@@ -102,16 +102,6 @@
   "@engine.gemini.noKey": {
     "description": "Error when the learner uses an AI feature without a Gemini API key."
   },
-  "engine.gemini.network": "Network error — are you online? ({detail})",
-  "@engine.gemini.network": {
-    "description": "Error when Gemini cannot be reached. detail = the browser’s technical message (English).",
-    "placeholders": {
-      "detail": {
-        "type": "String",
-        "example": "Failed to fetch"
-      }
-    }
-  },
   "engine.gemini.emptyBlocked": "Empty answer from Gemini (blocked: {reason}).",
   "@engine.gemini.emptyBlocked": {
     "description": "Error when Gemini answered nothing because its safety filter blocked the request. reason = Gemini’s code (e.g. SAFETY).",
@@ -1351,6 +1341,10 @@
         "example": "Delta Lake"
       }
     }
+  },
+  "engine.bk.pointCombine": "Before combining changes from another device",
+  "@engine.bk.pointCombine": {
+    "description": "Name of the restore point saved by itself before the changes of another device are combined with this one (shown later in Backup & restore)."
   },
   "engine.search.none": "No match — try a different word, or ask {tutor} {avatar}",
   "@engine.search.none": {
@@ -3709,6 +3703,10 @@
   "engine.cl.snapManual": "Manual snapshot",
   "@engine.cl.snapManual": {
     "description": "Name of a snapshot the learner takes by hand (shown in the list)."
+  },
+  "engine.cl.snapDaily": "Daily auto-snapshot",
+  "@engine.cl.snapDaily": {
+    "description": "Name of the snapshot the app takes by itself once a day (shown in the list of cloud snapshots)."
   },
   "engine.cl.snapSaved": "Snapshot saved",
   "@engine.cl.snapSaved": {

@@ -6,7 +6,6 @@ lang.field.tier*
 lang.pec.filter.*
 lang.lanes.sec.*
 lang.gram.rel.*
-lang.expl.tag.*
 lang.fn.*
 lang.kind.*
 lang.deep.kind.*
@@ -26,3 +25,5 @@ lang.script.drill.*
 lang.claude.status.*
 lang.claude.kind.*
 lang.pec.area.*
+lang.expl.status.*
+lang.expl.domain.*

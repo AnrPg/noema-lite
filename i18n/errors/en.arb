@@ -362,6 +362,16 @@
       }
     }
   },
+  "err.ai.network_gemini": "Network error — are you online? ({detail})",
+  "@err.ai.network_gemini": {
+    "description": "Error of the AI tutor’s Gemini client (the learner’s free Gemini key): Gemini could not be reached. detail = the browser’s technical message (English).",
+    "placeholders": {
+      "detail": {
+        "type": "String",
+        "example": "Failed to fetch"
+      }
+    }
+  },
   "err.ai.not_json": "The answer was not valid JSON.",
   "@err.ai.not_json": {
     "description": "Error of the AI provider (the learner’s own Claude API key or Gemini key), shown in “Create with Claude”, Roadmaps, the language tutor. The model answered something the app cannot read."

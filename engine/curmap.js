@@ -11,6 +11,12 @@ window.NoemaCurMap = (() => {
   const CM = (k, p) => window.NoemaI18n ? window.NoemaI18n.t(k, p) : k;
   const cmNum = n => window.NoemaI18n ? window.NoemaI18n.fmt.number(n) : String(n);
   const errMsg = e => window.NoemaI18n ? window.NoemaI18n.err(e) : (e?.message || String(e));   // an error's words (its code's message, else its English text)
+  /** A code of the AI's plan (a knowledge domain, a processing level) in the UI language; a value the catalog does not know: its own words. */
+  const codeWord = (prefix, v, own) => window.NoemaI18n && window.NoemaI18n.has(prefix + v) ? CM(prefix + v) : own;
+  /** A Roadmap's language for the learner: its name in the UI language (English keeps the words it always had: “Greek (Ελληνικά)”). */
+  const langLabel = code => window.NoemaI18n && window.NoemaI18n.locale !== 'en' ? window.NoemaI18n.fmt.langName(code) : (C().LANG[code] || code);
+  /** A stored error (c.error, a step's pack.error) in the UI language of the moment: its code (…errorInfo) when it has one, else the stored words. */
+  const storedErr = (info, text) => errMsg(info && info.code ? { ...info, message: text } : text);
   /** A message with elements inside (a bold name …): placeholders filled with \u0001…\u0008 markers → [text, element, text …]. */
   const rich = (s, parts) => String(s).split(/([\u0001-\u0008])/).filter(x => x !== '').map(x => parts[x] ?? x);
   const head = (t, sub) => el('div', { class: 'noema-ovhead' }, el('div', {}, el('h1', {}, t), sub ? el('p', { class: 'muted' }, sub) : null));
@@ -273,7 +279,7 @@ window.NoemaCurMap = (() => {
     overlay((box, close) => {
       box.classList.add('cg-box');
       const goal = el('textarea', { class: 'noema-input', rows: 2, placeholder: CM('roadmap.map.new.goalPh') });
-      const lang = el('select', { class: 'noema-input' }, ...Object.entries(C().LANG).map(([v, t]) => el('option', { value: v }, t))); lang.value = (navigator.language || 'en').slice(0, 2) in C().LANG ? (navigator.language || 'en').slice(0, 2) : 'en';
+      const lang = el('select', { class: 'noema-input' }, ...Object.keys(C().LANG).map(v => el('option', { value: v }, langLabel(v)))); lang.value = (navigator.language || 'en').slice(0, 2) in C().LANG ? (navigator.language || 'en').slice(0, 2) : 'en';
       const learner = el('input', { class: 'noema-input', placeholder: CM('roadmap.map.new.learnerPh') });
       const depth = el('select', { class: 'noema-input' }, el('option', { value: 'standard' }, CM('roadmap.map.new.depthStd')), el('option', { value: 'deep' }, CM('roadmap.map.new.depthDeep')), el('option', { value: 'exhaustive' }, CM('roadmap.map.new.depthAll'))); depth.value = 'deep';
       const apps = el('select', { class: 'noema-input' }, ...[[2, 4], [3, 6], [5, 8]].map(([a, b]) => el('option', { value: a + '-' + b }, CM('roadmap.map.new.apps', { a, b })))); apps.value = '3-6';
@@ -466,7 +472,7 @@ window.NoemaCurMap = (() => {
         const SG = stagesOf(c); const i = SG.findIndex(s => s[0] === c.stage);
         stages.innerHTML = ''; SG.forEach(([k, t], j) => stages.append(el('li', { class: c.stage === 'done' || j < i ? 'done' : j === i ? (ctl ? 'now' : 'wait') : '' }, (c.stage === 'done' || j < i ? '✅ ' : j === i && ctl ? '⏳ ' : j === i && c.status === 'waiting' ? '💬 ' : '◻️ ') + t)));
         status.className = 'cg-status ' + c.status;
-        status.textContent = ctl ? '🧠 ' + CM('roadmap.map.build.working') : c.status === 'attach' ? '📦 ' + CM('roadmap.map.build.attach') : c.status === 'ready' ? '✅ ' + CM('roadmap.map.build.ready') : c.status === 'waiting' ? '💬 ' + CM('roadmap.map.build.waiting') : c.status === 'failed' ? '⚠️ ' + (c.error ? errMsg(c.error) : CM('roadmap.map.build.stopped')) : c.status === 'paused' ? '⏸️ ' + CM('roadmap.map.build.paused') : '';
+        status.textContent = ctl ? '🧠 ' + CM('roadmap.map.build.working') : c.status === 'attach' ? '📦 ' + CM('roadmap.map.build.attach') : c.status === 'ready' ? '✅ ' + CM('roadmap.map.build.ready') : c.status === 'waiting' ? '💬 ' + CM('roadmap.map.build.waiting') : c.status === 'failed' ? '⚠️ ' + (c.error ? storedErr(c.errorInfo, c.error) : CM('roadmap.map.build.stopped')) : c.status === 'paused' ? '⏸️ ' + CM('roadmap.map.build.paused') : '';
         actions.innerHTML = '';
         appBox.style.display = c.provider === 'claudeapp' && c.status === 'waiting' ? '' : 'none';
         if (c.status === 'waiting') actions.append(el('button', { class: 'btn small', title: CM('roadmap.map.build.useKeyTip'), onclick: () => { const k = LLM().pick(acc, 'auto'); if (!k) { toast(CM('roadmap.map.build.needKey'), 4000); return; } c = C().get(acc, c.id); c.provider = 'auto'; c.status = 'building'; C().save(acc, c); run(); } }, CM('roadmap.map.build.useKey')), el('button', { class: 'btn small ghost', onclick: () => { if (confirm(CM('roadmap.map.build.deleteConfirm'))) { C().remove(acc, c.id); close(); library(acc, { onStudy }); } } }, '🗑 ' + CM('roadmap.map.delete')));
@@ -489,7 +495,7 @@ window.NoemaCurMap = (() => {
         if (c.status === 'ready') { G().kick(); }
       }
       box.append(el('button', { class: 'btn small ghost cg-back', onclick: () => { if (ctl && !confirm(CM('roadmap.map.build.leaveConfirm'))) return; ctl?.abort(); close(); library(acc, { onStudy }); } }, '← ' + CM('roadmap.map.lib.title')),
-        head(`🧭 “${c.title || c.goal}”`, c.imported ? `${C().LANG[c.language] || c.language} · ` + CM('roadmap.map.build.yours', { n: Object.keys(c.nodes).length }) + ` · ${c.learner || CM('roadmap.map.build.fromBasics')}` : `${C().LANG[c.language] || c.language} · ${CM('roadmap.map.build.depth', { d: String(c.depth) })} · ${c.learner || CM('roadmap.map.build.fromBasics')}`), stages, bar, status, appBox, actions,
+        head(`🧭 “${c.title || c.goal}”`, c.imported ? `${langLabel(c.language)} · ` + CM('roadmap.map.build.yours', { n: Object.keys(c.nodes).length }) + ` · ${c.learner || CM('roadmap.map.build.fromBasics')}` : `${langLabel(c.language)} · ${CM('roadmap.map.build.depth', { d: String(c.depth) })} · ${c.learner || CM('roadmap.map.build.fromBasics')}`), stages, bar, status, appBox, actions,
         el('details', { class: 'cg-logbox', open: true }, el('summary', {}, CM('roadmap.map.build.log')), log));
       paint(); if (start || c.status === 'building') run();
     }, { closable: false });
@@ -681,7 +687,7 @@ window.NoemaCurMap = (() => {
       const info = el('div', { class: 'tiny cm-detect' }), perr = el('div', { class: 'tiny cg-kstat bad' }), warnBox = el('div', { class: 'tiny cm-warns' });
       const graph = el('div', { class: 'cm-miniscroll', 'aria-label': CM('roadmap.map.imp.previewAria') }), nodeBox = el('div', { class: 'cm-nodebox' }), prev = el('ol', { class: 'cm-preview' });
       const title = el('input', { class: 'noema-input', placeholder: CM('roadmap.map.imp.namePh') });
-      const lang = el('select', { class: 'noema-input' }, ...Object.entries(C().LANG).map(([v, t]) => el('option', { value: v }, t))); lang.value = (navigator.language || 'en').slice(0, 2) in C().LANG ? (navigator.language || 'en').slice(0, 2) : 'en';
+      const lang = el('select', { class: 'noema-input' }, ...Object.keys(C().LANG).map(v => el('option', { value: v }, langLabel(v)))); lang.value = (navigator.language || 'en').slice(0, 2) in C().LANG ? (navigator.language || 'en').slice(0, 2) : 'en';
       const learner = el('input', { class: 'noema-input', placeholder: CM('roadmap.map.imp.learnerPh') });
       const PP = providerPick(acc, { what: 'plan' }), provider = PP.sel;
       const prefetch = el('select', { class: 'noema-input' }, ...[0, 1, 2, 3, 5, 8].map(n => el('option', { value: n }, CM('roadmap.map.new.ahead', { n })))); prefetch.value = '3';
@@ -1033,7 +1039,7 @@ window.NoemaCurMap = (() => {
       /** 💬 the Claude app has worked on this map already (or the message was copied): the learner knows the way */
       const appKey = 'noema:appUsed:' + acc;
       const knowsApp = () => { try { if (localStorage.getItem(appKey)) return true; } catch (e) { }
-        return Object.values(c.nodes || {}).some(n => /^claude-(app|chat)$/.test(n.pack?.via || '') || n.pack?.claimedAt) || (c.log || []).some(l => String(l.m || '').startsWith('💬 Claude app')); };   // i18n-ignore (matches the log's own words)   // i18n-ignore (matches the log's own words)
+        return Object.values(c.nodes || {}).some(n => /^claude-(app|chat)$/.test(n.pack?.via || '') || n.pack?.claimedAt) || (c.log || []).some(l => l.via === 'claude-app' || String(l.m || '').startsWith('💬 Claude app')); };   // i18n-ignore (older logs without via: their English words)
       const copyMsg = b => { try { localStorage.setItem(appKey, '1'); } catch (e) { } copy(J().message(C().get(acc, cid), { count: 1 }), b).then(() => { if (!b) toast(SL('copiedForClaude', '📋 Copied: paste it into a Claude chat'), 3500); }); if (page) { dotNow = null; drawMenu(); } };   // i18n-ignore (SL: the English fallback of an sh.* key of i18n/shell)
       let dotNow = null;
       const drawBar = () => {
@@ -1259,11 +1265,11 @@ window.NoemaCurMap = (() => {
               el('button', { class: 'btn small ghost', title: CM('roadmap.map.pnl.unqueueTip'), onclick: () => { G().fromApp(c, id); showPanel(id); } }, '↩ ' + CM('roadmap.map.notNow'))));
           else if (c.provider === 'claudeapp' && J().needsPlan(n)) act.append(el('div', { class: 'cm-live cm-appq' }, '💬 ' + CM('roadmap.map.pnl.appPlans'), el('span', { class: 'tiny' }, ' — ' + CM('roadmap.map.pnl.paste'))), el('div', { class: 'row' }, el('button', { class: 'btn primary', onclick: e => copyMsg(e.currentTarget) }, '📋 ' + CM('roadmap.map.app.copyMsg')), el('button', { class: 'btn small', onclick: () => showApp(id) }, CM('roadmap.map.map.howByHand'))));
           else if (pk.status === 'generating' || G().busy() === key) act.append(el('div', { class: 'cm-live' }, '⏳ ' + CM('roadmap.map.pnl.preparing') + ' ', el('span', { class: 'tiny' }, live?.msg || '')), el('button', { class: 'btn small', onclick: () => { G().stop(); } }, '⏸ ' + CM('roadmap.map.pnl.pause')));
-          else if (pk.status === 'paused' && pk.budgetHit) { const nb = el('input', { class: 'noema-input cg-budget', type: 'number', min: '1', value: String(Math.ceil((c.nodeBudget || 8) * 1.5)) }); act.append(el('p', { class: 'tiny' }, '💰 ' + (pk.error ? errMsg(pk.error) : CM('roadmap.map.pnl.budgetHit'))), el('label', { class: 'tiny' }, CM('roadmap.map.pnl.newLimit') + ' ', nb), el('button', { class: 'btn primary', onclick: () => { G().request(c, id, { resume: true, raiseBudget: +nb.value || 0 }); showPanel(id); } }, '▶ ' + CM('roadmap.map.build.continue'))); }
+          else if (pk.status === 'paused' && pk.budgetHit) { const nb = el('input', { class: 'noema-input cg-budget', type: 'number', min: '1', value: String(Math.ceil((c.nodeBudget || 8) * 1.5)) }); act.append(el('p', { class: 'tiny' }, '💰 ' + (pk.error ? storedErr(pk.errorInfo, pk.error) : CM('roadmap.map.pnl.budgetHit'))), el('label', { class: 'tiny' }, CM('roadmap.map.pnl.newLimit') + ' ', nb), el('button', { class: 'btn primary', onclick: () => { G().request(c, id, { resume: true, raiseBudget: +nb.value || 0 }); showPanel(id); } }, '▶ ' + CM('roadmap.map.build.continue'))); }
           else if (!n.reviewed && !c.autoApprove && pk.status !== 'failed') act.append(el('button', { class: 'btn primary', onclick: () => editStep(acc, cid, id, { mode: 'review', onDone: () => { drawMap(); showPanel(id); } }) }, '📝 ' + CM('roadmap.map.pnl.reviewPrepare')), tip(CM('roadmap.map.pnl.reviewTip')));
           else if (c.provider === 'claudeapp') act.append(el('button', { class: 'btn primary', onclick: () => { G().toApp(c, id); showPanel(id); showApp(id); } }, '💬 ' + CM('roadmap.map.pnl.prepareApp')), importBtn(acc, cid, id, () => { drawMap(); showPanel(id); }));
           else act.append(el('button', { class: 'btn primary', onclick: () => { G().request(c, id, { resume: true }); toast?.('⏳ ' + CM('roadmap.map.pnl.preparingToast', { title: n.title }), 5000); showPanel(id); } }, pk.status === 'failed' ? '↻ ' + CM('roadmap.map.pnl.tryAgain') : '⚡ ' + CM('roadmap.map.pnl.prepareNow')),
-            pk.status === 'failed' ? el('p', { class: 'tiny cg-kstat bad' }, '⚠️ ' + errMsg(pk.error)) : null, appWay());
+            pk.status === 'failed' ? el('p', { class: 'tiny cg-kstat bad' }, '⚠️ ' + storedErr(pk.errorInfo, pk.error)) : null, appWay());
           if (!st.mastered) act.append(el('button', { class: 'btn small cm-knowit', onclick: () => test(id) }, '🎓 ' + CM('roadmap.map.pnl.knowIt')));
           else if (st.how === 'test' || st.how === 'manual') act.append(el('button', { class: 'btn small ghost', onclick: () => { C().setMastered(acc, c, id, null); drawMap(); showPanel(id); } }, '↩ ' + CM('roadmap.map.pnl.undoMastered')));
         } else {
@@ -1298,7 +1304,7 @@ window.NoemaCurMap = (() => {
           n.chapters?.length ? el('div', {}, el('div', { class: 'nx-lbl' }, '📖 ' + CM('roadmap.map.pnl.nChapters', { n: n.chapters.length }), tip(CM('roadmap.map.pnl.chaptersTip'))), chBox) : null,
           st.parents.length ? el('div', { class: 'tiny cm-pre' }, el('b', {}, CM('roadmap.map.pnl.buildsOn') + ' '), st.parents.map(T).join(' · ')) : null,
           (() => { const kids = c.edges.filter(e => e.from === id).map(e => T(e.to)); return kids.length ? el('div', { class: 'tiny cm-pre' }, el('b', {}, CM('roadmap.map.pnl.opens') + ' '), kids.join(' · ')) : null; })(),
-          n.kDomain ? el('div', { class: 'tiny cm-pre' }, el('b', {}, CM('roadmap.map.pnl.kind') + ' '), n.kDomain.replace('_', ' '), n.levels?.length ? ' — ' + n.levels.map(l => l.replace(/_/g, ' ')).join(', ') : '') : null);
+          n.kDomain ? el('div', { class: 'tiny cm-pre' }, el('b', {}, CM('roadmap.map.pnl.kind') + ' '), codeWord('roadmap.map.kd.', n.kDomain, n.kDomain.replace('_', ' ')), n.levels?.length ? ' — ' + n.levels.map(l => codeWord('roadmap.map.level.', l, l.replace(/_/g, ' '))).join(', ') : '') : null);
       }
       // scroll only the map (scrollIntoView would also scroll the full-screen frame and hide the top bar)
       function scrollToNode(id) {

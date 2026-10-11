@@ -8,9 +8,9 @@ VIEWS.node = (v, r) => {
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); render(); }),
       h('span', { class: 'lx-ns ns-' + ns }, info(c).flag, ' ', STATE_LABEL[ns] || ns)),
     h('div', { class: 'row lx-actions' },
-      ['open', 'learning', 'known', 'mastered'].includes(ns) ? h('button', { class: 'btn primary small', onclick: () => runSession(N.planSession(UI.C, UI.L, { day: today(), minutes: 15, languages: [c] }), { only: n.id }) }, '▶ ' + LT('lang.card.learnNode')) : null,
-      n.kind === 'field' ? h('button', { class: 'btn small', onclick: () => go('#/field/' + encodeURIComponent(n.field) + '/' + n.tier) }, '🧺 ' + LT('lang.card.fieldMap')) : null,
-      n.kind === 'field' && ['learning', 'known', 'mastered'].includes(ns) ? h('button', { class: 'btn small', onclick: () => go('#/recall/' + encodeURIComponent(n.field)) }, '⏱️ ' + LT('lang.view.recall')) : null,
+      ['open', 'learning', 'known', 'mastered'].includes(ns) ? h('button', { class: 'btn primary small', 'data-icon': 'plus', onclick: () => runSession(N.planSession(UI.C, UI.L, { day: today(), minutes: 15, languages: [c] }), { only: n.id }) }, '▶ ' + LT('lang.card.learnNode')) : null,
+      n.kind === 'field' ? h('button', { class: 'btn small', 'data-icon': 'map', onclick: () => go('#/field/' + encodeURIComponent(n.field) + '/' + n.tier) }, '🧺 ' + LT('lang.card.fieldMap')) : null,
+      n.kind === 'field' && ['learning', 'known', 'mastered'].includes(ns) ? h('button', { class: 'btn small', 'data-icon': 'dots', onclick: () => go('#/recall/' + encodeURIComponent(n.field)) }, '⏱️ ' + LT('lang.view.recall')) : null,
       deepenButton(n.id, c)),
     !X.prepared[n.id] ? h('p', { class: 'lx-note' }, '⏳ ' + LT('lang.card.nodeUnwritten', { lang: info(c).name })) : null);
   const grid = h('div', { class: 'lx-cgrid' });
@@ -61,6 +61,10 @@ function compareTable(cid) {
 }
 
 const CONNOTATION = { positive: '🙂', negative: '🙁', neutral: '😐', mixed: '🤔' };   // + lang.card.conn.<connotation>
+/** A code of a word profile in words of the explanation language (a value the catalog does not know stays as the course wrote it):
+    registers lc.expl.reg.*, phrase kinds lc.expl.phraseKind.* (langcore's words), status lang.expl.status.*, domains lang.expl.domain.*. */
+const codeWord = (prefix, v) => v != null && v !== '' && window.NoemaI18n && NoemaI18n.has(prefix + v) ? LE(prefix + v) : v;
+const regWord = r => codeWord('lc.expl.reg.', r), regWords = rs => [].concat(rs || []).map(regWord).join(', ');
 /** Everything about one word (docs/LANGUAGES.md §4.6). */
 function wordCardView(c, lid, concept) {
   const card = N.wordCard(UI.C, UI.L, c, lid, { concept }), X = LX(c), lx = X.lex[lid];
@@ -70,22 +74,22 @@ function wordCardView(c, lid, concept) {
     e.py && UI.prefs.pinyin !== false ? h('div', { class: 'lx-help' }, e.py) : null,
     X.language.vowelMarks && UI.prefs.marks !== false ? h('div', { class: 'lx-plain', lang: c, dir: X.language.dir }, e.plain) : null,
     h('div', { class: 'lx-tr' }, e.tr),
-    h('div', { class: 'lx-chips' }, badge('🎭 ' + [].concat(e.register).join(', '), 'reg'), badge('📍 ' + e.context, 'ctx'), e.senseDef ? badge('≈ ' + e.senseDef, 'sense') : null,
+    h('div', { class: 'lx-chips' }, badge('🎭 ' + regWords(e.register), 'reg'), badge('📍 ' + e.context, 'ctx'), e.senseDef ? badge('≈ ' + e.senseDef, 'sense') : null,
       e.unknown?.length ? badge('🆕 ' + LT('lang.card.newWords', { n: e.unknown.length }), 'new') : null));
   const sec = {
     senses: items => h('ol', { class: 'lx-senses' }, ...items.map(s => h('li', { class: s.current ? 'lx-cur' : null },
-      h('b', {}, s.def), ' ', badge([].concat(s.register || []).join(', '), 'reg'), s.domains ? badge(s.domains.join(', '), 'ctx') : null,
+      h('b', {}, s.def), ' ', badge(regWords(s.register), 'reg'), s.domains ? badge(s.domains.map(d => codeWord('lang.expl.domain.', d)).join(', '), 'ctx') : null,
       s.current ? badge('← ' + LT('lang.card.thisMeaning'), 'sense') : s.concept ? h('a', { class: 'lx-badge sense', href: '#/c/' + s.concept }, (s.pending ? '⏳ ' : '→ ') + s.gloss) : null,
       ...s.forms.map(f => badge(f.label + ': ' + f.text, 'ctx')),
       s.words.length ? h('div', { class: 'tiny' }, LT('lang.card.alsoSaid') + ' ', s.words.join(' · '), s.contrast ? h('span', {}, ' — ⇄ ', h('b', {}, s.contrast.axis), ': ', LT('lang.card.thisWordIs', { value: s.contrast.value })) : null) : null,
-      s.nuances.length ? h('ul', { class: 'lx-list' }, ...s.nuances.map(n => h('li', {}, n.def, ' ', badge([].concat(n.register || []).join(', '), 'reg'), ...n.forms.map(f => badge(f.label + ': ' + f.text, 'ctx'))))) : null))),
+      s.nuances.length ? h('ul', { class: 'lx-list' }, ...s.nuances.map(n => h('li', {}, n.def, ' ', badge(regWords(n.register), 'reg'), ...n.forms.map(f => badge(f.label + ': ' + f.text, 'ctx'))))) : null))),
     facade: items => h('dl', { class: 'lx-parts' }, ...items.flatMap(x => [h('dt', {}, x.title), h('dd', { class: x.none ? 'tiny' : null }, /[֐-ۿ一-鿿]/.test(x.text) ? word(c, x.text, { sub: false }) : x.text)])),
     examples: items => h('div', {}, ...items.map(ex)),
     collocations: items => h('ul', { class: 'lx-list' }, ...items.map(x => h('li', {}, word(c, x.text, { sub: false }), ' — ', x.tr))),
     particleVerbs: items => h('ul', { class: 'lx-list' }, ...items.map(x => h('li', {}, word(c, x.text, { sub: false }), ' — ', x.tr))),
-    phrases: items => h('ul', { class: 'lx-list' }, ...items.map(x => h('li', {}, word(c, x.text, { sub: false }), ' ', badge(x.kind, 'ctx'), x.register ? badge([].concat(x.register).join(', '), 'reg') : null,
+    phrases: items => h('ul', { class: 'lx-list' }, ...items.map(x => h('li', {}, word(c, x.text, { sub: false }), ' ', badge(codeWord('lc.expl.phraseKind.', x.kind), 'ctx'), x.register ? badge(regWords(x.register), 'reg') : null,
       h('div', { class: 'tiny' }, '“' + x.tr + '” — ', h('b', {}, x.meaning), x.source ? ' (' + x.source + ')' : '')))),
-    synonyms: groups => h('div', {}, ...Object.entries(groups).map(([reg, list]) => h('div', { class: 'lx-syngroup' }, badge(reg, 'reg'),
+    synonyms: groups => h('div', {}, ...Object.entries(groups).map(([reg, list]) => h('div', { class: 'lx-syngroup' }, badge(regWord(reg), 'reg'),
       h('ul', { class: 'lx-list' }, ...list.map(s => h('li', {}, word(c, s.word, { sub: false }), s.region ? badge('🗺️ ' + s.region, 'ctx') : null, ' — ', s.nuance)))))),
     antonyms: items => h('ul', { class: 'lx-list' }, ...items.map(x => h('li', {}, word(c, x.word, { sub: false }), x.note ? ' — ' + x.note : ''))),
     pitfalls: items => h('ul', { class: 'lx-list lx-warn' }, ...items.map(x => h('li', {}, x))),
@@ -97,8 +101,8 @@ function wordCardView(c, lid, concept) {
     h('div', { class: 'lx-cardtop' },
       h('div', { class: 'lx-lemma' }, word(c, lx.lemma, { lex: lx })),
       h('div', { class: 'lx-meta' }, h('div', {}, h('b', {}, card.gloss)), h('div', { class: 'lx-chips' },
-        badge(STATE_LABEL[card.state] || card.state, 'st s-' + card.state), badge(card.frequency, 'freq'), badge(card.status && card.status !== 'current' ? card.status : null, 'reg'),
-        ...card.register.map(r => badge('🎭 ' + r, 'reg')), badge(card.connotation && CONNOTATION[card.connotation] ? CONNOTATION[card.connotation] + ' ' + LT('lang.card.conn.' + card.connotation) : null, 'ctx'),
+        badge(STATE_LABEL[card.state] || card.state, 'st s-' + card.state), badge(card.frequency, 'freq'), badge(card.status && card.status !== 'current' ? codeWord('lang.expl.status.', card.status) : null, 'reg'),
+        ...card.register.map(r => badge('🎭 ' + regWord(r), 'reg')), badge(card.connotation && CONNOTATION[card.connotation] ? CONNOTATION[card.connotation] + ' ' + LT('lang.card.conn.' + card.connotation) : null, 'ctx'),
         card.intensity ? badge(LT('lang.card.strength', { dots: '●'.repeat(card.intensity) + '○'.repeat(5 - card.intensity) }), 'ctx') : null))),
     card.parts.length ? h('dl', { class: 'lx-parts' }, ...card.parts.flatMap(([k, val]) => [h('dt', {}, k), h('dd', {}, /[֐-ۿ一-鿿]/.test(val) ? word(c, val, { sub: false }) : val)])) : null,
     deepButton(c, lid),

@@ -166,7 +166,7 @@ VIEWS.home = (v) => {
       h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => go('#/lesson/' + st.node) }, LT('lang.home.open')), h('button', { class: 'btn primary', onclick: () => runLesson(st.node, st.langs) }, '▶ ' + LT('lang.home.learn'))));
   })));
   v.append(h('div', { class: 'row lx-drills' }, h('span', { class: 'tiny' }, '🏋️ ' + LT('lang.home.drills') + ' '),
-    h('button', { class: 'btn ghost small', onclick: () => go('#/parts/' + UI.lang) }, '🔁 ' + LT('lang.view.parts')), ...scriptHomeButtons(),
+    h('button', { class: 'btn ghost small', 'data-icon': 'gym', onclick: () => go('#/parts/' + UI.lang) }, '🔁 ' + LT('lang.view.parts')), ...scriptHomeButtons(),
     ...UI.C.data.fields.filter(f => (f.subgroups || []).length > 1).map(f => h('button', { class: 'btn ghost small', onclick: () => go('#/sort/' + encodeURIComponent(f.field)) }, '🧩 ' + f.title))));
   if (UI.C.data.world) v.append(h('div', { class: 'row lx-libraries' }, h('span', { class: 'tiny' }, '📚 ' + LT('lang.home.peculiarAnyTime') + ' '),
     ...activeLangs().map(c => h('button', { class: 'btn ghost small', onclick: () => go('#/peculiar/' + c) }, info(c).flag + ' ' + info(c).label))));

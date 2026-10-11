@@ -62,6 +62,7 @@
   "err.ai.api_claude": "Claude: {detail}",
   "err.ai.quota": "Η δωρεάν ποσόστωση του Gemini εξαντλήθηκε προς το παρόν (429) — περίμενε ένα λεπτό ή χρησιμοποίησε τον Claude.",
   "err.ai.api_gemini": "Gemini {status}: {detail}",
+  "err.ai.network_gemini": "Σφάλμα δικτύου — είσαι συνδεδεμένος; ({detail})",
   "err.ai.not_json": "Η απάντηση δεν ήταν έγκυρο JSON.",
   "err.ai.invalid": "Η απάντηση του {provider} είχε ακόμη προβλήματα: {problems}",
   "err.ai.job.too_long": "Ο Claude δουλεύει πολύ ώρα. Πάτα «Συνέχεια» για να συνεχίσει ή «Διακοπή».",

@@ -407,7 +407,7 @@ async function sendTutor(text) {
     const target = (r.data.target || []).filter(x => typeof x === 'string' && x.trim());
     hist.push({ role: 'assistant', text: r.data.reply, target, check: target.map(t => N.checkText(UI.C, c, t, k.R)), t: Date.now() });
     persistTutor(key, ctx, hist, r.provider);
-  } catch (e) { hist.push({ role: 'error', text: e.message || String(e) }); }
+  } catch (e) { hist.push({ role: 'error', text: (window.NoemaI18n ? NoemaI18n.err(e) : e.message) || String(e) }); }
   finally { TT.busy = false; if (TT.open && tutorKey(TT.ctx) === key) drawTutor(); }
 }
 /** Keep the conversation with the others (engine/convos.js: IndexedDB, the backup folder, the cloud). */
@@ -427,9 +427,9 @@ function prodLanes() {
   return h('div', { class: 'lx-prodlanes' }, h('h2', { class: 'lx-h2' }, '✍️ ' + LT('lang.view.write') + ' · 📖 ' + LT('lang.view.read')),
     h('div', { class: 'lx-lanes' }, ...activeLangs().map(c => h('div', { class: 'lx-lanerow', 'data-lang': c },
       h('span', { class: 'lx-flag' }, info(c).flag), h('b', {}, info(c).label),
-      h('button', { class: 'btn small lx-towrite', onclick: () => go('#/write/' + c) }, '✍️ ' + LT('lang.view.write')),
-      h('button', { class: 'btn small lx-toread', onclick: () => go('#/read/' + c) }, '📖 ' + LT('lang.view.read')),
-      h('button', { class: 'btn ghost small lx-totutor', onclick: () => openLangTutor({ lang: c, intent: 'chat' }) }, '🎓 ' + LT('lang.frame.tutor'))))));
+      h('button', { class: 'btn small lx-towrite', 'data-icon': 'edit', onclick: () => go('#/write/' + c) }, '✍️ ' + LT('lang.view.write')),
+      h('button', { class: 'btn small lx-toread', 'data-icon': 'book', onclick: () => go('#/read/' + c) }, '📖 ' + LT('lang.view.read')),
+      h('button', { class: 'btn ghost small lx-totutor', 'data-icon': 'chat', onclick: () => openLangTutor({ lang: c, intent: 'chat' }) }, '🎓 ' + LT('lang.frame.tutor'))))));
 }
 const tutorRow = (ctx, intents) => h('div', { class: 'row lx-tutorrow' }, h('span', { class: 'tiny' }, '🎓 ' + LT('lang.tutor.rowLabel') + ' '),
   ...intents.map(x => h('button', { class: 'btn ghost small', 'data-intent': x, onclick: () => openLangTutor({ ...ctx, intent: x }) }, INTENT_LABEL[x])));

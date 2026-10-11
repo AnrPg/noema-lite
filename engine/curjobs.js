@@ -14,6 +14,8 @@
 (function (root) {
   'use strict';
   const C = () => root.NoemaCurriculum, L = () => root.NoemaLLM;
+  /** An error's words for the learner (its code's message in the UI language, else its English text — docs/i18n.md §6). */
+  const errW = e => root.NoemaI18n ? root.NoemaI18n.err(e) : String((e && e.message) || e);
   /** The learner's words for a key of i18n/roadmaps (docs/i18n.md). In the connector (no i18n runtime) the English catalog
       when it is loaded, else the key: nothing there is for a learner — the tasks, checks and errors for Claude stay English. */
   function rt(k, p) {
@@ -159,7 +161,7 @@
     else if (t.kind === 'audit') { line = C().applyAudit(c, data); c.stage = 'expand'; }
     else if (t.kind === 'expand') { C().applyExpansion(c, data); line = C().expandLine(data); c.stage = 'plan'; c.title = c.nodes[c.goalId]?.goalTitle || c.title || c.goal; }
     else if (t.kind === 'plan') { C().applyPlans(c, data); line = '   ✓ ' + rt('roadmap.jobs.planned', { list: t.ids.map(i => c.nodes[i]?.title).filter(Boolean).join(', ') }); }
-    if (isApp(c) && !GRAPH.includes(c.stage)) { c.status = 'ready'; c.error = null; if (c.stage === 'plan' && !Object.values(c.nodes).some(needsPlan)) c.stage = 'done'; }
+    if (isApp(c) && !GRAPH.includes(c.stage)) { c.status = 'ready'; c.error = null; c.errorInfo = null; if (c.stage === 'plan' && !Object.values(c.nodes).some(needsPlan)) c.stage = 'done'; }
     (c.log = c.log || []).push({ t: Date.now(), m: '💬 ' + rt('roadmap.jobs.log', { kind: t.kind, line: line.replace(/^\s*/, '') }), via: 'claude-app' });   // via: what the Claude app did (the words depend on the language)
     return line;
   }
@@ -241,7 +243,7 @@
     App.busy = true; let n = 0;
     try {
       const rows = (await CL.kvRows(IN)).sort((a, b) => a.key.localeCompare(b.key)); App.last = Date.now(); App.error = null;
-      if (rows.length && CL.pull) { try { await CL.pull(acc); } catch (x) { App.error = x.message; return 0; } }   // apply the answers to the newest copy of each curriculum, not to an older one on this device; no sync → they wait in the inbox for the next poll
+      if (rows.length && CL.pull) { try { await CL.pull(acc); } catch (x) { App.error = errW(x); return 0; } }   // apply the answers to the newest copy of each curriculum, not to an older one on this device; no sync → they wait in the inbox for the next poll
       const done = []; let steps = 0;
       for (const r of rows) {
         const cid = r.key.slice(IN.length).split(':')[0];
@@ -261,7 +263,7 @@
             if (t) { const errs = check(c, t, e.data); if (!errs.length) { apply(c, t, e.data); C().save(acc, c); n++; } else console.warn('[curjobs] answer refused', errs); }
           }
           done.push(r.key);
-        } catch (x) { console.warn('[curjobs]', x); App.error = x.message; }
+        } catch (x) { console.warn('[curjobs]', x); App.error = errW(x); }
       }
       // a queued step whose subject is saved already — its answer was handled on another device, then an older copy of the
       // curriculum put the step back in the queue: finish it here, so it is not prepared a second time
@@ -269,13 +271,13 @@
         if (nd.pack?.status !== 'app') continue;
         const pid = C().packId(c, nid), meta = C().kvGet(acc, 'packmeta:' + pid);
         if (!savedSince(c, nid, meta)) continue;
-        try { if (await finishStep(acc, c, { nid, packId: pid, version: meta.version || null })) { n++; steps++; } } catch (x) { console.warn('[curjobs]', x); App.error = x.message; }
+        try { if (await finishStep(acc, c, { nid, packId: pid, version: meta.version || null })) { n++; steps++; } } catch (x) { console.warn('[curjobs]', x); App.error = errW(x); }
       }
       // the changed curricula reach the cloud BEFORE their answers leave the inbox: the connector always sees one or the other
       if (n) await CL.push(acc);
       for (const k of done) await CL.kvDelete(k).catch(() => { });
       if (steps) await CL.pull(acc).catch(() => { });   // what the connector wrote with a step: its source-file index (👁), its subject's card
-    } catch (x) { App.error = x.message; } finally { App.busy = false; emitA(); }
+    } catch (x) { App.error = errW(x); } finally { App.busy = false; emitA(); }
     if (n) C().Gen.kick();
     return n;
   };

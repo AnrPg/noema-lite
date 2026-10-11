@@ -82,6 +82,8 @@
   "roadmap.share.uploading": "Le parcours…",
   "roadmap.share.logShared": "{pub, select, yes {partagé — 🌍 public} other {partagé}}",
   "roadmap.share.shared": "Partagé",
+  "roadmap.share.logStep": "« {title} »…",
+  "roadmap.share.logStepFailed": "« {title} » : {error}",
   "roadmap.share.logTook": "{known, select, yes {{took, plural, one {repris # changement sur {n, number} de {owner}} many {repris # changements sur {n, number} de {owner}} other {repris # changements sur {n, number} de {owner}}}} other {{took, plural, one {repris # changement sur {n, number} du propriétaire} many {repris # changements sur {n, number} du propriétaire} other {repris # changements sur {n, number} du propriétaire}}}}",
   "roadmap.share.logKept": "{known, select, yes {gardé ma copie (changements de {owner})} other {gardé ma copie (changements du propriétaire)}}",
   "roadmap.share.logStopped": "partage arrêté",

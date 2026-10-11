@@ -169,7 +169,7 @@ function deepButton(c, lid) {
 /** 🏋️ deepen on a node or lesson page: when the learner has met some of its words in this language. */
 function deepenButton(nid, c) {
   const k = N.known(UI.C, UI.L, c), met = (LX(c).byNode[nid] || []).filter(id => MET_DEEP.includes(k.state[id]) && hasDepthData(LX(c).lex[id]));
-  return met.length ? h('button', { class: 'btn small lx-deepenbtn', onclick: () => go(`#/deepen/${encodeURIComponent(nid)}/${c}`) }, '🏋️ ' + LT('lang.deep.deepenN', { n: met.length })) : null;
+  return met.length ? h('button', { class: 'btn small lx-deepenbtn', 'data-icon': 'gym', onclick: () => go(`#/deepen/${encodeURIComponent(nid)}/${c}`) }, '🏋️ ' + LT('lang.deep.deepenN', { n: met.length })) : null;
 }
 VIEWS.deep = (v, r) => {
   const c = r.arg, lid = r.arg2, x = UI.C.lang[c]?.lex[lid]; if (!x) return VIEWS.home(v);

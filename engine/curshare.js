@@ -27,12 +27,14 @@
   const enc = s => encodeURIComponent(s);
   const T = { cur: '/rest/v1/noema_curricula_shared', mem: '/rest/v1/noema_curriculum_members', steps: '/rest/v1/noema_curriculum_steps' };
   /* what stays with each person (their own settings, progress and AI work) — everything else is the shared map */
-  const LOCAL = ['log', 'usage', 'prefetch', 'nodeBudget', 'provider', 'model', 'autoApprove', 'shared', 'remote', 'error', 'updated'];
+  const LOCAL = ['log', 'usage', 'prefetch', 'nodeBudget', 'provider', 'model', 'autoApprove', 'shared', 'remote', 'error', 'errorInfo', 'updated'];
   const NODE_LOCAL = ['pack', 'reviewed', 'planWish', 'replan', 'assignedAt', 'planFrom', 'groupPlan'];   // 📦 an attached subject is the learner's own
   const NODE_PLAN = ['chapters', 'learningGoals', 'plannedAt', 'replanAt'];   // a step's chapter plan (= NoemaCurriculum.PLAN_KEYS): with an attached subject, the learner's own
   const clone = o => JSON.parse(JSON.stringify(o));
   /** The learner's words for a key of i18n/roadmaps (docs/i18n.md). The core also runs in the connector (no i18n runtime):
       there the English catalog when it is loaded, else the key — the connector uses no words of this file. */
+  /** An error's words for the learner (its code's message in the UI language, else its English text — docs/i18n.md §6). */
+  const errW = e => root.NoemaI18n ? root.NoemaI18n.err(e) : String((e && e.message) || e);
   function rt(k, p) {
     const I = root.NoemaI18n; if (I) return I.t(k, p);
     const m = root.NOEMA_I18N?.en?.m?.[k]; if (m == null) return k;
@@ -231,8 +233,8 @@
     c.shared = { id: cid, role: 'owner', owner: me(), ownerName: myName(acc), public: !!isPublic, version: (old?.version || 0) + 1, at, hash: h, files: meta.files };
     (c.log = c.log || []).push({ t: Date.now(), m: '👥 ' + rt('roadmap.share.logShared', { pub: isPublic ? 'yes' : 'no' }) }); save(acc, c); emit();
     if (steps) for (const [nid, n] of Object.entries(c.nodes)) if (n.pack?.status === 'ready' && !n.pack.assigned && !(n.pack.author && n.pack.author !== me())) {
-      onLog(`⚡ “${n.title}”…`);
-      try { await Share.contribute(acc, cid, nid); } catch (e) { onLog(`⚠️ “${n.title}”: ${e.message}`); }
+      onLog('⚡ ' + rt('roadmap.share.logStep', { title: n.title }));
+      try { await Share.contribute(acc, cid, nid); } catch (e) { onLog('⚠️ ' + rt('roadmap.share.logStepFailed', { title: n.title, error: errW(e) })); }
     }
     await Share.refresh(acc, cid).catch(() => { });
     onLog('✅ ' + rt('roadmap.share.shared')); return C().get(acc, cid);
@@ -342,10 +344,10 @@
     if (!row) throw new Error(rt('roadmap.share.gone'));
     if (row.owner === me()) throw new Error(rt('roadmap.share.own'));
     const em = CL().session().user.email.toLowerCase(), body = { status: 'joined', user_id: me(), name: myName(acc), responded_at: new Date().toISOString() };
-    const upd = await api(`${T.mem}?curriculum=eq.${enc(cid)}&email=eq.${enc(em)}`, { method: 'PATCH', body, headers: { Prefer: 'return=representation' } }).catch(e => { throw new Error(/row-level|403|permission/i.test(e.message) ? rt('roadmap.share.cannotJoin') : e.message); });   // i18n-ignore (REST queries)
+    const upd = await api(`${T.mem}?curriculum=eq.${enc(cid)}&email=eq.${enc(em)}`, { method: 'PATCH', body, headers: { Prefer: 'return=representation' } }).catch(e => { throw /row-level|403|permission/i.test(e.message) ? new Error(rt('roadmap.share.cannotJoin')) : e; });   // i18n-ignore (REST queries)
     if (!upd?.length) {
       if (!row.public) throw new Error(rt('roadmap.share.inviteOnly'));
-      await api(T.mem, { method: 'POST', body: [{ curriculum: cid, email: em, ...body }], headers: { Prefer: 'return=minimal' } }).catch(e => { throw new Error(dup(e) || /row-level|403/i.test(e.message) ? rt('roadmap.share.removed') : e.message); });
+      await api(T.mem, { method: 'POST', body: [{ curriculum: cid, email: em, ...body }], headers: { Prefer: 'return=minimal' } }).catch(e => { throw dup(e) || /row-level|403/i.test(e.message) ? new Error(rt('roadmap.share.removed')) : e; });
     }
     const local = C().get(acc, cid);
     const L = root.NoemaLLM; const provider = local?.provider || (L?.pick?.(acc, 'auto') ? 'auto' : 'claudeapp');

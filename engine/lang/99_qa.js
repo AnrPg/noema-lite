@@ -79,11 +79,11 @@ const QA_FAR = new Set(['locked', 'unprepared']);
       lanes.querySelector('h2').textContent = '🧭 ' + LT('lang.qa.yourLanes');
       for (const row of lanes.querySelectorAll('.lx-lanerow')) {
         const c = row.dataset.lang, tutor = row.querySelector('.lx-totutor');
-        const gram = h('button', { class: 'btn small lx-togrammar', title: LT('lang.qa.grammarTitle'), onclick: () => go('#/grammar/' + c) }, '📐 ' + LT('lang.view.grammar'));
+        const gram = h('button', { class: 'btn small lx-togrammar', 'data-icon': 'grid', title: LT('lang.qa.grammarTitle'), onclick: () => go('#/grammar/' + c) }, '📐 ' + LT('lang.view.grammar'));
         row.querySelector('.lx-towrite')?.before(gram);
         const sb = v.querySelector(`.lx-drills .lx-scriptbtn[data-lang="${c}"]`); if (sb) { sb.classList.remove('ghost'); sb.textContent = sb.textContent.replace(info(c).flag, '').replace(/\s+/g, ' ').trim(); tutor ? tutor.before(sb) : row.append(sb); }
         const pec = [...v.querySelectorAll('.lx-libraries button')].find(b => b.textContent.includes(info(c).label));
-        if (pec) { pec.textContent = '📚 ' + LT('lang.view.peculiar'); pec.classList.add('lx-topec'); tutor ? tutor.before(pec) : row.append(pec); }
+        if (pec) { pec.textContent = '📚 ' + LT('lang.view.peculiar'); pec.classList.add('lx-topec'); pec.dataset.icon = 'info'; tutor ? tutor.before(pec) : row.append(pec); }
         const lis = v.querySelector(`.lx-speechlanes .lx-lanerow[data-lang="${c}"] .lx-tolisten`);   // P9: 🎧 in the same row
         if (lis) { lis.textContent = '🎧 ' + LT('lang.view.listen'); tutor ? tutor.before(lis) : row.append(lis); }
         row.append(h('div', { class: 'lx-laneacts' }, ...row.querySelectorAll(':scope > button')));
@@ -137,6 +137,7 @@ function qaNextLessonButton(nid, ran = []) {
 /* ---------- 🔁 principal parts: distractors that do not give the answer away ---------- */
 /** Wrong options for “its <label>?” of one word: German forms built from the same word (der / die / das + noun, the plural
     and genitive patterns, du / er forms), then the word's other principal parts, then the same label of other words. */
+/** Wrong answers for a principal part: label = the part's stable id (langcore principalParts → [words, value, id]), never its words. */
 function qaPartsDistractors(c, p, label, val, pool) {
   const lem = LX(c).lex[p.id].lemma, made = [];
   if (c === 'de') {
@@ -148,8 +149,8 @@ function qaPartsDistractors(c, p, label, val, pool) {
     else if (label === 'er/sie/es') made.push(stem + 't', stem + 'et', uml(stem) + 't', lem);
     else if (label === 'du') made.push(stem + 'st', stem + 'est', uml(stem) + 'st', lem);
   }
-  const FORM = ['plural', 'feminine', 'feminine plural', 'with the article', 'counted plural', 'one (unit noun)', 'collective'];   // labels whose values are forms of the word   // i18n-ignore (langcore's labels, compared)
-  const own = FORM.includes(label) ? p.parts.filter(([l]) => l !== label && FORM.includes(l)).map(([, x]) => x).filter(x => x !== lem) : [];
+  const FORM = ['plural', 'feminine', 'feminine plural', 'with the article', 'counted plural', 'one (unit noun)', 'collective'];   // parts (ids) whose values are forms of the word   // i18n-ignore (langcore's part ids, compared)
+  const own = FORM.includes(label) ? p.parts.filter(q => q[2] !== label && FORM.includes(q[2])).map(([, x]) => x).filter(x => x !== lem) : [];
   const seen = new Set([val]), out = [];
   const closed = c === 'de' && label === 'article';   // der / die / das: two wrong ones, nothing else
   for (const x of [...shuffle(made), ...(closed ? [] : [...shuffle(own), ...shuffle([...(pool || [])])])]) if (!seen.has(x) && x && out.length < 3) { seen.add(x); out.push(x); }

@@ -82,6 +82,8 @@
   "roadmap.share.uploading": "Ο Οδικός χάρτης…",
   "roadmap.share.logShared": "{pub, select, yes {μοιράστηκε — 🌍 δημόσιος} other {μοιράστηκε}}",
   "roadmap.share.shared": "Μοιράστηκε",
+  "roadmap.share.logStep": "«{title}»…",
+  "roadmap.share.logStepFailed": "«{title}»: {error}",
   "roadmap.share.logTook": "{known, select, yes {δέχτηκα {took, number} από {n, number} αλλαγές του/της {owner}} other {δέχτηκα {took, number} από {n, number} αλλαγές του κατόχου}}",
   "roadmap.share.logKept": "{known, select, yes {κράτησα το αντίγραφό μου (αλλαγές του/της {owner})} other {κράτησα το αντίγραφό μου (αλλαγές του κατόχου)}}",
   "roadmap.share.logStopped": "η κοινή χρήση σταμάτησε",

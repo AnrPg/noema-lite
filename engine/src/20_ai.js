@@ -2,6 +2,8 @@
 const GEM_BASE = 'https://generativelanguage.googleapis.com/v1beta';
 /** An error of the Gemini client in the learner's words (needsKey: the 🔑 guide helps). */
 const gemErr = (key, vars, extra) => Object.assign(new Error(tE(key, vars)), extra || {});
+/** Gemini could not be reached (docs/i18n.md §6): the English words in .message (logs), the code for the learner's words (errText → err.ai.network_gemini). */
+const gemNetErr = e => Object.assign(new Error(`Network error — are you online? (${e && e.message})`), { code: 'ai.network_gemini', params: { detail: String(e && e.message) } });   // i18n-ignore (English .message of the error contract)
 const FALLBACK_MODELS = ['gemini-flash-latest', 'gemini-2.5-flash', 'gemini-2.0-flash'];
 
 function modelScore(name) {
@@ -70,7 +72,7 @@ async function gemini(opts, retry = 1) {
   let r;
   try {
     r = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-goog-api-key': key }, body: JSON.stringify(buildBody({ ...opts, model })) });
-  } catch (e) { throw gemErr('engine.gemini.network', { detail: e.message }); }
+  } catch (e) { throw gemNetErr(e); }
   if (!r.ok) {
     const t = await r.text();
     if (r.status === 400 && /thinking/i.test(t) && !noThinking.has(model)) { noThinking.add(model); return gemini(opts, retry); }

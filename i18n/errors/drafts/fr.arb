@@ -62,6 +62,7 @@
   "err.ai.api_claude": "Claude : {detail}",
   "err.ai.quota": "Le quota gratuit de Gemini est épuisé pour l’instant (429) — attends une minute ou utilise Claude.",
   "err.ai.api_gemini": "Gemini {status} : {detail}",
+  "err.ai.network_gemini": "Erreur réseau — es-tu en ligne ? ({detail})",
   "err.ai.not_json": "La réponse n’était pas du JSON valide.",
   "err.ai.invalid": "La réponse de {provider} avait encore des problèmes : {problems}",
   "err.ai.job.too_long": "Claude travaille depuis très longtemps. Appuie sur « Reprendre » pour qu’il continue, ou sur « Arrêter ».",

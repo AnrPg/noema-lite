@@ -82,6 +82,8 @@
   "roadmap.share.uploading": "Дорожная карта…",
   "roadmap.share.logShared": "{pub, select, yes {открыт доступ — 🌍 публично} other {открыт доступ}}",
   "roadmap.share.shared": "Готово, карта общая",
+  "roadmap.share.logStep": "«{title}»…",
+  "roadmap.share.logStepFailed": "«{title}»: {error}",
   "roadmap.share.logTook": "{known, select, yes {принято изменений от {owner}: {took, number} из {n, number}} other {принято изменений от владельца: {took, number} из {n, number}}}",
   "roadmap.share.logKept": "{known, select, yes {оставлена своя копия (изменения от {owner} не приняты)} other {оставлена своя копия (изменения владельца не приняты)}}",
   "roadmap.share.logStopped": "общий доступ закрыт",

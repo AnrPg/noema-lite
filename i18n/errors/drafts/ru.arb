@@ -62,6 +62,7 @@
   "err.ai.api_claude": "Claude: {detail}",
   "err.ai.quota": "Бесплатная квота Gemini пока исчерпана (429) — подожди минуту или используй Claude.",
   "err.ai.api_gemini": "Gemini {status}: {detail}",
+  "err.ai.network_gemini": "Ошибка сети — ты в сети? ({detail})",
   "err.ai.not_json": "Ответ не был корректным JSON.",
   "err.ai.invalid": "В ответе {provider} всё ещё есть ошибки: {problems}",
   "err.ai.job.too_long": "Claude работает уже очень долго. Нажми «Продолжить», чтобы он продолжил, или «Стоп».",

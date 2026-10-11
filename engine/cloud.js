@@ -116,7 +116,7 @@
   const pj = s => { try { return JSON.parse(s); } catch (e) { return undefined; } };
   async function restorePoint(acc) {   // before combining drops anything: at most one every 10 minutes
     if (Date.now() - (st.rpAt || 0) < 10 * 60e3) return; st.rpAt = Date.now();
-    try { await window.Noema?.backup?.restorePoint(acc, 'Before combining changes from another device'); } catch (e) { }   // i18n-ignore (a stored label, read on other devices too: translated where it is shown)
+    try { await window.Noema?.backup?.restorePoint(acc, 'Before combining changes from another device', { k: 'engine.bk.pointCombine' }); } catch (e) { }   // i18n-ignore (the stored label for older apps; k: shown in the UI language, engine/src/70_account.js)
   }
 
   /* ---------- combining two copies of a key (progress only grows) ---------- */
@@ -246,21 +246,24 @@
   const LEASE = 'a:inuse', FRESH = 2 * 60e3, BEAT = 30e3;
   const remoteOnly = k => inboxKey(k) || k === LEASE;
   const L = { state: 'unknown', holder: null, acc: null, lastInput: Date.now(), lastBeat: 0, at: null, busy: null };
+  /** This device → { name: English words (older apps show them), os: a code, br: the browser's name } — the "in use" row carries all
+      three; the other device shows os + br in its own language (engine/loader.js, loader.inuse.device), else the name. */
   function deviceName() {
     const u = navigator.userAgent || '';
+    const os = /iPhone/.test(u) ? 'iphone' : /iPad/.test(u) || (/Macintosh/.test(u) && navigator.maxTouchPoints > 1) ? 'ipad' : /Android/.test(u) ? (/Mobile/.test(u) ? 'android_phone' : 'android_tablet')
+      : /CrOS/.test(u) ? 'chromebook' : /Mac/.test(u) ? 'mac' : /Windows/.test(u) ? 'windows' : /Linux/.test(u) ? 'linux' : 'other';
     /* i18n-ignore-start */   // stored in the "in use" row and read on the OTHER device (in its own language): kept English here, translated where it is shown
-    const os = /iPhone/.test(u) ? 'iPhone' : /iPad/.test(u) || (/Macintosh/.test(u) && navigator.maxTouchPoints > 1) ? 'iPad' : /Android/.test(u) ? (/Mobile/.test(u) ? 'Android phone' : 'Android tablet')
-      : /CrOS/.test(u) ? 'Chromebook' : /Mac/.test(u) ? 'Mac' : /Windows/.test(u) ? 'Windows PC' : /Linux/.test(u) ? 'Linux PC' : 'another device';
+    const name = { iphone: 'iPhone', ipad: 'iPad', android_phone: 'Android phone', android_tablet: 'Android tablet', chromebook: 'Chromebook', mac: 'Mac', windows: 'Windows PC', linux: 'Linux PC', other: 'another device' }[os];
     const br = /Edg\//.test(u) ? 'Edge' : /OPR\//.test(u) ? 'Opera' : /Firefox\//.test(u) ? 'Firefox' : /Chrome\//.test(u) ? 'Chrome' : /Safari\//.test(u) ? 'Safari' : '';
     /* i18n-ignore-end */
-    return br ? os + ' · ' + br : os;
+    return { name: br ? name + ' · ' + br : name, os, br };
   }
   const rnd = () => Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
   const ME = (() => {
     let dev = null, sid = null;
     try { dev = localStorage.getItem('noema-device:id'); if (!dev) { dev = rnd(); localStorage.setItem('noema-device:id', dev); } } catch (e) { dev = rnd(); }
     try { sid = sessionStorage.getItem('noema:tab'); if (!sid) { sid = rnd(); sessionStorage.setItem('noema:tab', sid); } } catch (e) { sid = rnd(); }   // one per tab, kept across reloads
-    return { dev, sid, name: deviceName() };
+    return { dev, sid, ...deviceName() };
   })();
   const live = v => !!(v && !v.released && Date.now() - (v.at || 0) < FRESH);
   const activeHere = () => document.visibilityState === 'visible' && Date.now() - L.lastInput < FRESH;
@@ -283,7 +286,7 @@
       L.lastBeat = Date.now();
       if (!mine && live(v) && !take) { setLease('other', v); return 'other'; }   // in use elsewhere right now
       if (!take && !activeHere()) { setLease(mine ? 'mine' : 'unknown'); break; }   // nobody is using this tab: don't take it
-      const at = await leaseWrite(row?.updated_at, { sid: ME.sid, dev: ME.dev, name: ME.name, at: Date.now() });
+      const at = await leaseWrite(row?.updated_at, { sid: ME.sid, dev: ME.dev, name: ME.name, os: ME.os, br: ME.br, at: Date.now() });
       if (!at) continue;   // someone wrote it in between: look again
       L.at = at; setLease('mine');
       if (v && !mine) L.tookOver = true;   // another tab or device had it: bring in what it did
@@ -298,7 +301,7 @@
   function leaseRelease() {
     if (L.state !== 'mine' || !L.at || !session()) return;
     const at = L.at; L.at = null; L.state = 'unknown';
-    leaseWrite(at, { sid: ME.sid, dev: ME.dev, name: ME.name, at: Date.now(), released: true }, true).catch(() => { });
+    leaseWrite(at, { sid: ME.sid, dev: ME.dev, name: ME.name, os: ME.os, br: ME.br, at: Date.now(), released: true }, true).catch(() => { });
   }
 
   /* ---------- the UI language in the account (user_metadata.locale): Supabase's e-mails are written in it (cloud/email/, docs/i18n.md §6) ----------
@@ -402,7 +405,7 @@
     /** Rows whose key starts with `prefix` (e.g. the Claude app's answers, a:curin:) — read directly, not mirrored locally. */
     async kvRows(prefix) { return (await call('/rest/v1/noema_kv?select=key,value,updated_at&order=key&key=like.' + enc(prefix + '*'))) || []; },
     async kvDelete(key) { await call('/rest/v1/noema_kv?key=eq.' + enc(key), { method: 'DELETE' }); },
-    /** One device at a time (see "in use" above): state 'mine' | 'other' | 'unknown', holder = { name, sameDevice, at } when 'other'. */
+    /** One device at a time (see "in use" above): state 'mine' | 'other' | 'unknown', holder = { name, os, br, sameDevice, at } when 'other'. */
     lease: {
       get state() { return L.state; }, get holder() { return L.holder; }, device: ME,
       /** Look at the "in use" row and take it if nobody else is using Noema right now; take = true: take it anyway ("Use here"). */
@@ -461,7 +464,7 @@
     },
 
     /* ---------- snapshots (cloud restore points of the whole account) ---------- */
-    async snapshot(label = 'Manual snapshot') {   // i18n-ignore (stored labels, matched below and read on every device: translated where the list is shown)
+    async snapshot(label = 'Manual snapshot') {   // i18n-ignore (stored names: fixed English, matched below and read on every device — engine/src/70_account.js snapLabel shows them in the UI language)
       const data = await Noema.backup.collect(accId(), { includeSecrets: false });
       await call('/rest/v1/noema_snapshots', { method: 'POST', body: [{ user_id: uid(), label, data, size_bytes: JSON.stringify(data).length }], headers: { Prefer: 'return=minimal' } });
       jset('noema1:' + accId() + ':meta:lastSnapshot', Date.now());

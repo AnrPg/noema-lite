@@ -12,7 +12,7 @@ function feasText(c, f) {
   if (f.state === 'ready') return '🟢 ' + (f.usesBank ? LT('lang.feas.readyN', { n: f.sentences }) : LT('lang.feas.ready'));
   if (f.state === 'thin') return '🟡 ' + LT('lang.feas.thin', { n: f.sentences });
   if (f.state === 'absent') return '— ' + LT('lang.gram.absent');
-  const miss = Object.entries(f.needs || {}).filter(([, [have, need]]) => have < need).map(([pos, [have, need]]) => LT('lang.feas.missPos', { have, need, pos: (N.POS_LABEL[pos] || pos).split(' ')[0] }));
+  const miss = Object.entries(f.needs || {}).filter(([, [have, need]]) => have < need).map(([pos, [have, need]]) => LT('lang.feas.missPosN', { have, need, pos, posWord: (N.POS_LABEL[pos] || pos).split(' ')[0] }));
   const node = f.unlockBy?.[0] && UI.C.nodes[f.unlockBy[0]];
   return '🔒 ' + (node ? LT('lang.feas.needsNode', { node: (node.step != null ? stepLabel(node) + ' ' : '') + node.title }) : LT('lang.feas.needsWords')) + (miss.length ? ` (${LLIST(miss)})` : '');
 }
@@ -105,10 +105,8 @@ WIDGETS.slots = (it, done) => {
 /** The tags of a gloss line, spelled out (ACC = accusative …). */
 function legend(it) {
   const tags = uniq(it.units.filter(u => u.slot).flatMap(u => u.slot.options).flatMap(o => o.split('.').slice(1))).filter(t => /^[A-Z0-9]+$/.test(t));
-  // the names of the gloss tags are explanations: they follow the course's explanation language (lang.expl.tag.<TAG>)
-  const TAGS = ['NOM', 'ACC', 'DAT', 'GEN', 'SG', 'PL', 'DU', 'COLL', 'MASC', 'FEM', 'NEUT', 'DEF', 'INDF', 'PRS', 'PST', 'FUT', 'IND', 'SBJV', 'JUS', 'IMP', 'NFIN', 'PTCP',
-    'CONST', 'STRG', 'WEAK', 'MIX', 'CMPR', 'SPRL', 'PFV', 'IPFV', 'FORM', 'INFM', '1', '2', '3'];
-  const lab = t => TAGS.includes(t) ? LE('lang.expl.tag.' + t) : t;
+  // the names of the gloss tags are langcore's (N.TAG_LABEL, keys lc.expl.tag.<TAG>): one list of tags and words for the whole module
+  const lab = t => Object.prototype.hasOwnProperty.call(N.TAG_LABEL || {}, t) ? N.TAG_LABEL[t] : t;
   return tags.length ? '🔤 ' + tags.map(t => `${t} = ${lab(t)}`).join(' · ') : '';
 }
 /* paradigm: a table with hidden cells */

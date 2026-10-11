@@ -50,7 +50,7 @@ function partsPool(c) {
   const X = LX(c), k = N.known(UI.C, UI.L, c), out = [];
   for (const [id, x] of Object.entries(X.lex)) {
     if (!MET.includes(k.state[id])) continue;
-    const parts = N.principalParts(UI.C, c, x).filter(([l]) => l !== 'transliteration');
+    const parts = N.principalParts(UI.C, c, x).filter(q => q[2] !== 'transliteration');   // q = [label (words), value, id]
     if (parts.length) out.push({ id, parts });
   }
   return out;
@@ -61,22 +61,22 @@ VIEWS.parts = (v, r) => {
     h('h1', {}, '🔁 ' + LT('lang.view.parts'), h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).label}`)),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); go('#/parts/' + x); })));
   if (!pool.length) return v.append(h('p', { class: 'lx-note' }, LT('lang.parts.nothing', { lang: info(c).name })));
-  // every value a label takes among the words met: the distractors
-  const byLabel = {}; for (const p of partsPool(c)) for (const [l, val] of p.parts) (byLabel[l] = byLabel[l] || new Set()).add(val);
+  // every value a part (by its id) takes among the words met: the distractors
+  const byLabel = {}; for (const p of partsPool(c)) for (const [, val, id] of p.parts) (byLabel[id] = byLabel[id] || new Set()).add(val);
   const stage = h('div', { class: 'lx-stage' }); v.append(stage);
   let i = 0, right = 0; const day = today();
   const next = () => {
     stage.innerHTML = '';
     if (i >= pool.length) { save(); return stage.append(h('div', { class: 'lx-card lx-sortdone' }, h('b', {}, '✅ ' + LT('lang.drill.score', { right, n: pool.length })), ' ', h('button', { class: 'btn small primary', onclick: () => render() }, '↻ ' + LT('lang.drill.again')))); }
-    const p = pool[i++], x = X.lex[p.id], [label, val] = p.parts[Math.floor(Math.random() * p.parts.length)];
-    const others = qaPartsDistractors(c, p, label, val, byLabel[label]);   // forms of the same word first (99_qa.js): another word's form gives the answer away
-    const box = h('div', { class: 'lx-ex lx-exparts', 'data-kind': 'parts', 'data-lex': p.id, 'data-label': label });
+    const p = pool[i++], x = X.lex[p.id], [label, val, pid] = p.parts[Math.floor(Math.random() * p.parts.length)];   // label: the words shown; pid: the part's stable id (compared)
+    const others = qaPartsDistractors(c, p, pid, val, byLabel[pid]);   // forms of the same word first (99_qa.js): another word's form gives the answer away
+    const box = h('div', { class: 'lx-ex lx-exparts', 'data-kind': 'parts', 'data-lex': p.id, 'data-label': pid });
     if (!others.length) {   // nothing to choose among: show it and go on
       box.append(h('div', { class: 'lx-prompt' }, word(c, x.lemma, { lex: x })), h('div', { class: 'lx-q' }, `${label}: `, /[֐-ۿ一-鿿]/.test(val) ? word(c, val, { sub: false }) : val), h('button', { class: 'btn primary lx-next', onclick: next }, LT('lang.drill.next') + ' →'));
       return stage.append(box);
     }
     const opts = shuffle([{ val, ok: true }, ...others.map(o => ({ val: o }))]);
-    box.append(h('div', { class: 'lx-prompt' }, word(c, x.lemma, { lex: x, sub: label !== 'pinyin' }), h('div', { class: 'tiny' }, gloss(c, p.id))), h('div', { class: 'lx-q' }, /^(with |perfect |one |plural only|er\/|du$)/.test(label) ? label[0].toUpperCase() + label.slice(1) + ' …?' : LT('lang.parts.its', { label })),   // the pinyin under the word would be the answer
+    box.append(h('div', { class: 'lx-prompt' }, word(c, x.lemma, { lex: x, sub: pid !== 'pinyin' }), h('div', { class: 'tiny' }, gloss(c, p.id))), h('div', { class: 'lx-q' }, /^(with |perfect |one |plural only|er\/|du$)/.test(pid) ? label[0].toUpperCase() + label.slice(1) + ' …?' : LT('lang.parts.its', { label })),   // the pinyin under the word would be the answer
       options(opts.map(o => ({ ...o, label: /[֐-ۿ一-鿿]/.test(o.val) ? word(c, o.val, { sub: false }) : o.val })), (o, b, wrap) => {
         b.classList.add(o.ok ? 'right' : 'wrong'); if (!o.ok) markOpts(wrap, j => opts[j].ok); if (o.ok) right++;
         N.review(UI.C, UI.L, c, p.id, 'r', o.ok ? 'good' : 'again', day); save();

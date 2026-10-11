@@ -454,5 +454,6 @@
   "loader.viewer.kind.unknown": "Αρχείο",
   "loader.viewer.kind.youtube": "Βίντεο YouTube",
   "loader.viewer.kind.web": "Ιστοσελίδα",
-  "loader.meta.description": "noema-lite — δομημένη θεωρία, ένας σωκρατικός δάσκαλος ΤΝ και εξάσκηση σαν παιχνίδι για κάθε μάθημα."
+  "loader.meta.description": "noema-lite — δομημένη θεωρία, ένας σωκρατικός δάσκαλος ΤΝ και εξάσκηση σαν παιχνίδι για κάθε μάθημα.",
+  "loader.inuse.device": "{os, select, iphone {iPhone} ipad {iPad} android_phone {κινητό Android} android_tablet {tablet Android} chromebook {Chromebook} mac {Mac} windows {υπολογιστής Windows} linux {υπολογιστής Linux} other {άλλη συσκευή}}{browser, select, none {} other { · {browser}}}"
 }

@@ -5,6 +5,8 @@
 const fs = require('fs'), path = require('path');
 const { ROOT, LOCALES, loadAll, messages, parse, print } = require('./icu');
 const OUT = path.join(ROOT, 'engine', 'i18n');
+/** Components the app never reads at run time: the account e-mails (i18n/email → tools/i18n/emails.js → cloud/email/). check.js still checks them. */
+const NOT_IN_APP = new Set(['email']);
 
 const ACC = { a: 'á', b: 'ƀ', c: 'ç', d: 'ď', e: 'é', f: 'ƒ', g: 'ĝ', h: 'ĥ', i: 'í', j: 'ĵ', k: 'ķ', l: 'ļ', m: 'ɱ', n: 'ñ', o: 'ó', p: 'þ', q: 'ǫ', r: 'ŕ', s: 'š', t: 'ţ', u: 'ú', v: 'ṽ', w: 'ŵ', x: 'ẋ', y: 'ý', z: 'ž',
   A: 'Á', B: 'Ɓ', C: 'Ç', D: 'Ď', E: 'É', F: 'Ƒ', G: 'Ĝ', H: 'Ĥ', I: 'Í', J: 'Ĵ', K: 'Ķ', L: 'Ļ', M: 'Ṁ', N: 'Ñ', O: 'Ó', P: 'Þ', Q: 'Ǫ', R: 'Ŕ', S: 'Š', T: 'Ţ', U: 'Ú', V: 'Ṽ', W: 'Ŵ', X: 'Ẋ', Y: 'Ý', Z: 'Ž' };
@@ -16,7 +18,8 @@ function pseudo(msg, rtl) {
   return rtl ? `‮${body}‬` : `[${longer(body)}]`;
 }
 function build() {
-  const { cats, drafts } = loadAll();
+  const all = loadAll(), keep = o => Object.fromEntries(Object.entries(o).filter(([comp]) => !NOT_IN_APP.has(comp)));
+  const cats = keep(all.cats), drafts = keep(all.drafts);
   const merged = {}, mergedD = {};
   for (const [comp, byLoc] of Object.entries(cats)) for (const [loc, arb] of Object.entries(byLoc)) Object.assign(merged[loc] = merged[loc] || {}, messages(arb));
   for (const [comp, byLoc] of Object.entries(drafts)) for (const [loc, arb] of Object.entries(byLoc)) Object.assign(mergedD[loc] = mergedD[loc] || {}, messages(arb));
@@ -39,4 +42,4 @@ function build() {
   console.log(`i18n → engine/i18n/: ${Object.keys(en).length} keys · ` + LOCALES.filter(l => l !== 'en').map(l => `${l} ${Object.keys(merged[l] || {}).length}${Object.keys(mergedD[l] || {}).length ? '+' + Object.keys(mergedD[l]).length + 'd' : ''}`).join(' · '));
 }
 if (require.main === module) build();
-module.exports = { build, pseudo };
+module.exports = { build, pseudo, NOT_IN_APP };

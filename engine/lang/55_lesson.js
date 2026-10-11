@@ -15,8 +15,8 @@ VIEWS.lesson = (v, r) => {
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); render(); }),
       ...langs.map(x => h('span', { class: 'lx-ns ns-' + st[x] }, info(x).flag, ' ', STATE_LABEL[st[x]] || st[x], UI.L.langs[x]?.checks?.[nid] ? ' · ' + LT('lang.lesson.pct', { pct: Math.round(UI.L.langs[x].checks[nid].best * 100) }) : ''))),
     h('div', { class: 'row lx-actions' },
-      can.length ? h('button', { class: 'btn primary', onclick: () => runLesson(nid, can) }, '▶ ' + LT(can.every(x => !toIntroduce(x, nid, N.known(UI.C, UI.L, x)).length) ? 'lang.lesson.practiseFlags' : 'lang.lesson.learnFlags', { flags: can.map(x => info(x).flag).join(' ') })) : h('span', { class: 'lx-note' }, '🔒 ' + LT('lang.lesson.locked')),
-      can.length ? h('button', { class: 'btn', onclick: () => runLesson(nid, can, { checkOnly: true }) }, '✔ ' + LT('lang.lesson.check')) : null, deepenButton(nid, c)));
+      can.length ? h('button', { class: 'btn primary', 'data-icon': can.every(x => !toIntroduce(x, nid, N.known(UI.C, UI.L, x)).length) ? 'gym' : 'plus', onclick: () => runLesson(nid, can) }, '▶ ' + LT(can.every(x => !toIntroduce(x, nid, N.known(UI.C, UI.L, x)).length) ? 'lang.lesson.practiseFlags' : 'lang.lesson.learnFlags', { flags: can.map(x => info(x).flag).join(' ') })) : h('span', { class: 'lx-note' }, '🔒 ' + LT('lang.lesson.locked')),
+      can.length ? h('button', { class: 'btn', 'data-icon': 'check', onclick: () => runLesson(nid, can, { checkOnly: true }) }, '✔ ' + LT('lang.lesson.check')) : null, deepenButton(nid, c)));
   const fns = N.lessonFunctions(UI.C, c, nid);
   if (fns.includes('fn.overview')) v.append(typologyCard());
   v.append(h('h2', { class: 'lx-h2' }, '📖 ' + LT('lang.lesson.grammarIn', { lang: info(c).name })), ...fns.map(f => grammarCard(c, f, { compact: true, onPick: x => { UI.lang = x; UI.prefs.lang = x; save(); render(); } })));

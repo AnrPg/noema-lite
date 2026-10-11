@@ -642,6 +642,30 @@
   "@roadmap.share.shared": {
     "description": "Last progress line when sharing a Roadmap is done. Very short."
   },
+  "roadmap.share.logStep": "“{title}”…",
+  "@roadmap.share.logStep": {
+    "description": "Progress line while sharing a Roadmap: one prepared step (its subject) is being shared. title = the step’s title. After a ⚡ emoji.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Vectors"
+      }
+    }
+  },
+  "roadmap.share.logStepFailed": "“{title}”: {error}",
+  "@roadmap.share.logStepFailed": {
+    "description": "Progress line while sharing a Roadmap: sharing one prepared step failed. title = the step’s title, error = the reason (already in the learner’s language). After a ⚠️ emoji.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Vectors"
+      },
+      "error": {
+        "type": "String",
+        "example": "The cloud refused this (a permission rule)."
+      }
+    }
+  },
   "roadmap.share.logTook": "{known, select, yes {took {took, number} of {n, number} change(s) from {owner}} other {took {took, number} of {n, number} change(s) from the owner}}",
   "@roadmap.share.logTook": {
     "description": "Log line of a shared Roadmap: the member took some of the owner’s changes. took = how many, n = how many were offered; owner = the owner’s name, known = yes when it is known.",

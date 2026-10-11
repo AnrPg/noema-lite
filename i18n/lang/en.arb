@@ -1468,24 +1468,6 @@
       }
     }
   },
-  "lang.feas.missPos": "{have, number}/{need, number} {pos}s",
-  "@lang.feas.missPos": {
-    "description": "In the feasibility light: words of a part of speech the learner has / needs. {pos} = the part of speech in the singular, as the course engine names it (e.g. “verb”); English adds “s”.",
-    "placeholders": {
-      "have": {
-        "type": "int",
-        "example": "2"
-      },
-      "need": {
-        "type": "int",
-        "example": "4"
-      },
-      "pos": {
-        "type": "String",
-        "example": "verb"
-      }
-    }
-  },
   "lang.feas.needsNode": "needs {node}",
   "@lang.feas.needsNode": {
     "description": "Feasibility light (after 🔒): the course step that unlocks the point ({node} = step code and title).",
@@ -1601,146 +1583,6 @@
   "lang.ex.given": "Given:",
   "@lang.ex.given": {
     "description": "Label before the part of the answer given in an analysis exercise."
-  },
-  "lang.expl.tag.NOM": "nominative",
-  "@lang.expl.tag.NOM": {
-    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag NOM in the legend of a gloss exercise (“NOM = nominative”). A grammar term."
-  },
-  "lang.expl.tag.ACC": "accusative",
-  "@lang.expl.tag.ACC": {
-    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag ACC in the legend of a gloss exercise (“ACC = accusative”). A grammar term."
-  },
-  "lang.expl.tag.DAT": "dative",
-  "@lang.expl.tag.DAT": {
-    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag DAT in the legend of a gloss exercise (“DAT = dative”). A grammar term."
-  },
-  "lang.expl.tag.GEN": "genitive",
-  "@lang.expl.tag.GEN": {
-    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag GEN in the legend of a gloss exercise (“GEN = genitive”). A grammar term."
-  },
-  "lang.expl.tag.SG": "singular",
-  "@lang.expl.tag.SG": {
-    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag SG in the legend of a gloss exercise (“SG = singular”). A grammar term."
-  },
-  "lang.expl.tag.PL": "plural",
-  "@lang.expl.tag.PL": {
-    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag PL in the legend of a gloss exercise (“PL = plural”). A grammar term."
-  },
-  "lang.expl.tag.DU": "dual",
-  "@lang.expl.tag.DU": {
-    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag DU in the legend of a gloss exercise (“DU = dual”). A grammar term."
-  },
-  "lang.expl.tag.COLL": "collective",
-  "@lang.expl.tag.COLL": {
-    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag COLL in the legend of a gloss exercise (“COLL = collective”). A grammar term."
-  },
-  "lang.expl.tag.MASC": "masculine",
-  "@lang.expl.tag.MASC": {
-    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag MASC in the legend of a gloss exercise (“MASC = masculine”). A grammar term."
-  },
-  "lang.expl.tag.FEM": "feminine",
-  "@lang.expl.tag.FEM": {
-    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag FEM in the legend of a gloss exercise (“FEM = feminine”). A grammar term."
-  },
-  "lang.expl.tag.NEUT": "neuter",
-  "@lang.expl.tag.NEUT": {
-    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag NEUT in the legend of a gloss exercise (“NEUT = neuter”). A grammar term."
-  },
-  "lang.expl.tag.DEF": "definite",
-  "@lang.expl.tag.DEF": {
-    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag DEF in the legend of a gloss exercise (“DEF = definite”). A grammar term."
-  },
-  "lang.expl.tag.INDF": "indefinite",
-  "@lang.expl.tag.INDF": {
-    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag INDF in the legend of a gloss exercise (“INDF = indefinite”). A grammar term."
-  },
-  "lang.expl.tag.PRS": "present",
-  "@lang.expl.tag.PRS": {
-    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag PRS in the legend of a gloss exercise (“PRS = present”). A grammar term."
-  },
-  "lang.expl.tag.PST": "past",
-  "@lang.expl.tag.PST": {
-    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag PST in the legend of a gloss exercise (“PST = past”). A grammar term."
-  },
-  "lang.expl.tag.FUT": "future",
-  "@lang.expl.tag.FUT": {
-    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag FUT in the legend of a gloss exercise (“FUT = future”). A grammar term."
-  },
-  "lang.expl.tag.IND": "indicative",
-  "@lang.expl.tag.IND": {
-    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag IND in the legend of a gloss exercise (“IND = indicative”). A grammar term."
-  },
-  "lang.expl.tag.SBJV": "subjunctive",
-  "@lang.expl.tag.SBJV": {
-    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag SBJV in the legend of a gloss exercise (“SBJV = subjunctive”). A grammar term."
-  },
-  "lang.expl.tag.JUS": "jussive",
-  "@lang.expl.tag.JUS": {
-    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag JUS in the legend of a gloss exercise (“JUS = jussive”). A grammar term."
-  },
-  "lang.expl.tag.IMP": "imperative",
-  "@lang.expl.tag.IMP": {
-    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag IMP in the legend of a gloss exercise (“IMP = imperative”). A grammar term."
-  },
-  "lang.expl.tag.NFIN": "infinitive",
-  "@lang.expl.tag.NFIN": {
-    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag NFIN in the legend of a gloss exercise (“NFIN = infinitive”). A grammar term."
-  },
-  "lang.expl.tag.PTCP": "participle",
-  "@lang.expl.tag.PTCP": {
-    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag PTCP in the legend of a gloss exercise (“PTCP = participle”). A grammar term."
-  },
-  "lang.expl.tag.CONST": "construct state",
-  "@lang.expl.tag.CONST": {
-    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag CONST in the legend of a gloss exercise (“CONST = construct state”). A grammar term."
-  },
-  "lang.expl.tag.STRG": "strong ending",
-  "@lang.expl.tag.STRG": {
-    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag STRG in the legend of a gloss exercise (“STRG = strong ending”). A grammar term."
-  },
-  "lang.expl.tag.WEAK": "weak ending",
-  "@lang.expl.tag.WEAK": {
-    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag WEAK in the legend of a gloss exercise (“WEAK = weak ending”). A grammar term."
-  },
-  "lang.expl.tag.MIX": "mixed ending",
-  "@lang.expl.tag.MIX": {
-    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag MIX in the legend of a gloss exercise (“MIX = mixed ending”). A grammar term."
-  },
-  "lang.expl.tag.CMPR": "comparative",
-  "@lang.expl.tag.CMPR": {
-    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag CMPR in the legend of a gloss exercise (“CMPR = comparative”). A grammar term."
-  },
-  "lang.expl.tag.SPRL": "superlative",
-  "@lang.expl.tag.SPRL": {
-    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag SPRL in the legend of a gloss exercise (“SPRL = superlative”). A grammar term."
-  },
-  "lang.expl.tag.PFV": "perfective",
-  "@lang.expl.tag.PFV": {
-    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag PFV in the legend of a gloss exercise (“PFV = perfective”). A grammar term."
-  },
-  "lang.expl.tag.IPFV": "imperfective",
-  "@lang.expl.tag.IPFV": {
-    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag IPFV in the legend of a gloss exercise (“IPFV = imperfective”). A grammar term."
-  },
-  "lang.expl.tag.FORM": "formal",
-  "@lang.expl.tag.FORM": {
-    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag FORM in the legend of a gloss exercise (“FORM = formal”). A grammar term."
-  },
-  "lang.expl.tag.INFM": "informal",
-  "@lang.expl.tag.INFM": {
-    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag INFM in the legend of a gloss exercise (“INFM = informal”). A grammar term."
-  },
-  "lang.expl.tag.1": "1st person",
-  "@lang.expl.tag.1": {
-    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag 1 in the legend of a gloss exercise (“1 = 1st person”). A grammar term."
-  },
-  "lang.expl.tag.2": "2nd person",
-  "@lang.expl.tag.2": {
-    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag 2 in the legend of a gloss exercise (“2 = 2nd person”). A grammar term."
-  },
-  "lang.expl.tag.3": "3rd person",
-  "@lang.expl.tag.3": {
-    "description": "EXPLANATION (follows the course’s explanation language): the name of the gloss tag 3 in the legend of a gloss exercise (“3 = 3rd person”). A grammar term."
   },
   "lang.ex.proofAsk": "One word is wrong — tap it, then fix it.",
   "@lang.ex.proofAsk": {
@@ -4741,5 +4583,95 @@
   "lang.native.speakerAuto": "Automatic (your language when its translation is ready)",
   "@lang.native.speakerAuto": {
     "description": "The first option of the “Explanations in” picker: the app chooses (the native language’s translation when it is on, else the UI language’s, else the original)."
+  },
+  "lang.feas.missPosN": "{have, number}/{need, number} {pos, select, NOUN {nouns} PROPN {names} VERB {verbs} AUX {auxiliarys} ADJ {adjectives} DET {determiners} PRON {pronouns} ADP {prepositions} ADV {adverbs} PART {particles} CCONJ {conjunctions} SCONJ {subordinators} NUM {numbers} CLF {measures} INTJ {interjections} other {{posWord}s}}",
+  "@lang.feas.missPosN": {
+    "description": "In the feasibility light of a grammar function: words of a part of speech the learner has / needs. pos = the part-of-speech tag (Universal Dependencies: NOUN, VERB, AUX …) — write the plural word of each; posWord = the course engine’s word for an unknown tag (other). English keeps its old words (“auxiliarys”, “measures”).",
+    "placeholders": {
+      "have": {
+        "type": "int",
+        "example": "2"
+      },
+      "need": {
+        "type": "int",
+        "example": "4"
+      },
+      "pos": {
+        "type": "String",
+        "example": "VERB"
+      },
+      "posWord": {
+        "type": "String",
+        "example": "verb"
+      }
+    }
+  },
+  "lang.expl.status.dated": "dated",
+  "@lang.expl.status.dated": {
+    "description": "Word card (explanation language): a chip with the word’s status in the language when it is not current (data value “dated”). One or two words, lowercase."
+  },
+  "lang.expl.status.archaic": "archaic",
+  "@lang.expl.status.archaic": {
+    "description": "Word card (explanation language): a chip with the word’s status in the language when it is not current (data value “archaic”). One or two words, lowercase."
+  },
+  "lang.expl.status.obsolete": "obsolete",
+  "@lang.expl.status.obsolete": {
+    "description": "Word card (explanation language): a chip with the word’s status in the language when it is not current (data value “obsolete”). One or two words, lowercase."
+  },
+  "lang.expl.status.rare": "rare",
+  "@lang.expl.status.rare": {
+    "description": "Word card (explanation language): a chip with the word’s status in the language when it is not current (data value “rare”). One or two words, lowercase."
+  },
+  "lang.expl.status.neologism": "neologism",
+  "@lang.expl.status.neologism": {
+    "description": "Word card (explanation language): a chip with the word’s status in the language when it is not current (data value “neologism”). One or two words, lowercase."
+  },
+  "lang.expl.domain.botany": "botany",
+  "@lang.expl.domain.botany": {
+    "description": "Word card (explanation language): a chip with the field a meaning of the word belongs to (data value “botany”). One or two words, lowercase."
+  },
+  "lang.expl.domain.food": "food",
+  "@lang.expl.domain.food": {
+    "description": "Word card (explanation language): a chip with the field a meaning of the word belongs to (data value “food”). One or two words, lowercase."
+  },
+  "lang.expl.domain.education": "education",
+  "@lang.expl.domain.education": {
+    "description": "Word card (explanation language): a chip with the field a meaning of the word belongs to (data value “education”). One or two words, lowercase."
+  },
+  "lang.expl.domain.medicine": "medicine",
+  "@lang.expl.domain.medicine": {
+    "description": "Word card (explanation language): a chip with the field a meaning of the word belongs to (data value “medicine”). One or two words, lowercase."
+  },
+  "lang.expl.domain.psychology": "psychology",
+  "@lang.expl.domain.psychology": {
+    "description": "Word card (explanation language): a chip with the field a meaning of the word belongs to (data value “psychology”). One or two words, lowercase."
+  },
+  "lang.expl.domain.philosophy": "philosophy",
+  "@lang.expl.domain.philosophy": {
+    "description": "Word card (explanation language): a chip with the field a meaning of the word belongs to (data value “philosophy”). One or two words, lowercase."
+  },
+  "lang.expl.domain.gardening": "gardening",
+  "@lang.expl.domain.gardening": {
+    "description": "Word card (explanation language): a chip with the field a meaning of the word belongs to (data value “gardening”). One or two words, lowercase."
+  },
+  "lang.expl.domain.agriculture": "agriculture",
+  "@lang.expl.domain.agriculture": {
+    "description": "Word card (explanation language): a chip with the field a meaning of the word belongs to (data value “agriculture”). One or two words, lowercase."
+  },
+  "lang.expl.domain.household": "household",
+  "@lang.expl.domain.household": {
+    "description": "Word card (explanation language): a chip with the field a meaning of the word belongs to (data value “household”). One or two words, lowercase."
+  },
+  "lang.expl.domain.games": "games",
+  "@lang.expl.domain.games": {
+    "description": "Word card (explanation language): a chip with the field a meaning of the word belongs to (data value “games”). One or two words, lowercase."
+  },
+  "lang.expl.domain.chemistry": "chemistry",
+  "@lang.expl.domain.chemistry": {
+    "description": "Word card (explanation language): a chip with the field a meaning of the word belongs to (data value “chemistry”). One or two words, lowercase."
+  },
+  "lang.expl.domain.anatomy": "anatomy",
+  "@lang.expl.domain.anatomy": {
+    "description": "Word card (explanation language): a chip with the field a meaning of the word belongs to (data value “anatomy”). One or two words, lowercase."
   }
 }
