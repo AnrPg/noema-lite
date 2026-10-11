@@ -2545,5 +2545,75 @@
   "loader.group.languages": "Languages",
   "@loader.group.languages": {
     "description": "Subject picker: heading of the group of language subjects (id languages). Short."
+  },
+  "loader.study.ask": "Which languages do you want to study?",
+  "@loader.study.ask": {
+    "description": "D21: the question (title) of the chooser of the languages to study — on the Languages tab, a course's home and its settings."
+  },
+  "loader.study.why": "Choose one, several or all. The app then teaches only these — you can change this any time, and nothing you learned is lost.",
+  "@loader.study.why": {
+    "description": "D21: under the question of the language chooser."
+  },
+  "loader.study.noneHere": "None of the languages you chose is taught in this course (it teaches {langs}). Choose the ones you want to study here.",
+  "@loader.study.noneHere": {
+    "description": "D21: a course opened that teaches none of the languages the learner chose; {langs} = the course's languages, “A · B · C”.",
+    "placeholders": {
+      "langs": {
+        "type": "String",
+        "example": "Arabic · Hebrew"
+      }
+    }
+  },
+  "loader.study.ok": "{n, plural, =0 {Choose a language} one {Study # language} other {Study # languages}}",
+  "@loader.study.ok": {
+    "description": "D21: the button that stores the choice; n = how many languages are selected (0: the button is disabled).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "loader.study.all": "All",
+  "@loader.study.all": {
+    "description": "D21: button of the language chooser that selects every language. One word."
+  },
+  "loader.study.none": "None",
+  "@loader.study.none": {
+    "description": "D21: the same button when every language is selected: clears the selection. One word."
+  },
+  "loader.study.inCourse": "in this course",
+  "@loader.study.inCourse": {
+    "description": "D21: small mark under a language of the chooser that the open course teaches. Lowercase, short."
+  },
+  "loader.study.change": "Change your languages",
+  "@loader.study.change": {
+    "description": "D21: Languages tab — the row (and the sheet's title) that opens the language chooser again."
+  },
+  "loader.study.changeSub": "One, several or all — your progress is kept",
+  "@loader.study.changeSub": {
+    "description": "D21: Languages tab — the line under “Change your languages”."
+  },
+  "loader.study.yours": "Your languages",
+  "@loader.study.yours": {
+    "description": "D21: Languages tab — section label above the languages the learner chose (each row opens its course)."
+  },
+  "loader.study.courses": "Courses",
+  "@loader.study.courses": {
+    "description": "D21: Languages tab — section label above the language courses that teach the chosen languages."
+  },
+  "loader.study.otherCourses": "{n, plural, one {# other course} other {# other courses}}",
+  "@loader.study.otherCourses": {
+    "description": "D21: Languages tab — folded section with the courses that teach none of the chosen languages.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "loader.study.otherCoursesSub": "They teach none of the languages you chose. Open one to choose among its languages.",
+  "@loader.study.otherCoursesSub": {
+    "description": "D21: Languages tab — the line inside the folded “other courses”."
   }
 }

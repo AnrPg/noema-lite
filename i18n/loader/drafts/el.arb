@@ -464,5 +464,18 @@
   "loader.group.math": "Μαθηματικά & Στατιστική",
   "loader.group.social-sciences": "Κοινωνικές επιστήμες & Φιλοσοφία",
   "loader.group.economics": "Οικονομικά & Επιχειρήσεις",
-  "loader.group.languages": "Γλώσσες"
+  "loader.group.languages": "Γλώσσες",
+  "loader.study.ask": "Ποιες γλώσσες θέλεις να μελετήσεις;",
+  "loader.study.why": "Διάλεξε μία, μερικές ή όλες. Η εφαρμογή θα διδάσκει μόνο αυτές — μπορείς να το αλλάξεις όποτε θέλεις και τίποτα από όσα έμαθες δεν χάνεται.",
+  "loader.study.noneHere": "Καμία από τις γλώσσες που διάλεξες δεν διδάσκεται σε αυτό το μάθημα (διδάσκει: {langs}). Διάλεξε όσες θέλεις να μελετήσεις εδώ.",
+  "loader.study.ok": "{n, plural, =0 {Διάλεξε μια γλώσσα} one {Μελέτη # γλώσσας} other {Μελέτη # γλωσσών}}",
+  "loader.study.all": "Όλες",
+  "loader.study.none": "Καμία",
+  "loader.study.inCourse": "σε αυτό το μάθημα",
+  "loader.study.change": "Άλλαξε τις γλώσσες σου",
+  "loader.study.changeSub": "Μία, μερικές ή όλες — η πρόοδός σου κρατιέται",
+  "loader.study.yours": "Οι γλώσσες σου",
+  "loader.study.courses": "Μαθήματα",
+  "loader.study.otherCourses": "{n, plural, one {# άλλο μάθημα} other {# άλλα μαθήματα}}",
+  "loader.study.otherCoursesSub": "Δεν διδάσκουν καμία από τις γλώσσες που διάλεξες. Άνοιξε ένα για να διαλέξεις ανάμεσα στις γλώσσες του."
 }

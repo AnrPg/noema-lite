@@ -464,5 +464,18 @@
   "loader.group.math": "Математика и статистика",
   "loader.group.social-sciences": "Общественные науки и философия",
   "loader.group.economics": "Экономика и бизнес",
-  "loader.group.languages": "Языки"
+  "loader.group.languages": "Языки",
+  "loader.study.ask": "Какие языки ты хочешь учить?",
+  "loader.study.why": "Выбери один, несколько или все. Приложение будет учить только им — это можно поменять в любой момент, и ничего из выученного не пропадёт.",
+  "loader.study.noneHere": "Ни один из выбранных тобой языков не преподаётся в этом курсе (в нём: {langs}). Выбери те, что хочешь учить здесь.",
+  "loader.study.ok": "{n, plural, =0 {Выбери язык} one {Учить # язык} few {Учить # языка} many {Учить # языков} other {Учить # языка}}",
+  "loader.study.all": "Все",
+  "loader.study.none": "Ни одного",
+  "loader.study.inCourse": "в этом курсе",
+  "loader.study.change": "Изменить свои языки",
+  "loader.study.changeSub": "Один, несколько или все — прогресс сохраняется",
+  "loader.study.yours": "Твои языки",
+  "loader.study.courses": "Курсы",
+  "loader.study.otherCourses": "{n, plural, one {# другой курс} few {# других курса} many {# других курсов} other {# другого курса}}",
+  "loader.study.otherCoursesSub": "В них нет ни одного из выбранных тобой языков. Открой курс, чтобы выбрать среди его языков."
 }

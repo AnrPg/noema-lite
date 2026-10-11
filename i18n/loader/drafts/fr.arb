@@ -464,5 +464,18 @@
   "loader.group.math": "Mathématiques et statistiques",
   "loader.group.social-sciences": "Sciences sociales et philosophie",
   "loader.group.economics": "Économie et entreprise",
-  "loader.group.languages": "Langues"
+  "loader.group.languages": "Langues",
+  "loader.study.ask": "Quelles langues veux-tu étudier ?",
+  "loader.study.why": "Choisis-en une, plusieurs ou toutes. L’app n’enseigne alors que celles-ci — tu peux changer quand tu veux, et rien de ce que tu as appris n’est perdu.",
+  "loader.study.noneHere": "Aucune des langues que tu as choisies n’est enseignée dans ce cours (il enseigne : {langs}). Choisis celles que tu veux étudier ici.",
+  "loader.study.ok": "{n, plural, =0 {Choisis une langue} one {Étudier # langue} many {Étudier # langues} other {Étudier # langues}}",
+  "loader.study.all": "Toutes",
+  "loader.study.none": "Aucune",
+  "loader.study.inCourse": "dans ce cours",
+  "loader.study.change": "Changer tes langues",
+  "loader.study.changeSub": "Une, plusieurs ou toutes — tes progrès sont gardés",
+  "loader.study.yours": "Tes langues",
+  "loader.study.courses": "Cours",
+  "loader.study.otherCourses": "{n, plural, one {# autre cours} many {# autres cours} other {# autres cours}}",
+  "loader.study.otherCoursesSub": "Ils n’enseignent aucune des langues que tu as choisies. Ouvres-en un pour choisir parmi ses langues."
 }
