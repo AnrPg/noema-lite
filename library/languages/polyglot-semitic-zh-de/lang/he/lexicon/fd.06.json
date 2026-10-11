@@ -147,7 +147,7 @@
      }
     ],
     "etymology": {
-     "text": "Related to Aramaic אִית (ʾīṯ). Compare Arabic لَيْسَ (laysa, “to not be, there is not”).",
+     "text": "An old Semitic word of existence (Wiktionary). Compare Arabic لَيْسَ (laysa, “to not be, there is not”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -410,7 +410,7 @@
     },
     "funFacts": [
      "The suffixed forms show the old -at- ending that the plain word hides: מִשְׁפָּחָה → מִשְׁפַּחַת־ → מִשְׁפַּחְתִּי “my family”.",
-     "In biology it is exactly English family: the rank just above the genus (סוּג)."
+     "In biology it is the rank just above the genus (סוּג)."
     ],
     "pitfalls": [
      "“My family” in everyday speech is הַמִּשְׁפָּחָה שֶׁלִּי; מִשְׁפַּחְתִּי is formal or written.",
@@ -552,7 +552,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Do not confuse it with הוֹרָה, the Israeli circle dance: that word came through Yiddish from Greek χορός “dance” (English chorus)."
+     "Do not confuse it with הוֹרָה, the Israeli circle dance: that word came through Yiddish from Greek χορός “dance”."
     ],
     "pitfalls": [
      "There is no everyday singular: the formal הוֹרֶה “a parent” appears in official language; “one of my parents” is אֶחָד הַהוֹרִים שֶׁלִּי.",
@@ -560,6 +560,18 @@
     ],
     "subtleties": [
      "The suffixed הוֹרַי “my parents” sounds a little formal; in conversation הַהוֹרִים שֶׁלִּי is usual."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "הוֹרָה, the Israeli circle dance (not הוֹרִים!), goes back to χορός."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "הוֹרָה, the circle dance, is a distant relative of English chorus."
+     }
     ]
    }
   },
@@ -1026,7 +1038,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Through the Aramaic of the Gospels (“Abba, Father”) the word reached Greek ἀββᾶς and Latin abbas — the source of English abbot and German Abt."
+     "Through the Gospels (“Abba, Father”) the word travelled far: German Abt “abbot” comes from it."
     ],
     "pitfalls": [
      "Like אִמָּא it goes without the article before שֶׁלִּי: אַבָּא שֶׁלִּי.",
@@ -1034,6 +1046,43 @@
     ],
     "subtleties": [
      "Stress the first syllable: ÁBA."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Greek αββάς “abbot” is this word, taken from the Gospels."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "English abbot comes from this word, through the Gospels and Latin abbas."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "French abbé comes from this word, through the Gospels."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Italian abate comes from this word, through the Gospels."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "Spanish abad comes from this word, through the Gospels."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Portuguese abade comes from this word, through the Gospels."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Russian аббат comes from this word, through the Gospels."
+     }
     ]
    }
   },
@@ -2043,7 +2092,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "A nurse is a “sister” in Hebrew as in British English (Sister), in German (Krankenschwester) and in Russian (медсестра, from медицинская сестра “medical sister”)."
+     "A nurse is a “sister” in Hebrew, as in German Krankenschwester."
     ],
     "pitfalls": [
      "The plural is irregular: אֲחָיוֹת, הָאֲחָיוֹת (not *אָחוֹתוֹת).",
@@ -2051,6 +2100,18 @@
     ],
     "subtleties": [
      "A male nurse is אָח, a female nurse אָחוֹת — the same pair as brother and sister."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "As in British English (Sister), a nurse is an אָחוֹת."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "As in медсестра (медицинская сестра), a nurse is an אָחוֹת “sister”."
+     }
     ]
    }
   },
@@ -2659,13 +2720,35 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Like Greek οι παππούδες, Hebrew uses the plural of “grandfather” for “grandparents”; German has a word of its own, Großeltern."
+     "Hebrew uses the plural of “grandfather” for “grandparents”; German has a word of its own, Großeltern."
     ],
     "pitfalls": [
      "It is a masculine plural used for a mixed group: הַסָּבִים = the grandparents (or only the grandfathers)."
     ],
     "subtleties": [
      "At home: סַבָּא וְסָבְתָא שֶׁלִּי; in writing or in a speech: הַסָּבִים שֶׁלִּי."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Like οι παππούδες, the plural of “grandfather” means “grandparents”."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "Like abuelos, the masculine plural means “grandparents”."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Like nonni, the masculine plural means “grandparents”."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Like avós, the plural means “grandparents”."
+     }
     ]
    }
   },
@@ -3679,7 +3762,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Arabic separates the father’s brother عَمّ (ʿamm) from the mother’s brother خَال (khāl), and Turkish too (amca / dayı); Hebrew דּוֹד covers both, like German Onkel, Greek θείος and Russian дядя.",
+     "Arabic separates the father’s brother عَمّ (ʿamm) from the mother’s brother خَال (khāl); Hebrew דּוֹד covers both, like German Onkel.",
      "The name דָּוִד (David) is traditionally explained as “beloved”, from the same root."
     ],
     "pitfalls": [
@@ -3688,6 +3771,28 @@
     ],
     "subtleties": [
      "Children call a grown-up man close to the family דּוֹד, and a woman דּוֹדָה — like German Onkel and Tante."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Like θείος, דּוֹד covers the father’s and the mother’s brother."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Like дядя, דּוֹד covers the father’s and the mother’s brother."
+     },
+     {
+      "for": "hi",
+      "rel": "different",
+      "text": "Hindi separates चाचा (father’s brother) and मामा (mother’s brother); Hebrew דּוֹד covers both."
+     },
+     {
+      "for": "tr",
+      "rel": "different",
+      "text": "Turkish separates amca (father’s brother) and dayı (mother’s brother); Hebrew דּוֹד covers both."
+     }
     ]
    }
   },
@@ -3799,19 +3904,31 @@
     ],
     "phrases": [],
     "synonyms": [],
-    "synonymsNone": "One word for the father’s and the mother’s sister (Arabic عَمَّة / خَالَة, Turkish hala / teyze).",
+    "synonymsNone": "One word for the father’s and the mother’s sister (Arabic separates them: عَمَّة / خَالَة).",
     "etymology": {
      "text": "דּוֹד “uncle” + the feminine ending ־ָה (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish needs three words where Hebrew has דּוֹדָה: hala (father’s sister), teyze (mother’s sister) and yenge (an uncle’s wife)."
+     "One word does it all: the father’s sister, the mother’s sister and an uncle’s wife are all דּוֹדָה."
     ],
     "pitfalls": [
      "The plural is דּוֹדוֹת; a mixed group of uncles and aunts is דּוֹדִים."
     ],
     "subtleties": [
      "דּוֹדָה is also an uncle’s wife: Hebrew does not separate aunts by blood from aunts by marriage."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "different",
+      "text": "Turkish needs three words where Hebrew has דּוֹדָה: hala (father’s sister), teyze (mother’s sister) and yenge (an uncle’s wife)."
+     },
+     {
+      "for": "hi",
+      "rel": "different",
+      "text": "Hindi needs several words where Hebrew has דּוֹדָה: बुआ (father’s sister), मौसी (mother’s sister), चाची and मामी (uncles’ wives)."
+     }
     ]
    }
   },
@@ -4497,13 +4614,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Arabic قَرِيب (qarīb) also means both “near” and “relative”; Turkish took the Arabic plural as akraba “relatives”."
+     "Arabic قَرِيب (qarīb) also means both “near” and “relative”."
     ],
     "pitfalls": [
      "Only the first word changes: קְרוֹבֵי מִשְׁפָּחָה; the article goes on the second word: קְרוֹב הַמִּשְׁפָּחָה."
     ],
     "subtleties": [
      "With שֶׁלִּי and no article it means “a relative of mine”: הוּא קְרוֹב מִשְׁפָּחָה שֶׁלִּי."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish akraba “relatives” is the Arabic plural of قَرِيب, the cousin of קָרוֹב."
+     }
     ]
    }
   },
