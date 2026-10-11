@@ -405,7 +405,7 @@
   "sh.mapSigns": "Что значат значки",
   "sh.compassN": "С",
   "sh.rmStart": "Старт",
-  "sh.rmTreasure": "Сокровище: {goal, number}",
+  "sh.rmTreasure": "Сокровище: {goal}",
   "sh.signHere": "Вы здесь",
   "sh.signMastered": "пройден",
   "sh.signOpen": "открыт",

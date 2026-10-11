@@ -1690,7 +1690,7 @@
   "@sh.rmStart": {
     "description": ""
   },
-  "sh.rmTreasure": "The treasure: {goal, number}",
+  "sh.rmTreasure": "The treasure: {goal}",
   "@sh.rmTreasure": {
     "description": ""
   },

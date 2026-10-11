@@ -405,7 +405,7 @@
   "sh.mapSigns": "Ce que veulent dire les signes",
   "sh.compassN": "N",
   "sh.rmStart": "Départ",
-  "sh.rmTreasure": "Le trésor : {goal, number}",
+  "sh.rmTreasure": "Le trésor : {goal}",
   "sh.signHere": "Vous êtes ici",
   "sh.signMastered": "maîtrisée",
   "sh.signOpen": "ouverte",

@@ -405,7 +405,7 @@
   "sh.mapSigns": "Τι σημαίνουν τα σύμβολα",
   "sh.compassN": "Β",
   "sh.rmStart": "Αφετηρία",
-  "sh.rmTreasure": "Ο θησαυρός: {goal, number}",
+  "sh.rmTreasure": "Ο θησαυρός: {goal}",
   "sh.signHere": "Εδώ είσαι",
   "sh.signMastered": "τον πέρασες",
   "sh.signOpen": "ανοιχτός",
