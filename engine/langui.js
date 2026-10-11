@@ -213,8 +213,6 @@ function start({ acc, id, data, host = null, onRoute = null }) {
   FR.on = !!host; FR.host = host; FR.onRoute = onRoute; FR.base = host ? '#/lang/' + encodeURIComponent(id) : '';
   document.title = `${UI.C.data.course.title} · noema-lite`;   // i18n-ignore (the course title and the app name)
   document.documentElement.lang = UI.C.explainLang;
-  if (!document.querySelector('link[data-lx-fonts]')) document.head.append(   // i18n: Noto from Google Fonts until the fonts are self-hosted (docs/i18n.md §2 Fonts)
-    h('link', { rel: 'stylesheet', 'data-lx-fonts': '1', href: 'https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;600&family=Noto+Sans+Hebrew:wght@400;600&family=Noto+Sans+SC:wght@400;600&display=swap' }));
   document.body.classList.add('lx');
   if (host) { host.replaceChildren(h('div', { class: 'lx-top lx-subbar', role: 'tablist', 'aria-label': LT('lang.shell.yourLanguages') }), h('div', { class: 'lx-main' })); frameWatch(host); }   // inside the frame: its top bar and tabs stay
   else document.body.append(h('header', { class: 'topbar lx-top' }), h('main', { class: 'lx-main' }));

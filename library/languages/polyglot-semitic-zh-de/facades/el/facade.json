@@ -18,13 +18,13 @@
    "missing": 0
   },
   "3": {
-   "total": 22602,
-   "done": 22602,
+   "total": 22738,
+   "done": 22738,
    "stale": 0,
    "missing": 0
   }
  },
- "built": "2026-10-11T16:55:21Z",
+ "built": "2026-10-11T19:15:32Z",
  "files": [
   "_phenomena/facades/el/ar.json",
   "_phenomena/facades/el/de.json",

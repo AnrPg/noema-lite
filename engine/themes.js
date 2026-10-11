@@ -50,7 +50,7 @@ window.NoemaThemes = (() => {
   const EMOJI = { hedge: '🦔', owl: '🦉', axo: '🦎', dragon: '🐉', alien: '👽', bear: '🐻', fruit: '🍊', knight: '🛡️', berry: '🍓', hood: '🧺', piglet: '🐷', candy: '🍬', jack: '🌱', frog: '🐸', puss: '🐱', wolf: '🐺', eagle: '🦅', robot: '🤖', heron: '🪶', prism: '🔷',
     litM: '📚', litF: '✒️', techM: '💻', techF: '🖥️', physM: '⚛️', physF: '🪐', bioM: '🧪', bioF: '🧬', hydra: '🐲' };
   const KEYS = ['bg', 'paper', 'ink', 'ink2', 'ink3', 'line', 'acc', 'acc-ink', 'acc-soft', 't1', 't1i', 't2', 't2i', 't3', 't3i', 't4', 't4i', 'deco1', 'deco2', 'deco3'];
-  const SYS = '"Noto Sans Arabic","Noto Sans Hebrew","Noto Sans Devanagari",var(--noema-cjk,"Noto Sans SC"),ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif';   // + the scripts’ self-hosted Noto fonts (fonts/scripts.css, docs/i18n.md §2)
+  const SYS = '"Noto Sans Arabic","Noto Sans Hebrew","Noto Sans Devanagari",var(--noema-cjk,"Noto Sans SC"),ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif';   // + the scripts’ self-hosted Noto fonts (fonts/scripts.css, docs/i18n.md §2)   // i18n-ignore (font stack)
   const q = f => `"${f}"`;
   const DAY = 864e5, FREE_DAYS = 15, CHANGE_DAYS = 5, PREVIEW_MS = 5 * 60e3, DEFAULT = 'hedge';
 

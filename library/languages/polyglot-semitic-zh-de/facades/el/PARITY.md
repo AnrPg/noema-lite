@@ -2,9 +2,9 @@
 
 Made by `python3 tools/lang_facade.py parity polyglot-semitic-zh-de --locale el` (2026-10-11). Contract: docs/language-packs.md §3.
 
-**97009 addresses** · done 97009 · stale 0 · missing 0 · target-language runs broken 0 · orphans 0 · notes it cannot show 0 · unregistered text fields 0 · duplicate addresses 0 — **OK**
+**97145 addresses** · done 97145 · stale 0 · missing 0 · target-language runs broken 0 · orphans 0 · notes it cannot show 0 · unregistered text fields 0 · duplicate addresses 0 — **OK**
 
-Characters of the master per tier: tier 1: 1,220,235 · tier 2: 1,790,750 · tier 3: 1,433,806
+Characters of the master per tier: tier 1: 1,220,235 · tier 2: 1,790,750 · tier 3: 1,453,169
 
 ### Per tier
 
@@ -12,7 +12,7 @@ Characters of the master per tier: tier 1: 1,220,235 · tier 2: 1,790,750 · tie
 |---|---:|---:|---:|---:|---:|
 | 1 | 32371 | 32371 | 0 | 0 | 0 |
 | 2 | 42036 | 42036 | 0 | 0 | 0 |
-| 3 | 22602 | 22602 | 0 | 0 | 0 |
+| 3 | 22738 | 22738 | 0 | 0 | 0 |
 
 ### Per file (language)
 
@@ -20,8 +20,8 @@ Characters of the master per tier: tier 1: 1,220,235 · tier 2: 1,790,750 · tie
 |---|---:|---:|---:|---:|---:|
 | _phenomena/facades/el/ar.json | 1443 | 1443 | 0 | 0 | 0 |
 | _phenomena/facades/el/de.json | 1487 | 1487 | 0 | 0 | 0 |
-| _phenomena/facades/el/he.json | 1481 | 1481 | 0 | 0 | 0 |
-| _phenomena/facades/el/zh.json | 1584 | 1584 | 0 | 0 | 0 |
+| _phenomena/facades/el/he.json | 1519 | 1519 | 0 | 0 | 0 |
+| _phenomena/facades/el/zh.json | 1682 | 1682 | 0 | 0 | 0 |
 | _typology/facades/el.json | 856 | 856 | 0 | 0 | 0 |
 | polyglot-semitic-zh-de/facades/el/ar.json | 19073 | 19073 | 0 | 0 | 0 |
 | polyglot-semitic-zh-de/facades/el/core.json | 2144 | 2144 | 0 | 0 | 0 |
@@ -114,8 +114,8 @@ Characters of the master per tier: tier 1: 1,220,235 · tier 2: 1,790,750 · tie
 | phenomena:polysemy/*/formsDiffer | 100 | 100 | 0 | 0 | 0 |
 | phenomena:polysemy/*/meanings/*/gloss | 1168 | 1168 | 0 | 0 | 0 |
 | phenomena:summary | 4 | 4 | 0 | 0 | 0 |
-| phenomena:wordFeatures/*/*/title | 264 | 264 | 0 | 0 | 0 |
-| phenomena:wordFeatures/*/*/why | 264 | 264 | 0 | 0 | 0 |
+| phenomena:wordFeatures/*/*/title | 332 | 332 | 0 | 0 | 0 |
+| phenomena:wordFeatures/*/*/why | 332 | 332 | 0 | 0 | 0 |
 | phenomenon:alsoNote | 157 | 157 | 0 | 0 | 0 |
 | phenomenon:examples/*/note | 1337 | 1337 | 0 | 0 | 0 |
 | phenomenon:notes/*/text | 270 | 270 | 0 | 0 | 0 |

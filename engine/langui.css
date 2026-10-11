@@ -132,7 +132,7 @@ div.lx-md>:first-child{margin-top:0}div.lx-md>:last-child{margin-bottom:0}
 .lx-sortsent .lx-deepsent{font-size:19px}
 .lx-sortin{padding:4px 6px;border-radius:8px;background:var(--ok-bg);overflow-wrap:anywhere}
 .lx-cardtr{color:var(--ink2)}
-.lx-orderlist{min-height:48px;padding:8px 8px 8px 32px;border-radius:14px;border:2px dashed var(--line);font-size:22px;margin:8px 0}
+.lx-orderlist{min-height:48px;padding-block:8px;padding-inline:32px 8px;border-radius:14px;border:2px dashed var(--line);font-size:22px;margin:8px 0}
 .lx-orderlist.right{border-color:var(--ok);background:var(--ok-bg)}.lx-orderlist.wrong{border-color:var(--bad);background:var(--bad-bg)}
 .lx-vorder .lx-tile1{height:auto;min-height:48px;padding:6px 12px}
 .lx-deeptypes{margin:6px 0 10px}
@@ -235,7 +235,7 @@ body.lx,body.lx :is(article,main,section,.lx-card,.lx-ex)[lang]:not(.lx-w){--lc:
 .lx-readtext .lx-reader{font-size:18px}
 .lx-tutorrow{margin:8px 0;flex-wrap:wrap}
 /* the tutor drawer */
-.lx-tutor{position:fixed;top:0;right:0;bottom:0;width:min(440px,100vw);box-sizing:border-box;z-index:40;display:flex;flex-direction:column;gap:8px;padding:12px;background:var(--bg,#fff);border-left:1px solid var(--line);box-shadow:-8px 0 30px rgba(0,0,0,.15)}
+.lx-tutor{position:fixed;top:0;inset-inline-end:0;bottom:0;width:min(440px,100vw);box-sizing:border-box;z-index:40;display:flex;flex-direction:column;gap:8px;padding:12px;background:var(--bg,#fff);border-inline-start:1px solid var(--line);box-shadow:-8px 0 30px rgba(0,0,0,.15)}
 .lx-thead{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.lx-thead .spacer{flex:1}
 .lx-tctx{max-width:100%;overflow:hidden;text-overflow:ellipsis}
 .lx-tlang{max-width:150px;padding:4px 6px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:inherit}
@@ -250,7 +250,7 @@ body.lx,body.lx :is(article,main,section,.lx-card,.lx-ex)[lang]:not(.lx-w){--lc:
 .lx-tcomp{display:flex;gap:6px;align-items:flex-end}.lx-tin{flex:1;min-width:0;resize:none;padding:8px 10px;border-radius:12px;border:1.5px solid var(--line);background:var(--card);color:inherit;font:inherit}
 @media (max-width:640px){
   .lx-lanegrid{grid-template-columns:1fr}.lx-prompt.lx-digits{font-size:38px}.lx-src{font-size:22px}.lx-reader{font-size:19px;padding:10px 12px}
-  .lx-tutor{width:100vw;border-left:0}
+  .lx-tutor{width:100vw;border-inline-start:0}
 }
 /* P4 — scripts and input: the 🔤 lane, letter / character drills, keyboards, pinyin input (engine/lang/90_script.js) */
 .lx-glyph{font-size:1.6em;line-height:1.3}
@@ -351,6 +351,9 @@ body.lx,body.lx :is(article,main,section,.lx-card,.lx-ex)[lang]:not(.lx-w){--lc:
 .lj-refill .row{margin-top:8px}
 .lj-cmp th{white-space:nowrap}
 @media (max-width:640px){.lj-ways{grid-template-columns:1fr}.lj-box{padding:16px}.lj-cmp th{white-space:normal}}
+/* right-to-left interfaces (docs/i18n.md §5): the course's explanations keep their own direction (the explanation language,
+   usually left to right) — each paragraph takes the direction of its first letter */
+:root[dir=rtl] :is(.lx-summary,.lx-q,.lx-stmt,.lx-extext,.lx-ex1,.lx-ex,.lx-ptext,.lx-deeptext,.lx-tmsg,.lx-tmsg p,.lx-tmsg li,.lx-host h1,.lx-host h3,.lx-host summary,.lx-host td,.lx-host th){unicode-bidi:plaintext}
 /* ---- a course inside the frame (docs/LANGUAGES.md §8, docs/NEW_FRAME_AND_LANGUAGES.md): the frame's colours and fonts (--bg, --paper, --ink, --acc …, set by the learner's character) ---- */
 body.ns-on.lx-frame main#ns-main{max-width:1000px}
 @media (min-width:760px){body.ns-on.lx-frame main#ns-main{max-width:calc(1000px + 100px)}}
@@ -547,7 +550,7 @@ body.lx main.lx-main{max-width:1000px}
 .lx-go{font-size:17px;padding:14px 24px}
 .lx-h2{margin:26px 0 10px}.lx-h3{margin:22px 0 8px}
 .lx-nodes{display:grid;gap:10px}
-.lx-node{display:grid;gap:6px;text-align:left;padding:14px 16px;border-radius:var(--r-sm);background:var(--card);border:1.5px solid var(--line);font:inherit;color:inherit}
+.lx-node{display:grid;gap:6px;text-align:start;padding:14px 16px;border-radius:var(--r-sm);background:var(--card);border:1.5px solid var(--line);font:inherit;color:inherit}
 .lx-node:hover{border-color:var(--violet)}
 .lx-nodetitle{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
 .lx-nodestates{display:flex;gap:6px;flex-wrap:wrap}
@@ -557,7 +560,7 @@ body.lx main.lx-main{max-width:1000px}
 .lx-rail{display:inline-flex;gap:4px;padding:3px;border-radius:14px;background:var(--bg2);border:1px solid var(--line)}
 .lx-railbtn{position:relative;width:44px;height:38px;border-radius:11px;display:grid;place-items:center;font-size:20px}
 .lx-railbtn.on{background:var(--card);box-shadow:var(--shadow)}
-.lx-dot{position:absolute;right:5px;bottom:5px;width:9px;height:9px;border-radius:50%;background:var(--line);border:1.5px solid var(--card)}
+.lx-dot{position:absolute;inset-inline-end:5px;bottom:5px;width:9px;height:9px;border-radius:50%;background:var(--line);border:1.5px solid var(--card)}
 .lx-dot.s-learning,.lx-dot.s-seen{background:var(--info)}.lx-dot.s-known_r{background:#7fd1b5}.lx-dot.s-known_p{background:var(--ok)}.lx-dot.s-mastered{background:var(--warn)}.lx-dot.s-absent{background:transparent;border-color:var(--ink3)}
 .lx-actions{margin:12px 0}
 .lx-note{padding:10px 14px;border-radius:12px;background:var(--warn-bg)}
@@ -581,7 +584,7 @@ body.lx main.lx-main{max-width:1000px}
 .lx-sec{border-top:1px solid var(--line);padding:8px 0}.lx-sec summary{font-weight:750;cursor:pointer}
 .lx-ex{padding:8px 0}.lx-card .lx-ex{border-bottom:1px dashed var(--line)}
 .lx-extext{font-size:19px}.lx-plain{color:var(--ink3);font-size:15px}.lx-tr{color:var(--ink2)}
-.lx-list{margin:6px 0;padding-left:20px}.lx-list li{margin:4px 0}
+.lx-list{margin:6px 0;padding-inline-start:20px}.lx-list li{margin:4px 0}
 .lx-warn li,.lx-warn{color:#b4530c}
 .lx-syngroup{margin:6px 0}
 .lx-absent{margin:14px 0;padding:14px;border-radius:14px;border:1.5px dashed var(--line);background:var(--bg2)}
@@ -624,8 +627,8 @@ body.lx main.lx-main{max-width:1000px}
 .lx-step{display:inline-block;font-size:.6em;vertical-align:middle;padding:3px 9px;border-radius:999px;background:var(--violet-bg);color:var(--violet);font-weight:700;letter-spacing:.02em}
 .ns-passed{background:var(--ok-bg)}.ns-na{display:none}
 .lx-lessons{display:grid;gap:10px;margin:0 0 18px}
-.lx-lessonbtn{display:flex;align-items:center;gap:10px;justify-content:space-between;flex-wrap:wrap;text-align:left}
-.lx-callout{margin:12px 0;padding:10px 14px;border-radius:12px;background:var(--bg2);border-left:4px solid var(--line)}
+.lx-lessonbtn{display:flex;align-items:center;gap:10px;justify-content:space-between;flex-wrap:wrap;text-align:start}
+.lx-callout{margin:12px 0;padding:10px 14px;border-radius:12px;background:var(--bg2);border-inline-start:4px solid var(--line)}
 .lx-callout.k-tip{border-color:var(--info);background:var(--info-bg)}.lx-callout.k-pitfall,.lx-callout.k-warn{border-color:var(--warn);background:var(--warn-bg)}.lx-callout.k-key{border-color:var(--violet);background:var(--violet-bg)}
 .lx-callout .lx-list{margin:6px 0 0}
 .lx-summary{font-size:16px;line-height:1.55}
@@ -643,7 +646,7 @@ body.lx main.lx-main{max-width:1000px}
 
 /* concept pictures (core/media): small tiles, the card head, exercises — the emoji stands in when there is none */
 img.lx-pic{display:block;object-fit:cover;border-radius:10px;background:var(--bg2,#eee)}
-img.lx-temoji{width:56px;height:56px}img.lx-bigemoji{width:132px;height:100px}img.lx-exemoji{display:inline-block;vertical-align:middle;width:84px;height:64px;margin-right:6px}
+img.lx-temoji{width:56px;height:56px}img.lx-bigemoji{width:132px;height:100px}img.lx-exemoji{display:inline-block;vertical-align:middle;width:84px;height:64px;margin-inline-end:6px}
 .lx-exemoji{font-size:1em}
 
 /* drills: field sorting, principal parts */
@@ -678,7 +681,7 @@ img.lx-temoji{width:56px;height:56px}img.lx-bigemoji{width:132px;height:100px}im
 .lx-plink:hover,.lx-plink:focus-visible{border-bottom-style:solid}
 .lx-ptext{font-weight:500}
 .lx-ptag{font-size:12px;padding:1px 7px;border-radius:999px;background:var(--bg2);border:1px solid var(--line);color:var(--ink2);white-space:nowrap}
-.lx-psense{font-size:12.5px;padding:1px 8px 1px 2px;border-radius:999px;background:var(--info-bg,var(--bg2));color:var(--ink);max-width:100%;overflow-wrap:anywhere}
+.lx-psense{font-size:12.5px;padding-block:1px;padding-inline:2px 8px;border-radius:999px;background:var(--info-bg,var(--bg2));color:var(--ink);max-width:100%;overflow-wrap:anywhere}
 .lx-psense b{display:inline-grid;place-items:center;min-width:1.45em;height:1.45em;border-radius:50%;background:var(--card);font-size:11px;margin-inline-end:2px}
 .lx-pnote{flex-basis:100%;font-size:12.5px;color:var(--ink2);overflow-wrap:anywhere}
 .lx-pwhy{font-size:13px;color:var(--ink2);overflow-wrap:anywhere}
