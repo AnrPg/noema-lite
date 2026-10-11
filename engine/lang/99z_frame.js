@@ -135,7 +135,7 @@ function frameHome(v, acts, hold) {
   // the map: the steps near you; the signs explained on demand
   const nodes = v.querySelector('.lx-nodes'), legend = v.querySelector('.lx-maplegend'), more = v.querySelector('.lx-mapmore');
   if (nodes) {
-    out.push(h('span', { class: 'ns-label' }, 'The map'), nodes); if (more) out.push(more);
+    out.push(h('div', { class: 'lx-maphead' }, h('span', { class: 'ns-label' }, 'The map'), lanesButton()), nodes); if (more) out.push(more);
     if (legend) { const t = legend.textContent; legend.remove(); acts.push({ label: 'What the signs mean', icon: 'info', run: () => S.sheet('What the signs mean', body => body.append(h('p', {}, t))) }); }
   }
   // everything else of the older home waits, hidden (the grammar lane is in each language's sheet)

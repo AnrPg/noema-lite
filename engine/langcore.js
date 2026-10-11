@@ -1338,6 +1338,27 @@
     return { ok: dist <= tol && dist <= rev + 10 && lenOk, dist: Math.round(dist), reversed: rev + 10 < dist };
   }
 
+  /* ---------- parallel lanes (D13, §4.4.3, §9): the paths of several languages side by side ----------
+     One column per language; a node sits in ONE row for every language it applies to, so the same subject is level across
+     the lanes. A node's row is one below the lowest row its languages have used so far (the common order makes this
+     consistent); a step of one language alone fills the gap beside the others, whose lanes just run on (a longer edge). */
+  function parallelLanes(C, langs, opts = {}) {
+    langs = (langs || C.languages).filter(c => C.lang[c]);
+    const last = Object.fromEntries(langs.map(c => [c, -1])), rows = [];
+    const sectionOf = n => n.kind === 'lesson' ? (n.stage === 'core' ? 'core' : n.stage === 'advanced' ? 'advanced' : 'foundations') : (n.field ? 'field:' + n.field : n.kind || 'other');
+    let floor = -1, sec = null;
+    for (const nid of opts.order || C.order) {
+      const n = C.nodes[nid]; if (!n) continue;
+      const on = langs.filter(c => C.lang[c].applies[nid]); if (!on.length) continue;
+      const s = sectionOf(n); if (s !== sec) { sec = s; floor = Math.max(-1, ...langs.map(c => last[c])); }   // a new part starts below everything before it
+      const r = Math.max(floor, ...on.map(c => last[c])) + 1;
+      while (rows.length <= r) rows.push({ cells: {}, section: s });
+      for (const c of on) { rows[r].cells[c] = nid; last[c] = r; }
+    }
+    for (const row of rows) { const ids = new Set(Object.values(row.cells)); row.common = ids.size === 1 && Object.keys(row.cells).length > 1; }
+    return { langs, rows };
+  }
+  Object.assign(API, { parallelLanes });
   API.GEN = GEN;
   Object.assign(API, { scriptModule, letterClusters, glyphPositions, glyphForm, glyphTrackState, introduceGlyph, reviewGlyph, scriptState, needsTranslit, markLevel, fadeMarks, textMarkLevel, toneSandhi, parsePinyin, pinyinCandidates, letterDiff, checkTyped, scriptTypes, scriptItems, scriptSession, strokeMatch, resample, idsParts, ownSegmentation, knownSplit, GEN_SCRIPT });   // P4 — scripts and input
   /* ---------- P5 — Grammar lane: paradigm tables, analysis, morphemes, roots and patterns, agreement, contrasts, roles, glosses, proofreading, joining (§6.3, §6.4, §7.3, §7.5) ----------

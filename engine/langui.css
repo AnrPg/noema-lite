@@ -1,4 +1,27 @@
 /* GENERATED from engine/lang/*.css. Do not edit. */
+/* ⫴ parallel lanes — one quiet column per language; the same step on the same level; the lanes run on between steps */
+.lx-maphead{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.lx-maphead .lx-tolanes{margin-inline-start:auto}
+.lx-lanesview .lx-lanesnote{color:var(--ink2,#666);margin:-4px 0 14px;max-width:46em}
+.lx-lanes2{--line-c:var(--line,#d9d6e3);--node-bg:var(--paper,#fff);--node-ink:var(--ink,#222);--band:var(--acc-soft,rgba(120,100,200,.08));display:flex;flex-direction:column;max-width:960px}
+.lx-lanes2 .lx-lhead,.lx-lanes2 .lx-lrow{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));column-gap:8px}
+.lx-lanes2 .lx-lhead{position:sticky;top:0;z-index:2;background:var(--bg,#faf9fc);padding:6px 0 8px;border-bottom:1px solid var(--line-c)}
+.lx-lflag{text-align:center;font-size:1.35rem;line-height:1.1}.lx-lname{display:block;font-size:.72rem;color:var(--ink2,#666);letter-spacing:.02em}
+.lx-lsec{padding:18px 2px 6px;font-size:.72rem;font-weight:650;text-transform:uppercase;letter-spacing:.08em;color:var(--ink3,#888)}
+.lx-lrow{position:relative;border-radius:12px}
+.lx-lrow.lx-lcommon::before{content:'';position:absolute;inset:3px -4px;border-radius:12px;background:var(--band);opacity:.55;pointer-events:none}
+.lx-lrow:hover::before{opacity:1}
+.lx-lcell{position:relative;display:flex;justify-content:center;align-items:center;min-height:52px;
+  background:linear-gradient(var(--line-c),var(--line-c)) center/2px 100% no-repeat}
+.lx-lcell.lx-lgap{min-height:52px}
+.lx-lnode{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:1px;width:100%;max-width:190px;min-height:44px;padding:6px 8px;
+  border:1px solid var(--line-c);border-radius:12px;background:var(--node-bg);color:var(--node-ink);font:inherit;cursor:pointer;line-height:1.2}
+.lx-lnode:hover,.lx-lnode:focus-visible{border-color:var(--acc,#6b5bd2);outline:none;box-shadow:0 0 0 3px var(--acc-soft,rgba(107,91,210,.18))}
+.lx-lstep{font-size:.68rem;font-weight:700;color:var(--acc,#6b5bd2);letter-spacing:.03em}
+.lx-ltitle{font-size:.8rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;text-align:center}
+.lx-lsign{position:absolute;top:3px;inset-inline-end:6px;font-size:.7rem;color:var(--ink3,#888)}
+.lx-lnode.s-locked,.lx-lnode.s-unprepared{opacity:.55}.lx-lnode.s-passed,.lx-lnode.s-known,.lx-lnode.s-mastered{border-color:var(--acc-soft,#cfc8ef)}
+.lx-linfo-st{font-weight:600}.lx-linfo-fns{margin:6px 0 10px;padding-inline-start:1.2em}.lx-linfo-oth .btn{margin:2px}
+@media (max-width:560px){.lx-lanes2 .lx-lhead,.lx-lanes2 .lx-lrow{column-gap:4px}.lx-lnode{padding:5px 4px;border-radius:10px}.lx-ltitle{font-size:.7rem}.lx-lname{display:none}}
 /* P5 — the grammar lane (docs/LANGUAGES.md §6.3, §6.4, §7.3, §8) */
 .lx-feas{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:6px 0 10px;padding:6px 10px;border-radius:12px;background:var(--bg2);border:1px solid var(--line);font-size:14px}
 .lx-feas.s-ready{background:var(--ok-bg)}.lx-feas.s-thin{background:var(--warn-bg)}.lx-feas.s-locked{opacity:.85}

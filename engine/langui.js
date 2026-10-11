@@ -207,7 +207,7 @@ function topbar() {
 }
 const VIEWS = {};
 /** Where the learner is, in words: the last crumb of the frame. */
-const VIEW_LABEL = { settings: 'Settings', claude: 'Through Claude', grammar: 'Grammar', write: 'Writing', read: 'Reading', script: 'Script', listen: 'Listening & speaking',
+const VIEW_LABEL = { lanes: 'Parallel lanes', settings: 'Settings', claude: 'Through Claude', grammar: 'Grammar', write: 'Writing', read: 'Reading', script: 'Script', listen: 'Listening & speaking',
   cmp: 'Compare', poly: 'Polyglot drills', sort: 'Sort a field', parts: 'Principal parts', peculiar: 'Peculiarities', recall: 'Name them all', deep: 'Practise this word', deepen: 'Deepen' };
 function viewLabel(r) {
   const C = UI.C, fl = c => C.lang[c] ? info(c).flag + ' ' : '';
@@ -278,7 +278,7 @@ VIEWS.home = (v) => {
   if (UI.C.data.world) v.append(h('div', { class: 'row lx-libraries' }, h('span', { class: 'tiny' }, '📚 Peculiarities, any time: '),
     ...activeLangs().map(c => h('button', { class: 'btn ghost small', onclick: () => go('#/peculiar/' + c) }, info(c).flag + ' ' + info(c).name))));
   if (typeof grammarLaneHome === 'function') v.append(grammarLaneHome());   // P5: the 📐 grammar lane
-  v.append(h('h2', { class: 'lx-h2' }, '🗺️ The map'), nodeList());
+  v.append(h('div', { class: 'row lx-maphead' }, h('h2', { class: 'lx-h2' }, '🗺️ The map'), lanesButton()), nodeList());
 };
 function nodeList() {
   const st = Object.fromEntries(UI.C.languages.map(c => [c, N.nodeStates(UI.C, UI.L, c)]));
@@ -634,6 +634,60 @@ VIEWS.parts = (v, r) => {
   };
   next();
 };
+
+/* ---- 36_lanes.js ---- */
+/* ---------- ⫴ parallel lanes: the paths of your languages side by side (D13, §4.4.3, §9; #/lanes) ----------
+   One quiet column per language; the same subject sits on the same level in every lane (langcore.parallelLanes), a step of
+   one language alone sits beside the others' running lines. Each step is a small button: a tap tells more about it there. */
+const LANE_SECTION = s => s === 'foundations' ? 'Foundations' : s === 'core' ? 'Core' : s === 'advanced' ? 'Advanced' : s.startsWith('field:') ? (UI.C.data.fields.find(f => 'field:' + f.field === s)?.title || 'Words') : '';
+const LANE_SIGN = { passed: '✓', known: '✓', mastered: '★', learning: '◑', open: '○', ready: '○', locked: '🔒', unprepared: '⏳', skipped: '⤼', na: '' };
+function laneShort(n) { const t = String(n.title || '').split(/ — |: /)[0]; return t.length > 34 ? t.slice(0, 32) + '…' : t; }
+VIEWS.lanes = (v) => {
+  const langs = UI.C.languages.filter(c => UI.C.lang[c]), L = N.parallelLanes(UI.C, langs);
+  const st = Object.fromEntries(langs.map(c => [c, N.nodeStates(UI.C, UI.L, c)]));
+  v.classList.add('lx-lanesview');
+  v.append(h('h1', {}, 'Parallel lanes'),
+    h('p', { class: 'tiny lx-lanesnote' }, 'The same subject is on the same level in every language. A step of one language alone sits between them.'));
+  const grid = h('div', { class: 'lx-lanes2', style: `--n:${langs.length}`, role: 'table', 'aria-label': 'The paths of your languages side by side' });
+  grid.append(h('div', { class: 'lx-lhead', role: 'row' }, ...langs.map(c => h('div', { class: 'lx-lflag', role: 'columnheader', 'data-lang': c, title: info(c).name }, info(c).flag, h('span', { class: 'lx-lname' }, info(c).name)))));
+  let sec = null;
+  L.rows.forEach((row, i) => {
+    if (row.section !== sec) { sec = row.section; const t = LANE_SECTION(sec); if (t) grid.append(h('div', { class: 'lx-lsec', role: 'row' }, h('span', {}, t))); }
+    const r = h('div', { class: 'lx-lrow' + (row.common ? ' lx-lcommon' : ''), role: 'row', 'data-row': i });
+    for (const c of langs) {
+      const nid = row.cells[c], n = nid && UI.C.nodes[nid], s = nid ? st[c][nid] : null;
+      r.append(h('div', { class: 'lx-lcell' + (nid ? '' : ' lx-lgap'), role: 'cell', 'data-lang': c },
+        nid ? h('button', { class: 'lx-lnode s-' + s, 'data-node': nid, 'data-lang': c, title: `${info(c).name} · ${n.title} · ${STATE_LABEL[s] || s}`, onclick: () => laneInfo(c, nid) },
+          h('span', { class: 'lx-lstep' }, stepLabel(n) || (n.kind === 'field' ? '·' : '')), h('span', { class: 'lx-ltitle' }, laneShort(n)), LANE_SIGN[s] ? h('span', { class: 'lx-lsign', 'aria-hidden': 'true' }, LANE_SIGN[s]) : null) : null));
+    }
+    grid.append(r);
+  });
+  v.append(grid);
+};
+/** A step of one language: what it teaches there, how far you are, and the same step in your other languages. */
+function laneInfo(c, nid) {
+  const n = UI.C.nodes[nid], X = LX(c), s = N.nodeStates(UI.C, UI.L, c)[nid];
+  const fns = n.kind === 'lesson' ? N.lessonFunctions(UI.C, c, nid).filter(f => f !== 'fn.overview') : [];
+  const words = (X.byNode[nid] || []).length;
+  const others = UI.C.languages.filter(x => x !== c && UI.C.lang[x]?.applies[nid]);
+  const body = box => box.append(
+    h('p', { class: 'lx-linfo-st' }, info(c).flag, ' ', info(c).name, ' · ', String(STATE_LABEL[s] || s).replace(/^\S+\s/, '')),
+    fns.length ? h('ul', { class: 'lx-linfo-fns' }, ...fns.map(f => { const g = X.grammar[f]; return h('li', {}, UI.C.functions[f]?.title || f, g?.status && g.status !== 'realized' ? h('span', { class: 'tiny' }, ' · ' + g.status) : null); })) : null,
+    words ? h('p', { class: 'tiny' }, `${words} words in ${info(c).name}`) : null,
+    others.length ? h('p', { class: 'tiny lx-linfo-oth' }, 'Also in ', ...others.flatMap((x, i) => [i ? ' · ' : '', h('button', { class: 'btn ghost small', 'data-lang': x, onclick: () => { close(); laneInfo(x, nid); } }, info(x).name + ' · ' + String(STATE_LABEL[N.nodeStates(UI.C, UI.L, x)[nid]] || '').replace(/^\S+\s/, ''))])) : h('p', { class: 'tiny' }, `Only in ${info(c).name}.`),
+    h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => { close(); UI.lang = c; UI.prefs.lang = c; save(); go((n.kind === 'lesson' ? '#/lesson/' : '#/node/') + nid); } }, 'Open')));
+  let close = () => document.querySelector('.lx-pop')?.remove();
+  const title = (stepLabel(n) ? stepLabel(n) + ' ' : '') + n.title;
+  if (FR.on && window.NoemaShell?.sheet) { NoemaShell.sheet(title, (b, cl) => { close = cl; body(b); }); return; }
+  document.querySelector('.lx-pop')?.remove();
+  const pop = h('div', { class: 'lx-pop', role: 'dialog', 'aria-label': title, onclick: e => { if (e.target === pop) pop.remove(); } });
+  const inner = h('div', { class: 'lx-popbox lx-linfo' }, h('div', { class: 'row' }, h('b', {}, title), h('span', { class: 'spacer' }), h('button', { class: 'btn ghost small', onclick: () => pop.remove() }, '✕')));
+  body(inner); pop.append(inner); document.body.append(pop);
+  pop.addEventListener('keydown', e => { if (e.key === 'Escape') pop.remove(); });
+  inner.querySelector('.btn.primary')?.focus();
+}
+/** The way in: a quiet button next to the map (only with two or more languages). */
+const lanesButton = () => UI.C.languages.length > 1 ? h('button', { class: 'btn ghost small lx-tolanes', onclick: () => go('#/lanes') }, '⫴ Parallel lanes') : null;
 
 /* ---- 40_ex.js ---- */
 /* ---------- exercises of the vocabulary lane (docs/LANGUAGES.md §6.2) ---------- */
@@ -2455,7 +2509,7 @@ const tutorRow = (ctx, intents) => h('div', { class: 'row lx-tutorrow' }, h('spa
   ...intents.map(x => h('button', { class: 'btn ghost small', 'data-intent': x, onclick: () => openLangTutor({ ...ctx, intent: x }) }, INTENT_LABEL[x])));
 {
   const home = VIEWS.home;
-  VIEWS.home = (v, r) => { home(v, r); const map = [...v.querySelectorAll('h2')].find(x => /The map/.test(x.textContent)); const lanes = prodLanes(); map ? map.before(lanes) : v.append(lanes); };
+  VIEWS.home = (v, r) => { home(v, r); const map = v.querySelector('.lx-maphead') || [...v.querySelectorAll('h2')].find(x => /The map/.test(x.textContent)); const lanes = prodLanes(); map ? map.before(lanes) : v.append(lanes); };
   const fn = VIEWS.fn;
   VIEWS.fn = (v, r) => { fn(v, r); const fid = r.arg; if (!UI.C.functions[fid] || fid === 'fn.overview') return; const c = r.arg2 && UI.C.lang[r.arg2] ? r.arg2 : UI.lang; v.querySelector('.lx-gram')?.before(tutorRow({ lang: c, fn: fid }, ['explain', 'compare', 'quiz'])); };
   const lesson = VIEWS.lesson;
@@ -3231,25 +3285,37 @@ function noVoice(c) {
   if (SP.warned[c]) return; SP.warned[c] = true;
   toast(`🔇 No ${langLabel(c)} voice on this device — add one in the system's speech settings, then reload.`);
 }
-/** Speak a stored text in language c → Promise<boolean> (false: no voice / no speech synthesis). */
-async function say(c, text, { slow = false } = {}) {
-  if (!synthOK() || !text) { noVoice(c); return false; }
-  if (!SP.voices.length) await loadVoices();
-  const v = voiceOf(c); if (!v) { noVoice(c); return false; }
-  try { speechSynthesis.cancel(); } catch (e) { }
+/** Speak a stored text in language c → Promise<boolean> (false: no voice / no speech synthesis).
+    Robust against the browsers' known traps: speak() is called inside the click (Safari drops speech started after an await),
+    the utterance is kept referenced until it ends (Chrome stops firing events and goes silent when it is garbage-collected),
+    a stuck or paused queue is resumed, and speak() never follows cancel() in the same tick (Chrome then drops the new one). */
+function say(c, text, { slow = false } = {}) {
+  if (!synthOK() || !text) { noVoice(c); return Promise.resolve(false); }
+  if (!SP.voices.length) refreshVoices();
+  const v = SP.voices.length ? voiceOf(c) : null;
+  if (SP.voices.length && !v) { noVoice(c); return Promise.resolve(false); }
   const u = new SpeechSynthesisUtterance(UI.C?.lang[c] ? N.speechText(UI.C, c, text) : String(text));
-  u.lang = tagOf(c); u.voice = v; u.rate = slow || spPrefs().rate === 'slow' ? N.SPEECH_RATE.slow : N.SPEECH_RATE.normal;
+  u.lang = tagOf(c); if (v) u.voice = v;   // voices not listed yet (first click on some browsers): the engine picks one for the language
+  u.rate = slow || spPrefs().rate === 'slow' ? N.SPEECH_RATE.slow : N.SPEECH_RATE.normal;
   return new Promise(res => {
-    let over = false; const end = ok => { if (!over) { over = true; res(ok); } };
-    u.onend = () => end(true); u.onerror = () => end(false);
-    try { speechSynthesis.speak(u); } catch (e) { end(false); }
-    setTimeout(() => end(true), 2500 + String(text).length * 180);   // some engines never fire 'end'
+    let over = false; const end = ok => { if (over) return; over = true; if (SP.utter === u) SP.utter = null; res(ok); };
+    u.onend = () => end(true); u.onerror = e => end(e && (e.error === 'interrupted' || e.error === 'canceled'));
+    SP.utter = u;   // keep it alive until it ends
+    const go = () => { try { speechSynthesis.resume?.(); } catch (e) { } try { speechSynthesis.speak(u); } catch (e) { end(false); } };
+    let busy = false; try { busy = speechSynthesis.speaking || speechSynthesis.pending; } catch (e) { }
+    if (busy) { try { speechSynthesis.cancel(); } catch (e) { } setTimeout(go, 80); } else go();
+    setTimeout(() => end(true), 4000 + String(text).length * 180);   // some engines never fire 'end'
+    if (!SP.voices.length) loadVoices();   // for the next time
   });
 }
-function speakerBtn(c, text) {
-  return h('button', { type: 'button', class: 'lx-spk', 'data-lang': c, 'aria-label': `Listen (${langLabel(c)})`, title: `Listen (${langLabel(c)})`,
-    onclick: e => { e.stopPropagation(); e.preventDefault(); say(c, text); } });   // the icon comes from the CSS (::before): the text of what it follows stays the same
+function speakerBtn(c, text) {   // the click is handled once for the whole page (below), so a 🔊 always works, even re-drawn or moved
+  return h('button', { type: 'button', class: 'lx-spk', 'data-lang': c, 'data-text': text, 'aria-label': `Listen (${langLabel(c)})`, title: `Listen (${langLabel(c)})` });   // the icon comes from the CSS (::before): the text of what it follows stays the same
 }
+document.addEventListener('click', e => {
+  const b = e.target.closest?.('.lx-spk'); if (!b) return;
+  e.stopPropagation(); e.preventDefault();
+  say(b.dataset.lang, b.dataset.text);
+}, true);
 
 /* ---------- 🔊 everywhere: the texts get data-say (the stored text, not the faded display); a watcher adds the buttons ---------- */
 {
@@ -3529,7 +3595,7 @@ function sessionSpeechItems(plan) {
 }
 {
   const home = VIEWS.home;
-  VIEWS.home = (v, r) => { home(v, r); const after = v.querySelector('.lx-prodlanes'), lanes = speechLanes(); if (after) after.after(lanes); else { const map = [...v.querySelectorAll('h2')].find(x => /The map/.test(x.textContent)); map ? map.before(lanes) : v.append(lanes); } };
+  VIEWS.home = (v, r) => { home(v, r); const after = v.querySelector('.lx-prodlanes'), lanes = speechLanes(); if (after) after.after(lanes); else { const map = v.querySelector('.lx-maphead') || [...v.querySelectorAll('h2')].find(x => /The map/.test(x.textContent)); map ? map.before(lanes) : v.append(lanes); } };
   const settings = VIEWS.settings;
   VIEWS.settings = (v, r) => { settings(v, r); const tail = [...v.children].reverse().find(x => x.tagName === 'P'); const s = speechSettings(); tail ? tail.before(s) : v.append(s); loadVoices().then(() => { const o = v.querySelector('.lx-speechset'); if (o && !o.contains(document.activeElement)) o.replaceWith(speechSettings()); }); };
   const read = VIEWS.read;
@@ -3834,7 +3900,7 @@ function frameHome(v, acts, hold) {
   // the map: the steps near you; the signs explained on demand
   const nodes = v.querySelector('.lx-nodes'), legend = v.querySelector('.lx-maplegend'), more = v.querySelector('.lx-mapmore');
   if (nodes) {
-    out.push(h('span', { class: 'ns-label' }, 'The map'), nodes); if (more) out.push(more);
+    out.push(h('div', { class: 'lx-maphead' }, h('span', { class: 'ns-label' }, 'The map'), lanesButton()), nodes); if (more) out.push(more);
     if (legend) { const t = legend.textContent; legend.remove(); acts.push({ label: 'What the signs mean', icon: 'info', run: () => S.sheet('What the signs mean', body => body.append(h('p', {}, t))) }); }
   }
   // everything else of the older home waits, hidden (the grammar lane is in each language's sheet)

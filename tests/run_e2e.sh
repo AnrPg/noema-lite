@@ -47,3 +47,4 @@ node "$ROOT/tests/lang_claude.js" "$T"   # courses and content through Claude: t
 node "$ROOT/tests/lang_speech.js" "$T"   # P9 listening and speaking: speech synthesis, dictation, shadowing, recognition (speech services mocked)
 node "$ROOT/tests/lang_walkthrough.js" "$T"   # QA: the whole language part end to end — three learners, two widths, every route (docs/LANGUAGES.md §13 QA)
 node "$ROOT/tests/lang_frame.js" "$T"   # the language courses inside the new frame: the Languages tab, #/lang/<course>/…, Today, + New language (docs/LANGUAGES.md §8)
+node "$ROOT/tests/lang_lanes.js" "$T"   # ⫴ parallel lanes: the same subject level across the languages (D13, §9.2)

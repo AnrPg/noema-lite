@@ -43,7 +43,7 @@ function topbar() {
 }
 const VIEWS = {};
 /** Where the learner is, in words: the last crumb of the frame. */
-const VIEW_LABEL = { settings: 'Settings', claude: 'Through Claude', grammar: 'Grammar', write: 'Writing', read: 'Reading', script: 'Script', listen: 'Listening & speaking',
+const VIEW_LABEL = { lanes: 'Parallel lanes', settings: 'Settings', claude: 'Through Claude', grammar: 'Grammar', write: 'Writing', read: 'Reading', script: 'Script', listen: 'Listening & speaking',
   cmp: 'Compare', poly: 'Polyglot drills', sort: 'Sort a field', parts: 'Principal parts', peculiar: 'Peculiarities', recall: 'Name them all', deep: 'Practise this word', deepen: 'Deepen' };
 function viewLabel(r) {
   const C = UI.C, fl = c => C.lang[c] ? info(c).flag + ' ' : '';
@@ -114,7 +114,7 @@ VIEWS.home = (v) => {
   if (UI.C.data.world) v.append(h('div', { class: 'row lx-libraries' }, h('span', { class: 'tiny' }, '📚 Peculiarities, any time: '),
     ...activeLangs().map(c => h('button', { class: 'btn ghost small', onclick: () => go('#/peculiar/' + c) }, info(c).flag + ' ' + info(c).name))));
   if (typeof grammarLaneHome === 'function') v.append(grammarLaneHome());   // P5: the 📐 grammar lane
-  v.append(h('h2', { class: 'lx-h2' }, '🗺️ The map'), nodeList());
+  v.append(h('div', { class: 'row lx-maphead' }, h('h2', { class: 'lx-h2' }, '🗺️ The map'), lanesButton()), nodeList());
 };
 function nodeList() {
   const st = Object.fromEntries(UI.C.languages.map(c => [c, N.nodeStates(UI.C, UI.L, c)]));
