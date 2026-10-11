@@ -17,7 +17,21 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "רִאשׁוֹנָה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "רִאשׁוֹנִים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "רִאשׁוֹנוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "רִאשׁוֹן",
@@ -119,7 +133,7 @@
      "It agrees like any adjective: הַפַּעַם הָרִאשׁוֹנָה, הַיָּמִים הָרִאשׁוֹנִים — and the article is הָ before ר."
     ],
     "subtleties": [
-     "After a verb it says who came first and agrees with the subject: הִיא הִגִּיעָה רִאשׁוֹנָה, הֵם הִגִּיעוּ רִאשׁוֹנִים."
+     "After a verb it says who came first and agrees with the subject:\n→ הִיא הִגִּיעָה רִאשׁוֹנָה, הֵם הִגִּיעוּ רִאשׁוֹנִים"
     ]
    }
   },
@@ -144,7 +158,21 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "שְׁנִיָּה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "שְׁנִיִּים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "שְׁנִיּוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "שֵׁנִי",
@@ -257,7 +285,21 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "שְׁלִישִׁית"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "שְׁלִישִׁיִּים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "שְׁלִישִׁיּוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "שְׁלִישִׁי",
@@ -364,7 +406,21 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "רְבִיעִית"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "רְבִיעִיִּים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "רְבִיעִיּוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "רְבִיעִי",
@@ -468,7 +524,21 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "חֲמִישִׁית"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "חֲמִישִׁיִּים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "חֲמִישִׁיּוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "חֲמִישִׁי",
@@ -574,7 +644,21 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "שִׁשִּׁית"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "שִׁשִּׁיִּים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "שִׁשִּׁיּוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "שִׁשִּׁי",
@@ -688,7 +772,21 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "שְׁבִיעִית"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "שְׁבִיעִיִּים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "שְׁבִיעִיּוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "שְׁבִיעִי",
@@ -801,7 +899,21 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "שְׁמִינִית"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "שְׁמִינִיִּים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "שְׁמִינִיּוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "שְׁמִינִי",
@@ -904,7 +1016,21 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "תְּשִׁיעִית"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "תְּשִׁיעִיִּים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "תְּשִׁיעִיּוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "תְּשִׁיעִי",
@@ -1007,7 +1133,21 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "עֲשִׂירִית"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "עֲשִׂירִיִּים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "עֲשִׂירִיּוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "עֲשִׂירִי",
@@ -1111,7 +1251,21 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "אַחֲרוֹנָה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "אַחֲרוֹנִים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "אַחֲרוֹנוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "אַחֲרוֹן",
@@ -1279,7 +1433,28 @@
       ],
       "note": "after a number, with the older absolute form חֵצִי: שָׁלוֹשׁ וָחֵצִי “three and a half; half past three”"
      }
-    ]
+    ],
+    "pluralShape": [
+     "segolate: vowels rebuilt"
+    ],
+    "possessive": [
+     {
+      "form": "חֶצְיִי",
+      "number": "SG",
+      "register": "formal"
+     },
+     {
+      "form": "חֲצָאַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
+    }
    },
    "forms": {
     "N;SG;INDF": "חֲצִי",
@@ -1389,7 +1564,7 @@
      "After a number the form is חֵצִי with וָ: שָׁלוֹשׁ וָחֵצִי “three and a half”, also on the clock “half past three”."
     ],
     "subtleties": [
-     "Wiktionary gives the gender as masculine or feminine; in use it is mostly masculine: הַחֲצִי הַשֵּׁנִי “the second half”."
+     "Wiktionary gives the gender as masculine or feminine; in use it is mostly masculine:\n→ הַחֲצִי הַשֵּׁנִי “the second half”"
     ]
    }
   },
@@ -1430,6 +1605,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "segolate: vowels rebuilt"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -1522,7 +1709,7 @@
     ],
     "pitfalls": [
      "רֶבַע “a quarter” ≠ רֹבַע “a quarter (district) of a town” ≠ רְבִיעִי “fourth”.",
-     "On the clock: … וָרֶבַע “a quarter past …”, רֶבַע לְ… “a quarter to …”, with the feminine numbers of the hours: רֶבַע לְאַרְבַּע."
+     "On the clock: … וָרֶבַע “a quarter past …”, רֶבַע לְ… “a quarter to …”, with the feminine numbers of the hours:\n→ רֶבַע לְאַרְבַּע"
     ],
     "subtleties": [
      "Three quarters: שְׁלוֹשָׁה רְבָעִים — רֶבַע is masculine."
@@ -1570,6 +1757,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -1652,8 +1851,8 @@
      "Hebrew counts centuries with the hundred itself: “the twentieth hundred” = the twentieth century."
     ],
     "pitfalls": [
-     "The same word is the number 100: מֵאָה שָׁנִים “a hundred years” — but הַמֵּאָה הָעֶשְׂרִים “the twentieth century”. The article and the number after it show the century.",
-     "Feminine, so the number after it is feminine: הַמֵּאָה הָעֶשְׂרִים וְאַחַת, הַמֵּאָה הַשְּׁמוֹנֶה עֶשְׂרֵה; centuries 1–10 take the feminine ordinal: הַמֵּאָה הָרִאשׁוֹנָה."
+     "- The same word is the number 100: מֵאָה שָׁנִים “a hundred years” — but הַמֵּאָה הָעֶשְׂרִים “the twentieth century”.\n- The article and the number after it show the century.",
+     "Feminine, so the number after it is feminine: הַמֵּאָה הָעֶשְׂרִים וְאַחַת, הַמֵּאָה הַשְּׁמוֹנֶה עֶשְׂרֵה; centuries 1–10 take the feminine ordinal:\n→ הַמֵּאָה הָרִאשׁוֹנָה"
     ],
     "subtleties": [
      "Years and centuries are often counted לַסְּפִירָה “of the (common) era” and לִפְנֵי הַסְּפִירָה “before the era”."
@@ -1697,6 +1896,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -1821,6 +2032,18 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": {
+     "none": "a compound: “my …” is said with שֶׁל after it (… שֶׁלִּי); the endings go only on the first word in formal style"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {

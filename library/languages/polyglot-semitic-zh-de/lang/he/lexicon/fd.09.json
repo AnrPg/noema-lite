@@ -29,7 +29,10 @@
    "prefix": false,
    "translit": "o",
    "features": {
-    "spelling": "או"
+    "spelling": "או",
+    "allomorphs": {
+     "none": "one form"
+    }
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -508,7 +511,21 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "בְּרוּרָה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "בְּרוּרִים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "בְּרוּרוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "בָּרוּר",
@@ -749,7 +766,7 @@
      "גַּם … וְגַם … “both … and …” is a doubled “also”: גַּם תֵּה וְגַם קָפֶה."
     ],
     "pitfalls": [
-     "גַּם stands before the word it adds: גַּם אֲנִי רוֹצֶה קָפֶה “I too want coffee” — אֲנִי רוֹצֶה גַּם קָפֶה “I want coffee as well (besides something else)”.",
+     "גַּם stands before the word it adds:\n→ גַּם אֲנִי רוֹצֶה קָפֶה “I too want coffee” — אֲנִי רוֹצֶה גַּם קָפֶה “I want coffee as well (besides something else)”",
      "After וְ the ג loses its dot: וְגַם (ve-gam)."
     ],
     "subtleties": [

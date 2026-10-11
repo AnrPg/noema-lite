@@ -287,27 +287,27 @@
   {
    "for": "ru",
    "rel": "similar",
-   "text": "у меня есть брат “at me there is a brother” is the same idea as יֵשׁ לִי אָח “there is to me a brother”: no verb “have”. Hebrew uses “to” (לְ) where Russian uses “at” (у), and in both the past agrees with the thing owned: у меня была сестра ~ הָיְתָה לִי אָחוֹת."
+   "text": "у меня есть брат “at me there is a brother” is the same idea as יֵשׁ לִי אָח “there is to me a brother”: no verb “have”.\n\nHebrew uses “to” (לְ) where Russian uses “at” (у), and in both the past agrees with the thing owned:\n→ у меня была сестра ~ הָיְתָה לִי אָחוֹת"
   },
   {
    "for": "tr",
    "rel": "similar",
-   "text": "Turkish says “my brother exists” (kardeşim var); Hebrew says “there is to me a brother” (יֵשׁ לִי אָח). The negative is a word of its own in both: yok ~ אֵין. Turkish abi / ağabey and kardeş are all אָח: Hebrew does not split siblings by age."
+   "text": "Turkish says “my brother exists” (kardeşim var); Hebrew says “there is to me a brother” (יֵשׁ לִי אָח).\n\n- The negative is a word of its own in both: yok ~ אֵין.\n- Turkish abi / ağabey and kardeş are all אָח: Hebrew does not split siblings by age."
   },
   {
    "for": "el",
    "rel": "different",
-   "text": "Greek has a verb, έχω; Hebrew has none — it says יֵשׁ לִי “there is to me”. Do not look for a verb to conjugate: only לְ changes for the owner."
+   "text": "Greek has a verb, έχω; Hebrew has none — it says יֵשׁ לִי “there is to me”.\n\nDo not look for a verb to conjugate: only לְ changes for the owner."
   },
   {
    "for": "es",
    "rel": "different",
-   "text": "Spanish tener has no Hebrew counterpart: “I have” is יֵשׁ לִי “there is to me”. The owner goes into לְ, and only לְ changes (לִי, לְךָ, לָהּ …)."
+   "text": "Spanish tener has no Hebrew counterpart: “I have” is יֵשׁ לִי “there is to me”.\n\nThe owner goes into לְ, and only לְ changes (לִי, לְךָ, לָהּ …)."
   },
   {
    "for": "en",
    "rel": "different",
-   "text": "English “have” is a verb; Hebrew uses “there is” + “to me”: יֵשׁ לִי. In the past the verb agrees with the thing owned: הָיְתָה לִי דִּירָה “I had a flat” (literally “a flat was to me”)."
+   "text": "English “have” is a verb; Hebrew uses “there is” + “to me”:\n→ יֵשׁ לִי\n\nIn the past the verb agrees with the thing owned:\n→ הָיְתָה לִי דִּירָה “I had a flat” (literally “a flat was to me”)"
   },
   {
    "for": "fr",
@@ -317,12 +317,12 @@
   {
    "for": "de",
    "rel": "different",
-   "text": "German haben (ich habe einen Bruder) has no Hebrew counterpart; the thing owned is the subject and the owner is in לְ: יֵשׁ לִי אָח."
+   "text": "German haben (ich habe einen Bruder) has no Hebrew counterpart; the thing owned is the subject and the owner is in לְ:\n→ יֵשׁ לִי אָח"
   },
   {
    "for": "hi",
    "rel": "similar",
-   "text": "Hindi also has no “have” verb: मेरे पास किताब है “near me is a book”, and मेरा एक भाई है for relatives; Hebrew has one construction for both: יֵשׁ לִי סֵפֶר, יֵשׁ לִי אָח."
+   "text": "Hindi also has no “have” verb: मेरे पास किताब है “near me is a book”, and मेरा एक भाई है for relatives; Hebrew has one construction for both:\n→ יֵשׁ לִי סֵפֶר, יֵשׁ לִי אָח"
   },
   {
    "for": "fa",
@@ -332,7 +332,7 @@
   {
    "for": "mr",
    "rel": "similar",
-   "text": "Marathi says माझ्याकडे पुस्तक आहे “with me is a book” and मला भाऊ आहे “to me is a brother”; Hebrew uses one pattern for both: יֵשׁ לִי."
+   "text": "Marathi says माझ्याकडे पुस्तक आहे “with me is a book” and मला भाऊ आहे “to me is a brother”; Hebrew uses one pattern for both:\n→ יֵשׁ לִי"
   },
   {
    "for": "ar",
@@ -342,22 +342,22 @@
   {
    "for": "ja",
    "rel": "similar",
-   "text": "Japanese says “to me there is” (私には兄がいる); Hebrew is the same idea: יֵשׁ לִי אָח — with one word for people and things (no いる / ある split). 兄 and 弟 are both אָח: Hebrew does not split siblings by age."
+   "text": "Japanese says “to me there is” (私には兄がいる); Hebrew is the same idea: יֵשׁ לִי אָח — with one word for people and things (no いる / ある split).\n\n兄 and 弟 are both אָח: Hebrew does not split siblings by age."
   },
   {
    "for": "ko",
    "rel": "similar",
-   "text": "Korean uses 있다 “exist” (저는 형이 있어요); Hebrew יֵשׁ is the same idea, with the owner in לְ: יֵשׁ לִי אָח. 형 / 오빠 and 남동생 are all אָח: no older / younger split."
+   "text": "Korean uses 있다 “exist” (저는 형이 있어요); Hebrew יֵשׁ is the same idea, with the owner in לְ:\n→ יֵשׁ לִי אָח\n\n형 / 오빠 and 남동생 are all אָח: no older / younger split."
   },
   {
    "for": "fi",
    "rel": "same",
-   "text": "Finnish minulla on veli “at me is a brother” is the same pattern as יֵשׁ לִי אָח; Hebrew uses “to” (לְ) where Finnish uses -lla. Negative: minulla ei ole ~ אֵין לִי."
+   "text": "Finnish minulla on veli “at me is a brother” is the same pattern as יֵשׁ לִי אָח; Hebrew uses “to” (לְ) where Finnish uses -lla.\n\nNegative: minulla ei ole ~ אֵין לִי."
   },
   {
    "for": "hu",
    "rel": "same",
-   "text": "Hungarian nekem van egy bátyám “to me there is a brother of mine” is close to יֵשׁ לִי אָח; the negative is a word of its own in both: nincs ~ אֵין. Báty and öcs are both אָח: Hebrew does not split brothers by age."
+   "text": "Hungarian nekem van egy bátyám “to me there is a brother of mine” is close to יֵשׁ לִי אָח; the negative is a word of its own in both: nincs ~ אֵין.\n\nBáty and öcs are both אָח: Hebrew does not split brothers by age."
   },
   {
    "for": "sw",
@@ -372,12 +372,12 @@
   {
    "for": "zh",
    "rel": "different",
-   "text": "有 is both “have” and “there is” (我有一个哥哥 / 这儿有书); Hebrew יֵשׁ is both too, but the owner must be marked with לְ: יֵשׁ לִי — “there is to me”. And 哥哥 and 弟弟 are both אָח: Hebrew does not split siblings by age."
+   "text": "有 is both “have” and “there is” (我有一个哥哥 / 这儿有书); Hebrew יֵשׁ is both too, but the owner must be marked with לְ:\n→ יֵשׁ לִי — “there is to me”\n\nAnd 哥哥 and 弟弟 are both אָח: Hebrew does not split siblings by age."
   },
   {
    "for": "vi",
    "rel": "different",
-   "text": "Vietnamese có is both “have” and “there is” (tôi có sách); Hebrew יֵשׁ is the same word for both, with the owner in לְ: יֵשׁ לִי סֵפֶר. Anh trai and em trai are both אָח."
+   "text": "Vietnamese có is both “have” and “there is” (tôi có sách); Hebrew יֵשׁ is the same word for both, with the owner in לְ:\n→ יֵשׁ לִי סֵפֶר\n\nAnh trai and em trai are both אָח."
   },
   {
    "for": "iu",
@@ -387,42 +387,42 @@
   {
    "for": "it",
    "rel": "different",
-   "text": "Italian avere (ho un fratello) has no Hebrew counterpart: Hebrew says “there is to me”, יֵשׁ לִי אָח — close to c’è. In the past the verb agrees with the thing owned: הָיְתָה לִי דִּירָה “avevo un appartamento”."
+   "text": "Italian avere (ho un fratello) has no Hebrew counterpart: Hebrew says “there is to me”, יֵשׁ לִי אָח — close to c’è. In the past the verb agrees with the thing owned:\n→ הָיְתָה לִי דִּירָה “avevo un appartamento”"
   },
   {
    "for": "pt",
    "rel": "different",
-   "text": "Portuguese ter has no Hebrew counterpart: Hebrew uses its “there is” word, like há — יֵשׁ לִי אָח “there is to me a brother”. The negative is a word of its own: אֵין לִי זְמַן “não tenho tempo”."
+   "text": "Portuguese ter has no Hebrew counterpart: Hebrew uses its “there is” word, like há — יֵשׁ לִי אָח “there is to me a brother”.\n\nThe negative is a word of its own:\n→ אֵין לִי זְמַן “não tenho tempo”"
   },
   {
    "for": "sq",
    "rel": "different",
-   "text": "Albanian kam is a real verb (kam një vëlla); Hebrew has none and says יֵשׁ לִי אָח “there is to me a brother”. Albanian uses ka “has” also for “there is” (ka një libër); Hebrew uses יֵשׁ for both, with לְ for the owner."
+   "text": "Albanian kam is a real verb (kam një vëlla); Hebrew has none and says יֵשׁ לִי אָח “there is to me a brother”.\n\nAlbanian uses ka “has” also for “there is” (ka një libër); Hebrew uses יֵשׁ for both, with לְ for the owner."
   },
   {
    "for": "type:fusional",
    "rel": "different",
-   "text": "If your language has a verb “to have” with an object, rebuild the sentence: the thing owned is the subject and the owner goes into לְ — יֵשׁ לִי אָח. In the past the verb agrees with the thing: הָיְתָה לִי דִּירָה."
+   "text": "If your language has a verb “to have” with an object, rebuild the sentence: the thing owned is the subject and the owner goes into לְ — יֵשׁ לִי אָח.\n\nIn the past the verb agrees with the thing:\n→ הָיְתָה לִי דִּירָה"
   },
   {
    "for": "type:agglutinating",
    "rel": "similar",
-   "text": "If your language says “my X exists” or “at me there is X”, Hebrew is close: יֵשׁ לִי אָח “there is to me a brother”, and the negative is a separate word, אֵין: אֵין לִי אָח."
+   "text": "If your language says “my X exists” or “at me there is X”, Hebrew is close: יֵשׁ לִי אָח “there is to me a brother”, and the negative is a separate word, אֵין:\n→ אֵין לִי אָח"
   },
   {
    "for": "type:isolating",
    "rel": "similar",
-   "text": "If one word means both “have” and “there is” in your language, Hebrew יֵשׁ does too — but the owner must be marked with לְ: יֵשׁ לִי סֵפֶר “I have a book”, יֵשׁ פֹּה סֵפֶר “there is a book here”."
+   "text": "If one word means both “have” and “there is” in your language, Hebrew יֵשׁ does too — but the owner must be marked with לְ:\n→ יֵשׁ לִי סֵפֶר “I have a book”, יֵשׁ פֹּה סֵפֶר “there is a book here”"
   },
   {
    "for": "type:polysynthetic",
    "rel": "different",
-   "text": "If possession in your language is an affix on the noun or a verb built from it, Hebrew uses a fixed word for existence, יֵשׁ, and puts the owner into לְ with an ending: יֵשׁ לָנוּ בַּיִת."
+   "text": "If possession in your language is an affix on the noun or a verb built from it, Hebrew uses a fixed word for existence, יֵשׁ, and puts the owner into לְ with an ending:\n→ יֵשׁ לָנוּ בַּיִת"
   },
   {
    "for": "branch:Semitic",
    "rel": "similar",
-   "text": "Semitic languages commonly have no verb “to have” and use a preposition with the owner’s suffix. Hebrew adds the existential words יֵשׁ / אֵין: יֵשׁ לִי אָח, אֵין לִי אָח."
+   "text": "Semitic languages commonly have no verb “to have” and use a preposition with the owner’s suffix.\n\nHebrew adds the existential words יֵשׁ / אֵין:\n→ יֵשׁ לִי אָח, אֵין לִי אָח"
   }
  ]
 }

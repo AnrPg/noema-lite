@@ -11,7 +11,10 @@
    "prefix": false,
    "translit": "aval",
    "features": {
-    "spelling": "אבל"
+    "spelling": "אבל",
+    "allomorphs": {
+     "none": "one form"
+    }
    },
    "note": "Joins two clauses without changing their word order; a comma usually stands before it, as before German aber.",
    "contrasts": [
@@ -136,7 +139,10 @@
    "prefix": false,
    "translit": "ki",
    "features": {
-    "spelling": "כי"
+    "spelling": "כי",
+    "tense": {
+     "none": "the clause keeps its own tense"
+    }
    },
    "note": "“Because” + a clause (כִּי קַר “because it is cold”); before a noun use בִּגְלַל “because of” (בִּגְלַל הַקֹּר). In formal style כִּי also means “that”.",
    "contrasts": [
@@ -566,7 +572,8 @@
    "prefix": true,
    "translit": "kshe-",
    "features": {
-    "spelling": "כש"
+    "spelling": "כש",
+    "tense": "the future for a future event (כְּשֶׁאֶגְדַּל “when I grow up”), the past for a past one"
    },
    "note": "Written onto the first word of its clause (כְּשֶׁאֲנִי, כְּשֶׁהוּא); like שֶׁ it doubles the next letter when it can (כְּשֶׁזֶּה), but not before א, ה, ח, ע, ר. The formal word is כַּאֲשֶׁר.",
    "contrasts": [
@@ -673,7 +680,8 @@
    "prefix": false,
    "translit": "im",
    "features": {
-    "spelling": "אם"
+    "spelling": "אם",
+    "tense": "the future for a condition about the future (אִם יֵרֵד גֶּשֶׁם), the present for a general one (אִם אַתָּה רוֹצֶה)"
    },
    "note": "“If” + a clause; for a future event Hebrew puts the future after it (אִם יֵרֵד גֶּשֶׁם). Also “whether” in reported questions.",
    "ref": {
@@ -784,7 +792,7 @@
      "For a future event use the future after אִם: אִם יֵרֵד גֶּשֶׁם, not the present."
     ],
     "subtleties": [
-     "Like German ob, it also introduces a reported yes/no question: אֲנִי לֹא יוֹדֵעַ אִם … “I don’t know whether …”."
+     "Like German ob, it also introduces a reported yes/no question:\n→ אֲנִי לֹא יוֹדֵעַ אִם … “I don’t know whether …”"
     ]
    }
   },
@@ -799,7 +807,10 @@
    "prefix": true,
    "translit": "she-",
    "features": {
-    "spelling": "ש"
+    "spelling": "ש",
+    "tense": {
+     "none": "the clause keeps its own tense, also in reported speech (אָמַר שֶׁהוּא עָיֵף)"
+    }
    },
    "note": "Written onto the first word of its clause (שֶׁאַתָּה, שֶׁהוּא). It doubles the next letter when it can (שֶׁזֶּה, שֶׁלֹּא), but not before א, ה, ח, ע, ר. Never left out. After a preposition it makes a conjunction: לִפְנֵי שֶׁ, אַחֲרֵי שֶׁ, לַמְרוֹת שֶׁ.",
    "contrasts": [
@@ -916,7 +927,7 @@
      "It is never left out: “I’m glad you’re here” = אֲנִי שָׂמֵחַ שֶׁאַתָּה פֹּה."
     ],
     "subtleties": [
-     "After a preposition it makes a conjunction: לִפְנֵי שֶׁ “before”, אַחֲרֵי שֶׁ “after”, עַד שֶׁ “until”, לַמְרוֹת שֶׁ “although”, מִשּׁוּם שֶׁ “because”."
+     "After a preposition it makes a conjunction:\n→ לִפְנֵי שֶׁ “before”, אַחֲרֵי שֶׁ “after”, עַד שֶׁ “until”, לַמְרוֹת שֶׁ “although”, מִשּׁוּם שֶׁ “because”"
     ],
     "notes": [
      {
@@ -971,6 +982,12 @@
     "spelling": "למרות",
     "pronForms": {
      "none": "not used with personal endings (לַמְרוֹת זֹאת “despite this”)"
+    },
+    "suffixSet": {
+     "none": "no personal endings (see the forms with endings)"
+    },
+    "withArticle": {
+     "none": "a separate word: the article stays on the noun (לַמְרוֹת הַ…)"
     }
    },
    "note": "“Despite” + a noun (לַמְרוֹת הַגֶּשֶׁם); “although” + a clause with שֶׁ: לַמְרוֹת שֶׁהוּא עָיֵף. In the sentence bank the שֶׁ is a separate word part, written onto the first word of the clause.",
@@ -1104,7 +1121,10 @@
    "prefix": false,
    "translit": "af al pi",
    "features": {
-    "spelling": "אף על פי"
+    "spelling": "אף על פי",
+    "tense": {
+     "none": "the clause keeps its own tense; it is followed by שֶׁ (אַף עַל פִּי שֶׁ…)"
+    }
    },
    "note": "“Although” — with שֶׁ written onto the first word of the clause: אַף עַל פִּי שֶׁהוּא רָעֵב. More formal than לַמְרוֹת שֶׁ; often abbreviated אע״פ.",
    "contrasts": [

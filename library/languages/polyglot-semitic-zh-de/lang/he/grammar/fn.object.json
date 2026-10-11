@@ -280,12 +280,12 @@
   {
    "for": "tr",
    "rel": "similar",
-   "text": "It works like the Turkish accusative: only a definite (specific) object is marked — elma yiyorum / elmayı yiyorum ~ אוֹכֵל תַּפּוּחַ / אוֹכֵל אֶת הַתַּפּוּחַ. But אֶת is a separate word before the noun, not a suffix."
+   "text": "It works like the Turkish accusative: only a definite (specific) object is marked — elma yiyorum / elmayı yiyorum ~ אוֹכֵל תַּפּוּחַ / אוֹכֵל אֶת הַתַּפּוּחַ.\n\nBut אֶת is a separate word before the noun, not a suffix."
   },
   {
    "for": "el",
    "rel": "different",
-   "text": "Greek marks every direct object with the accusative (έναν / τον), definite or not; Hebrew marks only a definite one, with אֶת: אוֹכֵל תַּפּוּחַ / אוֹכֵל אֶת הַתַּפּוּחַ."
+   "text": "Greek marks every direct object with the accusative (έναν / τον), definite or not; Hebrew marks only a definite one, with אֶת:\n→ אוֹכֵל תַּפּוּחַ / אוֹכֵל אֶת הַתַּפּוּחַ"
   },
   {
    "for": "ru",
@@ -300,7 +300,7 @@
   {
    "for": "en",
    "rel": "new",
-   "text": "English has no object marker for nouns; Hebrew puts אֶת before a definite object (אוֹכֵל אֶת הַתַּפּוּחַ “eats the apple”). It is not translated."
+   "text": "English has no object marker for nouns; Hebrew puts אֶת before a definite object (אוֹכֵל אֶת הַתַּפּוּחַ “eats the apple”).\n\nIt is not translated."
   },
   {
    "for": "fr",
@@ -370,37 +370,37 @@
   {
    "for": "iu",
    "rel": "similar",
-   "text": "Inuktitut also separates definite objects: they go with a transitive verb ending, while an indefinite object takes the ending -mik with an intransitive verb; Hebrew marks the definite object with אֶת and leaves the verb alone."
+   "text": "Inuktitut also separates definite objects:\n- a definite object goes with a transitive verb ending;\n- an indefinite object takes the ending -mik with an intransitive verb.\n\nHebrew marks the definite object with אֶת and leaves the verb alone."
   },
   {
    "for": "it",
    "rel": "new",
-   "text": "Italian marks no noun object (mangio la mela); Hebrew puts אֶת before a definite object — אוֹכֵל אֶת הַתַּפּוּחַ — and nothing before an indefinite one. With a pronoun אֶת takes endings, a little like lo / la: אוֹתוֹ, אוֹתָהּ."
+   "text": "Italian marks no noun object (mangio la mela); Hebrew puts אֶת before a definite object — אוֹכֵל אֶת הַתַּפּוּחַ — and nothing before an indefinite one.\n\nWith a pronoun אֶת takes endings, a little like lo / la:\n→ אוֹתוֹ, אוֹתָהּ"
   },
   {
    "for": "pt",
    "rel": "new",
-   "text": "Portuguese marks no noun object (como a maçã); Hebrew adds אֶת before a definite object only: אוֹכֵל תַּפּוּחַ / אוֹכֵל אֶת הַתַּפּוּחַ. Object pronouns are אֶת with endings — אוֹתוֹ “o”, אוֹתָהּ “a” — after the verb."
+   "text": "Portuguese marks no noun object (como a maçã); Hebrew adds אֶת before a definite object only:\n→ אוֹכֵל תַּפּוּחַ / אוֹכֵל אֶת הַתַּפּוּחַ\n\nObject pronouns are אֶת with endings — אוֹתוֹ “o”, אוֹתָהּ “a” — after the verb."
   },
   {
    "for": "sq",
    "rel": "similar",
-   "text": "Albanian marks the object with the accusative (pashë djalin) and often echoes a definite object with the clitic e (e pashë djalin); Hebrew marks only a definite object, with the separate word אֶת: רָאִיתִי אֶת הַיֶּלֶד."
+   "text": "Albanian marks the object with the accusative (pashë djalin) and often echoes a definite object with the clitic e (e pashë djalin); Hebrew marks only a definite object, with the separate word אֶת:\n→ רָאִיתִי אֶת הַיֶּלֶד"
   },
   {
    "for": "type:fusional",
    "rel": "different",
-   "text": "If your language puts every direct object in the accusative, here only definite objects are marked — and by a word, not an ending: אוֹכֵל תַּפּוּחַ / אוֹכֵל אֶת הַתַּפּוּחַ."
+   "text": "If your language puts every direct object in the accusative, here only definite objects are marked — and by a word, not an ending:\n→ אוֹכֵל תַּפּוּחַ / אוֹכֵל אֶת הַתַּפּוּחַ"
   },
   {
    "for": "type:agglutinating",
    "rel": "similar",
-   "text": "If your language marks only a definite or specific object with a case suffix, Hebrew does the same with a separate word before the noun: אוֹכֵל תַּפּוּחַ / אוֹכֵל אֶת הַתַּפּוּחַ."
+   "text": "If your language marks only a definite or specific object with a case suffix, Hebrew does the same with a separate word before the noun:\n→ אוֹכֵל תַּפּוּחַ / אוֹכֵל אֶת הַתַּפּוּחַ"
   },
   {
    "for": "type:isolating",
    "rel": "new",
-   "text": "If word order alone shows the object in your language, keep the order (verb + object) and add אֶת before a definite object: הוּא אוֹכֵל אֶת הַתַּפּוּחַ."
+   "text": "If word order alone shows the object in your language, keep the order (verb + object) and add אֶת before a definite object:\n→ הוּא אוֹכֵל אֶת הַתַּפּוּחַ"
   },
   {
    "for": "type:polysynthetic",
@@ -410,7 +410,7 @@
   {
    "for": "branch:Semitic",
    "rel": "similar",
-   "text": "Semitic languages mark direct objects by case or by a particle; Hebrew uses the particle אֶת, and only before a definite object: אוֹכֵל אֶת הַתַּפּוּחַ."
+   "text": "Semitic languages mark direct objects by case or by a particle; Hebrew uses the particle אֶת, and only before a definite object:\n→ אוֹכֵל אֶת הַתַּפּוּחַ"
   }
  ]
 }

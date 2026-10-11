@@ -65,7 +65,9 @@
       "cell": "ADP;3;PL;FEM",
       "form": "בָּהֶן"
      }
-    ]
+    ],
+    "suffixSet": "singular-noun endings",
+    "withArticle": "בַּ (בַּבַּיִת), בָּ before הָ (בָּעִיר): the ה of the article drops"
    },
    "note": "Written attached to the next word. With the article it fuses: בְּ + הַבַּיִת → בַּבַּיִת (the ה falls away and its vowel moves to the ב: בַּ / בָּ / בֶּ). Its own vowel also changes: בִּ before a shva (בִּשְׂדֵה), בַּ before a hataf patah (בַּחֲנוּת).",
    "contrasts": [
@@ -360,7 +362,11 @@
       "cell": "ADP;3;PL;FEM",
       "form": "אֶצְלָן"
      }
-    ]
+    ],
+    "suffixSet": "singular-noun endings",
+    "withArticle": {
+     "none": "a separate word: the article stays on the noun (אֵצֶל הַ…)"
+    }
    },
    "note": "At someone’s place: אֵצֶל סָבְתָא “at Grandma’s”, אֵצֶל הָרוֹפֵא “at the doctor’s”. With pronouns: אֶצְלִי, אֶצְלְךָ, אֶצְלָהּ …",
    "contrasts": [
@@ -549,7 +555,11 @@
       "cell": "ADP;3;PL;FEM",
       "form": "אֲלֵיהֶן"
      }
-    ]
+    ],
+    "suffixSet": "plural-noun endings",
+    "withArticle": {
+     "none": "a separate word: the article stays on the noun (אֶל הַ…)"
+    }
    },
    "contrasts": [
     {
@@ -685,7 +695,9 @@
       "cell": "ADP;3;PL;FEM",
       "form": "מֵהֶן"
      }
-    ]
+    ],
+    "suffixSet": "a stem of its own",
+    "withArticle": "no fusion: מֵהַ… (מֵהַבַּיִת)"
    },
    "note": "Written attached to the next word; the נ of the old form מִן doubles the next letter (מִתֵּל אָבִיב), and before a guttural, ר or the article it is מֵ (מֵחֵיפָה, מֵהַבַּיִת). The article does not fuse: מֵהַבַּיִת. The full word מִן stands before the article in careful style (מִן הַבַּיִת). In comparisons it is “than”: גָּדוֹל יוֹתֵר מֵהַדִּירָה (lesson 17).",
    "contrasts": [
@@ -822,12 +834,12 @@
      "Arabic مِنْ does the same double job: “from” and “than” (أَكْبَرُ مِنْ)."
     ],
     "pitfalls": [
-     "The נ of מִן doubles the next letter: מִתֵּל אָבִיב (dagesh). Before ע, ח, א, ר and before the article it is מֵ: מֵחֵיפָה, מֵהַבַּיִת.",
+     "- The נ of מִן doubles the next letter:\n→ מִתֵּל אָבִיב (dagesh)\n- Before ע, ח, א, ר and before the article it is מֵ:\n→ מֵחֵיפָה, מֵהַבַּיִת",
      "With the article it does not fuse: מֵהַבַּיִת (the ה stays) — unlike בַּבַּיִת and לַבַּיִת."
     ],
     "subtleties": [
-     "The full word מִן is used before the article in careful style: מִן הַבַּיִת. Everyday speech says מֵהַבַּיִת.",
-     "As “than”, מִ takes endings with pronouns (מִמֶּנִּי “than me”, מִמְּךָ, מִמֶּנּוּ, מִמֶּנָּה, מֵהֶם), and before a clause, an adverb or a phrase with a preposition the full word מֵאֲשֶׁר is used: יוֹתֵר טוֹב מֵאֲשֶׁר בַּבַּיִת “better than at home”."
+     "- The full word מִן is used before the article in careful style:\n→ מִן הַבַּיִת\n- Everyday speech says מֵהַבַּיִת.",
+     "As “than”, מִ takes endings with pronouns (מִמֶּנִּי “than me”, מִמְּךָ, מִמֶּנּוּ, מִמֶּנָּה, מֵהֶם), and before a clause, an adverb or a phrase with a preposition the full word מֵאֲשֶׁר is used:\n→ יוֹתֵר טוֹב מֵאֲשֶׁר בַּבַּיִת “better than at home”"
     ],
     "notes": [
      {
@@ -900,7 +912,11 @@
       "cell": "ADP;3;PL;FEM",
       "form": "אִתָּן"
      }
-    ]
+    ],
+    "suffixSet": "a stem of its own",
+    "withArticle": {
+     "none": "a separate word: the article stays on the noun (עִם הַ…)"
+    }
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1007,6 +1023,12 @@
     "spelling": "בלי",
     "pronForms": {
      "none": "takes no personal endings: “without me” is בִּלְעָדַי (from בִּלְעֲדֵי)"
+    },
+    "suffixSet": {
+     "none": "no personal endings (see the forms with endings)"
+    },
+    "withArticle": {
+     "none": "a separate word: the article stays on the noun (בְּלִי הַ…)"
     }
    },
    "ref": {
@@ -1154,7 +1176,11 @@
       "cell": "ADP;3;PL;FEM",
       "form": "בִּשְׁבִילָן"
      }
-    ]
+    ],
+    "suffixSet": "singular-noun endings",
+    "withArticle": {
+     "none": "a separate word: the article stays on the noun (בִּשְׁבִיל הַ…)"
+    }
    },
    "contrasts": [
     {
@@ -1319,7 +1345,11 @@
       "cell": "ADP;3;PL;FEM",
       "form": "עֲלֵיהֶן"
      }
-    ]
+    ],
+    "suffixSet": "plural-noun endings",
+    "withArticle": {
+     "none": "a separate word: the article stays on the noun (עַל הַ…)"
+    }
    },
    "note": "“about” (a topic, lesson 11) and “on” (on top of, lesson 12) — one word. With pronouns: עָלַי, עָלֶיךָ, עָלָיו …",
    "ref": {
@@ -1460,6 +1490,19 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "compound: the first word changes",
+     "stem change"
+    ],
+    "possessive": {
+     "none": "a compound: “my …” is said with שֶׁל after it (… שֶׁלִּי); the endings go only on the first word in formal style"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -1592,6 +1635,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "stem change"
+    ],
+    "possessive": {
+     "none": "a loanword: possessive endings are not used; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -1727,6 +1782,27 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": [
+     {
+      "form": "עֲבוֹדָתִי",
+      "number": "SG",
+      "register": "formal"
+     },
+     {
+      "form": "עֲבוֹדוֹתַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -1900,6 +1976,27 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": [
+     {
+      "form": "מִשְׂרָדִי",
+      "number": "SG",
+      "register": "formal"
+     },
+     {
+      "form": "מִשְׂרָדַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -2041,6 +2138,18 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -2192,6 +2301,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": {
+     "none": "a loanword: possessive endings are not used; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -2336,6 +2457,18 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pluralShape": [
+     "stem change"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -2480,6 +2613,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -2604,6 +2749,19 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "compound: the first word changes",
+     "stem change"
+    ],
+    "possessive": {
+     "none": "a compound: “my …” is said with שֶׁל after it (… שֶׁלִּי); the endings go only on the first word in formal style"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -2734,6 +2892,19 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "compound: the first word changes",
+     "stem change"
+    ],
+    "possessive": {
+     "none": "a compound: “my …” is said with שֶׁל after it (… שֶׁלִּי); the endings go only on the first word in formal style"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -2862,6 +3033,19 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "compound: the first word changes",
+     "stem change"
+    ],
+    "possessive": {
+     "none": "a compound: “my …” is said with שֶׁל after it (… שֶׁלִּי); the endings go only on the first word in formal style"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -2987,6 +3171,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "a loanword: possessive endings are not used; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -3119,6 +3315,18 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": {
+     "none": "possessive endings are not used with this word; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -3262,6 +3470,27 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": [
+     {
+      "form": "תַּחֲנָתִי",
+      "number": "SG",
+      "register": "formal"
+     },
+     {
+      "form": "תַּחֲנוֹתַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -3396,6 +3625,19 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "compound: the first word changes",
+     "ending of the other gender"
+    ],
+    "possessive": {
+     "none": "a compound: “my …” is said with שֶׁל after it (… שֶׁלִּי); the endings go only on the first word in formal style"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -3533,6 +3775,27 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pluralShape": [
+     "ending of the other gender"
+    ],
+    "possessive": [
+     {
+      "form": "רְחוֹבִי",
+      "number": "SG",
+      "register": "formal"
+     },
+     {
+      "form": "רְחוֹבוֹתַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -3718,7 +3981,17 @@
       ],
       "note": "almost always in the construct: כִּכַּר לֶחֶם “a loaf of bread”"
      }
-    ]
+    ],
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": "feminine without a feminine ending",
+    "pair": {
+     "none": "not a noun for a person"
+    }
    },
    "forms": {
     "N;SG;INDF": "כִּכָּר",
@@ -3895,6 +4168,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "a loanword: possessive endings are not used; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -4048,6 +4333,26 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "ending of the other gender",
+     "stem change"
+    ],
+    "possessive": [
+     {
+      "form": "עִירִי",
+      "number": "SG",
+      "register": "formal"
+     },
+     {
+      "form": "עָרַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": "feminine without a feminine ending",
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -4195,6 +4500,27 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": [
+     {
+      "form": "כְּפָרִי",
+      "number": "SG",
+      "register": "formal"
+     },
+     {
+      "form": "כְּפָרַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -4338,7 +4664,26 @@
       ],
       "note": "with the article: the Land (Israel)"
      }
-    ]
+    ],
+    "pluralShape": [
+     "segolate: vowels rebuilt"
+    ],
+    "possessive": [
+     {
+      "form": "אַרְצִי",
+      "number": "SG",
+      "register": "formal"
+     },
+     {
+      "form": "אַרְצוֹתַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": "feminine without a feminine ending",
+    "pair": {
+     "none": "not a noun for a person"
+    }
    },
    "forms": {
     "N;SG;INDF": "אֶרֶץ",
@@ -4508,6 +4853,18 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -4703,10 +5060,10 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The ending ־ָה “towards” is a fossil of an old case ending, still alive in a few words: צָפוֹנָה “northwards”, יָמִינָה, הַבַּיְתָה."
+     "The ending ־ָה “towards” is a fossil of an old case ending, still alive in a few words:\n→ צָפוֹנָה “northwards”, יָמִינָה, הַבַּיְתָה"
     ],
     "pitfalls": [
-     "No לְ before it: הוֹלֵךְ הַבַּיְתָה (not *לְהַבַּיְתָה). Being at home is בַּבַּיִת."
+     "- No לְ before it:\n→ הוֹלֵךְ הַבַּיְתָה (not *לְהַבַּיְתָה)\n- Being at home is בַּבַּיִת."
     ],
     "subtleties": [
      "The ending ־ָה is unstressed: habáyta."

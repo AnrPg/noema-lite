@@ -355,22 +355,22 @@
   {
    "for": "ru",
    "rel": "similar",
-   "text": "As in Russian, the question word comes first and there is no “is” in the present (Где водитель? ~ אֵיפֹה הַנֶּהָג?). Куда / откуда match לְאָן / מֵאֵיפֹה."
+   "text": "As in Russian, the question word comes first and there is no “is” in the present (Где водитель? ~ אֵיפֹה הַנֶּהָג?).\n\nКуда / откуда match לְאָן / מֵאֵיפֹה."
   },
   {
    "for": "el",
    "rel": "similar",
-   "text": "Greek also puts the question word first (Πού είναι ο οδηγός;); Hebrew has no verb “is” in the present: אֵיפֹה הַנֶּהָג?"
+   "text": "Greek also puts the question word first (Πού είναι ο οδηγός;); Hebrew has no verb “is” in the present:\n→ אֵיפֹה הַנֶּהָג?"
   },
   {
    "for": "es",
    "rel": "similar",
-   "text": "As in Spanish, the question word goes first and a preposition goes before it (¿con quién? ~ עִם מִי?); unlike Spanish, there is no verb “is” in the present: אֵיפֹה הַנֶּהָג?"
+   "text": "As in Spanish, the question word goes first and a preposition goes before it (¿con quién? ~ עִם מִי?); unlike Spanish, there is no verb “is” in the present:\n→ אֵיפֹה הַנֶּהָג?"
   },
   {
    "for": "en",
    "rel": "different",
-   "text": "English uses “do” and can leave a preposition at the end (“Who is it for?”); Hebrew has no “do”, no “is” in the present, and the preposition always goes first: בִּשְׁבִיל מִי?"
+   "text": "English uses “do” and can leave a preposition at the end (“Who is it for?”); Hebrew has no “do”, no “is” in the present, and the preposition always goes first:\n→ בִּשְׁבִיל מִי?"
   },
   {
    "for": "fr",
@@ -435,7 +435,7 @@
   {
    "for": "lg",
    "rel": "different",
-   "text": "Luganda usually keeps the question word after the verb (ogenda wa? “where are you going?”); Hebrew puts it first: לְאָן אַתָּה הוֹלֵךְ?"
+   "text": "Luganda usually keeps the question word after the verb (ogenda wa? “where are you going?”); Hebrew puts it first:\n→ לְאָן אַתָּה הוֹלֵךְ?"
   },
   {
    "for": "zh",
@@ -455,17 +455,17 @@
   {
    "for": "it",
    "rel": "similar",
-   "text": "As in Italian, the question word comes first and a preposition stays before it (con chi? ~ עִם מִי?); but there is no verb “to be” in the present: אֵיפֹה הַנֶּהָג? “dov’è l’autista?”. The name is asked with “how”, as in Come ti chiami?: אֵיךְ קוֹרְאִים לְךָ?"
+   "text": "As in Italian, the question word comes first and a preposition stays before it (con chi? ~ עִם מִי?); but there is no verb “to be” in the present:\n→ אֵיפֹה הַנֶּהָג? “dov’è l’autista?”\n\nThe name is asked with “how”, as in Come ti chiami?:\n→ אֵיךְ קוֹרְאִים לְךָ?"
   },
   {
    "for": "pt",
    "rel": "similar",
-   "text": "As in Portuguese, the question word comes first and a preposition stays before it (com quem? ~ עִם מִי?); there is no verb “to be” in the present: אֵיפֹה הַנֶּהָג? “onde está o motorista?”. The name is asked with “how”, as in Como te chamas?: אֵיךְ קוֹרְאִים לְךָ?"
+   "text": "As in Portuguese, the question word comes first and a preposition stays before it (com quem? ~ עִם מִי?); there is no verb “to be” in the present:\n→ אֵיפֹה הַנֶּהָג? “onde está o motorista?”\n\nThe name is asked with “how”, as in Como te chamas?:\n→ אֵיךְ קוֹרְאִים לְךָ?"
   },
   {
    "for": "sq",
    "rel": "similar",
-   "text": "As in Albanian, the question word comes first (Ku është shoferi? ~ אֵיפֹה הַנֶּהָג?), but Hebrew needs no verb there. Like cili / cila, “which” agrees: אֵיזֶה / אֵיזוֹ. And the name is asked with “how”, as in Si quhesh?: אֵיךְ קוֹרְאִים לְךָ?"
+   "text": "As in Albanian, the question word comes first (Ku është shoferi? ~ אֵיפֹה הַנֶּהָג?), but Hebrew needs no verb there.\n\n- Like cili / cila, “which” agrees:\n→ אֵיזֶה / אֵיזוֹ\n- And the name is asked with “how”, as in Si quhesh?:\n→ אֵיךְ קוֹרְאִים לְךָ?"
   },
   {
    "for": "type:fusional",
@@ -475,22 +475,22 @@
   {
    "for": "type:agglutinating",
    "rel": "different",
-   "text": "If the question word stays where the answer would be in your language, Hebrew moves it to the front: אֵיפֹה הַנֶּהָג? A preposition goes with it: עִם מִי?"
+   "text": "If the question word stays where the answer would be in your language, Hebrew moves it to the front: אֵיפֹה הַנֶּהָג? A preposition goes with it:\n→ עִם מִי?"
   },
   {
    "for": "type:isolating",
    "rel": "different",
-   "text": "If your language leaves the question word in place, Hebrew puts it first and keeps the rest of the statement: הִיא רוֹצָה קָפֶה → מָה הִיא רוֹצָה?"
+   "text": "If your language leaves the question word in place, Hebrew puts it first and keeps the rest of the statement:\n→ הִיא רוֹצָה קָפֶה → מָה הִיא רוֹצָה?"
   },
   {
    "for": "type:polysynthetic",
    "rel": "different",
-   "text": "If questions in your language are marked by a particle or a verb affix, Hebrew uses a separate question word at the start and changes nothing else: מָתַי הוּא בָּא?"
+   "text": "If questions in your language are marked by a particle or a verb affix, Hebrew uses a separate question word at the start and changes nothing else:\n→ מָתַי הוּא בָּא?"
   },
   {
    "for": "branch:Semitic",
    "rel": "similar",
-   "text": "Many Hebrew question words have Semitic cousins (מִי, מָה, מָתַי, כַּמָּה), and they go first. כַּמָּה takes a plural noun: כַּמָּה יְלָדִים?"
+   "text": "Many Hebrew question words have Semitic cousins (מִי, מָה, מָתַי, כַּמָּה), and they go first.\n\nכַּמָּה takes a plural noun:\n→ כַּמָּה יְלָדִים?"
   },
   {
    "for": "el",

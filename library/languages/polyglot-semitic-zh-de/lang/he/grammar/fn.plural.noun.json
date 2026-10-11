@@ -172,8 +172,8 @@
   ]
  },
  "traps": [
-  "The ending does not always follow the gender: חַלּוֹן (m) → חַלּוֹנוֹת, תִּינוֹק (m) → תִּינוֹקוֹת, אִשָּׁה (f) → נָשִׁים, דְּלַעַת (f) → דְּלוּעִים, כְּרֵשָׁה (f) → כְּרֵשִׁים.",
-  "The first vowel shortens: סֵפֶר → סְפָרִים, בָּצָל → בְּצָלִים, גֶּזֶר → גְּזָרִים; under a guttural it becomes a hataf: חֶדֶר → חֲדָרִים, חָצִיל → חֲצִילִים.",
+  "The ending does not always follow the gender:\n→ חַלּוֹן (m) → חַלּוֹנוֹת, תִּינוֹק (m) → תִּינוֹקוֹת, אִשָּׁה (f) → נָשִׁים, דְּלַעַת (f) → דְּלוּעִים, כְּרֵשָׁה (f) → כְּרֵשִׁים",
+  "The first vowel shortens: סֵפֶר → סְפָרִים, בָּצָל → בְּצָלִים, גֶּזֶר → גְּזָרִים; under a guttural it becomes a hataf:\n→ חֶדֶר → חֲדָרִים, חָצִיל → חֲצִילִים",
   "-ִיָּה and -ִית become -ִיּוֹת: עַגְבָנִיָּה → עַגְבָנִיּוֹת, סְטוּדֶנְטִית → סְטוּדֶנְטִיּוֹת.",
   "Irregular plurals must be learnt: בַּיִת → בָּתִּים, אָח → אַחִים, אָחוֹת → אֲחָיוֹת, בַּת → בָּנוֹת.",
   "Food is often a mass noun: קָנִיתִי גֶּזֶר “I bought carrots”; שׁוּם, בְּרוֹקוֹלִי and תִּירָס have no plural in everyday use.",
@@ -335,12 +335,12 @@
   {
    "for": "lg",
    "rel": "different",
-   "text": "Luganda changes the class prefix for the plural (omuntu → abantu, ekitabo → ebitabo); Hebrew changes the ending: -ִים / -וֹת."
+   "text": "Luganda changes the class prefix for the plural (omuntu → abantu, ekitabo → ebitabo); Hebrew changes the ending:\n→ -ִים / -וֹת"
   },
   {
    "for": "zh",
    "rel": "new",
-   "text": "Chinese nouns do not change for number (们 only for people); in Hebrew every countable noun has a plural, and it must be used: שְׁנֵי סְפָרִים."
+   "text": "Chinese nouns do not change for number (们 only for people); in Hebrew every countable noun has a plural, and it must be used:\n→ שְׁנֵי סְפָרִים"
   },
   {
    "for": "vi",
@@ -355,7 +355,7 @@
   {
    "for": "it",
    "rel": "different",
-   "text": "Italian changes the final vowel (libro → libri, casa → case); Hebrew adds -ִים or -וֹת and often changes the stem vowels too (סֵפֶר → סְפָרִים). Some nouns cross over, as l’uovo → le uova does: חַלּוֹן (m.) → חַלּוֹנוֹת."
+   "text": "Italian changes the final vowel (libro → libri, casa → case); Hebrew adds -ִים or -וֹת and often changes the stem vowels too (סֵפֶר → סְפָרִים).\n\nSome nouns cross over, as l’uovo → le uova does:\n→ חַלּוֹן (m.) → חַלּוֹנוֹת"
   },
   {
    "for": "pt",
@@ -380,12 +380,12 @@
   {
    "for": "type:isolating",
    "rel": "new",
-   "text": "If your nouns do not change for number, the plural is new and obligatory: סֵפֶר / סְפָרִים — and everything that agrees becomes plural too: הַסְּפָרִים הָאֵלֶּה."
+   "text": "If your nouns do not change for number, the plural is new and obligatory: סֵפֶר / סְפָרִים — and everything that agrees becomes plural too:\n→ הַסְּפָרִים הָאֵלֶּה"
   },
   {
    "for": "type:polysynthetic",
    "rel": "different",
-   "text": "If number in your language is marked mainly on the verb, note that Hebrew marks it on the noun and on every word that agrees: הַסְּפָרִים הָאֵלֶּה הָיוּ פֹּה."
+   "text": "If number in your language is marked mainly on the verb, note that Hebrew marks it on the noun and on every word that agrees:\n→ הַסְּפָרִים הָאֵלֶּה הָיוּ פֹּה"
   },
   {
    "for": "branch:Semitic",

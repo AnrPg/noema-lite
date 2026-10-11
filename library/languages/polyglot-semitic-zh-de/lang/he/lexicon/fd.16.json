@@ -20,7 +20,21 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "גְּדוֹלָה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "גְּדוֹלִים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "גְּדוֹלוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "גָּדוֹל",
@@ -195,7 +209,7 @@
     ],
     "pitfalls": [
      "The first vowel shortens in the other forms: גָּדוֹל → גְּדוֹלָה, גְּדוֹלִים, גְּדוֹלוֹת (ga- → g’-).",
-     "After a definite noun it takes the article too: הַבַּיִת הַגָּדוֹל “the big house”. Without it, הַבַּיִת גָּדוֹל is a sentence: “the house is big”."
+     "- After a definite noun it takes the article too:\n→ הַבַּיִת הַגָּדוֹל “the big house”\n- Without it, הַבַּיִת גָּדוֹל is a sentence: “the house is big”."
     ],
     "subtleties": [
      "Of people גָּדוֹל means “older, grown-up” (הָאָח הַגָּדוֹל “the older brother”), not “tall” — that is גָּבֹהַּ.",
@@ -228,7 +242,21 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "קְטַנָּה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "קְטַנִּים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "קְטַנּוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "קָטָן",
@@ -403,7 +431,21 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "אֲרֻכָּה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "אֲרֻכִּים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "אֲרֻכּוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "אָרֹךְ",
@@ -554,7 +596,21 @@
     },
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "קְצָרָה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "קְצָרִים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "קְצָרוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "קָצָר",
@@ -688,7 +744,21 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "גְּבֹהָה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "גְּבֹהִים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "גְּבֹהוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "גָּבֹהַּ",
@@ -804,7 +874,7 @@
      "The opposite is נָמוּךְ “low, short” — Hebrew measures people the way it measures walls: high or low."
     ],
     "pitfalls": [
-     "The last letter is a sounded h: ה with a dot (mappiq) and a “stolen” a before it — gavóha. Unpointed: גבוה.",
+     "- The last letter is a sounded h: ה with a dot (mappiq) and a “stolen” a before it — gavóha.\n- Unpointed: גבוה.",
      "Of people גָּבֹהַּ is “tall”; גָּדוֹל of a person means “older, grown-up”."
     ],
     "subtleties": [
@@ -834,7 +904,21 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "טוֹבָה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "טוֹבִים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "טוֹבוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "טוֹב",
@@ -1015,7 +1099,7 @@
      "Arabic طَيِّب is the same word; German Masel “luck” comes from מַזָּל, as in מַזָּל טוֹב."
     ],
     "pitfalls": [
-     "As a reply טוֹב means “OK, fine” (טוֹב, אֲנִי בָּא); as an adverb it is “well”: הוּא מְבַשֵּׁל טוֹב “he cooks well”.",
+     "As a reply טוֹב means “OK, fine” (טוֹב, אֲנִי בָּא); as an adverb it is “well”:\n→ הוּא מְבַשֵּׁל טוֹב “he cooks well”",
      "“Better” has no special form: טוֹב יוֹתֵר or יוֹתֵר טוֹב (lesson 17)."
     ],
     "subtleties": [
@@ -1054,7 +1138,21 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "רָעָה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "רָעִים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "רָעוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "רַע",
@@ -1224,6 +1322,20 @@
       ],
       "note": "as a noun only in the feminine plural: הַחֲדָשׁוֹת “the news”"
      }
+    ],
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "חֲדָשָׁה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "חֲדָשִׁים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "חֲדָשׁוֹת"
+     }
     ]
    },
    "forms": {
@@ -1387,7 +1499,21 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "יְשָׁנָה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "יְשָׁנִים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "יְשָׁנוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "יָשָׁן",
@@ -1509,7 +1635,7 @@
     ],
     "pitfalls": [
      "Use יָשָׁן for things, זָקֵן (or politely מְבֻגָּר) for people: סֵפֶר יָשָׁן, but אִישׁ זָקֵן.",
-     "יָשָׁן “old” and יָשֵׁן “asleep, sleeps” are both written ישן: הַבַּיִת יָשָׁן “the house is old”, הַיֶּלֶד יָשֵׁן “the child is sleeping”."
+     "יָשָׁן “old” and יָשֵׁן “asleep, sleeps” are both written ישן:\n→ הַבַּיִת יָשָׁן “the house is old”, הַיֶּלֶד יָשֵׁן “the child is sleeping”"
     ],
     "subtleties": [
      "חָבֵר יָשָׁן is “an old (long-standing) friend”, not an elderly one."
@@ -1534,7 +1660,21 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "צְעִירָה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "צְעִירִים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "צְעִירוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "צָעִיר",
@@ -1656,7 +1796,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Arabic صَغِير means “small”; Hebrew kept the sense “young”. Lot’s refuge town צוֹעַר (Zoar) was named “the small one” (Genesis 19:20–22)."
+     "- Arabic صَغِير means “small”; Hebrew kept the sense “young”.\n- Lot’s refuge town צוֹעַר (Zoar) was named “the small one” (Genesis 19:20–22)."
     ],
     "pitfalls": [
      "The first vowel shortens: צְעִירָה (tse’irá), צְעִירִים."
@@ -1684,7 +1824,21 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "זְקֵנָה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "זְקֵנִים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "זְקֵנוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "זָקֵן",
@@ -1854,7 +2008,21 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "מְבֻגֶּרֶת"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "מְבֻגָּרִים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "מְבֻגָּרוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "מְבֻגָּר",
@@ -2033,7 +2201,21 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "חַמָּה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "חַמִּים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "חַמּוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "חַם",
@@ -2197,7 +2379,21 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "קָרָה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "קָרִים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "קָרוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "קַר",
@@ -2360,7 +2556,21 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "חֲמִימָה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "חֲמִימִים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "חֲמִימוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "חָמִים",
@@ -2463,7 +2673,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German warm / heiß = Hebrew חָמִים / חַם: one root, a gentler pattern. The Sabbath stew חַמִּין (hamin) is named for being kept hot."
+     "- German warm / heiß = Hebrew חָמִים / חַם: one root, a gentler pattern.\n- The Sabbath stew חַמִּין (hamin) is named for being kept hot."
     ],
     "pitfalls": [
      "חָמִים “warm” and חַמִּים “hot” (plural of חַם) are both written חמים: מַיִם חַמִּים “hot water”, but בַּיִת חָמִים “a warm home”.",
@@ -2492,7 +2702,21 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "יָפָה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "יָפִים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "יָפוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "יָפֶה",
@@ -2647,7 +2871,7 @@
      "Masculine יָפֶה ends in -e, feminine יָפָה in -a: the same letters יפה — only the vowel (and the context) tells them apart."
     ],
     "subtleties": [
-     "יָפֶה also praises an action (“nice!, well done!”) and works as an adverb: הִיא שָׁרָה יָפֶה “she sings beautifully”."
+     "יָפֶה also praises an action (“nice!, well done!”) and works as an adverb:\n→ הִיא שָׁרָה יָפֶה “she sings beautifully”"
     ]
    }
   },
@@ -2668,7 +2892,21 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "מְכֹעֶרֶת"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "מְכֹעָרִים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "מְכֹעָרוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "מְכֹעָר",
@@ -2812,7 +3050,21 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "קַלָּה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "קַלִּים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "קַלּוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "קַל",
@@ -2979,7 +3231,21 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "קָשָׁה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "קָשִׁים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "קָשׁוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "קָשֶׁה",
@@ -3170,7 +3436,21 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "זוֹלָה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "זוֹלִים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "זוֹלוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "זוֹל",
@@ -3276,7 +3556,7 @@
      "A common sign in Israeli shops: הַמְּחִירִים הוּזְלוּ “prices have been reduced” — the verb of זוֹל."
     ],
     "pitfalls": [
-     "Of a price itself Hebrew prefers “low”: מְחִיר נָמוּךְ (as German niedriger Preis); זוֹל describes the thing: הַכַּרְטִיס זוֹל."
+     "Of a price itself Hebrew prefers “low”: מְחִיר נָמוּךְ (as German niedriger Preis); זוֹל describes the thing:\n→ הַכַּרְטִיס זוֹל"
     ],
     "subtleties": [
      "זוֹל can sound pejorative (“cheap, tacky”); a positive “good value” is מִשְׁתַּלֵּם."
@@ -3301,7 +3581,21 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "יְקָרָה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "יְקָרִים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "יְקָרוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "יָקָר",
@@ -3474,7 +3768,21 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "שְׂמֵחָה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "שְׂמֵחִים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "שְׂמֵחוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "שָׂמֵחַ",
@@ -3619,7 +3927,21 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "עֲצוּבָה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "עֲצוּבִים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "עֲצוּבוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "עָצוּב",
@@ -3760,7 +4082,21 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "עֲיֵפָה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "עֲיֵפִים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "עֲיֵפוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "עָיֵף",
@@ -3926,7 +4262,21 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "רְעֵבָה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "רְעֵבִים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "רְעֵבוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "רָעֵב",
@@ -4070,7 +4420,21 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "צְמֵאָה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "צְמֵאִים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "צְמֵאוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "צָמֵא",
@@ -4194,7 +4558,21 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "מְהִירָה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "מְהִירִים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "מְהִירוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "מָהִיר",
@@ -4346,7 +4724,21 @@
     },
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "אִטִּית"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "אִטִּיִּים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "אִטִּיּוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "אִטִּי",
@@ -4464,7 +4856,7 @@
      "Biblical אַט means “gently”: David asks his men “לְאַט לִי לַנַּעַר לְאַבְשָׁלוֹם” — “deal gently, for my sake, with the young man Absalom” (2 Samuel 18:5)."
     ],
     "pitfalls": [
-     "The masculine plural has two yods: אִטִּיִּים (also written and said אִטִּים); the feminine ends in ־ִית: אִטִּית.",
+     "The masculine plural has two yods: אִטִּיִּים (also written and said אִטִּים); the feminine ends in ־ִית:\n→ אִטִּית",
      "“Slowly” is the adverb לְאַט, not *אִטִּי."
     ],
     "subtleties": [

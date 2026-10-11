@@ -205,7 +205,7 @@
    ],
    "specific": true,
    "alsoIn": [],
-   "alsoNote": "The tag only says the language has one script; a handwriting form whose letters differ strongly from print is the point here. Russian/Cyrillic cursive (т, д, и) is a partial parallel.",
+   "alsoNote": "The tag only says the language has one script; a handwriting form whose letters differ strongly from print is the point here. Some other alphabets also have cursive letters that look quite unlike their printed forms.",
    "what": "Hebrew has one script, but it is handwritten in a cursive form whose letters often look quite different from print (א, ג, ה, ל, צ and others), and almost nobody handwrites the print letters. A learner who wants to read notes or write by hand must learn both sets of shapes.",
    "examples": [
     {
@@ -225,7 +225,14 @@
    },
    "status": "missing",
    "gap": "A cursive font or stroke templates (the trace exercise now uses the print letters, self-checked) and a recognition drill print ↔ cursive.",
-   "when": "later (P4 script module)"
+   "when": "later (P4 script module)",
+   "notes": [
+    {
+     "for": "ru",
+     "rel": "similar",
+     "text": "Russian cursive is a partial parallel: handwritten *т*, *д*, *и* look quite unlike their printed forms, as the Hebrew script letters do."
+    }
+   ]
   },
   {
    "id": "he.script.no-capitals",
@@ -280,7 +287,7 @@
    ],
    "specific": true,
    "alsoIn": [],
-   "alsoNote": "The Academy's full spelling (extra ו/י, doubled consonantal ו/י) is a rule of Hebrew orthography; Arabic, Persian and Urdu write long vowels but have no separate unvocalized spelling standard.",
+   "alsoNote": "The Academy's full spelling (extra ו/י, doubled consonantal ו/י) is a rule of Hebrew orthography; Arabic writes long vowels but has no separate unvocalized spelling standard.",
    "what": "Ordinary texts use the full spelling of the Academy of the Hebrew Language: without niqqud, extra ו and י are written for o/u and for i (שולחן, כיסא), and a consonantal ו or י inside a word is doubled (הוורוד, סתיו). So the unvocalized word is not simply the vocalized one with the points removed. Learners must read and type this spelling, not the stripped one.",
    "examples": [
     {
@@ -394,7 +401,7 @@
    "alsoIn": [
     "ar"
    ],
-   "alsoNote": "Arabic writes وَ فَ بِ لِ كَ and ال onto the next word and stacks them (وبالبيت). French elided l', d', qu' are only a partial parallel.",
+   "alsoNote": "Arabic writes وَ فَ بِ لِ كَ and ال onto the next word and stacks them (وبالبيت).",
    "what": "Seven small words are single letters attached to the following word: וְ “and”, הַ “the”, בְּ “in”, לְ “to”, מִ “from”, כְּ “as, like” and שֶׁ “that”. Up to three can pile up, so a dictionary word is often hidden behind them: וּבַבַּיִת = and + in + the + house.",
    "examples": [
     {
@@ -419,7 +426,8 @@
     "wordFields": [
      "prefix",
      "alts",
-     "role"
+     "role",
+     "withArticle"
     ],
     "paradigm": [
      "N;SG;DEF;PFX",
@@ -439,7 +447,14 @@
    },
    "status": "partial",
    "gap": "The prefix כְּ “as, like” has no lexeme; the morph_build exercise (assemble prefixes + word) is not implemented; the tokenizer strips at most two prefixes (וּכְשֶׁהַ… has three).",
-   "when": "fd.01 (וְ), fd.04 (הַ), fd.11 (בְּ לְ מִ), fd.18 (שֶׁ, כְּשֶׁ)"
+   "when": "fd.01 (וְ), fd.04 (הַ), fd.11 (בְּ לְ מִ), fd.18 (שֶׁ, כְּשֶׁ)",
+   "notes": [
+    {
+     "for": "fr",
+     "rel": "similar",
+     "text": "French elided *l’*, *d’*, *qu’* are only a partial parallel: they keep an apostrophe and do not stack as וּבַבַּיִת “and in the house” does."
+    }
+   ]
   },
   {
    "id": "he.orth.prefix-vowels",
@@ -481,7 +496,9 @@
    "record": "the spellings of each prefix (alts) and the form of the word after a prefix (PFX cells)",
    "model": {
     "wordFields": [
-     "alts"
+     "alts",
+     "allomorphs",
+     "withArticle"
     ],
     "paradigm": [
      "ADP;DEF",
@@ -496,7 +513,7 @@
      "fn.definite"
     ],
     "exercises": [],
-    "other": "alts on he:ve (וּ וַ), he:be, he:min; ADP;DEF / ADP;ALT cells on לְ; 43 nouns have a PFX cell (the noun after a prefix + article). The tokenizer accepts any listed spelling; nothing checks that the right one was chosen."
+    "other": "alts on he:ve (וּ וַ), he:be, he:min; ADP;DEF / ADP;ALT cells on לְ; 43 nouns have a PFX cell (the noun after a prefix + article). The tokenizer accepts any listed spelling; nothing checks that the right one was chosen. R3: allomorphs on the conjunctions (וּ / וִ) and withArticle on the prepositions (בַּ, לַ; מֵהַ)."
    },
    "status": "partial",
    "gap": "A rule or stored variants for every prefix (בְּ, כְּ, וְ, מִ, שֶׁ) and a check that a bank token uses the right one; a choose-the-prefix-vowel drill (vowelize).",
@@ -516,7 +533,7 @@
    ],
    "specific": true,
    "alsoIn": [],
-   "alsoNote": "Geresh/gershayim for acronyms, letter numerals and loan sounds are Hebrew conventions; Persian and Urdu add new dotted letters (پ چ ژ گ) instead.",
+   "alsoNote": "Geresh/gershayim for acronyms, letter numerals and loan sounds are Hebrew conventions; other languages written in the Arabic script add new dotted letters (پ چ ژ گ) instead.",
    "what": "The geresh ׳ and the gershayim ״ mark abbreviations and acronyms (צה״ל, read as a word), letters used as numbers (ט״ו), and — on ג ז צ — the sounds [dʒ], [ʒ] and [tʃ] of loanwords (ג׳ ז׳ צ׳), for which the alphabet has no letter. The maqaf ־ is a high hyphen that joins words, above all the two nouns of a construct pair in vocalized texts. The other punctuation marks are the common Latin-script ones (. , ? ! : and quotation marks).",
    "examples": [
     {
@@ -566,7 +583,7 @@
     "fa",
     "ur"
    ],
-   "alsoNote": "Competing romanizations that hide letters with the same sound exist for Arabic, Persian and Urdu; other non-Latin scripts (ru, el, hi) also have several systems, but the tagged value (one script) occurs in Latin-script languages that have no such problem.",
+   "alsoNote": "Competing romanizations that hide letters with the same sound exist for Arabic and for other languages written in the Arabic script; other non-Latin scripts also have several systems, but the tagged value (one script) occurs in Latin-script languages that have no such problem.",
    "what": "Hebrew is romanized in several ways (ch / kh / h for ח and כ, ' or nothing for א and ע, e or ei for ֵי). A learner relying on transliteration must know that one sound can be spelled several ways and that the Latin spelling hides the difference between letters that sound alike.",
    "examples": [
     {
@@ -1186,7 +1203,7 @@
     "fa",
     "ur"
    ],
-   "alsoNote": "Persian and Urdu have the same kind of merged Arabic letters (ث س ص = s, ت ط = t, ح ه = h, ء ع); Greek has several letters and digraphs for one sound (ι η υ ει οι = i, ο ω = o). English and French spelling are partial parallels.",
+   "alsoNote": "Other languages written in the Arabic script have the same kind of merged letters (ث س ص = s, ت ط = t, ح ه = h, ء ع); some alphabetic spellings also use several letters for one sound.",
    "what": "Because old sound distinctions merged, several letters now share one sound: א and ע (glottal stop or silent), ב and ו (v), ח and כ ([χ]), ט and ת (t), כּ and ק (k), ס and שׂ (s). The once pharyngeal ח and ע and the once 'emphatic' ט and ק are now plain consonants. The spelling of every word must therefore be learned with the word; related words in other Semitic languages, which often keep these sounds apart, can show which letter is right.",
    "examples": [
     {
@@ -1216,7 +1233,24 @@
    },
    "status": "missing",
    "gap": "A script page on homophonous letters, the spell exercise with letter-level feedback (§6.1), and cognate hints from Arabic (bridges).",
-   "when": "fd.00 → P4"
+   "when": "fd.00 → P4",
+   "notes": [
+    {
+     "for": "el",
+     "rel": "similar",
+     "text": "Greek spelling has the same problem: several letters and digraphs for one sound (*ι η υ ει οι* = i, *ο ω* = o), learned word by word — as ט / ת or כּ / ק are in Hebrew."
+    },
+    {
+     "for": "en",
+     "rel": "similar",
+     "text": "English spelling is a partial parallel: one sound often has several spellings (*c* / *k* in *cat*, *kit*), learned word by word, as כּ / ק are."
+    },
+    {
+     "for": "fr",
+     "rel": "similar",
+     "text": "French spelling is a partial parallel: one sound has several spellings (*o*, *au*, *eau*), learned word by word, as ט / ת are."
+    }
+   ]
   },
   {
    "id": "he.phon.begadkefat",
@@ -1236,7 +1270,7 @@
    ],
    "specific": true,
    "alsoIn": [],
-   "alsoNote": "A hard/soft alternation of b k p written with a dot is specific to Hebrew; Spanish has postvocalic softening of b d g only as allophones, never spelled.",
+   "alsoNote": "A hard/soft alternation of b k p written with a dot is specific to Hebrew; elsewhere such softening is at most an unwritten variation of pronunciation.",
    "what": "ב כ פ have two sounds: hard (with dagesh) b k p, soft v kh f. The soft sound appears after a vowel, so the same root letter alternates inside one paradigm and after a prefix: כָּתַב / יִכְתֹּב, בַּיִת / בְּבַיִת. Loanwords usually keep their hard sound (בַּפַּארְק “in the park”), and colloquial speech levels some alternations.",
    "examples": [
     {
@@ -1272,7 +1306,14 @@
    },
    "status": "partial",
    "gap": "A phonology page with the rule and its exceptions (loanwords, colloquial levelling), and a transliterate/reading drill that checks b/v, k/kh, p/f.",
-   "when": "fd.00, fd.07"
+   "when": "fd.00, fd.07",
+   "notes": [
+    {
+     "for": "es",
+     "rel": "similar",
+     "text": "Spanish softens *b*, *d*, *g* between vowels (*lobo*, *nada*, *lago*), but only as a variation of sound, never written.\n\nIn Hebrew בּ / ב, כּ / כ, פּ / פ are different sounds that change within one word's forms:\n→ כָּתַב katav — יִכְתֹּב yikhtov"
+    }
+   ]
   },
   {
    "id": "he.phon.no-mutation",
@@ -1970,7 +2011,8 @@
    "record": "gender: MASC or FEM",
    "model": {
     "wordFields": [
-     "gender"
+     "gender",
+     "genderCue"
     ],
     "paradigm": [],
     "grammar": [
@@ -1981,7 +2023,7 @@
      "gender_article",
      "quiz"
     ],
-    "other": "gender required on every noun by the validator (GENDERED_NOUNS); 258 nouns carry it; gender_article drills it."
+    "other": "gender required on every noun by the validator (GENDERED_NOUNS); 258 nouns carry it; gender_article drills it. R3: genderCue flags the nouns whose gender goes against the ending (עִיר, אֶרֶץ, כּוֹס, לַיְלָה)."
    },
    "status": "covered",
    "gap": "",
@@ -2024,7 +2066,8 @@
    "model": {
     "wordFields": [
      "gender",
-     "senses"
+     "senses",
+     "pair"
     ],
     "paradigm": [],
     "grammar": [
@@ -2034,10 +2077,10 @@
     "exercises": [
      "gender_article"
     ],
-    "other": "The two words are separate lexemes with the same concept (he:more / he:mora); their contrasts (axis “gender of the person”) link them. langcore principalParts looks for a cell N;SG;FEM;INDF that Hebrew lexemes never have, so the card shows the pair only through the concept."
+    "other": "The two words are separate lexemes with the same concept (he:more / he:mora); their contrasts (axis “gender of the person”) link them. langcore principalParts looks for a cell N;SG;FEM;INDF that Hebrew lexemes never have, so the card shows the pair only through the concept. R3: pair on every noun links the female / male counterpart (lexeme, and senses where a meaning has its own, בַּעַל ↔ אִשָּׁה)."
    },
    "status": "partial",
-   "gap": "The counterpart on the word card and a “make the feminine” drill.",
+   "gap": "A “make the feminine” drill.",
    "when": "fd.01, fd.10"
   },
   {
@@ -2082,7 +2125,8 @@
     "wordFields": [
      "plurals",
      "gender",
-     "class"
+     "class",
+     "pluralShape"
     ],
     "paradigm": [
      "N;PL;INDF",
@@ -2097,10 +2141,10 @@
      "principal_parts",
      "transform"
     ],
-    "other": "plurals on every noun: the form, its ending (im / ot: a mismatch with the gender is visible) and the meanings it belongs to, with a note where a meaning has its own plural or only the plural (16 nouns: כִּכָּרוֹת / כִּכְּרוֹת, נְיָרוֹת, בָּנִים, נְכָדִים …); none with the reason for mass, plural-only and month nouns. The cells N;PL;INDF / N;PL;DEF hold the forms; fn.plural.noun lists an “agree” generator, which langcore does not implement (ignored)."
+    "other": "plurals on every noun: the form, its ending (im / ot: a mismatch with the gender is visible) and the meanings it belongs to, with a note where a meaning has its own plural or only the plural (16 nouns: כִּכָּרוֹת / כִּכְּרוֹת, נְיָרוֹת, בָּנִים, נְכָדִים …); none with the reason for mass, plural-only and month nouns. The cells N;PL;INDF / N;PL;DEF hold the forms; fn.plural.noun lists an “agree” generator, which langcore does not implement (ignored). R3: pluralShape on every noun says what is irregular (the other gender’s ending, a segolate, a stem change, the plural of another word, compounds)."
    },
    "status": "partial",
-   "gap": "An irregular-stem flag to drive focused drills, and the agree generator.",
+   "gap": "The agree generator.",
    "when": "fd.05"
   },
   {
@@ -2143,7 +2187,10 @@
    "level": "word",
    "record": "carried by the stored forms",
    "model": {
-    "wordFields": [],
+    "wordFields": [
+     "pluralShape",
+     "inflection"
+    ],
     "paradigm": [
      "N;PL;INDF",
      "ADJ;SG;FEM",
@@ -2156,7 +2203,7 @@
     "exercises": [
      "inflect"
     ],
-    "other": "All forms stored; the traps of fn.plural.noun and fn.adjective explain the shortening."
+    "other": "All forms stored; the traps of fn.plural.noun and fn.adjective explain the shortening. R3: pluralShape flags segolates and stem changes on every noun; inflection shows the adjective forms on the card."
    },
    "status": "covered",
    "gap": "",
@@ -2582,7 +2629,9 @@
    "level": "word",
    "record": "possSuffix: everyday / formal / none, with the N;POSS cells (and N;PL;POSS for countable nouns)",
    "model": {
-    "wordFields": [],
+    "wordFields": [
+     "possessive"
+    ],
     "paradigm": [
      "N;POSS;1;SG",
      "N;POSS;2;SG;MASC",
@@ -2595,10 +2644,10 @@
      "inflect",
      "transform"
     ],
-    "other": "13 nouns have the 10 N;POSS cells (singular only); the bank has a Formality variant (שֶׁלִּי ↔ suffix)."
+    "other": "13 nouns have the 10 N;POSS cells (singular only); the bank has a Formality variant (שֶׁלִּי ↔ suffix). R3: possessive on every noun — the 1st-person forms (SG and PL, from the paradigm or Wiktionary’s tables) with their register (everyday for family words, formal otherwise), or none with the reason (loans, mass nouns, compounds, literary only)."
    },
    "status": "partial",
-   "gap": "Plural-possessed forms (אַחַי “my brothers”, יְלָדַי), a register value per noun saying whether the suffix is used in speech, and the possessed forms of more nouns for reading.",
+   "gap": "The possessed forms of more nouns for reading (only the 1st person is stated outside the family words).",
    "when": "fd.06"
   },
   {
@@ -2658,7 +2707,7 @@
     "ga",
     "cy"
    ],
-   "alsoNote": "Arabic (لي، بك، عليه), Irish (agam, liom) and Welsh (ataf, arnaf) inflect prepositions for person. Hungarian personal forms of postpositions and case endings (nekem, velem) are a partial parallel.",
+   "alsoNote": "Arabic (لي، بك، عليه) inflects prepositions for person the same way; a few other languages have personal forms of prepositions, postpositions or case endings too.",
    "what": "Prepositions take personal endings instead of a pronoun: לִי “to me”, בִּשְׁבִילִי “for me”. Some change their stem (עִם → אִתִּי “with me”, מִן → מִמֶּנִּי “from me, than me”, אֶת → אוֹתִי “me”), and some take the plural-noun endings (עַל → עָלַי, לִפְנֵי → לְפָנַי).",
    "examples": [
     {
@@ -2687,7 +2736,8 @@
    "model": {
     "wordFields": [
      "pronForms",
-     "class"
+     "class",
+     "suffixSet"
     ],
     "paradigm": [
      "ADP;1;SG",
@@ -2703,7 +2753,7 @@
     "exercises": [
      "inflect"
     ],
-    "other": "16 of 31 prepositions state their 10 forms with personal endings (from Wiktionary’s tables: אִתִּי, מִמֶּנִּי, אוֹתִי, עָלַי …); the others say none (שֶׁלִּי … are themselves such forms; time words). Only לְ (class ADP.suffixed) has them as paradigm cells; שֶׁל’s forms are 10 separate lexemes."
+    "other": "16 of 31 prepositions state their 10 forms with personal endings (from Wiktionary’s tables: אִתִּי, מִמֶּנִּי, אוֹתִי, עָלַי …); the others say none (שֶׁלִּי … are themselves such forms; time words). Only לְ (class ADP.suffixed) has them as paradigm cells; שֶׁל’s forms are 10 separate lexemes. R3: suffixSet says which endings a preposition takes (singular-noun, plural-noun, mixed, own stem)."
    },
    "status": "partial",
    "gap": "The forms are facade data, not paradigm cells: the tokenizer does not read אִתִּי, אוֹתוֹ, מִמֶּנּוּ yet, and there are no inflect drills.",
@@ -2729,7 +2779,7 @@
    ],
    "specific": true,
    "alsoIn": [],
-   "alsoNote": "A present tense that is an old participle, inflected only for gender and number, is Hebrew's own; the Russian and Ukrainian past (ел, ела, ели) works the same way in another tense, and Hindi-Urdu participle tenses agree in gender and number but add an auxiliary for person.",
+   "alsoNote": "A present tense that is an old participle, inflected only for gender and number, is Hebrew's own; elsewhere such a form is found at most in another tense.",
    "what": "The present tense is an old participle and changes like an adjective, for gender and number only: אוֹכֵל, אוֹכֶלֶת, אוֹכְלִים, אוֹכְלוֹת. אֲנִי, אַתָּה and הוּא share one form, so the subject pronoun is required.",
    "examples": [
     {
@@ -2742,7 +2792,8 @@
    "record": "the four V;PRS cells",
    "model": {
     "wordFields": [
-     "binyan"
+     "binyan",
+     "present"
     ],
     "paradigm": [
      "V;PRS;SG;MASC",
@@ -2757,11 +2808,23 @@
      "inflect",
      "transform"
     ],
-    "other": "Required cells for every VERB (paradigmCells); bank variants Gender, Number, Addressee."
+    "other": "Required cells for every VERB (paradigmCells); bank variants Gender, Number, Addressee. R3: present (m. sg) on the card."
    },
    "status": "covered",
    "gap": "",
-   "when": "fd.07"
+   "when": "fd.07",
+   "notes": [
+    {
+     "for": "ru",
+     "rel": "similar",
+     "text": "The Russian past works the same way in another tense: an old participle that agrees in gender and number, not in person (*ел, ела, ели*) — like אוֹכֵל, אוֹכֶלֶת, אוֹכְלִים in the Hebrew present."
+    },
+    {
+     "for": "hi",
+     "rel": "similar",
+     "text": "Hindi participle tenses also agree in gender and number (*खाता, खाती, खाते*) but add है / हैं for the person; the Hebrew present has no auxiliary:\n→ אֲנִי אוֹכֵל"
+    }
+   ]
   },
   {
    "id": "he.morph.past",
@@ -2890,7 +2953,7 @@
     "ar",
     "am"
    ],
-   "alsoNote": "Arabic and Amharic mark person with the same prefixes (ʔ- t- y- n-), with one form for 'you (m.)' and 'she'; there the prefix conjugation is the imperfect / non-past, not a future only.",
+   "alsoNote": "Arabic marks person with the same prefixes (ʔ- t- y- n-), with one form for 'you (m.)' and 'she'; there the prefix conjugation is the imperfect / non-past, not a future only.",
    "what": "The future marks the person with prefixes (א־, ת־, י־, נ־) and some endings. The same form serves “you (m.)” and “she” (תֹּאכַל). It is also the everyday form of commands and requests, it follows אַל in prohibitions, and it is used after כְּשֶׁ / אִם for future events. The feminine plural forms (תֵּלַכְנָה) are literary; speech uses the masculine plural.",
    "examples": [
     {
@@ -2952,7 +3015,7 @@
    "alsoIn": [
     "ar"
    ],
-   "alsoNote": "Arabic also forms the imperative by dropping the prefix of the prefix conjugation and negates commands with لا + jussive. Spanish and Greek prohibitions with a non-imperative form (no vayas, μην πας) are a partial parallel.",
+   "alsoNote": "Arabic also forms the imperative by dropping the prefix of the prefix conjugation and negates commands with لا + jussive.",
    "what": "The imperative is the future without its prefix (תֵּלֵךְ → לֵךְ!), with forms for a man, a woman and a group. In speech the future itself is often the command and sounds softer. A prohibition is אַל + future, never the imperative; signs use the infinitive (לֹא לְהִכָּנֵס “no entry”).",
    "examples": [
     {
@@ -2975,7 +3038,8 @@
    "record": "the V;IMP cells (2 sg m, 2 sg f, 2 pl)",
    "model": {
     "wordFields": [
-     "role"
+     "role",
+     "imperative"
     ],
     "paradigm": [
      "V;IMP;2;SG;MASC",
@@ -2992,11 +3056,23 @@
      "transform",
      "quiz"
     ],
-    "other": "15 verbs store imperative and 2nd-person future cells; he:al-imp (אַל) has a role; bank variants Mood, Polarity, Formality, Addressee."
+    "other": "15 verbs store imperative and 2nd-person future cells; he:al-imp (אַל) has a role; bank variants Mood, Polarity, Formality, Addressee. R3: imperative on every verb (3 forms, or none with the reason)."
    },
    "status": "covered",
    "gap": "",
-   "when": "fd.13"
+   "when": "fd.13",
+   "notes": [
+    {
+     "for": "es",
+     "rel": "similar",
+     "text": "Spanish also forbids with a form other than the imperative (*no vayas*, not *ve*) — a partial parallel to אַל + the future:\n→ אַל תֵּלֵךְ"
+    },
+    {
+     "for": "el",
+     "rel": "similar",
+     "text": "Greek also forbids with a form other than the imperative (*μην πας*) — a partial parallel to אַל + the future:\n→ אַל תֵּלֵךְ"
+    }
+   ]
   },
   {
    "id": "he.morph.infinitive",
@@ -3028,7 +3104,9 @@
    "level": "word",
    "record": "V;NFIN",
    "model": {
-    "wordFields": [],
+    "wordFields": [
+     "infinitive"
+    ],
     "paradigm": [
      "V;NFIN"
     ],
@@ -3040,7 +3118,7 @@
      "inflect",
      "principal_parts"
     ],
-    "other": "V;NFIN is a required cell of every verb."
+    "other": "V;NFIN is a required cell of every verb. R3: infinitive on the card."
    },
    "status": "covered",
    "gap": "",
@@ -3183,15 +3261,16 @@
    "model": {
     "wordFields": [
      "binyan",
-     "root"
+     "root",
+     "related"
     ],
     "paradigm": [],
     "grammar": [],
     "exercises": [],
-    "other": "binyan is recorded but not its relation to other verbs."
+    "other": "binyan is recorded but not its relation to other verbs. R3: related on every verb — the same-root verbs in other binyanim with the relation (passive, causative, transitive / intransitive partner, “become”), from the course and Wiktionary’s “passive counterpart”."
    },
-   "status": "missing",
-   "gap": "Relation links between verbs of one root, a function for voice (passive) and the reflexive (cr.07), and root_pattern drills.",
+   "status": "partial",
+   "gap": "A function for voice (passive) and the reflexive (cr.07), and root_pattern drills.",
    "when": "cr.03, cr.07, later"
   },
   {
@@ -3425,7 +3504,8 @@
    "record": "the 8 ADJ cells",
    "model": {
     "wordFields": [
-     "class"
+     "class",
+     "inflection"
     ],
     "paradigm": [
      "ADJ;SG;MASC",
@@ -3443,7 +3523,7 @@
      "inflect",
      "transform"
     ],
-    "other": "Required 8 cells for every ADJ; class ADJ.inv for בְּסֵדֶר."
+    "other": "Required 8 cells for every ADJ; class ADJ.inv for בְּסֵדֶר. R3: inflection (f. sg, m. pl, f. pl) on the card."
    },
    "status": "covered",
    "gap": "",
@@ -3744,7 +3824,10 @@
    "record": "the gender forms and construct forms of each number (class gender / two / const / dual)",
    "model": {
     "wordFields": [
-     "class"
+     "class",
+     "agreement",
+     "genderForms",
+     "construct"
     ],
     "paradigm": [
      "NUM;MASC",
@@ -3762,7 +3845,7 @@
      "transform",
      "quiz"
     ],
-    "other": "language.json classes NUM.gender, NUM.two, NUM.const, NUM.dual with their cells; fn.numerals with traps; bank variants Gender, Definiteness."
+    "other": "language.json classes NUM.gender, NUM.two, NUM.const, NUM.dual with their cells; fn.numerals with traps; bank variants Gender, Definiteness. R3: agreement (agrees / reversed endings / one form), genderForms and construct on every number."
    },
    "status": "partial",
    "gap": "The colloquial levelling to feminine forms is not described (register note); the number_words drill (digits ↔ words) is not implemented.",
@@ -4122,7 +4205,7 @@
     "fa",
     "tr"
    ],
-   "alsoNote": "Persian را and the Turkish accusative mark only definite / specific direct objects, as אֶת does; Hindi-Urdu को and Spanish personal a mark objects partly by animacy (partial).",
+   "alsoNote": "Some languages likewise mark only definite / specific direct objects, as אֶת does; others mark objects partly by animacy.",
    "what": "A definite direct object is introduced by אֶת, a word with no meaning of its own: הוּא אוֹכֵל אֶת הַתַּפּוּחַ, but הוּא אוֹכֵל תַּפּוּחַ. With a pronoun it becomes אוֹתִי, אוֹתְךָ, אוֹתוֹ … The subject of a transitive verb and of an intransitive verb are treated alike (no marker, verb agreement); only the definite object is marked.",
    "examples": [
     {
@@ -4140,7 +4223,8 @@
    "record": null,
    "model": {
     "wordFields": [
-     "role"
+     "role",
+     "object"
     ],
     "paradigm": [],
     "grammar": [
@@ -4152,11 +4236,28 @@
      "build_sentence",
      "sentence_meaning"
     ],
-    "other": "he:et (role); fn.object with a Definiteness variant in the bank."
+    "other": "he:et (role); fn.object with a Definiteness variant in the bank. R3: the personal pronouns state their object form (object: אוֹתִי …)."
    },
    "status": "partial",
-   "gap": "The pronoun forms אוֹתִי … אוֹתָן are not stored (see he.morph.prep-suffix); the colloquial אֶת after יֵשׁ (יֵשׁ לִי אֶת הַסֵּפֶר) is mentioned only as non-standard.",
-   "when": "fd.07"
+   "gap": "The colloquial אֶת after יֵשׁ (יֵשׁ לִי אֶת הַסֵּפֶר) is mentioned only as non-standard.",
+   "when": "fd.07",
+   "notes": [
+    {
+     "for": "tr",
+     "rel": "same",
+     "text": "Like the Turkish accusative, אֶת marks only a definite object.\n→ *kitabı okudum* — קָרָאתִי אֶת הַסֵּפֶר\n→ *kitap okudum* — קָרָאתִי סֵפֶר"
+    },
+    {
+     "for": "hi",
+     "rel": "similar",
+     "text": "Hindi को marks objects partly by animacy and definiteness — a partial parallel; אֶת depends on definiteness alone (אֶת דָּנִי, אֶת הַסֵּפֶר)."
+    },
+    {
+     "for": "es",
+     "rel": "similar",
+     "text": "The personal *a* (*veo a María*) is a partial parallel: אֶת marks every definite object, a person or a thing (אֶת מִרְיָם, אֶת הַסֵּפֶר)."
+    }
+   ]
   },
   {
    "id": "he.syntax.word-order",
@@ -4487,7 +4588,7 @@
     "uk",
     "pl"
    ],
-   "alsoNote": "Russian, Ukrainian and Polish have the same three constructions: a subjectless 3rd person plural ('they say'), a dative experiencer with an invariable predicative (мне холодно, zimno mi) and impersonal modals + infinitive (надо, можно, trzeba). German mir ist kalt is a partial parallel.",
+   "alsoNote": "Some languages have the same three constructions: a subjectless 3rd person plural ('they say'), a dative experiencer with an invariable predicative and impersonal modals + infinitive. German mir ist kalt is a partial parallel.",
    "what": "A masculine plural verb without subject means “people, one” (קוֹרְאִים לִי דָּנָה “my name is Dana”). Feelings and states take לְ + the person and an unchanging masculine singular adjective (קַר לִי “I'm cold”, קָשֶׁה לִי “it's hard for me”). Modals such as צָרִיךְ, אֶפְשָׁר, אָסוּר + infinitive are impersonal too.",
    "examples": [
     {
@@ -4524,7 +4625,14 @@
    },
    "status": "partial",
    "gap": "A note or function on impersonal constructions, the dative-experiencer use marked on the adjectives that allow it, and the modals (cr.04).",
-   "when": "fd.16, cr.04"
+   "when": "fd.16, cr.04",
+   "notes": [
+    {
+     "for": "ru",
+     "rel": "same",
+     "text": "Russian has the same three constructions:\n- a subjectless 3rd person plural: *говорят* — אוֹמְרִים\n- a dative experiencer with an invariable word: *мне холодно* — קַר לִי\n- impersonal modals + infinitive: *надо*, *можно* — צָרִיךְ, אֶפְשָׁר"
+    }
+   ]
   },
   {
    "id": "he.syntax.relative",
@@ -4549,7 +4657,7 @@
     "ar",
     "fa"
    ],
-   "alsoNote": "Arabic and Persian also take a resumptive pronoun inside the relative clause; the Arabic relativizer agrees (الذي، التي) and is left out after an indefinite head.",
+   "alsoNote": "Arabic also takes a resumptive pronoun inside the relative clause; its relativizer agrees (الذي، التي) and is left out after an indefinite head.",
    "what": "Relative clauses start with the invariable שֶׁ (formal אֲשֶׁר). When the noun is not the subject or object, a pronoun points back to it inside the clause: הַבַּיִת שֶׁאֲנִי גָּר בּוֹ “the house I live in (it)”. Prepositions are never left at the end.",
    "examples": [
     {
@@ -4692,7 +4800,8 @@
    "record": null,
    "model": {
     "wordFields": [
-     "prefix"
+     "prefix",
+     "tense"
     ],
     "paradigm": [],
     "grammar": [
@@ -4703,7 +4812,7 @@
      "transform",
      "quiz"
     ],
-    "other": "fn.connectors with traps and bank sentences."
+    "other": "fn.connectors with traps and bank sentences. R3: tense on every subordinating conjunction (the future after כְּשֶׁ / אִם)."
    },
    "status": "covered",
    "gap": "",
@@ -5453,7 +5562,8 @@
    "record": null,
    "model": {
     "wordFields": [
-     "class"
+     "class",
+     "nounAfter"
     ],
     "paradigm": [
      "PRON;1;PL",
@@ -5463,7 +5573,7 @@
     "exercises": [
      "inflect"
     ],
-    "other": "he:kol senses (all / every / any); he:kulam with class PRON.all; no grammar function teaches the definiteness rule."
+    "other": "he:kol senses (all / every / any); he:kulam with class PRON.all; no grammar function teaches the definiteness rule. R3: nounAfter on every determiner states the כָּל הַ… / כָּל … rule."
    },
    "status": "partial",
    "gap": "A short rule (fn.numerals or a quantifier note) and bank sentences contrasting כָּל הַ… / כָּל ….",
@@ -5657,7 +5767,7 @@
    ],
    "specific": true,
    "alsoIn": [],
-   "alsoNote": "The particular polysemies are Hebrew's own; German bitte and Russian пожалуйста also mean both 'please' and 'you're welcome'.",
+   "alsoNote": "The particular polysemies are Hebrew's own; German bitte also means both 'please' and 'you're welcome'.",
    "what": "Many basic words cover several concepts: אָח is a brother and a male nurse, בַּעַל a husband and an owner, בְּבַקָּשָׁה both “please” and “you're welcome”. The unvocalized script adds homographs on top. See “polysemy” for the course words.",
    "examples": [
     {
@@ -5686,7 +5796,14 @@
    },
    "status": "partial",
    "gap": "sense_pick from profile examples labelled by sense.",
-   "when": "every lesson"
+   "when": "every lesson",
+   "notes": [
+    {
+     "for": "ru",
+     "rel": "same",
+     "text": "*Пожалуйста* also means both “please” and “you’re welcome”, like בְּבַקָּשָׁה."
+    }
+   ]
   },
   {
    "id": "he.lex.register",
@@ -5709,7 +5826,7 @@
    "alsoIn": [
     "el"
    ],
-   "alsoNote": "Modern Greek likewise keeps learned words of older stages beside everyday ones within one standard (ύδωρ / νερό, οίκος / σπίτι). Russian Church Slavonic doublets (глава / голова) and English Latinate words are partial parallels.",
+   "alsoNote": "Some languages likewise keep learned words of older stages beside everyday ones within one standard.",
    "what": "Modern Hebrew is one standard language — speech and writing share the same grammar — but it keeps Biblical and Mishnaic words beside everyday ones, so many concepts have a formal and an everyday word: אִמָּא / אֵם, לָמָּה / מַדּוּעַ, פֹּה / כָּאן, קוֹרְאִים לִי / שְׁמִי, אֲנִי לֹא / אֵינֶנִּי. Writing, news and formal speech use the formal layer much more than conversation.",
    "examples": [
     {
@@ -5745,7 +5862,24 @@
    },
    "status": "partial",
    "gap": "register_pick (§6.2) is not implemented; the inflected formal negation אֵינִי / אֵינוֹ … is recorded on אֵין (meaningForms) but not stored as cells.",
-   "when": "fd.02 and every lesson"
+   "when": "fd.02 and every lesson",
+   "notes": [
+    {
+     "for": "el",
+     "rel": "same",
+     "text": "Greek likewise keeps learned words of older stages beside everyday ones (*ύδωρ / νερό*, *οίκος / σπίτι*), as Hebrew has אֵם beside אִמָּא and מַדּוּעַ beside לָמָּה."
+    },
+    {
+     "for": "ru",
+     "rel": "similar",
+     "text": "Church Slavonic doublets (*глава / голова*) are a partial parallel to Hebrew’s formal and everyday pairs (אֵם / אִמָּא)."
+    },
+    {
+     "for": "en",
+     "rel": "similar",
+     "text": "Latinate words beside native ones (*commence / begin*) are a partial parallel to Hebrew’s formal and everyday pairs (מַדּוּעַ / לָמָּה)."
+    }
+   ]
   },
   {
    "id": "he.lex.loans-slang",
@@ -5765,7 +5899,7 @@
    ],
    "specific": true,
    "alsoIn": [],
-   "alsoNote": "The mix of loans and slang is Hebrew's own; Arabic speakers recognise the Arabic slang (יאללה, סבבה), Russian and English speakers some of the rest.",
+   "alsoNote": "The mix of loans and slang is Hebrew's own; Arabic speakers recognise the Arabic slang (יאללה, סבבה).",
    "what": "Everyday Hebrew is full of international loans (סְטוּדֶנְט, טֶלֶפוֹן, אוֹטוֹבּוּס) and slang from Arabic, Yiddish, English and Russian: יאללה “come on!” comes from Arabic. Loans keep their foreign sounds (no b/v alternation) and usually have no Semitic root.",
    "examples": [
     {
@@ -5793,7 +5927,19 @@
    },
    "status": "partial",
    "gap": "bridges.json (cognates and loans across the course and known languages, §4.10) and slang lexemes with register.",
-   "when": "fd.01 → later"
+   "when": "fd.01 → later",
+   "notes": [
+    {
+     "for": "ru",
+     "rel": "similar",
+     "text": "You will recognise some slang from Russian:\n→ חלטורה (*халтура*, a job on the side), צ'ייניק (*чайник*, a clueless beginner)"
+    },
+    {
+     "for": "en",
+     "rel": "similar",
+     "text": "You will recognise most international loans (סְטוּדֶנְט, טֶלֶפוֹן) and many newer ones from English, such as אימייל “e-mail”."
+    }
+   ]
   },
   {
    "id": "he.lex.construct-compounds",
@@ -6091,7 +6237,7 @@
     {
      "for": "branch:Semitic",
      "rel": "same",
-     "text": "If your language is Semitic, you will recognise thousands of Hebrew roots, often through regular sound correspondences: שָׁלוֹם, בַּיִת, יוֹם, אָכַל."
+     "text": "If your language is Semitic, you will recognise thousands of Hebrew roots, often through regular sound correspondences:\n→ שָׁלוֹם, בַּיִת, יוֹם, אָכַל"
     },
     {
      "for": "am",
@@ -6163,7 +6309,7 @@
     "el",
     "it"
    ],
-   "alsoNote": "Russian (синий / голубой), Ukrainian (синій / блакитний), Greek (μπλε / γαλάζιο) and Italian (blu / azzurro) also have a separate basic word for light blue; the tag captures only green vs blue.",
+   "alsoNote": "Some languages also have a separate basic word for light blue; the tag captures only green vs blue.",
    "what": "Green (יָרֹק) and blue (כָּחֹל) are separate basic colour words, and light (sky) blue has its own everyday word, תְּכֵלֶת: the colours of the flag are כָּחֹל־לָבָן, while the sky is תְּכֵלֶת.",
    "examples": [
     {
@@ -6185,7 +6331,24 @@
    },
    "status": "partial",
    "gap": "A lexeme for תְּכֵלֶת in the colour field.",
-   "when": "fd.17"
+   "when": "fd.17",
+   "notes": [
+    {
+     "for": "ru",
+     "rel": "same",
+     "text": "Like *синий / голубой*, Hebrew has two basic words: כָּחֹל / תְּכֵלֶת."
+    },
+    {
+     "for": "el",
+     "rel": "same",
+     "text": "Like *μπλε / γαλάζιο*, Hebrew has two basic words: כָּחֹל / תְּכֵלֶת."
+    },
+    {
+     "for": "it",
+     "rel": "same",
+     "text": "Like *blu / azzurro*, Hebrew has two basic words: כָּחֹל / תְּכֵלֶת."
+    }
+   ]
   },
   {
    "id": "he.prag.gendered-address",
@@ -6399,7 +6562,7 @@
    ],
    "specific": true,
    "alsoIn": [],
-   "alsoNote": "The formulas themselves are Hebrew and Jewish; Arabic, Turkish, Persian and Greek have comparable occasion formulas (e.g. religious phrases in everyday Arabic, Turkish güle güle kullan or Greek με γεια for something new).",
+   "alsoNote": "The formulas themselves are Hebrew and Jewish; Arabic has comparable occasion formulas, many of them religious, in everyday speech.",
    "what": "Daily life is full of set phrases for occasions: שַׁבָּת שָׁלוֹם on Friday and Saturday, חַג שָׂמֵחַ for holidays, מַזָּל טוֹב “congratulations”, בְּתֵאָבוֹן “enjoy your meal”, לְחַיִּים “cheers”, רְפוּאָה שְׁלֵמָה “get well”, תִּתְחַדֵּשׁ / תִּתְחַדְּשִׁי for something new, and religious ones even in secular speech (בְּעֶזְרַת הַשֵּׁם, בָּרוּךְ הַשֵּׁם). Wishes are noun phrases or the ordinary future (תִּתְחַדֵּשׁ “may you renew yourself”), as there is no special wish form of the verb.",
    "examples": [
     {
@@ -6431,7 +6594,19 @@
    },
    "status": "partial",
    "gap": "A formulas group (with occasion, reply and addressee gender) and the register / dialogue_turn exercises.",
-   "when": "fd.02, later"
+   "when": "fd.02, later",
+   "notes": [
+    {
+     "for": "tr",
+     "rel": "similar",
+     "text": "Turkish has comparable occasion formulas: *güle güle kullan* for something new is close to תִּתְחַדֵּשׁ."
+    },
+    {
+     "for": "el",
+     "rel": "similar",
+     "text": "Greek has comparable occasion formulas: *με γεια* for something new is close to תִּתְחַדֵּשׁ."
+    }
+   ]
   },
   {
    "id": "he.prag.greeting-replies",

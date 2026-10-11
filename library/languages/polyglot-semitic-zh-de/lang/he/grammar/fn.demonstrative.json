@@ -263,57 +263,57 @@
   {
    "for": "el",
    "rel": "similar",
-   "text": "Greek also puts the article on the noun with a demonstrative (αυτό το βιβλίο); Hebrew puts it on both words and the demonstrative follows: הַסֵּפֶר הַזֶּה."
+   "text": "Greek also puts the article on the noun with a demonstrative (αυτό το βιβλίο); Hebrew puts it on both words and the demonstrative follows:\n→ הַסֵּפֶר הַזֶּה"
   },
   {
    "for": "ru",
    "rel": "different",
-   "text": "Russian это presents (это книга) and этот / эта / это points (эта книга) before the noun; Hebrew זֶה / זֹאת presents too, but pointing is noun + article + demonstrative: הַסֵּפֶר הַזֶּה."
+   "text": "Russian это presents (это книга) and этот / эта / это points (эта книга) before the noun; Hebrew זֶה / זֹאת presents too, but pointing is noun + article + demonstrative:\n→ הַסֵּפֶר הַזֶּה"
   },
   {
    "for": "es",
    "rel": "different",
-   "text": "Spanish este / esta / estos come before the noun without an article; Hebrew puts the demonstrative after the noun and gives both the article: הַבַּיִת הַזֶּה. Spanish also distinguishes ese and aquel; Hebrew has “this” and “that” only."
+   "text": "Spanish este / esta / estos come before the noun without an article; Hebrew puts the demonstrative after the noun and gives both the article:\n→ הַבַּיִת הַזֶּה\n\nSpanish also distinguishes ese and aquel; Hebrew has “this” and “that” only."
   },
   {
    "for": "en",
    "rel": "trap",
-   "text": "“This is a house” and “this house” look alike in English; in Hebrew they are different: זֶה בַּיִת is a sentence, הַבַּיִת הַזֶּה a phrase. And “that is …” is still זֶה."
+   "text": "“This is a house” and “this house” look alike in English; in Hebrew they are different: זֶה בַּיִת is a sentence, הַבַּיִת הַזֶּה a phrase.\n\nAnd “that is …” is still זֶה."
   },
   {
    "for": "fr",
    "rel": "different",
-   "text": "French ce / cette / ces stand before the noun (cette maison); Hebrew says “the house the-this”: הַבַּיִת הַזֶּה. For presenting, זֶה works like c’est."
+   "text": "French ce / cette / ces stand before the noun (cette maison); Hebrew says “the house the-this”:\n→ הַבַּיִת הַזֶּה\n\nFor presenting, זֶה works like c’est."
   },
   {
    "for": "de",
    "rel": "different",
-   "text": "German dieser / diese / dieses stand before the noun and change for case; Hebrew puts the demonstrative after the noun, with the article on both: הַבַּיִת הַזֶּה."
+   "text": "German dieser / diese / dieses stand before the noun and change for case; Hebrew puts the demonstrative after the noun, with the article on both:\n→ הַבַּיִת הַזֶּה"
   },
   {
    "for": "hi",
    "rel": "different",
-   "text": "Hindi यह / वह come before the noun (यह घर); Hebrew puts the demonstrative after the noun and adds the article twice: הַבַּיִת הַזֶּה."
+   "text": "Hindi यह / वह come before the noun (यह घर); Hebrew puts the demonstrative after the noun and adds the article twice:\n→ הַבַּיִת הַזֶּה"
   },
   {
    "for": "fa",
    "rel": "different",
-   "text": "Persian این / آن come before the noun (این خانه); Hebrew puts זֶה after the noun, both with the article: הַבַּיִת הַזֶּה."
+   "text": "Persian این / آن come before the noun (این خانه); Hebrew puts זֶה after the noun, both with the article:\n→ הַבַּיִת הַזֶּה"
   },
   {
    "for": "mr",
    "rel": "similar",
-   "text": "Marathi हा / ही / हे agree in gender like זֶה / זֹאת, but stand before the noun (हा मुलगा); in Hebrew the demonstrative follows the noun: הַיֶּלֶד הַזֶּה."
+   "text": "Marathi हा / ही / हे agree in gender like זֶה / זֹאת, but stand before the noun (हा मुलगा); in Hebrew the demonstrative follows the noun:\n→ הַיֶּלֶד הַזֶּה"
   },
   {
    "for": "ar",
    "rel": "different",
-   "text": "Arabic puts the demonstrative first, before a definite noun (هٰذَا الْبَيْتُ); Hebrew puts it after, and both words take the article: הַבַּיִת הַזֶּה."
+   "text": "Arabic puts the demonstrative first, before a definite noun (هٰذَا الْبَيْتُ); Hebrew puts it after, and both words take the article:\n→ הַבַּיִת הַזֶּה"
   },
   {
    "for": "tr",
    "rel": "different",
-   "text": "Turkish bu / şu / o come before the noun and have no gender (bu ev); Hebrew follows the noun and agrees with it: הַבַּיִת הַזֶּה, הַדִּירָה הַזֹּאת."
+   "text": "Turkish bu / şu / o come before the noun and have no gender (bu ev); Hebrew follows the noun and agrees with it:\n→ הַבַּיִת הַזֶּה, הַדִּירָה הַזֹּאת"
   },
   {
    "for": "ja",
@@ -323,7 +323,7 @@
   {
    "for": "ko",
    "rel": "different",
-   "text": "Korean 이 / 그 / 저 distinguish three distances and stand before the noun; Hebrew has two, after the noun: הַבַּיִת הַזֶּה, הַבַּיִת הַהוּא."
+   "text": "Korean 이 / 그 / 저 distinguish three distances and stand before the noun; Hebrew has two, after the noun:\n→ הַבַּיִת הַזֶּה, הַבַּיִת הַהוּא"
   },
   {
    "for": "fi",
@@ -333,22 +333,22 @@
   {
    "for": "sw",
    "rel": "similar",
-   "text": "Swahili also puts the demonstrative after the noun and makes it agree (kitabu hiki “this book”, vitabu hivi); Hebrew does the same with two genders: הַסֵּפֶר הַזֶּה, הַסְּפָרִים הָאֵלֶּה."
+   "text": "Swahili also puts the demonstrative after the noun and makes it agree (kitabu hiki “this book”, vitabu hivi); Hebrew does the same with two genders:\n→ הַסֵּפֶר הַזֶּה, הַסְּפָרִים הָאֵלֶּה"
   },
   {
    "for": "lg",
    "rel": "similar",
-   "text": "Luganda demonstratives also follow the noun and agree with its class (omuntu ono “this person”); Hebrew does the same with two genders and adds the article to both words: הָאִישׁ הַזֶּה."
+   "text": "Luganda demonstratives also follow the noun and agree with its class (omuntu ono “this person”); Hebrew does the same with two genders and adds the article to both words:\n→ הָאִישׁ הַזֶּה"
   },
   {
    "for": "zh",
    "rel": "different",
-   "text": "Chinese 这 / 那 come first and need a measure word (这本书); Hebrew needs no measure word and puts the demonstrative after the noun: הַסֵּפֶר הַזֶּה."
+   "text": "Chinese 这 / 那 come first and need a measure word (这本书); Hebrew needs no measure word and puts the demonstrative after the noun:\n→ הַסֵּפֶר הַזֶּה"
   },
   {
    "for": "vi",
    "rel": "similar",
-   "text": "Vietnamese also puts the demonstrative after the noun (cuốn sách này “this book”); Hebrew adds the article to both words and makes them agree: הַסֵּפֶר הַזֶּה, הַמְּנוֹרָה הַזֹּאת."
+   "text": "Vietnamese also puts the demonstrative after the noun (cuốn sách này “this book”); Hebrew adds the article to both words and makes them agree:\n→ הַסֵּפֶר הַזֶּה, הַמְּנוֹרָה הַזֹּאת"
   },
   {
    "for": "iu",
@@ -358,7 +358,7 @@
   {
    "for": "it",
    "rel": "different",
-   "text": "Italian questo / quello stand before the noun (questa casa); Hebrew puts the demonstrative after it, with the article on both: הַדִּירָה הַזֹּאת. To present, זֶה מוֹרֶה works like questo è un insegnante."
+   "text": "Italian questo / quello stand before the noun (questa casa); Hebrew puts the demonstrative after it, with the article on both:\n→ הַדִּירָה הַזֹּאת\n\nTo present, זֶה מוֹרֶה works like questo è un insegnante."
   },
   {
    "for": "pt",
@@ -368,7 +368,7 @@
   {
    "for": "sq",
    "rel": "similar",
-   "text": "Albanian ai / ajo / ata / ato mean both “he, she, they” and “that, those” — and Hebrew builds “that” from its pronouns too: הַהוּא, הַהִיא, הָהֵם, הָהֵן. But it puts them after the noun, with the article: הָאִשָּׁה הַהִיא “ajo grua”."
+   "text": "Albanian ai / ajo / ata / ato mean both “he, she, they” and “that, those” — and Hebrew builds “that” from its pronouns too:\n→ הַהוּא, הַהִיא, הָהֵם, הָהֵן\n\nBut it puts them after the noun, with the article:\n→ הָאִשָּׁה הַהִיא “ajo grua”"
   },
   {
    "for": "type:fusional",
@@ -393,7 +393,7 @@
   {
    "for": "branch:Semitic",
    "rel": "similar",
-   "text": "Semitic demonstratives commonly agree in gender and number. Hebrew puts them after a definite noun and repeats the article: הַבַּיִת הַזֶּה. If yours comes before the noun, reverse the order."
+   "text": "Semitic demonstratives commonly agree in gender and number.\n\n- Hebrew puts them after a definite noun and repeats the article:\n→ הַבַּיִת הַזֶּה\n- If yours comes before the noun, reverse the order."
   }
  ]
 }

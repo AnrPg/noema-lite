@@ -29,7 +29,31 @@
     "verbalNoun": "הִתְעוֹרְרוּת",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "present": "מִתְעוֹרֵר",
+    "infinitive": "לְהִתְעוֹרֵר",
+    "imperative": [
+     {
+      "cell": "V;IMP;2;SG;MASC",
+      "form": "הִתְעוֹרֵר"
+     },
+     {
+      "cell": "V;IMP;2;SG;FEM",
+      "form": "הִתְעוֹרְרִי"
+     },
+     {
+      "cell": "V;IMP;2;PL;MASC",
+      "form": "הִתְעוֹרְרוּ"
+     }
+    ],
+    "related": [
+     {
+      "form": "הֵעִיר",
+      "binyan": "hifil",
+      "relation": "transitive",
+      "note": "“woke (someone) up”"
+     }
+    ]
    },
    "forms": {
     "V;PST;1;SG": "הִתְעוֹרַרְתִּי",
@@ -160,7 +184,7 @@
      "An alarm clock is a שָׁעוֹן מְעוֹרֵר, literally “a waking clock” — the same root."
     ],
     "pitfalls": [
-     "הִתְעוֹרֵר is waking up yourself. Waking someone else is הֵעִיר: הִיא הֵעִירָה אוֹתִי “she woke me up”.",
+     "- הִתְעוֹרֵר is waking up yourself.\n- Waking someone else is הֵעִיר:\n→ הִיא הֵעִירָה אוֹתִי “she woke me up”",
      "The ר is written twice where an ending follows: הִתְעוֹרְרָה, מִתְעוֹרְרִים, הִתְעוֹרַרְתִּי."
     ],
     "subtleties": [
@@ -202,7 +226,31 @@
     "verbalNoun": "קִימָה",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "present": "קָם",
+    "infinitive": "לָקוּם",
+    "imperative": [
+     {
+      "cell": "V;IMP;2;SG;MASC",
+      "form": "קוּם"
+     },
+     {
+      "cell": "V;IMP;2;SG;FEM",
+      "form": "קוּמִי"
+     },
+     {
+      "cell": "V;IMP;2;PL;MASC",
+      "form": "קוּמוּ"
+     }
+    ],
+    "related": [
+     {
+      "form": "הֵקִים",
+      "binyan": "hifil",
+      "relation": "causative",
+      "note": "“raised, set up, founded”"
+     }
+    ]
    },
    "forms": {
     "V;PST;1;SG": "קַמְתִּי",
@@ -344,8 +392,8 @@
      "מָקוֹם “place” comes from the same root: the place where one stands."
     ],
     "pitfalls": [
-     "In the masculine singular the past and the present are the same word: קָם “got up” and “gets up”. The feminine קָמָה too — the past is stressed on the first syllable (KA-ma), the present on the last (ka-MA).",
-     "A hollow root: only two letters show in the past and present (קַמְתִּי, קָמִים); the ו comes back in the future, the imperative and the infinitive: יָקוּם, קוּם!, לָקוּם."
+     "- In the masculine singular the past and the present are the same word: קָם “got up” and “gets up”.\n- The feminine קָמָה too — the past is stressed on the first syllable (KA-ma), the present on the last (ka-MA).",
+     "A hollow root: only two letters show in the past and present (קַמְתִּי, קָמִים); the ו comes back in the future, the imperative and the infinitive:\n→ יָקוּם, קוּם!, לָקוּם"
     ],
     "subtleties": [
      "In formal style קָם also means “came into being, was founded”: קָמָה מְדִינָה “a state was founded”.",
@@ -380,7 +428,31 @@
     "verbalNoun": "רְחִיצָה",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "present": "רוֹחֵץ",
+    "infinitive": "לִרְחֹץ",
+    "imperative": [
+     {
+      "cell": "V;IMP;2;SG;MASC",
+      "form": "רְחַץ"
+     },
+     {
+      "cell": "V;IMP;2;SG;FEM",
+      "form": "רַחֲצִי"
+     },
+     {
+      "cell": "V;IMP;2;PL;MASC",
+      "form": "רַחֲצוּ"
+     }
+    ],
+    "related": [
+     {
+      "form": "הִתְרַחֵץ",
+      "binyan": "hitpael",
+      "relation": "reflexive",
+      "note": "“washed oneself, bathed”"
+     }
+    ]
    },
    "forms": {
     "V;PST;1;SG": "רָחַצְתִּי",
@@ -498,7 +570,7 @@
      "A beach with lifeguards is a חוֹף רַחְצָה, a “bathing beach” — the same root."
     ],
     "pitfalls": [
-     "Body parts are a bare object, often without the article and without “my”: רָחַצְתִּי יָדַיִם “I washed my hands”.",
+     "Body parts are a bare object, often without the article and without “my”:\n→ רָחַצְתִּי יָדַיִם “I washed my hands”",
      "Clothes are not רָחַץ but כִּבֵּס: כִּבַּסְתִּי בְּגָדִים “I did the laundry”.",
      "The ח takes a hataf vowel before an ending: רָחֲצָה, רוֹחֲצִים; and the future has a: יִרְחַץ."
     ],
@@ -534,7 +606,31 @@
     "verbalNoun": "הִתְקַלְּחוּת",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "present": "מִתְקַלֵּחַ",
+    "infinitive": "לְהִתְקַלֵּחַ",
+    "imperative": [
+     {
+      "cell": "V;IMP;2;SG;MASC",
+      "form": "הִתְקַלֵּחַ"
+     },
+     {
+      "cell": "V;IMP;2;SG;FEM",
+      "form": "הִתְקַלְּחִי"
+     },
+     {
+      "cell": "V;IMP;2;PL;MASC",
+      "form": "הִתְקַלְּחוּ"
+     }
+    ],
+    "related": [
+     {
+      "form": "קִלֵּחַ",
+      "binyan": "piel",
+      "relation": "transitive",
+      "note": "“gave (someone) a shower”"
+     }
+    ]
    },
    "forms": {
     "V;PST;1;SG": "הִתְקַלַּחְתִּי",
@@ -640,7 +736,7 @@
      "מִקְלַחַת is both the act (“a shower”) and the place (“the shower”): אֲנִי בַּמִּקְלַחַת “I’m in the shower”."
     ],
     "pitfalls": [
-     "The final ח takes a furtive patach: הִתְקַלֵּחַ is said hitkaléach; before the feminine ending the vowels change: מִתְקַלַּחַת.",
+     "The final ח takes a furtive patach: הִתְקַלֵּחַ is said hitkaléach; before the feminine ending the vowels change:\n→ מִתְקַלַּחַת",
      "Hitpa‘el, but it takes no object and no “oneself”: just הִתְקַלַּחְתִּי “I showered”."
     ],
     "subtleties": [
@@ -676,7 +772,37 @@
     "verbalNoun": "הִתְלַבְּשׁוּת",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "present": "מִתְלַבֵּשׁ",
+    "infinitive": "לְהִתְלַבֵּשׁ",
+    "imperative": [
+     {
+      "cell": "V;IMP;2;SG;MASC",
+      "form": "הִתְלַבֵּשׁ"
+     },
+     {
+      "cell": "V;IMP;2;SG;FEM",
+      "form": "הִתְלַבְּשִׁי"
+     },
+     {
+      "cell": "V;IMP;2;PL;MASC",
+      "form": "הִתְלַבְּשׁוּ"
+     }
+    ],
+    "related": [
+     {
+      "form": "הִלְבִּישׁ",
+      "binyan": "hifil",
+      "relation": "transitive",
+      "note": "“dressed (someone)”"
+     },
+     {
+      "form": "לָבַשׁ",
+      "binyan": "paal",
+      "relation": "basic",
+      "note": "“put on, wore (clothes)”"
+     }
+    ]
    },
    "forms": {
     "V;PST;1;SG": "הִתְלַבַּשְׁתִּי",
@@ -792,7 +918,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The whole family of clothes words: לָבַשׁ “put on”, הִתְלַבֵּשׁ “get dressed”, הִלְבִּישׁ “dress (someone)”, לְבוּשׁ “clothing”."
+     "The whole family of clothes words:\n→ לָבַשׁ “put on”, הִתְלַבֵּשׁ “get dressed”, הִלְבִּישׁ “dress (someone)”, לְבוּשׁ “clothing”"
     ],
     "pitfalls": [
      "No object: “I put on a coat” is לָבַשְׁתִּי מְעִיל, not הִתְלַבַּשְׁתִּי מְעִיל.",
@@ -842,7 +968,31 @@
     "verbalNoun": "הַתְחָלָה",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "present": "מַתְחִיל",
+    "infinitive": "לְהַתְחִיל",
+    "imperative": [
+     {
+      "cell": "V;IMP;2;SG;MASC",
+      "form": "הַתְחֵל"
+     },
+     {
+      "cell": "V;IMP;2;SG;FEM",
+      "form": "הַתְחִילִי"
+     },
+     {
+      "cell": "V;IMP;2;PL;MASC",
+      "form": "הַתְחִילוּ"
+     }
+    ],
+    "related": [
+     {
+      "form": "הֻתְחַל",
+      "binyan": "hufal",
+      "relation": "passive",
+      "note": "“was begun” (formal)"
+     }
+    ]
    },
    "forms": {
     "V;PST;1;SG": "הִתְחַלְתִּי",
@@ -1017,7 +1167,37 @@
     "verbalNoun": "סִיּוּם",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "present": "מְסַיֵּם",
+    "infinitive": "לְסַיֵּם",
+    "imperative": [
+     {
+      "cell": "V;IMP;2;SG;MASC",
+      "form": "סַיֵּם"
+     },
+     {
+      "cell": "V;IMP;2;SG;FEM",
+      "form": "סַיְּמִי"
+     },
+     {
+      "cell": "V;IMP;2;PL;MASC",
+      "form": "סַיְּמוּ"
+     }
+    ],
+    "related": [
+     {
+      "form": "הִסְתַּיֵּם",
+      "binyan": "hitpael",
+      "relation": "intransitive",
+      "note": "“ended, came to an end”"
+     },
+     {
+      "form": "סֻיַּם",
+      "binyan": "pual",
+      "relation": "passive",
+      "note": "“was finished” (formal)"
+     }
+    ]
    },
    "forms": {
     "V;PST;1;SG": "סִיַּמְתִּי",
@@ -1175,7 +1355,7 @@
      "A סִיּוּם is also the festive meal for finishing the study of a tractate of the Talmud."
     ],
     "pitfalls": [
-     "The י is a consonant and is doubled: סִיַּמְתִּי, מְסַיֵּם — in everyday spelling with two yods: סיימתי, מסיים.",
+     "The י is a consonant and is doubled: סִיַּמְתִּי, מְסַיֵּם — in everyday spelling with two yods:\n→ סיימתי, מסיים",
      "גָּמַר is just as common in speech, but it is also a vulgar word (Wiktionary): סִיֵּם is the safe choice in writing and with strangers.",
      "Finishing doing something takes the infinitive: סִיַּמְתִּי לֶאֱכֹל “I finished eating”."
     ],
@@ -1211,7 +1391,31 @@
     "verbalNoun": "הֵרָדְמוּת",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "present": "נִרְדָּם",
+    "infinitive": "לְהֵרָדֵם",
+    "imperative": [
+     {
+      "cell": "V;IMP;2;SG;MASC",
+      "form": "הֵרָדֵם"
+     },
+     {
+      "cell": "V;IMP;2;SG;FEM",
+      "form": "הֵרָדְמִי"
+     },
+     {
+      "cell": "V;IMP;2;PL;MASC",
+      "form": "הֵרָדְמוּ"
+     }
+    ],
+    "related": [
+     {
+      "form": "הִרְדִּים",
+      "binyan": "hifil",
+      "relation": "causative",
+      "note": "“put to sleep, anaesthetized”"
+     }
+    ]
    },
    "forms": {
     "V;PST;1;SG": "נִרְדַּמְתִּי",
@@ -1331,7 +1535,7 @@
     ],
     "pitfalls": [
      "Falling asleep is נִרְדַּם; being asleep is יָשֵׁן: הוּא נִרְדַּם בְּעֶשֶׂר וְיָשַׁן עַד שֶׁבַע.",
-     "The ר takes no dagesh, so the future and the infinitive have e under the prefix: תֵּרָדֵם, לְהֵרָדֵם (everyday spelling תירדם, להירדם)."
+     "The ר takes no dagesh, so the future and the infinitive have e under the prefix:\n→ תֵּרָדֵם, לְהֵרָדֵם (everyday spelling תירדם, להירדם)"
     ],
     "subtleties": [
      "Of a limb, נִרְדַּם is “went numb, fell asleep”: הָרֶגֶל שֶׁלִּי נִרְדְּמָה “my leg has gone to sleep”."
@@ -1365,6 +1569,25 @@
     "verbalNoun": "שֵׁנָה",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "present": "יָשֵׁן",
+    "infinitive": "לִישֹׁן",
+    "imperative": [
+     {
+      "cell": "V;IMP;2;SG;MASC",
+      "form": "יְשַׁן"
+     },
+     {
+      "cell": "V;IMP;2;SG;FEM",
+      "form": "יִשְׁנִי"
+     },
+     {
+      "cell": "V;IMP;2;PL;MASC",
+      "form": "יִשְׁנוּ"
+     }
+    ],
+    "related": {
+     "none": "no verb of another binyan from this root in everyday use (“put to sleep” is הִרְדִּים, from another root)"
     }
    },
    "forms": {
@@ -1486,7 +1709,7 @@
     "pitfalls": [
      "Three words, one spelling: unvocalized ישן is יָשַׁן “slept”, יָשֵׁן “sleeps, is asleep” and the adjective יָשָׁן “old” (lesson 16).",
      "In the 1st person plural the נ of the root and of the ending merge: יָשַׁנּוּ “we slept”.",
-     "The infinitive is לִישֹׁן (full spelling לישון), and the future keeps the י as a vowel letter: יִישַׁן, תִּישַׁן."
+     "The infinitive is לִישֹׁן (full spelling לישון), and the future keeps the י as a vowel letter:\n→ יִישַׁן, תִּישַׁן"
     ],
     "subtleties": [
      "The present יָשֵׁן, יְשֵׁנָה is also a state: הוּא יָשֵׁן “he is asleep”."

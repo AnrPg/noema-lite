@@ -430,7 +430,7 @@
   {
    "for": "el",
    "rel": "different",
-   "text": "Greek builds words from a stem plus endings and suffixes (γράφω, γράμμα, γραφείο); Hebrew pours three consonants into vowel patterns: א־כ־ל → אָכַל, אוֹכֵל, אֹכֶל."
+   "text": "Greek builds words from a stem plus endings and suffixes (γράφω, γράμμα, γραφείο); Hebrew pours three consonants into vowel patterns:\n→ א־כ־ל → אָכַל, אוֹכֵל, אֹכֶל"
   },
   {
    "for": "ru",
@@ -440,12 +440,12 @@
   {
    "for": "es",
    "rel": "different",
-   "text": "Spanish derives with suffixes (cocinar, cocina, cocinero); Hebrew changes the vowel pattern of the root ב־שׁ־ל: בִּשֵּׁל, מְבַשֵּׁל, בִּשּׁוּל."
+   "text": "Spanish derives with suffixes (cocinar, cocina, cocinero); Hebrew changes the vowel pattern of the root ב־שׁ־ל:\n→ בִּשֵּׁל, מְבַשֵּׁל, בִּשּׁוּל"
   },
   {
    "for": "en",
    "rel": "similar",
-   "text": "English sing – sang – song is a small taste of the idea: the consonants stay and the vowels change. In Hebrew this is the main way of making words."
+   "text": "English sing – sang – song is a small taste of the idea: the consonants stay and the vowels change.\n\nIn Hebrew this is the main way of making words."
   },
   {
    "for": "fr",
@@ -455,7 +455,7 @@
   {
    "for": "de",
    "rel": "similar",
-   "text": "German singen – sang – gesungen – Gesang changes vowels inside a frame of consonants, as Hebrew does everywhere: אָכַל, אוֹכֵל, אֹכֶל."
+   "text": "German singen – sang – gesungen – Gesang changes vowels inside a frame of consonants, as Hebrew does everywhere:\n→ אָכַל, אוֹכֵל, אֹכֶל"
   },
   {
    "for": "hi",
@@ -475,17 +475,17 @@
   {
    "for": "tr",
    "rel": "different",
-   "text": "Turkish keeps the stem and adds suffixes in a row (yaz-, yazar, yazı); Hebrew changes the vowels inside a root and adds letters around it (כ־ת־ב: כָּתַב, כְּתָב, מִכְתָּב). The Arabic loans kitap, katip, mektup come from the same root."
+   "text": "Turkish keeps the stem and adds suffixes in a row (yaz-, yazar, yazı); Hebrew changes the vowels inside a root and adds letters around it (כ־ת־ב: כָּתַב, כְּתָב, מִכְתָּב).\n\nThe Arabic loans kitap, katip, mektup come from the same root."
   },
   {
    "for": "ja",
    "rel": "different",
-   "text": "Japanese builds words with suffixes and compounds (食べる, 食べ物); Hebrew changes the vowels around a root: אָכַל “he ate”, אֹכֶל “food”."
+   "text": "Japanese builds words with suffixes and compounds (食べる, 食べ物); Hebrew changes the vowels around a root:\n→ אָכַל “he ate”, אֹכֶל “food”"
   },
   {
    "for": "ko",
    "rel": "different",
-   "text": "Korean adds endings to an unchanging stem (먹다, 먹어요); Hebrew keeps only the consonants fixed: אָכַל, אוֹכֵל, אֹכֶל."
+   "text": "Korean adds endings to an unchanging stem (먹다, 먹어요); Hebrew keeps only the consonants fixed:\n→ אָכַל, אוֹכֵל, אֹכֶל"
   },
   {
    "for": "fi",
@@ -500,7 +500,7 @@
   {
    "for": "sw",
    "rel": "different",
-   "text": "Swahili keeps the verb root and adds prefixes and suffixes (kupika “to cook”, mpishi “a cook”); Hebrew changes the vowels inside: בִּשֵּׁל, מְבַשֵּׁל, בִּשּׁוּל. The Arabic loan kitabu shares the root כ־ת־ב."
+   "text": "Swahili keeps the verb root and adds prefixes and suffixes (kupika “to cook”, mpishi “a cook”); Hebrew changes the vowels inside:\n→ בִּשֵּׁל, מְבַשֵּׁל, בִּשּׁוּל\n\nThe Arabic loan kitabu shares the root כ־ת־ב."
   },
   {
    "for": "lg",
@@ -510,12 +510,12 @@
   {
    "for": "zh",
    "rel": "different",
-   "text": "Chinese never changes the inside of a word; it joins whole syllables (吃 + 饭 → 吃饭). Hebrew changes the vowels and adds letters around a root: אָכַל, אוֹכֵל, אֹכֶל."
+   "text": "Chinese never changes the inside of a word; it joins whole syllables (吃 + 饭 → 吃饭).\n\nHebrew changes the vowels and adds letters around a root:\n→ אָכַל, אוֹכֵל, אֹכֶל"
   },
   {
    "for": "vi",
    "rel": "different",
-   "text": "Vietnamese words never change inside; new words are compounds of whole syllables. Hebrew makes new words by changing the vowels around a root."
+   "text": "Vietnamese words never change inside; new words are compounds of whole syllables.\n\nHebrew makes new words by changing the vowels around a root."
   },
   {
    "for": "iu",
@@ -525,27 +525,27 @@
   {
    "for": "it",
    "rel": "different",
-   "text": "Italian derives with suffixes (cucinare, cucina, cuoco); Hebrew keeps three consonants and changes the vowel pattern around them: ב־שׁ־ל → בִּשֵּׁל “cooked”, מְבַשֵּׁל “cooks”, בִּשּׁוּל “cooking”."
+   "text": "Italian derives with suffixes (cucinare, cucina, cuoco); Hebrew keeps three consonants and changes the vowel pattern around them:\n→ ב־שׁ־ל → בִּשֵּׁל “cooked”, מְבַשֵּׁל “cooks”, בִּשּׁוּל “cooking”"
   },
   {
    "for": "pt",
    "rel": "different",
-   "text": "Portuguese builds words with suffixes (cozinhar, cozinha, cozinheiro); Hebrew pours a consonant root into patterns: ב־שׁ־ל → בִּשֵּׁל, מְבַשֵּׁל, בִּשּׁוּל."
+   "text": "Portuguese builds words with suffixes (cozinhar, cozinha, cozinheiro); Hebrew pours a consonant root into patterns:\n→ ב־שׁ־ל → בִּשֵּׁל, מְבַשֵּׁל, בִּשּׁוּל"
   },
   {
    "for": "sq",
    "rel": "different",
-   "text": "Albanian derives with suffixes (gatuaj, gatim, gatues); Hebrew keeps a root of three consonants and changes the vowels and pattern letters around it: ב־שׁ־ל → בִּשֵּׁל, בִּשּׁוּל, מְבַשֵּׁל."
+   "text": "Albanian derives with suffixes (gatuaj, gatim, gatues); Hebrew keeps a root of three consonants and changes the vowels and pattern letters around it:\n→ ב־שׁ־ל → בִּשֵּׁל, בִּשּׁוּל, מְבַשֵּׁל"
   },
   {
    "for": "type:fusional",
    "rel": "similar",
-   "text": "If your language changes vowels inside some words (strong verbs, ablaut), Hebrew makes that the main system: a consonant root in vowel patterns — כ־ת־ב: כָּתַב, מִכְתָּב, כְּתָב."
+   "text": "If your language changes vowels inside some words (strong verbs, ablaut), Hebrew makes that the main system: a consonant root in vowel patterns — כ־ת־ב:\n→ כָּתַב, מִכְתָּב, כְּתָב"
   },
   {
    "for": "type:agglutinating",
    "rel": "different",
-   "text": "If your language adds suffixes to an unchanging stem, Hebrew does the reverse: the consonants stay and the vowels inside change, with a few letters around them (כ־ת־ב → כָּתַב, מִכְתָּב). Find the root by stripping the pattern."
+   "text": "If your language adds suffixes to an unchanging stem, Hebrew does the reverse: the consonants stay and the vowels inside change, with a few letters around them (כ־ת־ב → כָּתַב, מִכְתָּב).\n\nFind the root by stripping the pattern."
   },
   {
    "for": "type:isolating",

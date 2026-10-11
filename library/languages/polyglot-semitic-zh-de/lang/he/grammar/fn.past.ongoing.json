@@ -243,7 +243,7 @@
   {
    "lang": "ar",
    "fn": "fn.past.ongoing",
-   "note": "Arabic says it with the same verb “to be”: كَانَ يَلْعَبُ “he used to play” — كَانَ + the imperfect, where Hebrew has הָיָה + the present form (participle): הָיָה מְשַׂחֵק."
+   "note": "Arabic says it with the same verb “to be”: كَانَ يَلْعَبُ “he used to play” — كَانَ + the imperfect, where Hebrew has הָיָה + the present form (participle):\n→ הָיָה מְשַׂחֵק"
   },
   {
    "lang": "de",
@@ -290,12 +290,12 @@
   {
    "for": "hi",
    "rel": "similar",
-   "text": "Hindi builds the habitual past the same way — participle + “was”: मैं खेलता था. Hebrew reverses the order: “was” + participle, הָיִיתִי מְשַׂחֵק, and both words agree."
+   "text": "Hindi builds the habitual past the same way — participle + “was”:\n→ मैं खेलता था\n\nHebrew reverses the order: “was” + participle, הָיִיתִי מְשַׂחֵק, and both words agree."
   },
   {
    "for": "fa",
    "rel": "different",
-   "text": "Persian marks the habitual and ongoing past with می‌ on the past verb (بازی می‌کردم); Hebrew adds the past of הָיָה to the present form: הָיִיתִי מְשַׂחֵק."
+   "text": "Persian marks the habitual and ongoing past with می‌ on the past verb (بازی می‌کردم); Hebrew adds the past of הָיָה to the present form:\n→ הָיִיתִי מְשַׂחֵק"
   },
   {
    "for": "mr",
@@ -310,7 +310,7 @@
   {
    "for": "tr",
    "rel": "different",
-   "text": "Turkish has suffixes for it — -(A)rdI for habits (oynardım) and -(I)yordu for ongoing (oynuyordum); Hebrew uses הָיָה + present for both: הָיִיתִי מְשַׂחֵק."
+   "text": "Turkish has suffixes for it — -(A)rdI for habits (oynardım) and -(I)yordu for ongoing (oynuyordum); Hebrew uses הָיָה + present for both:\n→ הָיִיתִי מְשַׂחֵק"
   },
   {
    "for": "ja",
@@ -335,32 +335,32 @@
   {
    "for": "sw",
    "rel": "different",
-   "text": "Swahili builds the ongoing past with -likuwa + a verb with -ki- (nilikuwa nikicheza); Hebrew uses הָיָה + the present form: הָיִיתִי מְשַׂחֵק."
+   "text": "Swahili builds the ongoing past with -likuwa + a verb with -ki- (nilikuwa nikicheza); Hebrew uses הָיָה + the present form:\n→ הָיִיתִי מְשַׂחֵק"
   },
   {
    "for": "zh",
    "rel": "different",
-   "text": "Chinese has no tense: 小时候我常常在外面玩; Hebrew needs the past of הָיָה with the present form: הָיִיתִי מְשַׂחֵק בַּחוּץ."
+   "text": "Chinese has no tense: 小时候我常常在外面玩; Hebrew needs the past of הָיָה with the present form:\n→ הָיִיתִי מְשַׂחֵק בַּחוּץ"
   },
   {
    "for": "vi",
    "rel": "different",
-   "text": "Vietnamese uses hay / thường (habit) and đang (ongoing) with a time word; Hebrew turns the time into הָיָה: הָיִיתִי מְשַׂחֵק."
+   "text": "Vietnamese uses hay / thường (habit) and đang (ongoing) with a time word; Hebrew turns the time into הָיָה:\n→ הָיִיתִי מְשַׂחֵק"
   },
   {
    "for": "type:polysynthetic",
    "rel": "different",
-   "text": "Polysynthetic languages tend to put habit and duration into suffixes inside one verb word; Hebrew uses two words — the past of הָיָה and the present form: הָיִיתִי מְשַׂחֵק."
+   "text": "Polysynthetic languages tend to put habit and duration into suffixes inside one verb word; Hebrew uses two words — the past of הָיָה and the present form:\n→ הָיִיתִי מְשַׂחֵק"
   },
   {
    "for": "it",
    "rel": "similar",
-   "text": "הָיִיתִי מְשַׂחֵק corresponds to the imperfetto (giocavo): habits and backgrounds in the past. But in Hebrew it is a two-word construction — the past of הָיָה + the present form — and the plain past is never wrong."
+   "text": "הָיִיתִי מְשַׂחֵק corresponds to the imperfetto (giocavo): habits and backgrounds in the past.\n\nBut in Hebrew it is a two-word construction — the past of הָיָה + the present form — and the plain past is never wrong."
   },
   {
    "for": "pt",
    "rel": "similar",
-   "text": "הָיִיתִי מְשַׂחֵק is close to the imperfeito (brincava) or costumava brincar: habits and backgrounds in the past. Hebrew builds it from two words, and may simply use the past: שִׂחַקְתִּי."
+   "text": "הָיִיתִי מְשַׂחֵק is close to the imperfeito (brincava) or costumava brincar: habits and backgrounds in the past.\n\nHebrew builds it from two words, and may simply use the past:\n→ שִׂחַקְתִּי"
   },
   {
    "for": "sq",
@@ -370,22 +370,22 @@
   {
    "for": "type:fusional",
    "rel": "similar",
-   "text": "If your language has an imperfective past form, Hebrew uses a construction instead: הָיָה (past, with the person) + the present form (gender and number): הָיִיתִי מְשַׂחֵק."
+   "text": "If your language has an imperfective past form, Hebrew uses a construction instead: הָיָה (past, with the person) + the present form (gender and number):\n→ הָיִיתִי מְשַׂחֵק"
   },
   {
    "for": "type:agglutinating",
    "rel": "different",
-   "text": "If habit and progress are suffixes on your verb, Hebrew uses two separate words, and both agree with the subject: הִיא הָיְתָה מְשַׂחֶקֶת."
+   "text": "If habit and progress are suffixes on your verb, Hebrew uses two separate words, and both agree with the subject:\n→ הִיא הָיְתָה מְשַׂחֶקֶת"
   },
   {
    "for": "type:isolating",
    "rel": "similar",
-   "text": "If your language shows habits with time and frequency words only, Hebrew can do the same (the plain past + כָּל יוֹם) — or use הָיָה + the present form: הָיִיתִי מְשַׂחֵק."
+   "text": "If your language shows habits with time and frequency words only, Hebrew can do the same (the plain past + כָּל יוֹם) — or use הָיָה + the present form:\n→ הָיִיתִי מְשַׂחֵק"
   },
   {
    "for": "branch:Semitic",
    "rel": "same",
-   "text": "“Was” + a non-past verb for past habits is a Semitic pattern; Hebrew uses the present form (the participle) after הָיָה: הָיָה מְשַׂחֵק."
+   "text": "“Was” + a non-past verb for past habits is a Semitic pattern; Hebrew uses the present form (the participle) after הָיָה:\n→ הָיָה מְשַׂחֵק"
   }
  ]
 }

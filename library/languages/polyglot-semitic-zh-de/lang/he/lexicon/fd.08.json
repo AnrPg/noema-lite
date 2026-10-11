@@ -289,7 +289,8 @@
     "position": "before",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "nounAfter": "an indefinite singular noun, in a negative sentence: אֵין לִי שׁוּם בְּעָיָה"
    },
    "note": "Before a noun, with לֹא or אֵין: “no … at all, not any”. Plain “no + noun” needs no word in Hebrew (אֵין לִי מְכוֹנִית “I have no car”); שׁוּם adds emphasis. Same spelling as שׁוּם “garlic”.",
    "contrasts": [
@@ -395,7 +396,7 @@
      "Same spelling, another word: שׁוּם “garlic”."
     ],
     "pitfalls": [
-     "Hebrew needs no word for “no” before a noun: “I have no car” is simply אֵין לִי מְכוֹנִית. שׁוּם adds “at all”: אֵין לִי שׁוּם מְכוֹנִית.",
+     "Hebrew needs no word for “no” before a noun: “I have no car” is simply אֵין לִי מְכוֹנִית. שׁוּם adds “at all”:\n→ אֵין לִי שׁוּם מְכוֹנִית",
      "It still needs לֹא or אֵין in the sentence: הוּא לֹא אוֹכֵל שׁוּם בָּשָׂר."
     ],
     "subtleties": [
@@ -416,6 +417,12 @@
     "agreement": "masculine",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "suffix": {
+     "none": "not a personal pronoun: it has no ending of its own"
+    },
+    "object": {
+     "none": "not a personal pronoun: as an object it stands as it is"
     }
    },
    "contrasts": [
@@ -528,6 +535,12 @@
     "agreement": "masculine",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "suffix": {
+     "none": "not a personal pronoun: it has no ending of its own"
+    },
+    "object": {
+     "none": "not a personal pronoun: as an object it stands as it is"
     }
    },
    "note": "A two-word lexeme: שׁוּם “any” + דָּבָר “thing”. Tokenized as one word.",
@@ -632,6 +645,12 @@
     "agreement": "masculine",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "suffix": {
+     "none": "not a personal pronoun: it has no ending of its own"
+    },
+    "object": {
+     "none": "not a personal pronoun: as an object it stands as it is"
     }
    },
    "note": "A two-word lexeme: אַף “even” + אֶחָד “one”. Feminine אַף אַחַת. Tokenized as one word.",
@@ -832,7 +851,7 @@
     ],
     "pitfalls": [
      "A verb needs לֹא as well: אֲנִי אַף פַּעַם לֹא אוֹכֵל … (not *אֲנִי אַף פַּעַם אוֹכֵל).",
-     "It may stand before לֹא or at the end: אֲנִי אַף פַּעַם לֹא שׁוֹתֶה קָפֶה = אֲנִי לֹא שׁוֹתֶה קָפֶה אַף פַּעַם."
+     "It may stand before לֹא or at the end:\n→ אֲנִי אַף פַּעַם לֹא שׁוֹתֶה קָפֶה = אֲנִי לֹא שׁוֹתֶה קָפֶה אַף פַּעַם"
     ],
     "subtleties": [
      "Unlike German nie, which needs no other negation, Hebrew keeps the double negation: אַף פַּעַם לֹא."

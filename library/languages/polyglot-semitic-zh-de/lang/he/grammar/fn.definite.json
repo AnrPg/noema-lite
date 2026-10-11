@@ -193,7 +193,7 @@
   {
    "lang": "ar",
    "fn": "fn.definite",
-   "note": "Arabic الـ is the same idea, a prefix; both languages double the next consonant — Arabic for the “sun letters” (الشَّمْس aš-šams), Hebrew for almost every letter (הַשֻּׁלְחָן). Arabic marks the indefinite with -un (tanwīn); Hebrew leaves it bare."
+   "note": "Arabic الـ is the same idea, a prefix; both languages double the next consonant — Arabic for the “sun letters” (الشَّمْس aš-šams), Hebrew for almost every letter (הַשֻּׁלְחָן).\n\nArabic marks the indefinite with -un (tanwīn); Hebrew leaves it bare."
   },
   {
    "lang": "de",
@@ -210,32 +210,32 @@
   {
    "for": "el",
    "rel": "similar",
-   "text": "Greek has a definite article too (ο / η / το), but Hebrew הַ never changes for gender, number or case, and it is written onto the word. There is no ένας / μία: סֵפֶר is “a book”."
+   "text": "Greek has a definite article too (ο / η / το), but Hebrew הַ never changes for gender, number or case, and it is written onto the word.\n\nThere is no ένας / μία: סֵפֶר is “a book”."
   },
   {
    "for": "ru",
    "rel": "new",
-   "text": "Russian has no articles; Hebrew marks “the” with הַ: סֵפֶר “a book, book” — הַסֵּפֶר “the book”. Use it whenever the listener knows which one."
+   "text": "Russian has no articles; Hebrew marks “the” with הַ:\n→ סֵפֶר “a book, book” — הַסֵּפֶר “the book”\n\nUse it whenever the listener knows which one."
   },
   {
    "for": "es",
    "rel": "similar",
-   "text": "Like el / la / los / las, but one form for all, written onto the noun: הַבַּיִת, הַדִּירָה, הַבָּתִּים. There is no un / una: a bare noun is indefinite."
+   "text": "Like el / la / los / las, but one form for all, written onto the noun:\n→ הַבַּיִת, הַדִּירָה, הַבָּתִּים\n\nThere is no un / una: a bare noun is indefinite."
   },
   {
    "for": "en",
    "rel": "similar",
-   "text": "הַ works much like “the” and never changes; but there is no “a”: סֵפֶר is “a book”. And the article is repeated on a demonstrative (later on an adjective) after the noun: הַסֵּפֶר הַזֶּה."
+   "text": "הַ works much like “the” and never changes; but there is no “a”: סֵפֶר is “a book”.\n\nAnd the article is repeated on a demonstrative (later on an adjective) after the noun:\n→ הַסֵּפֶר הַזֶּה"
   },
   {
    "for": "fr",
    "rel": "similar",
-   "text": "Like le / la / les, but invariable and attached: הַבַּיִת. There is no un / une and no partitive du / des: אֲנִי אוֹכֵל לֶחֶם “I eat (some) bread”."
+   "text": "Like le / la / les, but invariable and attached:\n→ הַבַּיִת\n\nThere is no un / une and no partitive du / des:\n→ אֲנִי אוֹכֵל לֶחֶם “I eat (some) bread”"
   },
   {
    "for": "de",
    "rel": "similar",
-   "text": "One article for der / die / das in every case: הַ. There is no ein / eine — a bare noun is indefinite — and the gender shows only in the words that agree."
+   "text": "One article for der / die / das in every case:\n→ הַ\n\nThere is no ein / eine — a bare noun is indefinite — and the gender shows only in the words that agree."
   },
   {
    "for": "hi",
@@ -255,7 +255,7 @@
   {
    "for": "ar",
    "rel": "similar",
-   "text": "The same idea as الْـ: a prefix, one form for all, and a doubled first letter after it (الشَّمْس ~ the dagesh in הַשֶּׁמֶשׁ). But Hebrew has no indefinite ending: كِتَابٌ (with tanwīn) is just סֵפֶר."
+   "text": "The same idea as الْـ: a prefix, one form for all, and a doubled first letter after it (الشَّمْس ~ the dagesh in הַשֶּׁמֶשׁ).\n\nBut Hebrew has no indefinite ending: كِتَابٌ (with tanwīn) is just סֵפֶר."
   },
   {
    "for": "tr",
@@ -300,27 +300,27 @@
   {
    "for": "it",
    "rel": "similar",
-   "text": "Like il / la / i / le, but one form for all, written onto the noun: הַבַּיִת, הַדִּירָה, הַבָּתִּים. There is no un / una and no partitive del / della: אֲנִי אוֹכֵל לֶחֶם “mangio (del) pane”."
+   "text": "Like il / la / i / le, but one form for all, written onto the noun:\n→ הַבַּיִת, הַדִּירָה, הַבָּתִּים\n\nThere is no un / una and no partitive del / della:\n→ אֲנִי אוֹכֵל לֶחֶם “mangio (del) pane”"
   },
   {
    "for": "pt",
    "rel": "similar",
-   "text": "Like o / a / os / as, but one invariable form written onto the noun. There is no um / uma: סֵפֶר is “um livro”. And as in Portuguese, the article fuses with a preposition: בַּחֶדֶר ~ no quarto."
+   "text": "Like o / a / os / as, but one invariable form written onto the noun.\n\n- There is no um / uma: סֵפֶר is “um livro”.\n- And as in Portuguese, the article fuses with a preposition: בַּחֶדֶר ~ no quarto."
   },
   {
    "for": "sq",
    "rel": "different",
-   "text": "Albanian puts the definite article at the end of the noun (libri, shtëpia); Hebrew puts it at the front: הַסֵּפֶר, הַבַּיִת. There is no një: a bare noun is indefinite, סֵפֶר “një libër”."
+   "text": "Albanian puts the definite article at the end of the noun (libri, shtëpia); Hebrew puts it at the front:\n→ הַסֵּפֶר, הַבַּיִת\n\nThere is no një: a bare noun is indefinite, סֵפֶר “një libër”."
   },
   {
    "for": "type:fusional",
    "rel": "similar",
-   "text": "If your articles change for gender, number and case, Hebrew’s is simpler: one prefix, הַ, for all. There is no indefinite article — a bare noun means “a …”."
+   "text": "If your articles change for gender, number and case, Hebrew’s is simpler: one prefix, הַ, for all.\n\nThere is no indefinite article — a bare noun means “a …”."
   },
   {
    "for": "type:agglutinating",
    "rel": "new",
-   "text": "If your language has no word for “the”, learn to add הַ to every noun the listener can identify and to leave a new one bare: זֶה סֵפֶר “this is a book”, זֶה הַסֵּפֶר “this is the book”."
+   "text": "If your language has no word for “the”, learn to add הַ to every noun the listener can identify and to leave a new one bare:\n→ זֶה סֵפֶר “this is a book”, זֶה הַסֵּפֶר “this is the book”"
   },
   {
    "for": "type:isolating",
@@ -330,12 +330,12 @@
   {
    "for": "type:polysynthetic",
    "rel": "new",
-   "text": "If definiteness in your language is shown by affixes or demonstratives, Hebrew uses one prefix, הַ, on every definite noun and repeats it on the word that follows: הַבַּיִת הַזֶּה."
+   "text": "If definiteness in your language is shown by affixes or demonstratives, Hebrew uses one prefix, הַ, on every definite noun and repeats it on the word that follows:\n→ הַבַּיִת הַזֶּה"
   },
   {
    "for": "branch:Semitic",
    "rel": "similar",
-   "text": "Many Semitic languages mark definiteness with a short article — a prefix in some, a suffix in others. Hebrew’s is the prefix הַ, which doubles the next letter (הַשֻּׁלְחָן); there is no indefinite marker at all."
+   "text": "Many Semitic languages mark definiteness with a short article — a prefix in some, a suffix in others.\n\nHebrew’s is the prefix הַ, which doubles the next letter (הַשֻּׁלְחָן); there is no indefinite marker at all."
   }
  ]
 }

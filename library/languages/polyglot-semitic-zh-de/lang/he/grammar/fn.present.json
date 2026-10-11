@@ -447,12 +447,12 @@
   {
    "for": "es",
    "rel": "different",
-   "text": "Spanish endings show the person (como, comes, come), so yo can be left out; the Hebrew present shows gender and number instead, so אֲנִי must be said. There is no estar + -ndo: אֲנִי אוֹכֵל is “I eat” and “I am eating”."
+   "text": "Spanish endings show the person (como, comes, come), so yo can be left out; the Hebrew present shows gender and number instead, so אֲנִי must be said.\n\nThere is no estar + -ndo: אֲנִי אוֹכֵל is “I eat” and “I am eating”."
   },
   {
    "for": "en",
    "rel": "different",
-   "text": "English needs “do” and “am …-ing”; Hebrew has neither: אֲנִי אוֹכֵל is “I eat”, “I am eating” and, with a question mark, “do I eat?”. But the verb changes for gender: a woman says אֲנִי אוֹכֶלֶת."
+   "text": "English needs “do” and “am …-ing”; Hebrew has neither: אֲנִי אוֹכֵל is “I eat”, “I am eating” and, with a question mark, “do I eat?”.\n\nBut the verb changes for gender: a woman says אֲנִי אוֹכֶלֶת."
   },
   {
    "for": "fr",
@@ -492,7 +492,7 @@
   {
    "for": "ja",
    "rel": "different",
-   "text": "Japanese verbs do not change for person or gender (食べる); Hebrew verbs change for gender and number: אוֹכֵל / אוֹכֶלֶת / אוֹכְלִים / אוֹכְלוֹת. There is no ている: one form covers “eat” and “is eating”."
+   "text": "Japanese verbs do not change for person or gender (食べる); Hebrew verbs change for gender and number:\n→ אוֹכֵל / אוֹכֶלֶת / אוֹכְלִים / אוֹכְלוֹת\n\nThere is no ている: one form covers “eat” and “is eating”."
   },
   {
    "for": "ko",
@@ -512,7 +512,7 @@
   {
    "for": "sw",
    "rel": "different",
-   "text": "Swahili shows the person with a prefix (ninakula, unakula, anakula); the Hebrew present shows gender and number, so the pronoun is needed: אֲנִי אוֹכֵל."
+   "text": "Swahili shows the person with a prefix (ninakula, unakula, anakula); the Hebrew present shows gender and number, so the pronoun is needed:\n→ אֲנִי אוֹכֵל"
   },
   {
    "for": "lg",
@@ -522,12 +522,12 @@
   {
    "for": "zh",
    "rel": "different",
-   "text": "Chinese verbs never change (我吃 / 她吃); Hebrew present verbs change for gender and number (אֲנִי אוֹכֵל / הִיא אוֹכֶלֶת). As in Chinese, one form covers “eat” and “is eating”."
+   "text": "Chinese verbs never change (我吃 / 她吃); Hebrew present verbs change for gender and number (אֲנִי אוֹכֵל / הִיא אוֹכֶלֶת).\n\nAs in Chinese, one form covers “eat” and “is eating”."
   },
   {
    "for": "vi",
    "rel": "different",
-   "text": "Vietnamese verbs never change (tôi ăn, cô ấy ăn); Hebrew verbs change for gender and number: אֲנִי אוֹכֵל, הִיא אוֹכֶלֶת."
+   "text": "Vietnamese verbs never change (tôi ăn, cô ấy ăn); Hebrew verbs change for gender and number:\n→ אֲנִי אוֹכֵל, הִיא אוֹכֶלֶת"
   },
   {
    "for": "iu",
@@ -537,17 +537,17 @@
   {
    "for": "it",
    "rel": "different",
-   "text": "Italian endings show the person (mangio, mangi, mangia), so io can go; the Hebrew present shows gender and number instead, so אֲנִי must stay — and a woman says אֲנִי אוֹכֶלֶת. One form also covers sto mangiando."
+   "text": "Italian endings show the person (mangio, mangi, mangia), so io can go; the Hebrew present shows gender and number instead, so אֲנִי must stay — and a woman says אֲנִי אוֹכֶלֶת.\n\nOne form also covers sto mangiando."
   },
   {
    "for": "pt",
    "rel": "different",
-   "text": "Portuguese endings show the person (como, comes, come); the Hebrew present shows gender and number, so the pronoun must be said: אֲנִי אוֹכֵל / אֲנִי אוֹכֶלֶת — like obrigado / obrigada, the form follows the speaker. One form also covers estou a comer."
+   "text": "Portuguese endings show the person (como, comes, come); the Hebrew present shows gender and number, so the pronoun must be said: אֲנִי אוֹכֵל / אֲנִי אוֹכֶלֶת — like obrigado / obrigada, the form follows the speaker.\n\nOne form also covers estou a comer."
   },
   {
    "for": "sq",
    "rel": "different",
-   "text": "Albanian endings show the person (punoj, punon, punojmë); the Hebrew present shows gender and number instead (עוֹבֵד / עוֹבֶדֶת / עוֹבְדִים / עוֹבְדוֹת), so the pronoun must stay. Albanian po punoj “I am working” is simply אֲנִי עוֹבֵד."
+   "text": "Albanian endings show the person (punoj, punon, punojmë); the Hebrew present shows gender and number instead (עוֹבֵד / עוֹבֶדֶת / עוֹבְדִים / עוֹבְדוֹת), so the pronoun must stay.\n\nAlbanian po punoj “I am working” is simply אֲנִי עוֹבֵד."
   },
   {
    "for": "type:fusional",
@@ -562,17 +562,17 @@
   {
    "for": "type:isolating",
    "rel": "similar",
-   "text": "As in your language, one form covers a habit and an action in progress. But the Hebrew verb changes for gender and number: הוּא אוֹכֵל, הִיא אוֹכֶלֶת, הֵם אוֹכְלִים."
+   "text": "As in your language, one form covers a habit and an action in progress.\n\nBut the Hebrew verb changes for gender and number:\n→ הוּא אוֹכֵל, הִיא אוֹכֶלֶת, הֵם אוֹכְלִים"
   },
   {
    "for": "type:polysynthetic",
    "rel": "different",
-   "text": "If your verb carries subject and object affixes, the Hebrew present carries only gender and number; subject and object are separate words: אֲנִי אוֹכֵל אֶת הַלֶּחֶם."
+   "text": "If your verb carries subject and object affixes, the Hebrew present carries only gender and number; subject and object are separate words:\n→ אֲנִי אוֹכֵל אֶת הַלֶּחֶם"
   },
   {
    "for": "branch:Semitic",
    "rel": "similar",
-   "text": "The Hebrew present is the old active participle (the qōtēl pattern), so it inflects like an adjective — for gender and number, not person. If your language uses the prefix conjugation for the present, in Hebrew that is the future."
+   "text": "The Hebrew present is the old active participle (the qōtēl pattern), so it inflects like an adjective — for gender and number, not person.\n\nIf your language uses the prefix conjugation for the present, in Hebrew that is the future."
   }
  ]
 }

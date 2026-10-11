@@ -10,7 +10,14 @@
    "translit": "efes",
    "features": {
     "spelling": "אפס",
-    "position": "before"
+    "position": "before",
+    "agreement": "one form",
+    "genderForms": {
+     "none": "one form for masculine and feminine nouns"
+    },
+    "construct": {
+     "none": "the number stays as it is before a noun"
+    }
    },
    "note": "Zero, the digit and the score. Originally a noun meaning “end, nothing”; it never changes.",
    "ref": {
@@ -32,7 +39,31 @@
    "translit": "echad",
    "features": {
     "spelling": "אחד",
-    "position": "after"
+    "position": "after",
+    "agreement": "agrees",
+    "genderForms": [
+     {
+      "gender": "MASC",
+      "form": "אֶחָד"
+     },
+     {
+      "gender": "FEM",
+      "form": "אַחַת",
+      "note": "also the counting form"
+     }
+    ],
+    "construct": [
+     {
+      "gender": "MASC",
+      "form": "אַחַד",
+      "note": "“one of”: אַחַד הַתַּלְמִידִים"
+     },
+     {
+      "gender": "FEM",
+      "form": "אַחַת",
+      "note": "“one of”: אַחַת הַתַּלְמִידוֹת"
+     }
+    ]
    },
    "forms": {
     "NUM;MASC": "אֶחָד",
@@ -55,7 +86,29 @@
    "translit": "shnayim",
    "features": {
     "spelling": "שניים",
-    "position": "before"
+    "position": "before",
+    "agreement": "agrees",
+    "genderForms": [
+     {
+      "gender": "MASC",
+      "form": "שְׁנַיִם"
+     },
+     {
+      "gender": "FEM",
+      "form": "שְׁתַּיִם",
+      "note": "also the counting form"
+     }
+    ],
+    "construct": [
+     {
+      "gender": "MASC",
+      "form": "שְׁנֵי"
+     },
+     {
+      "gender": "FEM",
+      "form": "שְׁתֵּי"
+     }
+    ]
    },
    "forms": {
     "NUM;MASC": "שְׁנַיִם",
@@ -84,7 +137,26 @@
    "translit": "shlosha",
    "features": {
     "spelling": "שלושה",
-    "position": "before"
+    "position": "before",
+    "agreement": "reversed endings",
+    "genderForms": [
+     {
+      "gender": "MASC",
+      "form": "שְׁלוֹשָׁה"
+     },
+     {
+      "gender": "FEM",
+      "form": "שָׁלוֹשׁ",
+      "note": "also the counting form"
+     }
+    ],
+    "construct": [
+     {
+      "gender": "MASC",
+      "form": "שְׁלוֹשֶׁת",
+      "note": "before a definite noun: שְׁלוֹשֶׁת הַ…"
+     }
+    ]
    },
    "forms": {
     "NUM;MASC": "שְׁלוֹשָׁה",
@@ -108,7 +180,26 @@
    "translit": "arba'a",
    "features": {
     "spelling": "ארבעה",
-    "position": "before"
+    "position": "before",
+    "agreement": "reversed endings",
+    "genderForms": [
+     {
+      "gender": "MASC",
+      "form": "אַרְבָּעָה"
+     },
+     {
+      "gender": "FEM",
+      "form": "אַרְבַּע",
+      "note": "also the counting form"
+     }
+    ],
+    "construct": [
+     {
+      "gender": "MASC",
+      "form": "אַרְבַּעַת",
+      "note": "before a definite noun: אַרְבַּעַת הַ…"
+     }
+    ]
    },
    "forms": {
     "NUM;MASC": "אַרְבָּעָה",
@@ -132,7 +223,26 @@
    "translit": "chamisha",
    "features": {
     "spelling": "חמישה",
-    "position": "before"
+    "position": "before",
+    "agreement": "reversed endings",
+    "genderForms": [
+     {
+      "gender": "MASC",
+      "form": "חֲמִשָּׁה"
+     },
+     {
+      "gender": "FEM",
+      "form": "חָמֵשׁ",
+      "note": "also the counting form"
+     }
+    ],
+    "construct": [
+     {
+      "gender": "MASC",
+      "form": "חֲמֵשֶׁת",
+      "note": "before a definite noun: חֲמֵשֶׁת הַ…"
+     }
+    ]
    },
    "forms": {
     "NUM;MASC": "חֲמִשָּׁה",
@@ -159,7 +269,26 @@
    "translit": "shisha",
    "features": {
     "spelling": "שישה",
-    "position": "before"
+    "position": "before",
+    "agreement": "reversed endings",
+    "genderForms": [
+     {
+      "gender": "MASC",
+      "form": "שִׁשָּׁה"
+     },
+     {
+      "gender": "FEM",
+      "form": "שֵׁשׁ",
+      "note": "also the counting form"
+     }
+    ],
+    "construct": [
+     {
+      "gender": "MASC",
+      "form": "שֵׁשֶׁת",
+      "note": "before a definite noun: שֵׁשֶׁת הַ…"
+     }
+    ]
    },
    "forms": {
     "NUM;MASC": "שִׁשָּׁה",
@@ -186,7 +315,26 @@
    "translit": "shiv'a",
    "features": {
     "spelling": "שבעה",
-    "position": "before"
+    "position": "before",
+    "agreement": "reversed endings",
+    "genderForms": [
+     {
+      "gender": "MASC",
+      "form": "שִׁבְעָה"
+     },
+     {
+      "gender": "FEM",
+      "form": "שֶׁבַע",
+      "note": "also the counting form"
+     }
+    ],
+    "construct": [
+     {
+      "gender": "MASC",
+      "form": "שִׁבְעַת",
+      "note": "before a definite noun: שִׁבְעַת הַ…"
+     }
+    ]
    },
    "forms": {
     "NUM;MASC": "שִׁבְעָה",
@@ -210,7 +358,26 @@
    "translit": "shmona",
    "features": {
     "spelling": "שמונה",
-    "position": "before"
+    "position": "before",
+    "agreement": "reversed endings",
+    "genderForms": [
+     {
+      "gender": "MASC",
+      "form": "שְׁמוֹנָה"
+     },
+     {
+      "gender": "FEM",
+      "form": "שְׁמוֹנֶה",
+      "note": "also the counting form"
+     }
+    ],
+    "construct": [
+     {
+      "gender": "MASC",
+      "form": "שְׁמוֹנַת",
+      "note": "before a definite noun: שְׁמוֹנַת הַ…"
+     }
+    ]
    },
    "forms": {
     "NUM;MASC": "שְׁמוֹנָה",
@@ -238,7 +405,26 @@
    "translit": "tish'a",
    "features": {
     "spelling": "תשעה",
-    "position": "before"
+    "position": "before",
+    "agreement": "reversed endings",
+    "genderForms": [
+     {
+      "gender": "MASC",
+      "form": "תִּשְׁעָה"
+     },
+     {
+      "gender": "FEM",
+      "form": "תֵּשַׁע",
+      "note": "also the counting form"
+     }
+    ],
+    "construct": [
+     {
+      "gender": "MASC",
+      "form": "תִּשְׁעַת",
+      "note": "before a definite noun: תִּשְׁעַת הַ…"
+     }
+    ]
    },
    "forms": {
     "NUM;MASC": "תִּשְׁעָה",
@@ -262,7 +448,26 @@
    "translit": "asara",
    "features": {
     "spelling": "עשרה",
-    "position": "before"
+    "position": "before",
+    "agreement": "reversed endings",
+    "genderForms": [
+     {
+      "gender": "MASC",
+      "form": "עֲשָׂרָה"
+     },
+     {
+      "gender": "FEM",
+      "form": "עֶשֶׂר",
+      "note": "also the counting form"
+     }
+    ],
+    "construct": [
+     {
+      "gender": "MASC",
+      "form": "עֲשֶׂרֶת",
+      "note": "before a definite noun: עֲשֶׂרֶת הַ…"
+     }
+    ]
    },
    "forms": {
     "NUM;MASC": "עֲשָׂרָה",
@@ -286,7 +491,22 @@
    "translit": "achad asar",
    "features": {
     "spelling": "אחד עשר",
-    "position": "before"
+    "position": "before",
+    "agreement": "agrees",
+    "genderForms": [
+     {
+      "gender": "MASC",
+      "form": "אַחַד עָשָׂר"
+     },
+     {
+      "gender": "FEM",
+      "form": "אַחַת עֶשְׂרֵה",
+      "note": "also the counting form"
+     }
+    ],
+    "construct": {
+     "none": "the number stays as it is before a noun"
+    }
    },
    "forms": {
     "NUM;MASC": "אַחַד עָשָׂר",
@@ -309,7 +529,22 @@
    "translit": "shneim asar",
    "features": {
     "spelling": "שנים עשר",
-    "position": "before"
+    "position": "before",
+    "agreement": "agrees",
+    "genderForms": [
+     {
+      "gender": "MASC",
+      "form": "שְׁנֵים עָשָׂר"
+     },
+     {
+      "gender": "FEM",
+      "form": "שְׁתֵּים עֶשְׂרֵה",
+      "note": "also the counting form"
+     }
+    ],
+    "construct": {
+     "none": "the number stays as it is before a noun"
+    }
    },
    "forms": {
     "NUM;MASC": "שְׁנֵים עָשָׂר",
@@ -332,7 +567,22 @@
    "translit": "shlosha asar",
    "features": {
     "spelling": "שלושה עשר",
-    "position": "before"
+    "position": "before",
+    "agreement": "reversed endings",
+    "genderForms": [
+     {
+      "gender": "MASC",
+      "form": "שְׁלוֹשָׁה עָשָׂר"
+     },
+     {
+      "gender": "FEM",
+      "form": "שְׁלוֹשׁ עֶשְׂרֵה",
+      "note": "also the counting form"
+     }
+    ],
+    "construct": {
+     "none": "the number stays as it is before a noun"
+    }
    },
    "forms": {
     "NUM;MASC": "שְׁלוֹשָׁה עָשָׂר",
@@ -355,7 +605,22 @@
    "translit": "arba'a asar",
    "features": {
     "spelling": "ארבעה עשר",
-    "position": "before"
+    "position": "before",
+    "agreement": "reversed endings",
+    "genderForms": [
+     {
+      "gender": "MASC",
+      "form": "אַרְבָּעָה עָשָׂר"
+     },
+     {
+      "gender": "FEM",
+      "form": "אַרְבַּע עֶשְׂרֵה",
+      "note": "also the counting form"
+     }
+    ],
+    "construct": {
+     "none": "the number stays as it is before a noun"
+    }
    },
    "forms": {
     "NUM;MASC": "אַרְבָּעָה עָשָׂר",
@@ -378,7 +643,22 @@
    "translit": "chamisha asar",
    "features": {
     "spelling": "חמישה עשר",
-    "position": "before"
+    "position": "before",
+    "agreement": "reversed endings",
+    "genderForms": [
+     {
+      "gender": "MASC",
+      "form": "חֲמִשָּׁה עָשָׂר"
+     },
+     {
+      "gender": "FEM",
+      "form": "חֲמֵשׁ עֶשְׂרֵה",
+      "note": "also the counting form"
+     }
+    ],
+    "construct": {
+     "none": "the number stays as it is before a noun"
+    }
    },
    "forms": {
     "NUM;MASC": "חֲמִשָּׁה עָשָׂר",
@@ -407,7 +687,22 @@
    "translit": "shisha asar",
    "features": {
     "spelling": "שישה עשר",
-    "position": "before"
+    "position": "before",
+    "agreement": "reversed endings",
+    "genderForms": [
+     {
+      "gender": "MASC",
+      "form": "שִׁשָּׁה עָשָׂר"
+     },
+     {
+      "gender": "FEM",
+      "form": "שֵׁשׁ עֶשְׂרֵה",
+      "note": "also the counting form"
+     }
+    ],
+    "construct": {
+     "none": "the number stays as it is before a noun"
+    }
    },
    "forms": {
     "NUM;MASC": "שִׁשָּׁה עָשָׂר",
@@ -436,7 +731,22 @@
    "translit": "shiv'a asar",
    "features": {
     "spelling": "שבעה עשר",
-    "position": "before"
+    "position": "before",
+    "agreement": "reversed endings",
+    "genderForms": [
+     {
+      "gender": "MASC",
+      "form": "שִׁבְעָה עָשָׂר"
+     },
+     {
+      "gender": "FEM",
+      "form": "שְׁבַע עֶשְׂרֵה",
+      "note": "also the counting form"
+     }
+    ],
+    "construct": {
+     "none": "the number stays as it is before a noun"
+    }
    },
    "forms": {
     "NUM;MASC": "שִׁבְעָה עָשָׂר",
@@ -459,7 +769,22 @@
    "translit": "shmona asar",
    "features": {
     "spelling": "שמונה עשר",
-    "position": "before"
+    "position": "before",
+    "agreement": "reversed endings",
+    "genderForms": [
+     {
+      "gender": "MASC",
+      "form": "שְׁמוֹנָה עָשָׂר"
+     },
+     {
+      "gender": "FEM",
+      "form": "שְׁמוֹנֶה עֶשְׂרֵה",
+      "note": "also the counting form"
+     }
+    ],
+    "construct": {
+     "none": "the number stays as it is before a noun"
+    }
    },
    "forms": {
     "NUM;MASC": "שְׁמוֹנָה עָשָׂר",
@@ -482,7 +807,22 @@
    "translit": "tish'a asar",
    "features": {
     "spelling": "תשעה עשר",
-    "position": "before"
+    "position": "before",
+    "agreement": "reversed endings",
+    "genderForms": [
+     {
+      "gender": "MASC",
+      "form": "תִּשְׁעָה עָשָׂר"
+     },
+     {
+      "gender": "FEM",
+      "form": "תְּשַׁע עֶשְׂרֵה",
+      "note": "also the counting form"
+     }
+    ],
+    "construct": {
+     "none": "the number stays as it is before a noun"
+    }
    },
    "forms": {
     "NUM;MASC": "תִּשְׁעָה עָשָׂר",
@@ -504,7 +844,14 @@
    "translit": "esrim",
    "features": {
     "spelling": "עשרים",
-    "position": "before"
+    "position": "before",
+    "agreement": "one form",
+    "genderForms": {
+     "none": "one form for masculine and feminine nouns"
+    },
+    "construct": {
+     "none": "the number stays as it is before a noun"
+    }
    },
    "note": "The same form for masculine and feminine nouns; 21, 22 … are said ten first: עֶשְׂרִים וְאֶחָד / עֶשְׂרִים וְאַחַת.",
    "ref": {
@@ -522,7 +869,14 @@
    "translit": "shloshim",
    "features": {
     "spelling": "שלושים",
-    "position": "before"
+    "position": "before",
+    "agreement": "one form",
+    "genderForms": {
+     "none": "one form for masculine and feminine nouns"
+    },
+    "construct": {
+     "none": "the number stays as it is before a noun"
+    }
    },
    "note": "The same form for masculine and feminine nouns; 21, 22 … are said ten first: שְׁלוֹשִׁים וְאֶחָד / שְׁלוֹשִׁים וְאַחַת.",
    "ref": {
@@ -540,7 +894,14 @@
    "translit": "arba'im",
    "features": {
     "spelling": "ארבעים",
-    "position": "before"
+    "position": "before",
+    "agreement": "one form",
+    "genderForms": {
+     "none": "one form for masculine and feminine nouns"
+    },
+    "construct": {
+     "none": "the number stays as it is before a noun"
+    }
    },
    "note": "The same form for masculine and feminine nouns; 21, 22 … are said ten first: אַרְבָּעִים וְאֶחָד / אַרְבָּעִים וְאַחַת.",
    "ref": {
@@ -561,7 +922,14 @@
    ],
    "features": {
     "spelling": "חמישים",
-    "position": "before"
+    "position": "before",
+    "agreement": "one form",
+    "genderForms": {
+     "none": "one form for masculine and feminine nouns"
+    },
+    "construct": {
+     "none": "the number stays as it is before a noun"
+    }
    },
    "note": "The same form for masculine and feminine nouns; 21, 22 … are said ten first: חֲמִשִּׁים וְאֶחָד / חֲמִשִּׁים וְאַחַת.",
    "ref": {
@@ -582,7 +950,14 @@
    ],
    "features": {
     "spelling": "שישים",
-    "position": "before"
+    "position": "before",
+    "agreement": "one form",
+    "genderForms": {
+     "none": "one form for masculine and feminine nouns"
+    },
+    "construct": {
+     "none": "the number stays as it is before a noun"
+    }
    },
    "note": "The same form for masculine and feminine nouns; 21, 22 … are said ten first: שִׁשִּׁים וְאֶחָד / שִׁשִּׁים וְאַחַת.",
    "ref": {
@@ -600,7 +975,14 @@
    "translit": "shiv'im",
    "features": {
     "spelling": "שבעים",
-    "position": "before"
+    "position": "before",
+    "agreement": "one form",
+    "genderForms": {
+     "none": "one form for masculine and feminine nouns"
+    },
+    "construct": {
+     "none": "the number stays as it is before a noun"
+    }
    },
    "note": "The same form for masculine and feminine nouns; 21, 22 … are said ten first: שִׁבְעִים וְאֶחָד / שִׁבְעִים וְאַחַת.",
    "ref": {
@@ -618,7 +1000,14 @@
    "translit": "shmonim",
    "features": {
     "spelling": "שמונים",
-    "position": "before"
+    "position": "before",
+    "agreement": "one form",
+    "genderForms": {
+     "none": "one form for masculine and feminine nouns"
+    },
+    "construct": {
+     "none": "the number stays as it is before a noun"
+    }
    },
    "note": "The same form for masculine and feminine nouns; 21, 22 … are said ten first: שְׁמוֹנִים וְאֶחָד / שְׁמוֹנִים וְאַחַת.",
    "ref": {
@@ -636,7 +1025,14 @@
    "translit": "tish'im",
    "features": {
     "spelling": "תשעים",
-    "position": "before"
+    "position": "before",
+    "agreement": "one form",
+    "genderForms": {
+     "none": "one form for masculine and feminine nouns"
+    },
+    "construct": {
+     "none": "the number stays as it is before a noun"
+    }
    },
    "note": "The same form for masculine and feminine nouns; 21, 22 … are said ten first: תִּשְׁעִים וְאֶחָד / תִּשְׁעִים וְאַחַת.",
    "ref": {
@@ -655,7 +1051,14 @@
    "translit": "me'a",
    "features": {
     "spelling": "מאה",
-    "position": "before"
+    "position": "before",
+    "agreement": "one form",
+    "genderForms": {
+     "none": "one form for masculine and feminine nouns (מֵאָה is itself a feminine noun: מָאתַיִם, שְׁלוֹשׁ מֵאוֹת)"
+    },
+    "construct": {
+     "none": "the number stays as it is before a noun"
+    }
    },
    "forms": {
     "NUM;SG": "מֵאָה",
@@ -682,7 +1085,14 @@
    "translit": "elef",
    "features": {
     "spelling": "אלף",
-    "position": "before"
+    "position": "before",
+    "agreement": "one form",
+    "genderForms": {
+     "none": "one form for masculine and feminine nouns (אֶלֶף is itself a masculine noun: אַלְפַּיִם, שְׁלוֹשֶׁת אֲלָפִים)"
+    },
+    "construct": {
+     "none": "the number stays as it is before a noun"
+    }
    },
    "forms": {
     "NUM;SG": "אֶלֶף",
@@ -712,7 +1122,8 @@
     "position": "before",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "nounAfter": "a plural or a mass noun: הַרְבֵּה סְפָרִים, הַרְבֵּה זְמַן; after a verb it means “a lot” (הוּא עוֹבֵד הַרְבֵּה)"
    },
    "note": "Invariable: הַרְבֵּה סְפָרִים, הַרְבֵּה מִטּוֹת, הַרְבֵּה נְיָר — before the noun, no article on the noun.",
    "ref": {
@@ -987,7 +1398,8 @@
     "position": "before",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "nounAfter": "a mass noun or a plural: קְצָת מַיִם, קְצָת אֲנָשִׁים; after a verb or before an adjective it means “a bit” (קְצָת עָיֵף)"
    },
    "note": "Invariable. Before a mass noun: קְצָת נְיָר “a little / some paper”; before an adjective it softens: קְצָת קָשֶׁה “a bit hard”.",
    "contrasts": [
@@ -1140,7 +1552,8 @@
     "position": "before",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "nounAfter": "an indefinite singular = every (כָּל יוֹם); a definite noun = all, the whole (כָּל הַסְּפָרִים, כָּל הַיּוֹם)"
    },
    "note": "Pronounced kol (the vowel is a qamats katan). כָּל + a definite noun = all / the whole (כָּל הַסְּפָרִים, כָּל הַמִּשְׁפָּחָה); כָּל + an indefinite singular = every (כָּל יוֹם). Alone: הַכֹּל “everything”.",
    "contrasts": [
@@ -1308,7 +1721,13 @@
       ],
       "note": "“all of us”, “all of you”"
      }
-    ]
+    ],
+    "suffix": {
+     "none": "it is itself כֹּל with personal endings"
+    },
+    "object": {
+     "none": "it is itself כֹּל with personal endings: as an object, אֶת כֻּלָּם"
+    }
    },
    "forms": {
     "PRON;1;PL": "כֻּלָּנוּ",
@@ -1446,7 +1865,8 @@
     "position": "before",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "nounAfter": "a plural noun: כַּמָּה סְפָרִים? “how many?”, כַּמָּה סְפָרִים “a few books”; before an adjective it exclaims (כַּמָּה יָפֶה!)"
    },
    "note": "Invariable, before a plural noun: כַּמָּה סְפָרִים “a few books”. The same word asks “how many / how much?” (lesson 10): only the question shows the difference.",
    "contrasts": [
@@ -1579,7 +1999,7 @@
      "Arabic كَمْ (kam) asks “how many?” too — but Arabic keeps the noun singular after it (كَمْ كِتَابًا), while Hebrew makes it plural (כַּמָּה סְפָרִים)."
     ],
     "pitfalls": [
-     "The same word asks and states: כַּמָּה סְפָרִים? “how many books?” — כַּמָּה סְפָרִים. “a few books”. Intonation and the question mark decide.",
+     "- The same word asks and states:\n→ כַּמָּה סְפָרִים? “how many books?” — כַּמָּה סְפָרִים\n- “a few books”.\n- Intonation and the question mark decide.",
      "The noun after it is plural: כַּמָּה יְלָדִים, never *כַּמָּה יֶלֶד."
     ],
     "subtleties": [

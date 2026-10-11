@@ -32,6 +32,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": {
+     "none": "a loanword: possessive endings are not used; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -116,7 +128,7 @@
      "Wiktionary links it to Hebrew כַּרְכֹּם (karkom), the crocus, whose stigmas are saffron: both are “yellow spices”."
     ],
     "pitfalls": [
-     "Do not confuse it with כַּרְכֹּם (karkom), the crocus or saffron, as in the Song of Songs (4:14): נֵרְדְּ וְכַרְכֹּם “nard and saffron”.",
+     "Do not confuse it with כַּרְכֹּם (karkom), the crocus or saffron, as in the Song of Songs (4:14):\n→ נֵרְדְּ וְכַרְכֹּם “nard and saffron”",
      "The first u is written with qubuts in vowelled text (כֻּרְכּוּם) but with ו in everyday spelling (כורכום)."
     ],
     "subtleties": [
@@ -174,6 +186,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": {
+     "none": "a loanword: possessive endings are not used; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -311,6 +335,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": {
+     "none": "a loanword: possessive endings are not used; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -385,7 +421,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Chinese writes it with the same characters as Japanese, 山葵 shānkuí; German simply borrowed the Japanese name, Wasabi.",
+     "Chinese writes it 山葵 shānkuí; German took the name from Japanese: Wasabi.",
      "Real wasabi is a relative of cabbage and horseradish, grown in cold mountain streams; it is grated fresh just before eating."
     ],
     "pitfalls": [
@@ -438,6 +474,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": {
+     "none": "possessive endings are not used with this word; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -519,7 +567,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German calls garden orache Gartenmelde. In the Book of Job (30:4) מַלּוּחַ is famine food, gathered by the poorest.",
+     "- German calls garden orache Gartenmelde.\n- In the Book of Job (30:4) מַלּוּחַ is famine food, gathered by the poorest.",
      "The Mediterranean saltbush, Atriplex halimus, grows wild on Israel’s coast and in its deserts; its leaves really do taste salty."
     ],
     "pitfalls": [
@@ -572,6 +620,20 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "compound: the first word changes",
+     "ending of the other gender",
+     "stem change"
+    ],
+    "possessive": {
+     "none": "a compound: “my …” is said with שֶׁל after it (… שֶׁלִּי); the endings go only on the first word in formal style"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -696,6 +758,18 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": {
+     "none": "possessive endings are not used with this word; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -833,6 +907,19 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "compound: the first word changes",
+     "segolate: vowels rebuilt"
+    ],
+    "possessive": {
+     "none": "a compound: “my …” is said with שֶׁל after it (… שֶׁלִּי); the endings go only on the first word in formal style"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
