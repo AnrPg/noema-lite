@@ -120,8 +120,8 @@ try:
     wj(f'{i18n}/engine/fr.arb', {'@@locale': 'fr', 'a': 'A fr', 'b': 'B {n} fr'}, 2)
     wj(f'{i18n}/engine/drafts/fr.arb', {'@@locale': 'fr', 'a': 'a?', 'b': 'b?'}, 2)
     os.makedirs(f'{i18n}/glossary/drafts', exist_ok=True)
-    with open(f'{i18n}/glossary/el.csv', 'w', encoding='utf-8') as fh: fh.write('source,target,description\n"step","σταθμός","One stop"\n"map","","x"\n')
-    gd = 'source,target,description\n"step","βήμα","One stop, on a ""Roadmap"""\n"map","χάρτης","multi\nline"\n'
+    with open(f'{i18n}/glossary/el.csv', 'w', encoding='utf-8') as fh: fh.write('source,target,developer_comments\n"step","σταθμός","One stop"\n"map","","x"\n')
+    gd = 'source,target,developer_comments\n"step","βήμα","One stop, on a ""Roadmap"""\n"map","χάρτης","multi\nline"\n'
     with open(f'{i18n}/glossary/drafts/el.csv', 'w', encoding='utf-8') as fh: fh.write(gd)
     node = lambda *a: subprocess.run(['node', os.path.join(ROOT, 'tools', 'i18n', 'prune_drafts.js'), '--root', repo, *a], capture_output=True, text=True)
     r = node()
@@ -131,7 +131,7 @@ try:
     d = rj(f'{i18n}/engine/drafts/el.arb')
     ok(list(d) == ['@@locale', 'b', 'c', 'd', 'z'], 'approved keys removed; drafts of untranslated / empty-approved keys kept; order kept')
     ok(not os.path.exists(f'{i18n}/engine/drafts/fr.arb'), 'a draft file with nothing left is deleted')
-    ok(rd(f'{i18n}/glossary/drafts/el.csv') == 'source,target,description\n"map","χάρτης","multi\nline"\n',
+    ok(rd(f'{i18n}/glossary/drafts/el.csv') == 'source,target,developer_comments\n"map","χάρτης","multi\nline"\n',
        'glossary drafts: the approved term removed, the other row kept byte for byte (quotes, newline in a field)')
     ok(rd(f'{i18n}/engine/el.arb').startswith('{\n  "@@locale": "el"'), 'approved catalogs untouched')
     ok(node('--check').returncode == 0, 'nothing left to prune')
@@ -179,7 +179,7 @@ try:
     made = WS.init_locale('es-ES', repo, write=False, log=quiet)
     ok(made and not os.path.exists(f'{i18n}/engine/es-ES.arb'), 'init-locale: dry run by default')
     WS.init_locale('es-ES', repo, write=True, log=quiet)
-    ok(rj(f'{i18n}/engine/es-ES.arb') == {'@@locale': 'es-ES'} and rd(f'{i18n}/glossary/es-ES.csv') == 'source,target,description\n',
+    ok(rj(f'{i18n}/engine/es-ES.arb') == {'@@locale': 'es-ES'} and rd(f'{i18n}/glossary/es-ES.csv') == 'source,target,developer_comments\n',
        'init-locale --write: {"@@locale": tag} stubs (BCP 47 file names), a header-only glossary file')
     try: WS.init_locale('xx', repo, log=quiet); ok(False, 'unknown locale refused')
     except SystemExit: ok(True, 'init-locale refuses a tag that is not a UI locale')
@@ -199,7 +199,13 @@ try:
            and c0['language_code_style'] == 'bcp' and 'icu_message_format' in c0['enforced_checks'], 'monolingual ARB, BCP 47 file names, ICU check enforced')
         ok('agreement' not in c0, 'no contributor agreement while the CLA is a draft')
         ok(cfg['ui']['project']['commit_policy'] == 30 and cfg['courses']['project']['commit_policy'] == 30, 'both projects: only approved translations are committed')
-        ok('glossary' not in names and any('glossary' in n for n in ui['notes']), 'the glossary is held back while its CSV has the column "description"')
+        g = next((c for c in ui['components'] if c['slug'] == 'glossary'), None)
+        ok(g and g['repo'] == 'weblate://noema-lite/core' and g['is_glossary'] and not any('glossary' in n for n in ui['notes']),
+           'the glossary component (CSV source,target,developer_comments) is planned, linked to core')
+        with open(f'{i18n}/glossary/el.csv', 'w', encoding='utf-8') as fh: fh.write('source,target,description\n"step","σταθμός","One stop"\n')
+        ui2 = WS.desired(cfg, repo)[0]
+        ok('glossary' not in [c['slug'] for c in ui2['components']] and any('glossary' in n for n in ui2['notes']),
+           'a glossary CSV with the old column "description" holds the component back (Weblate would empty it)')
         co = plan[1]
         ok([c['slug'] for c in co['components']] == [c['slug'] for c in idx['components']] and co['components'][0]['branch'] == 'weblate-facades'
            and co['components'][0]['file_format'] == 'json', 'the courses project: one flat-JSON component per facade file, on the exchange branch')

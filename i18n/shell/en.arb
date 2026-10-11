@@ -510,10 +510,6 @@
   "@sh.chatHistory": {
     "description": "Item of the tutor panel’s ⋮ menu: open the history of conversations."
   },
-  "sh.chatBack": "Back to the conversation",
-  "@sh.chatBack": {
-    "description": "Back to the current conversation from the history — currently not used by the app (kept for the tutor panel)."
-  },
   "sh.chatExport": "Export this conversation (.md)",
   "@sh.chatExport": {
     "description": "Item of the tutor panel’s ⋮ menu: download this conversation as Markdown (.md)."
@@ -525,17 +521,6 @@
   "sh.chatLangItem": "Conversation language",
   "@sh.chatLangItem": {
     "description": "Item of the tutor panel’s ⋮ menu: the language the tutor answers in."
-  },
-  "sh.chatLangSame": "Same as the subject ({l})",
-  "@sh.chatLangSame": {
-    "description": "Option of the conversation language: the same language as the subject’s content.",
-    "placeholders": {
-      "l": {
-        "type": "String",
-        "example": "English",
-        "description": "name of the subject’s language"
-      }
-    }
   },
   "sh.helloNight": "Hello",
   "@sh.helloNight": {
@@ -1336,17 +1321,6 @@
       }
     }
   },
-  "sh.nConcepts": "{n, plural, one {# section} other {# sections}}",
-  "@sh.nConcepts": {
-    "description": "A number of sections — currently not used by the app.",
-    "placeholders": {
-      "n": {
-        "type": "int",
-        "example": "7",
-        "description": "number of sections"
-      }
-    }
-  },
   "sh.collNote": "{n, plural, =0 {Every {item} is a chapter you have completed.} one {Every {item} is a chapter you have completed. The brightest one is from this week.} other {Every {item} is a chapter you have completed. The # brightest are from this week.}}",
   "@sh.collNote": {
     "description": "Note under the collection on Progress: every collection item (a star, shell, … depending on the character) is a completed chapter; the brightest ones were completed this week.",
@@ -1943,10 +1917,6 @@
   "sh.otherStation": "Make it another step",
   "@sh.otherStation": {
     "description": "Menu item of a subject that is already a Roadmap step: make it another step (of this or another Roadmap)."
-  },
-  "sh.notYours": "Only the subjects you made yourself can be shared.",
-  "@sh.notYours": {
-    "description": "Only subjects the learner made can be shared — currently not used by the app."
   },
   "sh.resetProgress": "Reset my progress in “{title}”",
   "@sh.resetProgress": {

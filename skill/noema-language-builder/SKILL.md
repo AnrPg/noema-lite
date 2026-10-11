@@ -57,7 +57,7 @@ toolkit the same files sit next to `LANGUAGE_BUILDER.md` (this text). Everything
   skip an audit turn. At the end say what a native speaker should still check.
 
 ## 1. Binding rules
-Read `$T/references/LANGUAGE_RULES.md` (D1–D20, binding) and `$T/references/language-packs.md` (D19, the contract of the
+Read `$T/references/LANGUAGE_RULES.md` (D1–D21, binding) and `$T/references/language-packs.md` (D19, the contract of the
 explanation layers) before anything else, then `$T/references/LANGUAGES.md` §4 (the content model) and §10.2 (the
 package). D13–D20 apply to the package exactly as to the library: the new language
 **fills the course's existing nodes and grammar functions** in the course's order — it never adds a node, concept,
@@ -105,12 +105,12 @@ Then run the checks yourself and mark the step.
 | F1…F6 | **Foundations** (prompts 3–8): `python3 $T/scripts/mkbrief.py foundations --course-dir work/lang/<course> --lang <code> --batch F<n> --nodes <ids> --sandbox > work/brief-F<n>.txt` — the sub-agent follows the brief (its FIRST RULE is D19): words with full facade and profile, grammar pages with a note for every supported native and type, neutral texts, ≥ 15 sentences per lesson, the catalogue's status | `validate_lang.py … --lang <code> --batch <ids> --alone`, `lang_refcheck.py … --lang <code>`, `node $T/scripts/lang_readback.js … --lang <code>`, `lang_facade.py lint …` |
 | V1…  | **Fields** (prompts 9–11): `mkbrief.py field …` — the same field in the other course languages as models; a rare item without a real word is an `absent` entry, never an invented word | the same |
 | K1…  | **Core** (prompt 12, 15–25): `mkbrief.py core …` — only the lessons the other languages have (nodes in `course.draft` wait); search the lexicon for a concept before adding a word (D15) | the same |
-| links | **Links** (prompt 13): seeAlso both ways — the new language's pages point to the other languages, and the other languages' pages of the same function get `{lang: "<code>", fn, note}` (only that field of their files); if the new language is a supported native: its contrast note on every grammar page of the other languages (D19); cognates, loans, false friends | `validate_lang.py … --strict --d19-strict --lang <code> --alone`, `lang_refcheck.py` |
+| links | **Links** (prompt 13): seeAlso both ways — the new language's pages point to the other languages, and the other languages' pages of the same function get `{lang: "<code>", fn, note}` (only that field of their files); if the new language is a supported native: its contrast note on every grammar page of the other languages (D19); cognates, loans, false friends | `validate_lang.py … --strict --lang <code> --alone`, `lang_refcheck.py` |
 | audit | **Audit** (prompt 14): 40 random words and 40 random sentences against Wiktionary and the grammar pages; `work/<code>-native-check.md` — what a native speaker should still check; fix in place | everything below |
 
 ## 5. Final checks, package, upload
 ```bash
-python3 $T/scripts/validate_lang.py work/lang/<course> --strict --d19-strict --lang <code> --alone   # 0 errors (D19 included)
+python3 $T/scripts/validate_lang.py work/lang/<course> --strict --lang <code> --alone   # 0 errors (D19 included: errors by default; --d19-lenient is only for test fixtures)
 python3 $T/scripts/lang_facade.py lint work/lang/<course>                                # D19: nothing for <code>
 python3 $T/scripts/lang_refcheck.py work/lang/<course> --lang <code>                     # no disagreement (ref.override only with a reason)
 python3 $T/scripts/lang_phenomena.py --root work/lang --lang <code>                      # no ❌

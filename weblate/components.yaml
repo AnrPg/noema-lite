@@ -89,8 +89,8 @@ ui:
     language_code_style: bcp
     manage_units: false
     # The CSV must use the column name translate-toolkit understands (developer_comments): a column named
-    # "description" is written back EMPTY by Weblate. weblate_setup.py refuses to create this component until the header
-    # is `source,target,developer_comments` (see weblate/README.md "Glossary").
+    # "description" is written back EMPTY by Weblate. weblate_setup.py leaves this component out while any glossary CSV
+    # has another header than `source,target,developer_comments` (see weblate/README.md "Glossary").
     required_header: ["source", "target", "developer_comments"]
 
 # ---------------------------------------------------- the language courses' explanation facades (docs/language-packs.md)

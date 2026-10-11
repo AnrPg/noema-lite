@@ -1085,7 +1085,7 @@ Input: due reviews (per language), next batches of open nodes, one trainable fun
     loader takes the content from the device or the cloud instead of `course.pack.js`).
 * **Tasks** (`engine/langcore.js`, P8 section — the same code in the app and in the connector): ids `core`,
   `node:<node>:<L>`, `function:<fn>:<L>`, `compare:<fn>`, `refill:<fn>:<L>:<n>`; queued in the record with `queuedAt`;
-  `langTaskSpec` gives the text (role, the binding rules D1–D20 in short, what to write, the course's concepts, nodes,
+  `langTaskSpec` gives the text (role, the binding rules D1–D21 in short, what to write, the course's concepts, nodes,
   frames, the words already written with their forms, the language's paradigm cells and facade, the common order of the
   library courses for `lang.core`, the answer's JSON Schema, the validator commands); `checkLangAnswer` checks an answer
   with the validator's rules that matter at run time (structure, ids, references, the DAG and the parallel order within the
@@ -1123,7 +1123,7 @@ The user asked: *"make the language playbook a skill for Claude and add it to th
 ask Claude to generate this package in full and with only one prompt of mine, and when it's done it should upload it
 straight to the app."* The whole of docs/NEW_LANGUAGE_PLAYBOOK.md (typology and phenomena → facade → F1–F6 → V1–V3 → K1… →
 links → audit) runs in Claude's sandbox; its result is ONE file, the **language package**, uploaded into the learner's
-private storage; the app adds the language to the course by itself. D1–D20 apply to a package exactly as to the library.
+private storage; the app adds the language to the course by itself. D1–D21 apply to a package exactly as to the library.
 
 **The package** — `noema.langpack/v1`, ONE language for ONE course (a library course or an account course); schema
 `tools/schemas/noema.langpack.v1.schema.json`:

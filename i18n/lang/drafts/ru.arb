@@ -614,7 +614,7 @@
   "lang.claude.knownPh": "например, el, en",
   "lang.claude.knownLabel": "Языки, которые ты знаешь",
   "lang.claude.explainLabel": "Язык объяснений",
-  "lang.claude.depthOf": "Глубина {code}",
+  "lang.claude.depthOf": "{lang}: глубина",
   "lang.claude.depth3": "всё (уровни 1–3)",
   "lang.claude.depth2": "частые + средние",
   "lang.claude.depth1": "частые слова",

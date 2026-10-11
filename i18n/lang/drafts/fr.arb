@@ -614,7 +614,7 @@
   "lang.claude.knownPh": "p. ex. el, en",
   "lang.claude.knownLabel": "Langues que tu connais",
   "lang.claude.explainLabel": "Langue des explications",
-  "lang.claude.depthOf": "Profondeur {code}",
+  "lang.claude.depthOf": "{lang} : profondeur",
   "lang.claude.depth3": "tout (niveaux 1–3)",
   "lang.claude.depth2": "courants + intermédiaires",
   "lang.claude.depth1": "les mots courants",

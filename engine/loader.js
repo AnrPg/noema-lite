@@ -893,7 +893,7 @@
     const c = (m && m.counts) || s.counts || {};
     const stat = (v, k) => v ? el('div', { class: 'nx-stat' }, el('b', {}, fmtN(v)), el('span', {}, tr(k, { n: num(v) }))) : null;
     return el('div', { class: 'nx-info' },
-      el('div', { class: 'nx-infohead' }, el('span', { class: 'nx-emo' }, s.emoji || '📘'), el('div', {}, el('h3', {}, s.title), el('div', { class: 'tiny' }, [s.owner_name || (m && m.ownerName) ? '👤 ' + (s.owner_name || m.ownerName) : '📚 ' + tr('loader.info.library'), m && m.language || s.language ? '🗣️ ' + (m && m.language || s.language) : '', m && m.sizeKB ? `💾 ${fmtN(m.sizeKB)} KB` : ''].filter(Boolean).join(' · ')))),   // i18n-ignore (KB: a unit)
+      el('div', { class: 'nx-infohead' }, el('span', { class: 'nx-emo' }, s.emoji || '📘'), el('div', {}, el('h3', {}, s.title), el('div', { class: 'tiny' }, [s.owner_name || (m && m.ownerName) ? '👤 ' + (s.owner_name || m.ownerName) : '📚 ' + tr('loader.info.library'), m && m.language || s.language ? '🗣️ ' + (window.NoemaI18n ? NoemaI18n.fmt.langName(m && m.language || s.language) : (m && m.language || s.language)) : '', m && m.sizeKB ? `💾 ${fmtN(m.sizeKB)} KB` : ''].filter(Boolean).join(' · ')))),   // i18n-ignore (KB: a unit)
       s.description ? el('p', { class: 'nx-desc' }, s.description) : null,
       el('div', { class: 'nx-stats' }, stat(c.chapters, 'loader.info.stat.chapters'), stat(c.sections, 'loader.info.stat.sections'), stat(c.exercises, 'loader.info.stat.exercises'), stat(c.visual, 'loader.info.stat.visual'), stat(c.pictures || c.media, 'loader.info.stat.pictures'), stat(c.flashcards, 'loader.info.stat.flashcards'), stat(c.playbooks, 'loader.info.stat.playbooks')),
       m && m.chapters && m.chapters.length ? el('div', {}, el('div', { class: 'nx-lbl' }, '📖 ' + tr('loader.info.nChapters', { n: m.chapters.length })), chaptersBox(m.chapters)) : null,
@@ -1141,10 +1141,11 @@
   /** One request as a row: who, what (info), Accept / Reject. */
   function shareRow(sh, { onAccepted } = {}) {
     if (UPDATE_KINDS.includes(sh.kind)) return updateRow(sh);
+    const tB = el('b', {}, sh.title), mtT = window.NoemaMT ? NoemaMT.toggle(Notes.acc, [NoemaMT.mark(tB, { language: sh.language || sh.meta?.language, kind: sh.kind === 'curriculum' ? 'shared.roadmap' : 'shared.pack' })]) : null;   // 🌐 its title on request (the personal message is never sent)
     const row = el('div', { class: 'nx-req' },
-      sh.kind === 'curriculum' ? el('div', { class: 'grow' }, ...trx('loader.req.invites', { who: el('b', {}, `${sh.from_name || tr('loader.req.someone')}`), title: el('b', {}, sh.title) }),
+      sh.kind === 'curriculum' ? el('div', { class: 'grow' }, ...trx('loader.req.invites', { who: el('b', {}, `${sh.from_name || tr('loader.req.someone')}`), title: tB }), mtT ? ' ' : null, mtT,
         el('div', { class: 'tiny' }, '👥 ' + tr('loader.req.invitesSub', { n: num(sh.meta?.counts?.steps) }) + (sh.message ? ' · ' + tr('loader.quoted', { text: sh.message }) : '')))
-      : el('div', { class: 'grow' }, ...trx('loader.req.wantsShare', { who: el('b', {}, `${sh.from_name || sh.from_email}`), title: el('b', {}, sh.title) }),
+      : el('div', { class: 'grow' }, ...trx('loader.req.wantsShare', { who: el('b', {}, `${sh.from_name || sh.from_email}`), title: tB }), mtT ? ' ' : null, mtT,
         el('div', { class: 'tiny' }, tr('loader.req.counts', { chapters: num(sh.meta?.counts?.chapters), exercises: num(sh.meta?.counts?.exercises) }) + (sh.message ? ' · ' + tr('loader.quoted', { text: sh.message }) : ''))),
       sh.kind === 'curriculum' ? null : el('button', { class: 'btn small ghost', title: tr('loader.req.details'), onclick: () => overlay((b, c) => b.append(infoCard({ title: sh.title, emoji: sh.meta?.emoji, owner_name: sh.from_name }, sh.meta), el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: c }, tr('loader.req.back'))))) }, 'ℹ️'),
       el('button', { class: 'btn small primary', onclick: async e => { e.currentTarget.disabled = true; try { const s = await Notes.accept(sh); toastL(s.kind === 'curriculum' ? '👥 ' + tr('loader.req.joined', { title: s.title }) : '✅ ' + tr('loader.req.accepted', { title: s.title })); onAccepted && onAccepted(s); } catch (er) { toastL('⚠️ ' + errMsg(er), 5000); e.target.disabled = false; } } }, '✓ ' + (sh.kind === 'curriculum' ? tr('loader.req.join') : tr('loader.req.accept'))),

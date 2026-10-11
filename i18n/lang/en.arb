@@ -3548,13 +3548,13 @@
   "@lang.claude.explainLabel": {
     "description": "Accessible name of the select of the explanation language."
   },
-  "lang.claude.depthOf": "Depth {code}",
+  "lang.claude.depthOf": "Depth {lang}",
   "@lang.claude.depthOf": {
-    "description": "Accessible name of the depth select of a language ({code} = its ISO code).",
+    "description": "Accessible name of the depth select of a language ({lang} = the language’s name in the UI language, e.g. “Spanish”).",
     "placeholders": {
-      "code": {
+      "lang": {
         "type": "String",
-        "example": "es"
+        "example": "Spanish"
       }
     }
   },

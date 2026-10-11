@@ -170,6 +170,8 @@ const PAGE = `<!doctype html><html><head><meta charset="utf-8"></head><body>
   ok(r.cb === true && r.prov === 'auto' && /Machine translation/.test(r.txt) && /Characters per day/.test(r.txt) && /Clear saved translations/.test(r.txt), 'Settings: consent, provider, caps, clear');
   await page.evaluate(() => { const c = document.querySelector('.mt-panel .mt-enable'); c.click(); });
   ok(await page.evaluate(() => !NoemaMT.enabled()), 'Settings: unticking turns it off');
+  ok(await page.evaluate(() => { const p = NoemaMT.panel(null, { heading: false }); return !p.querySelector('.ns-label') && !!p.querySelector('.mt-enable') && !!p.querySelector('.mt-clear'); }),
+     'Settings without its own heading (the classic engine’s ⚙️ section has one): the same consent, switch, caps');
   // the Greek UI: Greek texts need nothing, English ones do; the words come from the catalog
   await mock();
   await page.evaluate(() => { NoemaMT.setSettings(null, { on: true }); return NoemaI18n.use('el'); });

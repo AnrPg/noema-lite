@@ -1,4 +1,4 @@
-source,target,description
+source,target,developer_comments
 "Roadmap","Οδικός χάρτης","A goal broken into steps, drawn as a map; every step is taught by a full subject. Product term, capitalised in English; one fixed translation everywhere. (catalog: top.curricula)"
 "step","σταθμός","One stop on a Roadmap; each step is a subject. Called “station” on the map (same translation). (catalog: sh.nextStep)"
 "station","σταθμός","Synonym of “step” on the Roadmap map and its legend; translate exactly like step. (catalog: sh.signRule)"

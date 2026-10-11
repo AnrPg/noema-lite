@@ -14,7 +14,8 @@ apply   idempotent: creates a missing project / component / add-on, PATCHes the 
         `weblate-facades` of a checkout of the exchange branch; tools/i18n/weblate_facades.py export) and skipped without it.
         Refuses --apply while the GitHub owner is the placeholder OWNER. Sets the contributor agreement only from a
         weblate/CLA.md that is no longer marked DRAFT (the owner's rule: no unreviewed legal text goes live). Leaves out
-        the glossary while i18n/glossary/<locale>.csv still has the column "description" (Weblate writes it back empty).
+        the glossary while an i18n/glossary/<locale>.csv has the column "description" instead of "developer_comments"
+        (Weblate writes it back empty).
 init-locale  writes i18n/<component>/<tag>.arb = {"@@locale": "<tag>"} for every component (and an empty glossary
         file) where it is missing — the "template for new translations": Weblate finds the new file on its next pull
         and names nothing itself (BCP 47 file names stay exactly as the app expects). Dry run unless --write.
