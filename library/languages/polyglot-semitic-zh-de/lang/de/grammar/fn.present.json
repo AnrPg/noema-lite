@@ -416,7 +416,7 @@
   {
    "lang": "ar",
    "fn": "fn.present",
-   "note": "Arabic marks the person with prefixes and endings on the imperfect: آكُلُ ʾākulu (I eat), تَأْكُلُ taʾkulu (you eat, to a man), يَأْكُلُ yaʾkulu (he eats)."
+   "note": "Arabic marks the person with prefixes and endings on the imperfect:\n→ آكُلُ ʾākulu (I eat), تَأْكُلُ taʾkulu (you eat, to a man), يَأْكُلُ yaʾkulu (he eats)"
   },
   {
    "lang": "he",
@@ -426,7 +426,7 @@
   {
    "lang": "zh",
    "fn": "fn.present",
-   "note": "Chinese verbs never change: 我吃, 你吃, 他吃; time words and particles (在, 了) do the work German does with endings and context."
+   "note": "Chinese verbs never change: 我吃, 你吃, 他吃.\n\nTime words and particles (在, 了) do the work German does with endings and context."
   },
   {
    "lang": "de",
@@ -438,137 +438,137 @@
   {
    "for": "el",
    "rel": "similar",
-   "text": "One ending per person is familiar (τρώω, τρως, τρώει …), but German shows fewer distinct forms (wir and sie are alike: kaufen) and needs the pronoun. Greek uses θα for the future; German often uses the plain present with a time word: Morgen koche ich."
+   "text": "One ending per person is familiar (τρώω, τρως, τρώει …), but German shows fewer distinct forms (wir and sie are alike: kaufen) and needs the pronoun.\n\nGreek uses θα for the future; German often uses the plain present with a time word:\n→ Morgen koche ich."
   },
   {
    "for": "ru",
    "rel": "different",
-   "text": "German has no aspect pairs (делать / сделать): one verb, one present, for ongoing and repeated actions alike. Like the Russian perfective, the German present can refer to the future (Morgen koche ich)."
+   "text": "German has no aspect pairs (делать / сделать): one verb, one present, for ongoing and repeated actions alike.\n\nLike the Russian perfective, the German present can refer to the future:\n→ Morgen koche ich."
   },
   {
    "for": "es",
    "rel": "trap",
-   "text": "German has no progressive like estoy comiendo – Ich esse covers both; and the pronoun cannot be dropped. The verb-second rule (Vielleicht trinke ich Tee) has no Spanish counterpart."
+   "text": "- German has no progressive like estoy comiendo – Ich esse covers both.\n- The pronoun cannot be dropped.\n- The verb-second rule (Vielleicht trinke ich Tee) has no Spanish counterpart."
   },
   {
    "for": "en",
    "rel": "trap",
-   "text": "One present for “I eat” and “I am eating” – never *Ich bin essen. English has one ending (-s), German six slots (-e, -st, -t, -en, -t, -en). Ich will means “I want”, not “I will”."
+   "text": "- One present for “I eat” and “I am eating” – never *Ich bin essen.\n- English has one ending (-s), German six slots (-e, -st, -t, -en, -t, -en).\n- **Ich will means “I want”**, not “I will”."
   },
   {
    "for": "fr",
    "rel": "similar",
-   "text": "The French present also covers both “I eat” and “I am eating” (je mange). German endings are more audible (ich koche, du kochst, er kocht), and the verb must be second in the sentence."
+   "text": "The French present also covers both “I eat” and “I am eating” (je mange).\n\nGerman endings are more audible (ich koche, du kochst, er kocht), and **the verb must be second** in the sentence."
   },
   {
    "for": "hi",
    "rel": "different",
-   "text": "Hindi separates the habitual (khātā hū̃) from the progressive (khā rahā hū̃) and shows gender in the verb (khātā / khātī); German has one present and no gender: ich esse."
+   "text": "Hindi separates the habitual (khātā hū̃) from the progressive (khā rahā hū̃) and shows gender in the verb (khātā / khātī).\n\nGerman has one present and no gender:\n→ ich esse"
   },
   {
    "for": "fa",
    "rel": "different",
-   "text": "Persian adds the prefix mi- and person endings (mixoram, mixori, mixorad) and a progressive with dāštan; German has endings only and one present."
+   "text": "Persian adds the prefix mi- and person endings (mixoram, mixori, mixorad) and a progressive with dāštan.\n\nGerman has endings only and one present."
   },
   {
    "for": "mr",
    "rel": "different",
-   "text": "Marathi verbs show the subject’s gender (mī khāto / mī khāte); German verbs show only person and number: ich esse."
+   "text": "Marathi verbs show the subject’s gender (mī khāto / mī khāte); German verbs show only person and number:\n→ ich esse"
   },
   {
    "for": "ar",
    "rel": "different",
-   "text": "The Arabic imperfect uses prefixes and suffixes (aktubu, taktubu, yaktubu); German uses endings only: ich koche, du kochst, er kocht."
+   "text": "The Arabic imperfect uses prefixes and suffixes (aktubu, taktubu, yaktubu); German uses endings only:\n→ ich koche, du kochst, er kocht"
   },
   {
    "for": "he",
    "rel": "different",
-   "text": "The Hebrew present is a participle that changes for gender and number but not person (ochel, ochelet, ochlim, ochlot); the German present changes for person (esse, isst) and never for gender."
+   "text": "The Hebrew present is a participle that changes for gender and number but not person (ochel, ochelet, ochlim, ochlot).\n\nThe German present changes for person (esse, isst) and never for gender."
   },
   {
    "for": "tr",
    "rel": "different",
-   "text": "Turkish separates the progressive -iyor (yiyorum) from the aorist (yerim) and puts the verb last; German has one present (ich esse) and puts the verb second."
+   "text": "Turkish separates the progressive -iyor (yiyorum) from the aorist (yerim) and puts the verb last.\n\nGerman has one present (ich esse) and puts the verb second."
   },
   {
    "for": "ja",
    "rel": "new",
-   "text": "Japanese verbs do not change for the person (tabemasu for everyone); German verbs do: ich esse, du isst, er isst. The verb stands second, not at the end."
+   "text": "Japanese verbs do not change for the person (tabemasu for everyone); German verbs do:\n→ ich esse, du isst, er isst\n\nThe verb stands second, not at the end."
   },
   {
    "for": "ko",
    "rel": "new",
-   "text": "Korean verbs change for politeness, not for the person; German verbs change for the person (ich koche, du kochst) and stand second in a statement."
+   "text": "Korean verbs change for politeness, not for the person.\n\nGerman verbs change for the person (ich koche, du kochst) and stand second in a statement."
   },
   {
    "for": "fi",
    "rel": "similar",
-   "text": "Person endings (syön, syöt, syö, syömme, syötte, syövät) and a present that also covers the future are just as in German; new is the fixed verb-second position."
+   "text": "Person endings (syön, syöt, syö, syömme, syötte, syövät) and a present that also covers the future are just as in German.\n\nNew is the fixed verb-second position."
   },
   {
    "for": "hu",
    "rel": "different",
-   "text": "Hungarian verbs change for a definite object (látok egy házat / látom a házat); German verbs never do: ich sehe ein Haus, ich sehe das Haus."
+   "text": "Hungarian verbs change for a definite object (látok egy házat / látom a házat); German verbs never do:\n→ ich sehe ein Haus, ich sehe das Haus"
   },
   {
    "for": "sw",
    "rel": "different",
-   "text": "Swahili puts the subject and tense in prefixes (ninakula, nilikula, nitakula); German adds a person ending to the stem (ich esse, du isst) and has no tense prefix."
+   "text": "Swahili puts the subject and tense in prefixes (ninakula, nilikula, nitakula).\n\nGerman adds a person ending to the stem (ich esse, du isst) and has no tense prefix."
   },
   {
    "for": "zh",
    "rel": "new",
-   "text": "Chinese verbs never change (我吃, 你吃); German verbs take a person ending, and some change their vowel too (ich esse, du isst). There is no 在 for “now”: Ich esse covers it."
+   "text": "Chinese verbs never change (我吃, 你吃); German verbs take a person ending, and some change their vowel too:\n→ ich esse, du isst\n\nThere is no 在 for “now”: Ich esse covers it."
   },
   {
    "for": "vi",
    "rel": "new",
-   "text": "Vietnamese verbs never change and use đang / đã / sẽ for time; a German verb takes a person ending, and the present covers “now” and often the future."
+   "text": "Vietnamese verbs never change and use đang / đã / sẽ for time.\n\nA German verb takes a person ending, and the present covers “now” and often the future."
   },
   {
    "for": "iu",
    "rel": "similar",
-   "text": "Inuktitut verbs also take person endings, at the end of one long word with many suffixes; in German the ending sits on a short verb, and the other ideas are separate words."
+   "text": "Inuktitut verbs also take person endings, at the end of one long word with many suffixes.\n\nIn German the ending sits on a short verb, and the other ideas are separate words."
   },
   {
    "for": "it",
    "rel": "similar",
-   "text": "One ending per person is familiar (mangio, mangi, mangia …), but German needs the pronoun (ich esse, not *esse), and the verb must be second: Vielleicht trinke ich Tee. There is no progressive like sto mangiando: Ich esse covers both."
+   "text": "One ending per person is familiar (mangio, mangi, mangia …), but:\n- German needs the pronoun (ich esse, not *esse);\n- the verb must be second: Vielleicht trinke ich Tee;\n- there is no progressive like sto mangiando: Ich esse covers both."
   },
   {
    "for": "sq",
    "rel": "similar",
-   "text": "One ending per person is familiar (punoj, punon, punon, punojmë, punoni, punojnë), but German needs the pronoun (ich arbeite, not *arbeite), and po + verb (po ha) has no German counterpart: Er isst is both “eats” and “is eating”."
+   "text": "One ending per person is familiar (punoj, punon, punon, punojmë, punoni, punojnë), but:\n- German needs the pronoun (ich arbeite, not *arbeite);\n- po + verb (po ha) has no German counterpart: Er isst is both “eats” and “is eating”."
   },
   {
    "for": "pt",
    "rel": "trap",
-   "text": "German has no progressive like estou a comer – Ich esse covers both – and the pronoun cannot be dropped (ich esse, not *esse). The verb must be second in the sentence: Talvez beba chá – Vielleicht trinke ich Tee."
+   "text": "- German has no progressive like estou a comer – Ich esse covers both.\n- The pronoun cannot be dropped (ich esse, not *esse).\n- The verb must be second in the sentence: Talvez beba chá – Vielleicht trinke ich Tee."
   },
   {
    "for": "type:fusional",
    "rel": "similar",
-   "text": "Person endings are familiar; new are the obligatory pronoun (ich koche, du kochst), the verb in second place whatever comes first (Heute koche ich), and one present for “I eat” and “I am eating”."
+   "text": "Person endings are familiar; new are:\n- the obligatory pronoun (ich koche, du kochst);\n- the verb in second place whatever comes first (Heute koche ich);\n- one present for “I eat” and “I am eating”."
   },
   {
    "for": "type:agglutinating",
    "rel": "different",
-   "text": "If your verb piles up suffixes and stands at the end, the German present is short – stem + one person ending (koch-e, koch-st, koch-t) – and the verb stands second: Heute koche ich. The pronoun is always said."
+   "text": "If your verb piles up suffixes and stands at the end, the German present is short – stem + one person ending (koch-e, koch-st, koch-t) – and the verb stands second:\n→ Heute koche ich.\n\nThe pronoun is always said."
   },
   {
    "for": "type:isolating",
    "rel": "new",
-   "text": "If your verbs never change, German adds a person ending to every verb (ich koche, du kochst, er kocht), and some change their vowel too (ich esse, du isst). “Now” needs no marker: Ich esse = I am eating."
+   "text": "If your verbs never change, German adds a person ending to every verb (ich koche, du kochst, er kocht), and some change their vowel too (ich esse, du isst).\n\n“Now” needs no marker: Ich esse = I am eating."
   },
   {
    "for": "type:polysynthetic",
    "rel": "different",
-   "text": "If your verb includes subject and object, German splits them: the verb carries only a person ending (ich koche, du kochst), and the subject pronoun and the object are separate words: Ich koche Reis."
+   "text": "If your verb includes subject and object, German splits them: the verb carries only a person ending (ich koche, du kochst), and the subject pronoun and the object are separate words.\n→ Ich koche Reis."
   },
   {
    "for": "branch:Semitic",
    "rel": "different",
-   "text": "If your present verb shows the gender of the subject, German shows only the person: ich koche, du kochst, er kocht, sie kocht – he and she share kocht. Polite Sie takes the plural form: Sie kochen."
+   "text": "If your present verb shows the gender of the subject, German shows only the person – he and she share kocht:\n→ ich koche, du kochst, er kocht, sie kocht\n\nPolite Sie takes the plural form: Sie kochen."
   }
  ]
 }

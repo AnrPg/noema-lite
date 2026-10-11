@@ -395,7 +395,7 @@
   {
    "lang": "he",
    "fn": "fn.prep.core",
-   "note": "Hebrew be- (in, at), le- (to), mi- (from) are written joined to the noun; im (with), bli (without), bishvil (for), al (about) are separate words."
+   "note": "Hebrew:\n- be- (in, at), le- (to), mi- (from) are written joined to the noun;\n- im (with), bli (without), bishvil (for), al (about) are separate words."
   },
   {
    "lang": "zh",
@@ -405,94 +405,94 @@
   {
    "lang": "de",
    "fn": "fn.case",
-   "note": "Each preposition fixes the case: dative after aus, bei, mit, nach, von, zu; accusative after für, ohne."
+   "note": "Each preposition fixes the case:\n- dative after aus, bei, mit, nach, von, zu;\n- accusative after für, ohne."
   }
  ],
  "notes": [
   {
    "for": "el",
    "rel": "trap",
-   "text": "σε alone covers in, at and to: στο σχολείο is in der Schule (where) and zur Schule (where to); German also needs am Bahnhof, beim Arzt, zu Hause. από covers both aus (origin: aus Griechenland) and von (a starting point: von der Arbeit). With με German needs the dative: mit meinem Bruder."
+   "text": "σε alone covers in, at and to: στο σχολείο is in der Schule (where) and zur Schule (where to); German also needs am Bahnhof, beim Arzt, zu Hause.\n\n- από covers both aus (origin: aus Griechenland) and von (a starting point: von der Arbeit).\n- With με German needs the dative: mit meinem Bruder."
   },
   {
    "for": "ru",
    "rel": "similar",
-   "text": "в / на + case for “where” and “where to” work like in / an + case, and дома / домой split exactly as zu Hause / nach Hause. из / от match aus / von."
+   "text": "- в / на + case for “where” and “where to” work like in / an + case.\n- дома / домой split exactly as zu Hause / nach Hause.\n- из / от match aus / von."
   },
   {
    "for": "es",
    "rel": "different",
-   "text": "en covers in, at and on (en la escuela, en la mesa) and a covers “to”; German splits by place and direction: in der Schule, zur Schule, am Bahnhof, nach Madrid."
+   "text": "en covers in, at and on (en la escuela, en la mesa) and a covers “to”; German splits by place and direction:\n→ in der Schule, zur Schule, am Bahnhof, nach Madrid"
   },
   {
    "for": "en",
    "rel": "similar",
-   "text": "at my mother’s is bei meiner Mutter, to my mother is zu meiner Mutter; at home – zu Hause, home – nach Hause. German merges preposition and article: im, am, zum, zur."
+   "text": "- at my mother’s is bei meiner Mutter, to my mother is zu meiner Mutter;\n- at home – zu Hause, home – nach Hause.\n\nGerman merges preposition and article: im, am, zum, zur."
   },
   {
    "for": "fr",
    "rel": "trap",
-   "text": "chez ma mère is both bei meiner Mutter (where) and zu meiner Mutter (where to); German splits them. à Paris is in Paris or nach Paris."
+   "text": "chez ma mère is both bei meiner Mutter (where) and zu meiner Mutter (where to); German splits them.\n\nà Paris is in Paris or nach Paris."
   },
   {
    "for": "hi",
    "rel": "different",
-   "text": "Hindi postpositions follow the noun (ghar mẽ, ghar se, ghar ko); German prepositions precede it and fix its case: im Haus, aus dem Haus."
+   "text": "Hindi postpositions follow the noun (ghar mẽ, ghar se, ghar ko); German prepositions precede it and fix its case:\n→ im Haus, aus dem Haus"
   },
   {
    "for": "fa",
    "rel": "similar",
-   "text": "Persian prepositions come first as in German (dar xāne, be xāne, az xāne); but be covers every “to”, where German chooses nach, zu or in."
+   "text": "Persian prepositions come first as in German (dar xāne, be xāne, az xāne).\n\nBut be covers every “to”, where German chooses nach, zu or in."
   },
   {
    "for": "mr",
    "rel": "different",
-   "text": "Marathi puts the place relation at the end of the noun (gharāt – in the house, gharī – at home / home, gharūn – from the house); German puts a preposition before it."
+   "text": "Marathi puts the place relation at the end of the noun:\n→ gharāt – in the house, gharī – at home / home, gharūn – from the house\n\nGerman puts a preposition before it."
   },
   {
    "for": "ar",
    "rel": "different",
-   "text": "fī, ilā, min, maʿa all take the genitive; German prepositions each fix their own case (mit + dative, für + accusative). ʿinda (at someone’s) is bei."
+   "text": "- fī, ilā, min, maʿa all take the genitive; German prepositions each fix their own case (mit + dative, für + accusative).\n- ʿinda (at someone’s) is bei."
   },
   {
    "for": "he",
    "rel": "similar",
-   "text": "be-, le-, mi- are prefixes on the noun; German has separate words, which merge with the article (im, zum, vom). etsel (at someone’s place) is bei: bei meiner Mutter."
+   "text": "be-, le-, mi- are prefixes on the noun; German has separate words, which merge with the article (im, zum, vom).\n\netsel (at someone’s place) is bei: bei meiner Mutter."
   },
   {
    "for": "tr",
    "rel": "different",
-   "text": "Turkish uses case suffixes: evde (zu Hause), eve (nach Hause), evden (von zu Hause), okulda (in der Schule), okula (zur Schule). German puts a preposition before the noun and changes the article."
+   "text": "Turkish uses case suffixes:\n→ evde (zu Hause), eve (nach Hause), evden (von zu Hause)\n→ okulda (in der Schule), okula (zur Schule)\n\nGerman puts a preposition before the noun and changes the article."
   },
   {
    "for": "ja",
    "rel": "different",
-   "text": "Japanese particles follow the noun (gakkō ni / de / e / kara); German prepositions precede it, and the choice depends on the kind of place too."
+   "text": "Japanese particles follow the noun (gakkō ni / de / e / kara).\n\nGerman prepositions precede it, and the choice depends on the kind of place too."
   },
   {
    "for": "ko",
    "rel": "different",
-   "text": "Korean particles follow the noun (hakgyo-e, hakgyo-eseo); German prepositions come first and choose by place and direction."
+   "text": "Korean particles follow the noun (hakgyo-e, hakgyo-eseo).\n\nGerman prepositions come first and choose by place and direction."
   },
   {
    "for": "fi",
    "rel": "similar",
-   "text": "Finnish local cases split where / where to / where from just as German does (talossa – taloon – talosta: im Haus – ins Haus – aus dem Haus); German uses prepositions instead of endings."
+   "text": "Finnish local cases split where / where to / where from just as German does:\n→ talossa – taloon – talosta: im Haus – ins Haus – aus dem Haus\n\nGerman uses prepositions instead of endings."
   },
   {
    "for": "hu",
    "rel": "similar",
-   "text": "Hungarian suffixes split where / where to / where from (házban – házba – házból), the same three questions as Wo? / Wohin? / Woher?; German uses prepositions."
+   "text": "Hungarian suffixes split where / where to / where from (házban – házba – házból), the same three questions as Wo? / Wohin? / Woher?\n\nGerman uses prepositions."
   },
   {
    "for": "sw",
    "rel": "different",
-   "text": "Swahili -ni makes a place (nyumbani – at home and home; shuleni – at school and to school); German splits the two: zu Hause / nach Hause, in der Schule / zur Schule."
+   "text": "Swahili -ni makes a place (nyumbani – at home and home; shuleni – at school and to school).\n\nGerman splits the two:\n→ zu Hause / nach Hause, in der Schule / zur Schule"
   },
   {
    "for": "zh",
    "rel": "different",
-   "text": "在 + place for “where”, 去 + place for “where to”, 从 for “from”; in German the preposition and the case of the article change with the direction: in der Schule, in die Schule."
+   "text": "在 + place for “where”, 去 + place for “where to”, 从 for “from”.\n\nIn German the preposition and the case of the article change with the direction:\n→ in der Schule, in die Schule"
   },
   {
    "for": "vi",
@@ -502,47 +502,47 @@
   {
    "for": "iu",
    "rel": "similar",
-   "text": "Inuktitut case endings split where / where to / where from (iglumi – iglumut – iglumit), the same three questions as Wo? / Wohin? / Woher?; German uses prepositions instead."
+   "text": "Inuktitut case endings split where / where to / where from (iglumi – iglumut – iglumit), the same three questions as Wo? / Wohin? / Woher?\n\nGerman uses prepositions instead."
   },
   {
    "for": "it",
    "rel": "trap",
-   "text": "a and in split differently: sono a Roma / vado a Roma are in Rom / nach Rom, and da + person (sono dal medico / vado dal medico) is beim Arzt (where) / zum Arzt (where to). Like nel, al, dal, German merges preposition and article: im, am, zum, vom."
+   "text": "a and in split differently:\n- sono a Roma / vado a Roma are in Rom / nach Rom;\n- da + person (sono dal medico / vado dal medico) is beim Arzt (where) / zum Arzt (where to).\n\nLike nel, al, dal, German merges preposition and article: im, am, zum, vom."
   },
   {
    "for": "sq",
    "rel": "trap",
-   "text": "në covers in and to (jam në shkollë / shkoj në shkollë), and te covers at and to a person (jam te mjeku / shkoj te mjeku); German splits them: in der Schule / zur Schule, beim Arzt / zum Arzt. nga is both aus and von: nga Shqipëria – aus Albanien, nga puna – von der Arbeit."
+   "text": "në covers in and to (jam në shkollë / shkoj në shkollë), and te covers at and to a person (jam te mjeku / shkoj te mjeku); German splits them:\n→ in der Schule / zur Schule, beim Arzt / zum Arzt\n\nnga is both aus and von: nga Shqipëria – aus Albanien, nga puna – von der Arbeit."
   },
   {
    "for": "pt",
    "rel": "trap",
-   "text": "em covers in, at and on (na escola, na mesa), and a / para say “to”; German splits by place and direction: in der Schule, zur Schule, am Bahnhof, nach Lissabon. Like no, na, ao, do, German merges preposition and article: im, am, zum, vom."
+   "text": "em covers in, at and on (na escola, na mesa), and a / para say “to”; German splits by place and direction:\n→ in der Schule, zur Schule, am Bahnhof, nach Lissabon\n\nLike no, na, ao, do, German merges preposition and article: im, am, zum, vom."
   },
   {
    "for": "type:fusional",
    "rel": "similar",
-   "text": "If your prepositions govern cases, the system is familiar; new is how finely German splits one idea by the kind of place: in der Schule, am Bahnhof, beim Arzt, zu Hause – and for movement zur Schule, nach Berlin, in die Stadt."
+   "text": "If your prepositions govern cases, the system is familiar; new is **how finely German splits one idea by the kind of place**:\n→ in der Schule, am Bahnhof, beim Arzt, zu Hause\n→ for movement: zur Schule, nach Berlin, in die Stadt"
   },
   {
    "for": "type:agglutinating",
    "rel": "different",
-   "text": "Where you would use one locative, one directional and one source suffix, German chooses a preposition by the kind of place: in der Schule / am Bahnhof / beim Arzt (where), zur Schule / nach Berlin (where to), aus Athen / von der Arbeit (from)."
+   "text": "Where you would use one locative, one directional and one source suffix, German chooses a preposition by the kind of place:\n- in der Schule / am Bahnhof / beim Arzt (where);\n- zur Schule / nach Berlin (where to);\n- aus Athen / von der Arbeit (from)."
   },
   {
    "for": "type:isolating",
    "rel": "different",
-   "text": "If one word for “at” and one verb for “go” cover every place, note that German chooses the preposition by the kind of place and by direction (in der Schule, zur Schule, beim Arzt, nach Berlin) and puts the article in the matching case."
+   "text": "If one word for “at” and one verb for “go” cover every place, note that German:\n- chooses the preposition by the kind of place and by direction (in der Schule, zur Schule, beim Arzt, nach Berlin);\n- puts the article in the matching case."
   },
   {
    "for": "type:polysynthetic",
    "rel": "different",
-   "text": "Spatial relations your language may put into endings become German prepositions before the noun, merged with the article when possible: im Park, am Bahnhof, zum Arzt, vom Markt."
+   "text": "Spatial relations your language may put into endings become German prepositions before the noun, merged with the article when possible:\n→ im Park, am Bahnhof, zum Arzt, vom Markt"
   },
   {
    "for": "branch:Semitic",
    "rel": "different",
-   "text": "If one preposition such as “in” or “to” covers many places, German splits by the kind of place: in der Schule (inside), am Bahnhof (edge, point), beim Arzt (at a person’s), zu Hause; and for movement: zur Schule, nach Berlin, in die Stadt."
+   "text": "If one preposition such as “in” or “to” covers many places, German splits by the kind of place:\n- in der Schule (inside);\n- am Bahnhof (edge, point);\n- beim Arzt (at a person’s);\n- zu Hause.\n\nFor movement: zur Schule, nach Berlin, in die Stadt."
   }
  ]
 }

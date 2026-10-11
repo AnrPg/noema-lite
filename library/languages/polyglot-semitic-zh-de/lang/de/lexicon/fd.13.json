@@ -108,7 +108,7 @@
      "neutral"
     ],
     "connotation": "neutral",
-    "feeling": "One foot in front of the other – to work, to school, home; and the everyday “going” of plans and things.",
+    "feeling": "One foot in front of the other – to work, to school, home.\n\nAnd the everyday “going” of plans and things.",
     "senses": [
      {
       "id": "s1",
@@ -286,7 +286,7 @@
      "German splits going into gehen (on foot) and fahren (by vehicle)."
     ],
     "pitfalls": [
-     "gehen is going on foot; by car, bus, train or ship you fahren: Ich fahre mit dem Bus. “Ich gehe nach Berlin” sounds like walking there (or, in speech, moving there to live).",
+     "gehen is going on foot; by car, bus, train or ship you fahren:\n→ Ich fahre mit dem Bus.\n\n“Ich gehe nach Berlin” sounds like walking there (or, in speech, moving there to live).",
      "Irregular in the past: ging – gegangen, and the perfect takes sein: Ich bin nach Hause gegangen.",
      "Imperative: Geh! (du) – Geht! (ihr) – Gehen Sie! (polite)."
     ],
@@ -569,7 +569,7 @@
      "kommen goes back to the Indo-European root *gʷem-; the gʷ became k in Germanic."
     ],
     "pitfalls": [
-     "kommen is movement towards the speaker (or the place in the story): Kommst du zu mir? – but Ich komme! (“I’m coming!”) also answers someone who calls you.",
+     "kommen is movement towards the speaker (or the place in the story): Kommst du zu mir?\n\nBut Ich komme! (“I’m coming!”) also answers someone who calls you.",
      "Irregular past kam – gekommen; perfect with sein: Er ist gekommen.",
      "Origin with aus: Ich komme aus Athen (not *von Athen)."
     ],
@@ -840,7 +840,7 @@
      "laufen is the everyday “walk” and also “run”: Ich laufe zur Arbeit."
     ],
     "pitfalls": [
-     "Two meanings: in everyday speech laufen is “to walk, to go on foot” (Ich laufe nach Hause); in sport and with speed it is “to run”. When it must be clear, say zu Fuß gehen (walk) or rennen (run).",
+     "Two meanings:\n- in everyday speech laufen is “to walk, to go on foot” (Ich laufe nach Hause);\n- in sport and with speed it is “to run”.\n\nWhen it must be clear, say zu Fuß gehen (walk) or rennen (run).",
      "Stem change a → äu in du and er/sie/es: du läufst, er läuft – but the imperative has no umlaut: Lauf! (not *Läuf!).",
      "Perfect with sein: Ich bin nach Hause gelaufen."
     ],
@@ -1063,7 +1063,7 @@
      "rennen comes from a pair of old verbs (“to run” and “to make run”) that merged."
     ],
     "pitfalls": [
-     "rennen is always fast; for jogging or a race distance German usually says laufen: Ich laufe zehn Kilometer.",
+     "rennen is always fast; for jogging or a race distance German usually says laufen:\n→ Ich laufe zehn Kilometer.",
      "Mixed verb: rannte – gerannt (vowel change and -te like a weak verb); perfect with sein."
     ],
     "subtleties": [
@@ -1324,15 +1324,15 @@
     },
     "funFacts": [
      "fahren once meant simply “to travel” – by any means.",
-     "The noun family is huge: der Fahrer (driver), die Fahrkarte (ticket), das Fahrrad (bicycle), die Fahrt (trip), die Erfahrung (experience – what you get by travelling)."
+     "The noun family is huge:\n→ der Fahrer (driver), die Fahrkarte (ticket), das Fahrrad (bicycle), die Fahrt (trip)\n→ die Erfahrung (experience – what you get by travelling)"
     ],
     "pitfalls": [
-     "gehen is going on foot; by car, bus, train or ship you fahren: Ich fahre mit dem Bus. “Ich gehe nach Berlin” sounds like walking there (or, in speech, moving there to live).",
+     "gehen is going on foot; by car, bus, train or ship you fahren:\n→ Ich fahre mit dem Bus.\n\n“Ich gehe nach Berlin” sounds like walking there (or, in speech, moving there to live).",
      "Stem change a → ä in du and er/sie/es (du fährst, er fährt) – but not in the imperative: Fahr! (not *Fähr!).",
      "Perfect: Ich bin nach Berlin gefahren (movement, sein) – Ich habe das Auto gefahren (driving something, haben)."
     ],
     "subtleties": [
-     "German does not mark who drives: Ich fahre nach Berlin = I go to Berlin (by train, car, bus …). To say you are the driver: Ich fahre (das Auto) / Ich sitze am Steuer.",
+     "German does not mark who drives: Ich fahre nach Berlin = I go to Berlin (by train, car, bus …).\n\nTo say you are the driver:\n→ Ich fahre (das Auto) / Ich sitze am Steuer.",
      "For planes German uses fliegen: Wir fliegen nach Athen."
     ],
     "notes": [
@@ -1537,7 +1537,7 @@
      "Do not confuse reisen (to travel) with reißen (to tear) – ß!"
     ],
     "subtleties": [
-     "reisen sounds like longer journeys; for an everyday trip Germans say fahren: Ich fahre am Wochenende zu meinen Eltern."
+     "reisen sounds like longer journeys; for an everyday trip Germans say fahren:\n→ Ich fahre am Wochenende zu meinen Eltern."
     ]
    }
   },
@@ -2377,7 +2377,7 @@
      "Separable: Ich gehe jetzt weg. – Geh weg! (Go away! – can sound rude)."
     ],
     "subtleties": [
-     "Wann gehst du weg? can mean “When are you leaving?” or “When are you going out tonight?” – context decides."
+     "Wann gehst du weg? can mean “When are you leaving?” or “When are you going out tonight?”\n\nContext decides."
     ],
     "notes": [
      {
@@ -2628,7 +2628,7 @@
      {
       "for": "en",
       "rel": "similar",
-      "text": "ver- is the twin of English for- (forget, forsake). verlassen is related to archaic English forlet (“to leave”)."
+      "text": "ver- is the twin of English for- (forget, forsake).\n\nverlassen is related to archaic English forlet (“to leave”)."
      }
     ]
    }
@@ -3332,7 +3332,7 @@
     ],
     "pitfalls": [
      "Wait FOR = warten AUF + accusative: Ich warte auf dich (not *für dich).",
-     "Stem in -t: an -e- comes before -st and -t: du wartest, er wartet, ihr wartet; imperative Warte! (with -e).",
+     "Stem in -t: an -e- comes before -st and -t:\n→ du wartest, er wartet, ihr wartet; imperative Warte! (with -e)",
      "For something still going on use seit + present: Ich warte seit zwanzig Minuten."
     ],
     "subtleties": [
@@ -3585,7 +3585,7 @@
      "Spoken German often splits it: Wo kommst du her?"
     ],
     "pitfalls": [
-     "The answer: aus + dative for countries, cities, buildings (aus Griechenland, aus dem Haus); von + dative for people and points (vom Bahnhof, von meiner Mutter).",
+     "The answer:\n- aus + dative for countries, cities, buildings (aus Griechenland, aus dem Haus);\n- von + dative for people and points (vom Bahnhof, von meiner Mutter).",
      "Woher kommst du? asks for your origin – in the present tense."
     ],
     "subtleties": [
@@ -3764,7 +3764,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Bus is short for Latin omnibus, “for all” – a vehicle for everybody; the word came to German through French in the 19th century."
+     "Bus is short for Latin omnibus, “for all” – a vehicle for everybody.\n\nThe word came to German through French in the 19th century."
     ],
     "pitfalls": [
      "By bus = mit dem Bus (dative), not *mit Bus: Ich fahre mit dem Bus.",
@@ -4009,7 +4009,7 @@
      "Plural with umlaut: die Züge, dative den Zügen."
     ],
     "subtleties": [
-     "Zug is “a pull”: a train is what is pulled; a draught is air that pulls; a chess move pulls a piece. Context tells the meaning."
+     "Zug is “a pull”:\n- a train is what is pulled;\n- a draught is air that pulls;\n- a chess move pulls a piece.\n\nContext tells the meaning."
     ],
     "notes": [
      {
@@ -4338,7 +4338,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Taxi is short for taximeter (French taximètre), the meter that counts the fare (taxe = charge); the device is still called das Taxameter in German."
+     "Taxi is short for the name of the meter that counts the fare – still called das Taxameter in German (from Taxe, an old word for a charge)."
     ],
     "pitfalls": [
      "Neuter: das Taxi (in Switzerland occasionally der Taxi).",
@@ -4346,6 +4346,13 @@
     ],
     "subtleties": [
      "Taxi drivers in Germany are tipped by rounding up the fare (aufrunden)."
+    ],
+    "notes": [
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Taxi is your taxi, short for taximètre (taxe = charge); German still calls the meter das Taxameter."
+     }
     ]
    }
   },
@@ -4833,7 +4840,7 @@
      "On board = auf dem Schiff (not *im Schiff, unless you mean below deck)."
     ],
     "subtleties": [
-     "The ferry to an island is die Fähre; for it Germans also just say Schiff: Wir nehmen das Schiff nach Mykonos."
+     "The ferry to an island is die Fähre; for it Germans also just say Schiff:\n→ Wir nehmen das Schiff nach Mykonos."
     ],
     "notes": [
      {
@@ -5288,10 +5295,10 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Fahrkarte is literally a “travel card”; die Karte comes from Latin charta, from Greek χάρτης (a leaf of papyrus)."
+     "Fahrkarte is literally a “travel card”.\n\ndie Karte comes from Latin charta, from Greek χάρτης (a leaf of papyrus)."
     ],
     "pitfalls": [
-     "Fahrkarte is for buses, trams and trains; for a plane, a concert or a film say Ticket (Flugticket) or Karte (Kinokarte).",
+     "- Fahrkarte is for buses, trams and trains;\n- for a plane, a concert or a film say Ticket (Flugticket) or Karte (Kinokarte).",
      "Feminine because of die Karte: die Fahrkarte, plural die Fahrkarten."
     ],
     "subtleties": [
@@ -5469,7 +5476,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English ticket comes from Old French estiquet (a label) – the same word as étiquette and as German Etikett (label)."
+     "Ticket goes back to an old word for a label – it is the same word as das Etikett (label)."
     ],
     "pitfalls": [
      "Neuter: das Ticket; plural die Tickets.",
@@ -5483,6 +5490,11 @@
       "for": "fr",
       "rel": "similar",
       "text": "Ticket and Etikett are the same word as étiquette."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Ticket is borrowed from your ticket, which goes back to a word for a label – the same word as das Etikett."
      }
     ]
    }

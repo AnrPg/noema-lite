@@ -241,10 +241,10 @@
     },
     "funFacts": [
      "German “has” hunger, thirst, fear and luck: Hunger haben, Durst haben, Angst haben, Glück haben.",
-     "Not every language has an everyday verb “to have”: Hebrew says יֵשׁ לִי (“there is to me”), Arabic عِنْدِي (“at me”); German haben is a real verb."
+     "Not every language has an everyday verb “to have”:\n- Hebrew says יֵשׁ לִי (“there is to me”);\n- Arabic عِنْدِي (“at me”).\n\nGerman haben is a real verb."
     ],
     "pitfalls": [
-     "haben takes the accusative: Ich habe einen Bruder (der Bruder → einen Bruder); die, das and the plural do not change.",
+     "haben takes the accusative:\n→ Ich habe einen Bruder (der Bruder → einen Bruder)\n\ndie, das and the plural do not change.",
      "du hast, er hat – the b disappears in these two forms.",
      "Age is said with sein, not haben: Ich bin 20 (Jahre alt), never *Ich habe 20 Jahre."
     ],
@@ -1682,7 +1682,7 @@
     ],
     "pitfalls": [
      "Plural Schwestern (the dative is the same).",
-     "In hospitals the official word today is Pflegerin / Pflegefachfrau; Schwester is the traditional one."
+     "In hospitals the official word today is Pflegerin / Pflegefachfrau.\n\nSchwester is the traditional one."
     ],
     "subtleties": [
      "In compounds Schwester- means a “sister” organisation: die Schwesterfirma (sister company), das Schwesterschiff (sister ship)."
@@ -2481,7 +2481,7 @@
      {
       "for": "en",
       "rel": "similar",
-      "text": "English grandfather replaced eldfather in the same way. Großvater is built like English grandfather – “big” + father."
+      "text": "Großvater is built like English grandfather – “big” + father.\n\nEnglish grandfather replaced eldfather in the same way."
      }
     ]
    }
@@ -3455,7 +3455,7 @@
     ],
     "pitfalls": [
      "Plural Onkel (colloquially Onkels); dative den Onkeln.",
-     "German has one word for the father’s and the mother’s brother; to be precise, add väterlicherseits / mütterlicherseits."
+     "German has one word for the father’s and the mother’s brother.\n\nTo be precise, add väterlicherseits / mütterlicherseits."
     ],
     "subtleties": [
      "Onkel also covers the husband of an aunt."
@@ -3686,7 +3686,7 @@
      "neutral"
     ],
     "connotation": "neutral",
-    "feeling": "A (male) cousin – French in sound and spelling.",
+    "feeling": "A (male) cousin – a loanword that keeps its foreign sound and spelling.",
     "senses": [
      {
       "id": "s1",
@@ -3758,6 +3758,13 @@
     ],
     "subtleties": [
      "Cousins und Cousinen is the full way to say “cousins” of both sexes."
+    ],
+    "notes": [
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Cousin is your cousin, spelled and pronounced the French way (with the nasal vowel).\n\nThe female form is die Cousine."
+     }
     ]
    }
   },
@@ -4342,11 +4349,11 @@
      "verwandt also means “related” for languages: Deutsch und Englisch sind verwandt."
     ],
     "pitfalls": [
-     "It declines like an adjective: der Verwandte, but ein Verwandter; die Verwandten, but (no article) Verwandte.",
+     "It declines like an adjective:\n→ der Verwandte, but ein Verwandter\n→ die Verwandten, but (no article) Verwandte",
      "A woman: die Verwandte, eine Verwandte (dative der/einer Verwandten)."
     ],
     "subtleties": [
-     "Wiktionary gives two lemmas: Verwandter (a man, or anyone) and Verwandte (a woman); the plural Verwandte(n) covers everyone."
+     "Wiktionary gives two lemmas: Verwandter (a man, or anyone) and Verwandte (a woman).\n\nThe plural Verwandte(n) covers everyone."
     ]
    }
   },
@@ -4682,7 +4689,7 @@
     ],
     "pitfalls": [
      "sein (his) looks like the verb sein (to be) – the context decides: Das ist sein Vater.",
-     "The owner decides sein or ihr; the noun decides the ending: seine Schwester (his sister), ihr Bruder (her brother)."
+     "The owner decides sein or ihr; the noun decides the ending:\n→ seine Schwester (his sister), ihr Bruder (her brother)"
     ],
     "subtleties": [
      "For a neuter owner too: das Mädchen und sein Vater (grammatically correct, though people often say ihr Vater)."
@@ -4804,7 +4811,7 @@
      "Her, their and polite your all sound the same in German: ihr – one reason the polite form is written with a capital."
     ],
     "pitfalls": [
-     "ihr = her and their (and, capitalised, Ihr = your, polite). Also ihr = “you all” (pronoun) and ihr = “to her” – the context decides.",
+     "ihr = her and their (and, capitalised, Ihr = your, polite).\n\nAlso ihr = “you all” (pronoun) and ihr = “to her” – the context decides.",
      "ihr Bruder = her/their brother; ihre Schwester = her/their sister."
     ],
     "subtleties": [

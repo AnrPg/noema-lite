@@ -166,7 +166,7 @@
     {
      "for": "en",
      "rel": "trap",
-     "text": "Neither “was …-ing” nor “used to” has a German verb form: not *Ich war spielend, but Ich spielte gerade; I used to play football = Früher spielte ich Fußball."
+     "text": "Neither “was …-ing” nor “used to” has a German verb form:\n→ not *Ich war spielend, but Ich spielte gerade\n→ I used to play football = Früher spielte ich Fußball"
     }
    ]
   },
@@ -197,7 +197,7 @@
   "ich schlief, er schlief – strong verbs have no ending in ich and er.",
   "Not *Ich war spielend; not *Ich pflegte zu spielen in everyday speech (formal only).",
   "Als ich ein Kind war … (one period) – not *Wenn ich ein Kind war …",
-  "früher means “in the past, formerly” (Früher wohnte ich in Berlin); a moment earlier the same day is vorhin: Vorhin war er hier.",
+  "früher means “in the past, formerly” (Früher wohnte ich in Berlin).\n\nA moment earlier the same day is vorhin:\n→ Vorhin war er hier.",
   "Als die Mutter kam, schlief das Baby – after the als-clause the verb comes first: not *…, das Baby schlief."
  ],
  "evidence": {
@@ -377,67 +377,67 @@
   {
    "for": "el",
    "rel": "different",
-   "text": "Greek has a separate imperfect for habits and ongoing actions (έπαιζα vs έπαιξα); German has one Präteritum (spielte) and adds früher, immer or gerade."
+   "text": "Greek has a separate imperfect for habits and ongoing actions (έπαιζα vs έπαιξα).\n\nGerman has one Präteritum (spielte) and adds früher, immer or gerade."
   },
   {
    "for": "ru",
    "rel": "different",
-   "text": "Russian uses the imperfective past (играл) for habits and background; German has no aspect pair: spielte, plus früher or oft."
+   "text": "Russian uses the imperfective past (играл) for habits and background.\n\nGerman has no aspect pair: spielte, plus früher or oft."
   },
   {
    "for": "es",
    "rel": "trap",
-   "text": "There is no imperfecto: jugaba and jugué are both spielte (or habe gespielt). The habit is shown with früher, immer, oft."
+   "text": "There is no imperfecto: jugaba and jugué are both spielte (or habe gespielt).\n\nThe habit is shown with früher, immer, oft."
   },
   {
    "for": "en",
    "rel": "trap",
-   "text": "Neither “used to” nor “was …-ing” has a German verb form: Früher spielte ich … / Als er kam, schlief ich. Not *Ich war schlafend."
+   "text": "Neither “used to” nor “was …-ing” has a German verb form:\n→ Früher spielte ich … / Als er kam, schlief ich.\n→ Not *Ich war schlafend."
   },
   {
    "for": "fr",
    "rel": "different",
-   "text": "The imparfait (je jouais) has no German twin: Präteritum or Perfekt + früher / gerade. The German Präteritum is not an imparfait – it is used for finished events too."
+   "text": "The imparfait (je jouais) has no German twin: Präteritum or Perfekt + früher / gerade.\n\n**The German Präteritum is not an imparfait** – it is used for finished events too."
   },
   {
    "for": "hi",
    "rel": "different",
-   "text": "Hindi has a habitual past (खेलता था) and a progressive past (खेल रहा था); German uses one past and adverbs: früher spielte er / er spielte gerade."
+   "text": "Hindi has a habitual past (खेलता था) and a progressive past (खेल रहा था); German uses one past and adverbs:\n→ früher spielte er / er spielte gerade"
   },
   {
    "for": "fa",
    "rel": "different",
-   "text": "Persian marks the continuous and habitual past with mi- (mirāftam “I used to go / was going”); German says früher ging ich or ich ging gerade."
+   "text": "Persian marks the continuous and habitual past with mi- (mirāftam “I used to go / was going”). German says:\n→ früher ging ich or ich ging gerade"
   },
   {
    "for": "ar",
    "rel": "different",
-   "text": "Arabic kāna + imperfect (kāna yalʿabu) marks the habitual or ongoing past; German only has the past form and adds früher or gerade."
+   "text": "Arabic kāna + imperfect (kāna yalʿabu) marks the habitual or ongoing past.\n\nGerman only has the past form and adds früher or gerade."
   },
   {
    "for": "he",
    "rel": "similar",
-   "text": "Hebrew uses haya + the present form for past habits; German also leaves the habit to the context, but with a past verb and früher: Früher spielte er."
+   "text": "Hebrew uses haya + the present form for past habits; German also leaves the habit to the context, but with a past verb and früher:\n→ Früher spielte er."
   },
   {
    "for": "tr",
    "rel": "different",
-   "text": "Turkish has oynuyordu (was playing) and oynardı (used to play); German has spielte for both and adds gerade or früher."
+   "text": "Turkish has oynuyordu (was playing) and oynardı (used to play).\n\nGerman has spielte for both and adds gerade or früher."
   },
   {
    "for": "ja",
    "rel": "different",
-   "text": "Japanese -te ita (asonde ita, “was playing”) marks ongoing past; German uses the plain past + gerade or an als-clause."
+   "text": "Japanese -te ita (asonde ita, “was playing”) marks ongoing past.\n\nGerman uses the plain past + gerade or an als-clause."
   },
   {
    "for": "ko",
    "rel": "different",
-   "text": "Korean marks a progressive past (-고 있었다) and a habitual past (-곤 했다); German has no such endings: spielte + gerade / früher."
+   "text": "Korean marks a progressive past (-고 있었다) and a habitual past (-곤 했다).\n\nGerman has no such endings: spielte + gerade / früher."
   },
   {
    "for": "fi",
    "rel": "similar",
-   "text": "Finnish also has no aspect in the verb: the imperfect leikin covers “I played”, “I was playing” and “I used to play”, as German spielte does; time words do the rest."
+   "text": "Finnish also has no aspect in the verb: the imperfect leikin covers “I played”, “I was playing” and “I used to play”, as German spielte does.\n\nTime words do the rest."
   },
   {
    "for": "hu",
@@ -447,62 +447,62 @@
   {
    "for": "sw",
    "rel": "different",
-   "text": "Swahili builds an ongoing past with kuwa “to be” + a second verb (nilikuwa ninasoma, “I was reading”); German uses one past verb: ich las (gerade)."
+   "text": "Swahili builds an ongoing past with kuwa “to be” + a second verb (nilikuwa ninasoma, “I was reading”); German uses one past verb:\n→ ich las (gerade)"
   },
   {
    "for": "zh",
    "rel": "different",
-   "text": "Chinese marks ongoing with 在 / 正在 and habits with 以前, 小时候, 常; German must change the verb to the past and adds früher, oft."
+   "text": "Chinese marks ongoing with 在 / 正在 and habits with 以前, 小时候, 常.\n\nGerman must change the verb to the past and adds früher, oft."
   },
   {
    "for": "vi",
    "rel": "similar",
-   "text": "Vietnamese uses đang for ongoing actions and words like trước đây for the past, with an unchanged verb; German also uses words (gerade, früher), but the verb must be in the past."
+   "text": "Vietnamese uses đang for ongoing actions and words like trước đây for the past, with an unchanged verb.\n\nGerman also uses words (gerade, früher), but **the verb must be in the past**."
   },
   {
    "for": "iu",
    "rel": "different",
-   "text": "Inuktitut expresses many such meanings with suffixes inside the verb word; German uses separate words – früher, immer, oft, gerade – with the past form."
+   "text": "Inuktitut expresses many such meanings with suffixes inside the verb word.\n\nGerman uses separate words – früher, immer, oft, gerade – with the past form."
   },
   {
    "for": "it",
    "rel": "trap",
-   "text": "There is no imperfetto: giocavo and giocai / ho giocato are all spielte (or habe gespielt), and stavo giocando is spielte gerade. The habit is said with früher, immer, oft: Früher spielte ich Fußball (giocavo a calcio)."
+   "text": "There is no imperfetto:\n- giocavo and giocai / ho giocato are all spielte (or habe gespielt);\n- stavo giocando is spielte gerade.\n\nThe habit is said with früher, immer, oft:\n→ Früher spielte ich Fußball (giocavo a calcio)."
   },
   {
    "for": "sq",
    "rel": "trap",
-   "text": "Albanian has an imperfect for habits and background (luaja, flija) and po for an action in progress (po luaja); German has one Präteritum (spielte, schlief) and adds früher, immer or gerade: Früher spielte ich oft im Garten."
+   "text": "Albanian has an imperfect for habits and background (luaja, flija) and po for an action in progress (po luaja).\n\nGerman has one Präteritum (spielte, schlief) and adds früher, immer or gerade:\n→ Früher spielte ich oft im Garten."
   },
   {
    "for": "pt",
    "rel": "trap",
-   "text": "There is no imperfeito: brincava and brinquei are both spielte (or habe gespielt), and estava a brincar is spielte gerade. The habit is said with früher, immer, oft: Früher spielte ich oft im Garten."
+   "text": "There is no imperfeito:\n- brincava and brinquei are both spielte (or habe gespielt);\n- estava a brincar is spielte gerade.\n\nThe habit is said with früher, immer, oft:\n→ Früher spielte ich oft im Garten."
   },
   {
    "for": "type:fusional",
    "rel": "trap",
-   "text": "If your language has an imperfect or another past for habits and background, German does not: the Präteritum (spielte) or the Perfekt serves for finished events too, and früher, immer, gerade or an als-clause carry the meaning."
+   "text": "If your language has an imperfect or another past for habits and background, German does not:\n- the Präteritum (spielte) or the Perfekt serves for finished events too;\n- früher, immer, gerade or an als-clause carry the meaning."
   },
   {
    "for": "type:agglutinating",
    "rel": "different",
-   "text": "If your verb takes suffixes for “was doing” or “used to”, German has no such forms: it uses the plain past and adds a word – früher, gerade, immer, oft: Früher spielte ich oft im Garten."
+   "text": "If your verb takes suffixes for “was doing” or “used to”, German has no such forms: it uses the plain past and adds a word – früher, gerade, immer, oft.\n→ Früher spielte ich oft im Garten."
   },
   {
    "for": "type:isolating",
    "rel": "similar",
-   "text": "As with your time words and aspect markers, German says habit and background with words – früher, oft, gerade, als … – but the verb itself must still be in the past: Früher spielte ich. Als er kam, schlief ich."
+   "text": "As with your time words and aspect markers, German says habit and background with words – früher, oft, gerade, als … – but **the verb itself must still be in the past**:\n→ Früher spielte ich. Als er kam, schlief ich."
   },
   {
    "for": "type:polysynthetic",
    "rel": "different",
-   "text": "Where your verb carries suffixes for habitual or ongoing action, German uses the plain past (Präteritum or Perfekt) and separate words for the meaning: früher, immer, oft, gerade, als …"
+   "text": "Where your verb carries suffixes for habitual or ongoing action, German uses:\n- the plain past (Präteritum or Perfekt);\n- separate words for the meaning: früher, immer, oft, gerade, als …"
   },
   {
    "for": "branch:Semitic",
    "rel": "trap",
-   "text": "If you say “used to” or “was doing” with the past of “to be” plus a verb, do not copy it into German (*Ich war spielend): use the plain past with früher, immer or gerade – Früher spielte ich oft im Garten."
+   "text": "If you say “used to” or “was doing” with the past of “to be” plus a verb, do not copy it into German (*Ich war spielend): use the plain past with früher, immer or gerade.\n→ Früher spielte ich oft im Garten."
   }
  ]
 }

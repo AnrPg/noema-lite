@@ -231,7 +231,7 @@
   {
    "lang": "ar",
    "fn": "fn.agreement",
-   "note": "Arabic adjectives follow the noun and agree in gender, number, case and definiteness; non-human plurals take feminine singular agreement."
+   "note": "Arabic adjectives follow the noun and agree in gender, number, case and definiteness.\n\nNon-human plurals take feminine singular agreement."
   },
   {
    "lang": "he",
@@ -253,62 +253,62 @@
   {
    "for": "el",
    "rel": "trap",
-   "text": "Greek adjectives agree after είναι too (το τραπέζι είναι μεγάλο, η πόρτα είναι μεγάλη); in German the adjective after sein never changes: Der Tisch ist groß, die Tür ist groß."
+   "text": "Greek adjectives agree after είναι too:\n→ το τραπέζι είναι μεγάλο, η πόρτα είναι μεγάλη\n\nIn German the adjective after sein never changes:\n→ Der Tisch ist groß, die Tür ist groß."
   },
   {
    "for": "ru",
    "rel": "trap",
-   "text": "Russian predicate adjectives agree (стол большой, лампа большая) and the past verb shows gender (он был, она была); in German the predicate adjective is bare and the verb never shows gender."
+   "text": "Russian predicate adjectives agree (стол большой, лампа большая) and the past verb shows gender (он был, она была).\n\nIn German the predicate adjective is bare and **the verb never shows gender**."
   },
   {
    "for": "es",
    "rel": "trap",
-   "text": "Spanish adjectives agree everywhere (la casa es pequeña); German ones agree only before the noun: das kleine Haus, but Das Haus ist klein."
+   "text": "Spanish adjectives agree everywhere (la casa es pequeña); German ones agree only before the noun:\n→ das kleine Haus, but Das Haus ist klein."
   },
   {
    "for": "en",
    "rel": "new",
-   "text": "English words around a noun never change; German articles, dieser, possessives and adjectives before the noun all take endings for gender, number and case."
+   "text": "English words around a noun never change.\n\nGerman articles, dieser, possessives and adjectives before the noun **all take endings** for gender, number and case."
   },
   {
    "for": "fr",
    "rel": "trap",
-   "text": "French adjectives agree after être (la maison est grande); German ones do not (Das Haus ist groß), but before the noun they agree in case as well."
+   "text": "French adjectives agree after être (la maison est grande); German ones do not (Das Haus ist groß).\n\nBut before the noun they agree in case as well."
   },
   {
    "for": "hi",
    "rel": "different",
-   "text": "Hindi verbs agree in gender (vah jātā hai / vah jātī hai) and -ā adjectives agree (achchhā laṛkā, achchhī laṛkī); German verbs never show gender, and the adjective agrees only before the noun."
+   "text": "Hindi verbs agree in gender (vah jātā hai / vah jātī hai) and -ā adjectives agree (achchhā laṛkā, achchhī laṛkī).\n\nGerman verbs never show gender, and the adjective agrees **only before the noun**."
   },
   {
    "for": "fa",
    "rel": "new",
-   "text": "Persian adjectives never agree (ketāb-e bozorg, ketābhā-ye bozorg); German ones take endings before the noun."
+   "text": "Persian adjectives never agree (ketāb-e bozorg, ketābhā-ye bozorg).\n\nGerman ones take endings before the noun."
   },
   {
    "for": "mr",
    "rel": "similar",
-   "text": "Adjectives in -ā agree with the noun’s gender (moṭhā, moṭhī, moṭhe), as German ones do before the noun; after sein, though, the German adjective is bare."
+   "text": "Adjectives in -ā agree with the noun’s gender (moṭhā, moṭhī, moṭhe), as German ones do before the noun.\n\nAfter sein, though, the German adjective is bare."
   },
   {
    "for": "ar",
    "rel": "different",
-   "text": "Arabic adjectives agree in gender, number, case and definiteness, also as a predicate (al-baytu kabīrun); German ones agree only before the noun, and never in definiteness."
+   "text": "Arabic adjectives agree in gender, number, case and definiteness, also as a predicate (al-baytu kabīrun).\n\nGerman ones agree only before the noun, and never in definiteness."
   },
   {
    "for": "he",
    "rel": "different",
-   "text": "Hebrew adjectives agree in gender and number, and in definiteness (ha-bayit ha-gadol), also after the noun as a predicate (ha-delet gdola); German ones agree only before the noun."
+   "text": "Hebrew adjectives agree in gender and number, and in definiteness (ha-bayit ha-gadol), also after the noun as a predicate (ha-delet gdola).\n\nGerman ones agree **only before the noun**."
   },
   {
    "for": "tr",
    "rel": "new",
-   "text": "Turkish adjectives never change (büyük masa, büyük masalar); German adjectives and articles before a noun do."
+   "text": "Turkish adjectives never change (büyük masa, büyük masalar).\n\nGerman adjectives and articles before a noun do."
   },
   {
    "for": "ja",
    "rel": "new",
-   "text": "Japanese adjectives do not agree with the noun; German determiners and adjectives change with gender, number and case."
+   "text": "Japanese adjectives do not agree with the noun.\n\nGerman determiners and adjectives change with gender, number and case."
   },
   {
    "for": "ko",
@@ -318,27 +318,27 @@
   {
    "for": "fi",
    "rel": "similar",
-   "text": "Finnish adjectives agree in case and number (isossa talossa), as German ones do before the noun – but without gender, and a Finnish predicate adjective agrees in number (talot ovat isoja), a German one never does."
+   "text": "Finnish adjectives agree in case and number (isossa talossa), as German ones do before the noun – but:\n- without gender;\n- a Finnish predicate adjective agrees in number (talot ovat isoja), a German one never does."
   },
   {
    "for": "hu",
    "rel": "similar",
-   "text": "A Hungarian adjective before the noun never changes (a nagy házak) but agrees in number as a predicate (a házak nagyok) – the reverse of German: ein großes Haus, die Häuser sind groß."
+   "text": "A Hungarian adjective before the noun never changes (a nagy házak) but agrees in number as a predicate (a házak nagyok).\n\n**German is the reverse:**\n→ ein großes Haus, die Häuser sind groß"
   },
   {
    "for": "sw",
    "rel": "different",
-   "text": "Everything agrees by noun class, the predicate included (kitabu ni kikubwa, vitabu ni vikubwa); German agreement works before the noun only, with three genders."
+   "text": "Everything agrees by noun class, the predicate included:\n→ kitabu ni kikubwa, vitabu ni vikubwa\n\nGerman agreement works before the noun only, with three genders."
   },
   {
    "for": "lg",
    "rel": "different",
-   "text": "Agreement runs through the noun class, with prefixes on adjectives, numbers and verbs; German shows agreement with endings on the article and the adjective before the noun."
+   "text": "Agreement runs through the noun class, with prefixes on adjectives, numbers and verbs.\n\nGerman shows agreement with endings on the article and the adjective before the noun."
   },
   {
    "for": "zh",
    "rel": "new",
-   "text": "Chinese has no agreement; German articles and adjectives before a noun change with its gender, number and case."
+   "text": "Chinese has no agreement.\n\nGerman articles and adjectives before a noun change with its gender, number and case."
   },
   {
    "for": "vi",
@@ -348,47 +348,47 @@
   {
    "for": "iu",
    "rel": "different",
-   "text": "Inuktitut verbs agree with subject and object in person and number in one ending, but there is no gender. German agreement inside the noun phrase follows the gender of the noun."
+   "text": "Inuktitut verbs agree with subject and object in person and number in one ending, but there is no gender.\n\nGerman agreement inside the noun phrase follows the gender of the noun."
   },
   {
    "for": "it",
    "rel": "trap",
-   "text": "Italian adjectives agree after essere too (il tavolo è nuovo, la lampada è nuova); German ones stay bare after sein: Der Tisch ist neu, die Lampe ist neu. Before the noun German adds case to gender and number: ein neuer Tisch, mit einem neuen Tisch."
+   "text": "Italian adjectives agree after essere too (il tavolo è nuovo, la lampada è nuova); German ones stay bare after sein:\n→ Der Tisch ist neu, die Lampe ist neu.\n\nBefore the noun German adds case to gender and number:\n→ ein neuer Tisch, mit einem neuen Tisch"
   },
   {
    "for": "sq",
    "rel": "trap",
-   "text": "Albanian adjectives keep their linking article and agree after jam too (libri është i ri, tryeza është e re); German predicate adjectives never change: Das Buch ist neu, der Tisch ist neu. A pronoun follows the noun’s gender in both, but the genders differ: tryeza (feminine) → ajo, der Tisch → er."
+   "text": "Albanian adjectives keep their linking article and agree after jam too (libri është i ri, tryeza është e re); German predicate adjectives never change:\n→ Das Buch ist neu, der Tisch ist neu.\n\nA pronoun follows the noun’s gender in both, but the genders differ:\n→ tryeza (feminine) → ajo, der Tisch → er"
   },
   {
    "for": "pt",
    "rel": "trap",
-   "text": "Portuguese adjectives agree after ser and estar too (a casa é pequena); German ones agree only before the noun: das kleine Haus, but Das Haus ist klein. As with ele / ela, a thing is er, sie or es by its grammatical gender – a mesa → ela, but der Tisch → er."
+   "text": "Portuguese adjectives agree after ser and estar too (a casa é pequena); German ones agree only before the noun:\n→ das kleine Haus, but Das Haus ist klein.\n\nAs with ele / ela, a thing is er, sie or es by its grammatical gender:\n→ a mesa → ela, but der Tisch → er"
   },
   {
    "for": "type:fusional",
    "rel": "similar",
-   "text": "Agreement in gender and number will feel natural. New is that German agreement stops at sein (Der Tisch ist groß, Die Türen sind groß) and that the article and the adjective share one signal: der große Tisch, ein großer Tisch."
+   "text": "Agreement in gender and number will feel natural. New:\n- German agreement stops at sein (Der Tisch ist groß, Die Türen sind groß);\n- the article and the adjective share one signal: der große Tisch, ein großer Tisch."
   },
   {
    "for": "type:agglutinating",
    "rel": "new",
-   "text": "If determiners and adjectives never change in your language, German agreement is new: the article, dieser, mein and the adjective before a noun all change with its gender, number and case. A pronoun takes the noun’s gender even for things: der Tisch → er."
+   "text": "If determiners and adjectives never change in your language, German agreement is new: the article, dieser, mein and the adjective before a noun all change with its gender, number and case.\n\nA pronoun takes the noun’s gender even for things:\n→ der Tisch → er"
   },
   {
    "for": "type:isolating",
    "rel": "new",
-   "text": "In German the words around a noun change with it: der / die / das, dieser / diese / dieses, ein großer / eine große / ein großes. Learn every noun with its article – everything around it depends on that gender."
+   "text": "In German the words around a noun change with it:\n→ der / die / das, dieser / diese / dieses, ein großer / eine große / ein großes\n\n**Learn every noun with its article** – everything around it depends on that gender."
   },
   {
    "for": "type:polysynthetic",
    "rel": "different",
-   "text": "If your language marks agreement on the verb for subject and object, German adds agreement inside the noun phrase: the article and the adjective follow the noun’s gender (ein großer Tisch, eine große Lampe), while the verb agrees only with the subject."
+   "text": "If your language marks agreement on the verb for subject and object, German adds agreement inside the noun phrase:\n- the article and the adjective follow the noun’s gender (ein großer Tisch, eine große Lampe);\n- the verb agrees only with the subject."
   },
   {
    "for": "branch:Semitic",
    "rel": "trap",
-   "text": "If your adjectives agree after the noun and also in the predicate, note that German agreement stops at sein: Die Tür ist groß, Die Türen sind groß. Before a noun the adjective does agree – with three genders, not two, and with a case."
+   "text": "If your adjectives agree after the noun and also in the predicate, note that **German agreement stops at sein**:\n→ Die Tür ist groß, Die Türen sind groß.\n\nBefore a noun the adjective does agree – with three genders, not two, and with a case."
   }
  ]
 }

@@ -241,7 +241,7 @@
  },
  "traps": [
   "Ich gehe nach Athen means walking; with a vehicle say fahren, with a plane fliegen.",
-  "nach only for cities, countries without article and Hause; with an article: in die Türkei, in die Schweiz.",
+  "nach only for cities, countries without article and Hause.\n\nWith an article: in die Türkei, in die Schweiz.",
   "zu + people and buildings: Ich gehe zum Arzt – not *nach dem Arzt (nach dem Arzt = after the doctor).",
   "Where from a country is aus: Ich komme aus Griechenland – not *von Griechenland.",
   "Where to into a place is accusative: in den Park – not *in dem Park (that is “in the park”, no movement).",
@@ -410,17 +410,17 @@
   {
    "lang": "ar",
    "fn": "fn.direction",
-   "note": "Arabic إِلَى (to) and مِنْ (from) with the genitive, بِـ for the means (بِالسَّيَّارَةِ, by car), مَشْيًا (on foot); the questions are إِلَى أَيْنَ؟ and مِنْ أَيْنَ؟ – “to where”, “from where”, like German wohin / woher."
+   "note": "Arabic:\n- إِلَى (to) and مِنْ (from) with the genitive;\n- بِـ for the means (بِالسَّيَّارَةِ, by car), مَشْيًا (on foot);\n- the questions are إِلَى أَيْنَ؟ and مِنْ أَيْنَ؟ – “to where”, “from where”, like German wohin / woher."
   },
   {
    "lang": "he",
    "fn": "fn.direction",
-   "note": "Hebrew has the same three questions as German: אֵיפֹה (where), לְאָן (where to), מֵאֵיפֹה (where from); לְ / אֶל (to), מִ / מִן (from), בְּ for the vehicle (בְּאוֹטוֹבּוּס), בָּרֶגֶל (on foot)."
+   "note": "Hebrew has the same three questions as German: אֵיפֹה (where), לְאָן (where to), מֵאֵיפֹה (where from).\n- לְ / אֶל (to), מִ / מִן (from);\n- בְּ for the vehicle (בְּאוֹטוֹבּוּס), בָּרֶגֶל (on foot)."
   },
   {
    "lang": "zh",
    "fn": "fn.direction",
-   "note": "Chinese puts the direction into the verb: 去 (go, away from here) / 来 (come, towards here) + the place; 从 … 到 … (from … to …); the vehicle comes before: 坐公共汽车去 (go by bus), 走路去 (go on foot)."
+   "note": "Chinese puts the direction into the verb: 去 (go, away from here) / 来 (come, towards here) + the place.\n- 从 … 到 … (from … to …);\n- the vehicle comes before: 坐公共汽车去 (go by bus), 走路去 (go on foot)."
   },
   {
    "lang": "de",
@@ -437,32 +437,32 @@
   {
    "for": "el",
    "rel": "different",
-   "text": "σε covers “where” and “where to” (Είμαι στο πάρκο / Πάω στο πάρκο); German splits them: im Park (dative) / in den Park (accusative). πηγαίνω is one verb for walking and riding; German has gehen and fahren."
+   "text": "σε covers “where” and “where to” (Είμαι στο πάρκο / Πάω στο πάρκο); German splits them:\n→ im Park (dative) / in den Park (accusative)\n\nπηγαίνω is one verb for walking and riding; German has gehen and fahren."
   },
   {
    "for": "ru",
    "rel": "similar",
-   "text": "The same logic: в парке (where) / в парк (where to), and идти / ехать = gehen / fahren. German has no pairs like идти / ходить, and its particles (ankommen, weggehen) separate from the verb."
+   "text": "The same logic: в парке (where) / в парк (where to), and идти / ехать = gehen / fahren.\n\nBut German has no pairs like идти / ходить, and its particles (ankommen, weggehen) **separate from the verb**."
   },
   {
    "for": "es",
    "rel": "different",
-   "text": "ir is any way of going; German separates gehen (on foot) and fahren (by vehicle). Spanish puts the direction in the verb (entrar, salir); German puts it in a particle (hineingehen, hinausgehen)."
+   "text": "- ir is any way of going; German separates gehen (on foot) and fahren (by vehicle).\n- Spanish puts the direction in the verb (entrar, salir); German puts it in a particle (hineingehen, hinausgehen)."
   },
   {
    "for": "en",
    "rel": "similar",
-   "text": "Particles like come in, go away are German separable verbs (hereinkommen, weggehen) – but the German particle goes to the end of the clause: Kommen Sie herein! “go” by car or train is fahren, not gehen."
+   "text": "Particles like come in, go away are German separable verbs (hereinkommen, weggehen) – but **the German particle goes to the end of the clause**:\n→ Kommen Sie herein!\n\n“go” by car or train is fahren, not gehen."
   },
   {
    "for": "fr",
    "rel": "different",
-   "text": "French puts the direction in the verb (entrer, sortir, partir) and uses aller for any way of going; German uses gehen / fahren plus particles: hineingehen, weggehen."
+   "text": "French puts the direction in the verb (entrer, sortir, partir) and uses aller for any way of going.\n\nGerman uses gehen / fahren plus particles:\n→ hineingehen, weggehen"
   },
   {
    "for": "hi",
    "rel": "different",
-   "text": "jānā (go) and ānā (come) cover any way of moving; German splits gehen (on foot) and fahren (by vehicle)."
+   "text": "jānā (go) and ānā (come) cover any way of moving.\n\nGerman splits gehen (on foot) and fahren (by vehicle)."
   },
   {
    "for": "fa",
@@ -477,7 +477,7 @@
   {
    "for": "ar",
    "rel": "different",
-   "text": "dhahaba (go) covers any way of going; German chooses gehen or fahren. ilā (to) and min (from) take the genitive; German nach, zu, aus, von take the dative."
+   "text": "- dhahaba (go) covers any way of going; German chooses gehen or fahren.\n- ilā (to) and min (from) take the genitive; German nach, zu, aus, von take the dative."
   },
   {
    "for": "he",
@@ -487,12 +487,12 @@
   {
    "for": "tr",
    "rel": "different",
-   "text": "Turkish suffixes answer the three questions (parkta, parka, parktan); German uses prepositions and switches the case: im Park, in den Park, aus dem Park. gitmek covers walking and riding."
+   "text": "Turkish suffixes answer the three questions (parkta, parka, parktan); German uses prepositions and switches the case:\n→ im Park, in den Park, aus dem Park\n\ngitmek covers walking and riding."
   },
   {
    "for": "ja",
    "rel": "different",
-   "text": "iku (go) / kuru (come) cover any means, with de for the vehicle (densha de iku); German chooses fahren and says mit dem Zug."
+   "text": "iku (go) / kuru (come) cover any means, with de for the vehicle (densha de iku).\n\nGerman chooses fahren and says mit dem Zug."
   },
   {
    "for": "ko",
@@ -502,22 +502,22 @@
   {
    "for": "fi",
    "rel": "similar",
-   "text": "Finnish cases answer the same three questions (puistossa, puistoon, puistosta – im Park, in den Park, aus dem Park); mennä covers any means, German needs gehen or fahren."
+   "text": "Finnish cases answer the same three questions:\n→ puistossa, puistoon, puistosta – im Park, in den Park, aus dem Park\n\nmennä covers any means, German needs gehen or fahren."
   },
   {
    "for": "hu",
    "rel": "similar",
-   "text": "Hungarian suffixes split where / where to / where from (a parkban, a parkba, a parkból) as German does with cases; menni covers any means."
+   "text": "Hungarian suffixes split where / where to / where from (a parkban, a parkba, a parkból) as German does with cases.\n\nmenni covers any means."
   },
   {
    "for": "sw",
    "rel": "different",
-   "text": "kwenda covers any means, and the vehicle takes kwa (kwa basi); German uses fahren and mit + dative (mit dem Bus)."
+   "text": "kwenda covers any means, and the vehicle takes kwa (kwa basi).\n\nGerman uses fahren and mit + dative (mit dem Bus)."
   },
   {
    "for": "zh",
    "rel": "similar",
-   "text": "来 / 去 add the direction like her- / hin-: 进来 = herein, 进去 = hinein. German puts these particles at the end of the clause (Kommen Sie herein!)."
+   "text": "来 / 去 add the direction like her- / hin-: 进来 = herein, 进去 = hinein.\n\nGerman puts these particles at the end of the clause:\n→ Kommen Sie herein!"
   },
   {
    "for": "vi",
@@ -527,47 +527,47 @@
   {
    "for": "iu",
    "rel": "similar",
-   "text": "Inuktitut endings answer where / where to / where from (-mi, -mut, -mit), as German Wo? / Wohin? / Woher? do with prepositions and case."
+   "text": "Inuktitut endings answer where / where to / where from (-mi, -mut, -mit).\n\nGerman Wo? / Wohin? / Woher? do the same with prepositions and case."
   },
   {
    "for": "it",
    "rel": "different",
-   "text": "andare is any way of going; German splits gehen (on foot), fahren (by vehicle) and fliegen (by plane). a / in cover “where” and “where to” alike (sono a Roma, vado a Roma); German says in Rom / nach Rom, im Park / in den Park – and da + person (vado dal medico) is zum Arzt."
+   "text": "- andare is any way of going; German splits gehen (on foot), fahren (by vehicle) and fliegen (by plane).\n- a / in cover “where” and “where to” alike (sono a Roma, vado a Roma); German says in Rom / nach Rom, im Park / in den Park.\n- da + person (vado dal medico) is zum Arzt."
   },
   {
    "for": "sq",
    "rel": "different",
-   "text": "në covers “where” and “where to” alike (jam në park / shkoj në park), and te both “at” and “to” a person (jam te mjeku / shkoj te mjeku); German splits them: im Park / in den Park, beim Arzt / zum Arzt. shkoj is any way of going – German says gehen on foot, fahren by vehicle."
+   "text": "në covers “where” and “where to” alike (jam në park / shkoj në park), and te both “at” and “to” a person (jam te mjeku / shkoj te mjeku); German splits them:\n→ im Park / in den Park, beim Arzt / zum Arzt\n\nshkoj is any way of going – German says gehen on foot, fahren by vehicle."
   },
   {
    "for": "pt",
    "rel": "different",
-   "text": "ir is any way of going; German separates gehen (on foot), fahren (by vehicle) and fliegen (by plane). em says where and a / para where to (estou em Lisboa / vou para Lisboa) – German adds a case on top: im Park (dative) / in den Park (accusative)."
+   "text": "- ir is any way of going; German separates gehen (on foot), fahren (by vehicle) and fliegen (by plane).\n- em says where and a / para where to (estou em Lisboa / vou para Lisboa) – German adds a case on top: im Park (dative) / in den Park (accusative)."
   },
   {
    "for": "type:fusional",
    "rel": "similar",
-   "text": "If your language uses one preposition with two cases for “where” and “where to”, the German two-way prepositions work the same way: im Park (dative) / in den Park (accusative). New are the separable particles at the end of the clause: Der Zug kommt um acht an."
+   "text": "If your language uses one preposition with two cases for “where” and “where to”, the German two-way prepositions work the same way:\n→ im Park (dative) / in den Park (accusative)\n\nNew are the separable particles at the end of the clause:\n→ Der Zug kommt um acht an."
   },
   {
    "for": "type:agglutinating",
    "rel": "similar",
-   "text": "Your locative, directional and source suffixes become three German questions with prepositions: Wo? (im Park), Wohin? (in den Park, nach Berlin, zum Arzt), Woher? (aus Berlin, vom Arzt). The preposition depends on the kind of place, not only on the direction."
+   "text": "Your locative, directional and source suffixes become three German questions with prepositions:\n- Wo? (im Park)\n- Wohin? (in den Park, nach Berlin, zum Arzt)\n- Woher? (aus Berlin, vom Arzt)\n\n**The preposition depends on the kind of place**, not only on the direction."
   },
   {
    "for": "type:isolating",
    "rel": "similar",
-   "text": "If you add direction words after the verb (towards me, away from me, in, out), those are the German particles her- / hin- (herein, hinaus) – but German puts them at the end of the clause: Kommen Sie herein! Where and where to also differ by case: im Park / in den Park."
+   "text": "If you add direction words after the verb (towards me, away from me, in, out), those are the German particles her- / hin- (herein, hinaus) – but German puts them at the end of the clause:\n→ Kommen Sie herein!\n\nWhere and where to also differ by case: im Park / in den Park."
   },
   {
    "for": "type:polysynthetic",
    "rel": "different",
-   "text": "Where your language packs direction and manner into the verb, German spreads them out: the verb says how (gehen, fahren, fliegen), a preposition with a case says where to (in den Park, zum Arzt), and a particle at the end the direction: Er kommt herein."
+   "text": "Where your language packs direction and manner into the verb, German spreads them out:\n- the verb says how (gehen, fahren, fliegen);\n- a preposition with a case says where to (in den Park, zum Arzt);\n- a particle at the end the direction: Er kommt herein."
   },
   {
    "for": "branch:Semitic",
    "rel": "different",
-   "text": "If one verb “go” and one preposition “to” serve for every goal, German chooses the verb by the means (gehen, fahren, fliegen) and the preposition by the kind of goal: nach Berlin, zum Arzt, in den Park. The question words are built like yours: wohin (to where), woher (from where)."
+   "text": "If one verb “go” and one preposition “to” serve for every goal, German chooses:\n- the verb by the means (gehen, fahren, fliegen);\n- the preposition by the kind of goal: nach Berlin, zum Arzt, in den Park.\n\nThe question words are built like yours: wohin (to where), woher (from where)."
   }
  ]
 }

@@ -181,8 +181,8 @@
      "auf also means “up” and “open”: aufstehen (to get up), Die Tür ist auf (colloquial: open)."
     ],
     "pitfalls": [
-     "Two-way preposition: Wo? (where) + dative – Das Buch ist auf dem Tisch; Wohin? (where to) + accusative – Ich lege das Buch auf den Tisch.",
-     "auf = on a horizontal surface, touching (auf dem Tisch); an = at a side or vertical surface (an der Wand); über = above, not touching (über dem Tisch)."
+     "Two-way preposition:\n- Wo? (where) + dative – Das Buch ist auf dem Tisch;\n- Wohin? (where to) + accusative – Ich lege das Buch auf den Tisch.",
+     "- auf = on a horizontal surface, touching (auf dem Tisch);\n- an = at a side or vertical surface (an der Wand);\n- über = above, not touching (über dem Tisch)."
     ],
     "subtleties": [
      "Open places take auf, not in: auf dem Markt, auf dem Platz, auf der Straße."
@@ -333,7 +333,7 @@
      "unter is an old Germanic word: Old High German untar."
     ],
     "pitfalls": [
-     "Two-way preposition: Wo? (where) + dative – Die Tasche ist unter dem Tisch; Wohin? (where to) + accusative – Ich stelle die Tasche unter den Tisch.",
+     "Two-way preposition:\n- Wo? (where) + dative – Die Tasche ist unter dem Tisch;\n- Wohin? (where to) + accusative – Ich stelle die Tasche unter den Tisch.",
      "Spoken German merges unter dem → unterm (unterm Bett); in writing use unter dem."
     ],
     "subtleties": [
@@ -468,7 +468,7 @@
      "neben hides eben (even, level): “in an even line with”."
     ],
     "pitfalls": [
-     "Two-way preposition: Wo? (where) + dative – Der Stuhl steht neben dem Tisch; Wohin? (where to) + accusative – Ich stelle den Stuhl neben den Tisch."
+     "Two-way preposition:\n- Wo? (where) + dative – Der Stuhl steht neben dem Tisch;\n- Wohin? (where to) + accusative – Ich stelle den Stuhl neben den Tisch."
     ],
     "subtleties": [
      "nebenan (next door) and der Nachbar (neighbour) are handy companions: Mein Nachbar wohnt nebenan."
@@ -650,9 +650,9 @@
      "vor goes back to Proto-Germanic *fura."
     ],
     "pitfalls": [
-     "Two-way preposition: Wo? (where) + dative – Das Auto steht vor dem Haus; Wohin? (where to) + accusative – Ich fahre das Auto vor das Haus.",
+     "Two-way preposition:\n- Wo? (where) + dative – Das Auto steht vor dem Haus;\n- Wohin? (where to) + accusative – Ich fahre das Auto vor das Haus.",
      "vor (in front of, before) ≠ für (for): Ich warte vor dem Haus. – Das ist für dich.",
-     "In time, vor takes the dative only: vor dem Essen (before the meal), vor acht Uhr (before eight), vor einer Woche (a week ago) – there is no accusative of time."
+     "In time, vor takes the dative only – there is no accusative of time:\n→ vor dem Essen (before the meal), vor acht Uhr (before eight), vor einer Woche (a week ago)"
     ],
     "subtleties": [
      "vor + a time = “ago”: vor einer Woche (a week ago) – always dative.",
@@ -800,7 +800,7 @@
      "hinter goes back to the Germanic root *hind-."
     ],
     "pitfalls": [
-     "Two-way preposition: Wo? (where) + dative – Der Garten ist hinter dem Haus; Wohin? (where to) + accusative – Wir gehen hinter das Haus.",
+     "Two-way preposition:\n- Wo? (where) + dative – Der Garten ist hinter dem Haus;\n- Wohin? (where to) + accusative – Wir gehen hinter das Haus.",
      "Spoken German says hinterm (= hinter dem): hinterm Haus."
     ],
     "subtleties": [
@@ -949,7 +949,7 @@
      "zwischen contains the old word for “two” (zwei)."
     ],
     "pitfalls": [
-     "Two-way preposition: Wo? (where) + dative – zwischen dem Sofa und dem Regal; Wohin? (where to) + accusative – zwischen das Sofa und das Regal. Both nouns take the case."
+     "Two-way preposition:\n- Wo? (where) + dative – zwischen dem Sofa und dem Regal;\n- Wohin? (where to) + accusative – zwischen das Sofa und das Regal.\n\nBoth nouns take the case."
     ],
     "subtleties": [
      "zwischen also works for time: zwischen acht und neun Uhr."
@@ -1487,7 +1487,7 @@
      "drinnen is where (Ich bin drinnen); going in is rein / herein (Komm rein!)."
     ],
     "subtleties": [
-     "drinnen is colloquial-neutral and very common; innen is used for the inner side of things (innen und außen)."
+     "- drinnen is colloquial-neutral and very common;\n- innen is used for the inner side of things (innen und außen)."
     ]
    },
    "features": {
@@ -1749,7 +1749,7 @@
      "Etwas mit links machen = to do something with ease (literally “with the left”)."
     ],
     "pitfalls": [
-     "links / rechts are adverbs (Die Küche ist links); before a noun use the adjective: die linke Tür, die rechte Hand."
+     "links / rechts are adverbs (Die Küche ist links); before a noun use the adjective:\n→ die linke Tür, die rechte Hand"
     ],
     "subtleties": [
      "Something done “mit links” is done easily – with the left hand, without effort."
@@ -1871,7 +1871,7 @@
      "rechts and recht (right, law, correct) are one word."
     ],
     "pitfalls": [
-     "rechts (on the right) is different from recht (right, correct; quite): Du hast recht. – Das ist recht gut."
+     "rechts (on the right) is different from recht (right, correct; quite):\n→ Du hast recht. – Das ist recht gut."
     ],
     "subtleties": [
      "rechts vor links: at crossings without signs, the car coming from the right goes first."
@@ -2557,7 +2557,7 @@
     ],
     "pitfalls": [
      "Plural = singular: die Schlafzimmer; dative plural den Schlafzimmern.",
-     "German flats are counted in rooms (Zimmer), not bedrooms: eine 3-Zimmer-Wohnung has e.g. two bedrooms and a living room."
+     "German flats are counted in rooms (Zimmer), not bedrooms:\n→ eine 3-Zimmer-Wohnung has e.g. two bedrooms and a living room"
     ],
     "subtleties": [
      "Schlafzimmerblick (“bedroom look”) is a dreamy, sleepy look."
@@ -3361,7 +3361,7 @@
      "One step is die Stufe."
     ],
     "subtleties": [
-     "Treppenwitz: the clever reply you think of too late, on the stairs going out (French l’esprit de l’escalier)."
+     "Treppenwitz: the clever reply you think of too late, on the stairs going out."
     ],
     "notes": [
      {

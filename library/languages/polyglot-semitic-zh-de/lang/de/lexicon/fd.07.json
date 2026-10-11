@@ -726,7 +726,7 @@
      "kaufen goes back to Latin caupo (small trader, innkeeper)."
     ],
     "pitfalls": [
-     "einkaufen is “to go shopping” in general; kaufen needs an object: Ich kaufe Brot. / Ich gehe einkaufen.",
+     "einkaufen is “to go shopping” in general; kaufen needs an object:\n→ Ich kaufe Brot. / Ich gehe einkaufen.",
      "Regular verb: ich kaufe, du kaufst, er kauft, wir kaufen, ihr kauft, sie kaufen – no vowel change.",
      "Imperative: Kauf! (or Kaufe!) – Kauft! – Kaufen Sie!"
     ],
@@ -977,7 +977,7 @@
     "pitfalls": [
      "For activities German prefers gern + verb: Ich schwimme gern (I like swimming), rather than Ich mag schwimmen.",
      "No ending in ich mag / er mag; vowel change ö → a in the singular.",
-     "möchte is a form of mögen used as “would like”: ich möchte, du möchtest, er/sie möchte, wir möchten, ihr möchtet, sie/Sie möchten – the er-form has no -t (er möchte, not *er möchtet).",
+     "möchte is a form of mögen used as “would like”:\n→ ich möchte, du möchtest, er/sie möchte, wir möchten, ihr möchtet, sie/Sie möchten\n\nThe er-form has no -t (er möchte, not *er möchtet).",
      "Ich mag Kaffee = I like coffee (in general); Ich möchte einen Kaffee = I would like a coffee (now)."
     ],
     "subtleties": [
@@ -1232,12 +1232,12 @@
      {
       "for": "el",
       "rel": "different",
-      "text": "θέλω να πιω τσάι keeps the two verbs together; German splits them around the object: Ich will Tee trinken."
+      "text": "θέλω να πιω τσάι keeps the two verbs together; German splits them around the object:\n→ Ich will Tee trinken."
      },
      {
       "for": "ru",
       "rel": "different",
-      "text": "хочу пить чай keeps the two verbs together; German splits them around the object: Ich will Tee trinken."
+      "text": "хочу пить чай keeps the two verbs together; German splits them around the object:\n→ Ich will Tee trinken."
      },
      {
       "for": "en",
@@ -1489,7 +1489,7 @@
     ],
     "pitfalls": [
      "Regular verb: ich koche, du kochst, er kocht – no vowel change.",
-     "kochen is cooking on the stove; in the oven bread and cake are gebacken (backen), meat is gebraten (braten)."
+     "kochen is cooking on the stove. In the oven:\n- bread and cake are gebacken (backen);\n- meat is gebraten (braten)."
     ],
     "subtleties": [
      "Kaffee kochen and Tee kochen mean “to make coffee / tea”, even with a machine.",
@@ -2096,7 +2096,7 @@
     ],
     "pitfalls": [
      "Plural Eier (dative Eiern): ein Ei, zwei Eier.",
-     "In slang Eier means testicles – Eier haben = to have guts. Harmless in the kitchen, but jokes are everywhere."
+     "In slang Eier means testicles – Eier haben = to have guts.\n\nHarmless in the kitchen, but jokes are everywhere."
     ],
     "subtleties": [
      "das Ei is neuter: ein Ei, zwei Eier.",
@@ -2106,7 +2106,7 @@
      {
       "for": "en",
       "rel": "similar",
-      "text": "English once had its own word ey (plural eyren), the twin of Ei; egg is a northern loan. In 1490 William Caxton told of a woman who did not understand “eggys”, only “eyren”. Ei is related to English egg (and the old form ey)."
+      "text": "Ei is related to English egg (and the old form ey).\n\n- English once had its own word ey (plural eyren), the twin of Ei; egg is a northern loan.\n- In 1490 William Caxton told of a woman who did not understand “eggys”, only “eyren”."
      },
      {
       "for": "el",
@@ -2294,7 +2294,7 @@
     ],
     "pitfalls": [
      "No plural: kinds of meat are Fleischsorten.",
-     "das Fleisch is neuter; the butcher is der Metzger (south and west), der Fleischer (east) or der Schlachter (north)."
+     "das Fleisch is neuter. The butcher is:\n- der Metzger (south and west);\n- der Fleischer (east);\n- der Schlachter (north)."
     ],
     "subtleties": [
      "Many Germans do not count fish as Fleisch: Ich esse kein Fleisch, nur Fisch."
@@ -2303,7 +2303,7 @@
      {
       "for": "en",
       "rel": "different",
-      "text": "English splits meat and flesh and borrowed beef, pork and mutton; German says Fleisch and builds compounds."
+      "text": "English splits meat and flesh and borrowed beef, pork and mutton.\n\nGerman says Fleisch and builds compounds."
      },
      {
       "for": "en",
@@ -2708,7 +2708,7 @@
      "Hähnchen is literally “little rooster”, yet it names any chicken for the table."
     ],
     "pitfalls": [
-     "Huhn is the live animal (a hen); for food Germans in Germany usually say Hähnchen: Ich esse Hähnchen.",
+     "Huhn is the live animal (a hen); for food Germans in Germany usually say Hähnchen:\n→ Ich esse Hähnchen.",
      "The plural is the same as the singular: ein Hähnchen, zwei Hähnchen."
     ],
     "subtleties": [
@@ -3436,7 +3436,7 @@
      "das Obst is neuter."
     ],
     "subtleties": [
-     "Obst means the sweet fruit of trees and bushes that you eat raw; tomatoes and cucumbers are botanically fruits but Gemüse in the kitchen."
+     "Obst means the sweet fruit of trees and bushes that you eat raw.\n\nTomatoes and cucumbers are botanically fruits but Gemüse in the kitchen."
     ],
     "notes": [
      {
@@ -3798,7 +3798,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "A travelling word: Sanskrit śarkarā → Persian šakar → Arabic سُكَّر (sukkar) → Italian zucchero → German Zucker. Hebrew סוּכָּר comes from the same source."
+     "A travelling word:\n→ Sanskrit śarkarā → Persian šakar → Arabic سُكَّر (sukkar) → Italian zucchero → German Zucker\n\nHebrew סוּכָּר comes from the same source."
     ],
     "pitfalls": [
      "der Zucker is masculine; uncountable in the kitchen (Ich nehme keinen Zucker).",
@@ -3995,7 +3995,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Salz goes back to an Indo-European word for salt; Salär (a salary) is linked to salt through Latin salārium."
+     "Salz goes back to an Indo-European word for salt.\n\nSalär (a salary) is linked to salt through Latin salārium."
     ],
     "pitfalls": [
      "das Salz is neuter.",
@@ -4420,7 +4420,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Tea reached Europe by two roads: by sea from Hokkien tê (Tee, Hebrew תֵּה), by land from chá (Arabic شَاي). Mandarin says 茶 chá."
+     "Tea reached Europe by two roads:\n- by sea from Hokkien tê (Tee, Hebrew תֵּה);\n- by land from chá (Arabic شَاي).\n\nMandarin says 茶 chá."
     ],
     "pitfalls": [
      "der Tee is masculine – like der Kaffee, der Saft, der Wein; but das Wasser, das Bier, die Milch.",
@@ -4619,7 +4619,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Kaffee travelled from Arabic قَهْوَة (qahwa) through Ottoman Turkish kahve, Italian caffè and French café; Hebrew קָפֶה belongs to the same chain."
+     "Kaffee travelled from Arabic قَهْوَة (qahwa) through Ottoman Turkish kahve, Italian caffè and French café.\n\nHebrew קָפֶה belongs to the same chain."
     ],
     "pitfalls": [
      "der Kaffee (the drink, in Germany usually stressed on the first syllable: KAF-fee) – das Café (a coffee house, stressed on the second: Ca-FÉ).",
@@ -4780,7 +4780,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "die Milchstraße (the Milky Way) shows milk spilled across the sky; Galaxie, from Greek γάλα (milk), has the same picture."
+     "die Milchstraße (the Milky Way) shows milk spilled across the sky.\n\nGalaxie, from Greek γάλα (milk), has the same picture."
     ],
     "pitfalls": [
      "die Milch is feminine.",

@@ -238,7 +238,7 @@
   {
    "lang": "he",
    "fn": "fn.noun.gender",
-   "note": "Hebrew has two genders; feminine nouns usually end in -a or -t (ha-ir, the city, is a feminine exception)."
+   "note": "Hebrew has two genders; feminine nouns usually end in -a or -t.\n\nha-ir, the city, is a feminine exception."
   },
   {
    "lang": "zh",
@@ -255,17 +255,17 @@
   {
    "for": "el",
    "rel": "similar",
-   "text": "Three genders, as in German – but a noun’s gender often differs: ο τοίχος – die Wand, η καρέκλα – der Stuhl, το τραπέζι – der Tisch, το πιάτο – der Teller. Some match: το κορίτσι – das Mädchen (both neuter), η πόρτα – die Tür, το σπίτι – das Haus, το βιβλίο – das Buch. Greek nouns usually show their gender in the ending; German nouns rarely do, so learn the article with each one."
+   "text": "Three genders, as in German – but a noun’s gender often differs:\n→ ο τοίχος – die Wand, η καρέκλα – der Stuhl, το τραπέζι – der Tisch, το πιάτο – der Teller\n\nSome match:\n→ το κορίτσι – das Mädchen (both neuter), η πόρτα – die Tür, το σπίτι – das Haus, το βιβλίο – das Buch\n\nGreek nouns usually show their gender in the ending; German nouns rarely do, so **learn the article with each one**."
   },
   {
    "for": "ru",
    "rel": "similar",
-   "text": "Three genders again, but a Russian noun mostly shows its gender in its ending (стол, книга, окно); a German noun rarely does – the article carries it, so learn der / die / das with every noun. Genders may differ: книга – das Buch, девочка – das Mädchen."
+   "text": "Three genders again, but a Russian noun mostly shows its gender in its ending (стол, книга, окно); a German noun rarely does – the article carries it, so **learn der / die / das with every noun**.\n\nGenders may differ: книга – das Buch, девочка – das Mädchen."
   },
   {
    "for": "es",
    "rel": "different",
-   "text": "Spanish has two genders; German adds a neuter, and the genders do not carry over: la mesa – der Tisch, el libro – das Buch, la casa – das Haus."
+   "text": "Spanish has two genders; German adds a neuter, and the genders do not carry over:\n→ la mesa – der Tisch, el libro – das Buch, la casa – das Haus"
   },
   {
    "for": "en",
@@ -275,42 +275,42 @@
   {
    "for": "fr",
    "rel": "different",
-   "text": "Two genders in French, three in German, and they rarely carry over: la table – der Tisch, le livre – das Buch, la chaise – der Stuhl; la porte – die Tür matches."
+   "text": "Two genders in French, three in German, and they rarely carry over:\n→ la table – der Tisch, le livre – das Buch, la chaise – der Stuhl\n\nla porte – die Tür matches."
   },
   {
    "for": "hi",
    "rel": "different",
-   "text": "Hindi gives every noun one of two genders; German has three: mez (f.) – der Tisch, kitāb (f.) – das Buch. Hindi shows the gender on the verb and the adjective, German on the article."
+   "text": "Hindi gives every noun one of two genders; German has three:\n→ mez (f.) – der Tisch, kitāb (f.) – das Buch\n\nHindi shows the gender on the verb and the adjective, German on the article."
   },
   {
    "for": "fa",
    "rel": "new",
-   "text": "Persian has no grammatical gender; in German every noun has one, which decides the article, the pronoun and the adjective ending."
+   "text": "Persian has no grammatical gender.\n\nIn German every noun has one, which decides the article, the pronoun and the adjective ending."
   },
   {
    "for": "mr",
    "rel": "similar",
-   "text": "Marathi also has three genders, a neuter included, so the idea is familiar; the gender of each German noun still has to be learned with its article."
+   "text": "Marathi also has three genders, a neuter included, so the idea is familiar.\n\nThe gender of each German noun still has to be learned with its article."
   },
   {
    "for": "ar",
    "rel": "different",
-   "text": "Arabic has two genders and a clear sign for most feminines (-a, tāʾ marbūṭa); German has three and fewer clues: kitāb (m.) – das Buch, ṭāwila (f.) – der Tisch. The German endings -ung, -heit, -keit, -chen are the most reliable signs."
+   "text": "Arabic has two genders and a clear sign for most feminines (-a, tāʾ marbūṭa); German has three and fewer clues:\n→ kitāb (m.) – das Buch, ṭāwila (f.) – der Tisch\n\nThe German endings -ung, -heit, -keit, -chen are the most reliable signs."
   },
   {
    "for": "he",
    "rel": "different",
-   "text": "Two genders in Hebrew, with -a / -et for most feminines; German has three, mostly without a sign on the noun: shulchan (m.) – der Tisch, but delet (f.) – die Tür."
+   "text": "Two genders in Hebrew, with -a / -et for most feminines; German has three, mostly without a sign on the noun:\n→ shulchan (m.) – der Tisch, but delet (f.) – die Tür"
   },
   {
    "for": "tr",
    "rel": "new",
-   "text": "Turkish has no gender. In German every noun has one (der Tisch, die Tür, das Buch), and it changes the words around the noun."
+   "text": "Turkish has no gender.\n\nIn German every noun has one (der Tisch, die Tür, das Buch), and it changes the words around the noun."
   },
   {
    "for": "ja",
    "rel": "new",
-   "text": "Japanese nouns have no gender; German ones do, and the gender is learned with the article: der Tisch, die Tür, das Buch."
+   "text": "Japanese nouns have no gender; German ones do, and the gender is learned with the article:\n→ der Tisch, die Tür, das Buch"
   },
   {
    "for": "ko",
@@ -320,7 +320,7 @@
   {
    "for": "fi",
    "rel": "new",
-   "text": "No gender in Finnish, and hän is he and she; German has three genders, and even a thing is er, sie or es."
+   "text": "No gender in Finnish, and hän is he and she.\n\nGerman has three genders, and even a thing is er, sie or es."
   },
   {
    "for": "hu",
@@ -330,17 +330,17 @@
   {
    "for": "sw",
    "rel": "similar",
-   "text": "Noun classes are like a bigger gender system: each class has its prefix on the noun (mtu / watu, kitabu / vitabu) and agreement everywhere. German has only three classes, shown mostly on the article, not on the noun."
+   "text": "Noun classes are like a bigger gender system: each class has its prefix on the noun (mtu / watu, kitabu / vitabu) and agreement everywhere.\n\nGerman has only three classes, shown mostly on the article, not on the noun."
   },
   {
    "for": "lg",
    "rel": "similar",
-   "text": "Luganda noun classes (omuntu / abantu, ekitabo / ebitabo) work like a large gender system marked by prefixes; German has three genders, marked by the article (der, die, das), which also shows the case."
+   "text": "Luganda noun classes (omuntu / abantu, ekitabo / ebitabo) work like a large gender system marked by prefixes.\n\nGerman has three genders, marked by the article (der, die, das), which also shows the case."
   },
   {
    "for": "zh",
    "rel": "new",
-   "text": "Chinese has no grammatical gender (他 / 她 / 它 differ only in writing); every German noun has a gender that must be learned with it."
+   "text": "Chinese has no grammatical gender (他 / 她 / 它 differ only in writing).\n\nEvery German noun has a gender that must be learned with it."
   },
   {
    "for": "vi",
@@ -350,47 +350,47 @@
   {
    "for": "iu",
    "rel": "new",
-   "text": "Inuktitut nouns have no gender; in German every noun – even a thing – is masculine, feminine or neuter."
+   "text": "Inuktitut nouns have no gender.\n\nIn German every noun – even a thing – is masculine, feminine or neuter."
   },
   {
    "for": "it",
    "rel": "different",
-   "text": "Italian has two genders; German adds a neuter, and the genders often do not carry over: il tavolo – der Tisch matches, but la casa – das Haus, il libro – das Buch, la sedia – der Stuhl. Learn every noun with der, die or das."
+   "text": "Italian has two genders; German adds a neuter, and the genders often do not carry over:\n→ il tavolo – der Tisch matches\n→ but la casa – das Haus, il libro – das Buch, la sedia – der Stuhl\n\n**Learn every noun with der, die or das.**"
   },
   {
    "for": "sq",
    "rel": "different",
-   "text": "Albanian has two genders in everyday use; German adds a full neuter, and the genders rarely carry over: libri (masculine) – das Buch, shtëpia and vajza (feminine) – das Haus, das Mädchen; dera – die Tür matches."
+   "text": "Albanian has two genders in everyday use; German adds a full neuter, and the genders rarely carry over:\n→ libri (masculine) – das Buch\n→ shtëpia and vajza (feminine) – das Haus, das Mädchen\n\ndera – die Tür matches."
   },
   {
    "for": "pt",
    "rel": "different",
-   "text": "Portuguese has two genders; German adds a neuter, and the genders do not carry over: a mesa – der Tisch, o livro – das Buch, a casa – das Haus; a porta – die Tür matches. Learn every noun with its article."
+   "text": "Portuguese has two genders; German adds a neuter, and the genders do not carry over:\n→ a mesa – der Tisch, o livro – das Buch, a casa – das Haus\n\na porta – die Tür matches. **Learn every noun with its article.**"
   },
   {
    "for": "type:fusional",
    "rel": "similar",
-   "text": "If your language has genders, the idea is familiar, but the gender of each noun must be learned anew: the article is the only reliable sign (der Tisch, die Tür, das Fenster); endings such as -ung, -heit (die) and -chen (das) help."
+   "text": "If your language has genders, the idea is familiar, but the gender of each noun must be learned anew: **the article is the only reliable sign** (der Tisch, die Tür, das Fenster).\n\nEndings such as -ung, -heit (die) and -chen (das) help."
   },
   {
    "for": "type:agglutinating",
    "rel": "new",
-   "text": "If your language has no grammatical gender, every German noun brings a der, die or das that is not about sex: der Tisch, die Tür, das Mädchen. Learn it with the noun – it decides the article, the pronoun (der Tisch → er) and the endings."
+   "text": "If your language has no grammatical gender, every German noun brings a der, die or das that is not about sex:\n→ der Tisch, die Tür, das Mädchen\n\nLearn it with the noun – it decides the article, the pronoun (der Tisch → er) and the endings."
   },
   {
    "for": "type:isolating",
    "rel": "new",
-   "text": "Gender is new: every German noun is der, die or das, things included, and the pronoun follows the noun, not the thing: Der Tisch ist neu – er ist groß."
+   "text": "Gender is new: every German noun is der, die or das, things included, and the pronoun follows the noun, not the thing:\n→ Der Tisch ist neu – er ist groß."
   },
   {
    "for": "type:polysynthetic",
    "rel": "new",
-   "text": "If your language has no gender, note that German sorts every noun into der, die or das, and that a thing is er, sie or es after its gender: der Tisch → er, die Lampe → sie."
+   "text": "If your language has no gender, note that:\n- German sorts every noun into der, die or das;\n- a thing is er, sie or es after its gender: der Tisch → er, die Lampe → sie."
   },
   {
    "for": "branch:Semitic",
    "rel": "different",
-   "text": "If your nouns are masculine or feminine and a feminine ending often shows it, German adds a neuter and rarely shows the gender on the noun: der Tisch, die Tür, das Fenster. das Mädchen is neuter, so its pronoun is es."
+   "text": "If your nouns are masculine or feminine and a feminine ending often shows it, German adds a neuter and rarely shows the gender on the noun:\n→ der Tisch, die Tür, das Fenster\n\ndas Mädchen is neuter, so its pronoun is es."
   }
  ]
 }

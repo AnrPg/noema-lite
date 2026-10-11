@@ -1119,7 +1119,7 @@
     "title": "paired form",
     "prominent": true,
     "order": 2,
-    "phenomenon": "de.syn.v2",
+    "phenomenon": "de.syn.paired.conjunctions",
     "type": "string",
     "none": true,
     "why": "Two-part conjunctions: weder … noch (neither … nor), entweder … oder (either … or), zwar … aber (admittedly … but), sowohl … als auch (both … and). none: not part of a pair."

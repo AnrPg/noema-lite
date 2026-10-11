@@ -103,92 +103,92 @@
   {
    "for": "en",
    "rel": "different",
-   "text": "English works mostly analytically: word order and helper words carry the grammar (I will have eaten, the house of the teacher), with only a few fused leftovers (went, children, mice). Chinese will feel closest in this; German, a close relative, kept the endings, genders and cases English lost (des Mannes, dem Kind), so its tables are the new part, and Arabic and Hebrew are new in kind."
+   "text": "English works mostly analytically: word order and helper words carry the grammar (I will have eaten, the house of the teacher), with only a few fused leftovers (went, children, mice).\n\n- Chinese will feel closest in this.\n- German, a close relative, kept the endings, genders and cases English lost (des Mannes, dem Kind), so **its tables are the new part**.\n- Arabic and Hebrew are new in kind."
   },
   {
    "for": "el",
    "rel": "same",
-   "text": "Greek is fusional, like German, Arabic and Hebrew: one ending says several things at once — in του λόγου the -ου is genitive and singular together, and another noun class uses another ending for the same job (της γυναίκας). Learning each noun with its gender and its table is a habit you bring: German needs exactly that; Arabic and Hebrew add a root woven into vowel patterns, and Chinese has no endings at all."
+   "text": "Greek is fusional, like German, Arabic and Hebrew: one ending says several things at once.\n→ in του λόγου the -ου is genitive and singular together, and another noun class uses another ending for the same job (της γυναίκας)\n\n**Learning each noun with its gender and its table is a habit you bring:**\n- German needs exactly that;\n- Arabic and Hebrew add a root woven into vowel patterns;\n- Chinese has no endings at all."
   },
   {
    "for": "ru",
    "rel": "same",
-   "text": "Russian is strongly fusional: in книгами the single ending -ами means instrumental and plural at once, and other noun classes use other endings for the same job. Your six cases and three genders prepare you well for German (four cases, three genders, shown mostly on the article); Arabic and Hebrew are fusional too but change the vowels inside a root (كَتَبَ ‘he wrote’ – كِتَاب ‘book’), and Chinese has no endings at all."
+   "text": "Russian is strongly fusional: in книгами the single ending -ами means instrumental and plural at once, and other noun classes use other endings for the same job.\n\n- Your six cases and three genders prepare you well for German (four cases, three genders, shown mostly on the article).\n- Arabic and Hebrew are fusional too but change the vowels inside a root (كَتَبَ ‘he wrote’ – كِتَاب ‘book’).\n- Chinese has no endings at all."
   },
   {
    "for": "fr",
    "rel": "similar",
-   "text": "French is fusional but has moved far toward the analytic side: nouns have no cases, and articles and prepositions do that work (le livre de l’enfant), while the verb still fuses person, tense and mood in one ending (nous parlerions). German brings cases back on the article (das Buch des Kindes); Chinese goes all the way to the analytic side; Arabic and Hebrew build words around a root inside the word."
+   "text": "French is fusional but has moved far toward the analytic side: nouns have no cases, and articles and prepositions do that work (le livre de l’enfant), while the verb still fuses person, tense and mood in one ending (nous parlerions).\n\n- German brings cases back on the article (das Buch des Kindes).\n- Chinese goes all the way to the analytic side.\n- Arabic and Hebrew build words around a root inside the word."
   },
   {
    "for": "ar",
    "rel": "same",
-   "text": "Arabic is one of the course languages: fusional, with the root woven into vowel patterns (كَتَبَ، كِتَاب، كَاتِب، مَكْتَب from k-t-b), and with وَ, the prepositions, سَ and the pronouns glued on in a fixed order (وَسَيَكْتُبُونَهَا). Hebrew works the same way, often with the same roots (כ-ת-ב ‘write’); German is fusional through endings, articles and stem changes; Chinese changes no word at all."
+   "text": "Arabic is one of the course languages: fusional, with the root woven into vowel patterns, and with وَ, the prepositions, سَ and the pronouns glued on in a fixed order.\n→ كَتَبَ، كِتَاب، كَاتِب، مَكْتَب from k-t-b\n→ وَسَيَكْتُبُونَهَا\n\n- Hebrew works the same way, often with the same roots (כ-ת-ב ‘write’).\n- German is fusional through endings, articles and stem changes.\n- Chinese changes no word at all."
   },
   {
    "for": "de",
    "rel": "same",
-   "text": "German is fusional: one form says several things at once (des = genitive, singular, masculine or neuter), and the stem itself can change (Buch → Bücher, singen → sang → gesungen); it also builds compounds the agglutinating way (Gemüsesuppe) and uses helper verbs (habe gegessen). Arabic and Hebrew are fusional too, but they make the vowel change of singen – sang – gesungen the core of the system: a root of consonants inside changing vowel patterns."
+   "text": "German is fusional: one form says several things at once (des = genitive, singular, masculine or neuter), and the stem itself can change (Buch → Bücher, singen → sang → gesungen).\n\nIt also builds compounds the agglutinating way (Gemüsesuppe) and uses helper verbs (habe gegessen).\n\nArabic and Hebrew are fusional too, but they make the vowel change of singen – sang – gesungen **the core of the system**: a root of consonants inside changing vowel patterns."
   },
   {
    "for": "hi",
    "rel": "similar",
-   "text": "Hindi mixes types: endings fuse gender, number and case (लड़का, लड़के, लड़कों), while the postpositions stand as separate words after the noun (लड़कों को ‘to the boys’) and many tenses are built with helper verbs (जा रहा था). German will feel familiar in its genders and in a noun phrase that changes shape next to a relation word — before a postposition in Hindi, on the article after a preposition in German (der Mann → mit dem Mann); Arabic and Hebrew have two genders, as Hindi does."
+   "text": "Hindi mixes types:\n- endings fuse gender, number and case (लड़का, लड़के, लड़कों);\n- the postpositions stand as separate words after the noun (लड़कों को ‘to the boys’);\n- many tenses are built with helper verbs (जा रहा था).\n\nGerman will feel familiar in its genders and in a noun phrase that changes shape next to a relation word — before a postposition in Hindi, on the article after a preposition in German:\n→ der Mann → mit dem Mann\n\nArabic and Hebrew have two genders, as Hindi does."
   },
   {
    "for": "zh",
    "rel": "new",
-   "text": "Chinese is the isolating language of this course: no word changes, and order and small words (了, 个, 的) do the work. German, Arabic and Hebrew are new in kind: their words change for gender, number, case and person, so the endings and the first tables come first, and Arabic and Hebrew also change the vowels inside the word around a root."
+   "text": "Chinese is the isolating language of this course: no word changes, and order and small words (了, 个, 的) do the work.\n\nGerman, Arabic and Hebrew are **new in kind**: their words change for gender, number, case and person, so the endings and the first tables come first, and Arabic and Hebrew also change the vowels inside the word around a root."
   },
   {
    "for": "ja",
    "rel": "different",
-   "text": "Japanese is agglutinating: pieces with one meaning each are glued on in a fixed order — 食べさせられなかった is tabe- ‘eat’ + -sase- ‘make’ + -rare- (passive) + -nakat- ‘not’ + -ta (past). None of the course languages works mainly this way: in German, Arabic and Hebrew one ending carries several meanings and changes with the word class, so it is learned in tables. Reading a word piece by piece still helps with the attached prefixes and pronouns of Arabic and Hebrew (وَسَيَكْتُبُونَهَا)."
+   "text": "Japanese is agglutinating: pieces with one meaning each are glued on in a fixed order.\n→ 食べさせられなかった is tabe- ‘eat’ + -sase- ‘make’ + -rare- (passive) + -nakat- ‘not’ + -ta (past)\n\nNone of the course languages works mainly this way: in German, Arabic and Hebrew **one ending carries several meanings** and changes with the word class, so it is learned in tables.\n\nReading a word piece by piece still helps with the attached prefixes and pronouns of Arabic and Hebrew (وَسَيَكْتُبُونَهَا)."
   },
   {
    "for": "it",
    "rel": "similar",
-   "text": "Italian is fusional with an analytic side: the verb fuses person, tense and mood in one ending (parlerei ‘I would speak’), but nouns have no cases — prepositions merged with articles do that work (del libro, nel libro). German brings cases back on the article and merges some prepositions with it as you do (im Buch = in dem Buch, like nel = in il); Arabic and Hebrew share your two genders and their agreement, but build words around a root inside the word."
+   "text": "Italian is fusional with an analytic side: the verb fuses person, tense and mood in one ending (parlerei ‘I would speak’), but nouns have no cases — prepositions merged with articles do that work (del libro, nel libro).\n\n- German brings cases back on the article and merges some prepositions with it as you do (im Buch = in dem Buch, like nel = in il).\n- Arabic and Hebrew share your two genders and their agreement, but build words around a root inside the word."
   },
   {
    "for": "es",
    "rel": "similar",
-   "text": "Spanish is fusional: one verb ending says person, number, tense and mood at once (hablé ‘I spoke’), and the stem can change (puedo – pude). Nouns have no cases, though: prepositions do that work (el libro del niño). German brings cases back on the article (das Buch des Kindes); Arabic and Hebrew share your two genders and their agreement on adjectives and verbs, but build words around a root."
+   "text": "Spanish is fusional: one verb ending says person, number, tense and mood at once (hablé ‘I spoke’), and the stem can change (puedo – pude). Nouns have no cases, though: prepositions do that work (el libro del niño).\n\n- German brings cases back on the article (das Buch des Kindes).\n- Arabic and Hebrew share your two genders and their agreement on adjectives and verbs, but build words around a root."
   },
   {
    "for": "sq",
    "rel": "same",
-   "text": "Albanian is fusional: the definite article is glued to the end of the noun and fused with case (libër ‘book’, libri ‘the book’, librit ‘to the book’). Your cases and gender agreement prepare you for German, which marks them on an article before the noun (das Buch, dem Buch); Arabic and Hebrew put ‘the’ on the noun as you do, but at the front (الْكِتَاب، הַסֵּפֶר)."
+   "text": "Albanian is fusional: the definite article is glued to the end of the noun and fused with case.\n→ libër ‘book’, libri ‘the book’, librit ‘to the book’\n\n- Your cases and gender agreement prepare you for German, which marks them on an article before the noun (das Buch, dem Buch).\n- Arabic and Hebrew put ‘the’ on the noun as you do, but at the front (الْكِتَاب، הַסֵּפֶר)."
   },
   {
    "for": "pt",
    "rel": "similar",
-   "text": "Portuguese is fusional: one verb ending fuses person, number, tense and mood (falei ‘I spoke’, falámos ‘we spoke’), but nouns have no cases — prepositions merged with articles do that work (do livro, no livro). German brings cases back on the article and merges some prepositions with it as you do (im Buch = in dem Buch, like no = em o); Arabic and Hebrew share your two genders but build words around a root inside the word."
+   "text": "Portuguese is fusional: one verb ending fuses person, number, tense and mood (falei ‘I spoke’, falámos ‘we spoke’), but nouns have no cases — prepositions merged with articles do that work (do livro, no livro).\n\n- German brings cases back on the article and merges some prepositions with it as you do (im Buch = in dem Buch, like no = em o).\n- Arabic and Hebrew share your two genders but build words around a root inside the word."
   },
   {
    "for": "type:fusional",
    "rel": "same",
-   "text": "If your language packs several meanings into one ending and learns nouns with their gender in tables, three of the four course languages will feel familiar in kind: German through endings, articles and stem changes, Arabic and Hebrew through endings plus a root woven into vowel patterns. Chinese is the opposite: nothing changes, and order and small words do the work."
+   "text": "If your language packs several meanings into one ending and learns nouns with their gender in tables, three of the four course languages will feel familiar in kind:\n- German through endings, articles and stem changes;\n- Arabic and Hebrew through endings plus a root woven into vowel patterns.\n\nChinese is the opposite: nothing changes, and order and small words do the work."
   },
   {
    "for": "type:agglutinating",
    "rel": "different",
-   "text": "If your language glues on one suffix per meaning in a fixed order, the fused endings of German, Arabic and Hebrew are the hardest part: one ending says several things at once and changes with the word class, so it is learned in tables. What transfers: the attached prefixes and pronouns of Arabic and Hebrew, and German derivation (Freund-lich-keit-en), read piece by piece."
+   "text": "If your language glues on one suffix per meaning in a fixed order, **the fused endings of German, Arabic and Hebrew are the hardest part**: one ending says several things at once and changes with the word class, so it is learned in tables.\n\nWhat transfers, read piece by piece:\n- the attached prefixes and pronouns of Arabic and Hebrew;\n- German derivation (Freund-lich-keit-en)."
   },
   {
    "for": "type:isolating",
    "rel": "new",
-   "text": "If words in your language never change their form, the endings, genders and agreement of German, Arabic and Hebrew are the new part — learn every noun with its gender and start with the tables the first lessons give. Chinese will feel familiar: order and small words do the work."
+   "text": "If words in your language never change their form, the endings, genders and agreement of German, Arabic and Hebrew are the new part — **learn every noun with its gender** and start with the tables the first lessons give.\n\nChinese will feel familiar: order and small words do the work."
   },
   {
    "for": "type:polysynthetic",
    "rel": "different",
-   "text": "If your language builds a whole sentence into one verb, the Arabic verb with its attached pronouns (أَنُلْزِمُكُمُوهَا ‘shall we force it on you?’) will feel closest. Otherwise the course languages keep the object and the circumstances as separate words, and Chinese keeps every piece separate: word order carries what your verb carries inside."
+   "text": "If your language builds a whole sentence into one verb, the Arabic verb with its attached pronouns will feel closest:\n→ أَنُلْزِمُكُمُوهَا ‘shall we force it on you?’\n\nOtherwise the course languages keep the object and the circumstances as separate words, and Chinese keeps every piece separate: word order carries what your verb carries inside."
   },
   {
    "for": "branch:Semitic",
    "rel": "same",
-   "text": "If your language is Semitic, Arabic and Hebrew work like it: a root of consonants woven into vowel patterns, with ‘and’, prepositions and pronouns attached, and many roots shared (k-t-b / כ-ת-ב ‘write’). The work is in German, with three genders and case on the article, and in Chinese, with no endings at all."
+   "text": "If your language is Semitic, Arabic and Hebrew work like it:\n- a root of consonants woven into vowel patterns;\n- ‘and’, prepositions and pronouns attached;\n- many roots shared (k-t-b / כ-ת-ב ‘write’).\n\nThe work is in German, with three genders and case on the article, and in Chinese, with no endings at all."
   }
  ]
 }

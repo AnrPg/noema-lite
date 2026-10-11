@@ -135,7 +135,7 @@
     ],
     "pitfalls": [
      "was asks “what?”; it is not a form of sein (the past of ist is war).",
-     "After prepositions standard German uses wo(r)- + preposition: Womit? Worüber? – mit was is colloquial."
+     "After prepositions standard German uses wo(r)- + preposition:\n→ Womit? Worüber?\n\nmit was is colloquial."
     ],
     "subtleties": [
      "Was? alone sounds abrupt; Wie bitte? is the polite version."
@@ -144,7 +144,7 @@
      {
       "for": "en",
       "rel": "trap",
-      "text": "The w- words match English wh- words – was = what, wo = where – but wer is who. was is “what”, not the past tense was (that is war)."
+      "text": "The w- words match English wh- words – was = what, wo = where – but wer is who.\n\nwas is “what”, not the past tense was (that is war)."
      }
     ]
    }
@@ -613,10 +613,10 @@
      "Three words share the job of “when”: wann (question), wenn (whenever, if) and als (once, in the past)."
     ],
     "pitfalls": [
-     "wann asks (also in indirect questions: Weißt du, wann …?). The “when” that joins two clauses is wenn or als (S18): Wenn ich Zeit habe, … – not *Wann ich Zeit habe."
+     "wann asks (also in indirect questions: Weißt du, wann …?).\n\nThe “when” that joins two clauses is wenn or als (S18):\n→ Wenn ich Zeit habe, … – not *Wann ich Zeit habe."
     ],
     "subtleties": [
-     "For a clock time Germans often ask Um wie viel Uhr …?; Wann …? is wider (a day, a time of day, a date)."
+     "For a clock time Germans often ask Um wie viel Uhr …?\n\nWann …? is wider (a day, a time of day, a date)."
     ],
     "notes": [
      {
@@ -756,7 +756,7 @@
      "German asks the name with “how”: Wie heißt du?"
     ],
     "pitfalls": [
-     "“What’s your name?” is Wie heißt du? / Wie heißen Sie? – not *Was heißt du? (Was heißt …? asks what a word means: Was heißt „Haus“ auf Griechisch?).",
+     "“What’s your name?” is Wie heißt du? / Wie heißen Sie? – not *Was heißt du?\n\nWas heißt …? asks what a word means:\n→ Was heißt „Haus“ auf Griechisch?",
      "wie viel = how much; “how many” before a plural is wie viele."
     ],
     "subtleties": [
@@ -1009,7 +1009,7 @@
      "German splits “how much” and “how many” with one ending: wie viel Milch, wie viele Äpfel."
     ],
     "pitfalls": [
-     "wie viel + singular (uncountable) – wie viel Wasser; with a plural noun use wie viele: wie viele Äpfel.",
+     "- wie viel + singular (uncountable) – wie viel Wasser;\n- with a plural noun use wie viele: wie viele Äpfel.",
      "Two words today (wie viel); the older spelling wieviel is still often seen."
     ],
     "subtleties": [
@@ -1137,10 +1137,10 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The question word and its noun stay together in first place: Wie viele Brüder hast du? – never *Wie viele hast du Brüder? in standard German."
+     "The question word and its noun stay together in first place:\n→ Wie viele Brüder hast du? – never *Wie viele hast du Brüder? in standard German."
     ],
     "pitfalls": [
-     "wie viele goes with plural nouns (wie viele Äpfel); for uncountable things use wie viel (wie viel Milch).",
+     "- wie viele goes with plural nouns (wie viele Äpfel);\n- for uncountable things use wie viel (wie viel Milch).",
      "After a dative preposition it takes -n: mit wie vielen Kindern."
     ],
     "subtleties": [
@@ -1320,11 +1320,11 @@
      "welcher goes back to *hwi-līk-, “what-like”; the same *-līk- is in solcher."
     ],
     "pitfalls": [
-     "welcher declines like dieser (and der): welcher Mann, welche Frau, welches Kind; accusative welchen Mann; dative welchem Mann.",
+     "welcher declines like dieser (and der):\n→ welcher Mann, welche Frau, welches Kind\n→ accusative welchen Mann; dative welchem Mann",
      "Before a noun the question word is welcher: Welche Farbe? Welcher Bus?"
     ],
     "subtleties": [
-     "Welcher …? picks from things you can see or know; Was für ein …? asks about the type: Was für ein Auto hast du? – Ein kleines.",
+     "Welcher …? picks from things you can see or know; Was für ein …? asks about the type:\n→ Was für ein Auto hast du? – Ein kleines.",
      "Colloquial welche = “some”: Ich habe welche. (I have some.)"
     ],
     "notes": [
@@ -1422,7 +1422,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Beruf means “a calling”; Max Weber traced its double sense – trade and calling from God – to Luther’s Bible translation."
+     "Beruf means “a calling”.\n\nMax Weber traced its double sense – trade and calling from God – to Luther’s Bible translation."
     ],
     "pitfalls": [
      "The answer has no article: Ich bin Ärztin. – not *Ich bin eine Ärztin.",
@@ -1770,7 +1770,7 @@
      "No article for a job after sein: Sie ist Ärztin – unless an adjective comes in: eine gute Ärztin."
     ],
     "subtleties": [
-     "Ärztinnen und Ärzte: official texts name both forms; the masculine plural Ärzte traditionally covers everyone."
+     "Ärztinnen und Ärzte: official texts name both forms.\n\nThe masculine plural Ärzte traditionally covers everyone."
     ]
    }
   },
@@ -1935,7 +1935,7 @@
      "Plural = singular: die Krankenpfleger; dative plural den Krankenpflegern."
     ],
     "subtleties": [
-     "Since 2020 the training in Germany is called Pflegefachfrau / Pflegefachmann; Krankenpfleger(in) remains the everyday word."
+     "Since 2020 the training in Germany is called Pflegefachfrau / Pflegefachmann.\n\nKrankenpfleger(in) remains the everyday word."
     ]
    }
   },
@@ -2243,14 +2243,14 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The “sister” goes back to the nursing nuns and deaconesses. Hebrew אָחוֹת (aḥot) means both “sister” and “nurse”, and in British hospitals a senior nurse is still called “Sister”."
+     "The “sister” goes back to the nursing nuns and deaconesses.\n\nHebrew אָחוֹת (aḥot) means both “sister” and “nurse”, and in British hospitals a senior nurse is still called “Sister”."
     ],
     "pitfalls": [
      "There is no masculine *Krankenbruder: a man is Krankenpfleger.",
      "Plural -n: die Krankenschwestern."
     ],
     "subtleties": [
-     "Official titles no longer use it (Gesundheits- und Krankenpflegerin from 2004, Pflegefachfrau since 2020), but it is still very common in everyday speech."
+     "Official titles no longer use it (Gesundheits- und Krankenpflegerin from 2004, Pflegefachfrau since 2020).\n\nBut it is still very common in everyday speech."
     ]
    }
   },
@@ -2386,14 +2386,14 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Ingenieur is a French word, from Latin ingenium (talent, invention); Arabic says مُهَنْدِس (muhandis)."
+     "Ingenieur is a French word, from Latin ingenium (talent, invention).\n\nArabic says مُهَنْدِس (muhandis)."
     ],
     "pitfalls": [
      "French spelling and sound: g is [ʒ] as in Garage, -ieur is [iøːɐ̯].",
      "Plural Ingenieure (not *Ingenieurs); dative plural den Ingenieuren."
     ],
     "subtleties": [
-     "In Germany and Austria the engineering degree is shown like a title on doorbells and letters: Dipl.-Ing. Müller."
+     "In Germany and Austria the engineering degree is shown like a title on doorbells and letters: Dipl.‑Ing. Müller."
     ],
     "notes": [
      {
@@ -3607,7 +3607,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "From 1960 (Greece) and 1961 (Turkey) West Germany recruited Gastarbeiter; many Greek and Turkish families in Germany go back to them."
+     "From 1960 (Greece) and 1961 (Turkey) West Germany recruited Gastarbeiter.\n\nMany Greek and Turkish families in Germany go back to them."
     ],
     "pitfalls": [
      "Arbeiter usually means a manual worker; an office worker is ein Angestellter.",
@@ -4724,13 +4724,13 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German police forces belong to the federal states (Länder); the Bundespolizei guards borders, airports and stations."
+     "German police forces belong to the federal states (Länder).\n\nThe Bundespolizei guards borders, airports and stations."
     ],
     "pitfalls": [
      "Unlike the weak Polizist, Polizistin has no case endings: die, der, der, die Polizistin."
     ],
     "subtleties": [
-     "In German police ranks titles change (Polizeimeisterin, Kommissarin); in everyday speech: Polizistin."
+     "In German police ranks titles change (Polizeimeisterin, Kommissarin).\n\nIn everyday speech: Polizistin."
     ]
    }
   },

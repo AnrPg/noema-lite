@@ -63,7 +63,7 @@
      "neutral"
     ],
     "connotation": "neutral",
-    "feeling": "Golden-yellow curry colour, “golden milk” and stained fingers; fresh roots look like small orange ginger.",
+    "feeling": "Golden-yellow curry colour, “golden milk” and stained fingers.\n\nFresh roots look like small orange ginger.",
     "senses": [
      {
       "id": "s1",
@@ -144,7 +144,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Arabic كُرْكُم (kurkum) and Hebrew כּוּרְכּוּם (kurkum) are the same word as German Kurkuma; Chinese says 姜黄 (jiānghuáng, “ginger-yellow”).",
+     "Arabic كُرْكُم (kurkum) and Hebrew כּוּרְכּוּם (kurkum) are the same word as German Kurkuma.\n\nChinese says 姜黄 (jiānghuáng, “ginger-yellow”).",
      "Turmeric belongs to the ginger family: the fresh rhizomes look like ginger with bright orange flesh."
     ],
     "pitfalls": [
@@ -152,7 +152,7 @@
      "Plural Kurkumen is rare; people say Kurkumawurzeln for several roots."
     ],
     "subtleties": [
-     "Kurkuma alone usually means the dried yellow spice; for the fresh root say frische Kurkuma or Kurkumawurzel."
+     "Kurkuma alone usually means the dried yellow spice.\n\nFor the fresh root say frische Kurkuma or Kurkumawurzel."
     ]
    }
   },
@@ -294,7 +294,7 @@
      "No plural in normal use: say Borretschblätter (leaves) or Borretschpflanzen (plants)."
     ],
     "subtleties": [
-     "Only young leaves are used: older ones are very hairy. The flowers are a garnish and turn pink when they fade."
+     "- Only young leaves are used: older ones are very hairy.\n- The flowers are a garnish and turn pink when they fade."
     ],
     "notes": [
      {
@@ -456,7 +456,7 @@
      "Gänsefüßchen (diminutive, plural) means “quotation marks” in colloquial German – not little plants."
     ],
     "subtleties": [
-     "Botanically Gänsefuß is the whole genus; the edible weed is the Weiße Gänsefuß. Like spinach it contains oxalic acid, so it is usually cooked."
+     "Botanically Gänsefuß is the whole genus; the edible weed is the Weiße Gänsefuß.\n\nLike spinach it contains oxalic acid, so it is usually cooked."
     ],
     "notes": [
      {
@@ -624,7 +624,7 @@
      "The hooked burrs of the burdock inspired the hook-and-loop fastener – in German it is still called Klettverschluss."
     ],
     "pitfalls": [
-     "Klette alone means the plant or its burrs, and figuratively a clingy person; for the vegetable say Klettenwurzel."
+     "Klette alone means the plant or its burrs, and figuratively a clingy person.\n\nFor the vegetable say Klettenwurzel."
     ],
     "subtleties": [
      "The cut root browns quickly; Japanese recipes soak it in water or vinegar water."
@@ -773,7 +773,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Most “wasabi” paste outside Japan is horseradish with mustard and green colouring; real wasabi is expensive.",
+     "Most “wasabi” paste outside Japan is horseradish with mustard and green colouring.\n\nReal wasabi is expensive.",
      "Chinese writes the plant 山葵 (shānkuí) but usually calls the paste 芥末 (jièmo)."
     ],
     "pitfalls": [
@@ -940,7 +940,7 @@
      "It is not an onion for winter storage: the name refers to its frost hardiness."
     ],
     "subtleties": [
-     "In shops Frühlingszwiebel covers both young common onions and Welsh onions; gardeners keep the names apart."
+     "In shops Frühlingszwiebel covers both young common onions and Welsh onions.\n\nGardeners keep the names apart."
     ],
     "notes": [
      {
@@ -1100,7 +1100,7 @@
      "The plural is the same as the singular: die Rhabarber (rarely needed)."
     ],
     "subtleties": [
-     "Botanically a vegetable (a leafstalk), but in the kitchen treated like fruit; the traditional harvest ends on Johanni, 24 June."
+     "Botanically a vegetable (a leafstalk), but in the kitchen treated like fruit.\n\nThe traditional harvest ends on Johanni, 24 June."
     ],
     "synonymsNone": "No other standard word; Swiss and Austrian German also say Rhabarber.",
     "notes": [
@@ -1253,7 +1253,7 @@
      "Chinese 荸荠 (bíqí). It is not related to the chestnut at all: it is the corm of a sedge."
     ],
     "pitfalls": [
-     "Some books also call the water caltrop (Trapa) Wasserkastanie; the usual German name for that one is Wassernuss."
+     "Some books also call the water caltrop (Trapa) Wasserkastanie.\n\nThe usual German name for that one is Wassernuss."
     ],
     "subtleties": [
      "The crunch survives cooking because the cell walls are stabilised by special compounds (ferulic acid)."
@@ -1560,7 +1560,7 @@
      "Despite the name it is no yam: it is a legume."
     ],
     "subtleties": [
-     "In Germany it is a niche product; recipes usually write Jicama, while Yambohne is the dictionary and botany name."
+     "In Germany it is a niche product.\n\nRecipes usually write Jicama, while Yambohne is the dictionary and botany name."
     ],
     "notes": [
      {
@@ -1707,14 +1707,14 @@
      "src": "Duden online; Wiktionary (kaikki.org) for Italian cardo"
     },
     "funFacts": [
-     "The cardoon is the wild-type form of the same species as the artichoke; the artichoke was bred from it for its flower heads."
+     "The cardoon is the wild-type form of the same species as the artichoke.\n\nThe artichoke was bred from it for its flower heads."
     ],
     "pitfalls": [
      "The stalks are bitter and stringy: they are peeled and blanched before cooking.",
      "Do not confuse with Karde, a different thistle-like plant (teasel)."
     ],
     "subtleties": [
-     "In Germany Kardone is a restaurant and cookbook word; in French-speaking Switzerland the Cardon genevois is a protected regional speciality."
+     "In Germany Kardone is a restaurant and cookbook word.\n\nIn French-speaking Switzerland the Cardon genevois is a protected regional speciality."
     ]
    }
   },
@@ -1868,7 +1868,7 @@
      "Tiger nuts were found as grave goods in ancient Egyptian tombs."
     ],
     "pitfalls": [
-     "It is not a nut and not an almond but a tuber; Wiktionary also lists Erdmandel for the peanut and the earthnut pea, but today it normally means the tiger nut."
+     "It is not a nut and not an almond but a tuber.\n\nWiktionary also lists Erdmandel for the peanut and the earthnut pea, but today it normally means the tiger nut."
     ],
     "subtleties": [
      "Dried tiger nuts are hard and are soaked before eating or making milk."
@@ -2161,7 +2161,7 @@
      "Do not use it 1:1 instead of ginger: the taste is different (citrus, pine, pepper)."
     ],
     "subtleties": [
-     "German Galgant can mean several related plants; in Thai cooking it is the greater galangal (Alpinia galanga)."
+     "German Galgant can mean several related plants.\n\nIn Thai cooking it is the greater galangal (Alpinia galanga)."
     ]
    }
   },
@@ -2303,13 +2303,13 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German Wikipedia counts garden orache among the oldest cultivated plants; spinach pushed it out of European gardens."
+     "German Wikipedia counts garden orache among the oldest cultivated plants.\n\nSpinach pushed it out of European gardens."
     ],
     "pitfalls": [
      "Do not confuse Melde (orache) with the homonym Melde, a rare noun from melden (“to report”)."
     ],
     "subtleties": [
-     "Like spinach and fat hen it contains oxalic acid and is usually eaten cooked; red varieties lose their colour in the pot."
+     "Like spinach and fat hen it contains oxalic acid and is usually eaten cooked.\n\nRed varieties lose their colour in the pot."
     ]
    }
   },
@@ -2442,7 +2442,7 @@
      "The plant bears a man’s name: Guter Heinrich, “good Henry”."
     ],
     "pitfalls": [
-     "Gut is declined like an adjective: der Gute Heinrich, des Guten Heinrichs, but Guter Heinrich without an article. Write both parts with a capital letter."
+     "Gut is declined like an adjective:\n→ der Gute Heinrich, des Guten Heinrichs, but Guter Heinrich without an article\n\nWrite both parts with a capital letter."
     ],
     "subtleties": [
      "Botanists moved it from the goosefoot genus Chenopodium to Blitum, but cooks still treat it like fat hen and spinach."
@@ -2601,7 +2601,7 @@
      "The thickener glucomannan (E 425) comes from konjac; products are labelled Konjak, not Konjakwurzel."
     ],
     "subtleties": [
-     "The corm is a tuber-like stem, not a botanical root; the word Wurzel is used loosely, as in Ingwerwurzel."
+     "The corm is a tuber-like stem, not a botanical root.\n\nThe word Wurzel is used loosely, as in Ingwerwurzel."
     ]
    }
   },
@@ -3045,13 +3045,13 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Joseph Banks, the botanist of Captain Cook’s first voyage, brought it to Europe; the sailors ate it against scurvy."
+     "Joseph Banks, the botanist of Captain Cook’s first voyage, brought it to Europe.\n\nThe sailors ate it against scurvy."
     ],
     "pitfalls": [
      "Neuseeländer is never declined: der Neuseeländer Spinat, des Neuseeländer Spinats, mit Neuseeländer Spinat."
     ],
     "subtleties": [
-     "It is not related to spinach (it belongs to the ice-plant family); it likes heat, while true spinach bolts."
+     "It is not related to spinach (it belongs to the ice-plant family).\n\nIt likes heat, while true spinach bolts."
     ]
    }
   },
@@ -3194,13 +3194,13 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "For many wild palms, harvesting the heart kills the tree; today most palm hearts come from farmed multi-stemmed palms such as the peach palm."
+     "For many wild palms, harvesting the heart kills the tree.\n\nToday most palm hearts come from farmed multi-stemmed palms such as the peach palm."
     ],
     "pitfalls": [
      "Herz is irregular, and so is Palmherz in some forms: genitive des Palmherzes or des Palmherzens, dative dem Palmherz or Palmherzen."
     ],
     "subtleties": [
-     "Usually used in the plural for the product (Palmherzen); one piece is ein Palmherz or eine Stange Palmherz."
+     "Usually used in the plural for the product (Palmherzen).\n\nOne piece is ein Palmherz or eine Stange Palmherz."
     ],
     "notes": [
      {
@@ -3733,7 +3733,7 @@
      "neutral"
     ],
     "connotation": "neutral",
-    "feeling": "Known in Germany mostly as a tiny gluten-free grain; in Greece and Asia the leaves are a summer green.",
+    "feeling": "Known in Germany mostly as a tiny gluten-free grain.\n\nIn Greece and Asia the leaves are a summer green.",
     "senses": [
      {
       "id": "s1",
@@ -3803,7 +3803,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Boiled amaranth greens with lemon and oil are a summer dish around the Mediterranean; Chinese 苋菜 (xiàncài) is amaranth greens too.",
+     "Boiled amaranth greens with lemon and oil are a summer dish around the Mediterranean.\n\nChinese 苋菜 (xiàncài) is amaranth greens too.",
      "Amaranth was a staple grain of the Aztecs."
     ],
     "pitfalls": [
@@ -3811,7 +3811,7 @@
      "In German Amarant usually means the grain; for the vegetable say Amarantblätter."
     ],
     "subtleties": [
-     "The same plants give grain (the seeds) and greens (the leaves); some species are common garden weeds."
+     "The same plants give grain (the seeds) and greens (the leaves).\n\nSome species are common garden weeds."
     ],
     "notes": [
      {
@@ -3968,7 +3968,7 @@
      "Barbarakraut is named after Saint Barbara, whose feast day falls in early winter, when the plant can still be picked."
     ],
     "pitfalls": [
-     "Strictly, Winterkresse is Barbarea vulgaris; the land cress of seed catalogues is the related Barbarea verna. Both are eaten the same way."
+     "Strictly, Winterkresse is Barbarea vulgaris; the land cress of seed catalogues is the related Barbarea verna.\n\nBoth are eaten the same way."
     ],
     "subtleties": [
      "Older leaves become bitter; pick young ones or the winter rosettes."
@@ -4448,7 +4448,7 @@
      "A cocktail called the Gibson is a martini garnished with a pearl onion instead of an olive."
     ],
     "pitfalls": [
-     "Botanically German Wikipedia treats the Perlzwiebel as a form of Allium ampeloprasum (the leek species); in shops any tiny white onion is sold as Perlzwiebel or Silberzwiebel."
+     "Botanically German Wikipedia treats the Perlzwiebel as a form of Allium ampeloprasum (the leek species).\n\nIn shops any tiny white onion is sold as Perlzwiebel or Silberzwiebel."
     ],
     "subtleties": [
      "Almost always used in the plural: one onion alone is rarely mentioned."
@@ -4732,10 +4732,10 @@
      "It is the same species as leaf parsley, bred for the root – its leaves can be used like parsley too."
     ],
     "pitfalls": [
-     "Easy to confuse with Pastinake (parsnip): the parsnip is bigger, sweeter, and has a sunken leaf base; root parsley smells of parsley."
+     "Easy to confuse with Pastinake (parsnip):\n- the parsnip is bigger, sweeter, and has a sunken leaf base;\n- root parsley smells of parsley."
     ],
     "subtleties": [
-     "Wiktionary also lists Petersilienwurzel for the root of ordinary leaf parsley; at the market it means the special root variety."
+     "Wiktionary also lists Petersilienwurzel for the root of ordinary leaf parsley.\n\nAt the market it means the special root variety."
     ]
    }
   }
