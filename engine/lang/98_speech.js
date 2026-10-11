@@ -324,7 +324,7 @@ function speechLanes() {
   return h('div', { class: 'lx-speechlanes' }, h('h2', { class: 'lx-h2' }, '🎧 ' + LT('lang.listen.listening') + ' · 🗣️ ' + LT('lang.listen.speaking')),
     h('div', { class: 'lx-lanes' }, ...activeLangs().map(c => h('div', { class: 'lx-lanerow', 'data-lang': c },
       h('span', { class: 'lx-flag' }, info(c).flag), h('b', {}, info(c).label),
-      h('button', { class: 'btn small lx-tolisten', onclick: () => go('#/listen/' + c) }, '🎧 ' + LT('lang.view.listen'))))));
+      h('button', { class: 'btn small lx-tolisten', 'data-icon': 'mic', onclick: () => go('#/listen/' + c) }, '🎧 ' + LT('lang.view.listen'))))));
 }
 /** ⚙️ Settings → 🎧: a voice per language, the speed, auto-play, “I can't listen / speak now” (today). */
 function speechSettings() {

@@ -1947,7 +1947,7 @@
     return best && { lang: best.lang, fn: best.fn, feasibility: best.feasibility, items: best.items, usesNew: best.usesNew };
   }
   API.GEN = GEN;
-  Object.assign(API, { autoGenerators, checkSlots, checkTable, checkProofread, grammarLane, practiceBlock, sessionGrammar, sentenceUnits, P5_TYPES, POS_LABEL });   // P5 — grammar lane
+  Object.assign(API, { autoGenerators, checkSlots, checkTable, checkProofread, grammarLane, practiceBlock, sessionGrammar, sentenceUnits, P5_TYPES, POS_LABEL, TAG_LABEL });   // P5 — grammar lane
   /* ---------- P5v — Vocabulary depth (the remaining §6.2 types): roots, compounds, semantic splits, collocations, confusables, intensity, register, nuance, connotation, idioms, cloze, senses, origins ----------
      Every item is made from the stored lexemes and their profiles (never written at runtime) and reviews its word: R track, or P where the
      learner picks or completes the word itself. Other course words appear only when the learner has met them. Profile sentences follow D19 /

@@ -36,11 +36,12 @@ function polyHome() {
   const box = h('div', { class: 'lx-polyhome' });
   box.append(todayPicker() || '');
   if (activeLangs().length > 1) box.append(h('div', { class: 'row lx-polydrills' }, h('span', { class: 'tiny' }, '🌐 ' + LT('lang.poly.acrossLabel') + ' '),
-    h('button', { class: 'btn small', onclick: () => go('#/cmp') }, '⇄ ' + LT('lang.view.cmp')),
-    ...POLY_DRILLS().map(([t, label]) => h('button', { class: 'btn ghost small', 'data-type': t, onclick: () => go('#/poly/' + t) }, label))));
+    h('button', { class: 'btn small', 'data-icon': 'globe', onclick: () => go('#/cmp') }, '⇄ ' + LT('lang.view.cmp')),
+    ...POLY_DRILLS().map(([t, label]) => h('button', { class: 'btn ghost small', 'data-type': t, 'data-icon': POLY_ICON[t] || 'globe', onclick: () => go('#/poly/' + t) }, label))));
   return box;
 }
 const POLY_SIGN = { which_language: '🔤', cognate_bridge: '🌉', parallel_translate: '🔀', parallel_align: '🧷', compare_rule: '⚖️' };
+const POLY_ICON = { parallel_translate: 'edit' };   // the frame's line icon of a polyglot drill (99z_frame.js data-icon; the others: globe)
 /** The polyglot drills: [type, sign + name] (lang.poly.drill.<type>). */
 const POLY_DRILLS = () => Object.keys(POLY_SIGN).map(t => [t, POLY_SIGN[t] + ' ' + LT('lang.poly.drill.' + t)]);
 
@@ -251,7 +252,7 @@ VIEWS.cmp = (v, r) => {
   if (r.arg === 'frame' && UI.C.frames[r.arg2]) return cmpFrame(v, r.arg2, langs, redraw);
   if (r.arg === 'c' && UI.C.concepts[r.arg2]) return cmpConcept(v, r.arg2);
   v.append(h('h1', {}, '⇄ ' + LT('lang.poly.cmpTitle')), cmpLangPicker(redraw),
-    h('div', { class: 'row lx-polydrills' }, h('span', { class: 'tiny' }, '🏋️ '), ...POLY_DRILLS().map(([t, label]) => h('button', { class: 'btn ghost small', 'data-type': t, onclick: () => go('#/poly/' + t) }, label))));
+    h('div', { class: 'row lx-polydrills' }, h('span', { class: 'tiny' }, '🏋️ '), ...POLY_DRILLS().map(([t, label]) => h('button', { class: 'btn ghost small', 'data-type': t, 'data-icon': POLY_ICON[t] || 'globe', onclick: () => go('#/poly/' + t) }, label))));
   // grammar side by side
   const fns = fnOrder().filter(f => langs.filter(c => LX(c).grammar[f]).length >= 2);
   v.append(h('h2', { class: 'lx-h2' }, '📖 ' + LT('lang.poly.grammarSide') + ' ', h('span', { class: 'tiny' }, LNUM(fns.length))),

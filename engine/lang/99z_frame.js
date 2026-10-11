@@ -9,11 +9,13 @@
 const FS = () => window.NoemaShell;
 const FRAME_EMO = /(?![\u00A9\u00AE\u2122\u2190-\u21FF\u25A0-\u25FF\u2713\u2715])\p{Extended_Pictographic}(?:\uFE0F|\u20E3|[\u{1F3FB}-\u{1F3FF}]|\u200D\p{Extended_Pictographic})*\uFE0F?[ \u00A0]?/gu;
 const framePlain = t => String(t || '').replace(FRAME_EMO, '').replace(/\u25B6\s*/g, '').replace(/^\s*[\u2190-\u21FF]\s*/, '').replace(/[ \u00A0]{2,}/g, ' ').trim();
-/* the frame's line icons for the lanes and the actions the course offers (engine/art.js keys) */
+/* the frame's line icons for the lanes and the actions the course offers (engine/art.js keys): a button says its own (data-icon);
+   for the others (titles written by the course) a guess from its English words */
 const FRAME_ICON = [[/grammar|rule|point/i, 'grid'], [/writ|rewrite|translate/i, 'edit'], [/read|text/i, 'book'], [/letter|character|spelling|script|trac/i, 'doc'], [/peculiar|signs mean|what the/i, 'info'],
   [/listen|speak|say|shadow|dictat|voice/i, 'mic'], [/tutor|conversation|quiz|explain|ask/i, 'chat'], [/compare|across|bridge|which|align|holds/i, 'globe'], [/check/i, 'check'], [/claude|sentences/i, 'spark'],
   [/field|sort|map/i, 'map'], [/practi|drill|deepen|parts|mixed|round/i, 'gym'], [/setting/i, 'gear'], [/today/i, 'sun'], [/new|learn/i, 'plus']];
 const frameIcon = label => (FRAME_ICON.find(([re]) => re.test(label)) || [null, 'dots'])[1];
+const frameIconOf = b => b.dataset?.icon || frameIcon(b.textContent);
 const FRAME_TEXT = 'h1, h2, h3, h4, summary, button.btn, .lx-note, .lx-sub';   // i18n-ignore (selectors)
 const FRAME_KEEP = '.lx-w, .lx-tile, .lx-temoji, .lx-opt, .lx-prompt, .lx-glyphs, .lx-stage .lx-ex, .lx-ns, .lx-flag, .lx-laneicon, .lx-new, [lang]:not([lang|="en"]), textarea, input, select, .ns-ico';   // i18n-ignore (selectors)
 /** Chrome text without pictographs (flags, foreign words, pictures of words and exercises stay). */
@@ -43,7 +45,7 @@ function frameList(items, { close = null } = {}) {
     h('span', { class: 't' }, h('b', {}, it.label), it.sub ? h('small', {}, it.sub) : null), it.badge ? S.pill(it.badge, it.tone || 2) : h('span', { class: 'ns-chev', 'aria-hidden': 'true' }, '›'))));
 }
 /** A button of the older screen as an action: its words without pictographs, pressing the (hidden) button itself. */
-const frameAct = (b, extra = {}) => ({ label: framePlain(b.textContent) || b.title || '…', icon: frameIcon(b.textContent), disabled: b.disabled, run: () => b.click(), ...extra });
+const frameAct = (b, extra = {}) => ({ label: framePlain(b.textContent) || b.title || '…', icon: frameIconOf(b), disabled: b.disabled, run: () => b.click(), ...extra });
 const frameSheet = (title, items) => FS().sheet(title, (body, close) => body.append(frameList(items(), { close })));
 
 /** Tidy a view that was just drawn: → the actions for the frame's ⋮. */

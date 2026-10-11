@@ -295,9 +295,11 @@ function glyphCard(c, key) {
 /* ---------- the 🔤 script lane ---------- */
 const SCRIPT_SIGN = { glyph_form: '🔣', transliterate: '🔤', vowelize: '◌َ', tone_mark: '〽️', char_compose: '🧩', trace: '✍️', spell: '⌨️', learn: '🆕' };
 /** [sign, name] of a script drill (lang.script.drill.<type>). */
+/** The frame's line icon of each script drill (99z_frame.js data-icon). */
+const SCRIPT_ICON = { glyph_form: 'doc', transliterate: 'book', vowelize: 'dots', tone_mark: 'dots', char_compose: 'doc', trace: 'doc', spell: 'doc', learn: 'doc' };
 const SCRIPT_TITLE = new Proxy({}, { get: (o, t) => typeof t === 'string' && SCRIPT_SIGN[t] ? [SCRIPT_SIGN[t], LT('lang.script.drill.' + t)] : undefined });
 function scriptHomeButtons() {
-  return activeLangs().map(c => h('button', { class: 'btn ghost small lx-scriptbtn', 'data-lang': c, onclick: () => go('#/script/' + c) }, '🔤 ', info(c).flag, ' ', LT(N.scriptModule(UI.C, c) ? (N.scriptModule(UI.C, c).kind === 'chars' ? 'lang.script.characters' : 'lang.script.letters') : 'lang.script.drill.spell')));
+  return activeLangs().map(c => h('button', { class: 'btn ghost small lx-scriptbtn', 'data-lang': c, 'data-icon': 'doc', onclick: () => go('#/script/' + c) }, '🔤 ', info(c).flag, ' ', LT(N.scriptModule(UI.C, c) ? (N.scriptModule(UI.C, c).kind === 'chars' ? 'lang.script.characters' : 'lang.script.letters') : 'lang.script.drill.spell')));
 }
 VIEWS.script = (v, r) => {
   const c = r.arg && UI.C.lang[r.arg] ? r.arg : UI.lang, M = N.scriptModule(UI.C, c), X = LX(c);
@@ -306,8 +308,8 @@ VIEWS.script = (v, r) => {
   v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← ' + LT('lang.card.map'))),
     h('h1', {}, '🔤 ', LT(M ? (M.kind === 'chars' ? 'lang.script.characters' : 'lang.script.letters') : 'lang.script.drill.spell'), ' — ', info(c).flag, ' ', info(c).label),
     h('div', { class: 'row' }, flagRail(null, c, x => go('#/script/' + x))));
-  const drills = h('div', { class: 'row lx-drills lx-scriptdrills' }, ...N.scriptTypes(UI.C, c).map(t => h('button', { class: 'btn small', 'data-type': t, onclick: () => runScriptDrill(c, t) }, SCRIPT_TITLE[t][0] + ' ' + SCRIPT_TITLE[t][1])),
-    N.scriptTypes(UI.C, c).length > 1 ? h('button', { class: 'btn small primary', 'data-type': 'mix', onclick: () => runScriptDrill(c, null) }, '▶ ' + LT('lang.script.mixed')) : null);
+  const drills = h('div', { class: 'row lx-drills lx-scriptdrills' }, ...N.scriptTypes(UI.C, c).map(t => h('button', { class: 'btn small', 'data-type': t, 'data-icon': SCRIPT_ICON[t] || 'doc', onclick: () => runScriptDrill(c, t) }, SCRIPT_TITLE[t][0] + ' ' + SCRIPT_TITLE[t][1])),
+    N.scriptTypes(UI.C, c).length > 1 ? h('button', { class: 'btn small primary', 'data-type': 'mix', 'data-icon': 'gym', onclick: () => runScriptDrill(c, null) }, '▶ ' + LT('lang.script.mixed')) : null);
   if (!M) {   // how the language is written: an explanation (lang.expl.*, the course's explanation language)
     v.append(h('p', { class: 'lx-note' }, LE(c === 'de' ? 'lang.expl.script.de' : X.language.script === 'Latn' ? 'lang.expl.script.latin' : 'lang.expl.script.other', { lang: explName(c), script: X.language.script })), drills);
     return;
