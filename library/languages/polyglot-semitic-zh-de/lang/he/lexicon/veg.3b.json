@@ -124,7 +124,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German Kapern, Russian каперсы, Greek κάππαρη and Turkish kapari all go back to Greek κάππαρις; Hebrew has its own word, צָלָף.",
+     "German Kapern goes back to Greek κάππαρις; Hebrew has its own word, צָלָף.",
      "The caper bush is one of the plants that grow out of the stones of the Western Wall in Jerusalem."
     ],
     "pitfalls": [
@@ -134,6 +134,33 @@
     "subtleties": [
      "Ecclesiastes 12:5 says וְתָפֵר הָאֲבִיּוֹנָה, traditionally understood as “the caper berry shall fail”; אֲבִיּוֹנָה is the caper berry, צָלָף the plant and its bud.",
      "After the article the צ is doubled: הַצָּלָף, הַצְּלָפִים."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "different",
+      "text": "каперсы is the Greek κάππαρις; Hebrew has its own word, צָלָף."
+     },
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "κάππαρη is the Greek word; Hebrew has its own, צָלָף."
+     },
+     {
+      "for": "it",
+      "rel": "different",
+      "text": "cappero is the Greek κάππαρις; Hebrew has its own word, צָלָף."
+     },
+     {
+      "for": "fr",
+      "rel": "different",
+      "text": "câpre is the Greek κάππαρις; Hebrew has its own word, צָלָף."
+     },
+     {
+      "for": "tr",
+      "rel": "different",
+      "text": "kapari is the Greek κάππαρις; Hebrew has its own word, צָלָף."
+     }
     ]
    }
   },
@@ -241,7 +268,7 @@
      }
     ],
     "etymology": {
-     "text": "Wiktionary has no Hebrew entry. From Japanese 海苔 (nori), like English nori (Wiktionary: the kanji literally mean “ocean moss”, but are only a spelling of the native word, from Proto-Japonic *nǝri).",
+     "text": "Wiktionary has no Hebrew entry. From Japanese 海苔 (nori) (Wiktionary: the kanji literally mean “ocean moss”, but are only a spelling of the native word, from Proto-Japonic *nǝri).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -370,8 +397,8 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The same word travelled far: Turkish lobya, Georgian ლობიო (lobio) — known to Russian speakers as the bean dish лобио — and Persian lubia, all from Greek λόβιον “pod”.",
-     "A single pod can grow to half a metre; English calls it the yardlong bean, Chinese 豇豆 jiāngdòu."
+     "The same word travelled far, all from Greek λόβιον “pod”: Arabic لُوبِيَا is one of its forms.",
+     "A single pod can grow to half a metre; Chinese calls it 豇豆 jiāngdòu."
     ],
     "pitfalls": [
      "לוּבְּיָה can mean the long green pods or the dried black-eyed peas; the context (or the shop shelf) decides."
@@ -379,6 +406,38 @@
     "subtleties": [
      "Feminine: לוּבְּיָה טְרִיָּה.",
      "The dagesh in בּ keeps the sound b; without it the letter would read v."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "same",
+      "text": "The same word as lobya."
+     },
+     {
+      "for": "ka",
+      "rel": "same",
+      "text": "The same word as ლობიო (lobio)."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "The same word as лобио, the bean dish."
+     },
+     {
+      "for": "fa",
+      "rel": "same",
+      "text": "The same word as لوبیا."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "It goes back to λόβιον “pod”."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Hence the English name, yardlong bean."
+     }
     ]
    }
   },
@@ -761,7 +820,7 @@
      }
     ],
     "etymology": {
-     "text": "פֶּרַח “flower” (Wiktionary: cognate with Arabic فَرْخ, “chick, sprout”, and Aramaic פְּרַח “to fly”) + קִשּׁוּא “zucchini” (Wiktionary: compare Arabic كوسة).",
+     "text": "פֶּרַח “flower” (Wiktionary: cognate with Arabic فَرْخ, “chick, sprout”) + קִשּׁוּא “zucchini” (Wiktionary: compare Arabic كوسة).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -880,7 +939,7 @@
     "synonyms": [],
     "synonymsNone": "No synonym.",
     "etymology": {
-     "text": "דְּלַעַת “pumpkin, gourd, squash” (Wiktionary: compare Arabic دَلَّاع, “watermelon”) + סְפָּגֶטִי “spaghetti” (from Italian) — like English spaghetti squash and German Spaghettikürbis.",
+     "text": "דְּלַעַת “pumpkin, gourd, squash” (Wiktionary: compare Arabic دَلَّاع, “watermelon”) + סְפָּגֶטִי “spaghetti” (from Italian) — like German Spaghettikürbis.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -894,6 +953,13 @@
     "subtleties": [
      "Feminine, after דְּלַעַת: דְּלַעַת סְפָּגֶטִי אֲפוּיָה.",
      "The strands appear only after cooking: the flesh is scraped out with a fork."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Built exactly like spaghetti squash."
+     }
     ]
    }
   }

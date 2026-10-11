@@ -106,13 +106,13 @@
     ],
     "phrases": [],
     "synonyms": [],
-    "synonymsNone": "No synonym in Hebrew; the English name turmeric is not used.",
+    "synonymsNone": "No synonym in Hebrew.",
     "etymology": {
-     "text": "Wiktionary (kaikki.org) gives no etymology on the Hebrew page. Its Arabic entry كُرْكُم (kurkum, “turmeric”) lists Aramaic כּוּרְכְּמָא (kurkmā) and Hebrew כַּרְכֹּם (karkom) as Semitic cognates, and says the word most likely came via India from Sanskrit कुङ्कुम (kuṅkuma).",
+     "text": "Wiktionary (kaikki.org) gives no etymology on the Hebrew page. Its Arabic entry كُرْكُم (kurkum, “turmeric”) lists Hebrew כַּרְכֹּם (karkom) as a Semitic cognate, and says the word most likely came via India from Sanskrit कुङ्कुम (kuṅkuma).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German Kurkuma, Russian куркума and Greek κουρκουμάς are the same international word as Hebrew כֻּרְכּוּם; Chinese says 姜黄 jiānghuáng, “ginger-yellow” — turmeric is a relative of ginger (זַנְגְּבִיל).",
+     "German Kurkuma is the same international word as Hebrew כֻּרְכּוּם; Chinese says 姜黄 jiānghuáng, “ginger-yellow” — turmeric is a relative of ginger (זַנְגְּבִיל).",
      "Wiktionary links it to Hebrew כַּרְכֹּם (karkom), the crocus, whose stigmas are saffron: both are “yellow spices”."
     ],
     "pitfalls": [
@@ -122,6 +122,23 @@
     "subtleties": [
      "A mass noun without plural: for one fresh root say שֹׁרֶשׁ כֻּרְכּוּם, for several שָׁרְשֵׁי כֻּרְכּוּם.",
      "Israelis meet it mostly as the yellow powder; the fresh root is sold in health-food shops and markets."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "different",
+      "text": "The English name turmeric is not used in Hebrew: say כֻּרְכּוּם."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "The same word as куркума."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "The same word as κουρκουμάς."
+     }
     ]
    }
   },
@@ -232,7 +249,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English rhubarb and German Rhabarber go back, Wiktionary says, to Koine Greek ῥῆον βαρβαρικόν, “foreign rhubarb”; Hebrew רִיבָּס instead matches the Arabic and Persian name.",
+     "German Rhabarber goes back, Wiktionary says, to Greek ῥῆον βαρβαρικόν, “foreign rhubarb”; Hebrew רִיבָּס instead matches the Arabic name.",
      "Botanically a vegetable — you eat the leaf stalk — but it is cooked like a fruit, in jams, compotes and cakes."
     ],
     "pitfalls": [
@@ -242,6 +259,23 @@
     "subtleties": [
      "After the article the vowel is qamats, as before every ר: הָרִיבָּס.",
      "רִבָּה “jam” sounds similar but is unrelated: רִבַּת רִיבָּס is a pleasant tongue-twister."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "different",
+      "text": "English rhubarb goes back to Greek ῥῆον βαρβαρικόν; Hebrew רִיבָּס matches the Arabic name."
+     },
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "The European name goes back to ῥῆον βαρβαρικόν; Hebrew רִיבָּס matches the Arabic name."
+     },
+     {
+      "for": "fa",
+      "rel": "same",
+      "text": "The same name as ریواس / ریباس."
+     }
     ]
    }
   },
@@ -347,11 +381,11 @@
     "synonyms": [],
     "synonymsNone": "No synonym; the Japanese name is the only one.",
     "etymology": {
-     "text": "Wiktionary has no Hebrew entry. From Japanese 山葵 (wasabi), like English wasabi (Wiktionary: “Borrowed from Japanese 山葵 (wasabi)”).",
+     "text": "Wiktionary has no Hebrew entry. From Japanese 山葵 (wasabi) (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Chinese writes it with the same characters as Japanese, 山葵 shānkuí; German and Russian simply borrowed the Japanese name (Wasabi, васаби).",
+     "Chinese writes it with the same characters as Japanese, 山葵 shānkuí; German simply borrowed the Japanese name, Wasabi.",
      "Real wasabi is a relative of cabbage and horseradish, grown in cold mountain streams; it is grated fresh just before eating."
     ],
     "pitfalls": [
@@ -361,6 +395,18 @@
     "subtleties": [
      "After the article the ו is doubled in vowelled text: הַוָּאסָאבִּי.",
      "The alephs only mark the a vowels (וָאסָאבִּי); they are not pronounced."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Like васаби, it is the Japanese name, borrowed."
+     },
+     {
+      "for": "ja",
+      "rel": "same",
+      "text": "It is 山葵 (わさび), borrowed with its Japanese name."
+     }
     ]
    }
   },
@@ -473,7 +519,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German calls garden orache Gartenmelde and Russian лебеда; in Russian history лебеда was famine food — exactly as מַלּוּחַ is in the Book of Job.",
+     "German calls garden orache Gartenmelde. In the Book of Job (30:4) מַלּוּחַ is famine food, gathered by the poorest.",
      "The Mediterranean saltbush, Atriplex halimus, grows wild on Israel’s coast and in its deserts; its leaves really do taste salty."
     ],
     "pitfalls": [
@@ -482,6 +528,13 @@
     "subtleties": [
      "Garden orache is barely known in Israel; to most speakers מַלּוּחַ is the wild desert saltbush.",
      "In the Bible (Job 30:4) the outcasts “pick saltbush among the shrubs” — a picture of hunger."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "Like лебеда in Russian history, מַלּוּחַ is famine food in the Book of Job."
+     }
     ]
    }
   },
@@ -587,11 +640,11 @@
     "synonyms": [],
     "synonymsNone": "No synonym.",
     "etymology": {
-     "text": "לֵב “heart” (Wiktionary: from Proto-Semitic *libb-; also “heart, core, center”) + דֶּקֶל “palm tree” (Wiktionary: first attested in Mishnaic Hebrew, of uncertain origin; cognate with Aramaic דִּקְלָא) — like English heart of palm and German Palmherz.",
+     "text": "לֵב “heart” (Wiktionary: from Proto-Semitic *libb-; also “heart, core, center”) + דֶּקֶל “palm tree” (Wiktionary: first attested in Mishnaic Hebrew, of uncertain origin) — like German Palmherz.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Hebrew לֵב is cognate with Arabic لُبّ (lubb, “core, kernel”) and Aramaic לִבָּא (Wiktionary) — the “heart” of a palm is its core in every sense.",
+     "Hebrew לֵב is cognate with Arabic لُبّ (lubb, “core, kernel”) (Wiktionary) — the “heart” of a palm is its core in every sense.",
      "Cutting the heart used to kill the palm; today much of it comes from multi-stemmed palms such as the peach palm, which grow new shoots."
     ],
     "pitfalls": [
@@ -601,6 +654,13 @@
     "subtleties": [
      "דֶּקֶל alone is a palm tree (and in Wiktionary also its date); the vegetable needs the whole phrase.",
      "In everyday talk the plural is the normal form, as on the can: לִבְבוֹת דֶּקֶל."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Built exactly like heart of palm."
+     }
     ]
    }
   },
@@ -711,12 +771,12 @@
     "synonyms": [],
     "synonymsNone": "No synonym in everyday Hebrew.",
     "etymology": {
-     "text": "Wiktionary has no Hebrew entry and no etymology. English amaranth comes (via French and Latin) from Ancient Greek ἀμάραντος (amárantos, “unfading”), with the ending influenced by ἄνθος “flower” (Wiktionary).",
+     "text": "Wiktionary has no Hebrew entry and no etymology.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
      "In Greece the boiled greens are βλίτα, a classic summer salad with olive oil and lemon; Chinese 苋菜 xiàncài is the same leafy vegetable.",
-     "The Greek name ἀμάραντος, “unfading”, comes from the flowers, which keep their colour when dried."
+     "The flowers keep their colour when dried — hence the international name of the plant, which means “unfading”."
     ],
     "pitfalls": [
      "To most Israelis יַרְבּוּז is a weed, not food; when you mean the vegetable say עֲלֵי יַרְבּוּז."
@@ -724,6 +784,18 @@
     "subtleties": [
      "Masculine: יַרְבּוּז טָרִי.",
      "After the article the י is doubled: הַיַּרְבּוּז."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "different",
+      "text": "English amaranth comes from Greek ἀμάραντος “unfading”; Hebrew has its own name, יַרְבּוּז."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "The international name is ἀμάραντος, “unfading”: the flowers keep their colour when dried."
+     }
     ]
    }
   },
@@ -839,7 +911,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German Petersilienwurzel is the same “parsley root”; Russian петрушка and German Petersilie come from the same Greek πετροσέλινον, while Modern Greek and Turkish say μαϊντανός / maydanoz.",
+     "German Petersilienwurzel is the same “parsley root”, and German Petersilie comes from the same Greek πετροσέλινον.",
      "Root parsley and leaf parsley are one species: one variety is bred for its root, the other for its leaves."
     ],
     "pitfalls": [
@@ -849,6 +921,23 @@
     "subtleties": [
      "It is easily taken for a parsnip (גֶּזֶר לָבָן); the parsley root is slimmer and tastes of parsley.",
      "In שָׁרְשֵׁי the first vowel is a qamats katan, pronounced o."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "петрушка comes from the same Greek πετροσέλινον as פֶּטְרוֹזִילְיָה."
+     },
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "Modern Greek says μαϊντανός; פֶּטְרוֹזִילְיָה comes from the old πετροσέλινον."
+     },
+     {
+      "for": "tr",
+      "rel": "different",
+      "text": "Turkish says maydanoz; פֶּטְרוֹזִילְיָה comes from Greek πετροσέλινον."
+     }
     ]
    }
   }
