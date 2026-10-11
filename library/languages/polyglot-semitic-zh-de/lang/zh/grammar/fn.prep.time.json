@@ -164,7 +164,7 @@
     {
      "for": "en",
      "rel": "trap",
-     "text": "English at seven, on Monday, in May each need a preposition; Chinese uses none: 七点, 星期一, 五月 — just before the verb: 我七点走."
+     "text": "English at seven, on Monday, in May each need a preposition; Chinese uses none: 七点, 星期一, 五月 — just before the verb:\n→ 我七点走."
     }
    ]
   },
@@ -398,12 +398,12 @@
   {
    "for": "el",
    "rel": "different",
-   "text": "Greek puts the preposition before the time (πριν από τις οχτώ, μετά το φαγητό) and needs στις for clock times; Chinese puts 以前 / 以后 after it and needs nothing for ‘at’: 八点以前, 七点. Greek dates go small to big (1 Μαΐου 2026), Chinese big to small. πέντε και μισή ~ 五点半."
+   "text": "Greek puts the preposition before the time (πριν από τις οχτώ, μετά το φαγητό) and needs στις for clock times; Chinese puts 以前 / 以后 after it and needs nothing for ‘at’:\n→ 八点以前, 七点.\n\nGreek dates go small to big (1 Μαΐου 2026), Chinese big to small. πέντε και μισή ~ 五点半."
   },
   {
    "for": "ru",
    "rel": "trap",
-   "text": "Russian до / после come before the time (до восьми, после обеда); Chinese 八点以前, 吃饭以后 come after. Russian половина шестого ‘half of the sixth’ is 5:30 = 五点半: Chinese counts from the hour just passed."
+   "text": "Russian до / после come before the time (до восьми, после обеда); Chinese 八点以前, 吃饭以后 come after.\n\nRussian половина шестого ‘half of the sixth’ is 5:30 = 五点半: Chinese counts from the hour just passed."
   },
   {
    "for": "es",
@@ -413,7 +413,7 @@
   {
    "for": "en",
    "rel": "trap",
-   "text": "English before / after / until come before the time (before eight, after dinner); Chinese 以前 / 以后 come after it (八点以前, 吃饭以后). ‘At seven’, ‘on Monday’, ‘in May’ have no word in Chinese: 七点, 星期一, 五月."
+   "text": "English before / after / until come before the time (before eight, after dinner); Chinese 以前 / 以后 come after it (八点以前, 吃饭以后).\n\n‘At seven’, ‘on Monday’, ‘in May’ have no word in Chinese:\n→ 七点, 星期一, 五月."
   },
   {
    "for": "fr",
@@ -428,27 +428,27 @@
   {
    "for": "hi",
    "rel": "similar",
-   "text": "Hindi postpositions also follow the time (आठ बजे से पहले ‘before eight’, खाने के बाद ‘after eating’), as 以前 / 以后 do. Hindi has special words for 1:30 and 2:30 (डेढ़, ढाई); Chinese simply says 一点半, 两点半."
+   "text": "Hindi postpositions also follow the time (आठ बजे से पहले ‘before eight’, खाने के बाद ‘after eating’), as 以前 / 以后 do.\n\nHindi has special words for 1:30 and 2:30 (डेढ़, ढाई); Chinese simply says 一点半, 两点半."
   },
   {
    "for": "fa",
    "rel": "different",
-   "text": "Persian qabl az / baʿd az come before the time (qabl az sāʿat-e hasht ‘before eight’); Chinese 以前 / 以后 come after it: 八点以前. Iran’s official calendar is the Solar Hijri one; Chinese dates follow the Gregorian calendar, big to small."
+   "text": "Persian qabl az / baʿd az come before the time (qabl az sāʿat-e hasht ‘before eight’); Chinese 以前 / 以后 come after it:\n→ 八点以前.\n\nIran’s official calendar is the Solar Hijri one; Chinese dates follow the Gregorian calendar, big to small."
   },
   {
    "for": "mr",
    "rel": "similar",
-   "text": "Marathi puts ‘before’ and ‘after’ after the time or event (जेवणानंतर ‘after eating’), as Chinese does (吃饭以后). साडेपाच ‘5:30’ ~ 五点半, but Marathi has special words for 1:30 and 2:30 (दीड, अडीच); Chinese says 一点半, 两点半."
+   "text": "Marathi puts ‘before’ and ‘after’ after the time or event (जेवणानंतर ‘after eating’), as Chinese does (吃饭以后).\n\nसाडेपाच ‘5:30’ ~ 五点半, but Marathi has special words for 1:30 and 2:30 (दीड, अडीच); Chinese says 一点半, 两点半."
   },
   {
    "for": "ar",
    "rel": "different",
-   "text": "Arabic qabla / baʿda come before the time (qabla l-thāmina ‘before eight’); Chinese 以前 / 以后 come after it: 八点以前. Arabic dates go small to big, Chinese big to small."
+   "text": "Arabic qabla / baʿda come before the time (qabla l-thāmina ‘before eight’); Chinese 以前 / 以后 come after it:\n→ 八点以前.\n\nArabic dates go small to big, Chinese big to small."
   },
   {
    "for": "he",
    "rel": "different",
-   "text": "Hebrew lifnei / aharei come before the time (lifnei shmone ‘before eight’); Chinese puts 以前 / 以后 after it: 八点以前. Hebrew dates go small to big, Chinese big to small."
+   "text": "Hebrew lifnei / aharei come before the time (lifnei shmone ‘before eight’); Chinese puts 以前 / 以后 after it:\n→ 八点以前.\n\nHebrew dates go small to big, Chinese big to small."
   },
   {
    "for": "tr",
@@ -473,7 +473,7 @@
   {
    "for": "hu",
    "rel": "trap",
-   "text": "Hungarian fél hat ‘half six’ is 5:30; Chinese 五点半 is half past five. But Hungarian dates go big to small like Chinese ones (2026. május 1.), and postpositions follow the time (nyolc előtt ~ 八点以前)."
+   "text": "Hungarian fél hat ‘half six’ is 5:30; Chinese 五点半 is half past five.\n\nBut Hungarian dates go big to small like Chinese ones (2026. május 1.), and postpositions follow the time (nyolc előtt ~ 八点以前)."
   },
   {
    "for": "sw",
@@ -483,7 +483,7 @@
   {
    "for": "lg",
    "rel": "trap",
-   "text": "Luganda time-telling also counts the hours from 6 a.m. (essaawa emu ‘hour one’ = 7 o’clock); Chinese counts from midnight and noon: 七点 is 7 o’clock."
+   "text": "Luganda time-telling also counts the hours from 6 a.m. (essaawa emu ‘hour one’ = 7 o’clock); Chinese counts from midnight and noon:\n→ 七点 is 7 o’clock."
   },
   {
    "for": "vi",
@@ -493,27 +493,27 @@
   {
    "for": "iu",
    "rel": "different",
-   "text": "Inuktitut expresses many time relations with suffixes and verb endings; Chinese uses separate words after the time or event: 八点以前, 吃饭以后."
+   "text": "Inuktitut expresses many time relations with suffixes and verb endings; Chinese uses separate words after the time or event:\n→ 八点以前, 吃饭以后."
   },
   {
    "for": "it",
    "rel": "different",
-   "text": "Italian prima delle otto, dopo cena put the preposition first; Chinese puts 以前 / 以后 after the time: 八点以前, 吃饭以后. alle sette needs a; 七点 needs nothing. le cinque e mezza ~ 五点半; Italian dates go small to big (1 maggio 2026), Chinese big to small."
+   "text": "Italian prima delle otto, dopo cena put the preposition first; Chinese puts 以前 / 以后 after the time:\n→ 八点以前, 吃饭以后\n\n- alle sette needs a; 七点 needs nothing.\n- le cinque e mezza ~ 五点半.\n- Italian dates go small to big (1 maggio 2026), Chinese big to small."
   },
   {
    "for": "sq",
    "rel": "different",
-   "text": "Albanian para tetës ‘before eight’, pas darkës ‘after dinner’ put the preposition first; Chinese 八点以前, 吃饭以后 put it after. në orën shtatë needs në; 七点 needs nothing. tetë e gjysmë ~ 八点半; Albanian dates go small to big, Chinese big to small."
+   "text": "Albanian para tetës ‘before eight’, pas darkës ‘after dinner’ put the preposition first; Chinese 八点以前, 吃饭以后 put it after.\n\n- në orën shtatë needs në; 七点 needs nothing.\n- tetë e gjysmë ~ 八点半.\n- Albanian dates go small to big, Chinese big to small."
   },
   {
    "for": "pt",
    "rel": "different",
-   "text": "Portuguese antes das oito, depois do jantar put the preposition first; Chinese 八点以前, 吃饭以后 put it after. às sete needs a; 七点 needs nothing. cinco e meia ~ 五点半; Portuguese dates go small to big (1 de maio de 2026), Chinese big to small."
+   "text": "Portuguese antes das oito, depois do jantar put the preposition first; Chinese 八点以前, 吃饭以后 put it after.\n\n- às sete needs a; 七点 needs nothing.\n- cinco e meia ~ 五点半.\n- Portuguese dates go small to big (1 de maio de 2026), Chinese big to small."
   },
   {
    "for": "type:fusional",
    "rel": "different",
-   "text": "If your ‘before / after / since / until’ are prepositions before the time (often with a case), Chinese puts 以前 / 以后 / 以来 after it, and a point in time takes no preposition at all: 七点, 星期一, 五月."
+   "text": "If your ‘before / after / since / until’ are prepositions before the time (often with a case), Chinese puts 以前 / 以后 / 以来 after it, and a point in time takes no preposition at all:\n→ 七点, 星期一, 五月."
   },
   {
    "for": "type:agglutinating",
@@ -523,17 +523,17 @@
   {
    "for": "type:isolating",
    "rel": "different",
-   "text": "If your ‘before’ and ‘after’ come before the time, Chinese reverses them: 八点以前, 吃饭以后. Dates go big to small: 2026年五月一号."
+   "text": "If your ‘before’ and ‘after’ come before the time, Chinese reverses them:\n→ 八点以前, 吃饭以后.\n\nDates go big to small: 2026年五月一号."
   },
   {
    "for": "type:polysynthetic",
    "rel": "different",
-   "text": "If time relations are suffixes or verb endings in your language, Chinese uses separate words after the time or event: 八点以前, 吃饭以后, 吃饭的时候."
+   "text": "If time relations are suffixes or verb endings in your language, Chinese uses separate words after the time or event:\n→ 八点以前, 吃饭以后, 吃饭的时候."
   },
   {
    "for": "branch:Semitic",
    "rel": "different",
-   "text": "If ‘before’, ‘after’, ‘since’ and ‘until’ open the time phrase in your language, Chinese closes it: 吃饭以前, 吃饭以后; and dates run big to small: 2026年五月一号."
+   "text": "If ‘before’, ‘after’, ‘since’ and ‘until’ open the time phrase in your language, Chinese closes it:\n→ 吃饭以前, 吃饭以后; and dates run big to small: 2026年五月一号."
   }
  ],
  "seeAlso": [
@@ -545,7 +545,7 @@
   {
    "lang": "ar",
    "fn": "fn.prep.time",
-   "note": "Arabic uses قَبْلَ and بَعْدَ (+ genitive), حَتَّى ‘until’, مُنْذُ ‘since’, خِلَالَ ‘during’ and فِي السَّاعَةِ الْخَامِسَةِ ‘at five’ — all before the noun; Chinese reverses the order: 吃饭以前, 五点."
+   "note": "Arabic uses قَبْلَ and بَعْدَ (+ genitive), حَتَّى ‘until’, مُنْذُ ‘since’, خِلَالَ ‘during’ and فِي السَّاعَةِ الْخَامِسَةِ ‘at five’ — all before the noun; Chinese reverses the order:\n→ 吃饭以前, 五点."
   },
   {
    "lang": "he",

@@ -24,7 +24,14 @@
     },
     "kind": [
      "sortal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "counts": "long thin things: carrots, cucumbers, sticks, hairs (一根黄瓜, 一根胡萝卜)"
    }
   },
   {
@@ -51,7 +58,14 @@
     },
     "kind": [
      "sortal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "counts": "small round things: beans, grains, sweets, teeth, stars (一颗豆子, 一颗星星)"
    }
   },
   {
@@ -78,7 +92,14 @@
     },
     "kind": [
      "sortal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "counts": "plants and trees (一棵树, 一棵白菜)"
    }
   },
   {
@@ -105,7 +126,14 @@
     },
     "kind": [
      "sortal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "头儿 tóur is another word (‘boss’), not this measure word"
+    },
+    "counts": "large livestock (一头牛, 一头猪) and bulbs of garlic (一头蒜)"
    }
   },
   {
@@ -129,7 +157,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "contrasts": [
     {
@@ -258,7 +297,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "contrasts": [
     {
@@ -356,7 +406,7 @@
      "茄 is qié here; in 雪茄 (xuějiā, cigar) it is read jiā."
     ],
     "subtleties": [
-     "番 marks plants that came from abroad: 番薯 (sweet potato), 番石榴 (guava)."
+     "番 marks plants that came from abroad:\n→ 番薯 (sweet potato), 番石榴 (guava)."
     ]
    }
   },
@@ -383,7 +433,18 @@
     "measure": [
      "个",
      "颗"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -478,7 +539,7 @@
      "src": "character composition"
     },
     "funFacts": [
-     "洋 marks things that came from overseas: 洋葱, 洋娃娃 (doll)."
+     "洋 marks things that came from overseas:\n→ 洋葱, 洋娃娃 (doll)."
     ],
     "pitfalls": [
      "葱 alone is the spring onion (scallion), not the onion."
@@ -510,7 +571,16 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": "土豆儿 tǔdòur — northern colloquial",
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "contrasts": [
     {
@@ -653,7 +723,7 @@
     ],
     "pitfalls": [
      "In Taiwan 土豆 means peanut! Say 马铃薯 there.",
-     "Count single potatoes with 个; in shops potatoes are sold by weight: 一斤土豆."
+     "Count single potatoes with 个; in shops potatoes are sold by weight:\n→ 一斤土豆."
     ],
     "subtleties": [
      "土豆 is colloquial but fully standard in the Mainland; 马铃薯 is the formal or scientific word."
@@ -682,7 +752,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "contrasts": [
     {
@@ -823,7 +904,18 @@
     "measure": [
      "头",
      "瓣"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -953,7 +1045,18 @@
     },
     "measure": [
      "根"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1074,7 +1177,16 @@
      "个",
      "根",
      "条"
-    ]
+    ],
+    "neutralTone": "子 zi: the noun suffix 子 is toneless",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1182,7 +1294,7 @@
      "番茄 is the tomato, 茄子 the eggplant."
     ],
     "subtleties": [
-     "Measure words vary with shape and region: 一个, 一根 or 一条茄子."
+     "Measure words vary with shape and region:\n→ 一个, 一根 or 一条茄子."
     ],
     "notes": [
      {
@@ -1215,7 +1327,16 @@
     },
     "measure": [
      "根"
-    ]
+    ],
+    "neutralTone": "卜 bo is toneless in this word (alone: bǔ); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "contrasts": [
     {
@@ -1320,14 +1441,14 @@
      "src": "character composition"
     },
     "funFacts": [
-     "胡 marks old imports from Central Asia: 胡椒 (pepper), 胡瓜 (an old word for cucumber)."
+     "胡 marks old imports from Central Asia:\n→ 胡椒 (pepper), 胡瓜 (an old word for cucumber)."
     ],
     "pitfalls": [
      "卜 is toneless here: húluóbo.",
      "萝卜 alone is the white radish (daikon), not a carrot."
     ],
     "subtleties": [
-     "Traditional characters: 胡蘿蔔."
+     "Traditional characters:\n→ 胡蘿蔔."
     ]
    }
   },
@@ -1352,7 +1473,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1454,7 +1586,7 @@
      "地瓜 is a sweet potato in many places but a jicama in others."
     ],
     "subtleties": [
-     "The sweet potato has more regional names than almost any other vegetable: 红薯, 地瓜, 番薯, 白薯, 甘薯."
+     "The sweet potato has more regional names than almost any other vegetable:\n→ 红薯, 地瓜, 番薯, 白薯, 甘薯."
     ]
    }
   },
@@ -1480,7 +1612,18 @@
     "measure": [
      "粒",
      "颗"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1567,7 +1710,7 @@
     ],
     "pitfalls": [
      "豌 wān (1st tone) — not 碗 wǎn (bowl).",
-     "Single peas are counted with 粒 or 颗: 一粒豌豆."
+     "Single peas are counted with 粒 or 颗:\n→ 一粒豌豆."
     ],
     "subtleties": [
      "豆 alone (or 豆子) is any bean or pea; 豌豆 is specifically the pea."
@@ -1597,7 +1740,18 @@
     "measure": [
      "棵",
      "把"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1726,7 +1880,16 @@
     "measure": [
      "根",
      "个"
-    ]
+    ],
+    "neutralTone": "卜 bo is toneless in this word (alone: bǔ); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "contrasts": [
     {
@@ -1887,7 +2050,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1977,7 +2151,7 @@
      "Don't mix 南瓜 (pumpkin) with 西瓜 (watermelon) — both are 瓜."
     ],
     "subtleties": [
-     "瓜 is the family name of gourds and melons: 西瓜, 黄瓜, 南瓜, 冬瓜."
+     "瓜 is the family name of gourds and melons:\n→ 西瓜, 黄瓜, 南瓜, 冬瓜."
     ]
    }
   },
@@ -2004,7 +2178,18 @@
     "measure": [
      "棵",
      "片"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2130,7 +2315,18 @@
     "measure": [
      "个",
      "根"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2270,7 +2466,18 @@
      "个",
      "颗",
      "棵"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2412,7 +2619,18 @@
      "棵",
      "个",
      "朵"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2550,7 +2768,7 @@
      "Broccoli is not 菜花 but 西兰花 (also 绿菜花 ‘green cauliflower’)."
     ],
     "subtleties": [
-     "Florets are counted with 朵 (like flowers): 一朵菜花."
+     "Florets are counted with 朵 (like flowers):\n→ 一朵菜花."
     ]
    }
   },
@@ -2577,7 +2795,18 @@
      "棵",
      "个",
      "朵"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2668,7 +2897,7 @@
      "Don’t read 兰花 here as ‘orchid’: 西兰花 is one word, broccoli."
     ],
     "subtleties": [
-     "Florets are counted with 朵: 一朵西兰花."
+     "Florets are counted with 朵:\n→ 一朵西兰花."
     ]
    }
   },
@@ -2694,7 +2923,18 @@
     "measure": [
      "根",
      "棵"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2794,7 +3034,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2894,7 +3145,7 @@
      "甜 tián (sweet) vs 田 tián (field): same sound, different meaning."
     ],
     "subtleties": [
-     "Chinese names peppers by taste and shape: 甜椒 sweet, 辣椒 hot, 灯笼椒 ‘lantern’, 柿子椒 ‘persimmon’."
+     "Chinese names peppers by taste and shape:\n→ 甜椒 sweet, 辣椒 hot, 灯笼椒 ‘lantern’, 柿子椒 ‘persimmon’."
     ]
    }
   },
@@ -2919,7 +3170,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3029,7 +3291,16 @@
     },
     "measure": [
      "根"
-    ]
+    ],
+    "neutralTone": "芦 lu is toneless in this word (alone: lú); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3120,7 +3391,7 @@
      "葫芦 alone is the bottle gourd (calabash), not the zucchini."
     ],
     "subtleties": [
-     "Wiktionary gives 根 as its measure word: 一根西葫芦."
+     "Wiktionary gives 根 as its measure word:\n→ 一根西葫芦."
     ]
    }
   },
@@ -3145,7 +3416,18 @@
     },
     "measure": [
      "根"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3241,7 +3523,7 @@
      "豆角 does not always mean the green bean: in many places it is the long yardlong bean (豇豆)."
     ],
     "subtleties": [
-     "Single beans are counted with 根; by weight: 一斤四季豆."
+     "Single beans are counted with 根; by weight:\n→ 一斤四季豆."
     ]
    }
   },
@@ -3268,7 +3550,18 @@
      "根",
      "棵",
      "把"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3391,7 +3684,7 @@
      "大葱 (big northern scallion) and 小葱 (spring onion) are different varieties."
     ],
     "subtleties": [
-     "葱 can describe greenery: 葱绿 (verdant), 郁郁葱葱 (lush)."
+     "葱 can describe greenery:\n→ 葱绿 (verdant), 郁郁葱葱 (lush)."
     ]
    }
   },
@@ -3418,7 +3711,18 @@
      "根",
      "棵",
      "把"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3543,7 +3847,18 @@
      "根",
      "个",
      "粒"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",

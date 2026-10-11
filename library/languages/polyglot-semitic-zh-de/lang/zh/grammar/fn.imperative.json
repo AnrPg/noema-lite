@@ -144,7 +144,7 @@
   "*等我请 → 请等我.",
   "*不走！ for ‘don’t go!’ → 别走！ / 不要走！",
   "There is no plural or polite form of the verb (German kommt, kommen Sie): 你们来, 请您来 — the verb is still 来.",
-  "吗 turns it into a question, not a command: 你来吗？ ‘are you coming?’ vs 你来吧！ ‘do come!’"
+  "吗 turns it into a question, not a command:\n→ 你来吗？ ‘are you coming?’ vs 你来吧！ ‘do come!’"
  ],
  "evidence": {
   "lemmas": [
@@ -255,7 +255,7 @@
   {
    "for": "el",
    "rel": "different",
-   "text": "Greek has imperative forms for one and several (έλα / ελάτε) and a separate negative, μην + subjunctive (μην έρθεις); Chinese keeps the verb and adds words: 来！ 你们来！ 别来！"
+   "text": "Greek has imperative forms for one and several (έλα / ελάτε) and a separate negative, μην + subjunctive (μην έρθεις); Chinese keeps the verb and adds words:\n→ 来！ 你们来！ 别来！"
   },
   {
    "for": "ru",
@@ -270,7 +270,7 @@
   {
    "for": "en",
    "rel": "similar",
-   "text": "English already uses the bare verb (Come! Wait!), like 来！ 等！; but ‘please’ can go at the end and ‘don’t’ needs ‘do’ — 请 always comes first, and ‘don’t’ is 别 / 不要. ‘Let’s go’ ~ 我们走吧."
+   "text": "English already uses the bare verb (Come! Wait!), like 来！ 等！; but ‘please’ can go at the end and ‘don’t’ needs ‘do’ — 请 always comes first, and ‘don’t’ is 别 / 不要.\n\n‘Let’s go’ ~ 我们走吧."
   },
   {
    "for": "fr",
@@ -285,12 +285,12 @@
   {
    "for": "hi",
    "rel": "different",
-   "text": "Hindi imperatives change with politeness (आ, आओ, आइए ‘come’), and मत makes ‘don’t’ (मत जाओ); Chinese keeps 来 and shows politeness with 请: 请进. मत ~ 别."
+   "text": "Hindi imperatives change with politeness (आ, आओ, आइए ‘come’), and मत makes ‘don’t’ (मत जाओ); Chinese keeps 来 and shows politeness with 请:\n→ 请进.\n\nमत ~ 别."
   },
   {
    "for": "fa",
    "rel": "different",
-   "text": "Persian imperatives take be- and a plural / polite -id (boro / beravid ‘go’), and ‘don’t’ is na- (naro); Chinese keeps the bare verb: 去！ 你们去！ 别去！"
+   "text": "Persian imperatives take be- and a plural / polite -id (boro / beravid ‘go’), and ‘don’t’ is na- (naro); Chinese keeps the bare verb:\n→ 去！ 你们去！ 别去！"
   },
   {
    "for": "mr",
@@ -305,7 +305,7 @@
   {
    "for": "he",
    "rel": "different",
-   "text": "Hebrew imperatives change for gender and number (bo / bo’i / bo’u ‘come’), and ‘don’t’ is al + future (al tavo); Chinese keeps 来 and adds 别: 别来！"
+   "text": "Hebrew imperatives change for gender and number (bo / bo’i / bo’u ‘come’), and ‘don’t’ is al + future (al tavo); Chinese keeps 来 and adds 别:\n→ 别来！"
   },
   {
    "for": "tr",
@@ -315,7 +315,7 @@
   {
    "for": "ja",
    "rel": "different",
-   "text": "Japanese softens commands with verb forms (来てください ‘please come’, 来ないでください ‘please don’t come’); Chinese puts words before an unchanged verb: 请来, 别来. ください follows the verb, 请 precedes it."
+   "text": "Japanese softens commands with verb forms (来てください ‘please come’, 来ないでください ‘please don’t come’); Chinese puts words before an unchanged verb:\n→ 请来, 别来.\n\nください follows the verb, 请 precedes it."
   },
   {
    "for": "ko",
@@ -325,7 +325,7 @@
   {
    "for": "fi",
    "rel": "different",
-   "text": "Finnish tule / tulkaa change for one or several, and ‘don’t’ is a negative verb (älä tule); Chinese keeps 来 and adds 别: 别来！"
+   "text": "Finnish tule / tulkaa change for one or several, and ‘don’t’ is a negative verb (älä tule); Chinese keeps 来 and adds 别:\n→ 别来！"
   },
   {
    "for": "hu",
@@ -335,7 +335,7 @@
   {
    "for": "sw",
    "rel": "different",
-   "text": "Swahili uses the bare stem for one person (soma ‘read’) and -ni for several (someni); Chinese keeps the verb and adds 你们. ‘Don’t’ is a si- form (usisome ‘don’t read’); Chinese uses 别."
+   "text": "Swahili uses the bare stem for one person (soma ‘read’) and -ni for several (someni); Chinese keeps the verb and adds 你们.\n\n‘Don’t’ is a si- form (usisome ‘don’t read’); Chinese uses 别."
   },
   {
    "for": "lg",
@@ -360,17 +360,17 @@
   {
    "for": "sq",
    "rel": "different",
-   "text": "Albanian eja / ejani ‘come’ change for number, and ‘don’t’ is mos before the verb (mos shko ‘don’t go’) — a separate word like 别 (别走！). But the Albanian verb still changes; Chinese 走 never does. Ju lutem may follow the request; 请 must precede it."
+   "text": "Albanian eja / ejani ‘come’ change for number, and ‘don’t’ is mos before the verb (mos shko ‘don’t go’) — a separate word like 别 (别走！).\n\nBut the Albanian verb still changes; Chinese 走 never does.\n\nJu lutem may follow the request; 请 must precede it."
   },
   {
    "for": "pt",
    "rel": "different",
-   "text": "Portuguese vem / venham / venha change for person and politeness, and ‘don’t’ uses the subjunctive (não venhas); Chinese keeps 来 and adds 请, 别, 吧. Por favor may come last; 请 must come first."
+   "text": "Portuguese vem / venham / venha change for person and politeness, and ‘don’t’ uses the subjunctive (não venhas); Chinese keeps 来 and adds 请, 别, 吧.\n\nPor favor may come last; 请 must come first."
   },
   {
    "for": "type:fusional",
    "rel": "different",
-   "text": "If your imperative changes for number, gender or politeness and the negative uses another verb form, Chinese keeps the bare verb for every case: 来！ 你们来！ 请来！ 别来！"
+   "text": "If your imperative changes for number, gender or politeness and the negative uses another verb form, Chinese keeps the bare verb for every case:\n→ 来！ 你们来！ 请来！ 别来！"
   },
   {
    "for": "type:agglutinating",
@@ -380,17 +380,17 @@
   {
    "for": "type:isolating",
    "rel": "same",
-   "text": "If your commands use the bare verb with polite or softening particles, Chinese is the same: 请坐, 别走, 我们走吧."
+   "text": "If your commands use the bare verb with polite or softening particles, Chinese is the same:\n→ 请坐, 别走, 我们走吧."
   },
   {
    "for": "type:polysynthetic",
    "rel": "different",
-   "text": "If you have imperative endings for one, two and several people, Chinese keeps the verb unchanged and adds 你 or 你们 if needed: 你们来！"
+   "text": "If you have imperative endings for one, two and several people, Chinese keeps the verb unchanged and adds 你 or 你们 if needed:\n→ 你们来！"
   },
   {
    "for": "branch:Semitic",
    "rel": "different",
-   "text": "If your imperative changes for gender and number and ‘don’t’ uses a different verb form, Chinese keeps one bare verb and puts 别 or 不要 before it: 别来！ 不要走！"
+   "text": "If your imperative changes for gender and number and ‘don’t’ uses a different verb form, Chinese keeps one bare verb and puts 别 or 不要 before it:\n→ 别来！ 不要走！"
   }
  ],
  "seeAlso": [
@@ -402,12 +402,12 @@
   {
    "lang": "ar",
    "fn": "fn.imperative",
-   "note": "Arabic builds the imperative from the jussive and marks gender and number (اِذْهَبْ، اِذْهَبِي، اِذْهَبُوا); ‘don’t’ is لَا + jussive (لَا تَذْهَبْ). Chinese marks none of this: 去！ 别去！"
+   "note": "Arabic builds the imperative from the jussive and marks gender and number (اِذْهَبْ، اِذْهَبِي، اِذْهَبُوا); ‘don’t’ is لَا + jussive (لَا تَذْهَبْ).\n\nChinese marks none of this:\n→ 去！ 别去！"
   },
   {
    "lang": "he",
    "fn": "fn.imperative",
-   "note": "Hebrew has imperative forms for him, her and them (לֵךְ, לְכִי, לְכוּ), and speech often uses the future instead (תֵּלֵךְ); ‘don’t’ is אַל + future (אַל תֵּלֵךְ). Chinese: 走！ 别走！"
+   "note": "Hebrew has imperative forms for him, her and them (לֵךְ, לְכִי, לְכוּ), and speech often uses the future instead (תֵּלֵךְ); ‘don’t’ is אַל + future (אַל תֵּלֵךְ).\n\nChinese: 走！ 别走！"
   },
   {
    "lang": "zh",

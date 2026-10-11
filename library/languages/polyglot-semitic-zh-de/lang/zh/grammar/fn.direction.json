@@ -397,17 +397,17 @@
   {
    "for": "ru",
    "rel": "similar",
-   "text": "Russian chooses the verb by means — идти on foot, ехать by vehicle — and needs в / на for the goal (иду в школу). Chinese uses 去 for both, adds 走路 / 坐车 before it, and the goal follows 去 with no preposition."
+   "text": "Russian chooses the verb by means — идти on foot, ехать by vehicle — and needs в / на for the goal (иду в школу).\n\nChinese uses 去 for both, adds 走路 / 坐车 before it, and the goal follows 去 with no preposition."
   },
   {
    "for": "es",
    "rel": "different",
-   "text": "Spanish ir a la escuela needs a; Chinese 去学校 needs nothing. The means comes after in Spanish (en autobús), before in Chinese (坐公共汽车去)."
+   "text": "Spanish ir a la escuela needs a; Chinese 去学校 needs nothing.\n\nThe means comes after in Spanish (en autobús), before in Chinese (坐公共汽车去)."
   },
   {
    "for": "en",
    "rel": "trap",
-   "text": "English go to school / come from Beijing / by bus put ‘to’, ‘from’ and the means after the verb; Chinese puts 从 + place and the means before the verb and the goal right after it, with no ‘to’: 我从家坐公共汽车去学校."
+   "text": "English go to school / come from Beijing / by bus put ‘to’, ‘from’ and the means after the verb; Chinese puts 从 + place and the means before the verb and the goal right after it, with no ‘to’:\n→ 我从家坐公共汽车去学校."
   },
   {
    "for": "fr",
@@ -422,7 +422,7 @@
   {
    "for": "hi",
    "rel": "similar",
-   "text": "Hindi often needs no postposition for a destination either (मैं स्कूल जाता हूँ ‘I go to school’) — like 去学校 — but puts it before the verb; Chinese after it. से ‘from’ ~ 从, also before the verb."
+   "text": "Hindi often needs no postposition for a destination either (मैं स्कूल जाता हूँ ‘I go to school’) — like 去学校 — but puts it before the verb; Chinese after it.\n\nसे ‘from’ ~ 从, also before the verb."
   },
   {
    "for": "fa",
@@ -432,12 +432,12 @@
   {
    "for": "mr",
    "rel": "different",
-   "text": "Marathi marks the goal with an ending and puts it before the verb (मी शाळेत जातो ‘I go to school’); Chinese puts the bare goal after 去: 我去学校."
+   "text": "Marathi marks the goal with an ending and puts it before the verb (मी शाळेत जातो ‘I go to school’); Chinese puts the bare goal after 去:\n→ 我去学校."
   },
   {
    "for": "ar",
    "rel": "different",
-   "text": "Arabic dhahabtu ilā l-madrasa needs ilā ‘to’ after the verb and bi- for the means; Chinese needs no ‘to’ and puts the means before the verb: 坐公共汽车去学校."
+   "text": "Arabic dhahabtu ilā l-madrasa needs ilā ‘to’ after the verb and bi- for the means; Chinese needs no ‘to’ and puts the means before the verb:\n→ 坐公共汽车去学校."
   },
   {
    "for": "he",
@@ -462,7 +462,7 @@
   {
    "for": "fi",
    "rel": "different",
-   "text": "Finnish marks the goal by case (kouluun ‘to school’) and the means with -lla (bussilla); Chinese has no case: 坐公共汽车去学校."
+   "text": "Finnish marks the goal by case (kouluun ‘to school’) and the means with -lla (bussilla); Chinese has no case:\n→ 坐公共汽车去学校."
   },
   {
    "for": "hu",
@@ -472,7 +472,7 @@
   {
    "for": "sw",
    "rel": "different",
-   "text": "Swahili ninaenda shuleni ‘I go to school’ marks the goal with -ni and puts the means after (kwa basi); Chinese: 坐公共汽车去学校."
+   "text": "Swahili ninaenda shuleni ‘I go to school’ marks the goal with -ni and puts the means after (kwa basi); Chinese:\n→ 坐公共汽车去学校."
   },
   {
    "for": "lg",
@@ -482,7 +482,7 @@
   {
    "for": "vi",
    "rel": "similar",
-   "text": "Vietnamese đi Hà Nội also takes the goal right after the verb with no ‘to’ — like 去北京 — but puts the means after it (đi bằng xe buýt); Chinese puts the means first: 坐公共汽车去."
+   "text": "Vietnamese đi Hà Nội also takes the goal right after the verb with no ‘to’ — like 去北京 — but puts the means after it (đi bằng xe buýt); Chinese puts the means first:\n→ 坐公共汽车去."
   },
   {
    "for": "iu",
@@ -492,22 +492,22 @@
   {
    "for": "it",
    "rel": "different",
-   "text": "Italian vado a scuola / vengo da Pechino / in autobus put goal, source and means after the verb with prepositions; Chinese: 从北京来, 坐公共汽车去, 去学校 — source and means before the verb, the goal right after it with no preposition. a piedi ~ 走路, also before the verb: 走路去."
+   "text": "Italian vado a scuola / vengo da Pechino / in autobus put goal, source and means after the verb with prepositions; Chinese: 从北京来, 坐公共汽车去, 去学校 — source and means before the verb, the goal right after it with no preposition. a piedi ~ 走路, also before the verb:\n→ 走路去."
   },
   {
    "for": "sq",
    "rel": "different",
-   "text": "Albanian shkoj në shkollë needs në for the goal, and source and means follow the verb (vij nga Pekini, me autobus); Chinese puts 从 + place and the means before the verb and the goal right after it: 从北京来, 坐公共汽车去学校."
+   "text": "Albanian shkoj në shkollë needs në for the goal, and source and means follow the verb (vij nga Pekini, me autobus); Chinese puts 从 + place and the means before the verb and the goal right after it:\n→ 从北京来, 坐公共汽车去学校."
   },
   {
    "for": "pt",
    "rel": "different",
-   "text": "Portuguese vou à escola / venho de Pequim / de autocarro use prepositions after the verb; Chinese 去学校 needs no ‘a’, and source and means come before the verb: 从北京来, 坐公共汽车去. a pé ~ 走路: 走路去."
+   "text": "Portuguese vou à escola / venho de Pequim / de autocarro use prepositions after the verb; Chinese 去学校 needs no ‘a’, and source and means come before the verb: 从北京来, 坐公共汽车去. a pé ~ 走路:\n→ 走路去."
   },
   {
    "for": "type:fusional",
    "rel": "different",
-   "text": "If your language marks the goal with a preposition or a case (‘to the school’), Chinese marks nothing: the movement verb takes the place directly (去学校, 回家). Source (从 + place) and means (坐车) go before the verb."
+   "text": "If your language marks the goal with a preposition or a case (‘to the school’), Chinese marks nothing: the movement verb takes the place directly (去学校, 回家).\n\nSource (从 + place) and means (坐车) go before the verb."
   },
   {
    "for": "type:agglutinating",
@@ -517,17 +517,17 @@
   {
    "for": "type:isolating",
    "rel": "similar",
-   "text": "If your movement verbs already take the place directly (‘go school’), so do Chinese ones: 去学校. Put the means before the main verb (坐公共汽车去), and add 来 / 去 for the direction: 进来, 出去."
+   "text": "If your movement verbs already take the place directly (‘go school’), so do Chinese ones:\n→ 去学校.\n\nPut the means before the main verb (坐公共汽车去), and add 来 / 去 for the direction:\n→ 进来, 出去."
   },
   {
    "for": "type:polysynthetic",
    "rel": "different",
-   "text": "If goal and source are case endings in your language, Chinese uses the verb itself for the goal (去北京) and the separate word 从 before the verb for the source: 从北京来."
+   "text": "If goal and source are case endings in your language, Chinese uses the verb itself for the goal (去北京) and the separate word 从 before the verb for the source:\n→ 从北京来."
   },
   {
    "for": "branch:Semitic",
    "rel": "different",
-   "text": "If your language needs a ‘to’ preposition after the verb and a ‘with / by’ prefix for the means, Chinese needs neither: 去学校 ‘go school’, and the means is a small verb phrase before the main verb: 坐公共汽车去."
+   "text": "If your language needs a ‘to’ preposition after the verb and a ‘with / by’ prefix for the means, Chinese needs neither: 去学校 ‘go school’, and the means is a small verb phrase before the main verb:\n→ 坐公共汽车去."
   }
  ],
  "seeAlso": [
@@ -549,7 +549,7 @@
   {
    "lang": "zh",
    "fn": "fn.prep.core",
-   "note": "从 and 到 are the coverbs of S11; here they frame a whole trip: 从 A 到 B."
+   "note": "从 and 到 are the coverbs of S11; here they frame a whole trip:\n→ 从 A 到 B."
   }
  ]
 }

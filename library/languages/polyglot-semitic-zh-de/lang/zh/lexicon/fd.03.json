@@ -121,8 +121,8 @@
      "这 (zhè) ‘this’, 那 (nà) ‘that’ and 哪 (nǎ) ‘which’ form a set: 这里 here, 那里 there, 哪里 where?"
     ],
     "pitfalls": [
-     "Before a noun, 这 normally needs a measure word: 这个西红柿, 这根黄瓜.",
-     "Many northerners say zhèi before a measure word: 这个 zhèige."
+     "Before a noun, 这 normally needs a measure word:\n→ 这个西红柿, 这根黄瓜.",
+     "Many northerners say zhèi before a measure word:\n→ 这个 zhèige."
     ],
     "subtleties": [
      "As a subject, 这 stands alone: 这是土豆 ‘this is a potato’ — no measure word."
@@ -137,7 +137,14 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "the place word ‘here’ is 这儿 zhèr (see 这里)"
+    },
+    "withMeasure": "这 + measure word + noun: 这个人, 这本书 (colloquially also 这人)"
    }
   },
   {
@@ -262,11 +269,11 @@
     ],
     "pitfalls": [
      "那 nà ‘that’ and 哪 nǎ ‘which?’ differ only in tone and in the 口 of the written form.",
-     "Before a noun 那 needs a measure word: 那个人, 那本书 — but alone as a subject it stands bare: 那是老师."
+     "Before a noun 那 needs a measure word: 那个人, 那本书 — but alone as a subject it stands bare:\n→ 那是老师."
     ],
     "subtleties": [
-     "Many northerners say nèi before a measure word: 那个 nèige (and 这个 zhèige).",
-     "At the start of a sentence 那 means ‘well then’: 那好吧 ‘OK then’."
+     "Many northerners say nèi before a measure word:\n→ 那个 nèige (and 这个 zhèige).",
+     "At the start of a sentence 那 means ‘well then’:\n→ 那好吧 ‘OK then’."
     ]
    },
    "features": {
@@ -278,7 +285,14 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "the place word ‘there’ is 那儿 nàr (see 那里)"
+    },
+    "withMeasure": "那 + measure word + noun: 那个人, 那本书 (colloquially also 那人)"
    }
   },
   {
@@ -361,10 +375,10 @@
      }
     ],
     "funFacts": [
-     "些 is itself a measure word meaning ‘some, a few’: 一些 ‘some’, 这些 ‘these’, 那些 ‘those’."
+     "些 is itself a measure word meaning ‘some, a few’:\n→ 一些 ‘some’, 这些 ‘these’, 那些 ‘those’."
     ],
     "pitfalls": [
-     "No measure word after 这些: 这些书, not *这些本书.",
+     "No measure word after 这些:\n→ 这些书, not *这些本书.",
      "With an exact number use 这 + number + measure word: ‘these three books’ = 这三本书, not *这些三本书."
     ],
     "subtleties": [
@@ -380,7 +394,14 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "no measure word: 这些书 (些 is itself one)"
    }
   },
   {
@@ -466,7 +487,7 @@
      "那些年 ‘those years’ opens the title of the Taiwanese hit film 那些年，我们一起追的女孩 (2011), ‘You Are the Apple of My Eye’."
     ],
     "pitfalls": [
-     "No measure word after 那些: 那些人, not *那些个人 (heard in some dialects, but not standard).",
+     "No measure word after 那些:\n→ 那些人, not *那些个人 (heard in some dialects, but not standard).",
      "那些 nàxiē ‘those’ vs 哪些 nǎxiē ‘which ones?’ — tone!"
     ],
     "subtleties": [
@@ -482,7 +503,14 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "no measure word: 那些人 (些 is itself one)"
    }
   },
   {
@@ -588,14 +616,14 @@
      "src": "morphemes: 这 + 里"
     },
     "funFacts": [
-     "Traditional characters are written two ways: 這裡 (Taiwan) and 這裏 (Hong Kong)."
+     "Traditional characters are written two ways:\n→ 這裡 (Taiwan) and 這裏 (Hong Kong)."
     ],
     "pitfalls": [
-     "A place with 在 comes before the verb: 我在这里吃, not *我吃在这里.",
-     "这里 is a place word, not ‘this’: 这里的土豆 ‘the potatoes here’."
+     "A place with 在 comes before the verb:\n→ 我在这里吃, not *我吃在这里.",
+     "这里 is a place word, not ‘this’:\n→ 这里的土豆 ‘the potatoes here’."
     ],
     "subtleties": [
-     "‘Here with me’ is pronoun + 这儿/这里: 你的书在我这儿 ‘your book is here with me’.",
+     "‘Here with me’ is pronoun + 这儿/这里:\n→ 你的书在我这儿 ‘your book is here with me’.",
      "Mainland dictionaries give zhè·li with a toneless li."
     ]
    },
@@ -608,6 +636,11 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
+    },
+    "neutralTone": "里 li is toneless in this word (alone: lǐ); Taiwan speech often keeps the full tone",
+    "erhua": "这儿 zhèr — northern",
+    "plural": {
+     "none": "a place word: no plural"
     }
    }
   },
@@ -718,10 +751,10 @@
     ],
     "pitfalls": [
      "那里 nàli ‘there’ vs 哪里 nǎli ‘where?’ — only the tone and the 口 tell them apart.",
-     "A place with 在 comes before the verb: 我在那里等你 ‘I’ll wait for you there’, not *我等你在那里."
+     "A place with 在 comes before the verb:\n→ 我在那里等你 ‘I’ll wait for you there’, not *我等你在那里."
     ],
     "subtleties": [
-     "Person + 那里 means ‘at that person’s place’: 书在老师那里 ‘the book is with the teacher’.",
+     "Person + 那里 means ‘at that person’s place’:\n→ 书在老师那里 ‘the book is with the teacher’.",
      "The polite answer to a compliment, 哪里哪里 (‘not at all’), uses 哪, not 那."
     ]
    },
@@ -734,6 +767,11 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
+    },
+    "neutralTone": "里 li is toneless in this word (alone: lǐ); Taiwan speech often keeps the full tone",
+    "erhua": "那儿 nàr — northern",
+    "plural": {
+     "none": "a place word: no plural"
     }
    }
   },
@@ -761,7 +799,14 @@
     },
     "kind": [
      "general"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "counts": "the general measure word: people (一个人), most objects, abstract things (一个问题) — safe when unsure"
    }
   },
   {
@@ -788,7 +833,14 @@
     },
     "kind": [
      "sortal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "counts": "people, politely (一位老师, 几位客人)"
    }
   }
  ],

@@ -24,7 +24,11 @@
     },
     "position": [
      "sentenceFinal"
-    ]
+    ],
+    "neutralTone": "the whole word is toneless: 吗 ma (a particle)",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    }
    }
   },
   {
@@ -149,11 +153,11 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German oder covers every ‘or’; Chinese has two: 还是 asks (‘tea or coffee?’), 或者 states (‘tea or coffee, either is fine’)."
+     "German oder covers every ‘or’; Chinese has two:\n→ 还是 asks (‘tea or coffee?’), 或者 states (‘tea or coffee, either is fine’)."
     ],
     "pitfalls": [
-     "A 还是 question needs no 吗: 你喝茶还是咖啡？ (not *…咖啡吗？).",
-     "In a statement ‘or’ is 或者: 我喝茶或者咖啡."
+     "A 还是 question needs no 吗:\n→ 你喝茶还是咖啡？ (not *…咖啡吗？).",
+     "In a statement ‘or’ is 或者:\n→ 我喝茶或者咖啡."
     ],
     "subtleties": [
      "还 is read hái here; the same character is huán in 还 ‘to give back’."
@@ -210,7 +214,14 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": "是 shi is toneless in this word (alone: shì); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "joins": [
+     "choices in a question"
+    ]
    }
   },
   {
@@ -333,7 +344,7 @@
      "Don’t ask someone to choose with 或者: ‘tea or coffee?’ is 你喝茶还是咖啡？ — 你要茶或者咖啡吗？ only asks whether they want something at all (tea, coffee …)."
     ],
     "subtleties": [
-     "In a list, the last ‘or’ is 或者: 茶、咖啡或者果汁."
+     "In a list, the last ‘or’ is 或者:\n→ 茶、咖啡或者果汁."
     ]
    },
    "features": {
@@ -345,7 +356,16 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "joins": [
+     "choices in a statement"
+    ]
    }
   },
   {
@@ -448,7 +468,7 @@
      "也许吧 ‘maybe’ is a polite way to avoid a clear no."
     ],
     "pitfalls": [
-     "也许 stands before the verb or at the start, never at the end: 他也许在家 / 也许他在家 — not *他在家也许."
+     "也许 stands before the verb or at the start, never at the end:\n→ 他也许在家 / 也许他在家 — not *他在家也许."
     ],
     "subtleties": [
      "也许 is a pure adverb; 可能 can also be an adjective (不可能 ‘impossible’) and a noun (可能 ‘possibility’)."
@@ -467,7 +487,14 @@
     "position": [
      "preverbal",
      "sentenceInitial"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withNeg": "也许不 ‘maybe not’ (他也许不来)"
    }
   },
   {
@@ -594,11 +621,11 @@
      "不可能！ ‘impossible!’ is one of the commonest ways to say ‘No way!’."
     ],
     "pitfalls": [
-     "The negation follows 可能: 他可能不来 ‘he may not come’; 他不可能来 means ‘he can’t possibly come’.",
+     "The negation follows 可能:\n→ 他可能不来 ‘he may not come’;\n→ 他不可能来 means ‘he can’t possibly come’.",
      "可能 is also an adjective and a noun (不可能, 有可能); 也许 is only an adverb."
     ],
     "subtleties": [
-     "可能 often goes with 会: 他可能会来 ‘he might come’."
+     "可能 often goes with 会:\n→ 他可能会来 ‘he might come’."
     ]
    },
    "features": {
@@ -614,7 +641,14 @@
     "position": [
      "preverbal",
      "sentenceInitial"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withNeg": "可能不 ‘may not’ · 不可能 ‘cannot possibly’"
    }
   },
   {
@@ -723,8 +757,8 @@
      "真的假的？ ‘real or fake?’ is the colloquial ‘Seriously?!’."
     ],
     "pitfalls": [
-     "真的 goes before the verb: 我真的喜欢 — not *我喜欢真的.",
-     "Before an adjective people usually say 真: 真好吃; 真的好吃 is more emphatic."
+     "真的 goes before the verb:\n→ 我真的喜欢 — not *我喜欢真的.",
+     "Before an adjective people usually say 真:\n→ 真好吃;\n\n真的好吃 is more emphatic."
     ],
     "subtleties": [
      "真的！ as an answer insists ‘Really! (I’m not joking)’; 真的吗？ asks."
@@ -743,7 +777,12 @@
     "position": [
      "preverbal",
      "sentenceInitial"
-    ]
+    ],
+    "neutralTone": "的 de is toneless, as the particle always is",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withNeg": "真的不 ‘really not’ · 不是真的 ‘not true’"
    }
   },
   {
@@ -868,10 +907,10 @@
     ],
     "pitfalls": [
      "当然 can sound blunt (‘obviously!’) when the other person was not sure; a softer yes is 可以 or 好啊.",
-     "In an answer you may repeat the verb after it: 你喝茶吗？— 当然喝！"
+     "In an answer you may repeat the verb after it:\n→ 你喝茶吗？— 当然喝！"
     ],
     "subtleties": [
-     "当然 also answers a negative idea: 当然不 ‘of course not’."
+     "当然 also answers a negative idea:\n→ 当然不 ‘of course not’."
     ]
    },
    "features": {
@@ -887,7 +926,14 @@
     "position": [
      "preverbal",
      "sentenceInitial"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withNeg": "当然不 ‘of course not’"
    }
   },
   {
@@ -1018,7 +1064,7 @@
      "‘Me too’ is 我也是 or 我也 + the verb (我也喜欢), not *也我."
     ],
     "subtleties": [
-     "也 + 不 = ‘not either’: 我也不喝; in ‘neither … nor’ the second part is 也不."
+     "也 + 不 = ‘not either’:\n→ 我也不喝; in ‘neither … nor’ the second part is 也不."
     ]
    },
    "features": {
@@ -1033,7 +1079,14 @@
     },
     "position": [
      "preverbal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withNeg": "也不 / 也没 ‘not … either’ — never *不也"
    }
   },
   {
@@ -1140,11 +1193,11 @@
      "In simplified script 只 zhǐ ‘only’ also stands for 隻 zhī, the measure word for animals (一只猫 ‘a cat’) — two words, two tones, one character."
     ],
     "pitfalls": [
-     "只 goes before the verb, not before the noun: 我只喝水 ‘I only drink water’ (not *我喝只水).",
+     "只 goes before the verb, not before the noun:\n→ 我只喝水 ‘I only drink water’ (not *我喝只水).",
      "只 zhǐ (3rd tone) ‘only’ vs 只 zhī (1st tone), the measure word in 一只鸡."
     ],
     "subtleties": [
-     "只 + 有 = ‘to have only’ or ‘there is only’: 我只有一个妹妹."
+     "只 + 有 = ‘to have only’ or ‘there is only’:\n→ 我只有一个妹妹."
     ]
    },
    "features": {
@@ -1159,7 +1212,14 @@
     },
     "position": [
      "preverbal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withNeg": "不只 ‘not only’ (不只是我)"
    }
   },
   {
@@ -1305,7 +1365,7 @@
      "就 first meant ‘to go up to (a high place)’ — still in 就业 ‘to take up a job’ and 就座 ‘to take a seat’."
     ],
     "pitfalls": [
-     "就 stands after the subject, right before the verb: 我们就去 — never *就我们去.",
+     "就 stands after the subject, right before the verb:\n→ 我们就去 — never *就我们去.",
      "就 jiù ‘then’, 旧 jiù ‘old’ and 九 jiǔ ‘nine’ sound alike."
     ],
     "subtleties": [
@@ -1324,7 +1384,14 @@
     },
     "position": [
      "preverbal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withNeg": "就不 ‘simply won’t’ (我就不去)"
    }
   }
  ]
