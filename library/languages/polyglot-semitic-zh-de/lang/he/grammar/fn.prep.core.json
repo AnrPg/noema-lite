@@ -306,7 +306,7 @@
    "why": "מִ does not fuse with the article: מֵ + הַבַּיִת."
   },
   {
-   "q": "Greek “Είμαι στου παππού” (I’m at Grandpa’s) — which Hebrew word for “at”?",
+   "q": "“I’m at Grandpa’s” — which Hebrew word for “at”?",
    "options": [
     "אֵצֶל",
     "בְּ",
@@ -367,7 +367,7 @@
   {
    "for": "el",
    "rel": "different",
-   "text": "Greek σε is three Hebrew words: בְּ (in, at: στο σπίτι ~ בַּבַּיִת), לְ (to: στο σχολείο ~ לְבֵית הַסֵּפֶר) and אֵצֶל (at someone’s: στου παππού ~ אֵצֶל סַבָּא); με is עִם (with someone) or בְּ (with a tool). And no case follows."
+   "text": "Greek σε is three Hebrew words: בְּ (in, at: στο σπίτι ~ בַּבַּיִת), לְ (to: στο σχολείο ~ לְבֵית הַסֵּפֶר) and אֵצֶל (at someone’s: στου παππού ~ אֵצֶל סַבָּא); με is עִם (with someone) or בְּ (with a tool).\n\nAnd no case follows."
   },
   {
    "for": "ru",
@@ -382,7 +382,7 @@
   {
    "for": "en",
    "rel": "similar",
-   "text": "בְּ “in, at”, לְ “to” and מִ “from” work much like the English words, but they are written onto the next word and swallow the article (בַּבַּיִת). “With a pen” is בְּעֵט, not עִם."
+   "text": "בְּ “in, at”, לְ “to” and מִ “from” work much like the English words, but they are written onto the next word and swallow the article (בַּבַּיִת).\n\n“With a pen” is בְּעֵט, not עִם."
   },
   {
    "for": "fr",
@@ -397,7 +397,7 @@
   {
    "for": "hi",
    "rel": "different",
-   "text": "Hindi puts postpositions after the noun (घर में, घर से, घर को); Hebrew puts prepositions before it and writes three of them onto it: בַּבַּיִת, מֵהַבַּיִת, לַבַּיִת."
+   "text": "Hindi puts postpositions after the noun (घर में, घर से, घर को); Hebrew puts prepositions before it and writes three of them onto it:\n→ בַּבַּיִת, מֵהַבַּיִת, לַבַּיִת"
   },
   {
    "for": "fa",
@@ -407,7 +407,7 @@
   {
    "for": "mr",
    "rel": "different",
-   "text": "Marathi attaches its endings to the noun (घरात “in the house”, घरातून “from the house”); Hebrew attaches prepositions to the front: בַּבַּיִת, מֵהַבַּיִת."
+   "text": "Marathi attaches its endings to the noun (घरात “in the house”, घरातून “from the house”); Hebrew attaches prepositions to the front:\n→ בַּבַּיִת, מֵהַבַּיִת"
   },
   {
    "for": "ar",
@@ -417,7 +417,7 @@
   {
    "for": "tr",
    "rel": "different",
-   "text": "Turkish uses case suffixes for in / to / from (evde, eve, evden); Hebrew uses prefixes on the other side: בַּבַּיִת, לַבַּיִת, מֵהַבַּיִת."
+   "text": "Turkish uses case suffixes for in / to / from (evde, eve, evden); Hebrew uses prefixes on the other side:\n→ בַּבַּיִת, לַבַּיִת, מֵהַבַּיִת"
   },
   {
    "for": "ja",
@@ -432,7 +432,7 @@
   {
    "for": "fi",
    "rel": "different",
-   "text": "Finnish uses case endings (talossa, taloon, talosta); Hebrew uses prefixes before an unchanged noun: בַּבַּיִת, לַבַּיִת, מֵהַבַּיִת."
+   "text": "Finnish uses case endings (talossa, taloon, talosta); Hebrew uses prefixes before an unchanged noun:\n→ בַּבַּיִת, לַבַּיִת, מֵהַבַּיִת"
   },
   {
    "for": "hu",
@@ -442,7 +442,7 @@
   {
    "for": "sw",
    "rel": "different",
-   "text": "Swahili can add “for” to the verb itself (kupikia “to cook for”); Hebrew keeps the verb and adds a preposition: מְבַשֵּׁל בִּשְׁבִיל אִמָּא. Places take the ending -ni (nyumbani “at home”) where Hebrew uses בְּ."
+   "text": "Swahili can add “for” to the verb itself (kupikia “to cook for”); Hebrew keeps the verb and adds a preposition:\n→ מְבַשֵּׁל בִּשְׁבִיל אִמָּא\n\nPlaces take the ending -ni (nyumbani “at home”) where Hebrew uses בְּ."
   },
   {
    "for": "lg",
@@ -452,17 +452,57 @@
   {
    "for": "zh",
    "rel": "different",
-   "text": "Chinese puts 在 / 从 / 到 before the place and often a location word after it (在桌子上); Hebrew uses one prefix: בַּבַּיִת, מִתֵּל אָבִיב."
+   "text": "Chinese puts 在 / 从 / 到 before the place and often a location word after it (在桌子上); Hebrew uses one prefix:\n→ בַּבַּיִת, מִתֵּל אָבִיב"
   },
   {
    "for": "vi",
    "rel": "similar",
-   "text": "Vietnamese prepositions also come first (ở nhà, từ Hà Nội); Hebrew writes בְּ, לְ, מִ onto the noun: בַּבַּיִת, מִתֵּל אָבִיב."
+   "text": "Vietnamese prepositions also come first (ở nhà, từ Hà Nội); Hebrew writes בְּ, לְ, מִ onto the noun:\n→ בַּבַּיִת, מִתֵּל אָבִיב"
   },
   {
    "for": "iu",
    "rel": "different",
-   "text": "Inuktitut uses case endings (iglumi “in the house”, iglumut “to the house”, iglumit “from the house”); Hebrew uses the prefixes בְּ, לְ, מִ: בַּבַּיִת, לַבַּיִת, מֵהַבַּיִת."
+   "text": "Inuktitut uses case endings (iglumi “in the house”, iglumut “to the house”, iglumit “from the house”); Hebrew uses the prefixes בְּ, לְ, מִ:\n→ בַּבַּיִת, לַבַּיִת, מֵהַבַּיִת"
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "As in nella / alla, the article fuses with the preposition: בַּבַּיִת, לַשּׁוּק — but מִ does not fuse (מֵהַבַּיִת).\n\nItalian da “at someone’s” is אֵצֶל: אֵצֶל סָבְתָא “dalla nonna”. con is עִם, but a tool takes בְּ:\n→ בְּעֵט"
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "As in no / na / ao, the article fuses with בְּ and לְ (בַּבַּיִת, לַשּׁוּק “ao mercado”), but not with מִ: מֵהַבַּיִת. com is עִם, but a tool takes בְּ; and as with comigo, “with me” is one word:\n→ אִתִּי"
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian në covers “in” and “to”, and te / tek “at someone’s” is אֵצֶל (te gjyshja ~ אֵצֶל סָבְתָא).\n\nHebrew separates בְּ (in) and לְ (to), writes them onto the noun, and no case follows."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your prepositions govern cases, drop that: after a Hebrew preposition the noun is unchanged.\n\nWith a pronoun, the preposition itself takes the ending:\n→ לִי, אִתִּי, בִּשְׁבִילִי"
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If your language uses case suffixes after the noun, Hebrew puts the relation before it — often as a one-letter prefix (בַּבַּיִת, לַבַּיִת, מֵהַבַּיִת) — and puts personal endings on the preposition:\n→ לִי, אִתִּי"
+  },
+  {
+   "for": "type:isolating",
+   "rel": "similar",
+   "text": "If your language uses separate unchanging prepositions, Hebrew is close — but three of them are written onto the noun and swallow the article (בַּבַּיִת), and all take personal endings:\n→ לִי, אִתִּי"
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If relations such as “with” or “for” are verb affixes in your language, Hebrew uses prepositions before the noun, and the verb never changes for them:\n→ בִּשְׁבִיל אִמָּא, בְּעֵט"
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "One-letter prepositions (b-, l-) and prepositions with personal endings (לִי, בִּי) are shared Semitic; Hebrew fuses בְּ and לְ with the article (בַּבַּיִת) and puts no case on the noun."
   }
  ]
 }

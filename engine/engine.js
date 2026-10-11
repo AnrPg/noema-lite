@@ -2,11 +2,42 @@
 
 /* ---- 05_i18n.js ---- */
 /* ===================== i18n: menus, tabs and back buttons in the learner's language ===================== */
-/* The bundles live in engine/i18n.js (the pickers in engine/loader.js use them before a subject is open). The language is
-   S.settings.lang (⚙️ Settings → Display & studying; synced with the account), else the browser's. Course material and
-   the AI conversations are NOT translated here: they keep their own languages. */
+/* The catalogs are i18n/<component>/<locale>.arb (ICU MessageFormat), run by engine/i18n.js (docs/i18n.md). The language is
+   S.settings.lang (⚙️ Settings → Display & studying; synced with the account), else the device's. Course material and
+   the AI conversations are NOT translated here: they keep their own languages. Numbers and dates: NoemaI18n.fmt. */
 const uiLang = () => window.NoemaI18n ? NoemaI18n.lang(S.settings.lang) : 'en';
 const t = (key, vars) => window.NoemaI18n ? NoemaI18n.t(key, vars, S.settings.lang) : key;
+/* The engine's own words (i18n/engine/<locale>.arb, keys 'engine.…'): tE() is t() under a name no local variable shadows
+   (many functions here have a local `t`). errText(e): the words for an error of cloud.js / claude.js / llm.js —
+   NoemaI18n.err() translates its code and falls back to the (English) message. */
+const tE = (key, vars) => t(key, vars);
+const errText = e => window.NoemaI18n?.err ? NoemaI18n.err(e) : String(e?.message ?? e ?? '');
+/** "Ch3 · Delta Lake": a chapter's short number and a title, in the UI language. */
+const chTitle = (num, title) => tE('engine.common.chTitle', { num, title });
+/** The title without a leading "Ch3 · " (English, as older records have it, or the UI language's). */
+function stripCh(s) {
+  const pre = tE('engine.common.chTitle', { num: '\u0001', title: '\u0002' }).split('\u0002')[0];
+  const loc = pre.includes('\u0001') ? '|' + pre.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace('\u0001', '\\d+').replace(/\s+/g, '\\s*') : '';
+  return String(s ?? '').replace(new RegExp('^(?:Ch\\d+\\s*·\\s*' + loc + ')'), '');   // i18n-ignore
+}
+/** Sorting words for the learner: the UI language's collator (NoemaI18n.fmt.compare). */
+const uiCompare = (a, b) => window.NoemaI18n?.fmt ? NoemaI18n.fmt.compare(a, b) : String(a ?? '').localeCompare(String(b ?? ''));
+/** A number / a whole percent (0–100) in the UI language's digits and style (NoemaI18n.fmt). */
+const nf = n => window.NoemaI18n?.fmt ? NoemaI18n.fmt.number(n) : String(n);
+const pctText = p => window.NoemaI18n?.fmt ? NoemaI18n.fmt.percent(p / 100) : p + '%';
+/** "Ch3": a chapter's short number. */
+const chShort = num => tE('engine.common.chShort', { num });
+/** A message with elements in it (a bold name …): tNodes('engine.share.invite', { title }, { name: h('b', {}, who) }) → [text, node, text …]
+    for h()'s children. Each element placeholder must appear once in the message. */
+function tNodes(key, vars, nodes) {
+  const p = { ...(vars || {}) }, marks = [];
+  for (const [k, node] of Object.entries(nodes || {})) { p[k] = '\u0001' + marks.length + '\u0002'; marks.push(node); }
+  return tE(key, p).split(/\u0001(\d+)\u0002/).map((x, j) => j % 2 ? marks[+x] : x).filter(x => x !== '');
+}
+/** A file size in the UI language: "2.4 MB" / "380 KB" (one decimal for MB, as before). */
+const fileSize = bytes => bytes > 1048576
+  ? tE('engine.common.sizeMB', { size: window.NoemaI18n?.fmt ? NoemaI18n.fmt.number(bytes / 1048576, { minimumFractionDigits: 1, maximumFractionDigits: 1 }) : (bytes / 1048576).toFixed(1) })
+  : tE('engine.common.sizeKB', { size: nf(Math.round(bytes / 1024)) });
 
 /* ---- 10_core.js ---- */
 /* ===================== noema-lite engine — core (subject-agnostic) ===================== */
@@ -14,7 +45,9 @@ const t = (key, vars) => window.NoemaI18n ? NoemaI18n.t(key, vars, S.settings.la
 const COURSE = window.COURSE;               // array of chapters of the loaded subject pack (set by the loader)
 const SUBJ = Noema.subject;                    // subject.json of the loaded pack
 const ACCOUNT = Noema.account;                 // current profile / cloud account
+/* i18n-ignore-start */   // the tutor's defaults are words for the AI's prompts (20_ai.js), not for the learner
 const TUTOR = Object.assign({ name: 'Brick', avatar: '🦉', domain: SUBJ.title, prior: '', examples: 'Concrete, everyday examples from the subject.', interviewer: `an examiner for ${SUBJ.title}`, simulation: 'a realistic problem, misconception or anomaly from the subject', terminology: 'the canonical terminology of the field', examinerRole: `${SUBJ.title} examiner` }, SUBJ.tutor || {});
+/* i18n-ignore-end */
 // in the new frame the tutor is the character on screen now (NoemaThemes.current(): the learner's own, or the one on a 5-minute try), named in the menus' language;
 // read on every use, so a try or a change shows at once everywhere (buttons, the drawer, the prompts)
 if (window.NoemaShell?.mounted && window.NoemaThemes) for (const [k, f] of [['name', t => t.n], ['avatar', t => t.emoji]]) Object.defineProperty(TUTOR, k, { get: () => f(NoemaThemes.tutor()), enumerable: true });
@@ -51,18 +84,20 @@ function h(tag, attrs = {}, ...kids) {
   for (const kid of kids.flat()) if (kid != null && kid !== false) el.append(kid.nodeType ? kid : document.createTextNode(String(kid)));
   return el;
 }
-const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));   // i18n-ignore
 function fmt(s) {               // inline markdown-lite → safe HTML
   s = String(s ?? '');
   const codes = [];
   s = s.replace(/`([^`]+)`/g, (_, c) => { codes.push(c); return `\u0000${codes.length - 1}\u0000`; });
   s = esc(s)
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    .replace(/(^|[^*\w])\*(?!\s)(.+?)\*(?!\w)/g, '$1<em>$2</em>')
+    .replace(/(^|[^*\w])\*(?!\s)(.+?)\*(?!\w)/g, '$1<em>$2</em>')   // i18n-ignore
     .replace(/\n/g, '<br>');
   return s.replace(/\u0000(\d+)\u0000/g, (_, i) => `<code>${esc(codes[+i])}</code>`);
 }
 const F = s => h('span', { html: fmt(s) });
+/* an arrow written into a text points along the reading direction: mirrored in a right-to-left interface (docs/i18n.md §5) */
+const arrowBack = () => window.NoemaI18n?.dir === 'rtl' ? '→' : '←', arrowOn = () => window.NoemaI18n?.dir === 'rtl' ? '←' : '→';
 const shuffle = a => { a = [...a]; for (let i = a.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [a[i], a[j]] = [a[j], a[i]]; } return a; };
 const norm = s => String(s ?? '').toLowerCase().replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/\s+/g, ' ').trim().replace(/;$/, '').trim();
 const today = () => new Date().toISOString().slice(0, 10);
@@ -71,8 +106,10 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 /* ---------- syntax highlight ---------- */
 const KW = {
+  /* i18n-ignore-start */
   sql: 'select from where group by order having limit join left right inner outer full cross on as and or not null is in exists between like case when then else end create replace table view or if insert into values overwrite update set delete merge using matched source target alter add column columns drop truncate describe detail history restore version timestamp of vacuum retain hours optimize zorder cluster partitioned tblproperties show tables schemas catalogs use catalog schema grant revoke to all privileges with distinct union explain analyze compute statistics refresh streaming live stream materialized constraint expect violation fail row rows over partition row_number rank desc asc true false cast coalesce sum count avg min max apply purge reorg full by liquid auto',
   python: 'def return import from as if elif else for while in not and or is none true false class with try except finally raise lambda yield pass break continue global print self',
+  /* i18n-ignore-end */
 };
 const KWSET = Object.fromEntries(Object.entries(KW).map(([k, v]) => [k, new Set(v.split(' '))]));
 function highlight(code, lang) {
@@ -105,7 +142,7 @@ function guessLang(code) {
 function codeBlock(code, lang) {
   const pre = h('div', { class: 'pre', html: highlight(code, lang) });
   if (lang && lang !== 'text') pre.prepend(h('span', { class: 'lang' }, lang));
-  const cp = h('button', { class: 'copy', onclick: e => { e.stopPropagation(); navigator.clipboard?.writeText(code); toast('Copied 📋'); } }, 'copy');
+  const cp = h('button', { class: 'copy', onclick: e => { e.stopPropagation(); navigator.clipboard?.writeText(code); toast(tE('engine.core.copied')); } }, tE('engine.core.copy'));
   pre.append(cp);
   return pre;
 }
@@ -178,7 +215,7 @@ const CARD_KEYS_MOVED = (() => {
 let saveT;
 function flushSave() {
   clearTimeout(saveT);
-  const { settings, ...rest } = S; const { srcOn, apiKey, ...glob } = settings;
+  const { settings, ...rest } = S; const { srcOn, apiKey, mt: _mt, ...glob } = settings;   // a:settings.mt is engine/mt.js's own (written there): never written back from this copy
   Noema.kv.set(STATE_KEY, JSON.stringify({ ...rest, srcOn }));
   Noema.geminiKey.set(ACCOUNT.id, apiKey);   // this device only; the default key is not stored
   let cur = {}; try { cur = JSON.parse(Noema.kv.get(SETTINGS_KEY) || '{}'); } catch (e) { }
@@ -213,10 +250,10 @@ function addXP(n, el) {
   S.xp += n; Noema.stats.add(n); save();
   renderTopStats();
   const r = el?.getBoundingClientRect?.();
-  const f = h('div', { class: 'xpfloat', style: { left: (r ? r.left + r.width / 2 : innerWidth / 2) + 'px', top: (r ? r.top : innerHeight / 2) + 'px' } }, `+${n} XP`);
+  const f = h('div', { class: 'xpfloat', style: { left: (r ? r.left + r.width / 2 : innerWidth / 2) + 'px', top: (r ? r.top : innerHeight / 2) + 'px' } }, tE('engine.core.xpFloat', { n }));
   document.body.append(f); setTimeout(() => f.remove(), 1200);
   const RX = window.NoemaShell?.mounted ? window.NoemaReact : null;   // the character's reactions live in the new frame
-  if (before < S.settings.goal && Noema.stats.todayXP() >= S.settings.goal) { if (RX) RX.big('goal'); else confetti(160); toast('🎯 Daily goal smashed!'); }
+  if (before < S.settings.goal && Noema.stats.todayXP() >= S.settings.goal) { if (RX) RX.big('goal'); else confetti(160); toast('🎯 ' + tE('engine.core.goalSmashed')); }
   else if (LV && RX && LV(Noema.stats.get().xp || 0).lv > lv0) RX.big('level');
 }
 function record(ex, ok, firstTry = true) {
@@ -244,7 +281,7 @@ function beep(kind) {
 
 /* ---------- confetti ---------- */
 function confetti(n = 120) {
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;   // i18n-ignore
   let cv = $('#confetti');
   if (!cv) { cv = h('canvas', { id: 'confetti' }); document.body.append(cv); }
   const ctx = cv.getContext('2d'); cv.width = innerWidth; cv.height = innerHeight;
@@ -270,15 +307,15 @@ function modal(build) {
 }
 function confirmBox(text, onYes) {
   modal((b, close) => b.append(h('h3', {}, text), h('div', { class: 'row', style: { marginTop: '18px', justifyContent: 'flex-end' } },
-    h('button', { class: 'btn', onclick: close }, 'Cancel'), h('button', { class: 'btn primary', onclick: () => { close(); onYes(); } }, 'Yes'))));
+    h('button', { class: 'btn', onclick: close }, tE('engine.core.cancel')), h('button', { class: 'btn primary', onclick: () => { close(); onYes(); } }, tE('engine.core.yes')))));
 }
 
 /* ---------- theming per chapter ---------- */
-function isDark() { return document.documentElement.dataset.theme === 'dark' || (document.documentElement.dataset.theme !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches); }
+function isDark() { return document.documentElement.dataset.theme === 'dark' || (document.documentElement.dataset.theme !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches); }   // i18n-ignore
 function setAccent(el, ch) {
   const i = ch ? (ch._ci ?? ch._i) % PALETTE.length : 7;
   const c = isDark() ? PALETTE_DARK[i] : PALETTE[i][0];
-  const bg = isDark() ? `color-mix(in srgb, ${PALETTE_DARK[i]} 18%, #1f232e)` : PALETTE[i][1];
+  const bg = isDark() ? `color-mix(in srgb, ${PALETTE_DARK[i]} 18%, #1f232e)` : PALETTE[i][1];   // i18n-ignore
   el.style.setProperty('--c', c); el.style.setProperty('--c-bg', bg);
 }
 function applyTheme() {
@@ -294,6 +331,7 @@ function chProgress(c) {
 }
 
 /* ---------- section plain text (for AI context) ---------- */
+/* i18n-ignore-start */   // context for the AI's prompts (English, like the prompts themselves)
 function blockText(b) {
   switch (b.t) {
     case 'p': return b.text;
@@ -316,6 +354,7 @@ function chapterOutline(c) {
   return `# Chapter ${c.num}: ${c.title} — ${c.subtitle}\nMantra: ${c.mantra}\nSections:\n` + c.sections.map(s => `- ${s.title}: ${s.hook || ''}`).join('\n') +
     '\nKey pitfalls:\n' + c.pitfalls.map(p => `- ${p.title}: ${p.text}`).join('\n');
 }
+/* i18n-ignore-end */
 
 /* ---- 15_inbox.js ---- */
 /* ===================== Results inbox: study results that other apps append (e.g. Meletee) ===================== */
@@ -356,7 +395,7 @@ async function checkInbox() {
   if (inboxRun.busy || ACCOUNT.kind !== 'cloud' || !CL?.session?.() || !CL.kvRows) return 0;
   inboxRun.busy = true; let n = 0;
   try {
-    const rows = (await CL.kvRows(INBOX)).sort((a, b) => a.key.localeCompare(b.key));
+    const rows = (await CL.kvRows(INBOX)).sort((a, b) => a.key.localeCompare(b.key));   // storage keys, not words (i18n-ignore)
     const done = []; const seen = S.inboxDone = S.inboxDone || {};
     for (const r of rows) {
       let v; try { v = JSON.parse(r.value); } catch (e) { done.push(r.key); continue; }   // unreadable: it can never be applied
@@ -371,7 +410,7 @@ async function checkInbox() {
     // the changed state reaches the cloud BEFORE its rows leave the inbox (a failed push keeps them for the next check)
     if (n) await CL.push(ACCOUNT.id);
     for (const k of done) await CL.kvDelete(k).catch(() => { });
-    if (n) { toast(`📥 ${n} result${n === 1 ? '' : 's'} from your other apps`); renderTopStats(); }
+    if (n) { toast('📥 ' + tE('engine.inbox.applied', { n })); renderTopStats(); }
   } catch (e) { console.warn('[inbox]', e); } finally { inboxRun.busy = false; }
   return n;
 }
@@ -385,6 +424,10 @@ setTimeout(checkInbox, 0);   // once the whole engine has loaded
 /* ---- 20_ai.js ---- */
 /* ===================== Gemini client ===================== */
 const GEM_BASE = 'https://generativelanguage.googleapis.com/v1beta';
+/** An error of the Gemini client in the learner's words (needsKey: the 🔑 guide helps). */
+const gemErr = (key, vars, extra) => Object.assign(new Error(tE(key, vars)), extra || {});
+/** Gemini could not be reached (docs/i18n.md §6): the English words in .message (logs), the code for the learner's words (errText → err.ai.network_gemini). */
+const gemNetErr = e => Object.assign(new Error(`Network error — are you online? (${e && e.message})`), { code: 'ai.network_gemini', params: { detail: String(e && e.message) } });   // i18n-ignore (English .message of the error contract)
 const FALLBACK_MODELS = ['gemini-flash-latest', 'gemini-2.5-flash', 'gemini-2.0-flash'];
 
 function modelScore(name) {
@@ -403,9 +446,9 @@ function modelScore(name) {
 }
 async function detectModels() {
   const key = S.settings.apiKey;
-  if (!key) throw new Error('No API key set.');
-  const r = await fetch(`${GEM_BASE}/models?pageSize=1000`, { headers: { 'x-goog-api-key': key } });
-  if (!r.ok) throw new Error(`Model list failed (${r.status}): ${(await r.text()).slice(0, 200)}`);
+  if (!key) throw gemErr('engine.gemini.noKeySet', null, { needsKey: true });
+  let r; try { r = await fetch(`${GEM_BASE}/models?pageSize=1000`, { headers: { 'x-goog-api-key': key } }); } catch (e) { throw gemNetErr(e); }   // offline: the coded network error (docs/i18n.md §6)
+  if (!r.ok) throw gemErr('engine.gemini.modelListFailed', { status: r.status, detail: (await r.text()).slice(0, 200) });
   const d = await r.json();
   const ms = (d.models || []).filter(m => (m.supportedGenerationMethods || []).includes('generateContent'))
     .map(m => m.name.replace(/^models\//, '')).filter(n => modelScore(n) >= 0)
@@ -437,23 +480,23 @@ function buildBody({ system, contents, json, schema, temperature = 0.7, model })
   return body;
 }
 function friendlyError(status, text) {
-  if (status === 400 && /API key/i.test(text)) return 'Your Gemini API key was rejected. Open ⚙️ Settings and paste a valid key.';
-  if (status === 403) return 'Access denied (403). The key may be restricted (e.g. HTTP-referrer restriction blocks local files) or the Generative Language API is not enabled for it.';
-  if (status === 404) return 'That model is not available for your key. Open ⚙️ Settings → “Detect models”.';
-  if (status === 429) return 'Rate limit / quota reached (429). Wait a minute or switch to a lighter model in ⚙️ Settings.';
-  if (status >= 500) return 'Gemini is having a hiccup (' + status + '). Try again in a moment.';
-  return `Gemini error ${status}: ${text.slice(0, 220)}`;
+  if (status === 400 && /API key/i.test(text)) return tE('engine.gemini.keyRejected');   // i18n-ignore (a pattern of Gemini's answer)
+  if (status === 403) return tE('engine.gemini.denied');
+  if (status === 404) return tE('engine.gemini.noModel');
+  if (status === 429) return tE('engine.gemini.rateLimit');
+  if (status >= 500) return tE('engine.gemini.hiccup', { status });
+  return tE('engine.gemini.error', { status, detail: text.slice(0, 220) });
 }
 async function gemini(opts, retry = 1) {
   const model = await ensureModel();
   const key = S.settings.apiKey;
-  if (!key) throw new Error('No Gemini API key. Open ⚙️ Settings.');
+  if (!key) throw gemErr('engine.gemini.noKey', null, { needsKey: true });
   const stream = !!opts.onChunk;
-  const url = `${GEM_BASE}/models/${model}:${stream ? 'streamGenerateContent?alt=sse' : 'generateContent'}`;
+  const url = `${GEM_BASE}/models/${model}:${stream ? 'streamGenerateContent?alt=sse' : 'generateContent'}`;   // i18n-ignore
   let r;
   try {
     r = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-goog-api-key': key }, body: JSON.stringify(buildBody({ ...opts, model })) });
-  } catch (e) { throw new Error('Network error — are you online? (' + e.message + ')'); }
+  } catch (e) { throw gemNetErr(e); }
   if (!r.ok) {
     const t = await r.text();
     if (r.status === 400 && /thinking/i.test(t) && !noThinking.has(model)) { noThinking.add(model); return gemini(opts, retry); }
@@ -463,13 +506,13 @@ async function gemini(opts, retry = 1) {
       if (S.settings.model !== model) return gemini(opts, retry - 1);
     }
     if ((r.status === 503 || r.status === 500) && retry > 0) { await sleep(1200); return gemini(opts, retry - 1); }
-    throw new Error(friendlyError(r.status, t));
+    throw Object.assign(new Error(friendlyError(r.status, t)), r.status === 400 && /API key/i.test(t) ? { needsKey: true } : {});   // i18n-ignore
   }
   const partsText = d => (d.candidates?.[0]?.content?.parts || []).filter(p => !p.thought).map(p => p.text || '').join('');
   if (!stream) {
     const d = await r.json();
     const txt = partsText(d);
-    if (!txt) throw new Error('Empty answer from Gemini' + (d.promptFeedback?.blockReason ? ' (blocked: ' + d.promptFeedback.blockReason + ')' : '') + '.');
+    if (!txt) throw d.promptFeedback?.blockReason ? gemErr('engine.gemini.emptyBlocked', { reason: d.promptFeedback.blockReason }) : gemErr('engine.gemini.empty');
     return txt;
   }
   const reader = r.body.getReader(), dec = new TextDecoder();
@@ -485,7 +528,7 @@ async function gemini(opts, retry = 1) {
       try { const d = JSON.parse(line.slice(5)); const t = partsText(d); if (t) { full += t; opts.onChunk(full); } } catch (e) { }
     }
   }
-  if (!full) throw new Error('Empty answer from Gemini.');
+  if (!full) throw gemErr('engine.gemini.empty');
   return full;
 }
 async function geminiJSON(prompt, system, schema) {
@@ -495,6 +538,7 @@ async function geminiJSON(prompt, system, schema) {
 }
 
 /* ===================== Tutor ===================== */
+/* i18n-ignore-start */   // the learner profile is part of the AI's prompts (English)
 function learnerProfile() {
   let learner = '';
   try { learner = JSON.parse(Noema.kv.get(Noema.kv.accountKey('settings')) || '{}').learner || ''; } catch (e) { }
@@ -502,26 +546,30 @@ function learnerProfile() {
   return `${learner} ${TUTOR.prior || ''}`.trim();
 }
 const LEARNER = learnerProfile();
-/* ---------- the language of the AI conversations (⚙️ Settings): only what the AI writes to the learner — the pack is unchanged ---------- */
-const CHAT_LANGS = [['en', 'English', 'English'], ['el', 'Ελληνικά', 'Greek'], ['de', 'Deutsch', 'German'], ['fr', 'Français', 'French'], ['es', 'Español', 'Spanish'], ['it', 'Italiano', 'Italian'], ['pt', 'Português', 'Portuguese'], ['nl', 'Nederlands', 'Dutch'], ['pl', 'Polski', 'Polish'], ['ro', 'Română', 'Romanian'], ['bg', 'Български', 'Bulgarian'], ['ru', 'Русский', 'Russian'], ['uk', 'Українська', 'Ukrainian'], ['tr', 'Türkçe', 'Turkish'], ['ar', 'العربية', 'Arabic'], ['he', 'עברית', 'Hebrew'], ['hi', 'हिन्दी', 'Hindi'], ['zh', '中文', 'Chinese'], ['ja', '日本語', 'Japanese'], ['ko', '한국어', 'Korean']];
-const langName = code => (CHAT_LANGS.find(l => l[0] === code) || [])[2] || code;
+/* i18n-ignore-end */
+/* ---------- the language of the AI conversations: only what the AI writes to the learner — the pack is unchanged ---------- */
+/* One rule for every AI feature (engine/llm.js NoemaLLM.replyLang): the 🗣 choice (S.settings.chatLang, synced with the
+   account) when made, else the UI language; the course's own language stays for its terms and quotations. */
 const COURSE_LANG = SUBJ.language || 'en';
-/** '' = the language of the course (the learner may still write in another one) */
+/** '' = automatic (the app's language) */
 const chatLang = () => S.settings.chatLang || '';
-/** The rule added to every conversation's instructions, read at call time (a change applies to the next answer). */
-function langRule() {
-  const l = chatLang();
-  if (!l || l === COURSE_LANG) return COURSE_LANG !== 'en' || l ? `LANGUAGE: reply in ${langName(COURSE_LANG)} (the language of the course material) unless the learner writes in another language.` : '';
-  return `LANGUAGE: always write to the learner in ${langName(l)}, although the course material and the notes below are in ${langName(COURSE_LANG)}. Translate what you quote or explain from them; keep code, formulas and proper names as they are, and give a key technical term in its original form in parentheses the first time it appears (the learner meets it that way in the material). If the learner explicitly asks for another language, use that one.`;
-}
-/** For the JSON helpers (grading, feedback): which language their human-readable fields are written in. */
-const langFields = what => { const l = chatLang(); return l && l !== COURSE_LANG ? ` Write ${what} in ${langName(l)}.` : ''; };
+/** A language as the prompts name it: "Greek (Ελληνικά)". */
+const langName = code => window.NoemaLLM?.langLabel ? NoemaLLM.langLabel(code) : code;
+/** { code, auto, name, address }: the language the AI writes to the learner in, read at call time (a change applies to the next answer). */
+const replyLang = () => window.NoemaLLM?.replyLang ? NoemaLLM.replyLang(null, chatLang(), uiLang()) : { code: chatLang() || 'en', auto: !chatLang(), name: langName(chatLang() || 'en'), address: '' };
+/** " Write it in Greek (Ελληνικά)." after a directive of the app (WRAP UP, TUTOR STATE) when the learner does not read English. */
+const inReplyLang = (what = 'it') => { const r = replyLang(); return /^en\b/i.test(r.code) ? '' : ` Write ${what} in ${r.name}.`; };   // i18n-ignore (a prompt)
+/** The rule added to every conversation's instructions. */
+const langRule = () => window.NoemaLLM?.chatRule ? NoemaLLM.chatRule(replyLang(), COURSE_LANG) : '';
+/** For the JSON helpers (grading, feedback, questions): which language their human-readable fields are written in. */
+const langFields = what => window.NoemaLLM?.fieldsRule ? NoemaLLM.fieldsRule(replyLang(), COURSE_LANG, what) : '';
+/* i18n-ignore-start */   // MODES[*].sys, INTENT: prompts for the AI
 const FORMAT = `markdown allowed (**bold**, \`code\`, short lists, fenced code${SUBJ.features?.math ? ', LaTeX math with $…$ inline and $$…$$ display' : ''}). ${TUTOR.examples} At most one emoji. Never invent facts about ${TUTOR.domain}; if you go beyond the COURSE NOTES, say "(beyond the notes)".`;
 const STYLE = `Formatting: short turns (max ~120 words unless asked), ${FORMAT}`;
 /** For the free, in-depth explanations: the same rules without the short-turn cap. */
 const STYLE_FREE = `Formatting: ${FORMAT}`;
 const MODES = {
-  socratic: { get label() { return `${TUTOR.avatar} Socratic`; }, sys: `You are "{{tutor}}", a Socratic ${TUTOR.domain} tutor. Your job is to make the learner reach CLEAR, CORRECT, LASTING KNOWLEDGE — questions are a means, never the goal. ${LEARNER}
+  socratic: { get label() { return `${TUTOR.avatar} ` + tE('engine.mode.socratic'); }, sys: `You are "{{tutor}}", a Socratic ${TUTOR.domain} tutor. Your job is to make the learner reach CLEAR, CORRECT, LASTING KNOWLEDGE — questions are a means, never the goal. ${LEARNER}
 
 HOW YOU WORK — "elicitation threads"
 A thread = one question you are helping the learner work out. The app tracks every thread (see TUTOR STATE below — it is authoritative).
@@ -542,29 +590,31 @@ MACHINE STATE — mandatory, hidden from the learner. End EVERY reply with exact
 <noema-state>{"opened":[{"id":"t<N>","question":"<question you are asking now>","parent":"<open thread id or null>"}],"resolved":[{"id":"<thread id>","answer":"<1–2 sentence authoritative answer>","lesson":"<one sentence>"}],"lesson":"<optional lesson for a direct answer that opened no thread>","focus":"<id the learner should answer next, or null>","verdict":"correct|partial|wrong|none","summary":<true if this reply contains 🎓 What you learned, else false>}</noema-state>
 Omit empty arrays. Use the "Next new thread id" from TUTOR STATE. Nothing may follow the closing tag.
 ${STYLE}` },
-  explain: { label: '💡 Explain', sys: `You are "{{tutor}}", an expert ${TUTOR.domain} teacher in a FREE CONVERSATION with the learner. Your only goal is that the learner truly UNDERSTANDS. ${LEARNER}
+  explain: { get label() { return '💡 ' + tE('engine.mode.explain'); }, sys: `You are "{{tutor}}", an expert ${TUTOR.domain} teacher in a FREE CONVERSATION with the learner. Your only goal is that the learner truly UNDERSTANDS. ${LEARNER}
 HOW YOU WORK
 • Explain in depth and as intuitively and insightfully as possible. Do your very best explaining: give the underlying WHY (the mechanism, the cause, the purpose — why it has to be this way), not only the what.
 • Build from what the learner already knows; use a vivid analogy or mental image, a concrete example${SUBJ.features?.code ? ' or code' : ''}${SUBJ.features?.math ? ' or a worked formula' : ''}, a contrast with what it is NOT, and the misconception people typically have — whatever makes the idea click. Prefer one deep, well-built explanation over a checklist.
 • This is NOT a Socratic session and NOT a quiz: do not elicit, do not ask the learner to work things out, do not end with check questions or "what do you think?". Just explain. Answer follow-up questions the same way. Ask something only if the learner's question is truly ambiguous.
 • Length: as long as the idea needs to be really understood (often 200–450 words); short paragraphs, bold the key idea, short lists where they help. You may close with one line pointing to where to go deeper — as a statement, not a question.
 ${STYLE_FREE}` },
-  hint: { label: '🪜 Hint', chip: false, sys: `You are "{{tutor}}", a ${TUTOR.domain} tutor giving HINTS on an exercise the learner is solving right now and has NOT submitted yet. ${LEARNER}
+  hint: { get label() { return '🪜 ' + tE('engine.mode.hint'); }, chip: false, sys: `You are "{{tutor}}", a ${TUTOR.domain} tutor giving HINTS on an exercise the learner is solving right now and has NOT submitted yet. ${LEARNER}
 The exercise below comes with its correct answer and explanation — they are for YOU only.
 • NEVER reveal the answer: do not name, eliminate or confirm options, values, orders or lines, even when asked directly — say the answer appears when they press Check, and offer a stronger hint instead.
 • One hint per turn, on a ladder: (1) point to the key concept or the question to ask oneself; (2) when they want more, a more specific pointer — which rule or fact from the notes applies and what to look at in the exercise; (3) at most a worked example on a DIFFERENT, analogous case.
 • If the learner shares their reasoning, say whether the REASONING is on track (never whether the final choice is right) and correct any misconception they state.
 • Each hint ≤ 70 words. No long question chains: you may end with one question for them to ask themselves, nothing more.
 ${STYLE}` },
-  quiz: { label: '⚡ Quiz me', sys: `You are "{{tutor}}", a rapid-fire ${TUTOR.domain} quiz master. ${LEARNER}
+  quiz: { get label() { return '⚡ ' + tE('engine.mode.quiz'); }, sys: `You are "{{tutor}}", a rapid-fire ${TUTOR.domain} quiz master. ${LEARNER}
 Ask ONE question at a time, varying the format: predict-the-outcome, spot-the-trap, ${SUBJ.features?.code ? 'write-the-syntax, ' : ''}${SUBJ.features?.math ? 'calculate, ' : ''}compare two concepts, "what do you ask yourself first when…". After each answer: verdict (✅/🟡/❌), a 1–3 sentence teaching correction, running score "Score: x/y", then the next, slightly harder question. Focus on traps and reasoning errors. ${STYLE}` },
-  interview: { label: '🎤 Interview', sys: `You are ${TUTOR.interviewer}. ${LEARNER}
+  interview: { get label() { return '🎤 ' + tE('engine.mode.interview'); }, sys: `You are ${TUTOR.interviewer}. ${LEARNER}
 Ask ONE realistic question at a time about the context topic (conceptual, scenario or diagnostic). After the learner answers: score /10, what was strong, what was missing, and a crisp model answer in ≤4 sentences. Then ask the next question, mixing in follow-ups ("and what if…?"). ${STYLE}` },
-  debug: { label: '🔧 Case sim', sys: `You run an interactive CASE / DEBUGGING SIMULATION for ${TUTOR.domain}. ${LEARNER}
+  debug: { get label() { return '🔧 ' + tE('engine.mode.debug'); }, sys: `You run an interactive CASE / DEBUGGING SIMULATION for ${TUTOR.domain}. ${LEARNER}
 Invent a realistic scenario tied to the context topic (for example: ${TUTOR.simulation}). Describe ONLY the symptom or the observed facts (as a ticket, an error, a lab result or a case report would). The learner then asks diagnostic questions or "runs" checks. Reply exactly like the system/colleague/patient/data would — realistic outputs in code blocks where it fits — without revealing the root cause. If they flail, give a small nudge as a question. When they correctly state root cause + fix/explanation, debrief: which "ask yourself" questions they used well, which ones they skipped, and the ideal ordered checklist. ${STYLE}` },
 };
+/* i18n-ignore-end */
 const T = { open: false, mode: 'socratic', ctx: null, hist: {}, busy: false, intents: {} };
 function tutorCtxKey() { return (T.ctx?.id || 'course') + '|' + T.mode; }
+/* i18n-ignore-start */   // the course context of the prompts
 function tutorContextText() {
   const c = T.ctx;
   if (!c) return 'COURSE NOTES (overview):\n' + COURSE.map(chapterOutline).join('\n\n').slice(0, 90000);
@@ -583,39 +633,47 @@ function tutorContextText() {
   }
   return '';
 }
+/* i18n-ignore-end */
 /** 💡 Explain this — a small icon in the top corner of a lesson part (shown on hover; always faintly on touch screens).
     It opens the tutor dock in “Explain” mode with that part as the focus and its section + chapter as wider context. */
 function explainable(el, get) {
   if (!el || [...el.children].some(k => k.classList.contains('xbtn'))) return el;
   el.classList.add('xable');
-  const b = h('button', { class: 'xbtn', type: 'button', title: 'Explain this (AI)', 'aria-label': 'Explain this with the AI tutor', onclick: e => { e.stopPropagation(); e.preventDefault(); explainItem(get()); } }, '💡');
+  const b = h('button', { class: 'xbtn', type: 'button', title: tE('engine.tutor.explainThis'), 'aria-label': tE('engine.tutor.explainThisAria'), onclick: e => { e.stopPropagation(); e.preventDefault(); explainItem(get()); } }, '💡');
   // a block with its own buttons on top (a picture's ⤢, a question set's recall switch) takes the 💡 into that row, so it never covers them
   const dock = el.querySelector(':scope > .vx-fig > .vx > .vx-tools, :scope > .ask > .hd');
   if (dock) { b.classList.add('docked'); const zoom = $(':scope > .vx-zoom', dock); zoom ? dock.insertBefore(b, zoom) : dock.append(b); }
   else el.append(b);
   return el;
 }
-function explainItem({ label, text, sec, ch, what = 'part of the lesson' }) {
+function explainItem({ label, text, sec, ch, what = 'part of the lesson', bid = null }) {   // i18n-ignore (what: words of the prompt; the learner's message names it in the UI language)
   const plain = String(label || text || '').replace(/[*_`#>\[\]]/g, '').replace(/\s+/g, ' ').trim();
   const short = plain.length > 70 ? plain.slice(0, 68).replace(/\s+\S*$/, '') + '…' : plain;
   let hsh = 0; for (const x of String(text || label)) hsh = (hsh * 31 + x.charCodeAt(0)) >>> 0;
-  openTutor({ kind: 'item', id: 'x' + hsh.toString(36), label: short, text: text || label, sec: sec?.id || sec || null, ch: ch?.id || ch || null }, 'explain', `Explain this ${what} to me: “${short}”`,
+  openTutor({ kind: 'item', id: 'x' + hsh.toString(36), label: short, text: text || label, sec: sec?.id || sec || null, ch: ch?.id || ch || null,
+    origin: { via: 'explainThis', what, ...(bid ? { bid } : {}), ...(sec ? { sec: sec?.id || sec } : {}), ...(ch ? { ch: ch?.id || ch } : {}) } }, 'explain', tE('engine.aimsg.explainItem', { what: what.replace(/\s+/g, '_'), text: short }),   // the learner's first message: their bubble, in the UI language (the reply-language rule does the rest)
     { intent: INTENT.item(what) });
 }
 
 function setTutorContext(ctx) { T.ctx = ctx; if (T.open) renderTutor(); }
-function ctxLabel() {
+/** What the tutor talks about: [icon, chapter number or null, title] (ctxLabel() joins them). */
+function ctxParts() {
   const c = T.ctx;
-  if (!c) return '🌍 Whole course';
-  if (c.kind === 'section') return SEC[c.id] ? `📍 Ch${SEC[c.id]._ch.num} · ${SEC[c.id].title}` : '📍 ' + (c.label || 'Section');
-  if (c.kind === 'chapter') return CH[c.id] ? `📍 Ch${CH[c.id].num} · ${CH[c.id].title}` : '📍 ' + (c.label || 'Chapter');
-  if (c.kind === 'playbook') return PB[c.id] ? `🔧 ${PB[c.id].title}` : '🔧 ' + (c.label || 'Debug drill');
-  if (c.kind === 'exercise') return '🧩 This exercise';
-  if (c.kind === 'item') return '🔎 ' + (c.label || 'This part');
-  return '';
+  if (!c) return ['🌍', null, tE('engine.tutor.ctxCourse')];
+  if (c.kind === 'section') return SEC[c.id] ? ['📍', SEC[c.id]._ch.num, SEC[c.id].title] : ['📍', null, c.label || tE('engine.tutor.ctxSection')];
+  if (c.kind === 'chapter') return CH[c.id] ? ['📍', CH[c.id].num, CH[c.id].title] : ['📍', null, c.label || tE('engine.tutor.ctxChapter')];
+  if (c.kind === 'playbook') return PB[c.id] ? ['🔧', null, PB[c.id].title] : ['🔧', null, c.label || tE('engine.tutor.ctxDrill')];
+  if (c.kind === 'exercise') return ['🧩', null, tE('engine.tutor.ctxExercise')];
+  if (c.kind === 'item') return ['🔎', null, c.label || tE('engine.tutor.ctxPart')];
+  return null;
+}
+function ctxLabel() {
+  const p = ctxParts(); if (!p) return '';
+  return p[0] + ' ' + (p[1] != null ? chTitle(p[1], p[2]) : p[2]);
 }
 /** 🎯 Why a conversation was opened: each button of the app gives the tutor its own task on top of the mode.
     It goes into the instructions of every turn of that conversation (and is kept with it in the history). */
+/* i18n-ignore-start */   // tasks for the AI (prompts)
 const INTENT = {
   item: what => `The learner pressed 💡 "Explain this" on ONE ${what} of the lesson (the FOCUS below). Explain exactly that ${what}: first in its own terms and in depth — what it means, why it is so, how it works — then how it fits into the lesson around it. Go beyond the notes whenever it helps understanding (mark it "(beyond the notes)").`,
   exHint: given => `The learner pressed "Ask ${TUTOR.name}" on an exercise BEFORE answering it — they want a hint, not the solution.${given ? ` What they have entered so far (not submitted): ${given}` : ''}`,
@@ -628,6 +686,7 @@ const INTENT = {
   pbRoleplay: `Role-play of THIS debug playbook: present only its symptom as a realistic case (ticket, error, report) and let the learner investigate. The "Ask yourself" checklist, the steps and the root causes below are for you — never reveal them; react to their checks like the real system would and debrief against the checklist at the end.`,
   course: `The learner opened the tutor on the whole course without a topic: follow their lead; if they have no topic, suggest 2–3 central ideas of the course to start from.`,
 };
+/* i18n-ignore-end */
 function openTutor(ctx, mode, autoMsg, { intent } = {}) {
   if (ctx !== undefined) T.ctx = ctx;
   if (mode) T.mode = mode;
@@ -638,42 +697,57 @@ function openTutor(ctx, mode, autoMsg, { intent } = {}) {
   else setTimeout(() => $('.composer textarea')?.focus(), 350);
 }
 function closeTutor() { T.open = false; $('.drawer')?.classList.remove('open'); $('.scrim')?.classList.remove('on'); }
+/** 🗣 The choices for the AI conversations: automatic (the app's language), the course's language, every UI language by its
+    endonym (engine/i18n.js LOCALES) and an older choice that is none of them. → [[value, label]] */
+function chatLangChoices() {
+  const endo = c => { const L = (window.NoemaI18n?.LOCALES || []).find(l => l.tag === c); if (L) return L.name; try { const n = new Intl.DisplayNames([c], { type: 'language' }).of(c) || c; return n.charAt(0).toLocaleUpperCase(c) + n.slice(1); } catch (e) { return c; } };
+  const base = c => String(c).split('-')[0].toLowerCase();
+  const out = [['', tE('engine.tutor.chatLangAuto')], [COURSE_LANG, tE('engine.tutor.chatLangCourse', { lang: endo(COURSE_LANG) })]];
+  for (const L of (window.NoemaI18n?.LOCALES || [{ tag: 'en', name: 'English' }])) if (!L.pseudo && L.tag !== COURSE_LANG) out.push([L.tag, L.name]);
+  const cur = chatLang();
+  if (cur && !out.some(([v]) => v === cur) && !out.some(([v]) => v && base(v) === base(cur))) out.push([cur, endo(cur)]);
+  return out;
+}
+/** Is a choice the current one? (an older 'es' / 'pt' / 'zh' / 'ar' matches its UI locale es-ES / pt-PT / zh-Hans / ar-EG) */
+function chatLangIs(v) {
+  const cur = chatLang(); if (v === cur) return true; if (!v || !cur) return false;
+  const ch = chatLangChoices(); if (ch.some(([x]) => x === cur)) return false;
+  return ch.find(([x]) => x && x.split('-')[0].toLowerCase() === cur.split('-')[0].toLowerCase())?.[0] === v;
+}
 /** 🗣 The language picker of the AI conversations (⚙️ Settings and the tutor drawer). */
 function chatLangSelect({ cls = '', onChange = null, persist = true } = {}) {
-  return h('select', { class: cls, title: 'Language of the AI conversations — the course material stays as it is', 'aria-label': 'Language of the AI conversations', onchange: e => { if (persist) { S.settings.chatLang = e.target.value; save(); } onChange?.(e.target.value); } },
-    h('option', { value: '', selected: !chatLang() }, `🗣 Same as the course (${CHAT_LANGS.find(l => l[0] === COURSE_LANG)?.[1] || COURSE_LANG})`),
-    ...CHAT_LANGS.map(([v, l]) => h('option', { value: v, selected: chatLang() === v }, '🗣 ' + l)));
+  return h('select', { class: cls, title: tE('engine.tutor.chatLangTip'), 'aria-label': tE('engine.tutor.chatLangAria'), onchange: e => { if (persist) { S.settings.chatLang = e.target.value; save(); } onChange?.(e.target.value); } },
+    ...chatLangChoices().map(([v, l]) => h('option', { value: v, selected: chatLangIs(v) || (!v && !chatLang()), ...(v ? { lang: v } : {}) }, '🗣 ' + l)));
 }
 /** The tutor is the learner's character: its face (engine/art.js), else the subject's emoji. */
 function tutorFace() { const svg = SHL() && window.NoemaArt && window.NoemaThemes ? NoemaArt.mascot(NoemaThemes.current()) : ''; return svg ? h('div', { class: 'avatar face', html: svg }) : h('div', { class: 'avatar' }, TUTOR.avatar); }
 /** 🕘 history, ⬇️ export, ↺ new: in a ⋮ with the shell, three small buttons without it. */
 function tutorTools() {
-  const items = [{ label: 'Conversation history', icon: '🕘', run: () => { T.showHistory = !T.showHistory; renderTutor(); } }, { label: 'Export this conversation (.md)', icon: '⬇️', run: () => exportConvo(currentConvo()) },
-    { label: 'New conversation', icon: '↺', run: () => { T.hist[tutorCtxKey()] = []; delete T.tstate[tutorCtxKey()]; renderTutor(); } }];
-  if (SHL()) return [T.showHistory ? h('button', { class: 'iconbtn on', title: 'Conversation history', onclick: items[0].run }, '🕘') : null, SHL().menuButton(items, { label: 'More' })];
+  const items = [{ label: tE('engine.tutor.history'), icon: '🕘', run: () => { T.showHistory = !T.showHistory; renderTutor(); } }, { label: tE('engine.tutor.export'), icon: '⬇️', run: () => exportConvo(currentConvo()) },
+    { label: tE('engine.tutor.newConvo'), icon: '↺', run: () => { T.hist[tutorCtxKey()] = []; delete T.tstate[tutorCtxKey()]; renderTutor(); } }];
+  if (SHL()) return [T.showHistory ? h('button', { class: 'iconbtn on', title: tE('engine.tutor.history'), onclick: items[0].run }, '🕘') : null, SHL().menuButton(items, { label: tE('engine.tutor.more') })];
   return items.map((it, i) => h('button', { class: 'iconbtn' + (i === 0 && T.showHistory ? ' on' : ''), title: it.label, onclick: it.run }, it.icon));
 }
 function renderTutorHead() { if (T.open) renderTutor(); }
 /** The frame's tutor (docs/UI_MAP.md): face, name, ⋮, ✕ · "How <name> helps you" over one list of the modes ·
     a "For: …" chip (✕ = the whole subject) · the conversation · the box to write in. Nothing else. */
-const MODE_WORDS = { socratic: 'Socratic', explain: 'Explain', quiz: 'Quiz', interview: 'Interview', debug: 'Debug', hint: 'Hint' };
-const modeName = k => MODE_WORDS[k] ? SL('mode' + MODE_WORDS[k]) : (MODES[k]?.label || k), modeSub = k => MODE_WORDS[k] ? SL('mode' + MODE_WORDS[k] + 'Sub') : '';
+const MODE_WORDS = { socratic: 'Socratic', explain: 'Explain', quiz: 'Quiz', interview: 'Interview', debug: 'Debug', hint: 'Hint' };   // i18n-ignore
+const modeName = k => MODE_WORDS[k] ? SL('mode' + MODE_WORDS[k]) : (MODES[k]?.label || k), modeSub = k => MODE_WORDS[k] ? SL('mode' + MODE_WORDS[k] + 'Sub') : '';   // i18n-ignore
 function renderShellTutor(d) {
   const X = SHL(), hist = T.hist[tutorCtxKey()] || [];
   const msgs = h('div', { class: 'msgs' });
   const send = () => { const ta = $('.composer textarea', d); const v = ta.value.trim(); if (v) { ta.value = ''; ta.style.height = 'auto'; sendTutor(v); } };
-  const langMenu = btn => X.popMenu(btn, [{ label: SL('chatLangSame', { l: CHAT_LANGS.find(l => l[0] === COURSE_LANG)?.[1] || COURSE_LANG }), icon: !chatLang() ? '✓' : ' ', run: () => { S.settings.chatLang = ''; save(); renderTutor(); } },
-    ...CHAT_LANGS.map(([v, l]) => ({ label: l, icon: chatLang() === v ? '✓' : ' ', run: () => { S.settings.chatLang = v; save(); renderTutor(); } }))]);
+  const langMenu = btn => X.popMenu(btn, chatLangChoices().map(([v, l]) => ({ label: l, icon: (v ? chatLangIs(v) : !chatLang()) ? '✓' : ' ', run: () => { S.settings.chatLang = v; save(); renderTutor(); } })));
   const more = X.menuButton(() => [
     { label: SL('chatHistory'), icon: 'clock', run: () => SHL().convos() },   // the history is a window in the middle of the screen, every subject grouped by Roadmap and step
     { label: SL('chatNew'), icon: '↺', run: () => { T.showHistory = false; T.hist[tutorCtxKey()] = []; delete T.tstate[tutorCtxKey()]; renderTutor(); } },
     hist.length ? { label: SL('chatExport'), icon: '⬇️', run: () => exportConvo(currentConvo()) } : null,
-    { label: SL('chatLangItem'), sub: chatLang() ? CHAT_LANGS.find(l => l[0] === chatLang())?.[1] : SL('chatLangSame', { l: CHAT_LANGS.find(l => l[0] === COURSE_LANG)?.[1] || COURSE_LANG }), icon: '🗣', run: () => setTimeout(() => langMenu(more.querySelector('button') || more), 0) }], { label: X.L('more') });
+    { label: SL('chatLangItem'), sub: (chatLangChoices().find(([v]) => v && chatLangIs(v)) || chatLangChoices()[0])[1], icon: '🗣', run: () => setTimeout(() => langMenu(more.querySelector('button') || more), 0) }], { label: X.L('more') });
   const modeBtn = h('button', { class: 'ns-modesel', type: 'button', 'data-pop': '1', 'aria-haspopup': 'menu', 'aria-expanded': 'false', onclick: e => { e.stopPropagation(); const had = modeWrap.querySelector(':scope > .ns-pop'); X.closePops(); if (had) return;
     X.popMenu(modeBtn, Object.keys(MODES).filter(k => MODES[k].chip !== false || T.mode === k).map(k => ({ label: modeName(k), sub: modeSub(k), icon: T.mode === k ? '✓' : ' ', run: () => { T.mode = k; renderTutor(); } }))); } },
     h('b', {}, modeName(T.mode)), modeSub(T.mode) ? h('span', { class: 'sub' }, ' · ' + modeSub(T.mode)) : null, h('span', { class: 'caret', 'aria-hidden': 'true' }, '▾'));
   const modeWrap = h('div', { class: 'ns-menu ns-modewrap' }, modeBtn);
-  const ex = T.ctx?.kind === 'exercise', what = ex ? SL('forExercise') : T.ctx ? ctxLabel().replace(/^\S+\s/, '').replace(/^Ch\d+\s*·\s*/, '') : SL('tutorWhole');
+  const ex = T.ctx?.kind === 'exercise', what = ex ? SL('forExercise') : T.ctx ? (ctxParts()?.[2] ?? '') : SL('tutorWhole');
   d.append(
     h('div', { class: 'dh ns-dh', lang: uiLang() },   // the frame's words: capitals and hyphens of the menus' language (the page has the subject's)
       h('div', { class: 'top' }, tutorFace(), h('b', { class: 'ns-tname grow' }, TUTOR.name), more,
@@ -685,18 +759,18 @@ function renderShellTutor(d) {
     msgs,
     h('div', { class: 'composer' },
       h('textarea', { rows: 1, placeholder: SL('tutorWrite'), 'aria-label': SL('tutorWrite'), onkeydown: e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); } }, oninput: e => { e.target.style.height = 'auto'; e.target.style.height = Math.min(160, e.target.scrollHeight) + 'px'; } }),
-      h('button', { class: 'send', title: 'Send', 'aria-label': 'Send', onclick: send }, '➤')));
+      h('button', { class: 'send', title: tE('engine.tutor.send'), 'aria-label': tE('engine.tutor.send'), onclick: send }, '➤')));
   if (T.showHistory) { renderConvoHistory(msgs); return; }
   if (!hist.length) {
     const topic = T.ctx && !ex ? '«' + what + '»' : what;
-    const hi = SL('greet' + (MODE_WORDS[T.mode] || 'Socratic'), { name: ACCOUNT.name || '', topic });
+    const hi = SL('greet' + (MODE_WORDS[T.mode] || 'Socratic'), { name: ACCOUNT.name || '', topic });   // i18n-ignore
     msgs.append(h('div', { class: 'msg ai ns-greet', lang: uiLang() }, ACCOUNT.name ? hi : hi.replace(/,?\s+([.,])/, '$1')));   // no name: "Hi." 
   }
   hist.forEach(m => {
     if (m.hidden) return;
     const b = h('div', { class: 'msg ' + (m.role === 'user' ? 'me' : 'ai') }, md(m.text));
     const res = m.meta?.noemaState?.resolved || [];
-    if (m.role !== 'user' && res.some(r => r.lesson)) b.append(h('div', { class: 'lessonchips' }, ...res.filter(r => r.lesson).map(r => h('span', { class: 'lessonchip', html: '📌 <b>Saved to your lessons:</b> ' + fmt(r.lesson) }))));
+    if (m.role !== 'user' && res.some(r => r.lesson)) b.append(h('div', { class: 'lessonchips' }, ...res.filter(r => r.lesson).map(r => h('span', { class: 'lessonchip', html: '📌 ' + tE('engine.tutor.savedLesson', { lesson: fmt(r.lesson) }) }))));
     msgs.append(b);
   });
   const tb = threadTracker(tutorCtxKey(), hist.length); if (tb) msgs.before(tb);
@@ -710,35 +784,36 @@ function renderTutor() {
   d.append(
     h('div', { class: 'dh' },
       h('div', { class: 'top' }, tutorFace(),
-        h('div', { class: 'grow' }, h('b', {}, TUTOR.name), h('div', { class: 'tiny' }, 'Your Gemini-powered tutor · ' + (S.settings.model || 'auto model'))),
+        h('div', { class: 'grow' }, h('b', {}, TUTOR.name), h('div', { class: 'tiny' }, tE('engine.tutor.poweredBy', { model: S.settings.model || tE('engine.tutor.autoModel') }))),
         ...tutorTools(),
-        h('button', { class: 'iconbtn', title: 'Close', 'aria-label': 'Close', onclick: closeTutor }, '✕')),
+        h('button', { class: 'iconbtn', title: tE('engine.tutor.close'), 'aria-label': tE('engine.tutor.close'), onclick: closeTutor }, '✕')),
       h('div', { class: 'row' }, h('span', { class: 'ctxchip' }, ctxLabel()),
-        T.ctx ? h('button', { class: 'tiny', style: { textDecoration: 'underline' }, onclick: () => setTutorContext(null) }, 'use whole course') : null,
+        T.ctx ? h('button', { class: 'tiny', style: { textDecoration: 'underline' }, onclick: () => setTutorContext(null) }, tE('engine.tutor.useWhole')) : null,
         chatLangSelect({ cls: 'chatlang', onChange: () => renderTutor() })),
       h('div', { class: 'modechips' }, ...Object.entries(MODES).filter(([k, m]) => m.chip !== false || T.mode === k).map(([k, m]) => h('button', { class: T.mode === k ? 'on' : '', onclick: () => { T.mode = k; renderTutor(); } }, m.label)))),
     msgs,
     h('div', { class: 'composer' },
-      h('textarea', { rows: 1, placeholder: 'Your answer or question…', onkeydown: e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); const v = e.target.value.trim(); if (v) { e.target.value = ''; sendTutor(v); } } }, oninput: e => { e.target.style.height = 'auto'; e.target.style.height = Math.min(160, e.target.scrollHeight) + 'px'; } }),
-      h('button', { class: 'send', title: 'Send', onclick: () => { const ta = $('.composer textarea'); const v = ta.value.trim(); if (v) { ta.value = ''; sendTutor(v); } } }, '➤')));
+      h('textarea', { rows: 1, placeholder: tE('engine.tutor.placeholder'), onkeydown: e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); const v = e.target.value.trim(); if (v) { e.target.value = ''; sendTutor(v); } } }, oninput: e => { e.target.style.height = 'auto'; e.target.style.height = Math.min(160, e.target.scrollHeight) + 'px'; } }),
+      h('button', { class: 'send', title: tE('engine.tutor.send'), onclick: () => { const ta = $('.composer textarea'); const v = ta.value.trim(); if (v) { ta.value = ''; sendTutor(v); } } }, '➤')));
   if (T.showHistory) { renderConvoHistory(msgs); return; }
   if (!hist.length) {
     const topic = T.ctx ? ctxLabel().replace(/^\S+\s/, '') : SUBJ.title;
-    msgs.append(h('div', { class: 'msg ai' }, md(`Hi ${ACCOUNT.name || 'there'}! I'm **${TUTOR.name}** ${TUTOR.avatar}. Mode: **${MODES[T.mode].label}**. Pick a starter or just type.`)),
+    const greet = { name: ACCOUNT.name, tutor: TUTOR.name, avatar: TUTOR.avatar, mode: MODES[T.mode].label };
+    msgs.append(h('div', { class: 'msg ai' }, md(ACCOUNT.name ? tE('engine.tutor.greet', greet) : tE('engine.tutor.greetAnon', greet))),
       h('div', { class: 'starters' },
-        ...[
-          [`${TUTOR.avatar} Question me Socratically on this`, 'socratic', `Start a Socratic session on: ${topic}. Begin by probing what I already think.`],
-          ['⚡ Rapid-fire quiz, traps only', 'quiz', `Quiz me on ${topic}. Focus on certification traps and pitfalls.`],
-          ['🔧 Simulate a broken scenario', 'debug', `Start a debugging simulation related to: ${topic}.`],
-          ['🎤 Interview me', 'interview', `Interview me about ${topic}.`],
-          ['💡 Explain it differently', 'explain', `Explain the core idea of ${topic} differently from the notes.`],
+        ...[   // [the button, the mode, the learner's first message: their bubble, in the UI language — the reply-language rule tells the AI how to answer]
+          [`${TUTOR.avatar} ` + tE('engine.tutor.starterSocratic'), 'socratic', tE('engine.aimsg.startSocratic', { topic })],
+          ['⚡ ' + tE('engine.tutor.starterQuiz'), 'quiz', tE('engine.aimsg.startQuiz', { topic })],
+          ['🔧 ' + tE('engine.tutor.starterDebug'), 'debug', tE('engine.aimsg.startDebug', { topic })],
+          ['🎤 ' + tE('engine.tutor.starterInterview'), 'interview', tE('engine.aimsg.startInterview', { topic })],
+          ['💡 ' + tE('engine.tutor.starterExplain'), 'explain', tE('engine.aimsg.startExplain', { topic })],
         ].map(([l, m, msg]) => h('button', { onclick: () => { T.mode = m; renderTutor(); sendTutor(msg); } }, l))));
   }
   hist.forEach(m => {
     if (m.hidden) return;
     const b = h('div', { class: 'msg ' + (m.role === 'user' ? 'me' : 'ai') }, md(m.text));
     const res = m.meta?.noemaState?.resolved || [];
-    if (m.role !== 'user' && res.some(r => r.lesson)) b.append(h('div', { class: 'lessonchips' }, ...res.filter(r => r.lesson).map(r => h('span', { class: 'lessonchip', html: '📌 <b>Saved to your lessons:</b> ' + fmt(r.lesson) }))));
+    if (m.role !== 'user' && res.some(r => r.lesson)) b.append(h('div', { class: 'lessonchips' }, ...res.filter(r => r.lesson).map(r => h('span', { class: 'lessonchip', html: '📌 ' + tE('engine.tutor.savedLesson', { lesson: fmt(r.lesson) }) }))));
     msgs.append(b);
   });
   const tb = threadTracker(tutorCtxKey(), hist.length); if (tb) msgs.before(tb);
@@ -749,8 +824,8 @@ function tutorIntent(key, given) {
   return given || T.intents[key] || (T.hist[key] || []).find(m => m.meta?.intent)?.meta.intent || null;
 }
 /** The instructions of a tutor turn: the mode, then why the conversation was opened, then the course context. */
-function tutorSystem(intent) {
-  return MODES[T.mode].sys.replaceAll('{{tutor}}', TUTOR.name) + (intent ? '\n\nWHY THIS CONVERSATION WAS OPENED — your task in it (unless the learner asks for something else):\n' + intent : '') + '\n\n' + tutorContextText();
+function tutorSystem(intent) {   // i18n-ignore
+  return MODES[T.mode].sys.replaceAll('{{tutor}}', TUTOR.name) + (intent ? '\n\nWHY THIS CONVERSATION WAS OPENED — your task in it (unless the learner asks for something else):\n' + intent : '') + '\n\n' + tutorContextText();   // i18n-ignore
 }
 async function sendTutor(text, hidden = false, opts = {}) {
   if (T.busy) return;
@@ -771,57 +846,63 @@ async function sendTutor(text, hidden = false, opts = {}) {
   let system = tutorSystem(intent);
   { const lr = langRule(); if (lr) system += '\n\n' + lr; }
   if (threaded) system += '\n\n' + tutorStateBlock(ts, directive);
-  else if (directive === 'wrapup') system += '\n\nWRAP UP NOW: answer any question still pending with an authoritative **✅ Answer:**, then give **🎓 What you learned:** (3–7 concrete bullets of the key takeaways of this conversation) and one optional next step. Ask no new question.';
+  else if (directive === 'wrapup') system += '\n\nWRAP UP NOW: answer any question still pending with an authoritative **✅ Answer:**, then give **🎓 What you learned:** (3–7 concrete bullets of the key takeaways of this conversation) and one optional next step. Ask no new question.' + inReplyLang();   // i18n-ignore
   const contents = hist.map(m => ({ role: m.role === 'user' ? 'user' : 'model', parts: [{ text: m.text }] }));
   try {
     const full = await gemini({ system, contents, onChunk: t => { bubble.innerHTML = ''; bubble.append(md(splitControl(t).clean || '…')); msgs.scrollTop = msgs.scrollHeight; } });
     const { clean, control } = splitControl(full);
     const msg = { role: 'model', text: clean || full, t: Date.now() };
-    if (threaded) { if (control) { control._text = clean; } const got = applyControl(ts, control, hist.length); if (control) { delete control._text; msg.meta = { noemaState: control }; } if (got.length) toast(`📌 ${got.length} lesson${got.length > 1 ? 's' : ''} learned`); }
+    if (threaded) { if (control) { control._text = clean; } const got = applyControl(ts, control, hist.length); if (control) { delete control._text; msg.meta = { noemaState: control }; } if (got.length) toast('📌 ' + tE('engine.tutor.lessonsLearned', { n: got.length })); }
     hist.push(msg);
     persistConvo(key); maybeAutoTitle(key);
     touchStreak();
     renderTutor();
   } catch (e) {
     hist.pop(); persistConvo(key);
-    bubble.className = 'msg err'; bubble.innerHTML = ''; bubble.append(md('⚠️ ' + e.message), h('div', { class: 'row', style: { marginTop: '8px' } }, h('button', { class: 'btn small', onclick: openSettings }, '⚙️ Settings'), /key/i.test(e.message) ? h('button', { class: 'btn small ghost', onclick: () => openGuide('gemini') }, '🔑 How to get a key') : null));
+    bubble.className = 'msg err'; bubble.innerHTML = ''; bubble.append(md('⚠️ ' + errText(e)), h('div', { class: 'row', style: { marginTop: '8px' } }, h('button', { class: 'btn small', onclick: openSettings }, '⚙️ ' + tE('engine.tutor.settings')), e.needsKey || /key/i.test(e.message) ? h('button', { class: 'btn small ghost', onclick: () => openGuide('gemini') }, '🔑 ' + tE('engine.tutor.howKey')) : null));
   } finally { T.busy = false; }
 }
 
 /* ---------- AI helpers for exercises ---------- */
 async function aiGrade(ex, answer) {
   const schema = { type: 'OBJECT', properties: { score: { type: 'INTEGER' }, verdict: { type: 'STRING' }, covered: { type: 'ARRAY', items: { type: 'STRING' } }, missing: { type: 'ARRAY', items: { type: 'STRING' } }, mistakes: { type: 'ARRAY', items: { type: 'STRING' } }, feedback: { type: 'STRING' } }, required: ['score', 'verdict', 'feedback'] };
+  /* i18n-ignore-start */   // the grading prompt (English; langFields() asks for the learner's language)
   const ref = ex.type === 'write' ? `Reference solution:\n${ex.solution}` : `Model answer:\n${ex.model}\nRubric key points:\n- ${(ex.rubric || []).join('\n- ')}`;
   const sec = SEC[ex.section];
   const prompt = `Grade the learner's answer to a ${TUTOR.domain} exercise.\nQuestion: ${ex.q}\n${ex.code ? 'Code shown:\n' + ex.code + '\n' : ''}${ref}\n\nLearner's answer:\n"""${answer}"""\n\nSection notes (ground truth):\n${sec ? sectionText(sec).slice(0, 6000) : ''}\n\nReturn JSON: score 0-100 (meaning, not wording; for code accept equivalent correct syntax), verdict (one short line), covered (rubric points hit), missing (points missed), mistakes (factual errors), feedback (2-4 sentences, encouraging, specific, end with a nudge question).`;
   const g = await geminiJSON(prompt, `You are a strict but kind ${TUTOR.examinerRole}. Output only JSON.${langFields('the verdict, covered, missing and mistakes texts')}`, schema);
+  /* i18n-ignore-end */
   try {
     const sec = SEC[ex.section];
     logAI(ex.type === 'write' ? 'code-review' : 'grading', {
-      ctx: { kind: 'exercise', id: ex.id, label: `${sec ? 'Ch' + sec._ch.num + ' · ' + sec.title + ' · ' : ''}${ex.id}` },
-      title: `${ex.type === 'write' ? 'Code review' : 'Grading'}: ${String(ex.q || '').replace(/[*`_]/g, '').slice(0, 70)}`,
-      prompt: `**Question:** ${ex.q}${ex.code ? '\n\n```\n' + ex.code + '\n```' : ''}\n\n**My answer:**\n\n${ex.type === 'write' ? '```\n' + answer + '\n```' : answer}`,
-      response: `**Score: ${g.score}/100** — ${g.verdict || ''}\n\n${g.covered?.length ? '✅ ' + g.covered.join(' · ') + '\n\n' : ''}${g.missing?.length ? '➕ Missing: ' + g.missing.join(' · ') + '\n\n' : ''}${g.mistakes?.length ? '❌ ' + g.mistakes.join(' · ') + '\n\n' : ''}${g.feedback || ''}` });
+      ctx: { kind: 'exercise', id: ex.id, label: sec ? tE('engine.log.exCtx', { ch: chTitle(sec._ch.num, sec.title), id: ex.id }) : ex.id },
+      title: tE(ex.type === 'write' ? 'engine.log.codeReview' : 'engine.log.grading', { q: String(ex.q || '').replace(/[*`_]/g, '').slice(0, 70) }),
+      prompt: tE('engine.log.questionMd', { q: ex.q }) + (ex.code ? '\n\n```\n' + ex.code + '\n```' : '') + '\n\n' + tE('engine.log.myAnswerMd') + '\n\n' + (ex.type === 'write' ? '```\n' + answer + '\n```' : answer),
+      response: tE('engine.log.scoreMd', { score: g.score }) + ' — ' + (g.verdict || '') + '\n\n' + (g.covered?.length ? '✅ ' + g.covered.join(' · ') + '\n\n' : '') + (g.missing?.length ? '➕ ' + tE('engine.log.missing', { list: g.missing.join(' · ') }) + '\n\n' : '') + (g.mistakes?.length ? '❌ ' + g.mistakes.join(' · ') + '\n\n' : '') + (g.feedback || '') });
   } catch (e) { }
   return g;
 }
 async function aiQuestion(sec, kind = 'mcq') {
   const schema = { type: 'OBJECT', properties: { q: { type: 'STRING' }, code: { type: 'STRING' }, options: { type: 'ARRAY', items: { type: 'STRING' } }, answer: { type: 'INTEGER' }, why: { type: 'ARRAY', items: { type: 'STRING' } }, explain: { type: 'STRING' } }, required: ['q', 'options', 'answer', 'why', 'explain'] };
+  /* i18n-ignore-start */   // the question prompt (English; langFields() asks for the learner's language)
   const seen = shuffle(sec._ch.exercises.filter(e => e.section === sec.id)).slice(0, 6).map(e => '- ' + e.q).join('\n');
   const prompt = `Create ONE fresh, tricky multiple-choice question (4 options, exactly one correct) that tests deep understanding of this ${TUTOR.domain} section. Prefer a scenario, a prediction, a debugging decision or a certification trap. Avoid duplicating these existing questions:\n${seen}\n\nSECTION NOTES (only use facts from here):\n${sectionText(sec).slice(0, 9000)}\n\nJSON fields: q (inline markdown with **bold** and \`code\` allowed), code (optional snippet or empty string), options (4 strings), answer (0-3), why (4 short strings: why each option is right/wrong), explain (2-4 sentences that teach).`;
-  const r = await geminiJSON(prompt, 'You write excellent exam questions. Output only JSON.', schema);
-  try { logAI('question', { ctx: { kind: 'section', id: sec.id, label: `Ch${sec._ch.num} · ${sec.title}` }, title: `AI question: ${String(r.q || '').replace(/[*`_]/g, '').slice(0, 70)}`,
-    prompt: `Generate a fresh, tricky question on “${sec.title}”.`,
-    response: `${r.q}${r.code ? '\n\n```\n' + r.code + '\n```' : ''}\n\n${(r.options || []).map((o, i) => `${i === (r.answer | 0) ? '✅' : '▫️'} ${String.fromCharCode(65 + i)}. ${o}${r.why?.[i] ? ' — *' + r.why[i] + '*' : ''}`).join('\n')}\n\n**Explanation:** ${r.explain || ''}` }); } catch (e) { }
+  const r = await geminiJSON(prompt, 'You write excellent exam questions. Output only JSON.' + langFields('q, options, why and explain'), schema);
+  /* i18n-ignore-end */
+  try { logAI('question', { ctx: { kind: 'section', id: sec.id, label: chTitle(sec._ch.num, sec.title) }, title: tE('engine.log.aiQuestion', { q: String(r.q || '').replace(/[*`_]/g, '').slice(0, 70) }),
+    prompt: tE('engine.log.aiQuestionAsk', { title: sec.title }),
+    response: `${r.q}${r.code ? '\n\n```\n' + r.code + '\n```' : ''}\n\n${(r.options || []).map((o, i) => `${i === (r.answer | 0) ? '✅' : '▫️'} ${String.fromCharCode(65 + i)}. ${o}${r.why?.[i] ? ' — *' + r.why[i] + '*' : ''}`).join('\n')}\n\n` + tE('engine.log.explanationMd', { text: r.explain || '' }) }); } catch (e) { }
   return { id: 'ai-' + Date.now(), type: 'mcq', section: sec.id, difficulty: 2, tags: ['concept'], q: r.q, code: r.code || undefined, options: r.options.slice(0, 4), answer: Math.max(0, Math.min(3, r.answer | 0)), why: (r.why || []).slice(0, 4), explain: r.explain, _ch: sec._ch, _ai: true };
 }
 async function aiDrillGrade(d, answer) {
   const schema = { type: 'OBJECT', properties: { score: { type: 'INTEGER' }, hit: { type: 'ARRAY', items: { type: 'INTEGER' } }, feedback: { type: 'STRING' } }, required: ['score', 'hit', 'feedback'] };
+  /* i18n-ignore-start */   // the drill-grading prompt (English; langFields() asks for the learner's language)
   const prompt = `A learner was shown this debugging symptom and listed the questions they would ask themselves.\nSymptom: ${d.symptom}\nCanonical ordered checklist:\n${d.askYourself.map((q, i) => `${i}. ${q}`).join('\n')}\n\nLearner wrote:\n"""${answer}"""\n\nReturn JSON: hit = indexes of checklist questions the learner covered (same meaning counts), score 0-100 (coverage + sensible order), feedback 2-3 sentences: what they nailed, the most important one they missed and why it matters.`;
   const g = await geminiJSON(prompt, 'You are a precise debugging coach. Output only JSON.' + langFields('the feedback'), schema);
-  try { logAI('drill-grading', { ctx: { kind: 'playbook', id: d.id, label: d.title }, title: `Drill: ${d.title}`.slice(0, 90),
-    prompt: `**Symptom:** ${d.symptom}\n\n**The questions I would ask myself:**\n\n${answer}`,
-    response: `**Score: ${g.score}/100** — covered ${(g.hit || []).length}/${d.askYourself.length}\n\n${g.feedback || ''}\n\n**Canonical checklist:**\n${d.askYourself.map((q, i) => `${(g.hit || []).includes(i) ? '✅' : '▫️'} ${i + 1}. ${q}`).join('\n')}` }); } catch (e) { }
+  /* i18n-ignore-end */
+  try { logAI('drill-grading', { ctx: { kind: 'playbook', id: d.id, label: d.title }, title: tE('engine.log.drill', { title: d.title }).slice(0, 90),
+    prompt: tE('engine.log.symptomMd', { symptom: d.symptom }) + '\n\n' + tE('engine.log.myQuestionsMd') + '\n\n' + answer,
+    response: tE('engine.log.drillScoreMd', { score: g.score, hit: (g.hit || []).length, of: d.askYourself.length }) + '\n\n' + (g.feedback || '') + '\n\n' + tE('engine.log.checklistMd') + '\n' + d.askYourself.map((q, i) => `${(g.hit || []).includes(i) ? '✅' : '▫️'} ${i + 1}. ${q}`).join('\n') }); } catch (e) { }
   return g;
 }
 
@@ -830,8 +911,12 @@ function openSettings() { openAccountMenu('settings'); }
 
 /* ---- 30_exercises.js ---- */
 /* ===================== Exercise engine ===================== */
-const TYPE_LABEL = { mcq: '🎯 Choose', tf: '⚖️ True / False', odd: '🕵️ Odd one out', order: '🔢 Put in order', match: '🔗 Match', bucket: '🗂️ Sort', cloze: '✍️ Fill the gaps', spotbug: '🐞 Spot the bug', calc: '🧮 Calculate', scenario: '🚨 Debug simulation', free: '🗣️ Explain it', write: '⌨️ Write the code' };
-const TAG_LABEL = { concept: 'concept', syntax: 'syntax', pitfall: '⚠️ pitfall', debug: '🔧 debug', exam: '🎓 exam trap', interview: '🎤 interview', calc: '🧮 calc', compare: '⚖️ compare' };
+/* The label of an exercise type / tag: its emoji + its words in the UI language (engine.exType.<type>, engine.exTag.<tag>).
+   TYPE_LABEL[type] reads like the old map; other modules add their types' emoji to TYPE_ICON (35_visual.js). */
+const TYPE_ICON = { mcq: '🎯', tf: '⚖️', odd: '🕵️', order: '🔢', match: '🔗', bucket: '🗂️', cloze: '✍️', spotbug: '🐞', calc: '🧮', scenario: '🚨', free: '🗣️', write: '⌨️' };
+const TAG_ICON = { concept: '', syntax: '', pitfall: '⚠️', debug: '🔧', exam: '🎓', interview: '🎤', calc: '🧮', compare: '⚖️' };
+const iconLabel = (icons, prefix) => new Proxy(icons, { get: (o, k) => typeof k === 'string' && Object.prototype.hasOwnProperty.call(o, k) ? (o[k] ? o[k] + ' ' : '') + tE(prefix + k) : undefined });
+const TYPE_LABEL = iconLabel(TYPE_ICON, 'engine.exType.'), TAG_LABEL = iconLabel(TAG_ICON, 'engine.exTag.');
 const PAIR_COLORS = ['#7c5cff', '#ff922b', '#12b5a5', '#e64fa5', '#3b9cf6', '#40c057', '#f2a20c'];
 
 /* Each renderer returns { el, check(): true|false|null, reveal(), auto?: bool, selfDone?: bool } */
@@ -849,7 +934,7 @@ R.mcq = (ex, api) => {
     b._oi = oi; return b;
   });
   wrap.append(...btns);
-  const el = h('div', {}, multi ? h('div', { class: 'tiny', style: { marginBottom: '8px' } }, `Select ALL that apply (${ans.size}).`) : null, wrap);
+  const el = h('div', {}, multi ? h('div', { class: 'tiny', style: { marginBottom: '8px' } }, tE('engine.ex.selectAll', { n: ans.size })) : null, wrap);
   return {
     el, keys: k => { const b = btns[k]; b && b.click(); },
     check() { if (!sel.size) return null; return sel.size === ans.size && [...sel].every(x => ans.has(x)); },
@@ -862,7 +947,7 @@ R.odd = (ex, api) => { const r = R.mcq(ex, api); r.el.querySelector('.opts').cla
 R.tf = (ex, api) => {
   let pick = null;
   const mk = (v, label, cls) => h('button', { class: 'tfbtn ' + cls, onclick: () => { if (api.locked()) return; pick = v; api.check(); } }, label);
-  const t = mk(true, '👍 True', 't'), f = mk(false, '👎 False', 'f');
+  const t = mk(true, '👍 ' + tE('engine.ex.true'), 't'), f = mk(false, '👎 ' + tE('engine.ex.false'), 'f');
   return {
     el: h('div', { class: 'tfrow' }, t, f), keys: k => (k === 0 ? t : k === 1 ? f : null)?.click(),
     check: () => pick === null ? null : pick === ex.answer,
@@ -877,8 +962,8 @@ R.order = (ex, api) => {
   const items = shuffle(ex.items.map((t, i) => ({ t, i })));
   function draw() {
     seq.innerHTML = ''; pool.innerHTML = '';
-    if (!picked.length) seq.append(h('div', { class: 'ph' }, 'Tap the items below in the right order ↓'));
-    picked.forEach((it, k) => seq.append(h('button', { class: 'chipx', onclick: () => { if (api.locked()) return; picked.splice(k, 1); draw(); } }, h('span', { class: 'no' }, k + 1), F(it.t))));
+    if (!picked.length) seq.append(h('div', { class: 'ph' }, tE('engine.ex.orderHint')));
+    picked.forEach((it, k) => seq.append(h('button', { class: 'chipx', onclick: () => { if (api.locked()) return; picked.splice(k, 1); draw(); } }, h('span', { class: 'no' }, nf(k + 1)), F(it.t))));
     items.filter(it => !picked.includes(it)).forEach(it => pool.append(h('button', { class: 'chipx', onclick: () => { if (api.locked()) return; picked.push(it); draw(); } }, F(it.t))));
   }
   draw();
@@ -888,7 +973,7 @@ R.order = (ex, api) => {
     given: () => picked.map(it => it.t).join(' → '),
     reveal() {
       $$('.chipx', seq).forEach((b, k) => b.classList.add(picked[k].i === k ? 'right' : 'wrong'));
-      if (!picked.every((it, k) => it.i === k)) seq.after(h('div', { class: 'fb info' }, h('b', {}, 'Correct order: '), h('ol', { style: { margin: '6px 0 0', paddingLeft: '20px' } }, ...ex.items.map(t => h('li', { html: fmt(t) })))));
+      if (!picked.every((it, k) => it.i === k)) seq.after(h('div', { class: 'fb info' }, h('b', {}, tE('engine.ex.correctOrder') + ' '), h('ol', { style: { margin: '6px 0 0', paddingLeft: '20px' } }, ...ex.items.map(t => h('li', { html: fmt(t) })))));
     },
   };
 };
@@ -903,19 +988,19 @@ R.match = (ex, api) => {
     const used = Object.entries(link);
     Object.values(lb).forEach(b => { b.classList.remove('sel'); b.querySelector('.tag')?.remove(); b.style.borderColor = ''; });
     Object.values(rb).forEach(b => { b.querySelector('.tag')?.remove(); b.style.borderColor = ''; });
-    used.forEach(([l, r], k) => { const c = PAIR_COLORS[k % PAIR_COLORS.length]; [lb[l], rb[r]].forEach(b => { b.style.borderColor = c; b.append(h('span', { class: 'tag', style: { background: c } }, k + 1)); }); });
+    used.forEach(([l, r], k) => { const c = PAIR_COLORS[k % PAIR_COLORS.length]; [lb[l], rb[r]].forEach(b => { b.style.borderColor = c; b.append(h('span', { class: 'tag', style: { background: c } }, nf(k + 1))); }); });
     if (selL != null) lb[selL].classList.add('sel');
   }
   L.forEach(it => { lb[it.i] = h('button', { class: 'mitem', onclick: () => { if (api.locked()) return; if (link[it.i] != null) { delete link[it.i]; } selL = selL === it.i ? null : it.i; paint(); } }, F(it.t)); lcol.append(lb[it.i]); });
   Rr.forEach(it => { rb[it.i] = h('button', { class: 'mitem', onclick: () => { if (api.locked()) return; const owner = Object.keys(link).find(k => link[k] === it.i); if (owner != null) delete link[owner]; if (selL != null) { link[selL] = it.i; selL = null; const next = L.find(x => link[x.i] == null); if (next) selL = next.i; } paint(); } }, F(it.t)); rcol.append(rb[it.i]); });
   selL = 0; paint();
   return {
-    el: h('div', {}, h('div', { class: 'tiny', style: { marginBottom: '8px' } }, 'Tap a left item, then its partner on the right.'), h('div', { class: 'matchgrid' }, lcol, rcol)),
+    el: h('div', {}, h('div', { class: 'tiny', style: { marginBottom: '8px' } }, tE('engine.ex.matchHint')), h('div', { class: 'matchgrid' }, lcol, rcol)),
     check: () => Object.keys(link).length < L.length ? null : L.every(it => link[it.i] === it.i),
     given: () => L.filter(it => link[it.i] != null).map(it => it.t + ' = ' + ex.pairs[link[it.i]][1]).join('; '),
     reveal() {
       L.forEach(it => { const ok = link[it.i] === it.i; lb[it.i].classList.add(ok ? 'right' : 'wrong'); });
-      if (!L.every(it => link[it.i] === it.i)) lcol.parentElement.after(h('div', { class: 'fb info' }, h('b', {}, 'Correct pairs:'), h('ul', { style: { margin: '6px 0 0', paddingLeft: '20px' } }, ...ex.pairs.map(p => h('li', { html: fmt(p[0]) + ' → ' + fmt(p[1]) })))));
+      if (!L.every(it => link[it.i] === it.i)) lcol.parentElement.after(h('div', { class: 'fb info' }, h('b', {}, tE('engine.ex.correctPairs')), h('ul', { style: { margin: '6px 0 0', paddingLeft: '20px' } }, ...ex.pairs.map(p => h('li', { html: fmt(p[0]) + ' → ' + fmt(p[1]) })))));
     },
   };
 };
@@ -941,11 +1026,11 @@ R.bucket = (ex, api) => {
     pool.innerHTML = ''; zones.forEach(z => z.querySelector('.pool').innerHTML = '');
     items.forEach(it => (place[it.i] == null ? pool : zones[place[it.i]].querySelector('.pool')).append(chip(it)));
     zones.forEach(z => z.classList.toggle('hot', sel != null));
-    if (!pool.children.length) pool.append(h('span', { class: 'tiny' }, 'All sorted — check it!'));
+    if (!pool.children.length) pool.append(h('span', { class: 'tiny' }, tE('engine.ex.allSorted')));
   }
   draw();
   return {
-    el: h('div', {}, h('div', { class: 'tiny', style: { marginBottom: '8px' } }, 'Tap an item, then tap its bucket (or drag).'), pool, h('div', { class: 'buckets' }, ...zones)),
+    el: h('div', {}, h('div', { class: 'tiny', style: { marginBottom: '8px' } }, tE('engine.ex.bucketHint')), pool, h('div', { class: 'buckets' }, ...zones)),
     check: () => Object.keys(place).length < items.length ? null : items.every(it => place[it.i] === it.bucket),
     given: () => items.filter(it => place[it.i] != null).map(it => it.text + ' → ' + ex.buckets[place[it.i]]).join('; '),
     reveal() { zones.forEach(z => $$('.chipx', z).forEach(b => { const ok = place[b._it.i] === b._it.bucket; b.classList.add(ok ? 'right' : 'wrong'); if (!ok) b.append(h('small', { style: { opacity: .8 } }, ' → ' + ex.buckets[b._it.bucket])); })); },
@@ -999,10 +1084,10 @@ R.spotbug = (ex, api) => {
   const lines = ex.lines.map((l, i) => h('button', { onclick: () => { if (api.locked()) return; sel.has(i) ? sel.delete(i) : sel.add(i); lines[i].classList.toggle('sel'); } }, h('span', { class: 'ln' }, i + 1), h('span', { html: highlight(l, ex.lang || guessLang(ex.lines.join('\n'))) })));
   const bugs = new Set(ex.bugs);
   return {
-    el: h('div', {}, h('div', { class: 'tiny', style: { marginBottom: '8px' } }, `Click the buggy line${bugs.size > 1 ? 's (' + bugs.size + ')' : ''}.`), h('div', { class: 'codelines' }, ...lines)),
+    el: h('div', {}, h('div', { class: 'tiny', style: { marginBottom: '8px' } }, tE('engine.ex.spotbugHint', { n: bugs.size })), h('div', { class: 'codelines' }, ...lines)),
     check: () => !sel.size ? null : sel.size === bugs.size && [...sel].every(i => bugs.has(i)),
-    given: () => [...sel].sort((a, b) => a - b).map(i => 'line ' + (i + 1) + ' (0-based ' + i + ')').join(', '),
-    reveal() { lines.forEach((b, i) => { if (bugs.has(i)) b.classList.add('right'); else if (sel.has(i)) b.classList.add('wrong'); }); lines[0].parentElement.after(h('div', { class: 'fb ok' }, h('b', {}, '🔧 Fix'), /\n|;|\(|=/.test(ex.fix) ? codeBlock(ex.fix, ex.lang || guessLang(ex.fix)) : h('div', { html: fmt(ex.fix) }))); },
+    given: () => [...sel].sort((a, b) => a - b).map(i => 'line ' + (i + 1) + ' (0-based ' + i + ')').join(', '),   // i18n-ignore (for the AI)
+    reveal() { lines.forEach((b, i) => { if (bugs.has(i)) b.classList.add('right'); else if (sel.has(i)) b.classList.add('wrong'); }); lines[0].parentElement.after(h('div', { class: 'fb ok' }, h('b', {}, '🔧 ' + tE('engine.ex.fix')), /\n|;|\(|=/.test(ex.fix) ? codeBlock(ex.fix, ex.lang || guessLang(ex.fix)) : h('div', { html: fmt(ex.fix) }))); },
   };
 };
 
@@ -1021,7 +1106,7 @@ R.scenario = (ex, api) => {
   let k = 0, mistakes = 0;
   function step() {
     const st = ex.steps[k];
-    const div = h('div', { class: 'scstep' }, h('div', { class: 'sp' }, h('span', { class: 'pill c' }, `Step ${k + 1}/${ex.steps.length}`), ' ', F(st.prompt)), st.code ? codeBlock(st.code, guessLang(st.code)) : null);
+    const div = h('div', { class: 'scstep' }, h('div', { class: 'sp' }, h('span', { class: 'pill c' }, tE('engine.ex.step', { n: k + 1, of: ex.steps.length })), ' ', F(st.prompt)), st.code ? codeBlock(st.code, guessLang(st.code)) : null);
     const opts = h('div', { class: 'opts' });
     const fbBox = h('div');
     let done = false;
@@ -1033,7 +1118,7 @@ R.scenario = (ex, api) => {
           done = true; b.classList.add('right'); beep('ok');
           fbBox.append(h('div', { class: 'fb ok', html: '✅ ' + fmt(o.fb) }));
           k++;
-          if (k < ex.steps.length) fbBox.append(h('div', { style: { marginTop: '10px' } }, h('button', { class: 'btn small primary', onclick: e => { e.target.remove(); step(); } }, 'Next step →')));
+          if (k < ex.steps.length) fbBox.append(h('div', { style: { marginTop: '10px' } }, h('button', { class: 'btn small primary', onclick: e => { e.target.remove(); step(); } }, tE('engine.ex.nextStep'))));
           else api.done(mistakes === 0, mistakes);
         } else { mistakes++; b.classList.add('wrong', 'shake'); beep('bad'); fbBox.append(h('div', { class: 'fb bad', html: '❌ ' + fmt(o.fb) })); }
       } }, h('span', { class: 'k' }, String.fromCharCode(65 + i)), F(o.text));
@@ -1047,41 +1132,41 @@ R.scenario = (ex, api) => {
 };
 
 R.free = (ex, api) => {
-  const ta = h('textarea', { class: 'answer', placeholder: 'Explain in your own words… (aim for 2–5 sentences)' });
+  const ta = h('textarea', { class: 'answer', placeholder: tE('engine.ex.freePlaceholder') });
   const out = h('div');
   let finished = false;
   const finish = ok => { if (finished) return; finished = true; api.done(ok); };
   const aiBtn = h('button', { class: 'btn ai', onclick: async () => {
     if (!ta.value.trim()) { ta.classList.add('shake'); setTimeout(() => ta.classList.remove('shake'), 500); return; }
-    aiBtn.disabled = true; aiBtn.textContent = '✨ Grading…';
+    aiBtn.disabled = true; aiBtn.textContent = '✨ ' + tE('engine.ex.grading');
     try {
       const g = await aiGrade(ex, ta.value);
       const sc = Math.max(0, Math.min(100, g.score | 0));
       out.innerHTML = '';
       out.append(h('div', { class: 'fb ai' }, h('div', { class: 'row' }, h('span', { class: 'score', style: { background: sc >= 70 ? 'var(--ok)' : sc >= 45 ? 'var(--warn)' : 'var(--bad)' } }, sc), h('b', { class: 'grow', html: fmt(g.verdict) })),
         g.covered?.length ? h('div', { style: { marginTop: '8px' } }, '✅ ', F(g.covered.join(' · '))) : null,
-        g.missing?.length ? h('div', { style: { marginTop: '4px' } }, '➕ Missing: ', F(g.missing.join(' · '))) : null,
+        g.missing?.length ? h('div', { style: { marginTop: '4px' } }, '➕ ' + tE('engine.ex.missing') + ' ', F(g.missing.join(' · '))) : null,
         g.mistakes?.length ? h('div', { style: { marginTop: '4px' } }, '❌ ', F(g.mistakes.join(' · '))) : null,
         h('div', { style: { marginTop: '8px' } }, md(g.feedback))));
       out.append(modelBox());
       finish(sc >= 70);
-    } catch (e) { out.innerHTML = ''; out.append(h('div', { class: 'fb bad' }, '⚠️ ' + e.message + ' — use Self-check instead.')); aiBtn.disabled = false; aiBtn.textContent = '✨ Grade with AI'; }
-  } }, '✨ Grade with AI');
-  const modelBox = () => h('div', { class: 'explain' }, h('div', { class: 'hd' }, '📘 Model answer'), F(ex.model));
+    } catch (e) { out.innerHTML = ''; out.append(h('div', { class: 'fb bad' }, '⚠️ ' + tE('engine.ex.aiFailedSelf', { error: errText(e) }))); aiBtn.disabled = false; aiBtn.textContent = '✨ ' + tE('engine.ex.gradeAI'); }
+  } }, '✨ ' + tE('engine.ex.gradeAI'));
+  const modelBox = () => h('div', { class: 'explain' }, h('div', { class: 'hd' }, '📘 ' + tE('engine.ex.modelAnswer')), F(ex.model));
   const selfBtn = h('button', { class: 'btn', onclick: () => {
     selfBtn.disabled = true; out.innerHTML = '';
     const checks = ex.rubric.map(r => h('input', { type: 'checkbox' }));
-    out.append(modelBox(), h('div', { class: 'explain rubric' }, h('div', { class: 'hd' }, '☑️ Tick what your answer covered'), ...ex.rubric.map((r, i) => h('label', {}, checks[i], F(r))),
-      h('button', { class: 'btn small primary', style: { marginTop: '8px' }, onclick: e => { const n = checks.filter(c => c.checked).length; e.target.disabled = true; finish(n / ex.rubric.length >= 0.7); } }, 'Done')));
-  } }, '🙋 Self-check');
+    out.append(modelBox(), h('div', { class: 'explain rubric' }, h('div', { class: 'hd' }, '☑️ ' + tE('engine.ex.tickCovered')), ...ex.rubric.map((r, i) => h('label', {}, checks[i], F(r))),
+      h('button', { class: 'btn small primary', style: { marginTop: '8px' }, onclick: e => { const n = checks.filter(c => c.checked).length; e.target.disabled = true; finish(n / ex.rubric.length >= 0.7); } }, tE('engine.ex.done'))));
+  } }, '🙋 ' + tE('engine.ex.selfCheck'));
   return { el: h('div', {}, ta, h('div', { class: 'actions' }, aiBtn, selfBtn), out), selfDone: true, focus: () => ta.focus(), given: () => ta.value.trim() };
 };
 
 R.write = (ex, api) => {
-  const ta = h('textarea', { class: 'answer code', spellcheck: 'false', placeholder: '-- write your ' + (ex.lang || 'code') + ' here', onkeydown: e => { if (e.key === 'Tab') { e.preventDefault(); const s = ta.selectionStart; ta.value = ta.value.slice(0, s) + '  ' + ta.value.slice(ta.selectionEnd); ta.selectionStart = ta.selectionEnd = s + 2; } } });
+  const ta = h('textarea', { class: 'answer code', spellcheck: 'false', placeholder: ex.lang ? tE('engine.ex.writeLang', { lang: ex.lang }) : tE('engine.ex.writeCode'), onkeydown: e => { if (e.key === 'Tab') { e.preventDefault(); const s = ta.selectionStart; ta.value = ta.value.slice(0, s) + '  ' + ta.value.slice(ta.selectionEnd); ta.selectionStart = ta.selectionEnd = s + 2; } } });
   const missing = () => ex.keywords.filter(k => !ta.value.toLowerCase().replace(/\s+/g, ' ').includes(k.toLowerCase().replace(/\s+/g, ' ')));
   return {
-    el: h('div', {}, ta, h('div', { class: 'tiny', style: { marginTop: '6px' } }, 'Checked locally for the essential keywords; use ✨ AI review for a real code review.')),
+    el: h('div', {}, ta, h('div', { class: 'tiny', style: { marginTop: '6px' } }, tE('engine.ex.writeNote'))),
     focus: () => ta.focus(),
     check() { if (!ta.value.trim()) return null; return missing().length === 0; },
     given: () => ta.value.trim() ? '\n```\n' + ta.value.trim() + '\n```\n' : '',
@@ -1089,13 +1174,13 @@ R.write = (ex, api) => {
       ta.readOnly = true;
       const m = missing();
       const box = h('div', {});
-      if (m.length) box.append(h('div', { class: 'fb bad' }, 'Missing essentials: ', ...m.map(k => h('code', { style: { marginRight: '4px' } }, k))));
-      box.append(h('div', { class: 'explain' }, h('div', { class: 'hd' }, '✅ Reference solution'), codeBlock(ex.solution, ex.lang || guessLang(ex.solution))));
+      if (m.length) box.append(h('div', { class: 'fb bad' }, tE('engine.ex.missingEssentials') + ' ', ...m.map(k => h('code', { style: { marginRight: '4px' } }, k))));
+      box.append(h('div', { class: 'explain' }, h('div', { class: 'hd' }, '✅ ' + tE('engine.ex.refSolution')), codeBlock(ex.solution, ex.lang || guessLang(ex.solution))));
       const aiBtn = h('button', { class: 'btn small ai', style: { marginTop: '10px' }, onclick: async () => {
-        aiBtn.disabled = true; aiBtn.textContent = '✨ Reviewing…';
-        try { const g = await aiGrade(ex, ta.value); aiBtn.replaceWith(h('div', { class: 'fb ai' }, h('b', {}, `AI review: ${g.score}/100 — `), F(g.verdict), h('div', { style: { marginTop: '6px' } }, md(g.feedback)))); }
-        catch (e) { aiBtn.replaceWith(h('div', { class: 'fb bad' }, '⚠️ ' + e.message)); }
-      } }, '✨ AI review of my code');
+        aiBtn.disabled = true; aiBtn.textContent = '✨ ' + tE('engine.ex.reviewing');
+        try { const g = await aiGrade(ex, ta.value); aiBtn.replaceWith(h('div', { class: 'fb ai' }, h('b', {}, tE('engine.ex.aiReview', { score: g.score }) + ' '), F(g.verdict), h('div', { style: { marginTop: '6px' } }, md(g.feedback)))); }
+        catch (e) { aiBtn.replaceWith(h('div', { class: 'fb bad' }, '⚠️ ' + errText(e))); }
+      } }, '✨ ' + tE('engine.ex.aiReviewBtn'));
       box.append(aiBtn);
       ta.after(box);
     },
@@ -1122,30 +1207,30 @@ function exerciseCard(ex, { onDone, compact = false, noXP = false, showSection =
   };
   const head = h('div', { class: 'exhead' },
     h('span', { class: 'pill c' }, TYPE_LABEL[ex.type] || ex.type),
-    h('span', { class: 'diff', title: 'difficulty ' + ex.difficulty }, ...[1, 2, 3].map(i => h('i', { class: i <= ex.difficulty ? 'on' : '' }))),
+    h('span', { class: 'diff', title: tE('engine.ex.difficulty', { n: ex.difficulty }) }, ...[1, 2, 3].map(i => h('i', { class: i <= ex.difficulty ? 'on' : '' }))),
     ...(ex.tags || []).filter(t => t !== 'concept').map(t => h('span', { class: 'pill' }, TAG_LABEL[t] || t)),
     newPill(ex),
-    ex._ai ? h('span', { class: 'pill', style: { background: 'var(--violet-bg)', color: 'var(--violet)' } }, '✨ AI-made') : null,
-    showSection && SEC[ex.section] ? h('span', { class: 'tiny', style: { marginLeft: 'auto' } }, `Ch${ch.num} · ${SEC[ex.section].title}`) : null);
+    ex._ai ? h('span', { class: 'pill', style: { background: 'var(--violet-bg)', color: 'var(--violet)' } }, '✨ ' + tE('engine.ex.aiMade')) : null,
+    showSection && SEC[ex.section] ? h('span', { class: 'tiny', style: { marginLeft: 'auto' } }, chTitle(ch.num, SEC[ex.section].title)) : null);
   const q = h('div', { class: 'q', html: fmt(ex.q || '') });
   card.append(head, q);
   if (ex.code) card.append(h('div', { style: { margin: '0 0 12px' } }, codeBlock(ex.code, ex.lang || guessLang(ex.code))));
   const w = (R[ex.type] || R.mcq)(ex, api);
   card.append(w.el);
   const actions = h('div', { class: 'actions' });
-  const checkBtn = h('button', { class: 'btn primary', onclick: () => doCheck() }, 'Check ✓');
+  const checkBtn = h('button', { class: 'btn primary', onclick: () => doCheck() }, tE('engine.ex.check'));
   const nudge = h('span', { class: 'tiny' });
   if (!w.selfDone && !w.auto && !['tf'].includes(ex.type) && !(ex.type === 'mcq' && !ex.multi && !Array.isArray(ex.answer)) && ex.type !== 'odd') actions.append(checkBtn, nudge);
   const ask = () => askAIAbout(ex, null, givenOf(w));
   if (SHL()) {   // the frame: a quiet "Ask <character>" in the card's top corner
     card.classList.add('has-ask');
     const b = askBuddyBtn(ask); b.style.marginLeft = showSection && SEC[ex.section] ? '8px' : 'auto'; head.append(b);
-  } else actions.append(h('span', { class: 'grow' }), h('button', { class: 'btn ghost small', onclick: ask }, `${TUTOR.avatar} Ask ${TUTOR.name}`));
+  } else actions.append(h('span', { class: 'grow' }), h('button', { class: 'btn ghost small', onclick: ask }, `${TUTOR.avatar} ` + tE('engine.ex.askTutor', { tutor: TUTOR.name })));
   card.append(actions);
   function doCheck() {
     if (locked || w.selfDone || !w.check) return;
     const r = w.check();
-    if (r === null) { nudge.textContent = 'Finish your answer first 🙂'; card.classList.remove('shake'); void card.offsetWidth; card.classList.add('shake'); return; }
+    if (r === null) { nudge.textContent = tE('engine.ex.finishFirst'); card.classList.remove('shake'); void card.offsetWidth; card.classList.add('shake'); return; }
     finish(r, false);
   }
   function finish(ok, selfReported) {
@@ -1157,10 +1242,10 @@ function exerciseCard(ex, { onDone, compact = false, noXP = false, showSection =
     if (!ex._ai) record(ex, ok);
     const xp = ok ? 4 + ex.difficulty * 4 + (w.bonus?.() || 0) : 1;
     if (!noXP) addXP(xp, card);
-    const exp = h('div', { class: 'explain ' + (ok ? 'ok' : 'bad') }, h('div', { class: 'hd' }, ok ? pickOne(['✅ Nailed it!', '✅ Correct!', '🎉 Yes!', '✅ Spot on!', '🔥 Exactly!']) : pickOne(['💡 Not quite — here’s the key', '🧠 Learning moment', '💡 Close — look at this'])), h('div', { html: fmt(ex.explain || '') }));
+    const exp = h('div', { class: 'explain ' + (ok ? 'ok' : 'bad') }, h('div', { class: 'hd' }, ok ? pickOne([['✅', 'nailed'], ['✅', 'correct'], ['🎉', 'yes'], ['✅', 'spotOn'], ['🔥', 'exactly']].map(([i, k]) => i + ' ' + tE('engine.ex.ok.' + k))) : pickOne([['💡', 'notQuite'], ['🧠', 'learning'], ['💡', 'close']].map(([i, k]) => i + ' ' + tE('engine.ex.bad.' + k)))), h('div', { html: fmt(ex.explain || '') }));
     if (!ok) exp.append(h('div', { class: 'row', style: { marginTop: '10px' } },
-      h('button', { class: 'btn small ai', onclick: () => askAIAbout(ex, 'socratic', givenOf(w)) }, `${TUTOR.avatar} Help me get it (Socratic)`),
-      h('button', { class: 'btn small', onclick: () => askAIAbout(ex, 'explain', givenOf(w)) }, '💡 Explain differently')));
+      h('button', { class: 'btn small ai', onclick: () => askAIAbout(ex, 'socratic', givenOf(w)) }, `${TUTOR.avatar} ` + tE('engine.ex.helpSocratic')),
+      h('button', { class: 'btn small', onclick: () => askAIAbout(ex, 'explain', givenOf(w)) }, '💡 ' + tE('engine.ex.explainDiff'))));
     card.append(exp);
     window.NoemaReact?.answered(!!ok, { hard: ex.difficulty >= 3 });   // the character reacts (rarely big: engine/react.js)
     if (onDone) onDone(ok, card);
@@ -1171,6 +1256,7 @@ function exerciseCard(ex, { onDone, compact = false, noXP = false, showSection =
   return card;
 }
 const pickOne = a => a[Math.random() * a.length | 0];
+/* i18n-ignore-start */   // the exercise as context for the AI's prompts, and the learner's first messages to the AI (prompts: English)
 function exerciseAsText(ex) {
   let t = `Exercise (${ex.type}): ${ex.q || ''}\n`;
   if (ex.code) t += 'Code:\n' + ex.code + '\n';
@@ -1196,20 +1282,22 @@ function givenOf(w) { try { return String(w?.given?.() || '').slice(0, 3000); } 
     "Ask Brick" before answering → hints (never the answer) · "Help me get it" after a wrong answer → Socratic, starting from the learner's answer ·
     "Explain differently" after a wrong answer → a free, in-depth explanation from another angle (no questions). */
 function askAIAbout(ex, mode, given = '') {
-  const ctx = { kind: 'exercise', id: ex.id, text: exerciseAsText(ex) };
   const m = mode === 'explain' ? 'explain' : mode === 'socratic' ? 'socratic' : 'hint';
+  const ctx = { kind: 'exercise', id: ex.id, text: exerciseAsText(ex), origin: { via: m === 'explain' ? 'explainDifferently' : m === 'socratic' ? 'helpSocratic' : 'askHint', ex: ex.id, ...(ex.section ? { sec: ex.section } : {}) } };
   const key = ex.id + '|' + m;
   T.hist[key] = []; delete T.tstate[key];
-  const mine = given ? ` (I answered: ${given.length > 300 ? given.slice(0, 300) + '…' : given})` : '';
-  if (m === 'explain') openTutor(ctx, 'explain', `I got this exercise wrong${mine}. Explain it to me differently.`, { intent: INTENT.exExplain(given) });
-  else if (m === 'socratic') openTutor(ctx, 'socratic', `I got this exercise wrong${mine}. Help me get it — don't just give me the answer.`, { intent: INTENT.exSocratic(given) });
-  else openTutor(ctx, 'hint', 'Give me a hint for this exercise — don\'t tell me the answer.', { intent: INTENT.exHint(given) });
+  // the learner's first message (their bubble, in the UI language); the task for the AI is the INTENT (English)
+  const mine = { answered: given ? 'yes' : 'no', given: given.length > 300 ? given.slice(0, 300) + '…' : given };
+  if (m === 'explain') openTutor(ctx, 'explain', tE('engine.aimsg.exExplain', mine), { intent: INTENT.exExplain(given) });
+  else if (m === 'socratic') openTutor(ctx, 'socratic', tE('engine.aimsg.exSocratic', mine), { intent: INTENT.exSocratic(given) });
+  else openTutor(ctx, 'hint', tE('engine.aimsg.exHint'), { intent: INTENT.exHint(given) });
 }
+/* i18n-ignore-end */
 
 /* ---- 35_visual.js ---- */
 /* ===================== Visual exercises & figures — canonical schema: docs/VISUAL.md (noema.visual/v1) ===================== */
 const MEDIA = (Noema.pack && Noema.pack.media) || {};
-Object.assign(TYPE_LABEL, { img_hotspot: '📍 Find it on the image', img_sequence: '🧭 Trace the path', img_reveal: '🧩 Reveal & answer', img_drag: '🏷️ Drag the labels', img_label: '✏️ Label the image', img_select: '🔽 Pick the labels', img_occlusion: '🙈 Cover & recall' });
+Object.assign(TYPE_ICON, { img_hotspot: '📍', img_sequence: '🧭', img_reveal: '🧩', img_drag: '🏷️', img_label: '✏️', img_select: '🔽', img_occlusion: '🙈' });   // labels: engine.exType.img_*
 const isVisual = ex => /^img_/.test(ex.type || '');
 const SVGNS = 'http://www.w3.org/2000/svg';
 function sv(tag, attrs = {}) { const e = document.createElementNS(SVGNS, tag); for (const [k, v] of Object.entries(attrs)) if (v != null) e.setAttribute(k, v); return e; }
@@ -1255,12 +1343,12 @@ function labelMatch(r, val, fuzzy = true) {
 function vCredit(m) {
   if (!m.credit) return null;
   const txt = m.credit + (m.license && m.license !== 'own' ? ' · ' + m.license : '');
-  return /^https?:\/\//.test(m.url || '') ? h('a', { class: 'tiny vx-credit', href: m.url, target: '_blank', rel: 'noopener', title: 'Where this picture comes from' }, txt + ' ↗') : h('span', { class: 'tiny vx-credit' }, txt);
+  return /^https?:\/\//.test(m.url || '') ? h('a', { class: 'tiny vx-credit', href: m.url, target: '_blank', rel: 'noopener', title: tE('engine.vx.creditTip') }, txt + ' ↗') : h('span', { class: 'tiny vx-credit' }, txt);
 }
 /* ---------- the stage: picture + SVG overlay + positioned controls ---------- */
 function vStage(ex, { regions } = {}) {
   const m = MEDIA[ex.media];
-  if (!m) return { missing: true, el: h('div', { class: 'fb bad' }, `🖼️ Picture “${ex.media}” is missing from this subject pack.`) };
+  if (!m) return { missing: true, el: h('div', { class: 'fb bad' }, '🖼️ ' + tE('engine.vx.missing', { media: ex.media })) };
   const W = m.w, H = m.h;
   const regs = regions || vRegions(ex, m);
   const RG = Object.fromEntries(regs.map(r => [r.id, r]));
@@ -1268,10 +1356,10 @@ function vStage(ex, { regions } = {}) {
   const svg = sv('svg', { viewBox: `0 0 ${W} ${H}`, class: 'vx-svg', preserveAspectRatio: 'none', 'aria-hidden': 'true' });
   const gOut = sv('g'), gMask = sv('g'), gTop = sv('g'); svg.append(gOut, gMask, gTop);
   const layer = h('div', { class: 'vx-layer' });
-  const stage = h('div', { class: 'vx-stage', style: { aspectRatio: `${W} / ${H}`, maxWidth: `min(${m.mime === 'image/svg+xml' ? '100%' : W + 'px'}, calc(76vh * ${(W / H).toFixed(4)}))` }   /* tall pictures fit on screen; ⤢ for more */ }, img, svg, layer);
+  const stage = h('div', { class: 'vx-stage', style: { aspectRatio: `${W} / ${H}`, maxWidth: `min(${m.mime === 'image/svg+xml' ? '100%' : W + 'px'}, calc(76vh * ${(W / H).toFixed(4)}))` }   /* tall pictures fit on screen; ⤢ for more */ }, img, svg, layer);   // i18n-ignore
   stage.style.setProperty('--ar', String(W / H));
   const below = h('div', { class: 'vx-below' });
-  const zoomBtn = h('button', { class: 'iconbtn vx-zoom', title: 'Bigger picture (Esc to close)', 'aria-label': 'Toggle full screen picture', onclick: () => toggleFull() }, '⤢');
+  const zoomBtn = h('button', { class: 'iconbtn vx-zoom', title: tE('engine.vx.zoomTip'), 'aria-label': tE('engine.vx.zoomAria'), onclick: () => toggleFull() }, '⤢');
   const tools = h('div', { class: 'vx-tools' }, vCredit(m), h('span', { class: 'grow' }), zoomBtn);
   const wrap = h('div', { class: 'vx' }, tools, stage, below);
   // Full screen: the picture moves to <body> (an animated/transformed ancestor would otherwise trap position:fixed)
@@ -1323,7 +1411,7 @@ function vStage(ex, { regions } = {}) {
       Keys are kept away from the card's global shortcuts while the picture has focus. */
   function keyboard({ tap, undo, describe }) {
     stage.tabIndex = 0; stage.setAttribute('role', 'application');
-    stage.setAttribute('aria-label', 'Picture. Arrow keys move the crosshair (Shift for small steps), Enter or Space taps, Backspace removes the last tap.');
+    stage.setAttribute('aria-label', tE('engine.vx.stageAria'));
     const cross = h('span', { class: 'vx-cross', 'aria-hidden': 'true' }); layer.append(cross);
     const live = h('span', { class: 'vx-sr', 'aria-live': 'polite' }); wrap.append(live);
     let cx = W / 2, cy = H / 2, shown = false;
@@ -1351,8 +1439,8 @@ function vSlots(st, targets, makeCtl) {
     const [x, y] = rCenter(r);
     const s = { r, k, ctl: makeCtl(r, k) };
     s.pin = h('div', { class: 'vx-pin', style: st.pos(x, y) });
-    s.marker = h('span', { class: 'vx-num vx-marker', style: st.pos(x, y) }, k + 1);
-    s.row = h('div', { class: 'vx-row' }, h('span', { class: 'vx-num' }, k + 1));
+    s.marker = h('span', { class: 'vx-num vx-marker', style: st.pos(x, y) }, nf(k + 1));
+    s.row = h('div', { class: 'vx-row' }, h('span', { class: 'vx-num' }, nf(k + 1)));
     st.layer.append(s.pin, s.marker); list.append(s.row);
     return s;
   });
@@ -1376,8 +1464,8 @@ function vOverlap(els, stage) {
 /** Result list after checking (label / select / drag). */
 function vResults(rows) {
   return h('div', { class: 'vx-results' }, ...rows.map(({ k, r, ok, typo, given }) => h('div', { class: 'vx-res ' + (ok ? 'ok' : 'bad') },
-    h('span', { class: 'vx-num' }, k + 1), h('b', {}, ok ? '✓' : '✗'), ' ', F(r.label),
-    !ok ? h('span', { class: 'muted' }, given ? ` — you: “${given}”` : ' — left empty') : typo ? h('span', { class: 'muted' }, ` — accepted “${given}” (spelling: ${r.label})`) : null,
+    h('span', { class: 'vx-num' }, nf(k + 1)), h('b', {}, ok ? '✓' : '✗'), ' ', F(r.label),
+    !ok ? h('span', { class: 'muted' }, ' — ' + (given ? tE('engine.vx.resYou', { given }) : tE('engine.vx.resEmpty'))) : typo ? h('span', { class: 'muted' }, ' — ' + tE('engine.vx.resTypo', { given, label: r.label })) : null,
     r.note ? h('div', { class: 'tiny', html: fmt(r.note) }) : null)));
 }
 const vHint = text => h('div', { class: 'tiny vx-hint' }, text);
@@ -1400,17 +1488,17 @@ R.img_hotspot = (ex, api) => {
     if (api.locked()) return '';
     const sb = st.stage.getBoundingClientRect(), sx = sb.width / st.W, sy = sb.height / st.H;
     const near = pins.find(q => Math.hypot((q.x - x) * sx, (q.y - y) * sy) <= 10);
-    if (near) { drop(near); beep('tap'); return 'Pin removed.'; }
+    if (near) { drop(near); beep('tap'); return tE('engine.vx.pinRemoved'); }
     if (!multi) pins.slice().forEach(drop);
     const p = { x, y };
     p.el = h('span', { class: 'vx-pick', style: st.pos(x, y) }, multi ? pins.length + 1 : '');
     pins.push(p); st.layer.append(p.el); beep('tap');
-    return multi ? `Pin ${pins.length} of ${ans.length} placed.` : 'Pin placed. Press Tab to reach the Check button.';
+    return multi ? tE('engine.vx.pinNofM', { n: pins.length, of: ans.length }) : tE('engine.vx.pinPlaced');
   }
   st.stage.addEventListener('click', ev => tapAt(...st.toImg(ev)));
-  const where = (x, y) => `${['left', 'centre', 'right'][Math.min(2, Math.floor(3 * x / st.W))]} ${['top', 'middle', 'bottom'][Math.min(2, Math.floor(3 * y / st.H))]} (${Math.round(100 * x / st.W)}%, ${Math.round(100 * y / st.H)}%)`;
-  st.keyboard({ tap: tapAt, undo: () => { if (api.locked() || !pins.length) return ''; drop(pins[pins.length - 1]); return 'Last pin removed.'; }, describe: where });
-  st.below.prepend(vHint(multi ? `Tap ${ans.length} places on the picture (tap a pin again to remove it). Small picture? ⤢ makes it bigger. ⌨️ Tab to the picture, arrows + Enter.` : any ? 'Tap one right place on the picture (several are right) — then Check. ⌨️ arrows + Enter.' : 'Tap the right place on the picture — then Check. ⌨️ Tab to the picture, arrows move, Enter taps.'));
+  const where = (x, y) => tE('engine.vx.where', { h: ['left', 'centre', 'right'][Math.min(2, Math.floor(3 * x / st.W))], v: ['top', 'middle', 'bottom'][Math.min(2, Math.floor(3 * y / st.H))], x: Math.round(100 * x / st.W), y: Math.round(100 * y / st.H) });   // i18n-ignore (select values)
+  st.keyboard({ tap: tapAt, undo: () => { if (api.locked() || !pins.length) return ''; drop(pins[pins.length - 1]); return tE('engine.vx.lastPinRemoved'); }, describe: where });
+  st.below.prepend(vHint(multi ? tE('engine.vx.hotspotMulti', { n: ans.length }) : any ? tE('engine.vx.hotspotAny') : tE('engine.vx.hotspotOne')));
   return {
     el: st.el,
     check() {
@@ -1443,29 +1531,29 @@ R.img_sequence = (ex, api) => {
     Object.values(badges).forEach(b => b.remove());
     picks.forEach((r, i) => { const [x, y] = rCenter(r); badges[r.id] = h('span', { class: 'vx-num vx-step', style: st.pos(x, y) }, i + 1); st.layer.append(badges[r.id]); });
     $$('.vx-hov', st.svg).forEach(e => e.classList.toggle('on', picks.some(r => r.id === e.dataset.rid)));
-    counter.textContent = `${picks.length} / ${ex.answer.length} steps`;
+    counter.textContent = tE('engine.vx.seqCounter', { n: picks.length, of: ex.answer.length });
   }
   const counter = h('b', {});
   function tapAt(x, y) {
     if (api.locked()) return '';
     const r = st.hits(x, y, among)[0];
-    if (!r) { st.stage.classList.remove('vx-miss'); void st.stage.offsetWidth; st.stage.classList.add('vx-miss'); return 'No part here.'; }
+    if (!r) { st.stage.classList.remove('vx-miss'); void st.stage.offsetWidth; st.stage.classList.add('vx-miss'); return tE('engine.vx.noPart'); }
     const i = picks.indexOf(r);
     if (i >= 0) picks.splice(i); else if (picks.length < ex.answer.length) { picks.push(r); beep('tap'); }
     draw();
-    return i >= 0 ? `Removed from step ${i + 1} on.` : `Step ${picks.length}: ${r.label || r.id}.`;
+    return i >= 0 ? tE('engine.vx.seqRemoved', { n: i + 1 }) : tE('engine.vx.seqStep', { n: picks.length, label: r.label || r.id });
   }
   st.stage.addEventListener('click', ev => tapAt(...st.toImg(ev)));
-  st.keyboard({ tap: tapAt, undo: () => { if (api.locked() || !picks.length) return ''; picks.pop(); draw(); return 'Last step removed.'; },
-    describe: (x, y) => { const r = st.hits(x, y, among)[0]; hov.set(r?.id); return r ? (r.label || r.id) + (picks.includes(r) ? ` (step ${picks.indexOf(r) + 1})` : '') : 'No part here.'; } });
-  st.below.prepend(h('div', { class: 'tiny vx-hint' }, 'Tap the parts in the right order. Tap a numbered part again to undo from there. ⌨️ arrows + Enter, Backspace undoes. · ', counter));
+  st.keyboard({ tap: tapAt, undo: () => { if (api.locked() || !picks.length) return ''; picks.pop(); draw(); return tE('engine.vx.lastStepRemoved'); },
+    describe: (x, y) => { const r = st.hits(x, y, among)[0]; hov.set(r?.id); return r ? (picks.includes(r) ? tE('engine.vx.partStep', { label: r.label || r.id, n: picks.indexOf(r) + 1 }) : (r.label || r.id)) : tE('engine.vx.noPart'); } });
+  st.below.prepend(h('div', { class: 'tiny vx-hint' }, tE('engine.vx.seqHint') + ' · ', counter));
   draw();
   return {
     el: st.el,
     check: () => picks.length < ex.answer.length ? null : picks.every((r, i) => r.id === ex.answer[i]),
     reveal() {
       picks.forEach((r, i) => badges[r.id]?.classList.add(r.id === ex.answer[i] ? 'right' : 'wrong'));
-      if (!picks.every((r, i) => r.id === ex.answer[i])) st.below.append(h('div', { class: 'fb info' }, h('b', {}, '🧭 Correct path: '), ...ex.answer.flatMap((id, i) => [i ? ' → ' : '', h('span', { class: 'vx-chipref' }, `${i + 1}. ${st.RG[id]?.label || id}`)])));
+      if (!picks.every((r, i) => r.id === ex.answer[i])) st.below.append(h('div', { class: 'fb info' }, h('b', {}, '🧭 ' + tE('engine.vx.correctPath') + ' '), ...ex.answer.flatMap((id, i) => [i ? ' ' + arrowOn() + ' ' : '', h('span', { class: 'vx-chipref' }, `${i + 1}. ${st.RG[id]?.label || id}`)])));
     },
   };
 };
@@ -1486,10 +1574,10 @@ R.img_reveal = (ex, api) => {
   });
   const hidden = T.length - start.size;
   const counter = h('b', {});
-  const count = () => { counter.textContent = `🔍 ${opened} / ${hidden} tiles opened`; };
+  const count = () => { counter.textContent = '🔍 ' + tE('engine.vx.tilesOpened', { n: opened, of: hidden }); };
   count();
   const mc = R.mcq({ ...ex, type: 'mcq' }, api);
-  st.below.append(h('div', { class: 'tiny vx-hint' }, counter, ' · tap tiles to uncover the picture — answer as early as you dare: fewer tiles = more XP'), mc.el);
+  st.below.append(h('div', { class: 'tiny vx-hint' }, counter, ' · ' + tE('engine.vx.revealHint')), mc.el);
   return {
     el: st.el, auto: !(ex.multi || (Array.isArray(ex.answer) && ex.answer.length > 1)), keys: mc.keys,
     check: mc.check,
@@ -1531,7 +1619,7 @@ R.img_drag = (ex, api) => {
   let sel = null;
   const bank = h('div', { class: 'pool vx-bank' });
   const { slots } = vSlots(st, targets, (r, k) => {
-    const z = h('button', { class: 'vx-drop', 'data-k': k, 'aria-label': `Drop zone ${k + 1}`, style: { minWidth: zoneW + 'px' }, onclick: e => { e.stopPropagation(); if (!z._justDragged) tapZone(k); } });
+    const z = h('button', { class: 'vx-drop', 'data-k': k, 'aria-label': tE('engine.vx.dropZone', { n: k + 1 }), style: { minWidth: zoneW + 'px' }, onclick: e => { e.stopPropagation(); if (!z._justDragged) tapZone(k); } });
     // a placed label can be dragged on to another place, or off the picture back to the bank
     vDraggable(z, to => { if (!api.locked() && place.has(k)) put(+to.dataset.k, place.get(k)); }, { enabled: () => !api.locked() && place.has(k), onMiss: () => { if (!api.locked()) { place.delete(k); draw(); } } });
     return z;
@@ -1551,10 +1639,10 @@ R.img_drag = (ex, api) => {
     bank.innerHTML = '';
     const used = new Set(place.values());
     chips.filter(c => !used.has(c)).forEach(c => bank.append(chipEl(c)));
-    if (!bank.children.length) bank.append(h('span', { class: 'tiny' }, 'All placed — check it! (tap a placed label to move it)'));
+    if (!bank.children.length) bank.append(h('span', { class: 'tiny' }, tE('engine.vx.allPlaced')));
     slots.forEach(s => { const c = place.get(s.k); s.ctl.textContent = c ? c.text : '?'; s.ctl.title = c ? c.text : ''; s.ctl.classList.toggle('filled', !!c); s.ctl.classList.toggle('hot', !!sel && !c); });
   }
-  st.below.prepend(vHint('Drag each label onto its place — or tap a label, then tap the place.'), bank);
+  st.below.prepend(vHint(tE('engine.vx.dragHint')), bank);
   draw();
   const okAt = s => !!place.get(s.k) && norm(place.get(s.k).text) === norm(s.r.label);
   return {
@@ -1574,9 +1662,9 @@ R.img_label = (ex, api) => {
   const st = vStage(ex); if (st.missing) return vFail(st);
   const targets = vTargets(ex, st.regs);
   if (ex.mask !== false) targets.forEach(r => st.mask(r.id, true));
-  const { slots } = vSlots(st, targets, (r, k) => h('input', { class: 'vx-input', placeholder: `${k + 1} ?`, 'aria-label': `Name of part ${k + 1}`, autocapitalize: 'off', autocomplete: 'off', spellcheck: 'false',
+  const { slots } = vSlots(st, targets, (r, k) => h('input', { class: 'vx-input', placeholder: `${k + 1} ?`, 'aria-label': tE('engine.vx.partName', { n: k + 1 }), autocapitalize: 'off', autocomplete: 'off', spellcheck: 'false',
     onkeydown: e => { if (e.key === 'Enter') { e.preventDefault(); const nx = slots[k + 1]; if (nx) nx.ctl.focus(); else api.check(); } } }));
-  st.below.prepend(vHint('Type the name of each numbered part. Enter → next.'));
+  st.below.prepend(vHint(tE('engine.vx.labelHint')));
   const res = s => labelMatch(s.r, s.ctl.value, ex.fuzzy !== false);
   return {
     el: st.el, focus: () => !st.compact() && slots[0]?.ctl.focus({ preventScroll: true }),
@@ -1594,9 +1682,9 @@ R.img_select = (ex, api) => {
   const st = vStage(ex); if (st.missing) return vFail(st);
   const targets = vTargets(ex, st.regs);
   if (ex.mask !== false) targets.forEach(r => st.mask(r.id, true));
-  const shared = [...new Set([...targets.map(r => r.label), ...(ex.distractors || [])])].sort((a, b) => a.localeCompare(b));
-  const { slots } = vSlots(st, targets, (r, k) => h('select', { class: 'vx-select', 'aria-label': `Part ${k + 1}` }, h('option', { value: '' }, `${k + 1} · choose…`), ...(r.options || shared).map(o => h('option', { value: o }, o))));
-  st.below.prepend(vHint('Choose the right name at every numbered part.'));
+  const shared = [...new Set([...targets.map(r => r.label), ...(ex.distractors || [])])].sort(uiCompare);
+  const { slots } = vSlots(st, targets, (r, k) => h('select', { class: 'vx-select', 'aria-label': tE('engine.vx.part', { n: k + 1 }) }, h('option', { value: '' }, tE('engine.vx.choose', { n: k + 1 })), ...(r.options || shared).map(o => h('option', { value: o }, o))));
+  st.below.prepend(vHint(tE('engine.vx.selectHint')));
   const okAt = s => norm(s.ctl.value) === norm(s.r.label);
   return {
     el: st.el,
@@ -1614,7 +1702,7 @@ R.img_occlusion = (ex, api) => {
   const st = vStage(ex); if (st.missing) return vFail(st);
   const targets = ex.order === 'random' ? shuffle(vTargets(ex, st.regs)) : vTargets(ex, st.regs);
   targets.forEach((r, k) => { st.mask(r.id, true, 'occ'); });
-  const nums = targets.map((r, k) => { const [x, y] = rCenter(r); const n = h('span', { class: 'vx-num vx-marker always', style: st.pos(x, y) }, k + 1); st.layer.append(n); return n; });
+  const nums = targets.map((r, k) => { const [x, y] = rCenter(r); const n = h('span', { class: 'vx-num vx-marker always', style: st.pos(x, y) }, nf(k + 1)); st.layer.append(n); return n; });
   let k = 0, knew = 0; const marks = [];
   const panel = h('div', { class: 'vx-occ' });
   function focusOn() {
@@ -1622,8 +1710,8 @@ R.img_occlusion = (ex, api) => {
     panel.innerHTML = '';
     if (k >= targets.length) return finish();
     const r = targets[k];
-    const revealBtn = h('button', { class: 'btn primary', onclick: show }, '👁 Reveal');
-    panel.append(h('div', { class: 'vx-occq' }, h('span', { class: 'vx-num' }, k + 1), h('span', { html: fmt(r.q || 'What is hidden here? Say it (or think it) first.') })), h('div', { class: 'actions' }, revealBtn, h('span', { class: 'tiny' }, `${k + 1} / ${targets.length}`)));
+    const revealBtn = h('button', { class: 'btn primary', onclick: show }, '👁 ' + tE('engine.vx.reveal'));
+    panel.append(h('div', { class: 'vx-occq' }, h('span', { class: 'vx-num' }, nf(k + 1)), h('span', { html: fmt(r.q || tE('engine.vx.occQ')) })), h('div', { class: 'actions' }, revealBtn, h('span', { class: 'tiny' }, tE('engine.vx.nOfM', { n: k + 1, of: targets.length }))));
     st.masks[r.id].onclick = () => !api.locked() && show();
     setTimeout(() => revealBtn.focus({ preventScroll: true }), 30);
   }
@@ -1632,12 +1720,12 @@ R.img_occlusion = (ex, api) => {
     st.masks[r.id].classList.add('off'); nums[k].classList.add('seen');
     panel.innerHTML = '';
     const rate = ok => { marks[k] = ok; if (ok) knew++; nums[k].classList.add(ok ? 'right' : 'wrong'); st.outline(r.id, ok ? 'right' : 'wrong'); beep(ok ? 'ok' : 'bad'); k++; focusOn(); };
-    panel.append(h('div', { class: 'vx-occq' }, h('span', { class: 'vx-num' }, k + 1), h('b', { html: fmt(r.label) }), r.note ? h('div', { class: 'tiny', html: fmt(r.note) }) : null),
-      h('div', { class: 'actions' }, h('button', { class: 'btn small vx-yes', onclick: () => rate(true) }, '✓ I knew it'), h('button', { class: 'btn small vx-no', onclick: () => rate(false) }, '✗ I didn’t')));
+    panel.append(h('div', { class: 'vx-occq' }, h('span', { class: 'vx-num' }, nf(k + 1)), h('b', { html: fmt(r.label) }), r.note ? h('div', { class: 'tiny', html: fmt(r.note) }) : null),
+      h('div', { class: 'actions' }, h('button', { class: 'btn small vx-yes', onclick: () => rate(true) }, '✓ ' + tE('engine.vx.knew')), h('button', { class: 'btn small vx-no', onclick: () => rate(false) }, '✗ ' + tE('engine.vx.didnt'))));
   }
   function finish() {
     const pass = ex.pass ?? 0.8, score = knew / targets.length;
-    panel.append(h('div', { class: 'fb ' + (score >= pass ? 'ok' : 'bad') }, h('b', {}, `You recalled ${knew} / ${targets.length}. `), score >= pass ? 'Strong!' : 'These come back soon in your review.'));
+    panel.append(h('div', { class: 'fb ' + (score >= pass ? 'ok' : 'bad') }, h('b', {}, tE('engine.vx.recalled', { n: knew, of: targets.length }) + ' '), score >= pass ? tE('engine.vx.strong') : tE('engine.vx.comeBack')));
     api.done(score >= pass);
   }
   st.below.append(panel);
@@ -1653,10 +1741,24 @@ function figureBlock(b) {
   const cap = b.caption || st.m.caption;
   if (regs.length && b.explore !== false) {
     st.hover(regs);
+    // The label sits on the frame, not inside the picture (which clips at its edges): it may run past the picture,
+    // never past the screen — it is moved sideways (and above/below) until it fits.
     const tipEl = h('div', { class: 'vx-tip' });
-    st.layer.append(tipEl);
-    let pinned = null;
-    const showTip = (r, x, y) => { tipEl.innerHTML = ''; tipEl.append(h('b', { html: fmt(r.label || r.id) }), r.note ? h('div', { html: fmt(r.note) }) : null); Object.assign(tipEl.style, st.pos(x, y)); tipEl.classList.add('on'); tipEl.classList.toggle('below', y < st.H * 0.3); };
+    st.wrap.append(tipEl);
+    let pinned = null, tipAt = null;
+    const placeTip = () => {
+      if (!tipAt || !tipEl.classList.contains('on')) return;
+      const [x, y] = tipAt, sb = st.stage.getBoundingClientRect(), wb = st.wrap.getBoundingClientRect();
+      const px = sb.left - wb.left + x / st.W * sb.width, py = sb.top - wb.top + y / st.H * sb.height;
+      const w = tipEl.offsetWidth, ht = tipEl.offsetHeight, gap = 14, edge = 8, vw = document.documentElement.clientWidth || innerWidth;
+      const left = Math.max(edge, Math.min(wb.left + px - w / 2, vw - edge - w)) - wb.left;
+      const roomAbove = wb.top + py - gap - ht >= edge, roomBelow = wb.top + py + gap + ht <= innerHeight - edge;
+      const below = (y < st.H * 0.3 || !roomAbove) && (roomBelow || !roomAbove);
+      tipEl.classList.toggle('below', below);
+      Object.assign(tipEl.style, { left: left + 'px', top: (below ? py + gap : py - gap - ht) + 'px' });
+    };
+    const showTip = (r, x, y) => { tipEl.innerHTML = ''; tipEl.append(h('b', { html: fmt(r.label || r.id) }), r.note ? h('div', { html: fmt(r.note) }) : null); tipAt = [x, y]; tipEl.classList.add('on'); placeTip(); };
+    if (window.ResizeObserver) new ResizeObserver(placeTip).observe(st.stage);
     const covered = r => r && st.masks[r.id] && !st.masks[r.id].classList.contains('off');   // a hidden label stays hidden until you peek
     st.stage.addEventListener('mousemove', ev => { if (pinned) return; const [x, y] = st.toImg(ev); const r = st.hits(x, y)[0]; r && !covered(r) ? showTip(r, ...rCenter(r)) : tipEl.classList.remove('on'); });
     st.stage.addEventListener('mouseleave', () => { if (!pinned) tipEl.classList.remove('on'); });
@@ -1668,25 +1770,26 @@ function figureBlock(b) {
       pinned ? showTip(r, ...rCenter(r)) : tipEl.classList.remove('on');
     });
     st.keyboard({   // keyboard exploring: arrows move, the part under the crosshair is shown and announced; Enter peeks under a cover
-      tap: (x, y) => { const r = st.hits(x, y)[0]; const m = r && st.masks[r.id]; if (m && !m.classList.contains('off')) { m.classList.add('off'); return 'Uncovered: ' + (r.label || r.id); } return r ? (r.label || r.id) + (r.note ? '. ' + r.note : '') : 'Nothing here.'; },
+      tap: (x, y) => { const r = st.hits(x, y)[0]; const m = r && st.masks[r.id]; if (m && !m.classList.contains('off')) { m.classList.add('off'); return tE('engine.vx.uncovered', { label: r.label || r.id }); } return r ? (r.label || r.id) + (r.note ? '. ' + r.note : '') : tE('engine.vx.nothing'); },
       undo: () => '',
-      describe: (x, y) => { const r = st.hits(x, y)[0]; if (r && covered(r)) { tipEl.classList.remove('on'); return 'A hidden label. Enter peeks.'; } if (r) showTip(r, ...rCenter(r)); else tipEl.classList.remove('on'); return r ? (r.label || r.id) : 'Nothing here.'; } });
+      describe: (x, y) => { const r = st.hits(x, y)[0]; if (r && covered(r)) { tipEl.classList.remove('on'); return tE('engine.vx.hiddenLabel'); } if (r) showTip(r, ...rCenter(r)); else tipEl.classList.remove('on'); return r ? (r.label || r.id) : tE('engine.vx.nothing'); } });
     const named = regs.filter(r => r.label && !/-area$/.test(r.id));
     if (named.length) {   // the labels start hidden (test yourself first); the switch and its line sit on top of the picture
       let hidden = true;
       const say = h('span', { class: 'vx-lbltext' }), hideBtn = h('button', { class: 'btn small vx-lblbtn', type: 'button' });
-      const draw = () => { named.forEach(r => st.mask(r.id, hidden)); hideBtn.textContent = hidden ? '👀 Show labels' : '🙈 Hide labels'; say.textContent = hidden ? 'Labels hidden: tap a cover to peek.' : 'Hover or tap a part to see what it is.'; };
+      const draw = () => { named.forEach(r => st.mask(r.id, hidden)); hideBtn.textContent = hidden ? '👀 ' + tE('engine.vx.showLabels') : '🙈 ' + tE('engine.vx.hideLabels'); say.textContent = hidden ? tE('engine.vx.labelsHidden') : tE('engine.vx.hoverPart'); };
       hideBtn.onclick = () => { hidden = !hidden; draw(); };
       const credit = $('.vx-credit', st.tools); if (credit) st.below.append(h('div', { class: 'vx-figbar' }, credit));
       st.tools.prepend(h('div', { class: 'vx-labelbar' }, hideBtn, say));
       draw();
-    } else st.below.append(h('div', { class: 'row vx-figbar' }, h('span', { class: 'tiny grow' }, '👆 Hover or tap a part to see what it is.')));
+    } else st.below.append(h('div', { class: 'row vx-figbar' }, h('span', { class: 'tiny grow' }, '👆 ' + tE('engine.vx.hoverPart'))));
   }
   if (cap) box.append(h('figcaption', { class: 'caption', html: fmt(cap) }));
   return box;
 }
 
 /* ---------- text versions (tutor context, search) ---------- */
+/* i18n-ignore-start */   // context for the AI's prompts (English)
 function visualAsText(ex) {
   const m = MEDIA[ex.media] || {}; const regs = vRegions(ex, m); const L = id => (regs.find(r => r.id === id) || {}).label || id;
   let t = `Picture: ${m.alt || ex.media}${m.caption ? ' — ' + m.caption : ''}\n`;
@@ -1698,6 +1801,7 @@ function visualAsText(ex) {
   return t;
 }
 function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions(b, m).filter(r => r.label && !/-area$/.test(r.id)); return `[FIGURE] ${m.alt || b.media}${(b.caption || m.caption) ? ' — ' + (b.caption || m.caption) : ''}${regs.length ? '\nParts: ' + regs.map(r => r.label + (r.note ? ': ' + r.note : '')).join('; ') : ''}`; }
+/* i18n-ignore-end */
 
 /* ---- 40_views.js ---- */
 /* ===================== Views ===================== */
@@ -1725,7 +1829,7 @@ function lockedView() {
   shellChrome({ sub: true, crumbs: [[SL('exercisesWord')]], back: HOME(), corner: true });
   view(lockNote(), h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => go(HOME()) }, '📖 ' + SL('backToTheory'))));
 }
-const LOCKED_ROUTES = new Set(['practice', 'run', 'boss', 'lightning', 'cards', 'drills', 'drill', 'mistakes', 'ex']);
+const LOCKED_ROUTES = new Set(['practice', 'run', 'srun', 'boss', 'lightning', 'cards', 'drills', 'drill', 'mistakes', 'ex']);   // i18n-ignore
 const go = hash => { location.hash = hash; };
 /** Remember where the learner reads (Today › Continue, across subjects; engine/shell.js). */
 function noteRecent(extra = {}) {
@@ -1737,8 +1841,8 @@ function noteRecent(extra = {}) {
 let timerT = null, timerEnd = 0;
 function renderTopStats() {
   const x = $('#xpchip'), s = $('#streakchip');
-  if (x) x.textContent = `⭐ ${S.xp} XP`;
-  if (s) s.textContent = `🔥 ${Noema.stats.streakNow()}`;
+  if (x) x.textContent = '⭐ ' + tE('engine.top.xp', { n: S.xp });
+  if (s) s.textContent = '🔥 ' + nf(Noema.stats.streakNow());
 }
 /** ⏱️ The 15-minute focus sprint (top bar chip, or the shell's ⋮ with a small clock next to it). */
 function focusSprint(btn) {
@@ -1746,13 +1850,13 @@ function focusSprint(btn) {
   const idle = () => { clock?.classList.remove('running'); if (clock) { if (clock.classList.contains('ns-focus')) clock.remove(); else clock.textContent = '⏱️ ' + t('top.focus'); } };
   if (timerT) { clearInterval(timerT); timerT = null; idle(); return; }
   timerEnd = Date.now() + 15 * 60e3; clock?.classList.add('running');
-  const tick = () => { const left = Math.max(0, timerEnd - Date.now()); const c = $('.timer.running') || clock; if (c) c.textContent = `⏱️ ${String(left / 60e3 | 0).padStart(2, '0')}:${String((left / 1e3 | 0) % 60).padStart(2, '0')}`; if (!left) { clearInterval(timerT); timerT = null; idle(); confetti(120); beep('win'); toast('🎉 Sprint done! Take a 3-minute break — stretch, water, breathe.', 5000); } };
+  const tick = () => { const left = Math.max(0, timerEnd - Date.now()); const c = $('.timer.running') || clock; if (c) c.textContent = `⏱️ ${String(left / 60e3 | 0).padStart(2, '0')}:${String((left / 1e3 | 0) % 60).padStart(2, '0')}`; if (!left) { clearInterval(timerT); timerT = null; idle(); confetti(120); beep('win'); toast('🎉 ' + tE('engine.top.sprintDone'), 5000); } };
   tick(); timerT = setInterval(tick, 1000);
 }
 function topbar() {
   const timer = h('button', { class: 'chip timer hide-m', title: t('top.focusTitle'), onclick: () => focusSprint(timer) }, '⏱️ ' + t('top.focus'));
   return h('header', { class: 'topbar' },
-    h('div', { class: 'brand', onclick: () => go('#/') }, window.NoemaArt && window.NoemaThemes ? h('div', { class: 'logo', html: NoemaArt.mascot(NoemaThemes.current()) }) : null, h('span', { class: 'name' }, Noema.config.appName || 'noema-lite')),
+    h('div', { class: 'brand', onclick: () => go('#/') }, window.NoemaArt && window.NoemaThemes ? h('div', { class: 'logo', html: NoemaArt.mascot(NoemaThemes.current()) }) : null, h('span', { class: 'name' }, Noema.config.appName || 'noema-lite')),   // i18n-ignore (the app's name)
     h('button', { class: 'subjchip', title: t('top.switchSubject'), onclick: () => Noema.openSubjectPicker() }, h('span', {}, SUBJ.emoji || '📘'), h('span', { class: 'st' }, SUBJ.title), h('span', { class: 'chev' }, '▾')),
     h('div', { class: 'spacer' }),
     Noema.node ? h('button', { class: 'chip curchip', title: t('top.mapTitle'), onclick: () => Noema.curriculumMap(Noema.node.id, Noema.node.node) }, '🧭', h('span', { class: 'hide-s' }, ' ' + t('top.map')))
@@ -1777,9 +1881,9 @@ function bellButton() {
 function openNotes() {
   modal((box, close) => {
     const body = h('div');
-    const draw = list => { body.innerHTML = ''; if (!list.length) body.append(h('p', { class: 'muted' }, ACCOUNT.kind === 'cloud' ? 'Nothing new. 🎈' : 'Notifications need a ☁️ cloud account (Account menu → Cloud).')); list.forEach(sh => body.append(Noema.shareRow(sh, { onAccepted: s => { close(); confirmBox(`Open “${s.title}” now?`, () => s.kind === 'curriculum' ? Noema.curriculumMap(s.curriculum) : Noema.switchTo(ACCOUNT.id, s.id)); } }))); };
+    const draw = list => { body.innerHTML = ''; if (!list.length) body.append(h('p', { class: 'muted' }, ACCOUNT.kind === 'cloud' ? tE('engine.notes.nothing') : tE('engine.notes.needCloud'))); list.forEach(sh => body.append(Noema.shareRow(sh, { onAccepted: s => { close(); confirmBox(tE('engine.share.openNow', { title: s.title }), () => s.kind === 'curriculum' ? Noema.curriculumMap(s.curriculum) : Noema.switchTo(ACCOUNT.id, s.id)); } }))); };
     Noema.notes.on(draw);
-    box.append(h('div', { class: 'row' }, h('h2', { class: 'grow' }, '🔔 Notifications'), h('button', { class: 'iconbtn', onclick: close }, '✕')), body);
+    box.append(h('div', { class: 'row' }, h('h2', { class: 'grow' }, '🔔 ' + t('top.notifications')), h('button', { class: 'iconbtn', onclick: close }, '✕')), body);
   });
 }
 function shareBanner() {
@@ -1790,17 +1894,18 @@ function shareBanner() {
     bar.classList.toggle('on', !!items.length); if (!items.length) return;
     const sh = items[0];
     if (['curupdate', 'stepupdate', 'subjupdate'].includes(sh.kind)) {   // 🔔 an update that waits for me: take it or keep mine
-      const act = take => async e => { const b = e.currentTarget; b.disabled = true; try { await Noema.notes.update(sh, take); if (sh.kind !== 'curupdate' || !take) toast(take ? `✅ “${sh.title}” is up to date` : `👍 You keep your version of “${sh.title}”`); else b.disabled = false; } catch (er) { toast('⚠️ ' + er.message, 5000); b.disabled = false; } };   // 🔎 Review only opens the review: “Not now” there keeps the update waiting
-      bar.append(h('span', { class: 'grow' }, ...Noema.updateText(sh), items.length > 1 ? h('span', { class: 'tiny' }, `  (+${items.length - 1} more in 🔔)`) : ''),
-        h('button', { class: 'btn small primary', onclick: act(true) }, Noema.updateLabel(sh)), h('button', { class: 'btn small', onclick: act(false) }, sh.kind === 'curupdate' ? 'Keep my copy' : 'Keep mine'),
-        h('button', { class: 'btn small ghost', title: 'Decide later (it stays in 🔔)', onclick: () => { later.add(sh.id); draw(Noema.notes.pending); } }, 'Later'));
+      const act = take => async e => { const b = e.currentTarget; b.disabled = true; try { await Noema.notes.update(sh, take); if (sh.kind !== 'curupdate' || !take) toast(take ? '✅ ' + tE('engine.share.upToDate', { title: sh.title }) : '👍 ' + tE('engine.share.keepYours', { title: sh.title })); else b.disabled = false; } catch (er) { toast('⚠️ ' + errText(er), 5000); b.disabled = false; } };   // 🔎 Review only opens the review: “Not now” there keeps the update waiting
+      bar.append(h('span', { class: 'grow' }, ...Noema.updateText(sh), items.length > 1 ? h('span', { class: 'tiny' }, '  ' + tE('engine.share.more', { n: items.length - 1 })) : ''),
+        h('button', { class: 'btn small primary', onclick: act(true) }, Noema.updateLabel(sh)), h('button', { class: 'btn small', onclick: act(false) }, sh.kind === 'curupdate' ? tE('engine.share.keepMyCopy') : tE('engine.share.keepMine')),
+        h('button', { class: 'btn small ghost', title: tE('engine.share.laterTip'), onclick: () => { later.add(sh.id); draw(Noema.notes.pending); } }, tE('engine.share.later')));
       return;
     }
     const cur = sh.kind === 'curriculum';   // 👥 an invitation to a shared curriculum
-    bar.append(h('span', { class: 'grow' }, cur ? '👥 ' : '📬 ', h('b', {}, sh.from_name || sh.from_email || 'Someone'), cur ? ' invites you to the Roadmap ' : ' wants to share ', h('b', {}, `“${sh.title}”`), cur ? '' : ' with you', items.length > 1 ? h('span', { class: 'tiny' }, `  (+${items.length - 1} more in 🔔)`) : ''),
-      h('button', { class: 'btn small primary', onclick: async e => { e.target.disabled = true; try { const s = await Noema.notes.accept(sh); toast(cur ? `👥 You joined “${s.title}” — your progress is your own, the prepared steps are shared` : `✅ “${s.title}” added to your subjects`); confirmBox(`Open “${s.title}” now?`, () => cur ? Noema.curriculumMap(s.curriculum) : Noema.switchTo(ACCOUNT.id, s.id)); } catch (er) { toast('⚠️ ' + er.message, 5000); e.target.disabled = false; } } }, cur ? '✓ Join' : '✓ Accept'),
-      h('button', { class: 'btn small', onclick: async () => { await Noema.notes.reject(sh).catch(er => toast('⚠️ ' + er.message)); } }, '✕ Reject'),
-      h('button', { class: 'btn small ghost', title: 'Decide later (it stays in 🔔)', onclick: () => { later.add(sh.id); draw(Noema.notes.pending); } }, 'Later'));
+    const tB = h('b', {}, sh.title), mtT = window.NoemaMT ? NoemaMT.toggle(ACCOUNT.id, [NoemaMT.mark(tB, { language: sh.language || sh.meta?.language, kind: cur ? 'shared.roadmap' : 'shared.pack' })]) : null;   // 🌐 its title on request (the personal message is never sent)
+    bar.append(h('span', { class: 'grow' }, cur ? '👥 ' : '📬 ', ...tNodes(cur ? 'engine.share.invite' : 'engine.share.offer', null, { name: h('b', {}, sh.from_name || sh.from_email || tE('engine.share.someone')), title: tB }), items.length > 1 ? h('span', { class: 'tiny' }, '  ' + tE('engine.share.more', { n: items.length - 1 })) : '', mtT ? ' ' : '', mtT || ''),
+      h('button', { class: 'btn small primary', onclick: async e => { e.target.disabled = true; try { const s = await Noema.notes.accept(sh); toast(cur ? '👥 ' + tE('engine.share.joined', { title: s.title }) : '✅ ' + tE('engine.share.added', { title: s.title })); confirmBox(tE('engine.share.openNow', { title: s.title }), () => cur ? Noema.curriculumMap(s.curriculum) : Noema.switchTo(ACCOUNT.id, s.id)); } catch (er) { toast('⚠️ ' + errText(er), 5000); e.target.disabled = false; } } }, '✓ ' + (cur ? tE('engine.share.join') : tE('engine.share.accept'))),
+      h('button', { class: 'btn small', onclick: async () => { await Noema.notes.reject(sh).catch(er => toast('⚠️ ' + errText(er))); } }, '✕ ' + tE('engine.share.reject')),
+      h('button', { class: 'btn small ghost', title: tE('engine.share.laterTip'), onclick: () => { later.add(sh.id); draw(Noema.notes.pending); } }, tE('engine.share.later')));
   };
   Noema.notes.on(draw);
   return bar;
@@ -1846,7 +1951,7 @@ function practiceItems() {
     { label: t('home.mixed'), sub: t('home.mixedSub'), icon: '🎲', href: '#/practice/all' },
     { label: t('home.cards'), sub: t('home.cardsSub'), icon: '🃏', href: '#/cards', badge: dueFc ? t('home.due', { n: dueFc }) : null, tone: 4 },
     Object.keys(PB).length ? { label: t('home.drills'), sub: t('home.drillsSub'), icon: '🔧', href: '#/drills', badge: duePb ? t('home.due', { n: duePb }) : null, tone: 4 } : null,
-    { label: t('home.mistakes'), sub: t('home.mistakesSub'), icon: '🔁', href: '#/mistakes', badge: wrong || null, tone: 3 },
+    { label: t('home.mistakes'), sub: t('home.mistakesSub'), icon: '🔁', href: '#/mistakes', badge: wrong ? nf(wrong) : null, tone: 3 },
     { label: t('home.lightning'), sub: t('home.lightningSub'), icon: '⚡', href: '#/lightning' },
     '-',
     { label: SHL() ? SL('askTutor') : t('home.tutor'), sub: SHL() ? SL(window.NoemaThemes?.tutor?.()?.pl ? 'askTutorSubPl' : 'askTutorSub') : t('home.tutorSub'), icon: TUTOR.avatar, run: () => openTutor(null, 'socratic', null, { intent: INTENT.course }) }];
@@ -1873,13 +1978,13 @@ function subjectMenu() {
     window.NoemaCurMap?.attachDialog ? { label: Noema.node ? SL('otherStation') : SL('putOnMap'), sub: SL('putOnMapSub'), icon: 'path', run: async () => NoemaCurMap.attachDialog(ACCOUNT.id, { subject: await subjectMeta(), onDone: () => location.reload() }) } : null,
     { label: SL('editSubject'), sub: SL('editSubjectSub'), icon: 'edit', run: async () => Noema.editSubject(await subjectMeta(), { onChange: () => location.reload() }) },
     own(Noema.subjectMeta || {}) ? { label: SL('shareSubject'), sub: SL('shareSubjectSub'), icon: 'share', run: async () => Noema.share(await subjectMeta()) } : null,   // library subjects are everybody's already
-    { label: SL('exportPackage'), sub: SL('exportPackageSub'), icon: 'download', run: () => Noema.exportPackage(ACCOUNT.id, Noema.pack).catch(e => toast('⚠️ ' + e.message, 4000)) },
+    { label: SL('exportPackage'), sub: SL('exportPackageSub'), icon: 'download', run: () => Noema.exportPackage(ACCOUNT.id, Noema.pack).catch(e => toast('⚠️ ' + errText(e), 4000)) },
     { label: SL('pickSubject'), icon: 'book', run: () => Noema.openSubjectPicker() },
     '-',
     { label: SL('resetProgress', { title: SUBJ.title }), icon: 'close', danger: true, run: resetProgress }];
 }
 function resetProgress(after) {
-  confirmBox(`Reset your progress in ${SUBJ.title}? (a restore point is kept)`, async () => { await Noema.backup.restorePoint(ACCOUNT.id, 'Before reset of ' + SUBJ.title); const st = S.settings; for (const k of Object.keys(S)) delete S[k]; Object.assign(S, { xp: 0, read: {}, res: {}, pb: {}, fc: {}, boss: {}, last: null, resetAt: Date.now(), settings: st }); flushSave(); if (typeof after === 'function') after(); route(); renderTopStats(); });
+  confirmBox(tE('engine.home.resetConfirm', { title: SUBJ.title }), async () => { await Noema.backup.restorePoint(ACCOUNT.id, tE('engine.home.resetPoint', { title: SUBJ.title }), { k: 'engine.home.resetPoint', p: { title: SUBJ.title } }); const st = S.settings; for (const k of Object.keys(S)) delete S[k]; Object.assign(S, { xp: 0, read: {}, res: {}, pb: {}, fc: {}, boss: {}, last: null, resetAt: Date.now(), settings: st }); flushSave(); if (typeof after === 'function') after(); route(); renderTopStats(); });
 }
 /** 🔎 Jump to any concept of the subject. */
 function openSearch() {
@@ -1905,8 +2010,8 @@ function homeView() {
   const mantra = SUBJ.hero?.mantra || SUBJ.description;
   // the frame: one plain header (a step of which Roadmap · the title · one line · one bar); the classic screens keep the emoji and the step banner
   const top = X ? [st ? h('button', { class: 'ns-kicker subjkicker', title: SL('openMap'), onclick: () => Noema.curriculumMap(Noema.node.id, Noema.node.node) }, SL('stationOf', { title: st.info.c.title || st.info.c.goal }), ' ›') : null,
-      h('h1', { class: 'herohead' }, SUBJ.title), mantra ? h('p', { class: 'mantra', html: fmt(mantra) }) : null]
-    : [h('div', { class: 'subjtop' }, h('span', { class: 'subjemo' }, SUBJ.emoji || '📘'), h('div', { class: 'grow' }, h('h1', { class: 'herohead' }, SUBJ.title), mantra ? h('p', { class: 'mantra', html: fmt(mantra) }) : null))];
+      h('h1', { class: 'herohead' }, SUBJ.title, Noema.langTag?.(SUBJ) || ''), mantra ? h('p', { class: 'mantra', html: fmt(mantra) }) : null]
+    : [h('div', { class: 'subjtop' }, h('span', { class: 'subjemo' }, SUBJ.emoji || '📘'), h('div', { class: 'grow' }, h('h1', { class: 'herohead' }, SUBJ.title, Noema.langTag?.(SUBJ) || ''), mantra ? h('p', { class: 'mantra', html: fmt(mantra) }) : null))];
   const barW = st ? Math.round(Math.min(st.read, st.solved / NoemaCurriculum.PASS) * 100) : Math.round((p.sr + p.ex) * 50);
   const barTip = st ? (st.done ? SL('stationDone') : SL('stationMastery', { ...pr, p: Math.round(NoemaCurriculum.PASS * 100) })) : SL('subjProgress', pr);
   const v = view(
@@ -1927,8 +2032,8 @@ function homeView() {
         const card = h('button', { class: 'chcard', style: { animationDelay: i * 40 + 'ms' }, onclick: () => go('#/ch/' + c.id) },
           newBadge(c), h('div', { class: 'emo' }, c.emoji), h('div', { class: 'num' }, `${SL('chapterN', { n: c.num })}${S.boss[c.id] ? ' · 🏆' : ''}`), h('h3', {}, c.title), h('p', {}, c.subtitle),
           h('div', { class: 'bars' },
-            h('div', { class: 'barlbl' }, h('span', {}, '📖 ' + SL('theory')), h('span', {}, Math.round(p.sr * 100) + '%')), h('div', { class: 'bar' }, h('i', { style: { width: '0%' }, 'data-w': p.sr * 100 + '%' })),
-            h('div', { class: 'barlbl' }, h('span', {}, '🎯 ' + SL('practice')), h('span', {}, Math.round(p.ex * 100) + '%')), h('div', { class: 'bar alt' }, h('i', { style: { width: '0%' }, 'data-w': p.ex * 100 + '%' }))));
+            h('div', { class: 'barlbl' }, h('span', {}, '📖 ' + SL('theory')), h('span', {}, pctText(Math.round(p.sr * 100)))), h('div', { class: 'bar' }, h('i', { style: { width: '0%' }, 'data-w': p.sr * 100 + '%' })),
+            h('div', { class: 'barlbl' }, h('span', {}, '🎯 ' + SL('practice')), h('span', {}, pctText(Math.round(p.ex * 100)))), h('div', { class: 'bar alt' }, h('i', { style: { width: '0%' }, 'data-w': p.ex * 100 + '%' }))));
         setAccent(card, c); return card;
       })));
       requestAnimationFrame(() => requestAnimationFrame(() => $$('.bar>i[data-w]', body).forEach(i => i.style.width = i.dataset.w)));
@@ -1937,7 +2042,7 @@ function homeView() {
         const p = chProgress(c), pct = Math.round((p.sr + p.ex) * 50);
         const row = h('button', { class: 'chrow' + (pct >= 100 ? ' done' : ''), style: { animationDelay: i * 25 + 'ms' }, onclick: () => go('#/ch/' + c.id) },
           h('span', { class: 'emo' }, c.emoji), h('span', { class: 'grow' }, h('small', {}, SL('chapterN', { n: c.num }), S.boss[c.id] ? ' · 🏆' : ''), h('b', {}, c.title), c.subtitle ? h('small', { class: 'sub' }, c.subtitle) : null),
-          newBadge(c), h('span', { class: 'chpct' }, h('span', { class: 'minibar' }, h('i', { style: { width: pct + '%' } })), h('small', {}, pct + '%')));
+          newBadge(c), h('span', { class: 'chpct' }, h('span', { class: 'minibar' }, h('i', { style: { width: pct + '%' } })), h('small', {}, pctText(pct))));
         setAccent(row, c); return row;
       })));
     }
@@ -1952,11 +2057,11 @@ function doSearch(q, box) {
   if (!searchIdx) searchIdx = Object.values(SEC).map(s => ({ s, title: s.title.toLowerCase(), body: sectionText(s).toLowerCase() }));
   const words = q.split(/\s+/);
   const res = searchIdx.map(x => { let sc = 0; for (const w of words) { if (x.title.includes(w)) sc += 10; const c = x.body.split(w).length - 1; if (!c) return null; sc += Math.min(c, 8); } return { ...x, sc }; }).filter(Boolean).sort((a, b) => b.sc - a.sc).slice(0, 7);
-  if (!res.length) { box.append(h('div', { class: 'tiny' }, `No match — try a different word, or ask ${TUTOR.name} ${TUTOR.avatar}`)); return; }
+  if (!res.length) { box.append(h('div', { class: 'tiny' }, tE('engine.search.none', { tutor: TUTOR.name, avatar: TUTOR.avatar }))); return; }
   res.forEach((r, i) => {
     const pos = r.body.indexOf(words[0]);
     const snip = sectionText(r.s).slice(Math.max(0, pos - 50), pos + 90).replace(/\s+/g, ' ');
-    const b = h('button', { class: 'result', style: { animationDelay: i * 30 + 'ms' }, onclick: () => go('#/s/' + r.s.id) }, h('b', {}, `${r.s._ch.emoji} ${r.s.title}`), h('small', {}, `Ch${r.s._ch.num} · …${snip}…`));
+    const b = h('button', { class: 'result', style: { animationDelay: i * 30 + 'ms' }, onclick: () => go('#/s/' + r.s.id) }, h('b', {}, `${r.s._ch.emoji} ${r.s.title}`), h('small', {}, chTitle(r.s._ch.num, `…${snip}…`)));
     box.append(b);
   });
 }
@@ -1969,12 +2074,12 @@ function choiceList(items) {
     h('span', { class: 'pic' }, it.icon), h('span', { class: 'grow' }, h('b', {}, it.label), it.sub ? h('small', {}, it.sub) : null), it.badge != null && it.badge !== '' ? h('span', { class: 'pill c' }, it.badge) : null, h('span', { class: 'chev', 'aria-hidden': 'true' }, '›'))));
 }
 function chapterMenu(c) {
-  return () => [{ label: SL('chSocratic'), sub: SL('chSocraticSub'), icon: TUTOR.avatar, run: () => openTutor({ kind: 'chapter', id: c.id }, 'socratic', null, { intent: INTENT.chSocratic }) },
+  return () => [{ label: SL('chSocratic'), sub: SL('chSocraticSub'), icon: TUTOR.avatar, run: () => openTutor({ kind: 'chapter', id: c.id, origin: { via: 'chapterSocratic', ch: c.id } }, 'socratic', null, { intent: INTENT.chSocratic }) },
     { label: SL('searchSubject'), icon: 'search', run: openSearch }, { label: SL('sources'), sub: SL('sourcesSub'), icon: 'book', run: () => toggleSourcesDeck() },
     { label: timerT ? SL('focusStop') : SL('focusSprint'), sub: SL('focusSprintSub'), icon: 'clock', run: () => focusSprint() }, '-',
     { label: SL('allChapters'), icon: 'list', href: HOME() }];
 }
-function chapterView(id, tab) {
+function chapterView(id, tab, focus) {
   const c = CH[id]; if (!c) return go(HOME());
   setAccent(document.body, c);
   setTutorContext({ kind: 'chapter', id });
@@ -1989,9 +2094,9 @@ function chapterView(id, tab) {
     backBtn(t('ch.all'), HOME()),
     h('div', { class: 'chhead' }, h('div', { class: 'emo' }, c.emoji),
       h('div', { class: 'grow' }, h('div', { class: 'num' }, SL('chOf', { n: c.num, of: COURSE.length })), h('h1', {}, c.title), c.subtitle ? h('p', { class: 'muted', style: { margin: '6px 0 0' } }, c.subtitle) : null, sourceChips(FULL_COURSE.find(x => x.id === c.id) || c)),
-      h('div', { class: 'chring' }, ring((p.sr + p.ex) / 2, 76, 9), h('div', { class: 'chringc' }, Math.round((p.sr + p.ex) * 50) + '%'))),
-    explainable(h('div', { class: 'mantrabox' }, h('span', {}, '🧭'), F(c.mantra)), () => ({ label: c.mantra, text: `The mental model of chapter ${c.num} "${c.title}": ${c.mantra}`, ch: c, what: 'mental model' })),
-    h('div', { class: 'tabs', role: 'tablist' }, ...tabs.map(([k, l, n]) => h('button', { class: on === k ? 'on' : '', role: 'tab', 'aria-selected': String(on === k), onclick: () => go(`#/ch/${id}/${k}`) }, l, h('span', { class: 'n' }, n)))),
+      h('div', { class: 'chring' }, ring((p.sr + p.ex) / 2, 76, 9), h('div', { class: 'chringc' }, pctText(Math.round((p.sr + p.ex) * 50))))),
+    explainable(h('div', { class: 'mantrabox' }, h('span', {}, '🧭'), F(c.mantra)), () => ({ label: c.mantra, text: `The mental model of chapter ${c.num} "${c.title}": ${c.mantra}`, ch: c, what: 'mental model' })),   // i18n-ignore (for the AI)
+    h('div', { class: 'tabs', role: 'tablist' }, ...tabs.map(([k, l, n]) => h('button', { class: on === k ? 'on' : '', role: 'tab', 'aria-selected': String(on === k), onclick: () => go(`#/ch/${id}/${k}`) }, l, h('span', { class: 'n' }, nf(n))))),
     body);
   animateRings(v);
   if (on === 'learn') {
@@ -2001,12 +2106,12 @@ function chapterView(id, tab) {
       h('div', { class: 'path' }, ...c.sections.map((s, i) => {
         const nEx = c.exercises.filter(e => e.section === s.id), nOk = nEx.filter(e => solved(e.id)).length;
         return h('button', { class: 'node' + (S.read[s.id] ? ' done' : ''), style: { animationDelay: i * 35 + 'ms' }, onclick: () => go('#/s/' + s.id) },
-          h('div', { class: 'dot' }, S.read[s.id] ? '✓' : i + 1), h('div', { class: 'grow' }, h('b', {}, s.title), h('small', {}, s.hook || '')),
-          h('div', { class: 'meta' }, newBadge(s), h('span', { class: 'pill' + (nOk === nEx.length && nEx.length ? ' c' : '') }, `🎯 ${nOk}/${nEx.length}`)));
+          h('div', { class: 'dot' }, S.read[s.id] ? '✓' : nf(i + 1)), h('div', { class: 'grow' }, h('b', {}, s.title), h('small', {}, s.hook || '')),
+          h('div', { class: 'meta' }, newBadge(s), h('span', { class: 'pill' + (nOk === nEx.length && nEx.length ? ' c' : '') }, `🎯 ${nf(nOk)}/${nf(nEx.length)}`)));
       })),
       h('div', { class: 'row', style: { marginTop: '22px' } },
         nextSec ? h('button', { class: 'btn primary', onclick: () => go('#/s/' + nextSec.id) }, (S.read[c.sections[0].id] ? SL('continueSec', { title: nextSec.title }) : SL('startReading'))) : h('button', { class: 'btn primary', onclick: () => go(`#/ch/${id}/practice`) }, '🎯 ' + SL('practiceChapter')),
-        h('button', { class: 'btn ghost', onclick: () => openTutor({ kind: 'chapter', id }, 'socratic', null, { intent: INTENT.chSocratic }) }, `${TUTOR.avatar} ${SL('chSocratic')}`)));
+        h('button', { class: 'btn ghost', onclick: () => openTutor({ kind: 'chapter', id, origin: { via: 'chapterSocratic', ch: id } }, 'socratic', null, { intent: INTENT.chSocratic }) }, `${TUTOR.avatar} ${SL('chSocratic')}`)));
   } else if (on === 'practice') {
     if (STEP_LOCK) body.append(lockNote());
     else if (tab === 'practice') body.append(chapterPractice(c));
@@ -2020,9 +2125,10 @@ function chapterView(id, tab) {
     const traps = c.exercises.filter(e => e.tags.some(t => ['pitfall', 'exam'].includes(t))), tf = c.exercises.filter(e => e.type === 'tf');
     body.append(h('p', { class: 'muted' }, SL('trapsIntro')),
       h('div', { class: 'row', style: { marginBottom: '14px' } },
-        traps.length ? h('button', { class: 'btn primary', onclick: () => startRun(traps, { title: `⚠️ ${SL('trapDrill')} · Ch${c.num}`, count: 12, back: `#/ch/${id}/traps` }) }, '⚠️ ' + SL('trapsNoTimer')) : null,
+        traps.length ? h('button', { class: 'btn primary', onclick: () => startRun(traps, { title: `⚠️ ${SL('trapDrill')} · ${chShort(c.num)}`, count: 12, back: `#/ch/${id}/traps` }) }, '⚠️ ' + SL('trapsNoTimer')) : null,
         tf.length >= 3 ? h('button', { class: 'btn', onclick: () => go('#/lightning/' + id) }, '⚡ ' + SL('trapsTimed')) : null),
-      h('div', { style: { display: 'grid', gap: '10px' } }, ...c.pitfalls.map((p, i) => explainable(h('div', { class: 'callout pitfall', style: { animation: `slideIn .4s ${i * 30}ms both` } }, h('span', { class: 'ci' }, '⚠️'), h('b', { class: 't', html: fmt(p.title) }), h('div', { html: fmt(p.text) }), p.fix ? h('div', { style: { marginTop: '6px' }, html: '✅ <b>Fix:</b> ' + fmt(p.fix) }) : null), () => ({ label: p.title, text: `${p.title}: ${p.text}${p.fix ? ' — Fix: ' + p.fix : ''}`, ch: c, what: 'trap' })))));
+      h('div', { style: { display: 'grid', gap: '10px' } }, ...c.pitfalls.map((p, i) => explainable(h('div', { class: 'callout pitfall', 'data-pid': window.NoemaCatalog ? NoemaCatalog.trapId(p) : null, style: { animation: `slideIn .4s ${i * 30}ms both` } }, h('span', { class: 'ci' }, '⚠️'), h('b', { class: 't', html: fmt(p.title) }), h('div', { html: fmt(p.text) }), p.fix ? h('div', { style: { marginTop: '6px' }, html: '✅ ' + tE('engine.ch.fixHtml', { fix: fmt(p.fix) }) }) : null), () => ({ label: p.title, text: `${p.title}: ${p.text}${p.fix ? ' — Fix: ' + p.fix : ''}`, ch: c, what: 'trap' })))));   // i18n-ignore (text, what: for the AI)
+    if (focus) showHit(body.querySelector(`[data-pid="${focus}"]`));
   }
 }
 /** Practice tab: every way to practise this chapter. */
@@ -2031,13 +2137,13 @@ function chapterPractice(c) {
   const cards = c.flashcards.map((f, i) => f._key || c.id + '#' + i), dueC = cards.filter(k => S.fc[k] && cardDue(k)).length;
   const dueD = c.debug.filter(d => !S.pb[d.id] || S.pb[d.id].due <= today()).length;
   return choiceList([
-    c.exercises.length ? { label: SL('round10'), sub: SL('solvedOf', { n: ok, of: c.exercises.length }), icon: '🎯', cls: 'main', run: () => startRun(c.exercises, { title: `🎯 Ch${c.num} · ${c.title}`, count: 10, back: `#/ch/${id}/practice` }) } : null,
+    c.exercises.length ? { label: SL('round10'), sub: SL('solvedOf', { n: ok, of: c.exercises.length }), icon: '🎯', cls: 'main', run: () => startRun(c.exercises, { title: '🎯 ' + chTitle(c.num, c.title), count: 10, back: `#/ch/${id}/practice` }) } : null,
     c.exercises.length ? { label: SL('chooseRound'), sub: SL('chooseRoundSub'), icon: '🎛️', href: `#/ch/${id}/filters` } : null,
-    c.flashcards.length ? { label: t('home.cards'), sub: t('home.cardsSub'), icon: '🃏', href: `#/ch/${id}/cards`, badge: dueC ? t('home.due', { n: dueC }) : c.flashcards.length } : null,
-    c.debug.length ? { label: t('home.drills'), sub: t('home.drillsSub'), icon: '🔧', href: `#/ch/${id}/debug`, badge: dueD ? t('home.due', { n: dueD }) : c.debug.length } : null,
-    wrong.length ? { label: t('home.mistakes'), sub: t('home.mistakesSub'), icon: '🔁', badge: wrong.length, run: () => startRun(wrong, { title: `🔁 Ch${c.num} mistakes`, count: wrong.length, back: `#/ch/${id}/practice` }) } : null,
+    c.flashcards.length ? { label: t('home.cards'), sub: t('home.cardsSub'), icon: '🃏', href: `#/ch/${id}/cards`, badge: dueC ? t('home.due', { n: dueC }) : nf(c.flashcards.length) } : null,
+    c.debug.length ? { label: t('home.drills'), sub: t('home.drillsSub'), icon: '🔧', href: `#/ch/${id}/debug`, badge: dueD ? t('home.due', { n: dueD }) : nf(c.debug.length) } : null,
+    wrong.length ? { label: t('home.mistakes'), sub: t('home.mistakesSub'), icon: '🔁', badge: nf(wrong.length), run: () => startRun(wrong, { title: '🔁 ' + tE('engine.run.chMistakes', { num: c.num }), count: wrong.length, back: `#/ch/${id}/practice` }) } : null,
     c.exercises.length ? { label: S.boss[id] ? SL('bossBeaten') : SL('boss'), sub: SL('bossSub'), icon: S.boss[id] ? '🏆' : '👾', href: `#/boss/${id}` } : null,
-    { label: SL('chSocratic'), sub: SL('chSocraticSub'), icon: TUTOR.avatar, run: () => openTutor({ kind: 'chapter', id }, 'socratic', null, { intent: INTENT.chSocratic }) }]);
+    { label: SL('chSocratic'), sub: SL('chSocraticSub'), icon: TUTOR.avatar, run: () => openTutor({ kind: 'chapter', id, origin: { via: 'chapterSocratic', ch: id } }, 'socratic', null, { intent: INTENT.chSocratic }) }]);
 }
 
 /* ---------- section reader ---------- */
@@ -2058,8 +2164,8 @@ function renderBlock(b, i) {
     case 'ask': {
       const box = h('div', { class: 'ask' });
       const ol = h('ol', {}, ...b.questions.map(q => { const li = h('li', { onclick: () => li.classList.add('shown') }, h('span', { html: fmt(q) })); return li; }));
-      const tog = h('button', { class: 'btn small', style: { marginLeft: 'auto' }, onclick: () => { box.classList.toggle('recall'); $$('li', ol).forEach(l => l.classList.remove('shown')); tog.textContent = box.classList.contains('recall') ? '👁️ Show all' : '🙈 Recall mode'; } }, '🙈 Recall mode');
-      box.append(h('div', { class: 'hd' }, '🧠', h('span', { html: fmt(b.title || 'Ask yourself') }), tog), ol);
+      const tog = h('button', { class: 'btn small', style: { marginLeft: 'auto' }, onclick: () => { box.classList.toggle('recall'); $$('li', ol).forEach(l => l.classList.remove('shown')); tog.textContent = box.classList.contains('recall') ? '👁️ ' + tE('engine.blk.showAll') : '🙈 ' + tE('engine.blk.recallMode'); } }, '🙈 ' + tE('engine.blk.recallMode'));
+      box.append(h('div', { class: 'hd' }, '🧠', h('span', { html: fmt(b.title || tE('engine.blk.askYourself')) }), tog), ol);
       wrap.append(box); break;
     }
     case 'terms': wrap.append(h('div', { class: 'terms' }, ...b.items.map(t => h('div', { class: 'term' }, h('b', { html: fmt(t.term) }), h('div', { class: 'tiny', style: { color: 'var(--ink2)', fontSize: '14px' }, html: fmt(t.def) }))))); break;
@@ -2067,15 +2173,17 @@ function renderBlock(b, i) {
   return wrap;
 }
 /** 💡 on a block and on its cards / items (compare columns, terms, list items, table rows). */
+/* i18n-ignore-start */   // the kind of a part, and its text: words of the AI's prompt (explainItem)
 const BLOCK_WHAT = { p: 'paragraph', list: 'list', code: 'code example', figure: 'figure', diagram: 'diagram', table: 'table', callout: 'note', compare: 'comparison', flow: 'process', reveal: 'question', ask: 'set of questions', terms: 'set of terms' };
 function explainParts(el, b, s) {
-  explainable(el, () => ({ label: b.title || b.label || b.caption || (b.t === 'figure' ? (MEDIA[b.media]?.alt || 'this figure') : blockText(b)), text: blockText(b), sec: s, what: BLOCK_WHAT[b.t] || 'part of the lesson' }));
-  if (b.t === 'compare') $$('.compare > div', el).forEach((d, k) => { const it = b.items[k]; if (it) explainable(d, () => ({ label: it.title, text: it.title + ':\n' + it.points.map(p => '- ' + p).join('\n') + '\n\n(Compared with: ' + b.items.filter(x => x !== it).map(x => x.title).join(', ') + ')', sec: s, what: 'card' })); });
-  if (b.t === 'terms') $$('.term', el).forEach((d, k) => { const t = b.items[k]; if (t) explainable(d, () => ({ label: t.term, text: `${t.term}: ${t.def}`, sec: s, what: 'term' })); });
-  if (b.t === 'list') $$('li', el).forEach((d, k) => { const x = b.items[k]; if (x && String(x).length > 30) explainable(d, () => ({ label: x, text: x + '\n\n(One item of the list:\n' + blockText(b) + ')', sec: s, what: 'point' })); });
-  if (b.t === 'table') $$('tbody tr', el).forEach((d, k) => { const r = b.rows[k]; if (r) explainable(d.lastElementChild || d, () => ({ label: r[0], text: b.head.map((hd, j) => `${hd}: ${r[j] ?? ''}`).join('\n'), sec: s, what: 'row of the table' })); });
+  explainable(el, () => ({ label: b.title || b.label || b.caption || (b.t === 'figure' ? (MEDIA[b.media]?.alt || tE('engine.aimsg.thisFigure')) : blockText(b)), text: blockText(b), sec: s, what: BLOCK_WHAT[b.t] || 'part of the lesson', bid: el.dataset.bid }));
+  if (b.t === 'compare') $$('.compare > div', el).forEach((d, k) => { const it = b.items[k]; if (it) explainable(d, () => ({ label: it.title, text: it.title + ':\n' + it.points.map(p => '- ' + p).join('\n') + '\n\n(Compared with: ' + b.items.filter(x => x !== it).map(x => x.title).join(', ') + ')', sec: s, what: 'card', bid: el.dataset.bid })); });
+  if (b.t === 'terms') $$('.term', el).forEach((d, k) => { const t = b.items[k]; if (t) explainable(d, () => ({ label: t.term, text: `${t.term}: ${t.def}`, sec: s, what: 'term', bid: el.dataset.bid })); });
+  if (b.t === 'list') $$('li', el).forEach((d, k) => { const x = b.items[k]; if (x && String(x).length > 30) explainable(d, () => ({ label: x, text: x + '\n\n(One item of the list:\n' + blockText(b) + ')', sec: s, what: 'point', bid: el.dataset.bid })); });
+  if (b.t === 'table') $$('tbody tr', el).forEach((d, k) => { const r = b.rows[k]; if (r) explainable(d.lastElementChild || d, () => ({ label: r[0], text: b.head.map((hd, j) => `${hd}: ${r[j] ?? ''}`).join('\n'), sec: s, what: 'row of the table', bid: el.dataset.bid })); });
   return el;
 }
+/* i18n-ignore-end */
 function chunkBlocks(blocks) {
   // group into bite-size chunks of ~3–4 blocks, never splitting right after a heading-like callout
   const out = []; let cur = [], weight = 0;
@@ -2094,8 +2202,9 @@ function sectionMenu(s) {
     { label: SL('sources'), sub: SL('sourcesSub'), icon: 'book', run: () => toggleSourcesDeck() }, { label: timerT ? SL('focusStop') : SL('focusSprint'), sub: SL('focusSprintSub'), icon: 'clock', run: () => focusSprint() },
     '-', { label: SL('allSections'), icon: 'list', href: '#/ch/' + s._ch.id }];
 }
-function sectionView(sid) {
+function sectionView(sid, bid) {
   const s = SEC[sid]; if (!s) return go(HOME());
+  const bids = s._bids || (s._bids = window.NoemaCatalog ? NoemaCatalog.blockIds(s.blocks) : s.blocks.map((b, i) => 'b' + i));   // stable ids (engine/catalog.js): #/s/<section>/<block> opens exactly that block
   const c = s._ch; setAccent(document.body, c);
   S.last = sid; save();
   setTutorContext({ kind: 'section', id: sid });
@@ -2103,24 +2212,26 @@ function sectionView(sid) {
   noteRecent({ sid, secTitle: s.title, chNum: c.num, chOf: COURSE.length, secNum: s._j + 1, secOf: c.sections.length });
   const chunks = S.settings.chunk ? chunkBlocks(s.blocks) : [s.blocks];
   let shown = revealedChunks[sid] || (S.read[sid] ? chunks.length : 1);
+  const target = bid ? s.blocks[bids.indexOf(bid)] : null;   // a found block: every chunk up to it is shown
+  if (target) { const ci = chunks.findIndex(ch => ch.includes(target)); if (ci >= 0 && ci + 1 > shown) shown = revealedChunks[sid] = ci + 1; }
   const prev = c.sections[s._j - 1], next = c.sections[s._j + 1];
   const body = h('div');
   const pl = h('div', { class: 'progressline' }, h('i', { style: { width: '0%' } }));
   const tail = h('div');
   const v = view(h('div', { class: 'reader' },
-    backBtn(`← ${c.emoji} Ch${c.num} · ${c.title}`, '#/ch/' + c.id),
+    backBtn(`${arrowBack()} ${c.emoji} ` + chTitle(c.num, c.title), '#/ch/' + c.id),
     pl,
-    explainable(h('div', { class: 'sechead' }, h('div', { class: 'row' }, h('span', { class: 'pill c' }, SHL() ? `${SL('chOf', { n: c.num, of: COURSE.length })} · ${SL('secOf', { n: s._j + 1, of: c.sections.length })}` : `Section ${s._j + 1} / ${c.sections.length}`), S.read[sid] ? h('span', { class: 'pill', style: { background: 'var(--ok-bg)', color: 'var(--ok)' } }, '✓ ' + SL('read')) : null),
-      h('h1', { style: { marginTop: '10px' } }, s.title), s.hook ? h('p', { class: 'hook', html: fmt(s.hook) }) : null), () => ({ label: s.title, text: `The whole section "${s.title}" — ${s.hook || ''} (give me the big picture of this section)`, sec: s, what: 'section' })),
+    explainable(h('div', { class: 'sechead' }, h('div', { class: 'row' }, h('span', { class: 'pill c' }, SHL() ? `${SL('chOf', { n: c.num, of: COURSE.length })} · ${SL('secOf', { n: s._j + 1, of: c.sections.length })}` : tE('engine.sec.nOfM', { n: s._j + 1, of: c.sections.length })), S.read[sid] ? h('span', { class: 'pill', style: { background: 'var(--ok-bg)', color: 'var(--ok)' } }, '✓ ' + SL('read')) : null),
+      h('h1', { style: { marginTop: '10px' } }, s.title), s.hook ? h('p', { class: 'hook', html: fmt(s.hook) }) : null), () => ({ label: s.title, text: `The whole section "${s.title}" — ${s.hook || ''} (give me the big picture of this section)`, sec: s, what: 'section' })),   // i18n-ignore (for the AI)
     body, tail));
   function draw(scroll) {
     body.innerHTML = '';
-    chunks.slice(0, shown).forEach((ch, ci) => ch.forEach((b, i) => { const el = renderBlock(b, ci === shown - 1 ? i : 0); markNewBlock(el, b, c); explainParts(el, b, s); body.append(el); }));
+    chunks.slice(0, shown).forEach((ch, ci) => ch.forEach((b, i) => { const el = renderBlock(b, ci === shown - 1 ? i : 0); el.dataset.bid = bids[s.blocks.indexOf(b)]; markNewBlock(el, b, c); explainParts(el, b, s); body.append(el); }));
     pl.firstChild.style.width = (shown / chunks.length * 100) + '%';
     tail.innerHTML = '';
     if (shown < chunks.length) {
       tail.append(h('div', { class: 'continue' }, h('div', { class: 'row' },
-        h('button', { class: 'btn primary', onclick: () => { shown++; revealedChunks[sid] = shown; draw(true); } }, `${SL('continueRead')} ▾  (${shown}/${chunks.length})`),
+        h('button', { class: 'btn primary', onclick: () => { shown++; revealedChunks[sid] = shown; draw(true); } }, `${SL('continueRead')} ▾  (${nf(shown)}/${nf(chunks.length)})`),
         h('button', { class: 'btn ghost small', onclick: () => { shown = chunks.length; revealedChunks[sid] = shown; draw(); } }, SL('showAll')))));
       if (scroll) { const els = $$('.blk', body); const first = els[els.length - chunks[shown - 1].length]; first?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
     } else {
@@ -2133,9 +2244,16 @@ function sectionView(sid) {
     }
   }
   draw();
+  if (target) showHit(body.querySelector(`[data-bid="${bids[s.blocks.indexOf(target)]}"]`));
 }
-const SEC_ASK = { socratic: ['Start a Socratic session on "{t}". Begin by probing what I already think.', 'secSocratic'], debug: ['Start a debugging simulation related to "{t}".', 'secDebug'], interview: ['Interview me about "{t}".', 'secInterview'] };
-function askSection(s, mode) { const [msg, intent] = SEC_ASK[mode]; openTutor({ kind: 'section', id: s.id }, mode, msg.replace('{t}', s.title), { intent: INTENT[intent] }); }
+/** A place opened from the search (engine/search.js): brought into view and outlined for a moment. */
+function showHit(el) {
+  if (!el) return;
+  setTimeout(() => { el.scrollIntoView({ behavior: 'smooth', block: 'center' }); el.classList.add('ns-hit'); setTimeout(() => el.classList.remove('ns-hit'), 2600); }, 120);
+}
+/** The section's AI buttons: [the learner's first message (their bubble, in the UI language), the task for the AI]. */
+const SEC_ASK = { socratic: ['engine.aimsg.secSocratic', 'secSocratic'], debug: ['engine.aimsg.secDebug', 'secDebug'], interview: ['engine.aimsg.secInterview', 'secInterview'] };
+function askSection(s, mode) { const [msg, intent] = SEC_ASK[mode]; openTutor({ kind: 'section', id: s.id, origin: { via: 'section_' + mode, sec: s.id } }, mode, tE(msg, { title: s.title }), { intent: INTENT[intent] }); }
 function sectionTail(s, prev, next) {
   const c = s._ch;
   const exs = c.exercises.filter(e => e.section === s.id);
@@ -2152,7 +2270,7 @@ function sectionTail(s, prev, next) {
     pbs.forEach(d => zone.append(drillTile(d)));
   }
   const fresh = h('div', { class: STEP_LOCK ? '' : 'freshslot' });
-  const freshQ = async () => { const note = h('p', { class: 'tiny' }, '✨ ' + SL('generating')); fresh.prepend(note); try { const ex = await aiQuestion(s); note.replaceWith(exerciseCard(ex)); } catch (er) { note.remove(); toast('⚠️ ' + er.message, 4000); } };
+  const freshQ = async () => { const note = h('p', { class: 'tiny' }, '✨ ' + SL('generating')); fresh.prepend(note); try { const ex = await aiQuestion(s); note.replaceWith(exerciseCard(ex)); } catch (er) { note.remove(); toast('⚠️ ' + errText(er), 4000); } };
   const ask = [{ label: SL('askSocratic'), icon: TUTOR.avatar, run: () => askSection(s, 'socratic') }, { label: SL('askDebug'), icon: '🔧', run: () => askSection(s, 'debug') },
     { label: SL('askInterview'), icon: '🎤', run: () => askSection(s, 'interview') }, '-', { label: SL('askFresh'), sub: SL('askFreshSub'), icon: '✨', run: freshQ }];
   const X = SHL();
@@ -2163,17 +2281,17 @@ function sectionTail(s, prev, next) {
     exs.length && !STEP_LOCK ? h('button', { class: 'btn ghost', onclick: () => startRun(exs, { title: `🎯 ${s.title}`, count: exs.length, back: '#/s/' + s.id }) }, '🎯 ' + SL('allExercises', { n: exs.length })) : null));
   if (!X) {
     zone.append(h('div', { class: 'secnav' },
-      prev ? h('button', { class: 'btn', onclick: () => go('#/s/' + prev.id) }, '← ' + prev.title) : h('span'),
-      next ? h('button', { class: 'btn primary', onclick: () => go('#/s/' + next.id) }, next.title + ' →') : h('button', { class: 'btn primary', onclick: () => go(`#/ch/${c.id}/practice`) }, '🎯 ' + SL('practiceChapter') + ' →')));
+      prev ? h('button', { class: 'btn', onclick: () => go('#/s/' + prev.id) }, arrowBack() + ' ' + prev.title) : h('span'),
+      next ? h('button', { class: 'btn primary', onclick: () => go('#/s/' + next.id) }, next.title + ' ' + arrowOn()) : h('button', { class: 'btn primary', onclick: () => go(`#/ch/${c.id}/practice`) }, '🎯 ' + SL('practiceChapter') + ' ' + arrowOn())));
     return zone;
   }
   // the frame: one big “Next section” (the next chapter's first one after the last section), the chapter's practice beside it
   const nextCh = !next && COURSE[COURSE.indexOf(c) + 1], to = next || nextCh?.sections[0];
   zone.append(h('nav', { class: 'secnav ns-secnav', 'aria-label': SL('nextSection') },
-    to ? h('button', { class: 'btn primary secnext', onclick: () => go('#/s/' + to.id) }, h('span', { class: 'nx' }, SL('nextSection') + ' →'), h('small', {}, next ? next.title : SL('nextChapterFirst', { n: nextCh.num, title: nextCh.title })))
-      : h('button', { class: 'btn primary secnext', onclick: () => go(`#/ch/${c.id}/practice`) }, h('span', { class: 'nx' }, '🎯 ' + SL('practiceChapter') + ' →')),
+    to ? h('button', { class: 'btn primary secnext', onclick: () => go('#/s/' + to.id) }, h('span', { class: 'nx' }, SL('nextSection') + ' ' + arrowOn()), h('small', {}, next ? next.title : SL('nextChapterFirst', { n: nextCh.num, title: nextCh.title })))
+      : h('button', { class: 'btn primary secnext', onclick: () => go(`#/ch/${c.id}/practice`) }, h('span', { class: 'nx' }, '🎯 ' + SL('practiceChapter') + ' ' + arrowOn())),
     to && !next ? h('button', { class: 'btn', onclick: () => go(`#/ch/${c.id}/practice`) }, '🎯 ' + SL('practiceChapter')) : null,
-    prev ? h('button', { class: 'btn ghost small secprev', title: prev.title, onclick: () => go('#/s/' + prev.id) }, '← ' + SL('prevSection')) : null));
+    prev ? h('button', { class: 'btn ghost small secprev', title: prev.title, onclick: () => go('#/s/' + prev.id) }, arrowBack() + ' ' + SL('prevSection')) : null));
   return zone;
 }
 
@@ -2182,19 +2300,19 @@ function practiceSetup(body, c) {
   const st = { sec: 'all', types: new Set(), tags: new Set(), diff: 0, mode: 'smart', count: 10 };
   const info = h('span', { class: 'tiny' });
   const pool = () => c.exercises.filter(e => (st.sec === 'all' || e.section === st.sec) && (!st.types.size || st.types.has(e.type)) && (!st.tags.size || e.tags.some(t => st.tags.has(t))) && (!st.diff || e.difficulty === st.diff));
-  const upd = () => { const p = pool(); info.textContent = `${p.length} exercises match · ${p.filter(e => solved(e.id)).length} solved`; };
+  const upd = () => { const p = pool(); info.textContent = tE('engine.prac.match', { n: p.length, solved: p.filter(e => solved(e.id)).length }); };
   const chipset = (items, set, label) => h('div', { class: 'fchips' }, ...items.map(([k, l]) => { const b = h('button', { class: 'fchip', onclick: () => { set.has(k) ? set.delete(k) : set.add(k); b.classList.toggle('on'); upd(); } }, l); return b; }));
   const types = [...new Set(c.exercises.map(e => e.type))];
-  const secSel = h('select', { class: 'sel', onchange: e => { st.sec = e.target.value; upd(); } }, h('option', { value: 'all' }, 'All sections'), ...c.sections.map(s => h('option', { value: s.id }, s.title)));
-  const diffChips = h('div', { class: 'fchips' }, ...[[0, 'Any'], [1, '● easy'], [2, '●● medium'], [3, '●●● hard']].map(([d, l]) => { const b = h('button', { class: 'fchip' + (d === 0 ? ' on' : ''), onclick: () => { st.diff = d; $$('.fchip', diffChips).forEach(x => x.classList.remove('on')); b.classList.add('on'); upd(); } }, l); return b; }));
-  const countChips = h('div', { class: 'fchips' }, ...[[5, '5'], [10, '10'], [20, '20'], [999, '∞ all']].map(([n, l]) => { const b = h('button', { class: 'fchip' + (n === 10 ? ' on' : ''), onclick: () => { st.count = n; $$('.fchip', countChips).forEach(x => x.classList.remove('on')); b.classList.add('on'); } }, l); return b; }));
+  const secSel = h('select', { class: 'sel', onchange: e => { st.sec = e.target.value; upd(); } }, h('option', { value: 'all' }, tE('engine.prac.allSections')), ...c.sections.map(s => h('option', { value: s.id }, s.title)));
+  const diffChips = h('div', { class: 'fchips' }, ...[[0, tE('engine.prac.any')], [1, '● ' + tE('engine.prac.easy')], [2, '●● ' + tE('engine.prac.medium')], [3, '●●● ' + tE('engine.prac.hard')]].map(([d, l]) => { const b = h('button', { class: 'fchip' + (d === 0 ? ' on' : ''), onclick: () => { st.diff = d; $$('.fchip', diffChips).forEach(x => x.classList.remove('on')); b.classList.add('on'); upd(); } }, l); return b; }));
+  const countChips = h('div', { class: 'fchips' }, ...[[5, nf(5)], [10, nf(10)], [20, nf(20)], [999, '∞ ' + tE('engine.prac.all')]].map(([n, l]) => { const b = h('button', { class: 'fchip' + (n === 10 ? ' on' : ''), onclick: () => { st.count = n; $$('.fchip', countChips).forEach(x => x.classList.remove('on')); b.classList.add('on'); } }, l); return b; }));
   body.append(h('div', { class: 'card filters' },
-    h('div', {}, h('div', { class: 'lbl' }, 'Section'), secSel),
-    h('div', {}, h('div', { class: 'lbl' }, 'Exercise types'), chipset(types.map(t => [t, TYPE_LABEL[t]]), st.types)),
-    h('div', {}, h('div', { class: 'lbl' }, 'Focus'), chipset([['pitfall', '⚠️ pitfalls'], ['debug', '🔧 debugging'], ['exam', '🎓 exam traps'], ['syntax', '⌨️ syntax'], ['calc', '🧮 calc'], ['interview', '🎤 interview'], ['compare', '⚖️ compare']], st.tags)),
-    h('div', {}, h('div', { class: 'lbl' }, 'Difficulty'), diffChips),
-    h('div', {}, h('div', { class: 'lbl' }, 'Round size'), countChips),
-    h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => { const p = pool(); if (!p.length) return toast('No exercises match these filters'); startRun(p, { title: `🎯 Ch${c.num} practice`, count: st.count, back: `#/ch/${c.id}/practice` }); } }, '▶ Start round'), info)));
+    h('div', {}, h('div', { class: 'lbl' }, tE('engine.prac.section')), secSel),
+    h('div', {}, h('div', { class: 'lbl' }, tE('engine.prac.types')), chipset(types.map(t => [t, TYPE_LABEL[t]]), st.types)),
+    h('div', {}, h('div', { class: 'lbl' }, tE('engine.prac.focus')), chipset([['pitfall', '⚠️'], ['debug', '🔧'], ['exam', '🎓'], ['syntax', '⌨️'], ['calc', '🧮'], ['interview', '🎤'], ['compare', '⚖️']].map(([k, i]) => [k, i + ' ' + tE('engine.prac.focus_' + k)]), st.tags)),
+    h('div', {}, h('div', { class: 'lbl' }, tE('engine.prac.difficulty')), diffChips),
+    h('div', {}, h('div', { class: 'lbl' }, tE('engine.prac.roundSize')), countChips),
+    h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => { const p = pool(); if (!p.length) return toast(tE('engine.prac.noMatch')); startRun(p, { title: '🎯 ' + tE('engine.run.chPractice', { num: c.num }), count: st.count, back: `#/ch/${c.id}/practice` }); } }, '▶ ' + tE('engine.prac.start')), info)));
   upd();
 }
 function runOrder(list) {
@@ -2204,7 +2322,7 @@ function runOrder(list) {
   return [...shuffle(g2), ...shuffle(g1), ...shuffle(g3)];
 }
 function startRun(list, opt = {}) {
-  RUN = { list: (opt.keepOrder ? list : runOrder(list)).slice(0, opt.count || 10), i: 0, ok: 0, xp0: S.xp, wrong: [], title: opt.title || 'Practice', back: opt.back || HOME(), lives: opt.lives || 0, boss: opt.boss || null };
+  RUN = { list: (opt.keepOrder ? list : runOrder(list)).slice(0, opt.count || 10), i: 0, ok: 0, xp0: S.xp, wrong: [], title: opt.title || tE('engine.run.practice'), back: opt.back || HOME(), lives: opt.lives || 0, boss: opt.boss || null, after: opt.after || null };   // after: { label, run } — what comes next (a round made from search results)
   if (location.hash === '#/run') runView(); else go('#/run');
 }
 let RUN = null;
@@ -2216,34 +2334,52 @@ function runView() {
   const ex = R0.list[R0.i];
   setAccent(document.body, ex._ch);
   setTutorContext({ kind: 'section', id: ex.section });
-  const nextBtn = h('button', { class: 'btn primary', style: { display: 'none' }, onclick: () => { R0.i++; runView(); } }, R0.i + 1 < R0.list.length ? 'Next →' : 'Finish 🏁');
-  const card = exerciseCard(ex, { showSection: true, onDone: (ok) => { if (ok) R0.ok++; else { R0.wrong.push(ex); if (R0.lives) { R0.lives--; $('.hearts') && ($('.hearts').textContent = '❤️'.repeat(R0.lives) + '🤍'.repeat(3 - R0.lives)); } } if (R0.lives === 0 && R0.boss) nextBtn.textContent = 'See result'; nextBtn.style.display = ''; nextBtn.classList.add('pop'); setTimeout(() => nextBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 300); } });
+  const nextBtn = h('button', { class: 'btn primary', 'data-next': '1', style: { display: 'none' }, onclick: () => { R0.i++; runView(); } }, R0.i + 1 < R0.list.length ? tE('engine.run.next') : tE('engine.run.finish'));
+  const card = exerciseCard(ex, { showSection: true, onDone: (ok) => { if (ok) R0.ok++; else { R0.wrong.push(ex); if (R0.lives) { R0.lives--; $('.hearts') && ($('.hearts').textContent = '❤️'.repeat(R0.lives) + '🤍'.repeat(3 - R0.lives)); } } if (R0.lives === 0 && R0.boss) nextBtn.textContent = tE('engine.run.seeResult'); nextBtn.style.display = ''; nextBtn.classList.add('pop'); setTimeout(() => nextBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 300); } });
   view(h('div', { class: 'runner' },
-    h('div', { class: 'runtop' }, h('button', { class: 'iconbtn', title: 'Quit', onclick: () => go(R0.back) }, '✕'),
+    h('div', { class: 'runtop' }, h('button', { class: 'iconbtn', title: tE('engine.run.quit'), onclick: () => go(R0.back) }, '✕'),
       h('div', { class: 'bar' }, h('i', { style: { width: (R0.i / R0.list.length * 100) + '%' } })),
       R0.boss ? h('span', { class: 'hearts' }, '❤️'.repeat(R0.lives) + '🤍'.repeat(3 - R0.lives)) : null,
-      h('b', { class: 'tiny' }, `${R0.i + 1}/${R0.list.length}`)),
+      h('b', { class: 'tiny' }, `${nf(R0.i + 1)}/${nf(R0.list.length)}`)),
     h('div', { class: 'tiny', style: { marginBottom: '8px', fontWeight: 700 } }, R0.title),
     card, h('div', { class: 'row', style: { justifyContent: 'flex-end' } }, nextBtn)));
 }
 function runSummary() {
   const R0 = RUN, n = R0.i, pct = n ? R0.ok / n : 0, xp = S.xp - R0.xp0;
   let big = pct >= .9 ? '🏆' : pct >= .7 ? '🎉' : pct >= .5 ? '💪' : '🌱';
-  let msg = pct >= .9 ? 'Outstanding!' : pct >= .7 ? 'Great work!' : pct >= .5 ? 'Solid progress — the mistakes are where the learning is.' : 'Good start — retry the mistakes while they are fresh.';
+  let msg = tE(pct >= .9 ? 'engine.run.outstanding' : pct >= .7 ? 'engine.run.great' : pct >= .5 ? 'engine.run.solid' : 'engine.run.goodStart');
   const RX = SHL() ? window.NoemaReact : null;
   if (R0.boss) {
     const won = R0.lives > 0 && R0.i >= R0.list.length && pct >= .7;
-    if (won) { S.boss[R0.boss] = true; save(); big = '🏆'; msg = 'Boss defeated! Chapter badge unlocked.'; RX?.big('bosswin'); } else { big = '👾'; msg = 'The boss wins this time. Review the misses and come back stronger!'; }
+    if (won) { S.boss[R0.boss] = true; save(); big = '🏆'; msg = tE('engine.run.bossWon'); RX?.big('bosswin'); } else { big = '👾'; msg = tE('engine.run.bossLost'); }
   } else if (R0.back === '#/mistakes' && R0.ok && !mistakesList().length) RX?.big('gym');   // the gym is empty
   else if (n >= 5 && R0.ok === n) RX?.big('perfect');
   if (pct >= .7) { if (!RX) confetti(); beep('win'); }
   view(h('div', { class: 'runner' }, h('div', { class: 'card summary' },
     h('div', { class: 'big' }, big), h('h2', {}, msg),
-    h('div', { class: 'statgrid' }, h('div', { class: 'stat' }, h('b', {}, `${R0.ok}/${n}`), h('span', { class: 'tiny' }, 'correct')), h('div', { class: 'stat' }, h('b', {}, Math.round(pct * 100) + '%'), h('span', { class: 'tiny' }, 'accuracy')), h('div', { class: 'stat' }, h('b', {}, '+' + xp), h('span', { class: 'tiny' }, 'XP'))),
-    R0.wrong.length ? h('div', { style: { textAlign: 'left', margin: '0 0 18px' } }, h('b', {}, 'Review these:'), h('ul', {}, ...R0.wrong.map(e => h('li', { html: fmt((e.q || '').slice(0, 140)) })))) : null,
+    h('div', { class: 'statgrid' }, h('div', { class: 'stat' }, h('b', {}, `${nf(R0.ok)}/${nf(n)}`), h('span', { class: 'tiny' }, tE('engine.run.correct'))), h('div', { class: 'stat' }, h('b', {}, pctText(Math.round(pct * 100))), h('span', { class: 'tiny' }, tE('engine.run.accuracy'))), h('div', { class: 'stat' }, h('b', {}, '+' + nf(xp)), h('span', { class: 'tiny' }, tE('engine.run.xp')))),
+    R0.wrong.length ? h('div', { style: { textAlign: 'left', margin: '0 0 18px' } }, h('b', {}, tE('engine.run.reviewThese')), h('ul', {}, ...R0.wrong.map(e => h('li', { html: fmt((e.q || '').slice(0, 140)) })))) : null,
     h('div', { class: 'row', style: { justifyContent: 'center' } },
-      R0.wrong.length ? h('button', { class: 'btn primary', onclick: () => startRun(R0.wrong, { title: '🔁 Retry mistakes', count: R0.wrong.length, back: R0.back }) }, '🔁 Retry mistakes') : null,
-      h('button', { class: 'btn', onclick: () => go(R0.back) }, 'Done')))));
+      R0.wrong.length ? h('button', { class: 'btn primary', onclick: () => startRun(R0.wrong, { title: '🔁 ' + tE('engine.run.retry'), count: R0.wrong.length, back: R0.back }) }, '🔁 ' + tE('engine.run.retry')) : null,
+      R0.after ? h('button', { class: 'btn primary ns-srnext', onclick: R0.after.run }, R0.after.label) : null,
+      h('button', { class: 'btn', onclick: () => go(R0.back) }, tE('engine.run.done'))))));
+}
+/* ---------- 🔎 a round made from search results (engine/search.js): this subject's exercises, then its cards ---------- */
+function searchRunView() {
+  const X = window.NoemaSearch, R = X?.round(), st = R?.steps?.[R.i];
+  if (!st || st.sj !== SUBJ.id) return go(X ? '#/search' : HOME());
+  const after = X.after();
+  if (st.kind === 'ex') {
+    const list = st.ids.map(id => EX[id]).filter(Boolean);
+    if (!list.length) return after ? after.run() : go(R.back);
+    return startRun(list, { title: st.title, count: list.length, back: R.back, after });
+  }
+  const keys = new Set(st.keys || []), cards = allCards().filter(c => keys.has(c.key));
+  if (!cards.length) return after ? after.run() : go(R.back);
+  shellChrome({ sub: true, crumbs: [[st.title]], back: R.back, reading: true });
+  const body = h('div');
+  view(h('h1', {}, st.title), body);
+  flashDeck(body, cards, { all: true, onDone: () => h('div', { class: 'row', style: { justifyContent: 'center' } }, after ? h('button', { class: 'btn primary ns-srnext', onclick: after.run }, after.label) : null, h('button', { class: 'btn', onclick: () => go(R.back) }, t('sh.sr_backToResults'))) });
 }
 function mistakesList() { return ALL_EX.filter(e => S.res[e.id] && S.res[e.id].last === false); }
 function mistakesView() {
@@ -2251,10 +2387,10 @@ function mistakesView() {
   shellChrome({ sub: true, crumbs: [[t('home.mistakes')]], back: HOME() });
   const list = mistakesList();
   view(backBtn(t('nav.home'), HOME()), h('h1', {}, t('view.mistakes')),
-    h('p', { class: 'muted' }, 'Everything whose last attempt was wrong. Get it right once and it leaves the gym.'),
-    list.length ? h('div', {}, h('div', { class: 'row', style: { margin: '8px 0 18px' } }, h('button', { class: 'btn primary', onclick: () => startRun(list, { title: '🔁 Mistakes gym', count: 15, back: '#/mistakes' }) }, `▶ Train ${Math.min(15, list.length)} of ${list.length}`)),
-      h('div', { style: { display: 'grid', gap: '8px' } }, ...COURSE.map(c => { const n = list.filter(e => e._ch === c).length; return n ? h('button', { class: 'node', onclick: () => startRun(list.filter(e => e._ch === c), { title: `🔁 Ch${c.num} mistakes`, count: n, back: '#/mistakes' }) }, h('div', { class: 'dot' }, c.emoji), h('div', { class: 'grow' }, h('b', {}, c.title)), h('span', { class: 'pill' }, n)) : null; })))
-      : h('div', { class: 'empty' }, h('div', { class: 'e' }, '✨'), h('p', {}, 'No open mistakes. Go make some (that’s how learning works)!')));
+    h('p', { class: 'muted' }, tE('engine.gym.intro')),
+    list.length ? h('div', {}, h('div', { class: 'row', style: { margin: '8px 0 18px' } }, h('button', { class: 'btn primary', onclick: () => startRun(list, { title: t('view.mistakes'), count: 15, back: '#/mistakes' }) }, '▶ ' + tE('engine.gym.train', { n: Math.min(15, list.length), of: list.length }))),
+      h('div', { style: { display: 'grid', gap: '8px' } }, ...COURSE.map(c => { const n = list.filter(e => e._ch === c).length; return n ? h('button', { class: 'node', onclick: () => startRun(list.filter(e => e._ch === c), { title: '🔁 ' + tE('engine.run.chMistakes', { num: c.num }), count: n, back: '#/mistakes' }) }, h('div', { class: 'dot' }, c.emoji), h('div', { class: 'grow' }, h('b', {}, c.title)), h('span', { class: 'pill' }, nf(n))) : null; })))
+      : h('div', { class: 'empty' }, h('div', { class: 'e' }, '✨'), h('p', {}, tE('engine.gym.empty'))));
 }
 function mixedView() {
   setAccent(document.body, null);
@@ -2262,67 +2398,67 @@ function mixedView() {
   const readSecs = new Set(Object.keys(S.read));
   const pool = ALL_EX.filter(e => readSecs.has(e.section));
   view(backBtn(t('nav.home'), HOME()), h('h1', {}, t('view.mixed')),
-    h('p', { class: 'muted' }, 'Interleaving beats blocking: random exercises from every section you have read (or from everything).'),
+    h('p', { class: 'muted' }, tE('engine.mixed.intro')),
     h('div', { class: 'row', style: { marginTop: '14px' } },
-      h('button', { class: 'btn primary', disabled: !pool.length, onclick: () => startRun(pool, { title: '🎲 Mixed: what I have read', count: 12, back: '#/practice/all' }) }, `▶ From what I've read (${pool.length})`),
-      h('button', { class: 'btn', onclick: () => startRun(ALL_EX, { title: '🎲 Mixed: everything', count: 12, back: '#/practice/all' }) }, `▶ From everything (${ALL_EX.length})`),
-      h('button', { class: 'btn', onclick: () => startRun(ALL_EX.filter(e => e.tags.includes('debug')), { title: '🔧 Debugging only', count: 12, back: '#/practice/all' }) }, '🔧 Debugging only'),
-      h('button', { class: 'btn', onclick: () => startRun(ALL_EX.filter(e => e.tags.includes('exam')), { title: '🎓 Exam traps only', count: 12, back: '#/practice/all' }) }, '🎓 Exam traps only')));
+      h('button', { class: 'btn primary', disabled: !pool.length, onclick: () => startRun(pool, { title: '🎲 ' + tE('engine.mixed.readTitle'), count: 12, back: '#/practice/all' }) }, '▶ ' + tE('engine.mixed.fromRead', { n: pool.length })),
+      h('button', { class: 'btn', onclick: () => startRun(ALL_EX, { title: '🎲 ' + tE('engine.mixed.allTitle'), count: 12, back: '#/practice/all' }) }, '▶ ' + tE('engine.mixed.fromAll', { n: ALL_EX.length })),
+      h('button', { class: 'btn', onclick: () => startRun(ALL_EX.filter(e => e.tags.includes('debug')), { title: '🔧 ' + tE('engine.mixed.debugOnly'), count: 12, back: '#/practice/all' }) }, '🔧 ' + tE('engine.mixed.debugOnly')),
+      h('button', { class: 'btn', onclick: () => startRun(ALL_EX.filter(e => e.tags.includes('exam')), { title: '🎓 ' + tE('engine.mixed.examOnly'), count: 12, back: '#/practice/all' }) }, '🎓 ' + tE('engine.mixed.examOnly'))));
 }
 function bossView(id) {
   const c = CH[id]; if (!c) return go(HOME());
   setAccent(document.body, c);
   shellChrome({ sub: true, crumbs: [[`${c.emoji} ${c.title}`, '#/ch/' + id], [SL('boss')]], back: '#/ch/' + id + '/practice' });
-  view(backBtn(`← ${c.title}`, '#/ch/' + id),
-    h('div', { class: 'card summary' }, h('div', { class: 'big' }, '👾'), h('h1', {}, `Boss battle · Ch${c.num}`),
-      h('p', { class: 'muted' }, '15 mixed questions, mostly medium/hard. You have 3 lives ❤️❤️❤️. Lose them all and the boss wins. Score ≥ 70% with lives left to earn the 🏆.'),
+  view(backBtn(`${arrowBack()} ${c.title}`, '#/ch/' + id),
+    h('div', { class: 'card summary' }, h('div', { class: 'big' }, '👾'), h('h1', {}, tE('engine.boss.title', { num: c.num })),
+      h('p', { class: 'muted' }, tE('engine.boss.intro')),
       h('button', { class: 'btn primary', style: { marginTop: '10px' }, onclick: () => {
         const pool = c.exercises.filter(e => e.type !== 'free');
         const hard = shuffle(pool.filter(e => e.difficulty >= 2)), easy = shuffle(pool.filter(e => e.difficulty < 2));
         const pick = [...hard.slice(0, 12), ...easy.slice(0, 3)];
-        startRun(shuffle(pick).slice(0, 15), { title: `👾 Boss · Ch${c.num}`, count: 15, back: '#/ch/' + id, lives: 3, boss: id, keepOrder: true });
+        startRun(shuffle(pick).slice(0, 15), { title: '👾 ' + tE('engine.boss.runTitle', { num: c.num }), count: 15, back: '#/ch/' + id, lives: 3, boss: id, keepOrder: true });
         window.NoemaReact?.big('boss');
-      } }, '⚔️ Fight!')));
+      } }, '⚔️ ' + tE('engine.boss.fight'))));
 }
 
 /* ---------- lightning ---------- */
 function lightningView() {
   setAccent(document.body, null);
   shellChrome({ sub: true, crumbs: [[t('home.lightning')]], back: HOME() });
-  const chSel = h('select', { class: 'sel' }, h('option', { value: 'all' }, 'All chapters'), ...COURSE.map(c => h('option', { value: c.id }, `${c.emoji} Ch${c.num} ${c.title}`)));
+  const chSel = h('select', { class: 'sel' }, h('option', { value: 'all' }, tE('engine.light.allChapters')), ...COURSE.map(c => h('option', { value: c.id }, `${c.emoji} ${chShort(c.num)} ${c.title}`)));
   const best = S.bestLightning || 0;
   view(backBtn(t('nav.home'), HOME()),
     h('div', { class: 'card lightning' }, h('div', { style: { fontSize: '56px' } }, '⚡'), h('h1', {}, t('view.lightning')),
-      h('p', { class: 'muted' }, '60 seconds. True or false. Use ← / → or the buttons. Wrong answers are explained at the end.'),
-      h('div', { class: 'row', style: { justifyContent: 'center', margin: '14px 0' } }, chSel), h('p', { class: 'tiny' }, `Personal best: ${best}`),
-      h('button', { class: 'btn primary', onclick: () => playLightning(chSel.value) }, '▶ Go!')));
+      h('p', { class: 'muted' }, tE('engine.light.intro')),
+      h('div', { class: 'row', style: { justifyContent: 'center', margin: '14px 0' } }, chSel), h('p', { class: 'tiny' }, tE('engine.light.best', { n: best })),
+      h('button', { class: 'btn primary', onclick: () => playLightning(chSel.value) }, '▶ ' + tE('engine.light.go'))));
 }
 function playLightning(chid) {
   const pool = shuffle(ALL_EX.filter(e => e.type === 'tf' && (chid === 'all' || e._ch.id === chid)));
-  if (!pool.length) { toast('No true/false questions here'); return go(HOME()); }
+  if (!pool.length) { toast(tE('engine.light.noTf')); return go(HOME()); }
   const c0 = CH[chid], back = c0 ? `#/ch/${chid}/traps` : '#/lightning', here = location.hash;
   shellChrome({ sub: true, crumbs: c0 ? [[`${c0.emoji} ${c0.title}`, '#/ch/' + chid], [t('home.lightning')]] : [[t('home.lightning')]], back, reading: true });
   let i = 0, score = 0, end = Date.now() + 60e3, wrong = [], over = false, warned = false;
   const clock = h('div', { class: 'clock' }, '60'), stmt = h('div', { class: 'stmt' }), sc = h('div', { class: 'tiny' });
   const ans = v => { if (over) return; const ex = pool[i % pool.length]; if (v === ex.answer) { score++; beep('ok'); stmt.classList.remove('pop'); void stmt.offsetWidth; stmt.classList.add('pop'); } else { wrong.push(ex); beep('bad'); stmt.classList.remove('shake'); void stmt.offsetWidth; stmt.classList.add('shake'); } record(ex, v === ex.answer); i++; draw(); };
-  const draw = () => { const ex = pool[i % pool.length]; stmt.innerHTML = ''; stmt.append(h('div', { html: fmt(ex.q) })); setAccent(stmt, ex._ch); sc.textContent = `Score: ${score}`; };
+  const draw = () => { const ex = pool[i % pool.length]; stmt.innerHTML = ''; stmt.append(h('div', { html: fmt(ex.q) })); setAccent(stmt, ex._ch); sc.textContent = tE('engine.light.score', { n: score }); };
   const key = e => { if (e.key === 'ArrowLeft') ans(true); if (e.key === 'ArrowRight') ans(false); };
   document.addEventListener('keydown', key);
-  view(h('div', { class: 'runner lightning' + (SHL() ? ' has-ask' : '') }, SHL() ? askBuddyBtn(() => askAIAbout(pool[i % pool.length], null)) : null, clock, stmt, h('div', { class: 'tfrow' }, h('button', { class: 'tfbtn t', onclick: () => ans(true) }, '👍 True  ←'), h('button', { class: 'tfbtn f', onclick: () => ans(false) }, '→  👎 False')), h('div', { style: { marginTop: '12px' } }, sc)));
+  view(h('div', { class: 'runner lightning' + (SHL() ? ' has-ask' : '') }, SHL() ? askBuddyBtn(() => askAIAbout(pool[i % pool.length], null)) : null, clock, stmt, h('div', { class: 'tfrow' }, h('button', { class: 'tfbtn t', onclick: () => ans(true) }, '👍 ' + tE('engine.ex.true') + '  ←'), h('button', { class: 'tfbtn f', onclick: () => ans(false) }, '→  👎 ' + tE('engine.ex.false'))), h('div', { style: { marginTop: '12px' } }, sc)));
   draw();
-  const t = setInterval(() => {
-    if (location.hash !== here) { clearInterval(t); document.removeEventListener('keydown', key); over = true; return; }
+  const tmr = setInterval(() => {   // (not `t`: that is the translation function, used above in this function)
+    if (location.hash !== here) { clearInterval(tmr); document.removeEventListener('keydown', key); over = true; return; }
     const left = Math.max(0, Math.ceil((end - Date.now()) / 1000)); clock.textContent = left;
     if (left <= 5 && left > 0) { if (!warned) { warned = true; window.NoemaReact?.big('timer'); } else window.NoemaReact?.tick(left); }
     if (!left) {
-      clearInterval(t); document.removeEventListener('keydown', key); over = true;
+      clearInterval(tmr); document.removeEventListener('keydown', key); over = true;
       addXP(score * 3, clock);
       const pb = score > (S.bestLightning || 0); if (pb) { S.bestLightning = score; save(); }
       if (!wrong.length && score >= 5 && SHL() && window.NoemaReact) window.NoemaReact.big('timerwin'); else if (score >= 8 || pb) confetti();
       beep('win');
-      view(h('div', { class: 'runner' }, h('div', { class: 'card summary' }, h('div', { class: 'big' }, pb ? '🏅' : '⚡'), h('h2', {}, `${score} correct in 60 s${pb ? ' — new personal best!' : ''}`),
-        wrong.length ? h('div', { style: { textAlign: 'left', marginTop: '16px', display: 'grid', gap: '10px' } }, h('b', {}, 'The ones that fooled you:'), ...wrong.map(ex => h('div', { class: 'explain bad' }, h('div', { class: 'hd' }, ex.answer ? 'TRUE' : 'FALSE'), h('div', { html: '<b>' + fmt(ex.q) + '</b>' }), h('div', { style: { marginTop: '4px' }, html: fmt(ex.explain) })))) : h('p', {}, 'Flawless! 🔥'),
-        h('div', { class: 'row', style: { justifyContent: 'center', marginTop: '18px' } }, h('button', { class: 'btn primary', onclick: () => playLightning(chid) }, '⚡ Again'), h('button', { class: 'btn', onclick: () => go(c0 ? back : HOME()) }, c0 ? SL('back') : 'Home')))));
+      view(h('div', { class: 'runner' }, h('div', { class: 'card summary' }, h('div', { class: 'big' }, pb ? '🏅' : '⚡'), h('h2', {}, tE(pb ? 'engine.light.resultBest' : 'engine.light.result', { n: score })),
+        wrong.length ? h('div', { style: { textAlign: 'left', marginTop: '16px', display: 'grid', gap: '10px' } }, h('b', {}, tE('engine.light.fooled')), ...wrong.map(ex => h('div', { class: 'explain bad' }, h('div', { class: 'hd' }, ex.answer ? tE('engine.light.TRUE') : tE('engine.light.FALSE')), h('div', { html: '<b>' + fmt(ex.q) + '</b>' }), h('div', { style: { marginTop: '4px' }, html: fmt(ex.explain) })))) : h('p', {}, tE('engine.light.flawless')),
+        h('div', { class: 'row', style: { justifyContent: 'center', marginTop: '18px' } }, h('button', { class: 'btn primary', onclick: () => playLightning(chid) }, '⚡ ' + tE('engine.light.again')), h('button', { class: 'btn', onclick: () => go(c0 ? back : HOME()) }, c0 ? SL('back') : tE('engine.light.home'))))));
     }
   }, 200);
 }
@@ -2334,41 +2470,45 @@ function rateCardKey(key, q, from = new Date()) { const r = S.fc[key] || { box: 
 function cardDue(key) { const r = S.fc[key]; return !r || !r.due || r.due <= today(); }
 function countDueCards() { return COURSE.reduce((a, c) => a + c.flashcards.filter((f, i) => { const k = f._key || c.id + '#' + i; return S.fc[k] && cardDue(k); }).length, 0); }
 function allCards() { return COURSE.flatMap(c => c.flashcards.map((f, i) => ({ ...f, key: f._key || c.id + '#' + i, _ch: c }))); }
-function cardsView() {
+function cardsView(key) {
   setAccent(document.body, null);
   shellChrome({ sub: true, crumbs: [[t('home.cards')]], back: HOME() });
   const body = h('div');
-  view(backBtn(t('nav.home'), HOME()), h('h1', {}, t('view.cards')), h('p', { class: 'muted' }, 'Leitner spaced repetition: “Again” sends a card back to box 1, “Easy” jumps it ahead.'), body);
+  view(backBtn(t('nav.home'), HOME()), h('h1', {}, t('view.cards')), h('p', { class: 'muted' }, tE('engine.cards.intro')), body);
+  const one = key ? allCards().filter(c => c.key === key) : [];   // #/cards/<key>: the one card the search found
+  if (one.length) { flashDeck(body, one, { all: true }); return; }
   flashDeck(body, allCards());
 }
-function flashDeck(body, cards) {
+function flashDeck(body, cards, { all = false, onDone = null } = {}) {
   const seen = cards.filter(c => S.fc[c.key]);
   const due = cards.filter(c => S.fc[c.key] && cardDue(c.key)), fresh = cards.filter(c => !S.fc[c.key]);
-  const queue = [...shuffle(due), ...shuffle(fresh).slice(0, 15)];
-  body.append(h('div', { class: 'row', style: { margin: '6px 0 16px' } }, h('span', { class: 'pill c' }, `${due.length} due`), h('span', { class: 'pill' }, `${fresh.length} new`), h('span', { class: 'pill' }, `${seen.length - due.length} resting`)));
+  const queue = all ? shuffle(cards) : [...shuffle(due), ...shuffle(fresh).slice(0, 15)];   // all: every card given (the ones the search found), due or not
+  body.append(h('div', { class: 'row', style: { margin: '6px 0 16px' } }, h('span', { class: 'pill c' }, tE('engine.cards.due', { n: due.length })), h('span', { class: 'pill' }, tE('engine.cards.new', { n: fresh.length })), h('span', { class: 'pill' }, tE('engine.cards.resting', { n: seen.length - due.length }))));
   const stage = h('div'); body.append(stage);
   let i = 0;
   function show() {
     stage.innerHTML = '';
-    if (i >= queue.length) { stage.append(h('div', { class: 'empty' }, h('div', { class: 'e' }, '🌟'), h('p', {}, 'Deck done for now. Come back later for due cards!'))); if (queue.length) confetti(80); return; }
+    if (i >= queue.length) { stage.append(h('div', { class: 'empty' }, h('div', { class: 'e' }, '🌟'), h('p', {}, tE('engine.cards.done')))); if (queue.length) confetti(80); if (onDone) stage.append(onDone()); return; }
     const c = queue[i];
     const fl = h('div', { class: 'flash' }, h('div', { class: 'inner', onclick: () => fl.classList.toggle('flipped') },
-      h('div', { class: 'face' }, h('small', {}, `${c._ch.emoji} Ch${c._ch.num} · ${i + 1}/${queue.length}`), h('div', { html: fmt(c.q) }), h('div', { class: 'tiny', style: { position: 'absolute', bottom: '14px' } }, 'tap to flip')),
-      h('div', { class: 'face back' }, h('small', {}, 'answer'), h('div', { html: fmt(c.a) }))));
+      h('div', { class: 'face' }, h('small', {}, `${c._ch.emoji} ` + chTitle(c._ch.num, `${nf(i + 1)}/${nf(queue.length)}`)), h('div', { html: fmt(c.q) }), h('div', { class: 'tiny', style: { position: 'absolute', bottom: '14px' } }, tE('engine.cards.flip'))),
+      h('div', { class: 'face back' }, h('small', {}, tE('engine.cards.answer')), h('div', { html: fmt(c.a) }))));
     setAccent(fl, c._ch);
     if (SHL()) { fl.classList.add('has-ask'); fl.append(askBuddyBtn(() => askAboutCard(c, fl.classList.contains('flipped')))); }
     const rate = q => { rateCardKey(c.key, q); addXP(q === 0 ? 1 : 2, fl); if (q === 0) queue.push(c); i++; show(); };
-    stage.append(fl, h('div', { class: 'rate' }, h('button', { class: 'btn', onclick: () => rate(0) }, '😵 Again'), h('button', { class: 'btn', onclick: () => rate(1) }, '🙂 Good'), h('button', { class: 'btn primary', onclick: () => rate(2) }, '😎 Easy')),
-      c.section && SEC[c.section] ? h('div', { style: { textAlign: 'center', marginTop: '10px' } }, h('button', { class: 'tiny', style: { textDecoration: 'underline' }, onclick: () => go('#/s/' + c.section) }, 'open the section')) : null);
+    stage.append(fl, h('div', { class: 'rate' }, h('button', { class: 'btn', onclick: () => rate(0) }, '😵 ' + tE('engine.cards.again')), h('button', { class: 'btn', onclick: () => rate(1) }, '🙂 ' + tE('engine.cards.good')), h('button', { class: 'btn primary', onclick: () => rate(2) }, '😎 ' + tE('engine.cards.easy'))),
+      c.section && SEC[c.section] ? h('div', { style: { textAlign: 'center', marginTop: '10px' } }, h('button', { class: 'tiny', style: { textDecoration: 'underline' }, onclick: () => go('#/s/' + c.section) }, tE('engine.cards.openSection'))) : null);
   }
   show();
 }
 
 /** Ask the character about a flashcard: a hint while its answer is hidden, a deeper explanation once it is turned. */
+/* i18n-ignore-start */   // the card as context for the AI and the learner's first messages to it (prompts)
 function askAboutCard(c, turned) {
-  const ctx = { kind: 'exercise', id: 'fc:' + c.key, text: `Flashcard (chapter ${c._ch.num} “${c._ch.title}”)\nFront: ${c.q}\nBack: ${c.a}` };
-  if (turned) openTutor(ctx, 'explain', 'Explain this flashcard to me in more depth, with an example.');
-  else openTutor(ctx, 'hint', 'Give me a hint for this flashcard — don\'t tell me the answer.', { intent: INTENT.exHint('') });
+  const ctx = { kind: 'exercise', id: 'fc:' + c.key, origin: { via: turned ? 'cardExplain' : 'cardHint', card: c.key, ...(c.section ? { sec: c.section } : {}) }, text: `Flashcard (chapter ${c._ch.num} “${c._ch.title}”)\nFront: ${c.q}\nBack: ${c.a}` };
+/* i18n-ignore-end */
+  if (turned) openTutor(ctx, 'explain', tE('engine.aimsg.cardExplain'));   // the learner's first messages: their bubble, in the UI language
+  else openTutor(ctx, 'hint', tE('engine.aimsg.cardHint'), { intent: INTENT.exHint('') });
 }
 
 /* ---------- debug drills ---------- */
@@ -2376,14 +2516,14 @@ function countDuePlaybooks() { return Object.values(PB).filter(d => S.pb[d.id] &
 function drillTile(d) {
   const r = S.pb[d.id] || { box: 0 };
   const t = h('button', { class: 'pb', onclick: () => go('#/drill/' + d.id) }, h('span', { class: 'ic' }, '🔧'),
-    h('div', { class: 'grow' }, h('b', { html: fmt(d.title) }), newPill(d), h('div', { class: 'tiny' }, `${d.askYourself.length} ask-yourself questions${d.mnemonic ? ' · has mnemonic' : ''}`)),
-    h('div', { class: 'boxes', title: 'mastery' }, ...[1, 2, 3, 4, 5].map(i => h('i', { class: i <= r.box ? 'on' : '' }))));
+    h('div', { class: 'grow' }, h('b', { html: fmt(d.title) }), newPill(d), h('div', { class: 'tiny' }, tE(d.mnemonic ? 'engine.drill.questionsMnemo' : 'engine.drill.questions', { n: d.askYourself.length }))),
+    h('div', { class: 'boxes', title: tE('engine.drill.mastery') }, ...[1, 2, 3, 4, 5].map(i => h('i', { class: i <= r.box ? 'on' : '' }))));
   setAccent(t, d._ch); return t;
 }
 function drillList(body, list) {
   const due = list.filter(d => !S.pb[d.id] || S.pb[d.id].due <= today());
-  body.append(h('p', { class: 'muted' }, 'Each drill: read the symptom → write the questions you would ask yourself → compare with the checklist → rate yourself. Repeat until it is automatic.'),
-    h('div', { class: 'row', style: { marginBottom: '14px' } }, due.length ? h('button', { class: 'btn primary', onclick: () => go('#/drill/' + due[0].id) }, `▶ Next due drill (${due.length})`) : h('span', { class: 'pill', style: { background: 'var(--ok-bg)', color: 'var(--ok)' } }, 'All drills rested ✓')),
+  body.append(h('p', { class: 'muted' }, tE('engine.drill.intro')),
+    h('div', { class: 'row', style: { marginBottom: '14px' } }, due.length ? h('button', { class: 'btn primary', onclick: () => go('#/drill/' + due[0].id) }, '▶ ' + tE('engine.drill.nextDue', { n: due.length })) : h('span', { class: 'pill', style: { background: 'var(--ok-bg)', color: 'var(--ok)' } }, tE('engine.drill.allRested'))),
     h('div', { style: { display: 'grid', gap: '10px' } }, ...list.map(drillTile)));
 }
 function drillsView() {
@@ -2391,30 +2531,30 @@ function drillsView() {
   shellChrome({ sub: true, crumbs: [[t('home.drills')]], back: HOME() });
   const body = h('div');
   view(backBtn(t('nav.home'), HOME()), h('h1', {}, t('view.drills')),
-    h('p', { class: 'muted' }, `${Object.keys(PB).length} debugging playbooks. The goal: the right questions pop into your head automatically when something breaks.`), body);
-  COURSE.forEach(c => { if (!c.debug.length) return; const sub = h('div', { style: { margin: '22px 0 0' } }); body.append(h('h3', { style: { margin: '20px 0 10px' } }, `${c.emoji} Ch${c.num} · ${c.title}`), sub); sub.append(...c.debug.map(drillTile)); });
+    h('p', { class: 'muted' }, tE('engine.drill.playbooks', { n: Object.keys(PB).length })), body);
+  COURSE.forEach(c => { if (!c.debug.length) return; const sub = h('div', { style: { margin: '22px 0 0' } }); body.append(h('h3', { style: { margin: '20px 0 10px' } }, `${c.emoji} ` + chTitle(c.num, c.title)), sub); sub.append(...c.debug.map(drillTile)); });
 }
 function drillView(id) {
   const d = PB[id]; if (!d) return go('#/drills');
   const c = d._ch; setAccent(document.body, c);
   setTutorContext({ kind: 'playbook', id });
   shellChrome({ sub: true, crumbs: [[`${c.emoji} ${c.title}`, '#/ch/' + c.id], [t('home.drills'), `#/ch/${c.id}/debug`]], back: `#/ch/${c.id}/debug`, reading: true });
-  const ta = h('textarea', { class: 'answer', placeholder: 'One question per line, in the order you would ask them…' });
+  const ta = h('textarea', { class: 'answer', placeholder: tE('engine.drill.placeholder') });
   const stage = h('div');
   view(h('div', { class: 'reader' },
-    backBtn(`← ${c.emoji} Ch${c.num} debug drills`, `#/ch/${c.id}/debug`),
-    h('span', { class: 'pill c' }, '🔧 Debug drill'), h('h1', { style: { margin: '10px 0 14px' }, html: fmt(d.title) }),
-    h('div', { class: 'tiny', style: { fontWeight: 700, marginBottom: '6px' } }, 'SYMPTOM'), h('div', { class: 'symptom', html: fmt(d.symptom) }),
-    h('h3', { style: { margin: '22px 0 8px' } }, '🧠 What do you ask yourself? (before peeking)'), ta,
+    backBtn(`${arrowBack()} ${c.emoji} ` + tE('engine.drill.back', { num: c.num }), `#/ch/${c.id}/debug`),
+    h('span', { class: 'pill c' }, '🔧 ' + tE('engine.drill.pill')), h('h1', { style: { margin: '10px 0 14px' }, html: fmt(d.title) }),
+    h('div', { class: 'tiny', style: { fontWeight: 700, marginBottom: '6px' } }, tE('engine.drill.symptom')), h('div', { class: 'symptom', html: fmt(d.symptom) }),
+    h('h3', { style: { margin: '22px 0 8px' } }, '🧠 ' + tE('engine.drill.askYourself')), ta,
     h('div', { class: 'actions', style: { display: 'flex', gap: '8px', flexWrap: 'wrap', marginTop: '10px' } },
-      h('button', { class: 'btn primary', onclick: () => reveal(null) }, '👀 Reveal checklist'),
-      h('button', { class: 'btn ai', onclick: async e => { if (!ta.value.trim()) { ta.classList.add('shake'); setTimeout(() => ta.classList.remove('shake'), 500); return; } const b = e.currentTarget; b.disabled = true; b.textContent = '✨ Grading…'; try { const g = await aiDrillGrade(d, ta.value); reveal(g); } catch (er) { toast('⚠️ ' + er.message, 4000); reveal(null); } } }, '✨ Grade my checklist'),
-      h('button', { class: 'btn', onclick: () => orderDrill() }, '🔢 Order drill'),
-      h('button', { class: 'btn', onclick: () => openTutor({ kind: 'playbook', id }, 'debug', `Run a debugging simulation based on this playbook: "${d.title}". Give me only the symptom and let me investigate.`, { intent: INTENT.pbRoleplay }) }, `🎭 Role-play it with ${TUTOR.name}`)),
+      h('button', { class: 'btn primary', onclick: () => reveal(null) }, '👀 ' + tE('engine.drill.reveal')),
+      h('button', { class: 'btn ai', onclick: async e => { if (!ta.value.trim()) { ta.classList.add('shake'); setTimeout(() => ta.classList.remove('shake'), 500); return; } const b = e.currentTarget; b.disabled = true; b.textContent = '✨ ' + tE('engine.ex.grading'); try { const g = await aiDrillGrade(d, ta.value); reveal(g); } catch (er) { toast('⚠️ ' + errText(er), 4000); reveal(null); } } }, '✨ ' + tE('engine.drill.grade')),
+      h('button', { class: 'btn', onclick: () => orderDrill() }, '🔢 ' + tE('engine.drill.order')),
+      h('button', { class: 'btn', onclick: () => openTutor({ kind: 'playbook', id, origin: { via: 'drillRoleplay', drill: id } }, 'debug', tE('engine.aimsg.pbRoleplay', { title: d.title }), { intent: INTENT.pbRoleplay }) }, '🎭 ' + tE('engine.drill.roleplay', { tutor: TUTOR.name }))),   // the learner's first message: their bubble, in the UI language
     stage));
   function orderDrill() {
     stage.innerHTML = '';
-    const ex = { id: d.id + '-ord', type: 'order', q: 'Put your ask-yourself questions in the best order:', items: d.askYourself.slice(0, 9), explain: 'Ordering matters: cheap, high-signal checks first (identity, location, history) before expensive or invasive actions.', difficulty: 2, tags: ['debug'], _ch: c, _ai: true, section: d.section };
+    const ex = { id: d.id + '-ord', type: 'order', q: tE('engine.drill.orderQ'), items: d.askYourself.slice(0, 9), explain: tE('engine.drill.orderExplain'), difficulty: 2, tags: ['debug'], _ch: c, _ai: true, section: d.section };
     stage.append(h('div', { style: { marginTop: '18px' } }, exerciseCard(ex, { noXP: false })));
   }
   function reveal(g) {
@@ -2423,14 +2563,14 @@ function drillView(id) {
     const checks = d.askYourself.map((q, i) => h('input', { type: 'checkbox', checked: hit.has(i) }));
     if (g) stage.append(h('div', { class: 'fb ai' }, h('div', { class: 'row' }, h('span', { class: 'score', style: { background: g.score >= 70 ? 'var(--ok)' : g.score >= 45 ? 'var(--warn)' : 'var(--bad)' } }, g.score | 0), h('div', { class: 'grow' }, md(g.feedback)))));
     stage.append(
-      h('div', { class: 'ask', style: { marginTop: '18px' } }, h('div', { class: 'hd' }, '🧠 The checklist', h('span', { class: 'tiny', style: { marginLeft: 'auto' } }, 'tick the ones you had')),
-        h('div', { class: 'rubric' }, ...d.askYourself.map((q, i) => h('label', {}, checks[i], h('span', {}, h('b', {}, (i + 1) + '. '), F(q)))))),
-      d.mnemonic ? h('div', { style: { marginTop: '14px' } }, h('div', { class: 'tiny', style: { fontWeight: 700 } }, 'MEMORY HOOK'), h('div', { class: 'mnemo', html: fmt(d.mnemonic) })) : null,
-      h('h3', { style: { margin: '22px 0 10px' } }, '🛠️ Steps'), h('div', { class: 'steps' }, ...d.steps.map((s, i) => h('div', { class: 'stepc' }, h('b', { html: `${i + 1}. ` + fmt(s.do) }), s.why ? h('div', { class: 'tiny', style: { color: 'var(--ink2)', fontSize: '14px' }, html: '↳ ' + fmt(s.why) }) : null, s.code ? h('div', { style: { marginTop: '8px' } }, codeBlock(s.code, guessLang(s.code))) : null))),
-      h('h3', { style: { margin: '22px 0 10px' } }, '🎯 Usual root causes'), h('ul', {}, ...d.rootCauses.map(r => h('li', { html: fmt(r) }))),
-      h('div', { class: 'callout tip', style: { marginTop: '12px' } }, h('span', { class: 'ci' }, '✅'), h('b', { class: 't' }, 'Fix'), h('div', { html: fmt(d.fix) })),
-      h('h3', { style: { margin: '24px 0 10px' } }, 'How well did you recall it?'),
-      h('div', { class: 'row' }, ...[['😵 Blank', 0], ['🤔 Partly', 1], ['😎 Nailed it', 2]].map(([l, q]) => h('button', { class: 'btn' + (q === 2 ? ' primary' : ''), onclick: () => {
+      h('div', { class: 'ask', style: { marginTop: '18px' } }, h('div', { class: 'hd' }, '🧠 ' + tE('engine.drill.checklist'), h('span', { class: 'tiny', style: { marginLeft: 'auto' } }, tE('engine.drill.tick'))),
+        h('div', { class: 'rubric' }, ...d.askYourself.map((q, i) => h('label', {}, checks[i], h('span', {}, h('b', {}, nf(i + 1) + '. '), F(q)))))),
+      d.mnemonic ? h('div', { style: { marginTop: '14px' } }, h('div', { class: 'tiny', style: { fontWeight: 700 } }, tE('engine.drill.hook')), h('div', { class: 'mnemo', html: fmt(d.mnemonic) })) : null,
+      h('h3', { style: { margin: '22px 0 10px' } }, '🛠️ ' + tE('engine.drill.steps')), h('div', { class: 'steps' }, ...d.steps.map((s, i) => h('div', { class: 'stepc' }, h('b', { html: `${i + 1}. ` + fmt(s.do) }), s.why ? h('div', { class: 'tiny', style: { color: 'var(--ink2)', fontSize: '14px' }, html: '↳ ' + fmt(s.why) }) : null, s.code ? h('div', { style: { marginTop: '8px' } }, codeBlock(s.code, guessLang(s.code))) : null))),
+      h('h3', { style: { margin: '22px 0 10px' } }, '🎯 ' + tE('engine.drill.causes')), h('ul', {}, ...d.rootCauses.map(r => h('li', { html: fmt(r) }))),
+      h('div', { class: 'callout tip', style: { marginTop: '12px' } }, h('span', { class: 'ci' }, '✅'), h('b', { class: 't' }, tE('engine.ex.fix')), h('div', { html: fmt(d.fix) })),
+      h('h3', { style: { margin: '24px 0 10px' } }, tE('engine.drill.howWell')),
+      h('div', { class: 'row' }, ...[['😵 ' + tE('engine.drill.blank'), 0], ['🤔 ' + tE('engine.drill.partly'), 1], ['😎 ' + tE('engine.drill.nailed'), 2]].map(([l, q]) => h('button', { class: 'btn' + (q === 2 ? ' primary' : ''), onclick: () => {
         const r = S.pb[d.id] || { box: 0 };
         const ticked = checks.filter(x => x.checked).length / checks.length;
         r.box = q === 0 ? 1 : Math.min(5, r.box + (q === 2 && ticked >= .7 ? 2 : 1));
@@ -2439,7 +2579,7 @@ function drillView(id) {
         if (q === 2) confetti(70);
         const all = Object.values(PB).filter(x => x.id !== d.id && (!S.pb[x.id] || S.pb[x.id].due <= today()));
         const nxt = all.find(x => x._ch === c) || all[0];
-        toast(nxt ? 'Saved ✔ — next drill loading' : 'Saved ✔');
+        toast(nxt ? tE('engine.drill.savedNext') : tE('engine.drill.saved'));
         setTimeout(() => go(nxt ? '#/drill/' + nxt.id : `#/ch/${c.id}/debug`), 700);
       } }, l))));
     stage.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -2455,14 +2595,16 @@ function route() {
   closeTutorIfMobile();
   STEP_LOCK = stepLock();
   if (STEP_LOCK && LOCKED_ROUTES.has(p[0])) return lockedView();
+  if (p[0] === 'subject' && p[1] === 'sources') { homeView(); setTimeout(() => toggleSourcesDeck(), 200); return; }
   if (!p[0] || p[0] === 'subject') return homeView();
-  if (p[0] === 'ch') return chapterView(p[1], p[2]);
-  if (p[0] === 's') return sectionView(p[1]);
+  if (p[0] === 'ch') return chapterView(p[1], p[2], p[3]);
+  if (p[0] === 's') return sectionView(p[1], p[2]);
   if (p[0] === 'practice') return p[1] === 'all' ? mixedView() : (chTab[p[1]] = 'practice', chapterView(p[1], 'practice'));
   if (p[0] === 'run') return runView();
+  if (p[0] === 'srun') return searchRunView();
   if (p[0] === 'boss') return bossView(p[1]);
   if (p[0] === 'lightning') return p[1] && CH[p[1]] ? playLightning(p[1]) : lightningView();
-  if (p[0] === 'cards') return cardsView();
+  if (p[0] === 'cards') return cardsView(p[1] ? decodeURIComponent(p[1]) : null);
   if (p[0] === 'drills') return drillsView();
   if (p[0] === 'drill') return drillView(p[1]);
   if (p[0] === 'mistakes') return mistakesView();
@@ -2479,7 +2621,7 @@ document.addEventListener('keydown', e => {
   if (e.target.matches('input,textarea,select')) return;
   if (e.key === 'Escape') { closeTutor(); $('.modal')?.remove(); return; }
   const cards = $$('main .ex'); const card = cards.find(c => !c._locked?.()) ;
-  if (!card) { if (e.key === 'Enter') { const nb = [...$$('main .btn.primary')].find(b => b.offsetParent && /Next|Finish|See result/.test(b.textContent)); nb?.click(); } return; }
+  if (!card) { if (e.key === 'Enter') { const nb = [...$$('main .btn.primary')].find(b => b.offsetParent && (b.dataset.next || /Next|Finish|See result/.test(b.textContent))); nb?.click(); } return; }   // i18n-ignore (the English words: older buttons)
   if (/^[1-6]$/.test(e.key) && card._w.keys) { card._w.keys(+e.key - 1); }
   else if (e.key === 'Enter') card._check();
 });
@@ -2492,7 +2634,7 @@ function boot() {
   else document.body.append(topbar(), shareBanner(), h('main'), h('div', { class: 'scrim', onclick: closeTutor }), h('aside', { class: 'drawer' }));
   renderTopStats();
   if (!X) addEventListener('hashchange', route);
-  matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', () => route());
+  matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', () => route());   // i18n-ignore
   if (X) { X.attachEngine({ route, openTutor: () => openTutor(), focus: () => focusSprint(), history: () => X.convos(), resumeConvo, convoChanged,
     accView: (tab, body, close, opts) => ACC_VIEWS[tab](body, close, opts || {}), retheme: () => { renderTutorHead?.(); } });
     setTimeout(resumeConvo, 300); }
@@ -2506,7 +2648,7 @@ function boot() {
    may carry its own `src` (patched-in material) — otherwise it inherits the chapter's. Filtering never
    mutates content: it rebuilds lightweight views (shallow clones) of the full course. */
 const SRCREG = window.SOURCES || { sources: [], chapters: {}, patches: {} };
-const SOURCES = SRCREG.sources.length ? SRCREG.sources : [{ id: 'base', title: 'Course', pages: '', emoji: '📘' }];
+const SOURCES = SRCREG.sources.length ? SRCREG.sources : [{ id: 'base', title: tE('engine.src.course'), pages: '', emoji: '📘' }];   // (the loader has set the UI language before the engine runs)
 const SRC_BY_ID = Object.fromEntries(SOURCES.map((s, i) => [s.id, { ...s, _i: i }]));
 const FULL_COURSE = COURSE.slice();
 FULL_COURSE.forEach((c, i) => {
@@ -2529,24 +2671,24 @@ function isNewSrc(id) { const s = SRC_BY_ID[id]; if (!id || id === SOURCES[0].id
    Signals (strongest first): chapter.sources [{id, pages}] · the chapter's main source · items with their own src ·
    the free-text sourcePages ("ECB σ. 23–42 · Karp 9.2 · διάλεξη YouTube (37:00–63:00)"), split into parts and each
    part matched to a source by its id, short name, acronym or a word only its title has. */
-const NORM = x => String(x || '').toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g, '').replace(/['’`]/g, ' ').replace(/[^a-z0-9α-ωа-я]+/g, ' ').trim();
+const NORM = x => String(x || '').toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g, '').replace(/['’`]/g, ' ').replace(/[^a-z0-9α-ωа-я]+/g, ' ').trim();   // i18n-ignore
 const SRC_ALIASES = (() => {
   const words = s => NORM(s.title).split(' ').filter(w => w.length >= 4 && !/^\d+$/.test(w));
   const count = {}; SOURCES.forEach(s => new Set(words(s)).forEach(w => count[w] = (count[w] || 0) + 1));
-  const STOP = new Set(['part', 'chapter', 'with', 'from', 'the', 'and', 'for', 'των', 'στην', 'στον', 'για', 'απο', 'και', 'μαθημα', 'course', 'notes']);
+  const STOP = new Set(['part', 'chapter', 'with', 'from', 'the', 'and', 'for', 'των', 'στην', 'στον', 'για', 'απο', 'και', 'μαθημα', 'course', 'notes']);   // i18n-ignore
   return Object.fromEntries(SOURCES.map(s => {
     const a = new Set();
     if (s.id.length >= 2 && !/^(part|src|source|s)\d*$/i.test(s.id)) a.add(NORM(s.id));
     if (s.short) a.add(NORM(s.short));
-    const latin = (s.title.match(/[A-Z][A-Za-z']+/g) || []).filter(w => !/^(The|And|Of|For|In|On|A|An)$/.test(w)); if (latin.length >= 2) a.add(latin.map(w => w[0]).join('').toLowerCase());
-    for (const m of String(s.title).matchAll(/(κεφ|κεφαλαιο|ch|chapter|kap|chap)\.?\s*(\d+)/gi)) a.add(NORM(m[1].replace(/αλαιο|apter|ap/i, '')) + ' ' + m[2]);
+    const latin = (s.title.match(/[A-Z][A-Za-z']+/g) || []).filter(w => !/^(The|And|Of|For|In|On|A|An)$/.test(w)); if (latin.length >= 2) a.add(latin.map(w => w[0]).join('').toLowerCase());   // i18n-ignore
+    for (const m of String(s.title).matchAll(/(κεφ|κεφαλαιο|ch|chapter|kap|chap)\.?\s*(\d+)/gi)) a.add(NORM(m[1].replace(/αλαιο|apter|ap/i, '')) + ' ' + m[2]);   // i18n-ignore
     words(s).filter(w => count[w] === 1 && !STOP.has(w)).forEach(w => a.add(w));
-    const u = (String(s.url || s.subtitle || '').match(/https?:\/\/(?:www\.)?([a-z0-9-]+)/i) || [])[1]; if (u) a.add(u.toLowerCase());
+    const u = (String(s.url || s.subtitle || '').match(/https?:\/\/(?:www\.)?([a-z0-9-]+)/i) || [])[1]; if (u) a.add(u.toLowerCase());   // i18n-ignore
     return [s.id, [...a].filter(x => x && x.length >= 2)];
   }));
 })();
 const hasAlias = (seg, al) => { const t = ' ' + NORM(seg) + ' '; return al.filter(a => t.includes(' ' + a + ' ') || (a.length >= 5 && t.includes(' ' + a))).length; };
-const PAGE_RE = /(?<![\p{L}])(?:σελ|σ|pp?|pages?|page|seite|s|pg)\.?\s*(\d{1,4})/iu, TIME_RE = /(\d{1,2}):(\d{2})(?::(\d{2}))?/;
+const PAGE_RE = /(?<![\p{L}])(?:σελ|σ|pp?|pages?|page|seite|s|pg)\.?\s*(\d{1,4})/iu, TIME_RE = /(\d{1,2}):(\d{2})(?::(\d{2}))?/;   // i18n-ignore
 const REFS = {};
 /** [{ src, label, page, start, main }] for a chapter (memoised). */
 function chapterRefs(c) {
@@ -2572,20 +2714,20 @@ async function openSource(srcId, { page, start } = {}) {
   const s = SRC_BY_ID[srcId]; if (!s) return;
   if (page && window.NoemaSrcFiles?.filePage) page = NoemaSrcFiles.filePage(s, page);   // a part of a split PDF starts at "firstPage" of the book
   const av = window.NoemaSrcFiles ? NoemaSrcFiles.available(ACCOUNT.id, SUBJ.id, s) : null;
-  if (!av) { DECK.open = true; DECK.expanded[srcId] = true; renderSourcesDeck(); toast('📎 No file for this source yet — attach it in its card to preview it here.', 4500); return; }
+  if (!av) { DECK.open = true; DECK.expanded[srcId] = true; renderSourcesDeck(); toast('📎 ' + tE('engine.src.noFile'), 4500); return; }
   if (av.url && !av.meta) return NoemaViewer.open({ url: av.url, title: s.title, subtitle: s.subtitle, page, start });
-  toast('⏳ Opening…', 1200);
+  toast('⏳ ' + tE('engine.src.opening'), 1200);
   const rec = await NoemaSrcFiles.get(ACCOUNT.id, SUBJ.id, srcId).catch(() => null);
-  if (!rec) { toast('⚠️ The file is not available on this device and could not be downloaded.', 4500); return; }
+  if (!rec) { toast('⚠️ ' + tE('engine.src.unavailable'), 4500); return; }
   NoemaViewer.open({ blob: rec.blob, name: rec.name, type: rec.type, title: s.title, subtitle: s.subtitle, page });
 }
 /** The chapter header line: which sources this chapter comes from — tap one to open it at that page. */
 function sourceChips(c) {
   const refs = chapterRefs(c); if (!refs.length || (refs.length === 1 && !refs[0].label && SOURCES.length === 1 && SOURCES[0].id === 'base')) return null;
   const short = t => { t = String(t || '').replace(/\s+/g, ' ').trim(); return t.length > 46 ? t.slice(0, 44).replace(/[\s,·]+\S*$/, '') + '…' : t; };
-  return h('div', { class: 'srcrefs', 'aria-label': 'Sources of this chapter' }, h('span', { class: 'srcrefs-l' }, 'From'),
+  return h('div', { class: 'srcrefs', 'aria-label': tE('engine.src.chapterAria') }, h('span', { class: 'srcrefs-l' }, tE('engine.src.from')),
     ...refs.map(r => { const s = SRC_BY_ID[r.src]; const av = window.NoemaSrcFiles?.available(ACCOUNT.id, SUBJ.id, s);
-      return h('button', { class: 'srcref' + (av ? ' can' : ''), title: `${s.title}${r.label ? '\n' + r.label : ''}\n${av ? '👁 Open the source' + (r.page ? ' at page ' + r.page : '') : 'Show the source card'}`, onclick: () => openSource(r.src, { page: r.page, start: r.start }) },
+      return h('button', { class: 'srcref' + (av ? ' can' : ''), title: `${s.title}${r.label ? '\n' + r.label : ''}\n` + (av ? '👁 ' + (r.page ? tE('engine.src.openAtPage', { page: r.page }) : tE('engine.src.open')) : tE('engine.src.showCard')), onclick: () => openSource(r.src, { page: r.page, start: r.start }) },
         h('span', { class: 'e' }, s.emoji || '📘'), h('span', {}, short(r.label ? (s.short && !r.label.includes(s.short) ? s.short + ' ' + r.label : r.label) : s.short || s.title)), av ? h('span', { class: 'eye', 'aria-hidden': 'true' }, '👁') : null); }));
 }
 function newSources() { return SOURCES.filter(s => isNewSrc(s.id)).map(s => s.id); }
@@ -2645,26 +2787,26 @@ function applySourceFilter() {
 /* ---------- badges / hooks used by the existing views ---------- */
 function newBadge(x) {
   if (!x || !x._new) return null;
-  if (x.sections) return h('span', { class: 'newpill corner' }, x._newWhole ? '✨ NEW chapter' : '✨ new content');
-  return h('span', { class: 'newpill' }, '✨ new');
+  if (x.sections) return h('span', { class: 'newpill corner' }, '✨ ' + (x._newWhole ? tE('engine.src.newChapter') : tE('engine.src.newContent')));
+  return h('span', { class: 'newpill' }, '✨ ' + tE('engine.src.new'));
 }
 function newPill(item) {
   const c = item && item._ch; if (!c) return null;
   const s = item.src;
-  return s && s !== c.src && isNewSrc(s) ? h('span', { class: 'newpill' }, '✨ new') : null;
+  return s && s !== c.src && isNewSrc(s) ? h('span', { class: 'newpill' }, '✨ ' + tE('engine.src.new')) : null;
 }
-function markNewBlock(el, b, c) { if (b.src && b.src !== c.src && isNewSrc(b.src)) { el.classList.add('is-new'); el.prepend(h('span', { class: 'newtag' }, '✨ NEW')); } }
+function markNewBlock(el, b, c) { if (b.src && b.src !== c.src && isNewSrc(b.src)) { el.classList.add('is-new'); el.prepend(h('span', { class: 'newtag' }, '✨ ' + tE('engine.src.NEW'))); } }
 function filterBanner() {
   const on = activeSrcSet(); if (!on) return null;
   const names = [...on].map(id => SRC_BY_ID[id]?.title || id).join(' + ');
   const onlyNew = newSources().length && [...on].every(id => isNewSrc(id));
-  return h('div', { class: 'filterbar' }, h('span', {}, onlyNew ? '✨' : '🔎'), h('span', { class: 'grow' }, onlyNew ? h('b', {}, 'Only what’s new: ') : h('b', {}, 'Filtered: '), names),
-    h('button', { class: 'btn small', onclick: () => toggleSourcesDeck(true) }, '📚 Sources'), h('button', { class: 'btn small primary', onclick: () => setSrcFilter(null) }, 'Show everything'));
+  return h('div', { class: 'filterbar' }, h('span', {}, onlyNew ? '✨' : '🔎'), h('span', { class: 'grow' }, h('b', {}, (onlyNew ? tE('engine.src.onlyNewLabel') : tE('engine.src.filteredLabel')) + ' '), names),
+    h('button', { class: 'btn small', onclick: () => toggleSourcesDeck(true) }, '📚 ' + tE('engine.src.sources')), h('button', { class: 'btn small primary', onclick: () => setSrcFilter(null) }, tE('engine.src.showEverything')));
 }
 function whatsNewButton() {
   const ns = newSources();
   if (!ns.length) return null;
-  return h('button', { class: 'btn ai whatsnewbtn', onclick: () => go('#/new') }, '✨ Show me only what’s new');
+  return h('button', { class: 'btn ai whatsnewbtn', onclick: () => go('#/new') }, '✨ ' + tE('engine.src.showOnlyNew'));
 }
 
 /* ---------- "What's new" view ---------- */
@@ -2679,24 +2821,24 @@ function whatsNewView() {
   const exNew = FULL_COURSE.flatMap(c => c.exercises.filter(e => ids.includes(srcOfItem(e, c))));
   const pbNew = FULL_COURSE.flatMap(c => c.debug.filter(d => ids.includes(srcOfItem(d, c))));
   const filterOnly = () => setSrcFilter(ids);
-  const runNew = () => { setSrcFilter(ids); startRun(ALL_EX.slice(), { title: '✨ New exercises', count: 15, back: '#/new' }); };
+  const runNew = () => { setSrcFilter(ids); startRun(ALL_EX.slice(), { title: '✨ ' + tE('engine.new.exercisesTitle'), count: 15, back: '#/new' }); };
   shellChrome({ sub: true, crumbs: [[t('view.whatsNew')]], back: HOME() });
   view(backBtn(t('nav.home'), HOME()),
     h('h1', {}, none ? t('view.latest') : t('view.whatsNew')),
-    h('p', { class: 'muted' }, ids.map(id => `${SRC_BY_ID[id].emoji || '📗'} ${SRC_BY_ID[id].title} (pages ${SRC_BY_ID[id].pages})`).join(' · ') + (none ? ' — already marked as seen.' : '')),
+    h('p', { class: 'muted' }, ids.map(id => `${SRC_BY_ID[id].emoji || '📗'} ` + tE('engine.new.srcPages', { title: SRC_BY_ID[id].title, pages: SRC_BY_ID[id].pages })).join(' · ') + (none ? ' — ' + tE('engine.new.alreadySeen') : '')),
     h('div', { class: 'statgrid', style: { gridTemplateColumns: 'repeat(auto-fit,minmax(120px,1fr))' } },
-      ...[['chapters', newChs.length], ['sections', pick('sections') + pick('enriched')], ['exercises', pick('exercises')], ['debug drills', pick('playbooks')], ['flashcards', pick('cards')], ['traps', pick('pitfalls')]].map(([l, n]) => h('div', { class: 'stat' }, h('b', {}, n), h('span', { class: 'tiny' }, l)))),
+      ...[['chapters', newChs.length], ['sections', pick('sections') + pick('enriched')], ['exercises', pick('exercises')], ['drills', pick('playbooks')], ['flashcards', pick('cards')], ['traps', pick('pitfalls')]].map(([l, n]) => h('div', { class: 'stat' }, h('b', {}, nf(n)), h('span', { class: 'tiny' }, tE('engine.new.stat_' + l, { n }))))),
     h('div', { class: 'row', style: { margin: '6px 0 24px' } },
-      h('button', { class: 'btn primary', onclick: filterOnly }, '🔎 Show only new content everywhere'),
-      h('button', { class: 'btn', onclick: runNew }, `🎯 Practice new exercises (${exNew.length})`),
-      pbNew.length ? h('button', { class: 'btn', onclick: () => { setSrcFilter(ids); go('#/drill/' + pbNew[0].id); } }, `🔧 New debug drills (${pbNew.length})`) : null,
-      h('button', { class: 'btn', onclick: () => { setSrcFilter(ids); go('#/cards'); } }, '🃏 New flashcards'),
-      none ? null : h('button', { class: 'btn ghost', onclick: () => { markSeen(ids); applySourceFilter(); toast('Marked as seen ✔'); go(HOME()); } }, '✔ Mark as seen')),
-    newChs.length ? h('h2', { style: { marginBottom: '12px' } }, 'New chapters') : null,
-    newChs.length ? h('div', { class: 'chapters' }, ...newChs.map((c, i) => { const card = h('button', { class: 'chcard', style: { animationDelay: i * 50 + 'ms' }, onclick: () => go('#/ch/' + c.id) }, h('div', { class: 'emo' }, c.emoji), h('div', { class: 'num' }, `Chapter ${c.num}`), h('h3', {}, c.title), h('p', {}, c.subtitle), h('div', { class: 'tiny' }, `${c.sections.length} sections · ${c.exercises.length} exercises · ${c.debug.length} drills`)); setAccent(card, c); return card; })) : null,
-    enriched.length ? h('h2', { style: { margin: '28px 0 6px' } }, 'Existing sections that got new material') : null,
-    enriched.length ? h('p', { class: 'muted', style: { marginTop: 0 } }, 'Level-up notes and new exercises were appended — the original text is untouched. New blocks are marked ✨ NEW.') : null,
-    enriched.length ? h('div', { class: 'path' }, ...enriched.map(({ s, c }, i) => { const n = h('button', { class: 'node', style: { animationDelay: i * 25 + 'ms' }, onclick: () => go('#/s/' + s.id) }, h('div', { class: 'dot' }, c.emoji), h('div', { class: 'grow' }, h('b', {}, s.title), h('small', {}, `Ch${c.num} · ${c.title}`)), h('span', { class: 'newpill' }, `+${s.blocks.filter(b => ids.includes(b.src)).length} blocks · +${c.exercises.filter(e => e.section === s.id && ids.includes(e.src)).length} ex`)); setAccent(n, c); return n; })) : null);
+      h('button', { class: 'btn primary', onclick: filterOnly }, '🔎 ' + tE('engine.new.filterAll')),
+      h('button', { class: 'btn', onclick: runNew }, '🎯 ' + tE('engine.new.practice', { n: exNew.length })),
+      pbNew.length ? h('button', { class: 'btn', onclick: () => { setSrcFilter(ids); go('#/drill/' + pbNew[0].id); } }, '🔧 ' + tE('engine.new.drills', { n: pbNew.length })) : null,
+      h('button', { class: 'btn', onclick: () => { setSrcFilter(ids); go('#/cards'); } }, '🃏 ' + tE('engine.new.cards')),
+      none ? null : h('button', { class: 'btn ghost', onclick: () => { markSeen(ids); applySourceFilter(); toast(tE('engine.new.markedSeen')); go(HOME()); } }, '✔ ' + tE('engine.new.markSeen'))),
+    newChs.length ? h('h2', { style: { marginBottom: '12px' } }, tE('engine.new.chapters')) : null,
+    newChs.length ? h('div', { class: 'chapters' }, ...newChs.map((c, i) => { const card = h('button', { class: 'chcard', style: { animationDelay: i * 50 + 'ms' }, onclick: () => go('#/ch/' + c.id) }, h('div', { class: 'emo' }, c.emoji), h('div', { class: 'num' }, tE('engine.new.chapterN', { num: c.num })), h('h3', {}, c.title), h('p', {}, c.subtitle), h('div', { class: 'tiny' }, tE('engine.new.chCounts', { s: c.sections.length, e: c.exercises.length, d: c.debug.length }))); setAccent(card, c); return card; })) : null,
+    enriched.length ? h('h2', { style: { margin: '28px 0 6px' } }, tE('engine.new.enriched')) : null,
+    enriched.length ? h('p', { class: 'muted', style: { marginTop: 0 } }, tE('engine.new.enrichedNote')) : null,
+    enriched.length ? h('div', { class: 'path' }, ...enriched.map(({ s, c }, i) => { const n = h('button', { class: 'node', style: { animationDelay: i * 25 + 'ms' }, onclick: () => go('#/s/' + s.id) }, h('div', { class: 'dot' }, c.emoji), h('div', { class: 'grow' }, h('b', {}, s.title), h('small', {}, chTitle(c.num, c.title))), h('span', { class: 'newpill' }, tE('engine.new.added', { blocks: s.blocks.filter(b => ids.includes(b.src)).length, ex: c.exercises.filter(e => e.section === s.id && ids.includes(e.src)).length }))); setAccent(n, c); return n; })) : null);
 }
 
 /* ---------- Sources deck (collapsible menu under the top bar) ---------- */
@@ -2715,38 +2857,38 @@ function renderSourcesDeck() {
   const ns = newSources();
   const inner = h('div', { class: 'deckinner' });
   inner.append(h('div', { class: 'deckhead' },
-    h('div', { class: 'grow' }, h('b', {}, '📚 Sources'), h('span', { class: 'tiny' }, ` · ${SOURCES.length} source${SOURCES.length > 1 ? 's' : ''} · showing ${on ? on.size : 'all'}`)),
-    h('button', { class: 'fchip' + (!on ? ' on' : ''), onclick: () => setSrcFilter(null) }, 'All'),
-    ns.length ? h('button', { class: 'fchip' + (on && [...on].every(isNewSrc) ? ' on' : ''), onclick: () => setSrcFilter(ns) }, '✨ Only new') : null,
-    h('button', { class: 'iconbtn', title: 'Close', onclick: () => toggleSourcesDeck(false) }, '✕')));
+    h('div', { class: 'grow' }, h('b', {}, '📚 ' + tE('engine.src.sources')), h('span', { class: 'tiny' }, ' · ' + (on ? tE('engine.deck.countSome', { n: SOURCES.length, shown: on.size }) : tE('engine.deck.countAll', { n: SOURCES.length })))),
+    h('button', { class: 'fchip' + (!on ? ' on' : ''), onclick: () => setSrcFilter(null) }, tE('engine.deck.all')),
+    ns.length ? h('button', { class: 'fchip' + (on && [...on].every(isNewSrc) ? ' on' : ''), onclick: () => setSrcFilter(ns) }, '✨ ' + tE('engine.deck.onlyNew')) : null,
+    h('button', { class: 'iconbtn', title: tE('engine.deck.close'), onclick: () => toggleSourcesDeck(false) }, '✕')));
   SOURCES.forEach((s, i) => {
     const x = st[s.id]; const exp = !!DECK.expanded[s.id];
     const chs = sourceChapters(s.id);
     const fm = window.NoemaSrcFiles ? NoemaSrcFiles.index(ACCOUNT.id, SUBJ.id)[s.id] : null; const web = window.NoemaSrcFiles?.webUrl(s);
-    const pick = h('input', { type: 'file', style: { display: 'none' }, onchange: async e => { const f = e.target.files[0]; if (!f) return; toast('⬆️ Saving “' + f.name + '”…', 2500); try { await NoemaSrcFiles.put(ACCOUNT.id, SUBJ.id, s.id, f); toast('📎 Attached — tap 👁 to preview it (on every device).'); } catch (er) { toast('⚠️ ' + er.message, 6000); } renderSourcesDeck(); route(); } });
+    const pick = h('input', { type: 'file', style: { display: 'none' }, onchange: async e => { const f = e.target.files[0]; if (!f) return; toast('⬆️ ' + tE('engine.deck.saving', { name: f.name }), 2500); try { await NoemaSrcFiles.put(ACCOUNT.id, SUBJ.id, s.id, f); toast('📎 ' + tE('engine.deck.attached')); } catch (er) { toast('⚠️ ' + errText(er), 6000); } renderSourcesDeck(); route(); } });
     const card = h('div', { class: 'srccard' + (isOn(s.id) ? '' : ' off') + (exp ? ' exp' : ''), style: { animationDelay: i * 40 + 'ms' } },
       h('div', { class: 'srcrow' },
-        h('label', { class: 'switch', title: 'Include in the app' }, h('input', { type: 'checkbox', checked: isOn(s.id), onchange: e => { const cur = on ? [...on] : SOURCES.map(z => z.id); const next = e.target.checked ? [...new Set([...cur, s.id])] : cur.filter(z => z !== s.id); if (!next.length) { e.target.checked = true; toast('Keep at least one source on'); return; } setSrcFilter(next); } }), h('i')),
+        h('label', { class: 'switch', title: tE('engine.deck.include') }, h('input', { type: 'checkbox', checked: isOn(s.id), onchange: e => { const cur = on ? [...on] : SOURCES.map(z => z.id); const next = e.target.checked ? [...new Set([...cur, s.id])] : cur.filter(z => z !== s.id); if (!next.length) { e.target.checked = true; toast(tE('engine.deck.keepOne')); return; } setSrcFilter(next); } }), h('i')),
         h('span', { class: 'srcemo' }, s.emoji || '📘'),
         h('button', { class: 'grow srcmain', onclick: () => { DECK.expanded[s.id] = !exp; renderSourcesDeck(); } },
-          h('b', {}, s.title, isNewSrc(s.id) ? h('span', { class: 'newpill', style: { marginLeft: '6px' } }, '✨ new') : null),
-          h('small', {}, `${s.subtitle || ''}${s.pages ? ' · ' + (/^\d/.test(s.pages) ? 'pp. ' : '') + s.pages : ''}`)),
-        fm || web ? h('button', { class: 'iconbtn srceye', title: '👁 Preview' + (fm ? ' ' + fm.name : ''), 'aria-label': 'Preview the source', onclick: () => openSource(s.id) }, '👁') : null,
+          h('b', {}, s.title, isNewSrc(s.id) ? h('span', { class: 'newpill', style: { marginLeft: '6px' } }, '✨ ' + tE('engine.src.new')) : null),
+          h('small', {}, (s.subtitle || '') + (s.pages ? ' · ' + (/^\d/.test(s.pages) ? tE('engine.deck.pp', { pages: s.pages }) : s.pages) : ''))),
+        fm || web ? h('button', { class: 'iconbtn srceye', title: '👁 ' + tE('engine.deck.preview') + (fm ? ' ' + fm.name : ''), 'aria-label': tE('engine.deck.previewAria'), onclick: () => openSource(s.id) }, '👁') : null,
         h('button', { class: 'iconbtn', onclick: () => { DECK.expanded[s.id] = !exp; renderSourcesDeck(); } }, h('span', { class: 'chev', style: { transform: exp ? 'rotate(90deg)' : '' } }, '▸'))),
       exp ? h('div', { class: 'srcbody' },
-        h('div', { class: 'srcstats' }, ...[['🧱', x.newChapters.length, 'chapters'], ['📖', x.sections.size, 'sections'], ['➕', x.enriched.size, 'sections enriched'], ['🎯', x.exercises, 'exercises'], ['🔧', x.playbooks, 'drills'], ['🃏', x.cards, 'cards'], ['⚠️', x.pitfalls, 'traps']].filter(r => r[1]).map(([e, n, l]) => h('span', { class: 'pill' }, `${e} ${n} ${l}`))),
-        h('div', { class: 'srcfile' }, fm ? [h('span', {}, `📎 ${fm.name} · ${fm.size > 1048576 ? (fm.size / 1048576).toFixed(1) + ' MB' : Math.round(fm.size / 1024) + ' KB'}`, fm.cloud ? '' : ' · on this device only'), h('button', { class: 'btn small primary', onclick: () => openSource(s.id) }, '👁 Preview'), h('label', { class: 'btn small' }, '↻ Replace', pick), h('button', { class: 'btn small ghost', onclick: async () => { if (confirm('Remove the attached file of this source? (The course itself is not changed.)')) { await NoemaSrcFiles.remove(ACCOUNT.id, SUBJ.id, s.id); renderSourcesDeck(); route(); } } }, '🗑 Remove file')]
-          : web ? [h('span', {}, '🌐 ', h('a', { href: web, target: '_blank', rel: 'noopener' }, web.replace(/^https?:\/\/(www\.)?/, '').slice(0, 60))), h('button', { class: 'btn small primary', onclick: () => openSource(s.id) }, '👁 Preview'), h('label', { class: 'btn small' }, '📎 Attach a file instead', pick)]
-          : [h('span', { class: 'tiny' }, s.sha256 ? `📦 ${s.fileName || String(s.file).split('/').pop()} came in the subject's package (.noema.zip) — import the package to get it, or attach it` : s.file ? `📄 ${String(s.file).split('/').pop()} — not attached yet` : 'No file attached'), h('label', { class: 'btn small primary' }, '📎 Attach the file', pick)]),
-        h('div', { class: 'tiny', style: { margin: '6px 0' } }, `${s.pages ? (/^\d/.test(s.pages) ? 'Pages ' : '') + s.pages + ' · ' : ''}added ${s.added || '—'}`),
-        chs.length ? h('div', { class: 'srcchs' }, ...chs.map(({ c, ref }) => h('button', { class: 'srcch' + (ref.main ? '' : ' also'), title: ref.label || '', onclick: () => { toggleSourcesDeck(false); go('#/ch/' + c.id); } }, `${c.emoji} Ch${c.num} · ${c.title}`, ref.label ? h('small', {}, ' — ' + (ref.label.length > 60 ? ref.label.slice(0, 58) + '…' : ref.label)) : null, ref.main ? null : h('small', {}, ' (also)')))) : h('div', { class: 'tiny' }, 'No chapter is mapped to this source.'),
+        h('div', { class: 'srcstats' }, ...[['🧱', x.newChapters.length, 'chapters'], ['📖', x.sections.size, 'sections'], ['➕', x.enriched.size, 'enriched'], ['🎯', x.exercises, 'exercises'], ['🔧', x.playbooks, 'drills'], ['🃏', x.cards, 'cards'], ['⚠️', x.pitfalls, 'traps']].filter(r => r[1]).map(([e, n, l]) => h('span', { class: 'pill' }, `${e} ` + tE('engine.deck.st_' + l, { n })))),
+        h('div', { class: 'srcfile' }, fm ? [h('span', {}, `📎 ${fm.name} · ${fileSize(fm.size)}`, fm.cloud ? '' : ' · ' + tE('engine.deck.deviceOnly')), h('button', { class: 'btn small primary', onclick: () => openSource(s.id) }, '👁 ' + tE('engine.deck.preview')), h('label', { class: 'btn small' }, '↻ ' + tE('engine.deck.replace'), pick), h('button', { class: 'btn small ghost', onclick: async () => { if (confirm(tE('engine.deck.removeConfirm'))) { await NoemaSrcFiles.remove(ACCOUNT.id, SUBJ.id, s.id); renderSourcesDeck(); route(); } } }, '🗑 ' + tE('engine.deck.remove'))]
+          : web ? [h('span', {}, '🌐 ', h('a', { href: web, target: '_blank', rel: 'noopener' }, web.replace(/^https?:\/\/(www\.)?/, '').slice(0, 60))), h('button', { class: 'btn small primary', onclick: () => openSource(s.id) }, '👁 ' + tE('engine.deck.preview')), h('label', { class: 'btn small' }, '📎 ' + tE('engine.deck.attachInstead'), pick)]
+          : [h('span', { class: 'tiny' }, s.sha256 ? '📦 ' + tE('engine.deck.inPackage', { name: s.fileName || String(s.file).split('/').pop() }) : s.file ? '📄 ' + tE('engine.deck.notAttached', { name: String(s.file).split('/').pop() }) : tE('engine.deck.noFile')), h('label', { class: 'btn small primary' }, '📎 ' + tE('engine.deck.attach'), pick)]),
+        h('div', { class: 'tiny', style: { margin: '6px 0' } }, (s.pages ? (/^\d/.test(s.pages) ? tE('engine.deck.pages', { pages: s.pages }) : s.pages) + ' · ' : '') + tE('engine.deck.added', { date: s.added || '—' })),
+        chs.length ? h('div', { class: 'srcchs' }, ...chs.map(({ c, ref }) => h('button', { class: 'srcch' + (ref.main ? '' : ' also'), title: ref.label || '', onclick: () => { toggleSourcesDeck(false); go('#/ch/' + c.id); } }, `${c.emoji} ` + chTitle(c.num, c.title), ref.label ? h('small', {}, ' — ' + (ref.label.length > 60 ? ref.label.slice(0, 58) + '…' : ref.label)) : null, ref.main ? null : h('small', {}, ' ' + tE('engine.deck.also'))))) : h('div', { class: 'tiny' }, tE('engine.deck.noChapter')),
         h('div', { class: 'row', style: { marginTop: '10px' } },
-          h('button', { class: 'btn small', onclick: () => setSrcFilter([s.id]) }, '🔎 Only this source'),
-          isNewSrc(s.id) ? h('button', { class: 'btn small', onclick: () => { markSeen([s.id]); applySourceFilter(); route(); renderSourcesDeck(); } }, '✔ Mark as seen') : null,
-          s.id !== SOURCES[0].id && S.seenSrc?.[s.id] ? h('button', { class: 'btn small ghost', onclick: () => { delete S.seenSrc[s.id]; save(); applySourceFilter(); route(); renderSourcesDeck(); } }, '↺ Mark as new') : null)) : null);
+          h('button', { class: 'btn small', onclick: () => setSrcFilter([s.id]) }, '🔎 ' + tE('engine.deck.onlyThis')),
+          isNewSrc(s.id) ? h('button', { class: 'btn small', onclick: () => { markSeen([s.id]); applySourceFilter(); route(); renderSourcesDeck(); } }, '✔ ' + tE('engine.new.markSeen')) : null,
+          s.id !== SOURCES[0].id && S.seenSrc?.[s.id] ? h('button', { class: 'btn small ghost', onclick: () => { delete S.seenSrc[s.id]; save(); applySourceFilter(); route(); renderSourcesDeck(); } }, '↺ ' + tE('engine.deck.markNew')) : null)) : null);
     inner.append(card);
   });
-  inner.append(h('div', { class: 'tiny', style: { marginTop: '10px' } }, 'Turning a source off hides its chapters, sections, appended blocks, exercises, drills, cards and traps everywhere (practice, lightning, search, tutor). Your progress is never deleted. New sources are merged additively — just hand Claude the next PDF.'));
+  inner.append(h('div', { class: 'tiny', style: { marginTop: '10px' } }, tE('engine.deck.footer')));
   d.append(inner);
 }
 
@@ -2776,7 +2918,7 @@ const ACC_REF = { id: ACCOUNT.id, kind: ACCOUNT.kind || 'local' };
 const SUBJ_REF = { id: SUBJ.id, title: SUBJ.title, packVersion: Noema.pack?.version || null };
 function fromRec(r) {     // canonical record → in-memory shape used by the UI
   return { id: r.id, kind: r.kind, mode: r.mode, created: Date.parse(r.createdAt), updated: Date.parse(r.updatedAt),
-    ctx: r.context?.type && r.context.type !== 'course' ? { kind: r.context.type, id: r.context.id, label: r.context.label, ...(r.context.type === 'item' ? { sec: r.context.sectionId || null, ch: r.context.chapterId || null } : {}) } : null,
+    ctx: r.context?.type && r.context.type !== 'course' ? { kind: r.context.type, id: r.context.id, label: r.context.label, ...(r.context.type === 'item' ? { sec: r.context.sectionId || null, ch: r.context.chapterId || null } : {}), ...(r.context.origin ? { origin: r.context.origin } : {}) } : null,
     model: r.model?.name || '', title: r.title, titleSource: r.titleSource,
     titledLen: r.titleSource === 'user' ? 1e9 : (r.meta?.titledAtMessage ?? (r.title ? r.messages.length : 0)),
     msgs: r.messages.map(m => ({ id: m.id, role: m.role === 'assistant' ? 'model' : m.role, text: m.content, t: Date.parse(m.createdAt), ...(m.meta ? { meta: m.meta } : {}) })),
@@ -2786,7 +2928,8 @@ function toRec(cv) {      // in-memory shape → canonical record
   const sec = cv.ctx?.kind === 'section' ? cv.ctx.id : cv.ctx?.kind === 'exercise' ? (EX[cv.ctx.id]?.section || null) : cv.ctx?.kind === 'item' ? (cv.ctx.sec || null) : null;
   return Noema.convos.normalize({ id: cv.id, kind: cv.kind || 'tutor', mode: cv.mode, title: cv.title,
     titleSource: cv.titleSource || (cv.titledLen >= 1e9 ? 'user' : cv.title ? 'ai' : 'none'),
-    context: cv.ctx ? { type: cv.ctx.kind, id: cv.ctx.id, label: cv.ctx.label, ...(sec ? { sectionId: sec, chapterId: sec.split('-')[0] } : {}) } : { type: 'course', id: null, label: null },
+    // origin: the button the conversation began from and the exact part (block, exercise, card, drill) — the search shows it (docs/SEARCH.md)
+    context: cv.ctx ? { type: cv.ctx.kind, id: cv.ctx.id, label: cv.ctx.label, ...(sec ? { sectionId: sec, chapterId: sec.split('-')[0] } : {}), origin: cv.ctx.origin || { via: 'tutor' } } : { type: 'course', id: null, label: null, origin: { via: 'tutor' } },
     model: { provider: cv.provider || 'google', name: cv.model || S.settings.model || null },
     createdAt: new Date(cv.created).toISOString(), updatedAt: new Date(cv.updated || Date.now()).toISOString(),
     messages: cv.msgs.filter(m => !m.hidden).map(m => ({ id: m.id, role: m.role, content: m.text, createdAt: new Date(m.t || cv.created).toISOString(), ...(m.meta ? { meta: m.meta } : {}) })),
@@ -2808,7 +2951,7 @@ function saveConvos(cv) {
 }
 function ctxRecord() {
   const c = T.ctx; if (!c) return null;
-  return { kind: c.kind, id: c.id, label: ctxLabel().replace(/^\S+\s/, ''), ...(c.kind === 'item' ? { sec: c.sec || null, ch: c.ch || null, text: String(c.text || '').slice(0, 6000) } : {}) };
+  return { kind: c.kind, id: c.id, label: ctxLabel().replace(/^\S+\s/, ''), ...(c.kind === 'item' ? { sec: c.sec || null, ch: c.ch || null, text: String(c.text || '').slice(0, 6000) } : {}), ...(c.origin ? { origin: c.origin } : {}) };
 }
 function persistConvo(key) {
   const hist = T.hist[key];
@@ -2836,29 +2979,35 @@ function currentConvo() {
 }
 
 /* ---------- titles: succinct, descriptive, canonical ---------- */
-const MODE_NAME = { ...Noema.convos?.MODE_NAME, socratic: 'Socratic dialogue', explain: 'Explanation', quiz: 'Quiz', interview: 'Mock interview', debug: 'Debugging simulation' };   // + other apps' modes (engine/convos.js)
+const MODE_NAME = { ...Noema.convos?.MODE_NAME, socratic: 'Socratic dialogue', explain: 'Explanation', quiz: 'Quiz', interview: 'Mock interview', debug: 'Debugging simulation' };   // + other apps' modes (engine/convos.js) — English: for the AI's prompts and file names only; the learner reads cvModeName (i18n-ignore)
+/** A conversation's mode for the learner: this app's modes in the UI language, other apps' as they name them. */
+const cvModeName = m => ['socratic', 'explain', 'quiz', 'interview', 'debug'].includes(m) ? tE('engine.cv.mode_' + m) : (Noema.convos?.MODE_NAME?.[m] || m);   // other apps' modes: engine/convos.js's names, read now (loader.convo.mode.*)
 const fromApp = cv => Noema.convos?.fromApp?.(cv) || null;
 function cleanTitle(t) {
   return String(t || '').split('\n')[0].replace(/^\s*(title\s*:\s*)/i, '').replace(/[*_#`"“”'‘’]/g, '')
     .replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu, '').replace(/\s+/g, ' ').replace(/[\s.:;,!-]+$/, '').trim().slice(0, 90);
 }
 function fallbackTitle(cv) {
-  const topic = cv.ctx?.label?.replace(/^Ch\d+\s*·\s*/, '') || (cv.msgs.find(m => m.role === 'user')?.text || SUBJ.title).split(/\s+/).slice(0, 7).join(' ');
-  return cleanTitle(`${topic}`) || `${SUBJ.title} Tutoring Session`;
+  const topic = (cv.ctx?.label && stripCh(cv.ctx.label)) || (cv.msgs.find(m => m.role === 'user')?.text || SUBJ.title).split(/\s+/).slice(0, 7).join(' ');
+  return cleanTitle(`${topic}`) || tE('engine.cv.fallbackTitle', { title: SUBJ.title });
 }
 const displayTitle = cv => cv.title || fallbackTitle(cv);
-const KIND_BADGE = { tutor: '', grading: '📝 grading', 'code-review': '⌨️ code review', question: '✨ AI question', 'drill-grading': '🔧 drill grading' };
+const KIND_ICON = { grading: '📝', 'code-review': '⌨️', question: '✨', 'drill-grading': '🔧' };
+/** The badge of a one-shot AI record (grading, code review …) in the conversation list. */
+const kindBadge = k => KIND_ICON[k] ? KIND_ICON[k] + ' ' + tE('engine.cv.kind_' + k.replace('-', '_')) : '';
 async function generateTitle(cv) {
   if (CV.titling.has(cv.id)) return cv.title;
   CV.titling.add(cv.id);
   try {
+    /* i18n-ignore-start */   // the title prompt (English; it asks for the learner's reply language — replyLang())
     const transcript = cv.msgs.map(m => (m.role === 'user' ? 'Learner: ' : 'Tutor: ') + m.text).join('\n\n').slice(0, 9000);
     const prompt = `Write the title for this ${TUTOR.domain} tutoring conversation (mode: ${MODE_NAME[cv.mode] || cv.mode}; context: ${cv.ctx?.label || 'whole course'}).
 Rules: 3–8 words; name the specific concept(s) actually discussed, not generic words; canonical ${TUTOR.domain} terminology and capitalization (e.g. ${TUTOR.terminology}); Title Case; optionally "Topic: Angle" form; no quotes, emojis, trailing punctuation, dates, or words like Conversation/Chat/Session/Tutor.
-Reply with the title only.${chatLang() && chatLang() !== COURSE_LANG ? ` Write it in ${langName(chatLang())}.` : ''}
+Reply with the title only.${(r => /^en\b/.test(r.code) && /^en\b/.test(COURSE_LANG) ? '' : ` Write it in ${r.name}.`)(replyLang())}
 
 TRANSCRIPT:
 ${transcript}`;
+    /* i18n-ignore-end */
     const t = cleanTitle(await gemini({ contents: [{ role: 'user', parts: [{ text: prompt }] }], temperature: 0.2 }));
     if (t && t.split(' ').length <= 14) { cv.title = t; cv.titleSource = 'ai'; cv.titledLen = cv.msgs.length; saveConvos(cv); }
   } catch (e) { /* keep fallback */ }
@@ -2875,23 +3024,23 @@ function maybeAutoTitle(key) {
 /* ---------- export ---------- */
 const slug = s => String(s).toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 70) || 'conversation';
 const pad = n => String(n).padStart(2, '0');
-const fmtDate = (t, withTime = true) => { const d = new Date(t); return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}` + (withTime ? ` ${pad(d.getHours())}:${pad(d.getMinutes())}` : ''); };
+const fmtDate = (t, withTime = true) => { const d = new Date(t); return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}` + (withTime ? ` ${pad(d.getHours())}:${pad(d.getMinutes())}` : ''); };   // i18n-ignore
 function convoMarkdown(cv, level = 1) {
   const H = '#'.repeat(level);
   const title = displayTitle(cv);
   const lines = [`${H} ${title}`, '',
     `| | |`, `|---|---|`,
-    `| **Mode** | ${MODE_NAME[cv.mode] || cv.mode} |`,
-    `| **Context** | ${cv.ctx?.label ? cv.ctx.label.replace(/\|/g, '\\|') : 'Whole course'} |`,
-    `| **Started** | ${fmtDate(cv.created)} |`,
-    `| **Last message** | ${fmtDate(cv.updated || cv.created)} |`,
-    `| **Messages** | ${cv.msgs.length} |`,
-    `| **Tutor** | ${TUTOR.name} (Gemini${cv.model ? ' · ' + cv.model : ''}) |`,
-    `| **Subject** | ${SUBJ.title} |`, `| **Profile** | ${ACCOUNT.name} |`, `| **Source** | ${fromApp(cv) || `${APP_TITLE} (${Noema.config.appName})`} |`, '', '---', ''];
+    `| **${tE('engine.cv.md.mode')}** | ${cvModeName(cv.mode)} |`,
+    `| **${tE('engine.cv.md.context')}** | ${cv.ctx?.label ? cv.ctx.label.replace(/\|/g, '\\|') : tE('engine.cv.wholeCourse')} |`,
+    `| **${tE('engine.cv.md.started')}** | ${fmtDate(cv.created)} |`,
+    `| **${tE('engine.cv.md.last')}** | ${fmtDate(cv.updated || cv.created)} |`,
+    `| **${tE('engine.cv.md.messages')}** | ${nf(cv.msgs.length)} |`,
+    `| **${tE('engine.cv.md.tutor')}** | ${TUTOR.name} (Gemini${cv.model ? ' · ' + cv.model : ''}) |`,   // i18n-ignore
+    `| **${tE('engine.cv.md.subject')}** | ${SUBJ.title} |`, `| **${tE('engine.cv.md.profile')}** | ${ACCOUNT.name} |`, `| **${tE('engine.cv.md.source')}** | ${fromApp(cv) || `${APP_TITLE} (${Noema.config.appName})`} |`, '', '---', ''];
   const lessons = cv.tutorState?.lessons || [];
-  if (lessons.length) lines.push(`${H}# 📌 Lessons learned`, '', ...lessons.map((l, i) => `${i + 1}. ${l.text}`), '', '---', '');
+  if (lessons.length) lines.push(`${H}# 📌 ` + tE('engine.cv.md.lessons'), '', ...lessons.map((l, i) => `${i + 1}. ${l.text}`), '', '---', '');
   cv.msgs.forEach(m => {
-    const who = m.role === 'user' ? '🧑 You' : `${TUTOR.avatar} ${TUTOR.name}`;
+    const who = m.role === 'user' ? '🧑 ' + tE('engine.cv.md.you') : `${TUTOR.avatar} ${TUTOR.name}`;
     lines.push(`${H}# ${who}${m.t ? ' · ' + fmtDate(m.t).slice(11) : ''}`, '', demoteHeadings(String(m.text).trim(), level + 2), '');
   });
   return lines.join('\n');
@@ -2904,24 +3053,24 @@ function demoteHeadings(text, minLevel) {   // keep message headings below the s
     return l.replace(/^(#{1,6})\s+/, (m, hs) => '#'.repeat(Math.min(6, hs.length + minLevel - 1)) + ' ');
   }).join('\n');
 }
-function downloadText(name, text, type = 'text/markdown;charset=utf-8') {
+function downloadText(name, text, type = 'text/markdown;charset=utf-8') {   // i18n-ignore
   const url = URL.createObjectURL(new Blob([text], { type }));
   const a = h('a', { href: url, download: name }); document.body.append(a); a.click(); a.remove();
   setTimeout(() => URL.revokeObjectURL(url), 4000);
 }
 async function exportConvo(cv) {
-  if (!cv || !cv.msgs?.length) return toast('Nothing to export yet — start a conversation first 🙂');
-  if (!cv.title || cv.msgs.length - (cv.titledLen || 0) >= 2) { toast('✨ Naming your conversation…', 1500); await generateTitle(cv); }
+  if (!cv || !cv.msgs?.length) return toast(tE('engine.cv.nothingToExport'));
+  if (!cv.title || cv.msgs.length - (cv.titledLen || 0) >= 2) { toast('✨ ' + tE('engine.cv.naming'), 1500); await generateTitle(cv); }
   const title = displayTitle(cv);
   downloadText(`${fmtDate(cv.created, false)}_${slug(MODE_NAME[cv.mode] || cv.kind || 'conversation')}_${slug(title)}.md`, convoMarkdown(cv));
-  toast('⬇️ Exported “' + title + '”');
+  toast('⬇️ ' + tE('engine.cv.exported', { title }));
 }
 function exportAllConvos() {
   const list = CV.list.filter(c => c.msgs?.length).sort((a, b) => (a.created || 0) - (b.created || 0));
-  if (!list.length) return toast('No conversations yet');
-  const head = [`# ${APP_TITLE} — Tutor Conversations`, '', `Exported ${fmtDate(Date.now())} · ${list.length} conversation${list.length > 1 ? 's' : ''}`, '', '## Contents', '',
-    ...list.map((c, i) => `${i + 1}. ${displayTitle(c)} — *${MODE_NAME[c.mode] || c.mode}, ${fmtDate(c.created, false)}*`), '', '---', ''];
-  downloadText(`${fmtDate(Date.now(), false)}_${slug(APP_TITLE)}_all-tutor-conversations.md`, head.join('\n') + list.map(c => convoMarkdown(c, 2)).join('\n\n---\n\n'));
+  if (!list.length) return toast(tE('engine.cv.none'));
+  const head = ['# ' + tE('engine.cv.md.allTitle', { app: APP_TITLE }), '', tE('engine.cv.md.exportedOn', { date: fmtDate(Date.now()), n: list.length }), '', '## ' + tE('engine.cv.md.contents'), '',
+    ...list.map((c, i) => `${i + 1}. ${displayTitle(c)} — *${cvModeName(c.mode)}, ${fmtDate(c.created, false)}*`), '', '---', ''];
+  downloadText(`${fmtDate(Date.now(), false)}_${slug(APP_TITLE)}_all-tutor-conversations.md`, head.join('\n') + list.map(c => convoMarkdown(c, 2)).join('\n\n---\n\n'));   // i18n-ignore
 }
 
 /* ---------- open a stored conversation ---------- */
@@ -2975,31 +3124,31 @@ function renderConvoHistory(box) {
   const list = q ? all.filter(c => (displayTitle(c) + ' ' + (c.ctx?.label || '') + ' ' + c.msgs.map(m => m.text).join(' ')).toLowerCase().includes(q)) : all;
   box.classList.add('histbox');
   box.append(h('div', { class: 'histhead' },
-    h('b', { class: 'grow' }, `🕘 Conversations (${all.length})`, tip('Every conversation with the tutor — and every AI grading, code review and generated question — is saved automatically in the background: in this browser, in your backup folder (if set) and in the cloud (cloud accounts). ⬇️ exports a readable Markdown copy on demand.')),
-    all.length ? h('button', { class: 'btn small', onclick: exportAllConvos }, '⬇️ Export all') : null,
-    h('button', { class: 'btn small primary', onclick: () => { T.showHistory = false; renderTutor(); } }, '← Chat')));
-  if (others) box.append(h('label', { class: 'row tiny', style: { margin: '2px 0 4px' } }, h('input', { type: 'checkbox', checked: histAllKinds, onchange: e => { histAllKinds = e.target.checked; renderTutor(); } }), `Also show ${others} AI grading / review / question record${others > 1 ? 's' : ''}`));
+    h('b', { class: 'grow' }, '🕘 ' + tE('engine.cv.title', { n: all.length }), tip(tE('engine.cv.tip'))),
+    all.length ? h('button', { class: 'btn small', onclick: exportAllConvos }, '⬇️ ' + tE('engine.cv.exportAll')) : null,
+    h('button', { class: 'btn small primary', onclick: () => { T.showHistory = false; renderTutor(); } }, arrowBack() + ' ' + tE('engine.cv.chat'))));
+  if (others) box.append(h('label', { class: 'row tiny', style: { margin: '2px 0 4px' } }, h('input', { type: 'checkbox', checked: histAllKinds, onchange: e => { histAllKinds = e.target.checked; renderTutor(); } }), tE('engine.cv.alsoShow', { n: others })));
   if (all.length > 3) {
-    const inp = h('input', { class: 'histsearch', placeholder: 'Search conversations…', value: histQuery, oninput: e => { histQuery = e.target.value; const pos = e.target.selectionStart; renderTutor(); const ni = $('.histsearch'); if (ni) { ni.focus(); ni.setSelectionRange(pos, pos); } } });
+    const inp = h('input', { class: 'histsearch', placeholder: tE('engine.cv.search'), value: histQuery, oninput: e => { histQuery = e.target.value; const pos = e.target.selectionStart; renderTutor(); const ni = $('.histsearch'); if (ni) { ni.focus(); ni.setSelectionRange(pos, pos); } } });
     box.append(inp);
   }
-  if (!all.length) { box.append(h('div', { class: 'empty' }, h('div', { class: 'e' }, '💬'), h('p', {}, 'No conversations yet. Every chat with your tutor is saved here automatically, ready to export as Markdown.'))); return; }
+  if (!all.length) { box.append(h('div', { class: 'empty' }, h('div', { class: 'e' }, '💬'), h('p', {}, tE('engine.cv.empty')))); return; }
   list.forEach((cv, i) => {
     let confirmDel = false;
-    const titleEl = h('b', { class: 'cvtitle' }, displayTitle(cv), !cv.title && CV.titling.has(cv.id) ? h('span', { class: 'tiny' }, ' · naming…') : null);
+    const titleEl = h('b', { class: 'cvtitle' }, displayTitle(cv), !cv.title && CV.titling.has(cv.id) ? h('span', { class: 'tiny' }, ' · ' + tE('engine.cv.namingShort')) : null);
     const card = h('div', { class: 'cvcard', style: { animationDelay: Math.min(i, 12) * 25 + 'ms' } },
       h('button', { class: 'cvmain', onclick: () => openConvo(cv) }, titleEl,
-        h('small', {}, fromApp(cv) ? h('span', { class: 'cvfrom' }, 'from ' + fromApp(cv)) : null, `${cv.kind && cv.kind !== 'tutor' ? KIND_BADGE[cv.kind] : (MODES[cv.mode]?.label || MODE_NAME[cv.mode] || cv.mode)} · ${cv.ctx?.label || 'Whole course'}`),
-        h('small', {}, `${fmtDate(cv.updated || cv.created)} · ${cv.msgs.length} messages`)),
+        h('small', {}, fromApp(cv) ? h('span', { class: 'cvfrom' }, tE('engine.cv.fromApp', { app: fromApp(cv) })) : null, `${cv.kind && cv.kind !== 'tutor' ? kindBadge(cv.kind) : (MODES[cv.mode]?.label || cvModeName(cv.mode))} · ${cv.ctx?.label || tE('engine.cv.wholeCourse')}`),
+        h('small', {}, `${fmtDate(cv.updated || cv.created)} · ` + tE('engine.cv.messages', { n: cv.msgs.length }))),
       h('div', { class: 'cvactions' },
-        h('button', { class: 'iconbtn', title: 'Rename', onclick: () => {
+        h('button', { class: 'iconbtn', title: tE('engine.cv.rename'), onclick: () => {
           const inp = h('input', { class: 'histsearch', value: displayTitle(cv), onkeydown: e => { if (e.key === 'Enter') done(); if (e.key === 'Escape') renderTutor(); }, onblur: () => done() });
           const done = () => { const v = cleanTitle(inp.value); if (v) { cv.title = v; cv.titleSource = 'user'; cv.titledLen = 1e9; saveConvos(cv); } renderTutor(); };
           titleEl.replaceWith(inp); inp.focus(); inp.select();
         } }, '✏️'),
-        h('button', { class: 'iconbtn', title: 'Export .md', onclick: () => exportConvo(cv) }, '⬇️'),
-        h('button', { class: 'iconbtn', title: 'Delete', onclick: e => {
-          if (!confirmDel) { confirmDel = true; e.currentTarget.textContent = '❓'; e.currentTarget.title = 'Click again to delete'; return; }
+        h('button', { class: 'iconbtn', title: tE('engine.cv.exportMd'), onclick: () => exportConvo(cv) }, '⬇️'),
+        h('button', { class: 'iconbtn', title: tE('engine.cv.delete'), onclick: e => {
+          if (!confirmDel) { confirmDel = true; e.currentTarget.textContent = '❓'; e.currentTarget.title = tE('engine.cv.deleteAgain'); return; }
           CV.list = CV.list.filter(x => x !== cv); for (const k in CV.byKey) if (CV.byKey[k] === cv) { delete CV.byKey[k]; delete T.hist[k]; } Noema.convos.remove(ACCOUNT.id, cv.id).catch(() => { }); renderTutor();
         } }, '🗑️')));
     box.append(card);
@@ -3015,7 +3164,7 @@ function renderConvoHistory(box) {
 const THREAD_BUDGET = 3;        // learner attempts per thread before the tutor MUST give the answer
 const MAX_OPEN_THREADS = 2;     // main question + at most one nested sub-question
 const CONVERGE_AFTER = 10;      // learner turns after which the tutor must start converging
-const TELL_ME_RE = /\b(just tell me|tell me the answer|give me the answer|i give up|no idea|i don'?t know|idk|what'?s the answer)\b|δεν ξέρω|πες μου|απάντησέ μου|δώσε μου την απάντηση/i;
+const TELL_ME_RE = /\b(just tell me|tell me the answer|give me the answer|i give up|no idea|i don'?t know|idk|what'?s the answer)\b|δεν ξέρω|πες μου|απάντησέ μου|δώσε μου την απάντηση|не знаю|скажи ответ|просто скажи|дай ответ|сдаюсь|je ne sais pas|dis-moi la réponse|donne-moi la réponse|j['’]abandonne/i;   // i18n-ignore (the learner's words in the languages of the UI)
 
 T.tstate = {};
 function newThreadState() { return { v: 1, threads: [], lessons: [], focus: null, learnerTurns: 0, missingControl: 0, wrapped: false }; }
@@ -3044,6 +3193,7 @@ function noteLearnerTurn(ts, text, directive) {
 }
 
 /** The TUTOR STATE block appended to the system prompt of every Socratic call. */
+/* i18n-ignore-start */   // a prompt for the AI (English)
 function tutorStateBlock(ts, directive) {
   const open = openThreads(ts);
   const depth = t => { let d = 0, p = t; while (p && p.parent) { d++; p = ts.threads.find(x => x.id === p.parent); } return d; };
@@ -3060,10 +3210,13 @@ function tutorStateBlock(ts, directive) {
   if (ts.learnerTurns >= CONVERGE_AFTER && open.length && !directive) dir.push('This conversation is long → converge: resolve the open threads within this or the next reply and give the 🎓 summary.');
   if (!open.length && ts.lessons.length && !directive) dir.push('No thread is open → if the learner asked something new, decide afresh (direct answer or ONE new thread). If they just acknowledged, close with **🎓 What you learned:** instead of starting a new chain.');
   if (ts.missingControl) dir.push('Your previous reply lacked the <noema-state> line — you MUST include it.');
+  const lang = inReplyLang('the "question", "answer" and "lesson" texts of the <noema-state> line (the learner reads them in the thread tracker) and the bold headings');
+  if (lang) dir.push(lang.trim());
   lines.push('DIRECTIVES:', ...(dir.length ? dir.map(d => '- ' + d) : ['- (none)']));
   lines.push(`Next new thread id: ${nextThreadId(ts)}.`);
   return lines.join('\n');
 }
+/* i18n-ignore-end */
 
 /** Merge the model's control object into the state. Returns the lessons resolved in this turn. */
 function applyControl(ts, control, seq) {
@@ -3085,7 +3238,7 @@ function applyControl(ts, control, seq) {
   (control.resolved || []).forEach(r => {
     if (!r) return;
     let t = ts.threads.find(x => x.id === r.id);
-    if (!t) { t = { id: r.id || nextThreadId(ts), question: r.question || '(answered directly)', parent: null, status: 'open', attempts: 0, budget: THREAD_BUDGET, openedAt: seq }; ts.threads.push(t); }
+    if (!t) { t = { id: r.id || nextThreadId(ts), question: r.question || '(answered directly)', parent: null, status: 'open', attempts: 0, budget: THREAD_BUDGET, openedAt: seq }; ts.threads.push(t); }   // i18n-ignore
     resolve(t, r, control.verdict === 'correct' ? 'learner-correct' : 'answered');
   });
   if (control.lesson && !ts.lessons.some(l => l.text === control.lesson)) { const l = { text: String(control.lesson), thread: null, question: null, at: seq }; ts.lessons.push(l); got.push(l); }
@@ -3114,13 +3267,13 @@ function threadTracker(key, histLen) {
   const add = (...xs) => xs.forEach(x => x && row.append(x));
   if (socr && ts) {
     add(h('span', { class: 'tb-ic' }, open.length ? '🧵' : '✅'),
-      h('div', { class: 'grow tb-txt' }, focus ? h('span', {}, h('b', {}, 'Working on: '), focus.question, ' ', h('span', { class: 'pill ' + ((focus.attempts || 0) >= (focus.budget || THREAD_BUDGET) - 1 ? 'warnpill' : '') }, `try ${Math.min((focus.attempts || 0) + 1, focus.budget || THREAD_BUDGET)}/${focus.budget || THREAD_BUDGET}`)) : h('span', {}, open.length ? `${open.length} open question(s)` : (ts.lessons.length ? 'All questions answered' : 'Ask anything — I’ll answer or guide you, then close with the answer'))),
-      ts.lessons.length ? h('button', { class: 'pill c tb-lessons', onclick: () => bar.classList.toggle('open') }, `📌 ${ts.lessons.length} lesson${ts.lessons.length > 1 ? 's' : ''}`) : null,
-      ts.threads.length ? h('button', { class: 'iconbtn tb-more', title: 'Show all threads', onclick: () => bar.classList.toggle('open') }, '▾') : null);
-  } else add(h('span', { class: 'tb-ic' }, '🎯'), h('div', { class: 'grow tb-txt tiny' }, 'Want the key takeaways of this conversation?'));
-  const actions = h('div', { class: 'tb-actions' },
-    socr && focus ? h('button', { class: 'btn small', onclick: () => sendTutor('Just tell me the answer, please.', false, { directive: 'tellme' }) }, '💡 Just tell me') : null,
-    histLen >= 2 ? h('button', { class: 'btn small primary', onclick: () => sendTutor('Let’s wrap up: give me the answers and what I learned.', false, { directive: 'wrapup' }) }, '🎓 Wrap up') : null);
+      h('div', { class: 'grow tb-txt' }, focus ? h('span', {}, h('b', {}, tE('engine.thr.workingOn') + ' '), focus.question, ' ', h('span', { class: 'pill ' + ((focus.attempts || 0) >= (focus.budget || THREAD_BUDGET) - 1 ? 'warnpill' : '') }, tE('engine.thr.try', { n: Math.min((focus.attempts || 0) + 1, focus.budget || THREAD_BUDGET), of: focus.budget || THREAD_BUDGET }))) : h('span', {}, open.length ? tE('engine.thr.open', { n: open.length }) : (ts.lessons.length ? tE('engine.thr.allAnswered') : tE('engine.thr.askAnything')))),
+      ts.lessons.length ? h('button', { class: 'pill c tb-lessons', onclick: () => bar.classList.toggle('open') }, '📌 ' + tE('engine.thr.lessons', { n: ts.lessons.length })) : null,
+      ts.threads.length ? h('button', { class: 'iconbtn tb-more', title: tE('engine.thr.showAll'), onclick: () => bar.classList.toggle('open') }, '▾') : null);
+  } else add(h('span', { class: 'tb-ic' }, '🎯'), h('div', { class: 'grow tb-txt tiny' }, tE('engine.thr.takeaways')));
+  const actions = h('div', { class: 'tb-actions' },   // the buttons and the message they send (the learner's bubble) speak the UI language; the directive tells the AI what to do
+    socr && focus ? h('button', { class: 'btn small', onclick: () => sendTutor(tE('engine.aimsg.tellMe'), false, { directive: 'tellme' }) }, '💡 ' + tE('engine.thr.tellMe')) : null,
+    histLen >= 2 ? h('button', { class: 'btn small primary', onclick: () => sendTutor(tE('engine.aimsg.wrapUp'), false, { directive: 'wrapup' }) }, '🎓 ' + tE('engine.thr.wrapUp')) : null);
   bar.append(row);
   if (actions.children.length) bar.append(actions);
   if (ts && ts.threads.length) {
@@ -3137,7 +3290,7 @@ function threadTracker(key, histLen) {
 
 /* ---- 70_account.js ---- */
 /* ===================== Account menu: profile, subjects, backup & restore, cloud ===================== */
-const ACC_TABS = ['profile', 'settings', 'subjects', 'backup', 'cloud', 'help'];   // labels: t('acc.<tab>')
+const ACC_TABS = ['profile', 'settings', 'subjects', 'backup', 'cloud', 'help'];   // labels: t('acc.<tab>')   // i18n-ignore
 /** Collapsible section (closed by default) with an optional status pill and ⓘ tooltip. */
 function accSection(icon, title, { status = null, info = null, open = false, body }) {
   const d = h('details', { class: 'accsec', open: open || null },
@@ -3145,8 +3298,20 @@ function accSection(icon, title, { status = null, info = null, open = false, bod
     h('div', { class: 'accsecbody' }, body));
   return d;
 }
-const fmtBytes = n => n > 1e6 ? (n / 1e6).toFixed(1) + ' MB' : n > 1e3 ? Math.round(n / 1e3) + ' KB' : n + ' B';
-const fmtWhen = t => t ? new Date(t).toLocaleString() : '—';
+const fmtBytes = n => n > 1e6 ? tE('engine.common.sizeMB', { size: window.NoemaI18n?.fmt ? NoemaI18n.fmt.number(n / 1e6, { minimumFractionDigits: 1, maximumFractionDigits: 1 }) : (n / 1e6).toFixed(1) }) : n > 1e3 ? tE('engine.common.sizeKB', { size: nf(Math.round(n / 1e3)) }) : tE('engine.common.sizeB', { size: nf(n) });
+/** A moment / a day / a time of day in the UI language (the same fields the browser's toLocale…String() shows). */
+const WHEN_DAY = { year: 'numeric', month: 'numeric', day: 'numeric' }, WHEN_TIME = { hour: 'numeric', minute: '2-digit', second: '2-digit' };
+const fmtWhen = t => t ? (window.NoemaI18n?.fmt ? NoemaI18n.fmt.date(t, { ...WHEN_DAY, ...WHEN_TIME }) : new Date(t).toLocaleString()) : '—';
+const fmtDay = t => window.NoemaI18n?.fmt ? NoemaI18n.fmt.date(t, WHEN_DAY) : new Date(t).toLocaleDateString();
+const fmtTime = t => window.NoemaI18n?.fmt ? NoemaI18n.fmt.time(t, WHEN_TIME) : new Date(t).toLocaleTimeString();
+/** A language's name in the UI language (Intl.DisplayNames), for the learner; langName() keeps the English one for the prompts. */
+const uiLangName = code => window.NoemaI18n?.fmt?.langName ? NoemaI18n.fmt.langName(code) : langName(code);
+/** A restore point's name in the UI language of now: its catalog key (k, p) when it has one, else the words it was saved with. */
+const storedLabel = x => x.k && window.NoemaI18n?.has(x.k) ? tE(x.k, x.p || {}) : x.label;
+/** A cloud snapshot's name: the app's own snapshots are stored with fixed English names (matched by engine/cloud.js too) → the UI language;
+    any other name (older snapshots taken in another language, self-tests) as stored. */
+const SNAP_LABEL = { 'Manual snapshot': 'engine.cl.snapManual', 'Daily auto-snapshot': 'engine.cl.snapDaily' };   // i18n-ignore (stored names)
+const snapLabel = l => Object.prototype.hasOwnProperty.call(SNAP_LABEL, l) ? tE(SNAP_LABEL[l]) : l;
 function accountSettings() { try { return JSON.parse(Noema.kv.get(Noema.kv.accountKey('settings')) || '{}'); } catch (e) { return {}; } }
 function putAccountSettings(patch) { flushSave(); const s = Object.assign(accountSettings(), patch); Noema.kv.set(Noema.kv.accountKey('settings'), JSON.stringify(s)); Object.assign(S.settings, patch); }
 
@@ -3161,8 +3326,8 @@ function openAccountMenu(tab = 'profile') {
     ACC_TABS.forEach(k => tabs.append(h('button', { 'data-t': k, onclick: () => show(k) }, t('acc.' + k))));
     const st = Noema.stats.get();
     box.append(h('div', { class: 'acchead' }, h('div', { class: 'accemo' }, ACCOUNT.emoji || '🙂'),
-      h('div', { class: 'grow' }, h('h2', {}, ACCOUNT.name), h('div', { class: 'tiny' }, ACCOUNT.kind === 'cloud' ? `☁️ Cloud account · ${ACCOUNT.email}` : '💻 Local profile on this device')),
-      h('div', { class: 'accstats' }, h('span', { class: 'chip xp' }, `⭐ ${st.xp} XP total`), h('span', { class: 'chip streak' }, `🔥 ${Noema.stats.streakNow()} day streak`)),
+      h('div', { class: 'grow' }, h('h2', {}, ACCOUNT.name), h('div', { class: 'tiny' }, ACCOUNT.kind === 'cloud' ? '☁️ ' + tE('engine.acc.cloudAccount', { email: ACCOUNT.email }) : '💻 ' + tE('engine.acc.localProfile'))),
+      h('div', { class: 'accstats' }, h('span', { class: 'chip xp' }, '⭐ ' + tE('engine.acc.xpTotal', { n: st.xp })), h('span', { class: 'chip streak' }, '🔥 ' + tE('engine.acc.streak', { n: Noema.stats.streakNow() }))),
       h('button', { class: 'iconbtn', onclick: close }, '✕')), tabs, body);
     show(tab);
   });
@@ -3182,134 +3347,135 @@ const ACC_VIEWS = {
   settings(body, close, opts = {}) {
     const set = accountSettings(); const CL = window.NoemaClaude; const acc = ACCOUNT.id;
     // — Gemini (the tutor and every in-app AI helper)
-    const key = h('input', { type: 'password', value: S.settings.apiKey || '', placeholder: 'AIza…', autocomplete: 'off', 'aria-label': 'Gemini API key' });
-    const sel = h('select', { 'aria-label': 'Gemini model' }, ...(S.settings.models.length ? S.settings.models : FALLBACK_MODELS).map(m => h('option', { value: m, selected: m === S.settings.model }, m)));
-    const gstat = h('div', { class: 'tiny' }, S.settings.model ? 'Current model: ' + S.settings.model : 'The model is detected on first use.');
+    const key = h('input', { type: 'password', value: S.settings.apiKey || '', placeholder: 'AIza…', autocomplete: 'off', 'aria-label': tE('engine.acc.geminiKey') });   // i18n-ignore (the shape of a key)
+    const sel = h('select', { 'aria-label': tE('engine.acc.geminiModel') }, ...(S.settings.models.length ? S.settings.models : FALLBACK_MODELS).map(m => h('option', { value: m, selected: m === S.settings.model }, m)));
+    const gstat = h('div', { class: 'tiny' }, S.settings.model ? tE('engine.acc.currentModel', { model: S.settings.model }) : tE('engine.acc.modelOnFirstUse'));
     const geminiBox = h('div', {},
-      !S.settings.apiKey ? h('div', { class: 'callout warn' }, h('span', { class: 'ci' }, '🔑'), h('b', { class: 't' }, 'No Gemini key yet — the AI tutor is off'), h('div', {}, 'It is free and takes 2 minutes. ', h('button', { class: 'linkish', onclick: () => openGuide('gemini') }, 'Show me how'))) : null,
-      h('div', { class: 'field' }, h('label', {}, 'Gemini API key ', tip('Your personal key from Google AI Studio (free). Used only for calls from this app straight to Google. Never shared with other profiles or users.')), key, h('div', { class: 'tiny' }, ACCOUNT.kind === 'cloud' ? 'Stored only in this browser. Add it once on each device.' : 'Stored only in this browser, for this profile.')),
-      h('div', { class: 'field' }, h('label', {}, 'Gemini model'), sel,
+      !S.settings.apiKey ? h('div', { class: 'callout warn' }, h('span', { class: 'ci' }, '🔑'), h('b', { class: 't' }, tE('engine.acc.noGeminiKey')), h('div', {}, tE('engine.acc.freeTwoMin') + ' ', h('button', { class: 'linkish', onclick: () => openGuide('gemini') }, tE('engine.acc.showMeHow')))) : null,
+      h('div', { class: 'field' }, h('label', {}, tE('engine.acc.geminiKey') + ' ', tip(tE('engine.acc.geminiKeyTip'))), key, h('div', { class: 'tiny' }, ACCOUNT.kind === 'cloud' ? tE('engine.acc.keyStoredCloud') : tE('engine.acc.keyStoredLocal'))),
+      h('div', { class: 'field' }, h('label', {}, tE('engine.acc.geminiModel')), sel,
         h('div', { class: 'row' },
-          h('button', { class: 'btn small', onclick: async () => { S.settings.apiKey = key.value.trim(); gstat.textContent = 'Detecting…'; try { const ms = await detectModels(); sel.innerHTML = ''; ms.forEach(m => sel.append(h('option', { value: m, selected: m === S.settings.model }, m))); gstat.textContent = `Found ${ms.length} models · picked ${S.settings.model}`; } catch (e) { gstat.textContent = '⚠️ ' + e.message; } } }, '🔍 Detect models'),
-          h('button', { class: 'btn small', onclick: async () => { S.settings.apiKey = key.value.trim(); S.settings.model = sel.value; save(); gstat.textContent = 'Testing…'; try { const t = await gemini({ contents: [{ role: 'user', parts: [{ text: 'Reply with exactly: Brick is ready 🦉' }] }], temperature: 0 }); gstat.textContent = '✅ ' + t.trim().slice(0, 80); } catch (e) { gstat.textContent = '⚠️ ' + e.message; } } }, '🧪 Test')),
+          h('button', { class: 'btn small', onclick: async () => { S.settings.apiKey = key.value.trim(); gstat.textContent = tE('engine.acc.detecting'); try { const ms = await detectModels(); sel.innerHTML = ''; ms.forEach(m => sel.append(h('option', { value: m, selected: m === S.settings.model }, m))); gstat.textContent = tE('engine.acc.foundModels', { n: ms.length, model: S.settings.model }); } catch (e) { gstat.textContent = '⚠️ ' + errText(e); } } }, '🔍 ' + tE('engine.acc.detectModels')),
+          h('button', { class: 'btn small', onclick: async () => { S.settings.apiKey = key.value.trim(); S.settings.model = sel.value; save(); gstat.textContent = tE('engine.acc.testing'); try { const t = await gemini({ contents: [{ role: 'user', parts: [{ text: 'Reply with exactly: ' + tE('engine.acc.testReply') }] }], temperature: 0 }); gstat.textContent = '✅ ' + t.trim().slice(0, 80); } catch (e) { gstat.textContent = '⚠️ ' + errText(e); } } }, '🧪 ' + tE('engine.acc.test'))),   // i18n-ignore (a prompt)
         gstat));
     // — Claude (optional): the API key for ✨ Create with Claude and curricula; never synced
-    const ckey = h('input', { type: 'password', value: CL ? CL.Key.get(acc) : '', placeholder: 'sk-ant-…', autocomplete: 'off', spellcheck: 'false', 'aria-label': 'Claude API key' });
+    const ckey = h('input', { type: 'password', value: CL ? CL.Key.get(acc) : '', placeholder: 'sk-ant-…', autocomplete: 'off', spellcheck: 'false', 'aria-label': tE('engine.acc.claudeKey') });   // i18n-ignore (the shape of a key)
     const remember = h('input', { type: 'checkbox', checked: CL ? (CL.Key.remembered(acc) || !CL.Key.get(acc)) : true });
     const jgetA = (k, d) => { try { const v = Noema.kv.get(Noema.kv.accountKey(k)); return v == null ? d : JSON.parse(v); } catch (e) { return d; } };
-    const cmodel = h('select', { 'aria-label': 'Claude model' }, h('option', { value: '' }, 'Newest Sonnet (recommended)'));
+    const cmodel = h('select', { 'aria-label': tE('engine.acc.claudeModel') }, h('option', { value: '' }, tE('engine.acc.newestSonnet')));
     const savedModel = jgetA('claudeModel', ''); if (savedModel) cmodel.append(h('option', { value: savedModel, selected: true }, savedModel));
-    const cbudget = h('input', { type: 'number', min: 1, step: 1, value: jgetA('claudeBudget', 15), style: { width: '90px' }, 'aria-label': 'Spending limit per subject' });
-    const nbudget = h('input', { type: 'number', min: 1, step: 1, value: set.curBudget || 8, style: { width: '90px' }, 'aria-label': 'Spending limit per Roadmap step' });
-    const curProv = h('select', { 'aria-label': 'AI for new Roadmaps' }, ...[['', 'Recommended (the Claude app for cloud accounts)'], ['claudeapp', '💬 Claude app — your Claude plan'], ['auto', 'Automatic — an API key here'], ['claude', 'Claude — API key'], ['gemini', 'Gemini — free key']].map(([v, l]) => h('option', { value: v, selected: (set.curProvider || '') === v }, l)));
+    const cbudget = h('input', { type: 'number', min: 1, step: 1, value: jgetA('claudeBudget', 15), style: { width: '90px' }, 'aria-label': tE('engine.acc.limitSubjectAria') });
+    const nbudget = h('input', { type: 'number', min: 1, step: 1, value: set.curBudget || 8, style: { width: '90px' }, 'aria-label': tE('engine.acc.limitStepAria') });
+    const curProv = h('select', { 'aria-label': tE('engine.acc.curAI') }, ...[['', tE('engine.acc.prov_rec')], ['claudeapp', '💬 ' + tE('engine.acc.prov_claudeapp')], ['auto', tE('engine.acc.prov_auto')], ['claude', tE('engine.acc.prov_claude')], ['gemini', tE('engine.acc.prov_gemini')]].map(([v, l]) => h('option', { value: v, selected: (set.curProvider || '') === v }, l)));
     const cstat = h('div', { class: 'tiny' });
     const checkClaude = async () => {
       const k = ckey.value.trim();
-      if (!k) { CL.Key.forget(acc); cstat.textContent = 'No Claude key on this device.'; return true; }
-      if (!CL.Key.looksValid(k)) { cstat.textContent = '⚠️ That is not a Claude API key (it starts with sk-ant-).'; return false; }
-      cstat.textContent = '⏳ Checking…';
-      try { const ms = await CL.models(k); const cur = cmodel.value; cmodel.innerHTML = ''; cmodel.append(h('option', { value: '' }, 'Newest Sonnet (recommended) — ' + CL.defaultModel(ms)), ...ms.map(m => h('option', { value: m.id, selected: m.id === cur }, m.name))); CL.Key.set(acc, k, remember.checked); cstat.textContent = '✅ The key works.' + (remember.checked ? ' Remembered on this device only (never sent to the noema-lite cloud, not in backups).' : ' Kept until you close this tab.'); return true; }
-      catch (e) { cstat.textContent = '❌ ' + e.message; return false; }
+      if (!k) { CL.Key.forget(acc); cstat.textContent = tE('engine.acc.noClaudeKey'); return true; }
+      if (!CL.Key.looksValid(k)) { cstat.textContent = '⚠️ ' + tE('engine.acc.notClaudeKey'); return false; }
+      cstat.textContent = '⏳ ' + tE('engine.acc.checking');
+      try { const ms = await CL.models(k); const cur = cmodel.value; cmodel.innerHTML = ''; cmodel.append(h('option', { value: '' }, tE('engine.acc.newestSonnet') + ' — ' + CL.defaultModel(ms)), ...ms.map(m => h('option', { value: m.id, selected: m.id === cur }, m.name))); CL.Key.set(acc, k, remember.checked); cstat.textContent = '✅ ' + (remember.checked ? tE('engine.acc.keyWorksRemembered') : tE('engine.acc.keyWorksTab')); return true; }
+      catch (e) { cstat.textContent = '❌ ' + errText(e); return false; }
     };
-    const claude = !CL ? h('p', { class: 'tiny' }, 'This installation has no Claude module.') : h('div', {},
-      h('p', { class: 'tiny' }, 'Optional. Claude builds subjects from your sources (✨ Create with Claude) and Roadmaps. With your Claude plan you need no key here — use the Claude app with the noema-lite connector (ways B and C). A key is for way A: everything runs here, paid per use.'),
-      h('div', { class: 'field' }, h('label', {}, 'Claude API key ', tip('From the Claude Console (platform.claude.com → API keys). It stays in this browser: never uploaded to the noema-lite cloud, not part of backups. Leave it empty to remove it.')), ckey,
-        h('label', { class: 'row tiny' }, remember, 'Remember it on this device (untick on a shared computer)'),
-        h('div', { class: 'row' }, h('button', { class: 'btn small', onclick: checkClaude }, '✔️ Check the key'), CL.Key.get(acc) ? h('button', { class: 'btn small ghost', onclick: () => { CL.Key.forget(acc); ckey.value = ''; cstat.textContent = '🗑 Removed from this device.'; } }, 'Remove the key') : null), cstat),
-      h('div', { class: 'field' }, h('label', {}, 'Claude model ', tip('“Sonnet” gives very good courses for its price; “Opus” is the strongest and costs more; “Haiku” is cheaper but weaker. Check the key to list the models your key can use.')), cmodel),
-      h('div', { class: 'row' }, h('div', { class: 'field' }, h('label', {}, 'Limit per subject ($)'), cbudget), h('div', { class: 'field' }, h('label', {}, 'Limit per Roadmap step ($)'), nbudget)),
-      h('div', { class: 'field' }, h('label', {}, 'AI for new Roadmaps ', tip('Preselected when you create or import a Roadmap. The Claude app (your Claude plan) is usually the cheapest for Roadmaps; an API key or Gemini runs everything here.')), curProv),
-      h('div', { class: 'row' }, h('button', { class: 'btn small', onclick: () => { close(); Noema.claudeGuide(); } }, '✨ Create a subject with Claude'), h('button', { class: 'btn small', onclick: () => openAccountMenu('help') }, '❓ How to set up Claude (A · B · C)')));
+    const claude = !CL ? h('p', { class: 'tiny' }, tE('engine.acc.noClaudeModule')) : h('div', {},
+      h('p', { class: 'tiny' }, tE('engine.acc.claudeIntro')),
+      h('div', { class: 'field' }, h('label', {}, tE('engine.acc.claudeKey') + ' ', tip(tE('engine.acc.claudeKeyTip'))), ckey,
+        h('label', { class: 'row tiny' }, remember, tE('engine.acc.remember')),
+        h('div', { class: 'row' }, h('button', { class: 'btn small', onclick: checkClaude }, '✔️ ' + tE('engine.acc.checkKey')), CL.Key.get(acc) ? h('button', { class: 'btn small ghost', onclick: () => { CL.Key.forget(acc); ckey.value = ''; cstat.textContent = '🗑 ' + tE('engine.acc.keyRemoved'); } }, tE('engine.acc.removeKey')) : null), cstat),
+      h('div', { class: 'field' }, h('label', {}, tE('engine.acc.claudeModel') + ' ', tip(tE('engine.acc.claudeModelTip'))), cmodel),
+      h('div', { class: 'row' }, h('div', { class: 'field' }, h('label', {}, tE('engine.acc.limitSubject')), cbudget), h('div', { class: 'field' }, h('label', {}, tE('engine.acc.limitStep')), nbudget)),
+      h('div', { class: 'field' }, h('label', {}, tE('engine.acc.curAI') + ' ', tip(tE('engine.acc.curAITip'))), curProv),
+      h('div', { class: 'row' }, h('button', { class: 'btn small', onclick: () => { close(); Noema.claudeGuide(); } }, '✨ ' + tE('engine.acc.createWithClaude')), h('button', { class: 'btn small', onclick: () => openAccountMenu('help') }, '❓ ' + tE('engine.acc.howClaude'))));
     if (CL && CL.Key.get(acc)) setTimeout(checkClaude, 0);
     // — display & studying
-    const theme = h('select', { 'aria-label': 'Theme' }, ...[['auto', 'Auto (system)'], ['light', 'Light'], ['dark', 'Dark']].map(([v, l]) => h('option', { value: v, selected: S.settings.theme === v }, l)));
-    const goal = h('input', { type: 'number', min: 20, step: 10, value: S.settings.goal, 'aria-label': 'Daily XP goal' });
+    const theme = h('select', { 'aria-label': tE('engine.acc.theme') }, ...[['auto', tE('engine.acc.themeAuto')], ['light', tE('engine.acc.themeLight')], ['dark', tE('engine.acc.themeDark')]].map(([v, l]) => h('option', { value: v, selected: S.settings.theme === v }, l)));
+    const goal = h('input', { type: 'number', min: 20, step: 10, value: S.settings.goal, 'aria-label': tE('engine.acc.goal') });
     const snd = h('input', { type: 'checkbox', checked: S.settings.sound });
     const chunk = h('input', { type: 'checkbox', checked: S.settings.chunk });
-    const uiL = h('select', { 'aria-label': t('set.uiLang') }, h('option', { value: '', selected: !S.settings.lang }, t('set.uiLangAuto', { lang: NoemaI18n.LANGS.find(l => l[0] === NoemaI18n.browser())?.[1] })),
-      ...NoemaI18n.LANGS.map(([v, l]) => h('option', { value: v, selected: S.settings.lang === v }, l)));
+    const uiL = h('select', { 'aria-label': t('set.uiLang') }, h('option', { value: '', selected: !S.settings.lang }, t('set.uiLangAuto', { lang: NoemaI18n.LOCALES.find(l => l.tag === NoemaI18n.browser())?.name })),
+      ...NoemaI18n.LOCALES.filter(l => NoemaI18n.available().includes(l) || l.tag === S.settings.lang).map(l => h('option', { value: l.tag, selected: S.settings.lang === l.tag, lang: l.tag }, `${l.name} · ${l.tag}`)));
     const chatL = chatLangSelect({ persist: false });
-    const langBox = h('div', {}, h('div', { class: 'field' }, h('label', {}, 'Language of the AI conversations ', tip('The tutor (all its modes), the 💡 explanations, the feedback on your answers and the titles of your conversations are written in this language. The course material is NOT changed or translated: it stays in its own language on every screen.')), chatL,
-      h('div', { class: 'tiny' }, `The course material stays in its own language (${SUBJ.title}: ${langName(COURSE_LANG)}). You can also switch it in the tutor (🗣 next to the topic).`)));
-    const display = h('div', {}, h('div', { class: 'row' }, h('div', { class: 'field' }, h('label', {}, 'Theme'), theme), h('div', { class: 'field' }, h('label', {}, 'Daily XP goal'), goal)),
+    const langBox = h('div', {}, h('div', { class: 'field' }, h('label', {}, tE('engine.acc.chatLang') + ' ', tip(tE('engine.acc.chatLangTip'))), chatL,
+      h('div', { class: 'tiny' }, tE('engine.acc.chatLangNote', { title: SUBJ.title, lang: uiLangName(COURSE_LANG) }))));
+    const display = h('div', {}, h('div', { class: 'row' }, h('div', { class: 'field' }, h('label', {}, tE('engine.acc.theme')), theme), h('div', { class: 'field' }, h('label', {}, tE('engine.acc.goal')), goal)),
       h('div', { class: 'field' }, h('label', {}, t('set.uiLang') + ' ', tip(t('set.uiLangTip'))), uiL),
-      h('label', { class: 'row', style: { margin: '8px 0' } }, snd, 'Sound effects'),
-      h('label', { class: 'row', style: { margin: '8px 0' } }, chunk, 'Bite-size reading (reveal theory chunk by chunk)'));
+      h('label', { class: 'row', style: { margin: '8px 0' } }, snd, tE('engine.acc.sound')),
+      h('label', { class: 'row', style: { margin: '8px 0' } }, chunk, tE('engine.acc.chunk')));
     const subject = h('div', { class: 'row' },
-      h('button', { class: 'btn small', onclick: () => show('backup') }, '💾 Backup & restore…'),
-      h('button', { class: 'btn small', onclick: () => confirmBox(`Reset your progress in ${SUBJ.title}? (a restore point is kept)`, async () => { await Noema.backup.restorePoint(ACCOUNT.id, 'Before reset of ' + SUBJ.title); const st = S.settings; for (const k of Object.keys(S)) delete S[k]; Object.assign(S, { xp: 0, read: {}, res: {}, pb: {}, fc: {}, boss: {}, last: null, resetAt: Date.now(), settings: st }); flushSave(); close(); route(); renderTopStats(); }) }, `🗑️ Reset ${SUBJ.title} progress`));
+      h('button', { class: 'btn small', onclick: () => show('backup') }, '💾 ' + tE('engine.acc.backupBtn')),
+      h('button', { class: 'btn small', onclick: () => confirmBox(tE('engine.home.resetConfirm', { title: SUBJ.title }), async () => { await Noema.backup.restorePoint(ACCOUNT.id, tE('engine.home.resetPoint', { title: SUBJ.title }), { k: 'engine.home.resetPoint', p: { title: SUBJ.title } }); const st = S.settings; for (const k of Object.keys(S)) delete S[k]; Object.assign(S, { xp: 0, read: {}, res: {}, pb: {}, fc: {}, boss: {}, last: null, resetAt: Date.now(), settings: st }); flushSave(); close(); route(); renderTopStats(); }) }, '🗑️ ' + tE('engine.acc.resetBtn', { title: SUBJ.title })));
     const show = t => openAccountMenu(t);
     const hasClaude = !!(CL && CL.Key.get(acc));
     body.append(
-      accSection('🤖', 'Gemini — the AI tutor', { status: { ok: !!S.settings.apiKey, text: S.settings.apiKey ? 'key set' : 'no key' }, open: !S.settings.apiKey, body: geminiBox }),
-      accSection('✨', 'Claude (optional)', { status: { ok: true, text: hasClaude ? 'API key on this device' : 'Claude app / no key' }, info: 'Claude makes subjects and Roadmaps: with your Claude plan in the Claude app (no key needed here), or with an API key in this app.', body: claude }),
-      accSection('🗣️', 'Language of the AI conversations', { status: { ok: true, text: chatLang() ? langName(chatLang()) : 'as the course' }, body: langBox }),
-      opts.only === 'ai' ? null : accSection('🎨', 'Display & studying', { open: !!S.settings.apiKey, body: display }),
-      opts.only === 'ai' ? null : accSection('📘', 'This subject — ' + SUBJ.title, { body: subject }),
+      accSection('🤖', tE('engine.acc.secGemini'), { status: { ok: !!S.settings.apiKey, text: S.settings.apiKey ? tE('engine.acc.keySet') : tE('engine.acc.noKey') }, open: !S.settings.apiKey, body: geminiBox }),
+      accSection('✨', tE('engine.acc.secClaude'), { status: { ok: true, text: hasClaude ? tE('engine.acc.claudeOnDevice') : tE('engine.acc.claudeAppNoKey') }, info: tE('engine.acc.secClaudeInfo'), body: claude }),
+      accSection('🗣️', tE('engine.acc.chatLang'), { status: { ok: true, text: chatLang() ? uiLangName(chatLang()) : tE('engine.acc.chatLangAuto', { lang: uiLangName(uiLang()) }) }, body: langBox }),
+      opts.only === 'ai' ? null : accSection('🎨', tE('engine.acc.secDisplay'), { open: !!S.settings.apiKey, body: display }),
+      opts.only === 'ai' || !window.NoemaMT ? null : accSection('🌐', t('mt.set.title'), { body: NoemaMT.panel(acc, { heading: false }) }),   // machine translation of shared texts: consent, provider, caps (engine/mt.js, docs/i18n.md §11) — like Me › Language & appearance
+      opts.only === 'ai' ? null : accSection('📘', tE('engine.acc.secSubject', { title: SUBJ.title }), { body: subject }),
       h('div', { class: 'row', style: { justifyContent: 'flex-end', marginTop: '16px' } },
-        h('button', { class: 'btn primary', onclick: async () => {
+        h('button', { class: 'btn primary', 'data-act': 'save-settings', onclick: async () => {
           S.settings.apiKey = key.value.trim(); S.settings.model = sel.value; S.settings.theme = theme.value; S.settings.goal = Math.max(20, +goal.value || 120); S.settings.sound = snd.checked; S.settings.chunk = chunk.checked; S.settings.chatLang = chatL.value; const relabel = (S.settings.lang || '') !== uiL.value; S.settings.lang = uiL.value || undefined; save();
           putAccountSettings({ curProvider: curProv.value || undefined, curBudget: Math.max(1, +nbudget.value || 8) });
           if (CL) { Noema.kv.set(Noema.kv.accountKey('claudeBudget'), JSON.stringify(Math.max(1, +cbudget.value || 15))); if (cmodel.value) Noema.kv.set(Noema.kv.accountKey('claudeModel'), JSON.stringify(cmodel.value)); else Noema.kv.del(Noema.kv.accountKey('claudeModel'));
             if ((ckey.value.trim() || '') !== CL.Key.get(acc) || remember.checked !== CL.Key.remembered(acc)) { if (!(await checkClaude())) return; } }
           if (relabel) { flushSave(); location.reload(); return; }   // the menus are drawn once: show them in the new language
-          applyTheme(); close(); route(); renderTopStats(); toast('Saved ✔');
-        } }, 'Save settings')));
+          applyTheme(); close(); route(); renderTopStats(); toast(tE('engine.acc.saved'));
+        } }, tE('engine.acc.saveSettings'))));
   },
 
   profile(body, close) {
     const set = accountSettings();
     const name = h('input', { value: ACCOUNT.name, maxlength: 30 });
     const emoji = h('input', { value: ACCOUNT.emoji || '🙂', maxlength: 4, style: { width: '80px', textAlign: 'center', fontSize: '22px' } });
-    const learner = h('textarea', { class: 'answer', style: { minHeight: '90px' }, placeholder: 'e.g. I have ADHD and learn best when challenged; I already know X; I prepare for exam Y…' }, set.learner || ACCOUNT.learner || '');
+    const learner = h('textarea', { class: 'answer', style: { minHeight: '90px' }, placeholder: tE('engine.acc.learnerPh') }, set.learner || ACCOUNT.learner || '');
     const ask = h('input', { type: 'checkbox', checked: set.askSubjectOnStart ?? Noema.config.askSubjectOnStart });
-    const pin = h('input', { type: 'password', inputmode: 'numeric', maxlength: 8, placeholder: ACCOUNT.pin ? 'New PIN (empty = keep)' : 'Optional PIN' });
+    const pin = h('input', { type: 'password', inputmode: 'numeric', maxlength: 8, placeholder: ACCOUNT.pin ? tE('engine.acc.newPin') : tE('engine.acc.optPin') });
     const bySub = Object.entries(Noema.stats.get().bySubject || {}).sort((a, b) => b[1] - a[1]);
     // each chip names its subject (a Roadmap step's subject by its step), never by its id
-    const xpChips = bySub.map(([sid, xp]) => h('span', { class: 'pill', 'data-sid': sid }, `${subjectLabel(sid)}: ${xp}`));
-    Noema.subjectsFor(ACCOUNT.id).then(list => xpChips.forEach(c => { c.textContent = `${subjectLabel(c.dataset.sid, list)}: ${bySub.find(x => x[0] === c.dataset.sid)[1]}`; })).catch(() => { });
+    const xpChips = bySub.map(([sid, xp]) => h('span', { class: 'pill', 'data-sid': sid }, tE('engine.acc.xpChip', { title: subjectLabel(sid), n: xp })));
+    Noema.subjectsFor(ACCOUNT.id).then(list => xpChips.forEach(c => { c.textContent = tE('engine.acc.xpChip', { title: subjectLabel(c.dataset.sid, list), n: bySub.find(x => x[0] === c.dataset.sid)[1] }); })).catch(() => { });
     body.append(
-      h('div', { class: 'row' }, h('div', { class: 'field grow' }, h('label', {}, 'Name'), name), h('div', { class: 'field' }, h('label', {}, 'Emoji'), emoji)),
-      h('div', { class: 'field' }, h('label', {}, 'About me (the tutor adapts to this, in every subject) ', tip('Write how you learn, what you already know and your goal. It is added to every tutor conversation, in every subject. Stays private to this profile.')), learner),
-      h('label', { class: 'row', style: { margin: '8px 0' } }, ask, 'Show the subject picker every time I open the app'),
-      ACCOUNT.kind === 'local' ? h('div', { class: 'field' }, h('label', {}, 'PIN (a privacy curtain on a shared device — not encryption)'), h('div', { class: 'row' }, pin, ACCOUNT.pin ? h('button', { class: 'btn small', onclick: () => { Noema.saveLocalAccount({ ...ACCOUNT, pin: null }); toast('PIN removed'); } }, 'Remove PIN') : null)) : null,
-      bySub.length ? h('div', { class: 'field' }, h('label', {}, 'XP by subject'), h('div', { class: 'row' }, ...xpChips)) : null,
+      h('div', { class: 'row' }, h('div', { class: 'field grow' }, h('label', {}, tE('engine.acc.name')), name), h('div', { class: 'field' }, h('label', {}, tE('engine.acc.emoji')), emoji)),
+      h('div', { class: 'field' }, h('label', {}, tE('engine.acc.aboutMe') + ' ', tip(tE('engine.acc.aboutMeTip'))), learner),
+      h('label', { class: 'row', style: { margin: '8px 0' } }, ask, tE('engine.acc.askOnStart')),
+      ACCOUNT.kind === 'local' ? h('div', { class: 'field' }, h('label', {}, tE('engine.acc.pin')), h('div', { class: 'row' }, pin, ACCOUNT.pin ? h('button', { class: 'btn small', onclick: () => { Noema.saveLocalAccount({ ...ACCOUNT, pin: null }); toast(tE('engine.acc.pinRemoved')); } }, tE('engine.acc.removePin')) : null)) : null,
+      bySub.length ? h('div', { class: 'field' }, h('label', {}, tE('engine.acc.xpBySubject')), h('div', { class: 'row' }, ...xpChips)) : null,
       h('div', { class: 'row', style: { marginTop: '14px' } },
         h('button', { class: 'btn primary', onclick: async () => {
           const patch = { name: name.value.trim() || ACCOUNT.name, emoji: emoji.value.trim() || ACCOUNT.emoji };
           putAccountSettings({ learner: learner.value.trim(), askSubjectOnStart: ask.checked });
           if (ACCOUNT.kind === 'local') { const a = { ...ACCOUNT, ...patch }; if (pin.value) a.pin = await (async () => { const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(a.id + ':' + pin.value)); return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, '0')).join(''); })(); Noema.saveLocalAccount(a); }
-          else { try { await NoemaCloud.saveProfile({ ...patch, learner: learner.value.trim() }); } catch (e) { toast('⚠️ ' + e.message); } }
-          toast('Saved ✔ — reloading'); setTimeout(() => location.reload(), 600);
-        } }, 'Save profile'),
-        h('button', { class: 'btn', onclick: () => { close(); Noema.openSubjectPicker(); } }, '📚 Switch subject'),
-        h('button', { class: 'btn', onclick: () => { close(); Noema.openAccountPicker(); } }, '👥 Switch profile')),
-      ACCOUNT.kind === 'local' ? h('div', { class: 'dangerzone' }, h('b', {}, 'Danger zone'),
-        h('p', { class: 'tiny' }, 'Deleting removes this profile and all its data from this browser. A backup file is downloaded first.'),
-        h('button', { class: 'btn small', onclick: () => confirmBox(`Delete profile “${ACCOUNT.name}” and all its data on this device?`, async () => {
+          else { try { await NoemaCloud.saveProfile({ ...patch, learner: learner.value.trim() }); } catch (e) { toast('⚠️ ' + errText(e)); } }
+          toast(tE('engine.acc.savedReloading')); setTimeout(() => location.reload(), 600);
+        } }, tE('engine.acc.saveProfile')),
+        h('button', { class: 'btn', onclick: () => { close(); Noema.openSubjectPicker(); } }, '📚 ' + t('top.switchSubject')),
+        h('button', { class: 'btn', onclick: () => { close(); Noema.openAccountPicker(); } }, '👥 ' + tE('engine.acc.switchProfile'))),
+      ACCOUNT.kind === 'local' ? h('div', { class: 'dangerzone' }, h('b', {}, tE('engine.acc.danger')),
+        h('p', { class: 'tiny' }, tE('engine.acc.deleteNote')),
+        h('button', { class: 'btn small', onclick: () => confirmBox(tE('engine.acc.deleteConfirm', { name: ACCOUNT.name }), async () => {
           Noema.backup.download(await Noema.backup.collect(ACCOUNT.id, { includeSecrets: false }));
           Noema.wipeAccountData(ACCOUNT.id); Noema.removeLocalAccount(ACCOUNT.id); Noema.jset('noema1:current', {}); setTimeout(() => location.reload(), 800);
-        }) }, '🗑️ Delete this profile')) : null);
+        }) }, '🗑️ ' + tE('engine.acc.deleteProfile'))) : null);
   },
 
   async subjects(body) {
     const list = await Noema.subjectsFor(ACCOUNT.id);
     const set = accountSettings(); const hidden = new Set(set.hiddenSubjects || []);
     const CU = window.NoemaCurriculum, on = id => CU?.stepsOf ? CU.stepsOf(ACCOUNT.id, id).length : 0;   // 📦 how many curriculum steps a subject teaches (none: 📚 on the Shelf)
-    body.append(h('p', { class: 'muted' }, 'Choose which subjects appear in your picker. Library subjects are shared; imported packs belong only to this profile.'),
-      CU ? h('p', { class: 'tiny' }, '🧭 The way to study is a Roadmap: each of its steps is taught by a subject. The subjects on no step wait on your 📚 Shelf — study them from there, or put them on a Roadmap (🧭 Put on a Roadmap…).') : null,
+    body.append(h('p', { class: 'muted' }, tE('engine.acc.subjIntro')),
+      CU ? h('p', { class: 'tiny' }, '🧭 ' + tE('engine.acc.subjRoadmap')) : null,
       h('div', { class: 'sublist' }, ...list.map(s => h('div', { class: 'subrow' },
         h('label', { class: 'switch' }, h('input', { type: 'checkbox', checked: !hidden.has(s.id), onchange: e => { e.target.checked ? hidden.delete(s.id) : hidden.add(s.id); putAccountSettings({ hiddenSubjects: [...hidden] }); } }), h('i')),
         h('span', { style: { fontSize: '22px' } }, s.emoji || '📘'),
-        h('div', { class: 'grow' }, h('b', {}, s.title), h('div', { class: 'tiny' }, `${s.origin === 'library' ? 'Library' : s.origin === 'private' ? '🔒 Private (folder)' : '📥 Imported'} · ${s.counts?.chapters ?? '?'} chapters · ${s.counts?.exercises ?? '?'} exercises${CU ? (on(s.id) ? ` · 🧭 on ${on(s.id)} Roadmap step${on(s.id) === 1 ? '' : 's'}` : ' · 📚 on the Shelf') : ''}`)),
-        s.id === SUBJ.id ? h('span', { class: 'pill c' }, 'open') : h('button', { class: 'btn small', onclick: () => Noema.switchTo(ACCOUNT.id, s.id) }, 'Open'),
-        h('button', { class: 'iconbtn', title: 'Rename, describe or delete', 'aria-label': 'Edit ' + s.title, onclick: () => Noema.editSubject(s, { onChange: () => openAccountMenu('subjects') }) }, '✏️'),
-        s.origin !== 'library' ? h('button', { class: 'iconbtn', title: 'Share or make public', onclick: () => Noema.share(s) }, '🔗') : null))),
+        h('div', { class: 'grow' }, h('b', {}, s.title), h('div', { class: 'tiny' }, [s.origin === 'library' ? tE('engine.acc.originLibrary') : s.origin === 'private' ? '🔒 ' + tE('engine.acc.originPrivate') : '📥 ' + tE('engine.acc.originImported'), tE('engine.acc.subjCounts', { c: s.counts?.chapters ?? '?', e: s.counts?.exercises ?? '?' }), ...(CU ? [on(s.id) ? '🧭 ' + tE('engine.acc.onSteps', { n: on(s.id) }) : '📚 ' + tE('engine.acc.onShelf')] : [])].join(' · '))),
+        s.id === SUBJ.id ? h('span', { class: 'pill c' }, tE('engine.acc.isOpen')) : h('button', { class: 'btn small', onclick: () => Noema.switchTo(ACCOUNT.id, s.id) }, tE('engine.acc.open')),
+        h('button', { class: 'iconbtn', title: tE('engine.acc.editTip'), 'aria-label': tE('engine.acc.editAria', { title: s.title }), onclick: () => Noema.editSubject(s, { onChange: () => openAccountMenu('subjects') }) }, '✏️'),
+        s.origin !== 'library' ? h('button', { class: 'iconbtn', title: tE('engine.acc.shareTip'), onclick: () => Noema.share(s) }, '🔗') : null))),
       h('div', { class: 'row', style: { marginTop: '14px' } },
-        h('button', { class: 'btn ai', onclick: () => Noema.claudeGuide() }, '✨ Create a subject with Claude'),
-        CU && Noema.openShelf ? h('button', { class: 'btn', onclick: () => Noema.openShelf(ACCOUNT.id) }, '📚 Open the Shelf') : null,
-        h('label', { class: 'btn' }, '📥 Import subject pack…', h('input', { type: 'file', accept: '.json,.noemapack', style: { display: 'none' }, onchange: async e => { try { const s = await Noema.importPackFile(ACCOUNT.id, e.target.files[0]); confirmBox(`Open “${s.title}” now?`, () => Noema.switchTo(ACCOUNT.id, s.id)); } catch (er) { toast('⚠️ ' + er.message, 4000); } } })),
-        h('button', { class: 'btn', onclick: () => Noema.exportPackage(ACCOUNT.id, Noema.pack) }, `⬇️ Export “${SUBJ.title}” (package with its source files)`)));
+        h('button', { class: 'btn ai', onclick: () => Noema.claudeGuide() }, '✨ ' + tE('engine.acc.createWithClaude')),
+        CU && Noema.openShelf ? h('button', { class: 'btn', onclick: () => Noema.openShelf(ACCOUNT.id) }, '📚 ' + tE('engine.acc.openShelf')) : null,
+        h('label', { class: 'btn' }, '📥 ' + tE('engine.acc.importPack'), h('input', { type: 'file', accept: '.json,.noemapack', style: { display: 'none' }, onchange: async e => { try { const s = await Noema.importPackFile(ACCOUNT.id, e.target.files[0]); confirmBox(tE('engine.share.openNow', { title: s.title }), () => Noema.switchTo(ACCOUNT.id, s.id)); } catch (er) { toast('⚠️ ' + errText(er), 4000); } } })),
+        h('button', { class: 'btn', onclick: () => Noema.exportPackage(ACCOUNT.id, Noema.pack) }, '⬇️ ' + tE('engine.acc.exportPackage', { title: SUBJ.title }))));
   },
 
   async backup(body) {
@@ -3321,94 +3487,94 @@ const ACC_VIEWS = {
     const drawFs = async () => {
       fsBox.innerHTML = '';
       const hd = await Noema.autoBackup.handle(ACCOUNT.id);
-      if (!fsSupported) { fsBox.append(h('p', { class: 'tiny' }, 'This browser cannot write to folders (needs Chrome, Edge or Brave). Use “Download backup”, or a cloud account.'), guideBtn('backupFolder', '📁 How folder backups work')); return; }
-      if (!hd) { fsBox.append(guideBody('backupFolder', { compact: true }), h('button', { class: 'btn primary', onclick: async () => { try { const n = await Noema.autoBackup.choose(ACCOUNT.id); toast(`✅ Auto-backup → ${n}`); drawFs(); } catch (e) { if (e.name !== 'AbortError') toast('⚠️ ' + e.message); } } }, '📁 Choose backup folder')); return; }
+      if (!fsSupported) { fsBox.append(h('p', { class: 'tiny' }, tE('engine.bk.noFolders')), guideBtn('backupFolder', '📁 ' + tE('engine.bk.howFolders'))); return; }
+      if (!hd) { fsBox.append(guideBody('backupFolder', { compact: true }), h('button', { class: 'btn primary', onclick: async () => { try { const n = await Noema.autoBackup.choose(ACCOUNT.id); toast('✅ ' + tE('engine.bk.autoTo', { folder: n })); drawFs(); } catch (e) { if (e.name !== 'AbortError') toast('⚠️ ' + errText(e)); } } }, '📁 ' + tE('engine.bk.chooseFolder'))); return; }
       const ok = await Noema.autoBackup.permitted(hd);
-      fsBox.append(h('div', { class: 'row' }, h('span', { class: 'pill ' + (ok ? 'c' : 'warnpill') }, ok ? `✅ On → 📁 ${hd.name}` : `⏸️ Paused — permission needed for 📁 ${hd.name}`),
-        ok ? h('button', { class: 'btn small', onclick: async () => { await Noema.autoBackup.run(ACCOUNT.id, true); toast('💾 Backed up to folder'); drawFs(); } }, 'Back up now') : h('button', { class: 'btn small primary', onclick: async () => { if (await Noema.autoBackup.permitted(hd, true)) { Noema.autoBackup.start(ACCOUNT.id); await Noema.autoBackup.run(ACCOUNT.id, true); toast('✅ Auto-backup resumed'); } drawFs(); } }, 'Resume'),
-        h('button', { class: 'btn small ghost', onclick: async () => { await Noema.autoBackup.disable(ACCOUNT.id); drawFs(); } }, 'Turn off')),
-        h('div', { class: 'tiny', style: { marginTop: '6px' } }, `Last folder backup: ${fmtWhen(Noema.jget(`noema1:${ACCOUNT.id}:meta:lastFolderBackup`, 0))} · writes backups/ and conversations/ inside 📁 ${hd.name}`));
+      fsBox.append(h('div', { class: 'row' }, h('span', { class: 'pill ' + (ok ? 'c' : 'warnpill') }, ok ? '✅ ' + tE('engine.bk.onFolder', { folder: hd.name }) : '⏸️ ' + tE('engine.bk.pausedFolder', { folder: hd.name })),
+        ok ? h('button', { class: 'btn small', onclick: async () => { await Noema.autoBackup.run(ACCOUNT.id, true); toast('💾 ' + tE('engine.bk.backedUp')); drawFs(); } }, tE('engine.bk.backUpNow')) : h('button', { class: 'btn small primary', onclick: async () => { if (await Noema.autoBackup.permitted(hd, true)) { Noema.autoBackup.start(ACCOUNT.id); await Noema.autoBackup.run(ACCOUNT.id, true); toast('✅ ' + tE('engine.bk.resumed')); } drawFs(); } }, tE('engine.bk.resume')),
+        h('button', { class: 'btn small ghost', onclick: async () => { await Noema.autoBackup.disable(ACCOUNT.id); drawFs(); } }, tE('engine.bk.turnOff'))),
+        h('div', { class: 'tiny', style: { marginTop: '6px' } }, tE('engine.bk.lastFolder', { when: fmtWhen(Noema.jget(`noema1:${ACCOUNT.id}:meta:lastFolderBackup`, 0)), folder: hd.name })));
     };
     const drawRP = async () => {
       rpBox.innerHTML = '';
       const pts = await Noema.backup.listRestorePoints(ACCOUNT.id);
-      if (!pts.length) { rpBox.append(h('p', { class: 'tiny' }, 'No restore points yet. One is created automatically before every restore or reset.')); return; }
-      pts.forEach(p => rpBox.append(h('div', { class: 'subrow' }, h('div', { class: 'grow' }, h('b', {}, p.label), h('div', { class: 'tiny' }, `${fmtWhen(p.at)} · ${fmtBytes(p.size)}`)),
+      if (!pts.length) { rpBox.append(h('p', { class: 'tiny' }, tE('engine.bk.noPoints'))); return; }
+      pts.forEach(p => rpBox.append(h('div', { class: 'subrow' }, h('div', { class: 'grow' }, h('b', {}, storedLabel(p)), h('div', { class: 'tiny' }, `${fmtWhen(p.at)} · ${fmtBytes(p.size)}`)),
         h('button', { class: 'btn small', onclick: async () => Noema.backup.download(await Noema.backup.getRestorePoint(p.key)) }, '⬇️'),
-        h('button', { class: 'btn small', onclick: () => confirmBox('Go back to this restore point? (your current state becomes a new restore point)' + (ACCOUNT.kind === 'cloud' ? ' Your other devices go back to it too.' : ''), async () => { await Noema.backup.apply(await Noema.backup.getRestorePoint(p.key), ACCOUNT.id, 'replace'); toast('Restored ✔ — reloading'); setTimeout(() => location.reload(), 700); }) }, 'Restore'))));
+        h('button', { class: 'btn small', onclick: () => confirmBox(tE(ACCOUNT.kind === 'cloud' ? 'engine.bk.goBackCloud' : 'engine.bk.goBack'), async () => { await Noema.backup.apply(await Noema.backup.getRestorePoint(p.key), ACCOUNT.id, 'replace'); toast(tE('engine.bk.restored')); setTimeout(() => location.reload(), 700); }) }, tE('engine.bk.restore')))));
     };
     const pts0 = await Noema.backup.listRestorePoints(ACCOUNT.id);
     const nConv = (await Noema.convos.list(ACCOUNT.id)).length;
     const lastDl = Noema.jget(`noema1:${ACCOUNT.id}:meta:lastDownloadBackup`, 0);
     body.append(
-      h('p', { class: 'tiny', style: { margin: '0 0 10px' } }, `Everything below is optional. ${nConv} AI conversation${nConv === 1 ? ' is' : 's are'} saved automatically in this browser${ACCOUNT.kind === 'cloud' ? ' and in your cloud account' : ''}.`),
-      accSection('⬇️', 'Download a backup', { status: lastDl ? { ok: true, text: 'last ' + new Date(lastDl).toLocaleDateString() } : null,
-        info: 'One JSON file with everything of this profile: progress in every subject, flashcard schedules, all AI conversations (canonical format), settings and imported packs. Keep it anywhere; restore it here or on another device.',
-        body: [h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: async () => { flushSave(); Noema.backup.download(await Noema.backup.collect(ACCOUNT.id, { includeSecrets: inc.checked })); } }, '💾 Download backup'), h('label', { class: 'row tiny' }, inc, 'include my Gemini API key', tip('Off by default so a backup file you share or store somewhere can’t leak your key.')))] }),
-      accSection('📁', 'Automatic backups to a folder', { status: !fsSupported ? { ok: false, text: 'not in this browser' } : hd0 ? (ok0 ? { ok: true, text: 'on' } : { ok: false, text: 'paused' }) : { ok: false, text: 'off' },
-        info: 'Chrome/Edge can write into a folder you choose: a backup every few minutes + every AI conversation as .json and .md. Choose a folder inside Google Drive or iCloud Drive for an automatic off-site copy.', body: fsBox }),
-      accSection('⬆️', 'Restore from a backup file', { info: 'Replace = exact copy of the backup. Merge = keep what you have, the backup wins where both have the same item. New profile = restore side by side without touching this profile. A restore point is created first, so you can always undo.',
-        body: [h('p', { class: 'tiny' }, 'Also accepts the “Export progress” file of the old single-file Databricks Quest.'),
-          h('label', { class: 'btn' }, '📂 Choose backup file…', h('input', { type: 'file', accept: '.json', style: { display: 'none' }, onchange: async e => {
-            let obj; try { obj = Noema.backup.validate(JSON.parse(await e.target.files[0].text())); } catch (er) { toast('⚠️ ' + er.message, 4000); return; }
-            modal((b, c2) => b.append(h('h3', {}, 'Restore backup'), h('p', { class: 'muted' }, `From “${obj.account.name}” · ${fmtWhen(obj.createdAt)} · ${Object.keys(obj.data).length} items · ${(obj.conversations || []).length} conversations`),
-              ACCOUNT.kind === 'cloud' ? h('p', { class: 'tiny' }, 'Replace and Merge change your account on all your devices, not only this one. A restore point of how things are now is kept on this device first, so you can undo it.') : null,
+      h('p', { class: 'tiny', style: { margin: '0 0 10px' } }, tE(ACCOUNT.kind === 'cloud' ? 'engine.bk.introCloud' : 'engine.bk.intro', { n: nConv })),
+      accSection('⬇️', tE('engine.bk.secDownload'), { status: lastDl ? { ok: true, text: tE('engine.bk.lastOn', { date: fmtDay(lastDl) }) } : null,
+        info: tE('engine.bk.downloadInfo'),
+        body: [h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: async () => { flushSave(); Noema.backup.download(await Noema.backup.collect(ACCOUNT.id, { includeSecrets: inc.checked })); } }, '💾 ' + tE('engine.bk.download')), h('label', { class: 'row tiny' }, inc, tE('engine.bk.includeKey'), tip(tE('engine.bk.includeKeyTip'))))] }),
+      accSection('📁', tE('engine.bk.secFolder'), { status: !fsSupported ? { ok: false, text: tE('engine.bk.notInBrowser') } : hd0 ? (ok0 ? { ok: true, text: tE('engine.bk.on') } : { ok: false, text: tE('engine.bk.paused') }) : { ok: false, text: tE('engine.bk.off') },
+        info: tE('engine.bk.folderInfo'), body: fsBox }),
+      accSection('⬆️', tE('engine.bk.secRestore'), { info: tE('engine.bk.restoreInfo'),
+        body: [h('p', { class: 'tiny' }, tE('engine.bk.oldFile')),
+          h('label', { class: 'btn' }, '📂 ' + tE('engine.bk.chooseFile'), h('input', { type: 'file', accept: '.json', style: { display: 'none' }, onchange: async e => {
+            let obj; try { let raw; try { raw = JSON.parse(await e.target.files[0].text()); } catch (pe) { throw new Error(tE('loader.backup.notBackup')); } obj = Noema.backup.validate(raw); } catch (er) { toast('⚠️ ' + errText(er), 4000); return; }   // not JSON at all: the same words as any other file that is not a backup (the parser's English stays out)
+            modal((b, c2) => b.append(h('h3', {}, tE('engine.bk.restoreTitle')), h('p', { class: 'muted' }, tE('engine.bk.fileInfo', { name: obj.account.name, when: fmtWhen(obj.createdAt), items: Object.keys(obj.data).length, convs: (obj.conversations || []).length })),
+              ACCOUNT.kind === 'cloud' ? h('p', { class: 'tiny' }, tE('engine.bk.cloudWarn')) : null,
               h('div', { style: { display: 'grid', gap: '8px' } },
-                h('button', { class: 'btn primary', onclick: async () => { c2(); await Noema.backup.apply(obj, ACCOUNT.id, 'replace'); toast('Restored ✔ — reloading'); setTimeout(() => location.reload(), 700); } }, `♻️ Replace ${ACCOUNT.name}'s data with it`),
-                h('button', { class: 'btn', onclick: async () => { c2(); await Noema.backup.apply(obj, ACCOUNT.id, 'merge'); toast('Merged ✔ — reloading'); setTimeout(() => location.reload(), 700); } }, '🔀 Merge into this profile (backup wins on conflicts)'),
-                h('button', { class: 'btn', onclick: async () => { c2(); const base = (obj.account.name || 'Restored') + ' (restored)'; const id = (base.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'restored') + '-' + Date.now().toString(36).slice(-4); Noema.saveLocalAccount({ id, name: base, emoji: obj.account.emoji || '♻️', created: Date.now() }); await Noema.backup.apply(obj, id, 'replace'); Noema.switchTo(id, null); } }, '➕ Restore as a new local profile'),
-                h('button', { class: 'btn ghost', onclick: c2 }, 'Cancel'))));
-          } })), guideBtn('restore', '♻️ How restoring works')] }),
-      accSection('🕘', 'Restore points on this device', { status: { ok: true, text: String(pts0.length) }, info: 'Automatic safety copies kept in this browser (last 12): one is made before every restore, reset or profile copy.', body: rpBox }));
+                h('button', { class: 'btn primary', onclick: async () => { c2(); await Noema.backup.apply(obj, ACCOUNT.id, 'replace'); toast(tE('engine.bk.restored')); setTimeout(() => location.reload(), 700); } }, '♻️ ' + tE('engine.bk.replace', { name: ACCOUNT.name })),
+                h('button', { class: 'btn', onclick: async () => { c2(); await Noema.backup.apply(obj, ACCOUNT.id, 'merge'); toast(tE('engine.bk.merged')); setTimeout(() => location.reload(), 700); } }, '🔀 ' + tE('engine.bk.merge')),
+                h('button', { class: 'btn', onclick: async () => { c2(); const base = tE('engine.bk.restoredName', { name: obj.account.name || tE('engine.bk.restoredDefault') }); const id = (base.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'restored') + '-' + Date.now().toString(36).slice(-4); Noema.saveLocalAccount({ id, name: base, emoji: obj.account.emoji || '♻️', created: Date.now() }); await Noema.backup.apply(obj, id, 'replace'); Noema.switchTo(id, null); } }, '➕ ' + tE('engine.bk.asNew')),   // i18n-ignore
+                h('button', { class: 'btn ghost', onclick: c2 }, tE('engine.core.cancel')))));
+          } })), guideBtn('restore', '♻️ ' + tE('engine.bk.howRestore'))] }),
+      accSection('🕘', tE('engine.bk.secPoints'), { status: { ok: true, text: nf(pts0.length) }, info: tE('engine.bk.pointsInfo'), body: rpBox }));
     drawFs(); drawRP();
   },
 
   async cloud(body, close) {
     if (!Noema.config.supabaseUrl || !window.NoemaCloud) {
-      body.append(h('div', { class: 'callout warn' }, h('span', { class: 'ci' }, '☁️'), h('b', { class: 't' }, 'Cloud sync is not set up for this installation yet'), h('div', {}, 'Optional. Without it, everything still works on this device; use folder backups to stay safe.')),
-        accSection('🛠️', 'Set up the cloud (owner, once)', { open: true, body: guideBody('cloudOwner', { compact: true }) }),
-        accSection('🐙', 'Keep the repository on GitHub', { body: guideBody('github', { compact: true }) }));
+      body.append(h('div', { class: 'callout warn' }, h('span', { class: 'ci' }, '☁️'), h('b', { class: 't' }, tE('engine.cl.notSetUp')), h('div', {}, tE('engine.cl.notSetUpNote'))),
+        accSection('🛠️', tE('engine.cl.secOwner'), { open: true, body: guideBody('cloudOwner', { compact: true }) }),
+        accSection('🐙', tE('engine.cl.secGithub'), { body: guideBody('github', { compact: true }) }));
       return;
     }
     const sess = NoemaCloud.session();
     if (!sess) {
-      body.append(h('p', {}, 'Sign in to a cloud account to study from any device. Your data stays private to your account.'), h('button', { class: 'btn ai', onclick: () => { close(); Noema.openAccountPicker(); } }, '☁️ Sign in / create account'),
-        accSection('☁️', 'How cloud accounts work', { body: guideBody('cloudUser', { compact: true }) }), accSection('👥', 'Invite friends', { body: guideBody('friends', { compact: true }) }));
+      body.append(h('p', {}, tE('engine.cl.signInIntro')), h('button', { class: 'btn ai', onclick: () => { close(); Noema.openAccountPicker(); } }, '☁️ ' + tE('engine.cl.signIn')),
+        accSection('☁️', tE('engine.cl.secHow'), { body: guideBody('cloudUser', { compact: true }) }), accSection('👥', tE('engine.cl.secFriends'), { body: guideBody('friends', { compact: true }) }));
       return;
     }
     if (ACCOUNT.kind !== 'cloud') {
-      body.append(h('p', {}, `You are signed in to the cloud as ${sess.user.email}, but you are using the local profile “${ACCOUNT.name}”.`),
-        h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => Noema.switchTo('u_' + sess.user.id, SUBJ.id) }, 'Switch to my cloud account'),
-          h('button', { class: 'btn', onclick: () => confirmBox(`Copy all of “${ACCOUNT.name}” into your cloud account? (cloud data with the same keys is overwritten; a cloud snapshot is taken first)`, async () => {
-            const target = 'u_' + sess.user.id; await NoemaCloud.snapshot('Before copying local profile ' + ACCOUNT.name).catch(() => { });
+      body.append(h('p', {}, tE('engine.cl.localWhileSignedIn', { email: sess.user.email, name: ACCOUNT.name })),
+        h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => Noema.switchTo('u_' + sess.user.id, SUBJ.id) }, tE('engine.cl.switchToCloud')),
+          h('button', { class: 'btn', onclick: () => confirmBox(tE('engine.cl.copyConfirm', { name: ACCOUNT.name }), async () => {
+            const target = 'u_' + sess.user.id; await NoemaCloud.snapshot(tE('engine.cl.snapBeforeCopy', { name: ACCOUNT.name })).catch(() => { });
             await Noema.backup.apply(await Noema.backup.collect(ACCOUNT.id, { includeSecrets: true }), target, 'merge');
             const keys = Object.keys(Noema.kv.accountData(target)); const mt = Noema.jget(`noema1:${target}:meta:mtime`, {}); keys.forEach(k => mt[k] = Date.now()); Noema.jset(`noema1:${target}:meta:mtime`, mt);
-            toast('Copied — switching to your cloud account'); Noema.switchTo(target, SUBJ.id);
-          }) }, '⬆️ Copy this profile into my cloud account')));
+            toast(tE('engine.cl.copied')); Noema.switchTo(target, SUBJ.id);
+          }) }, '⬆️ ' + tE('engine.cl.copyBtn'))));
       return;
     }
     const stBox = h('div');
-    const drawSt = () => { const s = NoemaCloud.status(); stBox.innerHTML = ''; stBox.append(h('div', { class: 'row' }, h('span', { class: 'pill ' + (s.error ? '' : 'c') }, s.error ? '⚠️ ' + s.error : s.syncing ? '🔄 Syncing…' : `✅ Synced ${s.lastSync ? new Date(s.lastSync).toLocaleTimeString() : ''}`), s.pending ? h('span', { class: 'pill' }, `${s.pending} change(s) waiting`) : null)); };
+    const drawSt = () => { const s = NoemaCloud.status(); stBox.innerHTML = ''; stBox.append(h('div', { class: 'row' }, h('span', { class: 'pill ' + (s.error ? '' : 'c') }, s.error ? '⚠️ ' + errText(s.error) : s.syncing ? '🔄 ' + tE('engine.cl.syncing') : '✅ ' + tE('engine.cl.synced', { time: s.lastSync ? fmtTime(s.lastSync) : '' })), s.pending ? h('span', { class: 'pill' }, tE('engine.cl.pending', { n: s.pending })) : null)); };
     NoemaCloud.onStatus(drawSt); drawSt();
     const snapBox = h('div');
     const drawSnaps = async () => {
       snapBox.innerHTML = '';
-      let list = []; try { list = await NoemaCloud.listSnapshots(); } catch (e) { snapBox.append(h('p', { class: 'tiny' }, '⚠️ ' + e.message)); return; }
-      if (!list.length) snapBox.append(h('p', { class: 'tiny' }, 'No snapshots yet.'));
-      list.forEach(sn => snapBox.append(h('div', { class: 'subrow' }, h('div', { class: 'grow' }, h('b', {}, sn.label), h('div', { class: 'tiny' }, `${fmtWhen(sn.created_at)} · ${fmtBytes(sn.size_bytes || 0)}`)),
+      let list = []; try { list = await NoemaCloud.listSnapshots(); } catch (e) { snapBox.append(h('p', { class: 'tiny' }, '⚠️ ' + errText(e))); return; }
+      if (!list.length) snapBox.append(h('p', { class: 'tiny' }, tE('engine.cl.noSnaps')));
+      list.forEach(sn => snapBox.append(h('div', { class: 'subrow' }, h('div', { class: 'grow' }, h('b', {}, snapLabel(sn.label)), h('div', { class: 'tiny' }, `${fmtWhen(sn.created_at)} · ${fmtBytes(sn.size_bytes || 0)}`)),
         h('button', { class: 'btn small', onclick: async () => Noema.backup.download(await NoemaCloud.getSnapshot(sn.id)) }, '⬇️'),
-        h('button', { class: 'btn small', onclick: () => confirmBox('Restore your account to this snapshot? All your devices go back to it, and anything newer is removed from them too. A snapshot of how things are now is taken first, so you can undo this.', async () => { await NoemaCloud.snapshot('Before restoring a snapshot'); await Noema.backup.apply(await NoemaCloud.getSnapshot(sn.id), ACCOUNT.id, 'replace'); await NoemaCloud.push(ACCOUNT.id).catch(() => { }); toast('Restored ✔ — reloading'); setTimeout(() => location.reload(), 900); }) }, 'Restore'),
+        h('button', { class: 'btn small', onclick: () => confirmBox(tE('engine.cl.restoreSnapConfirm'), async () => { await NoemaCloud.snapshot(tE('engine.cl.snapBeforeRestore')); await Noema.backup.apply(await NoemaCloud.getSnapshot(sn.id), ACCOUNT.id, 'replace'); await NoemaCloud.push(ACCOUNT.id).catch(() => { }); toast(tE('engine.bk.restored')); setTimeout(() => location.reload(), 900); }) }, tE('engine.bk.restore')),
         h('button', { class: 'iconbtn', onclick: async () => { await NoemaCloud.deleteSnapshot(sn.id); drawSnaps(); } }, '🗑️'))));
     };
-    body.append(h('p', { class: 'tiny' }, `Signed in as ${sess.user.email}. Progress, conversations and settings sync automatically; a daily snapshot is kept (last 30).`), stBox,
+    body.append(h('p', { class: 'tiny' }, tE('engine.cl.signedInAs', { email: sess.user.email })), stBox,
       h('div', { class: 'row', style: { margin: '10px 0' } },
-        h('button', { class: 'btn', onclick: async () => { try { await NoemaCloud.push(ACCOUNT.id); const n = await NoemaCloud.pull(ACCOUNT.id); toast(n ? `Pulled ${n} change(s) — reloading` : 'Up to date ✔'); if (n) setTimeout(() => location.reload(), 800); } catch (e) { toast('⚠️ ' + e.message); } } }, '🔄 Sync now'),
-        h('button', { class: 'btn', onclick: async () => { try { await NoemaCloud.snapshot('Manual snapshot'); toast('📸 Snapshot saved'); drawSnaps(); } catch (e) { toast('⚠️ ' + e.message); } } }, '📸 Take snapshot'),
-        h('label', { class: 'btn' }, '🗄️ Upload database backup…', h('input', { type: 'file', accept: '.db,.sqlite,.gz,.zip,.json', style: { display: 'none' }, onchange: async e => { try { await NoemaCloud.uploadFile('db', e.target.files[0]); toast('☁️ Database backup uploaded'); } catch (er) { toast('⚠️ ' + er.message, 4000); } } })),
-        h('button', { class: 'btn ghost', onclick: async () => { await NoemaCloud.push(ACCOUNT.id).catch(() => { }); await NoemaCloud.signOut(); Noema.jset('noema1:current', {}); location.reload(); } }, 'Sign out')),
-      accSection('🩺', 'Check the cloud connection', { info: 'Runs a real round trip with your account — progress, conversations, snapshots, files, Explore, sharing — and cleans up after itself. Use it after updating the database or when something does not sync.', body: selfTestBox() }),
-      accSection('📸', 'Cloud snapshots', { open: true, info: 'Restore points of your whole account stored in the cloud: one automatic per day (last 30) + any you take manually.', body: snapBox }),
-      accSection('👥', 'Invite friends', { body: guideBody('friends', { compact: true }) }));
+        h('button', { class: 'btn', onclick: async () => { try { await NoemaCloud.push(ACCOUNT.id); const n = await NoemaCloud.pull(ACCOUNT.id); toast(n ? tE('engine.cl.pulled', { n }) : tE('engine.cl.upToDate')); if (n) setTimeout(() => location.reload(), 800); } catch (e) { toast('⚠️ ' + errText(e)); } } }, '🔄 ' + tE('engine.cl.syncNow')),
+        h('button', { class: 'btn', onclick: async () => { try { await NoemaCloud.snapshot(); toast('📸 ' + tE('engine.cl.snapSaved')); drawSnaps(); } catch (e) { toast('⚠️ ' + errText(e)); } } }, '📸 ' + tE('engine.cl.takeSnap')),
+        h('label', { class: 'btn' }, '🗄️ ' + tE('engine.cl.uploadDb'), h('input', { type: 'file', accept: '.db,.sqlite,.gz,.zip,.json', style: { display: 'none' }, onchange: async e => { try { await NoemaCloud.uploadFile('db', e.target.files[0]); toast('☁️ ' + tE('engine.cl.dbUploaded')); } catch (er) { toast('⚠️ ' + errText(er), 4000); } } })),
+        h('button', { class: 'btn ghost', onclick: async () => { await NoemaCloud.push(ACCOUNT.id).catch(() => { }); await NoemaCloud.signOut(); Noema.jset('noema1:current', {}); location.reload(); } }, tE('engine.cl.signOut'))),
+      accSection('🩺', tE('engine.cl.secCheck'), { info: tE('engine.cl.checkInfo'), body: selfTestBox() }),
+      accSection('📸', tE('engine.cl.secSnaps'), { open: true, info: tE('engine.cl.snapsInfo'), body: snapBox }),
+      accSection('👥', tE('engine.cl.secFriends'), { body: guideBody('friends', { compact: true }) }));
     drawSnaps();
   },
 };
@@ -3421,26 +3587,26 @@ function selfTestBox() {
     const res = await NoemaCloud.selfTest(st => {
       const r = rows[st.name] || (rows[st.name] = list.appendChild(h('div', { class: 'strow' })));
       r.innerHTML = ''; r.className = 'strow ' + (st.running ? 'run' : st.ok ? 'ok' : 'bad');
-      r.append(h('span', { class: 'sti' }, st.running ? '⏳' : st.ok ? '✅' : '❌'), h('b', {}, st.name), st.ms != null ? h('span', { class: 'tiny' }, ` ${st.ms} ms ${st.note ? '· ' + st.note : ''}`) : null,
-        st.error ? h('div', { class: 'tiny' }, '⚠️ ' + st.error) : null, st.hint ? h('div', { class: 'tiny sthint' }, '👉 ' + st.hint) : null);
+      r.append(h('span', { class: 'sti' }, st.running ? '⏳' : st.ok ? '✅' : '❌'), h('b', {}, st.name), st.ms != null ? h('span', { class: 'tiny' }, ' ' + tE('engine.cl.ms', { n: st.ms }) + ` ${st.note ? '· ' + st.note : ''}`) : null,
+        st.error ? h('div', { class: 'tiny' }, '⚠️ ' + errText(st.error)) : null, st.hint ? h('div', { class: 'tiny sthint' }, '👉 ' + st.hint) : null);
     });
     const bad = res.filter(r => !r.ok).length;
-    list.append(h('div', { class: 'fb ' + (bad ? 'bad' : 'ok') }, bad ? `${bad} check(s) failed — follow the 👉 hints.` : 'Everything works with the real cloud ✔'));
+    list.append(h('div', { class: 'fb ' + (bad ? 'bad' : 'ok') }, bad ? tE('engine.cl.checksFailed', { n: bad }) : tE('engine.cl.allWorks')));
     run.disabled = false;
-  } }, '🩺 Run the check');
-  box.append(h('p', { class: 'tiny' }, 'Takes a few seconds. Nothing of yours is changed: test data is deleted right away.'), run, list);
+  } }, '🩺 ' + tE('engine.cl.runCheck'));
+  box.append(h('p', { class: 'tiny' }, tE('engine.cl.checkNote')), run, list);
   return box;
 }
 
 ACC_VIEWS.help = function (body) {
   const st = setupStatus();
   const state = { gemini: st.gemini, backupFolder: !!Noema.jget(`noema1:${ACCOUNT.id}:meta:lastFolderBackup`, 0), cloudUser: ACCOUNT.kind === 'cloud', cloudOwner: !!Noema.config.supabaseUrl, claude: !!window.NoemaClaude?.Key.get(ACCOUNT.id) };
-  body.append(h('p', { class: 'tiny', style: { margin: '0 0 10px' } }, 'Step-by-step guides. Everything here is optional — the app works fully on one device without any of it.'),
+  body.append(h('p', { class: 'tiny', style: { margin: '0 0 10px' } }, tE('engine.help.intro')),
     ...Object.entries(GUIDES).map(([id, g]) => {
-      if (id !== 'claude' || !Noema.claudeSetupView) return accSection(g.icon, g.title, { status: id in state ? (state[id] ? { ok: true, text: 'done' } : { ok: false, text: 'not set up' }) : null, body: guideBody(id) });
+      if (id !== 'claude' || !Noema.claudeSetupView) return accSection(g.icon, g.title, { status: id in state ? (state[id] ? { ok: true, text: tE('engine.help.done') } : { ok: false, text: tE('engine.help.notSetUp') }) : null, body: guideBody(id) });
       // ✨ Set up Claude: the same numbered steps as in “Create with Claude” (both ways), built when opened
       const holder = h('div', { class: 'claudesetup' });
-      const sec = accSection(g.icon, g.title, { status: state.claude ? { ok: true, text: 'API key here' } : null, body: h('div', {}, guideBody(id), holder) });
+      const sec = accSection(g.icon, g.title, { status: state.claude ? { ok: true, text: tE('engine.help.apiKeyHere') } : null, body: h('div', {}, guideBody(id), holder) });
       sec.addEventListener('toggle', () => { if (sec.open && !holder.firstChild) holder.append(Noema.claudeSetupView(ACCOUNT.id)); });
       return sec;
     }));
@@ -3451,7 +3617,7 @@ function wireSyncDot() {
   if (SHL()) return;   // the shell paints its own (engine/shell.js)
   const dot = $('#syncdot'); if (!dot) return;
   if (ACCOUNT.kind !== 'cloud' || !window.NoemaCloud) { dot.remove(); return; }
-  const paint = s => { dot.className = 'syncdot ' + (s.error ? 'err' : s.syncing || s.pending ? 'busy' : 'ok'); dot.title = s.error ? 'Sync error: ' + s.error : s.syncing ? 'Syncing…' : s.pending ? 'Changes waiting to sync' : 'All changes synced'; };
+  const paint = s => { dot.className = 'syncdot ' + (s.error ? 'err' : s.syncing || s.pending ? 'busy' : 'ok'); dot.title = s.error ? tE('engine.cl.syncError', { error: errText(s.error) }) : s.syncing ? tE('engine.cl.syncing') : s.pending ? tE('engine.cl.waiting') : tE('engine.cl.allSynced'); };
   NoemaCloud.onStatus(paint); paint(NoemaCloud.status());
 }
 
@@ -3459,71 +3625,26 @@ function wireSyncDot() {
 /* ===================== Help: ⓘ tooltips, setup guides, first-sessions setup banner ===================== */
 /** Small ⓘ that shows an explanation on hover / focus / tap. */
 function tip(text) {
-  const t = h('span', { class: 'htip', tabindex: '0', role: 'button', 'aria-label': 'More info', onclick: e => { e.stopPropagation(); e.preventDefault(); t.classList.toggle('show'); } }, 'i', h('span', { class: 'htipbox', html: fmt(text) }));
+  const t = h('span', { class: 'htip', tabindex: '0', role: 'button', 'aria-label': tE('engine.help.moreInfo'), onclick: e => { e.stopPropagation(); e.preventDefault(); t.classList.toggle('show'); } }, 'i', h('span', { class: 'htipbox', html: fmt(text) }));
   return t;
 }
 document.addEventListener('click', () => $$('.htip.show').forEach(t => t.classList.remove('show')));
 
 const SITE_URL = Noema.config.siteUrl || '';
-const GUIDES = {
-  gemini: { icon: '🔑', title: 'Get your free Gemini API key', who: 'Everyone who wants the AI tutor', steps: [
-    'Open **Google AI Studio** → https://aistudio.google.com/apikey and sign in with your Google account.',
-    'Click **Create API key** (accept the terms if asked) and copy the key (it starts with `AIza…`).',
-    'In this app: **⚙️ Settings → Gemini API key** → paste → **🔍 Detect models** → **🧪 Test**. You should see “Brick is ready”.',
-    'Done. On a cloud account the key follows you privately to all your devices; on a local profile it stays in this browser.'],
-    notes: ['The key is personal — don’t share it. Each friend uses their own (it is free with generous limits).', 'Without a key everything works except the tutor, AI grading and AI-generated questions.'] },
-  backupFolder: { icon: '📁', title: 'Automatic backups to a folder (Google Drive / iCloud too)', who: 'Chrome, Edge or Brave on a computer', steps: [
-    'Account menu (your emoji, top-right) → **💾 Backup & restore → 📁 Automatic backups** → **Choose backup folder**.',
-    `Pick your profile folder, e.g. **noema-lite/accounts/${ACCOUNT.id}** (any folder works). The app creates **backups/** and **conversations/** inside it.`,
-    'From now on: a backup file every few minutes when something changed (and when you leave), and every AI conversation as **.json + .md** within ~20 seconds.',
-    '**Off-site for free:** install **Google Drive for desktop** (https://www.google.com/drive/download/) and choose a folder inside **Google Drive → My Drive** — or a folder in **iCloud Drive**. Your backups then reach the cloud automatically.',
-    'After a browser restart the browser may ask again: open the menu and click **Resume** once.'],
-    notes: ['Safari/Firefox can’t write to folders: use **Download backup** instead (or a cloud account).'] },
-  restore: { icon: '♻️', title: 'Restoring data', who: 'Everyone', steps: [
-    '**Restore points** (this device) are created automatically before every restore or reset — the quickest undo.',
-    '**From a file:** 💾 Backup & restore → Restore from a backup file → choose **Replace** (exact copy), **Merge** (backup wins on conflicts) or **New profile** (side by side).',
-    '**Cloud accounts:** ☁️ Cloud → Cloud snapshots → Restore (a snapshot of the current state is taken first).',
-    '**Everything (owner):** the SQLite database in noema-lite/data can recreate any file of any past version: `python3 tools/db_restore.py list`.'] },
-  cloudUser: { icon: '☁️', title: 'Use a cloud account (study from anywhere)', who: 'You and your friends', steps: [
-    `Open the website${SITE_URL ? ' (' + SITE_URL + ')' : ''} on any device → **☁️ Sign in / create a cloud account**.`,
-    'Create the account (email + password). If asked, confirm the email from your inbox, then sign in.',
-    'Add your Gemini key (⚙️ Settings) once on each device: it stays in that browser. Progress, flashcards, conversations and settings sync automatically.',
-    'Already studied locally? In the local app: account menu → ☁️ Cloud → sign in → **⬆️ Copy this profile into my cloud account**.'],
-    notes: ['Your data is private to your account (row-level security). A daily snapshot is kept for 30 days.'] },
-  cloudOwner: { icon: '🛠️', title: 'Set up the cloud (owner, once)', who: 'Only the owner of this installation', steps: [
-    '**Supabase** (accounts + sync): https://supabase.com → New project (region Frankfurt) → **SQL Editor** → run the whole file **cloud/supabase.sql**.',
-    'Supabase: the **Project URL** is `https://<project-ref>.supabase.co` (the ref is in your dashboard address) and the **publishable key** (`sb_publishable_…`) is under **Project Settings → API Keys** → put both in **config.js** (or give them to Claude). Never share the secret key or the database password.',
-    '**Netlify** (website): https://app.netlify.com → Add new site → Import from GitHub → pick the repo → Deploy (settings come from netlify.toml).',
-    'Supabase → **Authentication → URL Configuration → Site URL** = your Netlify address.',
-    'Full step-by-step guide with screenshots-level detail: **cloud/README.md** in the repository.'] },
-  github: { icon: '🐙', title: 'Keep the repository on GitHub (owner)', who: 'Only the owner', steps: [
-    'Install **GitHub Desktop** (https://desktop.github.com) and sign in.',
-    '**File → Add Local Repository** → choose Documents/MyApps/noema-lite.',
-    '**Publish repository** → keep **Keep this code private** ticked.',
-    'Whenever Claude has made changes: open GitHub Desktop → **Push origin**. Netlify then updates the website automatically.'] },
-  claude: { icon: '✨', title: 'Set up Claude and create subjects (three ways)', who: 'Everyone', steps: [
-    'Account menu → 📚 Subjects → **✨ Create a subject with Claude** (or the same button in the subject picker). The window shows every step, numbered, with ⓘ tips.',
-    '**Way A — here in noema-lite:** create a Claude Console account (platform.claude.com), add a little credit, create an API key and paste it in the window. noema-lite uploads the skill, sends your files to Claude and imports the finished subject — you never leave the app. You see the cost live and set a limit.',
-    `**Way B — in the Claude app or website:** with your Claude plan (Free, Pro, Max): switch on code execution, add the connector **Customize → Connectors → + Add → Add custom connector** with the address ${SITE_URL ? SITE_URL + '/mcp' : '<your site>/mcp'} (the same for everyone and every device), then attach your sources in a new chat and send the prompt from the window.`,
-    '**Way C — a whole Roadmap with your Claude plan (⭐ recommended for Roadmaps, usually the cheapest):** set up the connector as in way B, then in 🧭 Roadmaps choose **💬 Claude app** when you create or import a Roadmap. Copy the one message noema-lite shows into a Claude chat: Claude builds the Roadmap, plans the chapters and prepares the queued steps; they appear on the Roadmap by themselves. No API cost — the bigger the Roadmap, the bigger the saving.',
-    'Claude reads everything, adds pictures (from your sources, from the web and its own diagrams / graphs) and builds the pack; the new subject appears in your picker.',
-    'Share it if you like: 🔗 on the subject → public (🌍 Explore) or with one person.'],
-    notes: ['Way A: your API key stays on this device only. Way B: noema-lite never sees your Claude login.', 'Updates are additive: Claude keeps all ids, so your progress stays.'] },
-  curricula: { icon: '🧭', title: 'Roadmaps: from a goal to a Roadmap of steps', who: 'Everyone with a Claude API key or a Gemini key', steps: [
-    'Subject picker → **🧭 Roadmaps** (or 🧭 in the top bar) → **➕ New Roadmap**.',
-    'Type what you want to master, your starting point and the depth. Four AI agents lay it out: **every prerequisite** (from several sciences), **the whole goal** (aspects, sub-topics, synthesis) and **applications**; then they plan the chapters of every step.',
-    'The Roadmap shows three parts. **open** steps (green open padlock) can be studied; **🔒 locked** ones show their information and chapters but open only when their prerequisites are mastered.',
-    'Every step becomes a full subject (theory, exercises, flashcards, drills, tutor), prepared in the background a few steps ahead while the app is open — with Claude from official sources found on the web, or with Gemini and Google Search.',
-    'A step is **✅ mastered** when all its sections are read and 80 % of its exercises solved — or with **🎓 I already know this** (8 of 10 in a short test).',
-    'Already have a subject for a step? On the step: **📦 Use a subject I have**. Only that step is re-planned to follow the subject (🔄 until its new plan is here); it is never generated. Subjects on no step wait on the **📚 Shelf** (bottom of the subject picker): study them there, or **🧭 Put on a Roadmap…**.'],
-    notes: ['Roadmaps and prepared steps are saved in your account (cloud) like your subjects.', 'Claude costs a few dollars per prepared step (limit per step in ⚙️ of the Roadmap); Gemini’s free quota is limited.'] },
-  friends: { icon: '👥', title: 'Invite friends', who: 'You', steps: [
-    `Send them the website link${SITE_URL ? ' (' + SITE_URL + ')' : ''}.`,
-    'Each friend creates their **own cloud account** — they see the shared subjects, never your progress, conversations or key.',
-    'Each friend adds **their own free Gemini key** (guide: “Get your free Gemini API key”).',
-    'Want to give them one of your subjects? Subject picker → **🔗** on the subject → *Share with a person* (their e-mail) — they get a 🔔 and accept. Or **🌍 Make it public** so everybody finds it in Explore.'],
-    notes: ['Supabase’s built-in email service sends only a few emails per hour: for more than a handful of friends, either turn off “Confirm email” (Authentication → Providers → Email) or connect your own SMTP.'] },
+/* The setup guides: their words are in the catalog (engine.guide.<id>.title / .who / .step1… / .note1…, Markdown);
+   here only their icon and how many steps and notes each has. GUIDES[id] reads like the old object ({ icon, title, who, steps, notes }). */
+const GUIDE_DEF = {
+  gemini: { icon: '🔑', steps: 4, notes: 2 }, backupFolder: { icon: '📁', steps: 5, notes: 1 }, restore: { icon: '♻️', steps: 4, notes: 0 },
+  cloudUser: { icon: '☁️', steps: 4, notes: 1 }, cloudOwner: { icon: '🛠️', steps: 5, notes: 0 }, github: { icon: '🐙', steps: 4, notes: 0 },
+  claude: { icon: '✨', steps: 6, notes: 2 }, curricula: { icon: '🧭', steps: 6, notes: 2 }, friends: { icon: '👥', steps: 4, notes: 1 },
 };
+function guideOf(id) {
+  const d = GUIDE_DEF[id], k = 'engine.guide.' + id + '.';
+  const P = { site: SITE_URL, hasSite: SITE_URL ? 'yes' : 'no', acc: ACCOUNT.id, mcp: SITE_URL ? SITE_URL + '/mcp' : tE('engine.guide.mcpPlaceholder') };
+  const list = (part, n) => Array.from({ length: n }, (_, i) => tE(k + part + (i + 1), P));
+  return { icon: d.icon, title: tE(k + 'title'), who: tE(k + 'who'), steps: list('step', d.steps), notes: d.notes ? list('note', d.notes) : null };
+}
+const GUIDES = new Proxy(GUIDE_DEF, { get: (o, id) => typeof id === 'string' && Object.prototype.hasOwnProperty.call(o, id) ? guideOf(id) : undefined });
 function guideBody(id, { compact = false } = {}) {
   const g = GUIDES[id]; if (!g) return h('div');
   return h('div', { class: 'guide' },
@@ -3531,9 +3652,9 @@ function guideBody(id, { compact = false } = {}) {
     h('ol', { class: 'gsteps' }, ...g.steps.map(s => h('li', { html: linkify(fmt(s)) }))),
     g.notes ? h('div', { class: 'gnotes' }, ...g.notes.map(n => h('div', { html: '💡 ' + linkify(fmt(n)) }))) : null);
 }
-const linkify = html => html.replace(/(^|[\s(])(https?:\/\/[^\s<)]+)/g, '$1<a href="$2" target="_blank" rel="noopener">$2</a>');
+const linkify = html => html.replace(/(^|[\s(])(https?:\/\/[^\s<)]+)/g, '$1<a href="$2" target="_blank" rel="noopener">$2</a>');   // i18n-ignore
 function openGuide(id) { const g = GUIDES[id]; if (!g) return; modal((b, close) => b.append(h('div', { class: 'row' }, h('h2', { class: 'grow' }, `${g.icon} ${g.title}`), h('button', { class: 'iconbtn', onclick: close }, '✕')), guideBody(id))); }
-const guideBtn = (id, label) => h('button', { class: 'btn small ghost', onclick: () => openGuide(id) }, label || `${GUIDES[id].icon} How?`);
+const guideBtn = (id, label) => h('button', { class: 'btn small ghost', onclick: () => openGuide(id) }, label || `${GUIDES[id].icon} ` + tE('engine.help.how'));
 
 /* ---------- setup status ---------- */
 function setupStatus() {
@@ -3551,14 +3672,14 @@ function setupBanner() {
   if (sessions > 5) return null;
   const st = setupStatus();
   const items = [];
-  if (!st.gemini && !st.dismissed.gemini) items.push(['gemini', '🔑 The AI tutor is off: add your free Gemini key.', 'Set up']);
-  if (!st.protectedData && !st.dismissed.backup) items.push(['backup', '💾 Your progress lives only in this browser: turn on backups (folder, Google Drive or cloud).', 'Set up']);
+  if (!st.gemini && !st.dismissed.gemini) items.push(['gemini', '🔑 ' + tE('engine.setup.gemini'), tE('engine.setup.setUp')]);
+  if (!st.protectedData && !st.dismissed.backup) items.push(['backup', '💾 ' + tE('engine.setup.backup'), tE('engine.setup.setUp')]);
   if (!items.length) return null;
   const box = h('div', { class: 'setupbar' });
   items.forEach(([k, text, cta]) => box.append(h('div', { class: 'setuprow' }, h('span', { class: 'grow' }, text),
     h('button', { class: 'btn small primary', onclick: () => k === 'gemini' ? openGuide('gemini') : openAccountMenu('backup') }, cta),
-    h('button', { class: 'iconbtn', title: 'Dismiss', onclick: () => { const d = setupStatus().dismissed; d[k] = Date.now(); putAccountSettings({ dismissedSetup: d }); route(); } }, '✕'))));
-  box.append(h('div', { class: 'tiny', style: { marginTop: '4px' } }, `Optional · shown during your first sessions (${sessions}/5) · `, h('button', { class: 'linkish tiny', onclick: () => openAccountMenu('help') }, 'all setup guides')));
+    h('button', { class: 'iconbtn', title: tE('engine.setup.dismiss'), onclick: () => { const d = setupStatus().dismissed; d[k] = Date.now(); putAccountSettings({ dismissedSetup: d }); route(); } }, '✕'))));
+  box.append(h('div', { class: 'tiny', style: { marginTop: '4px' } }, tE('engine.setup.optional', { n: sessions, of: 5 }) + ' · ', h('button', { class: 'linkish tiny', onclick: () => openAccountMenu('help') }, tE('engine.setup.allGuides'))));
   return box;
 }
 

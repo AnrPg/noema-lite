@@ -40,7 +40,12 @@
       "article": "das",
       "lexeme": "de:ins"
      }
-    ]
+    ],
+    "pronominalAdverb": [
+     "darin (drin)",
+     "worin"
+    ],
+    "position": "before the noun"
    },
    "ref": {
     "src": "kaikki",
@@ -154,16 +159,28 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German in and English in are one Germanic word, related to Greek ἐν (en) and Latin in."
+     "in is an old Indo-European preposition, *h₁én."
     ],
     "pitfalls": [
      "Two-way preposition: Wo? → dative (Ich bin in der Küche), Wohin? → accusative (Ich gehe in die Küche).",
      "in dem → im and in das → ins: Ich bin im Park. – not *in dem Park (unless “in that park”).",
-     "A city or a country without article: in Berlin, in Griechenland; with an article: in der Türkei, in der Schweiz.",
-     "Months and seasons take im (in + dem): im Mai, im Sommer; a year takes no preposition (2026) or im Jahr 2026 – not *in 2026."
+     "- A city or a country without article: in Berlin, in Griechenland;\n- with an article: in der Türkei, in der Schweiz.",
+     "- Months and seasons take im (in + dem): im Mai, im Sommer;\n- a year takes no preposition (2026) or im Jahr 2026 – not *in 2026."
     ],
     "subtleties": [
-     "in for buildings you go inside (im Café, im Supermarkt); an open market or a square takes auf: auf dem Markt, auf dem Platz."
+     "- in for buildings you go inside (im Café, im Supermarkt);\n- an open market or a square takes auf: auf dem Markt, auf dem Platz."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "in and English in are one Germanic word."
+     },
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "in is related to εν (as in ενδο-)."
+     }
     ]
    }
   },
@@ -218,7 +235,12 @@
       "article": "das",
       "lexeme": "de:ans"
      }
-    ]
+    ],
+    "pronominalAdverb": [
+     "daran (dran)",
+     "woran"
+    ],
+    "position": "before the noun"
    },
    "ref": {
     "src": "kaikki",
@@ -353,16 +375,28 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "an is the same word as English on and Greek ἀνά (aná, “up, on”)."
+     "an is an old Germanic preposition, Old High German ana."
     ],
     "pitfalls": [
      "an = at the side or edge (an der Wand, am Fenster); auf = on top of a surface (auf dem Tisch).",
      "an dem → am, an das → ans: am Bahnhof, ans Meer.",
      "Two-way preposition: Wo? + dative (am Fenster), Wohin? + accusative (ans Fenster).",
-     "Days, parts of the day and dates take an + dative, nearly always as am: am Montag, am Morgen, am Wochenende, am 3. Mai – but in der Nacht."
+     "Days, parts of the day and dates take an + dative, nearly always as am – but in der Nacht:\n→ am Montag, am Morgen, am Wochenende, am 3. Mai"
     ],
     "subtleties": [
      "“At” a place is three words in German: an (an edge: am Bahnhof), bei (a person or firm: beim Arzt) and in (inside: in der Schule)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "an is the same word as English on."
+     },
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "an is related to ανά."
+     }
     ]
    }
   },
@@ -409,7 +443,12 @@
       "article": "dem",
       "lexeme": "de:beim"
      }
-    ]
+    ],
+    "pronominalAdverb": [
+     "dabei",
+     "wobei"
+    ],
+    "position": "before the noun"
    },
    "ref": {
     "src": "kaikki",
@@ -518,18 +557,35 @@
     "synonyms": [],
     "synonymsNone": "A preposition has no true synonym; the neighbouring prepositions are compared in the pitfalls.",
     "etymology": {
-     "text": "From Middle High German bī, from Old High German bī, from Proto-West Germanic *bī, from Proto-Germanic *bi. Compare English by.",
+     "text": "From Middle High German bī, from Old High German bī, from Proto-West Germanic *bī, from Proto-Germanic *bi.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Like French chez, bei + a person means “at someone’s home”: bei Anna = chez Anna; Greek says στης Άννας."
+     "bei + a person means “at someone’s home”: bei Anna, bei meinen Eltern."
     ],
     "pitfalls": [
-     "bei is only for where you ARE: Ich bin bei meiner Mutter. Going there is zu: Ich gehe zu meiner Mutter (not *bei meiner Mutter gehen).",
+     "bei is only for where you ARE: Ich bin bei meiner Mutter.\n\nGoing there is zu:\n→ Ich gehe zu meiner Mutter (not *bei meiner Mutter gehen).",
      "bei always takes the dative: bei dem → beim."
     ],
     "subtleties": [
      "bei uns can mean “at our home” or “in our country”: Bei uns isst man spät. (In our country people eat late.)"
+    ],
+    "notes": [
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "bei Anna is chez Anna."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "bei Anna is στης Άννας."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "bei is related to English by."
+     }
     ]
    }
   },
@@ -577,7 +633,12 @@
       "article": "der",
       "lexeme": "de:zur"
      }
-    ]
+    ],
+    "pronominalAdverb": [
+     "dazu",
+     "wozu"
+    ],
+    "position": "before the noun"
    },
    "ref": {
     "src": "kaikki",
@@ -720,11 +781,11 @@
     "synonyms": [],
     "synonymsNone": "A preposition has no true synonym; the neighbouring prepositions are compared in the pitfalls.",
     "etymology": {
-     "text": "From a merger of Middle High German ze (Old High German za, zi) and zuo (Old High German zuo, from Proto-West Germanic *tō). Cognate with Dutch toe, English to, too.",
+     "text": "From a merger of Middle High German ze (Old High German za, zi) and zuo (Old High German zuo, from Proto-West Germanic *tō).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "zu is English to and too – one German word does both jobs: zu Hause (at home), zu groß (too big)."
+     "One word, two jobs: direction and place (zum Arzt, zu Hause) and “too” (zu groß)."
     ],
     "pitfalls": [
      "zu always takes the dative, even for movement: zu dem Arzt → zum Arzt; zu der Post → zur Post.",
@@ -732,7 +793,14 @@
      "Cities and countries take nach, not zu: nach Berlin, nach Griechenland."
     ],
     "subtleties": [
-     "zu is for going to a person or a place you visit for its purpose (zum Arzt, zur Post, zur Arbeit); in + accusative is for going inside (in die Küche, ins Kino)."
+     "- zu is for going to a person or a place you visit for its purpose (zum Arzt, zur Post, zur Arbeit);\n- in + accusative is for going inside (in die Küche, ins Kino)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "zu is English to and too in one word:\n→ zum Arzt (to the doctor), zu groß (too big)\n\nzu is related to English to and too."
+     }
     ]
    }
   },
@@ -765,7 +833,12 @@
     ],
     "contractions": {
      "none": "no merged forms with the article"
-    }
+    },
+    "pronominalAdverb": [
+     "danach",
+     "wonach"
+    ],
+    "position": "before; after in some phrases"
    },
    "ref": {
     "src": "kaikki",
@@ -860,20 +933,27 @@
     "synonyms": [],
     "synonymsNone": "A preposition has no true synonym; the neighbouring prepositions are compared in the pitfalls.",
     "etymology": {
-     "text": "From Middle High German nāh, from Old High German nāh; related to nah (“near”). Cognate with Dutch na, English nigh.",
+     "text": "From Middle High German nāh, from Old High German nāh; related to nah (“near”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
      "nach and nah (near) are one word historically – “going near” became “going to”."
     ],
     "pitfalls": [
-     "nach for cities and countries WITHOUT article (nach Spanien); with an article use in + accusative: in die Türkei, in die Schweiz, in die USA.",
+     "- nach for cities and countries WITHOUT article (nach Spanien);\n- with an article use in + accusative: in die Türkei, in die Schweiz, in die USA.",
      "nach is never used for going to a person or a building: zum Arzt, zur Schule (not *nach der Schule, which means “after school”).",
      "Two meanings, both with the dative: nach Berlin / nach Hause (to) and nach dem Essen / nach der Arbeit (after)."
     ],
     "subtleties": [
      "nach Hause has the old dative Hause; nach always takes the dative.",
-     "after + a verb is the conjunction nachdem (Nachdem ich gegessen habe, …); after = afterwards is danach."
+     "- after + a verb is the conjunction nachdem (Nachdem ich gegessen habe, …);\n- after = afterwards is danach."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "nach is related to English nigh (near) – nah is its twin."
+     }
     ]
    }
   },
@@ -908,7 +988,12 @@
     ],
     "contractions": {
      "none": "no merged forms with the article"
-    }
+    },
+    "pronominalAdverb": [
+     "daraus (draus)",
+     "woraus"
+    ],
+    "position": "before the noun"
    },
    "ref": {
     "src": "kaikki",
@@ -1026,18 +1111,25 @@
     "synonyms": [],
     "synonymsNone": "A preposition has no true synonym; the neighbouring prepositions are compared in the pitfalls.",
     "etymology": {
-     "text": "From Middle High German ūȥ, from Old High German ūȥ (“out”), from Proto-West Germanic *ūt. Compare Dutch uit, English out.",
+     "text": "From Middle High German ūȥ, from Old High German ūȥ (“out”), from Proto-West Germanic *ūt.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "aus and English out are the same word – compare Der Ball ist im Aus (the ball is out) and Licht aus! (lights off!)."
+     "aus also means “out, off, over”: Der Ball ist im Aus. Licht aus! Die Schule ist aus."
     ],
     "pitfalls": [
      "Origin is aus: Ich bin aus Griechenland. (not *von Griechenland)",
      "aus always takes the dative: aus dem Haus, aus der Schule."
     ],
     "subtleties": [
-     "aus = out of an inside (aus dem Haus, aus der Stadt); von = from a point, a person or the surface (vom Arzt, von der Arbeit)."
+     "- aus = out of an inside (aus dem Haus, aus der Stadt);\n- von = from a point, a person or the surface (vom Arzt, von der Arbeit)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "aus is English out: Der Ball ist im Aus – the ball is out."
+     }
     ]
    }
   },
@@ -1081,7 +1173,12 @@
       "article": "dem",
       "lexeme": "de:vom"
      }
-    ]
+    ],
+    "pronominalAdverb": [
+     "davon",
+     "wovon"
+    ],
+    "position": "before the noun"
    },
    "ref": {
     "src": "kaikki",
@@ -1191,7 +1288,7 @@
     "synonyms": [],
     "synonymsNone": "A preposition has no true synonym; the neighbouring prepositions are compared in the pitfalls.",
     "etymology": {
-     "text": "From Middle High German von(e) (“from”), from Old High German fon(a). Cognate with Old Dutch fan (modern van), Old Frisian fon, fan.",
+     "text": "From Middle High German von(e) (“from”), from Old High German fon(a).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -1203,7 +1300,7 @@
     ],
     "subtleties": [
      "In speech von + dative replaces the genitive: das Auto von meinem Bruder = das Auto meines Bruders.",
-     "von in names (Johann Wolfgang von Goethe) is the noble particle, like Dutch van."
+     "von in names (Johann Wolfgang von Goethe) is the noble particle."
     ]
    }
   },
@@ -1227,7 +1324,12 @@
     ],
     "contractions": {
      "none": "no merged forms with the article"
-    }
+    },
+    "pronominalAdverb": [
+     "damit",
+     "womit"
+    ],
+    "position": "before the noun"
    },
    "ref": {
     "src": "kaikki",
@@ -1300,11 +1402,11 @@
     "synonyms": [],
     "synonymsNone": "A preposition has no true synonym; the neighbouring prepositions are compared in the pitfalls.",
     "etymology": {
-     "text": "From Middle High German mite, mit, from Old High German miti, mit, from Proto-West Germanic *midi. Cognate with Middle English mid (“with”).",
+     "text": "From Middle High German mite, mit, from Old High German miti, mit, from Proto-West Germanic *midi.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "mit is related to Greek μετά (metá, “with, among, after”) – the meta- of metaphor."
+     "mit goes back to Proto-Germanic *midi."
     ],
     "pitfalls": [
      "mit always takes the dative – also in the plural, where the noun adds -n: mit meinen Brüdern, mit den Kindern.",
@@ -1312,6 +1414,13 @@
     ],
     "subtleties": [
      "mit as an adverb means “along, too”: Kommst du mit? (Are you coming along?)"
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "mit is related to μετά – the meta- of μεταφορά."
+     }
     ]
    }
   },
@@ -1333,7 +1442,11 @@
     ],
     "contractions": {
      "none": "no merged forms with the article"
-    }
+    },
+    "pronominalAdverb": {
+     "none": "no da- / wo- form: ohne das, ohne es"
+    },
+    "position": "before the noun"
    },
    "ref": {
     "src": "kaikki",
@@ -1406,11 +1519,11 @@
     "synonyms": [],
     "synonymsNone": "A preposition has no true synonym; the neighbouring prepositions are compared in the pitfalls.",
     "etymology": {
-     "text": "From Middle High German āne, from Old High German āna, āno (“without”), from Proto-Germanic *ēnu, *ēnō. Possibly cognate with Ancient Greek ἄνευ (áneu, “without”).",
+     "text": "From Middle High German āne, from Old High German āna, āno (“without”), from Proto-Germanic *ēnu, *ēnō.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "ohne may be a cousin of Greek ἄνευ – both mean “without”."
+     "ohne takes the accusative, like für: ohne meinen Bruder."
     ],
     "pitfalls": [
      "ohne takes the accusative: ohne meinen Bruder (not *ohne meinem Bruder).",
@@ -1418,6 +1531,13 @@
     ],
     "subtleties": [
      "Ohne mich! – a whole answer: “Count me out!”"
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "ohne is possibly related to άνευ (without)."
+     }
     ]
    }
   },
@@ -1443,7 +1563,12 @@
       "form": "fürs",
       "article": "das"
      }
-    ]
+    ],
+    "pronominalAdverb": [
+     "dafür",
+     "wofür"
+    ],
+    "position": "before the noun"
    },
    "ref": {
     "src": "kaikki",
@@ -1527,14 +1652,21 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek για covers both “for” and “about”; German splits them: für (for) and über (about)."
+     "German splits “for” and “about”: ein Geschenk für dich, ein Buch über Berlin."
     ],
     "pitfalls": [
      "für takes the accusative: für meinen Vater (masculine -en), für dich, für ihn.",
-     "A period of time often needs no für: Ich bleibe zwei Wochen (für zwei Wochen is also fine for a planned stay); a time still going on takes seit (S15)."
+     "A period of time often needs no für: Ich bleibe zwei Wochen (für zwei Wochen is also fine for a planned stay).\n\nA time still going on takes seit (S15)."
     ],
     "subtleties": [
      "für vs vor: für = for; vor = in front of / before – they were once the same word."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "για covers both: για σένα is für dich, ένα βιβλίο για το Βερολίνο is ein Buch über Berlin."
+     }
     ]
    }
   },
@@ -1592,7 +1724,12 @@
       "article": "dem",
       "register": "colloquial"
      }
-    ]
+    ],
+    "pronominalAdverb": [
+     "darüber (drüber)",
+     "worüber"
+    ],
+    "position": "before the noun"
    },
    "ref": {
     "src": "kaikki",
@@ -1710,18 +1847,30 @@
     "synonyms": [],
     "synonymsNone": "A preposition has no true synonym; the neighbouring prepositions are compared in the pitfalls.",
     "etymology": {
-     "text": "From Middle High German über, from Old High German ubiri, ubari, from Proto-Germanic *ubiri, from Proto-Indo-European *upéri. Cognate with Ancient Greek ὑπέρ (hupér, “above”), Latin super, English over.",
+     "text": "From Middle High German über, from Old High German ubiri, ubari, from Proto-Germanic *ubiri, from Proto-Indo-European *upéri.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "über is Greek ὑπέρ (hupér) – the hyper- of hyperactive – and Latin super."
+     "über is an old Indo-European preposition, *upér (“over”)."
     ],
     "pitfalls": [
      "über meaning “about” always takes the accusative: über den Film, über die Stadt.",
-     "über = above without touching (Die Lampe ist über dem Tisch); auf = on, touching (Das Buch ist auf dem Tisch)."
+     "- über = above without touching (Die Lampe ist über dem Tisch);\n- auf = on, touching (Das Buch ist auf dem Tisch)."
     ],
     "subtleties": [
      "über is a two-way preposition for place (S12): über dem Tisch (where) – über den Tisch (across, where to)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "über is related to English over."
+     },
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "über shares its Indo-European root with υπέρ (hyper-)."
+     }
     ]
    }
   },
@@ -1738,7 +1887,11 @@
     ],
     "contractions": {
      "none": "itself a merged form: in + dem"
-    }
+    },
+    "pronominalAdverb": {
+     "none": "a merged form of preposition + article: the da- / wo- forms belong to the preposition"
+    },
+    "position": "before the noun"
    },
    "role": "in + dem: in the (masc./neut. dative, where?) – im Park, im Büro; in time: im Mai, im Sommer, im Jahr 2026",
    "ref": {
@@ -1762,7 +1915,11 @@
     ],
     "contractions": {
      "none": "itself a merged form: in + das"
-    }
+    },
+    "pronominalAdverb": {
+     "none": "a merged form of preposition + article: the da- / wo- forms belong to the preposition"
+    },
+    "position": "before the noun"
    },
    "role": "in + das: into the (neut. accusative, where to?) – ins Café",
    "ref": {
@@ -1786,7 +1943,11 @@
     ],
     "contractions": {
      "none": "itself a merged form: an + dem"
-    }
+    },
+    "pronominalAdverb": {
+     "none": "a merged form of preposition + article: the da- / wo- forms belong to the preposition"
+    },
+    "position": "before the noun"
    },
    "role": "an + dem: at the, on the (masc./neut. dative) – am Bahnhof, am Fenster; in time: am Montag, am Abend, am Wochenende",
    "ref": {
@@ -1807,7 +1968,11 @@
     ],
     "contractions": {
      "none": "itself a merged form: an + das"
-    }
+    },
+    "pronominalAdverb": {
+     "none": "a merged form of preposition + article: the da- / wo- forms belong to the preposition"
+    },
+    "position": "before the noun"
    },
    "role": "an + das: to the, onto the (neut. accusative) – ans Fenster",
    "ref": {
@@ -1831,7 +1996,11 @@
     ],
     "contractions": {
      "none": "itself a merged form: zu + dem"
-    }
+    },
+    "pronominalAdverb": {
+     "none": "a merged form of preposition + article: the da- / wo- forms belong to the preposition"
+    },
+    "position": "before the noun"
    },
    "role": "zu + dem: to the (masc./neut.) – zum Arzt, zum Bahnhof",
    "ref": {
@@ -1855,7 +2024,11 @@
     ],
     "contractions": {
      "none": "itself a merged form: zu + der"
-    }
+    },
+    "pronominalAdverb": {
+     "none": "a merged form of preposition + article: the da- / wo- forms belong to the preposition"
+    },
+    "position": "before the noun"
    },
    "role": "zu + der: to the (fem.) – zur Schule, zur Post",
    "ref": {
@@ -1879,7 +2052,11 @@
     ],
     "contractions": {
      "none": "itself a merged form: bei + dem"
-    }
+    },
+    "pronominalAdverb": {
+     "none": "a merged form of preposition + article: the da- / wo- forms belong to the preposition"
+    },
+    "position": "before the noun"
    },
    "role": "bei + dem: at the (masc./neut.) – beim Arzt",
    "ref": {
@@ -1903,7 +2080,11 @@
     ],
     "contractions": {
      "none": "itself a merged form: von + dem"
-    }
+    },
+    "pronominalAdverb": {
+     "none": "a merged form of preposition + article: the da- / wo- forms belong to the preposition"
+    },
+    "position": "before the noun"
    },
    "role": "von + dem: from the, of the (masc./neut.) – vom Markt, vom Arzt",
    "ref": {
@@ -2016,7 +2197,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Russian splits it exactly like German: дома (at home) – домой (home, where to); Greek uses one phrase for both: στο σπίτι."
+     "German keeps apart being at home (zu Hause) and going home (nach Hause)."
     ],
     "pitfalls": [
      "zu Hause = where (at home); nach Hause = where to (home): Ich bin zu Hause. – Ich will nach Hause.",
@@ -2024,12 +2205,30 @@
     ],
     "subtleties": [
      "The -e of Hause is an old dative ending kept only in these phrases; elsewhere: im Haus.",
-     "The spelling zuhause (one word) is also accepted; das Zuhause is a noun: “home” as a place you belong to."
+     "The spelling zuhause (one word) is also accepted.\n\ndas Zuhause is a noun: “home” as a place you belong to."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "дома is zu Hause and домой is nach Hause – exactly the German split."
+     },
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "στο σπίτι is both zu Hause and nach Hause: Ich bin zu Hause – Ich gehe nach Hause."
+     }
     ]
    },
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -2123,19 +2322,37 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English “home” works without a preposition (go home) – German needs nach, Greek στο σπίτι, Turkish the dative eve."
+     "Going home always needs nach: Ich gehe nach Hause (never *zu Hause gehen)."
     ],
     "pitfalls": [
      "nach Hause is movement (where to); being at home is zu Hause.",
      "Not *zu Hause gehen: going home is always nach Hause gehen."
     ],
     "subtleties": [
-     "The spelling nachhause (one word) is also accepted; nach Haus (without -e) is heard in speech and songs."
+     "The spelling nachhause (one word) is also accepted.\n\nnach Haus (without -e) is heard in speech and songs."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English go home has no preposition; German needs nach: Ich gehe nach Hause."
+     },
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "Πάω (στο) σπίτι is Ich gehe nach Hause – not *zu Hause."
+     }
     ]
    },
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -2170,6 +2387,17 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Schule"
+    ],
+    "number": "singular and plural",
+    "genderCue": "most nouns in -e are feminine (die Lampe)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -2301,15 +2529,37 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek σχολή first meant “leisure” – learning was what free people did with their free time; σχολείο and Schule are the same word.",
+     "Schule goes back to a word that first meant “leisure”: learning was what free people did with their free time.",
      "On the first school day German children get a Schultüte, a big paper cone full of sweets."
     ],
     "pitfalls": [
      "in der Schule (at school – where) vs zur Schule / in die Schule (to school – where to).",
-     "False friend: das Gymnasium is an academic secondary school, not a gym."
+     "das Gymnasium is an academic secondary school.\n\nFor sport you go to the Fitnessstudio or the Turnhalle."
     ],
     "subtleties": [
      "zur Schule gehen also means “to be a pupil”: Mein Sohn geht noch zur Schule."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Schule is the same word as σχολή and σχολείο."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "das Gymnasium is not a gym but an academic secondary school."
+     },
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "γυμνάσιο is a lower secondary school; das Gymnasium is an academic school that leads to the Abitur."
+     },
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "гимназия is close to das Gymnasium: an academic secondary school."
+     }
     ]
    }
   },
@@ -2347,6 +2597,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Universität"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-tät → die",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -2432,7 +2693,7 @@
      }
     ],
     "etymology": {
-     "text": "Borrowed from Latin ūniversitās (“the whole; a community, guild”). Compare Dutch universiteit.",
+     "text": "Borrowed from Latin ūniversitās (“the whole; a community, guild”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -2482,6 +2743,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Uni"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -2611,6 +2885,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Arbeit"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -2747,14 +3034,21 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Arbeit comes from the same root as Russian работа (rabota) – and “robot”, from Czech robota (forced labour)."
+     "Arbeit first meant hardship, toil; the same old root is in Roboter, from a word for forced labour."
     ],
     "pitfalls": [
-     "At work = bei der Arbeit (colloquially auf der Arbeit; in Austria and Bavaria also in der Arbeit); to work = zur Arbeit.",
+     "- At work = bei der Arbeit (colloquially auf der Arbeit; in Austria and Bavaria also in der Arbeit);\n- to work = zur Arbeit.",
      "Plural Arbeiten only for pieces of work (Klassenarbeiten); “jobs” are Stellen or Jobs."
     ],
     "subtleties": [
      "die Arbeit is both the activity and the workplace: Ich habe viel Arbeit. – Ich bin bei der Arbeit."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "Arbeit and работа come from the same root."
+     }
     ]
    }
   },
@@ -2787,6 +3081,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Büros"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -2888,13 +3195,30 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Russian бюро and Turkish büro are the same French word; French bureau first meant a desk covered with coarse woollen cloth (bure)."
+     "Büro comes from bureau, which first meant a desk covered with coarse woollen cloth (bure)."
     ],
     "pitfalls": [
-     "Stress on the last syllable: Bü-RO; plural die Büros (with -s, so no -n in the dative: in den Büros)."
+     "Stress on the last syllable: Bü-RO.\n\nPlural die Büros (with -s, so no -n in the dative: in den Büros)."
     ],
     "subtleties": [
-     "Homeoffice looks English but is German: in English you “work from home”."
+     "Homeoffice is a German coinage from borrowed parts: im Homeoffice arbeiten."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "бюро is the same word, from bureau."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Büro is bureau, spelled the German way."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "Homeoffice looks English but is German: in English you work from home."
+     }
     ]
    }
   },
@@ -2934,6 +3258,18 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Geschäfts",
+     "des Geschäftes"
+    ],
+    "number": "singular and plural",
+    "genderCue": "most nouns with Ge- are neuter (das Geschäft)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -3048,7 +3384,7 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German gescheft, from Old High German giscaft, from Proto-West Germanic *gaskafti. Cognate with Yiddish געשעפֿט (gesheft).",
+     "text": "From Middle High German gescheft, from Old High German giscaft, from Proto-West Germanic *gaskafti.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -3107,6 +3443,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Ladens"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -3216,7 +3565,7 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German laden, lade (“board; plank; shutter; shop”), from Old High German *lado. Probably akin to German Latte, English lath; unrelated to Lade.",
+     "text": "From Middle High German laden, lade (“board; plank; shutter; shop”), from Old High German *lado. Probably akin to Latte; unrelated to Lade.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -3228,6 +3577,13 @@
     ],
     "subtleties": [
      "In Middle High German laden meant a board or a shutter – and also the shop behind it."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Laden is probably related to English lath."
+     }
     ]
    }
   },
@@ -3258,6 +3614,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Supermarkts",
+     "des Supermarktes"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -3393,6 +3763,20 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Marktes",
+     "des Markts"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -3545,6 +3929,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Restaurants"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -3639,14 +4036,26 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek εστιατόριο and German Restaurant both name the place after what it does: εστιάζω (to feast), restaurer (to restore)."
+     "Restaurant names the place after what it does: from restaurer, “to restore” (one’s strength)."
     ],
     "pitfalls": [
      "das Restaurant (neuter), plural die Restaurants.",
-     "Said the French way: the -ant is nasal, like in French."
+     "Said with a nasal vowel at the end: [ʁɛstoˈʁãː], often also [ʁɛstoˈʁaŋ]."
     ],
     "subtleties": [
-     "In Germany you usually wait to be seated only in better restaurants; in a pub you choose a free table."
+     "In Germany you usually wait to be seated only in better restaurants.\n\nIn a pub you choose a free table."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "εστιατόριο also names the place after what it does: εστιάζω."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Restaurant is said almost as in French: [ʁɛstoˈʁãː]."
+     }
     ]
    }
   },
@@ -3677,6 +4086,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Cafés"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -3774,7 +4196,7 @@
     ],
     "subtleties": [
      "Many German cafés are also bakeries or cake shops (Konditorei); a Kneipe is a pub.",
-     "In older texts Café is also found as a spelling of the drink (today Kaffee); now it means only the place."
+     "In older texts Café is also found as a spelling of the drink (today Kaffee).\n\nNow it means only the place."
     ]
    }
   },
@@ -3813,6 +4235,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Krankenhauses"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (das Haus)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -3907,7 +4340,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek νοσοκομείο (“place for tending the sick”) and German Krankenhaus (“house of the sick”) are built on the same idea."
+     "Krankenhaus is literally “house of the sick”."
     ],
     "pitfalls": [
      "das Hospital exists but sounds old-fashioned; the normal word is Krankenhaus.",
@@ -3915,6 +4348,13 @@
     ],
     "subtleties": [
      "im Krankenhaus liegen = to be in hospital as a patient; im Krankenhaus arbeiten = to work there."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "νοσοκομείο (“place for tending the sick”) is built on the same idea as Krankenhaus."
+     }
     ]
    }
   },
@@ -3946,6 +4386,17 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Apotheke"
+    ],
+    "number": "singular and plural",
+    "genderCue": "most nouns in -e are feminine (die Lampe)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -4041,14 +4492,26 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Russian аптека (apteka) is the same Greek word; Turkish says eczane."
+     "Apotheke goes back to Greek ἀποθήκη, “storehouse”."
     ],
     "pitfalls": [
-     "False friend for Greeks: German Apotheke = pharmacy (φαρμακείο), not a storeroom (αποθήκη).",
+     "die Apotheke is a pharmacy; a storeroom is ein Lager or ein Abstellraum.",
      "A Drogerie (dm, Rossmann) sells soap, cosmetics and household goods – medicines are in der Apotheke."
     ],
     "subtleties": [
-     "German pharmacies take turns staying open at night and on Sundays (Notdienst); a sign on the door says which one is open."
+     "German pharmacies take turns staying open at night and on Sundays (Notdienst).\n\nA sign on the door says which one is open."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "аптека is the same word as Apotheke."
+     },
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "αποθήκη (storeroom) is the same word – but Apotheke means φαρμακείο."
+     }
     ]
    }
   },
@@ -4087,6 +4550,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Bank"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -4184,7 +4660,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek τράπεζα means both “table” and “bank” – just as the Italian banco (bench) that gave German Bank its money sense; English bankrupt is Italian banca rotta, “broken bench”."
+     "Bank took its money sense from Italian banco, the money-changer’s bench.\n\nbankrott is banca rotta, “broken bench”."
     ],
     "pitfalls": [
      "Same singular, two plurals: die Banken (banks) – die Bänke (benches).",
@@ -4192,6 +4668,23 @@
     ],
     "subtleties": [
      "In Germany many people still pay cash; the Sparkasse is in almost every town."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "τράπεζα is table and bank – the same image as Bank, from a money-changer’s bench."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English bankrupt is the same banca rotta as German bankrott."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Bank and bankrott come from banco and banca rotta."
+     }
     ]
    }
   },
@@ -4221,6 +4714,19 @@
     ],
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Post"
+    ],
+    "number": "singular only",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a mass noun, month or name of a substance: no diminutive in use"
     }
    },
    "forms": {
@@ -4367,6 +4873,18 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Bahnhofs",
+     "des Bahnhofes"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (der Hof)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -4452,7 +4970,7 @@
       "text": "Ich verstehe nur Bahnhof.",
       "tr": "I only understand “station”.",
       "kind": "idiom",
-      "meaning": "I don’t understand a thing – it’s all Greek to me",
+      "meaning": "I don’t understand a thing",
       "register": "colloquial"
      }
     ],
@@ -4473,7 +4991,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Ich verstehe nur Bahnhof means “It’s all Greek to me”."
+     "Ich verstehe nur Bahnhof (“I only understand ‘station’”) means: I don’t understand a thing."
     ],
     "pitfalls": [
      "am Bahnhof = at the station (around it, meeting point); im Bahnhof = inside the station.",
@@ -4481,6 +4999,18 @@
     ],
     "subtleties": [
      "A bus station is der Busbahnhof (ZOB); a stop is die Haltestelle."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Ich verstehe nur Bahnhof is the English “it’s all Greek to me”."
+     },
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Ich verstehe nur Bahnhof says what μου φαίνονται κινέζικα says."
+     }
     ]
    }
   },
@@ -4518,6 +5048,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Flughafens"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (der Hafen)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -4603,11 +5144,11 @@
      }
     ],
     "etymology": {
-     "text": "From Flug (“flight”) + Hafen (“port”). Compare Icelandic flughöfn.",
+     "text": "From Flug (“flight”) + Hafen (“port”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The same picture in other languages: Greek αερολιμένας (air harbour), Turkish havalimanı (hava + liman), Russian аэропорт."
+     "Flughafen is literally “flight harbour”."
     ],
     "pitfalls": [
      "der Hafen is masculine, so der Flughafen; plural die Flughäfen.",
@@ -4615,6 +5156,23 @@
     ],
     "subtleties": [
      "Flughafen is literally “flight harbour”."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "αερολιμένας (air harbour) is the same picture as Flughafen."
+     },
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "аэропорт has the same picture: air + port (harbour)."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "airport has the same picture: Flughafen is a “flight harbour”."
+     }
     ]
    }
   },
@@ -4647,7 +5205,16 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "genitive": [
+     "der Straße"
+    ],
+    "number": "singular and plural",
+    "genderCue": "most nouns in -e are feminine (die Lampe)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": "das Sträßchen"
    },
    "forms": {
     "N;NOM;SG": "Straße",
@@ -4764,7 +5331,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Latin strata also gave English street, Italian strada – and colloquial Greek στράτα."
+     "Straße comes from Latin (via) strata, “paved road”."
     ],
     "pitfalls": [
      "auf der Straße (on the open street) – but addresses use in: Ich wohne in der Goethestraße.",
@@ -4772,6 +5339,23 @@
     ],
     "subtleties": [
      "auf der Straße stehen / sitzen can mean to be out of work or homeless."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Straße and English street come from the same strata (“paved road”)."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "Straße and strada come from the same strata (“paved road”)."
+     },
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Straße and colloquial στράτα come from the same strata (“paved road”)."
+     }
     ]
    }
   },
@@ -4809,7 +5393,18 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "genitive": [
+     "des Platzes"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": "das Plätzchen (also a word of its own: a biscuit)"
    },
    "forms": {
     "N;NOM;SG": "Platz",
@@ -4959,7 +5554,7 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German plaz, from Old French place, from Latin platēa, from Ancient Greek πλατεῖα (plateîa), short for πλατεῖα ὁδός (plateîa hodós, “broad way”). Cognate with English place.",
+     "text": "From Middle High German plaz, from Old French place, from Latin platēa, from Ancient Greek πλατεῖα (plateîa), short for πλατεῖα ὁδός (plateîa hodós, “broad way”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -4971,6 +5566,18 @@
     ],
     "subtleties": [
      "Nehmen Sie Platz! is the polite “sit down”."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Platz goes back to πλατεία, borrowed by way of other languages."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Platz is related to English place."
+     }
     ]
    }
   },
@@ -5001,6 +5608,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Parks",
+     "des Parkes"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -5135,7 +5756,18 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "genitive": [
+     "der Stadt"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": "das Städtchen"
    },
    "forms": {
     "N;NOM;SG": "Stadt",
@@ -5260,11 +5892,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German stat, from Old High German stat, from Proto-West Germanic *stadi, from Proto-Germanic *stadiz, from Proto-Indo-European *stéh₂tis. Cognate with English stead.",
+     "text": "From Middle High German stat, from Old High German stat, from Proto-West Germanic *stadi, from Proto-Germanic *stadiz, from Proto-Indo-European *stéh₂tis.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Stadt and English stead (instead, homestead) come from the same root as stehen (to stand): a town is “where one stands”."
+     "Stadt comes from the same root as stehen (to stand): a town is “where one stands”."
     ],
     "pitfalls": [
      "Plural with umlaut: die Städte; dative plural den Städten.",
@@ -5272,6 +5904,13 @@
     ],
     "subtleties": [
      "in die Stadt gehen often means “to go downtown”, even if you live in the city."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Stadt is related to English stead (as in instead, homestead)."
+     }
     ]
    }
   },
@@ -5303,7 +5942,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "genitive": [
+     "des Dorfes",
+     "des Dorfs"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": "das Dörfchen"
    },
    "forms": {
     "N;NOM;SG": "Dorf",
@@ -5392,7 +6043,7 @@
       "text": "Das sind für mich böhmische Dörfer.",
       "tr": "Those are Bohemian villages to me.",
       "kind": "idiom",
-      "meaning": "I don’t understand any of it – it’s all Greek to me",
+      "meaning": "I don’t understand any of it",
       "register": "colloquial"
      }
     ],
@@ -5409,11 +6060,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German dorf, from Old High German dorf, thorph, from Proto-West Germanic *þorp, from Proto-Germanic *þurpą. Cognate with Dutch dorp, Old English þorp.",
+     "text": "From Middle High German dorf, from Old High German dorf, thorph, from Proto-West Germanic *þorp, from Proto-Germanic *þurpą.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English place names in -thorpe (Scunthorpe) contain the same word as Dorf."
+     "Many place names end in -dorf: Düsseldorf, Dorfen, Altdorf."
     ],
     "pitfalls": [
      "Plural with umlaut: die Dörfer, dative den Dörfern.",
@@ -5421,6 +6072,13 @@
     ],
     "subtleties": [
      "Dorf can be figurative: Berlin ist doch ein Dorf! (everyone knows each other)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English place names in -thorpe (Scunthorpe) contain the same word as Dorf."
+     }
     ]
    }
   },
@@ -5461,7 +6119,21 @@
       ],
       "note": "only singular, with the article: auf dem Land, aufs Land"
      }
-    ]
+    ],
+    "genitive": [
+     "des Landes",
+     "des Lands"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
+    }
    },
    "forms": {
     "N;NOM;SG": "Land",
@@ -5606,18 +6278,30 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German lant, from Old High German lant, from Proto-West Germanic *land, from Proto-Germanic *landą, from Proto-Indo-European *lendʰ- (“land, heath”). Compare Dutch, English and Danish land.",
+     "text": "From Middle High German lant, from Old High German lant, from Proto-West Germanic *land, from Proto-Germanic *landą, from Proto-Indo-European *lendʰ- (“land, heath”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Germans call Greece Griechenland after the Latin Graeci; Greeks call it Ελλάδα, and Turks Yunanistan (from Ionia)."
+     "Germans call Greece Griechenland, after Latin Graeci."
     ],
     "pitfalls": [
-     "Country names in -land are neuter and take no article: in Griechenland, nach Deutschland. With an article: die Türkei, die Schweiz → in der Türkei, in die Türkei.",
+     "Country names in -land are neuter and take no article: in Griechenland, nach Deutschland.\n\nWith an article: die Türkei, die Schweiz → in der Türkei, in die Türkei.",
      "auf dem Land = in the countryside, not “on the country”."
     ],
     "subtleties": [
      "Plural die Länder; the poetic plural Lande survives in phrases like in deutschen Landen."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "Greece is Griechenland in German, after Graeci – not after Ελλάδα."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Land is English land."
+     }
     ]
    }
   }

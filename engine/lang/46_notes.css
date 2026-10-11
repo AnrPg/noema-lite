@@ -1,0 +1,45 @@
+/* R1 / R2 — comparison notes in sections (From your languages · Among the languages you are learning · From other languages, folded)
+   and the Markdown subset of notes and comparison-like texts (46_notes.js). Colours from the theme tokens: light and dark alike. */
+.lx-cmp{margin:12px 0;padding:10px 12px 4px;border-radius:12px;border:1px solid var(--line);border-inline-start:4px solid var(--violet);background:var(--violet-bg)}
+.lx-cmp.k-learning{border-inline-start-color:var(--info);background:var(--info-bg)}
+.lx-cmp.k-others{border-inline-start-color:var(--line);background:var(--bg2);padding-bottom:6px}
+.lx-cmp.compact{margin:8px 0;padding:6px 10px 2px;font-size:.95em}
+.lx-cmp-title{display:flex;align-items:center;gap:6px;margin:0 0 6px;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--ink2)}
+details.lx-cmp>summary.lx-cmp-title{cursor:pointer;margin:0;padding:2px 0;list-style:none}
+details.lx-cmp>summary.lx-cmp-title::-webkit-details-marker{display:none}
+details.lx-cmp>summary.lx-cmp-title::after{content:'▸';margin-inline-start:auto;font-size:14px;transition:transform .15s}
+details.lx-cmp[open]>summary.lx-cmp-title{margin-bottom:6px}
+details.lx-cmp[open]>summary.lx-cmp-title::after{transform:rotate(90deg)}
+.lx-cmp-n{font-weight:600;padding:0 7px;border-radius:999px;background:var(--card);border:1px solid var(--line);letter-spacing:0}
+.lx-cgroup{padding:8px 0;border-top:1px solid color-mix(in srgb,var(--line) 70%,transparent)}
+.lx-cmp-title+.lx-cgroup{border-top:0;padding-top:2px}
+.lx-cg-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;margin:0 0 3px}
+.lx-cg-name{font-size:15px}
+.lx-cg-sub{font-size:12px;color:var(--ink2)}
+.lx-cg-lvl{font-size:11px;font-weight:700;padding:0 6px;border-radius:6px;border:1px solid var(--line);color:var(--ink2)}
+.lx-cg-flag{font-size:1.05em;line-height:1}
+.lx-cg-more{margin:6px 0 2px;display:flex;gap:6px}
+.lx-cg-also{list-style:none;margin:4px 0 0;padding:0;display:grid;gap:4px}
+.lx-cg-also li{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px}
+.lx-rel{font-size:11.5px;font-weight:600;padding:1px 8px;border-radius:999px;white-space:nowrap;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+.lx-rel.r-same{background:var(--ok-bg);border-color:var(--ok)}
+.lx-rel.r-similar{background:var(--info-bg);border-color:var(--info)}
+.lx-rel.r-different{background:var(--violet-bg);border-color:var(--violet)}
+.lx-rel.r-new{background:var(--warn-bg);border-color:var(--warn)}
+.lx-rel.r-trap{background:var(--bad-bg);border-color:var(--bad)}
+/* the Markdown subset */
+.lx-md{line-height:1.5;overflow-wrap:anywhere}
+div.lx-md>:first-child{margin-top:0}div.lx-md>:last-child{margin-bottom:0}
+.lx-md p{margin:0 0 6px}
+.lx-md-list{margin:2px 0 6px;padding-inline-start:20px}
+.lx-md-list>li{margin:2px 0}
+.lx-md-list>li::marker{color:var(--ink2)}
+.lx-md strong{font-weight:700}
+.lx-md em{font-style:italic}
+.lx-md-ex{display:flex;gap:6px;align-items:baseline;margin:3px 0 6px;padding:3px 8px;border-radius:8px;background:color-mix(in srgb,var(--card) 75%,transparent)}
+.lx-md-list .lx-md-ex{margin:3px 0}
+.lx-md-arrow{color:var(--ink2);flex:none}
+.lx-md [lang]:not(.lx-w){unicode-bidi:isolate}
+.lx-list li>.lx-md,.lx-feeling>.lx-md{display:inline}
+.lx-list li>div.lx-md,.lx-feeling>div.lx-md{display:block;margin-top:2px}
+@media (max-width:600px){.lx-cmp{padding:8px 10px 2px}.lx-cg-name{font-size:14px}.lx-md-list{padding-inline-start:18px}}

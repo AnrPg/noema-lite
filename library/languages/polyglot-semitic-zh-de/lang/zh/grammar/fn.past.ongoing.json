@@ -322,7 +322,7 @@
   {
    "for": "ar",
    "rel": "similar",
-   "text": "Arabic كَانَ + imperfect (كَانَ يَلْعَبُ ‘he used to play / he was playing’) does with an auxiliary what Chinese does with a frame word: 以前他常常玩 / 那时候他在玩."
+   "text": "Arabic كَانَ + imperfect (كَانَ يَلْعَبُ ‘he used to play / he was playing’) does with an auxiliary what Chinese does with a frame word:\n→ 以前他常常玩 / 那时候他在玩."
   },
   {
    "for": "he",
@@ -363,6 +363,41 @@
    "for": "type:polysynthetic",
    "rel": "different",
    "text": "Polysynthetic languages tend to put ‘ongoing’ and ‘habitual’ into suffixes inside one long verb word; Chinese uses separate words (在, 着, 常常) around a verb that never changes."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "The imperfetto (giocavo) holds ‘I was playing’ and ‘I used to play’; Chinese splits them: 在玩 at a moment, 以前常常玩 as a habit. stavo giocando ~ 在玩."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "The Albanian imperfect (luaja) is both ‘was playing’ and ‘used to play’, and po luaja stresses the ongoing moment — like 在玩.\n\nFor the habit Chinese uses a past frame and the bare verb:\n→ 小时候我常常玩."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "The imperfeito (brincava) holds both meanings; estava a brincar ‘I was at playing’ ~ 在玩 — the same ‘be at’ picture as 在. costumava brincar ‘used to play’ ~ 以前常常玩."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your past has a separate form for ‘ongoing / habitual’ (an imperfect), Chinese splits that meaning: 在 + verb for what was going on at a moment, a past frame (以前, 小时候) + 常常 for a habit — and no 了 for either."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If you mark ‘was doing’ and ‘used to do’ with suffixes, Chinese has words for both: 在 before the verb for the ongoing action, a past frame (以前, 小时候) with 常常 / 总是 for the habit; 着 marks a lasting state."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "same",
+   "text": "If your language uses ‘ongoing’ particles and time frames without tense, Chinese is familiar: 那时候我在吃饭, 小时候我常常去 — and no 了 in the background."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "If your language builds the past habitual with ‘was’ + an imperfect verb, Chinese does that job with a frame word and the bare verb (以前他常常玩), and ‘was doing at that moment’ with 在:\n→ 那时候他在玩."
   }
  ],
  "seeAlso": [
@@ -374,12 +409,12 @@
   {
    "lang": "ar",
    "fn": "fn.past.ongoing",
-   "note": "Arabic كَانَ + imperfect (كَانَ يَلْعَبُ ‘he used to play / was playing’); Chinese: 以前常常玩 / 那时候在玩."
+   "note": "Arabic كَانَ + imperfect (كَانَ يَلْعَبُ ‘he used to play / was playing’); Chinese:\n→ 以前常常玩 / 那时候在玩."
   },
   {
    "lang": "he",
    "fn": "fn.past.ongoing",
-   "note": "Hebrew past of הָיָה + participle (הָיִיתִי מְשַׂחֵק ‘I used to play’); Chinese: 以前 / 小时候 + bare verb."
+   "note": "Hebrew past of הָיָה + participle (הָיִיתִי מְשַׂחֵק ‘I used to play’); Chinese:\n→ 以前 / 小时候 + bare verb."
   },
   {
    "lang": "zh",

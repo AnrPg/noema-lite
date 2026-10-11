@@ -1,0 +1,4282 @@
+{
+ "t:adj.agreement/learnerNote": {
+  "t": "Όποιος δεν έχει συμφωνία πρέπει να μάθει τις καταλήξεις του επιθέτου για κάθε ουσιαστικό· όποιος έχει συμφωνία πρέπει να μάθει να αφήνει τα επίθετα αμετάβλητα.",
+  "src": "8ff4f25c8736",
+  "by": "claude"
+ },
+ "t:adj.agreement/question": {
+  "t": "Συμφωνεί το επιθετικό επίθετο με το ουσιαστικό του, και ως προς τι;",
+  "src": "0840bf1f8e90",
+  "by": "claude"
+ },
+ "t:adj.agreement/title": {
+  "t": "Συμφωνία του επιθέτου",
+  "src": "d3e1fb7a87ab",
+  "by": "claude"
+ },
+ "t:adj.agreement/values/0/title": {
+  "t": "χωρίς συμφωνία",
+  "src": "66476bf1f091",
+  "by": "claude"
+ },
+ "t:adj.agreement/values/1/title": {
+  "t": "μόνο στην πτώση (μερική)",
+  "src": "223d66fc53de",
+  "by": "claude"
+ },
+ "t:adj.agreement/values/2/title": {
+  "t": "αριθμός και πτώση",
+  "src": "1c571ba898a4",
+  "by": "claude"
+ },
+ "t:adj.agreement/values/3/title": {
+  "t": "γένος και αριθμός",
+  "src": "a1b580993ec3",
+  "by": "claude"
+ },
+ "t:adj.agreement/values/4/title": {
+  "t": "γένος, αριθμός και πτώση",
+  "src": "9e539f506db9",
+  "by": "claude"
+ },
+ "t:adj.agreement/values/5/title": {
+  "t": "ονοματική τάξη",
+  "src": "7c68fda1751b",
+  "by": "claude"
+ },
+ "t:adj.comparativeForm/learnerNote": {
+  "t": "Πρέπει να μάθεις τις καταλήξεις του συγκριτικού (και τις ανώμαλες) ή να φτιάχνεις συγκριτικό με μια λέξη βαθμού.",
+  "src": "e77b7911a50b",
+  "by": "claude"
+ },
+ "t:adj.comparativeForm/question": {
+  "t": "Σχηματίζεται το «μεγαλύτερος» με πρόσφυμα ή με ξεχωριστή λέξη («πιο μεγάλος»);",
+  "src": "2d6e137f01a9",
+  "by": "claude"
+ },
+ "t:adj.comparativeForm/title": {
+  "t": "Συγκριτικός βαθμός των επιθέτων",
+  "src": "4ba41a669e1b",
+  "by": "claude"
+ },
+ "t:adj.comparativeForm/values/0/title": {
+  "t": "με πρόσφυμα (groß → größer)",
+  "src": "c97545a6e5c7",
+  "by": "claude"
+ },
+ "t:adj.comparativeForm/values/1/title": {
+  "t": "με ξεχωριστή λέξη (πιο μεγάλος)",
+  "src": "0e698900d8a8",
+  "by": "claude"
+ },
+ "t:adj.comparativeForm/values/2/title": {
+  "t": "και τα δύο, ανάλογα με το επίθετο",
+  "src": "c9ad3e2d9f09",
+  "by": "claude"
+ },
+ "t:adj.predicative/learnerNote": {
+  "t": "Πρέπει να μάθεις να χρησιμοποιείς τα επίθετα σαν ρήματα (με χρόνο και άρνηση, χωρίς «είμαι»), ή να προσθέτεις συνδετικό ρήμα.",
+  "src": "6ccfe2cdd9b2",
+  "by": "claude"
+ },
+ "t:adj.predicative/question": {
+  "t": "Συμπεριφέρεται ένα κατηγορηματικό επίθετο («το σπίτι είναι μεγάλο») σαν ρήμα;",
+  "src": "2bbb3a7d7d13",
+  "by": "claude"
+ },
+ "t:adj.predicative/title": {
+  "t": "Επίθετα ως ρήματα",
+  "src": "f6002ea61023",
+  "by": "claude"
+ },
+ "t:adj.predicative/values/0/title": {
+  "t": "ρηματικά: τα επίθετα κλίνονται / λειτουργούν ως κατηγορούμενο σαν ρήματα, χωρίς συνδετικό",
+  "src": "498a37f28aff",
+  "by": "claude"
+ },
+ "t:adj.predicative/values/1/title": {
+  "t": "μη ρηματικά: τα επίθετα χρειάζονται συνδετικό («είναι»)",
+  "src": "a7c66052f23d",
+  "by": "claude"
+ },
+ "t:adj.predicative/values/2/title": {
+  "t": "μικτά",
+  "src": "3f8fee624f43",
+  "by": "claude"
+ },
+ "t:lex.carryVerbs/learnerNote": {
+  "t": "Πρέπει να διαλέγεις το ρήμα της μεταφοράς ανάλογα με το πώς κουβαλιέται το πράγμα.",
+  "src": "995d1ec9e26d",
+  "by": "claude"
+ },
+ "t:lex.carryVerbs/question": {
+  "t": "Υπάρχει ένα βασικό ρήμα «κουβαλώ», ή πρέπει να διαλέξεις τον τρόπο (στο χέρι, στην πλάτη, στον ώμο, στην αγκαλιά);",
+  "src": "f21a5735d738",
+  "by": "claude"
+ },
+ "t:lex.carryVerbs/title": {
+  "t": "Ρήματα της μεταφοράς",
+  "src": "fed6008b2b6a",
+  "by": "claude"
+ },
+ "t:lex.carryVerbs/values/0/title": {
+  "t": "ένα γενικό ρήμα, ο τρόπος προαιρετικός",
+  "src": "c816a57975b9",
+  "by": "claude"
+ },
+ "t:lex.carryVerbs/values/1/title": {
+  "t": "ο τρόπος πρέπει να επιλεγεί",
+  "src": "f8a2511acf68",
+  "by": "claude"
+ },
+ "t:lex.cutVerbs/learnerNote": {
+  "t": "Πρέπει να διαλέγεις το ρήμα του κοψίματος ανάλογα με το εργαλείο και τον τρόπο.",
+  "src": "f0794a850da7",
+  "by": "claude"
+ },
+ "t:lex.cutVerbs/question": {
+  "t": "Υπάρχει γενικό «κόβω», ή πρέπει να διαλέξεις το εργαλείο (μαχαίρι ή ψαλίδι);",
+  "src": "a16cf5794783",
+  "by": "claude"
+ },
+ "t:lex.cutVerbs/title": {
+  "t": "Ρήματα του κοψίματος",
+  "src": "5cb5dc81191d",
+  "by": "claude"
+ },
+ "t:lex.cutVerbs/values/0/title": {
+  "t": "ένα γενικό ρήμα «κόβω»",
+  "src": "233af6310556",
+  "by": "claude"
+ },
+ "t:lex.cutVerbs/values/1/title": {
+  "t": "διαφορετικά ρήματα ανάλογα με το εργαλείο (χωρίς γενικό ρήμα)",
+  "src": "6969087be6be",
+  "by": "claude"
+ },
+ "t:lex.knowVerbs/learnerNote": {
+  "t": "Πρέπει να διαλέγεις το ρήμα ανάλογα με το τι ξέρεις (γεγονός ή πρόσωπο / τόπο), ή να μάθεις ότι ένα ρήμα καλύπτει και τα δύο.",
+  "src": "1a88fb6919ba",
+  "by": "claude"
+ },
+ "t:lex.knowVerbs/question": {
+  "t": "Είναι το «ξέρω ένα γεγονός» και το «γνωρίζω ένα πρόσωπο» διαφορετικά ρήματα;",
+  "src": "238688728491",
+  "by": "claude"
+ },
+ "t:lex.knowVerbs/title": {
+  "t": "Ρήματα της γνώσης",
+  "src": "05245c69683f",
+  "by": "claude"
+ },
+ "t:lex.knowVerbs/values/0/title": {
+  "t": "ένα ρήμα",
+  "src": "c537debadc0b",
+  "by": "claude"
+ },
+ "t:lex.knowVerbs/values/1/title": {
+  "t": "δύο ρήματα (wissen / kennen)",
+  "src": "a62b60b2af6f",
+  "by": "claude"
+ },
+ "t:lex.siblingAge/learnerNote": {
+  "t": "Πρέπει να ξέρεις (και να λες) πάντα αν ένας αδελφός ή μια αδελφή είναι μεγαλύτερος ή μικρότερος.",
+  "src": "db391e15cbb9",
+  "by": "claude"
+ },
+ "t:lex.siblingAge/question": {
+  "t": "Ξεχωρίζουν οι βασικές λέξεις για τα αδέλφια τα μεγαλύτερα από τα μικρότερα;",
+  "src": "f5275d9101a2",
+  "by": "claude"
+ },
+ "t:lex.siblingAge/title": {
+  "t": "Συγγένεια: μεγαλύτερα και μικρότερα αδέλφια",
+  "src": "60c1d468b0d9",
+  "by": "claude"
+ },
+ "t:lex.siblingAge/values/0/title": {
+  "t": "όχι",
+  "src": "9390298f3fb0",
+  "by": "claude"
+ },
+ "t:lex.siblingAge/values/1/title": {
+  "t": "ναι",
+  "src": "8a798890fe93",
+  "by": "claude"
+ },
+ "t:lex.uncleTerms/learnerNote": {
+  "t": "Πρέπει να μάθεις ξεχωριστές λέξεις ανάλογα με την πλευρά της οικογένειας (και καμιά φορά ανάλογα με τη σχετική ηλικία), ή να μάθεις ότι μία λέξη καλύπτει πολλούς συγγενείς.",
+  "src": "be58ce0cf255",
+  "by": "claude"
+ },
+ "t:lex.uncleTerms/question": {
+  "t": "Πώς ονομάζονται οι αδελφοί του πατέρα και της μητέρας;",
+  "src": "3107bce6604b",
+  "by": "claude"
+ },
+ "t:lex.uncleTerms/title": {
+  "t": "Συγγένεια: θείοι",
+  "src": "e6d23d590c69",
+  "by": "claude"
+ },
+ "t:lex.uncleTerms/values/0/title": {
+  "t": "μία λέξη και για τους δύο θείους (αδελφό του πατέρα και της μητέρας), διαφορετική από τον «πατέρα»",
+  "src": "aadaaab62bc1",
+  "by": "claude"
+ },
+ "t:lex.uncleTerms/values/1/title": {
+  "t": "διαφορετικές λέξεις για τον αδελφό του πατέρα και τον αδελφό της μητέρας",
+  "src": "eba785837007",
+  "by": "claude"
+ },
+ "t:lex.uncleTerms/values/2/title": {
+  "t": "ο αδελφός του πατέρα λέγεται «πατέρας» (μεγάλος / μικρός πατέρας), ο αδελφός της μητέρας διαφορετικά",
+  "src": "50425b187dea",
+  "by": "claude"
+ },
+ "t:lex.uncleTerms/values/3/title": {
+  "t": "όλοι οι θείοι λέγονται «πατέρας»",
+  "src": "ee60e7692e95",
+  "by": "claude"
+ },
+ "t:lex.wearVerbs/learnerNote": {
+  "t": "Πρέπει να διαλέγεις το ρήμα του ντυσίματος ανάλογα με το αντικείμενο (πουκάμισο, παπούτσια, καπέλο, γυαλιά, δαχτυλίδι).",
+  "src": "9becb80c35bd",
+  "by": "claude"
+ },
+ "t:lex.wearVerbs/question": {
+  "t": "Υπάρχει ένα ρήμα για το «φοράω / βάζω» για όλα, ή πολλά ανάλογα με το μέρος του σώματος ή το αντικείμενο;",
+  "src": "fb47d3b2edc5",
+  "by": "claude"
+ },
+ "t:lex.wearVerbs/title": {
+  "t": "Ρήματα του ντυσίματος",
+  "src": "3aabd2e8ec58",
+  "by": "claude"
+ },
+ "t:lex.wearVerbs/values/0/title": {
+  "t": "ένα γενικό ρήμα",
+  "src": "8be3c99af414",
+  "by": "claude"
+ },
+ "t:lex.wearVerbs/values/1/title": {
+  "t": "δύο (ρούχα και αξεσουάρ)",
+  "src": "1c77425e983e",
+  "by": "claude"
+ },
+ "t:lex.wearVerbs/values/2/title": {
+  "t": "πολλά ανάλογα με το μέρος του σώματος (σώμα, πόδια, κεφάλι, χέρια …)",
+  "src": "9e90f8edc085",
+  "by": "claude"
+ },
+ "t:morph.affixation/learnerNote": {
+  "t": "Όποιος έρχεται από επιθηματική γλώσσα πρέπει να μάθει να κοιτάζει στην αρχή της λέξης για τη γραμματική (και αντίστροφα), και να βρίσκει το θέμα πίσω από τα προσφύματα.",
+  "src": "9ddc73040e1f",
+  "by": "claude"
+ },
+ "t:morph.affixation/question": {
+  "t": "Εκφράζεται η κλίση κυρίως με προθήματα ή με επιθήματα;",
+  "src": "9969356235cd",
+  "by": "claude"
+ },
+ "t:morph.affixation/title": {
+  "t": "Προθήματα ή επιθήματα",
+  "src": "a2a1f7c54bb1",
+  "by": "claude"
+ },
+ "t:morph.affixation/values/0/title": {
+  "t": "λίγα κλιτικά προσφύματα",
+  "src": "48642bd19e23",
+  "by": "claude"
+ },
+ "t:morph.affixation/values/1/title": {
+  "t": "έντονα επιθηματική",
+  "src": "b410e65d9d5c",
+  "by": "claude"
+ },
+ "t:morph.affixation/values/2/title": {
+  "t": "ελαφρά επιθηματική",
+  "src": "bf11417c8795",
+  "by": "claude"
+ },
+ "t:morph.affixation/values/3/title": {
+  "t": "προθήματα και επιθήματα εξίσου",
+  "src": "16157c365333",
+  "by": "claude"
+ },
+ "t:morph.affixation/values/4/title": {
+  "t": "ελαφρά προθηματική",
+  "src": "87117791b8fd",
+  "by": "claude"
+ },
+ "t:morph.affixation/values/5/title": {
+  "t": "έντονα προθηματική",
+  "src": "303e9d72dad2",
+  "by": "claude"
+ },
+ "t:morph.compounding/learnerNote": {
+  "t": "Όποιος έρχεται από γλώσσα με σύνθεση πρέπει να μάθει να εκφράζει έννοιες με φράσεις με προθέσεις· όποιος έρχεται από γλώσσα με φράσεις πρέπει να μάθει να φτιάχνει και να αναλύει μακριά σύνθετα.",
+  "src": "ebc3fec9b17f",
+  "by": "claude"
+ },
+ "t:morph.compounding/question": {
+  "t": "Πόσο ελεύθερα ενώνονται λέξεις σε σύνθετες λέξεις;",
+  "src": "c3bfe28e1383",
+  "by": "claude"
+ },
+ "t:morph.compounding/title": {
+  "t": "Σύνθεση λέξεων",
+  "src": "f89c67a4fccb",
+  "by": "claude"
+ },
+ "t:morph.compounding/values/0/title": {
+  "t": "περιορισμένα: οι νέες έννοιες κυρίως με φράσεις (Ο του Ο) ή με παραγωγή",
+  "src": "7e37bd4957d5",
+  "by": "claude"
+ },
+ "t:morph.compounding/values/1/title": {
+  "t": "συχνά: τα σύνθετα ουσιαστικό + ουσιαστικό είναι συνηθισμένα",
+  "src": "825e1e9a704f",
+  "by": "claude"
+ },
+ "t:morph.compounding/values/2/title": {
+  "t": "παντού: ο κύριος τρόπος σχηματισμού λέξεων· μακριά σύνθετα",
+  "src": "a445df7c5b3b",
+  "by": "claude"
+ },
+ "t:morph.fusion/learnerNote": {
+  "t": "Πρέπει να προσαρμόσεις το μέγεθος της μονάδας που απομνημονεύεις: ολόκληρους κλιτούς τύπους στις συγχωνευτικές γλώσσες, πρόσφυμα προς πρόσφυμα στις συγκολλητικές, ξεχωριστές λέξεις στις απομονωτικές.",
+  "src": "f3dae75702c4",
+  "by": "claude"
+ },
+ "t:morph.fusion/question": {
+  "t": "Πόσο σφιχτά «πακετάρονται» οι γραμματικές σημασίες μέσα στις λέξεις (η λεπτομέρεια πίσω από τον μορφολογικό τύπο);",
+  "src": "1592b991c595",
+  "by": "claude"
+ },
+ "t:morph.fusion/title": {
+  "t": "Βαθμός σύντηξης",
+  "src": "2a09b03035f4",
+  "by": "claude"
+ },
+ "t:morph.fusion/values/0/title": {
+  "t": "απομονωτικός: πρακτικά καμία κλίση",
+  "src": "e2cc4af0ce55",
+  "by": "claude"
+ },
+ "t:morph.fusion/values/1/title": {
+  "t": "κυρίως απομονωτικός, με κάποια παραγωγικά προσφύματα ή προσφύματα φωνής, αλλά χωρίς κλίση για πτώση, πρόσωπο ή χρόνο",
+  "src": "edaa41b85e88",
+  "by": "claude"
+ },
+ "t:morph.fusion/values/2/title": {
+  "t": "συγκολλητικός: διαφανείς αλυσίδες προσφυμάτων",
+  "src": "d275194a6df0",
+  "by": "claude"
+ },
+ "t:morph.fusion/values/3/title": {
+  "t": "συγκολλητικός, με αξιοσημείωτη σύντηξη και εναλλαγές του θέματος",
+  "src": "a9606001a914",
+  "by": "claude"
+ },
+ "t:morph.fusion/values/4/title": {
+  "t": "συγχωνευτικές καταλήξεις, αλλά λίγες· μεγάλο μέρος της γραμματικής με τη σειρά των λέξεων και με βοηθητικά ρήματα",
+  "src": "8d25852a4249",
+  "by": "claude"
+ },
+ "t:morph.fusion/values/5/title": {
+  "t": "συγχωνευτικός: πλούσια κλιτικά παραδείγματα με «πολυσήμαντες» καταλήξεις",
+  "src": "117d638e4a5d",
+  "by": "claude"
+ },
+ "t:morph.fusion/values/6/title": {
+  "t": "πολυσυνθετικός: πολλά μορφήματα ανά λέξη, ενσωμάτωση",
+  "src": "40db83d08946",
+  "by": "claude"
+ },
+ "t:morph.incorporation/learnerNote": {
+  "t": "Όποιος δεν έχει ενσωμάτωση πρέπει να μάθει να αναγνωρίζει ένα ουσιαστικό-αντικείμενο μέσα σε μια ρηματική λέξη και να φτιάχνει τέτοια ρήματα.",
+  "src": "fdf0ff6ab511",
+  "by": "claude"
+ },
+ "t:morph.incorporation/question": {
+  "t": "Μπορεί ένα ουσιαστικό (συνήθως το αντικείμενο) να χτιστεί μέσα στη ρηματική λέξη;",
+  "src": "d5a549f711ed",
+  "by": "claude"
+ },
+ "t:morph.incorporation/title": {
+  "t": "Ενσωμάτωση ουσιαστικού",
+  "src": "3e360f8f483c",
+  "by": "claude"
+ },
+ "t:morph.incorporation/values/0/title": {
+  "t": "όχι",
+  "src": "9390298f3fb0",
+  "by": "claude"
+ },
+ "t:morph.incorporation/values/1/title": {
+  "t": "περιορισμένα ή λεξικοποιημένα",
+  "src": "ec9da1501b83",
+  "by": "claude"
+ },
+ "t:morph.incorporation/values/2/title": {
+  "t": "παραγωγικά",
+  "src": "60c394d0e768",
+  "by": "claude"
+ },
+ "t:morph.reduplication/learnerNote": {
+  "t": "Όποιος δεν έχει αναδιπλασιασμό πρέπει να μάθει ότι η επανάληψη μιας λέξης ή της πρώτης συλλαβής της αλλάζει τη σημασία της (πληθυντικός, ένταση, επανάληψη, όψη).",
+  "src": "ee5f8ff5bb8f",
+  "by": "claude"
+ },
+ "t:morph.reduplication/question": {
+  "t": "Είναι η (πλήρης ή μερική) επανάληψη μιας λέξης ή συλλαβής παραγωγική γραμματική διαδικασία;",
+  "src": "c465ef88dd7e",
+  "by": "claude"
+ },
+ "t:morph.reduplication/title": {
+  "t": "Αναδιπλασιασμός",
+  "src": "7823c337c6f9",
+  "by": "claude"
+ },
+ "t:morph.reduplication/values/0/title": {
+  "t": "χωρίς παραγωγικό αναδιπλασιασμό",
+  "src": "19ae78247747",
+  "by": "claude"
+ },
+ "t:morph.reduplication/values/1/title": {
+  "t": "μόνο πλήρης αναδιπλασιασμός",
+  "src": "83d88fcdb8d0",
+  "by": "claude"
+ },
+ "t:morph.reduplication/values/2/title": {
+  "t": "παραγωγικός μερικός (και συνήθως πλήρης) αναδιπλασιασμός",
+  "src": "8ccc7bc2f65c",
+  "by": "claude"
+ },
+ "t:morph.rootPattern/learnerNote": {
+  "t": "Πρέπει να μάθεις να βλέπεις τη συμφωνική ρίζα πίσω από μια λέξη, να «διαβάζεις» σημασίες από το μοτίβο της και να ψάχνεις λέξεις στο λεξικό με βάση τη ρίζα.",
+  "src": "6a70aadbaa9a",
+  "by": "claude"
+ },
+ "t:morph.rootPattern/question": {
+  "t": "Χτίζονται οι λέξεις βάζοντας φωνηεντικά μοτίβα μέσα σε συμφωνικές ρίζες (k-t-b → kataba, kitāb, maktab);",
+  "src": "4bb230c78c22",
+  "by": "claude"
+ },
+ "t:morph.rootPattern/title": {
+  "t": "Μορφολογία ρίζας και μοτίβου",
+  "src": "3952b3382693",
+  "by": "claude"
+ },
+ "t:morph.rootPattern/values/0/title": {
+  "t": "όχι",
+  "src": "9390298f3fb0",
+  "by": "claude"
+ },
+ "t:morph.rootPattern/values/1/title": {
+  "t": "ναι: συμφωνικές ρίζες και μοτίβα",
+  "src": "cd479c0627d3",
+  "by": "claude"
+ },
+ "t:morph.stemChange/learnerNote": {
+  "t": "Όποιος έρχεται από γλώσσα με αμετάβλητα θέματα πρέπει να μάθει πολλά θέματα για μία λέξη και τους κανόνες ή τους καταλόγους που τα ορίζουν.",
+  "src": "4556f72f3dcf",
+  "by": "claude"
+ },
+ "t:morph.stemChange/question": {
+  "t": "Αλλάζουν τα θέματα εσωτερικά (εναλλαγή φωνηέντων, μεταπτωτική εναλλαγή, μεταφωνία, εναλλαγή συμφώνων) για να δηλώσουν γραμματική;",
+  "src": "fa516fdb542e",
+  "by": "claude"
+ },
+ "t:morph.stemChange/title": {
+  "t": "Αλλαγές του θέματος",
+  "src": "167b41ccc928",
+  "by": "claude"
+ },
+ "t:morph.stemChange/values/0/title": {
+  "t": "όχι ή σχεδόν καθόλου",
+  "src": "15ed2a48156f",
+  "by": "claude"
+ },
+ "t:morph.stemChange/values/1/title": {
+  "t": "σε μέρος του λεξιλογίου (ανώμαλα ρήματα, ορισμένοι πληθυντικοί)",
+  "src": "04cda2f0cbc1",
+  "by": "claude"
+ },
+ "t:morph.stemChange/values/2/title": {
+  "t": "παντού: ένας κύριος τρόπος κλίσης",
+  "src": "787baeb807db",
+  "by": "claude"
+ },
+ "t:morph.type/learnerNote": {
+  "t": "Όποιος έρχεται από άλλον τύπο πρέπει να αλλάξει τον τρόπο που σκέφτεται τη λέξη: οι απομονωτικές γλώσσες θέλουν σειρά λέξεων και μόρια, οι συγκολλητικές μακριές αλυσίδες επιθημάτων, οι συγχωνευτικές πίνακες κλίσης, οι πολυσυνθετικές ολόκληρες προτάσεις χτισμένες μέσα στο ρήμα.",
+  "src": "a11e334ae312",
+  "by": "claude"
+ },
+ "t:morph.type/question": {
+  "t": "Ποιος μορφολογικός τύπος κυριαρχεί στη γλώσσα;",
+  "src": "3f5d50904cc3",
+  "by": "claude"
+ },
+ "t:morph.type/title": {
+  "t": "Μορφολογικός τύπος",
+  "src": "0a29a23d48c4",
+  "by": "claude"
+ },
+ "t:morph.type/values/0/title": {
+  "t": "απομονωτικός: οι λέξεις δεν αλλάζουν· η γραμματική με ξεχωριστές λέξεις και με τη σειρά τους",
+  "src": "a3eaf3f95c47",
+  "by": "claude"
+ },
+ "t:morph.type/values/1/title": {
+  "t": "συγκολλητικός: αλυσίδες προσφυμάτων, μία σημασία ανά πρόσφυμα",
+  "src": "80807b129e2e",
+  "by": "claude"
+ },
+ "t:morph.type/values/2/title": {
+  "t": "συγχωνευτικός: καταλήξεις που φέρουν πολλές σημασίες μαζί, αλλαγές του θέματος",
+  "src": "6ae83388bac2",
+  "by": "claude"
+ },
+ "t:morph.type/values/3/title": {
+  "t": "πολυσυνθετικός: μία μακριά ρηματική λέξη μπορεί να εκφράσει ολόκληρη πρόταση",
+  "src": "cbfa4b3a824d",
+  "by": "claude"
+ },
+ "t:nom.alienability/learnerNote": {
+  "t": "Πρέπει να μάθεις ποια ουσιαστικά ή ποιες σχέσεις παίρνουν ποια κτητική δομή, π.χ. μέρη του σώματος και συγγενείς σε αντίθεση με τα συνηθισμένα αντικείμενα.",
+  "src": "9b496c4c5984",
+  "by": "claude"
+ },
+ "t:nom.alienability/question": {
+  "t": "Εξαρτάται ο τρόπος που λες «το Χ μου» από το είδος του πράγματος ή της σχέσης κτήσης;",
+  "src": "f0c7593b73b0",
+  "by": "claude"
+ },
+ "t:nom.alienability/title": {
+  "t": "Αναπαλλοτρίωτη και παλλοτριωτή κτήση",
+  "src": "92b5156571e3",
+  "by": "claude"
+ },
+ "t:nom.alienability/values/0/title": {
+  "t": "χωρίς ταξινόμηση της κτήσης",
+  "src": "0e32f8f1405e",
+  "by": "claude"
+ },
+ "t:nom.alienability/values/1/title": {
+  "t": "αναπαλλοτρίωτη (μέρη του σώματος, συγγενείς) και παλλοτριωτή κτήση",
+  "src": "0c331d2572db",
+  "by": "claude"
+ },
+ "t:nom.alienability/values/2/title": {
+  "t": "τάξεις a / o που επιλέγονται από τη σχέση κατόχου και κτήματος",
+  "src": "85d3f07da9b8",
+  "by": "claude"
+ },
+ "t:nom.caseMarking/learnerNote": {
+  "t": "Πρέπει να μάθεις πού φαίνεται η πτώση: στο τέλος του ουσιαστικού, στην αρχή του ή σε μια μικρή λέξη κολλημένη σε ολόκληρη τη φράση.",
+  "src": "867bb3ff261f",
+  "by": "claude"
+ },
+ "t:nom.caseMarking/question": {
+  "t": "Με ποια μέσα σημειώνονται οι σχέσεις πτώσης στην ονοματική φράση;",
+  "src": "68d1199af4fb",
+  "by": "claude"
+ },
+ "t:nom.caseMarking/title": {
+  "t": "Πώς σημειώνεται η πτώση",
+  "src": "cd7efcf130d4",
+  "by": "claude"
+ },
+ "t:nom.caseMarking/values/0/title": {
+  "t": "χωρίς πτωτικά προσφύματα ή πτωτικά κλιτικά",
+  "src": "9c027c88fbad",
+  "by": "claude"
+ },
+ "t:nom.caseMarking/values/1/title": {
+  "t": "πτωτικά επιθήματα",
+  "src": "0b725b193c6f",
+  "by": "claude"
+ },
+ "t:nom.caseMarking/values/2/title": {
+  "t": "πτωτικά προθήματα",
+  "src": "8f60f8f85911",
+  "by": "claude"
+ },
+ "t:nom.caseMarking/values/3/title": {
+  "t": "μεταθετικά πτωτικά κλιτικά / μόρια",
+  "src": "e89311ab4eaf",
+  "by": "claude"
+ },
+ "t:nom.caseMarking/values/4/title": {
+  "t": "προθετικά πτωτικά κλιτικά / μόρια",
+  "src": "b99787d95afe",
+  "by": "claude"
+ },
+ "t:nom.caseMarking/values/5/title": {
+  "t": "μικτά",
+  "src": "3f8fee624f43",
+  "by": "claude"
+ },
+ "t:nom.caseSyncretism/learnerNote": {
+  "t": "Πρέπει να μάθεις ότι μία κατάληξη μπορεί να αντιστοιχεί σε πολλές πτώσεις και να καταλαβαίνεις τον ρόλο από τα συμφραζόμενα, τη συμφωνία ή τις προθέσεις.",
+  "src": "3af19ecf9d89",
+  "by": "claude"
+ },
+ "t:nom.caseSyncretism/question": {
+  "t": "Έχουν διαφορετικές πτώσεις την ίδια μορφή;",
+  "src": "fdce006c5274",
+  "by": "claude"
+ },
+ "t:nom.caseSyncretism/title": {
+  "t": "Συγκρητισμός πτώσεων",
+  "src": "7304de5b892f",
+  "by": "claude"
+ },
+ "t:nom.caseSyncretism/values/0/title": {
+  "t": "χωρίς σήμανση πτώσης",
+  "src": "47a14e450591",
+  "by": "claude"
+ },
+ "t:nom.caseSyncretism/values/1/title": {
+  "t": "χωρίς συγκρητισμό: κάθε πτώση έχει τη δική της μορφή",
+  "src": "775416587a2c",
+  "by": "claude"
+ },
+ "t:nom.caseSyncretism/values/2/title": {
+  "t": "μόνο ανάμεσα στις βασικές πτώσεις (π.χ. ονομαστική = αιτιατική)",
+  "src": "05b4e506128e",
+  "by": "claude"
+ },
+ "t:nom.caseSyncretism/values/3/title": {
+  "t": "και σε άλλες πτώσεις (π.χ. γενική = δοτική)",
+  "src": "9497a09af09c",
+  "by": "claude"
+ },
+ "t:nom.cases/learnerNote": {
+  "t": "Όποιος δεν έχει πτώσεις πρέπει να μάθει να αλλάζει την κατάληξη του ουσιαστικού ανάλογα με τον ρόλο του στην πρόταση, συχνά μαζί με προθέσεις· όποιος έχει πτώσεις πρέπει να μάθει να εκφράζει αυτούς τους ρόλους με τη σειρά των λέξεων και με προθέσεις.",
+  "src": "d17335830689",
+  "by": "claude"
+ },
+ "t:nom.cases/question": {
+  "t": "Πόσες μορφολογικές πτώσεις έχουν τα ουσιαστικά;",
+  "src": "d5f94b70cf83",
+  "by": "claude"
+ },
+ "t:nom.cases/title": {
+  "t": "Αριθμός πτώσεων",
+  "src": "60dc8fc15999",
+  "by": "claude"
+ },
+ "t:nom.cases/values/0/title": {
+  "t": "κανένα",
+  "src": "140bedbf9c3f",
+  "by": "claude"
+ },
+ "t:nom.cases/values/1/title": {
+  "t": "2",
+  "src": "d4735e3a265e",
+  "by": "claude"
+ },
+ "t:nom.cases/values/2/title": {
+  "t": "3",
+  "src": "4e07408562be",
+  "by": "claude"
+ },
+ "t:nom.cases/values/3/title": {
+  "t": "4",
+  "src": "4b227777d4dd",
+  "by": "claude"
+ },
+ "t:nom.cases/values/4/title": {
+  "t": "5",
+  "src": "ef2d127de37b",
+  "by": "claude"
+ },
+ "t:nom.cases/values/5/title": {
+  "t": "6-7",
+  "src": "191b402adf11",
+  "by": "claude"
+ },
+ "t:nom.cases/values/6/title": {
+  "t": "8-9",
+  "src": "16c4b6b5193b",
+  "by": "claude"
+ },
+ "t:nom.cases/values/7/title": {
+  "t": "10 ή περισσότερες",
+  "src": "5fd179bbedbe",
+  "by": "claude"
+ },
+ "t:nom.classifiers/learnerNote": {
+  "t": "Όποιος δεν έχει ταξινομητές στη γλώσσα του πρέπει να μάθει τον σωστό ταξινομητή για κάθε ουσιαστικό· όποιος τους έχει πρέπει να μάθει να μετρά τα ουσιαστικά απευθείας.",
+  "src": "a1019f06f39b",
+  "by": "claude"
+ },
+ "t:nom.classifiers/question": {
+  "t": "Πρέπει να μπαίνει ταξινομητής ανάμεσα στο αριθμητικό και το ουσιαστικό («τρία ΤΑΞ βιβλία»);",
+  "src": "a07f0742d140",
+  "by": "claude"
+ },
+ "t:nom.classifiers/title": {
+  "t": "Ταξινομητές",
+  "src": "ccf331bc3be5",
+  "by": "claude"
+ },
+ "t:nom.classifiers/values/0/title": {
+  "t": "όχι",
+  "src": "9390298f3fb0",
+  "by": "claude"
+ },
+ "t:nom.classifiers/values/1/title": {
+  "t": "προαιρετικά",
+  "src": "ec91fdd9256c",
+  "by": "claude"
+ },
+ "t:nom.classifiers/values/2/title": {
+  "t": "υποχρεωτικά",
+  "src": "b67cb6216c03",
+  "by": "claude"
+ },
+ "t:nom.constructState/learnerNote": {
+  "t": "Πρέπει να μάθεις να αλλάζεις ή να επεκτείνεις το πρώτο ουσιαστικό της φράσης, αντί να σημειώνεις μόνο τον κάτοχο.",
+  "src": "c481b4da3c0c",
+  "by": "claude"
+ },
+ "t:nom.constructState/question": {
+  "t": "Παίρνει ένα ουσιαστικό ειδική μορφή ή συνδετικό στοιχείο όταν ακολουθείται από κάτοχο ή προσδιορισμό;",
+  "src": "cff871302772",
+  "by": "claude"
+ },
+ "t:nom.constructState/title": {
+  "t": "Κατάσταση συνάφειας και συνδετικά στοιχεία",
+  "src": "71b8db9046ec",
+  "by": "claude"
+ },
+ "t:nom.constructState/values/0/title": {
+  "t": "όχι",
+  "src": "9390298f3fb0",
+  "by": "claude"
+ },
+ "t:nom.constructState/values/1/title": {
+  "t": "κατάσταση συνάφειας: το κύριο ουσιαστικό παίρνει ειδική δεμένη μορφή («σπίτι-του ο-άντρας»)",
+  "src": "442a7e186239",
+  "by": "claude"
+ },
+ "t:nom.constructState/values/2/title": {
+  "t": "εζάφε: ένα συνδετικό φωνήεν μετά το κύριο ουσιαστικό, πριν από τους προσδιορισμούς του",
+  "src": "fb63b7879b53",
+  "by": "claude"
+ },
+ "t:nom.constructState/values/3/title": {
+  "t": "ένα συνδετικό μόριο ανάμεσα στον προσδιορισμό και το ουσιαστικό",
+  "src": "fc70a1ec6def",
+  "by": "claude"
+ },
+ "t:nom.definiteArticle/learnerNote": {
+  "t": "Όποιος δεν έχει άρθρα πρέπει να μάθει να αποφασίζει για την οριστικότητα σε κάθε ονοματική φράση· όποιος έχει άρθρα πρέπει να μάθει να την εκφράζει με τα συμφραζόμενα, τη σειρά των λέξεων ή τις δεικτικές λέξεις.",
+  "src": "7e15652f3940",
+  "by": "claude"
+ },
+ "t:nom.definiteArticle/question": {
+  "t": "Υπάρχει οριστικό άρθρο, και πού μπαίνει;",
+  "src": "27e6f831fc07",
+  "by": "claude"
+ },
+ "t:nom.definiteArticle/title": {
+  "t": "Οριστικό άρθρο",
+  "src": "606f5a2a4f8f",
+  "by": "claude"
+ },
+ "t:nom.definiteArticle/values/0/title": {
+  "t": "κανένα",
+  "src": "140bedbf9c3f",
+  "by": "claude"
+ },
+ "t:nom.definiteArticle/values/1/title": {
+  "t": "ξεχωριστή λέξη πριν από το ουσιαστικό",
+  "src": "eb1eb84b1f25",
+  "by": "claude"
+ },
+ "t:nom.definiteArticle/values/2/title": {
+  "t": "ξεχωριστή λέξη μετά το ουσιαστικό",
+  "src": "a65311842c3c",
+  "by": "claude"
+ },
+ "t:nom.definiteArticle/values/3/title": {
+  "t": "πρόθημα",
+  "src": "acc640b037ae",
+  "by": "claude"
+ },
+ "t:nom.definiteArticle/values/4/title": {
+  "t": "επίθημα",
+  "src": "a60294c3b3be",
+  "by": "claude"
+ },
+ "t:nom.dual/learnerNote": {
+  "t": "Όποιος δεν έχει δυϊκό πρέπει να χρησιμοποιεί μια τρίτη μορφή αριθμού για ακριβώς δύο πράγματα και να κάνει τις άλλες λέξεις να συμφωνούν μαζί της.",
+  "src": "88273fc54786",
+  "by": "claude"
+ },
+ "t:nom.dual/question": {
+  "t": "Υπάρχει γραμματικός δυϊκός (μορφή για ακριβώς δύο);",
+  "src": "7a38e0afb9d4",
+  "by": "claude"
+ },
+ "t:nom.dual/title": {
+  "t": "Δυϊκός αριθμός",
+  "src": "cbd8af989e50",
+  "by": "claude"
+ },
+ "t:nom.dual/values/0/title": {
+  "t": "όχι",
+  "src": "9390298f3fb0",
+  "by": "claude"
+ },
+ "t:nom.dual/values/1/title": {
+  "t": "μόνο σε αντωνυμίες ή ρηματικούς τύπους",
+  "src": "3dc1d44ce9f3",
+  "by": "claude"
+ },
+ "t:nom.dual/values/2/title": {
+  "t": "σε περιορισμένο σύνολο ουσιαστικών (ζευγάρια, μονάδες χρόνου)",
+  "src": "ec95b892db15",
+  "by": "claude"
+ },
+ "t:nom.dual/values/3/title": {
+  "t": "παραγωγικός στα ουσιαστικά",
+  "src": "e571088755d9",
+  "by": "claude"
+ },
+ "t:nom.genderBasis/learnerNote": {
+  "t": "Πρέπει να μάθεις ποια ουσιαστικά πάνε σε ποια τάξη· στις γλώσσες με ονοματικές τάξεις η τάξη σημειώνεται με πρόθημα και αλλάζει στον πληθυντικό.",
+  "src": "11fa2f2cfa37",
+  "by": "claude"
+ },
+ "t:nom.genderBasis/question": {
+  "t": "Με ποιο κριτήριο κατατάσσονται τα ουσιαστικά σε γένη ή τάξεις;",
+  "src": "d8e5b7d1c3b5",
+  "by": "claude"
+ },
+ "t:nom.genderBasis/title": {
+  "t": "Βάση του γένους",
+  "src": "ff0f076d5a92",
+  "by": "claude"
+ },
+ "t:nom.genderBasis/values/0/title": {
+  "t": "χωρίς γένος",
+  "src": "05da31c0a9c9",
+  "by": "claude"
+ },
+ "t:nom.genderBasis/values/1/title": {
+  "t": "με βάση το φύλο (αρσενικό / θηλυκό, και ουδέτερο)",
+  "src": "d312efdddf2a",
+  "by": "claude"
+ },
+ "t:nom.genderBasis/values/2/title": {
+  "t": "όχι με βάση το φύλο (π.χ. ανθρώπινο / μη ανθρώπινο, σχήμα, ονοματικές τάξεις)",
+  "src": "2f77ebc7d421",
+  "by": "claude"
+ },
+ "t:nom.genderCount/learnerNote": {
+  "t": "Όποιος δεν έχει γένος πρέπει να μάθει το γένος κάθε ουσιαστικού ως μέρος της λέξης και να κάνει τις άλλες λέξεις να συμφωνούν μαζί του· όποιος έχει γένος πρέπει να μάθει να μην το σημειώνει.",
+  "src": "0140f910d4c3",
+  "by": "claude"
+ },
+ "t:nom.genderCount/question": {
+  "t": "Πόσα γένη ή ονοματικές τάξεις ελέγχουν τη συμφωνία;",
+  "src": "ba6ad3e71ce5",
+  "by": "claude"
+ },
+ "t:nom.genderCount/title": {
+  "t": "Αριθμός γενών / ονοματικών τάξεων",
+  "src": "c60b5b8cc09c",
+  "by": "claude"
+ },
+ "t:nom.genderCount/values/0/title": {
+  "t": "κανένα",
+  "src": "140bedbf9c3f",
+  "by": "claude"
+ },
+ "t:nom.genderCount/values/1/title": {
+  "t": "δύο",
+  "src": "3fc4ccfe7458",
+  "by": "claude"
+ },
+ "t:nom.genderCount/values/2/title": {
+  "t": "τρία",
+  "src": "8b5b9db0c13d",
+  "by": "claude"
+ },
+ "t:nom.genderCount/values/3/title": {
+  "t": "τέσσερα ή περισσότερα (ονοματικές τάξεις)",
+  "src": "3b40baa8adda",
+  "by": "claude"
+ },
+ "t:nom.genitive/learnerNote": {
+  "t": "Πρέπει να μάθεις ποιο από τα δύο ουσιαστικά παίρνει τη σήμανση και με ποια σειρά μπαίνουν.",
+  "src": "d7190bbd8441",
+  "by": "claude"
+ },
+ "t:nom.genitive/question": {
+  "t": "Πώς συνδέεται το ουσιαστικό-κάτοχος με το ουσιαστικό-κτήμα;",
+  "src": "f39f64fa6bac",
+  "by": "claude"
+ },
+ "t:nom.genitive/title": {
+  "t": "Κτητική ονοματική φράση («το σπίτι του άντρα»)",
+  "src": "51cac0628fbe",
+  "by": "claude"
+ },
+ "t:nom.genitive/values/0/title": {
+  "t": "με κατάληξη ή κλιτικό στον κάτοχο (γενική πτώση)",
+  "src": "b57c4513257d",
+  "by": "claude"
+ },
+ "t:nom.genitive/values/1/title": {
+  "t": "με ξεχωριστή λέξη (του, 的)",
+  "src": "b46e3b643f27",
+  "by": "claude"
+ },
+ "t:nom.genitive/values/2/title": {
+  "t": "με δείκτη στο κτήμα",
+  "src": "05f8c5f7833c",
+  "by": "claude"
+ },
+ "t:nom.genitive/values/3/title": {
+  "t": "με δείκτες και στα δύο",
+  "src": "b9561e47d041",
+  "by": "claude"
+ },
+ "t:nom.genitive/values/4/title": {
+  "t": "το κτήμα παίρνει μορφή συνάφειας / δεμένη μορφή",
+  "src": "5d13651488e0",
+  "by": "claude"
+ },
+ "t:nom.genitive/values/5/title": {
+  "t": "συνδετικό στοιχείο κολλημένο στο κτήμα (τύπου εζάφε)",
+  "src": "fe16dc64fd47",
+  "by": "claude"
+ },
+ "t:nom.genitive/values/6/title": {
+  "t": "τα δύο ουσιαστικά απλώς μπαίνουν το ένα δίπλα στο άλλο",
+  "src": "0751c9941559",
+  "by": "claude"
+ },
+ "t:nom.indefiniteArticle/learnerNote": {
+  "t": "Όποιος δεν έχει αόριστο άρθρο πρέπει να μάθει πότε απαιτείται το «ένας / ένα»· όποιος έχει άρθρο πρέπει να μάθει να αφήνει τα ουσιαστικά χωρίς άρθρο.",
+  "src": "6697a30a0da0",
+  "by": "claude"
+ },
+ "t:nom.indefiniteArticle/question": {
+  "t": "Υπάρχει αόριστο άρθρο, και είναι η ίδια λέξη με το «ένα»;",
+  "src": "2b5a9ee9e79e",
+  "by": "claude"
+ },
+ "t:nom.indefiniteArticle/title": {
+  "t": "Αόριστο άρθρο",
+  "src": "2258db7245ba",
+  "by": "claude"
+ },
+ "t:nom.indefiniteArticle/values/0/title": {
+  "t": "κανένα",
+  "src": "140bedbf9c3f",
+  "by": "claude"
+ },
+ "t:nom.indefiniteArticle/values/1/title": {
+  "t": "ναι, η ίδια λέξη με το «ένα»",
+  "src": "87a6dd1a9fff",
+  "by": "claude"
+ },
+ "t:nom.indefiniteArticle/values/2/title": {
+  "t": "ναι, λέξη διαφορετική από το «ένα»",
+  "src": "da30c3a00897",
+  "by": "claude"
+ },
+ "t:nom.indefiniteArticle/values/3/title": {
+  "t": "πρόσφυμα",
+  "src": "baa0ae47210a",
+  "by": "claude"
+ },
+ "t:nom.plural/learnerNote": {
+  "t": "Όποιος μιλά γλώσσα με προαιρετικό πληθυντικό πρέπει να μάθει να τον σημειώνει κάθε φορά· όποιος έχει υποχρεωτικό πληθυντικό πρέπει να μάθει να αφήνει τα ουσιαστικά ασημείωτα και να καταλαβαίνει τον αριθμό από τα συμφραζόμενα.",
+  "src": "97b3089b3ffb",
+  "by": "claude"
+ },
+ "t:nom.plural/question": {
+  "t": "Σημειώνεται ο πληθυντικός στα ουσιαστικά, και είναι υποχρεωτικός;",
+  "src": "36a083ccf9a2",
+  "by": "claude"
+ },
+ "t:nom.plural/title": {
+  "t": "Σήμανση πληθυντικού στα ουσιαστικά",
+  "src": "0cf22cab1bcc",
+  "by": "claude"
+ },
+ "t:nom.plural/values/0/title": {
+  "t": "χωρίς ονοματικό πληθυντικό",
+  "src": "70d87a99956b",
+  "by": "claude"
+ },
+ "t:nom.plural/values/1/title": {
+  "t": "προαιρετικός (χρησιμοποιείται όταν ο πληθυντικός μετράει)",
+  "src": "654dd586bd83",
+  "by": "claude"
+ },
+ "t:nom.plural/values/2/title": {
+  "t": "υποχρεωτικός για ανθρώπινα / έμψυχα ουσιαστικά, αλλιώς προαιρετικός",
+  "src": "f7d3f3f47416",
+  "by": "claude"
+ },
+ "t:nom.plural/values/3/title": {
+  "t": "υποχρεωτικός για όλα τα ουσιαστικά",
+  "src": "d4ab9fe3a269",
+  "by": "claude"
+ },
+ "t:nom.pluralAfterNumeral/learnerNote": {
+  "t": "Πρέπει να μάθεις τη μορφή του ουσιαστικού που απαιτεί κάθε αριθμητικό: ορισμένες γλώσσες ρίχνουν τον πληθυντικό μετά από αριθμούς, άλλες απαιτούν συγκεκριμένη πτώση.",
+  "src": "d9ffc34d023f",
+  "by": "claude"
+ },
+ "t:nom.pluralAfterNumeral/question": {
+  "t": "Ποια μορφή παίρνει ένα ουσιαστικό μετά από αριθμητικό («δύο βιβλία»);",
+  "src": "a1ee2e4aabc5",
+  "by": "claude"
+ },
+ "t:nom.pluralAfterNumeral/title": {
+  "t": "Ουσιαστικά μετά από αριθμητικά",
+  "src": "eeab32db9854",
+  "by": "claude"
+ },
+ "t:nom.pluralAfterNumeral/values/0/title": {
+  "t": "τον πληθυντικό",
+  "src": "6291e76046bb",
+  "by": "claude"
+ },
+ "t:nom.pluralAfterNumeral/values/1/title": {
+  "t": "τη βασική μορφή (ενικό / ασημείωτη)",
+  "src": "a48e6c278961",
+  "by": "claude"
+ },
+ "t:nom.pluralAfterNumeral/values/2/title": {
+  "t": "μια ειδική μορφή ή πτώση ανάλογα με το αριθμητικό (π.χ. γενική, μεριστική, δυϊκό)",
+  "src": "bfbe0c341935",
+  "by": "claude"
+ },
+ "t:nom.possessiveAffixes/learnerNote": {
+  "t": "Όποιος δεν έχει κτητικά προσφύματα πρέπει να μάθει μια σειρά καταλήξεων προσώπου για τα ουσιαστικά («σπίτι-μου» σε μία λέξη)· όποιος τα έχει πρέπει να μάθει ξεχωριστές κτητικές λέξεις.",
+  "src": "111b792e1f61",
+  "by": "claude"
+ },
+ "t:nom.possessiveAffixes/question": {
+  "t": "Σημειώνεται ο κάτοχος («μου», «σου») με πρόσφυμα πάνω στο ουσιαστικό;",
+  "src": "ee9b8f204640",
+  "by": "claude"
+ },
+ "t:nom.possessiveAffixes/title": {
+  "t": "Κτητικά προσφύματα",
+  "src": "b4fbf2ccfdda",
+  "by": "claude"
+ },
+ "t:nom.possessiveAffixes/values/0/title": {
+  "t": "όχι",
+  "src": "9390298f3fb0",
+  "by": "claude"
+ },
+ "t:nom.possessiveAffixes/values/1/title": {
+  "t": "προθήματα",
+  "src": "8c7400e64084",
+  "by": "claude"
+ },
+ "t:nom.possessiveAffixes/values/2/title": {
+  "t": "επιθήματα",
+  "src": "905022ca87fd",
+  "by": "claude"
+ },
+ "t:nom.possessiveAffixes/values/3/title": {
+  "t": "προθήματα και επιθήματα",
+  "src": "c50e0bcc8d69",
+  "by": "claude"
+ },
+ "t:nom.singulative/learnerNote": {
+  "t": "Πρέπει να μάθεις ότι το βασικό ουσιαστικό μπορεί να σημαίνει ολόκληρη τη μάζα ή την κατηγορία, και ότι για ένα μεμονωμένο αντικείμενο χρειάζεται παράγωγη (συχνά μακρύτερη) μορφή.",
+  "src": "ba080cebde23",
+  "by": "claude"
+ },
+ "t:nom.singulative/question": {
+  "t": "Υπάρχει βασικό περιληπτικό ουσιαστικό από το οποίο παράγεται ουσιαστικό «μίας μονάδας» («δέντρα» ως σύνολο → «ένα δέντρο»);",
+  "src": "7a5a2e688c8c",
+  "by": "claude"
+ },
+ "t:nom.singulative/title": {
+  "t": "Περιληπτικό και ενικό μονάδας",
+  "src": "633198a2d176",
+  "by": "claude"
+ },
+ "t:nom.singulative/values/0/title": {
+  "t": "όχι",
+  "src": "9390298f3fb0",
+  "by": "claude"
+ },
+ "t:nom.singulative/values/1/title": {
+  "t": "λίγα ουσιαστικά",
+  "src": "efc563fd19b7",
+  "by": "claude"
+ },
+ "t:nom.singulative/values/2/title": {
+  "t": "παραγωγικό",
+  "src": "60c394d0e768",
+  "by": "claude"
+ },
+ "t:num.agreement/learnerNote": {
+  "t": "Πρέπει να κλίνεις τα αριθμητικά μαζί με το ουσιαστικό (και στα αραβικά ακόμη και να αντιστρέφεις το γένος τους), ή να μάθεις ότι είναι άκλιτα.",
+  "src": "501e04542e1d",
+  "by": "claude"
+ },
+ "t:num.agreement/question": {
+  "t": "Αλλάζουν τα αριθμητικά ανάλογα με το γένος, την πτώση ή την ονοματική τάξη;",
+  "src": "2f45de91921f",
+  "by": "claude"
+ },
+ "t:num.agreement/title": {
+  "t": "Συμφωνία των αριθμητικών",
+  "src": "5cf3dd22e05c",
+  "by": "claude"
+ },
+ "t:num.agreement/values/0/title": {
+  "t": "όχι",
+  "src": "9390298f3fb0",
+  "by": "claude"
+ },
+ "t:num.agreement/values/1/title": {
+  "t": "ορισμένα αριθμητικά (π.χ. «ένα», «δύο»)",
+  "src": "fadb3b9f0334",
+  "by": "claude"
+ },
+ "t:num.agreement/values/2/title": {
+  "t": "τα περισσότερα αριθμητικά συμφωνούν ή κλίνονται",
+  "src": "f32fbc92db6f",
+  "by": "claude"
+ },
+ "t:num.base/learnerNote": {
+  "t": "Πρέπει να μάθεις να μετράς σε εικοσάδες (τέσσερα-είκοσι = 80) ή με σύστημα με βάση το πέντε για τους μικρούς αριθμούς.",
+  "src": "6039c077c0ae",
+  "by": "claude"
+ },
+ "t:num.base/question": {
+  "t": "Ποια είναι η βάση του συστήματος αρίθμησης;",
+  "src": "bf3d11e2f7fb",
+  "by": "claude"
+ },
+ "t:num.base/title": {
+  "t": "Βάση του αριθμητικού συστήματος",
+  "src": "dbde1a52e58a",
+  "by": "claude"
+ },
+ "t:num.base/values/0/title": {
+  "t": "δεκαδικό (δεκάδες)",
+  "src": "4b6aa2e32b86",
+  "by": "claude"
+ },
+ "t:num.base/values/1/title": {
+  "t": "μικτό, με εικοσάδες και δεκάδες",
+  "src": "45148021daa7",
+  "by": "claude"
+ },
+ "t:num.base/values/2/title": {
+  "t": "εικοσαδικό (εικοσάδες)",
+  "src": "9ae4a20f66d5",
+  "by": "claude"
+ },
+ "t:num.base/values/3/title": {
+  "t": "άλλο (π.χ. με βάση το πέντε για το 6-9)",
+  "src": "88d18386ff02",
+  "by": "claude"
+ },
+ "t:num.largeNumbers/learnerNote": {
+  "t": "Πρέπει να αναδιατάσσεις τα ψηφία όταν διαβάζεις μεγάλους αριθμούς (10.000 = μία μυριάδα· 100.000 = ένα λακ).",
+  "src": "0d80d83f84a0",
+  "by": "claude"
+ },
+ "t:num.largeNumbers/question": {
+  "t": "Πώς ομαδοποιούνται οι μεγάλοι αριθμοί;",
+  "src": "1fbe492d39c4",
+  "by": "claude"
+ },
+ "t:num.largeNumbers/title": {
+  "t": "Μεγάλοι αριθμοί",
+  "src": "428384dda8c4",
+  "by": "claude"
+ },
+ "t:num.largeNumbers/values/0/title": {
+  "t": "ανά χιλιάδες (χίλια, εκατομμύριο)",
+  "src": "fb8ea7642d5f",
+  "by": "claude"
+ },
+ "t:num.largeNumbers/values/1/title": {
+  "t": "ανά δεκάδες χιλιάδων (万)",
+  "src": "ae7c515263e4",
+  "by": "claude"
+ },
+ "t:num.largeNumbers/values/2/title": {
+  "t": "λακ (100.000) και κρορ (10.000.000)",
+  "src": "58502dd63629",
+  "by": "claude"
+ },
+ "t:num.largeNumbers/values/3/title": {
+  "t": "ξεχωριστή λέξη για κάθε δύναμη του δέκα έως το εκατομμύριο",
+  "src": "9cc0644867a9",
+  "by": "claude"
+ },
+ "t:num.order/learnerNote": {
+  "t": "Πρέπει να αντιστρέφεις τη σειρά δεκάδων και μονάδων όταν λες ή ακούς αριθμούς.",
+  "src": "f670ac715d06",
+  "by": "claude"
+ },
+ "t:num.order/question": {
+  "t": "Λέγεται το 21 «είκοσι ένα» ή «ένα-και-είκοσι»;",
+  "src": "ea3bafefb070",
+  "by": "claude"
+ },
+ "t:num.order/title": {
+  "t": "Σειρά δεκάδων και μονάδων",
+  "src": "8a6017aedbb4",
+  "by": "claude"
+ },
+ "t:num.order/values/0/title": {
+  "t": "πρώτα οι δεκάδες",
+  "src": "66c94f2754b9",
+  "by": "claude"
+ },
+ "t:num.order/values/1/title": {
+  "t": "πρώτα οι μονάδες",
+  "src": "8b34f5448d10",
+  "by": "claude"
+ },
+ "t:num.order/values/2/title": {
+  "t": "χρησιμοποιούνται και οι δύο σειρές",
+  "src": "6a4577d84f05",
+  "by": "claude"
+ },
+ "t:phon.aspiration/learnerNote": {
+  "t": "Όποιος μιλά γλώσσα χωρίς αντίθεση δασύτητας πρέπει να μάθει ότι το p και το pʰ είναι διαφορετικοί ήχοι που αλλάζουν τη λέξη.",
+  "src": "dee88a94b190",
+  "by": "claude"
+ },
+ "t:phon.aspiration/question": {
+  "t": "Ξεχωρίζει λέξεις η δασύτητα (μια ριπή αέρα: pʰ αντί για p);",
+  "src": "f2d6799fcebc",
+  "by": "claude"
+ },
+ "t:phon.aspiration/title": {
+  "t": "Αντίθεση δασύτητας",
+  "src": "4725d6b3b6ec",
+  "by": "claude"
+ },
+ "t:phon.aspiration/values/0/title": {
+  "t": "όχι (η δασύτητα, αν υπάρχει, είναι αυτόματη)",
+  "src": "0414f44da326",
+  "by": "claude"
+ },
+ "t:phon.aspiration/values/1/title": {
+  "t": "δασέα και ψιλά κλειστά",
+  "src": "8160cab6dce0",
+  "by": "claude"
+ },
+ "t:phon.aspiration/values/2/title": {
+  "t": "τέσσερις σειρές: άηχα, δασέα, ηχηρά, ηχηρά με μουρμουρητό (breathy)",
+  "src": "9ff4c1eb944b",
+  "by": "claude"
+ },
+ "t:phon.clicks/learnerNote": {
+  "t": "Όποιος δεν έχει κλικ πρέπει να μάθει να τα παράγει μέσα σε λέξεις, με κανονική ταχύτητα, και να ξεχωρίζει τις σειρές τους.",
+  "src": "7ec326648a91",
+  "by": "claude"
+ },
+ "t:phon.clicks/question": {
+  "t": "Χρησιμοποιούνται τα κλικ ως κανονικά σύμφωνα;",
+  "src": "72fe5319a844",
+  "by": "claude"
+ },
+ "t:phon.clicks/title": {
+  "t": "Σύμφωνα-κλικ (μαλακουργά)",
+  "src": "d77a75cd86f3",
+  "by": "claude"
+ },
+ "t:phon.clicks/values/0/title": {
+  "t": "όχι",
+  "src": "9390298f3fb0",
+  "by": "claude"
+ },
+ "t:phon.clicks/values/1/title": {
+  "t": "ναι: τα κλικ είναι σύμφωνα της γλώσσας",
+  "src": "cdf840a21bda",
+  "by": "claude"
+ },
+ "t:phon.finalDevoicing/learnerNote": {
+  "t": "Όπου ισχύει η αφόνηση, πρέπει να μάθεις να διαβάζεις ένα γραμμένο τελικό b / d / g ως p / t / k· όπου δεν ισχύει, να κρατάς την ηχηρότητα στο τέλος.",
+  "src": "6e6b3a0cc5c8",
+  "by": "claude"
+ },
+ "t:phon.finalDevoicing/question": {
+  "t": "Γίνονται άηχα τα ηχηρά αποφρακτικά στο τέλος της λέξης (γράφεται d, λέγεται t);",
+  "src": "502a8f8a00f5",
+  "by": "claude"
+ },
+ "t:phon.finalDevoicing/title": {
+  "t": "Τελική αφόνηση",
+  "src": "b031ddeae323",
+  "by": "claude"
+ },
+ "t:phon.finalDevoicing/values/0/title": {
+  "t": "όχι",
+  "src": "9390298f3fb0",
+  "by": "claude"
+ },
+ "t:phon.finalDevoicing/values/1/title": {
+  "t": "ναι",
+  "src": "8a798890fe93",
+  "by": "claude"
+ },
+ "t:phon.finalDevoicing/values/2/title": {
+  "t": "δεν ισχύει: δεν υπάρχει αντίθεση ηχηρότητας στα αποφρακτικά",
+  "src": "25eb8037a2ee",
+  "by": "claude"
+ },
+ "t:phon.frontRounded/learnerNote": {
+  "t": "Όποιος δεν τα έχει πρέπει να μάθει να στρογγυλεύει τα χείλη λέγοντας i ή e, και να κρατά το ü χωριστά από το u και το i.",
+  "src": "19baaeeb1073",
+  "by": "claude"
+ },
+ "t:phon.frontRounded/question": {
+  "t": "Υπάρχουν πρόσθια στρογγυλά φωνήεντα (ü / y, ö / ø);",
+  "src": "b3181c2c022b",
+  "by": "claude"
+ },
+ "t:phon.frontRounded/title": {
+  "t": "Πρόσθια στρογγυλά φωνήεντα",
+  "src": "eaff0a5a6c7b",
+  "by": "claude"
+ },
+ "t:phon.frontRounded/values/0/title": {
+  "t": "κανένα",
+  "src": "140bedbf9c3f",
+  "by": "claude"
+ },
+ "t:phon.frontRounded/values/1/title": {
+  "t": "μόνο κλειστά (ü / y)",
+  "src": "3e3bee163a67",
+  "by": "claude"
+ },
+ "t:phon.frontRounded/values/2/title": {
+  "t": "μόνο μέσα (ö / ø)",
+  "src": "d08f0d6db426",
+  "by": "claude"
+ },
+ "t:phon.frontRounded/values/3/title": {
+  "t": "κλειστά και μέσα",
+  "src": "d733ce6c3807",
+  "by": "claude"
+ },
+ "t:phon.gemination/learnerNote": {
+  "t": "Όποιος δεν έχει διπλά σύμφωνα πρέπει να μάθει να κρατά ένα σύμφωνο περισσότερο, γιατί ένα απλό σύμφωνο μπορεί να δώσει άλλη λέξη.",
+  "src": "470052a67d26",
+  "by": "claude"
+ },
+ "t:phon.gemination/question": {
+  "t": "Ξεχωρίζει λέξεις ένα μακρύ (διπλό) σύμφωνο (π.χ. στα αραβικά دَرَسَ darasa «σπούδασε» / دَرَّسَ darrasa «δίδαξε»);",
+  "src": "03f425fcf23a",
+  "by": "claude"
+ },
+ "t:phon.gemination/title": {
+  "t": "Μακρά (διπλά) σύμφωνα",
+  "src": "06861267c4df",
+  "by": "claude"
+ },
+ "t:phon.gemination/values/0/title": {
+  "t": "όχι",
+  "src": "9390298f3fb0",
+  "by": "claude"
+ },
+ "t:phon.gemination/values/1/title": {
+  "t": "ναι",
+  "src": "8a798890fe93",
+  "by": "claude"
+ },
+ "t:phon.glottalized/learnerNote": {
+  "t": "Όποιος δεν τα έχει πρέπει να μάθει να σχηματίζει σύμφωνα με κλειστή γλωττίδα (εξωθητικά) ή με ρεύμα αέρα προς τα μέσα (εισωθητικά) και να τα κρατά χωριστά από τα απλά σύμφωνα.",
+  "src": "c7f80bca3f75",
+  "by": "claude"
+ },
+ "t:phon.glottalized/question": {
+  "t": "Υπάρχουν λαρυγγοποιημένα σύμφωνα: εξωθητικά (p', t', k') ή εισωθητικά (ɓ, ɗ);",
+  "src": "a3996d2762c8",
+  "by": "claude"
+ },
+ "t:phon.glottalized/title": {
+  "t": "Εξωθητικά και εισωθητικά σύμφωνα",
+  "src": "339fc5aa8189",
+  "by": "claude"
+ },
+ "t:phon.glottalized/values/0/title": {
+  "t": "κανένα",
+  "src": "140bedbf9c3f",
+  "by": "claude"
+ },
+ "t:phon.glottalized/values/1/title": {
+  "t": "εξωθητικά",
+  "src": "e0c04ca3a465",
+  "by": "claude"
+ },
+ "t:phon.glottalized/values/2/title": {
+  "t": "εισωθητικά",
+  "src": "a1c0df07dbdc",
+  "by": "claude"
+ },
+ "t:phon.glottalized/values/3/title": {
+  "t": "εξωθητικά και εισωθητικά",
+  "src": "3094ace05179",
+  "by": "claude"
+ },
+ "t:phon.interdentals/learnerNote": {
+  "t": "Όποιος δεν έχει θ / ð πρέπει να μάθει να βάζει τη γλώσσα ανάμεσα στα δόντια και να μην αντικαθιστά αυτούς τους ήχους με t, s, d ή z.",
+  "src": "d4149a9b5952",
+  "by": "claude"
+ },
+ "t:phon.interdentals/question": {
+  "t": "Υπάρχουν μεσοδοντικά τριβόμενα (θ, ð: η άκρη της γλώσσας ανάμεσα στα δόντια);",
+  "src": "858062840e47",
+  "by": "claude"
+ },
+ "t:phon.interdentals/title": {
+  "t": "Μεσοδοντικοί ήχοι (θ, ð)",
+  "src": "a9ed5bd5d9c8",
+  "by": "claude"
+ },
+ "t:phon.interdentals/values/0/title": {
+  "t": "όχι",
+  "src": "9390298f3fb0",
+  "by": "claude"
+ },
+ "t:phon.interdentals/values/1/title": {
+  "t": "ναι",
+  "src": "8a798890fe93",
+  "by": "claude"
+ },
+ "t:phon.liquids/learnerNote": {
+  "t": "Όποιος έχει ένα μόνο υγρό πρέπει να μάθει να κρατά χωριστά το r και το l· όποιος έχει ένα μόνο r πρέπει να μάθει να ξεχωρίζει το μονοπαλλόμενο από το πολυπαλλόμενο.",
+  "src": "29dbd906472c",
+  "by": "claude"
+ },
+ "t:phon.liquids/question": {
+  "t": "Είναι οι ήχοι r και οι ήχοι l διαφορετικά φωνήματα, και υπάρχουν πολλοί ήχοι r;",
+  "src": "fa483d593039",
+  "by": "claude"
+ },
+ "t:phon.liquids/title": {
+  "t": "r και l",
+  "src": "1893ec615593",
+  "by": "claude"
+ },
+ "t:phon.liquids/values/0/title": {
+  "t": "ένα υγρό: το r και το l δεν ξεχωρίζουν",
+  "src": "21ada4c91594",
+  "by": "claude"
+ },
+ "t:phon.liquids/values/1/title": {
+  "t": "ξεχωρίζουν το r και το l",
+  "src": "9c00cf245948",
+  "by": "claude"
+ },
+ "t:phon.liquids/values/2/title": {
+  "t": "r και l, και δύο ή περισσότεροι αντιτιθέμενοι ήχοι r (μονοπαλλόμενο / πολυπαλλόμενο)",
+  "src": "224bf467bf72",
+  "by": "claude"
+ },
+ "t:phon.mutation/learnerNote": {
+  "t": "Πρέπει να μάθεις να αναγνωρίζεις μια λέξη κάτω από διάφορα αρχικά ή εσωτερικά σύμφωνα και να εφαρμόζεις τους κανόνες που προκαλούν την αλλαγή όταν μιλάς.",
+  "src": "dcb3243ac2d9",
+  "by": "claude"
+ },
+ "t:phon.mutation/question": {
+  "t": "Αλλάζουν τα σύμφωνα στην αρχή ή στο εσωτερικό της λέξης για γραμματικούς λόγους;",
+  "src": "a329fb2fb884",
+  "by": "claude"
+ },
+ "t:phon.mutation/title": {
+  "t": "Μετάλλαξη και διαβάθμιση συμφώνων",
+  "src": "6ad44c84e915",
+  "by": "claude"
+ },
+ "t:phon.mutation/values/0/title": {
+  "t": "χωρίς συστηματική μετάλλαξη",
+  "src": "987ffcac10b3",
+  "by": "claude"
+ },
+ "t:phon.mutation/values/1/title": {
+  "t": "μετάλλαξη του αρχικού συμφώνου (το πρώτο σύμφωνο αλλάζει μετά από ορισμένες λέξεις)",
+  "src": "d1e983ff83de",
+  "by": "claude"
+ },
+ "t:phon.mutation/values/2/title": {
+  "t": "διαβάθμιση συμφώνων (τα σύμφωνα του θέματος εναλλάσσονται ανάμεσα σε ισχυρή και ασθενή βαθμίδα)",
+  "src": "dc2631377f36",
+  "by": "claude"
+ },
+ "t:phon.nasalVowels/learnerNote": {
+  "t": "Όποιος δεν έχει ρινικά φωνήεντα πρέπει να μάθει να αφήνει αέρα να περνά από τη μύτη πάνω στο ίδιο το φωνήεν, χωρίς να προφέρει ολόκληρο n ή m.",
+  "src": "eb9ad8e51da4",
+  "by": "claude"
+ },
+ "t:phon.nasalVowels/question": {
+  "t": "Αντιτίθενται τα ρινικά φωνήεντα στα στοματικά;",
+  "src": "afd94a53a56a",
+  "by": "claude"
+ },
+ "t:phon.nasalVowels/title": {
+  "t": "Ρινικά φωνήεντα",
+  "src": "b31d22a2843d",
+  "by": "claude"
+ },
+ "t:phon.nasalVowels/values/0/title": {
+  "t": "όχι",
+  "src": "9390298f3fb0",
+  "by": "claude"
+ },
+ "t:phon.nasalVowels/values/1/title": {
+  "t": "ναι",
+  "src": "8a798890fe93",
+  "by": "claude"
+ },
+ "t:phon.palatalization/learnerNote": {
+  "t": "Όποιος δεν έχει ουρανικοποίηση πρέπει να ακούει και να παράγει τα μαλακά σύμφωνα (με τη ράχη της γλώσσας ανασηκωμένη προς τον ουρανίσκο, όπως για το [j]) ως διαφορετικούς ήχους και να μάθει πώς τα σημειώνει η ορθογραφία.",
+  "src": "9efdd537ae74",
+  "by": "claude"
+ },
+ "t:phon.palatalization/question": {
+  "t": "Υπάρχουν ζεύγη απλών και ουρανικοποιημένων («μαλακών») συμφώνων που ξεχωρίζουν λέξεις;",
+  "src": "a4e06a36b870",
+  "by": "claude"
+ },
+ "t:phon.palatalization/title": {
+  "t": "Σκληρά και μαλακά σύμφωνα",
+  "src": "cd290543bb66",
+  "by": "claude"
+ },
+ "t:phon.palatalization/values/0/title": {
+  "t": "όχι",
+  "src": "9390298f3fb0",
+  "by": "claude"
+ },
+ "t:phon.palatalization/values/1/title": {
+  "t": "μερικά ζεύγη",
+  "src": "8d75bc6f15f6",
+  "by": "claude"
+ },
+ "t:phon.palatalization/values/2/title": {
+  "t": "μια συστηματική σειρά σκληρών / μαλακών",
+  "src": "edba7809918a",
+  "by": "claude"
+ },
+ "t:phon.pharyngeals/learnerNote": {
+  "t": "Όποιος δεν τα έχει πρέπει να μάθει να παράγει ήχους στον λαιμό και να κρατά τα εμφατικά σύμφωνα (που «χρωματίζουν» και τα φωνήεντα) χωριστά από τα απλά.",
+  "src": "af9bd50d86d3",
+  "by": "claude"
+ },
+ "t:phon.pharyngeals/question": {
+  "t": "Υπάρχουν φαρυγγικά σύμφωνα (ħ, ʕ) ή φαρυγγοποιημένα «εμφατικά» σύμφωνα (ṣ, ṭ, ḍ, ẓ);",
+  "src": "1895898bcf91",
+  "by": "claude"
+ },
+ "t:phon.pharyngeals/title": {
+  "t": "Φαρυγγικά και φαρυγγοποιημένα σύμφωνα",
+  "src": "6060b17d84c7",
+  "by": "claude"
+ },
+ "t:phon.pharyngeals/values/0/title": {
+  "t": "κανένα",
+  "src": "140bedbf9c3f",
+  "by": "claude"
+ },
+ "t:phon.pharyngeals/values/1/title": {
+  "t": "φαρυγγικά σύμφωνα ħ, ʕ",
+  "src": "4758a612dbc8",
+  "by": "claude"
+ },
+ "t:phon.pharyngeals/values/2/title": {
+  "t": "φαρυγγικά και μια σειρά εμφατικών συμφώνων",
+  "src": "937bb4535dba",
+  "by": "claude"
+ },
+ "t:phon.retroflex/learnerNote": {
+  "t": "Όποιος δεν έχει ανακεκαμμένα πρέπει να μάθει να ακούει και να σχηματίζει μια δεύτερη σειρά t / d ή s με την άκρη της γλώσσας γυρισμένη προς τα πίσω.",
+  "src": "3b9aa09bb330",
+  "by": "claude"
+ },
+ "t:phon.retroflex/question": {
+  "t": "Υπάρχουν ανακεκαμμένα σύμφωνα (η άκρη της γλώσσας γυρισμένη προς τα πίσω) που αντιτίθενται στα οδοντικά / φατνιακά;",
+  "src": "9bb7ed457674",
+  "by": "claude"
+ },
+ "t:phon.retroflex/title": {
+  "t": "Ανακεκαμμένα σύμφωνα",
+  "src": "d75a6087ab23",
+  "by": "claude"
+ },
+ "t:phon.retroflex/values/0/title": {
+  "t": "κανένα",
+  "src": "140bedbf9c3f",
+  "by": "claude"
+ },
+ "t:phon.retroflex/values/1/title": {
+  "t": "μόνο ως παραλλαγές (π.χ. από r + t)",
+  "src": "9ad7b1c1e219",
+  "by": "claude"
+ },
+ "t:phon.retroflex/values/2/title": {
+  "t": "ανακεκαμμένα συριστικά / προστριβόμενα (ʂ, ʈʂ) σε αντίθεση με ήχους σαν το s",
+  "src": "ece112b69137",
+  "by": "claude"
+ },
+ "t:phon.retroflex/values/3/title": {
+  "t": "ανακεκαμμένα κλειστά (ʈ, ɖ) σε αντίθεση με τα t, d",
+  "src": "f06c180e055a",
+  "by": "claude"
+ },
+ "t:phon.stress/learnerNote": {
+  "t": "Όποιος έρχεται από γλώσσα με σταθερό τόνο πρέπει να μάθει τον τόνο κάθε λέξης εκεί όπου είναι ελεύθερος· όποιος έρχεται από γλώσσα με ελεύθερο τόνο πρέπει να σταματήσει να τονίζει συλλαβές που η γλώσσα-στόχος δεν τονίζει.",
+  "src": "2fa259c58177",
+  "by": "claude"
+ },
+ "t:phon.stress/question": {
+  "t": "Πού πέφτει ο τόνος της λέξης;",
+  "src": "11ff1b167bbe",
+  "by": "claude"
+ },
+ "t:phon.stress/title": {
+  "t": "Τονισμός της λέξης",
+  "src": "3ea894664d31",
+  "by": "claude"
+ },
+ "t:phon.stress/values/0/title": {
+  "t": "σταθερά στην πρώτη συλλαβή",
+  "src": "ca0948b86355",
+  "by": "claude"
+ },
+ "t:phon.stress/values/1/title": {
+  "t": "σταθερά στην παραλήγουσα",
+  "src": "c2b9b5d5fa6a",
+  "by": "claude"
+ },
+ "t:phon.stress/values/2/title": {
+  "t": "σταθερά στη λήγουσα (με λίγες εξαιρέσεις)",
+  "src": "ae8d1f2dd78d",
+  "by": "claude"
+ },
+ "t:phon.stress/values/3/title": {
+  "t": "προβλέψιμος από το βάρος της συλλαβής (μακρά φωνήεντα, κλειστές συλλαβές)",
+  "src": "7ace774c928a",
+  "by": "claude"
+ },
+ "t:phon.stress/values/4/title": {
+  "t": "ελεύθερος: η τονισμένη συλλαβή μαθαίνεται μαζί με κάθε λέξη",
+  "src": "38c7dfc68388",
+  "by": "claude"
+ },
+ "t:phon.stress/values/5/title": {
+  "t": "χωρίς διακριτικό τόνο λέξης (η έμφαση έρχεται από τόνο, ύψος ή φράση)",
+  "src": "faefbdcb1d9e",
+  "by": "claude"
+ },
+ "t:phon.syllableStructure/learnerNote": {
+  "t": "Όποιος έρχεται από γλώσσα με απλές συλλαβές πρέπει να μάθει να προφέρει συμπλέγματα χωρίς να παρεμβάλλει φωνήεντα· όποιος έρχεται από γλώσσα με συμπλέγματα πρέπει να μάθει να κρατά ανοιχτές τις ανοιχτές συλλαβές.",
+  "src": "df1b1138b2bc",
+  "by": "claude"
+ },
+ "t:phon.syllableStructure/question": {
+  "t": "Πόσο σύνθετες μπορεί να είναι οι συλλαβές (συμφωνικά συμπλέγματα στην αρχή και στο τέλος);",
+  "src": "3caedf99628f",
+  "by": "claude"
+ },
+ "t:phon.syllableStructure/title": {
+  "t": "Δομή της συλλαβής",
+  "src": "3a5e401cfbc3",
+  "by": "claude"
+ },
+ "t:phon.syllableStructure/values/0/title": {
+  "t": "απλή: (Σ)Φ",
+  "src": "d62c9d005312",
+  "by": "claude"
+ },
+ "t:phon.syllableStructure/values/1/title": {
+  "t": "μέτρια σύνθετη: ΣΣΦΣ με απλά συμπλέγματα",
+  "src": "71d66332ab6f",
+  "by": "claude"
+ },
+ "t:phon.syllableStructure/values/2/title": {
+  "t": "σύνθετη: μεγαλύτερα συμπλέγματα (π.χ. str-, -nkst)",
+  "src": "574b3a7924ed",
+  "by": "claude"
+ },
+ "t:phon.uvulars/learnerNote": {
+  "t": "Όποιος δεν έχει σταφυλικά πρέπει να μάθει να παράγει ήχους πιο πίσω από το k και να τους κρατά χωριστά από το k και το h.",
+  "src": "0db3f7b082f1",
+  "by": "claude"
+ },
+ "t:phon.uvulars/question": {
+  "t": "Υπάρχουν σύμφωνα που αρθρώνονται στη σταφυλή (q, χ, ʁ);",
+  "src": "3d2c484022bd",
+  "by": "claude"
+ },
+ "t:phon.uvulars/title": {
+  "t": "Σταφυλικά σύμφωνα",
+  "src": "bb7fef34c6b9",
+  "by": "claude"
+ },
+ "t:phon.uvulars/values/0/title": {
+  "t": "κανένα",
+  "src": "140bedbf9c3f",
+  "by": "claude"
+ },
+ "t:phon.uvulars/values/1/title": {
+  "t": "μόνο σταφυλικά κλειστά (q)",
+  "src": "f84a00578c81",
+  "by": "claude"
+ },
+ "t:phon.uvulars/values/2/title": {
+  "t": "μόνο σταφυλικά εξακολουθητικά (χ, ʁ)",
+  "src": "89b975b623b5",
+  "by": "claude"
+ },
+ "t:phon.uvulars/values/3/title": {
+  "t": "σταφυλικά κλειστά και εξακολουθητικά",
+  "src": "11aeb6013760",
+  "by": "claude"
+ },
+ "t:phon.voicing/learnerNote": {
+  "t": "Όποιος μιλά γλώσσα χωρίς αντίθεση ηχηρότητας πρέπει να μάθει να ακούει και να προφέρει τα b / p, d / t, z / s ως διαφορετικούς ήχους· όποιος έχει ηχηρότητα πρέπει να μάθει ότι εδώ αυτή τη δουλειά την κάνει άλλο γνώρισμα (π.χ. η δασύτητα).",
+  "src": "3b61bd7365ec",
+  "by": "claude"
+ },
+ "t:phon.voicing/question": {
+  "t": "Ξεχωρίζουν λέξεις τα ηχηρά και τα άηχα αποφρακτικά (b / p, z / s);",
+  "src": "3d617639e36e",
+  "by": "claude"
+ },
+ "t:phon.voicing/title": {
+  "t": "Αντίθεση ηχηρότητας",
+  "src": "8aebae5dce1e",
+  "by": "claude"
+ },
+ "t:phon.voicing/values/0/title": {
+  "t": "χωρίς αντίθεση ηχηρότητας",
+  "src": "052fc7a66f3f",
+  "by": "claude"
+ },
+ "t:phon.voicing/values/1/title": {
+  "t": "μόνο στα κλειστά (b / p)",
+  "src": "34c750f9bd7b",
+  "by": "claude"
+ },
+ "t:phon.voicing/values/2/title": {
+  "t": "μόνο στα τριβόμενα (z / s)",
+  "src": "48431b53e966",
+  "by": "claude"
+ },
+ "t:phon.voicing/values/3/title": {
+  "t": "στα κλειστά και στα τριβόμενα",
+  "src": "b81eb87b88da",
+  "by": "claude"
+ },
+ "t:phon.vowelHarmony/learnerNote": {
+  "t": "Όποιος δεν έχει φωνηεντική αρμονία στη γλώσσα του πρέπει να μάθει δύο ή τέσσερις μορφές για κάθε επίθημα και να τις διαλέγει από τα φωνήεντα του θέματος.",
+  "src": "f5931b3bce94",
+  "by": "claude"
+ },
+ "t:phon.vowelHarmony/question": {
+  "t": "Πρέπει τα φωνήεντα των επιθημάτων να ταιριάζουν με τα φωνήεντα του θέματος;",
+  "src": "390477e2f46b",
+  "by": "claude"
+ },
+ "t:phon.vowelHarmony/title": {
+  "t": "Φωνηεντική αρμονία",
+  "src": "9b0bf747f6af",
+  "by": "claude"
+ },
+ "t:phon.vowelHarmony/values/0/title": {
+  "t": "χωρίς φωνηεντική αρμονία",
+  "src": "1c8c71976cce",
+  "by": "claude"
+ },
+ "t:phon.vowelHarmony/values/1/title": {
+  "t": "ίχνη ή περιορισμένη αρμονία",
+  "src": "c9937d633197",
+  "by": "claude"
+ },
+ "t:phon.vowelHarmony/values/2/title": {
+  "t": "αρμονία πρόσθιων / οπίσθιων φωνηέντων",
+  "src": "b200079b65fd",
+  "by": "claude"
+ },
+ "t:phon.vowelHarmony/values/3/title": {
+  "t": "αρμονία πρόσθιων / οπίσθιων και στρογγυλών φωνηέντων",
+  "src": "35d78b05ceb5",
+  "by": "claude"
+ },
+ "t:phon.vowelHarmony/values/4/title": {
+  "t": "αρμονία ρίζας της γλώσσας (ATR)",
+  "src": "76c59fe1a946",
+  "by": "claude"
+ },
+ "t:phon.vowelHarmony/values/5/title": {
+  "t": "ρινική αρμονία: η ρινικότητα απλώνεται σε όλη τη λέξη",
+  "src": "bf6a8103d86f",
+  "by": "claude"
+ },
+ "t:phon.vowelLength/learnerNote": {
+  "t": "Όποιος δεν έχει μήκος φωνηέντων στη γλώσσα του πρέπει να ακούει και να κρατάει τα μακρά φωνήεντα, γιατί ένα βραχύ φωνήεν μπορεί να δώσει άλλη λέξη.",
+  "src": "33c236897757",
+  "by": "claude"
+ },
+ "t:phon.vowelLength/question": {
+  "t": "Ξεχωρίζει λέξεις το μήκος ενός φωνήεντος;",
+  "src": "57b7a93aac9a",
+  "by": "claude"
+ },
+ "t:phon.vowelLength/title": {
+  "t": "Μήκος φωνηέντων",
+  "src": "59be352618d8",
+  "by": "claude"
+ },
+ "t:phon.vowelLength/values/0/title": {
+  "t": "όχι: το μήκος δεν είναι διακριτικό",
+  "src": "1282ae7881a7",
+  "by": "claude"
+ },
+ "t:phon.vowelLength/values/1/title": {
+  "t": "βραχέα και μακρά φωνήεντα",
+  "src": "f0313149ab00",
+  "by": "claude"
+ },
+ "t:phon.vowelLength/values/2/title": {
+  "t": "τρεις βαθμοί μήκους / ποσότητας",
+  "src": "4d0814b7af93",
+  "by": "claude"
+ },
+ "t:phon.vowelReduction/learnerNote": {
+  "t": "Όποιος έχει φωνήεντα που κρατούν την ποιότητά τους πρέπει να μάθει ότι στις άτονες συλλαβές η γραφή και η προφορά αποκλίνουν, και ότι ο τόνος αποφασίζει πώς ακούγεται ένα φωνήεν.",
+  "src": "ae4d91bc7dc5",
+  "by": "claude"
+ },
+ "t:phon.vowelReduction/question": {
+  "t": "Αλλάζουν ποιότητα ή εξαφανίζονται τα φωνήεντα όταν είναι άτονα;",
+  "src": "2f3a91fca97c",
+  "by": "claude"
+ },
+ "t:phon.vowelReduction/title": {
+  "t": "Αποδυνάμωση άτονων φωνηέντων",
+  "src": "1721787ce708",
+  "by": "claude"
+ },
+ "t:phon.vowelReduction/values/0/title": {
+  "t": "όχι: τα φωνήεντα κρατούν την ποιότητά τους",
+  "src": "3d4d8e8ece36",
+  "by": "claude"
+ },
+ "t:phon.vowelReduction/values/1/title": {
+  "t": "κάποια αποδυνάμωση ή αποβολή",
+  "src": "8b82ae771c3f",
+  "by": "claude"
+ },
+ "t:phon.vowelReduction/values/2/title": {
+  "t": "ισχυρή: πολλά άτονα φωνήεντα συγχωνεύονται σε λίγα αδύναμα φωνήεντα",
+  "src": "0ea7c0a798b6",
+  "by": "claude"
+ },
+ "t:prag.diglossia/learnerNote": {
+  "t": "Πρέπει να μάθεις δύο ποικιλίες, ή τουλάχιστον δύο σειρές τύπων, και πότε χρησιμοποιείται η καθεμία.",
+  "src": "2d757da82d55",
+  "by": "claude"
+ },
+ "t:prag.diglossia/question": {
+  "t": "Διαφέρει αισθητά η γραπτή / επίσημη πρότυπη γλώσσα από την καθημερινή προφορική;",
+  "src": "1fee03cdc22b",
+  "by": "claude"
+ },
+ "t:prag.diglossia/title": {
+  "t": "Διγλωσσία",
+  "src": "c64a5a97e11e",
+  "by": "claude"
+ },
+ "t:prag.diglossia/values/0/title": {
+  "t": "χωρίς σημαντική απόσταση",
+  "src": "91ed24b2b600",
+  "by": "claude"
+ },
+ "t:prag.diglossia/values/1/title": {
+  "t": "αισθητή απόσταση (διαφέρουν τύποι και λέξεις)",
+  "src": "d8b1554e310e",
+  "by": "claude"
+ },
+ "t:prag.diglossia/values/2/title": {
+  "t": "δύο διακριτές ποικιλίες για επίσημη και καθημερινή χρήση",
+  "src": "d86a21523559",
+  "by": "claude"
+ },
+ "t:prag.genderedSpeech/learnerNote": {
+  "t": "Πρέπει να σημειώνεις το δικό σου φύλο σε ρηματικούς ή επιθετικούς τύπους, ή να διαλέγεις μόρια και αντωνυμίες ανάλογα με το φύλο.",
+  "src": "5c53f3bb7d9d",
+  "by": "claude"
+ },
+ "t:prag.genderedSpeech/question": {
+  "t": "Αλλάζει ό,τι λέει ο ομιλητής για τον εαυτό του ανάλογα με το φύλο του;",
+  "src": "e3ee8ce17a80",
+  "by": "claude"
+ },
+ "t:prag.genderedSpeech/title": {
+  "t": "Το φύλο του ομιλητή στον λόγο",
+  "src": "d0f54ce1f9c5",
+  "by": "claude"
+ },
+ "t:prag.genderedSpeech/values/0/title": {
+  "t": "όχι",
+  "src": "9390298f3fb0",
+  "by": "claude"
+ },
+ "t:prag.genderedSpeech/values/1/title": {
+  "t": "ναι, μέσω της συμφωνίας (π.χ. το «ήμουν κουρασμένος / κουρασμένη» διαφέρει για άντρα και γυναίκα)",
+  "src": "bdd23a87d818",
+  "by": "claude"
+ },
+ "t:prag.genderedSpeech/values/2/title": {
+  "t": "ναι, μέσω αντωνυμιών, μορίων ή όρων συγγένειας με γένος",
+  "src": "10a25ab06b3f",
+  "by": "claude"
+ },
+ "t:prag.politePronouns/learnerNote": {
+  "t": "Πρέπει να διαλέγεις τον τρόπο προσφώνησης (και τους αντίστοιχους ρηματικούς τύπους) ανάλογα με τη σχέση και την περίσταση.",
+  "src": "ae73dd7b63f3",
+  "by": "claude"
+ },
+ "t:prag.politePronouns/question": {
+  "t": "Εξαρτάται η επιλογή του «εσύ» από την ευγένεια;",
+  "src": "e869fb33e681",
+  "by": "claude"
+ },
+ "t:prag.politePronouns/title": {
+  "t": "Ευγένεια στις αντωνυμίες (ενικός / πληθυντικός ευγενείας)",
+  "src": "dc7df866a5b6",
+  "by": "claude"
+ },
+ "t:prag.politePronouns/values/0/title": {
+  "t": "χωρίς διάκριση",
+  "src": "4bc12661b091",
+  "by": "claude"
+ },
+ "t:prag.politePronouns/values/1/title": {
+  "t": "δύο τύποι (οικείος / ευγενικός)",
+  "src": "d237c0bea5cf",
+  "by": "claude"
+ },
+ "t:prag.politePronouns/values/2/title": {
+  "t": "τρία ή περισσότερα επίπεδα",
+  "src": "175291e55efc",
+  "by": "claude"
+ },
+ "t:prag.politePronouns/values/3/title": {
+  "t": "οι αντωνυμίες αποφεύγονται· χρησιμοποιούνται τίτλοι και όροι συγγένειας",
+  "src": "232e437df1f2",
+  "by": "claude"
+ },
+ "t:prag.speechLevels/learnerNote": {
+  "t": "Πρέπει να σημειώνεις το επίπεδο ευγένειας σε κάθε πρόταση, διαλέγοντας καταλήξεις ή μόρια ανάλογα με τον συνομιλητή.",
+  "src": "d27828b1ad96",
+  "by": "claude"
+ },
+ "t:prag.speechLevels/question": {
+  "t": "Αλλάζουν οι ρηματικές καταλήξεις ή τα μόρια της πρότασης ανάλογα με το πόσο επίσημη είναι η περίσταση;",
+  "src": "697039b20a7c",
+  "by": "claude"
+ },
+ "t:prag.speechLevels/title": {
+  "t": "Επίπεδα ύφους",
+  "src": "34701824de24",
+  "by": "claude"
+ },
+ "t:prag.speechLevels/values/0/title": {
+  "t": "όχι",
+  "src": "9390298f3fb0",
+  "by": "claude"
+ },
+ "t:prag.speechLevels/values/1/title": {
+  "t": "ευγενικά μόρια που προστίθενται στις προτάσεις",
+  "src": "7d0de87b8c25",
+  "by": "claude"
+ },
+ "t:prag.speechLevels/values/2/title": {
+  "t": "δύο επίπεδα ρηματικών καταλήξεων (απλό / ευγενικό)",
+  "src": "d5f785049a60",
+  "by": "claude"
+ },
+ "t:prag.speechLevels/values/3/title": {
+  "t": "πολλά επίπεδα ύφους στις ρηματικές καταλήξεις",
+  "src": "05aff7edcfd8",
+  "by": "claude"
+ },
+ "t:pron.gender/learnerNote": {
+  "t": "Πρέπει να διαλέγεις αντωνυμίες (και ρηματικούς τύπους) ανάλογα με το φύλο του προσώπου για το οποίο ή στο οποίο μιλάς, ή να μάθεις ότι μία αντωνυμία καλύπτει και τα δύο.",
+  "src": "10410abaae48",
+  "by": "claude"
+ },
+ "t:pron.gender/question": {
+  "t": "Ξεχωρίζουν οι προσωπικές αντωνυμίες αρσενικό και θηλυκό;",
+  "src": "90f98d55baa2",
+  "by": "claude"
+ },
+ "t:pron.gender/title": {
+  "t": "Γένος στις προσωπικές αντωνυμίες",
+  "src": "859077b8c6b7",
+  "by": "claude"
+ },
+ "t:pron.gender/values/0/title": {
+  "t": "όχι («αυτός» = «αυτή»)",
+  "src": "f1344fe8393e",
+  "by": "claude"
+ },
+ "t:pron.gender/values/1/title": {
+  "t": "μόνο στη γραφή",
+  "src": "d549629eee34",
+  "by": "claude"
+ },
+ "t:pron.gender/values/2/title": {
+  "t": "στο 3ο πρόσωπο (αυτός / αυτή)",
+  "src": "06eaf2e5bc57",
+  "by": "claude"
+ },
+ "t:pron.gender/values/3/title": {
+  "t": "και στο 1ο ή 2ο πρόσωπο (π.χ. «εσύ» αρσ. / θηλ.)",
+  "src": "2bb1c59fd0b7",
+  "by": "claude"
+ },
+ "t:pron.inclusive/learnerNote": {
+  "t": "Πρέπει να αποφασίζεις κάθε φορά αν το «εμείς» περιλαμβάνει το πρόσωπο στο οποίο μιλάς.",
+  "src": "624dee607417",
+  "by": "claude"
+ },
+ "t:pron.inclusive/question": {
+  "t": "Υπάρχουν δύο λέξεις για το «εμείς»: μία που περιλαμβάνει τον ακροατή και μία που τον αποκλείει;",
+  "src": "f9430958840e",
+  "by": "claude"
+ },
+ "t:pron.inclusive/title": {
+  "t": "Περιεκτικό και αποκλειστικό «εμείς»",
+  "src": "c6dcf7390c62",
+  "by": "claude"
+ },
+ "t:pron.inclusive/values/0/title": {
+  "t": "όχι",
+  "src": "9390298f3fb0",
+  "by": "claude"
+ },
+ "t:pron.inclusive/values/1/title": {
+  "t": "ναι",
+  "src": "8a798890fe93",
+  "by": "claude"
+ },
+ "t:script.direction/learnerNote": {
+  "t": "Όποιος έχει συνηθίσει την άλλη κατεύθυνση πρέπει να ξαναεκπαιδεύσει την κίνηση των ματιών και τη διάταξη της σελίδας, ακόμη και το από πού αρχίζει ένα βιβλίο και πώς μπαίνουν μέσα στο κείμενο οι αριθμοί και οι ξένες λέξεις.",
+  "src": "e12d8ea68a05",
+  "by": "claude"
+ },
+ "t:script.direction/question": {
+  "t": "Προς ποια κατεύθυνση γράφεται η κανονική γραφή;",
+  "src": "37003ad035b7",
+  "by": "claude"
+ },
+ "t:script.direction/title": {
+  "t": "Κατεύθυνση γραφής",
+  "src": "0935fd222194",
+  "by": "claude"
+ },
+ "t:script.direction/values/0/title": {
+  "t": "από αριστερά προς τα δεξιά",
+  "src": "7d852e658818",
+  "by": "claude"
+ },
+ "t:script.direction/values/1/title": {
+  "t": "από δεξιά προς τα αριστερά",
+  "src": "752fa095e782",
+  "by": "claude"
+ },
+ "t:script.direction/values/2/title": {
+  "t": "από αριστερά προς τα δεξιά ή σε κάθετες στήλες (από πάνω προς τα κάτω, από δεξιά προς τα αριστερά)",
+  "src": "b97610b0e4b4",
+  "by": "claude"
+ },
+ "t:script.letterCase/learnerNote": {
+  "t": "Όποιος έρχεται από γραφή χωρίς κεφαλαία πρέπει να μάθει δύο σχήματα για κάθε γράμμα και τους κανόνες των κεφαλαίων· όποιος έρχεται από γραφή με κεφαλαία πρέπει να μάθει να αναγνωρίζει ονόματα χωρίς κεφαλαίο.",
+  "src": "5167c3499b9d",
+  "by": "claude"
+ },
+ "t:script.letterCase/question": {
+  "t": "Έχει η γραφή κεφαλαία και πεζά γράμματα, και ποιες λέξεις γράφονται με κεφαλαίο;",
+  "src": "eeabbd30331a",
+  "by": "claude"
+ },
+ "t:script.letterCase/title": {
+  "t": "Κεφαλαία και πεζά",
+  "src": "978509636846",
+  "by": "claude"
+ },
+ "t:script.letterCase/values/0/title": {
+  "t": "χωρίς διάκριση κεφαλαίων και πεζών",
+  "src": "435fcb3afe7f",
+  "by": "claude"
+ },
+ "t:script.letterCase/values/1/title": {
+  "t": "κεφαλαίο στην αρχή της πρότασης και στα ονόματα",
+  "src": "84462e5321f3",
+  "by": "claude"
+ },
+ "t:script.letterCase/values/2/title": {
+  "t": "κεφαλαίο σε κάθε ουσιαστικό",
+  "src": "3a26c37df21a",
+  "by": "claude"
+ },
+ "t:script.multiple/learnerNote": {
+  "t": "Όποιος έρχεται από γλώσσα με μία γραφή πρέπει να περιμένει ότι θα μάθει ένα δεύτερο σύνολο χαρακτήρων για πλήρη γραμματισμό, ή ότι θα διαβάζει πολλές γραφές δίπλα δίπλα στην ίδια πρόταση.",
+  "src": "033e0110b8d3",
+  "by": "claude"
+ },
+ "t:script.multiple/question": {
+  "t": "Γράφεται η γλώσσα με μία γραφή ή με περισσότερες;",
+  "src": "3aa1e70350da",
+  "by": "claude"
+ },
+ "t:script.multiple/title": {
+  "t": "Αριθμός γραφών",
+  "src": "a6ec07259473",
+  "by": "claude"
+ },
+ "t:script.multiple/values/0/title": {
+  "t": "μία γραφή",
+  "src": "89551e5fcdec",
+  "by": "claude"
+ },
+ "t:script.multiple/values/1/title": {
+  "t": "μία γραφή με δύο κανονικές παραλλαγές (π.χ. απλοποιημένοι / παραδοσιακοί χαρακτήρες)",
+  "src": "de43bd1ed2b1",
+  "by": "claude"
+ },
+ "t:script.multiple/values/2/title": {
+  "t": "δύο διαφορετικές γραφές σε κανονική χρήση (ανάλογα με τη χώρα ή την περιοχή)",
+  "src": "620ebc695c3f",
+  "by": "claude"
+ },
+ "t:script.multiple/values/3/title": {
+  "t": "πολλές γραφές ανακατεμένες σε κάθε κείμενο",
+  "src": "a185284ec09b",
+  "by": "claude"
+ },
+ "t:script.positionalForms/learnerNote": {
+  "t": "Όποιος έρχεται από γραφή με σταθερά σχήματα πρέπει να μάθει έως τέσσερις μορφές για κάθε γράμμα και τους κανόνες σύνδεσης· τα τελικά σχήματα μαθαίνονται ως ορθογραφικός κανόνας.",
+  "src": "6b7f5812d1e4",
+  "by": "claude"
+ },
+ "t:script.positionalForms/question": {
+  "t": "Αλλάζουν σχήμα τα γράμματα ανάλογα με τη θέση τους στη λέξη;",
+  "src": "268afc8bd973",
+  "by": "claude"
+ },
+ "t:script.positionalForms/title": {
+  "t": "Σχήματα γραμμάτων ανάλογα με τη θέση",
+  "src": "816d55ca501c",
+  "by": "claude"
+ },
+ "t:script.positionalForms/values/0/title": {
+  "t": "ένα σχήμα για κάθε γράμμα (για κεφαλαίο και πεζό)",
+  "src": "d5e93287bda0",
+  "by": "claude"
+ },
+ "t:script.positionalForms/values/1/title": {
+  "t": "λίγα γράμματα έχουν ειδικό τελικό σχήμα",
+  "src": "a30efe99d2f4",
+  "by": "claude"
+ },
+ "t:script.positionalForms/values/2/title": {
+  "t": "τα γράμματα ενώνονται και τα περισσότερα αλλάζουν σχήμα ανάλογα με τη θέση (αρχικό, μεσαίο, τελικό, μεμονωμένο)",
+  "src": "c61dfa5b9d75",
+  "by": "claude"
+ },
+ "t:script.stressMarking/learnerNote": {
+  "t": "Όπου ο τόνος δεν σημειώνεται, πρέπει να μάθεις τον τόνο κάθε λέξης μαζί με τη λέξη· όπου σημειώνεται, πρέπει να μάθεις τους κανόνες του τονικού σημαδιού.",
+  "src": "13af600b39c8",
+  "by": "claude"
+ },
+ "t:script.stressMarking/question": {
+  "t": "Φαίνεται στη συνηθισμένη ορθογραφία η θέση του τόνου της λέξης;",
+  "src": "ef8582e9e399",
+  "by": "claude"
+ },
+ "t:script.stressMarking/title": {
+  "t": "Ο τονισμός στη γραφή",
+  "src": "0c21c6735ad9",
+  "by": "claude"
+ },
+ "t:script.stressMarking/values/0/title": {
+  "t": "ο τόνος είναι σταθερός, προβλέψιμος ή δεν διακρίνει λέξεις",
+  "src": "e510ace81306",
+  "by": "claude"
+ },
+ "t:script.stressMarking/values/1/title": {
+  "t": "ο τόνος είναι ελεύθερος αλλά δεν γράφεται ποτέ",
+  "src": "bfe9bb62d833",
+  "by": "claude"
+ },
+ "t:script.stressMarking/values/2/title": {
+  "t": "τονικό σημάδι μόνο όπου ο τόνος παραβαίνει τον βασικό κανόνα",
+  "src": "f266cb56cfc3",
+  "by": "claude"
+ },
+ "t:script.stressMarking/values/3/title": {
+  "t": "κάθε λέξη με δύο ή περισσότερες συλλαβές παίρνει τονικό σημάδι",
+  "src": "e8a53d050b9f",
+  "by": "claude"
+ },
+ "t:script.toneMarking/learnerNote": {
+  "t": "Όπου ο τόνος δεν γράφεται, πρέπει να μάθεις τον τόνο κάθε λέξης ξεχωριστά· όπου γράφεται, να τον αποκωδικοποιείς από τους ορθογραφικούς κανόνες.",
+  "src": "16640c4650bd",
+  "by": "claude"
+ },
+ "t:script.toneMarking/question": {
+  "t": "Αν η γλώσσα έχει τόνους ή τονικό ύψος, πώς τους δείχνει η γραφή;",
+  "src": "d58c390e696a",
+  "by": "claude"
+ },
+ "t:script.toneMarking/title": {
+  "t": "Οι τόνοι στη γραφή",
+  "src": "2ee4bf8b2693",
+  "by": "claude"
+ },
+ "t:script.toneMarking/values/0/title": {
+  "t": "δεν υπάρχουν τόνοι να γραφτούν",
+  "src": "fe9442385de3",
+  "by": "claude"
+ },
+ "t:script.toneMarking/values/1/title": {
+  "t": "οι τόνοι / το τονικό ύψος δεν γράφονται",
+  "src": "5cd690a337f5",
+  "by": "claude"
+ },
+ "t:script.toneMarking/values/2/title": {
+  "t": "τονικά σημάδια πάνω στα φωνήεντα",
+  "src": "1cfe3e25535b",
+  "by": "claude"
+ },
+ "t:script.toneMarking/values/3/title": {
+  "t": "ο τόνος προκύπτει από τις κατηγορίες των γραμμάτων και από τονικά σημάδια στη γραφή της συλλαβής",
+  "src": "ccd02215833b",
+  "by": "claude"
+ },
+ "t:script.toneMarking/values/4/title": {
+  "t": "οι χαρακτήρες δεν δείχνουν τον τόνο (οι λατινικές μεταγραφές προσθέτουν σημάδια)",
+  "src": "e8d02b805492",
+  "by": "claude"
+ },
+ "t:script.type/learnerNote": {
+  "t": "Όποιος έρχεται από διαφορετικό τύπο γραφής πρέπει να μάθει όχι μόνο νέα σχήματα, αλλά και μια νέα ιδέα για το τι αντιπροσωπεύει ένα σημείο: π.χ. να διαβάζει λέξεις χωρίς φωνήεντα ή να απομνημονεύει χαρακτήρες που δεν «συλλαβίζουν» ήχους.",
+  "src": "a060d2ecd599",
+  "by": "claude"
+ },
+ "t:script.type/question": {
+  "t": "Τι αντιπροσωπεύει ένα βασικό σημείο της κανονικής γραφής;",
+  "src": "b967f205147e",
+  "by": "claude"
+ },
+ "t:script.type/title": {
+  "t": "Τύπος γραφής",
+  "src": "792dde8a84f8",
+  "by": "claude"
+ },
+ "t:script.type/values/0/title": {
+  "t": "αλφάβητο: γράμματα για σύμφωνα και φωνήεντα",
+  "src": "4cab327d9c83",
+  "by": "claude"
+ },
+ "t:script.type/values/1/title": {
+  "t": "αμπτζάντ (συμφωνογραφία): γράμματα για τα σύμφωνα, τα βραχέα φωνήεντα συνήθως δεν γράφονται",
+  "src": "b2cc1bb6376c",
+  "by": "claude"
+ },
+ "t:script.type/values/2/title": {
+  "t": "αμπουγκίντα: συμφωνικά γράμματα με προσαρτημένα φωνηεντικά σημάδια",
+  "src": "a4edd1c6665a",
+  "by": "claude"
+ },
+ "t:script.type/values/3/title": {
+  "t": "συλλαβάριο: ένα σημείο για κάθε συλλαβή",
+  "src": "a57be11f409f",
+  "by": "claude"
+ },
+ "t:script.type/values/4/title": {
+  "t": "λογογραφική: ένας χαρακτήρας για κάθε μόρφημα / συλλαβή",
+  "src": "f76b61c82ee9",
+  "by": "claude"
+ },
+ "t:script.type/values/5/title": {
+  "t": "μικτή: λογογράμματα μαζί με συλλαβικά σημεία",
+  "src": "93b0b5e54903",
+  "by": "claude"
+ },
+ "t:script.vowels/learnerNote": {
+  "t": "Όποιος έχει συνηθίσει να γράφονται όλα τα φωνήεντα πρέπει να μάθει να συμπληρώνει τα φωνήεντα από τη γνώση της λέξης (αμπτζάντ) ή να διαβάζει φωνηεντικά σημάδια γύρω από ένα σύμφωνο (αμπουγκίντα)· όποιος έρχεται από λογογραφική γραφή πρέπει να μάθει να αποδίδει γραπτώς τους ήχους.",
+  "src": "e8217387a43b",
+  "by": "claude"
+ },
+ "t:script.vowels/question": {
+  "t": "Πώς δείχνονται τα φωνήεντα στο συνηθισμένο γραπτό κείμενο;",
+  "src": "c518a802d7d4",
+  "by": "claude"
+ },
+ "t:script.vowels/title": {
+  "t": "Τα φωνήεντα στη γραφή",
+  "src": "5f448a4ebeb4",
+  "by": "claude"
+ },
+ "t:script.vowels/values/0/title": {
+  "t": "κάθε φωνήεν γράφεται ως γράμμα",
+  "src": "c1f544c3ae18",
+  "by": "claude"
+ },
+ "t:script.vowels/values/1/title": {
+  "t": "φωνηεντικά σημάδια προσαρτημένα στα συμφωνικά γράμματα (αμπουγκίντα), με ένα εννοούμενο φωνήεν",
+  "src": "693d1b84a8aa",
+  "by": "claude"
+ },
+ "t:script.vowels/values/2/title": {
+  "t": "τα βραχέα φωνήεντα κανονικά παραλείπονται",
+  "src": "04e7dd2231e9",
+  "by": "claude"
+ },
+ "t:script.vowels/values/3/title": {
+  "t": "οι χαρακτήρες δεν αποδίδουν ήχους (τα φωνήεντα δεν φαίνονται)",
+  "src": "5b381379d4ce",
+  "by": "claude"
+ },
+ "t:script.wordSpacing/learnerNote": {
+  "t": "Όποιος έχει συνηθίσει τα κενά ανάμεσα στις λέξεις πρέπει να μάθει να βρίσκει τα όρια των λέξεων από τη γνώση του λεξιλογίου· όποιος έχει συνηθίσει κείμενο χωρίς κενά πρέπει να μάθει πού μπαίνουν τα κενά όταν γράφει.",
+  "src": "22b7e4f0fff0",
+  "by": "claude"
+ },
+ "t:script.wordSpacing/question": {
+  "t": "Τι χωρίζει η γραφή με κενά ή σημάδια;",
+  "src": "6b287351d0c5",
+  "by": "claude"
+ },
+ "t:script.wordSpacing/title": {
+  "t": "Κενά ανάμεσα στις λέξεις",
+  "src": "a3d6a1f4a059",
+  "by": "claude"
+ },
+ "t:script.wordSpacing/values/0/title": {
+  "t": "κενά ανάμεσα στις λέξεις",
+  "src": "3b106d002466",
+  "by": "claude"
+ },
+ "t:script.wordSpacing/values/1/title": {
+  "t": "κενά ή σημάδια ανάμεσα στις συλλαβές",
+  "src": "de8722cc0a2a",
+  "by": "claude"
+ },
+ "t:script.wordSpacing/values/2/title": {
+  "t": "κανένας χωρισμός λέξεων (κενά μόνο ανάμεσα σε φράσεις ή προτάσεις, αν υπάρχουν καθόλου)",
+  "src": "3bf826d75938",
+  "by": "claude"
+ },
+ "t:sem.greenBlue/learnerNote": {
+  "t": "Πρέπει να χωρίσεις (ή να ενώσεις) το φάσμα των χρωμάτων, π.χ. να προσδιορίζεις μια ενιαία λέξη «πρασινομπλέ» ως «πρασινομπλέ του φύλλου» / «πρασινομπλέ του ουρανού».",
+  "src": "86844a0880f1",
+  "by": "claude"
+ },
+ "t:sem.greenBlue/question": {
+  "t": "Ονομάζονται το πράσινο και το μπλε με διαφορετικές βασικές λέξεις χρώματος;",
+  "src": "2680285c08c9",
+  "by": "claude"
+ },
+ "t:sem.greenBlue/title": {
+  "t": "Πράσινο και μπλε",
+  "src": "eea85e8a7fa9",
+  "by": "claude"
+ },
+ "t:sem.greenBlue/values/0/title": {
+  "t": "ναι, δύο βασικές λέξεις",
+  "src": "af81e48f0457",
+  "by": "claude"
+ },
+ "t:sem.greenBlue/values/1/title": {
+  "t": "όχι, μία βασική λέξη καλύπτει και τα δύο",
+  "src": "e4f7ff78bb6a",
+  "by": "claude"
+ },
+ "t:sem.greenBlue/values/2/title": {
+  "t": "άλλος χωρισμός",
+  "src": "d3cefb12420e",
+  "by": "claude"
+ },
+ "t:sem.motionFraming/learnerNote": {
+  "t": "Πρέπει να «ξαναπακετάρεις» τα γεγονότα κίνησης: να βάζεις την κατεύθυνση στο ρήμα και τον τρόπο σε επιρρηματικό προσδιορισμό, ή αντίστροφα.",
+  "src": "e0990bdf0fa9",
+  "by": "claude"
+ },
+ "t:sem.motionFraming/question": {
+  "t": "Εκφράζει συνήθως το ρήμα τη διαδρομή της κίνησης (μπαίνω, βγαίνω) ή τον τρόπο (τρέχω, επιπλέω), με τη διαδρομή σε ένα μόριο;",
+  "src": "c05dc13d3e5a",
+  "by": "claude"
+ },
+ "t:sem.motionFraming/title": {
+  "t": "Ρήματα κίνησης: τρόπος ή διαδρομή",
+  "src": "f30f9a1766eb",
+  "by": "claude"
+ },
+ "t:sem.motionFraming/values/0/title": {
+  "t": "η διαδρομή στο ρήμα («μπαίνω τρέχοντας»)",
+  "src": "8b19c44a95bf",
+  "by": "claude"
+ },
+ "t:sem.motionFraming/values/1/title": {
+  "t": "ο τρόπος στο ρήμα, η διαδρομή σε μόριο ή πρόθημα (hineinlaufen: «τρέχω-μέσα»)",
+  "src": "c53b6c83e45d",
+  "by": "claude"
+ },
+ "t:sem.motionFraming/values/2/title": {
+  "t": "και τα δύο ως ισότιμα ρήματα (跑进来: τρέχω-μπαίνω-έρχομαι)",
+  "src": "99d527817ea3",
+  "by": "claude"
+ },
+ "t:sem.positionVerbs/learnerNote": {
+  "t": "Πρέπει να διαλέγεις «στέκεται», «κείτεται» ή «κάθεται» ανάλογα με το σχήμα και τον προσανατολισμό του αντικειμένου, ή να μάθεις να χρησιμοποιείς ένα γενικό «είναι».",
+  "src": "4eebeacee580",
+  "by": "claude"
+ },
+ "t:sem.positionVerbs/question": {
+  "t": "Εκφράζεται η θέση των αντικειμένων κανονικά με ρήματα στάσης (το βιβλίο «κείτεται», το ποτήρι «στέκεται»);",
+  "src": "9d93754d2f58",
+  "by": "claude"
+ },
+ "t:sem.positionVerbs/title": {
+  "t": "Ρήματα στάσης",
+  "src": "73b26b9bf9c0",
+  "by": "claude"
+ },
+ "t:sem.positionVerbs/values/0/title": {
+  "t": "ένα γενικό «είμαι / βρίσκομαι»",
+  "src": "78dde91efb0b",
+  "by": "claude"
+ },
+ "t:sem.positionVerbs/values/1/title": {
+  "t": "τα ρήματα στάσης (στέκομαι, κείτομαι, κάθομαι, κρέμομαι) είναι ο κανονικός τρόπος",
+  "src": "473d69cf32c2",
+  "by": "claude"
+ },
+ "t:syn.adjectiveNoun/learnerNote": {
+  "t": "Πρέπει να αντιστρέψεις τη συνηθισμένη σειρά επιθέτου και ουσιαστικού και να μάθεις όσα επίθετα κρατούν ειδική θέση.",
+  "src": "289e5c600ca9",
+  "by": "claude"
+ },
+ "t:syn.adjectiveNoun/question": {
+  "t": "Μπαίνει το επίθετο πριν ή μετά το ουσιαστικό;",
+  "src": "9ba0f3402d39",
+  "by": "claude"
+ },
+ "t:syn.adjectiveNoun/title": {
+  "t": "Επίθετο και ουσιαστικό",
+  "src": "9223e090254c",
+  "by": "claude"
+ },
+ "t:syn.adjectiveNoun/values/0/title": {
+  "t": "επίθετο πριν από το ουσιαστικό",
+  "src": "ea5748b8886e",
+  "by": "claude"
+ },
+ "t:syn.adjectiveNoun/values/1/title": {
+  "t": "ουσιαστικό πριν από το επίθετο",
+  "src": "b49b293679d5",
+  "by": "claude"
+ },
+ "t:syn.adjectiveNoun/values/2/title": {
+  "t": "χωρίς κυρίαρχη σειρά",
+  "src": "3c696b912b6f",
+  "by": "claude"
+ },
+ "t:syn.adpositions/learnerNote": {
+  "t": "Πρέπει να μάθεις να βάζεις τη λέξη της σχέσης μετά το ουσιαστικό («το σπίτι μέσα») ή πριν από αυτό.",
+  "src": "326ab0c39a8a",
+  "by": "claude"
+ },
+ "t:syn.adpositions/question": {
+  "t": "Μπαίνουν τα προθετικά στοιχεία πριν ή μετά την ονοματική φράση τους;",
+  "src": "98646727ca6b",
+  "by": "claude"
+ },
+ "t:syn.adpositions/title": {
+  "t": "Προθέσεις ή μεταθέσεις",
+  "src": "b263e214216b",
+  "by": "claude"
+ },
+ "t:syn.adpositions/values/0/title": {
+  "t": "προθέσεις",
+  "src": "fff2cb6c23a5",
+  "by": "claude"
+ },
+ "t:syn.adpositions/values/1/title": {
+  "t": "μεταθέσεις",
+  "src": "3b2ada842edd",
+  "by": "claude"
+ },
+ "t:syn.adpositions/values/2/title": {
+  "t": "χωρίς κυρίαρχο τύπο (και τα δύο)",
+  "src": "b86499494eaa",
+  "by": "claude"
+ },
+ "t:syn.adpositions/values/3/title": {
+  "t": "χωρίς προθέσεις ή μεταθέσεις",
+  "src": "c7e214d02e55",
+  "by": "claude"
+ },
+ "t:syn.alignment/learnerNote": {
+  "t": "Όποιος έρχεται από ονομαστική-αιτιατική γλώσσα πρέπει να μάθει ότι η πτώση του «υποκειμένου» μπορεί να εξαρτάται από τη μεταβατικότητα, τον χρόνο ή τη φωνή· οι εργαστικές γλώσσες σημειώνουν με ιδιαίτερο τρόπο τον δράστη ενός μεταβατικού ρήματος.",
+  "src": "a467c982e2e7",
+  "by": "claude"
+ },
+ "t:syn.alignment/question": {
+  "t": "Αντιμετωπίζεται το υποκείμενο ενός αμετάβατου ρήματος όπως ο δράστης ή όπως το αντικείμενο ενός μεταβατικού ρήματος;",
+  "src": "2d8f39948de5",
+  "by": "claude"
+ },
+ "t:syn.alignment/title": {
+  "t": "Στοίχιση των ρόλων",
+  "src": "9d597870c4b3",
+  "by": "claude"
+ },
+ "t:syn.alignment/values/0/title": {
+  "t": "ονομαστική-αιτιατική: υποκείμενο αμετάβατου = υποκείμενο μεταβατικού",
+  "src": "45d885829937",
+  "by": "claude"
+ },
+ "t:syn.alignment/values/1/title": {
+  "t": "εργαστική: υποκείμενο αμετάβατου = αντικείμενο μεταβατικού· ο δράστης σημειώνεται",
+  "src": "e4a67410b281",
+  "by": "claude"
+ },
+ "t:syn.alignment/values/2/title": {
+  "t": "διχασμένη: εργαστική ή ενεργητική σε ορισμένους χρόνους / πρόσωπα, ονομαστική-αιτιατική αλλού",
+  "src": "b2daddba61e2",
+  "by": "claude"
+ },
+ "t:syn.alignment/values/3/title": {
+  "t": "ενεργητική: εξαρτάται από το αν το υποκείμενο ενεργεί ή υφίσταται",
+  "src": "1ec80beff127",
+  "by": "claude"
+ },
+ "t:syn.alignment/values/4/title": {
+  "t": "συμμετρική φωνή: μια ρηματική φωνή διαλέγει ποιο όρισμα είναι ο άξονας",
+  "src": "0f03afaca4e7",
+  "by": "claude"
+ },
+ "t:syn.alignment/values/5/title": {
+  "t": "ουδέτερη: καμία πτώση ή συμφωνία δεν ξεχωρίζει τους ρόλους",
+  "src": "408d3802a926",
+  "by": "claude"
+ },
+ "t:syn.beSplit/learnerNote": {
+  "t": "Πρέπει να διαλέγεις ανάμεσα σε δύο ρήματα «είμαι» (ταυτότητα ή θέση / κατάσταση) ή να μάθεις ότι ένα καλύπτει και τα δύο.",
+  "src": "39e803e4d5bb",
+  "by": "claude"
+ },
+ "t:syn.beSplit/question": {
+  "t": "Εκφράζονται με την ίδια λέξη το «ο Χ είναι δάσκαλος» και το «ο Χ είναι στο σπίτι»;",
+  "src": "0eb9e1c6d0c9",
+  "by": "claude"
+ },
+ "t:syn.beSplit/title": {
+  "t": "«Είναι» (ταυτότητα) και «είναι» (θέση)",
+  "src": "e8545650b57f",
+  "by": "claude"
+ },
+ "t:syn.beSplit/values/0/title": {
+  "t": "η ίδια δομή",
+  "src": "a9e2d3ccf3b8",
+  "by": "claude"
+ },
+ "t:syn.beSplit/values/1/title": {
+  "t": "διαφορετικές λέξεις (π.χ. 是 / 在)",
+  "src": "4a64aed3b182",
+  "by": "claude"
+ },
+ "t:syn.comparison/learnerNote": {
+  "t": "Πρέπει να μάθεις την πτώση, την πρόθεση ή το ρήμα που σημειώνει τον όρο σύγκρισης.",
+  "src": "0831210adbc2",
+  "by": "claude"
+ },
+ "t:syn.comparison/question": {
+  "t": "Πώς χτίζεται το «ο Χ είναι μεγαλύτερος από τον Υ»;",
+  "src": "013b9c304930",
+  "by": "claude"
+ },
+ "t:syn.comparison/title": {
+  "t": "Δομή σύγκρισης",
+  "src": "7683e1b809be",
+  "by": "claude"
+ },
+ "t:syn.comparison/values/0/title": {
+  "t": "με «από / σε» (μεγάλος από Υ)",
+  "src": "c5f66a731686",
+  "by": "claude"
+ },
+ "t:syn.comparison/values/1/title": {
+  "t": "με ρήμα «ξεπερνώ / περνώ» (μεγάλος ξεπερνά Υ)",
+  "src": "09abbe8e2842",
+  "by": "claude"
+ },
+ "t:syn.comparison/values/2/title": {
+  "t": "με δύο προτάσεις (ο Χ είναι μεγάλος, ο Υ είναι μικρός)",
+  "src": "15dfa1bc796a",
+  "by": "claude"
+ },
+ "t:syn.comparison/values/3/title": {
+  "t": "με μόριο «από» (συγκριτικό μόριο)",
+  "src": "129634398bf2",
+  "by": "claude"
+ },
+ "t:syn.copula/learnerNote": {
+  "t": "Πρέπει να μάθεις να φτιάχνεις προτάσεις χωρίς «είναι» (ονοματικές προτάσεις) ή να το προσθέτεις πάντα.",
+  "src": "99f0061b3d22",
+  "by": "claude"
+ },
+ "t:syn.copula/question": {
+  "t": "Χρειάζεται το «είμαι» σε προτάσεις του ενεστώτα όπως «αυτός είναι δάσκαλος»;",
+  "src": "ff26c74c1ca1",
+  "by": "claude"
+ },
+ "t:syn.copula/title": {
+  "t": "Το συνδετικό «είμαι» στον ενεστώτα",
+  "src": "1fc03bec681a",
+  "by": "claude"
+ },
+ "t:syn.copula/values/0/title": {
+  "t": "ναι",
+  "src": "8a798890fe93",
+  "by": "claude"
+ },
+ "t:syn.copula/values/1/title": {
+  "t": "προαιρετικά / συχνά παραλείπεται",
+  "src": "c91eef92b2a6",
+  "by": "claude"
+ },
+ "t:syn.copula/values/2/title": {
+  "t": "χωρίς συνδετικό στον ενεστώτα (ή καθόλου): «αυτός δάσκαλος»",
+  "src": "c1b270982e24",
+  "by": "claude"
+ },
+ "t:syn.copula/values/3/title": {
+  "t": "λείπει μόνο στο 3ο πρόσωπο· το 1ο / 2ο πρόσωπο παίρνει συνδετικό ή κατάληξη",
+  "src": "5a8223426fdb",
+  "by": "claude"
+ },
+ "t:syn.demonstrativeNoun/learnerNote": {
+  "t": "Πρέπει να μάθεις τη θέση των δεικτικών, που μπορεί να διαφέρει από τη θέση των επιθέτων και των άρθρων.",
+  "src": "1e66b79ecf9f",
+  "by": "claude"
+ },
+ "t:syn.demonstrativeNoun/question": {
+  "t": "Μπαίνει το «αυτός / εκείνος» πριν ή μετά το ουσιαστικό;",
+  "src": "e4f88a163428",
+  "by": "claude"
+ },
+ "t:syn.demonstrativeNoun/title": {
+  "t": "Δεικτικό και ουσιαστικό",
+  "src": "fff1f1344ecd",
+  "by": "claude"
+ },
+ "t:syn.demonstrativeNoun/values/0/title": {
+  "t": "πριν από το ουσιαστικό",
+  "src": "ccdfca01198d",
+  "by": "claude"
+ },
+ "t:syn.demonstrativeNoun/values/1/title": {
+  "t": "μετά το ουσιαστικό (ή ως επίθημα)",
+  "src": "3bf0adf7d3a3",
+  "by": "claude"
+ },
+ "t:syn.demonstrativeNoun/values/2/title": {
+  "t": "και στις δύο πλευρές του ουσιαστικού",
+  "src": "3618024a4569",
+  "by": "claude"
+ },
+ "t:syn.demonstrativeNoun/values/3/title": {
+  "t": "και τα δύο, ανάλογα με τη δομή",
+  "src": "5ac35339a096",
+  "by": "claude"
+ },
+ "t:syn.genitiveNoun/learnerNote": {
+  "t": "Πρέπει να αντιστρέψεις τη σειρά «του Χ το Υ» / «το Υ του Χ».",
+  "src": "9f8150f5d275",
+  "by": "claude"
+ },
+ "t:syn.genitiveNoun/question": {
+  "t": "Μπαίνει ο κάτοχος πριν ή μετά το ουσιαστικό-κτήμα;",
+  "src": "74d0c0693c0a",
+  "by": "claude"
+ },
+ "t:syn.genitiveNoun/title": {
+  "t": "Κάτοχος και ουσιαστικό",
+  "src": "ea394fc6c96a",
+  "by": "claude"
+ },
+ "t:syn.genitiveNoun/values/0/title": {
+  "t": "πρώτα ο κάτοχος",
+  "src": "0f3a2a8d2b25",
+  "by": "claude"
+ },
+ "t:syn.genitiveNoun/values/1/title": {
+  "t": "πρώτα το κτήμα",
+  "src": "76993c8b301e",
+  "by": "claude"
+ },
+ "t:syn.genitiveNoun/values/2/title": {
+  "t": "χωρίς κυρίαρχη σειρά",
+  "src": "3c696b912b6f",
+  "by": "claude"
+ },
+ "t:syn.have/learnerNote": {
+  "t": "Πρέπει να μάθεις να εκφράζεις την κτήση με υπαρκτική δομή και μια πτώση ή πρόθεση αντί για ρήμα «έχω», ή αντίστροφα.",
+  "src": "4b71b4358853",
+  "by": "claude"
+ },
+ "t:syn.have/question": {
+  "t": "Πώς εκφράζεται το «έχω ένα βιβλίο»;",
+  "src": "12f9ae35704b",
+  "by": "claude"
+ },
+ "t:syn.have/title": {
+  "t": "Κατηγορηματική κτήση («έχω»)",
+  "src": "5e8fb5148f69",
+  "by": "claude"
+ },
+ "t:syn.have/values/0/title": {
+  "t": "με ρήμα «έχω»",
+  "src": "406e8be937c0",
+  "by": "claude"
+ },
+ "t:syn.have/values/1/title": {
+  "t": "«σε μένα / σ’ εμένα είναι ένα βιβλίο»",
+  "src": "aede21d660e5",
+  "by": "claude"
+ },
+ "t:syn.have/values/2/title": {
+  "t": "«το βιβλίο μου υπάρχει»",
+  "src": "df2ab4d9fff2",
+  "by": "claude"
+ },
+ "t:syn.have/values/3/title": {
+  "t": "«(όσο για) μένα, υπάρχει ένα βιβλίο» / υπαρκτική δομή με θέμα",
+  "src": "1b404f1a4b66",
+  "by": "claude"
+ },
+ "t:syn.have/values/4/title": {
+  "t": "«είμαι με ένα βιβλίο»",
+  "src": "95040958cf82",
+  "by": "claude"
+ },
+ "t:syn.negation/learnerNote": {
+  "t": "Πρέπει να μάθεις τη μορφή του αρνητικού στοιχείου και αν είναι ξεχωριστή λέξη, πρόσφυμα, κλιτό ρήμα ή δύο κομμάτια γύρω από το ρήμα.",
+  "src": "f06785a45888",
+  "by": "claude"
+ },
+ "t:syn.negation/question": {
+  "t": "Πώς γίνεται αρνητική μια πρόταση;",
+  "src": "541254d4af24",
+  "by": "claude"
+ },
+ "t:syn.negation/title": {
+  "t": "Άρνηση",
+  "src": "849bc3ea2c32",
+  "by": "claude"
+ },
+ "t:syn.negation/values/0/title": {
+  "t": "με αρνητικό μόριο / αρνητική λέξη",
+  "src": "4e05e4ebfdf7",
+  "by": "claude"
+ },
+ "t:syn.negation/values/1/title": {
+  "t": "με αρνητικό πρόσφυμα στο ρήμα",
+  "src": "0101efe206b1",
+  "by": "claude"
+ },
+ "t:syn.negation/values/2/title": {
+  "t": "με αρνητικό βοηθητικό ρήμα (που κλίνεται)",
+  "src": "b40074b2ba97",
+  "by": "claude"
+ },
+ "t:syn.negation/values/3/title": {
+  "t": "με διμερή άρνηση",
+  "src": "0dbef407a4d1",
+  "by": "claude"
+ },
+ "t:syn.negationPosition/learnerNote": {
+  "t": "Πρέπει να μάθεις πού μπαίνει η άρνηση, που μπορεί να διαφέρει ανάμεσα σε κύριες και δευτερεύουσες προτάσεις.",
+  "src": "c6be8c2fb5b2",
+  "by": "claude"
+ },
+ "t:syn.negationPosition/question": {
+  "t": "Πού στέκεται το αρνητικό στοιχείο σε σχέση με το ρήμα;",
+  "src": "2658c537c655",
+  "by": "claude"
+ },
+ "t:syn.negationPosition/title": {
+  "t": "Θέση της άρνησης",
+  "src": "b7756a740e4a",
+  "by": "claude"
+ },
+ "t:syn.negationPosition/values/0/title": {
+  "t": "πριν από το ρήμα",
+  "src": "26c9c56e7e12",
+  "by": "claude"
+ },
+ "t:syn.negationPosition/values/1/title": {
+  "t": "μετά το ρήμα (ή ως επίθημα)",
+  "src": "bbc4f8421fba",
+  "by": "claude"
+ },
+ "t:syn.negationPosition/values/2/title": {
+  "t": "και στις δύο πλευρές",
+  "src": "f9fcb5ed48a7",
+  "by": "claude"
+ },
+ "t:syn.negationPosition/values/3/title": {
+  "t": "εξαρτάται από το είδος της πρότασης ή τη θέση του ρήματος",
+  "src": "fd16a602bb40",
+  "by": "claude"
+ },
+ "t:syn.negativeConcord/learnerNote": {
+  "t": "Πρέπει να μάθεις αν το «κανείς» χρειάζεται επιπλέον «δεν» στο ρήμα, αφού ο διπλασιασμός μπορεί να είναι υποχρεωτικός ή λάθος.",
+  "src": "139e0f38e9a1",
+  "by": "claude"
+ },
+ "t:syn.negativeConcord/question": {
+  "t": "Με το «κανείς / τίποτα», αρνείται και το ρήμα («κανείς δεν ήρθε»);",
+  "src": "f6c98a7017ba",
+  "by": "claude"
+ },
+ "t:syn.negativeConcord/title": {
+  "t": "Αρνητική συμφωνία",
+  "src": "12a3d376ceec",
+  "by": "claude"
+ },
+ "t:syn.negativeConcord/values/0/title": {
+  "t": "ναι: το ρήμα αρνείται πάντα κι αυτό",
+  "src": "6ff105df71f0",
+  "by": "claude"
+ },
+ "t:syn.negativeConcord/values/1/title": {
+  "t": "όχι: μόνο μία άρνηση",
+  "src": "a39f8667f181",
+  "by": "claude"
+ },
+ "t:syn.negativeConcord/values/2/title": {
+  "t": "εξαρτάται από τη θέση ή τη λέξη",
+  "src": "37a6d384c961",
+  "by": "claude"
+ },
+ "t:syn.numeralNoun/learnerNote": {
+  "t": "Πρέπει να μάθεις να βάζεις τον αριθμό μετά το ουσιαστικό (συχνά με ταξινομητή) ή πριν από αυτό.",
+  "src": "edf341eea1e5",
+  "by": "claude"
+ },
+ "t:syn.numeralNoun/question": {
+  "t": "Μπαίνει το αριθμητικό πριν ή μετά το ουσιαστικό;",
+  "src": "9403c4a727cf",
+  "by": "claude"
+ },
+ "t:syn.numeralNoun/title": {
+  "t": "Αριθμητικό και ουσιαστικό",
+  "src": "29116eb81b61",
+  "by": "claude"
+ },
+ "t:syn.numeralNoun/values/0/title": {
+  "t": "πρώτα το αριθμητικό",
+  "src": "34b4b8ba2608",
+  "by": "claude"
+ },
+ "t:syn.numeralNoun/values/1/title": {
+  "t": "πρώτα το ουσιαστικό",
+  "src": "ed3cb2dd6e82",
+  "by": "claude"
+ },
+ "t:syn.obliquePosition/learnerNote": {
+  "t": "Πρέπει να μετακινείς τις φράσεις χρόνου, τόπου και τρόπου πριν από το ρήμα (π.χ. στα κινεζικά) ή μετά το αντικείμενο.",
+  "src": "073bfed2285c",
+  "by": "claude"
+ },
+ "t:syn.obliquePosition/question": {
+  "t": "Πού στέκονται οι επιρρηματικές φράσεις (τόπου, χρόνου, οργάνου) σε σχέση με το ρήμα και το αντικείμενο;",
+  "src": "4097fd335c18",
+  "by": "claude"
+ },
+ "t:syn.obliquePosition/title": {
+  "t": "Θέση των επιρρηματικών προσδιορισμών",
+  "src": "a84310381e47",
+  "by": "claude"
+ },
+ "t:syn.obliquePosition/values/0/title": {
+  "t": "μετά το ρήμα και το αντικείμενο (Ρ Α Π)",
+  "src": "48910642f836",
+  "by": "claude"
+ },
+ "t:syn.obliquePosition/values/1/title": {
+  "t": "πριν από το ρήμα, με το αντικείμενο μετά (Π Ρ Α)",
+  "src": "460936d72f79",
+  "by": "claude"
+ },
+ "t:syn.obliquePosition/values/2/title": {
+  "t": "πριν από το αντικείμενο και το ρήμα (Π Α Ρ)",
+  "src": "b648008cfa9b",
+  "by": "claude"
+ },
+ "t:syn.obliquePosition/values/3/title": {
+  "t": "ανάμεσα στο αντικείμενο και το ρήμα (Α Π Ρ)",
+  "src": "987346556d42",
+  "by": "claude"
+ },
+ "t:syn.obliquePosition/values/4/title": {
+  "t": "χωρίς κυρίαρχη σειρά",
+  "src": "3c696b912b6f",
+  "by": "claude"
+ },
+ "t:syn.polarQuestion/learnerNote": {
+  "t": "Πρέπει να μάθεις το ερωτηματικό μόριο και τη θέση του, την αντιστροφή, ή ότι αρκεί μόνο ο επιτονισμός.",
+  "src": "e9c9a5d077ac",
+  "by": "claude"
+ },
+ "t:syn.polarQuestion/question": {
+  "t": "Πώς σημειώνονται οι ερωτήσεις ναι / όχι;",
+  "src": "5b6a085c10ba",
+  "by": "claude"
+ },
+ "t:syn.polarQuestion/title": {
+  "t": "Ερωτήσεις ναι / όχι",
+  "src": "f0d87ef0a13b",
+  "by": "claude"
+ },
+ "t:syn.polarQuestion/values/0/title": {
+  "t": "με ερωτηματικό μόριο",
+  "src": "601656fc553f",
+  "by": "claude"
+ },
+ "t:syn.polarQuestion/values/1/title": {
+  "t": "υπάρχει μόριο, αλλά συχνά αρκεί μόνο ο επιτονισμός",
+  "src": "4d4451d4f197",
+  "by": "claude"
+ },
+ "t:syn.polarQuestion/values/2/title": {
+  "t": "με ερωτηματικούς ρηματικούς τύπους",
+  "src": "56318c978a01",
+  "by": "claude"
+ },
+ "t:syn.polarQuestion/values/3/title": {
+  "t": "με αλλαγή της σειράς των λέξεων (αντιστροφή)",
+  "src": "74b9932918a2",
+  "by": "claude"
+ },
+ "t:syn.polarQuestion/values/4/title": {
+  "t": "μόνο με τον επιτονισμό",
+  "src": "f082dfffcda6",
+  "by": "claude"
+ },
+ "t:syn.polarQuestion/values/5/title": {
+  "t": "με μόριο και ρηματική μορφολογία",
+  "src": "2ed942ac0329",
+  "by": "claude"
+ },
+ "t:syn.proDrop/learnerNote": {
+  "t": "Όποιος έρχεται από γλώσσα που παραλείπει το υποκείμενο πρέπει να λέει πάντα το υποκείμενο· όποιος έρχεται από γλώσσα που δεν το παραλείπει πρέπει να μάθει να το αφήνει έξω.",
+  "src": "ef1a352dab8f",
+  "by": "claude"
+ },
+ "t:syn.proDrop/question": {
+  "t": "Μπορούν να παραλειφθούν οι προσωπικές αντωνυμίες υποκειμένου;",
+  "src": "ef44d8f5aba4",
+  "by": "claude"
+ },
+ "t:syn.proDrop/title": {
+  "t": "Προσωπικές αντωνυμίες υποκειμένου",
+  "src": "15b897b5a172",
+  "by": "claude"
+ },
+ "t:syn.proDrop/values/0/title": {
+  "t": "όχι: οι αντωνυμίες υποκειμένου είναι υποχρεωτικές",
+  "src": "240b857cb544",
+  "by": "claude"
+ },
+ "t:syn.proDrop/values/1/title": {
+  "t": "ναι: το ρήμα δείχνει το υποκείμενο, οι αντωνυμίες είναι για έμφαση",
+  "src": "870b93050086",
+  "by": "claude"
+ },
+ "t:syn.proDrop/values/2/title": {
+  "t": "ναι: οι αντωνυμίες παραλείπονται όταν είναι σαφές από τα συμφραζόμενα, χωρίς συμφωνία",
+  "src": "dfbe03abc269",
+  "by": "claude"
+ },
+ "t:syn.proDrop/values/3/title": {
+  "t": "μόνο σε ορισμένα πρόσωπα ή χρόνους",
+  "src": "7cebf925cb01",
+  "by": "claude"
+ },
+ "t:syn.questionParticlePosition/learnerNote": {
+  "t": "Πρέπει να μάθεις πού μπαίνει το ερωτηματικό μόριο, που μπορεί να εξαρτάται από το τι ρωτάς.",
+  "src": "241ae49566f5",
+  "by": "claude"
+ },
+ "t:syn.questionParticlePosition/question": {
+  "t": "Πού μπαίνει το ερωτηματικό μόριο των ερωτήσεων ναι / όχι;",
+  "src": "f56deac0ebc8",
+  "by": "claude"
+ },
+ "t:syn.questionParticlePosition/title": {
+  "t": "Θέση του ερωτηματικού μορίου",
+  "src": "e5d6fdeefcba",
+  "by": "claude"
+ },
+ "t:syn.questionParticlePosition/values/0/title": {
+  "t": "δεν χρησιμοποιείται συνήθως ερωτηματικό μόριο",
+  "src": "6505ac9f0365",
+  "by": "claude"
+ },
+ "t:syn.questionParticlePosition/values/1/title": {
+  "t": "στην αρχή της πρότασης",
+  "src": "db2576b18664",
+  "by": "claude"
+ },
+ "t:syn.questionParticlePosition/values/2/title": {
+  "t": "μετά την πρώτη λέξη ή φράση",
+  "src": "92527ed9f42f",
+  "by": "claude"
+ },
+ "t:syn.questionParticlePosition/values/3/title": {
+  "t": "στο τέλος της πρότασης",
+  "src": "d250ec3e35ad",
+  "by": "claude"
+ },
+ "t:syn.questionParticlePosition/values/4/title": {
+  "t": "ακριβώς μετά τη λέξη για την οποία ρωτάς",
+  "src": "20a427f7da3c",
+  "by": "claude"
+ },
+ "t:syn.questionParticlePosition/values/5/title": {
+  "t": "αλλού (π.χ. πριν από το ρήμα)",
+  "src": "880a7eb75e75",
+  "by": "claude"
+ },
+ "t:syn.relativeClauseOrder/learnerNote": {
+  "t": "Πρέπει να χτίζεις αναφορικές προτάσεις πριν από το ουσιαστικό (και να περιμένεις το ουσιαστικό στο τέλος) ή μετά από αυτό.",
+  "src": "04b30a8257d8",
+  "by": "claude"
+ },
+ "t:syn.relativeClauseOrder/question": {
+  "t": "Ακολουθεί ή προηγείται η αναφορική πρόταση του ουσιαστικού της;",
+  "src": "54953f3f07e1",
+  "by": "claude"
+ },
+ "t:syn.relativeClauseOrder/title": {
+  "t": "Αναφορική πρόταση και ουσιαστικό",
+  "src": "4a74dc9f7219",
+  "by": "claude"
+ },
+ "t:syn.relativeClauseOrder/values/0/title": {
+  "t": "μετά το ουσιαστικό",
+  "src": "4d0a182c542f",
+  "by": "claude"
+ },
+ "t:syn.relativeClauseOrder/values/1/title": {
+  "t": "πριν από το ουσιαστικό",
+  "src": "ccdfca01198d",
+  "by": "claude"
+ },
+ "t:syn.relativeClauseOrder/values/2/title": {
+  "t": "συσχετική (αναφορική πρόταση + επαναληπτικό «εκείνος»)",
+  "src": "6c4c89d3ed13",
+  "by": "claude"
+ },
+ "t:syn.relativeClauseOrder/values/3/title": {
+  "t": "το ουσιαστικό μένει μέσα στην αναφορική πρόταση",
+  "src": "4473b63ec76e",
+  "by": "claude"
+ },
+ "t:syn.relativeClauseOrder/values/4/title": {
+  "t": "μικτά",
+  "src": "3f8fee624f43",
+  "by": "claude"
+ },
+ "t:syn.relativizer/learnerNote": {
+  "t": "Πρέπει να μάθεις την αναφορική λέξη (και τους τύπους της για πτώση / γένος) ή τους μετοχικούς τύπους που αντικαθιστούν τις αναφορικές προτάσεις.",
+  "src": "76a2c34fdc20",
+  "by": "claude"
+ },
+ "t:syn.relativizer/question": {
+  "t": "Τι σημειώνει μια αναφορική πρόταση;",
+  "src": "f3baf58176bb",
+  "by": "claude"
+ },
+ "t:syn.relativizer/title": {
+  "t": "Πώς σημειώνονται οι αναφορικές προτάσεις",
+  "src": "6def99a5541e",
+  "by": "claude"
+ },
+ "t:syn.relativizer/values/0/title": {
+  "t": "αναφορική αντωνυμία (der, die, das)",
+  "src": "c729737697eb",
+  "by": "claude"
+ },
+ "t:syn.relativizer/values/1/title": {
+  "t": "άκλιτο μόριο ή συμπληρωματικός δείκτης (she-, 的)",
+  "src": "104d12a8b265",
+  "by": "claude"
+ },
+ "t:syn.relativizer/values/2/title": {
+  "t": "ειδικός ρηματικός τύπος (μετοχή, αναφορικό πρόσφυμα)",
+  "src": "0e3dbdae7c18",
+  "by": "claude"
+ },
+ "t:syn.relativizer/values/3/title": {
+  "t": "τίποτα: η πρόταση απλώς μπαίνει δίπλα στο ουσιαστικό",
+  "src": "208f9c985236",
+  "by": "claude"
+ },
+ "t:syn.relativizer/values/4/title": {
+  "t": "συσχετικό ζεύγος («όποιος … εκείνος»)",
+  "src": "92968bd16194",
+  "by": "claude"
+ },
+ "t:syn.serialVerbs/learnerNote": {
+  "t": "Πρέπει να μάθεις να εκφράζεις κατεύθυνση, όργανο, αποτέλεσμα ή σκοπό βάζοντας γυμνά ρήματα στη σειρά, ή να αντικαθιστάς τέτοιες αλυσίδες με προθέσεις και δευτερεύουσες προτάσεις.",
+  "src": "cae96b1caceb",
+  "by": "claude"
+ },
+ "t:syn.serialVerbs/question": {
+  "t": "Μπορούν πολλά ρήματα να μπουν στη σειρά σε μία πρόταση χωρίς συνδέσμους («παίρνω μαχαίρι κόβω κρέας»);",
+  "src": "4bdfb4e5f1d3",
+  "by": "claude"
+ },
+ "t:syn.serialVerbs/title": {
+  "t": "Σειριακά ρήματα",
+  "src": "df3048b19d09",
+  "by": "claude"
+ },
+ "t:syn.serialVerbs/values/0/title": {
+  "t": "όχι",
+  "src": "9390298f3fb0",
+  "by": "claude"
+ },
+ "t:syn.serialVerbs/values/1/title": {
+  "t": "περιορισμένα",
+  "src": "7b508dace774",
+  "by": "claude"
+ },
+ "t:syn.serialVerbs/values/2/title": {
+  "t": "παραγωγικά",
+  "src": "60c394d0e768",
+  "by": "claude"
+ },
+ "t:syn.subordination/learnerNote": {
+  "t": "Πρέπει να μάθεις να μετατρέπεις το «επειδή ήρθε» σε ονοματοποιημένο ρήμα με πτωτική κατάληξη, ή αντίστροφα.",
+  "src": "b326aa1f9ff4",
+  "by": "claude"
+ },
+ "t:syn.subordination/question": {
+  "t": "Είναι οι δευτερεύουσες προτάσεις κυρίως παρεμφατικές προτάσεις με συνδέσμους, ή μη παρεμφατικοί ρηματικοί τύποι (μετοχές, ονοματοποιήσεις, επιρρηματικές μετοχές);",
+  "src": "8831909b0a71",
+  "by": "claude"
+ },
+ "t:syn.subordination/title": {
+  "t": "Δευτερεύουσες προτάσεις",
+  "src": "31d1bdcd460b",
+  "by": "claude"
+ },
+ "t:syn.subordination/values/0/title": {
+  "t": "παρεμφατικές προτάσεις με συνδέσμους («ότι», «επειδή», «όταν»)",
+  "src": "8ed021276576",
+  "by": "claude"
+ },
+ "t:syn.subordination/values/1/title": {
+  "t": "μη παρεμφατικοί ρηματικοί τύποι με πτωτικές καταλήξεις ή μεταθέσεις",
+  "src": "44d598d1cffd",
+  "by": "claude"
+ },
+ "t:syn.subordination/values/2/title": {
+  "t": "και τα δύο είναι συνηθισμένα",
+  "src": "35aa752da4b5",
+  "by": "claude"
+ },
+ "t:syn.switchReference/learnerNote": {
+  "t": "Πρέπει να διαλέγεις τον τύπο του εξαρτημένου ρήματος ανάλογα με το αν αλλάζει το υποκείμενο από πρόταση σε πρόταση.",
+  "src": "06e8e1f4ade4",
+  "by": "claude"
+ },
+ "t:syn.switchReference/question": {
+  "t": "Δείχνει ένα εξαρτημένο ρήμα αν το υποκείμενό του είναι το ίδιο με του κύριου ρήματος;",
+  "src": "449e37883320",
+  "by": "claude"
+ },
+ "t:syn.switchReference/title": {
+  "t": "Δείκτες αλλαγής υποκειμένου",
+  "src": "56d5292382ee",
+  "by": "claude"
+ },
+ "t:syn.switchReference/values/0/title": {
+  "t": "όχι",
+  "src": "9390298f3fb0",
+  "by": "claude"
+ },
+ "t:syn.switchReference/values/1/title": {
+  "t": "ναι",
+  "src": "8a798890fe93",
+  "by": "claude"
+ },
+ "t:syn.topicProminence/learnerNote": {
+  "t": "Πρέπει να μάθεις να ξεκινάς με αυτό για το οποίο μιλά η πρόταση και να το σχολιάζεις, ή να χτίζεις προτάσεις γύρω από γραμματικό υποκείμενο που συμφωνεί με το ρήμα.",
+  "src": "05f68db76482",
+  "by": "claude"
+ },
+ "t:syn.topicProminence/question": {
+  "t": "Οργανώνεται η πρόταση γύρω από ένα γραμματικό υποκείμενο ή γύρω από ένα θέμα («όσο για το Χ, …»);",
+  "src": "e116f2d8b335",
+  "by": "claude"
+ },
+ "t:syn.topicProminence/title": {
+  "t": "Προβολή του θέματος",
+  "src": "5514d58baff5",
+  "by": "claude"
+ },
+ "t:syn.topicProminence/values/0/title": {
+  "t": "με προβολή του υποκειμένου",
+  "src": "e749f7c33a78",
+  "by": "claude"
+ },
+ "t:syn.topicProminence/values/1/title": {
+  "t": "με προβολή του θέματος",
+  "src": "a5db1087c189",
+  "by": "claude"
+ },
+ "t:syn.topicProminence/values/2/title": {
+  "t": "και το υποκείμενο και το θέμα σημειώνονται γραμματικά",
+  "src": "9bac3402115a",
+  "by": "claude"
+ },
+ "t:syn.topicProminence/values/3/title": {
+  "t": "κανένα από τα δύο",
+  "src": "02566ed5f414",
+  "by": "claude"
+ },
+ "t:syn.verbSecond/learnerNote": {
+  "t": "Πρέπει να αντιστρέφεις υποκείμενο και ρήμα μετά από κάθε στοιχείο που μπαίνει μπροστά και, όπου ισχύει, να στέλνεις το ρήμα στο τέλος των δευτερευουσών προτάσεων.",
+  "src": "b1c2c9c40f56",
+  "by": "claude"
+ },
+ "t:syn.verbSecond/question": {
+  "t": "Πρέπει το παρεμφατικό ρήμα να είναι το δεύτερο στοιχείο της κύριας πρότασης;",
+  "src": "45944eba4c13",
+  "by": "claude"
+ },
+ "t:syn.verbSecond/title": {
+  "t": "Ρήμα στη δεύτερη θέση",
+  "src": "981c95a26a57",
+  "by": "claude"
+ },
+ "t:syn.verbSecond/values/0/title": {
+  "t": "όχι",
+  "src": "9390298f3fb0",
+  "by": "claude"
+ },
+ "t:syn.verbSecond/values/1/title": {
+  "t": "ναι, ρήμα στη δεύτερη θέση στις κύριες προτάσεις",
+  "src": "0669651e9824",
+  "by": "claude"
+ },
+ "t:syn.verbSecond/values/2/title": {
+  "t": "ρήμα στη δεύτερη θέση στις κύριες προτάσεις και ρήμα στο τέλος στις δευτερεύουσες",
+  "src": "5f6e8fd28c2f",
+  "by": "claude"
+ },
+ "t:syn.whPosition/learnerNote": {
+  "t": "Πρέπει να μάθεις να αφήνεις την ερωτηματική λέξη εκεί όπου θα έμπαινε η απάντηση, ή να τη μετακινείς στην αρχή.",
+  "src": "ed97d8cf927f",
+  "by": "claude"
+ },
+ "t:syn.whPosition/question": {
+  "t": "Μετακινούνται οι ερωτηματικές λέξεις (ποιος, τι, πού) στην αρχή;",
+  "src": "e6078f911a51",
+  "by": "claude"
+ },
+ "t:syn.whPosition/title": {
+  "t": "Ερωτηματικές λέξεις",
+  "src": "1e6965cd8839",
+  "by": "claude"
+ },
+ "t:syn.whPosition/values/0/title": {
+  "t": "ναι, στην αρχή της πρότασης",
+  "src": "29b4f0f017a0",
+  "by": "claude"
+ },
+ "t:syn.whPosition/values/1/title": {
+  "t": "όχι: μένουν στη θέση τους (ή μπαίνουν πριν από το ρήμα)",
+  "src": "dc4c39c2c408",
+  "by": "claude"
+ },
+ "t:syn.whPosition/values/2/title": {
+  "t": "και τα δύο",
+  "src": "94f106e01173",
+  "by": "claude"
+ },
+ "t:syn.wordOrder/learnerNote": {
+  "t": "Πρέπει να αναδιατάξεις την πρόταση γύρω από το ρήμα (π.χ. να το βάζεις στο τέλος ή στην αρχή) και να στηρίζεσαι στις πτώσεις ή στα μόρια εκεί όπου η σειρά είναι ελεύθερη.",
+  "src": "3d4171f9c137",
+  "by": "claude"
+ },
+ "t:syn.wordOrder/question": {
+  "t": "Ποια είναι η κυρίαρχη σειρά υποκειμένου, αντικειμένου και ρήματος;",
+  "src": "0032cd0d1a1a",
+  "by": "claude"
+ },
+ "t:syn.wordOrder/title": {
+  "t": "Βασική σειρά των λέξεων",
+  "src": "338165c7a565",
+  "by": "claude"
+ },
+ "t:syn.wordOrder/values/0/title": {
+  "t": "Υ-Α-Ρ (υποκείμενο – αντικείμενο – ρήμα)",
+  "src": "3c9669c48f7d",
+  "by": "claude"
+ },
+ "t:syn.wordOrder/values/1/title": {
+  "t": "Υ-Ρ-Α (υποκείμενο – ρήμα – αντικείμενο)",
+  "src": "df98806ab8e1",
+  "by": "claude"
+ },
+ "t:syn.wordOrder/values/2/title": {
+  "t": "Ρ-Υ-Α (ρήμα – υποκείμενο – αντικείμενο)",
+  "src": "f1062d016aba",
+  "by": "claude"
+ },
+ "t:syn.wordOrder/values/3/title": {
+  "t": "Ρ-Α-Υ (ρήμα – αντικείμενο – υποκείμενο)",
+  "src": "921dc8f421ba",
+  "by": "claude"
+ },
+ "t:syn.wordOrder/values/4/title": {
+  "t": "Α-Ρ-Υ (αντικείμενο – ρήμα – υποκείμενο)",
+  "src": "394b577e069f",
+  "by": "claude"
+ },
+ "t:syn.wordOrder/values/5/title": {
+  "t": "Α-Υ-Ρ (αντικείμενο – υποκείμενο – ρήμα)",
+  "src": "fce6d54d4f6e",
+  "by": "claude"
+ },
+ "t:syn.wordOrder/values/6/title": {
+  "t": "χωρίς κυρίαρχη σειρά",
+  "src": "3c696b912b6f",
+  "by": "claude"
+ },
+ "t:time.calendar/learnerNote": {
+  "t": "Πρέπει να μάθεις να διαβάζεις ημερομηνίες σε άλλο ημερολόγιο ή χρονολόγηση, και ότι οι γιορτές μετακινούνται σε σχέση με το γρηγοριανό έτος.",
+  "src": "2cde9d34e11b",
+  "by": "claude"
+ },
+ "t:time.calendar/question": {
+  "t": "Ποιο ημερολόγιο χρησιμοποιείται για τις ημερομηνίες στην καθημερινή ζωή;",
+  "src": "cf68330e88ae",
+  "by": "claude"
+ },
+ "t:time.calendar/title": {
+  "t": "Ημερολόγιο σε χρήση",
+  "src": "fe9482c96d99",
+  "by": "claude"
+ },
+ "t:time.calendar/values/0/title": {
+  "t": "το γρηγοριανό ημερολόγιο",
+  "src": "165cb5845a5f",
+  "by": "claude"
+ },
+ "t:time.calendar/values/1/title": {
+  "t": "γρηγοριανό, με παραδοσιακό ημερολόγιο για γιορτές / θρησκευτικές ημερομηνίες",
+  "src": "b9b716e45eb3",
+  "by": "claude"
+ },
+ "t:time.calendar/values/2/title": {
+  "t": "επίσημο μη γρηγοριανό ημερολόγιο ή χρονολόγηση",
+  "src": "62d4f1237560",
+  "by": "claude"
+ },
+ "t:time.dayNames/learnerNote": {
+  "t": "Όπου οι μέρες δεν είναι αριθμημένες, πρέπει να μάθεις τα ονόματά τους ως λεξιλόγιο· όπου είναι, να χρησιμοποιείς την αρίθμηση.",
+  "src": "63592229d878",
+  "by": "claude"
+ },
+ "t:time.dayNames/question": {
+  "t": "Πώς ονομάζονται οι μέρες της εβδομάδας;",
+  "src": "e299c1c049aa",
+  "by": "claude"
+ },
+ "t:time.dayNames/title": {
+  "t": "Ονόματα των ημερών της εβδομάδας",
+  "src": "cf0f6bc82f99",
+  "by": "claude"
+ },
+ "t:time.dayNames/values/0/title": {
+  "t": "κυρίως με αριθμό (δεύτερη μέρα, τρίτη μέρα …)",
+  "src": "482614d22edc",
+  "by": "claude"
+ },
+ "t:time.dayNames/values/1/title": {
+  "t": "από πλανήτες / θεούς (μέρα της Σελήνης, μέρα του Ήλιου)",
+  "src": "a2ff5815f6d3",
+  "by": "claude"
+ },
+ "t:time.dayNames/values/2/title": {
+  "t": "άλλη ή μικτή προέλευση",
+  "src": "5b445071ab3a",
+  "by": "claude"
+ },
+ "t:time.halfHour/learnerNote": {
+  "t": "Πρέπει να μετατοπίζεις την ώρα όταν λες «και μισή», ή να μάθεις διαφορετικό σημείο έναρξης της μέρας.",
+  "src": "4e57d2b24c0c",
+  "by": "claude"
+ },
+ "t:time.halfHour/question": {
+  "t": "Πώς λέγεται το 2:30;",
+  "src": "3538d6756d82",
+  "by": "claude"
+ },
+ "t:time.halfHour/title": {
+  "t": "Πώς λέμε «και μισή»",
+  "src": "c10cd2bfd16e",
+  "by": "claude"
+ },
+ "t:time.halfHour/values/0/title": {
+  "t": "«δύο και μισή»",
+  "src": "1ba1c704a88b",
+  "by": "claude"
+ },
+ "t:time.halfHour/values/1/title": {
+  "t": "μισή της επόμενης ώρας (halb drei = 2:30)",
+  "src": "faca94f170b9",
+  "by": "claude"
+ },
+ "t:time.halfHour/values/2/title": {
+  "t": "άλλος τρόπος μέτρησης του χρόνου (π.χ. ώρες μετρημένες από την αυγή)",
+  "src": "2510cc4d638e",
+  "by": "claude"
+ },
+ "t:time.monthNames/learnerNote": {
+  "t": "Πρέπει να μάθεις δώδεκα νέα ονόματα μηνών όπου η γλώσσα έχει δικά της ονόματα· οι αριθμημένοι μήνες χρειάζονται μόνο τα αριθμητικά και τη λέξη «μήνας».",
+  "src": "7ad79136903d",
+  "by": "claude"
+ },
+ "t:time.monthNames/question": {
+  "t": "Πώς ονομάζονται οι μήνες;",
+  "src": "e56b4ce1c174",
+  "by": "claude"
+ },
+ "t:time.monthNames/title": {
+  "t": "Ονόματα των μηνών",
+  "src": "bf90f0c09280",
+  "by": "claude"
+ },
+ "t:time.monthNames/values/0/title": {
+  "t": "ονόματα από τα λατινικά (το ρωμαϊκό ημερολόγιο)",
+  "src": "dee1c5025677",
+  "by": "claude"
+ },
+ "t:time.monthNames/values/1/title": {
+  "t": "ντόπια ονόματα",
+  "src": "c2292c5039d2",
+  "by": "claude"
+ },
+ "t:time.monthNames/values/2/title": {
+  "t": "με αριθμό (πρώτος μήνας …)",
+  "src": "976dfe848b68",
+  "by": "claude"
+ },
+ "t:tone.lexical/learnerNote": {
+  "t": "Όποιος δεν έχει τόνους στη γλώσσα του πρέπει να ακούει και να παράγει το ύψος της φωνής ως μέρος κάθε λέξης· όποιος έχει τόνους πρέπει να μάθει ότι εδώ το ύψος της φωνής φέρει μόνο επιτονισμό και συναίσθημα, όχι σημασία λέξης.",
+  "src": "3c3bb03deb14",
+  "by": "claude"
+ },
+ "t:tone.lexical/question": {
+  "t": "Ξεχωρίζει λέξεις το τονικό ύψος μιας συλλαβής;",
+  "src": "08c77218d7b3",
+  "by": "claude"
+ },
+ "t:tone.lexical/title": {
+  "t": "Λεξικός τόνος",
+  "src": "cfca5510c60e",
+  "by": "claude"
+ },
+ "t:tone.lexical/values/0/title": {
+  "t": "χωρίς λεξικό τόνο",
+  "src": "985f881b26b2",
+  "by": "claude"
+ },
+ "t:tone.lexical/values/1/title": {
+  "t": "τονισμός ύψους: ένα τονικό σχήμα ανά λέξη ξεχωρίζει ορισμένες λέξεις",
+  "src": "1798d020296d",
+  "by": "claude"
+ },
+ "t:tone.lexical/values/2/title": {
+  "t": "δύο επίπεδα (ψηλό / χαμηλό)",
+  "src": "25738780ed17",
+  "by": "claude"
+ },
+ "t:tone.lexical/values/3/title": {
+  "t": "τρεις ή περισσότεροι τόνοι / τονικές καμπύλες",
+  "src": "ecd6907e25d1",
+  "by": "claude"
+ },
+ "t:verb.antipassive/learnerNote": {
+  "t": "Πρέπει να μάθεις έναν ρηματικό τύπο που αφαιρεί τη μεταβατικότητα και χρησιμοποιείται όταν ο δέκτης της πράξης είναι αόριστος ή ασήμαντος· είναι χαρακτηριστικός των εργαστικών γλωσσών.",
+  "src": "7da8f1c7ed31",
+  "by": "claude"
+ },
+ "t:verb.antipassive/question": {
+  "t": "Υπάρχει αντιπαθητική φωνή (το αντικείμενο υποβιβάζεται ή παραλείπεται και ο δράστης γίνεται κανονικό υποκείμενο αμετάβατου ρήματος);",
+  "src": "b20c690e8d4d",
+  "by": "claude"
+ },
+ "t:verb.antipassive/title": {
+  "t": "Αντιπαθητική φωνή",
+  "src": "63062325416a",
+  "by": "claude"
+ },
+ "t:verb.antipassive/values/0/title": {
+  "t": "όχι",
+  "src": "9390298f3fb0",
+  "by": "claude"
+ },
+ "t:verb.antipassive/values/1/title": {
+  "t": "ναι",
+  "src": "8a798890fe93",
+  "by": "claude"
+ },
+ "t:verb.applicative/learnerNote": {
+  "t": "Πρέπει να μάθεις ότι ένα ρηματικό πρόσφυμα μπορεί να κάνει τον ωφελούμενο ή τον τόπο άμεσο αντικείμενο.",
+  "src": "53604dc2d2d0",
+  "by": "claude"
+ },
+ "t:verb.applicative/question": {
+  "t": "Μπορεί ένα ρηματικό πρόσφυμα να προσθέσει νέο αντικείμενο (ωφελούμενο, τόπο, όργανο): «μαγειρεύω-για» κάποιον;",
+  "src": "8bff27fc03f0",
+  "by": "claude"
+ },
+ "t:verb.applicative/title": {
+  "t": "Εφαρμοστική φωνή",
+  "src": "5e3867c85d87",
+  "by": "claude"
+ },
+ "t:verb.applicative/values/0/title": {
+  "t": "όχι",
+  "src": "9390298f3fb0",
+  "by": "claude"
+ },
+ "t:verb.applicative/values/1/title": {
+  "t": "ναι",
+  "src": "8a798890fe93",
+  "by": "claude"
+ },
+ "t:verb.causative/learnerNote": {
+  "t": "Πρέπει να μάθεις το αιτιατικό πρόσφυμα και πώς αλλάζει την πτώση του προσώπου που βάζεις να ενεργήσει, ή να χρησιμοποιείς ξεχωριστό ρήμα «βάζω / αφήνω».",
+  "src": "1233ef8e5a55",
+  "by": "claude"
+ },
+ "t:verb.causative/question": {
+  "t": "Μπορεί το «βάζω κάποιον να κάνει» να σχηματιστεί αλλάζοντας το ίδιο το ρήμα;",
+  "src": "6bb01ebac8fe",
+  "by": "claude"
+ },
+ "t:verb.causative/title": {
+  "t": "Αιτιατική μορφολογία",
+  "src": "6dd237a7f797",
+  "by": "claude"
+ },
+ "t:verb.causative/values/0/title": {
+  "t": "όχι: μόνο με ξεχωριστό ρήμα («βάζω», «αφήνω»)",
+  "src": "d15fe575d72a",
+  "by": "claude"
+ },
+ "t:verb.causative/values/1/title": {
+  "t": "παραγωγικό αιτιατικό πρόσφυμα ή μοτίβο",
+  "src": "7e4e2ce12b9e",
+  "by": "claude"
+ },
+ "t:verb.causative/values/2/title": {
+  "t": "ρηματικά σύνθετα (αιτία + αποτέλεσμα)",
+  "src": "db31c6c0f85c",
+  "by": "claude"
+ },
+ "t:verb.causative/values/3/title": {
+  "t": "πρόσφυμα και σύνθετα",
+  "src": "6755d161a446",
+  "by": "claude"
+ },
+ "t:verb.conditional/learnerNote": {
+  "t": "Πρέπει να μάθεις αν το «αν / θα» το φέρει ρηματικός τύπος, βοηθητικό ρήμα ή μόνο ένας σύνδεσμος.",
+  "src": "88f253278e34",
+  "by": "claude"
+ },
+ "t:verb.conditional/question": {
+  "t": "Πώς εκφράζεται το «θα … / αν»;",
+  "src": "e8e88df86832",
+  "by": "claude"
+ },
+ "t:verb.conditional/title": {
+  "t": "Δυνητική",
+  "src": "f0d15abed6bc",
+  "by": "claude"
+ },
+ "t:verb.conditional/values/0/title": {
+  "t": "με δυνητικό ρηματικό τύπο ή δυνητικό επίθημα",
+  "src": "bd807fbf080f",
+  "by": "claude"
+ },
+ "t:verb.conditional/values/1/title": {
+  "t": "με βοηθητικό ρήμα ή μόριο (würde)",
+  "src": "6e57b15dc9be",
+  "by": "claude"
+ },
+ "t:verb.conditional/values/2/title": {
+  "t": "μόνο με τον σύνδεσμο «αν»· το ρήμα μένει αμετάβλητο",
+  "src": "0d5016e9bd92",
+  "by": "claude"
+ },
+ "t:verb.converbs/learnerNote": {
+  "t": "Πρέπει να μάθεις να συνδέεις προτάσεις με έναν μη παρεμφατικό ρηματικό τύπο και να αφήνεις παρεμφατικό μόνο το τελευταίο ρήμα, ή (αντίστροφα) να χρησιμοποιείς παρεμφατικά ρήματα ενωμένα με «και».",
+  "src": "1eeb8e46e0fe",
+  "by": "claude"
+ },
+ "t:verb.converbs/question": {
+  "t": "Υπάρχουν απαρέμφατοι επιρρηματικοί ρηματικοί τύποι («αφού έκανε», «κάνοντας») που δένουν προτάσεις σε αλυσίδα;",
+  "src": "ea4e3cd42414",
+  "by": "claude"
+ },
+ "t:verb.converbs/title": {
+  "t": "Επιρρηματικές μετοχές και αλυσίδες προτάσεων",
+  "src": "5e2c877c2dba",
+  "by": "claude"
+ },
+ "t:verb.converbs/values/0/title": {
+  "t": "όχι",
+  "src": "9390298f3fb0",
+  "by": "claude"
+ },
+ "t:verb.converbs/values/1/title": {
+  "t": "ναι",
+  "src": "8a798890fe93",
+  "by": "claude"
+ },
+ "t:verb.converbs/values/2/title": {
+  "t": "ναι, και η αλυσίδα με επιρρηματικές μετοχές είναι ο κύριος τρόπος σύνδεσης προτάσεων",
+  "src": "adb16df5d2c2",
+  "by": "claude"
+ },
+ "t:verb.evidentiality/learnerNote": {
+  "t": "Όποιος δεν έχει τεκμηριωτικούς δείκτες πρέπει να διαλέγει ρηματικό τύπο ανάλογα με το αν είδε το γεγονός ή το ξέρει από άλλους ή από ίχνη.",
+  "src": "e91549d1be37",
+  "by": "claude"
+ },
+ "t:verb.evidentiality/question": {
+  "t": "Πρέπει το ρήμα να δείχνει πώς ξέρει ο ομιλητής την πληροφορία (το είδε, το συμπέρανε, το άκουσε);",
+  "src": "ba8ec187c1db",
+  "by": "claude"
+ },
+ "t:verb.evidentiality/title": {
+  "t": "Τεκμηριωτικότητα",
+  "src": "def55139bf06",
+  "by": "claude"
+ },
+ "t:verb.evidentiality/values/0/title": {
+  "t": "χωρίς γραμματικούς τεκμηριωτικούς δείκτες",
+  "src": "5adb316b567e",
+  "by": "claude"
+ },
+ "t:verb.evidentiality/values/1/title": {
+  "t": "μόνο έμμεση (μεταφερόμενη / συμπερασματική)",
+  "src": "737a4e7dd30a",
+  "by": "claude"
+ },
+ "t:verb.evidentiality/values/2/title": {
+  "t": "άμεση και έμμεση",
+  "src": "ebd66b627559",
+  "by": "claude"
+ },
+ "t:verb.future/learnerNote": {
+  "t": "Πρέπει να μάθεις αν απαιτείται μελλοντικός τύπος, αν χτίζεται με βοηθητικό ρήμα ή αν αφήνεται στα συμφραζόμενα.",
+  "src": "458cacda9796",
+  "by": "claude"
+ },
+ "t:verb.future/question": {
+  "t": "Πώς εκφράζεται ο μελλοντικός χρόνος;",
+  "src": "07d4b2538ad7",
+  "by": "claude"
+ },
+ "t:verb.future/title": {
+  "t": "Μέλλοντας",
+  "src": "31afe21cebb7",
+  "by": "claude"
+ },
+ "t:verb.future/values/0/title": {
+  "t": "με κλιτικό μέλλοντα",
+  "src": "b6c907073c3c",
+  "by": "claude"
+ },
+ "t:verb.future/values/1/title": {
+  "t": "με βοηθητικό ρήμα ή μόριο",
+  "src": "b7e8302b85a1",
+  "by": "claude"
+ },
+ "t:verb.future/values/2/title": {
+  "t": "χωρίς γραμματικό μέλλοντα: ο ενεστώτας / μη παρελθοντικός ή προαιρετικές λέξεις",
+  "src": "84ea5f800498",
+  "by": "claude"
+ },
+ "t:verb.honorifics/learnerNote": {
+  "t": "Πρέπει να μάθεις ένα δεύτερο σύνολο λέξεων ή ρηματικών τύπων για πρόσωπα που σέβεσαι, και πότε να τα χρησιμοποιείς.",
+  "src": "780f9a71de34",
+  "by": "claude"
+ },
+ "t:verb.honorifics/question": {
+  "t": "Αλλάζουν τα ρήματα ή οι λέξεις για να δείξουν σεβασμό στο πρόσωπο για το οποίο ή στο οποίο μιλάς;",
+  "src": "b5bfefa24627",
+  "by": "claude"
+ },
+ "t:verb.honorifics/title": {
+  "t": "Τιμητικοί τύποι",
+  "src": "8067bc213cb5",
+  "by": "claude"
+ },
+ "t:verb.honorifics/values/0/title": {
+  "t": "όχι (σεβασμός μόνο μέσω αντωνυμιών ή τίτλων)",
+  "src": "a8c99b8c2222",
+  "by": "claude"
+ },
+ "t:verb.honorifics/values/1/title": {
+  "t": "ειδικό τιμητικό λεξιλόγιο (βασιλικές, θρησκευτικές ή ευγενικές λέξεις)",
+  "src": "e51b153fddfd",
+  "by": "claude"
+ },
+ "t:verb.honorifics/values/2/title": {
+  "t": "τιμητική ρηματική μορφολογία και επίπεδα ύφους",
+  "src": "021bb14592a4",
+  "by": "claude"
+ },
+ "t:verb.infinitive/learnerNote": {
+  "t": "Όπου δεν υπάρχει απαρέμφατο, πρέπει να μάθεις να λες το «θέλω να πάω» ως «θέλω ότι πάω» (ή με ρηματικό ουσιαστικό)· όπου υπάρχει, να κατακτήσεις τις δομές με απαρέμφατο.",
+  "src": "9112f484c965",
+  "by": "claude"
+ },
+ "t:verb.infinitive/question": {
+  "t": "Υπάρχει απαρέμφατο, και αν όχι, τι το αντικαθιστά;",
+  "src": "d56fa958a342",
+  "by": "claude"
+ },
+ "t:verb.infinitive/title": {
+  "t": "Απαρέμφατο",
+  "src": "7344fc40d016",
+  "by": "claude"
+ },
+ "t:verb.infinitive/values/0/title": {
+  "t": "απαρέμφατο",
+  "src": "dcc6d0196736",
+  "by": "claude"
+ },
+ "t:verb.infinitive/values/1/title": {
+  "t": "στη θέση του ρηματικό ουσιαστικό (μάσνταρ)",
+  "src": "ef09067a9031",
+  "by": "claude"
+ },
+ "t:verb.infinitive/values/2/title": {
+  "t": "στη θέση του παρεμφατική δευτερεύουσα πρόταση ή υποτακτική",
+  "src": "85d98776bf1c",
+  "by": "claude"
+ },
+ "t:verb.infinitive/values/3/title": {
+  "t": "δεν ισχύει: τα ρήματα δεν αλλάζουν μορφή",
+  "src": "c760153578f0",
+  "by": "claude"
+ },
+ "t:verb.lightVerbs/learnerNote": {
+  "t": "Πρέπει να μαθαίνεις τα ρήματα ως ενότητες ουσιαστικό + ελαφρύ ρήμα και ποιο ελαφρύ ρήμα παίρνει κάθε ουσιαστικό.",
+  "src": "41a56dc0d457",
+  "by": "claude"
+ },
+ "t:verb.lightVerbs/question": {
+  "t": "Σχηματίζονται πολλά ρήματα ως ουσιαστικό + «κάνω / φτιάχνω / είμαι» («δουλειά κάνω» = δουλεύω, «μελέτη κάνω» = μελετώ);",
+  "src": "4720c34c3802",
+  "by": "claude"
+ },
+ "t:verb.lightVerbs/title": {
+  "t": "Σύνθετα με «ελαφρύ» ρήμα",
+  "src": "edbcb369d1f7",
+  "by": "claude"
+ },
+ "t:verb.lightVerbs/values/0/title": {
+  "t": "σπάνια",
+  "src": "50270c12c086",
+  "by": "claude"
+ },
+ "t:verb.lightVerbs/values/1/title": {
+  "t": "συχνά",
+  "src": "92a5dc04bd6f",
+  "by": "claude"
+ },
+ "t:verb.lightVerbs/values/2/title": {
+  "t": "ο κύριος τρόπος σχηματισμού νέων ρημάτων",
+  "src": "c6a1ae599e32",
+  "by": "claude"
+ },
+ "t:verb.mirativity/learnerNote": {
+  "t": "Πρέπει να μάθεις τον ρηματικό τύπο ή το μόριο που δηλώνει έκπληξη ή κάτι που μόλις ανακαλύφθηκε.",
+  "src": "2e8fcf31b178",
+  "by": "claude"
+ },
+ "t:verb.mirativity/question": {
+  "t": "Υπάρχει γραμματική μορφή για νέα ή απρόσμενη πληροφορία («ώστε είναι εδώ!»);",
+  "src": "b54417a19a41",
+  "by": "claude"
+ },
+ "t:verb.mirativity/title": {
+  "t": "Θαυμαστικότητα",
+  "src": "b763e593d17b",
+  "by": "claude"
+ },
+ "t:verb.mirativity/values/0/title": {
+  "t": "όχι",
+  "src": "9390298f3fb0",
+  "by": "claude"
+ },
+ "t:verb.mirativity/values/1/title": {
+  "t": "ναι",
+  "src": "8a798890fe93",
+  "by": "claude"
+ },
+ "t:verb.objectCompounds/learnerNote": {
+  "t": "Πρέπει να μάθεις ότι αυτά τα ρήματα περιέχουν ήδη το αντικείμενό τους και πώς μπαίνουν μέσα τους οι δείκτες όψης και οι προσδιορισμοί.",
+  "src": "c7fa56ab1fab",
+  "by": "claude"
+ },
+ "t:verb.objectCompounds/question": {
+  "t": "Υπάρχουν ρήματα φτιαγμένα από ρήμα + αντικείμενο που χωρίζονται για να μπουν άλλες λέξεις ανάμεσα (睡觉 → 睡了一个好觉);",
+  "src": "6302074897f9",
+  "by": "claude"
+ },
+ "t:verb.objectCompounds/title": {
+  "t": "Χωριζόμενα σύνθετα ρήματος-αντικειμένου",
+  "src": "9cc8555698a8",
+  "by": "claude"
+ },
+ "t:verb.objectCompounds/values/0/title": {
+  "t": "όχι",
+  "src": "9390298f3fb0",
+  "by": "claude"
+ },
+ "t:verb.objectCompounds/values/1/title": {
+  "t": "ναι",
+  "src": "8a798890fe93",
+  "by": "claude"
+ },
+ "t:verb.objectMarking/learnerNote": {
+  "t": "Πρέπει να μάθεις να σημειώνεις το αντικείμενο μέσα στη ρηματική λέξη, ίσως και δύο φορές (με αντωνυμία και με ουσιαστικό), ή να σταματήσεις να το κάνεις.",
+  "src": "8bf34b6f73a1",
+  "by": "claude"
+ },
+ "t:verb.objectMarking/question": {
+  "t": "Σημειώνεται το αντικείμενο (πρόσωπο, αριθμός ή οριστικότητα) πάνω στο ρήμα;",
+  "src": "6ce7a43d8275",
+  "by": "claude"
+ },
+ "t:verb.objectMarking/title": {
+  "t": "Σήμανση αντικειμένου στο ρήμα",
+  "src": "043cc532d341",
+  "by": "claude"
+ },
+ "t:verb.objectMarking/values/0/title": {
+  "t": "όχι",
+  "src": "9390298f3fb0",
+  "by": "claude"
+ },
+ "t:verb.objectMarking/values/1/title": {
+  "t": "άτονες αντωνυμίες αντικειμένου κολλημένες στο ρήμα ή σε σταθερή θέση δίπλα του",
+  "src": "9737a068bb73",
+  "by": "claude"
+ },
+ "t:verb.objectMarking/values/2/title": {
+  "t": "συμφωνία: το ρήμα σημειώνει το αντικείμενο ακόμη κι όταν υπάρχει πλήρες ουσιαστικό-αντικείμενο",
+  "src": "b2076b5fb476",
+  "by": "claude"
+ },
+ "t:verb.objectMarking/values/3/title": {
+  "t": "το ρήμα έχει ξεχωριστή κλίση για οριστικά αντικείμενα",
+  "src": "7e4a5d528093",
+  "by": "claude"
+ },
+ "t:verb.optative/learnerNote": {
+  "t": "Πρέπει να μάθεις ξεχωριστό ρηματικό τύπο για ευχές και ευλογίες, ή να τις εκφράζεις με δομές «ας» / «να».",
+  "src": "f2cbd51aa0b8",
+  "by": "claude"
+ },
+ "t:verb.optative/question": {
+  "t": "Υπάρχει ειδικός κλιτικός τύπος για ευχές («να ζήσει»);",
+  "src": "e0dce5d89b63",
+  "by": "claude"
+ },
+ "t:verb.optative/title": {
+  "t": "Ευκτική",
+  "src": "dc160f109bd5",
+  "by": "claude"
+ },
+ "t:verb.optative/values/0/title": {
+  "t": "όχι",
+  "src": "9390298f3fb0",
+  "by": "claude"
+ },
+ "t:verb.optative/values/1/title": {
+  "t": "ναι",
+  "src": "8a798890fe93",
+  "by": "claude"
+ },
+ "t:verb.participles/learnerNote": {
+  "t": "Πρέπει να μάθεις να μετατρέπεις μια αναφορική πρόταση σε μετοχική φράση («το διαβασμένο από μένα βιβλίο») ή αντίστροφα.",
+  "src": "136adce972aa",
+  "by": "claude"
+ },
+ "t:verb.participles/question": {
+  "t": "Υπάρχουν μετοχές (επιθετικοί ρηματικοί τύποι), και πόσες;",
+  "src": "429bd902f1c2",
+  "by": "claude"
+ },
+ "t:verb.participles/title": {
+  "t": "Μετοχές",
+  "src": "8692d6f37e2d",
+  "by": "claude"
+ },
+ "t:verb.participles/values/0/title": {
+  "t": "κανένα (ή δεν διαφέρουν από τους παρεμφατικούς τύπους)",
+  "src": "88ec3a76782c",
+  "by": "claude"
+ },
+ "t:verb.participles/values/1/title": {
+  "t": "μία ή δύο, κυρίως σε περιφραστικούς χρόνους",
+  "src": "03d9191cefbb",
+  "by": "claude"
+ },
+ "t:verb.participles/values/2/title": {
+  "t": "πολλές, ανά χρόνο / φωνή, που χρησιμοποιούνται σαν αναφορικές προτάσεις",
+  "src": "f94c7662aab0",
+  "by": "claude"
+ },
+ "t:verb.particleVerbs/learnerNote": {
+  "t": "Πρέπει να μάθεις τη σημασία κάθε ρήματος με μόριο ως ενιαίο σύνολο και, για τα χωριζόμενα, πού μπαίνει το μόριο σε κάθε είδος πρότασης.",
+  "src": "0cf5c282655f",
+  "by": "claude"
+ },
+ "t:verb.particleVerbs/question": {
+  "t": "Υπάρχουν ρήματα με μόρια ή προθήματα που αλλάζουν τη σημασία, και χωρίζονται από το ρήμα;",
+  "src": "35b65f2c9688",
+  "by": "claude"
+ },
+ "t:verb.particleVerbs/title": {
+  "t": "Ρηματικά μόρια και προρρηματικά στοιχεία",
+  "src": "668ddf281404",
+  "by": "claude"
+ },
+ "t:verb.particleVerbs/values/0/title": {
+  "t": "χωρίς συστηματική κατηγορία ρημάτων με μόριο",
+  "src": "dffcbba1dac3",
+  "by": "claude"
+ },
+ "t:verb.particleVerbs/values/1/title": {
+  "t": "ρήματα με πρόθημα που μένει κολλημένο",
+  "src": "83fa24eab39c",
+  "by": "claude"
+ },
+ "t:verb.particleVerbs/values/2/title": {
+  "t": "φραστικά ρήματα: ξεχωριστό μόριο μετά το ρήμα",
+  "src": "b6f314ad82b2",
+  "by": "claude"
+ },
+ "t:verb.particleVerbs/values/3/title": {
+  "t": "χωριζόμενα: το μόριο είναι κολλημένο σε ορισμένους τύπους και ξεκολλάει σε άλλους",
+  "src": "8971596dda74",
+  "by": "claude"
+ },
+ "t:verb.passive/learnerNote": {
+  "t": "Πρέπει να μάθεις πώς (και πόσο συχνά) η γλώσσα προάγει το αντικείμενο σε υποκείμενο, ή πώς το αποφεύγει.",
+  "src": "2b09de40e457",
+  "by": "claude"
+ },
+ "t:verb.passive/question": {
+  "t": "Υπάρχει παθητική φωνή, και πώς σχηματίζεται;",
+  "src": "fcf00861be29",
+  "by": "claude"
+ },
+ "t:verb.passive/title": {
+  "t": "Παθητική φωνή",
+  "src": "78c04330e989",
+  "by": "claude"
+ },
+ "t:verb.passive/values/0/title": {
+  "t": "χωρίς παθητική φωνή",
+  "src": "adc05bb1c377",
+  "by": "claude"
+ },
+ "t:verb.passive/values/1/title": {
+  "t": "με βοηθητικό ρήμα ή μόριο («είμαι» + μετοχή, 被)",
+  "src": "8f9eaa60f502",
+  "by": "claude"
+ },
+ "t:verb.passive/values/2/title": {
+  "t": "με ρηματικό πρόσφυμα ή μοτίβο θέματος",
+  "src": "beca586dfc05",
+  "by": "claude"
+ },
+ "t:verb.passive/values/3/title": {
+  "t": "σύστημα φωνών: οποιοδήποτε από πολλά ορίσματα μπορεί να γίνει ο άξονας",
+  "src": "0387e7289dc2",
+  "by": "claude"
+ },
+ "t:verb.past/learnerNote": {
+  "t": "Όποιος δεν έχει παρελθοντικό χρόνο πρέπει να σημειώνει κάθε περασμένο γεγονός πάνω στο ρήμα· όποιος έχει έναν παρελθοντικό πρέπει να μάθει να διαλέγει ανάμεσα σε κοντινό και μακρινό παρελθόν.",
+  "src": "fbe26efa835f",
+  "by": "claude"
+ },
+ "t:verb.past/question": {
+  "t": "Υπάρχει γραμματικός παρελθοντικός χρόνος, και ξεχωρίζει βαθμούς απόστασης;",
+  "src": "2b37d902c343",
+  "by": "claude"
+ },
+ "t:verb.past/title": {
+  "t": "Παρελθοντικός χρόνος",
+  "src": "2c3f512a02e5",
+  "by": "claude"
+ },
+ "t:verb.past/values/0/title": {
+  "t": "χωρίς γραμματικό παρελθοντικό χρόνο",
+  "src": "1a5c9f06047f",
+  "by": "claude"
+ },
+ "t:verb.past/values/1/title": {
+  "t": "ένας παρελθοντικός (χωρίς διακρίσεις απόστασης)",
+  "src": "7bd806d6b989",
+  "by": "claude"
+ },
+ "t:verb.past/values/2/title": {
+  "t": "δύο ή περισσότεροι παρελθοντικοί ανάλογα με την απόσταση (σήμερα / χθες / πριν από πολύ καιρό)",
+  "src": "2deecd9f9a8e",
+  "by": "claude"
+ },
+ "t:verb.perfect/learnerNote": {
+  "t": "Πρέπει να μάθεις πότε απαιτείται ο παρακείμενος (αντί για απλό παρελθοντικό χρόνο) και πώς σχηματίζεται.",
+  "src": "d5376b977dce",
+  "by": "claude"
+ },
+ "t:verb.perfect/question": {
+  "t": "Υπάρχει παρακείμενος («έχει κάνει», με σημασία για το παρόν), και από τι χτίζεται;",
+  "src": "cb69ad4a0cf6",
+  "by": "claude"
+ },
+ "t:verb.perfect/title": {
+  "t": "Παρακείμενος",
+  "src": "b7b5d051e8cb",
+  "by": "claude"
+ },
+ "t:verb.perfect/values/0/title": {
+  "t": "χωρίς παρακείμενο",
+  "src": "7adc44105b6f",
+  "by": "claude"
+ },
+ "t:verb.perfect/values/1/title": {
+  "t": "από δομή με «έχω»",
+  "src": "0d4f12749656",
+  "by": "claude"
+ },
+ "t:verb.perfect/values/2/title": {
+  "t": "από «τελειώνω» ή «ήδη»",
+  "src": "c434d9a1f8ab",
+  "by": "claude"
+ },
+ "t:verb.perfect/values/3/title": {
+  "t": "άλλο (π.χ. «είμαι» + μετοχή, πρόσφυμα)",
+  "src": "cb91586e0274",
+  "by": "claude"
+ },
+ "t:verb.perfective/learnerNote": {
+  "t": "Όποιος δεν έχει όψη πρέπει να αποφασίζει για κάθε ρήμα στο παρελθόν ή στο μέλλον αν το γεγονός ιδωθεί ως σύνολο ή ως κάτι που διαρκεί· με ζεύγη ρημάτων, κάθε ρήμα πρέπει να μαθευτεί δύο φορές.",
+  "src": "11222d36d879",
+  "by": "claude"
+ },
+ "t:verb.perfective/question": {
+  "t": "Ξεχωρίζει η γραμματική τα ολοκληρωμένα (συνοπτική όψη) από τα διαρκή / επαναλαμβανόμενα (μη συνοπτική όψη) γεγονότα;",
+  "src": "06f60ce9c2a2",
+  "by": "claude"
+ },
+ "t:verb.perfective/title": {
+  "t": "Συνοπτική / μη συνοπτική όψη",
+  "src": "9bcafca5647c",
+  "by": "claude"
+ },
+ "t:verb.perfective/values/0/title": {
+  "t": "χωρίς γραμματικό ζεύγος όψης",
+  "src": "e6478dd60b4f",
+  "by": "claude"
+ },
+ "t:verb.perfective/values/1/title": {
+  "t": "ναι, με ρηματικούς τύπους (π.χ. αόριστος / παρατατικός)",
+  "src": "073477f8383c",
+  "by": "claude"
+ },
+ "t:verb.perfective/values/2/title": {
+  "t": "ναι, με ζεύγη ρημάτων (συνήθως παράγωγα με πρόθημα ή επίθημα)",
+  "src": "7bd9088dfd94",
+  "by": "claude"
+ },
+ "t:verb.perfective/values/3/title": {
+  "t": "ναι, με μόρια",
+  "src": "fb9a6312ceea",
+  "by": "claude"
+ },
+ "t:verb.progressive/learnerNote": {
+  "t": "Πρέπει να μάθεις αν το «τρώω» μπορεί να σημαίνει «τρώω αυτή τη στιγμή» και πότε απαιτείται η εξελικτική μορφή.",
+  "src": "ee7ac50cbdfa",
+  "by": "claude"
+ },
+ "t:verb.progressive/question": {
+  "t": "Υπάρχει εξελικτική μορφή («κάνω αυτή τη στιγμή»), και πρέπει να χρησιμοποιείται για γεγονότα σε εξέλιξη;",
+  "src": "a949dff9170c",
+  "by": "claude"
+ },
+ "t:verb.progressive/title": {
+  "t": "Εξελικτική μορφή",
+  "src": "c21bea0c6d59",
+  "by": "claude"
+ },
+ "t:verb.progressive/values/0/title": {
+  "t": "χωρίς ειδική εξελικτική μορφή",
+  "src": "3a772278b616",
+  "by": "claude"
+ },
+ "t:verb.progressive/values/1/title": {
+  "t": "υπάρχει εξελικτική μορφή, αλλά και η απλή μορφή καλύπτει τα γεγονότα σε εξέλιξη",
+  "src": "353a3b4efe98",
+  "by": "claude"
+ },
+ "t:verb.progressive/values/2/title": {
+  "t": "τα γεγονότα σε εξέλιξη απαιτούν την εξελικτική μορφή",
+  "src": "0f8a8fc6e3c5",
+  "by": "claude"
+ },
+ "t:verb.subjectAgreement/learnerNote": {
+  "t": "Όποιος δεν έχει συμφωνία πρέπει να μάθει πίνακες κλίσης· όποιος έχει συμφωνία πρέπει να μάθει ότι εδώ το ρήμα μένει ίδιο και το υποκείμενο πρέπει να λέγεται.",
+  "src": "54c263debe6d",
+  "by": "claude"
+ },
+ "t:verb.subjectAgreement/question": {
+  "t": "Αλλάζει το ρήμα ανάλογα με το υποκείμενο, και ως προς τι;",
+  "src": "c137cc62cf13",
+  "by": "claude"
+ },
+ "t:verb.subjectAgreement/title": {
+  "t": "Συμφωνία του ρήματος με το υποκείμενο",
+  "src": "47cf38ba6e69",
+  "by": "claude"
+ },
+ "t:verb.subjectAgreement/values/0/title": {
+  "t": "χωρίς συμφωνία",
+  "src": "66476bf1f091",
+  "by": "claude"
+ },
+ "t:verb.subjectAgreement/values/1/title": {
+  "t": "πρόσωπο και αριθμός",
+  "src": "fe091eda3007",
+  "by": "claude"
+ },
+ "t:verb.subjectAgreement/values/2/title": {
+  "t": "πρόσωπο, αριθμός και (σε ορισμένους τύπους) γένος",
+  "src": "a817767c8543",
+  "by": "claude"
+ },
+ "t:verb.subjectAgreement/values/3/title": {
+  "t": "πρόσωπο και ονοματική τάξη",
+  "src": "86f4ca544f32",
+  "by": "claude"
+ },
+ "t:verb.subjunctive/learnerNote": {
+  "t": "Όποιος δεν έχει υποτακτική πρέπει να μάθει ποιοι σύνδεσμοι και ποια ρήματα την προκαλούν και τους τύπους της· όποιος την έχει πρέπει να μάθει να χρησιμοποιεί συνηθισμένους τύπους.",
+  "src": "e1b1fe28924a",
+  "by": "claude"
+ },
+ "t:verb.subjunctive/question": {
+  "t": "Υπάρχει υποτακτική (ρηματικός τύπος για ευχές, σκοπό, δυνατότητα σε δευτερεύουσες προτάσεις);",
+  "src": "3a3fc2d04f09",
+  "by": "claude"
+ },
+ "t:verb.subjunctive/title": {
+  "t": "Υποτακτική",
+  "src": "05ba186b1cc6",
+  "by": "claude"
+ },
+ "t:verb.subjunctive/values/0/title": {
+  "t": "όχι",
+  "src": "9390298f3fb0",
+  "by": "claude"
+ },
+ "t:verb.subjunctive/values/1/title": {
+  "t": "ναι: ειδικοί ρηματικοί τύποι",
+  "src": "e4410deb1848",
+  "by": "claude"
+ },
+ "t:verb.subjunctive/values/2/title": {
+  "t": "ναι: μόριο (συχνά με ειδικούς ρηματικούς τύπους)",
+  "src": "3c4043ceabc8",
+  "by": "claude"
+ },
+ "t:verb.tenseObligatory/learnerNote": {
+  "t": "Όποιος έρχεται από γλώσσα χωρίς χρόνους πρέπει να σημειώνει τον χρόνο σε κάθε ρήμα· όποιος έχει χρόνους πρέπει να μάθει να αφήνει τον χρόνο στα επιρρήματα και στα συμφραζόμενα.",
+  "src": "5fb107a94a7f",
+  "by": "claude"
+ },
+ "t:verb.tenseObligatory/question": {
+  "t": "Πρέπει κάθε παρεμφατικό ρήμα (ή πρόταση) να σημειώνεται για χρόνο;",
+  "src": "ea9a6baeb68a",
+  "by": "claude"
+ },
+ "t:verb.tenseObligatory/title": {
+  "t": "Υποχρεωτικός χρόνος",
+  "src": "088ff1874f12",
+  "by": "claude"
+ },
+ "t:verb.tenseObligatory/values/0/title": {
+  "t": "ναι: χρόνος ή δείκτης χρόνου-όψης σε κάθε παρεμφατική πρόταση",
+  "src": "dfe8837c18e9",
+  "by": "claude"
+ },
+ "t:verb.tenseObligatory/values/1/title": {
+  "t": "ένας δείκτης όψης ή έγκλισης είναι υποχρεωτικός, αλλά όχι ο χρόνος",
+  "src": "8a8daa00071d",
+  "by": "claude"
+ },
+ "t:verb.tenseObligatory/values/2/title": {
+  "t": "όχι: ο χρόνος δείχνεται με προαιρετικά μόρια, επιρρήματα ή τα συμφραζόμενα",
+  "src": "00de43bb193b",
+  "by": "claude"
+ }
+}

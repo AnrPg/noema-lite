@@ -299,57 +299,57 @@
   {
    "for": "el",
    "rel": "similar",
-   "text": "Greek builds the future with θα + verb (θα ταξιδέψω); German uses werden + infinitive at the end of the clause – and very often just the present with a time word."
+   "text": "Greek builds the future with θα + verb (θα ταξιδέψω).\n\nGerman uses werden + infinitive at the end of the clause – and **very often just the present with a time word**."
   },
   {
    "for": "ru",
    "rel": "similar",
-   "text": "Like the Russian буду + infinitive, German uses an auxiliary: werde + infinitive. And as the Russian perfective present (поеду) points to the future, the German present with a time word often does: Morgen fahre ich."
+   "text": "Like the Russian буду + infinitive, German uses an auxiliary: werde + infinitive.\n\nAnd as the Russian perfective present (поеду) points to the future, the German present with a time word often does:\n→ Morgen fahre ich."
   },
   {
    "for": "es",
    "rel": "different",
-   "text": "Spanish has a future ending (viajaré) and ir a + infinitive; German has neither: Ich werde reisen, or simply Ich reise morgen."
+   "text": "Spanish has a future ending (viajaré) and ir a + infinitive; German has neither:\n→ Ich werde reisen, or simply Ich reise morgen."
   },
   {
    "for": "en",
    "rel": "trap",
-   "text": "Ich will means “I want”, not “I will”; the future auxiliary is werden. With a time word German prefers the present: Next week I’m going … = Nächste Woche fahre ich …"
+   "text": "**Ich will means “I want”, not “I will”**; the future auxiliary is werden.\n\nWith a time word German prefers the present:\n→ Next week I’m going … = Nächste Woche fahre ich …"
   },
   {
    "for": "fr",
    "rel": "different",
-   "text": "French has a future ending (je voyagerai) and aller + infinitive; German uses werden + infinitive, or the present with a time word."
+   "text": "French has a future ending (je voyagerai) and aller + infinitive.\n\nGerman uses werden + infinitive, or the present with a time word."
   },
   {
    "for": "hi",
    "rel": "different",
-   "text": "Hindi has a future ending that also shows gender (जाऊँगा / जाऊँगी); German werden shows only person and number: ich werde gehen."
+   "text": "Hindi has a future ending that also shows gender (जाऊँगा / जाऊँगी); German werden shows only person and number:\n→ ich werde gehen"
   },
   {
    "for": "fa",
    "rel": "similar",
-   "text": "Persian forms the future with the auxiliary xāstan + the short past stem (xāham raft); German too uses an auxiliary (werden) + the infinitive, placed at the end."
+   "text": "Persian forms the future with the auxiliary xāstan + the short past stem (xāham raft).\n\nGerman too uses an auxiliary (werden) + the infinitive, placed at the end."
   },
   {
    "for": "mr",
    "rel": "different",
-   "text": "Marathi has future endings on the verb; German uses a separate auxiliary werden and keeps the main verb in the infinitive."
+   "text": "Marathi has future endings on the verb.\n\nGerman uses a separate auxiliary werden and keeps the main verb in the infinitive."
   },
   {
    "for": "ar",
    "rel": "different",
-   "text": "Arabic marks the future with sa- / sawfa before the imperfect; German uses the auxiliary werden and puts the infinitive at the end."
+   "text": "Arabic marks the future with sa- / sawfa before the imperfect.\n\nGerman uses the auxiliary werden and puts the infinitive at the end."
   },
   {
    "for": "he",
    "rel": "different",
-   "text": "Hebrew has a separate future conjugation with prefixes (esa, tisa, yisa); German has none and uses werden + infinitive or the present."
+   "text": "Hebrew has a separate future conjugation with prefixes (esa, tisa, yisa).\n\nGerman has none and uses werden + infinitive or the present."
   },
   {
    "for": "tr",
    "rel": "different",
-   "text": "Turkish has a future suffix -ecek / -acak (gideceğim); German adds the separate auxiliary werden, or uses the present with a time word."
+   "text": "Turkish has a future suffix -ecek / -acak (gideceğim).\n\nGerman adds the separate auxiliary werden, or uses the present with a time word."
   },
   {
    "for": "ja",
@@ -359,37 +359,77 @@
   {
    "for": "ko",
    "rel": "different",
-   "text": "Korean uses endings such as -(으)ㄹ 거예요 for future plans; German puts werden in second place and the infinitive at the end."
+   "text": "Korean uses endings such as -(으)ㄹ 거예요 for future plans.\n\nGerman puts werden in second place and the infinitive at the end."
   },
   {
    "for": "fi",
    "rel": "similar",
-   "text": "Finnish has no future tense either: the present and a time word (huomenna menen) do the job, as in German Morgen gehe ich. German also has werden + infinitive."
+   "text": "Finnish has no future tense either: the present and a time word (huomenna menen) do the job, as in German:\n→ Morgen gehe ich.\n\nGerman also has werden + infinitive."
   },
   {
    "for": "hu",
    "rel": "similar",
-   "text": "Hungarian uses the present for the future or the auxiliary fog + infinitive (menni fogok); German: Morgen gehe ich, or Ich werde gehen."
+   "text": "Hungarian uses the present for the future or the auxiliary fog + infinitive (menni fogok). German:\n→ Morgen gehe ich, or Ich werde gehen."
   },
   {
    "for": "sw",
    "rel": "different",
-   "text": "Swahili marks the future with the prefix -ta- (nitasafiri); German uses a separate auxiliary: Ich werde reisen."
+   "text": "Swahili marks the future with the prefix -ta- (nitasafiri); German uses a separate auxiliary:\n→ Ich werde reisen."
   },
   {
    "for": "zh",
    "rel": "new",
-   "text": "Chinese adds 要 / 会 / 打算 or only a time word and the verb never changes; German conjugates werden for the person (ich werde, du wirst) and puts the infinitive last."
+   "text": "Chinese adds 要 / 会 / 打算 or only a time word and the verb never changes.\n\nGerman conjugates werden for the person (ich werde, du wirst) and puts the infinitive last."
   },
   {
    "for": "vi",
    "rel": "new",
-   "text": "Vietnamese puts sẽ before the verb (tôi sẽ đi); German puts werden second and the infinitive at the end: Ich werde gehen."
+   "text": "Vietnamese puts sẽ before the verb (tôi sẽ đi); German puts werden second and the infinitive at the end:\n→ Ich werde gehen."
   },
   {
    "for": "iu",
    "rel": "different",
-   "text": "Inuktitut marks the future with a suffix inside the verb word; German uses the separate auxiliary werden + infinitive."
+   "text": "Inuktitut marks the future with a suffix inside the verb word.\n\nGerman uses the separate auxiliary werden + infinitive."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Italian has a future ending (viaggerò), but like German it often uses the present for a plan:\n→ Domani parto – Morgen fahre ich.\n\nGerman has no ending: werden + infinitive at the end (Ich werde reisen), which also makes a guess, as the Italian future does:\n→ Sarà a casa – Er wird zu Hause sein."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Like do të + verb (do të udhëtoj), German builds its future with a helper: werden + infinitive (Ich werde reisen) – but werden changes for the person and the infinitive goes to the end.\n\nWith a time word both often use the present:\n→ Nesër nisem – Morgen fahre ich."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese has a future ending (viajarei) and ir + infinitive (vou viajar); German has neither:\n→ Ich werde reisen\n→ or simply the present with a time word, as in Amanhã viajo – Morgen reise ich.\n\n**Do not copy vou + infinitive with gehen**: the helper is werden."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "Whether your language has a future ending or a helper verb, German usually needs neither: **the present with a time word is the normal future**.\n→ Morgen fahre ich nach Berlin.\n\nwerden + infinitive at the end makes it explicit or firm."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If your future is a suffix on the verb, German uses a separate helper, werden, in second place and the infinitive at the very end:\n→ Ich werde ein Hotel buchen.\n\nOr simply the present with a time word:\n→ Morgen buche ich ein Hotel."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "similar",
+   "text": "If a time word or a helper shows the future and the verb never changes, German often does the same with a time word (Morgen fahre ich).\n\nBut the helper werden changes for the person – ich werde, du wirst, er wird – and the infinitive goes last."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "Where your language adds a future suffix inside the verb, German either:\n- uses the present with a time word (Morgen fahre ich), or\n- puts the separate helper werden second and the infinitive last: Ich werde fahren."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If your future is a verb form or a particle before the verb, German uses werden + infinitive – werden second, the infinitive at the end:\n→ Ich werde reisen.\n\nWith a time word most often just the present:\n→ Morgen reise ich."
   }
  ]
 }

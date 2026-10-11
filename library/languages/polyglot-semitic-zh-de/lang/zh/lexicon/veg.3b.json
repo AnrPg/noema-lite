@@ -22,7 +22,18 @@
     "measure": [
      "颗",
      "粒"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "zh.wikipedia: 刺山柑 (title for Capparis spinosa, Wikidata Q156251); Wiktionary has no entry (its 酸豆 lists “pickled caper”)",
@@ -95,13 +106,45 @@
      "src": "character composition"
     },
     "funFacts": [
-     "Arabic كَبَر (kabar), Greek κάππαρις (kápparis), German Kaper and English caper are all the same word."
+     "Arabic كَبَر (kabar) and German Kaper are the same old Mediterranean word."
     ],
     "pitfalls": [
      "酸豆 alone often means tamarind (also 酸角) on the Mainland — say 刺山柑 to be clear."
     ],
     "subtleties": [
      "Caper berries (the fruit) are bigger than capers (the buds); the smallest buds are the most prized."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Greek κάππαρη (ancient κάππαρις) is the same word."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "English caper is the same word."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "French câpre is the same word."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Italian cappero is the same word."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "Spanish alcaparra is the same word, with the Arabic article al-."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Portuguese alcaparra is the same word, with the Arabic article al-."
+     }
     ]
    }
   },
@@ -126,7 +169,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "market name (not in Wiktionary or CC-CEDICT); zh.wikipedia files the plant as 刺角瓜 (Wikidata Q41318)",
@@ -233,7 +287,18 @@
     "measure": [
      "颗",
      "粒"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -308,7 +373,7 @@
      }
     ],
     "etymology": {
-     "text": "棉 (‘cotton’) + 豆 (‘bean’). The English name comes from Lima, Peru.",
+     "text": "棉 (‘cotton’) + 豆 (‘bean’).",
      "src": "character composition; Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -320,6 +385,13 @@
     ],
     "subtleties": [
      "In Britain the dried white ones are called butter beans."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English lima bean is named after Lima, Peru."
+     }
     ]
    }
   },
@@ -345,7 +417,18 @@
     "measure": [
      "个",
      "棵"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "descriptive standard name (not in Wiktionary or CC-CEDICT)",
@@ -413,13 +496,30 @@
      "src": "character composition"
     },
     "funFacts": [
-     "English Savoy comes from the Savoy region in the Alps; German Wirsing comes from Italian (Lombard) verza."
+     "German Wirsing comes from Lombard (northern Italian) verza; Chinese 皱叶 ‘wrinkled leaf’ names the crinkly leaves."
     ],
     "pitfalls": [
      "In 甘蓝, 蓝 is an old plant word (as in the indigo plant), not the colour blue."
     ],
     "subtleties": [
      "Its looser, crinkled leaves cook faster than a smooth white cabbage."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English Savoy comes from the Savoy region in the Alps."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "French chou de Savoie names the same region."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "Italian verza is the source of German Wirsing."
+     }
     ]
    }
   },
@@ -444,7 +544,18 @@
     },
     "measure": [
      "根"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -550,7 +661,18 @@
     "measure": [
      "张",
      "片"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -660,7 +782,18 @@
     "measure": [
      "根",
      "条"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -749,10 +882,17 @@
      "Cantonese 胜瓜 replaces 丝 because it sounds like 输 ‘lose’ — the same taboo that turned 猪舌 ‘pig’s tongue’ into 猪脷."
     ],
     "pitfalls": [
-     "English ‘Chinese okra’ (Wiktionary’s gloss) means this gourd — not okra (秋葵)."
+     "Not okra (秋葵): the ridged gourd is sometimes sold as a kind of ‘okra’, but it is a luffa."
     ],
     "subtleties": [
      "Old dried fruits turn fibrous, but the bath sponge is usually made from the smooth luffa (丝瓜)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English ‘Chinese okra’ (Wiktionary’s gloss) means this gourd — not okra (秋葵)."
+     }
     ]
    }
   },
@@ -777,7 +917,18 @@
     },
     "measure": [
      "根"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -883,7 +1034,34 @@
     },
     "measure": [
      "根"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": [
+     {
+      "measure": [
+       "根"
+      ],
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "measure": [
+       "颗",
+       "粒"
+      ],
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -984,7 +1162,7 @@
      "src": "character composition; Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The pods can grow half a metre long — English ‘yardlong’ exaggerates a little."
+     "The pods can grow half a metre long."
     ],
     "pitfalls": [
      "Wiktionary’s gloss is ‘cowpea; black-eyed pea’ — the long green 豇豆 at a Chinese market is the yardlong bean, a cowpea subspecies.",
@@ -992,6 +1170,13 @@
     ],
     "subtleties": [
      "What 豆角 means depends on the region: green beans (四季豆) in much of the north, long beans in many southern places."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English ‘yardlong bean’ exaggerates a little."
+     }
     ]
    }
   },
@@ -1017,7 +1202,18 @@
     "measure": [
      "个",
      "棵"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "zh.wikipedia: 宝塔花菜 (title for Wikidata Q1775431, “又称罗马花椰菜”); Wiktionary has no entry",
@@ -1091,13 +1287,20 @@
     },
     "funFacts": [
      "The number of spirals on a Romanesco is usually a Fibonacci number.",
-     "Italian romanesco means ‘Roman’."
+     "宝塔 ‘pagoda’ describes the spiralling, tower-like florets."
     ],
     "pitfalls": [
      "宝塔菜 (without 花) is the Chinese artichoke 甘露子, a tuber."
     ],
     "subtleties": [
      "Botanically a cauliflower cultivar, it tastes somewhere between cauliflower and broccoli."
+    ],
+    "notes": [
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "Italian romanesco means ‘Roman’; 宝塔菜花 sees a pagoda instead."
+     }
     ]
    }
   },
@@ -1123,7 +1326,18 @@
     "measure": [
      "根",
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1222,7 +1436,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "zh.wikipedia: 哈瓦那辣椒 (title for Wikidata Q764375); Wiktionary has no entry",
@@ -1286,7 +1511,7 @@
     "synonyms": [],
     "synonymsNone": "Chinese uses only this transcribed name. The Hainan 黄灯笼辣椒 (‘yellow lantern chili’) is the same species, Capsicum chinense, but a different variety, not a synonym.",
     "etymology": {
-     "text": "哈瓦那 (Havana, Spanish La Habana) + 辣椒 (‘chili’): like Spanish habanero, ‘from Havana’.",
+     "text": "哈瓦那 (Havana, Spanish La Habana) + 辣椒 (‘chili’): ‘the Havana chili’.",
      "src": "character composition"
     },
     "funFacts": [
@@ -1297,6 +1522,13 @@
     ],
     "subtleties": [
      "About 100,000–350,000 Scoville units, with a fruity aroma behind the heat."
+    ],
+    "notes": [
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "Spanish habanero ‘from Havana’ says the same."
+     }
     ]
    }
   },
@@ -1321,7 +1553,18 @@
     },
     "measure": [
      "片"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1432,7 +1675,18 @@
     "measure": [
      "根",
      "条"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1538,7 +1792,18 @@
     "measure": [
      "片",
      "条"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1666,7 +1931,18 @@
     },
     "measure": [
      "片"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "zh.wikipedia: 石莼属 (Ulva, Wikidata Q1109330), species 石莼 (Ulva lactuca); Wiktionary has no entry",
@@ -1771,7 +2047,18 @@
     "measure": [
      "棵",
      "根"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1853,7 +2140,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English gai lan is the Cantonese pronunciation.",
+     "The name gai lan on menus abroad is the Cantonese pronunciation of 芥蓝.",
      "Su Shi (苏轼) wrote about 芥蓝 during his exile in Guangdong in the 1090s."
     ],
     "pitfalls": [
@@ -1861,6 +2148,13 @@
     ],
     "subtleties": [
      "芥蓝 is the same species as broccoli and cabbage (甘蓝), Brassica oleracea."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English gai lan / kai-lan is that Cantonese pronunciation."
+     }
     ]
    }
   },
@@ -1886,7 +2180,18 @@
     "measure": [
      "颗",
      "粒"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1964,13 +2269,20 @@
      "src": "character composition; Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Japanese edamame (枝豆) means ‘branch beans’ — they were sold still on the stem."
+     "毛豆 ‘hairy beans’ are named after the fine fuzz on the pods."
     ],
     "pitfalls": [
      "毛豆 and 黄豆 are the same plant (soybean, 大豆) picked at different ages."
     ],
     "subtleties": [
      "In Chinese home cooking 毛豆 are usually shelled and stir-fried; the salted pods are a bar snack."
+    ],
+    "notes": [
+     {
+      "for": "ja",
+      "rel": "different",
+      "text": "Japanese edamame 枝豆 ‘branch beans’ are the same — named after the stem they were sold on, where Chinese sees the hairy pods."
+     }
     ]
    }
   },
@@ -1995,7 +2307,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "market and seed-catalogue name (not in Wiktionary, CC-CEDICT or zh.wikipedia)",
@@ -2059,17 +2382,29 @@
     "synonyms": [],
     "synonymsNone": "A modern name for an imported summer squash; there are no older or regional names.",
     "etymology": {
-     "text": "飞碟 (‘flying saucer, UFO’) + 瓜 (‘gourd, squash’) — like the English trade name ‘UFO squash’.",
+     "text": "飞碟 (‘flying saucer, UFO’) + 瓜 (‘gourd, squash’).",
      "src": "character composition"
     },
     "funFacts": [
-     "French calls it pâtisson; English pattypan refers to a small pan for baking patties."
+     "Its flat, scalloped shape has given it names after pies, pans and flying saucers."
     ],
     "pitfalls": [
      "Not a storage pumpkin (南瓜): eat it young and tender, like zucchini."
     ],
     "subtleties": [
      "It comes in white, yellow and green."
+    ],
+    "notes": [
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "French pâtisson names it after a pie (pâté)."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English pattypan refers to a small pan for baking patties; ‘UFO squash’ is the trade name 飞碟瓜 matches."
+     }
     ]
    }
   },
@@ -2094,7 +2429,18 @@
     },
     "measure": [
      "把"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "zh.wikipedia: 羊栖菜 (title for Wikidata Q1204264); Wiktionary has no entry",
@@ -2200,7 +2546,18 @@
     "measure": [
      "串",
      "颗"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2285,7 +2642,7 @@
      }
     ],
     "etymology": {
-     "text": "海 (‘sea’) + 葡萄 (‘grapes’), as in English ‘sea grapes’. 葡萄 itself was borrowed in the Han dynasty from an Iranian language (Bactrian *bādāwa ‘wine’, Wiktionary).",
+     "text": "海 (‘sea’) + 葡萄 (‘grapes’). 葡萄 itself was borrowed in the Han dynasty from an Iranian language (Bactrian *bādāwa ‘wine’, Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -2296,6 +2653,13 @@
     ],
     "subtleties": [
      "葡萄 is pútáo; in quick speech often pútao."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "As in English ‘sea grapes’."
+     }
     ]
    }
   },
@@ -2320,7 +2684,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "zh.wikipedia: 金絲瓜 (title for Wikidata Q2142043); Wiktionary has no entry",
@@ -2431,7 +2806,18 @@
     "measure": [
      "棵",
      "把"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "CC-CEDICT (MDBG): 小松菜 xiao3 song1 cai4 ‘komatsuna’; zh.wikipedia (Wikidata Q4383692); Wiktionary has no Chinese entry",
@@ -2502,10 +2888,17 @@
      "Legend says the shogun Tokugawa Yoshimune named it after the village of Komatsugawa."
     ],
     "pitfalls": [
-     "It is a Brassica rapa like 小白菜 — not spinach, despite the English ‘mustard spinach’."
+     "It is a Brassica rapa like 小白菜 — not spinach (菠菜)."
     ],
     "subtleties": [
      "Written with Japanese kanji but pronounced the Chinese way: xiǎo sōng cài, not komatsuna."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "Not spinach, despite the English ‘mustard spinach’."
+     }
     ]
    }
   },
@@ -2531,7 +2924,18 @@
     "measure": [
      "棵",
      "把"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "zh.wikipedia: 水菜 (title for Wikidata Q50912348), “也称京菜、京水、京水菜、京都水菜”; Wiktionary has no entry",
@@ -2635,7 +3039,18 @@
     },
     "measure": [
      "棵"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2750,7 +3165,18 @@
     },
     "measure": [
      "朵"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "transparent compound 南瓜 + 花 (not in Wiktionary or CC-CEDICT); the usual Chinese name for squash blossoms as food",
@@ -2827,13 +3253,25 @@
      "src": "character composition"
     },
     "funFacts": [
-     "Italian fiori di zucca and Mexican flor de calabaza are the same delicacy."
+     "The flowers are stuffed or fried in many cuisines, from Italy to Mexico."
     ],
     "pitfalls": [
      "南瓜花 covers the blossoms of any squash; for zucchini flowers specifically you can say 西葫芦花."
     ],
     "subtleties": [
      "The flowers wilt within hours: pick them in the morning and cook them the same day."
+    ],
+    "notes": [
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Italian fiori di zucca are the same delicacy."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "Mexican flor de calabaza is the same delicacy."
+     }
     ]
    }
   },
@@ -2859,7 +3297,18 @@
     "measure": [
      "个",
      "颗"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2928,7 +3377,7 @@
      }
     ],
     "etymology": {
-     "text": "牛心 (‘ox heart’) + 菜 (‘vegetable’): after its pointed, heart-like shape (compare English ‘oxheart cabbage’).",
+     "text": "牛心 (‘ox heart’) + 菜 (‘vegetable’): after its pointed, heart-like shape.",
      "src": "character composition; Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -2939,6 +3388,13 @@
     ],
     "subtleties": [
      "Same species as round cabbage (Brassica oleracea), only a pointed type."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Compare English ‘oxheart cabbage’."
+     }
     ]
    }
   },
@@ -2964,7 +3420,18 @@
     "measure": [
      "根",
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "CC-CEDICT (MDBG): 玉米筍|玉米笋 yu4 mi3 sun3 ‘baby corn’; zh.wikipedia (Wikidata Q4838440); Wiktionary has no entry",
@@ -3063,7 +3530,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",

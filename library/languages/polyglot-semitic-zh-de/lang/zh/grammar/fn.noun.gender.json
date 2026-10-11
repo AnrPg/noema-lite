@@ -104,7 +104,7 @@
  },
  "traps": [
   "Looking for a feminine ending: there is none — a female teacher is 女老师.",
-  "Thinking 这 changes for gender or number: 这个男孩, 这个女孩 — the same 这个."
+  "Thinking 这 changes for gender or number:\n→ 这个男孩, 这个女孩 — the same 这个."
  ],
  "generators": [
   {
@@ -160,27 +160,27 @@
   {
    "for": "el",
    "rel": "new",
-   "text": "Greek nouns have three genders shown by the article (ο, η, το), and articles and adjectives agree. Chinese has none of this: no gender to learn, and a measure word per noun instead (ένα τραπέζι ~ 一张桌子)."
+   "text": "Greek nouns have three genders shown by the article (ο, η, το), and articles and adjectives agree.\n\nChinese has none of this: no gender to learn, and a measure word per noun instead (ένα τραπέζι ~ 一张桌子)."
   },
   {
    "for": "ru",
    "rel": "new",
-   "text": "Russian has three genders and agreement everywhere (новый стол, новая книга); Chinese 新 never changes. Feminine forms like учительница have no Chinese match: 老师, or 女老师 when it matters."
+   "text": "Russian has three genders and agreement everywhere (новый стол, новая книга); Chinese 新 never changes.\n\nFeminine forms like учительница have no Chinese match: 老师, or 女老师 when it matters."
   },
   {
    "for": "es",
    "rel": "new",
-   "text": "Spanish has two genders (el libro, la mesa) and many paired forms (profesor / profesora); Chinese has no gender and marks sex only when needed, with 男 / 女: 男老师, 女老师."
+   "text": "Spanish has two genders (el libro, la mesa) and many paired forms (profesor / profesora); Chinese has no gender and marks sex only when needed, with 男 / 女:\n→ 男老师, 女老师."
   },
   {
    "for": "en",
    "rel": "similar",
-   "text": "English nouns have no grammatical gender either; only he / she / it show sex — and in Chinese even these sound the same (tā). Pairs like waiter / waitress correspond to 男 / 女 + noun, used only when it matters."
+   "text": "English nouns have no grammatical gender either; only he / she / it show sex — and in Chinese even these sound the same (tā).\n\nPairs like waiter / waitress correspond to 男 / 女 + noun, used only when it matters."
   },
   {
    "for": "fr",
    "rel": "new",
-   "text": "French has two genders and agreement (un grand livre, une grande table); Chinese 大 never changes. Le professeur / la professeure: Chinese says 老师 for both."
+   "text": "French has two genders and agreement (un grand livre, une grande table); Chinese 大 never changes.\n\nLe professeur / la professeure: Chinese says 老师 for both."
   },
   {
    "for": "de",
@@ -190,7 +190,7 @@
   {
    "for": "hi",
    "rel": "new",
-   "text": "Hindi has two genders, and adjectives and verbs agree (अच्छा लड़का / अच्छी लड़की); Chinese 好 never changes: 好男孩, 好女孩."
+   "text": "Hindi has two genders, and adjectives and verbs agree (अच्छा लड़का / अच्छी लड़की); Chinese 好 never changes:\n→ 好男孩, 好女孩."
   },
   {
    "for": "fa",
@@ -256,6 +256,46 @@
    "for": "iu",
    "rel": "same",
    "text": "Inuktitut has no grammatical gender; neither has Chinese."
+  },
+  {
+   "for": "it",
+   "rel": "new",
+   "text": "Italian has two genders shown by article and ending (il libro, la tavola) with agreement (un libro nuovo, una casa nuova); Chinese 新 never changes.\n\nprofessore / professoressa: Chinese says 老师 for both, or 女老师 when it matters."
+  },
+  {
+   "for": "sq",
+   "rel": "new",
+   "text": "Albanian nouns are masculine or feminine (with a few neuters), and articles and adjectives agree (djalë i mirë, vajzë e mirë); Chinese has no gender: 好男孩, 好女孩 — 好 never changes. mësues / mësuese ~ 老师 for both."
+  },
+  {
+   "for": "pt",
+   "rel": "new",
+   "text": "Portuguese has two genders (o livro, a mesa) with agreement everywhere (um livro novo, uma mesa nova); Chinese has none. professor / professora ~ 老师, or 男老师 / 女老师 when it matters."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "new",
+   "text": "If every noun in your language has a gender that articles, adjectives or verbs agree with, Chinese frees you of all of it; what replaces gender as ‘the thing to learn with each noun’ is its measure word:\n→ 一本书, 一张桌子."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "same",
+   "text": "If your language has no grammatical gender, neither has Chinese; ‘he’ and ‘she’ are even the same spoken word (tā), and 男 / 女 before a noun mark sex only when needed."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "same",
+   "text": "If your language has no gender and uses classifiers, Chinese is familiar: the measure word plays the role that gender plays elsewhere."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "same",
+   "text": "If your language has no grammatical gender, neither has Chinese — even ‘he’ and ‘she’ sound the same (tā) and differ only in writing (他 / 她)."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "new",
+   "text": "If gender runs through your nouns, adjectives, verbs, numbers and even ‘you’, Chinese marks none of it: 你 for any listener, 好 for any noun — only the written 他 / 她 differ."
   }
  ],
  "seeAlso": [

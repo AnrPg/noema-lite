@@ -146,7 +146,7 @@
     {
      "for": "el",
      "rel": "trap",
-     "text": "Greek σε covers ‘at’ and ‘to’ (στο σπίτι, πάω στο σχολείο); Chinese splits it into 在 and 去 / 到. από is 从 for a place you leave and 离 for a distance; με is 跟 … 一起 with a person but 加 / 用 with a thing; για is 给 / 为 for a person, 关于 for a topic; χωρίς is 没有 + noun or 不 + verb."
+     "text": "Greek σε covers ‘at’ and ‘to’ (στο σπίτι, πάω στο σχολείο); Chinese splits it into 在 and 去 / 到.\n\n- από is 从 for a place you leave and 离 for a distance;\n- με is 跟 … 一起 with a person but 加 / 用 with a thing;\n- για is 给 / 为 for a person, 关于 for a topic;\n- χωρίς is 没有 + noun or 不 + verb."
     },
     {
      "for": "es",
@@ -241,7 +241,7 @@
   "*我喝咖啡跟牛奶 for ‘coffee with milk’ → 我喝加牛奶的咖啡.",
   "*一本书关于家庭 → 一本关于家庭的书 (the 关于 phrase before the noun, with 的).",
   "*这是给你 → 这是给你的 (‘this is for you’ needs 的).",
-  "*我从家很远 for ‘I live far from home’ → distance takes 离: 我家离这里很远.",
+  "*我从家很远 for ‘I live far from home’ → distance takes 离:\n→ 我家离这里很远.",
   "*在冰箱 for ‘in the fridge’ → 在冰箱里 (a thing needs a place word)."
  ],
  "evidence": {
@@ -369,27 +369,27 @@
   {
    "for": "el",
    "rel": "trap",
-   "text": "Greek prepositional phrases follow the verb (τρώω στο σπίτι, δουλεύω σε τράπεζα); Chinese coverb phrases go before it: 我在家吃饭, 我在银行工作."
+   "text": "Greek prepositional phrases follow the verb (τρώω στο σπίτι, δουλεύω σε τράπεζα); Chinese coverb phrases go before it:\n→ 我在家吃饭, 我在银行工作."
   },
   {
    "for": "ru",
    "rel": "different",
-   "text": "Russian prepositions govern cases (в доме, в дом, из дома, с другом) and usually follow the verb; Chinese coverbs take an unchanged noun and stand before the verb: 我在家吃饭, 我跟朋友一起吃饭."
+   "text": "Russian prepositions govern cases (в доме, в дом, из дома, с другом) and usually follow the verb; Chinese coverbs take an unchanged noun and stand before the verb:\n→ 我在家吃饭, 我跟朋友一起吃饭."
   },
   {
    "for": "es",
    "rel": "trap",
-   "text": "Spanish puts the phrase after the verb (como en casa, trabajo en un banco); Chinese before it: 我在家吃饭, 我在银行工作."
+   "text": "Spanish puts the phrase after the verb (como en casa, trabajo en un banco); Chinese before it:\n→ 我在家吃饭, 我在银行工作."
   },
   {
    "for": "en",
    "rel": "trap",
-   "text": "English puts the prepositional phrase after the verb (I eat at home, I work at a bank); Chinese puts it before: 我在家吃饭, 我在银行工作. ‘with’ is 跟 … 一起 for people but 用 / 加 for things."
+   "text": "English puts the prepositional phrase after the verb (I eat at home, I work at a bank); Chinese puts it before:\n→ 我在家吃饭, 我在银行工作.\n\n‘with’ is 跟 … 一起 for people but 用 / 加 for things."
   },
   {
    "for": "fr",
    "rel": "trap",
-   "text": "French phrases follow the verb (je mange à la maison); Chinese ones precede it: 我在家吃饭."
+   "text": "French phrases follow the verb (je mange à la maison); Chinese ones precede it:\n→ 我在家吃饭."
   },
   {
    "for": "de",
@@ -409,32 +409,32 @@
   {
    "for": "mr",
    "rel": "similar",
-   "text": "Marathi marks place and company after the noun (घरी ‘at home’, मित्राबरोबर ‘with a friend’) and puts them before the verb — the Chinese position, though Chinese puts its coverb before the noun: 在家, 跟朋友."
+   "text": "Marathi marks place and company after the noun (घरी ‘at home’, मित्राबरोबर ‘with a friend’) and puts them before the verb — the Chinese position, though Chinese puts its coverb before the noun:\n→ 在家, 跟朋友."
   },
   {
    "for": "ar",
    "rel": "different",
-   "text": "Arabic prepositions follow the verb (ākulu fī l-bayt) and put the noun in the genitive; Chinese coverbs come before the verb and the noun never changes: 我在家吃饭."
+   "text": "Arabic prepositions follow the verb (ākulu fī l-bayt) and put the noun in the genitive; Chinese coverbs come before the verb and the noun never changes:\n→ 我在家吃饭."
   },
   {
    "for": "he",
    "rel": "different",
-   "text": "Hebrew prepositions follow the verb and often fuse with the article (ba-bayit ‘at home’); Chinese 在家 stands before the verb: 我在家吃饭."
+   "text": "Hebrew prepositions follow the verb and often fuse with the article (ba-bayit ‘at home’); Chinese 在家 stands before the verb:\n→ 我在家吃饭."
   },
   {
    "for": "tr",
    "rel": "similar",
-   "text": "Turkish case endings and postpositions (evde, arkadaşımla) come before the verb — the Chinese position — but after the noun; Chinese coverbs stand before the noun: 在家, 跟朋友."
+   "text": "Turkish case endings and postpositions (evde, arkadaşımla) come before the verb — the Chinese position — but after the noun; Chinese coverbs stand before the noun:\n→ 在家, 跟朋友."
   },
   {
    "for": "ja",
    "rel": "similar",
-   "text": "Japanese particles (家で, 友達と) follow the noun and stand before the verb; Chinese coverbs precede the noun, but the phrase also goes before the verb: 在家吃饭 ~ 家で食べる."
+   "text": "Japanese particles (家で, 友達と) follow the noun and stand before the verb; Chinese coverbs precede the noun, but the phrase also goes before the verb:\n→ 在家吃饭 ~ 家で食べる."
   },
   {
    "for": "ko",
    "rel": "similar",
-   "text": "Korean particles (집에서, 친구하고) follow the noun and stand before the verb; Chinese coverbs precede the noun, and the phrase also stands before the verb: 在家吃饭 ~ 집에서 밥을 먹어요."
+   "text": "Korean particles (집에서, 친구하고) follow the noun and stand before the verb; Chinese coverbs precede the noun, and the phrase also stands before the verb:\n→ 在家吃饭 ~ 집에서 밥을 먹어요."
   },
   {
    "for": "fi",
@@ -459,12 +459,52 @@
   {
    "for": "vi",
    "rel": "trap",
-   "text": "Vietnamese also has verb-like prepositions (ở ‘be at’, cho ‘give, for’) — the same idea as 在 and 给 — but usually puts the phrase after the verb (tôi làm việc ở ngân hàng); Chinese puts it before: 我在银行工作."
+   "text": "Vietnamese also has verb-like prepositions (ở ‘be at’, cho ‘give, for’) — the same idea as 在 and 给 — but usually puts the phrase after the verb (tôi làm việc ở ngân hàng); Chinese puts it before:\n→ 我在银行工作."
   },
   {
    "for": "iu",
    "rel": "different",
-   "text": "Inuktitut marks place, goal and source with case endings on the noun (-mi ‘at’, -mut ‘to’, -mit ‘from’); Chinese has no endings and uses separate coverbs before the verb: 在家, 从家."
+   "text": "Inuktitut marks place, goal and source with case endings on the noun (-mi ‘at’, -mut ‘to’, -mit ‘from’); Chinese has no endings and uses separate coverbs before the verb:\n→ 在家, 从家."
+  },
+  {
+   "for": "it",
+   "rel": "trap",
+   "text": "Italian puts the phrase after the verb (mangio a casa, lavoro in banca); Chinese before it: 我在家吃饭, 我在银行工作. senza ‘without’ has no Chinese word: 没有 + noun or 不 + verb."
+  },
+  {
+   "for": "sq",
+   "rel": "trap",
+   "text": "Albanian prepositions govern cases and follow the verb (ha në shtëpi ‘he eats at home’, punoj në bankë); Chinese coverb phrases stand before the verb with an unchanged noun: 我在家吃饭, 我在银行工作. pa ‘without’ has no Chinese word:\n→ 没有 + noun."
+  },
+  {
+   "for": "pt",
+   "rel": "trap",
+   "text": "Portuguese puts the phrase after the verb (como em casa, trabalho num banco); Chinese puts it before: 我在家吃饭, 我在银行工作. sem ‘without’ has no Chinese word: 没有 + noun or 不 + verb."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your prepositions govern cases and follow the verb, Chinese coverbs take an unchanged noun and stand before the verb: subject – coverb + noun – verb – object (我在家吃饭)."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If place, source and companion are case endings or postpositions before your verb, Chinese also puts them before the verb — but as words in front of the noun:\n→ 在家, 从家, 跟朋友 + verb."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "trap",
+   "text": "If your language has verb-like prepositions after the main verb (‘work at bank’), Chinese moves them in front of it:\n→ 我在银行工作."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If you mark place and direction with case endings, Chinese uses separate coverbs before the verb — 在家, 从家, 跟朋友 — and the noun never changes."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If your prepositions follow the verb and fuse with the article or take pronoun suffixes, Chinese coverbs stand before the verb with an unchanged noun or pronoun:\n→ 我在家吃饭, 我跟他一起去."
   }
  ],
  "seeAlso": [

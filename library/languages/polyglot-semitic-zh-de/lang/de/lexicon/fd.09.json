@@ -100,7 +100,7 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German oder, from Old High German odar, an alteration of odo by analogy with wedar (whence modern weder). The origin of odo is uncertain; compare Old English eþþa, oþþe and Gothic 𐌰𐌹𐌸𐌸𐌰𐌿 (aiþþau).",
+     "text": "From Middle High German oder, from Old High German odar, an alteration of odo by analogy with wedar (whence modern weder). The origin of odo is uncertain.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -111,11 +111,22 @@
      "A question with oder is answered with the choice, not with ja or nein: Tee, bitte."
     ],
     "subtleties": [
-     "…, oder? at the end asks for agreement, like English right? or Turkish değil mi? – very frequent in the south and in Switzerland."
+     "…, oder? at the end asks for agreement – very frequent in the south and in Switzerland."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "…, oder? at the end works like English …, right?"
+     }
     ]
    },
    "features": {
-    "verbPosition": "none (position zero)"
+    "verbPosition": "none (position zero)",
+    "paired": "entweder … oder",
+    "particleUse": {
+     "none": "no modal-particle use"
+    }
    }
   },
   {
@@ -225,7 +236,7 @@
      {
       "word": "eventuell",
       "register": "neutral",
-      "nuance": "possibly, if need be – a false friend: not “eventually”"
+      "nuance": "possibly, if need be"
      },
      {
       "word": "womöglich",
@@ -249,24 +260,63 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German vil līchte (“very easily”), thus: “what could easily happen”. Compare Dutch wellicht.",
+     "text": "From Middle High German vil līchte (“very easily”), thus: “what could easily happen”.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "vielleicht is viel + leicht, “very easily”: what may easily happen. Greek ίσως, Russian может быть (“it may be”) and Turkish belki express the same idea differently."
+     "vielleicht is viel + leicht, “very easily”: what may easily happen."
     ],
     "pitfalls": [
      "When vielleicht starts the sentence, the verb comes second: Vielleicht trinke ich Tee (not *Vielleicht ich trinke Tee).",
-     "eventuell means “maybe”, not “eventually” (= schließlich, endlich)."
+     "eventuell means “maybe, possibly”; “in the end, finally” is schließlich or endlich."
     ],
     "subtleties": [
      "In a request vielleicht makes it more polite: Hast du vielleicht ein bisschen Zeit?"
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "different",
+      "text": "может быть says “it may be”; vielleicht says “very easily”."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "eventuell is not “eventually” (that is schließlich, endlich): it means possibly."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "eventuell means what éventuellement means: possibly."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "eventuell means what eventualmente means: possibly, if need be."
+     }
     ]
    },
    "features": {
     "comparison": {
      "none": "not compared"
-    }
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": [
+     {
+      "senses": [
+       "s2"
+      ],
+      "function": "softens a polite request: Können Sie mir vielleicht helfen?"
+     },
+     {
+      "senses": [
+       "s3"
+      ],
+      "function": "amazement, often ironic: Du bist vielleicht lustig!"
+     }
+    ]
    }
   },
   {
@@ -393,24 +443,47 @@
      }
     ],
     "etymology": {
-     "text": "From wirk(en) + -lich. Cognate with Bavarian wirkli and Dutch werkelijk.",
+     "text": "From wirk(en) + -lich.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
      "wirklich comes from wirken (to work, to have an effect): what is real is what works – die Wirklichkeit is reality.",
-     "The reaction “Really?” is Wirklich? in German, Αλήθεια; in Greek, Правда? in Russian and Gerçekten mi? in Turkish."
+     "The reaction “Really?” is Wirklich? – or Echt? in casual speech."
     ],
     "pitfalls": [
-     "As an adverb wirklich never changes; as an adjective (real) it takes endings: ein wirkliches Problem.",
+     "- As an adverb wirklich never changes;\n- as an adjective (real) it takes endings: ein wirkliches Problem.",
      "Wirklich? alone is a reaction; inside the sentence it emphasises: Das ist wirklich gut."
     ],
     "subtleties": [
-     "nicht wirklich (not really) works much like English and softens a no."
+     "nicht wirklich (not really) softens a no."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Αλήθεια; is Wirklich?"
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Правда? is Wirklich?"
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "nicht wirklich works like English not really."
+     }
     ]
    },
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -508,11 +581,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German natiurlich, from Old High German natūrlīh. Equivalent to Natur + -lich. Compare Dutch natuurlijk, English naturally.",
+     "text": "From Middle High German natiurlich, from Old High German natūrlīh. Equivalent to Natur + -lich.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "natürlich = “by nature”: Greek φυσικά (from φύση, nature) means both “naturally” and “of course” – exactly like German; English naturally does too."
+     "natürlich = “by nature”: it means both “naturally” and “of course”."
     ],
     "pitfalls": [
      "At the start of a sentence it takes the first place and the verb comes second: Natürlich trinke ich Kaffee.",
@@ -520,11 +593,29 @@
     ],
     "subtleties": [
      "Natürlich nicht! = Of course not!"
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "natürlich is φυσικά: naturally and of course."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "natürlich is both naturally and of course, as English naturally is."
+     }
     ]
    },
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -649,11 +740,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German ouch, from Old High German ouh, from Proto-Germanic *auk. Cognate with Dutch ook (“also”), Swedish och (“and”), Danish og (“and”) and archaic English eke (“also”).",
+     "text": "From Middle High German ouch, from Old High German ouh, from Proto-Germanic *auk.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "auch is a cousin of archaic English eke (“also”) and of Swedish och and Danish og, which mean “and”."
+     "auch goes back to Old High German ouh."
     ],
     "pitfalls": [
      "auch stands before the word it adds: Ich trinke auch Tee (tea as well) – Auch ich trinke Tee (I too).",
@@ -661,12 +752,30 @@
     ],
     "subtleties": [
      "Unstressed, auch is a particle that checks: Hast du auch alles? (Are you sure you’ve got everything?)"
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "auch is related to the old English word eke (“also”)."
+     }
     ]
    },
    "features": {
     "comparison": {
      "none": "not compared"
-    }
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": [
+     {
+      "senses": [
+       "s3"
+      ],
+      "function": "asks for confirmation or justifies: Hast du auch alles? – Ich bin müde, ich habe auch kaum geschlafen."
+     }
+    ]
    }
   },
   {
@@ -773,14 +882,14 @@
      }
     ],
     "etymology": {
-     "text": "From late Middle High German nuor, contracted from older niwer, newære, from Old High German niwāri, ni wāri (“were it not”). Cognate with Yiddish נאָר (nor), Dutch maar.",
+     "text": "From late Middle High German nuor, contracted from older niwer, newære, from Old High German niwāri, ni wāri (“were it not”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "nur grew out of ni wāri, “were it not” – the same origin as Dutch maar (“but”)."
+     "nur grew out of ni wāri, “were it not”."
     ],
     "pitfalls": [
-     "nur vs erst: Es ist erst acht Uhr (only eight – it will get later); Ich habe nur zehn Euro (only ten – that’s all).",
+     "nur vs erst:\n- Es ist erst acht Uhr (only eight – it will get later);\n- Ich habe nur zehn Euro (only ten – that’s all).",
      "nur stands before what it limits: Nur ich trinke Tee / Ich trinke nur Tee."
     ],
     "subtleties": [
@@ -790,7 +899,18 @@
    "features": {
     "comparison": {
      "none": "not compared"
-    }
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": [
+     {
+      "senses": [
+       "s2"
+      ],
+      "function": "wishes and urging: Wenn ich nur Zeit hätte! – Komm nur herein!"
+     }
+    ]
    }
   },
   {
@@ -908,18 +1028,45 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German doch, from Old High German doh, from Proto-West Germanic *þauh, from Proto-Germanic *þauh. Cognate to Old English þēah (English though).",
+     "text": "From Middle High German doch, from Old High German doh, from Proto-West Germanic *þauh, from Proto-Germanic *þauh.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "doch is a cousin of English though."
+     "doch is an old word: Old High German doh."
     ],
     "pitfalls": [
-     "doch answers only a negative question or statement; to a positive question the answer is ja: Isst du Fleisch? – Ja.",
+     "doch answers only a negative question or statement; to a positive question the answer is ja:\n→ Isst du Fleisch? – Ja.",
      "Answering a negative question with nein agrees with it: Isst du kein Fleisch? – Nein (= No, I don’t)."
     ],
     "subtleties": [
-     "French si and Arabic بَلَى (balā) do the same job as doch; English needs a whole sentence (“Yes, I do!”)."
+     "Arabic بَلَى (balā) does the same job as doch."
+    ],
+    "notes": [
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "doch does the job of si: Tu ne bois pas de café ? – Si !"
+     },
+     {
+      "for": "en",
+      "rel": "different",
+      "text": "English needs a whole sentence (“Yes, I do!”) where German says doch."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "doch is related to English though."
+     }
+    ]
+   },
+   "features": {
+    "particleUse": [
+     {
+      "senses": [
+       "s3"
+      ],
+      "function": "urging, reminding, objecting: Komm doch mit! – Das weißt du doch."
+     }
     ]
    }
   }

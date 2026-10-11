@@ -29,7 +29,10 @@
    "prefix": false,
    "translit": "o",
    "features": {
-    "spelling": "או"
+    "spelling": "או",
+    "allomorphs": {
+     "none": "one form"
+    }
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -112,7 +115,7 @@
      }
     ],
     "etymology": {
-     "text": "From Proto-Semitic *ʔaw. Cognate with Arabic أَوْ (ʔaw) and Ugaritic 𐎜 (ʾō) (Wiktionary).",
+     "text": "From Proto-Semitic *ʔaw. Cognate with Arabic أَوْ (ʔaw) (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -338,7 +341,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "אֱמֶת “truth” shares its root with אָמֵן “amen”, which Greek, German, Russian, Arabic (آمِين) and English all borrowed.",
+     "אֱמֶת “truth” shares its root with אָמֵן “amen”, which German, Arabic (آمِين) and many other languages borrowed.",
      "In the legend of the Golem of Prague, אֱמֶת written on its forehead gave it life; erasing the א left מֵת “dead”."
     ],
     "pitfalls": [
@@ -347,6 +350,23 @@
     ],
     "subtleties": [
      "A sharp נוּ, בֶּאֱמֶת! means “oh, come on!” — impatience, not surprise."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Greek αμήν is the same word, borrowed from Hebrew."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Russian аминь is the same word, borrowed from Hebrew."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "English amen is the same word, borrowed from Hebrew."
+     }
     ]
    }
   },
@@ -450,7 +470,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Literally “as (is) understood” — the same picture as German selbstverständlich and Greek εννοείται.",
+     "Literally “as (is) understood” — the same picture as German selbstverständlich.",
      "מוּבָן “understood” comes from the root ב־י־ן, as in מֵבִין “(he) understands”."
     ],
     "pitfalls": [
@@ -458,6 +478,13 @@
     ],
     "subtleties": [
      "As a one-word answer it is polite and neutral; בָּרוּר! or בֶּטַח! sound more casual."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "The same picture as εννοείται, “it is understood”."
+     }
     ]
    }
   },
@@ -484,7 +511,21 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "בְּרוּרָה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "בְּרוּרִים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "בְּרוּרוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "בָּרוּר",
@@ -725,7 +766,7 @@
      "גַּם … וְגַם … “both … and …” is a doubled “also”: גַּם תֵּה וְגַם קָפֶה."
     ],
     "pitfalls": [
-     "גַּם stands before the word it adds: גַּם אֲנִי רוֹצֶה קָפֶה “I too want coffee” — אֲנִי רוֹצֶה גַּם קָפֶה “I want coffee as well (besides something else)”.",
+     "גַּם stands before the word it adds:\n→ גַּם אֲנִי רוֹצֶה קָפֶה “I too want coffee” — אֲנִי רוֹצֶה גַּם קָפֶה “I want coffee as well (besides something else)”",
      "After וְ the ג loses its dot: וְגַם (ve-gam)."
     ],
     "subtleties": [

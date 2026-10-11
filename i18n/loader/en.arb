@@ -1,0 +1,2629 @@
+{
+  "@@locale": "en",
+  "loader.close": "Close",
+  "@loader.close": {
+    "description": "Button that closes a dialog (subject editing, sharing, Explore, Claude guide …). Short."
+  },
+  "loader.back": "← Back",
+  "@loader.back": {
+    "description": "Button that goes back to the previous screen of a dialog. Keep the arrow. Short."
+  },
+  "loader.legacy.carriedOver": "Your previous Databricks Quest progress was carried over",
+  "@loader.legacy.carriedOver": {
+    "description": "Toast shown once after the progress of the old app “Databricks Quest” (a product name, keep it) was moved into this app."
+  },
+  "loader.edit.name": "Name",
+  "@loader.edit.name": {
+    "description": "Label of the field with the subject’s name in the “Edit subject” dialog (also its accessible label)."
+  },
+  "loader.edit.desc": "Description",
+  "@loader.edit.desc": {
+    "description": "Label of the field with the subject’s one-line description in the “Edit subject” dialog."
+  },
+  "loader.edit.descPlaceholder": "A line about this subject (shown in the subject list)",
+  "@loader.edit.descPlaceholder": {
+    "description": "Placeholder of the description field in the “Edit subject” dialog."
+  },
+  "loader.edit.title": "Edit “{title}”",
+  "@loader.edit.title": {
+    "description": "Title of the “Edit subject” dialog; a subject emoji is shown before it.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Human anatomy"
+      }
+    }
+  },
+  "loader.edit.libraryNote": "A library subject: your name and description are only for you.",
+  "@loader.edit.libraryNote": {
+    "description": "Subtitle of the “Edit subject” dialog for a ready-made subject of the app’s library."
+  },
+  "loader.edit.ownNote": "Only you see these changes.",
+  "@loader.edit.ownNote": {
+    "description": "Subtitle of the “Edit subject” dialog for the learner’s own subject."
+  },
+  "loader.edit.saved": "Saved",
+  "@loader.edit.saved": {
+    "description": "Toast after the subject’s new name/description were saved (a ✔ is shown before it)."
+  },
+  "loader.edit.save": "Save",
+  "@loader.edit.save": {
+    "description": "Button that saves the subject’s name and description."
+  },
+  "loader.edit.restored": "Original name and description restored",
+  "@loader.edit.restored": {
+    "description": "Toast after the learner’s own name/description of a subject were removed again."
+  },
+  "loader.edit.restore": "Restore the original",
+  "@loader.edit.restore": {
+    "description": "Button: remove the learner’s own name/description and show the subject’s original ones again."
+  },
+  "loader.edit.removeTitle": "Remove from my list",
+  "@loader.edit.removeTitle": {
+    "description": "Heading of the section that hides a subject from the learner’s subject list."
+  },
+  "loader.edit.removeText": "Hides the subject from the subject list (your progress stays). Bring it back in ⚙️ → Subjects.",
+  "@loader.edit.removeText": {
+    "description": "Explanation under “Remove from my list”. “⚙️ → Subjects” is the place in the settings where hidden subjects can be shown again."
+  },
+  "loader.edit.hidden": "Hidden — ⚙️ → Subjects brings it back",
+  "@loader.edit.hidden": {
+    "description": "Toast after a subject was hidden."
+  },
+  "loader.edit.hide": "Hide",
+  "@loader.edit.hide": {
+    "description": "Button that hides the subject from the subject list."
+  },
+  "loader.edit.deleteTitle": "Delete",
+  "@loader.edit.deleteTitle": {
+    "description": "Heading of the section that deletes the learner’s own subject."
+  },
+  "loader.edit.deleteText": "Deletes the subject from this device and your cloud account, with its attached source files. Your progress is kept, so importing it again brings everything back.",
+  "@loader.edit.deleteText": {
+    "description": "Explanation in the delete section of the “Edit subject” dialog."
+  },
+  "loader.edit.deleteConfirm": "Delete “{title}”? This cannot be undone (progress is kept).",
+  "@loader.edit.deleteConfirm": {
+    "description": "Browser confirmation before a subject is deleted.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Human anatomy"
+      }
+    }
+  },
+  "loader.edit.deleted": "Deleted",
+  "@loader.edit.deleted": {
+    "description": "Toast after a subject was deleted."
+  },
+  "loader.edit.deleteBtn": "Delete the subject",
+  "@loader.edit.deleteBtn": {
+    "description": "Button that deletes the learner’s own subject (asks for confirmation first)."
+  },
+  "loader.edit.share": "Share or make public",
+  "@loader.edit.share": {
+    "description": "Button/tooltip that opens the sharing dialog of a subject (share with a person by e-mail, or publish it for everyone)."
+  },
+  "loader.cancel": "Cancel",
+  "@loader.cancel": {
+    "description": "Button that cancels a small form (e.g. entering a PIN). Short."
+  },
+  "loader.err.loadScript": "Could not load {file}",
+  "@loader.err.loadScript": {
+    "description": "Error when a file of the app (a subject pack, a module) could not be loaded; {file} is its path.",
+    "placeholders": {
+      "file": {
+        "type": "String",
+        "example": "library/subjects/biology/pack.js"
+      }
+    }
+  },
+  "loader.pack.gettingNew": "Getting the new version of “{title}”…",
+  "@loader.pack.gettingNew": {
+    "description": "Toast while a newer version of a subject is downloaded from the cloud.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Human anatomy"
+      }
+    }
+  },
+  "loader.pack.upToDate": "“{title}” is up to date",
+  "@loader.pack.upToDate": {
+    "description": "Toast after the newest version of a subject was downloaded.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Human anatomy"
+      }
+    }
+  },
+  "loader.pack.network": "network",
+  "@loader.pack.network": {
+    "description": "Stands in for the reason in “could not be downloaded right now (network)” when the error has no message. One word."
+  },
+  "loader.pack.newFailed": "The new version of “{title}” could not be downloaded right now ({error}). You are studying the copy saved on this device; it will try again next time.",
+  "@loader.pack.newFailed": {
+    "description": "Long toast when a newer version of a subject exists but could not be downloaded; {error} is the technical reason.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Human anatomy"
+      },
+      "error": {
+        "type": "String",
+        "example": "Failed to fetch"
+      }
+    }
+  },
+  "loader.pack.loadFailed": "The study pack for “{title}” could not be loaded.",
+  "@loader.pack.loadFailed": {
+    "description": "Error shown instead of a subject whose content could not be loaded.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Human anatomy"
+      }
+    }
+  },
+  "loader.pack.notInLibrary": "That subject is not in your library.",
+  "@loader.pack.notInLibrary": {
+    "description": "Error when a Roadmap step points to a subject the learner does not have."
+  },
+  "loader.pin.wrong": "Wrong PIN",
+  "@loader.pin.wrong": {
+    "description": "Toast when the PIN typed for a profile is wrong."
+  },
+  "loader.pin.placeholder": "PIN",
+  "@loader.pin.placeholder": {
+    "description": "Placeholder of the PIN field when a protected profile is opened. Very short."
+  },
+  "loader.pin.enter": "{name} — enter PIN",
+  "@loader.pin.enter": {
+    "description": "Heading of the small PIN form for a protected profile; the profile’s emoji is shown before it.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Maria"
+      }
+    }
+  },
+  "loader.pin.unlock": "Unlock",
+  "@loader.pin.unlock": {
+    "description": "Button that opens a PIN-protected profile."
+  },
+  "loader.profile.namePlaceholder": "Name (e.g. Maria)",
+  "@loader.profile.namePlaceholder": {
+    "description": "Placeholder of the name field when a new local profile is created. Use a common first name of the language."
+  },
+  "loader.profile.pinPlaceholder": "Optional PIN (privacy curtain, not encryption)",
+  "@loader.profile.pinPlaceholder": {
+    "description": "Placeholder of the optional PIN field of a new profile: the PIN only hides the profile, it does not encrypt anything."
+  },
+  "loader.profile.title": "New profile",
+  "@loader.profile.title": {
+    "description": "Title of the form that creates a new local profile."
+  },
+  "loader.profile.sub": "Each profile has its own subjects, progress, conversations, settings and backups.",
+  "@loader.profile.sub": {
+    "description": "Subtitle of the new-profile form."
+  },
+  "loader.profile.create": "Create profile",
+  "@loader.profile.create": {
+    "description": "Button that creates the new local profile."
+  },
+  "loader.cloud.email": "Email",
+  "@loader.cloud.email": {
+    "description": "Placeholder of the e-mail field of the cloud sign-in form."
+  },
+  "loader.cloud.password": "Password (min 8 characters)",
+  "@loader.cloud.password": {
+    "description": "Placeholder of the password field of the cloud sign-in form."
+  },
+  "loader.cloud.displayName": "Display name",
+  "@loader.cloud.displayName": {
+    "description": "Placeholder of the name field when a cloud account is created."
+  },
+  "loader.cloud.signIn": "Sign in",
+  "@loader.cloud.signIn": {
+    "description": "Title and button of the cloud sign-in form."
+  },
+  "loader.cloud.createTitle": "Create cloud account",
+  "@loader.cloud.createTitle": {
+    "description": "Title of the form that creates a noema-lite cloud account."
+  },
+  "loader.cloud.createBtn": "Create account",
+  "@loader.cloud.createBtn": {
+    "description": "Button that creates the cloud account."
+  },
+  "loader.cloud.private": "Your data is private to your account (row-level security).",
+  "@loader.cloud.private": {
+    "description": "Subtitle of the cloud sign-in form. “row-level security” is the database feature that keeps each account’s rows private."
+  },
+  "loader.cloud.confirmEmail": "Check your inbox to confirm the email, then sign in.",
+  "@loader.cloud.confirmEmail": {
+    "description": "Message after sign-up when the e-mail must be confirmed first."
+  },
+  "loader.cloud.noAccount": "No account yet? Create one",
+  "@loader.cloud.noAccount": {
+    "description": "Link under the sign-in form that switches to creating an account."
+  },
+  "loader.cloud.haveAccount": "Have an account? Sign in",
+  "@loader.cloud.haveAccount": {
+    "description": "Link under the sign-up form that switches to signing in."
+  },
+  "loader.cloud.resetSent": "Password-reset email sent.",
+  "@loader.cloud.resetSent": {
+    "description": "Message after the password-reset e-mail was sent."
+  },
+  "loader.cloud.forgot": "Forgot password?",
+  "@loader.cloud.forgot": {
+    "description": "Link that sends a password-reset e-mail."
+  },
+  "loader.chip.sharedBy": "shared by {name}",
+  "@loader.chip.sharedBy": {
+    "description": "Tooltip of the 🤝 mark on a subject someone shared with the learner.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Anna"
+      }
+    }
+  },
+  "loader.chip.from": "from {name}",
+  "@loader.chip.from": {
+    "description": "Tooltip of the 🌍 mark on a subject taken from Explore (published by {name}).",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Anna"
+      }
+    }
+  },
+  "loader.chip.update": "A new version is ready — it downloads when you open the subject",
+  "@loader.chip.update": {
+    "description": "Tooltip of the ✨ mark on a subject chip when a newer version waits."
+  },
+  "loader.chip.editTip": "Rename, describe, hide or delete",
+  "@loader.chip.editTip": {
+    "description": "Tooltip of the ✏️ button next to a subject in the subject list."
+  },
+  "loader.chip.editLabel": "Edit {title}",
+  "@loader.chip.editLabel": {
+    "description": "Accessible label (screen readers) of the ✏️ button next to a subject.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Human anatomy"
+      }
+    }
+  },
+  "loader.chip.shareLabel": "Share {title}",
+  "@loader.chip.shareLabel": {
+    "description": "Accessible label (screen readers) of the 🔗 button next to a subject.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Human anatomy"
+      }
+    }
+  },
+  "loader.pick.languages": "Languages",
+  "@loader.pick.languages": {
+    "description": "Tab of the subject picker that opens the language courses (a 🌍 is shown before it)."
+  },
+  "loader.pick.languagesSub": "several at once",
+  "@loader.pick.languagesSub": {
+    "description": "Small line under “Languages” in the subject picker: the courses teach several languages side by side."
+  },
+  "loader.pick.curSummary": "{mastered, number}/{total, number} · {open, number} open",
+  "@loader.pick.curSummary": {
+    "description": "Progress of a Roadmap in the subject picker: steps mastered of all steps, and how many steps are open (studyable now).",
+    "placeholders": {
+      "mastered": {
+        "type": "int",
+        "example": "3"
+      },
+      "total": {
+        "type": "int",
+        "example": "12"
+      },
+      "open": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "loader.langs.title": "Language courses",
+  "@loader.langs.title": {
+    "description": "Title of the dialog that lists the language courses (a 🌍 is shown before it)."
+  },
+  "loader.langs.sub": "Several languages learned side by side: the same idea in each of them",
+  "@loader.langs.sub": {
+    "description": "Subtitle of the language-courses dialog."
+  },
+  "loader.langs.own": "your own course, written through Claude",
+  "@loader.langs.own": {
+    "description": "Tooltip of the 🔒 mark on a language course the learner made with Claude (an AI; keep the name)."
+  },
+  "loader.langs.new": "New language course",
+  "@loader.langs.new": {
+    "description": "Button that starts making a new language course (a ✨ is shown before it)."
+  },
+  "loader.chooseAnother": "Choose another subject",
+  "@loader.chooseAnother": {
+    "description": "Button under an error when a subject or course could not be opened."
+  },
+  "loader.import.opening": "Opening the package…",
+  "@loader.import.opening": {
+    "description": "Toast while an imported subject package (.noema.zip) is opened."
+  },
+  "loader.import.done": "“{title}” imported",
+  "@loader.import.done": {
+    "description": "Toast after a subject pack was imported (a 📥 is shown before it).",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Human anatomy"
+      }
+    }
+  },
+  "loader.import.doneWithFiles": "“{title}” imported with {n, plural, one {# source file(s)} other {# source file(s)}} — 👁 open them in 📚 Sources",
+  "@loader.import.doneWithFiles": {
+    "description": "Toast after a subject package was imported together with its source files (PDFs …). “📚 Sources” is the subject’s Sources page. English keeps “(s)”; use the proper plural forms.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Human anatomy"
+      },
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "loader.import.filesMissing": "{n, plural, one {# source file(s)} other {# source file(s)}} missing or damaged: {files}",
+  "@loader.import.filesMissing": {
+    "description": "Added to the import toast (after “ · ⚠️ ”) when some source files of a package were missing or damaged; {files} lists their names.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "2"
+      },
+      "files": {
+        "type": "String",
+        "example": "notes.pdf, atlas.pdf"
+      }
+    }
+  },
+  "loader.import.notPackOrPackage": "This file is not a noema-lite subject pack or package.",
+  "@loader.import.notPackOrPackage": {
+    "description": "Error when the learner imports a file that is not a subject pack (.json) or package (.noema.zip)."
+  },
+  "loader.import.notPack": "This file is not a noema-lite subject pack.",
+  "@loader.import.notPack": {
+    "description": "Error when a file or download is not a valid subject pack."
+  },
+  "loader.import.jsonNoFiles": "its {n, plural, one {# source file(s) are} other {# source file(s) are}} not in this .json — import the .noema.zip package instead, or attach them in 📚 Sources",
+  "@loader.import.jsonNoFiles": {
+    "description": "Added to the import toast (after “ · 📎 ”) when a plain .json pack was imported whose source files are only in the .noema.zip package. English keeps “(s) are”; use the proper plural forms.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "loader.export.preparing": "Preparing the package…",
+  "@loader.export.preparing": {
+    "description": "Toast while a subject is saved as a package (.noema.zip) for download."
+  },
+  "loader.export.withFiles": "(with {n, plural, one {# source file(s)} other {# source file(s)}})",
+  "@loader.export.withFiles": {
+    "description": "Added after the file name of an exported package (e.g. “biology.noema.zip (with 3 source file(s))”). English keeps “(s)”; use the proper plural forms.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "loader.info.chapterCounts": "{sections, plural, one {# section} other {# sections}} · {exercises, plural, one {# exercise} other {# exercises}}",
+  "@loader.info.chapterCounts": {
+    "description": "In the chapter list of a subject’s info card: how many sections and exercises a chapter has.",
+    "placeholders": {
+      "sections": {
+        "type": "int",
+        "example": "4"
+      },
+      "exercises": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "loader.info.chapters": "Chapters",
+  "@loader.info.chapters": {
+    "description": "Accessible label (screen readers) of the scrollable chapter list in a subject’s info card."
+  },
+  "loader.info.library": "noema-lite library",
+  "@loader.info.library": {
+    "description": "In a subject’s info card instead of the owner’s name: the subject is part of the app’s built-in library (a 📚 is shown before it)."
+  },
+  "loader.info.stat.chapters": "{n, plural, one {chapters} other {chapters}}",
+  "@loader.info.stat.chapters": {
+    "description": "Label under a big number in a subject’s info card (the number is shown above it). English always uses the plural; use the form that fits the number.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "8"
+      }
+    }
+  },
+  "loader.info.stat.sections": "{n, plural, one {sections} other {sections}}",
+  "@loader.info.stat.sections": {
+    "description": "Label under a big number in a subject’s info card (the number is shown above it).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "40"
+      }
+    }
+  },
+  "loader.info.stat.exercises": "{n, plural, one {exercises} other {exercises}}",
+  "@loader.info.stat.exercises": {
+    "description": "Label under a big number in a subject’s info card (the number is shown above it).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "120"
+      }
+    }
+  },
+  "loader.info.stat.visual": "{n, plural, one {picture exercises} other {picture exercises}}",
+  "@loader.info.stat.visual": {
+    "description": "Label under a big number in a subject’s info card: exercises built on a picture (label a diagram, find the part …).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "15"
+      }
+    }
+  },
+  "loader.info.stat.pictures": "{n, plural, one {pictures} other {pictures}}",
+  "@loader.info.stat.pictures": {
+    "description": "Label under a big number in a subject’s info card (the number is shown above it).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "30"
+      }
+    }
+  },
+  "loader.info.stat.flashcards": "{n, plural, one {flashcards} other {flashcards}}",
+  "@loader.info.stat.flashcards": {
+    "description": "Label under a big number in a subject’s info card (the number is shown above it).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "90"
+      }
+    }
+  },
+  "loader.info.stat.playbooks": "{n, plural, one {debug playbooks} other {debug playbooks}}",
+  "@loader.info.stat.playbooks": {
+    "description": "Label under a big number in a subject’s info card: step-by-step checklists for finding a problem (“debug drills”).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "6"
+      }
+    }
+  },
+  "loader.info.nChapters": "{n, plural, one {# chapter} other {# chapters}}",
+  "@loader.info.nChapters": {
+    "description": "Heading of the chapter list in a subject’s info card (a 📖 is shown before it).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "8"
+      }
+    }
+  },
+  "loader.info.sources": "Sources",
+  "@loader.info.sources": {
+    "description": "Heading of the list of a subject’s sources (books, PDFs, web pages) in its info card."
+  },
+  "loader.info.pages": "(pages {pages})",
+  "@loader.info.pages": {
+    "description": "After a source in a subject’s info card: which pages of it were used; {pages} is e.g. “13–30”.",
+    "placeholders": {
+      "pages": {
+        "type": "String",
+        "example": "13–30"
+      }
+    }
+  },
+  "loader.info.sourceFiles": "Comes with {n, plural, one {# source file} other {# source files}} — they open with 👁 in 📚 Sources.",
+  "@loader.info.sourceFiles": {
+    "description": "In a subject’s info card: the subject brings its source files (PDFs …), which open in the viewer.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "loader.info.sourceFilesSize": "Comes with {n, plural, one {# source file} other {# source files}} ({size}) — they open with 👁 in 📚 Sources.",
+  "@loader.info.sourceFilesSize": {
+    "description": "Like the line without size, with the files’ total size, e.g. “4.2 MB”.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      },
+      "size": {
+        "type": "String",
+        "example": "4.2 MB"
+      }
+    }
+  },
+  "loader.info.restricted": "{n, plural, one {# picture(s) are} other {# picture(s) are}} not openly licensed (personal study use).",
+  "@loader.info.restricted": {
+    "description": "In a subject’s info card: some pictures may only be used for personal study. English keeps “(s) are”; use the proper plural forms.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "loader.files.getting": "Getting its {n, plural, one {# source file(s)} other {# source file(s)}}…",
+  "@loader.files.getting": {
+    "description": "Toast while the source files of a shared or public subject are downloaded.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "loader.files.failed": "{n, plural, one {# source file(s)} other {# source file(s)}} could not be downloaded: {files}",
+  "@loader.files.failed": {
+    "description": "Toast when some source files of a shared or public subject could not be downloaded; {files} lists their names.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "1"
+      },
+      "files": {
+        "type": "String",
+        "example": "atlas.pdf"
+      }
+    }
+  },
+  "loader.share.title": "Share “{title}”",
+  "@loader.share.title": {
+    "description": "Title of the sharing dialog of a subject (a 🔗 is shown before it).",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Human anatomy"
+      }
+    }
+  },
+  "loader.share.counts": "{chapters, plural, one {# chapter} other {# chapters}} · {exercises, plural, one {# exercise} other {# exercises}} · {pictures, plural, one {# picture} other {# pictures}}",
+  "@loader.share.counts": {
+    "description": "Subtitle of the sharing dialog: the size of the subject.",
+    "placeholders": {
+      "chapters": {
+        "type": "int",
+        "example": "8"
+      },
+      "exercises": {
+        "type": "int",
+        "example": "120"
+      },
+      "pictures": {
+        "type": "int",
+        "example": "30"
+      }
+    }
+  },
+  "loader.share.needsCloud": "Sharing needs a cloud account (free). Sign in with one — or send the file instead:",
+  "@loader.share.needsCloud": {
+    "description": "In the sharing dialog of a local profile; a download button follows."
+  },
+  "loader.share.download": "Download the package to send",
+  "@loader.share.download": {
+    "description": "Button in the sharing dialog of a local profile: save the subject as a file to send by other means."
+  },
+  "loader.share.restricted": "{n, plural, one {# picture(s) in this subject are} other {# picture(s) in this subject are}} not openly licensed (fine for your own study). Sharing them may need the owners’ permission — I understand.",
+  "@loader.share.restricted": {
+    "description": "Checkbox the learner must tick before sharing a subject with pictures that are not openly licensed. English keeps “(s) … are”; use the proper plural forms.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "loader.share.includeFiles": "Include its {n, plural, one {# source file} other {# source files}} ({size}) — PDFs and documents open with 👁 for them too",
+  "@loader.share.includeFiles": {
+    "description": "Checkbox in the sharing dialog: send the subject’s source files with it; {size} is their total size.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "2"
+      },
+      "size": {
+        "type": "String",
+        "example": "640 KB"
+      }
+    }
+  },
+  "loader.share.preparingFiles": "Preparing the source files…",
+  "@loader.share.preparingFiles": {
+    "description": "Progress line in the sharing dialog."
+  },
+  "loader.share.uploading": "Uploading source files: {k, number}/{n, number} — {name}",
+  "@loader.share.uploading": {
+    "description": "Progress line in the sharing dialog: file {k} of {n}, with its name.",
+    "placeholders": {
+      "k": {
+        "type": "int",
+        "example": "2"
+      },
+      "n": {
+        "type": "int",
+        "example": "3"
+      },
+      "name": {
+        "type": "String",
+        "example": "atlas.pdf"
+      }
+    }
+  },
+  "loader.share.public": "Public",
+  "@loader.share.public": {
+    "description": "Heading of the “publish for everyone” section of the sharing dialog (a 🌍 is shown before it)."
+  },
+  "loader.share.publicTip": "Everyone who opens noema-lite can find it under 🌍 Explore, read its info and study it. You can withdraw it at any time.",
+  "@loader.share.publicTip": {
+    "description": "Tooltip of the ⓘ next to “Public” in the sharing dialog."
+  },
+  "loader.share.publicSince": "Public since {date} — visible to everyone in 🌍 Explore.",
+  "@loader.share.publicSince": {
+    "description": "In the sharing dialog of a published subject; {date} is the day it was last published.",
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "10/11/2026"
+      }
+    }
+  },
+  "loader.share.onlyYou": "Only you can see it now.",
+  "@loader.share.onlyYou": {
+    "description": "In the sharing dialog of a subject that is not published."
+  },
+  "loader.share.updated": "Updated",
+  "@loader.share.updated": {
+    "description": "Toast after the newest version of a public subject was published."
+  },
+  "loader.share.publishNewest": "Publish the newest version",
+  "@loader.share.publishNewest": {
+    "description": "Button: publish the current version of an already public subject."
+  },
+  "loader.share.withdrawn": "Withdrawn",
+  "@loader.share.withdrawn": {
+    "description": "Toast after a public subject was withdrawn (no longer public)."
+  },
+  "loader.share.withdraw": "Withdraw",
+  "@loader.share.withdraw": {
+    "description": "Button that withdraws a public subject or a share that is still waiting."
+  },
+  "loader.share.publicNow": "Public now",
+  "@loader.share.publicNow": {
+    "description": "Toast after a subject was made public."
+  },
+  "loader.share.makePublic": "Make it public",
+  "@loader.share.makePublic": {
+    "description": "Button that publishes a subject for everyone (Explore)."
+  },
+  "loader.share.emailPlaceholder": "Their e-mail (the one they sign in with)",
+  "@loader.share.emailPlaceholder": {
+    "description": "Placeholder of the e-mail field: the person to share the subject with."
+  },
+  "loader.share.msgPlaceholder": "Optional message, e.g. “for Friday’s exam”",
+  "@loader.share.msgPlaceholder": {
+    "description": "Placeholder of the optional message sent with a shared subject."
+  },
+  "loader.share.person": "Share with a person",
+  "@loader.share.person": {
+    "description": "Heading of the “share with one person by e-mail” section (a 👤 is shown before it)."
+  },
+  "loader.share.personTip": "They get a notification (🔔 and a banner) and choose Accept or Reject. After accepting it appears in their subjects. They need a noema-lite cloud account with this e-mail.",
+  "@loader.share.personTip": {
+    "description": "Tooltip of the ⓘ next to “Share with a person”."
+  },
+  "loader.share.sending": "Sending…",
+  "@loader.share.sending": {
+    "description": "Status while a share is sent."
+  },
+  "loader.share.sent": "Sent to {email} — they will see it next time they open noema-lite.",
+  "@loader.share.sent": {
+    "description": "Status after a subject was shared with a person.",
+    "placeholders": {
+      "email": {
+        "type": "String",
+        "example": "anna@example.com"
+      }
+    }
+  },
+  "loader.share.send": "Send",
+  "@loader.share.send": {
+    "description": "Button that shares the subject with the e-mail typed above."
+  },
+  "loader.share.sentList": "Sent",
+  "@loader.share.sentList": {
+    "description": "Heading of the list of people this subject was shared with."
+  },
+  "loader.share.status": "{status, select, pending {waiting} accepted {accepted} rejected {rejected} revoked {withdrawn} other {{status}}}",
+  "@loader.share.status": {
+    "description": "State of a share in the list of people it was sent to (a small pill).",
+    "placeholders": {
+      "status": {
+        "type": "String",
+        "example": "pending"
+      }
+    }
+  },
+  "loader.quoted": "“{text}”",
+  "@loader.quoted": {
+    "description": "A message someone wrote, shown in quotation marks (use the language’s own quotation marks).",
+    "placeholders": {
+      "text": {
+        "type": "String",
+        "example": "for Friday’s exam"
+      }
+    }
+  },
+  "loader.explore.getting": "Getting “{title}”…",
+  "@loader.explore.getting": {
+    "description": "Toast while a public subject from Explore is downloaded.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Human anatomy"
+      }
+    }
+  },
+  "loader.explore.downloadFailed": "Could not download it ({status})",
+  "@loader.explore.downloadFailed": {
+    "description": "Error when a public subject could not be downloaded; {status} is the HTTP status number.",
+    "placeholders": {
+      "status": {
+        "type": "String",
+        "example": "404"
+      }
+    }
+  },
+  "loader.explore.added": "“{title}” added to your subjects",
+  "@loader.explore.added": {
+    "description": "Toast after a subject was added to the learner’s subjects (from Explore, or made with Claude).",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Human anatomy"
+      }
+    }
+  },
+  "loader.explore.search": "Search public subjects…",
+  "@loader.explore.search": {
+    "description": "Placeholder of the search field in Explore (a 🔎 is shown before it)."
+  },
+  "loader.explore.study": "Study this subject",
+  "@loader.explore.study": {
+    "description": "Button in the details sheet of a public subject (touch screens)."
+  },
+  "loader.explore.noMatch": "Nothing matches.",
+  "@loader.explore.noMatch": {
+    "description": "Explore: no public subject matches the search."
+  },
+  "loader.explore.none": "No public subjects yet.",
+  "@loader.explore.none": {
+    "description": "Explore: there are no public subjects at all."
+  },
+  "loader.explore.cardLabel": "{title} — choose to study",
+  "@loader.explore.cardLabel": {
+    "description": "Accessible label (screen readers) of a subject card in Explore.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Human anatomy"
+      }
+    }
+  },
+  "loader.explore.title": "Explore",
+  "@loader.explore.title": {
+    "description": "Title of the Explore dialog: every public subject (a 🌍 is shown before it)."
+  },
+  "loader.explore.subTouch": "Subjects anyone can study. Tap a subject to study it · press and hold it for the details.",
+  "@loader.explore.subTouch": {
+    "description": "Subtitle of Explore on touch screens."
+  },
+  "loader.explore.subMouse": "Subjects anyone can study. Click a subject to study it · point at it for the details.",
+  "@loader.explore.subMouse": {
+    "description": "Subtitle of Explore with a mouse."
+  },
+  "loader.req.someone": "Someone",
+  "@loader.req.someone": {
+    "description": "Stands for an unknown person who invites the learner to a Roadmap."
+  },
+  "loader.req.invites": "{who} invites you to the Roadmap “{title}”",
+  "@loader.req.invites": {
+    "description": "Notification row: an invitation to a shared Roadmap. {who} and {title} are shown in bold.",
+    "placeholders": {
+      "who": {
+        "type": "String",
+        "example": "Anna"
+      },
+      "title": {
+        "type": "String",
+        "example": "Become a data engineer"
+      }
+    }
+  },
+  "loader.req.invitesSub": "{n, plural, one {# step} other {# steps}} — your own progress, the prepared steps are shared",
+  "@loader.req.invitesSub": {
+    "description": "Second line of a Roadmap invitation (a 👥 is shown before it). Everybody keeps their own progress; the prepared steps are the same for all.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "loader.req.wantsShare": "{who} wants to share “{title}” with you",
+  "@loader.req.wantsShare": {
+    "description": "Notification row: someone shares a subject with the learner. {who} and {title} are shown in bold.",
+    "placeholders": {
+      "who": {
+        "type": "String",
+        "example": "Anna"
+      },
+      "title": {
+        "type": "String",
+        "example": "Human anatomy"
+      }
+    }
+  },
+  "loader.req.counts": "{chapters, plural, one {# chapter} other {# chapters}} · {exercises, plural, one {# exercise} other {# exercises}}",
+  "@loader.req.counts": {
+    "description": "Second line of a shared-subject notification: its size.",
+    "placeholders": {
+      "chapters": {
+        "type": "int",
+        "example": "8"
+      },
+      "exercises": {
+        "type": "int",
+        "example": "120"
+      }
+    }
+  },
+  "loader.req.details": "Details",
+  "@loader.req.details": {
+    "description": "Tooltip of the ℹ️ button that shows the info card of a shared subject."
+  },
+  "loader.req.back": "Back",
+  "@loader.req.back": {
+    "description": "Button that closes the info card of a shared subject."
+  },
+  "loader.req.joined": "You joined “{title}” — find it in 🧭 Roadmaps",
+  "@loader.req.joined": {
+    "description": "Toast after the learner joined a shared Roadmap.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Become a data engineer"
+      }
+    }
+  },
+  "loader.req.accepted": "“{title}” is now in your subjects",
+  "@loader.req.accepted": {
+    "description": "Toast after the learner accepted a shared subject.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Human anatomy"
+      }
+    }
+  },
+  "loader.req.join": "Join",
+  "@loader.req.join": {
+    "description": "Button that accepts an invitation to a shared Roadmap (a ✓ is shown before it)."
+  },
+  "loader.req.accept": "Accept",
+  "@loader.req.accept": {
+    "description": "Button that accepts a shared subject (a ✓ is shown before it)."
+  },
+  "loader.req.rejected": "Rejected",
+  "@loader.req.rejected": {
+    "description": "Toast after the learner rejected a share or an invitation."
+  },
+  "loader.req.reject": "Reject",
+  "@loader.req.reject": {
+    "description": "Button that rejects a share or an invitation (a ✕ is shown before it)."
+  },
+  "loader.upd.owner": "The owner",
+  "@loader.upd.owner": {
+    "description": "Stands for the unknown owner of a shared Roadmap in “{who} changed the Roadmap …”."
+  },
+  "loader.upd.author": "Its author",
+  "@loader.upd.author": {
+    "description": "Stands for the unknown author of a step or subject in “{who} made/published a new version …”."
+  },
+  "loader.upd.curChanged": "{who} changed the Roadmap “{title}”",
+  "@loader.upd.curChanged": {
+    "description": "Notification: the owner of a shared Roadmap changed it ({title} in bold; a 🧭 is shown before it).",
+    "placeholders": {
+      "who": {
+        "type": "String",
+        "example": "Anna"
+      },
+      "title": {
+        "type": "String",
+        "example": "Become a data engineer"
+      }
+    }
+  },
+  "loader.upd.curChanges": "{n, plural, one {# change} other {# changes}} — nothing changes in your copy until you take it",
+  "@loader.upd.curChanges": {
+    "description": "Second line of the “Roadmap changed” notification.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "loader.upd.curChangesList": "{n, plural, one {# change} other {# changes}}: {lines} — nothing changes in your copy until you take it",
+  "@loader.upd.curChangesList": {
+    "description": "Second line of the “Roadmap changed” notification with the changes listed ({lines}, separated by “ · ”).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "2"
+      },
+      "lines": {
+        "type": "String",
+        "example": "new step “Spark” · step “SQL” renamed"
+      }
+    }
+  },
+  "loader.upd.stepNew": "{who} made a new version of the step “{title}”",
+  "@loader.upd.stepNew": {
+    "description": "Notification: a new version of a prepared step of a shared Roadmap ({title} in bold; a ⚡ is shown before it).",
+    "placeholders": {
+      "who": {
+        "type": "String",
+        "example": "Anna"
+      },
+      "title": {
+        "type": "String",
+        "example": "Spark basics"
+      }
+    }
+  },
+  "loader.upd.stepNewSub": "in “{roadmap}” — yours stays until you take it",
+  "@loader.upd.stepNewSub": {
+    "description": "Second line of the “new version of the step” notification; {roadmap} is the Roadmap’s title.",
+    "placeholders": {
+      "roadmap": {
+        "type": "String",
+        "example": "Become a data engineer"
+      }
+    }
+  },
+  "loader.upd.subjNew": "{who} published a new version of “{title}”",
+  "@loader.upd.subjNew": {
+    "description": "Notification: a public subject taken from Explore has a new version ({title} in bold; a 🌍 is shown before it).",
+    "placeholders": {
+      "who": {
+        "type": "String",
+        "example": "Anna"
+      },
+      "title": {
+        "type": "String",
+        "example": "Human anatomy"
+      }
+    }
+  },
+  "loader.upd.subjNewSub": "your progress stays (the same subject)",
+  "@loader.upd.subjNewSub": {
+    "description": "Second line of the “new version of a public subject” notification."
+  },
+  "loader.upd.subjSteps": "the {n, plural, one {# Roadmap step it teaches is} other {# Roadmap steps it teaches are}} re-planned to follow it",
+  "@loader.upd.subjSteps": {
+    "description": "Added (after “ · ”) when the updated subject teaches steps of the learner’s Roadmaps: those steps are planned again.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "loader.upd.review": "Review",
+  "@loader.upd.review": {
+    "description": "Button of a “Roadmap changed” notification: opens the list of changes to choose from (a 🔎 is shown before it)."
+  },
+  "loader.upd.getIt": "Get it",
+  "@loader.upd.getIt": {
+    "description": "Button of a “new version of the step” notification (a ⬇️ is shown before it)."
+  },
+  "loader.upd.update": "Update",
+  "@loader.upd.update": {
+    "description": "Button of a “new version of a subject” notification (a ⬆️ is shown before it)."
+  },
+  "loader.upd.kept": "You keep your version of “{title}”",
+  "@loader.upd.kept": {
+    "description": "Toast after the learner declined an update (a 👍 is shown before it).",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Human anatomy"
+      }
+    }
+  },
+  "loader.upd.keepCopy": "Keep my copy",
+  "@loader.upd.keepCopy": {
+    "description": "Button of a “Roadmap changed” notification: keep the Roadmap as it is."
+  },
+  "loader.upd.keepMine": "Keep mine",
+  "@loader.upd.keepMine": {
+    "description": "Button of an update notification: keep the current version."
+  },
+  "loader.files.attached": "{n, plural, one {# source file(s) attached} other {# source file(s) attached}} — open them with 👁 in 📚 Sources",
+  "@loader.files.attached": {
+    "description": "Toast after a subject made by Claude got its source files (PDFs …) attached.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "loader.files.notAttached": "{n, plural, one {# source file(s) of the package could not be attached} other {# source file(s) of the package could not be attached}}: {files}",
+  "@loader.files.notAttached": {
+    "description": "Toast when some source files of a package made by Claude could not be attached; {files} lists their names.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "1"
+      },
+      "files": {
+        "type": "String",
+        "example": "atlas.pdf"
+      }
+    }
+  },
+  "loader.copied": "Copied",
+  "@loader.copied": {
+    "description": "A copy button briefly shows this after copying (a ✓ is shown before it). Short."
+  },
+  "loader.copyThis": "Copy this:",
+  "@loader.copyThis": {
+    "description": "Browser prompt with a text to copy by hand when the clipboard is not available."
+  },
+  "loader.moreInfo": "More info",
+  "@loader.moreInfo": {
+    "description": "Tooltip / accessible label of the small “i” that opens an explanation."
+  },
+  "loader.cg.copy": "Copy",
+  "@loader.cg.copy": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Button that copies the connector address (a 📋 is shown before it)."
+  },
+  "loader.cg.copyMessage": "Copy the message",
+  "@loader.cg.copyMessage": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Button that copies the ready-made message for Claude (a 📋 is shown before it)."
+  },
+  "loader.cg.newChat": "Open a new chat",
+  "@loader.cg.newChat": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Link that opens a new chat on claude.ai (an ↗ is shown after it)."
+  },
+  "loader.cg.account.title": "Create a Claude account",
+  "@loader.cg.account.title": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Title of a step."
+  },
+  "loader.cg.account.tip": "The Free plan works for small sources (a few pages). For whole books or many PDFs use Pro or Max: they allow much longer work.",
+  "@loader.cg.account.tip": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Explanation of the step “Create a Claude account”. Free, Pro and Max are Claude’s plans (names)."
+  },
+  "loader.cg.account.open": "Open {site} — or install the Claude app for your computer or phone from {download}.",
+  "@loader.cg.account.open": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). {site} and {download} are links (claude.ai, claude.ai/download).",
+    "placeholders": {
+      "site": {
+        "type": "String",
+        "example": "claude.ai"
+      },
+      "download": {
+        "type": "String",
+        "example": "claude.ai/download"
+      }
+    }
+  },
+  "loader.cg.account.signUp": "Click <b>Sign up</b> and use your e-mail or Google account.",
+  "@loader.cg.account.signUp": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). <b>Sign up</b> is the button on claude.ai."
+  },
+  "loader.cg.account.have": "Already have one? Go to step 2.",
+  "@loader.cg.account.have": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Small note under the account step."
+  },
+  "loader.cg.code.title": "Switch on “Code execution”",
+  "@loader.cg.code.title": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Title of a step: a setting in Claude (“Code execution”)."
+  },
+  "loader.cg.code.tip": "Claude needs it to run the noema-lite tools that check and build the course.",
+  "@loader.cg.code.tip": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Explanation of the step “Switch on Code execution”."
+  },
+  "loader.cg.code.open": "Open {link}.",
+  "@loader.cg.code.open": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). {link} is a link to Claude’s settings page (“Settings → Capabilities”).",
+    "placeholders": {
+      "link": {
+        "type": "String",
+        "example": "Settings → Capabilities"
+      }
+    }
+  },
+  "loader.cg.code.link": "Settings → Capabilities",
+  "@loader.cg.code.link": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Text of a link: the place in Claude’s settings."
+  },
+  "loader.cg.code.turnOn": "Turn on <b>Code execution and file creation</b>.",
+  "@loader.cg.code.turnOn": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). The bold part is the name of the setting in Claude."
+  },
+  "loader.cg.conn.title": "Connect noema-lite to Claude",
+  "@loader.cg.conn.title": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Title of a step: add noema-lite as a “connector” in Claude."
+  },
+  "loader.cg.conn.tip": "Then Claude saves finished subjects straight into your noema-lite account. The address is the same for everybody, on every computer and phone: it is on the noema-lite website, not on your computer. On the Free plan you can add one connector.",
+  "@loader.cg.conn.tip": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Explanation of the connector step."
+  },
+  "loader.cg.conn.needCloud": "You need a noema-lite cloud account for this: choose “Sign in / create a cloud account” when noema-lite asks who is studying (⚙️ → Cloud).",
+  "@loader.cg.conn.needCloud": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Warning in the connector step for a local profile. “Sign in / create a cloud account” is the button of the profile picker (key pick.cloudSignIn): use the same words."
+  },
+  "loader.cg.conn.open": "In Claude open <b>Customize → Connectors</b>.",
+  "@loader.cg.conn.open": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). The bold part is Claude’s menu."
+  },
+  "loader.cg.conn.add": "Click <b>+ Add</b> → <b>Add custom connector</b>.",
+  "@loader.cg.conn.add": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). The bold parts are Claude’s buttons."
+  },
+  "loader.cg.conn.fields": "Name: <b>noema-lite</b> · URL: {url}",
+  "@loader.cg.conn.fields": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). What to type into Claude’s connector form; {url} is the connector address (code font); a Copy button follows.",
+    "placeholders": {
+      "url": {
+        "type": "String",
+        "example": "https://noema-lite.netlify.app/mcp"
+      }
+    }
+  },
+  "loader.cg.conn.advanced": "Leave <i>Advanced settings</i> empty and click <b>Add</b>.",
+  "@loader.cg.conn.advanced": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). The italic and bold parts are in Claude’s connector form."
+  },
+  "loader.cg.conn.connect": "Click <b>Connect</b>: a noema-lite page opens → sign in with your cloud account → <b>Allow</b>.",
+  "@loader.cg.conn.connect": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). The bold parts are buttons (Claude’s “Connect”, noema-lite’s “Allow”)."
+  },
+  "loader.cg.skill.title": "Optional: add the skill",
+  "@loader.cg.skill.title": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Title of an optional step: upload the “skill” (a package of instructions for Claude)."
+  },
+  "loader.cg.skill.tip": "Not required: the connector already gives Claude the same instructions and tools. The skill only lets Claude start a little faster. Claude does not allow other websites to install skills into your account (a safety rule), so this one step is manual.",
+  "@loader.cg.skill.tip": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Explanation of the skill step."
+  },
+  "loader.cg.skill.download": "{btn} (a .zip file — do not unzip it).",
+  "@loader.cg.skill.download": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). {btn} is the download button “Download the skill”.",
+    "placeholders": {
+      "btn": {
+        "type": "String",
+        "example": "Download the skill"
+      }
+    }
+  },
+  "loader.cg.skill.downloadBtn": "Download the skill",
+  "@loader.cg.skill.downloadBtn": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Download button (a ⬇️ is shown before it)."
+  },
+  "loader.cg.skill.upload": "In Claude: <b>Customize → Skills</b> → <b>+</b> → <b>Create skill</b> → <b>Upload a skill</b> → choose the zip.",
+  "@loader.cg.skill.upload": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). The bold parts are Claude’s menus and buttons."
+  },
+  "loader.cg.ask.title": "Ask Claude",
+  "@loader.cg.ask.title": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Title of a step."
+  },
+  "loader.cg.ask.tip": "Big sources take 10–40 minutes. You can watch Claude work; keep the chat open until it says the subject is saved.",
+  "@loader.cg.ask.tip": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Explanation of the step “Ask Claude”."
+  },
+  "loader.cg.ask.attach": "Attach your PDFs and pictures with the <b>+</b> (or 📎) button.",
+  "@loader.cg.ask.attach": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). The + button of Claude’s chat box."
+  },
+  "loader.cg.ask.choose": "Either choose <b>+ → noema-lite → Create a noema-lite subject</b> and type the title, or paste this message and fill in the dots: {btn}",
+  "@loader.cg.ask.choose": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). The bold part is Claude’s menu path to the connector’s ready-made prompt; {btn} is the “Copy the message” button.",
+    "placeholders": {
+      "btn": {
+        "type": "String",
+        "example": "Copy the message"
+      }
+    }
+  },
+  "loader.cg.ask.send": "Press Send.",
+  "@loader.cg.ask.send": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Last action of the step “Ask Claude”."
+  },
+  "loader.cg.study.title": "Study",
+  "@loader.cg.study.title": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Title of the last step."
+  },
+  "loader.cg.study.picker": "Open noema-lite → subject picker: the new subject is there with 🔒 (if not, close and reopen the picker).",
+  "@loader.cg.study.picker": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Where the new subject appears."
+  },
+  "loader.cg.study.package": "Without the connector Claude gives you a package {file} (the course + your source files): download it, then {import} in the subject picker.",
+  "@loader.cg.study.package": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). {file} is the file name “<id>.noema.zip” (bold); {import} is the name of the import button (bold, key pick.import).",
+    "placeholders": {
+      "file": {
+        "type": "String",
+        "example": "<id>.noema.zip"
+      },
+      "import": {
+        "type": "String",
+        "example": "📥 Import subject pack"
+      }
+    }
+  },
+  "loader.cg.faq.skillQ": "Why can’t noema-lite add the skill to my Claude by itself?",
+  "@loader.cg.faq.skillQ": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). A question in the guide’s FAQ (a ❓ is shown before it)."
+  },
+  "loader.cg.faq.skillA": "Claude does not let websites install things into your Claude account — that protects you. You do not need the skill anyway: with the connector Claude gets the instructions from noema-lite by itself. In way A (here in noema-lite) the app uploads the skill for you automatically, using your API key.",
+  "@loader.cg.faq.skillA": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Answer to “Why can’t noema-lite add the skill …?”. “way A” is the first of the guide’s three ways (A, B, C)."
+  },
+  "loader.cg.faq.urlQ": "Is the connector address the same on every computer?",
+  "@loader.cg.faq.urlQ": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). A question in the guide’s FAQ (a ❓ is shown before it)."
+  },
+  "loader.cg.faq.urlA": "Yes: {url}. It points to the noema-lite website, so it is the same for every user and every device (Windows, Mac, Linux, phones).",
+  "@loader.cg.faq.urlA": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Answer; {url} is the connector address (code font).",
+    "placeholders": {
+      "url": {
+        "type": "String",
+        "example": "https://noema-lite.netlify.app/mcp"
+      }
+    }
+  },
+  "loader.cg.faq.noUrl": "(this installation has no website address)",
+  "@loader.cg.faq.noUrl": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Shown instead of the connector address when the app has no website configured."
+  },
+  "loader.cg.c.recommend": "<b>Recommended for Roadmaps — usually the cheapest way. </b>A Roadmap has many steps and each one becomes a full subject. With an API key (way A) every prepared step costs a few dollars, so 30–40 steps add up; with your Claude plan (Free, Pro or Max) there is nothing to pay beyond the plan. The difference grows with the size of the Roadmap. The catch: your plan has usage limits, so a big Roadmap may be prepared over a few days — prepare the next steps while you study the first ones.",
+  "@loader.cg.c.recommend": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way C: a whole Roadmap prepared by the learner’s own Claude app (with their Claude plan) through the noema-lite connector. Introduction (a ⭐ is shown before it). Keep the bold tags around the first sentence."
+  },
+  "loader.cg.c.choose.title": "Choose “Claude app” in noema-lite",
+  "@loader.cg.c.choose.title": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way C: a whole Roadmap prepared by the learner’s own Claude app (with their Claude plan) through the noema-lite connector. Title of a step."
+  },
+  "loader.cg.c.choose.tip": "It is preselected when you have a cloud account. Your Roadmaps made with an API key can switch too: open the Roadmap → ⚙️ → AI for new steps; or send single steps with “💬 In my Claude app instead”.",
+  "@loader.cg.c.choose.tip": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way C: a whole Roadmap prepared by the learner’s own Claude app (with their Claude plan) through the noema-lite connector. Explanation of the step. “AI for new steps” and “💬 In my Claude app instead” are labels on the Roadmap page: use the same words as there."
+  },
+  "loader.cg.c.choose.open": "Open {roadmaps} → {new} or {import}.",
+  "@loader.cg.c.choose.open": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way C: a whole Roadmap prepared by the learner’s own Claude app (with their Claude plan) through the noema-lite connector. {roadmaps} is a button, {new} and {import} the names of buttons on the Roadmaps page (bold).",
+    "placeholders": {
+      "roadmaps": {
+        "type": "String",
+        "example": "🧭 Roadmaps"
+      },
+      "new": {
+        "type": "String",
+        "example": "➕ New Roadmap"
+      },
+      "import": {
+        "type": "String",
+        "example": "📥 Import a Roadmap"
+      }
+    }
+  },
+  "loader.cg.c.choose.which": "At “Which AI…?” choose <b>💬 Claude app — with your Claude plan</b>.",
+  "@loader.cg.c.choose.which": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way C: a whole Roadmap prepared by the learner’s own Claude app (with their Claude plan) through the noema-lite connector. “Which AI…?” and the bold option are on the new-Roadmap form: use the same words as there."
+  },
+  "loader.cg.c.choose.build": "Press <b>Build</b> / <b>Import</b>. Nothing runs in noema-lite: it waits for your Claude app.",
+  "@loader.cg.c.choose.build": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way C: a whole Roadmap prepared by the learner’s own Claude app (with their Claude plan) through the noema-lite connector. The bold parts are buttons of the new-Roadmap / import form."
+  },
+  "loader.cg.c.paste.title": "Paste one message into a Claude chat",
+  "@loader.cg.c.paste.title": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way C: a whole Roadmap prepared by the learner’s own Claude app (with their Claude plan) through the noema-lite connector. Title of a step."
+  },
+  "loader.cg.c.paste.tip": "Claude asks the connector for the next task — the Roadmap’s agents, the chapter plans, then the queued steps — does it and saves it into your account. One step per chat keeps Claude fast and focused; for the next step paste the same message into a new chat.",
+  "@loader.cg.c.paste.tip": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way C: a whole Roadmap prepared by the learner’s own Claude app (with their Claude plan) through the noema-lite connector. Explanation of the step."
+  },
+  "loader.cg.c.paste.copy": "In noema-lite press <b>📋 Copy the message</b> (on the waiting Roadmap, in the 💬 bar of its Roadmap, or on a step).",
+  "@loader.cg.c.paste.copy": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way C: a whole Roadmap prepared by the learner’s own Claude app (with their Claude plan) through the noema-lite connector. The bold part is a button on the Roadmap page."
+  },
+  "loader.cg.c.paste.chat": "{link} — in the chat, make sure the noema-lite connector is on (<b>+ → Connectors</b>).",
+  "@loader.cg.c.paste.chat": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way C: a whole Roadmap prepared by the learner’s own Claude app (with their Claude plan) through the noema-lite connector. {link} is the link “Open a new chat”; the bold part is Claude’s menu.",
+    "placeholders": {
+      "link": {
+        "type": "String",
+        "example": "Open a new chat"
+      }
+    }
+  },
+  "loader.cg.c.paste.send": "Paste the message and send it. Claude works for a few minutes (the Roadmap) up to 10–40 minutes (a step with big files).",
+  "@loader.cg.c.paste.send": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way C: a whole Roadmap prepared by the learner’s own Claude app (with their Claude plan) through the noema-lite connector. Last action of the step."
+  },
+  "loader.cg.c.back.title": "Come back to noema-lite",
+  "@loader.cg.c.back.title": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way C: a whole Roadmap prepared by the learner’s own Claude app (with their Claude plan) through the noema-lite connector. Title of a step."
+  },
+  "loader.cg.c.back.tip": "The app checks when you return to it and every 20 seconds while something waits. ⚡ on the Roadmap = ready to study.",
+  "@loader.cg.c.back.tip": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way C: a whole Roadmap prepared by the learner’s own Claude app (with their Claude plan) through the noema-lite connector. Explanation of the step."
+  },
+  "loader.cg.c.back.appears": "What Claude saved appears by itself: the Roadmap, the chapters, the prepared steps.",
+  "@loader.cg.c.back.appears": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way C: a whole Roadmap prepared by the learner’s own Claude app (with their Claude plan) through the noema-lite connector. First action of the step “Come back to noema-lite”."
+  },
+  "loader.cg.c.back.byHand": "No connector (or no cloud account)? Press <b>How? · by hand</b>: copy a task into any Claude chat and paste the answer back; for a step, download its bundle (task + your files + toolkit), give it to Claude, and import the .noema.zip it makes with <b>📥 Import its package</b>.",
+  "@loader.cg.c.back.byHand": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way C: a whole Roadmap prepared by the learner’s own Claude app (with their Claude plan) through the noema-lite connector. The bold parts are buttons on the Roadmap page: use the same words as there."
+  },
+  "loader.cg.c.faq.q": "Which way should I choose?",
+  "@loader.cg.c.faq.q": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). A question in the guide’s FAQ (a ❓ is shown before it)."
+  },
+  "loader.cg.c.faq.c": "<b>C (Claude plan): </b>cheapest for Roadmaps, best for big ones; you paste a message per step and the plan’s limits set the pace.",
+  "@loader.cg.c.faq.c": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Answer, way C. Keep the bold label."
+  },
+  "loader.cg.c.faq.a": "<b>A (API key): </b>fully automatic — steps are prepared in the background while the app is open; you pay per step (you set a limit).",
+  "@loader.cg.c.faq.a": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Answer, way A. Keep the bold label."
+  },
+  "loader.cg.c.faq.gemini": "<b>Gemini (free key): </b>free and automatic, simpler subjects (no web pictures).",
+  "@loader.cg.c.faq.gemini": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Answer, Gemini (Google’s AI, a name). Keep the bold label."
+  },
+  "loader.cg.c.faq.mix": "You can mix them: switch a Roadmap in ⚙️, or send single steps to the Claude app.",
+  "@loader.cg.c.faq.mix": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Last line of the answer."
+  },
+  "loader.cg.noModule": "This installation has no Claude module.",
+  "@loader.cg.noModule": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Shown instead of way A when this copy of the app has no Claude module."
+  },
+  "loader.cg.setup.a": "A. Here in noema-lite — with a Claude API key",
+  "@loader.cg.setup.a": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Heading of way A (a 🏠 is shown before it)."
+  },
+  "loader.cg.setup.aSub": "you pay Anthropic per use; everything happens in this app",
+  "@loader.cg.setup.aSub": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Small text after the heading of way A (after “ · ”). Anthropic is the company (a name)."
+  },
+  "loader.cg.setup.createThisWay": "Create a subject this way",
+  "@loader.cg.setup.createThisWay": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Button under way A (a ✨ is shown before it)."
+  },
+  "loader.cg.setup.roadmapsSameKey": "Roadmaps (use the same key)",
+  "@loader.cg.setup.roadmapsSameKey": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Button under way A that opens the Roadmaps (a 🧭 is shown before it)."
+  },
+  "loader.cg.setup.b": "B. In the Claude app or website — with the noema-lite connector",
+  "@loader.cg.setup.b": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Heading of way B (a 💬 is shown before it)."
+  },
+  "loader.cg.setup.bSub": "uses your Claude plan; the subject arrives here by itself",
+  "@loader.cg.setup.bSub": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Small text after the heading of way B (after “ · ”)."
+  },
+  "loader.cg.setup.c": "C. Roadmaps with your Claude plan — the Claude app plans and prepares the steps",
+  "@loader.cg.setup.c": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Heading of way C (a 🧭 is shown before it)."
+  },
+  "loader.cg.setup.cBadge": "recommended for Roadmaps · usually cheapest",
+  "@loader.cg.setup.cBadge": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Badge next to the heading of way C (a ⭐ is shown before it). Short."
+  },
+  "loader.cg.setup.cSub": "no API cost; results arrive here by themselves",
+  "@loader.cg.setup.cSub": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Small text after the heading of way C (after “ · ”)."
+  },
+  "loader.cg.key.model": "Claude model",
+  "@loader.cg.key.model": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key (from the Claude Console, platform.claude.com). Label of the list of Claude models the key can use."
+  },
+  "loader.cg.key.modelTip": "The default is the newest “Sonnet”: very good quality for its price. “Opus” is the strongest and costs more; “Haiku” is cheaper but writes weaker courses.",
+  "@loader.cg.key.modelTip": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key (from the Claude Console, platform.claude.com). Explanation of the model list. Sonnet, Opus and Haiku are model names (keep them)."
+  },
+  "loader.cg.key.invalid": "That does not look like a Claude API key — it starts with sk-ant- and is long. Copy it again from the Console.",
+  "@loader.cg.key.invalid": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key (from the Claude Console, platform.claude.com). Error under the key field."
+  },
+  "loader.cg.key.checking": "Checking…",
+  "@loader.cg.key.checking": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key (from the Claude Console, platform.claude.com). Status while the key is tested."
+  },
+  "loader.cg.key.noModels": "no models available for this key",
+  "@loader.cg.key.noModels": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key (from the Claude Console, platform.claude.com). Error (lower case, shown after ❌) when the key works but gives access to no model."
+  },
+  "loader.cg.key.worksRemembered": "The key works. It is remembered on this device only (never sent to the noema-lite cloud).",
+  "@loader.cg.key.worksRemembered": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key (from the Claude Console, platform.claude.com). Status after a successful test, when “Remember the key” is ticked."
+  },
+  "loader.cg.key.worksTab": "The key works. It is kept only until you close this tab.",
+  "@loader.cg.key.worksTab": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key (from the Claude Console, platform.claude.com). Status after a successful test, when “Remember the key” is not ticked."
+  },
+  "loader.cg.key.console.title": "Create a Claude Console account",
+  "@loader.cg.key.console.title": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key (from the Claude Console, platform.claude.com). Title of a step."
+  },
+  "loader.cg.key.console.tip": "This is Anthropic’s account for the Claude API (Anthropic makes Claude). It is separate from a claude.ai chat plan: a Pro or Max subscription does <b>not</b> include API credit.",
+  "@loader.cg.key.console.tip": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key (from the Claude Console, platform.claude.com). Explanation of the step. Keep the bold “not”."
+  },
+  "loader.cg.key.console.open": "Open the Claude Console: {link}",
+  "@loader.cg.key.console.open": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key (from the Claude Console, platform.claude.com). {link} is the link platform.claude.com.",
+    "placeholders": {
+      "link": {
+        "type": "String",
+        "example": "platform.claude.com"
+      }
+    }
+  },
+  "loader.cg.key.console.signUp": "Click <b>Sign up</b> and use your e-mail or your Google account.",
+  "@loader.cg.key.console.signUp": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key (from the Claude Console, platform.claude.com). <b>Sign up</b> is the button in the Console."
+  },
+  "loader.cg.key.console.confirm": "Open the e-mail Anthropic sends you and confirm it.",
+  "@loader.cg.key.console.confirm": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key (from the Claude Console, platform.claude.com). Action of the account step."
+  },
+  "loader.cg.key.console.have": "Already have an account? Skip to step 2.",
+  "@loader.cg.key.console.have": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key (from the Claude Console, platform.claude.com). Small note under the account step."
+  },
+  "loader.cg.key.credit.title": "Add some credit",
+  "@loader.cg.key.credit.title": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key (from the Claude Console, platform.claude.com). Title of a step: buy prepaid API credit."
+  },
+  "loader.cg.key.credit.tip": "You pay only for what Claude actually uses. A typical subject costs a few dollars; very big PDFs cost more. noema-lite shows the estimated cost while Claude works and stops at the limit you set in step 7.",
+  "@loader.cg.key.credit.tip": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key (from the Claude Console, platform.claude.com). Explanation of the credit step."
+  },
+  "loader.cg.key.credit.open": "Open {link}.",
+  "@loader.cg.key.credit.open": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key (from the Claude Console, platform.claude.com). {link} is a link to the Console’s billing page.",
+    "placeholders": {
+      "link": {
+        "type": "String",
+        "example": "Settings → Billing"
+      }
+    }
+  },
+  "loader.cg.key.credit.link": "Settings → Billing",
+  "@loader.cg.key.credit.link": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key (from the Claude Console, platform.claude.com). Text of a link: the place in the Console."
+  },
+  "loader.cg.key.credit.buy": "Buy credit — a small amount (for example $5–10) is enough to start.",
+  "@loader.cg.key.credit.buy": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key (from the Claude Console, platform.claude.com). Action of the credit step. The amount is in US dollars (the Console bills in dollars)."
+  },
+  "loader.cg.key.credit.limit": "Recommended: set a monthly spending limit (in the Console: <b>Settings → Limits</b>).",
+  "@loader.cg.key.credit.limit": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key (from the Claude Console, platform.claude.com). The bold part is the place in the Console."
+  },
+  "loader.cg.key.create.title": "Create an API key",
+  "@loader.cg.key.create.title": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key (from the Claude Console, platform.claude.com). Title of a step."
+  },
+  "loader.cg.key.create.tip": "The key is like a password that lets noema-lite ask Claude for you. Anyone who has it can spend your credit — do not send it to anybody. You can delete it in the Console at any time.",
+  "@loader.cg.key.create.tip": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key (from the Claude Console, platform.claude.com). Explanation of the key step."
+  },
+  "loader.cg.key.create.open": "Open {link}.",
+  "@loader.cg.key.create.open": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key (from the Claude Console, platform.claude.com). {link} is a link to the Console’s API-keys page.",
+    "placeholders": {
+      "link": {
+        "type": "String",
+        "example": "Settings → API keys"
+      }
+    }
+  },
+  "loader.cg.key.create.link": "Settings → API keys",
+  "@loader.cg.key.create.link": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key (from the Claude Console, platform.claude.com). Text of a link: the place in the Console."
+  },
+  "loader.cg.key.create.click": "Click <b>Create key</b>, name it <b>noema-lite</b>, and confirm.",
+  "@loader.cg.key.create.click": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key (from the Claude Console, platform.claude.com). The bold parts are the Console’s button and the name to type."
+  },
+  "loader.cg.key.create.copy": "Click <b>Copy</b>. The key starts with <code>sk-ant-</code> and is shown only once.",
+  "@loader.cg.key.create.copy": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key (from the Claude Console, platform.claude.com). The bold part is the Console’s button; keep sk-ant- as it is."
+  },
+  "loader.cg.key.paste.title": "Paste the key here",
+  "@loader.cg.key.paste.title": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key (from the Claude Console, platform.claude.com). Title of a step."
+  },
+  "loader.cg.key.paste.tip": "The key stays in this browser. It is never uploaded to the noema-lite cloud and is not part of backups.",
+  "@loader.cg.key.paste.tip": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key (from the Claude Console, platform.claude.com). Explanation of the paste step."
+  },
+  "loader.cg.key.paste.box": "Click in the box and paste the key (<kbd>Ctrl</kbd> + <kbd>V</kbd> on Windows and Linux, <kbd>⌘</kbd> + <kbd>V</kbd> on a Mac):",
+  "@loader.cg.key.paste.box": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key (from the Claude Console, platform.claude.com). The key field follows. <kbd> marks keyboard keys."
+  },
+  "loader.cg.key.paste.check": "Click {btn} — a green ✅ means it works.",
+  "@loader.cg.key.paste.check": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key (from the Claude Console, platform.claude.com). {btn} is the button “Check the key”.",
+    "placeholders": {
+      "btn": {
+        "type": "String",
+        "example": "Check the key"
+      }
+    }
+  },
+  "loader.cg.key.paste.checkBtn": "Check the key",
+  "@loader.cg.key.paste.checkBtn": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key (from the Claude Console, platform.claude.com). Button that tests the key (a ✔️ is shown before it)."
+  },
+  "loader.cg.key.paste.remember": "Remember the key on this device (untick on a shared computer)",
+  "@loader.cg.key.paste.remember": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key (from the Claude Console, platform.claude.com). Checkbox: keep the key on this device after the tab is closed."
+  },
+  "loader.cg.title": "Create a subject with Claude",
+  "@loader.cg.title": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Title of the guide (a ✨ is shown before it)."
+  },
+  "loader.cg.sub": "Claude reads your PDFs, notes, pictures and links and builds the whole course: theory, exercises, picture exercises and flashcards.",
+  "@loader.cg.sub": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Subtitle of the guide."
+  },
+  "loader.cg.unfinished": "Not finished yet",
+  "@loader.cg.unfinished": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Heading of the list of subjects Claude started but did not finish (an ⏳ is shown before it)."
+  },
+  "loader.cg.jobRow": "“{title}” · {when} · ≈ {cost}",
+  "@loader.cg.jobRow": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). One unfinished subject: its title, when it was started, and the estimated cost so far (in US dollars).",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Human anatomy"
+      },
+      "when": {
+        "type": "String",
+        "example": "10/11/2026, 3:04:05 PM"
+      },
+      "cost": {
+        "type": "String",
+        "example": "$1.23"
+      }
+    }
+  },
+  "loader.cg.resume": "Resume",
+  "@loader.cg.resume": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Button that continues an unfinished subject (in one place a ▶ is shown before it)."
+  },
+  "loader.cg.delete": "Delete",
+  "@loader.cg.delete": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Button that deletes an unfinished subject (in one place a 🗑 is shown before it)."
+  },
+  "loader.cg.deleteJobConfirm": "Delete this unfinished subject? What Claude did so far is lost.",
+  "@loader.cg.deleteJobConfirm": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Browser confirmation."
+  },
+  "loader.cg.how": "How do you want to work with Claude?",
+  "@loader.cg.how": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Question above the three ways A, B, C."
+  },
+  "loader.cg.home.a": "A. Here in noema-lite",
+  "@loader.cg.home.a": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Title of the choice “way A”."
+  },
+  "loader.cg.home.a1": "You never leave this app",
+  "@loader.cg.home.a1": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Point of way A."
+  },
+  "loader.cg.home.a2": "Needs a Claude API key: you pay Anthropic per use (a few dollars per subject — you see the cost live and set a limit)",
+  "@loader.cg.home.a2": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Point of way A. Anthropic is the company (a name)."
+  },
+  "loader.cg.home.a3": "Simplest: everything happens on this page",
+  "@loader.cg.home.a3": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Point of way A."
+  },
+  "loader.cg.home.b": "B. In the Claude app or website",
+  "@loader.cg.home.b": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Title of the choice “way B”."
+  },
+  "loader.cg.home.b1": "Uses your Claude plan (Free, Pro or Max) — no extra cost",
+  "@loader.cg.home.b1": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Point of way B. Free, Pro and Max are Claude’s plans (names)."
+  },
+  "loader.cg.home.b2": "You chat with Claude there; the finished subject arrives here by itself",
+  "@loader.cg.home.b2": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Point of way B."
+  },
+  "loader.cg.home.b3": "Best for very big sources (Pro / Max)",
+  "@loader.cg.home.b3": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Point of way B."
+  },
+  "loader.cg.home.c": "C. A whole Roadmap with your Claude plan",
+  "@loader.cg.home.c": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Title of the choice “way C”."
+  },
+  "loader.cg.home.cBadge": "usually cheapest",
+  "@loader.cg.home.cBadge": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Badge on the choice “way C” (a ⭐ is shown before it). Short."
+  },
+  "loader.cg.home.c1": "A Roadmap of steps (from a goal, or your own Roadmap + files); every step becomes a subject",
+  "@loader.cg.home.c1": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Point of way C."
+  },
+  "loader.cg.home.c2": "Your Claude app plans and prepares the steps — no API cost",
+  "@loader.cg.home.c2": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Point of way C."
+  },
+  "loader.cg.home.c3": "The bigger the Roadmap, the bigger the saving",
+  "@loader.cg.home.c3": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Point of way C."
+  },
+  "loader.cg.noModuleApp": "This noema-lite installation has no Claude module.",
+  "@loader.cg.noModuleApp": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key. Shown when this copy of the app has no Claude module."
+  },
+  "loader.cg.a.remove": "Remove {name}",
+  "@loader.cg.a.remove": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key. Accessible label (screen readers) of the ✕ next to a chosen file.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "notes.pdf"
+      }
+    }
+  },
+  "loader.cg.a.choose": "Choose files",
+  "@loader.cg.a.choose": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key. The drop box for the source files (a 📂 is shown before it)."
+  },
+  "loader.cg.a.drag": "or drag them here",
+  "@loader.cg.a.drag": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key. Small text after “Choose files” in the drop box."
+  },
+  "loader.cg.a.linksPlaceholder": "Optional: web links, one per line",
+  "@loader.cg.a.linksPlaceholder": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key. Placeholder of the field for web links used as sources."
+  },
+  "loader.cg.a.titlePlaceholder": "e.g. Human heart anatomy",
+  "@loader.cg.a.titlePlaceholder": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key. Placeholder of the subject title field: an example title."
+  },
+  "loader.cg.a.sameLang": "Same as the sources",
+  "@loader.cg.a.sameLang": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key. First option of the language list: the course is written in the language of the sources."
+  },
+  "loader.cg.a.goalExam": "Pass an exam",
+  "@loader.cg.a.goalExam": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key. Option of the “Your goal” list."
+  },
+  "loader.cg.a.goalUnderstand": "Understand it deeply",
+  "@loader.cg.a.goalUnderstand": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key. Option of the “Your goal” list."
+  },
+  "loader.cg.a.goalProject": "Use it in a project / at work",
+  "@loader.cg.a.goalProject": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key. Option of the “Your goal” list."
+  },
+  "loader.cg.a.notesPlaceholder": "Optional: anything Claude should know (e.g. “focus on chapters 3–5”, “I am a beginner”)",
+  "@loader.cg.a.notesPlaceholder": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key. Placeholder of the notes for Claude."
+  },
+  "loader.cg.a.needKey": "Step 4: the key needs to work first.",
+  "@loader.cg.a.needKey": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key. Error when the learner presses Start without a working key (a 👆 is shown before it)."
+  },
+  "loader.cg.a.needFiles": "Step 5: add at least one file or link.",
+  "@loader.cg.a.needFiles": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key. Error when the learner presses Start without sources."
+  },
+  "loader.cg.a.needTitle": "Step 6: give the subject a title.",
+  "@loader.cg.a.needTitle": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key. Error when the learner presses Start without a title."
+  },
+  "loader.cg.preparing": "Preparing…",
+  "@loader.cg.preparing": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Status / button text while Claude’s work is being prepared (an ⏳ is shown before it)."
+  },
+  "loader.cg.a.start": "Start",
+  "@loader.cg.a.start": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key. The button that starts Claude’s work (a 🚀 is shown before it)."
+  },
+  "loader.cg.a.title": "Create it here in noema-lite",
+  "@loader.cg.a.title": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key. Title of way A (a 🏠 is shown before it)."
+  },
+  "loader.cg.a.sub": "Follow the steps in order. Steps 1–3 are needed only the first time.",
+  "@loader.cg.a.sub": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key. Subtitle of way A."
+  },
+  "loader.cg.a.sources.title": "Add your sources",
+  "@loader.cg.a.sources.title": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key. Title of a step."
+  },
+  "loader.cg.a.sources.tip": "PDFs, pictures (photos, scans, slides), text files or Word documents. Claude reads everything and uses the pictures inside them for picture exercises. It also finds extra pictures on the web.",
+  "@loader.cg.a.sources.tip": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key. Explanation of the sources step."
+  },
+  "loader.cg.a.sources.pick": "Click <b>Choose files</b> and pick your files (hold <kbd>Ctrl</kbd> / <kbd>⌘</kbd> to pick several), or drag them onto the box:",
+  "@loader.cg.a.sources.pick": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key. The drop box follows. The bold part is the drop box’s label (“Choose files”)."
+  },
+  "loader.cg.a.sources.links": "Optional: paste web pages to use as sources, one per line:",
+  "@loader.cg.a.sources.links": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key. The links field follows."
+  },
+  "loader.cg.a.describe.title": "Describe the subject",
+  "@loader.cg.a.describe.title": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key. Title of a step."
+  },
+  "loader.cg.a.describe.tip": "Only the title is required. The language decides the language of the course and of the AI tutor.",
+  "@loader.cg.a.describe.tip": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key. Explanation of the describe step."
+  },
+  "loader.cg.a.fTitle": "Title",
+  "@loader.cg.a.fTitle": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key. Label of the subject title field."
+  },
+  "loader.cg.a.fLang": "Language",
+  "@loader.cg.a.fLang": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key. Label of the course language list."
+  },
+  "loader.cg.a.fGoal": "Your goal",
+  "@loader.cg.a.fGoal": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key. Label of the goal list."
+  },
+  "loader.cg.a.fNotes": "Notes for Claude (optional)",
+  "@loader.cg.a.fNotes": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key. Label of the notes field."
+  },
+  "loader.cg.a.startTitle": "Start",
+  "@loader.cg.a.startTitle": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key. Title of the last step (start Claude’s work)."
+  },
+  "loader.cg.a.startTip": "Claude works for 10–60 minutes depending on the size of the sources. Keep this page open (you can use other tabs or apps). If the page closes, open ✨ Create with Claude again and press Resume — nothing is lost.",
+  "@loader.cg.a.startTip": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key. Explanation of the start step. “✨ Create with Claude” and “Resume” are buttons (use the same words)."
+  },
+  "loader.cg.a.limit": "Choose a spending limit: {field}",
+  "@loader.cg.a.limit": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key. {field} is the limit field “stop and ask me above $ [15]”; an ⓘ follows.",
+    "placeholders": {
+      "field": {
+        "type": "String",
+        "example": "stop and ask me above $ 15"
+      }
+    }
+  },
+  "loader.cg.a.limitField": "stop and ask me above $ {budget}",
+  "@loader.cg.a.limitField": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key. {budget} is the number field (US dollars). Put the $ where the language writes the currency sign.",
+    "placeholders": {
+      "budget": {
+        "type": "String",
+        "example": "15"
+      }
+    }
+  },
+  "loader.cg.a.limitTip": "An estimate based on the published prices; the exact amount is in the Console under Usage. When the limit is reached Claude pauses; you can raise it and continue.",
+  "@loader.cg.a.limitTip": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key. Explanation of the spending limit. “Usage” is a page of the Claude Console."
+  },
+  "loader.cg.a.press": "Press {go} and watch Claude work.",
+  "@loader.cg.a.press": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Way A: inside noema-lite with the learner’s own Claude API key. {go} is the Start button.",
+    "placeholders": {
+      "go": {
+        "type": "String",
+        "example": "🚀 Start"
+      }
+    }
+  },
+  "loader.cg.p.keyPlaceholder": "sk-ant-… (your Claude API key)",
+  "@loader.cg.p.keyPlaceholder": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Progress page of a subject Claude is making with the learner’s API key. Placeholder of the key field when the key is needed to continue. Keep “sk-ant-…”."
+  },
+  "loader.cg.p.pasteKey": "Paste your Claude API key to continue.",
+  "@loader.cg.p.pasteKey": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Progress page of a subject Claude is making with the learner’s API key. Status when the key is not on this device (a 🔑 is shown before it)."
+  },
+  "loader.cg.p.continue": "Continue",
+  "@loader.cg.p.continue": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Progress page of a subject Claude is making with the learner’s API key. Button that continues Claude’s work (in one place a ▶ is shown before it)."
+  },
+  "loader.cg.p.money": "≈ {cost} of your {budget} limit · {k, number}k tokens · {turns, plural, one {# steps} other {# steps}} · model {model}",
+  "@loader.cg.p.money": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Progress page of a subject Claude is making with the learner’s API key. Cost line: estimated cost so far of the spending limit, thousands of tokens (“k” = thousand), Claude’s working steps, the model’s name. English keeps “steps” for 1; use the proper plural.",
+    "placeholders": {
+      "cost": {
+        "type": "String",
+        "example": "$1.23"
+      },
+      "budget": {
+        "type": "String",
+        "example": "$15"
+      },
+      "k": {
+        "type": "int",
+        "example": "240"
+      },
+      "turns": {
+        "type": "int",
+        "example": "12"
+      },
+      "model": {
+        "type": "String",
+        "example": "claude-sonnet-4-5"
+      }
+    }
+  },
+  "loader.cg.p.working": "Claude is working… keep this page open.",
+  "@loader.cg.p.working": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Progress page of a subject Claude is making with the learner’s API key. Status while Claude works (a 🧠 is shown before it)."
+  },
+  "loader.cg.p.paused": "Paused.",
+  "@loader.cg.p.paused": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Progress page of a subject Claude is making with the learner’s API key. Status when the work is paused (a ⏸️ is shown before it)."
+  },
+  "loader.cg.p.question": "Claude needs an answer:",
+  "@loader.cg.p.question": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Progress page of a subject Claude is making with the learner’s API key. Status when Claude asks the learner a question (a 💬 is shown before it); the question follows."
+  },
+  "loader.cg.p.done": "Your subject is ready!",
+  "@loader.cg.p.done": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Progress page of a subject Claude is making with the learner’s API key. Status when the subject is finished (a ✅ is shown before it)."
+  },
+  "loader.cg.p.stop": "Stop",
+  "@loader.cg.p.stop": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Progress page of a subject Claude is making with the learner’s API key. Button that stops Claude’s work (a ⏹ is shown before it)."
+  },
+  "loader.cg.p.open": "Open my new subject",
+  "@loader.cg.p.open": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Progress page of a subject Claude is making with the learner’s API key. Button that adds the finished subject and opens it (a 📚 is shown before it)."
+  },
+  "loader.cg.p.answerPlaceholder": "Your answer (or just press Send: “continue and finish the pack”)",
+  "@loader.cg.p.answerPlaceholder": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Progress page of a subject Claude is making with the learner’s API key. Placeholder of the answer to Claude’s question. “Send” is the button below."
+  },
+  "loader.cg.p.send": "Send",
+  "@loader.cg.p.send": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Progress page of a subject Claude is making with the learner’s API key. Button that sends the answer to Claude."
+  },
+  "loader.cg.p.newLimit": "New limit $ {field}",
+  "@loader.cg.p.newLimit": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Progress page of a subject Claude is making with the learner’s API key. Label of the field for a higher spending limit (US dollars); {field} is the number field.",
+    "placeholders": {
+      "field": {
+        "type": "String",
+        "example": "23"
+      }
+    }
+  },
+  "loader.cg.p.deleteConfirm": "Delete this unfinished subject?",
+  "@loader.cg.p.deleteConfirm": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Progress page of a subject Claude is making with the learner’s API key. Browser confirmation."
+  },
+  "loader.cg.p.leaveConfirm": "Claude keeps working only while this window is open. Stop and go back?",
+  "@loader.cg.p.leaveConfirm": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Progress page of a subject Claude is making with the learner’s API key. Browser confirmation when the learner leaves while Claude works."
+  },
+  "loader.cg.p.madeBy": "Made by Claude with your API key",
+  "@loader.cg.p.madeBy": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Progress page of a subject Claude is making with the learner’s API key. Subtitle of the progress page."
+  },
+  "loader.cg.p.log": "What Claude is doing",
+  "@loader.cg.p.log": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Progress page of a subject Claude is making with the learner’s API key. Heading of the live log of Claude’s actions."
+  },
+  "loader.cg.c.title": "A Roadmap with your Claude plan",
+  "@loader.cg.c.title": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Title of way C (a 🧭 is shown before it)."
+  },
+  "loader.cg.c.sub": "Steps 1–4 are needed only the first time (the same as way B).",
+  "@loader.cg.c.sub": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Subtitle of way C."
+  },
+  "loader.cg.b.title": "Use the Claude app or website",
+  "@loader.cg.b.title": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Title of way B (a 💬 is shown before it)."
+  },
+  "loader.cg.b.sub": "Steps 1–4 are needed only the first time. Works the same on Windows, Mac, Linux, iPhone and Android.",
+  "@loader.cg.b.sub": {
+    "description": "Step-by-step guide “Create a subject with Claude” (Claude is Anthropic’s AI; keep the name). Subtitle of way B."
+  },
+  "loader.oauth.title": "Connect Claude",
+  "@loader.oauth.title": {
+    "description": "Consent page shown when the learner connects Claude (the AI app) to their noema-lite account (OAuth). Title of the page."
+  },
+  "loader.oauth.openApp": "Open noema-lite",
+  "@loader.oauth.openApp": {
+    "description": "Consent page shown when the learner connects Claude (the AI app) to their noema-lite account (OAuth). Button under an error: open the app instead."
+  },
+  "loader.oauth.noCloud": "This noema-lite installation has no cloud accounts.",
+  "@loader.oauth.noCloud": {
+    "description": "Consent page shown when the learner connects Claude (the AI app) to their noema-lite account (OAuth). Error when this copy of the app has no cloud accounts."
+  },
+  "loader.oauth.signInSub": "Sign in to the noema-lite account Claude should save your subjects to.",
+  "@loader.oauth.signInSub": {
+    "description": "Consent page shown when the learner connects Claude (the AI app) to their noema-lite account (OAuth). Shown before sign-in."
+  },
+  "loader.oauth.invalid": "This connection request is invalid or has expired ({error}). Start again from Claude.",
+  "@loader.oauth.invalid": {
+    "description": "Consent page shown when the learner connects Claude (the AI app) to their noema-lite account (OAuth). Error; {error} is the technical reason.",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "invalid authorization_id"
+      }
+    }
+  },
+  "loader.oauth.connected": "Connected — go back to Claude.",
+  "@loader.oauth.connected": {
+    "description": "Consent page shown when the learner connects Claude (the AI app) to their noema-lite account (OAuth). Shown after approving, when the browser does not go back by itself."
+  },
+  "loader.oauth.cancelled": "Cancelled.",
+  "@loader.oauth.cancelled": {
+    "description": "Consent page shown when the learner connects Claude (the AI app) to their noema-lite account (OAuth). Shown after denying."
+  },
+  "loader.oauth.consentTitle": "Connect Claude to noema-lite",
+  "@loader.oauth.consentTitle": {
+    "description": "Consent page shown when the learner connects Claude (the AI app) to their noema-lite account (OAuth). Title of the consent (a 🔗 is shown before it)."
+  },
+  "loader.oauth.signedInAs": "Signed in as {email}",
+  "@loader.oauth.signedInAs": {
+    "description": "Consent page shown when the learner connects Claude (the AI app) to their noema-lite account (OAuth). Subtitle: the account that will be connected.",
+    "placeholders": {
+      "email": {
+        "type": "String",
+        "example": "anna@example.com"
+      }
+    }
+  },
+  "loader.oauth.wants": "{client} wants to use your noema-lite account.",
+  "@loader.oauth.wants": {
+    "description": "Consent page shown when the learner connects Claude (the AI app) to their noema-lite account (OAuth). {client} is the name of the app asking (usually “Claude”), in bold.",
+    "placeholders": {
+      "client": {
+        "type": "String",
+        "example": "Claude"
+      }
+    }
+  },
+  "loader.oauth.scopeList": "list your subjects",
+  "@loader.oauth.scopeList": {
+    "description": "Consent page shown when the learner connects Claude (the AI app) to their noema-lite account (OAuth). What the app may do, point 1 (a ✅ is shown before it)."
+  },
+  "loader.oauth.scopePacks": "create and update your private subject packs",
+  "@loader.oauth.scopePacks": {
+    "description": "Consent page shown when the learner connects Claude (the AI app) to their noema-lite account (OAuth). What the app may do, point 2."
+  },
+  "loader.oauth.scopeRoadmaps": "read your Roadmaps and send their steps, chapter plans and prepared steps (you see them arrive in noema-lite)",
+  "@loader.oauth.scopeRoadmaps": {
+    "description": "Consent page shown when the learner connects Claude (the AI app) to their noema-lite account (OAuth). What the app may do, point 3."
+  },
+  "loader.oauth.scopeNot": "it gets only the connector’s tools: no access to your conversations, progress or keys through them",
+  "@loader.oauth.scopeNot": {
+    "description": "Consent page shown when the learner connects Claude (the AI app) to their noema-lite account (OAuth). What the app may NOT do (a 🚫 is shown before it)."
+  },
+  "loader.oauth.returnTo": "After approving you return to {site}.",
+  "@loader.oauth.returnTo": {
+    "description": "Consent page shown when the learner connects Claude (the AI app) to their noema-lite account (OAuth). {site} is the address of the app that asked (bold).",
+    "placeholders": {
+      "site": {
+        "type": "String",
+        "example": "claude.ai"
+      }
+    }
+  },
+  "loader.oauth.deny": "Deny",
+  "@loader.oauth.deny": {
+    "description": "Consent page shown when the learner connects Claude (the AI app) to their noema-lite account (OAuth). Button that refuses the connection."
+  },
+  "loader.oauth.allow": "Allow",
+  "@loader.oauth.allow": {
+    "description": "Consent page shown when the learner connects Claude (the AI app) to their noema-lite account (OAuth). Button that allows the connection."
+  },
+  "loader.err.noIndexedDB": "IndexedDB unavailable",
+  "@loader.err.noIndexedDB": {
+    "description": "Error when the browser’s local database (IndexedDB, a technical name) cannot be used, e.g. in a private window."
+  },
+  "loader.backup.legacyName": "legacy export",
+  "@loader.backup.legacyName": {
+    "description": "Name given to a backup file of the old app (Databricks Quest) when it is restored; shown where the backup’s profile name appears."
+  },
+  "loader.backup.notBackup": "Not a noema-lite backup file.",
+  "@loader.backup.notBackup": {
+    "description": "Error when the learner restores a file that is not a backup."
+  },
+  "loader.backup.beforeRestore": "Before restore {when}",
+  "@loader.backup.beforeRestore": {
+    "description": "Name of the restore point saved automatically before a backup is restored; it is stored and shown later in the list of restore points. {when} is the date and time.",
+    "placeholders": {
+      "when": {
+        "type": "String",
+        "example": "10/11/2026, 3:04:05 PM"
+      }
+    }
+  },
+  "loader.convo.kind.tutor": "Tutor conversation",
+  "@loader.convo.kind.tutor": {
+    "description": "Kind of a saved AI conversation; shown in the conversation list and as “Type” in the exported Markdown file. "
+  },
+  "loader.convo.kind.grading": "AI grading",
+  "@loader.convo.kind.grading": {
+    "description": "Kind of a saved AI conversation; shown in the conversation list and as “Type” in the exported Markdown file. The AI graded one of the learner’s answers."
+  },
+  "loader.convo.kind.codeReview": "AI code review",
+  "@loader.convo.kind.codeReview": {
+    "description": "Kind of a saved AI conversation; shown in the conversation list and as “Type” in the exported Markdown file. The AI reviewed the learner’s code."
+  },
+  "loader.convo.kind.question": "AI-generated question",
+  "@loader.convo.kind.question": {
+    "description": "Kind of a saved AI conversation; shown in the conversation list and as “Type” in the exported Markdown file. The AI wrote a new practice question."
+  },
+  "loader.convo.kind.drillGrading": "Debug-drill grading",
+  "@loader.convo.kind.drillGrading": {
+    "description": "Kind of a saved AI conversation; shown in the conversation list and as “Type” in the exported Markdown file. The AI graded a “debug drill” (a checklist for finding a problem)."
+  },
+  "loader.convo.mode.socratic": "Socratic dialogue",
+  "@loader.convo.mode.socratic": {
+    "description": "Mode of a tutor conversation (how the AI tutor talks with the learner); shown in the conversation list and in exports. The tutor only asks questions that lead the learner to the answer."
+  },
+  "loader.convo.mode.explain": "Explanation",
+  "@loader.convo.mode.explain": {
+    "description": "Mode of a tutor conversation (how the AI tutor talks with the learner); shown in the conversation list and in exports. The tutor explains."
+  },
+  "loader.convo.mode.quiz": "Quiz",
+  "@loader.convo.mode.quiz": {
+    "description": "Mode of a tutor conversation (how the AI tutor talks with the learner); shown in the conversation list and in exports. The tutor quizzes the learner."
+  },
+  "loader.convo.mode.interview": "Mock interview",
+  "@loader.convo.mode.interview": {
+    "description": "Mode of a tutor conversation (how the AI tutor talks with the learner); shown in the conversation list and in exports. A practice job interview."
+  },
+  "loader.convo.mode.debug": "Debugging simulation",
+  "@loader.convo.mode.debug": {
+    "description": "Mode of a tutor conversation (how the AI tutor talks with the learner); shown in the conversation list and in exports. The learner finds the cause of a simulated problem."
+  },
+  "loader.convo.mode.hint": "Hint",
+  "@loader.convo.mode.hint": {
+    "description": "Mode of a tutor conversation (how the AI tutor talks with the learner); shown in the conversation list and in exports. From the sibling app Meletee: a hint for an exercise."
+  },
+  "loader.convo.mode.feynman": "Feynman coach",
+  "@loader.convo.mode.feynman": {
+    "description": "Mode of a tutor conversation (how the AI tutor talks with the learner); shown in the conversation list and in exports. From the sibling app Meletee: the learner explains simply, like Richard Feynman (a name)."
+  },
+  "loader.convo.mode.teachBack": "Teach-back",
+  "@loader.convo.mode.teachBack": {
+    "description": "Mode of a tutor conversation (how the AI tutor talks with the learner); shown in the conversation list and in exports. From the sibling app Meletee: the learner teaches the idea back to the tutor."
+  },
+  "loader.convo.mode.whyChain": "Why-chain",
+  "@loader.convo.mode.whyChain": {
+    "description": "Mode of a tutor conversation (how the AI tutor talks with the learner); shown in the conversation list and in exports. From the sibling app Meletee: a chain of “why?” questions."
+  },
+  "loader.convo.mode.examples": "Examples coach",
+  "@loader.convo.mode.examples": {
+    "description": "Mode of a tutor conversation (how the AI tutor talks with the learner); shown in the conversation list and in exports. From the sibling app Meletee: the learner finds examples."
+  },
+  "loader.convo.mode.mnemonic": "Memory hook",
+  "@loader.convo.mode.mnemonic": {
+    "description": "Mode of a tutor conversation (how the AI tutor talks with the learner); shown in the conversation list and in exports. From the sibling app Meletee: a mnemonic to remember something."
+  },
+  "loader.convo.mode.methodLab": "Method Lab",
+  "@loader.convo.mode.methodLab": {
+    "description": "Mode of a tutor conversation (how the AI tutor talks with the learner); shown in the conversation list and in exports. From the sibling app Meletee: practising a study method."
+  },
+  "loader.convo.mode.plan": "Study plan",
+  "@loader.convo.mode.plan": {
+    "description": "Mode of a tutor conversation (how the AI tutor talks with the learner); shown in the conversation list and in exports. From the sibling app Meletee: making a study plan."
+  },
+  "loader.convo.tutor": "Tutor",
+  "@loader.convo.tutor": {
+    "description": "Default name of the AI tutor in an exported conversation when the tutor character has no name."
+  },
+  "loader.convo.md.type": "Type",
+  "@loader.convo.md.type": {
+    "description": "Row label of the table at the top of an exported conversation (Markdown file the learner downloads or finds in the backup folder). "
+  },
+  "loader.convo.md.subject": "Subject",
+  "@loader.convo.md.subject": {
+    "description": "Row label of the table at the top of an exported conversation (Markdown file the learner downloads or finds in the backup folder). "
+  },
+  "loader.convo.md.context": "Context",
+  "@loader.convo.md.context": {
+    "description": "Row label of the table at the top of an exported conversation (Markdown file the learner downloads or finds in the backup folder). What the conversation was about (a chapter, a section, the whole course)."
+  },
+  "loader.convo.md.started": "Started",
+  "@loader.convo.md.started": {
+    "description": "Row label of the table at the top of an exported conversation (Markdown file the learner downloads or finds in the backup folder). When the conversation started."
+  },
+  "loader.convo.md.lastMessage": "Last message",
+  "@loader.convo.md.lastMessage": {
+    "description": "Row label of the table at the top of an exported conversation (Markdown file the learner downloads or finds in the backup folder). When the last message was written."
+  },
+  "loader.convo.md.messages": "Messages",
+  "@loader.convo.md.messages": {
+    "description": "Row label of the table at the top of an exported conversation (Markdown file the learner downloads or finds in the backup folder). How many messages."
+  },
+  "loader.convo.md.model": "Model",
+  "@loader.convo.md.model": {
+    "description": "Row label of the table at the top of an exported conversation (Markdown file the learner downloads or finds in the backup folder). The AI model’s name."
+  },
+  "loader.convo.md.id": "Id",
+  "@loader.convo.md.id": {
+    "description": "Row label of the table at the top of an exported conversation (Markdown file the learner downloads or finds in the backup folder). The conversation’s technical identifier."
+  },
+  "loader.convo.md.source": "Source",
+  "@loader.convo.md.source": {
+    "description": "Row label of the table at the top of an exported conversation (Markdown file the learner downloads or finds in the backup folder). Which app wrote the conversation."
+  },
+  "loader.convo.wholeCourse": "Whole course",
+  "@loader.convo.wholeCourse": {
+    "description": "Context of a conversation about the whole subject (not one chapter), in exports."
+  },
+  "loader.convo.deleted": "This conversation was deleted.",
+  "@loader.convo.deleted": {
+    "description": "Exported file of a deleted conversation (shown in italics)."
+  },
+  "loader.convo.lessons": "Lessons learned",
+  "@loader.convo.lessons": {
+    "description": "Heading in an exported tutor conversation: the short lessons the tutor noted (a 📌 is shown before it)."
+  },
+  "loader.convo.you": "You",
+  "@loader.convo.you": {
+    "description": "The learner’s messages in an exported conversation (a 🧑 is shown before it)."
+  },
+  "loader.viewer.couldNotLoad": "could not load {file}",
+  "@loader.viewer.couldNotLoad": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Error (lower case, shown inside “This file could not be shown (…)”) when a part of the viewer could not be loaded.",
+    "placeholders": {
+      "file": {
+        "type": "String",
+        "example": "viewer/mammoth.browser.min.js"
+      }
+    }
+  },
+  "loader.viewer.pdfPassword": "the PDF is password-protected",
+  "@loader.viewer.pdfPassword": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Reason (lower case, shown inside “This file could not be shown (…)”)."
+  },
+  "loader.viewer.page": "Page",
+  "@loader.viewer.page": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Accessible label of the page-number field of a PDF."
+  },
+  "loader.viewer.prevPage": "Previous page",
+  "@loader.viewer.prevPage": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Accessible label of the ‹ button of a PDF."
+  },
+  "loader.viewer.nextPage": "Next page",
+  "@loader.viewer.nextPage": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Accessible label of the › button of a PDF."
+  },
+  "loader.viewer.zoomOut": "Zoom out",
+  "@loader.viewer.zoomOut": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Accessible label of the − button."
+  },
+  "loader.viewer.zoomIn": "Zoom in",
+  "@loader.viewer.zoomIn": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Accessible label of the + button."
+  },
+  "loader.viewer.noText": "(no text found)",
+  "@loader.viewer.noText": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Shown for an OpenDocument file without text."
+  },
+  "loader.viewer.slide": "Slide {n, number}",
+  "@loader.viewer.slide": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Number of a slide of a PowerPoint file.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "loader.viewer.noSlides": "(no slides found)",
+  "@loader.viewer.noSlides": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Shown for a PowerPoint file without slides."
+  },
+  "loader.viewer.emptyBook": "(empty book)",
+  "@loader.viewer.emptyBook": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Shown for an e-book (EPUB) without content."
+  },
+  "loader.viewer.mail.from": "From",
+  "@loader.viewer.mail.from": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Header line of an e-mail file: the sender (a colon follows)."
+  },
+  "loader.viewer.mail.to": "To",
+  "@loader.viewer.mail.to": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Header line of an e-mail file: the recipient (a colon follows)."
+  },
+  "loader.viewer.mail.date": "Date",
+  "@loader.viewer.mail.date": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Header line of an e-mail file (a colon follows)."
+  },
+  "loader.viewer.mail.subject": "Subject",
+  "@loader.viewer.mail.subject": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Header line of an e-mail file: the e-mail’s subject line (a colon follows)."
+  },
+  "loader.viewer.empty": "(empty)",
+  "@loader.viewer.empty": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Shown for an e-mail without text."
+  },
+  "loader.viewer.zipFile": "File",
+  "@loader.viewer.zipFile": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Column heading in the list of files inside a ZIP archive."
+  },
+  "loader.viewer.zipSize": "Size",
+  "@loader.viewer.zipSize": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Column heading in the list of files inside a ZIP archive."
+  },
+  "loader.viewer.open": "Open",
+  "@loader.viewer.open": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Button that opens a file inside a ZIP archive (a 👁 is shown before it)."
+  },
+  "loader.viewer.nFiles": "{n, plural, one {# files} other {# files}}",
+  "@loader.viewer.nFiles": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Above the list of files inside a ZIP archive. English keeps “files” for 1; use the proper plural.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "loader.viewer.legacy": "Older binary Office format: showing the text found inside it. Download the file for the full layout.",
+  "@loader.viewer.legacy": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Note above the text extracted from an old .doc/.ppt file."
+  },
+  "loader.viewer.noReadable": "(no readable text found)",
+  "@loader.viewer.noReadable": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Shown when an old Office file has no readable text."
+  },
+  "loader.viewer.unknown": "This type cannot be shown here — download it to open it in its own program. First bytes:",
+  "@loader.viewer.unknown": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Note above a hexadecimal dump of an unknown file."
+  },
+  "loader.viewer.readable": "Readable text inside",
+  "@loader.viewer.readable": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Expandable section with the text found in an unknown file."
+  },
+  "loader.viewer.opening": "Opening…",
+  "@loader.viewer.opening": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). While a file is loaded (an ⏳ is shown before it)."
+  },
+  "loader.viewer.file": "File",
+  "@loader.viewer.file": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Title of the viewer when the file has no name."
+  },
+  "loader.viewer.fileLower": "file",
+  "@loader.viewer.fileLower": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Stands for a file without a name inside “Preview: {name}” (lower case)."
+  },
+  "loader.viewer.preview": "Preview: {name}",
+  "@loader.viewer.preview": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Accessible label of the viewer dialog.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "notes.pdf"
+      }
+    }
+  },
+  "loader.viewer.openSite": "Open",
+  "@loader.viewer.openSite": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Link that opens a web address (YouTube, a web page) in a new tab (an ↗ is shown before it)."
+  },
+  "loader.viewer.webNote": "Web page — if it stays empty, the site does not allow previews: use ↗ Open.",
+  "@loader.viewer.webNote": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Note above a web page shown in a frame. “↗ Open” is the link at the top (loader.viewer.openSite)."
+  },
+  "loader.viewer.noDownload": "The file could not be downloaded for a preview.",
+  "@loader.viewer.noDownload": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Error when a file on the web could not be downloaded."
+  },
+  "loader.viewer.noDownloadWhy": "The file could not be downloaded for a preview ({error}).",
+  "@loader.viewer.noDownloadWhy": {
+    "description": "File viewer (👁: opens a source file on top of the app). Error when a file on the web could not be downloaded and the site’s file service said why; {error} is that reason, already in the UI language (e.g. “larger than 25 MB”).",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "larger than 25 MB"
+      }
+    }
+  },
+  "loader.viewer.openOriginal": "Open the original",
+  "@loader.viewer.openOriginal": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Link to the file on the web (an ↗ is shown before it)."
+  },
+  "loader.viewer.download": "Download",
+  "@loader.viewer.download": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Tooltip of the ⬇️ button."
+  },
+  "loader.viewer.newTab": "Open in a new tab",
+  "@loader.viewer.newTab": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Tooltip of the ↗ button."
+  },
+  "loader.viewer.failed": "This file could not be shown ({error}). You can still download it.",
+  "@loader.viewer.failed": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Error; {error} is the reason (technical, may be English).",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "the PDF is password-protected"
+      }
+    }
+  },
+  "loader.viewer.kind.pdf": "PDF",
+  "@loader.viewer.kind.pdf": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Kind of the open file, in its subtitle (“notes.pdf · PDF · 2.1 MB”). Short. "
+  },
+  "loader.viewer.kind.image": "Picture",
+  "@loader.viewer.kind.image": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Kind of the open file, in its subtitle (“notes.pdf · PDF · 2.1 MB”). Short. "
+  },
+  "loader.viewer.kind.heic": "HEIC photo",
+  "@loader.viewer.kind.heic": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Kind of the open file, in its subtitle (“notes.pdf · PDF · 2.1 MB”). Short. HEIC is a photo format of phones."
+  },
+  "loader.viewer.kind.tiff": "TIFF picture",
+  "@loader.viewer.kind.tiff": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Kind of the open file, in its subtitle (“notes.pdf · PDF · 2.1 MB”). Short. "
+  },
+  "loader.viewer.kind.markdown": "Markdown",
+  "@loader.viewer.kind.markdown": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Kind of the open file, in its subtitle (“notes.pdf · PDF · 2.1 MB”). Short. A text format (a name)."
+  },
+  "loader.viewer.kind.csv": "Table (CSV)",
+  "@loader.viewer.kind.csv": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Kind of the open file, in its subtitle (“notes.pdf · PDF · 2.1 MB”). Short. "
+  },
+  "loader.viewer.kind.json": "JSON",
+  "@loader.viewer.kind.json": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Kind of the open file, in its subtitle (“notes.pdf · PDF · 2.1 MB”). Short. A data format (a name)."
+  },
+  "loader.viewer.kind.html": "Web page",
+  "@loader.viewer.kind.html": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Kind of the open file, in its subtitle (“notes.pdf · PDF · 2.1 MB”). Short. An .html file."
+  },
+  "loader.viewer.kind.text": "Text",
+  "@loader.viewer.kind.text": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Kind of the open file, in its subtitle (“notes.pdf · PDF · 2.1 MB”). Short. "
+  },
+  "loader.viewer.kind.docx": "Word document",
+  "@loader.viewer.kind.docx": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Kind of the open file, in its subtitle (“notes.pdf · PDF · 2.1 MB”). Short. "
+  },
+  "loader.viewer.kind.odt": "OpenDocument",
+  "@loader.viewer.kind.odt": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Kind of the open file, in its subtitle (“notes.pdf · PDF · 2.1 MB”). Short. A document format (a name)."
+  },
+  "loader.viewer.kind.rtf": "Rich text",
+  "@loader.viewer.kind.rtf": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Kind of the open file, in its subtitle (“notes.pdf · PDF · 2.1 MB”). Short. An .rtf file."
+  },
+  "loader.viewer.kind.sheet": "Spreadsheet",
+  "@loader.viewer.kind.sheet": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Kind of the open file, in its subtitle (“notes.pdf · PDF · 2.1 MB”). Short. "
+  },
+  "loader.viewer.kind.pptx": "PowerPoint",
+  "@loader.viewer.kind.pptx": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Kind of the open file, in its subtitle (“notes.pdf · PDF · 2.1 MB”). Short. A product name."
+  },
+  "loader.viewer.kind.epub": "E-book",
+  "@loader.viewer.kind.epub": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Kind of the open file, in its subtitle (“notes.pdf · PDF · 2.1 MB”). Short. "
+  },
+  "loader.viewer.kind.ipynb": "Jupyter notebook",
+  "@loader.viewer.kind.ipynb": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Kind of the open file, in its subtitle (“notes.pdf · PDF · 2.1 MB”). Short. Jupyter is a product name."
+  },
+  "loader.viewer.kind.eml": "E-mail",
+  "@loader.viewer.kind.eml": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Kind of the open file, in its subtitle (“notes.pdf · PDF · 2.1 MB”). Short. A saved e-mail file."
+  },
+  "loader.viewer.kind.zip": "ZIP archive",
+  "@loader.viewer.kind.zip": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Kind of the open file, in its subtitle (“notes.pdf · PDF · 2.1 MB”). Short. "
+  },
+  "loader.viewer.kind.audio": "Audio",
+  "@loader.viewer.kind.audio": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Kind of the open file, in its subtitle (“notes.pdf · PDF · 2.1 MB”). Short. "
+  },
+  "loader.viewer.kind.video": "Video",
+  "@loader.viewer.kind.video": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Kind of the open file, in its subtitle (“notes.pdf · PDF · 2.1 MB”). Short. "
+  },
+  "loader.viewer.kind.legacy": "Older Office file",
+  "@loader.viewer.kind.legacy": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Kind of the open file, in its subtitle (“notes.pdf · PDF · 2.1 MB”). Short. An old .doc/.ppt file."
+  },
+  "loader.viewer.kind.unknown": "File",
+  "@loader.viewer.kind.unknown": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Kind of the open file, in its subtitle (“notes.pdf · PDF · 2.1 MB”). Short. A file of an unknown kind."
+  },
+  "loader.viewer.kind.youtube": "YouTube video",
+  "@loader.viewer.kind.youtube": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Kind of the open file, in its subtitle (“notes.pdf · PDF · 2.1 MB”). Short. "
+  },
+  "loader.viewer.kind.web": "Web page",
+  "@loader.viewer.kind.web": {
+    "description": "File viewer (👁: opens a source file — PDF, picture, document … — on top of the app). Kind of the open file, in its subtitle (“notes.pdf · PDF · 2.1 MB”). Short. A web address shown in a frame."
+  },
+  "loader.meta.description": "noema-lite — structured theory, a Socratic AI tutor and gamified practice for any subject.",
+  "@loader.meta.description": {
+    "description": "The page’s description (HTML meta description, e.g. shown when the page is shared or bookmarked). “noema-lite” is the app’s name."
+  },
+  "loader.inuse.device": "{os, select, iphone {iPhone} ipad {iPad} android_phone {Android phone} android_tablet {Android tablet} chromebook {Chromebook} mac {Mac} windows {Windows PC} linux {Linux PC} other {another device}}{browser, select, none {} other { · {browser}}}",
+  "@loader.inuse.device": {
+    "description": "“Noema is open on {where}” (inuse.title): the other device that is using the account right now. os = a code of its kind (iphone, ipad, android_phone, android_tablet, chromebook, mac, windows, linux, other); browser = the browser’s name (Chrome, Safari, Firefox, Edge, Opera — never translated) or none. Product names stay as they are.",
+    "placeholders": {
+      "os": {
+        "type": "String",
+        "example": "android_phone"
+      },
+      "browser": {
+        "type": "String",
+        "example": "Chrome"
+      }
+    }
+  },
+  "loader.group.data-cloud": "Data & Cloud Engineering",
+  "@loader.group.data-cloud": {
+    "description": "Subject picker / Shelf: the heading of a group of library subjects (library/groups.json, id data-cloud). Short."
+  },
+  "loader.group.ai-cs": "AI & Computer Science",
+  "@loader.group.ai-cs": {
+    "description": "Subject picker: heading of a group of library subjects (id ai-cs). Short."
+  },
+  "loader.group.life-sciences": "Life Sciences",
+  "@loader.group.life-sciences": {
+    "description": "Subject picker: heading of a group of library subjects (id life-sciences). Short."
+  },
+  "loader.group.physics": "Physics & Medical Physics",
+  "@loader.group.physics": {
+    "description": "Subject picker: heading of a group of library subjects (id physics). Short."
+  },
+  "loader.group.chemistry": "Chemistry",
+  "@loader.group.chemistry": {
+    "description": "Subject picker: heading of a group of library subjects (id chemistry). Short."
+  },
+  "loader.group.math": "Mathematics & Statistics",
+  "@loader.group.math": {
+    "description": "Subject picker: heading of a group of library subjects (id math). Short."
+  },
+  "loader.group.social-sciences": "Social Sciences & Philosophy",
+  "@loader.group.social-sciences": {
+    "description": "Subject picker: heading of a group of library subjects (id social-sciences). Short."
+  },
+  "loader.group.economics": "Economics & Business",
+  "@loader.group.economics": {
+    "description": "Subject picker: heading of a group of library subjects (id economics). Short."
+  },
+  "loader.group.languages": "Languages",
+  "@loader.group.languages": {
+    "description": "Subject picker: heading of the group of language subjects (id languages). Short."
+  },
+  "loader.study.ask": "Which languages do you want to study?",
+  "@loader.study.ask": {
+    "description": "D21: the question (title) of the chooser of the languages to study — on the Languages tab, a course's home and its settings."
+  },
+  "loader.study.why": "Choose one, several or all. The app then teaches only these — you can change this any time, and nothing you learned is lost.",
+  "@loader.study.why": {
+    "description": "D21: under the question of the language chooser."
+  },
+  "loader.study.noneHere": "None of the languages you chose is taught in this course (it teaches {langs}). Choose the ones you want to study here.",
+  "@loader.study.noneHere": {
+    "description": "D21: a course opened that teaches none of the languages the learner chose; {langs} = the course's languages, “A · B · C”.",
+    "placeholders": {
+      "langs": {
+        "type": "String",
+        "example": "Arabic · Hebrew"
+      }
+    }
+  },
+  "loader.study.ok": "{n, plural, =0 {Choose a language} one {Study # language} other {Study # languages}}",
+  "@loader.study.ok": {
+    "description": "D21: the button that stores the choice; n = how many languages are selected (0: the button is disabled).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "loader.study.all": "All",
+  "@loader.study.all": {
+    "description": "D21: button of the language chooser that selects every language. One word."
+  },
+  "loader.study.none": "None",
+  "@loader.study.none": {
+    "description": "D21: the same button when every language is selected: clears the selection. One word."
+  },
+  "loader.study.inCourse": "in this course",
+  "@loader.study.inCourse": {
+    "description": "D21: small mark under a language of the chooser that the open course teaches. Lowercase, short."
+  },
+  "loader.study.change": "Change your languages",
+  "@loader.study.change": {
+    "description": "D21: Languages tab — the row (and the sheet's title) that opens the language chooser again."
+  },
+  "loader.study.changeSub": "One, several or all — your progress is kept",
+  "@loader.study.changeSub": {
+    "description": "D21: Languages tab — the line under “Change your languages”."
+  },
+  "loader.study.yours": "Your languages",
+  "@loader.study.yours": {
+    "description": "D21: Languages tab — section label above the languages the learner chose (each row opens its course)."
+  },
+  "loader.study.courses": "Courses",
+  "@loader.study.courses": {
+    "description": "D21: Languages tab — section label above the language courses that teach the chosen languages."
+  },
+  "loader.study.otherCourses": "{n, plural, one {# other course} other {# other courses}}",
+  "@loader.study.otherCourses": {
+    "description": "D21: Languages tab — folded section with the courses that teach none of the chosen languages.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "loader.study.otherCoursesSub": "They teach none of the languages you chose. Open one to choose among its languages.",
+  "@loader.study.otherCoursesSub": {
+    "description": "D21: Languages tab — the line inside the folded “other courses”."
+  }
+}

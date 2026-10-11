@@ -1,0 +1,141 @@
+# Weblate configuration as code for noema-lite (docs/i18n.md §9, weblate/README.md).
+# Applied by `python3 tools/i18n/weblate_setup.py apply` — a dry run unless --apply is given; idempotent (creates what is
+# missing, PATCHes what differs, never deletes). Field names are those of the Weblate REST API
+# (https://docs.weblate.org/en/latest/api.html; your instance documents itself at /api/schema/).
+#
+# Placeholders to replace before the first --apply: OWNER (GitHub owner of the private repository) and the site URL.
+
+github:
+  # SSH URL: Weblate clones and pushes with its own SSH key (a deploy key with write access on the repository), and the
+  # GitHub webhook payload reports this exact URL — Weblate matches webhooks to components by exact repository URL.
+  repo: git@github.com:OWNER/noema-lite.git
+  web: https://github.com/OWNER/noema-lite
+  # what the app's catalogs are read from and what Weblate's pull requests target
+  branch: main
+  # Weblate pushes its commits to this branch of the same repository and opens a pull request from it to `branch`.
+  # Never main: only the owner merges into main.
+  push_branch: weblate-translations
+
+# ------------------------------------------------------------------------------------------------ the app's interface
+ui:
+  project:
+    slug: noema-lite
+    name: noema-lite
+    web: https://noema-lite.example.com
+    access_control: 100            # private: only invited translators see it
+    translation_review: true       # translator → reviewer approves
+    source_review: false           # English is edited in the repository only
+    # 30 = "Only include approved translations" (project setting "Translation quality filter", Weblate ≥ 5.13).
+    # The REST API may not expose it: weblate_setup.py checks it and tells you when to set it in the UI.
+    commit_policy: 30
+    instructions: |
+      Translate the noema-lite study app. Read the description of every string (where it appears, length limits).
+      Keep ICU placeholders exactly ({n}, {title}…); plurals use every CLDR category of your language.
+      Use the glossary (component "Glossary") for the app's terms. Address: el εσύ · ru ты · fr tu · de du · it tu ·
+      es tú · pt tu · sq ti · tr sen · hi आप · ja です/ます · zh 你 · ar أنت (MSA).
+      Typography: fr narrow no-break space before ? ! : ; and « » · el ; as question mark and « » · ru « ».
+
+  # One component per i18n/<component>/ that has an en.arb (the glossary folder is separate, below). New folders become
+  # new components on the next `apply`.
+  discover: "i18n/*/en.arb"
+  main_component: core            # holds the Git repository; every other component links to it (weblate://noema-lite/core)
+  component_defaults:
+    name: "{component}"
+    slug: "{component}"
+    vcs: github
+    file_format: arb
+    filemask: "i18n/{component}/*.arb"           # drafts/ is a subfolder: never matched
+    template: "i18n/{component}/en.arb"          # monolingual: English is the source
+    # Template for new translations: empty on purpose. A new locale starts as the stub {"@@locale": "<tag>"} that
+    # `weblate_setup.py init-locale <tag>` writes into every component (keys absent = English fallback at run time);
+    # a copy of en.arb with empty values would hide the English fallback.
+    new_base: ""
+    new_lang: contact                            # locales are switched on by the owner (config.locales), not by translators
+    language_code_style: bcp                     # file names zh-Hans.arb, pt-PT.arb, es-ES.arb, ar-EG.arb
+    manage_units: false                          # keys are added in en.arb in the repository, never in Weblate
+    edit_template: false                         # English source strings are edited in the repository only
+    check_flags: "icu-message-format"
+    enforced_checks: [icu_message_format]        # ICU syntax, placeholders, `other` in every plural/select: cannot be dismissed
+    merge_style: rebase
+    push_on_commit: true
+    commit_pending_age: 24                       # hours: changes are committed (and the PR updated) at least daily
+    file_format_params:
+      json_indent: 2
+    repoweb: "https://github.com/OWNER/noema-lite/blob/{{branch}}/{{filename}}#L{{line}}"
+    # agreement: set from weblate/CLA.md by weblate_setup.py — only once the lawyer-reviewed text has replaced the DRAFT
+  component_overrides:
+    email:
+      priority: 90                               # the account e-mails: translated early, reviewed carefully
+    errors:
+      priority: 90
+  addons:
+    # installed on the main component: they act on the shared repository
+    - name: weblate.git.squash
+      configuration:
+        squash: language                         # one commit per language in the pull request
+        append_trailers: true                    # keeps Co-authored-by: lines for every translator
+    - name: weblate.cleanup.generic              # removes from <locale>.arb the keys en.arb no longer has
+      configuration: {}
+  glossary:
+    name: Glossary
+    slug: glossary
+    vcs: github
+    is_glossary: true
+    file_format: csv                              # bilingual CSV: source,target,developer_comments
+    filemask: "i18n/glossary/*.csv"
+    language_regex: "^(?!terms$).*$"             # terms.csv is the English term list (term, part_of_speech, description)
+    new_base: ""
+    new_lang: contact
+    language_code_style: bcp
+    manage_units: false
+    # The CSV must use the column name translate-toolkit understands (developer_comments): a column named
+    # "description" is written back EMPTY by Weblate. weblate_setup.py leaves this component out while any glossary CSV
+    # has another header than `source,target,developer_comments` (see weblate/README.md "Glossary").
+    required_header: ["source", "target", "developer_comments"]
+
+# ---------------------------------------------------- the language courses' explanation facades (docs/language-packs.md)
+# Not ARB: facades/<locale>/*.json are {address: {t, src, by}}. tools/i18n/weblate_facades.py converts them to flat
+# monolingual JSON on a separate branch (`exchange_branch`) — keys are "<address>#<src hash>", so every translation
+# Weblate approves is bound to the exact English master text it was made from — and back (`import`). main keeps the
+# facades as the single source of truth; the exchange branch is derived.
+courses:
+  project:
+    slug: noema-lite-courses
+    name: noema-lite language courses
+    web: https://noema-lite.example.com
+    access_control: 100
+    translation_review: true
+    source_review: false
+    commit_policy: 30            # REQUIRED here: weblate_facades.py import treats every string in a file as approved
+    instructions: |
+      Explanations of the language courses, translated for learners whose native language is yours (D19).
+      Target-language words (Arabic, Hebrew, Chinese, German forms, transliterations, pinyin, *-marked wrong forms,
+      numbers) stay byte-identical. Keep the Markdown markup of notes exactly (line breaks, "- " and "1. " items).
+      Never compare with a language outside the course; your own language may be named only in its own notes.
+  exchange_branch: weblate-facades
+  push_branch: weblate-facades-translations
+  # one component per facade file, from the exchange tree's INDEX.json (weblate_facades.py export)
+  index: "weblate-facades/INDEX.json"
+  component_defaults:
+    vcs: github
+    file_format: json                            # "JSON file" (flat keys; NOT json-nested: addresses contain dots)
+    filemask: "weblate-facades/{dir}/*.json"
+    template: "weblate-facades/{dir}/en.json"
+    new_base: ""
+    new_lang: contact
+    language_code_style: bcp
+    manage_units: false
+    edit_template: false
+    check_flags: "md-text, ignore-same"          # notes are Markdown; target-language-only cells stay identical
+    merge_style: rebase
+    push_on_commit: true
+    commit_pending_age: 24
+    file_format_params:
+      json_indent: 1
+  addons:
+    - name: weblate.git.squash
+      configuration:
+        squash: language
+        append_trailers: true
+    - name: weblate.cleanup.generic              # drops keys of superseded master texts (their hash changed)
+      configuration: {}

@@ -180,7 +180,7 @@
   "*我吃饭在家 → 我在家吃饭.",
   "*我喝不茶 → 我不喝茶.",
   "*我们喝都茶 → 我们都喝茶.",
-  "German V2 does not apply: *今天吃我面包 → 今天我吃面包."
+  "German V2 does not apply:\n→ *今天吃我面包 → 今天我吃面包."
  ],
  "evidence": {
   "lemmas": [
@@ -265,37 +265,37 @@
   {
    "for": "el",
    "rel": "different",
-   "text": "Greek is SVO but very free (Το ψωμί το τρώω εγώ) and puts place and time after the verb (τρώω στο σπίτι); Chinese order is fixed, and place and time come before the verb: 我在家吃饭."
+   "text": "Greek is SVO but very free (Το ψωμί το τρώω εγώ) and puts place and time after the verb (τρώω στο σπίτι); Chinese order is fixed, and place and time come before the verb:\n→ 我在家吃饭."
   },
   {
    "for": "ru",
    "rel": "different",
-   "text": "Russian order is free because case shows the roles; Chinese order is fixed because nothing else shows them. Я ем дома ‘I eat at home’ becomes 我在家吃饭 — the place moves in front of the verb."
+   "text": "Russian order is free because case shows the roles; Chinese order is fixed because nothing else shows them.\n\nЯ ем дома ‘I eat at home’ becomes 我在家吃饭 — the place moves in front of the verb."
   },
   {
    "for": "es",
    "rel": "different",
-   "text": "Spanish is SVO with place and time usually after the verb (como en casa); Chinese puts them before it: 我在家吃饭."
+   "text": "Spanish is SVO with place and time usually after the verb (como en casa); Chinese puts them before it:\n→ 我在家吃饭."
   },
   {
    "for": "en",
    "rel": "trap",
-   "text": "English is SVO too, but puts place and time at the end (I eat at home today); Chinese puts them before the verb (我今天在家吃饭). *我吃饭在家 is the typical mistake."
+   "text": "English is SVO too, but puts place and time at the end (I eat at home today); Chinese puts them before the verb (我今天在家吃饭).\n\n*我吃饭在家 is the typical mistake."
   },
   {
    "for": "fr",
    "rel": "different",
-   "text": "French is SVO with place and time after the verb (je mange à la maison); Chinese: 我在家吃饭. French object pronouns go before the verb (je le mange); Chinese ones stay after it."
+   "text": "French is SVO with place and time after the verb (je mange à la maison); Chinese:\n→ 我在家吃饭.\n\nFrench object pronouns go before the verb (je le mange); Chinese ones stay after it."
   },
   {
    "for": "de",
    "rel": "different",
-   "text": "German V2 moves the verb to second place (Heute esse ich zu Hause); Chinese never moves it: 今天我在家吃饭. German puts the place after the verb; Chinese before it."
+   "text": "German V2 moves the verb to second place (Heute esse ich zu Hause); Chinese never moves it:\n→ 今天我在家吃饭.\n\nGerman puts the place after the verb; Chinese before it."
   },
   {
    "for": "hi",
    "rel": "similar",
-   "text": "Hindi puts time and place before the verb too (मैं घर पर खाना खाता हूँ), like Chinese; but the Hindi object also precedes the verb (SOV), while the Chinese one follows it: 我在家吃饭."
+   "text": "Hindi puts time and place before the verb too (मैं घर पर खाना खाता हूँ), like Chinese; but the Hindi object also precedes the verb (SOV), while the Chinese one follows it:\n→ 我在家吃饭."
   },
   {
    "for": "fa",
@@ -315,17 +315,17 @@
   {
    "for": "he",
    "rel": "different",
-   "text": "Hebrew is SVO with the place after the verb (ani okhel ba-bayit); Chinese puts it before: 我在家吃饭."
+   "text": "Hebrew is SVO with the place after the verb (ani okhel ba-bayit); Chinese puts it before:\n→ 我在家吃饭."
   },
   {
    "for": "tr",
    "rel": "similar",
-   "text": "Turkish also puts time and place before the verb (Ben evde yemek yerim ‘I eat at home’); Chinese differs in putting the object after the verb: 我在家吃饭."
+   "text": "Turkish also puts time and place before the verb (Ben evde yemek yerim ‘I eat at home’); Chinese differs in putting the object after the verb:\n→ 我在家吃饭."
   },
   {
    "for": "ja",
    "rel": "similar",
-   "text": "Japanese puts time and place before the verb, as Chinese does (家でご飯を食べる), and has a topic slot (は), like the Chinese topic first. But the Japanese object precedes the verb; the Chinese one follows."
+   "text": "Japanese puts time and place before the verb, as Chinese does (家でご飯を食べる), and has a topic slot (は), like the Chinese topic first.\n\nBut the Japanese object precedes the verb; the Chinese one follows."
   },
   {
    "for": "ko",
@@ -335,7 +335,7 @@
   {
    "for": "fi",
    "rel": "different",
-   "text": "Finnish is SVO but freer, with place and time often after the verb (syön kotona); Chinese fixes them before the verb: 我在家吃饭."
+   "text": "Finnish is SVO but freer, with place and time often after the verb (syön kotona); Chinese fixes them before the verb:\n→ 我在家吃饭."
   },
   {
    "for": "hu",
@@ -345,7 +345,7 @@
   {
    "for": "sw",
    "rel": "different",
-   "text": "Swahili is SVO with place and time after the verb (ninakula nyumbani ‘I eat at home’); Chinese puts them before: 我在家吃饭."
+   "text": "Swahili is SVO with place and time after the verb (ninakula nyumbani ‘I eat at home’); Chinese puts them before:\n→ 我在家吃饭."
   },
   {
    "for": "lg",
@@ -361,6 +361,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut packs subject and object into the verb word, which usually comes last; Chinese builds the sentence from separate words in a fixed order: subject – time – place – verb – object."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian is SVO with place and time after the verb (mangio a casa oggi) and a fairly free order; Chinese fixes them before the verb:\n→ 我今天在家吃饭.\n\n*我吃饭在家 is the typical mistake."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian is SVO but free, thanks to cases and clitics, with place and time usually after the verb (ha në shtëpi ‘he eats at home’); Chinese order is fixed and puts them before the verb:\n→ 我在家吃饭."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese is SVO with place and time after the verb (como em casa hoje); Chinese puts them before it: 我今天在家吃饭. também / só ~ 也 / 只 must stand right before the Chinese verb:\n→ 我也喝."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If case endings let your words move freely, Chinese words cannot: the order is the grammar — subject – time – place – verb – object (我今天在家吃饭)."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If your language puts time and place before the verb (and the verb last), Chinese agrees on the first part — time and place before the verb — but puts the object after it:\n→ 我在家吃饭."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "trap",
+   "text": "If your language is SVO with the place after the verb (‘I eat rice at home’), move the place before the verb:\n→ 我在家吃饭."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If subject and object live in your verb word, Chinese builds the sentence from separate words in a fixed order: subject – time – place – verb – object."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If your sentences may start with the verb and put the place after it, Chinese fixes subject – place – verb – object:\n→ 我在家吃饭."
   }
  ],
  "seeAlso": [
@@ -377,7 +417,7 @@
   {
    "lang": "he",
    "fn": "fn.object",
-   "note": "Hebrew is subject – verb – object like Chinese, but the place usually follows the verb (אֲנִי אוֹכֵל בַּבַּיִת); Chinese puts it before: 我在家吃饭."
+   "note": "Hebrew is subject – verb – object like Chinese, but the place usually follows the verb (אֲנִי אוֹכֵל בַּבַּיִת); Chinese puts it before:\n→ 我在家吃饭."
   }
  ]
 }

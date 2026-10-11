@@ -27,6 +27,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Tomate"
+    ],
+    "number": "singular and plural",
+    "genderCue": "most nouns in -e are feminine (die Lampe)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -196,6 +207,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Zwiebel"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -382,6 +406,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Kartoffel"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -537,6 +574,13 @@
     ],
     "subtleties": [
      "In slang, Kartoffel can be a mocking name for a German; it is usually teasing, but it can hurt."
+    ],
+    "notes": [
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "Kartoffel comes from tartufolo, “little truffle” – a diminutive of tartufo."
+     }
     ]
    }
   },
@@ -562,6 +606,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Knoblauchs"
+    ],
+    "number": "singular only",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a mass noun, month or name of a substance: no diminutive in use"
     }
    },
    "forms": {
@@ -656,7 +713,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The old form was Klobelauch; the kl- changed to kn- in line with words for knobbly things such as Knopf, Knoten, Knolle."
+     "The old form was Klobelauch.\n\nThe kl- changed to kn- in line with words for knobbly things such as Knopf, Knoten, Knolle."
     ],
     "pitfalls": [
      "No plural: to count, use eine Knoblauchzehe (a clove) or eine Knoblauchknolle (a bulb).",
@@ -700,6 +757,17 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Gurke"
+    ],
+    "number": "singular and plural",
+    "genderCue": "most nouns in -e are feminine (die Lampe)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -836,17 +904,29 @@
      }
     ],
     "etymology": {
-     "text": "Borrowed from Old Polish ogórek, from Byzantine Greek ἀγγούριον (angoúrion, “cucumber”). Cognate with Dutch augurk, English gherkin.",
+     "text": "Borrowed from Old Polish ogórek, from Byzantine Greek ἀγγούριον (angoúrion, “cucumber”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Gurke reached German through Polish from Byzantine Greek ἀγγούριον – the same word as Modern Greek αγγούρι."
+     "Gurke reached German through Polish from Byzantine Greek ἀγγούριον."
     ],
     "pitfalls": [
-     "German Gurke covers both the fresh cucumber and the small pickle; English separates cucumber and gherkin."
+     "German Gurke covers both the fresh cucumber and the small pickled one (Gewürzgurke, saure Gurke)."
     ],
     "subtleties": [
      "In colloquial speech a Gurke is a lame old car or a useless device – context tells you which “cucumber” is meant."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Gurke is the same word as αγγούρι: both come from Byzantine ἀγγούριον."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "Gurke is related to the word gherkin.\n\nEnglish separates cucumber and gherkin; German Gurke is both, and a gherkin is a Gewürzgurke."
+     }
     ]
    }
   },
@@ -877,6 +957,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Aubergine"
+    ],
+    "number": "singular and plural",
+    "genderCue": "most nouns in -e are feminine (die Lampe)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -975,10 +1066,22 @@
      "Aubergine and Austrian Melanzani are doublets – two borrowings that go back to the same source."
     ],
     "pitfalls": [
-     "French spelling and pronunciation: Au- is said [o] and -g- like the s in “pleasure”: [obɛʁˈʒiːnə]."
+     "A French spelling and pronunciation: Au- is said [o] and g is [ʒ], as in Garage: [obɛʁˈʒiːnə]."
     ],
     "subtleties": [
      "aubergine is also a colour word: ein auberginefarbenes Kleid (an aubergine-coloured dress)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "The g of Aubergine is the sound of s in “pleasure”."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Aubergine is said almost as in French, with a clear final -e: [obɛʁˈʒiːnə]."
+     }
     ]
    }
   },
@@ -1009,6 +1112,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Karotte"
+    ],
+    "number": "singular and plural",
+    "genderCue": "most nouns in -e are feminine (die Lampe)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -1120,14 +1234,26 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The orange carrot is usually credited to Dutch growers of the 17th century; older carrots were mostly purple or yellow."
+     "The orange carrot is usually credited to growers in the Netherlands in the 17th century.\n\nOlder carrots were mostly purple or yellow."
     ],
     "pitfalls": [
-     "Spelling: German Karotte has one r and two t's; English carrot has two r's and one t."
+     "Spelling: Karotte has one r and two t."
     ],
     "subtleties": [
      "“Carrot and stick” is not said with Karotte in German: Zuckerbrot und Peitsche (“sweet bread and whip”).",
      "Which word people use (Karotte, Möhre, Gelbe Rübe, Rüebli) tells you where they are from."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English carrot has two r and one t; German Karotte is the other way round."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Karotte is spelled like carotte, with K: one r, two t."
+     }
     ]
    }
   },
@@ -1165,6 +1291,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Süßkartoffel"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Kartoffel)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -1259,7 +1396,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English potato itself comes from batata, the Caribbean word for the sweet potato."
+     "Batate goes back to batata, the Caribbean (Taíno) word for the sweet potato."
     ],
     "pitfalls": [
      "In Switzerland ß is written ss: Süsskartoffel.",
@@ -1267,6 +1404,23 @@
     ],
     "subtleties": [
      "Despite the name, the sweet potato belongs to the bindweed family (Windengewächse), not to the nightshade family like the potato."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English potato itself comes from batata, the Caribbean word for the sweet potato."
+     },
+     {
+      "for": "pt",
+      "rel": "trap",
+      "text": "batata is the ordinary potato (Kartoffel); batata-doce is Süßkartoffel or Batate."
+     },
+     {
+      "for": "es",
+      "rel": "trap",
+      "text": "In Spain batata is Batate (Süßkartoffel) and patata is Kartoffel."
+     }
     ]
    }
   },
@@ -1297,6 +1451,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Erbse"
+    ],
+    "number": "singular and plural",
+    "genderCue": "most nouns in -e are feminine (die Lampe)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -1395,7 +1560,7 @@
     "synonyms": [],
     "synonymsNone": "No everyday synonym: Zuckererbse (sugar pea) and Kichererbse (chickpea) are different plants or kinds.",
     "etymology": {
-     "text": "From Middle High German erbīz, erwīz, arwīz, ar(e)weiz, from Old High German arawīz, araweiz, from Proto-West Germanic *arwīt, *arwait. Cognate with Dutch erwt, Swedish ärta.",
+     "text": "From Middle High German erbīz, erwīz, arwīz, ar(e)weiz, from Old High German arawīz, araweiz, from Proto-West Germanic *arwīt, *arwait.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -1437,6 +1602,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Spinats"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -1524,13 +1702,25 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Italian spinace, like English spinach, goes back to Arabic إِسْفَانَاخ (ʔisfānāḵ), from Classical Persian."
+     "Spinat came through Italian spinace from Arabic إِسْفَانَاخ (ʔisfānāḵ), itself from Classical Persian."
     ],
     "pitfalls": [
-     "Masculine: der Spinat. It is normally uncountable; the plural Spinate is only used for kinds of spinach."
+     "Masculine: der Spinat.\n\nIt is normally uncountable; the plural Spinate is only used for kinds of spinach."
     ],
     "subtleties": [
      "In shops you choose between Blattspinat (whole leaves) and Rahmspinat (chopped, with cream) – often frozen."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English spinach goes back to the same Arabic word."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Spinat was borrowed from spinace (today spinaci)."
+     }
     ]
    }
   },
@@ -1561,6 +1751,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Radieschens"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-chen, -lein: a diminutive → das (even for persons: das Mädchen)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "itself a diminutive (-chen, from an older Radies) that became a word of its own"
     }
    },
    "forms": {
@@ -1641,7 +1842,7 @@
       "text": "sich die Radieschen von unten ansehen",
       "tr": "to look at the radishes from below",
       "kind": "idiom",
-      "meaning": "to be dead and buried (like English “to push up daisies”)",
+      "meaning": "to be dead and buried",
       "register": "colloquial"
      }
     ],
@@ -1652,7 +1853,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Radieschen goes back to Latin rādīx “root” – the same word as English radish and radical."
+     "Radieschen goes back to Latin rādīx “root”."
     ],
     "pitfalls": [
      "das Radieschen (small red radish) is not der Rettich (large, usually white radish).",
@@ -1660,6 +1861,13 @@
     ],
     "subtleties": [
      "Words in -chen are always neuter and do not change in the plural: das Radieschen, die Radieschen."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Radieschen goes back to rādīx – the same word as English radish and radical.\n\ndie Radieschen von unten ansehen is the German “push up daisies”."
+     }
     ]
    }
   },
@@ -1690,6 +1898,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Kürbisses"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -1773,7 +1994,7 @@
     "synonyms": [],
     "synonymsNone": "No synonym in standard German; kinds are named by compounds (Hokkaido-Kürbis, Butternusskürbis, Riesenkürbis).",
     "etymology": {
-     "text": "From Middle High German kürbiȥ, from Old High German kurbiȥ, from Proto-West Germanic *kurbit (ultimately from Latin cucurbita). Cognate with Luxembourgish Kürbis, Yiddish קירבעס (kirbes).",
+     "text": "From Middle High German kürbiȥ, from Old High German kurbiȥ, from Proto-West Germanic *kurbit (ultimately from Latin cucurbita).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -1783,7 +2004,14 @@
      "-is → -isse: der Kürbis, des Kürbisses, die Kürbisse, den Kürbissen."
     ],
     "subtleties": [
-     "Kürbis covers what English splits into pumpkin, squash and gourd; kinds are named with compounds: Hokkaido-Kürbis, Butternusskürbis."
+     "Kürbis covers pumpkins, squashes and gourds alike; kinds are named with compounds:\n→ Hokkaido-Kürbis, Butternusskürbis"
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English splits pumpkin, squash and gourd; German says Kürbis for all of them."
+     }
     ]
    }
   },
@@ -1816,6 +2044,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Chilis"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -1944,7 +2185,7 @@
      }
     ],
     "etymology": {
-     "text": "From Spanish chile, from Classical Nahuatl chīlli (etymology of the English cognate chili).",
+     "text": "From Spanish chile, from Classical Nahuatl chīlli.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -1956,6 +2197,13 @@
     ],
     "subtleties": [
      "Chili can mean the fresh pod, the powder or the dish; context decides."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Chili is the same word as English chili."
+     }
     ]
    }
   },
@@ -1994,6 +2242,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Kohls"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -2127,7 +2388,7 @@
      "The surname Kohl originally named a grower or seller of cabbages."
     ],
     "pitfalls": [
-     "der Kohl (cabbage) ≠ die Kohle (coal; colloquially also “money”) – and the rare plural of Kohl is also Kohle.",
+     "der Kohl (cabbage) ≠ die Kohle (coal; colloquially also “money”).\n\nThe rare plural of Kohl is also Kohle.",
      "Usually uncountable: Kohl essen; for one head say ein Kohlkopf."
     ],
     "subtleties": [
@@ -2170,6 +2431,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Blumenkohls"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (der Kohl)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -2265,14 +2537,26 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "A boxer's swollen ear is a Blumenkohlohr, just like English “cauliflower ear”.",
-     "Both Blumenkohl and Austrian Karfiol (Italian cavolfiore) mean “flower cabbage”."
+     "A boxer’s swollen ear is a Blumenkohlohr, a “cauliflower ear”.",
+     "Both Blumenkohl and Austrian Karfiol mean “flower cabbage”."
     ],
     "pitfalls": [
      "Masculine like Kohl: der Blumenkohl. Compounds take the gender of their last part."
     ],
     "subtleties": [
      "The florets are called Röschen, “little roses”."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Blumenkohlohr is exactly the English cauliflower ear."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "Austrian Karfiol is cavolfiore, and Blumenkohl translates it: flower + cabbage."
+     }
     ]
    }
   },
@@ -2304,6 +2588,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Brokkolis"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -2408,14 +2705,21 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "In 2020 the German drug commissioner said at a press conference that cannabis was „kein Brokkoli“ (no broccoli); the much-mocked remark made Brokkoli jokey slang for marijuana."
+     "In 2020 the German drug commissioner said at a press conference that cannabis was „kein Brokkoli“ (no broccoli).\n\nThe much-mocked remark made Brokkoli jokey slang for marijuana."
     ],
     "pitfalls": [
      "Plural unchanged: der Brokkoli, die Brokkoli.",
      "Spelling with kk: Brokkoli (the Italian spelling Broccoli is also accepted)."
     ],
     "subtleties": [
-     "Most Germans say it with a long o, [ˈbroːkoli] – unlike Italian broccoli with a short o."
+     "Most Germans say it with a long o: [ˈbroːkoli]."
+    ],
+    "notes": [
+     {
+      "for": "it",
+      "rel": "trap",
+      "text": "Most Germans say [ˈbroːkoli] with a long o, unlike broccoli with a short one.\n\nThe usual spelling is Brokkoli."
+     }
     ]
    }
   },
@@ -2448,6 +2752,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Lauchs"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -2548,7 +2865,7 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German louch, from Old High German louh, from Proto-West Germanic *lauk, from Proto-Germanic *laukaz. Compare Low German Look, Dutch look, English leek, Danish løg, Swedish lök.",
+     "text": "From Middle High German louch, from Old High German louh, from Proto-West Germanic *lauk, from Proto-Germanic *laukaz.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -2559,6 +2876,13 @@
     ],
     "subtleties": [
      "As slang (Du Lauch!) it is an insult for a skinny, weak person – common among young people."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Lauch is related to English leek."
+     }
     ]
    }
   },
@@ -2590,6 +2914,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Paprika"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -2702,7 +3039,7 @@
      "The Hungarian scientist Albert Szent-Györgyi isolated vitamin C in quantity from paprika peppers and won the 1937 Nobel Prize."
     ],
     "pitfalls": [
-     "Gender: Wiktionary gives both der and die Paprika. In Germany die Paprika is usual for the vegetable; der Paprika is the form used in Austria; for the spice both genders occur.",
+     "Gender: Wiktionary gives both der and die Paprika.\n- In Germany die Paprika is usual for the vegetable;\n- der Paprika is the form used in Austria;\n- for the spice both genders occur.",
      "Plural: Paprika after an article or number (zwei Paprika), but often Paprikas when it stands alone (Ich kaufe Paprikas)."
     ],
     "subtleties": [
@@ -2737,6 +3074,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Roten Bete"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -2856,7 +3206,7 @@
      "The red colour (betanin) is used as a natural food colouring, E 162 (beetroot red)."
     ],
     "pitfalls": [
-     "Rote is an adjective and is declined: die Rote Bete, der Roten Bete, mit Roter Bete (without article), die Roten Beten, but Rote Beten (plural without article).",
+     "Rote is an adjective and is declined:\n→ die Rote Bete, der Roten Bete, mit Roter Bete (without article), die Roten Beten\n→ but Rote Beten (plural without article)",
      "Do not confuse Bete/Beete with das Beet (flower bed)."
     ],
     "subtleties": [
@@ -2891,6 +3241,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Zucchini"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -2986,13 +3349,25 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "zucchini means “little pumpkins”: Italian zucca = pumpkin, gourd."
+     "Zucchini means “little pumpkins”: it is built on zucca, “pumpkin, gourd”."
     ],
     "pitfalls": [
      "Singular and plural are the same: die Zucchini – die Zucchini (colloquially also Zucchinis)."
     ],
     "subtleties": [
-     "German uses the Italian plural zucchini as its singular; the “correct” Italian singular der Zucchino is rare."
+     "German uses the borrowed plural form Zucchini as its singular.\n\nThe original singular der Zucchino is rare."
+    ],
+    "notes": [
+     {
+      "for": "it",
+      "rel": "trap",
+      "text": "German uses the plural zucchini as a singular – die Zucchini is one courgette; zucchino is rare."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Zucchini is your zucchini, “little zucche” – the plural of zucchino."
+     }
     ]
    }
   },
@@ -3025,6 +3400,17 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Bohne"
+    ],
+    "number": "singular and plural",
+    "genderCue": "most nouns in -e are feminine (die Lampe)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -3161,7 +3547,7 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German bone, from Old High German bōna, from Proto-West Germanic *baunu, from Proto-Germanic *baunō, from Proto-Indo-European *bʰabʰ- (“bean”). Compare Dutch boon, English bean, Danish bønne.",
+     "text": "From Middle High German bone, from Old High German bōna, from Proto-West Germanic *baunu, from Proto-Germanic *baunō, from Proto-Indo-European *bʰabʰ- (“bean”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -3172,6 +3558,13 @@
     ],
     "subtleties": [
      "eine Bohnenstange (“beanpole”) is a very tall, thin person."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Bohne is related to English bean."
+     }
     ]
    }
   },
@@ -3210,6 +3603,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Frühlingszwiebel"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Zwiebel)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -3344,6 +3748,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Staudenselleries"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (der Sellerie)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -3437,14 +3852,21 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Sellerie goes back to Ancient Greek σέλινον – Modern Greek still calls celery σέλινο."
+     "Sellerie goes back to Ancient Greek σέλινον."
     ],
     "pitfalls": [
-     "In Germany plain Sellerie usually means the round celeriac root; for the stalks say Staudensellerie or Stangensellerie.",
+     "In Germany plain Sellerie usually means the round celeriac root.\n\nFor the stalks say Staudensellerie or Stangensellerie.",
      "Gender varies: der or die Staudensellerie (Wiktionary lists both)."
     ],
     "subtleties": [
      "Staude refers to the bushy, perennial plant – the stalks grow as a dense bunch."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Sellerie is σέλινο: the word travelled from Greek into German."
+     }
     ]
    }
   },
@@ -3470,6 +3892,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Maises"
+    ],
+    "number": "singular only",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a mass noun, month or name of a substance: no diminutive in use"
     }
    },
    "forms": {
@@ -3573,11 +4008,18 @@
      "des Mais can also be the genitive of der Mai (May) – the two words only look alike."
     ],
     "pitfalls": [
-     "False friend: German Korn is grain (or a grain spirit), not corn; corn is Mais.",
+     "Korn is grain (or a grain spirit); maize is Mais.",
      "Usually no plural: for one cob say ein Maiskolben."
     ],
     "subtleties": [
      "Mais is both the farm crop (Futtermais, animal feed) and the vegetable (Zuckermais)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "Korn is not corn: it is grain; corn is Mais."
+     }
     ]
    }
   }

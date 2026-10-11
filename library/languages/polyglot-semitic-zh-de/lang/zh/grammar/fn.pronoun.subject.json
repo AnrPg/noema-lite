@@ -229,7 +229,7 @@
   {
    "for": "el",
    "rel": "different",
-   "text": "Greek pronouns change by case (εγώ / με / μου) and gender (αυτός / αυτή / αυτό), and the subject is usually dropped because the verb ending shows it (τρώω ‘I eat’). Chinese 我 is subject and object, and it usually stays, because the verb has no ending. εσύ / εσείς ↔ 你 / 您 — but 您 is one person only; several are 你们."
+   "text": "Greek pronouns change by case (εγώ / με / μου) and gender (αυτός / αυτή / αυτό), and the subject is usually dropped because the verb ending shows it (τρώω ‘I eat’).\n\nChinese 我 is subject and object, and it usually stays, because the verb has no ending. εσύ / εσείς ↔ 你 / 您 — but 您 is one person only; several are 你们."
   },
   {
    "for": "ru",
@@ -239,12 +239,12 @@
   {
    "for": "es",
    "rel": "similar",
-   "text": "Spanish drops the subject (como ‘I eat’) because the verb shows it; Chinese verbs show nothing, so 我吃 keeps 我. tú / usted ↔ 你 / 您, and ellos / ellas ↔ 他们 / 她们 make the same split: a mixed group takes the masculine form in both."
+   "text": "Spanish drops the subject (como ‘I eat’) because the verb shows it; Chinese verbs show nothing, so 我吃 keeps 我.\n\ntú / usted ↔ 你 / 您, and ellos / ellas ↔ 他们 / 她们 make the same split: a mixed group takes the masculine form in both."
   },
   {
    "for": "en",
    "rel": "different",
-   "text": "English I / me and he / him change by role; Chinese 我 and 他 do not. English has no polite ‘you’ (您) and no ‘we including you’ (咱们). he / she / it ↔ 他 / 她 / 它 — but in Chinese they are one spoken word, tā."
+   "text": "English I / me and he / him change by role; Chinese 我 and 他 do not.\n\nEnglish has no polite ‘you’ (您) and no ‘we including you’ (咱们). he / she / it ↔ 他 / 她 / 它 — but in Chinese they are one spoken word, tā."
   },
   {
    "for": "fr",
@@ -259,72 +259,112 @@
   {
    "for": "hi",
    "rel": "similar",
-   "text": "Hindi वह is both ‘he’ and ‘she’ (the verb shows the gender), close to the single spoken tā. Hindi has three levels of ‘you’ (तू / तुम / आप), Chinese two (你 / 您); Hindi हम has no inclusive / exclusive split like 咱们 / 我们."
+   "text": "Hindi वह is both ‘he’ and ‘she’ (the verb shows the gender), close to the single spoken tā.\n\nHindi has three levels of ‘you’ (तू / तुम / आप), Chinese two (你 / 您); Hindi हम has no inclusive / exclusive split like 咱们 / 我们."
   },
   {
    "for": "fa",
    "rel": "similar",
-   "text": "Persian u is ‘he’ and ‘she’ alike, like spoken tā. to / shomā ↔ 你 / 您, but shomā is also the plural. Persian often drops the subject because the verb ending shows it (mikhoram ‘I eat’); Chinese keeps 我."
+   "text": "Persian u is ‘he’ and ‘she’ alike, like spoken tā. to / shomā ↔ 你 / 您, but shomā is also the plural.\n\nPersian often drops the subject because the verb ending shows it (mikhoram ‘I eat’); Chinese keeps 我."
   },
   {
    "for": "mr",
    "rel": "similar",
-   "text": "Marathi separates आपण ‘we, including you’ from आम्ही ‘we, without you’ — exactly 咱们 / 我们. Unlike Chinese, Marathi तो / ती / ते tell ‘he’, ‘she’ and ‘it’ apart in speech."
+   "text": "Marathi separates आपण ‘we, including you’ from आम्ही ‘we, without you’ — exactly 咱们 / 我们.\n\nUnlike Chinese, Marathi तो / ती / ते tell ‘he’, ‘she’ and ‘it’ apart in speech."
   },
   {
    "for": "ar",
    "rel": "different",
-   "text": "Arabic marks gender in ‘you’ and ‘they’ (anta / anti, hum / hunna) and has dual pronouns (antumā, humā); Chinese has neither. The Arabic verb carries the person (katabtu ‘I wrote’), so pronouns are often dropped; Chinese verbs carry nothing, so the pronoun stays."
+   "text": "Arabic marks gender in ‘you’ and ‘they’ (anta / anti, hum / hunna) and has dual pronouns (antumā, humā); Chinese has neither.\n\nThe Arabic verb carries the person (katabtu ‘I wrote’), so pronouns are often dropped; Chinese verbs carry nothing, so the pronoun stays."
   },
   {
    "for": "he",
    "rel": "different",
-   "text": "Hebrew separates ‘you’ masculine and feminine (ata / at) and ‘they’ (hem / hen); Chinese marks gender only in writing (他们 / 她们). The rule for mixed groups is the same: one man makes it hem, and 他们."
+   "text": "Hebrew separates ‘you’ masculine and feminine (ata / at) and ‘they’ (hem / hen); Chinese marks gender only in writing (他们 / 她们).\n\nThe rule for mixed groups is the same: one man makes it hem, and 他们."
   },
   {
    "for": "tr",
    "rel": "similar",
-   "text": "Turkish o is ‘he’, ‘she’ and ‘it’ — like the single spoken tā. sen / siz ↔ 你 / 您, but siz is also the plural (Chinese 你们). Turkish pronouns take case endings (beni, bana); 我 never changes."
+   "text": "Turkish o is ‘he’, ‘she’ and ‘it’ — like the single spoken tā. sen / siz ↔ 你 / 您, but siz is also the plural (Chinese 你们).\n\nTurkish pronouns take case endings (beni, bana); 我 never changes."
   },
   {
    "for": "ja",
    "rel": "similar",
-   "text": "Japanese also leaves pronouns out when the context is clear and adds -たち to people (私たち ‘we’) much like 们. But Japanese avoids ‘you’ with superiors and uses names and titles, while Chinese 您 is a respectful pronoun used freely."
+   "text": "Japanese also leaves pronouns out when the context is clear and adds -たち to people (私たち ‘we’) much like 们.\n\nBut Japanese avoids ‘you’ with superiors and uses names and titles, while Chinese 您 is a respectful pronoun used freely."
   },
   {
    "for": "ko",
    "rel": "different",
-   "text": "Korean avoids second-person pronouns with elders and uses titles or names (선생님 ‘teacher’); Chinese addresses them directly with 您. Korean -들 (학생들) marks a group of people, like 们, but optionally."
+   "text": "Korean avoids second-person pronouns with elders and uses titles or names (선생님 ‘teacher’); Chinese addresses them directly with 您.\n\nKorean -들 (학생들) marks a group of people, like 们, but optionally."
   },
   {
    "for": "fi",
    "rel": "similar",
-   "text": "Finnish hän is ‘he’ and ‘she’ — no gender in speech, like tā. sinä / te ↔ 你 / 您, but te is also the plural. Finnish pronouns decline (minä, minua, minulle); 我 never changes."
+   "text": "Finnish hän is ‘he’ and ‘she’ — no gender in speech, like tā. sinä / te ↔ 你 / 您, but te is also the plural.\n\nFinnish pronouns decline (minä, minua, minulle); 我 never changes."
   },
   {
    "for": "hu",
    "rel": "similar",
-   "text": "Hungarian ő is ‘he’ and ‘she’, like spoken tā. Hungarian polite ‘you’ (ön, maga) takes a 3rd-person verb; Chinese 您 simply replaces 你 and the verb stays the same."
+   "text": "Hungarian ő is ‘he’ and ‘she’, like spoken tā.\n\nHungarian polite ‘you’ (ön, maga) takes a 3rd-person verb; Chinese 您 simply replaces 你 and the verb stays the same."
   },
   {
    "for": "sw",
    "rel": "different",
-   "text": "Swahili yeye is ‘he’ and ‘she’, like spoken tā, but the verb prefix shows the person (ninakula ‘I eat’, anakula ‘she eats’), so pronouns are often dropped. Chinese verbs show nothing and keep the pronoun. Swahili has no respectful ‘you’ like 您."
+   "text": "Swahili yeye is ‘he’ and ‘she’, like spoken tā, but the verb prefix shows the person (ninakula ‘I eat’, anakula ‘she eats’), so pronouns are often dropped.\n\nChinese verbs show nothing and keep the pronoun.\n\nSwahili has no respectful ‘you’ like 您."
   },
   {
    "for": "lg",
    "rel": "different",
-   "text": "Luganda ye is ‘he’ and ‘she’, like spoken tā, and a prefix on the verb shows the person (n- ‘I’, o- ‘you’, a- ‘he / she’). Chinese verbs have no prefix: the pronoun itself does that job, so it is rarely left out."
+   "text": "Luganda ye is ‘he’ and ‘she’, like spoken tā, and a prefix on the verb shows the person (n- ‘I’, o- ‘you’, a- ‘he / she’).\n\nChinese verbs have no prefix: the pronoun itself does that job, so it is rarely left out."
   },
   {
    "for": "vi",
    "rel": "similar",
-   "text": "Vietnamese also has an inclusive ‘we’ (chúng ta) and an exclusive one (chúng tôi) — exactly 咱们 / 我们. But Vietnamese mostly addresses people with kinship words (anh, chị, em, bác); Chinese uses 你 / 您 for everyone."
+   "text": "Vietnamese also has an inclusive ‘we’ (chúng ta) and an exclusive one (chúng tôi) — exactly 咱们 / 我们.\n\nBut Vietnamese mostly addresses people with kinship words (anh, chị, em, bác); Chinese uses 你 / 您 for everyone."
   },
   {
    "for": "iu",
    "rel": "different",
-   "text": "Inuktitut shows the person in the verb ending, with singular, dual (‘we two’) and plural, and pronouns are mostly left out. Chinese has no dual and puts the person only in the pronoun: 我们 is ‘we’, however many."
+   "text": "Inuktitut shows the person in the verb ending, with singular, dual (‘we two’) and plural, and pronouns are mostly left out.\n\nChinese has no dual and puts the person only in the pronoun: 我们 is ‘we’, however many."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Italian drops the subject (mangio ‘I eat’) because the verb shows it; Chinese verbs show nothing, so 我吃 keeps 我.\n\n- tu / Lei ↔ 你 / 您 — Lei is one person only, like 您 (several: 你们).\n- io / me / mi change with their role; 我 does not."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Albanian drops the subject (punoj ‘I work’) because the verb shows it; Chinese keeps it: 我工作. ai / ajo ↔ 他 / 她 — the same split, but in Chinese both sound tā. ti / ju ↔ 你 / 您, but ju is also the plural; ‘you all’ is 你们."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "Portuguese often drops the subject (como ‘I eat’); Chinese keeps 我.\n\n- tu / você / o senhor ↔ 你 / 您, and eles / elas ↔ 他们 / 她们 make the same split: a mixed group takes the masculine form in both.\n- eu / me / mim change with their role; 我 does not."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your pronouns change for case (‘I / me’) and your verb ending makes them optional, Chinese does the opposite: one form for every role (我 is ‘I’ and ‘me’), and the pronoun usually stays because the verb has no ending."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If your pronouns take case endings and your ‘he / she’ is one word, Chinese is close in speech — tā for he, she and it — but its pronouns never change:\n→ 我, 我们, 他喜欢我."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "same",
+   "text": "If your pronouns never change and you add a word for the plural, Chinese is the same:\n→ 我 → 我们, 你 → 你们.\n\nNote 咱们, the ‘we’ that includes the listener."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If person lives in your verb ending (with a dual), Chinese puts it only in a separate pronoun and has no dual: 我们 is ‘we’, however many."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If your language separates masculine and feminine ‘you’ and ‘they’ and attaches pronouns as suffixes, Chinese has one 你, gender only in writing (他 / 她), and pronouns that are always separate words:\n→ 他喜欢我."
   }
  ],
  "seeAlso": [

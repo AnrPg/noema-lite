@@ -1,0 +1,137 @@
+{
+  "@@locale": "en",
+  "email.confirm.subject": "Confirm your noema-lite account",
+  "@email.confirm.subject": {
+    "description": "Supabase account e-mail “Confirm signup” (cloud/email/confirm-signup.html, built by tools/i18n/emails.js). E-mail subject. Short."
+  },
+  "email.confirm.heading": "Welcome to noema-lite",
+  "@email.confirm.heading": {
+    "description": "Supabase account e-mail “Confirm signup” (cloud/email/confirm-signup.html, built by tools/i18n/emails.js). The heading."
+  },
+  "email.confirm.intro": "Confirm your e-mail address {email} to start studying — your progress then syncs on all your devices.",
+  "@email.confirm.intro": {
+    "description": "Supabase account e-mail “Confirm signup” (cloud/email/confirm-signup.html, built by tools/i18n/emails.js). The text above the button. email = the new account’s address.",
+    "placeholders": {
+      "email": {
+        "type": "String",
+        "example": "ana@example.com"
+      }
+    }
+  },
+  "email.confirm.action": "Confirm my e-mail",
+  "@email.confirm.action": {
+    "description": "Supabase account e-mail “Confirm signup” (cloud/email/confirm-signup.html, built by tools/i18n/emails.js). The button. Short."
+  },
+  "email.invite.subject": "You are invited to noema-lite",
+  "@email.invite.subject": {
+    "description": "Supabase account e-mail “Invite user” (cloud/email/invite.html, built by tools/i18n/emails.js). E-mail subject. Short."
+  },
+  "email.invite.heading": "You are invited to noema-lite",
+  "@email.invite.heading": {
+    "description": "Supabase account e-mail “Invite user” (cloud/email/invite.html, built by tools/i18n/emails.js). The heading."
+  },
+  "email.invite.intro": "Someone invited {email} to study with noema-lite. Accept the invitation to create your account.",
+  "@email.invite.intro": {
+    "description": "Supabase account e-mail “Invite user” (cloud/email/invite.html, built by tools/i18n/emails.js). The text above the button. email = the invited address.",
+    "placeholders": {
+      "email": {
+        "type": "String",
+        "example": "ana@example.com"
+      }
+    }
+  },
+  "email.invite.action": "Accept the invitation",
+  "@email.invite.action": {
+    "description": "Supabase account e-mail “Invite user” (cloud/email/invite.html, built by tools/i18n/emails.js). The button. Short."
+  },
+  "email.magic.subject": "Your noema-lite sign-in link",
+  "@email.magic.subject": {
+    "description": "Supabase account e-mail “Magic Link” (cloud/email/magic-link.html, built by tools/i18n/emails.js). E-mail subject. Short."
+  },
+  "email.magic.heading": "Sign in to noema-lite",
+  "@email.magic.heading": {
+    "description": "Supabase account e-mail “Magic Link” (cloud/email/magic-link.html, built by tools/i18n/emails.js). The heading."
+  },
+  "email.magic.intro": "Use this link to sign in as {email}. It works once and expires soon.",
+  "@email.magic.intro": {
+    "description": "Supabase account e-mail “Magic Link” (cloud/email/magic-link.html, built by tools/i18n/emails.js). The text above the button. email = the account’s address.",
+    "placeholders": {
+      "email": {
+        "type": "String",
+        "example": "ana@example.com"
+      }
+    }
+  },
+  "email.magic.action": "Sign in",
+  "@email.magic.action": {
+    "description": "Supabase account e-mail “Magic Link” (cloud/email/magic-link.html, built by tools/i18n/emails.js). The button. Short."
+  },
+  "email.change.subject": "Confirm your new e-mail address",
+  "@email.change.subject": {
+    "description": "Supabase account e-mail “Change Email Address” (cloud/email/change-email.html, built by tools/i18n/emails.js). E-mail subject. Short."
+  },
+  "email.change.heading": "Confirm your new e-mail address",
+  "@email.change.heading": {
+    "description": "Supabase account e-mail “Change Email Address” (cloud/email/change-email.html, built by tools/i18n/emails.js). The heading."
+  },
+  "email.change.intro": "You asked to change the e-mail address of your noema-lite account from {email} to {newEmail}. Confirm the change:",
+  "@email.change.intro": {
+    "description": "Supabase account e-mail “Change Email Address” (cloud/email/change-email.html, built by tools/i18n/emails.js). The text above the button. email = the old address, newEmail = the new one.",
+    "placeholders": {
+      "email": {
+        "type": "String",
+        "example": "ana@example.com"
+      },
+      "newEmail": {
+        "type": "String",
+        "example": "ana.new@example.com"
+      }
+    }
+  },
+  "email.change.action": "Confirm the change",
+  "@email.change.action": {
+    "description": "Supabase account e-mail “Change Email Address” (cloud/email/change-email.html, built by tools/i18n/emails.js). The button. Short."
+  },
+  "email.reset.subject": "Reset your noema-lite password",
+  "@email.reset.subject": {
+    "description": "Supabase account e-mail “Reset Password” (cloud/email/reset-password.html, built by tools/i18n/emails.js). E-mail subject. Short."
+  },
+  "email.reset.heading": "Reset your password",
+  "@email.reset.heading": {
+    "description": "Supabase account e-mail “Reset Password” (cloud/email/reset-password.html, built by tools/i18n/emails.js). The heading."
+  },
+  "email.reset.intro": "Someone asked to reset the password of the noema-lite account {email}. Choose a new one with this link:",
+  "@email.reset.intro": {
+    "description": "Supabase account e-mail “Reset Password” (cloud/email/reset-password.html, built by tools/i18n/emails.js). The text above the button. email = the account’s address.",
+    "placeholders": {
+      "email": {
+        "type": "String",
+        "example": "ana@example.com"
+      }
+    }
+  },
+  "email.reset.action": "Choose a new password",
+  "@email.reset.action": {
+    "description": "Supabase account e-mail “Reset Password” (cloud/email/reset-password.html, built by tools/i18n/emails.js). The button. Short."
+  },
+  "email.reauth.subject": "Your noema-lite confirmation code",
+  "@email.reauth.subject": {
+    "description": "Supabase account e-mail “Reauthentication” (cloud/email/reauthentication.html, built by tools/i18n/emails.js). E-mail subject. Short."
+  },
+  "email.reauth.heading": "Confirm it’s you",
+  "@email.reauth.heading": {
+    "description": "Supabase account e-mail “Reauthentication” (cloud/email/reauthentication.html, built by tools/i18n/emails.js). The heading."
+  },
+  "email.reauth.intro": "Enter this code in noema-lite to confirm it’s you:",
+  "@email.reauth.intro": {
+    "description": "Supabase account e-mail “Reauthentication” (cloud/email/reauthentication.html, built by tools/i18n/emails.js). The text above the code (a few digits shown below it)."
+  },
+  "email.common.linkFallback": "If the button does not work, copy this address into your browser:",
+  "@email.common.linkFallback": {
+    "description": "Every account e-mail with a button: the line above the plain link."
+  },
+  "email.common.ignore": "If you did not ask for this, you can ignore this e-mail.",
+  "@email.common.ignore": {
+    "description": "Every account e-mail: the last line, small."
+  }
+}

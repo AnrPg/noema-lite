@@ -26,7 +26,7 @@
     },
     "explainLang": {
      "type": "string",
-     "description": "language of all explanations, glosses and feedback (default en)"
+     "description": "the language of the MASTER facade — every explanation, gloss and note is written in it inline (en). Learners read them in their explanation locale (D19: their native language if supported, else their UI language) through facades/<locale>/ (docs/language-packs.md §3)"
     },
     "languages": {
      "type": "array",
@@ -62,7 +62,7 @@
      "items": {
       "type": "string"
      },
-     "description": "languages the learner already speaks (bridges only)"
+     "description": "legacy (D18 bridges): the course’s default learner languages; D19 takes the native language and the known languages from each learner’s settings"
     },
     "profiles": {
      "enum": [
@@ -70,6 +70,26 @@
       "optional"
      ],
      "description": "required (default): every content word has a full profile"
+    },
+    "d19": {
+     "enum": [
+      "lenient"
+     ],
+     "description": "only for a pre-D19 test fixture (tests/fixtures/lang-mini): the D19 / R3 rules of tools/validate_lang.py are warnings, not errors"
+    },
+    "facades": {
+     "type": "object",
+     "description": "D19: the locale facades of this course (facades/<locale>/facade.json), locale → status; a locale is offered as an explanation language when its facade is \"on\" (or \"preview\" on a preview host) and Tier 1 is complete. Optional — without it the master is shown.",
+     "propertyNames": {
+      "pattern": "^[a-z]{2,3}(-[A-Za-z0-9]{2,8})*$"
+     },
+     "additionalProperties": {
+      "enum": [
+       "draft",
+       "preview",
+       "on"
+      ]
+     }
     }
    }
   },
@@ -447,6 +467,11 @@
      ],
      "description": "the morphological type → the path of foundation lessons (D10)"
     },
+    "wordFeaturesChecklist": {
+     "type": "object",
+     "description": "R3: an item of the validator's checklist (a typology feature id of the language's profile, e.g. nom.constructState, or type:<typology>) that is NOT a parameter of a word in this language, with the reason (e.g. the construct form is predictable from the paradigm). The map itself is lang/<L>/WORD_PARAMETERS.md (the first step of a language package)",
+     "additionalProperties": { "type": "string", "minLength": 1 }
+    },
     "wordFeatures": {
      "type": "object",
      "description": "the facade of each part of speech (D14, §4.5.1)",
@@ -513,6 +538,14 @@
         },
         "why": {
          "type": "string"
+        },
+        "prominent": {
+         "type": "boolean",
+         "description": "R3: shown on the word card right under the word, always visible (true), or folded (false). Default: every stated parameter visible, except those already shown with the headword (transliteration, pinyin) and an uninformative {none} (folded; “no plural”, “no measure word” stay visible)"
+        },
+        "order": {
+         "type": "number",
+         "description": "R3: place in the parameters block under the word (lower first; the most important first). Default: declaration order (parameters with an order come before those without)"
         }
        }
       }
@@ -910,6 +943,10 @@
        "text"
       ]
      }
+    },
+    "notes": {
+     "$ref": "#/$defs/notes",
+     "description": "D19: one note for each supported native but the page’s language, and one per type + branch:Semitic"
     }
    }
   },
@@ -1558,6 +1595,10 @@
      "items": {
       "type": "string"
      }
+    },
+    "notes": {
+     "$ref": "#/$defs/notes",
+     "description": "D19: comparisons of this word with a learner’s language (cognates, false friends, “like X”) — they never sit in pitfalls, funFacts, subtleties, feeling, synonyms nuance or etymology"
     }
    }
   },
@@ -1725,6 +1766,10 @@
        },
        "when": {
         "type": "string"
+       },
+       "notes": {
+        "$ref": "#/$defs/notes",
+        "description": "D19: how this phenomenon looks from a learner’s native language or type (optional; alsoNote / alsoIn stay as data)"
        }
       }
      }
@@ -1740,6 +1785,45 @@
     },
     "conceptGaps": {
      "type": "array"
+    },
+    "notes": {
+     "$ref": "#/$defs/notes",
+     "description": "D19: notes on the whole catalogue (optional)"
+    }
+   }
+  },
+  "notes": {
+   "type": "array",
+   "description": "D19 contrast notes (docs/language-packs.md §2.1): how a point looks from ONE native language (a supported native: en el ru fr ar de hi zh ja it es sq pt tr; other profiled codes are shown only in the folded “From other languages” section, R1) or from a type / branch / family (a type note names no language). Required on every grammar page: every supported native but the page’s own language + type:fusional, type:agglutinating, type:isolating, type:polysynthetic, branch:Semitic. Shown in three sections (R1: the learner’s native and C1/C2 languages first; the course languages being learned; every other note, folded). The text is a structured Markdown subset (R2, docs/language-packs.md §2.3: paragraphs separated by a blank line, “- ” / “1. ” lists, **bold**, *italic*, “→ ” example lines; no headings, links, HTML, tables, code). Written in the master (English), translated into every locale facade.",
+   "items": {
+    "type": "object",
+    "required": [
+     "for",
+     "rel",
+     "text"
+    ],
+    "properties": {
+     "for": {
+      "type": "string",
+      "pattern": "^([a-z]{2,3}|type:(fusional|agglutinating|isolating|polysynthetic)|branch:.+|family:.+)$"
+     },
+     "rel": {
+      "enum": [
+       "same",
+       "similar",
+       "different",
+       "new",
+       "trap"
+      ]
+     },
+     "text": {
+      "type": "string",
+      "minLength": 1
+     },
+     "by": {
+      "type": "string",
+      "description": "who wrote it when not the course authors (e.g. \"AI\" for a learner’s private note)"
+     }
     }
    }
   }

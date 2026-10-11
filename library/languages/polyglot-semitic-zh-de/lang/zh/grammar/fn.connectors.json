@@ -138,7 +138,14 @@
    "t": "callout",
    "kind": "key",
    "title": "There is no ‘that’",
-   "text": "我知道他是老师 ‘I know (that) he is a teacher’, 我觉得这个很贵 ‘I think (that) this is expensive’ — the clause follows the verb directly. (知道 ‘know’, 觉得 ‘think’ and 说 ‘say’ come later.) Don’t translate ‘that’ with 那."
+   "text": "我知道他是老师 ‘I know (that) he is a teacher’, 我觉得这个很贵 ‘I think (that) this is expensive’ — the clause follows the verb directly. (知道 ‘know’, 觉得 ‘think’ and 说 ‘say’ come later.) 那 only points (‘that one’); it never introduces a clause.",
+   "notes": [
+    {
+     "for": "en",
+     "rel": "trap",
+     "text": "English ‘that’ is both a pointing word (that book) and a clause opener (I know that …).\n\nChinese 那 is only the pointing word; the clause opener has no Chinese word:\n→ 我知道他是老师."
+    }
+   ]
   },
   {
    "t": "callout",
@@ -181,7 +188,7 @@
   "*的时候我饿 → 我饿的时候 (的时候 after the clause).",
   "*就我们去 → 我们就去 (就 after the subject).",
   "*我们所以不去 → 所以我们不去 (所以 opens its clause).",
-  "*我知道那他是老师 → 我知道他是老师 (no ‘that’).",
+  "*我知道那他是老师 → 我知道他是老师 (no word introduces the clause; 那 only points).",
   "*因为很累我 → 因为我很累 (the order inside the clause stays subject – verb).",
   "虽然…但是… is right in Chinese — keep 但是 even if your language has no ‘but’ after ‘although’."
  ],
@@ -289,12 +296,12 @@
   {
    "for": "el",
    "rel": "different",
-   "text": "Greek αν ‘if’, όταν ‘when’, επειδή ‘because’, αν και ‘although’ open their clause and need no partner; Chinese likes pairs (如果…就, 因为…所以, 虽然…但是) and puts 的时候 at the end of the when-clause: 我饿的时候."
+   "text": "Greek αν ‘if’, όταν ‘when’, επειδή ‘because’, αν και ‘although’ open their clause and need no partner; Chinese likes pairs (如果…就, 因为…所以, 虽然…但是) and puts 的时候 at the end of the when-clause:\n→ 我饿的时候."
   },
   {
    "for": "ru",
    "rel": "similar",
-   "text": "Russian если …, то … ‘if …, then …’ is already a pair like 如果…就…. когда opens its clause; 的时候 closes it: 我饿的时候."
+   "text": "Russian если …, то … ‘if …, then …’ is already a pair like 如果…就…. когда opens its clause; 的时候 closes it:\n→ 我饿的时候."
   },
   {
    "for": "es",
@@ -304,7 +311,7 @@
   {
    "for": "en",
    "rel": "trap",
-   "text": "English ‘although … but’ is wrong, Chinese 虽然…但是 is right. English ‘when’ opens its clause, Chinese 的时候 closes it (我饿的时候). And English ‘and’ joins clauses; Chinese 和 does not."
+   "text": "English ‘although … but’ is wrong, Chinese 虽然…但是 is right.\n\nEnglish ‘when’ opens its clause, Chinese 的时候 closes it (我饿的时候).\n\nAnd English ‘and’ joins clauses; Chinese 和 does not."
   },
   {
    "for": "fr",
@@ -319,12 +326,12 @@
   {
    "for": "hi",
    "rel": "similar",
-   "text": "Hindi अगर … तो ‘if … then’ and जब … तब ‘when … then’ are pairs like 如果…就; क्योंकि ‘because’ opens the second clause, while Chinese 因为 opens the first: 因为…，所以…."
+   "text": "Hindi अगर … तो ‘if … then’ and जब … तब ‘when … then’ are pairs like 如果…就; क्योंकि ‘because’ opens the second clause, while Chinese 因为 opens the first:\n→ 因为…，所以…."
   },
   {
    "for": "fa",
    "rel": "different",
-   "text": "Persian agar ‘if’, vaqti ke ‘when’, chon ‘because’ open their clause, usually without a partner; Chinese pairs them and puts 的时候 at the end: 我饿的时候."
+   "text": "Persian agar ‘if’, vaqti ke ‘when’, chon ‘because’ open their clause, usually without a partner; Chinese pairs them and puts 的时候 at the end:\n→ 我饿的时候."
   },
   {
    "for": "mr",
@@ -334,7 +341,7 @@
   {
    "for": "ar",
    "rel": "different",
-   "text": "Arabic idhā ‘if’, ʿindamā ‘when’, li-anna ‘because’ open their clause, and fa- may mark the result; Chinese marks both halves more often: 如果…就, 因为…所以."
+   "text": "Arabic idhā ‘if’, ʿindamā ‘when’, li-anna ‘because’ open their clause, and fa- may mark the result; Chinese marks both halves more often:\n→ 如果…就, 因为…所以."
   },
   {
    "for": "he",
@@ -344,7 +351,7 @@
   {
    "for": "tr",
    "rel": "similar",
-   "text": "Turkish often closes a ‘when’ clause with a noun, as Chinese does: acıktığım zaman ‘when I’m hungry’ — zaman ‘time’ ~ 时候, 我饿的时候. Turkish eğer … -se ‘if’ marks both ends, like 如果…的话."
+   "text": "Turkish often closes a ‘when’ clause with a noun, as Chinese does: acıktığım zaman ‘when I’m hungry’ — zaman ‘time’ ~ 时候, 我饿的时候.\n\nTurkish eğer … -se ‘if’ marks both ends, like 如果…的话."
   },
   {
    "for": "ja",
@@ -379,19 +386,59 @@
   {
    "for": "vi",
    "rel": "same",
-   "text": "Vietnamese uses the same pairs: vì … nên ~ 因为…所以, tuy … nhưng ~ 虽然…但是, nếu … thì ~ 如果…就. Only ‘when’ differs: khi opens its clause, 的时候 closes it."
+   "text": "Vietnamese uses the same pairs: vì … nên ~ 因为…所以, tuy … nhưng ~ 虽然…但是, nếu … thì ~ 如果…就.\n\nOnly ‘when’ differs: khi opens its clause, 的时候 closes it."
   },
   {
    "for": "iu",
    "rel": "different",
-   "text": "Inuktitut links clauses with special verb endings for ‘when’, ‘because’ and ‘if’; Chinese uses separate words, often in pairs: 因为…所以, 如果…就."
+   "text": "Inuktitut links clauses with special verb endings for ‘when’, ‘because’ and ‘if’; Chinese uses separate words, often in pairs:\n→ 因为…所以, 如果…就."
+  },
+  {
+   "for": "it",
+   "rel": "trap",
+   "text": "Italian anche se / benché needs no ma — Chinese 虽然…但是 needs both. se, quando, perché open their clause; 的时候 closes it (我饿的时候).\n\nItalian e joins clauses, Chinese 和 does not; and che ‘that’ has no Chinese word:\n→ 我知道他是老师."
+  },
+  {
+   "for": "sq",
+   "rel": "trap",
+   "text": "Albanian edhe pse, nëse, kur, sepse open their clause and need no partner; Chinese pairs them (虽然…但是, 如果…就, 因为…所以) and closes the when-clause with 的时候.\n\nAlbanian që / se ‘that’ (e di që është mësues) has no Chinese word:\n→ 我知道他是老师."
+  },
+  {
+   "for": "pt",
+   "rel": "trap",
+   "text": "Portuguese embora needs no mas; Chinese 虽然…但是 needs both. se, quando, porque open their clause; 的时候 closes it (我饿的时候).\n\nPortuguese que is obligatory (sei que ele é professor); Chinese has no word for it:\n→ 我知道他是老师."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your language marks a subordinate clause with one conjunction — and perhaps a special verb form or word order — Chinese often marks both halves (因为…所以, 虽然…但是, 如果…就), and the order inside each clause never changes."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If your language ends a ‘when’ clause with a noun or a suffix, Chinese does the same:\n→ 我饿的时候 ‘I hungry 的 time’.\n\nBut ‘because’ and ‘although’ open their clause (因为…, 虽然…), and the object follows the verb."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "same",
+   "text": "If your language links clauses with paired words (‘because … so’, ‘although … but’, ‘if … then’), Chinese is familiar:\n→ 因为…所以, 虽然…但是, 如果…就.\n\nCheck only ‘when’: 的时候 closes its clause."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If you link clauses with special verb endings for ‘when’, ‘if’ and ‘because’, Chinese uses separate words, often in pairs (因为…所以, 如果…就), around clauses that keep their normal order."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If every subordinate clause in your language opens with a particle (‘if’, ‘when’, ‘because’, ‘that’), note three changes: Chinese often marks both halves (如果…就, 因为…所以), closes a when-clause with 的时候, and has no word for ‘that’:\n→ 我知道他是老师."
   }
  ],
  "seeAlso": [
   {
    "lang": "de",
    "fn": "fn.connectors",
-   "note": "German sends the verb to the end after weil, dass, wenn, obwohl (…, weil ich müde bin) and inverts after deshalb; Chinese keeps subject – verb order everywhere and marks both halves: 因为…所以…."
+   "note": "German sends the verb to the end after weil, dass, wenn, obwohl (…, weil ich müde bin) and inverts after deshalb; Chinese keeps subject – verb order everywhere and marks both halves:\n→ 因为…所以…."
   },
   {
    "lang": "ar",

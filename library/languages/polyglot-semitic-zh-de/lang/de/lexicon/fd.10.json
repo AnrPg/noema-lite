@@ -17,7 +17,11 @@
     "reference": "things",
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "possessive": {
+     "none": "no possessive of its own"
+    },
+    "reflexiveForm": "sich"
    },
    "forms": {
     "PRON;NOM": "was",
@@ -123,18 +127,25 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German waȥ, from Old High German waȥ, from Proto-West Germanic *hwat, from Proto-Germanic *hwat, from Proto-Indo-European *kʷod. Cognate with Dutch wat, English what, Danish hvad.",
+     "text": "From Middle High German waȥ, from Old High German waȥ, from Proto-West Germanic *hwat, from Proto-Germanic *hwat, from Proto-Indo-European *kʷod.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German w- question words match English wh- words: was – what, wo – where, wer – who (careful!)."
+     "The German question words all begin with w-: was, wo, wer, wann, wie, warum."
     ],
     "pitfalls": [
-     "False friend: German was = what, not the English past tense “was” (that is war).",
-     "After prepositions standard German uses wo(r)- + preposition: Womit? Worüber? – mit was is colloquial."
+     "was asks “what?”; it is not a form of sein (the past of ist is war).",
+     "After prepositions standard German uses wo(r)- + preposition:\n→ Womit? Worüber?\n\nmit was is colloquial."
     ],
     "subtleties": [
      "Was? alone sounds abrupt; Wie bitte? is the polite version."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "The w- words match English wh- words – was = what, wo = where – but wer is who.\n\nwas is “what”, not the past tense was (that is war)."
+     }
     ]
    }
   },
@@ -239,23 +250,41 @@
     ],
     "antonyms": [],
     "etymology": {
-     "text": "With a widespread dialectal shift from -ā- to -ō-, from Middle High German wā, wār, from Old High German wār, hwār, from Proto-West Germanic *hwār, from Proto-Germanic *hwēr, *hwar; ultimately from Proto-Indo-European *kʷís, whence also wer. Cognate with English where.",
+     "text": "With a widespread dialectal shift from -ā- to -ō-, from Middle High German wā, wār, from Old High German wār, hwār, from Proto-West Germanic *hwār, from Proto-Germanic *hwēr, *hwar; ultimately from Proto-Indo-European *kʷís, whence also wer.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The old -r of wo (compare English where) survives in compounds: woran, worauf, worin."
+     "The old -r of wo survives in compounds: woran, worauf, worin."
     ],
     "pitfalls": [
      "wo is only for location: wohin = where to (Wohin gehst du?), woher = where from (Woher kommst du?).",
-     "False friend: German wo = where, German wer = who."
+     "Do not mix up wo (where) and wer (who)."
     ],
     "subtleties": [
      "In southern German speech wo is also used as a relative pronoun (der Mann, wo …) – nonstandard."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "The old -r of wo is the r of English where."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "wo is where, and wer – which looks like where – is who."
+     }
     ]
    },
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -283,7 +312,9 @@
       ],
       "note": "the genitive (formal); in speech: von wem?"
      }
-    ]
+    ],
+    "possessive": "wessen (whose?)",
+    "reflexiveForm": "sich"
    },
    "forms": {
     "PRON;NOM": "wer",
@@ -425,21 +456,38 @@
     "synonyms": [],
     "synonymsNone": "No synonym: wer is the only word for “who?”; welcher asks “which one” from a known set.",
     "etymology": {
-     "text": "From Middle High German wër, from Old High German wër, from Proto-West Germanic *hwaʀ. Related to wo; compare English who.",
+     "text": "From Middle High German wër, from Old High German wër, from Proto-West Germanic *hwaʀ. Related to wo.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
      "wer, wen, wem, wessen end like the article der, den, dem, des – learn the two sets together.",
-     "One Indo-European question root *kʷ- is behind German wer, was, wo, English who, what, where, Latin quis, Greek τίς and Russian кто, что."
+     "One Indo-European question root *kʷ- is behind wer, was and wo."
     ],
     "pitfalls": [
-     "wer = who, wo = where – a classic mix-up (English “where” looks like wer).",
+     "wer = who, wo = where – a classic mix-up.",
      "Choose the case: Wer kocht? (subject) – Wen fragst du? (object) – Mit wem? (dative) – Wessen? (owner).",
      "wer takes a singular verb (Wer kocht heute?) – except when sein links it to a plural noun: Wer sind diese Leute?"
     ],
     "subtleties": [
      "wessen sounds formal or written; everyday speech says Von wem ist das? or Wem gehört das?",
      "wer has no feminine and no plural: it asks about a man, a woman or several people alike."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "The question root of wer and was is the same as in кто and что."
+     },
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "The question root of wer and was is the same as in τι (τίς)."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "wer is related to English who – and looks like where, which is wo."
+     }
     ]
    }
   },
@@ -558,22 +606,35 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German wanne, Old High German wanne, from Proto-West Germanic *hwannā, *hwan, from Proto-Germanic *hwan. Cognate with English when.",
+     "text": "From Middle High German wanne, Old High German wanne, from Proto-West Germanic *hwannā, *hwan, from Proto-Germanic *hwan.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English “when” is three German words: wann (question), wenn (whenever, if) and als (once, in the past)."
+     "Three words share the job of “when”: wann (question), wenn (whenever, if) and als (once, in the past)."
     ],
     "pitfalls": [
-     "wann asks (also in indirect questions: Weißt du, wann …?). The “when” that joins two clauses is wenn or als (S18): Wenn ich Zeit habe, … – not *Wann ich Zeit habe."
+     "wann asks (also in indirect questions: Weißt du, wann …?).\n\nThe “when” that joins two clauses is wenn or als (S18):\n→ Wenn ich Zeit habe, … – not *Wann ich Zeit habe."
     ],
     "subtleties": [
-     "For a clock time Germans often ask Um wie viel Uhr …?; Wann …? is wider (a day, a time of day, a date)."
+     "For a clock time Germans often ask Um wie viel Uhr …?\n\nWann …? is wider (a day, a time of day, a date)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English when is three German words: wann, wenn and als."
+     }
     ]
    },
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -692,20 +753,38 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek and Russian ask the name with “how” too: Πώς σε λένε; – Как тебя зовут? Turkish asks “what”: Adın ne?"
+     "German asks the name with “how”: Wie heißt du?"
     ],
     "pitfalls": [
-     "“What’s your name?” is Wie heißt du? / Wie heißen Sie? – not *Was heißt du? (Was heißt …? asks what a word means: Was heißt „Haus“ auf Griechisch?).",
+     "“What’s your name?” is Wie heißt du? / Wie heißen Sie? – not *Was heißt du?\n\nWas heißt …? asks what a word means:\n→ Was heißt „Haus“ auf Griechisch?",
      "wie viel = how much; “how many” before a plural is wie viele."
     ],
     "subtleties": [
      "Wie? alone is a casual “what?/pardon?”; Wie bitte? is the polite form.",
      "so … wie = as … as (so alt wie ich); after a comparative German uses als: älter als ich."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Πώς σε λένε; also asks with “how”: Wie heißt du?"
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Как тебя зовут? also asks with “how”: Wie heißt du?"
+     }
     ]
    },
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -801,22 +880,40 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German warumme, war umbe, from Old High German wār umbe; equivalent to wo (“where”) + um (“for the purpose of”), thus “for what purpose”. Doublet of worum. Compare Dutch waarom.",
+     "text": "From Middle High German warumme, war umbe, from Old High German wār umbe; equivalent to wo (“where”) + um (“for the purpose of”), thus “for what purpose”. Doublet of worum.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "warum is built like Greek γιατί (για + τι, “for what”), Russian почему (по + чему) and Turkish neden (ne + den, “from what”): every language asks “for/from what?”."
+     "warum is built from wo(r) + um: “about what?”."
     ],
     "pitfalls": [
      "The answer usually starts with weil, and the verb goes to the end (S18): Warum? – Weil ich müde bin."
     ],
     "subtleties": [
      "Warum nicht? is also a relaxed “yes”: Kaffee? – Warum nicht?"
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "warum is built like γιατί (για + τι): “for what?”."
+     },
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "warum is built like почему (по + чему)."
+     }
     ]
    },
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -909,20 +1006,38 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek πόσο / πόσοι, Russian сколько and Turkish kaç / ne kadar split “how much” and “how many” in their own ways – German does it with one ending: viel / viele."
+     "German splits “how much” and “how many” with one ending: wie viel Milch, wie viele Äpfel."
     ],
     "pitfalls": [
-     "wie viel + singular (uncountable) – wie viel Wasser; with a plural noun use wie viele: wie viele Äpfel.",
+     "- wie viel + singular (uncountable) – wie viel Wasser;\n- with a plural noun use wie viele: wie viele Äpfel.",
      "Two words today (wie viel); the older spelling wieviel is still often seen."
     ],
     "subtleties": [
      "In everyday speech wie viel also comes before plurals (Wie viel Kinder hast du?), but written standard German says wie viele."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "πόσο / πόσοι is wie viel / wie viele."
+     },
+     {
+      "for": "ru",
+      "rel": "different",
+      "text": "сколько covers both; German splits them: wie viel Milch, wie viele Äpfel."
+     }
     ]
    },
    "features": {
     "adjAfter": "strong",
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "standalone": {
+     "none": "the same forms as before a noun"
+    },
+    "stem": {
+     "none": "the endings are added to the base form"
     }
    }
   },
@@ -945,6 +1060,12 @@
     "adjAfter": "strong",
     "senseForms": {
      "none": "one meaning"
+    },
+    "standalone": {
+     "none": "the same forms as before a noun"
+    },
+    "stem": {
+     "none": "the endings are added to the base form"
     }
    },
    "forms": {
@@ -1016,10 +1137,10 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The question word and its noun stay together in first place: Wie viele Brüder hast du? – never *Wie viele hast du Brüder? in standard German."
+     "The question word and its noun stay together in first place:\n→ Wie viele Brüder hast du? – never *Wie viele hast du Brüder? in standard German."
     ],
     "pitfalls": [
-     "wie viele goes with plural nouns (wie viele Äpfel); for uncountable things use wie viel (wie viel Milch).",
+     "- wie viele goes with plural nouns (wie viele Äpfel);\n- for uncountable things use wie viel (wie viel Milch).",
      "After a dative preposition it takes -n: mit wie vielen Kindern."
     ],
     "subtleties": [
@@ -1053,6 +1174,12 @@
     "adjAfter": "weak",
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "standalone": {
+     "none": "the same forms as before a noun"
+    },
+    "stem": {
+     "none": "the endings are added to the base form"
     }
    },
    "forms": {
@@ -1186,19 +1313,31 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German welich, from Old High German welih, wilih, from Proto-Germanic *hwilīkaz. Compare English which.",
+     "text": "From Middle High German welich, from Old High German welih, wilih, from Proto-Germanic *hwilīkaz.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "welcher and English which go back to one Germanic word *hwi-līk- “what-like”; the same *-līk- is in English such and German solcher."
+     "welcher goes back to *hwi-līk-, “what-like”; the same *-līk- is in solcher."
     ],
     "pitfalls": [
-     "welcher declines like dieser (and der): welcher Mann, welche Frau, welches Kind; accusative welchen Mann; dative welchem Mann.",
-     "English “what + noun” is often welcher in German: What colour? – Welche Farbe?"
+     "welcher declines like dieser (and der):\n→ welcher Mann, welche Frau, welches Kind\n→ accusative welchen Mann; dative welchem Mann",
+     "Before a noun the question word is welcher: Welche Farbe? Welcher Bus?"
     ],
     "subtleties": [
-     "Welcher …? picks from things you can see or know; Was für ein …? asks about the type: Was für ein Auto hast du? – Ein kleines.",
+     "Welcher …? picks from things you can see or know; Was für ein …? asks about the type:\n→ Was für ein Auto hast du? – Ein kleines.",
      "Colloquial welche = “some”: Ich habe welche. (I have some.)"
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "welcher and English which go back to one word, “what-like”; English such has the same ending."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "“what + noun” is often welcher: What colour? – Welche Farbe?"
+     }
     ]
    }
   },
@@ -1283,7 +1422,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Beruf, like English “vocation” (Latin vocare, “to call”), means “a calling”; Max Weber traced its double sense – trade and calling from God – to Luther’s Bible translation."
+     "Beruf means “a calling”.\n\nMax Weber traced its double sense – trade and calling from God – to Luther’s Bible translation."
     ],
     "pitfalls": [
      "The answer has no article: Ich bin Ärztin. – not *Ich bin eine Ärztin.",
@@ -1291,11 +1430,24 @@
     ],
     "subtleties": [
      "Beruf is a trained profession (a calling); a job is die Stelle or, informally, der Job."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Beruf, like English vocation (from vocare, “to call”), means a calling."
+     }
     ]
    },
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -1333,6 +1485,21 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Arztes",
+     "des Arzts"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Ärztin",
+      "lexeme": "de:Ärztin"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -1446,7 +1613,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Arzt comes from Greek ἀρχίατρος “chief physician” – the same ἰατρός as Greek γιατρός."
+     "Arzt comes from Greek ἀρχίατρος, “chief physician”."
     ],
     "pitfalls": [
      "No article for a job after sein or werden: Ich bin Arzt – unless an adjective comes in: ein guter Arzt.",
@@ -1454,6 +1621,13 @@
     ],
     "subtleties": [
      "Patients sometimes say Herr Doktor / Frau Doktor; the job itself is Arzt / Ärztin."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Arzt comes from ἀρχίατρος – the same ιατρός as γιατρός."
+     }
     ]
    }
   },
@@ -1491,6 +1665,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Ärztin"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-in: a female person → die",
+    "pair": [
+     {
+      "form": "der Arzt",
+      "lexeme": "de:Arzt"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -1582,7 +1770,7 @@
      "No article for a job after sein: Sie ist Ärztin – unless an adjective comes in: eine gute Ärztin."
     ],
     "subtleties": [
-     "Ärztinnen und Ärzte: official texts name both forms; the masculine plural Ärzte traditionally covers everyone."
+     "Ärztinnen und Ärzte: official texts name both forms.\n\nThe masculine plural Ärzte traditionally covers everyone."
     ]
    }
   },
@@ -1628,6 +1816,24 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Krankenpflegers"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Krankenpflegerin",
+      "lexeme": "de:Krankenpflegerin"
+     },
+     {
+      "form": "die Krankenschwester",
+      "lexeme": "de:Krankenschwester"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -1729,7 +1935,7 @@
      "Plural = singular: die Krankenpfleger; dative plural den Krankenpflegern."
     ],
     "subtleties": [
-     "Since 2020 the training in Germany is called Pflegefachfrau / Pflegefachmann; Krankenpfleger(in) remains the everyday word."
+     "Since 2020 the training in Germany is called Pflegefachfrau / Pflegefachmann.\n\nKrankenpfleger(in) remains the everyday word."
     ]
    }
   },
@@ -1775,6 +1981,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Krankenpflegerin"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-in: a female person → die",
+    "pair": [
+     {
+      "form": "der Krankenpfleger",
+      "lexeme": "de:Krankenpfleger"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -1860,13 +2080,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Like Greek νοσηλεύτρια (from νόσος, “illness”), the German word names the illness: krank (sick) + Pflegerin (carer)."
+     "The German word names the illness: krank (sick) + Pflegerin (carer)."
     ],
     "pitfalls": [
      "A long but regular word: feminine -in, plural -innen (die Krankenpflegerinnen)."
     ],
     "subtleties": [
      "Many people still say Krankenschwester; Krankenpflegerin sounds neutral and professional."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Krankenpflegerin names the illness, as νοσηλεύτρια (from νόσος) does."
+     }
     ]
    }
   },
@@ -1912,6 +2139,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Krankenschwester"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a female person → die",
+    "pair": [
+     {
+      "form": "der Krankenpfleger",
+      "lexeme": "de:Krankenpfleger"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -2002,14 +2243,14 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The “sister” goes back to the nursing nuns and deaconesses. Hebrew אָחוֹת (aḥot) means both “sister” and “nurse”, and in British hospitals a senior nurse is still called “Sister”."
+     "The “sister” goes back to the nursing nuns and deaconesses.\n\nHebrew אָחוֹת (aḥot) means both “sister” and “nurse”, and in British hospitals a senior nurse is still called “Sister”."
     ],
     "pitfalls": [
      "There is no masculine *Krankenbruder: a man is Krankenpfleger.",
      "Plural -n: die Krankenschwestern."
     ],
     "subtleties": [
-     "Official titles no longer use it (Gesundheits- und Krankenpflegerin from 2004, Pflegefachfrau since 2020), but it is still very common in everyday speech."
+     "Official titles no longer use it (Gesundheits- und Krankenpflegerin from 2004, Pflegefachfrau since 2020).\n\nBut it is still very common in everyday speech."
     ]
    }
   },
@@ -2047,6 +2288,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Ingenieurs"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Ingenieurin",
+      "lexeme": "de:Ingenieurin"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -2131,14 +2386,31 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Russian инженер and German Ingenieur are the same French word; Greek says μηχανικός, and Turkish mühendis is the Arabic مُهَنْدِس (muhandis)."
+     "Ingenieur is a French word, from Latin ingenium (talent, invention).\n\nArabic says مُهَنْدِس (muhandis)."
     ],
     "pitfalls": [
-     "French spelling and sound: g like the s in “measure” [ʒ], -ieur [iøːɐ̯].",
+     "French spelling and sound: g is [ʒ] as in Garage, -ieur is [iøːɐ̯].",
      "Plural Ingenieure (not *Ingenieurs); dative plural den Ingenieuren."
     ],
     "subtleties": [
      "In Germany and Austria the engineering degree is shown like a title on doorbells and letters: Dipl.-Ing. Müller."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "инженер is the same word as Ingenieur."
+     },
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "μηχανικός is Ingenieur – a word from a different source."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "The g of Ingenieur is the s of “measure”."
+     }
     ]
    }
   },
@@ -2176,6 +2448,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Ingenieurin"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-in: a female person → die",
+    "pair": [
+     {
+      "form": "der Ingenieur",
+      "lexeme": "de:Ingenieur"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -2300,6 +2586,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Fahrers"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Fahrerin",
+      "lexeme": "de:Fahrerin"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -2393,7 +2693,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "fahren is related to English fare, as in farewell (“go well”)."
+     "Fahrer is fahren + -er: the one who drives."
     ],
     "pitfalls": [
      "Plural = singular: die Fahrer; dative plural den Fahrern.",
@@ -2401,6 +2701,13 @@
     ],
     "subtleties": [
      "fahren covers going by any vehicle, so Fahrer is anyone at the controls – also of a bike: der Radfahrer (cyclist)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "fahren is related to English fare, as in farewell (“go well”)."
+     }
     ]
    }
   },
@@ -2438,6 +2745,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Fahrerin"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-in: a female person → die",
+    "pair": [
+     {
+      "form": "der Fahrer",
+      "lexeme": "de:Fahrer"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -2568,6 +2889,21 @@
     ],
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Kochs",
+     "des Koches"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Köchin",
+      "lexeme": "de:Köchin"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -2666,7 +3002,7 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German koch, from Old High German choch, from Proto-West Germanic *kok, borrowed from Latin coquus (“cook”). Compare English cook.",
+     "text": "From Middle High German koch, from Old High German choch, from Proto-West Germanic *kok, borrowed from Latin coquus (“cook”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -2678,6 +3014,13 @@
     ],
     "subtleties": [
      "German Chef means boss, not chef: the chef of a restaurant is der Küchenchef or Chefkoch."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Koch is related to English cook."
+     }
     ]
    }
   },
@@ -2715,6 +3058,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Köchin"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-in: a female person → die",
+    "pair": [
+     {
+      "form": "der Koch",
+      "lexeme": "de:Koch"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -2842,6 +3199,20 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Verkäufers"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Verkäuferin",
+      "lexeme": "de:Verkäuferin"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -2935,11 +3306,11 @@
      }
     ],
     "etymology": {
-     "text": "From verkaufen (“to sell”) + -er. Cognate with Dutch verkoper.",
+     "text": "From verkaufen (“to sell”) + -er.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "kaufen comes from Latin caupo (“small trader, innkeeper”) – a cousin of English cheap (Old English cēap, “trade”)."
+     "kaufen comes from Latin caupo (“small trader, innkeeper”)."
     ],
     "pitfalls": [
      "verkaufen = to sell, kaufen = to buy: the Verkäufer sells, the Käufer or Kunde buys.",
@@ -2947,6 +3318,13 @@
     ],
     "subtleties": [
      "In a shop der Verkäufer is the assistant; in a contract it is the seller (Verkäufer – Käufer)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "kaufen is a cousin of English cheap (older English cēap, “trade”)."
+     }
     ]
    }
   },
@@ -2984,6 +3362,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Verkäuferin"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-in: a female person → die",
+    "pair": [
+     {
+      "form": "der Verkäufer",
+      "lexeme": "de:Verkäufer"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -3112,6 +3504,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Arbeiters"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Arbeiterin",
+      "lexeme": "de:Arbeiterin"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -3201,7 +3607,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "From 1960 (Greece) and 1961 (Turkey) West Germany recruited Gastarbeiter; many Greek and Turkish families in Germany go back to them."
+     "From 1960 (Greece) and 1961 (Turkey) West Germany recruited Gastarbeiter.\n\nMany Greek and Turkish families in Germany go back to them."
     ],
     "pitfalls": [
      "Arbeiter usually means a manual worker; an office worker is ein Angestellter.",
@@ -3248,6 +3654,20 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Arbeiterin"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-in: a female person → die",
+    "pair": [
+     {
+      "form": "der Arbeiter",
+      "lexeme": "de:Arbeiter"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -3336,13 +3756,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Arbeit is related to Russian работа (rabota) – and to “robot”, from Czech robota (forced labour)."
+     "Arbeit first meant toil; the word Roboter comes from a related word for forced labour."
     ],
     "pitfalls": [
      "Plural Arbeiterinnen; no umlaut."
     ],
     "subtleties": [
      "In beekeeping die Arbeiterin is the worker bee – all worker bees are female."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "Arbeit is related to работа."
+     }
     ]
    }
   },
@@ -3388,6 +3815,21 @@
     ],
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Bauern",
+     "des Bauers"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Bäuerin",
+      "lexeme": "de:Bäuerin"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -3523,11 +3965,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German būre, gebūre, from Old High German būr (“peasant”), gibūr, gibūro, from Proto-West Germanic *būr, from Proto-Germanic *būraz (“inhabitant, dweller”). Compare English boor.",
+     "text": "From Middle High German būre, gebūre, from Old High German būr (“peasant”), gibūr, gibūro, from Proto-West Germanic *būr, from Proto-Germanic *būraz (“inhabitant, dweller”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The same word gave Dutch boer (whence the Boers of South Africa) and is hidden in Nachbar, “the one who dwells near” – like English neighbour."
+     "Bauer is hidden in Nachbar, “the one who dwells near”."
     ],
     "pitfalls": [
      "Bauer is a weak (n-)noun in standard German: den Bauern, dem Bauern, des Bauern – the same form as the plural.",
@@ -3535,6 +3977,18 @@
     ],
     "subtleties": [
      "In chess der Bauer is the pawn; in some card games the jack is called Bauer."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Bauer is hidden in Nachbar as in English neighbour (“near-dweller”)."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "Bauer is related to English boor, but means a farmer, without any insult."
+     }
     ]
    }
   },
@@ -3572,6 +4026,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Bäuerin"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-in: a female person → die",
+    "pair": [
+     {
+      "form": "der Bauer",
+      "lexeme": "de:Bauer"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -3703,6 +4171,21 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Landwirts",
+     "des Landwirtes"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Landwirtin",
+      "lexeme": "de:Landwirtin"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -3849,6 +4332,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Landwirtin"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-in: a female person → die",
+    "pair": [
+     {
+      "form": "der Landwirt",
+      "lexeme": "de:Landwirt"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -3973,6 +4470,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Polizisten"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Polizistin",
+      "lexeme": "de:Polizistin"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -4067,7 +4578,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Polizist goes back to Greek πόλις, like Politik and Greek πολίτης."
+     "Polizist goes back to Greek πόλις (city), like Politik."
     ],
     "pitfalls": [
      "Weak noun: den Polizisten, dem Polizisten, des Polizisten (all with -en).",
@@ -4075,6 +4586,13 @@
     ],
     "subtleties": [
      "Bulle is common slang but rude to an officer’s face."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Polizist goes back to πόλις, like πολίτης."
+     }
     ]
    }
   },
@@ -4112,6 +4630,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Polizistin"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-in: a female person → die",
+    "pair": [
+     {
+      "form": "der Polizist",
+      "lexeme": "de:Polizist"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -4192,13 +4724,13 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German police forces belong to the federal states (Länder); the Bundespolizei guards borders, airports and stations."
+     "German police forces belong to the federal states (Länder).\n\nThe Bundespolizei guards borders, airports and stations."
     ],
     "pitfalls": [
      "Unlike the weak Polizist, Polizistin has no case endings: die, der, der, die Polizistin."
     ],
     "subtleties": [
-     "In German police ranks titles change (Polizeimeisterin, Kommissarin); in everyday speech: Polizistin."
+     "In German police ranks titles change (Polizeimeisterin, Kommissarin).\n\nIn everyday speech: Polizistin."
     ]
    }
   },
@@ -4236,6 +4768,21 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Anwalts",
+     "des Anwaltes"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Anwältin",
+      "lexeme": "de:Anwältin"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -4335,7 +4882,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Anwalt shares the root of walten, Gewalt (power, force) and English wield."
+     "Anwalt shares the root of walten and Gewalt (power, force)."
     ],
     "pitfalls": [
      "Plural with umlaut: die Anwälte; dative den Anwälten.",
@@ -4343,6 +4890,13 @@
     ],
     "subtleties": [
      "Herr Rechtsanwalt / Frau Rechtsanwältin is how letters address a lawyer."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Anwalt shares its root with English wield."
+     }
     ]
    }
   },
@@ -4380,6 +4934,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Anwältin"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-in: a female person → die",
+    "pair": [
+     {
+      "form": "der Anwalt",
+      "lexeme": "de:Anwalt"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -4507,6 +5075,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Künstlers"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Künstlerin",
+      "lexeme": "de:Künstlerin"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -4596,14 +5178,36 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Kunst comes from können – art as “what you can do”, like Greek τέχνη (skill, craft, art)."
+     "Kunst comes from können – art as “what you can do”."
     ],
     "pitfalls": [
-     "False friend: German Artist is a circus performer (acrobat); an artist is ein Künstler.",
+     "Do not confuse: der Artist is a circus performer; a painter, musician or writer is ein Künstler.",
      "Plural = singular: die Künstler; dative den Künstlern."
     ],
     "subtleties": [
      "Lebenskünstler is half praise, half irony: someone who gets by happily with little."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Kunst comes from können, just as τέχνη means skill, craft and art."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "der Artist is a circus performer; an artist is ein Künstler."
+     },
+     {
+      "for": "fr",
+      "rel": "trap",
+      "text": "artiste is ein Künstler; der Artist is only a circus performer."
+     },
+     {
+      "for": "it",
+      "rel": "trap",
+      "text": "artista is ein Künstler; der Artist is only a circus performer."
+     }
     ]
    }
   },
@@ -4641,6 +5245,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Künstlerin"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-in: a female person → die",
+    "pair": [
+     {
+      "form": "der Künstler",
+      "lexeme": "de:Künstler"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {

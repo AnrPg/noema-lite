@@ -270,27 +270,27 @@
   {
    "for": "el",
    "rel": "same",
-   "text": "As in Greek, double negation is required: δεν θέλω τίποτα ~ אֲנִי לֹא רוֹצֶה כְּלוּם, κανείς δεν τρώει ~ אַף אֶחָד לֹא אוֹכֵל."
+   "text": "As in Greek, double negation is required:\n→ δεν θέλω τίποτα ~ אֲנִי לֹא רוֹצֶה כְּלוּם, κανείς δεν τρώει ~ אַף אֶחָד לֹא אוֹכֵל"
   },
   {
    "for": "es",
    "rel": "similar",
-   "text": "As in Spanish, a negative word after the verb needs the negation too: no quiero nada ~ אֲנִי לֹא רוֹצֶה כְּלוּם. But before the verb Hebrew still needs לֹא (אַף אֶחָד לֹא אוֹכֵל), where Spanish says nadie come."
+   "text": "As in Spanish, a negative word after the verb needs the negation too: no quiero nada ~ אֲנִי לֹא רוֹצֶה כְּלוּם.\n\nBut before the verb Hebrew still needs לֹא (אַף אֶחָד לֹא אוֹכֵל), where Spanish says nadie come."
   },
   {
    "for": "en",
    "rel": "trap",
-   "text": "“I don’t want nothing” is wrong in standard English but the only correct Hebrew: אֲנִי לֹא רוֹצֶה כְּלוּם. And “no” before a noun (“I have no time”) is just אֵין or לֹא: אֵין לִי זְמַן."
+   "text": "“I don’t want nothing” is wrong in standard English but the only correct Hebrew:\n→ אֲנִי לֹא רוֹצֶה כְּלוּם\n\nAnd “no” before a noun (“I have no time”) is just אֵין or לֹא:\n→ אֵין לִי זְמַן"
   },
   {
    "for": "fr",
    "rel": "similar",
-   "text": "French ne … rien / personne / jamais also combines two negative words: je ne veux rien ~ אֲנִי לֹא רוֹצֶה כְּלוּם. Hebrew לֹא stands only before the verb — there is no second part like pas."
+   "text": "French ne … rien / personne / jamais also combines two negative words: je ne veux rien ~ אֲנִי לֹא רוֹצֶה כְּלוּם.\n\nHebrew לֹא stands only before the verb — there is no second part like pas."
   },
   {
    "for": "de",
    "rel": "different",
-   "text": "German uses one negation (niemand isst, ich will nichts) and kein before nouns; Hebrew doubles it (אַף אֶחָד לֹא אוֹכֵל) and has no kein: אֵין לִי זְמַן."
+   "text": "German uses one negation (niemand isst, ich will nichts) and kein before nouns; Hebrew doubles it (אַף אֶחָד לֹא אוֹכֵל) and has no kein:\n→ אֵין לִי זְמַן"
   },
   {
    "for": "hi",
@@ -300,7 +300,7 @@
   {
    "for": "fa",
    "rel": "different",
-   "text": "Persian negates with the prefix نـ on the verb (نمی‌خورم); Hebrew uses the separate word לֹא before the verb. Both need double negation: هیچ چیز نمی‌خواهم ~ אֲנִי לֹא רוֹצֶה כְּלוּם."
+   "text": "Persian negates with the prefix نـ on the verb (نمی‌خورم); Hebrew uses the separate word לֹא before the verb.\n\nBoth need double negation:\n→ هیچ چیز نمی‌خواهم ~ אֲנִי לֹא רוֹצֶה כְּלוּם"
   },
   {
    "for": "mr",
@@ -315,12 +315,12 @@
   {
    "for": "tr",
    "rel": "different",
-   "text": "Turkish negates inside the verb (yemiyorum) and uses yok for “there isn’t”; Hebrew puts the separate word לֹא before the verb and uses אֵין (~ yok). Double negation is the same: hiçbir şey istemiyorum ~ אֲנִי לֹא רוֹצֶה כְּלוּם."
+   "text": "Turkish negates inside the verb (yemiyorum) and uses yok for “there isn’t”; Hebrew puts the separate word לֹא before the verb and uses אֵין (~ yok).\n\nDouble negation is the same: hiçbir şey istemiyorum ~ אֲנִי לֹא רוֹצֶה כְּלוּם."
   },
   {
    "for": "ja",
    "rel": "different",
-   "text": "Japanese negates with a verb ending (食べない) and uses ない for “there isn’t”; Hebrew puts לֹא before the verb and uses אֵין. Both keep the negative word with the negation: 何も食べない ~ אֲנִי לֹא אוֹכֵל כְּלוּם."
+   "text": "Japanese negates with a verb ending (食べない) and uses ない for “there isn’t”; Hebrew puts לֹא before the verb and uses אֵין.\n\nBoth keep the negative word with the negation:\n→ 何も食べない ~ אֲנִי לֹא אוֹכֵל כְּלוּם"
   },
   {
    "for": "ko",
@@ -350,7 +350,7 @@
   {
    "for": "zh",
    "rel": "similar",
-   "text": "不 stands before the verb like לֹא, and 没有 “there isn’t / don’t have” matches אֵין (没有时间 ~ אֵין לִי זְמַן). Hebrew has one לֹא for every tense — no 不 / 没 choice."
+   "text": "不 stands before the verb like לֹא, and 没有 “there isn’t / don’t have” matches אֵין (没有时间 ~ אֵין לִי זְמַן).\n\nHebrew has one לֹא for every tense — no 不 / 没 choice."
   },
   {
    "for": "vi",
@@ -361,6 +361,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut negates with a suffix inside the verb (-nngit-); Hebrew uses the word לֹא before the verb, and אֵין for “there isn’t”."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "As in Italian, a negative word after the verb keeps the negation: non voglio niente ~ אֲנִי לֹא רוֹצֶה כְּלוּם.\n\nBut before the verb Hebrew still needs לֹא: אַף אֶחָד לֹא אוֹכֵל, where Italian says nessuno mangia."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "As in Portuguese, a negative word after the verb keeps the negation: não quero nada ~ אֲנִי לֹא רוֹצֶה כְּלוּם.\n\nBefore the verb Hebrew still needs לֹא (אַף אֶחָד לֹא אוֹכֵל), where Portuguese says ninguém come."
+  },
+  {
+   "for": "sq",
+   "rel": "same",
+   "text": "As in Albanian, double negation is required: nuk dua asgjë ~ אֲנִי לֹא רוֹצֶה כְּלוּם, askush nuk ha ~ אַף אֶחָד לֹא אוֹכֵל.\n\nAnd nuk ka “there isn’t” matches אֵין:\n→ אֵין לֶחֶם"
+  },
+  {
+   "for": "type:fusional",
+   "rel": "trap",
+   "text": "If your language allows only one negation per clause, unlearn it: Hebrew keeps לֹא beside every negative word — אֲנִי לֹא רוֹצֶה כְּלוּם, אַף אֶחָד לֹא בָּא."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If your language negates inside the verb with a suffix, Hebrew uses a separate word before it, לֹא, in every tense; and “there isn’t / don’t have” is a word of its own, אֵין."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "similar",
+   "text": "If your language has one negator for verbs and another for “not have / there isn’t”, Hebrew splits the same way: לֹא before the verb, אֵין for absence — and לֹא stays with negative words:\n→ אַף פַּעַם לֹא"
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If negation in your language is an affix inside the verb word, Hebrew puts the separate word לֹא right before the verb; a negative word such as כְּלוּם “nothing” goes with it, not instead of it."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "As in many Semitic languages, there is a general “not” (לֹא) and a negative of existence (אֵין, the opposite of יֵשׁ).\n\nHebrew uses one לֹא for every tense."
   }
  ]
 }

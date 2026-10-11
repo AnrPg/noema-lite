@@ -129,22 +129,45 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English not has the same history: from Old English nāwiht “no thing” (also the source of naught).",
-     "Greek δεν, Russian не and Turkish -me/-ma stand before the verb or inside it; German nicht usually comes late in the clause: Ich trinke den Kaffee nicht.",
-     "nicht never combines with another negative word in standard German: Ich esse nichts (not *Ich esse nicht nichts) – unlike Greek δεν τρώω τίποτα or Russian я ничего не ем."
+     "nicht comes from Old High German niwiht, “not a thing”.",
+     "nicht usually comes late in the clause: Ich trinke den Kaffee nicht.",
+     "nicht never combines with another negative word in standard German: Ich esse nichts (not *Ich esse nicht nichts)."
     ],
     "pitfalls": [
-     "nicht vs kein: kein replaces “not a / not any” before a noun without the definite article (Ich habe keine Gurke), nicht negates verbs, adjectives and nouns with der/die/das (Ich esse die Gurke nicht).",
-     "Position: nicht usually comes after the object and at the end of a main clause (Ich mag ihn nicht), but before adjectives, places and second verbs (nicht frisch, nicht hier, nicht essen)."
+     "nicht vs kein:\n- kein replaces “not a / not any” before a noun without the definite article (Ich habe keine Gurke);\n- nicht negates verbs, adjectives and nouns with der/die/das (Ich esse die Gurke nicht).",
+     "Position:\n- nicht usually comes after the object and at the end of a main clause (Ich mag ihn nicht);\n- but before adjectives, places and second verbs (nicht frisch, nicht hier, nicht essen)."
     ],
     "subtleties": [
      "The position of nicht can change what is negated: Ich esse nicht die Gurke (but something else) vs Ich esse die Gurke nicht (not at all).",
      "nicht before a word negates just that word: nicht hier (but there), nicht gut, nicht mein Bruder."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English not has the same history: older English nāwiht, “no thing” (also the source of naught)."
+     },
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "δεν stands before the verb and goes with τίποτα (δεν τρώω τίποτα).\n\nnicht usually comes late, and Ich esse nichts needs no second negation."
+     },
+     {
+      "for": "ru",
+      "rel": "trap",
+      "text": "не stands before the verb and goes with ничего (я ничего не ем).\n\nnicht usually comes late, and Ich esse nichts needs no second negation."
+     }
     ]
    },
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -173,7 +196,13 @@
       ],
       "note": "standing alone: Keiner hat mich gefragt."
      }
-    ]
+    ],
+    "standalone": [
+     "keiner, keine, kein(e)s"
+    ],
+    "stem": {
+     "none": "the endings are added to the base form"
+    }
    },
    "forms": {
     "DET;NOM;SG;MASC": "kein",
@@ -309,12 +338,12 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German kein, a back-formation from original nekein (“not any”), from Old High German nihein, from Proto-West Germanic *nehwain, from Proto-Germanic *nehw ainaz (“not any”). Compare Dutch geen, Yiddish קיין (keyn).",
+     "text": "From Middle High German kein, a back-formation from original nekein (“not any”), from Old High German nihein, from Proto-West Germanic *nehwain, from Proto-Germanic *nehw ainaz (“not any”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
      "kein is declined exactly like ein in the singular – but unlike ein it has a plural: keine Tomaten.",
-     "Greek says δεν έχω αυτοκίνητο (“I don’t have car”), Russian у меня нет машины, Turkish arabam yok – German puts the negation into the article: Ich habe kein Auto."
+     "German puts the negation into the article: Ich habe kein Auto."
     ],
     "pitfalls": [
      "*Ich habe nicht eine Tomate is not the normal negation – say Ich habe keine Tomate.",
@@ -323,6 +352,18 @@
     ],
     "subtleties": [
      "Used alone as a pronoun it takes adjective-like endings: Hast du einen Apfel? – Nein, ich habe keinen."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "δεν έχω αυτοκίνητο is Ich habe kein Auto: the negation sits in the article."
+     },
+     {
+      "for": "ru",
+      "rel": "different",
+      "text": "у меня нет машины is Ich habe kein Auto: the negation sits in the article."
+     }
     ]
    }
   },
@@ -340,7 +381,11 @@
     "reference": "things",
     "senseForms": {
      "none": "one meaning"
-    }
+    },
+    "possessive": {
+     "none": "no possessive of its own"
+    },
+    "reflexiveForm": "sich"
    },
    "forms": {
     "PRON;NOM": "nichts",
@@ -461,19 +506,36 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German nihtes niht (“nothing of nothing”), a reinforcing construction with niht. Compare French rien de rien. See nicht. Cognate with Dutch niets, Low German nix.",
+     "text": "From Middle High German nihtes niht (“nothing of nothing”), a reinforcing construction with niht. See nicht.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "nichts is an old genitive: Middle High German nihtes niht, “nothing of nothing” – like French rien de rien."
+     "nichts is an old genitive: Middle High German nihtes niht, “nothing of nothing”."
     ],
     "pitfalls": [
-     "One negation is enough: Ich esse nichts – never *Ich esse nicht nichts (Greek δεν τρώω τίποτα and Russian я ничего не ем need two).",
+     "One negation is enough: Ich esse nichts – never *Ich esse nicht nichts.",
      "nichts never changes its form: nichts (subject), nichts (object), mit nichts."
     ],
     "subtleties": [
      "An adjective after nichts becomes a capitalised noun: nichts Neues, nichts Gutes.",
      "das Nichts (capital N) is a noun: nothingness, the void."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "δεν τρώω τίποτα has two negations; German has one: Ich esse nichts."
+     },
+     {
+      "for": "ru",
+      "rel": "trap",
+      "text": "я ничего не ем has two negations; German has one: Ich esse nichts."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "nichts goes back to nihtes niht, “nothing of nothing” – built like rien de rien."
+     }
     ]
    }
   },
@@ -491,7 +553,11 @@
     "reference": "persons",
     "senseForms": {
      "none": "one meaning"
-    }
+    },
+    "possessive": {
+     "none": "no possessive of its own"
+    },
+    "reflexiveForm": "sich"
    },
    "forms": {
     "PRON;NOM": "niemand",
@@ -597,18 +663,25 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German nieman, from Old High German nioman; equivalent to nie (“never”) + Mann (“man”). Cognate with Dutch niemand, Afrikaans niemand.",
+     "text": "From Middle High German nieman, from Old High German nioman; equivalent to nie (“never”) + Mann (“man”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "niemand is “never a man”: nie + Mann – Dutch niemand is the same word."
+     "niemand is “never a man”: nie + Mann."
     ],
     "pitfalls": [
      "Accusative niemanden, dative niemandem – in speech often simply niemand.",
-     "One negation only: Niemand trinkt Wein = nobody drinks wine (Greek needs two: Κανείς δεν πίνει κρασί)."
+     "One negation only: Niemand trinkt Wein = nobody drinks wine."
     ],
     "subtleties": [
      "The verb is singular: Niemand isst, niemand ist da."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "Κανείς δεν πίνει κρασί has two negations; Niemand trinkt Wein has one."
+     }
     ]
    }
   },
@@ -740,7 +813,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "nie, nichts, niemand and nirgends (nowhere) all start with the old negative n- – as English never, nothing, nobody and nowhere do."
+     "nie, nichts, niemand and nirgends (nowhere) all start with the old negative n-."
     ],
     "pitfalls": [
      "nie stands where nicht would stand: Ich trinke nie Kaffee. Ich esse das nie.",
@@ -748,11 +821,24 @@
     ],
     "subtleties": [
      "noch nie = never so far: Ich war noch nie in Berlin. – je = ever: Warst du je in Berlin?"
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "nie, nichts, niemand, nirgends start with the old n- as never, nothing, nobody and nowhere do."
+     }
     ]
    },
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -857,7 +943,7 @@
      }
     ],
     "etymology": {
-     "text": "From nie + -mals. Similar to Dutch niemaals.",
+     "text": "From nie + -mals.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -874,6 +960,12 @@
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -970,11 +1062,11 @@
      }
     ],
     "etymology": {
-     "text": "From Old High German wedar, from Proto-West Germanic *hwaþar, from Proto-Germanic *hwaþeraz; cognate with English whether and either.",
+     "text": "From Old High German wedar, from Proto-West Germanic *hwaþar, from Proto-Germanic *hwaþeraz.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "weder is a cousin of English whether and either; the pair weder … noch matches Greek ούτε … ούτε, Russian ни … ни and Turkish ne … ne."
+     "weder … noch is a pair: Ich trinke weder Kaffee noch Tee."
     ],
     "pitfalls": [
      "weder … noch is already negative: Ich habe weder Brot noch Käse – no kein, no nicht in the same clause.",
@@ -982,10 +1074,31 @@
     ],
     "subtleties": [
      "It can join objects (weder Tee noch Kaffee), subjects (Weder Anna noch Max …) and adjectives (weder gut noch schlecht)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "weder … noch is ούτε … ούτε."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "weder … noch is ни … ни."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "weder is related to English whether and either."
+     }
     ]
    },
    "features": {
-    "verbPosition": "takes the first place (inversion)"
+    "verbPosition": "takes the first place (inversion)",
+    "paired": "weder … noch",
+    "particleUse": {
+     "none": "no modal-particle use"
+    }
    }
   },
   {
@@ -1110,19 +1223,23 @@
     "synonyms": [],
     "synonymsNone": "The conjunction “nor” has no other form in German; outside weder … noch, use und auch nicht.",
     "etymology": {
-     "text": "From Middle High German noch, from Old High German noh, from Proto-West Germanic *noh, from Proto-Germanic *nuh, from Proto-Indo-European *nu (“now”) + *-kʷe (“and, also”). Cognate to Dutch nog and noch.",
+     "text": "From Middle High German noch, from Old High German noh, from Proto-West Germanic *noh, from Proto-Germanic *nuh, from Proto-Indo-European *nu (“now”) + *-kʷe (“and, also”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [],
     "pitfalls": [
-     "noch alone usually means “still” or “more”: Ich habe noch Brot (I still have bread). Only after weder does it mean “nor”."
+     "noch alone usually means “still” or “more”:\n→ Ich habe noch Brot (I still have bread).\n\nOnly after weder does it mean “nor”."
     ],
     "subtleties": [
      "Noch einen Kaffee, bitte! = Another coffee, please!"
     ]
    },
    "features": {
-    "verbPosition": "takes the first place (inversion)"
+    "verbPosition": "takes the first place (inversion)",
+    "paired": "weder … noch",
+    "particleUse": {
+     "none": "no modal-particle use"
+    }
    }
   }
  ],

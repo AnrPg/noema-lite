@@ -191,12 +191,12 @@
   {
    "lang": "he",
    "fn": "fn.noun.gender",
-   "note": "Hebrew has the same two genders and the same main sign (feminine -ָה / -ֶת), with feminines that lack it (אֶרֶץ, earth) — and כּוֹס (glass) is feminine there too."
+   "note": "Hebrew has the same two genders and the same main sign (feminine -ָה / -ֶת), with feminines that lack it (אֶרֶץ, earth).\n\nכּוֹס (glass) is feminine there too."
   },
   {
    "lang": "de",
    "fn": "fn.noun.gender",
-   "note": "German has three genders that the form rarely shows — learn der / die / das with every noun; Arabic gender is mostly visible (ة)."
+   "note": "German has three genders that the form rarely shows — learn der / die / das with every noun.\n\nArabic gender is mostly visible (ة)."
   },
   {
    "lang": "zh",
@@ -218,17 +218,17 @@
   {
    "for": "el",
    "rel": "different",
-   "text": "Greek has three genders and the ending often shows them (-ος, -η / -α, -ο); Arabic has two, with ة as the main feminine sign. The genders often differ: ο ήλιος is masculine but شَمْس feminine; το σπίτι is neuter, بَيْت masculine."
+   "text": "Greek has three genders and the ending often shows them (-ος, -η / -α, -ο); Arabic has two, with **ة as the main feminine sign**.\n\nThe genders often differ:\n- ο ήλιος is masculine, but شَمْس feminine;\n- το σπίτι is neuter, بَيْت masculine."
   },
   {
    "for": "ru",
    "rel": "different",
-   "text": "Russian has three genders, shown by the ending; Arabic has two, with ة as the main feminine sign — and no neuter: a Russian neuter such as окно becomes feminine نَافِذَة."
+   "text": "Russian has three genders, shown by the ending. Arabic has two, with ة as the main feminine sign — and **no neuter**:\n→ a neuter such as окно becomes feminine نَافِذَة"
   },
   {
    "for": "es",
    "rel": "similar",
-   "text": "Spanish also has two genders with a typical feminine ending (-a ≈ ة: mesa ≈ طَاوِلَة). There are exceptions on both sides: la mano is feminine like يَد, el día masculine."
+   "text": "Spanish also has two genders with a typical feminine ending:\n→ -a ≈ ة: mesa ≈ طَاوِلَة\n\nThere are exceptions on both sides: la mano is feminine like يَد, el día masculine."
   },
   {
    "for": "en",
@@ -238,12 +238,12 @@
   {
    "for": "fr",
    "rel": "similar",
-   "text": "French also has two genders, but the noun rarely shows it; Arabic gender is mostly visible: ة means feminine (غُرْفَة), with a short list of exceptions."
+   "text": "French also has two genders, but the noun rarely shows it.\n\nArabic gender is **mostly visible**: ة means feminine (غُرْفَة), with a short list of exceptions."
   },
   {
    "for": "hi",
    "rel": "similar",
-   "text": "Hindi also has two genders and a typical feminine ending (-ī: लड़की); the Arabic sign is ة. Loanwords can switch gender: किताब is feminine in Hindi, كِتَاب masculine in Arabic."
+   "text": "Hindi also has two genders and a typical feminine ending (-ī: लड़की); the Arabic sign is ة.\n\nLoanwords can switch gender: किताब is feminine in Hindi, كِتَاب masculine in Arabic."
   },
   {
    "for": "fa",
@@ -294,6 +294,56 @@
    "for": "iu",
    "rel": "new",
    "text": "Inuktitut nouns have no gender; Arabic splits every noun into masculine and feminine."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German has three genders, shown on the article (der / die / das). Arabic has two, **mostly visible on the noun** — ة means feminine.\n\nGenders differ:\n- die Sonne is feminine like شَمْس;\n- das Haus is masculine بَيْت;\n- every German neuter becomes masculine or feminine."
+  },
+  {
+   "for": "zh",
+   "rel": "new",
+   "text": "Chinese nouns have no gender. Every Arabic noun is masculine or feminine, and هٰذَا / هٰذِهِ, هُوَ / هِيَ and later adjectives and verbs follow it.\n\n**Most feminine nouns end in ة**:\n→ غُرْفَة"
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Italian also has two genders with a typical feminine ending:\n→ -a ≈ ة: la camera ≈ غُرْفَة\n\nGenders often differ:\n- il sole is masculine, شَمْس feminine;\n- la casa is feminine, بَيْت masculine."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Albanian also has (mainly) two genders, with a typical feminine ending -ë / -e; the Arabic sign is ة:\n→ dhomë ≈ غُرْفَة\n\nGenders often differ:\n- dielli (the sun) is masculine, شَمْس feminine;\n- shtëpia (the house) is feminine, بَيْت masculine."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "Portuguese also has two genders with a typical feminine ending:\n→ -a ≈ ة: a mesa ≈ طَاوِلَة\n\nGenders often differ:\n- o sol is masculine, شَمْس feminine;\n- a casa is feminine, بَيْت masculine."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your nouns have gender, two is easy:\n- Arabic has no neuter;\n- ة is a reliable feminine sign — with a short list of feminines without it (شَمْس, يَد, كَأْس)."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "new",
+   "text": "If your nouns have no gender, **learn it with every noun**: it decides هٰذَا / هٰذِهِ, هُوَ / هِيَ, and later adjectives and verbs.\n\nMost nouns in ة are feminine."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "new",
+   "text": "If your nouns have no gender, start with the ending:\n- ة (غُرْفَة, شَقَّة) means feminine;\n- nouns for women are feminine;\n- the rest are mostly masculine."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "new",
+   "text": "If your language does not classify nouns by gender, note that **every Arabic noun is masculine or feminine** — things too — and the words that point to it follow.\n→ بَيْت m., غُرْفَة f."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "If your language is Semitic, two genders and a feminine ending in -t / -a are familiar.\n- ة (tāʾ marbūṭa) is the Arabic sign.\n- Body parts that come in pairs are feminine: يَد, عَيْن."
   }
  ]
 }

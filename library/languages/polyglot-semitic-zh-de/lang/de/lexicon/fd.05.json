@@ -84,7 +84,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German says null where Greek says μηδέν and English zero: the word came from Latin nullus (“none”) through Italian.",
+     "null came from Latin nullus (“none”) through Italian.",
      "die Stunde null (“hour zero”) is the German name for the new start in May 1945."
     ],
     "pitfalls": [
@@ -92,10 +92,25 @@
     ],
     "subtleties": [
      "Colloquially null means “no … at all”: Ich habe null Ahnung (I have no idea)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "μηδέν is null in German – a word from nullus (“none”)."
+     },
+     {
+      "for": "en",
+      "rel": "different",
+      "text": "English zero is null in German."
+     }
     ]
    },
    "features": {
-    "ordinal": "nullte"
+    "ordinal": "nullte",
+    "inCompounds": {
+     "none": "not used to build other numerals"
+    }
    }
   },
   {
@@ -177,7 +192,8 @@
     ]
    },
    "features": {
-    "ordinal": "erste"
+    "ordinal": "erste",
+    "inCompounds": "ein- (einundzwanzig, einhundert); eins only at the end (hunderteins); ein, eine before a noun"
    }
   },
   {
@@ -230,22 +246,40 @@
     "synonyms": [],
     "synonymsNone": "A number has no synonym; only the figure itself.",
     "etymology": {
-     "text": "From Middle High German zwei, from Old High German zwei (neuter of zwēne). Compare Dutch twee, English two, twain. Zwei was originally the neuter form, now used for all genders; the Old High German masculine zwēne survives in early modern zween, the feminine zwō in the variant zwo.",
+     "text": "From Middle High German zwei, from Old High German zwei (neuter of zwēne). Zwei was originally the neuter form, now used for all genders; the Old High German masculine zwēne survives in early modern zween, the feminine zwō in the variant zwo.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Old German had three words for “two”: zween (masculine), zwo (feminine), zwei (neuter). Only zwei survived – and zwo is back as a spoken variant.",
-     "zwei is the same old word as Greek δύο, Russian два and English two."
+     "Old German had three words for “two”: zween (masculine), zwo (feminine), zwei (neuter).\n\nOnly zwei survived – and zwo is back as a spoken variant.",
+     "zwei goes back to Indo-European *dwóh₁ (two)."
     ],
     "pitfalls": [
      "On the phone, on the radio and in the army people say zwo instead of zwei, so that it is not confused with drei."
     ],
     "subtleties": [
      "In a café the drink stays singular after the number: Zwei Kaffee, bitte (two coffees)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "zwei is the same old word as δύο."
+     },
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "zwei is the same old word as два."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "zwei is related to English two and twain."
+     }
     ]
    },
    "features": {
-    "ordinal": "zweite"
+    "ordinal": "zweite",
+    "inCompounds": "zwan- in zwanzig; zwo in speech (to keep it apart from drei)"
    }
   },
   {
@@ -306,18 +340,36 @@
     "synonyms": [],
     "synonymsNone": "A number has no synonym; only the figure itself.",
     "etymology": {
-     "text": "From Middle High German drī, from Old High German dri, from Proto-West Germanic *þrīʀ, from Proto-Germanic *þrīz, from Proto-Indo-European *tréyes. Compare Dutch drie, English three, Danish tre.",
+     "text": "From Middle High German drī, from Old High German dri, from Proto-West Germanic *þrīʀ, from Proto-Germanic *þrīz, from Proto-Indo-European *tréyes.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "drei, Greek τρία, Russian три, Latin trēs and English three all go back to Proto-Indo-European *tréyes."
+     "drei goes back to Proto-Indo-European *tréyes."
     ],
     "pitfalls": [
      "drei and zwei sound alike on a bad line – hence zwo for two."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "drei and τρία go back to the same Indo-European word."
+     },
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "drei and три go back to the same Indo-European word."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "drei is related to English three."
+     }
     ]
    },
    "features": {
-    "ordinal": "dritte"
+    "ordinal": "dritte",
+    "inCompounds": "drei- (dreizehn), but dreißig with -ßig (not -zig)"
    }
   },
   {
@@ -378,15 +430,25 @@
     "synonyms": [],
     "synonymsNone": "A number has no synonym; only the figure itself.",
     "etymology": {
-     "text": "From Middle High German vier, from Old High German fior, from Proto-West Germanic *feuwar, from Proto-Germanic *fedwōr, from Proto-Indo-European *kʷetwṓr. Compare Dutch vier, English four, Danish fire, Swedish fyra.",
+     "text": "From Middle High German vier, from Old High German fior, from Proto-West Germanic *feuwar, from Proto-Germanic *fedwōr, from Proto-Indo-European *kʷetwṓr.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
      "unter vier Augen – “under four eyes” – means a talk between two people only."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "vier is related to English four."
+     }
     ]
    },
    "features": {
-    "ordinal": "vierte"
+    "ordinal": "vierte",
+    "inCompounds": {
+     "none": "unchanged in compounds (vierzehn, vierzig)"
+    }
    }
   },
   {
@@ -447,18 +509,33 @@
     "synonyms": [],
     "synonymsNone": "A number has no synonym; only the figure itself.",
     "etymology": {
-     "text": "Inherited from Middle High German vünf, from Old High German fimf, from Proto-West Germanic *fimf, from Proto-Germanic *fimf, from Proto-Indo-European *pénkʷe. Formal cognates include Dutch vijf, English five, Yiddish פֿינף (finf), Gothic fimf and Icelandic fimm.",
+     "text": "Inherited from Middle High German vünf, from Old High German fimf, from Proto-West Germanic *fimf, from Proto-Germanic *fimf, from Proto-Indo-European *pénkʷe.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "fünf and Greek πέντε (pénte) are the same Indo-European word *pénkʷe – think of the pentagon (five corners)."
+     "fünf goes back to Indo-European *pénkʷe."
     ],
     "pitfalls": [
      "Write ü: fünf, fünfzehn, fünfzig (fuffzehn, fuffzig are Berlin speech)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "fünf and πέντε are the same Indo-European word *pénkʷe – think of the Πεντάγωνο."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "fünf is related to English five."
+     }
     ]
    },
    "features": {
-    "ordinal": "fünfte"
+    "ordinal": "fünfte",
+    "inCompounds": {
+     "none": "unchanged in compounds (fünfzehn, fünfzig)"
+    }
    }
   },
   {
@@ -515,14 +592,27 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "sechs is the same old word as Greek έξι, Latin sex and Russian шесть."
+     "sechs goes back to Indo-European *swéḱs."
     ],
     "pitfalls": [
      "The s disappears in sechzehn (16) and sechzig (60) – not *sechszehn, *sechszig."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "sechs is the same old word as έξι."
+     },
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "sechs is the same old word as шесть."
+     }
     ]
    },
    "features": {
-    "ordinal": "sechste"
+    "ordinal": "sechste",
+    "inCompounds": "sech- in sechzehn, sechzig (the s is dropped)"
    }
   },
   {
@@ -583,19 +673,37 @@
     "synonyms": [],
     "synonymsNone": "A number has no synonym; only the figure itself.",
     "etymology": {
-     "text": "From Middle High German siben, from Old High German sibun, from Proto-West Germanic *sebun, from Proto-Germanic *sebun, from earlier Proto-Germanic *sebunt, from Proto-Indo-European *septḿ̥. Compare Dutch zeven, English seven.",
+     "text": "From Middle High German siben, from Old High German sibun, from Proto-West Germanic *sebun, from Proto-Germanic *sebun, from earlier Proto-Germanic *sebunt, from Proto-Indo-European *septḿ̥.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "sieben, Greek επτά, Latin septem and Russian семь all come from Indo-European *septḿ̥.",
+     "sieben comes from Indo-European *septḿ̥.",
      "sieben is also a verb: Mehl sieben = to sift flour."
     ],
     "pitfalls": [
      "The -en disappears in siebzehn (17) and siebzig (70)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "sieben and επτά come from the same Indo-European word."
+     },
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "sieben and семь come from the same Indo-European word."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "sieben is related to English seven."
+     }
     ]
    },
    "features": {
-    "ordinal": "siebte"
+    "ordinal": "siebte",
+    "inCompounds": "sieb- in siebzehn, siebzig"
    }
   },
   {
@@ -648,18 +756,33 @@
     "synonyms": [],
     "synonymsNone": "A number has no synonym; only the figure itself.",
     "etymology": {
-     "text": "From Middle High German ahte, from Old High German ahto, from Proto-West Germanic *ahtō, from Proto-Germanic *ahtōu, from Proto-Indo-European *oḱtṓw. Compare Dutch acht, English eight, Danish otte, Swedish åtta, Greek οκτώ (októ), Latin octō.",
+     "text": "From Middle High German ahte, from Old High German ahto, from Proto-West Germanic *ahtō, from Proto-Germanic *ahtōu, from Proto-Indo-European *oḱtṓw.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "acht and Greek οκτώ are the same word: the k of októ became ch in German (an octopus has acht Arme)."
+     "acht goes back to Indo-European *oḱtṓw; the old k became ch in German."
     ],
     "pitfalls": [
      "Do not mix it up with die Acht in Acht geben / sich in Acht nehmen (to watch out) – an unrelated word."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "acht is the same word as οκτώ: the κ became ch (ein Oktopus hat acht Arme)."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "acht is related to English eight."
+     }
     ]
    },
    "features": {
-    "ordinal": "achte"
+    "ordinal": "achte",
+    "inCompounds": {
+     "none": "unchanged in compounds (achtzehn, achtzig)"
+    }
    }
   },
   {
@@ -712,18 +835,33 @@
     "synonyms": [],
     "synonymsNone": "A number has no synonym; only the figure itself.",
     "etymology": {
-     "text": "From Old High German niun, from Proto-Germanic *newun, from Proto-Indo-European *h₁néwn̥. Cognate with Low German negen, Dutch negen, English nine, West Frisian njoggen, Danish ni, Gothic niun.",
+     "text": "From Old High German niun, from Proto-Germanic *newun, from Proto-Indo-European *h₁néwn̥.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "neun belongs with English nine and Greek εννέα (ennéa) – all from Indo-European *h₁néwn̥."
+     "neun goes back to Indo-European *h₁néwn̥."
     ],
     "pitfalls": [
      "eu sounds like oi: neun [nɔɪ̯n]."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "neun belongs with εννέα – both from Indo-European *h₁néwn̥."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "neun is related to English nine."
+     }
     ]
    },
    "features": {
-    "ordinal": "neunte"
+    "ordinal": "neunte",
+    "inCompounds": {
+     "none": "unchanged in compounds (neunzehn, neunzig)"
+    }
    }
   },
   {
@@ -776,18 +914,31 @@
     "synonyms": [],
     "synonymsNone": "A number has no synonym; only the figure itself.",
     "etymology": {
-     "text": "From Middle High German zehen, from Old High German zehan, from Proto-West Germanic and Proto-Germanic *tehun (“ten”), from Proto-Indo-European *déḱm̥ (“ten”). Compare Dutch tien, Low German teihn, English ten, Gothic taihun.",
+     "text": "From Middle High German zehen, from Old High German zehan, from Proto-West Germanic and Proto-Germanic *tehun (“ten”), from Proto-Indo-European *déḱm̥ (“ten”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "zehn, Greek δέκα and Latin decem share the root *déḱm̥ – German z comes from an old t (compare English ten)."
+     "zehn goes back to Indo-European *déḱm̥; German z comes from an old t."
     ],
     "pitfalls": [
      "The teens end in -zehn (dreizehn), the tens in -zig (dreißig) – do not mix them."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "zehn and δέκα share the root *déḱm̥."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "zehn is related to English ten: German z often stands for an old t (zehn – ten, Zunge – tongue)."
+     }
     ]
    },
    "features": {
-    "ordinal": "zehnte"
+    "ordinal": "zehnte",
+    "inCompounds": "-zehn in 13–19 (dreizehn); the tens end in -zig instead (zwanzig)"
    }
   },
   {
@@ -840,19 +991,34 @@
     "synonyms": [],
     "synonymsNone": "A number has no synonym; only the figure itself.",
     "etymology": {
-     "text": "From Middle High German eilf, eilef, einlif, from Old High German einlif, from Proto-Germanic *ainalif, a compound of *ainaz and *-lif. Until the 19th century usually written eilf. Compare Dutch elf, English eleven, Danish elleve.",
+     "text": "From Middle High German eilf, eilef, einlif, from Old High German einlif, from Proto-Germanic *ainalif, a compound of *ainaz and *-lif. Until the 19th century usually written eilf.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "elf (like English eleven) is “one left over” after counting to ten; zwölf is “two left over”.",
+     "elf is “one left over” after counting to ten; zwölf is “two left over”.",
      "die Elf is also the football team (eleven players): die deutsche Elf."
     ],
     "pitfalls": [
-     "False friend: German elf is the number 11; the fairy creature is der Elf / die Elfe."
+     "elf (11) has a namesake: der Elf / die Elfe is a fairy creature."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "elf and zwölf are English eleven and twelve: “one left” and “two left” after ten."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "elf is the number 11; the fairy creature is der Elf / die Elfe."
+     }
     ]
    },
    "features": {
-    "ordinal": "elfte"
+    "ordinal": "elfte",
+    "inCompounds": {
+     "none": "unchanged in compounds (elfhundert)"
+    }
    }
   },
   {
@@ -918,18 +1084,28 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German zwölf, zwolf, zwelf, zwelif, from Old High German zwelif, from an original *twelif, from Proto-Germanic *twalif. Compare Dutch twaalf, English twelve, Norwegian and Danish tolv.",
+     "text": "From Middle High German zwölf, zwolf, zwelf, zwelif, from Old High German zwelif, from an original *twelif, from Proto-Germanic *twalif.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "zwölf is the last number with a name of its own; from 13 on German builds the numbers from units + zehn."
+     "zwölf is the last number with a name of its own.\n\nFrom 13 on German builds the numbers from units + zehn."
     ],
     "pitfalls": [
      "Write ö: zwölf, not *zwolf."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "zwölf is related to English twelve."
+     }
     ]
    },
    "features": {
-    "ordinal": "zwölfte"
+    "ordinal": "zwölfte",
+    "inCompounds": {
+     "none": "unchanged in compounds (zwölfhundert)"
+    }
    }
   },
   {
@@ -982,18 +1158,28 @@
     "synonyms": [],
     "synonymsNone": "A number has no synonym; only the figure itself.",
     "etymology": {
-     "text": "From Middle High German dreizehen, from Old High German drīzehan, akin to Old Saxon thriutein. Ultimately from Proto-Germanic *þritehun. Equivalent to drei + zehn. Compare Dutch dertien, English thirteen, Danish tretten.",
+     "text": "From Middle High German dreizehen, from Old High German drīzehan, akin to Old Saxon thriutein. Ultimately from Proto-Germanic *þritehun. Equivalent to drei + zehn.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
      "Freitag, der Dreizehnte – Friday the 13th – is an unlucky day for superstitious Germans too."
     ],
     "pitfalls": [
-     "Built like English: the unit first, then -zehn (drei + zehn = dreizehn)."
+     "The unit first, then -zehn (drei + zehn = dreizehn)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Built like English: the unit first, then -zehn (-teen)."
+     }
     ]
    },
    "features": {
-    "ordinal": "dreizehnte"
+    "ordinal": "dreizehnte",
+    "inCompounds": {
+     "none": "itself a compound (unit + zehn)"
+    }
    }
   },
   {
@@ -1046,18 +1232,28 @@
     "synonyms": [],
     "synonymsNone": "A number has no synonym; only the figure itself.",
     "etymology": {
-     "text": "From Middle High German vierzehen, from Old High German fiorzehan, from Proto-Germanic *fedurtehun. Equivalent to vier + zehn. Compare Dutch veertien, English fourteen, Danish fjorten.",
+     "text": "From Middle High German vierzehen, from Old High German fiorzehan, from Proto-Germanic *fedurtehun. Equivalent to vier + zehn.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
      "vierzehn Tage (fourteen days) is the everyday German for “two weeks, a fortnight”."
     ],
     "pitfalls": [
-     "Built like English: the unit first, then -zehn (vier + zehn = vierzehn)."
+     "The unit first, then -zehn (vier + zehn = vierzehn)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Built like English: the unit first, then -zehn (-teen)."
+     }
     ]
    },
    "features": {
-    "ordinal": "vierzehnte"
+    "ordinal": "vierzehnte",
+    "inCompounds": {
+     "none": "itself a compound (unit + zehn)"
+    }
    }
   },
   {
@@ -1110,18 +1306,28 @@
     "synonyms": [],
     "synonymsNone": "A number has no synonym; only the figure itself.",
     "etymology": {
-     "text": "From Middle High German vünfzehen, from Old High German fimfzehan, from Proto-Germanic *fimftehun. Equivalent to fünf + zehn. Compare Dutch vijftien, English fifteen, Danish femten.",
+     "text": "From Middle High German vünfzehen, from Old High German fimfzehan, from Proto-Germanic *fimftehun. Equivalent to fünf + zehn.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
      "In Berlin you hear fuffzehn; Wiktionary also lists fuchzehn."
     ],
     "pitfalls": [
-     "Built like English: the unit first, then -zehn (fünf + zehn = fünfzehn)."
+     "The unit first, then -zehn (fünf + zehn = fünfzehn)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Built like English: the unit first, then -zehn (-teen)."
+     }
     ]
    },
    "features": {
-    "ordinal": "fünfzehnte"
+    "ordinal": "fünfzehnte",
+    "inCompounds": {
+     "none": "itself a compound (unit + zehn)"
+    }
    }
   },
   {
@@ -1174,7 +1380,7 @@
     "synonyms": [],
     "synonymsNone": "A number has no synonym; only the figure itself.",
     "etymology": {
-     "text": "From Middle High German seh(s)zehen, from Old High German seh(s)zehan, from Proto-Germanic *sehstehun. Equivalent to sechs + zehn. Compare Dutch zestien, English sixteen, Danish seksten.",
+     "text": "From Middle High German seh(s)zehen, from Old High German seh(s)zehan, from Proto-Germanic *sehstehun. Equivalent to sechs + zehn.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -1182,11 +1388,21 @@
     ],
     "pitfalls": [
      "Not *sechszehn: the s of sechs is dropped.",
-     "Built like English: the unit first, then -zehn (sechs + zehn = sechzehn)."
+     "The unit first, then -zehn (sechs + zehn = sechzehn)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Built like English: the unit first, then -zehn (-teen)."
+     }
     ]
    },
    "features": {
-    "ordinal": "sechzehnte"
+    "ordinal": "sechzehnte",
+    "inCompounds": {
+     "none": "itself a compound (unit + zehn)"
+    }
    }
   },
   {
@@ -1239,7 +1455,7 @@
     "synonyms": [],
     "synonymsNone": "A number has no synonym; only the figure itself.",
     "etymology": {
-     "text": "From Middle High German sibenzehen, from Old High German sibunzehan, from Proto-Germanic *sebuntehun. Equivalent to sieben + zehn. Compare Dutch zeventien, English seventeen, Danish sytten.",
+     "text": "From Middle High German sibenzehen, from Old High German sibunzehan, from Proto-Germanic *sebuntehun. Equivalent to sieben + zehn.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -1247,11 +1463,21 @@
     ],
     "pitfalls": [
      "Not *siebenzehn: the -en of sieben is dropped.",
-     "Built like English: the unit first, then -zehn (sieben + zehn = siebzehn)."
+     "The unit first, then -zehn (sieben + zehn = siebzehn)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Built like English: the unit first, then -zehn (-teen)."
+     }
     ]
    },
    "features": {
-    "ordinal": "siebzehnte"
+    "ordinal": "siebzehnte",
+    "inCompounds": {
+     "none": "itself a compound (unit + zehn)"
+    }
    }
   },
   {
@@ -1304,18 +1530,28 @@
     "synonyms": [],
     "synonymsNone": "A number has no synonym; only the figure itself.",
     "etymology": {
-     "text": "From Middle High German ahzehen, from Old High German ahtozehan, from Proto-Germanic *ahtōutehun. Equivalent to acht + zehn. Compare Dutch achttien, English eighteen, Danish atten.",
+     "text": "From Middle High German ahzehen, from Old High German ahtozehan, from Proto-Germanic *ahtōutehun. Equivalent to acht + zehn.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
      "In Germany you come of age mit achtzehn – at eighteen."
     ],
     "pitfalls": [
-     "Built like English: the unit first, then -zehn (acht + zehn = achtzehn)."
+     "The unit first, then -zehn (acht + zehn = achtzehn)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Built like English: the unit first, then -zehn (-teen)."
+     }
     ]
    },
    "features": {
-    "ordinal": "achtzehnte"
+    "ordinal": "achtzehnte",
+    "inCompounds": {
+     "none": "itself a compound (unit + zehn)"
+    }
    }
   },
   {
@@ -1368,18 +1604,28 @@
     "synonyms": [],
     "synonymsNone": "A number has no synonym; only the figure itself.",
     "etymology": {
-     "text": "From Middle High German niunzëhen, from Old High German niunzehan, from Proto-Germanic *newuntehun. Equivalent to neun + zehn. Compare Dutch negentien, English nineteen, Danish nitten.",
+     "text": "From Middle High German niunzëhen, from Old High German niunzehan, from Proto-Germanic *newuntehun. Equivalent to neun + zehn.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Like English nineteen: the unit first, then -zehn."
+     "neunzehn is the last of the -zehn numbers; next comes zwanzig."
     ],
     "pitfalls": [
-     "Built like English: the unit first, then -zehn (neun + zehn = neunzehn)."
+     "The unit first, then -zehn (neun + zehn = neunzehn)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Built like English: the unit first, then -zehn (-teen)."
+     }
     ]
    },
    "features": {
-    "ordinal": "neunzehnte"
+    "ordinal": "neunzehnte",
+    "inCompounds": {
+     "none": "itself a compound (unit + zehn)"
+    }
    }
   },
   {
@@ -1432,19 +1678,27 @@
     "synonyms": [],
     "synonymsNone": "A number has no synonym; only the figure itself.",
     "etymology": {
-     "text": "From Middle High German zweinzec, from Old High German zweinzug, from Proto-Germanic *twaintigaz, *twai tigiwiz. Cognate with Dutch twintig, English twenty, Danish tyve. The form zwanzig goes back to dialects that had early on lowered Middle High German -ei- to [aɪ̯]; elsewhere the contraction yielded zwenzig, which waned around 1700.",
+     "text": "From Middle High German zweinzec, from Old High German zweinzug, from Proto-Germanic *twaintigaz, *twai tigiwiz. The form zwanzig goes back to dialects that had early on lowered Middle High German -ei- to [aɪ̯]; elsewhere the contraction yielded zwenzig, which waned around 1700.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "21 is einundzwanzig – “one-and-twenty”: German says the units first, like Arabic and old English (four-and-twenty blackbirds)."
+     "21 is einundzwanzig – “one-and-twenty”: German says the units first, like Arabic."
     ],
     "pitfalls": [
      "Not *zweizig: twenty is zwanzig.",
      "From 21 on, the unit comes first: einundzwanzig, zweiundzwanzig … neunundzwanzig – written as one word."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "21 is einundzwanzig, “one-and-twenty”, as in old English four-and-twenty blackbirds – not twenty-one."
+     }
     ]
    },
    "features": {
-    "ordinal": "zwanzigste"
+    "ordinal": "zwanzigste",
+    "inCompounds": "units before the tens, joined by und: einundzwanzig, zweiundzwanzig"
    }
   },
   {
@@ -1506,7 +1760,8 @@
     ]
    },
    "features": {
-    "ordinal": "dreißigste"
+    "ordinal": "dreißigste",
+    "inCompounds": "units before the tens, joined by und: einunddreißig, zweiunddreißig"
    }
   },
   {
@@ -1563,15 +1818,23 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "-zig is the old Germanic word for “ten(s)”, the same element as English -ty (forty, fifty)."
+     "-zig is the old Germanic word for “ten(s)”."
     ],
     "pitfalls": [
      "vier + zig: vierzig; 44 = vierundvierzig.",
      "The tens end in -zig (-ßig in dreißig); the unit comes first in between: einundvierzig = 41."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "-zig is the same element as English -ty: vierzig – forty, fünfzig – fifty."
+     }
     ]
    },
    "features": {
-    "ordinal": "vierzigste"
+    "ordinal": "vierzigste",
+    "inCompounds": "units before the tens, joined by und: einundvierzig, zweiundvierzig"
    }
   },
   {
@@ -1633,7 +1896,8 @@
     ]
    },
    "features": {
-    "ordinal": "fünfzigste"
+    "ordinal": "fünfzigste",
+    "inCompounds": "units before the tens, joined by und: einundfünfzig, zweiundfünfzig"
    }
   },
   {
@@ -1695,7 +1959,8 @@
     ]
    },
    "features": {
-    "ordinal": "sechzigste"
+    "ordinal": "sechzigste",
+    "inCompounds": "units before the tens, joined by und: einundsechzig, zweiundsechzig"
    }
   },
   {
@@ -1757,7 +2022,8 @@
     ]
    },
    "features": {
-    "ordinal": "siebzigste"
+    "ordinal": "siebzigste",
+    "inCompounds": "units before the tens, joined by und: einundsiebzig, zweiundsiebzig"
    }
   },
   {
@@ -1819,7 +2085,8 @@
     ]
    },
    "features": {
-    "ordinal": "achtzigste"
+    "ordinal": "achtzigste",
+    "inCompounds": "units before the tens, joined by und: einundachtzig, zweiundachtzig"
    }
   },
   {
@@ -1881,7 +2148,8 @@
     ]
    },
    "features": {
-    "ordinal": "neunzigste"
+    "ordinal": "neunzigste",
+    "inCompounds": "units before the tens, joined by und: einundneunzig, zweiundneunzig"
    }
   },
   {
@@ -1946,17 +2214,30 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The hund- of hundert is Indo-European *ḱm̥tóm, the same root as Latin centum, Greek εκατό and Russian сто."
+     "The hund- of hundert is Indo-European *ḱm̥tóm."
     ],
     "pitfalls": [
      "No ein needed: hundert = 100; einhundert is used for clarity (cheques, 101 = hunderteins)."
     ],
     "subtleties": [
      "101 = hunderteins, 121 = hunderteinundzwanzig: one word, the hundreds first, then units-and-tens."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "hundert shares its root with εκατό."
+     },
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "hundert shares its root with сто."
+     }
     ]
    },
    "features": {
-    "ordinal": "hundertste"
+    "ordinal": "hundertste",
+    "inCompounds": "hundert or einhundert; one word: hundertzwanzig, zweihunderteins"
    }
   },
   {
@@ -2009,21 +2290,34 @@
     "synonyms": [],
     "synonymsNone": "A number has no synonym; only the figure itself.",
     "etymology": {
-     "text": "From Middle High German tūsunt, from Old High German dūsunt, from Proto-West Germanic *þūsundi, from Proto-Germanic *þūsundī. Compare Old Saxon thūsund, Dutch duizend, English thousand, Danish tusind.",
+     "text": "From Middle High German tūsunt, from Old High German dūsunt, from Proto-West Germanic *þūsundi, from Proto-Germanic *þūsundī.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "tausend and Russian тысяча (tysjača) are related: this word for “thousand” is shared by the Germanic and the Balto-Slavic languages."
+     "This word for “thousand” is shared by the Germanic and the Balto-Slavic languages."
     ],
     "pitfalls": [
      "German writes thousands with a point and decimals with a comma: 1.000 = one thousand, 1,5 = one and a half."
     ],
     "subtleties": [
      "tausendmal = a thousand times; Tausende von Leuten = thousands of people (noun, capital T)."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "tausend and тысяча are related."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "tausend is related to English thousand."
+     }
     ]
    },
    "features": {
-    "ordinal": "tausendste"
+    "ordinal": "tausendste",
+    "inCompounds": "tausend or eintausend; one word below a million: zweitausendvierundzwanzig"
    }
   },
   {
@@ -2046,6 +2340,12 @@
     "adjAfter": "strong",
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "standalone": {
+     "none": "the same forms as before a noun"
+    },
+    "stem": {
+     "none": "the endings are added to the base form"
     }
    },
    "forms": {
@@ -2170,7 +2470,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "viel and Greek πολύ (polý, “much”) are related through Indo-European – poly- in English words is the Greek twin of viel."
+     "viel is related through Indo-European to poly- (“many”) in words such as Polygon."
     ],
     "pitfalls": [
      "viel + a singular uncountable noun (viel Papier, viel Zeit), viele + a plural (viele Bücher).",
@@ -2179,6 +2479,18 @@
     "subtleties": [
      "Vielen Dank is a set phrase (Dank is masculine: accusative vielen Dank).",
      "After an article it takes adjective endings: die vielen Leute (all those people)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "viel and πολύ are related through Indo-European."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "poly- in English words is a twin of viel."
+     }
     ]
    }
   },
@@ -2195,6 +2507,12 @@
     "adjAfter": "strong",
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "standalone": {
+     "none": "the same forms as before a noun"
+    },
+    "stem": {
+     "none": "the endings are added to the base form"
     }
    },
    "forms": {
@@ -2297,11 +2615,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German weinec, wēnec (“marginal”), from Old High German *weinag, wēnag (“miserable”), from Proto-Germanic *wainagaz. Cognate with Dutch weinig, Yiddish ווייניק (veynik).",
+     "text": "From Middle High German weinec, wēnec (“marginal”), from Old High German *weinag, wēnag (“miserable”), from Proto-Germanic *wainagaz.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "wenig once meant “miserable, pitiable” (Old High German wēnag); its ē came from a blend with Old High German wē (“woe”) – the same word as English woe."
+     "wenig once meant “miserable, pitiable” (Old High German wēnag).\n\nIts ē came from a blend with Old High German wē (“woe”)."
     ],
     "pitfalls": [
      "wenig (little) ≠ ein wenig (a little): Ich habe wenig Zeit (hardly any) – Ich habe ein wenig Zeit (some).",
@@ -2310,6 +2628,13 @@
     "subtleties": [
      "In everyday speech nicht viel / nicht viele is more common than wenig / wenige.",
      "weniger is both the comparative (weniger Leute = fewer people) and the genitive plural form – the context tells them apart."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "The wē in wenig is the same word as English woe."
+     }
     ]
    }
   },
@@ -2423,7 +2748,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "ein bisschen is literally “a little bite” – Bissen (bite) + -chen, just like English a bit comes from bite."
+     "ein bisschen is literally “a little bite” – Bissen (bite) + -chen."
     ],
     "pitfalls": [
      "Write -ss-: bisschen (the old spelling bißchen was replaced in the 1996 reform).",
@@ -2431,12 +2756,25 @@
     ],
     "subtleties": [
      "ein bisschen softens a request or criticism: Das ist ein bisschen teuer (that’s a bit expensive)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "ein bisschen is built like English a bit, which comes from bite."
+     }
     ]
    },
    "features": {
     "adjAfter": "strong",
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "standalone": {
+     "none": "the same forms as before a noun"
+    },
+    "stem": {
+     "none": "takes no endings"
     }
    }
   },
@@ -2529,6 +2867,12 @@
     "adjAfter": "strong",
     "senseForms": {
      "none": "one meaning"
+    },
+    "standalone": {
+     "none": "the same forms as before a noun"
+    },
+    "stem": {
+     "none": "takes no endings"
     }
    }
   },
@@ -2551,7 +2895,13 @@
       ],
       "note": "never inflected, only after sein: Die Milch ist alle."
      }
-    ]
+    ],
+    "standalone": {
+     "none": "the same forms as before a noun"
+    },
+    "stem": {
+     "none": "the endings are added to the base form"
+    }
    },
    "forms": {
     "DET;NOM;PL": "alle",
@@ -2652,7 +3002,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "all and English all are the same Germanic word *allaz."
+     "all goes back to Proto-Germanic *allaz."
     ],
     "pitfalls": [
      "alle is plural: alle Kinder sind …; “everything” is alles (singular): Alles ist gut.",
@@ -2661,6 +3011,13 @@
     "subtleties": [
      "It can stand after the verb: Wir sind alle hier (we are all here).",
      "Before the article: alle die Kinder is rare; say alle Kinder or all die Kinder."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "all and English all are the same Germanic word."
+     }
     ]
    }
   },
@@ -2683,6 +3040,12 @@
     "adjAfter": "strong",
     "senseForms": {
      "none": "one meaning"
+    },
+    "standalone": {
+     "none": "the same forms as before a noun"
+    },
+    "stem": {
+     "none": "the endings are added to the base form"
     }
    },
    "forms": {
@@ -2771,17 +3134,24 @@
      }
     ],
     "etymology": {
-     "text": "Plural of einig, from Middle High German einec, from Old High German einag, einīg, from Proto-West Germanic *ainag. More at English any.",
+     "text": "Plural of einig, from Middle High German einec, from Old High German einag, einīg, from Proto-West Germanic *ainag.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "einig- is the German twin of English any (Proto-West Germanic *ainag, from ein, “one”)."
+     "einig- is built from ein (“one”): Proto-West Germanic *ainag."
     ],
     "pitfalls": [
-     "einige is plural: einige Bücher. With an uncountable noun German says etwas: etwas Papier (some paper)."
+     "einige is plural: einige Bücher.\n\nWith an uncountable noun German says etwas: etwas Papier (some paper)."
     ],
     "subtleties": [
      "Singular einiges means “quite a lot (of things)”: Ich weiß einiges darüber."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "einig- is the German twin of English any. einige is related to English any."
+     }
     ]
    }
   },
@@ -2804,6 +3174,12 @@
     "adjAfter": "weak",
     "senseForms": {
      "none": "one meaning"
+    },
+    "standalone": {
+     "none": "the same forms as before a noun"
+    },
+    "stem": {
+     "none": "the endings are added to the base form"
     }
    },
    "forms": {
@@ -2887,17 +3263,24 @@
      }
     ],
     "etymology": {
-     "text": "Plural of manch, from Middle High German manec, from Old High German manag. Cognate with Dutch menig, English many, Polish mnogi.",
+     "text": "Plural of manch, from Middle High German manec, from Old High German manag.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "manch is English many: Old High German manag. The original g survives in mannigfaltig (manifold)."
+     "manch is Old High German manag; the original g survives in mannigfaltig (“manifold”)."
     ],
     "pitfalls": [
-     "manche means “some, but not all” – it is not “many” even though it is the same word as English many."
+     "manche means “some, but not all”; for “many” say viele."
     ],
     "subtleties": [
      "Singular manch- is literary: mancher Mann (many a man), manches Mal (many a time)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "manche is the same word as English many, but means “some, not all”; many is viele."
+     }
     ]
    }
   }

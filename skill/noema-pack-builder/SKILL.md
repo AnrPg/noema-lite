@@ -134,13 +134,26 @@ back `<subject_id>.noema.zip`.
 
 ## Language courses (🌍 Languages)
 Foreign-language courses are not subject packs. **Read `references/LANGUAGE_RULES.md` first — it is binding for every
-task on a language course** (the short form of decisions D1–D19; with the connector: `noema_authoring_guide` part
+task on a language course** (the short form of decisions D1–D21; with the connector: `noema_authoring_guide` part
 "languages"); the full contract is `references/LANGUAGES.md`. Courses are checked with `tools/validate_lang.py`,
 `tools/lang_refcheck.py` and `tools/lang_phenomena.py`. The hard rules, in short:
+0. **Taught through the learner's native language** (D19, `references/language-packs.md` — first): supported natives =
+   the UI locales' languages (en el ru fr ar de hi zh ja it es sq pt tr); a learner reads the explanations in their native language and sees
+   the comparisons in three sections (R1: “From your languages” — the native first, then C1 / C2 —, “Among the languages
+   you are learning”, “From other languages”, folded). Every general text you write names **no language
+   outside the course** and explains nothing through English grammar; every comparison is a **contrast note**
+   `{for, rel, text}` — on every grammar page one for each supported native but the page's language and the five type
+   notes (`type:fusional`, `type:agglutinating`, `type:isolating`, `type:polysynthetic`, `branch:Semitic`);
+   `profile.notes` on words. Every note is **structured** (R2): paragraphs separated by a blank line, `- ` lists,
+   `**bold**` for the one key point, `*italic*` for cited words, examples on their own line (`→ …`); no headings, links,
+   HTML, tables or code. Check with `scripts/lang_facade.py lint <course folder>`.
 1. **A new language starts with its catalogue of phenomena** (`library/languages/_phenomena/<code>.json`, §4.11): every
    special, uncommon or notable feature of the language — script, sounds, the morphology of every part of speech, syntax,
    one concept with several words, one word with several meanings, register, politeness, culture, numbers — with how the
    app records and teaches it and what is missing. The language's `wordFeatures` and its course content come from it.
+   **Then, before any word (R3): the exhaustive per-part-of-speech map of the word's parameters** —
+   `lang/<code>/WORD_PARAMETERS.md` + `wordFeatures` with `prominent` / `order` (the word card shows them right under the
+   word); every word states every one (a value or `{"none": "<why>"}`).
 2. **Every word states its language's whole facade** (`features` per `wordFeatures`, §4.5.1): a value for every parameter
    of its part of speech, or `{"none": "<why>"}` — e.g. Arabic nouns: root, pattern, every plural with the meanings it
    belongs to, dual, human or not; Chinese: measure words, readings and traditional forms per meaning.
@@ -148,8 +161,8 @@ task on a language course** (the short form of decisions D1–D19; with the conn
 4. **Every distinct meaning of a word is its own concept** (D15) — pending until a node teaches it; nuances say `of` the sense.
 5. **One common order of subjects across all languages** (D13, §4.4.3): never teach a subject earlier or later in one language.
 6. **No built-in point of view** (D16): describe a language for a learner of ANY background — its typological profile (`_typology/languages.json`) and phenomena tagged with feature values, covering everything it has or lacks; never "unlike English…". What is new for a learner is computed from their languages.
-8. **Comparison notes, not inline comparisons** (D16, D18): general texts name no outside language; every grammar page gets `notes` for at least 8 languages of the reference set (`_typology/reference.json`), covering all four types.
-9. **Vocabulary is its own track** (D19): sentences for the other aspects may hold up to ⌈30 %⌉ unknown words (each in the lexicon with its full facade); every field you write brings ≥ 2 sentences for every non-vocabulary node before it.
+8. **Contrast notes, not inline comparisons** (D16, D18, D19): general texts name no outside language; every grammar page gets `notes` for every supported native but its own language and the five type notes (`_typology/reference.json`: `supported`, `types`).
+9. **Vocabulary is its own track** (D20): sentences for the other aspects may hold up to ⌈30 %⌉ unknown words (each in the lexicon with its full facade); every field you write brings ≥ 2 sentences for every non-vocabulary node before it.
 7. **The course never ends** (D17): foundations → core C01–C48 → open-ended advanced modules, each placed on the common order.
 
 **Tasks of a language course** (the learner's ✨ new course, ✨ more sentences — connector: `noema_lang_courses` →
@@ -164,6 +177,19 @@ Get the current pack (`noema_get_pack_url`, or the package / file the user gives
 the existing sources keep the files the learner already has, and only NEW sources must bring theirs). **Never change or delete existing ids** (progress is keyed
 by them). Add new chapters (next `chNN`) or `patches/*.json` with `appendBlocks` / `appendExercises`
 (reserve a fresh id range, e.g. `chNN-e7NN`), register the new source in `sources.json` (its file in `work/<id>/sources/`), rebuild, save.
+
+## Translations (optional — only when the user asks)
+A pack is written in one language (`subject.language`). It may also offer other languages; a learner whose app speaks
+one of them sees it, everyone else sees the original with a small language tag. Never required, never invented unasked.
+- **Name and description**: in `subject.json` add `"i18n": { "el": { "title": "…", "description": "…" } }` (also
+  `appTitle`, `searchExamples`, `hero`, `tutor` — only fields the subject has). Locale codes: `el ru fr de it es-ES pt-PT sq
+  tr ar-EG hi ja zh-Hans zh-Hant en` or a bare language (`es`, `pt`).
+- **Chapters**: `translations/<locale>/chNN.json` = the whole chapter (as built: base + patches) translated, with the
+  SAME ids, sections, blocks, exercises, cards, playbooks, pitfalls and answers — only the words change. Translate
+  naturally for learners of that language, keep `$…$` math and code unchanged. A chapter you do not translate stays in
+  the original language. Updating a translated pack: add the new items to every translation too.
+- `make_pack.py` validates both (same ids/structure/answers) and builds the pack with `"v": 2`; `unpack.py` gives the
+  translations back in `translations/`. Contract: `references/CONTENT_SPEC.md` → "Packs in several languages".
 
 ## Quality bar (check before saving)
 - Every source detail is taught **and** tested; nothing invented; obvious source errors corrected and noted.

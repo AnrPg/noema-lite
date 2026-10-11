@@ -14,6 +14,16 @@
 (function (root) {
   'use strict';
   const C = () => root.NoemaCurriculum, L = () => root.NoemaLLM;
+  /** An error's words for the learner (its code's message in the UI language, else its English text — docs/i18n.md §6). */
+  const errW = e => root.NoemaI18n ? root.NoemaI18n.err(e) : String((e && e.message) || e);
+  /** The learner's words for a key of i18n/roadmaps (docs/i18n.md). In the connector (no i18n runtime) the English catalog
+      when it is loaded, else the key: nothing there is for a learner — the tasks, checks and errors for Claude stay English. */
+  function rt(k, p) {
+    const I = root.NoemaI18n; if (I) return I.t(k, p);
+    const m = root.NOEMA_I18N?.en?.m?.[k]; if (m == null) return k;
+    const F = root.IntlMessageFormat, M = F && (F.IntlMessageFormat || F.default || F);
+    try { return M ? String(new M(m, 'en', undefined, { ignoreTag: true }).format(p || {})) : m; } catch (e) { return m; }
+  }
   const BATCH = 5, BATCH_FILES = 2, GRAPH = ['dag', 'audit', 'expand'], IN = 'a:curin:';
   /* A step handed to a run of the learner's Claude is CLAIMED (KV a:curclaim:<cid>:<nid>, a lease): other runs — e.g. the
      hourly scheduled ones, while this one is still building — skip it, so every queued step is prepared once. The claim
@@ -60,6 +70,7 @@
   }
 
   /* ---------- tasks ---------- */
+  /* i18n-ignore-start — the tasks, their errors and the checks are for Claude (the connector, a copied task): English */
   const TITLES = { dag: 'Agent 1 — the Roadmap: every prerequisite, the goal, its applications', audit: 'Agent 1b — are the prerequisites complete?', expand: 'Agent 2 — the whole goal, in depth' };
   const SYS = { audit: 'You are a rigorous curriculum reviewer. Answer only through the requested structure.', expand: 'You are a curriculum graph editor. Answer only through the requested structure.' };
   const wishes = (c, ids) => { const w = ids.filter(i => c.nodes[i]?.planWish).map(i => `- ${i} (“${c.nodes[i].title}”): ${c.nodes[i].planWish}`); return w.length ? `\n\nThe learner's own wishes for these steps (follow them):\n${w.join('\n')}` : ''; };
@@ -137,15 +148,21 @@
     if (t.kind === 'plan') return C().validatePlans(data, t.ids, c);
     return [];
   }
+  /* i18n-ignore-end */
+  /** The task's name for the learner (the app's “Next task”), in their language. */
+  function taskLabel(c, t) {
+    if (t.kind === 'plan') return rt('roadmap.jobs.task.plan', { n: t.ids.length, list: t.ids.map(i => c.nodes[i]?.title).join(' · ') });
+    return rt(t.kind === 'dag' ? 'roadmap.jobs.task.dag' : t.kind === 'audit' ? 'roadmap.jobs.task.audit' : 'roadmap.jobs.task.expand');
+  }
   /** Apply a checked answer to the curriculum (mutates it) → a log line. */
   function apply(c, t, data) {
     let line;
     if (t.kind === 'dag') { line = C().applyDag(c, data); c.stage = 'audit'; }
     else if (t.kind === 'audit') { line = C().applyAudit(c, data); c.stage = 'expand'; }
     else if (t.kind === 'expand') { C().applyExpansion(c, data); line = C().expandLine(data); c.stage = 'plan'; c.title = c.nodes[c.goalId]?.goalTitle || c.title || c.goal; }
-    else if (t.kind === 'plan') { C().applyPlans(c, data); line = `   ✓ planned: ${t.ids.map(i => c.nodes[i]?.title).filter(Boolean).join(', ')}`; }
-    if (isApp(c) && !GRAPH.includes(c.stage)) { c.status = 'ready'; c.error = null; if (c.stage === 'plan' && !Object.values(c.nodes).some(needsPlan)) c.stage = 'done'; }
-    (c.log = c.log || []).push({ t: Date.now(), m: '💬 Claude app — ' + t.title.split(' — ')[0] + ':' + line.replace(/^\s*/, ' ') });
+    else if (t.kind === 'plan') { C().applyPlans(c, data); line = '   ✓ ' + rt('roadmap.jobs.planned', { list: t.ids.map(i => c.nodes[i]?.title).filter(Boolean).join(', ') }); }
+    if (isApp(c) && !GRAPH.includes(c.stage)) { c.status = 'ready'; c.error = null; c.errorInfo = null; if (c.stage === 'plan' && !Object.values(c.nodes).some(needsPlan)) c.stage = 'done'; }
+    (c.log = c.log || []).push({ t: Date.now(), m: '💬 ' + rt('roadmap.jobs.log', { kind: t.kind, line: line.replace(/^\s*/, '') }), via: 'claude-app' });   // via: what the Claude app did (the words depend on the language)
     return line;
   }
   /** The curriculum as it will be once the app has applied the answers still in the inbox (the connector works on this). */
@@ -171,6 +188,7 @@
   const inboxKey = (cid, seq) => `${IN}${cid}:${seq || Date.now().toString(36).padStart(9, '0') + '-' + Math.random().toString(36).slice(2, 6)}`;
 
   /* ---------- texts (the same words in the connector, the copied task and the step bundle) ---------- */
+  /* i18n-ignore-start — what Claude reads: the tasks, a step's brief, the message the learner pastes into a Claude chat */
   const LANGN = c => C().LANG[c.language] || c.language;
   /** A map / plan task as text. mode 'connector' (answer with noema_curriculum_submit) or 'paste' (answer with the JSON only). */
   function taskText(c, t, mode = 'connector', { fileLines = [] } = {}) {
@@ -200,8 +218,11 @@
     if (w.graph) parts.push('build its map');
     if (w.graph || w.toPlan.length) parts.push('plan the chapters of its steps');
     if (w.steps.length) parts.push(`prepare ${Math.min(count, w.steps.length) > 1 ? `the next ${Math.min(count, w.steps.length)} queued steps, one after the other` : 'the next queued step'}`);
-    return `Use the noema-lite connector to work on my noema-lite curriculum “${c.title || c.goal}” (id ${c.id}): ${parts.join(', then ') || 'see what is left to do'}.\nCall noema_curriculum_task with curriculum_id "${c.id}" and follow what it returns; after each accepted answer or saved step call it again — ${count > 1 ? `stop after ${count} prepared steps or` : 'stop after one prepared step or'} when it says there is nothing left. Do not ask me questions — choose sensible defaults.`;
+    return `Use the noema-lite connector to work on my noema-lite curriculum “${c.title || c.goal}” (id ${c.id}): ${parts.join(', then ') || 'see what is left to do'}.\nCall noema_curriculum_task with curriculum_id "${c.id}" and follow what it returns; after each accepted answer or saved step call it again — ${count > 1 ? `stop after ${count} prepared steps or` : 'stop after one prepared step or'} when it says there is nothing left. Do not ask me questions — choose sensible defaults.${talkIn(c)}`;
   }
+  /** The language the learner reads Claude's messages in (engine/llm.js replyLang), when it is not English: the curriculum keeps its own. */
+  const talkIn = c => { const r = L()?.replyLang?.(); return !r || /^en\b/.test(r.code) ? '' : ` Write your messages to me in ${r.name}${r.address ? ` (${r.address})` : ''}; the curriculum itself stays in ${LANGN(c)}.`; };
+  /* i18n-ignore-end */
 
   /* ======================= in the app: the inbox, pasted answers, step bundles and packages ======================= */
   const App = { acc: null, timer: null, last: null, error: null, busy: false, listeners: new Set() };
@@ -216,7 +237,7 @@
     if (n.pack?.status === 'ready' && n.pack.id === e.packId && (!e.version || n.pack.version === e.version)) return false;
     const pack = await root.Noema.getPackById(acc, e.packId);
     await C().Gen.finish(c, e.nid, pack, { stored: true, via: 'claude-app' });
-    toast(`🧭 “${n.title}” — prepared by your Claude app — is ready to study`, 4000); return true;
+    toast('🧭 ' + rt('roadmap.jobs.stepReady', { title: n.title }), 4000); return true;
   }
   /** Fetch the answers waiting in the cloud, check and apply them, delete them. → how many were applied */
   App.poll = async (acc = App.acc) => {
@@ -224,7 +245,7 @@
     App.busy = true; let n = 0;
     try {
       const rows = (await CL.kvRows(IN)).sort((a, b) => a.key.localeCompare(b.key)); App.last = Date.now(); App.error = null;
-      if (rows.length && CL.pull) { try { await CL.pull(acc); } catch (x) { App.error = x.message; return 0; } }   // apply the answers to the newest copy of each curriculum, not to an older one on this device; no sync → they wait in the inbox for the next poll
+      if (rows.length && CL.pull) { try { await CL.pull(acc); } catch (x) { App.error = errW(x); return 0; } }   // apply the answers to the newest copy of each curriculum, not to an older one on this device; no sync → they wait in the inbox for the next poll
       const done = []; let steps = 0;
       for (const r of rows) {
         const cid = r.key.slice(IN.length).split(':')[0];
@@ -235,8 +256,8 @@
           if (e.kind === 'step') { if (await finishStep(acc, c, e)) { n++; steps++; } }
           else if (e.kind === 'assign') {   // 📦 Claude saved a subject for a step the learner named: it teaches that step from now on
             const res = await C().Edit.assign(acc, cid, e.nid, e.packId, { from: e.from || 'claude' });
-            if (res.error && /not in your library/.test(res.error) && Date.now() - (Date.parse(r.updated_at) || 0) < 864e5) continue;   // its card has not synced yet: next time
-            if (res.ok) { n++; toast(`📦 “${e.title || e.packId}” now teaches “${C().get(acc, cid)?.nodes[e.nid]?.title || e.nid}”${res.replan ? ' — that step is being re-planned' : ''}`, 5000); }
+            if (res.code === 'notInLibrary' && Date.now() - (Date.parse(r.updated_at) || 0) < 864e5) continue;   // its card has not synced yet: next time
+            if (res.ok) { n++; toast('📦 ' + rt('roadmap.jobs.attached', { subject: e.title || e.packId, step: C().get(acc, cid)?.nodes[e.nid]?.title || e.nid, replan: res.replan ? 'yes' : 'no' }), 5000); }
             else toast('📦 ' + res.error, 5000);
           }
           else {
@@ -244,7 +265,7 @@
             if (t) { const errs = check(c, t, e.data); if (!errs.length) { apply(c, t, e.data); C().save(acc, c); n++; } else console.warn('[curjobs] answer refused', errs); }
           }
           done.push(r.key);
-        } catch (x) { console.warn('[curjobs]', x); App.error = x.message; }
+        } catch (x) { console.warn('[curjobs]', x); App.error = errW(x); }
       }
       // a queued step whose subject is saved already — its answer was handled on another device, then an older copy of the
       // curriculum put the step back in the queue: finish it here, so it is not prepared a second time
@@ -252,13 +273,13 @@
         if (nd.pack?.status !== 'app') continue;
         const pid = C().packId(c, nid), meta = C().kvGet(acc, 'packmeta:' + pid);
         if (!savedSince(c, nid, meta)) continue;
-        try { if (await finishStep(acc, c, { nid, packId: pid, version: meta.version || null })) { n++; steps++; } } catch (x) { console.warn('[curjobs]', x); App.error = x.message; }
+        try { if (await finishStep(acc, c, { nid, packId: pid, version: meta.version || null })) { n++; steps++; } } catch (x) { console.warn('[curjobs]', x); App.error = errW(x); }
       }
       // the changed curricula reach the cloud BEFORE their answers leave the inbox: the connector always sees one or the other
       if (n) await CL.push(acc);
       for (const k of done) await CL.kvDelete(k).catch(() => { });
       if (steps) await CL.pull(acc).catch(() => { });   // what the connector wrote with a step: its source-file index (👁), its subject's card
-    } catch (x) { App.error = x.message; } finally { App.busy = false; emitA(); }
+    } catch (x) { App.error = errW(x); } finally { App.busy = false; emitA(); }
     if (n) C().Gen.kick();
     return n;
   };
@@ -275,26 +296,28 @@
 
   /** Without the connector: the learner pasted Claude's answer to a copied task → { ok, line } | { errors } */
   App.paste = (acc, cid, taskId, text) => {
-    const c = C().get(acc, cid); if (!c) return { errors: ['This Roadmap is not on this device.'] };
-    const t = byId(c, taskId); if (!t) return { errors: ['This task is already done (or the Roadmap changed) — copy the current task again.'] };
-    let data; try { data = L().parseJSON(text); } catch (e) { return { errors: ['That is not a JSON answer — paste exactly what Claude answered (the JSON object).'] }; }
-    const errs = check(c, t, data); if (errs.length) return { errors: errs };
+    const c = C().get(acc, cid); if (!c) return { errors: [rt('roadmap.jobs.notHere')] };
+    const t = byId(c, taskId); if (!t) return { errors: [rt('roadmap.jobs.taskDone')] };
+    let data; try { data = L().parseJSON(text); } catch (e) { return { errors: [rt('roadmap.jobs.notJson')] }; }
+    const errs = check(c, t, data); if (errs.length) return { errors: errs };   // the checks' words are for Claude (the learner copies them into the chat): English
     const line = apply(c, t, data); C().save(acc, c); C().Gen.kick(); return { ok: true, line };
   };
   /** The task text to copy into any Claude chat (no connector). */
-  App.copyTask = (acc, cid) => { const c = C().get(acc, cid); const t = c && next(c, { want: 'any' }); return t && t.kind !== 'step' && !t.error ? { id: t.id, title: t.title, text: taskText(c, t, 'paste'), files: (t.downloads || []).map(d => d.name), steps: t.ids || [] } : null; };
+  App.copyTask = (acc, cid) => { const c = C().get(acc, cid); const t = c && next(c, { want: 'any' }); return t && t.kind !== 'step' && !t.error ? { id: t.id, title: taskLabel(c, t), text: taskText(c, t, 'paste'), files: (t.downloads || []).map(d => d.name), steps: t.ids || [] } : null; };
   /** ⬇️ A step's bundle for a Claude chat without the connector: the task, the learner's files and the toolkit. */
   App.bundle = async (acc, cid, nid) => {
-    const c = C().get(acc, cid); const t = c && stepSpec(c, nid); if (!t) throw new Error('Step not found.');
+    const c = C().get(acc, cid); const t = c && stepSpec(c, nid); if (!t) throw new Error(rt('roadmap.stepNotFound'));
     if (!root.JSZip && root.NoemaViewer?.jszip) await root.NoemaViewer.jszip();
-    if (!root.JSZip) throw new Error('The package writer is not available.');
+    if (!root.JSZip) throw new Error(rt('roadmap.jobs.noZip'));
     const z = new root.JSZip(), lines = [], missing = [];
     for (const d of t.downloads) {
       const rec = await root.NoemaSrcFiles.get(acc, d.store, d.src).catch(() => null);
+      /* i18n-ignore-start — TASK.md is for Claude */
       if (rec?.blob) { z.file('files/' + d.name, rec.blob); lines.push(`- files/${d.name}${d.pages ? ` (${d.pages} pages)` : ''} — in this bundle`); } else { missing.push(d.name); lines.push(`- ${d.name} — NOT in this bundle (ask the learner to attach it)`); }
+      /* i18n-ignore-end */
     }
     try { const kit = await fetch((root.NOEMA_CONFIG?.siteUrl || '').replace(/\/$/, '') + '/downloads/noema-pack-builder.zip'); if (kit.ok) z.file('noema-pack-builder.zip', await kit.blob()); } catch (e) { }
-    z.file('TASK.md', stepText(c, t, { mode: 'bundle', fileLines: lines }) + `\n\n## The toolkit\nnoema-pack-builder.zip in this bundle is the noema-pack-builder skill: unzip it in your sandbox and follow its SKILL.md (scripts/ has start_subject.py, make_pack.py…). If you have the skill installed already, use that.`);
+    z.file('TASK.md', stepText(c, t, { mode: 'bundle', fileLines: lines }) + `\n\n## The toolkit\nnoema-pack-builder.zip in this bundle is the noema-pack-builder skill: unzip it in your sandbox and follow its SKILL.md (scripts/ has start_subject.py, make_pack.py…). If you have the skill installed already, use that.`);   // i18n-ignore (for Claude)
     const blob = await z.generateAsync({ type: 'blob' });
     const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `${t.packId}-for-claude.zip`; document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 15000);
     return { missing, name: a.download };
@@ -303,13 +326,13 @@
   App.importPackage = async (acc, cid, nid, file) => {
     const SF = root.NoemaSrcFiles; let pack, files = null;
     if (SF && await SF.isZip(file)) { const b = await SF.readBundle(file); pack = b.pack; files = {}; for (const s of SF.packaged(pack)) { const blob = await b.file(s.file); if (blob) files[s.file] = blob; } }
-    else { try { pack = JSON.parse(await file.text()); } catch (e) { throw new Error('This file is not a noema-lite package (.noema.zip) or pack (.json).'); } }
-    if (pack?.format !== 'noema-pack' && pack?.format !== 'noema-pack/v1' && !Array.isArray(pack?.chapters)) throw new Error('This file is not a noema-lite subject pack.');
-    const res = root.NoemaPackCheck?.checkPack(pack); if (res?.errors?.length) throw new Error(`The pack has ${res.errors.length} error(s): ${res.errors.slice(0, 3).join('; ')}`);
-    const c = C().get(acc, cid); if (!c?.nodes[nid]) throw new Error('Step not found.');
+    else { try { pack = JSON.parse(await file.text()); } catch (e) { throw new Error(rt('roadmap.jobs.notPackage')); } }
+    if (pack?.format !== 'noema-pack' && pack?.format !== 'noema-pack/v1' && !Array.isArray(pack?.chapters)) throw new Error(rt('roadmap.jobs.notPack'));
+    const res = root.NoemaPackCheck?.checkPack(pack); if (res?.errors?.length) throw new Error(rt('roadmap.jobs.packErrors', { n: res.errors.length, list: res.errors.slice(0, 3).join('; ') }));   // the errors themselves: English diagnostics (engine/packcheck.js)
+    const c = C().get(acc, cid); if (!c?.nodes[nid]) throw new Error(rt('roadmap.stepNotFound'));
     C().Gen.start(acc); await C().Gen.finish(c, nid, pack, { files, via: 'claude-chat' });
     return { title: c.nodes[nid].title };
   };
 
-  root.NoemaCurJobs = { work, settle, attachTo, savedSince, claimKey, CLAIM, LEASE, next, byId, planGen, check, apply, merged, spec, stepSpec, planBatch, downloadsOf, taskText, stepText, message, inboxKey, needsPlan, prepared, isApp, BATCH, BATCH_FILES, IN, App };
+  root.NoemaCurJobs = { work, settle, attachTo, savedSince, claimKey, CLAIM, LEASE, next, byId, planGen, check, apply, merged, spec, stepSpec, planBatch, downloadsOf, taskText, taskLabel, stepText, message, inboxKey, needsPlan, prepared, isApp, BATCH, BATCH_FILES, IN, App };
 })(typeof window !== 'undefined' ? window : globalThis);

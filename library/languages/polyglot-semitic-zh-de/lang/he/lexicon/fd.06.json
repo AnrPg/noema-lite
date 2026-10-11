@@ -147,7 +147,7 @@
      }
     ],
     "etymology": {
-     "text": "Related to Aramaic אִית (ʾīṯ). Compare Arabic لَيْسَ (laysa, “to not be, there is not”).",
+     "text": "An old Semitic word of existence (Wiktionary). Compare Arabic لَيْسَ (laysa, “to not be, there is not”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -217,7 +217,9 @@
       "cell": "ADP;3;PL;FEM",
       "form": "לָהֶן"
      }
-    ]
+    ],
+    "suffixSet": "singular-noun endings",
+    "withArticle": "לַ (לַשּׁוּק), לָ before הָ (לָעֲבוֹדָה): the ה of the article drops"
    },
    "forms": {
     "ADP": "לְ",
@@ -289,6 +291,27 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": [
+     {
+      "form": "מִשְׁפַּחְתִּי",
+      "number": "SG",
+      "register": "everyday"
+     },
+     {
+      "form": "מִשְׁפְּחוֹתַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": {
+     "none": "not a noun for a person (a family)"
     }
    },
    "forms": {
@@ -409,8 +432,8 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The suffixed forms show the old -at- ending that the plain word hides: מִשְׁפָּחָה → מִשְׁפַּחַת־ → מִשְׁפַּחְתִּי “my family”.",
-     "In biology it is exactly English family: the rank just above the genus (סוּג)."
+     "The suffixed forms show the old -at- ending that the plain word hides:\n→ מִשְׁפָּחָה → מִשְׁפַּחַת־ → מִשְׁפַּחְתִּי “my family”",
+     "In biology it is the rank just above the genus (סוּג)."
     ],
     "pitfalls": [
      "“My family” in everyday speech is הַמִּשְׁפָּחָה שֶׁלִּי; מִשְׁפַּחְתִּי is formal or written.",
@@ -449,6 +472,22 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": [
+     {
+      "form": "הוֹרַי",
+      "number": "PL",
+      "register": "everyday"
+     }
+    ],
+    "genderCue": {
+     "none": "plural only: the ending matches the gender"
+    },
+    "pair": {
+     "none": "the masculine plural names both parents"
     }
    },
    "forms": {
@@ -552,7 +591,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Do not confuse it with הוֹרָה, the Israeli circle dance: that word came through Yiddish from Greek χορός “dance” (English chorus)."
+     "Do not confuse it with הוֹרָה, the Israeli circle dance: that word came through Yiddish from Greek χορός “dance”."
     ],
     "pitfalls": [
      "There is no everyday singular: the formal הוֹרֶה “a parent” appears in official language; “one of my parents” is אֶחָד הַהוֹרִים שֶׁלִּי.",
@@ -560,6 +599,18 @@
     ],
     "subtleties": [
      "The suffixed הוֹרַי “my parents” sounds a little formal; in conversation הַהוֹרִים שֶׁלִּי is usual."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "הוֹרָה, the Israeli circle dance (not הוֹרִים!), goes back to χορός."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "הוֹרָה, the circle dance, is a distant relative of English chorus."
+     }
     ]
    }
   },
@@ -595,7 +646,20 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pluralShape": [
+     "stem change"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": "feminine by meaning (a woman), although it has no feminine ending",
+    "pair": [
+     {
+      "form": "אַבָּא",
+      "lexeme": "he:aba"
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "אִמָּא",
@@ -708,7 +772,7 @@
      "The final -ָא of אִמָּא, אַבָּא and סָבְתָא is the Aramaic “emphatic” (definite) ending — and Hebrew indeed uses these words like names, without הַ."
     ],
     "pitfalls": [
-     "With שֶׁלִּי it usually goes without the article, like a name: אִמָּא שֶׁלִּי (הָאִמָּא שֶׁלִּי is also heard in speech).",
+     "With שֶׁלִּי it usually goes without the article, like a name:\n→ אִמָּא שֶׁלִּי (הָאִמָּא שֶׁלִּי is also heard in speech)",
      "No suffix on this word: “my mum” is אִמָּא שֶׁלִּי, or the formal אִמִּי (from אֵם)."
     ],
     "subtleties": [
@@ -756,7 +820,29 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pluralShape": [
+     "stem change"
+    ],
+    "possessive": [
+     {
+      "form": "אִמִּי",
+      "number": "SG",
+      "register": "everyday"
+     },
+     {
+      "form": "אִמּוֹתַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": "feminine by meaning (a woman), although it has no feminine ending",
+    "pair": [
+     {
+      "form": "אָב",
+      "lexeme": "he:av"
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "אֵם",
@@ -930,7 +1016,23 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pluralShape": [
+     "the plural of another word",
+     "ending of the other gender"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": [
+     {
+      "form": "אִמָּא",
+      "lexeme": "he:ima"
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "אַבָּא",
@@ -1026,7 +1128,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Through the Aramaic of the Gospels (“Abba, Father”) the word reached Greek ἀββᾶς and Latin abbas — the source of English abbot and German Abt."
+     "Through the Gospels (“Abba, Father”) the word travelled far: German Abt “abbot” comes from it."
     ],
     "pitfalls": [
      "Like אִמָּא it goes without the article before שֶׁלִּי: אַבָּא שֶׁלִּי.",
@@ -1034,6 +1136,43 @@
     ],
     "subtleties": [
      "Stress the first syllable: ÁBA."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Greek αββάς “abbot” is this word, taken from the Gospels."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "English abbot comes from this word, through the Gospels and Latin abbas."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "French abbé comes from this word, through the Gospels."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Italian abate comes from this word, through the Gospels."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "Spanish abad comes from this word, through the Gospels."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Portuguese abade comes from this word, through the Gospels."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Russian аббат comes from this word, through the Gospels."
+     }
     ]
    }
   },
@@ -1084,6 +1223,30 @@
        "s3"
       ],
       "note": "in this use in the construct: אֲבִי הַ… “the father of …”"
+     }
+    ],
+    "pluralShape": [
+     "ending of the other gender"
+    ],
+    "possessive": [
+     {
+      "form": "אָבִי",
+      "number": "SG",
+      "register": "everyday"
+     },
+     {
+      "form": "אֲבוֹתַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": [
+     {
+      "form": "אֵם",
+      "lexeme": "he:em"
      }
     ]
    },
@@ -1295,6 +1458,30 @@
       ],
       "note": "only the plural (also “sons”)"
      }
+    ],
+    "pluralShape": [
+     "stem change"
+    ],
+    "possessive": [
+     {
+      "form": "בְּנִי",
+      "number": "SG",
+      "register": "everyday"
+     },
+     {
+      "form": "בָּנַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": [
+     {
+      "form": "בַּת",
+      "lexeme": "he:bat"
+     }
     ]
    },
    "forms": {
@@ -1442,11 +1629,11 @@
      "Arabic اِبْن (ibn) / bin is the same word: Hebrew בֶּן־ and Arabic bin both mean “son of” in names."
     ],
     "pitfalls": [
-     "Before another noun it becomes בֶּן: בֶּן דּוֹד, בֶּן שֵׁשׁ — and the plural בָּנִים becomes בְּנֵי: בְּנֵי דּוֹדִים.",
+     "Before another noun it becomes בֶּן: בֶּן דּוֹד, בֶּן שֵׁשׁ — and the plural בָּנִים becomes בְּנֵי:\n→ בְּנֵי דּוֹדִים",
      "בָּנִים also means simply “boys” (בָּנִים וּבָנוֹת “boys and girls”); “children” in general is יְלָדִים."
     ],
     "subtleties": [
-     "Age in years is said with בֶּן / בַּת and a feminine number, because שָׁנִים “years” is feminine: הוּא בֶּן שָׁלוֹשׁ “he is three” (but בֶּן שְׁלוֹשָׁה חֳדָשִׁים “three months old”)."
+     "Age in years is said with בֶּן / בַּת and a feminine number, because שָׁנִים “years” is feminine:\n→ הוּא בֶּן שָׁלוֹשׁ “he is three” (but בֶּן שְׁלוֹשָׁה חֳדָשִׁים “three months old”)"
     ]
    }
   },
@@ -1512,6 +1699,30 @@
        "s3"
       ],
       "note": "only the plural (also “daughters”)"
+     }
+    ],
+    "pluralShape": [
+     "stem change"
+    ],
+    "possessive": [
+     {
+      "form": "בִּתִּי",
+      "number": "SG",
+      "register": "everyday"
+     },
+     {
+      "form": "בְּנוֹתַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": [
+     {
+      "form": "בֵּן",
+      "lexeme": "he:ben"
      }
     ]
    },
@@ -1715,7 +1926,31 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pluralShape": [
+     "stem change"
+    ],
+    "possessive": [
+     {
+      "form": "אָחִי",
+      "number": "SG",
+      "register": "everyday"
+     },
+     {
+      "form": "אַחַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": [
+     {
+      "form": "אָחוֹת",
+      "lexeme": "he:achot"
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "אָח",
@@ -1870,7 +2105,7 @@
     "pitfalls": [
      "The plural has a patah: אָח → אַחִים, הָאַחִים.",
      "With suffixes it adds -ִי-: אָחִיו “his brother”, אָחִיהָ “her brother” (like אָב).",
-     "אַחִים also means “siblings” for a mixed group: כַּמָּה אַחִים יֵשׁ לְךָ? “how many brothers and sisters do you have?”"
+     "אַחִים also means “siblings” for a mixed group:\n→ כַּמָּה אַחִים יֵשׁ לְךָ? “how many brothers and sisters do you have?”"
     ],
     "subtleties": [
      "אָחִי is both “my brother” and the slang “bro” between friends; only the context tells."
@@ -1920,7 +2155,31 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pluralShape": [
+     "stem change"
+    ],
+    "possessive": [
+     {
+      "form": "אֲחוֹתִי",
+      "number": "SG",
+      "register": "everyday"
+     },
+     {
+      "form": "אַחְיוֹתַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": [
+     {
+      "form": "אָח",
+      "lexeme": "he:ach"
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "אָחוֹת",
@@ -2043,7 +2302,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "A nurse is a “sister” in Hebrew as in British English (Sister), in German (Krankenschwester) and in Russian (медсестра, from медицинская сестра “medical sister”)."
+     "A nurse is a “sister” in Hebrew, as in German Krankenschwester."
     ],
     "pitfalls": [
      "The plural is irregular: אֲחָיוֹת, הָאֲחָיוֹת (not *אָחוֹתוֹת).",
@@ -2051,6 +2310,18 @@
     ],
     "subtleties": [
      "A male nurse is אָח, a female nurse אָחוֹת — the same pair as brother and sister."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "As in British English (Sister), a nurse is an אָחוֹת."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "As in медсестра (медицинская сестра), a nurse is an אָחוֹת “sister”."
+     }
     ]
    }
   },
@@ -2095,7 +2366,29 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pluralShape": [
+     "segolate: vowels rebuilt"
+    ],
+    "possessive": [
+     {
+      "form": "בַּעֲלִי",
+      "number": "SG",
+      "register": "everyday"
+     }
+    ],
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": [
+     {
+      "form": "אִשָּׁה",
+      "lexeme": "he:isha",
+      "senses": [
+       "s1"
+      ]
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "בַּעַל",
@@ -2272,7 +2565,22 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pluralShape": [
+     "ending of the other gender"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": [
+     {
+      "form": "תִּינֹקֶת",
+      "lexeme": "he:tinoket"
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "תִּינוֹק",
@@ -2424,7 +2732,22 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": [
+     {
+      "form": "תִּינוֹק",
+      "lexeme": "he:tinok"
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "תִּינֹקֶת",
@@ -2517,7 +2840,7 @@
      "The pair תִּינוֹק / תִּינֹקֶת works like יֶלֶד / יַלְדָּה: Hebrew names the sex even of a newborn."
     ],
     "pitfalls": [
-     "The plural תִּינוֹקוֹת is the same as that of תִּינוֹק; only agreement shows the gender: שָׁלוֹשׁ תִּינוֹקוֹת (girls), שְׁלוֹשָׁה תִּינוֹקוֹת (boys or a mix)."
+     "The plural תִּינוֹקוֹת is the same as that of תִּינוֹק; only agreement shows the gender:\n→ שָׁלוֹשׁ תִּינוֹקוֹת (girls), שְׁלוֹשָׁה תִּינוֹקוֹת (boys or a mix)"
     ],
     "subtleties": [
      "In full spelling it is written תינוקת, with a ו, although the vowel sign is a short holam (תִּינֹקֶת)."
@@ -2561,7 +2884,19 @@
       ],
       "note": "the plural of סָב; the singular is the separate word סָב / סַבָּא"
      }
-    ]
+    ],
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "plural only: the ending matches the gender"
+    },
+    "pair": {
+     "none": "the masculine plural names both grandparents"
+    }
    },
    "forms": {
     "N;PL;INDF": "סָבִים",
@@ -2659,13 +2994,35 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Like Greek οι παππούδες, Hebrew uses the plural of “grandfather” for “grandparents”; German has a word of its own, Großeltern."
+     "Hebrew uses the plural of “grandfather” for “grandparents”; German has a word of its own, Großeltern."
     ],
     "pitfalls": [
      "It is a masculine plural used for a mixed group: הַסָּבִים = the grandparents (or only the grandfathers)."
     ],
     "subtleties": [
      "At home: סַבָּא וְסָבְתָא שֶׁלִּי; in writing or in a speech: הַסָּבִים שֶׁלִּי."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Like οι παππούδες, the plural of “grandfather” means “grandparents”."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "Like abuelos, the masculine plural means “grandparents”."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Like nonni, the masculine plural means “grandparents”."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Like avós, the plural means “grandparents”."
+     }
     ]
    }
   },
@@ -2696,7 +3053,22 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": {
+     "none": "possessive endings are not used with this word; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": [
+     {
+      "form": "סָבְתָא",
+      "lexeme": "he:savta"
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "סַבָּא",
@@ -2838,7 +3210,31 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": [
+     {
+      "form": "סָבִי",
+      "number": "SG",
+      "register": "everyday"
+     },
+     {
+      "form": "סָבַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": [
+     {
+      "form": "סָבָה",
+      "lexeme": "he:sava"
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "סָב",
@@ -3000,7 +3396,20 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": "feminine by meaning (a woman), although it has no feminine ending",
+    "pair": [
+     {
+      "form": "סַבָּא",
+      "lexeme": "he:saba"
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "סָבְתָא",
@@ -3160,7 +3569,31 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": [
+     {
+      "form": "סָבָתִי",
+      "number": "SG",
+      "register": "everyday"
+     },
+     {
+      "form": "סָבוֹתַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": [
+     {
+      "form": "סָב",
+      "lexeme": "he:sav"
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "סָבָה",
@@ -3305,7 +3738,31 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pluralShape": [
+     "segolate: vowels rebuilt"
+    ],
+    "possessive": [
+     {
+      "form": "נֶכְדִּי",
+      "number": "SG",
+      "register": "everyday"
+     },
+     {
+      "form": "נְכָדַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": [
+     {
+      "form": "נֶכְדָּה",
+      "lexeme": "he:nechda"
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "נֶכֶד",
@@ -3444,7 +3901,22 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pluralShape": [
+     "segolate: vowels rebuilt"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": [
+     {
+      "form": "נֶכֶד",
+      "lexeme": "he:neched"
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "נֶכְדָּה",
@@ -3568,7 +4040,31 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": [
+     {
+      "form": "דּוֹדִי",
+      "number": "SG",
+      "register": "everyday"
+     },
+     {
+      "form": "דּוֹדַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": [
+     {
+      "form": "דּוֹדָה",
+      "lexeme": "he:doda"
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "דּוֹד",
@@ -3679,7 +4175,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Arabic separates the father’s brother عَمّ (ʿamm) from the mother’s brother خَال (khāl), and Turkish too (amca / dayı); Hebrew דּוֹד covers both, like German Onkel, Greek θείος and Russian дядя.",
+     "Arabic separates the father’s brother عَمّ (ʿamm) from the mother’s brother خَال (khāl); Hebrew דּוֹד covers both, like German Onkel.",
      "The name דָּוִד (David) is traditionally explained as “beloved”, from the same root."
     ],
     "pitfalls": [
@@ -3688,6 +4184,28 @@
     ],
     "subtleties": [
      "Children call a grown-up man close to the family דּוֹד, and a woman דּוֹדָה — like German Onkel and Tante."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Like θείος, דּוֹד covers the father’s and the mother’s brother."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Like дядя, דּוֹד covers the father’s and the mother’s brother."
+     },
+     {
+      "for": "hi",
+      "rel": "different",
+      "text": "Hindi separates चाचा (father’s brother) and मामा (mother’s brother); Hebrew דּוֹד covers both."
+     },
+     {
+      "for": "tr",
+      "rel": "different",
+      "text": "Turkish separates amca (father’s brother) and dayı (mother’s brother); Hebrew דּוֹד covers both."
+     }
     ]
    }
   },
@@ -3728,7 +4246,22 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": [
+     {
+      "form": "דּוֹד",
+      "lexeme": "he:dod"
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "דּוֹדָה",
@@ -3799,19 +4332,31 @@
     ],
     "phrases": [],
     "synonyms": [],
-    "synonymsNone": "One word for the father’s and the mother’s sister (Arabic عَمَّة / خَالَة, Turkish hala / teyze).",
+    "synonymsNone": "One word for the father’s and the mother’s sister (Arabic separates them: عَمَّة / خَالَة).",
     "etymology": {
      "text": "דּוֹד “uncle” + the feminine ending ־ָה (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish needs three words where Hebrew has דּוֹדָה: hala (father’s sister), teyze (mother’s sister) and yenge (an uncle’s wife)."
+     "One word does it all: the father’s sister, the mother’s sister and an uncle’s wife are all דּוֹדָה."
     ],
     "pitfalls": [
      "The plural is דּוֹדוֹת; a mixed group of uncles and aunts is דּוֹדִים."
     ],
     "subtleties": [
      "דּוֹדָה is also an uncle’s wife: Hebrew does not separate aunts by blood from aunts by marriage."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "different",
+      "text": "Turkish needs three words where Hebrew has דּוֹדָה: hala (father’s sister), teyze (mother’s sister) and yenge (an uncle’s wife)."
+     },
+     {
+      "for": "hi",
+      "rel": "different",
+      "text": "Hindi needs several words where Hebrew has דּוֹדָה: बुआ (father’s sister), मौसी (mother’s sister), चाची and मामी (uncles’ wives)."
+     }
     ]
    }
   },
@@ -3851,7 +4396,23 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pluralShape": [
+     "compound: both words change",
+     "stem change"
+    ],
+    "possessive": {
+     "none": "a compound: “my …” is said with שֶׁל after it (… שֶׁלִּי); the endings go only on the first word in formal style"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": [
+     {
+      "form": "בַּת דּוֹד",
+      "lexeme": "he:bat-dod"
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "בֶּן דּוֹד",
@@ -3998,7 +4559,23 @@
     },
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pluralShape": [
+     "compound: both words change",
+     "stem change"
+    ],
+    "possessive": {
+     "none": "a compound: “my …” is said with שֶׁל after it (… שֶׁלִּי); the endings go only on the first word in formal style"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": [
+     {
+      "form": "בֶּן דּוֹד",
+      "lexeme": "he:ben-dod"
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "בַּת דּוֹד",
@@ -4143,6 +4720,21 @@
       ],
       "note": "only the plural: nephews and nieces"
      }
+    ],
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": [
+     {
+      "form": "אַחְיָנִית",
+      "lexeme": "he:achyanit"
+     }
     ]
    },
    "forms": {
@@ -4284,7 +4876,22 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": [
+     {
+      "form": "אַחְיָן",
+      "lexeme": "he:achyan"
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "אַחְיָנִית",
@@ -4409,7 +5016,22 @@
     },
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pluralShape": [
+     "compound: the first word changes"
+    ],
+    "possessive": {
+     "none": "a compound: “my …” is said with שֶׁל after it (… שֶׁלִּי); the endings go only on the first word in formal style"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": [
+     {
+      "form": "קְרוֹבַת מִשְׁפָּחָה",
+      "lexeme": "he:krovat-mishpacha"
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "קְרוֹב מִשְׁפָּחָה",
@@ -4497,13 +5119,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Arabic قَرِيب (qarīb) also means both “near” and “relative”; Turkish took the Arabic plural as akraba “relatives”."
+     "Arabic قَرِيب (qarīb) also means both “near” and “relative”."
     ],
     "pitfalls": [
      "Only the first word changes: קְרוֹבֵי מִשְׁפָּחָה; the article goes on the second word: קְרוֹב הַמִּשְׁפָּחָה."
     ],
     "subtleties": [
      "With שֶׁלִּי and no article it means “a relative of mine”: הוּא קְרוֹב מִשְׁפָּחָה שֶׁלִּי."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish akraba “relatives” is the Arabic plural of قَرِيب, the cousin of קָרוֹב."
+     }
     ]
    }
   },
@@ -4541,7 +5170,22 @@
     },
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pluralShape": [
+     "compound: the first word changes"
+    ],
+    "possessive": {
+     "none": "a compound: “my …” is said with שֶׁל after it (… שֶׁלִּי); the endings go only on the first word in formal style"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": [
+     {
+      "form": "קְרוֹב מִשְׁפָּחָה",
+      "lexeme": "he:krov-mishpacha"
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "קְרוֹבַת מִשְׁפָּחָה",
@@ -4624,7 +5268,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The -ַת of קְרוֹבַת is the old feminine ending that every -ָה noun shows before another noun: מִשְׁפָּחָה → מִשְׁפַּחַת, קְרוֹבָה → קְרוֹבַת."
+     "The -ַת of קְרוֹבַת is the old feminine ending that every -ָה noun shows before another noun:\n→ מִשְׁפָּחָה → מִשְׁפַּחַת, קְרוֹבָה → קְרוֹבַת"
     ],
     "pitfalls": [
      "The first word ends in -ַת: קְרוֹבַת מִשְׁפָּחָה, not *קְרוֹבָה מִשְׁפָּחָה."
@@ -4647,6 +5291,12 @@
     "spelling": "שלי",
     "pronForms": {
      "none": "it is already a form of שֶׁל with a personal ending"
+    },
+    "suffixSet": {
+     "none": "no personal endings (see the forms with endings)"
+    },
+    "withArticle": {
+     "none": "a form with a personal ending: no noun follows"
     }
    },
    "note": "שֶׁל + “me”: after a definite noun, הַבַּיִת שֶׁלִּי “my house”. The same for a man and a woman speaking.",
@@ -4668,6 +5318,12 @@
     "spelling": "שלך",
     "pronForms": {
      "none": "it is already a form of שֶׁל with a personal ending"
+    },
+    "suffixSet": {
+     "none": "no personal endings (see the forms with endings)"
+    },
+    "withArticle": {
+     "none": "a form with a personal ending: no noun follows"
     }
    },
    "note": "שֶׁל + “you” (to a man): הַסֵּפֶר שֶׁלְּךָ “your book”. To a woman: שֶׁלָּךְ.",
@@ -4699,6 +5355,12 @@
     "spelling": "שלך",
     "pronForms": {
      "none": "it is already a form of שֶׁל with a personal ending"
+    },
+    "suffixSet": {
+     "none": "no personal endings (see the forms with endings)"
+    },
+    "withArticle": {
+     "none": "a form with a personal ending: no noun follows"
     }
    },
    "note": "שֶׁל + “you” (to a woman): הַסֵּפֶר שֶׁלָּךְ “your book”. To a man: שֶׁלְּךָ.",
@@ -4730,6 +5392,12 @@
     "spelling": "שלו",
     "pronForms": {
      "none": "it is already a form of שֶׁל with a personal ending"
+    },
+    "suffixSet": {
+     "none": "no personal endings (see the forms with endings)"
+    },
+    "withArticle": {
+     "none": "a form with a personal ending: no noun follows"
     }
    },
    "note": "שֶׁל + “him”: הַבַּיִת שֶׁלּוֹ “his house”. It follows the owner, not the thing.",
@@ -4754,6 +5422,12 @@
     "spelling": "שלה",
     "pronForms": {
      "none": "it is already a form of שֶׁל with a personal ending"
+    },
+    "suffixSet": {
+     "none": "no personal endings (see the forms with endings)"
+    },
+    "withArticle": {
+     "none": "a form with a personal ending: no noun follows"
     }
    },
    "note": "שֶׁל + “her”: הַבַּיִת שֶׁלָּהּ “her house”. The final ה is pronounced h in careful speech (shelah).",
@@ -4778,6 +5452,12 @@
     "spelling": "שלנו",
     "pronForms": {
      "none": "it is already a form of שֶׁל with a personal ending"
+    },
+    "suffixSet": {
+     "none": "no personal endings (see the forms with endings)"
+    },
+    "withArticle": {
+     "none": "a form with a personal ending: no noun follows"
     }
    },
    "note": "שֶׁל + “us”: הַבַּיִת שֶׁלָּנוּ “our house”.",
@@ -4802,6 +5482,12 @@
     "spelling": "שלכם",
     "pronForms": {
      "none": "it is already a form of שֶׁל with a personal ending"
+    },
+    "suffixSet": {
+     "none": "no personal endings (see the forms with endings)"
+    },
+    "withArticle": {
+     "none": "a form with a personal ending: no noun follows"
     }
    },
    "note": "שֶׁל + “you” (several people, men or a mixed group): הַבַּיִת שֶׁלָּכֶם. To women only: שֶׁלָּכֶן.",
@@ -4830,6 +5516,12 @@
     "spelling": "שלכן",
     "pronForms": {
      "none": "it is already a form of שֶׁל with a personal ending"
+    },
+    "suffixSet": {
+     "none": "no personal endings (see the forms with endings)"
+    },
+    "withArticle": {
+     "none": "a form with a personal ending: no noun follows"
     }
    },
    "note": "שֶׁל + “you” (several women): הַבַּיִת שֶׁלָּכֶן. In casual speech many use שֶׁלָּכֶם for women too.",
@@ -4858,6 +5550,12 @@
     "spelling": "שלהם",
     "pronForms": {
      "none": "it is already a form of שֶׁל with a personal ending"
+    },
+    "suffixSet": {
+     "none": "no personal endings (see the forms with endings)"
+    },
+    "withArticle": {
+     "none": "a form with a personal ending: no noun follows"
     }
    },
    "note": "שֶׁל + “them” (men or a mixed group): הַבַּיִת שֶׁלָּהֶם. Women only: שֶׁלָּהֶן.",
@@ -4886,6 +5584,12 @@
     "spelling": "שלהן",
     "pronForms": {
      "none": "it is already a form of שֶׁל with a personal ending"
+    },
+    "suffixSet": {
+     "none": "no personal endings (see the forms with endings)"
+    },
+    "withArticle": {
+     "none": "a form with a personal ending: no noun follows"
     }
    },
    "note": "שֶׁל + “them” (women only): הַבַּיִת שֶׁלָּהֶן. In casual speech many use שֶׁלָּהֶם for women too.",
@@ -4952,7 +5656,11 @@
       "cell": "ADP;3;PL;FEM",
       "form": "שֶׁלָּהֶן"
      }
-    ]
+    ],
+    "suffixSet": "singular-noun endings",
+    "withArticle": {
+     "none": "a separate word: the article stays on the noun (שֶׁל הַ…)"
+    }
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",

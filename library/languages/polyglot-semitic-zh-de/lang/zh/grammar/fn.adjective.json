@@ -214,7 +214,7 @@
   "*旧人 → 老人 (旧 is for things); *年轻的手机 → 新手机 (年轻 is for people).",
   "*生日高兴 → 生日快乐 (wishes use 快乐).",
   "Tall people are 高, not 长; a short person is 矮, not 短.",
-  "很好 is one ready-made word (‘fine, very good’): 我很好 ‘I’m fine’."
+  "很好 is one ready-made word (‘fine, very good’):\n→ 我很好 ‘I’m fine’."
  ],
  "evidence": {
   "lemmas": [
@@ -384,7 +384,7 @@
   {
    "for": "el",
    "rel": "different",
-   "text": "Greek adjectives need είμαι and agree in gender, number and case (το σπίτι είναι μεγάλο, μεγάλα σπίτια); Chinese 大 needs no verb and never changes: 房子很大, 大房子."
+   "text": "Greek adjectives need είμαι and agree in gender, number and case (το σπίτι είναι μεγάλο, μεγάλα σπίτια); Chinese 大 needs no verb and never changes:\n→ 房子很大, 大房子."
   },
   {
    "for": "ru",
@@ -399,7 +399,7 @@
   {
    "for": "en",
    "rel": "trap",
-   "text": "English says ‘is big’ with ‘be’; Chinese 很大 has no 是 — *他是高 is the classic mistake. Before a noun the order matches (big house ~ 大房子), but two-syllable adjectives need 的 (漂亮的房间)."
+   "text": "English says ‘is big’ with ‘be’; Chinese 很大 has no 是 — *他是高 is the classic mistake.\n\nBefore a noun the order matches (big house ~ 大房子), but two-syllable adjectives need 的 (漂亮的房间)."
   },
   {
    "for": "fr",
@@ -409,7 +409,7 @@
   {
    "for": "de",
    "rel": "different",
-   "text": "German puts the bare adjective after sein (das Haus ist groß) but adds endings before a noun (ein großes Haus); Chinese 大 never changes, and the predicate needs no verb: 房子很大."
+   "text": "German puts the bare adjective after sein (das Haus ist groß) but adds endings before a noun (ein großes Haus); Chinese 大 never changes, and the predicate needs no verb:\n→ 房子很大."
   },
   {
    "for": "hi",
@@ -419,7 +419,7 @@
   {
    "for": "fa",
    "rel": "trap",
-   "text": "Persian puts the adjective after the noun with the ezafe (khāne-ye bozorg ‘big house’); Chinese puts it before: 大房子. As a predicate Persian needs ast (khāne bozorg ast); Chinese does not: 房子很大."
+   "text": "Persian puts the adjective after the noun with the ezafe (khāne-ye bozorg ‘big house’); Chinese puts it before:\n→ 大房子.\n\nAs a predicate Persian needs ast (khāne bozorg ast); Chinese does not:\n→ 房子很大."
   },
   {
    "for": "mr",
@@ -429,22 +429,22 @@
   {
    "for": "ar",
    "rel": "different",
-   "text": "Arabic adjectives follow the noun and agree in gender, number and definiteness (bayt kabīr, al-bayt al-kabīr); Chinese ones precede it and never change (大房子). As a predicate, Arabic too has no verb in the present (al-baytu kabīr) — like 房子很大."
+   "text": "Arabic adjectives follow the noun and agree in gender, number and definiteness (bayt kabīr, al-bayt al-kabīr); Chinese ones precede it and never change (大房子).\n\nAs a predicate, Arabic too has no verb in the present (al-baytu kabīr) — like 房子很大."
   },
   {
    "for": "he",
    "rel": "different",
-   "text": "Hebrew adjectives follow the noun and agree (bayit gadol, ha-bayit ha-gadol); Chinese ones precede it (大房子). As a predicate Hebrew, like Chinese, uses no verb in the present (ha-bayit gadol ~ 房子很大)."
+   "text": "Hebrew adjectives follow the noun and agree (bayit gadol, ha-bayit ha-gadol); Chinese ones precede it (大房子).\n\nAs a predicate Hebrew, like Chinese, uses no verb in the present (ha-bayit gadol ~ 房子很大)."
   },
   {
    "for": "tr",
    "rel": "similar",
-   "text": "Turkish adjectives precede the noun and never agree (büyük ev ~ 大房子). As a predicate Turkish needs nothing in the 3rd person (ev büyük), close to 房子很大."
+   "text": "Turkish adjectives precede the noun and never agree (büyük ev ~ 大房子).\n\nAs a predicate Turkish needs nothing in the 3rd person (ev büyük), close to 房子很大."
   },
   {
    "for": "ja",
    "rel": "same",
-   "text": "Japanese i-adjectives are predicates by themselves (家は大きい) and precede the noun unchanged (大きい家) — the Chinese pattern: 房子很大, 大房子."
+   "text": "Japanese i-adjectives are predicates by themselves (家は大きい) and precede the noun unchanged (大きい家) — the Chinese pattern:\n→ 房子很大, 大房子."
   },
   {
    "for": "ko",
@@ -464,29 +464,69 @@
   {
    "for": "sw",
    "rel": "different",
-   "text": "Swahili adjectives follow the noun and agree with its class (kitabu kizuri ‘a good book’, vitabu vizuri ‘good books’); Chinese adjectives precede it unchanged: 好书."
+   "text": "Swahili adjectives follow the noun and agree with its class (kitabu kizuri ‘a good book’, vitabu vizuri ‘good books’); Chinese adjectives precede it unchanged:\n→ 好书."
   },
   {
    "for": "lg",
    "rel": "different",
-   "text": "Luganda adjectives follow the noun and agree with its class (omuntu omulungi ‘a good person’, ekitabo ekirungi ‘a good book’); Chinese ones precede the noun and never change: 好人, 好书."
+   "text": "Luganda adjectives follow the noun and agree with its class (omuntu omulungi ‘a good person’, ekitabo ekirungi ‘a good book’); Chinese ones precede the noun and never change:\n→ 好人, 好书."
   },
   {
    "for": "vi",
    "rel": "similar",
-   "text": "Vietnamese adjectives are predicates without a copula, as in Chinese (nhà này rất to ‘this house is very big’ ~ 这个房子很大), but they follow the noun (nhà to ‘a big house’), while Chinese ones precede it: 大房子."
+   "text": "Vietnamese adjectives are predicates without a copula, as in Chinese (nhà này rất to ‘this house is very big’ ~ 这个房子很大), but they follow the noun (nhà to ‘a big house’), while Chinese ones precede it:\n→ 大房子."
   },
   {
    "for": "iu",
    "rel": "similar",
    "text": "Inuktitut expresses qualities as verbs (‘be big’ is a verb word with a person ending) — like Chinese adjectives, which need no 是 — but builds them with suffixes; Chinese 大 is a bare word."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian adjectives need essere and agree (la casa è grande, le case sono grandi) and usually follow the noun (una casa bianca); Chinese 大 needs no verb, never changes and comes first:\n→ 房子很大, 白房子."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian adjectives follow the noun, agree and mostly take a linking article (një shtëpi e madhe ‘a big house’, shtëpia është e madhe); Chinese 大 comes first, needs no 是 and never changes:\n→ 大房子, 房子很大.\n\nThe 的 of 漂亮的房间 is a linker like Albanian e, but it stands between adjective and noun in the opposite order."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese uses ser / estar + an agreeing adjective, usually after the noun (a casa é grande, uma casa branca); Chinese: 房子很大, 白房子 — no verb, no agreement, adjective first.\n\nThe 很 of 房子很大 is only the link: the sentence is a plain ‘a casa é grande’, not ‘muito grande’."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your adjectives take endings for gender, number or case and need a verb ‘to be’ as a predicate, drop both habits:\n\n- 大 is the same for one house or many;\n- 房子很大 has no verb — an unstressed 很 is the usual link (*房子是大 is the classic mistake)."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If your adjectives stand before the noun and never agree, Chinese works the same way (大房子).\n\nThe difference is the predicate: no copula, but 很 + adjective (房子很大), and 的 after two-syllable adjectives before a noun (漂亮的房间)."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "same",
+   "text": "If adjectives in your language already work like verbs — no copula, no agreement — Chinese is familiar: 房子很大, 不大, 大吗？ Check only the order: the adjective comes before the noun (大房子), with 的 after longer ones (漂亮的房间)."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "similar",
+   "text": "If your language expresses qualities as verbs inside a long word, Chinese adjectives are verbs too (房子很大 ‘the house is-big’), but they are separate, unchanging words: negated with 不 (不大), asked with 吗."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If your language puts the adjective after the noun and makes it agree in gender, number and definiteness, reverse the order and drop agreement:\n→ 大房子, 那个大房子.\n\nAs a predicate Chinese, like your nominal sentence, has no verb in the present — 房子很大 — but it adds 很."
   }
  ],
  "seeAlso": [
   {
    "lang": "de",
    "fn": "fn.adjective",
-   "note": "German needs sein (Das Haus ist groß) and, before a noun, endings that agree (ein großes Haus, die großen Häuser); Chinese uses neither a verb nor an ending: 房子很大, 大房子."
+   "note": "German needs sein (Das Haus ist groß) and, before a noun, endings that agree (ein großes Haus, die großen Häuser); Chinese uses neither a verb nor an ending:\n→ 房子很大, 大房子."
   },
   {
    "lang": "ar",
@@ -501,7 +541,7 @@
   {
    "lang": "zh",
    "fn": "fn.copula",
-   "note": "是 links nouns only (S01): 他是老师, but 他很高."
+   "note": "是 links nouns only (S01):\n→ 他是老师, but 他很高."
   },
   {
    "lang": "zh",
@@ -511,7 +551,7 @@
   {
    "lang": "zh",
    "fn": "fn.comparison",
-   "note": "S17 builds on the bare adjective: 他比我高, 他最高."
+   "note": "S17 builds on the bare adjective:\n→ 他比我高, 他最高."
   }
  ]
 }

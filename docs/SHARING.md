@@ -68,6 +68,9 @@ Icons on the subject chips: 🔒 only yours · 🤝 shared with you · 🌍 take
 - The popup: owner (📚 library or 👤 name), language, size, description, statistics (chapters, sections,
   exercises, picture exercises, pictures, flashcards, debug playbooks), the **chapters as a numbered list**
   in a fixed-size box that scrolls (its height follows the screen), sources with links, licence note.
+- 🌐 **Translate**: a title or description in another language than yours can be machine-translated with your own
+  Claude or Gemini key (off until you turn it on — Me › Language & appearance, or the first time you tap it); *Show original*
+  brings the author's words back. Only public and shared texts are ever sent (docs/i18n.md §11).
 
 ## 6. How it is stored (for the curious)
 | Data | Where | Who can read |

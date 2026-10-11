@@ -144,8 +144,8 @@
      "大学 ‘university’ is literally ‘great learning’, the title of a Confucian classic."
     ],
     "pitfalls": [
-     "For the age of people 大 means ‘old(er)’: 他比我大 ‘he is older than me’, 你多大？ ‘how old are you?’ — not 老.",
-     "Rain and wind are 大 ‘heavy, strong’: 雨很大 — not *重."
+     "For the age of people 大 means ‘old(er)’:\n→ 他比我大 ‘he is older than me’, 你多大？ ‘how old are you?’ — not 老.",
+     "Rain and wind are 大 ‘heavy, strong’:\n→ 雨很大 — not *重."
     ],
     "subtleties": [
      "One syllable: it goes straight before the noun (大房子); with 很 it needs 的 (很大的房子).",
@@ -161,7 +161,17 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": "大大的 (AA)",
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -339,7 +349,17 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": "小小的 (AA)",
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -493,7 +513,7 @@
      "People are not 长: a tall person is 高 (他很高)."
     ],
     "subtleties": [
-     "For a long time, 很长时间 and 很久 are both common: 我等了很长时间 / 我等了很久.",
+     "For a long time, 很长时间 and 很久 are both common:\n→ 我等了很长时间 / 我等了很久.",
      "One syllable: it goes straight before the noun (大房子); with 很 it needs 的 (很大的房子)."
     ]
    },
@@ -518,7 +538,17 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": "长长的 (AA)",
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -653,7 +683,7 @@
      "A short PERSON is 矮 ǎi, not 短: 他很矮 ‘he is short’ — 短 is for lengths and durations."
     ],
     "subtleties": [
-     "长 and 短 pair up in many words: 长短 ‘length’, 长处 / 短处 ‘strengths / weaknesses’.",
+     "长 and 短 pair up in many words:\n→ 长短 ‘length’, 长处 / 短处 ‘strengths / weaknesses’.",
      "One syllable: it goes straight before the noun (大房子); with 很 it needs 的 (很大的房子)."
     ]
    },
@@ -666,7 +696,17 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": "短短的 (AA)",
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -799,7 +839,7 @@
      "The opposite of 高 for people and buildings is 矮 ǎi; for levels and prices it is 低 dī."
     ],
     "subtleties": [
-     "Tall people are 高, long things 长: 他很高, 这条街很长.",
+     "Tall people are 高, long things 长:\n→ 他很高, 这条街很长.",
      "One syllable: it goes straight before the noun (大房子); with 很 it needs 的 (很大的房子)."
     ]
    },
@@ -812,7 +852,17 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": "高高的 (AA)",
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -1009,16 +1059,23 @@
     },
     "funFacts": [
      "好 is 女 ‘woman’ + 子 ‘child’ — the classic picture of ‘good’.",
-     "好 is everywhere in greetings: 你好 ‘hello’ (‘you good’), 早上好 ‘good morning’, 好久不见 ‘long time no see’ — English borrowed that last one word for word."
+     "好 is everywhere in greetings:\n→ 你好 ‘hello’ (‘you good’), 早上好 ‘good morning’, 好久不见 ‘long time no see’."
     ],
     "pitfalls": [
-     "很好 is a ready-made unit (‘fine’, ‘very good’), and 不好 is ‘bad, not good’: 天气不好. For ‘very good’ alone, say 很好 or 非常好.",
+     "很好 is a ready-made unit (‘fine’, ‘very good’), and 不好 is ‘bad, not good’:\n→ 天气不好.\n\nFor ‘very good’ alone, say 很好 or 非常好.",
      "好 hǎo ‘good’ vs 好 hào ‘to like’ (爱好 àihào ‘hobby’): same character, two readings."
     ],
     "subtleties": [
-     "好 + verb makes ‘nice to …’: 好吃 (food), 好喝 (drinks), 好看 (looks, films), 好听 (sounds); 难 + verb is the opposite: 难吃, 难看.",
-     "In speech 好 before an adjective is an exclamation: 好冷！ ‘so cold!’",
+     "好 + verb makes ‘nice to …’:\n→ 好吃 (food), 好喝 (drinks), 好看 (looks, films), 好听 (sounds);\n\n难 + verb is the opposite: 难吃, 难看.",
+     "In speech 好 before an adjective is an exclamation:\n→ 好冷！ ‘so cold!’",
      "One syllable: it goes straight before the noun (大房子); with 很 it needs 的 (很大的房子)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English ‘long time no see’ is a word-for-word copy of 好久不见."
+     }
     ]
    },
    "features": {
@@ -1030,7 +1087,17 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": "好好(儿) (AA: ‘properly’, before a verb: 好好学习)",
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -1174,12 +1241,12 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "坏了 alone is a cry of alarm: 坏了！ ‘oh no!’",
+     "坏了 alone is a cry of alarm:\n→ 坏了！ ‘oh no!’",
      "The traditional 壞 has 土 ‘earth’: what rots turns to earth."
     ],
     "pitfalls": [
      "For the quality of things Chinese usually says 不好, not 坏: 天气不好 ‘the weather is bad’, 这本书不好 ‘this book isn’t good’ — 坏 sounds moral or broken.",
-     "坏了 after a thing = broken or spoiled: 车坏了 ‘the car has broken down’."
+     "坏了 after a thing = broken or spoiled:\n→ 车坏了 ‘the car has broken down’."
     ],
     "subtleties": [
      "After a verb or an adjective, 坏 only intensifies: 饿坏了 ‘starving’, 高兴坏了 ‘over the moon’ — nothing is bad.",
@@ -1195,7 +1262,19 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": {
+     "none": "not doubled"
+    },
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -1336,10 +1415,10 @@
      "新闻 ‘news’ = ‘new + heard’; 新西兰 ‘New Zealand’ and 新加坡 ‘Singapore’ also start with 新."
     ],
     "pitfalls": [
-     "New FOOD is 新鲜 xīnxiān ‘fresh’, not just 新: 新鲜的鱼 ‘fresh fish’."
+     "New FOOD is 新鲜 xīnxiān ‘fresh’, not just 新:\n→ 新鲜的鱼 ‘fresh fish’."
     ],
     "subtleties": [
-     "新 before a verb means ‘newly, just’: 新买的手机 ‘a phone I’ve just bought’.",
+     "新 before a verb means ‘newly, just’:\n→ 新买的手机 ‘a phone I’ve just bought’.",
      "One syllable: it goes straight before the noun (大房子); with 很 it needs 的 (很大的房子)."
     ]
    },
@@ -1352,7 +1431,19 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": {
+     "none": "not doubled"
+    },
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -1506,7 +1597,19 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": {
+     "none": "not doubled"
+    },
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -1630,7 +1733,19 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": {
+     "none": "not doubled (年纪轻轻 ‘so young’ is the set phrase)"
+    },
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -1803,8 +1918,8 @@
      "老师 ‘teacher’, 老公 ‘husband’ and 老虎 ‘tiger’ all start with 老, and none of them has to be old: there 老 is only a prefix of respect or habit."
     ],
     "pitfalls": [
-     "Calling someone 老 to their face (你很老) is as rude as in English; say 年纪大 or nothing.",
-     "老 is for people and long-standing things; worn things are 旧: 旧手机, not *老手机 (unless you mean ‘my good old phone’)."
+     "Calling someone 老 to their face (你很老) is rude; say 年纪大 or nothing — though 老 before a surname (老王) is friendly.",
+     "老 is for people and long-standing things; worn things are 旧:\n→ 旧手机, not *老手机 (unless you mean ‘my good old phone’)."
     ],
     "subtleties": [
      "老 + surname for older friends and colleagues (老王), 小 + surname for younger ones (小王); 老大, 老二 are the first and second child.",
@@ -1820,7 +1935,19 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": {
+     "none": "not doubled"
+    },
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -1972,10 +2099,10 @@
     },
     "funFacts": [
      "The four dots 灬 at the bottom are fire — also in 煮 ‘to boil’ and 熟 ‘cooked’.",
-     "热狗 ‘hot dog’ is a word-for-word translation: 热 ‘hot’ + 狗 ‘dog’."
+     "热狗 ‘hot dog’ is a word-for-word translation:\n→ 热 ‘hot’ + 狗 ‘dog’."
     ],
     "pitfalls": [
-     "For something too hot to touch use 烫: 汤很烫 ‘the soup is scalding’; 热 is the temperature in general."
+     "For something too hot to touch use 烫:\n→ 汤很烫 ‘the soup is scalding’;\n\n热 is the temperature in general."
     ],
     "subtleties": [
      "我很热 ‘I’m hot’ is fine in Chinese (unlike German ich bin heiß — say mir ist heiß).",
@@ -1992,7 +2119,17 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": "热热的 (AA); 热乎乎 (ABB)",
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -2142,7 +2279,7 @@
      "The two strokes on the left, 冫, are ice — also in 冰 ‘ice’ and 冬 ‘winter’ (at the bottom)."
     ],
     "pitfalls": [
-     "Food and drinks that are no longer hot are 凉: 饭凉了 ‘the food has gone cold’; 冷 is mostly the weather and how you feel."
+     "Food and drinks that are no longer hot are 凉:\n→ 饭凉了 ‘the food has gone cold’;\n\n冷 is mostly the weather and how you feel."
     ],
     "subtleties": [
      "冷笑话 ‘cold joke’ is a corny joke — the laugh dies of cold.",
@@ -2158,7 +2295,17 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": "冷冰冰 (ABB)",
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -2280,11 +2427,11 @@
      "The 和 of 暖和 is the same character as 和 hé ‘and’, read with a light tone: nuǎnhuo."
     ],
     "pitfalls": [
-     "Warm WATER or food is not 暖和 but 温: 温水 ‘lukewarm water’; 暖和 is for weather, rooms and clothes."
+     "Warm WATER or food is not 暖和 but 温:\n→ 温水 ‘lukewarm water’;\n\n暖和 is for weather, rooms and clothes."
     ],
     "subtleties": [
-     "As a verb it doubles like other two-syllable verbs: 暖和暖和 ‘warm up a bit’ (ABAB).",
-     "Two syllables: as an attribute it takes 的: 暖和的房间."
+     "As a verb it doubles like other two-syllable verbs:\n→ 暖和暖和 ‘warm up a bit’ (ABAB).",
+     "Two syllables: as an attribute it takes 的:\n→ 暖和的房间."
     ]
    },
    "features": {
@@ -2296,7 +2443,15 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": "和 huo is toneless in this word (alone: hé); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": "暖暖和和 (AABB)",
+    "attributive": "with 的"
    }
   },
   {
@@ -2445,7 +2600,7 @@
     ],
     "subtleties": [
      "漂亮话 ‘pretty words’ are fine words that mean nothing.",
-     "Two syllables: as an attribute it takes 的: 漂亮的房间."
+     "Two syllables: as an attribute it takes 的:\n→ 漂亮的房间."
     ]
    },
    "features": {
@@ -2457,7 +2612,15 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": "亮 liang is toneless in this word (alone: liàng); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": "漂漂亮亮 (AABB)",
+    "attributive": "with 的"
    }
   },
   {
@@ -2583,14 +2746,14 @@
      "src": "morphemes: 好 + 看 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "好看 belongs to a family: 好吃 ‘tasty’, 好喝 ‘nice to drink’, 好听 ‘nice to hear’ — and the opposites with 难: 难看, 难吃, 难听."
+     "好看 belongs to a family: 好吃 ‘tasty’, 好喝 ‘nice to drink’, 好听 ‘nice to hear’ — and the opposites with 难:\n→ 难看, 难吃, 难听."
     ],
     "pitfalls": [
-     "A 好看 book or film is interesting, not beautiful: 这本书很好看 ‘this book is a good read’."
+     "A 好看 book or film is interesting, not beautiful:\n→ 这本书很好看 ‘this book is a good read’."
     ],
     "subtleties": [
      "好看 is the most everyday word for good looks; 漂亮 is a bit stronger, 美 more literary.",
-     "Two syllables: as an attribute it takes 的: 好看的包."
+     "Two syllables: as an attribute it takes 的:\n→ 好看的包."
     ]
    },
    "features": {
@@ -2602,7 +2765,19 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": {
+     "none": "not doubled"
+    },
+    "attributive": "with 的"
    }
   },
   {
@@ -2773,7 +2948,7 @@
     ],
     "pitfalls": [
      "In everyday speech 美 alone as a predicate sounds literary or emphatic; for people 漂亮 / 好看 are more usual.",
-     "In compounds 美 often means American: 美元 ‘US dollar’, 美剧 ‘American TV series’."
+     "In compounds 美 often means American:\n→ 美元 ‘US dollar’, 美剧 ‘American TV series’."
     ],
     "subtleties": [
      "美什么美！ ‘what are you so smug about?’ — colloquial 美 = pleased with oneself.",
@@ -2789,7 +2964,17 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": "美美的 (AA)",
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -2909,7 +3094,7 @@
     ],
     "subtleties": [
      "脸色难看 ‘face-colour ugly’ means looking ill or angry, not ugly.",
-     "Two syllables: as an attribute it takes 的: 难看的椅子."
+     "Two syllables: as an attribute it takes 的:\n→ 难看的椅子."
     ]
    },
    "features": {
@@ -2921,7 +3106,19 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": {
+     "none": "not doubled"
+    },
+    "attributive": "with 的"
    }
   },
   {
@@ -3066,10 +3263,10 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Simplified 丑 merged two words: 醜 ‘ugly’ and 丑 ‘clown; the Ox of the zodiac’. In Taiwan they are still written apart."
+     "Simplified 丑 merged two words:\n→ 醜 ‘ugly’ and 丑 ‘clown; the Ox of the zodiac’.\n\nIn Taiwan they are still written apart."
     ],
     "pitfalls": [
-     "丑 is blunt: about a person it hurts. Soften it: 长得不太好看 ‘not very good-looking’."
+     "丑 is blunt: about a person it hurts.\n\nSoften it: 长得不太好看 ‘not very good-looking’."
     ],
     "subtleties": [
      "丑 is mostly about people, animals and photos; for clothes and furniture 难看 is more usual.",
@@ -3097,7 +3294,19 @@
     ],
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": {
+     "none": "not doubled"
+    },
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -3223,11 +3432,11 @@
      "你一个人带三个孩子，真不容易！ — ‘not easy’ is a compliment: it recognises someone’s effort."
     ],
     "pitfalls": [
-     "Before a verb 容易 often means ‘likely to’, not ‘easy’: 他容易生气 ‘he gets angry easily’."
+     "Before a verb 容易 often means ‘likely to’, not ‘easy’:\n→ 他容易生气 ‘he gets angry easily’."
     ],
     "subtleties": [
      "容易 describes how hard something is to DO; 简单 describes the thing itself (a simple dish, a simple question).",
-     "Two syllables: as an attribute it takes 的: 很容易的工作."
+     "Two syllables: as an attribute it takes 的:\n→ 很容易的工作."
     ]
    },
    "features": {
@@ -3239,7 +3448,19 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": {
+     "none": "not doubled"
+    },
+    "attributive": "with 的"
    },
    "contrasts": [
     {
@@ -3395,7 +3616,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "难 + verb = ‘bad to …’: 难吃, 难喝, 难看, 难听 — and 难过 ‘hard to get through’ = ‘sad’.",
+     "难 + verb = ‘bad to …’:\n→ 难吃, 难喝, 难看, 难听 — and 难过 ‘hard to get through’ = ‘sad’.",
      "我太难了 ‘life is so hard for me’ became one of China’s internet catchphrases in 2019."
     ],
     "pitfalls": [
@@ -3403,7 +3624,7 @@
      "‘It’s hard for me’ is 对我来说很难 — *我很难 does not say what you mean."
     ],
     "subtleties": [
-     "难 + verb can also be ‘hard to’: 很难说 ‘hard to say’, 很难找 ‘hard to find’.",
+     "难 + verb can also be ‘hard to’:\n→ 很难说 ‘hard to say’, 很难找 ‘hard to find’.",
      "One syllable: it goes straight before the noun (大房子); with 很 it needs 的 (很大的房子)."
     ]
    },
@@ -3428,7 +3649,19 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": {
+     "none": "not doubled"
+    },
+    "attributive": "with 的"
    }
   },
   {
@@ -3579,7 +3812,7 @@
     ],
     "subtleties": [
      "Bargaining: 能便宜一点吗？ ‘could you make it a bit cheaper?’",
-     "Two syllables: as an attribute it takes 的: 便宜的饭馆."
+     "Two syllables: as an attribute it takes 的:\n→ 便宜的饭馆."
     ]
    },
    "features": {
@@ -3603,7 +3836,17 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": "宜 yi is toneless in this word (alone: yí); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": {
+     "none": "not doubled"
+    },
+    "attributive": "with 的"
    }
   },
   {
@@ -3760,7 +4003,19 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": {
+     "none": "not doubled"
+    },
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -3891,7 +4146,7 @@
      "src": "morphemes: 高 + 兴 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "高兴 is literally ‘high mood’ — like English ‘in high spirits’."
+     "高兴 is literally ‘high mood’."
     ],
     "pitfalls": [
      "兴 here is xìng (4th tone), not xīng as in 兴奋 xīngfèn ‘excited’.",
@@ -3899,7 +4154,14 @@
     ],
     "subtleties": [
      "不高兴 usually means ‘annoyed, upset’, not just ‘not happy’.",
-     "Two syllables: as an attribute it takes 的: 高兴的孩子."
+     "Two syllables: as an attribute it takes 的:\n→ 高兴的孩子."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Like English ‘in high spirits’."
+     }
     ]
    },
    "features": {
@@ -3911,7 +4173,17 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": "高高兴兴 (AABB)",
+    "attributive": "with 的"
    }
   },
   {
@@ -4036,7 +4308,7 @@
     ],
     "subtleties": [
      "开心 ‘open heart’ and 伤心 ‘hurt heart’ are mirror words.",
-     "Two syllables: as an attribute it takes 的: 开心的一天."
+     "Two syllables: as an attribute it takes 的:\n→ 开心的一天."
     ]
    },
    "features": {
@@ -4048,7 +4320,17 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": "开开心心 (AABB)",
+    "attributive": "with 的"
    }
   },
   {
@@ -4198,8 +4480,8 @@
      "‘I’m sorry’ as an apology is 对不起 — 我很难过 is ‘I feel sad’ (or ‘I’m so sorry’ in condolence)."
     ],
     "subtleties": [
-     "Context decides between 难过 ‘sad’ and 难 + 过 ‘hard to cross’: 这条河很难过 ‘this river is hard to cross’.",
-     "Two syllables: as an attribute it takes 的: 难过的事."
+     "Context decides between 难过 ‘sad’ and 难 + 过 ‘hard to cross’:\n→ 这条河很难过 ‘this river is hard to cross’.",
+     "Two syllables: as an attribute it takes 的:\n→ 难过的事."
     ]
    },
    "features": {
@@ -4211,7 +4493,19 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": {
+     "none": "not doubled"
+    },
+    "attributive": "with 的"
    }
   },
   {
@@ -4340,14 +4634,21 @@
      "src": "morphemes: 伤 + 心 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "伤心 ‘hurt-heart’ is the English ‘heartbroken’; its mirror word is 开心 ‘open-heart’ = happy."
+     "伤心 ‘hurt-heart’ is sadness; its mirror word is 开心 ‘open-heart’ = happy."
     ],
     "pitfalls": [
      "伤心 is strong: for small disappointments 难过 or 不高兴 fit better."
     ],
     "subtleties": [
-     "The two halves can split: 伤了他的心 ‘broke his heart’.",
-     "Two syllables: as an attribute it takes 的: 伤心的孩子."
+     "The two halves can split:\n→ 伤了他的心 ‘broke his heart’.",
+     "Two syllables: as an attribute it takes 的:\n→ 伤心的孩子."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "伤心 is the English ‘heartbroken’."
+     }
     ]
    },
    "features": {
@@ -4359,7 +4660,19 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": {
+     "none": "not doubled"
+    },
+    "attributive": "with 的"
    }
   },
   {
@@ -4505,7 +4818,7 @@
     ],
     "pitfalls": [
      "累 lèi ‘tired’ vs 积累 jīlěi ‘to accumulate’: two readings.",
-     "Sleepy is 困, not 累: 我困了 ‘I’m sleepy’, 我累了 ‘I’m worn out’."
+     "Sleepy is 困, not 累:\n→ 我困了 ‘I’m sleepy’, 我累了 ‘I’m worn out’."
     ],
     "subtleties": [
      "辛苦了 ‘you’ve worked hard’ thanks someone for an effort; 你累了吧 ‘you must be tired’ is the friendly way to say the same.",
@@ -4533,7 +4846,19 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": {
+     "none": "not doubled"
+    },
+    "attributive": "with 的"
    }
   },
   {
@@ -4660,7 +4985,7 @@
      "‘I’m hungry’ is usually 我饿了 — the 了 says ‘I’ve become hungry’ (S14); 我很饿 is fine too."
     ],
     "subtleties": [
-     "The opposite is 饱 bǎo ‘full’: 我饱了 ‘I’m full’.",
+     "The opposite is 饱 bǎo ‘full’:\n→ 我饱了 ‘I’m full’.",
      "One syllable: it goes straight before the noun (大房子); with 很 it needs 的 (很大的房子)."
     ]
    },
@@ -4673,7 +4998,19 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": {
+     "none": "not doubled"
+    },
+    "attributive": "with 的"
    }
   },
   {
@@ -4799,7 +5136,19 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": {
+     "none": "not doubled"
+    },
+    "attributive": "with 的"
    }
   },
   {
@@ -4969,11 +5318,11 @@
      "快 first meant ‘pleased’ (with 忄 ‘heart’) — still alive in 快乐 ‘happy’ (生日快乐 ‘happy birthday’)."
     ],
     "pitfalls": [
-     "To say someone DOES something fast you need 得: 他跑得很快 ‘he runs fast’ — *他跑很快 is wrong.",
-     "快…了 means ‘soon’: 快到了 ‘almost there’, 快八点了 ‘it’s nearly eight’."
+     "To say someone DOES something fast you need 得:\n→ 他跑得很快 ‘he runs fast’ — *他跑很快 is wrong.",
+     "快…了 means ‘soon’:\n→ 快到了 ‘almost there’, 快八点了 ‘it’s nearly eight’."
     ],
     "subtleties": [
-     "很快 is also ‘very soon’: 他很快就来 ‘he’s coming soon’.",
+     "很快 is also ‘very soon’:\n→ 他很快就来 ‘he’s coming soon’.",
      "One syllable: it goes straight before the noun (大房子); with 很 it needs 的 (很大的房子)."
     ]
    },
@@ -4986,7 +5335,17 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": "快快(地) (AA: ‘quickly’)",
+    "attributive": "directly or with 的"
    }
   },
   {
@@ -5127,10 +5486,10 @@
      "慢走 ‘walk slowly’ is what a host says to a departing guest — ‘take care’; 慢慢吃 ‘eat slowly’ is ‘enjoy your meal’."
     ],
     "pitfalls": [
-     "Late is 晚, not 慢: 他来晚了 ‘he came late’; 慢 is about speed."
+     "Late is 晚, not 慢:\n→ 他来晚了 ‘he came late’;\n\n慢 is about speed."
     ],
     "subtleties": [
-     "Doubled, 慢慢 is an adverb: 慢慢走 ‘walk slowly, take care’.",
+     "Doubled, 慢慢 is an adverb:\n→ 慢慢走 ‘walk slowly, take care’.",
      "One syllable: it goes straight before the noun (大房子); with 很 it needs 的 (很大的房子)."
     ]
    },
@@ -5143,7 +5502,17 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": "慢慢(地) (AA: ‘slowly’, 慢慢吃)",
+    "attributive": "directly or with 的"
    }
   }
  ]

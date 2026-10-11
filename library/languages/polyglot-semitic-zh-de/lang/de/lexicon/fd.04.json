@@ -37,7 +37,18 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "genitive": [
+     "des Hauses"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": "das Häuschen"
    },
    "forms": {
     "N;NOM;SG": "Haus",
@@ -194,12 +205,12 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German hūs, from Old High German hūs, from Proto-West Germanic *hūs, from Proto-Germanic *hūsą. Cognate with Old Frisian hūs, Low German Hus, Huus, Dutch huis, Icelandic hús, Danish hus, Swedish hus, English house.",
+     "text": "From Middle High German hūs, from Old High German hūs, from Proto-West Germanic *hūs, from Proto-Germanic *hūsą.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
      "The Bauhaus (1919), the famous school of design, means “building house”.",
-     "Haus and English house were the same word a thousand years ago: Old High German and Old English both said hūs."
+     "Old High German said hūs; the vowel became au only later: Haus."
     ],
     "pitfalls": [
      "Plural with umlaut: das Haus – die Häuser (dative den Häusern).",
@@ -208,6 +219,13 @@
     "subtleties": [
      "Haus is a building; your home as a feeling is das Zuhause or das Heim.",
      "Dative dem Haus or (older, set phrases) dem Hause."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Haus and house were the same word a thousand years ago: older English also said hūs."
+     }
     ]
    }
   },
@@ -239,6 +257,17 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Wohnung"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-ung → die",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -348,11 +377,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German wonunge, from Old High German wonunga, from Proto-West Germanic *wunungu, equivalent to wohnen + -ung. Related to Dutch woning (“house, residence”).",
+     "text": "From Middle High German wonunge, from Old High German wonunga, from Proto-West Germanic *wunungu, equivalent to wohnen + -ung.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Wohnung is wohnen (to live, dwell) + -ung; the same pattern makes the noun from many verbs: rechnen → Rechnung."
+     "Wohnung is wohnen (to live, dwell) + -ung.\n\nThe same pattern makes the noun from many verbs: rechnen → Rechnung."
     ],
     "pitfalls": [
      "A Wohnung is a flat; a whole building for one family is a Haus.",
@@ -391,6 +420,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Zimmers"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -493,19 +535,36 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German zimber, from Old High German zimbar, from Proto-West Germanic *timr, from Proto-Germanic *timrą, from Proto-Indo-European *dem- (“build, house”). Cognate with English timber, Swedish timmer, Dutch timmer (“building; construction; room”).",
+     "text": "From Middle High German zimber, from Old High German zimbar, from Proto-West Germanic *timr, from Proto-Germanic *timrą, from Proto-Indo-European *dem- (“build, house”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
      "Zimmer first meant timber – rooms were made of wood; a carpenter is still a Zimmermann.",
-     "The root *dem- “build, house” also gave Greek δόμος (domos, house) and Russian дом (dom)."
+     "Zimmer goes back to the Indo-European root *dem- “build, house”."
     ],
     "pitfalls": [
      "Zimmer is a room with walls. “Room” as space is Platz: Hast du Platz? (Have you got room?), not *Zimmer.",
      "Neuter, plural the same: das Zimmer – die Zimmer (dative den Zimmern)."
     ],
     "subtleties": [
-     "Zimmer is the everyday word in homes and hotels; Raum is more technical (Büroraum, Lagerraum) and also means space."
+     "- Zimmer is the everyday word in homes and hotels;\n- Raum is more technical (Büroraum, Lagerraum) and also means space."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "The root of Zimmer also gave δόμος."
+     },
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "The root of Zimmer also gave дом."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "Zimmer is related to English timber, but means a room."
+     }
     ]
    }
   },
@@ -536,7 +595,18 @@
     },
     "senseForms": {
      "none": "one meaning"
-    }
+    },
+    "genitive": [
+     "der Tür"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": "das Türchen"
    },
    "forms": {
     "N;NOM;SG": "Tür",
@@ -654,11 +724,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German tür, from Old High German turi, from Proto-West Germanic *dur. Compare English door.",
+     "text": "From Middle High German tür, from Old High German turi, from Proto-West Germanic *dur.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Tür, English door, Greek θύρα (thýra) and Russian дверь (dver’) all come from one Indo-European word for door."
+     "Tür goes back to the Indo-European word for door."
     ],
     "pitfalls": [
      "Tür (a door you walk through) ≠ Tor (a gate, a big door; also a goal in football).",
@@ -666,6 +736,23 @@
     ],
     "subtleties": [
      "an der Tür (at the door, dative: where) vs an die Tür (to the door, accusative: where to) – two-way preposition."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Tür and θύρα come from one Indo-European word."
+     },
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "Tür and дверь come from one Indo-European word."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Tür is related to English door."
+     }
     ]
    }
   },
@@ -698,6 +785,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Fensters"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -811,13 +911,30 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Fenster came from Latin fenestra with Roman stone houses and glass; English window is a different word – Old Norse vindauga, “wind-eye”."
+     "Fenster came from Latin fenestra with Roman stone houses and glass."
     ],
     "pitfalls": [
-     "Neuter, although many nouns in -er are masculine: das Fenster. Plural die Fenster, dative den Fenstern."
+     "Neuter, although many nouns in -er are masculine: das Fenster.\n\nPlural die Fenster, dative den Fenstern."
     ],
     "subtleties": [
      "Germans love the Kippfenster: a window that both opens and tilts (kippen) for air."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "different",
+      "text": "English window is a different word, a borrowed “wind-eye”."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Fenster and fenêtre both come from fenestra."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Fenster and finestra both come from fenestra."
+     }
     ]
    }
   },
@@ -850,6 +967,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Wand"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -976,18 +1106,25 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German want, from Old High German want, from Proto-Germanic *wanduz (“fence, wall”), from Proto-Indo-European *wendʰ- (“to turn; bend; wind; twist; braid; weave”). Cognate with English wand although developing a completely distinct meaning.",
+     "text": "From Middle High German want, from Old High German want, from Proto-Germanic *wanduz (“fence, wall”), from Proto-Indo-European *wendʰ- (“to turn; bend; wind; twist; braid; weave”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
      "Wiktionary traces Wand to a root meaning “to wind, to weave” – probably because early walls were woven from branches and plastered with clay."
     ],
     "pitfalls": [
-     "Wand = wall of a room; Mauer = a (stone) wall outside, around a garden or a city – die Berliner Mauer.",
+     "- Wand = wall of a room;\n- Mauer = a (stone) wall outside, around a garden or a city – die Berliner Mauer.",
      "Plural with umlaut: die Wände."
     ],
     "subtleties": [
      "an der Wand (where: dative) / an die Wand (where to: accusative)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "Wand is related to English wand, but it means a wall (inside a room), not a magic stick."
+     }
     ]
    }
   },
@@ -1018,7 +1155,18 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "genitive": [
+     "des Tisches"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": "das Tischchen"
    },
    "forms": {
     "N;NOM;SG": "Tisch",
@@ -1148,7 +1296,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Tisch, English dish and disk all go back through Latin discus to Greek δίσκος (dískos) – first a plate, then a table."
+     "Tisch goes back through Latin discus to Greek δίσκος – first a plate, then a table."
     ],
     "pitfalls": [
      "Masculine: der Tisch, einen Tisch; plural die Tische.",
@@ -1156,6 +1304,18 @@
     ],
     "subtleties": [
      "A desk is a Schreibtisch, literally a “writing table”."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English dish and disk come from the same discus as Tisch."
+     },
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Tisch comes from δίσκος."
+     }
     ]
    }
   },
@@ -1189,7 +1349,18 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "genitive": [
+     "des Stuhles"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": "das Stühlchen"
    },
    "forms": {
     "N;NOM;SG": "Stuhl",
@@ -1327,11 +1498,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German stuol, from Old High German stuol, from Proto-West Germanic *stōl. Cognate with Dutch stoel, English stool, Swedish stol; ultimately from Proto-Indo-European *steh₂- and thus related to stehen.",
+     "text": "From Middle High German stuol, from Old High German stuol, from Proto-West Germanic *stōl. Ultimately from Proto-Indo-European *steh₂- and thus related to stehen.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Stuhl is English stool – the German word kept the general meaning “seat”, the English one narrowed it."
+     "Stuhl kept the general meaning “seat”: any chair is a Stuhl."
     ],
     "pitfalls": [
      "Plural with umlaut: die Stühle.",
@@ -1339,6 +1510,13 @@
     ],
     "subtleties": [
      "In Austria a chair is often called Sessel; in Germany a Sessel is an armchair."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "Stuhl is the same word as English stool, but it means any chair, with a back."
+     }
     ]
    }
   },
@@ -1371,7 +1549,18 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "genitive": [
+     "des Bettes"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": "das Bettchen"
    },
    "forms": {
     "N;NOM;SG": "Bett",
@@ -1495,7 +1684,7 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German bet, bette, from Old High German betti, from Proto-West Germanic *badi, from Proto-Germanic *badją (“plot, grave, resting-place, bed”). Cognate with Dutch bed, English bed, Swedish bädd. Doublet of Beet.",
+     "text": "From Middle High German bet, bette, from Old High German betti, from Proto-West Germanic *badi, from Proto-Germanic *badją (“plot, grave, resting-place, bed”). Doublet of Beet.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -1507,6 +1696,13 @@
     ],
     "subtleties": [
      "Bett is also the duvet in many regions: das Bett aufschütteln = to shake up the duvet."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Bett is related to English bed."
+     }
     ]
    }
   },
@@ -1539,7 +1735,18 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "genitive": [
+     "des Schrankes"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": "das Schränkchen"
    },
    "forms": {
     "N;NOM;SG": "Schrank",
@@ -1696,7 +1903,16 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "genitive": [
+     "der Lampe"
+    ],
+    "number": "singular and plural",
+    "genderCue": "most nouns in -e are feminine (die Lampe)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": "das Lämpchen"
    },
    "forms": {
     "N;NOM;SG": "Lampe",
@@ -1804,11 +2020,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German lampe, from Latin lampada, from Latin lampas. Cognate with English lamp.",
+     "text": "From Middle High German lampe, from Latin lampada, from Latin lampas.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Latin lampas comes from Greek λαμπάς (lampás, torch), from λάμπω (lámpo, to shine) – so the word sounds familiar in Greek λάμπα, Russian лампа and Turkish lamba."
+     "Latin lampas comes from Greek λαμπάς (lampás, torch), from λάμπω (lámpo, to shine)."
     ],
     "pitfalls": [
      "Feminine: die Lampe, plural Lampen.",
@@ -1816,6 +2032,23 @@
     ],
     "subtleties": [
      "Lampe is the object; Licht is the light it gives (Mach das Licht aus!)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Lampe is λάμπα, from λάμπω."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Lampe is лампа."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Lampe is related to English lamp."
+     }
     ]
    }
   },
@@ -1848,7 +2081,18 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "genitive": [
+     "des Buches"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": "das Büchlein"
    },
    "forms": {
     "N;NOM;SG": "Buch",
@@ -1979,7 +2223,7 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German buoch, from Old High German buoh, from Proto-West Germanic *bōk, from Proto-Germanic *bōks. Cognate with English book.",
+     "text": "From Middle High German buoch, from Old High German buoh, from Proto-West Germanic *bōk, from Proto-Germanic *bōks.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -1990,6 +2234,13 @@
     ],
     "subtleties": [
      "wie er im Buche steht (a textbook example) keeps an old dative ending -e."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Buch is related to English book."
+     }
     ]
    }
   },
@@ -2027,6 +2278,19 @@
     ],
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Stiftes"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -2167,7 +2431,7 @@
      "Plural Stifte, dative Stiften."
     ],
     "subtleties": [
-     "Stift is the general word; if you need a ballpoint ask for a Kugelschreiber (Kuli), for a fountain pen a Füller."
+     "Stift is the general word.\n\nIf you need a ballpoint ask for a Kugelschreiber (Kuli), for a fountain pen a Füller."
     ]
    }
   },
@@ -2202,6 +2466,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Papiers"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -2333,7 +2610,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Papier goes back through Latin papyrus to Greek πάπυρος (pápyros); paper itself was invented in China – Chinese 纸 (zhǐ)."
+     "Papier goes back through Latin papyrus to Greek πάπυρος (pápyros).\n\nPaper itself was invented in China – Chinese 纸 (zhǐ)."
     ],
     "pitfalls": [
      "A sheet of paper is ein Blatt Papier, not *ein Papier.",
@@ -2378,6 +2655,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Telefons"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -2475,7 +2765,7 @@
      }
     ],
     "etymology": {
-     "text": "Older spelling Telephon; from Ancient Greek τῆλε (têle, “afar”) + φωνή (phōnḗ, “sound; voice”). Wiktionary’s entry for English telephone notes that the English word was modelled on German Telephon.",
+     "text": "Older spelling Telephon; from Ancient Greek τῆλε (têle, “afar”) + φωνή (phōnḗ, “sound; voice”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -2488,6 +2778,18 @@
     ],
     "subtleties": [
      "Today das Telefon is the phone in general or the landline; the mobile in your pocket is das Handy."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Telefon is τηλέφωνο: τῆλε + φωνή."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English telephone was modelled on German Telephon."
+     }
     ]
    }
   },
@@ -2525,6 +2827,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Handys"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -2620,14 +2935,21 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Handy is a German “pseudo-anglicism”: it looks English but English speakers say mobile or cell phone."
+     "Handy is a German coinage that only looks borrowed."
     ],
     "pitfalls": [
-     "Handy is not English for a phone: in English it means “useful”. A German saying Handy in London will not be understood.",
+     "Handy ([ˈhɛndi]) is the everyday word; Mobiltelefon is formal, and in Switzerland Natel is common.",
      "Plural Handys (with -s, like most nouns in -y)."
     ],
     "subtleties": [
      "In Switzerland the mobile is often called Natel (an old brand name)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "Handy is not English for a phone (in English handy means useful): English says mobile or cell phone."
+     }
     ]
    }
   },
@@ -2661,6 +2983,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Schlüssels"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -2763,7 +3098,7 @@
     "synonyms": [],
     "synonymsNone": "No everyday synonym; a code or password is a Code or Passwort, a solution a Lösung.",
     "etymology": {
-     "text": "From Middle High German slüȥȥel, from Old High German sluȥȥil, from Proto-West Germanic *slutil, derived from *sleutan (“to close”), from which also modern German schließen. Cognate with Dutch sleutel and English slot.",
+     "text": "From Middle High German slüȥȥel, from Old High German sluȥȥil, from Proto-West Germanic *slutil, derived from *sleutan (“to close”), from which also modern German schließen.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -2775,6 +3110,13 @@
     ],
     "subtleties": [
      "Many technical keys are Schlüssel too: Notenschlüssel (clef), Schraubenschlüssel (spanner)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Schlüssel is related to English slot (as in a bolt that locks)."
+     }
     ]
    }
   },
@@ -2807,7 +3149,16 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "genitive": [
+     "der Tasche"
+    ],
+    "number": "singular and plural",
+    "genderCue": "most nouns in -e are feminine (die Lampe)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": "das Täschchen"
    },
    "forms": {
     "N;NOM;SG": "Tasche",
@@ -2938,7 +3289,7 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German tasche, from Old High German taska, tasca. Further origin unknown. Cognate with Dutch tas, Middle Low German tasche (“bag, pouch”), Old Norse taska (“bag, purse”).",
+     "text": "From Middle High German tasche, from Old High German taska, tasca. Further origin unknown.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -2980,7 +3331,16 @@
     },
     "senseForms": {
      "none": "one meaning"
-    }
+    },
+    "genitive": [
+     "der Tasse"
+    ],
+    "number": "singular and plural",
+    "genderCue": "most nouns in -e are feminine (die Lampe)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": "das Tässchen"
    },
    "forms": {
     "N;NOM;SG": "Tasse",
@@ -3081,18 +3441,30 @@
      }
     ],
     "etymology": {
-     "text": "From Late Middle High German *tasse, from Middle French tasse, from Arabic طَاس (ṭās), variant of طَسْت (ṭast), from Middle Persian tšt’ (tašt). Cognate with Modern French tasse, Dutch tas.",
+     "text": "From Late Middle High German *tasse, from Middle French tasse, from Arabic طَاس (ṭās), variant of طَسْت (ṭast), from Middle Persian tšt’ (tašt).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Tasse came from Arabic طَاس (ṭās, a bowl) through French – the Arabic word is also behind Turkish tas (bowl)."
+     "Tasse came from Arabic طَاس (ṭās, a bowl) through French."
     ],
     "pitfalls": [
-     "No “of”: eine Tasse Kaffee (a cup of coffee), zwei Tassen Tee.",
+     "Container and contents stand side by side: eine Tasse Kaffee, zwei Tassen Tee.",
      "die Tasse (cup) ≠ die Tasche (bag)."
     ],
     "subtleties": [
      "A Becher is a mug without a saucer; Tasse is the classic cup, often with a saucer (Untertasse)."
+    ],
+    "notes": [
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Tasse is the same word as tasse – and means the same: a cup."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "No “of”: a cup of coffee is eine Tasse Kaffee."
+     }
     ]
    }
   },
@@ -3141,7 +3513,18 @@
       ],
       "note": "the material: no plural, often without an article (aus Glas)"
      }
-    ]
+    ],
+    "genitive": [
+     "des Glases"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": "das Gläschen"
    },
    "forms": {
     "N;NOM;SG": "Glas",
@@ -3268,18 +3651,30 @@
      }
     ],
     "etymology": {
-     "text": "From Old High German glas, gles, from Proto-West Germanic *glas, from Proto-Germanic *glasą, from Proto-Indo-European *ǵʰel- (“to shine, glimmer, glow”). Compare Low German Glas, Dutch glas, English glass.",
+     "text": "From Old High German glas, gles, from Proto-West Germanic *glas, from Proto-Germanic *glasą, from Proto-Indo-European *ǵʰel- (“to shine, glimmer, glow”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
      "Glas comes from a root meaning “to shine” – a fitting origin for glass."
     ],
     "pitfalls": [
-     "Plural with umlaut: die Gläser. But after a number, as a measure: zwei Glas Bier (two glasses of beer).",
+     "Plural with umlaut: die Gläser.\n\nBut after a number, as a measure:\n→ zwei Glas Bier (two glasses of beer)",
      "Glasses for the eyes are a Brille, not Gläser."
     ],
     "subtleties": [
-     "ein Glas Wasser – no “of”, like eine Tasse Kaffee."
+     "ein Glas Wasser – container and contents side by side, like eine Tasse Kaffee."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Glas is related to English glass."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "No “of”: a glass of water is ein Glas Wasser."
+     }
     ]
    }
   },
@@ -3310,6 +3705,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Tellers"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -3414,11 +3822,23 @@
      "Teller comes from French tailloir, from tailler “to cut”: a medieval plate was a board to cut meat on."
     ],
     "pitfalls": [
-     "English teller (bank clerk) is a false friend.",
+     "der Teller is masculine; a soup plate is ein tiefer Teller, a dinner plate ein flacher Teller.",
      "Plural = singular: die Teller (dative den Tellern)."
     ],
     "subtleties": [
-     "ein Teller Suppe – no “of”, like eine Tasse Kaffee."
+     "ein Teller Suppe – container and contents side by side, like eine Tasse Kaffee."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "Teller is a plate, not a bank clerk."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "No “of”: a plate of soup is ein Teller Suppe."
+     }
     ]
    }
   }

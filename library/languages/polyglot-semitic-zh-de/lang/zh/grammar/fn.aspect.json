@@ -176,7 +176,7 @@
  "traps": [
   "*他没来了 → 他没来.",
   "*我没去北京过 → 我没去过北京 (过 right after the verb).",
-  "*昨天我在家了 — no 了 for a plain past state: 昨天我在家.",
+  "*昨天我在家了 — no 了 for a plain past state:\n→ 昨天我在家.",
   "*以前我常常去了公园 → 以前我常常去公园 (a habit takes no 了).",
   "*他正在到 → 他快到了 (到 cannot be ‘in progress’).",
   "他去过北京 (has been and come back) ≠ 他去北京了 (has gone there).",
@@ -298,12 +298,12 @@
   {
    "for": "el",
    "rel": "similar",
-   "text": "Greek marks aspect inside the verb (έφαγα ‘I ate it’ / έτρωγα ‘I was eating’), and the split is close to 了 vs 在: complete vs ongoing. But Greek always marks tense as well; Chinese marks only aspect, and only when it matters."
+   "text": "Greek marks aspect inside the verb (έφαγα ‘I ate it’ / έτρωγα ‘I was eating’), and the split is close to 了 vs 在: complete vs ongoing.\n\nBut Greek always marks tense as well; Chinese marks only aspect, and only when it matters."
   },
   {
    "for": "ru",
    "rel": "similar",
-   "text": "Russian aspect pairs (съел / ел) feel like 吃了 / 吃: the perfective ‘done’ ≈ verb + 了. But Russian marks aspect on every verb, Chinese only when it matters — and 了 also works in the future (明天吃了饭我们走)."
+   "text": "Russian aspect pairs (съел / ел) feel like 吃了 / 吃: the perfective ‘done’ ≈ verb + 了.\n\nBut Russian marks aspect on every verb, Chinese only when it matters — and 了 also works in the future (明天吃了饭我们走)."
   },
   {
    "for": "es",
@@ -313,7 +313,7 @@
   {
    "for": "en",
    "rel": "trap",
-   "text": "The English past tense is not 了: ‘yesterday I was at home’ is 昨天我在家, without 了. ‘I have been to Beijing’ ~ 我去过北京; ‘he is eating’ ~ 他在吃饭; ‘I bought two tickets’ ~ 我买了两张票."
+   "text": "The English past tense is not 了: ‘yesterday I was at home’ is 昨天我在家, without 了.\n\n‘I have been to Beijing’ ~ 我去过北京; ‘he is eating’ ~ 他在吃饭; ‘I bought two tickets’ ~ 我买了两张票."
   },
   {
    "for": "fr",
@@ -323,7 +323,7 @@
   {
    "for": "de",
    "rel": "different",
-   "text": "German has no aspect forms; ich habe gegessen covers both 吃了 and 吃过. Chinese chooses: 我吃了 (done, now), 我吃过 (ever). gerade ~ 正在."
+   "text": "German has no aspect forms; ich habe gegessen covers both 吃了 and 吃过.\n\nChinese chooses: 我吃了 (done, now), 我吃过 (ever). gerade ~ 正在."
   },
   {
    "for": "hi",
@@ -348,7 +348,7 @@
   {
    "for": "he",
    "rel": "new",
-   "text": "Modern Hebrew has tenses but no aspect forms (akhalti ‘I ate’ covers 吃了 and 吃过); Chinese has no tenses but marks aspect: 吃了, 吃过, 在吃."
+   "text": "Modern Hebrew has tenses but no aspect forms (akhalti ‘I ate’ covers 吃了 and 吃过); Chinese has no tenses but marks aspect:\n→ 吃了, 吃过, 在吃."
   },
   {
    "for": "tr",
@@ -373,7 +373,7 @@
   {
    "for": "hu",
    "rel": "similar",
-   "text": "Hungarian preverbs often mark completion (megettem ‘I ate it up’ vs ettem ‘I ate, I was eating’); Chinese uses 了 after the verb: 我吃了."
+   "text": "Hungarian preverbs often mark completion (megettem ‘I ate it up’ vs ettem ‘I ate, I was eating’); Chinese uses 了 after the verb:\n→ 我吃了."
   },
   {
    "for": "sw",
@@ -393,7 +393,47 @@
   {
    "for": "iu",
    "rel": "different",
-   "text": "Inuktitut marks time and aspect with suffixes inside the verb word (nirilauqtunga ‘I ate’); Chinese adds separate particles to an unchanged verb: 我吃了."
+   "text": "Inuktitut marks time and aspect with suffixes inside the verb word (nirilauqtunga ‘I ate’); Chinese adds separate particles to an unchanged verb:\n→ 我吃了."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Italian ho mangiato / mangiavo split complete and ongoing in the past; Chinese 吃了 / 在吃 split them without any tense. sto mangiando ~ 我在吃; sei mai stato a Pechino? ~ 你去过北京吗？ But ieri ero a casa is 昨天我在家 — no 了."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Albanian hëngra ‘I ate’ / haja ‘I was eating’ split complete and ongoing, and po + verb marks ‘in progress’ (po ha ‘he is eating’) — a close cousin of 在吃.\n\nBut Albanian always marks tense as well; Chinese marks only aspect, and only when it matters:\n→ 吃了, 在吃, 吃过."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "Portuguese comi / comia split complete and ongoing in the past; Chinese 吃了 / 在吃 do it without tense. estou a comer ‘I am at eating’ is the same picture as 我在吃 (在 ‘be at’).\n\nCareful: tenho comido is ‘I have been eating (lately)’, not 我吃过 ‘I have eaten (before)’."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your verb endings fuse tense, person and aspect, take them apart: Chinese never marks tense or person; it adds 了 (done), 过 (experienced) or 在 (in progress) only when that matters, and a time word says when."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If your language stacks suffixes for ‘done’, ‘ongoing’ and tense, Chinese has the same ideas as separate words — 了 and 过 after the verb, 在 before it — and no tense marker at all:\n→ 昨天我在家."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "same",
+   "text": "If your language uses particles for ‘done’, ‘ongoing’ and ‘ever’, 了, 在 and 过 are the same kind of tool.\n\nWatch the slots: 在 before the verb, 了 / 过 after it, and 了 drops after 没."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If aspect and tense are suffixes inside your verb word, Chinese takes them out: the verb stays bare, and separate words around it add ‘done’ (了), ‘ever’ (过) or ‘in progress’ (在)."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If your verb has two stems — a completed one with suffixes and an incomplete one with prefixes — note that 了 is not that completed stem:\n\n- it says ‘done’, not ‘past’ (昨天我在家 has no 了);\n- it works in the future too (明天吃了饭我们走)."
   }
  ],
  "seeAlso": [
@@ -415,7 +455,7 @@
   {
    "lang": "zh",
    "fn": "fn.negation",
-   "note": "没 (S08) is the negation of completed and experienced actions: 没来, 没去过."
+   "note": "没 (S08) is the negation of completed and experienced actions:\n→ 没来, 没去过."
   }
  ]
 }

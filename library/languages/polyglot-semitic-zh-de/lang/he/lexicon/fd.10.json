@@ -15,6 +15,12 @@
     "agreement": "masculine",
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "suffix": {
+     "none": "not a personal pronoun: it has no ending of its own"
+    },
+    "object": {
+     "none": "not a personal pronoun: as an object it stands after אֶת as it is (אֶת זֶה, אֶת מִי)"
     }
    },
    "contrasts": [
@@ -131,14 +137,14 @@
      }
     ],
     "etymology": {
-     "text": "Cognates such as Aramaic מָה (mā, “what”), Arabic مَا (mā, “what”) and Ugaritic 𐎎𐎅 (mh) can be found across the Central Semitic languages.",
+     "text": "Cognates such as Arabic مَا (mā, “what”) can be found across the Central Semitic languages.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
      "The Passover Seder’s Four Questions open with מַה נִּשְׁתַּנָּה הַלַּיְלָה הַזֶּה — “What makes this night different?”"
     ],
     "pitfalls": [
-     "No verb “is” is needed: מָה זֶה? = What is this?",
+     "No verb “to be” is needed: מָה זֶה? = What is this?",
      "“Which …?” is usually אֵיזֶה / אֵיזוֹ, not מָה: אֵיזֶה יָרָק? (which vegetable?)."
     ],
     "subtleties": [
@@ -284,6 +290,12 @@
     "agreement": "both",
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "suffix": {
+     "none": "not a personal pronoun: it has no ending of its own"
+    },
+    "object": {
+     "none": "not a personal pronoun: as an object it stands after אֶת as it is (אֶת זֶה, אֶת מִי)"
     }
    },
    "note": "Invariable: מִי הוּא? מִי הִיא? מִי הֵם? — the same word for one person or many, man or woman.",
@@ -373,7 +385,7 @@
     "synonyms": [],
     "synonymsNone": "No synonym: מִי is the only “who?”.",
     "etymology": {
-     "text": "Compare Ugaritic 𐎎𐎊 (my), Phoenician 𐤌𐤉 (my), El-Amarna Akkadian mīya “who”, and Levantine, Egyptian and Hijazi Arabic مين (mīn) “who” (Wiktionary).",
+     "text": "An old Semitic word; compare Levantine, Egyptian and Hijazi Arabic مين (mīn) “who” (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -489,11 +501,11 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The Mishnah opens with a “when?”: מֵאֵימָתַי קוֹרִין אֶת שְׁמַע בְּעַרְבִית — “From when may one recite the Shema in the evening?” (Berakhot 1:1).",
+     "The Mishnah opens with a “when?”:\n→ מֵאֵימָתַי קוֹרִין אֶת שְׁמַע בְּעַרְבִית — “From when may one recite the Shema in the evening?” (Berakhot 1:1)",
      "Arabic مَتَى (matā) is the same word."
     ],
     "pitfalls": [
-     "מָתַי only asks. The “when” of a statement (“when I come …”) is כְּשֶׁ… or כַּאֲשֶׁר (lesson 18).",
+     "- מָתַי only asks.\n- The “when” of a statement (“when I come …”) is כְּשֶׁ… or כַּאֲשֶׁר (lesson 18).",
      "Unvowelled מתי can also be the name מַתִּי (Mati) — context decides."
     ],
     "subtleties": [
@@ -614,7 +626,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek Πώς σε λένε; Russian Как тебя зовут? and German Wie heißt du? ask the name with “how” too — exactly like אֵיךְ קוֹרְאִים לְךָ?"
+     "German Wie heißt du? asks the name with “how” too — exactly like אֵיךְ קוֹרְאִים לְךָ?"
     ],
     "pitfalls": [
      "“What is your name?” is אֵיךְ קוֹרְאִים לְךָ? — with “how”, not “what” (or מָה הַשֵּׁם שֶׁלְּךָ?).",
@@ -622,6 +634,43 @@
     ],
     "subtleties": [
      "The final ךְ carries a shva and is said ech, one syllable."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Like Πώς σε λένε;, the name is asked with “how”."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Like Как тебя зовут?, the name is asked with “how”."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Like Come ti chiami?, the name is asked with “how”."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Like Como te chamas?, the name is asked with “how”."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "Like ¿Cómo te llamas?, the name is asked with “how”."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Like Comment tu t’appelles ?, the name is asked with “how”."
+     },
+     {
+      "for": "sq",
+      "rel": "same",
+      "text": "Like Si quhesh?, the name is asked with “how”."
+     }
     ]
    }
   },
@@ -731,7 +780,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The cry “Ηλί, ηλί, λαμά σαβαχθανί” of the Greek Gospels (Matthew 27:46) quotes Psalm 22 — the same לָמָה.",
+     "The cry “Eli, Eli, lama sabachthani” of the Gospels (Matthew 27:46) quotes Psalm 22 — the same לָמָה.",
      "Wiktionary also gives the spelling לָמָה without the dot in the מ."
     ],
     "pitfalls": [
@@ -740,6 +789,13 @@
     ],
     "subtleties": [
      "לָמָּה can sound like a reproach (לָמָּה לֹא?! “why not?!”); the same question with מַדּוּעַ sounds like a news report."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "In the Gospels it is Ηλί, ηλί, λαμά σαβαχθανί — λαμά is this word."
+     }
     ]
    }
   },
@@ -842,7 +898,14 @@
      "The final ־ַעַ is a “stolen” patah, said before the ע: ma-DU-a."
     ],
     "subtleties": [
-     "Both mean exactly “why”: the difference is only the register — like German warum (both) vs. English why / wherefore."
+     "Both mean exactly “why”: the difference is only the register — German has one word, warum, for both."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "The difference is register only — a little like why and the old wherefore."
+     }
     ]
    }
   },
@@ -862,7 +925,8 @@
     "position": "before",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "nounAfter": "an indefinite noun, with which it agrees: אֵיזֶה סֵפֶר?, אֵיזוֹ מִטָּה?, אֵילוּ סְפָרִים?"
    },
    "forms": {
     "DET;SG;MASC": "אֵיזֶה",
@@ -960,14 +1024,26 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek ποιος / ποια / ποιο changes for gender just like אֵיזֶה / אֵיזוֹ."
+     "It changes for gender and number like an adjective — אֵיזֶה סֵפֶר, אֵיזוֹ כּוֹס, אֵילוּ סְפָרִים — as German welcher / welche / welches does."
     ],
     "pitfalls": [
-     "It agrees with the noun: אֵיזֶה (m.), אֵיזוֹ (f.), אֵילוּ (plural). In everyday speech many people say אֵיזֶה for all — but write אֵיזוֹ before a feminine noun.",
+     "- It agrees with the noun:\n→ אֵיזֶה (m.), אֵיזוֹ (f.), אֵילוּ (plural)\n- In everyday speech many people say אֵיזֶה for all — but write אֵיזוֹ before a feminine noun.",
      "Unvowelled אילו is also אֵלּוּ “these” and אִלּוּ “if (only)” — only the vowels tell them apart."
     ],
     "subtleties": [
      "מָה + noun is not “which …?”: “which book?” is אֵיזֶה סֵפֶר?, never *מָה סֵפֶר?"
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Like ποιος / ποια / ποιο, it changes for gender: אֵיזֶה / אֵיזוֹ."
+     },
+     {
+      "for": "sq",
+      "rel": "same",
+      "text": "Like cili / cila, it changes for gender: אֵיזֶה / אֵיזוֹ."
+     }
     ]
    }
   },
@@ -984,6 +1060,12 @@
     "agreement": "both",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "suffix": {
+     "none": "not a personal pronoun: it has no ending of its own"
+    },
+    "object": {
+     "none": "not a personal pronoun: as an object it stands as it is"
     }
    },
    "note": "Two words, one question: שֶׁל “of” + מִי “who”.",
@@ -1046,13 +1128,50 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German wessen, Russian чей and Greek ποιανού are single words; Hebrew builds “whose” like English “of whom”."
+     "German wessen is a single word; Hebrew builds “whose” from two: “of whom”."
     ],
     "pitfalls": [
      "There is no one-word “whose”: always שֶׁל מִי, at the start or at the end of the question — שֶׁל מִי הַתִּיק? / הַתִּיק שֶׁל מִי?"
     ],
     "subtleties": [
      "The answer uses the same שֶׁל: שֶׁלִּי “mine”, שֶׁל אַבָּא “Dad’s”."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "different",
+      "text": "Russian чей is a single word; Hebrew says “of whom”: שֶׁל מִי."
+     },
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "Greek ποιανού is a single word; Hebrew says “of whom”: שֶׁל מִי."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Built like “of whom” rather than “whose”."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Built exactly like di chi: “of whom”."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "Built exactly like de quién: “of whom”."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Built exactly like de quem: “of whom”."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "Built like à qui / de qui: a preposition + “who”."
+     }
     ]
    }
   },
@@ -1094,7 +1213,22 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": [
+     {
+      "form": "רוֹפְאָה",
+      "lexeme": "he:rofa"
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "רוֹפֵא",
@@ -1218,7 +1352,14 @@
      "The final א is silent: ro-FE; with the article הָרוֹפֵא (qamats: ר never doubles)."
     ],
     "subtleties": [
-     "“To go to the doctor” takes the article, as in English: לָלֶכֶת לָרוֹפֵא."
+     "“To go to the doctor” takes the article: לָלֶכֶת לָרוֹפֵא (German zum Arzt)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "As in “go to the doctor”, the article is there: לָלֶכֶת לָרוֹפֵא."
+     }
     ]
    }
   },
@@ -1259,7 +1400,22 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": [
+     {
+      "form": "רוֹפֵא",
+      "lexeme": "he:rofe"
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "רוֹפְאָה",
@@ -1339,13 +1495,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Russian says врач for a woman too; Hebrew, like German Ärztin, always marks a woman doctor: רוֹפְאָה."
+     "Like German Ärztin, Hebrew always marks a woman doctor: רוֹפְאָה."
     ],
     "pitfalls": [
      "The plural רוֹפְאוֹת is for women only; a mixed group is רוֹפְאִים."
     ],
     "subtleties": [
-     "Before another noun it becomes רוֹפְאַת: רוֹפְאַת יְלָדִים “a paediatrician (f.)” (Wiktionary also gives רוֹפֵאת־)."
+     "Before another noun it becomes רוֹפְאַת:\n→ רוֹפְאַת יְלָדִים “a paediatrician (f.)” (Wiktionary also gives רוֹפֵאת־)"
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "different",
+      "text": "Russian says врач for a woman too; Hebrew always marks a woman doctor: רוֹפְאָה."
+     }
     ]
    }
   },
@@ -1386,7 +1549,31 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": [
+     {
+      "form": "מְהַנְדְּסִי",
+      "number": "SG",
+      "register": "formal"
+     },
+     {
+      "form": "מְהַנְדְּסַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": [
+     {
+      "form": "מְהַנְדֶּסֶת",
+      "lexeme": "he:mehandeset"
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "מְהַנְדֵּס",
@@ -1470,7 +1657,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish mühendis “engineer” comes from Arabic مُهَنْدِس (muhandis) — the same word as מְהַנְדֵּס.",
+     "Arabic مُهَنْدِس (muhandis) “engineer” is the same word as מְהַנְדֵּס.",
      "Arabic هَنْدَسَة and Hebrew הַנְדָּסָה mean both “engineering” and “geometry” (Wiktionary)."
     ],
     "pitfalls": [
@@ -1478,7 +1665,14 @@
      "Stress on the last syllable: me-han-DES; plural מְהַנְדְּסִים."
     ],
     "subtleties": [
-     "It has the shape of a piʿel present form (מְ־ … ־ֵ־), the shape of many “doers”: מְבַשֵּׁל “cooking”, מְהַנְדֵּס “engineer”."
+     "It has the shape of a piʿel present form (מְ־ … ־ֵ־), the shape of many “doers”:\n→ מְבַשֵּׁל “cooking”, מְהַנְדֵּס “engineer”"
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "same",
+      "text": "Turkish mühendis comes from Arabic مُهَنْدِس, the same word as מְהַנְדֵּס."
+     }
     ]
    }
   },
@@ -1519,7 +1713,22 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": [
+     {
+      "form": "מְהַנְדֵּס",
+      "lexeme": "he:mehandes"
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "מְהַנְדֶּסֶת",
@@ -1646,7 +1855,22 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": [
+     {
+      "form": "נַהֶגֶת",
+      "lexeme": "he:naheget"
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "נֶהָג",
@@ -1790,7 +2014,22 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": [
+     {
+      "form": "נֶהָג",
+      "lexeme": "he:nehag"
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "נַהֶגֶת",
@@ -1919,7 +2158,31 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": [
+     {
+      "form": "טַבָּחִי",
+      "number": "SG",
+      "register": "formal"
+     },
+     {
+      "form": "טַבָּחַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": [
+     {
+      "form": "טַבַּחַת",
+      "lexeme": "he:tabachat"
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "טַבָּח",
@@ -2012,7 +2275,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish mutfak “kitchen” comes from Arabic مَطْبَخ (maṭbaḵ) — the same word as Hebrew מִטְבָּח, from the root of טַבָּח."
+     "Arabic مَطْبَخ (maṭbaḵ) “kitchen” is the same word as Hebrew מִטְבָּח, from the root of טַבָּח."
     ],
     "pitfalls": [
      "“To cook” is בִּשֵּׁל (lesson 7) — the verb of this root, טָבַח, means “to slaughter”!",
@@ -2020,6 +2283,13 @@
     ],
     "subtleties": [
      "The feminine is טַבַּחַת (Wiktionary); job ads also use the form טַבָּחִית."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "same",
+      "text": "Turkish mutfak “kitchen” comes from Arabic مَطْبَخ — the same word as מִטְבָּח, from the root of טַבָּח."
+     }
     ]
    }
   },
@@ -2060,7 +2330,22 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": [
+     {
+      "form": "טַבָּח",
+      "lexeme": "he:tabach"
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "טַבַּחַת",
@@ -2193,7 +2478,31 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": [
+     {
+      "form": "מוֹכְרִי",
+      "number": "SG",
+      "register": "formal"
+     },
+     {
+      "form": "מוֹכְרַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": [
+     {
+      "form": "מוֹכֶרֶת",
+      "lexeme": "he:mocheret"
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "מוֹכֵר",
@@ -2344,7 +2653,22 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": [
+     {
+      "form": "מוֹכֵר",
+      "lexeme": "he:mocher"
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "מוֹכֶרֶת",
@@ -2476,7 +2800,22 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": [
+     {
+      "form": "פּוֹעֶלֶת",
+      "lexeme": "he:poelet"
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "פּוֹעֵל",
@@ -2614,7 +2953,22 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": [
+     {
+      "form": "פּוֹעֵל",
+      "lexeme": "he:poel"
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "פּוֹעֶלֶת",
@@ -2750,7 +3104,22 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": [
+     {
+      "form": "חַקְלָאִית",
+      "lexeme": "he:chaklait"
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "חַקְלַאי",
@@ -2901,7 +3270,22 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": [
+     {
+      "form": "חַקְלַאי",
+      "lexeme": "he:chaklai"
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "חַקְלָאִית",
@@ -3030,7 +3414,22 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": [
+     {
+      "form": "שׁוֹטֶרֶת",
+      "lexeme": "he:shoteret"
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "שׁוֹטֵר",
@@ -3181,7 +3580,22 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": [
+     {
+      "form": "שׁוֹטֵר",
+      "lexeme": "he:shoter"
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "שׁוֹטֶרֶת",
@@ -3305,7 +3719,22 @@
     },
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pluralShape": [
+     "compound: the first word changes"
+    ],
+    "possessive": {
+     "none": "a compound: “my …” is said with שֶׁל after it (… שֶׁלִּי); the endings go only on the first word in formal style"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": [
+     {
+      "form": "עוֹרֶכֶת דִּין",
+      "lexeme": "he:orechet-din"
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "עוֹרֵךְ דִּין",
@@ -3389,14 +3818,14 @@
      }
     ],
     "etymology": {
-     "text": "עוֹרֵךְ “one who arranges”, present participle of עָרַךְ “to arrange, to draw up”, + דִּין “law, judgement”, cognate with Arabic دِين (dīn) and Aramaic דִּינָא (Wiktionary).",
+     "text": "עוֹרֵךְ “one who arranges”, present participle of עָרַךְ “to arrange, to draw up”, + דִּין “law, judgement”, cognate with Arabic دِين (dīn) (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
      "פְּרַקְלִיט “counsel” is Greek παράκλητος (“one called to help”), borrowed in Rabbinic times."
     ],
     "pitfalls": [
-     "The article goes on the second word: עוֹרֵךְ הַדִּין “the lawyer” (the everyday הָעוֹרֵךְ דִּין is not standard).",
+     "The article goes on the second word:\n→ עוֹרֵךְ הַדִּין “the lawyer” (the everyday הָעוֹרֵךְ דִּין is not standard)",
      "The plural changes the first word: עוֹרְכֵי דִּין."
     ],
     "subtleties": [
@@ -3438,7 +3867,22 @@
     },
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pluralShape": [
+     "compound: the first word changes"
+    ],
+    "possessive": {
+     "none": "a compound: “my …” is said with שֶׁל after it (… שֶׁלִּי); the endings go only on the first word in formal style"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": [
+     {
+      "form": "עוֹרֵךְ דִּין",
+      "lexeme": "he:orech-din"
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "עוֹרֶכֶת דִּין",
@@ -3570,7 +4014,22 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": [
+     {
+      "form": "אׇמָּנִית",
+      "lexeme": "he:omanit"
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "אׇמָּן",
@@ -3718,7 +4177,22 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": [
+     {
+      "form": "אׇמָּן",
+      "lexeme": "he:oman"
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "אׇמָּנִית",
@@ -3912,7 +4386,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German keeps the same three questions apart as Hebrew: wo? (אֵיפֹה), wohin? (לְאָן), woher? (מֵאֵיפֹה)."
+     "- German keeps the same three questions apart as Hebrew: wo?\n- (אֵיפֹה), wohin?\n- (לְאָן), woher?\n- (מֵאֵיפֹה)."
     ],
     "pitfalls": [
      "With movement ask לְאָן, not אֵיפֹה: לְאָן אַתָּה נוֹסֵעַ? — like German wohin vs wo."

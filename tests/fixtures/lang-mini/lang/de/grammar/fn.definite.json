@@ -143,6 +143,46 @@
    "for": "iu",
    "rel": "new",
    "text": "Inuktitut has no articles; German needs der or ein, chosen by whether the thing is known."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Like Italian il / la / un / una, the German article shows gender; German also declines it for case: der Kürbis → den Kürbis."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian puts the definite article at the end of the noun (shtëpi → shtëpia); German puts a separate word before it: das Haus."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "Like Portuguese o / a / um / uma, the German article shows gender; German also declines it for case."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "same",
+   "text": "If your language packs gender, number and case into one ending, expect the same in the German article: den = masculine, accusative, singular."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "new",
+   "text": "If your language adds one ending per meaning, expect German to pack gender, number and case into one small word before the noun."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "new",
+   "text": "If your language has no articles, the German article is new: it is obligatory before most nouns and changes its form."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "new",
+   "text": "If your language builds much into the verb, note that German marks definiteness on a separate word before the noun."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "Semitic languages mark definiteness with a prefix on the noun; German uses a separate article that also shows gender and case."
   }
  ]
 }

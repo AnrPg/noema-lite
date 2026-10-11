@@ -34,7 +34,17 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "stemVowels": {
+     "none": "a frozen verb with past forms only: no present, so no vowel pair"
+    },
+    "imperative": {
+     "none": "a frozen verb: no imperative"
+    },
+    "passive": {
+     "none": "a frozen verb: no passive"
+    },
+    "past1sg": "لَسْتُ"
    },
    "contrasts": [
     {
@@ -328,7 +338,10 @@
      "“I have no car” is not said with لَا: لَيْسَ عِنْدِي سَيَّارَةٌ — the “no” goes on the verbless sentence (لَيْسَ)."
     ]
    },
-   "prefix": false
+   "prefix": false,
+   "features": {
+    "governs": "a present indicative (لَا يَذْهَبُ); the jussive in a prohibition (لَا تَذْهَبْ); an indefinite noun in -a without tanwīn (لَا شَكَّ)"
+   }
   },
   {
    "id": "ar:ma_neg",
@@ -417,7 +430,10 @@
      "In MSA the neutral negation of the past is لَمْ + jussive (لَمْ أَذْهَبْ); مَا + past sounds literary or emphatic."
     ]
    },
-   "prefix": false
+   "prefix": false,
+   "features": {
+    "governs": "a past verb: مَا ذَهَبْتُ"
+   }
   },
   {
    "id": "ar:la_shay",
@@ -496,15 +512,23 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Built exactly like English “no-thing”: لَا + شَيْء."
+     "Built from two words: لَا (no) + شَيْء (thing), “no thing”."
     ],
     "pitfalls": [
      "With a verb, use لَا + verb + شَيْئًا: لَا أُرِيدُ شَيْئًا (I don’t want anything) — not *أُرِيدُ لَا شَيْءَ."
     ],
     "subtleties": [
      "شَيْءَ has -a without tanwīn: this is the لَا that denies a whole class (لَا النَّافِيَةُ لِلْجِنْسِ), as in لَا شَكَّ (no doubt)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Built exactly like “no-thing”: لَا + شَيْء."
+     }
     ]
-   }
+   },
+   "features": {}
   },
   {
    "id": "ar:la_ahad",
@@ -591,7 +615,8 @@
     "subtleties": [
      "After لَا أَحَدَ a verb can follow: لَا أَحَدَ يَأْكُلُ (nobody eats) — the verb is masculine singular."
     ]
-   }
+   },
+   "features": {}
   },
   {
    "id": "ar:abadan",
@@ -606,7 +631,8 @@
     "derivedFrom": "أَبَد (eternity), in the accusative",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "formation": "adverbial accusative"
    },
    "translit": "ʾabadan",
    "ref": {
@@ -812,13 +838,55 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek ούτε … ούτε and Russian ни … ни also repeat the negation; Arabic repeats it with “and”: وَلَا."
+     "Arabic repeats the negation and joins it with “and”: لَا … وَلَا …"
     ],
     "pitfalls": [
      "The first part is the normal negation of the sentence: لَا before a present verb, لَيْسَ in a sentence without a verb; only the second part is وَلَا."
     ],
     "subtleties": [
      "The nouns keep the case of their place: لَا أَشْرَبُ الشَّايَ وَلَا الْقَهْوَةَ (both accusative); لَيْسَ عِنْدِي أَخٌ وَلَا أُخْتٌ (both nominative)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Like ούτε … ούτε, the negation is repeated: لَا … وَلَا …"
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Like ни … ни, the negation is repeated: لَا … وَلَا …"
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Like ni … ni, the negation is repeated: لَا … وَلَا …"
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "Like ni … ni, the negation is repeated: لَا … وَلَا …"
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Like né … né, the negation is repeated: لَا … وَلَا …"
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Like nem … nem, the negation is repeated: لَا … وَلَا …"
+     },
+     {
+      "for": "sq",
+      "rel": "same",
+      "text": "Like as … as, the negation is repeated: لَا … وَلَا …"
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Like neither … nor, but with the same word twice: لَا … وَلَا …"
+     }
     ]
    },
    "prefix": false
@@ -840,6 +908,7 @@
     "plurals": [
      {
       "form": "أَشْيَاء",
+      "translit": "ʾašyāʾ",
       "kind": "broken",
       "declension": "diptote",
       "note": "things: a diptote, although it looks like أَفْعَال (grammarians disagree on its measure)",
@@ -852,7 +921,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "no other form belongs to one meaning (the plurals do: see plurals)"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "شَيْءُ",
+      "translit": "šayʾu"
+     }
+    ]
    },
    "role": "thing, something; after a negated verb “anything”: لَا أُرِيدُ شَيْئًا = I don’t want anything. Needed for “nothing” with a verb.",
    "gender": "MASC",
@@ -981,7 +1059,49 @@
      "The plural أَشْيَاءُ is a diptote: no tanwīn."
     ],
     "subtleties": [
-     "After a negated verb it means “anything”: لَا آكُلُ شَيْئًا (I’m not eating anything) — one negation, like English “not … anything”."
+     "After a negated verb it means “anything”: لَا آكُلُ شَيْئًا (I’m not eating anything) — one negation is enough."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "One negation, like “not … anything”: لَا آكُلُ شَيْئًا."
+     },
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "Greek doubles the negation (δεν τρώω τίποτα); Arabic does not: لَا آكُلُ شَيْئًا."
+     },
+     {
+      "for": "ru",
+      "rel": "trap",
+      "text": "Russian doubles the negation (я ничего не ем); Arabic does not: لَا آكُلُ شَيْئًا."
+     },
+     {
+      "for": "fr",
+      "rel": "trap",
+      "text": "French needs ne … rien; Arabic has one negation and a plain “thing”: لَا آكُلُ شَيْئًا."
+     },
+     {
+      "for": "es",
+      "rel": "trap",
+      "text": "Spanish doubles the negation (no como nada); Arabic does not: لَا آكُلُ شَيْئًا."
+     },
+     {
+      "for": "it",
+      "rel": "trap",
+      "text": "Italian doubles the negation (non mangio niente); Arabic does not: لَا آكُلُ شَيْئًا."
+     },
+     {
+      "for": "pt",
+      "rel": "trap",
+      "text": "Portuguese doubles the negation (não como nada); Arabic does not: لَا آكُلُ شَيْئًا."
+     },
+     {
+      "for": "sq",
+      "rel": "trap",
+      "text": "Albanian doubles the negation (nuk ha asgjë); Arabic does not: لَا آكُلُ شَيْئًا."
+     }
     ]
    }
   }

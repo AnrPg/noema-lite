@@ -1,0 +1,6 @@
+err.auth.*
+err.cloud.*
+err.share.*
+err.files.*
+err.ai.*
+err.img.*

@@ -1,0 +1,11 @@
+{
+ "c:pron.i/gloss": { "t": "εγώ", "src": "test" },
+ "c:time.may/gloss": { "t": "Μάιος", "src": "test" },
+ "f:fn.definite/title": { "t": "Το οριστικό και το αόριστο άρθρο", "src": "test" },
+ "s:de.c01_04.001/gloss": { "t": "Σήμερα ξύπνησα στις έξι.", "src": "test" },
+ "s:de.c01_04.003/gloss": { "t": "Σηκώνομαι στις έξι.", "src": "test" },
+ "s:de.c01_04.118/gloss": { "t": "Σήμερα είναι πρώτη Μαΐου.", "src": "test" },
+ "s:de.c01_04.022/gloss": { "t": "Κοιμήθηκα καλά.", "src": "test" },
+ "s:ar.c01_04.013/gloss": { "t": "Κοιμήθηκα πολύ καλά.", "src": "test" },
+ "s:no.such.sentence/gloss": { "t": "(an address the master does not have: ignored)", "src": "test" }
+}

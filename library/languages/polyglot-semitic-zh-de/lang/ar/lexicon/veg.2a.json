@@ -26,7 +26,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "زَنْجَبِيلُ",
+      "translit": "zanjabīlu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "zanjabīl",
@@ -126,7 +135,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Arabic زَنْجَبِيل, Hebrew זַנְגְּבִיל (zangvil), Turkish zencefil, Ancient Greek ζιγγίβερις and Latin zingiber (→ English ginger, German Ingwer) all go back to the same South Indian word."
+     "Arabic زَنْجَبِيل, Hebrew זַנְגְּבִיל (zangvil) and, through Greek and Latin, German Ingwer all go back to the same South Indian word."
     ],
     "pitfalls": [
      "In Egypt the consonants are often swapped: جنزبيل (ganzabīl, Wiktionary) — write زَنْجَبِيل.",
@@ -134,6 +143,58 @@
     ],
     "subtleties": [
      "A mass noun: a piece is قِطْعَةُ زَنْجَبِيلٍ, the root جِذْرُ الزَّنْجَبِيلِ; there is no unit noun."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English ginger goes back to the same South Indian word as زَنْجَبِيل."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "French gingembre goes back to the same South Indian word as زَنْجَبِيل."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "Italian zenzero goes back to the same South Indian word as زَنْجَبِيل."
+     },
+     {
+      "for": "es",
+      "rel": "similar",
+      "text": "Spanish jengibre goes back to the same South Indian word as زَنْجَبِيل."
+     },
+     {
+      "for": "pt",
+      "rel": "similar",
+      "text": "Portuguese gengibre goes back to the same South Indian word as زَنْجَبِيل."
+     },
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "ζιγγίβερις, the old Greek name of ginger, is the same South Indian word as زَنْجَبِيل."
+     },
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "Russian имбирь goes back to the same South Indian word as زَنْجَبِيل."
+     },
+     {
+      "for": "sq",
+      "rel": "similar",
+      "text": "Albanian xhenxhefil is the same word."
+     },
+     {
+      "for": "hi",
+      "rel": "similar",
+      "text": "The South Indian word behind زَنْجَبِيل is also the source of शृङ्गवेर (śṛṅgavera, ginger)."
+     },
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish zencefil is the same word."
+     }
     ]
    }
   },
@@ -164,7 +225,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "شَمَرُ",
+      "translit": "šamaru"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "šamar",
@@ -273,7 +343,7 @@
     },
     "funFacts": [
      "Hebrew שׁוּמָר (shumar, fennel) is the same Akkadian-Aramaic word.",
-     "The Greek town of Marathon is named after fennel (μάραθο): the battlefield was a “fennel field”."
+     "The seeds (بُذُورُ الشَّمَرِ) are a spice of their own, and a tea made from them is an old remedy for the stomach."
     ],
     "pitfalls": [
      "Without vowels شمر is also the verb شَمَّرَ (to tuck up): شَمَّرَ عَنْ سَاعِدَيْهِ = he rolled up his sleeves (got down to work).",
@@ -281,6 +351,13 @@
     ],
     "subtleties": [
      "One word for the vegetable and the spice: the seeds are بُذُورُ الشَّمَرِ; context tells which is meant."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "The town of Marathon is named after fennel (μάραθο): the battlefield was a “fennel field”."
+     }
     ]
    }
   },
@@ -310,7 +387,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "هِلْيَوْنُ",
+      "translit": "hilyawnu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "hilyawn",
@@ -433,6 +519,7 @@
     "plurals": [
      {
       "form": "قُلْقَاسَات",
+      "translit": "qulqāsāt",
       "kind": "soundFem",
       "declension": "sound",
       "note": "counted (plural of قُلْقَاسَة)",
@@ -446,7 +533,16 @@
     "unit": "قُلْقَاسَة",
     "meaningForms": {
      "none": "no other form belongs to one meaning (the plurals do: see plurals)"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "قُلْقَاسُ",
+      "translit": "qulqāsu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "qulqās",
@@ -571,7 +667,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Arabic قُلْقَاس and Greek κολοκάσι (taro in Cyprus) are one word that travelled between Egypt, Aramaic and Greek."
+     "One word that travelled between Egypt, Aramaic and Greek — the botanical name Colocasia is the same word."
     ],
     "pitfalls": [
      "Raw taro irritates mouth and skin; it is always cooked, and many cooks wear gloves to peel it.",
@@ -579,6 +675,13 @@
     ],
     "subtleties": [
      "Collective: الْقُلْقَاسُ (taro as food), قُلْقَاسَة (one corm), قُلْقَاسَات (corms counted)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Greek κολοκάσι (taro in Cyprus) is the same word as قُلْقَاس."
+     }
     ]
    }
   },
@@ -609,7 +712,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "طَرْخَشْقُونُ",
+      "translit": "ṭarḫašqūnu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -731,7 +843,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English and German name the leaf after a lion’s tooth (dent-de-lion, Löwenzahn); the Persian name inside Arabic speaks of poverty — “the poor man’s herb”.",
+     "German names the leaf after a lion’s tooth (Löwenzahn); the Persian name inside Arabic speaks of poverty — “the poor man’s herb”.",
      "The botanists’ Latin Taraxacum is usually traced to this Arabic-Persian word."
     ],
     "pitfalls": [
@@ -740,6 +852,33 @@
     ],
     "subtleties": [
      "A learned word: in markets the bitter wild greens are sold under the name هِنْدِبَاء (Levantine هندبة), not طَرْخَشْقُون."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "different",
+      "text": "English dandelion is “lion’s tooth” (dent-de-lion); the name inside Arabic means “the poor man’s herb”."
+     },
+     {
+      "for": "fr",
+      "rel": "different",
+      "text": "French dent-de-lion is “lion’s tooth”; the name inside Arabic means “the poor man’s herb”."
+     },
+     {
+      "for": "it",
+      "rel": "different",
+      "text": "Italian dente di leone is “lion’s tooth”; the name inside Arabic means “the poor man’s herb”."
+     },
+     {
+      "for": "es",
+      "rel": "different",
+      "text": "Spanish diente de león is “lion’s tooth”; the name inside Arabic means “the poor man’s herb”."
+     },
+     {
+      "for": "pt",
+      "rel": "different",
+      "text": "Portuguese dente-de-leão is “lion’s tooth”; the name inside Arabic means “the poor man’s herb”."
+     }
     ]
    }
   },
@@ -765,7 +904,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "لِفْتُ",
+      "translit": "liftu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "lift",
@@ -901,7 +1049,16 @@
     "declension": "diptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "هِنْدِبَاءُ",
+      "translit": "hindibāʾu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -1052,11 +1209,11 @@
      }
     ],
     "etymology": {
-     "text": "From Aramaic hendǝḇā, cognate with Arabic هَدَب (“twisted leaves or sprigs”). From Semitic also Byzantine Greek ἔντυβον, whence Late Latin intibus and English endive (Wiktionary).",
+     "text": "From Aramaic hendǝḇā, cognate with Arabic هَدَب (“twisted leaves or sprigs”). From Semitic also Byzantine Greek ἔντυβον, whence Late Latin intibus (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English endive (and its cousins in the European languages) goes back, through Greek and Latin, to this Semitic word."
+     "The European words for endive go back, through Greek and Latin, to this Semitic word."
     ],
     "pitfalls": [
      "Diptote: no tanwīn — هِنْدِبَاءُ, accusative and genitive هِنْدِبَاءَ (Wiktionary).",
@@ -1064,6 +1221,38 @@
     ],
     "subtleties": [
      "Feminine: الْهِنْدِبَاءُ الْمُرَّةُ (the bitter chicory); Wiktionary treats it as a collective without a unit noun."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English endive goes back to this Semitic word."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "French endive goes back to this Semitic word."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "Italian indivia goes back to this Semitic word."
+     },
+     {
+      "for": "es",
+      "rel": "similar",
+      "text": "Spanish endibia goes back to this Semitic word."
+     },
+     {
+      "for": "pt",
+      "rel": "similar",
+      "text": "Portuguese endívia goes back to this Semitic word."
+     },
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Greek αντίδι goes back to Byzantine ἔντυβον, borrowed from this Semitic word."
+     }
     ]
    }
   },
@@ -1089,7 +1278,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "رِجْلَةُ",
+      "translit": "rijlatu"
+     }
+    ]
    },
    "gender": "FEM",
    "translit": "rijla",
@@ -1222,7 +1420,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "قُرَّاصُ",
+      "translit": "qurrāṣu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "qurrāṣ",
@@ -1348,6 +1555,12 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a noun with its adjective: only ثُوم takes the construct form, and the adjective then follows the whole construct"
     }
    },
    "gender": "MASC",
@@ -1423,13 +1636,35 @@
      "src": "Wiktionary (kaikki.org): ثوم; the phrase has no entry"
     },
     "funFacts": [
-     "German Bärlauch and Latin Allium ursinum say “bear’s garlic”; Arabic, like English, just says “wild garlic”."
+     "German Bärlauch and the botanical Allium ursinum say “bear’s garlic”; Arabic just says “wild garlic”."
     ],
     "pitfalls": [
      "بَرِّيّ (barrī, wild) and بَرِيء (barīʾ, innocent) sound alike — listen for the doubled r and the final hamza."
     ],
     "subtleties": [
      "Two words, one noun: the adjective follows the noun in case and definiteness — الثُّومُ الْبَرِّيُّ, الثُّومَ الْبَرِّيَّ, الثُّومِ الْبَرِّيِّ."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Arabic says just what English says: “wild garlic”."
+     },
+     {
+      "for": "fr",
+      "rel": "different",
+      "text": "French ail des ours says “bears’ garlic”; Arabic says “wild garlic”."
+     },
+     {
+      "for": "it",
+      "rel": "different",
+      "text": "Italian aglio orsino says “bear’s garlic”; Arabic says “wild garlic”."
+     },
+     {
+      "for": "ru",
+      "rel": "different",
+      "text": "Russian медвежий лук says “bear’s onion”; Arabic says “wild garlic”."
+     }
     ]
    }
   },
@@ -1453,6 +1688,7 @@
     "plurals": [
      {
       "form": "جَزَرَات بَيْضَاء",
+      "translit": "jazarāt bayḍāʾ",
       "kind": "soundFem",
       "declension": "sound",
       "note": "counted: جَزَرَاتٌ بَيْضَاءُ (plural of the unit)",
@@ -1466,6 +1702,12 @@
     "unit": "جَزَرَة بَيْضَاء",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a noun with its adjective: only جَزَر takes the construct form, and the adjective then follows the whole construct"
     }
    },
    "gender": "MASC",
@@ -1587,7 +1829,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "حُمَّاضُ",
+      "translit": "ḥummāḍu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "ḥummāḍ",
@@ -1722,6 +1973,12 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a noun with its adjective: only فُجْل takes the construct form, and the adjective then follows the whole construct"
     }
    },
    "gender": "MASC",
@@ -1797,7 +2054,7 @@
      "src": "Wiktionary (kaikki.org): فجل and the translation table of English horseradish"
     },
     "funFacts": [
-     "Japanese wasabi is a close relative, and cheap “wasabi” paste is often coloured horseradish."
+     "Wasabi (وَاسَابِي) is a close relative, and cheap “wasabi” paste is often coloured horseradish."
     ],
     "pitfalls": [
      "In a salad, فُجْلٌ حَارٌّ can simply mean a sharp-tasting radish — context decides.",
@@ -1805,6 +2062,13 @@
     ],
     "subtleties": [
      "حَارّ means both “hot” in temperature and “hot, spicy”; here it is the sting of mustard oil."
+    ],
+    "notes": [
+     {
+      "for": "ja",
+      "rel": "similar",
+      "text": "わさび is a close relative: cheap わさび paste is often coloured horseradish, فُجْل حَارّ."
+     }
     ]
    }
   },
@@ -1831,7 +2095,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "قُرَّةُ",
+      "translit": "qurratu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -1983,7 +2256,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "رَشَادُ",
+      "translit": "rašādu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "rašād",
@@ -2114,7 +2396,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "سِلْقُ",
+      "translit": "silqu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "silq",
@@ -2193,7 +2484,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Chard is “the Sicilian vegetable”: Greek σικελικόν gave Arabic سِلْق — and, through Persian, شَلْجَم (turnip).",
+     "Chard is “the Sicilian vegetable”: Ancient Greek σικελικόν gave Arabic سِلْق through Syriac.",
      "Hebrew סֶלֶק (selek) is the same Aramaic word — but in Hebrew it means beetroot."
     ],
     "pitfalls": [
@@ -2232,7 +2523,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "جِرْجِيرُ",
+      "translit": "jirjīru"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -2378,7 +2678,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "مُلُوخِيَّةُ",
+      "translit": "mulūḫiyyatu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -2493,7 +2802,7 @@
     "funFacts": [
      "The Fatimid caliph al-Ḥākim bi-Amr Allāh banned mulūḫiyya in Egypt in the early 11th century.",
      "Egyptian cooks traditionally gasp (شَهْقَة) as they pour the sizzling garlic into the pot — kitchen lore for a good result.",
-     "Greek μολόχα (molócha, mallow) is its cousin: the name came into Arabic from Greek."
+     "Its name came into Arabic from Ancient Greek μολόχιον, “mallow”."
     ],
     "pitfalls": [
      "In Morocco مْلُوخِيَّة means okra, not jute mallow (Wiktionary).",
@@ -2502,6 +2811,13 @@
     "subtleties": [
      "One word for the plant and the dish. In Egypt the leaves are minced into a slippery soup; in the Levant they are often cooked whole.",
      "Popular etymology links the name to مُلُوك “kings” (a “royal” dish); Wiktionary derives it from Greek."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "*μολόχα* (mallow) is its cousin: مُلُوخِيَّة comes from ancient μολόχιον."
+     }
     ]
    }
   },
@@ -2525,6 +2841,7 @@
     "plurals": [
      {
       "form": "بَصَلَات حَمْرَاء",
+      "translit": "baṣalāt ḥamrāʾ",
       "kind": "soundFem",
       "declension": "sound",
       "note": "counted: بَصَلَاتٌ حَمْرَاءُ (plural of the unit)",
@@ -2538,6 +2855,12 @@
     "unit": "بَصَلَة حَمْرَاء",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a noun with its adjective: only بَصَل takes the construct form, and the adjective then follows the whole construct"
     }
    },
    "gender": "MASC",
@@ -2630,13 +2953,35 @@
      "src": "Wiktionary (kaikki.org): بصل and the translation table of English red onion"
     },
     "funFacts": [
-     "Arabic, English and German (rote Zwiebel) all call it “red”, though the colour is really purple."
+     "Arabic, like German (rote Zwiebel), calls it “red”, though the colour is really purple."
     ],
     "pitfalls": [
      "أَحْمَر is a diptote with the feminine حَمْرَاء: بَصَلٌ أَحْمَرُ, but بَصَلَةٌ حَمْرَاءُ (one red onion) — never *بَصَلَةٌ أَحْمَرُ."
     ],
     "subtleties": [
      "Counted red onions: بَصَلَاتٌ حَمْرَاءُ — a non-human plural takes a feminine singular adjective."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "English also says “red onion”, though the colour is purple."
+     },
+     {
+      "for": "es",
+      "rel": "different",
+      "text": "Spanish says cebolla morada, “purple onion”; Arabic says “red”: بَصَل أَحْمَر."
+     },
+     {
+      "for": "pt",
+      "rel": "different",
+      "text": "Portuguese says cebola roxa, “purple onion”; Arabic says “red”: بَصَل أَحْمَر."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Greek also says κόκκινο κρεμμύδι, “red onion”."
+     }
     ]
    }
   }
@@ -2670,12 +3015,12 @@
   {
    "concept": "veg.shallot",
    "reason": "No single established word for the shallot.",
-   "use": "كُرَّاثٌ أَنْدَلُسِيٌّ (Wiktionary’s translation), or the European loan شالوت in shops and recipes; English shallot itself comes from the city of Ascalon (عَسْقَلَان)"
+   "use": "كُرَّاثٌ أَنْدَلُسِيٌّ (Wiktionary’s translation), or the European loan شالوت in shops and recipes"
   },
   {
    "concept": "veg.yam",
    "reason": "True yams (Dioscorea) are not grown in most Arab countries; no established word.",
-   "use": "the English loan يَام (Wiktionary’s translation table); note that American “yam” often means sweet potato = بَطَاطَا حُلْوَة"
+   "use": "the English loan يَام (Wiktionary’s translation table)"
   },
   {
    "concept": "veg.mustardgreens",

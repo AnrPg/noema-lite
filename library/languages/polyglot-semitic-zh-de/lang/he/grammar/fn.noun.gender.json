@@ -242,22 +242,22 @@
   {
    "for": "el",
    "rel": "different",
-   "text": "Greek has three genders; Hebrew has two, and Greek neuters land on either side: το βιβλίο → סֵפֶר (m.), το κρεβάτι → מִטָּה (f.). As in Greek, the ending is a good guide (-ָה, -ת feminine), with exceptions to learn."
+   "text": "Greek has three genders; Hebrew has two, and Greek neuters land on either side:\n→ το βιβλίο → סֵפֶר (m.), το κρεβάτι → מִטָּה (f.)\n\nAs in Greek, the ending is a good guide (-ָה, -ת feminine), with exceptions to learn."
   },
   {
    "for": "ru",
    "rel": "different",
-   "text": "Russian has three genders and also reads them from the ending (-а feminine ~ Hebrew -ָה, -ת); but there is no neuter, so a Russian neuter becomes masculine or feminine: окно → חַלּוֹן (m.)."
+   "text": "Russian has three genders and also reads them from the ending (-а feminine ~ Hebrew -ָה, -ת); but there is no neuter, so a Russian neuter becomes masculine or feminine:\n→ окно → חַלּוֹן (m.)"
   },
   {
    "for": "es",
    "rel": "similar",
-   "text": "Two genders, as in Spanish, with typical endings: -ָה / -ת feminine (like -a), most others masculine (like -o). Both languages have exceptions (la mano; כּוֹס f.), and the genders do not match across them: la mesa, but שֻׁלְחָן is masculine."
+   "text": "Two genders, as in Spanish, with typical endings: -ָה / -ת feminine (like -a), most others masculine (like -o).\n\nBoth languages have exceptions (la mano; כּוֹס f.), and the genders do not match across them: la mesa, but שֻׁלְחָן is masculine."
   },
   {
    "for": "en",
    "rel": "new",
-   "text": "English nouns have no gender; in Hebrew every noun is masculine or feminine, and it shows in זֶה / זֹאת, הוּא / הִיא and later in adjectives and verbs. A thing is “he” or “she”, never “it”."
+   "text": "English nouns have no gender; in Hebrew every noun is masculine or feminine, and it shows in זֶה / זֹאת, הוּא / הִיא and later in adjectives and verbs.\n\nA thing is “he” or “she”, never “it”."
   },
   {
    "for": "fr",
@@ -267,12 +267,12 @@
   {
    "for": "de",
    "rel": "different",
-   "text": "German has three genders and shows them in the article (der / die / das); Hebrew has two, and its article הַ shows none — the gender appears in the words that agree. German neuters land on either side: das Buch → סֵפֶר (m.), das Bett → מִטָּה (f.)."
+   "text": "German has three genders and shows them in the article (der / die / das); Hebrew has two, and its article הַ shows none — the gender appears in the words that agree.\n\nGerman neuters land on either side: das Buch → סֵפֶר (m.), das Bett → מִטָּה (f.)."
   },
   {
    "for": "hi",
    "rel": "similar",
-   "text": "Hindi has two genders and its endings help (लड़का / लड़की); in Hebrew -ָה and -ת mark the feminine. The genders do not carry over: Hindi किताब is feminine, Hebrew סֵפֶר masculine."
+   "text": "Hindi has two genders and its endings help (लड़का / लड़की); in Hebrew -ָה and -ת mark the feminine.\n\nThe genders do not carry over: Hindi किताब is feminine, Hebrew סֵפֶר masculine."
   },
   {
    "for": "fa",
@@ -282,12 +282,12 @@
   {
    "for": "mr",
    "rel": "different",
-   "text": "Marathi has three genders; Hebrew has two — no neuter. Learn each noun with its gender; the endings -ָה and -ת usually mean feminine."
+   "text": "Marathi has three genders; Hebrew has two — no neuter.\n\nLearn each noun with its gender; the endings -ָה and -ת usually mean feminine."
   },
   {
    "for": "ar",
    "rel": "similar",
-   "text": "The same two genders and the same main sign: Arabic tāʾ marbūṭa (ـة) corresponds to Hebrew -ָה / -ת. Both languages also have feminines without the ending, which must be learnt (Hebrew כּוֹס)."
+   "text": "The same two genders and the same main sign: Arabic tāʾ marbūṭa (ـة) corresponds to Hebrew -ָה / -ת.\n\nBoth languages also have feminines without the ending, which must be learnt (Hebrew כּוֹס)."
   },
   {
    "for": "tr",
@@ -338,6 +338,46 @@
    "for": "iu",
    "rel": "new",
    "text": "Inuktitut has no gender; Hebrew has two, on every noun, and they decide the form of the words around it."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Two genders and no neuter, as in Italian, with a typical feminine ending (-a ~ -ָה).\n\nBut the genders do not carry over (il letto, but מִטָּה is feminine; la sedia, but כִּסֵּא is masculine), and the article הַ never shows the gender."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "Two genders, as in Portuguese, with a typical feminine ending (-a ~ -ָה, -ת).\n\nBut the genders do not carry over (a mesa, but שֻׁלְחָן is masculine; o copo, but כּוֹס is feminine), and הַ does not show gender as o / a do."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Two genders in practice, as in Albanian, and an ending that helps (-ë / -e ~ -ָה, -ת).\n\nThe genders do not carry over — tavolinë is feminine, but שֻׁלְחָן is masculine; shtrat is masculine, but מִטָּה is feminine."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your nouns have gender, the idea is familiar: Hebrew has two (no neuter), read mostly from the ending (־ָה, ־ת feminine).\n\nThe genders of your language do not carry over."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "new",
+   "text": "If your language has no grammatical gender, this is the big new habit: every Hebrew noun is masculine or feminine, and the words that agree show it (זֶה בַּיִת, זֹאת דִּירָה)."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "new",
+   "text": "If your nouns have no gender, learn each Hebrew noun with it: the ending usually tells (־ָה, ־ת feminine), and זֶה / זֹאת confirms it."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "new",
+   "text": "If your language sorts nouns by animacy or shape rather than sex, Hebrew sorts every noun, living or not, into masculine or feminine:\n→ שֻׁלְחָן m., מִטָּה f"
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "The same two genders and the same feminine -t (־ָה / ־ֶת / ־ִית) as in other Semitic languages, with a few unmarked feminines to learn (כּוֹס)."
   }
  ]
 }

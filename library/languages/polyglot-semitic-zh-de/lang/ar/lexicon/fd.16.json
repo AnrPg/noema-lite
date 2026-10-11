@@ -20,6 +20,7 @@
     "plurals": [
      {
       "form": "كِبَار",
+      "translit": "kibār",
       "kind": "broken",
       "pattern": "فِعَال",
       "declension": "triptote",
@@ -31,6 +32,7 @@
      },
      {
       "form": "كُبَرَاء",
+      "translit": "kubarāʾ",
       "kind": "broken",
       "pattern": "فُعَلَاء",
       "declension": "diptote",
@@ -44,6 +46,9 @@
     "elative": "أَكْبَر",
     "meaningForms": {
      "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "contrasts": [
@@ -234,7 +239,7 @@
     },
     "funFacts": [
      "Its elative أَكْبَر is in the call to prayer: اللّٰهُ أَكْبَرُ, “God is greatest”.",
-     "Greek μεγάλος and German groß do the same double job: a big house, and an older person (ο μεγάλος μου αδελφός, mein großer Bruder = أَخِي الْأَكْبَرُ)."
+     "German groß does the same double job: a big house, and an older person (mein großer Bruder = أَخِي الْأَكْبَرُ)."
     ],
     "pitfalls": [
      "Plural for people: the broken plural كِبَار (الْأَوْلَادُ كِبَارٌ); plural for things: the feminine singular (الْبُيُوتُ كَبِيرَةٌ).",
@@ -242,6 +247,28 @@
     ],
     "subtleties": [
      "أَكْبَرُ مِنِّي is both “bigger than me” and “older than me” — the context decides."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "μεγάλος does the same double job: ο μεγάλος μου αδελφός = أَخِي الْأَكْبَرُ."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "grand does the same double job: mon grand frère = أَخِي الْأَكْبَرُ."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "big does the same double job: my big brother = أَخِي الْأَكْبَرُ."
+     },
+     {
+      "for": "ru",
+      "rel": "different",
+      "text": "Russian says старший брат, not большой; Arabic uses “bigger”: أَخِي الْأَكْبَرُ."
+     }
     ]
    }
   },
@@ -264,6 +291,7 @@
     "plurals": [
      {
       "form": "صِغَار",
+      "translit": "ṣiġār",
       "kind": "broken",
       "pattern": "فِعَال",
       "declension": "triptote",
@@ -277,6 +305,9 @@
     "elative": "أَصْغَر",
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "contrasts": [
@@ -478,6 +509,7 @@
     "plurals": [
      {
       "form": "طِوَال",
+      "translit": "ṭiwāl",
       "kind": "broken",
       "pattern": "فِعَال",
       "declension": "triptote",
@@ -492,6 +524,9 @@
     "elative": "أَطْوَل",
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "translit": "ṭawīl",
@@ -674,7 +709,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "One word for long and tall, like Turkish uzun (uzun yol, uzun boylu); Greek, German and Russian split them (μακρύς / ψηλός, lang / groß, длинный / высокий).",
+     "One word for long and tall: طَرِيقٌ طَوِيلٌ (a long road), رَجُلٌ طَوِيلٌ (a tall man) — German splits them (lang / groß).",
      "طَاوِلَة (table) comes from Italian tavola; Wiktionary suggests it was reshaped to sound like a word of the root ط و ل — a table is “a long thing”."
     ],
     "pitfalls": [
@@ -683,6 +718,58 @@
     ],
     "subtleties": [
      "The question “how tall are you?” is about length: كَمْ طُولُكَ؟ — طُول (length, height) is the noun of the same root."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "Greek splits μακρύς and ψηλός; Arabic has one word: طَوِيل."
+     },
+     {
+      "for": "ru",
+      "rel": "trap",
+      "text": "Russian splits длинный and высокий; Arabic has one word: طَوِيل."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English splits long and tall; Arabic has one word: طَوِيل."
+     },
+     {
+      "for": "fr",
+      "rel": "trap",
+      "text": "French splits long and grand; Arabic has one word: طَوِيل."
+     },
+     {
+      "for": "it",
+      "rel": "trap",
+      "text": "Italian splits lungo and alto; Arabic has one word: طَوِيل."
+     },
+     {
+      "for": "es",
+      "rel": "trap",
+      "text": "Spanish splits largo and alto; Arabic has one word: طَوِيل."
+     },
+     {
+      "for": "pt",
+      "rel": "trap",
+      "text": "Portuguese splits comprido and alto; Arabic has one word: طَوِيل."
+     },
+     {
+      "for": "hi",
+      "rel": "same",
+      "text": "Like लंबा, one word for long and tall: طَوِيل."
+     },
+     {
+      "for": "sq",
+      "rel": "same",
+      "text": "Like i gjatë, one word for long and tall: طَوِيل."
+     },
+     {
+      "for": "tr",
+      "rel": "same",
+      "text": "Like uzun (uzun yol, uzun boylu), one word for long and tall."
+     }
     ]
    }
   },
@@ -705,6 +792,7 @@
     "plurals": [
      {
       "form": "قِصَار",
+      "translit": "qiṣār",
       "kind": "broken",
       "pattern": "فِعَال",
       "declension": "triptote",
@@ -719,6 +807,9 @@
     "elative": "أَقْصَر",
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "translit": "qaṣīr",
@@ -886,7 +977,7 @@
      }
     ],
     "etymology": {
-     "text": "Adjective of the root ق ص ر (q ṣ r); Wiktionary: cognate with Hebrew קצר (katsár, “short”) and Amharic አጭር (ač̣ər, “short”).",
+     "text": "Adjective of the root ق ص ر (q ṣ r); Wiktionary: cognate with Hebrew קצר (katsár, “short”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -898,6 +989,13 @@
     ],
     "subtleties": [
      "“Short of …, lacking” is not قَصِير but نَاقِص."
+    ],
+    "notes": [
+     {
+      "for": "am",
+      "rel": "same",
+      "text": "Amharic አጭር (ač̣ər, “short”) is a cognate of قَصِير."
+     }
     ]
    }
   },
@@ -920,6 +1018,7 @@
     "plurals": [
      {
       "form": "جَيِّدُونَ",
+      "translit": "jayyidūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -936,6 +1035,12 @@
       "senses": [
        "s2"
       ]
+     }
+    ],
+    "governs": [
+     {
+      "prep": "فِي",
+      "what": "good at (جَيِّدٌ فِي الرِّيَاضِيَّاتِ)"
      }
     ]
    },
@@ -1112,6 +1217,7 @@
     "plurals": [
      {
       "form": "سَيِّئُونَ",
+      "translit": "sayyiʾūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -1124,6 +1230,9 @@
     "elative": "أَسْوَأ",
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "translit": "sayyiʾ",
@@ -1302,6 +1411,7 @@
     "plurals": [
      {
       "form": "جُدُد",
+      "translit": "judud",
       "kind": "broken",
       "pattern": "فُعُل",
       "declension": "triptote",
@@ -1320,7 +1430,10 @@
        "s2"
       ]
      }
-    ]
+    ],
+    "governs": {
+     "none": "no fixed preposition"
+    }
    },
    "translit": "jadīd",
    "forms": {
@@ -1509,6 +1622,7 @@
     "plurals": [
      {
       "form": "قُدَامَى",
+      "translit": "qudāmā",
       "kind": "broken",
       "pattern": "فُعَالَى",
       "declension": "invariable",
@@ -1519,6 +1633,7 @@
      },
      {
       "form": "قُدَمَاء",
+      "translit": "qudamāʾ",
       "kind": "broken",
       "pattern": "فُعَلَاء",
       "declension": "diptote",
@@ -1532,6 +1647,9 @@
     "elative": "أَقْدَم",
     "meaningForms": {
      "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "translit": "qadīm",
@@ -1745,6 +1863,7 @@
     "plurals": [
      {
       "form": "شُبَّان",
+      "translit": "šubbān",
       "kind": "broken",
       "pattern": "فُعْلَان",
       "declension": "triptote",
@@ -1767,7 +1886,10 @@
        "s2"
       ]
      }
-    ]
+    ],
+    "governs": {
+     "none": "no fixed preposition"
+    }
    },
    "contrasts": [
     {
@@ -1956,6 +2078,7 @@
     "plurals": [
      {
       "form": "مُسِنُّونَ",
+      "translit": "musinnūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -1969,6 +2092,9 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "contrasts": [
@@ -2134,6 +2260,7 @@
     "plurals": [
      {
       "form": "حَارُّونَ",
+      "translit": "ḥārrūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -2147,6 +2274,9 @@
     "elative": "أَحَرّ",
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "contrasts": [
@@ -2315,14 +2445,51 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Its noun حَرَارَة (heat, temperature) went into Turkish as hararet (heat, fever, thirst)."
+     "Its noun حَرَارَة is heat — and the temperature on a thermometer: دَرَجَةُ الْحَرَارَةِ."
     ],
     "pitfalls": [
      "Hot tea, coffee or soup is normally سَاخِن; with food حَارّ usually means SPICY: طَعَامٌ حَارٌّ.",
      "The double r: حَارٌّ, حَارَّةٌ; the elative is أَحَرُّ (hotter)."
     ],
     "subtleties": [
-     "“It is hot” has no “it is”: الْجَوُّ حَارٌّ — the weather (is) hot."
+     "The weather is said with a subject and no verb: الْجَوُّ حَارٌّ — the weather (is) hot."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "حَرَارَة went into Turkish as hararet (heat, fever, thirst)."
+     },
+     {
+      "for": "en",
+      "rel": "different",
+      "text": "No empty “it is”: “it is hot” is الْجَوُّ حَارٌّ, “the weather (is) hot”."
+     },
+     {
+      "for": "fr",
+      "rel": "different",
+      "text": "No il fait: il fait chaud is الْجَوُّ حَارٌّ, “the weather (is) hot”."
+     },
+     {
+      "for": "it",
+      "rel": "different",
+      "text": "No fa: fa caldo is الْجَوُّ حَارٌّ, “the weather (is) hot”."
+     },
+     {
+      "for": "es",
+      "rel": "different",
+      "text": "No hace: hace calor is الْجَوُّ حَارٌّ, “the weather (is) hot”."
+     },
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "No κάνει: κάνει ζέστη is الْجَوُّ حَارٌّ, “the weather (is) hot”."
+     },
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "Like жарко, no verb is needed — but Arabic names a subject: الْجَوُّ حَارٌّ, “the weather (is) hot”."
+     }
     ]
    }
   },
@@ -2343,6 +2510,7 @@
     "plurals": [
      {
       "form": "سَاخِنُونَ",
+      "translit": "sāḫinūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -2356,6 +2524,9 @@
     "elative": "أَسْخَن",
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "contrasts": [
@@ -2546,6 +2717,7 @@
     "plurals": [
      {
       "form": "بَارِدُونَ",
+      "translit": "bāridūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -2558,6 +2730,9 @@
     "elative": "أَبْرَد",
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "translit": "bārid",
@@ -2710,7 +2885,7 @@
      }
     ],
     "etymology": {
-     "text": "Wiktionary: derived from the active participle of بَرَدَ (barada, “to be cold, to freeze”); cognate with Amharic ብርድ (bɨrd, cold).",
+     "text": "Wiktionary: derived from the active participle of بَرَدَ (barada, “to be cold, to freeze”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -2721,6 +2896,13 @@
     ],
     "subtleties": [
      "Weather: الْجَوُّ بَارِدٌ (it is cold) — a sentence with no verb."
+    ],
+    "notes": [
+     {
+      "for": "am",
+      "rel": "same",
+      "text": "Amharic ብርድ (bɨrd, cold) is a cognate."
+     }
     ]
    }
   },
@@ -2741,6 +2923,7 @@
     "plurals": [
      {
       "form": "دَافِئُونَ",
+      "translit": "dāfiʾūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -2753,6 +2936,9 @@
     "elative": "أَدْفَأ",
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "contrasts": [
@@ -2937,6 +3123,7 @@
     "plurals": [
      {
       "form": "جَمِيلُونَ",
+      "translit": "jamīlūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -2949,6 +3136,9 @@
     "elative": "أَجْمَل",
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "translit": "jamīl",
@@ -3131,13 +3321,45 @@
     },
     "funFacts": [
      "مَا أَجْمَلَ …! is the Arabic exclamation “how beautiful …!” — the elative with -a after مَا.",
-     "The camel, جَمَل, is written with the same root letters ج م ل; Greek κάμηλος and English camel come from the Semitic word."
+     "The camel, جَمَل, is written with the same root letters ج م ل — and the European words for camel come from the Semitic word."
     ],
     "pitfalls": [
      "For a man, وَسِيم (handsome) is the usual compliment; جَمِيل is said of women, things and places."
     ],
     "subtleties": [
      "As a noun, الْجَمِيل is a favour, a good deed: لَنْ أَنْسَى جَمِيلَكَ, I won’t forget your kindness."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Greek καμήλα (κάμηλος) comes from the Semitic word for camel."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English camel comes from the Semitic word جَمَل."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "French chameau comes from the Semitic word جَمَل."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "Italian cammello comes from the Semitic word جَمَل."
+     },
+     {
+      "for": "es",
+      "rel": "similar",
+      "text": "Spanish camello comes from the Semitic word جَمَل."
+     },
+     {
+      "for": "pt",
+      "rel": "similar",
+      "text": "Portuguese camelo comes from the Semitic word جَمَل."
+     }
     ]
    }
   },
@@ -3159,6 +3381,7 @@
     "plurals": [
      {
       "form": "قِبَاح",
+      "translit": "qibāḥ",
       "kind": "broken",
       "pattern": "فِعَال",
       "declension": "triptote",
@@ -3172,6 +3395,9 @@
     "elative": "أَقْبَح",
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "translit": "qabīḥ",
@@ -3357,6 +3583,7 @@
     "plurals": [
      {
       "form": "سَهْلُونَ",
+      "translit": "sahlūn",
       "kind": "soundMasc",
       "declension": "sound",
       "note": "easy-going (people)",
@@ -3366,6 +3593,7 @@
      },
      {
       "form": "سُهُول",
+      "translit": "suhūl",
       "kind": "broken",
       "pattern": "فُعُول",
       "declension": "triptote",
@@ -3379,7 +3607,13 @@
     "elative": "أَسْهَل",
     "meaningForms": {
      "none": "no other form belongs to one meaning (the plurals do: see plurals)"
-    }
+    },
+    "governs": [
+     {
+      "prep": "عَلَى",
+      "what": "easy for someone (سَهْلٌ عَلَيَّ)"
+     }
+    ]
    },
    "translit": "sahl",
    "forms": {
@@ -3564,6 +3798,7 @@
     "plurals": [
      {
       "form": "صِعَاب",
+      "translit": "ṣiʿāb",
       "kind": "broken",
       "pattern": "فِعَال",
       "declension": "triptote",
@@ -3577,7 +3812,13 @@
     "elative": "أَصْعَب",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "governs": [
+     {
+      "prep": "عَلَى",
+      "what": "hard for someone (صَعْبٌ عَلَيْهِ)"
+     }
+    ]
    },
    "translit": "ṣaʿb",
    "forms": {
@@ -3752,6 +3993,7 @@
     "plurals": [
      {
       "form": "رَخِيصُونَ",
+      "translit": "raḫīṣūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -3764,6 +4006,9 @@
     "elative": "أَرْخَص",
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "translit": "raḫīṣ",
@@ -3896,17 +4141,24 @@
      }
     ],
     "etymology": {
-     "text": "Wiktionary: an adjective of the pattern فَعِيل from the verb رَخُصَ (“to be cheap”); cognate with Amharic ርካሽ (rɨkaš, “cheap”).",
+     "text": "Wiktionary: an adjective of the pattern فَعِيل from the verb رَخُصَ (“to be cheap”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Amharic ርካሽ (rɨkaš) is the same Semitic word (Wiktionary)."
+     "From the same root ر خ ص comes رُخْصَة, a permit or licence: رُخْصَةُ الْقِيَادَةِ, a driving licence."
     ],
     "pitfalls": [
      "About a person or behaviour it is an insult (cheap, base) — use it for prices."
     ],
     "subtleties": [
      "At the market: هَلْ عِنْدَكَ شَيْءٌ أَرْخَصُ؟ — do you have something cheaper?"
+    ],
+    "notes": [
+     {
+      "for": "am",
+      "rel": "same",
+      "text": "Amharic ርካሽ (rɨkaš) is the same Semitic word (Wiktionary)."
+     }
     ]
    }
   },
@@ -3927,6 +4179,7 @@
     "plurals": [
      {
       "form": "غَالُونَ",
+      "translit": "ġālūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -3939,7 +4192,16 @@
     "elative": "أَغْلَى",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "governs": [
+     {
+      "prep": "عَلَى",
+      "what": "dear to someone (غَالٍ عَلَيَّ)",
+      "senses": [
+       "s2"
+      ]
+     }
+    ]
    },
    "translit": "ġālī",
    "forms": {
@@ -4116,6 +4378,7 @@
     "plurals": [
      {
       "form": "سُعَدَاء",
+      "translit": "suʿadāʾ",
       "kind": "broken",
       "pattern": "فُعَلَاء",
       "declension": "diptote",
@@ -4129,7 +4392,13 @@
     "elative": "أَسْعَد",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "governs": [
+     {
+      "prep": "بِـ",
+      "what": "happy with, glad about (سَعِيدٌ بِلِقَائِكَ)"
+     }
+    ]
    },
    "translit": "saʿīd",
    "forms": {
@@ -4334,6 +4603,7 @@
     "plurals": [
      {
       "form": "حَزِينُونَ",
+      "translit": "ḥazīnūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -4345,7 +4615,13 @@
     "elative": "أَحْزَن",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "governs": [
+     {
+      "prep": "عَلَى",
+      "what": "sad about, grieving for (حَزِينٌ عَلَى صَدِيقِهِ)"
+     }
+    ]
    },
    "translit": "ḥazīn",
    "forms": {
@@ -4531,6 +4807,7 @@
     "plurals": [
      {
       "form": "مُتْعَبُونَ",
+      "translit": "mutʿabūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -4544,7 +4821,13 @@
     },
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "governs": [
+     {
+      "prep": "مِنْ",
+      "what": "tired from (مُتْعَبٌ مِنَ الْعَمَلِ)"
+     }
+    ]
    },
    "translit": "mutʿab",
    "forms": {
@@ -4668,13 +4951,25 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek has the same pair: κουρασμένος (tired) / κουραστικός (tiring); Arabic changes one vowel: مُتْعَب / مُتْعِب."
+     "One vowel makes the difference: مُتْعَب (tired — the passive participle) / مُتْعِب (tiring — the active participle)."
     ],
     "pitfalls": [
      "مُتْعَب (mutʿab) = tired, مُتْعِب (mutʿib) = tiring: أَنَا مُتْعَبٌ لِأَنَّ الْعَمَلَ مُتْعِبٌ."
     ],
     "subtleties": [
      "In speech تَعْبَان is far more common; مُتْعَب is the standard written word."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "The same pair as κουρασμένος (tired) / κουραστικός (tiring): مُتْعَب / مُتْعِب."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "The same pair as tired / tiring: مُتْعَب / مُتْعِب."
+     }
     ]
    }
   },
@@ -4694,6 +4989,7 @@
     "plurals": [
      {
       "form": "جِيَاع",
+      "translit": "jiyāʿ",
       "kind": "broken",
       "pattern": "فِعَال",
       "declension": "triptote",
@@ -4708,6 +5004,9 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "translit": "jāʾiʿ",
@@ -4874,6 +5173,7 @@
     "plurals": [
      {
       "form": "عِطَاش",
+      "translit": "ʿiṭāš",
       "kind": "broken",
       "pattern": "فِعَال",
       "declension": "triptote",
@@ -4889,6 +5189,9 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "translit": "ʿaṭšān",
@@ -5065,6 +5368,7 @@
     "plurals": [
      {
       "form": "سِرَاع",
+      "translit": "sirāʿ",
       "kind": "broken",
       "pattern": "فِعَال",
       "declension": "triptote",
@@ -5077,6 +5381,9 @@
     "elative": "أَسْرَع",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "translit": "sarīʿ",
@@ -5261,6 +5568,7 @@
     "plurals": [
      {
       "form": "بِطَاء",
+      "translit": "biṭāʾ",
       "kind": "broken",
       "pattern": "فِعَال",
       "declension": "triptote",
@@ -5273,6 +5581,9 @@
     "elative": "أَبْطَأ",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "governs": {
+     "none": "no fixed preposition"
     }
    },
    "translit": "baṭīʾ",

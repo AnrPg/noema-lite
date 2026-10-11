@@ -377,7 +377,7 @@
   {
    "lang": "he",
    "fn": "fn.future",
-   "note": "In Hebrew the prefix conjugation itself is the future (אֶסַּע “I will travel”); in Arabic the same kind of form is the present, and سَـ makes it future (سَأُسَافِرُ)."
+   "note": "In Hebrew the prefix conjugation itself is the future:\n→ אֶסַּע “I will travel”\n\nIn Arabic the same kind of form is the present, and سَـ makes it future (سَأُسَافِرُ)."
   },
   {
    "lang": "de",
@@ -392,7 +392,7 @@
   {
    "lang": "ar",
    "fn": "fn.present",
-   "note": "The future is built on the present: سَـ + أُسَافِرُ; its negation uses the subjunctive, which also follows أَنْ “to” (أُرِيدُ أَنْ أُسَافِرَ)."
+   "note": "The future is built on the present: سَـ + أُسَافِرُ.\n\nIts negation uses the subjunctive, which also follows أَنْ “to”:\n→ أُرِيدُ أَنْ أُسَافِرَ"
   }
  ],
  "typology": [
@@ -413,37 +413,37 @@
   {
    "for": "el",
    "rel": "similar",
-   "text": "Greek forms the future with θα + verb (θα ταξιδέψω); Arabic’s سَـ is similar but written joined to the verb, and the negation changes the particle: لَنْ أُسَافِرَ (Greek keeps θα: δεν θα ταξιδέψω)."
+   "text": "Greek forms the future with θα + verb (θα ταξιδέψω); Arabic’s سَـ is similar but **written joined to the verb**.\n\nThe negation changes the particle — Greek keeps θα:\n→ لَنْ أُسَافِرَ — δεν θα ταξιδέψω"
   },
   {
    "for": "ru",
    "rel": "different",
-   "text": "Russian has a one-word future of perfective verbs (поеду) and буду + infinitive (буду ездить); Arabic always builds the future from the present with سَـ / سَوْفَ."
+   "text": "Russian has a one-word future of perfective verbs (поеду) and буду + infinitive (буду ездить).\n\nArabic **always builds the future from the present** with سَـ / سَوْفَ."
   },
   {
    "for": "es",
    "rel": "similar",
-   "text": "Spanish has a one-word future (viajaré) and ir a + infinitive; Arabic’s present for plans (أُسَافِرُ غَدًا) matches “viajo mañana”, and سَأُسَافِرُ the future tense."
+   "text": "Spanish has a one-word future (viajaré) and ir a + infinitive.\n- Arabic’s present for plans matches “viajo mañana”: أُسَافِرُ غَدًا\n- سَأُسَافِرُ matches the future tense."
   },
   {
    "for": "en",
    "rel": "similar",
-   "text": "“will” is a separate word like سَوْفَ; Arabic usually joins its short form سَـ to the verb, and “won’t” is another particle, لَنْ, with a changed verb ending (لَنْ أُسَافِرَ)."
+   "text": "“will” is a separate word like سَوْفَ; Arabic usually **joins its short form سَـ to the verb**.\n\n“won’t” is another particle, لَنْ, with a changed verb ending:\n→ لَنْ أُسَافِرَ"
   },
   {
    "for": "fr",
    "rel": "similar",
-   "text": "French has a one-word future (je voyagerai) and aller + infinitive (je vais voyager); Arabic builds it from the present with سَـ / سَوْفَ and negates it with لَنْ."
+   "text": "French has a one-word future (je voyagerai) and aller + infinitive (je vais voyager).\n\nArabic builds it from the present with سَـ / سَوْفَ and negates it with لَنْ."
   },
   {
    "for": "de",
    "rel": "similar",
-   "text": "German uses werden + infinitive or simply the present with a time word (ich reise morgen); Arabic does both: سَأُسَافِرُ or أُسَافِرُ غَدًا."
+   "text": "German uses werden + infinitive or simply the present with a time word (ich reise morgen). Arabic does both:\n→ سَأُسَافِرُ or أُسَافِرُ غَدًا"
   },
   {
    "for": "hi",
    "rel": "different",
-   "text": "Hindi has a one-word future that shows the speaker’s gender (मैं जाऊँगा / जाऊँगी); the Arabic future is the present with سَـ, and its “I” form has no gender (سَأَذْهَبُ)."
+   "text": "Hindi has a one-word future that shows the speaker’s gender:\n→ मैं जाऊँगा / जाऊँगी\n\nThe Arabic future is the present with سَـ, and its “I” form has no gender:\n→ سَأَذْهَبُ"
   },
   {
    "for": "fa",
@@ -468,7 +468,7 @@
   {
    "for": "ja",
    "rel": "different",
-   "text": "Japanese has no future form: the non-past (行く) covers it, as the Arabic present can (أَذْهَبُ غَدًا); Arabic adds سَـ when the future is meant explicitly."
+   "text": "Japanese has no future form: the non-past (行く) covers it, as the Arabic present can (أَذْهَبُ غَدًا).\n\nArabic adds سَـ when the future is meant explicitly."
   },
   {
    "for": "ko",
@@ -498,7 +498,7 @@
   {
    "for": "zh",
    "rel": "different",
-   "text": "Chinese uses 要, 会 or 打算 before an unchanged verb (我要去埃及); Arabic joins سَـ to a verb that already carries the person (سَأُسَافِرُ)."
+   "text": "Chinese uses 要, 会 or 打算 before an unchanged verb:\n→ 我要去埃及\n\nArabic joins سَـ to a verb that **already carries the person**:\n→ سَأُسَافِرُ"
   },
   {
    "for": "vi",
@@ -509,6 +509,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut marks the future with a suffix inside the verb word (-langa-); Arabic puts سَـ before the present."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Italian has a one-word future (viaggerò) and uses the present for plans (domani parto). Arabic does both:\n→ سَأُسَافِرُ or أُسَافِرُ غَدًا\n\n**The negative changes the particle:** لَنْ أُسَافِرَ, not *لَا سَأُسَافِرُ."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Albanian builds the future like Arabic, with a particle before the verb:\n→ do të shkoj = سَأَذْهَبُ\n\nBut the negative keeps do (nuk do të shkoj), while **Arabic replaces سَـ with لَنْ**:\n→ لَنْ أَذْهَبَ"
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "Portuguese has a one-word future (viajarei), ir + infinitive (vou viajar) and the present for plans (viajo amanhã).\n\nArabic uses:\n- سَـ / سَوْفَ, or the present with a time word;\n- لَنْ + subjunctive for “will not”."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your future is an ending or an auxiliary, Arabic is simpler:\n- سَـ (or سَوْفَ) before the present — سَأُسَافِرُ;\n- لَنْ + the subjunctive for the negative."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If your language marks the future with a suffix inside the verb, Arabic puts **a particle in front of the present** instead:\n→ سَـ + أُسَافِرُ = سَأُسَافِرُ"
+  },
+  {
+   "for": "type:isolating",
+   "rel": "similar",
+   "text": "If you mark the future with a word before an unchanged verb, the idea is the same — but the Arabic verb **already carries the person**:\n→ سَأُسَافِرُ, سَتُسَافِرُ, سَيُسَافِرُ"
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If your language marks the future with a suffix inside the verb word, note that Arabic:\n- puts سَـ before the present;\n- negates it with a different particle, لَنْ."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If your language is Semitic, the prefix verb may already be your future.\n\nIn Arabic it is **the present**, and the future needs سَـ or سَوْفَ:\n→ سَأُسَافِرُ"
   }
  ]
 }

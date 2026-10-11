@@ -586,12 +586,12 @@
   {
    "lang": "he",
    "fn": "fn.past",
-   "note": "Hebrew has the same Semitic suffix past: Arabic -tu, -nā match Hebrew -ti, -nu (יָשַׁנְתִּי “I slept”, כָּתַבְנוּ “we wrote”); Hebrew negates it with לֹא, Arabic with لَمْ + jussive."
+   "note": "Hebrew has the same Semitic suffix past — Arabic -tu, -nā match Hebrew -ti, -nu:\n→ יָשַׁנְתִּי “I slept”, כָּתַבְנוּ “we wrote”\n\nHebrew negates it with לֹא, Arabic with لَمْ + jussive."
   },
   {
    "lang": "de",
    "fn": "fn.past",
-   "note": "German speaks of the past mostly with the Perfekt (ich habe geschlafen, ich bin aufgewacht); Arabic has one synthetic past (نِمْتُ، اِسْتَيْقَظْتُ) with no auxiliary."
+   "note": "German speaks of the past mostly with the Perfekt (ich habe geschlafen, ich bin aufgewacht).\n\nArabic has one synthetic past with no auxiliary:\n→ نِمْتُ، اِسْتَيْقَظْتُ"
   },
   {
    "lang": "zh",
@@ -601,7 +601,7 @@
   {
    "lang": "ar",
    "fn": "fn.present",
-   "note": "The present puts the person in a prefix (أَغْسِلُ، تَغْسِلُ); the past in an ending (غَسَلْتُ، غَسَلَتْ). The jussive after لَمْ is built from the present."
+   "note": "- The present puts the person in a prefix: أَغْسِلُ، تَغْسِلُ.\n- The past puts it in an ending: غَسَلْتُ، غَسَلَتْ.\n\nThe jussive after لَمْ is built from the present."
   }
  ],
  "typology": [
@@ -634,27 +634,27 @@
   {
    "for": "el",
    "rel": "similar",
-   "text": "Greek also has a past with person endings and no pronoun (κοιμήθηκα “I slept”); the Arabic past (نِمْتُ) matches the Greek aorist of a completed action, and the Greek imperfect (κοιμόμουν) matches كُنْتُ أَنَامُ of the next lesson."
+   "text": "Greek also has a past with person endings and no pronoun (κοιμήθηκα “I slept”).\n- The Arabic past (نِمْتُ) matches the Greek aorist of a completed action.\n- The Greek imperfect (κοιμόμουν) matches كُنْتُ أَنَامُ of the next lesson."
   },
   {
    "for": "ru",
    "rel": "different",
-   "text": "Russian marks completion with perfective verbs (проснулся / просыпался) and its past agrees in gender and number, not person; Arabic has one past form (اِسْتَيْقَظْتُ) whose ending shows the person, and the gender only in the 2nd and 3rd person."
+   "text": "Russian marks completion with perfective verbs (проснулся / просыпался), and its past agrees in gender and number, not person.\n\nArabic has **one past form** whose ending shows the person, and the gender only in the 2nd and 3rd person:\n→ اِسْتَيْقَظْتُ"
   },
   {
    "for": "es",
    "rel": "similar",
-   "text": "Like the preterite (me desperté), the Arabic past is one word with a person ending; Arabic has no separate perfect (me he despertado): both are اِسْتَيْقَظْتُ, with قَدْ to stress “already”."
+   "text": "Like the preterite (me desperté), the Arabic past is one word with a person ending.\n\nArabic has **no separate perfect** (me he despertado): both are اِسْتَيْقَظْتُ, with قَدْ to stress “already”."
   },
   {
    "for": "en",
    "rel": "new",
-   "text": "English has “woke up” and “have woken up”; Arabic has one past (اِسْتَيْقَظْتُ), optionally with قَدْ. The negative needs no “did”: لَمْ + a special form of the verb (لَمْ أَسْتَيْقِظْ)."
+   "text": "English has “woke up” and “have woken up”; Arabic has **one past** (اِسْتَيْقَظْتُ), optionally with قَدْ.\n\nThe negative needs no “did”: لَمْ + a special form of the verb:\n→ لَمْ أَسْتَيْقِظْ"
   },
   {
    "for": "fr",
    "rel": "different",
-   "text": "Spoken French tells the past with the passé composé (je me suis réveillé, j’ai dormi); the Arabic past is a single word with an ending (اِسْتَيْقَظْتُ، نِمْتُ), closer to the written passé simple."
+   "text": "Spoken French tells the past with the passé composé (je me suis réveillé, j’ai dormi).\n\nThe Arabic past is **a single word with an ending**, closer to the written passé simple:\n→ اِسْتَيْقَظْتُ، نِمْتُ"
   },
   {
    "for": "de",
@@ -664,7 +664,7 @@
   {
    "for": "hi",
    "rel": "different",
-   "text": "Hindi builds the past from a participle that agrees in gender and number (मैं उठा / मैं उठी) and marks the subject of a transitive past with ने; the Arabic past agrees through endings and never changes the case of the subject."
+   "text": "Hindi builds the past from a participle that agrees in gender and number (मैं उठा / मैं उठी) and marks the subject of a transitive past with ने.\n\nThe Arabic past agrees through endings and **never changes the case of the subject**."
   },
   {
    "for": "fa",
@@ -674,7 +674,7 @@
   {
    "for": "mr",
    "rel": "different",
-   "text": "The Marathi past shows the speaker’s gender even with “I” (मी उठलो / मी उठले); the Arabic past has one form for “I” (اِسْتَيْقَظْتُ) and shows gender only in the 2nd and 3rd person (اِسْتَيْقَظْتَ / اِسْتَيْقَظْتِ)."
+   "text": "The Marathi past shows the speaker’s gender even with “I” (मी उठलो / मी उठले).\n\nThe Arabic past has one form for “I” and shows gender only in the 2nd and 3rd person:\n→ اِسْتَيْقَظْتُ\n→ اِسْتَيْقَظْتَ / اِسْتَيْقَظْتِ"
   },
   {
    "for": "he",
@@ -684,12 +684,12 @@
   {
    "for": "tr",
    "rel": "different",
-   "text": "Turkish puts a past suffix before the person ending (uyandım “I woke up”) and has a second, hearsay past in -miş; Arabic has one past (اِسْتَيْقَظْتُ) and no evidential distinction."
+   "text": "Turkish puts a past suffix before the person ending (uyandım “I woke up”) and has a second, hearsay past in -miş.\n\nArabic has **one past** (اِسْتَيْقَظْتُ) and no evidential distinction."
   },
   {
    "for": "ja",
    "rel": "different",
-   "text": "Japanese marks the past with -ta (起きた) and never marks the person; the Arabic ending carries person, number and gender (اِسْتَيْقَظْتُ / اِسْتَيْقَظَتْ)."
+   "text": "Japanese marks the past with -ta (起きた) and never marks the person.\n\nThe Arabic ending carries **person, number and gender**:\n→ اِسْتَيْقَظْتُ / اِسْتَيْقَظَتْ"
   },
   {
    "for": "ko",
@@ -699,7 +699,7 @@
   {
    "for": "fi",
    "rel": "similar",
-   "text": "Finnish also has a past with person endings (heräsin, heräsit); Arabic adds gender (اِسْتَيْقَظْتَ / اِسْتَيْقَظْتِ) and negates with a particle, لَمْ, instead of a negative verb (en herännyt)."
+   "text": "Finnish also has a past with person endings (heräsin, heräsit). Arabic:\n- adds gender: اِسْتَيْقَظْتَ / اِسْتَيْقَظْتِ;\n- negates with a particle, لَمْ, instead of a negative verb (en herännyt)."
   },
   {
    "for": "hu",
@@ -719,7 +719,7 @@
   {
    "for": "zh",
    "rel": "different",
-   "text": "Chinese marks completion with 了 and experience with 过 after an unchanged verb (我起床了); Arabic changes the verb itself (نَهَضْتُ) and has no special marker for “have ever done”."
+   "text": "Chinese marks completion with 了 and experience with 过 after an unchanged verb (我起床了).\n\nArabic **changes the verb itself** (نَهَضْتُ) and has no special marker for “have ever done”."
   },
   {
    "for": "vi",
@@ -730,6 +730,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut marks how long ago something happened (earlier today, yesterday, long ago) with suffixes inside the verb; Arabic has one past and adds time words (أَمْسِ، قَبْلَ سَنَةٍ)."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Like the passato remoto (mangiai), the Arabic past is one word with a person ending; the spoken passato prossimo (ho mangiato) is also أَكَلْتُ — **Arabic has no auxiliary**.\n\nThe negative needs another form:\n→ لَمْ آكُلْ, not *لَا أَكَلْتُ"
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Like the Albanian aorist (shkova, “I went”), the Arabic past is one word with a person ending:\n→ ذَهَبْتُ\n\n- The perfect kam shkuar is also ذَهَبْتُ (with قَدْ for “already”).\n- The negative uses لَمْ + jussive: لَمْ أَذْهَبْ."
+  },
+  {
+   "for": "pt",
+   "rel": "same",
+   "text": "Like the pretérito perfeito (acordei, “I woke up / I have woken up”), the Arabic past is one word with a person ending and **covers both meanings**:\n→ اِسْتَيْقَظْتُ\n\nThe negative needs another form:\n→ لَمْ أَسْتَيْقِظْ (não acordei)"
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your past has person endings, Arabic is close: **one form with an ending** for every finished action, with no auxiliary.\n→ نِمْتُ, نِمْنَا\n\nThe negative uses لَمْ + the jussive."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If you add a past suffix and then a person suffix, note that Arabic has **a separate past stem** with its own person endings:\n→ كَتَبَ → كَتَبْتُ, كَتَبْنَا"
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If you mark completion with a particle after an unchanged verb, note that Arabic **changes the verb itself**, and قَدْ before it stresses “already”.\n→ نَامَ (he slept) → نِمْتُ (I slept)"
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "similar",
+   "text": "If your verbs carry person and tense in endings, the Arabic past will feel natural — one word, with the ending for the person:\n→ غَسَلْتُ, غَسَلَتْ, غَسَلْنَا"
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "If your language is Semitic, the suffix past is the same old form, with endings close to yours (-tu, -nā, -ū).\n\nOnly the negative لَمْ + jussive is Arabic’s own."
   }
  ]
 }

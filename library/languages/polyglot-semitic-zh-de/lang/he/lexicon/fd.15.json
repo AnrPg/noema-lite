@@ -29,6 +29,18 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": {
+     "none": "a name of a day or month: not used with possessive endings"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -111,7 +123,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Like the other month names, Hebrew took יָנוּאָר from German (Wiktionary) — so German Januar, Russian январь and Greek Ιανουάριος are its brothers."
+     "Like the other month names, Hebrew took יָנוּאָר from German (Wiktionary): German Januar is its model."
     ],
     "pitfalls": [
      "No article and no change after בְּ: בְּיָנוּאָר “in January” (a month is like a name).",
@@ -119,6 +131,18 @@
     ],
     "subtleties": [
      "January falls in the Hebrew months טֵבֵת and שְׁבָט; Hebrew dates and Gregorian dates are both used in Israel."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "A brother of январь: the same Roman month name."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "A brother of Ιανουάριος: the same Roman month name."
+     }
     ]
    }
   },
@@ -151,6 +175,18 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": {
+     "none": "a name of a day or month: not used with possessive endings"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -228,7 +264,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish Şubat and Levantine Arabic شُبَاط “February” carry the old Semitic month name that Hebrew calls שְׁבָט."
+     "Levantine Arabic شُبَاط “February” carries the old Semitic month name that Hebrew calls שְׁבָט."
     ],
     "pitfalls": [
      "The first letter is פ without a dot: f (februar) — a sign of a loanword.",
@@ -236,6 +272,13 @@
     ],
     "subtleties": [
      "February overlaps the Hebrew month שְׁבָט; the tree festival טוּ בִּשְׁבָט (15 Shevat) falls in January or February."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish Şubat “February” carries the old Semitic month name that Hebrew calls שְׁבָט."
+     }
     ]
    }
   },
@@ -268,6 +311,18 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": {
+     "none": "a name of a day or month: not used with possessive endings"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -353,7 +408,7 @@
      "No article and no change after בְּ: בְּמֶרְץ “in March” (a month is like a name)."
     ],
     "subtleties": [
-     "March overlaps the Hebrew month אֲדָר (Purim, 14 Adar) or נִיסָן. In a Hebrew leap year there are two Adars: אֲדָר א׳ and אֲדָר ב׳."
+     "- March overlaps the Hebrew month אֲדָר (Purim, 14 Adar) or נִיסָן.\n- In a Hebrew leap year there are two Adars: אֲדָר א׳ and אֲדָר ב׳."
     ]
    }
   },
@@ -386,6 +441,18 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": {
+     "none": "a name of a day or month: not used with possessive endings"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -463,7 +530,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish Nisan “April” and Levantine Arabic نَيْسَان are the same name as the Hebrew month נִיסָן."
+     "Levantine Arabic نَيْسَان “April” is the same name as the Hebrew month נִיסָן."
     ],
     "pitfalls": [
      "No article and no change after בְּ: בְּאַפְּרִיל “in April” (a month is like a name).",
@@ -471,6 +538,13 @@
     ],
     "subtleties": [
      "April overlaps the Hebrew month נִיסָן, the month of Passover (פֶּסַח, 15 Nisan)."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish Nisan “April” is the same name as the Hebrew month נִיסָן."
+     }
     ]
    }
   },
@@ -503,6 +577,18 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": {
+     "none": "a name of a day or month: not used with possessive endings"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -615,6 +701,18 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": {
+     "none": "a name of a day or month: not used with possessive endings"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -687,7 +785,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Unvowelled, “June” and “Greek” (יוני / יווני) are almost the same word — a pun for a Greek speaker."
+     "Unvowelled, יוּנִי “June” and יְוָנִי “Greek” (יוני / יווני) are almost the same word."
     ],
     "pitfalls": [
      "No article and no change after בְּ: בְּיוּנִי “in June” (a month is like a name).",
@@ -695,6 +793,13 @@
     ],
     "subtleties": [
      "June overlaps the Hebrew month סִיוָן, the month of Shavuot (6 Sivan)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "A pun for you: unvowelled יוני “June” and יווני “Greek” are almost the same word."
+     }
     ]
    }
   },
@@ -727,6 +832,18 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": {
+     "none": "a name of a day or month: not used with possessive endings"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -799,7 +916,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish Temmuz “July” and Levantine Arabic تَمُّوز are the same name as the Hebrew month תַּמּוּז."
+     "Levantine Arabic تَمُّوز “July” is the same name as the Hebrew month תַּמּוּז."
     ],
     "pitfalls": [
      "No article and no change after בְּ: בְּיוּלִי “in July” (a month is like a name).",
@@ -807,6 +924,13 @@
     ],
     "subtleties": [
      "July overlaps the Hebrew month תַּמּוּז."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish Temmuz “July” is the same name as the Hebrew month תַּמּוּז."
+     }
     ]
    }
   },
@@ -839,6 +963,18 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": {
+     "none": "a name of a day or month: not used with possessive endings"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -956,6 +1092,18 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": {
+     "none": "a name of a day or month: not used with possessive endings"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -1033,7 +1181,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish Eylül “September” and Levantine Arabic أَيْلُول are the same name as the Hebrew month אֱלוּל."
+     "Levantine Arabic أَيْلُول “September” is the same name as the Hebrew month אֱלוּל."
     ],
     "pitfalls": [
      "No article and no change after בְּ: בְּסֶפְּטֶמְבֶּר “in September” (a month is like a name).",
@@ -1041,6 +1189,13 @@
     ],
     "subtleties": [
      "September overlaps the Hebrew months אֱלוּל and תִּשְׁרֵי — the time of the High Holidays."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish Eylül “September” is the same name as the Hebrew month אֱלוּל."
+     }
     ]
    }
   },
@@ -1073,6 +1228,18 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": {
+     "none": "a name of a day or month: not used with possessive endings"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -1190,6 +1357,18 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": {
+     "none": "a name of a day or month: not used with possessive endings"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -1307,6 +1486,18 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": {
+     "none": "a name of a day or month: not used with possessive endings"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -1384,7 +1575,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Latin decem “ten” is the same word as Greek δέκα and Russian десять — December was the tenth month (Wiktionary)."
+     "December was the tenth month of the old Roman year: Latin decem “ten”, a cousin of German zehn (Wiktionary)."
     ],
     "pitfalls": [
      "After בְּ the dot of the ד disappears: בְּדֵצֶמְבֶּר (bedetsember).",
@@ -1392,6 +1583,18 @@
     ],
     "subtleties": [
      "December overlaps the Hebrew months כִּסְלֵו and טֵבֵת; Hanukkah begins on 25 Kislev."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Latin decem “ten” is a cousin of δέκα."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Latin decem “ten” is a cousin of десять."
+     }
     ]
    }
   },
@@ -1434,6 +1637,27 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": [
+     {
+      "form": "אֲבִיבִי",
+      "number": "SG",
+      "register": "formal"
+     },
+     {
+      "form": "אֲבִיבַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -1579,6 +1803,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "segolate: vowels rebuilt"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -1654,7 +1890,7 @@
     "synonyms": [],
     "synonymsNone": "No synonym in use.",
     "etymology": {
-     "text": "From Proto-Semitic *qayθ̣- “summer”; compare Aramaic qēṭā and Arabic قَيْظ (qayẓ, “oppressive heat, midsummer”) (Wiktionary).",
+     "text": "From Proto-Semitic *qayθ̣- “summer”; compare Arabic قَيْظ (qayẓ, “oppressive heat, midsummer”) (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -1710,6 +1946,18 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -1836,7 +2084,7 @@
      "“In autumn” takes the article: בַּסְּתָו."
     ],
     "subtleties": [
-     "In the Bible סְתָו is the rainy winter (Wiktionary): כִּי הִנֵּה הַסְּתָו עָבָר “for lo, the winter is past” (Song of Songs 2:11)."
+     "In the Bible סְתָו is the rainy winter (Wiktionary):\n→ כִּי הִנֵּה הַסְּתָו עָבָר “for lo, the winter is past” (Song of Songs 2:11)"
     ]
    }
   },
@@ -1877,6 +2125,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "segolate: vowels rebuilt"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -2025,6 +2285,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "ending of the other gender"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -2178,6 +2450,18 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pluralShape": [
+     "segolate: vowels rebuilt"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -2274,7 +2558,7 @@
     "synonyms": [],
     "synonymsNone": "No synonym in use.",
     "etymology": {
-     "text": "Originally “new moon”; related to חָדָשׁ “new”; compare Phoenician ḥdš “new moon, month” (Wiktionary).",
+     "text": "Originally “new moon”; related to חָדָשׁ “new” (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -2328,6 +2612,27 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "ending of the other gender"
+    ],
+    "possessive": [
+     {
+      "form": "שְׁנָתִי",
+      "number": "SG",
+      "register": "formal"
+     },
+     {
+      "form": "שְׁנוֹתַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -2418,7 +2723,7 @@
     "synonyms": [],
     "synonymsNone": "No synonym in use.",
     "etymology": {
-     "text": "Inherited from Proto-Semitic *šanat-; cognate with Arabic سَنَة (sana) and Ugaritic šnt (Wiktionary).",
+     "text": "Inherited from Proto-Semitic *šanat-; cognate with Arabic سَنَة (sana) (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -2489,7 +2794,19 @@
       ],
       "note": "with the article + a number: הַשָּׁעָה שָׁלוֹשׁ “it is three o’clock”"
      }
-    ]
+    ],
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": {
+     "none": "not a noun for a person"
+    }
    },
    "forms": {
     "N;SG;INDF": "שָׁעָה",
@@ -2628,16 +2945,23 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Arabic سَاعَة and Turkish saat (from Arabic) mean both “hour” and “clock” — Hebrew uses שָׁעָה for the hour and שָׁעוֹן for the clock."
+     "Arabic سَاعَة means both “hour” and “clock” — Hebrew uses שָׁעָה for the hour and שָׁעוֹן for the clock."
     ],
     "pitfalls": [
-     "Telling the time uses the feminine numbers, because שָׁעָה is feminine: הַשָּׁעָה שָׁלוֹשׁ (not שְׁלוֹשָׁה), בְּשָׁעָה שְׁתַּיִם.",
+     "Telling the time uses the feminine numbers, because שָׁעָה is feminine:\n→ הַשָּׁעָה שָׁלוֹשׁ (not שְׁלוֹשָׁה), בְּשָׁעָה שְׁתַּיִם",
      "There is no separate word for “o’clock”: “at five o’clock” is בְּשָׁעָה חָמֵשׁ (or just בְּחָמֵשׁ).",
      "Two hours = שְׁעָתַיִם (dual), not *שְׁתֵּי שָׁעוֹת."
     ],
     "subtleties": [
-     "Half past = וָחֵצִי: הַשָּׁעָה שָׁלוֹשׁ וָחֵצִי; quarter past = וָרֶבַע; quarter to = רֶבַע לְ…: רֶבַע לְאַרְבַּע.",
+     "Half past = וָחֵצִי: הַשָּׁעָה שָׁלוֹשׁ וָחֵצִי; quarter past = וָרֶבַע; quarter to = רֶבַע לְ…:\n→ רֶבַע לְאַרְבַּע",
      "A watch or a clock is a שָׁעוֹן — from שָׁעָה (Wiktionary)."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish saat (from Arabic سَاعَة) is both “hour” and “clock”; Hebrew splits them: שָׁעָה / שָׁעוֹן."
+     }
     ]
    }
   },
@@ -2678,6 +3002,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -2760,7 +3096,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Arabic دَقِيقَة and Turkish dakika are the same word — the “fine, small” part of an hour (Wiktionary gives the Arabic)."
+     "Arabic دَقِيقَة is the same word — the “fine, small” part of an hour (Wiktionary gives the Arabic)."
     ],
     "pitfalls": [
      "Feminine: דַּקָּה אַחַת, חָמֵשׁ דַּקּוֹת (feminine numbers).",
@@ -2768,6 +3104,13 @@
     ],
     "subtleties": [
      "עוֹד דַּקָּה is “in a minute”; רֶגַע is shorter and vaguer."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "same",
+      "text": "Turkish dakika is the same word, from Arabic دَقِيقَة."
+     }
     ]
    }
   },
@@ -2808,6 +3151,27 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": [
+     {
+      "form": "תַּאֲרִיכִי",
+      "number": "SG",
+      "register": "formal"
+     },
+     {
+      "form": "תַּאֲרִיכַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -2885,7 +3249,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Arabic تَارِيخ and Turkish tarih mean both “date” and “history”; Hebrew borrowed only “date”."
+     "Arabic تَارِيخ means both “date” and “history”; Hebrew borrowed only “date”."
     ],
     "pitfalls": [
      "A date is a day of the calendar — not a meeting with someone (that is פְּגִישָׁה) and not the fruit (תָּמָר).",
@@ -2893,6 +3257,13 @@
     ],
     "subtleties": [
      "A date is said “day + בְּ + month”: עֶשְׂרִים בְּמַאי “the 20th of May” (masculine numbers, for יוֹם)."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish tarih (from Arabic) means both “date” and “history”; Hebrew תַּאֲרִיךְ is only “date”."
+     }
     ]
    }
   },
@@ -2930,6 +3301,19 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "compound: the first word changes",
+     "stem change"
+    ],
+    "possessive": {
+     "none": "a compound: “my …” is said with שֶׁל after it (… שֶׁלִּי); the endings go only on the first word in formal style"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -3025,7 +3409,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Israelis also sing יוֹם הֻלֶּדֶת שָׂמֵחַ to the English tune of “Happy Birthday”."
+     "Israelis also sing יוֹם הֻלֶּדֶת שָׂמֵחַ to the international “Happy Birthday” tune."
     ],
     "pitfalls": [
      "The article goes on the second word: יוֹם הַהֻלֶּדֶת (not *הַיּוֹם הֻלֶּדֶת).",
@@ -3074,6 +3458,18 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -3249,7 +3645,11 @@
       "cell": "ADP;3;PL;FEM",
       "form": "אַחֲרֵיהֶן"
      }
-    ]
+    ],
+    "suffixSet": "plural-noun endings",
+    "withArticle": {
+     "none": "a separate word: the article stays on the noun (אַחֲרֵי הַ…)"
+    }
    },
    "note": "“After” (in time): אַחֲרֵי הָעֲבוֹדָה. Before a clause אַחֲרֵי שֶׁ…; with pronouns אַחֲרַי “after me”, אַחֲרֶיךָ …",
    "ref": {
@@ -3369,6 +3769,12 @@
     "spelling": "עד",
     "pronForms": {
      "none": "not used with personal endings in Modern Hebrew (literary עָדַי …)"
+    },
+    "suffixSet": {
+     "none": "no personal endings (see the forms with endings)"
+    },
+    "withArticle": {
+     "none": "a separate word: the article stays on the noun (עַד הַ…)"
     }
    },
    "note": "“Until, till”; with מִ: from … to … (מִשְּׁמוֹנֶה עַד חָמֵשׁ). Before a clause עַד שֶׁ…",
@@ -3476,7 +3882,7 @@
      }
     ],
     "etymology": {
-     "text": "Biblical Hebrew; Wiktionary gives no etymology. The Aramaic word is the same: עַד.",
+     "text": "Biblical Hebrew; Wiktionary gives no etymology.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -3505,6 +3911,12 @@
     "spelling": "מאז",
     "pronForms": {
      "none": "a time word: not used with personal endings"
+    },
+    "suffixSet": {
+     "none": "no personal endings (see the forms with endings)"
+    },
+    "withArticle": {
+     "none": "a separate word: the article stays on the noun (מֵאָז הַ…)"
     }
    },
    "note": "“Since (a point in time)”, with the present for what is still going on: הוּא פֹּה מֵאָז יָנוּאָר. Alone it means “since then”. With a time word מִ alone also works: מֵהַבֹּקֶר “since the morning”.",
@@ -3599,10 +4011,17 @@
      "German seit + present (ich warte seit einer Stunde) works exactly like Hebrew מֵאָז + present."
     ],
     "pitfalls": [
-     "A state that is still going on takes the present: הוּא פֹּה מֵאָז יָנוּאָר “he has been here since January” — like German Er ist seit Januar hier, not like English “has been”."
+     "A state that is still going on takes the present: הוּא פֹּה מֵאָז יָנוּאָר “he has been here since January” — like German Er ist seit Januar hier."
     ],
     "subtleties": [
      "Before a clause: מֵאָז שֶׁ… “ever since …” (Wiktionary)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "Not like “has been”: a state that still lasts takes the present — הוּא פֹּה מֵאָז יָנוּאָר."
+     }
     ]
    }
   },
@@ -3619,6 +4038,12 @@
     "spelling": "במשך",
     "pronForms": {
      "none": "a time word: not used with personal endings"
+    },
+    "suffixSet": {
+     "none": "no personal endings (see the forms with endings)"
+    },
+    "withArticle": {
+     "none": "a separate word: the article stays on the noun (בְּמֶשֶׁךְ הַ…)"
     }
    },
    "note": "“During, for (a period)”: בְּמֶשֶׁךְ הַקַּיִץ “during the summer”, בְּמֶשֶׁךְ שָׁעָה “for an hour”. A length of time can also stand alone: מְחַכֶּה שָׁעָה.",

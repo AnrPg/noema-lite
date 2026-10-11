@@ -149,12 +149,12 @@
      "The folk etymology ‘a hand holding meat’ makes a good memory aid, even though the real analysis treats 又 as the sound element."
     ],
     "pitfalls": [
-     "Negate only with 没: 我没有, never *我不有.",
-     "Under negation 一个 is normally dropped: 我没有南瓜 (I have no pumpkin)."
+     "Negate only with 没:\n→ 我没有, never *我不有.",
+     "Under negation 一个 is normally dropped:\n→ 我没有南瓜 (I have no pumpkin)."
     ],
     "subtleties": [
-     "When a place comes first, 有 means ‘there is’: 冰箱里有黄瓜 ‘there are cucumbers in the fridge’.",
-     "有 + a noun can make an adjective: 有名 (famous), 有用 (useful), 有意思 (interesting)."
+     "When a place comes first, 有 means ‘there is’:\n→ 冰箱里有黄瓜 ‘there are cucumbers in the fridge’.",
+     "有 + a noun can make an adjective:\n→ 有名 (famous), 有用 (useful), 有意思 (interesting)."
     ]
    },
    "features": {
@@ -170,7 +170,33 @@
     "separable": {
      "none": "one syllable: nothing to split"
     },
-    "neg": "mei"
+    "neg": "mei",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "state"
+    ],
+    "aspect": [
+     "了",
+     "过",
+     "着"
+    ],
+    "complements": {
+     "none": "takes none"
+    },
+    "redup": {
+     "none": "not doubled: a state"
+    },
+    "degreeComplement": {
+     "none": "takes no 得 comment of manner or degree"
+    },
+    "object": [
+     "noun"
+    ]
    }
   },
   {
@@ -196,7 +222,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "place word (在家)"
    },
    "contrasts": [
     {
@@ -347,12 +384,12 @@
      "国家 ‘country’ is literally ‘state-family’, and 大家 ‘big family’ means ‘everybody’."
     ],
     "pitfalls": [
-     "我家 is both ‘my family’ and ‘my home’: 我家在北京 ‘my home is in Beijing’.",
+     "我家 is both ‘my family’ and ‘my home’:\n→ 我家在北京 ‘my home is in Beijing’.",
      "As a measure word 家 counts shops and companies (一家公司) and households (这栋楼住着三家人 ‘three families live in this building’); a family as a unit is 一个家庭.",
-     "‘At home’ is 在家 — no 里 needed (在家里 is also fine). ‘To go home’ is 回家 (not *去家); ‘to go to someone’s home’ is 去 + owner + 家: 去我家."
+     "‘At home’ is 在家 — no 里 needed (在家里 is also fine).\n\n‘To go home’ is 回家 (not *去家); ‘to go to someone’s home’ is 去 + owner + 家:\n→ 去我家."
     ],
     "subtleties": [
-     "With 家 the 的 is normally dropped: 我家, 你们家; 我的家 sounds emotional, as in songs.",
+     "With 家 the 的 is normally dropped:\n→ 我家, 你们家;\n\n我的家 sounds emotional, as in songs.",
      "As a measure word for shops, restaurants and companies (这家饭馆 ‘this restaurant’) 家 is learned as its own entry, the measure word 家 (S11)."
     ]
    }
@@ -379,7 +416,20 @@
     "measure": [
      "个",
      "户"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a social unit, not a place: ‘at home’ is 在家"
+    }
    },
    "contrasts": [
     {
@@ -488,7 +538,7 @@
      "家庭 is the family as a unit; for ‘my family’ in daily talk say 我家 or 我的家人."
     ],
     "subtleties": [
-     "家庭 is often the first part of a compound: 家庭作业 ‘homework’, 家庭医生 ‘family doctor’, 家庭主妇 ‘housewife’."
+     "家庭 is often the first part of a compound:\n→ 家庭作业 ‘homework’, 家庭医生 ‘family doctor’, 家庭主妇 ‘housewife’."
     ]
    }
   },
@@ -514,7 +564,18 @@
     "measure": [
      "位",
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -606,10 +667,17 @@
      "家人们 ‘family members!’ has become the typical greeting of Chinese livestreamers to their viewers — like ‘folks!’."
     ],
     "pitfalls": [
-     "家人 means the people: 我的家人 ‘my family (members)’; a family as a unit is 一个家庭."
+     "家人 means the people:\n→ 我的家人 ‘my family (members)’; a family as a unit is 一个家庭."
     ],
     "subtleties": [
-     "我们是家人 ‘we are family’ is also said to close friends — the same image as English."
+     "我们是家人 ‘we are family’ is also said to close friends."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "The same image as English ‘we’re family’."
+     }
     ]
    }
   },
@@ -634,7 +702,18 @@
     },
     "measure": {
      "none": "a pair word that is not counted with a measure word: 我的父母, 他父母"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -724,14 +803,21 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Like German Eltern and Greek γονείς, Chinese has one word for ‘parents’ — but it is simply ‘father-mother’."
+     "Like German Eltern, Chinese has one word for ‘parents’ — but it is simply ‘father-mother’."
     ],
     "pitfalls": [
-     "The order is fixed: 父母 ‘father-mother’, never *母父.",
+     "The order is fixed:\n→ 父母 ‘father-mother’, never *母父.",
      "You talk ABOUT your parents with 父母; you call them 爸 and 妈."
     ],
     "subtleties": [
      "父母 is neutral to formal; in casual speech people say 我爸妈."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Like Greek γονείς, one word — but built from ‘father’ + ‘mother’."
+     }
     ]
    }
   },
@@ -757,7 +843,16 @@
     "measure": [
      "个",
      "位"
-    ]
+    ],
+    "neutralTone": "the second 妈 is toneless: mā ma",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -860,14 +955,36 @@
     },
     "funFacts": [
      "妈 mā, 麻 má ‘hemp’, 马 mǎ ‘horse’, 骂 mà ‘to scold’ — the classic drill of the four tones starts with ‘mother’.",
-     "Like Greek μαμά, Russian мама and German Mama, 妈妈 is a nursery word built on ‘ma’."
+     "Like German Mama, 妈妈 is a nursery word built on ‘ma’ — such words for ‘mother’ are found all over the world."
     ],
     "pitfalls": [
      "The second syllable is toneless: māma, not *māmā.",
-     "妈 alone (mā) is the informal short form: 我妈 ‘my mum’, 妈！ ‘Mum!’"
+     "妈 alone (mā) is the informal short form:\n→ 我妈 ‘my mum’, 妈！ ‘Mum!’"
     ],
     "subtleties": [
-     "With family words 的 is usually dropped: 我妈妈 ‘my mother’; 我的妈妈 sounds more emphatic or written."
+     "With family words 的 is usually dropped:\n→ 我妈妈 ‘my mother’;\n\n我的妈妈 sounds more emphatic or written."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Greek μαμά is the same kind of word."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Russian мама is the same kind of word."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "French maman is the same kind of word."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Italian mamma is the same kind of word."
+     }
     ]
    }
   },
@@ -893,7 +1010,18 @@
     "measure": [
      "个",
      "位"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -988,7 +1116,7 @@
      "母亲 is formal or written: you use it in a speech or an essay, but you call your mother 妈 / 妈妈 — never *母亲 to her face."
     ],
     "subtleties": [
-     "母亲 is the word for figurative mothers: 母亲河 ‘mother river’, 祖国母亲 ‘the motherland’."
+     "母亲 is the word for figurative mothers:\n→ 母亲河 ‘mother river’, 祖国母亲 ‘the motherland’."
     ]
    }
   },
@@ -1014,7 +1142,16 @@
     "measure": [
      "个",
      "位"
-    ]
+    ],
+    "neutralTone": "the second 爸 is toneless: bà ba",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -1108,13 +1245,35 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "bàba sounds like Turkish baba ‘father’ and Arabic bābā ‘dad’ — b/p nursery words for ‘father’ are found worldwide (Greek μπαμπάς, Russian папа, Hebrew אַבָּא)."
+     "bàba sounds like Arabic bābā ‘dad’ and Hebrew אַבָּא (abba) — b/p nursery words for ‘father’ are found worldwide."
     ],
     "pitfalls": [
      "The second syllable is toneless: bàba."
     ],
     "subtleties": [
      "爸爸 and 妈妈 are both how you talk about your parents and how you call them; 父亲 / 母亲 are never used to call them."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Greek μπαμπάς is one of them."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Russian папа is one of them."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "French papa is one of them."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Italian papà is one of them."
+     }
     ]
    }
   },
@@ -1140,7 +1299,18 @@
     "measure": [
      "个",
      "位"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -1229,14 +1399,14 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "In Taiwan Father’s Day is 8 August: 八八 bābā sounds like 爸爸.",
+     "In Taiwan Father’s Day is 8 August:\n→ 八八 bābā sounds like 爸爸.",
      "Zhu Ziqing’s essay 背影 ‘The View of My Father’s Back’ (1925) is a school classic about a father’s love."
     ],
     "pitfalls": [
      "父亲 is formal: you would never call your father *父亲 — call him 爸 or 爸爸."
     ],
     "subtleties": [
-     "In father-son words the literary 父 is used: 父子 ‘father and son’, 父女 ‘father and daughter’."
+     "In father-son words the literary 父 is used:\n→ 父子 ‘father and son’, 父女 ‘father and daughter’."
     ]
    }
   },
@@ -1261,7 +1431,16 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": "子 zi: the noun suffix 子 is toneless",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1387,7 +1566,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1480,7 +1670,7 @@
      "女儿红 ‘daughter red’ is a Shaoxing rice wine that by tradition was buried when a daughter was born and opened at her wedding."
     ],
     "pitfalls": [
-     "女儿 is a daughter (a relation), 女孩 a girl (any girl): 我有一个女儿 vs 那个女孩是学生."
+     "女儿 is a daughter (a relation), 女孩 a girl (any girl):\n→ 我有一个女儿 vs 那个女孩是学生."
     ],
     "subtleties": [
      "Politely, someone else’s daughter is 您的千金 ‘your thousand gold’."
@@ -1508,7 +1698,16 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": "the second 哥 is toneless: gē ge",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -1602,14 +1801,14 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "哥 came into Chinese from the Xianbei word aqa ‘elder brother’ — compare Turkish ağabey (abi) ‘big brother’, from Turkic aka."
+     "哥 came into Chinese from the Xianbei word aqa ‘elder brother’ — a word of the northern steppe peoples."
     ],
     "pitfalls": [
-     "There is no everyday word for just ‘brother’: say 哥哥 (older) or 弟弟 (younger). ‘Brothers and sisters’ is 兄弟姐妹.",
+     "There is no everyday word for just ‘brother’: say 哥哥 (older) or 弟弟 (younger).\n\n‘Brothers and sisters’ is 兄弟姐妹.",
      "The second syllable is toneless: gēge."
     ],
     "subtleties": [
-     "哥 is also a friendly address for a young man a little older than you: 张哥 ‘brother Zhang’."
+     "哥 is also a friendly address for a young man a little older than you:\n→ 张哥 ‘brother Zhang’."
     ]
    }
   },
@@ -1634,7 +1833,16 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": "the second 弟 is toneless: dì di",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -1734,7 +1942,7 @@
      "第 ‘order, -th’ (第一 ‘first’) is 弟 under bamboo 竹 — the same idea of sequence."
     ],
     "pitfalls": [
-     "弟弟 is only the younger brother; an older one is 哥哥. The second syllable is toneless: dìdi."
+     "弟弟 is only the younger brother; an older one is 哥哥.\n\nThe second syllable is toneless: dìdi."
     ],
     "subtleties": [
      "小弟 xiǎodì is also a man’s modest ‘I’ among friends, and ‘underling’ in gang talk."
@@ -1762,7 +1970,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -1910,7 +2129,16 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": "the second 姐 is toneless: jiě jie",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -2010,7 +2238,7 @@
      "小姐 ‘Miss’ (literally ‘little elder sister’) is a polite address, but on the mainland it is often avoided now because it can suggest a bar hostess — 姐 or 美女 are heard instead."
     ],
     "pitfalls": [
-     "Only the OLDER sister is 姐姐; the younger is 妹妹. The second syllable is toneless: jiějie."
+     "Only the OLDER sister is 姐姐; the younger is 妹妹.\n\nThe second syllable is toneless: jiějie."
     ],
     "subtleties": [
      "Shop assistants and waitresses are often addressed as 姐 / 姐姐 or 美女 ‘beautiful lady’ — informal but friendly."
@@ -2038,7 +2266,16 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": "the second 妹 is toneless: mèi mei",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -2135,13 +2372,30 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish also splits sisters by age — abla ‘elder sister’ vs kız kardeş — but Chinese does it for brothers too: 哥哥, 弟弟, 姐姐, 妹妹."
+     "Chinese splits siblings by age for both sexes — 哥哥, 弟弟, 姐姐, 妹妹 — and has no everyday word for one ‘sister’ without saying older or younger."
     ],
     "pitfalls": [
      "The second syllable is toneless: mèimei."
     ],
     "subtleties": [
      "妹子 mèizi is slang for ‘girl, young woman’."
+    ],
+    "notes": [
+     {
+      "for": "ja",
+      "rel": "same",
+      "text": "Japanese splits them the same way, with the same characters:\n→ 兄 / 弟, 姉 / 妹."
+     },
+     {
+      "for": "en",
+      "rel": "new",
+      "text": "English sister needs ‘older / younger’ added; Chinese must choose 姐姐 or 妹妹."
+     },
+     {
+      "for": "hi",
+      "rel": "similar",
+      "text": "Hindi बहन has no age split, though दीदी is used for an elder sister — Chinese always chooses:\n→ 姐姐 or 妹妹."
+     }
     ]
    }
   },
@@ -2166,7 +2420,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -2263,13 +2528,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Chinese, like English, has ‘sister cities’: 姐妹城市."
+     "Twin towns are 姐妹城市 ‘sister cities’ in Chinese."
     ],
     "pitfalls": [
      "姐妹 says nothing about age: 我有两个姐妹 ‘I have two sisters’ — older or younger."
     ],
     "subtleties": [
-     "Women call close friends 姐妹, as English speakers say ‘sis’."
+     "Women call close friends 姐妹 ‘sisters’."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Like English ‘sister cities’ — and women’s 姐妹 for friends is like ‘sis’."
+     }
     ]
    }
   },
@@ -2295,7 +2567,16 @@
     "measure": [
      "个",
      "位"
-    ]
+    ],
+    "neutralTone": "夫 fu is toneless in this word (alone: fū); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -2397,7 +2678,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Japanese 大丈夫 daijōbu ‘it’s all right’ comes from the same Chinese 大丈夫 ‘a real man’."
+     "大丈夫 ‘a real man, a man of character’ is an old Chinese phrase built on 丈夫."
     ],
     "pitfalls": [
      "zhàngfu with a toneless fu is ‘husband’; zhàngfū with a full tone is the literary ‘man’ in 大丈夫."
@@ -2405,6 +2686,13 @@
     "subtleties": [
      "丈夫 is neutral and fine everywhere; with friends people say 老公, in polite company 我先生.",
      "The literary ‘man, a real man’ survives in sayings: 男子汉大丈夫，说话要算数 ‘a real man keeps his word’ — there the word is read zhàngfū."
+    ],
+    "notes": [
+     {
+      "for": "ja",
+      "rel": "trap",
+      "text": "Japanese 大丈夫 daijōbu ‘it’s all right’ comes from this Chinese 大丈夫 ‘a real man’; and Japanese 丈夫 jōbu means ‘sturdy’, not ‘husband’."
+     }
     ]
    }
   },
@@ -2429,7 +2717,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -2555,7 +2854,16 @@
     "measure": [
      "个",
      "位"
-    ]
+    ],
+    "neutralTone": "子 zi: the noun suffix 子 is toneless",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -2686,7 +2994,16 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": "婆 po is toneless in this word (alone: pó); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -2820,7 +3137,16 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": "the second 宝 is toneless: bǎo bao",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -2954,7 +3280,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -3055,7 +3392,7 @@
      "婴儿 is for babies up to about one year; an older little child is a 宝宝 or 小孩."
     ],
     "subtleties": [
-     "婴儿 is the word of shops and doctors: 婴儿用品 ‘baby products’, 婴儿食品 ‘baby food’."
+     "婴儿 is the word of shops and doctors:\n→ 婴儿用品 ‘baby products’, 婴儿食品 ‘baby food’."
     ]
    }
   },
@@ -3080,7 +3417,18 @@
     },
     "measure": {
      "none": "a pair word that is not counted with a measure word: 我的祖父母"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3170,7 +3518,7 @@
      "祖 means ‘ancestor’: 祖国 ‘motherland’ is literally ‘the ancestors’ country’ — like German Vaterland."
     ],
     "pitfalls": [
-     "Strictly 祖父母 are the father’s parents; the mother’s are 外祖父母. In daily talk say 爷爷奶奶 / 外公外婆."
+     "Strictly 祖父母 are the father’s parents; the mother’s are 外祖父母.\n\nIn daily talk say 爷爷奶奶 / 外公外婆."
     ],
     "subtleties": [
      "祖父母 belongs to writing — forms, essays, the news; nobody calls their grandparents that."
@@ -3199,7 +3547,16 @@
     "measure": [
      "个",
      "位"
-    ]
+    ],
+    "neutralTone": "the second 爷 is toneless: yé ye",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -3329,7 +3686,18 @@
     "measure": [
      "个",
      "位"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -3421,7 +3789,7 @@
      "外 ‘outside’ reflects the old patrilineal view: the mother’s family was ‘outside’ the clan."
     ],
     "pitfalls": [
-     "外 marks the mother’s side: 外公, 外婆, 外孙. Don’t call your father’s father 外公 — he is 爷爷."
+     "外 marks the mother’s side:\n→ 外公, 外婆, 外孙.\n\nDon’t call your father’s father 外公 — he is 爷爷."
     ],
     "subtleties": [
      "外公 / 外婆 are standard and southern; in the north many say 姥爷 / 姥姥."
@@ -3450,7 +3818,16 @@
     "measure": [
      "个",
      "位"
-    ]
+    ],
+    "neutralTone": "the second 奶 is toneless: nǎi nai",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -3580,7 +3957,18 @@
     "measure": [
      "个",
      "位"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -3677,13 +4065,13 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "婆 ‘grandmother’ is an old Sino-Tibetan word: Burmese still says bhwa: for ‘grandmother’."
+     "婆 ‘grandmother’ is an old word, inherited from Proto-Sino-Tibetan *pʷa-n."
     ],
     "pitfalls": [
-     "外婆 is the mother’s mother; the father’s mother is 奶奶. 婆婆 alone means ‘mother-in-law (the husband’s mother)’ in standard Chinese."
+     "外婆 is the mother’s mother; the father’s mother is 奶奶.\n\n婆婆 alone means ‘mother-in-law (the husband’s mother)’ in standard Chinese."
     ],
     "subtleties": [
-     "Southern and standard: 外婆; northern: 姥姥."
+     "Southern and standard:\n→ 外婆;\n→ northern: 姥姥."
     ]
    }
   },
@@ -3710,7 +4098,16 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": "子 zi: the noun suffix 子 is toneless",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -3863,7 +4260,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -3974,7 +4382,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -4089,7 +4508,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -4175,7 +4605,7 @@
      "外孙女 is the DAUGHTER’s daughter; the son’s daughter is 孙女."
     ],
     "subtleties": [
-     "外 always marks a link through a woman of the family: 外公, 外婆, 外孙, 外甥."
+     "外 always marks a link through a woman of the family:\n→ 外公, 外婆, 外孙, 外甥."
     ]
    }
   },
@@ -4201,7 +4631,16 @@
     "measure": [
      "个",
      "位"
-    ]
+    ],
+    "neutralTone": "the second 叔 is toneless: shū shu",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -4329,7 +4768,16 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": "the second 伯 is toneless: bó bo",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -4458,7 +4906,16 @@
     "measure": [
      "个",
      "位"
-    ]
+    ],
+    "neutralTone": "the second 舅 is toneless: jiù jiu",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -4594,7 +5051,16 @@
     "measure": [
      "个",
      "位"
-    ]
+    ],
+    "neutralTone": "父 fu is toneless in this word (alone: fù); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -4679,7 +5145,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Every uncle by marriage is named after his wife: 姑父 is ‘aunt-father’, 姨父 ‘(maternal) aunt-father’."
+     "Every uncle by marriage is named after his wife:\n→ 姑父 is ‘aunt-father’, 姨父 ‘(maternal) aunt-father’."
     ],
     "pitfalls": [
      "姑父 is related by marriage: the husband of 姑姑 (your father’s sister)."
@@ -4711,7 +5177,16 @@
     "measure": [
      "个",
      "位"
-    ]
+    ],
+    "neutralTone": "父 fu is toneless in this word (alone: fù); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -4828,7 +5303,16 @@
     "measure": [
      "个",
      "位"
-    ]
+    ],
+    "neutralTone": "the second 姑 is toneless: gū gu",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -4950,7 +5434,18 @@
     "measure": [
      "个",
      "位"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -5100,7 +5595,18 @@
     "measure": [
      "个",
      "位"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -5180,7 +5686,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The wives of uncles are named after their husbands: 舅妈 (舅舅’s wife), 婶婶 (叔叔’s wife), 伯母 (伯伯’s wife)."
+     "The wives of uncles are named after their husbands:\n→ 舅妈 (舅舅’s wife), 婶婶 (叔叔’s wife), 伯母 (伯伯’s wife)."
     ],
     "pitfalls": [
      "舅妈 is the wife of 舅舅 — related by marriage, not by blood."
@@ -5212,7 +5718,16 @@
     "measure": [
      "个",
      "位"
-    ]
+    ],
+    "neutralTone": "the second 婶 is toneless: shěn shen",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -5305,13 +5820,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "婶 squeezes two syllables, 叔 + 母, into one — the way English ‘ma’am’ comes from ‘madam’."
+     "婶 squeezes two syllables, 叔 + 母 ‘uncle’s mother-figure’, into one."
     ],
     "pitfalls": [
      "婶婶 is the wife of 叔叔; the wife of 伯伯 is 伯母, of 舅舅 舅妈."
     ],
     "subtleties": [
      "In the countryside 婶 / 婶子 is a friendly address for a married woman of the village."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "The way English ‘ma’am’ comes from ‘madam’."
+     }
     ]
    }
   },
@@ -5337,7 +5859,18 @@
     "measure": [
      "个",
      "位"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -5462,7 +5995,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -5577,7 +6121,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -5692,7 +6247,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -5807,7 +6373,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -5922,7 +6499,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -6037,7 +6625,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -6152,7 +6751,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -6267,7 +6877,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -6382,7 +7003,16 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": "子 zi: the noun suffix 子 is toneless",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -6498,7 +7128,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -6609,7 +7250,16 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": "甥 sheng is toneless in this word (alone: shēng); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -6700,7 +7350,7 @@
      "The pun 外甥打灯笼——照舅 (照旧) ‘as usual’ is one of the best-known 歇后语 — two-part riddle sayings."
     ],
     "pitfalls": [
-     "外甥 is your SISTER’s son; your brother’s son is 侄子. In some dialects 外甥 can also mean a daughter’s son."
+     "外甥 is your SISTER’s son; your brother’s son is 侄子.\n\nIn some dialects 外甥 can also mean a daughter’s son."
     ],
     "subtleties": [
      "From the nephew’s side you are his 舅舅 (if you are a man) or 姨 / 阿姨 (if a woman)."
@@ -6728,7 +7378,16 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": "甥 sheng is toneless in this word (alone: shēng); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "contrasts": [
     {
@@ -6808,13 +7467,25 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English has one ‘niece’, Chinese four: 侄女 (brother’s), 外甥女 (sister’s) — and for a wife’s side further words exist."
+     "Chinese has several words for ‘niece’: 侄女 (a brother’s daughter), 外甥女 (a sister’s daughter) — and the wife’s side has further words."
     ],
     "pitfalls": [
      "外甥女 is your SISTER’s daughter; your brother’s daughter is 侄女."
     ],
     "subtleties": [
      "外 again marks the link through a woman of the family — here your sister."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "new",
+      "text": "English has one ‘niece’ for all of them."
+     },
+     {
+      "for": "de",
+      "rel": "new",
+      "text": "German has one Nichte for all of them."
+     }
     ]
    }
   },
@@ -6840,7 +7511,16 @@
     "measure": [
      "个",
      "位"
-    ]
+    ],
+    "neutralTone": "戚 qi is toneless in this word (alone: qī); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -7055,11 +7735,11 @@
      "的 is the most frequent character in Chinese texts."
     ],
     "pitfalls": [
-     "的 comes AFTER the owner: 我的书 ‘my book’, never *的我书 or *书的我.",
+     "的 comes AFTER the owner:\n→ 我的书 ‘my book’, never *的我书 or *书的我.",
      "的 is toneless: de."
     ],
     "subtleties": [
-     "我的 alone means ‘mine’: 这本书是我的 ‘this book is mine’."
+     "我的 alone means ‘mine’:\n→ 这本书是我的 ‘this book is mine’."
     ]
    },
    "features": {
@@ -7074,7 +7754,11 @@
     },
     "position": [
      "afterModifier"
-    ]
+    ],
+    "neutralTone": "the whole word is toneless: 的 de (a particle)",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    }
    }
   },
   {
@@ -7101,7 +7785,14 @@
     },
     "kind": [
      "sortal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "counts": "members of a household (三口人); mouthfuls (一口饭)"
    }
   }
  ],

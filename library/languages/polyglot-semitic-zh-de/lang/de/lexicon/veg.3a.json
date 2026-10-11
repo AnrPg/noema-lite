@@ -27,6 +27,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Kurkuma"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -50,7 +63,7 @@
      "neutral"
     ],
     "connotation": "neutral",
-    "feeling": "Golden-yellow curry colour, “golden milk” and stained fingers; fresh roots look like small orange ginger.",
+    "feeling": "Golden-yellow curry colour, “golden milk” and stained fingers.\n\nFresh roots look like small orange ginger.",
     "senses": [
      {
       "id": "s1",
@@ -131,7 +144,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Arabic كُرْكُم (kurkum) and Hebrew כּוּרְכּוּם (kurkum) are the same word as German Kurkuma; Chinese says 姜黄 (jiānghuáng, “ginger-yellow”).",
+     "Arabic كُرْكُم (kurkum) and Hebrew כּוּרְכּוּם (kurkum) are the same word as German Kurkuma.\n\nChinese says 姜黄 (jiānghuáng, “ginger-yellow”).",
      "Turmeric belongs to the ginger family: the fresh rhizomes look like ginger with bright orange flesh."
     ],
     "pitfalls": [
@@ -139,7 +152,7 @@
      "Plural Kurkumen is rare; people say Kurkumawurzeln for several roots."
     ],
     "subtleties": [
-     "Kurkuma alone usually means the dried yellow spice; for the fresh root say frische Kurkuma or Kurkumawurzel."
+     "Kurkuma alone usually means the dried yellow spice.\n\nFor the fresh root say frische Kurkuma or Kurkumawurzel."
     ]
    }
   },
@@ -165,6 +178,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Borretsches"
+    ],
+    "number": "singular only",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a mass noun, month or name of a substance: no diminutive in use"
     }
    },
    "forms": {
@@ -257,18 +283,30 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German boretsch, buretsch, reflecting a Romance pronunciation of Medieval Latin borāgō. Compare French bourrache.",
+     "text": "From Middle High German boretsch, buretsch, reflecting a Romance pronunciation of Medieval Latin borāgō.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
      "Borage is one of the seven herbs of the Frankfurter Grüne Soße, together with parsley, chives, chervil, cress, sorrel and salad burnet.",
-     "English borage, French bourrache and German Borretsch all come from Medieval Latin borago."
+     "Borretsch comes from Medieval Latin borago."
     ],
     "pitfalls": [
      "No plural in normal use: say Borretschblätter (leaves) or Borretschpflanzen (plants)."
     ],
     "subtleties": [
-     "Only young leaves are used: older ones are very hairy. The flowers are a garnish and turn pink when they fade."
+     "- Only young leaves are used: older ones are very hairy.\n- The flowers are a garnish and turn pink when they fade."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English borage is the same word as Borretsch, from medieval borago."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "Borretsch is related to French bourrache."
+     }
     ]
    }
   },
@@ -307,6 +345,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Gänsefußes"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (der Fuß)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -407,7 +456,14 @@
      "Gänsefüßchen (diminutive, plural) means “quotation marks” in colloquial German – not little plants."
     ],
     "subtleties": [
-     "Botanically Gänsefuß is the whole genus; the edible weed is the Weiße Gänsefuß. Like spinach it contains oxalic acid, so it is usually cooked."
+     "Botanically Gänsefuß is the whole genus; the edible weed is the Weiße Gänsefuß.\n\nLike spinach it contains oxalic acid, so it is usually cooked."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Chenopodium is χήνα + πόδι – exactly Gänsefuß."
+     }
     ]
    }
   },
@@ -446,6 +502,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Klettenwurzel"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Wurzel)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -557,10 +624,17 @@
      "The hooked burrs of the burdock inspired the hook-and-loop fastener – in German it is still called Klettverschluss."
     ],
     "pitfalls": [
-     "Klette alone means the plant or its burrs, and figuratively a clingy person; for the vegetable say Klettenwurzel."
+     "Klette alone means the plant or its burrs, and figuratively a clingy person.\n\nFor the vegetable say Klettenwurzel."
     ],
     "subtleties": [
      "The cut root browns quickly; Japanese recipes soak it in water or vinegar water."
+    ],
+    "notes": [
+     {
+      "for": "ja",
+      "rel": "same",
+      "text": "Klettenwurzel is ゴボウ (gobō)."
+     }
     ]
    }
   },
@@ -591,6 +665,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Wasabi"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -686,14 +773,21 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Most “wasabi” paste outside Japan is horseradish with mustard and green colouring; real wasabi is expensive.",
-     "Chinese writes 山葵 (shānkuí) with the same characters as Japanese, but usually calls the paste 芥末 (jièmo)."
+     "Most “wasabi” paste outside Japan is horseradish with mustard and green colouring.\n\nReal wasabi is expensive.",
+     "Chinese writes the plant 山葵 (shānkuí) but usually calls the paste 芥末 (jièmo)."
     ],
     "pitfalls": [
      "Gender: der Wasabi (Wiktionary); the plural is identical and hardly used."
     ],
     "subtleties": [
      "The burning comes from volatile mustard oils: it rises into the nose and fades quickly, unlike the heat of chili."
+    ],
+    "notes": [
+     {
+      "for": "ja",
+      "rel": "same",
+      "text": "Wasabi is わさび (山葵); Chinese writes the plant with the same characters but calls the paste 芥末."
+     }
     ]
    }
   },
@@ -731,6 +825,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Winterzwiebel"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Zwiebel)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -829,13 +934,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Chinese 葱 (cōng) and Japanese negi (ねぎ) are mostly this species, not the European onion."
+     "Chinese 葱 (cōng) is mostly this species, not the common onion."
     ],
     "pitfalls": [
      "It is not an onion for winter storage: the name refers to its frost hardiness."
     ],
     "subtleties": [
-     "In shops Frühlingszwiebel covers both young common onions and Welsh onions; gardeners keep the names apart."
+     "In shops Frühlingszwiebel covers both young common onions and Welsh onions.\n\nGardeners keep the names apart."
+    ],
+    "notes": [
+     {
+      "for": "ja",
+      "rel": "same",
+      "text": "ねぎ (negi) is mostly this species – Winterzwiebel, not the 玉ねぎ (Zwiebel)."
+     }
     ]
    }
   },
@@ -866,6 +978,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Rhabarbers"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -967,7 +1092,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The name says “foreign (barbarian) rheum”: the root came to the Greeks from beyond their world. Greek ραβέντι, Turkish ravent and Russian ревень are related names.",
+     "The name says “foreign (barbarian) rheum”: the root came to the Greeks from beyond their world.",
      "Medicinal rhubarb root is Chinese 大黄 (dàhuáng, “big yellow”)."
     ],
     "pitfalls": [
@@ -975,9 +1100,21 @@
      "The plural is the same as the singular: die Rhabarber (rarely needed)."
     ],
     "subtleties": [
-     "Botanically a vegetable (a leafstalk), but in the kitchen treated like fruit; the traditional harvest ends on Johanni, 24 June."
+     "Botanically a vegetable (a leafstalk), but in the kitchen treated like fruit.\n\nThe traditional harvest ends on Johanni, 24 June."
     ],
-    "synonymsNone": "No other standard word; Swiss and Austrian German also say Rhabarber."
+    "synonymsNone": "No other standard word; Swiss and Austrian German also say Rhabarber.",
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "ραβέντι is a related name."
+     },
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "ревень is a related name."
+     }
+    ]
    }
   },
   {
@@ -1014,6 +1151,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Wasserkastanie"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Kastanie)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -1105,7 +1253,7 @@
      "Chinese 荸荠 (bíqí). It is not related to the chestnut at all: it is the corm of a sedge."
     ],
     "pitfalls": [
-     "Some books also call the water caltrop (Trapa) Wasserkastanie; the usual German name for that one is Wassernuss."
+     "Some books also call the water caltrop (Trapa) Wasserkastanie.\n\nThe usual German name for that one is Wassernuss."
     ],
     "subtleties": [
      "The crunch survives cooking because the cell walls are stabilised by special compounds (ferulic acid)."
@@ -1146,6 +1294,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Wassernuss"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Nuss)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -1230,17 +1389,29 @@
      }
     ],
     "etymology": {
-     "text": "Wasser (“water”, from Old High German waȥȥar) + Nuss (“nut”, from Old High German nuȥ, cognate with English nut).",
+     "text": "Wasser (“water”, from Old High German waȥȥar) + Nuss (“nut”, from Old High German nuȥ).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
      "Chinese 菱角 (língjiao). People in Europe gathered water caltrops as food since prehistoric times."
     ],
     "pitfalls": [
-     "Do not mix up Wassernuss (Trapa) and Wasserkastanie (Eleocharis) – English “water chestnut” can mean both."
+     "Do not mix up Wassernuss (Trapa) and Wasserkastanie (Eleocharis): they are different plants."
     ],
     "subtleties": [
      "The raw nut is not eaten; it is boiled or roasted, and the starchy kernel tastes like chestnut."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English “water chestnut” can mean both Wassernuss and Wasserkastanie."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Nuss is related to English nut."
+     }
     ]
    }
   },
@@ -1278,6 +1449,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Yambohne"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Bohne)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -1367,7 +1549,7 @@
      }
     ],
     "etymology": {
-     "text": "Yams (“yam”) + Bohne (“bean”, from Old High German bōna, cognate with English bean): a bean plant with a yam-like root.",
+     "text": "Yams (“yam”) + Bohne (“bean”, from Old High German bōna): a bean plant with a yam-like root.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -1378,7 +1560,14 @@
      "Despite the name it is no yam: it is a legume."
     ],
     "subtleties": [
-     "In Germany it is a niche product; recipes usually write Jicama, while Yambohne is the dictionary and botany name."
+     "In Germany it is a niche product.\n\nRecipes usually write Jicama, while Yambohne is the dictionary and botany name."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Bohne is related to English bean."
+     }
     ]
    }
   },
@@ -1409,6 +1598,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Kardone"
+    ],
+    "number": "singular and plural",
+    "genderCue": "most nouns in -e are feminine (die Lampe)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -1507,14 +1707,14 @@
      "src": "Duden online; Wiktionary (kaikki.org) for Italian cardo"
     },
     "funFacts": [
-     "The cardoon is the wild-type form of the same species as the artichoke; the artichoke was bred from it for its flower heads."
+     "The cardoon is the wild-type form of the same species as the artichoke.\n\nThe artichoke was bred from it for its flower heads."
     ],
     "pitfalls": [
      "The stalks are bitter and stringy: they are peeled and blanched before cooking.",
      "Do not confuse with Karde, a different thistle-like plant (teasel)."
     ],
     "subtleties": [
-     "In Germany Kardone is a restaurant and cookbook word; in French-speaking Switzerland the Cardon genevois is a protected regional speciality."
+     "In Germany Kardone is a restaurant and cookbook word.\n\nIn French-speaking Switzerland the Cardon genevois is a protected regional speciality."
     ]
    }
   },
@@ -1553,6 +1753,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Erdmandel"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Mandel)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -1653,14 +1864,21 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish yer bademi means the same as Erdmandel: “earth almond”. In Egypt tiger nuts are called حَبّ العَزِيز (ḥabb al-ʿazīz).",
+     "Erdmandel means “earth almond”. In Egypt tiger nuts are called حَبّ العَزِيز (ḥabb al-ʿazīz).",
      "Tiger nuts were found as grave goods in ancient Egyptian tombs."
     ],
     "pitfalls": [
-     "It is not a nut and not an almond but a tuber; Wiktionary also lists Erdmandel for the peanut and the earthnut pea, but today it normally means the tiger nut."
+     "It is not a nut and not an almond but a tuber.\n\nWiktionary also lists Erdmandel for the peanut and the earthnut pea, but today it normally means the tiger nut."
     ],
     "subtleties": [
      "Dried tiger nuts are hard and are soaked before eating or making milk."
+    ],
+    "notes": [
+     {
+      "for": "es",
+      "rel": "similar",
+      "text": "Erdmandel is chufa, the nut of horchata de chufa."
+     }
     ]
    }
   },
@@ -1693,6 +1911,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Malabarspinats"
+    ],
+    "number": "singular only",
+    "genderCue": "compound: the last part decides (der Spinat)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a mass noun, month or name of a substance: no diminutive in use"
     }
    },
    "forms": {
@@ -1819,6 +2048,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Galgants"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -1919,7 +2161,7 @@
      "Do not use it 1:1 instead of ginger: the taste is different (citrus, pine, pepper)."
     ],
     "subtleties": [
-     "German Galgant can mean several related plants; in Thai cooking it is the greater galangal (Alpinia galanga)."
+     "German Galgant can mean several related plants.\n\nIn Thai cooking it is the greater galangal (Alpinia galanga)."
     ]
    }
   },
@@ -1957,6 +2199,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Gartenmelde"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Melde)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -2050,13 +2303,13 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German Wikipedia counts garden orache among the oldest cultivated plants; spinach pushed it out of European gardens."
+     "German Wikipedia counts garden orache among the oldest cultivated plants.\n\nSpinach pushed it out of European gardens."
     ],
     "pitfalls": [
      "Do not confuse Melde (orache) with the homonym Melde, a rare noun from melden (“to report”)."
     ],
     "subtleties": [
-     "Like spinach and fat hen it contains oxalic acid and is usually eaten cooked; red varieties lose their colour in the pot."
+     "Like spinach and fat hen it contains oxalic acid and is usually eaten cooked.\n\nRed varieties lose their colour in the pot."
     ]
    }
   },
@@ -2082,6 +2335,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Guten Heinrichs"
+    ],
+    "number": "singular only",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a mass noun, month or name of a substance: no diminutive in use"
     }
    },
    "forms": {
@@ -2173,13 +2439,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English Good King Henry, German Guter Heinrich: the plant has a man’s name in both languages."
+     "The plant bears a man’s name: Guter Heinrich, “good Henry”."
     ],
     "pitfalls": [
-     "Gut is declined like an adjective: der Gute Heinrich, des Guten Heinrichs, but Guter Heinrich without an article. Write both parts with a capital letter."
+     "Gut is declined like an adjective:\n→ der Gute Heinrich, des Guten Heinrichs, but Guter Heinrich without an article\n\nWrite both parts with a capital letter."
     ],
     "subtleties": [
      "Botanists moved it from the goosefoot genus Chenopodium to Blitum, but cooks still treat it like fat hen and spinach."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "In English it is Good King Henry – a man’s name too."
+     }
     ]
    }
   },
@@ -2217,6 +2490,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Konjakwurzel"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Wurzel)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -2317,7 +2601,7 @@
      "The thickener glucomannan (E 425) comes from konjac; products are labelled Konjak, not Konjakwurzel."
     ],
     "subtleties": [
-     "The corm is a tuber-like stem, not a botanical root; the word Wurzel is used loosely, as in Ingwerwurzel."
+     "The corm is a tuber-like stem, not a botanical root.\n\nThe word Wurzel is used loosely, as in Ingwerwurzel."
     ]
    }
   },
@@ -2355,6 +2639,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Meerfenchels"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (der Fenchel)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -2433,20 +2728,42 @@
     "phrases": [],
     "synonyms": [],
     "etymology": {
-     "text": "Meer (“sea”, from Old High German meri, cognate with Latin mare) + Fenchel (“fennel”, ultimately from Latin fēnuculum).",
+     "text": "Meer (“sea”, from Old High German meri) + Fenchel (“fennel”, ultimately from Latin fēnuculum).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek κρίταμο (krítamo) is the same plant, a classic Greek pickle.",
+     "Pickled sea fennel is a classic of Mediterranean coasts.",
      "Shakespeare’s King Lear mentions a samphire gatherer on the cliffs of Dover: “dreadful trade!”"
     ],
     "pitfalls": [
-     "English “samphire” is also used for glasswort (Queller); in German these are two different words."
+     "Do not confuse Meerfenchel with Queller (glasswort): two different plants and two different words."
     ],
     "subtleties": [
      "It is not related to fennel; the name comes from the fennel-like smell and feathery leaves."
     ],
-    "synonymsNone": "No common German synonym: the plant is rare in German-speaking countries, and cooks sometimes use the French name criste marine instead."
+    "synonymsNone": "No common German synonym: the plant is rare in German-speaking countries, and cooks sometimes use the French name criste marine instead.",
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "κρίταμο is this plant – the classic Greek pickle."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English “samphire” is used for Meerfenchel and for glasswort (Queller); German keeps them apart."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "Meer is related to mare (sea)."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "Meer is related to mer (sea)."
+     }
+    ]
    }
   },
   {
@@ -2476,6 +2793,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Quellers"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -2570,17 +2900,24 @@
      }
     ],
     "etymology": {
-     "text": "From Low German Queller, from Middle Low German queller, quelder, cognate with Dutch kwelder (“salt marsh”); probably from quellen (“to soak, swell with water”) + -er.",
+     "text": "From Low German Queller, from Middle Low German queller, quelder; probably from quellen (“to soak, swell with water”) + -er.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The ash of glasswort was once used to make glass and soap – hence the English name."
+     "The ash of Queller was once used to make glass and soap."
     ],
     "pitfalls": [
      "Usually used without plural as a mass noun; the plural is the same form: die Queller."
     ],
     "subtleties": [
      "The plants store salt, so they need no extra salt; rinse them and cook only briefly."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "The glass made from its ash gave the English name glasswort."
+     }
     ]
    }
   },
@@ -2606,6 +2943,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Neuseeländer Spinats"
+    ],
+    "number": "singular only",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a mass noun, month or name of a substance: no diminutive in use"
     }
    },
    "forms": {
@@ -2695,13 +3045,13 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Joseph Banks, the botanist of Captain Cook’s first voyage, brought it to Europe; the sailors ate it against scurvy."
+     "Joseph Banks, the botanist of Captain Cook’s first voyage, brought it to Europe.\n\nThe sailors ate it against scurvy."
     ],
     "pitfalls": [
      "Neuseeländer is never declined: der Neuseeländer Spinat, des Neuseeländer Spinats, mit Neuseeländer Spinat."
     ],
     "subtleties": [
-     "It is not related to spinach (it belongs to the ice-plant family); it likes heat, while true spinach bolts."
+     "It is not related to spinach (it belongs to the ice-plant family).\n\nIt likes heat, while true spinach bolts."
     ]
    }
   },
@@ -2740,6 +3090,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Palmherzes"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (das Herz)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -2829,17 +3190,34 @@
      }
     ],
     "etymology": {
-     "text": "Palme (“palm”, from Latin palma) + Herz (“heart”, from Old High German hërza, cognate with English heart).",
+     "text": "Palme (“palm”, from Latin palma) + Herz (“heart”, from Old High German hërza).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "For many wild palms, harvesting the heart kills the tree; today most palm hearts come from farmed multi-stemmed palms such as the peach palm."
+     "For many wild palms, harvesting the heart kills the tree.\n\nToday most palm hearts come from farmed multi-stemmed palms such as the peach palm."
     ],
     "pitfalls": [
      "Herz is irregular, and so is Palmherz in some forms: genitive des Palmherzes or des Palmherzens, dative dem Palmherz or Palmherzen."
     ],
     "subtleties": [
-     "Usually used in the plural for the product (Palmherzen); one piece is ein Palmherz or eine Stange Palmherz."
+     "Usually used in the plural for the product (Palmherzen).\n\nOne piece is ein Palmherz or eine Stange Palmherz."
+    ],
+    "notes": [
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "Palmherz translates palmito."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Palmherz translates palmito."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Herz is related to English heart."
+     }
     ]
    }
   },
@@ -2877,6 +3255,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Haferwurzel"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Wurzel)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -3019,6 +3408,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Zuckerwurzel"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Wurzel)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -3152,6 +3552,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Knollenziestes"
+    ],
+    "number": "singular only",
+    "genderCue": "compound: the last part decides (der Ziest)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a mass noun, month or name of a substance: no diminutive in use"
     }
    },
    "forms": {
@@ -3286,6 +3697,19 @@
     ],
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Amarants"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -3309,7 +3733,7 @@
      "neutral"
     ],
     "connotation": "neutral",
-    "feeling": "Known in Germany mostly as a tiny gluten-free grain; in Greece and Asia the leaves are a summer green.",
+    "feeling": "Known in Germany mostly as a tiny gluten-free grain.\n\nIn Greece and Asia the leaves are a summer green.",
     "senses": [
      {
       "id": "s1",
@@ -3371,7 +3795,7 @@
      {
       "word": "Amaranth",
       "register": "neutral",
-      "nuance": "spelling variant, as in English"
+      "nuance": "spelling variant with -th"
      }
     ],
     "etymology": {
@@ -3379,7 +3803,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek βλίτα (vlíta), boiled amaranth greens with lemon and oil, is a classic summer dish; Chinese 苋菜 (xiàncài) is amaranth greens too.",
+     "Boiled amaranth greens with lemon and oil are a summer dish around the Mediterranean.\n\nChinese 苋菜 (xiàncài) is amaranth greens too.",
      "Amaranth was a staple grain of the Aztecs."
     ],
     "pitfalls": [
@@ -3387,7 +3811,19 @@
      "In German Amarant usually means the grain; for the vegetable say Amarantblätter."
     ],
     "subtleties": [
-     "The same plants give grain (the seeds) and greens (the leaves); some species are common garden weeds."
+     "The same plants give grain (the seeds) and greens (the leaves).\n\nSome species are common garden weeds."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Amaranth is spelled as in English."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "βλίτα are Amarant leaves."
+     }
     ]
    }
   },
@@ -3425,6 +3861,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Winterkresse"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Kresse)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -3514,17 +3961,24 @@
      }
     ],
     "etymology": {
-     "text": "From Winter (“winter”) + Kresse (“cress”, from Old High German kressa, cognate with English cress).",
+     "text": "From Winter (“winter”) + Kresse (“cress”, from Old High German kressa).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
      "Barbarakraut is named after Saint Barbara, whose feast day falls in early winter, when the plant can still be picked."
     ],
     "pitfalls": [
-     "Strictly, Winterkresse is Barbarea vulgaris; the land cress of seed catalogues is the related Barbarea verna. Both are eaten the same way."
+     "Strictly, Winterkresse is Barbarea vulgaris; the land cress of seed catalogues is the related Barbarea verna.\n\nBoth are eaten the same way."
     ],
     "subtleties": [
      "Older leaves become bitter; pick young ones or the winter rosettes."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Kresse is related to English cress."
+     }
     ]
    }
   },
@@ -3563,6 +4017,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Etagenzwiebel"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Zwiebel)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -3656,13 +4121,25 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English calls it walking onion: the heavy stalks bend, the bulblets touch the ground and root, so the plant “walks” across the bed."
+     "The heavy stalks bend, the bulblets touch the ground and root, so the plant “walks” across the bed."
     ],
     "pitfalls": [
      "Etage is pronounced the French way: [eˈtaːʒə]."
     ],
     "subtleties": [
      "You can eat the green leaves like spring onions and the bulblets like small onions or shallots."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "That is why English calls it walking onion."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Etage is étage (floor), said [eˈtaːʒə]: an Etagenzwiebel grows in storeys."
+     }
     ]
    }
   },
@@ -3702,6 +4179,17 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Spargelsalats"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (der Salat)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -3858,6 +4346,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Perlzwiebel"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Zwiebel)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -3949,7 +4448,7 @@
      "A cocktail called the Gibson is a martini garnished with a pearl onion instead of an olive."
     ],
     "pitfalls": [
-     "Botanically German Wikipedia treats the Perlzwiebel as a form of Allium ampeloprasum (the leek species); in shops any tiny white onion is sold as Perlzwiebel or Silberzwiebel."
+     "Botanically German Wikipedia treats the Perlzwiebel as a form of Allium ampeloprasum (the leek species).\n\nIn shops any tiny white onion is sold as Perlzwiebel or Silberzwiebel."
     ],
     "subtleties": [
      "Almost always used in the plural: one onion alone is rarely mentioned."
@@ -3986,6 +4485,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Elefantenknoblauchs"
+    ],
+    "number": "singular only",
+    "genderCue": "compound: the last part decides (der Knoblauch)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a mass noun, month or name of a substance: no diminutive in use"
     }
    },
    "forms": {
@@ -4120,6 +4630,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Petersilienwurzel"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Wurzel)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -4211,10 +4732,10 @@
      "It is the same species as leaf parsley, bred for the root – its leaves can be used like parsley too."
     ],
     "pitfalls": [
-     "Easy to confuse with Pastinake (parsnip): the parsnip is bigger, sweeter, and has a sunken leaf base; root parsley smells of parsley."
+     "Easy to confuse with Pastinake (parsnip):\n- the parsnip is bigger, sweeter, and has a sunken leaf base;\n- root parsley smells of parsley."
     ],
     "subtleties": [
-     "Wiktionary also lists Petersilienwurzel for the root of ordinary leaf parsley; at the market it means the special root variety."
+     "Wiktionary also lists Petersilienwurzel for the root of ordinary leaf parsley.\n\nAt the market it means the special root variety."
     ]
    }
   }

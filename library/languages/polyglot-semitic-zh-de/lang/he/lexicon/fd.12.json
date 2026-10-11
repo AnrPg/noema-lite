@@ -52,7 +52,11 @@
       "cell": "ADP;3;PL;FEM",
       "form": "מִתַּחְתֵּיהֶן"
      }
-    ]
+    ],
+    "suffixSet": "plural-noun endings",
+    "withArticle": {
+     "none": "a separate word: the article stays on the noun (מִתַּחַת הַ…)"
+    }
    },
    "note": "Followed by לְ: מִתַּחַת לַשֻּׁלְחָן “under the table”. With pronouns: מִתַּחְתַּי, מִתַּחְתֶּיךָ …",
    "ref": {
@@ -119,12 +123,12 @@
      }
     ],
     "etymology": {
-     "text": "מִן “from” + תַּחַת “under”; תַּחַת is related to Arabic تَحْتَ (taḥta), Ge’ez taḥtä and Ugaritic tḥt (Wiktionary).",
+     "text": "מִן “from” + תַּחַת “under”; תַּחַת is related to Arabic تَحْتَ (taḥta) (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
      "Arabic تَحْتَ (taḥta) “under” is the same word as תַּחַת (Wiktionary).",
-     "As in English, מִתַּחַת לַשֻּׁלְחָן also means “under the table”: secretly, illegally."
+     "מִתַּחַת לַשֻּׁלְחָן also means “secretly, illegally” — money paid under the table."
     ],
     "pitfalls": [
      "Say מִתַּחַת לְ… with לְ: מִתַּחַת לַשֻּׁלְחָן — not *מִתַּחַת הַשֻּׁלְחָן.",
@@ -132,6 +136,23 @@
     ],
     "subtleties": [
      "“Downstairs, below” without a noun is לְמַטָּה: הוּא לְמַטָּה “he is downstairs”."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "As in English, “under the table” also means secretly, illegally."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "As with por debajo de la mesa, it also means secretly, illegally."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "Like the dessous-de-table, money passed “under the table” is a bribe."
+     }
     ]
    }
   },
@@ -187,7 +208,11 @@
       "cell": "ADP;3;PL;FEM",
       "form": "לְיָדָן"
      }
-    ]
+    ],
+    "suffixSet": "singular-noun endings",
+    "withArticle": {
+     "none": "a separate word: the article stays on the noun (לְיַד הַ…)"
+    }
    },
    "contrasts": [
     {
@@ -274,7 +299,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "It is literally “at the hand of” — as English says “close at hand”."
+     "It is literally “at the hand of”: what is next to you is within reach."
     ],
     "pitfalls": [
      "No לְ after it: לְיַד הַבַּיִת, not *לְיַד לַבַּיִת.",
@@ -282,6 +307,13 @@
     ],
     "subtleties": [
      "לְיַד is right beside; קָרוֹב לְ… is “near”, possibly farther away."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "The same picture as “close at hand”."
+     }
     ]
    }
   },
@@ -339,7 +371,11 @@
       "cell": "ADP;3;PL;FEM",
       "form": "לִפְנֵיהֶן"
      }
-    ]
+    ],
+    "suffixSet": "plural-noun endings",
+    "withArticle": {
+     "none": "a separate word: the article stays on the noun (לִפְנֵי הַ…)"
+    }
    },
    "note": "“in front of” (place); the same word is “before” in time (lesson 15) and “ago”: לִפְנֵי שָׁנָה “a year ago”.",
    "ref": {
@@ -519,7 +555,11 @@
       "cell": "ADP;3;PL;FEM",
       "form": "מֵאֲחוֹרֵיהֶן"
      }
-    ]
+    ],
+    "suffixSet": "plural-noun endings",
+    "withArticle": {
+     "none": "a separate word: the article stays on the noun (מֵאֲחוֹרֵי הַ…)"
+    }
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -605,7 +645,7 @@
      "Hebrew likes מִ “from” in place words: מִתַּחַת, מֵאֲחוֹרֵי, מִשְּׂמֹאל — as if seen “from” there."
     ],
     "pitfalls": [
-     "אַחֲרֵי is “after” (in time): אַחֲרֵי הָאֲרוּחָה. For a place say מֵאֲחוֹרֵי.",
+     "- אַחֲרֵי is “after” (in time):\n→ אַחֲרֵי הָאֲרוּחָה\n- For a place say מֵאֲחוֹרֵי.",
      "Without a noun use מֵאָחוֹר “at the back”."
     ],
     "subtleties": [
@@ -666,7 +706,11 @@
       "cell": "ADP;3;PL;FEM",
       "form": "בֵּינֵיהֶן"
      }
-    ]
+    ],
+    "suffixSet": "singular endings, plural-noun endings in the plural",
+    "withArticle": {
+     "none": "a separate word: the article stays on the noun (בֵּין הַ…)"
+    }
    },
    "note": "Between X and Y: בֵּין X לְY (standard) or בֵּין X וּבֵין Y; in speech also בֵּין X וְY.",
    "ref": {
@@ -745,7 +789,7 @@
      }
     ],
     "etymology": {
-     "text": "Compare Arabic بَيْنَ (bayna) and Aramaic byn (Wiktionary).",
+     "text": "Compare Arabic بَيْنَ (bayna) (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -784,7 +828,21 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "קְרוֹבָה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "קְרוֹבִים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "קְרוֹבוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "קָרוֹב",
@@ -903,7 +961,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Arabic قَرِيب (qarīb) is the same word; Turkish akraba “relatives” comes from its Arabic plural أَقْرِبَاء."
+     "Arabic قَرِيب (qarīb) is the same word."
     ],
     "pitfalls": [
      "It agrees: קָרוֹב, קְרוֹבָה, קְרוֹבִים, קְרוֹבוֹת — הַתַּחֲנָה קְרוֹבָה.",
@@ -912,6 +970,13 @@
     "subtleties": [
      "As an adverb it does not change: הִיא גָּרָה קָרוֹב “she lives nearby”.",
      "בְּקָרוֹב “soon” is “in the near (time)”."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish akraba “relatives” comes from the Arabic plural أَقْرِبَاء of قَرِيب, the same word as קָרוֹב."
+     }
     ]
    }
   },
@@ -938,7 +1003,21 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "רְחוֹקָה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "רְחוֹקִים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "רְחוֹקוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "רָחוֹק",
@@ -1040,7 +1119,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Hebrew pairs the prepositions like English: רָחוֹק מִ… “far from”, קָרוֹב לְ… “close to”."
+     "Each takes its own preposition: רָחוֹק מִ… “far from”, קָרוֹב לְ… “close to”."
     ],
     "pitfalls": [
      "“Far from” takes מִ: רָחוֹק מִכָּאן, רָחוֹק מֵהָעִיר.",
@@ -1048,6 +1127,18 @@
     ],
     "subtleties": [
      "As an adverb it does not change: הֵם גָּרִים רָחוֹק “they live far away”."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "The same pairing as English: far from, close to."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "The same pairing as lontano da, vicino a."
+     }
     ]
    }
   },
@@ -1143,7 +1234,7 @@
      "The Ministry of the Interior is מִשְׂרַד הַפְּנִים, “the ministry of the inside”."
     ],
     "pitfalls": [
-     "Where? בִּפְנִים. Where to? פְּנִימָה: בּוֹא פְּנִימָה “come in”.",
+     "- Where?\n- בִּפְנִים.\n- Where to?\n- פְּנִימָה: בּוֹא פְּנִימָה “come in”.",
      "With a noun say בְּ… or בְּתוֹךְ…: בַּבַּיִת / בְּתוֹךְ הַבַּיִת."
     ],
     "subtleties": [
@@ -1242,7 +1333,7 @@
      "Abroad is חוּץ לָאָרֶץ, “outside the Land”, shortened to חוּ״ל."
     ],
     "pitfalls": [
-     "Where? בַּחוּץ. Where to? הַחוּצָה: צֵא הַחוּצָה “go out”.",
+     "- Where?\n- בַּחוּץ.\n- Where to?\n- הַחוּצָה: צֵא הַחוּצָה “go out”.",
      "חוּץ מִ… means “except”: כֻּלָּם חוּץ מִמֶּנִּי “everyone except me”."
     ],
     "subtleties": [
@@ -1285,7 +1376,19 @@
       ],
       "note": "with the article: the Left (in politics)"
      }
-    ]
+    ],
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": {
+     "none": "possessive endings are not used with this word; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
+    }
    },
    "forms": {
     "N;SG;INDF": "שְׂמֹאל",
@@ -1395,7 +1498,7 @@
      }
     ],
     "etymology": {
-     "text": "From Proto-Semitic *śimaʔl-, cognate with Arabic شِمَال (šimāl), Akkadian šumēlum and Aramaic סְמָלָא; the sense “north” comes from facing the sunrise, with the north on the left (Wiktionary).",
+     "text": "From Proto-Semitic *śimaʔl-, cognate with Arabic شِمَال (šimāl); the sense “north” comes from facing the sunrise, with the north on the left (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -1447,7 +1550,17 @@
       ],
       "note": "with the article: the Right (in politics)"
      }
-    ]
+    ],
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": {
+     "none": "possessive endings are not used with this word; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": "feminine without a feminine ending",
+    "pair": {
+     "none": "not a noun for a person"
+    }
    },
    "forms": {
     "N;SG;INDF": "יָמִין",
@@ -1613,6 +1726,27 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": [
+     {
+      "form": "מִטְבָּחִי",
+      "number": "SG",
+      "register": "formal"
+     },
+     {
+      "form": "מִטְבָּחַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -1702,7 +1836,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish mutfak “kitchen” comes from Arabic مَطْبَخ (maṭbaḵ) — the same word as מִטְבָּח."
+     "Arabic مَطْبَخ (maṭbaḵ) “kitchen” is the same word as מִטְבָּח."
     ],
     "pitfalls": [
      "With the article the מ doubles: הַמִּטְבָּח; “in the kitchen” = בַּמִּטְבָּח.",
@@ -1710,6 +1844,13 @@
     ],
     "subtleties": [
      "A kosher kitchen keeps two sets of dishes, for meat and for milk."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "same",
+      "text": "Turkish mutfak comes from Arabic مَطْبَخ — the same word as מִטְבָּח."
+     }
     ]
    }
   },
@@ -1747,6 +1888,19 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "compound: the first word changes",
+     "segolate: vowels rebuilt"
+    ],
+    "possessive": {
+     "none": "a compound: “my …” is said with שֶׁל after it (… שֶׁלִּי); the endings go only on the first word in formal style"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -1874,6 +2028,19 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pluralShape": [
+     "compound: the first word changes",
+     "segolate: vowels rebuilt"
+    ],
+    "possessive": {
+     "none": "a compound: “my …” is said with שֶׁל after it (… שֶׁלִּי); the endings go only on the first word in formal style"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -2022,6 +2189,18 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "a loanword: possessive endings are not used; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -2114,7 +2293,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German Salon, Greek σαλόνι, Russian салон, Turkish salon — all from French salon."
+     "Like German Salon, it comes from French salon."
     ],
     "pitfalls": [
      "With the article the ס doubles: הַסָּלוֹן; “in the living room” = בַּסָּלוֹן.",
@@ -2122,6 +2301,28 @@
     ],
     "subtleties": [
      "In Israel the סָלוֹן is the main room of the flat, where guests are received."
+    ],
+    "notes": [
+     {
+      "for": "fr",
+      "rel": "trap",
+      "text": "From salon — but in Hebrew it is the everyday living room of any flat."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "The same word as σαλόνι, the living room."
+     },
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "The same word as салон, but in Hebrew it is the living room of a home."
+     },
+     {
+      "for": "tr",
+      "rel": "same",
+      "text": "The same word as salon."
+     }
     ]
    }
   },
@@ -2163,6 +2364,18 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -2316,6 +2529,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "segolate: vowels rebuilt"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -2428,6 +2653,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "plural only: the ending matches the gender"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -2553,6 +2790,27 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": [
+     {
+      "form": "מַדָּפִי",
+      "number": "SG",
+      "register": "formal"
+     },
+     {
+      "form": "מַדָּפַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -2694,6 +2952,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -2769,11 +3039,11 @@
      }
     ],
     "etymology": {
-     "text": "Compare Arabic صُفَّة (ṣuffa) “sofa, long seat of stone or brick”, from Aramaic צפא “mat”; the word may have entered European languages via Turkish or through Moorish Spain (Wiktionary).",
+     "text": "Compare Arabic صُفَّة (ṣuffa) “sofa, long seat of stone or brick”, from Aramaic צפא “mat”; from Arabic the word travelled into the languages of Europe (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English and German Sofa came, via Turkish, from Arabic ṣuffa (Wiktionary) — a cousin of סַפָּה."
+     "German Sofa came from Arabic ṣuffa (Wiktionary) — a cousin of סַפָּה."
     ],
     "pitfalls": [
      "Feminine: סַפָּה נוֹחָה.",
@@ -2781,6 +3051,28 @@
     ],
     "subtleties": [
      "You sit “on” it: עַל הַסַּפָּה."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English sofa comes from Arabic صُفَّة, a cousin of סַפָּה."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "French sofa comes from Arabic صُفَّة, a cousin of סַפָּה."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "Italian sofà comes from Arabic صُفَّة, a cousin of סַפָּה."
+     },
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish sofa passed the Arabic word صُفَّة on to Europe; it is a cousin of סַפָּה."
+     }
     ]
    }
   },
@@ -2821,6 +3113,27 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": [
+     {
+      "form": "מְקָרְרִי",
+      "number": "SG",
+      "register": "formal"
+     },
+     {
+      "form": "מְקָרְרַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {

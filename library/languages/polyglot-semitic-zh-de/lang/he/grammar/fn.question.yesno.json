@@ -99,7 +99,7 @@
    "t": "callout",
    "kind": "key",
    "title": "Your voice is the grammar",
-   "text": "Hebrew changes nothing in the sentence: no inversion, no “do”, no particle in everyday speech. The rising voice — and in writing the question mark — turns a statement into a question.",
+   "text": "Hebrew changes nothing in the sentence: no inversion, no helper verb, no particle in everyday speech. The rising voice — and in writing the question mark — turns a statement into a question.",
    "typology": [
     {
      "feature": "syn.polarQuestion",
@@ -165,9 +165,9 @@
    "Is it everyday speech? → keep the statement and raise your voice at the end (write “?”).",
    "Is it formal or written? → put הַאִם at the very beginning.",
    "Did I change the word order? → don’t: Hebrew questions keep the statement order.",
-   "Do I need a word for “do / does”? → no, Hebrew has none.",
+   "Do I need a helper verb? → no, Hebrew has none.",
    "Is it a choice between two things? → use אוֹ; the answer is one of them.",
-   "Answering a negative question with “yes, I do”? → repeat the verb or say דַּוְקָא כֵּן."
+   "Answering “yes” to a negative question? → repeat the verb or say דַּוְקָא כֵּן."
   ],
   "steps": [
    "Say the statement.",
@@ -176,7 +176,7 @@
   ]
  },
  "traps": [
-  "No inversion and no “do”: “Do you want tea?” = אַתָּה רוֹצֶה תֵּה?",
+  "No inversion and no helper verb: “Do you want tea?” = אַתָּה רוֹצֶה תֵּה?",
   "הַאִם is formal; in conversation it can sound stiff.",
   "Do not confuse הַאִם (question particle) with אִם (“if”).",
   "A question by intonation alone shows in writing only by its question mark — don’t forget it.",
@@ -246,10 +246,10 @@
    "options": [
     "raise the voice at the end: אַתָּה שׁוֹתֶה תֵּה?",
     "put the verb first: שׁוֹתֶה אַתָּה תֵּה?",
-    "add a word for “do”"
+    "add a helper verb"
    ],
    "answer": "raise the voice at the end: אַתָּה שׁוֹתֶה תֵּה?",
-   "why": "Hebrew keeps the statement order and has no “do”; intonation (and the question mark) makes the question."
+   "why": "Hebrew keeps the statement order and has no helper verb; intonation (and the question mark) makes the question."
   },
   {
    "q": "Which word opens a yes/no question in formal Hebrew?",
@@ -302,12 +302,12 @@
   {
    "for": "ru",
    "rel": "same",
-   "text": "As in Russian, intonation alone makes the question (Ты хочешь кофе? ~ אַתָּה רוֹצֶה קָפֶה?). The formal הַאִם is a little like ли, but it always stands first."
+   "text": "As in Russian, intonation alone makes the question (Ты хочешь кофе? ~ אַתָּה רוֹצֶה קָפֶה?).\n\nThe formal הַאִם is a little like ли, but it always stands first."
   },
   {
    "for": "el",
    "rel": "same",
-   "text": "As in Greek, the word order stays and only the voice rises (Θέλεις καφέ; ~ אַתָּה רוֹצֶה קָפֶה?). Hebrew writes the question mark ?, not ;."
+   "text": "As in Greek, the word order stays and only the voice rises (Θέλεις καφέ; ~ אַתָּה רוֹצֶה קָפֶה?).\n\nHebrew writes the question mark ?, not ;."
   },
   {
    "for": "es",
@@ -327,7 +327,7 @@
   {
    "for": "de",
    "rel": "different",
-   "text": "German moves the verb to the front (Willst du Kaffee?); Hebrew keeps the statement order. For doch, Hebrew repeats the verb or says דַּוְקָא כֵּן."
+   "text": "German moves the verb to the front (Willst du Kaffee?); Hebrew keeps the statement order.\n\nFor doch, Hebrew repeats the verb or says דַּוְקָא כֵּן."
   },
   {
    "for": "hi",
@@ -382,7 +382,7 @@
   {
    "for": "zh",
    "rel": "different",
-   "text": "Chinese ends with 吗 or uses verb-不-verb (你要不要咖啡?); Hebrew needs neither — the rising voice alone, or formal הַאִם at the start. As in Chinese, a short “yes” can repeat the verb: — רוֹצֶה!"
+   "text": "Chinese ends with 吗 or uses verb-不-verb (你要不要咖啡?); Hebrew needs neither — the rising voice alone, or formal הַאִם at the start.\n\nAs in Chinese, a short “yes” can repeat the verb:\n→ — רוֹצֶה!"
   },
   {
    "for": "vi",
@@ -393,6 +393,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut marks a question with an interrogative verb ending (such as -vit “you?”); Hebrew leaves the verb as it is and uses intonation."
+  },
+  {
+   "for": "it",
+   "rel": "same",
+   "text": "As in Italian, intonation alone makes the question: Vuoi un caffè? ~ אַתָּה רוֹצֶה קָפֶה? Formal Hebrew may also open with הַאִם, which has no Italian counterpart."
+  },
+  {
+   "for": "pt",
+   "rel": "same",
+   "text": "As in Portuguese, intonation alone turns a statement into a question (Queres café? ~ אַתָּה רוֹצֶה קָפֶה?), and a short answer often repeats the verb:\n→ — רוֹצֶה! (— Quero!)\n\nFormal Hebrew may add הַאִם at the start."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Albanian a at the start (A do kafe?) is the counterpart of formal הַאִם (הַאִם אַתָּה רוֹצֶה קָפֶה?); everyday Hebrew drops it and uses intonation alone."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your language inverts the verb or adds a helper verb in questions, Hebrew does neither: the statement with a rising voice is the question — אַתָּה רוֹצֶה קָפֶה?"
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If your language adds a question particle or suffix after a word, everyday Hebrew adds nothing; only formal style puts הַאִם at the very start."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If your language ends a question with a particle, everyday Hebrew uses the rising voice alone (formal הַאִם goes at the start); a short answer often repeats the verb:\n→ — רוֹצֶה!"
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If your language marks a question inside the verb word, Hebrew leaves the verb as it is; the voice — or formal הַאִם at the start — makes the question."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "Many Semitic languages have a question particle at the start of the sentence; Hebrew’s is הַאִם, but speech usually drops it and lets intonation do the job."
   }
  ]
 }

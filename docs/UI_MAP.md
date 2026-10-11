@@ -13,7 +13,7 @@ test suites run that way. `tests/shell.js` checks the new homes.
 | Place | What is there |
 |---|---|
 | **Tabs** (bottom on phones, a rail on the left from 760 px) | Today · Knowledge · Languages (only if chosen) · Discover · Progress |
-| **Top bar** | ← back · crumbs (where you are; tap a crumb to go there) · the page's own buttons · **⋮** · 🔔 · **Me** (your emoji, with the sync dot) |
+| **Top bar** | ← back · crumbs (where you are; tap a crumb to go there) · the page's own buttons · **⋮** · 🔎 search (also `/`, Ctrl K; the page `#/search`, docs/SEARCH.md) · 🔔 · **Me** (your emoji, with the sync dot) |
 | **The character** (bottom right) | Ask the tutor. Full body on navigation pages, a small face while you read or practise |
 | **Share bar** (under the top bar) | Pending shares, invitations and updates: Accept / Join / Reject / Update / Keep mine / Later |
 | Phones | The top bar slides away while you read and comes back after a deliberate scroll up |
@@ -32,7 +32,7 @@ test suites run that way. `tests/shell.js` checks the new homes.
 | T10 🌓 theme (was hidden on phones) | Me › Language & appearance › Light / dark |
 | T11 🔔 | 🔔 in the top bar (a sheet instead of a modal) |
 | T12 🦉 Tutor | The character button |
-| T13 account chip, T14 sync dot | Me (top right on phones, foot of the rail on wide screens), with the sync dot |
+| T13 account chip, T14 sync dot | Me (top right on phones, foot of the rail on wide screens, with the account's name under it), with the sync dot. It opens a menu: **Me** (the page others see) · **Settings** · **Help** · **My subjects** — Switch account · Log out |
 | B1–B5 share / update banners | The share bar under the top bar (same buttons) and 🔔 |
 | B6–B8 setup banner | Unchanged, on the subject page during the first sessions |
 | B9–B10 source filter banner | Unchanged, on every page while a filter is on |
@@ -98,26 +98,28 @@ mastered station and the last 5 seconds of a timed round can bring a big reactio
 | Starter buttons | A greeting from the character for the mode and the topic |
 | everything else | Unchanged (the threads tracker and "Saved to your lessons" show only when there are some); the sheet rises from the bottom on phones |
 
-## 7. Account menu (A, AP, AS, ASu, AB, AC, AH) → **Me**
+## 7. Account menu (A, AP, AS, ASu, AB, AC, AH) → **Me ▾** (since 2026-10-11 a menu: Me · Settings · Help · My subjects — Switch account · Log out)
 | Old | New home |
 |---|---|
-| A1 header (XP, streak) | Me (name, kind) and Progress |
-| A3 tabs | Me's list: Character · Profile · AI · Language & appearance · Conversations · My subjects · Data and sync · Help, and Switch profile |
+| A1 header (XP, streak) | Settings (name, kind) and Progress |
+| A3 tabs | Settings (`#/me`): Character · Profile · AI · Language & appearance · Conversations · Data and sync, then Switch profile · Log out (one row when both fit, else one under the other). Help (`#/help`) and My subjects (`#/subjects`) are their own items of Me ▾; `#/me/help` and `#/me/subjects` lead there |
 | AP1–AP9 Profile | Me › Profile (unchanged form, incl. "show the subject picker every time", PIN, delete profile) |
 | AS1–AS16 Gemini, Claude, AI conversations' language | Me › AI |
 | AS17 theme, AS18 daily goal, AS19 menus' language, AS20 sound, AS21 bite-size reading | Me › Language & appearance (+ How much game) |
 | AS22 backup of this subject | Me › Data and sync |
 | AS23 Reset this subject's progress | Subject ⋮ › Reset my progress |
-| ASu1–ASu8 Subjects | Me › My subjects (unchanged), and each subject's ⋮ on the Shelf |
+| ASu1–ASu8 Subjects | Me ▾ › My subjects (`#/subjects`): folded groups, one per Roadmap (its stations, each with its subject and that subject's chapters; a chapter opens there), then the Shelf and Languages. Each subject: Open, and ⋮ › Study · Put it on a Roadmap · Edit · Share · **Export the package** (with its source files; was the loose “⬇️ Export “…” (package with its source files)” button, which exported the subject open at the time) · Hide from / Show in the subject list (was the switch). Below: Create with Claude · Shelf · Import — short, one row when they fit, else one under the other, each explained on hover |
 | AB1–AB10 Backup & restore, AC1–AC13 Cloud | Me › Data and sync (cloud first, then backup and restore) |
-| AH1–AH11 Help | Me › Help (unchanged guides) |
+| AH1–AH11 Help | Me ▾ › Help (`#/help`, unchanged guides) |
 | — | Me › Character: the gallery of 29 characters in three folded groups (pet friends and fruits · fairy tales · serious; the same groups at first start), "Try for 5 minutes" (everything — the tutor's name and face, the ask buttons, the reactions — follows the character on trial: `NoemaThemes.current()` is the one way to read it), change it as often as you like for the first 15 days, then once every 5 days (or fixed by an organisation: `config.js` `character`, `lockCharacter`). Characters from fairy tales keep their tale's name in every language. The Serious group holds the nine professions of 2026-10-09 (two philologists, two tech nerds, two maths-and-physics scientists, two biochemists, the polyglot Hydra), each with its props beside it and its own collection item |
-| — | Me › What I learn: Knowledge / Languages / Both (shows or hides the Languages tab) |
+| — | Settings › What I learn: Knowledge / Languages / Both (shows or hides the Languages tab) |
+| — | **Me ▾ › Me** (`#/profile`): the page others see — picture, a few words, then only the parts you switch on (progress · achievements · languages I study · topics I study · what I share). Private until you publish it (cloud accounts); Copy the link gives `#/u/<id>`. Others reach it from that link and from the person button next to each row of Discover › What others share / Roadmaps others share. docs/PROFILE.md |
+| — | **Log out** (Me ▾, and next to Switch profile in Settings): a cloud account sends what waits and signs out; the list of profiles opens, even with only one profile |
 
 ## 8. Before a subject: accounts, picker, Shelf, Explore, sharing, Claude (PA, SP, SH, SC, ES, SS, EX, CG, CS)
 | Old | New home |
 |---|---|
-| PA1–PA13 profiles, PIN, cloud sign-in, in-use card, Connect Claude | Unchanged; Switch profile is in Me and in Today ⋮ |
+| PA1–PA13 profiles, PIN, cloud sign-in, in-use card, Connect Claude | Unchanged; Switch account is in Me ▾, Switch profile in Settings and in Today ⋮ |
 | — first start | Two questions once: what you learn (Knowledge / Languages / Both) and who comes with you (the character) |
 | SP subject picker at start | Today opens instead; the picker stays one tap away (⋮ › Choose a subject) and can come back at every start (Me › Profile) |
 | SP1, SP3–SP6 curricula in the picker | Knowledge tab (Roadmaps, + New Roadmap, ⋮ › Import a map / Roadmaps others share) |
@@ -127,7 +129,7 @@ mastered station and the last 5 seconds of a timed round can bring a big reactio
 | SP10 ✨ Create with Claude | Discover; Shelf ⋮ |
 | SP11 🌍 Explore | Discover; Shelf ⋮. A page (`#/explore/subjects`), in folded sections by domain like the Roadmaps |
 | SP12 📥 Import subject pack | Discover › Import a file; Shelf ⋮ (now .zip too) |
-| SP13 👤 Switch profile | Me; Today ⋮ |
+| SP13 👤 Switch profile | Me ▾ › Switch account; Settings; Today ⋮ |
 | ES, SS, EX, CG, CS dialogs | Unchanged; opened from the places above, Discover › Your Claude app, Me › AI |
 
 ## 9. Roadmaps (curricula) (CL, XC, SCu, NC, BP, IM, MP, MB, ST, AT, RC, MS, AP-, NU, PT, SU)

@@ -449,27 +449,27 @@
   {
    "for": "el",
    "rel": "different",
-   "text": "Greek σε covers both “to” and “in” (πάω στο σπίτι / είμαι στο σπίτι); Hebrew separates them: לַבַּיִת / בַּבַּיִת. And Greek πάω covers foot and vehicle, where Hebrew splits הָלַךְ / נָסַע."
+   "text": "Greek σε covers both “to” and “in” (πάω στο σπίτι / είμαι στο σπίτι); Hebrew separates them:\n→ לַבַּיִת / בַּבַּיִת\n\nAnd Greek πάω covers foot and vehicle, where Hebrew splits הָלַךְ / נָסַע."
   },
   {
    "for": "ru",
    "rel": "similar",
-   "text": "Russian also splits идти / ехать (on foot / by vehicle) like הָלַךְ / נָסַע; but Russian builds direction with prefixes (войти, выйти, прийти), while Hebrew uses separate verbs: נִכְנַס, יָצָא, הִגִּיעַ."
+   "text": "Russian also splits идти / ехать (on foot / by vehicle) like הָלַךְ / נָסַע; but Russian builds direction with prefixes (войти, выйти, прийти), while Hebrew uses separate verbs:\n→ נִכְנַס, יָצָא, הִגִּיעַ"
   },
   {
    "for": "es",
    "rel": "similar",
-   "text": "Spanish also puts the direction in the verb (entrar, salir, volver ~ נִכְנַס, יָצָא, חָזַר) and adds the manner only if needed (a pie ~ בָּרֶגֶל). But ir covers foot and vehicle alike; Hebrew uses נָסַע for a vehicle."
+   "text": "Spanish also puts the direction in the verb (entrar, salir, volver ~ נִכְנַס, יָצָא, חָזַר) and adds the manner only if needed (a pie ~ בָּרֶגֶל).\n\nBut ir covers foot and vehicle alike; Hebrew uses נָסַע for a vehicle."
   },
   {
    "for": "en",
    "rel": "different",
-   "text": "English puts the direction in a particle (go in, go out, come back); Hebrew has a verb for each: נִכְנַס, יָצָא, חָזַר. “Go by bus” is נָסַע, never הָלַךְ."
+   "text": "English puts the direction in a particle (go in, go out, come back); Hebrew has a verb for each:\n→ נִכְנַס, יָצָא, חָזַר\n\n“Go by bus” is נָסַע, never הָלַךְ."
   },
   {
    "for": "fr",
    "rel": "similar",
-   "text": "As in French (entrer, sortir, revenir), the direction is in the verb: נִכְנַס, יָצָא, חָזַר. Aller covers both ways of going; Hebrew separates הָלַךְ (on foot) and נָסַע (by vehicle)."
+   "text": "As in French (entrer, sortir, revenir), the direction is in the verb:\n→ נִכְנַס, יָצָא, חָזַר\n\nAller covers both ways of going; Hebrew separates הָלַךְ (on foot) and נָסַע (by vehicle)."
   },
   {
    "for": "de",
@@ -489,7 +489,7 @@
   {
    "for": "tr",
    "rel": "different",
-   "text": "Turkish adds a suffix for each direction (şehre, şehirde, şehirden); Hebrew uses three prefixes and leaves the noun alone: לָעִיר, בָּעִיר, מֵהָעִיר. Like Hebrew, Turkish puts the direction in the verb (girmek, çıkmak, dönmek)."
+   "text": "Turkish adds a suffix for each direction (şehre, şehirde, şehirden); Hebrew uses three prefixes and leaves the noun alone:\n→ לָעִיר, בָּעִיר, מֵהָעִיר\n\nLike Hebrew, Turkish puts the direction in the verb (girmek, çıkmak, dönmek)."
   },
   {
    "for": "ja",
@@ -509,7 +509,7 @@
   {
    "for": "hu",
    "rel": "different",
-   "text": "Hungarian puts the direction in verb prefixes (bemegy, kimegy, visszajön); Hebrew has a separate verb for each: נִכְנַס, יָצָא, חָזַר."
+   "text": "Hungarian puts the direction in verb prefixes (bemegy, kimegy, visszajön); Hebrew has a separate verb for each:\n→ נִכְנַס, יָצָא, חָזַר"
   },
   {
    "for": "sw",
@@ -524,12 +524,52 @@
   {
    "for": "vi",
    "rel": "different",
-   "text": "Vietnamese strings verbs together (đi vào, chạy ra); Hebrew uses one verb with the direction in it: נִכְנַס, יָצָא."
+   "text": "Vietnamese strings verbs together (đi vào, chạy ra); Hebrew uses one verb with the direction in it:\n→ נִכְנַס, יָצָא"
   },
   {
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut marks the goal and the source with case endings (-mut “to”, -mit “from”) and builds the movement into one long verb; Hebrew uses separate words: a verb plus לְ / מִ."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Italian also puts the direction in the verb (entrare, uscire, tornare ~ נִכְנַס, יָצָא, חָזַר), but andare covers foot and vehicle, where Hebrew splits הָלַךְ / נָסַע.\n\nAnd a casa is both “at home” and “home(wards)”; Hebrew says בַּבַּיִת / הַבַּיְתָה."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "As in Portuguese (entrar, sair, voltar), the direction is in the verb: נִכְנַס, יָצָא, חָזַר.\n\n- ir covers foot and vehicle; Hebrew splits הָלַךְ (a pé) and נָסַע (de autocarro, de carro).\n- ir para casa ~ הַבַּיְתָה, estar em casa ~ בַּבַּיִת."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Albanian also has a verb for each direction (hyj, dal, kthehem ~ נִכְנַס, יָצָא, חָזַר), but në covers both “to” and “in” (shkoj në shtëpi / jam në shtëpi); Hebrew separates them:\n→ הַבַּיְתָה / בַּבַּיִת\n\nAnd shkoj covers foot and vehicle, where Hebrew splits הָלַךְ / נָסַע."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your language marks direction with cases or verb particles, Hebrew uses a verb for each direction (נִכְנַס, יָצָא, חָזַר) and three prefixes:\n→ לְ “to”, מִ “from”, בְּ “in, by”"
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If your language says “to / in / from” with suffixes on the place, Hebrew uses prefixes on it:\n→ לָעִיר, בָּעִיר, מֵהָעִיר\n\nAnd it puts the direction into the verb itself, as you may be used to:\n→ נִכְנַס “go in”, יָצָא “go out”"
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If your language adds direction words after the verb, Hebrew uses one verb that already contains the direction (נִכְנַס, יָצָא, חָזַר) and a prefix on the place:\n→ לַחֶדֶר"
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If your language builds path and manner of motion into one long verb, Hebrew splits them: a verb for the direction (נִכְנַס, יָצָא), a verb chosen by foot or vehicle (הָלַךְ / נָסַע), and a prefix on the place."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "Semitic verbs of motion usually contain the direction themselves — enter, go out, return, arrive (נִכְנַס, יָצָא, חָזַר, הִגִּיעַ).\n\nHebrew adds the prefixes לְ / מִ / בְּ and the old ending ־ָה “towards”:\n→ הַבַּיְתָה"
   }
  ]
 }

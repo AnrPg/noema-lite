@@ -14,7 +14,8 @@ A whole language as ONE file — the language package (noema.langpack/v1, docs/L
   python3 tools/lang_course.py package <course-dir> <code> [-o <file>]
         → the language <code> of the course folder as a package (language.json, lexicon, grammar, bank, script modules,
           its catalogue of phenomena, its typological profile when the library has none, the other languages' seeAlso
-          entries that point to it, and the checks). Refused while validate_lang.py --strict --lang <code> has errors
+          entries that point to it, its locale facades if any — facades/<loc>/<code>.json, D19 —, and the checks with the
+          D19 lint summary). Refused while validate_lang.py --strict --lang <code> has errors
           or the reference check (from the cache, offline) disagrees.
   python3 tools/lang_course.py unpack <course file> <out-dir> --package <pkg.json> [--patch <patch.json>]
         → the course as a folder WITH the package's language added (to check it again or extend it)
@@ -103,6 +104,11 @@ def unpack(src, out, patch=None, package=None, world=False):
             if L.get(k): wj(os.path.join(b, k + '.json'), L[k])
         man['bank'][code] = [s['id'] for s in L.get('bank') or []]
     wj(os.path.join(root, MANIFEST), man)
+    pk = data.get('_package') or {}
+    for loc, entries in (pk.get('facades') or {}).items():   # D19: the package's locale facades → facades/<loc>/<code>.json (+ its phenomena's)
+        lang_f = {a: e for a, e in entries.items() if not a.startswith(('p:', 'ph:'))}; phen_f = {a: e for a, e in entries.items() if a.startswith(('p:', 'ph:'))}
+        if lang_f: wj(os.path.join(root, 'facades', loc, pk['code'] + '.json'), lang_f)
+        if phen_f: wj(os.path.join(out, '_phenomena', 'facades', loc, pk['code'] + '.json'), phen_f)
     if world: put_world(out, data.get('_package'))
     print(root)
     return root
@@ -207,7 +213,7 @@ def package(root, code, out_file=None):
     lexicon = {n['id']: J(f'lang/{code}/lexicon/{n["id"]}.json') for n in nodes if J(f'lang/{code}/lexicon/{n["id"]}.json')}
     grammar = {f: J(f'lang/{code}/grammar/{f}.json') for f in fns if J(f'lang/{code}/grammar/{f}.json')}
     bank = [x for f in sorted(glob.glob(os.path.join(b, 'bank', '*.json'))) for x in rj(f).get('sentences') or []]
-    exempt = [x for f in sorted(glob.glob(os.path.join(b, 'bank', '*.json'))) for x in rj(f).get('fieldExemptions') or []]   # D19: a field that cannot show a node says why
+    exempt = [x for f in sorted(glob.glob(os.path.join(b, 'bank', '*.json'))) for x in rj(f).get('fieldExemptions') or []]   # D20: a field that cannot show a node says why
     pp = phenomena_path(root, code); phen = rj(pp) if pp else None
     _, profiles, _, _ = world(root)
     lib = rj(os.path.join(SHARED, '_typology', 'languages.json')) if os.path.exists(os.path.join(SHARED, '_typology', 'languages.json')) else {'languages': []}
@@ -233,12 +239,26 @@ def package(root, code, out_file=None):
            'checks': {'validator': {'errors': 0, 'warnings': len(v.warns), 'strict': True},
                       'refcheck': {'words': len(rep), 'problems': 0, 'unverified': sum(1 for r in rep.values() if r['unverified']), 'offline': True},
                       'phenomena': {'phenomena': ph.get('phenomena', 0), 'covered': st.get('covered', 0), 'partial': st.get('partial', 0), 'missing': st.get('missing', 0), 'errors': len(ph.get('errors') or [])}}}
+    # D19 (optional, additive): the locale facades of the language's texts — facades/<loc>/<code>.json and _phenomena/facades/<loc>/<code>.json
+    facades = {}
+    for f in sorted(glob.glob(os.path.join(root, 'facades', '*', code + '.json'))) + sorted(glob.glob(os.path.join(here, '_phenomena', 'facades', '*', code + '.json'))):
+        loc = os.path.basename(os.path.dirname(f))
+        if loc == 'en': continue   # the master is the package's own texts
+        facades.setdefault(loc, {}).update(rj(f))
+    if facades: pkg = {**{k: v for k, v in pkg.items() if k != 'checks'}, 'facades': facades, 'checks': pkg['checks']}
+    try:   # D19: the facade lint of the language (warnings until the course's content is rewritten — docs/language-packs-status.md)
+        import lang_facade
+        fl = [x for x in lang_facade.lint(root) if x.sev != 'info' and (f'/lang/{code}/' in x.where or f'_phenomena/{code}.json' in x.where)]
+        pkg['checks']['d19'] = {'warnings': len(fl), 'requiredNotesMissing': sum(1 for x in fl if x.cat == 'required'), 'outsideLanguages': sum(1 for x in fl if x.cat == 'names')}
+    except Exception as e:
+        pkg['checks']['d19'] = {'error': f'{e.__class__.__name__}: {e}'}
     if not phen: sys.exit(f'❌ not packaged: no catalogue of phenomena for {code} (_phenomena/{code}.json next to the course)')
     out_file = out_file or f'{course["id"]}.lang-{code}.json'
     with open(out_file, 'w', encoding='utf-8') as f: json.dump(pkg, f, ensure_ascii=False, separators=(',', ':'))
     words = sum(len(x.get('lexemes') or []) for x in lexicon.values())
     print(f'✅ {out_file}: {pkg["name"]} ({code}) for {course["id"]} — {words} words in {len(lexicon)} nodes, {len(grammar)} grammar pages, {len(bank)} sentences, '
-          f'{len(phen.get("phenomena") or [])} phenomena{", its typological profile" if "typology" in pkg else ""}{f", seeAlso on {sum(len(x) for x in see.values())} pages of other languages" if see else ""} · {os.path.getsize(out_file) // 1024} KB')
+          f'{len(phen.get("phenomena") or [])} phenomena{", its typological profile" if "typology" in pkg else ""}{f", seeAlso on {sum(len(x) for x in see.values())} pages of other languages" if see else ""}'
+          f'{f", facades {sorted(facades)}" if facades else ""} · D19 lint: {pkg["checks"]["d19"].get("warnings", "?")} warning(s) · {os.path.getsize(out_file) // 1024} KB')
     return out_file
 
 

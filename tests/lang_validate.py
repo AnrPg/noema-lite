@@ -49,7 +49,7 @@ try:
 except ImportError as e:
     print(f'  ⏭  schema check skipped ({e})')
 
-def mutated(change):
+def mutated(change, **kw):
     d = tempfile.mkdtemp(prefix='lang-mini-'); dst = os.path.join(d, 'c'); shutil.copytree(MINI, dst)
     def J(rel, fn=None):
         p = os.path.join(dst, rel)
@@ -58,10 +58,10 @@ def mutated(change):
         r = fn(obj)
         with open(p, 'w', encoding='utf-8') as f: f.write(r if isinstance(r, Raw) else json.dumps(obj, ensure_ascii=False, indent=1))
     change(J, dst)
-    v = validate(dst, strict=True); shutil.rmtree(d); return v.errors
+    v = validate(dst, strict=True, **kw); shutil.rmtree(d); return (v.errors, v.warns) if kw.pop('_warns', None) else v.errors
 
-def expect(name, change, needle):
-    errs = mutated(change)
+def expect(name, change, needle, **kw):
+    errs = mutated(change, **kw)
     hit = [e for e in errs if needle in e]
     ok(bool(hit), f'{name} → “{hit[0] if hit else needle}”' + ('' if hit else f' (got {errs[:3]})'))
 
@@ -206,8 +206,22 @@ def drop_tone(c): c['phenomena'] = [p for p in c['phenomena'] if not any(t['feat
 e = phen_errors(drop_tone)
 ok(any('not covered by any phenomenon' in x and 'tone.lexical' in x for x in e), 'an uncovered feature — here an absence, “no lexical tone” — is refused')
 
-# ---------- D18: comparison notes for the reference set; D19: every field brings sentences for the nodes before it ----------
-expect('a page without comparison notes', lambda J, d: J('lang/ar/grammar/fn.definite.json', lambda o: o.pop('notes')), 'comparison notes for the reference set: 0 of at least 8')
+# ---------- D19: contrast notes for every supported native + every type; D20: every field brings sentences for the nodes before it ----------
+expect('a page without contrast notes (--d19-strict)', lambda J, d: J('lang/ar/grammar/fn.definite.json', lambda o: o.pop('notes')), 'contrast notes missing (D19: every supported native but ar, every type and branch:Semitic): en, el, ru', d19_strict=True)
+errs = mutated(lambda J, d: J('lang/ar/grammar/fn.definite.json', lambda o: o.pop('notes')))
+ok(not [e for e in errs if 'contrast notes missing' in e], 'a pre-D19 fixture (course.json "d19": "lenient") keeps the D19 rules as warnings')
+def no_flag(o): o.pop('d19', None)
+errs = mutated(lambda J, d: (J('course.json', no_flag), J('lang/ar/grammar/fn.definite.json', lambda o: o.pop('notes'))))
+ok([e for e in errs if 'lang/ar/grammar/fn.definite.json' in e and 'contrast notes missing' in e], 'by default (since 2026-10-11) the D19 rules are errors')
+errs = mutated(lambda J, d: (J('course.json', no_flag), J('lang/ar/grammar/fn.definite.json', lambda o: o.pop('notes'))), d19_lenient=True)
+ok(not [e for e in errs if 'contrast notes missing' in e], '--d19-lenient makes them warnings again')
+full = [{'for': c, 'rel': 'same', 'text': 'x'} for c in ['en', 'el', 'ru', 'fr', 'de', 'hi', 'zh', 'ja', 'it', 'es', 'sq', 'pt', 'tr', 'type:fusional', 'type:agglutinating', 'type:isolating', 'type:polysynthetic', 'branch:Semitic']]
+errs = mutated(lambda J, d: J('lang/ar/grammar/fn.definite.json', lambda o: o.update(notes=full)), d19_strict=True)
+ok(not [e for e in errs if 'lang/ar/grammar/fn.definite.json' in e and 'contrast notes missing' in e], 'a page with a note for every supported native but its own, every type and branch:Semitic passes')
+expect('a note for an unknown branch', lambda J, d: J('lang/he/grammar/fn.definite.json', lambda o: o['notes'].append({'for': 'branch:Klingonic', 'rel': 'new', 'text': '…'})), 'unknown branch “Klingonic”')
+expect('a word profile note without a valid `for`', lambda J, d: J('lang/de/lexicon/veg.1.json', lambda o: o['lexemes'][0]['profile'].update(notes=[{'for': 'xx', 'rel': 'trap', 'text': '…'}])), '“xx” has no profile')
+expect('a comparison in a word profile (--d19-strict: the lint of every learner text)', lambda J, d: J('lang/de/lexicon/veg.1.json', lambda o: o['lexemes'][0]['profile'].update(funFacts=['Cognate with English carrot.'])), 'x:de:Karotte/profile/funFacts/0: names a language outside the course (English)', d19_strict=True)
+expect('an unregistered text field (--d19-strict)', lambda J, d: J('lang/de/grammar/fn.definite.json', lambda o: o.update(newText='hello')), 'not in tools/schemas/noema.langfacade.fields.json', d19_strict=True)
 expect('a comparison in the general text', lambda J, d: J('lang/de/grammar/fn.definite.json', lambda o: o.update(summary=o['summary'] + ' As in English.')), 'names other languages in its general text (English)')
 expect('a note for a language without a profile', lambda J, d: J('lang/he/grammar/fn.definite.json', lambda o: o['notes'].append({'for': 'xx', 'rel': 'new', 'text': '…'})), '“xx” has no profile')
 expect('a note with an unknown relation', lambda J, d: J('lang/he/grammar/fn.definite.json', lambda o: o['notes'][0].update(rel='odd')), 'rel must be one of')
@@ -216,4 +230,38 @@ expect('a field without sentences for a node before it', lambda J, d: J('lang/ar
 expect('an exemption without a reason', lambda J, d: J('lang/he/bank/basic.json', lambda o: o['fieldExemptions'][0].update(reason='')), 'say why')
 expect('a function without its aspect', lambda J, d: J('core/functions/fn.definite.json', lambda o: o.update(category='stuff')), 'category must be one of')
 
+
+# ---------- R3: the map of the word's parameters comes first; every word states every parameter ----------
+def mutated_w(change, **kw):
+    d = tempfile.mkdtemp(prefix='lang-mini-'); dst = os.path.join(d, 'c'); shutil.copytree(MINI, dst)
+    def J(rel, fn=None):
+        p = os.path.join(dst, rel)
+        if fn is None: return p
+        with open(p, encoding='utf-8') as f: obj = json.load(f)
+        fn(obj)
+        with open(p, 'w', encoding='utf-8') as f: f.write(json.dumps(obj, ensure_ascii=False, indent=1))
+    change(J, dst)
+    v = validate(dst, strict=True, **kw); shutil.rmtree(d); return v.errors, v.warns
+def write_map(d, L, text):
+    with open(os.path.join(d, 'lang', L, 'WORD_PARAMETERS.md'), 'w', encoding='utf-8') as f: f.write(text)
+def de_map(J, d, drop=()):
+    lj = json.load(open(J('lang/de/language.json'), encoding='utf-8'))
+    write_map(d, 'de', '# German word parameters\n\n' + ''.join(f'## {pos}\n\n' + ''.join(f'- `{x["id"]}`: …\n' for x in ds if x['id'] not in drop) + '\n' for pos, ds in lj['wordFeatures'].items()))
+e, w = mutated_w(lambda J, d: None, d19_strict=True)
+ok(any('lang/de/WORD_PARAMETERS.md: missing' in x for x in e), 'R3: a language without its WORD_PARAMETERS.md (--d19-strict) → error')
+e, w = mutated_w(lambda J, d: None)
+ok(not any('WORD_PARAMETERS' in x for x in e) and any('lang/de/WORD_PARAMETERS.md: missing' in x for x in w), 'R3: in a pre-D19 fixture (d19: lenient) the missing map is a warning')
+e, w = mutated_w(lambda J, d: de_map(J, d), d19_strict=True)
+ok(not any('lang/de/WORD_PARAMETERS.md' in x for x in e), 'R3: a map with a section per part of speech naming every parameter passes')
+e, w = mutated_w(lambda J, d: de_map(J, d, drop=('aux',)), d19_strict=True)
+ok(any('VERB: parameters of wordFeatures not in the map: aux' in x for x in e), 'R3: a parameter of wordFeatures missing from the map → reported')
+e, w = mutated_w(lambda J, d: J('lang/de/language.json', lambda o: o['wordFeatures']['NOUN'][0].update(prominent='yes')))
+ok(any('prominent must be true or false' in x for x in e), 'R3: prominent must be a boolean')
+e, w = mutated_w(lambda J, d: J('lang/de/language.json', lambda o: o['wordFeatures']['NOUN'][1].update(order='first')))
+ok(any('order must be a number' in x for x in e), 'R3: order must be a number')
+ok(any('declare how the word card shows the parameters' in x for x in mutated_w(lambda J, d: None)[1]), 'R3: no prominent / order anywhere → a warning')
+e, w = mutated_w(lambda J, d: J('lang/de/language.json', lambda o: o['wordFeatures'].update(NOUN=[x for x in o['wordFeatures']['NOUN'] if 'plural' not in x['id']])) or J('lang/de/lexicon/veg.1.json', lambda o: [x.get('features', {}).pop('plurals', None) for x in o['lexemes']]))
+ok(any('R3 checklist: nom.plural = obligatory — declare the plural(s), per meaning for NOUN' in x for x in w), 'R3 checklist: a German noun map without the plural → warning')
+e2, w2 = mutated_w(lambda J, d: J('lang/de/language.json', lambda o: (o['wordFeatures'].update(NOUN=[x for x in o['wordFeatures']['NOUN'] if 'plural' not in x['id']]), o.update(wordFeaturesChecklist={'nom.plural': 'test'}))) or J('lang/de/lexicon/veg.1.json', lambda o: [x.get('features', {}).pop('plurals', None) for x in o['lexemes']]))
+ok(not any('R3 checklist: nom.plural' in x for x in w2) and not any('wordFeaturesChecklist' in x for x in e2), 'R3 checklist: wordFeaturesChecklist says why an item is not a word parameter')
 print(f'\n{fails} FAILED' if fails else '\nALL PASSED'); sys.exit(1 if fails else 0)

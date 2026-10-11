@@ -26,7 +26,16 @@
     "declension": "diptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "طَمَاطِمُ",
+      "translit": "ṭamāṭimu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "ṭamāṭim",
@@ -146,6 +155,7 @@
     "plurals": [
      {
       "form": "بَصَلَات",
+      "translit": "baṣalāt",
       "kind": "soundFem",
       "declension": "sound",
       "note": "counted: the plural of the unit noun",
@@ -160,7 +170,16 @@
     "unit": "بَصَلَة",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "بَصَلُ",
+      "translit": "baṣalu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "baṣal",
@@ -272,6 +291,18 @@
     ],
     "subtleties": [
      "As a collective it takes masculine singular agreement: الْبَصَلُ رَخِيصٌ الْيَوْمَ (onions are cheap today)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English shallot itself comes from the city of Ascalon (عَسْقَلَان)."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "French échalote comes from the city of Ascalon (عَسْقَلَان)."
+     }
     ]
    }
   },
@@ -301,7 +332,16 @@
     "declension": "diptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "بَطَاطِسُ",
+      "translit": "baṭāṭisu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "baṭāṭis",
@@ -413,6 +453,7 @@
     "plurals": [
      {
       "form": "ثُومَات",
+      "translit": "ṯūmāt",
       "kind": "soundFem",
       "declension": "sound",
       "note": "counted: the plural of the unit noun",
@@ -426,7 +467,16 @@
     "unit": "ثُومَة",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "ثُومُ",
+      "translit": "ṯūmu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "ṯūm",
@@ -551,6 +601,7 @@
     "plurals": [
      {
       "form": "خِيَارَات",
+      "translit": "ḫiyārāt",
       "kind": "soundFem",
       "declension": "sound",
       "note": "counted: the plural of the unit noun",
@@ -564,7 +615,16 @@
     "unit": "خِيَارَة",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "خِيَارُ",
+      "translit": "ḫiyāru"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "ḫiyār",
@@ -656,13 +716,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish hıyar (cucumber) is the same Persian word."
+     "Do not confuse it with خِيَار “choice” (root خ ي ر): the same letters, a different word."
     ],
     "pitfalls": [
      "خِيَار also means “choice, option” — same spelling, same vowels: لَيْسَ لَدَيَّ خِيَارٌ = I have no choice."
     ],
     "subtleties": [
      "One cucumber is خِيَارَة; the collective خِيَار is cucumbers as food."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish hıyar (cucumber) is the same Persian word."
+     }
     ]
    }
   },
@@ -686,6 +753,7 @@
     "plurals": [
      {
       "form": "بَاذِنْجَانَات",
+      "translit": "bāḏinjānāt",
       "kind": "soundFem",
       "declension": "sound",
       "note": "counted: the plural of the unit noun",
@@ -699,7 +767,16 @@
     "unit": "بَاذِنْجَانَة",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "بَاذِنْجَانُ",
+      "translit": "bāḏinjānu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "bāḏinjān",
@@ -786,13 +863,70 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Through Arabic al-bāḏinjān came Spanish berenjena, Catalan albergínia and French — and German — aubergine."
+     "Through Arabic al-bāḏinjān the word reached Europe — German Aubergine among others."
     ],
     "pitfalls": [
-     "Written with ذ (ḏ, as in English “this”), not ز: بَاذِنْجَان."
+     "Written with ذ (ḏ, said with the tongue between the teeth), not ز: بَاذِنْجَان."
     ],
     "subtleties": [
      "Counting: ثَلَاثُ بَاذِنْجَانَاتٍ — numbers 3–10 take the opposite gender of the singular (بَاذِنْجَانَة is feminine, so ثَلَاث has no ة)."
+    ],
+    "notes": [
+     {
+      "for": "es",
+      "rel": "similar",
+      "text": "Spanish berenjena comes from Arabic al-bāḏinjān."
+     },
+     {
+      "for": "pt",
+      "rel": "similar",
+      "text": "Portuguese beringela comes from Arabic al-bāḏinjān."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "French aubergine comes from Arabic al-bāḏinjān."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "British English aubergine comes from Arabic al-bāḏinjān."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "Italian melanzana is the same word, reshaped as if it were mela (apple)."
+     },
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Greek μελιτζάνα goes back to the same word as بَاذِنْجَان."
+     },
+     {
+      "for": "hi",
+      "rel": "similar",
+      "text": "Hindi बैंगन and Arabic بَاذِنْجَان go back to the same old Indian word, वातिङ्गण (vātiṅgaṇa)."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "ذ is the th of English “this”."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "ذ is Greek δ: δέντρο."
+     },
+     {
+      "for": "es",
+      "rel": "similar",
+      "text": "ذ is close to the soft d between vowels in Spanish (cada), said with the tongue between the teeth."
+     },
+     {
+      "for": "sq",
+      "rel": "same",
+      "text": "ذ is Albanian dh: dhomë."
+     }
     ]
    }
   },
@@ -816,6 +950,7 @@
     "plurals": [
      {
       "form": "جَزَرَات",
+      "translit": "jazarāt",
       "kind": "soundFem",
       "declension": "sound",
       "note": "counted: the plural of the unit noun",
@@ -829,7 +964,16 @@
     "unit": "جَزَرَة",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "جَزَرُ",
+      "translit": "jazaru"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "jazar",
@@ -961,6 +1105,12 @@
     "declension": "invariable",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a noun with its adjective: only بَطَاطَا takes the construct form, and the adjective then follows the whole construct"
     }
    },
    "gender": "FEM",
@@ -1042,13 +1192,40 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English “potato” itself comes from batata, the Taíno name of the sweet potato, via Spanish."
+     "بَطَاطَا (from Spanish batata, a Taíno word) first named the sweet potato; the ordinary potato took the name later."
     ],
     "pitfalls": [
      "In the Levant بَطَاطَا alone is the ordinary potato, in Egypt it is the sweet potato — in MSA add حُلْوَة to be clear."
     ],
     "subtleties": [
-     "بَطَاطَا is indeclinable (it ends in -ā): only the adjective shows case and definiteness — بَطَاطَا حُلْوَةٌ / الْبَطَاطَا الْحُلْوَةَ. The adjective is feminine because بَطَاطَا is feminine."
+     "بَطَاطَا is indeclinable (it ends in -ā): only the adjective shows case and definiteness.\n→ بَطَاطَا حُلْوَةٌ / الْبَطَاطَا الْحُلْوَةَ\n\nThe adjective is feminine because بَطَاطَا is feminine."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English potato itself comes from batata, a Caribbean name of the sweet potato."
+     },
+     {
+      "for": "es",
+      "rel": "trap",
+      "text": "Spanish batata is the sweet potato and patata the potato; Arabic says بَطَاطَا حُلْوَة (sweet potato) and بَطَاطِس (potato)."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Portuguese batata-doce is built the same way: بَطَاطَا حُلْوَة, “sweet potato”."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "French patate douce is built the same way: بَطَاطَا حُلْوَة."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "American “yam” often means the sweet potato: that is بَطَاطَا حُلْوَة, not يَام."
+     }
     ]
    }
   },
@@ -1078,7 +1255,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "بَازِلَّاءُ",
+      "translit": "bāzillāʾu"
+     }
+    ]
    },
    "gender": "FEM",
    "translit": "bāzillāʾ",
@@ -1159,13 +1345,25 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek μπιζέλι also comes from the Italian word for peas — a Greek speaker already half-knows بَازِلَّاء."
+     "A loan from the Italian word for peas, piselli, given an Arabic ending: بَازِلَّاء."
     ],
     "pitfalls": [
      "Double l (šadda) and a final hamza: بَازِلَّاء (bāzillāʾ). Spellings without the hamza are informal."
     ],
     "subtleties": [
      "A feminine mass noun (Wiktionary): بَازِلَّاءُ مُجَمَّدَةٌ (frozen peas). Wiktionary declines it as a triptote: بَازِلَّاءً، بَازِلَّاءٍ."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Greek μπιζέλι comes from the same word for peas as بَازِلَّاء — you already half-know it."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "بَازِلَّاء is your piselli."
+     }
     ]
    }
   },
@@ -1195,7 +1393,16 @@
     "declension": "diptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "سَبَانِخُ",
+      "translit": "sabāniḫu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "sabāniḫ",
@@ -1270,7 +1477,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The same Persian word became Turkish ıspanak, Greek σπανάκι and — through Arabic and Medieval Latin — English spinach."
+     "A Persian word that travelled on: through Arabic and Medieval Latin it reached most European languages."
     ],
     "pitfalls": [
      "Declined here as a diptote like طَمَاطِم (حُزْمَةُ سَبَانِخَ); Wiktionary also records triptote use (سَبَانِخٌ، سَبَانِخٍ) and the vowel variant سَبَانَخ.",
@@ -1278,6 +1485,53 @@
     ],
     "subtleties": [
      "A mass noun: there is no unit noun; count leaves (وَرَقَةُ سَبَانِخَ) or bunches (حُزْمَةُ سَبَانِخَ)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Greek σπανάκι is the same word, which came from Iran."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English spinach comes from this word."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "French épinard comes from this word."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "Italian spinaci comes from this word."
+     },
+     {
+      "for": "es",
+      "rel": "similar",
+      "text": "Spanish espinaca comes, through Andalusian Arabic, from this word."
+     },
+     {
+      "for": "pt",
+      "rel": "similar",
+      "text": "Portuguese espinafre comes from this word."
+     },
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "Russian шпинат goes back, through Western Europe, to this word."
+     },
+     {
+      "for": "sq",
+      "rel": "similar",
+      "text": "Albanian spinaq goes back to the same word."
+     },
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish ıspanak is the same Persian word."
+     }
     ]
    }
   },
@@ -1297,6 +1551,7 @@
     "plurals": [
      {
       "form": "فُجْلَات",
+      "translit": "fujlāt",
       "kind": "soundFem",
       "declension": "sound",
       "note": "counted: the plural of the unit noun",
@@ -1310,7 +1565,16 @@
     "unit": "فُجْلَة",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "فُجْلُ",
+      "translit": "fujlu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "fujl",
@@ -1427,6 +1691,7 @@
     "plurals": [
      {
       "form": "قَرْعَات",
+      "translit": "qarʿāt",
       "kind": "soundFem",
       "declension": "sound",
       "note": "counted: the plural of the unit noun",
@@ -1440,7 +1705,16 @@
     "unit": "قَرْعَة",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "قَرْعُ",
+      "translit": "qarʿu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "qarʿ",
@@ -1564,6 +1838,7 @@
     "plurals": [
      {
       "form": "خَسَّات",
+      "translit": "ḫassāt",
       "kind": "soundFem",
       "declension": "sound",
       "note": "counted: the plural of the unit noun",
@@ -1577,7 +1852,16 @@
     "unit": "خَسَّة",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "خَسُّ",
+      "translit": "ḫassu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "ḫass",
@@ -1701,6 +1985,12 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a noun with its adjective: only فِلْفِل takes the construct form, and the adjective then follows the whole construct"
     }
    },
    "gender": "MASC",
@@ -1781,7 +2071,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek πιπέρι, English pepper and Arabic فِلْفِل all go back to Sanskrit pippalī."
+     "فِلْفِل goes back, through Persian, to Sanskrit pippalī — like German Pfeffer."
     ],
     "pitfalls": [
      "Plain فِلْفِل is ambiguous — black pepper, sweet pepper or chili, depending on region and context. Add حَارّ for chili.",
@@ -1789,6 +2079,43 @@
     ],
     "subtleties": [
      "حَارّ also means “hot” in temperature: يَوْمٌ حَارٌّ (a hot day)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Greek πιπέρι goes back to the same ancient Indian word, pippalī."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English pepper goes back to the same ancient Indian word, pippalī."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "French poivre goes back to the same ancient Indian word, pippalī."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "Italian pepe goes back to the same ancient Indian word, pippalī."
+     },
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "Russian перец goes back to the same ancient Indian word, pippalī."
+     },
+     {
+      "for": "sq",
+      "rel": "similar",
+      "text": "Albanian piper goes back to the same ancient Indian word, pippalī."
+     },
+     {
+      "for": "hi",
+      "rel": "similar",
+      "text": "Hindi पिप्पली (long pepper) is the same old word as فِلْفِل: both go back to pippalī."
+     }
     ]
    }
   },
@@ -1814,7 +2141,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "مَلْفُوفُ",
+      "translit": "malfūfu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "malfūf",
@@ -1931,7 +2267,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "قَرْنَبِيطُ",
+      "translit": "qarnabīṭu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "qarnabīṭ",
@@ -2048,7 +2393,16 @@
     "declension": "invariable",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "بْرُوكُلِي",
+      "translit": "brūkulī"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "brūkulī",
@@ -2123,7 +2477,7 @@
      "src": "Wiktionary (kaikki.org), translation tables of “broccoli”"
     },
     "funFacts": [
-     "Italian broccoli is a plural: “little sprouts”, from brocco, “shoot”."
+     "In the language it comes from, the word is a plural: “little sprouts”, from *brocco*, “shoot”."
     ],
     "pitfalls": [
      "The spelling is not fixed: بروكلي, بروكولي and بركولي all occur, and the vowels vary. The initial cluster br- is kept, so the vocalized form starts with a sukūn: بْرُوكُلِي.",
@@ -2131,6 +2485,13 @@
     ],
     "subtleties": [
      "Masculine (Wiktionary): الْبْرُوكُلِي غَنِيٌّ (broccoli is rich)."
+    ],
+    "notes": [
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "*broccoli* is the same word, borrowed with its plural ending; in Arabic بْرُوكُلِي is a masculine mass noun."
+     }
     ]
    }
   },
@@ -2160,7 +2521,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "كُرَّاثُ",
+      "translit": "kurrāṯu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "kurrāṯ",
@@ -2278,6 +2648,12 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a noun with its adjective: only فِلْفِل takes the construct form, and the adjective then follows the whole construct"
     }
    },
    "gender": "MASC",
@@ -2402,7 +2778,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "شَمَنْدَرُ",
+      "translit": "šamandaru"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "šamandar",
@@ -2483,7 +2868,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "A Turkish speaker recognises بَنْجَر at once: it is pancar."
+     "Two words for one root vegetable: شَمَنْدَر in most of the Levant and Iraq, بَنْجَر in Egypt."
     ],
     "pitfalls": [
      "Sun letter: الشَّمَنْدَرُ = aš-šamandar.",
@@ -2491,6 +2876,13 @@
     ],
     "subtleties": [
      "Masculine mass noun: الشَّمَنْدَرُ الْمَسْلُوقُ (boiled beetroot)."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "A Turkish speaker recognises بَنْجَر at once: it is pancar."
+     }
     ]
    }
   },
@@ -2520,7 +2912,16 @@
     "declension": "invariable",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "كُوسَا",
+      "translit": "kūsā"
+     }
+    ]
    },
    "gender": "FEM",
    "translit": "kūsā",
@@ -2638,6 +3039,12 @@
     "declension": "invariable",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a noun with its adjective: only فَاصُولِيَا takes the construct form, and the adjective then follows the whole construct"
     }
    },
    "gender": "FEM",
@@ -2724,7 +3131,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "A Greek speaker hears φασόλια/φασούλια in فَاصُولِيَا — it came to Arabic through Turkish fasulye."
+     "It came to Arabic through Turkish fasulye, from Greek φασούλια."
     ],
     "pitfalls": [
      "خَضْرَاء is a diptote: فَاصُولِيَا خَضْرَاءُ (no tanwīn), and without al- its genitive ends in -a (خَضْرَاءَ).",
@@ -2732,6 +3139,28 @@
     ],
     "subtleties": [
      "فَاصُولِيَا itself is indeclinable (ends in -ā); the case shows only on خَضْرَاء, which is feminine because فَاصُولِيَا is."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "You hear φασόλια / φασούλια in فَاصُولِيَا: the word came to Arabic from Greek."
+     },
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "Russian фасоль is the same word as فَاصُولِيَا."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "Italian fagioli is a cousin of فَاصُولِيَا: both go back to ancient φασίολος."
+     },
+     {
+      "for": "sq",
+      "rel": "similar",
+      "text": "Albanian fasule is the same word as فَاصُولِيَا."
+     }
     ]
    }
   },
@@ -2761,6 +3190,12 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a noun with its adjective: only بَصَل takes the construct form, and the adjective then follows the whole construct"
     }
    },
    "gender": "MASC",
@@ -2836,13 +3271,20 @@
      "src": "Wiktionary (kaikki.org): بصل; the phrase has no entry"
     },
     "funFacts": [
-     "The Arabic image is the same as American English “green onion”."
+     "The name says what you see: onions eaten green, before the bulb has grown."
     ],
     "pitfalls": [
      "أَخْضَر is a diptote: بَصَلٌ أَخْضَرُ (no tanwīn on the adjective), بَصَلٍ أَخْضَرَ in the genitive."
     ],
     "subtleties": [
      "Collective and masculine: الْبَصَلُ الْأَخْضَرُ طَازَجٌ (the spring onions are fresh)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "The Arabic picture is the same as American English “green onion”."
+     }
     ]
    }
   },
@@ -2872,7 +3314,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "كَرَفْسُ",
+      "translit": "karafsu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "karafs",
@@ -2947,13 +3398,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish kereviz (celery) comes from the same Persian word."
+     "One of the many Persian words of the Arabic kitchen — and the Persians had it from Syriac."
     ],
     "pitfalls": [
      "Vowels: ka-rafs (كَرَفْس) with sukūn on f. Unvocalized كرفس can also be read كُرْفُس, a rare word for cotton (Wiktionary)."
     ],
     "subtleties": [
      "Masculine mass noun: كَرَفْسٌ طَازَجٌ (fresh celery)."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish kereviz (celery) comes from the same Persian word."
+     }
     ]
    }
   },
@@ -2989,6 +3447,15 @@
       "senses": [
        "s2"
       ]
+     }
+    ],
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "ذُرَةُ",
+      "translit": "ḏuratu"
      }
     ]
    },
@@ -3087,7 +3554,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English durra (sorghum) is this Arabic word."
+     "ذُرَة covers both maize and sorghum (ذُرَةٌ رَفِيعَةٌ, “thin dhura”): the old grain gave its name to the new one."
     ],
     "pitfalls": [
      "ذُرَة (ḏura, corn: short u, no šadda) and ذَرَّة (ḏarra, atom, speck: with šadda) are both written ذرة without vowels.",
@@ -3095,6 +3562,13 @@
     ],
     "subtleties": [
      "Feminine (it ends in ة): الذُّرَةُ الْمَشْوِيَّةُ (grilled corn)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English durra (sorghum) is this Arabic word."
+     }
     ]
    }
   }

@@ -1,0 +1,217 @@
+{
+  "@@locale": "en",
+  "mt.translate": "Translate",
+  "@mt.translate": {
+    "description": "Button on a shared item (title/description written by another learner): machine-translate it into the UI language. Short."
+  },
+  "mt.showOriginal": "Show original",
+  "@mt.showOriginal": {
+    "description": "Button on a machine-translated shared item: show the original text again. Short."
+  },
+  "mt.translateAll": "Translate all",
+  "@mt.translateAll": {
+    "description": "Button above a list of shared items (Explore): machine-translate every title and description in a language other than the UI language. Short."
+  },
+  "mt.showOriginals": "Show originals",
+  "@mt.showOriginals": {
+    "description": "Button above a translated list: show every original text again. Short."
+  },
+  "mt.translating": "Translating…",
+  "@mt.translating": {
+    "description": "Status while the machine translation runs."
+  },
+  "mt.badge": "machine-translated",
+  "@mt.badge": {
+    "description": "Small tag right after a text that was machine-translated. Very short, lowercase."
+  },
+  "mt.badgeTip": "Machine-translated from {from} by {provider}. Original: {original}",
+  "@mt.badgeTip": {
+    "description": "Tooltip of a machine-translated text. {from} = name of the original language (e.g. Greek), {provider} = Claude or Gemini (a brand, not translated), {original} = the original text.",
+    "placeholders": {
+      "from": {
+        "type": "String",
+        "example": "Greek"
+      },
+      "provider": {
+        "type": "String",
+        "example": "Claude"
+      },
+      "original": {
+        "type": "String",
+        "example": "Κινηματική"
+      }
+    }
+  },
+  "mt.note": "Machine translation by {provider}: it may contain mistakes.",
+  "@mt.note": {
+    "description": "Note next to a translated list. {provider} = Claude or Gemini (brand).",
+    "placeholders": {
+      "provider": {
+        "type": "String",
+        "example": "Gemini"
+      }
+    }
+  },
+  "mt.estimate": "Translate {n, plural, one {# text} other {# texts}} ({chars, number} characters, {tiny, select, yes {under {cost}} other {about {cost}}}) with {provider}?",
+  "@mt.estimate": {
+    "description": "Asked before translating several shared texts at once (cost estimate). {cost} = an amount in US dollars, already formatted ($0.04); {tiny} = yes when the cost is below one cent ({cost} is then $0.01: “under $0.01”); {provider} = Claude or Gemini (brand).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "12"
+      },
+      "chars": {
+        "type": "int",
+        "example": "1400"
+      },
+      "cost": {
+        "type": "String",
+        "example": "$0.04"
+      },
+      "tiny": {
+        "type": "String",
+        "example": "no"
+      },
+      "provider": {
+        "type": "String",
+        "example": "Claude"
+      }
+    }
+  },
+  "mt.confirm": "Translate",
+  "@mt.confirm": {
+    "description": "Button that confirms the cost estimate and starts the translation. Short."
+  },
+  "mt.cancel": "Cancel",
+  "@mt.cancel": {
+    "description": "Button: do not translate. Short."
+  },
+  "mt.hint.nokey": "No AI key on this device: add your Claude API key or Gemini key (Me › AI) to translate shared texts. The original is shown.",
+  "@mt.hint.nokey": {
+    "description": "Shown when the learner asks to translate but has no own AI key on this device."
+  },
+  "mt.hint.daily": "Today’s translation limit ({max, number} characters) is reached. The original is shown.",
+  "@mt.hint.daily": {
+    "description": "Shown when the daily character cap (Settings) is reached.",
+    "placeholders": {
+      "max": {
+        "type": "int",
+        "example": "20000"
+      }
+    }
+  },
+  "mt.hint.session": "This session’s translation limit ({max, number} requests) is reached. The original is shown.",
+  "@mt.hint.session": {
+    "description": "Shown when the per-session request cap (Settings) is reached.",
+    "placeholders": {
+      "max": {
+        "type": "int",
+        "example": "30"
+      }
+    }
+  },
+  "mt.hint.rate": "Too many translations in a minute: try again shortly.",
+  "@mt.hint.rate": {
+    "description": "Shown when the per-minute request cap is reached."
+  },
+  "mt.hint.private": "Not translated: this text is private.",
+  "@mt.hint.private": {
+    "description": "Shown when a text may not be sent (private or not a shared kind)."
+  },
+  "mt.hint.sensitive": "Not translated: the text seems to contain personal data (an e-mail address, a phone number or a key).",
+  "@mt.hint.sensitive": {
+    "description": "Shown when the privacy check keeps a text on the device."
+  },
+  "mt.hint.error": "The translation failed: {error}. The original is shown.",
+  "@mt.hint.error": {
+    "description": "Shown when the AI provider returned an error. {error} = the error’s words (already translated).",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "No connection to Claude"
+      }
+    }
+  },
+  "mt.consent.title": "Translate shared texts?",
+  "@mt.consent.title": {
+    "description": "Title of the consent dialog shown the first time the learner asks to translate."
+  },
+  "mt.consent.turnOn": "Turn on and translate",
+  "@mt.consent.turnOn": {
+    "description": "Button of the consent dialog: switch machine translation on and translate now."
+  },
+  "mt.set.title": "Machine translation",
+  "@mt.set.title": {
+    "description": "Settings section title (Me › Language & appearance)."
+  },
+  "mt.set.consent": "When this is on, titles and descriptions that other learners shared (🌍 Explore, shared Roadmaps and subjects) can be translated into your language. They are sent from this device straight to the AI of your own key (Claude or Gemini), never to a noema-lite server, and saved on this device so the same text is not sent twice. Your own notes, private subjects and anything marked private are never sent. Machine translations may contain mistakes: you can always show the original. Translating uses your key’s quota and may cost a little.",
+  "@mt.set.consent": {
+    "description": "Consent text of machine translation (plain product text, not legal). Explains what is sent where. Keep every fact."
+  },
+  "mt.set.enable": "Translate shared texts with my own AI key",
+  "@mt.set.enable": {
+    "description": "Checkbox: the learner’s consent to machine translation (off by default)."
+  },
+  "mt.set.provider": "Translate with",
+  "@mt.set.provider": {
+    "description": "Label of the provider choice."
+  },
+  "mt.set.auto": "Automatic (Claude if its key is set, else Gemini)",
+  "@mt.set.auto": {
+    "description": "Provider option."
+  },
+  "mt.set.claude": "Claude (your API key)",
+  "@mt.set.claude": {
+    "description": "Provider option."
+  },
+  "mt.set.gemini": "Gemini (your key)",
+  "@mt.set.gemini": {
+    "description": "Provider option."
+  },
+  "mt.set.using": "Translations use {provider} with your own key.",
+  "@mt.set.using": {
+    "description": "Status line in the settings. {provider} = Claude or Gemini (brand).",
+    "placeholders": {
+      "provider": {
+        "type": "String",
+        "example": "Claude"
+      }
+    }
+  },
+  "mt.set.daily": "Characters per day",
+  "@mt.set.daily": {
+    "description": "Number field: daily cap of characters sent for translation."
+  },
+  "mt.set.session": "Translation requests per session",
+  "@mt.set.session": {
+    "description": "Number field: cap of requests to the AI per session (until the tab is closed)."
+  },
+  "mt.set.usedToday": "Used today: {used, number} of {max, number} characters.",
+  "@mt.set.usedToday": {
+    "description": "Settings: how much of the daily cap is used.",
+    "placeholders": {
+      "used": {
+        "type": "int",
+        "example": "1200"
+      },
+      "max": {
+        "type": "int",
+        "example": "20000"
+      }
+    }
+  },
+  "mt.set.clear": "Clear saved translations ({n, number})",
+  "@mt.set.clear": {
+    "description": "Button: delete the translations saved on this device. {n} = how many.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "42"
+      }
+    }
+  },
+  "mt.set.cleared": "Saved translations cleared",
+  "@mt.set.cleared": {
+    "description": "Button text after clearing the translation cache."
+  }
+}

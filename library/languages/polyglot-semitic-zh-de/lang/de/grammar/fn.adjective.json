@@ -531,7 +531,7 @@
   {
    "lang": "ar",
    "fn": "fn.adjective",
-   "note": "Arabic puts the adjective AFTER the noun and makes it agree in gender, number, case and definiteness: بَيْتٌ كَبِيرٌ (a big house), الْبَيْتُ الْكَبِيرُ (the big house) – the article is repeated."
+   "note": "Arabic puts the adjective AFTER the noun and makes it agree in gender, number, case and definiteness – the article is repeated:\n→ بَيْتٌ كَبِيرٌ (a big house)\n→ الْبَيْتُ الْكَبِيرُ (the big house)"
   },
   {
    "lang": "he",
@@ -541,7 +541,7 @@
   {
    "lang": "zh",
    "fn": "fn.adjective",
-   "note": "Chinese adjectives are stative verbs: no 是, usually 很 in a statement (房子很大); before a noun with 的 (很大的房子) or directly for short ones (大房子). No endings at all."
+   "note": "Chinese adjectives are stative verbs, with no endings at all:\n- no 是, usually 很 in a statement (房子很大);\n- before a noun with 的 (很大的房子) or directly for short ones (大房子)."
   },
   {
    "lang": "de",
@@ -558,97 +558,137 @@
   {
    "for": "el",
    "rel": "trap",
-   "text": "A Greek adjective agrees with its noun whatever stands before it, also after είναι (το σπίτι είναι μεγάλο); German endings depend on the article (der große / ein großer) and disappear after sein: Das Haus ist groß."
+   "text": "A Greek adjective agrees with its noun whatever stands before it, also after είναι:\n→ το σπίτι είναι μεγάλο\n\nGerman endings depend on the article (der große / ein großer) and disappear after sein:\n→ Das Haus ist groß."
   },
   {
    "for": "ru",
    "rel": "similar",
-   "text": "Russian adjectives agree in gender, number and case, as German ones do, but their ending does not depend on the article (Russian has none); German has weak, mixed and strong endings."
+   "text": "Russian adjectives agree in gender, number and case, as German ones do, but their ending does not depend on the article (Russian has none).\n\nGerman has **weak, mixed and strong endings**."
   },
   {
    "for": "es",
    "rel": "different",
-   "text": "Spanish puts most adjectives after the noun (una casa grande) and they always agree; German puts them before and changes them only there: ein großes Haus, but Das Haus ist groß."
+   "text": "Spanish puts most adjectives after the noun (una casa grande) and they always agree.\n\nGerman puts them before and changes them only there:\n→ ein großes Haus, but Das Haus ist groß."
   },
   {
    "for": "en",
    "rel": "new",
-   "text": "English adjectives never change; German ones take an ending before the noun, chosen by the article. The adverb has no -ly: schnell = fast and quickly. “I’m cold” is Mir ist kalt."
+   "text": "- English adjectives never change; German ones take an ending before the noun, chosen by the article.\n- The adverb has no -ly: schnell = fast and quickly.\n- “I’m cold” is Mir ist kalt."
   },
   {
    "for": "fr",
    "rel": "different",
-   "text": "Most French adjectives follow the noun and always agree (la maison est grande); German ones precede the noun and agree only there."
+   "text": "Most French adjectives follow the noun and always agree (la maison est grande).\n\nGerman ones precede the noun and agree only there."
   },
   {
    "for": "hi",
    "rel": "similar",
-   "text": "Hindi adjectives in -ā agree (achchhā laṛkā, achchhī laṛkī, achchhe laṛke) and come before the noun, as in German; others never change (sundar). mujhe ṭhaṇḍ lag rahī hai has the experiencer in the dative, like Mir ist kalt."
+   "text": "Hindi adjectives in -ā agree and come before the noun, as in German; others never change (sundar).\n→ achchhā laṛkā, achchhī laṛkī, achchhe laṛke\n\nmujhe ṭhaṇḍ lag rahī hai has the experiencer in the dative, like Mir ist kalt."
   },
   {
    "for": "fa",
    "rel": "different",
-   "text": "Persian adjectives follow the noun with the ezafe and never change (ketāb-e bozorg); German ones precede it and take endings: ein großes Buch."
+   "text": "Persian adjectives follow the noun with the ezafe and never change (ketāb-e bozorg); German ones precede it and take endings:\n→ ein großes Buch"
   },
   {
    "for": "mr",
    "rel": "similar",
-   "text": "Adjectives in -ā agree in gender and precede the noun, as in German; German adds case and the choice between weak and strong endings."
+   "text": "Adjectives in -ā agree in gender and precede the noun, as in German.\n\nGerman adds case and the choice between weak and strong endings."
   },
   {
    "for": "ar",
    "rel": "different",
-   "text": "Arabic adjectives follow the noun and agree in gender, number, case and definiteness (al-baytu l-kabīru); German ones precede it, and the article decides the ending: das große Haus, ein großes Haus."
+   "text": "Arabic adjectives follow the noun and agree in gender, number, case and definiteness (al-baytu l-kabīru).\n\nGerman ones precede it, and the article decides the ending:\n→ das große Haus, ein großes Haus"
   },
   {
    "for": "he",
    "rel": "different",
-   "text": "Hebrew adjectives follow the noun and repeat the article (ha-bayit ha-gadol); German ones precede the noun and take an ending: das große Haus."
+   "text": "Hebrew adjectives follow the noun and repeat the article (ha-bayit ha-gadol); German ones precede the noun and take an ending:\n→ das große Haus"
   },
   {
    "for": "tr",
    "rel": "new",
-   "text": "Turkish adjectives never change (büyük ev, büyük evler); German ones do, before a noun. “I’m cold” is a verb in Turkish (üşüyorum), a dative phrase in German: Mir ist kalt."
+   "text": "Turkish adjectives never change (büyük ev, büyük evler); German ones do, before a noun.\n\n“I’m cold” is a verb in Turkish (üşüyorum), a dative phrase in German:\n→ Mir ist kalt."
   },
   {
    "for": "ja",
    "rel": "different",
-   "text": "Japanese i-adjectives inflect for tense like verbs (takai, takakatta); German adjectives have no tense, but take case and gender endings before a noun."
+   "text": "Japanese i-adjectives inflect for tense like verbs (takai, takakatta).\n\nGerman adjectives have no tense, but take case and gender endings before a noun."
   },
   {
    "for": "ko",
    "rel": "different",
-   "text": "Korean adjectives are verbs (keuda, keun jip); a German adjective needs sein as a predicate and an ending before a noun."
+   "text": "Korean adjectives are verbs (keuda, keun jip).\n\nA German adjective needs sein as a predicate and an ending before a noun."
   },
   {
    "for": "fi",
    "rel": "similar",
-   "text": "Finnish adjectives agree in case and number before the noun (isossa talossa), as German ones do – but without gender, and without the weak / strong choice."
+   "text": "Finnish adjectives agree in case and number before the noun, as German ones do – but without gender, and without the weak / strong choice.\n→ isossa talossa"
   },
   {
    "for": "hu",
    "rel": "new",
-   "text": "Hungarian attributive adjectives never change (a nagy házban); German ones always take an ending before a noun: in dem großen Haus."
+   "text": "Hungarian attributive adjectives never change (a nagy házban); German ones always take an ending before a noun:\n→ in dem großen Haus"
   },
   {
    "for": "sw",
    "rel": "different",
-   "text": "Swahili adjectives follow the noun and agree by class (kitabu kikubwa, vitabu vikubwa); German ones precede the noun and agree by gender, number and case."
+   "text": "Swahili adjectives follow the noun and agree by class:\n→ kitabu kikubwa, vitabu vikubwa\n\nGerman ones precede the noun and agree by gender, number and case."
   },
   {
    "for": "zh",
    "rel": "different",
-   "text": "Chinese adjectives precede the noun with or without 的 (大房子, 很大的房子) and never change; as a predicate they need no copula (房子很大). German needs sein (Das Haus ist groß) and endings before the noun."
+   "text": "Chinese adjectives precede the noun with or without 的 (大房子, 很大的房子) and never change; as a predicate they need no copula (房子很大).\n\nGerman needs sein and endings before the noun:\n→ Das Haus ist groß."
   },
   {
    "for": "vi",
    "rel": "different",
-   "text": "Vietnamese adjectives follow the noun (nhà lớn) and need no copula (nhà lớn = the house is big); German puts them before the noun with an ending and uses sein in a predicate."
+   "text": "Vietnamese adjectives follow the noun (nhà lớn) and need no copula:\n→ nhà lớn = the house is big\n\nGerman puts them before the noun with an ending and uses sein in a predicate."
   },
   {
    "for": "iu",
    "rel": "different",
-   "text": "Inuktitut has no separate class of adjectives: a quality is a verb or a suffix on the noun (-rjuaq, big). German adjectives are words of their own, with endings before the noun."
+   "text": "Inuktitut has no separate class of adjectives: a quality is a verb or a suffix on the noun (-rjuaq, big).\n\nGerman adjectives are words of their own, with endings before the noun."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Most Italian adjectives follow the noun and agree everywhere, after essere too:\n→ una casa grande, la casa è grande\n\nA German adjective comes before the noun with an ending chosen by the article and **stays bare after sein**:\n→ ein großes Haus, Das Haus ist groß\n\nAs in Italian ho fame / ho sete, German says Ich habe Hunger / Durst."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "An Albanian adjective follows the noun with its linking article and keeps it after jam:\n→ një shtëpi e madhe, djali i mirë, shtëpia është e madhe\n\nA German adjective comes before the noun with an ending and **stays bare after sein**:\n→ ein großes Haus, Das Haus ist groß\n\nKam uri / kam etje is exactly Ich habe Hunger / Durst."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Most Portuguese adjectives follow the noun and always agree:\n→ uma casa grande, a casa é grande\n\nA German adjective comes before the noun, takes an ending chosen by the article and **stays bare after sein**:\n→ ein großes Haus, Das Haus ist groß\n\nTenho fome / tenho sede is the German Ich habe Hunger / Durst."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If adjectives in your language agree in gender, number and case, the idea is familiar. New:\n- the German ending also depends on the word in front (der große Tisch, ein großer Tisch, großer Hunger);\n- it disappears after sein: Der Tisch ist groß."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "new",
+   "text": "If your adjectives never change, **the endings before a German noun are the hard part**: one ending (-e, -er, -es, -en, -em) carries gender, number and case at once and is chosen by the article in front.\n\nAfter sein the adjective stays bare, as you are used to:\n→ Das Haus ist groß."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "new",
+   "text": "If your adjectives never change and can stand as a predicate on their own, two things are new:\n- before a noun a German adjective always takes an ending (ein großes Haus);\n- as a predicate it needs sein (Das Haus ist groß)."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "new",
+   "text": "If a quality is a verb or a suffix on the noun in your language, German adjectives are separate words placed before the noun with an ending chosen by the article:\n→ ein großes Haus\n\nAs a predicate they follow sein:\n→ Das Haus ist groß."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If adjectives in your language follow the noun and repeat its gender, number and definiteness, German turns this round:\n- the adjective comes first;\n- the article in front decides its ending (der große Tisch, ein großer Tisch);\n- after sein it never agrees: Die Tür ist groß."
   }
  ]
 }

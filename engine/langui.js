@@ -37,21 +37,44 @@ function h(tag, attrs, ...kids) {
   return e;
 }
 const $ = (s, r = document) => r.querySelector(s);
+/* ---------- the three languages (docs/i18n.md §1): the UI language (menus, buttons, labels, messages: the catalog i18n/lang/, keys
+   lang.*) · the course's speaker language (UI.C.explainLang: the course's own explanations come from its data; the few explanations
+   this code writes itself are lang.expl.* and follow it when it is a UI locale) · the learned languages (never translated) ---------- */
+const LT = (k, p) => window.NoemaI18n ? NoemaI18n.t(k, p) : k;
+/* an arrow written into a text points along the reading direction: mirrored in a right-to-left interface (docs/i18n.md §5) */
+const arrowBack = () => window.NoemaI18n?.dir === 'rtl' ? '→' : '←', arrowOn = () => window.NoemaI18n?.dir === 'rtl' ? '←' : '→';
+const LE = (k, p) => !window.NoemaI18n ? k : UI.C?.explainLang && NoemaI18n.match(UI.C.explainLang) ? NoemaI18n.t(k, p, UI.C.explainLang) : NoemaI18n.t(k, p);
+/** A list in the UI locale (“a, b, c” in English, as the course always wrote it; “a, b и c” in Russian …). */
+const LLIST = items => window.NoemaI18n && NoemaI18n.locale !== 'en' ? NoemaI18n.fmt.list(items.map(String)) : items.join(', ');
+/** A message with elements inside (a link, a bold word): LTE('lang.x', { link: element, n: 3 }) → [text, element, text …], the
+    element where the message puts its placeholder (ICU formats the rest). */
+const LTE = (k, p = {}) => {
+  const els = {}, q = {};
+  for (const [n, v] of Object.entries(p)) if (typeof Node !== 'undefined' && v instanceof Node) { els[n] = v; q[n] = '\u0001' + n + '\u0001'; } else q[n] = v;
+  return LT(k, q).split('\u0001').map((x, i) => i % 2 ? (els[x] || x) : x).filter(x => x !== '');
+};
+/** A language's name for a lang.expl.* message: in the language that message is shown in (the explanation language when it is a UI locale). */
+const explName = code => { try { const loc = window.NoemaI18n && UI.C?.explainLang && NoemaI18n.match(UI.C.explainLang) ? UI.C.explainLang : (window.NoemaI18n?.locale || 'en'); return new Intl.DisplayNames([loc, 'en'], { type: 'language' }).of(code) || code; } catch (e) { return code; } };
+/** A number in the UI locale's digits. */
+const LNUM = n => window.NoemaI18n ? NoemaI18n.fmt.number(n) : String(n);
 const shuffle = a => { const b = a.slice(); for (let i = b.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [b[i], b[j]] = [b[j], b[i]]; } return b; };
 const uniq = a => [...new Set(a)];
 
 /* ---------- languages: names, flags, scripts ---------- */
-const LANG_INFO = {
-  ar: { flag: '🇸🇦', name: 'Arabic', font: "'Noto Naskh Arabic'" }, he: { flag: '🇮🇱', name: 'Hebrew', font: "'Noto Sans Hebrew'" },
-  zh: { flag: '🇨🇳', name: 'Chinese', font: "'Noto Sans SC'" }, de: { flag: '🇩🇪', name: 'German' }, el: { flag: '🇬🇷', name: 'Greek' },
-  en: { flag: '🇬🇧', name: 'English' }, ru: { flag: '🇷🇺', name: 'Russian' }, tr: { flag: '🇹🇷', name: 'Turkish' }, hi: { flag: '🇮🇳', name: 'Hindi' },
-  fr: { flag: '🇫🇷', name: 'French' }, es: { flag: '🇪🇸', name: 'Spanish' }, it: { flag: '🇮🇹', name: 'Italian' }, ja: { flag: '🇯🇵', name: 'Japanese' },
+const LANG_INFO = {   // the names come from Intl in the UI language (uiLangName)
+  ar: { flag: '🇸🇦', font: "'Noto Naskh Arabic'" }, he: { flag: '🇮🇱', font: "'Noto Sans Hebrew'" },   // i18n-ignore
+  zh: { flag: '🇨🇳', font: "'Noto Sans SC'" }, de: { flag: '🇩🇪' }, el: { flag: '🇬🇷' },   // i18n-ignore
+  en: { flag: '🇬🇧' }, ru: { flag: '🇷🇺' }, tr: { flag: '🇹🇷' }, hi: { flag: '🇮🇳' },
+  fr: { flag: '🇫🇷' }, es: { flag: '🇪🇸' }, it: { flag: '🇮🇹' }, ja: { flag: '🇯🇵' },
   pt: { flag: '🇵🇹' }, ko: { flag: '🇰🇷' }, fa: { flag: '🇮🇷' }, nl: { flag: '🇳🇱' }, pl: { flag: '🇵🇱' }, sw: { flag: '🇹🇿' }, vi: { flag: '🇻🇳' }, uk: { flag: '🇺🇦' }, fi: { flag: '🇫🇮' }, hu: { flag: '🇭🇺' },
 };
-/** A language's English name for codes without an entry above (Intl knows them all). */
+/** A language's name in the UI language (Intl knows them all; English when the runtime is missing). */
 const LANG_DN = (() => { try { return new Intl.DisplayNames(['en'], { type: 'language' }); } catch (e) { return null; } })();
 const langDisplay = code => { try { return LANG_DN?.of(code) || code; } catch (e) { return code; } };
-const info = code => ({ flag: '🏳️', name: langDisplay(code), ...(LANG_INFO[code] || {}), ...((UI.C?.data.course.flags || {})[code] ? { flag: UI.C.data.course.flags[code] } : {}) });
+const uiLangName = code => window.NoemaI18n ? NoemaI18n.fmt.langName(code) : langDisplay(code);
+/** A language: its flag, its name in the UI language (name: inside a sentence) and as a label of its own (label: “Arabe”, not “arabe”). */
+const capFirst = s => { const a = [...String(s || '')]; return a.length ? (window.NoemaI18n ? NoemaI18n.fmt.upper(a[0]) : a[0].toUpperCase()) + a.slice(1).join('') : ''; };
+const info = code => ({ flag: '🏳️', ...(LANG_INFO[code] || {}), name: uiLangName(code), get label() { return capFirst(this.name); }, ...((UI.C?.data.course.flags || {})[code] ? { flag: UI.C.data.course.flags[code] } : {}) });
 const LX = code => UI.C.lang[code];
 const SUB_EMOJI = { root: '🥕', bulb: '🧅', stem: '🌿', leafy: '🥬', brassica: '🥦', fruitveg: '🍅', cucurbit: '🎃', legume: '🫛', flower: '🌸', sea: '🌊', pron: '👤', verb: '🏃', func: '🔤' };
 const conceptEmoji = cid => SUB_EMOJI[UI.C.concepts[cid]?.subgroup] || '🔹';
@@ -73,12 +96,27 @@ function word(code, text, { lex = null, cls = '', sub = true, marks = null } = {
     : X.language.vowelMarks && (UI.prefs.translit !== false || needTranslit(code)) && lex.translit && text === lex.lemma ? lex.translit : null;   // always until the letters are known (§5.5)
   return helper ? h('span', { class: 'lx-wbox' }, e, h('span', { class: 'lx-help', lang: code === 'zh' ? 'zh-Latn-pinyin' : 'und-Latn' }, helper)) : e;
 }
-/* ---------- the learner's languages (D18) and words met before they are learned (D19) ---------- */
-/** The languages the learner knows: settings, else the course's known languages as native ones. */
-/** The learner's languages (D18); without = the language on screen, which is never “familiar” from itself. */
-const knowsL = (without = null) => (UI.L.settings.knows || (UI.C.data.course.knownLanguages || []).map(code => ({ code, level: 'native' }))).filter(k => (k.code || k) !== without);
+/* ---------- the learner's native language (D19, docs/language-packs.md §2.2) and words met before they are learned (D20) ---------- */
+/** The account's settings (a:settings: synced; the native language lives there, for every course). */
+const accSettings = () => { try { return JSON.parse(localStorage.getItem(`noema1:${UI.acc}:a:settings`) || '{}') || {}; } catch (e) { return {}; } };
+function putAccSettings(patch) {
+  if (window.NoemaThemes?.putSettings) return NoemaThemes.putSettings(patch, UI.acc);
+  const k = `noema1:${UI.acc}:a:settings`, s = Object.assign(accSettings(), patch); Object.keys(patch).forEach(x => patch[x] === undefined && delete s[x]);
+  if (window.Noema?.kv) Noema.kv.set(k, JSON.stringify(s)); else try { localStorage.setItem(k, JSON.stringify(s)); } catch (e) { }
+}
+let nativeMemo = null;
+/** The learner's native language: a:settings.native, else the course's settings.knows entry at level native → {code?, name, type, family, branch, supported} | null. */
+const nativeL = () => {
+  const raw = (localStorage.getItem(`noema1:${UI.acc}:a:settings`) || '') + '|' + JSON.stringify(UI.L?.settings.knows || null);
+  if (nativeMemo && nativeMemo.raw === raw && nativeMemo.C === UI.C) return nativeMemo.v;
+  const v = N.nativeOf(UI.C, accSettings().native, UI.L?.settings.knows); nativeMemo = { raw, C: UI.C, v }; return v;
+};
+/** The languages that decide what is familiar (D18, R1: the native language and the ones spoken at C1 / C2); without = the language on screen, never “familiar” from itself. */
+const knowsL = (without = null) => [...N.nativeKnows(nativeL()), ...N.speaksOf(UI.L?.settings.knows, nativeL()).map(s => ({ ...s, level: s.level }))].filter(k => (k.code || k.name) !== without);
 const profileOf = code => (UI.C.data.world?.languages || []).find(l => l.code === code) || null;
-const langName = code => code?.startsWith('type:') ? `${code.slice(5)} languages` : code?.startsWith('family:') ? `${code.slice(7)} languages` : (profileOf(code)?.name || info(code).name || code);
+/** A learner's language by name: a group (type:… / family:…), else the course profile's (English) name in an English UI, else the UI language's name. */
+const langName = code => code?.startsWith('type:') ? LT('lang.base.langGroup', { group: code.slice(5) }) : code?.startsWith('family:') ? LT('lang.base.langGroup', { group: code.slice(7) }) : code?.startsWith('branch:') ? LT('lang.base.langGroup', { group: code.slice(7) })
+  : (() => { const ui = info(code).name; return (!window.NoemaI18n || NoemaI18n.locale === 'en' || ui === code) && profileOf(code)?.name || ui || code; })();   // Intl without a name: the profile's
 /** A bank sentence, word by word: every word shows its meaning on hover and opens its card on tap; unknown words carry 🆕. */
 function sentenceView(c, s, unknown = []) {
   if (!s?.tokens) return word(c, s?.text || '', { sub: false });
@@ -100,21 +138,23 @@ function wordPopup(c, lid) {
     h('div', { class: 'lx-popbox' }, h('div', { class: 'row' }, h('b', {}, gloss(c, lid)), h('button', { class: 'btn ghost small', onclick: () => pop.remove() }, '✕')), wordCardView(c, lid)));
   document.body.append(pop);
 }
-/** Words met before they were learned (D19): remembered per session, listed at the end of a lesson. */
+/** Words met before they were learned (D20): remembered per session, listed at the end of a lesson. */
 const metNew = new Map();
 function noteNew(c, ids) { for (const l of ids || []) metNew.set(c + '|' + l, { c, l }); }
-function newWordsList(title = '🆕 Words you met before learning them') {
+function newWordsList(title = '🆕 ' + LT('lang.base.metBefore')) {
   if (!metNew.size) return null;
   const items = [...metNew.values()];
-  return h('details', { class: 'lx-sec lx-newlist', open: true }, h('summary', {}, title, h('span', { class: 'tiny' }, ' ' + items.length)),
-    h('ul', { class: 'lx-list' }, ...items.map(({ c, l }) => h('li', {}, info(c).flag, ' ', h('button', { class: 'btn ghost small', onclick: () => wordPopup(c, l) }, LX(c).lex[l].lemma), ' — ', gloss(c, l)))));
+  return h('details', { class: 'lx-sec lx-newlist', open: true }, h('summary', {}, title, h('span', { class: 'tiny' }, ' ' + LNUM(items.length))),
+    h('ul', { class: 'lx-list' }, ...items.map(({ c, l }) => h('li', {}, info(c).flag, ' ', h('button', { class: 'btn ghost small', onclick: () => wordPopup(c, l) }, LX(c).lex[l].lemma), ' — ', gloss(c, l), paramsLine(c, l)))));
 }
 /** What a word means, in the explanation language. */
 function gloss(code, lid) {
   const x = LX(code).lex[lid], c = (x.senses || [])[0];
   return c ? UI.C.concepts[c]?.gloss || c : (x.role || '');
 }
-const STATE_LABEL = { locked: '🔒 locked', ready: '○ new', seen: '◔ seen', learning: '◑ learning', known_r: '◕ known (reading)', known_p: '● known', mastered: '★ mastered', absent: '— no word', unprepared: '⏳ not written yet', open: '○ open', known: '● known', skipped: '⤼ skipped', passed: '✔ passed', na: '—' };
+/** The state of a word or a step: its sign + its name in the UI language (STATE_LABEL[state], read at draw time). */
+const STATE_SIGN = { locked: '🔒', ready: '○', seen: '◔', learning: '◑', known_r: '◕', known_p: '●', mastered: '★', absent: '—', unprepared: '⏳', open: '○', known: '●', skipped: '⤼', passed: '✔' };
+const STATE_LABEL = new Proxy({}, { get: (o, s) => s === 'na' ? '—' : typeof s === 'string' && STATE_SIGN[s] ? STATE_SIGN[s] + ' ' + LT('lang.state.' + s) : undefined });
 
 /* ---------- learner state: one storage key per (language, node) and per (language, function) ---------- */
 const P = () => `noema1:${UI.acc}:s:lang:${UI.id}:`;
@@ -125,7 +165,9 @@ function loadLearner() {
     if (k && k.startsWith(p)) { try { kv[k.slice(p.length)] = JSON.parse(localStorage.getItem(k)); } catch (e) { } }
   }
   UI.prefs = kv.prefs || {};
-  return N.fromKV(UI.C, kv);
+  const L = N.fromKV(UI.C, kv);
+  L.settings.languages = UI.C.languages.slice();   // D21: the course's settings say what it teaches now (the others' progress stays stored)
+  return L;
 }
 let saveTimer = null;
 function save(now = false) {
@@ -153,6 +195,8 @@ function foldRemote(e) {
     try { kv[k] = JSON.parse(m); } catch (x) { }
   }
   const L2 = N.fromKV(UI.C, kv); UI.L.settings = L2.settings; UI.L.langs = L2.langs; UI.prefs = kv.prefs || UI.prefs;   // in place: a running session keeps writing into UI.L
+  if (!studyAnswer()) { const ch = studyChoice(); if (ch.langs.join() !== UI.C.languages.join() && !document.querySelector('.lx-session')) { save(true); return restudy(); } }   // another device chose other languages (before D21's answer)
+  UI.L.settings.languages = UI.C.languages.slice();
   save();
   if (!document.querySelector('.lx-session')) render();
   UI.remoteFolds = (UI.remoteFolds || 0) + 1;
@@ -160,6 +204,32 @@ function foldRemote(e) {
 addEventListener('noema:remote', foldRemote);
 const today = () => N.dayNumber();
 const activeLangs = () => (UI.L.settings.languages || UI.C.languages).filter(c => UI.C.lang[c]);
+/* ---------- D21: the learner chooses the languages to study (docs/LANGUAGES.md §8 *Languages to study*) ----------
+   One answer for the whole app: a:settings.studyLangs (synced, in backups) — the languages the learner studies, in every course
+   that has them. The course is built with only those (N.course(data, {languages})), so every view, session, generator, compare
+   table and bridge knows only them; the progress of the others stays stored (one key per language and node, §5.6) and is back as
+   soon as they are chosen again. Before the learner answers, a course teaches what it taught before (its settings.languages, else all). */
+/** The stored settings of the open course (before the learner state is loaded). */
+const storedCourseSettings = () => { try { return JSON.parse(localStorage.getItem(P() + 'settings') || '{}') || {}; } catch (e) { return {}; } };
+/** The account's answer (codes) or null when the learner has not answered yet. */
+const studyAnswer = () => { const s = accSettings().studyLangs; return Array.isArray(s) ? s : null; };
+/** N.studyLangs for the open course: {langs, chosen, none}. */
+const studyChoice = (data = UI.data) => N.studyLangs(data.course.languages, studyAnswer(), UI.L && UI.L.course === UI.id ? UI.L.settings.languages : storedCourseSettings().languages);
+/** Every language the app offers to study (the library's courses and the learner's own, loader.js), this course's first. */
+const offeredLangs = () => uniq([...(UI.data?.course.languages || []), ...((window.Noema?.langStudy?.offered?.(UI.acc)) || []).map(x => x.code)]);
+/** Store a new answer (codes, in any order) for the whole app. */
+function putStudy(codes) {
+  const all = offeredLangs(), want = all.filter(c => codes.includes(c)).concat(codes.filter(c => !all.includes(c)));
+  if (window.Noema?.langStudy?.set) Noema.langStudy.set(UI.acc, want); else putAccSettings({ studyLangs: want });
+}
+/** Study / stop studying one language of this course (⚙️ Settings): the answer so far (all the app's languages before the first
+    one) with this language in or out — a course never ends up with none. */
+function toggleStudy(code, on) {
+  const cur = studyAnswer() || offeredLangs().filter(c => !UI.data.course.languages.includes(c) || UI.C.languages.includes(c));
+  const next = on ? uniq([...cur, code]) : cur.filter(c => c !== code);
+  if (!UI.data.course.languages.some(c => next.includes(c))) return false;
+  putStudy(next); restudy(); return true;
+}
 
 /* ---- 10_shell.js ---- */
 /* ---------- the shell: start, top bar, routes ---------- */
@@ -168,15 +238,16 @@ let wired = false;
     onRoute({ view, label, home }) tells the frame where the learner is); without it the course takes the whole page. */
 function start({ acc, id, data, host = null, onRoute = null }) {
   if (UI.C && UI.acc) save(true);   // another course was open in this page (the frame opens one after the other)
-  UI.acc = acc; UI.id = id; UI.C = N.course(data); UI.L = loadLearner(); UI.day = today(); UI.profiles = false;
+  UI.acc = acc; UI.id = id; UI.data = data; UI.facade = null; UI.profMap = null; UI.L = null; UI.C = buildCourse(data); UI.L = loadLearner(); UI.day = today(); UI.profiles = false;
   window.NoemaLangUI?.claude?.activateAdded?.();   // a language a package added (docs/LANGUAGES.md §10.2) is active once
+  if (studyChoice().langs.join() !== UI.C.languages.join()) { save(true); UI.C = buildCourse(data); UI.L = loadLearner(); }   // D21: … and studied
+  applyExplanationLocale();   // D19: the explanations in the learner's native language (its facade), when one is on
   UI.lang = UI.prefs.lang && UI.C.lang[UI.prefs.lang] ? UI.prefs.lang : activeLangs()[0];
   FR.on = !!host; FR.host = host; FR.onRoute = onRoute; FR.base = host ? '#/lang/' + encodeURIComponent(id) : '';
-  document.title = `${UI.C.data.course.title} · noema-lite`;
+  document.title = `${UI.C.data.course.title} · noema-lite`;   // i18n-ignore (the course title and the app name)
   document.documentElement.lang = UI.C.explainLang;
-  if (!document.querySelector('link[data-lx-fonts]')) document.head.append(h('link', { rel: 'stylesheet', 'data-lx-fonts': '1', href: 'https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;600&family=Noto+Sans+Hebrew:wght@400;600&family=Noto+Sans+SC:wght@400;600&display=swap' }));
   document.body.classList.add('lx');
-  if (host) { host.replaceChildren(h('div', { class: 'lx-top lx-subbar', role: 'tablist', 'aria-label': 'Your languages' }), h('div', { class: 'lx-main' })); frameWatch(host); }   // inside the frame: its top bar and tabs stay
+  if (host) { host.replaceChildren(h('div', { class: 'lx-top lx-subbar', role: 'tablist', 'aria-label': LT('lang.shell.yourLanguages') }), h('div', { class: 'lx-main' })); frameWatch(host); }   // inside the frame: its top bar and tabs stay
   else document.body.append(h('header', { class: 'topbar lx-top' }), h('main', { class: 'lx-main' }));
   if (!wired) {
     wired = true;
@@ -184,6 +255,69 @@ function start({ acc, id, data, host = null, onRoute = null }) {
     document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden' && UI.C) save(true); });
   }
   render();
+}
+/* ---------- D19: the explanation locale and its facade (docs/language-packs.md §2.2, §3) ---------- */
+/** The locale facades of the open course: {locale: {status, coverage, path?}} — from the registry (built course.expl.<locale>.js) and those loaded. */
+function facadeStatuses() {
+  const meta = ((window.NOEMA_REGISTRY || {}).languages || []).find(m => m.id === UI.id), out = {};
+  for (const [loc, f] of Object.entries(meta?.expl || {})) out[loc] = f;
+  for (const [loc, f] of Object.entries(((window.NOEMA_LANGEXPL || {})[UI.id]) || {})) out[loc] = { ...(out[loc] || {}), status: f.status, coverage: f.coverage };
+  return out;
+}
+const previewHost = () => { try { return !!window.NOEMA_CONFIG?.i18nPreview || /^(deploy-preview-\d+|[\w-]+--)/.test(location.hostname); } catch (e) { return false; } };
+const facadeOpts = () => ({ preview: previewHost(), drafts: window.NOEMA_CONFIG?.i18nDrafts === true });
+/** The locales the explanations can be shown in: the master and every usable facade. */
+function explanationLocales() {
+  const master = UI.data.course.masterLang || UI.data.course.explainLang || 'en', F = facadeStatuses();
+  return [master, ...Object.keys(F).filter(l => l !== master && N.facadeUsable(F[l], facadeOpts()))];
+}
+/** The course as the learner sees it: the master, or the master through the facade of the explanation locale. */
+const buildCourse = data => N.course(UI.facade ? N.applyFacade(data, UI.facade) : data, { languages: studyChoice(data).langs });   // D21: only the languages the learner studies
+/** D21: the learner chose other languages (here, on the Languages tab, on another device): the course again with only those, the
+    learner state read again from the stored keys — the progress of a language chosen again is all there. */
+function restudy() {
+  if (!UI.C) return;
+  save(true);
+  UI.C = buildCourse(UI.data); if (UI.profMap) N.addProfiles(UI.C, facadeProfMap(UI.profMap));
+  UI.L = loadLearner(); save();
+  if (!UI.C.lang[UI.lang]) UI.lang = UI.prefs.lang && UI.C.lang[UI.prefs.lang] ? UI.prefs.lang : activeLangs()[0];
+  nativeMemo = null;
+  if (!document.querySelector('.lx-session')) render();
+}
+/** The word profiles (course.profiles.js) through the facade. */
+const facadeProfMap = map => UI.facade && map ? N.facadeProfiles(map, UI.facade) : map;
+const facadeLoading = {};
+/** Resolve the explanation locale (native ▸ UI locale ▸ master; the learner's choice first) and show the course through its facade:
+ *  at once when the facade is loaded, else after its file (course.expl.<locale>.js, loaded like the word profiles). → the locale */
+function applyExplanationLocale() {
+  const master = UI.data.course.masterLang || UI.data.course.explainLang || 'en';
+  const loc = N.explanationLocale({ native: nativeL(), uiLocale: window.NoemaI18n?.locale || 'en', override: UI.L?.settings.speaker, facades: facadeStatuses(), master, ...facadeOpts() });
+  const id = UI.id, loaded = l => ((window.NOEMA_LANGEXPL || {})[id] || {})[l];
+  const swap = fac => {
+    const kv = UI.L ? N.toKV(UI.C, UI.L) : null;
+    UI.facade = fac ? { ...fac, locale: fac.locale || loc } : null; UI.C = buildCourse(UI.data);
+    if (kv) { const st = UI.L.settings; UI.L = N.fromKV(UI.C, kv); UI.L.settings = st; }   // every setting kept as it is (fromKV keeps only the known ones)
+    if (UI.profMap) N.addProfiles(UI.C, facadeProfMap(UI.profMap));
+    nativeMemo = null;
+  };
+  const want = loc === master ? null : loc;
+  if ((UI.facade?.locale || null) !== want) {
+    if (!want) swap(null);
+    else if (loaded(want)) swap(loaded(want));
+    else {
+      const path = facadeStatuses()[want]?.path;
+      if (path && !facadeLoading[id + '|' + want]) facadeLoading[id + '|' + want] = new Promise(res => { const sc = document.createElement('script'); sc.src = path; sc.onload = sc.onerror = () => res(); document.head.append(sc); })
+        .then(() => { delete facadeLoading[id + '|' + want]; if (UI.id === id && loaded(want)) { applyExplanationLocale(); if (UI.C && !document.querySelector('.lx-session')) render(); } });
+      N.setExplainLocale(UI.C.explainLang); return UI.C.explainLang;   // until it is in: the master
+    }
+  }
+  N.setExplainLocale(UI.C.explainLang);
+  try {   // the explanations this code writes (lang.expl.*, lc.expl.*) follow the explanation language: its catalog, when it is a UI locale
+    const xl = window.NoemaI18n && NoemaI18n.match(UI.C.explainLang);
+    if (xl && xl !== 'en' && !NoemaI18n.catalogs[xl]) NoemaI18n.load(xl).then(() => { if (UI.C && UI.id === id && !document.querySelector('.lx-session')) render(); });
+  } catch (e) { }
+  if (UI.C.explainLang && document.documentElement && UI.view) document.documentElement.lang = UI.C.explainLang;
+  return UI.C.explainLang;
 }
 /** Is the course on screen? (inside the frame the learner may be on another tab) */
 const shown = () => !FR.on || (!!FR.host?.isConnected && innerHash() != null);
@@ -195,21 +329,21 @@ function topbar() {
   const k = Object.fromEntries(activeLangs().map(c => [c, N.known(UI.C, UI.L, c)]));
   const chips = activeLangs().map(c => {
     const total = Object.keys(LX(c).lex).length, kn = Object.values(k[c].state).filter(s => ['known_r', 'known_p', 'mastered'].includes(s)).length;
-    return h('button', { class: 'chip lx-flagchip' + (c === UI.lang ? ' on' : ''), 'data-lang': c, title: `${info(c).name}: ${kn} of ${total} words known`, onclick: () => { UI.lang = c; UI.prefs.lang = c; save(); render(); } },
+    return h('button', { class: 'chip lx-flagchip' + (c === UI.lang ? ' on' : ''), 'data-lang': c, title: LT('lang.shell.chipKnown', { lang: info(c).name, kn, total }), onclick: () => { UI.lang = c; UI.prefs.lang = c; save(); render(); } },
       h('span', { class: 'lx-flag' }, info(c).flag), c.toUpperCase(), h('span', { class: 'lx-ring', style: { '--p': total ? Math.round(kn / total * 100) : 0 } }));
   });
-  const explain = h('span', { class: 'chip lx-explain', title: 'Explanations, meanings and feedback are written in this language (chosen when the course was made)' }, '💬 ' + info(UI.C.explainLang).name);
+  const explain = h('span', { class: 'chip lx-explain', title: LT('lang.shell.explainTitle') }, '💬 ' + info(UI.C.explainLang).name);
   if (FR.on) { t.append(...chips, h('span', { class: 'spacer' }), explain); return; }   // the frame has the title (crumbs), ⚙️ and the other courses (⋮)
   t.append(
     h('div', { class: 'brand', onclick: () => go('#/') }, h('div', { class: 'logo' }, '🌍'), h('span', { class: 'lx-title' }, UI.C.data.course.title)),
     h('span', { class: 'spacer' }), explain, ...chips,
-    h('button', { class: 'iconbtn', title: 'Settings', onclick: () => go('#/settings') }, '⚙️'),
-    h('button', { class: 'iconbtn', title: 'Choose another subject or course', onclick: () => window.Noema?.openSubjectPicker ? Noema.openSubjectPicker() : null }, '📚'));
+    h('button', { class: 'iconbtn', title: LT('lang.shell.settings'), onclick: () => go('#/settings') }, '⚙️'),
+    h('button', { class: 'iconbtn', title: LT('lang.shell.otherSubject'), onclick: () => window.Noema?.openSubjectPicker ? Noema.openSubjectPicker() : null }, '📚'));
 }
 const VIEWS = {};
 /** Where the learner is, in words: the last crumb of the frame. */
-const VIEW_LABEL = { lanes: 'Parallel lanes', settings: 'Settings', claude: 'Through Claude', grammar: 'Grammar', write: 'Writing', read: 'Reading', script: 'Script', listen: 'Listening & speaking',
-  cmp: 'Compare', poly: 'Polyglot drills', sort: 'Sort a field', parts: 'Principal parts', peculiar: 'Peculiarities', recall: 'Name them all', deep: 'Practise this word', deepen: 'Deepen' };
+const VIEW_NAMES = ['lanes', 'settings', 'claude', 'grammar', 'write', 'read', 'script', 'listen', 'cmp', 'poly', 'sort', 'parts', 'peculiar', 'recall', 'deep', 'deepen'];
+const VIEW_LABEL = new Proxy({}, { get: (o, k) => VIEW_NAMES.includes(k) ? LT('lang.view.' + k) : undefined });   // lang.view.<name>
 function viewLabel(r) {
   const C = UI.C, fl = c => C.lang[c] ? info(c).flag + ' ' : '';
   try {
@@ -219,13 +353,15 @@ function viewLabel(r) {
     if (r.name === 'node' || r.name === 'lesson') return C.nodes[r.arg] ? (C.nodes[r.arg].kind === 'lesson' ? stepLabel(C.nodes[r.arg]) + ' ' : '') + C.nodes[r.arg].title : r.arg;
     if (r.name === 'fn') return C.functions[r.arg]?.title || r.arg;
     if (r.name === 'field') return (C.data.fields.find(f => f.field === r.arg) || {}).title || r.arg;
-    if (r.name === 'deepen') return 'Deepen · ' + (C.nodes[r.arg]?.title || r.arg);
+    if (r.name === 'deepen') return LT('lang.view.deepenOf', { title: C.nodes[r.arg]?.title || r.arg });
     return (r.arg && C.lang[r.arg] ? fl(r.arg) : '') + (VIEW_LABEL[r.name] || r.name);
   } catch (e) { return VIEW_LABEL[r.name] || r.name; }
 }
 function render() {
   if (!UI.C || !shown()) return;
   const r = route(); UI.view = r.name;
+  if (!document.querySelector('.lx-session') && studyChoice().langs.join() !== UI.C.languages.join()) return restudy();   // D21: the choice changed elsewhere
+  if (!document.querySelector('.lx-session')) applyExplanationLocale();   // D19: the native language may have changed (Me › Language and appearance, another device)
   if (FR.on) document.documentElement.lang = UI.C.explainLang;
   topbar();
   const m = $('.lx-main'); m.innerHTML = ''; window.scrollTo(0, 0);
@@ -248,46 +384,50 @@ function frameSummary(v) {
 }
 /** A row of flag buttons for a card: one per course language, with the state of the concept in it. */
 function flagRail(cid, current, onPick) {
-  return h('div', { class: 'lx-rail', role: 'tablist', 'aria-label': 'Languages' }, ...UI.C.languages.map(c => {
+  if (UI.C.languages.length < 2) return null;   // D21: one language studied — a course of one language, no switch
+  return h('div', { class: 'lx-rail', role: 'tablist', 'aria-label': LT('lang.shell.languages') }, ...UI.C.languages.map(c => {
     const st = cid ? N.conceptState(UI.C, UI.L, c, cid) : null;
-    return h('button', { class: 'lx-railbtn' + (c === current ? ' on' : ''), 'data-lang': c, role: 'tab', 'aria-selected': c === current ? 'true' : 'false', title: `${info(c).name} — ${STATE_LABEL[st] || ''}`, onclick: () => onPick(c) },
+    return h('button', { class: 'lx-railbtn' + (c === current ? ' on' : ''), 'data-lang': c, role: 'tab', 'aria-selected': c === current ? 'true' : 'false', title: `${info(c).label} — ${STATE_LABEL[st] || ''}`, onclick: () => onPick(c) },
       h('span', { class: 'lx-flag' }, info(c).flag), h('span', { class: 'lx-dot s-' + (st || 'none') }));
   }));
 }
 
 /* ---------- home ---------- */
 VIEWS.home = (v) => {
+  if (studyChoice().none) { const ask = studyAsk(true); if (ask) { v.append(h('h1', {}, UI.C.data.course.title), ask); return; } }   // D21: none of the chosen languages is in this course
   const plan = N.planSession(UI.C, UI.L, { day: today(), minutes: UI.L.settings.minutes || 20, languages: todayLangs() });   // today's languages (P6, §9.6)
   const nRev = plan.steps.filter(s => s.kind === 'review').reduce((a, s) => a + s.items.length, 0);
   const learn = plan.steps.find(s => s.kind === 'learn'), lessons = plan.steps.filter(s => s.kind === 'lesson');
   const nNew = learn ? learn.concepts.reduce((a, c) => a + c.langs.length, 0) : 0, nScript = scriptSessionSteps().length;   // letters / characters in the first weeks (P4)
+  const counts = LT(nScript ? 'lang.home.sessionCountsScript' : 'lang.home.sessionCounts', { rev: nRev, nNew, script: nScript });   // the frame's big card shows them (data-rest)
+  const ask = studyAsk(); if (ask) v.append(ask);   // D21: “Which languages do you want to study?” until the learner answers
   v.append(h('div', { class: 'lx-hero' },
     h('h1', {}, UI.C.data.course.title),
-    h('p', { class: 'lx-sub' }, `${UI.C.languages.map(c => info(c).flag + ' ' + info(c).name).join(' · ')} — explained in ${info(UI.C.explainLang).name}`),
+    h('p', { class: 'lx-sub' }, LT('lang.home.sub', { langs: UI.C.languages.map(c => info(c).flag + ' ' + info(c).label).join(' · '), lang: info(UI.C.explainLang).name })),
     h('div', { class: 'row' },
-      h('button', { class: 'btn primary lx-go', disabled: !(nRev || nNew || nScript), onclick: () => runSession(plan) }, nRev || nNew || nScript ? `▶ Today's session — ${nRev} review${nRev === 1 ? '' : 's'} · ${nNew} new` + (nScript ? ` · ${nScript} letters & characters` : '') : '✅ Nothing due — come back tomorrow'),
-      learn ? h('span', { class: 'tiny' }, `new words from “${UI.C.nodes[learn.node].title}”, the same ideas in every language`) : null)));
-  v.append(polyHome());   // P6: today's languages, the compare lane, the polyglot drills
-  if (lessons.length) v.append(h('h2', { class: 'lx-h2' }, lessons.some(st => UI.C.nodes[st.node].stage === 'core') ? '🧱 Your next lesson' : '🧱 Foundations — your next lesson'), h('div', { class: 'lx-lessons' }, ...lessons.map(st => {
+      h('button', { class: 'btn primary lx-go', disabled: !(nRev || nNew || nScript), 'data-go': nRev || nNew || nScript ? 'session' : 'none', 'data-rest': counts, onclick: () => runSession(plan) }, nRev || nNew || nScript ? '▶ ' + LT('lang.home.session', { counts }) : '✅ ' + LT('lang.home.nothingDue')),
+      learn ? h('span', { class: 'tiny' }, LT('lang.home.newFrom', { title: UI.C.nodes[learn.node].title })) : null)));
+  v.append(nativeAsk() || '', polyHome());   // D19: “Your native language?” (once) · P6: today's languages, the compare lane, the polyglot drills
+  if (lessons.length) v.append(h('h2', { class: 'lx-h2' }, '🧱 ' + LT(lessons.some(st => UI.C.nodes[st.node].stage === 'core') ? 'lang.home.nextLesson' : 'lang.home.nextFoundation')), h('div', { class: 'lx-lessons' }, ...lessons.map(st => {
     const n = UI.C.nodes[st.node];
-    return h('div', { class: 'lx-card lx-lessonbtn', 'data-node': st.node }, h('div', {}, h('span', { class: 'lx-step' }, stepLabel(n)), ' ', h('b', {}, n.title), h('div', { class: 'tiny' }, st.langs.map(c => info(c).flag + ' ' + info(c).name).join(' · '))),
-      h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => go('#/lesson/' + st.node) }, 'Open'), h('button', { class: 'btn primary', onclick: () => runLesson(st.node, st.langs) }, '▶ Learn')));
+    return h('div', { class: 'lx-card lx-lessonbtn', 'data-node': st.node }, h('div', {}, h('span', { class: 'lx-step' }, stepLabel(n)), ' ', h('b', {}, n.title), h('div', { class: 'tiny' }, st.langs.map(c => info(c).flag + ' ' + info(c).label).join(' · '))),
+      h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => go('#/lesson/' + st.node) }, LT('lang.home.open')), h('button', { class: 'btn primary', onclick: () => runLesson(st.node, st.langs) }, '▶ ' + LT('lang.home.learn'))));
   })));
-  v.append(h('div', { class: 'row lx-drills' }, h('span', { class: 'tiny' }, '🏋️ Drills: '),
-    h('button', { class: 'btn ghost small', onclick: () => go('#/parts/' + UI.lang) }, '🔁 Principal parts'), ...scriptHomeButtons(),
+  v.append(h('div', { class: 'row lx-drills' }, h('span', { class: 'tiny' }, '🏋️ ' + LT('lang.home.drills') + ' '),
+    h('button', { class: 'btn ghost small', 'data-icon': 'gym', onclick: () => go('#/parts/' + UI.lang) }, '🔁 ' + LT('lang.view.parts')), ...scriptHomeButtons(),
     ...UI.C.data.fields.filter(f => (f.subgroups || []).length > 1).map(f => h('button', { class: 'btn ghost small', onclick: () => go('#/sort/' + encodeURIComponent(f.field)) }, '🧩 ' + f.title))));
-  if (UI.C.data.world) v.append(h('div', { class: 'row lx-libraries' }, h('span', { class: 'tiny' }, '📚 Peculiarities, any time: '),
-    ...activeLangs().map(c => h('button', { class: 'btn ghost small', onclick: () => go('#/peculiar/' + c) }, info(c).flag + ' ' + info(c).name))));
+  if (UI.C.data.world) v.append(h('div', { class: 'row lx-libraries' }, h('span', { class: 'tiny' }, '📚 ' + LT('lang.home.peculiarAnyTime') + ' '),
+    ...activeLangs().map(c => h('button', { class: 'btn ghost small', onclick: () => go('#/peculiar/' + c) }, info(c).flag + ' ' + info(c).label))));
   if (typeof grammarLaneHome === 'function') v.append(grammarLaneHome());   // P5: the 📐 grammar lane
-  v.append(h('div', { class: 'row lx-maphead' }, h('h2', { class: 'lx-h2' }, '🗺️ The map'), lanesButton()), nodeList());
+  v.append(h('div', { class: 'row lx-maphead' }, h('h2', { class: 'lx-h2' }, '🗺️ ' + LT('lang.home.map')), lanesButton()), nodeList());
 };
 function nodeList() {
   const st = Object.fromEntries(UI.C.languages.map(c => [c, N.nodeStates(UI.C, UI.L, c)]));
   return h('div', { class: 'lx-nodes' }, ...UI.C.order.filter(nid => UI.C.nodes[nid].kind !== 'lesson' || activeLangs().some(c => LX(c).applies[nid])).map(nid => {
     const n = UI.C.nodes[nid];
     return h('button', { class: 'lx-node' + (n.kind === 'lesson' ? ' lx-lessonnode' : ''), onclick: () => go((n.kind === 'lesson' ? '#/lesson/' : '#/node/') + nid) },
-      h('div', { class: 'lx-nodetitle' }, h('b', {}, n.kind === 'lesson' ? h('span', { class: 'lx-step' }, stepLabel(n)) : null, n.kind === 'lesson' ? ' ' : null, n.title), h('span', { class: 'tiny' }, `${n.concepts.length} ideas` + (n.prereqs?.length ? ' · after ' + n.prereqs.map(p => UI.C.nodes[p].title.split(' — ')[0]).join(', ') : ''))),
-      h('div', { class: 'lx-nodestates' }, ...UI.C.languages.map(c => h('span', { class: 'lx-ns ns-' + st[c][nid], title: `${info(c).name}: ${STATE_LABEL[st[c][nid]] || st[c][nid]}` }, info(c).flag, ' ', (STATE_LABEL[st[c][nid]] || st[c][nid])))));
+      h('div', { class: 'lx-nodetitle' }, h('b', {}, n.kind === 'lesson' ? h('span', { class: 'lx-step' }, stepLabel(n)) : null, n.kind === 'lesson' ? ' ' : null, n.title), h('span', { class: 'tiny' }, n.prereqs?.length ? LT('lang.home.ideasAfter', { n: n.concepts.length, after: LLIST(n.prereqs.map(p => UI.C.nodes[p].title.split(' — ')[0])) }) : LT('lang.home.ideas', { n: n.concepts.length }))),
+      h('div', { class: 'lx-nodestates' }, ...UI.C.languages.map(c => h('span', { class: 'lx-ns ns-' + st[c][nid], title: `${info(c).label}: ${STATE_LABEL[st[c][nid]] || st[c][nid]}` }, info(c).flag, ' ', (STATE_LABEL[st[c][nid]] || st[c][nid])))));
   }));
 }
 
@@ -297,16 +437,16 @@ VIEWS.node = (v, r) => {
   const n = UI.C.nodes[r.arg]; if (!n) return VIEWS.home(v);
   if (n.kind === 'lesson') return VIEWS.lesson(v, r);
   const c = UI.lang, X = LX(c), k = N.known(UI.C, UI.L, c), ns = k.nodes[n.id];
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← Map')),
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, arrowBack() + ' ' + LT('lang.card.map'))),
     h('h1', {}, n.title),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); render(); }),
       h('span', { class: 'lx-ns ns-' + ns }, info(c).flag, ' ', STATE_LABEL[ns] || ns)),
     h('div', { class: 'row lx-actions' },
-      ['open', 'learning', 'known', 'mastered'].includes(ns) ? h('button', { class: 'btn primary small', onclick: () => runSession(N.planSession(UI.C, UI.L, { day: today(), minutes: 15, languages: [c] }), { only: n.id }) }, '▶ Learn / review this node') : null,
-      n.kind === 'field' ? h('button', { class: 'btn small', onclick: () => go('#/field/' + encodeURIComponent(n.field) + '/' + n.tier) }, '🧺 Field map') : null,
-      n.kind === 'field' && ['learning', 'known', 'mastered'].includes(ns) ? h('button', { class: 'btn small', onclick: () => go('#/recall/' + encodeURIComponent(n.field)) }, '⏱️ Name them all') : null,
+      ['open', 'learning', 'known', 'mastered'].includes(ns) ? h('button', { class: 'btn primary small', 'data-icon': 'plus', onclick: () => runSession(N.planSession(UI.C, UI.L, { day: today(), minutes: 15, languages: [c] }), { only: n.id }) }, '▶ ' + LT('lang.card.learnNode')) : null,
+      n.kind === 'field' ? h('button', { class: 'btn small', 'data-icon': 'map', onclick: () => go('#/field/' + encodeURIComponent(n.field) + '/' + n.tier) }, '🧺 ' + LT('lang.card.fieldMap')) : null,
+      n.kind === 'field' && ['learning', 'known', 'mastered'].includes(ns) ? h('button', { class: 'btn small', 'data-icon': 'dots', onclick: () => go('#/recall/' + encodeURIComponent(n.field)) }, '⏱️ ' + LT('lang.view.recall')) : null,
       deepenButton(n.id, c)),
-    !X.prepared[n.id] ? h('p', { class: 'lx-note' }, `⏳ The ${info(c).name} words of this node are not written yet.`) : null);
+    !X.prepared[n.id] ? h('p', { class: 'lx-note' }, '⏳ ' + LT('lang.card.nodeUnwritten', { lang: info(c).name })) : null);
   const grid = h('div', { class: 'lx-cgrid' });
   const ids = [...n.concepts.map(cid => ({ cid })), ...(X.byNode[n.id] || []).filter(id => !(X.lex[id].senses || []).length).map(id => ({ lex: id }))];
   for (const it of ids) grid.append(conceptTile(c, it, k));
@@ -318,7 +458,7 @@ function conceptTile(c, { cid, lex }, k) {
   const visible = !['locked', 'ready'].includes(st) || UI.prefs.peek;
   return h('button', { class: 'lx-tile s-' + st, onclick: () => go(cid ? '#/c/' + cid : '#/w/' + c + '/' + lex), title: STATE_LABEL[st] || '' },
     cid ? conceptPic(cid) : h('span', { class: 'lx-temoji' }, '🔤'),
-    h('span', { class: 'lx-tword' }, absent ? h('i', { class: 'tiny' }, '— no word') : visible ? lids.map((id, i) => [i ? ' · ' : '', word(c, X.lex[id].lemma, { sub: false })]) : '?'),
+    h('span', { class: 'lx-tword' }, absent ? h('i', { class: 'tiny' }, '— ' + LT('lang.card.noWordShort')) : visible ? lids.map((id, i) => [i ? ' · ' : '', word(c, X.lex[id].lemma, { sub: false })]) : '?'),
     h('span', { class: 'lx-tgloss' }, cid ? UI.C.concepts[cid].gloss : gloss(c, lex)));
 }
 
@@ -328,32 +468,77 @@ VIEWS.c = (v, r) => {
   const node = UI.C.nodes[LX(UI.lang).owner[cid] || UI.C.owner[cid]];
   const draw = () => {
     v.innerHTML = ''; topbar();
-    v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.length > 1 || !node ? history.back() : go('#/node/' + node.id) }, '← ' + (node ? node.title : 'Back'))),
-      h('div', { class: 'lx-cardhead' }, conceptPic(cid, 'lx-bigemoji'), h('div', {}, h('h1', {}, con.gloss), h('div', { class: 'tiny' }, [node ? node.title : '⏳ a meaning not taught yet (D15) — met as another meaning of a word you learn', con.wikidata ? 'Wikidata ' + con.wikidata : null].filter(Boolean).join(' · ')))),
+    v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.length > 1 || !node ? history.back() : go('#/node/' + node.id) }, arrowBack() + ' ' + (node ? node.title : LT('lang.card.back')))),
+      h('div', { class: 'lx-cardhead' }, conceptPic(cid, 'lx-bigemoji'), h('div', {}, h('h1', {}, con.gloss), h('div', { class: 'tiny' }, [node ? node.title : '⏳ ' + LT('lang.card.untaughtMeaning'), con.wikidata ? 'Wikidata ' + con.wikidata : null].filter(Boolean).join(' · ')))),   // i18n-ignore (Wikidata: a name)
       h('div', { class: 'row' }, flagRail(cid, UI.lang, x => { UI.lang = x; UI.prefs.lang = x; save(); draw(); }),
-        h('button', { class: 'btn small' + (UI.prefs.compare ? ' primary' : ''), onclick: () => { UI.prefs.compare = !UI.prefs.compare; save(); draw(); } }, '⇄ Compare')));
-    if (UI.prefs.compare) v.append(compareTable(cid), polyConceptStrip(cid));   // + the bridges among its words (P6)
+        UI.C.languages.length > 1 ? h('button', { class: 'btn small' + (UI.prefs.compare ? ' primary' : ''), onclick: () => { UI.prefs.compare = !UI.prefs.compare; save(); draw(); } }, '⇄ ' + LT('lang.view.cmp')) : null));
+    if (UI.prefs.compare && UI.C.languages.length > 1) v.append(compareTable(cid), polyConceptStrip(cid));   // + the bridges among its words (P6)
     const X = LX(UI.lang), lids = X.byConcept[cid] || [];
-    if (X.absent[cid]) v.append(h('div', { class: 'lx-absent' }, h('b', {}, `${info(UI.lang).flag} No ${info(UI.lang).name} word for this. `), X.absent[cid].reason, X.absent[cid].use ? h('div', {}, 'Instead: ', h('b', {}, X.absent[cid].use)) : null));
-    else if (node && !X.prepared[node.id]) v.append(h('p', { class: 'lx-note' }, `⏳ Not written yet in ${info(UI.lang).name}.`));
+    if (X.absent[cid]) v.append(h('div', { class: 'lx-absent' }, h('b', {}, info(UI.lang).flag + ' ' + LT('lang.card.noWordFor', { lang: info(UI.lang).name }) + ' '), X.absent[cid].reason, X.absent[cid].use ? h('div', {}, LT('lang.card.instead') + ' ', h('b', {}, X.absent[cid].use)) : null));
+    else if (node && !X.prepared[node.id]) v.append(h('p', { class: 'lx-note' }, '⏳ ' + LT('lang.card.unwrittenIn', { lang: info(UI.lang).name })));
     for (const lid of lids) v.append(wordCardView(UI.lang, lid, cid));
   };
   draw();
 };
-VIEWS.w = (v, r) => { const c = r.arg, lid = r.arg2; if (!UI.C.lang[c]?.lex[lid]) return VIEWS.home(v); v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.back() }, '← Back')), wordCardView(c, lid)); };
+VIEWS.w = (v, r) => { const c = r.arg, lid = r.arg2; if (!UI.C.lang[c]?.lex[lid]) return VIEWS.home(v); v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.back() }, arrowBack() + ' ' + LT('lang.card.back'))), wordCardView(c, lid)); };
 
 function compareTable(cid) {
   const rows = UI.C.languages.map(c => {
     const X = LX(c), lids = X.byConcept[cid] || [];
     const first = lids[0] && N.wordCard(UI.C, UI.L, c, lids[0]);
-    return h('tr', {}, h('th', {}, info(c).flag + ' ' + info(c).name),
-      h('td', {}, X.absent[cid] ? h('i', {}, '— ', X.absent[cid].use || 'no word') : lids.map((id, i) => [i ? h('br') : null, word(c, X.lex[id].lemma, { lex: X.lex[id] })])),
-      h('td', { class: 'tiny' }, first ? first.parts.slice(0, 2).map(p => `${p[0]}: ${p[1]}`).join(' · ') : ''),
+    return h('tr', {}, h('th', {}, info(c).flag + ' ' + info(c).label),
+      h('td', {}, X.absent[cid] ? h('i', {}, '— ', X.absent[cid].use || LT('lang.card.noWordShort')) : lids.map((id, i) => [i ? h('br') : null, word(c, X.lex[id].lemma, { lex: X.lex[id] })])),
+      h('td', { class: 'tiny' }, first ? (first.params?.length ? paramsLine(c, lids[0]) : first.parts.slice(0, 2).map(p => `${p[0]}: ${p[1]}`).join(' · ')) : ''),
       h('td', {}, first?.examples[0] ? h('span', {}, word(c, first.examples[0].text, { sub: false }), h('div', { class: 'tiny' }, first.examples[0].tr)) : ''));
   });
   return h('div', { class: 'lx-compare' }, h('table', {}, h('tbody', {}, ...rows)));
 }
 
+const CONNOTATION = { positive: '🙂', negative: '🙁', neutral: '😐', mixed: '🤔' };   // + lang.card.conn.<connotation>
+/** A code of a word profile in words of the explanation language (a value the catalog does not know stays as the course wrote it):
+    registers lc.expl.reg.*, phrase kinds lc.expl.phraseKind.* (langcore's words), status lang.expl.status.*, domains lang.expl.domain.*. */
+const codeWord = (prefix, v) => v != null && v !== '' && window.NoemaI18n && NoemaI18n.has(prefix + v) ? LE(prefix + v) : v;
+const regWord = r => codeWord('lc.expl.reg.', r), regWords = rs => [].concat(rs || []).map(regWord).join(', ');
+/* ---------- the word's parameters, right under the word (R3, D14): label · value, the forms in the language's script ---------- */
+/** One form of a parameter: in the language's font and direction (pinyin / a transliteration in Latin letters), its reading under it, a link to its own card. */
+function paramForm(c, f) {
+  const X = LX(c), showSub = f.sub && (c === 'zh' ? UI.prefs.pinyin !== false : UI.prefs.translit !== false || needTranslit(c));
+  let e = f.latin ? h('span', { class: 'lx-platin', lang: c === 'zh' ? 'zh-Latn-pinyin' : 'und-Latn' }, f.text) : word(c, f.text, { sub: false });
+  if (showSub) e = h('span', { class: 'lx-wbox' }, e, h('span', { class: 'lx-help', lang: c === 'zh' ? 'zh-Latn-pinyin' : 'und-Latn' }, f.sub));
+  if (f.lex && X.lex[f.lex] && !document.querySelector('.lx-session')) e = h('a', { class: 'lx-plink', href: '#/w/' + c + '/' + encodeURIComponent(f.lex), title: gloss(c, f.lex), onclick: () => document.querySelector('.lx-pop')?.remove() }, e);
+  return h('span', { class: 'lx-pform' + (f.role ? ' lx-p' + f.role : ''), dir: f.latin ? 'ltr' : null }, e);
+}
+/** One value: its forms, its kind (tags), the meanings it belongs to, a note. compact: forms and tags only. */
+function paramValue(c, v, compact) {
+  return h('span', { class: 'lx-pval' + (v.senses.length && !compact ? ' lx-pwide' : '') },
+    ...v.forms.map(f => paramForm(c, f)),
+    v.text ? h('span', { class: 'lx-ptext' }, v.text) : null,
+    ...v.tags.map(t => h('span', { class: 'lx-ptag' }, t)),
+    ...(compact ? [] : v.senses.map(s => h('span', { class: 'lx-psense', title: s.def }, h('b', {}, LNUM(s.n)), ' ', s.def))),
+    v.note && !compact ? h('span', { class: 'lx-pnote' }, v.note) : null);
+}
+function paramRow(c, r, compact) {
+  return h('div', { class: 'lx-prow' + (r.none != null ? ' lx-pnone' : '') + (r.short ? ' lx-pshort' : ''), 'data-param': r.id },
+    h('span', { class: 'lx-pk' }, r.title),
+    h('span', { class: 'lx-pv' }, r.none != null ? h('span', { class: 'lx-pwhy' }, '— ' + r.none) : r.values.map(v => paramValue(c, v, compact))));
+}
+/** The parameters block (R3): the prominent ones always visible, in the declared order; the rest (and the uninformative “none”s) folded.
+ *  compact (lesson intro, lists): the first prominent ones only, without meanings and notes. */
+function paramsBlock(c, params, { compact = false, max = 6 } = {}) {
+  if (!params || !params.length) return null;
+  const top = params.filter(r => r.prominent), rest = params.filter(r => !r.prominent);
+  if (compact) { const rows = top.filter(r => r.none == null).slice(0, max); return rows.length ? h('div', { class: 'lx-params lx-pcompact' }, ...rows.map(r => paramRow(c, r, true))) : null; }
+  return h('section', { class: 'lx-params', 'aria-label': LT('lang.card.params.label') },
+    ...top.map(r => paramRow(c, r)),
+    rest.length ? h('details', { class: 'lx-pmore' }, h('summary', {}, LT('lang.card.params.more', { n: rest.length })), h('div', { class: 'lx-pmorebody' }, ...rest.map(r => paramRow(c, r)))) : null);
+}
+/** One line for a list of words: “plural: die Männer · genitive: des Mannes” (the first prominent parameters, as text). */
+function paramsLine(c, lid, max = 2) {
+  let ps = []; try { ps = N.wordParams(UI.C, lid, c); } catch (e) { return null; }
+  const bits = ps.filter(r => r.prominent && r.none == null && r.values.some(v => v.forms.length)).slice(0, max)
+    .map(r => [r.title + ': ', ...r.values.flatMap((v, i) => [i ? ' · ' : '', ...v.forms.filter(f => f.role !== 'pattern').map(f => f.latin ? f.text : word(c, f.text, { sub: false }))])]);
+  return bits.length ? h('span', { class: 'lx-pline tiny' }, ...bits.flatMap((b, i) => [i ? ' · ' : ' (', ...b]), ')') : null;
+}
 /** Everything about one word (docs/LANGUAGES.md §4.6). */
 function wordCardView(c, lid, concept) {
   const card = N.wordCard(UI.C, UI.L, c, lid, { concept }), X = LX(c), lx = X.lex[lid];
@@ -363,44 +548,46 @@ function wordCardView(c, lid, concept) {
     e.py && UI.prefs.pinyin !== false ? h('div', { class: 'lx-help' }, e.py) : null,
     X.language.vowelMarks && UI.prefs.marks !== false ? h('div', { class: 'lx-plain', lang: c, dir: X.language.dir }, e.plain) : null,
     h('div', { class: 'lx-tr' }, e.tr),
-    h('div', { class: 'lx-chips' }, badge('🎭 ' + [].concat(e.register).join(', '), 'reg'), badge('📍 ' + e.context, 'ctx'), e.senseDef ? badge('≈ ' + e.senseDef, 'sense') : null,
-      e.unknown?.length ? badge('🆕 ' + e.unknown.length + ' new word' + (e.unknown.length > 1 ? 's' : ''), 'new') : null));
+    h('div', { class: 'lx-chips' }, badge('🎭 ' + regWords(e.register), 'reg'), badge('📍 ' + e.context, 'ctx'), e.senseDef ? badge('≈ ' + e.senseDef, 'sense') : null,
+      e.unknown?.length ? badge('🆕 ' + LT('lang.card.newWords', { n: e.unknown.length }), 'new') : null));
   const sec = {
     senses: items => h('ol', { class: 'lx-senses' }, ...items.map(s => h('li', { class: s.current ? 'lx-cur' : null },
-      h('b', {}, s.def), ' ', badge([].concat(s.register || []).join(', '), 'reg'), s.domains ? badge(s.domains.join(', '), 'ctx') : null,
-      s.current ? badge('← this meaning', 'sense') : s.concept ? h('a', { class: 'lx-badge sense', href: '#/c/' + s.concept }, (s.pending ? '⏳ ' : '→ ') + s.gloss) : null,
+      h('b', {}, s.def), ' ', badge(regWords(s.register), 'reg'), s.domains ? badge(s.domains.map(d => codeWord('lang.expl.domain.', d)).join(', '), 'ctx') : null,
+      s.current ? badge('← ' + LT('lang.card.thisMeaning'), 'sense') : s.concept ? h('a', { class: 'lx-badge sense', href: '#/c/' + s.concept }, (s.pending ? '⏳ ' : '→ ') + s.gloss) : null,
       ...s.forms.map(f => badge(f.label + ': ' + f.text, 'ctx')),
-      s.words.length ? h('div', { class: 'tiny' }, 'also said: ', s.words.join(' · '), s.contrast ? h('span', {}, ' — ⇄ ', h('b', {}, s.contrast.axis), ': this word = ', s.contrast.value) : null) : null,
-      s.nuances.length ? h('ul', { class: 'lx-list' }, ...s.nuances.map(n => h('li', {}, n.def, ' ', badge([].concat(n.register || []).join(', '), 'reg'), ...n.forms.map(f => badge(f.label + ': ' + f.text, 'ctx'))))) : null))),
+      s.words.length ? h('div', { class: 'tiny' }, LT('lang.card.alsoSaid') + ' ', s.words.join(' · '), s.contrast ? h('span', {}, ' — ⇄ ', h('b', {}, s.contrast.axis), ': ', LT('lang.card.thisWordIs', { value: s.contrast.value })) : null) : null,
+      s.nuances.length ? h('ul', { class: 'lx-list' }, ...s.nuances.map(n => h('li', {}, n.def, ' ', badge(regWords(n.register), 'reg'), ...n.forms.map(f => badge(f.label + ': ' + f.text, 'ctx'))))) : null))),
     facade: items => h('dl', { class: 'lx-parts' }, ...items.flatMap(x => [h('dt', {}, x.title), h('dd', { class: x.none ? 'tiny' : null }, /[֐-ۿ一-鿿]/.test(x.text) ? word(c, x.text, { sub: false }) : x.text)])),
     examples: items => h('div', {}, ...items.map(ex)),
     collocations: items => h('ul', { class: 'lx-list' }, ...items.map(x => h('li', {}, word(c, x.text, { sub: false }), ' — ', x.tr))),
     particleVerbs: items => h('ul', { class: 'lx-list' }, ...items.map(x => h('li', {}, word(c, x.text, { sub: false }), ' — ', x.tr))),
-    phrases: items => h('ul', { class: 'lx-list' }, ...items.map(x => h('li', {}, word(c, x.text, { sub: false }), ' ', badge(x.kind, 'ctx'), x.register ? badge([].concat(x.register).join(', '), 'reg') : null,
+    phrases: items => h('ul', { class: 'lx-list' }, ...items.map(x => h('li', {}, word(c, x.text, { sub: false }), ' ', badge(codeWord('lc.expl.phraseKind.', x.kind), 'ctx'), x.register ? badge(regWords(x.register), 'reg') : null,
       h('div', { class: 'tiny' }, '“' + x.tr + '” — ', h('b', {}, x.meaning), x.source ? ' (' + x.source + ')' : '')))),
-    synonyms: groups => h('div', {}, ...Object.entries(groups).map(([reg, list]) => h('div', { class: 'lx-syngroup' }, badge(reg, 'reg'),
-      h('ul', { class: 'lx-list' }, ...list.map(s => h('li', {}, word(c, s.word, { sub: false }), s.region ? badge('🗺️ ' + s.region, 'ctx') : null, ' — ', s.nuance)))))),
+    synonyms: groups => h('div', {}, ...Object.entries(groups).map(([reg, list]) => h('div', { class: 'lx-syngroup' }, badge(regWord(reg), 'reg'),
+      h('ul', { class: 'lx-list' }, ...list.map(s => h('li', {}, word(c, s.word, { sub: false }), s.region ? badge('🗺️ ' + s.region, 'ctx') : null, ' — ', mdView(s.nuance, { forLang: c, inline: true }))))))),   // R2
     antonyms: items => h('ul', { class: 'lx-list' }, ...items.map(x => h('li', {}, word(c, x.word, { sub: false }), x.note ? ' — ' + x.note : ''))),
-    pitfalls: items => h('ul', { class: 'lx-list lx-warn' }, ...items.map(x => h('li', {}, x))),
-    subtleties: items => h('ul', { class: 'lx-list' }, ...items.map(x => h('li', {}, x))),
+    pitfalls: items => h('ul', { class: 'lx-list lx-warn' }, ...items.map(x => h('li', {}, mdView(x, { forLang: c, inline: true })))),   // R2: structured texts
+    subtleties: items => h('ul', { class: 'lx-list' }, ...items.map(x => h('li', {}, mdView(x, { forLang: c, inline: true })))),
     etymology: items => h('div', {}, ...items.map(x => h('p', {}, x.text, h('span', { class: 'tiny' }, ' — ' + x.src)))),
-    funFacts: items => h('ul', { class: 'lx-list' }, ...items.map(x => h('li', {}, '💡 ', x))),
+    funFacts: items => h('ul', { class: 'lx-list' }, ...items.map(x => h('li', {}, '💡 ', mdView(x, { forLang: c, inline: true })))),
   };
   return h('article', { class: 'lx-card', lang: UI.C.explainLang },
     h('div', { class: 'lx-cardtop' },
       h('div', { class: 'lx-lemma' }, word(c, lx.lemma, { lex: lx })),
       h('div', { class: 'lx-meta' }, h('div', {}, h('b', {}, card.gloss)), h('div', { class: 'lx-chips' },
-        badge(STATE_LABEL[card.state] || card.state, 'st s-' + card.state), badge(card.frequency, 'freq'), badge(card.status && card.status !== 'current' ? card.status : null, 'reg'),
-        ...card.register.map(r => badge('🎭 ' + r, 'reg')), badge(card.connotation ? { positive: '🙂 positive', negative: '🙁 negative', neutral: '😐 neutral', mixed: '🤔 mixed' }[card.connotation] : null, 'ctx'),
-        card.intensity ? badge('strength ' + '●'.repeat(card.intensity) + '○'.repeat(5 - card.intensity), 'ctx') : null))),
-    card.parts.length ? h('dl', { class: 'lx-parts' }, ...card.parts.flatMap(([k, val]) => [h('dt', {}, k), h('dd', {}, /[֐-ۿ一-鿿]/.test(val) ? word(c, val, { sub: false }) : val)])) : null,
+        badge(STATE_LABEL[card.state] || card.state, 'st s-' + card.state), badge(card.frequency, 'freq'), badge(card.status && card.status !== 'current' ? codeWord('lang.expl.status.', card.status) : null, 'reg'),
+        ...card.register.map(r => badge('🎭 ' + regWord(r), 'reg')), badge(card.connotation && CONNOTATION[card.connotation] ? CONNOTATION[card.connotation] + ' ' + LT('lang.card.conn.' + card.connotation) : null, 'ctx'),
+        card.intensity ? badge(LT('lang.card.strength', { dots: '●'.repeat(card.intensity) + '○'.repeat(5 - card.intensity) }), 'ctx') : null))),
+    card.params?.length ? paramsBlock(c, card.params)   // R3: the word's parameters, right under it
+      : card.parts.length ? h('dl', { class: 'lx-parts' }, ...card.parts.flatMap(([k, val]) => [h('dt', {}, k), h('dd', {}, /[֐-ۿ一-鿿]/.test(val) ? word(c, val, { sub: false }) : val)])) : null,
     deepButton(c, lid),
-    card.feeling ? h('p', { class: 'lx-feeling' }, '💭 ', card.feeling) : null,
-    ...card.sections.map(s => h('details', { class: 'lx-sec', open: ['senses', 'facade', 'examples', 'pitfalls'].includes(s.key) ? true : null },
-      h('summary', {}, s.title, h('span', { class: 'tiny' }, ' ' + (Array.isArray(s.items) ? s.items.length : Object.values(s.items).flat().length))), sec[s.key](s.items))),
+    card.feeling ? h('div', { class: 'lx-feeling' }, '💭 ', mdView(card.feeling, { forLang: c, inline: true })) : null,
+    ...card.sections.filter(s => !(s.key === 'facade' && card.params?.length)).map(s => h('details', { class: 'lx-sec', open: ['senses', 'facade', 'examples', 'pitfalls'].includes(s.key) ? true : null },
+      h('summary', {}, s.title, h('span', { class: 'tiny' }, ' ' + LNUM(Array.isArray(s.items) ? s.items.length : Object.values(s.items).flat().length))), sec[s.key](s.items))),
+    ...wordNotesView(c, lx),   // R1: the word seen from the learner's languages and among the languages they learn (46_notes.js)
     polyWordExtras(c, lid),   // P6: bridges and false friends across the learner's languages
-    card.synonymsNone ? h('p', { class: 'tiny' }, 'Synonyms: ', card.synonymsNone) : null,
-    !card.hasProfile ? h('p', { class: 'tiny' }, 'A little word: ', gloss(c, lid)) : null);
+    card.synonymsNone ? h('p', { class: 'tiny' }, LT('lang.card.synonyms') + ' ', card.synonymsNone) : null,
+    !card.hasProfile ? h('p', { class: 'tiny' }, LT('lang.card.littleWord') + ' ', gloss(c, lid)) : null);
 }
 
 /* ---- 30_vocab.js ---- */
@@ -410,16 +597,16 @@ VIEWS.field = (v, r) => {
   const field = UI.C.data.fields.find(f => f.field === fid); if (!field) return VIEWS.home(v);
   const c = UI.lang, k = N.known(UI.C, UI.L, c);
   const all = field.concepts;
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← Map')),
-    h('h1', {}, '🧺 ', field.title, h('span', { class: 'tiny' }, ` · ${all.length} in all`)),
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, arrowBack() + ' ' + LT('lang.card.map'))),
+    h('h1', {}, '🧺 ', field.title, h('span', { class: 'tiny lx-count' }, ' · ' + LT('lang.field.inAll', { n: all.length }))),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); render(); }),
-      h('div', { class: 'lx-seg' }, ...[0, 1, 2, 3].map(t => h('button', { class: tierPick === t ? 'on' : '', onclick: () => go(`#/field/${encodeURIComponent(fid)}/${t}`) }, t ? ['', 'common', 'less common', 'rare'][t] : 'all'))),
-      h('button', { class: 'btn small', onclick: () => go('#/sort/' + encodeURIComponent(fid)) }, '🧩 Sort into groups'),
-      h('label', { class: 'tiny lx-peek' }, h('input', { type: 'checkbox', checked: UI.prefs.peek ? true : null, onchange: e => { UI.prefs.peek = e.target.checked; save(); render(); } }), ' show words not learned yet')));
+      h('div', { class: 'lx-seg' }, ...[0, 1, 2, 3].map(t => h('button', { class: tierPick === t ? 'on' : '', onclick: () => go(`#/field/${encodeURIComponent(fid)}/${t}`) }, LT('lang.field.tier' + t)))),
+      h('button', { class: 'btn small', onclick: () => go('#/sort/' + encodeURIComponent(fid)) }, '🧩 ' + LT('lang.field.sortGroups')),
+      h('label', { class: 'tiny lx-peek' }, h('input', { type: 'checkbox', checked: UI.prefs.peek ? true : null, onchange: e => { UI.prefs.peek = e.target.checked; save(); render(); } }), ' ' + LT('lang.field.peek'))));
   for (const sg of field.subgroups || [{ id: null, title: '' }]) {
     const items = all.filter(x => (sg.id == null || x.subgroup === sg.id) && (!tierPick || x.tier === tierPick)).sort((a, b) => a.tier - b.tier || a.rank - b.rank);
     if (!items.length) continue;
-    v.append(h('h3', { class: 'lx-h3' }, (SUB_EMOJI[sg.id] || '') + ' ' + sg.title, h('span', { class: 'tiny' }, ' ' + items.length)),
+    v.append(h('h3', { class: 'lx-h3' }, (SUB_EMOJI[sg.id] || '') + ' ' + sg.title, h('span', { class: 'tiny' }, ' ' + LNUM(items.length))),
       h('div', { class: 'lx-cgrid' }, ...items.map((x, i) => {
         const t = conceptTile(c, { cid: x.id }, k);
         if (i && items[i - 1].tier !== x.tier) t.classList.add('lx-tierbreak');
@@ -446,15 +633,15 @@ VIEWS.recall = (v, r) => {
   const c = UI.lang, X = LX(c), k = N.known(UI.C, UI.L, c);
   const words = Object.values(X.lex).filter(x => (x.senses || []).some(s => UI.C.concepts[s]?.field === fid));
   const found = new Map(); let left = 180, timer = null;
-  const si = scriptInput(c, { cls: 'lx-recallin', placeholder: `Type a ${info(c).name} word and press Enter…` }), input = si.input;   // keyboards / pinyin (P4)
+  const si = scriptInput(c, { cls: 'lx-recallin', placeholder: LT('lang.recall.placeholder', { lang: info(c).name }) }), input = si.input;   // keyboards / pinyin (P4)
   const clock = h('b', { class: 'lx-clock' }, '3:00'), list = h('div', { class: 'lx-found' }), msg = h('div', { class: 'tiny' });
   const finish = () => {
     clearInterval(timer); input.disabled = true;
     const taught = words.filter(x => k.R.has(x.id)), got = [...found.keys()];
     const bonus = got.filter(id => !k.R.has(id));
-    v.append(h('div', { class: 'lx-result' }, h('h2', {}, `${got.length} of ${words.length} ${field.title.toLowerCase()} in ${info(c).name}`),
-      h('p', {}, `Of the ${taught.length} you have learned you named ${got.filter(id => k.R.has(id)).length}.`, bonus.length ? ` And ${bonus.length} you have not been taught yet — well done!` : ''),
-      h('details', {}, h('summary', {}, 'The ones you did not name'), h('div', { class: 'lx-cgrid' }, ...words.filter(x => !found.has(x.id)).map(x => conceptTile(c, { cid: x.senses[0] }, k))))));
+    v.append(h('div', { class: 'lx-result' }, h('h2', {}, LT('lang.recall.result', { got: got.length, total: words.length, field: field.title.toLowerCase(), lang: info(c).name })),
+      h('p', {}, LT('lang.recall.learned', { taught: taught.length, named: got.filter(id => k.R.has(id)).length }), bonus.length ? ' ' + LT('lang.recall.bonus', { n: bonus.length }) : ''),
+      h('details', {}, h('summary', {}, LT('lang.recall.notNamed')), h('div', { class: 'lx-cgrid' }, ...words.filter(x => !found.has(x.id)).map(x => conceptTile(c, { cid: x.senses[0] }, k))))));
     // naming a learned word counts as a correct production review
     for (const id of got) if (k.R.has(id)) N.review(UI.C, UI.L, c, id, 'p', 'good', today());
     save(true);
@@ -465,85 +652,148 @@ VIEWS.recall = (v, r) => {
     if (!t) return;
     if (!timer) timer = setInterval(() => { left--; clock.textContent = `${left / 60 | 0}:${String(left % 60).padStart(2, '0')}`; if (left <= 0) finish(); }, 1000);
     const hit = words.find(x => !found.has(x.id) && spellings(c, x).has(t));
-    if (hit) { found.set(hit.id, true); list.prepend(h('span', { class: 'lx-hit' }, word(c, hit.lemma, { sub: false }), ' ', h('span', { class: 'tiny' }, gloss(c, hit.id)))); msg.textContent = `✓ ${found.size}`; }
-    else msg.textContent = words.some(x => spellings(c, x).has(t)) ? 'already named' : 'not in this field (or a spelling I do not know)';
+    if (hit) { found.set(hit.id, true); list.prepend(h('span', { class: 'lx-hit' }, word(c, hit.lemma, { sub: false }), ' ', h('span', { class: 'tiny' }, gloss(c, hit.id)))); msg.textContent = `✓ ${LNUM(found.size)}`; }
+    else msg.textContent = LT(words.some(x => spellings(c, x).has(t)) ? 'lang.recall.already' : 'lang.recall.notInField');
   });
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.back() }, '← Back')),
-    h('h1', {}, `⏱️ Name all the ${field.title.toLowerCase()} you can — ${info(c).flag} ${info(c).name}`),
-    h('p', { class: 'tiny' }, 'Any form counts; without vowel marks, in transliteration or pinyin (tones optional) too. The clock starts with your first word.'),
-    h('div', { class: 'row' }, si.el, clock, h('button', { class: 'btn small', onclick: finish }, 'Done')), msg, list);
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.back() }, arrowBack() + ' ' + LT('lang.card.back'))),
+    h('h1', {}, '⏱️ ' + LT('lang.recall.title', { field: field.title.toLowerCase(), lang: info(c).flag + ' ' + info(c).label })),
+    h('p', { class: 'tiny' }, LT('lang.recall.how')),
+    h('div', { class: 'row' }, si.el, clock, h('button', { class: 'btn small', onclick: finish }, LT('lang.recall.done'))), msg, list);
   setTimeout(() => input.focus(), 50);
 };
 
 /* ---------- ⚙️ settings ---------- */
-/** D18: the learner's languages with their level; native / C2 ones fold what is familiar. A language without a profile is
+/** D18, R1: the learner's languages with their level; native, C1 and C2 ones fold what is familiar and are compared with. A language without a profile is
  *  described by its type (and family), and the app infers from them. */
-const LEVELS = [['native', 'native'], ['C2', 'C2 (near-native)'], ['C1', 'C1'], ['B2', 'B2'], ['B1', 'B1'], ['A2', 'A2 or less']];
+const LEVELS = [['native', () => LT('lang.set.native')], ['C2', () => LT('lang.set.c2')], ['C1', () => 'C1'], ['B2', () => 'B2'], ['B1', () => 'B1'], ['A2', () => LT('lang.set.a2')]];
 function knowsEditor() {
   const S = UI.L.settings, W = UI.C.data.world, box = h('div', { class: 'lx-knows' });
-  const list = () => S.knows || (S.knows = knowsL().map(k => ({ ...k })));
+  const list = () => S.knows || (S.knows = []);
   const draw = () => {
     box.innerHTML = '';
     for (const [i, k] of list().entries()) box.append(h('div', { class: 'lx-setrow', 'data-know': k.code || k.name },
-      h('b', {}, k.code ? langName(k.code) : k.name), k.code ? null : h('span', { class: 'tiny' }, ` (${k.type || '?'}${k.family ? ', ' + k.family : ''}: inferred)`), ' ',
-      h('select', { 'aria-label': 'level', onchange: e => { k.level = e.target.value; save(); } }, ...LEVELS.map(([v, t]) => h('option', { value: v, selected: (k.level || 'native') === v ? true : null }, t))),
+      h('b', {}, k.code ? capFirst(langName(k.code)) : k.name), k.code ? null : h('span', { class: 'tiny' }, ' ' + LT('lang.set.inferred', { what: (k.type || '?') + (k.family ? ', ' + k.family : '') })), ' ',
+      h('select', { 'aria-label': LT('lang.set.level'), onchange: e => { k.level = e.target.value; save(); } }, ...LEVELS.map(([v, t]) => h('option', { value: v, selected: (k.level || 'native') === v ? true : null }, t()))),
       h('button', { class: 'btn ghost small', onclick: () => { list().splice(i, 1); save(); draw(); } }, '✕')));
-    const langs = (W?.languages || []).slice().sort((a, b) => a.name.localeCompare(b.name));
-    const pick = h('select', { 'aria-label': 'add a language' }, h('option', { value: '' }, '+ add a language …'), ...langs.map(l => h('option', { value: l.code }, `${l.name} — ${l.family}`)), h('option', { value: '*' }, 'another language (not in the list) …'));
+    const nm = l => capFirst(langName(l.code) || l.name), cmp = window.NoemaI18n ? NoemaI18n.fmt.compare : (a, b) => a.localeCompare(b);
+    const langs = (W?.languages || []).slice().sort((a, b) => cmp(nm(a), nm(b)));
+    const pick = h('select', { 'aria-label': LT('lang.set.addLang') }, h('option', { value: '' }, '+ ' + LT('lang.set.addLangItem')), ...langs.map(l => h('option', { value: l.code }, `${nm(l)} — ${l.family}`)), h('option', { value: '*' }, LT('lang.set.otherLang')));
     pick.onchange = () => {
       if (pick.value === '*') {
-        const name = prompt('Name of the language?'); if (!name) return draw();
-        const type = prompt('Its type: isolating, agglutinating, fusional or polysynthetic?', 'agglutinating') || '';
+        const name = prompt(LT('lang.set.askName')); if (!name) return draw();
+        const type = prompt(LT('lang.set.askType'), 'agglutinating') || '';   // the answer is one of the four type codes
         const fams = [...new Set((W?.languages || []).map(l => l.family))].sort();
-        const family = prompt('Its family, if one of these (else leave empty): ' + fams.join(', '), '') || '';
+        const family = prompt(LT('lang.set.askFamily', { families: fams.join(', ') }), '') || '';
         list().push({ name, type: type.trim().toLowerCase(), ...(fams.includes(family.trim()) ? { family: family.trim() } : {}), level: 'native' });
       } else if (pick.value && !list().some(k => k.code === pick.value)) list().push({ code: pick.value, level: 'native' });
       save(); draw();
     };
-    box.append(pick, h('p', { class: 'tiny' }, 'Native and C2 languages decide what is folded as familiar; comparison notes are shown for all of them.'),
+    box.append(pick, h('p', { class: 'tiny' }, LT('lang.set.knowsNote')),
       h('label', { class: 'lx-check' }, h('input', { type: 'checkbox', checked: S.aiNotes ? true : null, onchange: e => { S.aiNotes = e.target.checked; save(); } }),
-        ' ✨ Let Claude or Gemini write comparison notes for my languages that the course has none for (needs your API key in the app’s ⚙️ Settings)'));
+        ' ✨ ' + LT('lang.set.aiNotes')));
   };
   draw(); return box;
 }
+/** D19: the learner's native language (a:settings.native, one for every course): a picker of every profiled language + “another
+ *  language” (its name, type and family). onPick(native | null) after it is saved. */
+function nativePicker(onPick = () => { }) {
+  const W = UI.C.data.world, cur = accSettings().native || null, box = h('div', { class: 'lx-native' });
+  const nm = l => capFirst(langName(l.code) || l.name), cmp = window.NoemaI18n ? NoemaI18n.fmt.compare : (a, b) => a.localeCompare(b);
+  const langs = (W?.languages || []).slice().sort((a, b) => cmp(nm(a), nm(b)));
+  const known = cur?.code && langs.some(l => l.code === cur.code);
+  const sel = h('select', { class: 'lx-nativesel', 'aria-label': LT('lang.native.label') }, h('option', { value: '' }, LT('lang.native.none')),
+    ...langs.map(l => h('option', { value: l.code, selected: cur?.code === l.code ? true : null }, `${nm(l)} — ${l.family}`)),
+    cur && !known ? h('option', { value: '=', selected: true }, cur.name || cur.code) : null,
+    h('option', { value: '*' }, LT('lang.native.other')));
+  const typeNames = Object.fromEntries((UI.C.data.typology?.types || []).map(t => [t.id, t.name]));
+  const other = h('div', { class: 'lx-nativeother', hidden: true });
+  const name = h('input', { class: 'noema-input', 'aria-label': LT('lang.native.name'), placeholder: LT('lang.native.name') });
+  const type = h('select', { 'aria-label': LT('lang.native.type') }, ...N.TYPES.map(t => h('option', { value: t }, typeNames[t] || t)));
+  const fams = [...new Set((W?.languages || []).map(l => l.family))].sort(cmp);
+  const fam = h('select', { 'aria-label': LT('lang.native.family') }, h('option', { value: '' }, LT('lang.native.familyUnknown')), ...fams.map(f => h('option', { value: f }, f)));
+  const put = v => { putAccSettings({ native: v || undefined }); nativeMemo = null; onPick(nativeL()); };
+  other.append(name, type, fam, h('button', { class: 'btn small', onclick: () => { const n = name.value.trim(); if (!n) return name.focus(); put({ name: n, type: type.value, ...(fam.value ? { family: fam.value } : {}) }); } }, LT('lang.native.save')));
+  sel.onchange = () => { other.hidden = sel.value !== '*'; if (sel.value === '*') return name.focus(); if (sel.value !== '=') put(sel.value ? { code: sel.value } : null); };
+  box.append(sel, other);
+  return box;
+}
+/** D19: asked once in a language course while the native language is not known (until then: no comparisons, general texts only). */
+function nativeAsk() {
+  if (nativeL() || UI.prefs.nativeAsked || !UI.C.data.world) return null;
+  const box = h('div', { class: 'lx-card lx-native-ask', 'data-ask': 'native' }, h('b', {}, '🧭 ' + LT('lang.native.ask')), h('p', { class: 'tiny' }, LT('lang.native.askWhy')),
+    nativePicker(() => { UI.prefs.nativeAsked = true; save(); applyExplanationLocale(); render(); }),
+    h('button', { class: 'btn ghost small lx-nativelater', onclick: () => { UI.prefs.nativeAsked = true; save(); box.remove(); } }, LT('lang.native.later')));
+  return box;
+}
+/** D21: “Which languages do you want to study?” (loader.js studyChooser: every language the app offers, one, several or all). On the
+    home until the learner answers (until then the course teaches what it taught before); none: the learner chose languages this
+    course does not have — it asks for its own and shows nothing else. */
+function studyAsk(none = false) {
+  const S = window.Noema?.langStudy;
+  if (!S?.chooser || (!none && (studyAnswer() || offeredLangs().length < 2))) return null;
+  return h('div', { class: 'lx-card lx-study-ask', 'data-ask': 'study' }, S.chooser(UI.acc, { course: UI.id, none, onDone: () => restudy() }));
+}
+/** The same question at any time (⚙️ Settings, the frame's ⋮): in a sheet inside the frame, else over the page. */
+function studySheet() {
+  const S = window.Noema?.langStudy; if (!S?.chooser) return;
+  if (FR.on && window.NoemaShell?.sheet) return NoemaShell.sheet(LT('lang.study.menu'), (body, close) => body.append(S.chooser(UI.acc, { course: UI.id, onDone: () => { close(); restudy(); } })));
+  document.querySelector('.lx-pop')?.remove();
+  const pop = h('div', { class: 'lx-pop', role: 'dialog', onclick: e => { if (e.target === pop) pop.remove(); } },
+    h('div', { class: 'lx-popbox' }, h('div', { class: 'row' }, h('b', {}, LT('lang.study.menu')), h('button', { class: 'btn ghost small', 'aria-label': LT('lang.study.close'), onclick: () => pop.remove() }, '✕')),
+      S.chooser(UI.acc, { course: UI.id, onDone: () => { pop.remove(); restudy(); } })));
+  document.body.append(pop);
+}
+/** D19: the language of the explanations — automatic (the native language's, else the UI's, when its facade is on) or the learner's choice (settings.speaker). */
+function speakerPicker() {
+  const opts = explanationLocales(); if (opts.length < 2) return null;
+  const S = UI.L.settings;
+  return h('label', { class: 'lx-setrow' }, LT('lang.native.speaker') + ' ', h('select', { class: 'lx-speaker', onchange: e => { if (e.target.value) S.speaker = e.target.value; else delete S.speaker; save(); applyExplanationLocale(); render(); } },
+    h('option', { value: '' }, LT('lang.native.speakerAuto')), ...opts.map(l => h('option', { value: l, selected: S.speaker === l ? true : null }, capFirst(uiLangName(l))))));
+}
+const PEC_AREAS = ['script', 'orthography', 'phonology', 'morphology', 'syntax', 'lexicon', 'semantics', 'pragmatics', 'culture', 'numbers'];   // lang.pec.area.<area>
 /** D18: the peculiarities of a language as a free library (no order): what is new for you first marked, every one readable. */
 VIEWS.peculiar = (v, r) => {
   const c = r.arg && UI.C.lang[r.arg] ? r.arg : UI.lang, W = UI.C.data.world;
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.length > 1 ? history.back() : go('#/') }, '← Back')),
-    h('h1', {}, `📚 ${info(c).name}: its peculiarities`), h('div', { class: 'row' }, flagRail(null, c, x => go('#/peculiar/' + x))));
-  if (!W) return v.append(h('p', { class: 'lx-note' }, 'The catalogue is not in this build.'));
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.length > 1 ? history.back() : go('#/') }, arrowBack() + ' ' + LT('lang.card.back'))),
+    h('h1', {}, '📚 ' + LT('lang.pec.title', { lang: info(c).name })), h('div', { class: 'row' }, flagRail(null, c, x => go('#/peculiar/' + x))));
+  if (!W) return v.append(h('p', { class: 'lx-note' }, LT('lang.pec.noCatalogue')));
   const r2 = N.forLearner(UI.C, c, knowsL()), isNew = new Set(r2.new.map(x => x.p.id)), fam = Object.fromEntries(r2.familiar.map(x => [x.p.id, x.from]));
   const filt = UI.prefs.pecFilter || 'all';
-  v.append(h('p', { class: 'tiny' }, `${r2.new.length} new for you · ${r2.familiar.length} familiar from ${r2.knownProfiles.map(langName).join(', ') || '—'} · read them in any order. `,
-    ...['all', 'new', 'familiar'].map(f => h('button', { class: 'btn small' + (filt === f ? ' primary' : ''), onclick: () => { UI.prefs.pecFilter = f; save(); go('#/peculiar/' + c); render(); } }, f))));
+  v.append(h('p', { class: 'tiny' }, LT('lang.pec.counts', { nNew: r2.new.length, nFam: r2.familiar.length, from: LLIST(r2.knownProfiles.map(langName)) || '—' }) + ' ',
+    ...['all', 'new', 'familiar'].map(f => h('button', { class: 'btn small' + (filt === f ? ' primary' : ''), 'data-filter': f, onclick: () => { UI.prefs.pecFilter = f; save(); go('#/peculiar/' + c); render(); } }, LT('lang.pec.filter.' + f)))));
   const byArea = {};
   for (const p of W.phenomena[c] || []) {
     if (filt === 'new' && !isNew.has(p.id) || filt === 'familiar' && !fam[p.id]) continue;
     (byArea[p.area] = byArea[p.area] || []).push(p);
   }
-  for (const [area, ps] of Object.entries(byArea)) v.append(h('details', { class: 'lx-sec', open: true, 'data-area': area }, h('summary', {}, area, h('span', { class: 'tiny' }, ' ' + ps.length)),
+  for (const [area, ps] of Object.entries(byArea)) v.append(h('details', { class: 'lx-sec', open: true, 'data-area': area }, h('summary', {}, PEC_AREAS.includes(area) ? LT('lang.pec.area.' + area) : area, h('span', { class: 'tiny' }, ' ' + LNUM(ps.length))),
     ...ps.map(p => h('details', { class: 'lx-pec', 'data-id': p.id }, h('summary', {}, isNew.has(p.id) ? '✨ ' : fam[p.id] ? '✓ ' : '', p.kind === 'lacks' ? '∅ ' : '', h('b', {}, p.title),
-        fam[p.id] ? h('span', { class: 'tiny' }, ' — familiar from ' + fam[p.id].map(langName).join(', ')) : null),
+        fam[p.id] ? h('span', { class: 'tiny' }, ' — ' + LT('lang.pec.familiarFrom', { from: LLIST(fam[p.id].map(langName)) })) : null),
       h('p', {}, wordsIn(c, p.what)),
       ...(p.examples || []).map(e => h('div', { class: 'lx-ex' }, h('div', { class: 'lx-extext' }, wordsIn(c, e.text)), e.translit ? h('div', { class: 'tiny' }, e.translit) : null, e.note ? h('div', { class: 'lx-tr' }, e.note) : null)),
-      (() => { const mine = N.notesFor(UI.C, p.notes, knowsL()); return mine.length ? notesList(mine) : null; })(),
-      p.when ? h('p', { class: 'tiny' }, '🛤️ In the course: ', p.when) : null))));
+      ...notesSections(p.notes, c, { compact: true }),   // R1: from the learner's languages · among the languages they learn
+      p.when ? h('p', { class: 'tiny' }, '🛤️ ' + LT('lang.pec.inCourse') + ' ', p.when) : null))));
 };
 VIEWS.settings = (v) => {
   const S = UI.L.settings;
-  const langBox = h('div', { class: 'lx-setrow' }, ...UI.C.languages.map(c => h('label', { class: 'lx-check' },
-    h('input', { type: 'checkbox', checked: activeLangs().includes(c) ? true : null, onchange: e => { const s = new Set(activeLangs()); e.target.checked ? s.add(c) : s.delete(c); if (!s.size) { e.target.checked = true; return; } S.languages = UI.C.languages.filter(x => s.has(x)); save(); } }),
-    ' ', info(c).flag, ' ', info(c).name,
-    h('select', { 'aria-label': `How far to go in ${info(c).name}`, onchange: e => { S.depth = { ...(S.depth || {}), [c]: +e.target.value }; save(); } },
-      ...[[1, 'common words only'], [2, 'common + less common'], [3, 'everything, the rare ones too']].map(([d, t]) => h('option', { value: d, selected: (S.depth?.[c] ?? 3) === d ? true : null }, t))))));
+  // D21: every language of the course, the ones studied ticked — a change is the learner's answer for the whole app (and the course is
+  // built again with only those; the progress of a language left out stays stored and is back when it is ticked again)
+  const langBox = h('div', { class: 'lx-setrow lx-studylangs' }, ...UI.C.allLanguages.map(c => h('label', { class: 'lx-check', 'data-lang': c },
+    h('input', { type: 'checkbox', checked: UI.C.languages.includes(c) ? true : null, onchange: e => { if (!toggleStudy(c, e.target.checked)) e.target.checked = true; } }),
+    ' ', info(c).flag, ' ', info(c).label,
+    !UI.C.languages.includes(c) ? null : h('select', { 'aria-label': LT('lang.set.depthFor', { lang: info(c).name }), onchange: e => { S.depth = { ...(S.depth || {}), [c]: +e.target.value }; save(); } },
+      ...[[1, LT('lang.set.depth1')], [2, LT('lang.set.depth2')], [3, LT('lang.set.depth3')]].map(([d, t]) => h('option', { value: d, selected: (S.depth?.[c] ?? 3) === d ? true : null }, t))))));
   const num = (label, key, min, max, def) => h('label', { class: 'lx-setrow' }, label, ' ', h('input', { type: 'number', min, max, value: S[key] || def, onchange: e => { S[key] = Math.max(min, Math.min(max, +e.target.value || def)); save(); } }));
   const tog = (label, key) => h('label', { class: 'lx-check' }, h('input', { type: 'checkbox', checked: UI.prefs[key] !== false ? true : null, onchange: e => { UI.prefs[key] = e.target.checked; save(); } }), ' ', label);
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← Map')), h('h1', {}, '⚙️ Settings'),
-    h('h3', { class: 'lx-h3' }, 'Languages you study now'), langBox,
-    h('h3', { class: 'lx-h3' }, 'Languages you already know'), knowsEditor(),
-    h('h3', { class: 'lx-h3' }, 'Sessions'), num('New ideas per session', 'batch', 3, 30, 12), num('Minutes per session', 'minutes', 5, 120, UI.C.data.course.defaults?.dailyMinutes || 20),
-    h('h3', { class: 'lx-h3' }, 'Reading help'), tog('Vowel marks in Arabic and Hebrew', 'marks'), marksSettings(), tog('Transliteration under Arabic and Hebrew words', 'translit'), tog('Pinyin under Chinese words', 'pinyin'),
-    h('p', { class: 'tiny' }, `Explanations are in ${info(UI.C.explainLang).name}: the language chosen when the course was made.`));
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, arrowBack() + ' ' + LT('lang.card.map'))), h('h1', {}, '⚙️ ' + LT('lang.shell.settings')),
+    h('h3', { class: 'lx-h3' }, LT('lang.set.studyNow')), langBox,
+    h('p', { class: 'tiny lx-studynote' }, LT(UI.C.languages.length < UI.C.allLanguages.length ? 'lang.study.keptNote' : 'lang.study.note'), ' ',
+      window.Noema?.langStudy?.chooser ? h('button', { class: 'btn ghost small lx-studyall', onclick: () => studySheet() }, LT('lang.study.allApp')) : null),
+    h('h3', { class: 'lx-h3' }, LT('lang.native.label')), nativePicker(() => { applyExplanationLocale(); render(); }), h('p', { class: 'tiny' }, LT('lang.native.note')), speakerPicker(),
+    h('h3', { class: 'lx-h3' }, LT('lang.set.knowAlready')), knowsEditor(),
+    h('h3', { class: 'lx-h3' }, LT('lang.set.sessions')), num(LT('lang.set.batch'), 'batch', 3, 30, 12), num(LT('lang.set.minutes'), 'minutes', 5, 120, UI.C.data.course.defaults?.dailyMinutes || 20),
+    h('h3', { class: 'lx-h3' }, LT('lang.set.readingHelp')), tog(LT('lang.set.marks'), 'marks'), marksSettings(), tog(LT('lang.set.translit'), 'translit'), tog(LT('lang.set.pinyin'), 'pinyin'),
+    h('p', { class: 'tiny' }, LT('lang.set.explainNote', { lang: info(UI.C.explainLang).name })));
 };
 
 /* ---- 35_drills.js ---- */
@@ -563,19 +813,19 @@ function sortPool(c, fid, n = 12) {
 VIEWS.sort = (v, r) => {
   const fid = r.arg, field = UI.C.data.fields.find(f => f.field === fid); if (!field) return VIEWS.home(v);
   const c = UI.lang, X = LX(c), pool = sortPool(c, fid);
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/field/' + encodeURIComponent(fid) + '/0') }, '← Field map')),
-    h('h1', {}, '🧩 Sort into groups', h('span', { class: 'tiny' }, ` · ${field.title} · ${info(c).flag} ${info(c).name}`)),
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/field/' + encodeURIComponent(fid) + '/0') }, arrowBack() + ' ' + LT('lang.card.fieldMap'))),
+    h('h1', {}, '🧩 ' + LT('lang.field.sortGroups'), h('span', { class: 'tiny' }, ` · ${field.title} · ${info(c).flag} ${info(c).label}`)),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); render(); })));
-  if (pool.length < 4) return v.append(h('p', { class: 'lx-note' }, `Meet at least 4 words of this field in ${info(c).name} first (you have met ${pool.length}).`));
+  if (pool.length < 4) return v.append(h('p', { class: 'lx-note' }, LT('lang.sort.tooFew', { lang: info(c).name, n: pool.length })));
   const groups = (field.subgroups || []).filter(g => pool.some(p => p.group === g.id));
   const tries = {}; let picked = null, left = pool.length;
-  const chips = h('div', { class: 'lx-sortchips' }), bins = h('div', { class: 'lx-sortbins' }), status = h('div', { class: 'tiny lx-sortstatus' }, `${left} to sort`);
+  const chips = h('div', { class: 'lx-sortchips' }), bins = h('div', { class: 'lx-sortbins' }), status = h('div', { class: 'tiny lx-sortstatus' }, LT('lang.sort.left', { n: left }));
   const finish = () => {
     const day = today(); let right = 0;
     for (const p of pool) { const ok = !tries[p.id]; if (ok) right++; N.review(UI.C, UI.L, c, p.id, 'r', ok ? 'good' : 'again', day); }
     save(); status.textContent = '';
-    v.append(h('div', { class: 'lx-card lx-sortdone' }, h('b', {}, `✅ ${right} of ${pool.length} right the first time`), ' ',
-      h('button', { class: 'btn small primary', onclick: () => render() }, '↻ Again'), ' ', h('button', { class: 'btn small', onclick: () => go('#/field/' + encodeURIComponent(fid) + '/0') }, 'Field map')));
+    v.append(h('div', { class: 'lx-card lx-sortdone' }, h('b', {}, '✅ ' + LT('lang.sort.done', { right, n: pool.length })), ' ',
+      h('button', { class: 'btn small primary', onclick: () => render() }, '↻ ' + LT('lang.drill.again')), ' ', h('button', { class: 'btn small', onclick: () => go('#/field/' + encodeURIComponent(fid) + '/0') }, LT('lang.card.fieldMap'))));
   };
   for (const p of pool) {
     const chip = h('button', { class: 'btn lx-sortchip', 'data-id': p.id, 'data-cid': p.cid, onclick: () => { if (chip.disabled) return; chips.querySelectorAll('.on').forEach(x => x.classList.remove('on')); chip.classList.add('on'); picked = { p, chip }; } }, word(c, X.lex[p.id].lemma, { sub: false }));
@@ -586,12 +836,12 @@ VIEWS.sort = (v, r) => {
     const bin = h('div', { class: 'lx-sortbin', 'data-group': g.id, role: 'button', tabindex: '0', onclick: () => {
       if (!picked) return;
       const { p, chip } = picked;
-      if (p.group === g.id) { chip.disabled = true; chip.classList.remove('on'); chip.classList.add('right'); list.append(h('span', { class: 'lx-sortin' }, word(c, X.lex[p.id].lemma, { sub: false }), h('span', { class: 'tiny' }, ' ' + UI.C.concepts[p.cid].gloss))); chip.remove(); picked = null; left--; status.textContent = left ? `${left} to sort` : ''; if (!left) finish(); }
-      else { tries[p.id] = (tries[p.id] || 0) + 1; bin.classList.add('lx-shake'); setTimeout(() => bin.classList.remove('lx-shake'), 400); status.textContent = `Not ${g.title.toLowerCase()} — try another group`; }
+      if (p.group === g.id) { chip.disabled = true; chip.classList.remove('on'); chip.classList.add('right'); list.append(h('span', { class: 'lx-sortin' }, word(c, X.lex[p.id].lemma, { sub: false }), h('span', { class: 'tiny' }, ' ' + UI.C.concepts[p.cid].gloss))); chip.remove(); picked = null; left--; status.textContent = left ? LT('lang.sort.left', { n: left }) : ''; if (!left) finish(); }
+      else { tries[p.id] = (tries[p.id] || 0) + 1; bin.classList.add('lx-shake'); setTimeout(() => bin.classList.remove('lx-shake'), 400); status.textContent = LT('lang.sort.wrong', { group: g.title.toLowerCase() }); }
     } }, h('div', { class: 'lx-sorthead' }, (SUB_EMOJI[g.id] || '') + ' ' + g.title), list);
     bins.append(bin);
   }
-  v.append(h('p', { class: 'tiny' }, 'Tap a word, then the group it belongs to.'), chips, status, bins);
+  v.append(h('p', { class: 'tiny' }, LT('lang.sort.how')), chips, status, bins);
 };
 
 /** Words of language c the learner has met that have something to memorize besides the meaning → [{ id, parts }] */
@@ -599,37 +849,37 @@ function partsPool(c) {
   const X = LX(c), k = N.known(UI.C, UI.L, c), out = [];
   for (const [id, x] of Object.entries(X.lex)) {
     if (!MET.includes(k.state[id])) continue;
-    const parts = N.principalParts(UI.C, c, x).filter(([l]) => l !== 'transliteration');
+    const parts = N.principalParts(UI.C, c, x).filter(q => q[2] !== 'transliteration');   // q = [label (words), value, id]
     if (parts.length) out.push({ id, parts });
   }
   return out;
 }
 VIEWS.parts = (v, r) => {
   const c = UI.C.lang[r.arg] ? r.arg : UI.lang, X = LX(c), pool = shuffle(partsPool(c)).slice(0, 10);
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← Map')),
-    h('h1', {}, '🔁 Principal parts', h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).name}`)),
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, arrowBack() + ' ' + LT('lang.card.map'))),
+    h('h1', {}, '🔁 ' + LT('lang.view.parts'), h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).label}`)),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); go('#/parts/' + x); })));
-  if (!pool.length) return v.append(h('p', { class: 'lx-note' }, `Nothing to drill yet in ${info(c).name}: learn some words first.`));
-  // every value a label takes among the words met: the distractors
-  const byLabel = {}; for (const p of partsPool(c)) for (const [l, val] of p.parts) (byLabel[l] = byLabel[l] || new Set()).add(val);
+  if (!pool.length) return v.append(h('p', { class: 'lx-note' }, LT('lang.parts.nothing', { lang: info(c).name })));
+  // every value a part (by its id) takes among the words met: the distractors
+  const byLabel = {}; for (const p of partsPool(c)) for (const [, val, id] of p.parts) (byLabel[id] = byLabel[id] || new Set()).add(val);
   const stage = h('div', { class: 'lx-stage' }); v.append(stage);
   let i = 0, right = 0; const day = today();
   const next = () => {
     stage.innerHTML = '';
-    if (i >= pool.length) { save(); return stage.append(h('div', { class: 'lx-card lx-sortdone' }, h('b', {}, `✅ ${right} of ${pool.length}`), ' ', h('button', { class: 'btn small primary', onclick: () => render() }, '↻ Again'))); }
-    const p = pool[i++], x = X.lex[p.id], [label, val] = p.parts[Math.floor(Math.random() * p.parts.length)];
-    const others = qaPartsDistractors(c, p, label, val, byLabel[label]);   // forms of the same word first (99_qa.js): another word's form gives the answer away
-    const box = h('div', { class: 'lx-ex lx-exparts', 'data-kind': 'parts', 'data-lex': p.id, 'data-label': label });
+    if (i >= pool.length) { save(); return stage.append(h('div', { class: 'lx-card lx-sortdone' }, h('b', {}, '✅ ' + LT('lang.drill.score', { right, n: pool.length })), ' ', h('button', { class: 'btn small primary', onclick: () => render() }, '↻ ' + LT('lang.drill.again')))); }
+    const p = pool[i++], x = X.lex[p.id], [label, val, pid] = p.parts[Math.floor(Math.random() * p.parts.length)];   // label: the words shown; pid: the part's stable id (compared)
+    const others = qaPartsDistractors(c, p, pid, val, byLabel[pid]);   // forms of the same word first (99_qa.js): another word's form gives the answer away
+    const box = h('div', { class: 'lx-ex lx-exparts', 'data-kind': 'parts', 'data-lex': p.id, 'data-label': pid });
     if (!others.length) {   // nothing to choose among: show it and go on
-      box.append(h('div', { class: 'lx-prompt' }, word(c, x.lemma, { lex: x })), h('div', { class: 'lx-q' }, `${label}: `, /[֐-ۿ一-鿿]/.test(val) ? word(c, val, { sub: false }) : val), h('button', { class: 'btn primary lx-next', onclick: next }, 'Next →'));
+      box.append(h('div', { class: 'lx-prompt' }, word(c, x.lemma, { lex: x })), h('div', { class: 'lx-q' }, `${label}: `, /[֐-ۿ一-鿿]/.test(val) ? word(c, val, { sub: false }) : val), h('button', { class: 'btn primary lx-next', onclick: next }, LT('lang.drill.next') + ' ' + arrowOn()));
       return stage.append(box);
     }
     const opts = shuffle([{ val, ok: true }, ...others.map(o => ({ val: o }))]);
-    box.append(h('div', { class: 'lx-prompt' }, word(c, x.lemma, { lex: x, sub: label !== 'pinyin' }), h('div', { class: 'tiny' }, gloss(c, p.id))), h('div', { class: 'lx-q' }, /^(with |perfect |one |plural only|er\/|du$)/.test(label) ? label[0].toUpperCase() + label.slice(1) + ' …?' : `Its ${label}?`),   // the pinyin under the word would be the answer
+    box.append(h('div', { class: 'lx-prompt' }, word(c, x.lemma, { lex: x, sub: pid !== 'pinyin' }), h('div', { class: 'tiny' }, gloss(c, p.id))), h('div', { class: 'lx-q' }, /^(with |perfect |one |plural only|er\/|du$)/.test(pid) ? label[0].toUpperCase() + label.slice(1) + ' …?' : LT('lang.parts.its', { label })),   // the pinyin under the word would be the answer
       options(opts.map(o => ({ ...o, label: /[֐-ۿ一-鿿]/.test(o.val) ? word(c, o.val, { sub: false }) : o.val })), (o, b, wrap) => {
         b.classList.add(o.ok ? 'right' : 'wrong'); if (!o.ok) markOpts(wrap, j => opts[j].ok); if (o.ok) right++;
         N.review(UI.C, UI.L, c, p.id, 'r', o.ok ? 'good' : 'again', day); save();
-        box.append(h('div', { class: 'row' }, h('button', { class: 'btn primary lx-next', onclick: next }, 'Next →')));
+        box.append(h('div', { class: 'row' }, h('button', { class: 'btn primary lx-next', onclick: next }, LT('lang.drill.next') + ' ' + arrowOn())));
       }));
     stage.append(box);
   };
@@ -640,7 +890,7 @@ VIEWS.parts = (v, r) => {
 /* ---------- ⫴ parallel lanes: the paths of your languages side by side (D13, §4.4.3, §9; #/lanes) ----------
    One quiet column per language; the same subject sits on the same level in every lane (langcore.parallelLanes), a step of
    one language alone sits beside the others' running lines. Each step is a small button: a tap tells more about it there. */
-const LANE_SECTION = s => s === 'foundations' ? 'Foundations' : s === 'core' ? 'Core' : s === 'advanced' ? 'Advanced' : s.startsWith('field:') ? (UI.C.data.fields.find(f => 'field:' + f.field === s)?.title || 'Words') : '';
+const LANE_SECTION = s => ['foundations', 'core', 'advanced'].includes(s) ? LT('lang.lanes.sec.' + s) : s.startsWith('field:') ? (UI.C.data.fields.find(f => 'field:' + f.field === s)?.title || LT('lang.lanes.sec.words')) : '';
 const LANE_SIGN = { passed: '✓', known: '✓', mastered: '★', learning: '◑', open: '○', ready: '○', locked: '🔒', unprepared: '⏳', skipped: '⤼', na: '' };
 function laneShort(n) { const t = String(n.title || '').split(/ — |: /)[0]; return t.length > 34 ? t.slice(0, 32) + '…' : t; }
 /** The short code of a step for the compact lanes: S00 → S0, C05 → C5; a field node → its letter and number (veg.2a → V2a). */
@@ -659,7 +909,7 @@ function laneCompact(n) {
 let laneHover = null;
 function laneHoverShow(btn, c, nid) {
   laneHoverHide(); const n = UI.C.nodes[nid], s = N.nodeStates(UI.C, UI.L, c)[nid], r = btn.getBoundingClientRect();
-  laneHover = h('div', { class: 'lx-lhover', role: 'tooltip' }, h('b', {}, (stepLabel(n) ? stepLabel(n) + ' ' : '') + n.title), h('div', { class: 'tiny' }, info(c).flag + ' ' + info(c).name + ' · ' + String(STATE_LABEL[s] || s).replace(/^\S+\s/, '')));
+  laneHover = h('div', { class: 'lx-lhover', role: 'tooltip' }, h('b', {}, (stepLabel(n) ? stepLabel(n) + ' ' : '') + n.title), h('div', { class: 'tiny' }, info(c).flag + ' ' + info(c).label + ' · ' + String(STATE_LABEL[s] || s).replace(/^\S+\s/, '')));
   document.body.append(laneHover);
   const w = laneHover.offsetWidth, x = Math.min(Math.max(8, r.left + r.width / 2 - w / 2), innerWidth - w - 8), above = r.top > 90;
   Object.assign(laneHover.style, { left: x + 'px', top: (above ? r.top - laneHover.offsetHeight - 8 : r.bottom + 8) + 'px' });
@@ -670,12 +920,12 @@ VIEWS.lanes = (v) => {
   const langs = UI.C.languages.filter(c => UI.C.lang[c]), L = N.parallelLanes(UI.C, langs), dots = laneCompact(langs.length);
   const st = Object.fromEntries(langs.map(c => [c, N.nodeStates(UI.C, UI.L, c)]));
   v.classList.add('lx-lanesview');
-  const seg = h('div', { class: 'lx-seg lx-lviewpick', role: 'group', 'aria-label': 'How the steps look' }, ...[['', 'Auto'], ['tiles', 'Tiles'], ['dots', 'Dots']].map(([k, t]) =>
+  const seg = h('div', { class: 'lx-seg lx-lviewpick', role: 'group', 'aria-label': LT('lang.lanes.lookLabel') }, ...[['', LT('lang.lanes.auto')], ['tiles', LT('lang.lanes.tiles')], ['dots', LT('lang.lanes.dots')]].map(([k, t]) =>
     h('button', { class: (UI.prefs.lanesView || '') === k ? 'on' : '', 'aria-pressed': (UI.prefs.lanesView || '') === k ? 'true' : 'false', onclick: () => { UI.prefs.lanesView = k || undefined; save(); render(); } }, t)));
-  v.append(h('div', { class: 'lx-lanestop' }, h('h1', {}, 'Parallel lanes'), seg),
-    h('p', { class: 'tiny lx-lanesnote' }, 'The same subject is on the same level in every language. A step of one language alone sits between them.'));
-  const grid = h('div', { class: 'lx-lanes2' + (dots ? ' lx-ldots' : ''), 'data-n': langs.length, style: `--n:${langs.length}`, role: 'table', 'aria-label': 'The paths of your languages side by side' });
-  grid.append(h('div', { class: 'lx-lhead', role: 'row' }, ...langs.map(c => h('div', { class: 'lx-lflag', role: 'columnheader', 'data-lang': c, title: info(c).name }, info(c).flag, h('span', { class: 'lx-lname' }, info(c).name)))));
+  v.append(h('div', { class: 'lx-lanestop' }, h('h1', {}, LT('lang.view.lanes')), seg),
+    h('p', { class: 'tiny lx-lanesnote' }, LT('lang.lanes.note')));
+  const grid = h('div', { class: 'lx-lanes2' + (dots ? ' lx-ldots' : ''), 'data-n': langs.length, style: `--n:${langs.length}`, role: 'table', 'aria-label': LT('lang.lanes.tableLabel') });
+  grid.append(h('div', { class: 'lx-lhead', role: 'row' }, ...langs.map(c => h('div', { class: 'lx-lflag', role: 'columnheader', 'data-lang': c, title: info(c).label }, info(c).flag, h('span', { class: 'lx-lname' }, info(c).label)))));
   let sec = null;
   L.rows.forEach((row, i) => {
     if (row.section !== sec) { sec = row.section; const t = LANE_SECTION(sec); if (t) grid.append(h('div', { class: 'lx-lsec', role: 'row' }, h('span', {}, t))); }
@@ -684,9 +934,9 @@ VIEWS.lanes = (v) => {
       const nid = row.cells[c], n = nid && UI.C.nodes[nid], s = nid ? st[c][nid] : null;
       r.append(h('div', { class: 'lx-lcell' + (nid ? '' : ' lx-lgap'), role: 'cell', 'data-lang': c },
         !nid ? null : dots
-          ? h('button', { class: 'lx-ldot s-' + s, 'data-node': nid, 'data-lang': c, 'aria-label': `${info(c).name} · ${n.title} · ${STATE_LABEL[s] || s}`,
+          ? h('button', { class: 'lx-ldot s-' + s, 'data-node': nid, 'data-lang': c, 'aria-label': `${info(c).label} · ${n.title} · ${STATE_LABEL[s] || s}`,
               onclick: () => { laneHoverHide(); laneInfo(c, nid); }, onmouseenter: e => laneHoverShow(e.currentTarget, c, nid), onmouseleave: laneHoverHide, onfocus: e => laneHoverShow(e.currentTarget, c, nid), onblur: laneHoverHide }, laneCode(n))
-          : h('button', { class: 'lx-lnode s-' + s, 'data-node': nid, 'data-lang': c, title: `${info(c).name} · ${n.title} · ${STATE_LABEL[s] || s}`, onclick: () => laneInfo(c, nid) },
+          : h('button', { class: 'lx-lnode s-' + s, 'data-node': nid, 'data-lang': c, title: `${info(c).label} · ${n.title} · ${STATE_LABEL[s] || s}`, onclick: () => laneInfo(c, nid) },
               h('span', { class: 'lx-lstep' }, stepLabel(n) || (n.kind === 'field' ? '·' : '')), h('span', { class: 'lx-ltitle' }, laneShort(n)), LANE_SIGN[s] ? h('span', { class: 'lx-lsign', 'aria-hidden': 'true' }, LANE_SIGN[s]) : null)));
     }
     grid.append(r);
@@ -700,11 +950,11 @@ function laneInfo(c, nid) {
   const words = (X.byNode[nid] || []).length;
   const others = UI.C.languages.filter(x => x !== c && UI.C.lang[x]?.applies[nid]);
   const body = box => box.append(
-    h('p', { class: 'lx-linfo-st' }, info(c).flag, ' ', info(c).name, ' · ', String(STATE_LABEL[s] || s).replace(/^\S+\s/, '')),
-    fns.length ? h('ul', { class: 'lx-linfo-fns' }, ...fns.map(f => { const g = X.grammar[f]; return h('li', {}, UI.C.functions[f]?.title || f, g?.status && g.status !== 'realized' ? h('span', { class: 'tiny' }, ' · ' + g.status) : null); })) : null,
-    words ? h('p', { class: 'tiny' }, `${words} words in ${info(c).name}`) : null,
-    others.length ? h('p', { class: 'tiny lx-linfo-oth' }, 'Also in ', ...others.flatMap((x, i) => [i ? ' · ' : '', h('button', { class: 'btn ghost small', 'data-lang': x, onclick: () => { close(); laneInfo(x, nid); } }, info(x).name + ' · ' + String(STATE_LABEL[N.nodeStates(UI.C, UI.L, x)[nid]] || '').replace(/^\S+\s/, ''))])) : h('p', { class: 'tiny' }, `Only in ${info(c).name}.`),
-    h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => { close(); UI.lang = c; UI.prefs.lang = c; save(); go((n.kind === 'lesson' ? '#/lesson/' : '#/node/') + nid); } }, 'Open')));
+    h('p', { class: 'lx-linfo-st' }, info(c).flag, ' ', info(c).label, ' · ', String(STATE_LABEL[s] || s).replace(/^\S+\s/, '')),
+    fns.length ? h('ul', { class: 'lx-linfo-fns' }, ...fns.map(f => { const g = X.grammar[f]; return h('li', {}, UI.C.functions[f]?.title || f, g?.status && g.status !== 'realized' ? h('span', { class: 'tiny' }, ' · ' + LT('lang.poly.st.' + (['periphrastic', 'absent'].includes(g.status) ? g.status : 'other'), { status: g.status })) : null); })) : null,
+    words ? h('p', { class: 'tiny' }, LT('lang.lanes.words', { n: words, lang: info(c).name })) : null,
+    others.length ? h('p', { class: 'tiny lx-linfo-oth' }, LT('lang.lanes.alsoIn') + ' ', ...others.flatMap((x, i) => [i ? ' · ' : '', h('button', { class: 'btn ghost small', 'data-lang': x, onclick: () => { close(); laneInfo(x, nid); } }, info(x).label + ' · ' + String(STATE_LABEL[N.nodeStates(UI.C, UI.L, x)[nid]] || '').replace(/^\S+\s/, ''))])) : h('p', { class: 'tiny' }, LT('lang.lanes.onlyIn', { lang: info(c).name })),
+    h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => { close(); UI.lang = c; UI.prefs.lang = c; save(); go((n.kind === 'lesson' ? '#/lesson/' : '#/node/') + nid); } }, LT('lang.home.open'))));
   let close = () => document.querySelector('.lx-pop')?.remove();
   const title = (stepLabel(n) ? stepLabel(n) + ' ' : '') + n.title;
   if (FR.on && window.NoemaShell?.sheet) { NoemaShell.sheet(title, (b, cl) => { close = cl; body(b); }); return; }
@@ -716,7 +966,7 @@ function laneInfo(c, nid) {
   inner.querySelector('.btn.primary')?.focus();
 }
 /** The way in: a quiet button next to the map (only with two or more languages). */
-const lanesButton = () => UI.C.languages.length > 1 ? h('button', { class: 'btn ghost small lx-tolanes', onclick: () => go('#/lanes') }, '⫴ Parallel lanes') : null;
+const lanesButton = () => UI.C.languages.length > 1 ? h('button', { class: 'btn ghost small lx-tolanes', onclick: () => go('#/lanes') }, '⫴ ' + LT('lang.view.lanes')) : null;
 
 /* ---- 40_ex.js ---- */
 /* ---------- exercises of the vocabulary lane (docs/LANGUAGES.md §6.2) ---------- */
@@ -744,7 +994,7 @@ function exRecognize(c, lid, done) {
   const X = LX(c), me = X.lex[lid], box = h('div', { class: 'lx-ex lx-exrec' });
   const right = gloss(c, lid);
   const opts = shuffle([{ label: right, ok: true }, ...uniq(neighbours(c, lid, 8).map(x => gloss(c, x.id))).filter(g => g && g !== right).slice(0, 3).map(g => ({ label: g }))]);
-  box.append(h('div', { class: 'lx-q' }, 'What does it mean?'), h('div', { class: 'lx-prompt' }, word(c, me.lemma, { lex: me })),
+  box.append(h('div', { class: 'lx-q' }, LT('lang.ex.whatMeans')), h('div', { class: 'lx-prompt' }, word(c, me.lemma, { lex: me })),
     options(opts, (o, b, wrap) => { b.classList.add(o.ok ? 'right' : 'wrong'); if (!o.ok) markOpts(wrap, i => opts[i].ok); feedback(box, !!o.ok, c, lid); done(!!o.ok); }));
   return box;
 }
@@ -753,7 +1003,7 @@ const hasPic = (c, lid) => { const cid = (LX(c).lex[lid].senses || [])[0], con =
 function exPicture(c, lid, done) {
   const X = LX(c), me = X.lex[lid], box = h('div', { class: 'lx-ex lx-expic' });
   const opts = shuffle([{ id: lid, ok: true }, ...neighbours(c, lid, 8).filter(x => x.lemma !== me.lemma).slice(0, 3).map(x => ({ id: x.id }))]);
-  box.append(h('div', { class: 'lx-q' }, `What is it in ${info(c).name}?`), h('div', { class: 'lx-prompt' }, conceptPic(me.senses[0], 'lx-bigemoji')));
+  box.append(h('div', { class: 'lx-q' }, LT('lang.ex.whatIsIt', { lang: info(c).name })), h('div', { class: 'lx-prompt' }, conceptPic(me.senses[0], 'lx-bigemoji')));
   box.append(options(opts.map(o => ({ ...o, label: word(c, X.lex[o.id].lemma, { sub: false }) })), (o, b, wrap) => {
     b.classList.add(o.ok ? 'right' : 'wrong'); if (!o.ok) markOpts(wrap, j => opts[j].ok); feedback(box, !!o.ok, c, lid); done(!!o.ok); }));
   return box;
@@ -762,7 +1012,7 @@ function exPicture(c, lid, done) {
 function exProduce(c, lid, done) {
   const X = LX(c), me = X.lex[lid], box = h('div', { class: 'lx-ex lx-exprod' });
   const cid = (me.senses || [])[0];
-  box.append(h('div', { class: 'lx-q' }, `In ${info(c).name}?`), h('div', { class: 'lx-prompt lx-meaning' }, cid ? conceptPic(cid, 'lx-exemoji') : '', ' ', gloss(c, lid)));
+  box.append(h('div', { class: 'lx-q' }, LT('lang.ex.inLang', { lang: info(c).name })), h('div', { class: 'lx-prompt lx-meaning' }, cid ? conceptPic(cid, 'lx-exemoji') : '', ' ', gloss(c, lid)));
   const parts = clusters(me.lemma).filter(t => t.trim());   // multi-word words: the spaces are not tiles
   const afterWord = ok => extraCheck(c, lid, box, ok2 => { feedback(box, ok && ok2, c, lid); done(ok && ok2); }, ok);
   if (parts.length > 14) {
@@ -781,7 +1031,7 @@ function exProduce(c, lid, done) {
   };
   tiles.forEach(tile => pool.append(h('button', { class: 'lx-tile1', onclick: e => { if (over || e.currentTarget.disabled) return; built.push(tile); e.currentTarget.disabled = true; e.currentTarget.dataset.used = built.length; drawSlot(); if (built.length === parts.length) check(); } }, tile.t === ' ' ? '␣' : tile.t)));
   const undo = h('button', { class: 'btn small ghost', onclick: () => { if (over || !built.length) return; built.pop(); const b = [...pool.children].find(x => +x.dataset.used === built.length + 1); if (b) { b.disabled = false; delete b.dataset.used; } drawSlot(); } }, '⌫');
-  const giveUp = h('button', { class: 'btn small ghost', onclick: () => { if (!over) { over = true; slot.classList.add('wrong'); afterWord(false); } } }, 'Show me');
+  const giveUp = h('button', { class: 'btn small ghost', onclick: () => { if (!over) { over = true; slot.classList.add('wrong'); afterWord(false); } } }, LT('lang.ex.showMe'));
   // typing is allowed too, in every script (keyboards, pinyin, umlauts: 90_script.js); ar / he once the letters are known
   const typed = produceTyping(c, lid, (ok, t) => { if (over) return; over = true; slot.textContent = t; slot.classList.add(ok ? 'right' : 'wrong'); [...pool.children].forEach(b => b.disabled = true); afterWord(ok); });
   drawSlot();
@@ -793,14 +1043,14 @@ function extraCheck(c, lid, box, done, wordOk) {
   const me = LX(c).lex[lid];
   if (c === 'de' && me.pos === 'NOUN' && me.gender && me.class !== 'plt') {
     const right = { MASC: 'der', FEM: 'die', NEUT: 'das' }[me.gender], opts = ['der', 'die', 'das'].map(a => ({ label: a, ok: a === right }));
-    box.append(h('div', { class: 'lx-q' }, wordOk ? 'And its article?' : 'Its article?'), options(opts, (o, b, wrap) => { b.classList.add(o.ok ? 'right' : 'wrong'); if (!o.ok) markOpts(wrap, i => opts[i].ok); done(!!o.ok); }));
+    box.append(h('div', { class: 'lx-q' }, LT(wordOk ? 'lang.ex.andArticle' : 'lang.ex.article')), options(opts, (o, b, wrap) => { b.classList.add(o.ok ? 'right' : 'wrong'); if (!o.ok) markOpts(wrap, i => opts[i].ok); done(!!o.ok); }));
     return;
   }
   if (c === 'zh' && me.pos === 'NOUN' && me.measure?.length) {
     const clf = Object.values(LX(c).lex).filter(x => x.pos === 'CLF').map(x => x.lemma);
     const right = me.measure[0], wrongs = shuffle(clf.filter(m => !me.measure.includes(m))).slice(0, 3);
     const opts = shuffle([{ label: '一' + right, ok: true }, ...wrongs.map(m => ({ label: '一' + m }))]);
-    box.append(h('div', { class: 'lx-q' }, 'Which measure word? (one …)'), options(opts.map(o => ({ ...o, label: word(c, o.label, { sub: false }) })), (o, b, wrap) => { b.classList.add(o.ok ? 'right' : 'wrong'); if (!o.ok) markOpts(wrap, i => opts[i].ok); done(!!o.ok); }));
+    box.append(h('div', { class: 'lx-q' }, LT('lang.ex.measure')), options(opts.map(o => ({ ...o, label: word(c, o.label, { sub: false }) })), (o, b, wrap) => { b.classList.add(o.ok ? 'right' : 'wrong'); if (!o.ok) markOpts(wrap, i => opts[i].ok); done(!!o.ok); }));
     return;
   }
   done(true);
@@ -810,19 +1060,20 @@ function exIntro(c, lid, done) {
   const X = LX(c), me = X.lex[lid], card = N.wordCard(UI.C, UI.L, c, lid);
   const e1 = card.examples[0];
   const box = h('div', { class: 'lx-ex lx-intro' },
-    h('div', { class: 'lx-q' }, `New in ${info(c).flag} ${info(c).name}`),
+    h('div', { class: 'lx-q' }, LT('lang.ex.newIn', { lang: info(c).flag + ' ' + info(c).label })),
     h('div', { class: 'lx-prompt' }, word(c, me.lemma, { lex: me })),
     h('div', { class: 'lx-meaning' }, me.senses?.[0] ? conceptPic(me.senses[0], 'lx-exemoji') : '', ' ', card.gloss),
-    card.parts.length ? h('dl', { class: 'lx-parts' }, ...card.parts.slice(0, 4).flatMap(([k, val]) => [h('dt', {}, k), h('dd', {}, /[֐-ۿ一-鿿]/.test(val) ? word(c, val, { sub: false }) : val)])) : null,
+    card.params?.length ? paramsBlock(c, card.params, { compact: true, max: 5 })   // R3: the word's main parameters
+      : card.parts.length ? h('dl', { class: 'lx-parts' }, ...card.parts.slice(0, 4).flatMap(([k, val]) => [h('dt', {}, k), h('dd', {}, /[֐-ۿ一-鿿]/.test(val) ? word(c, val, { sub: false }) : val)])) : null,
     e1 ? h('div', { class: 'lx-ex1' }, word(c, e1.text, { sub: false }), h('div', { class: 'tiny' }, e1.tr)) : null,
     card.sections.find(s => s.key === 'pitfalls') ? h('div', { class: 'lx-warn tiny' }, '⚠️ ', card.sections.find(s => s.key === 'pitfalls').items[0]) : null,
-    h('div', { class: 'row' }, h('button', { class: 'btn primary lx-next', onclick: () => done(true) }, 'Got it →')));
+    h('div', { class: 'row' }, h('button', { class: 'btn primary lx-next', onclick: () => done(true) }, LT('lang.ex.gotIt') + ' ' + arrowOn())));
   return box;
 }
 
 /* ---- 45_grammar.js ---- */
 /* ---------- grammar: the page of a function in one language, with the same point in the other languages (§6.7, D10) ---------- */
-const STATUS_LABEL = { realized: '', periphrastic: '≈ said another way', absent: '— not in this language' };
+const STATUS_LABEL = new Proxy({}, { get: (o, s) => s === 'realized' ? '' : s === 'periphrastic' ? '≈ ' + LT('lang.gram.periphrastic') : s === 'absent' ? '— ' + LT('lang.gram.absent') : undefined });
 
 /** Content blocks (tools/CONTENT_SPEC.md) — the kinds the grammar files use. Foreign text inside is shown in the language's font and direction. */
 function blocks(c, list) {
@@ -830,10 +1081,10 @@ function blocks(c, list) {
   return (list || []).map(b => {
     const el = block1(c, b, t);
     if (!el || !b) return el;
-    const mine = N.notesFor(UI.C, b.notes, knowsL()), from = N.familiarFrom(UI.C, b.typology, knowsL(c));
-    const body = mine.length ? h('div', {}, el, notesList(mine)) : el;
-    // D18: a part the learner knows from a native / C2 language is folded into one line
-    return from.length ? h('details', { class: 'lx-familiar' }, h('summary', {}, `✓ familiar from ${from.join(', ')} — show`), body) : body;
+    const notes = notesSections(b.notes, c, { compact: true }), from = N.familiarFrom(UI.C, b.typology, knowsL(c));   // R1: from the learner's languages · among the languages they learn
+    const body = notes.length ? h('div', {}, el, ...notes) : el;
+    // D18: a part the learner knows from their native / C1 / C2 languages is folded into one line
+    return from.length ? h('details', { class: 'lx-familiar' }, h('summary', {}, '✓ ' + LT('lang.gram.familiarShow', { from: LLIST(from) })), body) : body;
   });
 }
 function block1(c, b, t) {
@@ -843,46 +1094,45 @@ function block1(c, b, t) {
     if (b.t === 'table') return h('div', { class: 'lx-compare' }, h('table', {}, b.head ? h('thead', {}, h('tr', {}, ...b.head.map(x => h('th', {}, t(x))))) : null,
       h('tbody', {}, ...(b.rows || []).map(r => h('tr', {}, ...r.map(x => h('td', {}, t(x))))))), b.caption ? h('div', { class: 'tiny' }, b.caption) : null);
     if (b.t === 'callout') return h('div', { class: 'lx-callout k-' + (b.kind || 'key') }, b.title ? h('b', {}, b.title + ' ') : null, t(b.text));
-    if (b.t === 'compare') return h('div', { class: 'lx-cmpblk' }, ...(b.items || []).map(it => h('div', {}, h('b', {}, t(it.title)), h('ul', { class: 'lx-list' }, ...(it.points || []).map(x => h('li', {}, t(x)))))));
+    if (b.t === 'compare') return h('div', { class: 'lx-cmpblk' }, ...(b.items || []).map(it => h('div', {}, h('b', {}, t(it.title)), h('ul', { class: 'lx-list' }, ...(it.points || []).map(x => h('li', {}, mdView(x, { forLang: c, inline: true })))))));   // R2
     if (b.t === 'flow') return h('div', { class: 'lx-flow' }, ...(b.items || []).map((x, i) => [i ? h('span', { class: 'lx-arrow' }, '→') : null, h('span', { class: 'chip' }, t(x))]));
-    if (b.t === 'ask') return h('div', { class: 'lx-callout k-tip' }, h('b', {}, (b.title || 'Ask yourself') + ' '), h('ul', { class: 'lx-list' }, ...(b.questions || []).map(x => h('li', {}, t(x)))));
+    if (b.t === 'ask') return h('div', { class: 'lx-callout k-tip', 'data-sec': 'ask' }, h('b', {}, (b.title || LE('lang.expl.askYourself')) + ' '), h('ul', { class: 'lx-list' }, ...(b.questions || []).map(x => h('li', {}, t(x)))));
     if (b.t === 'terms') return h('dl', { class: 'lx-parts' }, ...(b.items || []).flatMap(x => [h('dt', {}, x.term), h('dd', {}, t(x.def))]));
     if (b.t === 'reveal') return h('details', { class: 'lx-sec' }, h('summary', {}, b.label), h('p', {}, t(b.text)));
     return b.text ? h('p', {}, t(b.text)) : null;
   }
 }
-const REL_LABEL = { same: '= the same', similar: '≈ similar', different: '≠ different', new: '✨ new', trap: '⚠️ trap' };
-function notesList(notes) {
-  return h('ul', { class: 'lx-list lx-notes' }, ...notes.map(n => h('li', { 'data-for': n.for }, h('b', {}, langName(n.for)), ' ', h('span', { class: 'lx-badge ctx' }, REL_LABEL[n.rel] || n.rel || ''), n.ai ? h('span', { class: 'lx-badge reg' }, 'AI') : null, ' ', wordsIn('en', n.text))));
-}
-/** Comparison notes (D18): those for the learner's languages open, the whole reference set folded. */
-function notesView(c, notes, fid) {
+/** Comparison notes (R1): the two sections — from the learner's languages (native first, then C1 / C2) and among the languages they
+ *  learn (with the links to them: seeAlso) — and, on request, Claude / Gemini for a native language the course has no note for. Until
+ *  the native language is known only the second section. → [element …] */
+function notesView(c, notes, fid, seeAlso = []) {
   const all = [...(notes || []), ...((UI.prefs.aiNotes || {})[c + '|' + fid] || [])];
-  const mine = N.notesFor(UI.C, all, knowsL()), rest = all.filter(n => !mine.includes(n));
+  const nat = nativeL();
   const wantAI = UI.L.settings.aiNotes && window.NoemaLLM?.pick?.(UI.acc);
-  const missing = knowsL().filter(k => k.code ? !all.some(n => n.for === k.code) : true);
-  const box = h('div', { class: 'lx-notesbox' });
-  box.append(mine.length ? h('div', { class: 'lx-callout k-key' }, h('b', {}, '🧭 From your languages '), notesList(mine)) : null,
-    rest.length ? h('details', { class: 'lx-sec' }, h('summary', {}, '🌐 The same point from other languages ', h('span', { class: 'tiny' }, rest.length)), notesList(rest)) : null,
-    wantAI && fid && missing.length ? h('button', { class: 'btn small', onclick: e => aiNotes(c, fid, missing, e.target) }, `✨ Notes for ${missing.map(k => k.name || langName(k.code)).join(', ')}`) : null);
-  return box;
+  const missing = nat && !all.some(n => (n.ai || nat.supported) && (n.for === nat.code || n.for === nat.name)) ? [nat] : [];   // D18: Claude / Gemini may write one for the learner's own language
+  const btn = wantAI && fid && missing.length ? h('button', { class: 'btn small', onclick: e => aiNotes(c, fid, missing, e.target) }, '✨ ' + LT('lang.gram.notesFor', { langs: LLIST(missing.map(k => k.name || langName(k.code))) })) : null;
+  return contrastView(contrastL(all, c, seeAlso), { fid, tail: btn });
 }
 /** D18: Claude / Gemini write notes for the learner's languages that the course has none for — only on request, with their key. */
 async function aiNotes(c, fid, langsWanted, btn) {
-  const g = LX(c).grammar[fid]; btn.disabled = true; btn.textContent = '✨ writing…';
+  const g = LX(c).grammar[fid]; btn.disabled = true; btn.textContent = '✨ ' + LT('lang.gram.writing');
   try {
     const r = await NoemaLLM.json({ acc: UI.acc, name: 'notes', schema: { type: 'object', required: ['notes'], properties: { notes: { type: 'array', items: { type: 'object', required: ['for', 'rel', 'text'],
       properties: { for: { type: 'string' }, rel: { type: 'string', enum: ['same', 'similar', 'different', 'new', 'trap'] }, text: { type: 'string' } } } } } },
-      prompt: `You write short comparison notes for a language course. The point: "${UI.C.functions[fid]?.title}" in ${info(c).name}.
+      /* i18n-ignore-start (a prompt for the AI: stays English) */
+      prompt: `You write short comparison notes for a language course. The point: "${UI.C.functions[fid]?.title}" in ${langDisplay(c)}.
 What the course says:
 ${g.summary}
 
-For each of these languages the learner speaks, write ONE note (1–2 sentences, concrete, correct; give a word or form of that language when it helps) saying how the same point looks there and what transfers, what is new or what misleads: ${langsWanted.map(k => (k.name || langName(k.code)) + (k.code ? ` (code ${k.code})` : '')).join('; ')}.
-Use "for" = the code given (or the name when there is none). rel = same | similar | different | new | trap. If you are not sure about a language, leave it out.` });
+For each of these languages the learner speaks, write ONE note (1–2 sentences, concrete, correct; give a word or form of that language when it helps) saying how the same point looks there and what transfers, what is new or what misleads: ${langsWanted.map(k => (k.name || profileOf(k.code)?.name || langDisplay(k.code)) + (k.code ? ` (code ${k.code})` : '')).join('; ')}.
+Use "for" = the code given (or the name when there is none). rel = same | similar | different | new | trap. If you are not sure about a language, leave it out.
+Format of a text: one short sentence stays a sentence; two or more points are a list ("- " at the start of each line); an example goes on its own line starting with "→ "; **bold** for the one key word or sentence, *italic* for words cited; no headings, links or HTML.
+Write the notes in the language with code "${UI.C.explainLang}". ${N.nativeRule(nativeL(), N.ruleLangs(UI.C, UI.L, nativeL()))}` });
+    /* i18n-ignore-end */
     const notes = (r.data.notes || []).map(n => ({ ...n, ai: true }));
     UI.prefs.aiNotes = { ...(UI.prefs.aiNotes || {}), [c + '|' + fid]: [...((UI.prefs.aiNotes || {})[c + '|' + fid] || []), ...notes] }; save();
-    btn.replaceWith(notesList(notes));
-  } catch (e) { btn.disabled = false; btn.textContent = '✨ ' + (e.message || 'failed'); }
+    btn.replaceWith(...contrastView(N.contrastFor(notes, nativeL()), { compact: true }));
+  } catch (e) { btn.disabled = false; btn.textContent = '✨ ' + ((window.NoemaI18n ? NoemaI18n.err(e) : e.message) || LT('lang.gram.failed')); }
 }
 /** Mixed text: runs of Arabic, Hebrew or Chinese script get their own span (font, direction), the rest stays as it is. */
 function wordsIn(c, s) {
@@ -902,18 +1152,19 @@ const firstSentence = s => (String(s || '').match(/^.*?[.!?](\s|$)/) || [s || ''
 
 /** The same teaching point in every course language: status + the first sentence, each a link to that language's page. */
 function acrossLanguages(fid, current, onPick) {
+  if (UI.C.languages.length < 2) return null;   // D21: one language studied
   const rows = UI.C.languages.map(c => {
     const g = LX(c).grammar[fid];
-    return h('tr', { class: c === current ? 'on' : '' }, h('th', {}, h('button', { class: 'btn ghost small', onclick: () => onPick(c) }, info(c).flag + ' ' + info(c).name)),
-      h('td', {}, !g ? h('i', { class: 'tiny' }, 'not written yet') : [g.status !== 'realized' ? h('span', { class: 'lx-badge reg' }, STATUS_LABEL[g.status]) : null, ' ', wordsIn(c, firstSentence(g.summary))]));
+    return h('tr', { class: c === current ? 'on' : '' }, h('th', {}, h('button', { class: 'btn ghost small', onclick: () => onPick(c) }, info(c).flag + ' ' + info(c).label)),
+      h('td', {}, !g ? h('i', { class: 'tiny' }, LT('lang.state.unprepared')) : [g.status !== 'realized' ? h('span', { class: 'lx-badge reg' }, STATUS_LABEL[g.status]) : null, ' ', wordsIn(c, firstSentence(g.summary))]));
   });
-  return h('div', { class: 'lx-compare lx-across' }, h('div', { class: 'tiny' }, '⇄ The same point in your other languages'), h('table', {}, h('tbody', {}, ...rows)));
+  return h('div', { class: 'lx-compare lx-across' }, h('div', { class: 'tiny' }, '⇄ ' + LT('lang.gram.sameInOthers')), h('table', {}, h('tbody', {}, ...rows)));
 }
 
 /** One function in one language: the explanation, the checklist, the traps, sentences of the bank, the other languages. */
 function grammarCard(c, fid, { compact = false, onPick = null } = {}) {
   const g = LX(c).grammar[fid], fn = UI.C.functions[fid] || { title: fid };
-  if (!g) return h('div', { class: 'lx-card' }, h('h3', {}, fn.title), h('p', { class: 'lx-note' }, `⏳ Not written yet in ${info(c).name}.`));
+  if (!g) return h('div', { class: 'lx-card' }, h('h3', {}, fn.title), h('p', { class: 'lx-note' }, '⏳ ' + LT('lang.card.unwrittenIn', { lang: info(c).name })));
   if (fn.category === 'overview') return overviewCard(c, g);
   const k = N.known(UI.C, UI.L, c);
   const ex = N.selectSentences(UI.C, c, { known: k.R, functions: [fid], maxUnknown: 'auto' }).slice(0, compact ? 3 : 8);
@@ -921,17 +1172,17 @@ function grammarCard(c, fid, { compact = false, onPick = null } = {}) {
   const from = Array.isArray(g.typology) ? N.familiarFrom(UI.C, g.typology, knowsL(c)) : [];
   return h('article', { class: 'lx-card lx-gram', lang: UI.C.explainLang, 'data-fn': fid, 'data-lang': c },
     h('div', { class: 'lx-cardtop' }, h('h3', {}, info(c).flag, ' ', fn.title), g.status !== 'realized' ? h('span', { class: 'lx-badge reg' }, STATUS_LABEL[g.status]) : null),
-    from.length ? h('div', { class: 'tiny lx-familiarline' }, `✓ This point works as in ${from.join(', ')}: the parts you know are folded.`) : null,
+    from.length ? h('div', { class: 'tiny lx-familiarline' }, '✓ ' + LT('lang.gram.worksAsIn', { from: LLIST(from) })) : null,
     typeof feasibilityBar === 'function' ? feasibilityBar(c, fid, compact) : null,   // P5: the feasibility light (§7.3) and ▶ practise
     h('p', { class: 'lx-summary' }, wordsIn(c, g.summary)),
     ...blocks(c, g.blocks),
-    g.procedure?.askYourself?.length ? h('div', { class: 'lx-callout k-tip' }, h('b', {}, '🤔 Ask yourself '), h('ol', { class: 'lx-list' }, ...g.procedure.askYourself.map(x => h('li', {}, wordsIn(c, x))))) : null,
-    g.traps?.length ? h('div', { class: 'lx-callout k-pitfall' }, h('b', {}, '⚠️ Traps '), h('ul', { class: 'lx-list' }, ...g.traps.map(x => h('li', {}, wordsIn(c, x))))) : null,
-    ex.length ? h('details', { class: 'lx-sec', open: compact ? null : true }, h('summary', {}, 'In sentences ', h('span', { class: 'tiny' }, ex.length)),
-      ...ex.map(s => h('div', { class: 'lx-ex' }, h('div', { class: 'lx-extext' }, sentenceView(c, s, s.unknown)), h('div', { class: 'lx-tr' }, s.gloss), s.unknown.length ? h('div', { class: 'tiny' }, '🆕 ', s.unknown.map(l => LX(c).lex[l].lemma + ' = ' + gloss(c, l)).join(' · ')) : h('div', { class: 'tiny' }, '✓ fits your words')))) : null,
-    notesView(c, g.notes, fid),
-    (g.seeAlso || []).length ? h('div', { class: 'lx-callout k-key' }, h('b', {}, '🔗 See also '), h('ul', { class: 'lx-list' }, ...g.seeAlso.map(x => h('li', {},
-      h('button', { class: 'btn ghost small', onclick: () => go(`#/fn/${encodeURIComponent(x.fn || fid)}/${x.lang}`) }, info(x.lang).flag + ' ' + (UI.C.functions[x.fn || fid]?.title || x.fn)), ' ', x.note || '')))) : null,
+    g.procedure?.askYourself?.length ? h('div', { class: 'lx-callout k-tip', 'data-sec': 'ask' }, h('b', {}, '🤔 ' + LT('lang.gram.askYourself') + ' '), h('ol', { class: 'lx-list' }, ...g.procedure.askYourself.map(x => h('li', {}, wordsIn(c, x))))) : null,
+    g.traps?.length ? h('div', { class: 'lx-callout k-pitfall' }, h('b', {}, '⚠️ ' + LT('lang.gram.traps') + ' '), h('ul', { class: 'lx-list' }, ...g.traps.map(x => h('li', {}, mdView(x, { forLang: c, inline: true }))))) : null,
+    ex.length ? h('details', { class: 'lx-sec', open: compact ? null : true }, h('summary', {}, LT('lang.gram.inSentences') + ' ', h('span', { class: 'tiny' }, LNUM(ex.length))),
+      ...ex.map(s => h('div', { class: 'lx-ex' }, h('div', { class: 'lx-extext' }, sentenceView(c, s, s.unknown)), h('div', { class: 'lx-tr' }, s.gloss), s.unknown.length ? h('div', { class: 'tiny' }, '🆕 ', s.unknown.map(l => LX(c).lex[l].lemma + ' = ' + gloss(c, l)).join(' · ')) : h('div', { class: 'tiny' }, '✓ ' + LT('lang.gram.fitsWords'))))) : null,
+    ...notesView(c, g.notes, fid, (g.seeAlso || []).filter(x => x.lang !== c)),   // R1: the links to the other course languages sit with their notes
+    (g.seeAlso || []).some(x => x.lang === c) ? h('div', { class: 'lx-callout k-key', 'data-sec': 'also' }, h('b', {}, '🔗 ' + LT('lang.gram.seeAlso') + ' '), h('ul', { class: 'lx-list' }, ...g.seeAlso.filter(x => x.lang === c).map(x => h('li', {},
+      h('button', { class: 'btn ghost small', onclick: () => go(`#/fn/${encodeURIComponent(x.fn || fid)}/${x.lang}`) }, info(x.lang).flag + ' ' + (UI.C.functions[x.fn || fid]?.title || x.fn)), ' ', x.note ? mdView(x.note, { forLang: c, inline: true }) : '')))) : null,
     acrossLanguages(fid, c, onPick || (x => go(`#/fn/${encodeURIComponent(fid)}/${x}`))),
     polyFnStrip(fid));   // P6: the comparison strip, the compare lane
 }
@@ -939,27 +1190,28 @@ function grammarCard(c, fid, { compact = false, onPick = null } = {}) {
 /** Lesson S00: the four types of languages (shared) and this language at a glance (D11). */
 function typologyCard() {
   const T = UI.C.data.typology; if (!T) return null;
-  return h('article', { class: 'lx-card lx-typology' }, h('h3', {}, '🧬 Four ways languages build words'), h('p', {}, T.intro),
+  return h('article', { class: 'lx-card lx-typology' }, h('h3', {}, '🧬 ' + LE('lang.expl.fourWays')), h('p', {}, T.intro),
     ...T.types.map(t => h('details', { class: 'lx-sec', open: true, 'data-type': t.id }, h('summary', {}, h('b', {}, t.name), ' ', UI.C.languages.filter(c => LX(c).typology === t.id).map(c => info(c).flag).join(' ')),
-      h('p', {}, t.summary), t.learnFirst ? h('p', { class: 'tiny' }, '🧭 Learn first: ', t.learnFirst) : null,
-      ...t.examples.map(e => h('div', { class: 'lx-ex' }, h('div', { class: 'lx-extext' }, info(e.lang).flag, ' ', UI.C.lang[e.lang] ? word(e.lang, e.text, { sub: false }) : h('span', { lang: e.lang }, e.text)), e.tr ? h('div', { class: 'lx-tr' }, e.tr) : null, h('div', { class: 'tiny' }, wordsIn('en', e.analysis)))),
-      t.languages ? h('p', { class: 'tiny' }, 'Languages: ', t.languages) : null)),
-    T.spectrum ? h('div', { class: 'lx-callout k-key' }, h('b', {}, 'A spectrum, not boxes. '), T.spectrum) : null);
+      h('p', {}, t.summary), t.learnFirst ? h('p', { class: 'tiny' }, '🧭 ' + LE('lang.expl.learnFirst') + ' ', t.learnFirst) : null,
+      ...t.examples.map(e => h('div', { class: 'lx-ex' }, h('div', { class: 'lx-extext' }, info(e.lang).flag, ' ', UI.C.lang[e.lang] ? word(e.lang, e.text, { sub: false }) : h('span', { lang: e.lang }, e.text)), e.tr ? h('div', { class: 'lx-tr' }, e.tr) : null, h('div', { class: 'tiny' }, scriptRuns(e.analysis, e.lang)))),
+      t.languages ? h('p', { class: 'tiny' }, LE('lang.expl.languages') + ' ', t.languages) : null)),
+    T.spectrum ? h('div', { class: 'lx-callout k-key' }, h('b', {}, LE('lang.expl.spectrum') + ' '), T.spectrum) : null,
+    ...contrastView(contrastL(T.notes, null)));   // R1: the four types seen from the learner's languages and the ones they learn
 }
 function overviewCard(c, g) {
   const T = UI.C.data.typology, type = T?.types.find(t => t.id === g.typology?.type);
   const others = UI.C.languages.filter(x => x !== c);
   return h('article', { class: 'lx-card lx-overview', 'data-lang': c },
-    h('h3', {}, info(c).flag, ' ', info(c).name, ' at a glance'), h('p', { class: 'lx-summary' }, wordsIn(c, g.summary)),
+    h('h3', {}, info(c).flag, ' ', LT('lang.gram.atAGlance', { lang: info(c).name })), h('p', { class: 'lx-summary' }, wordsIn(c, g.summary)),
     h('dl', { class: 'lx-parts' }, ...(g.facts || []).flatMap(f => [h('dt', {}, f.label), h('dd', {}, wordsIn(c, f.value))])),
-    h('div', { class: 'lx-callout k-key' }, h('b', {}, `Type: ${type?.name || g.typology?.type}. `), wordsIn(c, g.typology?.why), g.typology?.alsoShows ? h('div', { class: 'tiny' }, 'Also: ', wordsIn(c, g.typology.alsoShows)) : null),
-    h('h4', {}, '✨ What is special from the very beginning'),
+    h('div', { class: 'lx-callout k-key' }, h('b', {}, LE('lang.expl.type', { type: type?.name || g.typology?.type }) + ' '), wordsIn(c, g.typology?.why), g.typology?.alsoShows ? h('div', { class: 'tiny' }, LE('lang.expl.also') + ' ', wordsIn(c, g.typology.alsoShows)) : null),
+    h('h4', {}, '✨ ' + LT('lang.gram.special')),
     h('ul', { class: 'lx-list' }, ...(g.peculiarities || []).map(p => h('li', {}, h('b', {}, p.title), ' — ', wordsIn(c, p.text)))),
-    g.pathNote ? h('div', { class: 'lx-callout k-tip' }, h('b', {}, '🛤️ Its path through the steps '), wordsIn(c, g.pathNote)) : null,
-    notesView(c, g.notes, 'fn.overview'),
-    h('p', {}, h('button', { class: 'btn small', onclick: () => go('#/peculiar/' + c) }, `📚 The library of ${info(c).name}'s peculiarities`)),
+    g.pathNote ? h('div', { class: 'lx-callout k-tip' }, h('b', {}, '🛤️ ' + LT('lang.gram.path') + ' '), wordsIn(c, g.pathNote)) : null,
+    ...notesView(c, g.notes, 'fn.overview', g.seeAlso || []),
+    h('p', {}, h('button', { class: 'btn small', onclick: () => go('#/peculiar/' + c) }, '📚 ' + LT('lang.gram.library', { lang: info(c).name }))),
     learnerView(c),
-    others.length ? h('p', { class: 'tiny' }, 'The same overview for: ', ...others.map(x => h('button', { class: 'btn ghost small', onclick: () => go(`#/fn/fn.overview/${x}`) }, info(x).flag + ' ' + info(x).name))) : null);
+    others.length ? h('p', { class: 'tiny' }, LT('lang.gram.sameOverview') + ' ', ...others.map(x => h('button', { class: 'btn ghost small', onclick: () => go(`#/fn/fn.overview/${x}`) }, info(x).flag + ' ' + info(x).label))) : null);
 }
 /** D16 — computed, not written from one point of view: what is new and what is familiar for this learner, from the languages they know. */
 function learnerView(c) {
@@ -968,17 +1220,18 @@ function learnerView(c) {
   const name = k => langName(k);
   const item = (x, extra) => h('li', {}, h('b', {}, x.p.kind === 'lacks' ? '∅ ' + x.p.title : x.p.title), ' — ', wordsIn(c, x.p.what || ''), extra);
   return h('div', { class: 'lx-forlearner' },
-    h('h4', {}, `🧭 New for you, familiar to you`),
-    h('p', { class: 'tiny' }, 'Computed from the languages you know: ', r.knownProfiles.map(name).join(', ') || '—',
-      r.unknownLangs.length ? ` (no profile yet for ${r.unknownLangs.join(', ')})` : '', ` · ${r.new.length} new · ${r.familiar.length} familiar`),
-    h('details', { class: 'lx-sec', open: true }, h('summary', {}, `✨ New for you (${r.new.length})`),
+    h('h4', {}, '🧭 ' + LT('lang.gram.newFamiliar')),
+    h('p', { class: 'tiny' }, r.unknownLangs.length
+      ? LT('lang.gram.computedNoProfile', { langs: LLIST(r.knownProfiles.map(name)) || '—', unknown: LLIST(r.unknownLangs), nNew: r.new.length, nFam: r.familiar.length })
+      : LT('lang.gram.computed', { langs: LLIST(r.knownProfiles.map(name)) || '—', nNew: r.new.length, nFam: r.familiar.length })),
+    h('details', { class: 'lx-sec', open: true }, h('summary', {}, '✨ ' + LT('lang.gram.newForYou', { n: r.new.length })),
       h('ul', { class: 'lx-list' }, ...r.new.map(x => item(x, x.notes.length ? h('div', { class: 'tiny' }, ...x.notes.map(n => h('div', {}, '↳ ', h('b', {}, n.title + ': '), n.value, n.note ? ' — ' + n.note : ''))) : null)))),
-    h('details', { class: 'lx-sec' }, h('summary', {}, `🤝 Familiar from your languages (${r.familiar.length})`),
-      h('ul', { class: 'lx-list' }, ...r.familiar.map(x => item(x, h('span', { class: 'tiny' }, ' (as in ', x.from.map(name).join(', '), ')'))))));
+    h('details', { class: 'lx-sec' }, h('summary', {}, '🤝 ' + LT('lang.gram.familiarFromYours', { n: r.familiar.length })),
+      h('ul', { class: 'lx-list' }, ...r.familiar.map(x => item(x, h('span', { class: 'tiny' }, ' ' + LT('lang.gram.asIn', { langs: LLIST(x.from.map(name)) })))))));
 }
 VIEWS.fn = (v, r) => {
   const fid = r.arg, c = r.arg2 && UI.C.lang[r.arg2] ? r.arg2 : UI.lang; if (!UI.C.functions[fid]) return VIEWS.home(v);
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.length > 1 ? history.back() : go('#/') }, '← Back')),
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.length > 1 ? history.back() : go('#/') }, arrowBack() + ' ' + LT('lang.card.back'))),
     h('div', { class: 'row' }, flagRail(null, c, x => go(`#/fn/${encodeURIComponent(fid)}/${x}`))),
     fid === 'fn.overview' ? typologyCard() : null, grammarCard(c, fid));
 };
@@ -1000,7 +1253,7 @@ function exChoose(it, done) {
 function exBuild(it, done) {
   const X = LX(it.lang), box = h('div', { class: 'lx-ex lx-exbuild', 'data-kind': it.kind });
   if (it.kind === 'transform') box.append(h('div', { class: 'lx-q' }, it.change), h('div', { class: 'lx-prompt' }, word(it.lang, it.source, { sub: false })), h('div', { class: 'tiny' }, it.sourceGloss));
-  else box.append(h('div', { class: 'lx-q' }, `Build it in ${info(it.lang).name}:`), h('div', { class: 'lx-prompt lx-meaning' }, it.gloss));
+  else box.append(h('div', { class: 'lx-q' }, LT('lang.gram.buildIn', { lang: info(it.lang).name })), h('div', { class: 'lx-prompt lx-meaning' }, it.gloss));
   noteNew(it.lang, it.unknown);
   if ((it.unknown || []).length) box.append(h('div', { class: 'tiny lx-newwords' }, '🆕 ', ...it.unknown.flatMap((l, i) => [i ? ' · ' : '', h('button', { class: 'btn ghost small', onclick: () => wordPopup(it.lang, l) }, X.lex[l].lemma), ' = ' + gloss(it.lang, l)])));
   const built = [], slot = h('div', { class: 'lx-slot', lang: it.lang, dir: X.language.dir }), pool = h('div', { class: 'lx-tiles', lang: it.lang, dir: X.language.dir });
@@ -1014,13 +1267,126 @@ function exBuild(it, done) {
   };
   it.tiles.forEach((t, i) => pool.append(h('button', { class: 'lx-tile1', 'data-i': i, onclick: e => { if (over || e.currentTarget.disabled) return; built.push({ t, i }); e.currentTarget.disabled = true; draw(); if (built.length === it.size) check(); } }, t)));
   const undo = h('button', { class: 'btn small ghost', onclick: () => { if (over || !built.length) return; const b = built.pop(); pool.children[b.i].disabled = false; draw(); } }, '⌫');
-  const giveUp = h('button', { class: 'btn small ghost', onclick: () => { if (!over) { over = true; slot.classList.add('wrong'); box.append(h('div', { class: 'lx-fb bad' }, '❌ ', word(it.lang, it.answers[0], { sub: false }))); done(false); } } }, 'Show me');
+  const giveUp = h('button', { class: 'btn small ghost', onclick: () => { if (!over) { over = true; slot.classList.add('wrong'); box.append(h('div', { class: 'lx-fb bad' }, '❌ ', word(it.lang, it.answers[0], { sub: false }))); done(false); } } }, LT('lang.ex.showMe'));
   draw(); box.append(slot, pool, h('div', { class: 'row' }, undo, giveUp));
   return box;
 }
 /** Widgets for item types added by later phases: WIDGETS[it.type] = (it, done) => element. */
 const WIDGETS = {};
 const exItem = (it, done) => WIDGETS[it.type] ? WIDGETS[it.type](it, done) : it.type === 'build' ? exBuild(it, done) : exChoose(it, done);
+
+/* ---- 46_notes.js ---- */
+/* ---------- R1 / R2 — the comparisons a learner sees (docs/language-packs.md §2.2), structured ----------
+   Three sections wherever a place has comparison notes (grammar pages, their blocks, the overview, the typology card, phenomena,
+   word cards): “From your languages” (the native language first — else its branch / family / type —, then the C1 / C2 languages
+   in the learner's order), “Among the languages you are learning” (the other course languages the learner studies: their notes
+   and the links to them) and, folded, “From other languages” (every other note: other languages, types, branches, families).
+   Each note sits under the heading of its language: its own name (endonym) and a rel chip.
+   Every note (and every comparison-like text: pitfalls, subtleties, fun facts, feeling, synonyms' nuances, the grammar pages'
+   comparison texts) is a small Markdown subset (langcore noteMarkdown) drawn as DOM nodes — never innerHTML of the text —
+   with the runs of another script in their language, font and direction. */
+
+/** The languages the learner speaks at C1 / C2 (course settings.knows), in their order, without the native one. */
+const speaksL = () => N.speaksOf(UI.L?.settings.knows, nativeL());
+/** contrastFor for the learner on screen (page: the language shown, null for a shared page such as the typology card). Until the
+ *  native language is known no comparison at all (§2.2: the course asks for it once; general texts only until then). */
+const contrastL = (notes, page = null, seeAlso = []) => nativeL() ? N.contrastFor(notes, nativeL(), { speaks: speaksL(), learning: UI.L ? activeLangs() : [], page, seeAlso })
+  : { yours: [], learning: [], others: [] };
+/** A language's own name (its endonym: “Ελληνικά”, “Deutsch”, “العربية”), else its name in the UI language. */
+function endonym(code) {
+  try {
+    const n = new Intl.DisplayNames([code], { type: 'language' }).of(code);
+    if (n && n.toLowerCase() !== String(code).toLowerCase()) { const a = [...n]; return a[0].toLocaleUpperCase(code) + a.slice(1).join(''); }
+  } catch (e) { }
+  return capFirst(langName(code));
+}
+const REL_SIGN = { same: '=', similar: '≈', different: '≠', new: '✨', trap: '⚠️' };
+const REL_LABEL = new Proxy({}, { get: (o, r) => typeof r === 'string' && REL_SIGN[r] ? REL_SIGN[r] + ' ' + LT('lang.gram.rel.' + r) : undefined });   // lang.gram.rel.<rel>
+const relChip = rel => rel ? h('span', { class: 'lx-rel r-' + (REL_SIGN[rel] ? rel : 'other') }, REL_LABEL[rel] || rel) : null;
+const noteAiBadge = n => n?.ai ? h('span', { class: 'lx-badge reg' }, LT('lang.gram.aiBadge')) : null;
+
+/* ---- R2: the Markdown subset as DOM ---- */
+const RUN_SCRIPTS = [   // [script, its runs (letters, with spaces between them), the language a run is in]
+  ['he', /[֐-׿יִ-ﭏ]/, () => 'he'],
+  ['ar', /[؀-ۿݐ-ݿﭐ-﷿ﹰ-﻿]/, f => ['fa', 'ur'].includes(f) ? f : 'ar'],
+  ['cjk', /[぀-ヿ㐀-鿿豈-﫿　-〿＀-￯]/, (f, run) => /[぀-ヿ]/.test(run) || f === 'ja' ? 'ja' : 'zh'],
+  ['el', /[Ͱ-Ͽἀ-῿]/, () => 'el'],
+  ['cyr', /[Ѐ-ӿ]/, f => ['ru', 'uk', 'bg', 'sr'].includes(f) ? f : 'ru'],
+  ['deva', /[ऀ-ॿ]/, f => ['hi', 'mr'].includes(f) ? f : 'hi'],
+];
+const RUN_RE = new RegExp(RUN_SCRIPTS.map(([, r]) => { const c = r.source; return `${c}+(?:[\\s\\u0300-\\u036F'’]*${c}+)*`; }).join('|'), 'g');
+const RTL = new Set(['he', 'ar', 'fa', 'ur']);
+/** The script the explanations are written in (its runs need no marking). */
+const explScript = () => ({ he: 'he', ar: 'ar', fa: 'ar', zh: 'cjk', ja: 'cjk', el: 'el', ru: 'cyr', uk: 'cyr', bg: 'cyr', hi: 'deva' })[String(UI.C?.explainLang || 'en').split('-')[0]] || null;
+/** Mixed text: every run of another script in its language (a course language: its font, direction and vowel marks — like wordsIn;
+ *  any other: lang and dir). forLang: the language the note speaks about (decides Japanese kanji, Persian letters …). */
+function scriptRuns(s, forLang = null) {
+  s = String(s ?? ''); const out = [], skip = explScript(); let last = 0, m;
+  RUN_RE.lastIndex = 0;
+  while ((m = RUN_RE.exec(s))) {
+    const run = m[0], sc = RUN_SCRIPTS.find(([, r]) => r.test(run[0]));
+    if (!sc || sc[0] === skip) continue;
+    if (m.index > last) out.push(s.slice(last, m.index));
+    const code = sc[2](forLang, run);
+    const e = UI.C?.lang[code] ? word(code, run, { sub: false }) : h('span', { lang: code, dir: RTL.has(code) ? 'rtl' : null }, run);
+    if (e && e.dataset) e.dataset.inline = '1';   // a run inside prose: no 🔊 button of its own (98_speech.js)
+    out.push(e);
+    last = m.index + run.length;
+  }
+  if (last < s.length) out.push(s.slice(last));
+  return out;
+}
+/** A text in the Markdown subset (R2) → DOM: paragraphs, lists, → examples, bold, italic. inline: one plain paragraph comes back as a
+ *  span (inside a list item, after an icon …). */
+function mdView(text, { forLang = null, inline = false, cls = '' } = {}) {
+  const blocks = N.noteMarkdown(text);
+  const inl = list => list.map(x => x.t === 'text' ? scriptRuns(x.s, forLang) : h(x.t === 'b' ? 'strong' : 'em', {}, inl(x.c)));
+  const lines = ls => ls.flatMap((l, i) => i ? [h('br'), ...inl(l)] : inl(l));
+  const ex = l => h('div', { class: 'lx-md-ex' }, h('span', { class: 'lx-md-arrow', 'aria-hidden': 'true' }, '→'), h('span', {}, inl(l)));
+  if (inline && blocks.length <= 1 && (!blocks.length || blocks[0].t === 'p')) return h('span', { class: 'lx-md ' + cls }, blocks.length ? lines(blocks[0].lines) : '');
+  return h('div', { class: 'lx-md ' + cls }, ...blocks.map(b => b.t === 'p' ? h('p', {}, lines(b.lines)) : b.t === 'ex' ? ex(b.inl)
+    : h(b.t, { class: 'lx-md-list', start: b.t === 'ol' && b.start !== 1 ? b.start : null }, ...b.items.map(it => h('li', {}, lines(it.lines), ...it.ex.map(ex))))));
+}
+
+/* ---- R1: the sections ---- */
+/** The name of a group of languages: a type by the course's name for it (core/typology.json), a branch / family as “… languages”. */
+const groupName = key => { const [k, v] = String(key).split(':'); const t = k === 'type' && (UI.C?.data.typology?.types || []).find(x => x.id === v); return t ? t.name : langName(key); };
+/** The heading of a group: the language's own name (+ its name in the UI language when it differs) or the group's name, C1 / C2,
+ *  the rel chip of its first note. A native language shown through its branch / family / type: its name + that group's name. */
+function groupHead(g, sec) {
+  const code = g.kind === 'lang' ? g.lang : null, main = code ? endonym(code) : g.kind === 'name' ? capFirst(g.name || g.for) : groupName(g.for);
+  const ui = code ? capFirst(langName(code)) : '', sub = g.via ? groupName(g.via) : ui && ui.toLowerCase() !== main.toLowerCase() ? ui : null;
+  return h('div', { class: 'lx-cg-head' }, sec === 'learning' && code ? h('span', { class: 'lx-cg-flag', 'aria-hidden': 'true' }, info(code).flag) : null,
+    h('b', { class: 'lx-cg-name', lang: code || null, dir: 'auto' }, main), sub ? h('span', { class: 'lx-cg-sub' }, sub) : null,
+    g.level ? h('span', { class: 'lx-cg-lvl' }, g.level) : null, relChip(g.notes[0]?.rel), noteAiBadge(g.notes[0]));
+}
+function groupView(g, sec, fid) {
+  return h('div', { class: 'lx-cgroup', 'data-lang': g.for, 'data-kind': g.kind || 'lang' },
+    groupHead(g, sec),
+    ...g.notes.map((n, i) => h('div', { class: 'lx-cg-note', 'data-for': n.for }, i ? h('div', { class: 'lx-cg-more' }, relChip(n.rel), noteAiBadge(n)) : null,
+      mdView(n.text, { forLang: g.kind === 'lang' ? g.lang : null }))),
+    g.seeAlso ? h('ul', { class: 'lx-cg-also' }, ...g.seeAlso.map(x => h('li', {},
+      UI.C.lang[x.lang] ? h('button', { class: 'btn ghost small', onclick: () => go(`#/fn/${encodeURIComponent(x.fn || fid)}/${x.lang}`) }, '🔗 ' + (UI.C.functions[x.fn || fid]?.title || x.fn || fid))
+        : h('span', { class: 'tiny' }, '🔗 ' + (UI.C.functions[x.fn || fid]?.title || x.fn || fid)),   // D21: a course language the learner does not study has no page now
+      x.note ? mdView(x.note, { forLang: x.lang, inline: true }) : null))) : null);
+}
+/** The sections of a contrastFor result → [element …] (none when empty): “From your languages”, “Among the languages you are
+ *  learning”, and “From other languages” folded (a <details>). opts: {fid (seeAlso links), compact (inside a block, a phenomenon),
+ *  cls (an extra class), tail (an element at the end of “yours”: the ✨ button)}. */
+function contrastView(r, { fid = null, compact = false, cls = '', tail = null } = {}) {
+  const k0 = `lx-notesbox lx-cmp${compact ? ' compact' : ''}${cls ? ' ' + cls : ''}`;
+  const box = (k, groups, title, extra = null) => groups.length || extra ? h('section', { class: `${k0} k-${k}`, 'data-cmp': k },
+    h('div', { class: 'lx-cmp-title' }, title), ...groups.map(g => groupView(g, k, fid)), extra) : null;
+  const others = r.others || [];
+  return [box('yours', r.yours || [], '🧭 ' + LT('lang.gram.fromYours'), tail), box('learning', r.learning || [], '🌐 ' + LT('lang.gram.amongLearning')),
+    others.length ? h('details', { class: `${k0} k-others`, 'data-cmp': 'others' },   // folded by default (R1.3)
+      h('summary', { class: 'lx-cmp-title' }, '🗺️ ' + LT('lang.gram.fromOthers'), h('span', { class: 'lx-cmp-n' }, LNUM(others.length))),
+      ...others.map(g => groupView(g, 'others', fid))) : null].filter(Boolean);
+}
+/** The notes of one place (a block, a phenomenon, a word: notes; c: the language on screen) as the sections. */
+const notesSections = (notes, c, opts = {}) => contrastView(contrastL(notes, c, opts.seeAlso || []), opts);
+/** The comparison notes of a word (profile.notes) for its card. */
+const wordNotesView = (c, lx) => notesSections(lx.profile?.notes, c, { cls: 'lx-wnotes' });
 
 /* ---- 50_session.js ---- */
 /* ---------- the session: reviews, then new ideas learned in every language one after the other (§7.5) ---------- */
@@ -1060,7 +1426,7 @@ function runSession(plan, { only = null } = {}) {
   const total = queue.length, stats = { right: 0, wrong: 0, introduced: 0 }, retried = new Set();
   const before = Object.fromEntries(activeLangs().map(c => [c, N.nodeStates(UI.C, UI.L, c)]));
   const m = $('.lx-main'); const bar = h('div', { class: 'lx-progress' }, h('i')), stage = h('div', { class: 'lx-stage' });
-  m.innerHTML = ''; m.append(h('div', { class: 'view lx-view lx-session' }, h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => { save(true); go('#/'); render(); } }, '✕ Stop'), bar), stage));
+  m.innerHTML = ''; m.append(h('div', { class: 'view lx-view lx-session' }, h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => { save(true); go('#/'); render(); } }, '✕ ' + LT('lang.sess.stop')), bar), stage));
   let i = 0;
   const next = () => {
     bar.firstChild.style.width = Math.round(i / (total + retried.size) * 100) + '%';
@@ -1078,23 +1444,23 @@ function runSession(plan, { only = null } = {}) {
       ok ? stats.right++ : stats.wrong++;
       const key = a.kind + a.lang + (a.lex || JSON.stringify([a.it?.sentence, a.it?.prompt, a.it?.kind]));
       if (!ok && a.kind !== 'poly' && !retried.has(key)) { retried.add(key); queue.splice(Math.min(3, queue.length), 0, { ...a, retry: true }); }   // once more, a little later
-      const btn = h('button', { class: 'btn primary lx-next' }, 'Next →'); btn.onclick = next;
+      const btn = h('button', { class: 'btn primary lx-next' }, LT('lang.drill.next') + ' ' + arrowOn()); btn.onclick = next;
       stage.append(h('div', { class: 'row lx-nextrow' }, btn)); setTimeout(() => btn.focus(), 30);
     };
     UI.current = a;
     const ex = a.kind === 'script' ? scriptStep(a, done) : ['item', 'deep', 'poly'].includes(a.kind) ? exItem(a.it, done) : a.kind === 'intro' ? exIntro(a.lang, a.lex, done) : a.kind === 'rec' ? exRecognize(a.lang, a.lex, done) : a.kind === 'pic' ? exPicture(a.lang, a.lex, done) : exProduce(a.lang, a.lex, done);
     Object.assign(ex.dataset, a.kind === 'poly' ? { kind: a.it.kind, lang: a.lang, poly: '1' } : { kind: a.kind === 'item' ? a.it.kind : a.kind, lang: a.lang, ...(a.lex ? { lex: a.lex } : {}) });   // for tests and styling
-    stage.append(h('div', { class: 'tiny lx-which' }, a.kind === 'poly' ? '🌐 across your languages' : [info(a.lang).flag, ' ', info(a.lang).name], a.review ? ' · review' : '', a.pair ? ' · ⇄ with its relative' : '', a.kind === 'deep' ? ' · ' + (DEEP_LABEL[a.it.kind] || '🏋️') : '', a.retry ? ' · once more' : ''), ex);
+    stage.append(h('div', { class: 'tiny lx-which' }, a.kind === 'poly' ? '🌐 ' + LT('lang.sess.across') : [info(a.lang).flag, ' ', info(a.lang).label], a.review ? ' · ' + LT('lang.sess.review') : '', a.pair ? ' · ⇄ ' + LT('lang.sess.relative') : '', a.kind === 'deep' ? ' · ' + (DEEP_LABEL[a.it.kind] || '🏋️') : '', a.retry ? ' · ' + LT('lang.sess.onceMore') : ''), ex);
   };
   const finish = () => {
     save(true); bar.firstChild.style.width = '100%'; stage.innerHTML = '';
     const opened = [];
     for (const c of activeLangs()) { const now = N.nodeStates(UI.C, UI.L, c); for (const nid of UI.C.order) if (before[c][nid] !== now[nid] && ['open', 'known', 'mastered'].includes(now[nid])) opened.push(`${info(c).flag} ${UI.C.nodes[nid].title}: ${STATE_LABEL[now[nid]]}`); }
-    stage.append(h('div', { class: 'lx-result' }, h('h2', {}, '🎉 Session done'),
-      h('p', {}, `${stats.introduced} new · ${stats.right} right · ${stats.wrong} to practise again`),
+    stage.append(h('div', { class: 'lx-result' }, h('h2', {}, '🎉 ' + LT('lang.sess.done')),
+      h('p', {}, LT('lang.sess.stats', { nNew: stats.introduced, right: stats.right, wrong: stats.wrong })),
       opened.length ? h('ul', {}, ...opened.map(t => h('li', {}, t))) : null,
       newWordsList(),
-      h('div', { class: 'row' }, qaNextLessonButton(null, activeLangs()), h('button', { class: 'btn primary', onclick: () => go('#/') }, 'Back to the map'))));   // the next step offered (QA)
+      h('div', { class: 'row' }, qaNextLessonButton(null, activeLangs()), h('button', { class: 'btn primary', onclick: () => go('#/') }, LT('lang.sess.backToMap')))));   // the next step offered (QA)
   };
   document.onkeydown = e => {
     if (!$('.lx-session')) { document.onkeydown = null; return; }
@@ -1103,7 +1469,7 @@ function runSession(plan, { only = null } = {}) {
   next();
 }
 /** The word profiles arrive after the start: a word card on screen is drawn again with them. */
-function addProfiles(map) { const n = N.addProfiles(UI.C, map); UI.profiles = true; if (n && ['c', 'w', 'node', 'field'].includes(UI.view) && !$('.lx-session')) render(); return n; }
+function addProfiles(map) { UI.profMap = map; const n = N.addProfiles(UI.C, facadeProfMap(map)); UI.profiles = true; if (n && ['c', 'w', 'node', 'field'].includes(UI.view) && !$('.lx-session')) render(); return n; }
 window.NoemaLangUI = { start, render, go, toHash, innerHash, FR, UI, addProfiles, save, foldRemote, ex: { exPicture, exRecognize, exProduce, exItem } };
 
 /* ---- 55_lesson.js ---- */
@@ -1119,25 +1485,25 @@ VIEWS.lesson = (v, r) => {
   const c = langs.includes(UI.lang) ? UI.lang : langs[0], X = LX(c), k = N.known(UI.C, UI.L, c);
   const st = Object.fromEntries(langs.map(x => [x, N.nodeStates(UI.C, UI.L, x)[nid]]));
   const can = langs.filter(x => ['open', 'learning', 'passed', 'known', 'mastered'].includes(st[x]));
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← Map')),
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, arrowBack() + ' ' + LT('lang.card.map'))),
     h('h1', {}, h('span', { class: 'lx-step' }, stepLabel(n)), ' ', n.title),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); render(); }),
-      ...langs.map(x => h('span', { class: 'lx-ns ns-' + st[x] }, info(x).flag, ' ', STATE_LABEL[st[x]] || st[x], UI.L.langs[x]?.checks?.[nid] ? ` · ${Math.round(UI.L.langs[x].checks[nid].best * 100)} %` : ''))),
+      ...langs.map(x => h('span', { class: 'lx-ns ns-' + st[x] }, info(x).flag, ' ', STATE_LABEL[st[x]] || st[x], UI.L.langs[x]?.checks?.[nid] ? ' · ' + LT('lang.lesson.pct', { pct: Math.round(UI.L.langs[x].checks[nid].best * 100) }) : ''))),
     h('div', { class: 'row lx-actions' },
-      can.length ? h('button', { class: 'btn primary', onclick: () => runLesson(nid, can) }, '▶ ' + (can.every(x => !toIntroduce(x, nid, N.known(UI.C, UI.L, x)).length) ? 'Practise' : 'Learn') + ' — ' + can.map(x => info(x).flag).join(' ')) : h('span', { class: 'lx-note' }, '🔒 Pass the lesson before it first.'),
-      can.length ? h('button', { class: 'btn', onclick: () => runLesson(nid, can, { checkOnly: true }) }, '✔ Lesson check') : null, deepenButton(nid, c)));
+      can.length ? h('button', { class: 'btn primary', 'data-icon': can.every(x => !toIntroduce(x, nid, N.known(UI.C, UI.L, x)).length) ? 'gym' : 'plus', onclick: () => runLesson(nid, can) }, '▶ ' + LT(can.every(x => !toIntroduce(x, nid, N.known(UI.C, UI.L, x)).length) ? 'lang.lesson.practiseFlags' : 'lang.lesson.learnFlags', { flags: can.map(x => info(x).flag).join(' ') })) : h('span', { class: 'lx-note' }, '🔒 ' + LT('lang.lesson.locked')),
+      can.length ? h('button', { class: 'btn', 'data-icon': 'check', onclick: () => runLesson(nid, can, { checkOnly: true }) }, '✔ ' + LT('lang.lesson.check')) : null, deepenButton(nid, c)));
   const fns = N.lessonFunctions(UI.C, c, nid);
   if (fns.includes('fn.overview')) v.append(typologyCard());
-  v.append(h('h2', { class: 'lx-h2' }, '📖 Grammar in ', info(c).name), ...fns.map(f => grammarCard(c, f, { compact: true, onPick: x => { UI.lang = x; UI.prefs.lang = x; save(); render(); } })));
+  v.append(h('h2', { class: 'lx-h2' }, '📖 ' + LT('lang.lesson.grammarIn', { lang: info(c).name })), ...fns.map(f => grammarCard(c, f, { compact: true, onPick: x => { UI.lang = x; UI.prefs.lang = x; save(); render(); } })));
   // the same step in the other languages: their own extra points (D10)
   const extra = langs.filter(x => x !== c).map(x => [x, N.lessonFunctions(UI.C, x, nid).filter(f => !fns.includes(f))]).filter(([, f]) => f.length);
-  if (extra.length) v.append(h('div', { class: 'lx-callout k-key' }, h('b', {}, '🔗 At this step your other languages also learn: '),
+  if (extra.length) v.append(h('div', { class: 'lx-callout k-key' }, h('b', {}, '🔗 ' + LT('lang.lesson.othersLearn') + ' '),
     h('ul', { class: 'lx-list' }, ...extra.map(([x, f]) => h('li', {}, info(x).flag, ' ', ...f.map(fid => h('button', { class: 'btn ghost small', onclick: () => go(`#/fn/${encodeURIComponent(fid)}/${x}`) }, UI.C.functions[fid]?.title || fid)))))));
   if (n.concepts.length || (X.byNode[nid] || []).length) {
     const grid = h('div', { class: 'lx-cgrid' });
     for (const cid of n.concepts) grid.append(conceptTile(c, { cid }, k));
     for (const id of (X.byNode[nid] || []).filter(id => !(X.lex[id].senses || []).length)) grid.append(conceptTile(c, { lex: id }, k));
-    v.append(h('h2', { class: 'lx-h2' }, '🔤 Words ', h('span', { class: 'tiny' }, n.concepts.length)), grid);
+    v.append(h('h2', { class: 'lx-h2' }, '🔤 ' + LT('lang.lanes.sec.words') + ' ', h('span', { class: 'tiny' }, LNUM(n.concepts.length))), grid);
   }
 };
 
@@ -1166,12 +1532,12 @@ function runLesson(nid, langs, { checkOnly = false } = {}) {
 }
 
 function runQueue(queue, { nid, langs, title }) {
-  metNew.clear();   // the 🆕 words of this run, listed at the end (D19)
+  metNew.clear();   // the 🆕 words of this run, listed at the end (D20)
   const m = $('.lx-main'), bar = h('div', { class: 'lx-progress' }, h('i')), stage = h('div', { class: 'lx-stage' });
-  m.innerHTML = ''; m.append(h('div', { class: 'view lx-view lx-session lx-lessonrun', 'data-node': nid }, h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => { save(true); go('#/lesson/' + nid); render(); } }, '✕ Stop'), h('b', { class: 'tiny' }, title), bar), stage));
+  m.innerHTML = ''; m.append(h('div', { class: 'view lx-view lx-session lx-lessonrun', 'data-node': nid }, h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => { save(true); go('#/lesson/' + nid); render(); } }, '✕ ' + LT('lang.sess.stop')), h('b', { class: 'tiny' }, title), bar), stage));
   const stats = { right: 0, wrong: 0, introduced: 0 }, results = {}, retried = new Set(); let total = queue.length, i = 0;
   const day = today();
-  const nextBtn = (label = 'Next →') => { const b = h('button', { class: 'btn primary lx-next' }, label); b.onclick = next; stage.append(h('div', { class: 'row lx-nextrow' }, b)); setTimeout(() => b.focus(), 30); };
+  const nextBtn = (label = LT('lang.drill.next') + ' ' + arrowOn()) => { const b = h('button', { class: 'btn primary lx-next' }, label); b.onclick = next; stage.append(h('div', { class: 'row lx-nextrow' }, b)); setTimeout(() => b.focus(), 30); };
   function next() {
     bar.firstChild.style.width = Math.round(i / Math.max(total, 1) * 100) + '%';
     const a = queue.shift(); if (!a) return finish();
@@ -1179,7 +1545,7 @@ function runQueue(queue, { nid, langs, title }) {
     if (a.kind === 'screen') {
       if (a.make) stage.append(a.make());
       else { let cur = a.langs[0] || langs[0]; const holder = h('div'); const draw = () => { holder.innerHTML = ''; holder.append(grammarCard(cur, a.fn, { compact: true, onPick: x => { cur = x; draw(); } })); }; draw(); stage.append(a.langs.length > 1 ? flagRail(null, cur, x => { cur = x; draw(); }) : null, holder); }
-      return nextBtn('Got it →');
+      return nextBtn(LT('lang.ex.gotIt') + ' ' + arrowOn());
     }
     if (a.kind === 'drills') {   // expand into exercises now that the words are known
       const items = [];
@@ -1195,8 +1561,8 @@ function runQueue(queue, { nid, langs, title }) {
         for (const it of its) items.push({ kind: 'item', it, check: true });
       }
       if (!items.length) return finish();
-      stage.append(h('div', { class: 'lx-result' }, h('h2', {}, '✔ The lesson check'), h('p', {}, `${items.length} questions in ${uniq(items.map(x => x.it.lang)).map(c => info(c).flag).join(' ')} — 80 % in a language passes the lesson there.`)));
-      queue.unshift(...shuffle(items)); total += items.length; return nextBtn('Start →');
+      stage.append(h('div', { class: 'lx-result' }, h('h2', {}, '✔ ' + LT('lang.lesson.theCheck')), h('p', {}, LT('lang.lesson.checkIntro', { n: items.length, flags: uniq(items.map(x => x.it.lang)).map(c => info(c).flag).join(' ') }))));
+      queue.unshift(...shuffle(items)); total += items.length; return nextBtn(LT('lang.lesson.start') + ' ' + arrowOn());
     }
     const done = ok => {
       if (a.kind === 'intro') { N.introduce(UI.C, UI.L, a.lang, a.lex, day); stats.introduced++; save(); return next(); }
@@ -1216,18 +1582,18 @@ function runQueue(queue, { nid, langs, title }) {
     const ex = a.kind === 'item' ? exItem(a.it, done) : a.kind === 'intro' ? exIntro(a.lang, a.lex, done) : a.kind === 'rec' ? exRecognize(a.lang, a.lex, done) : exProduce(a.lang, a.lex, done);
     const lang = a.lang || a.it.lang;
     Object.assign(ex.dataset, { kind: a.kind === 'item' ? a.it.kind : a.kind, lang, ...(a.check ? { check: '1' } : {}) });
-    stage.append(h('div', { class: 'tiny lx-which' }, info(lang).flag, ' ', info(lang).name, a.check ? ' · lesson check' : '', a.retry ? ' · once more' : ''), ex);
+    stage.append(h('div', { class: 'tiny lx-which' }, info(lang).flag, ' ', info(lang).label, a.check ? ' · ' + LT('lang.lesson.checkTag') : '', a.retry ? ' · ' + LT('lang.sess.onceMore') : ''), ex);
   }
   function finish() {
     for (const [c, R] of Object.entries(results)) N.recordCheck(UI.C, UI.L, c, nid, R.n ? R.c / R.n : 0, day);
     save(true); bar.firstChild.style.width = '100%'; stage.innerHTML = '';
     const st = Object.fromEntries(langs.map(c => [c, N.nodeStates(UI.C, UI.L, c)[nid]]));
-    stage.append(h('div', { class: 'lx-result' }, h('h2', {}, Object.keys(results).length ? '🏁 Lesson check done' : '🎉 Well done'),
-      h('p', {}, `${stats.introduced} new words · ${stats.right} right · ${stats.wrong} to practise again`),
-      Object.keys(results).length ? h('ul', {}, ...Object.entries(results).map(([c, R]) => h('li', { 'data-lang': c }, info(c).flag, ' ', info(c).name, `: ${R.c}/${R.n} = ${Math.round(R.c / R.n * 100)} % — `, !['passed', 'known', 'mastered'].includes(st[c]) ? 'not yet (80 % passes)' : R.c / R.n >= N.PASS ? '✔ passed' : `✔ passed before (best ${Math.round((UI.L.langs[c]?.checks?.[nid]?.best ?? 1) * 100)} %) — practise it again`))) : null,
-      langs.some(c => toIntroduce(c, nid, N.known(UI.C, UI.L, c)).length) ? h('p', { class: 'tiny' }, 'More words of this lesson are waiting — continue when you are ready.') : null,
+    stage.append(h('div', { class: 'lx-result' }, h('h2', {}, Object.keys(results).length ? '🏁 ' + LT('lang.lesson.checkDone') : '🎉 ' + LT('lang.lesson.wellDone')),
+      h('p', {}, LT('lang.lesson.stats', { nNew: stats.introduced, right: stats.right, wrong: stats.wrong })),
+      Object.keys(results).length ? h('ul', {}, ...Object.entries(results).map(([c, R]) => h('li', { 'data-lang': c }, info(c).flag, ' ', info(c).label, ': ' + LT('lang.lesson.score', { c: R.c, n: R.n, pct: Math.round(R.c / R.n * 100) }) + ' — ', !['passed', 'known', 'mastered'].includes(st[c]) ? LT('lang.lesson.notYet') : R.c / R.n >= N.PASS ? '✔ ' + LT('lang.state.passed') : '✔ ' + LT('lang.lesson.passedBefore', { best: Math.round((UI.L.langs[c]?.checks?.[nid]?.best ?? 1) * 100) })))) : null,
+      langs.some(c => toIntroduce(c, nid, N.known(UI.C, UI.L, c)).length) ? h('p', { class: 'tiny' }, LT('lang.lesson.moreWaiting')) : null,
       newWordsList(),
-      h('div', { class: 'row' }, qaNextLessonButton(nid, langs), h('button', { class: 'btn' + (qaNextLessonButton(nid, langs) ? '' : ' primary'), onclick: () => go('#/lesson/' + nid) }, 'Back to the lesson'), h('button', { class: 'btn', onclick: () => go('#/') }, 'The map'))));
+      h('div', { class: 'row' }, qaNextLessonButton(nid, langs), h('button', { class: 'btn' + (qaNextLessonButton(nid, langs) ? '' : ' primary'), onclick: () => go('#/lesson/' + nid) }, LT('lang.lesson.back')), h('button', { class: 'btn', onclick: () => go('#/') }, LT('lang.home.map')))));
   }
   document.onkeydown = e => {
     if (!$('.lx-session')) { document.onkeydown = null; return; }
@@ -1242,17 +1608,18 @@ function runQueue(queue, { nid, langs, title }) {
    contrasts, morphemes and joined sentences), the feasibility light of a function, the 📐 grammar lane (home and
    #/grammar/<lang>), practice blocks that record practiceFunction, and the grammar step of the daily session. */
 const FEAS_LIGHT = { ready: '🟢', thin: '🟡', locked: '🔒', absent: '—' };
-const FN_STATE = { new: '○ new', practicing: '◑ practising', solid: '● solid', mastered: '★ mastered' };
+const FN_SIGN = { new: '○', practicing: '◑', solid: '●', mastered: '★' };
+const FN_STATE = new Proxy({}, { get: (o, s) => typeof s === 'string' && FN_SIGN[s] ? FN_SIGN[s] + ' ' + LT('lang.fn.' + s) : undefined });   // lang.fn.<state>
 const explainAttrs = () => ({ lang: UI.C.explainLang, dir: 'ltr' });
 
 /** The light of one function in one language (§7.3): 🟢 ready · 🟡 thin (n sentences) · 🔒 needs node X. */
 function feasText(c, f) {
-  if (f.state === 'ready') return `🟢 ready${f.usesBank ? ` · ${f.sentences} sentences` : ''}`;
-  if (f.state === 'thin') return `🟡 thin (${f.sentences} sentence${f.sentences === 1 ? '' : 's'})`;
-  if (f.state === 'absent') return '— not in this language';
-  const miss = Object.entries(f.needs || {}).filter(([, [have, need]]) => have < need).map(([pos, [have, need]]) => `${have}/${need} ${(N.POS_LABEL[pos] || pos).split(' ')[0]}s`);
+  if (f.state === 'ready') return '🟢 ' + (f.usesBank ? LT('lang.feas.readyN', { n: f.sentences }) : LT('lang.feas.ready'));
+  if (f.state === 'thin') return '🟡 ' + LT('lang.feas.thin', { n: f.sentences });
+  if (f.state === 'absent') return '— ' + LT('lang.gram.absent');
+  const miss = Object.entries(f.needs || {}).filter(([, [have, need]]) => have < need).map(([pos, [have, need]]) => LT('lang.feas.missPosN', { have, need, pos, posWord: (N.POS_LABEL[pos] || pos).split(' ')[0] }));
   const node = f.unlockBy?.[0] && UI.C.nodes[f.unlockBy[0]];
-  return '🔒 ' + (node ? `needs ${node.step != null ? stepLabel(node) + ' ' : ''}${node.title}` : 'needs more words') + (miss.length ? ` (${miss.join(', ')})` : '');
+  return '🔒 ' + (node ? LT('lang.feas.needsNode', { node: (node.step != null ? stepLabel(node) + ' ' : '') + node.title }) : LT('lang.feas.needsWords')) + (miss.length ? ` (${LLIST(miss)})` : '');
 }
 /** On a grammar card: the light, the state and ▶ practise (not inside a running lesson). */
 function feasibilityBar(c, fid, compact) {
@@ -1260,27 +1627,26 @@ function feasibilityBar(c, fid, compact) {
   const f = N.feasibility(UI.C, UI.L, c, fid), st = N.functionState(UI.C, UI.L, c, fid);
   const can = (f.state === 'ready' || f.state === 'thin') && !document.querySelector('.lx-session');
   return h('div', { class: 'lx-feas s-' + f.state, 'data-feas': f.state, 'data-fn': fid, 'data-lang': c },
-    h('span', { class: 'lx-light', title: 'Can this point be trained now with the words you know? (§7.3)' }, feasText(c, f)),
+    h('span', { class: 'lx-light', title: LT('lang.feas.title') }, feasText(c, f)),
     h('span', { class: 'lx-badge lx-fnstate' }, FN_STATE[st] || st),
-    can ? h('button', { class: 'btn small primary lx-practise', onclick: () => practiseFn(c, fid) }, '▶ Practise') : null,
+    can ? h('button', { class: 'btn small primary lx-practise', onclick: () => practiseFn(c, fid) }, '▶ ' + LT('lang.glane.practise')) : null,
     !compact && can ? h('span', { class: 'tiny lx-kinds' }, kindsOf(c, fid)) : null);
 }
-const KIND_NAME = { inflect: 'forms', gender: 'gender', measure: 'measure words', meaning: 'meanings', build: 'building sentences', transform: 'changing sentences', quiz: 'quiz',
-  paradigm: 'tables', analyze: 'analysing forms', morph: 'pieces of words', root: 'roots and patterns', agree: 'agreement', contrast: 'contrasts', parse: 'word roles',
-  gloss: 'glosses', proofread: 'finding mistakes', combine: 'joining sentences', word: 'words' };
+const KIND_KEYS = ['inflect', 'gender', 'measure', 'meaning', 'build', 'transform', 'quiz', 'paradigm', 'analyze', 'morph', 'root', 'agree', 'contrast', 'parse', 'gloss', 'proofread', 'combine', 'word'];
+const KIND_NAME = new Proxy({}, { get: (o, k) => KIND_KEYS.includes(k) ? LT('lang.kind.' + k) : undefined });   // lang.kind.<kind>
 function kindsOf(c, fid) {
   const kinds = uniq(N.exercises(UI.C, UI.L, c, fid, { auto: true, max: 60 }).map(it => it.kind));
-  return kinds.length ? 'Exercises: ' + kinds.map(k => KIND_NAME[k] || k).join(' · ') : '';
+  return kinds.length ? LT('lang.glane.exercises', { kinds: kinds.map(k => KIND_NAME[k] || k).join(' · ') }) : '';
 }
 
 /* ---------- widgets (exItem → WIDGETS[it.type]) ---------- */
 function fbBox(ok, it) { return h('div', { class: 'lx-fb ' + (ok ? 'ok' : 'bad') }, ok ? '✅ ' : '❌ ', wordsIn(it.lang, it.why || '')); }
 function checkRow(onCheck, onReveal) {
-  return h('div', { class: 'row lx-checkrow' }, h('button', { class: 'btn primary lx-check', onclick: onCheck }, 'Check ✓'), h('button', { class: 'btn small ghost lx-reveal', onclick: onReveal }, 'Show me'));
+  return h('div', { class: 'row lx-checkrow' }, h('button', { class: 'btn primary lx-check', onclick: onCheck }, LT('lang.ex.check') + ' ✓'), h('button', { class: 'btn small ghost lx-reveal', onclick: onReveal }, LT('lang.ex.showMe')));
 }
 /** A choice inside a sentence or a row: a native select (keyboard and screen readers work), foreign options in their script. */
 function selectFor(slot, { foreign, c, label }) {
-  const s = h('select', { class: 'lx-sel', 'aria-label': label || 'choose', ...(foreign ? { lang: c, dir: dirOf(c) } : explainAttrs()) },
+  const s = h('select', { class: 'lx-sel', 'aria-label': label || LT('lang.ex.choose'), ...(foreign ? { lang: c, dir: dirOf(c) } : explainAttrs()) },
     slot.value == null ? h('option', { value: '' }, '…') : null, ...slot.options.map(o => h('option', { value: o }, foreign && LX(c).language.vowelMarks && UI.prefs.marks === false ? N.stripMarks(c, o) : o)));
   s.value = slot.value ?? '';
   return s;
@@ -1297,7 +1663,7 @@ WIDGETS.slots = (it, done) => {
   const c = it.lang, X = LX(c), box = h('div', { class: 'lx-ex lx-exslots', 'data-kind': it.kind }), un = it.unknown || [];
   noteNew(c, un);
   box.append(h('div', { class: 'lx-q' }, wordsIn(c, it.ask)));
-  if (it.kind === 'analyze') box.append(h('div', { class: 'lx-prompt' }, word(c, it.prompt, { sub: false })), it.fixed ? h('div', { class: 'tiny lx-fixed' }, 'Given: ', it.fixed) : null);
+  if (it.kind === 'analyze') box.append(h('div', { class: 'lx-prompt' }, word(c, it.prompt, { sub: false })), it.fixed ? h('div', { class: 'tiny lx-fixed' }, LT('lang.ex.given') + ' ', it.fixed) : null);
   if (it.kind === 'agree') box.append(h('div', { class: 'lx-src' }, X.sentenceById[it.sentences?.[0]] ? sentenceView(c, X.sentenceById[it.sentences[0]], un) : word(c, it.source, { sub: false })), h('div', { class: 'tiny' }, it.sourceGloss, ' → ', h('b', {}, it.gloss)));
   else if (it.gloss) box.append(h('div', { class: 'tiny lx-tr' }, '“', it.gloss, '”'));
   const sels = [], foreign = FOREIGN_SLOTS(it);
@@ -1344,10 +1710,9 @@ WIDGETS.slots = (it, done) => {
 /** The tags of a gloss line, spelled out (ACC = accusative …). */
 function legend(it) {
   const tags = uniq(it.units.filter(u => u.slot).flatMap(u => u.slot.options).flatMap(o => o.split('.').slice(1))).filter(t => /^[A-Z0-9]+$/.test(t));
-  const lab = { NOM: 'nominative', ACC: 'accusative', DAT: 'dative', GEN: 'genitive', SG: 'singular', PL: 'plural', DU: 'dual', COLL: 'collective', MASC: 'masculine', FEM: 'feminine', NEUT: 'neuter',
-    DEF: 'definite', INDF: 'indefinite', PRS: 'present', PST: 'past', FUT: 'future', IND: 'indicative', SBJV: 'subjunctive', JUS: 'jussive', IMP: 'imperative', NFIN: 'infinitive', PTCP: 'participle',
-    CONST: 'construct state', STRG: 'strong ending', WEAK: 'weak ending', MIX: 'mixed ending', CMPR: 'comparative', SPRL: 'superlative', PFV: 'perfective', IPFV: 'imperfective', FORM: 'formal', INFM: 'informal', 1: '1st person', 2: '2nd person', 3: '3rd person' };
-  return tags.length ? '🔤 ' + tags.map(t => `${t} = ${lab[t] || t}`).join(' · ') : '';
+  // the names of the gloss tags are langcore's (N.TAG_LABEL, keys lc.expl.tag.<TAG>): one list of tags and words for the whole module
+  const lab = t => Object.prototype.hasOwnProperty.call(N.TAG_LABEL || {}, t) ? N.TAG_LABEL[t] : t;
+  return tags.length ? '🔤 ' + tags.map(t => `${t} = ${lab(t)}`).join(' · ') : '';
 }
 /* paradigm: a table with hidden cells */
 WIDGETS.table = (it, done) => {
@@ -1373,7 +1738,7 @@ WIDGETS.table = (it, done) => {
 WIDGETS.proofread = (it, done) => {
   const c = it.lang, X = LX(c), box = h('div', { class: 'lx-ex lx-exproof', 'data-kind': it.kind }), un = it.unknown || [];
   noteNew(c, un);
-  box.append(h('div', { class: 'lx-q' }, 'One word is wrong — tap it, then fix it.'), h('div', { class: 'tiny lx-tr' }, '“', it.gloss, '”'));
+  box.append(h('div', { class: 'lx-q' }, LT('lang.ex.proofAsk')), h('div', { class: 'tiny lx-tr' }, '“', it.gloss, '”'));
   const line = h('div', { class: 'lx-proofline', lang: c, dir: dirOf(c) }), sp = X.language.tokenJoin !== 'none';
   let over = false, at = null;
   const btns = it.units.map((u, i) => u.p ? h('span', { lang: c }, u.t) : h('button', { class: 'lx-pword' + (u.l && un.includes(u.l) ? ' lx-new' : ''), lang: c, 'data-i': i, title: u.l && un.includes(u.l) ? '🆕 ' + gloss(c, u.l) : '', onclick: () => pick(i) },
@@ -1391,11 +1756,11 @@ WIDGETS.proofread = (it, done) => {
     if (i !== it.wrongAt) { btns[i].classList.add('wrong'); btns[it.wrongAt].classList.add('right'); return end(false, i, null); }
     btns[i].classList.add('found');
     const opts = it.fix.options.map(o => ({ label: word(c, o, { sub: false }), v: o, ok: it.fix.accept.includes(N.nfc(o)) }));
-    box.insertBefore(h('div', { class: 'lx-q' }, 'The right form?'), box.querySelector('.lx-checkrow'));
+    box.insertBefore(h('div', { class: 'lx-q' }, LT('lang.ex.rightForm')), box.querySelector('.lx-checkrow'));
     box.insertBefore(options(opts, (o, b, wrap) => { const r = N.checkProofread(it, i, o.v); b.classList.add(r.ok ? 'right' : 'wrong'); if (!r.ok) markOpts(wrap, j => opts[j].ok); end(r.ok, i, o.v); }), box.querySelector('.lx-checkrow'));
     setTimeout(() => box.querySelector('.lx-opts .lx-opt')?.focus(), 30);
   }
-  box.append(h('div', { class: 'row lx-checkrow' }, h('button', { class: 'btn small ghost lx-reveal', onclick: () => { if (over) return; btns[it.wrongAt].classList.add('right'); end(false, null, null); } }, 'Show me')));
+  box.append(h('div', { class: 'row lx-checkrow' }, h('button', { class: 'btn small ghost lx-reveal', onclick: () => { if (over) return; btns[it.wrongAt].classList.add('right'); end(false, null, null); } }, LT('lang.ex.showMe'))));
   setTimeout(() => btns.find(b => b.tagName === 'BUTTON')?.focus(), 30);
   return box;
 };
@@ -1411,13 +1776,13 @@ WIDGETS.contrast = (it, done) => {
 /* morph_build and combine: tiles, as when building a sentence */
 WIDGETS.morph = (it, done) => {
   const box = exBuild({ ...it, type: 'build' }, done); box.dataset.kind = 'morph';
-  const q = box.querySelector('.lx-q'); if (q) q.textContent = 'Put the pieces together, in order:';
+  const q = box.querySelector('.lx-q'); if (q) q.textContent = LT('lang.ex.morphAsk');
   const p = box.querySelector('.lx-prompt'); if (p) { p.innerHTML = ''; p.append(...wordsIn(it.lang, it.gloss)); }
   return box;
 };
 WIDGETS.combine = (it, done) => {
   const c = it.lang, X = LX(c), box = exBuild({ ...it, type: 'build' }, done); box.dataset.kind = 'combine';
-  const q = box.querySelector('.lx-q'); if (q) q.textContent = `Join the two sentences into one with “${it.connector}” (${it.connectorGloss}):`;
+  const q = box.querySelector('.lx-q'); if (q) q.textContent = LT('lang.ex.combineAsk', { connector: it.connector, gloss: it.connectorGloss });
   const srcs = h('ol', { class: 'lx-list lx-sources' }, ...(it.sentences || []).slice(0, 2).map((id, i) => h('li', {}, X.sentenceById[id] ? sentenceView(c, X.sentenceById[id], it.unknown || []) : word(c, it.sources[i], { sub: false }), h('div', { class: 'tiny' }, it.sourceGlosses?.[i] || ''))));
   q?.after(srcs);
   return box;
@@ -1427,22 +1792,22 @@ function toast(msg) { document.querySelector('.lx-toast')?.remove(); const t = h
 /* ---------- practice blocks: items of one or more functions, every answer recorded (practiceFunction) ---------- */
 function practiseFn(c, fid) {
   const items = N.exercises(UI.C, UI.L, c, fid, { auto: true, max: 10 });
-  if (!items.length) return toast('Nothing to practise yet with the words you know.');
+  if (!items.length) return toast(LT('lang.glane.nothing'));
   runPractice(items, { title: `${info(c).flag} ${UI.C.functions[fid]?.title || fid}`, back: innerHash() || '#/', again: () => practiseFn(c, fid) });
 }
 function practiseMixed(c) {
   const fids = N.grammarLane(UI.C, UI.L, c).filter(x => x.state !== 'mastered' && ['ready', 'thin'].includes(x.feasibility.state)).map(x => x.fn);
   const items = N.practiceBlock(UI.C, UI.L, c, shuffle(fids).slice(0, 6), { max: 12 });
-  if (!items.length) return toast('Nothing to practise yet with the words you know.');
-  runPractice(items, { title: `${info(c).flag} 📐 Mixed grammar`, back: innerHash() || '#/', again: () => practiseMixed(c) });
+  if (!items.length) return toast(LT('lang.glane.nothing'));
+  runPractice(items, { title: `${info(c).flag} 📐 ` + LT('lang.glane.mixedTitle'), back: innerHash() || '#/', again: () => practiseMixed(c) });
 }
 function runPractice(items, { title, back = '#/', again = null }) {
   metNew.clear();
   const m = $('.lx-main'), bar = h('div', { class: 'lx-progress' }, h('i')), stage = h('div', { class: 'lx-stage' });
-  m.innerHTML = ''; m.append(h('div', { class: 'view lx-view lx-session lx-practice' }, h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => { save(true); go(back); } }, '✕ Stop'), h('b', { class: 'tiny' }, title), bar), stage));
+  m.innerHTML = ''; m.append(h('div', { class: 'view lx-view lx-session lx-practice' }, h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => { save(true); go(back); } }, '✕ ' + LT('lang.sess.stop')), h('b', { class: 'tiny' }, title), bar), stage));
   const queue = items.map(it => ({ it })), byFn = {}, retried = new Set(); let total = queue.length, i = 0;
   const day = today();
-  const nextBtn = () => { const b = h('button', { class: 'btn primary lx-next' }, 'Next →'); b.onclick = next; stage.append(h('div', { class: 'row lx-nextrow' }, b)); setTimeout(() => b.focus(), 30); };
+  const nextBtn = () => { const b = h('button', { class: 'btn primary lx-next' }, LT('lang.drill.next') + ' ' + arrowOn()); b.onclick = next; stage.append(h('div', { class: 'row lx-nextrow' }, b)); setTimeout(() => b.focus(), 30); };
   function next() {
     bar.firstChild.style.width = Math.round(i / Math.max(total, 1) * 100) + '%';
     const a = queue.shift(); if (!a) return finish();
@@ -1458,15 +1823,15 @@ function runPractice(items, { title, back = '#/', again = null }) {
     };
     const ex = exItem(a.it, done);
     Object.assign(ex.dataset, { kind: a.it.kind, lang: a.it.lang });
-    stage.append(h('div', { class: 'tiny lx-which' }, info(a.it.lang).flag, ' ', info(a.it.lang).name, ' · ', UI.C.functions[a.it.fn]?.title || '', a.retry ? ' · once more' : ''), ex);
+    stage.append(h('div', { class: 'tiny lx-which' }, info(a.it.lang).flag, ' ', info(a.it.lang).name, ' · ', UI.C.functions[a.it.fn]?.title || '', a.retry ? ' · ' + LT('lang.sess.onceMore') : ''), ex);
   }
   function finish() {
     save(true); bar.firstChild.style.width = '100%'; stage.innerHTML = ''; UI.current = null;
     const rows = Object.values(byFn);
-    stage.append(h('div', { class: 'lx-result lx-practicedone' }, h('h2', {}, '📐 Practice done'),
-      h('ul', { class: 'lx-list' }, ...rows.map(R => h('li', { 'data-fn': R.fn, 'data-lang': R.lang }, info(R.lang).flag, ' ', UI.C.functions[R.fn]?.title || R.fn, `: ${R.c}/${R.n} — `, FN_STATE[N.functionState(UI.C, UI.L, R.lang, R.fn)]))),
+    stage.append(h('div', { class: 'lx-result lx-practicedone' }, h('h2', {}, '📐 ' + LT('lang.glane.done')),
+      h('ul', { class: 'lx-list' }, ...rows.map(R => h('li', { 'data-fn': R.fn, 'data-lang': R.lang }, info(R.lang).flag, ' ', UI.C.functions[R.fn]?.title || R.fn, `: ${LNUM(R.c)}/${LNUM(R.n)} — `, FN_STATE[N.functionState(UI.C, UI.L, R.lang, R.fn)]))),
       newWordsList(),
-      h('div', { class: 'row' }, again ? h('button', { class: 'btn primary', onclick: again }, '↻ Again') : null, h('button', { class: 'btn', onclick: () => go(back) }, 'Back'))));
+      h('div', { class: 'row' }, again ? h('button', { class: 'btn primary', onclick: again }, '↻ ' + LT('lang.drill.again')) : null, h('button', { class: 'btn', onclick: () => go(back) }, LT('lang.card.back')))));
   }
   document.onkeydown = e => {
     if (!$('.lx-practice')) { document.onkeydown = null; return; }
@@ -1482,34 +1847,34 @@ function laneRow(c, x) {
     h('div', { class: 'lx-lanetitle' }, h('button', { class: 'btn ghost small', onclick: () => go(`#/fn/${encodeURIComponent(x.fn)}/${c}`) }, x.title),
       x.lesson && UI.C.nodes[x.lesson]?.step != null ? h('span', { class: 'lx-step' }, stepLabel(UI.C.nodes[x.lesson])) : null),
     h('div', { class: 'lx-lanemeta' }, h('span', { class: 'lx-badge lx-fnstate' }, FN_STATE[x.state]), h('span', { class: 'lx-light' }, feasText(c, x.feasibility)),
-      can ? h('button', { class: 'btn small primary lx-practise', onclick: () => practiseFn(c, x.fn) }, '▶ Practise') : null));
+      can ? h('button', { class: 'btn small primary lx-practise', onclick: () => practiseFn(c, x.fn) }, '▶ ' + LT('lang.glane.practise')) : null));
 }
 const toPractise = lane => lane.filter(x => x.state !== 'mastered' && ['ready', 'thin'].includes(x.feasibility.state)).sort((a, b) => ['practicing', 'new', 'solid'].indexOf(a.state) - ['practicing', 'new', 'solid'].indexOf(b.state));
 /** On the home: per language, what the open lessons teach, how far each point is and what can be practised now. */
 function grammarLaneHome() {
-  const box = h('section', { class: 'lx-glane' }, h('h2', { class: 'lx-h2' }, '📐 Grammar lane'));
+  const box = h('section', { class: 'lx-glane' }, h('h2', { class: 'lx-h2' }, '📐 ' + LT('lang.glane.title')));
   let any = false;
   for (const c of activeLangs()) {
     const lane = N.grammarLane(UI.C, UI.L, c); if (!lane.length) continue;
     any = true;
     const n = s => lane.filter(x => x.state === s).length, ready = toPractise(lane);
     box.append(h('div', { class: 'lx-card lx-laneh', 'data-lang': c },
-      h('div', { class: 'row' }, h('b', {}, info(c).flag, ' ', info(c).name), h('span', { class: 'tiny' }, `${lane.length} point${lane.length === 1 ? '' : 's'} · ${FN_STATE.new} ${n('new')} · ${FN_STATE.practicing} ${n('practicing')} · ${FN_STATE.solid} ${n('solid')} · ${FN_STATE.mastered} ${n('mastered')}`),
-        h('span', { class: 'spacer' }), ready.length ? h('button', { class: 'btn small primary lx-mixed', onclick: () => practiseMixed(c) }, '▶ Mixed practice') : null,
-        h('button', { class: 'btn small ghost', onclick: () => go('#/grammar/' + c) }, 'All →')),
+      h('div', { class: 'row' }, h('b', {}, info(c).flag, ' ', info(c).label), h('span', { class: 'tiny' }, [LT('lang.glane.points', { n: lane.length }), ...['new', 'practicing', 'solid', 'mastered'].map(s => `${FN_STATE[s]} ${LNUM(n(s))}`)].join(' · ')),
+        h('span', { class: 'spacer' }), ready.length ? h('button', { class: 'btn small primary lx-mixed', onclick: () => practiseMixed(c) }, '▶ ' + LT('lang.glane.mixed')) : null,
+        h('button', { class: 'btn small ghost', onclick: () => go('#/grammar/' + c) }, LT('lang.glane.all') + ' ' + arrowOn())),
       ...ready.slice(0, 3).map(x => laneRow(c, x))));
   }
-  if (!any) box.append(h('p', { class: 'tiny' }, 'The grammar of your lessons appears here once a lesson is open.'));
+  if (!any) box.append(h('p', { class: 'tiny' }, LT('lang.glane.empty')));
   return box;
 }
 VIEWS.grammar = (v, r) => {
   const c = r.arg && UI.C.lang[r.arg] ? r.arg : UI.lang, lane = N.grammarLane(UI.C, UI.L, c);
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← Map')),
-    h('h1', {}, '📐 Grammar', h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).name}`)),
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, arrowBack() + ' ' + LT('lang.card.map'))),
+    h('h1', {}, '📐 ' + LT('lang.view.grammar'), h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).label}`)),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); go('#/grammar/' + x); }),
-      toPractise(lane).length ? h('button', { class: 'btn primary lx-mixed', onclick: () => practiseMixed(c) }, '▶ Mixed practice') : null),
-    h('p', { class: 'tiny' }, 'The points of your open lessons. 🟢 ready · 🟡 thin (few sentences with your words yet) · 🔒 needs a lesson or words first. Practising records how sure you are: new → practising → solid → mastered.'));
-  if (!lane.length) return v.append(h('p', { class: 'lx-note' }, `No lesson is open yet in ${info(c).name}.`));
+      toPractise(lane).length ? h('button', { class: 'btn primary lx-mixed', onclick: () => practiseMixed(c) }, '▶ ' + LT('lang.glane.mixed')) : null),
+    h('p', { class: 'tiny' }, LT('lang.glane.help')));
+  if (!lane.length) return v.append(h('p', { class: 'lx-note' }, LT('lang.glane.noLesson', { lang: info(c).name })));
   v.append(h('div', { class: 'lx-lane' }, ...lane.map(x => laneRow(c, x))));
 };
 
@@ -1535,9 +1900,9 @@ Object.assign(window.NoemaLangUI, { grammar: { runPractice, practiseFn, practise
    (langcore.deepRecord: R or P track; a sorting item reviews every word on it).
    🏋️ practise this word (#/deep/<lang>/<lexeme>, from the word card) · 🏋️ deepen (#/deepen/<node>/<lang>, from the node and lesson pages)
    · 1–3 deepening items at the end of the daily session (sessionDeep, §7.5). */
-const DEEP_LABEL = { root_family: '🌳 Root families', compound_split: '🧱 Compounds', sense_split: '🔀 Which word here?', collocation: '🤝 Goes with', confusables: '👯 Easily mixed up',
-  intensity_scale: '📶 Strength', register_pick: '🎭 Register', nuance_pick: '🔍 Nuance', connotation: '💭 Feeling', idiom_meaning: '🗝️ Idioms and sayings', example_cloze: '✏️ In context',
-  sense_pick: '🧭 Which meaning?', etymology_link: '🏺 Where it comes from' };
+const DEEP_SIGN = { root_family: '🌳', compound_split: '🧱', sense_split: '🔀', collocation: '🤝', confusables: '👯', intensity_scale: '📶', register_pick: '🎭', nuance_pick: '🔍', connotation: '💭',
+  idiom_meaning: '🗝️', example_cloze: '✏️', sense_pick: '🧭', etymology_link: '🏺' };
+const DEEP_LABEL = new Proxy({}, { get: (o, k) => typeof k === 'string' && DEEP_SIGN[k] ? DEEP_SIGN[k] + ' ' + LT('lang.deep.kind.' + k) : undefined });   // lang.deep.kind.<kind>
 const MET_DEEP = ['seen', 'learning', 'known_r', 'known_p', 'mastered'];
 /** Explanation parts: text in the explanation language (Arabic, Hebrew, Chinese runs tagged) and foreign words {w, lang} with their lang and dir. */
 function richText(parts, c) { return (Array.isArray(parts) ? parts : [parts]).map(p => p && typeof p === 'object' ? word(UI.C.lang[p.lang] ? p.lang : c, p.w, { sub: false }) : wordsIn(c, String(p ?? ''))); }
@@ -1547,14 +1912,14 @@ function deepTokens(c, toks, fill = null, interactive = true) {
   let glue = true;
   for (const k of toks || []) {
     let el;
-    if (k.gap) el = h('span', { class: 'lx-gapw' }, show(k.pre || ''), h('span', { class: 'lx-gap' + (fill ? ' filled' : ''), 'aria-label': fill ? null : 'gap' }, fill ? show(fill) : '＿＿＿'), show(k.post || ''));
+    if (k.gap) el = h('span', { class: 'lx-gapw' }, show(k.pre || ''), h('span', { class: 'lx-gap' + (fill ? ' filled' : ''), 'aria-label': fill ? null : LT('lang.deep.gap') }, fill ? show(fill) : '＿＿＿'), show(k.post || ''));
     else if (k.p) el = document.createTextNode(k.t);
     else if (k.target) el = h('mark', { class: 'lx-target' }, show(k.t));
     else if (k.l && X.lex[k.l] && !interactive) el = h('span', { class: 'lx-w' + (k.new ? ' lx-new' : ''), title: (k.new ? '🆕 ' : '') + gloss(c, k.l) }, show(k.t));   // inside a button: the 🆕 words open from the line above
     else if (k.l && X.lex[k.l]) {
       const open = e => { e.stopPropagation(); wordPopup(c, k.l); };
       el = h('span', { class: 'lx-w lx-tok' + (k.new ? ' lx-new' : ''), tabindex: '0', role: 'button', title: (k.new ? '🆕 ' : '') + gloss(c, k.l), onclick: open, onkeydown: e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(e); } } }, show(k.t));
-    } else el = h('span', { class: k.out ? 'lx-out' : '', title: k.out ? 'not in the course yet — see the translation' : null }, show(k.t));
+    } else el = h('span', { class: k.out ? 'lx-out' : '', title: k.out ? LT('lang.deep.outOfCourse') : null }, show(k.t));
     if (out.length && sp && !glue && k.p !== true) out.push(' ');
     out.push(el); glue = k.p === 'open';
   }
@@ -1581,7 +1946,7 @@ WIDGETS.vpick = (it, done) => {
   let promptEl = deepPrompt(it);
   const after = pr.trAfter ? h('div', { class: 'lx-tr lx-trafter', hidden: true }, pr.trAfter) : null;
   box.append(h('div', { class: 'lx-q' }, ...richText(it.ask, c)), promptEl,
-    pr.tr ? h('div', { class: 'lx-tr' }, pr.tr) : null, pr.hint ? h('div', { class: 'lx-chips' }, h('span', { class: 'lx-badge reg' }, '🎭 ' + pr.hint)) : null, pr.lit ? h('div', { class: 'tiny' }, 'literally: “' + pr.lit + '”') : null, newWordsLine(c, it.unknown));
+    pr.tr ? h('div', { class: 'lx-tr' }, pr.tr) : null, pr.hint ? h('div', { class: 'lx-chips' }, h('span', { class: 'lx-badge reg' }, '🎭 ' + pr.hint)) : null, pr.lit ? h('div', { class: 'tiny' }, LT('lang.deep.literally', { lit: pr.lit })) : null, newWordsLine(c, it.unknown));
   const opts = it.options.map(o => ({ o, label: deepOpt(it, o, it.optLang), ok: o === it.answer }));
   box.append(options(opts, (o, b, wrap) => {
     b.classList.add(o.ok ? 'right' : 'wrong'); if (!o.ok) markOpts(wrap, i => opts[i].ok);
@@ -1600,19 +1965,19 @@ WIDGETS.vsort = (it, done) => {
   const label = (card, inChip) => card.tokens ? h('span', {}, deepTokens(c, card.tokens, null, !inChip), card.tr ? h('span', { class: 'tiny lx-cardtr' }, ' — ' + card.tr) : null, card.hint ? h('span', { class: 'tiny lx-cardtr' }, ' (' + card.hint + ')') : null) : h('span', {}, word(card.lang || c, card.text, { sub: false }), card.note ? h('span', { class: 'tiny' }, ' ' + card.note) : null);
   for (const card of it.cards) {
     const chip = h('button', { class: 'btn lx-sortchip' + (card.tokens ? ' lx-sortsent' : ''), 'data-id': card.id, 'data-bucket': card.bucket, onclick: () => {
-      if (chip.disabled) return; chips.querySelectorAll('.on').forEach(x => x.classList.remove('on')); chip.classList.add('on'); picked = { card, chip }; status.textContent = 'Now its group…'; } }, label(card, true));
+      if (chip.disabled) return; chips.querySelectorAll('.on').forEach(x => x.classList.remove('on')); chip.classList.add('on'); picked = { card, chip }; status.textContent = LT('lang.deep.nowGroup'); } }, label(card, true));
     chips.append(chip);
   }
   for (const b of it.buckets) {
     const list = h('div', { class: 'lx-sortlist' });
     const drop = () => {
-      if (!picked) { status.textContent = 'Tap a card first.'; return; }
+      if (!picked) { status.textContent = LT('lang.deep.tapFirst'); return; }
       const { card, chip } = picked;
       if (card.bucket === b.id) {
         if (!(card.lex in perLex)) perLex[card.lex] = true;
-        chip.remove(); list.append(h('div', { class: 'lx-sortin' }, label(card, true))); picked = null; left--; status.textContent = left ? `${left} to sort` : '';
+        chip.remove(); list.append(h('div', { class: 'lx-sortin' }, label(card, true))); picked = null; left--; status.textContent = left ? LT('lang.sort.left', { n: left }) : '';
         if (!left) { it.perLex = perLex; box.append(deepFeedback(it, !wrong)); done(!wrong); }
-      } else { perLex[card.lex] = false; wrong++; bin.classList.add('lx-shake'); setTimeout(() => bin.classList.remove('lx-shake'), 400); status.textContent = 'Not this one — try another group'; }
+      } else { perLex[card.lex] = false; wrong++; bin.classList.add('lx-shake'); setTimeout(() => bin.classList.remove('lx-shake'), 400); status.textContent = LT('lang.deep.notThis'); }
     };
     const bin = h('div', { class: 'lx-sortbin', 'data-group': b.id, role: 'button', tabindex: '0', onclick: drop, onkeydown: e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); drop(); } } },
       h('div', { class: 'lx-sorthead' }, b.lang ? word(b.lang, b.label, { sub: false }) : b.label), list);
@@ -1660,17 +2025,17 @@ function deepRun(holder, items, { again = null } = {}) {
     bar.firstChild.style.width = Math.round(i / items.length * 100) + '%'; stage.innerHTML = '';
     if (i >= items.length) {
       save(true);
-      stage.append(h('div', { class: 'lx-result lx-deepdone' }, h('h2', {}, `🏋️ ${right} of ${items.length} right`),
-        h('ul', { class: 'lx-list' }, ...Object.entries(byKind).map(([k, r]) => h('li', {}, `${DEEP_LABEL[k] || k}: ${r.c} / ${r.n}`))),
-        h('p', { class: 'tiny' }, 'Every answer counts as a review of its word.'), newWordsList(),
-        h('div', { class: 'row' }, again ? h('button', { class: 'btn primary', onclick: again }, '↻ Again') : null, h('button', { class: 'btn', onclick: () => history.length > 1 ? history.back() : go('#/') }, '← Back'))));
+      stage.append(h('div', { class: 'lx-result lx-deepdone' }, h('h2', {}, '🏋️ ' + LT('lang.deep.score', { right, n: items.length })),
+        h('ul', { class: 'lx-list' }, ...Object.entries(byKind).map(([k, r]) => h('li', {}, `${DEEP_LABEL[k] || k}: ${LNUM(r.c)} / ${LNUM(r.n)}`))),
+        h('p', { class: 'tiny' }, LT('lang.deep.eachReview')), newWordsList(),
+        h('div', { class: 'row' }, again ? h('button', { class: 'btn primary', onclick: again }, '↻ ' + LT('lang.drill.again')) : null, h('button', { class: 'btn', onclick: () => history.length > 1 ? history.back() : go('#/') }, arrowBack() + ' ' + LT('lang.card.back')))));
       return;
     }
     const it = items[i++];
     const el = exItem(it, ok => {
       N.deepRecord(UI.C, UI.L, it.lang, it, ok, day, it.perLex); save();
       if (ok) right++; const t = byKind[it.kind] = byKind[it.kind] || { c: 0, n: 0 }; t.n++; if (ok) t.c++;
-      const b = h('button', { class: 'btn primary lx-next' }, i < items.length ? 'Next →' : 'Finish'); b.onclick = next;
+      const b = h('button', { class: 'btn primary lx-next' }, i < items.length ? LT('lang.drill.next') + ' ' + arrowOn() : LT('lang.deep.finish')); b.onclick = next;
       stage.append(h('div', { class: 'row lx-nextrow' }, b)); setTimeout(() => b.focus(), 30);
     });
     Object.assign(el.dataset, { kind: it.kind, lang: it.lang, lex: it.lex });
@@ -1687,7 +2052,7 @@ function deepRun(holder, items, { again = null } = {}) {
 function whenProfiles(c, draw, v) {
   const ready = () => UI.profiles || Object.values(LX(c).lex).some(x => x.profile);
   if (ready()) return draw();
-  v.append(h('p', { class: 'lx-note lx-wait' }, '⏳ Loading the word profiles…'));
+  v.append(h('p', { class: 'lx-note lx-wait' }, '⏳ ' + LT('lang.deep.loading')));
   const hash = location.hash; let n = 0;
   const t = setInterval(() => { if (location.hash !== hash) return clearInterval(t); if (ready() || ++n > 50) { clearInterval(t); render(); } }, 200);
 }
@@ -1695,20 +2060,20 @@ const hasDepthData = x => !!(x.profile || x.root || x.compound || (x.contrasts |
 /** 🏋️ on the word card (the types its data allows). */
 function deepButton(c, lid) {
   const x = LX(c)?.lex[lid]; if (!x || !hasDepthData(x) || document.querySelector('.lx-session')) return null;
-  return h('button', { class: 'btn small lx-deepbtn', onclick: () => { document.querySelector('.lx-pop')?.remove(); go(`#/deep/${c}/${encodeURIComponent(lid)}`); } }, '🏋️ Practise this word');
+  return h('button', { class: 'btn small lx-deepbtn', onclick: () => { document.querySelector('.lx-pop')?.remove(); go(`#/deep/${c}/${encodeURIComponent(lid)}`); } }, '🏋️ ' + LT('lang.view.deep'));
 }
 /** 🏋️ deepen on a node or lesson page: when the learner has met some of its words in this language. */
 function deepenButton(nid, c) {
   const k = N.known(UI.C, UI.L, c), met = (LX(c).byNode[nid] || []).filter(id => MET_DEEP.includes(k.state[id]) && hasDepthData(LX(c).lex[id]));
-  return met.length ? h('button', { class: 'btn small lx-deepenbtn', onclick: () => go(`#/deepen/${encodeURIComponent(nid)}/${c}`) }, `🏋️ Deepen (${met.length} word${met.length === 1 ? '' : 's'})`) : null;
+  return met.length ? h('button', { class: 'btn small lx-deepenbtn', 'data-icon': 'gym', onclick: () => go(`#/deepen/${encodeURIComponent(nid)}/${c}`) }, '🏋️ ' + LT('lang.deep.deepenN', { n: met.length })) : null;
 }
 VIEWS.deep = (v, r) => {
   const c = r.arg, lid = r.arg2, x = UI.C.lang[c]?.lex[lid]; if (!x) return VIEWS.home(v);
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.length > 1 ? history.back() : go('#/w/' + c + '/' + encodeURIComponent(lid)) }, '← Back')),
-    h('h1', {}, '🏋️ ', word(c, x.lemma, { lex: x }), h('span', { class: 'tiny' }, ` · ${gloss(c, lid)} · ${info(c).flag} ${info(c).name}`)));
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.length > 1 ? history.back() : go('#/w/' + c + '/' + encodeURIComponent(lid)) }, arrowBack() + ' ' + LT('lang.card.back'))),
+    h('h1', {}, '🏋️ ', word(c, x.lemma, { lex: x }), h('span', { class: 'tiny' }, ` · ${gloss(c, lid)} · ${info(c).flag} ${info(c).label}`)));
   whenProfiles(c, () => {
     const types = N.deepTypes(UI.C, UI.L, c, lid);
-    if (!types.length) return v.append(h('p', { class: 'lx-note' }, 'Nothing to practise in depth for this word yet: its data allows none of the depth exercises (or they need words you have not met).'));
+    if (!types.length) return v.append(h('p', { class: 'lx-note' }, LT('lang.deep.noneForWord')));
     v.append(h('div', { class: 'lx-chips lx-deeptypes' }, ...types.map(t => h('span', { class: 'lx-badge ctx', 'data-type': t }, DEEP_LABEL[t] || t))));
     const run = () => { v.querySelector('.lx-deephold')?.remove(); const hold = h('div', { class: 'lx-deephold' }); v.append(hold); deepRun(hold, N.deepItems(UI.C, UI.L, c, [lid], { max: 10 }), { again: run }); };
     run();
@@ -1717,16 +2082,16 @@ VIEWS.deep = (v, r) => {
 VIEWS.deepen = (v, r) => {
   const nid = r.arg, n = UI.C.nodes[nid]; if (!n) return VIEWS.home(v);
   const c = r.arg2 && UI.C.lang[r.arg2] ? r.arg2 : UI.lang;
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go((n.kind === 'lesson' ? '#/lesson/' : '#/node/') + nid) }, '← ' + n.title)),
-    h('h1', {}, '🏋️ Deepen', h('span', { class: 'tiny' }, ` · ${n.title} · ${info(c).flag} ${info(c).name}`)),
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go((n.kind === 'lesson' ? '#/lesson/' : '#/node/') + nid) }, arrowBack() + ' ' + n.title)),
+    h('h1', {}, '🏋️ ' + LT('lang.view.deepen'), h('span', { class: 'tiny' }, ` · ${n.title} · ${info(c).flag} ${info(c).label}`)),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); go(`#/deepen/${encodeURIComponent(nid)}/${x}`); })));
   whenProfiles(c, () => {
     const k = N.known(UI.C, UI.L, c), ids = (LX(c).byNode[nid] || []).filter(id => MET_DEEP.includes(k.state[id]));
-    if (!ids.length) return v.append(h('p', { class: 'lx-note' }, `Meet some words of this node in ${info(c).name} first.`));
+    if (!ids.length) return v.append(h('p', { class: 'lx-note' }, LT('lang.deep.meetFirst', { lang: info(c).name })));
     const run = () => { v.querySelector('.lx-deephold')?.remove(); const hold = h('div', { class: 'lx-deephold' }); v.append(hold);
       const items = N.deepItems(UI.C, UI.L, c, shuffle(ids), { k, max: 12 });
-      if (!items.length) return hold.append(h('p', { class: 'lx-note' }, 'Nothing to deepen here yet.'));
-      hold.append(h('p', { class: 'tiny' }, `A mixed set over the ${ids.length} word${ids.length === 1 ? '' : 's'} you have met: `, ...uniq(items.map(it => it.kind)).map(t => h('span', { class: 'lx-badge ctx' }, DEEP_LABEL[t] || t))));
+      if (!items.length) return hold.append(h('p', { class: 'lx-note' }, LT('lang.deep.nothingHere')));
+      hold.append(h('p', { class: 'tiny' }, LT('lang.deep.mixedSet', { n: ids.length }) + ' ', ...uniq(items.map(it => it.kind)).map(t => h('span', { class: 'lx-badge ctx' }, DEEP_LABEL[t] || t))));
       deepRun(hold, items, { again: run }); };
     run();
   }, v);
@@ -1745,11 +2110,14 @@ function sessionDeep(plan, only) {
    on the home. Every answer comes from langcore (N.polyItems, N.bridges, N.compareFn): stored data only. */
 const RTL_CODES = ['ar', 'he', 'fa', 'ur', 'yi', 'ps', 'sd', 'ug', 'dv', 'ku-Arab'];
 const dirOf = code => UI.C.lang[code] ? (LX(code).language.dir || 'ltr') : RTL_CODES.includes(code) ? 'rtl' : 'ltr';
-const flagName = c => [info(c).flag, ' ', info(c).name];
+const flagName = c => [info(c).flag, ' ', info(c).label];
 /** A word of a language outside the course (the learner's), with its language and direction. */
 const otherWord = (code, text) => h('span', { class: 'lx-w lx-ow', lang: code, dir: dirOf(code) }, text);
-const BRIDGE_LABEL = { cognate: '🌉 related', loan: '🔁 loan', falseFriend: '⚠️ false friend' };
-const VIA_LABEL = { root: 'same root', etymology: 'etymology', source: 'same source', pitfall: 'noted' };
+const BRIDGE_SIGN = { cognate: '🌉', loan: '🔁', falseFriend: '⚠️' };
+const BRIDGE_LABEL = new Proxy({}, { get: (o, k) => typeof k === 'string' && BRIDGE_SIGN[k] ? BRIDGE_SIGN[k] + ' ' + LT('lang.poly.bridge.' + k) : undefined });   // lang.poly.bridge.<kind>
+const VIA_LABEL = new Proxy({}, { get: (o, k) => ['root', 'etymology', 'source', 'pitfall'].includes(k) ? LT('lang.poly.via.' + k) : undefined });   // lang.poly.via.<via>
+/** “A and B” (English as the course always wrote it: “A and B and C”), a conjunction list in the UI locale otherwise. */
+const LAND = items => window.NoemaI18n && NoemaI18n.locale !== 'en' ? NoemaI18n.fmt.list(items.map(String)) : items.join(' and ');   // i18n-ignore (English as before)
 
 /* ---------- today's languages (§9.6): chosen on the home among the active ones, for today only ---------- */
 function todayLangs() {
@@ -1761,24 +2129,27 @@ function todayLangs() {
 function todayPicker() {
   const act = activeLangs(); if (act.length < 2) return null;
   const cur = todayLangs();
-  return h('div', { class: 'row lx-today', role: 'group', 'aria-label': 'Languages of today’s session' }, h('span', { class: 'tiny' }, '📅 Today: '),
+  return h('div', { class: 'row lx-today', role: 'group', 'aria-label': LT('lang.poly.todayLabel') }, h('span', { class: 'tiny' }, '📅 ' + LT('lang.poly.today') + ' '),
     ...act.map(c => h('button', { class: 'chip lx-todaychip' + (cur.includes(c) ? ' on' : ''), 'data-lang': c, 'aria-pressed': cur.includes(c) ? 'true' : 'false',
-      title: cur.includes(c) ? `Leave ${info(c).name} out today` : `Take ${info(c).name} today too`, onclick: () => {
+      title: LT(cur.includes(c) ? 'lang.poly.leaveOut' : 'lang.poly.takeToo', { lang: info(c).name }), onclick: () => {
         const s = new Set(cur); if (s.has(c)) s.delete(c); else s.add(c); if (!s.size) return;
         UI.prefs.today = { day: today(), langs: act.filter(x => s.has(x)) }; save(); render();
       } }, ...flagName(c))),
-    cur.length < act.length ? h('span', { class: 'tiny' }, ' — tomorrow all of them again') : null);
+    cur.length < act.length ? h('span', { class: 'tiny' }, ' — ' + LT('lang.poly.tomorrowAll')) : null);
 }
 /** The home's polyglot part: today's languages, the compare lane and the polyglot drills. */
 function polyHome() {
   const box = h('div', { class: 'lx-polyhome' });
   box.append(todayPicker() || '');
-  if (activeLangs().length > 1) box.append(h('div', { class: 'row lx-polydrills' }, h('span', { class: 'tiny' }, '🌐 Across your languages: '),
-    h('button', { class: 'btn small', onclick: () => go('#/cmp') }, '⇄ Compare'),
-    ...POLY_DRILLS.map(([t, label]) => h('button', { class: 'btn ghost small', 'data-type': t, onclick: () => go('#/poly/' + t) }, label))));
+  if (activeLangs().length > 1) box.append(h('div', { class: 'row lx-polydrills' }, h('span', { class: 'tiny' }, '🌐 ' + LT('lang.poly.acrossLabel') + ' '),
+    h('button', { class: 'btn small', 'data-icon': 'globe', onclick: () => go('#/cmp') }, '⇄ ' + LT('lang.view.cmp')),
+    ...POLY_DRILLS().map(([t, label]) => h('button', { class: 'btn ghost small', 'data-type': t, 'data-icon': POLY_ICON[t] || 'globe', onclick: () => go('#/poly/' + t) }, label))));
   return box;
 }
-const POLY_DRILLS = [['which_language', '🔤 Which language?'], ['cognate_bridge', '🌉 Bridges'], ['parallel_translate', '🔀 Translate across'], ['parallel_align', '🧷 Align the words'], ['compare_rule', '⚖️ Which holds where?']];
+const POLY_SIGN = { which_language: '🔤', cognate_bridge: '🌉', parallel_translate: '🔀', parallel_align: '🧷', compare_rule: '⚖️' };
+const POLY_ICON = { parallel_translate: 'edit' };   // the frame's line icon of a polyglot drill (99z_frame.js data-icon; the others: globe)
+/** The polyglot drills: [type, sign + name] (lang.poly.drill.<type>). */
+const POLY_DRILLS = () => Object.keys(POLY_SIGN).map(t => [t, POLY_SIGN[t] + ' ' + LT('lang.poly.drill.' + t)]);
 
 /* ---------- widgets (it, done) → element (docs/LANGUAGES.md §6.6) ---------- */
 WIDGETS.which_language = (it, done) => {
@@ -1787,12 +2158,12 @@ WIDGETS.which_language = (it, done) => {
     : it.roman ? h('span', { class: 'lx-w lx-roman', lang: it.lang + '-Latn', dir: 'ltr' }, it.prompt) : word(it.lang, it.prompt, { sub: false });
   const holder = h('div', { class: 'lx-prompt lx-hidecol' }, shown);   // the colour of a language would give the answer away until it is given
   const opts = it.options.map(c => ({ label: h('span', { class: 'lx-langopt', 'data-lang': c }, ...flagName(c)), ok: c === it.answer }));
-  box.append(h('div', { class: 'lx-q' }, it.sentence ? 'Which of your languages is this sentence in?' : 'Which of your languages is this word from?'), holder,
+  box.append(h('div', { class: 'lx-q' }, LT(it.sentence ? 'lang.poly.whichSentence' : 'lang.poly.whichWord')), holder,
     options(opts, (o, b, wrap) => {
       b.classList.add(o.ok ? 'right' : 'wrong'); if (!o.ok) markOpts(wrap, i => opts[i].ok); holder.classList.remove('lx-hidecol');
       const lx = it.lex && LX(it.lang).lex[it.lex];
       box.append(h('div', { class: 'lx-fb ' + (o.ok ? 'ok' : 'bad') }, o.ok ? '✅ ' : '❌ ', ...flagName(it.answer), ': ', lx ? word(it.lang, lx.lemma, { lex: lx }) : null, ' — ', it.gloss,
-        it.pair ? h('div', { class: 'tiny' }, '⇄ It has a relative in another of your languages, asked with it: keep the two apart.') : null));
+        it.pair ? h('div', { class: 'tiny' }, '⇄ ' + LT('lang.poly.pairNote')) : null));
       done(!!o.ok);
     }));
   return box;
@@ -1802,7 +2173,7 @@ WIDGETS.cognate_bridge = (it, done) => {
   const box = h('div', { class: 'lx-ex lx-exbridge', 'data-kind': it.kind });
   if (it.kind === 'false_friend') {
     const opts = it.pairs.map((p, i) => ({ label: h('span', { class: 'lx-pair' }, info(p.a.lang).flag, ' ', lexWord(p.a.lang, p.a.lex), ' ⇄ ', info(p.b.lang).flag, ' ', lexWord(p.b.lang, p.b.lex)), ok: i === it.answer }));
-    box.append(h('div', { class: 'lx-q' }, 'Related look-alikes — which pair is a false friend (it does not mean the same)?'),
+    box.append(h('div', { class: 'lx-q' }, LT('lang.poly.falseFriendAsk')),
       options(opts, (o, b, wrap) => {
         b.classList.add(o.ok ? 'right' : 'wrong'); if (!o.ok) markOpts(wrap, i => opts[i].ok);
         box.append(h('div', { class: 'lx-fb ' + (o.ok ? 'ok' : 'bad') }, o.ok ? '✅ ' : '❌ ', wordsIn(it.lang, it.why || ''),
@@ -1812,9 +2183,9 @@ WIDGETS.cognate_bridge = (it, done) => {
     return box;
   }
   const prompt = it.kind === 'known'
-    ? h('div', { class: 'lx-prompt' }, h('span', { class: 'tiny' }, langName(it.other.code) + ' '), otherWord(it.other.code, it.other.word))
+    ? h('div', { class: 'lx-prompt' }, h('span', { class: 'tiny' }, capFirst(langName(it.other.code)) + ' '), otherWord(it.other.code, it.other.word))
     : h('div', { class: 'lx-prompt' }, info(it.from).flag, ' ', lexWord(it.from, it.lex, true), h('div', { class: 'tiny' }, gloss(it.from, it.lex)));
-  const q = it.kind === 'known' ? `A word of ${langName(it.other.code)}, one of your languages — which ${info(it.lang).name} word is linked to it by its origin?` : `Which ${info(it.lang).name} word is related to it?`;
+  const q = it.kind === 'known' ? LT('lang.poly.knownAsk', { other: langName(it.other.code), lang: info(it.lang).name }) : LT('lang.poly.relatedAsk', { lang: info(it.lang).name });
   const opts = it.options.map(id => ({ label: lexWord(it.lang, id), ok: id === it.answer }));
   box.append(h('div', { class: 'lx-q' }, q), prompt, options(opts, (o, b, wrap) => {
     b.classList.add(o.ok ? 'right' : 'wrong'); if (!o.ok) markOpts(wrap, i => opts[i].ok);
@@ -1833,16 +2204,16 @@ function tileBuilder(it, onDone) {
   const finish = ok => { over = true; slot.classList.add(ok ? 'right' : 'wrong'); [...pool.children].forEach(b => b.disabled = true); onDone(ok); };
   it.tiles.forEach((t, i) => pool.append(h('button', { class: 'lx-tile1', 'data-i': i, onclick: e => { if (over || e.currentTarget.disabled) return; built.push({ t, i }); e.currentTarget.disabled = true; draw(); if (built.length === it.size) finish(N.checkBuilt(UI.C, it.lang, it, built.map(b => b.t))); } }, t)));
   const undo = h('button', { class: 'btn small ghost', onclick: () => { if (over || !built.length) return; const b = built.pop(); pool.children[b.i].disabled = false; draw(); } }, '⌫');
-  const giveUp = h('button', { class: 'btn small ghost', onclick: () => { if (!over) finish(false); } }, 'Show me');
+  const giveUp = h('button', { class: 'btn small ghost', onclick: () => { if (!over) finish(false); } }, LT('lang.ex.showMe'));
   draw();
   return h('div', {}, slot, pool, h('div', { class: 'row' }, undo, giveUp));
 }
 WIDGETS.parallel_translate = (it, done) => {
   const box = h('div', { class: 'lx-ex lx-exparallel', 'data-kind': 'parallel' }), XF = LX(it.from);
   noteNew(it.from, it.unknownFrom); noteNew(it.lang, it.unknown);
-  box.append(h('div', { class: 'lx-q' }, ...flagName(it.from), ' → ', ...flagName(it.lang), ': say the same'),
+  box.append(h('div', { class: 'lx-q' }, LT('lang.poly.saySame', { from: flagName(it.from).join(''), to: flagName(it.lang).join('') })),
     h('div', { class: 'lx-prompt' }, sentenceView(it.from, XF.sentenceById[it.source], it.unknownFrom)),
-    h('details', { class: 'lx-hint' }, h('summary', { class: 'tiny' }, 'the meaning'), h('div', { class: 'lx-tr' }, it.gloss)));
+    h('details', { class: 'lx-hint' }, h('summary', { class: 'tiny' }, LT('lang.poly.theMeaning')), h('div', { class: 'lx-tr' }, it.gloss)));
   if ((it.unknown || []).length) box.append(h('div', { class: 'tiny lx-newwords' }, '🆕 ', ...it.unknown.flatMap((l, i) => [i ? ' · ' : '', h('button', { class: 'btn ghost small', onclick: () => wordPopup(it.lang, l) }, LX(it.lang).lex[l].lemma), ' = ' + gloss(it.lang, l)])));
   box.append(tileBuilder(it, ok => {
     box.append(h('div', { class: 'lx-fb ' + (ok ? 'ok' : 'bad') }, ok ? '✅ ' : '❌ ', sentenceView(it.lang, LX(it.lang).sentenceById[it.sentence], it.unknown), h('div', { class: 'tiny' }, it.gloss)));
@@ -1863,7 +2234,7 @@ WIDGETS.parallel_align = (it, done) => {
       const b = h('button', { class: 'lx-atok', lang: c, dir: X.language.dir || 'ltr', 'data-i': i, onclick: () => pick(c, i, b) }, tokText(c, t.t));
       btns[c][i] = b; return b;
     });
-    return h('div', { class: 'lx-aline', 'data-lang': c, lang: c, dir: X.language.dir || 'ltr' }, h('span', { class: 'lx-aflag', title: info(c).name }, info(c).flag),
+    return h('div', { class: 'lx-aline', 'data-lang': c, lang: c, dir: X.language.dir || 'ltr' }, h('span', { class: 'lx-aflag', title: info(c).label }, info(c).flag),
       ...parts.flatMap((p, i) => i && sp && !/^[.,!?;:،؟。，！？、)」]/.test(p.textContent) ? [' ', p] : [p]));
   });
   const show = () => {
@@ -1874,35 +2245,35 @@ WIDGETS.parallel_align = (it, done) => {
     const row = it.rows[r], pb = btns[pv][row.pivot]; pb.classList.add('lx-focus');
     need = Object.keys(row.hits); found = new Set();
     it.langs.forEach((c, i) => { if (c !== pv && !need.includes(c)) lines[i].classList.add('lx-skip'); });
-    status.textContent = `${r + 1} / ${it.rows.length} · Tap the word that means “${pb.textContent}” in ${need.map(c => info(c).name).join(' and ')}.`;
+    status.textContent = LT('lang.poly.alignStep', { i: r + 1, n: it.rows.length, word: pb.textContent, langs: LAND(need.map(c => info(c).name)) });
   };
   const pick = (c, i, b) => {
     if (over || r < 0 || r >= it.rows.length || c === pv || !need.includes(c) || found.has(c)) return;
     const row = it.rows[r];
     if (row.hits[c].includes(i)) { b.classList.add('right'); b.dataset.row = r + 1; found.add(c); if (found.size === need.length) { btns[pv][row.pivot].classList.add('right'); btns[pv][row.pivot].dataset.row = r + 1; setTimeout(show, 200); } }
-    else { mistakes++; b.classList.add('wrong'); setTimeout(() => b.classList.remove('wrong'), 600); status.textContent = `Not that one — “${btns[pv][row.pivot].textContent}” is ${row.gloss}.`; }
+    else { mistakes++; b.classList.add('wrong'); setTimeout(() => b.classList.remove('wrong'), 600); status.textContent = LT('lang.poly.alignWrong', { word: btns[pv][row.pivot].textContent, gloss: row.gloss }); }
   };
   const finish = () => {
     if (over) return; over = true; status.textContent = '';
     const ok = mistakes === 0;
-    box.append(h('div', { class: 'lx-fb ' + (ok ? 'ok' : 'bad') }, ok ? '✅ All matched' : `❌ ${mistakes} wrong tap${mistakes > 1 ? 's' : ''}`, h('div', { class: 'tiny' }, it.gloss),
+    box.append(h('div', { class: 'lx-fb ' + (ok ? 'ok' : 'bad') }, ok ? '✅ ' + LT('lang.poly.allMatched') : '❌ ' + LT('lang.poly.wrongTaps', { n: mistakes }), h('div', { class: 'tiny' }, it.gloss),
       h('ul', { class: 'lx-list tiny' }, ...it.rows.map(row => h('li', {}, h('b', {}, row.gloss), ': ', ...it.langs.flatMap(c => {
         const s = LX(c).sentenceById[it.sentences[c]], is = c === pv ? [row.pivot] : row.hits[c] || [];
         return is.length ? [info(c).flag, ' ', h('span', { class: 'lx-w', lang: c, dir: LX(c).language.dir || 'ltr' }, is.map(i => tokText(c, s.tokens[i].t)).join(' ')), ' '] : [];
     }))))));
     done(ok);
   };
-  const giveUp = h('button', { class: 'btn small ghost', onclick: () => { if (over) return; mistakes++; for (let j = Math.max(r, 0); j < it.rows.length; j++) for (const [c, is] of Object.entries(it.rows[j].hits)) is.forEach(i => btns[c][i].classList.add('right')); finish(); } }, 'Show me');
-  box.append(h('div', { class: 'lx-q' }, `The same meaning in ${it.langs.length} languages — match the words`), h('div', { class: 'lx-align' }, ...lines), status, h('div', { class: 'row' }, giveUp));
+  const giveUp = h('button', { class: 'btn small ghost', onclick: () => { if (over) return; mistakes++; for (let j = Math.max(r, 0); j < it.rows.length; j++) for (const [c, is] of Object.entries(it.rows[j].hits)) is.forEach(i => btns[c][i].classList.add('right')); finish(); } }, LT('lang.ex.showMe'));
+  box.append(h('div', { class: 'lx-q' }, LT('lang.poly.alignAsk', { n: it.langs.length })), h('div', { class: 'lx-align' }, ...lines), status, h('div', { class: 'row' }, giveUp));
   show();
   return box;
 };
 WIDGETS.compare_rule = (it, done) => {
   const box = h('div', { class: 'lx-ex lx-excompare', 'data-kind': it.kind }), picks = it.statements.map(() => new Set());
   let over = false;
-  const check = h('button', { class: 'btn primary small lx-check', disabled: true }, 'Check');
+  const check = h('button', { class: 'btn primary small lx-check', disabled: true }, LT('lang.ex.check'));
   const rows = it.statements.map((st, i) => {
-    const chips = it.langs.map(c => h('button', { class: 'chip lx-bucket', 'data-lang': c, 'aria-pressed': 'false', title: info(c).name, onclick: e => {
+    const chips = it.langs.map(c => h('button', { class: 'chip lx-bucket', 'data-lang': c, 'aria-pressed': 'false', title: info(c).label, onclick: e => {
       if (over) return; const set = picks[i], b = e.currentTarget;
       if (!it.multi) { set.clear(); b.parentNode.querySelectorAll('.lx-bucket').forEach(x => { x.classList.remove('on'); x.setAttribute('aria-pressed', 'false'); }); }
       if (set.has(c)) { set.delete(c); b.classList.remove('on'); b.setAttribute('aria-pressed', 'false'); } else { set.add(c); b.classList.add('on'); b.setAttribute('aria-pressed', 'true'); }
@@ -1915,12 +2286,12 @@ WIDGETS.compare_rule = (it, done) => {
     it.statements.forEach((st, i) => {
       const ok = st.holds.length === picks[i].size && st.holds.every(c => picks[i].has(c)); if (!ok) all = false;
       rows[i].classList.add(ok ? 'right' : 'wrong');
-      if (!ok) rows[i].append(h('div', { class: 'tiny' }, '→ ', ...st.holds.flatMap(c => [info(c).flag, ' ', info(c).name, ' '])));
+      if (!ok) rows[i].append(h('div', { class: 'tiny' }, '→ ', ...st.holds.flatMap(c => [info(c).flag, ' ', info(c).label, ' '])));
     });
     box.append(h('div', { class: 'lx-fb ' + (all ? 'ok' : 'bad') }, all ? '✅ ' : '❌ ', it.title, h('div', { class: 'tiny' }, wordsIn(it.lang, it.why || ''))));
     done(all);
   };
-  box.append(h('div', { class: 'lx-q' }, it.kind === 'whose' ? `${it.title} — whose page says this?` : `${it.title} — for which language does each statement hold? (one or more)`), ...rows, h('div', { class: 'row' }, check));
+  box.append(h('div', { class: 'lx-q' }, LT(it.kind === 'whose' ? 'lang.poly.whoseAsk' : 'lang.poly.holdsAsk', { title: it.title })), ...rows, h('div', { class: 'row' }, check));
   return box;
 };
 
@@ -1928,7 +2299,7 @@ WIDGETS.compare_rule = (it, done) => {
 function polyWordExtras(c, lid) {
   const bs = N.bridgesOf(UI.C, c, lid), kl = N.knownLinks(UI.C, c, lid, knowsL());
   if (!bs.length && !kl.length) return null;
-  return h('details', { class: 'lx-sec lx-bridges', open: true }, h('summary', {}, '🌐 Across your languages', h('span', { class: 'tiny' }, ' ' + (bs.length + kl.length))),
+  return h('details', { class: 'lx-sec lx-bridges', open: true }, h('summary', {}, '🌐 ' + LT('lang.frame.across'), h('span', { class: 'tiny' }, ' ' + LNUM(bs.length + kl.length))),
     h('ul', { class: 'lx-list' },
       ...bs.map(b => h('li', { class: b.kind === 'falseFriend' ? 'lx-ff' : null, 'data-kind': b.kind, 'data-lang': b.other.lang },
         h('span', { class: 'lx-badge ctx' }, BRIDGE_LABEL[b.kind]), ' ', info(b.other.lang).flag, ' ',
@@ -1936,7 +2307,7 @@ function polyWordExtras(c, lid) {
         ...b.via.map(x => h('span', { class: 'lx-badge reg' }, VIA_LABEL[x] || x)),
         b.note ? h('div', { class: 'tiny' }, wordsIn(c, b.note)) : null)),
       ...kl.map(x => h('li', { 'data-kind': 'known', 'data-for': x.code, class: x.kind === 'falseFriend' ? 'lx-ff' : null },
-        h('span', { class: 'lx-badge ctx' }, x.kind === 'falseFriend' ? BRIDGE_LABEL.falseFriend : x.kind === 'compare' ? '≈ compare' : '🔗 linked'), ' ', h('b', {}, langName(x.code)), ' ', otherWord(x.code, x.word),
+        h('span', { class: 'lx-badge ctx' }, x.kind === 'falseFriend' ? BRIDGE_LABEL.falseFriend : x.kind === 'compare' ? '≈ ' + LT('lang.poly.compareBadge') : '🔗 ' + LT('lang.poly.linked')), ' ', h('b', {}, capFirst(langName(x.code))), ' ', otherWord(x.code, x.word),
         h('div', { class: 'tiny' }, wordsIn(c, x.note))))));
 }
 /** The bridges among the words of one concept (under the flag card's ⇄ table) and the way to the compare lane. */
@@ -1949,22 +2320,22 @@ function polyConceptStrip(cid) {
       h('button', { class: 'btn ghost small', onclick: () => wordPopup(b.other.lang, b.other.lex) }, lexWord(b.other.lang, b.other.lex)), b.other.lang && !(LX(b.other.lang).lex[b.other.lex].senses || []).includes(cid) ? ' — ' + gloss(b.other.lang, b.other.lex) : ''));
   }
   return h('div', { class: 'lx-polystrip' }, rows.length ? h('ul', { class: 'lx-list' }, ...rows) : null,
-    h('button', { class: 'btn ghost small', onclick: () => go('#/cmp/c/' + encodeURIComponent(cid)) }, '⇄ In the compare lane'));
+    h('button', { class: 'btn ghost small', onclick: () => go('#/cmp/c/' + encodeURIComponent(cid)) }, '⇄ ' + LT('lang.poly.inLane')));
 }
 /** Under a function page: its typological values in every course language (the comparison strip), folded. */
 function polyFnStrip(fid) {
   const cf = N.compareFn(UI.C, fid, UI.C.languages); if (cf.langs.length < 2) return null;
-  return h('details', { class: 'lx-sec lx-fnstrip' }, h('summary', {}, '⇄ Side by side ', h('span', { class: 'tiny' }, cf.features.length + ' features')),
+  return h('details', { class: 'lx-sec lx-fnstrip' }, h('summary', {}, '⇄ ' + LT('lang.poly.sideBySide') + ' ', h('span', { class: 'tiny' }, LT('lang.poly.features', { n: cf.features.length }))),
     cf.features.length ? stripTable(cf) : null,
-    h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => go('#/cmp/fn/' + encodeURIComponent(fid)) }, '⇄ In the compare lane'),
-      h('button', { class: 'btn ghost small', onclick: () => go('#/poly/compare_rule/' + encodeURIComponent(fid)) }, '⚖️ Which holds where?')));
+    h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => go('#/cmp/fn/' + encodeURIComponent(fid)) }, '⇄ ' + LT('lang.poly.inLane')),
+      h('button', { class: 'btn ghost small', onclick: () => go('#/poly/compare_rule/' + encodeURIComponent(fid)) }, '⚖️ ' + LT('lang.poly.drill.compare_rule'))));
 }
 function stripTable(cf) {
   return h('div', { class: 'lx-compare lx-strip' }, h('table', {}, h('thead', {}, h('tr', {}, h('th', {}, ''), ...cf.langs.map(c => h('th', { 'data-lang': c }, ...flagName(c))))),
-    h('tbody', {}, h('tr', {}, h('th', {}, 'status'), ...cf.rows.map(r => h('td', {}, r.status === 'realized' ? '✓ its own form' : STATUS_LABEL[r.status] || r.status))),
+    h('tbody', {}, h('tr', {}, h('th', {}, LT('lang.poly.status')), ...cf.rows.map(r => h('td', {}, r.status === 'realized' ? '✓ ' + LT('lang.poly.ownForm') : STATUS_LABEL[r.status] || r.status))),
       ...cf.features.map(f => {
         const vals = cf.langs.map(c => f.values[c]?.value || null), differ = new Set(vals.filter(Boolean)).size > 1;
-        return h('tr', { class: differ ? 'lx-differs' : null }, h('th', {}, f.title), ...cf.langs.map(c => h('td', { title: f.values[c]?.from === 'profile' ? 'from the language’s profile' : '' }, f.values[c] ? f.values[c].title : h('i', { class: 'tiny' }, 'unknown'))));
+        return h('tr', { class: differ ? 'lx-differs' : null }, h('th', {}, f.title), ...cf.langs.map(c => h('td', { title: f.values[c]?.from === 'profile' ? LT('lang.poly.fromProfile') : '' }, f.values[c] ? f.values[c].title : h('i', { class: 'tiny' }, LT('lang.poly.unknown')))));
       }))));
 }
 
@@ -1972,39 +2343,39 @@ function stripTable(cf) {
 const cmpLangs = () => { const act = activeLangs(), p = (UI.prefs.cmpLangs || []).filter(c => act.includes(c)); return p.length >= 2 ? p : act; };
 function cmpLangPicker(redraw) {
   const act = activeLangs(), cur = cmpLangs();
-  return h('div', { class: 'row lx-cmplangs', role: 'group', 'aria-label': 'Languages to compare' }, ...act.map(c => h('button', { class: 'chip lx-todaychip' + (cur.includes(c) ? ' on' : ''), 'data-lang': c, 'aria-pressed': cur.includes(c) ? 'true' : 'false', onclick: () => {
+  return h('div', { class: 'row lx-cmplangs', role: 'group', 'aria-label': LT('lang.poly.cmpLangs') }, ...act.map(c => h('button', { class: 'chip lx-todaychip' + (cur.includes(c) ? ' on' : ''), 'data-lang': c, 'aria-pressed': cur.includes(c) ? 'true' : 'false', onclick: () => {
     const s = new Set(cur); if (s.has(c)) s.delete(c); else s.add(c); if (s.size < 2) return; UI.prefs.cmpLangs = act.filter(x => s.has(x)); save(); redraw();
   } }, ...flagName(c))));
 }
 const fnOrder = () => { const at = {}; UI.C.order.forEach((nid, i) => { const f = UI.C.nodes[nid].functions || []; for (const x of (Array.isArray(f) ? f : Object.values(f).flat())) if (!(x in at)) at[x] = i; }); return Object.keys(UI.C.functions).filter(f => f !== 'fn.overview').sort((a, b) => (at[a] ?? 1e9) - (at[b] ?? 1e9)); };
 const STATUS_MARK = { realized: '✓', periphrastic: '≈', absent: '—' };
 VIEWS.cmp = (v, r) => {
-  const back = h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => r.arg ? go('#/cmp') : go('#/') }, r.arg ? '← Compare' : '← Map'));
+  const back = h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => r.arg ? go('#/cmp') : go('#/') }, arrowBack() + ' ' + LT(r.arg ? 'lang.view.cmp' : 'lang.card.map')));
   v.append(back);
-  if (activeLangs().length < 2) return v.append(h('h1', {}, '⇄ Compare'), h('p', { class: 'lx-note' }, 'Comparing needs two languages: choose them in ⚙️ Settings.'));
+  if (activeLangs().length < 2) return v.append(h('h1', {}, '⇄ ' + LT('lang.view.cmp')), h('p', { class: 'lx-note' }, LT('lang.poly.needsTwo')));
   const langs = cmpLangs(), redraw = () => render();
   if (r.arg === 'fn' && UI.C.functions[r.arg2]) return cmpFn(v, r.arg2, langs, redraw);
   if (r.arg === 'frame' && UI.C.frames[r.arg2]) return cmpFrame(v, r.arg2, langs, redraw);
   if (r.arg === 'c' && UI.C.concepts[r.arg2]) return cmpConcept(v, r.arg2);
-  v.append(h('h1', {}, '⇄ Compare your languages'), cmpLangPicker(redraw),
-    h('div', { class: 'row lx-polydrills' }, h('span', { class: 'tiny' }, '🏋️ '), ...POLY_DRILLS.map(([t, label]) => h('button', { class: 'btn ghost small', 'data-type': t, onclick: () => go('#/poly/' + t) }, label))));
+  v.append(h('h1', {}, '⇄ ' + LT('lang.poly.cmpTitle')), cmpLangPicker(redraw),
+    h('div', { class: 'row lx-polydrills' }, h('span', { class: 'tiny' }, '🏋️ '), ...POLY_DRILLS().map(([t, label]) => h('button', { class: 'btn ghost small', 'data-type': t, 'data-icon': POLY_ICON[t] || 'globe', onclick: () => go('#/poly/' + t) }, label))));
   // grammar side by side
   const fns = fnOrder().filter(f => langs.filter(c => LX(c).grammar[f]).length >= 2);
-  v.append(h('h2', { class: 'lx-h2' }, '📖 Grammar side by side ', h('span', { class: 'tiny' }, fns.length)),
+  v.append(h('h2', { class: 'lx-h2' }, '📖 ' + LT('lang.poly.grammarSide') + ' ', h('span', { class: 'tiny' }, LNUM(fns.length))),
     h('div', { class: 'lx-cmplist' }, ...fns.map(f => h('button', { class: 'lx-cmprow', 'data-fn': f, onclick: () => go('#/cmp/fn/' + encodeURIComponent(f)) }, h('span', {}, UI.C.functions[f].title),
-      h('span', { class: 'lx-cmpst' }, ...langs.map(c => { const g = LX(c).grammar[f]; return h('span', { class: 'lx-badge', 'data-lang': c, title: `${info(c).name}: ${g ? g.status : 'not written yet'}` }, info(c).flag, ' ', g ? STATUS_MARK[g.status] || '?' : '⏳'); }))))));
+      h('span', { class: 'lx-cmpst' }, ...langs.map(c => { const g = LX(c).grammar[f]; return h('span', { class: 'lx-badge', 'data-lang': c, title: `${info(c).label}: ${g ? LT('lang.poly.st.' + (['realized', 'periphrastic', 'absent'].includes(g.status) ? g.status : 'other'), { status: g.status }) : LT('lang.state.unprepared')}` }, info(c).flag, ' ', g ? STATUS_MARK[g.status] || '?' : '⏳'); }))))));
   // frames: the same meaning in every language
   const groups = N.parallelGroups(UI.C), byFrame = {};
   for (const G of groups) if (langs.filter(c => G.by[c]).length >= 2) byFrame[G.frame] = (byFrame[G.frame] || 0) + 1;
   const frames = Object.keys(byFrame).sort((a, b) => byFrame[b] - byFrame[a]);
-  v.append(h('h2', { class: 'lx-h2' }, '🧩 The same meaning in every language ', h('span', { class: 'tiny' }, frames.length + ' frames')),
-    h('div', { class: 'lx-cmplist' }, ...frames.map(f => h('button', { class: 'lx-cmprow', 'data-frame': f, onclick: () => go('#/cmp/frame/' + encodeURIComponent(f)) }, h('span', {}, UI.C.frames[f]?.meaning || f), h('span', { class: 'tiny' }, byFrame[f] + ' sentences')))));
+  v.append(h('h2', { class: 'lx-h2' }, '🧩 ' + LT('lang.poly.sameMeaning') + ' ', h('span', { class: 'tiny' }, LT('lang.poly.frames', { n: frames.length }))),
+    h('div', { class: 'lx-cmplist' }, ...frames.map(f => h('button', { class: 'lx-cmprow', 'data-frame': f, onclick: () => go('#/cmp/frame/' + encodeURIComponent(f)) }, h('span', {}, UI.C.frames[f]?.meaning || f), h('span', { class: 'tiny' }, LT('lang.poly.sentences', { n: byFrame[f] }))))));
   // bridges
   const B = N.bridges(UI.C).list.filter(b => langs.includes(b.a.lang) && langs.includes(b.b.lang));
   const kinds = ['falseFriend', 'loan', 'cognate'];
-  v.append(h('h2', { class: 'lx-h2' }, '🌉 Bridges between them ', h('span', { class: 'tiny' }, B.length)),
+  v.append(h('h2', { class: 'lx-h2' }, '🌉 ' + LT('lang.poly.bridgesTitle') + ' ', h('span', { class: 'tiny' }, LNUM(B.length))),
     ...kinds.map(kd => { const list = B.filter(b => b.kind === kd); if (!list.length) return null;
-      return h('details', { class: 'lx-sec', open: kd === 'falseFriend' ? true : null, 'data-kind': kd }, h('summary', {}, BRIDGE_LABEL[kd], h('span', { class: 'tiny' }, ' ' + list.length)),
+      return h('details', { class: 'lx-sec', open: kd === 'falseFriend' ? true : null, 'data-kind': kd }, h('summary', {}, BRIDGE_LABEL[kd], h('span', { class: 'tiny' }, ' ' + LNUM(list.length))),
         h('ul', { class: 'lx-list lx-bridgelist' }, ...list.slice(0, 300).map(b => h('li', {}, ...[b.a, b.b].flatMap((w, i) => [i ? ' ⇄ ' : '', info(w.lang).flag, ' ', h('button', { class: 'btn ghost small', onclick: () => wordPopup(w.lang, w.lex) }, lexWord(w.lang, w.lex)), h('span', { class: 'tiny' }, ' ' + gloss(w.lang, w.lex))]),
           ' ', ...b.via.map(x => h('span', { class: 'lx-badge reg' }, VIA_LABEL[x] || x))))));
     }));
@@ -2026,35 +2397,35 @@ function cmpFn(v, fid, langs, redraw) {
     const un = s.req.filter(l => !kn[c].has(l)); noteNew(c, un);
     return h('div', {}, sentenceView(c, s, un), id ? null : h('div', { class: 'tiny' }, s.gloss));
   };
-  v.append(best && bestN >= 2 ? h('p', { class: 'tiny' }, 'The same sentence in each: ', h('b', {}, best.gloss)) : null,
+  v.append(best && bestN >= 2 ? h('p', { class: 'tiny' }, LT('lang.poly.sameSentence') + ' ', h('b', {}, best.gloss)) : null,
     h('div', { class: 'lx-compare lx-cmpfn' }, h('table', {}, h('tbody', {}, ...cf.rows.map(r => h('tr', { 'data-lang': r.lang },
       h('th', {}, h('button', { class: 'btn ghost small', onclick: () => go(`#/fn/${encodeURIComponent(fid)}/${r.lang}`) }, ...flagName(r.lang))),
       h('td', {}, r.status !== 'realized' ? h('span', { class: 'lx-badge reg' }, STATUS_LABEL[r.status]) : null, ' ', wordsIn(r.lang, r.first), h('div', { class: 'lx-cmpex' }, exOf(r.lang)))))))),
-    langs.filter(c => !cf.langs.includes(c)).length ? h('p', { class: 'tiny' }, '⏳ Not written yet in ', langs.filter(c => !cf.langs.includes(c)).map(c => info(c).name).join(', ')) : null);
-  if (cf.features.length) v.append(h('h2', { class: 'lx-h2' }, '📊 The comparison strip'), h('p', { class: 'tiny' }, 'The values of the shared typology (rows that differ are marked); a value not tagged on the page comes from the language’s profile.'), stripTable(cf));
-  if (cf.seeAlso.length) v.append(h('h2', { class: 'lx-h2' }, '🔗 How they relate'), h('ul', { class: 'lx-list' }, ...cf.seeAlso.map(x => h('li', {}, info(x.from).flag, ' → ', info(x.lang).flag, ' ',
+    langs.filter(c => !cf.langs.includes(c)).length ? h('p', { class: 'tiny' }, '⏳ ' + LT('lang.poly.notWrittenIn', { langs: LLIST(langs.filter(c => !cf.langs.includes(c)).map(c => info(c).name)) })) : null);
+  if (cf.features.length) v.append(h('h2', { class: 'lx-h2' }, '📊 ' + LT('lang.poly.strip')), h('p', { class: 'tiny' }, LT('lang.poly.stripHelp')), stripTable(cf));
+  if (cf.seeAlso.length) v.append(h('h2', { class: 'lx-h2' }, '🔗 ' + LT('lang.poly.relate')), h('ul', { class: 'lx-list' }, ...cf.seeAlso.map(x => h('li', {}, info(x.from).flag, ' → ', info(x.lang).flag, ' ',
     x.fn !== fid ? h('button', { class: 'btn ghost small', onclick: () => go(`#/fn/${encodeURIComponent(x.fn)}/${x.lang}`) }, UI.C.functions[x.fn]?.title || x.fn) : null, ' ', wordsIn(x.lang, x.note)))));
-  v.append(h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => go('#/poly/compare_rule/' + encodeURIComponent(fid)) }, '⚖️ Which holds where?')), newWordsList('🆕 Words in these sentences you have not learned yet'));
+  v.append(h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => go('#/poly/compare_rule/' + encodeURIComponent(fid)) }, '⚖️ ' + LT('lang.poly.drill.compare_rule'))), newWordsList('🆕 ' + LT('lang.poly.newInSentences')));
 }
 function cmpFrame(v, fid, langs, redraw) {
   const fr = UI.C.frames[fid], kn = Object.fromEntries(langs.map(c => [c, N.known(UI.C, UI.L, c).R]));
   const groups = N.parallelGroups(UI.C).filter(G => G.frame === fid && langs.filter(c => G.by[c]).length >= 2);
   v.append(h('h1', {}, '🧩 ', fr.meaning || fid), cmpLangPicker(redraw),
-    h('div', { class: 'row' }, h('button', { class: 'btn primary small', onclick: () => go('#/poly/parallel_align/' + encodeURIComponent(fid)) }, '🧷 Align the words'), h('button', { class: 'btn small', onclick: () => go('#/poly/parallel_translate/' + encodeURIComponent(fid)) }, '🔀 Translate across')),
-    h('p', { class: 'tiny' }, `${groups.length} meanings said in at least two of your languages.`));
+    h('div', { class: 'row' }, h('button', { class: 'btn primary small', onclick: () => go('#/poly/parallel_align/' + encodeURIComponent(fid)) }, '🧷 ' + LT('lang.poly.drill.parallel_align')), h('button', { class: 'btn small', onclick: () => go('#/poly/parallel_translate/' + encodeURIComponent(fid)) }, '🔀 ' + LT('lang.poly.drill.parallel_translate'))),
+    h('p', { class: 'tiny' }, LT('lang.poly.meaningsCount', { n: groups.length })));
   for (const G of groups.slice(0, 40)) v.append(h('div', { class: 'lx-card lx-pgroup' }, h('div', { class: 'lx-tr' }, G.gloss),
     ...langs.filter(c => G.by[c]).map(c => { const s = LX(c).sentenceById[G.by[c][0].id], un = s.req.filter(l => !kn[c].has(l)); noteNew(c, un); return h('div', { class: 'lx-prow', 'data-lang': c }, h('span', { class: 'lx-aflag' }, info(c).flag), sentenceView(c, s, un)); })));
-  v.append(newWordsList('🆕 Words in these sentences you have not learned yet'));
+  v.append(newWordsList('🆕 ' + LT('lang.poly.newInSentences')));
 }
 function cmpConcept(v, cid) {
   const con = UI.C.concepts[cid];
-  v.append(h('div', { class: 'lx-cardhead' }, conceptPic(cid, 'lx-bigemoji'), h('div', {}, h('h1', {}, '⇄ ', con.gloss), h('button', { class: 'btn ghost small', onclick: () => go('#/c/' + encodeURIComponent(cid)) }, '→ the flag card'))),
+  v.append(h('div', { class: 'lx-cardhead' }, conceptPic(cid, 'lx-bigemoji'), h('div', {}, h('h1', {}, '⇄ ', con.gloss), h('button', { class: 'btn ghost small', onclick: () => go('#/c/' + encodeURIComponent(cid)) }, '→ ' + LT('lang.poly.flagCard')))),
     compareTable(cid), polyConceptStrip(cid));
 }
 
 /* ---------- 🏋️ polyglot drills (#/poly/<type>/<function or frame>) ---------- */
 VIEWS.poly = (v, r) => {
-  const type = r.arg, langs = cmpLangs(), label = (POLY_DRILLS.find(x => x[0] === type) || [type, type])[1];
+  const type = r.arg, langs = cmpLangs(), label = (POLY_DRILLS().find(x => x[0] === type) || [type, type])[1];
   if (!N.POLY_TYPES.includes(type)) return VIEWS.cmp(v, { name: 'cmp' });
   const k = Object.fromEntries(langs.map(c => [c, N.known(UI.C, UI.L, c)]));
   const opts = { langs, k, knows: knowsL(), max: 8 };
@@ -2062,8 +2433,8 @@ VIEWS.poly = (v, r) => {
   if (r.arg2 && UI.C.frames[r.arg2]) opts.frame = r.arg2;
   const items = langs.length >= 2 || type === 'cognate_bridge' ? N.polyItems(UI.C, UI.L, type, opts) : [];
   if (!items.length) {
-    v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/cmp') }, '← Compare')), h('h1', {}, label),
-      h('p', { class: 'lx-note lx-polyempty' }, langs.length < 2 ? 'This needs two languages: choose them in ⚙️ Settings.' : 'Nothing to ask yet: learn some words in at least two of your languages first (the items use only words you have met).'));
+    v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/cmp') }, arrowBack() + ' ' + LT('lang.view.cmp'))), h('h1', {}, label),
+      h('p', { class: 'lx-note lx-polyempty' }, LT(langs.length < 2 ? 'lang.poly.needsTwoDrill' : 'lang.poly.nothingYet')));
     return;
   }
   runPoly(v, items, { title: label + (opts.fn ? ' · ' + UI.C.functions[opts.fn].title : opts.frame ? ' · ' + (UI.C.frames[opts.frame].meaning || opts.frame) : ''), back: opts.fn ? '#/cmp/fn/' + encodeURIComponent(opts.fn) : opts.frame ? '#/cmp/frame/' + encodeURIComponent(opts.frame) : '#/cmp' });
@@ -2073,7 +2444,7 @@ function runPoly(v, items, { title, back }) {
   metNew.clear();
   const bar = h('div', { class: 'lx-progress' }, h('i')), stage = h('div', { class: 'lx-stage' });
   v.classList.add('lx-session', 'lx-polyrun');
-  v.append(h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => { save(true); go(back); } }, '✕ Stop'), h('b', { class: 'tiny' }, title), bar), stage);
+  v.append(h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => { save(true); go(back); } }, '✕ ' + LT('lang.sess.stop')), h('b', { class: 'tiny' }, title), bar), stage);
   let i = 0, right = 0; const day = today();
   const next = () => {
     bar.firstChild.style.width = Math.round(i / items.length * 100) + '%';
@@ -2083,15 +2454,15 @@ function runPoly(v, items, { title, back }) {
       if (ok) right++;
       if (it.fn && LX(it.lang)?.grammar[it.fn]) N.practiceFunction(UI.C, UI.L, it.lang, it.fn, ok ? 1 : 0, 1, day);
       save();
-      const b = h('button', { class: 'btn primary lx-next' }, 'Next →'); b.onclick = next; stage.append(h('div', { class: 'row lx-nextrow' }, b)); setTimeout(() => b.focus(), 30);
+      const b = h('button', { class: 'btn primary lx-next' }, LT('lang.drill.next') + ' ' + arrowOn()); b.onclick = next; stage.append(h('div', { class: 'row lx-nextrow' }, b)); setTimeout(() => b.focus(), 30);
     });
     Object.assign(ex.dataset, { kind: it.kind, lang: it.lang, type: it.type });
     stage.append(h('div', { class: 'tiny lx-which' }, (it.langs || it.options || [it.from, it.lang]).filter(Boolean).filter((c, j, a) => UI.C.lang[c] && a.indexOf(c) === j).map(c => info(c).flag).join(' ')), ex);
   };
   const finish = () => {
     save(true); bar.firstChild.style.width = '100%'; stage.innerHTML = '';
-    stage.append(h('div', { class: 'lx-result lx-polydone' }, h('h2', {}, `✅ ${right} of ${items.length} right`), newWordsList(),
-      h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => render() }, '↻ Again'), h('button', { class: 'btn', onclick: () => go(back) }, 'Back'))));
+    stage.append(h('div', { class: 'lx-result lx-polydone' }, h('h2', {}, '✅ ' + LT('lang.deep.score', { right, n: items.length })), newWordsList(),
+      h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => render() }, '↻ ' + LT('lang.drill.again')), h('button', { class: 'btn', onclick: () => go(back) }, LT('lang.card.back')))));
   };
   document.onkeydown = e => {
     if (!$('.lx-polyrun')) { document.onkeydown = null; return; }
@@ -2113,19 +2484,18 @@ window.NoemaLangUI.poly = { runSession, runPoly, todayLangs, polyWordExtras, cmp
 /* ---------- the AI: availability, the key, the label ---------- */
 const aiVendor = () => { try { return window.NoemaLLM?.pick?.(UI.acc) || null; } catch (e) { return null; } };
 const chatLangOf = () => UI.prefs.chatLang || UI.C.explainLang;
-const aiBadge = (txt = '🤖 AI-judged') => h('span', { class: 'lx-badge lx-ai', title: 'Judged by an AI model with your own key — the course’s stored answers stay the reference' }, txt);
+const aiBadge = (txt = '🤖 ' + LT('lang.prod.aiJudged')) => h('span', { class: 'lx-badge lx-ai', title: LT('lang.prod.aiJudgedTitle') }, txt);
 /** How to add a key — shown wherever an AI button cannot work yet. The Gemini key is stored on this device only. */
 function keyHelp(onSaved) {
-  const inp = h('input', { class: 'noema-input lx-keyin', type: 'password', placeholder: 'Gemini API key (AIza…)', autocomplete: 'off', 'aria-label': 'Gemini API key' });
+  const inp = h('input', { class: 'noema-input lx-keyin', type: 'password', placeholder: LT('lang.prod.keyPlaceholder'), autocomplete: 'off', 'aria-label': LT('lang.prod.keyLabel') });
   const box = h('div', { class: 'lx-callout k-tip lx-keyhelp' },
-    h('b', {}, '🔑 The AI needs your own key. '),
-    'Get a free Gemini key at ', h('a', { href: 'https://aistudio.google.com/apikey', target: '_blank', rel: 'noopener' }, 'aistudio.google.com/apikey'),
-    ' and paste it here — it stays on this device only (never synced, never in a backup). A Claude API key works too: add it in the app’s ⚙️ Settings → Claude of any subject.',
+    h('b', {}, '🔑 ' + LT('lang.prod.keyNeeded') + ' '),
+    ...LTE('lang.prod.keyHow', { link: h('a', { href: 'https://aistudio.google.com/apikey', target: '_blank', rel: 'noopener' }, 'aistudio.google.com/apikey') }),   // i18n-ignore (a URL)
     h('div', { class: 'row' }, inp, h('button', { class: 'btn small primary', onclick: () => {
       const v = inp.value.trim(); if (!v) return inp.focus();
       try { window.Noema?.geminiKey ? Noema.geminiKey.set(UI.acc, v) : localStorage.setItem('noema-device:geminiKey:' + UI.acc, v); } catch (e) { }
-      box.replaceWith(h('div', { class: 'tiny lx-keyok' }, '✅ Key saved on this device.')); onSaved?.();
-    } }, 'Save the key')));
+      box.replaceWith(h('div', { class: 'tiny lx-keyok' }, '✅ ' + LT('lang.prod.keySaved'))); onSaved?.();
+    } }, LT('lang.prod.keySave'))));
   return box;
 }
 async function aiJSON(t, extra = {}) {
@@ -2138,47 +2508,47 @@ function checkedText(c, text, r) {
   for (const k of r.tokens) {
     if (k.p) { parts.push({ t: k.t, el: document.createTextNode(k.t) }); continue; }
     const w = r.words[wi++];   // checkText lists the words in the order of the tokens
-    if (!w || !w.inCourse) { parts.push({ t: k.t, el: h('span', { class: 'lx-w lx-notin', lang: c, title: 'not in the course (check it in a dictionary)' }, k.t) }); continue; }
+    if (!w || !w.inCourse) { parts.push({ t: k.t, el: h('span', { class: 'lx-w lx-notin', lang: c, title: LT('lang.prod.notInCourseTitle') }, k.t) }); continue; }
     parts.push({ t: k.t, el: h('span', { class: 'lx-w lx-tok' + (w.known ? '' : ' lx-new'), lang: c, tabindex: '0', title: (w.known ? '' : '🆕 ') + (w.l ? gloss(c, w.l) : ''), onclick: e => { e.stopPropagation(); if (w.l) wordPopup(c, w.l); } }, k.t) });
   }
   return h('span', { class: 'lx-sent', lang: c, dir: X.language.dir || 'ltr' }, ...parts.flatMap((p, i) => i && sp && !/^[.,!?;:،؟。，！？、)」]/.test(p.t) && !/^[(«„“]$/.test(parts[i - 1].t) ? [' ', p.el] : [p.el]));
 }
 /** Under an AI text: the course words it uses that are not learned yet (glossed) and the words that are not in the course. */
 function wordsNote(c, r) {
-  if (!r.unlearned.length && !r.unknown.length) return h('div', { class: 'tiny lx-wordsok' }, '✓ Only words you know.');
+  if (!r.unlearned.length && !r.unknown.length) return h('div', { class: 'tiny lx-wordsok' }, '✓ ' + LT('lang.prod.onlyKnown'));
   noteNew(c, r.unlearned);
   return h('div', { class: 'tiny lx-wordsnote' },
     r.unlearned.length ? h('div', {}, '🆕 ', ...r.unlearned.flatMap((l, i) => [i ? ' · ' : '', h('button', { class: 'btn ghost small', onclick: () => wordPopup(c, l) }, LX(c).lex[l].lemma), ' = ' + gloss(c, l)])) : null,
-    r.unknown.length ? h('div', {}, '❓ Not in the course: ', uniq(r.unknown).join(' · ')) : null);
+    r.unknown.length ? h('div', {}, '❓ ' + LT('lang.prod.notInCourse') + ' ', uniq(r.unknown).join(' · ')) : null);
 }
 
 /* ---------- widgets (WIDGETS[type], see 45_grammar.js) ---------- */
 function textInput(c, { multiline = false, placeholder = '' } = {}) {
   const X = LX(c);
   return h(multiline ? 'textarea' : 'input', { class: 'noema-input lx-typed' + (multiline ? ' lx-compose' : ''), lang: c, dir: X.language.dir || 'ltr', rows: multiline ? 5 : null, placeholder,
-    autocapitalize: 'off', autocomplete: 'off', spellcheck: 'false', 'aria-label': `your answer in ${info(c).name}` });
+    autocapitalize: 'off', autocomplete: 'off', spellcheck: 'false', 'aria-label': LT('lang.prod.answerIn', { lang: info(c).name }) });
 }
 /** The AI's verdict on an open answer, labelled; the course's own answer stays shown as the reference (never replaced). */
 function verdictView(c, d) {
   const r = d.corrected ? N.checkText(UI.C, c, d.corrected, N.known(UI.C, UI.L, c).R) : null;
   return h('div', { class: 'lx-aiv v-' + d.verdict, 'data-verdict': d.verdict },
-    h('div', { class: 'row' }, aiBadge(), h('b', {}, d.verdict === 'correct' ? '✅ Correct' : d.verdict === 'acceptable' ? '🟡 Acceptable' : '❌ Not right yet')),
+    h('div', { class: 'row' }, aiBadge(), h('b', {}, d.verdict === 'correct' ? '✅ ' + LT('lang.prod.correct') : d.verdict === 'acceptable' ? '🟡 ' + LT('lang.prod.acceptable') : '❌ ' + LT('lang.prod.notRight'))),
     d.feedback ? h('p', {}, wordsIn(c, d.feedback)) : null,
     (d.mistakes || []).length ? h('ul', { class: 'lx-list' }, ...d.mistakes.map(m => h('li', {}, h('del', {}, word(c, m.wrong, { sub: false })), ' → ', h('ins', {}, word(c, m.right, { sub: false })), m.why ? ' — ' + m.why : ''))) : null,
-    r && d.corrected ? h('div', { class: 'lx-aicorr' }, h('span', { class: 'tiny' }, 'AI correction (not the answer key): '), checkedText(c, d.corrected, r), wordsNote(c, r)) : null);
+    r && d.corrected ? h('div', { class: 'lx-aicorr' }, h('span', { class: 'tiny' }, LT('lang.prod.aiCorrNotKey') + ' '), checkedText(c, d.corrected, r), wordsNote(c, r)) : null);
 }
 /** Judge an open answer: AI when the learner has a key, otherwise say how to get one. → Promise<bool> */
 async function judgeOpen(box, c, task) {
-  if (!aiVendor()) { box.append(h('div', { class: 'lx-fb bad' }, '🤷 This answer is not one the course has stored. An AI could judge it: ', keyHelp())); return false; }
-  const wait = h('div', { class: 'tiny lx-aiwait' }, '🤖 asking the AI…'); box.append(wait);
+  if (!aiVendor()) { box.append(h('div', { class: 'lx-fb bad' }, '🤷 ' + LT('lang.prod.notStored') + ' ', keyHelp())); return false; }
+  const wait = h('div', { class: 'tiny lx-aiwait' }, '🤖 ' + LT('lang.prod.asking')); box.append(wait);
   try {
-    const t = N.aiTask(UI.C, UI.L, c, task, { chatLang: chatLangOf() });
+    const t = N.aiTask(UI.C, UI.L, c, task, { chatLang: chatLangOf(), native: nativeL() });
     const r = await aiJSON(t); wait.remove();
     box.append(verdictView(c, r.data));
     return r.data.verdict !== 'wrong';
-  } catch (e) { wait.remove(); box.append(h('div', { class: 'lx-fb bad' }, '⚠️ The AI could not judge it: ' + (e.message || e), /key/i.test(e.message || '') ? keyHelp() : null)); return false; }
+  } catch (e) { wait.remove(); box.append(h('div', { class: 'lx-fb bad' }, '⚠️ ' + LT('lang.prod.couldNotJudge', { err: window.NoemaI18n ? NoemaI18n.err(e) : (e.message || e) }), /key/i.test(e.message || '') ? keyHelp() : null)); return false; }
 }
-const courseAnswer = (c, txt, label = 'The course’s answer: ') => h('div', { class: 'lx-ref' }, h('span', { class: 'tiny' }, label), word(c, txt, { sub: false }));
+const courseAnswer = (c, txt, label = LT('lang.prod.courseAnswer') + ' ') => h('div', { class: 'lx-ref' }, h('span', { class: 'tiny' }, label), word(c, txt, { sub: false }));
 /** A typed answer checked against stored sentences first; the AI only for what they do not decide. */
 function typedBox(c, { sentence, refs, onCheck, aiTask, multiline = false, placeholder = '' }, done) {
   const wrap = h('div', { class: 'lx-typebox' }), inp = textInput(c, { multiline, placeholder }); let over = false;
@@ -2186,16 +2556,16 @@ function typedBox(c, { sentence, refs, onCheck, aiTask, multiline = false, place
     const val = inp.value.trim(); if (over || !val) return; over = true; inp.disabled = true; btn.disabled = true; give.disabled = true;
     const r = sentence ? N.typedAnswer(UI.C, c, sentence, val, refs) : { ok: false, how: null };
     const extra = onCheck ? onCheck(val, wrap) : null;
-    if (r.ok) { wrap.append(h('div', { class: 'lx-fb ok', 'data-how': r.how }, '✅ ', r.how === 'variant' ? 'Right — the course writes it: ' : 'Right: ', word(c, sentence.text === val ? val : (refs?.[0] || sentence.text), { sub: false }), extra)); return done(true, r.how); }
+    if (r.ok) { wrap.append(h('div', { class: 'lx-fb ok', 'data-how': r.how }, '✅ ', LT(r.how === 'variant' ? 'lang.prod.rightVariant' : 'lang.prod.right') + ' ', word(c, sentence.text === val ? val : (refs?.[0] || sentence.text), { sub: false }), extra)); return done(true, r.how); }
     if (extra) wrap.append(extra);
     if (sentence || refs?.length) wrap.append(courseAnswer(c, refs?.[0] || sentence.text));
     const ok = aiTask ? await judgeOpen(wrap, c, { ...aiTask, answer: val }) : false;
     done(ok, ok ? 'ai' : null);
   };
-  const btn = h('button', { class: 'btn primary small', onclick: submit }, 'Check');
-  const give = h('button', { class: 'btn ghost small', onclick: () => { if (over) return; over = true; inp.disabled = true; btn.disabled = true; give.disabled = true; if (sentence || refs?.length) wrap.append(courseAnswer(c, refs?.[0] || sentence.text)); done(false, null); } }, 'Show me');
+  const btn = h('button', { class: 'btn primary small', onclick: submit }, LT('lang.ex.check'));
+  const give = h('button', { class: 'btn ghost small', onclick: () => { if (over) return; over = true; inp.disabled = true; btn.disabled = true; give.disabled = true; if (sentence || refs?.length) wrap.append(courseAnswer(c, refs?.[0] || sentence.text)); done(false, null); } }, LT('lang.ex.showMe'));
   inp.addEventListener('keydown', e => { if (e.key === 'Enter' && (!multiline || e.ctrlKey || e.metaKey)) { e.preventDefault(); submit(); } });
-  wrap.append(inp, h('div', { class: 'row' }, btn, give, multiline ? h('span', { class: 'tiny' }, 'Ctrl + Enter checks') : null));
+  wrap.append(inp, h('div', { class: 'row' }, btn, give, multiline ? h('span', { class: 'tiny' }, LT('lang.prod.ctrlEnter')) : null));
   setTimeout(() => inp.focus(), 40);
   return wrap;
 }
@@ -2204,11 +2574,11 @@ WIDGETS.translate = (it, done) => {
   if (it.mode === 'tiles') {
     const holder = h('div', { class: 'lx-ex lx-extrans', 'data-kind': 'translate', 'data-mode': 'tiles' });
     holder.append(exBuild({ ...it, type: 'build', kind: 'translate' }, ok => done(ok)),
-      h('div', { class: 'row' }, h('button', { class: 'btn ghost small lx-totyped', onclick: () => holder.replaceWith(WIDGETS.translate({ ...it, mode: 'typed' }, done)) }, '⌨️ Type it instead')));
+      h('div', { class: 'row' }, h('button', { class: 'btn ghost small lx-totyped', onclick: () => holder.replaceWith(WIDGETS.translate({ ...it, mode: 'typed' }, done)) }, '⌨️ ' + LT('lang.prod.typeInstead'))));
     return holder;
   }
   const box = h('div', { class: 'lx-ex lx-extrans', 'data-kind': 'translate', 'data-mode': 'typed' },
-    h('div', { class: 'lx-q' }, `Say it in ${info(c).name}:`), h('div', { class: 'lx-prompt lx-meaning' }, it.gloss));
+    h('div', { class: 'lx-q' }, LT('lang.prod.sayIn', { lang: info(c).name })), h('div', { class: 'lx-prompt lx-meaning' }, it.gloss));
   noteNew(c, it.unknown);
   if ((it.unknown || []).length) box.append(h('div', { class: 'tiny lx-newwords' }, '🆕 ', ...it.unknown.flatMap((l, i) => [i ? ' · ' : '', h('button', { class: 'btn ghost small', onclick: () => wordPopup(c, l) }, X.lex[l].lemma), ' = ' + gloss(c, l)])));
   box.append(typedBox(c, { sentence: s, aiTask: { kind: 'translate', gloss: it.gloss, reference: it.answers } }, (ok, how) => { if (how && how !== 'ai') credit(c, s, ok); done(ok); }));
@@ -2219,11 +2589,11 @@ function credit(c, s, ok) { if (!ok || !s) return; const k = N.known(UI.C, UI.L,
 WIDGETS.rewrite = (it, done) => {
   const c = it.lang, X = LX(c), src = X.sentenceById[it.sentence], target = it.target ? X.sentenceById[it.target] : null;
   const box = h('div', { class: 'lx-ex lx-exrewrite', 'data-kind': it.kind },
-    h('div', { class: 'lx-q' }, it.kind === 'expand' ? '➕ Expand the sentence' : '🔁 Rewrite the sentence'),
+    h('div', { class: 'lx-q' }, it.kind === 'expand' ? '➕ ' + LT('lang.prod.expand') : '🔁 ' + LT('lang.prod.rewrite')),
     h('div', { class: 'lx-prompt lx-src' }, sentenceView(c, src, it.unknown)), h('div', { class: 'lx-tr' }, it.sourceGloss),
-    h('div', { class: 'lx-constraint' }, '👉 ', it.constraint), !target ? h('div', { class: 'tiny' }, aiBadge('🤖 open answer'), ' judged by the AI with your key; the words are checked against the course') : null);
+    h('div', { class: 'lx-constraint' }, '👉 ', it.constraint), !target ? h('div', { class: 'tiny' }, aiBadge('🤖 ' + LT('lang.prod.openAnswer')), ' ' + LT('lang.prod.openAnswerNote')) : null);
   noteNew(c, it.unknown);
-  const vocab = (val, wrap) => { const r = N.checkText(UI.C, c, val, N.known(UI.C, UI.L, c).R); return h('div', { class: 'lx-vocab' }, h('span', { class: 'tiny' }, 'Your words: '), checkedText(c, val, r), wordsNote(c, r)); };
+  const vocab = (val, wrap) => { const r = N.checkText(UI.C, c, val, N.known(UI.C, UI.L, c).R); return h('div', { class: 'lx-vocab' }, h('span', { class: 'tiny' }, LT('lang.prod.yourWords') + ' '), checkedText(c, val, r), wordsNote(c, r)); };
   box.append(typedBox(c, { sentence: target, onCheck: target ? null : vocab, aiTask: { kind: it.kind, source: it.source, sourceGloss: it.sourceGloss, constraint: it.constraint, reference: it.answers } },
     (ok, how) => { if (target && how && how !== 'ai') credit(c, target, ok); done(ok); }));
   return box;
@@ -2232,29 +2602,29 @@ WIDGETS.compose = (it, done) => {
   const c = it.lang, X = LX(c);
   const box = h('div', { class: 'lx-ex lx-excompose', 'data-kind': 'compose' }, h('div', { class: 'lx-q' }, '📝 ', it.prompt),
     it.picture ? h('div', { class: 'lx-prompt' }, conceptPic(it.picture, 'lx-bigemoji')) : null,
-    h('div', { class: 'lx-required' }, h('span', { class: 'tiny' }, 'Use these words (any form): '), ...it.required.map(l => h('button', { class: 'chip lx-req', 'data-lex': l, onclick: () => wordPopup(c, l) }, word(c, X.lex[l].lemma, { sub: false }), ' ', h('span', { class: 'tiny' }, gloss(c, l))))));
-  const inp = textInput(c, { multiline: true, placeholder: `Write in ${info(c).name}…` }); let over = false;
+    h('div', { class: 'lx-required' }, h('span', { class: 'tiny' }, LT('lang.prod.useWords') + ' '), ...it.required.map(l => h('button', { class: 'chip lx-req', 'data-lex': l, onclick: () => wordPopup(c, l) }, word(c, X.lex[l].lemma, { sub: false }), ' ', h('span', { class: 'tiny' }, gloss(c, l))))));
+  const inp = textInput(c, { multiline: true, placeholder: LT('lang.prod.writeIn', { lang: info(c).name }) }); let over = false;
   const out = h('div', { class: 'lx-composeout' });
   const submit = async () => {
     const val = inp.value.trim(); if (over || !val) return; over = true; inp.disabled = true; btn.disabled = true;
     const k = N.known(UI.C, UI.L, c), r = N.composeCheck(UI.C, c, val, it, k.R);
-    out.append(h('div', { class: 'lx-check1' }, h('b', {}, '✔ Checked by the course: '),
+    out.append(h('div', { class: 'lx-check1' }, h('b', {}, '✔ ' + LT('lang.prod.checkedByCourse') + ' '),
       ...it.required.map(l => h('span', { class: 'lx-badge ' + (r.used.includes(l) ? 'lx-used' : 'lx-missing'), 'data-lex': l }, (r.used.includes(l) ? '✓ ' : '✗ ') + X.lex[l].lemma)),
-      h('span', { class: 'tiny' }, ` · ${r.sentences} sentence${r.sentences === 1 ? '' : 's'}`)), h('div', {}, checkedText(c, val, r)), wordsNote(c, r));
+      h('span', { class: 'tiny' }, ' · ' + LT('lang.prod.nSentences', { n: r.sentences }))), h('div', {}, checkedText(c, val, r)), wordsNote(c, r));
     let ok = !r.missing.length;
-    if (!aiVendor()) { out.append(h('p', { class: 'tiny' }, 'The rubric (grammar, vocabulary, spelling, cohesion) needs an AI: '), keyHelp()); return done(ok); }
-    const wait = h('div', { class: 'tiny' }, '🤖 the AI reads your text…'); out.append(wait);
+    if (!aiVendor()) { out.append(h('p', { class: 'tiny' }, LT('lang.prod.rubricNeedsAI') + ' '), keyHelp()); return done(ok); }
+    const wait = h('div', { class: 'tiny' }, '🤖 ' + LT('lang.prod.aiReads')); out.append(wait);
     try {
-      const res = await aiJSON(N.aiTask(UI.C, UI.L, c, { ...it, kind: 'compose', answer: val }, { chatLang: chatLangOf() })); wait.remove();
+      const res = await aiJSON(N.aiTask(UI.C, UI.L, c, { ...it, kind: 'compose', answer: val }, { chatLang: chatLangOf(), native: nativeL() })); wait.remove();
       out.append(rubricView(c, val, res.data));
       const avg = ['grammar', 'vocabulary', 'spelling', 'cohesion'].reduce((a, x) => a + (res.data.aspects[x]?.score || 0), 0) / 4;
       ok = ok && avg >= 3;
-    } catch (e) { wait.remove(); out.append(h('div', { class: 'lx-fb bad' }, '⚠️ The AI could not grade it: ' + (e.message || e))); }
+    } catch (e) { wait.remove(); out.append(h('div', { class: 'lx-fb bad' }, '⚠️ ' + LT('lang.prod.couldNotGrade', { err: window.NoemaI18n ? NoemaI18n.err(e) : (e.message || e) }))); }
     done(ok);
   };
-  const btn = h('button', { class: 'btn primary small', onclick: submit }, 'Check my text');
+  const btn = h('button', { class: 'btn primary small', onclick: submit }, LT('lang.prod.checkText'));
   inp.addEventListener('keydown', e => { if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); submit(); } });
-  box.append(inp, h('div', { class: 'row' }, btn, h('span', { class: 'tiny' }, 'Ctrl + Enter checks')), out);
+  box.append(inp, h('div', { class: 'row' }, btn, h('span', { class: 'tiny' }, LT('lang.prod.ctrlEnter'))), out);
   setTimeout(() => inp.focus(), 40);
   return box;
 };
@@ -2268,12 +2638,12 @@ function rubricView(c, text, d) {
   }
   marked.push(rest);
   const r = d.corrected ? N.checkText(UI.C, c, d.corrected, N.known(UI.C, UI.L, c).R) : null;
-  return h('div', { class: 'lx-rubric' }, h('div', { class: 'row' }, aiBadge(), h('b', {}, 'The rubric')),
+  return h('div', { class: 'lx-rubric' }, h('div', { class: 'row' }, aiBadge(), h('b', {}, LT('lang.prod.rubric'))),
     h('div', { class: 'lx-aspects' }, ...['grammar', 'vocabulary', 'spelling', 'cohesion'].map(a => h('div', { class: 'lx-aspect', 'data-aspect': a },
-      h('b', {}, a), h('span', { class: 'lx-score' }, '●'.repeat(d.aspects[a]?.score || 0) + '○'.repeat(5 - (d.aspects[a]?.score || 0)), ' ', (d.aspects[a]?.score ?? '–') + '/5'), h('div', { class: 'tiny' }, d.aspects[a]?.comment || '')))),
+      h('b', {}, LT('lang.prod.aspect.' + a)), h('span', { class: 'lx-score' }, '●'.repeat(d.aspects[a]?.score || 0) + '○'.repeat(5 - (d.aspects[a]?.score || 0)), ' ', (d.aspects[a]?.score ?? '–') + '/5'), h('div', { class: 'tiny' }, d.aspects[a]?.comment || '')))),
     (d.corrections || []).length ? h('div', { class: 'lx-marked', lang: c, dir: LX(c).language.dir || 'ltr' }, ...marked) : null,
     (d.corrections || []).length ? h('ul', { class: 'lx-list tiny' }, ...d.corrections.map(x => h('li', {}, h('del', {}, word(c, x.from, { sub: false })), ' → ', h('ins', {}, word(c, x.to, { sub: false })), x.why ? ' — ' + x.why : ''))) : null,
-    r ? h('div', { class: 'lx-aicorr' }, h('span', { class: 'tiny' }, 'AI correction: '), checkedText(c, d.corrected, r), wordsNote(c, r)) : null,
+    r ? h('div', { class: 'lx-aicorr' }, h('span', { class: 'tiny' }, LT('lang.prod.aiCorr') + ' '), checkedText(c, d.corrected, r), wordsNote(c, r)) : null,
     d.feedback ? h('p', {}, wordsIn(c, d.feedback)) : null);
 }
 /** A choice whose prompt is not a plain word: numbers, clock, dates, register, dialogue turns. */
@@ -2295,7 +2665,7 @@ WIDGETS.date = (it, done) => choiceBox(it, done, it.sentence ? h('div', { class:
 /** A question on a graded text: the text stays readable above it (folded on a phone). */
 WIDGETS.readq = (it, done) => {
   const X = LX(it.lang), k = N.known(UI.C, UI.L, it.lang);
-  const text = (it.text || []).length ? h('details', { class: 'lx-sec lx-readtext', open: true }, h('summary', {}, '📖 The text'), textBody(it.lang, it.text.map(id => X.sentenceById[id]).map(s => ({ s, unknown: s.req.filter(l => !k.R.has(l)) })), { noEye: true })) : null;
+  const text = (it.text || []).length ? h('details', { class: 'lx-sec lx-readtext', open: true }, h('summary', {}, '📖 ' + LT('lang.prod.theText')), textBody(it.lang, it.text.map(id => X.sentenceById[id]).map(s => ({ s, unknown: s.req.filter(l => !k.R.has(l)) })), { noEye: true })) : null;
   return choiceBox({ ...it, ask: it.prompt }, done, text, o => wordsIn(it.lang, o));
 };
 WIDGETS.register = (it, done) => choiceBox(it, done, h('div', { class: 'lx-meaning' }, it.gloss));
@@ -2303,7 +2673,7 @@ WIDGETS.dialogue = (it, done) => choiceBox(it, done, h('div', { class: 'lx-dialo
 /** An analogue clock face (SVG, no text: works in any language). */
 function clockFace(t) {
   const NS = 'http://www.w3.org/2000/svg', el = (n, a) => { const e = document.createElementNS(NS, n); for (const [k, v] of Object.entries(a)) e.setAttribute(k, v); return e; };
-  const svg = el('svg', { viewBox: '-50 -50 100 100', class: 'lx-clockface', role: 'img', 'aria-label': `${t.h}:${String(t.m).padStart(2, '0')}` });
+  const svg = el('svg', { viewBox: '-50 -50 100 100', class: 'lx-clockface', role: 'img', 'aria-label': `${t.h}:${String(t.m).padStart(2, '0')}` });   // i18n-ignore (a time)
   svg.append(el('circle', { r: 46, class: 'f' }));
   for (let i = 0; i < 12; i++) { const a = i * Math.PI / 6; svg.append(el('line', { x1: 38 * Math.sin(a), y1: -38 * Math.cos(a), x2: 43 * Math.sin(a), y2: -43 * Math.cos(a), class: 'tick' })); }
   const ha = ((t.h % 12) + t.m / 60) * Math.PI / 6, ma = t.m * Math.PI / 30;
@@ -2320,8 +2690,8 @@ WIDGETS.clock = (it, done) => {
 function runProd(items, { title, back = '#/', lang }) {
   metNew.clear();
   const m = $('.lx-main'), bar = h('div', { class: 'lx-progress' }, h('i')), stage = h('div', { class: 'lx-stage' });
-  m.innerHTML = ''; m.append(h('div', { class: 'view lx-view lx-session lx-prodrun', 'data-lang': lang || '' }, h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => { save(true); go(back); render(); } }, '✕ Stop'), h('b', { class: 'tiny' }, title), bar), stage));
-  if (!items.length) { stage.append(h('p', { class: 'lx-note' }, 'Nothing to practise here yet with the words you know — learn the lesson it needs first.'), h('button', { class: 'btn', onclick: () => go(back) }, '← Back')); return; }
+  m.innerHTML = ''; m.append(h('div', { class: 'view lx-view lx-session lx-prodrun', 'data-lang': lang || '' }, h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => { save(true); go(back); render(); } }, '✕ ' + LT('lang.sess.stop')), h('b', { class: 'tiny' }, title), bar), stage));
+  if (!items.length) { stage.append(h('p', { class: 'lx-note' }, LT('lang.prod.nothingHere')), h('button', { class: 'btn', onclick: () => go(back) }, arrowBack() + ' ' + LT('lang.card.back'))); return; }
   const queue = items.slice(), total = queue.length, stats = { right: 0, wrong: 0 }, day = today(); let i = 0;
   const next = () => {
     bar.firstChild.style.width = Math.round(i / total * 100) + '%';
@@ -2332,15 +2702,15 @@ function runProd(items, { title, back = '#/', lang }) {
       if (it.fn) N.practiceFunction(UI.C, UI.L, it.lang, it.fn, ok ? 1 : 0, 1, day);
       if ((it.lex || []).length && LX(it.lang).lex[it.lex[0]]) N.review(UI.C, UI.L, it.lang, it.lex[0], 'r', ok ? 'good' : 'again', day);   // the number / month word asked
       save(); ok ? stats.right++ : stats.wrong++;
-      const b = h('button', { class: 'btn primary lx-next' }, 'Next →'); b.onclick = next; stage.append(h('div', { class: 'row lx-nextrow' }, b)); setTimeout(() => b.focus(), 30);
+      const b = h('button', { class: 'btn primary lx-next' }, LT('lang.drill.next') + ' ' + arrowOn()); b.onclick = next; stage.append(h('div', { class: 'row lx-nextrow' }, b)); setTimeout(() => b.focus(), 30);
     };
     const ex = exItem(it, done);
-    stage.append(h('div', { class: 'tiny lx-which' }, info(it.lang).flag, ' ', info(it.lang).name), ex);
+    stage.append(h('div', { class: 'tiny lx-which' }, info(it.lang).flag, ' ', info(it.lang).label), ex);
   };
   const finish = () => {
     UI.current = null; save(true); bar.firstChild.style.width = '100%'; stage.innerHTML = '';
-    stage.append(h('div', { class: 'lx-result' }, h('h2', {}, '🎉 Done'), h('p', {}, `${stats.right} right · ${stats.wrong} to practise again`), newWordsList(),
-      h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => go(back) }, '← Back'), h('button', { class: 'btn', onclick: () => go('#/') }, 'The map'))));
+    stage.append(h('div', { class: 'lx-result' }, h('h2', {}, '🎉 ' + LT('lang.prod.done')), h('p', {}, LT('lang.prod.stats', { right: stats.right, wrong: stats.wrong })), newWordsList(),
+      h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => go(back) }, arrowBack() + ' ' + LT('lang.card.back')), h('button', { class: 'btn', onclick: () => go('#/') }, LT('lang.home.map')))));
   };
   document.onkeydown = e => {
     if (!$('.lx-prodrun')) { document.onkeydown = null; return; }
@@ -2351,28 +2721,28 @@ function runProd(items, { title, back = '#/', lang }) {
 
 /* ---------- ✍️ the writing lane ---------- */
 const WRITE_SETS = [
-  { id: 'translate', icon: '🔤', title: 'Translate', what: 'the meaning → the sentence (tiles first, typing when you know the words)', make: (c, k) => N.translateItems(UI.C, UI.L, c, { k, max: 8 }) },
-  { id: 'rewrite', icon: '🔁', title: 'Rewrite and expand', what: 'the same sentence under a constraint, or with a detail more', make: (c, k) => N.rewriteItems(UI.C, UI.L, c, { k, max: 6 }) },
-  { id: 'compose', icon: '📝', title: 'Guided writing', what: 'a few sentences on a topic with given words — a rubric per aspect', make: (c, k) => { const t = N.composeTask(UI.C, UI.L, c, { k }); return t ? [t] : []; } },
-  { id: 'register', icon: '🎭', title: 'Register and dialogue', what: 'the right formula for the person; the fitting answer', make: (c, k) => shuffle([...N.registerItems(UI.C, UI.L, c, { k, max: 4 }), ...N.dialogueItems(UI.C, UI.L, c, { k, max: 4 })]) },
-  { id: 'numbers', icon: '🔢', title: 'Numbers', what: 'digits ↔ words, counting things', make: (c, k) => N.numberItems(UI.C, UI.L, c, { k, max: 10 }) },
-  { id: 'clock', icon: '🕒', title: 'The clock', what: 'what time does it say?', make: (c, k) => N.clockItems(UI.C, UI.L, c, { k, max: 6 }) },
-  { id: 'date', icon: '📅', title: 'Dates', what: 'months, days, ordinals, dates in sentences', make: (c, k) => N.dateItems(UI.C, UI.L, c, { k, max: 8 }) }];
+  { id: 'translate', icon: '🔤', get title() { return LT('lang.write.translate'); }, get what() { return LT('lang.write.translateWhat'); }, make: (c, k) => N.translateItems(UI.C, UI.L, c, { k, max: 8 }) },
+  { id: 'rewrite', icon: '🔁', get title() { return LT('lang.write.rewrite'); }, get what() { return LT('lang.write.rewriteWhat'); }, make: (c, k) => N.rewriteItems(UI.C, UI.L, c, { k, max: 6 }) },
+  { id: 'compose', icon: '📝', get title() { return LT('lang.write.compose'); }, get what() { return LT('lang.write.composeWhat'); }, make: (c, k) => { const t = N.composeTask(UI.C, UI.L, c, { k }); return t ? [t] : []; } },
+  { id: 'register', icon: '🎭', get title() { return LT('lang.write.register'); }, get what() { return LT('lang.write.registerWhat'); }, make: (c, k) => shuffle([...N.registerItems(UI.C, UI.L, c, { k, max: 4 }), ...N.dialogueItems(UI.C, UI.L, c, { k, max: 4 })]) },
+  { id: 'numbers', icon: '🔢', get title() { return LT('lang.write.numbers'); }, get what() { return LT('lang.write.numbersWhat'); }, make: (c, k) => N.numberItems(UI.C, UI.L, c, { k, max: 10 }) },
+  { id: 'clock', icon: '🕒', get title() { return LT('lang.write.clock'); }, get what() { return LT('lang.write.clockWhat'); }, make: (c, k) => N.clockItems(UI.C, UI.L, c, { k, max: 6 }) },
+  { id: 'date', icon: '📅', get title() { return LT('lang.write.date'); }, get what() { return LT('lang.write.dateWhat'); }, make: (c, k) => N.dateItems(UI.C, UI.L, c, { k, max: 8 }) }];
 VIEWS.write = (v, r) => {
   const c = UI.C.lang[r.arg] ? r.arg : UI.lang, k = N.known(UI.C, UI.L, c);
-  if (r.arg2) { const set = WRITE_SETS.find(s => s.id === r.arg2); if (set) return runProd(set.make(c, k), { title: `${set.icon} ${set.title} · ${info(c).flag} ${info(c).name}`, back: '#/write/' + c, lang: c }); }
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← Map')),
-    h('h1', {}, '✍️ Writing', h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).name}`)),
+  if (r.arg2) { const set = WRITE_SETS.find(s => s.id === r.arg2); if (set) return runProd(set.make(c, k), { title: `${set.icon} ${set.title} · ${info(c).flag} ${info(c).label}`, back: '#/write/' + c, lang: c }); }
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, arrowBack() + ' ' + LT('lang.card.map'))),
+    h('h1', {}, '✍️ ' + LT('lang.view.write'), h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).label}`)),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); go('#/write/' + x); })),
-    h('p', { class: 'tiny' }, `Sentences with the words you know (${k.R.size}); a few new ones are marked 🆕. The course's stored sentences decide; other answers are judged by the AI with your key and marked “AI-judged”.`),
+    h('p', { class: 'tiny' }, LT('lang.write.help', { n: k.R.size })),
     !aiVendor() ? keyHelp(() => render()) : null);
   const grid = h('div', { class: 'lx-lanegrid' });
   for (const set of WRITE_SETS) {
     const n = set.make(c, k).length;
     grid.append(h('button', { class: 'lx-lanecard', 'data-set': set.id, disabled: n ? null : true, onclick: () => go(`#/write/${c}/${set.id}`) },
-      h('span', { class: 'lx-laneicon' }, set.icon), h('b', {}, set.title), h('span', { class: 'tiny' }, set.what), h('span', { class: 'tiny lx-lanen' }, n ? `${n} ready` : 'learn more words first')));
+      h('span', { class: 'lx-laneicon' }, set.icon), h('b', {}, set.title), h('span', { class: 'tiny' }, set.what), h('span', { class: 'tiny lx-lanen' }, n ? LT('lang.write.ready', { n }) : LT('lang.write.learnMore'))));
   }
-  v.append(grid, h('div', { class: 'row' }, h('button', { class: 'btn small', onclick: () => openLangTutor({ lang: c, intent: 'chat' }) }, '🎓 A conversation at my level')));
+  v.append(grid, h('div', { class: 'row' }, h('button', { class: 'btn small', onclick: () => openLangTutor({ lang: c, intent: 'chat' }) }, '🎓 ' + LT('lang.tutor.intent.chat'))));
 };
 
 /* ---------- 📖 the reading lane ---------- */
@@ -2380,61 +2750,62 @@ VIEWS.read = (v, r) => {
   const c = UI.C.lang[r.arg] ? r.arg : UI.lang, k = N.known(UI.C, UI.L, c);
   if (r.arg2) return readerView(v, c, r.arg2, k);
   const texts = N.readerTexts(UI.C, UI.L, c, { k });
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← Map')),
-    h('h1', {}, '📖 Reading', h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).name}`)),
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, arrowBack() + ' ' + LT('lang.card.map'))),
+    h('h1', {}, '📖 ' + LT('lang.view.read'), h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).label}`)),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); go('#/read/' + x); })),
-    h('p', { class: 'tiny' }, 'Short texts made of the course’s sentences, at most one new word per sentence. Tap a word for its card.'),
-    h('div', { class: 'row' }, aiVendor() ? h('button', { class: 'btn small', onclick: e => aiReader(c, e.currentTarget) }, '✨ A new text written by the AI (checked against your words)') : h('span', { class: 'tiny' }, '✨ New texts written by an AI need your key (see Writing).')));
-  if (!texts.length) return v.append(h('p', { class: 'lx-note' }, `No text yet with the words you know in ${info(c).name} — learn a few lessons first.`));
+    h('p', { class: 'tiny' }, LT('lang.read.help')),
+    h('div', { class: 'row' }, aiVendor() ? h('button', { class: 'btn small', onclick: e => aiReader(c, e.currentTarget) }, '✨ ' + LT('lang.read.aiText')) : h('span', { class: 'tiny' }, '✨ ' + LT('lang.read.aiNeedsKey'))));
+  if (!texts.length) return v.append(h('p', { class: 'lx-note' }, LT('lang.read.noText', { lang: info(c).name })));
   v.append(h('div', { class: 'lx-texts' }, ...texts.slice(0, 40).map(t => h('button', { class: 'lx-textcard', 'data-text': t.id, onclick: () => go(`#/read/${c}/${encodeURIComponent(t.id)}`) },
-    h('b', {}, t.title), h('span', { class: 'tiny' }, `${t.sentences.length} sentences · ${t.unknown.length ? '🆕 ' + t.unknown.length + ' new word' + (t.unknown.length > 1 ? 's' : '') : '✓ only words you know'}`)))));
+    h('b', {}, t.title), h('span', { class: 'tiny' }, t.unknown.length ? LT('lang.read.cardNew', { n: t.sentences.length, u: t.unknown.length }) : LT('lang.read.cardKnown', { n: t.sentences.length }))))));
 };
 function readerView(v, c, id, k) {
   const t = N.readerTexts(UI.C, UI.L, c, { k }).find(x => x.id === id); if (!t) return go('#/read/' + c);
   const X = LX(c); metNew.clear();
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/read/' + c) }, '← Texts')), h('h1', {}, '📖 ', t.title));
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/read/' + c) }, arrowBack() + ' ' + LT('lang.read.texts'))), h('h1', {}, '📖 ', t.title));
   v.append(textBody(c, t.sentences.map(sid => X.sentenceById[sid]).map(s => ({ s, unknown: s.req.filter(l => !k.R.has(l)) }))));
-  v.append(newWordsList('🆕 New words in this text') || h('p', { class: 'tiny' }, '✓ Only words you know.'),
-    h('div', { class: 'row' }, h('button', { class: 'btn primary lx-readq', onclick: () => runProd(N.readerQuestions(UI.C, UI.L, c, t, { n: 3 }).map(q => ({ ...q, type: 'readq', text: t.sentences })), { title: `📖 ${t.title} — questions`, back: `#/read/${c}/${encodeURIComponent(t.id)}`, lang: c }) }, '❓ Questions on the text'),
-      h('button', { class: 'btn small', onclick: () => openLangTutor({ lang: c, intent: 'chat' }) }, '🎓 Talk about it with the tutor')));
+  v.append(newWordsList('🆕 ' + LT('lang.read.newInText')) || h('p', { class: 'tiny' }, '✓ ' + LT('lang.prod.onlyKnown')),
+    h('div', { class: 'row' }, h('button', { class: 'btn primary lx-readq', onclick: () => runProd(N.readerQuestions(UI.C, UI.L, c, t, { n: 3 }).map(q => ({ ...q, type: 'readq', text: t.sentences })), { title: '📖 ' + LT('lang.read.questionsTitle', { title: t.title }), back: `#/read/${c}/${encodeURIComponent(t.id)}`, lang: c }) }, '❓ ' + LT('lang.read.questions')),
+      h('button', { class: 'btn small', onclick: () => openLangTutor({ lang: c, intent: 'chat' }) }, '🎓 ' + LT('lang.read.talkTutor'))));
 }
 /** The sentences of a text in one paragraph: each word opens its card, 👁 shows the meaning of a sentence. */
 function textBody(c, rows, { aiGloss = false, noEye = false } = {}) {
   const X = LX(c), body = h('div', { class: 'lx-reader', lang: c, dir: X.language.dir || 'ltr' });
   for (const { s, unknown, r, gl } of rows) {
     if (s) noteNew(c, unknown);
-    const tr = h('span', { class: 'lx-rtr', hidden: true, lang: UI.C.explainLang, dir: 'ltr' }, (gl ?? s.gloss) + (aiGloss ? ' (AI)' : ''));
+    const tr = h('span', { class: 'lx-rtr', hidden: true, lang: UI.C.explainLang, dir: 'ltr' }, (gl ?? s.gloss) + (aiGloss ? ' (' + LT('lang.gram.aiBadge') + ')' : ''));
     body.append(h('span', { class: 'lx-rsent' }, s ? sentenceView(c, s, unknown) : checkedText(c, r.text, r.check), ' ',
-      noEye ? null : h('button', { class: 'lx-eye', title: 'show the meaning', 'aria-label': 'show the meaning', onclick: () => { tr.hidden = !tr.hidden; } }, '👁'), noEye ? null : tr, ' '));
+      noEye ? null : h('button', { class: 'lx-eye', title: LT('lang.read.showMeaning'), 'aria-label': LT('lang.read.showMeaning'), onclick: () => { tr.hidden = !tr.hidden; } }, '👁'), noEye ? null : tr, ' '));
   }
   return body;
 }
 /** ✨ A text by the AI: the LLM proposes, the tokenizer decides (every word in the course, at most one unknown per sentence). No questions: they would need an answer key. */
 async function aiReader(c, btn) {
-  btn.disabled = true; const old = btn.textContent; btn.textContent = '✨ writing…';
+  btn.disabled = true; const old = btn.textContent; btn.textContent = '✨ ' + LT('lang.gram.writing');
   try {
-    const k = N.known(UI.C, UI.L, c), t = N.readerTask(UI.C, UI.L, c, { k, chatLang: chatLangOf() });
+    const k = N.known(UI.C, UI.L, c), t = N.readerTask(UI.C, UI.L, c, { k, chatLang: chatLangOf(), native: nativeL() });
     const res = await aiJSON(t, { repairs: 2 });
     const rows = res.data.sentences.map(x => ({ r: { text: x.text, check: N.checkText(UI.C, c, x.text, k.R) }, gl: x.gloss }));
     const okRows = rows.filter(x => !x.r.check.unknown.length && x.r.check.unlearned.length <= 1);
     const v = $('.lx-view'); metNew.clear(); for (const x of okRows) noteNew(c, x.r.check.unlearned);
     v.innerHTML = '';
-    v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/read/' + c) }, '← Texts')), h('h1', {}, '📖 ', res.data.title, ' ', aiBadge('🤖 AI-written · checked')),
-      h('p', { class: 'tiny' }, `${okRows.length} of ${rows.length} sentences passed the check (every word in the course, at most one new word per sentence)${rows.length > okRows.length ? '; the others are left out' : ''}. The meanings are the AI’s translation.`),
-      textBody(c, okRows, { aiGloss: true }), newWordsList('🆕 New words in this text') || h('p', { class: 'tiny' }, '✓ Only words you know.'));
-  } catch (e) { btn.disabled = false; btn.textContent = '⚠️ ' + (e.message || 'failed') + ' — try again'; console.warn(e); return; }
+    v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/read/' + c) }, arrowBack() + ' ' + LT('lang.read.texts'))), h('h1', {}, '📖 ', res.data.title, ' ', aiBadge('🤖 ' + LT('lang.read.aiWritten'))),
+      h('p', { class: 'tiny' }, LT(rows.length > okRows.length ? 'lang.read.passedSome' : 'lang.read.passedAll', { ok: okRows.length, n: rows.length })),
+      textBody(c, okRows, { aiGloss: true }), newWordsList('🆕 ' + LT('lang.read.newInText')) || h('p', { class: 'tiny' }, '✓ ' + LT('lang.prod.onlyKnown')));
+  } catch (e) { btn.disabled = false; btn.textContent = '⚠️ ' + LT('lang.read.tryAgain', { err: (window.NoemaI18n ? NoemaI18n.err(e) : e.message) || LT('lang.gram.failed') }); console.warn(e); return; }
   btn.textContent = old;
 }
 
 /* ---------- 🎓 the tutor in a language (§8) ---------- */
 const TT = { open: false, ctx: null, hist: {}, busy: false, ids: {} };
 const tutorKey = ctx => [ctx.lang, ctx.fn || ctx.node || 'course', ctx.intent || 'chat'].join('|');
-const INTENT_LABEL = { explain: '📘 Explain this rule', compare: '⇄ Compare the languages', quiz: '❓ Quiz this node', chat: '💬 A conversation at my level' };
-const INTENT_MSG = { explain: 'Explain this rule to me.', compare: 'How does this point work in the other languages of the course?', quiz: 'Quiz me on this.', chat: 'Let’s talk — at my level, please.' };
+const INTENT_SIGN = { explain: '📘', compare: '⇄', quiz: '❓', chat: '💬' };
+const INTENT_LABEL = new Proxy({}, { get: (o, x) => typeof x === 'string' && INTENT_SIGN[x] ? INTENT_SIGN[x] + ' ' + LT('lang.tutor.intent.' + x) : undefined });   // lang.tutor.intent.<intent>
+/** The learner's first message for a button (shown in the drawer as theirs; the tutor answers in the language chosen there). */
+const INTENT_MSG = new Proxy({}, { get: (o, x) => ['explain', 'compare', 'quiz', 'chat', 'hint'].includes(x) ? LT('lang.tutor.msg.' + x) : undefined });   // lang.tutor.msg.<intent>
 /** The tutor is the learner's character (main: NoemaThemes.current() everywhere): its name and face, when the app has characters. */
 function tutorNameNow() { try { return window.NoemaThemes ? NoemaThemes.tutor().n : ''; } catch (e) { return ''; } }
 function tutorFaceNow() { try { return window.NoemaArt && window.NoemaThemes ? h('span', { class: 'lx-tface', html: NoemaArt.mascot(NoemaThemes.current()), 'aria-hidden': 'true' }) : null; } catch (e) { return null; } }
-INTENT_MSG.hint = 'I am on an exercise and want a hint, not the answer.';
 function openLangTutor(ctx) {
   TT.ctx = { lang: ctx.lang || UI.lang, fn: ctx.fn || null, node: ctx.node || null, intent: ctx.intent || 'chat' };
   TT.open = true; drawTutor();
@@ -2444,30 +2815,30 @@ function openLangTutor(ctx) {
 function closeLangTutor() { TT.open = false; document.querySelector('.lx-tutor')?.remove(); }
 function ctxLabelOf(ctx) {
   const c = ctx.lang, fn = ctx.fn && UI.C.functions[ctx.fn], n = ctx.node && UI.C.nodes[ctx.node];
-  return `${info(c).flag} ${info(c).name}` + (fn ? ' · ' + fn.title : n ? ' · ' + n.title : '');
+  return `${info(c).flag} ${info(c).label}` + (fn ? ' · ' + fn.title : n ? ' · ' + n.title : '');
 }
 function drawTutor() {
   document.querySelector('.lx-tutor')?.remove(); if (!TT.open) return;
   const ctx = TT.ctx, key = tutorKey(ctx), hist = TT.hist[key] || [], c = ctx.lang;
-  const intents = ['explain', 'compare', 'quiz', 'chat'].filter(x => x === 'chat' || (x === 'quiz' ? !!(ctx.node || ctx.fn) : !!ctx.fn));
+  const intents = ['explain', 'compare', 'quiz', 'chat'].filter(x => x === 'chat' || (x === 'quiz' ? !!(ctx.node || ctx.fn) : x === 'compare' ? !!ctx.fn && UI.C.languages.length > 1 : !!ctx.fn));   // D21: comparing needs two languages studied
   const msgs = h('div', { class: 'lx-tmsgs', 'aria-live': 'polite' });
-  const ta = h('textarea', { class: 'noema-input lx-tin', rows: 2, placeholder: 'Your message…', 'aria-label': 'your message to the tutor', onkeydown: e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); const v = ta.value.trim(); if (v) { ta.value = ''; sendTutor(v); } } } });
-  const sel = h('select', { class: 'lx-tlang', 'aria-label': 'language of the tutor’s explanations', onchange: e => { UI.prefs.chatLang = e.target.value; save(); } },
-    ...uniq([UI.C.explainLang, 'en', 'el', 'de', 'ru', 'tr', 'fr', 'es', ...knowsL().map(k => k.code).filter(Boolean)]).map(x => h('option', { value: x, selected: chatLangOf() === x ? true : null }, '🗣 ' + langName(x))));
-  const box = h('aside', { class: 'lx-tutor', role: 'dialog', 'aria-label': 'Tutor' },
-    h('div', { class: 'lx-thead' }, tutorFaceNow(), h('b', { class: 'lx-tname' }, tutorNameNow() || '🎓 Tutor'), h('span', { class: 'tiny lx-tctx' }, ctxLabelOf(ctx)), h('span', { class: 'spacer' }), sel, h('button', { class: 'iconbtn', title: 'Close', 'aria-label': 'Close the tutor', onclick: closeLangTutor }, '✕')),
+  const ta = h('textarea', { class: 'noema-input lx-tin', rows: 2, placeholder: LT('lang.tutor.placeholder'), 'aria-label': LT('lang.tutor.msgLabel'), onkeydown: e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); const v = ta.value.trim(); if (v) { ta.value = ''; sendTutor(v); } } } });
+  const sel = h('select', { class: 'lx-tlang', 'aria-label': LT('lang.tutor.langLabel'), onchange: e => { UI.prefs.chatLang = e.target.value; save(); } },
+    ...uniq([UI.C.explainLang, UI.C.masterLang, nativeL()?.code, (window.NoemaI18n?.locale || '').split('-')[0], ...N.SUPPORTED_NATIVES].filter(Boolean)).map(x => h('option', { value: x, selected: chatLangOf() === x ? true : null }, '🗣 ' + capFirst(langName(x)))));
+  const box = h('aside', { class: 'lx-tutor', role: 'dialog', 'aria-label': LT('lang.frame.tutor') },
+    h('div', { class: 'lx-thead' }, tutorFaceNow(), h('b', { class: 'lx-tname' }, tutorNameNow() || '🎓 ' + LT('lang.frame.tutor')), h('span', { class: 'tiny lx-tctx' }, ctxLabelOf(ctx)), h('span', { class: 'spacer' }), sel, h('button', { class: 'iconbtn lx-tclose', title: LT('lang.tutor.close'), 'aria-label': LT('lang.tutor.closeLabel'), onclick: closeLangTutor }, '✕')),
     h('div', { class: 'lx-tintents' }, ...intents.map(x => h('button', { class: 'chip' + (x === ctx.intent ? ' on' : ''), 'data-intent': x, onclick: () => {
-      if (!aiVendor()) { msgs.prepend(h('div', { class: 'lx-tmsg sys' }, `${INTENT_LABEL[x]} needs an AI key — add one below.`)); return; }
+      if (!aiVendor()) { msgs.prepend(h('div', { class: 'lx-tmsg sys' }, LT('lang.tutor.needsKey', { what: INTENT_LABEL[x] }))); return; }
       TT.ctx = { ...ctx, intent: x }; drawTutor(); if (!(TT.hist[tutorKey(TT.ctx)] || []).length) sendTutor(INTENT_MSG[x]);
     } }, INTENT_LABEL[x]))),
-    h('div', { class: 'tiny lx-trule' }, `Uses the ${info(c).name} words you know (${N.known(UI.C, UI.L, c).R.size}); at most one new word per sentence, glossed. Its words are checked against the course.`),
+    h('div', { class: 'tiny lx-trule' }, LT('lang.tutor.rule', { lang: info(c).name, n: N.known(UI.C, UI.L, c).R.size })),
     !aiVendor() ? keyHelp(() => drawTutor()) : null, msgs,
     h('div', { class: 'lx-tcomp' }, ta, h('button', { class: 'btn primary small', disabled: aiVendor() ? null : true, onclick: () => { const v = ta.value.trim(); if (v) { ta.value = ''; sendTutor(v); } } }, '➤')));
   for (const m of hist) msgs.append(tutorMsg(c, m));
-  if (!hist.length) msgs.append(h('div', { class: 'lx-tmsg sys' }, aiVendor() ? 'Pick what you want, or just write.' : 'Each button above works once you have added a key.'));
+  if (!hist.length) msgs.append(h('div', { class: 'lx-tmsg sys' }, LT(aiVendor() ? 'lang.tutor.pick' : 'lang.tutor.addKey')));
   box.addEventListener('keydown', e => { if (e.key === 'Escape') closeLangTutor(); });   // keyboard: Esc closes the drawer
   document.body.append(box); msgs.scrollTop = msgs.scrollHeight;
-  setTimeout(() => (aiVendor() ? ta : box.querySelector('.lx-keyhelp input') || box.querySelector('[aria-label="Close the tutor"]'))?.focus(), 50);   // focus in the drawer: Esc closes it, with or without a key
+  setTimeout(() => (aiVendor() ? ta : box.querySelector('.lx-keyhelp input') || box.querySelector('.lx-tclose'))?.focus(), 50);   // focus in the drawer: Esc closes it, with or without a key
 }
 /** A light markdown: **bold**, line breaks; the language's own sentences in their font and direction. */
 function tutorText(c, text, targets) {
@@ -2495,7 +2866,7 @@ function tutorMsg(c, m) {
   if (m.role === 'user') return h('div', { class: 'lx-tmsg me' }, m.text);
   if (m.role === 'error') return h('div', { class: 'lx-tmsg err' }, '⚠️ ', m.text);
   const r = m.check;
-  return h('div', { class: 'lx-tmsg ai' }, tutorText(c, m.text, m.target), r && (m.target || []).length ? h('div', { class: 'lx-tcheck' }, h('span', { class: 'tiny' }, 'In the course: '), ...m.target.map((t, i) => h('div', {}, checkedText(c, t, r[i]))), wordsNote(c, mergeChecks(r))) : null);
+  return h('div', { class: 'lx-tmsg ai' }, tutorText(c, m.text, m.target), r && (m.target || []).length ? h('div', { class: 'lx-tcheck' }, h('span', { class: 'tiny' }, LT('lang.tutor.inCourse') + ' '), ...m.target.map((t, i) => h('div', {}, checkedText(c, t, r[i]))), wordsNote(c, mergeChecks(r))) : null);
 }
 const mergeChecks = rs => ({ unknown: uniq(rs.flatMap(r => r.unknown)), unlearned: uniq(rs.flatMap(r => r.unlearned)) });
 async function sendTutor(text) {
@@ -2504,13 +2875,15 @@ async function sendTutor(text) {
   hist.push({ role: 'user', text, t: Date.now() }); TT.busy = true; drawTutor();
   const msgs = document.querySelector('.lx-tmsgs'); msgs?.append(h('div', { class: 'lx-tmsg ai lx-typing' }, '…'));
   try {
-    const k = N.known(UI.C, UI.L, c), task = N.tutorTask(UI.C, UI.L, c, ctx, { k, chatLang: chatLangOf(), tutorName: tutorNameNow() });
+    const k = N.known(UI.C, UI.L, c), task = N.tutorTask(UI.C, UI.L, c, ctx, { k, chatLang: chatLangOf(), tutorName: tutorNameNow(), native: nativeL() });
+    /* i18n-ignore-start (the prompt for the AI stays English; the reply language is chatLang, set in langcore.tutorTask's system prompt) */
     const convo = hist.filter(m => m.role !== 'error').map(m => `${m.role === 'user' ? 'Learner' : 'Tutor'}: ${m.text}`).join('\n\n');
     const r = await NoemaLLM.json({ acc: UI.acc, system: task.system, prompt: `The conversation so far:\n\n${convo}\n\nWrite the tutor's next message.`, schema: task.schema, name: task.name, repairs: 1, maxTokens: 6000 });
+    /* i18n-ignore-end */
     const target = (r.data.target || []).filter(x => typeof x === 'string' && x.trim());
     hist.push({ role: 'assistant', text: r.data.reply, target, check: target.map(t => N.checkText(UI.C, c, t, k.R)), t: Date.now() });
     persistTutor(key, ctx, hist, r.provider);
-  } catch (e) { hist.push({ role: 'error', text: e.message || String(e) }); }
+  } catch (e) { hist.push({ role: 'error', text: (window.NoemaI18n ? NoemaI18n.err(e) : e.message) || String(e) }); }
   finally { TT.busy = false; if (TT.open && tutorKey(TT.ctx) === key) drawTutor(); }
 }
 /** Keep the conversation with the others (engine/convos.js: IndexedDB, the backup folder, the cloud). */
@@ -2527,18 +2900,18 @@ function persistTutor(key, ctx, hist, provider) {
 
 /* ---------- hooks: the lanes on the home, the tutor on the grammar, lesson and node pages ---------- */
 function prodLanes() {
-  return h('div', { class: 'lx-prodlanes' }, h('h2', { class: 'lx-h2' }, '✍️ Writing · 📖 Reading'),
+  return h('div', { class: 'lx-prodlanes' }, h('h2', { class: 'lx-h2' }, '✍️ ' + LT('lang.view.write') + ' · 📖 ' + LT('lang.view.read')),
     h('div', { class: 'lx-lanes' }, ...activeLangs().map(c => h('div', { class: 'lx-lanerow', 'data-lang': c },
-      h('span', { class: 'lx-flag' }, info(c).flag), h('b', {}, info(c).name),
-      h('button', { class: 'btn small lx-towrite', onclick: () => go('#/write/' + c) }, '✍️ Writing'),
-      h('button', { class: 'btn small lx-toread', onclick: () => go('#/read/' + c) }, '📖 Reading'),
-      h('button', { class: 'btn ghost small lx-totutor', onclick: () => openLangTutor({ lang: c, intent: 'chat' }) }, '🎓 Tutor')))));
+      h('span', { class: 'lx-flag' }, info(c).flag), h('b', {}, info(c).label),
+      h('button', { class: 'btn small lx-towrite', 'data-icon': 'edit', onclick: () => go('#/write/' + c) }, '✍️ ' + LT('lang.view.write')),
+      h('button', { class: 'btn small lx-toread', 'data-icon': 'book', onclick: () => go('#/read/' + c) }, '📖 ' + LT('lang.view.read')),
+      h('button', { class: 'btn ghost small lx-totutor', 'data-icon': 'chat', onclick: () => openLangTutor({ lang: c, intent: 'chat' }) }, '🎓 ' + LT('lang.frame.tutor'))))));
 }
-const tutorRow = (ctx, intents) => h('div', { class: 'row lx-tutorrow' }, h('span', { class: 'tiny' }, '🎓 Tutor: '),
+const tutorRow = (ctx, intents) => h('div', { class: 'row lx-tutorrow' }, h('span', { class: 'tiny' }, '🎓 ' + LT('lang.tutor.rowLabel') + ' '),
   ...intents.map(x => h('button', { class: 'btn ghost small', 'data-intent': x, onclick: () => openLangTutor({ ...ctx, intent: x }) }, INTENT_LABEL[x])));
 {
   const home = VIEWS.home;
-  VIEWS.home = (v, r) => { home(v, r); const map = v.querySelector('.lx-maphead') || [...v.querySelectorAll('h2')].find(x => /The map/.test(x.textContent)); const lanes = prodLanes(); map ? map.before(lanes) : v.append(lanes); };
+  VIEWS.home = (v, r) => { home(v, r); const map = v.querySelector('.lx-maphead') || [...v.querySelectorAll('h2')].find(x => /The map/.test(x.textContent)); const lanes = prodLanes(); map ? map.before(lanes) : v.append(lanes); };   // i18n-ignore (the map's head is found by its class)
   const fn = VIEWS.fn;
   VIEWS.fn = (v, r) => { fn(v, r); const fid = r.arg; if (!UI.C.functions[fid] || fid === 'fn.overview') return; const c = r.arg2 && UI.C.lang[r.arg2] ? r.arg2 : UI.lang; v.querySelector('.lx-gram')?.before(tutorRow({ lang: c, fn: fid }, ['explain', 'compare', 'quiz'])); };
   const lesson = VIEWS.lesson;
@@ -2572,10 +2945,10 @@ const needTranslit = c => { try { return N.needsTranslit(UI.C, UI.L, c); } catch
 function marksSettings() {
   const langs = UI.C.languages.filter(c => LX(c).language.vowelMarks);
   if (!langs.length) return null;
-  return h('div', { class: 'lx-marklevels' }, ...langs.map(c => h('label', { class: 'lx-setrow' }, info(c).flag, ' ', info(c).name, ' — vowel marks: ',
-    h('select', { 'aria-label': `Vowel marks in ${info(c).name}`, 'data-lang': c, onchange: e => { UI.prefs.markLevel = { ...(UI.prefs.markLevel || {}), [c]: e.target.value }; save(); } },
-      ...[['full', 'always all of them'], ['fading', 'fading: on new words, fewer on known ones'], ['none', 'none (unvocalized)']].map(([v2, t]) => h('option', { value: v2, selected: ((UI.prefs.markLevel || {})[c] || 'full') === v2 ? true : null }, t))))),
-    h('p', { class: 'tiny' }, 'Fading: a new word shows every mark; once you know it for reading only the šadda / dagesh stay; once you can write it, none. Drills about the marks always show them.'));
+  return h('div', { class: 'lx-marklevels' }, ...langs.map(c => h('label', { class: 'lx-setrow' }, info(c).flag, ' ', info(c).label, ' — ' + LT('lang.script.marksLabel') + ' ',
+    h('select', { 'aria-label': LT('lang.script.marksIn', { lang: info(c).name }), 'data-lang': c, onchange: e => { UI.prefs.markLevel = { ...(UI.prefs.markLevel || {}), [c]: e.target.value }; save(); } },
+      ...[['full', LT('lang.script.marksFull')], ['fading', LT('lang.script.marksFading')], ['none', LT('lang.script.marksNone')]].map(([v2, t]) => h('option', { value: v2, selected: ((UI.prefs.markLevel || {})[c] || 'full') === v2 ? true : null }, t))))),
+    h('p', { class: 'tiny' }, LT('lang.script.fadingHelp')));
 }
 
 /* ---------- typing in any script: on-screen keyboards, pinyin input, umlauts (§8) ---------- */
@@ -2584,7 +2957,7 @@ const keyBtn = (label, onclick, extra = {}) => h('button', { type: 'button', cla
  *  box (tone numbers → marks) whose characters are chosen, de the ä ö ü ß buttons. → {el, input, insert} */
 function scriptInput(c, { placeholder = '', onEnter = null, cls = '', autofocus = false } = {}) {
   const X = LX(c), M = N.scriptModule(UI.C, c);
-  const input = h('input', { class: 'noema-input lx-typein2 ' + cls, lang: c, dir: X.language.dir || 'ltr', placeholder, autocomplete: 'off', autocapitalize: 'off', spellcheck: 'false', 'aria-label': placeholder || `Your answer in ${info(c).name}` });
+  const input = h('input', { class: 'noema-input lx-typein2 ' + cls, lang: c, dir: X.language.dir || 'ltr', placeholder, autocomplete: 'off', autocapitalize: 'off', spellcheck: 'false', 'aria-label': placeholder || LT('lang.script.answerIn', { lang: info(c).name }) });
   const wrap = h('div', { class: 'lx-input', 'data-lang': c }, input);
   const insert = s => {
     const a = input.selectionStart ?? input.value.length, b = input.selectionEnd ?? a;
@@ -2598,20 +2971,20 @@ function scriptInput(c, { placeholder = '', onEnter = null, cls = '', autofocus 
   };
   input.addEventListener('keydown', e => { if (e.key === 'Enter' && onEnter && !e.isComposing) { e.preventDefault(); onEnter(input.value); } });
   if (c === 'de' || X.language.capitalizeFirst) {
-    wrap.append(h('div', { class: 'lx-kbd lx-kbd-de', role: 'group', 'aria-label': 'Special letters' }, ...['ä', 'ö', 'ü', 'ß', 'Ä', 'Ö', 'Ü'].map(ch => keyBtn(ch, () => insert(ch), { 'data-key': ch }))));
+    wrap.append(h('div', { class: 'lx-kbd lx-kbd-de', role: 'group', 'aria-label': LT('lang.script.special') }, ...['ä', 'ö', 'ü', 'ß', 'Ä', 'Ö', 'Ü'].map(ch => keyBtn(ch, () => insert(ch), { 'data-key': ch }))));
   } else if (M?.kind === 'letters' && M.keyboard) {
     const kb = M.keyboard, open = (UI.prefs.kbd || {})[c] !== false;
-    const panel = h('div', { class: 'lx-kbd', lang: c, dir: 'rtl', role: 'group', 'aria-label': `${info(c).name} keyboard`, hidden: open ? null : true },
+    const panel = h('div', { class: 'lx-kbd', lang: c, dir: 'rtl', role: 'group', 'aria-label': LT('lang.script.keyboardOf', { lang: info(c).name }), hidden: open ? null : true },
       ...kb.rows.map(r => h('div', { class: 'lx-kbdrow' }, ...r.split(' ').map(ch => keyBtn(ch, () => insert(ch), { 'data-key': ch, title: M.items[ch]?.name || '' })))),
-      h('div', { class: 'lx-kbdrow lx-kbdmarks' }, ...(kb.marks || []).map(m => keyBtn('◌' + m, () => insert(m), { 'data-key': m, title: M.markInfo[m]?.name || (m === 'ׁ' ? 'shin dot' : m === 'ׂ' ? 'sin dot' : '') }))),
-      h('div', { class: 'lx-kbdrow' }, ...(kb.punct || []).map(p => keyBtn(p, () => insert(p), { 'data-key': p })), keyBtn('␣', () => insert(' '), { class: 'lx-key lx-keywide', 'data-key': ' ', title: 'space' }), keyBtn('⌫', backspace, { class: 'lx-key lx-keywide', title: 'delete' })));
-    const tog = h('button', { type: 'button', class: 'btn ghost small lx-kbdtoggle', 'aria-expanded': open ? 'true' : 'false', title: 'On-screen keyboard', onclick: () => {
+      h('div', { class: 'lx-kbdrow lx-kbdmarks' }, ...(kb.marks || []).map(m => keyBtn('◌' + m, () => insert(m), { 'data-key': m, title: M.markInfo[m]?.name || (m === 'ׁ' ? LT('lang.script.shinDot') : m === 'ׂ' ? LT('lang.script.sinDot') : '') }))),
+      h('div', { class: 'lx-kbdrow' }, ...(kb.punct || []).map(p => keyBtn(p, () => insert(p), { 'data-key': p })), keyBtn('␣', () => insert(' '), { class: 'lx-key lx-keywide', 'data-key': ' ', title: LT('lang.script.space') }), keyBtn('⌫', backspace, { class: 'lx-key lx-keywide', title: LT('lang.script.delete') })));
+    const tog = h('button', { type: 'button', class: 'btn ghost small lx-kbdtoggle', 'aria-expanded': open ? 'true' : 'false', title: LT('lang.script.onScreen'), onclick: () => {
       panel.hidden = !panel.hidden; tog.setAttribute('aria-expanded', panel.hidden ? 'false' : 'true'); UI.prefs.kbd = { ...(UI.prefs.kbd || {}), [c]: !panel.hidden }; save(); input.focus(); } }, '⌨️');
     wrap.insertBefore(tog, input.nextSibling); wrap.append(panel);
   } else if (c === 'zh' || X.language.romanization === 'pinyin') {
     const K = N.known(UI.C, UI.L, c).R;
-    const py = h('input', { class: 'noema-input lx-pyin', lang: 'zh-Latn-pinyin', placeholder: 'pinyin, e.g. ni3hao3 or nihao', autocomplete: 'off', autocapitalize: 'off', spellcheck: 'false', 'aria-label': 'Type pinyin, then choose the characters' });
-    const prev = h('span', { class: 'lx-pyprev', lang: 'zh-Latn-pinyin' }), cands = h('div', { class: 'lx-cands', role: 'listbox', 'aria-label': 'Characters' });
+    const py = h('input', { class: 'noema-input lx-pyin', lang: 'zh-Latn-pinyin', placeholder: LT('lang.script.pyPlaceholder'), autocomplete: 'off', autocapitalize: 'off', spellcheck: 'false', 'aria-label': LT('lang.script.pyLabel') });
+    const prev = h('span', { class: 'lx-pyprev', lang: 'zh-Latn-pinyin' }), cands = h('div', { class: 'lx-cands', role: 'listbox', 'aria-label': LT('lang.script.chars') });
     const refresh = () => {
       const r = N.pinyinCandidates(UI.C, c, py.value, { known: K }); prev.textContent = r.marks ? '→ ' + r.marks : ''; cands.innerHTML = '';
       r.candidates.forEach((x, i) => cands.append(h('button', { type: 'button', class: 'lx-cand', role: 'option', 'data-text': x.text, title: x.gloss, onmousedown: e => e.preventDefault(),
@@ -2623,7 +2996,7 @@ function scriptInput(c, { placeholder = '', onEnter = null, cls = '', autofocus 
       else if (e.key === 'Enter' && !py.value.trim() && onEnter) { e.preventDefault(); onEnter(input.value); }
       else if (e.key === 'Backspace' && !py.value) { e.preventDefault(); input.value = [...input.value].slice(0, -1).join(''); }
     });
-    wrap.append(h('div', { class: 'lx-pybox' }, h('span', { class: 'tiny' }, '拼 '), py, prev), cands);
+    wrap.append(h('div', { class: 'lx-pybox' }, h('span', { class: 'tiny', lang: 'zh' }, '拼 '), py, prev), cands);   // i18n-ignore (拼: a Chinese sign for pinyin)
   }
   if (autofocus) setTimeout(() => input.focus(), 40);
   return { el: wrap, input, insert };
@@ -2633,7 +3006,7 @@ function scriptInput(c, { placeholder = '', onEnter = null, cls = '', autofocus 
 function produceTyping(c, lid, onAnswer) {
   const X = LX(c), me = X.lex[lid];
   if (N.scriptModule(UI.C, c)?.kind === 'letters' && needTranslit(c)) return null;
-  const si = scriptInput(c, { placeholder: 'or type it…', cls: 'lx-typein', onEnter: v => {
+  const si = scriptInput(c, { placeholder: LT('lang.script.orType'), cls: 'lx-typein', onEnter: v => {
     const t = N.nfc(v.trim()); if (!t) return;
     const r = N.checkTyped(UI.C, c, lid, t), ok = r.ok || (X.language.capitalizeFirst && t.toLowerCase() === N.nfc(me.lemma).toLowerCase() && me.pos !== 'NOUN');
     onAnswer(ok, t, r);
@@ -2676,13 +3049,13 @@ function tilesWidget(it, { box, tiles, size, show, check, label }) {
   tiles.forEach((t, i) => pool.append(h('button', { class: 'lx-tile1', 'data-i': i, 'data-t': t, 'aria-label': label ? label(t) : t, onclick: e => {
     if (over || e.currentTarget.disabled) return; built.push({ t, i }); e.currentTarget.disabled = true; draw(); if (built.length === size) end(check(built.map(b => b.t))); } }, t)));
   const undo = h('button', { class: 'btn small ghost', onclick: () => { if (over || !built.length) return; const b = built.pop(); pool.children[b.i].disabled = false; draw(); } }, '⌫');
-  const give = h('button', { class: 'btn small ghost', onclick: () => { if (!over) end(false); } }, 'Show me');
+  const give = h('button', { class: 'btn small ghost', onclick: () => { if (!over) end(false); } }, LT('lang.ex.showMe'));
   draw(); box.append(slot, pool, h('div', { class: 'row' }, undo, give));
 }
 WIDGETS.glyph_form = (it, done) => {
   if (it.kind !== 'join') return scriptChoose(it, done);
   const box = h('div', { class: 'lx-ex lx-exscript lx-exjoin', 'data-kind': 'join', 'data-type': it.type }); box._done = done;
-  box.append(h('div', { class: 'lx-q' }, `Write it in ${info(it.lang).name} — tap its letters in order${it.lang === 'he' ? ' (mind the final forms)' : ' (they join by themselves)'}:`), h('div', { class: 'lx-prompt lx-meaning' }, it.prompt));
+  box.append(h('div', { class: 'lx-q' }, LT(it.lang === 'he' ? 'lang.script.joinAskHe' : 'lang.script.joinAsk', { lang: info(it.lang).name })), h('div', { class: 'lx-prompt lx-meaning' }, it.prompt));
   tilesWidget(it, { box, tiles: it.tiles, size: it.letters.length, show: s => s.join(''), check: s => s.join('') === it.answer, label: t => N.scriptModule(UI.C, it.lang)?.items[t]?.name || t });
   return box;
 };
@@ -2690,8 +3063,8 @@ WIDGETS.transliterate = scriptChoose;
 WIDGETS.char_compose = (it, done) => {
   if (it.kind !== 'compose') return scriptChoose(it, done);
   const box = h('div', { class: 'lx-ex lx-exscript lx-excompose', 'data-kind': 'compose', 'data-type': it.type }); box._done = done;
-  const LAYOUT = { '⿰': 'left | right', '⿱': 'top / bottom', '⿲': 'left | middle | right', '⿳': 'top / middle / bottom', '⿴': 'outside around inside', '⿵': 'open below', '⿶': 'open above', '⿷': 'open right', '⿸': 'top-left around', '⿹': 'top-right around', '⿺': 'bottom-left around', '⿻': 'overlapping' };
-  box.append(h('div', { class: 'lx-q' }, `Build the character from its parts (${LAYOUT[it.layout] || it.layout}):`), h('div', { class: 'lx-prompt lx-meaning' }, it.prompt, it.reading ? h('span', { class: 'lx-latin tiny', lang: 'zh-Latn-pinyin' }, ' ' + it.reading) : null),
+  const LAYOUT = { '⿰': 'lr', '⿱': 'tb', '⿲': 'lmr', '⿳': 'tmb', '⿴': 'around', '⿵': 'openBelow', '⿶': 'openAbove', '⿷': 'openRight', '⿸': 'tl', '⿹': 'tr', '⿺': 'bl', '⿻': 'overlap' };   // lang.script.layout.<name>
+  box.append(h('div', { class: 'lx-q' }, LT('lang.script.composeAsk', { layout: LAYOUT[it.layout] ? LT('lang.script.layout.' + LAYOUT[it.layout]) : it.layout })), h('div', { class: 'lx-prompt lx-meaning' }, it.prompt, it.reading ? h('span', { class: 'lx-latin tiny', lang: 'zh-Latn-pinyin' }, ' ' + it.reading) : null),
     it.hint ? h('div', { class: 'tiny' }, '💡 ', wordsIn('zh', it.hint)) : null);
   tilesWidget(it, { box, tiles: it.tiles, size: it.answer.length, show: s => s.join(' + '), check: s => s.slice().sort().join('') === it.answer.slice().sort().join('') });
   return box;
@@ -2701,7 +3074,7 @@ WIDGETS.vowelize = (it, done) => {
   const box = h('div', { class: 'lx-ex lx-exscript lx-exvowel', 'data-kind': 'vowelize', 'data-type': it.type });
   const cur = it.letters.map(l => ({ ...l, mine: [] })); let sel = cur.findIndex(l => !l.sep), over = false;
   const row = h('div', { class: 'lx-vrow', lang: it.lang, dir: X.language.dir || 'rtl' }), preview = h('div', { class: 'lx-w lx-vpreview', lang: it.lang, dir: X.language.dir || 'rtl', 'aria-live': 'polite' });
-  const draw = () => { preview.textContent = N.nfc(cur.map(l => l.base + l.mine.join('')).join('')); row.innerHTML = ''; cur.forEach((l, i) => row.append(l.sep ? h('span', { class: 'lx-vsep' }, l.base) : h('button', { type: 'button', class: 'lx-vletter' + (i === sel ? ' on' : '') + (l.state ? ' ' + l.state : ''), 'data-i': i, 'aria-pressed': i === sel ? 'true' : 'false', 'aria-label': `letter ${i + 1}`,
+  const draw = () => { preview.textContent = N.nfc(cur.map(l => l.base + l.mine.join('')).join('')); row.innerHTML = ''; cur.forEach((l, i) => row.append(l.sep ? h('span', { class: 'lx-vsep' }, l.base) : h('button', { type: 'button', class: 'lx-vletter' + (i === sel ? ' on' : '') + (l.state ? ' ' + l.state : ''), 'data-i': i, 'aria-pressed': i === sel ? 'true' : 'false', 'aria-label': LT('lang.script.letterN', { n: i + 1 }),
     onclick: () => { if (over) return; sel = i; draw(); row.querySelector('.lx-vletter.on')?.focus(); } }, N.nfc(l.base + l.mine.join(''))))); };
   const kindOf = m => M?.markInfo[m]?.kind || 'vowel';
   const put = m => {
@@ -2713,7 +3086,7 @@ WIDGETS.vowelize = (it, done) => {
   };
   const step = d => { if (over) return; let i = sel; do { i += d; } while (i >= 0 && i < cur.length && cur[i].sep); if (i >= 0 && i < cur.length) { sel = i; draw(); row.querySelector('.lx-vletter.on')?.focus(); } };
   const pal = h('div', { class: 'lx-palette', lang: it.lang }, ...it.palette.map((m, i) => keyBtn(h('span', {}, h('span', { class: 'lx-w', lang: it.lang, dir: X.language.dir }, '◌' + m), h('span', { class: 'tiny' }, ' ' + (M?.markInfo[m]?.name || ''), i < 9 ? h('span', { class: 'lx-k' }, i + 1) : null)), () => put(m), { 'data-mark': m })),
-    keyBtn('∅ clear', () => { if (!over && sel >= 0) { cur[sel].mine = []; draw(); } }, { 'data-mark': '' }));
+    keyBtn('∅ ' + LT('lang.script.clearMarks'), () => { if (!over && sel >= 0) { cur[sel].mine = []; draw(); } }, { 'data-mark': '' }));
   const check = () => {
     if (over) return; over = true;
     let ok = true; for (const l of cur) if (!l.sep) { const r = l.mine.slice().sort().join('') === l.marks.slice().sort().join(''); l.state = r ? 'right' : 'wrong'; if (!r) ok = false; }
@@ -2727,8 +3100,8 @@ WIDGETS.vowelize = (it, done) => {
     else if (e.key === 'Enter') { e.preventDefault(); check(); }
   });
   draw();
-  box.append(h('div', { class: 'lx-q' }, `Add the vowel marks, letter by letter (tap a letter, then its marks; ← → move, 1–9 marks, Enter checks):`), h('div', { class: 'lx-prompt lx-meaning' }, it.prompt), preview, row, pal,
-    h('div', { class: 'row' }, h('button', { class: 'btn primary small lx-check', onclick: check }, 'Check'), h('button', { class: 'btn ghost small', onclick: () => { if (!over) { cur.forEach(l => l.mine = l.marks.slice()); check(); } } }, 'Show me')));
+  box.append(h('div', { class: 'lx-q' }, LT('lang.script.vowelAsk')), h('div', { class: 'lx-prompt lx-meaning' }, it.prompt), preview, row, pal,
+    h('div', { class: 'row' }, h('button', { class: 'btn primary small lx-check', onclick: check }, LT('lang.ex.check')), h('button', { class: 'btn ghost small', onclick: () => { if (!over) { cur.forEach(l => l.mine = l.marks.slice()); check(); } } }, LT('lang.ex.showMe'))));
   setTimeout(() => box.focus(), 30);
   return box;
 };
@@ -2738,15 +3111,15 @@ WIDGETS.tone_mark = (it, done) => {
   const syl = h('div', { class: 'lx-tones' });
   const draw = () => { syl.innerHTML = ''; it.chars.forEach((ch, i) => syl.append(h('div', { class: 'lx-tonecol' + (i === cur && !over ? ' on' : ''), 'data-i': i },
     h('div', { class: 'lx-w lx-tonech', lang: 'zh' }, ch), h('div', { class: 'lx-latin', lang: 'zh-Latn-pinyin' }, mine[i] ? N.pinyinNumbersToMarks(it.bases[i] + (mine[i] === 5 ? '' : mine[i])) : it.bases[i]),
-    h('div', { class: 'lx-toneopts' }, ...[1, 2, 3, 4, 5].map(t => h('button', { type: 'button', class: 'lx-tonebtn' + (mine[i] === t ? ' on' : '') + (over ? (t === it.answer[i] ? ' right' : mine[i] === t ? ' wrong' : '') : ''), 'data-tone': t, 'aria-label': `syllable ${i + 1}: tone ${t === 5 ? 'neutral' : t}`,
+    h('div', { class: 'lx-toneopts' }, ...[1, 2, 3, 4, 5].map(t => h('button', { type: 'button', class: 'lx-tonebtn' + (mine[i] === t ? ' on' : '') + (over ? (t === it.answer[i] ? ' right' : mine[i] === t ? ' wrong' : '') : ''), 'data-tone': t, 'aria-label': LT('lang.script.toneLabel', { n: i + 1, tone: t === 5 ? 'neutral' : String(t) }),
       onclick: () => { if (over) return; mine[i] = t; cur = Math.min(i + 1, it.chars.length - 1); draw(); if (mine.every(Boolean)) check(); } }, t === 5 ? '·' : N.pinyinNumbersToMarks('a' + t))))))); };
   const check = () => { if (over) return; over = true; const ok = mine.every((t, i) => t === it.answer[i]); draw(); scriptRecord(it, ok); scriptFb(box, ok, it); done(ok); };
   box.tabIndex = -1;
   box.addEventListener('keydown', e => { if (!over && /^[1-5]$/.test(e.key)) { e.preventDefault(); e.stopPropagation(); mine[cur] = +e.key; cur = Math.min(cur + 1, it.chars.length - 1); draw(); if (mine.every(Boolean)) check(); } });
   draw();
-  box.append(h('div', { class: 'lx-q' }, it.mode === 'spoken' ? 'How is it said? (the tones change in speech)' : 'Mark the tone of every syllable (keys 1–5, 5 = neutral):'),
-    h('div', { class: 'lx-prompt lx-meaning' }, it.prompt, it.mode === 'spoken' ? h('div', { class: 'tiny' }, 'written: ', h('span', { class: 'lx-latin', lang: 'zh-Latn-pinyin' }, it.bases.map((b, i) => N.pinyinNumbersToMarks(b + (it.written[i] === 5 ? '' : it.written[i]))).join(' '))) : null), syl,
-    h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => { if (!over) { mine.fill(0); check(); } } }, 'Show me')));
+  box.append(h('div', { class: 'lx-q' }, LT(it.mode === 'spoken' ? 'lang.script.toneSpoken' : 'lang.script.toneAsk')),
+    h('div', { class: 'lx-prompt lx-meaning' }, it.prompt, it.mode === 'spoken' ? h('div', { class: 'tiny' }, LT('lang.script.written') + ' ', h('span', { class: 'lx-latin', lang: 'zh-Latn-pinyin' }, it.bases.map((b, i) => N.pinyinNumbersToMarks(b + (it.written[i] === 5 ? '' : it.written[i]))).join(' '))) : null), syl,
+    h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => { if (!over) { mine.fill(0); check(); } } }, LT('lang.ex.showMe'))));
   setTimeout(() => box.focus(), 30);
   return box;
 };
@@ -2756,25 +3129,25 @@ WIDGETS.spell = (it, done) => {
   const out = h('div', { class: 'lx-diff', lang: it.lang, dir: X.language.dir || 'ltr' });
   const finish = (ok, r) => {
     over = true; si.input.disabled = true; scriptRecord(it, ok);
-    if (r && !ok) { out.append(...r.diff.map(d => h('span', { class: 'lx-d d-' + d.op, title: d.op === 'wrong' ? `you: ${d.t} · right: ${d.want}` : d.op }, d.op === 'wrong' ? d.want : d.t))); }
+    if (r && !ok) { out.append(...r.diff.map(d => h('span', { class: 'lx-d d-' + d.op, title: d.op === 'wrong' ? LT('lang.script.youRight', { you: d.t, right: d.want }) : ['same', 'missing', 'extra'].includes(d.op) ? LT('lang.script.op.' + d.op) : d.op }, d.op === 'wrong' ? d.want : d.t))); }
     scriptFb(box, ok, it, r?.notes?.length ? h('ul', { class: 'lx-list tiny' }, ...r.notes.map(n => h('li', {}, n))) : null); done(ok);
   };
-  const si = scriptInput(it.lang, { placeholder: `Type it in ${info(it.lang).name}…`, autofocus: true, onEnter: v => { if (over || !v.trim()) return; const r = N.checkTyped(UI.C, it.lang, it.lex, v, { forms: it.also }); finish(r.ok, r); } });
-  box.append(h('div', { class: 'lx-q' }, `Write it in ${info(it.lang).name}:`), h('div', { class: 'lx-prompt lx-meaning' }, it.concept ? conceptPic(it.concept, 'lx-exemoji') : '', ' ', it.prompt), si.el, out,
-    h('div', { class: 'row' }, h('button', { class: 'btn primary small lx-check', onclick: () => { if (!over && si.input.value.trim()) { const r = N.checkTyped(UI.C, it.lang, it.lex, si.input.value, { forms: it.also }); finish(r.ok, r); } } }, 'Check'),
-      h('button', { class: 'btn ghost small', onclick: () => { if (!over) finish(false, null); } }, 'Show me')));
+  const si = scriptInput(it.lang, { placeholder: LT('lang.script.typeIn', { lang: info(it.lang).name }), autofocus: true, onEnter: v => { if (over || !v.trim()) return; const r = N.checkTyped(UI.C, it.lang, it.lex, v, { forms: it.also }); finish(r.ok, r); } });
+  box.append(h('div', { class: 'lx-q' }, LT('lang.script.writeIn', { lang: info(it.lang).name })), h('div', { class: 'lx-prompt lx-meaning' }, it.concept ? conceptPic(it.concept, 'lx-exemoji') : '', ' ', it.prompt), si.el, out,
+    h('div', { class: 'row' }, h('button', { class: 'btn primary small lx-check', onclick: () => { if (!over && si.input.value.trim()) { const r = N.checkTyped(UI.C, it.lang, it.lex, si.input.value, { forms: it.also }); finish(r.ok, r); } } }, LT('lang.ex.check')),
+      h('button', { class: 'btn ghost small', onclick: () => { if (!over) finish(false, null); } }, LT('lang.ex.showMe'))));
   return box;
 };
 WIDGETS.trace = (it, done) => {
   const X = LX(it.lang), box = h('div', { class: 'lx-ex lx-exscript lx-extrace', 'data-kind': it.check, 'data-type': it.type });
-  const S = 280, cv = h('canvas', { class: 'lx-canvas', width: S * 2, height: S * 2, 'aria-label': `Draw ${it.glyph}`, role: 'img' }), g = cv.getContext('2d');
+  const S = 280, cv = h('canvas', { class: 'lx-canvas', width: S * 2, height: S * 2, 'aria-label': LT('lang.script.draw', { glyph: it.glyph }), role: 'img' }), g = cv.getContext('2d');
   const toBox = (x, y) => [x / S * 1024, 900 - y / S * 1024], toCv = (x, y) => [x / 1024 * S * 2, (900 - y) / 1024 * S * 2];
   const strokes = [], med = it.medians || []; let curStroke = null, next = 0, misses = 0, over = false, hint = false;
   const ghost = () => {
     g.clearRect(0, 0, S * 2, S * 2); g.lineCap = 'round'; g.lineJoin = 'round';
     g.strokeStyle = 'rgba(127,127,127,.25)'; g.lineWidth = 1.5; g.strokeRect(1, 1, S * 2 - 2, S * 2 - 2); g.beginPath(); g.moveTo(S, 0); g.lineTo(S, S * 2); g.moveTo(0, S); g.lineTo(S * 2, S); g.stroke();
     if (it.check === 'medians') med.forEach((m, i) => { g.strokeStyle = i < next ? 'rgba(46,160,90,.85)' : hint && i === next ? 'rgba(230,140,0,.7)' : 'rgba(127,127,127,.22)'; g.lineWidth = 34; g.beginPath(); m.forEach((p, j) => { const [x, y] = toCv(p[0], p[1]); j ? g.lineTo(x, y) : g.moveTo(x, y); }); g.stroke(); });
-    else { g.fillStyle = 'rgba(127,127,127,.18)'; g.font = `${S * 1.3}px ${it.lang === 'ar' ? "'Noto Naskh Arabic', serif" : "'Noto Sans Hebrew', sans-serif"}`; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(it.glyph, S, S * 1.05); }
+    else { g.fillStyle = 'rgba(127,127,127,.18)'; g.font = `${S * 1.3}px ${it.lang === 'ar' ? "'Noto Naskh Arabic', serif" : "'Noto Sans Hebrew', sans-serif"}`; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(it.glyph, S, S * 1.05); }   // i18n-ignore (fonts)
     g.strokeStyle = 'rgba(40,40,40,.9)'; g.lineWidth = 9; for (const s of strokes) { g.beginPath(); s.forEach(([x, y], j) => j ? g.lineTo(x * 2, y * 2) : g.moveTo(x * 2, y * 2)); g.stroke(); }
   };
   const status = h('div', { class: 'tiny lx-tracestatus', 'aria-live': 'polite' });
@@ -2786,24 +3159,24 @@ WIDGETS.trace = (it, done) => {
     if (it.check !== 'medians' || over) return;
     if (s.length < 2) { strokes.pop(); ghost(); return; }
     const r = N.strokeMatch(s.map(([x, y]) => toBox(x, y)), med[next]);
-    if (r.ok) { next++; strokes.pop(); hint = false; status.textContent = `stroke ${next} of ${med.length} ✓`; if (next === med.length) end(misses <= 1); }
-    else { strokes.pop(); misses++; hint = misses >= 2; status.textContent = r.reversed ? 'the other way round — strokes go from where they start' : `not stroke ${next + 1} — ${hint ? 'follow the orange one' : 'try again'}`; }
+    if (r.ok) { next++; strokes.pop(); hint = false; status.textContent = LT('lang.script.strokeOk', { n: next, of: med.length }) + ' ✓'; if (next === med.length) end(misses <= 1); }
+    else { strokes.pop(); misses++; hint = misses >= 2; status.textContent = r.reversed ? LT('lang.script.reversed') : LT(hint ? 'lang.script.notStrokeHint' : 'lang.script.notStroke', { n: next + 1 }); }
     ghost();
   };
   cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up); cv.addEventListener('pointerleave', up);
-  const end = ok => { if (over) return; over = true; next = med.length; ghost(); scriptRecord(it, ok); scriptFb(box, ok, it, it.check === 'medians' ? h('div', { class: 'tiny' }, `${misses} wrong stroke${misses === 1 ? '' : 's'}`) : null); done(ok); };
+  const end = ok => { if (over) return; over = true; next = med.length; ghost(); scriptRecord(it, ok); scriptFb(box, ok, it, it.check === 'medians' ? h('div', { class: 'tiny' }, LT('lang.script.wrongStrokes', { n: misses })) : null); done(ok); };
   const demo = () => {   // the stroke order, one stroke after another
     if (it.check !== 'medians') return; let i = 0; const was = next; next = 0; ghost();
     const t = setInterval(() => { if (i >= med.length || !box.isConnected) { clearInterval(t); next = over ? med.length : was; ghost(); return; } next = ++i; ghost(); }, 420);
   };
   ghost();
-  box.append(h('div', { class: 'lx-q' }, it.check === 'medians' ? `Write ${it.glyph} stroke by stroke (in the right order):` : `Trace the letter, then compare it with the model:`),
+  box.append(h('div', { class: 'lx-q' }, it.check === 'medians' ? LT('lang.script.strokeAsk', { glyph: it.glyph }) : LT('lang.script.traceAsk')),
     h('div', { class: 'lx-prompt lx-meaning' }, h('span', { class: 'lx-w', lang: it.lang, dir: X.language.dir || 'ltr' }, it.glyph), ' ', h('span', { class: 'tiny' }, [it.prompt, it.reading].filter(Boolean).join(' · '))),
     h('div', { class: 'lx-canvaswrap' }, cv), status,
-    h('div', { class: 'row' }, it.check === 'medians' ? h('button', { class: 'btn ghost small', onclick: demo }, '▶ Stroke order') : null,
-      h('button', { class: 'btn ghost small', onclick: () => { if (!over) { strokes.length = 0; ghost(); } } }, 'Clear'),
-      it.check === 'medians' ? h('button', { class: 'btn ghost small', onclick: () => end(false) }, 'Show me')
-        : [h('button', { class: 'btn primary small lx-selfok', onclick: () => end(true) }, '✓ Looks right'), h('button', { class: 'btn ghost small lx-selfno', onclick: () => end(false) }, '✗ Not yet')]));
+    h('div', { class: 'row' }, it.check === 'medians' ? h('button', { class: 'btn ghost small', onclick: demo }, '▶ ' + LT('lang.script.strokeOrder')) : null,
+      h('button', { class: 'btn ghost small', onclick: () => { if (!over) { strokes.length = 0; ghost(); } } }, LT('lang.script.clear')),
+      it.check === 'medians' ? h('button', { class: 'btn ghost small', onclick: () => end(false) }, LT('lang.ex.showMe'))
+        : [h('button', { class: 'btn primary small lx-selfok', onclick: () => end(true) }, '✓ ' + LT('lang.script.looksRight')), h('button', { class: 'btn ghost small lx-selfno', onclick: () => end(false) }, '✗ ' + LT('lang.script.notYet'))]));
   box._strokeTest = { toBox, med, draw: pts => { if (over) return; curStroke = pts.map(([x, y]) => [x / 1024 * S, (900 - y) / 1024 * S]); strokes.push(curStroke); up(); } };   // tests draw a stroke in box coordinates
   return box;
 };
@@ -2815,14 +3188,14 @@ function glyphIntro(c, key, done) {
   const ex = Object.values(X.lex).filter(x => !x.prefix && hasGlyph(c, x, key) && x.translit).sort((a, b) => a.lemma.length - b.lemma.length)[0];
   const forms = Object.entries(it.forms || {}).filter(([, f]) => f);
   const box = h('div', { class: 'lx-ex lx-intro lx-glyphintro', 'data-kind': 'glyph_intro', 'data-glyph': key },
-    h('div', { class: 'lx-q' }, `New in ${info(c).flag} ${info(c).name}: ${it.type === 'mark' ? 'a vowel mark' : 'a letter'}`),
+    h('div', { class: 'lx-q' }, LT(it.type === 'mark' ? 'lang.script.newMark' : 'lang.script.newLetter', { lang: info(c).flag + ' ' + info(c).label })),
     h('div', { class: 'lx-prompt' }, h('span', { class: 'lx-w lx-glyph', lang: c, dir: X.language.dir }, it.type === 'mark' ? '◌' + key : key)),
     h('div', { class: 'lx-meaning' }, h('b', {}, it.name), ' · ', h('span', { class: 'lx-latin' }, it.translit || '—'), it.sound ? ` · [${it.sound}]` : '', it.what ? ' · ' + it.what : ''),
     forms.length > 1 ? h('dl', { class: 'lx-parts lx-forms' }, ...forms.flatMap(([p, f]) => [h('dt', {}, p), h('dd', {}, h('span', { class: 'lx-w lx-glyph', lang: c, dir: X.language.dir }, f))])) : null,
     it.note ? h('p', { class: 'tiny' }, it.note) : null,
-    (M.look[key] || []).length ? h('p', { class: 'tiny' }, '👀 Do not mix up with ', ...(M.look[key] || []).flatMap((b, i) => [i ? ' · ' : '', h('span', { class: 'lx-w', lang: c }, b), ' ', M.items[b]?.name || ''])) : null,
+    (M.look[key] || []).length ? h('p', { class: 'tiny' }, '👀 ' + LT('lang.script.mixUp') + ' ', ...(M.look[key] || []).flatMap((b, i) => [i ? ' · ' : '', h('span', { class: 'lx-w', lang: c }, b), ' ', M.items[b]?.name || ''])) : null,
     ex ? h('div', { class: 'lx-ex1' }, word(c, ex.lemma, { lex: ex, marks: 'full' }), h('div', { class: 'tiny' }, ex.translit, ' — ', gloss(c, ex.id))) : null,
-    h('div', { class: 'row' }, h('button', { class: 'btn primary lx-next', onclick: () => { N.introduceGlyph(UI.C, UI.L, c, key, today()); save(); done(true); } }, 'Got it →')));
+    h('div', { class: 'row' }, h('button', { class: 'btn primary lx-next', onclick: () => { N.introduceGlyph(UI.C, UI.L, c, key, today()); save(); done(true); } }, LT('lang.ex.gotIt') + ' ' + arrowOn())));
   return box;
 }
 /** The card of a letter or a character (tap in the lane). */
@@ -2831,49 +3204,52 @@ function glyphCard(c, key) {
   const words = M.kind === 'chars' ? (M.words[key] || []).slice(0, 12) : Object.values(X.lex).filter(x => !x.prefix && hasGlyph(c, x, key)).slice(0, 10).map(x => x.id);
   const body = M.kind === 'chars'
     ? [h('div', { class: 'lx-prompt' }, h('span', { class: 'lx-w lx-glyph', lang: 'zh' }, key)),
-      h('dl', { class: 'lx-parts' }, ...[['reading', [...(it.readings || []), ...(it.wordReadings || [])].join(' · ')], ['meaning', it.meaning], ['traditional', (it.trad || []).join(' ')], ['parts', it.ids], ['radical', it.radical], ['strokes', it.medians?.length || it.strokes], ['how it is built', [it.etymology?.type, it.etymology?.hint].filter(Boolean).join(': ')]]
-        .filter(([, v2]) => v2).flatMap(([k2, v2]) => [h('dt', {}, k2), h('dd', {}, wordsIn('zh', String(v2)))]))]
+      h('dl', { class: 'lx-parts' }, ...[['reading', [...(it.readings || []), ...(it.wordReadings || [])].join(' · ')], ['meaning', it.meaning], ['traditional', (it.trad || []).join(' ')], ['parts', it.ids], ['radical', it.radical], ['strokes', it.medians?.length || it.strokes], ['built', [it.etymology?.type, it.etymology?.hint].filter(Boolean).join(': ')]]
+        .filter(([, v2]) => v2).flatMap(([k2, v2]) => [h('dt', {}, LT('lang.script.field.' + k2)), h('dd', {}, wordsIn('zh', String(v2)))]))]
     : [h('div', { class: 'lx-prompt' }, h('span', { class: 'lx-w lx-glyph', lang: c, dir: X.language.dir }, it.type === 'mark' ? '◌' + key : key)),
-      h('dl', { class: 'lx-parts' }, ...[['name', it.name], ['transliteration', it.translit], ['sound', it.sound && `[${it.sound}]`], ['what it does', it.what], ['joins', it.joins && { dual: 'to both sides', right: 'only to the letter before it', none: 'to no letter' }[it.joins]], ['note', it.note]].filter(([, v2]) => v2).flatMap(([k2, v2]) => [h('dt', {}, k2), h('dd', {}, v2)])),
+      h('dl', { class: 'lx-parts' }, ...[['name', it.name], ['transliteration', it.translit], ['sound', it.sound && `[${it.sound}]`], ['what', it.what], ['joins', it.joins && (['dual', 'right', 'none'].includes(it.joins) ? LT('lang.script.joins.' + it.joins) : it.joins)], ['note', it.note]].filter(([, v2]) => v2).flatMap(([k2, v2]) => [h('dt', {}, LT('lang.script.field.' + k2)), h('dd', {}, v2)])),
       Object.keys(it.forms || {}).length > 1 ? h('dl', { class: 'lx-parts lx-forms' }, ...Object.entries(it.forms).flatMap(([p, f]) => [h('dt', {}, p), h('dd', {}, h('span', { class: 'lx-w lx-glyph', lang: c, dir: X.language.dir }, f))])) : null];
   const pop = h('div', { class: 'lx-pop', role: 'dialog', 'aria-label': it.name || key, onclick: e => { if (e.target === pop) pop.remove(); } },
     h('div', { class: 'lx-popbox lx-glyphcard', 'data-glyph': key }, h('div', { class: 'row' }, h('b', {}, it.name || it.meaning || key), h('span', { class: 'lx-badge st s-' + st }, STATE_LABEL[st] || st), h('span', { class: 'spacer' }), h('button', { class: 'btn ghost small', onclick: () => pop.remove() }, '✕')),
-      ...body, words.length ? h('div', { class: 'lx-sec' }, h('b', {}, 'In words of the course'), h('ul', { class: 'lx-list' }, ...words.map(id => h('li', {}, word(c, X.lex[id].lemma, { lex: X.lex[id] }), ' — ', gloss(c, id))))) : null,
-      (it.medians || M.kind === 'letters') && it.type !== 'mark' ? h('button', { class: 'btn small', onclick: () => { pop.remove(); runScriptDrill(c, 'trace', { only: key }); } }, '✍️ Trace it') : null));
+      ...body, words.length ? h('div', { class: 'lx-sec' }, h('b', {}, LT('lang.script.inWords')), h('ul', { class: 'lx-list' }, ...words.map(id => h('li', {}, word(c, X.lex[id].lemma, { lex: X.lex[id] }), ' — ', gloss(c, id))))) : null,
+      (it.medians || M.kind === 'letters') && it.type !== 'mark' ? h('button', { class: 'btn small', onclick: () => { pop.remove(); runScriptDrill(c, 'trace', { only: key }); } }, '✍️ ' + LT('lang.script.traceIt')) : null));
   document.body.append(pop);
 }
 
 /* ---------- the 🔤 script lane ---------- */
-const SCRIPT_TITLE = { glyph_form: ['🔣', 'Letter forms'], transliterate: ['🔤', 'Reading'], vowelize: ['◌َ', 'Vowel marks'], tone_mark: ['〽️', 'Tones'], char_compose: ['🧩', 'Building characters'], trace: ['✍️', 'Tracing'], spell: ['⌨️', 'Spelling'], learn: ['🆕', 'The next letters'] };
+const SCRIPT_SIGN = { glyph_form: '🔣', transliterate: '🔤', vowelize: '◌َ', tone_mark: '〽️', char_compose: '🧩', trace: '✍️', spell: '⌨️', learn: '🆕' };
+/** [sign, name] of a script drill (lang.script.drill.<type>). */
+/** The frame's line icon of each script drill (99z_frame.js data-icon). */
+const SCRIPT_ICON = { glyph_form: 'doc', transliterate: 'book', vowelize: 'dots', tone_mark: 'dots', char_compose: 'doc', trace: 'doc', spell: 'doc', learn: 'doc' };
+const SCRIPT_TITLE = new Proxy({}, { get: (o, t) => typeof t === 'string' && SCRIPT_SIGN[t] ? [SCRIPT_SIGN[t], LT('lang.script.drill.' + t)] : undefined });
 function scriptHomeButtons() {
-  return activeLangs().map(c => h('button', { class: 'btn ghost small lx-scriptbtn', 'data-lang': c, onclick: () => go('#/script/' + c) }, '🔤 ', info(c).flag, ' ', N.scriptModule(UI.C, c) ? (N.scriptModule(UI.C, c).kind === 'chars' ? 'Characters' : 'Letters') : 'Spelling'));
+  return activeLangs().map(c => h('button', { class: 'btn ghost small lx-scriptbtn', 'data-lang': c, 'data-icon': 'doc', onclick: () => go('#/script/' + c) }, '🔤 ', info(c).flag, ' ', LT(N.scriptModule(UI.C, c) ? (N.scriptModule(UI.C, c).kind === 'chars' ? 'lang.script.characters' : 'lang.script.letters') : 'lang.script.drill.spell')));
 }
 VIEWS.script = (v, r) => {
   const c = r.arg && UI.C.lang[r.arg] ? r.arg : UI.lang, M = N.scriptModule(UI.C, c), X = LX(c);
   if (c !== UI.lang) { UI.lang = c; UI.prefs.lang = c; save(); }
   v.classList.add('lx-scriptview'); v.dataset.lang = c;
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← Map')),
-    h('h1', {}, '🔤 ', M ? (M.kind === 'chars' ? 'Characters' : 'Letters') : 'Spelling', ' — ', info(c).flag, ' ', info(c).name),
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, arrowBack() + ' ' + LT('lang.card.map'))),
+    h('h1', {}, '🔤 ', LT(M ? (M.kind === 'chars' ? 'lang.script.characters' : 'lang.script.letters') : 'lang.script.drill.spell'), ' — ', info(c).flag, ' ', info(c).label),
     h('div', { class: 'row' }, flagRail(null, c, x => go('#/script/' + x))));
-  const drills = h('div', { class: 'row lx-drills lx-scriptdrills' }, ...N.scriptTypes(UI.C, c).map(t => h('button', { class: 'btn small', 'data-type': t, onclick: () => runScriptDrill(c, t) }, SCRIPT_TITLE[t][0] + ' ' + SCRIPT_TITLE[t][1])),
-    N.scriptTypes(UI.C, c).length > 1 ? h('button', { class: 'btn small primary', 'data-type': 'mix', onclick: () => runScriptDrill(c, null) }, '▶ Mixed') : null);
-  if (!M) {
-    v.append(h('p', { class: 'lx-note' }, `${info(c).name} is written in the ${X.language.script === 'Latn' ? 'Latin alphabet' : X.language.script}${c === 'de' ? ': ä ö ü and ß are letters of their own, every noun starts with a capital letter' : ''}. Spelling drills use the words you have met; the buttons under the answer field type the special letters.`), drills);
+  const drills = h('div', { class: 'row lx-drills lx-scriptdrills' }, ...N.scriptTypes(UI.C, c).map(t => h('button', { class: 'btn small', 'data-type': t, 'data-icon': SCRIPT_ICON[t] || 'doc', onclick: () => runScriptDrill(c, t) }, SCRIPT_TITLE[t][0] + ' ' + SCRIPT_TITLE[t][1])),
+    N.scriptTypes(UI.C, c).length > 1 ? h('button', { class: 'btn small primary', 'data-type': 'mix', 'data-icon': 'gym', onclick: () => runScriptDrill(c, null) }, '▶ ' + LT('lang.script.mixed')) : null);
+  if (!M) {   // how the language is written: an explanation (lang.expl.*, the course's explanation language)
+    v.append(h('p', { class: 'lx-note' }, LE(c === 'de' ? 'lang.expl.script.de' : X.language.script === 'Latn' ? 'lang.expl.script.latin' : 'lang.expl.script.other', { lang: explName(c), script: X.language.script })), drills);
     return;
   }
   const ss = N.scriptState(UI.C, UI.L, c);
   const pct = ss.total ? Math.round(ss.known / ss.total * 100) : 0;
   const fresh = M.kind === 'letters' ? ss.groups.filter(g => ss.open.includes(g.id)).flatMap(g => g.items).filter(x => ss.items[x] === 'ready') : [];
   v.append(h('div', { class: 'lx-card lx-stagemeter', 'data-stage': ss.stage },
-    h('div', { class: 'row' }, h('b', {}, `Stage ${ss.stage} of ${ss.stages}`), h('span', { class: 'tiny' }, `${ss.known} of ${ss.total} ${M.kind === 'chars' ? 'characters' : 'letters and marks'} known · ${ss.introduced} met`), ss.complete ? h('span', { class: 'lx-badge st s-known_p' }, '✅ complete') : null),
+    h('div', { class: 'row' }, h('b', {}, LT('lang.script.stage', { n: ss.stage, of: ss.stages })), h('span', { class: 'tiny' }, LT(M.kind === 'chars' ? 'lang.script.knownChars' : 'lang.script.knownLetters', { known: ss.known, total: ss.total, met: ss.introduced })), ss.complete ? h('span', { class: 'lx-badge st s-known_p' }, '✅ ' + LT('lang.script.complete')) : null),
     h('div', { class: 'lx-progress', role: 'progressbar', 'aria-valuenow': pct, 'aria-valuemin': 0, 'aria-valuemax': 100 }, h('i', { style: { width: pct + '%' } })),
-    h('p', { class: 'tiny' }, M.kind === 'chars' ? 'A character is known when you know a word with it (or from its own drills). The groups follow the lessons.'
-      : ss.complete ? 'Every letter is known: words may now be typed, and transliteration follows your setting.' : 'Letters come in groups of similar shapes; the next group opens when you have practised this one. Until every letter is known, words show their transliteration and you write them with tiles.'),
-    fresh.length ? h('button', { class: 'btn primary lx-learnletters', onclick: () => runScriptDrill(c, 'learn') }, `🆕 Learn ${fresh.length === 1 ? 'the next one' : 'the next ' + Math.min(fresh.length, 6)}`) : null), drills);
+    h('p', { class: 'tiny' }, LT(M.kind === 'chars' ? 'lang.script.charsHelp' : ss.complete ? 'lang.script.lettersDone' : 'lang.script.lettersHelp')),
+    fresh.length ? h('button', { class: 'btn primary lx-learnletters', onclick: () => runScriptDrill(c, 'learn') }, '🆕 ' + LT('lang.script.learnNext', { n: Math.min(fresh.length, 6) })) : null), drills);
   for (const [gi, g] of ss.groups.entries()) {
     const isOpen = ss.open.includes(g.id);
     if (M.kind === 'chars' && !isOpen && g.state === 'new' && gi > ss.groups.findIndex(x => x.state === 'new') + 2) continue;   // characters: the near groups only
-    v.append(h('details', { class: 'lx-sec lx-glyphgroup', open: isOpen ? true : null, 'data-group': g.id }, h('summary', {}, g.title, h('span', { class: 'tiny' }, ` · ${g.known}/${g.items.length} known${isOpen ? '' : g.state === 'new' ? ' · 🔒 later' : ''}`)),
+    v.append(h('details', { class: 'lx-sec lx-glyphgroup', open: isOpen ? true : null, 'data-group': g.id }, h('summary', {}, g.title, h('span', { class: 'tiny' }, ' · ' + LT('lang.script.groupKnown', { known: g.known, n: g.items.length }) + (isOpen ? '' : g.state === 'new' ? ' · 🔒 ' + LT('lang.script.later') : ''))),
       h('div', { class: 'lx-glyphs' + (isOpen || g.state !== 'new' ? '' : ' lx-later') }, ...g.items.map(key => {
         const it = M.items[key], st = ss.items[key];
         return h('button', { class: 'lx-gtile s-' + st, 'data-glyph': key, title: `${it.name || it.meaning || ''} — ${STATE_LABEL[st] || st}`, onclick: () => glyphCard(c, key) },
@@ -2901,27 +3277,27 @@ function runScriptDrill(c, type, { only = null } = {}) {
   }
   const m = $('.lx-main'); m.innerHTML = '';
   const bar = h('div', { class: 'lx-progress' }, h('i')), stage = h('div', { class: 'lx-stage' });
-  const title = type ? SCRIPT_TITLE[type].join(' ') : '▶ Mixed';
-  m.append(h('div', { class: 'view lx-view lx-session lx-scriptrun', 'data-lang': c, 'data-type': type || 'mix' }, h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => { save(true); go('#/script/' + c); render(); } }, '✕ Stop'), h('b', { class: 'tiny' }, info(c).flag + ' ' + title), bar), stage));
-  if (!queue.length) { stage.append(h('div', { class: 'lx-result' }, h('p', {}, `Nothing to drill here yet in ${info(c).name}: learn some ${N.scriptModule(UI.C, c)?.kind === 'letters' ? 'letters' : 'words'} first.`), h('button', { class: 'btn primary', onclick: () => go('#/script/' + c) }, 'Back'))); return; }
+  const title = type ? SCRIPT_TITLE[type].join(' ') : '▶ ' + LT('lang.script.mixed');
+  m.append(h('div', { class: 'view lx-view lx-session lx-scriptrun', 'data-lang': c, 'data-type': type || 'mix' }, h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => { save(true); go('#/script/' + c); render(); } }, '✕ ' + LT('lang.sess.stop')), h('b', { class: 'tiny' }, info(c).flag + ' ' + title), bar), stage));
+  if (!queue.length) { stage.append(h('div', { class: 'lx-result' }, h('p', {}, LT(N.scriptModule(UI.C, c)?.kind === 'letters' ? 'lang.script.nothingLetters' : 'lang.script.nothingWords', { lang: info(c).name })), h('button', { class: 'btn primary', onclick: () => go('#/script/' + c) }, LT('lang.card.back')))); return; }
   const total = queue.length, stats = { right: 0, wrong: 0 }; let i = 0;
   const next = () => {
     bar.firstChild.style.width = Math.round(i / total * 100) + '%';
     const a = queue.shift(); stage.innerHTML = '';
     if (!a) {
       save(true); bar.firstChild.style.width = '100%';
-      return stage.append(h('div', { class: 'lx-result' }, h('h2', {}, '🎉 Done'), h('p', {}, `${stats.right} right · ${stats.wrong} to practise again`),
-        h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => runScriptDrill(c, type) }, '↻ Again'), h('button', { class: 'btn', onclick: () => go('#/script/' + c) }, 'Back to the letters'))));
+      return stage.append(h('div', { class: 'lx-result' }, h('h2', {}, '🎉 ' + LT('lang.prod.done')), h('p', {}, LT('lang.prod.stats', { right: stats.right, wrong: stats.wrong })),
+        h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => runScriptDrill(c, type) }, '↻ ' + LT('lang.drill.again')), h('button', { class: 'btn', onclick: () => go('#/script/' + c) }, LT('lang.script.backLetters')))));
     }
     i++;
     UI.current = { kind: 'script', lang: c, it: a.item, intro: a.intro };   // what is on screen (tests, the tutor)
     const done = ok => {
       if (a.intro) return next();
       ok ? stats.right++ : stats.wrong++;
-      const b = h('button', { class: 'btn primary lx-next' }, 'Next →'); b.onclick = next; stage.append(h('div', { class: 'row lx-nextrow' }, b)); setTimeout(() => b.focus(), 30);
+      const b = h('button', { class: 'btn primary lx-next' }, LT('lang.drill.next') + ' ' + arrowOn()); b.onclick = next; stage.append(h('div', { class: 'row lx-nextrow' }, b)); setTimeout(() => b.focus(), 30);
     };
     const ex = a.intro ? glyphIntro(c, a.intro, done) : exItem(a.item, done);
-    stage.append(h('div', { class: 'tiny lx-which' }, info(c).flag, ' ', info(c).name), ex);
+    stage.append(h('div', { class: 'tiny lx-which' }, info(c).flag, ' ', info(c).label), ex);
   };
   document.onkeydown = e => {
     if (!$('.lx-scriptrun')) { document.onkeydown = null; return; }
@@ -2962,6 +3338,10 @@ Object.assign(window.NoemaLangUI, { script: { scriptInput, shownMarks, runScript
   }
   const cloudAcc = acc => { try { const s = window.NoemaCloud?.session?.(); return !!s && acc === 'u_' + s.user.id; } catch (e) { return false; } };
   const toast = (m, ms = 3000) => window.Noema?.toast ? Noema.toast(m, ms) : console.log(m);
+  /** An error's words for the learner: its code's message in the UI language, else its (English) text (docs/i18n.md §6). */
+  const errW = e => window.NoemaI18n ? NoemaI18n.err(e) : String((e && e.message) || e);
+  /** A refused task's error: task.error keeps the English text (the connector, older apps), task.errorInfo { code, params } the learner's words. */
+  const taskErr = t => t.errorInfo && t.errorInfo.code && window.NoemaI18n && NoemaI18n.has('err.' + t.errorInfo.code) ? NoemaI18n.err(t.errorInfo) : t.error;
 
   /* ---------- device + cloud storage of the content ---------- */
   const ownDb = { db: null, open() { if (this.db) return Promise.resolve(this.db); return new Promise((res, rej) => { const r = indexedDB.open('noema-lite', 1); r.onupgradeneeded = () => { const d = r.result; ['packs', 'handles', 'restore', 'convos'].forEach(n => { if (!d.objectStoreNames.contains(n)) d.createObjectStore(n); }); }; r.onsuccess = () => { this.db = r.result; res(this.db); }; r.onerror = () => rej(r.error); }); } };
@@ -2975,7 +3355,7 @@ Object.assign(window.NoemaLangUI, { script: { scriptInput, shownMarks, runScript
   async function loadContent(acc, cid) {
     const rec = getRec(acc, cid); let d = await devGet(devKey(acc, 'langcourse', cid));
     if (cloudAcc(acc) && (!d || (rec && (d.rev || 0) < (rec.rev || 0)))) { const c = await cloudGet(`langs/${cid}.json`); if (c && (!d || (c.rev || 0) > (d.rev || 0))) { d = c; await devPut(devKey(acc, 'langcourse', cid), d); } }
-    if (!d) throw new Error('This course is not on this device yet' + (cloudAcc(acc) ? ' (and not in the cloud).' : ' — sign in to the cloud account it was made with.'));
+    if (!d) throw new Error(LT(cloudAcc(acc) ? 'lang.claude.notHereCloud' : 'lang.claude.notHereSignIn'));
     return d;
   }
   async function saveContent(acc, rec, data) {
@@ -3001,7 +3381,7 @@ Object.assign(window.NoemaLangUI, { script: { scriptInput, shownMarks, runScript
   /** The content a task of this record works on: the account course, or a library course with the learner's patch. */
   async function contentFor(acc, rec) {
     if (rec.origin === 'account') return { data: await loadContent(acc, rec.id) };
-    const lib = (await libraryData()).find(d => d.course.id === rec.id); if (!lib) throw new Error(`The library course “${rec.id}” is not available here.`);
+    const lib = (await libraryData()).find(d => d.course.id === rec.id); if (!lib) throw new Error(LT('lang.claude.libMissing', { id: rec.id }));
     const patch = await loadPatch(acc, rec.id);
     return { data: N.langApplyPatch(JSON.parse(JSON.stringify(lib)), patch), patch };
   }
@@ -3049,27 +3429,28 @@ Object.assign(window.NoemaLangUI, { script: { scriptInput, shownMarks, runScript
     const added = Object.keys(UI.C?.data.course.added || {}); if (!added.length) return;
     const seen = UI.prefs.addedSeen || [], fresh = added.filter(c => !seen.includes(c)); if (!fresh.length) return;
     UI.L.settings.languages = [...new Set([...(UI.L.settings.languages || UI.C.languages), ...fresh])];
+    const st = studyAnswer(); if (st) putStudy([...st, ...fresh]);   // D21: the learner asked for it — it is one of the languages they study
     UI.prefs.addedSeen = [...seen, ...fresh]; save();
   }
   /** ⋮ › the language › Remove this language (and the course settings): asks, removes, opens the course again without it. */
   async function removeAdded(code) {
     const a = UI.C?.data.course.added?.[code]; if (!a) return;
-    if (!confirm(`Remove ${a.name || info(code).name} from “${UI.C.data.course.title}”?\n\nThe language leaves this course on every device. Your progress in it is kept: adding it again through Claude brings it back.`)) return;
+    if (!confirm(LT('lang.claude.removeAsk', { lang: a.name || info(code).name, title: UI.C.data.course.title }) + '\n\n' + LT('lang.claude.removeAskSub'))) return;
     await removePackage(UI.acc, UI.id, code);
-    toast(`${a.name || info(code).name} removed from the course`, 2500);
+    toast(LT('lang.claude.removed', { lang: a.name || info(code).name }), 2500);
     setTimeout(() => location.reload(), 300);
   }
   const addedPanel = () => {
     const added = UI.C.data.course.added || {}, codes = Object.keys(added); if (!codes.length) return null;
-    return h('div', { class: 'lj-added' }, h('h3', { class: 'lx-h3' }, 'Languages added through Claude'),
-      ...codes.map(c => h('div', { class: 'row lj-addedrow', 'data-lang': c }, h('span', {}, info(c).flag, ' ', h('b', {}, added[c].name || info(c).name), added[c].built ? h('span', { class: 'tiny' }, ' · made ' + String(added[c].built).slice(0, 10)) : null),
-        h('button', { class: 'btn small ghost lj-remove', 'data-lang': c, onclick: () => removeAdded(c) }, 'Remove this language'))));
+    return h('div', { class: 'lj-added' }, h('h3', { class: 'lx-h3' }, LT('lang.claude.addedTitle')),
+      ...codes.map(c => h('div', { class: 'row lj-addedrow', 'data-lang': c }, h('span', {}, info(c).flag, ' ', h('b', {}, added[c].name || info(c).label), added[c].built ? h('span', { class: 'tiny' }, ' · ' + LT('lang.claude.made', { date: String(added[c].built).slice(0, 10) })) : null),
+        h('button', { class: 'btn small ghost lj-remove', 'data-lang': c, onclick: () => removeAdded(c) }, LT('lang.frame.removeLang')))));
   };
 
   /* ---------- the course that is open: rebuilt after a merge ---------- */
   function refresh(acc, cid, data) {
     if (UI.acc !== acc || UI.id !== cid || !UI.C) return;
-    UI.C = N.course(applyPacks(data, PACKS[acc + '|' + cid])); const prof = (window.NOEMA_LANGPROFILES || {})[cid]; if (prof) N.addProfiles(UI.C, prof);
+    UI.data = applyPacks(data, PACKS[acc + '|' + cid]); UI.C = buildCourse(UI.data); const prof = (window.NOEMA_LANGPROFILES || {})[cid]; if (prof) { UI.profMap = prof; N.addProfiles(UI.C, facadeProfMap(prof)); }   // D19: through the facade of the explanation locale
     UI.L = N.fromKV(UI.C, N.toKV(UI.C, UI.L));
     if (!document.querySelector('.lx-session')) render();
   }
@@ -3084,12 +3465,12 @@ Object.assign(window.NoemaLangUI, { script: { scriptInput, shownMarks, runScript
   /* ---------- the three ways ---------- */
   /** ▶ With the Claude key on this device: one task (Claude repairs its answer when the check finds problems). */
   async function runTask(acc, cid, taskId, { onLog = () => { }, signal } = {}) {
-    const rec = getRec(acc, cid), task = rec && N.langTaskById(rec, taskId); if (!task) throw new Error('This task is not open any more.');
+    const rec = getRec(acc, cid), task = rec && N.langTaskById(rec, taskId); if (!task) throw new Error(LT('lang.claude.taskClosed'));
     const ctx = await contentFor(acc, rec), peers = task.kind === K.core ? await libraryData() : [];
     const sp = N.langTaskSpec(rec, ctx.data, task, { peers });
     onLog(`✨ ${sp.title}…`);
     const r = await NoemaLLM.json({ acc, provider: 'claude', name: 'answer', system: sp.system, prompt: sp.prompt, schema: sp.schema, maxTokens: 32000, signal, repairs: 2,
-      validate: d => N.checkLangAnswer(rec, ctx.data, task, d, { peers }), onRepair: (errs) => onLog(`↻ Claude fixes ${errs.length} problem(s)…`) });
+      validate: d => N.checkLangAnswer(rec, ctx.data, task, d, { peers }), onRepair: (errs) => onLog('↻ ' + LT('lang.claude.fixes', { n: errs.length })) });
     const line = await applyAndSave(acc, rec, ctx, task, r.data);
     onLog('✓ ' + line); return line;
   }
@@ -3100,7 +3481,7 @@ Object.assign(window.NoemaLangUI, { script: { scriptInput, shownMarks, runScript
       if (signal?.aborted) break;
       const t = N.langNext(getRec(acc, cid) || { tasks: [] }); if (!t || t.error) break;
       try { await runTask(acc, cid, t.id, { onLog, signal }); }
-      catch (e) { onLog('⚠️ ' + t.id + ': ' + e.message); const rec = getRec(acc, cid), x = N.langTaskById(rec, t.id); if (x && !signal?.aborted) { x.status = 'refused'; x.error = String(e.message).slice(0, 300); putRec(acc, rec); } if (/key|credit|401|Stopped/i.test(e.message)) break; }
+      catch (e) { onLog('⚠️ ' + t.id + ': ' + errW(e)); const rec = getRec(acc, cid), x = N.langTaskById(rec, t.id); if (x && !signal?.aborted) { x.status = 'refused'; x.error = String(e.message).slice(0, 300); x.errorInfo = e.code ? { code: e.code, params: e.params || {} } : null; putRec(acc, rec); } if (/key|credit|401|Stopped/i.test(e.message)) break; }
     }
     return n;
   }
@@ -3110,8 +3491,8 @@ Object.assign(window.NoemaLangUI, { script: { scriptInput, shownMarks, runScript
     return N.langTaskText(rec, ctx.data, task, { mode: 'paste', peers: task.kind === K.core ? await libraryData() : [] });
   }
   async function paste(acc, cid, taskId, text) {
-    const rec = getRec(acc, cid), task = rec && N.langTaskById(rec, taskId); if (!task) return { errors: ['This task is not open any more — copy the current task again.'] };
-    let ans; try { ans = NoemaLLM.parseJSON(text); } catch (e) { return { errors: ['That is not a JSON answer — paste exactly what Claude answered (the JSON object).'] }; }
+    const rec = getRec(acc, cid), task = rec && N.langTaskById(rec, taskId); if (!task) return { errors: [LT('lang.claude.taskClosedCopy')] };
+    let ans; try { ans = NoemaLLM.parseJSON(text); } catch (e) { return { errors: [LT('lang.claude.notJSON')] }; }
     const ctx = await contentFor(acc, rec), errs = N.checkLangAnswer(rec, ctx.data, task, ans, { peers: task.kind === K.core ? await libraryData() : [] });
     if (errs.length) return { errors: errs };
     return { ok: true, line: await applyAndSave(acc, rec, ctx, task, ans) };
@@ -3135,14 +3516,14 @@ Object.assign(window.NoemaLangUI, { script: { scriptInput, shownMarks, runScript
         try {
           const ctx = ctxs[cid] = ctxs[cid] || await contentFor(acc, rec);
           const errs = N.checkLangAnswer(rec, ctx.data, task, e.data, { peers: task.kind === K.core ? await libraryData() : [] });
-          if (errs.length) { console.warn('[langjobs] answer refused', errs); task.status = 'refused'; task.error = errs.slice(0, 5).join('; '); putRec(acc, rec); }
+          if (errs.length) { console.warn('[langjobs] answer refused', errs); task.status = 'refused'; task.error = errs.slice(0, 5).join('; '); task.errorInfo = null; putRec(acc, rec); }
           else { await applyAndSave(acc, rec, ctx, task, e.data); n++; }
           done.push(r.key);
         } catch (x) { console.warn('[langjobs]', x); }
       }
       if (n) await CL.push(acc).catch(() => { });   // the records reach the cloud before their answers leave the inbox
       for (const k of done) await CL.kvDelete(k).catch(() => { });
-      if (n) toast(`✨ ${n} answer(s) from your Claude app merged into your course`, 3500);
+      if (n) toast('✨ ' + LT('lang.claude.merged', { n }), 3500);
     } catch (x) { console.warn('[langjobs] poll', x); }
     return n;
   }
@@ -3176,11 +3557,13 @@ Object.assign(window.NoemaLangUI, { script: { scriptInput, shownMarks, runScript
 
   /* ---------- small UI helpers ---------- */
   const LANGS = ['ar', 'he', 'zh', 'de', 'es', 'fr', 'it', 'pt', 'ru', 'tr', 'ja', 'ko', 'el', 'en', 'hi', 'fa', 'nl', 'pl', 'sw', 'vi'];
-  const EXPLAIN = [['en', 'English'], ['el', 'Ελληνικά'], ['de', 'Deutsch'], ['fr', 'Français'], ['es', 'Español'], ['it', 'Italiano'], ['ru', 'Русский'], ['tr', 'Türkçe']];
-  const copy = async (t, btn) => { try { await navigator.clipboard.writeText(t); if (btn) { const o = btn.textContent; btn.textContent = '✓ Copied'; setTimeout(() => btn.textContent = o, 1600); } } catch (e) { } };
+  const EXPLAIN = [['en', 'English'], ['el', 'Ελληνικά'], ['de', 'Deutsch'], ['fr', 'Français'], ['es', 'Español'], ['it', 'Italiano'], ['ru', 'Русский'], ['tr', 'Türkçe']];   // i18n-ignore (endonyms)
+  const copy = async (t, btn) => { try { await navigator.clipboard.writeText(t); if (btn) { const o = btn.textContent; btn.textContent = '✓ ' + LT('lang.claude.copied'); setTimeout(() => btn.textContent = o, 1600); } } catch (e) { } };
   const hasKey = acc => !!window.NoemaClaude?.Key?.get(acc);
-  const STATUS = { queued: '⏳ queued', done: '✅ done', refused: '⚠️ refused' };
-  const kindLabel = { [K.core]: '🧱 the core', [K.node]: '📖 a node', [K.function]: '🧩 grammar', [K.compare]: '⇄ comparison', [K.refill]: '✨ more sentences' };
+  const STATUS_SIGN = { queued: '⏳', done: '✅', refused: '⚠️' };
+  const STATUS = new Proxy({}, { get: (o, s) => typeof s === 'string' && STATUS_SIGN[s] ? STATUS_SIGN[s] + ' ' + LT('lang.claude.status.' + s) : undefined });   // lang.claude.status.<status>
+  const KIND_SIGN = { [K.core]: ['🧱', 'core'], [K.node]: ['📖', 'node'], [K.function]: ['🧩', 'function'], [K.compare]: ['⇄', 'compare'], [K.refill]: ['✨', 'refill'] };
+  const kindLabel = new Proxy({}, { get: (o, k) => typeof k === 'string' && KIND_SIGN[k] ? KIND_SIGN[k][0] + ' ' + LT('lang.claude.kind.' + KIND_SIGN[k][1]) : undefined });   // lang.claude.kind.<kind>
   function overlay(build) {
     const o = h('div', { class: 'noema-overlay lj-ov', role: 'dialog', 'aria-modal': 'true' }), box = h('div', { class: 'noema-ovbox lj-box' }); o.append(box);
     const close = () => { o.remove(); document.removeEventListener('keydown', esc); };
@@ -3188,110 +3571,112 @@ Object.assign(window.NoemaLangUI, { script: { scriptInput, shownMarks, runScript
     o.addEventListener('click', e => { if (e.target === o) close(); }); document.addEventListener('keydown', esc);
     build(box, close); document.body.append(o); setTimeout(() => box.querySelector('input,button')?.focus(), 30); return close;
   }
-  function textBox(text) { return h('textarea', { class: 'lj-text', readonly: true, rows: 8, 'aria-label': 'Text to copy' }, text); }
+  function textBox(text) { return h('textarea', { class: 'lj-text', readonly: true, rows: 8, 'aria-label': LT('lang.claude.textToCopy') }, text); }
 
   /* ---------- ✨ New language course (from the subject picker's 🌍 Languages overlay) ---------- */
   function newCourse(acc, { onCreated = () => { } } = {}) {
     overlay((box, close) => {
       const chosen = new Set(), depth = {};
-      const title = h('input', { class: 'noema-input lj-in', placeholder: 'e.g. Spanish and Japanese for travelling', 'aria-label': 'Title' });
-      const more = h('input', { class: 'noema-input lj-in', placeholder: 'other codes, e.g. uk, ta', 'aria-label': 'Other language codes' });
-      const known = h('input', { class: 'noema-input lj-in', placeholder: 'e.g. el, en', 'aria-label': 'Languages you know' });
-      const explain = h('select', { class: 'noema-input lj-in', 'aria-label': 'Explanation language' }, ...EXPLAIN.map(([v, t]) => h('option', { value: v }, t)));
+      const title = h('input', { class: 'noema-input lj-in', placeholder: LT('lang.claude.titlePh'), 'aria-label': LT('lang.claude.titleLabel') });
+      const more = h('input', { class: 'noema-input lj-in', placeholder: LT('lang.claude.morePh'), 'aria-label': LT('lang.claude.moreLabel') });
+      const known = h('input', { class: 'noema-input lj-in', placeholder: LT('lang.claude.knownPh'), 'aria-label': LT('lang.claude.knownLabel') });
+      const explain = h('select', { class: 'noema-input lj-in', 'aria-label': LT('lang.claude.explainLabel') }, ...EXPLAIN.map(([v, t]) => h('option', { value: v }, t)));
       const depths = h('div', { class: 'lj-depths' });
       const langsNow = () => [...chosen, ...more.value.split(/[\s,;]+/).map(x => x.trim().toLowerCase()).filter(x => /^[a-z]{2,3}$/.test(x))].filter((x, i, a) => a.indexOf(x) === i);
-      const drawDepth = () => { depths.innerHTML = ''; for (const c of langsNow()) depths.append(h('label', { class: 'lj-depth' }, info(c).flag, ' ', info(c).name, ' ', h('select', { 'aria-label': 'Depth ' + c, 'data-lang': c, onchange: e => { depth[c] = +e.target.value; } }, ...[[3, 'everything (tiers 1–3)'], [2, 'common + intermediate'], [1, 'the common words']].map(([v, t]) => h('option', { value: v, selected: (depth[c] || 3) === v ? '' : null }, t))))); };
+      const drawDepth = () => { depths.innerHTML = ''; for (const c of langsNow()) depths.append(h('label', { class: 'lj-depth' }, info(c).flag, ' ', info(c).label, ' ', h('select', { 'aria-label': LT('lang.claude.depthOf', { lang: window.NoemaI18n ? NoemaI18n.fmt.langName(c) : c }), 'data-lang': c, onchange: e => { depth[c] = +e.target.value; } }, ...[[3, LT('lang.claude.depth3')], [2, LT('lang.claude.depth2')], [1, LT('lang.claude.depth1')]].map(([v, t]) => h('option', { value: v, selected: (depth[c] || 3) === v ? '' : null }, t))))); };
       more.addEventListener('input', drawDepth);
-      const chips = h('div', { class: 'lj-chips' }, ...LANGS.map(c => h('button', { class: 'chip lj-lang', type: 'button', 'data-lang': c, 'aria-pressed': 'false', onclick: e => { const b = e.currentTarget; if (chosen.has(c)) chosen.delete(c); else chosen.add(c); b.setAttribute('aria-pressed', chosen.has(c) ? 'true' : 'false'); b.classList.toggle('on', chosen.has(c)); drawDepth(); } }, info(c).flag, ' ', info(c).name)));
+      const chips = h('div', { class: 'lj-chips' }, ...LANGS.map(c => h('button', { class: 'chip lj-lang', type: 'button', 'data-lang': c, 'aria-pressed': 'false', onclick: e => { const b = e.currentTarget; if (chosen.has(c)) chosen.delete(c); else chosen.add(c); b.setAttribute('aria-pressed', chosen.has(c) ? 'true' : 'false'); b.classList.toggle('on', chosen.has(c)); drawDepth(); } }, info(c).flag, ' ', info(c).label)));
       let way = 'claudeapp';
-      const ways = h('div', { class: 'cg-choices lj-ways', role: 'radiogroup', 'aria-label': 'Who writes it' }, ...[
-        ['claudeapp', '💬 The Claude app — recommended', 'With the noema-lite connector: your Claude plan writes the course task by task (scheduled runs at night); the app merges every answer by itself.'],
-        ['claude', '▶ Here, with your Claude key', hasKey(acc) ? 'The app asks Claude now (paid per use on your API account); the key stays on this device.' : 'Needs a Claude API key on this device (⚙️ Settings → Claude).'],
-        ['cowork', '🧑‍💻 Claude here in Cowork', 'For the shared library of the app: Claude writes the course into library/languages/ of the repository and validates it.'],
+      const ways = h('div', { class: 'cg-choices lj-ways', role: 'radiogroup', 'aria-label': LT('lang.claude.whoWrites') }, ...[
+        ['claudeapp', '💬 ' + LT('lang.claude.wayApp'), LT('lang.claude.wayAppSub')],
+        ['claude', '▶ ' + LT('lang.claude.wayKey'), LT(hasKey(acc) ? 'lang.claude.wayKeySub' : 'lang.claude.wayKeyNeeds')],
+        ['cowork', '🧑‍💻 ' + LT('lang.claude.wayCowork'), LT('lang.claude.wayCoworkSub')],
       ].map(([v, t, d]) => h('button', { class: 'cg-choice lj-way' + (v === way ? ' on' : ''), type: 'button', role: 'radio', 'aria-checked': v === way ? 'true' : 'false', 'data-way': v, disabled: v === 'claude' && !hasKey(acc) ? '' : null, onclick: e => { way = v; ways.querySelectorAll('.lj-way').forEach(b => { const on = b.dataset.way === v; b.classList.toggle('on', on); b.setAttribute('aria-checked', on ? 'true' : 'false'); }); } }, h('b', {}, t), h('span', { class: 'tiny' }, d))));
       const msg = h('div', { class: 'lj-msg', role: 'status' });
       const go1 = h('button', { class: 'btn primary lj-create', type: 'button', onclick: async () => {
         const langs = langsNow(), opts = { title: title.value.trim(), languages: langs, explainLang: explain.value || 'en', depth: Object.fromEntries(langs.map(c => [c, depth[c] || 3])), knownLanguages: known.value.split(/[\s,;]+/).filter(Boolean), provider: way };
-        if (!opts.title) { msg.textContent = '⚠️ Give the course a title.'; title.focus(); return; }
-        if (!langs.length) { msg.textContent = '⚠️ Choose at least one language.'; return; }
-        if (way === 'cowork') { box.innerHTML = ''; box.append(h('h2', {}, '🧑‍💻 A course for the shared library'), h('p', {}, 'Give Claude (Claude Code / Cowork, in the noema-lite repository) this brief. The course is written into library/languages/, validated (validate_lang.py --strict, lang_refcheck.py, lang_phenomena.py) and appears for everybody after the next build.'), textBox(coworkBrief(opts)), h('div', { class: 'row' }, h('button', { class: 'btn', onclick: e => copy(coworkBrief(opts), e.currentTarget) }, '📋 Copy'), h('button', { class: 'btn ghost', onclick: close }, 'Close'))); return; }
-        go1.disabled = true; msg.textContent = '⏳ Creating the course…';
+        if (!opts.title) { msg.textContent = '⚠️ ' + LT('lang.claude.needTitle'); title.focus(); return; }
+        if (!langs.length) { msg.textContent = '⚠️ ' + LT('lang.claude.needLang'); return; }
+        if (way === 'cowork') { box.innerHTML = ''; box.append(h('h2', {}, '🧑‍💻 ' + LT('lang.claude.coworkTitle')), h('p', {}, LT('lang.claude.coworkHow')), textBox(coworkBrief(opts)), h('div', { class: 'row' }, h('button', { class: 'btn', onclick: e => copy(coworkBrief(opts), e.currentTarget) }, '📋 ' + LT('lang.claude.copy')), h('button', { class: 'btn ghost', onclick: close }, LT('lang.tutor.close')))); return; }
+        go1.disabled = true; msg.textContent = '⏳ ' + LT('lang.claude.creating');
         try {
           const { record } = await create(acc, opts);
           if (way === 'claude') {
-            msg.textContent = '✨ Claude writes the core of the course…';
-            try { await runTask(acc, record.id, 'core', { onLog: t => { msg.textContent = t; } }); } catch (e) { msg.textContent = '⚠️ ' + e.message + ' — the task stays in the queue (✨ Through Claude).'; }
+            msg.textContent = '✨ ' + LT('lang.claude.writingCore');
+            try { await runTask(acc, record.id, 'core', { onLog: t => { msg.textContent = t; } }); } catch (e) { msg.textContent = '⚠️ ' + LT('lang.claude.staysQueued', { err: errW(e) }); }
             close(); onCreated(record); return;
           }
           box.innerHTML = '';
-          box.append(h('h2', {}, `✨ “${record.title}” is waiting for your Claude app`), h('p', {}, 'Paste this into a chat in the Claude app (with the noema-lite connector). Claude writes the core first, then the nodes in each language; every answer reaches this app by itself. On the course page ✨ Through Claude shows the queue.'),
-            textBox(N.langMessage(record)), h('div', { class: 'row' }, h('button', { class: 'btn', onclick: e => copy(N.langMessage(record), e.currentTarget) }, '📋 Copy the message'), h('button', { class: 'btn primary', onclick: () => { close(); onCreated(record); } }, 'Open the course')));
-        } catch (e) { go1.disabled = false; msg.textContent = '⚠️ ' + e.message; }
-      } }, '✨ Create the course');
-      box.append(h('h2', {}, '✨ New language course'), h('p', { class: 'tiny' }, 'A private course in your account, written by Claude to the rules of the language courses (correct forms, the common order of every language, sentences from what you know).'),
-        h('label', { class: 'lj-field' }, h('b', {}, 'Title'), title),
-        h('div', { class: 'lj-field' }, h('b', {}, 'Languages'), chips, more),
-        h('label', { class: 'lj-field' }, h('b', {}, 'Explanations in'), explain),
-        h('div', { class: 'lj-field' }, h('b', {}, 'Depth per language'), depths),
-        h('label', { class: 'lj-field' }, h('b', {}, 'Languages you already know'), known),
-        h('div', { class: 'lj-field' }, h('b', {}, 'Who writes it'), ways),
-        msg, h('div', { class: 'row' }, go1, h('button', { class: 'btn ghost', type: 'button', onclick: close }, 'Cancel')));
+          box.append(h('h2', {}, '✨ ' + LT('lang.claude.waiting', { title: record.title })), h('p', {}, LT('lang.claude.waitingHow')),
+            textBox(N.langMessage(record)), h('div', { class: 'row' }, h('button', { class: 'btn', onclick: e => copy(N.langMessage(record), e.currentTarget) }, '📋 ' + LT('lang.claude.copyMsg')), h('button', { class: 'btn primary', onclick: () => { close(); onCreated(record); } }, LT('lang.claude.openCourse'))));
+        } catch (e) { go1.disabled = false; msg.textContent = '⚠️ ' + errW(e); }
+      } }, '✨ ' + LT('lang.claude.create'));
+      box.append(h('h2', {}, '✨ ' + LT('lang.claude.newTitle')), h('p', { class: 'tiny' }, LT('lang.claude.newSub')),
+        h('label', { class: 'lj-field' }, h('b', {}, LT('lang.claude.titleLabel')), title),
+        h('div', { class: 'lj-field' }, h('b', {}, LT('lang.shell.languages')), chips, more),
+        h('label', { class: 'lj-field' }, h('b', {}, LT('lang.claude.explainIn')), explain),
+        h('div', { class: 'lj-field' }, h('b', {}, LT('lang.claude.depthPer')), depths),
+        h('label', { class: 'lj-field' }, h('b', {}, LT('lang.set.knowAlready')), known),
+        h('div', { class: 'lj-field' }, h('b', {}, LT('lang.claude.whoWrites')), ways),
+        msg, h('div', { class: 'row' }, go1, h('button', { class: 'btn ghost', type: 'button', onclick: close }, LT('lang.claude.cancel'))));
       drawDepth();
     });
   }
-  const coworkBrief = o => `Create a new language course for the shared library of noema-lite: “${o.title}” — languages ${o.languages.join(', ')}, explanations in ${o.explainLang}, depth ${Object.entries(o.depth).map(([k, v]) => k + ' ' + v).join(', ')}, known languages ${o.knownLanguages.join(', ') || '—'}.\nRead docs/LANGUAGE_RULES.md first (binding), then docs/LANGUAGES.md §4, §10 and §11. A language without a catalogue starts with its typological profile and its catalogue of phenomena (library/languages/_phenomena/<code>.json) and its wordFeatures. Place every node on the common order of all the courses (D13). Write it in library/languages/<id>/, ground every form (tools/lang_refcheck.py), and leave python3 tools/validate_lang.py <dir> --strict, tools/lang_phenomena.py and python3 tools/build.py clean.`;
+  const coworkBrief = o => `Create a new language course for the shared library of noema-lite: “${o.title}” — languages ${o.languages.join(', ')}, explanations in ${o.explainLang}, depth ${Object.entries(o.depth).map(([k, v]) => k + ' ' + v).join(', ')}, known languages ${o.knownLanguages.join(', ') || '—'}.\nRead docs/LANGUAGE_RULES.md first (binding), then docs/LANGUAGES.md §4, §10 and §11. A language without a catalogue starts with its typological profile and its catalogue of phenomena (library/languages/_phenomena/<code>.json) and its wordFeatures. Place every node on the common order of all the courses (D13). Write it in library/languages/<id>/, ground every form (tools/lang_refcheck.py), and leave python3 tools/validate_lang.py <dir> --strict, tools/lang_phenomena.py and python3 tools/build.py clean.`;   // i18n-ignore (a brief for Claude Code: stays English)
 
   /* ---------- #/claude — the course's task queue ---------- */
   const busy = { ctl: null };
   VIEWS.claude = (v) => {
     const acc = UI.acc, C = UI.C, rec = getRec(acc, C.id);
     const account = !!C.data.course.account;
-    v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← The course')),
-      h('h1', { class: 'lj-h1' }, '✨ Through Claude'), h('p', { class: 'lx-sub' }, account ? 'Your own course: Claude writes it task by task, every answer is checked before it joins the course.' : 'This course is from the library: here Claude writes more sentences with the words you know (✨ on a grammar page).'));
-    if (!rec) { v.append(h('p', { class: 'lx-note' }, 'Nothing queued for Claude yet. On a grammar page, “✨ Ask Claude for more sentences” queues a task.')); return; }
-    const data = C.data, nd = account ? N.langNeeds(rec, data) : null, w = N.langWork(rec);
+    v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, arrowBack() + ' ' + LT('lang.claude.theCourse'))),
+      h('h1', { class: 'lj-h1' }, '✨ ' + LT('lang.view.claude')), h('p', { class: 'lx-sub' }, LT(account ? 'lang.claude.subAccount' : 'lang.claude.subLibrary')));
+    if (!rec) { v.append(h('p', { class: 'lx-note' }, LT('lang.claude.nothingQueued'))); return; }
+    const data = C.data, nd0 = account ? N.langNeeds(rec, data) : null, w = N.langWork(rec);
+    const nd = nd0 && { ...nd0, nodes: nd0.nodes.filter(x => C.lang[x.lang]), functions: nd0.functions.filter(x => C.lang[x.lang]),   // D21: only for the languages the learner studies
+      compare: C.languages.length > 1 ? nd0.compare.filter(fn => C.languages.filter(c => C.lang[c].grammar[fn]).length >= 2) : [] };
     const log = h('div', { class: 'lj-log', role: 'log', 'aria-live': 'polite' });
     const say = t => { log.prepend(h('div', {}, t)); };
     const queueBtns = account ? h('div', { class: 'row lj-queue' },
-      nd.core ? null : h('button', { class: 'btn small', disabled: nd.nodes.length ? null : '', onclick: () => { const r = getRec(acc, C.id); const per = {}; for (const x of nd.nodes) if (!per[x.lang]) per[x.lang] = x; Object.values(per).forEach(x => N.langQueue(r, K.node, x)); putRec(acc, r); render(); } }, '🧱 Queue the next node in each language'),
-      nd.core ? null : h('button', { class: 'btn small lj-night', disabled: nd.nodes.length || nd.functions.length ? null : '', onclick: () => { const r = getRec(acc, C.id); const n = N.langQueueNight(r, data); putRec(acc, r); toast(`🌙 ${n} task(s) queued — a scheduled Claude run (or ▶ here) works through them`); render(); } }, `🌙 Queue every unwritten node (${nd.nodes.length + nd.functions.length})`),
-      nd.core ? null : h('button', { class: 'btn small', disabled: nd.compare.length ? null : '', onclick: () => { const r = getRec(acc, C.id); nd.compare.forEach(fn => N.langQueue(r, K.compare, { fn })); putRec(acc, r); render(); } }, `⇄ Queue comparisons (${nd.compare.length})`)) : null;
+      nd.core ? null : h('button', { class: 'btn small', disabled: nd.nodes.length ? null : '', onclick: () => { const r = getRec(acc, C.id); const per = {}; for (const x of nd.nodes) if (!per[x.lang]) per[x.lang] = x; Object.values(per).forEach(x => N.langQueue(r, K.node, x)); putRec(acc, r); render(); } }, '🧱 ' + LT('lang.claude.queueNext')),
+      nd.core ? null : h('button', { class: 'btn small lj-night', disabled: nd.nodes.length || nd.functions.length ? null : '', onclick: () => { const r = getRec(acc, C.id); const n = N.langQueueNight(r, data, { langs: C.languages }); putRec(acc, r); toast('🌙 ' + LT('lang.claude.nightQueued', { n })); render(); } }, '🌙 ' + LT('lang.claude.queueAll', { n: nd.nodes.length + nd.functions.length })),
+      nd.core ? null : h('button', { class: 'btn small', disabled: nd.compare.length ? null : '', onclick: () => { const r = getRec(acc, C.id); nd.compare.forEach(fn => N.langQueue(r, K.compare, { fn })); putRec(acc, r); render(); } }, '⇄ ' + LT('lang.claude.queueCmp', { n: nd.compare.length }))) : null;
     const runAll = hasKey(acc) && w.queued.length ? h('button', { class: 'btn primary lj-runall', onclick: async e => {
       if (busy.ctl) { busy.ctl.abort(); return; }
-      busy.ctl = new AbortController(); e.currentTarget.textContent = '■ Stop';
+      busy.ctl = new AbortController(); e.currentTarget.textContent = '■ ' + LT('lang.sess.stop');
       try { await runQueue(acc, C.id, { onLog: say, signal: busy.ctl.signal }); } finally { busy.ctl = null; render(); }
-    } }, `▶ Write the queue with my Claude key (${w.queued.length})`) : null;
+    } }, '▶ ' + LT('lang.claude.runAll', { n: w.queued.length })) : null;
     v.append(h('div', { class: 'lx-card lj-ways2' },
-      h('div', { class: 'lj-stats' }, h('span', { class: 'lx-badge' }, `${w.queued.length} queued`), w.claimed.length ? h('span', { class: 'lx-badge ctx' }, `${w.claimed.length} being written`) : null, h('span', { class: 'lx-badge reg' }, `${w.done} done`), w.refused ? h('span', { class: 'lx-badge new' }, `${w.refused} refused`) : null),
+      h('div', { class: 'lj-stats' }, h('span', { class: 'lx-badge' }, LT('lang.claude.nQueued', { n: w.queued.length })), w.claimed.length ? h('span', { class: 'lx-badge ctx' }, LT('lang.claude.nClaimed', { n: w.claimed.length })) : null, h('span', { class: 'lx-badge reg' }, LT('lang.claude.nDone', { n: w.done })), w.refused ? h('span', { class: 'lx-badge new' }, LT('lang.claude.nRefused', { n: w.refused })) : null),
       queueBtns,
       h('div', { class: 'row' }, runAll,
-        w.queued.length ? h('button', { class: 'btn small lj-msgbtn', onclick: e => copy(N.langMessage(getRec(acc, C.id), { count: Math.min(5, w.queued.length) }), e.currentTarget) }, '💬 Copy the message for the Claude app') : null,
-        cloudAcc(acc) ? h('button', { class: 'btn small lj-poll', onclick: async () => { const n = await poll(acc); say(n ? `✓ ${n} answer(s) merged` : 'No answers waiting.'); if (n) render(); } }, '🔄 Fetch answers') : null,
-        account ? h('button', { class: 'btn small ghost', onclick: () => { const blob = new Blob([JSON.stringify(C.data)], { type: 'application/json' }); const a = h('a', { href: URL.createObjectURL(blob), download: `course-${C.id}.json` }); document.body.append(a); a.click(); a.remove(); } }, '⬇️ The course file') : null),
-      !hasKey(acc) ? h('p', { class: 'tiny' }, '▶ With a Claude API key on this device (⚙️ Settings → Claude) the app writes the queue itself.') : null,
+        w.queued.length ? h('button', { class: 'btn small lj-msgbtn', onclick: e => copy(N.langMessage(getRec(acc, C.id), { count: Math.min(5, w.queued.length) }), e.currentTarget) }, '💬 ' + LT('lang.claude.copyForApp')) : null,
+        cloudAcc(acc) ? h('button', { class: 'btn small lj-poll', onclick: async () => { const n = await poll(acc); say(n ? '✓ ' + LT('lang.claude.nMerged', { n }) : LT('lang.claude.noAnswers')); if (n) render(); } }, '🔄 ' + LT('lang.claude.fetch')) : null,
+        account ? h('button', { class: 'btn small ghost', onclick: () => { const blob = new Blob([JSON.stringify(C.data)], { type: 'application/json' }); const a = h('a', { href: URL.createObjectURL(blob), download: `course-${C.id}.json` }); document.body.append(a); a.click(); a.remove(); } }, '⬇️ ' + LT('lang.claude.courseFile')) : null),
+      !hasKey(acc) ? h('p', { class: 'tiny' }, '▶ ' + LT('lang.claude.withKey')) : null,
       log));
     const open = N.langOpenTasks(rec), past = (rec.tasks || []).filter(t => t.status !== 'queued').slice(-12).reverse();
-    v.append(h('h2', { class: 'lx-h2' }, 'The queue'), open.length ? h('div', { class: 'lj-tasks' }, ...open.map(t => taskRow(acc, C, t, say))) : h('p', { class: 'tiny' }, account && !nd.core && !nd.nodes.length ? '🎉 Every node is written.' : 'Nothing queued.'));
-    if (past.length) v.append(h('details', { class: 'lx-sec' }, h('summary', {}, 'Done and refused ', h('span', { class: 'tiny' }, past.length)), h('ul', { class: 'lx-list' }, ...past.map(t => h('li', { 'data-task': t.id }, STATUS[t.status] || t.status, ' ', h('code', {}, t.id), t.error ? h('div', { class: 'tiny' }, t.error) : null)))));
-    if ((rec.log || []).length) v.append(h('details', { class: 'lx-sec' }, h('summary', {}, 'What Claude wrote'), h('ul', { class: 'lx-list' }, ...rec.log.slice(-15).reverse().map(l => h('li', {}, new Date(l.t).toLocaleString(), ' — ', l.m)))));
+    v.append(h('h2', { class: 'lx-h2' }, LT('lang.claude.queue')), open.length ? h('div', { class: 'lj-tasks' }, ...open.map(t => taskRow(acc, C, t, say))) : h('p', { class: 'tiny' }, account && !nd.core && !nd.nodes.length ? '🎉 ' + LT('lang.claude.allWritten') : LT('lang.claude.nothingInQueue')));
+    if (past.length) v.append(h('details', { class: 'lx-sec' }, h('summary', {}, LT('lang.claude.past') + ' ', h('span', { class: 'tiny' }, LNUM(past.length))), h('ul', { class: 'lx-list' }, ...past.map(t => h('li', { 'data-task': t.id }, STATUS[t.status] || t.status, ' ', h('code', {}, t.id), t.error ? h('div', { class: 'tiny' }, taskErr(t)) : null)))));
+    if ((rec.log || []).length) v.append(h('details', { class: 'lx-sec' }, h('summary', {}, LT('lang.claude.wrote')), h('ul', { class: 'lx-list' }, ...rec.log.slice(-15).reverse().map(l => h('li', {}, window.NoemaI18n ? NoemaI18n.fmt.date(l.t, { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' }) : new Date(l.t).toLocaleString(), ' — ', l.k && window.NoemaI18n ? '✓ ' + NoemaI18n.t(l.k, l.p) : l.m)))));   // l.m: English (the connector, older entries); l.k, l.p: the learner's words
   };
   function taskRow(acc, C, t, say) {
     const row = h('div', { class: 'lx-card lj-task', 'data-task': t.id },
-      h('div', { class: 'lj-taskhead' }, h('b', {}, kindLabel[t.kind] || t.kind), ' ', h('code', {}, t.id), t.night ? h('span', { class: 'lx-badge' }, '🌙') : null, t.claimedAt ? h('span', { class: 'lx-badge ctx' }, '✍️ being written by a run') : null),
+      h('div', { class: 'lj-taskhead' }, h('b', {}, kindLabel[t.kind] || t.kind), ' ', h('code', {}, t.id), t.night ? h('span', { class: 'lx-badge' }, '🌙') : null, t.claimedAt ? h('span', { class: 'lx-badge ctx' }, '✍️ ' + LT('lang.claude.claimedByRun')) : null),
       h('div', { class: 'row' },
-        hasKey(acc) ? h('button', { class: 'btn small primary lj-run', onclick: async e => { e.currentTarget.disabled = true; try { await runTask(acc, C.id, t.id, { onLog: say }); } catch (x) { say('⚠️ ' + x.message); } render(); } }, '▶ Write it now') : null,
-        h('button', { class: 'btn small lj-copy', onclick: async e => copy(await copyTask(acc, C.id, t.id), e.currentTarget) }, '📋 Copy the task'),
-        h('button', { class: 'btn small lj-paste', onclick: () => pasteBox(acc, C, t, row) }, '📥 Paste the answer')));
+        hasKey(acc) ? h('button', { class: 'btn small primary lj-run', onclick: async e => { e.currentTarget.disabled = true; try { await runTask(acc, C.id, t.id, { onLog: say }); } catch (x) { say('⚠️ ' + errW(x)); } render(); } }, '▶ ' + LT('lang.claude.writeNow')) : null,
+        h('button', { class: 'btn small lj-copy', onclick: async e => copy(await copyTask(acc, C.id, t.id), e.currentTarget) }, '📋 ' + LT('lang.claude.copyTask')),
+        h('button', { class: 'btn small lj-paste', onclick: () => pasteBox(acc, C, t, row) }, '📥 ' + LT('lang.claude.pasteAnswer'))));
     return row;
   }
   function pasteBox(acc, C, t, row) {
     row.querySelector('.lj-pastebox')?.remove();
-    const ta = h('textarea', { class: 'lj-text lj-answer', rows: 8, placeholder: 'Paste Claude’s answer (the JSON object) here', 'aria-label': 'Claude’s answer' }), out = h('div', { class: 'lj-errs', role: 'status' });
+    const ta = h('textarea', { class: 'lj-text lj-answer', rows: 8, placeholder: LT('lang.claude.pastePh'), 'aria-label': LT('lang.claude.answerLabel') }), out = h('div', { class: 'lj-errs', role: 'status' });
     const box = h('div', { class: 'lj-pastebox' }, ta, h('div', { class: 'row' }, h('button', { class: 'btn small primary lj-check', onclick: async () => {
       const r = await paste(acc, C.id, t.id, ta.value);
-      if (r.errors) { out.innerHTML = ''; out.append(h('b', {}, `❌ ${r.errors.length} problem(s) — give them to Claude to fix:`), h('ul', { class: 'lx-list' }, ...r.errors.slice(0, 30).map(e => h('li', {}, e)))); return; }
+      if (r.errors) { out.innerHTML = ''; out.append(h('b', {}, '❌ ' + LT('lang.claude.problems', { n: r.errors.length })), h('ul', { class: 'lx-list' }, ...r.errors.slice(0, 30).map(e => h('li', {}, e)))); return; }
       toast('✓ ' + r.line); render();
-    } }, '✓ Check and add')), out);
+    } }, '✓ ' + LT('lang.claude.checkAdd'))), out);
     row.append(box); ta.focus();
   }
 
@@ -3301,8 +3686,8 @@ Object.assign(window.NoemaLangUI, { script: { scriptInput, shownMarks, runScript
     const rec = getRec(UI.acc, UI.id);
     if (UI.C.data.course.account && !UI.C.data.nodes.length) return VIEWS.claude(v, r);   // nothing to learn before the core is written
     home0(v, r);
-    if (rec) { const w = N.langWork(rec); v.prepend(h('div', { class: 'row lj-homebar' }, h('button', { class: 'btn small ghost lj-open', onclick: () => go('#/claude') }, `✨ Through Claude${w.queued.length + w.claimed.length ? ` — ${w.queued.length + w.claimed.length} task(s) waiting` : ''}`))); }
-    else if (UI.C.data.course.account) v.prepend(h('div', { class: 'row lj-homebar' }, h('button', { class: 'btn small ghost lj-open', onclick: () => go('#/claude') }, '✨ Through Claude')));
+    if (rec) { const w = N.langWork(rec); v.prepend(h('div', { class: 'row lj-homebar' }, h('button', { class: 'btn small ghost lj-open', onclick: () => go('#/claude') }, '✨ ' + (w.queued.length + w.claimed.length ? LT('lang.claude.homeWaiting', { n: w.queued.length + w.claimed.length }) : LT('lang.view.claude'))))); }
+    else if (UI.C.data.course.account) v.prepend(h('div', { class: 'row lj-homebar' }, h('button', { class: 'btn small ghost lj-open', onclick: () => go('#/claude') }, '✨ ' + LT('lang.view.claude'))));
   };
   const fn0 = VIEWS.fn;
   VIEWS.fn = (v, r) => {
@@ -3310,20 +3695,21 @@ Object.assign(window.NoemaLangUI, { script: { scriptInput, shownMarks, runScript
     const fid = r.arg, c = r.arg2 && UI.C.lang[r.arg2] ? r.arg2 : UI.lang; if (!UI.C.functions[fid] || !LX(c).grammar[fid] || UI.C.functions[fid].category === 'overview') return;
     if ((UI.C.data.course.added || {})[c]) return;   // a language added by a package: no refills for it yet (§10.2)
     const cmp = (UI.C.data.compare || {})[fid];
-    if (cmp) {
-      const head = h('thead', {}, h('tr', {}, h('th', {}, ''), ...UI.C.languages.map(x => h('th', {}, info(x).flag, ' ', info(x).name))));
+    if (cmp && UI.C.languages.length > 1) {   // D21: the languages the learner studies, two at least
+      const head = h('thead', {}, h('tr', {}, h('th', {}, ''), ...UI.C.languages.map(x => h('th', {}, info(x).flag, ' ', info(x).label))));
       const body = h('tbody', {}, ...cmp.rows.map(row => h('tr', {}, h('th', {}, row.aspect), ...UI.C.languages.map(x => h('td', { lang: x, dir: LX(x).language.dir || 'ltr' }, row.cells[x] ? wordsIn(x, row.cells[x]) : '—')))));
-      v.append(h('div', { class: 'lx-card lj-cmp' }, h('h3', {}, '⇄ ', UI.C.functions[fid].title, ' across the languages'), h('div', { class: 'lx-compare' }, h('table', {}, head, body))));
+      v.append(h('div', { class: 'lx-card lj-cmp' }, h('h3', {}, '⇄ ', LT('lang.claude.acrossLangs', { title: UI.C.functions[fid].title })), h('div', { class: 'lx-compare' }, h('table', {}, head, body))));
     }
     const f = N.feasibility(UI.C, UI.L, c, fid), rec = getRec(UI.acc, UI.id), open = rec && (rec.tasks || []).find(t => t.kind === K.refill && t.fn === fid && t.lang === c && t.status === 'queued');
-    const light = { ready: '🟢 ready', thin: `🟡 thin (${f.sentences} sentences)`, locked: '🔒 needs ' + (f.unlockBy.slice(0, 2).map(n => UI.C.nodes[n]?.title || n).join(', ') || 'more words'), absent: '—' }[f.state];
+    const lockedBy = f.unlockBy.slice(0, 2).map(n => UI.C.nodes[n]?.title || n);
+    const light = { ready: () => '🟢 ' + LT('lang.feas.ready'), thin: () => '🟡 ' + LT('lang.claude.thinN', { n: f.sentences }), locked: () => '🔒 ' + (lockedBy.length ? LT('lang.feas.needsNode', { node: LLIST(lockedBy) }) : LT('lang.feas.needsWords')), absent: () => '—' }[f.state]?.();
     v.append(h('div', { class: 'lx-card lj-refill', 'data-state': f.state },
-      h('div', {}, h('b', {}, 'Sentences with the words you know: '), light, h('span', { class: 'tiny' }, ` · ${f.sentences} usable`)),
-      open ? h('p', { class: 'tiny lj-queued' }, `⏳ Asked already (${open.id}) — ✨ Through Claude shows how it gets written.`) : null,
+      h('div', {}, h('b', {}, LT('lang.claude.withYourWords') + ' '), light, h('span', { class: 'tiny' }, ' · ' + LT('lang.claude.usable', { n: f.sentences }))),
+      open ? h('p', { class: 'tiny lj-queued' }, '⏳ ' + LT('lang.claude.askedAlready', { id: open.id })) : null,
       f.state === 'absent' ? null : h('div', { class: 'row' }, h('button', { class: 'btn small ai lj-askmore', onclick: () => {
         const t = queueRefill(UI.acc, UI.C, UI.L, c, fid);
-        toast(`✨ Asked: ${t.id}`); go('#/claude');
-      } }, f.state === 'ready' ? '✨ Ask Claude for even more sentences' : '✨ Ask Claude for more sentences with what I know'))));
+        toast('✨ ' + LT('lang.claude.asked', { id: t.id })); go('#/claude');
+      } }, '✨ ' + LT(f.state === 'ready' ? 'lang.claude.askEvenMore' : 'lang.claude.askMore')))));
   };
 
   // the course settings: the languages added through Claude, each with Remove (§10.2)
@@ -3377,9 +3763,9 @@ if (synthOK()) { try { speechSynthesis.addEventListener('voiceschanged', () => {
 
 /** No voice for a language: said once (a notice, not an error); the buttons of that language show 🔇. */
 function noVoice(c) {
-  for (const b of document.querySelectorAll(`.lx-spk[data-lang="${c}"]`)) { b.title = `No ${langLabel(c)} voice on this device`; b.classList.add('lx-mute'); }
+  for (const b of document.querySelectorAll(`.lx-spk[data-lang="${c}"]`)) { b.title = LT('lang.speech.noVoice', { lang: langLabel(c) }); b.classList.add('lx-mute'); }
   if (SP.warned[c]) return; SP.warned[c] = true;
-  toast(`🔇 No ${langLabel(c)} voice on this device — add one in the system's speech settings, then reload.`);
+  toast('🔇 ' + LT('lang.speech.noVoiceToast', { lang: langLabel(c) }));
 }
 /** Speak a stored text in language c → Promise<boolean> (false: no voice / no speech synthesis).
     Robust against the browsers' known traps: speak() is called inside the click (Safari drops speech started after an await),
@@ -3405,7 +3791,7 @@ function say(c, text, { slow = false } = {}) {
   });
 }
 function speakerBtn(c, text) {   // the click is handled once for the whole page (below), so a 🔊 always works, even re-drawn or moved
-  return h('button', { type: 'button', class: 'lx-spk', 'data-lang': c, 'data-text': text, 'aria-label': `Listen (${langLabel(c)})`, title: `Listen (${langLabel(c)})` });   // the icon comes from the CSS (::before): the text of what it follows stays the same
+  return h('button', { type: 'button', class: 'lx-spk', 'data-lang': c, 'data-text': text, 'aria-label': LT('lang.speech.listen', { lang: langLabel(c) }), title: LT('lang.speech.listen', { lang: langLabel(c) }) });   // the icon comes from the CSS (::before): the text of what it follows stays the same
 }
 document.addEventListener('click', e => {
   const b = e.target.closest?.('.lx-spk'); if (!b) return;
@@ -3419,8 +3805,8 @@ document.addEventListener('click', e => {
   const s0 = sentenceView; sentenceView = (c, s, unknown = []) => { const e = s0(c, s, unknown); if (e?.dataset && s?.text) { e.dataset.say = s.text; e.dataset.sayl = c; } return e; };
   const i0 = wordsIn; wordsIn = (c, s) => { const out = i0(c, s); for (const x of out) if (x && x.dataset) x.dataset.inline = '1'; return out; };   // runs inside prose: no button (but examples are spoken)
 }
-const SPK_SKIP = 'button, .lx-opts, .lx-opt, select, option, label, .lx-tile, .lx-tile1, .lx-slot, .lx-tiles, .lx-kbd, .lx-cands, .lx-tutor, [data-nospeak], .lx-hidecol, .lx-input, header, .lx-tmsg, .lx-diff, .lx-roman';
-const SPK_IN_STAGE = '.lx-fb, .lx-ref, .lx-intro, .lx-readtext, .lx-gram, .lx-typology, .lx-overview';   // inside an exercise: never on a prompt it would give away
+const SPK_SKIP = 'button, .lx-opts, .lx-opt, select, option, label, .lx-tile, .lx-tile1, .lx-slot, .lx-tiles, .lx-kbd, .lx-cands, .lx-tutor, [data-nospeak], .lx-hidecol, .lx-input, header, .lx-tmsg, .lx-diff, .lx-roman';   // i18n-ignore (selectors)
+const SPK_IN_STAGE = '.lx-fb, .lx-ref, .lx-intro, .lx-readtext, .lx-gram, .lx-typology, .lx-overview';   // inside an exercise: never on a prompt it would give away   // i18n-ignore (selectors)
 function decorate(root) {
   if (!UI.C) return;
   if (!SP.capsSet) pushCaps();
@@ -3463,17 +3849,18 @@ function newLine(it) {
 /** ▶ the audio of an item (played once when shown), 🐢 slowly; without a voice the text can be shown instead. */
 function player(it, { auto = true, reveal = true } = {}) {
   const c = it.lang, box = h('div', { class: 'row lx-player' });
-  const play = h('button', { type: 'button', class: 'btn primary lx-play', 'aria-label': `Play (${info(c).name})`, onclick: () => say(c, it.say) }, '🔊 Play');
-  const slow = h('button', { type: 'button', class: 'btn ghost small lx-slow', 'aria-label': 'Play slowly', onclick: () => say(c, it.say, { slow: true }) }, '🐢 Slowly');
-  box.append(play, slow, h('span', { class: 'tiny lx-keyhint' }, 'r = again'));
+  const play = h('button', { type: 'button', class: 'btn primary lx-play', 'aria-label': LT('lang.speech.playIn', { lang: info(c).name }), onclick: () => say(c, it.say) }, '🔊 ' + LT('lang.speech.play'));
+  const slow = h('button', { type: 'button', class: 'btn ghost small lx-slow', 'aria-label': LT('lang.speech.playSlowly'), onclick: () => say(c, it.say, { slow: true }) }, '🐢 ' + LT('lang.speech.slowly'));
+  box.append(play, slow, h('span', { class: 'tiny lx-keyhint' }, LT('lang.speech.rAgain')));
   if (!hasVoice(c)) {
-    box.append(h('span', { class: 'tiny lx-novoice' }, `🔇 No ${info(c).name} voice on this device. `));
-    if (reveal) box.append(h('button', { type: 'button', class: 'btn ghost small lx-revealtxt', onclick: e => e.currentTarget.replaceWith(h('span', { class: 'lx-revealed' }, spText(it))) }, '👁 Read it instead'));
+    box.append(h('span', { class: 'tiny lx-novoice' }, '🔇 ' + LT('lang.speech.noVoiceDot', { lang: info(c).name }) + ' '));
+    if (reveal) box.append(h('button', { type: 'button', class: 'btn ghost small lx-revealtxt', onclick: e => e.currentTarget.replaceWith(h('span', { class: 'lx-revealed' }, spText(it))) }, '👁 ' + LT('lang.speech.readInstead')));
   } else if (auto) setTimeout(() => { if (box.isConnected) say(c, it.say); }, 150);
   return box;
 }
 const fbBoxSp = (ok, ...kids) => h('div', { class: 'lx-fb ' + (ok ? 'ok' : 'bad') }, ok ? '✅ ' : '❌ ', ...kids);
-const TONE_OPTS = { 1: '1st  ā  ˉ', 2: '2nd  á  ˊ', 3: '3rd  ǎ  ˇ', 4: '4th  à  ˋ', 5: 'neutral  a  ·' };
+const TONE_MARKS = { 1: '  ā  ˉ', 2: '  á  ˊ', 3: '  ǎ  ˇ', 4: '  à  ˋ', 5: '  a  ·' };
+const TONE_OPTS = new Proxy({}, { get: (o, t) => TONE_MARKS[t] ? LT('lang.speech.tone', { t: String(t) }) + TONE_MARKS[t] : undefined });   // “1st  ā  ˉ”
 
 /* ---------- widgets (§6.8) ---------- */
 WIDGETS.listen_pick = (it, done) => {
@@ -3497,17 +3884,17 @@ WIDGETS.dictation = (it, done) => {
   const out = h('div', { class: 'lx-diff', lang: c, dir: X.language.dir || 'ltr' }); let over = false;
   const finish = (ok, r) => {
     if (over) return; over = true; si.input.disabled = true; spRecord(it, ok);
-    if (r && !ok && r.diff?.length) out.append(...r.diff.map(d => h('span', { class: 'lx-d d-' + d.op, title: d.op === 'wrong' ? `you: ${d.t} · right: ${d.want}` : d.op }, d.op === 'wrong' ? d.want : d.t)));
+    if (r && !ok && r.diff?.length) out.append(...r.diff.map(d => h('span', { class: 'lx-d d-' + d.op, title: d.op === 'wrong' ? LT('lang.script.youRight', { you: d.t, right: d.want }) : ['same', 'missing', 'extra'].includes(d.op) ? LT('lang.script.op.' + d.op) : d.op }, d.op === 'wrong' ? d.want : d.t)));
     box.append(fbBoxSp(ok, spText(it), ' — ', it.kind === 'word' ? gloss(c, it.lex) : (it.gloss || ''),
-      r?.notes?.length ? h('ul', { class: 'lx-list tiny' }, ...r.notes.map(n => h('li', {}, n))) : null, ok && r?.how === 'variant' ? h('div', { class: 'tiny' }, 'Right — the course writes it like this.') : null));
+      r?.notes?.length ? h('ul', { class: 'lx-list tiny' }, ...r.notes.map(n => h('li', {}, n))) : null, ok && r?.how === 'variant' ? h('div', { class: 'tiny' }, LT('lang.speech.variant')) : null));
     done(ok);
   };
   const check = v => { if (over || !String(v || '').trim()) return; const r = N.checkDictation(UI.C, c, it, v); finish(r.ok, r); };
-  const si = scriptInput(c, { placeholder: 'Type what you hear…', autofocus: true, onEnter: check });
-  box.append(h('div', { class: 'lx-q' }, it.kind === 'word' ? '✍️ Listen and write the word' : '✍️ Listen and write the sentence'),
-    it.hint ? h('div', { class: 'tiny lx-hint' }, 'Meaning: ', it.hint) : null, newLine(it), player(it, { reveal: false }), si.el, out,
-    h('div', { class: 'row' }, h('button', { class: 'btn primary small lx-check', onclick: () => check(si.input.value) }, 'Check'),
-      h('button', { class: 'btn ghost small', onclick: () => finish(false, null) }, 'Show me')));
+  const si = scriptInput(c, { placeholder: LT('lang.speech.typeHeard'), autofocus: true, onEnter: check });
+  box.append(h('div', { class: 'lx-q' }, '✍️ ' + LT(it.kind === 'word' ? 'lang.speech.dictWord' : 'lang.speech.dictSentence')),
+    it.hint ? h('div', { class: 'tiny lx-hint' }, LT('lang.speech.meaning') + ' ', it.hint) : null, newLine(it), player(it, { reveal: false }), si.el, out,
+    h('div', { class: 'row' }, h('button', { class: 'btn primary small lx-check', onclick: () => check(si.input.value) }, LT('lang.ex.check')),
+      h('button', { class: 'btn ghost small', onclick: () => finish(false, null) }, LT('lang.ex.showMe'))));
   return box;
 };
 WIDGETS.listen_meaning = (it, done) => {
@@ -3522,10 +3909,10 @@ WIDGETS.listen_meaning = (it, done) => {
 /** A recorder in memory (getUserMedia + MediaRecorder): record → stop → play yourself, or the voice and then you. */
 function recorderView(it) {
   const box = h('div', { class: 'lx-rec row' });
-  if (!recordOK()) { box.append(h('span', { class: 'tiny lx-norec' }, '🎙️ Recording is not available in this browser: say it aloud after the voice, then judge yourself.')); return box; }
+  if (!recordOK()) { box.append(h('span', { class: 'tiny lx-norec' }, '🎙️ ' + LT('lang.speech.noRecording'))); return box; }
   let rec = null, stream = null, url = null, chunks = [];
-  const audio = h('audio', { class: 'lx-mine', controls: true, hidden: true, 'aria-label': 'Your recording' });
-  const both = h('button', { type: 'button', class: 'btn small lx-both', hidden: true, onclick: async () => { await say(it.lang, it.say); try { audio.currentTime = 0; await audio.play(); } catch (e) { } } }, '▶ The voice, then you');
+  const audio = h('audio', { class: 'lx-mine', controls: true, hidden: true, 'aria-label': LT('lang.speech.yourRecording') });
+  const both = h('button', { type: 'button', class: 'btn small lx-both', hidden: true, onclick: async () => { await say(it.lang, it.say); try { audio.currentTime = 0; await audio.play(); } catch (e) { } } }, '▶ ' + LT('lang.speech.voiceThenYou'));
   const btn = h('button', { type: 'button', class: 'btn small lx-recbtn', onclick: async () => {
     if (rec && rec.state === 'recording') { rec.stop(); return; }
     try {
@@ -3536,20 +3923,20 @@ function recorderView(it) {
         try { (stream.getTracks?.() || []).forEach(t => t.stop()); } catch (e) { }
         if (url) URL.revokeObjectURL(url);
         url = URL.createObjectURL(new Blob(chunks, { type: chunks[0]?.type || 'audio/webm' })); audio.src = url; audio.hidden = false; both.hidden = false;
-        btn.textContent = '🎙️ Record again'; btn.classList.remove('on'); box.dataset.recorded = '1';
+        btn.textContent = '🎙️ ' + LT('lang.speech.recordAgain'); btn.classList.remove('on'); box.dataset.recorded = '1';
       };
-      rec.start(); btn.textContent = '⏹ Stop'; btn.classList.add('on');
-    } catch (e) { box.append(h('span', { class: 'tiny lx-norec' }, '🎙️ The microphone is not available (' + (e.name || e.message || e) + '): say it aloud and judge yourself.')); btn.disabled = true; }
-  } }, '🎙️ Record yourself');
+      rec.start(); btn.textContent = '⏹ ' + LT('lang.sess.stop'); btn.classList.add('on');
+    } catch (e) { box.append(h('span', { class: 'tiny lx-norec' }, '🎙️ ' + LT('lang.speech.noMic', { err: String(e.name || e.message || e) }))); btn.disabled = true; }
+  } }, '🎙️ ' + LT('lang.speech.recordYourself'));
   box.append(btn, audio, both);
   return box;
 }
 WIDGETS.shadowing = (it, done) => {
   const c = it.lang, box = h('div', { class: 'lx-ex lx-exshadow', 'data-kind': it.kind, 'data-type': 'shadowing', ...(it.from ? { 'data-from': it.from } : {}) });
-  const grade = h('div', { class: 'row lx-selfgrade' }, h('span', { class: 'lx-badge reg' }, '🙋 self-graded'),
-    h('button', { class: 'btn small lx-good', onclick: () => fin(true) }, '✓ Close to the voice'), h('button', { class: 'btn ghost small lx-notyet', onclick: () => fin(false) }, '✗ Not yet'));
+  const grade = h('div', { class: 'row lx-selfgrade' }, h('span', { class: 'lx-badge reg' }, '🙋 ' + LT('lang.speech.selfGraded')),
+    h('button', { class: 'btn small lx-good', onclick: () => fin(true) }, '✓ ' + LT('lang.speech.closeToVoice')), h('button', { class: 'btn ghost small lx-notyet', onclick: () => fin(false) }, '✗ ' + LT('lang.script.notYet')));
   let over = false; const fin = ok => { if (over) return; over = true; [...grade.querySelectorAll('button')].forEach(b => b.disabled = true); spRecord(it, ok); done(ok); };
-  box.append(h('div', { class: 'lx-q' }, it.from === 'speak' ? '🗣️ Say it after the voice (speech recognition is not available here, so you judge yourself)' : '🗣️ Listen, then say it after the voice'),
+  box.append(h('div', { class: 'lx-q' }, '🗣️ ' + LT(it.from === 'speak' ? 'lang.speech.shadowNoSR' : 'lang.speech.shadowAsk')),
     h('div', { class: 'lx-prompt' }, spText(it)), h('div', { class: 'tiny' }, it.gloss || ''), newLine(it), player(it, { reveal: false }), recorderView(it), grade);
   return box;
 };
@@ -3570,37 +3957,37 @@ WIDGETS.speak = (it, done) => {
   const c = it.lang, X = LX(c), box = h('div', { class: 'lx-ex lx-exspeak', 'data-kind': it.kind, 'data-type': 'speak', 'data-mode': it.mode });
   const s = spSentence(it), lx = it.lex ? X.lex[it.lex] : null;
   const out = h('div', { class: 'lx-heardbox' }); let tries = 0, over = false;
-  const mic = h('button', { type: 'button', class: 'btn primary lx-mic', onclick: () => listen() }, '🎤 Speak');
-  const give = h('button', { type: 'button', class: 'btn ghost small lx-giveup', onclick: () => end(false) }, 'Show me');
+  const mic = h('button', { type: 'button', class: 'btn primary lx-mic', onclick: () => listen() }, '🎤 ' + LT('lang.speech.speak'));
+  const give = h('button', { type: 'button', class: 'btn ghost small lx-giveup', onclick: () => end(false) }, LT('lang.ex.showMe'));
   const end = ok => { if (over) return; over = true; mic.disabled = true; give.disabled = true; spRecord(it, ok);
-    box.append(fbBoxSp(ok, spText(it), ' — ', it.gloss || '', h('div', { class: 'tiny' }, 'Checked against the course’s words (what your browser heard)'))); done(ok); };
+    box.append(fbBoxSp(ok, spText(it), ' — ', it.gloss || '', h('div', { class: 'tiny' }, LT('lang.speech.checkedHeard')))); done(ok); };
   const heardView = r => {
     const tokens = s ? (s.tokens || []).filter(k => !k.p) : [{ t: lx.lemma }];
-    return h('div', { class: 'lx-heard' }, h('span', { class: 'tiny' }, 'Heard: '), h('span', { class: 'lx-w', lang: c, dir: X.language.dir || 'ltr' }, '“' + (r.heard || '…') + '”'),
+    return h('div', { class: 'lx-heard' }, h('span', { class: 'tiny' }, LT('lang.speech.heard') + ' '), h('span', { class: 'lx-w', lang: c, dir: X.language.dir || 'ltr' }, '“' + (r.heard || '…') + '”'),
       h('div', { class: 'lx-heardwords', lang: c, dir: X.language.dir || 'ltr' }, ...tokens.map((k, i) => h('span', { class: 'lx-hw ' + (r.matched[i] ? 'ok' : 'miss') }, k.t))));
   };
   const listen = async () => {
-    if (over) return; mic.disabled = true; mic.textContent = '… listening'; out.innerHTML = '';
+    if (over) return; mic.disabled = true; mic.textContent = '… ' + LT('lang.speech.listening'); out.innerHTML = '';
     try {
-      const alts = await hearOnce(c); mic.textContent = '🎤 Speak'; mic.disabled = false;
-      if (!alts.length) { out.append(h('div', { class: 'tiny lx-nothing' }, 'Nothing heard — try again.')); return; }
+      const alts = await hearOnce(c); mic.textContent = '🎤 ' + LT('lang.speech.speak'); mic.disabled = false;
+      if (!alts.length) { out.append(h('div', { class: 'tiny lx-nothing' }, LT('lang.speech.nothingHeard'))); return; }
       const r = N.checkSpoken(UI.C, c, it, alts); tries++;
       out.append(heardView(r));
       if (r.ok) return end(true);
       if (tries >= 3) return end(false);
-      out.append(h('div', { class: 'tiny lx-again' }, `❌ Not quite — try again (${3 - tries} left).`));
+      out.append(h('div', { class: 'tiny lx-again' }, '❌ ' + LT('lang.speech.notQuite', { n: 3 - tries })));
     } catch (e) {
-      mic.textContent = '🎤 Speak'; mic.disabled = false;
+      mic.textContent = '🎤 ' + LT('lang.speech.speak'); mic.disabled = false;
       if (/not-allowed|service-not-allowed|no-recognition|audio-capture/.test(e.message)) { box.replaceWith(WIDGETS.shadowing({ ...it, type: 'shadowing', from: 'speak' }, done)); return; }
-      out.append(h('div', { class: 'tiny lx-nothing' }, e.message === 'no-speech' ? 'Nothing heard — try again.' : '⚠️ ' + e.message));
+      out.append(h('div', { class: 'tiny lx-nothing' }, e.message === 'no-speech' ? LT('lang.speech.nothingHeard') : '⚠️ ' + e.message));
     }
   };
-  box.append(h('div', { class: 'lx-q' }, it.mode === 'produce' ? `🎤 Say it in ${info(c).name}` : '🎤 Say it aloud'),
+  box.append(h('div', { class: 'lx-q' }, '🎤 ' + (it.mode === 'produce' ? LT('lang.speech.sayIn', { lang: info(c).name }) : LT('lang.speech.sayAloud'))),
     it.mode === 'produce' ? h('div', { class: 'lx-prompt lx-meaning' }, lx?.senses?.[0] ? conceptPic(lx.senses[0], 'lx-exemoji') : '', ' ', it.gloss)
       : h('div', {}, h('div', { class: 'lx-prompt' }, spText(it)), h('div', { class: 'tiny' }, it.gloss || '')),
     newLine(it), it.mode !== 'produce' && hasVoice(c) ? player(it, { auto: false, reveal: false }) : null,
     h('div', { class: 'row' }, mic, give), out,
-    h('div', { class: 'tiny lx-srnote' }, 'Your browser turns your voice into text (it may use its own online service); the course compares that text with its stored words.'));
+    h('div', { class: 'tiny lx-srnote' }, LT('lang.speech.srNote')));
   return box;
 };
 
@@ -3610,78 +3997,78 @@ WIDGETS.speak = (it, done) => {
   exIntro = (c, lid, done) => { const box = i0(c, lid, done); if (spPrefs().autoplay && !spToday('noListen')) setTimeout(() => { if (box.isConnected && hasVoice(c)) say(c, LX(c).lex[lid].lemma); }, 150); return box; };
 }
 async function readAloud(btn, c) {
-  if (SP.reading) { SP.reading.stop = true; try { speechSynthesis.cancel(); } catch (e) { } SP.reading = null; btn.textContent = '🔊 Listen to the whole text'; return; }
-  const job = SP.reading = { stop: false }; btn.textContent = '⏹ Stop';
+  if (SP.reading) { SP.reading.stop = true; try { speechSynthesis.cancel(); } catch (e) { } SP.reading = null; btn.textContent = '🔊 ' + LT('lang.speech.wholeText'); return; }
+  const job = SP.reading = { stop: false }; btn.textContent = '⏹ ' + LT('lang.sess.stop');
   for (const el of document.querySelectorAll('.lx-reader .lx-rsent > [data-say]')) {
     if (job.stop || !btn.isConnected) break;
     el.classList.add('lx-reading'); const ok = await say(c, el.dataset.say); el.classList.remove('lx-reading');
     if (!ok) break;
   }
-  if (SP.reading === job) { SP.reading = null; btn.textContent = '🔊 Listen to the whole text'; }
+  if (SP.reading === job) { SP.reading = null; btn.textContent = '🔊 ' + LT('lang.speech.wholeText'); }
 }
 
 /* ---------- 🎧 the lane ---------- */
 const LISTEN_SETS = [
-  { id: 'hear', type: 'listen_pick', icon: '🔊', title: 'Hear and choose', what: 'a word → which one it is, or what it means' },
-  { id: 'sentences', type: 'listen_meaning', icon: '👂', title: 'Sentences', what: 'a sentence → what it means' },
-  { id: 'dictation', type: 'dictation', icon: '✍️', title: 'Dictation', what: 'a word or a sentence → write it' },
-  { id: 'shadow', type: 'shadowing', icon: '🗣️', title: 'Shadowing', what: 'say it after the voice, record yourself, compare' },
-  { id: 'speak', type: 'speak', icon: '🎤', title: 'Say it', what: 'say a word or a sentence — checked against the course' },
-  { id: 'tones', type: 'listen_tone', icon: '🎵', title: 'Tones by ear', what: 'one syllable of a word → its tone', only: c => c === 'zh' || LX(c).language.romanization === 'pinyin' }];
+  { id: 'hear', type: 'listen_pick', icon: '🔊', get title() { return LT('lang.listen.hear'); }, get what() { return LT('lang.listen.hearWhat'); } },
+  { id: 'sentences', type: 'listen_meaning', icon: '👂', get title() { return LT('lang.listen.sentences'); }, get what() { return LT('lang.listen.sentencesWhat'); } },
+  { id: 'dictation', type: 'dictation', icon: '✍️', get title() { return LT('lang.listen.dictation'); }, get what() { return LT('lang.listen.dictationWhat'); } },
+  { id: 'shadow', type: 'shadowing', icon: '🗣️', get title() { return LT('lang.listen.shadow'); }, get what() { return LT('lang.listen.shadowWhat'); } },
+  { id: 'speak', type: 'speak', icon: '🎤', get title() { return LT('lang.listen.speak'); }, get what() { return LT('lang.listen.speakWhat'); } },
+  { id: 'tones', type: 'listen_tone', icon: '🎵', get title() { return LT('lang.listen.tones'); }, get what() { return LT('lang.listen.tonesWhat'); }, only: c => c === 'zh' || LX(c).language.romanization === 'pinyin' }];
 const listenMake = (c, set, k) => N.speechItems(UI.C, UI.L, c, set.type, { k, max: 8, caps: pushCaps() });
 VIEWS.listen = (v, r) => {
   const c = UI.C.lang[r.arg] ? r.arg : UI.lang;
-  const wait = h('p', { class: 'tiny lx-loading' }, '… looking for voices on this device');
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← Map')),
-    h('h1', {}, '🎧 Listening & speaking', h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).name}`)),
+  const wait = h('p', { class: 'tiny lx-loading' }, '… ' + LT('lang.listen.looking'));
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, arrowBack() + ' ' + LT('lang.card.map'))),
+    h('h1', {}, '🎧 ' + LT('lang.view.listen'), h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).label}`)),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); go('#/listen/' + x); })), wait);
   loadVoices().then(() => {
     if (route().name !== 'listen' || !wait.isConnected) return;
     wait.remove();
     const k = N.known(UI.C, UI.L, c);
-    if (r.arg2) { const set = LISTEN_SETS.find(s => s.id === r.arg2); if (set) return runProd(listenMake(c, set, k), { title: `${set.icon} ${set.title} · ${info(c).flag} ${info(c).name}`, back: '#/listen/' + c, lang: c }); }
+    if (r.arg2) { const set = LISTEN_SETS.find(s => s.id === r.arg2); if (set) return runProd(listenMake(c, set, k), { title: `${set.icon} ${set.title} · ${info(c).flag} ${info(c).label}`, back: '#/listen/' + c, lang: c }); }
     const v0 = voiceOf(c);
     v.append(h('div', { class: 'lx-callout k-key lx-devline' },
-      h('div', {}, v0 ? `🔊 Voice: ${v0.name} (${v0.lang})` : `🔇 No ${info(c).name} voice on this device — listening needs one (add it in the system's speech settings).`),
-      h('div', {}, srCtor() ? '🎤 Speech recognition: yes (your browser may use its own online service)' : '🎤 No speech recognition in this browser — “Say it” becomes shadowing.'),
-      h('div', {}, recordOK() ? '🎙️ Recording: yes (kept on this page only)' : '🎙️ No recording here — shadowing without it.')),
-      spToday('noListen') ? h('p', { class: 'lx-note lx-offnote' }, '🙉 You chose “I can’t listen now” for today. ', h('button', { class: 'btn small', onclick: () => { setSp({ noListen: null }); render(); } }, 'I can listen again')) : null,
-      spToday('noSpeak') ? h('p', { class: 'lx-note lx-offnote' }, '🤐 You chose “I can’t speak now” for today. ', h('button', { class: 'btn small', onclick: () => { setSp({ noSpeak: null }); render(); } }, 'I can speak again')) : null);
+      h('div', {}, v0 ? '🔊 ' + LT('lang.listen.voice', { name: v0.name, tag: v0.lang }) : '🔇 ' + LT('lang.listen.noVoiceLane', { lang: info(c).name })),
+      h('div', {}, '🎤 ' + LT(srCtor() ? 'lang.listen.srYes' : 'lang.listen.srNo')),
+      h('div', {}, '🎙️ ' + LT(recordOK() ? 'lang.listen.recYes' : 'lang.listen.recNo'))),
+      spToday('noListen') ? h('p', { class: 'lx-note lx-offnote' }, '🙉 ' + LT('lang.listen.choseNoListen') + ' ', h('button', { class: 'btn small', onclick: () => { setSp({ noListen: null }); render(); } }, LT('lang.listen.canListen'))) : null,
+      spToday('noSpeak') ? h('p', { class: 'lx-note lx-offnote' }, '🤐 ' + LT('lang.listen.choseNoSpeak') + ' ', h('button', { class: 'btn small', onclick: () => { setSp({ noSpeak: null }); render(); } }, LT('lang.listen.canSpeak'))) : null);
     const grid = h('div', { class: 'lx-lanegrid' });
     for (const set of LISTEN_SETS) {
       if (set.only && !set.only(c)) continue;
       const n = listenMake(c, set, k).length;
       grid.append(h('button', { class: 'lx-lanecard', 'data-set': set.id, disabled: n ? null : true, onclick: () => go(`#/listen/${c}/${set.id}`) },
-        h('span', { class: 'lx-laneicon' }, set.icon), h('b', {}, set.title), h('span', { class: 'tiny' }, set.what), h('span', { class: 'tiny lx-lanen' }, n ? `${n} ready` : !v0 && set.type !== 'speak' ? 'needs a voice' : 'learn more words first')));
+        h('span', { class: 'lx-laneicon' }, set.icon), h('b', {}, set.title), h('span', { class: 'tiny' }, set.what), h('span', { class: 'tiny lx-lanen' }, n ? LT('lang.write.ready', { n }) : !v0 && set.type !== 'speak' ? LT('lang.listen.needsVoice') : LT('lang.write.learnMore'))));
     }
-    v.append(grid, h('p', { class: 'tiny' }, '⚙️ Voice, speed, auto-play and “I can’t listen / speak now”: ', h('button', { class: 'btn ghost small', onclick: () => go('#/settings') }, 'Settings')));
+    v.append(grid, h('p', { class: 'tiny' }, '⚙️ ' + LT('lang.listen.settingsHint') + ' ', h('button', { class: 'btn ghost small', onclick: () => go('#/settings') }, LT('lang.shell.settings'))));
   });
 };
 function speechLanes() {
-  return h('div', { class: 'lx-speechlanes' }, h('h2', { class: 'lx-h2' }, '🎧 Listening · 🗣️ Speaking'),
+  return h('div', { class: 'lx-speechlanes' }, h('h2', { class: 'lx-h2' }, '🎧 ' + LT('lang.listen.listening') + ' · 🗣️ ' + LT('lang.listen.speaking')),
     h('div', { class: 'lx-lanes' }, ...activeLangs().map(c => h('div', { class: 'lx-lanerow', 'data-lang': c },
-      h('span', { class: 'lx-flag' }, info(c).flag), h('b', {}, info(c).name),
-      h('button', { class: 'btn small lx-tolisten', onclick: () => go('#/listen/' + c) }, '🎧 Listening & speaking')))));
+      h('span', { class: 'lx-flag' }, info(c).flag), h('b', {}, info(c).label),
+      h('button', { class: 'btn small lx-tolisten', 'data-icon': 'mic', onclick: () => go('#/listen/' + c) }, '🎧 ' + LT('lang.view.listen'))))));
 }
 /** ⚙️ Settings → 🎧: a voice per language, the speed, auto-play, “I can't listen / speak now” (today). */
 function speechSettings() {
-  const sp = spPrefs(), box = h('div', { class: 'lx-speechset' }, h('h3', { class: 'lx-h3' }, '🎧 Listening & speaking'));
-  if (!synthOK()) box.append(h('p', { class: 'tiny' }, '🔇 This browser has no speech synthesis.'));
+  const sp = spPrefs(), box = h('div', { class: 'lx-speechset' }, h('h3', { class: 'lx-h3' }, '🎧 ' + LT('lang.view.listen')));
+  if (!synthOK()) box.append(h('p', { class: 'tiny' }, '🔇 ' + LT('lang.listen.noSynth')));
   for (const c of UI.C.languages) {
     const vs = N.voicesFor(SP.voices, tagOf(c)), cur = (sp.voice || {})[c] || '';
-    box.append(h('label', { class: 'lx-setrow' }, info(c).flag, ' ', info(c).name, ' — voice: ',
-      vs.length ? h('select', { 'data-lang': c, class: 'lx-voicesel', 'aria-label': `Voice for ${info(c).name}`, onchange: e => setSp({ voice: { ...(spPrefs().voice || {}), [c]: e.target.value || undefined } }) },
-        h('option', { value: '' }, 'automatic' + (vs[0] ? ` (${vs[0].name})` : '')), ...vs.map(v => h('option', { value: v.name, selected: v.name === cur ? true : null }, `${v.name} · ${v.lang}`)))
-        : h('span', { class: 'tiny lx-novoice' }, `🔇 none on this device (${tagOf(c)})`)));
+    box.append(h('label', { class: 'lx-setrow' }, info(c).flag, ' ', info(c).label, ' — ' + LT('lang.listen.voiceLabel') + ' ',
+      vs.length ? h('select', { 'data-lang': c, class: 'lx-voicesel', 'aria-label': LT('lang.listen.voiceFor', { lang: info(c).name }), onchange: e => setSp({ voice: { ...(spPrefs().voice || {}), [c]: e.target.value || undefined } }) },
+        h('option', { value: '' }, vs[0] ? LT('lang.listen.automaticWith', { name: vs[0].name }) : LT('lang.listen.automatic')), ...vs.map(v => h('option', { value: v.name, selected: v.name === cur ? true : null }, `${v.name} · ${v.lang}`)))
+        : h('span', { class: 'tiny lx-novoice' }, '🔇 ' + LT('lang.listen.noneHere', { tag: tagOf(c) }))));
   }
   const chk = (key, label, val, set) => h('label', { class: 'lx-check', 'data-key': key }, h('input', { type: 'checkbox', checked: val ? true : null, onchange: e => set(e.target.checked) }), ' ', label);
-  box.append(h('label', { class: 'lx-setrow' }, 'Speed: ', h('select', { class: 'lx-ratesel', 'aria-label': 'Speed of the voice', onchange: e => setSp({ rate: e.target.value }) },
-      ...[['normal', 'normal'], ['slow', 'slow']].map(([x, t]) => h('option', { value: x, selected: (sp.rate || 'normal') === x ? true : null }, t)))),
-    chk('autoplay', 'Play new words aloud in the session', sp.autoplay, x => setSp({ autoplay: x })),
-    chk('noListen', 'I can’t listen now (no audio items today)', spToday('noListen'), x => setSp({ noListen: x ? today() : null })),
-    chk('noSpeak', 'I can’t speak now (no speaking items today)', spToday('noSpeak'), x => setSp({ noSpeak: x ? today() : null })),
-    h('p', { class: 'tiny' }, srCtor() ? '🎤 Speech recognition is available in this browser (it may send what you say to its own service); the course compares the text with its stored words.' : '🎤 No speech recognition in this browser: speaking items become shadowing.',
-      ' ', recordOK() ? '🎙️ Recordings stay on the page and are never stored.' : ''));
+  box.append(h('label', { class: 'lx-setrow' }, LT('lang.listen.speed') + ' ', h('select', { class: 'lx-ratesel', 'aria-label': LT('lang.listen.speedLabel'), onchange: e => setSp({ rate: e.target.value }) },
+      ...[['normal', LT('lang.listen.normal')], ['slow', LT('lang.listen.slow')]].map(([x, t]) => h('option', { value: x, selected: (sp.rate || 'normal') === x ? true : null }, t)))),
+    chk('autoplay', LT('lang.listen.autoplay'), sp.autoplay, x => setSp({ autoplay: x })),
+    chk('noListen', LT('lang.listen.noListen'), spToday('noListen'), x => setSp({ noListen: x ? today() : null })),
+    chk('noSpeak', LT('lang.listen.noSpeak'), spToday('noSpeak'), x => setSp({ noSpeak: x ? today() : null })),
+    h('p', { class: 'tiny' }, '🎤 ' + LT(srCtor() ? 'lang.listen.srAvail' : 'lang.listen.srNone'),
+      ' ', recordOK() ? '🎙️ ' + LT('lang.listen.recNever') : ''));
   return box;
 }
 /** The session's step (§7.5 step 6): up to two items, in today's languages that have a voice. */
@@ -3691,11 +4078,11 @@ function sessionSpeechItems(plan) {
 }
 {
   const home = VIEWS.home;
-  VIEWS.home = (v, r) => { home(v, r); const after = v.querySelector('.lx-prodlanes'), lanes = speechLanes(); if (after) after.after(lanes); else { const map = v.querySelector('.lx-maphead') || [...v.querySelectorAll('h2')].find(x => /The map/.test(x.textContent)); map ? map.before(lanes) : v.append(lanes); } };
+  VIEWS.home = (v, r) => { home(v, r); const after = v.querySelector('.lx-prodlanes'), lanes = speechLanes(); if (after) after.after(lanes); else { const map = v.querySelector('.lx-maphead') || [...v.querySelectorAll('h2')].find(x => /The map/.test(x.textContent)); map ? map.before(lanes) : v.append(lanes); } };   // i18n-ignore (found by its class)
   const settings = VIEWS.settings;
   VIEWS.settings = (v, r) => { settings(v, r); const tail = [...v.children].reverse().find(x => x.tagName === 'P'); const s = speechSettings(); tail ? tail.before(s) : v.append(s); loadVoices().then(() => { const o = v.querySelector('.lx-speechset'); if (o && !o.contains(document.activeElement)) o.replaceWith(speechSettings()); }); };
   const read = VIEWS.read;
-  VIEWS.read = (v, r) => { read(v, r); if (!r.arg2) return; const c = UI.C.lang[r.arg] ? r.arg : UI.lang, reader = v.querySelector('.lx-reader'); if (reader) reader.before(h('div', { class: 'row lx-readaloud' }, h('button', { class: 'btn small lx-readall', onclick: e => readAloud(e.currentTarget, c) }, '🔊 Listen to the whole text'))); };
+  VIEWS.read = (v, r) => { read(v, r); if (!r.arg2) return; const c = UI.C.lang[r.arg] ? r.arg : UI.lang, reader = v.querySelector('.lx-reader'); if (reader) reader.before(h('div', { class: 'row lx-readaloud' }, h('button', { class: 'btn small lx-readall', onclick: e => readAloud(e.currentTarget, c) }, '🔊 ' + LT('lang.speech.wholeText')))); };
 }
 Object.assign(window.NoemaLangUI || {}, { speech: { say, loadVoices, speechCaps, pushCaps, sessionSpeechItems, LISTEN_SETS, SP, decorate } });
 
@@ -3707,7 +4094,7 @@ Object.assign(window.NoemaLangUI || {}, { speech: { say, loadVoices, speechCaps,
 const QA_SCRIPT = /[֐-׿יִ-ﭏ]+(?:[\s֐-׿יִ-ﭏ]*[֐-׿יִ-ﭏ])?|[؀-ۿݐ-ݿﭐ-﷿ﹰ-﻿]+(?:[\s؀-ۿݐ-ݿﭐ-﷿ﹰ-﻿ً-ٟ]*[؀-ۿݐ-ݿﭐ-﷿ﹰ-﻿])?|[㐀-鿿豈-﫿]+/g;
 const QA_SKIP = new Set(['SCRIPT', 'STYLE', 'TEXTAREA', 'INPUT', 'OPTION', 'SELECT', 'TITLE', 'svg', 'SVG', 'text', 'CANVAS']);
 const QA_OTHER = { Arab: ['fa', 'ur', 'ps', 'ku', 'sd', 'ug'], Hebr: ['yi', 'lad'], Hani: ['ja', 'ko', 'yue', 'vi'] };
-function qaScriptOf(run) { return /[֐-׿יִ-ﭏ]/.test(run) ? 'Hebr' : /[㐀-鿿豈-﫿]/.test(run) ? 'Hani' : 'Arab'; }
+function qaScriptOf(run) { return /[֐-׿יִ-ﭏ]/.test(run) ? 'Hebr' : /[㐀-鿿豈-﫿]/.test(run) ? 'Hani' : 'Arab'; }   // i18n-ignore
 function qaLangOf(run, el) {
   const sc = qaScriptOf(run), base = { Hebr: 'he', Arab: 'ar', Hani: 'zh' }[sc];
   const forCode = el.closest('[data-for]')?.dataset.for;   // a comparison note about Persian, Yiddish, Japanese …
@@ -3749,7 +4136,7 @@ function qaMarkScripts(root) {
     const roots = new Set();
     for (const mu of list) for (const n of mu.addedNodes) {
       const el = n.nodeType === 1 ? n : n.parentElement;
-      if (el && el.isConnected && !el.classList?.contains('lx-autolang') && el.closest?.('.lx-main, .lx-pop, .lx-tutor, .lx-top, .lj-box, .lx-glyphcard')) roots.add(el);
+      if (el && el.isConnected && !el.classList?.contains('lx-autolang') && el.closest?.('.lx-main, .lx-pop, .lx-tutor, .lx-top, .lj-box, .lx-glyphcard')) roots.add(el);   // i18n-ignore
     }
     for (const r of roots) { let up = r.parentElement, inner = false; while (up && !inner) { inner = roots.has(up); up = up.parentElement; } if (!inner) qaMarkScripts(r); }   // the outermost only
   });
@@ -3770,7 +4157,7 @@ const QA_FAR = new Set(['locked', 'unprepared']);
     if (go1 && go1.disabled && first) {
       const nid = first.dataset.node, n = UI.C.nodes[nid];
       const st = N.planSession(UI.C, UI.L, { day: today(), minutes: UI.L.settings.minutes || 20, languages: todayLangs() }).steps.find(s => s.kind === 'lesson' && s.node === nid);
-      const start = go1.cloneNode(false); start.disabled = false; start.textContent = `▶ Start: ${stepLabel(n)} ${n.title}`;   // a clone: without the session's listener
+      const start = go1.cloneNode(false); start.disabled = false; start.dataset.go = 'start'; start.dataset.rest = `${stepLabel(n)} ${n.title}`; start.textContent = '▶ ' + LT('lang.qa.start', { lesson: start.dataset.rest });   // a clone: without the session's listener
       start.addEventListener('click', () => runLesson(nid, st?.langs?.length ? st.langs : lessonLangs(nid))); go1.replaceWith(start);
     }
     const poly = v.querySelector('.lx-polyhome'), today1 = poly?.querySelector('.lx-today');
@@ -3778,16 +4165,16 @@ const QA_FAR = new Set(['locked', 'unprepared']);
     // the lanes: one row per language — grammar, writing, reading, script, peculiarities, tutor; then what spans languages
     const lanes = v.querySelector('.lx-prodlanes');
     if (lanes) {
-      lanes.querySelector('h2').textContent = '🧭 Your lanes';
+      lanes.querySelector('h2').textContent = '🧭 ' + LT('lang.qa.yourLanes');
       for (const row of lanes.querySelectorAll('.lx-lanerow')) {
         const c = row.dataset.lang, tutor = row.querySelector('.lx-totutor');
-        const gram = h('button', { class: 'btn small lx-togrammar', title: 'The grammar points of your open lessons', onclick: () => go('#/grammar/' + c) }, '📐 Grammar');
+        const gram = h('button', { class: 'btn small lx-togrammar', 'data-icon': 'grid', title: LT('lang.qa.grammarTitle'), onclick: () => go('#/grammar/' + c) }, '📐 ' + LT('lang.view.grammar'));
         row.querySelector('.lx-towrite')?.before(gram);
         const sb = v.querySelector(`.lx-drills .lx-scriptbtn[data-lang="${c}"]`); if (sb) { sb.classList.remove('ghost'); sb.textContent = sb.textContent.replace(info(c).flag, '').replace(/\s+/g, ' ').trim(); tutor ? tutor.before(sb) : row.append(sb); }
-        const pec = [...v.querySelectorAll('.lx-libraries button')].find(b => b.textContent.includes(info(c).name));
-        if (pec) { pec.textContent = '📚 Peculiarities'; pec.classList.add('lx-topec'); tutor ? tutor.before(pec) : row.append(pec); }
+        const pec = [...v.querySelectorAll('.lx-libraries button')].find(b => b.textContent.includes(info(c).label));
+        if (pec) { pec.textContent = '📚 ' + LT('lang.view.peculiar'); pec.classList.add('lx-topec'); pec.dataset.icon = 'info'; tutor ? tutor.before(pec) : row.append(pec); }
         const lis = v.querySelector(`.lx-speechlanes .lx-lanerow[data-lang="${c}"] .lx-tolisten`);   // P9: 🎧 in the same row
-        if (lis) { lis.textContent = '🎧 Listening & speaking'; tutor ? tutor.before(lis) : row.append(lis); }
+        if (lis) { lis.textContent = '🎧 ' + LT('lang.view.listen'); tutor ? tutor.before(lis) : row.append(lis); }
         row.append(h('div', { class: 'lx-laneacts' }, ...row.querySelectorAll(':scope > button')));
       }
       v.querySelector('.lx-libraries')?.remove();
@@ -3796,7 +4183,7 @@ const QA_FAR = new Set(['locked', 'unprepared']);
       const drills = v.querySelector('.lx-drills');
       if (drills) {
         const sorts = [...drills.querySelectorAll('button')].filter(b => b.textContent.startsWith('🧩'));
-        if (sorts.length) drills.append(h('details', { class: 'lx-sortfold' }, h('summary', { class: 'btn ghost small' }, `🧩 Sort a field into its groups (${sorts.length})`), h('div', { class: 'row' }, ...sorts)));
+        if (sorts.length) drills.append(h('details', { class: 'lx-sortfold' }, h('summary', { class: 'btn ghost small' }, '🧩 ' + LT('lang.qa.sortFold', { n: sorts.length })), h('div', { class: 'row' }, ...sorts)));
         lanes.append(drills);
       }
       if (poly && !poly.children.length) poly.remove();
@@ -3820,7 +4207,7 @@ function qaCompactMap(v) {
   const cut = lastNear + 4, hidden = nodes.slice(cut);
   if (hidden.length > 2) {
     hidden.forEach(n => { n.hidden = true; });
-    box.after(h('button', { class: 'btn ghost small lx-mapmore', onclick: e => { hidden.forEach(n => { n.hidden = false; }); e.currentTarget.remove(); } }, `🗺️ The whole map — ${hidden.length} more steps`));
+    box.after(h('button', { class: 'btn ghost small lx-mapmore', onclick: e => { hidden.forEach(n => { n.hidden = false; }); e.currentTarget.remove(); } }, '🗺️ ' + LT('lang.qa.wholeMap', { n: hidden.length })));
   }
   const legend = [...seen].filter(Boolean).map(s => `${QA_ICON(s)} ${(STATE_LABEL[s] || s).split(' ').slice(1).join(' ')}`).join(' · ');
   box.before(h('p', { class: 'tiny lx-maplegend' }, legend));
@@ -3833,16 +4220,17 @@ function qaNextLessonButton(nid, ran = []) {
   const st = N.nextLessons(UI.C, UI.L, langs, K).filter(s => s.node !== nid).sort((a, b) => mine(a) - mine(b))[0];   // the languages just learned first
   if (!st) return null;
   const n = UI.C.nodes[st.node];
-  return h('button', { class: 'btn primary lx-nextlesson', onclick: () => runLesson(st.node, st.langs) }, `▶ Next lesson: ${stepLabel(n)} ${n.title}`);
+  return h('button', { class: 'btn primary lx-nextlesson', onclick: () => runLesson(st.node, st.langs) }, '▶ ' + LT('lang.qa.nextLesson', { lesson: `${stepLabel(n)} ${n.title}` }));
 }
 
 /* ---------- 🔁 principal parts: distractors that do not give the answer away ---------- */
 /** Wrong options for “its <label>?” of one word: German forms built from the same word (der / die / das + noun, the plural
     and genitive patterns, du / er forms), then the word's other principal parts, then the same label of other words. */
+/** Wrong answers for a principal part: label = the part's stable id (langcore principalParts → [words, value, id]), never its words. */
 function qaPartsDistractors(c, p, label, val, pool) {
   const lem = LX(c).lex[p.id].lemma, made = [];
   if (c === 'de') {
-    const noun = val.replace(/^(der|die|das|des|dem|den) /, ''), uml = w => w.replace(/(au|a|o|u)(?=[^aou]*$)/i, x => ({ au: 'äu', a: 'ä', o: 'ö', u: 'ü', Au: 'Äu', A: 'Ä', O: 'Ö', U: 'Ü' }[x] || x));
+    const noun = val.replace(/^(der|die|das|des|dem|den) /, ''), uml = w => w.replace(/(au|a|o|u)(?=[^aou]*$)/i, x => ({ au: 'äu', a: 'ä', o: 'ö', u: 'ü', Au: 'Äu', A: 'Ä', O: 'Ö', U: 'Ü' }[x] || x));   // i18n-ignore
     const stem = lem.replace(/e?n$/, '');
     if (label === 'article') made.push(...['der', 'die', 'das'].map(a => a + ' ' + noun));
     else if (label === 'plural') made.push(...[lem, lem + 'e', lem + 'en', lem + 'n', lem + 'er', lem + 's', uml(lem) + 'e', uml(lem) + 'er', uml(lem)].map(x => 'die ' + x));
@@ -3850,8 +4238,8 @@ function qaPartsDistractors(c, p, label, val, pool) {
     else if (label === 'er/sie/es') made.push(stem + 't', stem + 'et', uml(stem) + 't', lem);
     else if (label === 'du') made.push(stem + 'st', stem + 'est', uml(stem) + 'st', lem);
   }
-  const FORM = ['plural', 'feminine', 'feminine plural', 'with the article', 'counted plural', 'one (unit noun)', 'collective'];   // labels whose values are forms of the word
-  const own = FORM.includes(label) ? p.parts.filter(([l]) => l !== label && FORM.includes(l)).map(([, x]) => x).filter(x => x !== lem) : [];
+  const FORM = ['plural', 'feminine', 'feminine plural', 'with the article', 'counted plural', 'one (unit noun)', 'collective'];   // parts (ids) whose values are forms of the word   // i18n-ignore (langcore's part ids, compared)
+  const own = FORM.includes(label) ? p.parts.filter(q => q[2] !== label && FORM.includes(q[2])).map(([, x]) => x).filter(x => x !== lem) : [];
   const seen = new Set([val]), out = [];
   const closed = c === 'de' && label === 'article';   // der / die / das: two wrong ones, nothing else
   for (const x of [...shuffle(made), ...(closed ? [] : [...shuffle(own), ...shuffle([...(pool || [])])])]) if (!seen.has(x) && x && out.length < 3) { seen.add(x); out.push(x); }
@@ -3870,13 +4258,15 @@ function qaPartsDistractors(c, p, label, val, pool) {
 const FS = () => window.NoemaShell;
 const FRAME_EMO = /(?![\u00A9\u00AE\u2122\u2190-\u21FF\u25A0-\u25FF\u2713\u2715])\p{Extended_Pictographic}(?:\uFE0F|\u20E3|[\u{1F3FB}-\u{1F3FF}]|\u200D\p{Extended_Pictographic})*\uFE0F?[ \u00A0]?/gu;
 const framePlain = t => String(t || '').replace(FRAME_EMO, '').replace(/\u25B6\s*/g, '').replace(/^\s*[\u2190-\u21FF]\s*/, '').replace(/[ \u00A0]{2,}/g, ' ').trim();
-/* the frame's line icons for the lanes and the actions the course offers (engine/art.js keys) */
+/* the frame's line icons for the lanes and the actions the course offers (engine/art.js keys): a button says its own (data-icon);
+   for the others (titles written by the course) a guess from its English words */
 const FRAME_ICON = [[/grammar|rule|point/i, 'grid'], [/writ|rewrite|translate/i, 'edit'], [/read|text/i, 'book'], [/letter|character|spelling|script|trac/i, 'doc'], [/peculiar|signs mean|what the/i, 'info'],
   [/listen|speak|say|shadow|dictat|voice/i, 'mic'], [/tutor|conversation|quiz|explain|ask/i, 'chat'], [/compare|across|bridge|which|align|holds/i, 'globe'], [/check/i, 'check'], [/claude|sentences/i, 'spark'],
   [/field|sort|map/i, 'map'], [/practi|drill|deepen|parts|mixed|round/i, 'gym'], [/setting/i, 'gear'], [/today/i, 'sun'], [/new|learn/i, 'plus']];
 const frameIcon = label => (FRAME_ICON.find(([re]) => re.test(label)) || [null, 'dots'])[1];
-const FRAME_TEXT = 'h1, h2, h3, h4, summary, button.btn, .lx-note, .lx-sub';
-const FRAME_KEEP = '.lx-w, .lx-tile, .lx-temoji, .lx-opt, .lx-prompt, .lx-glyphs, .lx-stage .lx-ex, .lx-ns, .lx-flag, .lx-laneicon, .lx-new, [lang]:not([lang|="en"]), textarea, input, select, .ns-ico';
+const frameIconOf = b => b.dataset?.icon || frameIcon(b.textContent);
+const FRAME_TEXT = 'h1, h2, h3, h4, summary, button.btn, .lx-note, .lx-sub';   // i18n-ignore (selectors)
+const FRAME_KEEP = '.lx-w, .lx-tile, .lx-temoji, .lx-opt, .lx-prompt, .lx-glyphs, .lx-stage .lx-ex, .lx-ns, .lx-flag, .lx-laneicon, .lx-new, [lang]:not([lang|="en"]), textarea, input, select, .ns-ico';   // i18n-ignore (selectors)
 /** Chrome text without pictographs (flags, foreign words, pictures of words and exercises stay). */
 function framePlainTree(root) {
   if (!FR.on || !root || root.nodeType !== 1) return;
@@ -3904,7 +4294,7 @@ function frameList(items, { close = null } = {}) {
     h('span', { class: 't' }, h('b', {}, it.label), it.sub ? h('small', {}, it.sub) : null), it.badge ? S.pill(it.badge, it.tone || 2) : h('span', { class: 'ns-chev', 'aria-hidden': 'true' }, '›'))));
 }
 /** A button of the older screen as an action: its words without pictographs, pressing the (hidden) button itself. */
-const frameAct = (b, extra = {}) => ({ label: framePlain(b.textContent) || b.title || '…', icon: frameIcon(b.textContent), disabled: b.disabled, run: () => b.click(), ...extra });
+const frameAct = (b, extra = {}) => ({ label: framePlain(b.textContent) || b.title || '…', icon: frameIconOf(b), disabled: b.disabled, run: () => b.click(), ...extra });
 const frameSheet = (title, items) => FS().sheet(title, (body, close) => body.append(frameList(items(), { close })));
 
 /** Tidy a view that was just drawn: → the actions for the frame's ⋮. */
@@ -3914,7 +4304,7 @@ function frameTidy(v, r) {
   const kids = sel => [...v.querySelectorAll(':scope > ' + sel)];
   kids('.lx-back').forEach(x => x.remove());   // ← and the crumbs of the frame
   // the tutor's intents: the character opens the tutor; the intents of this page wait in ⋮
-  kids('.lx-tutorrow').forEach(row => { row.querySelectorAll('button').forEach(b => move(b, { sub: 'Tutor', icon: 'chat' })); row.remove(); });
+  kids('.lx-tutorrow').forEach(row => { row.querySelectorAll('button').forEach(b => move(b, { sub: LT('lang.frame.tutor'), icon: 'chat' })); row.remove(); });
   // one primary action: the rest of an action row goes to ⋮
   kids('.lx-actions').forEach(row => {
     const bs = [...row.querySelectorAll(':scope > button')], keep = bs.find(b => b.classList.contains('primary')) || bs[0];
@@ -3924,15 +4314,15 @@ function frameTidy(v, r) {
   kids('.row').forEach(row => {
     if (row.matches('.lx-cmplangs, .lx-today') || row.querySelector('.lx-rail, input, select, textarea')) return;
     const bs = [...row.querySelectorAll(':scope > button.btn')]; if (bs.length < 3) return;
-    const keep = bs.find(b => b.classList.contains('primary')), rest = bs.filter(b => b !== keep), lab = framePlain(row.querySelector(':scope > .tiny')?.textContent || '').replace(/:\s*$/, '');
+    const keep = bs.find(b => b.classList.contains('primary')), rest = bs.filter(b => b !== keep), lab = framePlain(row.querySelector(':scope > .tiny')?.textContent || '').replace(/[:\s\u202F]*$/, '');   // “Drills:” → Drills (also “Exercices :”)
     const items = rest.map(b => frameAct(b)); rest.forEach(b => hold.append(b));
-    row.replaceChildren(...[keep, FS().menuButton(items, { cls: 'btn ns-dropbtn', label: lab || 'Practice', content: h('span', {}, (lab || 'Practice') + ' ▾') })].filter(Boolean));
+    row.replaceChildren(...[keep, FS().menuButton(items, { cls: 'btn ns-dropbtn', label: lab || LT('lang.frame.practice'), content: h('span', {}, (lab || LT('lang.frame.practice')) + ' ▾') })].filter(Boolean));
     row.classList.add('lx-frow');
   });
   // a course written through Claude: its refill card says the state; asking for more is an action
   v.querySelectorAll('.lj-refill .row button').forEach(b => move(b, { icon: 'spark' }));
   // noise on demand: the state chips beside a title (the flags' dots say it), counts after section titles
-  kids('.row > .lx-ns').forEach(x => x.remove());
+  kids('.row > .lx-ns').forEach(x => x.remove());   // i18n-ignore (a selector)
   v.querySelectorAll(':scope > h2 > .tiny, :scope > section > h2 > .tiny').forEach(x => x.remove());
   // the explanation under a title → an (i) beside it
   const h1 = v.querySelector(':scope > h1');
@@ -3941,7 +4331,7 @@ function frameTidy(v, r) {
   }
   // a lesson's grammar points: the first one open, the others one tap away (less to scroll past on a phone)
   const grams = kids('article.lx-gram');
-  if (grams.length > 1) grams.forEach((card, i) => { const d = h('details', { class: 'lx-ffold', open: i === 0 ? true : null }, h('summary', {}, card.querySelector('h3')?.textContent || 'Grammar')); card.replaceWith(d); d.append(card); });
+  if (grams.length > 1) grams.forEach((card, i) => { const d = h('details', { class: 'lx-ffold', open: i === 0 ? true : null }, h('summary', {}, card.querySelector('h3')?.textContent || LT('lang.view.grammar'))); card.replaceWith(d); d.append(card); });
   if (r.name === 'home' && v.querySelector('.lx-hero')) frameHome(v, acts, hold);
   else frameTidy2(v, r, move);
   if (hold.children.length) v.append(hold);
@@ -3958,26 +4348,28 @@ function frameTidy(v, r) {
 function frameHome(v, acts, hold) {
   const S = FS(), hero = v.querySelector('.lx-hero'), course = UI.C.data.course;
   const go1 = hero.querySelector('.lx-go'), todayRow = v.querySelector('.lx-today');
-  const names = UI.C.languages.map(c => info(c).name), named = names.every(n => course.title.includes(n));
-  const head = h('div', { class: 'lx-fhead' }, h('h1', {}, course.title), h('p', { class: 'ns-muted lx-fsub' }, (named ? '' : names.join(' · ') + ' — ') + 'explained in ' + info(UI.C.explainLang).name));
-  // the one primary action
-  const txt = framePlain(go1?.textContent || ''), session = /session/i.test(txt), start = txt.match(/^(?:▶\s*)?Start:\s*(.+)$/), none = !go1 || go1.disabled;
+  const names = UI.C.languages.map(c => info(c).label), named = names.every(n => course.title.includes(n));
+  const head = h('div', { class: 'lx-fhead' }, h('h1', {}, course.title), h('p', { class: 'ns-muted lx-fsub' }, named ? LT('lang.frame.explainedIn', { lang: info(UI.C.explainLang).name }) : LT('lang.home.sub', { langs: names.join(' · '), lang: info(UI.C.explainLang).name })));
+  // the one primary action (what it is: data-go = session | start | none, its words without the label: data-rest)
+  const txt = framePlain(go1?.textContent || ''), session = go1?.dataset.go === 'session', start = go1?.dataset.go === 'start' ? [txt, go1.dataset.rest || txt] : null, none = !go1 || go1.disabled;
   const todays = todayLangs();
   const card = h(none ? 'div' : 'button', { class: 'ns-go lx-fgo' + (none ? ' lx-fdone' : ''), onclick: none ? null : () => go1.click() },
-    h('span', { class: 'rm' }, session ? 'Today’s session' : start ? 'Your next lesson' : 'Today'),
-    h('h2', {}, session ? txt.replace(/^.*?session\s*[—-]\s*/i, '') : start ? start[1] : txt.replace(/^✅\s*/, '')),
+    h('span', { class: 'rm' }, LT(session ? 'lang.frame.session' : start ? 'lang.home.nextLesson' : 'lang.frame.today')),
+    h('h2', {}, session ? go1.dataset.rest || txt : start ? start[1] : txt.replace(/^✅\s*/, '')),
     h('span', { class: 'meta' }, todays.length > 1 || UI.C.languages.length > 1 ? S.pill(todays.map(c => info(c).flag).join(' '), 1) : null),
     none ? null : h('span', { class: 'arrow', 'aria-hidden': 'true' }, '→'));
-  const out = [head, card];
+  const study = v.querySelector('.lx-study-ask'), out = [head, study, card].filter(Boolean), ask = v.querySelector('.lx-native-ask'); if (ask) out.push(ask);   // D21: “Which languages?” leads; D19: “Your native language?” stays in sight
+  study?.querySelectorAll('.btn.primary').forEach(b => b.classList.remove('primary'));   // the big card stays the one primary action
+  acts.push({ label: LT('lang.study.menu'), sub: UI.C.languages.map(c => info(c).label).join(' · '), icon: 'globe', key: 'study', run: () => studySheet() });
   if (go1) hold.append(go1);
   if (todayRow) {   // which languages today: on demand
     hold.append(todayRow);
-    acts.unshift({ label: 'Today’s languages', sub: todays.map(c => info(c).name).join(' · '), icon: 'sun', run: () => frameTodaySheet() });
+    acts.unshift({ label: LT('lang.frame.todaysLangs'), sub: todays.map(c => info(c).label).join(' · '), icon: 'sun', run: () => frameTodaySheet() });
   }
   // the next lessons (when the card is the session, or more than one waits)
   const lessons = [...v.querySelectorAll('.lx-lessonbtn')];
   const listed = lessons.filter((b, i) => session || i > 0 || !start);
-  if (listed.length) out.push(h('span', { class: 'ns-label' }, listed.length > 1 ? 'Next lessons' : 'Next lesson'), frameList(listed.map(b => {
+  if (listed.length) out.push(h('span', { class: 'ns-label' }, LT('lang.frame.nextLessons', { n: listed.length })), frameList(listed.map(b => {
     const nid = b.dataset.node, n = UI.C.nodes[nid];
     return { label: n.title, sub: framePlain(b.querySelector('.tiny')?.textContent || ''), txt: stepLabel(n) || '·', run: () => go('#/lesson/' + nid) };
   })));
@@ -3986,22 +4378,22 @@ function frameHome(v, acts, hold) {
   const langItems = rows.map(row => {
     const c = row.dataset.lang, bs = [...row.querySelectorAll('button')]; bs.forEach(b => hold.append(b));
     const k = N.known(UI.C, UI.L, c), kn = Object.values(k.state).filter(s => ['known_r', 'known_p', 'mastered'].includes(s)).length;
-    const added = (course.added || {})[c], rm = added ? [{ label: 'Remove this language', sub: 'Added through Claude', icon: 'trash', key: 'remove-' + c, run: () => NoemaLangUI.claude.removeAdded(c) }] : [];
-    return { label: info(c).name, sub: kn ? `${kn} words known` : added ? 'Added through Claude' : null, flag: info(c).flag, key: 'lang-' + c, run: () => frameSheet(`${info(c).flag} ${info(c).name}`, () => [...bs.map(b => frameAct(b)), ...rm]) };
+    const added = (course.added || {})[c], rm = added ? [{ label: LT('lang.frame.removeLang'), sub: LT('lang.frame.addedClaude'), icon: 'trash', key: 'remove-' + c, run: () => NoemaLangUI.claude.removeAdded(c) }] : [];
+    return { label: info(c).label, sub: kn ? LT('lang.frame.wordsKnown', { n: kn }) : added ? LT('lang.frame.addedClaude') : null, flag: info(c).flag, key: 'lang-' + c, run: () => frameSheet(`${info(c).flag} ${info(c).label}`, () => [...bs.map(b => frameAct(b)), ...rm]) };
   });
   // ⋮ › a language added by a package (docs/LANGUAGES.md §10.2) › Remove this language
-  for (const c of Object.keys(course.added || {})) if (UI.C.lang[c]) acts.push({ label: info(c).name, sub: 'Added through Claude', flag: info(c).flag, icon: 'globe', key: 'added-' + c,
-    run: () => frameSheet(`${info(c).flag} ${info(c).name}`, () => [{ label: 'Remove this language', sub: 'It leaves this course on every device; your progress is kept', icon: 'trash', key: 'remove-' + c, run: () => NoemaLangUI.claude.removeAdded(c) }]) });
+  for (const c of Object.keys(course.added || {})) if (UI.C.lang[c]) acts.push({ label: info(c).label, sub: LT('lang.frame.addedClaude'), flag: info(c).flag, icon: 'globe', key: 'added-' + c,
+    run: () => frameSheet(`${info(c).flag} ${info(c).label}`, () => [{ label: LT('lang.frame.removeLang'), sub: LT('lang.frame.removeLangSub'), icon: 'trash', key: 'remove-' + c, run: () => NoemaLangUI.claude.removeAdded(c) }]) });
   const poly = [...v.querySelectorAll('.lx-polydrills button')], drills = [...v.querySelectorAll('.lx-drills button:not(summary)')];
   poly.forEach(b => hold.append(b)); drills.forEach(b => hold.append(b));
-  if (poly.length) langItems.push({ label: 'Across your languages', sub: 'Compare, bridges, which language', icon: 'globe', key: 'across', run: () => frameSheet('Across your languages', () => poly.map(b => frameAct(b))) });
-  if (drills.length) langItems.push({ label: 'Drills', sub: 'Principal parts, sorting fields', icon: 'gym', key: 'drills', run: () => frameSheet('Drills', () => drills.map(b => frameAct(b))) });
-  if (langItems.length) out.push(h('span', { class: 'ns-label' }, 'Your languages'), frameList(langItems));
+  if (poly.length) langItems.push({ label: LT('lang.frame.across'), sub: LT('lang.frame.acrossSub'), icon: 'globe', key: 'across', run: () => frameSheet(LT('lang.frame.across'), () => poly.map(b => frameAct(b))) });
+  if (drills.length) langItems.push({ label: LT('lang.frame.drills'), sub: LT('lang.frame.drillsSub'), icon: 'gym', key: 'drills', run: () => frameSheet(LT('lang.frame.drills'), () => drills.map(b => frameAct(b))) });
+  if (langItems.length) out.push(h('span', { class: 'ns-label' }, LT('lang.shell.yourLanguages')), frameList(langItems));
   // the map: the steps near you; the signs explained on demand
   const nodes = v.querySelector('.lx-nodes'), legend = v.querySelector('.lx-maplegend'), more = v.querySelector('.lx-mapmore');
   if (nodes) {
-    out.push(h('div', { class: 'lx-maphead' }, h('span', { class: 'ns-label' }, 'The map'), lanesButton()), nodes); if (more) out.push(more);
-    if (legend) { const t = legend.textContent; legend.remove(); acts.push({ label: 'What the signs mean', icon: 'info', run: () => S.sheet('What the signs mean', body => body.append(h('p', {}, t))) }); }
+    out.push(h('div', { class: 'lx-maphead' }, h('span', { class: 'ns-label' }, LT('lang.home.map')), lanesButton()), nodes); if (more) out.push(more);
+    if (legend) { const t = legend.textContent; legend.remove(); acts.push({ label: LT('lang.frame.signs'), icon: 'info', run: () => S.sheet(LT('lang.frame.signs'), body => body.append(h('p', {}, t))) }); }
   }
   // everything else of the older home waits, hidden (the grammar lane is in each language's sheet)
   for (const x of [...v.children]) if (!x.classList.contains('lx-moved')) hold.append(x);
@@ -4010,10 +4402,10 @@ function frameHome(v, acts, hold) {
 }
 /** Today's languages, as switches in a sheet (the older chips do the work). */
 function frameTodaySheet() {
-  FS().sheet('Today’s languages', (body, close) => {
+  FS().sheet(LT('lang.frame.todaysLangs'), (body, close) => {
     const draw = () => {
       const chips = [...document.querySelectorAll('.lx-moved .lx-todaychip')];
-      body.replaceChildren(h('p', { class: 'ns-muted' }, 'The languages of today’s session; tomorrow all of them again.'), frameList(chips.map(ch => ({ label: info(ch.dataset.lang).name, flag: info(ch.dataset.lang).flag,
+      body.replaceChildren(h('p', { class: 'ns-muted' }, LT('lang.frame.todaysLangsSub')), frameList(chips.map(ch => ({ label: info(ch.dataset.lang).label, flag: info(ch.dataset.lang).flag,
         badge: ch.classList.contains('on') ? '✓' : null, run: () => { ch.click(); setTimeout(draw, 50); } }))));
     };
     draw();
@@ -4026,7 +4418,7 @@ function frameMore(box, items, n, what = 'more') {
   items = items.filter(x => x.isConnected); if (items.length <= n + 1 || box.dataset.fmore) return;
   box.dataset.fmore = '1';
   const rest = items.slice(n); rest.forEach(x => x.classList.add('lx-fhide'));
-  const b = h('button', { class: 'btn ghost small lx-fmorebtn', type: 'button', onclick: e => { e.stopPropagation(); rest.forEach(x => x.classList.remove('lx-fhide')); b.remove(); } }, `More (${rest.length} ${what})`);
+  const b = h('button', { class: 'btn ghost small lx-fmorebtn', type: 'button', onclick: e => { e.stopPropagation(); rest.forEach(x => x.classList.remove('lx-fhide')); b.remove(); } }, LT('lang.frame.more', { n: rest.length, what }));
   (items[items.length - 1].parentElement === box ? box : items[0].parentElement).after(b);
 }
 /** A word card: the word, 🔊, its meaning and one quiet line of its facade; the rest on demand. move: a page's ⋮ (else the button stays, quiet). */
@@ -4061,7 +4453,7 @@ function frameExamples(root) {
   for (const [p, l] of groups) frameMore(p, l, 3, 'examples');
 }
 /** A grammar point: its title, its state, one summary and the first table or block; everything else in a few quiet sections. */
-const GRAM_GROUPS = [['from', 'From your languages'], ['ask', 'Ask yourself'], ['traps', 'Traps'], ['more', 'More about this point'], ['examples', 'Sentences'], ['also', 'See also'], ['other', 'In your other languages']];
+const GRAM_GROUPS = ['from', 'ask', 'traps', 'more', 'examples', 'also', 'other'];   // titles: lang.frame.gram.<group>
 function frameGram(card) {
   if (card.dataset.ftidy) return; card.dataset.ftidy = '1';
   const fam = card.querySelector(':scope > .lx-familiarline'); if (fam) { card.querySelector(':scope > .lx-cardtop h3')?.append(' ', FS().hint(framePlain(fam.textContent))); fam.remove(); }
@@ -4070,12 +4462,13 @@ function frameGram(card) {
   let first = null; const groups = {};
   for (const x of kids.slice(i + 1)) {
     const head = (x.querySelector(':scope > b, :scope > .tiny, :scope > summary')?.textContent || '').toLowerCase();
-    const k = x.matches('.lx-familiar, .lx-notesbox') ? 'from' : /ask yourself/.test(head) ? 'ask' : x.matches('.k-pitfall') || /trap/.test(head) ? 'traps'
-      : /see also/.test(head) ? 'also' : x.matches('.lx-across, .lx-fnstrip, .lx-strip') ? 'other' : x.matches('.lx-exs, .lx-examples') || x.querySelector(':scope > .lx-ex') ? 'examples' : 'more';
+    const sec = x.dataset.sec;   // set where the block is drawn (45_grammar.js), so any UI language works; the English words stay a fallback
+    const k = x.matches('.lx-familiar, .lx-notesbox') ? 'from' : sec === 'ask' || /ask yourself/.test(head) ? 'ask' : x.matches('.k-pitfall') || /trap/.test(head) ? 'traps'
+      : sec === 'also' || /see also/.test(head) ? 'also' : x.matches('.lx-across, .lx-fnstrip, .lx-strip') ? 'other' : x.matches('.lx-exs, .lx-examples') || x.querySelector(':scope > .lx-ex') ? 'examples' : 'more';
     if (!first && k === 'more' && x.matches('.lx-compare, .lx-callout, .lx-paradigm, table, .lx-block')) { first = x; continue; }
     (groups[k] = groups[k] || []).push(x);
   }
-  for (const [k, title] of GRAM_GROUPS) if (groups[k]) { const d = h('details', { class: 'lx-fsec', 'data-k': k }, h('summary', {}, title)); groups[k][0].before(d); d.append(...groups[k]); card.append(d); }
+  for (const k of GRAM_GROUPS) if (groups[k]) { const d = h('details', { class: 'lx-fsec', 'data-k': k }, h('summary', {}, LT('lang.frame.gram.' + k))); groups[k][0].before(d); d.append(...groups[k]); card.append(d); }
 }
 /** The settings as the frame's panels: one per subject (like Me's pages). */
 function frameSettings(v) {
@@ -4097,7 +4490,7 @@ function frameTidy2(v, r, move) {
   v.querySelectorAll('.lx-cgrid').forEach(l => frameMore(l, [...l.children].filter(x => !x.matches('.lx-tierbreak:not(button)')), 24, 'more'));
   v.querySelectorAll(':scope details.lx-sec').forEach((d, i) => { d.querySelector(':scope > summary > .tiny')?.remove(); if (r.name === 'peculiar' && i > 0) d.open = false; });
   // counters in titles ("· 82 in all", a lone count): the grid says it
-  v.querySelectorAll(':scope > :is(h1, h2, h3) > .tiny').forEach(t => { if (/^[\s·\d]*(in all)?\s*$/.test(t.textContent)) t.remove(); });
+  v.querySelectorAll(':scope > :is(h1, h2, h3) > .tiny').forEach(t => { if (t.classList.contains('lx-count') || /^[\s·\d]*(in all)?\s*$/.test(t.textContent)) t.remove(); });   // i18n-ignore (a pattern)
   v.querySelectorAll(':scope > :is(h2, h3)').forEach(x => { if (!x.textContent.trim()) x.remove(); });
   if (r.name === 'peculiar') {   // the filter as a small switch; how many are new or familiar on demand
     const p = v.querySelector(':scope > p.tiny');
@@ -4115,13 +4508,13 @@ new MutationObserver(ms => { if (!FR.on) return; for (const m of ms) m.addedNode
   const inFrame = () => document.body.classList.contains('ns-on');
   function addAsk(box) {
     if (box.querySelector(':scope > .exask')) return;
-    const l = 'Ask ' + (tutorNameNow() || 'your tutor'), face = tutorFaceNow();
+    const nm = tutorNameNow(), l = nm ? LT('lang.frame.ask', { name: nm }) : LT('lang.frame.askYourTutor'), face = tutorFaceNow();
     const b = h('button', { class: 'exask lx-exask', type: 'button', title: l, 'aria-label': l, onclick: e => {
       e.stopPropagation();
       const a = UI.current || {}, it = a.it || {}, lang = box.dataset.lang || it.lang || a.lang || UI.lang;
       const q = ((box.querySelector('.lx-q, .lx-deepq, .lx-prompt') || box).innerText || '').replace(/\s+/g, ' ').trim().slice(0, 300);
       openLangTutor({ lang, fn: it.fn || null, intent: 'hint', auto: false });
-      if (aiVendor()) sendTutor(`I am on this exercise and want a hint, not the answer: «${q}»`);
+      if (aiVendor()) sendTutor(LT('lang.tutor.hintMsg', { q }));   // the learner's words in the drawer (the tutor's language is chosen in the drawer)
     } }, face ? (face.classList.replace('lx-tface', 'exface'), face) : null, h('span', { class: 'lbl' }, l));
     box.classList.add('has-ask'); box.prepend(b);
   }

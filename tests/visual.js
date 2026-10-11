@@ -235,6 +235,15 @@ const C = { fuel: [95, 125], boiler: [290, 125], turbine: [490, 125], generator:
   await q.tap('#T button:has-text("Check")'); await wait(150); ok(await result(q) === 'ok', 'phone: sequence with touch taps');
   await card(q, 'ch01-e101'); await tapImg(q, ...C.boiler); await q.tap('#T button:has-text("Check")'); await wait(150);
   ok(await result(q) === 'ok', 'phone: hotspot with a touch tap');
+  // figure labels run past the picture's edge (never cut by it) but always stay on screen
+  await q.evaluate(() => { for (const m of Object.values(MEDIA)) for (const r of m.regions || []) if (/fuel/i.test(r.id + ' ' + (r.label || ''))) r.note = 'A long note that is much wider than the part it names, to check that the label is not cut by the picture and stays on the screen.'; location.hash = '#/s/ch01-s01'; }); await wait(500);
+  { const sa = await q.$('button:has-text("show all")'); if (sa) { await sa.click(); await wait(300); } }
+  await q.evaluate(() => { document.querySelector('main .vx-fig').id = 'F1'; }); await q.locator('#F1 .vx-stage').scrollIntoViewIfNeeded(); await wait(200);
+  await q.tap('#F1 button:has-text("Show labels")'); await wait(150);
+  { const [x, y] = await at(q, ...C.fuel, '#F1 .vx-stage'); await q.touchscreen.tap(x, y); await wait(250); }
+  const tip = await q.evaluate(() => { const t = document.querySelector('#F1 .vx-tip'), s = document.querySelector('#F1 .vx-stage').getBoundingClientRect(), r = t.getBoundingClientRect(); return { on: t.classList.contains('on'), long: /long note/.test(t.textContent), inStage: !!t.closest('.vx-stage'), past: r.left < s.left || r.right > s.right || r.top < s.top || r.bottom > s.bottom, l: r.left, r: r.right, vw: document.documentElement.clientWidth }; });
+  ok(tip.on && tip.long && !tip.inStage && tip.l >= 0 && tip.r <= tip.vw, 'phone: a figure label is shown whole, inside the screen ' + JSON.stringify(tip));
+  await q.screenshot({ path: SHOTS + '/v3_phone_figtip.png' });
   ok(await q.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'phone: no horizontal overflow');
   await q.screenshot({ path: SHOTS + '/v4_phone_hotspot.png' });
   ok(!P.E.length, 'phone: no page errors ' + JSON.stringify(P.E.slice(0, 3)));

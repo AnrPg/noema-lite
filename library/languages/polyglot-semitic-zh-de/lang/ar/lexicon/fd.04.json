@@ -18,6 +18,7 @@
     "plurals": [
      {
       "form": "بُيُوت",
+      "translit": "buyūt",
       "kind": "broken",
       "pattern": "فُعُول",
       "declension": "triptote",
@@ -29,6 +30,7 @@
      },
      {
       "form": "أَبْيَات",
+      "translit": "ʾabyāt",
       "kind": "broken",
       "pattern": "أَفْعَال",
       "declension": "triptote",
@@ -39,6 +41,7 @@
      },
      {
       "form": "بُيُوتَات",
+      "translit": "buyūtāt",
       "kind": "soundFem",
       "declension": "sound",
       "note": "great families, noble houses",
@@ -51,7 +54,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "no other form belongs to one meaning (the plurals do: see plurals)"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "بَيْتُ",
+      "translit": "baytu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "bayt",
@@ -226,7 +238,7 @@
      }
     ],
     "etymology": {
-     "text": "From Proto-Semitic *bayt- (Wiktionary, which compares Amharic ቤት bēt); Hebrew בַּיִת (bayit) is the same word.",
+     "text": "From Proto-Semitic *bayt- (Wiktionary); Hebrew בַּיִת (bayit) is the same word.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -239,6 +251,13 @@
     ],
     "subtleties": [
      "بَيْت is “home” too: فِي الْبَيْتِ = at home; أَهْلُ الْبَيْتِ = the household."
+    ],
+    "notes": [
+     {
+      "for": "am",
+      "rel": "same",
+      "text": "Amharic ቤት (bēt) is a cognate of بَيْت."
+     }
     ]
    }
   },
@@ -258,6 +277,7 @@
     "plurals": [
      {
       "form": "شُقَق",
+      "translit": "šuqaq",
       "kind": "broken",
       "pattern": "فُعَل",
       "declension": "triptote",
@@ -271,7 +291,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "شَقَّةُ",
+      "translit": "šaqqatu"
+     }
+    ]
    },
    "gender": "FEM",
    "translit": "šaqqa",
@@ -413,6 +442,7 @@
     "plurals": [
      {
       "form": "غُرَف",
+      "translit": "ġuraf",
       "kind": "broken",
       "pattern": "فُعَل",
       "declension": "triptote",
@@ -426,7 +456,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "غُرْفَةُ",
+      "translit": "ġurfatu"
+     }
+    ]
    },
    "gender": "FEM",
    "translit": "ġurfa",
@@ -550,11 +589,11 @@
      }
     ],
     "etymology": {
-     "text": "Root غ ر ف; Wiktionary gives no older origin. Through Andalusian Arabic it gave Old Spanish and Catalan algorfa (an attic, a granary), and Swahili ghorofa (storey).",
+     "text": "Root غ ر ف; Wiktionary gives no older origin.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Swahili ghorofa (an upper floor) comes from غُرْفَة (Wiktionary)."
+     "Its plural is غُرَف, a broken plural on the pattern فُعَل."
     ],
     "pitfalls": [
      "The usual plural is غُرَف (ġuraf); غُرُفَات / غُرْفَات also exist.",
@@ -562,6 +601,18 @@
     ],
     "subtleties": [
      "Rooms are named by iḍāfa (noun + genitive): غُرْفَةُ النَّوْمِ = “room of the sleep”, غُرْفَةُ الْجُلُوسِ = sitting room."
+    ],
+    "notes": [
+     {
+      "for": "sw",
+      "rel": "similar",
+      "text": "Swahili ghorofa (an upper floor) comes from غُرْفَة (Wiktionary)."
+     },
+     {
+      "for": "es",
+      "rel": "similar",
+      "text": "Spanish algorfa (an attic, a granary) comes, through Andalusian Arabic, from غُرْفَة."
+     }
     ]
    }
   },
@@ -581,6 +632,7 @@
     "plurals": [
      {
       "form": "أَبْوَاب",
+      "translit": "ʾabwāb",
       "kind": "broken",
       "pattern": "أَفْعَال",
       "declension": "triptote",
@@ -595,7 +647,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "بَابُ",
+      "translit": "bābu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "bāb",
@@ -721,7 +782,7 @@
     },
     "funFacts": [
      "Babylon is Akkadian Bāb-ilim, “gate of god” — the same word bāb.",
-     "Turkish bap (chapter) comes from بَاب in its sense “chapter” (Wiktionary)."
+     "بَاب also means a chapter of a book, or a section of a newspaper."
     ],
     "pitfalls": [
      "The plural is أَبْوَاب: the hidden w of the root ب و ب appears.",
@@ -729,6 +790,13 @@
     ],
     "subtleties": [
      "A book’s أَبْوَاب are its chapters; فِي هٰذَا الْبَابِ = in this field."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish bap (chapter) comes from بَاب in its sense “chapter” (Wiktionary)."
+     }
     ]
    }
   },
@@ -747,6 +815,7 @@
     "plurals": [
      {
       "form": "نَوَافِذ",
+      "translit": "nawāfiḏ",
       "kind": "broken",
       "pattern": "فَوَاعِل",
       "declension": "diptote",
@@ -760,7 +829,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "نَافِذَةُ",
+      "translit": "nāfiḏatu"
+     }
+    ]
    },
    "gender": "FEM",
    "translit": "nāfiḏa",
@@ -890,6 +968,7 @@
     "plurals": [
      {
       "form": "جُدْرَان",
+      "translit": "judrān",
       "kind": "broken",
       "pattern": "فُعْلَان",
       "declension": "triptote",
@@ -899,6 +978,7 @@
      },
      {
       "form": "جُدُر",
+      "translit": "judur",
       "kind": "broken",
       "pattern": "فُعُل",
       "declension": "triptote",
@@ -912,7 +992,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "جِدَارُ",
+      "translit": "jidāru"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "jidār",
@@ -1048,6 +1137,7 @@
     "plurals": [
      {
       "form": "طَاوِلَات",
+      "translit": "ṭāwilāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -1059,7 +1149,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "no other form belongs to one meaning (the plurals do: see plurals)"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "طَاوِلَةُ",
+      "translit": "ṭāwilatu"
+     }
+    ]
    },
    "gender": "FEM",
    "translit": "ṭāwila",
@@ -1174,7 +1273,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Its second meaning, backgammon, links it to Turkish tavla and Greek τάβλι — all from Latin tabula, a board."
+     "Its second meaning is backgammon (طَاوِلَةُ الزَّهْرِ), the board game of the coffee house; both go back to Latin tabula, a board."
     ],
     "pitfalls": [
      "A loanword that follows Arabic rules: feminine with ة, sound plural طَاوِلَات.",
@@ -1182,6 +1281,18 @@
     ],
     "subtleties": [
      "“To play backgammon” is لَعِبَ الطَّاوِلَةَ — the same word as the table."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Greek τάβλι (backgammon) is the same word: both from the Roman tabula, a board."
+     },
+     {
+      "for": "tr",
+      "rel": "same",
+      "text": "Turkish tavla (backgammon) is the same word."
+     }
     ]
    }
   },
@@ -1202,6 +1313,7 @@
     "plurals": [
      {
       "form": "كَرَاسِيّ",
+      "translit": "karāsī",
       "kind": "broken",
       "pattern": "فَعَالِيّ",
       "declension": "diptote",
@@ -1216,7 +1328,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "كُرْسِيُّ",
+      "translit": "kursiyyu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -1348,7 +1469,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish kürsü (lectern, podium) and Malay and Indonesian kursi (chair) come from it (Wiktionary).",
+     "كُرْسِيّ is also a throne or a professor’s chair, and آيَةُ الْكُرْسِيِّ, “the Throne Verse”, is a famous verse of the Qurʾān.",
      "The chain goes back to Sumerian guza — one of the oldest traceable words in this course."
     ],
     "pitfalls": [
@@ -1357,6 +1478,28 @@
     ],
     "subtleties": [
      "آيَةُ الْكُرْسِيِّ, the Throne Verse, is one of the best-known verses of the Qurʾān — there كُرْسِيّ is God’s throne."
+    ],
+    "notes": [
+     {
+      "for": "hi",
+      "rel": "same",
+      "text": "Hindi कुर्सी (chair) is this word."
+     },
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish kürsü (lectern, podium) comes from it."
+     },
+     {
+      "for": "ms",
+      "rel": "same",
+      "text": "Malay kursi (chair) comes from it."
+     },
+     {
+      "for": "id",
+      "rel": "same",
+      "text": "Indonesian kursi (chair) comes from it."
+     }
     ]
    }
   },
@@ -1376,6 +1519,7 @@
     "plurals": [
      {
       "form": "أَسِرَّة",
+      "translit": "ʾasirra",
       "kind": "broken",
       "pattern": "أَفْعِلَة",
       "declension": "triptote",
@@ -1386,6 +1530,7 @@
      },
      {
       "form": "سُرُر",
+      "translit": "surur",
       "kind": "broken",
       "pattern": "فُعُل",
       "declension": "triptote",
@@ -1399,7 +1544,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "no other form belongs to one meaning (the plurals do: see plurals)"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "سَرِيرُ",
+      "translit": "sarīru"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -1530,7 +1684,14 @@
      "Sun letter: with the article the s is doubled — السَّرِيرُ (as-sarīr)."
     ],
     "subtleties": [
-     "As in English, hospitals count beds: مُسْتَشْفًى بِمِئَةِ سَرِيرٍ (a hundred-bed hospital)."
+     "Hospitals count their size in beds: مُسْتَشْفًى بِمِئَةِ سَرِيرٍ (a hundred-bed hospital)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "As in English, hospitals count beds: a hundred-bed hospital."
+     }
     ]
    }
   },
@@ -1550,6 +1711,7 @@
     "plurals": [
      {
       "form": "خَزَائِن",
+      "translit": "ḫazāʾin",
       "kind": "broken",
       "pattern": "فَعَائِل",
       "declension": "diptote",
@@ -1563,7 +1725,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "خِزَانَةُ",
+      "translit": "ḫizānatu"
+     }
+    ]
    },
    "gender": "FEM",
    "translit": "ḫizāna",
@@ -1667,7 +1838,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English magazine and German Magazin come from the Arabic plural مَخَازِن (storehouses), of the same root خ ز ن, through Italian magazzino."
+     "German Magazin comes from the Arabic plural مَخَازِن (storehouses), of the same root خ ز ن, through Italian magazzino."
     ],
     "pitfalls": [
      "Spelled with kasra: خِزَانَة (ḫizāna); خَزِينَة is another word (treasury, cash box).",
@@ -1675,6 +1846,48 @@
     ],
     "subtleties": [
      "Literally “a place of storing”: the same root gives مَخْزَن (warehouse) and خَزْن (storage)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English magazine comes from the plural مَخَازِن (storehouses) — but an Arabic magazine is مَجَلَّة."
+     },
+     {
+      "for": "fr",
+      "rel": "trap",
+      "text": "French magasin (shop) comes from مَخَازِن (storehouses); a shop is مَحَلّ."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Italian magazzino (warehouse) is the Arabic plural مَخَازِن."
+     },
+     {
+      "for": "es",
+      "rel": "similar",
+      "text": "Spanish almacén is الْمَخْزَن, the storehouse, article and all."
+     },
+     {
+      "for": "pt",
+      "rel": "similar",
+      "text": "Portuguese armazém is الْمَخْزَن, the storehouse, article and all."
+     },
+     {
+      "for": "ru",
+      "rel": "trap",
+      "text": "Russian магазин (shop) comes from مَخَازِن (storehouses); a shop is مَحَلّ."
+     },
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "Greek μαγαζί (shop) goes back to مَخَازِن (storehouses); a shop is مَحَلّ."
+     },
+     {
+      "for": "sq",
+      "rel": "similar",
+      "text": "Albanian magazinë goes back to مَخَازِن (storehouses)."
+     }
     ]
    }
   },
@@ -1693,6 +1906,7 @@
     "plurals": [
      {
       "form": "مَصَابِيح",
+      "translit": "maṣābīḥ",
       "kind": "broken",
       "pattern": "مَفَاعِيل",
       "declension": "diptote",
@@ -1706,7 +1920,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "مِصْبَاحُ",
+      "translit": "miṣbāḥu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "miṣbāḥ",
@@ -1857,6 +2080,7 @@
     "plurals": [
      {
       "form": "كُتُب",
+      "translit": "kutub",
       "kind": "broken",
       "pattern": "فُعُل",
       "declension": "triptote",
@@ -1871,7 +2095,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "كِتَابُ",
+      "translit": "kitābu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "kitāb",
@@ -2029,7 +2262,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish kitap, Persian and Hindi kitāb, Swahili kitabu: all from كِتَاب (Wiktionary lists dozens of descendants).",
+     "One of the most widely borrowed Arabic words: dozens of languages from Africa to Southeast Asia say “book” with it (Wiktionary).",
      "Hebrew כְּתָב (ktav, script, writing) has the same root k-t-b."
     ],
     "pitfalls": [
@@ -2038,6 +2271,28 @@
     ],
     "subtleties": [
      "One root, a whole family: كَتَبَ (he wrote), كَاتِب (writer), مَكْتَب (desk, office), مَكْتَبَة (library, bookshop), مَكْتُوب (written)."
+    ],
+    "notes": [
+     {
+      "for": "hi",
+      "rel": "same",
+      "text": "Hindi किताब is this word — feminine in Hindi, masculine in Arabic."
+     },
+     {
+      "for": "tr",
+      "rel": "same",
+      "text": "Turkish kitap is this word."
+     },
+     {
+      "for": "fa",
+      "rel": "same",
+      "text": "Persian کتاب is this word."
+     },
+     {
+      "for": "sw",
+      "rel": "same",
+      "text": "Swahili kitabu is this word."
+     }
     ]
    }
   },
@@ -2056,6 +2311,7 @@
     "plurals": [
      {
       "form": "أَقْلَام",
+      "translit": "ʾaqlām",
       "kind": "broken",
       "pattern": "أَفْعَال",
       "declension": "triptote",
@@ -2069,7 +2325,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "قَلَمُ",
+      "translit": "qalamu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "qalam",
@@ -2200,7 +2465,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "From Greek κάλαμος, “reed” — the first pens were cut reeds. Turkish kalem and Swahili kalamu come from the Arabic (Wiktionary)."
+     "From Greek κάλαμος, “reed” — the first pens were cut reeds."
     ],
     "pitfalls": [
      "قَلَم covers pens and pencils; a pencil is قَلَمُ رَصَاصٍ.",
@@ -2208,6 +2473,28 @@
     ],
     "subtleties": [
      "بِقَلَمِ فُلَانٍ under an article = “written by so-and-so” (Wiktionary)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Greek καλάμι (reed) and καλαμάρι (squid — once an ink-holder) are relatives of قَلَم."
+     },
+     {
+      "for": "hi",
+      "rel": "same",
+      "text": "Hindi क़लम (pen) is this word."
+     },
+     {
+      "for": "tr",
+      "rel": "same",
+      "text": "Turkish kalem comes from the Arabic."
+     },
+     {
+      "for": "sw",
+      "rel": "same",
+      "text": "Swahili kalamu comes from the Arabic."
+     }
     ]
    }
   },
@@ -2229,6 +2516,7 @@
     "plurals": [
      {
       "form": "أَوْرَاق",
+      "translit": "ʾawrāq",
       "kind": "broken",
       "pattern": "أَفْعَال",
       "declension": "triptote",
@@ -2242,6 +2530,7 @@
      },
      {
       "form": "وَرَقَات",
+      "translit": "waraqāt",
       "kind": "soundFem",
       "declension": "sound",
       "note": "counted sheets: ثَلَاثُ وَرَقَاتٍ (plural of وَرَقَة)",
@@ -2255,7 +2544,16 @@
     "unit": "وَرَقَة",
     "meaningForms": {
      "none": "no other form belongs to one meaning (the plurals do: see plurals)"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "وَرَقُ",
+      "translit": "waraqu"
+     }
+    ]
    },
    "class": "collective",
    "gender": "MASC",
@@ -2390,7 +2688,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish varak (a thin leaf, gold leaf) comes from وَرَق (Wiktionary).",
+     "Its unit noun وَرَقَة is one sheet — and also a form, a banknote (وَرَقَةٌ نَقْدِيَّةٌ) or a playing card.",
      "Stuffed vine leaves are وَرَقُ عِنَبٍ — the same word as paper."
     ],
     "pitfalls": [
@@ -2399,6 +2697,13 @@
     ],
     "subtleties": [
      "لَعِبَ الْوَرَقَ = to play cards: the cards are “the paper”."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish varak (a thin leaf, gold leaf) comes from وَرَق (Wiktionary)."
+     }
     ]
    }
   },
@@ -2418,6 +2723,7 @@
     "plurals": [
      {
       "form": "هَوَاتِف",
+      "translit": "hawātif",
       "kind": "broken",
       "pattern": "فَوَاعِل",
       "declension": "diptote",
@@ -2431,7 +2737,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "هَاتِفُ",
+      "translit": "hātifu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "hātif",
@@ -2593,6 +2908,7 @@
     "plurals": [
      {
       "form": "مَفَاتِيح",
+      "translit": "mafātīḥ",
       "kind": "broken",
       "pattern": "مَفَاعِيل",
       "declension": "diptote",
@@ -2607,7 +2923,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "مِفْتَاحُ",
+      "translit": "miftāḥu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "miftāḥ",
@@ -2775,6 +3100,7 @@
     "plurals": [
      {
       "form": "حَقَائِب",
+      "translit": "ḥaqāʾib",
       "kind": "broken",
       "pattern": "فَعَائِل",
       "declension": "diptote",
@@ -2788,7 +3114,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "حَقِيبَةُ",
+      "translit": "ḥaqībatu"
+     }
+    ]
    },
    "gender": "FEM",
    "translit": "ḥaqība",
@@ -2911,11 +3246,11 @@
      }
     ],
     "etymology": {
-     "text": "Root ح ق ب; Wiktionary gives no older origin. It passed into Ottoman Turkish (Turkish heybe, “saddlebag”), Albanian and Armenian.",
+     "text": "Root ح ق ب; Wiktionary gives no older origin.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish heybe (saddlebag) comes from حَقِيبَة, while the Arabic everyday word شَنْطَة comes from Turkish çanta: a loan in each direction."
+     "حَقِيبَة is also a minister’s portfolio: حَقِيبَةٌ وِزَارِيَّةٌ. The everyday word for a bag, شَنْطَة, is a loan from Turkish."
     ],
     "pitfalls": [
      "The plural حَقَائِب is a diptote: حَقَائِبُ.",
@@ -2923,6 +3258,18 @@
     ],
     "subtleties": [
      "وَزِيرٌ بِلَا حَقِيبَةٍ = a minister without portfolio."
+    ],
+    "notes": [
+     {
+      "for": "sq",
+      "rel": "similar",
+      "text": "Albanian hejbe (saddlebag) comes from حَقِيبَة."
+     },
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish heybe (saddlebag) comes from حَقِيبَة, while the Arabic شَنْطَة comes from Turkish çanta: a loan in each direction."
+     }
     ]
    }
   },
@@ -2945,6 +3292,7 @@
     "plurals": [
      {
       "form": "فَنَاجِين",
+      "translit": "fanājīn",
       "kind": "broken",
       "declension": "diptote",
       "senses": [
@@ -2956,7 +3304,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "فِنْجَانُ",
+      "translit": "finjānu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "finjān",
@@ -3065,7 +3422,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek φλιτζάνι (cup) comes from Turkish fincan, from this Arabic word — which itself goes back through Persian and Aramaic to Greek πίναξ: a round trip."
+     "A round trip: the word goes back through Persian and Aramaic to Greek πίναξ (plate, board), and travelled on from Arabic into other languages."
     ],
     "pitfalls": [
      "The plural فَنَاجِين is a diptote: فَنَاجِينُ.",
@@ -3073,6 +3430,23 @@
     ],
     "subtleties": [
      "فِنْجَان is the small cup for Arabic or Turkish coffee (or tea); a big mug is كُوب."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Greek φλιτζάνι (cup) comes from فِنْجَان — itself from Greek πίναξ: a round trip."
+     },
+     {
+      "for": "sq",
+      "rel": "similar",
+      "text": "Albanian filxhan (cup) comes from فِنْجَان."
+     },
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish fincan comes from this word."
+     }
     ]
    }
   },
@@ -3092,6 +3466,7 @@
     "plurals": [
      {
       "form": "كُؤُوس",
+      "translit": "kuʾūs",
       "kind": "broken",
       "pattern": "فُعُول",
       "declension": "triptote",
@@ -3106,7 +3481,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "كَأْسُ",
+      "translit": "kaʾsu"
+     }
+    ]
    },
    "gender": "FEM",
    "translit": "kaʾs",
@@ -3245,6 +3629,7 @@
     "plurals": [
      {
       "form": "صُحُون",
+      "translit": "ṣuḥūn",
       "kind": "broken",
       "pattern": "فُعُول",
       "declension": "triptote",
@@ -3259,7 +3644,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "صَحْنُ",
+      "translit": "ṣaḥnu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "ṣaḥn",
@@ -3378,7 +3772,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek σαγάνι (a shallow pan) — and the dish σαγανάκι named after it — comes from Turkish sahan, from Arabic صَحْن (Wiktionary)."
+     "صَحْن is also an open courtyard: صَحْنُ الْمَسْجِدِ, the court of a mosque."
     ],
     "pitfalls": [
      "The plural is صُحُون: غَسَلْتُ الصُّحُونَ (I washed the dishes).",
@@ -3386,6 +3780,23 @@
     ],
     "subtleties": [
      "The plate is صَحْن; the food on the menu is طَبَق: الطَّبَقُ الرَّئِيسِيُّ = the main course."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Greek σαγάνι (a shallow pan) — and σαγανάκι, named after it — comes from صَحْن."
+     },
+     {
+      "for": "sq",
+      "rel": "similar",
+      "text": "Albanian sahan (a deep dish) comes from صَحْن."
+     },
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish sahan comes from صَحْن."
+     }
     ]
    }
   }

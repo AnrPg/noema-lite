@@ -235,7 +235,7 @@
   {
    "for": "el",
    "rel": "different",
-   "text": "Greek έχω ‘have’ conjugates (έχω, έχεις, έχει), and ‘there is’ is υπάρχει (in speech also έχει: έχει ψωμί;). Chinese 有 does both and never changes: 我有面包, 这里有面包. Negation: δεν έχω ~ 没有, never *不有."
+   "text": "Greek έχω ‘have’ conjugates (έχω, έχεις, έχει), and ‘there is’ is υπάρχει (in speech also έχει: έχει ψωμί;).\n\nChinese 有 does both and never changes:\n→ 我有面包, 这里有面包.\n\nNegation: δεν έχω ~ 没有, never *不有."
   },
   {
    "for": "ru",
@@ -250,12 +250,12 @@
   {
    "for": "en",
    "rel": "different",
-   "text": "English has two constructions, ‘I have’ and ‘there is’; Chinese has one verb, 有, with the owner or the place first: 我有书 / 桌子上有书. ‘There is’ never uses 是: *这里是很多人."
+   "text": "English has two constructions, ‘I have’ and ‘there is’; Chinese has one verb, 有, with the owner or the place first:\n→ 我有书 / 桌子上有书.\n\n‘There is’ never uses 是:\n→ *这里是很多人."
   },
   {
    "for": "fr",
    "rel": "similar",
-   "text": "French il y a ‘there is’ already uses avoir ‘have’; Chinese goes all the way: 有 is ‘have’ and ‘there is’ (j’ai un frère ~ 我有一个哥哥, il y a beaucoup de monde ~ 这里有很多人)."
+   "text": "French il y a ‘there is’ already uses avoir ‘have’; Chinese goes all the way:\n→ 有 is ‘have’ and ‘there is’ (j’ai un frère ~ 我有一个哥哥, il y a beaucoup de monde ~ 这里有很多人)."
   },
   {
    "for": "de",
@@ -265,47 +265,47 @@
   {
    "for": "hi",
    "rel": "different",
-   "text": "Hindi says ‘near me is a car’ (मेरे पास कार है) and ‘my two brothers are’ (मेरे दो भाई हैं); Chinese uses one verb with the owner as subject: 我有一辆车, 我有两个哥哥."
+   "text": "Hindi says ‘near me is a car’ (मेरे पास कार है) and ‘my two brothers are’ (मेरे दो भाई हैं); Chinese uses one verb with the owner as subject:\n→ 我有一辆车, 我有两个哥哥."
   },
   {
    "for": "fa",
    "rel": "similar",
-   "text": "Persian dāshtan ‘have’ (dāram, dāri) ~ 有, but conjugated; ‘there is’ is hast. Chinese uses 有 for both and never changes it."
+   "text": "Persian dāshtan ‘have’ (dāram, dāri) ~ 有, but conjugated; ‘there is’ is hast.\n\nChinese uses 有 for both and never changes it."
   },
   {
    "for": "mr",
    "rel": "different",
-   "text": "Marathi says ‘with me is a book’ (माझ्याकडे पुस्तक आहे) and ‘to me is a brother’ (मला एक भाऊ आहे); Chinese makes the owner the subject of 有: 我有一本书, 我有一个哥哥."
+   "text": "Marathi says ‘with me is a book’ (माझ्याकडे पुस्तक आहे) and ‘to me is a brother’ (मला एक भाऊ आहे); Chinese makes the owner the subject of 有:\n→ 我有一本书, 我有一个哥哥."
   },
   {
    "for": "ar",
    "rel": "different",
-   "text": "Arabic has no verb ‘have’: ʿindī kitāb ‘at me (is) a book’, and hunāka for ‘there is’. Chinese uses the verb 有 for both, with the owner as subject: 我有一本书."
+   "text": "Arabic has no verb ‘have’: ʿindī kitāb ‘at me (is) a book’, and hunāka for ‘there is’.\n\nChinese uses the verb 有 for both, with the owner as subject:\n→ 我有一本书."
   },
   {
    "for": "he",
    "rel": "similar",
-   "text": "Hebrew yesh li ‘there is to me’ uses yesh for ‘have’ and ‘there is’ and ein for both negatives — just like 有 / 没有. The difference: Chinese makes the owner the subject (我有), Hebrew puts him after le- (li)."
+   "text": "Hebrew yesh li ‘there is to me’ uses yesh for ‘have’ and ‘there is’ and ein for both negatives — just like 有 / 没有.\n\nThe difference: Chinese makes the owner the subject (我有), Hebrew puts him after le- (li)."
   },
   {
    "for": "tr",
    "rel": "similar",
-   "text": "Turkish var / yok cover ‘there is’ and ‘have’ (kardeşim var ‘I have a brother’, burada çay var ‘there is tea here’) — Chinese 有 / 没有 work the same way, but the owner is a plain subject: 我有一个哥哥."
+   "text": "Turkish var / yok cover ‘there is’ and ‘have’ (kardeşim var ‘I have a brother’, burada çay var ‘there is tea here’) — Chinese 有 / 没有 work the same way, but the owner is a plain subject:\n→ 我有一个哥哥."
   },
   {
    "for": "ja",
    "rel": "similar",
-   "text": "Japanese ある / いる mean ‘there is’ and also ‘have’ (車がある ‘I have a car’), split by animacy (いる for people and animals). Chinese 有 serves for everything, living or not."
+   "text": "Japanese ある / いる mean ‘there is’ and also ‘have’ (車がある ‘I have a car’), split by animacy (いる for people and animals).\n\nChinese 有 serves for everything, living or not."
   },
   {
    "for": "ko",
    "rel": "trap",
-   "text": "Korean 있다 is ‘there is’, ‘have’ and also ‘be at’ (학교에 있어요 ‘is at school’); Chinese splits it: 有 for ‘have / there is’, 在 for ‘be at’ (他在学校)."
+   "text": "Korean 있다 is ‘there is’, ‘have’ and also ‘be at’ (학교에 있어요 ‘is at school’); Chinese splits it:\n→ 有 for ‘have / there is’, 在 for ‘be at’ (他在学校)."
   },
   {
    "for": "fi",
    "rel": "different",
-   "text": "Finnish says ‘at me is a car’ (minulla on auto); Chinese says ‘I have a car’, with the owner as subject: 我有一辆车."
+   "text": "Finnish says ‘at me is a car’ (minulla on auto); Chinese says ‘I have a car’, with the owner as subject:\n→ 我有一辆车."
   },
   {
    "for": "hu",
@@ -315,7 +315,7 @@
   {
    "for": "sw",
    "rel": "similar",
-   "text": "Swahili ‘have’ is ‘be with’: nina gari ‘I have a car’, sina ‘I don’t have’; ‘there is’ is kuna. Chinese uses one verb for both, 有, and one negative, 没有."
+   "text": "Swahili ‘have’ is ‘be with’: nina gari ‘I have a car’, sina ‘I don’t have’; ‘there is’ is kuna.\n\nChinese uses one verb for both, 有, and one negative, 没有."
   },
   {
    "for": "lg",
@@ -330,7 +330,47 @@
   {
    "for": "iu",
    "rel": "different",
-   "text": "Inuktitut expresses ‘have’ with a suffix on the noun, inside one verb word (‘brother-have-I’). Chinese keeps separate words: 我 + 有 + 一个哥哥."
+   "text": "Inuktitut expresses ‘have’ with a suffix on the noun, inside one verb word (‘brother-have-I’).\n\nChinese keeps separate words:\n→ 我 + 有 + 一个哥哥."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian has avere ‘have’ and c’è / ci sono ‘there is / are’ (from essere); Chinese uses 有 for both: ho due fratelli ~ 我有两个哥哥, c’è molta gente ~ 这里有很多人. non ho / non c’è ~ 没有, never *不有."
+  },
+  {
+   "for": "sq",
+   "rel": "same",
+   "text": "Albanian already does what Chinese does: kam ‘I have’ and ka ‘there is’ are one verb (ka shumë njerëz këtu ~ 这里有很多人).\n\nBut kam conjugates (kam, ke, ka) and is negated with plain nuk; Chinese 有 never changes and has its own negation, 没有."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese has ter ‘have’ and há ‘there is’ (from haver); Chinese uses 有 for both: tenho dois irmãos ~ 我有两个哥哥, há muita gente ~ 这里有很多人. não tenho / não há ~ 没有, never *不有."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your ‘have’ conjugates and ‘there is’ is another construction, Chinese uses one unchanging verb for both:\n→ 我有书 (owner first), 桌子上有书 (place first).\n\nIts negation is always 没有, never *不有."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If you say ‘at me there is’ with an existence word (and a special word for ‘there isn’t’), Chinese 有 / 没有 is the same pair — but the owner is a plain subject:\n→ 我有一个哥哥."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "same",
+   "text": "If one verb in your language means both ‘have’ and ‘there is’, Chinese 有 is the same:\n→ 我有两个哥哥, 这里有很多人; its negative is 没有."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If ‘have’ is a suffix inside your verb word, Chinese keeps it as a separate verb with a subject:\n→ 我 + 有 + 一个哥哥."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "If your language says ‘at me / to me (there is)’ with one word for ‘there is’, Chinese 有 also does both jobs — but the owner becomes the subject:\n→ 我有一本书.\n\nThe negation of both is 没有."
   }
  ],
  "seeAlso": [

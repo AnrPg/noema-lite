@@ -277,7 +277,7 @@
    "A consequence? → لِذٰلِكَ (therefore) or فَـ (and so); one thing after another → ثُمَّ (later) / فَـ (at once).",
    "A time clause → عِنْدَمَا; a question “when?” → مَتَى.",
    "A condition → إِذَا + past form; a command after it → فَـ.",
-   "Is there an “is” in the when / if clause? → كَانَ (أَكُونُ, كُنْتَ) + accusative."
+   "Does the when / if clause need “to be” (a state, a place, a job)? → كَانَ (أَكُونُ, كُنْتَ) + accusative."
   ]
  },
  "traps": [
@@ -509,17 +509,17 @@
   {
    "lang": "he",
    "fn": "fn.connectors",
-   "note": "Hebrew: אֲבָל (but), כִּי / מִפְּנֵי שֶׁ (because), לָכֵן (so), אַחַר כָּךְ (then), כְּשֶׁ (when), אִם (if), שֶׁ (that), לַמְרוֹת שֶׁ (although) — many end in the prefix שֶׁ, and nothing changes after them: no case, no word order."
+   "note": "Hebrew — many end in the prefix שֶׁ, and **nothing changes after them**: no case, no word order.\n- אֲבָל (but), כִּי / מִפְּנֵי שֶׁ (because), לָכֵן (so), אַחַר כָּךְ (then)\n- כְּשֶׁ (when), אִם (if), שֶׁ (that), לַמְרוֹת שֶׁ (although)"
   },
   {
    "lang": "de",
    "fn": "fn.connectors",
-   "note": "German: weil, dass, wenn, obwohl send the verb to the end; deshalb and dann invert (deshalb esse ich). Arabic keeps the order and changes the case after لِأَنَّ / أَنَّ / لٰكِنَّ."
+   "note": "German: weil, dass, wenn, obwohl send the verb to the end; deshalb and dann invert (deshalb esse ich).\n\nArabic keeps the order and changes the case after لِأَنَّ / أَنَّ / لٰكِنَّ."
   },
   {
    "lang": "zh",
    "fn": "fn.connectors",
-   "note": "Chinese pairs its linking words: 因为 … 所以 … (because … so), 虽然 … 但是 … (although … but — the pair Arabic does not allow), 如果 …（的话）(if), … 的时候 (when)."
+   "note": "Chinese pairs its linking words:\n- 因为 … 所以 … (because … so)\n- 虽然 … 但是 … (although … but — the pair Arabic does not allow)\n- 如果 …（的话）(if)\n- … 的时候 (when)"
   },
   {
    "lang": "ar",
@@ -568,27 +568,27 @@
   {
    "for": "es",
    "rel": "different",
-   "text": "Spanish quiero ir uses an infinitive; Arabic says أُرِيدُ أَنْ أَذْهَبَ (“I want that I go”). Spanish que + subjunctive (quiero que vayas) is close to أَنْ + subjunctive."
+   "text": "Spanish quiero ir uses an infinitive; Arabic says “I want that I go”:\n→ أُرِيدُ أَنْ أَذْهَبَ\n\nSpanish que + subjunctive (quiero que vayas) is close to أَنْ + subjunctive."
   },
   {
    "for": "en",
    "rel": "different",
-   "text": "English “I want to go” has an infinitive; Arabic has a full verb with a person: أُرِيدُ أَنْ أَذْهَبَ. And “because he is tired” is لِأَنَّهُ مُتْعَبٌ — the pronoun becomes an ending of “because”."
+   "text": "English “I want to go” has an infinitive; Arabic has **a full verb with a person**:\n→ أُرِيدُ أَنْ أَذْهَبَ\n\n“Because he is tired” is لِأَنَّهُ مُتْعَبٌ — the pronoun becomes an ending of “because”."
   },
   {
    "for": "fr",
    "rel": "similar",
-   "text": "French bien que and Arabic مَعَ أَنَّ both mean “although”, and neither takes a “but” in the main clause; French je veux partir has an infinitive, Arabic أُرِيدُ أَنْ أَذْهَبَ does not."
+   "text": "- French bien que and Arabic مَعَ أَنَّ both mean “although”, and neither takes a “but” in the main clause.\n- French je veux partir has an infinitive; Arabic أُرِيدُ أَنْ أَذْهَبَ does not."
   },
   {
    "for": "hi",
    "rel": "similar",
-   "text": "Hindi लेकिन is Arabic لٰكِنْ, borrowed through Persian, and कि (that) opens a clause like أَنَّ; but after لِأَنَّ / أَنَّ a pronoun becomes an ending (لِأَنَّهُ), which Hindi क्योंकि never does."
+   "text": "Hindi लेकिन is Arabic لٰكِنْ, and कि (that) opens a clause like أَنَّ.\n\nBut after لِأَنَّ / أَنَّ **a pronoun becomes an ending** (لِأَنَّهُ), which Hindi क्योंकि never does."
   },
   {
    "for": "fa",
    "rel": "similar",
-   "text": "Persian که, اگر, چون and اما (from Arabic أَمَّا) open clauses without changing their order, as Arabic linking words do; Persian می‌خواهم بروم (“I want I go”) is close to أُرِيدُ أَنْ أَذْهَبَ."
+   "text": "Persian که, اگر, چون and اما (from Arabic أَمَّا) open clauses without changing their order, as Arabic linking words do.\n\n→ Persian می‌خواهم بروم (“I want I go”) is close to أُرِيدُ أَنْ أَذْهَبَ"
   },
   {
    "for": "mr",
@@ -598,12 +598,12 @@
   {
    "for": "tr",
    "rel": "different",
-   "text": "Turkish joins clauses with verb endings (-ince, -ip, -diği için) before the main clause; Arabic uses separate words at the start of the clause: عِنْدَمَا, لِأَنَّ. Turkish ama, fakat and ve come from Arabic أَمَّا, فَقَطْ and وَ."
+   "text": "Turkish joins clauses with verb endings (-ince, -ip, -diği için) before the main clause; Arabic uses **separate words at the start of the clause**:\n→ عِنْدَمَا, لِأَنَّ\n\nTurkish ama, fakat and ve come from Arabic أَمَّا, فَقَطْ and وَ."
   },
   {
    "for": "ja",
    "rel": "different",
-   "text": "Japanese puts the linking word at the end of the first clause (疲れたから, because I’m tired); Arabic puts it at the start: لِأَنَّنِي مُتْعَبٌ."
+   "text": "Japanese puts the linking word at the end of the first clause; Arabic puts it at the start:\n→ 疲れたから — لِأَنَّنِي مُتْعَبٌ (because I’m tired)"
   },
   {
    "for": "ko",
@@ -634,6 +634,56 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut joins clauses with special verb moods (“when …”, “because …”) instead of separate words; Arabic uses linking words: عِنْدَمَا, لِأَنَّ, إِذَا."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German sends the verb to the end after weil, dass, wenn (weil er müde ist). Arabic **never changes the order** — what changes is the case:\n→ لِأَنَّهُ مُتْعَبٌ\n\nIch will gehen has an infinitive; Arabic says “I want that I go”:\n→ أُرِيدُ أَنْ أَذْهَبَ"
+  },
+  {
+   "for": "zh",
+   "rel": "trap",
+   "text": "- Chinese pairs its connectors (因为…所以…, 虽然…但是…); Arabic uses one: لِأَنَّ … alone, and مَعَ أَنَّ never takes لٰكِنْ in the main clause.\n- 我想去 has no person on 去; Arabic puts it on both verbs: أُرِيدُ أَنْ أَذْهَبَ."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Italian che + subjunctive (voglio che tu vada) is close to أَنْ + subjunctive.\n\nBut where Italian has an infinitive (voglio andare), Arabic still says:\n→ أُرِيدُ أَنْ أَذْهَبَ\n\nLike benché, مَعَ أَنَّ takes no “but” in the main clause."
+  },
+  {
+   "for": "sq",
+   "rel": "same",
+   "text": "Albanian also has no infinitive here: dua të shkoj, with të + subjunctive, is exactly أُرِيدُ أَنْ أَذْهَبَ.\n\nNew is that after لِأَنَّ / أَنَّ:\n- a pronoun becomes an ending: لِأَنَّهُ مُتْعَبٌ;\n- a noun turns accusative."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese quero ir has an infinitive; Arabic says “I want that I go”:\n→ أُرِيدُ أَنْ أَذْهَبَ\n\n- Que + subjunctive (quero que vás) is close to أَنْ + subjunctive.\n- porque is لِأَنَّ — but **only Arabic attaches the pronoun**: لِأَنَّهُ."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your language uses conjunctions with an ordinary clause, most Arabic connectors work the same way.\n\nNew are the few (لِأَنَّ, أَنَّ, لٰكِنَّ) after which **the subject is accusative or a pronoun ending**."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If you join clauses with verb endings placed before the main clause, Arabic does the reverse: **a separate word at the start of the clause**, and the main clause often comes first.\n→ عِنْدَمَا, لِأَنَّ, إِذَا"
+  },
+  {
+   "for": "type:isolating",
+   "rel": "similar",
+   "text": "If you join clauses with separate words and unchanged verbs, the Arabic connectors will feel natural. Only the verbs change:\n→ أُرِيدُ أَنْ أَذْهَبَ (I want that I go)\n\nA pronoun after لِأَنَّ is an ending."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If your language joins clauses with special verb moods, note that Arabic:\n- uses linking words at the start of the clause (عِنْدَمَا, لِأَنَّ, إِذَا);\n- needs only one special verb form, the subjunctive after أَنْ."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "If your language is Semitic, joining with “and” (وَ) and “so” (فَـ) and a “that” before a clause will feel familiar.\n\nNew is that لِأَنَّ, أَنَّ and لٰكِنَّ make the following subject accusative or take a pronoun ending."
   }
  ]
 }

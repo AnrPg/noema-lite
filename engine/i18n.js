@@ -1,166 +1,197 @@
-/* noema-lite — interface languages (first pass: the menus, tabs and back buttons; the course material and the
-   AI conversations keep their own languages). Flat bundles per language; a missing key falls back to English.
-   Used by the subject/profile pickers (engine/loader.js, before a subject is open) and by the engine (t(), engine/src/05_i18n.js).
-   The language: settings.lang of the account (⚙️ Settings → Display & studying), else the browser's language. */
+/* noema-lite — the interface language (docs/i18n.md). One runtime for every screen:
+   • catalogs: i18n/<component>/<locale>.arb (ICU MessageFormat) → built by tools/i18n/build.js into engine/i18n/<locale>.js;
+     English is loaded with the page, any other locale lazily (a <script>, so it works on file:// and offline too);
+   • t(key, params) formats with intl-messageformat (plurals, select, numbers in the locale's digits) along the
+     fallback chain of the locale (pt-PT → pt → en …); a missing key shows the English text and is logged once;
+   • the locale: the account's choice (a:settings.lang; Arabic digits: a:settings.numerals), else the device's languages (BCP 47 lookup), else English;
+     each locale has a flag in config.js (locales: { tag: 'on' | 'preview' | 'off' }) — 'preview' only on deploy previews;
+   • Intl helpers: numbers, dates, relative time, lists, collation, plural categories, names order.
+   Keeps the older API: NoemaI18n.t(key, vars, pref), .lang(pref), .browser(), .LANGS. */
 (function (root) {
   'use strict';
-  const NB = ' ', NN = ' ';   // French: no-break space before “:”, narrow no-break space before “; ! ?”
-  const B = {
-    en: {
-      'top.switchSubject': 'Switch subject', 'top.map': 'Map', 'top.mapTitle': 'Back to this Roadmap',
-      'top.curricula': 'Roadmaps', 'top.curriculaTitle': 'Roadmaps: type a goal, get its steps',
-      'top.explore': 'Explore', 'top.exploreTitle': 'Explore: every public subject — info, statistics, study it',
-      'top.focus': 'Focus', 'top.focusTitle': '15-minute focus sprint', 'top.streak': 'Day streak', 'top.notifications': 'Notifications',
-      'top.sources': 'Sources', 'top.theme': 'Theme', 'top.tutor': 'Tutor', 'top.tutorTitle': 'Open tutor',
-      'top.account': '{name} — profile, ⚙️ settings, backup & sync, ❓ help',
-      'home.lightning': 'Lightning round', 'home.lightningSub': '60 seconds of true/false traps',
-      'home.drills': 'Debug drills', 'home.drillsSub': 'Memorize the “ask yourself” checklists',
-      'home.cards': 'Flashcards', 'home.cardsSub': 'Spaced-repetition recall',
-      'home.mistakes': 'Mistakes gym', 'home.mistakesSub': 'Retry what you got wrong',
-      'home.mixed': 'Mixed practice', 'home.mixedSub': 'Random exercises from everything you read',
-      'home.tutor': 'Socratic tutor', 'home.tutorSub': 'Gemini questions you until it clicks',
-      'home.due': '{n} due', 'home.chapters': 'Chapters',
-      'ch.all': '← All chapters', 'ch.learn': '📖 Learn', 'ch.practice': '🎯 Practice', 'ch.debug': '🔧 Debug drills', 'ch.cards': '🃏 Cards', 'ch.traps': '⚠️ Traps',
-      'nav.home': '← Home',
-      'view.mistakes': '🔁 Mistakes gym', 'view.mixed': '🎲 Mixed practice', 'view.lightning': 'Lightning round', 'view.cards': '🃏 Flashcards',
-      'view.drills': '🔧 Debug drills', 'view.whatsNew': '✨ What’s new', 'view.latest': '✨ Latest additions',
-      'acc.profile': '👤 Profile', 'acc.settings': '⚙️ Settings', 'acc.subjects': '📚 Subjects', 'acc.backup': '💾 Backup & restore', 'acc.cloud': '☁️ Cloud', 'acc.help': '❓ Help',
-      'set.uiLang': 'Language of the menus', 'set.uiLangAuto': 'Automatic ({lang})',
-      'set.uiLangTip': 'The menus and buttons translated so far. The course material and the AI conversations have their own language settings.',
-      'inuse.title': 'Noema is open on {where}', 'inuse.why': 'You were using it there just now. To keep your progress safe, Noema works on one device at a time.',
-      'inuse.use': 'Use here', 'inuse.useNote': 'The other one pauses. Everything you did there is already saved and comes here.',
-      'inuse.stay': 'Or just keep going there: nothing here changes, and this window waits.', 'inuse.offlineWork': 'What you did here while offline is kept and combined with your account automatically.',
-      'inuse.otherTab': 'another tab on this device', 'inuse.otherDevice': 'another device', 'inuse.continued': 'Continuing here ✔', 'inuse.offline': 'Could not reach your account. Check the connection and try again.',
-      'pick.who': 'Who is studying?', 'pick.local': 'local profile', 'pick.newProfile': 'New profile', 'pick.onDevice': 'on this device',
-      'pick.cloudSignIn': '☁️ Sign in / create a cloud account', 'pick.cloudHint': 'Study from any device — progress syncs automatically.',
-      'pick.what': 'What do you want to study?', 'pick.search': '🔎 Search subjects…',
-      'pick.subjects': '📚 Subjects', 'pick.subjectsSub': 'ready-made courses', 'pick.curricula': '🧭 Roadmaps', 'pick.curriculaSub': 'a goal → its steps',
-      'pick.noMatch': 'No subject matches.', 'pick.none': 'No subjects yet. Tap ✨ Create with Claude: your sources become a full study pack.',
-      'pick.create': '✨ Create with Claude', 'pick.explore': '🌍 Explore', 'pick.import': '📥 Import subject pack', 'pick.switchProfile': '👤 Switch profile',
-      'pick.close': 'Close', 'pick.other': 'Other', 'pick.shared': '📬 {n} subject(s) shared with you',
-      'pick.shelf': '📚 Shelf — {n} subject(s) not on any Roadmap', 'pick.shelfSub': 'Subjects that teach no step of a Roadmap. Study them here, or 🧭 put them on a Roadmap — the Roadmap is the way to study.',
-      'pick.putOnMap': 'Put on a Roadmap…', 'pick.noCurricula': 'No Roadmap yet. Type a goal and get its steps — then put the subjects you have on them.',
-      'pick.newCurriculum': '➕ New Roadmap', 'pick.importMap': '📥 Import a Roadmap', 'pick.onShelf': '📚 “{title}” is on your Shelf — 🧭 put it on a Roadmap to study it as one of its steps.',
-    },
-    el: {
-      'top.switchSubject': 'Αλλαγή μαθήματος', 'top.map': 'Χάρτης', 'top.mapTitle': 'Πίσω σε αυτόν τον Οδικό χάρτη',
-      'top.curricula': 'Οδικοί χάρτες', 'top.curriculaTitle': 'Οδικοί χάρτες: γράψε έναν στόχο και πάρε τους σταθμούς του',
-      'top.explore': 'Εξερεύνηση', 'top.exploreTitle': 'Εξερεύνηση: όλα τα δημόσια μαθήματα — πληροφορίες, στατιστικά, μελέτη',
-      'top.focus': 'Συγκέντρωση', 'top.focusTitle': '15 λεπτά συγκεντρωμένης μελέτης', 'top.streak': 'Συνεχόμενες μέρες', 'top.notifications': 'Ειδοποιήσεις',
-      'top.sources': 'Πηγές', 'top.theme': 'Εμφάνιση', 'top.tutor': 'Δάσκαλος', 'top.tutorTitle': 'Άνοιξε τον δάσκαλο',
-      'top.account': '{name} — προφίλ, ⚙️ ρυθμίσεις, αντίγραφα και συγχρονισμός, ❓ βοήθεια',
-      'home.lightning': 'Γύρος-αστραπή', 'home.lightningSub': '60 δευτερόλεπτα με παγίδες σωστού/λάθους',
-      'home.drills': 'Εξάσκηση στην αποσφαλμάτωση', 'home.drillsSub': 'Μάθε τις λίστες «ρώτα τον εαυτό σου»',
-      'home.cards': 'Κάρτες μνήμης', 'home.cardsSub': 'Ανάκληση με επαναλήψεις σε διαστήματα',
-      'home.mistakes': 'Γυμναστήριο λαθών', 'home.mistakesSub': 'Ξαναδοκίμασε όσα έκανες λάθος',
-      'home.mixed': 'Μικτή εξάσκηση', 'home.mixedSub': 'Τυχαίες ασκήσεις από όσα έχεις διαβάσει',
-      'home.tutor': 'Σωκρατικός δάσκαλος', 'home.tutorSub': 'Το Gemini σε ρωτάει μέχρι να το καταλάβεις',
-      'home.due': '{n} για σήμερα', 'home.chapters': 'Κεφάλαια',
-      'ch.all': '← Όλα τα κεφάλαια', 'ch.learn': '📖 Θεωρία', 'ch.practice': '🎯 Εξάσκηση', 'ch.debug': '🔧 Αποσφαλμάτωση', 'ch.cards': '🃏 Κάρτες', 'ch.traps': '⚠️ Παγίδες',
-      'nav.home': '← Αρχική',
-      'view.mistakes': '🔁 Γυμναστήριο λαθών', 'view.mixed': '🎲 Μικτή εξάσκηση', 'view.lightning': 'Γύρος-αστραπή', 'view.cards': '🃏 Κάρτες μνήμης',
-      'view.drills': '🔧 Εξάσκηση στην αποσφαλμάτωση', 'view.whatsNew': '✨ Τι νέο υπάρχει', 'view.latest': '✨ Οι τελευταίες προσθήκες',
-      'acc.profile': '👤 Προφίλ', 'acc.settings': '⚙️ Ρυθμίσεις', 'acc.subjects': '📚 Μαθήματα', 'acc.backup': '💾 Αντίγραφα και επαναφορά', 'acc.cloud': '☁️ Cloud', 'acc.help': '❓ Βοήθεια',
-      'set.uiLang': 'Γλώσσα των μενού', 'set.uiLangAuto': 'Αυτόματα ({lang})',
-      'set.uiLangTip': 'Τα μενού και τα κουμπιά που έχουν μεταφραστεί ως τώρα. Το υλικό του μαθήματος και οι συζητήσεις με την ΤΝ έχουν τις δικές τους ρυθμίσεις γλώσσας.',
-      'inuse.title': 'Το Noema είναι ανοιχτό: {where}', 'inuse.why': 'Το χρησιμοποιούσες εκεί μόλις τώρα. Για να μένει ασφαλής η πρόοδός σου, το Noema δουλεύει σε μία συσκευή τη φορά.',
-      'inuse.use': 'Χρήση εδώ', 'inuse.useNote': 'Η άλλη συσκευή σταματά. Ό,τι έκανες εκεί έχει ήδη αποθηκευτεί και έρχεται εδώ.',
-      'inuse.stay': 'Ή συνέχισε εκεί: εδώ δεν αλλάζει τίποτα, και αυτό το παράθυρο περιμένει.', 'inuse.offlineWork': 'Ό,τι έκανες εδώ χωρίς σύνδεση κρατιέται και ενώνεται αυτόματα με τον λογαριασμό σου.',
-      'inuse.otherTab': 'άλλη καρτέλα αυτής της συσκευής', 'inuse.otherDevice': 'άλλη συσκευή', 'inuse.continued': 'Συνεχίζεις εδώ ✔', 'inuse.offline': 'Δεν ήταν δυνατή η σύνδεση με τον λογαριασμό σου. Έλεγξε τη σύνδεση και δοκίμασε ξανά.',
-      'pick.who': 'Ποιος διαβάζει;', 'pick.local': 'τοπικό προφίλ', 'pick.newProfile': 'Νέο προφίλ', 'pick.onDevice': 'σε αυτή τη συσκευή',
-      'pick.cloudSignIn': '☁️ Σύνδεση / νέος λογαριασμός cloud', 'pick.cloudHint': 'Διάβασε από όποια συσκευή θέλεις — η πρόοδος συγχρονίζεται μόνη της.',
-      'pick.what': 'Τι θέλεις να μελετήσεις;', 'pick.search': '🔎 Αναζήτηση μαθημάτων…',
-      'pick.subjects': '📚 Μαθήματα', 'pick.subjectsSub': 'έτοιμα μαθήματα', 'pick.curricula': '🧭 Οδικοί χάρτες', 'pick.curriculaSub': 'ένας στόχος → οι σταθμοί του',
-      'pick.noMatch': 'Κανένα μάθημα δεν ταιριάζει.', 'pick.none': 'Δεν έχεις ακόμη μαθήματα. Πάτα ✨ Δημιουργία με το Claude: οι πηγές σου γίνονται ένα πλήρες πακέτο μελέτης.',
-      'pick.create': '✨ Δημιουργία με το Claude', 'pick.explore': '🌍 Εξερεύνηση', 'pick.import': '📥 Εισαγωγή πακέτου μαθήματος', 'pick.switchProfile': '👤 Αλλαγή προφίλ',
-      'pick.close': 'Κλείσιμο', 'pick.other': 'Άλλα', 'pick.shared': '📬 Μαθήματα που μοιράστηκαν μαζί σου: {n}',
-      'pick.shelf': '📚 Ράφι — θέματα εκτός Οδικού χάρτη: {n}', 'pick.shelfSub': 'Θέματα που δεν είναι σταθμός κανενός Οδικού χάρτη. Μελέτησέ τα εδώ ή 🧭 βάλε τα σε έναν Οδικό χάρτη — ο Οδικός χάρτης είναι ο τρόπος μελέτης.',
-      'pick.putOnMap': 'Βάλ’ το σε Οδικό χάρτη…', 'pick.noCurricula': 'Δεν έχεις ακόμη Οδικό χάρτη. Γράψε έναν στόχο και πάρε τους σταθμούς του — μετά βάλε σε αυτούς τα θέματα που έχεις.',
-      'pick.newCurriculum': '➕ Νέος Οδικός χάρτης', 'pick.importMap': '📥 Εισαγωγή Οδικού χάρτη', 'pick.onShelf': '📚 Το «{title}» είναι στο Ράφι σου — 🧭 βάλ’ το σε έναν Οδικό χάρτη για να το μελετήσεις ως σταθμό του.',
-    },
-    ru: {
-      'top.switchSubject': 'Сменить предмет', 'top.map': 'Карта', 'top.mapTitle': 'Вернуться к этой дорожной карте',
-      'top.curricula': 'Дорожные карты', 'top.curriculaTitle': 'Дорожные карты: напишите цель и получите её этапы',
-      'top.explore': 'Обзор', 'top.exploreTitle': 'Обзор: все открытые предметы — описание, статистика, изучение',
-      'top.focus': 'Фокус', 'top.focusTitle': '15 минут сосредоточенной работы', 'top.streak': 'Дней подряд', 'top.notifications': 'Уведомления',
-      'top.sources': 'Источники', 'top.theme': 'Тема', 'top.tutor': 'Наставник', 'top.tutorTitle': 'Открыть наставника',
-      'top.account': '{name} — профиль, ⚙️ настройки, резервные копии и синхронизация, ❓ помощь',
-      'home.lightning': 'Блиц', 'home.lightningSub': '60 секунд ловушек «верно или неверно»',
-      'home.drills': 'Тренировка отладки', 'home.drillsSub': 'Запомните чек-листы «спросите себя»',
-      'home.cards': 'Карточки', 'home.cardsSub': 'Интервальные повторения',
-      'home.mistakes': 'Работа над ошибками', 'home.mistakesSub': 'Повторите то, в чём ошиблись',
-      'home.mixed': 'Смешанная практика', 'home.mixedSub': 'Случайные упражнения из всего прочитанного',
-      'home.tutor': 'Сократовский наставник', 'home.tutorSub': 'Gemini задаёт вопросы, пока всё не станет ясно',
-      'home.due': 'к повторению: {n}', 'home.chapters': 'Главы',
-      'ch.all': '← Все главы', 'ch.learn': '📖 Теория', 'ch.practice': '🎯 Практика', 'ch.debug': '🔧 Отладка', 'ch.cards': '🃏 Карточки', 'ch.traps': '⚠️ Ловушки',
-      'nav.home': '← Главная',
-      'view.mistakes': '🔁 Работа над ошибками', 'view.mixed': '🎲 Смешанная практика', 'view.lightning': 'Блиц', 'view.cards': '🃏 Карточки',
-      'view.drills': '🔧 Тренировка отладки', 'view.whatsNew': '✨ Что нового', 'view.latest': '✨ Последние добавления',
-      'acc.profile': '👤 Профиль', 'acc.settings': '⚙️ Настройки', 'acc.subjects': '📚 Предметы', 'acc.backup': '💾 Резервные копии', 'acc.cloud': '☁️ Облако', 'acc.help': '❓ Помощь',
-      'set.uiLang': 'Язык меню', 'set.uiLangAuto': 'Автоматически ({lang})',
-      'set.uiLangTip': 'Меню и кнопки, которые уже переведены. У материалов курса и разговоров с ИИ свои настройки языка.',
-      'inuse.title': 'Noema открыт: {where}', 'inuse.why': 'Вы только что пользовались им там. Чтобы ваш прогресс был в безопасности, Noema работает на одном устройстве за раз.',
-      'inuse.use': 'Использовать здесь', 'inuse.useNote': 'Другое устройство встанет на паузу. Всё, что вы там сделали, уже сохранено и появится здесь.',
-      'inuse.stay': 'Или просто продолжайте там: здесь ничего не изменится, это окно подождёт.', 'inuse.offlineWork': 'То, что вы сделали здесь без связи, сохранится и автоматически объединится с вашим аккаунтом.',
-      'inuse.otherTab': 'другая вкладка на этом устройстве', 'inuse.otherDevice': 'другое устройство', 'inuse.continued': 'Продолжаем здесь ✔', 'inuse.offline': 'Не удалось связаться с аккаунтом. Проверьте подключение и попробуйте снова.',
-      'pick.who': 'Кто занимается?', 'pick.local': 'локальный профиль', 'pick.newProfile': 'Новый профиль', 'pick.onDevice': 'на этом устройстве',
-      'pick.cloudSignIn': '☁️ Войти или создать облачный аккаунт', 'pick.cloudHint': 'Занимайтесь с любого устройства — прогресс синхронизируется сам.',
-      'pick.what': 'Что вы хотите изучать?', 'pick.search': '🔎 Поиск предметов…',
-      'pick.subjects': '📚 Предметы', 'pick.subjectsSub': 'готовые курсы', 'pick.curricula': '🧭 Дорожные карты', 'pick.curriculaSub': 'цель → её этапы',
-      'pick.noMatch': 'Подходящих предметов нет.', 'pick.none': 'Предметов пока нет. Нажмите ✨ Создать с Claude: ваши материалы станут полноценным учебным пакетом.',
-      'pick.create': '✨ Создать с Claude', 'pick.explore': '🌍 Обзор', 'pick.import': '📥 Импорт пакета предмета', 'pick.switchProfile': '👤 Сменить профиль',
-      'pick.close': 'Закрыть', 'pick.other': 'Другое', 'pick.shared': '📬 С вами поделились предметами: {n}',
-      'pick.shelf': '📚 Полка — предметов вне дорожных карт: {n}', 'pick.shelfSub': 'Предметы, которые не являются этапом ни одной дорожной карты. Изучайте их здесь или 🧭 добавьте в дорожную карту — дорожная карта и есть путь обучения.',
-      'pick.putOnMap': 'Добавить в дорожную карту…', 'pick.noCurricula': 'Дорожных карт пока нет. Введите цель и получите её этапы — затем поставьте на них свои предметы.',
-      'pick.newCurriculum': '➕ Новая дорожная карта', 'pick.importMap': '📥 Импорт дорожной карты', 'pick.onShelf': '📚 «{title}» на вашей полке — 🧭 добавьте его в дорожную карту, чтобы изучать как её этап.',
-    },
-    fr: {
-      'top.switchSubject': 'Changer de matière', 'top.map': 'Carte', 'top.mapTitle': 'Revenir à ce parcours',
-      'top.curricula': 'Parcours', 'top.curriculaTitle': `Parcours${NB}: écris un objectif, obtiens ses étapes`,
-      'top.explore': 'Explorer', 'top.exploreTitle': `Explorer${NB}: toutes les matières publiques — infos, statistiques, étude`,
-      'top.focus': 'Concentration', 'top.focusTitle': 'Un sprint de concentration de 15 minutes', 'top.streak': 'Jours d’affilée', 'top.notifications': 'Notifications',
-      'top.sources': 'Sources', 'top.theme': 'Thème', 'top.tutor': 'Tuteur', 'top.tutorTitle': 'Ouvrir le tuteur',
-      'top.account': '{name} — profil, ⚙️ réglages, sauvegarde et synchro, ❓ aide',
-      'home.lightning': 'Manche éclair', 'home.lightningSub': '60 secondes de pièges vrai ou faux',
-      'home.drills': 'Exercices de débogage', 'home.drillsSub': `Retiens les listes «${NB}pose-toi la question${NB}»`,
-      'home.cards': 'Cartes mémoire', 'home.cardsSub': 'Mémorisation par répétition espacée',
-      'home.mistakes': 'Salle des erreurs', 'home.mistakesSub': 'Réessaie ce que tu as raté',
-      'home.mixed': 'Pratique mélangée', 'home.mixedSub': 'Des exercices au hasard parmi tout ce que tu as lu',
-      'home.tutor': 'Tuteur socratique', 'home.tutorSub': 'Gemini te pose des questions jusqu’au déclic',
-      'home.due': '{n} à revoir', 'home.chapters': 'Chapitres',
-      'ch.all': '← Tous les chapitres', 'ch.learn': '📖 Apprendre', 'ch.practice': '🎯 S’entraîner', 'ch.debug': '🔧 Débogage', 'ch.cards': '🃏 Cartes', 'ch.traps': '⚠️ Pièges',
-      'nav.home': '← Accueil',
-      'view.mistakes': '🔁 Salle des erreurs', 'view.mixed': '🎲 Pratique mélangée', 'view.lightning': 'Manche éclair', 'view.cards': '🃏 Cartes mémoire',
-      'view.drills': '🔧 Exercices de débogage', 'view.whatsNew': `✨ Quoi de neuf${NN}?`, 'view.latest': '✨ Derniers ajouts',
-      'acc.profile': '👤 Profil', 'acc.settings': '⚙️ Réglages', 'acc.subjects': '📚 Matières', 'acc.backup': '💾 Sauvegarde et restauration', 'acc.cloud': '☁️ Cloud', 'acc.help': '❓ Aide',
-      'set.uiLang': 'Langue des menus', 'set.uiLangAuto': 'Automatique ({lang})',
-      'set.uiLangTip': 'Les menus et les boutons déjà traduits. Le contenu du cours et les conversations avec l’IA ont leurs propres réglages de langue.',
-      'inuse.title': 'Noema est ouvert : {where}'.replace(' :', NB + ':'), 'inuse.why': `Vous l’utilisiez là-bas à l’instant. Pour protéger votre progression, Noema fonctionne sur un seul appareil à la fois.`,
-      'inuse.use': 'Utiliser ici', 'inuse.useNote': `L’autre appareil se met en pause. Tout ce que vous y avez fait est déjà enregistré et arrive ici.`,
-      'inuse.stay': `Ou continuez simplement là-bas${NB}: rien ne change ici, cette fenêtre attend.`, 'inuse.offlineWork': `Ce que vous avez fait ici hors ligne est conservé et fusionné automatiquement avec votre compte.`,
-      'inuse.otherTab': 'un autre onglet de cet appareil', 'inuse.otherDevice': 'un autre appareil', 'inuse.continued': 'On continue ici ✔', 'inuse.offline': `Impossible de joindre votre compte. Vérifiez la connexion et réessayez.`,
-      'pick.who': `Qui étudie${NN}?`, 'pick.local': 'profil local', 'pick.newProfile': 'Nouveau profil', 'pick.onDevice': 'sur cet appareil',
-      'pick.cloudSignIn': '☁️ Se connecter ou créer un compte cloud', 'pick.cloudHint': 'Étudie depuis n’importe quel appareil — ta progression se synchronise toute seule.',
-      'pick.what': `Qu’est-ce que tu veux étudier${NN}?`, 'pick.search': '🔎 Chercher une matière…',
-      'pick.subjects': '📚 Matières', 'pick.subjectsSub': 'des cours tout prêts', 'pick.curricula': '🧭 Parcours', 'pick.curriculaSub': 'un objectif → ses étapes',
-      'pick.noMatch': 'Aucune matière ne correspond.', 'pick.none': `Pas encore de matière. Touche ✨ Créer avec Claude${NB}: tes sources deviennent un pack d’étude complet.`,
-      'pick.create': '✨ Créer avec Claude', 'pick.explore': '🌍 Explorer', 'pick.import': '📥 Importer un pack de matière', 'pick.switchProfile': '👤 Changer de profil',
-      'pick.close': 'Fermer', 'pick.other': 'Autres', 'pick.shared': `📬 Matières partagées avec toi${NB}: {n}`,
-      'pick.shelf': `📚 Étagère — matières hors parcours${NB}: {n}`, 'pick.shelfSub': 'Les matières qui n’enseignent aucune étape d’un parcours. Étudie-les ici, ou 🧭 place-les dans un parcours — le parcours est la façon d’étudier.',
-      'pick.putOnMap': 'Placer dans un parcours…', 'pick.noCurricula': 'Pas encore de parcours. Écris un objectif et obtiens ses étapes — puis place tes matières sur ces étapes.',
-      'pick.newCurriculum': '➕ Nouveau parcours', 'pick.importMap': '📥 Importer un parcours', 'pick.onShelf': `📚 «${NB}{title}${NB}» est sur ton étagère — 🧭 place-la dans un parcours pour l’étudier comme une de ses étapes.`,
-    },
-  };
-  const LANGS = [['en', 'English'], ['el', 'Ελληνικά'], ['ru', 'Русский'], ['fr', 'Français']];
-  const pick = l => { l = String(l || '').toLowerCase().split(/[-_]/)[0]; return B[l] ? l : null; };
-  const browser = () => { try { return (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language]).map(pick).find(Boolean) || 'en'; } catch (e) { return 'en'; } };
-  /** The language to show: the learner's choice (settings.lang) when supported, else the browser's, else English. */
-  const lang = pref => pick(pref) || browser();
-  /** t('home.due', { n: 3 }, settings.lang) → the string in that language ({name} placeholders filled in). */
-  function t(key, vars, pref) {
-    const L = lang(pref); let s = B[L][key] ?? B.en[key] ?? key;
-    if (vars) s = s.replace(/\{(\w+)\}/g, (m, k) => vars[k] != null ? String(vars[k]) : m);
-    return s;
+  /* ---------- the UI locales (endonyms, never flags) ---------- */
+  const LOCALES = [
+    { tag: 'en', name: 'English' }, { tag: 'el', name: 'Ελληνικά' }, { tag: 'ru', name: 'Русский' }, { tag: 'fr', name: 'Français' },
+    { tag: 'ar-EG', name: 'العربية (مصر)', dir: 'rtl' }, { tag: 'de', name: 'Deutsch' }, { tag: 'hi', name: 'हिन्दी' },
+    { tag: 'zh-Hans', name: '中文（简体）' }, { tag: 'zh-Hant', name: '中文（繁體）' }, { tag: 'ja', name: '日本語', familyFirst: true },
+    { tag: 'it', name: 'Italiano' }, { tag: 'es-ES', name: 'Español (España)' }, { tag: 'sq', name: 'Shqip' }, { tag: 'pt-PT', name: 'Português (Portugal)' }, { tag: 'tr', name: 'Türkçe' },
+    // pseudo-locales for testing (never offered unless config.pseudoLocales): accented +40 %, and right-to-left
+    { tag: 'en-XA', name: '[Ƥşḗŭḓǿ]', pseudo: true }, { tag: 'ar-XB', name: '[ˁƤşḗŭḓǿ RTL]', pseudo: true, dir: 'rtl' },
+  ];
+  for (const L of LOCALES) { L.dir = L.dir || 'ltr'; if (/^(zh|ja)/.test(L.tag)) L.familyFirst = true; }
+  const BY = Object.fromEntries(LOCALES.map(L => [L.tag.toLowerCase(), L]));
+  /** The fallback chain of a locale: itself, its language without the region, English (Traditional never falls to Simplified). */
+  function chain(tag) {
+    const out = [tag], parts = tag.split('-');
+    if (parts.length > 1 && !/^zh-/i.test(tag)) out.push(parts[0]);
+    if (tag === 'en-XA') out.push('en'); if (tag === 'ar-XB') out.push('en');
+    if (!out.includes('en')) out.push('en');
+    return out;
   }
-  root.NoemaI18n = { t, lang, browser, LANGS, bundles: B };
+  const CFG = () => root.NOEMA_CONFIG || {};
+  const isPreviewHost = () => { try { return !!CFG().i18nPreview || /^(deploy-preview-\d+|[\w-]+--)/.test(location.hostname); } catch (e) { return false; } };
+  /** 'on' | 'preview' | 'off' for a locale (config.locales; English is always on; the four shipped locales default to on). */
+  function flag(tag) {
+    if (tag === 'en') return 'on';
+    const L = BY[tag.toLowerCase()]; if (!L) return 'off';
+    if (L.pseudo) return CFG().pseudoLocales ? 'on' : 'off';
+    const f = (CFG().locales || {})[L.tag] ?? (['el', 'ru', 'fr'].includes(L.tag) ? 'on' : 'off');
+    return f;
+  }
+  const usable = tag => { const f = flag(tag); return f === 'on' || (f === 'preview' && isPreviewHost()); };
+  /** The locales offered in the picker: those switched on (and preview ones on deploy previews). */
+  const available = () => LOCALES.filter(L => usable(L.tag));
+
+  /* ---------- locale resolution (RFC 4647 lookup with a few known equivalences) ---------- */
+  function match(raw) {
+    if (!raw) return null;
+    const t = String(raw).replace(/_/g, '-').trim(), lo = t.toLowerCase(), base = lo.split('-')[0];
+    if (BY[lo] && usable(BY[lo].tag)) return BY[lo].tag;
+    if (base === 'zh') { const trad = /-(hant|tw|hk|mo)\b/.test(lo); const x = trad ? 'zh-Hant' : 'zh-Hans'; return usable(x) ? x : null; }
+    const byBase = { es: 'es-ES', pt: 'pt-PT', ar: 'ar-EG' }[base] || (BY[base] ? BY[base].tag : null);
+    return byBase && usable(byBase) ? byBase : null;
+  }
+  const deviceList = () => { try { return navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language]; } catch (e) { return []; } };
+  /** The device's best supported locale (or 'en'). */
+  const browser = () => deviceList().map(match).find(Boolean) || 'en';
+  /** The locale to show for a preference (the account's settings.lang): the preference when usable, else the device's, else English. */
+  const lang = pref => match(pref) || browser();
+
+  /* ---------- catalogs ---------- */
+  const CAT = root.NOEMA_I18N = root.NOEMA_I18N || {};   // tag → { m: messages, d: drafts }
+  const loading = {};
+  const base = () => { try { const s = document.currentScript?.src || [...document.scripts].map(x => x.src).find(x => /engine\/i18n\.js/.test(x)); return s ? s.replace(/i18n\.js(\?.*)?$/, 'i18n/') : 'engine/i18n/'; } catch (e) { return 'engine/i18n/'; } };
+  const BASE = base();
+  /** Load a locale's catalog (and its fallbacks) → Promise. English comes with the page. */
+  function load(tag) {
+    return Promise.all(chain(tag).filter(t => !CAT[t] && t !== 'en' && BY[t.toLowerCase()]).map(t => loading[t] || (loading[t] = new Promise(res => {
+      if (typeof document === 'undefined') return res(false);
+      const s = document.createElement('script'); s.src = BASE + t + '.js'; s.async = true;
+      s.onload = () => res(true); s.onerror = () => { console.warn('[i18n] no catalog for ' + t); res(false); };
+      document.head.append(s);
+    })))).then(() => { cache.clear(); return tag; });
+  }
+  const cache = new Map(), missing = new Set();
+  const IMF = () => root.IntlMessageFormat && (root.IntlMessageFormat.IntlMessageFormat || root.IntlMessageFormat.default || root.IntlMessageFormat);
+  /** May Claude's draft (not yet reviewed in Weblate) be shown? In a 'preview' locale yes; in a locale that is 'on' too (unless
+      config.i18nDrafts === false) — but never for a key marked sensitive (legal, billing, safety: "x-sensitive" in en.arb). */
+  function draftOK(t, key) {
+    const D = CFG().i18nDrafts; if (D === true) return true;
+    if ((CAT.en && CAT.en.s || []).includes(key)) return false;
+    const f = flag(t); return f === 'preview' || (f === 'on' && D !== false);
+  }
+  /** The message of a key for a locale: approved first, then a draft (draftOK), along the chain. */
+  function source(tag, key) {
+    for (const t of chain(tag)) {
+      const c = CAT[t]; if (!c) continue;
+      if (c.m && c.m[key] != null) return [c.m[key], t];
+      if (c.d && c.d[key] != null && draftOK(t, key)) return [c.d[key], t];
+    }
+    return [null, null];
+  }
+  /** The locale string Intl uses: the tag plus the chosen digits (Arabic: arab by default, latn on request). */
+  function intlTag(tag) {
+    const nu = (state.digits || {})[tag];
+    return nu ? `${tag}-u-nu-${nu}` : tag;
+  }
+  /** In a right-to-left locale a text put into a message ({title}, {name} …: a subject's title, a name — often left-to-right)
+      is bidi-isolated (FSI … PDI), so its direction neither takes from nor gives to the sentence around it. Only plain {x}
+      arguments: numbers, plurals and selects keep their values. */
+  const SIMPLE = new Map();
+  function isolate(tag, msg, params) {
+    if (!params || (BY[tag.toLowerCase()] || {}).dir !== 'rtl') return params;
+    let names = SIMPLE.get(msg);
+    if (!names) { names = new Set([...String(msg).matchAll(/\{\s*(\w+)\s*\}/g)].map(m => m[1])); SIMPLE.set(msg, names); }
+    let out = params;
+    for (const k of names) if (typeof params[k] === 'string' && params[k]) { if (out === params) out = { ...params }; out[k] = '⁨' + params[k] + '⁩'; }
+    return out;
+  }
+  function format(tag, key, params) {
+    const [msg, from] = source(tag, key);
+    if (msg == null) {
+      if (!missing.has(key)) { missing.add(key); console.warn('[i18n] missing key: ' + key); }
+      return key.split('.').pop();
+    }
+    const ck = tag + '\u0000' + key;
+    let f = cache.get(ck);
+    if (!f) {
+      const M = IMF();
+      if (!M) f = { format: p => String(msg).replace(/\{(\w+)\}/g, (m, k) => p && p[k] != null ? String(p[k]) : m) };
+      else try { f = new M(msg, intlTag(from === 'en' && tag !== 'en' ? 'en' : tag), undefined, { ignoreTag: true }); }
+      catch (e) { console.warn('[i18n] invalid message ' + key + ' (' + from + '): ' + e.message); f = { format: () => msg }; }
+      cache.set(ck, f);
+    }
+    try { const out = f.format(isolate(tag, msg, params) || {}); return Array.isArray(out) ? out.join('') : out; }
+    catch (e) { console.warn('[i18n] ' + key + ': ' + e.message); return String(msg); }
+  }
+  /** t('home.due', { n: 3 }) in the current locale; the third argument (a preference) is kept for older callers. */
+  function t(key, params, pref) {
+    let tag = state.locale;
+    if (pref !== undefined) { tag = lang(pref); if (!chain(tag).every(x => x === 'en' || CAT[x] || !BY[x.toLowerCase()])) load(tag); }   // not loaded yet: English now, the right words on the next draw
+    return format(tag, key, params);
+  }
+  const has = (key, tag = state.locale) => source(tag, key)[0] != null;
+  /** The words for an error: a backend answer { code, params, message } or an Error with .code/.params → t('err.' + code),
+      else its (English) message — older servers and unknown codes keep working (docs/i18n.md §6). */
+  function err(e) {
+    if (e == null) return '';
+    const x = e.error && typeof e.error === 'object' ? e.error : e, code = x.code, msg = x.message || (typeof e === 'string' ? e : String(e));
+    return code && has('err.' + code) ? t('err.' + code, x.params || {}) : msg;
+  }
+
+  /* ---------- the current locale ---------- */
+  /** The last account's settings (a:settings: lang, numerals) — read before any account is open, so the first screen is right. */
+  const accountSettings = () => { try { const c = JSON.parse(localStorage.getItem('noema1:current') || '{}') || {}; return c.acc ? JSON.parse(localStorage.getItem(`noema1:${c.acc}:a:settings`) || '{}') || {} : {}; } catch (e) { return {}; } };
+  const state = { locale: 'en', digits: {} };
+  try { const a = accountSettings(); state.locale = lang(a.lang); if (a.numerals) state.digits = { 'ar-EG': a.numerals }; } catch (e) { state.locale = browser(); }
+  const listeners = [];
+  /** Switch to a locale (the account's preference, or null for the device's) → Promise once its catalog is in. */
+  function use(pref, { digits } = {}) {
+    const tag = lang(pref); if (digits) state.digits = { ...state.digits, ...digits };
+    return load(tag).then(() => {
+      const changed = tag !== state.locale; state.locale = tag; if (digits) cache.clear();
+      apply(); if (changed) listeners.forEach(f => { try { f(tag); } catch (e) { console.warn(e); } });
+      return tag;
+    });
+  }
+  /** <html lang dir> follow the UI locale (the content keeps its own lang/dir on each element). */
+  function apply(first) {
+    try { const L = BY[state.locale.toLowerCase()] || BY.en, d = document.documentElement; if (first) d.lang = L.tag; d.dir = L.dir; d.dataset.uiLocale = L.tag; } catch (e) { }
+  }
+  const ready = load(state.locale).then(() => { apply(true); return state.locale; });
+
+  /* ---------- Intl helpers (never hand-formatted) ---------- */
+  const COLL = { c: null, loc: null };
+  const fmt = {
+    number: (n, o) => new Intl.NumberFormat(intlTag(state.locale), o).format(n),
+    percent: (x, o) => new Intl.NumberFormat(intlTag(state.locale), { style: 'percent', maximumFractionDigits: 0, ...o }).format(x),
+    // a missing or broken time stamp (an old record, a hand-edited backup) gives '' — never a RangeError that stops a whole page from drawing
+    date: (d, o = { dateStyle: 'medium' }) => { const x = d instanceof Date ? d : new Date(d); return isNaN(x) ? '' : new Intl.DateTimeFormat(intlTag(state.locale), o).format(x); },
+    time: (d, o = { timeStyle: 'short' }) => { const x = d instanceof Date ? d : new Date(d); return isNaN(x) ? '' : new Intl.DateTimeFormat(intlTag(state.locale), o).format(x); },
+    relative: (v, unit, o = { numeric: 'auto' }) => new Intl.RelativeTimeFormat(intlTag(state.locale), o).format(v, unit),
+    /** “3 days ago” from a time stamp, in the largest fitting unit. */
+    ago(ts, now = Date.now()) {
+      const s = Math.round((ts - now) / 1000), a = Math.abs(s);
+      const [v, u] = a < 60 ? [s, 'second'] : a < 3600 ? [Math.round(s / 60), 'minute'] : a < 86400 ? [Math.round(s / 3600), 'hour'] : a < 2592000 ? [Math.round(s / 86400), 'day'] : a < 31536000 ? [Math.round(s / 2592000), 'month'] : [Math.round(s / 31536000), 'year'];
+      return fmt.relative(v, u);
+    },
+    list: (items, o = { type: 'conjunction' }) => new Intl.ListFormat(state.locale, o).format(items.map(String)),
+    collator: (o = { sensitivity: 'base', numeric: true }) => new Intl.Collator(state.locale, o),
+    compare: (a, b) => { if (!COLL.c || COLL.loc !== state.locale) { COLL.c = fmt.collator(); COLL.loc = state.locale; } return COLL.c.compare(String(a ?? ''), String(b ?? '')); },   // one Collator per locale: a sort calls this thousands of times
+    plural: n => new Intl.PluralRules(state.locale).select(n),
+    /** A person's name in the locale's order (family first for ja and zh). */
+    name: (given, family) => (BY[state.locale.toLowerCase()] || {}).familyFirst ? [family, given].filter(Boolean).join('') : [given, family].filter(Boolean).join(' '),
+    /** Language names in the UI language (Intl.DisplayNames). */
+    langName: code => { try { return new Intl.DisplayNames([state.locale, 'en'], { type: 'language' }).of(code) || code; } catch (e) { return code; } },
+    /** Locale-aware case: Greek uppercase without accents comes from the locale rules. */
+    upper: s => String(s).toLocaleUpperCase(state.locale), lower: s => String(s).toLocaleLowerCase(state.locale),
+  };
+
+  const LANGS = LOCALES.filter(L => !L.pseudo).map(L => [L.tag, L.name]);   // older callers: [[tag, endonym]] (filtered by available() where offered)
+  root.NoemaI18n = {
+    t, has, err, lang, browser, match, chain, use, load, ready, flag, available, onChange: f => listeners.push(f),
+    get locale() { return state.locale; }, get dir() { return (BY[state.locale.toLowerCase()] || BY.en).dir; },
+    setDigits: (tag, nu) => { state.digits = { ...state.digits, [tag]: nu }; cache.clear(); },
+    fmt, LOCALES, LANGS, missingKeys: () => [...missing], catalogs: CAT,
+  };
 })(typeof window !== 'undefined' ? window : globalThis);

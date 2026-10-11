@@ -11,6 +11,14 @@
     "comparison": "not compared",
     "stem": {
      "none": "the ending is added to the base form"
+    },
+    "degrees": {
+     "none": "an ordinal or a word of order: not compared"
+    },
+    "endings": "takes endings",
+    "use": "attributive only",
+    "governs": {
+     "none": "no complement of its own"
     }
    },
    "forms": {
@@ -145,6 +153,14 @@
     "comparison": "not compared",
     "stem": {
      "none": "the ending is added to the base form"
+    },
+    "degrees": {
+     "none": "an ordinal or a word of order: not compared"
+    },
+    "endings": "takes endings",
+    "use": "attributive only",
+    "governs": {
+     "none": "no complement of its own"
     }
    },
    "forms": {
@@ -274,6 +290,14 @@
     "comparison": "not compared",
     "stem": {
      "none": "the ending is added to the base form"
+    },
+    "degrees": {
+     "none": "an ordinal or a word of order: not compared"
+    },
+    "endings": "takes endings",
+    "use": "attributive only",
+    "governs": {
+     "none": "no complement of its own"
     }
    },
    "forms": {
@@ -403,6 +427,14 @@
     "comparison": "not compared",
     "stem": {
      "none": "the ending is added to the base form"
+    },
+    "degrees": {
+     "none": "an ordinal or a word of order: not compared"
+    },
+    "endings": "takes endings",
+    "use": "attributive only",
+    "governs": {
+     "none": "no complement of its own"
     }
    },
    "forms": {
@@ -505,7 +537,7 @@
     "synonyms": [],
     "synonymsNone": "An ordinal number has no synonym; it can be written as a figure with a dot (4.).",
     "etymology": {
-     "text": "From Middle High German vierde, from Old High German fiordo, from Proto-West Germanic *feurþō; equivalent to vier + -te. Cognate with Dutch vierde, English fourth.",
+     "text": "From Middle High German vierde, from Old High German fiordo, from Proto-West Germanic *feurþō; equivalent to vier + -te.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -516,6 +548,13 @@
     ],
     "subtleties": [
      "Regular from vier: vier + -te."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "vierte is related to English fourth."
+     }
     ]
    },
    "class": "attr"
@@ -531,6 +570,14 @@
     "comparison": "not compared",
     "stem": {
      "none": "the ending is added to the base form"
+    },
+    "degrees": {
+     "none": "an ordinal or a word of order: not compared"
+    },
+    "endings": "takes endings",
+    "use": "attributive only",
+    "governs": {
+     "none": "no complement of its own"
     }
    },
    "forms": {
@@ -633,17 +680,24 @@
     "synonyms": [],
     "synonymsNone": "An ordinal number has no synonym; it can be written as a figure with a dot (5.).",
     "etymology": {
-     "text": "From Old High German fimfto, from Proto-Germanic *fimftô; equivalent to fünf + -te. Cognate with English fifth.",
+     "text": "From Old High German fimfto, from Proto-Germanic *fimftô; equivalent to fünf + -te.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English fifth and German fünfte both keep the f-sound of five / fünf."
+     "fünfte keeps the sound of fünf: fünf → fünfte."
     ],
     "pitfalls": [
      "Regular: fünf + -te = fünfte; the umlaut stays."
     ],
     "subtleties": [
      "In German schools, die fünfte Klasse is the first year of secondary school in most states."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "fünfte is related to English fifth; both keep the f-sound of five / fünf."
+     }
     ]
    },
    "class": "attr"
@@ -659,6 +713,14 @@
     "comparison": "not compared",
     "stem": {
      "none": "the ending is added to the base form"
+    },
+    "degrees": {
+     "none": "an ordinal or a word of order: not compared"
+    },
+    "endings": "takes endings",
+    "use": "attributive only",
+    "governs": {
+     "none": "no complement of its own"
     }
    },
    "forms": {
@@ -787,6 +849,14 @@
     "comparison": "not compared",
     "stem": {
      "none": "the ending is added to the base form"
+    },
+    "degrees": {
+     "none": "an ordinal or a word of order: not compared"
+    },
+    "endings": "takes endings",
+    "use": "attributive only",
+    "governs": {
+     "none": "no complement of its own"
     }
    },
    "forms": {
@@ -915,6 +985,14 @@
     "comparison": "not compared",
     "stem": {
      "none": "the ending is added to the base form"
+    },
+    "degrees": {
+     "none": "an ordinal or a word of order: not compared"
+    },
+    "endings": "takes endings",
+    "use": "attributive only",
+    "governs": {
+     "none": "no complement of its own"
     }
    },
    "forms": {
@@ -1043,6 +1121,14 @@
     "comparison": "not compared",
     "stem": {
      "none": "the ending is added to the base form"
+    },
+    "degrees": {
+     "none": "an ordinal or a word of order: not compared"
+    },
+    "endings": "takes endings",
+    "use": "attributive only",
+    "governs": {
+     "none": "no complement of its own"
     }
    },
    "forms": {
@@ -1171,6 +1257,14 @@
     "comparison": "not compared",
     "stem": {
      "none": "the ending is added to the base form"
+    },
+    "degrees": {
+     "none": "an ordinal or a word of order: not compared"
+    },
+    "endings": "takes endings",
+    "use": "attributive only",
+    "governs": {
+     "none": "no complement of its own"
     }
    },
    "forms": {
@@ -1302,6 +1396,14 @@
     "comparison": "not compared",
     "stem": {
      "none": "the ending is added to the base form"
+    },
+    "degrees": {
+     "none": "an ordinal or a word of order: not compared"
+    },
+    "endings": "takes endings",
+    "use": "attributive only",
+    "governs": {
+     "none": "no complement of its own"
     }
    },
    "forms": {
@@ -1425,19 +1527,26 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German lest, a contraction of leȥȥest, from Old High German leȥȥist, the superlative of laȥ (“slow, sluggish”), cognate with English late.",
+     "text": "From Middle High German lest, a contraction of leȥȥest, from Old High German leȥȥist, the superlative of laȥ (“slow, sluggish”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English last and German letzte both go back to a superlative of late."
+     "letzte goes back to an old superlative meaning “latest”."
     ],
     "pitfalls": [
-     "letzte Woche = last week (the one before this); die letzte Woche can also mean the final week (of the holidays). Context decides.",
+     "- letzte Woche = last week (the one before this);\n- die letzte Woche can also mean the final week (of the holidays).\n\nContext decides.",
      "Declined like an adjective: der letzte, ein letzter, am letzten."
     ],
     "subtleties": [
      "letzt- was once a superlative of an old word for late: last is “latest”.",
      "Never used predicatively without an ending: Er war der Letzte (he was the last one)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "letzte is built like English last: both are old superlatives of a word for “late”."
+     }
     ]
    },
    "class": "attr"
@@ -1469,6 +1578,17 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Hälfte"
+    ],
+    "number": "singular and plural",
+    "genderCue": "most nouns in -e are feminine (die Lampe)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -1579,7 +1699,7 @@
      "With a plural noun the verb is usually singular: Die Hälfte der Schüler war krank (also waren in speech)."
     ],
     "subtleties": [
-     "Half of a thing as an adjective is halb: ein halbes Brot; the noun is die Hälfte: die Hälfte des Brotes.",
+     "- Half of a thing as an adjective is halb: ein halbes Brot;\n- the noun is die Hälfte: die Hälfte des Brotes.",
      "meine bessere Hälfte (my better half) = my partner, said jokingly."
     ]
    }
@@ -1594,6 +1714,12 @@
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    },
    "contrasts": [
@@ -1673,19 +1799,31 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German halp, from Old High German halb, from Proto-Germanic *halbaz. Compare Dutch half, English half.",
+     "text": "From Middle High German halp, from Old High German halb, from Proto-Germanic *halbaz.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The same “half to the next hour” clock is used in Dutch (half acht) and in the Scandinavian languages."
+     "halb counts towards the next hour: halb acht = 7:30."
     ],
     "pitfalls": [
      "halb counts towards the next hour: halb acht = 7:30, not 8:30. Think: half (on the way to) eight.",
      "Before a noun halb is an adjective and takes endings: eine halbe Stunde (half an hour), ein halbes Jahr."
     ],
     "subtleties": [
-     "In speech the 12-hour clock is normal: um halb acht (morning or evening); official times use 24 hours: 19:30 = neunzehn Uhr dreißig.",
+     "In speech the 12-hour clock is normal: um halb acht (morning or evening).\n\nOfficial times use 24 hours: 19:30 = neunzehn Uhr dreißig.",
      "anderthalb / eineinhalb = one and a half; zweieinhalb = two and a half."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "половина восьмого is halb acht: both count towards the next hour."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "halb is related to English half."
+     }
     ]
    }
   },
@@ -1723,6 +1861,17 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Viertels"
+    ],
+    "number": "singular and plural",
+    "genderCue": "fractions in -tel are neuter (das Viertel, das Drittel)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -1821,10 +1970,10 @@
     ],
     "pitfalls": [
      "das Viertel is neuter, like every fraction in -tel: das Drittel, das Fünftel.",
-     "Clock: Viertel nach acht (8:15), Viertel vor neun (8:45). In parts of the east and south: viertel neun (8:15), dreiviertel neun (8:45) – counted towards the next hour like halb."
+     "Clock: Viertel nach acht (8:15), Viertel vor neun (8:45).\n\nIn parts of the east and south: viertel neun (8:15), dreiviertel neun (8:45) – counted towards the next hour like halb."
     ],
     "subtleties": [
-     "das Viertel is also a part of a town, a quarter or neighbourhood (das Altstadtviertel); in Austria and Bavaria ein Viertel (Wein) is a quarter litre of wine.",
+     "- das Viertel is also a part of a town, a quarter or neighbourhood (das Altstadtviertel).\n- In Austria and Bavaria ein Viertel (Wein) is a quarter litre of wine.",
      "Fractions are built the same way: ein Drittel (a third), ein Fünftel (a fifth)."
     ]
    }
@@ -1863,6 +2012,17 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Jahrhunderts"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (das Hundert)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a time noun: no diminutive"
     }
    },
    "forms": {
@@ -1942,11 +2102,11 @@
      }
     ],
     "etymology": {
-     "text": "Jahr (“year”) + hundert (“hundred”). Compare Dutch jaarhonderd.",
+     "text": "Jahr (“year”) + hundert (“hundred”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The 1900s are das zwanzigste Jahrhundert – like in English, the century number is one higher than the hundreds."
+     "The 1900s are das zwanzigste Jahrhundert: the century number is one higher than the hundreds."
     ],
     "pitfalls": [
      "Centuries are ordinal numbers: im 19. Jahrhundert = im neunzehnten Jahrhundert (dot = ordinal).",
@@ -1985,6 +2145,20 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Jahrzehnts",
+     "des Jahrzehntes"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a time noun: no diminutive"
     }
    },
    "forms": {
@@ -2119,6 +2293,18 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Jahrestags",
+     "des Jahrestages"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (der Tag)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a time noun: no diminutive"
     }
    },
    "forms": {
@@ -2258,6 +2444,17 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Jubiläums"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-um → das",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a time noun: no diminutive"
     }
    },
    "forms": {
@@ -2355,7 +2552,7 @@
      "A Jubiläum is counted with an adjective in -jährig: das 25-jährige (fünfundzwanzigjährige) Jubiläum."
     ],
     "subtleties": [
-     "Jubiläum is for institutions, firms, clubs and long service; for a couple one says Jahrestag or Hochzeitstag."
+     "Jubiläum is for institutions, firms, clubs and long service.\n\nFor a couple one says Jahrestag or Hochzeitstag."
     ]
    }
   }

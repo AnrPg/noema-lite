@@ -1,0 +1,2025 @@
+{
+  "@@locale": "en",
+  "lc.expl.specificToLanguage": "Specific to this language",
+  "@lc.expl.specificToLanguage": {
+    "description": "Language course, “what is new for you” list of a grammar page: title of the note on a phenomenon only this language has. Short."
+  },
+  "lc.expl.part.pluralOnly": "plural only",
+  "@lc.expl.part.pluralOnly": {
+    "description": "Language course, word card: label of one of the forms learned with the word (principal parts) — a German noun that has only a plural. Short, lower case."
+  },
+  "lc.expl.part.article": "article",
+  "@lc.expl.part.article": {
+    "description": "Language course, word card: label of one of the forms learned with the word (principal parts) — German noun: the article with the word (der / die / das). Short, lower case."
+  },
+  "lc.expl.part.genitive": "genitive",
+  "@lc.expl.part.genitive": {
+    "description": "Language course, word card: label of one of the forms learned with the word (principal parts) — German noun: its genitive singular form. Short, lower case."
+  },
+  "lc.expl.part.plural": "plural",
+  "@lc.expl.part.plural": {
+    "description": "Language course, word card: label of one of the forms learned with the word (principal parts) — the plural form. Short, lower case."
+  },
+  "lc.expl.part.perfectWith": "perfect with",
+  "@lc.expl.part.perfectWith": {
+    "description": "Language course, word card: label of one of the forms learned with the word (principal parts) — German verb: the auxiliary of its perfect (haben / sein). Short, lower case."
+  },
+  "lc.expl.part.collective": "collective",
+  "@lc.expl.part.collective": {
+    "description": "Language course, word card: label of one of the forms learned with the word (principal parts) — Arabic collective noun (a kind of thing as a mass). Short, lower case."
+  },
+  "lc.expl.part.unitNoun": "one (unit noun)",
+  "@lc.expl.part.unitNoun": {
+    "description": "Language course, word card: label of one of the forms learned with the word (principal parts) — Arabic: the noun for one piece of a collective. Short, lower case."
+  },
+  "lc.expl.part.countedPlural": "counted plural",
+  "@lc.expl.part.countedPlural": {
+    "description": "Language course, word card: label of one of the forms learned with the word (principal parts) — Arabic: the plural used when counting. Short, lower case."
+  },
+  "lc.expl.part.feminine": "feminine",
+  "@lc.expl.part.feminine": {
+    "description": "Language course, word card: label of one of the forms learned with the word (principal parts) — the feminine form of the word. Short, lower case."
+  },
+  "lc.expl.part.withArticle": "with the article",
+  "@lc.expl.part.withArticle": {
+    "description": "Language course, word card: label of one of the forms learned with the word (principal parts) — the word with the definite article. Short, lower case."
+  },
+  "lc.expl.part.femininePlural": "feminine plural",
+  "@lc.expl.part.femininePlural": {
+    "description": "Language course, word card: label of one of the forms learned with the word (principal parts) — the feminine plural form. Short, lower case."
+  },
+  "lc.expl.part.root": "root",
+  "@lc.expl.part.root": {
+    "description": "Language course, word card: label of one of the forms learned with the word (principal parts) — Arabic / Hebrew: the consonant root of the word. Short, lower case."
+  },
+  "lc.expl.part.binyan": "binyan",
+  "@lc.expl.part.binyan": {
+    "description": "Language course, word card: label of one of the forms learned with the word (principal parts) — Hebrew: the verb pattern (binyan) — a grammar term, often kept as is. Short, lower case."
+  },
+  "lc.expl.part.verbForm": "verb form",
+  "@lc.expl.part.verbForm": {
+    "description": "Language course, word card: label of one of the forms learned with the word (principal parts) — Arabic: the verb form (I–X). Short, lower case."
+  },
+  "lc.expl.part.gender": "gender",
+  "@lc.expl.part.gender": {
+    "description": "Language course, word card: label of one of the forms learned with the word (principal parts) — the grammatical gender of the word. Short, lower case."
+  },
+  "lc.expl.part.pinyin": "pinyin",
+  "@lc.expl.part.pinyin": {
+    "description": "Language course, word card: label of one of the forms learned with the word (principal parts) — Chinese: the word in pinyin (Latin letters with tones). Short, lower case."
+  },
+  "lc.expl.part.traditional": "traditional",
+  "@lc.expl.part.traditional": {
+    "description": "Language course, word card: label of one of the forms learned with the word (principal parts) — Chinese: the word in traditional characters. Short, lower case."
+  },
+  "lc.expl.part.measureWord": "measure word",
+  "@lc.expl.part.measureWord": {
+    "description": "Language course, word card: label of one of the forms learned with the word (principal parts) — Chinese: the measure word (classifier) the noun takes. Short, lower case."
+  },
+  "lc.expl.part.transliteration": "transliteration",
+  "@lc.expl.part.transliteration": {
+    "description": "Language course, word card: label of one of the forms learned with the word (principal parts) — the word in Latin letters. Short, lower case."
+  },
+  "lc.ui.card.meanings": "Meanings",
+  "@lc.ui.card.meanings": {
+    "description": "Language course, word card: title of a section — every meaning of the word."
+  },
+  "lc.ui.card.facade": "This word in {lang}",
+  "@lc.ui.card.facade": {
+    "description": "Language course, word card: title of a section — the grammatical parameters of the word in its language ({lang} = the language’s name, e.g. German).",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "German"
+      }
+    }
+  },
+  "lc.ui.card.examples": "In sentences — contexts and registers",
+  "@lc.ui.card.examples": {
+    "description": "Language course, word card: title of a section — example sentences."
+  },
+  "lc.ui.card.collocations": "Goes with",
+  "@lc.ui.card.collocations": {
+    "description": "Language course, word card: title of a section — words that often go with this one (collocations)."
+  },
+  "lc.ui.card.particleVerbs": "Verbs built on it",
+  "@lc.ui.card.particleVerbs": {
+    "description": "Language course, word card: title of a section — verbs made from this word with a particle (German anfangen …)."
+  },
+  "lc.ui.card.phrases": "Idioms, sayings and quotes",
+  "@lc.ui.card.phrases": {
+    "description": "Language course, word card: title of a section — idioms, sayings and quotes with the word."
+  },
+  "lc.ui.card.synonyms": "Synonyms by register",
+  "@lc.ui.card.synonyms": {
+    "description": "Language course, word card: title of a section — synonyms grouped by register (formal, colloquial …)."
+  },
+  "lc.ui.card.antonyms": "Opposites",
+  "@lc.ui.card.antonyms": {
+    "description": "Language course, word card: title of a section — antonyms."
+  },
+  "lc.ui.card.pitfalls": "Watch out",
+  "@lc.ui.card.pitfalls": {
+    "description": "Language course, word card: title of a section — pitfalls and false friends (shown after a ⚠️)."
+  },
+  "lc.ui.card.subtleties": "Subtleties",
+  "@lc.ui.card.subtleties": {
+    "description": "Language course, word card: title of a section — fine points of use."
+  },
+  "lc.ui.card.etymology": "Where it comes from",
+  "@lc.ui.card.etymology": {
+    "description": "Language course, word card: title of a section — etymology."
+  },
+  "lc.ui.card.funFacts": "Fun facts",
+  "@lc.ui.card.funFacts": {
+    "description": "Language course, word card: title of a section — curious facts about the word."
+  },
+  "lc.expl.yes": "yes",
+  "@lc.expl.yes": {
+    "description": "Language course, word card: the value “yes” of a yes/no parameter of the word (e.g. separable: yes)."
+  },
+  "lc.expl.no": "no",
+  "@lc.expl.no": {
+    "description": "Language course, word card: the value “no” of a yes/no parameter of the word."
+  },
+  "lc.expl.param.present": "present",
+  "@lc.expl.param.present": {
+    "description": "Language course, word card, the parameters under the word (R3): label of the German verb’s present-tense forms that change (du fährst · er fährt). Short, lower case."
+  },
+  "lc.expl.param.preterite": "simple past (Präteritum)",
+  "@lc.expl.param.preterite": {
+    "description": "Language course, word card, the parameters under the word (R3): label of the German verb’s simple past form (fuhr). Keep the German term “Präteritum” in brackets. Short, lower case."
+  },
+  "lc.expl.param.participle": "past participle (Partizip II)",
+  "@lc.expl.param.participle": {
+    "description": "Language course, word card, the parameters under the word (R3): label of the German verb’s past participle, shown with its auxiliary (ist gefahren, hat gegessen). Keep the German term “Partizip II” in brackets. Short, lower case."
+  },
+  "lc.expl.fv.broken": "broken",
+  "@lc.expl.fv.broken": {
+    "description": "Language course, word card, the parameters under the word (R3): kind of an Arabic plural: a “broken” (internal) plural, made by changing the vowels inside the word. One or two words, lower case."
+  },
+  "lc.expl.fv.soundMasc": "sound masculine",
+  "@lc.expl.fv.soundMasc": {
+    "description": "Language course, word card, the parameters under the word (R3): kind of an Arabic plural: the sound masculine plural (ending -ūna). Lower case."
+  },
+  "lc.expl.fv.soundFem": "sound feminine",
+  "@lc.expl.fv.soundFem": {
+    "description": "Language course, word card, the parameters under the word (R3): kind of an Arabic plural: the sound feminine plural (ending -āt). Lower case."
+  },
+  "lc.expl.fv.triptote": "triptote",
+  "@lc.expl.fv.triptote": {
+    "description": "Language course, word card, the parameters under the word (R3): Arabic declension class: a noun with three case endings (grammar term). Lower case."
+  },
+  "lc.expl.fv.diptote": "diptote",
+  "@lc.expl.fv.diptote": {
+    "description": "Language course, word card, the parameters under the word (R3): Arabic declension class: a noun with only two case endings (grammar term). Lower case."
+  },
+  "lc.expl.fv.defective": "defective",
+  "@lc.expl.fv.defective": {
+    "description": "Language course, word card, the parameters under the word (R3): a declension or root class: “defective” (Arabic nouns ending in -in / roots with a weak last letter; grammar term). Lower case."
+  },
+  "lc.expl.fv.invariable": "invariable",
+  "@lc.expl.fv.invariable": {
+    "description": "Language course, word card, the parameters under the word (R3): a declension class: a word whose ending never changes. Lower case."
+  },
+  "lc.expl.fv.sound": "sound",
+  "@lc.expl.fv.sound": {
+    "description": "Language course, word card, the parameters under the word (R3): the declension of a sound (regular) plural, or a sound (regular) root. Lower case."
+  },
+  "lc.expl.fv.active": "active",
+  "@lc.expl.fv.active": {
+    "description": "Language course, word card, the parameters under the word (R3): kind of a participle: active (the one who does it). Lower case."
+  },
+  "lc.expl.fv.passive": "passive",
+  "@lc.expl.fv.passive": {
+    "description": "Language course, word card, the parameters under the word (R3): kind of a participle: passive (the one to whom it is done). Lower case."
+  },
+  "lc.expl.fv.weak": "weak",
+  "@lc.expl.fv.weak": {
+    "description": "Language course, word card, the parameters under the word (R3): a conjugation or declension class: weak (German grammar term: regular verbs; weak adjective endings). Lower case."
+  },
+  "lc.expl.fv.strong": "strong",
+  "@lc.expl.fv.strong": {
+    "description": "Language course, word card, the parameters under the word (R3): a conjugation or declension class: strong (German grammar term: verbs with a vowel change; strong adjective endings). Lower case."
+  },
+  "lc.expl.fv.mixed": "mixed",
+  "@lc.expl.fv.mixed": {
+    "description": "Language course, word card, the parameters under the word (R3): a conjugation or declension class: mixed (German grammar term). Lower case."
+  },
+  "lc.expl.fv.modal": "modal",
+  "@lc.expl.fv.modal": {
+    "description": "Language course, word card, the parameters under the word (R3): a German conjugation class: modal verbs (können, müssen …). Lower case."
+  },
+  "lc.expl.fv.irregular": "irregular",
+  "@lc.expl.fv.irregular": {
+    "description": "Language course, word card, the parameters under the word (R3): a conjugation or comparison class: irregular. Lower case."
+  },
+  "lc.expl.fv.none": "none",
+  "@lc.expl.fv.none": {
+    "description": "Language course, word card, the parameters under the word (R3): the value “none” of a parameter (e.g. Hebrew: no preposition or object marker). Lower case."
+  },
+  "lc.expl.fv.dual": "dual",
+  "@lc.expl.fv.dual": {
+    "description": "Language course, word card, the parameters under the word (R3): an Arabic declension class: the dual (forms for “two”). Lower case."
+  },
+  "lc.expl.fv.hollow": "hollow",
+  "@lc.expl.fv.hollow": {
+    "description": "Language course, word card, the parameters under the word (R3): an Arabic root class: “hollow” root (weak middle letter و / ي; grammar term). Lower case."
+  },
+  "lc.expl.fv.assimilated": "assimilated",
+  "@lc.expl.fv.assimilated": {
+    "description": "Language course, word card, the parameters under the word (R3): an Arabic root class: “assimilated” root (weak first letter و / ي; grammar term). Lower case."
+  },
+  "lc.expl.fv.doubled": "doubled",
+  "@lc.expl.fv.doubled": {
+    "description": "Language course, word card, the parameters under the word (R3): an Arabic root class: “doubled” (geminate) root (same 2nd and 3rd letter; grammar term). Lower case."
+  },
+  "lc.expl.fv.hamzated": "hamzated",
+  "@lc.expl.fv.hamzated": {
+    "description": "Language course, word card, the parameters under the word (R3): an Arabic root class: a root with a hamza (ء) among its letters (grammar term). Lower case."
+  },
+  "lc.expl.fv.regular": "regular",
+  "@lc.expl.fv.regular": {
+    "description": "Language course, word card, the parameters under the word (R3): a comparison or root class: regular. Lower case."
+  },
+  "lc.expl.fv.feminine": "feminine",
+  "@lc.expl.fv.feminine": {
+    "description": "Language course, word card, the parameters under the word (R3): a German noun declension class: the feminine declension (no ending in the singular). Lower case."
+  },
+  "lc.expl.fv.adjectival": "adjectival",
+  "@lc.expl.fv.adjectival": {
+    "description": "Language course, word card, the parameters under the word (R3): a German declension class: declined like an adjective (der Deutsche, ein Deutscher). Lower case."
+  },
+  "lc.expl.fv.informal": "informal",
+  "@lc.expl.fv.informal": {
+    "description": "Language course, word card, the parameters under the word (R3): a German pronoun or word: informal (du, hallo). Lower case."
+  },
+  "lc.expl.fv.formal": "formal",
+  "@lc.expl.fv.formal": {
+    "description": "Language course, word card, the parameters under the word (R3): a German pronoun or word: formal (Sie, guten Tag). Lower case."
+  },
+  "lc.expl.fv.neutral": "neutral",
+  "@lc.expl.fv.neutral": {
+    "description": "Language course, word card, the parameters under the word (R3): a German word’s formality: neutral (neither formal nor informal). Lower case."
+  },
+  "lc.expl.fv.noChange": "no change",
+  "@lc.expl.fv.noChange": {
+    "description": "Language course, word card, the parameters under the word (R3): German verb, present tense of du / er: the stem vowel does not change. Lower case."
+  },
+  "lc.expl.fv.notCompared": "not compared",
+  "@lc.expl.fv.notCompared": {
+    "description": "Language course, word card, the parameters under the word (R3): a German adjective or adverb without comparative and superlative. Lower case."
+  },
+  "lc.expl.fv.umlaut": "umlaut",
+  "@lc.expl.fv.umlaut": {
+    "description": "Language course, word card, the parameters under the word (R3): a German adjective compared with an umlaut (alt → älter). Keep “umlaut” or use the usual grammar term. Lower case."
+  },
+  "lc.expl.fv.foreign": "foreign",
+  "@lc.expl.fv.foreign": {
+    "description": "Language course, word card, the parameters under the word (R3): a German plural of a foreign word (Museum → Museen). Lower case."
+  },
+  "lc.expl.fv.clfGeneral": "general",
+  "@lc.expl.fv.clfGeneral": {
+    "description": "Language course, word card, the parameters under the word (R3): a Chinese measure word’s kind: the general measure word (个). Lower case."
+  },
+  "lc.expl.fv.clfSortal": "sortal",
+  "@lc.expl.fv.clfSortal": {
+    "description": "Language course, word card, the parameters under the word (R3): a Chinese measure word’s kind: a sortal classifier (for a kind of thing: 本 for books). Lower case."
+  },
+  "lc.expl.fv.clfContainer": "container",
+  "@lc.expl.fv.clfContainer": {
+    "description": "Language course, word card, the parameters under the word (R3): a Chinese measure word’s kind: a container (杯 cup, 瓶 bottle). Lower case."
+  },
+  "lc.expl.fv.clfPartitive": "partitive",
+  "@lc.expl.fv.clfPartitive": {
+    "description": "Language course, word card, the parameters under the word (R3): a Chinese measure word’s kind: a part of a whole (片 slice, 块 piece). Lower case."
+  },
+  "lc.expl.fv.clfUnit": "unit",
+  "@lc.expl.fv.clfUnit": {
+    "description": "Language course, word card, the parameters under the word (R3): a Chinese measure word’s kind: a unit of measure (公斤 kilo, 米 metre). Lower case."
+  },
+  "lc.expl.fv.clfCollective": "collective",
+  "@lc.expl.fv.clfCollective": {
+    "description": "Language course, word card, the parameters under the word (R3): a Chinese measure word’s kind: a group (群 crowd, 双 pair). Lower case."
+  },
+  "lc.expl.fv.clfVerbal": "verbal",
+  "@lc.expl.fv.clfVerbal": {
+    "description": "Language course, word card, the parameters under the word (R3): a Chinese measure word’s kind: counts actions (次 times, 遍 times through). Lower case."
+  },
+  "lc.expl.fv.before": "before",
+  "@lc.expl.fv.before": {
+    "description": "Language course, word card, the parameters under the word (R3): position of a word: before the word it goes with. Lower case."
+  },
+  "lc.expl.fv.after": "after",
+  "@lc.expl.fv.after": {
+    "description": "Language course, word card, the parameters under the word (R3): position of a word: after the word it goes with. Lower case."
+  },
+  "lc.expl.tag.NOM": "nominative",
+  "@lc.expl.tag.NOM": {
+    "description": "Language course: a grammatical feature in words — case. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.ACC": "accusative",
+  "@lc.expl.tag.ACC": {
+    "description": "Language course: a grammatical feature in words — case. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.DAT": "dative",
+  "@lc.expl.tag.DAT": {
+    "description": "Language course: a grammatical feature in words — case. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.GEN": "genitive",
+  "@lc.expl.tag.GEN": {
+    "description": "Language course: a grammatical feature in words — case. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.SG": "singular",
+  "@lc.expl.tag.SG": {
+    "description": "Language course: a grammatical feature in words — number. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.PL": "plural",
+  "@lc.expl.tag.PL": {
+    "description": "Language course: a grammatical feature in words — number. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.DU": "dual",
+  "@lc.expl.tag.DU": {
+    "description": "Language course: a grammatical feature in words — number (two). Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.COLL": "collective",
+  "@lc.expl.tag.COLL": {
+    "description": "Language course: a grammatical feature in words — number. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.MASC": "masculine",
+  "@lc.expl.tag.MASC": {
+    "description": "Language course: a grammatical feature in words — gender; also the answer to “Its gender?”. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.FEM": "feminine",
+  "@lc.expl.tag.FEM": {
+    "description": "Language course: a grammatical feature in words — gender; also the answer to “Its gender?”. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.NEUT": "neuter",
+  "@lc.expl.tag.NEUT": {
+    "description": "Language course: a grammatical feature in words — gender; also the answer to “Its gender?”. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.DEF": "definite (“the”)",
+  "@lc.expl.tag.DEF": {
+    "description": "Language course: a grammatical feature in words — definiteness. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.INDF": "indefinite",
+  "@lc.expl.tag.INDF": {
+    "description": "Language course: a grammatical feature in words — definiteness. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.PRS": "present",
+  "@lc.expl.tag.PRS": {
+    "description": "Language course: a grammatical feature in words — tense. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.PST": "past",
+  "@lc.expl.tag.PST": {
+    "description": "Language course: a grammatical feature in words — tense. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.FUT": "future",
+  "@lc.expl.tag.FUT": {
+    "description": "Language course: a grammatical feature in words — tense. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.PFV": "perfective",
+  "@lc.expl.tag.PFV": {
+    "description": "Language course: a grammatical feature in words — aspect. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.IPFV": "imperfective",
+  "@lc.expl.tag.IPFV": {
+    "description": "Language course: a grammatical feature in words — aspect. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.IND": "indicative",
+  "@lc.expl.tag.IND": {
+    "description": "Language course: a grammatical feature in words — mood. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.SBJV": "subjunctive",
+  "@lc.expl.tag.SBJV": {
+    "description": "Language course: a grammatical feature in words — mood. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.JUSS": "jussive",
+  "@lc.expl.tag.JUSS": {
+    "description": "Language course: a grammatical feature in words — mood (Arabic). Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.IMP": "imperative",
+  "@lc.expl.tag.IMP": {
+    "description": "Language course: a grammatical feature in words — mood. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.NFIN": "infinitive",
+  "@lc.expl.tag.NFIN": {
+    "description": "Language course: a grammatical feature in words — verb form. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.CSTR": "construct state",
+  "@lc.expl.tag.CSTR": {
+    "description": "Language course: a grammatical feature in words — Arabic / Hebrew noun state. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.1": "1st person",
+  "@lc.expl.tag.1": {
+    "description": "Language course: a grammatical feature in words — person. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.2": "2nd person",
+  "@lc.expl.tag.2": {
+    "description": "Language course: a grammatical feature in words — person. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.3": "3rd person",
+  "@lc.expl.tag.3": {
+    "description": "Language course: a grammatical feature in words — person. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.STRG": "strong ending (no article)",
+  "@lc.expl.tag.STRG": {
+    "description": "Language course: a grammatical feature in words — German adjective ending. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.WEAK": "weak ending (after der / die / das)",
+  "@lc.expl.tag.WEAK": {
+    "description": "Language course: a grammatical feature in words — German adjective ending — der / die / das are German words. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.MIX": "mixed ending (after ein / kein / mein)",
+  "@lc.expl.tag.MIX": {
+    "description": "Language course: a grammatical feature in words — German adjective ending — ein / kein / mein are German words. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.SEP": "the separated particle",
+  "@lc.expl.tag.SEP": {
+    "description": "Language course: a grammatical feature in words — the particle of a German separable verb. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.PFX": "after an attached preposition",
+  "@lc.expl.tag.PFX": {
+    "description": "Language course: a grammatical feature in words — Arabic / Hebrew: a form after a preposition written together with the word. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.ALT": "before the article (another spelling)",
+  "@lc.expl.tag.ALT": {
+    "description": "Language course: a grammatical feature in words — another spelling used before the article. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.CONST": "construct state (“the … of”)",
+  "@lc.expl.tag.CONST": {
+    "description": "Language course: a grammatical feature in words — Arabic / Hebrew construct state. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.POSS": "with an owner ending",
+  "@lc.expl.tag.POSS": {
+    "description": "Language course: a grammatical feature in words — a form with a possessive suffix. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.INFM": "informal",
+  "@lc.expl.tag.INFM": {
+    "description": "Language course: a grammatical feature in words — register of address. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.FORM": "formal",
+  "@lc.expl.tag.FORM": {
+    "description": "Language course: a grammatical feature in words — register of address. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.CMPR": "comparative",
+  "@lc.expl.tag.CMPR": {
+    "description": "Language course: a grammatical feature in words — degree. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.SPRL": "superlative",
+  "@lc.expl.tag.SPRL": {
+    "description": "Language course: a grammatical feature in words — degree. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.NEG": "negative",
+  "@lc.expl.tag.NEG": {
+    "description": "Language course: a grammatical feature in words — polarity. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.PTCP": "participle",
+  "@lc.expl.tag.PTCP": {
+    "description": "Language course: a grammatical feature in words — verb form. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.MSDR": "verbal noun",
+  "@lc.expl.tag.MSDR": {
+    "description": "Language course: a grammatical feature in words — Arabic masdar. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.JUS": "jussive",
+  "@lc.expl.tag.JUS": {
+    "description": "Language course: a grammatical feature in words — mood (another tag for it). Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.HAB": "habitual",
+  "@lc.expl.tag.HAB": {
+    "description": "Language course: a grammatical feature in words — aspect. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.INT": "question",
+  "@lc.expl.tag.INT": {
+    "description": "Language course: a grammatical feature in words — mood: interrogative. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.DIR": "directional",
+  "@lc.expl.tag.DIR": {
+    "description": "Language course: a grammatical feature in words — Hebrew directional ending. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.tag.POS": "positive",
+  "@lc.expl.tag.POS": {
+    "description": "Language course: a grammatical feature in words — polarity (not negated). Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."
+  },
+  "lc.expl.owner.1S": "my",
+  "@lc.expl.owner.1S": {
+    "description": "Language course: the owner of a possessed form (Arabic / Hebrew possessive endings), 1S = person, number (S/P/D two) and gender (M/F). Shown in “owner: …”. Short."
+  },
+  "lc.expl.owner.2S": "your",
+  "@lc.expl.owner.2S": {
+    "description": "Language course: the owner of a possessed form (Arabic / Hebrew possessive endings), 2S = person, number (S/P/D two) and gender (M/F). Shown in “owner: …”. Short."
+  },
+  "lc.expl.owner.2SM": "your (m.)",
+  "@lc.expl.owner.2SM": {
+    "description": "Language course: the owner of a possessed form (Arabic / Hebrew possessive endings), 2SM = person, number (S/P/D two) and gender (M/F). Shown in “owner: …”. Short."
+  },
+  "lc.expl.owner.2SF": "your (f.)",
+  "@lc.expl.owner.2SF": {
+    "description": "Language course: the owner of a possessed form (Arabic / Hebrew possessive endings), 2SF = person, number (S/P/D two) and gender (M/F). Shown in “owner: …”. Short."
+  },
+  "lc.expl.owner.3S": "his/her",
+  "@lc.expl.owner.3S": {
+    "description": "Language course: the owner of a possessed form (Arabic / Hebrew possessive endings), 3S = person, number (S/P/D two) and gender (M/F). Shown in “owner: …”. Short."
+  },
+  "lc.expl.owner.3SM": "his",
+  "@lc.expl.owner.3SM": {
+    "description": "Language course: the owner of a possessed form (Arabic / Hebrew possessive endings), 3SM = person, number (S/P/D two) and gender (M/F). Shown in “owner: …”. Short."
+  },
+  "lc.expl.owner.3SF": "her",
+  "@lc.expl.owner.3SF": {
+    "description": "Language course: the owner of a possessed form (Arabic / Hebrew possessive endings), 3SF = person, number (S/P/D two) and gender (M/F). Shown in “owner: …”. Short."
+  },
+  "lc.expl.owner.1P": "our",
+  "@lc.expl.owner.1P": {
+    "description": "Language course: the owner of a possessed form (Arabic / Hebrew possessive endings), 1P = person, number (S/P/D two) and gender (M/F). Shown in “owner: …”. Short."
+  },
+  "lc.expl.owner.2P": "your (pl.)",
+  "@lc.expl.owner.2P": {
+    "description": "Language course: the owner of a possessed form (Arabic / Hebrew possessive endings), 2P = person, number (S/P/D two) and gender (M/F). Shown in “owner: …”. Short."
+  },
+  "lc.expl.owner.2PM": "your (pl. m.)",
+  "@lc.expl.owner.2PM": {
+    "description": "Language course: the owner of a possessed form (Arabic / Hebrew possessive endings), 2PM = person, number (S/P/D two) and gender (M/F). Shown in “owner: …”. Short."
+  },
+  "lc.expl.owner.2PF": "your (pl. f.)",
+  "@lc.expl.owner.2PF": {
+    "description": "Language course: the owner of a possessed form (Arabic / Hebrew possessive endings), 2PF = person, number (S/P/D two) and gender (M/F). Shown in “owner: …”. Short."
+  },
+  "lc.expl.owner.3P": "their",
+  "@lc.expl.owner.3P": {
+    "description": "Language course: the owner of a possessed form (Arabic / Hebrew possessive endings), 3P = person, number (S/P/D two) and gender (M/F). Shown in “owner: …”. Short."
+  },
+  "lc.expl.owner.3PM": "their (m.)",
+  "@lc.expl.owner.3PM": {
+    "description": "Language course: the owner of a possessed form (Arabic / Hebrew possessive endings), 3PM = person, number (S/P/D two) and gender (M/F). Shown in “owner: …”. Short."
+  },
+  "lc.expl.owner.3PF": "their (f.)",
+  "@lc.expl.owner.3PF": {
+    "description": "Language course: the owner of a possessed form (Arabic / Hebrew possessive endings), 3PF = person, number (S/P/D two) and gender (M/F). Shown in “owner: …”. Short."
+  },
+  "lc.expl.owner.2D": "your (two)",
+  "@lc.expl.owner.2D": {
+    "description": "Language course: the owner of a possessed form (Arabic / Hebrew possessive endings), 2D = person, number (S/P/D two) and gender (M/F). Shown in “owner: …”. Short."
+  },
+  "lc.expl.owner.3D": "their (two)",
+  "@lc.expl.owner.3D": {
+    "description": "Language course: the owner of a possessed form (Arabic / Hebrew possessive endings), 3D = person, number (S/P/D two) and gender (M/F). Shown in “owner: …”. Short."
+  },
+  "lc.expl.ownerIs": "owner: {owner}",
+  "@lc.expl.ownerIs": {
+    "description": "Language course: part of the label of a possessed form, e.g. “nominative · singular · owner: my”. {owner} = my, your (pl.) …",
+    "placeholders": {
+      "owner": {
+        "type": "String",
+        "example": "my"
+      }
+    }
+  },
+  "lc.expl.basicForm": "basic form",
+  "@lc.expl.basicForm": {
+    "description": "Language course: label of the form of a word that has no grammatical features (its dictionary form)."
+  },
+  "lc.ui.variant.negative": "Make it negative",
+  "@lc.ui.variant.negative": {
+    "description": "Language course: the change the learner makes to a sentence (transform, agreement and rewrite exercises). Imperative, addressed to the learner."
+  },
+  "lc.ui.variant.positive": "Make it positive",
+  "@lc.ui.variant.positive": {
+    "description": "Language course: the change the learner makes to a sentence (transform, agreement and rewrite exercises). Imperative, addressed to the learner."
+  },
+  "lc.ui.variant.question": "Make it a question",
+  "@lc.ui.variant.question": {
+    "description": "Language course: the change the learner makes to a sentence (transform, agreement and rewrite exercises). Imperative, addressed to the learner."
+  },
+  "lc.ui.variant.command": "Make it a command",
+  "@lc.ui.variant.command": {
+    "description": "Language course: the change the learner makes to a sentence (transform, agreement and rewrite exercises). Imperative, addressed to the learner."
+  },
+  "lc.ui.variant.plural": "Make it plural",
+  "@lc.ui.variant.plural": {
+    "description": "Language course: the change the learner makes to a sentence (transform, agreement and rewrite exercises). Imperative, addressed to the learner."
+  },
+  "lc.ui.variant.singular": "Make it singular",
+  "@lc.ui.variant.singular": {
+    "description": "Language course: the change the learner makes to a sentence (transform, agreement and rewrite exercises). Imperative, addressed to the learner."
+  },
+  "lc.ui.variant.dual": "Make it dual (two)",
+  "@lc.ui.variant.dual": {
+    "description": "Language course: the change the learner makes to a sentence (transform, agreement and rewrite exercises). Imperative, addressed to the learner."
+  },
+  "lc.ui.variant.definite": "Make it definite (“the”)",
+  "@lc.ui.variant.definite": {
+    "description": "Language course: the change the learner makes to a sentence (transform, agreement and rewrite exercises). Imperative, addressed to the learner."
+  },
+  "lc.ui.variant.indefinite": "Make it indefinite",
+  "@lc.ui.variant.indefinite": {
+    "description": "Language course: the change the learner makes to a sentence (transform, agreement and rewrite exercises). Imperative, addressed to the learner."
+  },
+  "lc.ui.variant.aboutWoman": "Say it about / to a woman",
+  "@lc.ui.variant.aboutWoman": {
+    "description": "Language course: the change the learner makes to a sentence (transform, agreement and rewrite exercises). Imperative, addressed to the learner."
+  },
+  "lc.ui.variant.aboutMan": "Say it about / to a man",
+  "@lc.ui.variant.aboutMan": {
+    "description": "Language course: the change the learner makes to a sentence (transform, agreement and rewrite exercises). Imperative, addressed to the learner."
+  },
+  "lc.ui.variant.toWoman": "Say it to a woman",
+  "@lc.ui.variant.toWoman": {
+    "description": "Language course: the change the learner makes to a sentence (transform, agreement and rewrite exercises). Imperative, addressed to the learner."
+  },
+  "lc.ui.variant.toMan": "Say it to a man",
+  "@lc.ui.variant.toMan": {
+    "description": "Language course: the change the learner makes to a sentence (transform, agreement and rewrite exercises). Imperative, addressed to the learner."
+  },
+  "lc.ui.variant.past": "Put it in the past",
+  "@lc.ui.variant.past": {
+    "description": "Language course: the change the learner makes to a sentence (transform, agreement and rewrite exercises). Imperative, addressed to the learner."
+  },
+  "lc.ui.variant.future": "Put it in the future",
+  "@lc.ui.variant.future": {
+    "description": "Language course: the change the learner makes to a sentence (transform, agreement and rewrite exercises). Imperative, addressed to the learner."
+  },
+  "lc.ui.variant.present": "Put it in the present",
+  "@lc.ui.variant.present": {
+    "description": "Language course: the change the learner makes to a sentence (transform, agreement and rewrite exercises). Imperative, addressed to the learner."
+  },
+  "lc.ui.variant.completed": "Say that it happened (completed)",
+  "@lc.ui.variant.completed": {
+    "description": "Language course: the change the learner makes to a sentence (transform, agreement and rewrite exercises). Imperative, addressed to the learner."
+  },
+  "lc.ui.variant.ongoing": "Say that it is going on",
+  "@lc.ui.variant.ongoing": {
+    "description": "Language course: the change the learner makes to a sentence (transform, agreement and rewrite exercises). Imperative, addressed to the learner."
+  },
+  "lc.ui.variant.formal": "Say it politely (formal)",
+  "@lc.ui.variant.formal": {
+    "description": "Language course: the change the learner makes to a sentence (transform, agreement and rewrite exercises). Imperative, addressed to the learner."
+  },
+  "lc.ui.variant.informal": "Say it informally",
+  "@lc.ui.variant.informal": {
+    "description": "Language course: the change the learner makes to a sentence (transform, agreement and rewrite exercises). Imperative, addressed to the learner."
+  },
+  "lc.ui.variant.far": "Point to something farther away (that)",
+  "@lc.ui.variant.far": {
+    "description": "Language course: the change the learner makes to a sentence (transform, agreement and rewrite exercises). Imperative, addressed to the learner."
+  },
+  "lc.ui.variant.near": "Point to something near (this)",
+  "@lc.ui.variant.near": {
+    "description": "Language course: the change the learner makes to a sentence (transform, agreement and rewrite exercises). Imperative, addressed to the learner."
+  },
+  "lc.ui.variant.aNotA": "Ask with A-not-A (是不是, 要不要)",
+  "@lc.ui.variant.aNotA": {
+    "description": "Language course: the change the learner makes to a sentence (transform, agreement and rewrite exercises). Imperative, addressed to the learner. The Chinese words stay as they are."
+  },
+  "lc.ui.variant.intonation": "Ask with intonation only",
+  "@lc.ui.variant.intonation": {
+    "description": "Language course: the change the learner makes to a sentence (transform, agreement and rewrite exercises). Imperative, addressed to the learner."
+  },
+  "lc.ui.ask.article": "Its article?",
+  "@lc.ui.ask.article": {
+    "description": "Language course, exercise instruction (the question above the answers). German noun: choose der, die or das."
+  },
+  "lc.ui.ask.gender": "Its gender?",
+  "@lc.ui.ask.gender": {
+    "description": "Language course, exercise instruction (the question above the answers). Choose the grammatical gender of the noun."
+  },
+  "lc.ui.ask.measureWord": "one … — which measure word?",
+  "@lc.ui.ask.measureWord": {
+    "description": "Language course, exercise instruction (the question above the answers). Chinese: choose the measure word for “one <noun>”. Lower case, as a short prompt."
+  },
+  "lc.ui.ask.meaning": "What does it mean?",
+  "@lc.ui.ask.meaning": {
+    "description": "Language course, exercise instruction (the question above the answers). Choose the meaning of the word or sentence shown."
+  },
+  "lc.ui.ask.glyphForm": "{name}: its form {pos, select, initial {at the start of a word (joined to the next letter)} medial {in the middle of a word} final {at the end of a word} other {}}?",
+  "@lc.ui.ask.glyphForm": {
+    "description": "Language course, exercise instruction (the question above the answers). Arabic / Hebrew letters: choose the shape of a letter in a position. {name} = the letter’s name (e.g. bāʾ); {pos} = initial, medial or final.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "bāʾ"
+      },
+      "pos": {
+        "type": "String",
+        "example": "initial"
+      }
+    }
+  },
+  "lc.expl.glyphForm": "{name} {pos, select, initial {at the start of a word (joined to the next letter)} medial {in the middle of a word} final {at the end of a word} other {}}: {form}",
+  "@lc.expl.glyphForm": {
+    "description": "Explanation (“why” line) under an exercise. The letter {name} in a position, then its shape {form}.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "bāʾ"
+      },
+      "pos": {
+        "type": "String",
+        "example": "initial"
+      },
+      "form": {
+        "type": "String",
+        "example": "ـبـ"
+      }
+    }
+  },
+  "lc.ui.ask.latinLetters": "How is it written in Latin letters?",
+  "@lc.ui.ask.latinLetters": {
+    "description": "Language course, exercise instruction (the question above the answers). A letter or word of another script: choose its transliteration."
+  },
+  "lc.ui.ask.whichLetter": "Which letter?",
+  "@lc.ui.ask.whichLetter": {
+    "description": "Language course, exercise instruction (the question above the answers). A transliteration and its sound are shown: choose the letter."
+  },
+  "lc.ui.ask.pinyin": "Its pinyin?",
+  "@lc.ui.ask.pinyin": {
+    "description": "Language course, exercise instruction (the question above the answers). Chinese word: choose its pinyin."
+  },
+  "lc.ui.ask.howRead": "How is it read?",
+  "@lc.ui.ask.howRead": {
+    "description": "Language course, exercise instruction (the question above the answers). A word of another script: choose how it is read (in Latin letters)."
+  },
+  "lc.ui.ask.whichIsIt": "Which is it?",
+  "@lc.ui.ask.whichIsIt": {
+    "description": "Language course, exercise instruction (the question above the answers). A reading in Latin letters is shown: choose the written word."
+  },
+  "lc.ui.ask.charReading": "Its reading in {word} ({gloss})?",
+  "@lc.ui.ask.charReading": {
+    "description": "Language course, exercise instruction (the question above the answers). Chinese: the reading of one character inside the word {word}, which means {gloss}.",
+    "placeholders": {
+      "word": {
+        "type": "String",
+        "example": "Gurke"
+      },
+      "gloss": {
+        "type": "String",
+        "example": "cucumber"
+      }
+    }
+  },
+  "lc.expl.toneSandhi": "written {written}, said {said} ({rule, select, bu {不 before a 4th tone → bú} other {3rd + 3rd → 2nd + 3rd}})",
+  "@lc.expl.toneSandhi": {
+    "description": "Explanation (“why” line) under an exercise. Chinese tone change in speech: {written} and {said} are pinyin; the rule in brackets. Keep 不 and bú.",
+    "placeholders": {
+      "written": {
+        "type": "String",
+        "example": "nǐ hǎo"
+      },
+      "said": {
+        "type": "String",
+        "example": "ní hǎo"
+      },
+      "rule": {
+        "type": "String",
+        "example": "threes"
+      }
+    }
+  },
+  "lc.expl.charParts": "{ch} = {ids}{hasMeaning, select, yes { · meaning from {meaning}} other {}}{hasSound, select, yes { · sound from {sound}} other {}}",
+  "@lc.expl.charParts": {
+    "description": "Explanation (“why” line) under an exercise. Chinese character {ch} built from its parts {ids}; the part that gives the meaning and the part that gives the sound.",
+    "placeholders": {
+      "ch": {
+        "type": "String",
+        "example": "好"
+      },
+      "ids": {
+        "type": "String",
+        "example": "⿰女子"
+      },
+      "hasMeaning": {
+        "type": "String",
+        "example": "yes"
+      },
+      "meaning": {
+        "type": "String",
+        "example": "女"
+      },
+      "hasSound": {
+        "type": "String",
+        "example": "no"
+      },
+      "sound": {
+        "type": "String",
+        "example": ""
+      }
+    }
+  },
+  "lc.ui.ask.radical": "Its radical (the part it is filed under in a dictionary)?",
+  "@lc.ui.ask.radical": {
+    "description": "Language course, exercise instruction (the question above the answers). Chinese character: choose its radical."
+  },
+  "lc.expl.radical": "{ch}: radical {radical}{hasMeaning, select, yes { — {meaning}} other {}}",
+  "@lc.expl.radical": {
+    "description": "Explanation (“why” line) under an exercise. Chinese character {ch}, its radical and the character’s meaning.",
+    "placeholders": {
+      "ch": {
+        "type": "String",
+        "example": "好"
+      },
+      "radical": {
+        "type": "String",
+        "example": "女"
+      },
+      "hasMeaning": {
+        "type": "String",
+        "example": "yes"
+      },
+      "meaning": {
+        "type": "String",
+        "example": "女"
+      }
+    }
+  },
+  "lc.expl.strokes": "{ch}: {n, plural, one {# strokes} other {# strokes}}",
+  "@lc.expl.strokes": {
+    "description": "Explanation (“why” line) under an exercise. Chinese character {ch} and its number of strokes. (English keeps “strokes” even for 1, as before.)",
+    "placeholders": {
+      "ch": {
+        "type": "String",
+        "example": "好"
+      },
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "lc.expl.typed.umlaut": "umlaut: ä ö ü are letters of their own",
+  "@lc.expl.typed.umlaut": {
+    "description": "Language course: a note under a typed answer that was wrong, naming the spelling rule (German). Lower case. The letters of the language stay as they are."
+  },
+  "lc.expl.typed.eszett": "ß (or ss after a long vowel / diphthong)",
+  "@lc.expl.typed.eszett": {
+    "description": "Language course: a note under a typed answer that was wrong, naming the spelling rule (German). Lower case. The letters of the language stay as they are."
+  },
+  "lc.expl.typed.hamza": "hamza and its seat (أ إ آ ء ؤ ئ)",
+  "@lc.expl.typed.hamza": {
+    "description": "Language course: a note under a typed answer that was wrong, naming the spelling rule (Arabic; hamza is the name of the sign). Lower case. The letters of the language stay as they are."
+  },
+  "lc.expl.typed.taMarbuta": "tāʾ marbūṭa ة at the end, not هـ",
+  "@lc.expl.typed.taMarbuta": {
+    "description": "Language course: a note under a typed answer that was wrong, naming the spelling rule (Arabic; tāʾ marbūṭa is the name of the letter). Lower case. The letters of the language stay as they are."
+  },
+  "lc.expl.typed.alifMaqsura": "alif maqṣūra ى (no dots) vs yāʾ ي",
+  "@lc.expl.typed.alifMaqsura": {
+    "description": "Language course: a note under a typed answer that was wrong, naming the spelling rule (Arabic; alif maqṣūra and yāʾ are letter names). Lower case. The letters of the language stay as they are."
+  },
+  "lc.expl.typed.finalForm": "final form (ך ם ן ף ץ at the end of a word only)",
+  "@lc.expl.typed.finalForm": {
+    "description": "Language course: a note under a typed answer that was wrong, naming the spelling rule (Hebrew). Lower case. The letters of the language stay as they are."
+  },
+  "lc.expl.typed.swiss": "the Swiss spelling (ss for ß) — elsewhere ß",
+  "@lc.expl.typed.swiss": {
+    "description": "Language course: a note under a typed answer that was wrong, naming the spelling rule (German; the answer is accepted). Lower case. The letters of the language stay as they are."
+  },
+  "lc.expl.typed.vowelMark": "the letters are right; a vowel mark is not",
+  "@lc.expl.typed.vowelMark": {
+    "description": "Language course: a note under a typed answer that was wrong, naming the spelling rule (Arabic / Hebrew). Lower case. The letters of the language stay as they are."
+  },
+  "lc.expl.typed.nounCapital": "nouns start with a capital letter",
+  "@lc.expl.typed.nounCapital": {
+    "description": "Language course: a note under a typed answer that was wrong, naming the spelling rule (German). Lower case. The letters of the language stay as they are."
+  },
+  "lc.expl.typed.capital": "capital / small letter",
+  "@lc.expl.typed.capital": {
+    "description": "Language course: a note under a typed answer that was wrong, naming the spelling rule (the case of a letter is wrong). Lower case. The letters of the language stay as they are."
+  },
+  "lc.ui.typed.pinyinThenChars": "type the pinyin, then choose the characters",
+  "@lc.ui.typed.pinyinThenChars": {
+    "description": "Language course: a note under a typed Chinese answer written in Latin letters. Lower case."
+  },
+  "lc.expl.pos.NOUN": "noun",
+  "@lc.expl.pos.NOUN": {
+    "description": "Language course: a part of speech (NOUN), an answer option of “Which part of speech is each word?” and a label. Lower case."
+  },
+  "lc.expl.pos.PROPN": "name",
+  "@lc.expl.pos.PROPN": {
+    "description": "Language course: a part of speech (PROPN), an answer option of “Which part of speech is each word?” and a label. Lower case."
+  },
+  "lc.expl.pos.VERB": "verb",
+  "@lc.expl.pos.VERB": {
+    "description": "Language course: a part of speech (VERB), an answer option of “Which part of speech is each word?” and a label. Lower case."
+  },
+  "lc.expl.pos.AUX": "auxiliary verb",
+  "@lc.expl.pos.AUX": {
+    "description": "Language course: a part of speech (AUX), an answer option of “Which part of speech is each word?” and a label. Lower case."
+  },
+  "lc.expl.pos.ADJ": "adjective",
+  "@lc.expl.pos.ADJ": {
+    "description": "Language course: a part of speech (ADJ), an answer option of “Which part of speech is each word?” and a label. Lower case."
+  },
+  "lc.expl.pos.DET": "determiner / article",
+  "@lc.expl.pos.DET": {
+    "description": "Language course: a part of speech (DET), an answer option of “Which part of speech is each word?” and a label. Lower case."
+  },
+  "lc.expl.pos.PRON": "pronoun",
+  "@lc.expl.pos.PRON": {
+    "description": "Language course: a part of speech (PRON), an answer option of “Which part of speech is each word?” and a label. Lower case."
+  },
+  "lc.expl.pos.ADP": "preposition",
+  "@lc.expl.pos.ADP": {
+    "description": "Language course: a part of speech (ADP), an answer option of “Which part of speech is each word?” and a label. Lower case."
+  },
+  "lc.expl.pos.ADV": "adverb",
+  "@lc.expl.pos.ADV": {
+    "description": "Language course: a part of speech (ADV), an answer option of “Which part of speech is each word?” and a label. Lower case."
+  },
+  "lc.expl.pos.PART": "particle",
+  "@lc.expl.pos.PART": {
+    "description": "Language course: a part of speech (PART), an answer option of “Which part of speech is each word?” and a label. Lower case."
+  },
+  "lc.expl.pos.CCONJ": "conjunction (and, but …)",
+  "@lc.expl.pos.CCONJ": {
+    "description": "Language course: a part of speech (CCONJ), an answer option of “Which part of speech is each word?” and a label. Lower case."
+  },
+  "lc.expl.pos.SCONJ": "subordinator (that, because …)",
+  "@lc.expl.pos.SCONJ": {
+    "description": "Language course: a part of speech (SCONJ), an answer option of “Which part of speech is each word?” and a label. Lower case."
+  },
+  "lc.expl.pos.NUM": "number",
+  "@lc.expl.pos.NUM": {
+    "description": "Language course: a part of speech (NUM), an answer option of “Which part of speech is each word?” and a label. Lower case."
+  },
+  "lc.expl.pos.CLF": "measure word",
+  "@lc.expl.pos.CLF": {
+    "description": "Language course: a part of speech (CLF), an answer option of “Which part of speech is each word?” and a label. Lower case."
+  },
+  "lc.expl.pos.INTJ": "interjection",
+  "@lc.expl.pos.INTJ": {
+    "description": "Language course: a part of speech (INTJ), an answer option of “Which part of speech is each word?” and a label. Lower case."
+  },
+  "lc.expl.dim.Case": "Case",
+  "@lc.expl.dim.Case": {
+    "description": "Language course, “Which form is it?” exercise: the name of a grammatical dimension, the heading of one row of choices. Capitalized, one word."
+  },
+  "lc.expl.dim.Number": "Number",
+  "@lc.expl.dim.Number": {
+    "description": "Language course, “Which form is it?” exercise: the name of a grammatical dimension, the heading of one row of choices. Capitalized, one word."
+  },
+  "lc.expl.dim.Gender": "Gender",
+  "@lc.expl.dim.Gender": {
+    "description": "Language course, “Which form is it?” exercise: the name of a grammatical dimension, the heading of one row of choices. Capitalized, one word."
+  },
+  "lc.expl.dim.Person": "Person",
+  "@lc.expl.dim.Person": {
+    "description": "Language course, “Which form is it?” exercise: the name of a grammatical dimension, the heading of one row of choices. Capitalized, one word."
+  },
+  "lc.expl.dim.Definiteness": "Definiteness",
+  "@lc.expl.dim.Definiteness": {
+    "description": "Language course, “Which form is it?” exercise: the name of a grammatical dimension, the heading of one row of choices. Capitalized, one word."
+  },
+  "lc.expl.dim.Tense": "Tense",
+  "@lc.expl.dim.Tense": {
+    "description": "Language course, “Which form is it?” exercise: the name of a grammatical dimension, the heading of one row of choices. Capitalized, one word."
+  },
+  "lc.expl.dim.Mood": "Mood",
+  "@lc.expl.dim.Mood": {
+    "description": "Language course, “Which form is it?” exercise: the name of a grammatical dimension, the heading of one row of choices. Capitalized, one word."
+  },
+  "lc.expl.dim.Aspect": "Aspect",
+  "@lc.expl.dim.Aspect": {
+    "description": "Language course, “Which form is it?” exercise: the name of a grammatical dimension, the heading of one row of choices. Capitalized, one word."
+  },
+  "lc.expl.dim.Form": "Form",
+  "@lc.expl.dim.Form": {
+    "description": "Language course, “Which form is it?” exercise: the name of a grammatical dimension — the non-finite form (infinitive, participle …), the heading of one row of choices. Capitalized, one word."
+  },
+  "lc.expl.dim.Degree": "Degree",
+  "@lc.expl.dim.Degree": {
+    "description": "Language course, “Which form is it?” exercise: the name of a grammatical dimension, the heading of one row of choices. Capitalized, one word."
+  },
+  "lc.expl.dim.Ending": "Ending",
+  "@lc.expl.dim.Ending": {
+    "description": "Language course, “Which form is it?” exercise: the name of a grammatical dimension — German adjective endings (strong / weak / mixed), the heading of one row of choices. Capitalized, one word."
+  },
+  "lc.expl.dim.Address": "Address",
+  "@lc.expl.dim.Address": {
+    "description": "Language course, “Which form is it?” exercise: the name of a grammatical dimension — formal or informal address, the heading of one row of choices. Capitalized, one word."
+  },
+  "lc.expl.dim.Polarity": "Polarity",
+  "@lc.expl.dim.Polarity": {
+    "description": "Language course, “Which form is it?” exercise: the name of a grammatical dimension — positive or negative, the heading of one row of choices. Capitalized, one word."
+  },
+  "lc.expl.dim.Owner": "Owner",
+  "@lc.expl.dim.Owner": {
+    "description": "Language course, “Which form is it?” exercise: the name of a grammatical dimension — the owner of a possessed form, the heading of one row of choices. Capitalized, one word."
+  },
+  "lc.expl.notMarked": "— (not marked)",
+  "@lc.expl.notMarked": {
+    "description": "Language course, “Which form is it?” exercise: the option for a dimension the form does not mark."
+  },
+  "lc.ui.ask.paradigm": "Fill in the table of {word}",
+  "@lc.ui.ask.paradigm": {
+    "description": "Language course, exercise instruction (the question above the answers). Fill the hidden forms of the table of the word {word}.",
+    "placeholders": {
+      "word": {
+        "type": "String",
+        "example": "Gurke"
+      }
+    }
+  },
+  "lc.ui.ask.whichForm": "Which form of {word} is it?",
+  "@lc.ui.ask.whichForm": {
+    "description": "Language course, exercise instruction (the question above the answers). A form is shown: choose its features. {word} = the dictionary form.",
+    "placeholders": {
+      "word": {
+        "type": "String",
+        "example": "Gurke"
+      }
+    }
+  },
+  "lc.expl.formOf": "{form} = {labels} of {word}",
+  "@lc.expl.formOf": {
+    "description": "Explanation (“why” line) under an exercise. {form} is the form described by {labels} (e.g. “nominative · singular”, several joined with “or”) of the word {word}.",
+    "placeholders": {
+      "form": {
+        "type": "String",
+        "example": "ـبـ"
+      },
+      "labels": {
+        "type": "String",
+        "example": "nominative · singular"
+      },
+      "word": {
+        "type": "String",
+        "example": "Gurke"
+      }
+    }
+  },
+  "lc.expl.or": "{a} or {b}",
+  "@lc.expl.or": {
+    "description": "Language course: joins two alternatives (descriptions of a form); used repeatedly for three or more: “a or b or c”.",
+    "placeholders": {
+      "a": {
+        "type": "String",
+        "example": "nominative"
+      },
+      "b": {
+        "type": "String",
+        "example": "accusative"
+      }
+    }
+  },
+  "lc.expl.verbFormN": "Form {form}",
+  "@lc.expl.verbFormN": {
+    "description": "Language course: an Arabic verb form, {form} = its Roman number (Form II). Also shown as an answer option.",
+    "placeholders": {
+      "form": {
+        "type": "String",
+        "example": "ـبـ"
+      }
+    }
+  },
+  "lc.ui.ask.rootPattern": "Root × pattern — which word?",
+  "@lc.ui.ask.rootPattern": {
+    "description": "Language course, exercise instruction (the question above the answers). Arabic / Hebrew: a root and a pattern are shown; choose the word they make."
+  },
+  "lc.ui.ask.root": "Its root?",
+  "@lc.ui.ask.root": {
+    "description": "Language course, exercise instruction (the question above the answers). Arabic / Hebrew: choose the root of the word."
+  },
+  "lc.expl.rootPattern": "{word}: root {root}, pattern {pattern}",
+  "@lc.expl.rootPattern": {
+    "description": "Explanation (“why” line) under an exercise. The root and the pattern of the word {word}.",
+    "placeholders": {
+      "word": {
+        "type": "String",
+        "example": "Gurke"
+      },
+      "root": {
+        "type": "String",
+        "example": "k t b"
+      },
+      "pattern": {
+        "type": "String",
+        "example": "maCCaC"
+      }
+    }
+  },
+  "lc.ui.ask.pattern": "Its pattern?",
+  "@lc.ui.ask.pattern": {
+    "description": "Language course, exercise instruction (the question above the answers). Arabic / Hebrew: choose the pattern of the word."
+  },
+  "lc.expl.patternRoot": "{word}: pattern {pattern}, root {root}",
+  "@lc.expl.patternRoot": {
+    "description": "Explanation (“why” line) under an exercise. The pattern and the root of the word {word}.",
+    "placeholders": {
+      "word": {
+        "type": "String",
+        "example": "Gurke"
+      },
+      "pattern": {
+        "type": "String",
+        "example": "maCCaC"
+      },
+      "root": {
+        "type": "String",
+        "example": "k t b"
+      }
+    }
+  },
+  "lc.ui.ask.agree": "{change}: {from} → {to}. Change the words that agree with it.",
+  "@lc.ui.ask.agree": {
+    "description": "Language course, exercise instruction (the question above the answers). Agreement exercise: {change} = what changes (e.g. Make it plural), {from} → {to} = the word that changed; the learner updates the other words.",
+    "placeholders": {
+      "change": {
+        "type": "String",
+        "example": "Make it plural"
+      },
+      "from": {
+        "type": "String",
+        "example": "Kind"
+      },
+      "to": {
+        "type": "String",
+        "example": "Kinder"
+      }
+    }
+  },
+  "lc.ui.ask.whichSentence": "Which sentence says this?",
+  "@lc.ui.ask.whichSentence": {
+    "description": "Language course, exercise instruction (the question above the answers). A meaning is shown: choose the sentence that says it."
+  },
+  "lc.expl.startingSentence": "the starting sentence",
+  "@lc.expl.startingSentence": {
+    "description": "Explanation (“why” line) under an exercise. The sentence before any change (the original of its variants). Lower case."
+  },
+  "lc.expl.contrastOther": "{text} = “{gloss}”",
+  "@lc.expl.contrastOther": {
+    "description": "Explanation (“why” line) under an exercise. Another sentence {text} of the same group and its meaning {gloss}.",
+    "placeholders": {
+      "text": {
+        "type": "String",
+        "example": "Das Kind spielt."
+      },
+      "gloss": {
+        "type": "String",
+        "example": "cucumber"
+      }
+    }
+  },
+  "lc.expl.contrastOtherVariant": "{text} = “{gloss}” ({variant})",
+  "@lc.expl.contrastOtherVariant": {
+    "description": "Explanation (“why” line) under an exercise. Another sentence {text} of the same group, its meaning {gloss} and what makes it different ({variant}, e.g. plural).",
+    "placeholders": {
+      "text": {
+        "type": "String",
+        "example": "Das Kind spielt."
+      },
+      "gloss": {
+        "type": "String",
+        "example": "cucumber"
+      },
+      "variant": {
+        "type": "String",
+        "example": "plural"
+      }
+    }
+  },
+  "lc.ui.ask.parseCase": "Which case is each marked word in?",
+  "@lc.ui.ask.parseCase": {
+    "description": "Language course, exercise instruction (the question above the answers). Choose the grammatical case of every marked word of the sentence."
+  },
+  "lc.ui.ask.parsePos": "Which part of speech is each word?",
+  "@lc.ui.ask.parsePos": {
+    "description": "Language course, exercise instruction (the question above the answers). Choose the part of speech of every word of the sentence."
+  },
+  "lc.ui.ask.glossReverse": "Choose the word for every gloss",
+  "@lc.ui.ask.glossReverse": {
+    "description": "Language course, exercise instruction (the question above the answers). Interlinear gloss in reverse: a gloss is shown under every gap; choose the word."
+  },
+  "lc.ui.ask.gloss": "Gloss every word (meaning.FEATURES)",
+  "@lc.ui.ask.gloss": {
+    "description": "Language course, exercise instruction (the question above the answers). Choose the interlinear gloss of every word, written as meaning.FEATURES (e.g. carrot.ACC.SG) — keep “meaning.FEATURES” as a pattern, translate “meaning” if you like."
+  },
+  "lc.expl.agreeWith": "{label}, to agree with {word}",
+  "@lc.expl.agreeWith": {
+    "description": "Explanation (“why” line) under an exercise. Proofreading: the right form ({label}, e.g. “plural”) is needed to agree with the word {word}.",
+    "placeholders": {
+      "label": {
+        "type": "String",
+        "example": "plural"
+      },
+      "word": {
+        "type": "String",
+        "example": "Gurke"
+      }
+    }
+  },
+  "lc.expl.takesMeasure": "{noun} takes {measures}",
+  "@lc.expl.takesMeasure": {
+    "description": "Explanation (“why” line) under an exercise. Chinese: the noun {noun} takes the measure word(s) {measures}.",
+    "placeholders": {
+      "noun": {
+        "type": "String",
+        "example": "书"
+      },
+      "measures": {
+        "type": "String",
+        "example": "本"
+      }
+    }
+  },
+  "lc.expl.reg.neutral": "neutral",
+  "@lc.expl.reg.neutral": {
+    "description": "Language course: a register a word is used in, shown in brackets after a word, e.g. “(formal, literary)”. Lower case, short."
+  },
+  "lc.expl.reg.colloquial": "colloquial",
+  "@lc.expl.reg.colloquial": {
+    "description": "Language course: a register a word is used in, shown in brackets after a word, e.g. “(formal, literary)”. Lower case, short."
+  },
+  "lc.expl.reg.formal": "formal",
+  "@lc.expl.reg.formal": {
+    "description": "Language course: a register a word is used in, shown in brackets after a word, e.g. “(formal, literary)”. Lower case, short."
+  },
+  "lc.expl.reg.informal": "informal",
+  "@lc.expl.reg.informal": {
+    "description": "Language course: a register a word is used in, shown in brackets after a word, e.g. “(formal, literary)”. Lower case, short."
+  },
+  "lc.expl.reg.literary": "literary",
+  "@lc.expl.reg.literary": {
+    "description": "Language course: a register a word is used in, shown in brackets after a word, e.g. “(formal, literary)”. Lower case, short."
+  },
+  "lc.expl.reg.regional": "regional",
+  "@lc.expl.reg.regional": {
+    "description": "Language course: a register a word is used in, shown in brackets after a word, e.g. “(formal, literary)”. Lower case, short."
+  },
+  "lc.expl.reg.technical": "technical",
+  "@lc.expl.reg.technical": {
+    "description": "Language course: a register a word is used in, shown in brackets after a word, e.g. “(formal, literary)”. Lower case, short."
+  },
+  "lc.expl.reg.religious": "religious",
+  "@lc.expl.reg.religious": {
+    "description": "Language course: a register a word is used in, shown in brackets after a word, e.g. “(formal, literary)”. Lower case, short."
+  },
+  "lc.expl.reg.slang": "slang",
+  "@lc.expl.reg.slang": {
+    "description": "Language course: a register a word is used in, shown in brackets after a word, e.g. “(formal, literary)”. Lower case, short."
+  },
+  "lc.expl.reg.dated": "dated",
+  "@lc.expl.reg.dated": {
+    "description": "Language course: a register a word is used in, shown in brackets after a word, e.g. “(formal, literary)”. Lower case, short."
+  },
+  "lc.expl.reg.honorific": "honorific",
+  "@lc.expl.reg.honorific": {
+    "description": "Language course: a register a word is used in (respectful), shown in brackets after a word, e.g. “(formal, literary)”. Lower case, short."
+  },
+  "lc.expl.reg.archaic": "archaic",
+  "@lc.expl.reg.archaic": {
+    "description": "Language course: a register a word is used in, shown in brackets after a word, e.g. “(formal, literary)”. Lower case, short."
+  },
+  "lc.expl.reg.humorous": "humorous",
+  "@lc.expl.reg.humorous": {
+    "description": "Language course: a register a word is used in, shown in brackets after a word, e.g. “(formal, literary)”. Lower case, short."
+  },
+  "lc.expl.reg.pejorative": "pejorative",
+  "@lc.expl.reg.pejorative": {
+    "description": "Language course: a register a word is used in, shown in brackets after a word, e.g. “(formal, literary)”. Lower case, short."
+  },
+  "lc.expl.reg.children": "children",
+  "@lc.expl.reg.children": {
+    "description": "Language course: a register a word is used in (used with small children), shown in brackets after a word, e.g. “(formal, literary)”. Lower case, short."
+  },
+  "lc.expl.reg.euphemistic": "euphemistic",
+  "@lc.expl.reg.euphemistic": {
+    "description": "Language course: a register a word is used in, shown in brackets after a word, e.g. “(formal, literary)”. Lower case, short."
+  },
+  "lc.expl.reg.dialectal": "dialectal",
+  "@lc.expl.reg.dialectal": {
+    "description": "Language course: a register a word is used in, shown in brackets after a word, e.g. “(formal, literary)”. Lower case, short."
+  },
+  "lc.expl.reg.poetic": "poetic",
+  "@lc.expl.reg.poetic": {
+    "description": "Language course: a register a word is used in, shown in brackets after a word, e.g. “(formal, literary)”. Lower case, short."
+  },
+  "lc.expl.reg.vulgar": "vulgar",
+  "@lc.expl.reg.vulgar": {
+    "description": "Language course: a register a word is used in, shown in brackets after a word, e.g. “(formal, literary)”. Lower case, short."
+  },
+  "lc.expl.reg.obsolete": "obsolete",
+  "@lc.expl.reg.obsolete": {
+    "description": "Language course: a register a word is used in, shown in brackets after a word, e.g. “(formal, literary)”. Lower case, short."
+  },
+  "lc.expl.phraseKind.idiom": "idiom",
+  "@lc.expl.phraseKind.idiom": {
+    "description": "Language course: the kind of an expression (shown in “What does it mean (idiom)?”). Lower case, short."
+  },
+  "lc.expl.phraseKind.proverb": "proverb",
+  "@lc.expl.phraseKind.proverb": {
+    "description": "Language course: the kind of an expression (shown in “What does it mean (idiom)?”). Lower case, short."
+  },
+  "lc.expl.phraseKind.saying": "saying",
+  "@lc.expl.phraseKind.saying": {
+    "description": "Language course: the kind of an expression (shown in “What does it mean (idiom)?”). Lower case, short."
+  },
+  "lc.expl.phraseKind.quote": "quote",
+  "@lc.expl.phraseKind.quote": {
+    "description": "Language course: the kind of an expression (shown in “What does it mean (idiom)?”). Lower case, short."
+  },
+  "lc.expl.phraseKind.colloquial": "colloquial",
+  "@lc.expl.phraseKind.colloquial": {
+    "description": "Language course: the kind of an expression (shown in “What does it mean (idiom)?”). Lower case, short."
+  },
+  "lc.expl.phraseKind.phrase": "phrase",
+  "@lc.expl.phraseKind.phrase": {
+    "description": "Language course: the kind of an expression (shown in “What does it mean (idiom)?”). Lower case, short."
+  },
+  "lc.expl.rootOf": "{word} — root {root}",
+  "@lc.expl.rootOf": {
+    "description": "Explanation (“why” line) under an exercise. The word {word} and its root {root}.",
+    "placeholders": {
+      "word": {
+        "type": "String",
+        "example": "Gurke"
+      },
+      "root": {
+        "type": "String",
+        "example": "k t b"
+      }
+    }
+  },
+  "lc.expl.rootFamily": "{word} — root {root}. The same root: {family}",
+  "@lc.expl.rootFamily": {
+    "description": "Explanation (“why” line) under an exercise. The word {word}, its root {root}, then other words with the same root ({family}: words with their meanings in brackets).",
+    "placeholders": {
+      "word": {
+        "type": "String",
+        "example": "Gurke"
+      },
+      "root": {
+        "type": "String",
+        "example": "k t b"
+      },
+      "family": {
+        "type": "String",
+        "example": "كَاتِب (writer)"
+      }
+    }
+  },
+  "lc.ui.ask.sortByRoot": "Sort the words by their root",
+  "@lc.ui.ask.sortByRoot": {
+    "description": "Language course, exercise instruction (the question above the answers). Put the words into two groups, one per root."
+  },
+  "lc.ui.ask.whereSplit": "Where does it split?",
+  "@lc.ui.ask.whereSplit": {
+    "description": "Language course, exercise instruction (the question above the answers). A compound word: choose where it splits into its parts."
+  },
+  "lc.ui.ask.andArticle": "And its article?",
+  "@lc.ui.ask.andArticle": {
+    "description": "Language course, exercise instruction (the question above the answers). Second step after splitting a German compound: choose its article (der / die / das)."
+  },
+  "lc.ui.ask.andGender": "And its gender?",
+  "@lc.ui.ask.andGender": {
+    "description": "Language course, exercise instruction (the question above the answers). Second step after splitting a compound: choose its gender."
+  },
+  "lc.expl.compoundHead": "{split} — the last part, {last}, is the head: it decides the gender{hasGender, select, yes { ({gender}{hasExample, select, yes {, as in {example}} other {}}){hasArticle, select, yes {: {withArticle}} other {}}} other {}}.",
+  "@lc.expl.compoundHead": {
+    "description": "Explanation (“why” line) under an exercise. A compound {split} (its parts joined with ·), its last part {last}; {gender} = masculine / feminine / neuter; {example} = the last part as a word of its own; {withArticle} = the compound with its German article.",
+    "placeholders": {
+      "split": {
+        "type": "String",
+        "example": "Kranken·haus"
+      },
+      "last": {
+        "type": "String",
+        "example": "haus"
+      },
+      "hasGender": {
+        "type": "String",
+        "example": "yes"
+      },
+      "gender": {
+        "type": "String",
+        "example": "neuter"
+      },
+      "hasExample": {
+        "type": "String",
+        "example": "yes"
+      },
+      "example": {
+        "type": "String",
+        "example": "das Haus"
+      },
+      "hasArticle": {
+        "type": "String",
+        "example": "yes"
+      },
+      "withArticle": {
+        "type": "String",
+        "example": "das Krankenhaus"
+      }
+    }
+  },
+  "lc.expl.senseSplit": "“{gloss}”: {words}",
+  "@lc.expl.senseSplit": {
+    "description": "Explanation (“why” line) under an exercise. A meaning {gloss} and the words that share it ({words}), each with what separates it.",
+    "placeholders": {
+      "gloss": {
+        "type": "String",
+        "example": "cucumber"
+      },
+      "words": {
+        "type": "String",
+        "example": "kennen = a person · wissen = a fact"
+      }
+    }
+  },
+  "lc.expl.senseSplitAxis": "“{gloss}” — {axis}: {words}",
+  "@lc.expl.senseSplitAxis": {
+    "description": "Explanation (“why” line) under an exercise. A meaning {gloss}, what separates its words ({axis}, e.g. register) and the words ({words}).",
+    "placeholders": {
+      "gloss": {
+        "type": "String",
+        "example": "cucumber"
+      },
+      "axis": {
+        "type": "String",
+        "example": "register"
+      },
+      "words": {
+        "type": "String",
+        "example": "kennen = a person · wissen = a fact"
+      }
+    }
+  },
+  "lc.ui.ask.fillGap": "Which word fills the gap?",
+  "@lc.ui.ask.fillGap": {
+    "description": "Language course, exercise instruction (the question above the answers). A sentence with a gap: choose the word that fits."
+  },
+  "lc.ui.ask.sortGaps": "Which word goes in each gap? Sort the sentences",
+  "@lc.ui.ask.sortGaps": {
+    "description": "Language course, exercise instruction (the question above the answers). Sort sentences with a gap under the words that fill them."
+  },
+  "lc.ui.ask.goesWith": "What goes with {word} here?",
+  "@lc.ui.ask.goesWith": {
+    "description": "Language course, exercise instruction (the question above the answers). Collocation: choose the words that go with {word} (a word of the language learned) in the sentence.",
+    "placeholders": {
+      "word": {
+        "type": "String",
+        "example": "Gurke"
+      }
+    }
+  },
+  "lc.ui.ask.whichWord": "Which word is it?",
+  "@lc.ui.ask.whichWord": {
+    "description": "Language course, exercise instruction (the question above the answers). A clue is shown: choose the word."
+  },
+  "lc.ui.ask.whichMeans": "Which one means “{gloss}”?",
+  "@lc.ui.ask.whichMeans": {
+    "description": "Language course, exercise instruction (the question above the answers). Words that look alike: choose the one with the meaning {gloss}.",
+    "placeholders": {
+      "gloss": {
+        "type": "String",
+        "example": "cucumber"
+      }
+    }
+  },
+  "lc.ui.prompt.lookAlike": "Words that look alike",
+  "@lc.ui.prompt.lookAlike": {
+    "description": "Language course: the line above a set of words that look alike (confusables exercise)."
+  },
+  "lc.ui.ask.weakestFirst": "Put them in order: the weakest first",
+  "@lc.ui.ask.weakestFirst": {
+    "description": "Language course, exercise instruction (the question above the answers). Order words by strength (intensity)."
+  },
+  "lc.ui.ask.stronger": "Which is stronger?",
+  "@lc.ui.ask.stronger": {
+    "description": "Language course, exercise instruction (the question above the answers). Choose the stronger of the words."
+  },
+  "lc.ui.ask.registerFits": "Which word fits {reg, select, formal {in a formal letter or an official text} informal {talking to family and friends} colloquial {chatting with friends} slang {in slang, among young people} literary {in literature} poetic {in poetry} technical {in a technical or specialist text} honorific {speaking respectfully to someone} neutral {in everyday neutral speech} dated {in older texts (dated)} archaic {in very old texts (archaic)} humorous {as a joke} pejorative {to sound disparaging} euphemistic {to put it gently (a euphemism)} children {talking to small children} religious {in a religious context} vulgar {vulgarly} dialectal {in a dialect} regional {in one region (a regional word)} regionalNamed {in {region}} other {in {reg} use}}?",
+  "@lc.ui.ask.registerFits": {
+    "description": "Language course, exercise instruction (the question above the answers). Register: choose the word that fits a situation. {reg} = the register; {region} = a region’s name (regionalNamed); “other” shows the register as written.",
+    "placeholders": {
+      "reg": {
+        "type": "String",
+        "example": "formal"
+      },
+      "vulgarly": {
+        "type": "String",
+        "example": ""
+      },
+      "region": {
+        "type": "String",
+        "example": "Austria"
+      }
+    }
+  },
+  "lc.ui.prompt.wordsAround": "Words around “{gloss}”",
+  "@lc.ui.prompt.wordsAround": {
+    "description": "Language course, register exercise: the line above the words, {gloss} = their shared meaning.",
+    "placeholders": {
+      "gloss": {
+        "type": "String",
+        "example": "cucumber"
+      }
+    }
+  },
+  "lc.ui.ask.nuance": "Which word has this nuance?",
+  "@lc.ui.ask.nuance": {
+    "description": "Language course, exercise instruction (the question above the answers). A nuance is described: choose the word."
+  },
+  "lc.ui.ask.feeling": "What feeling does it carry?",
+  "@lc.ui.ask.feeling": {
+    "description": "Language course, exercise instruction (the question above the answers). Choose the connotation of the word (positive, neutral, negative, mixed)."
+  },
+  "lc.ui.connotation.positive": "positive",
+  "@lc.ui.connotation.positive": {
+    "description": "Language course, “What feeling does it carry?”: an answer option (the connotation of a word). Lower case."
+  },
+  "lc.ui.connotation.neutral": "neutral",
+  "@lc.ui.connotation.neutral": {
+    "description": "Language course, “What feeling does it carry?”: an answer option (the connotation of a word). Lower case."
+  },
+  "lc.ui.connotation.negative": "negative",
+  "@lc.ui.connotation.negative": {
+    "description": "Language course, “What feeling does it carry?”: an answer option (the connotation of a word). Lower case."
+  },
+  "lc.ui.connotation.mixed": "mixed",
+  "@lc.ui.connotation.mixed": {
+    "description": "Language course, “What feeling does it carry?”: an answer option (the connotation of a word). Lower case."
+  },
+  "lc.ui.ask.meaningOfKind": "What does it mean ({kind})?",
+  "@lc.ui.ask.meaningOfKind": {
+    "description": "Language course, exercise instruction (the question above the answers). An expression is shown: choose its meaning. {kind} = idiom, proverb, saying …",
+    "placeholders": {
+      "kind": {
+        "type": "String",
+        "example": "idiom"
+      }
+    }
+  },
+  "lc.ui.ask.whichExpression": "Which expression says this?",
+  "@lc.ui.ask.whichExpression": {
+    "description": "Language course, exercise instruction (the question above the answers). A meaning is shown: choose the expression (idiom, proverb …) that says it."
+  },
+  "lc.ui.ask.whichMeaning": "Which meaning of {word} is used here?",
+  "@lc.ui.ask.whichMeaning": {
+    "description": "Language course, exercise instruction (the question above the answers). A sentence is shown: choose the meaning of the word {word} (a word of the language learned) in it.",
+    "placeholders": {
+      "word": {
+        "type": "String",
+        "example": "Gurke"
+      }
+    }
+  },
+  "lc.ui.ask.comesFrom": "Which word comes from this?",
+  "@lc.ui.ask.comesFrom": {
+    "description": "Language course, exercise instruction (the question above the answers). An etymology is shown (the word hidden): choose the word."
+  },
+  "lc.expl.bridgeSource": "Both from {lang} {word}.",
+  "@lc.expl.bridgeSource": {
+    "description": "Language course, related words across languages: both words were borrowed from the word {word} of the language {lang} (an English name, e.g. French).",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "German"
+      },
+      "word": {
+        "type": "String",
+        "example": "Gurke"
+      }
+    }
+  },
+  "lc.expl.bridgeRoots": "Root {a} ↔ {b}: the same radicals by the regular sound correspondences, and a meaning in common.",
+  "@lc.expl.bridgeRoots": {
+    "description": "Language course, related words: an Arabic root {a} and a Hebrew root {b} correspond.",
+    "placeholders": {
+      "a": {
+        "type": "String",
+        "example": "nominative"
+      },
+      "b": {
+        "type": "String",
+        "example": "accusative"
+      }
+    }
+  },
+  "lc.expl.statusStatement": "This language {status, select, realized {has a form or construction of its own for it} periphrastic {says it with other means (other words, word order)} absent {does not mark it at all} other {{status}}}.",
+  "@lc.expl.statusStatement": {
+    "description": "Language course, comparing a grammar point across the languages: a statement the learner matches with the languages it is true for. {status} = how the language expresses the point.",
+    "placeholders": {
+      "status": {
+        "type": "String",
+        "example": "realized"
+      }
+    }
+  },
+  "lc.expl.compareStatement": "{feature}: {value}",
+  "@lc.expl.compareStatement": {
+    "description": "Language course, comparing a grammar point across the languages: a statement the learner matches with the languages it is true for — a feature of the point and its value (both from the course, e.g. “Article position: before the noun”). Explanation language (D19).",
+    "placeholders": {
+      "feature": {
+        "type": "String",
+        "example": "Article position"
+      },
+      "value": {
+        "type": "String",
+        "example": "before the noun"
+      }
+    }
+  },
+  "lc.expl.compareWhy": "{title}: {rows}",
+  "@lc.expl.compareWhy": {
+    "description": "Language course, comparing a grammar point across the languages: the explanation after the answer — the point’s title, then one row per language (lc.expl.compareWhyRow, joined with “ · ”). Explanation language (D19).",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "The definite article"
+      },
+      "rows": {
+        "type": "String",
+        "example": "de — German marks it with an article. · el — Greek marks it with an article."
+      }
+    }
+  },
+  "lc.expl.compareWhyRow": "{lang} — {rule}",
+  "@lc.expl.compareWhyRow": {
+    "description": "Language course, the explanation of a comparison: one language’s row — {lang} = its ISO code (e.g. “de”), {rule} = the first sentence of that language’s grammar page for the point. Explanation language (D19).",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "de"
+      },
+      "rule": {
+        "type": "String",
+        "example": "German marks it with an article."
+      }
+    }
+  },
+  "lc.ui.expand.time": "Add when it happens (a time word).",
+  "@lc.ui.expand.time": {
+    "description": "Language course, “expand” writing exercise: what the learner adds to a sentence. Imperative."
+  },
+  "lc.ui.expand.place": "Add where it happens (a place).",
+  "@lc.ui.expand.place": {
+    "description": "Language course, “expand” writing exercise: what the learner adds to a sentence. Imperative."
+  },
+  "lc.ui.expand.describe": "Add a describing word (an adjective).",
+  "@lc.ui.expand.describe": {
+    "description": "Language course, “expand” writing exercise: what the learner adds to a sentence. Imperative."
+  },
+  "lc.ui.expand.reason": "Add a reason (because …).",
+  "@lc.ui.expand.reason": {
+    "description": "Language course, “expand” writing exercise: what the learner adds to a sentence. Imperative."
+  },
+  "lc.ui.expand.and": "Add a second sentence joined with “and” or “but”.",
+  "@lc.ui.expand.and": {
+    "description": "Language course, “expand” writing exercise: what the learner adds to a sentence. Imperative."
+  },
+  "lc.ui.rewrite.otherWords": "Say the same thing in other words.",
+  "@lc.ui.rewrite.otherWords": {
+    "description": "Language course, rewrite exercise: the task (a paraphrase). Imperative."
+  },
+  "lc.ui.compose.task": "Write {type, select, message {a short message to a friend} description {a short description} other {a short story of what happened}} ({sentences} sentences) about “{topic}”.",
+  "@lc.ui.compose.task": {
+    "description": "Language course, guided writing: the task. {sentences} = a range such as 2–3; {topic} = the lesson’s title.",
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "example": "message"
+      },
+      "sentences": {
+        "type": "String",
+        "example": "2–3"
+      },
+      "topic": {
+        "type": "String",
+        "example": "Food"
+      }
+    }
+  },
+  "lc.ui.ask.textSays": "Which of these does the text say?",
+  "@lc.ui.ask.textSays": {
+    "description": "Language course, exercise instruction (the question above the answers). Reading: a comprehension question under a short text."
+  },
+  "lc.ui.ask.numberInWords": "{masc, select, yes {How do you say it in words? (the form used with masculine nouns)} other {How do you say it in words?}}",
+  "@lc.ui.ask.numberInWords": {
+    "description": "Language course, exercise instruction (the question above the answers). A number in digits: choose it in words (Arabic / Hebrew: the form used with masculine nouns).",
+    "placeholders": {
+      "masc": {
+        "type": "String",
+        "example": "yes"
+      }
+    }
+  },
+  "lc.ui.ask.whichNumber": "Which number is it?",
+  "@lc.ui.ask.whichNumber": {
+    "description": "Language course, exercise instruction (the question above the answers). A number in words: choose it in digits."
+  },
+  "lc.ui.ask.countingPlural": "{n} — {gloss} (plural): which is right?",
+  "@lc.ui.ask.countingPlural": {
+    "description": "Language course, exercise instruction (the question above the answers). Arabic / Hebrew counting: {n} things, {gloss} = what is counted; choose the right number form.",
+    "placeholders": {
+      "n": {
+        "type": "String",
+        "example": "3"
+      },
+      "gloss": {
+        "type": "String",
+        "example": "cucumber"
+      }
+    }
+  },
+  "lc.expl.countingGender": "{noun} is {gender} → {phrase}. From 3 to 10 the number takes the form of the other gender (the form in -a goes with masculine nouns).",
+  "@lc.expl.countingGender": {
+    "description": "Explanation (“why” line) under an exercise. Arabic / Hebrew: {noun} is a noun, {gender} masculine or feminine, {phrase} the number with the noun.",
+    "placeholders": {
+      "noun": {
+        "type": "String",
+        "example": "书"
+      },
+      "gender": {
+        "type": "String",
+        "example": "neuter"
+      },
+      "phrase": {
+        "type": "String",
+        "example": "ثَلَاثَةُ كُتُبٍ"
+      }
+    }
+  },
+  "lc.ui.ask.countingTwo": "two {gloss}: which is right?",
+  "@lc.ui.ask.countingTwo": {
+    "description": "Language course, exercise instruction (the question above the answers). Chinese: “two” things ({gloss} = what is counted); choose 两 or 二. Lower case.",
+    "placeholders": {
+      "gloss": {
+        "type": "String",
+        "example": "cucumber"
+      }
+    }
+  },
+  "lc.expl.liang": "{phrase} — before a measure word “two” is 两; 二 is for counting and inside numbers (十二, 二十).",
+  "@lc.expl.liang": {
+    "description": "Explanation (“why” line) under an exercise. Chinese 两 and 二; keep the characters.",
+    "placeholders": {
+      "phrase": {
+        "type": "String",
+        "example": "ثَلَاثَةُ كُتُبٍ"
+      }
+    }
+  },
+  "lc.ui.ask.whichSentenceTime": "Which sentence says this time?",
+  "@lc.ui.ask.whichSentenceTime": {
+    "description": "Language course, exercise instruction (the question above the answers). A clock time is shown: choose the sentence."
+  },
+  "lc.ui.ask.whatTime": "What time does it say?",
+  "@lc.ui.ask.whatTime": {
+    "description": "Language course, exercise instruction (the question above the answers). A sentence is shown: choose the time it says."
+  },
+  "lc.ui.ask.whichMonth": "Which month is it?",
+  "@lc.ui.ask.whichMonth": {
+    "description": "Language course, exercise instruction (the question above the answers). A month number is shown: choose the month’s name."
+  },
+  "lc.ui.ask.monthNumber": "Which month is it (its number)?",
+  "@lc.ui.ask.monthNumber": {
+    "description": "Language course, exercise instruction (the question above the answers). A month name is shown: choose its number."
+  },
+  "lc.ui.ask.nextDay": "Which day comes after it?",
+  "@lc.ui.ask.nextDay": {
+    "description": "Language course, exercise instruction (the question above the answers). A day of the week is shown: choose the next day."
+  },
+  "lc.ui.ask.ordinal": "{n, plural, =1 {The first: which word?} =2 {The second: which word?} =3 {The third: which word?} =4 {The fourth: which word?} =5 {The fifth: which word?} =6 {The sixth: which word?} =7 {The seventh: which word?} =8 {The eighth: which word?} =9 {The ninth: which word?} =10 {The tenth: which word?} =11 {The eleventh: which word?} =12 {The twelfth: which word?} =13 {The thirteenth: which word?} =14 {The fourteenth: which word?} =15 {The fifteenth: which word?} =16 {The sixteenth: which word?} =17 {The seventeenth: which word?} =18 {The eighteenth: which word?} =19 {The nineteenth: which word?} =20 {The twentieth: which word?} =21 {The twenty-first: which word?} =22 {The twenty-second: which word?} =23 {The twenty-third: which word?} =24 {The twenty-fourth: which word?} =25 {The twenty-fifth: which word?} =26 {The twenty-sixth: which word?} =27 {The twenty-seventh: which word?} =28 {The twenty-eighth: which word?} =29 {The twenty-ninth: which word?} =30 {The thirtieth: which word?} =31 {The thirty-first: which word?} other {The #th: which word?}}",
+  "@lc.ui.ask.ordinal": {
+    "description": "Language course, exercise instruction (the question above the answers). An ordinal number is shown in digits (1., 2. …): choose the word. {n} = 1–31; a language may use `other` with # alone (e.g. “The #th”).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "lc.ui.ask.whichDate": "Which date does it say?",
+  "@lc.ui.ask.whichDate": {
+    "description": "Language course, exercise instruction (the question above the answers). A sentence is shown: choose the date it says."
+  },
+  "lc.ui.ask.whichPolite": "Which one is polite (formal)?",
+  "@lc.ui.ask.whichPolite": {
+    "description": "Language course, exercise instruction (the question above the answers). Two sentences: choose the polite (formal) one."
+  },
+  "lc.ui.ask.whichInformal": "Which one is informal (familiar)?",
+  "@lc.ui.ask.whichInformal": {
+    "description": "Language course, exercise instruction (the question above the answers). Two sentences: choose the informal one."
+  },
+  "lc.ui.ask.toWoman": "Which one do you say to a woman?",
+  "@lc.ui.ask.toWoman": {
+    "description": "Language course, exercise instruction (the question above the answers). Two sentences: choose the one addressed to a woman."
+  },
+  "lc.ui.ask.toMan": "Which one do you say to a man?",
+  "@lc.ui.ask.toMan": {
+    "description": "Language course, exercise instruction (the question above the answers). Two sentences: choose the one addressed to a man."
+  },
+  "lc.ui.ask.toSeveral": "Which one do you say to several people?",
+  "@lc.ui.ask.toSeveral": {
+    "description": "Language course, exercise instruction (the question above the answers). Two sentences: choose the one addressed to several people."
+  },
+  "lc.ui.ask.fitsAnswer": "What fits as the answer?",
+  "@lc.ui.ask.fitsAnswer": {
+    "description": "Language course, exercise instruction (the question above the answers). Dialogue: a line is shown; choose the reply."
+  },
+  "lc.ui.course.needsTitle": "A course needs a title.",
+  "@lc.ui.course.needsTitle": {
+    "description": "Language course, new course made through Claude: error when the title is empty."
+  },
+  "lc.ui.course.needsLanguage": "Choose at least one language.",
+  "@lc.ui.course.needsLanguage": {
+    "description": "Language course, new course made through Claude: error when no language is chosen."
+  },
+  "lc.ui.claudeLog.core": "the core: {nodes, plural, one {{nodes} nodes} other {{nodes} nodes}}, {concepts, plural, one {{concepts} concepts} other {{concepts} concepts}}, {functions, plural, one {{functions} grammar points} other {{functions} grammar points}}, {frames, plural, one {{frames} frames} other {{frames} frames}}",
+  "@lc.ui.claudeLog.core": {
+    "description": "Language course, “What Claude wrote” (the log of a course made through Claude): one line after Claude’s answer was merged. (English keeps the plural even for 1, as the stored English line does.) The core of the course: its numbers of nodes (lessons and word groups), concepts, grammar points and sentence frames.",
+    "placeholders": {
+      "nodes": {
+        "type": "int",
+        "example": "6"
+      },
+      "concepts": {
+        "type": "int",
+        "example": "120"
+      },
+      "functions": {
+        "type": "int",
+        "example": "14"
+      },
+      "frames": {
+        "type": "int",
+        "example": "9"
+      }
+    }
+  },
+  "lc.ui.claudeLog.node": "{node} in {lang}: {words, plural, one {{words} words} other {{words} words}}, {absent} absent, {sentences, plural, one {{sentences} sentences} other {{sentences} sentences}}",
+  "@lc.ui.claudeLog.node": {
+    "description": "Language course, “What Claude wrote” (the log of a course made through Claude): one line after Claude’s answer was merged. (English keeps the plural even for 1, as the stored English line does.) {node} = a node id (fd.03 …), {lang} = a language name; {absent} = concepts the language has no word for.",
+    "placeholders": {
+      "node": {
+        "type": "String",
+        "example": "fd.03"
+      },
+      "lang": {
+        "type": "String",
+        "example": "German"
+      },
+      "words": {
+        "type": "int",
+        "example": "12"
+      },
+      "absent": {
+        "type": "String",
+        "example": "1"
+      },
+      "sentences": {
+        "type": "int",
+        "example": "8"
+      }
+    }
+  },
+  "lc.ui.claudeLog.function": "{fn} in {lang}: the realization + {sentences, plural, one {{sentences} sentences} other {{sentences} sentences}}",
+  "@lc.ui.claudeLog.function": {
+    "description": "Language course, “What Claude wrote” (the log of a course made through Claude): one line after Claude’s answer was merged. (English keeps the plural even for 1, as the stored English line does.) {fn} = a grammar point id (fn.past …); the realization = its grammar page in the language {lang}.",
+    "placeholders": {
+      "fn": {
+        "type": "String",
+        "example": "fn.past"
+      },
+      "lang": {
+        "type": "String",
+        "example": "German"
+      },
+      "sentences": {
+        "type": "int",
+        "example": "8"
+      }
+    }
+  },
+  "lc.ui.claudeLog.compare": "{fn} compared across {n, plural, one {{n} languages} other {{n} languages}}",
+  "@lc.ui.claudeLog.compare": {
+    "description": "Language course, “What Claude wrote” (the log of a course made through Claude): one line after Claude’s answer was merged. (English keeps the plural even for 1, as the stored English line does.) {fn} = a grammar point id.",
+    "placeholders": {
+      "fn": {
+        "type": "String",
+        "example": "fn.past"
+      },
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "lc.ui.claudeLog.refill": "{n, plural, one {{n} new sentences} other {{n} new sentences}} for {fn} in {lang} with the words you know",
+  "@lc.ui.claudeLog.refill": {
+    "description": "Language course, “What Claude wrote” (the log of a course made through Claude): one line after Claude’s answer was merged. (English keeps the plural even for 1, as the stored English line does.) New practice sentences for the grammar point {fn} in the language {lang}.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      },
+      "fn": {
+        "type": "String",
+        "example": "fn.past"
+      },
+      "lang": {
+        "type": "String",
+        "example": "German"
+      }
+    }
+  },
+  "lc.expl.tone.1": "1st tone",
+  "@lc.expl.tone.1": {
+    "description": "Language course, Chinese: the name of a tone, in explanations of listening exercises."
+  },
+  "lc.expl.tone.2": "2nd tone",
+  "@lc.expl.tone.2": {
+    "description": "Language course, Chinese: the name of a tone, in explanations of listening exercises."
+  },
+  "lc.expl.tone.3": "3rd tone",
+  "@lc.expl.tone.3": {
+    "description": "Language course, Chinese: the name of a tone, in explanations of listening exercises."
+  },
+  "lc.expl.tone.4": "4th tone",
+  "@lc.expl.tone.4": {
+    "description": "Language course, Chinese: the name of a tone, in explanations of listening exercises."
+  },
+  "lc.expl.tone.5": "neutral tone",
+  "@lc.expl.tone.5": {
+    "description": "Language course, Chinese: the name of a tone, in explanations of listening exercises."
+  },
+  "lc.ui.ask.listenWord": "Listen — which word is it?",
+  "@lc.ui.ask.listenWord": {
+    "description": "Language course, exercise instruction (the question above the answers). Listening: a word is spoken; choose it."
+  },
+  "lc.ui.ask.listenMeaning": "Listen — what does it mean?",
+  "@lc.ui.ask.listenMeaning": {
+    "description": "Language course, exercise instruction (the question above the answers). Listening: a word or sentence is spoken; choose its meaning."
+  },
+  "lc.ui.ask.listenTone": "Listen — the tone of {ch} (syllable {at} of {n})?",
+  "@lc.ui.ask.listenTone": {
+    "description": "Language course, exercise instruction (the question above the answers). Chinese listening: choose the tone of the character {ch}, the {at}th syllable of {n}.",
+    "placeholders": {
+      "ch": {
+        "type": "String",
+        "example": "好"
+      },
+      "at": {
+        "type": "String",
+        "example": "2"
+      },
+      "n": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+  "lc.expl.toneChanged": "{word} — said {said} (written {pinyin}: {ch} {from} → {to} in speech)",
+  "@lc.expl.toneChanged": {
+    "description": "Explanation (“why” line) under an exercise. Chinese: the word {word} is said {said} (pinyin); its character {ch} is written with the tone {from} and said with {to}.",
+    "placeholders": {
+      "word": {
+        "type": "String",
+        "example": "Gurke"
+      },
+      "said": {
+        "type": "String",
+        "example": "ní hǎo"
+      },
+      "pinyin": {
+        "type": "String",
+        "example": "nǐ hǎo"
+      },
+      "ch": {
+        "type": "String",
+        "example": "好"
+      },
+      "from": {
+        "type": "String",
+        "example": "Kind"
+      },
+      "to": {
+        "type": "String",
+        "example": "Kinder"
+      }
+    }
+  },
+  "lc.expl.toneSaid": "{word} — said {said} · {ch}: {tone}",
+  "@lc.expl.toneSaid": {
+    "description": "Explanation (“why” line) under an exercise. Chinese: the word {word} is said {said} (pinyin); its character {ch} has the tone {tone}.",
+    "placeholders": {
+      "word": {
+        "type": "String",
+        "example": "Gurke"
+      },
+      "said": {
+        "type": "String",
+        "example": "ní hǎo"
+      },
+      "ch": {
+        "type": "String",
+        "example": "好"
+      },
+      "tone": {
+        "type": "String",
+        "example": "3rd tone"
+      }
+    }
+  }
+}

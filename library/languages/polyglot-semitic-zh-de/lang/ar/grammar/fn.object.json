@@ -331,12 +331,12 @@
   {
    "lang": "de",
    "fn": "fn.object",
-   "note": "German shows the accusative on the article, and only in the masculine (den Tee, einen Apfel; die Milch stays die); Arabic changes the ending of every noun (-a / -an)."
+   "note": "German shows the accusative on the article, and only in the masculine:\n→ den Tee, einen Apfel; die Milch stays die\n\nArabic changes the ending of every noun (-a / -an)."
   },
   {
    "lang": "he",
    "fn": "fn.object",
-   "note": "Hebrew has no case endings: before a definite object it puts אֶת (אֲנִי שׁוֹתֶה אֶת הַקָּפֶה), an indefinite object gets nothing — Arabic marks both with the ending."
+   "note": "Hebrew has no case endings:\n- before a definite object it puts אֶת: אֲנִי שׁוֹתֶה אֶת הַקָּפֶה;\n- an indefinite object gets nothing.\n\nArabic marks both with the ending."
   },
   {
    "lang": "zh",
@@ -367,17 +367,17 @@
   {
    "for": "de",
    "rel": "different",
-   "text": "German marks the accusative only on the article, and only in the masculine (den Tee, einen Apfel); Arabic marks every object on the noun itself: الشَّايَ / شَايًا."
+   "text": "German marks the accusative only on the article, and only in the masculine (den Tee, einen Apfel).\n\nArabic marks **every object on the noun itself**:\n→ الشَّايَ / شَايًا"
   },
   {
    "for": "el",
    "rel": "similar",
-   "text": "Greek marks the object on the article and the ending (τον καφέ); Arabic only on the ending, but for every noun: الشَّايَ / شَايًا."
+   "text": "Greek marks the object on the article and the ending (τον καφέ); Arabic only on the ending, but **for every noun**:\n→ الشَّايَ / شَايًا"
   },
   {
    "for": "tr",
    "rel": "different",
-   "text": "Turkish adds -(y)ı only to a definite object (çayı içiyorum) and leaves an indefinite one bare (çay içiyorum); Arabic marks every object: الشَّايَ / شَايًا."
+   "text": "Turkish adds -(y)ı only to a definite object (çayı içiyorum) and leaves an indefinite one bare (çay içiyorum).\n\nArabic **marks every object**:\n→ الشَّايَ / شَايًا"
   },
   {
    "for": "ru",
@@ -387,17 +387,17 @@
   {
    "for": "es",
    "rel": "different",
-   "text": "Spanish nouns do not change as objects (bebo té) — only people get a (veo a Juan); Arabic marks every object with -a / -an."
+   "text": "Spanish nouns do not change as objects (bebo té) — only people get a (veo a Juan).\n\nArabic marks **every object** with -a / -an."
   },
   {
    "for": "en",
    "rel": "new",
-   "text": "English shows the object only by its place after the verb; Arabic marks it on the noun (-a / -an), so the order can change without changing who does what."
+   "text": "English shows the object only by its place after the verb.\n\nArabic marks it on the noun (-a / -an), so **the order can change without changing who does what**."
   },
   {
    "for": "fr",
    "rel": "different",
-   "text": "French shows the object by its place, and puts object pronouns before the verb (je le mange); Arabic marks the noun with -a / -an and attaches object pronouns after the verb (آكُلُهُ)."
+   "text": "- French shows the object by its place; Arabic marks the noun with -a / -an.\n- French puts object pronouns before the verb (je le mange); Arabic attaches them after the verb (آكُلُهُ)."
   },
   {
    "for": "hi",
@@ -417,7 +417,7 @@
   {
    "for": "ja",
    "rel": "different",
-   "text": "Japanese marks the object with を after the noun (お茶を飲む) and puts the verb last; Arabic changes the noun’s ending and puts the verb first or in the middle."
+   "text": "- Japanese marks the object with を after the noun (お茶を飲む); Arabic changes the noun’s ending.\n- Japanese puts the verb last; Arabic puts it first or in the middle."
   },
   {
    "for": "ko",
@@ -437,7 +437,7 @@
   {
    "for": "sw",
    "rel": "different",
-   "text": "Swahili nouns do not change as objects; an object prefix inside the verb can stand for them (nimekinunua, I have bought it). Arabic marks the object noun with -a / -an and attaches object pronouns as endings (أَشْتَرِيهِ)."
+   "text": "Swahili nouns do not change as objects; an object prefix inside the verb can stand for them:\n→ nimekinunua — I have bought it\n\nArabic marks the object noun with -a / -an and attaches object pronouns as endings:\n→ أَشْتَرِيهِ"
   },
   {
    "for": "lg",
@@ -452,7 +452,52 @@
   {
    "for": "iu",
    "rel": "different",
-   "text": "Inuktitut marks the subject of a transitive verb (ergative) rather than the object, and puts an indefinite object in the -mik case; Arabic always marks the object with the accusative -a / -an."
+   "text": "Inuktitut marks the subject of a transitive verb (ergative) rather than the object, and puts an indefinite object in the -mik case.\n\nArabic always marks the object with the accusative -a / -an."
+  },
+  {
+   "for": "zh",
+   "rel": "new",
+   "text": "Chinese shows the object by its place after the verb (我喝茶) or with 把. Arabic marks **every object on the noun** — so the ending, not the place, says who does what:\n→ أَشْرَبُ الشَّايَ / شَايًا\n\n我爱你 is one Arabic word: أُحِبُّكَ."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "- Italian nouns do not change as objects (bevo il tè); Arabic marks the noun with -a / -an.\n- Italian object pronouns go before the verb (lo bevo); Arabic attaches the pronoun after the verb: أَشْرَبُهُ."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Albanian also marks the object on the noun (pi kafenë, the accusative with the article) and often repeats it with a pronoun before the verb (e pi kafenë).\n\nArabic marks every object with -a / -an and attaches a pronoun **only after the verb**:\n→ أَشْرَبُهَا"
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese nouns do not change as objects (bebo chá), and object pronouns sit next to the verb (bebo-o).\n\nArabic marks **the noun itself** and joins the pronoun to the end of the verb:\n→ أَشْرَبُ الشَّايَ / شَايًا\n→ أَشْرَبُهُ"
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your language marks the object with an ending, Arabic does too — on every noun, whatever its gender:\n- -a with the article: الشَّايَ\n- -an without: شَايًا"
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If you mark (definite) objects with a suffix, note that Arabic marks every object, definite or not — الشَّايَ, شَايًا — and the verb usually comes before it."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "new",
+   "text": "If word order alone shows the object, note that Arabic **adds an ending to it**:\n→ أَشْرَبُ الشَّايَ / شَايًا\n\nObject pronouns are endings on the verb: أُحِبُّكَ."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If your verb already contains the object, note that Arabic keeps a noun object separate (with -a / -an); only a pronoun object joins the verb:\n→ آكُلُهُ"
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "If your language is Semitic, object pronouns as verb endings are familiar (أُحِبُّكَ).\n\nNew may be **the accusative ending -a / -an** on noun objects."
   }
  ]
 }

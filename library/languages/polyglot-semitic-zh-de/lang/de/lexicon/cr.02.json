@@ -28,6 +28,17 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Kindheit"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-heit → die",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a time noun: no diminutive"
     }
    },
    "forms": {
@@ -127,7 +138,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "-heit is the cousin of English -hood: Kindheit – childhood, Mannheit – manhood."
+     "-heit makes abstract nouns: Kindheit, Freiheit, Gesundheit."
     ],
     "pitfalls": [
      "“When I was a child” is als ich ein Kind war or als ich klein war – not *in meinem Kind.",
@@ -136,6 +147,13 @@
     "subtleties": [
      "The adverb of childhood memories is früher (in the past) or als Kind (as a child): Als Kind spielte ich oft im Garten.",
      "Nouns in -heit, -keit, -ung are always feminine: die Kindheit, die Freiheit, die Wohnung."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "-heit is the cousin of English -hood: Kindheit – childhood."
+     }
     ]
    }
   },
@@ -174,6 +192,18 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Spielzeugs",
+     "des Spielzeuges"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (das Zeug)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -269,19 +299,26 @@
      }
     ],
     "etymology": {
-     "text": "Compound of Spiel (“game”) + Zeug (“stuff, gear”), or spielen (“to play”) + Zeug; Zeug is from Middle High German ziuc (“stuff, gear”) and is related to English toy.",
+     "text": "Compound of Spiel (“game”) + Zeug (“stuff, gear”), or spielen (“to play”) + Zeug; Zeug is from Middle High German ziuc (“stuff, gear”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Zeug (stuff, gear) and English toy may be related: Wiktionary connects the two words."
+     "Zeug means stuff, gear: Spielzeug is “play stuff”."
     ],
     "pitfalls": [
      "In the singular Spielzeug often means “toys” as a mass: Er hat viel Spielzeug (lots of toys) – not *viele Spielzeug.",
      "das Spielzeug is neuter like its last part, das Zeug."
     ],
     "subtleties": [
-     "Spielzeuge (plural) counts kinds or pieces; viel Spielzeug (singular) is the usual way to talk about a pile of toys.",
+     "- Spielzeuge (plural) counts kinds or pieces;\n- viel Spielzeug (singular) is the usual way to talk about a pile of toys.",
      "Figuratively: Er ist nur ihr Spielzeug (he is just her plaything)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Zeug is related to English toy."
+     }
     ]
    }
   },
@@ -314,7 +351,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "genitive": [
+     "des Spiels",
+     "des Spieles"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": "das Spielchen (colloquial: a quick game)"
    },
    "forms": {
     "N;NOM;SG": "Spiel",
@@ -449,7 +498,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The Olympic Games are die Olympischen Spiele – plural, like in English."
+     "The Olympic Games are die Olympischen Spiele – plural."
     ],
     "pitfalls": [
      "ein Spiel spielen – the noun and the verb go together naturally; one does not *machen a game.",
@@ -458,6 +507,13 @@
     "subtleties": [
      "auf dem Spiel stehen = to be at stake; aufs Spiel setzen = to put at risk.",
      "Spiel is also play in a machine (a loose part has Spiel – slack) and leeway (Spielraum)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "die Olympischen Spiele is plural, as the Olympic Games are."
+     }
     ]
    }
   },
@@ -512,6 +568,28 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "participle": "ge-",
+    "imperative": [
+     "spiel(e)!",
+     "spielt!",
+     "spielen Sie!"
+    ],
+    "konj2": {
+     "none": "a weak verb: the Konjunktiv II is the Präteritum form (spielte); speech uses würde + infinitive"
+    },
+    "endingAdjust": {
+     "none": "the endings are added regularly"
+    },
+    "spokenPast": "Perfekt",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": {
+     "none": "the verb marks no direction towards or away from the speaker"
+    },
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
     }
    },
    "forms": {
@@ -637,7 +715,7 @@
      }
     ],
     "etymology": {
-     "text": "Inherited from Middle High German spil(e)n, from Old High German spilōn, from Proto-West Germanic *spilōn. Cognate with Bavarian spuin.",
+     "text": "Inherited from Middle High German spil(e)n, from Old High German spilōn, from Proto-West Germanic *spilōn.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -648,7 +726,7 @@
      "Sports and games need no article: Fußball spielen, Tennis spielen, Schach spielen."
     ],
     "subtleties": [
-     "spielen also covers playing music and acting: Klavier spielen (play the piano), eine Rolle spielen (to play a part; also: to matter – Das spielt keine Rolle = it doesn’t matter).",
+     "spielen also covers playing music and acting:\n→ Klavier spielen (play the piano)\n→ eine Rolle spielen (to play a part; also: to matter – Das spielt keine Rolle = it doesn’t matter)",
      "A story spielt somewhere: Der Film spielt in Berlin (is set in Berlin)."
     ]
    }
@@ -688,6 +766,29 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "participle": "ge- after the particle",
+    "imperative": [
+     "wachs(e) auf!",
+     "wachst auf!",
+     "wachsen Sie auf!"
+    ],
+    "konj2": [
+     {
+      "form": "wüchse auf",
+      "use": "rare (würde + infinitive instead)"
+     }
+    ],
+    "endingAdjust": "s-sound stem: du -t (du heißt)",
+    "spokenPast": "Perfekt",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": {
+     "none": "the verb marks no direction towards or away from the speaker"
+    },
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
     }
    },
    "forms": {
@@ -880,6 +981,26 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "participle": "no ge- (unstressed prefix)",
+    "imperative": [
+     "erinnere dich!",
+     "erinnert euch!",
+     "erinnern Sie sich!"
+    ],
+    "konj2": {
+     "none": "a weak verb: the Konjunktiv II is the Präteritum form (erinnerte); speech uses würde + infinitive"
+    },
+    "endingAdjust": "-ern / -eln stem (wir erinnern, ich erinnere)",
+    "spokenPast": "Perfekt",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": {
+     "none": "the verb marks no direction towards or away from the speaker"
+    },
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
     }
    },
    "forms": {
@@ -1055,6 +1176,29 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "participle": "no ge- (unstressed prefix)",
+    "imperative": [
+     "vergiss!",
+     "vergesst!",
+     "vergessen Sie!"
+    ],
+    "konj2": [
+     {
+      "form": "vergäße",
+      "use": "mostly written"
+     }
+    ],
+    "endingAdjust": "s-sound stem: du -t (du heißt)",
+    "spokenPast": "Perfekt",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": {
+     "none": "the verb marks no direction towards or away from the speaker"
+    },
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
     }
    },
    "forms": {
@@ -1183,7 +1327,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English forget and German vergessen are twins: for-/ver- + get/gessen."
+     "vergessen is ver- + an old verb gessen (“to get”)."
     ],
     "pitfalls": [
      "Infinitive and participle are the same: vergessen – ich habe vergessen (no ge-, because ver- is an inseparable prefix).",
@@ -1193,6 +1337,13 @@
     "subtleties": [
      "vergessen also means to leave something behind: Ich habe meinen Schirm im Bus vergessen.",
      "Vergiss es! (forget it!) is an informal “never mind / no way”."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "vergessen and English forget are twins: for-/ver- + get/gessen."
+     }
     ]
    }
   },
@@ -1231,6 +1382,17 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Kindergartens"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (der Garten)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -1319,15 +1481,22 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English borrowed the word kindergarten from German together with Fröbel’s idea."
+     "Friedrich Fröbel named his Kindergarten in 1840; the word travelled abroad with his idea."
     ],
     "pitfalls": [
      "der Kindergarten is masculine like der Garten; plural die Kindergärten.",
      "In German it is for children of about three to six, before school; it is not the first school year."
     ],
     "subtleties": [
-     "in den Kindergarten gehen (to attend) – accusative of direction; im Kindergarten sein (to be there) – dative.",
+     "- in den Kindergarten gehen (to attend) – accusative of direction;\n- im Kindergarten sein (to be there) – dative.",
      "Colloquially Kindergarten also means childish squabbling: Das ist doch Kindergarten!"
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "English kindergarten is this German word."
+     }
     ]
    }
   },
@@ -1358,6 +1527,21 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Nachbarn",
+     "des Nachbars"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Nachbarin",
+      "lexeme": "de:Nachbarin"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -1469,15 +1653,22 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Nachbar and English neighbour share their history: “near” + “dweller”, Bauer being the old word for a dweller before it meant farmer."
+     "Nachbar is “near” + “dweller”: Bauer was the old word for a dweller before it meant farmer."
     ],
     "pitfalls": [
      "A weak noun: den Nachbarn, dem Nachbarn, des Nachbarn (colloquially des Nachbars, and den/dem Nachbar are heard, but the -n forms are the standard).",
      "The plural is Nachbarn – the same as the singular forms after den/dem: context or the article decides."
     ],
     "subtleties": [
-     "The woman is die Nachbarin; for a group of men and women the plural die Nachbarn is used (or Nachbarinnen und Nachbarn).",
-     "English neighbour has the same two parts: neigh- (near) + -bour (dweller, cf. German Bauer)."
+     "The woman is die Nachbarin.\n\nFor a group of men and women the plural die Nachbarn is used (or Nachbarinnen und Nachbarn).",
+     "Nachbar usually takes -n outside the nominative: den Nachbarn, dem Nachbarn; plural die Nachbarn."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English neighbour has the same two parts: neigh- (near) + -bour (dweller, as in Bauer)."
+     }
     ]
    }
   },
@@ -1508,6 +1699,20 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Nachbarin"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-in: a female person → die",
+    "pair": [
+     {
+      "form": "der Nachbar",
+      "lexeme": "de:Nachbar"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -1639,6 +1844,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": {
+     "none": "plural only: no singular"
+    },
+    "number": "plural only",
+    "genderCue": {
+     "none": "plural only: no gender"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "plural only: no diminutive"
     }
    },
    "forms": {
@@ -1730,7 +1948,7 @@
      "Ferien are school (or university) holidays; adults at work have Urlaub: Ich habe im Juli Urlaub."
     ],
     "subtleties": [
-     "In everyday speech Germans just say die Ferien; Schulferien is used when it must be clear (dates, calendars, news).",
+     "In everyday speech Germans just say die Ferien.\n\nSchulferien is used when it must be clear (dates, calendars, news).",
      "In Germany each federal state has its own school-holiday dates, so the summer holidays are staggered."
     ]
    }
@@ -1746,6 +1964,12 @@
    "features": {
     "comparison": {
      "none": "itself the comparative of früh (earlier); in this meaning not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    },
    "ref": {
@@ -1866,12 +2090,19 @@
      "“Früher war alles besser” (everything used to be better) is the classic German grumble about the present."
     ],
     "pitfalls": [
-     "German has no verb form for “used to”: früher (+ the Präteritum or the perfect) does the job – Früher wohnte ich in Berlin.",
+     "For a past habit German uses früher with the Präteritum or the perfect: Früher wohnte ich in Berlin.",
      "früher is also simply “earlier”: Komm bitte früher! (Please come earlier!) – the context decides."
     ],
     "subtleties": [
      "früher contrasts with heute (today, nowadays): Früher war alles anders – heute …",
      "The adjective früher means former: mein früherer Lehrer (my former teacher)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "German has no verb form for “used to”: I used to live in Berlin = Früher wohnte ich in Berlin."
+     }
     ]
    }
   }

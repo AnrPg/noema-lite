@@ -66,7 +66,7 @@
      "הַתַּחֲנָה קְרוֹבָה לַבַּיִת. · זֶה רָחוֹק מִכָּאן."
     ]
    ],
-   "caption": "No verb “is” in the present: thing + preposition + place.",
+   "caption": "No verb “to be” in the present: thing + preposition + place.",
    "typology": [
     {
      "feature": "syn.adpositions",
@@ -390,22 +390,22 @@
   {
    "for": "el",
    "rel": "similar",
-   "text": "Greek builds the same picture, often with two words: πάνω στο τραπέζι (עַל), κάτω από (מִתַּחַת לְ), δίπλα σε (לְיַד), μπροστά από (לִפְנֵי), πίσω από (מֵאֲחוֹרֵי), ανάμεσα σε (בֵּין). Like κοντά σε / μακριά από, Hebrew says קָרוֹב לְ / רָחוֹק מִ."
+   "text": "Greek builds the same picture, often with two words:\n→ πάνω στο τραπέζι (עַל), κάτω από (מִתַּחַת לְ), δίπλα σε (לְיַד), μπροστά από (לִפְנֵי), πίσω από (מֵאֲחוֹרֵי), ανάμεσα σε (בֵּין)\n\nLike κοντά σε / μακριά από, Hebrew says קָרוֹב לְ / רָחוֹק מִ."
   },
   {
    "for": "ru",
    "rel": "different",
-   "text": "Russian на столе / под столом need cases, and often a posture verb (книга лежит на столе); Hebrew needs neither: הַסֵּפֶר עַל הַשֻּׁלְחָן."
+   "text": "Russian на столе / под столом need cases, and often a posture verb (книга лежит на столе); Hebrew needs neither:\n→ הַסֵּפֶר עַל הַשֻּׁלְחָן"
   },
   {
    "for": "es",
    "rel": "similar",
-   "text": "encima de, debajo de, al lado de, delante de, detrás de, entre — Hebrew has one or two words for each (עַל, מִתַּחַת לְ, לְיַד, לִפְנֵי, מֵאֲחוֹרֵי, בֵּין … לְ), and no estar: הַסֵּפֶר עַל הַשֻּׁלְחָן."
+   "text": "encima de, debajo de, al lado de, delante de, detrás de, entre — Hebrew has one or two words for each (עַל, מִתַּחַת לְ, לְיַד, לִפְנֵי, מֵאֲחוֹרֵי, בֵּין … לְ), and no estar:\n→ הַסֵּפֶר עַל הַשֻּׁלְחָן"
   },
   {
    "for": "en",
    "rel": "similar",
-   "text": "“Close to / far from” are the same in Hebrew: קָרוֹב לְ / רָחוֹק מִ. But there is no “is” and no “lies / stands”: הַסֵּפֶר עַל הַשֻּׁלְחָן."
+   "text": "“Close to / far from” are the same in Hebrew:\n→ קָרוֹב לְ / רָחוֹק מִ\n\nBut there is no “is” and no “lies / stands”:\n→ הַסֵּפֶר עַל הַשֻּׁלְחָן"
   },
   {
    "for": "fr",
@@ -415,12 +415,12 @@
   {
    "for": "de",
    "rel": "different",
-   "text": "German says where something is with a posture verb and the dative (Das Buch liegt auf dem Tisch) and where it goes with the accusative (auf den Tisch); Hebrew needs no verb and no case: הַסֵּפֶר עַל הַשֻּׁלְחָן."
+   "text": "German says where something is with a posture verb and the dative (Das Buch liegt auf dem Tisch) and where it goes with the accusative (auf den Tisch); Hebrew needs no verb and no case:\n→ הַסֵּפֶר עַל הַשֻּׁלְחָן"
   },
   {
    "for": "hi",
    "rel": "different",
-   "text": "Hindi uses postpositions after the noun (मेज़ पर, मेज़ के नीचे); Hebrew puts the preposition first: עַל הַשֻּׁלְחָן, מִתַּחַת לַשֻּׁלְחָן."
+   "text": "Hindi uses postpositions after the noun (मेज़ पर, मेज़ के नीचे); Hebrew puts the preposition first:\n→ עַל הַשֻּׁלְחָן, מִתַּחַת לַשֻּׁלְחָן"
   },
   {
    "for": "fa",
@@ -430,22 +430,22 @@
   {
    "for": "mr",
    "rel": "different",
-   "text": "Marathi puts the place word after the noun (टेबलावर “on the table”, टेबलाखाली “under the table”); Hebrew puts it first: עַל הַשֻּׁלְחָן."
+   "text": "Marathi puts the place word after the noun (टेबलावर “on the table”, टेबलाखाली “under the table”); Hebrew puts it first:\n→ עַל הַשֻּׁלְחָן"
   },
   {
    "for": "ar",
    "rel": "same",
-   "text": "Arabic عَلَى, تَحْتَ, بَيْنَ, أَمَامَ, وَرَاءَ come first too, and no verb is needed (الْكِتَابُ عَلَى الطَّاوِلَةِ ~ הַסֵּפֶר עַל הַשֻּׁלְחָן; עַל ~ عَلَى, בֵּין ~ بَيْنَ). Only Hebrew has no case after them."
+   "text": "Arabic عَلَى, تَحْتَ, بَيْنَ, أَمَامَ, وَرَاءَ come first too, and no verb is needed (الْكِتَابُ عَلَى الطَّاوِلَةِ ~ הַסֵּפֶר עַל הַשֻּׁלְחָן; עַל ~ عَلَى, בֵּין ~ بَيْنَ).\n\nOnly Hebrew has no case after them."
   },
   {
    "for": "tr",
    "rel": "different",
-   "text": "Turkish says “the table’s top-on” (masanın üstünde); Hebrew puts the preposition first: עַל הַשֻּׁלְחָן. Turkish yakın / uzak take -e / -den (eve yakın, evden uzak) — the same “to / from” split as קָרוֹב לְ / רָחוֹק מִ."
+   "text": "Turkish says “the table’s top-on” (masanın üstünde); Hebrew puts the preposition first:\n→ עַל הַשֻּׁלְחָן\n\nTurkish yakın / uzak take -e / -den (eve yakın, evden uzak) — the same “to / from” split as קָרוֹב לְ / רָחוֹק מִ."
   },
   {
    "for": "ja",
    "rel": "different",
-   "text": "Japanese says “the desk’s top-at” (机の上に) and needs ある / いる; Hebrew puts the place word first and needs no verb: עַל הַשֻּׁלְחָן."
+   "text": "Japanese says “the desk’s top-at” (机の上に) and needs ある / いる; Hebrew puts the place word first and needs no verb:\n→ עַל הַשֻּׁלְחָן"
   },
   {
    "for": "ko",
@@ -455,7 +455,7 @@
   {
    "for": "fi",
    "rel": "different",
-   "text": "Finnish uses cases or postpositions (pöydällä, pöydän alla); Hebrew uses prepositions before the noun: עַל הַשֻּׁלְחָן, מִתַּחַת לַשֻּׁלְחָן."
+   "text": "Finnish uses cases or postpositions (pöydällä, pöydän alla); Hebrew uses prepositions before the noun:\n→ עַל הַשֻּׁלְחָן, מִתַּחַת לַשֻּׁלְחָן"
   },
   {
    "for": "hu",
@@ -470,7 +470,7 @@
   {
    "for": "zh",
    "rel": "different",
-   "text": "Chinese wraps the place: 在 + noun + 上 / 下 / 旁边 (在桌子上); Hebrew uses one preposition before the noun: עַל הַשֻּׁלְחָן."
+   "text": "Chinese wraps the place: 在 + noun + 上 / 下 / 旁边 (在桌子上); Hebrew uses one preposition before the noun:\n→ עַל הַשֻּׁלְחָן"
   },
   {
    "for": "vi",
@@ -480,7 +480,47 @@
   {
    "for": "iu",
    "rel": "different",
-   "text": "Inuktitut says where something is with a location noun carrying a case ending, after the thing it relates to; Hebrew uses a preposition before the noun: עַל הַשֻּׁלְחָן."
+   "text": "Inuktitut says where something is with a location noun carrying a case ending, after the thing it relates to; Hebrew uses a preposition before the noun:\n→ עַל הַשֻּׁלְחָן"
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "sopra, sotto, accanto a, davanti a, dietro, tra ~ עַל, מִתַּחַת לְ, לְיַד, לִפְנֵי, מֵאֲחוֹרֵי, בֵּין; and vicino a / lontano da has the same “to / from” split as קָרוֹב לְ / רָחוֹק מִ.\n\nBut Hebrew needs no verb in the present:\n→ הַסֵּפֶר עַל הַשֻּׁלְחָן"
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "em cima de, debaixo de, ao lado de, à frente de, atrás de, entre ~ עַל, מִתַּחַת לְ, לְיַד, לִפְנֵי, מֵאֲחוֹרֵי, בֵּין — and no estar:\n→ הַסֵּפֶר עַל הַשֻּׁלְחָן\n\nWhere Portuguese says perto de / longe de, Hebrew says קָרוֹב לְ “close to” / רָחוֹק מִ “far from”."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "mbi, nën, pranë, para, prapa, midis ~ עַל, מִתַּחַת לְ, לְיַד, לִפְנֵי, מֵאֲחוֹרֵי, בֵּין; but Albanian puts the noun into a case (pranë shtëpisë), while Hebrew needs no case and no verb:\n→ הַסֵּפֶר עַל הַשֻּׁלְחָן"
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your language says where something is with a posture verb and a case, Hebrew needs neither:\n→ הַסֵּפֶר עַל הַשֻּׁלְחָן “the book (is) on the table”\n\nOnly מִתַּחַת and בֵּין need a second preposition, לְ."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If your language says “the table’s top-on” with suffixes, Hebrew puts one preposition before the noun:\n→ עַל הַשֻּׁלְחָן\n\n“Close to” and “far from” keep a to / from split:\n→ קָרוֹב לְ, רָחוֹק מִ"
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If your language frames the noun with a word before and a place word after, Hebrew uses only the word before: עַל הַשֻּׁלְחָן, מִתַּחַת לַשֻּׁלְחָן — and needs no verb for “be at”."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If spatial relations are affixes inside a verb or noun word in your language, Hebrew uses separate prepositions, several built from body words:\n→ לִפְנֵי “to the face of”, לְיַד “at the hand of”"
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "עַל, תַּחַת, בֵּין and the body-part prepositions (לִפְנֵי “to the face of”) have relatives across the branch; Hebrew puts no case after them and no verb in the present."
   }
  ]
 }

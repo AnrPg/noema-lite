@@ -446,7 +446,7 @@
   {
    "lang": "zh",
    "fn": "fn.measure.word",
-   "note": "Chinese puts a measure word between the number and the noun (三本书) and has two words for “two” (二 / 两); Arabic changes the noun's number and case instead."
+   "note": "Chinese puts a measure word between the number and the noun (三本书) and has two words for “two” (二 / 两).\n\nArabic changes the noun's number and case instead."
   },
   {
    "lang": "ar",
@@ -480,32 +480,32 @@
   {
    "for": "el",
    "rel": "different",
-   "text": "Greek changes only 1, 3, 4 (and the hundreds) for gender, and after 2 the noun is always plural (τρία βιβλία); Arabic reverses the gender of 3–10, uses the dual for 2 and a singular after 10. Greek says the tens first (είκοσι ένα), Arabic the unit first (وَاحِدٌ وَعِشْرُونَ)."
+   "text": "Greek changes only 1, 3, 4 (and the hundreds) for gender, and after 2 the noun is always plural (τρία βιβλία).\n\nArabic:\n- reverses the gender of 3–10;\n- uses the dual for 2 and a singular after 10;\n- says the unit first, where Greek says the tens first: είκοσι ένα — وَاحِدٌ وَعِشْرُونَ."
   },
   {
    "for": "ru",
    "rel": "similar",
-   "text": "Russian also changes the noun with the number — два стола, пять столов; Arabic has its own steps: the dual for 2, the genitive plural for 3–10, the accusative singular for 11–99, the genitive singular for 100. Russian says the tens first (двадцать один)."
+   "text": "Russian also changes the noun with the number — два стола, пять столов. Arabic has its own steps:\n- the dual for 2;\n- the genitive plural for 3–10;\n- the accusative singular for 11–99;\n- the genitive singular for 100.\n\nRussian says the tens first (двадцать один)."
   },
   {
    "for": "es",
    "rel": "different",
-   "text": "Spanish numbers barely change (uno / una, doscientos / doscientas) and the noun is plural after 2; Arabic reverses the gender of 3–10 and uses the singular after 10. Spanish says the tens first (veintiuno)."
+   "text": "Spanish numbers barely change (uno / una, doscientos / doscientas) and the noun is plural after 2.\n\nArabic **reverses the gender of 3–10** and uses the singular after 10. Spanish says the tens first (veintiuno)."
   },
   {
    "for": "en",
    "rel": "new",
-   "text": "In English only the noun’s -s changes; Arabic has a dual for 2, reversed gender for 3–10, the singular after 11–99 (عِشْرُونَ طَالِبًا, “twenty student”), and the unit before the ten in 21–99, as in old “four-and-twenty”."
+   "text": "In English only the noun’s -s changes. Arabic has:\n- a dual for 2;\n- reversed gender for 3–10;\n- the singular after 11–99: عِشْرُونَ طَالِبًا, “twenty student”;\n- the unit before the ten in 21–99, as in old “four-and-twenty”."
   },
   {
    "for": "fr",
    "rel": "different",
-   "text": "French counts 70 and 80 in twenties (soixante-dix, quatre-vingts) and says the tens first (vingt et un); Arabic is decimal throughout and says the unit first (وَاحِدٌ وَعِشْرُونَ)."
+   "text": "French counts 70 and 80 in twenties (soixante-dix, quatre-vingts) and says the tens first (vingt et un).\n\nArabic is decimal throughout and **says the unit first**:\n→ وَاحِدٌ وَعِشْرُونَ"
   },
   {
    "for": "hi",
    "rel": "similar",
-   "text": "Hindi 21–99 are fused words with the unit first, to be learned one by one (पच्चीस, 25); Arabic builds them in the same order but regularly: unit + وَ + ten (خَمْسَةٌ وَعِشْرُونَ)."
+   "text": "Hindi 21–99 are fused words with the unit first, to be learned one by one (पच्चीस, 25).\n\nArabic builds them in the same order but regularly — unit + وَ + ten:\n→ خَمْسَةٌ وَعِشْرُونَ"
   },
   {
    "for": "fa",
@@ -520,12 +520,12 @@
   {
    "for": "tr",
    "rel": "different",
-   "text": "Turkish keeps the noun singular after any number (üç kitap); Arabic uses a genitive plural after 3–10 (ثَلَاثَةُ كُتُبٍ) and an accusative singular after 11–99. Turkish says the tens first (yirmi bir)."
+   "text": "Turkish keeps the noun singular after any number (üç kitap). Arabic uses:\n- a genitive plural after 3–10: ثَلَاثَةُ كُتُبٍ;\n- an accusative singular after 11–99.\n\nTurkish says the tens first (yirmi bir)."
   },
   {
    "for": "ja",
    "rel": "different",
-   "text": "Japanese needs a counter between number and noun (三冊の本); Arabic needs none, but the number itself changes gender (ثَلَاثَةُ كُتُبٍ, ثَلَاثُ غُرَفٍ)."
+   "text": "Japanese needs a counter between number and noun (三冊の本).\n\nArabic needs none, but **the number itself changes gender**:\n→ ثَلَاثَةُ كُتُبٍ, ثَلَاثُ غُرَفٍ"
   },
   {
    "for": "ko",
@@ -561,6 +561,56 @@
    "for": "iu",
    "rel": "similar",
    "text": "Inuktitut nouns have a dual too, so “two” can be said by the noun alone — as Arabic كِتَابَانِ is “two books”."
+  },
+  {
+   "for": "de",
+   "rel": "similar",
+   "text": "As in German, 21–99 say the unit first:\n→ خَمْسَةٌ وَعِشْرُونَ = fünfundzwanzig\n\nDifferent — Arabic:\n- uses the dual for 2;\n- gives 3–10 **the opposite gender of the noun**: ثَلَاثَةُ كُتُبٍ;\n- puts a singular noun after 11–99: عِشْرُونَ طَالِبًا, “zwanzig Student”."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese numbers never change and need a measure word (三本书). Arabic needs no measure word but **changes the number and the noun**:\n- كِتَابَانِ — two books, the dual;\n- ثَلَاثَةُ كُتُبٍ;\n- عِشْرُونَ كِتَابًا — with a singular noun.\n\n二十五 says the ten first, Arabic the unit: خَمْسَةٌ وَعِشْرُونَ."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian numbers barely change (uno / una) and the noun is plural after 1 (tre libri).\n\nArabic:\n- uses the dual for 2;\n- reverses the gender of 3–10;\n- uses the singular after 10;\n- says the unit first, where Italian says the tens first: ventuno — وَاحِدٌ وَعِشْرُونَ."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian counts some tens in twenties (njëzet = 20, dyzet = 40) and says the ten first (njëzet e një); Arabic is decimal and says the unit first:\n→ وَاحِدٌ وَعِشْرُونَ\n\nTre / tri agree with the noun’s gender; Arabic 3–10 take the **OPPOSITE** gender:\n→ ثَلَاثَةُ كُتُبٍ, ثَلَاثُ غُرَفٍ"
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese changes 1 and 2 for gender (um / uma, dois / duas), as Arabic does (وَاحِد / وَاحِدَة, اِثْنَانِ / اِثْنَتَانِ).\n\nBut Arabic:\n- reverses the gender of 3–10;\n- uses the singular after 10;\n- says the unit first: وَاحِدٌ وَعِشْرُونَ (vinte e um)."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If the noun in your language is simply plural after every number above one, expect **four rules** in Arabic:\n1. the dual for 2;\n2. reversed gender + genitive plural for 3–10;\n3. accusative singular for 11–99;\n4. genitive singular for 100 and 1000."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If the noun stays singular after numbers in your language, Arabic does the same from 11 up:\n→ عِشْرُونَ طَالِبًا\n\nFor 3–10 it uses a plural, and **the number takes the opposite gender of the noun**."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If you count with a measure word and an unchanged noun, note that Arabic has no measure words but changes the noun:\n- the dual for two: كِتَابَانِ;\n- a plural for 3–10;\n- a singular from 11 on."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "new",
+   "text": "Learn the four steps:\n1. 1 and 2 are in the noun itself: كِتَابٌ, كِتَابَانِ;\n2. 3–10 take the opposite gender of the noun;\n3. 11–99 take a singular accusative noun;\n4. 100 and 1000 a singular genitive one."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "If your language is Semitic, gender polarity in 3–10 is the familiar Semitic rule:\n→ ثَلَاثَةُ كُتُبٍ / ثَلَاثُ غُرَفٍ\n\nThe case of the noun after the number is Arabic’s own."
   }
  ]
 }

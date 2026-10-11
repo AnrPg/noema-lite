@@ -115,7 +115,8 @@
     "subtleties": [
      "Formal Arabic also uses مَاذَا before a past verb: مَاذَا فَعَلْتَ؟ (what did you do?)."
     ]
-   }
+   },
+   "features": {}
   },
   {
    "id": "ar:ma",
@@ -245,7 +246,8 @@
     "subtleties": [
      "In the exclamation مَا أَجْمَلَ …! the noun is accusative: مَا أَجْمَلَ الْبَحْرَ!"
     ]
-   }
+   },
+   "features": {}
   },
   {
    "id": "ar:ayna",
@@ -263,7 +265,8 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "formation": "indeclinable particle"
    },
    "translit": "ʾayna",
    "ref": {
@@ -482,11 +485,11 @@
      }
     ],
     "etymology": {
-     "text": "From Proto-Semitic *mann-; cognates include Aramaic מן (man), Geʿez መኑ (männu) and Amharic ማን (man) (Wiktionary).",
+     "text": "From Proto-Semitic *mann-; cognates include Aramaic מן (man) and Geʿez መኑ (männu) (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Amharic ማን (man), “who”, is the same Semitic word (Wiktionary).",
+     "مَنْ also opens a clause: مَنْ يَدْرُسُ يَنْجَحُ, whoever studies succeeds.",
      "One word for any person: مَنْ does not change for gender or number — مَنْ هُوَ؟ مَنْ هِيَ؟ مَنْ هُمْ؟"
     ],
     "pitfalls": [
@@ -496,8 +499,21 @@
     "subtleties": [
      "Before al- it takes a helping vowel i: مَنِ الطَّبِيبُ؟ (who is the doctor?).",
      "As a relative or conditional word it means “whoever”: مَنْ جَدَّ وَجَدَ."
+    ],
+    "notes": [
+     {
+      "for": "am",
+      "rel": "same",
+      "text": "Amharic ማን (man), “who”, is the same Semitic word (Wiktionary)."
+     },
+     {
+      "for": "am",
+      "rel": "same",
+      "text": "Amharic ማን (man) is a cognate of مَنْ."
+     }
     ]
-   }
+   },
+   "features": {}
   },
   {
    "id": "ar:mata",
@@ -516,7 +532,8 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "formation": "indeclinable particle"
    },
    "contrasts": [
     {
@@ -630,12 +647,19 @@
      "Hebrew מָתַי (matáy), “when?”, is the same word — one of the easiest bridges between the two languages."
     ],
     "pitfalls": [
-     "No helper verb and no inversion: مَتَى تَأْكُلُ؟ is literally “when you-eat?”.",
+     "The order of the statement stays and nothing is added: مَتَى تَأْكُلُ؟ is literally “when you-eat?”.",
      "Written with ى (alif maqṣūra) but read -ā: matā."
     ],
     "subtleties": [
      "With a noun no verb is needed: مَتَى الْعَشَاءُ؟ (When is dinner?) — the noun is nominative.",
      "In formal conditional sentences مَتَى means “whenever”: مَتَى شِئْتَ (whenever you wish)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "No “do” and no inversion: مَتَى تَأْكُلُ؟, “when you-eat?”."
+     }
     ]
    }
   },
@@ -661,7 +685,8 @@
        "s2"
       ]
      }
-    ]
+    ],
+    "formation": "indeclinable particle"
    },
    "translit": "kayfa",
    "ref": {
@@ -757,7 +782,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The noun كَيْف (state, mood, pleasure) went into Turkish as keyif (good mood, pleasure) and from there into Greek as κέφι (kéfi, high spirits)."
+     "The noun كَيْف means a state, a mood — and in everyday speech pleasure: عَلَى كَيْفِكَ, as you like."
     ],
     "pitfalls": [
      "كَيْفَ asks “how?” — “how many?” is كَمْ and “how much (price)?” is بِكَمْ.",
@@ -766,6 +791,28 @@
     "subtleties": [
      "كَيْفَ + a noun asks after a state: كَيْفَ الْعَمَلُ؟ (How is work?).",
      "كَيْفَمَا = however, in whatever way (Wiktionary)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Greek κέφι (high spirits) comes from the noun كَيْف."
+     },
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "Russian кайф (pleasure, a high) comes from the noun كَيْف."
+     },
+     {
+      "for": "sq",
+      "rel": "similar",
+      "text": "Albanian qejf (pleasure, good mood) comes from the noun كَيْف."
+     },
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish keyif (good mood, pleasure) comes from the noun كَيْف."
+     }
     ]
    }
   },
@@ -783,7 +830,8 @@
     "derivedFrom": "لِ + مَاذَا (what?)",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "formation": "phrase"
    },
    "translit": "li-māḏā",
    "ref": {
@@ -866,7 +914,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Literally “for what?” — built like Greek γιατί (για + τι), Russian почему (по + чему) and Turkish niçin (ne + için)."
+     "Literally “for what?”: لِـ (for) + مَاذَا (what)."
     ],
     "pitfalls": [
      "Written as one word: لِمَاذَا, not *لِ مَاذَا.",
@@ -874,6 +922,43 @@
     ],
     "subtleties": [
      "لِمَاذَا لَا …؟ also makes a suggestion: لِمَاذَا لَا نَأْكُلُ هُنَا؟ (Why don’t we eat here?)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Built like γιατί (για + τι)."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Built like почему (по + чему)."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Built like pourquoi (pour + quoi)."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Built like perché (per + che)."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "Built like por qué (por + qué)."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Built like porquê (por + quê)."
+     },
+     {
+      "for": "tr",
+      "rel": "same",
+      "text": "Built like niçin (ne + için)."
+     }
     ]
    }
   },
@@ -893,7 +978,8 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "formation": "indeclinable particle"
    },
    "translit": "kam",
    "ref": {
@@ -993,12 +1079,24 @@
      "Hebrew כַּמָּה (kamá), “how many, how much”, is its cousin."
     ],
     "pitfalls": [
-     "After كَمْ the noun is singular and accusative indefinite: كَمْ أَخًا؟ — not *كَمْ إِخْوَةً؟ (unlike English “how many brothers”).",
+     "After كَمْ the noun is singular and accusative indefinite: كَمْ أَخًا؟ — not *كَمْ إِخْوَةً؟.",
      "The price is asked with بِ: بِكَمْ هٰذَا؟ — كَمْ alone asks for a number."
     ],
     "subtleties": [
      "Wiktionary: after a preposition (بِكَمْ) the noun may also be genitive — بِكَمْ دِرْهَمٍ؟.",
      "Before al- it takes the helping vowel i: كَمِ السَّاعَةُ؟."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "Not like “how many brothers”: the noun after كَمْ is singular — كَمْ أَخًا؟"
+     },
+     {
+      "for": "ru",
+      "rel": "trap",
+      "text": "Not like сколько братьев: the noun after كَمْ is singular and accusative — كَمْ أَخًا؟"
+     }
     ]
    }
   },
@@ -1124,6 +1222,9 @@
      "With a feminine noun both أَيُّ مَدِينَةٍ and أَيَّةُ مَدِينَةٍ are correct; أَيُّ is more common.",
      "With a pronoun ending: أَيُّهُمْ؟ (which of them?), أَيُّهُمَا؟ (which of the two?)."
     ]
+   },
+   "features": {
+    "governs": "a genitive noun, as the first term of a construct: أَيُّ كِتَابٍ؟ (feminine أَيَّةُ is optional)"
    }
   },
   {
@@ -1225,7 +1326,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "No special word for “whose”: Arabic asks “to whom (is) this book?”, like French à qui est ce livre ? — German wessen and Greek ποιανού are case forms instead."
+     "No special word for “whose”: Arabic asks “to whom (is) this book?” — German wessen is a case form instead."
     ],
     "pitfalls": [
      "Answer with لِ + the owner: هٰذَا لِأَبِي (it is my father’s), هٰذَا لِي (it is mine) — لِي, never *لِأَنَا."
@@ -1233,7 +1334,32 @@
     "subtleties": [
      "Also correct: كِتَابُ مَنْ هٰذَا؟ (whose book is this?), with مَنْ as the second word of a construct.",
      "Before al- it takes the helping vowel i: لِمَنِ الْكِتَابُ؟."
+    ],
+    "notes": [
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Like à qui est ce livre ?: لِمَنْ هٰذَا الْكِتَابُ؟"
+     },
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "Greek ποιανού is a case form; Arabic asks “to whom?”: لِمَنْ هٰذَا الْكِتَابُ؟"
+     },
+     {
+      "for": "ru",
+      "rel": "different",
+      "text": "Russian has a word of its own, чей; Arabic asks “to whom?”: لِمَنْ هٰذَا الْكِتَابُ؟"
+     },
+     {
+      "for": "en",
+      "rel": "different",
+      "text": "English has a word of its own, whose; Arabic asks “to whom?”: لِمَنْ هٰذَا الْكِتَابُ؟"
+     }
     ]
+   },
+   "features": {
+    "governs": "the thing owned, as a predicate: لِمَنْ هٰذَا الْكِتَابُ؟"
    }
   },
   {
@@ -1252,6 +1378,7 @@
     "plurals": [
      {
       "form": "أَطِبَّاء",
+      "translit": "ʾaṭibbāʾ",
       "kind": "broken",
       "pattern": "أَفْعِلَاء",
       "declension": "diptote",
@@ -1264,7 +1391,19 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "طَبِيبَة",
+      "note": "the feminine with -a (ة)"
+     }
+    ],
+    "construct": [
+     {
+      "form": "طَبِيبُ",
+      "translit": "ṭabību"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "ṭabīb",
@@ -1383,7 +1522,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "طِبّ (ṭibb, medicine) is the same root: Turkish tıp (medicine) and tabip (physician) come from it."
+     "طِبّ (ṭibb, medicine) is the same root, and the plural is أَطِبَّاء."
     ],
     "pitfalls": [
      "The plural is broken and a diptote: أَطِبَّاءُ (no tanwīn), not *طَبِيبُونَ; women doctors are طَبِيبَات."
@@ -1391,6 +1530,18 @@
     "subtleties": [
      "In speech a doctor is addressed as دُكْتُور / دُكْتُورَة; طَبِيب is the word for the profession.",
      "Wiktionary also lists the rarer plural أَطِبَّة."
+    ],
+    "notes": [
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "French toubib (a doctor, colloquial) is this word."
+     },
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish tıp (medicine) and tabip (physician) come from it."
+     }
     ]
    }
   },
@@ -1410,6 +1561,7 @@
     "plurals": [
      {
       "form": "مُمَرِّضُونَ",
+      "translit": "mumarriḍūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -1421,7 +1573,19 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "مُمَرِّضَة",
+      "note": "the feminine with -a (ة)"
+     }
+    ],
+    "construct": [
+     {
+      "form": "مُمَرِّضُ",
+      "translit": "mumarriḍu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "mumarriḍ",
@@ -1554,6 +1718,7 @@
     "plurals": [
      {
       "form": "مُهَنْدِسُونَ",
+      "translit": "muhandisūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -1566,7 +1731,19 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "مُهَنْدِسَة",
+      "note": "the feminine with -a (ة)"
+     }
+    ],
+    "construct": [
+     {
+      "form": "مُهَنْدِسُ",
+      "translit": "muhandisu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "muhandis",
@@ -1696,13 +1873,25 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish mühendis (engineer) is this Arabic word; its Persian source survives in Persian andâze, “measure”."
+     "From هَنْدَسَة — geometry, then engineering: the engineer is “the geometer”."
     ],
     "pitfalls": [
      "Four root letters (ه ن د س): the plural is sound, مُهَنْدِسُونَ — no broken plural."
     ],
     "subtleties": [
      "هَنْدَسَة is both “engineering” and “geometry”; Wiktionary also lists the older senses “geometer, architect, surveyor”."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "same",
+      "text": "Turkish mühendis (engineer) is this Arabic word."
+     },
+     {
+      "for": "fa",
+      "rel": "similar",
+      "text": "Its Persian source survives in Persian andâze, “measure”."
+     }
     ]
    }
   },
@@ -1722,6 +1911,7 @@
     "plurals": [
      {
       "form": "سَائِقُونَ",
+      "translit": "sāʾiqūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -1733,7 +1923,19 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "سَائِقَة",
+      "note": "the feminine with -a (ة)"
+     }
+    ],
+    "construct": [
+     {
+      "form": "سَائِقُ",
+      "translit": "sāʾiqu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "sāʾiq",
@@ -1875,6 +2077,7 @@
     "plurals": [
      {
       "form": "طَبَّاخُونَ",
+      "translit": "ṭabbāḫūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -1886,7 +2089,19 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "طَبَّاخَة",
+      "note": "the feminine with -a (ة)"
+     }
+    ],
+    "construct": [
+     {
+      "form": "طَبَّاخُ",
+      "translit": "ṭabbāḫu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "ṭabbāḫ",
@@ -2028,6 +2243,7 @@
     "plurals": [
      {
       "form": "بَاعَة",
+      "translit": "bāʿa",
       "kind": "broken",
       "pattern": "فَعَلَة",
       "declension": "triptote",
@@ -2037,6 +2253,7 @@
      },
      {
       "form": "بَائِعُونَ",
+      "translit": "bāʾiʿūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -2048,7 +2265,19 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "بَائِعَة",
+      "note": "the feminine with -a (ة)"
+     }
+    ],
+    "construct": [
+     {
+      "form": "بَائِعُ",
+      "translit": "bāʾiʿu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "bāʾiʿ",
@@ -2214,6 +2443,7 @@
     "plurals": [
      {
       "form": "عُمَّال",
+      "translit": "ʿummāl",
       "kind": "broken",
       "pattern": "فُعَّال",
       "declension": "triptote",
@@ -2224,6 +2454,7 @@
      },
      {
       "form": "عَامِلُونَ",
+      "translit": "ʿāmilūn",
       "kind": "soundMasc",
       "declension": "sound",
       "note": "employees, those working (الْعَامِلُونَ فِي الشَّرِكَةِ)",
@@ -2233,6 +2464,7 @@
      },
      {
       "form": "عَوَامِل",
+      "translit": "ʿawāmil",
       "kind": "broken",
       "pattern": "فَوَاعِل",
       "declension": "diptote",
@@ -2246,7 +2478,19 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "no other form belongs to one meaning (the plurals do: see plurals)"
-    }
+    },
+    "pair": [
+     {
+      "form": "عَامِلَة",
+      "note": "the feminine with -a (ة)"
+     }
+    ],
+    "construct": [
+     {
+      "form": "عَامِلُ",
+      "translit": "ʿāmilu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "ʿāmil",
@@ -2400,13 +2644,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The same root gives عَمَل (work) — a place word of the next lesson; Turkish amele (labourer) comes from the Arabic plural عَمَلَة."
+     "The same root gives عَمَل (work) — a place word of the next lesson — and the plural عُمَّال (workers)."
     ],
     "pitfalls": [
      "“Workers” is usually the broken plural عُمَّال; عَوَامِل is the plural of the other عَامِل, “factor”."
     ],
     "subtleties": [
      "عَامِل is manual or factory work; an office employee is مُوَظَّف."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish amele (labourer) comes from the Arabic plural عَمَلَة."
+     }
     ]
    }
   },
@@ -2426,6 +2677,7 @@
     "plurals": [
      {
       "form": "مُزَارِعُونَ",
+      "translit": "muzāriʿūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -2437,7 +2689,19 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "مُزَارِعَة",
+      "note": "the feminine with -a (ة)"
+     }
+    ],
+    "construct": [
+     {
+      "form": "مُزَارِعُ",
+      "translit": "muzāriʿu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -2581,6 +2845,7 @@
     "plurals": [
      {
       "form": "فَلَّاحُونَ",
+      "translit": "fallāḥūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -2592,7 +2857,19 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "فَلَّاحَة",
+      "note": "the feminine with -a (ة)"
+     }
+    ],
+    "construct": [
+     {
+      "form": "فَلَّاحُ",
+      "translit": "fallāḥu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -2736,6 +3013,7 @@
     "plurals": [
      {
       "form": "شُرْطِيُّونَ",
+      "translit": "šurṭiyyūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -2747,7 +3025,19 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "شُرْطِيَّة",
+      "note": "the feminine with -a (ة)"
+     }
+    ],
+    "construct": [
+     {
+      "form": "شُرْطِيُّ",
+      "translit": "šurṭiyyu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "šurṭī",
@@ -2893,6 +3183,7 @@
     "plurals": [
      {
       "form": "مُحَامُونَ",
+      "translit": "muḥāmūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -2904,7 +3195,20 @@
     "declension": "defective",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "مُحَامِيَة",
+      "note": "the feminine with -a (ة)"
+     }
+    ],
+    "construct": [
+     {
+      "form": "مُحَامِي",
+      "translit": "muḥāmī",
+      "note": "the final ī comes back (مُحَامِي الشَّرِكَةِ)"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "muḥāmī",
@@ -3046,6 +3350,7 @@
     "plurals": [
      {
       "form": "فَنَّانُونَ",
+      "translit": "fannānūn",
       "kind": "soundMasc",
       "declension": "sound",
       "senses": [
@@ -3057,7 +3362,19 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "فَنَّانَة",
+      "note": "the feminine with -a (ة)"
+     }
+    ],
+    "construct": [
+     {
+      "form": "فَنَّانُ",
+      "translit": "fannānu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "fannān",
@@ -3172,13 +3489,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "In the Arab world الْفَنَّانُ … very often introduces a singer or an actor; Turkish fen (science, technique) is the same word فَنّ."
+     "In the Arab world الْفَنَّانُ … very often introduces a singer or an actor; فَنّ itself is “art”: الْفُنُونُ الْجَمِيلَةُ, the fine arts."
     ],
     "pitfalls": [
      "The n is doubled: فَنَّان (fannān) — the faʿʿāl pattern of professions."
     ],
     "subtleties": [
      "فَنّ (art) has the plural فُنُون: كُلِّيَّةُ الْفُنُونِ الْجَمِيلَةِ (faculty of fine arts)."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish fen (science, technique) is the same word فَنّ."
+     }
     ]
    }
   }

@@ -133,11 +133,53 @@
      "吃了吗？(‘Have you eaten?’) is a greeting, like ‘How are you?’ — not an invitation to a meal."
     ],
     "pitfalls": [
-     "Drinks take 喝, not 吃: 喝水, 喝茶 — and soup is drunk: 喝汤.",
-     "吃 is used where English says ‘take’: 吃药 (take medicine)."
+     "Drinks take 喝, not 吃: 喝水, 喝茶 — and soup is drunk:\n→ 喝汤.",
+     "Medicine is ‘eaten’ too:\n→ 吃药 ‘take medicine’ — 拿药 is only ‘pick up medicine’."
     ],
     "subtleties": [
-     "吃 + an experience = to undergo it: 吃苦 (endure hardship), 吃亏 (lose out), 吃惊 (be startled)."
+     "吃 + an experience = to undergo it:\n→ 吃苦 (endure hardship), 吃亏 (lose out), 吃惊 (be startled)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "‘take medicine’ is 吃药, not *拿药."
+     },
+     {
+      "for": "de",
+      "rel": "trap",
+      "text": "Medikamente nehmen is 吃药, not *拿药."
+     },
+     {
+      "for": "fr",
+      "rel": "trap",
+      "text": "prendre un médicament is 吃药, not *拿药."
+     },
+     {
+      "for": "es",
+      "rel": "trap",
+      "text": "tomar una medicina is 吃药, not *拿药."
+     },
+     {
+      "for": "it",
+      "rel": "trap",
+      "text": "prendere una medicina is 吃药, not *拿药."
+     },
+     {
+      "for": "pt",
+      "rel": "trap",
+      "text": "tomar um medicamento is 吃药, not *拿药."
+     },
+     {
+      "for": "ru",
+      "rel": "trap",
+      "text": "принимать лекарство is 吃药, not *拿药."
+     },
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "παίρνω φάρμακο is 吃药, not *拿药."
+     }
     ]
    },
    "features": {
@@ -153,7 +195,49 @@
     "separable": {
      "none": "one syllable: nothing to split"
     },
-    "neg": "bu+mei"
+    "neg": "bu+mei",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过",
+     "着",
+     "在"
+    ],
+    "complements": [
+     {
+      "kind": "result",
+      "form": "吃完",
+      "gloss": "finish eating"
+     },
+     {
+      "kind": "result",
+      "form": "吃饱",
+      "gloss": "eat one’s fill"
+     },
+     {
+      "kind": "potential",
+      "form": "吃不下",
+      "gloss": "cannot eat any more"
+     },
+     {
+      "kind": "potential",
+      "form": "吃不了",
+      "gloss": "cannot finish it"
+     }
+    ],
+    "redup": "吃吃看 (AA + 看: ‘try eating’)",
+    "degreeComplement": "他吃得很快 / 他吃饭吃得很快",
+    "object": [
+     "noun"
+    ]
    }
   },
   {
@@ -271,7 +355,7 @@
      "Chinese eats soup with a spoon but still says 喝汤 ‘drink soup’."
     ],
     "pitfalls": [
-     "Soup and porridge are ‘drunk’ in Chinese: 喝汤, 喝粥.",
+     "Soup and porridge are ‘drunk’ in Chinese:\n→ 喝汤, 喝粥.",
      "The same character is read hè in 喝彩 (hècǎi, ‘to cheer’) — a different word, ‘to shout’."
     ],
     "subtleties": [
@@ -291,7 +375,44 @@
     "separable": {
      "none": "one syllable: nothing to split"
     },
-    "neg": "bu+mei"
+    "neg": "bu+mei",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过",
+     "着",
+     "在"
+    ],
+    "complements": [
+     {
+      "kind": "result",
+      "form": "喝完",
+      "gloss": "finish drinking"
+     },
+     {
+      "kind": "result",
+      "form": "喝醉",
+      "gloss": "get drunk"
+     },
+     {
+      "kind": "potential",
+      "form": "喝不了",
+      "gloss": "cannot drink it all"
+     }
+    ],
+    "redup": "喝喝茶 (AA)",
+    "degreeComplement": "他喝得太多了",
+    "object": [
+     "noun"
+    ]
    }
   },
   {
@@ -413,7 +534,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Many money words contain 貝/贝 (cowrie shell, early money): 买, 卖, 贵 (expensive), 货 (goods)."
+     "Many money words contain 貝/贝 (cowrie shell, early money):\n→ 买, 卖, 贵 (expensive), 货 (goods)."
     ],
     "pitfalls": [
      "买 mǎi (3rd tone) = buy, 卖 mài (4th tone) = sell; the extra 十 on top of 卖 means ‘sell’.",
@@ -436,7 +557,45 @@
     "separable": {
      "none": "one syllable: nothing to split"
     },
-    "neg": "bu+mei"
+    "neg": "bu+mei",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过",
+     "在"
+    ],
+    "complements": [
+     {
+      "kind": "result",
+      "form": "买到",
+      "gloss": "manage to buy"
+     },
+     {
+      "kind": "result",
+      "form": "买好",
+      "gloss": "have bought"
+     },
+     {
+      "kind": "potential",
+      "form": "买不到",
+      "gloss": "cannot get it"
+     }
+    ],
+    "redup": {
+     "none": "not doubled: not used for a short, casual action"
+    },
+    "degreeComplement": "这件衣服买得很便宜",
+    "object": [
+     "noun"
+    ]
    }
   },
   {
@@ -569,11 +728,11 @@
     ],
     "pitfalls": [
      "Mainland standard has a neutral second syllable: xǐhuan; Taiwan says xǐhuān.",
-     "A verb follows directly — no ‘to’: 我喜欢吃玉米."
+     "A verb follows directly, with nothing in between:\n→ 我喜欢吃玉米."
     ],
     "subtleties": [
      "我喜欢你 is a typical way to confess feelings; 我爱你 is much heavier.",
-     "Degree words go before it: 很喜欢, 非常喜欢, 有点儿喜欢."
+     "Degree words go before it:\n→ 很喜欢, 非常喜欢, 有点儿喜欢."
     ]
    },
    "features": {
@@ -589,7 +748,33 @@
     "separable": {
      "none": "not a verb-object word: it does not split"
     },
-    "neg": "bu+mei"
+    "neg": "bu+mei",
+    "neutralTone": "欢 huan is toneless in this word (alone: huān); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "psych (takes 很)"
+    ],
+    "aspect": [
+     "了",
+     "过"
+    ],
+    "complements": [
+     {
+      "kind": "direction",
+      "form": "喜欢上",
+      "gloss": "come to like, fall for"
+     }
+    ],
+    "redup": {
+     "none": "not doubled: not used for a short, casual action"
+    },
+    "degreeComplement": "喜欢得不得了 ‘like it terribly’",
+    "object": [
+     "noun",
+     "verb"
+    ]
    }
   },
   {
@@ -745,7 +930,7 @@
      "The character once meant ‘waist’ — when it was borrowed for ‘want’, the flesh radical was added to make a new character 腰."
     ],
     "pitfalls": [
-     "不要 + verb is a command, ‘don’t!’: 不要吃! ‘Don’t eat (it)!’ For ‘I don’t want to eat’ say 我不想吃.",
+     "不要 + verb is a command, ‘don’t!’:\n→ 不要吃! ‘Don’t eat (it)!’ For ‘I don’t want to eat’ say 我不想吃.",
      "In 要求 (yāoqiú, ‘to demand’) the character is read yāo (1st tone)."
     ],
     "subtleties": [
@@ -766,7 +951,44 @@
     "separable": {
      "none": "one syllable: nothing to split"
     },
-    "neg": "bu+mei"
+    "neg": "bu+mei",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action",
+     "auxiliary (+ verb)"
+    ],
+    "aspect": [
+     "了",
+     "过"
+    ],
+    "complements": [
+     {
+      "kind": "result",
+      "form": "要到",
+      "gloss": "manage to get"
+     },
+     {
+      "kind": "direction",
+      "form": "要回来",
+      "gloss": "ask back, get back"
+     }
+    ],
+    "redup": {
+     "none": "not doubled: not used for a short, casual action"
+    },
+    "degreeComplement": {
+     "none": "takes no 得 comment of manner or degree"
+    },
+    "object": [
+     "noun",
+     "verb",
+     "noun + verb (pivot)"
+    ]
    }
   },
   {
@@ -927,11 +1149,11 @@
      "心 ‘heart’ is at the bottom of 想: in Chinese tradition the heart is the seat of thought."
     ],
     "pitfalls": [
-     "想 needs a verb before a thing: 我想吃土豆 / 我想要土豆. 想 + a person or place means ‘miss’: 我想你 ‘I miss you’.",
+     "想 needs a verb before a thing:\n→ 我想吃土豆 / 我想要土豆.\n\n想 + a person or place means ‘miss’:\n→ 我想你 ‘I miss you’.",
      "‘I don’t want to’ is 我不想 — not 我不要 (which sounds like a refusal or a command)."
     ],
     "subtleties": [
-     "想 = a wish (softer, may not happen); 要 = a firmer intention. 我想去 ‘I’d like to go’, 我要去 ‘I’m going to go’."
+     "想 = a wish (softer, may not happen); 要 = a firmer intention.\n\n我想去 ‘I’d like to go’, 我要去 ‘I’m going to go’."
     ]
    },
    "features": {
@@ -947,7 +1169,52 @@
     "separable": {
      "none": "one syllable: nothing to split"
     },
-    "neg": "bu+mei"
+    "neg": "bu+mei",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "psych (takes 很)",
+     "auxiliary (+ verb)"
+    ],
+    "aspect": [
+     "了",
+     "过",
+     "着",
+     "在"
+    ],
+    "complements": [
+     {
+      "kind": "direction",
+      "form": "想起来",
+      "gloss": "recall"
+     },
+     {
+      "kind": "direction",
+      "form": "想出来",
+      "gloss": "think up"
+     },
+     {
+      "kind": "result",
+      "form": "想到",
+      "gloss": "think of"
+     },
+     {
+      "kind": "potential",
+      "form": "想不起来",
+      "gloss": "cannot recall"
+     }
+    ],
+    "redup": "想想 / 想一想 (AA, A一A)",
+    "degreeComplement": "你想得太多了",
+    "object": [
+     "noun",
+     "verb",
+     "clause"
+    ]
    }
   },
   {
@@ -1057,15 +1324,22 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Like Turkish yemek yapmak and Greek φτιάχνω φαγητό, Chinese says ‘make the meal’ — 做饭.",
+     "Chinese says ‘make the meal’:\n→ 做饭 ‘to cook’.",
      "The proverb about the housewife without rice is how Chinese say ‘you can’t make bricks without straw’."
     ],
     "pitfalls": [
-     "做饭 already contains its object 饭: say 我做饭 ‘I cook’, but for a dish use 做 + the dish: 做鱼 ‘cook fish’, 做汤 ‘make soup’ (not *做饭鱼).",
+     "做饭 already contains its object 饭: say 我做饭 ‘I cook’, but for a dish use 做 + the dish:\n→ 做鱼 ‘cook fish’, 做汤 ‘make soup’ (not *做饭鱼).",
      "It is a separable verb: other words can come between 做 and 饭 (做了饭 ‘cooked’, 做什么饭 ‘cook what?’) — this comes later."
     ],
     "subtleties": [
-     "做饭 is cooking a meal in general; the technique has its own verb: 炒 ‘stir-fry’, 煮 ‘boil’, 蒸 ‘steam’, 烤 ‘roast, bake’."
+     "做饭 is cooking a meal in general; the technique has its own verb:\n→ 炒 ‘stir-fry’, 煮 ‘boil’, 蒸 ‘steam’, 烤 ‘roast, bake’."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Greek φτιάχνω φαγητό is the same picture."
+     }
     ]
    },
    "features": {
@@ -1082,10 +1356,37 @@
      {
       "verb": "做",
       "object": "饭",
-      "example": "做了一顿饭"
+      "example": "做了一顿饭",
+      "inserts": "了 · 好 · a measure (做了一顿饭, 做好饭)"
      }
     ],
-    "neg": "bu+mei"
+    "neg": "bu+mei",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过",
+     "在"
+    ],
+    "complements": [
+     {
+      "kind": "result",
+      "form": "做好饭",
+      "gloss": "have the meal ready (the result goes inside)"
+     }
+    ],
+    "redup": "做做饭 (AAB)",
+    "degreeComplement": "她做饭做得很好",
+    "object": [
+     "no object"
+    ]
    }
   },
   {
@@ -1111,7 +1412,34 @@
      "个",
      "片",
      "块"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": [
+     {
+      "measure": [
+       "片",
+       "块"
+      ],
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "measure": [
+       "个"
+      ],
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1238,7 +1566,18 @@
     },
     "measure": [
      "块"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1349,19 +1688,26 @@
      }
     ],
     "etymology": {
-     "text": "奶 ‘milk’ + 酪 ‘curd, fermented milk product’ (酉 ‘fermented drink’ + phonetic 各). Pulleyblank compared 酪 with Mongolian айраг and Turkish ayran.",
+     "text": "奶 ‘milk’ + 酪 ‘curd, fermented milk product’ (酉 ‘fermented drink’ + phonetic 各). Pulleyblank compared 酪 with the steppe words for fermented milk (Mongolian айраг).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "酪 may be related to Turkish ayran and Mongolian airag (Pulleyblank’s proposal) — a memory of the dairy cultures of the steppe.",
+     "酪 may be an old loan from the dairy cultures of the northern steppe (Pulleyblank’s proposal).",
      "Dairy is not traditional in Han Chinese cooking, but Yunnan has its own cheeses: 乳饼 and the Bai people’s 乳扇."
     ],
     "pitfalls": [
-     "Three words, one food: 奶酪 (standard), 芝士 (menus, from Cantonese), 起司 (Taiwan).",
+     "Three words, one food:\n→ 奶酪 (standard), 芝士 (menus, from Cantonese), 起司 (Taiwan).",
      "In Taiwan the second syllable is read luò (nǎiluò)."
     ],
     "subtleties": [
      "Pieces take 块 (一块奶酪); slices take 片 (一片奶酪)."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Pulleyblank compared 酪 with Turkish *ayran*: both may go back to the dairy words of the steppe."
+     }
     ]
    }
   },
@@ -1387,7 +1733,18 @@
     "measure": [
      "个",
      "颗"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1499,11 +1856,11 @@
      "蛋 is a late character: it is found neither on the oracle bones nor in the Shuowen dictionary; the old word for ‘egg’ is 卵."
     ],
     "pitfalls": [
-     "蛋 alone is colloquial — and it appears in insults: 笨蛋 ‘idiot’, 坏蛋 ‘bad guy’. For food say 鸡蛋.",
-     "Eggs are counted with 个: 两个鸡蛋 (not *两鸡蛋)."
+     "蛋 alone is colloquial — and it appears in insults:\n→ 笨蛋 ‘idiot’, 坏蛋 ‘bad guy’.\n\nFor food say 鸡蛋.",
+     "Eggs are counted with 个:\n→ 两个鸡蛋 (not *两鸡蛋)."
     ],
     "subtleties": [
-     "Other eggs name the bird: 鸭蛋 ‘duck egg’, 鹅蛋 ‘goose egg’ — 鸡蛋 is literally ‘chicken egg’."
+     "Other eggs name the bird:\n→ 鸭蛋 ‘duck egg’, 鹅蛋 ‘goose egg’ — 鸡蛋 is literally ‘chicken egg’."
     ]
    }
   },
@@ -1530,7 +1887,18 @@
     "measure": [
      "块",
      "片"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1693,7 +2061,18 @@
     },
     "measure": [
      "条"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1834,7 +2213,18 @@
     },
     "measure": [
      "块"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1911,7 +2301,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "鸡 jī may imitate the bird’s call (Schuessler); Wiktionary compares Vietnamese gà and Proto-Tai *kaj.",
+     "鸡 jī may imitate the bird’s call (Schuessler).",
      "吃鸡 ‘to eat chicken’ is also gamers’ slang for winning a battle-royale game (from ‘winner winner, chicken dinner’)."
     ],
     "pitfalls": [
@@ -1944,7 +2334,18 @@
     },
     "measure": [
      "碗"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "contrasts": [
     {
@@ -2033,13 +2434,13 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "米 also means ‘metre’ (short for 米突, from French mètre): 一米 ‘one metre’."
+     "米 also means ‘metre’ (short for 米突, from French mètre):\n→ 一米 ‘one metre’."
     ],
     "pitfalls": [
      "Uncooked rice is 大米 or 米; cooked rice is 米饭 — and rice growing in the field is 稻 or 水稻."
     ],
     "subtleties": [
-     "Rice is ordered and counted by the bowl: 两碗米饭 ‘two bowls of rice’."
+     "Rice is ordered and counted by the bowl:\n→ 两碗米饭 ‘two bowls of rice’."
     ]
    }
   },
@@ -2067,7 +2468,33 @@
     "measure": [
      "碗",
      "顿"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": [
+     {
+      "measure": [
+       "碗"
+      ],
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "measure": [
+       "顿"
+      ],
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "contrasts": [
     {
@@ -2210,7 +2637,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "饭 is also internet slang for ‘fan’ (from English fan): 饭圈 ‘fandom’.",
+     "饭 is also internet slang for ‘fan’ (from English fan):\n→ 饭圈 ‘fandom’.",
      "你吃饭了吗？ ‘Have you eaten (rice)?’ is a greeting — like ‘How are you?’, not an invitation."
     ],
     "pitfalls": [
@@ -2245,7 +2672,18 @@
     },
     "measure": [
      "碗"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2381,7 +2819,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "In Japanese the same character 湯 (yu) still means ‘hot water’ — the old Chinese meaning.",
+     "The old meaning ‘hot, boiling water’ survives in the idiom 赴汤蹈火 ‘go through boiling water and fire’.",
      "鸡汤 ‘chicken soup’ also means feel-good, inspirational talk (心灵鸡汤 ‘chicken soup for the soul’)."
     ],
     "pitfalls": [
@@ -2390,6 +2828,13 @@
     ],
     "subtleties": [
      "In many southern families soup comes at the start of the meal; in the north it often ends it."
+    ],
+    "notes": [
+     {
+      "for": "ja",
+      "rel": "similar",
+      "text": "Japanese 湯 yu still means ‘hot water’ — the old Chinese meaning; ‘soup’ is 汤 in Chinese."
+     }
     ]
    }
   },
@@ -2415,7 +2860,18 @@
     "measure": [
      "份",
      "盘"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2501,7 +2957,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English salad, German Salat, Greek σαλάτα, Russian салат and Turkish salata all go back to Latin sal ‘salt’ (salted greens); 沙拉 brings the same word in through English."
+     "German Salat and Chinese 沙拉 go back to Latin sal ‘salt’ (salted greens); 沙拉 brought the word in through English."
     ],
     "pitfalls": [
      "沙拉酱 is often a creamy, mayonnaise-like dressing — not oil and vinegar.",
@@ -2509,6 +2965,48 @@
     ],
     "subtleties": [
      "Raw salads are a Western import; the Chinese table has 凉菜 ‘cold dishes’ instead."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Greek σαλάτα is the same word."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Russian салат is the same word."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "French salade is the same word."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Italian insalata is the same word."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "Spanish ensalada is the same word."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Portuguese salada is the same word."
+     },
+     {
+      "for": "sq",
+      "rel": "same",
+      "text": "Albanian sallatë is the same word."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "English salad is the word 沙拉 imitates."
+     }
     ]
    }
   },
@@ -2534,7 +3032,18 @@
     "measure": [
      "个",
      "种"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2654,7 +3163,18 @@
     "measure": [
      "个",
      "颗"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2741,7 +3261,7 @@
      "On Christmas Eve, 平安夜 ‘the night of peace’, people in China give each other apples: 苹 píng sounds like 平 píng ‘peace’."
     ],
     "pitfalls": [
-     "苹果 can mean an iPhone in conversation: 我的苹果 may be ‘my iPhone’.",
+     "苹果 can mean an iPhone in conversation:\n→ 我的苹果 may be ‘my iPhone’.",
      "Traditional script writes 蘋果; 苹 alone is a different, rare character in traditional texts."
     ],
     "subtleties": [
@@ -2771,7 +3291,18 @@
     },
     "measure": {
      "none": "sugar as a substance is measured, not counted: 一点儿糖, 一勺糖 ‘a spoonful’; a lump or a sweet is 一块糖 / 一颗糖"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2913,7 +3444,18 @@
     },
     "measure": {
      "none": "a mass noun, measured rather than counted: 一点儿盐 ‘a little salt’, 一勺盐 ‘a spoonful’, 一袋盐 ‘a bag of salt’"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3025,7 +3567,7 @@
      "The adjective ‘salty’ is 咸 xián: 太咸了 ‘too salty’ — 盐 is only the noun."
     ],
     "subtleties": [
-     "Salt is measured, not counted: 一点儿盐, 一勺盐 ‘a spoonful of salt’, 一袋盐 ‘a bag of salt’."
+     "Salt is measured, not counted:\n→ 一点儿盐, 一勺盐 ‘a spoonful of salt’, 一袋盐 ‘a bag of salt’."
     ]
    }
   },
@@ -3051,7 +3593,18 @@
     "measure": [
      "杯",
      "瓶"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3184,11 +3737,11 @@
      "The three dots 氵 on the left of 汤 ‘soup’, 汁 ‘juice’ and 酒 ‘alcohol’ are ‘water’: they mark liquids."
     ],
     "pitfalls": [
-     "Water is measured by its container: 一杯水, 一瓶水 — not *一个水.",
+     "Water is measured by its container:\n→ 一杯水, 一瓶水 — not *一个水.",
      "Warm or boiled water (热水, 开水) is a usual drink in China; for cold water say 冰水 or 凉水."
     ],
     "subtleties": [
-     "水 can mean money or profit in a few words: 薪水 ‘salary’, 油水 ‘perks’."
+     "水 can mean money or profit in a few words:\n→ 薪水 ‘salary’, 油水 ‘perks’."
     ]
    }
   },
@@ -3214,7 +3767,18 @@
     "measure": [
      "杯",
      "壶"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3330,11 +3894,73 @@
      "Most languages took their word for tea from Chinese: tea, Tee and Hebrew תֵּה from coastal Min tê; çay, чай, τσάι and Arabic شَاي from chá."
     ],
     "pitfalls": [
-     "红茶 ‘red tea’ is what English and German call black tea (Schwarztee); 黑茶 ‘black tea’ is a fermented tea like pu’er.",
-     "Tea is counted by the cup or the pot: 一杯茶, 一壶茶."
+     "红茶 ‘red tea’ is the fully oxidised tea (German Schwarztee); 黑茶 ‘black tea’ is a post-fermented tea such as pu’er.",
+     "Tea is counted by the cup or the pot:\n→ 一杯茶, 一壶茶."
     ],
     "subtleties": [
-     "喝茶 can also mean a relaxed meeting: 有空来喝茶 ‘come over for tea some time’."
+     "喝茶 can also mean a relaxed meeting:\n→ 有空来喝茶 ‘come over for tea some time’."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English black tea is 红茶; 黑茶 is a different, post-fermented tea such as pu’er."
+     },
+     {
+      "for": "de",
+      "rel": "trap",
+      "text": "Schwarztee is 红茶; 黑茶 is a different, post-fermented tea such as Pu-Erh."
+     },
+     {
+      "for": "fr",
+      "rel": "trap",
+      "text": "Le thé noir is 红茶; 黑茶 is a different, post-fermented tea such as le pu-erh."
+     },
+     {
+      "for": "es",
+      "rel": "trap",
+      "text": "El té negro is 红茶; 黑茶 is a different, post-fermented tea such as el pu-erh."
+     },
+     {
+      "for": "it",
+      "rel": "trap",
+      "text": "Il tè nero is 红茶; 黑茶 is a different, post-fermented tea such as il pu-erh."
+     },
+     {
+      "for": "pt",
+      "rel": "trap",
+      "text": "O chá preto is 红茶; 黑茶 is a different, post-fermented tea such as o pu-erh."
+     },
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "Το μαύρο τσάι is 红茶; 黑茶 is a different, post-fermented tea such as pu-erh."
+     },
+     {
+      "for": "ru",
+      "rel": "trap",
+      "text": "Чёрный чай is 红茶; 黑茶 is a different, post-fermented tea such as пуэр."
+     },
+     {
+      "for": "sq",
+      "rel": "trap",
+      "text": "Çaji i zi is 红茶; 黑茶 is a different, post-fermented tea such as pu-erh."
+     },
+     {
+      "for": "hi",
+      "rel": "trap",
+      "text": "काली चाय is 红茶; 黑茶 is a different, post-fermented tea such as pu-erh."
+     },
+     {
+      "for": "ja",
+      "rel": "same",
+      "text": "Japanese 紅茶 kōcha is the same word for the same tea; 黑茶 is the post-fermented kind (黒茶 kurocha)."
+     },
+     {
+      "for": "ar",
+      "rel": "same",
+      "text": "Many Arabic speakers call it شاي أحمر ‘red tea’ too — that is 红茶; 黑茶 is a post-fermented tea such as pu-erh."
+     }
     ]
    }
   },
@@ -3359,7 +3985,18 @@
     },
     "measure": [
      "杯"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3435,14 +4072,31 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "One word through the learner’s languages: Arabic قَهْوَة → Turkish kahve → Italian caffè → German Kaffee, Greek καφές, Russian кофе — and Chinese 咖啡."
+     "One word across the course: Arabic قَهْوَة → (Turkish, Italian) → German Kaffee — and Chinese 咖啡."
     ],
     "pitfalls": [
      "Both characters were made for the sound (口 + a phonetic); 咖 is also read gā in 咖喱 ‘curry’.",
-     "Coffee is counted by the cup: 一杯咖啡."
+     "Coffee is counted by the cup:\n→ 一杯咖啡."
     ],
     "subtleties": [
      "咖啡色 ‘coffee colour’ is a common word for brown."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Greek καφές is the same word."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Russian кофе is the same word."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Italian caffè is the link through which it reached most of Europe."
+     }
     ]
    }
   },
@@ -3469,7 +4123,18 @@
      "杯",
      "瓶",
      "盒"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3555,11 +4220,11 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "牛 ‘cow’ is also slang for ‘awesome’: 太牛了! ‘amazing!’"
+     "牛 ‘cow’ is also slang for ‘awesome’:\n→ 太牛了! ‘amazing!’"
     ],
     "pitfalls": [
      "奶 alone is colloquial (and also ‘breast’) and it is part of 奶奶 ‘grandma’: for the drink say 牛奶.",
-     "Milk is counted by its container: 一杯 / 一瓶 / 一盒牛奶."
+     "Milk is counted by its container:\n→ 一杯 / 一瓶 / 一盒牛奶."
     ],
     "subtleties": [
      "Other milks name the animal or the source: 羊奶 ‘goat’s milk’, but soy milk is 豆浆 ‘bean liquid’."
@@ -3588,7 +4253,16 @@
     "measure": [
      "杯",
      "瓶"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": "果汁儿 guǒzhīr — northern",
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3670,11 +4344,11 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "For one fruit the 果 is dropped: 苹果汁 ‘apple juice’, 橙汁 ‘orange juice’ — fruit + 汁."
+     "For one fruit the 果 is dropped:\n→ 苹果汁 ‘apple juice’, 橙汁 ‘orange juice’ — fruit + 汁."
     ],
     "pitfalls": [
-     "Vegetable and meat juices are just 汁: 番茄汁 ‘tomato juice’, 肉汁 ‘meat juices, gravy’.",
-     "Juice is counted by the glass or the bottle: 一杯果汁, 一瓶果汁."
+     "Vegetable and meat juices are just 汁:\n→ 番茄汁 ‘tomato juice’, 肉汁 ‘meat juices, gravy’.",
+     "Juice is counted by the glass or the bottle:\n→ 一杯果汁, 一瓶果汁."
     ],
     "subtleties": [
      "Packaged ‘juice’ is often a 果汁饮料 ‘juice drink’ with little real juice — the label says so."
@@ -3703,7 +4377,16 @@
     "measure": [
      "杯",
      "瓶"
-    ]
+    ],
+    "neutralTone": "萄 tao is toneless in this word (alone: táo); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3802,7 +4485,7 @@
     ],
     "pitfalls": [
      "酒 alone is any alcoholic drink, very often Chinese spirits (白酒): for wine say 葡萄酒 or 红酒.",
-     "Wine is counted by the glass or the bottle: 一杯 / 一瓶葡萄酒."
+     "Wine is counted by the glass or the bottle:\n→ 一杯 / 一瓶葡萄酒."
     ],
     "subtleties": [
      "On the mainland 葡萄 is said pútao, with a light second syllable; Taiwan says pútáo."
@@ -3832,7 +4515,18 @@
      "杯",
      "瓶",
      "罐"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3917,7 +4611,7 @@
     ],
     "pitfalls": [
      "啤 has no meaning of its own: it exists only for the sound pí in 啤酒.",
-     "Beer is counted by glass, bottle or can: 一杯 / 一瓶 / 一罐啤酒."
+     "Beer is counted by glass, bottle or can:\n→ 一杯 / 一瓶 / 一罐啤酒."
     ],
     "subtleties": [
      "Restaurants may serve beer at room temperature: ask for 冰的 ‘a cold one’."
@@ -3945,7 +4639,18 @@
     },
     "measure": [
      "顿"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -4058,7 +4763,18 @@
     },
     "measure": [
      "顿"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -4143,7 +4859,7 @@
      "午 is the hour of the Horse, 11:00–13:00, in the old twelve-hour day; 中午 ‘noon’ and 下午 ‘afternoon’ come from it."
     ],
     "pitfalls": [
-     "午饭 is the meal, 中午 the time: 中午吃午饭 ‘have lunch at noon’."
+     "午饭 is the meal, 中午 the time:\n→ 中午吃午饭 ‘have lunch at noon’."
     ],
     "subtleties": [
      "After lunch many people take a short nap, 午睡."
@@ -4171,7 +4887,18 @@
     },
     "measure": [
      "顿"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -4287,7 +5014,14 @@
     },
     "kind": [
      "container"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "counts": "a bowl of food (一碗饭, 一碗汤)"
    }
   },
   {
@@ -4315,7 +5049,12 @@
     "kind": [
      "partitive",
      "unit"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": "块儿 kuàir — northern (一块儿蛋糕)",
+    "counts": "pieces and lumps (一块蛋糕, 一块肉); money: yuan in speech (五块钱)"
    }
   },
   {
@@ -4342,7 +5081,14 @@
     },
     "kind": [
      "container"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "counts": "a bottle of (一瓶水, 一瓶啤酒)"
    }
   },
   {
@@ -4370,7 +5116,14 @@
     "kind": [
      "partitive",
      "sortal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "counts": "portions and copies: a serving, a newspaper, a job (一份沙拉, 一份报纸, 一份工作)"
    }
   }
  ]

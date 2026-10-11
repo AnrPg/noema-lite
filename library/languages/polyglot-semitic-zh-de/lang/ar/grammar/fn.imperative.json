@@ -442,17 +442,17 @@
   {
    "lang": "he",
    "fn": "fn.imperative",
-   "note": "Hebrew builds the command from the future stem too: לֵךְ / לְכִי / לְכוּ (go!) — in speech the future often serves as a command (תֵּלֵךְ). Like Arabic it has masculine and feminine forms."
+   "note": "Hebrew builds the command from the future stem too:\n→ לֵךְ / לְכִי / לְכוּ (go!)\n\nIn speech the future often serves as a command (תֵּלֵךְ). Like Arabic it has masculine and feminine forms."
   },
   {
    "lang": "de",
    "fn": "fn.imperative",
-   "note": "German: geh! / geht! / gehen Sie! — a polite Sie-form but no gender. Arabic: four forms by gender and number, politeness by words (مِنْ فَضْلِكَ)."
+   "note": "- German: geh! / geht! / gehen Sie! — a polite Sie-form but no gender.\n- Arabic: four forms by gender and number, politeness by words (مِنْ فَضْلِكَ)."
   },
   {
    "lang": "zh",
    "fn": "fn.imperative",
-   "note": "Chinese has no command form: the bare verb (走！), 请 for “please”, 吧 to soften, 别 / 不要 for “don’t”."
+   "note": "Chinese has no command form:\n- the bare verb (走！);\n- 请 for “please”;\n- 吧 to soften;\n- 别 / 不要 for “don’t”."
   },
   {
    "lang": "ar",
@@ -479,22 +479,22 @@
   {
    "for": "el",
    "rel": "similar",
-   "text": "Greek also has a singular and a plural command (φάε / φάτε), and the plural is also polite; Arabic has four forms by gender and number, and no polite form."
+   "text": "Greek also has a singular and a plural command (φάε / φάτε), and the plural is also polite.\n\nArabic has **four forms by gender and number**, and no polite form."
   },
   {
    "for": "ru",
    "rel": "similar",
-   "text": "Russian ешь / ешьте split by number (the plural is also polite); Arabic adds gender: كُلْ (to a man), كُلِي (to a woman), كُلُوا, كُلْنَ."
+   "text": "Russian ешь / ешьте split by number (the plural is also polite); Arabic **adds gender**:\n→ كُلْ (to a man), كُلِي (to a woman), كُلُوا, كُلْنَ"
   },
   {
    "for": "es",
    "rel": "different",
-   "text": "Spanish chooses the command by politeness (come / coma, comed / coman); Arabic only by gender and number: كُلْ, كُلِي, كُلُوا, كُلْنَ."
+   "text": "Spanish chooses the command by politeness (come / coma, comed / coman); Arabic only by gender and number:\n→ كُلْ, كُلِي, كُلُوا, كُلْنَ"
   },
   {
    "for": "en",
    "rel": "new",
-   "text": "English has one form for everyone (Go!); Arabic has four: اِذْهَبْ to a man, اِذْهَبِي to a woman, اِذْهَبُوا to several, اِذْهَبْنَ to women."
+   "text": "English has one form for everyone (Go!); Arabic has four:\n- اِذْهَبْ to a man\n- اِذْهَبِي to a woman\n- اِذْهَبُوا to several\n- اِذْهَبْنَ to women"
   },
   {
    "for": "fr",
@@ -504,22 +504,22 @@
   {
    "for": "hi",
    "rel": "different",
-   "text": "Hindi has three commands by respect (जा, जाओ, जाइए); Arabic has four by gender and number (اِذْهَبْ, اِذْهَبِي, اِذْهَبُوا, اِذْهَبْنَ)."
+   "text": "Hindi has three commands by respect; Arabic has four by gender and number.\n→ जा, जाओ, जाइए\n→ اِذْهَبْ, اِذْهَبِي, اِذْهَبُوا, اِذْهَبْنَ"
   },
   {
    "for": "fa",
    "rel": "similar",
-   "text": "Persian builds the command with a prefix on the present stem (برو, go!; بروید, plural); Arabic builds it from the present by dropping the prefix and, if needed, adding a helping vowel: اِذْهَبْ."
+   "text": "Persian builds the command with a prefix on the present stem:\n→ برو, go!; بروید, plural\n\nArabic builds it from the present by dropping the prefix and, if needed, adding a helping vowel:\n→ اِذْهَبْ"
   },
   {
    "for": "tr",
    "rel": "different",
-   "text": "Turkish uses the bare stem (gel!, git!) and -in for the plural or polite (gelin); Arabic changes the ending by gender as well: تَعَالَ, تَعَالَيْ, تَعَالَوْا."
+   "text": "Turkish uses the bare stem (gel!, git!) and -in for the plural or polite (gelin).\n\nArabic changes the ending **by gender as well**:\n→ تَعَالَ, تَعَالَيْ, تَعَالَوْا"
   },
   {
    "for": "ja",
    "rel": "different",
-   "text": "Japanese softens requests with 〜てください and keeps blunt forms (行け) for rare uses; Arabic uses the plain command politely, adding مِنْ فَضْلِكَ."
+   "text": "Japanese softens requests with 〜てください and keeps blunt forms (行け) for rare uses.\n\nArabic uses **the plain command politely**, adding مِنْ فَضْلِكَ."
   },
   {
    "for": "ko",
@@ -555,6 +555,56 @@
    "for": "iu",
    "rel": "similar",
    "text": "Inuktitut commands are a mood ending with singular, dual and plural; Arabic has a dual command too (اِذْهَبَا, you two, go!), plus gender in the singular and plural."
+  },
+  {
+   "for": "de",
+   "rel": "similar",
+   "text": "German splits geh! / geht! by number and adds a polite Gehen Sie!. Arabic splits **by gender and number**:\n→ اِذْهَبْ, اِذْهَبِي, اِذْهَبُوا, اِذْهَبْنَ\n\nIt has no polite form: politeness comes from مِنْ فَضْلِكَ."
+  },
+  {
+   "for": "zh",
+   "rel": "new",
+   "text": "Chinese uses the bare verb for everyone (去!, 请坐). Arabic has **four forms by the listener’s gender and number**:\n→ اِجْلِسْ, اِجْلِسِي, اِجْلِسُوا, اِجْلِسْنَ\n\n请 is مِنْ فَضْلِكَ / مِنْ فَضْلِكِ — which changes too."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian chooses the command by politeness (mangia / mangi, mangiate); Arabic only by gender and number:\n→ كُلْ, كُلِي, كُلُوا, كُلْنَ\n\nAs non mangiare uses another form, “Don’t …!” is لَا + the jussive:\n→ لَا تَأْكُلْ"
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Albanian also has a singular and a plural command (shko! / shkoni!), and the plural is also polite. Arabic has **four by gender and number**:\n→ اِذْهَبْ, اِذْهَبِي, اِذْهَبُوا, اِذْهَبْنَ\n\nAs with mos shko!, the negative uses another form:\n→ لَا تَذْهَبْ"
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese chooses the command by politeness (come / coma, comam); Arabic only by gender and number:\n→ كُلْ, كُلِي, كُلُوا, كُلْنَ\n\nAs in não comas, the negative uses another form:\n→ لَا تَأْكُلْ"
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your language has command forms by number, Arabic **adds gender**:\n- اِذْهَبْ (to a man)\n- اِذْهَبِي (to a woman)\n- اِذْهَبُوا (to several)\n- اِذْهَبْنَ (to women)"
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If your commands are a stem + an ending for the listener, the Arabic idea is the same: the present stem without its prefix + an ending.\n\nBut **the endings show gender**:\n→ اِذْهَبْ / اِذْهَبِي"
+  },
+  {
+   "for": "type:isolating",
+   "rel": "new",
+   "text": "If your language uses the bare verb for any listener, note that the Arabic command:\n- changes for gender and number;\n- often needs a helping alif in front: اِذْهَبْ, اُدْخُلْ."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "similar",
+   "text": "If your verbs already carry the listener in an ending, the Arabic command will feel natural: the ending says who is spoken to — nothing, -ī, -ū or -na."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "If your language is Semitic, an imperative cut from the prefix form, with gender endings, is familiar.\n\nNew are:\n- the helping alif (اِذْهَبْ);\n- the jussive after لَا."
   }
  ]
 }

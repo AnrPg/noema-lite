@@ -51,7 +51,7 @@
     [
      "On Monday I work.",
      "星期一我工作。",
-     "no word for ‘on’"
+     "no preposition"
     ],
     [
      "In the evening we eat at home.",
@@ -255,7 +255,7 @@
   "*星期两 → 星期二.",
   "*我们在家晚上吃饭 → 晚上我们在家吃饭 (time before place).",
   "*三个天 → 三天 (天 counts by itself).",
-  "早上好 is the greeting; ‘in the morning’ is just 早上: 我早上喝茶."
+  "早上好 is the greeting; ‘in the morning’ is just 早上:\n→ 我早上喝茶."
  ],
  "evidence": {
   "lemmas": [
@@ -391,7 +391,7 @@
   {
    "for": "el",
    "rel": "trap",
-   "text": "Greek Δευτέρα ‘second’ is Monday and Τρίτη ‘third’ Tuesday, counted from Sunday; Chinese 星期一 is Monday and 星期二 Tuesday. Greek, too, needs no preposition with days (τη Δευτέρα), but its time words can go anywhere; Chinese ones go before the verb."
+   "text": "Greek Δευτέρα ‘second’ is Monday and Τρίτη ‘third’ Tuesday, counted from Sunday; Chinese 星期一 is Monday and 星期二 Tuesday.\n\nGreek, too, needs no preposition with days (τη Δευτέρα), but its time words can go anywhere; Chinese ones go before the verb."
   },
   {
    "for": "ru",
@@ -406,7 +406,7 @@
   {
    "for": "en",
    "rel": "trap",
-   "text": "English names the days (Monday, Tuesday), needs ‘on’ / ‘in’, and puts the time at the end (I work on Monday); Chinese numbers the days and puts the time first, with no preposition: 星期一我工作."
+   "text": "English names the days (Monday, Tuesday), needs ‘on’ / ‘in’, and puts the time at the end (I work on Monday); Chinese numbers the days and puts the time first, with no preposition:\n→ 星期一我工作."
   },
   {
    "for": "fr",
@@ -421,17 +421,17 @@
   {
    "for": "hi",
    "rel": "similar",
-   "text": "Hindi सोमवार ‘moon-day’, मंगलवार ‘Mars-day’ are planetary names; Chinese days are numbers. Hindi also puts time words before the verb (मैं कल जाऊँगा ‘I’ll go tomorrow’), as Chinese does."
+   "text": "Hindi सोमवार ‘moon-day’, मंगलवार ‘Mars-day’ are planetary names; Chinese days are numbers.\n\nHindi also puts time words before the verb (मैं कल जाऊँगा ‘I’ll go tomorrow’), as Chinese does."
   },
   {
    "for": "fa",
    "rel": "trap",
-   "text": "Persian numbers the days from Saturday: doshanbe ‘two-shanbe’ is Monday, seshanbe Tuesday; Chinese numbers from Monday: 星期一 Monday, 星期二 Tuesday. The same number names a different day."
+   "text": "Persian numbers the days from Saturday: doshanbe ‘two-shanbe’ is Monday, seshanbe Tuesday; Chinese numbers from Monday:\n→ 星期一 Monday, 星期二 Tuesday.\n\nThe same number names a different day."
   },
   {
    "for": "mr",
    "rel": "similar",
-   "text": "Marathi सोमवार, मंगळवार are planetary names; Chinese days are numbers from Monday. Marathi, like Chinese, puts the time before the verb (मी उद्या जाईन ‘I’ll go tomorrow’)."
+   "text": "Marathi सोमवार, मंगळवार are planetary names; Chinese days are numbers from Monday.\n\nMarathi, like Chinese, puts the time before the verb (मी उद्या जाईन ‘I’ll go tomorrow’)."
   },
   {
    "for": "ar",
@@ -446,17 +446,17 @@
   {
    "for": "tr",
    "rel": "similar",
-   "text": "Turkish days have names (Pazartesi, Salı); Chinese ones are numbered from Monday. Turkish puts the time before the verb (yarın gidiyorum), as Chinese does (我明天去), with no preposition."
+   "text": "Turkish days have names (Pazartesi, Salı); Chinese ones are numbered from Monday.\n\nTurkish puts the time before the verb (yarın gidiyorum), as Chinese does (我明天去), with no preposition."
   },
   {
    "for": "ja",
    "rel": "trap",
-   "text": "Japanese 月曜日 ‘moon day’ uses planetary names, so the characters do not match: Monday is 星期一. Months do match (一月, 二月), and Japanese also puts the time before the verb."
+   "text": "Japanese 月曜日 ‘moon day’ uses planetary names, so the characters do not match: Monday is 星期一.\n\nMonths do match (一月, 二月), and Japanese also puts the time before the verb."
   },
   {
    "for": "ko",
    "rel": "trap",
-   "text": "Korean 월요일 ‘moon day’ uses planetary names; Chinese numbers the days: 星期一. Korean, like Chinese, puts time words before the verb (내일 가요 ~ 明天去)."
+   "text": "Korean 월요일 ‘moon day’ uses planetary names; Chinese numbers the days:\n→ 星期一.\n\nKorean, like Chinese, puts time words before the verb (내일 가요 ~ 明天去)."
   },
   {
    "for": "fi",
@@ -471,29 +471,69 @@
   {
    "for": "sw",
    "rel": "trap",
-   "text": "Swahili numbers its days from Saturday (Jumamosi ‘day one’ = Saturday, Jumatatu ‘day three’ = Monday); Chinese numbers from Monday (星期一). Same idea, different start — the numbers do not match."
+   "text": "Swahili numbers its days from Saturday (Jumamosi ‘day one’ = Saturday, Jumatatu ‘day three’ = Monday); Chinese numbers from Monday (星期一).\n\nSame idea, different start — the numbers do not match."
   },
   {
    "for": "lg",
    "rel": "similar",
-   "text": "Luganda counts several weekdays too, and Lwakubiri ‘the second’ is Tuesday — like 星期二. Chinese numbers all of them from Monday: 星期一 … 星期六, and Sunday is 星期天."
+   "text": "Luganda counts several weekdays too, and Lwakubiri ‘the second’ is Tuesday — like 星期二.\n\nChinese numbers all of them from Monday: 星期一 … 星期六, and Sunday is 星期天."
   },
   {
    "for": "vi",
    "rel": "trap",
-   "text": "Vietnamese thứ hai ‘second’ is Monday and thứ ba Tuesday; Chinese 星期二 is Tuesday. Vietnamese time words can go at the start or the end; Chinese ones go before the verb."
+   "text": "Vietnamese thứ hai ‘second’ is Monday and thứ ba Tuesday; Chinese 星期二 is Tuesday.\n\nVietnamese time words can go at the start or the end; Chinese ones go before the verb."
   },
   {
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut marks time with suffixes inside the verb word; Chinese marks it only with separate time words before the verb (明天, 星期一), and the verb never changes."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian days are named after planets and gods (lunedì, martedì); Chinese ones are numbered from Monday (星期一, 星期二).\n\nLike Chinese, Italian needs no preposition with a day (lunedì lavoro ~ 星期一我工作), but its time words may also go at the end; Chinese ones go before the verb."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian days have names (e hënë ‘Monday’, e martë ‘Tuesday’); Chinese numbers them from Monday: 星期一, 星期二. të hënën ‘on Monday’ needs no preposition, like 星期一 — but Chinese puts it before the verb:\n→ 星期一我工作."
+  },
+  {
+   "for": "pt",
+   "rel": "trap",
+   "text": "Portuguese segunda-feira ‘second’ is Monday and terça-feira ‘third’ Tuesday, counted from Sunday; Chinese 星期一 is Monday and 星期二 Tuesday — **never translate segunda as *星期二**.\n\nna segunda needs em; 星期一 needs nothing and stands before the verb."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your days need a preposition or a case (‘on Monday’) and time words can go anywhere, Chinese uses the bare time word before the verb:\n→ 星期一我工作, 我明天去."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If your time words come before the verb with no preposition, Chinese is the same (我明天去, 星期一我工作) — but its days are numbered from Monday:\n→ 星期一 = 1."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "similar",
+   "text": "If your days are numbered too, check where the count starts: Chinese 星期一 ‘week-one’ is Monday.\n\nTime words go before the verb, never at the end."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If time is marked inside your verb word, Chinese marks it only with separate time words before the verb (明天, 星期一); the verb never changes."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "trap",
+   "text": "If your weekdays are counted from Sunday (‘the second’ = Monday), shift by one: Chinese counts from Monday — 星期一 Monday, 星期二 Tuesday."
   }
  ],
  "seeAlso": [
   {
    "lang": "de",
    "fn": "fn.time.day",
-   "note": "German uses am (am Montag, am Abend) and in der Nacht but nothing with heute / morgen / gestern; it often opens with the time and keeps the verb second (Morgen fahre ich nach Peking). Chinese needs no preposition and puts the verb after the time: 明天我去北京."
+   "note": "German uses am (am Montag, am Abend) and in der Nacht but nothing with heute / morgen / gestern; it often opens with the time and keeps the verb second (Morgen fahre ich nach Peking).\n\nChinese needs no preposition and puts the verb after the time:\n→ 明天我去北京."
   },
   {
    "lang": "ar",

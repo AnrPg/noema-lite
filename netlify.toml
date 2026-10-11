@@ -9,3 +9,4 @@
   directory = "dist/functions"
 [build.environment]
   PYTHON_VERSION = "3.11"
+  NODE_VERSION = "22"   # tools/i18n/build.js (the UI catalogs) and tools/lang_stamp.js run in the build

@@ -158,6 +158,8 @@
    {
     "id": "gender",
     "title": "gender",
+    "prominent": true,
+    "order": 1,
     "phenomenon": "he.morph.gender",
     "type": "enum",
     "values": [
@@ -168,39 +170,10 @@
     "why": "Every agreeing word (adjective, verb, demonstrative, number) depends on it, and the ending often misleads (לַיְלָה m., עִיר f.)."
    },
    {
-    "id": "translit",
-    "title": "learner transliteration",
-    "phenomenon": "he.orth.romanization",
-    "type": "string",
-    "at": "top",
-    "why": "Until the script is learned every word is shown with its romanization, in one scheme: ch for ח and כ, ts for צ, sh for שׁ, ei for ֵי, an apostrophe before an ע / א that opens a syllable inside a word, a hyphen after a prefix (be-, le-)."
-   },
-   {
-    "id": "spelling",
-    "title": "everyday spelling (no vowel points)",
-    "phenomenon": "he.orth.ktiv-male",
-    "type": "string",
-    "why": "Everyday texts are unvocalized: the learner must read and type the standard full spelling (ktiv male), which often adds ו or י to the stripped form (שֻׁלְחָן → שולחן)."
-   },
-   {
-    "id": "root",
-    "title": "root",
-    "phenomenon": "he.morph.root",
-    "type": "string",
-    "why": "The root letters, separated by spaces (כ ת ב): the root links the word to its family and to Arabic cognates. Loans, compounds and primary words say none, with the reason.",
-    "none": true
-   },
-   {
-    "id": "pattern",
-    "title": "noun pattern (mishkal)",
-    "phenomenon": "he.morph.mishkal",
-    "type": "string",
-    "none": true,
-    "why": "The pattern, written with the dummy root ק־ט־ל, carries meaning (places מִקְטָל, tools, professions קַטָּל) and predicts the plural and the construct. Loans, compounds and primary or one-syllable nouns say none."
-   },
-   {
     "id": "plurals",
     "title": "plural",
+    "prominent": true,
+    "order": 2,
     "phenomenon": "he.morph.plural",
     "type": "list",
     "none": true,
@@ -213,20 +186,33 @@
     "why": "The plural is not predictable from the gender (חַלּוֹנוֹת m., שָׁנִים f.) and the stem often changes; a meaning may have its own plural (כִּכָּרוֹת squares, כִּכְּרוֹת loaves)."
    },
    {
-    "id": "dual",
-    "title": "dual (“two …”)",
-    "phenomenon": "he.morph.dual",
-    "type": "list",
+    "id": "pluralShape",
+    "title": "how the plural is built",
+    "prominent": true,
+    "order": 3,
+    "phenomenon": [
+     "he.morph.plural",
+     "he.morph.stem-change"
+    ],
+    "type": "strings",
+    "values": [
+     "regular",
+     "ending of the other gender",
+     "segolate: vowels rebuilt",
+     "stem change",
+     "the plural of another word",
+     "compound: the first word changes",
+     "compound: both words change",
+     "noun + adjective: both change"
+    ],
     "none": true,
-    "item": {
-     "form": "string",
-     "senses": "senses?"
-    },
-    "why": "A few nouns (units of time, paired things) say “two” with the ending ־ַיִם (יוֹמַיִם); all others use שְׁנֵי / שְׁתֵּי + the plural."
+    "why": "What must be learned beyond the ending: regular (the gender's own ending, only the usual shortening of vowels: מָטוֹס → מְטוֹסִים); the ending of the other gender (חַלּוֹן → חַלּוֹנוֹת, שָׁנָה → שָׁנִים); a segolate whose vowels are rebuilt (סֵפֶר → סְפָרִים, יַלְדָּה → יְלָדוֹת); a stem change (בַּיִת → בָּתִּים, עִיר → עָרִים); the plural of another word (אַבָּא → אָבוֹת); a compound whose first word changes (בֵּית סֵפֶר → בָּתֵּי סֵפֶר), whose two words change (בֶּן דּוֹד → בְּנֵי דּוֹדִים), or a noun with its adjective (פִּלְפֵּל חָרִיף → פִּלְפְּלִים חֲרִיפִים). Agreement always follows the gender of the singular. none: no plural."
    },
    {
     "id": "construct",
     "title": "construct forms (“the … of”)",
+    "prominent": true,
+    "order": 4,
     "phenomenon": "he.morph.construct",
     "type": "list",
     "none": true,
@@ -239,8 +225,93 @@
     "why": "Needed for every “X of Y” phrase and every compound; the stem often changes (בַּיִת → בֵּית, ־ָה → ־ַת, ־ִים → ־ֵי). The forms are also paradigm cells."
    },
    {
+    "id": "possessive",
+    "title": "with a possessive ending (“my …”)",
+    "prominent": true,
+    "order": 5,
+    "phenomenon": "he.morph.poss-suffix",
+    "type": "list",
+    "none": true,
+    "item": {
+     "form": "string",
+     "number": "enum:SG|PL",
+     "register": "enum:everyday|formal"
+    },
+    "why": "The form with “my” shows the stem the endings attach to, which often differs from the plain word (מִשְׁפָּחָה → מִשְׁפַּחְתִּי, סֵפֶר → סִפְרִי, בַּיִת → בֵּיתִי); SG: one thing (“my book”), PL: several (סְפָרַי “my books”). register: everyday for family words (אָחִי, אִמִּי), formal for the others, which speech says with שֶׁל (הַסֵּפֶר שֶׁלִּי). none: loanwords, mass nouns, names of days and months, compounds, and nouns whose endings belong only to literary style."
+   },
+   {
+    "id": "root",
+    "title": "root",
+    "prominent": true,
+    "order": 6,
+    "phenomenon": "he.morph.root",
+    "type": "string",
+    "why": "The root letters, separated by spaces (כ ת ב): the root links the word to its family and to Arabic cognates. Loans, compounds and primary words say none, with the reason.",
+    "none": true
+   },
+   {
+    "id": "pattern",
+    "title": "noun pattern (mishkal)",
+    "prominent": true,
+    "order": 7,
+    "phenomenon": "he.morph.mishkal",
+    "type": "string",
+    "none": true,
+    "why": "The pattern, written with the dummy root ק־ט־ל, carries meaning (places מִקְטָל, tools, professions קַטָּל) and predicts the plural and the construct. Loans, compounds and primary or one-syllable nouns say none."
+   },
+   {
+    "id": "spelling",
+    "title": "everyday spelling (no vowel points)",
+    "prominent": true,
+    "order": 8,
+    "phenomenon": "he.orth.ktiv-male",
+    "type": "string",
+    "why": "Everyday texts are unvocalized: the learner must read and type the standard full spelling (ktiv male), which often adds ו or י to the stripped form (שֻׁלְחָן → שולחן)."
+   },
+   {
+    "id": "dual",
+    "title": "dual (“two …”)",
+    "prominent": false,
+    "order": 9,
+    "phenomenon": "he.morph.dual",
+    "type": "list",
+    "none": true,
+    "item": {
+     "form": "string",
+     "senses": "senses?"
+    },
+    "why": "A few nouns (units of time, paired things) say “two” with the ending ־ַיִם (יוֹמַיִם); all others use שְׁנֵי / שְׁתֵּי + the plural."
+   },
+   {
+    "id": "genderCue",
+    "title": "gender against the ending",
+    "prominent": false,
+    "order": 10,
+    "phenomenon": "he.morph.gender",
+    "type": "string",
+    "none": true,
+    "why": "Most feminine nouns end in ־ָה or ־ת and most masculine nouns do not; a noun that breaks this is flagged (feminine עִיר, אֶרֶץ, כּוֹס; masculine לַיְלָה). none: the ending matches the gender."
+   },
+   {
+    "id": "pair",
+    "title": "female / male counterpart",
+    "prominent": false,
+    "order": 11,
+    "phenomenon": "he.morph.person-pairs",
+    "type": "list",
+    "none": true,
+    "item": {
+     "form": "string",
+     "lexeme": "lexeme?",
+     "senses": "senses?"
+    },
+    "why": "Nouns for people come in pairs, mostly made with ־ָה, ־ֶת or ־ִית (מוֹרֶה → מוֹרָה, תַּיָּר → תַּיֶּרֶת, סְטוּדֶנְט → סְטוּדֶנְטִית), some with another word (אָח – אָחוֹת, אַבָּא – אִמָּא). lexeme: when it is in the lexicon; senses: the meaning the pair belongs to (בַּעַל “husband” ↔ אִשָּׁה “wife”). none: not a noun for a person, or one word for everyone (אָדָם)."
+   },
+   {
     "id": "meaningForms",
     "title": "forms of one meaning",
+    "prominent": false,
+    "order": 12,
     "phenomenon": "he.sem.polysemy",
     "type": "list",
     "none": true,
@@ -250,41 +321,42 @@
      "note": "string?"
     },
     "why": "A meaning may use only some forms (only the plural, only the construct, only with the article, only the imperative): each such form names its meanings."
-   }
-  ],
-  "VERB": [
+   },
    {
     "id": "translit",
     "title": "learner transliteration",
+    "prominent": false,
+    "order": 13,
     "phenomenon": "he.orth.romanization",
     "type": "string",
     "at": "top",
     "why": "Until the script is learned every word is shown with its romanization, in one scheme: ch for ח and כ, ts for צ, sh for שׁ, ei for ֵי, an apostrophe before an ע / א that opens a syllable inside a word, a hyphen after a prefix (be-, le-)."
-   },
-   {
-    "id": "spelling",
-    "title": "everyday spelling (no vowel points)",
-    "phenomenon": "he.orth.ktiv-male",
-    "type": "string",
-    "why": "Everyday texts are unvocalized: the learner must read and type the standard full spelling (ktiv male), which often adds ו or י to the stripped form (שֻׁלְחָן → שולחן)."
-   },
-   {
-    "id": "root",
-    "title": "root",
-    "phenomenon": "he.morph.root",
-    "type": "string",
-    "why": "The root letters, separated by spaces (כ ת ב): the root links the word to its family and to Arabic cognates. Loans, compounds and primary words say none, with the reason."
-   },
+   }
+  ],
+  "VERB": [
    {
     "id": "binyan",
     "title": "verb pattern (binyan)",
+    "prominent": true,
+    "order": 1,
     "phenomenon": "he.morph.binyan",
     "type": "string",
     "why": "One of paal, nifal, piel, pual, hifil, hufal, hitpael: it fixes all the forms and often the meaning relative to other verbs of the root."
    },
    {
+    "id": "root",
+    "title": "root",
+    "prominent": true,
+    "order": 2,
+    "phenomenon": "he.morph.root",
+    "type": "string",
+    "why": "The root letters, separated by spaces (כ ת ב): the root links the word to its family and to Arabic cognates. Loans, compounds and primary words say none, with the reason."
+   },
+   {
     "id": "rootClass",
     "title": "weak-root class (gizra)",
+    "prominent": true,
+    "order": 3,
     "phenomenon": "he.morph.weak-roots",
     "type": "strings",
     "values": [
@@ -306,26 +378,92 @@
     "why": "Explains the “irregular” forms: שׁוֹתָה, לִשְׁתּוֹת (lamed-he), בָּא (ayin-vav), תִּסַּע (pe-nun), לָלֶכֶת (הָלַךְ, irregular)."
    },
    {
+    "id": "present",
+    "title": "present (he …s)",
+    "prominent": true,
+    "order": 4,
+    "phenomenon": "he.morph.present",
+    "type": "string",
+    "none": true,
+    "why": "The masculine singular present (a participle: כּוֹתֵב, מְדַבֵּר, מַתְחִיל) is a principal part: its pattern belongs to the binyan, and weak roots change it (קָם, שׁוֹתֶה). none: הָיָה has no present in use."
+   },
+   {
     "id": "future",
     "title": "future (he will …)",
+    "prominent": true,
+    "order": 5,
     "phenomenon": "he.morph.future",
     "type": "string",
     "why": "The 3rd person masculine singular future is a principal part: it shows the stem vowel of pa‘al (יִכְתֹּב / יִלְמַד) and what a weak root does (יֵלֵךְ, יִסַּע)."
    },
    {
+    "id": "infinitive",
+    "title": "infinitive (to …)",
+    "prominent": true,
+    "order": 6,
+    "phenomenon": "he.morph.infinitive",
+    "type": "string",
+    "why": "The infinitive with לְ is the form a second verb takes (אֲנִי רוֹצֶה לֶאֱכֹל) and the dictionary form in speech; weak roots make it irregular (לָלֶכֶת, לָצֵאת, לָקוּם)."
+   },
+   {
     "id": "governs",
     "title": "preposition or object marker of each meaning",
+    "prominent": true,
+    "order": 7,
     "phenomenon": "he.syntax.government",
     "type": "list",
     "item": {
      "prep": "enum:et|le|be|mi|al|im|el|none",
      "senses": "senses"
     },
-    "why": "Each verb takes its own preposition or אֶת (definite object), often unlike English or Greek: חִכָּה לְ, עָזַב אֶת, נָהַג בְּ; none = no complement or a bare complement."
+    "why": "Each verb takes its own preposition or אֶת (definite object), often not the one a word-for-word translation suggests: חִכָּה לְ, עָזַב אֶת, נָהַג בְּ; none = no complement or a bare complement."
+   },
+   {
+    "id": "spelling",
+    "title": "everyday spelling (no vowel points)",
+    "prominent": true,
+    "order": 8,
+    "phenomenon": "he.orth.ktiv-male",
+    "type": "string",
+    "why": "Everyday texts are unvocalized: the learner must read and type the standard full spelling (ktiv male), which often adds ו or י to the stripped form (שֻׁלְחָן → שולחן)."
+   },
+   {
+    "id": "imperative",
+    "title": "imperative (do …!)",
+    "prominent": false,
+    "order": 9,
+    "phenomenon": "he.morph.imperative",
+    "type": "list",
+    "none": true,
+    "item": {
+     "cell": "enum:V;IMP;2;SG;MASC|V;IMP;2;SG;FEM|V;IMP;2;PL;MASC",
+     "form": "string",
+     "note": "string?"
+    },
+    "why": "To a man, to a woman, to several people (קוּם, קוּמִי, קוּמוּ). The short forms of weak roots are learned (לֵךְ, סַע, צֵא); in everyday speech the future often serves as a request (תָּקוּם!), and a prohibition is always אַל + the future (אַל תֵּלֵךְ). none: no command in use."
+   },
+   {
+    "id": "related",
+    "title": "the same root in other binyanim",
+    "prominent": false,
+    "order": 10,
+    "phenomenon": "he.morph.voice-binyan",
+    "type": "list",
+    "none": true,
+    "item": {
+     "form": "string",
+     "binyan": "enum:paal|nifal|piel|pual|hifil|hufal|hitpael",
+     "relation": "enum:passive|active|causative|basic|reflexive|transitive|intransitive|inchoative|other",
+     "lexeme": "lexeme?",
+     "note": "string?"
+    },
+    "why": "Voice and valency are a change of binyan: the passive (אָכַל → נֶאֱכַל), the causative “make someone …” (בָּא → הֵבִיא, נִכְנַס → הִכְנִיס), the transitive or intransitive partner (הִתְעוֹרֵר ↔ הֵעִיר, סִיֵּם ↔ הִסְתַּיֵּם), “become” (הָיָה → נִהְיָה). relation says what the other verb is to this one (basic: the plain verb it is built on; other: the same root with another meaning). none: no such verb in everyday use."
    },
    {
     "id": "verbalNoun",
     "title": "verbal noun (shem pe‘ula)",
+    "prominent": false,
+    "order": 11,
     "phenomenon": "he.morph.verbal-noun",
     "type": "string",
     "none": true,
@@ -334,6 +472,8 @@
    {
     "id": "meaningForms",
     "title": "forms of one meaning",
+    "prominent": false,
+    "order": 12,
     "phenomenon": "he.sem.polysemy",
     "type": "list",
     "none": true,
@@ -343,27 +483,38 @@
      "note": "string?"
     },
     "why": "A meaning may use only some forms (only the plural, only the construct, only with the article, only the imperative): each such form names its meanings."
-   }
-  ],
-  "ADJ": [
+   },
    {
     "id": "translit",
     "title": "learner transliteration",
+    "prominent": false,
+    "order": 13,
     "phenomenon": "he.orth.romanization",
     "type": "string",
     "at": "top",
     "why": "Until the script is learned every word is shown with its romanization, in one scheme: ch for ח and כ, ts for צ, sh for שׁ, ei for ֵי, an apostrophe before an ע / א that opens a syllable inside a word, a hyphen after a prefix (be-, le-)."
-   },
+   }
+  ],
+  "ADJ": [
    {
-    "id": "spelling",
-    "title": "everyday spelling (no vowel points)",
-    "phenomenon": "he.orth.ktiv-male",
-    "type": "string",
-    "why": "Everyday texts are unvocalized: the learner must read and type the standard full spelling (ktiv male), which often adds ו or י to the stripped form (שֻׁלְחָן → שולחן)."
+    "id": "inflection",
+    "title": "feminine and plural",
+    "prominent": true,
+    "order": 1,
+    "phenomenon": "he.morph.adjective",
+    "type": "list",
+    "none": true,
+    "item": {
+     "cell": "enum:ADJ;SG;FEM|ADJ;PL;MASC|ADJ;PL;FEM",
+     "form": "string"
+    },
+    "why": "An adjective agrees with its noun in gender and number; the three other forms show the vowel changes and doubled consonants (גָּדוֹל → גְּדוֹלָה, יָרֹק → יְרֻקָּה, יָפֶה → יָפָה) and the endings ־ִית / ־ִיִּים of adjectives in ־ִי (סִינִי → סִינִית). none: invariable words (בְּסֵדֶר)."
    },
    {
     "id": "root",
     "title": "root",
+    "prominent": true,
+    "order": 2,
     "phenomenon": "he.morph.root",
     "type": "string",
     "why": "The root letters, separated by spaces (כ ת ב): the root links the word to its family and to Arabic cognates. Loans, compounds and primary words say none, with the reason.",
@@ -372,6 +523,8 @@
    {
     "id": "pattern",
     "title": "adjective pattern",
+    "prominent": true,
+    "order": 3,
     "phenomenon": "he.morph.adj-patterns",
     "type": "string",
     "none": true,
@@ -380,6 +533,8 @@
    {
     "id": "governs",
     "title": "preposition of the complement",
+    "prominent": true,
+    "order": 4,
     "phenomenon": "he.syntax.government",
     "type": "list",
     "none": true,
@@ -390,8 +545,19 @@
     "why": "Some adjectives take their own preposition: קָרוֹב לְ, רָחוֹק מִ, עָיֵף מִ, רָעֵב לְ."
    },
    {
+    "id": "spelling",
+    "title": "everyday spelling (no vowel points)",
+    "prominent": true,
+    "order": 5,
+    "phenomenon": "he.orth.ktiv-male",
+    "type": "string",
+    "why": "Everyday texts are unvocalized: the learner must read and type the standard full spelling (ktiv male), which often adds ו or י to the stripped form (שֻׁלְחָן → שולחן)."
+   },
+   {
     "id": "meaningForms",
     "title": "forms of one meaning",
+    "prominent": false,
+    "order": 6,
     "phenomenon": "he.sem.polysemy",
     "type": "list",
     "none": true,
@@ -401,35 +567,43 @@
      "note": "string?"
     },
     "why": "A meaning may use only some forms (only the plural, only the construct, only with the article, only the imperative): each such form names its meanings."
-   }
-  ],
-  "ADV": [
+   },
    {
     "id": "translit",
     "title": "learner transliteration",
+    "prominent": false,
+    "order": 7,
     "phenomenon": "he.orth.romanization",
     "type": "string",
     "at": "top",
     "why": "Until the script is learned every word is shown with its romanization, in one scheme: ch for ח and כ, ts for צ, sh for שׁ, ei for ֵי, an apostrophe before an ע / א that opens a syllable inside a word, a hyphen after a prefix (be-, le-)."
-   },
-   {
-    "id": "spelling",
-    "title": "everyday spelling (no vowel points)",
-    "phenomenon": "he.orth.ktiv-male",
-    "type": "string",
-    "why": "Everyday texts are unvocalized: the learner must read and type the standard full spelling (ktiv male), which often adds ו or י to the stripped form (שֻׁלְחָן → שולחן)."
-   },
+   }
+  ],
+  "ADV": [
    {
     "id": "derivedFrom",
     "title": "built from",
+    "prominent": true,
+    "order": 1,
     "phenomenon": "he.morph.adverbs",
     "type": "string",
     "none": true,
     "why": "Many adverbs are a preposition + a noun (בְּ + אֱמֶת), the article + a noun (הַיּוֹם) or a participle; basic adverbs say none."
    },
    {
+    "id": "spelling",
+    "title": "everyday spelling (no vowel points)",
+    "prominent": true,
+    "order": 2,
+    "phenomenon": "he.orth.ktiv-male",
+    "type": "string",
+    "why": "Everyday texts are unvocalized: the learner must read and type the standard full spelling (ktiv male), which often adds ו or י to the stripped form (שֻׁלְחָן → שולחן)."
+   },
+   {
     "id": "meaningForms",
     "title": "forms of one meaning",
+    "prominent": false,
+    "order": 3,
     "phenomenon": "he.sem.polysemy",
     "type": "list",
     "none": true,
@@ -439,27 +613,68 @@
      "note": "string?"
     },
     "why": "A meaning may use only some forms (only the plural, only the construct, only with the article, only the imperative): each such form names its meanings."
-   }
-  ],
-  "NUM": [
+   },
    {
     "id": "translit",
     "title": "learner transliteration",
+    "prominent": false,
+    "order": 4,
     "phenomenon": "he.orth.romanization",
     "type": "string",
     "at": "top",
     "why": "Until the script is learned every word is shown with its romanization, in one scheme: ch for ח and כ, ts for צ, sh for שׁ, ei for ֵי, an apostrophe before an ע / א that opens a syllable inside a word, a hyphen after a prefix (be-, le-)."
+   }
+  ],
+  "NUM": [
+   {
+    "id": "agreement",
+    "title": "gender with the noun",
+    "prominent": true,
+    "order": 1,
+    "phenomenon": "he.numbers.gender",
+    "type": "enum",
+    "values": [
+     "agrees",
+     "reversed endings",
+     "one form"
+    ],
+    "why": "agrees: the masculine form with a masculine noun (אֶחָד, שְׁנַיִם, 11 and 12); reversed endings: the form in ־ָה goes with a masculine noun and the short form with a feminine noun (שְׁלוֹשָׁה סְפָרִים, שָׁלוֹשׁ מִטּוֹת: 3–10 and the units of 13–19); one form: zero, the tens, hundred and thousand."
    },
    {
-    "id": "spelling",
-    "title": "everyday spelling (no vowel points)",
-    "phenomenon": "he.orth.ktiv-male",
-    "type": "string",
-    "why": "Everyday texts are unvocalized: the learner must read and type the standard full spelling (ktiv male), which often adds ו or י to the stripped form (שֻׁלְחָן → שולחן)."
+    "id": "genderForms",
+    "title": "masculine / feminine forms",
+    "prominent": true,
+    "order": 2,
+    "phenomenon": "he.numbers.gender",
+    "type": "list",
+    "none": true,
+    "item": {
+     "gender": "enum:MASC|FEM",
+     "form": "string",
+     "note": "string?"
+    },
+    "why": "The form used with masculine nouns and the form used with feminine nouns. Plain counting, prices, the clock and phone numbers use the feminine form (אַחַת, שְׁתַּיִם, שָׁלוֹשׁ …). none: one form for both."
+   },
+   {
+    "id": "construct",
+    "title": "form before a noun (construct)",
+    "prominent": true,
+    "order": 3,
+    "phenomenon": "he.numbers.gender",
+    "type": "list",
+    "none": true,
+    "item": {
+     "gender": "enum:MASC|FEM",
+     "form": "string",
+     "note": "string?"
+    },
+    "why": "Two always has a construct form before a noun (שְׁנֵי סְפָרִים, שְׁתֵּי מִטּוֹת); the masculine 3–10 take one before a definite noun (שְׁלוֹשֶׁת הַסְּפָרִים “the three books”); one has one in “one of …” (אַחַד הַתַּלְמִידִים). none: the number stays as it is before a noun."
    },
    {
     "id": "position",
     "title": "position relative to the noun",
+    "prominent": true,
+    "order": 4,
     "phenomenon": "he.syntax.word-order",
     "type": "enum",
     "values": [
@@ -467,27 +682,33 @@
      "after"
     ],
     "why": "אֶחָד / אַחַת follows its noun like an adjective; every other number precedes it."
-   }
-  ],
-  "PRON": [
-   {
-    "id": "translit",
-    "title": "learner transliteration",
-    "phenomenon": "he.orth.romanization",
-    "type": "string",
-    "at": "top",
-    "why": "Until the script is learned every word is shown with its romanization, in one scheme: ch for ח and כ, ts for צ, sh for שׁ, ei for ֵי, an apostrophe before an ע / א that opens a syllable inside a word, a hyphen after a prefix (be-, le-)."
    },
    {
     "id": "spelling",
     "title": "everyday spelling (no vowel points)",
+    "prominent": true,
+    "order": 5,
     "phenomenon": "he.orth.ktiv-male",
     "type": "string",
     "why": "Everyday texts are unvocalized: the learner must read and type the standard full spelling (ktiv male), which often adds ו or י to the stripped form (שֻׁלְחָן → שולחן)."
    },
    {
+    "id": "translit",
+    "title": "learner transliteration",
+    "prominent": false,
+    "order": 6,
+    "phenomenon": "he.orth.romanization",
+    "type": "string",
+    "at": "top",
+    "why": "Until the script is learned every word is shown with its romanization, in one scheme: ch for ח and כ, ts for צ, sh for שׁ, ei for ֵי, an apostrophe before an ע / א that opens a syllable inside a word, a hyphen after a prefix (be-, le-)."
+   }
+  ],
+  "PRON": [
+   {
     "id": "agreement",
     "title": "gender (for agreement)",
+    "prominent": true,
+    "order": 1,
     "phenomenon": "he.syntax.agreement",
     "type": "enum",
     "values": [
@@ -499,8 +720,42 @@
     "why": "“You” and “they” have masculine and feminine words; the verb and the adjective agree with them. both = one form for both genders; inflected = the forms carry the gender (זֶה / זֹאת)."
    },
    {
+    "id": "suffix",
+    "title": "personal ending",
+    "prominent": true,
+    "order": 2,
+    "phenomenon": [
+     "he.morph.poss-suffix",
+     "he.morph.prep-suffix"
+    ],
+    "type": "string",
+    "none": true,
+    "why": "The ending that stands for this pronoun on prepositions and nouns (לִי, אִתִּי, סִפְרִי “my book”), with its form after plural nouns and plural-type prepositions (סְפָרַי, עָלַי). none: not a personal pronoun."
+   },
+   {
+    "id": "object",
+    "title": "as a definite direct object",
+    "prominent": true,
+    "order": 3,
+    "phenomenon": "he.syntax.object-et",
+    "type": "string",
+    "none": true,
+    "why": "A personal pronoun as a direct object is אֶת with the ending (אוֹתִי “me”, אוֹתוֹ “him, it”): רָאִיתִי אוֹתוֹ. none: not a personal pronoun (others stand after אֶת as they are: אֶת זֶה, אֶת מִי)."
+   },
+   {
+    "id": "spelling",
+    "title": "everyday spelling (no vowel points)",
+    "prominent": true,
+    "order": 4,
+    "phenomenon": "he.orth.ktiv-male",
+    "type": "string",
+    "why": "Everyday texts are unvocalized: the learner must read and type the standard full spelling (ktiv male), which often adds ו or י to the stripped form (שֻׁלְחָן → שולחן)."
+   },
+   {
     "id": "meaningForms",
     "title": "forms of one meaning",
+    "prominent": false,
+    "order": 5,
     "phenomenon": "he.sem.polysemy",
     "type": "list",
     "none": true,
@@ -510,27 +765,37 @@
      "note": "string?"
     },
     "why": "A meaning may use only some forms (only the plural, only the construct, only with the article, only the imperative): each such form names its meanings."
-   }
-  ],
-  "DET": [
+   },
    {
     "id": "translit",
     "title": "learner transliteration",
+    "prominent": false,
+    "order": 6,
     "phenomenon": "he.orth.romanization",
     "type": "string",
     "at": "top",
     "why": "Until the script is learned every word is shown with its romanization, in one scheme: ch for ח and כ, ts for צ, sh for שׁ, ei for ֵי, an apostrophe before an ע / א that opens a syllable inside a word, a hyphen after a prefix (be-, le-)."
-   },
+   }
+  ],
+  "DET": [
    {
-    "id": "spelling",
-    "title": "everyday spelling (no vowel points)",
-    "phenomenon": "he.orth.ktiv-male",
+    "id": "nounAfter",
+    "title": "the noun after it",
+    "prominent": true,
+    "order": 1,
+    "phenomenon": [
+     "he.syntax.kol",
+     "he.syntax.word-order"
+    ],
     "type": "string",
-    "why": "Everyday texts are unvocalized: the learner must read and type the standard full spelling (ktiv male), which often adds ו or י to the stripped form (שֻׁלְחָן → שולחן)."
+    "none": true,
+    "why": "What kind of noun the word takes, and how the meaning changes with it: כָּל + an indefinite singular = every (כָּל יוֹם), + a definite noun = all, the whole (כָּל הַיּוֹם); שׁוּם only in a negative sentence; הַהוּא after a definite noun."
    },
    {
     "id": "position",
     "title": "position relative to the noun",
+    "prominent": true,
+    "order": 2,
     "phenomenon": "he.syntax.word-order",
     "type": "enum",
     "values": [
@@ -540,8 +805,19 @@
     "why": "הַהוּא follows its noun (with the article, like an adjective); כָּל, אֵיזֶה, הַרְבֵּה, קְצָת, כַּמָּה precede it."
    },
    {
+    "id": "spelling",
+    "title": "everyday spelling (no vowel points)",
+    "prominent": true,
+    "order": 3,
+    "phenomenon": "he.orth.ktiv-male",
+    "type": "string",
+    "why": "Everyday texts are unvocalized: the learner must read and type the standard full spelling (ktiv male), which often adds ו or י to the stripped form (שֻׁלְחָן → שולחן)."
+   },
+   {
     "id": "meaningForms",
     "title": "forms of one meaning",
+    "prominent": false,
+    "order": 4,
     "phenomenon": "he.sem.polysemy",
     "type": "list",
     "none": true,
@@ -551,35 +827,34 @@
      "note": "string?"
     },
     "why": "A meaning may use only some forms (only the plural, only the construct, only with the article, only the imperative): each such form names its meanings."
-   }
-  ],
-  "ADP": [
+   },
    {
     "id": "translit",
     "title": "learner transliteration",
+    "prominent": false,
+    "order": 5,
     "phenomenon": "he.orth.romanization",
     "type": "string",
     "at": "top",
     "why": "Until the script is learned every word is shown with its romanization, in one scheme: ch for ח and כ, ts for צ, sh for שׁ, ei for ֵי, an apostrophe before an ע / א that opens a syllable inside a word, a hyphen after a prefix (be-, le-)."
-   },
+   }
+  ],
+  "ADP": [
    {
     "id": "prefix",
     "title": "written onto the next word",
+    "prominent": true,
+    "order": 1,
     "phenomenon": "he.orth.prefix-clitics",
     "type": "bool",
     "at": "top",
     "why": "בְּ, לְ, מִ are prefixes, written onto the next word and fused with the article (בַּבַּיִת); the others are words of their own."
    },
    {
-    "id": "spelling",
-    "title": "everyday spelling (no vowel points)",
-    "phenomenon": "he.orth.ktiv-male",
-    "type": "string",
-    "why": "Everyday texts are unvocalized: the learner must read and type the standard full spelling (ktiv male), which often adds ו or י to the stripped form (שֻׁלְחָן → שולחן)."
-   },
-   {
     "id": "pronForms",
     "title": "forms with personal endings",
+    "prominent": true,
+    "order": 2,
     "phenomenon": "he.morph.prep-suffix",
     "type": "list",
     "none": true,
@@ -588,77 +863,144 @@
      "form": "string"
     },
     "why": "Prepositions take endings instead of pronouns, often with another stem (עִם → אִתִּי, מִ → מִמֶּנִּי, אֶת → אוֹתִי)."
-   }
-  ],
-  "CCONJ": [
+   },
+   {
+    "id": "suffixSet",
+    "title": "type of personal endings",
+    "prominent": true,
+    "order": 3,
+    "phenomenon": "he.morph.prep-suffix",
+    "type": "enum",
+    "none": true,
+    "values": [
+     "singular-noun endings",
+     "plural-noun endings",
+     "singular endings, plural-noun endings in the plural",
+     "a stem of its own"
+    ],
+    "why": "Prepositions take one of the two sets of noun endings: those of a singular noun (לִי, לוֹ; בִּשְׁבִילִי) or those of a plural noun (עָלַי, עָלָיו; אַחֲרַי); בֵּין mixes them (בֵּינִי but בֵּינֵינוּ), and some change their stem (עִם → אִתִּי, מִן → מִמֶּנִּי, אֶת → אוֹתִי). none: no personal endings."
+   },
+   {
+    "id": "withArticle",
+    "title": "with the article",
+    "prominent": true,
+    "order": 4,
+    "phenomenon": [
+     "he.orth.prefix-clitics",
+     "he.morph.article"
+    ],
+    "type": "string",
+    "none": true,
+    "why": "The one-letter prepositions בְּ and לְ swallow the article: בַּבַּיִת, לַשּׁוּק (only the vowel shows it); מִ does not: מֵהַבַּיִת. none: a separate word, after which the article stays on the noun (עַל הַשֻּׁלְחָן), or a form that takes no noun."
+   },
+   {
+    "id": "spelling",
+    "title": "everyday spelling (no vowel points)",
+    "prominent": true,
+    "order": 5,
+    "phenomenon": "he.orth.ktiv-male",
+    "type": "string",
+    "why": "Everyday texts are unvocalized: the learner must read and type the standard full spelling (ktiv male), which often adds ו or י to the stripped form (שֻׁלְחָן → שולחן)."
+   },
    {
     "id": "translit",
     "title": "learner transliteration",
+    "prominent": false,
+    "order": 6,
     "phenomenon": "he.orth.romanization",
     "type": "string",
     "at": "top",
     "why": "Until the script is learned every word is shown with its romanization, in one scheme: ch for ח and כ, ts for צ, sh for שׁ, ei for ֵי, an apostrophe before an ע / א that opens a syllable inside a word, a hyphen after a prefix (be-, le-)."
-   },
+   }
+  ],
+  "CCONJ": [
    {
     "id": "prefix",
     "title": "written onto the next word",
+    "prominent": true,
+    "order": 1,
     "phenomenon": "he.orth.prefix-clitics",
     "type": "bool",
     "at": "top",
     "why": "וְ is a prefix with several spellings (וּ, וַ); אוֹ and אֲבָל are words of their own."
    },
    {
+    "id": "allomorphs",
+    "title": "forms by the next sound",
+    "prominent": true,
+    "order": 2,
+    "phenomenon": "he.orth.prefix-vowels",
+    "type": "string",
+    "none": true,
+    "why": "The prefix וְ changes its vowel with the next sound: וּ before ב, מ, פ and before a shva (וּבַיִת, וּמַיִם, וּשְׁנַיִם), וִ before יְ (וִירוּשָׁלַיִם). none: one form."
+   },
+   {
     "id": "spelling",
     "title": "everyday spelling (no vowel points)",
+    "prominent": true,
+    "order": 3,
     "phenomenon": "he.orth.ktiv-male",
     "type": "string",
     "why": "Everyday texts are unvocalized: the learner must read and type the standard full spelling (ktiv male), which often adds ו or י to the stripped form (שֻׁלְחָן → שולחן)."
-   }
-  ],
-  "SCONJ": [
+   },
    {
     "id": "translit",
     "title": "learner transliteration",
+    "prominent": false,
+    "order": 4,
     "phenomenon": "he.orth.romanization",
     "type": "string",
     "at": "top",
     "why": "Until the script is learned every word is shown with its romanization, in one scheme: ch for ח and כ, ts for צ, sh for שׁ, ei for ֵי, an apostrophe before an ע / א that opens a syllable inside a word, a hyphen after a prefix (be-, le-)."
-   },
+   }
+  ],
+  "SCONJ": [
    {
     "id": "prefix",
     "title": "written onto the next word",
+    "prominent": true,
+    "order": 1,
     "phenomenon": "he.orth.prefix-clitics",
     "type": "bool",
     "at": "top",
     "why": "שֶׁ and כְּשֶׁ are written onto the first word of their clause; כִּי, אִם, אַף עַל פִּי are words of their own."
    },
    {
+    "id": "tense",
+    "title": "tense in the clause",
+    "prominent": true,
+    "order": 2,
+    "phenomenon": "he.syntax.subordination",
+    "type": "string",
+    "none": true,
+    "why": "Some conjunctions call for a particular tense: a future event after כְּשֶׁ or אִם is in the future (כְּשֶׁאֶגְדַּל, אִם יֵרֵד גֶּשֶׁם). none: the clause keeps its own tense."
+   },
+   {
     "id": "spelling",
     "title": "everyday spelling (no vowel points)",
+    "prominent": true,
+    "order": 3,
     "phenomenon": "he.orth.ktiv-male",
     "type": "string",
     "why": "Everyday texts are unvocalized: the learner must read and type the standard full spelling (ktiv male), which often adds ו or י to the stripped form (שֻׁלְחָן → שולחן)."
-   }
-  ],
-  "INTJ": [
+   },
    {
     "id": "translit",
     "title": "learner transliteration",
+    "prominent": false,
+    "order": 4,
     "phenomenon": "he.orth.romanization",
     "type": "string",
     "at": "top",
     "why": "Until the script is learned every word is shown with its romanization, in one scheme: ch for ח and כ, ts for צ, sh for שׁ, ei for ֵי, an apostrophe before an ע / א that opens a syllable inside a word, a hyphen after a prefix (be-, le-)."
-   },
-   {
-    "id": "spelling",
-    "title": "everyday spelling (no vowel points)",
-    "phenomenon": "he.orth.ktiv-male",
-    "type": "string",
-    "why": "Everyday texts are unvocalized: the learner must read and type the standard full spelling (ktiv male), which often adds ו or י to the stripped form (שֻׁלְחָן → שולחן)."
-   },
+   }
+  ],
+  "INTJ": [
    {
     "id": "addressee",
     "title": "said to",
+    "prominent": true,
+    "order": 1,
     "phenomenon": "he.prag.gendered-address",
     "type": "enum",
     "values": [
@@ -672,24 +1014,39 @@
    {
     "id": "reply",
     "title": "usual reply",
+    "prominent": true,
+    "order": 2,
     "phenomenon": "he.prag.greeting-replies",
     "type": "string",
     "none": true,
     "why": "Greetings and formulas have set answers (בֹּקֶר טוֹב → בֹּקֶר אוֹר, תּוֹדָה → בְּבַקָּשָׁה)."
-   }
-  ],
-  "PART": [
-   {
-    "id": "translit",
-    "title": "learner transliteration",
-    "phenomenon": "he.orth.romanization",
-    "type": "string",
-    "at": "top",
-    "why": "Until the script is learned every word is shown with its romanization, in one scheme: ch for ח and כ, ts for צ, sh for שׁ, ei for ֵי, an apostrophe before an ע / א that opens a syllable inside a word, a hyphen after a prefix (be-, le-)."
    },
    {
     "id": "spelling",
     "title": "everyday spelling (no vowel points)",
+    "prominent": true,
+    "order": 3,
+    "phenomenon": "he.orth.ktiv-male",
+    "type": "string",
+    "why": "Everyday texts are unvocalized: the learner must read and type the standard full spelling (ktiv male), which often adds ו or י to the stripped form (שֻׁלְחָן → שולחן)."
+   },
+   {
+    "id": "translit",
+    "title": "learner transliteration",
+    "prominent": false,
+    "order": 4,
+    "phenomenon": "he.orth.romanization",
+    "type": "string",
+    "at": "top",
+    "why": "Until the script is learned every word is shown with its romanization, in one scheme: ch for ח and כ, ts for צ, sh for שׁ, ei for ֵי, an apostrophe before an ע / א that opens a syllable inside a word, a hyphen after a prefix (be-, le-)."
+   }
+  ],
+  "PART": [
+   {
+    "id": "spelling",
+    "title": "everyday spelling (no vowel points)",
+    "prominent": true,
+    "order": 1,
     "phenomenon": "he.orth.ktiv-male",
     "type": "string",
     "why": "Everyday texts are unvocalized: the learner must read and type the standard full spelling (ktiv male), which often adds ו or י to the stripped form (שֻׁלְחָן → שולחן)."
@@ -697,6 +1054,8 @@
    {
     "id": "meaningForms",
     "title": "forms of one meaning",
+    "prominent": false,
+    "order": 2,
     "phenomenon": "he.sem.polysemy",
     "type": "list",
     "none": true,
@@ -706,6 +1065,16 @@
      "note": "string?"
     },
     "why": "A meaning may use only some forms (only the plural, only the construct, only with the article, only the imperative): each such form names its meanings."
+   },
+   {
+    "id": "translit",
+    "title": "learner transliteration",
+    "prominent": false,
+    "order": 3,
+    "phenomenon": "he.orth.romanization",
+    "type": "string",
+    "at": "top",
+    "why": "Until the script is learned every word is shown with its romanization, in one scheme: ch for ח and כ, ts for צ, sh for שׁ, ei for ֵי, an apostrophe before an ע / א that opens a syllable inside a word, a hyphen after a prefix (be-, le-)."
    }
   ]
  }

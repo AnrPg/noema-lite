@@ -1,0 +1,8 @@
+{
+  "@@locale": "en",
+  "packs.langTag": "Content in {lang}",
+  "@packs.langTag": {
+    "description": "Tooltip and screen-reader label of the small language tag (e.g. “EN”) shown next to a subject's name in the subject picker, the Shelf, Explore and the subject's home screen when the subject's content is in another language than the interface (docs/i18n.md §10). {lang} is the language's name in the interface language (e.g. “English”, “Greek”). Short.",
+    "placeholders": { "lang": { "type": "String", "example": "English" } }
+  }
+}

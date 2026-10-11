@@ -35,7 +35,7 @@ function runSession(plan, { only = null } = {}) {
   const total = queue.length, stats = { right: 0, wrong: 0, introduced: 0 }, retried = new Set();
   const before = Object.fromEntries(activeLangs().map(c => [c, N.nodeStates(UI.C, UI.L, c)]));
   const m = $('.lx-main'); const bar = h('div', { class: 'lx-progress' }, h('i')), stage = h('div', { class: 'lx-stage' });
-  m.innerHTML = ''; m.append(h('div', { class: 'view lx-view lx-session' }, h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => { save(true); go('#/'); render(); } }, '✕ Stop'), bar), stage));
+  m.innerHTML = ''; m.append(h('div', { class: 'view lx-view lx-session' }, h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => { save(true); go('#/'); render(); } }, '✕ ' + LT('lang.sess.stop')), bar), stage));
   let i = 0;
   const next = () => {
     bar.firstChild.style.width = Math.round(i / (total + retried.size) * 100) + '%';
@@ -53,23 +53,23 @@ function runSession(plan, { only = null } = {}) {
       ok ? stats.right++ : stats.wrong++;
       const key = a.kind + a.lang + (a.lex || JSON.stringify([a.it?.sentence, a.it?.prompt, a.it?.kind]));
       if (!ok && a.kind !== 'poly' && !retried.has(key)) { retried.add(key); queue.splice(Math.min(3, queue.length), 0, { ...a, retry: true }); }   // once more, a little later
-      const btn = h('button', { class: 'btn primary lx-next' }, 'Next →'); btn.onclick = next;
+      const btn = h('button', { class: 'btn primary lx-next' }, LT('lang.drill.next') + ' ' + arrowOn()); btn.onclick = next;
       stage.append(h('div', { class: 'row lx-nextrow' }, btn)); setTimeout(() => btn.focus(), 30);
     };
     UI.current = a;
     const ex = a.kind === 'script' ? scriptStep(a, done) : ['item', 'deep', 'poly'].includes(a.kind) ? exItem(a.it, done) : a.kind === 'intro' ? exIntro(a.lang, a.lex, done) : a.kind === 'rec' ? exRecognize(a.lang, a.lex, done) : a.kind === 'pic' ? exPicture(a.lang, a.lex, done) : exProduce(a.lang, a.lex, done);
     Object.assign(ex.dataset, a.kind === 'poly' ? { kind: a.it.kind, lang: a.lang, poly: '1' } : { kind: a.kind === 'item' ? a.it.kind : a.kind, lang: a.lang, ...(a.lex ? { lex: a.lex } : {}) });   // for tests and styling
-    stage.append(h('div', { class: 'tiny lx-which' }, a.kind === 'poly' ? '🌐 across your languages' : [info(a.lang).flag, ' ', info(a.lang).name], a.review ? ' · review' : '', a.pair ? ' · ⇄ with its relative' : '', a.kind === 'deep' ? ' · ' + (DEEP_LABEL[a.it.kind] || '🏋️') : '', a.retry ? ' · once more' : ''), ex);
+    stage.append(h('div', { class: 'tiny lx-which' }, a.kind === 'poly' ? '🌐 ' + LT('lang.sess.across') : [info(a.lang).flag, ' ', info(a.lang).label], a.review ? ' · ' + LT('lang.sess.review') : '', a.pair ? ' · ⇄ ' + LT('lang.sess.relative') : '', a.kind === 'deep' ? ' · ' + (DEEP_LABEL[a.it.kind] || '🏋️') : '', a.retry ? ' · ' + LT('lang.sess.onceMore') : ''), ex);
   };
   const finish = () => {
     save(true); bar.firstChild.style.width = '100%'; stage.innerHTML = '';
     const opened = [];
     for (const c of activeLangs()) { const now = N.nodeStates(UI.C, UI.L, c); for (const nid of UI.C.order) if (before[c][nid] !== now[nid] && ['open', 'known', 'mastered'].includes(now[nid])) opened.push(`${info(c).flag} ${UI.C.nodes[nid].title}: ${STATE_LABEL[now[nid]]}`); }
-    stage.append(h('div', { class: 'lx-result' }, h('h2', {}, '🎉 Session done'),
-      h('p', {}, `${stats.introduced} new · ${stats.right} right · ${stats.wrong} to practise again`),
+    stage.append(h('div', { class: 'lx-result' }, h('h2', {}, '🎉 ' + LT('lang.sess.done')),
+      h('p', {}, LT('lang.sess.stats', { nNew: stats.introduced, right: stats.right, wrong: stats.wrong })),
       opened.length ? h('ul', {}, ...opened.map(t => h('li', {}, t))) : null,
       newWordsList(),
-      h('div', { class: 'row' }, qaNextLessonButton(null, activeLangs()), h('button', { class: 'btn primary', onclick: () => go('#/') }, 'Back to the map'))));   // the next step offered (QA)
+      h('div', { class: 'row' }, qaNextLessonButton(null, activeLangs()), h('button', { class: 'btn primary', onclick: () => go('#/') }, LT('lang.sess.backToMap')))));   // the next step offered (QA)
   };
   document.onkeydown = e => {
     if (!$('.lx-session')) { document.onkeydown = null; return; }
@@ -78,5 +78,5 @@ function runSession(plan, { only = null } = {}) {
   next();
 }
 /** The word profiles arrive after the start: a word card on screen is drawn again with them. */
-function addProfiles(map) { const n = N.addProfiles(UI.C, map); UI.profiles = true; if (n && ['c', 'w', 'node', 'field'].includes(UI.view) && !$('.lx-session')) render(); return n; }
+function addProfiles(map) { UI.profMap = map; const n = N.addProfiles(UI.C, facadeProfMap(map)); UI.profiles = true; if (n && ['c', 'w', 'node', 'field'].includes(UI.view) && !$('.lx-session')) render(); return n; }
 window.NoemaLangUI = { start, render, go, toHash, innerHash, FR, UI, addProfiles, save, foldRemote, ex: { exPicture, exRecognize, exProduce, exItem } };

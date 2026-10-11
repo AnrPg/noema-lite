@@ -221,7 +221,7 @@
     "Tust du Tee trinken?"
    ],
    "answer": "Trinkst du Tee?",
-   "why": "The verb moves to the front; no “do”."
+   "why": "The conjugated verb itself moves to the front – tun is not a helper verb."
   },
   {
    "q": "Isst du kein Fleisch? – ___! (Yes, I do.)",
@@ -305,12 +305,12 @@
   {
    "for": "el",
    "rel": "different",
-   "text": "Greek keeps the statement order and changes only the intonation (Πίνεις τσάι;); German moves the verb to the front: Trinkst du Tee? Greek has no single word for doch – it needs a sentence (Ναι, πίνω)."
+   "text": "Greek keeps the statement order and changes only the intonation (Πίνεις τσάι;); German moves the verb to the front:\n→ Trinkst du Tee?\n\nGreek has no single word for doch – it needs a sentence (Ναι, πίνω)."
   },
   {
    "for": "ru",
    "rel": "different",
-   "text": "Russian asks by intonation (Ты пьёшь чай?); German must move the verb first: Trinkst du Tee? There is no single word like doch: Russian answers with the verb (Пью!)."
+   "text": "Russian asks by intonation (Ты пьёшь чай?); German must move the verb first:\n→ Trinkst du Tee?\n\nThere is no single word like doch: Russian answers with the verb (Пью!)."
   },
   {
    "for": "es",
@@ -320,17 +320,17 @@
   {
    "for": "en",
    "rel": "trap",
-   "text": "German adds no do: Do you drink tea? = Trinkst du Tee? (with be, have and modals English inverts as German does). “Yes” to a negative question is doch."
+   "text": "German adds no do (with be, have and modals English inverts as German does):\n→ Do you drink tea? = Trinkst du Tee?\n\n“Yes” to a negative question is doch."
   },
   {
    "for": "fr",
    "rel": "similar",
-   "text": "Inversion (Bois-tu du thé ?) is the German pattern, but in German it is the normal question; est-ce que has no counterpart. doch is French si."
+   "text": "Inversion (Bois-tu du thé ?) is the German pattern, but in German it is the normal question; est-ce que has no counterpart.\n\ndoch is French si."
   },
   {
    "for": "hi",
    "rel": "different",
-   "text": "Hindi can start with kyā and keeps the verb at the end (kyā tum cāy pīte ho?); German has no question word for yes / no: it moves the verb first."
+   "text": "Hindi can start with kyā and keeps the verb at the end (kyā tum cāy pīte ho?).\n\nGerman has no question word for yes / no: it moves the verb first."
   },
   {
    "for": "fa",
@@ -345,7 +345,7 @@
   {
    "for": "ar",
    "rel": "similar",
-   "text": "Arabic starts with hal or ʾa-; German starts with the verb. balā is exactly doch: “yes” against a negative."
+   "text": "Arabic starts with hal or ʾa-; German starts with the verb.\n\nbalā is exactly doch: “yes” against a negative."
   },
   {
    "for": "he",
@@ -355,7 +355,7 @@
   {
    "for": "tr",
    "rel": "different",
-   "text": "Turkish adds the particle mi after the word asked about (Çay içiyor musun?); German has no particle and moves the verb first."
+   "text": "Turkish adds the particle mi after the word asked about (Çay içiyor musun?).\n\nGerman has no particle and moves the verb first."
   },
   {
    "for": "ja",
@@ -370,7 +370,7 @@
   {
    "for": "fi",
    "rel": "similar",
-   "text": "Finnish also puts the verb first, with -ko / -kö on it (Juotko teetä?); German moves the verb first without any suffix: Trinkst du Tee?"
+   "text": "Finnish also puts the verb first, with -ko / -kö on it (Juotko teetä?); German moves the verb first without any suffix:\n→ Trinkst du Tee?"
   },
   {
    "for": "hu",
@@ -380,22 +380,62 @@
   {
    "for": "sw",
    "rel": "different",
-   "text": "Swahili may start with Je and otherwise asks by intonation (Je, unakunywa chai?); German moves the verb first."
+   "text": "Swahili may start with Je and otherwise asks by intonation (Je, unakunywa chai?).\n\nGerman moves the verb first."
   },
   {
    "for": "zh",
    "rel": "different",
-   "text": "Chinese adds 吗 (你喝茶吗?) or uses verb-not-verb (你喝不喝茶?); German moves the verb to the front: Trinkst du Tee?"
+   "text": "Chinese adds 吗 (你喝茶吗?) or uses verb-not-verb (你喝不喝茶?); German moves the verb to the front:\n→ Trinkst du Tee?"
   },
   {
    "for": "vi",
    "rel": "different",
-   "text": "Vietnamese frames the verb with có … không (anh có uống trà không?); German just moves the verb first."
+   "text": "Vietnamese frames the verb with có … không (anh có uống trà không?).\n\nGerman just moves the verb first."
   },
   {
    "for": "iu",
    "rel": "different",
-   "text": "Inuktitut shows a question with a special verb ending (the interrogative mood); German keeps the verb form and moves it to the front."
+   "text": "Inuktitut shows a question with a special verb ending (the interrogative mood).\n\nGerman keeps the verb form and moves it to the front."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian asks by intonation alone (Bevi tè?); German moves the verb to the front: Trinkst du Tee?.\n\nFor “yes” against a negative German has one word, doch, where Italian needs a phrase (sì che lo bevo):\n→ Trinkst du keinen Kaffee? – Doch!"
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian asks with a at the start or by intonation (A pi çaj?); German moves the verb to the front instead: Trinkst du Tee?.\n\npo is ja, jo is nein, and for “yes” against a negative German has the special word doch."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese asks by intonation (Bebes chá?) and often answers with the verb (Bebo.); German moves the verb to the front (Trinkst du Tee?) and answers ja / nein.\n\n“Yes” to a negative question is doch:\n→ Não bebes café? – Doch!"
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your yes/no questions use intonation or a particle, German moves the conjugated verb to the front instead and needs no helper verb:\n→ Trinkst du Tee?\n\ndoch answers “yes” to a negative question."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If you ask with a question particle or suffix and keep the verb at the end, German has no particle: the verb itself moves to the front, and the voice usually rises.\n→ Trinkst du Tee?"
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If you add a particle at the end or repeat the verb with a negative, German moves the verb to the front instead: Trinkst du Tee?.\n\ndoch answers “yes” to a negative question:\n→ Trinkst du keinen Kaffee? – Doch!"
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If a question is a suffix on your verb, German shows it by word order: the conjugated verb comes first, and nothing is added to the verb.\n→ Trinkst du Tee?"
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If you ask with a particle before the statement or with intonation alone, German moves the verb itself to the front: Trinkst du Tee?.\n\n“Yes” against a negative question is the special word doch:\n→ Isst du kein Fleisch? – Doch!"
   }
  ]
 }

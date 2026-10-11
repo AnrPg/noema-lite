@@ -173,10 +173,10 @@
  },
  "traps": [
   "Never drop the pronoun: Ich bin müde, not *Bin müde – the verb ending alone is not enough.",
-  "ich is written with a small letter inside a sentence; only the polite Sie (and Ihnen, Ihr) takes a capital.",
+  "ich is written with a small letter inside a sentence.\n\nOnly the polite Sie (and Ihnen, Ihr) takes a capital.",
   "A girl is es in grammar (das Mädchen … es), though people often say sie once they know her name.",
   "Sie (polite) takes the verb of “they”: Sie sind, never *Sie bist / *Sie ist.",
-  "ihr (you, plural) is also ihr = (to) her and ihr = her/their (possessive); the verb shows which: ihr seid."
+  "ihr (you, plural) is also ihr = (to) her and ihr = her/their (possessive).\n\nThe verb shows which: ihr seid."
  ],
  "evidence": {
   "lemmas": [
@@ -293,12 +293,12 @@
   {
    "lang": "ar",
    "fn": "fn.pronoun.subject",
-   "note": "Arabic splits “you” and “they” by gender (anta / anti, hum / hunna) and has a dual (antumā, humā); the pronoun is often dropped because the verb shows the person."
+   "note": "Arabic splits “you” and “they” by gender (anta / anti, hum / hunna) and has a dual (antumā, humā).\n\nThe pronoun is often dropped because the verb shows the person."
   },
   {
    "lang": "he",
    "fn": "fn.pronoun.subject",
-   "note": "Hebrew also splits “you” and “they” by gender (atá / at, atem / aten, hem / hen); in the past tense ani / ata can be left out, in the present not."
+   "note": "Hebrew also splits “you” and “they” by gender (atá / at, atem / aten, hem / hen).\n\nIn the past tense ani / ata can be left out, in the present not."
   },
   {
    "lang": "zh",
@@ -315,102 +315,142 @@
   {
    "for": "el",
    "rel": "trap",
-   "text": "Greek can drop the pronoun (είμαι κουρασμένος); German never can: Ich bin müde. αυτός / αυτή / αυτό follow the noun’s gender like er / sie / es, but polite εσείς takes the 2nd plural, while Sie takes the form of “they” (Sie sind)."
+   "text": "Greek can drop the pronoun (είμαι κουρασμένος); **German never can**: Ich bin müde.\n\nαυτός / αυτή / αυτό follow the noun’s gender like er / sie / es, but polite εσείς takes the 2nd plural, while Sie takes the form of “they” (Sie sind)."
   },
   {
    "for": "ru",
    "rel": "similar",
-   "text": "он / она / оно follow the grammatical gender of the noun exactly like er / sie / es (стол → он, der Tisch → er). The polite вы is the 2nd plural; German Sie is the 3rd plural with a capital S, and ihr is a separate plural “you”."
+   "text": "он / она / оно follow the grammatical gender of the noun exactly like er / sie / es (стол → он, der Tisch → er).\n\nThe polite вы is the 2nd plural; German Sie is the 3rd plural with a capital S, and ihr is a separate plural “you”."
   },
   {
    "for": "es",
    "rel": "trap",
-   "text": "Spanish leaves the pronoun out (Soy profesor); German must say Ich bin Lehrer. There is no everyday subject pronoun for things in Spanish (Es grande); German says Er / Sie / Es ist groß by the noun’s gender. usted takes the 3rd singular, but Sie always takes the plural form: Sie sind."
+   "text": "- Spanish leaves the pronoun out (Soy profesor); German must say Ich bin Lehrer.\n- There is no everyday subject pronoun for things in Spanish (Es grande); German says Er / Sie / Es ist groß by the noun’s gender.\n- usted takes the 3rd singular, but Sie always takes the plural form: Sie sind."
   },
   {
    "for": "en",
    "rel": "trap",
-   "text": "it covers every thing in English; German uses er, sie or es by the noun’s gender: der Tisch → er, die Lampe → sie. you is one word for du, ihr and Sie. ich is lower-case inside a sentence, unlike I."
+   "text": "- it covers every thing in English; German uses er, sie or es by the noun’s gender: der Tisch → er, die Lampe → sie.\n- you is one word for du, ihr and Sie.\n- ich is lower-case inside a sentence, unlike I."
   },
   {
    "for": "fr",
    "rel": "similar",
-   "text": "Obligatory pronouns and il / elle for things by gender (la table → elle) work as in German, but German adds a neuter es. vous is polite and plural at once; German splits it into Sie (polite) and ihr (several friends)."
+   "text": "Obligatory pronouns and il / elle for things by gender (la table → elle) work as in German, but German adds a neuter es.\n\nvous is polite and plural at once; German splits it into Sie (polite) and ihr (several friends)."
   },
   {
    "for": "hi",
    "rel": "different",
-   "text": "vah / vo is he, she and it; the gender shows only on the verb (vah jātā hai / vah jātī hai). German shows it in the pronoun (er / sie / es) and never on the verb. Hindi has three degrees of “you” (tū, tum, āp), German two (du, Sie) plus the plural ihr."
+   "text": "- vah / vo is he, she and it; the gender shows only on the verb (vah jātā hai / vah jātī hai). German shows it in the pronoun (er / sie / es) and never on the verb.\n- Hindi has three degrees of “you” (tū, tum, āp), German two (du, Sie) plus the plural ihr."
   },
   {
    "for": "fa",
    "rel": "different",
-   "text": "u is he and she, and the pronoun is often left out because the verb ending shows the person (miravam). German has er / sie / es and needs the pronoun every time. šomā is polite like Sie, but it is the 2nd plural, Sie the 3rd."
+   "text": "- u is he and she, and the pronoun is often left out because the verb ending shows the person (miravam). German has er / sie / es and **needs the pronoun every time**.\n- šomā is polite like Sie, but it is the 2nd plural, Sie the 3rd."
   },
   {
    "for": "mr",
    "rel": "similar",
-   "text": "to / tī / te (he, she, it) have three genders like er / sie / es. German wir has no inclusive / exclusive split: it is used for āpaṇ and āmhī alike."
+   "text": "- to / tī / te (he, she, it) have three genders like er / sie / es.\n- German wir has no inclusive / exclusive split: it is used for āpaṇ and āmhī alike."
   },
   {
    "for": "ar",
    "rel": "different",
-   "text": "Arabic marks gender in “you” (anta / anti) and has dual pronouns; German du has no gender and there is no dual. huwa / hiya for things follow the noun’s gender, as er / sie / es do, and there is a third, neuter es. The pronoun cannot be left out in German, even though the verb shows the person."
+   "text": "- Arabic marks gender in “you” (anta / anti) and has dual pronouns; German du has no gender and there is no dual.\n- huwa / hiya for things follow the noun’s gender, as er / sie / es do, and there is a third, neuter es.\n- The pronoun cannot be left out in German, even though the verb shows the person."
   },
   {
    "for": "he",
    "rel": "different",
-   "text": "Hebrew distinguishes atá / at (you, m. / f.) and can drop the pronoun in the past (halachti); German du has no gender and the pronoun is always there. hu / hi for things follow the noun’s gender, as er / sie / es do. Hebrew has no polite pronoun; German Sie is obligatory with strangers."
+   "text": "- Hebrew distinguishes atá / at (you, m. / f.) and can drop the pronoun in the past (halachti); German du has no gender and the pronoun is always there.\n- hu / hi for things follow the noun’s gender, as er / sie / es do.\n- Hebrew has no polite pronoun; German Sie is obligatory with strangers."
   },
   {
    "for": "tr",
    "rel": "trap",
-   "text": "Turkish drops the pronoun (geliyorum) and o is he, she and it; German must say ich komme and choose er / sie / es by the noun’s gender. siz is polite and plural; German has Sie for polite and ihr for several friends."
+   "text": "- Turkish drops the pronoun (geliyorum) and o is he, she and it; German must say ich komme and choose er / sie / es by the noun’s gender.\n- siz is polite and plural; German has Sie for polite and ihr for several friends."
   },
   {
    "for": "ja",
    "rel": "new",
-   "text": "Japanese often leaves the person out and avoids “you” (anata), using names or titles instead. In German every clause needs its subject pronoun, and du / Sie is a grammatical choice made with every sentence."
+   "text": "Japanese often leaves the person out and avoids “you” (anata), using names or titles instead.\n\nIn German every clause needs its subject pronoun, and du / Sie is a grammatical choice made with every sentence."
   },
   {
    "for": "ko",
    "rel": "new",
-   "text": "Korean often omits pronouns and shows respect in the verb ending. German needs a pronoun in every clause, and respect is the pronoun Sie with the verb form of “they”."
+   "text": "Korean often omits pronouns and shows respect in the verb ending.\n\nGerman needs a pronoun in every clause, and respect is the pronoun Sie with the verb form of “they”."
   },
   {
    "for": "fi",
    "rel": "different",
-   "text": "hän is he and she, and minä / sinä can be dropped (olen opettaja); German says Ich bin Lehrer and chooses er / sie / es by the noun’s gender – even for things, where Finnish says se."
+   "text": "hän is he and she, and minä / sinä can be dropped (olen opettaja).\n\nGerman says Ich bin Lehrer and chooses er / sie / es by the noun’s gender – even for things, where Finnish says se."
   },
   {
    "for": "hu",
    "rel": "similar",
-   "text": "ő is he and she, and the pronoun is usually dropped (vagyok); German needs it. The polite ön / maga takes a 3rd-person verb – like German Sie, which also takes a 3rd-person (plural) form: Sie sind."
+   "text": "ő is he and she, and the pronoun is usually dropped (vagyok); German needs it.\n\nThe polite ön / maga takes a 3rd-person verb – like German Sie, which also takes a 3rd-person (plural) form:\n→ Sie sind."
   },
   {
    "for": "sw",
    "rel": "new",
-   "text": "The subject is a prefix on the verb (ninasoma, anasoma), and yeye means he and she. German uses separate pronouns with gender (er / sie / es) and needs them in every clause."
+   "text": "The subject is a prefix on the verb (ninasoma, anasoma), and yeye means he and she.\n\nGerman uses separate pronouns with gender (er / sie / es) and needs them in every clause."
   },
   {
    "for": "lg",
    "rel": "new",
-   "text": "The subject is a prefix on the verb, and there is no gender in the pronouns. German needs a separate pronoun in every clause and chooses er / sie / es by the noun’s gender."
+   "text": "The subject is a prefix on the verb, and there is no gender in the pronouns.\n\nGerman needs a separate pronoun in every clause and chooses er / sie / es by the noun’s gender."
   },
   {
    "for": "zh",
    "rel": "different",
-   "text": "他 / 她 / 它 sound the same (tā) and differ only in writing; German er / sie / es sound different and follow the noun’s grammatical gender (der Tisch → er). 您 corresponds to Sie, but German cannot leave the subject out when it is clear from the context."
+   "text": "他 / 她 / 它 sound the same (tā) and differ only in writing; German er / sie / es sound different and follow the noun’s grammatical gender (der Tisch → er).\n\n您 corresponds to Sie, but German cannot leave the subject out when it is clear from the context."
   },
   {
    "for": "vi",
    "rel": "new",
-   "text": "Vietnamese chooses “I” and “you” among kinship words by age and relation (anh, chị, em, bác …). German has a fixed set: ich, du, Sie, and the choice of du or Sie depends on closeness and formality, not on age alone."
+   "text": "Vietnamese chooses “I” and “you” among kinship words by age and relation (anh, chị, em, bác …).\n\nGerman has a fixed set: ich, du, Sie, and the choice of du or Sie depends on closeness and formality, not on age alone."
   },
   {
    "for": "iu",
    "rel": "new",
-   "text": "The person of the subject is an ending of the verb, and separate pronouns are used mainly for emphasis; there is no gender. German needs a separate pronoun in every clause and gives things er, sie or es by the noun’s gender."
+   "text": "The person of the subject is an ending of the verb, and separate pronouns are used mainly for emphasis; there is no gender.\n\nGerman needs a separate pronoun in every clause and gives things er, sie or es by the noun’s gender."
+  },
+  {
+   "for": "it",
+   "rel": "trap",
+   "text": "- Italian leaves the pronoun out (Sono stanco); German must say Ich bin müde.\n- Lei takes the 3rd singular, but Sie always takes the plural form: Sie sind.\n- For things German needs a pronoun by gender: der Tisch → er, die Lampe → sie, das Buch → es."
+  },
+  {
+   "for": "sq",
+   "rel": "trap",
+   "text": "- Albanian leaves the pronoun out (Jam i lodhur); German must say Ich bin müde.\n- Polite Ju is the 2nd plural; Sie takes the form of “they”: Sie sind.\n- As with ai / ajo for things, the pronoun follows the noun’s gender – but German adds a neuter: das Buch → es."
+  },
+  {
+   "for": "pt",
+   "rel": "trap",
+   "text": "- Portuguese leaves the pronoun out (Sou professor); German must say Ich bin Lehrer.\n- o senhor / você take the 3rd singular, but Sie always takes the plural form: Sie sind.\n- For things German says er, sie, es by gender: der Tisch → er."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "trap",
+   "text": "If your language can drop the subject pronoun, **German cannot**:\n→ Ich bin müde, not *Bin müde.\n\n- er / sie / es follow the noun’s gender for things too;\n- polite Sie takes the 3rd person plural: Sie sind."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If your verb ending shows the person and the pronoun is often left out, German still needs the pronoun:\n→ Ich bin müde.\n\n“He” and “she” are two words, er and sie, and things are er, sie or es by the noun’s gender."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If pronouns can be left out when the context is clear, note that the German subject pronoun is always said and changes the verb:\n→ ich bin, du bist, er ist\n\nThings are er, sie or es by gender."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If the subject is a prefix or suffix of your verb, German adds a separate pronoun before the verb that can never be left out:\n→ ich komme, du kommst, sie kommt"
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If your “you” and “they” change for a man or a woman, note that German splits only he / she / it (er, sie, es): du, ihr and sie (they) serve for both sexes.\n\nThe pronoun is never left out: Ich bin müde."
   }
  ]
 }

@@ -27,6 +27,20 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Plans",
+     "des Planes"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -179,6 +193,17 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Reise"
+    ],
+    "number": "singular and plural",
+    "genderCue": "most nouns in -e are feminine (die Lampe)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -292,7 +317,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Gute Reise! is the standard farewell to someone setting off; for a trip by car people also say Gute Fahrt!"
+     "Gute Reise! is the standard farewell to someone setting off.\n\nFor a trip by car people also say Gute Fahrt!"
     ],
     "pitfalls": [
      "eine Reise machen – the usual verb is machen, not *nehmen.",
@@ -331,6 +356,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Hotels"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -424,7 +462,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "In French hôtel also means a large town house or a public building (hôtel de ville = town hall); German borrowed only the inn meaning."
+     "Hotel came from French with only one of its meanings, the inn."
     ],
     "pitfalls": [
      "das Hotel is neuter; plural die Hotels (with -s, as many borrowed words).",
@@ -433,6 +471,13 @@
     "subtleties": [
      "im Hotel (in the hotel, where) – ins Hotel (to the hotel, where to).",
      "Hotels are rated with stars: ein Vier-Sterne-Hotel."
+    ],
+    "notes": [
+     {
+      "for": "fr",
+      "rel": "different",
+      "text": "hôtel also means a mansion or a public building (hôtel de ville); German Hotel is only the inn."
+     }
     ]
    }
   },
@@ -479,6 +524,28 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "participle": "ge-",
+    "imperative": [
+     "buch(e)!",
+     "bucht!",
+     "buchen Sie!"
+    ],
+    "konj2": {
+     "none": "a weak verb: the Konjunktiv II is the Präteritum form (buchte); speech uses würde + infinitive"
+    },
+    "endingAdjust": {
+     "none": "the endings are added regularly"
+    },
+    "spokenPast": "Perfekt",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": {
+     "none": "the verb marks no direction towards or away from the speaker"
+    },
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
     }
    },
    "forms": {
@@ -599,7 +666,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The verb comes from das Buch (to enter in a book); the travel meaning probably followed English to book."
+     "The verb comes from das Buch (to enter in a book).\n\nThe travel meaning probably followed English to book."
     ],
     "pitfalls": [
      "buchen is regular: buchte, gebucht.",
@@ -654,6 +721,28 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "participle": "no ge- (-ieren verb)",
+    "imperative": [
+     "reservier(e)!",
+     "reserviert!",
+     "reservieren Sie!"
+    ],
+    "konj2": {
+     "none": "a weak verb: the Konjunktiv II is the Präteritum form (reservierte); speech uses würde + infinitive"
+    },
+    "endingAdjust": {
+     "none": "the endings are added regularly"
+    },
+    "spokenPast": "Perfekt",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": {
+     "none": "the verb marks no direction towards or away from the speaker"
+    },
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
     }
    },
    "forms": {
@@ -808,6 +897,17 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Reisepasses"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (der Pass)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -942,6 +1042,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Koffers"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -1039,7 +1152,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English coffer (a strongbox) is the same word – from Old French cofre."
+     "Koffer comes from Old French cofre (a chest)."
     ],
     "pitfalls": [
      "The plural has no ending: der Koffer – die Koffer; dative plural den Koffern.",
@@ -1048,6 +1161,18 @@
     "subtleties": [
      "die Koffer packen can also mean to leave for good: Er hat die Koffer gepackt.",
      "In Austria Koffer is also an insult (idiot) – a different word of the same form."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English coffer (a strongbox) is the same word."
+     },
+     {
+      "for": "fr",
+      "rel": "trap",
+      "text": "Koffer is the same word as coffre, but means a suitcase (valise)."
+     }
     ]
    }
   },
@@ -1080,6 +1205,18 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Auslands",
+     "des Auslandes"
+    ],
+    "number": "singular only",
+    "genderCue": "compound: the last part decides (das Land)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a mass noun, month or name of a substance: no diminutive in use"
     }
    },
    "forms": {
@@ -1177,19 +1314,26 @@
      }
     ],
     "etymology": {
-     "text": "Back-formation from Ausländer (“foreigner”), from Middle High German ūzlender; by surface analysis aus + Land. Compare English outland.",
+     "text": "Back-formation from Ausländer (“foreigner”), from Middle High German ūzlender; by surface analysis aus + Land.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
      "The genitive -s appears in compounds: der Auslandsaufenthalt, die Auslandsreise."
     ],
     "pitfalls": [
-     "German uses a noun with a preposition where other languages have an adverb: im Ausland (abroad, where?), ins Ausland (abroad, where to?), aus dem Ausland (from abroad).",
+     "German uses a noun with a preposition where other languages have an adverb:\n→ im Ausland (abroad, where?), ins Ausland (abroad, where to?), aus dem Ausland (from abroad)",
      "das Ausland is neuter, like das Land; it has no plural."
     ],
     "subtleties": [
      "The opposite is das Inland (home country): im In- und Ausland (at home and abroad).",
-     "der Ausländer / die Ausländerin = foreigner; the word can sound distancing, so people often say Menschen aus dem Ausland."
+     "der Ausländer / die Ausländerin = foreigner.\n\nThe word can sound distancing, so people often say Menschen aus dem Ausland."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Ausland is built like English outland: aus + Land."
+     }
     ]
    }
   },
@@ -1234,6 +1378,28 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "participle": "no ge- (unstressed prefix)",
+    "imperative": [
+     "besuch(e)!",
+     "besucht!",
+     "besuchen Sie!"
+    ],
+    "konj2": {
+     "none": "a weak verb: the Konjunktiv II is the Präteritum form (besuchte); speech uses würde + infinitive"
+    },
+    "endingAdjust": {
+     "none": "the endings are added regularly"
+    },
+    "spokenPast": "Perfekt",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": {
+     "none": "the verb marks no direction towards or away from the speaker"
+    },
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
     }
    },
    "forms": {
@@ -1348,11 +1514,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German besuochen (“to seek, use, visit, investigate”), from Old High German bisuohhen, by surface analysis be- + suchen (“to seek”). Cognate with Dutch bezoeken, Swedish besöka, English beseech.",
+     "text": "From Middle High German besuochen (“to seek, use, visit, investigate”), from Old High German bisuohhen, by surface analysis be- + suchen (“to seek”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English beseech is a cousin of besuchen: both are “be- + seek”."
+     "besuchen is be- + suchen (to seek)."
     ],
     "pitfalls": [
      "besuchen takes a direct object (accusative): Ich besuche dich – not *Ich besuche zu dir.",
@@ -1361,6 +1527,13 @@
     "subtleties": [
      "besuchen also means to attend: eine Schule besuchen, einen Kurs besuchen.",
      "der Besuch is the visit and the visitors: Wir haben Besuch (we have guests)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "besuchen is related to English beseech."
+     }
     ]
    }
   },
@@ -1391,6 +1564,20 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Touristen"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Touristin",
+      "lexeme": "de:Touristin"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -1525,6 +1712,20 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Touristin"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-in: a female person → die",
+    "pair": [
+     {
+      "form": "der Tourist",
+      "lexeme": "de:Tourist"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -1659,6 +1860,20 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Reiseleiters"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Reiseleiterin",
+      "lexeme": "de:Reiseleiterin"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -1762,7 +1977,7 @@
      "der Leiter (leader) and die Leiter (ladder) are two different words that only look alike – the article tells them apart."
     ],
     "pitfalls": [
-     "der Reiseführer is usually the guidebook (a book), though it can also mean a guide; der Reiseleiter is always a person.",
+     "der Reiseführer is usually the guidebook (a book), though it can also mean a guide.\n\nder Reiseleiter is always a person.",
      "Do not confuse der Leiter (leader, manager) with die Leiter (ladder)."
     ],
     "subtleties": [
@@ -1805,6 +2020,20 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Reiseleiterin"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-in: a female person → die",
+    "pair": [
+     {
+      "form": "der Reiseleiter",
+      "lexeme": "de:Reiseleiter"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -1915,6 +2144,12 @@
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    },
    "ref": {
@@ -2021,6 +2256,12 @@
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    },
    "ref": {
@@ -2161,6 +2402,31 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "participle": "ge-",
+    "imperative": [
+     "werd(e)!",
+     "werdet!",
+     "werden Sie!"
+    ],
+    "konj2": [
+     {
+      "form": "würde",
+      "use": "common in speech"
+     }
+    ],
+    "endingAdjust": {
+     "none": "irregular forms of its own (see the paradigm)"
+    },
+    "spokenPast": "Präteritum",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": {
+     "none": "the verb marks no direction towards or away from the speaker"
+    },
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
     }
    },
    "forms": {
@@ -2280,22 +2546,34 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German wërden, from Old High German wërdan, from Proto-Germanic *werþaną. Cognate with Dutch worden, obsolete English worth (“to become”), and Latin vertō (“to turn”). The use as a future auxiliary is a Middle High German innovation.",
+     "text": "From Middle High German wërden, from Old High German wërdan, from Proto-Germanic *werþaną. The use as a future auxiliary is a Middle High German innovation.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The future with werden is younger than the language itself: it became common only in Middle High German; before, the present did the job – and it still often does."
+     "The future with werden is younger than the language itself: it became common only in Middle High German.\n\nBefore, the present did the job – and it still often does."
     ],
     "pitfalls": [
      "werden is not “want”: Ich will kommen = I want to come; Ich werde kommen = I will come.",
-     "bekommen is a false friend: it means to get, to receive – not to become (that is werden).",
+     "Do not confuse bekommen (to get, to receive) with werden (to become).",
      "du wirst, er wird – the vowel changes and the d of the stem disappears in du wirst; ihr werdet.",
      "With the future the infinitive goes to the very end: Ich werde morgen nach Berlin fahren."
     ],
     "subtleties": [
-     "As a full verb it takes sein in the perfect: Er ist Lehrer geworden; as the passive auxiliary the participle is worden (Das Haus ist gebaut worden).",
+     "- As a full verb it takes sein in the perfect: Er ist Lehrer geworden.\n- As the passive auxiliary the participle is worden (Das Haus ist gebaut worden).",
      "werden + infinitive can also express a guess about the present: Er wird schon zu Hause sein (he’s probably at home by now).",
      "Präteritum wurde; the old form ward appears in literature."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "bekommen is a false friend: it means to get, not to become (that is werden)."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "werden is related to obsolete English worth (“to become”), still heard in “woe worth the day”."
+     }
     ]
    }
   }

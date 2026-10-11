@@ -21,7 +21,20 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -107,14 +120,26 @@
      "src": "morphemes: 星期 + 一 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "Greek Δευτέρα ‘second’, Hebrew יוֹם שֵׁנִי ‘second day’ and Arabic الاثنين ‘the second’ count from Sunday — Chinese counts from Monday: 星期一 ‘week-one’."
+     "Hebrew יוֹם שֵׁנִי ‘second day’ and Arabic الاثنين ‘the second’ count from Sunday — Chinese counts from Monday:\n→ 星期一 ‘week-one’."
     ],
     "pitfalls": [
      "No word for ‘on’: 星期一我工作 / 我星期一工作 — 在星期一 is bookish, and the day never goes at the end (*我工作星期一).",
-     "Monday is ONE in Chinese but ‘second’ in Greek: don’t translate Δευτέρα as *星期二."
+     "Monday is ONE in Chinese but ‘second’ in Hebrew and Arabic: don’t translate יוֹם שֵׁנִי or الاثنين as *星期二."
     ],
     "subtleties": [
      "Only Sunday has a name (星期天 / 星期日); Monday to Saturday are just numbers 1–6."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "Greek Δευτέρα ‘second’ is Monday: don’t translate it as *星期二."
+     },
+     {
+      "for": "pt",
+      "rel": "trap",
+      "text": "Portuguese segunda-feira ‘second’ is Monday: don’t translate it as *星期二."
+     }
     ]
    }
   },
@@ -139,7 +164,20 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -225,13 +263,30 @@
      "src": "morphemes: 星期 + 二 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "Russian вторник (from второй ‘second’) and Chinese 星期二 ‘week-two’ agree: both count from Monday. Greek Τρίτη ‘third’ counts from Sunday."
+     "星期二 ‘week-two’ is Tuesday, the second day counted from Monday; Hebrew יוֹם שְׁלִישִׁי ‘third day’ counts from Sunday."
     ],
     "pitfalls": [
      "It is 星期二 with 二, never *星期两: 两 is only for counting things (两个人), not for names and order."
     ],
     "subtleties": [
      "‘Every Tuesday’ is 每个星期二 or, in writing, 每周二."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Russian вторник (from второй ‘second’) agrees: both count from Monday."
+     },
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "Greek Τρίτη ‘third’ counts from Sunday; 星期二 is ‘two’."
+     },
+     {
+      "for": "pt",
+      "rel": "trap",
+      "text": "Portuguese terça-feira ‘third’ counts from Sunday; 星期二 is ‘two’."
+     }
     ]
    }
   },
@@ -256,7 +311,20 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -342,13 +410,20 @@
      "src": "morphemes: 星期 + 三 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "German Mittwoch ‘mid-week’ and Russian среда (‘middle’) name Wednesday after its place in the week; Chinese just counts: 3."
+     "German Mittwoch ‘mid-week’ names Wednesday after its place in the week; Chinese just counts: 3."
     ],
     "pitfalls": [
-     "The number after 星期 names the day (星期三 ‘Wednesday’); a number before it counts weeks: 三个星期 ‘three weeks’."
+     "The number after 星期 names the day (星期三 ‘Wednesday’); a number before it counts weeks:\n→ 三个星期 ‘three weeks’."
     ],
     "subtleties": [
-     "In writing and on timetables 周三 is common: 周三下午."
+     "In writing and on timetables 周三 is common:\n→ 周三下午."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "Russian среда (‘middle’) names it after its place in the week too."
+     }
     ]
    }
   },
@@ -373,7 +448,20 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -459,13 +547,30 @@
      "src": "morphemes: 星期 + 四 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "Russian четверг (from четвёртый ‘fourth’) is Chinese 星期四 ‘week-four’; Greek Πέμπτη, Hebrew יוֹם חֲמִישִׁי and Arabic الخميس all say ‘fifth’."
+     "Hebrew יוֹם חֲמִישִׁי and Arabic الخميس say ‘fifth’ for Thursday; Chinese 星期四 says ‘four’."
     ],
     "pitfalls": [
      "Listen for the tone: 星期四 xīngqīsì (4th tone) is Thursday; 十 shí (2nd tone) is ‘ten’."
     ],
     "subtleties": [
      "With days and dates 是 can drop: 今天星期四 ‘today is Thursday’ — the time word itself is the predicate."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Russian четверг (from четвёртый ‘fourth’) is exactly 星期四."
+     },
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "Greek Πέμπτη says ‘fifth’; 星期四 says ‘four’."
+     },
+     {
+      "for": "pt",
+      "rel": "trap",
+      "text": "Portuguese quinta-feira says ‘fifth’; 星期四 says ‘four’."
+     }
     ]
    }
   },
@@ -490,7 +595,20 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -576,13 +694,30 @@
      "src": "morphemes: 星期 + 五 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "Greek Παρασκευή ‘preparation’ (for the Sabbath), Arabic الجمعة ‘the gathering’ (Friday prayer; Turkish cuma comes from it), Russian пятница ‘fifth’ — Chinese 星期五 ‘week-five’ agrees with the Russian."
+     "Arabic الجمعة ‘the gathering’ names Friday after the Friday prayer; Chinese just counts:\n→ 星期五 ‘week-five’."
     ],
     "pitfalls": [
      "‘Next Friday’ is 下个星期五 (or 下星期五), ‘last Friday’ 上个星期五: 下 ‘down’ is the future, 上 ‘up’ the past."
     ],
     "subtleties": [
      "星期五晚上 ‘Friday evening’: the bigger unit comes first, as in dates."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "Greek Παρασκευή is the ‘preparation’ (for the Sabbath)."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Russian пятница ‘fifth’ agrees with 星期五."
+     },
+     {
+      "for": "pt",
+      "rel": "trap",
+      "text": "Portuguese sexta-feira says ‘sixth’; 星期五 says ‘five’."
+     }
     ]
    }
   },
@@ -607,7 +742,20 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -693,13 +841,45 @@
      "src": "morphemes: 星期 + 六 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "Greek Σάββατο, Hebrew שַׁבָּת, Arabic السَّبْت, Russian суббота and German Samstag all come from the Hebrew Sabbath; Chinese simply says ‘week-six’."
+     "Arabic السَّبْت and German Samstag come from the Hebrew שַׁבָּת (Sabbath); Chinese simply says ‘week-six’."
     ],
     "pitfalls": [
      "星期六 is the last numbered day: there is no *星期七 — Sunday is 星期天 / 星期日."
     ],
     "subtleties": [
      "礼拜六 is heard in the south (Shanghai) and in older speech."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "Greek Σάββατο comes from the Sabbath too."
+     },
+     {
+      "for": "ru",
+      "rel": "different",
+      "text": "Russian суббота comes from the Sabbath too."
+     },
+     {
+      "for": "it",
+      "rel": "different",
+      "text": "Italian sabato comes from the Sabbath too."
+     },
+     {
+      "for": "es",
+      "rel": "different",
+      "text": "Spanish sábado comes from the Sabbath too."
+     },
+     {
+      "for": "pt",
+      "rel": "different",
+      "text": "Portuguese sábado comes from the Sabbath too."
+     },
+     {
+      "for": "fr",
+      "rel": "different",
+      "text": "French samedi comes from the Sabbath too."
+     }
     ]
    }
   },
@@ -724,7 +904,20 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    },
    "contrasts": [
     {
@@ -822,13 +1015,45 @@
      "src": "morphemes: 星期 + 天 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "Greek Κυριακή ‘the Lord’s day’, Russian воскресенье ‘resurrection’, Turkish pazar ‘market’, German Sonntag ‘sun-day’ — Chinese calls it the ‘week-day’ (天 ‘day’)."
+     "German Sonntag is the ‘sun-day’; Chinese calls it the ‘week-day’ (天 ‘day’) — or 星期日, with 日 ‘sun, day’."
     ],
     "pitfalls": [
      "*星期七 does not exist: Sunday is 星期天 (spoken) or 星期日 (written)."
     ],
     "subtleties": [
      "星期天 is the everyday spoken form; 星期日 is used on calendars and forms, 周日 on timetables."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "Greek Κυριακή is ‘the Lord’s day’."
+     },
+     {
+      "for": "ru",
+      "rel": "different",
+      "text": "Russian воскресенье is ‘resurrection’."
+     },
+     {
+      "for": "it",
+      "rel": "different",
+      "text": "Italian domenica is ‘the Lord’s day’."
+     },
+     {
+      "for": "es",
+      "rel": "different",
+      "text": "Spanish domingo is ‘the Lord’s day’."
+     },
+     {
+      "for": "pt",
+      "rel": "different",
+      "text": "Portuguese domingo is ‘the Lord’s day’."
+     },
+     {
+      "for": "fr",
+      "rel": "different",
+      "text": "French dimanche is ‘the Lord’s day’."
+     }
     ]
    }
   },
@@ -853,7 +1078,20 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    },
    "contrasts": [
     {
@@ -946,13 +1184,20 @@
      "src": "morphemes: 星期 + 日 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "日 is both ‘sun’ and ‘day’ (日出 ‘sunrise’); German Sonntag and English Sunday are named after the sun."
+     "日 is both ‘sun’ and ‘day’ (日出 ‘sunrise’); German Sonntag is named after the sun as well."
     ],
     "pitfalls": [
      "In conversation 星期日 can sound stiff; with friends say 星期天."
     ],
     "subtleties": [
      "Forms, timetables and calendars use 星期日 or 周日."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "English Sunday is named after the sun as well."
+     }
     ]
    }
   },
@@ -978,7 +1223,20 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    },
    "role": "week — in the day names 星期一 … 星期六 and 星期几 ‘which day?’ (S14); ‘week’ as a unit of time is the topic of S15",
    "contrasts": [
@@ -1087,7 +1345,7 @@
      "‘Which day is it?’ is 今天星期几？ — the question word 几 takes the place of the number."
     ],
     "subtleties": [
-     "星期 is more spoken, 周 more written: 下个星期 / 下周 ‘next week’."
+     "星期 is more spoken, 周 more written:\n→ 下个星期 / 下周 ‘next week’."
     ]
    }
   },
@@ -1112,7 +1370,20 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1189,17 +1460,29 @@
      }
     ],
     "etymology": {
-     "text": "周 ‘week’ + 末 ‘end’: ‘week-end’, built exactly like English weekend and German Wochenende.",
+     "text": "周 ‘week’ + 末 ‘end’: ‘week-end’, built exactly like German Wochenende.",
      "src": "morphemes: 周 + 末 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "Greek says Σαββατοκύριακο ‘Saturday-Sunday’; Chinese copies the English idea instead: 周 ‘week’ + 末 ‘end’."
+     "周末 is a modern word, modelled on the ‘week-end’ of other languages:\n→ 周 ‘week’ + 末 ‘end’."
     ],
     "pitfalls": [
      "‘At the weekend’ needs no ‘at’: 周末我在家 — *在周末 is only for written style."
     ],
     "subtleties": [
      "周末愉快！ ‘Have a nice weekend!’ is the usual Friday goodbye."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "Greek says Σαββατοκύριακο ‘Saturday-Sunday’; 周末 copies the ‘week-end’ idea instead."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Built exactly like English weekend."
+     }
     ]
    }
   },
@@ -1227,6 +1510,19 @@
     },
     "measure": {
      "none": "天 is itself a counter: 三天 ‘three days’ (no 个)"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    },
    "ref": {
@@ -1368,7 +1664,7 @@
      "天 is both ‘sky’ and ‘day’; 天安门 is the ‘Gate of Heavenly Peace’."
     ],
     "pitfalls": [
-     "天 counts by itself — no measure word: 三天 ‘three days’, not *三个天 (compare 三个星期, 三个月)."
+     "天 counts by itself — no measure word:\n→ 三天 ‘three days’, not *三个天 (compare 三个星期, 三个月)."
     ],
     "subtleties": [
      "天天 ‘day-day’ means ‘every day’, like 每天."
@@ -1499,7 +1795,12 @@
     "position": [
      "preverbal",
      "sentenceInitial"
-    ]
+    ],
+    "neutralTone": "里 li is toneless in this word (alone: lǐ); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withNeg": "夜里不 / 夜里没 — the time word comes first (他夜里不睡觉)"
    }
   },
   {
@@ -1523,7 +1824,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": "上 shang is toneless in this word (alone: shàng); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    },
    "contrasts": [
     {
@@ -1624,7 +1936,7 @@
      "早！ alone is a quick ‘morning!’ among colleagues."
     ],
     "pitfalls": [
-     "早上好 is the greeting (S02); ‘in the morning’ is just 早上 before the verb: 我早上喝咖啡."
+     "早上好 is the greeting (S02); ‘in the morning’ is just 早上 before the verb:\n→ 我早上喝咖啡."
     ],
     "subtleties": [
      "早上 is the early morning (getting up, breakfast); from about nine to twelve it is 上午."
@@ -1652,7 +1964,20 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    },
    "contrasts": [
     {
@@ -1739,7 +2064,7 @@
      "午 is the hour of the horse (11 a.m. – 1 p.m.) in the old twelve-part day: 上午 comes before it, 下午 after it, 中午 is the middle."
     ],
     "pitfalls": [
-     "Clock times need the part of the day FIRST to be clear: 上午十点 ‘10 a.m.’, 晚上十点 ‘10 p.m.’."
+     "Clock times need the part of the day FIRST to be clear:\n→ 上午十点 ‘10 a.m.’, 晚上十点 ‘10 p.m.’."
     ],
     "subtleties": [
      "早上 is getting up and breakfast; 上午 is the working morning, until noon."
@@ -1767,6 +2092,19 @@
     },
     "measure": {
      "none": "a time word: it is not counted with a measure word"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    },
    "ref": {
@@ -1880,7 +2218,20 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1962,13 +2313,20 @@
      "src": "morphemes: 下 + 午 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "English p.m. is Latin post meridiem ‘after midday’ — exactly 下午 ‘below noon’."
+     "下午 is ‘below noon’ — the hours after midday, like Latin post meridiem ‘after midday’."
     ],
     "pitfalls": [
      "下午三点 ‘3 p.m.’: the part of the day comes first, then the hour."
     ],
     "subtleties": [
      "下午 lasts until about six; after that it is 晚上."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "English p.m. (post meridiem, ‘after midday’) says exactly 下午."
+     }
     ]
    }
   },
@@ -1994,7 +2352,18 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": "上 shang is toneless in this word (alone: shàng); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    },
    "contrasts": [
     {
@@ -2113,14 +2482,31 @@
      "src": "morphemes: 晚 + 上 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "晚 is both ‘evening’ and ‘late’ — like Spanish tarde ‘afternoon; late’."
+     "晚 is both ‘evening’ and ‘late’."
     ],
     "pitfalls": [
      "‘Tonight’ is 今天晚上 (written 今晚).",
      "晚上好 is the greeting ‘good evening’; 晚安 ‘good night’ is said when going to bed."
     ],
     "subtleties": [
-     "晚上 covers the whole evening and the night until you sleep — English ‘last night’ is usually 昨天晚上."
+     "晚上 covers the whole evening and the night until you sleep — so ‘last night’ is usually 昨天晚上."
+    ],
+    "notes": [
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "Like Spanish tarde ‘afternoon; late’, one word covers both."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Like Portuguese tarde ‘afternoon; late’, one word covers both."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English ‘last night’ is usually 昨天晚上, not 昨天夜里."
+     }
     ]
    }
   },
@@ -2146,6 +2532,17 @@
     },
     "measure": {
      "none": "a time word: it is not counted with a measure word"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": "今儿 jīnr — Beijing colloquial",
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    },
    "ref": {
@@ -2244,13 +2641,25 @@
      "src": "morphemes: 今 + 天 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "Greek σήμερα, German heute and Russian сегодня (сего дня ‘of this day’) are all ‘this day’ — just like 今天."
+     "German heute is also ‘this day’ — just like 今天 ‘now-day’."
     ],
     "pitfalls": [
      "今天 goes before the verb, at the start or after the subject: 今天我不去 / 我今天不去 — never at the end (*我不去今天)."
     ],
     "subtleties": [
-     "With days and dates 是 can drop: 今天星期一 ‘today is Monday’."
+     "With days and dates 是 can drop:\n→ 今天星期一 ‘today is Monday’."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Greek σήμερα is ‘this day’ too."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Russian сегодня (сего дня ‘of this day’) is ‘this day’ too."
+     }
     ]
    }
   },
@@ -2275,6 +2684,17 @@
     },
     "measure": {
      "none": "a time word: it is not counted with a measure word"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": "明儿 míngr — Beijing colloquial",
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    },
    "ref": {
@@ -2365,13 +2785,13 @@
      "src": "morphemes: 明 + 天 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "明 is sun 日 + moon 月 = ‘bright’; it also means ‘next’: 明年 ‘next year’."
+     "明 is sun 日 + moon 月 = ‘bright’; it also means ‘next’:\n→ 明年 ‘next year’."
     ],
     "pitfalls": [
-     "There is no future tense: 明天 alone makes it the future — 明天我去 ‘I’ll go tomorrow’. Don’t add 了."
+     "There is no future tense: 明天 alone makes it the future — 明天我去 ‘I’ll go tomorrow’.\n\nDon’t add 了."
     ],
     "subtleties": [
-     "明天 is also ‘the future’: 更好的明天 ‘a better tomorrow’."
+     "明天 is also ‘the future’:\n→ 更好的明天 ‘a better tomorrow’."
     ]
    }
   },
@@ -2396,6 +2816,17 @@
     },
     "measure": {
      "none": "a time word: it is not counted with a measure word"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": "昨儿 zuór — Beijing colloquial",
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    },
    "ref": {
@@ -2509,6 +2940,19 @@
     },
     "measure": {
      "none": "a time word: it is not counted with a measure word"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    },
    "contrasts": [
@@ -2614,10 +3058,10 @@
      "现在 also names ‘the present’ in grammar books: 现在时 ‘present tense’ — a tense Chinese never marks."
     ],
     "pitfalls": [
-     "现在 goes before the verb: 我现在去 ‘I’m going now’ — not *我去现在."
+     "现在 goes before the verb:\n→ 我现在去 ‘I’m going now’ — not *我去现在."
     ],
     "subtleties": [
-     "现在 + … + 了 marks a change: 现在他是老师了 ‘now he is a teacher (he wasn’t before)’."
+     "现在 + … + 了 marks a change:\n→ 现在他是老师了 ‘now he is a teacher (he wasn’t before)’."
     ]
    }
   },
@@ -2643,6 +3087,19 @@
     },
     "measure": {
      "none": "a time word: it is not counted with a measure word"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    },
    "contrasts": [
@@ -2764,11 +3221,18 @@
      "以后 and 以前 use the same 后 / 前 as 后面 / 前面 (S12): space and time share words, like German vor / nach (vor dem Haus — vor dem Essen)."
     ],
     "pitfalls": [
-     "以后 comes AFTER what it refers to: 吃饭以后 ‘after eating’ — the opposite order of English after and German nach.",
+     "以后 comes AFTER what it refers to: 吃饭以后 ‘after eating’ — the opposite order of German nach.",
      "‘Later’ about the past (‘and then …’) is 后来, not 以后."
     ],
     "subtleties": [
-     "Alone at the start, 以后 means ‘from now on, in future’: 以后别这样了 ‘don’t do that again’."
+     "Alone at the start, 以后 means ‘from now on, in future’:\n→ 以后别这样了 ‘don’t do that again’."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English after comes first; 以后 comes last:\n→ 吃饭以后."
+     }
     ]
    }
   },
@@ -2893,7 +3357,7 @@
      "马上 ‘on horseback’ = ‘right away’: in old China nothing was faster than a horse."
     ],
     "pitfalls": [
-     "马上 often pairs with 就 … 了: 马上就到了 ‘we’re almost there’."
+     "马上 often pairs with 就 … 了:\n→ 马上就到了 ‘we’re almost there’."
     ],
     "subtleties": [
      "马上 is elastic: 我马上来 can mean one minute — or twenty."
@@ -2911,7 +3375,16 @@
     },
     "position": [
      "preverbal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withNeg": {
+     "none": "rarely negated: ‘not right away’ is 先不 / 不急着"
+    }
    }
   },
   {
@@ -3038,7 +3511,7 @@
      "Before the verb 一会 is ‘soon’ (一会就来); after the verb it is ‘a little while’ (等一会)."
     ],
     "subtleties": [
-     "一会 … 一会 … means ‘now … now …’: 一会冷，一会热 ‘now cold, now hot’."
+     "一会 … 一会 … means ‘now … now …’:\n→ 一会冷，一会热 ‘now cold, now hot’."
     ]
    },
    "variants": [
@@ -3061,7 +3534,14 @@
      "preverbal",
      "sentenceInitial",
      "afterVerb"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": "一会儿 yíhuìr — the usual spoken form in the north",
+    "withNeg": {
+     "none": "rarely negated"
+    }
    }
   },
   {
@@ -3191,17 +3671,29 @@
      }
     ],
     "etymology": {
-     "text": "Phono-semantic compound: semantic 日 ‘sun’ + phonetic 免; from Proto-Sino-Tibetan *mor ‘night’. Wiktionary compares Spanish tarde, which also means both ‘evening’ and ‘late’.",
+     "text": "Phono-semantic compound: semantic 日 ‘sun’ + phonetic 免; from Proto-Sino-Tibetan *mor ‘night’.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "晚 is both ‘evening’ and ‘late’, like Spanish tarde."
+     "晚 is both ‘evening’ and ‘late’:\n→ 晚上 ‘evening’, 来晚了 ‘came late’."
     ],
     "pitfalls": [
      "‘I’m late’ (arriving) is 我来晚了 or 我迟到了 — not *我是晚."
     ],
     "subtleties": [
-     "晚 + 了 marks a change: 现在很晚了 ‘it’s got late’."
+     "晚 + 了 marks a change:\n→ 现在很晚了 ‘it’s got late’."
+    ],
+    "notes": [
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "Like Spanish tarde ‘afternoon; late’, one word covers both."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Like Portuguese tarde ‘afternoon; late’, one word covers both."
+     }
     ]
    },
    "features": {
@@ -3213,7 +3705,19 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "predicative": "without 是",
+    "degree": "takes 很",
+    "redup": {
+     "none": "not doubled"
+    },
+    "attributive": "directly"
    }
   },
   {
@@ -3334,14 +3838,21 @@
      "src": "morphemes: 总 + 是 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "老是 ‘old-is’ is the grumbling ‘always’: 你老是迟到！"
+     "老是 ‘old-is’ is the grumbling ‘always’:\n→ 你老是迟到！"
     ],
     "pitfalls": [
      "总是 goes before the verb, after the subject: 我总是喝茶 — never at the end.",
-     "A negation follows it: 他总是不吃早饭 ‘he never has breakfast’ (he always doesn’t)."
+     "A negation follows it:\n→ 他总是不吃早饭 ‘he never has breakfast’ (he always doesn’t)."
     ],
     "subtleties": [
-     "Like English ‘always’, 总是 can carry irritation: 你总是这样！ ‘you’re always like this!’"
+     "总是 can carry irritation:\n→ 你总是这样！ ‘you’re always like this!’"
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Like English ‘always’."
+     }
     ]
    },
    "features": {
@@ -3356,7 +3867,14 @@
     },
     "position": [
      "preverbal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withNeg": "总是不 ‘always fails to’ · 不总是 ‘not always’"
    }
   },
   {
@@ -3460,7 +3978,7 @@
      "src": "morphemes: 常 + 常 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "Doubling makes adverbs of frequency: 常 → 常常, 天 → 天天 ‘every day’."
+     "Doubling makes adverbs of frequency:\n→ 常 → 常常, 天 → 天天 ‘every day’."
     ],
     "pitfalls": [
      "The negation is 不常 ‘not often’ — *不常常 is avoided."
@@ -3481,7 +3999,14 @@
     },
     "position": [
      "preverbal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withNeg": "常常不 ‘often not’ · ‘not often’ is 不常 (rarely *不常常)"
    }
   },
   {
@@ -3593,13 +4118,13 @@
      "src": "morphemes: 经 + 常 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "As an adjective 经常 means ‘everyday, regular’: 经常性的工作 ‘routine work’."
+     "As an adjective 经常 means ‘everyday, regular’:\n→ 经常性的工作 ‘routine work’."
     ],
     "pitfalls": [
      "不经常 ‘not often’ is fine; with 常常 it is 不常."
     ],
     "subtleties": [
-     "往往 states a tendency known from experience and is not used for the future or for wishes; 经常 can be: 以后我会经常来."
+     "往往 states a tendency known from experience and is not used for the future or for wishes; 经常 can be:\n→ 以后我会经常来."
     ]
    },
    "features": {
@@ -3614,7 +4139,14 @@
     },
     "position": [
      "preverbal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withNeg": "经常不 ‘often not’ · 不经常 ‘not often’"
    }
   },
   {
@@ -3707,13 +4239,20 @@
      "src": "morphemes: 有 + 时候 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "Literally ‘there are times’ — like English ‘at times’."
+     "Literally ‘there are times’:\n→ 有 + 时候."
     ],
     "pitfalls": [
      "有时候 goes before the verb or at the very start: 有时候我走路 / 我有时候走路 — not at the end."
     ],
     "subtleties": [
-     "有时候 … 有时候 … balances two habits: 有时候喝茶，有时候喝咖啡."
+     "有时候 … 有时候 … balances two habits:\n→ 有时候喝茶，有时候喝咖啡."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Like English ‘at times’."
+     }
     ]
    },
    "features": {
@@ -3729,7 +4268,12 @@
     "position": [
      "preverbal",
      "sentenceInitial"
-    ]
+    ],
+    "neutralTone": "候 hou is toneless in this word (alone: hòu); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withNeg": "有时候不 ‘sometimes not’"
    }
   },
   {
@@ -3829,10 +4373,10 @@
      "src": "morphemes: 正 + 在 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "呢 at the end adds ‘right now’: 他在吃饭呢 ‘he’s eating at the moment’."
+     "呢 at the end adds ‘right now’:\n→ 他在吃饭呢 ‘he’s eating at the moment’."
     ],
     "pitfalls": [
-     "正在 does not go with verbs that cannot last (到, 是, 知道): *他正在到 is wrong."
+     "正在 does not go with verbs that cannot last (到, 是, 知道):\n→ *他正在到 is wrong."
     ],
     "subtleties": [
      "正在 stresses ‘at this very moment’; 在 alone is the everyday form."
@@ -3850,7 +4394,16 @@
     },
     "position": [
      "preverbal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withNeg": {
+     "none": "not negated: the negation is 没在 (他没在吃饭)"
+    }
    }
   },
   {
@@ -3979,10 +4532,10 @@
     ],
     "pitfalls": [
      "了 is not a past tense: a past habit takes no 了 (以前他常常来), and 了 can refer to the future (明天吃了饭再去 ‘tomorrow I’ll go after eating’).",
-     "没 negates without 了: 他没来 ‘he didn’t come’ — never *他没来了."
+     "没 negates without 了:\n→ 他没来 ‘he didn’t come’ — never *他没来了."
     ],
     "subtleties": [
-     "With a bare object, sentence-final 了 sounds more natural than verb-了: 我买票了 ‘I’ve bought the tickets’; verb-了 likes a number: 我买了两张票."
+     "With a bare object, sentence-final 了 sounds more natural than verb-了:\n→ 我买票了 ‘I’ve bought the tickets’; verb-了 likes a number: 我买了两张票."
     ]
    },
    "features": {
@@ -4011,7 +4564,11 @@
     "position": [
      "afterVerb",
      "sentenceFinal"
-    ]
+    ],
+    "neutralTone": "the whole word is toneless: 了 le (a particle)",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    }
    },
    "contrasts": [
     {
@@ -4124,7 +4681,7 @@
      "Negation keeps 过: 我没去过 ‘I’ve never been’ — unlike 了, which drops after 没."
     ],
     "subtleties": [
-     "去过 = been there (and back): an experience; 去了 = went (and may still be there): 他去过北京 vs 他去北京了."
+     "去过 = been there (and back): an experience; 去了 = went (and may still be there):\n→ 他去过北京 vs 他去北京了."
     ]
    },
    "features": {
@@ -4150,7 +4707,11 @@
     },
     "position": [
      "afterVerb"
-    ]
+    ],
+    "neutralTone": "the whole word is toneless: 过 guo (a particle)",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    }
    }
   },
   {
@@ -4174,7 +4735,14 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "每 + measure word: 每个人; words that count themselves follow directly: 每天, 每年"
    }
   }
  ],

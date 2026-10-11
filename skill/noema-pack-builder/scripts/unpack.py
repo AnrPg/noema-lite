@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Turn an existing pack back into a subject folder, for ADDITIVE updates.
-  python3 unpack.py PACK.noema.zip|PACK.json WORKDIR   → WORKDIR/<id>/ (subject.json, sources.json, chapters/, media/, sources/)
+  python3 unpack.py PACK.noema.zip|PACK.json WORKDIR   → WORKDIR/<id>/ (subject.json, sources.json, chapters/, media/, sources/, translations/)
 A .noema.zip package also gives back the original source files (sources/). From a plain .json the files are not there:
 the learner already has them, so make_pack.py keeps those sources as they are.
 Existing chapters become the base files: never renumber or delete their ids — add new chapters (next chNN)
@@ -38,6 +38,11 @@ json.dump({'from': os.path.basename(a[0]), 'sourcesWithFiles': kept}, open(os.pa
 for c in p['chapters']:
     c = {k: v for k, v in c.items() if not k.startswith('_')}
     json.dump(c, open(os.path.join(d, 'chapters', c['id'] + '.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+for loc, t in (p.get('translations') or {}).items():   # a pack in several languages: translations/<locale>/chNN.json
+    for c in t.get('chapters', []):
+        c = {k: v for k, v in c.items() if not k.startswith('_')}
+        os.makedirs(os.path.join(d, 'translations', loc), exist_ok=True)
+        json.dump(c, open(os.path.join(d, 'translations', loc, c['id'] + '.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 EXT = {'image/svg+xml': '.svg', 'image/png': '.png', 'image/jpeg': '.jpg', 'image/webp': '.webp'}
 items = []
 for mid, m in (p.get('media') or {}).items():

@@ -15,7 +15,7 @@
    "value": "concord"
   }
  ],
- "summary": "Chinese has two everyday negators, placed directly before the verb (or before 在 + place). 不 bù negates will, habits, likes, the present and the future, adjectives and 是: 我不吃肉 ‘I don’t eat meat’. 没 méi (often 没有) negates 有 and says that something did not happen or has not happened yet: 我没吃早饭 ‘I didn’t have breakfast’, 我没有咖啡 ‘I have no coffee’. There is no ‘do’, the verb does not change, and there is no word ‘no’ before a noun (German kein): 没有 + noun does it. ‘Nothing’, ‘nobody’ and ‘never’ are built with the same two negators — 什么都不 / 什么都没, 没有人, 从来不 / 从来没 — and ‘neither … nor’ is 不 …，也不 ….",
+ "summary": "Chinese has two everyday negators, placed directly before the verb (or before 在 + place). 不 bù negates will, habits, likes, the present and the future, adjectives and 是: 我不吃肉 ‘I don’t eat meat’. 没 méi (often 没有) negates 有 and says that something did not happen or has not happened yet: 我没吃早饭 ‘I didn’t have breakfast’, 我没有咖啡 ‘I have no coffee’. There is no helping verb, the verb does not change, and there is no negative word before a noun (German kein): 没有 + noun does it. ‘Nothing’, ‘nobody’ and ‘never’ are built with the same two negators — 什么都不 / 什么都没, 没有人, 从来不 / 从来没 — and ‘neither … nor’ is 不 …，也不 ….",
  "blocks": [
   {
    "t": "table",
@@ -171,7 +171,7 @@
   "*他没是老师 → 他不是老师.",
   "*我没吃了 → 我没吃 (没 and 了 do not go together here).",
   "不要 + verb is the command ‘don’t!’; ‘I don’t want to eat’ is 我不想吃.",
-  "Under 没有, 一个 normally disappears: 我没有苹果, not *我没有一个苹果.",
+  "Under 没有, 一个 normally disappears:\n→ 我没有苹果, not *我没有一个苹果.",
   "*我不什么都吃 → 我什么都不吃.",
   "*人没有在家 for ‘nobody is at home’ → 没有人在家.",
   "*我从来吃肉 for ‘I never eat meat’ → 我从来不吃肉.",
@@ -223,22 +223,22 @@
   {
    "for": "el",
    "rel": "similar",
-   "text": "Greek has two negators too — δεν for statements, μην for wishes and commands — but splits them differently; Chinese 不 / 没 split will and habit from fact and event. Like δεν … τίποτα, Chinese always negates the verb: 什么都不吃."
+   "text": "Greek has two negators too — δεν for statements, μην for wishes and commands — but splits them differently; Chinese 不 / 没 split will and habit from fact and event.\n\nLike δεν … τίποτα, Chinese always negates the verb:\n→ 什么都不吃."
   },
   {
    "for": "ru",
    "rel": "similar",
-   "text": "Russian не before the verb ~ 不, and нет (у меня нет …) ~ 没有 for ‘not have / there isn’t’. Я ничего не ем is negative concord, like 我什么都不吃."
+   "text": "Russian не before the verb ~ 不, and нет (у меня нет …) ~ 没有 for ‘not have / there isn’t’.\n\nЯ ничего не ем is negative concord, like 我什么都不吃."
   },
   {
    "for": "es",
    "rel": "similar",
-   "text": "Spanish no before the verb ~ 不 / 没, and no … nada / nadie is negative concord like 什么都不 / 没有人. Spanish has one negator; Chinese chooses between 不 and 没."
+   "text": "Spanish no before the verb ~ 不 / 没, and no … nada / nadie is negative concord like 什么都不 / 没有人.\n\nSpanish has one negator; Chinese chooses between 不 and 没."
   },
   {
    "for": "en",
    "rel": "trap",
-   "text": "English needs ‘do’ (I don’t eat) and uses nothing / nobody without ‘not’; Chinese has no ‘do’ and always negates the verb: 我什么都不吃. And ‘I didn’t eat’ is 我没吃, not *我不吃了."
+   "text": "English needs ‘do’ (I don’t eat) and uses nothing / nobody without ‘not’; Chinese has no ‘do’ and always negates the verb:\n→ 我什么都不吃.\n\nAnd ‘I didn’t eat’ is 我没吃, not *我不吃了."
   },
   {
    "for": "fr",
@@ -248,22 +248,22 @@
   {
    "for": "de",
    "rel": "different",
-   "text": "German kein + noun ↔ 没有 + noun. German nichts / niemand stand alone; Chinese still needs 不 / 没: 我什么都不吃."
+   "text": "German kein + noun ↔ 没有 + noun.\n\nGerman nichts / niemand stand alone; Chinese still needs 不 / 没:\n→ 我什么都不吃."
   },
   {
    "for": "hi",
    "rel": "similar",
-   "text": "Hindi नहीं before the verb ~ 不 / 没, and मत for ‘don’t!’ ~ 别. Hindi has one statement negator; Chinese chooses 不 (habit, will) or 没 (fact, event, 有)."
+   "text": "Hindi नहीं before the verb ~ 不 / 没, and मत for ‘don’t!’ ~ 别.\n\nHindi has one statement negator; Chinese chooses 不 (habit, will) or 没 (fact, event, 有)."
   },
   {
    "for": "fa",
    "rel": "different",
-   "text": "Persian negates with a prefix on the verb (nemikhoram ‘I don’t eat’, nakhordam ‘I didn’t eat’); Chinese uses separate words before the verb: 我不吃, 我没吃."
+   "text": "Persian negates with a prefix on the verb (nemikhoram ‘I don’t eat’, nakhordam ‘I didn’t eat’); Chinese uses separate words before the verb:\n→ 我不吃, 我没吃."
   },
   {
    "for": "mr",
    "rel": "trap",
-   "text": "Marathi नाही comes after the verb (मी खात नाही ‘I don’t eat’); Chinese 不 / 没 come before it: 我不吃."
+   "text": "Marathi नाही comes after the verb (मी खात नाही ‘I don’t eat’); Chinese 不 / 没 come before it:\n→ 我不吃."
   },
   {
    "for": "ar",
@@ -278,12 +278,12 @@
   {
    "for": "tr",
    "rel": "similar",
-   "text": "Turkish has three negations: -mA- on verbs (yemiyorum), değil for ‘is not’ (öğrenci değilim), yok for ‘there isn’t / don’t have’ (param yok). Chinese has 不 for verbs and 是 and 没有 for ‘don’t have / there isn’t’ — a similar split."
+   "text": "Turkish has three negations: -mA- on verbs (yemiyorum), değil for ‘is not’ (öğrenci değilim), yok for ‘there isn’t / don’t have’ (param yok).\n\nChinese has 不 for verbs and 是 and 没有 for ‘don’t have / there isn’t’ — a similar split."
   },
   {
    "for": "ja",
    "rel": "different",
-   "text": "Japanese negates with a verb suffix at the end (食べない, 食べなかった); Chinese puts 不 or 没 before the verb: 我不吃, 我没吃. Japanese ない also means ‘there isn’t’, like 没有."
+   "text": "Japanese negates with a verb suffix at the end (食べない, 食べなかった); Chinese puts 不 or 没 before the verb:\n→ 我不吃, 我没吃.\n\nJapanese ない also means ‘there isn’t’, like 没有."
   },
   {
    "for": "ko",
@@ -298,12 +298,12 @@
   {
    "for": "hu",
    "rel": "similar",
-   "text": "Hungarian nem before the verb ~ 不, and nincs ‘there isn’t’ ~ 没有. Semmit sem eszem ‘I eat nothing’ has negative concord, like 什么都不吃."
+   "text": "Hungarian nem before the verb ~ 不, and nincs ‘there isn’t’ ~ 没有.\n\nSemmit sem eszem ‘I eat nothing’ has negative concord, like 什么都不吃."
   },
   {
    "for": "sw",
    "rel": "different",
-   "text": "Swahili negates with prefixes and changes the verb’s ending (sili ‘I don’t eat’ vs ninakula ‘I eat’); Chinese adds 不 before an unchanged verb: 我不吃."
+   "text": "Swahili negates with prefixes and changes the verb’s ending (sili ‘I don’t eat’ vs ninakula ‘I eat’); Chinese adds 不 before an unchanged verb:\n→ 我不吃."
   },
   {
    "for": "lg",
@@ -313,12 +313,52 @@
   {
    "for": "vi",
    "rel": "similar",
-   "text": "Vietnamese không before the verb ~ 不 / 没 (tôi không ăn), and chưa ‘not yet’ ~ 还没. The split between 不 and 没 is new: không does both."
+   "text": "Vietnamese không before the verb ~ 不 / 没 (tôi không ăn), and chưa ‘not yet’ ~ 还没.\n\nThe split between 不 and 没 is new: không does both."
   },
   {
    "for": "iu",
    "rel": "different",
-   "text": "Inuktitut negates with a suffix inside the verb word (-nngit-); Chinese uses a separate word before the verb: 不 or 没."
+   "text": "Inuktitut negates with a suffix inside the verb word (-nngit-); Chinese uses a separate word before the verb:\n→ 不 or 没."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Italian non before the verb ~ 不 / 没 (non mangio carne ~ 我不吃肉), and non … niente / nessuno is negative concord like 什么都不 / 没有人.\n\nItalian has one negator; Chinese chooses: 不 for will and habit, 没 for what did not happen and for 有."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Albanian nuk (s’) before the verb ~ 不 / 没, and mos for wishes and commands ~ 别; nuk ha asgjë ‘he eats nothing’ is negative concord like 他什么都不吃.\n\nNew is the split by meaning:\n→ 不吃 ‘doesn’t / won’t eat’ vs 没吃 ‘didn’t eat’."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "Portuguese não before the verb ~ 不 / 没, and não … nada / ninguém is negative concord like 什么都不 / 没有人.\n\nShort answers repeat the verb in both languages: Bebes? — Não bebo.\n\n~ 喝吗？— 不喝。"
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your negator is one particle before the verb, Chinese has two: 不 for will, habit, states and the future, 没 for what did not happen and for 有.\n\nThe verb never changes, and 了 drops after 没."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If you negate with a suffix inside the verb (and another word for ‘there isn’t’), Chinese uses separate words before the verb — 不 or 没 — and 没有 for ‘don’t have / there isn’t’."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "similar",
+   "text": "If one negator in your language covers everything, Chinese splits it:\n→ 不 (not, won’t, don’t usually) and 没 (didn’t, haven’t, don’t have);\n→ ‘not yet’ is 还没."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If negation is a suffix inside your verb word, Chinese puts a separate word before the verb:\n→ 不 or 没 — 我不吃, 我没吃."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "If your language chooses its negator by tense, or has a special one for ‘there isn’t’, Chinese chooses by meaning — and the verb never changes:\n\n- 不 for will and habit;\n- 没 for what did not happen;\n- 没有 for ‘don’t have / there isn’t’."
   }
  ],
  "seeAlso": [

@@ -633,9 +633,9 @@
   },
   {
    "id": "phon.interdentals",
-   "title": "'Th' sounds",
+   "title": "Interdental sounds (θ, ð)",
    "area": "phonology",
-   "question": "Are there interdental fricatives (θ as in 'thin', ð as in 'this')?",
+   "question": "Are there interdental fricatives (θ, ð: the tongue tip between the teeth)?",
    "wals": "19A",
    "values": [
     {
@@ -1382,11 +1382,11 @@
    "values": [
     {
      "id": "dependent-affix",
-     "title": "an ending or clitic on the possessor (genitive case, 's)"
+     "title": "an ending or clitic on the possessor (a genitive case)"
     },
     {
      "id": "adposition-or-particle",
-     "title": "a separate word ('of', 'de', 的, の)"
+     "title": "a separate word ('of', 的)"
     },
     {
      "id": "head-affix",
@@ -1620,7 +1620,7 @@
     },
     {
      "id": "particle",
-     "title": "yes: a particle (often with special forms), e.g. να, să, да, бы"
+     "title": "yes: a particle (often with special verb forms)"
     }
    ],
    "learnerNote": "A learner without a subjunctive must learn which conjunctions and verbs trigger it and its forms; one with it must learn to use ordinary forms."
@@ -1638,7 +1638,7 @@
     },
     {
      "id": "auxiliary-or-particle",
-     "title": "an auxiliary or particle (would, würde, бы, θα)"
+     "title": "an auxiliary or particle (würde)"
     },
     {
      "id": "conjunction-only",
@@ -1823,7 +1823,7 @@
    "id": "verb.lightVerbs",
    "title": "Light-verb compounds",
    "area": "morphology",
-   "question": "Are many verbs formed as noun + 'do / make / be' (kar kardan, 勉強する, 공부하다)?",
+   "question": "Are many verbs formed as noun + 'do / make / be' ('work do' = to work, 'study do' = to study)?",
    "wals": null,
    "values": [
     {
@@ -2016,7 +2016,7 @@
    "values": [
     {
      "id": "affix",
-     "title": "an affix (big-ger)"
+     "title": "an affix (groß → größer)"
     },
     {
      "id": "analytic",
@@ -2242,11 +2242,11 @@
    "values": [
     {
      "id": "relative-pronoun",
-     "title": "a relative pronoun (who / which / der / который)"
+     "title": "a relative pronoun (der, die, das)"
     },
     {
      "id": "invariant-particle",
-     "title": "an invariant particle or complementiser (που, que, she-, 的)"
+     "title": "an invariant particle or complementiser (she-, 的)"
     },
     {
      "id": "verb-form",
@@ -2258,7 +2258,7 @@
     },
     {
      "id": "correlative",
-     "title": "a correlative pair (jo … vo)"
+     "title": "a correlative pair ('who … that one')"
     }
    ],
    "learnerNote": "A learner must learn the relative word (and its case / gender forms) or the participle forms that replace relative clauses."
@@ -2328,7 +2328,7 @@
     },
     {
      "id": "different",
-     "title": "different words (e.g. ser / estar, 是 / 在)"
+     "title": "different words (e.g. 是 / 在)"
     }
    ],
    "learnerNote": "A learner must choose between two 'to be' verbs (identity vs location / state) or learn that one covers both."
@@ -2820,7 +2820,7 @@
    "values": [
     {
      "id": "lineal",
-     "title": "one word for both uncles, distinct from 'father' (English type)"
+     "title": "one word for both uncles (father's and mother's brother), distinct from 'father'"
     },
     {
      "id": "bifurcate-collateral",
@@ -2868,7 +2868,7 @@
     },
     {
      "id": "two",
-     "title": "two verbs (savoir / connaître, wissen / kennen)"
+     "title": "two verbs (wissen / kennen)"
     }
    ],
    "learnerNote": "A learner must choose the verb by what is known (a fact or a person / place), or learn that one verb covers both."
@@ -2962,11 +2962,11 @@
    "values": [
     {
      "id": "verb-framed",
-     "title": "path in the verb (entrar corriendo)"
+     "title": "path in the verb ('enter running')"
     },
     {
      "id": "satellite-framed",
-     "title": "manner in the verb, path in a particle or prefix (run in, hineinlaufen)"
+     "title": "manner in the verb, path in a particle or prefix (hineinlaufen: 'run-into')"
     },
     {
      "id": "equipollent",
@@ -3102,7 +3102,7 @@
     },
     {
      "id": "half-to-next",
-     "title": "'half three' (half of the next hour)"
+     "title": "half of the next hour (halb drei = 2:30)"
     },
     {
      "id": "other-system",
@@ -3142,7 +3142,7 @@
    "values": [
     {
      "id": "latin-derived",
-     "title": "names from Latin (January …)"
+     "title": "names from Latin (the Roman calendar)"
     },
     {
      "id": "native",
@@ -3153,7 +3153,7 @@
      "title": "by number (first month …)"
     }
    ],
-   "learnerNote": "A learner must learn twelve native month names where they are not Latin-derived or numbered."
+   "learnerNote": "A learner must learn twelve new month names where the language has names of its own; numbered months need only the numerals and the word for 'month'."
   },
   {
    "id": "time.calendar",

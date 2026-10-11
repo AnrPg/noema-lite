@@ -180,12 +180,12 @@
   {
    "for": "el",
    "rel": "different",
-   "text": "Greek puts the accusative after every preposition (στο σπίτι, από το σπίτι); Hebrew changes nothing in the noun: בַּבַּיִת, מֵהַבַּיִת."
+   "text": "Greek puts the accusative after every preposition (στο σπίτι, από το σπίτι); Hebrew changes nothing in the noun:\n→ בַּבַּיִת, מֵהַבַּיִת"
   },
   {
    "for": "ru",
    "rel": "different",
-   "text": "Russian shows where / where to / where from with the case (в доме / в дом / из дома); Hebrew uses three prepositions and an unchanged noun: בַּבַּיִת / לַבַּיִת / מֵהַבַּיִת."
+   "text": "Russian shows where / where to / where from with the case (в доме / в дом / из дома); Hebrew uses three prepositions and an unchanged noun:\n→ בַּבַּיִת / לַבַּיִת / מֵהַבַּיִת"
   },
   {
    "for": "es",
@@ -195,7 +195,7 @@
   {
    "for": "en",
    "rel": "same",
-   "text": "As in English (in, to, from the house), the preposition carries the meaning and the noun stays the same: בַּבַּיִת, לַבַּיִת, מֵהַבַּיִת."
+   "text": "As in English (in, to, from the house), the preposition carries the meaning and the noun stays the same:\n→ בַּבַּיִת, לַבַּיִת, מֵהַבַּיִת"
   },
   {
    "for": "fr",
@@ -205,7 +205,7 @@
   {
    "for": "de",
    "rel": "different",
-   "text": "German two-way prepositions choose the dative or the accusative (in der / in die Stadt); Hebrew chooses the preposition instead: בָּעִיר / לָעִיר."
+   "text": "German two-way prepositions choose the dative or the accusative (in der / in die Stadt); Hebrew chooses the preposition instead:\n→ בָּעִיר / לָעִיר"
   },
   {
    "for": "hi",
@@ -225,12 +225,12 @@
   {
    "for": "ar",
    "rel": "different",
-   "text": "Arabic puts the noun in the genitive after every preposition (فِي الْمَدِينَةِ); Hebrew lost the case endings: בָּעִיר."
+   "text": "Arabic puts the noun in the genitive after every preposition (فِي الْمَدِينَةِ); Hebrew lost the case endings:\n→ בָּעִיר"
   },
   {
    "for": "tr",
    "rel": "different",
-   "text": "Turkish evde / eve / evden change the noun; Hebrew uses three prepositions and leaves the noun alone: בַּבַּיִת / לַבַּיִת / מֵהַבַּיִת."
+   "text": "Turkish evde / eve / evden change the noun; Hebrew uses three prepositions and leaves the noun alone:\n→ בַּבַּיִת / לַבַּיִת / מֵהַבַּיִת"
   },
   {
    "for": "ja",
@@ -271,6 +271,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut marks where / where to / where from with case endings (-mi, -mut, -mit); Hebrew uses prefixes with an unchanged noun."
+  },
+  {
+   "for": "it",
+   "rel": "same",
+   "text": "As in Italian (in casa, a casa, da casa), the preposition alone carries the meaning, and as in nella / alla the article fuses with it:\n→ בַּבַּיִת, לַבַּיִת\n\nBut a casa is both “at home” and “(to) home”; Hebrew separates בַּבַּיִת and הַבַּיְתָה / לַבַּיִת."
+  },
+  {
+   "for": "pt",
+   "rel": "same",
+   "text": "As in Portuguese (em casa, para casa, de casa), the preposition carries the meaning and the noun stays the same. em + o → no fuses just as בְּ + הַ → בַּ: no quarto ~ בַּחֶדֶר."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian puts the noun into a case after each preposition (në shtëpi, nga shtëpia, me shokun); Hebrew nouns never change after a preposition:\n→ בַּבַּיִת, מֵהַבַּיִת, עִם הֶחָבֵר"
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your prepositions demand a case, drop that habit: after a Hebrew preposition the noun is unchanged (בָּעִיר, לָעִיר, מֵהָעִיר).\n\nOnly its first letters may change spelling."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If your language says “in / to / from” with suffixes on the noun, Hebrew uses three prefixes in front of it — בָּעִיר, לָעִיר, מֵהָעִיר — and the noun itself does not change."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "same",
+   "text": "As in your language, the noun never changes; only the preposition does:\n→ בָּעִיר / לָעִיר / מֵהָעִיר\n\nNew is that בְּ, לְ, מִ are written onto the noun."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If your language puts location and direction inside a long verb or noun word, Hebrew keeps them in short prepositions before an unchanged noun:\n→ בָּעִיר, לָעִיר, מֵהָעִיר"
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "The prepositions are old Semitic (בְּ, לְ, מִן, עַל, אֶל have relatives across the branch), but Hebrew puts no case on the noun after them:\n→ בַּבַּיִת, מִן הַבַּיִת"
   }
  ]
 }

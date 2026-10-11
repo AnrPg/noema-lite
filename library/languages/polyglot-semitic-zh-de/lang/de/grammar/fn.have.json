@@ -277,32 +277,32 @@
   {
    "for": "el",
    "rel": "same",
-   "text": "έχω works like haben, and Greek marks the object on a masculine article as German does: έχω έναν αδελφό – Ich habe einen Bruder. Age is είμαι … χρονών, just as German uses sein. But “there is” is es gibt, never hat (colloquial Greek έχει)."
+   "text": "έχω works like haben, and Greek marks the object on a masculine article as German does:\n→ έχω έναν αδελφό – Ich habe einen Bruder\n\nAge is είμαι … χρονών, just as German uses sein. But **“there is” is es gibt, never hat** (colloquial Greek έχει)."
   },
   {
    "for": "ru",
    "rel": "different",
-   "text": "Russian says у меня есть брат (“at me there is a brother”); German has a real verb, and the owner is its subject: Ich habe einen Bruder."
+   "text": "Russian says у меня есть брат (“at me there is a brother”); German has a real verb, and the owner is its subject:\n→ Ich habe einen Bruder."
   },
   {
    "for": "es",
    "rel": "trap",
-   "text": "tener works like haben, and tengo hambre / sed / miedo are exactly Hunger / Durst / Angst haben. But age is sein (Ich bin zwanzig, not *Ich habe zwanzig Jahre), and hay is es gibt."
+   "text": "tener works like haben, and tengo hambre / sed / miedo are exactly Hunger / Durst / Angst haben. But:\n- age is sein (Ich bin zwanzig, not *Ich habe zwanzig Jahre);\n- hay is es gibt."
   },
   {
    "for": "en",
    "rel": "similar",
-   "text": "have is haben; but German says Hunger haben (to be hungry), Durst haben, Angst haben, Recht haben, and “there is” is es gibt."
+   "text": "have is haben; but:\n- German says Hunger haben (to be hungry), Durst haben, Angst haben, Recht haben;\n- “there is” is es gibt."
   },
   {
    "for": "fr",
    "rel": "trap",
-   "text": "avoir is haben, and avoir faim / soif / peur match Hunger / Durst / Angst haben; but age takes sein (Ich bin zwanzig, not j’ai vingt ans), and il y a is es gibt."
+   "text": "avoir is haben, and avoir faim / soif / peur match Hunger / Durst / Angst haben. But:\n- age takes sein (Ich bin zwanzig, not j’ai vingt ans);\n- il y a is es gibt."
   },
   {
    "for": "hi",
    "rel": "different",
-   "text": "Hindi has no verb “to have”: mere pās kitāb hai (“near me a book is”), mere do bhāī haĩ (“my two brothers are”). German makes the owner the subject of haben: Ich habe zwei Brüder."
+   "text": "Hindi has no verb “to have”: mere pās kitāb hai (“near me a book is”), mere do bhāī haĩ (“my two brothers are”).\n\nGerman makes the owner the subject of haben:\n→ Ich habe zwei Brüder."
   },
   {
    "for": "fa",
@@ -312,27 +312,27 @@
   {
    "for": "mr",
    "rel": "different",
-   "text": "Marathi says malā ek bhāū āhe (“to me a brother is”) or mājhyākaḍe … āhe (“near me … is”); German turns the owner into the subject of haben."
+   "text": "Marathi says malā ek bhāū āhe (“to me a brother is”) or mājhyākaḍe … āhe (“near me … is”).\n\nGerman turns the owner into the subject of haben."
   },
   {
    "for": "ar",
    "rel": "different",
-   "text": "Arabic has no verb “to have”: ʿindī kitāb (“at me a book”), lī akh (“to me a brother”). In German the owner is the subject of haben and the thing owned is the object, in the accusative: Ich habe einen Bruder."
+   "text": "Arabic has no verb “to have”: ʿindī kitāb (“at me a book”), lī akh (“to me a brother”).\n\nIn German the owner is the subject of haben and the thing owned is the object, in the accusative:\n→ Ich habe einen Bruder."
   },
   {
    "for": "he",
    "rel": "different",
-   "text": "Hebrew says yesh li (“there is to me”) and ein li for “not have”; German uses haben and kein: Ich habe ein Auto. Ich habe kein Auto."
+   "text": "Hebrew says yesh li (“there is to me”) and ein li for “not have”; German uses haben and kein:\n→ Ich habe ein Auto. Ich habe kein Auto."
   },
   {
    "for": "tr",
    "rel": "different",
-   "text": "Turkish says kardeşim var (“my sibling exists”) and yok for “not have”; German uses the verb haben and kein: Ich habe einen Bruder. Ich habe keinen Bruder."
+   "text": "Turkish says kardeşim var (“my sibling exists”) and yok for “not have”; German uses the verb haben and kein:\n→ Ich habe einen Bruder. Ich habe keinen Bruder."
   },
   {
    "for": "ja",
    "rel": "different",
-   "text": "Japanese uses verbs of existence (ani ga imasu, kuruma ga arimasu); German uses haben with the owner as subject: Ich habe einen Bruder, ein Auto. Bruder covers ani and otōto alike: German says älterer / jüngerer Bruder only when needed."
+   "text": "Japanese uses verbs of existence (ani ga imasu, kuruma ga arimasu); German uses haben with the owner as subject:\n→ Ich habe einen Bruder, ein Auto.\n\nBruder covers ani and otōto alike: German says älterer / jüngerer Bruder only when needed."
   },
   {
    "for": "ko",
@@ -342,17 +342,17 @@
   {
    "for": "fi",
    "rel": "different",
-   "text": "Finnish says minulla on veli (“at me is a brother”); in German the owner is the subject: Ich habe einen Bruder."
+   "text": "Finnish says minulla on veli (“at me is a brother”); in German the owner is the subject:\n→ Ich habe einen Bruder."
   },
   {
    "for": "hu",
    "rel": "different",
-   "text": "Hungarian says nekem van egy testvérem (“to me there is a sibling-of-mine”); German uses the verb haben: Ich habe einen Bruder. Bruder covers báty and öcs: German adds älter or jünger only when needed."
+   "text": "Hungarian says nekem van egy testvérem (“to me there is a sibling-of-mine”); German uses the verb haben:\n→ Ich habe einen Bruder.\n\nBruder covers báty and öcs: German adds älter or jünger only when needed."
   },
   {
    "for": "sw",
    "rel": "similar",
-   "text": "kuwa na (“be with”: nina kaka) does the work of haben; German has a single verb with person endings: ich habe, du hast, er hat."
+   "text": "kuwa na (“be with”: nina kaka) does the work of haben; German has a single verb with person endings:\n→ ich habe, du hast, er hat"
   },
   {
    "for": "lg",
@@ -362,17 +362,57 @@
   {
    "for": "zh",
    "rel": "trap",
-   "text": "有 is both “have” and “there is” (我有一个哥哥 / 这里有一个咖啡馆); German splits them: Ich habe einen Bruder – Hier gibt es ein Café. Bruder and Schwester do not say who is older (哥哥 / 弟弟); add älter or jünger only when it matters: mein älterer Bruder."
+   "text": "有 is both “have” and “there is” (我有一个哥哥 / 这里有一个咖啡馆); German splits them:\n→ Ich habe einen Bruder – Hier gibt es ein Café.\n\nBruder and Schwester do not say who is older (哥哥 / 弟弟); add älter or jünger only when it matters: mein älterer Bruder."
   },
   {
    "for": "vi",
    "rel": "trap",
-   "text": "có means “have” and “there is”; German uses haben for the first and es gibt for the second. Bruder and Schwester do not say who is older (anh / em): German adds älter or jünger only when needed."
+   "text": "- có means “have” and “there is”; German uses haben for the first and es gibt for the second.\n- Bruder and Schwester do not say who is older (anh / em): German adds älter or jünger only when needed."
   },
   {
    "for": "iu",
    "rel": "different",
-   "text": "Possession is a suffix meaning “have” (-qaq-) on the noun, which becomes the verb; German uses the separate verb haben with the thing owned as its object."
+   "text": "Possession is a suffix meaning “have” (-qaq-) on the noun, which becomes the verb.\n\nGerman uses the separate verb haben with the thing owned as its object."
+  },
+  {
+   "for": "it",
+   "rel": "trap",
+   "text": "avere is haben, and ho fame / sete / paura match Hunger / Durst / Angst haben. But:\n- age takes sein (Ich bin zwanzig – not *Ich habe zwanzig Jahre, as in ho vent’anni);\n- c’è / ci sono is es gibt."
+  },
+  {
+   "for": "sq",
+   "rel": "trap",
+   "text": "kam is haben, and kam uri / etje / frikë are Hunger / Durst / Angst haben; age is sein in both (Jam njëzet vjeç – Ich bin zwanzig).\n\nBut ka for “there is” (Këtu ka një kafene) is **es gibt, never hat**:\n→ Hier gibt es ein Café."
+  },
+  {
+   "for": "pt",
+   "rel": "trap",
+   "text": "ter is haben, and tenho fome / sede / medo match Hunger / Durst / Angst haben. But:\n- age is sein (Ich bin zwanzig – not *Ich habe zwanzig Jahre, as in tenho vinte anos);\n- há is es gibt."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your language has a verb “to have”, haben works like it, with the thing in the accusative (Ich habe einen Bruder). Check the uses one by one:\n- Hunger / Durst haben for states;\n- sein for age (Ich bin zwanzig);\n- es gibt for “there is”."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If you say “at me there is” or “my X exists”, German uses a verb with the owner as subject and the thing as object:\n→ Ich habe einen Bruder.\n\nExistence is a separate phrase:\n→ Es gibt hier ein Café."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "trap",
+   "text": "If one word means both “have” and “there is”, German splits it:\n→ Ich habe einen Bruder – Hier gibt es ein Café.\n\nhaben changes for the person (ich habe, du hast, er hat), and its object takes the accusative."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If possession is a suffix on the noun or the verb in your language, German uses the separate verb haben with an object:\n→ Ich habe zwei Kinder.\n\n“there is” is the fixed phrase es gibt."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "new",
+   "text": "If your language has no verb “to have” and says “there is to me” or “at me”, German has a real verb – the owner is the subject, the thing an accusative object:\n→ Ich habe einen Bruder.\n\nThe negative is kein, not a “there is not” word:\n→ Ich habe keine Zeit."
   }
  ]
 }

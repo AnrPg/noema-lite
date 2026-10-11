@@ -22,5 +22,26 @@
  "authoring": {
   "minVisualPerChapter": 3,
   "minExercisesPerPicture": 3
+ },
+ "i18n": {
+  "el": {
+   "title": "Φυσική (δοκιμή)",
+   "description": "Δοκιμαστικό πακέτο με μαθηματικά.",
+   "hero": {
+    "headline": "Μάθε **Φυσική** με $E = mc^2$"
+   }
+  },
+  "fr": {
+   "title": "Physique (démo)",
+   "description": "Pack de test avec des maths.",
+   "hero": {
+    "headline": "Apprends la **physique** avec $E = mc^2$",
+    "mantra": "L’énergie se conserve : $$\\Delta E = W + Q$$"
+   },
+   "tutor": {
+    "domain": "physique",
+    "examples": "Utilise des exemples d’imagerie médicale."
+   }
+  }
  }
 }

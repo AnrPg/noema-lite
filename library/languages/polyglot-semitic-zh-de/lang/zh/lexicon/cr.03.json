@@ -121,13 +121,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "计划 is one of many modern words that Chinese and Japanese share: 計画 keikaku."
+     "计划 is one of many modern words shared by the languages written with Chinese characters."
     ],
     "pitfalls": [
      "Taiwan writes 計畫, Hong Kong and many older texts 計劃 — both are correct traditional spellings."
     ],
     "subtleties": [
-     "计划 sounds organised, often written down; for a simple personal intention people say 打算: 你明天有什么打算？"
+     "计划 sounds organised, often written down; for a simple personal intention people say 打算:\n→ 你明天有什么打算？"
+    ],
+    "notes": [
+     {
+      "for": "ja",
+      "rel": "same",
+      "text": "Japanese 計画 keikaku is the same word, written the same way."
+     }
     ]
    },
    "features": {
@@ -143,7 +150,20 @@
     "measure": [
      "个",
      "项"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "an abstract noun, not a place"
+    }
    }
   },
   {
@@ -255,13 +275,13 @@
      "src": "morphemes (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "打 is the ‘do’ of many verbs: 打电话 ‘make a phone call’, 打球 ‘play ball’, 打算 ‘make plans’."
+     "打 is the ‘do’ of many verbs:\n→ 打电话 ‘make a phone call’, 打球 ‘play ball’, 打算 ‘make plans’."
     ],
     "pitfalls": [
-     "打算 + verb needs no word for ‘to’: 我打算去. The negative is 不打算 ‘don’t intend to’ or 没打算 ‘hadn’t planned to’."
+     "打算 + verb needs no word for ‘to’:\n→ 我打算去.\n\nThe negative is 不打算 ‘don’t intend to’ or 没打算 ‘hadn’t planned to’."
     ],
     "subtleties": [
-     "打算 tells an intention, not a certainty: 我打算去 ‘I mean to go’, 我会去 ‘I will go’, 我要去 ‘I’m going (it’s decided)’."
+     "打算 tells an intention, not a certainty:\n→ 我打算去 ‘I mean to go’, 我会去 ‘I will go’, 我要去 ‘I’m going (it’s decided)’."
     ]
    },
    "features": {
@@ -277,7 +297,29 @@
     "neg": "bu+mei",
     "separable": {
      "none": "not a verb–object word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "auxiliary (+ verb)"
+    ],
+    "aspect": [
+     "过"
+    ],
+    "complements": {
+     "none": "takes none"
+    },
+    "redup": "打算打算 (ABAB: ‘think it over’)",
+    "degreeComplement": {
+     "none": "takes no 得 comment of manner or degree"
+    },
+    "object": [
+     "verb"
+    ]
    }
   },
   {
@@ -377,7 +419,7 @@
      "北京饭店 ‘Beijing Hotel’ is a hotel, not a restaurant: 饭店 in a name is often a hotel."
     ],
     "pitfalls": [
-     "酒店 is not a bar: a bar is 酒吧 (jiǔbā). In Taiwan 酒店 can also mean a hostess club — 饭店 or 旅馆 is safer there."
+     "酒店 is not a bar: a bar is 酒吧 (jiǔbā).\n\nIn Taiwan 酒店 can also mean a hostess club — 饭店 or 旅馆 is safer there."
     ],
     "subtleties": [
      "Staying at a hotel is 住酒店 / 住在酒店 (住 ‘to live, to stay’)."
@@ -395,7 +437,18 @@
     },
     "measure": [
      "家"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "place or + 里 (在学校 / 在学校里)"
    }
   },
   {
@@ -518,7 +571,45 @@
     "neg": "bu+mei",
     "separable": {
      "none": "not a verb–object word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过",
+     "在"
+    ],
+    "complements": [
+     {
+      "kind": "result",
+      "form": "预订好",
+      "gloss": "have booked"
+     },
+     {
+      "kind": "result",
+      "form": "预订到",
+      "gloss": "manage to book"
+     },
+     {
+      "kind": "potential",
+      "form": "预订不到",
+      "gloss": "cannot get a booking"
+     }
+    ],
+    "redup": {
+     "none": "not doubled: not used for a short, casual action"
+    },
+    "degreeComplement": "我们预订得很早",
+    "object": [
+     "noun"
+    ]
    }
   },
   {
@@ -606,7 +697,7 @@
      "Getting a passport is 办护照 ‘handle a passport’, not *买护照."
     ],
     "subtleties": [
-     "A passport is counted like a book: 一本护照."
+     "A passport is counted like a book:\n→ 一本护照."
     ]
    },
    "features": {
@@ -621,7 +712,18 @@
     },
     "measure": [
      "本"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    }
   },
   {
@@ -721,7 +823,7 @@
      "行 has two readings: xíng ‘to go’ (行李, 旅行) and háng ‘row, trade’ (银行 ‘bank’)."
     ],
     "pitfalls": [
-     "Luggage itself (行李) is counted with 件: 两件行李; a 行李箱 is counted with 个."
+     "Luggage itself (行李) is counted with 件:\n→ 两件行李; a 行李箱 is counted with 个."
     ],
     "subtleties": [
      "In a car, Wiktionary notes, 行李箱 is also the boot (trunk)."
@@ -739,7 +841,16 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": "李 li is toneless in this word (alone: lǐ); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": "needs 上 / 里 … (在桌子上)"
    }
   },
   {
@@ -851,10 +962,10 @@
      "Order matters: 国外 ‘outside the country’ = abroad; 外国 ‘outside country’ = a foreign country."
     ],
     "pitfalls": [
-     "国外 is a place, 外国 a country: 在国外 ‘abroad’, but 外国人 ‘a foreigner’ — not *国外人."
+     "国外 is a place, 外国 a country:\n→ 在国外 ‘abroad’, but 外国人 ‘a foreigner’ — not *国外人."
     ],
     "subtleties": [
-     "国外 behaves like a place name: 在国外, 去国外, 从国外."
+     "国外 behaves like a place name:\n→ 在国外, 去国外, 从国外."
     ]
    },
    "features": {
@@ -869,7 +980,18 @@
     },
     "measure": {
      "none": "a place word: it is not counted"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": "place word (在家)"
    }
   },
   {
@@ -998,8 +1120,34 @@
      {
       "verb": "出",
       "object": "国",
-      "example": "出过国"
+      "example": "出过国",
+      "inserts": "了 · 过 (出过国)"
      }
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过"
+    ],
+    "complements": {
+     "none": "takes none"
+    },
+    "redup": {
+     "none": "not doubled: not used for a short, casual action"
+    },
+    "degreeComplement": {
+     "none": "takes no 得 comment of manner or degree"
+    },
+    "object": [
+     "no object"
     ]
    }
   },
@@ -1110,7 +1258,7 @@
      "参观 is for places and things, never for people: visiting a friend is 看朋友 / 看望朋友."
     ],
     "subtleties": [
-     "参观 is looking round as a visitor; staying somewhere is not 参观: *参观北京三天 → 在北京玩三天."
+     "参观 is looking round as a visitor; staying somewhere is not 参观:\n→ *参观北京三天 → 在北京玩三天."
     ]
    },
    "features": {
@@ -1126,7 +1274,33 @@
     "neg": "bu+mei",
     "separable": {
      "none": "not a verb–object word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过",
+     "在"
+    ],
+    "complements": [
+     {
+      "kind": "result",
+      "form": "参观完",
+      "gloss": "finish the visit"
+     }
+    ],
+    "redup": "参观参观 (ABAB)",
+    "degreeComplement": "我们参观得很仔细",
+    "object": [
+     "place"
+    ]
    }
   },
   {
@@ -1230,7 +1404,7 @@
      "src": "morphemes (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "Visiting the sick with fruit or flowers is usual — but never with a clock: 送钟 ‘give a clock’ sounds like 送终 ‘attend a deathbed’."
+     "Visiting the sick with fruit or flowers is usual — but never with a clock:\n→ 送钟 ‘give a clock’ sounds like 送终 ‘attend a deathbed’."
     ],
     "pitfalls": [
      "看望 is for people (family, the sick, older people), not for places: visiting a museum is 参观."
@@ -1252,7 +1426,32 @@
     "neg": "bu+mei",
     "separable": {
      "none": "not a verb–object word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过"
+    ],
+    "complements": {
+     "none": "takes none"
+    },
+    "redup": {
+     "none": "not doubled: not used for a short, casual action"
+    },
+    "degreeComplement": {
+     "none": "takes no 得 comment of manner or degree"
+    },
+    "object": [
+     "noun"
+    ]
    }
   },
   {
@@ -1352,7 +1551,7 @@
      "src": "morphemes (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "客 ‘guest’ makes many words for people: 客人 ‘guest’, 乘客 ‘passenger’, 顾客 ‘customer’."
+     "客 ‘guest’ makes many words for people:\n→ 客人 ‘guest’, 乘客 ‘passenger’, 顾客 ‘customer’."
     ],
     "pitfalls": [
      "A passenger on a train or a plane is 乘客 or 旅客, not 游客 — a 游客 is there to look round."
@@ -1375,7 +1574,18 @@
      "个",
      "位",
      "名"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    }
   },
   {
@@ -1473,7 +1683,7 @@
      "A guidebook is not 导游 but 旅游指南 (lǚyóu zhǐnán)."
     ],
     "subtleties": [
-     "导游 is the person and the job: 他做导游 ‘he works as a guide’."
+     "导游 is the person and the job:\n→ 他做导游 ‘he works as a guide’."
     ]
    },
    "features": {
@@ -1490,7 +1700,18 @@
      "个",
      "位",
      "名"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "takes 们 (people)",
+    "locative": "needs 这儿 / 那儿 (在朋友那儿)"
    }
   },
   {
@@ -1621,6 +1842,19 @@
     },
     "measure": {
      "none": "a time word: it is not counted"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    }
   },
@@ -1720,7 +1954,7 @@
      "src": "morphemes (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "With 周 the weekdays are short too: 周一 … 周日 (S14) — so 下周三 is ‘next Wednesday’."
+     "With 周 the weekdays are short too:\n→ 周一 … 周日 (S14) — so 下周三 is ‘next Wednesday’."
     ],
     "pitfalls": [
      "Traditional characters write the week 週 (下週); 周 alone is also the Zhou dynasty, which keeps 周."
@@ -1741,6 +1975,19 @@
     },
     "measure": {
      "none": "a time word: it is not counted"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    }
   },
@@ -1868,6 +2115,19 @@
     },
     "measure": {
      "none": "a time word: it is not counted"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    }
   },
@@ -2025,7 +2285,7 @@
      "不会 is both ‘won’t’ and ‘can’t (never learnt)’: 他不会来 ‘he won’t come’, 他不会游泳 ‘he can’t swim’ — the verb and the situation decide."
     ],
     "subtleties": [
-     "会 predicts (it will probably happen); 要 announces (it is decided or near): 明天会很冷, but 我明天要走 ‘I’m leaving tomorrow’."
+     "会 predicts (it will probably happen); 要 announces (it is decided or near):\n→ 明天会很冷, but 我明天要走 ‘I’m leaving tomorrow’."
     ]
    },
    "features": {
@@ -2041,7 +2301,32 @@
     "neg": "bu",
     "separable": {
      "none": "a single verb (as ‘will’ or ‘can’ it stands before another verb)"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "auxiliary (+ verb)"
+    ],
+    "aspect": {
+     "none": "an auxiliary: no aspect particle (the verb after it may take one)"
+    },
+    "complements": {
+     "none": "takes none"
+    },
+    "redup": {
+     "none": "not doubled: an auxiliary"
+    },
+    "degreeComplement": {
+     "none": "takes no 得 comment of manner or degree"
+    },
+    "object": [
+     "verb",
+     "noun"
+    ]
    }
   }
  ]

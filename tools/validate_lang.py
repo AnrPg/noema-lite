@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Validate a language course (docs/LANGUAGES.md §4 and §11). No network, no dependencies.
 
-  python3 tools/validate_lang.py <course-dir> [--lang de] [--strict] [--json] [--batch fd.00,fd.01] [--alone]
+  python3 tools/validate_lang.py <course-dir> [--lang de] [--strict] [--d19-lenient] [--json] [--batch fd.00,fd.01] [--alone]
 
 Without --strict a course may be unfinished: a node without its lexicon file in a language is “not prepared yet”
 and a frame without a sentence is reported as a warning. --strict (the tests, a finished course) makes both errors.
@@ -9,6 +9,22 @@ and a frame without a sentence is reported as a warning. --strict (the tests, a 
 --batch: while a content batch is written, only the listed nodes must have a word (or an absent entry) for every concept.
 The parallel order (D13, a hard constraint) is checked against every language of this course, the path of every
 language type, and every language of the other courses in the same folder (library/languages/*); --alone skips the others.
+D19 (taught through the learner's native language, docs/language-packs.md): every grammar page has notes for every
+supported native but its own language + type:fusional / agglutinating / isolating / polysynthetic + branch:Semitic, and
+the lint of tools/lang_facade.py runs over every learner text (word profiles, phenomena, typology, quiz, facts, seeAlso,
+function titles …: no language outside the course, no English-anchored explanation, every text field registered).
+Supported natives (R1, 2026-10-11): en el ru fr ar de hi zh ja it es sq pt tr.
+R2: notes and comparison-like texts (pitfalls, subtleties, fun facts, feeling) use the structured Markdown subset —
+a note over ~220 characters in one paragraph, or markup outside the subset (headings, links, HTML, tables, code), is a
+WARNING (never an error, not even with --d19-strict).
+R3: the first step of a language is the exhaustive map of its word parameters — lang/<L>/WORD_PARAMETERS.md (a section
+per part of speech naming every parameter of wordFeatures) and wordFeatures with prominent / order; every word states
+every parameter of its part of speech (a value or {"none": "<why>"}: an ERROR); the map covers the checklist of the
+language's type and typological profile (R3_CHECKLIST, R3_TYPE: warnings; wordFeaturesChecklist says why an item is
+not a word parameter).
+These D19 rules and the R3 map file are ERRORS (since 2026-10-11: the library course passes them). --d19-lenient (or
+"d19": "lenient" in course.json — only for a pre-D19 test fixture such as tests/fixtures/lang-mini) makes them warnings;
+--d19-strict (the old switch, kept) makes them errors even then.
 
 Exit 0 when valid, 1 with the list of problems otherwise. Every check here has a negative test in tests/lang_validate.py.
 """
@@ -31,7 +47,7 @@ GENERATORS = {  # exercise types a function may ask for (docs/LANGUAGES.md §6)
     'register_pick', 'nuance_pick', 'connotation', 'idiom_meaning', 'example_cloze', 'sense_pick', 'etymology_link'}
 GENERATORS |= {'listen_pick', 'listen_tone', 'dictation', 'listen_meaning', 'shadowing', 'speak'}   # P9 — listening and speaking (§6.8)
 STATUS = {'realized', 'periphrastic', 'absent'}
-W_FEAT, W_PROF, W_FAM, W_REF, W_NAMES = None, {}, set(), [], []
+W_FEAT, W_PROF, W_FAM, W_REF, W_NAMES, W_BRANCH = None, {}, set(), [], [], set()
 TYPOLOGIES = {'isolating', 'agglutinating', 'fusional', 'polysynthetic'}   # D10: one path of foundation lessons per type
 NODE_KINDS = {'core', 'field', 'lesson'}
 
@@ -175,6 +191,7 @@ def check_profile(v, w, L, lj, x, required, pending=frozenset()):
         return
     if not isinstance(pr, dict): v.E(w, 'profile must be an object'); return
     pw = w + ' · profile'
+    if 'notes' in pr: check_notes(v, pw, pr['notes'], W_PROF, W_FAM)   # D19: comparisons of the word with a learner's language
     regs = lambda r: [r] if isinstance(r, str) else (r or [])
     def reg_ok(where, r):
         for g in regs(r):
@@ -304,6 +321,7 @@ def check_phenomena(v, L, path):
         if not ph.get('examples'): v.E(pw, 'at least one example')
         if ph.get('kind', 'has') not in ('has', 'lacks'): v.E(pw, 'kind must be "has" or "lacks"')
         if 'specific' in ph and not isinstance(ph['specific'], bool): v.E(pw, 'specific must be true or false')
+        if 'notes' in ph: check_notes(v, pw, ph['notes'], profiles or W_PROF, {p.get('family') for p in (profiles or W_PROF).values()})   # D19
         for a in ph.get('alsoIn') or []:
             if profiles is not None and a not in profiles: v.E(pw, f'alsoIn: “{a}” has no profile')
         if ph.get('alsoIn') and not ph.get('specific'): v.E(pw, 'alsoIn is for a specific phenomenon (specific: true)')
@@ -324,8 +342,11 @@ def check_phenomena(v, L, path):
 
 
 NOTE_REL = {'same', 'similar', 'different', 'new', 'trap'}
+D19_NATIVES = ['en', 'el', 'ru', 'fr', 'ar', 'de', 'hi', 'zh', 'ja', 'it', 'es', 'sq', 'pt', 'tr']   # supported natives = the UI locales' languages
+D19_GROUPS = ['type:fusional', 'type:agglutinating', 'type:isolating', 'type:polysynthetic', 'branch:Semitic']
+def D19_REQUIRED(L): return [c for c in D19_NATIVES if c != L] + D19_GROUPS
 CATEGORIES = {'overview', 'script', 'phonology', 'morphology', 'morphosyntax', 'syntax', 'semantics', 'pragmatics', 'lexicon',
-              'reading', 'writing', 'speaking', 'listening', 'production', 'culture'}   # D19: non-vocabulary aspects
+              'reading', 'writing', 'speaking', 'listening', 'production', 'culture'}   # D20: non-vocabulary aspects
 
 
 def world(root):
@@ -335,22 +356,24 @@ def world(root):
             fs = json.load(open(os.path.join(d, 'features.json'), encoding='utf-8'))['features']
             ls = json.load(open(os.path.join(d, 'languages.json'), encoding='utf-8'))['languages']
         except (OSError, ValueError, KeyError): continue
-        try: ref = json.load(open(os.path.join(d, 'reference.json'), encoding='utf-8')).get('languages') or []
+        try: rj = json.load(open(os.path.join(d, 'reference.json'), encoding='utf-8')); ref = list(dict.fromkeys((rj.get('supported') or []) + (rj.get('languages') or [])))
         except (OSError, ValueError): ref = []
         return ({f['id']: {x['id'] for x in f.get('values') or []} for f in fs}, {x['code']: x for x in ls}, {x.get('family') for x in ls}, ref)
     return None, {}, set(), []
 
 
-def check_notes(v, w, notes, profiles, families):
-    """Comparison notes (D16, D18): {for: code | type:… | family:…, rel, text}. → the set of `for` values."""
+def check_notes(v, w, notes, profiles, families, branches=None):
+    """Contrast notes (D16, D18, D19): {for: code | type:… | branch:… | family:…, rel, text}. → the set of `for` values."""
     out = set()
     if notes is None: return out
     if not isinstance(notes, list): v.E(w, 'notes must be a list'); return out
     for n in notes:
         f = n.get('for'); nw = f'{w} · note for {f}'
-        if not isinstance(f, str) or not f: v.E(nw, '“for” is required (a language code, type:<type> or family:<family>)'); continue
+        if not isinstance(f, str) or not f: v.E(nw, '“for” is required (a language code, type:<type>, branch:<branch> or family:<family>)'); continue
         if f.startswith('type:'):
             if f[5:] not in TYPOLOGIES: v.E(nw, f'unknown type “{f[5:]}”')
+        elif f.startswith('branch:'):
+            if (branches if branches is not None else W_BRANCH) and f[7:] not in (branches if branches is not None else W_BRANCH): v.E(nw, f'unknown branch “{f[7:]}” (branches of _typology/languages.json, without the part in brackets)')
         elif f.startswith('family:'):
             if f[7:] not in families: v.E(nw, f'unknown family “{f[7:]}” (families of _typology/languages.json)')
         elif f not in profiles: v.E(nw, f'“{f}” has no profile in _typology/languages.json')
@@ -397,6 +420,77 @@ def check_decls(v, where, wf, phen):
             for ph_ in ps:
                 if ph_ not in phen: v.E(dw, f'phenomenon “{ph_}” is not in the catalogue')
     return out
+
+
+# R3: the checklist a language's word-parameter map must cover, from its typological profile (_typology/languages.json):
+# (feature, values meaning "absent", part of speech ('*' = every content POS declared), parameter id regex, what to declare)
+R3_CONTENT = ('NOUN', 'VERB', 'ADJ', 'ADV')
+R3_CHECKLIST = [
+    ('nom.genderCount', {'none'}, 'NOUN', r'^gender$', 'the gender'),
+    ('nom.plural', {'none', 'optional'}, 'NOUN', r'plural', 'the plural(s), per meaning'),
+    ('nom.dual', {'none', 'pronouns-or-verbs-only'}, 'NOUN', r'dual', 'the dual'),
+    ('nom.classifiers', {'none'}, 'NOUN', r'measure|classifier|clf', 'the measure word(s)'),
+    ('nom.cases', {'none'}, 'NOUN', r'declension|case|genitive', 'the declension (class / genitive)'),
+    ('nom.cases', {'none'}, 'ADP', r'govern|case', 'the case it governs'),
+    ('nom.constructState', {'none'}, 'NOUN', r'construct|ezafe|linker|state', 'the construct / linked form'),
+    ('morph.rootPattern', {'none'}, 'NOUN', r'^root$', 'the root'),
+    ('morph.rootPattern', {'none'}, 'NOUN', r'pattern|wazn|mishkal', 'the pattern'),
+    ('morph.rootPattern', {'none'}, 'VERB', r'^root$', 'the root'),
+    ('morph.rootPattern', {'none'}, 'VERB', r'binyan|verbForm|form|pattern|measure', 'the verb pattern (binyan / form)'),
+    ('morph.stemChange', {'none'}, 'VERB', r'principal|present|past|future|stem|conjugation|binyan|verbForm', 'the principal parts / stems'),
+    ('verb.particleVerbs', {'none'}, 'VERB', r'separab|particle|prefix', 'the separable / particle part'),
+    ('verb.perfect', {'none', 'finish-already', 'other'}, 'VERB', r'aux|principal|participle', 'the perfect (auxiliary / participle)'),
+    ('adj.comparativeForm', {'analytic'}, 'ADJ', r'compar|elative|degree', 'the comparison forms'),
+    ('phon.vowelHarmony', {'none', 'limited'}, 'NOUN', r'harmony', 'the vowel-harmony class'),
+    ('morph.incorporation', {'none', 'limited'}, 'VERB', r'incorporat|template|slot', 'the incorporation template'),
+    ('tone.lexical', {'none'}, '*', r'pinyin|reading|tone|accent', 'the tones / reading'),
+    ('script.multiple', {'single'}, '*', r'trad|variant|script|spelling|kana|kanji', 'the other script forms'),
+    ('script.vowels', {'full', 'inherent'}, '*', r'translit|vocal|spelling|reading|romaniz', 'the transliteration / vocalization'),
+]
+R3_TYPE = {   # the minimal map of a morphological type (always, whatever the profile)
+    'fusional': [('NOUN', r'declension|plural|pattern|class|gender', 'an inflection class (declension / plural / pattern)'),
+                 ('VERB', r'principal|conjugation|binyan|verbForm|present|class|stem', 'the conjugation class / principal parts')],
+    'agglutinating': [('VERB', r'harmony|stem|class|govern|valency|aspect', 'the stem class / harmony / government')],
+    'isolating': [('VERB', r'separab|neg|aspect|complement|position|govern', 'how it combines (separable, negation, aspect, position)')],
+    'polysynthetic': [('VERB', r'incorporat|template|slot|class', 'the verb template / incorporation')],
+}
+
+
+def check_word_map(v, L, lw, lj, decls, profile, root, R3):
+    """R3: the exhaustive per-POS parameter map — lang/<L>/WORD_PARAMETERS.md and wordFeatures (prominent / order) cover
+    the checklist of the language's type and profile. R3 = v.E for the map file (v.W with --d19-lenient)."""
+    if not decls: return
+    md_path = os.path.join(root, lw, 'WORD_PARAMETERS.md')
+    if not os.path.exists(md_path):
+        R3(f'{lw}/WORD_PARAMETERS.md', 'missing: the FIRST step of a language package is the exhaustive map of the parameters of every part of speech (R3), written before any word')
+    else:
+        md = open(md_path, encoding='utf-8').read()
+        for pos, ds in decls.items():
+            if not re.search(r'(?m)^#{1,4}\s.*\b' + re.escape(pos) + r'\b', md): R3(f'{lw}/WORD_PARAMETERS.md', f'no section for {pos} (a heading naming it): map every part of speech of wordFeatures (R3)')
+            miss = [d['id'] for d in ds if not re.search(r'\b' + re.escape(d['id']) + r'\b', md)]
+            if miss: R3(f'{lw}/WORD_PARAMETERS.md', f'{pos}: parameters of wordFeatures not in the map: {", ".join(miss)} (R3)')
+    for pos, ds in decls.items():
+        for d in ds:
+            dw = f'{lw}/language.json · wordFeatures.{pos}.{d.get("id")}'
+            if 'prominent' in d and not isinstance(d['prominent'], bool): v.E(dw, 'prominent must be true or false (R3)')
+            if 'order' in d and (isinstance(d['order'], bool) or not isinstance(d['order'], (int, float))): v.E(dw, 'order must be a number (R3)')
+    unordered = [p for p in R3_CONTENT if len(decls.get(p) or []) > 1 and not any('order' in d or 'prominent' in d for d in decls[p])]
+    if unordered: v.W(f'{lw}/language.json · wordFeatures', f'{", ".join(unordered)}: declare how the word card shows the parameters (prominent, order — the most important first; default: declaration order, R3)')
+    ok = lj.get('wordFeaturesChecklist') or {}
+    if not isinstance(ok, dict): v.E(f'{lw}/language.json', 'wordFeaturesChecklist must map checklist items to the reason they are not word parameters (R3)'); ok = {}
+    for k, why in ok.items():
+        if not (isinstance(why, str) and why.strip()): v.E(f'{lw}/language.json · wordFeaturesChecklist.{k}', 'say why it is not a parameter of a word (R3)')
+    content = [p for p in R3_CONTENT if p in decls]
+    vals = (profile or {}).get('values') or {}
+    def has(pos, rx): return any(re.search(rx, d['id'], re.I) or re.search(rx, ' '.join(d['phenomenon'] if isinstance(d.get('phenomenon'), list) else [d.get('phenomenon') or '']), re.I) for d in decls.get(pos, []))
+    for feat, absent, pos, rx, what in R3_CHECKLIST:
+        val = vals.get(feat)
+        if val is None or val in absent or feat in ok: continue
+        for p in (content if pos == '*' else [pos] if pos in decls else []):
+            if not has(p, rx): v.W(f'{lw}/language.json · wordFeatures.{p}', f'R3 checklist: {feat} = {val} — declare {what} for {p} (or say in wordFeaturesChecklist.{feat} why it is not a word parameter)')
+    for pos, rx, what in R3_TYPE.get(lj.get('typology'), []):
+        if f'type:{lj.get("typology")}' in ok: break
+        if pos in decls and not has(pos, rx): v.W(f'{lw}/language.json · wordFeatures.{pos}', f'R3 checklist of a {lj.get("typology")} language: declare {what} for {pos}')
 
 
 def check_features(v, w, x, decls, lexids):
@@ -477,13 +571,18 @@ def need_str(v, where, obj, key):
     if not (isinstance(obj.get(key), str) and obj[key].strip()): v.E(where, f'“{key}” is required (text)')
 
 
-def validate(root, only=None, strict=True, batch=None, peers=None):
-    """peers: the other courses whose language paths this one must agree with (D13); default: the course folders next to it."""
+def validate(root, only=None, strict=True, batch=None, peers=None, d19_strict=False, d19_lenient=False):
+    """peers: the other courses whose language paths this one must agree with (D13); default: the course folders next to it.
+    The D19 rules (required notes, the lint of every learner text, the R3 map file) are errors; d19_lenient (or course.json
+    "d19": "lenient", a pre-D19 fixture) makes them warnings; d19_strict makes them errors whatever the course says."""
     v = V(root)
     course = v.load('course.json')
     if not course: return v
-    global W_FEAT, W_PROF, W_FAM, W_REF, W_NAMES
+    global W_FEAT, W_PROF, W_FAM, W_REF, W_NAMES, W_BRANCH
     W_FEAT, W_PROF, W_FAM, W_REF = world(root)
+    W_BRANCH = {re.sub(r'\s*\(.*', '', p.get('branch') or '').strip() for p in W_PROF.values() if p.get('branch')}
+    lenient = not d19_strict and (d19_lenient or course.get('d19') == 'lenient')
+    D19 = v.W if lenient else v.E
     if W_PROF and W_REF:
         for c in W_REF:
             if c not in W_PROF: v.E('_typology/reference.json', f'reference language “{c}” has no profile')
@@ -532,7 +631,7 @@ def validate(root, only=None, strict=True, batch=None, peers=None):
         functions[d.get('id')] = d
         need_str(v, where, d, 'title')
         if W_NAMES and any(re.search(r'\b' + re.escape(nm) + r'\b', d.get('title') or '') for nm in W_NAMES): v.E(where, 'the title names a language outside the course (D16): describe the point itself')
-        if d.get('category') not in CATEGORIES: v.E(where, f'category must be one of {", ".join(sorted(CATEGORIES))} (the aspect of the language it teaches, D19)')
+        if d.get('category') not in CATEGORIES: v.E(where, f'category must be one of {", ".join(sorted(CATEGORIES))} (the aspect of the language it teaches, D20)')
     for fid, d in functions.items():
         for a in d.get('after') or []:
             if a not in functions: v.E(f'core/functions/{fid}.json', f'unknown function “{a}” in after')
@@ -645,6 +744,7 @@ def validate(root, only=None, strict=True, batch=None, peers=None):
         else: phen = check_phenomena(v, L, pp)
         if 'wordFeatures' not in lj: v.E(f'{lw}/language.json', 'wordFeatures is required: the parameters every word of each part of speech states (D14, §4.5.1)')
         decls = check_decls(v, f'{lw}/language.json', lj.get('wordFeatures') or {}, phen) if 'wordFeatures' in lj else {}
+        check_word_map(v, L, lw, lj, decls, W_PROF.get(L), root, D19)   # R3: the map of the word's parameters comes first
         # §4.9 (P4): the script module — ar / he: the whole alphabet with its forms; zh: every character of the course's words
         if L in ('ar', 'he', 'zh'):
             se, sw = script_check(root, L, strict); v.errors += se; v.warns += sw
@@ -805,14 +905,14 @@ def validate(root, only=None, strict=True, batch=None, peers=None):
             if not g: continue
             overview = functions[fid].get('category') == 'overview'
             if g.get('function') != fid: v.E(where, f'function must be “{fid}”')
-            # D16 / D18: comparisons with other languages live in notes, for the reference set; texts name no outside language
-            fors = check_notes(v, where, g.get('notes'), W_PROF, W_FAM)
+            # D16 / D18 / D19: comparisons with other languages live in notes — one for every supported native but the page's own
+            # language, and one per type (+ branch:Semitic); the general text names no outside language
+            check_notes(v, where, g.get('notes'), W_PROF, W_FAM)
             for bi, b in enumerate(g.get('blocks') or []):
-                if isinstance(b, dict): fors |= check_notes(v, f'{where} · block {bi + 1}', b.get('notes'), W_PROF, W_FAM)
-            if W_REF:
-                refs = {f for f in fors if f in W_REF}; types = {W_PROF[f].get('typology') for f in refs if f in W_PROF} | {f[5:] for f in fors if f.startswith('type:')}
-                if len(refs) < 8 or not TYPOLOGIES <= types:
-                    v.E(where, f'comparison notes for the reference set: {len(refs)} of at least 8 languages, types {", ".join(sorted(t for t in types if t)) or "none"} of all four (D18; _typology/reference.json)')
+                if isinstance(b, dict): check_notes(v, f'{where} · block {bi + 1}', b.get('notes'), W_PROF, W_FAM)
+            have = {n.get('for') for n in g.get('notes') or [] if isinstance(n, dict) and isinstance(n.get('text'), str) and n['text'].strip()}
+            miss = [c for c in D19_REQUIRED(L) if c not in have]
+            if miss: D19(where, f'contrast notes missing (D19: every supported native but {L}, every type and branch:Semitic): {", ".join(miss)}')
             if W_NAMES:
                 txt = ' '.join(texts_of(g))
                 named = sorted({nm for nm in W_NAMES if re.search(r'\b' + re.escape(nm) + r'\b', txt)})
@@ -850,8 +950,6 @@ def validate(root, only=None, strict=True, batch=None, peers=None):
                 for f in g.get('peculiarities') or []:
                     for k in ('title', 'text'): need_str(v, where + ' · peculiarities', f, k)
                 if g.get('forYou'): v.E(where, 'forYou is replaced by notes (D18): one note per language, {for, rel, text}')
-                miss = [k for k in (course.get('knownLanguages') or []) if k not in {n.get('for') for n in g.get('notes') or []}]
-                if miss: v.E(where, f'notes for the course’s known languages are missing: {", ".join(miss)} (what is easy or hard from each)')
                 if len(g.get('quiz') or []) < 3: v.E(where, 'quiz: at least 3 questions')
             for c in g.get('paradigmCells') or []:
                 for e in cell_errors(c, extra): v.E(where, f'{c}: {e}')
@@ -888,7 +986,7 @@ def validate(root, only=None, strict=True, batch=None, peers=None):
             return [(l, f)]
         for fn in v.files(f'{lw}/bank'):
             where = f'{lw}/bank/{fn}'; d = v.load(where)
-            for x_ in (d or {}).get('fieldExemptions') or []:   # D19: a field that cannot show a node says why
+            for x_ in (d or {}).get('fieldExemptions') or []:   # D20: a field that cannot show a node says why
                 if not (x_.get('reason') or '').strip(): v.E(where, f'fieldExemptions {x_.get("field")} / {x_.get("function")}: say why')
                 exempt[(x_.get('field'), x_.get('function'))] = x_
             for s in (d or {}).get('sentences', []):
@@ -939,7 +1037,7 @@ def validate(root, only=None, strict=True, batch=None, peers=None):
         for fid, f in frames.items():
             fr_draft = f.get("lessons") and all(x in draft and not (batch and x in batch) for x in f['lessons'])   # a frame of lessons still being written
             if fid not in realized and L not in (f.get('absent') or {}): (v.E if strict and not fr_draft else v.W)(f'{lw}/bank', f'frame “{fid}” has no sentence in {L}')
-        # D19: every field brings ≥ 2 sentences (with its own words) for every non-vocabulary node taught before it
+        # D20: every field brings ≥ 2 sentences (with its own words) for every non-vocabulary node taught before it
         order_ = [nid for nid in topo_order(nodes) if nid in app]
         fields_ = {}
         for nid in order_:
@@ -956,12 +1054,22 @@ def validate(root, only=None, strict=True, batch=None, peers=None):
             for fid in before:
                 n_ = sum(1 for sid, s in sids.items() if fid in (s.get('functions') or []) and sent_lex.get(sid, set()) & words)
                 if n_ < 2 and (fld, fid) not in exempt:
-                    (v.E if strict else v.W)(f'{lw}/bank', f'field {fld}: {n_} sentence(s) for {fid} with the field’s words — every field brings ≥ 2 for every node before it, or says why in fieldExemptions (D19)')
+                    (v.E if strict else v.W)(f'{lw}/bank', f'field {fld}: {n_} sentence(s) for {fid} with the field’s words — every field brings ≥ 2 for every node before it, or says why in fieldExemptions (D20)')
         check_generators(v, lw, functions, frames, lex, sids, {fid: g for fid, g in grams.items() if g}, extra, strict)   # P5: generators, their parameters and pools
     if not only and strict:
         for cid in sorted(pending - meant): v.E(f'concept {cid}', 'is pending, but no word of the course has this meaning: remove it')
     for x in os.listdir(os.path.join(root, 'lang')) if os.path.isdir(os.path.join(root, 'lang')) else []:
         if x not in langs: v.W(f'lang/{x}', 'not a course language (ignored)')
+    # D19: the lint of every learner text (tools/lang_facade.py) — the required notes are checked above
+    try:
+        import lang_facade
+        for f in lang_facade.lint(root):
+            if f.cat == 'required' or f.sev == 'info': continue
+            if only and f'/lang/{only}/' not in f.where and f'_phenomena/{only}.json' not in f.where: continue   # --lang: that language's files only
+            if f.cat in ('structure', 'markup'): v.W(f.where, f'{f.msg} (R2 {f.cat})'); continue   # R2: a warning, never an error (docs/language-packs.md §2.3)
+            D19(f.where, f'{f.msg} (D19 {f.cat})')
+    except Exception as e:   # the lint must never hide the other checks
+        v.W('D19 lint', f'not run ({e.__class__.__name__}: {e})')
     return v
 
 
@@ -1048,7 +1156,7 @@ def main(a):
     if not a: print(__doc__); sys.exit(2)
     batch = set(a[a.index('--batch') + 1].split(',')) if '--batch' in a else None   # a content batch in progress: only these nodes must be complete
     peers = [] if '--alone' in a else None   # --alone: skip the comparison with the other courses (D13)
-    v = validate(a[0], a[a.index('--lang') + 1] if '--lang' in a else None, '--strict' in a, batch, peers)
+    v = validate(a[0], a[a.index('--lang') + 1] if '--lang' in a else None, '--strict' in a, batch, peers, d19_strict='--d19-strict' in a, d19_lenient='--d19-lenient' in a)
     if '--json' in a: print(json.dumps({'errors': v.errors, 'warnings': v.warns}, ensure_ascii=False, indent=1))
     else:
         for e in v.errors: print('❌', e)

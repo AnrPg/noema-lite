@@ -57,7 +57,32 @@
       ],
       "note": "the auxiliary with a past participle"
      }
-    ]
+    ],
+    "participle": "ge-",
+    "imperative": [
+     "hab(e)!",
+     "habt!",
+     "haben Sie!"
+    ],
+    "konj2": [
+     {
+      "form": "hätte",
+      "use": "common in speech"
+     }
+    ],
+    "endingAdjust": {
+     "none": "irregular forms of its own (see the paradigm)"
+    },
+    "spokenPast": "Präteritum",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": {
+     "none": "the verb marks no direction towards or away from the speaker"
+    },
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
+    }
    },
    "forms": {
     "V;NFIN": "haben",
@@ -211,21 +236,38 @@
     ],
     "antonyms": [],
     "etymology": {
-     "text": "From Middle High German haben, from Old High German habēn, from Proto-West Germanic *habbjan, from Proto-Germanic *habjaną, from Proto-Indo-European *kap- (“to grasp”). Cognates include Dutch hebben, English have, Danish have.",
+     "text": "From Middle High German haben, from Old High German habēn, from Proto-West Germanic *habbjan, from Proto-Germanic *habjaną, from Proto-Indo-European *kap- (“to grasp”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German “has” hunger, thirst, fear and luck where English “is” hungry, thirsty, afraid and lucky.",
-     "Many languages have no everyday verb “to have”: Russian says у меня есть (“at me there is”), Turkish kardeşim var (“my sibling exists”), Hebrew יֵשׁ לִי (“there is to me”), Arabic عِنْدِي (“at me”). German, Greek (έχω) and English use a verb."
+     "German “has” hunger, thirst, fear and luck: Hunger haben, Durst haben, Angst haben, Glück haben.",
+     "Not every language has an everyday verb “to have”:\n- Hebrew says יֵשׁ לִי (“there is to me”);\n- Arabic عِنْدِي (“at me”).\n\nGerman haben is a real verb."
     ],
     "pitfalls": [
-     "haben takes the accusative: Ich habe einen Bruder (der Bruder → einen Bruder); die, das and the plural do not change.",
+     "haben takes the accusative:\n→ Ich habe einen Bruder (der Bruder → einen Bruder)\n\ndie, das and the plural do not change.",
      "du hast, er hat – the b disappears in these two forms.",
      "Age is said with sein, not haben: Ich bin 20 (Jahre alt), never *Ich habe 20 Jahre."
     ],
     "subtleties": [
      "Wir haben Montag / Wir haben Mai: “it is Monday / it is May” – haben for the date.",
      "“There is/are” is es gibt, not haben (except regionally)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "different",
+      "text": "German “has” what English “is”: Ich habe Hunger (I am hungry), Angst haben (to be afraid), Glück haben (to be lucky)."
+     },
+     {
+      "for": "ru",
+      "rel": "different",
+      "text": "у меня есть (“at me there is”) is ich habe: German uses a real verb with an object."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "έχω works like haben."
+     }
     ]
    }
   },
@@ -258,6 +300,17 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Familie"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-ie → die",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -398,6 +451,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": {
+     "none": "plural only: no singular"
+    },
+    "number": "plural only",
+    "genderCue": {
+     "none": "plural only: no gender"
+    },
+    "pair": {
+     "none": "mother and father together"
+    },
+    "diminutive": {
+     "none": "plural only: no diminutive"
     }
    },
    "forms": {
@@ -487,11 +553,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German eltern, from Old High German eltirōn, from Proto-Germanic *alþizô. Compare Dutch ouders, English elders. The form is equivalent to a nominalised comparative of alt (“old”).",
+     "text": "From Middle High German eltern, from Old High German eltirōn, from Proto-Germanic *alþizô. The form is equivalent to a nominalised comparative of alt (“old”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Eltern are “the older ones”: the word is an old comparative of alt, like English elders."
+     "Eltern are “the older ones”: the word is an old comparative of alt."
     ],
     "pitfalls": [
      "Eltern exists only in the plural: one parent is ein Elternteil (der/das Elternteil).",
@@ -499,6 +565,13 @@
     ],
     "subtleties": [
      "Großeltern (grandparents) and Schwiegereltern (parents-in-law) are built on it."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Eltern is related to English elders."
+     }
     ]
    }
   },
@@ -537,7 +610,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "genitive": [
+     "der Mutter"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a female person → die",
+    "pair": [
+     {
+      "form": "der Vater",
+      "lexeme": "de:Vater"
+     }
+    ],
+    "diminutive": "das Mütterchen (also: a little old woman)"
    },
    "forms": {
     "N;NOM;SG": "Mutter",
@@ -660,11 +745,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German muoter, from Old High German muoter, from Proto-West Germanic *mōder, from Proto-Germanic *mōdēr, from Proto-Indo-European *méh₂tēr. Compare Dutch moeder, English mother, Danish moder, Swedish moder.",
+     "text": "From Middle High German muoter, from Old High German muoter, from Proto-West Germanic *mōder, from Proto-Germanic *mōdēr, from Proto-Indo-European *méh₂tēr.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Mutter, Greek μητέρα (μήτηρ), Russian мать (mat’) and Latin māter all go back to Indo-European *méh₂tēr.",
+     "Mutter goes back to Indo-European *méh₂tēr.",
      "Muttersprache (“mother tongue”) is the German word for native language."
     ],
     "pitfalls": [
@@ -674,6 +759,23 @@
     "subtleties": [
      "Children address her as Mama, not Mutter; Mutter as an address sounds stiff or old-fashioned.",
      "Without an article it can work like a name: Mutter ist in der Küche."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Mutter and μητέρα (μήτηρ) go back to the same Indo-European word."
+     },
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "Mutter and мать go back to the same Indo-European word."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Mutter is related to English mother."
+     }
     ]
    }
   },
@@ -705,6 +807,20 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Vaters"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Mutter",
+      "lexeme": "de:Mutter"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -828,11 +944,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German vater, from Old High German fater, from Proto-West Germanic *fader, from Proto-Germanic *fadēr, from Proto-Indo-European *ph₂tḗr. Germanic cognates include Dutch vader, English father, Danish fader, Gothic fadar.",
+     "text": "From Middle High German vater, from Old High German fater, from Proto-West Germanic *fader, from Proto-Germanic *fadēr, from Proto-Indo-European *ph₂tḗr.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Vater, Greek πατέρας (πατήρ), Latin pater: Indo-European *ph₂tḗr – the p became f in Germanic (and is written v in German)."
+     "Vater goes back to Indo-European *ph₂tḗr: the p became f in Germanic (written v in German)."
     ],
     "pitfalls": [
      "Plural with umlaut: die Väter (dative den Vätern).",
@@ -841,6 +957,18 @@
     "subtleties": [
      "Children say Papa; Vater is the neutral word when you talk about him.",
      "In Germany Vatertag falls on Ascension Day (Christi Himmelfahrt)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Vater and πατέρας (πατήρ) are one Indo-European word: the π became f (written v)."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Vater is related to English father."
+     }
     ]
    }
   },
@@ -871,7 +999,19 @@
     },
     "senseForms": {
      "none": "one meaning"
-    }
+    },
+    "genitive": [
+     "des Sohnes"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Tochter",
+      "lexeme": "de:Tochter"
+     }
+    ],
+    "diminutive": "das Söhnchen"
    },
    "forms": {
     "N;NOM;SG": "Sohn",
@@ -977,11 +1117,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German sun, from Old High German sunu, from Proto-West Germanic *sunu, from Proto-Germanic *sunuz, from Proto-Indo-European *suHnús. Compare Dutch zoon, English son, Danish søn, Yiddish זון (zun), Gothic sunus.",
+     "text": "From Middle High German sun, from Old High German sunu, from Proto-West Germanic *sunu, from Proto-Germanic *sunuz, from Proto-Indo-European *suHnús.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Sohn and Russian сын (syn) are the same Indo-European word *suHnús."
+     "Sohn goes back to Indo-European *suHnús."
     ],
     "pitfalls": [
      "Plural with umlaut: die Söhne (dative den Söhnen).",
@@ -989,6 +1129,18 @@
     ],
     "subtleties": [
      "The long o is written oh: Sohn [zoːn]."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "Sohn and сын are the same Indo-European word."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Sohn is related to English son."
+     }
     ]
    }
   },
@@ -1021,7 +1173,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "genitive": [
+     "der Tochter"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a female person → die",
+    "pair": [
+     {
+      "form": "der Sohn",
+      "lexeme": "de:Sohn"
+     }
+    ],
+    "diminutive": "das Töchterchen"
    },
    "forms": {
     "N;NOM;SG": "Tochter",
@@ -1115,11 +1279,11 @@
      }
     ],
     "etymology": {
-     "text": "Inherited from Old High German tohter. Compare Dutch dochter, English daughter, Swedish dotter.",
+     "text": "Inherited from Old High German tohter.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Tochter, Greek θυγατέρα (θυγάτηρ) and Russian дочь (doč’) all go back to one Indo-European word for “daughter”."
+     "Tochter goes back to an Indo-European word for “daughter”."
     ],
     "pitfalls": [
      "Plural with umlaut only: die Töchter (dative den Töchtern).",
@@ -1127,6 +1291,23 @@
     ],
     "subtleties": [
      "Mutter, Tochter and Schwester end in -er like Vater and Bruder, but they are feminine: the meaning decides."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Tochter and θυγατέρα (θυγάτηρ) go back to one Indo-European word."
+     },
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "Tochter and дочь go back to one Indo-European word."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Tochter is related to English daughter."
+     }
     ]
    }
   },
@@ -1160,7 +1341,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "genitive": [
+     "des Bruders"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Schwester",
+      "lexeme": "de:Schwester"
+     }
+    ],
+    "diminutive": "das Brüderchen"
    },
    "forms": {
     "N;NOM;SG": "Bruder",
@@ -1286,7 +1479,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Bruder, Russian брат (brat) and Latin frāter are one Indo-European word; Greek φράτηρ meant a clan brother, while the usual Greek word is αδελφός."
+     "Bruder goes back to the Indo-European word for “brother”, *bʰréh₂tēr."
     ],
     "pitfalls": [
      "Plural with umlaut only: die Brüder (dative den Brüdern).",
@@ -1294,6 +1487,18 @@
     ],
     "subtleties": [
      "großer / kleiner Bruder (big / little brother) is the everyday way to say older / younger."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "Bruder and брат are one Indo-European word."
+     },
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "φράτηρ meant a clan brother; the usual word is αδελφός – German Bruder is the old word."
+     }
     ]
    }
   },
@@ -1341,7 +1546,19 @@
       ],
       "note": "as a title before a first name, without an article: Schwester Anna"
      }
-    ]
+    ],
+    "genitive": [
+     "der Schwester"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a female person → die",
+    "pair": [
+     {
+      "form": "der Bruder",
+      "lexeme": "de:Bruder"
+     }
+    ],
+    "diminutive": "das Schwesterchen"
    },
    "forms": {
     "N;NOM;SG": "Schwester",
@@ -1457,18 +1674,30 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German swëster, from Old High German swëster, from Proto-Germanic *swestēr. Compare Low German swester, Dutch zuster, English sister, Danish søster, Swedish syster.",
+     "text": "From Middle High German swëster, from Old High German swëster, from Proto-Germanic *swestēr.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Schwester and Russian сестра (sestra) are cognates from Indo-European *swésōr."
+     "Schwester goes back to Indo-European *swésōr."
     ],
     "pitfalls": [
      "Plural Schwestern (the dative is the same).",
-     "In hospitals the official word today is Pflegerin / Pflegefachfrau; Schwester is the traditional one."
+     "In hospitals the official word today is Pflegerin / Pflegefachfrau.\n\nSchwester is the traditional one."
     ],
     "subtleties": [
      "In compounds Schwester- means a “sister” organisation: die Schwesterfirma (sister company), das Schwesterschiff (sister ship)."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "Schwester and сестра are cognates."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Schwester is related to English sister."
+     }
     ]
    }
   },
@@ -1513,6 +1742,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Ehemannes"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Ehefrau",
+      "lexeme": "de:Ehefrau"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -1665,6 +1908,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Ehefrau"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a female person → die",
+    "pair": [
+     {
+      "form": "der Ehemann",
+      "lexeme": "de:Ehemann"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -1805,6 +2062,17 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Babys"
+    ],
+    "number": "singular and plural",
+    "genderCue": "young beings are often neuter (das Kind, das Baby, das Mädchen)",
+    "pair": {
+     "none": "one noun for a baby of either sex"
+    },
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -1905,11 +2173,18 @@
      "German nouns from English usually form the plural with -s: das Baby – die Babys, das Handy – die Handys."
     ],
     "pitfalls": [
-     "Plural Babys – the English spelling Babies is now proscribed.",
+     "Plural Babys – *Babies is wrong in German.",
      "Das Baby is neuter, like das Kind and das Mädchen."
     ],
     "subtleties": [
-     "German pronounces it the English way: [ˈbeːbi]."
+     "Said [ˈbeːbi]."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "Plural Babys, not the English spelling Babies."
+     }
     ]
    }
   },
@@ -1940,6 +2215,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": {
+     "none": "plural only: no singular"
+    },
+    "number": "plural only",
+    "genderCue": {
+     "none": "plural only: no gender"
+    },
+    "pair": {
+     "none": "grandmother and grandfather together"
+    },
+    "diminutive": {
+     "none": "plural only: no diminutive"
     }
    },
    "forms": {
@@ -2016,7 +2304,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "groß- works like English grand-: Großvater, Großmutter, Großeltern."
+     "groß- makes the grandparents: Großvater, Großmutter, Großeltern."
     ],
     "pitfalls": [
      "Plural only, like Eltern: one grandparent = ein Großelternteil (rare); say Großvater or Großmutter.",
@@ -2024,6 +2312,13 @@
     ],
     "subtleties": [
      "Urgroßeltern = great-grandparents (one more generation: ur-)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "groß- works like English grand-: Großvater, Großmutter, Großeltern."
+     }
     ]
    }
   },
@@ -2068,6 +2363,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Großvaters"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Großmutter",
+      "lexeme": "de:Großmutter"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -2155,11 +2464,11 @@
      }
     ],
     "etymology": {
-     "text": "From groß + Vater. Displaced Middle High German eltervater, altervater (“grandfather”). Compare English grandfather, which displaced eldfather in a similar manner.",
+     "text": "From groß + Vater. Displaced Middle High German eltervater, altervater (“grandfather”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German once said eltervater (“elder father”) – Großvater replaced it, just as English grandfather replaced eldfather."
+     "German once said eltervater (“elder father”); Großvater replaced it."
     ],
     "pitfalls": [
      "Plural with umlaut: die Großväter (dative den Großvätern).",
@@ -2167,6 +2476,13 @@
     ],
     "subtleties": [
      "In the family people say Opa; Großvater is for talking about him, in writing or formally."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Großvater is built like English grandfather – “big” + father.\n\nEnglish grandfather replaced eldfather in the same way."
+     }
     ]
    }
   },
@@ -2206,6 +2522,20 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Opas"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Oma",
+      "lexeme": "de:Oma"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -2298,11 +2628,11 @@
      }
     ],
     "etymology": {
-     "text": "Cognate with Dutch opa.",
+     "text": "A short, childlike form of Großpapa.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Opa and Oma are shared with Dutch, which says opa and oma too."
+     "Opa and Oma are the everyday words; Großvater and Großmutter sound more formal."
     ],
     "pitfalls": [
      "Plural Opas (with -s).",
@@ -2361,6 +2691,20 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Großmutter"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a female person → die",
+    "pair": [
+     {
+      "form": "der Großvater",
+      "lexeme": "de:Großvater"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -2463,7 +2807,7 @@
      }
     ],
     "etymology": {
-     "text": "From groß + Mutter. Displaced Middle High German eltermuoter, altermuoter (“grandmother”), related to English eldmother.",
+     "text": "From groß + Mutter. Displaced Middle High German eltermuoter, altermuoter (“grandmother”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -2475,6 +2819,13 @@
     ],
     "subtleties": [
      "In the family people say Oma; Großmutter is for talking about her, in writing or in fairy tales."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Großmutter is built like English grandmother – “big” + mother."
+     }
     ]
    }
   },
@@ -2519,6 +2870,20 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Oma"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a female person → die",
+    "pair": [
+     {
+      "form": "der Opa",
+      "lexeme": "de:Opa"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -2630,11 +2995,11 @@
      }
     ],
     "etymology": {
-     "text": "Cognate to Dutch oma.",
+     "text": "A short, childlike form of Großmama.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Opa and Oma are shared with Dutch, which says opa and oma too."
+     "Opa and Oma are the everyday words; Großvater and Großmutter sound more formal."
     ],
     "pitfalls": [
      "Plural Omas (with -s).",
@@ -2676,6 +3041,20 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Enkels"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Enkelin",
+      "lexeme": "de:Enkelin"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -2783,7 +3162,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "There is a second Enkel: in north-western Germany it means “ankle”, the same word as English ankle.",
+     "There is a second Enkel: in north-western Germany it means “ankle”.",
      "der Enkeltrick (the grandchild trick): a scam in which a caller pretends to be a grandchild needing money."
     ],
     "pitfalls": [
@@ -2792,6 +3171,13 @@
     ],
     "subtleties": [
      "Plural Enkel usually means grandchildren of both sexes."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "That second Enkel is the same word as English ankle."
+     }
     ]
    }
   },
@@ -2822,6 +3208,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Enkelin"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-in: a female person → die",
+    "pair": [
+     {
+      "form": "der Enkel",
+      "lexeme": "de:Enkel"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -2940,6 +3340,20 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Onkels"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Tante",
+      "lexeme": "de:Tante"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -3041,10 +3455,17 @@
     ],
     "pitfalls": [
      "Plural Onkel (colloquially Onkels); dative den Onkeln.",
-     "German has one word for the father’s and the mother’s brother; to be precise, add väterlicherseits / mütterlicherseits."
+     "German has one word for the father’s and the mother’s brother.\n\nTo be precise, add väterlicherseits / mütterlicherseits."
     ],
     "subtleties": [
      "Onkel also covers the husband of an aunt."
+    ],
+    "notes": [
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Onkel and Tante are oncle and tante."
+     }
     ]
    }
   },
@@ -3076,6 +3497,20 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Tante"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a female person → die",
+    "pair": [
+     {
+      "form": "der Onkel",
+      "lexeme": "de:Onkel"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -3214,6 +3649,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Cousins"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Cousine",
+      "lexeme": "de:Cousine"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -3237,7 +3686,7 @@
      "neutral"
     ],
     "connotation": "neutral",
-    "feeling": "A (male) cousin – French in sound and spelling.",
+    "feeling": "A (male) cousin – a loanword that keeps its foreign sound and spelling.",
     "senses": [
      {
       "id": "s1",
@@ -3309,6 +3758,13 @@
     ],
     "subtleties": [
      "Cousins und Cousinen is the full way to say “cousins” of both sexes."
+    ],
+    "notes": [
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Cousin is your cousin, spelled and pronounced the French way (with the nasal vowel).\n\nThe female form is die Cousine."
+     }
     ]
    }
   },
@@ -3346,6 +3802,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Cousine"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a female person → die",
+    "pair": [
+     {
+      "form": "der Cousin",
+      "lexeme": "de:Cousin"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -3475,6 +3945,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Neffen"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Nichte",
+      "lexeme": "de:Nichte"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -3552,17 +4036,34 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German neve, from Old High German nefo, nevo, from Proto-West Germanic *nefō, from Proto-Germanic *nefô. Cognate with Dutch neef. Further from Proto-Indo-European *népōts. The form with -ff- is irregular and was spread by Luther.",
+     "text": "From Middle High German neve, from Old High German nefo, nevo, from Proto-West Germanic *nefō, from Proto-Germanic *nefô. Further from Proto-Indo-European *népōts. The form with -ff- is irregular and was spread by Luther.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Neffe and Latin nepōs (grandson, nephew) – the root of English nepotism – are the same Indo-European word."
+     "Neffe goes back to the Indo-European word *népōts (grandson, nephew)."
     ],
     "pitfalls": [
      "Neffe is a weak (n-) noun: every form except the nominative singular ends in -n – Ich habe einen Neffen, mit dem Neffen."
     ],
     "subtleties": [
      "Like der Junge, der Student: masculine nouns of this type add -(e)n in the accusative, dative and genitive."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "The same root gave English nepotism (favours for one’s nephews)."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "Neffe and nipote are the same Indo-European word."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "Neffe and neveu are the same Indo-European word."
+     }
     ]
    }
   },
@@ -3593,6 +4094,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Nichte"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a female person → die",
+    "pair": [
+     {
+      "form": "der Neffe",
+      "lexeme": "de:Neffe"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -3670,7 +4185,7 @@
      }
     ],
     "etymology": {
-     "text": "Borrowed from Middle Low German nichte, from Old Saxon *nifta, from Proto-Germanic *niftiz. This form replaced High German (obsolete) Niftel in the 17th century; it shows the Low German shift -ft- → -cht-. Related to Neffe.",
+     "text": "Borrowed from Middle Low German nichte, from Old Saxon *nifta, from Proto-Germanic *niftiz. This form replaced High German (obsolete) Niftel in the 17th century; it shows the Low German shift -ft- → -cht-.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -3714,6 +4229,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Verwandten"
+    ],
+    "number": "singular and plural",
+    "genderCue": "an adjectival noun: the gender of the person (der Verwandte, die Verwandte)",
+    "pair": [
+     {
+      "form": "die Verwandte (ein Verwandter – eine Verwandte)"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -3821,11 +4349,11 @@
      "verwandt also means “related” for languages: Deutsch und Englisch sind verwandt."
     ],
     "pitfalls": [
-     "It declines like an adjective: der Verwandte, but ein Verwandter; die Verwandten, but (no article) Verwandte.",
+     "It declines like an adjective:\n→ der Verwandte, but ein Verwandter\n→ die Verwandten, but (no article) Verwandte",
      "A woman: die Verwandte, eine Verwandte (dative der/einer Verwandten)."
     ],
     "subtleties": [
-     "Wiktionary gives two lemmas: Verwandter (a man, or anyone) and Verwandte (a woman); the plural Verwandte(n) covers everyone."
+     "Wiktionary gives two lemmas: Verwandter (a man, or anyone) and Verwandte (a woman).\n\nThe plural Verwandte(n) covers everyone."
     ]
    }
   },
@@ -3844,6 +4372,13 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "owner": "ich (1st person singular)",
+    "standalone": [
+     "meiner, meine, mein(e)s"
+    ],
+    "stem": {
+     "none": "the endings are added to the base form"
     }
    },
    "forms": {
@@ -3913,11 +4448,11 @@
     "phrases": [],
     "synonyms": [],
     "etymology": {
-     "text": "From Middle High German and Old High German mīn, from Proto-West Germanic *mīn. Compare English my and mine.",
+     "text": "From Middle High German and Old High German mīn, from Proto-West Germanic *mīn.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "mein and English mine are the same word (Old English mīn)."
+     "mein goes back to Old High German mīn."
     ],
     "pitfalls": [
      "It takes the endings of ein: mein Bruder, meine Schwester, mein Kind – and meine in the plural (ein has no plural, mein has)."
@@ -3925,7 +4460,14 @@
     "subtleties": [
      "The ending agrees with the thing owned, not with the owner: a woman says mein Mann, a man says meine Frau."
     ],
-    "synonymsNone": "No synonym: the possessive is the only way to say it."
+    "synonymsNone": "No synonym: the possessive is the only way to say it.",
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "mein is related to English my and mine."
+     }
+    ]
    }
   },
   {
@@ -3948,6 +4490,13 @@
     "address": "informal",
     "senseForms": {
      "none": "one meaning"
+    },
+    "owner": "du (one person, informal)",
+    "standalone": [
+     "deiner, deine, dein(e)s"
+    ],
+    "stem": {
+     "none": "the endings are added to the base form"
     }
    },
    "forms": {
@@ -4010,11 +4559,11 @@
     "phrases": [],
     "synonyms": [],
     "etymology": {
-     "text": "From Middle High German dīn, from Old High German dīn. Akin to Old Saxon thīn, English thine, thy.",
+     "text": "From Middle High German dīn, from Old High German dīn.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "dein is English thine / thy – the old English “du”-possessive."
+     "dein goes back to Old High German dīn, the possessive of du."
     ],
     "pitfalls": [
      "dein goes with du; to a person you say Sie to, use Ihr: dein Vater → Ihr Vater."
@@ -4022,7 +4571,14 @@
     "subtleties": [
      "In letters and messages Dein / Deine may be capitalised as a courtesy (Dein Max)."
     ],
-    "synonymsNone": "No synonym: the possessive is the only way to say it."
+    "synonymsNone": "No synonym: the possessive is the only way to say it.",
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "dein is related to English thine and thy."
+     }
+    ]
    }
   },
   {
@@ -4041,6 +4597,13 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "owner": "er / es (a masculine or neuter owner)",
+    "standalone": [
+     "seiner, seine, sein(e)s"
+    ],
+    "stem": {
+     "none": "the endings are added to the base form"
     }
    },
    "forms": {
@@ -4118,15 +4681,15 @@
     "phrases": [],
     "synonyms": [],
     "etymology": {
-     "text": "From Middle High German sein, sīn, from Old High German sīn, from Proto-West Germanic *sīn, from Proto-Germanic *sīnaz (“his own, her own, its own, their own”) (a reflexive possessive). Cognate with Dutch zijn (“his, its”), Danish sin.",
+     "text": "From Middle High German sein, sīn, from Old High German sīn, from Proto-West Germanic *sīn, from Proto-Germanic *sīnaz (“his own, her own, its own, their own”) (a reflexive possessive).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "sein was once a reflexive “his/her/its own” for any owner – Danish sin still works that way."
+     "sein was once a reflexive “his/her/its own” for any owner."
     ],
     "pitfalls": [
      "sein (his) looks like the verb sein (to be) – the context decides: Das ist sein Vater.",
-     "The owner decides sein or ihr; the noun decides the ending: seine Schwester (his sister), ihr Bruder (her brother)."
+     "The owner decides sein or ihr; the noun decides the ending:\n→ seine Schwester (his sister), ihr Bruder (her brother)"
     ],
     "subtleties": [
      "For a neuter owner too: das Mädchen und sein Vater (grammatically correct, though people often say ihr Vater)."
@@ -4150,6 +4713,13 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "owner": "sie – she (a feminine owner) or they (several owners)",
+    "standalone": [
+     "ihrer, ihre, ihr(e)s"
+    ],
+    "stem": {
+     "none": "the endings are added to the base form"
     }
    },
    "forms": {
@@ -4241,7 +4811,7 @@
      "Her, their and polite your all sound the same in German: ihr – one reason the polite form is written with a capital."
     ],
     "pitfalls": [
-     "ihr = her and their (and, capitalised, Ihr = your, polite). Also ihr = “you all” (pronoun) and ihr = “to her” – the context decides.",
+     "ihr = her and their (and, capitalised, Ihr = your, polite).\n\nAlso ihr = “you all” (pronoun) and ihr = “to her” – the context decides.",
      "ihr Bruder = her/their brother; ihre Schwester = her/their sister."
     ],
     "subtleties": [
@@ -4265,7 +4835,12 @@
     },
     "senseForms": {
      "none": "one meaning"
-    }
+    },
+    "owner": "wir",
+    "standalone": [
+     "unserer, unsere, unser(e)s"
+    ],
+    "stem": "unser- (unsre, unsren: e dropped only in literary or casual style)"
    },
    "forms": {
     "DET;NOM;SG;MASC": "unser",
@@ -4338,7 +4913,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "unser is English our: the German keeps the n that English lost (compare uns / us)."
+     "unser is built on uns: Old High German unsēr."
     ],
     "pitfalls": [
      "The -er belongs to the stem, it is not an ending: unser Sohn, unsere Tochter, unsere Kinder.",
@@ -4347,7 +4922,14 @@
     "subtleties": [
      "Vater unser (the Lord’s Prayer) keeps the old order: the possessive after the noun."
     ],
-    "synonymsNone": "No synonym: the possessive is the only way to say it."
+    "synonymsNone": "No synonym: the possessive is the only way to say it.",
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "unser is English our: German keeps the n that English lost (uns – us)."
+     }
+    ]
    }
   },
   {
@@ -4370,7 +4952,12 @@
     "address": "informal",
     "senseForms": {
      "none": "one meaning"
-    }
+    },
+    "owner": "ihr (several people, informal)",
+    "standalone": [
+     "eurer, eure, eures"
+    ],
+    "stem": "eur- (eure, euren, eurem; euere is rare)"
    },
    "forms": {
     "DET;NOM;SG;MASC": "euer",
@@ -4432,11 +5019,11 @@
     "phrases": [],
     "synonyms": [],
     "etymology": {
-     "text": "From Middle High German iuwer, from Old High German iuwar. Compare English your, Dutch jouw, uw.",
+     "text": "From Middle High German iuwer, from Old High German iuwar.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "euer is related to English your (Old English ēower)."
+     "euer goes back to Old High German iuwēr."
     ],
     "pitfalls": [
      "With an ending the e before r usually drops: euer Sohn, but eure Tochter, euren Sohn (euere is possible but rare)."
@@ -4444,7 +5031,14 @@
     "subtleties": [
      "euer goes with ihr (you all); to people you say Sie to, use Ihr."
     ],
-    "synonymsNone": "No synonym: the possessive is the only way to say it."
+    "synonymsNone": "No synonym: the possessive is the only way to say it.",
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "euer is related to English your."
+     }
+    ]
    }
   },
   {
@@ -4473,6 +5067,13 @@
     "address": "formal",
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "owner": "Sie (polite, one or several people)",
+    "standalone": [
+     "Ihrer, Ihre, Ihr(e)s"
+    ],
+    "stem": {
+     "none": "the endings are added to the base form"
     }
    },
    "forms": {

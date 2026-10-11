@@ -118,7 +118,7 @@
    "t": "callout",
    "kind": "pitfall",
    "title": "No preposition, no marker",
-   "text": "喜欢 takes its object directly: 我喜欢茶 (no ‘of’, no ‘von’). And 的 is not an object marker: ‘I eat bread’ is 我吃面包, not *我吃的面包."
+   "text": "喜欢 takes its object directly, with no preposition and no case: 我喜欢茶. And 的 is not an object marker: ‘I eat bread’ is 我吃面包, not *我吃的面包."
   },
   {
    "t": "callout",
@@ -143,7 +143,7 @@
  "traps": [
   "*我面包吃 → 我吃面包 (the object follows the verb).",
   "*我吃的面包 for ‘I eat bread’ → 我吃面包.",
-  "German Den Tee trinke ich cannot be copied word for word: *茶喝我 would mean ‘the tea drinks me’.",
+  "German Den Tee trinke ich cannot be copied word for word:\n→ *茶喝我 would mean ‘the tea drinks me’.",
   "*我要咖啡一杯 → 我要一杯咖啡 (number + measure word before the noun)."
  ],
  "evidence": {
@@ -247,12 +247,12 @@
   {
    "for": "es",
    "rel": "different",
-   "text": "Spanish marks a human object with a (veo a María) and nothing else; Chinese marks no object at all: 我喜欢安娜, 我吃面包."
+   "text": "Spanish marks a human object with a (veo a María) and nothing else; Chinese marks no object at all:\n→ 我喜欢安娜, 我吃面包."
   },
   {
    "for": "en",
    "rel": "same",
-   "text": "English also shows the object by position (the dog bites the man / the man bites the dog), and so does Chinese: 妈妈喜欢孩子 / 孩子喜欢妈妈. Unlike me / him, Chinese pronouns do not change: 他喜欢我."
+   "text": "English also shows the object by position (the dog bites the man / the man bites the dog), and so does Chinese:\n→ 妈妈喜欢孩子 / 孩子喜欢妈妈.\n\nUnlike me / him, Chinese pronouns do not change:\n→ 他喜欢我."
   },
   {
    "for": "fr",
@@ -267,12 +267,12 @@
   {
    "for": "hi",
    "rel": "different",
-   "text": "Hindi puts the object before the verb (मैं रोटी खाता हूँ) and marks a known one with को; Chinese puts it after the verb and marks nothing: 我吃面包."
+   "text": "Hindi puts the object before the verb (मैं रोटी खाता हूँ) and marks a known one with को; Chinese puts it after the verb and marks nothing:\n→ 我吃面包."
   },
   {
    "for": "fa",
    "rel": "different",
-   "text": "Persian puts the object before the verb and marks a known one with rā (nān rā khordam ‘I ate the bread’); Chinese puts it after the verb, unmarked: 我吃了面包."
+   "text": "Persian puts the object before the verb and marks a known one with rā (nān rā khordam ‘I ate the bread’); Chinese puts it after the verb, unmarked:\n→ 我吃了面包."
   },
   {
    "for": "mr",
@@ -287,17 +287,17 @@
   {
    "for": "he",
    "rel": "different",
-   "text": "Hebrew marks a definite object with et (ani ohev et ha-lekhem ‘I like the bread’); Chinese never marks the object: 我喜欢面包."
+   "text": "Hebrew marks a definite object with et (ani ohev et ha-lekhem ‘I like the bread’); Chinese never marks the object:\n→ 我喜欢面包."
   },
   {
    "for": "tr",
    "rel": "different",
-   "text": "Turkish puts the object before the verb and marks a definite one with -ı (ekmeği yiyorum ‘I eat the bread’); Chinese puts it after the verb, unmarked: 我吃面包."
+   "text": "Turkish puts the object before the verb and marks a definite one with -ı (ekmeği yiyorum ‘I eat the bread’); Chinese puts it after the verb, unmarked:\n→ 我吃面包."
   },
   {
    "for": "ja",
    "rel": "different",
-   "text": "Japanese marks the object with を and puts it before the verb (パンを食べる); Chinese puts it after and marks nothing: 我吃面包."
+   "text": "Japanese marks the object with を and puts it before the verb (パンを食べる); Chinese puts it after and marks nothing:\n→ 我吃面包."
   },
   {
    "for": "ko",
@@ -317,7 +317,7 @@
   {
    "for": "sw",
    "rel": "similar",
-   "text": "Swahili also has subject – verb – object with no case on nouns (ninakula mkate ‘I eat bread’), but the verb can carry an object prefix (ninakupenda ‘I love you’); Chinese verbs carry nothing: 我喜欢你."
+   "text": "Swahili also has subject – verb – object with no case on nouns (ninakula mkate ‘I eat bread’), but the verb can carry an object prefix (ninakupenda ‘I love you’); Chinese verbs carry nothing:\n→ 我喜欢你."
   },
   {
    "for": "lg",
@@ -333,6 +333,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut shows subject and object in the verb ending and marks nouns by case in an ergative pattern; Chinese has no endings at all — only the position after the verb."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Italian relies on order for nouns (il gatto mangia il topo), as Chinese does, but its object pronouns move before the verb (lo mangio); Chinese ones stay after it:\n→ 他喜欢我, never *他我喜欢."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian marks the object by case and often doubles it with a pronoun (e pashë Benin ‘I saw Ben’), so the order can change; Chinese has no case — only the place after the verb makes the object:\n→ 妈妈喜欢孩子 vs 孩子喜欢妈妈."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "Portuguese relies on order for nouns (o gato come o rato), as Chinese does, and in Portugal object pronouns usually follow the verb too (vejo-o ‘I see him’ ~ 我看他).\n\nBut eu / me change; Chinese pronouns do not:\n→ 他喜欢我."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your language marks the object with a case ending and lets it move, Chinese cannot: there is no case, only the position after the verb (我吃面包).\n\nSwap the nouns and the meaning swaps:\n→ 孩子喜欢妈妈."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If your object comes before the verb with a case ending, Chinese puts it after the verb, unmarked — 我吃面包 — and the order is fixed."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "same",
+   "text": "If your language shows the object by its place after the verb, Chinese is the same: 我吃面包 — no marker, no case."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If subject and object live in your verb ending, Chinese spells them out as separate words in a fixed order: subject – verb – object (妈妈喜欢孩子)."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If your language marks the object (with a case vowel or an object particle) or attaches object pronouns to the verb, Chinese does neither: 我喜欢他 — 他 is a separate, unchanged word after the verb."
   }
  ],
  "seeAlso": [

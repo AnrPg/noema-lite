@@ -65,7 +65,9 @@
       "cell": "ADP;3;PL;FEM",
       "form": "בָּהֶן"
      }
-    ]
+    ],
+    "suffixSet": "singular-noun endings",
+    "withArticle": "בַּ (בַּבַּיִת), בָּ before הָ (בָּעִיר): the ה of the article drops"
    },
    "note": "Written attached to the next word. With the article it fuses: בְּ + הַבַּיִת → בַּבַּיִת (the ה falls away and its vowel moves to the ב: בַּ / בָּ / בֶּ). Its own vowel also changes: בִּ before a shva (בִּשְׂדֵה), בַּ before a hataf patah (בַּחֲנוּת).",
    "contrasts": [
@@ -279,9 +281,9 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek σε covers “in, at, to” at once — בְּ covers “in” and “at” (and “to” is לְ).",
+     "בְּ covers “in” and “at”; “to” is a different prefix, לְ.",
      "Arabic keeps the article after the same prefix (بِالْبَيْتِ bi-l-bayti); Hebrew swallows it (בַּבַּיִת).",
-     "English needs three words for time — at five, on Monday, in May; Hebrew uses בְּ for all three (German um, am, im)."
+     "One prefix for every point in time — בְּחָמֵשׁ, בְּיוֹם שֵׁנִי, בְּמַאי — where German says um, am, im."
     ],
     "pitfalls": [
      "With the article it fuses: בַּבַּיִת “in the house”, never *בְּהַבַּיִת.",
@@ -292,6 +294,18 @@
     "subtleties": [
      "Unvowelled בבית is both בְּבַיִת “in a house” and בַּבַּיִת “in the house, at home” — only the vowel shows the article.",
      "A tool takes בְּ, not עִם: כּוֹתֵב בְּעֵט “writes with a pen”."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "Greek σε covers “in, at, to” at once; Hebrew splits it: בְּ for “in, at”, לְ for “to”."
+     },
+     {
+      "for": "en",
+      "rel": "different",
+      "text": "English needs at five, on Monday, in May; Hebrew uses בְּ for all three."
+     }
     ]
    }
   },
@@ -348,7 +362,11 @@
       "cell": "ADP;3;PL;FEM",
       "form": "אֶצְלָן"
      }
-    ]
+    ],
+    "suffixSet": "singular-noun endings",
+    "withArticle": {
+     "none": "a separate word: the article stays on the noun (אֵצֶל הַ…)"
+    }
    },
    "note": "At someone’s place: אֵצֶל סָבְתָא “at Grandma’s”, אֵצֶל הָרוֹפֵא “at the doctor’s”. With pronouns: אֶצְלִי, אֶצְלְךָ, אֶצְלָהּ …",
    "contrasts": [
@@ -374,7 +392,7 @@
      "neutral"
     ],
     "connotation": "positive",
-    "feeling": "At Grandma’s, at the doctor’s, at a friend’s — the “at” of people (German bei, French chez).",
+    "feeling": "At Grandma’s, at the doctor’s, at a friend’s — the “at” of people (German bei).",
     "senses": [
      {
       "id": "s1",
@@ -451,7 +469,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German bei is the closest: bei Oma = אֵצֶל סָבְתָא, beim Arzt = אֵצֶל הָרוֹפֵא; French chez does the same job."
+     "German bei is the closest: bei Oma = אֵצֶל סָבְתָא, beim Arzt = אֵצֶל הָרוֹפֵא."
     ],
     "pitfalls": [
      "Only for people (and their homes or offices): “at school” is בְּבֵית הַסֵּפֶר, not *אֵצֶל בֵּית הַסֵּפֶר.",
@@ -459,6 +477,28 @@
     ],
     "subtleties": [
      "אֶצְלִי also means “in my case, with me”: אֶצְלִי זֶה אַחֶרֶת “with me it’s different”."
+    ],
+    "notes": [
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "It is chez: אֵצֶל סָבְתָא “chez mamie”, אֵצֶל הָרוֹפֵא “chez le médecin”."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "It is da with a person: אֵצֶל סָבְתָא “dalla nonna”."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "It is у with a person: אֵצֶל סָבְתָא “у бабушки”."
+     },
+     {
+      "for": "sq",
+      "rel": "same",
+      "text": "It is te / tek with a person: אֵצֶל סָבְתָא “te gjyshja”."
+     }
     ]
    }
   },
@@ -515,7 +555,11 @@
       "cell": "ADP;3;PL;FEM",
       "form": "אֲלֵיהֶן"
      }
-    ]
+    ],
+    "suffixSet": "plural-noun endings",
+    "withArticle": {
+     "none": "a separate word: the article stays on the noun (אֶל הַ…)"
+    }
    },
    "contrasts": [
     {
@@ -577,7 +621,7 @@
      }
     ],
     "etymology": {
-     "text": "From Proto-Semitic *ʾila “towards, nigh”, cognate with Akkadian ana and Arabic إِلَى (ʔilā) (Wiktionary).",
+     "text": "From Proto-Semitic *ʾila “towards, nigh”, cognate with Arabic إِلَى (ʔilā) (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -651,7 +695,9 @@
       "cell": "ADP;3;PL;FEM",
       "form": "מֵהֶן"
      }
-    ]
+    ],
+    "suffixSet": "a stem of its own",
+    "withArticle": "no fusion: מֵהַ… (מֵהַבַּיִת)"
    },
    "note": "Written attached to the next word; the נ of the old form מִן doubles the next letter (מִתֵּל אָבִיב), and before a guttural, ר or the article it is מֵ (מֵחֵיפָה, מֵהַבַּיִת). The article does not fuse: מֵהַבַּיִת. The full word מִן stands before the article in careful style (מִן הַבַּיִת). In comparisons it is “than”: גָּדוֹל יוֹתֵר מֵהַדִּירָה (lesson 17).",
    "contrasts": [
@@ -785,15 +831,32 @@
     "funFacts": [
      "Arabic مِنْ (min) is the same word — and Arabic keeps the n: مِنَ الْبَيْتِ.",
      "In comparisons it means “than”: גָּדוֹל מִ… “bigger than …” (lesson 17) — like Arabic أَكْبَر مِنْ.",
-     "Greek από and Arabic مِنْ do the same double job: “from” and “than” (μεγαλύτερος από, أَكْبَرُ مِنْ)."
+     "Arabic مِنْ does the same double job: “from” and “than” (أَكْبَرُ مِنْ)."
     ],
     "pitfalls": [
-     "The נ of מִן doubles the next letter: מִתֵּל אָבִיב (dagesh). Before ע, ח, א, ר and before the article it is מֵ: מֵחֵיפָה, מֵהַבַּיִת.",
+     "- The נ of מִן doubles the next letter:\n→ מִתֵּל אָבִיב (dagesh)\n- Before ע, ח, א, ר and before the article it is מֵ:\n→ מֵחֵיפָה, מֵהַבַּיִת",
      "With the article it does not fuse: מֵהַבַּיִת (the ה stays) — unlike בַּבַּיִת and לַבַּיִת."
     ],
     "subtleties": [
-     "The full word מִן is used before the article in careful style: מִן הַבַּיִת. Everyday speech says מֵהַבַּיִת.",
-     "As “than”, מִ takes endings with pronouns (מִמֶּנִּי “than me”, מִמְּךָ, מִמֶּנּוּ, מִמֶּנָּה, מֵהֶם), and before a clause, an adverb or a phrase with a preposition the full word מֵאֲשֶׁר is used: יוֹתֵר טוֹב מֵאֲשֶׁר בַּבַּיִת “better than at home”."
+     "- The full word מִן is used before the article in careful style:\n→ מִן הַבַּיִת\n- Everyday speech says מֵהַבַּיִת.",
+     "As “than”, מִ takes endings with pronouns (מִמֶּנִּי “than me”, מִמְּךָ, מִמֶּנּוּ, מִמֶּנָּה, מֵהֶם), and before a clause, an adverb or a phrase with a preposition the full word מֵאֲשֶׁר is used:\n→ יוֹתֵר טוֹב מֵאֲשֶׁר בַּבַּיִת “better than at home”"
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Like από, it is both “from” and “than”: μεγαλύτερος από ~ גָּדוֹל יוֹתֵר מִ…."
+     },
+     {
+      "for": "hi",
+      "rel": "same",
+      "text": "Like से, it is both “from” and “than”: भाई से लंबा ~ גָּבֹהַּ יוֹתֵר מֵהָאָח."
+     },
+     {
+      "for": "sq",
+      "rel": "same",
+      "text": "Like nga, it is both “from” and “than”: më i madh nga ~ גָּדוֹל יוֹתֵר מִ…."
+     }
     ]
    }
   },
@@ -849,7 +912,11 @@
       "cell": "ADP;3;PL;FEM",
       "form": "אִתָּן"
      }
-    ]
+    ],
+    "suffixSet": "a stem of its own",
+    "withArticle": {
+     "none": "a separate word: the article stays on the noun (עִם הַ…)"
+    }
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -927,7 +994,7 @@
      }
     ],
     "etymology": {
-     "text": "Cognate with Ugaritic ʿm and, by metathesis, with Arabic مَعَ (maʕa) and Ugaritic mʿ (Wiktionary).",
+     "text": "Cognate, by metathesis, with Arabic مَعَ (maʕa) (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -956,6 +1023,12 @@
     "spelling": "בלי",
     "pronForms": {
      "none": "takes no personal endings: “without me” is בִּלְעָדַי (from בִּלְעֲדֵי)"
+    },
+    "suffixSet": {
+     "none": "no personal endings (see the forms with endings)"
+    },
+    "withArticle": {
+     "none": "a separate word: the article stays on the noun (בְּלִי הַ…)"
     }
    },
    "ref": {
@@ -1039,7 +1112,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Yiddish speakers say keyn ayin hore for the same wish as בְּלִי עַיִן הָרָע."
+     "בְּלִי עַיִן הָרָע “without the evil eye” is said after praise or good news, to ward off bad luck."
     ],
     "pitfalls": [
      "It is one word, not בְּ + לִי “in me”.",
@@ -1103,7 +1176,11 @@
       "cell": "ADP;3;PL;FEM",
       "form": "בִּשְׁבִילָן"
      }
-    ]
+    ],
+    "suffixSet": "singular-noun endings",
+    "withArticle": {
+     "none": "a separate word: the article stays on the noun (בִּשְׁבִיל הַ…)"
+    }
    },
    "contrasts": [
     {
@@ -1268,7 +1345,11 @@
       "cell": "ADP;3;PL;FEM",
       "form": "עֲלֵיהֶן"
      }
-    ]
+    ],
+    "suffixSet": "plural-noun endings",
+    "withArticle": {
+     "none": "a separate word: the article stays on the noun (עַל הַ…)"
+    }
    },
    "note": "“about” (a topic, lesson 11) and “on” (on top of, lesson 12) — one word. With pronouns: עָלַי, עָלֶיךָ, עָלָיו …",
    "ref": {
@@ -1409,6 +1490,19 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "compound: the first word changes",
+     "stem change"
+    ],
+    "possessive": {
+     "none": "a compound: “my …” is said with שֶׁל after it (… שֶׁלִּי); the endings go only on the first word in formal style"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -1485,11 +1579,11 @@
      }
     ],
     "etymology": {
-     "text": "From בַּיִת “house” + סֵפֶר “book” (Wiktionary); compare Akkadian bīt ṭuppim “house of the tablet”.",
+     "text": "From בַּיִת “house” + סֵפֶר “book” (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Literally “house of book” — and Akkadian said bīt ṭuppim, “house of the tablet” (Wiktionary)."
+     "Literally “house of book”: בַּיִת in its construct form, בֵּית, + סֵפֶר."
     ],
     "pitfalls": [
      "The article goes on the second word: בֵּית הַסֵּפֶר “the school”; “at school” = בְּבֵית הַסֵּפֶר.",
@@ -1541,6 +1635,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "stem change"
+    ],
+    "possessive": {
+     "none": "a loanword: possessive endings are not used; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -1676,6 +1782,27 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": [
+     {
+      "form": "עֲבוֹדָתִי",
+      "number": "SG",
+      "register": "formal"
+     },
+     {
+      "form": "עֲבוֹדוֹתַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -1849,6 +1976,27 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": [
+     {
+      "form": "מִשְׂרָדִי",
+      "number": "SG",
+      "register": "formal"
+     },
+     {
+      "form": "מִשְׂרָדַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -1990,6 +2138,18 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -2141,6 +2301,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": {
+     "none": "a loanword: possessive endings are not used; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -2222,7 +2394,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German Supermarkt, Greek σουπερμάρκετ, Russian супермаркет — Israelis simply cut the internationalism to סוּפֶּר."
+     "German Supermarkt is the same internationalism — Israelis simply cut it to סוּפֶּר."
     ],
     "pitfalls": [
      "Unvowelled סופר is also סוֹפֵר “writer” and “counting”.",
@@ -2230,6 +2402,18 @@
     ],
     "subtleties": [
      "As slang סוּפֶּר also means “super, very”: סוּפֶּר טָעִים “super tasty” (Wiktionary)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "The same internationalism as σουπερμάρκετ, cut short to סוּפֶּר."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "The same internationalism as супермаркет, cut short to סוּפֶּר."
+     }
     ]
    }
   },
@@ -2273,6 +2457,18 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pluralShape": [
+     "stem change"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -2417,6 +2613,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -2541,6 +2749,19 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "compound: the first word changes",
+     "stem change"
+    ],
+    "possessive": {
+     "none": "a compound: “my …” is said with שֶׁל after it (… שֶׁלִּי); the endings go only on the first word in formal style"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -2620,13 +2841,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German Kaffeehaus and Turkish kahvehane are built the same way: “coffee house”."
+     "German Kaffeehaus is built the same way: “coffee house”."
     ],
     "pitfalls": [
      "The article goes on the second word: בֵּית הַקָּפֶה; plural בָּתֵּי קָפֶה."
     ],
     "subtleties": [
      "Wiktionary writes it with a hyphen (maqaf): בֵּית־קָפֶה; with a space it is the same word."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "same",
+      "text": "Built like kahvehane: “coffee house”."
+     }
     ]
    }
   },
@@ -2664,6 +2892,19 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "compound: the first word changes",
+     "stem change"
+    ],
+    "possessive": {
+     "none": "a compound: “my …” is said with שֶׁל after it (… שֶׁלִּי); the endings go only on the first word in formal style"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -2736,7 +2977,7 @@
      }
     ],
     "etymology": {
-     "text": "From בֵּית “house” + חוֹלִים “sick people, patients” (Wiktionary); it was common enough by 1778 to enter an Italian edition of Calepinus’s dictionary. Compare German Krankenhaus.",
+     "text": "From בֵּית “house” + חוֹלִים “sick people, patients” (Wiktionary); it was common enough by 1778 to be recorded in an edition of Calepinus’s dictionary. Compare German Krankenhaus.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -2748,6 +2989,13 @@
     ],
     "subtleties": [
      "Without the article, בְּבֵית חוֹלִים is “in hospital” (as a patient)."
+    ],
+    "notes": [
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "By 1778 the word was common enough to appear in an Italian edition of Calepinus’s dictionary (Wiktionary)."
+     }
     ]
    }
   },
@@ -2785,6 +3033,19 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "compound: the first word changes",
+     "stem change"
+    ],
+    "possessive": {
+     "none": "a compound: “my …” is said with שֶׁל after it (… שֶׁלִּי); the endings go only on the first word in formal style"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -2910,6 +3171,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "a loanword: possessive endings are not used; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -2988,7 +3261,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek τράπεζα (“table”) and Italian banca (“bench”) both name the money-changer’s table."
+     "The bank is named after the money-changer’s bench: the word goes back to Old Italian banca."
     ],
     "pitfalls": [
      "Only the money bank: a river bank is גָּדָה, a bench סַפְסָל.",
@@ -2996,6 +3269,18 @@
     ],
     "subtleties": [
      "In Israel banks are open on Sunday — the first working day of the week."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Like τράπεζα “table”, the word names the money-changer’s table — here a bench, banca."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "It is banca, the money-changer’s bench."
+     }
     ]
    }
   },
@@ -3030,6 +3315,18 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": {
+     "none": "possessive endings are not used with this word; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -3173,6 +3470,27 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": [
+     {
+      "form": "תַּחֲנָתִי",
+      "number": "SG",
+      "register": "formal"
+     },
+     {
+      "form": "תַּחֲנוֹתַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -3307,6 +3625,19 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "compound: the first word changes",
+     "ending of the other gender"
+    ],
+    "possessive": {
+     "none": "a compound: “my …” is said with שֶׁל after it (… שֶׁלִּי); the endings go only on the first word in formal style"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -3388,13 +3719,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German Flughafen is a “flight harbour”, like the official נְמַל תְּעוּפָה; English airfield is a “flight field”, like שְׂדֵה תְּעוּפָה."
+     "German Flughafen is a “flight harbour”, like the official נְמַל תְּעוּפָה; שְׂדֵה תְּעוּפָה is a “flight field”."
     ],
     "pitfalls": [
      "The article goes on the second word: שְׂדֵה הַתְּעוּפָה; “at the airport” = בִּשְׂדֵה הַתְּעוּפָה (בְּ before a shva becomes בִּ)."
     ],
     "subtleties": [
      "The ש of שָׂדֶה is a שׂ (s)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "שְׂדֵה תְּעוּפָה is built like airfield: a “flight field”."
+     }
     ]
    }
   },
@@ -3437,6 +3775,27 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pluralShape": [
+     "ending of the other gender"
+    ],
+    "possessive": [
+     {
+      "form": "רְחוֹבִי",
+      "number": "SG",
+      "register": "formal"
+     },
+     {
+      "form": "רְחוֹבוֹתַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -3622,7 +3981,17 @@
       ],
       "note": "almost always in the construct: כִּכַּר לֶחֶם “a loaf of bread”"
      }
-    ]
+    ],
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": "feminine without a feminine ending",
+    "pair": {
+     "none": "not a noun for a person"
+    }
    },
    "forms": {
     "N;SG;INDF": "כִּכָּר",
@@ -3743,7 +4112,7 @@
      }
     ],
     "etymology": {
-     "text": "Compare כִּרְכָּר and Aramaic כַּכַּר (Wiktionary).",
+     "text": "Compare כִּרְכָּר (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -3799,6 +4168,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "a loanword: possessive endings are not used; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -3883,7 +4264,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German Park, Greek πάρκο, Russian парк, Turkish park — the same word in every language you know."
+     "The same international word as German Park."
     ],
     "pitfalls": [
      "The א only marks the a: PARK, one syllable.",
@@ -3891,6 +4272,23 @@
     ],
     "subtleties": [
      "A small park in the neighbourhood, with swings, is a גִּנָּה or גִּנַּת שַׁעֲשׁוּעִים."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "The same word as πάρκο."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "The same word as парк."
+     },
+     {
+      "for": "tr",
+      "rel": "same",
+      "text": "The same word as park."
+     }
     ]
    }
   },
@@ -3935,6 +4333,26 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "ending of the other gender",
+     "stem change"
+    ],
+    "possessive": [
+     {
+      "form": "עִירִי",
+      "number": "SG",
+      "register": "formal"
+     },
+     {
+      "form": "עָרַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": "feminine without a feminine ending",
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -4023,11 +4441,11 @@
      }
     ],
     "etymology": {
-     "text": "Compare Ugaritic ʿr “city” and perhaps Sumerian iri, uru “city”; the plural comes from an old word עָר of the same meaning (Wiktionary).",
+     "text": "An old Semitic word; the plural comes from another old word, עָר, of the same meaning (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The plural עָרִים comes from a different, old word, עָר (Wiktionary) — as if English “town” had the plural “cities”."
+     "The plural עָרִים comes from a different, old word, עָר (Wiktionary) — two old words share one paradigm."
     ],
     "pitfalls": [
      "Feminine without a feminine ending: עִיר גְּדוֹלָה.",
@@ -4035,6 +4453,13 @@
     ],
     "subtleties": [
      "With the article: הָעִיר; “in the city” = בָּעִיר."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "It is as if “town” had the plural “cities”."
+     }
     ]
    }
   },
@@ -4075,6 +4500,27 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": [
+     {
+      "form": "כְּפָרִי",
+      "number": "SG",
+      "register": "formal"
+     },
+     {
+      "form": "כְּפָרַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -4218,7 +4664,26 @@
       ],
       "note": "with the article: the Land (Israel)"
      }
-    ]
+    ],
+    "pluralShape": [
+     "segolate: vowels rebuilt"
+    ],
+    "possessive": [
+     {
+      "form": "אַרְצִי",
+      "number": "SG",
+      "register": "formal"
+     },
+     {
+      "form": "אַרְצוֹתַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": "feminine without a feminine ending",
+    "pair": {
+     "none": "not a noun for a person"
+    }
    },
    "forms": {
     "N;SG;INDF": "אֶרֶץ",
@@ -4388,6 +4853,18 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -4583,10 +5060,10 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The ending ־ָה “towards” is a fossil of an old case ending, still alive in a few words: צָפוֹנָה “northwards”, יָמִינָה, הַבַּיְתָה."
+     "The ending ־ָה “towards” is a fossil of an old case ending, still alive in a few words:\n→ צָפוֹנָה “northwards”, יָמִינָה, הַבַּיְתָה"
     ],
     "pitfalls": [
-     "No לְ before it: הוֹלֵךְ הַבַּיְתָה (not *לְהַבַּיְתָה). Being at home is בַּבַּיִת."
+     "- No לְ before it:\n→ הוֹלֵךְ הַבַּיְתָה (not *לְהַבַּיְתָה)\n- Being at home is בַּבַּיִת."
     ],
     "subtleties": [
      "The ending ־ָה is unstressed: habáyta."

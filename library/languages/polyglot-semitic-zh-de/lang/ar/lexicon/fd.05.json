@@ -15,6 +15,9 @@
     },
     "ordinal": {
      "none": "zero has no ordinal"
+    },
+    "genderForms": {
+     "none": "a noun: one form whatever the gender of the counted noun"
     }
    },
    "class": "noun",
@@ -41,7 +44,7 @@
      "neutral"
     ],
     "connotation": "neutral",
-    "feeling": "Zero — the Arabic word behind English zero and cipher.",
+    "feeling": "Zero — and an Arabic word behind the European words for zero and cipher.",
     "senses": [
      {
       "id": "s1",
@@ -89,11 +92,58 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English zero and cipher, German Ziffer, Russian цифра and Turkish sıfır all go back to صِفْر (via Medieval Latin zephirum and cifra).",
+     "صِفْر means “empty”: through Medieval Latin zephirum and cifra it became the European words for zero and for digit or cipher — German Ziffer among them.",
      "The digit zero in the Arabic digits used in the Middle East (٠١٢٣٤٥٦٧٨٩) is a dot: ٠."
     ],
     "pitfalls": [
      "In Eastern Arabic digits ٠ (a dot) is 0 and ٥ (a small circle) is 5 — do not read ٥ as zero."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English zero and cipher both go back to صِفْر."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "French zéro and chiffre both go back to صِفْر."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "Italian zero and cifra both go back to صِفْر."
+     },
+     {
+      "for": "es",
+      "rel": "similar",
+      "text": "Spanish cero and cifra both go back to صِفْر."
+     },
+     {
+      "for": "pt",
+      "rel": "similar",
+      "text": "Portuguese zero and cifra both go back to صِفْر."
+     },
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "Russian цифра (digit) goes back to صِفْر."
+     },
+     {
+      "for": "sq",
+      "rel": "similar",
+      "text": "Albanian zero and shifër both go back to صِفْر."
+     },
+     {
+      "for": "hi",
+      "rel": "similar",
+      "text": "صِفْر (“empty”) translated the Indian idea of शून्य (“empty”, zero)."
+     },
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish sıfır goes back to صِفْر."
+     }
     ]
    }
   },
@@ -108,7 +158,17 @@
     "root": "و ح د",
     "polarity": false,
     "countedNoun": "agrees (after the noun)",
-    "ordinal": "أَوَّل"
+    "ordinal": "أَوَّل",
+    "genderForms": [
+     {
+      "form": "وَاحِد",
+      "with": "MASC"
+     },
+     {
+      "form": "وَاحِدَة",
+      "with": "FEM"
+     }
+    ]
    },
    "class": "one",
    "translit": "wāḥid",
@@ -172,7 +232,7 @@
     },
     "funFacts": [
      "Hebrew אֶחָד (eḥad) matches the other Arabic “one”, أَحَد (in 11: أَحَدَ عَشَرَ, and “one of”: أَحَدُ الطُّلَّابِ).",
-     "Turkish tevhit (belief in one God) is Arabic تَوْحِيد, from the root و ح د of وَاحِد."
+     "The root و ح د of وَاحِد also gives وَحِيد (alone, only), وَحْدَة (unity; loneliness) and تَوْحِيد (the oneness of God)."
     ],
     "pitfalls": [
      "“A book” or “one book” is normally just كِتَابٌ; وَاحِدٌ after the noun adds “only one”.",
@@ -180,6 +240,13 @@
     ],
     "subtleties": [
      "The other “one”, أَحَد (feminine إِحْدَى), is used in 11 and in “one of”: إِحْدَى الطَّالِبَاتِ (one of the female students)."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish tevhit (belief in one God) is Arabic تَوْحِيد, from the root و ح د of وَاحِد."
+     }
     ]
    }
   },
@@ -194,7 +261,17 @@
     "root": "ث ن ي",
     "polarity": false,
     "countedNoun": "dual alone",
-    "ordinal": "ثَانٍ"
+    "ordinal": "ثَانٍ",
+    "genderForms": [
+     {
+      "form": "اِثْنَانِ",
+      "with": "MASC"
+     },
+     {
+      "form": "اِثْنَتَانِ",
+      "with": "FEM"
+     }
+    ]
    },
    "class": "two",
    "translit": "iṯnān",
@@ -271,7 +348,17 @@
     "root": "ث ل ث",
     "polarity": true,
     "countedNoun": "GEN;PL",
-    "ordinal": "ثَالِث"
+    "ordinal": "ثَالِث",
+    "genderForms": [
+     {
+      "form": "ثَلَاثَة",
+      "with": "MASC"
+     },
+     {
+      "form": "ثَلَاث",
+      "with": "FEM"
+     }
+    ]
    },
    "class": "unit",
    "translit": "ṯalāṯa",
@@ -352,7 +439,17 @@
     "root": "ر ب ع",
     "polarity": true,
     "countedNoun": "GEN;PL",
-    "ordinal": "رَابِع"
+    "ordinal": "رَابِع",
+    "genderForms": [
+     {
+      "form": "أَرْبَعَة",
+      "with": "MASC"
+     },
+     {
+      "form": "أَرْبَع",
+      "with": "FEM"
+     }
+    ]
    },
    "class": "unit",
    "translit": "ʾarbaʿa",
@@ -434,7 +531,17 @@
     "root": "خ م س",
     "polarity": true,
     "countedNoun": "GEN;PL",
-    "ordinal": "خَامِس"
+    "ordinal": "خَامِس",
+    "genderForms": [
+     {
+      "form": "خَمْسَة",
+      "with": "MASC"
+     },
+     {
+      "form": "خَمْس",
+      "with": "FEM"
+     }
+    ]
    },
    "class": "unit",
    "translit": "ḫamsa",
@@ -515,7 +622,17 @@
     "root": "س د س",
     "polarity": true,
     "countedNoun": "GEN;PL",
-    "ordinal": "سَادِس"
+    "ordinal": "سَادِس",
+    "genderForms": [
+     {
+      "form": "سِتَّة",
+      "with": "MASC"
+     },
+     {
+      "form": "سِتّ",
+      "with": "FEM"
+     }
+    ]
    },
    "class": "unit",
    "translit": "sitta",
@@ -596,7 +713,17 @@
     "root": "س ب ع",
     "polarity": true,
     "countedNoun": "GEN;PL",
-    "ordinal": "سَابِع"
+    "ordinal": "سَابِع",
+    "genderForms": [
+     {
+      "form": "سَبْعَة",
+      "with": "MASC"
+     },
+     {
+      "form": "سَبْع",
+      "with": "FEM"
+     }
+    ]
    },
    "class": "unit",
    "translit": "sabʿa",
@@ -676,7 +803,17 @@
     "root": "ث م ن",
     "polarity": true,
     "countedNoun": "GEN;PL",
-    "ordinal": "ثَامِن"
+    "ordinal": "ثَامِن",
+    "genderForms": [
+     {
+      "form": "ثَمَانِيَة",
+      "with": "MASC"
+     },
+     {
+      "form": "ثَمَانٍ",
+      "with": "FEM"
+     }
+    ]
    },
    "class": "unit",
    "translit": "ṯamāniya",
@@ -757,7 +894,17 @@
     "root": "ت س ع",
     "polarity": true,
     "countedNoun": "GEN;PL",
-    "ordinal": "تَاسِع"
+    "ordinal": "تَاسِع",
+    "genderForms": [
+     {
+      "form": "تِسْعَة",
+      "with": "MASC"
+     },
+     {
+      "form": "تِسْع",
+      "with": "FEM"
+     }
+    ]
    },
    "class": "unit",
    "translit": "tisʿa",
@@ -837,7 +984,17 @@
     "root": "ع ش ر",
     "polarity": true,
     "countedNoun": "GEN;PL",
-    "ordinal": "عَاشِر"
+    "ordinal": "عَاشِر",
+    "genderForms": [
+     {
+      "form": "عَشَرَة",
+      "with": "MASC"
+     },
+     {
+      "form": "عَشْر",
+      "with": "FEM"
+     }
+    ]
    },
    "class": "unit",
    "translit": "ʿašara",
@@ -921,7 +1078,17 @@
     },
     "polarity": false,
     "countedNoun": "ACC;SG",
-    "ordinal": "حَادِيَ عَشَرَ"
+    "ordinal": "حَادِيَ عَشَرَ",
+    "genderForms": [
+     {
+      "form": "أَحَدَ عَشَرَ",
+      "with": "MASC"
+     },
+     {
+      "form": "إِحْدَى عَشْرَةَ",
+      "with": "FEM"
+     }
+    ]
    },
    "class": "teen",
    "translit": "ʾaḥada ʿašara",
@@ -998,7 +1165,17 @@
     },
     "polarity": false,
     "countedNoun": "ACC;SG",
-    "ordinal": "ثَانِيَ عَشَرَ"
+    "ordinal": "ثَانِيَ عَشَرَ",
+    "genderForms": [
+     {
+      "form": "اِثْنَا عَشَرَ",
+      "with": "MASC"
+     },
+     {
+      "form": "اِثْنَتَا عَشْرَةَ",
+      "with": "FEM"
+     }
+    ]
    },
    "class": "teen",
    "translit": "iṯnā ʿašara",
@@ -1075,7 +1252,17 @@
     },
     "polarity": true,
     "countedNoun": "ACC;SG",
-    "ordinal": "ثَالِثَ عَشَرَ"
+    "ordinal": "ثَالِثَ عَشَرَ",
+    "genderForms": [
+     {
+      "form": "ثَلَاثَةَ عَشَرَ",
+      "with": "MASC"
+     },
+     {
+      "form": "ثَلَاثَ عَشْرَةَ",
+      "with": "FEM"
+     }
+    ]
    },
    "class": "teen",
    "translit": "ṯalāṯata ʿašara",
@@ -1151,7 +1338,17 @@
     },
     "polarity": true,
     "countedNoun": "ACC;SG",
-    "ordinal": "رَابِعَ عَشَرَ"
+    "ordinal": "رَابِعَ عَشَرَ",
+    "genderForms": [
+     {
+      "form": "أَرْبَعَةَ عَشَرَ",
+      "with": "MASC"
+     },
+     {
+      "form": "أَرْبَعَ عَشْرَةَ",
+      "with": "FEM"
+     }
+    ]
    },
    "class": "teen",
    "translit": "ʾarbaʿata ʿašara",
@@ -1224,7 +1421,17 @@
     },
     "polarity": true,
     "countedNoun": "ACC;SG",
-    "ordinal": "خَامِسَ عَشَرَ"
+    "ordinal": "خَامِسَ عَشَرَ",
+    "genderForms": [
+     {
+      "form": "خَمْسَةَ عَشَرَ",
+      "with": "MASC"
+     },
+     {
+      "form": "خَمْسَ عَشْرَةَ",
+      "with": "FEM"
+     }
+    ]
    },
    "class": "teen",
    "translit": "ḫamsata ʿašara",
@@ -1297,7 +1504,17 @@
     },
     "polarity": true,
     "countedNoun": "ACC;SG",
-    "ordinal": "سَادِسَ عَشَرَ"
+    "ordinal": "سَادِسَ عَشَرَ",
+    "genderForms": [
+     {
+      "form": "سِتَّةَ عَشَرَ",
+      "with": "MASC"
+     },
+     {
+      "form": "سِتَّ عَشْرَةَ",
+      "with": "FEM"
+     }
+    ]
    },
    "class": "teen",
    "translit": "sittata ʿašara",
@@ -1370,7 +1587,17 @@
     },
     "polarity": true,
     "countedNoun": "ACC;SG",
-    "ordinal": "سَابِعَ عَشَرَ"
+    "ordinal": "سَابِعَ عَشَرَ",
+    "genderForms": [
+     {
+      "form": "سَبْعَةَ عَشَرَ",
+      "with": "MASC"
+     },
+     {
+      "form": "سَبْعَ عَشْرَةَ",
+      "with": "FEM"
+     }
+    ]
    },
    "class": "teen",
    "translit": "sabʿata ʿašara",
@@ -1443,7 +1670,17 @@
     },
     "polarity": true,
     "countedNoun": "ACC;SG",
-    "ordinal": "ثَامِنَ عَشَرَ"
+    "ordinal": "ثَامِنَ عَشَرَ",
+    "genderForms": [
+     {
+      "form": "ثَمَانِيَةَ عَشَرَ",
+      "with": "MASC"
+     },
+     {
+      "form": "ثَمَانِيَ عَشْرَةَ",
+      "with": "FEM"
+     }
+    ]
    },
    "class": "teen",
    "translit": "ṯamāniyata ʿašara",
@@ -1516,7 +1753,17 @@
     },
     "polarity": true,
     "countedNoun": "ACC;SG",
-    "ordinal": "تَاسِعَ عَشَرَ"
+    "ordinal": "تَاسِعَ عَشَرَ",
+    "genderForms": [
+     {
+      "form": "تِسْعَةَ عَشَرَ",
+      "with": "MASC"
+     },
+     {
+      "form": "تِسْعَ عَشْرَةَ",
+      "with": "FEM"
+     }
+    ]
    },
    "class": "teen",
    "translit": "tisʿata ʿašara",
@@ -1587,7 +1834,10 @@
     "root": "ع ش ر",
     "polarity": false,
     "countedNoun": "ACC;SG",
-    "ordinal": "الْعِشْرُونَ"
+    "ordinal": "الْعِشْرُونَ",
+    "genderForms": {
+     "none": "one form for masculine and feminine nouns"
+    }
    },
    "class": "ten",
    "translit": "ʿišrūna",
@@ -1662,7 +1912,10 @@
     "root": "ث ل ث",
     "polarity": false,
     "countedNoun": "ACC;SG",
-    "ordinal": "الثَّلَاثُونَ"
+    "ordinal": "الثَّلَاثُونَ",
+    "genderForms": {
+     "none": "one form for masculine and feminine nouns"
+    }
    },
    "class": "ten",
    "translit": "ṯalāṯūna",
@@ -1737,7 +1990,10 @@
     "root": "ر ب ع",
     "polarity": false,
     "countedNoun": "ACC;SG",
-    "ordinal": "الْأَرْبَعُونَ"
+    "ordinal": "الْأَرْبَعُونَ",
+    "genderForms": {
+     "none": "one form for masculine and feminine nouns"
+    }
    },
    "class": "ten",
    "translit": "ʾarbaʿūna",
@@ -1790,7 +2046,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish erbain, the forty coldest days of winter, is Arabic أَرْبَعِين."
+     "الْأَرْبَعِين is also the memorial gathering held forty days after a death."
     ],
     "pitfalls": [
      "-ūna is the nominative; the accusative and genitive end in -īna: عُمْرُهُ عِشْرُونَ سَنَةً, but بَعْدَ عِشْرِينَ دَقِيقَةً. In speech you mostly hear -īn.",
@@ -1798,6 +2054,13 @@
     ],
     "subtleties": [
      "21–99: the unit first, then وَ and the ten — like German einundzwanzig: وَاحِدٌ وَعِشْرُونَ (21), خَمْسَةٌ وَعِشْرُونَ (25)."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish erbain, the forty coldest days of winter, is Arabic أَرْبَعِين."
+     }
     ]
    }
   },
@@ -1812,7 +2075,10 @@
     "root": "خ م س",
     "polarity": false,
     "countedNoun": "ACC;SG",
-    "ordinal": "الْخَمْسُونَ"
+    "ordinal": "الْخَمْسُونَ",
+    "genderForms": {
+     "none": "one form for masculine and feminine nouns"
+    }
    },
    "class": "ten",
    "translit": "ḫamsūna",
@@ -1887,7 +2153,10 @@
     "root": "س د س",
     "polarity": false,
     "countedNoun": "ACC;SG",
-    "ordinal": "السِّتُّونَ"
+    "ordinal": "السِّتُّونَ",
+    "genderForms": {
+     "none": "one form for masculine and feminine nouns"
+    }
    },
    "class": "ten",
    "translit": "sittūna",
@@ -1959,7 +2228,10 @@
     "root": "س ب ع",
     "polarity": false,
     "countedNoun": "ACC;SG",
-    "ordinal": "السَّبْعُونَ"
+    "ordinal": "السَّبْعُونَ",
+    "genderForms": {
+     "none": "one form for masculine and feminine nouns"
+    }
    },
    "class": "ten",
    "translit": "sabʿūna",
@@ -2031,7 +2303,10 @@
     "root": "ث م ن",
     "polarity": false,
     "countedNoun": "ACC;SG",
-    "ordinal": "الثَّمَانُونَ"
+    "ordinal": "الثَّمَانُونَ",
+    "genderForms": {
+     "none": "one form for masculine and feminine nouns"
+    }
    },
    "class": "ten",
    "translit": "ṯamānūna",
@@ -2103,7 +2378,10 @@
     "root": "ت س ع",
     "polarity": false,
     "countedNoun": "ACC;SG",
-    "ordinal": "التِّسْعُونَ"
+    "ordinal": "التِّسْعُونَ",
+    "genderForms": {
+     "none": "one form for masculine and feminine nouns"
+    }
    },
    "class": "ten",
    "translit": "tisʿūna",
@@ -2175,7 +2453,10 @@
     "root": "م ء ي",
     "polarity": false,
     "countedNoun": "GEN;SG",
-    "ordinal": "الْمِائَة"
+    "ordinal": "الْمِائَة",
+    "genderForms": {
+     "none": "a noun: one form whatever the gender of the counted noun"
+    }
    },
    "class": "noun",
    "translit": "miʾa",
@@ -2264,7 +2545,10 @@
     "root": "ء ل ف",
     "polarity": false,
     "countedNoun": "GEN;SG",
-    "ordinal": "الْأَلْف"
+    "ordinal": "الْأَلْف",
+    "genderForms": {
+     "none": "a noun: one form whatever the gender of the counted noun"
+    }
    },
    "class": "noun",
    "translit": "ʾalf",
@@ -2361,6 +2645,7 @@
     "plurals": [
      {
       "form": "كَثِيرُونَ",
+      "translit": "kaṯīrūn",
       "kind": "soundMasc",
       "declension": "sound",
       "note": "many (people): كَثِيرُونَ يَظُنُّونَ ذٰلِكَ",
@@ -2378,6 +2663,12 @@
       "senses": [
        "s2"
       ]
+     }
+    ],
+    "governs": [
+     {
+      "prep": "مِنْ",
+      "what": "many of (كَثِيرٌ مِنَ النَّاسِ)"
      }
     ]
    },
@@ -2528,7 +2819,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish ekseriyet (majority) and ekseriya (mostly) come from أَكْثَر, the comparative of this word."
+     "Its elative أَكْثَر is both “more” and “most”: أَكْثَرُ النَّاسِ, most people."
     ],
     "pitfalls": [
      "People take the plural كَثِيرُونَ (أَصْدِقَاءُ كَثِيرُونَ); things take the feminine singular كَثِيرَةٌ (كُتُبٌ كَثِيرَةٌ) — the rule for non-human plurals.",
@@ -2536,6 +2827,13 @@
     ],
     "subtleties": [
      "Two ways to say “many books”: كُتُبٌ كَثِيرَةٌ (adjective after the noun) and كَثِيرٌ مِنَ الْكُتُبِ (“much of the books”, with مِنْ, lesson 11) — the second is very common in writing."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish ekseriyet (majority) and ekseriya (mostly) come from أَكْثَر, the comparative of this word."
+     }
     ]
    }
   },
@@ -2557,6 +2855,7 @@
     "plurals": [
      {
       "form": "قَلِيلُونَ",
+      "translit": "qalīlūn",
       "kind": "soundMasc",
       "declension": "sound",
       "note": "few (people)",
@@ -2570,7 +2869,13 @@
     "elative": "أَقَلّ",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "governs": [
+     {
+      "prep": "مِنْ",
+      "what": "few of, a little of (قَلِيلٌ مِنَ الْمَاءِ)"
+     }
+    ]
    },
    "class": "quant",
    "translit": "qalīl",
@@ -2731,11 +3036,48 @@
      "Hebrew קַל (kal, light, easy) belongs to the cognate root ק ל ל."
     ],
     "pitfalls": [
-     "Arabic does not split “few” and “a few” as English does: قَلِيل covers both, and the context gives the tone.",
+     "One word for a small amount seen as too little and a small amount seen as some: قَلِيل covers both, and the context gives the tone.",
      "Things in the plural take the feminine singular (كُتُبٌ قَلِيلَةٌ), people the plural (قَلِيلُونَ)."
     ],
     "subtleties": [
      "The same root gives أَقَلّ (less, the least) and قَلَّمَا (rarely)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "Arabic does not split “few” and “a few”: قَلِيل covers both."
+     },
+     {
+      "for": "fr",
+      "rel": "trap",
+      "text": "Arabic does not split peu and quelques: قَلِيل covers both."
+     },
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "Arabic does not split λίγοι (too few) and μερικοί (some): قَلِيل covers both."
+     },
+     {
+      "for": "ru",
+      "rel": "trap",
+      "text": "Arabic does not split мало and несколько: قَلِيل covers both."
+     },
+     {
+      "for": "it",
+      "rel": "trap",
+      "text": "Arabic does not split pochi and alcuni: قَلِيل covers both."
+     },
+     {
+      "for": "es",
+      "rel": "trap",
+      "text": "Arabic does not split pocos and unos pocos: قَلِيل covers both."
+     },
+     {
+      "for": "pt",
+      "rel": "trap",
+      "text": "Arabic does not split poucos and alguns: قَلِيل covers both."
+     }
     ]
    }
   },
@@ -2751,7 +3093,8 @@
     "derivedFrom": "قَلِيل (little), in the accusative",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "formation": "adverbial accusative"
    },
    "translit": "qalīlan",
    "ref": {
@@ -2842,7 +3185,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Like German ein bisschen and Greek λίγο, it answers both “how much?” and “how long?” (wait a little)."
+     "Like German ein bisschen, it answers both “how much?” and “how long?” (wait a little)."
     ],
     "pitfalls": [
      "The final -an is part of the word: qalīlan, said qalīlā at a pause; written with tanwīn and an alif: قَلِيلًا.",
@@ -2850,6 +3193,43 @@
     ],
     "subtleties": [
      "The accusative -an turns adjectives into adverbs: كَثِيرًا (a lot), قَلِيلًا (a little), جِدًّا (very)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Like λίγο, it answers both “how much?” and “how long?”: περίμενε λίγο = اِنْتَظِرْ قَلِيلًا."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Like немного, it answers both “how much?” and “how long?”: подожди немного = اِنْتَظِرْ قَلِيلًا."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Like un peu, it answers both “how much?” and “how long?”: attends un peu = اِنْتَظِرْ قَلِيلًا."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Like un po’, it answers both “how much?” and “how long?”: aspetta un po’ = اِنْتَظِرْ قَلِيلًا."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "Like un poco, it answers both “how much?” and “how long?”: espera un poco = اِنْتَظِرْ قَلِيلًا."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Like um pouco, it answers both “how much?” and “how long?”: espera um pouco = اِنْتَظِرْ قَلِيلًا."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Like “a little”, it answers both “how much?” and “how long?”: wait a little = اِنْتَظِرْ قَلِيلًا."
+     }
     ]
    }
   },
@@ -2875,7 +3255,17 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "كُلُّ",
+      "translit": "kullu",
+      "note": "always followed by its genitive (كُلُّ يَوْمٍ)"
+     }
+    ]
    },
    "class": "quant",
    "gender": "MASC",
@@ -3003,7 +3393,7 @@
     },
     "funFacts": [
      "Hebrew כָּל / כֹּל (kol, all) is the same word.",
-     "Turkish külliye (a complex of mosque and schools) is Arabic كُلِّيَّة (in Arabic today: a faculty, a college), from this word."
+     "From the same word: كُلِّيَّة, “totality” — today a faculty or college of a university (كُلِّيَّةُ الطِّبِّ, the faculty of medicine)."
     ],
     "pitfalls": [
      "كُلّ is a noun: the noun after it is genitive (كُلُّ الْبُيُوتِ), and كُلّ itself takes the case of its place in the sentence (subject: كُلُّ).",
@@ -3011,6 +3401,13 @@
     ],
     "subtleties": [
      "It can also come after the noun with a pronoun: الطُّلَّابُ كُلُّهُمْ (the students, all of them)."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish külliye (a complex of mosque and schools) is Arabic كُلِّيَّة, from this word."
+     }
     ]
    }
   },
@@ -3041,6 +3438,16 @@
       "senses": [
        "s2"
       ]
+     }
+    ],
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "بَعْضُ",
+      "translit": "baʿḍu",
+      "note": "always followed by its genitive (بَعْضُ النَّاسِ)"
      }
     ]
    },
@@ -3141,7 +3548,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish bazı (some) and bazen (sometimes) come from بَعْض and بَعْضًا."
+     "بَعْضُهُمْ بَعْضًا means “each other” — literally “some of them … some”: يُسَاعِدُ بَعْضُهُمْ بَعْضًا."
     ],
     "pitfalls": [
      "بَعْض is a noun: the word after it is genitive and usually definite — بَعْضُ الْكُتُبِ (some of the books), not *بَعْضُ كُتُبٌ.",
@@ -3149,6 +3556,13 @@
     ],
     "subtleties": [
      "بَعْضَ الشَّيْءِ (somewhat) is the formal “a little”."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish bazı (some) and bazen (sometimes) come from بَعْض and بَعْضًا."
+     }
     ]
    }
   }

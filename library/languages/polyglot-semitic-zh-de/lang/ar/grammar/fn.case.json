@@ -327,17 +327,17 @@
   {
    "lang": "de",
    "fn": "fn.case",
-   "note": "German chooses the case after in, an, auf …: dative for “where?” (in der Schule), accusative for “where to?” (in die Schule). Arabic always uses the genitive and changes the preposition (فِي / إِلَى)."
+   "note": "German chooses the case after in, an, auf …:\n- dative for “where?” — in der Schule;\n- accusative for “where to?” — in die Schule.\n\nArabic always uses the genitive and changes the preposition (فِي / إِلَى)."
   },
   {
    "lang": "he",
    "fn": "fn.case",
-   "note": "Modern Hebrew has no cases: בְּבֵית סֵפֶר, לְבֵית סֵפֶר — the noun never changes; only the preposition does. Arabic keeps the old Semitic genitive -i."
+   "note": "Modern Hebrew has no cases — the noun never changes; only the preposition does:\n→ בְּבֵית סֵפֶר, לְבֵית סֵפֶר\n\nArabic keeps the old Semitic genitive -i."
   },
   {
    "lang": "zh",
    "fn": "fn.prep.core",
-   "note": "Chinese has no cases at all: 在学校 (at school), 去学校 (to school) — the place word stays the same."
+   "note": "Chinese has no cases at all — the place word stays the same:\n→ 在学校 (at school), 去学校 (to school)"
   },
   {
    "lang": "ar",
@@ -387,12 +387,12 @@
   {
    "for": "hi",
    "rel": "similar",
-   "text": "Hindi puts a noun into its oblique form before every postposition (लड़का → लड़के से); Arabic puts it into the genitive after every preposition — one form for all, in both."
+   "text": "Hindi puts a noun into its oblique form before every postposition:\n→ लड़का → लड़के से\n\nArabic puts it into the genitive after every preposition — **one form for all, in both**."
   },
   {
    "for": "fa",
    "rel": "different",
-   "text": "Persian nouns do not change after prepositions. The Arabic construct (بَيْتُ الْأَبِ, the father’s house) is the counterpart of the Persian ezafe (خانهٔ پدر), but it marks the second noun with the genitive instead of linking with -e."
+   "text": "Persian nouns do not change after prepositions.\n\nThe Arabic construct is the counterpart of the Persian ezafe, but **it marks the second noun with the genitive** instead of linking with -e:\n→ خانهٔ پدر — بَيْتُ الْأَبِ (the father’s house)"
   },
   {
    "for": "mr",
@@ -433,6 +433,61 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut says in / to / from with case endings (-mi, -mut, -mit); Arabic with a preposition + the genitive."
+  },
+  {
+   "for": "fr",
+   "rel": "new",
+   "text": "French nouns never change after a preposition (dans la maison, de la maison).\n\nArabic nouns take **the genitive -i / -in after every preposition**:\n→ فِي الْبَيْتِ, مِنْ بَيْتٍ"
+  },
+  {
+   "for": "de",
+   "rel": "trap",
+   "text": "German chooses the case by preposition and by “where?” / “where to?”:\n→ in der Schule / in die Schule\n\nArabic has **one case after every preposition, the genitive**, and lets the preposition say the direction:\n→ فِي الْمَدْرَسَةِ, إِلَى الْمَدْرَسَةِ"
+  },
+  {
+   "for": "zh",
+   "rel": "new",
+   "text": "Chinese nouns stay the same after 在, 从 and 到; Arabic nouns change their ending after a preposition:\n→ فِي الْبَيْتِ, مِنَ الْبَيْتِ, إِلَى الْبَيْتِ"
+  },
+  {
+   "for": "it",
+   "rel": "new",
+   "text": "Italian nouns never change after a preposition (in casa, da casa).\n\nArabic nouns take **the genitive -i / -in after every preposition**:\n→ فِي الْبَيْتِ, فِي بَيْتٍ"
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian chooses the case by preposition:\n- në shkollë with the accusative;\n- nga shkolla with the nominative;\n- para shkollës with the ablative.\n\nArabic has **one case after all prepositions: the genitive**."
+  },
+  {
+   "for": "pt",
+   "rel": "new",
+   "text": "Portuguese nouns never change after a preposition (na escola, da escola).\n\nArabic nouns take **the genitive -i / -in after every preposition**:\n→ فِي الْمَدْرَسَةِ, مِنَ الْمَدْرَسَةِ"
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your prepositions govern different cases, Arabic is simpler:\n- every preposition takes the genitive;\n- the direction is in the preposition, never in the case."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If your language says in / to / from with case suffixes, Arabic says it with a preposition before the noun — فِي, إِلَى, مِنْ — and puts the noun into **one case, the genitive**."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "new",
+   "text": "If your nouns never change, remember one rule: **after any preposition the noun ends in -i** (with the article) or -in (without).\n→ فِي الْبَيْتِ, فِي بَيْتٍ"
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If your language marks in / to / from with endings on the place word, Arabic uses separate prepositions before the noun, which then takes the genitive."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "If your language is Semitic, prepositions before the noun are familiar (بِـ, لِـ, مِنْ).\n\nNew is that the noun after them takes **a genitive ending, -i**."
   }
  ]
 }

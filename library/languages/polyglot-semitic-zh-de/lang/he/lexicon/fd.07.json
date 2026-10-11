@@ -29,7 +29,37 @@
     "verbalNoun": "אֲכִילָה",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "present": "אוֹכֵל",
+    "infinitive": "לֶאֱכֹל",
+    "imperative": [
+     {
+      "cell": "V;IMP;2;SG;MASC",
+      "form": "אֱכֹל"
+     },
+     {
+      "cell": "V;IMP;2;SG;FEM",
+      "form": "אִכְלִי"
+     },
+     {
+      "cell": "V;IMP;2;PL;MASC",
+      "form": "אִכְלוּ"
+     }
+    ],
+    "related": [
+     {
+      "form": "נֶאֱכַל",
+      "binyan": "nifal",
+      "relation": "passive",
+      "note": "“was eaten”"
+     },
+     {
+      "form": "הֶאֱכִיל",
+      "binyan": "hifil",
+      "relation": "causative",
+      "note": "“fed”"
+     }
+    ]
    },
    "forms": {
     "V;PST;3;SG;MASC": "אָכַל",
@@ -147,7 +177,7 @@
      }
     ],
     "etymology": {
-     "text": "From Proto-Semitic *ʔakal-. Compare Aramaic אֲכַל (ʾăḵal), Arabic أَكَلَ (ʔakala).",
+     "text": "From Proto-Semitic *ʔakal-. Compare Arabic أَكَلَ (ʔakala).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -195,7 +225,31 @@
     "verbalNoun": "שְׁתִיָּה",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "present": "שׁוֹתֶה",
+    "infinitive": "לִשְׁתּוֹת",
+    "imperative": [
+     {
+      "cell": "V;IMP;2;SG;MASC",
+      "form": "שְׁתֵה"
+     },
+     {
+      "cell": "V;IMP;2;SG;FEM",
+      "form": "שְׁתִי"
+     },
+     {
+      "cell": "V;IMP;2;PL;MASC",
+      "form": "שְׁתוּ"
+     }
+    ],
+    "related": [
+     {
+      "form": "נִשְׁתָּה",
+      "binyan": "nifal",
+      "relation": "passive",
+      "note": "“was drunk” (formal); “gave to drink” is הִשְׁקָה, from another root"
+     }
+    ]
    },
    "forms": {
     "V;PST;3;SG;MASC": "שָׁתָה",
@@ -288,7 +342,7 @@
      }
     ],
     "etymology": {
-     "text": "Compare Aramaic אִשְׁתִּי (ʾištī), Ge’ez ሰትየ (sätyä).",
+     "text": "An old Semitic verb, with cognates across the branch (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -299,7 +353,24 @@
      "Infinitive לִשְׁתּוֹת (lishtot), with a dagesh in the ת."
     ],
     "subtleties": [
-     "Without an object, הוּא שׁוֹתֶה can mean “he drinks (alcohol)” — as in English."
+     "Without an object, הוּא שׁוֹתֶה can mean “he drinks (alcohol)” — as German er trinkt can."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "As in English, “he drinks” without an object can mean alcohol."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "As with il boit, without an object it can mean alcohol."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "As with он пьёт, without an object it can mean alcohol."
+     }
     ]
    }
   },
@@ -334,7 +405,31 @@
     "verbalNoun": "קְנִיָּה",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "present": "קוֹנֶה",
+    "infinitive": "לִקְנוֹת",
+    "imperative": [
+     {
+      "cell": "V;IMP;2;SG;MASC",
+      "form": "קְנֵה"
+     },
+     {
+      "cell": "V;IMP;2;SG;FEM",
+      "form": "קְנִי"
+     },
+     {
+      "cell": "V;IMP;2;PL;MASC",
+      "form": "קְנוּ"
+     }
+    ],
+    "related": [
+     {
+      "form": "נִקְנָה",
+      "binyan": "nifal",
+      "relation": "passive",
+      "note": "“was bought”"
+     }
+    ]
    },
    "forms": {
     "V;PST;3;SG;MASC": "קָנָה",
@@ -453,12 +548,12 @@
      }
     ],
     "etymology": {
-     "text": "Cognate with Aramaic קְנָא (“to acquire”).",
+     "text": "An old Semitic verb, first meaning “to acquire” (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
      "The present participle is also a noun: קוֹנֶה “buyer, customer”.",
-     "Same letters, a different word: קָנֶה “reed, cane” — related to Greek κάννα and to English cane, canal, cannon."
+     "Same letters, a different word: קָנֶה “reed, cane”, an old word that travelled west as a word for “reed, tube”."
     ],
     "pitfalls": [
      "A lamed-he verb like שָׁתָה: קוֹנֶה (m), קוֹנָה (f), קוֹנִים, קוֹנוֹת.",
@@ -466,6 +561,38 @@
     ],
     "subtleties": [
      "In the Bible and in formal Hebrew קָנָה means “acquire” in general, not only with money: קְנֵה לְךָ חָבֵר."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Greek κάννα “reed” is related to קָנֶה “reed, cane”."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English cane, canal and cannon are distant relatives of קָנֶה “reed, cane”."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "Italian canna “reed” is a distant relative of קָנֶה “reed, cane”."
+     },
+     {
+      "for": "es",
+      "rel": "similar",
+      "text": "Spanish caña “reed” is a distant relative of קָנֶה “reed, cane”."
+     },
+     {
+      "for": "pt",
+      "rel": "similar",
+      "text": "Portuguese cana “reed” is a distant relative of קָנֶה “reed, cane”."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "French canne “cane” is a distant relative of קָנֶה “reed, cane”."
+     }
     ]
    }
   },
@@ -499,7 +626,26 @@
     "verbalNoun": "אַהֲבָה",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "present": "אוֹהֵב",
+    "infinitive": "לֶאֱהֹב",
+    "imperative": {
+     "none": "not used as a command (the literary אֱהַב is found only in old texts)"
+    },
+    "related": [
+     {
+      "form": "נֶאֱהַב",
+      "binyan": "nifal",
+      "relation": "passive",
+      "note": "“was loved” (formal)"
+     },
+     {
+      "form": "הִתְאַהֵב",
+      "binyan": "hitpael",
+      "relation": "inchoative",
+      "note": "“fell in love” (+ בְּ)"
+     }
+    ]
    },
    "forms": {
     "V;PST;3;SG;MASC": "אָהַב",
@@ -619,7 +765,7 @@
      }
     ],
     "etymology": {
-     "text": "Compare Ugaritic 𐎀𐎅𐎁 (ảhb).",
+     "text": "An old Semitic verb (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -666,6 +812,14 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "present": "רוֹצֶה",
+    "infinitive": "לִרְצוֹת",
+    "imperative": {
+     "none": "not used as a command"
+    },
+    "related": {
+     "none": "no counterpart with a related everyday meaning (הִרְצָה “lectured” and רִצָּה “appeased” are far from “wanted”)"
     }
    },
    "forms": {
@@ -791,7 +945,7 @@
    "senses": [],
    "prefix": false,
    "translit": "et",
-   "role": "marks a definite direct object (no English equivalent): אֲנִי אוֹכֵל אֶת הַגֶּזֶר",
+   "role": "marks a definite direct object (it is not translated): אֲנִי אוֹכֵל אֶת הַגֶּזֶר",
    "features": {
     "spelling": "את",
     "pronForms": [
@@ -835,7 +989,11 @@
       "cell": "ADP;3;PL;FEM",
       "form": "אוֹתָן"
      }
-    ]
+    ],
+    "suffixSet": "a stem of its own",
+    "withArticle": {
+     "none": "a separate word: the article stays on the noun (אֶת הַ…)"
+    }
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -871,7 +1029,37 @@
     "verbalNoun": "בִּשּׁוּל",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "present": "מְבַשֵּׁל",
+    "infinitive": "לְבַשֵּׁל",
+    "imperative": [
+     {
+      "cell": "V;IMP;2;SG;MASC",
+      "form": "בַּשֵּׁל"
+     },
+     {
+      "cell": "V;IMP;2;SG;FEM",
+      "form": "בַּשְּׁלִי"
+     },
+     {
+      "cell": "V;IMP;2;PL;MASC",
+      "form": "בַּשְּׁלוּ"
+     }
+    ],
+    "related": [
+     {
+      "form": "הִתְבַּשֵּׁל",
+      "binyan": "hitpael",
+      "relation": "intransitive",
+      "note": "“cooked, was cooking” (by itself)"
+     },
+     {
+      "form": "בֻּשַּׁל",
+      "binyan": "pual",
+      "relation": "passive",
+      "note": "“was cooked”"
+     }
+    ]
    },
    "forms": {
     "V;PST;3;SG;MASC": "בִּשֵּׁל",
@@ -993,8 +1181,15 @@
      "The ב has a dot (b) at the start of בִּשֵּׁל (bishel) but not after מְ: מְבַשֵּׁל (mevashel, with v)."
     ],
     "subtleties": [
-     "English “cook” covers every way of making food; בִּשֵּׁל is first of all cooking with heat, in a pot. Baking is אָפָה, frying טִגֵּן.",
+     "- בִּשֵּׁל is first of all cooking with heat, in a pot — not every way of making food.\n- Baking is אָפָה, frying טִגֵּן.",
      "A cook (the job) is a different word: טַבָּח."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English “cook” covers every way of making food; בִּשֵּׁל is cooking with heat, in a pot."
+     }
     ]
    }
   },
@@ -1037,6 +1232,27 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pluralShape": [
+     "segolate: vowels rebuilt"
+    ],
+    "possessive": [
+     {
+      "form": "לַחְמִי",
+      "number": "SG",
+      "register": "formal"
+     },
+     {
+      "form": "לְחָמַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -1155,7 +1371,7 @@
      "The blessing before a meal with bread ends with הַמּוֹצִיא לֶחֶם מִן הָאָרֶץ “who brings forth bread from the earth”."
     ],
     "pitfalls": [
-     "As food it is uncountable: אֲנִי אוֹכֵל לֶחֶם (no “a”). One loaf is כִּכַּר לֶחֶם, or in a shop simply לֶחֶם אֶחָד; the plural לְחָמִים means loaves or kinds of bread.",
+     "- As food it is uncountable:\n→ אֲנִי אוֹכֵל לֶחֶם (no article)\n- One loaf is כִּכַּר לֶחֶם, or in a shop simply לֶחֶם אֶחָד; the plural לְחָמִים means loaves or kinds of bread.",
      "Stress on the first syllable: LE-chem (like יֶלֶד, סֵפֶר)."
     ],
     "subtleties": [
@@ -1200,6 +1416,27 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": [
+     {
+      "form": "גְּבִינָתִי",
+      "number": "SG",
+      "register": "formal"
+     },
+     {
+      "form": "גְּבִינוֹתַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -1326,6 +1563,27 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "ending of the other gender"
+    ],
+    "possessive": [
+     {
+      "form": "בֵּיצָתִי",
+      "number": "SG",
+      "register": "formal"
+     },
+     {
+      "form": "בֵּיצַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -1407,7 +1665,7 @@
     "synonyms": [],
     "synonymsNone": "No synonym in everyday use (an omelette is a different word, חֲבִיתָה).",
     "etymology": {
-     "text": "Uncertain, possibly named after its whiteness from the same root as أَبْيَض (ʔabyaḍ, “white”). Cognate with Arabic بَيْض (bayḍ) and Classical Syriac ܒܝܥܬܐ (bēʿṯā) (Wiktionary).",
+     "text": "Uncertain, possibly named after its whiteness from the same root as أَبْيَض (ʔabyaḍ, “white”). Cognate with Arabic بَيْض (bayḍ) (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -1415,7 +1673,7 @@
      "Arabic بَيْض (bayḍ) “eggs” is the same word."
     ],
     "pitfalls": [
-     "Feminine, but the plural ends in -ִים: בֵּיצָה → בֵּיצִים — and it stays feminine: שְׁתֵּי בֵּיצִים, שָׁלוֹשׁ בֵּיצִים.",
+     "Feminine, but the plural ends in -ִים: בֵּיצָה → בֵּיצִים — and it stays feminine:\n→ שְׁתֵּי בֵּיצִים, שָׁלוֹשׁ בֵּיצִים",
      "Same letters, another word: בִּצָּה “swamp” (unvowelled, both can be written ביצה).",
      "In slang the plural בֵּיצִים also means “testicles” (vulgar) — context makes it clear."
     ],
@@ -1453,6 +1711,18 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": {
+     "none": "possessive endings are not used with this word; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -1614,6 +1884,27 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": [
+     {
+      "form": "דָּגִי",
+      "number": "SG",
+      "register": "formal"
+     },
+     {
+      "form": "דָּגַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -1708,7 +1999,7 @@
      }
     ],
     "etymology": {
-     "text": "Related to Ugaritic 𐎄𐎂 (dg), of unknown ultimate origin (Wiktionary).",
+     "text": "An old Northwest Semitic word, of unknown ultimate origin (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -1765,6 +2056,18 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pluralShape": [
+     "ending of the other gender"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -1878,7 +2181,7 @@
      }
     ],
     "etymology": {
-     "text": "Compare Ge’ez ዖፍ (ʿof, “bird”) (Wiktionary). The verb עָף “to fly” has the same root ע־ו־ף.",
+     "text": "Originally “bird, fowl” (Wiktionary). The verb עָף “to fly” has the same root ע־ו־ף.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -1925,6 +2228,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": {
+     "none": "a loanword: possessive endings are not used; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -2004,14 +2319,51 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "A word you know: it comes from Greek ὄρυζα, like German Reis, English rice and Russian рис."
+     "It comes from Greek ὄρυζα, like German Reis."
     ],
     "pitfalls": [
-     "Everyday spelling with ו: אורז. Without it, ארז reads as אֶרֶז “cedar”.",
+     "- Everyday spelling with ו:\n→ אורז\n- Without it, ארז reads as אֶרֶז “cedar”.",
      "With the article: הָאֹרֶז (hā- before א)."
     ],
     "subtleties": [
      "Uncountable: אֲנִי אוֹכֵל אֹרֶז, קְצָת אֹרֶז — no plural in everyday use."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "It is ὄρυζα, the old Greek word for rice."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Like English rice, it goes back to Greek ὄρυζα."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Like рис, it goes back to Greek ὄρυζα."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Like riso, it goes back to Greek ὄρυζα."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Like riz, it goes back to Greek ὄρυζα."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "Like arroz (through Arabic), it goes back to Greek ὄρυζα."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Like arroz (through Arabic), it goes back to Greek ὄρυζα."
+     }
     ]
    }
   },
@@ -2052,6 +2404,27 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": [
+     {
+      "form": "מְרָקִי",
+      "number": "SG",
+      "register": "formal"
+     },
+     {
+      "form": "מְרָקַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -2139,7 +2512,7 @@
     },
     "funFacts": [
      "Arabic مَرَق (maraq) “broth” is the same word.",
-     "Hebrew “eats” soup, like Greek (τρώω σούπα), Russian (есть суп) and German (Suppe essen)."
+     "Hebrew “eats” soup, as German does (Suppe essen)."
     ],
     "pitfalls": [
      "Soup is eaten, not drunk: אוֹכְלִים מָרָק (as German Suppe essen).",
@@ -2147,6 +2520,18 @@
     ],
     "subtleties": [
      "In Israeli winters soup is often the whole supper, and מְרַק עוֹף is the classic home remedy for a cold."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Hebrew “eats” soup, as in τρώω σούπα."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Hebrew “eats” soup, as in есть суп."
+     }
     ]
    }
   },
@@ -2193,6 +2578,18 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "a loanword: possessive endings are not used; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -2285,7 +2682,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "One word in all your languages: from Latin sal “salt”, like German Salat, Greek σαλάτα, Russian салат, Turkish salata and Arabic سَلَطَة (salaṭa)."
+     "An international word, ultimately from the word for “salt”: German Salat and Arabic سَلَطَة (salaṭa) are the same word."
     ],
     "pitfalls": [
      "Masculine: סָלָט טָעִים, הַסָּלָט הַזֶּה (not *טְעִימָה).",
@@ -2293,6 +2690,43 @@
     ],
     "subtleties": [
      "The plural סָלָטִים is the array of small salads and dips served first in Israeli restaurants."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "The same word as σαλάτα."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "The same word as салат."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "The same word as insalata."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "The same word as salade."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "The same word as ensalada."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "The same word as salada."
+     },
+     {
+      "for": "tr",
+      "rel": "same",
+      "text": "The same word as salata."
+     }
     ]
    }
   },
@@ -2334,6 +2768,23 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pluralShape": [
+     "ending of the other gender",
+     "stem change"
+    ],
+    "possessive": [
+     {
+      "form": "פִּרְיִי",
+      "number": "SG",
+      "register": "formal"
+     }
+    ],
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -2441,7 +2892,7 @@
     "synonyms": [],
     "synonymsNone": "No everyday synonym (תְּנוּבָה “produce, yield” is formal and collective).",
     "etymology": {
-     "text": "From Proto-Semitic *piry-. Cognate with Ge’ez ፍሬ (fəre) and Ugaritic 𐎔𐎗 (pr /pirû/) (Wiktionary).",
+     "text": "From Proto-Semitic *piry-. Cognates live on across the Semitic languages (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -2450,11 +2901,23 @@
     ],
     "pitfalls": [
      "The plural changes its vowels and ends in -וֹת although the word is masculine: פְּרִי → פֵּרוֹת.",
-     "English uses “fruit” as a mass noun; Hebrew uses the plural: אֲנִי אוֹכֵל פֵּרוֹת “I eat fruit”.",
+     "For fruit in general Hebrew uses the plural: אֲנִי אוֹכֵל פֵּרוֹת “I eat fruit”.",
      "Everyday spelling of the plural: פירות."
     ],
     "subtleties": [
      "One piece of fruit is פְּרִי אֶחָד; in botany a tomato is also a פְּרִי."
+    ],
+    "notes": [
+     {
+      "for": "am",
+      "rel": "same",
+      "text": "Amharic ፍሬ (fəre) “fruit, seed” is the same Semitic word."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English “fruit” is a mass noun (“I eat fruit”); Hebrew says the plural: אֲנִי אוֹכֵל פֵּרוֹת."
+     }
     ]
    }
   },
@@ -2496,6 +2959,27 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": [
+     {
+      "form": "תַּפּוּחִי",
+      "number": "SG",
+      "register": "formal"
+     },
+     {
+      "form": "תַּפּוּחַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -2590,11 +3074,11 @@
      }
     ],
     "etymology": {
-     "text": "Uncertain; if derived from a verbal root then either named after its scent (נָפַח “to blow, to scent”) or from תָּפַח “to swell, become round”. Cognates include Arabic تُفَّاح (tuffāḥ) and Ugaritic tpḥ (Wiktionary).",
+     "text": "Uncertain; if derived from a verbal root then either named after its scent (נָפַח “to blow, to scent”) or from תָּפַח “to swell, become round”. Cognate with Arabic تُفَّاح (tuffāḥ) (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "תַּפּוּחַ אֲדָמָה “earth apple” is a potato — like French pomme de terre and Austrian German Erdapfel.",
+     "תַּפּוּחַ אֲדָמָה “earth apple” is a potato — like Austrian German Erdapfel.",
      "תַּפּוּז “orange” is a modern blend of תַּפּוּחַ זָהָב “golden apple”.",
      "Arabic تُفَّاح (tuffāḥ) is the same word."
     ],
@@ -2604,6 +3088,18 @@
     ],
     "subtleties": [
      "Masculine: תַּפּוּחַ אֶחָד, שְׁנֵי תַּפּוּחִים, שְׁלוֹשָׁה תַּפּוּחִים."
+    ],
+    "notes": [
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "תַּפּוּחַ אֲדָמָה is pomme de terre, word for word."
+     },
+     {
+      "for": "nl",
+      "rel": "same",
+      "text": "תַּפּוּחַ אֲדָמָה is aardappel, word for word."
+     }
     ]
    }
   },
@@ -2636,6 +3132,18 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": {
+     "none": "possessive endings are not used with this word; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -2724,15 +3232,62 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "One word through all your languages: Sanskrit śárkarā → Persian šakar → Arabic sukkar → Hebrew סֻכָּר; the same journey gave German Zucker, English sugar, Greek ζάχαρη, Russian сахар and Turkish şeker.",
+     "A word that crossed Asia: Sanskrit śárkarā → Persian šakar → Arabic sukkar → Hebrew סֻכָּר; the same journey gave German Zucker.",
      "Diabetes is סֻכֶּרֶת, with the ending of names of illnesses, as in צַהֶבֶת “jaundice”."
     ],
     "pitfalls": [
-     "Everyday spelling with ו: סוכר. Without it, סכר reads as סֶכֶר “dam”.",
+     "- Everyday spelling with ו:\n→ סוכר\n- Without it, סכר reads as סֶכֶר “dam”.",
      "The ֻ (kubbutz) is an u: su-KAR."
     ],
     "subtleties": [
      "Uncountable: קְצָת סֻכָּר, הַרְבֵּה סֻכָּר; sugar cubes are קֻבִּיּוֹת סֻכָּר."
+    ],
+    "notes": [
+     {
+      "for": "hi",
+      "rel": "same",
+      "text": "शक्कर is the same word: Sanskrit शर्करा travelled west through Persian and Arabic and arrived as סֻכָּר."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "English sugar is the same word, from the same journey through Arabic."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Greek ζάχαρη is the same word, from the same journey through Arabic."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Russian сахар is the same word, from the same journey."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Italian zucchero is the same word, through Arabic سُكَّر."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "French sucre is the same word, through Arabic سُكَّر."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "Spanish azúcar is the same word, with the Arabic article: السُّكَّر."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Portuguese açúcar is the same word, with the Arabic article: السُّكَّر."
+     },
+     {
+      "for": "tr",
+      "rel": "same",
+      "text": "Turkish şeker is the same word, from Persian."
+     }
     ]
    }
   },
@@ -2764,6 +3319,18 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": {
+     "none": "possessive endings are not used with this word; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -2858,7 +3425,7 @@
     "synonyms": [],
     "synonymsNone": "No synonym in everyday use.",
     "etymology": {
-     "text": "From Proto-West Semitic *milḥ-. Compare Aramaic מִלְחָא (milḥā), Arabic مِلْح (milḥ), Maltese melħ (Wiktionary).",
+     "text": "From Proto-West Semitic *milḥ-. Compare Arabic مِلْح (milḥ) (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -2871,6 +3438,13 @@
     ],
     "subtleties": [
      "Salt preserves, so בְּרִית מֶלַח, a “covenant of salt” (Numbers 18:19), is one that lasts for ever."
+    ],
+    "notes": [
+     {
+      "for": "branch:Semitic",
+      "rel": "same",
+      "text": "The word for salt, m-l-ḥ, is shared across the Semitic languages."
+     }
     ]
    }
   },
@@ -2904,6 +3478,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "plural only: the ending matches the gender"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -2991,7 +3577,7 @@
     "synonyms": [],
     "synonymsNone": "No synonym in everyday use.",
     "etymology": {
-     "text": "From Proto-Semitic *māy-. Compare Aramaic מַיָּא (mayyā), Arabic مَاء (māʔ). Doublet of מ״ם (the letter mem) (Wiktionary).",
+     "text": "From Proto-Semitic *māy-. Compare Arabic مَاء (māʔ). Doublet of מ״ם (the letter mem) (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -3021,7 +3607,7 @@
    "features": {
     "spelling": "תה",
     "root": {
-     "none": "a loanword (from European languages, compare French thé): no Hebrew root"
+     "none": "a loanword (from European languages): no Hebrew root"
     },
     "pattern": {
      "none": "a loanword: not built on a Hebrew pattern"
@@ -3040,6 +3626,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": {
+     "none": "a loanword: possessive endings are not used; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -3119,11 +3717,11 @@
      }
     ],
     "etymology": {
-     "text": "Borrowed from Western European languages, compare French thé and German Tee (Wiktionary).",
+     "text": "Borrowed from Western European languages, compare German Tee (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "One Chinese word (茶) travelled two ways: by sea as “te” (Hebrew תֵּה, German Tee, English tea), overland as “cha” (Russian чай, Turkish çay, Greek τσάι, Arabic شَاي)."
+     "One Chinese word (茶) travelled two ways: by sea as “te” (Hebrew תֵּה, German Tee), overland as “cha” (Arabic شَاي)."
     ],
     "pitfalls": [
      "One short syllable: te (not “tea”).",
@@ -3131,6 +3729,48 @@
     ],
     "subtleties": [
      "Israelis often drink tea from a glass: כּוֹס תֵּה."
+    ],
+    "notes": [
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "The same word as thé."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Like English tea, Hebrew took the “te” form that came by sea."
+     },
+     {
+      "for": "ru",
+      "rel": "different",
+      "text": "Russian чай is the overland “cha” form; Hebrew took the sea form “te”: תֵּה."
+     },
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "Greek τσάι is the overland “cha” form; Hebrew took the sea form “te”: תֵּה."
+     },
+     {
+      "for": "hi",
+      "rel": "different",
+      "text": "Hindi चाय is the overland “cha” form; Hebrew took the sea form “te”: תֵּה."
+     },
+     {
+      "for": "pt",
+      "rel": "different",
+      "text": "Portuguese chá is the “cha” form; Hebrew took the “te” form: תֵּה."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Like tè, Hebrew took the “te” form that came by sea."
+     },
+     {
+      "for": "tr",
+      "rel": "different",
+      "text": "Turkish çay is the overland “cha” form; Hebrew took the sea form “te”: תֵּה."
+     }
     ]
    }
   },
@@ -3166,6 +3806,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": {
+     "none": "a loanword: possessive endings are not used; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -3252,7 +3904,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "From Arabic قَهْوَة (qahwa) via Turkish kahve, Italian caffè and French café — the same chain gave German Kaffee, Greek καφές and Russian кофе.",
+     "From Arabic قَهْوَة (qahwa) via Turkish kahve, Italian caffè and French café — the same chain gave German Kaffee.",
      "קָפֶה הָפוּךְ, “upside-down coffee”, is the Israeli name for a latte."
     ],
     "pitfalls": [
@@ -3261,6 +3913,18 @@
     ],
     "subtleties": [
      "בֵּית קָפֶה “house of coffee” is a café."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Greek καφές comes from the same Arabic word, قَهْوَة."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Russian кофе comes from the same Arabic word, قَهْوَة."
+     }
     ]
    }
   },
@@ -3292,6 +3956,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": {
+     "none": "possessive endings are not used with this word; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -3371,7 +4047,7 @@
     "synonyms": [],
     "synonymsNone": "No synonym.",
     "etymology": {
-     "text": "Cognate with Aramaic חַלְבָּא and sharing its root with Arabic حَلِيب (ḥalīb) (Wiktionary).",
+     "text": "Sharing its root with Arabic حَلِيب (ḥalīb) (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -3426,6 +4102,27 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": [
+     {
+      "form": "מִיצִי",
+      "number": "SG",
+      "register": "formal"
+     },
+     {
+      "form": "מִיצַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -3564,6 +4261,19 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "ending of the other gender",
+     "segolate: vowels rebuilt"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -3657,7 +4367,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "*wayn- belongs to an old Mediterranean wine word, usually connected with Greek οἶνος and Latin vinum (→ German Wein, English wine).",
+     "*wayn- belongs to an old Mediterranean wine word, the same that gave German Wein.",
      "The blessing over wine ends with בּוֹרֵא פְּרִי הַגָּפֶן “who creates the fruit of the vine”."
     ],
     "pitfalls": [
@@ -3666,6 +4376,43 @@
     ],
     "subtleties": [
      "As a drink it is uncountable: כּוֹס יַיִן; יֵינוֹת are kinds of wine (יֵינוֹת מֵהַגָּלִיל)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "It belongs to the same old wine word as οἶνος."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "It belongs to the same old wine word as English wine."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "It belongs to the same old wine word as vino."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "It belongs to the same old wine word as vin."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "It belongs to the same old wine word as vino."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "It belongs to the same old wine word as vinho."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "It belongs to the same old wine word as вино."
+     }
     ]
    }
   },
@@ -3711,6 +4458,18 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "a loanword: possessive endings are not used; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -3796,7 +4555,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "A word you know: it is German Bier, with an -a perhaps from Arabic or Turkish bira."
+     "It is German Bier, with an -a perhaps from Arabic بِيرَة."
     ],
     "pitfalls": [
      "Homograph: בִּירָה is also “capital city” (bi-RA, as in בִּירַת צָרְפַת “the capital of France”); beer is BI-ra.",
@@ -3804,6 +4563,13 @@
     ],
     "subtleties": [
      "Ordering, “a beer” is simply בִּירָה; “two beers” is שְׁתֵּי בִּירוֹת."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "The final -a may come from Turkish bira (or Arabic بِيرَة)."
+     }
     ]
    }
   },
@@ -3841,6 +4607,18 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "compound: the first word changes"
+    ],
+    "possessive": {
+     "none": "a compound: “my …” is said with שֶׁל after it (… שֶׁלִּי); the endings go only on the first word in formal style"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -3931,7 +4709,7 @@
      "The “Israeli breakfast” of the kibbutz dining halls — eggs, chopped salad, white cheese, olives, bread — became a hotel classic."
     ],
     "pitfalls": [
-     "The article goes on the second word: אֲרוּחַת הַבֹּקֶר “the breakfast” (in speech you also hear the non-standard הָאֲרוּחַת בֹּקֶר).",
+     "The article goes on the second word:\n→ אֲרוּחַת הַבֹּקֶר “the breakfast” (in speech you also hear the non-standard הָאֲרוּחַת בֹּקֶר)",
      "Feminine, because of אֲרוּחָה: אֲרוּחַת בֹּקֶר טוֹבָה."
     ],
     "subtleties": [
@@ -3973,6 +4751,18 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "compound: the first word changes"
+    ],
+    "possessive": {
+     "none": "a compound: “my …” is said with שֶׁל after it (… שֶׁלִּי); the endings go only on the first word in formal style"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -4101,6 +4891,18 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "compound: the first word changes"
+    ],
+    "possessive": {
+     "none": "a compound: “my …” is said with שֶׁל after it (… שֶׁלִּי); the endings go only on the first word in formal style"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {

@@ -42,7 +42,13 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "stemVowels": "a–a",
+    "imperative": "اِذْهَبْ",
+    "passive": {
+     "none": "intransitive: no personal passive (ذَهَبَ بِـ “to take away” has the impersonal ذُهِبَ بِهِ)"
+    },
+    "past1sg": "ذَهَبْتُ"
    },
    "translit": "ḏahaba",
    "forms": {
@@ -199,10 +205,17 @@
     ],
     "pitfalls": [
      "The present has a: يَذْهَبُ (not *يَذْهُبُ), so the imperative starts with i: اِذْهَبْ!",
-     "The goal takes إِلَى: أَذْهَبُ إِلَى السُّوقِ — never فِي (Greek σε, German in/zu are both إِلَى here)."
+     "The goal takes إِلَى: أَذْهَبُ إِلَى السُّوقِ — never فِي (German in/zu are both إِلَى here)."
     ],
     "subtleties": [
      "ذَهَبَ is “go” however you go — on foot or by car; German gehen / fahren are both ذَهَبَ (the vehicle comes with بِـ: ذَهَبْتُ بِالْقِطَارِ)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "Greek σε is both place and goal (στην αγορά); for the goal Arabic says إِلَى: أَذْهَبُ إِلَى السُّوقِ."
+     }
     ]
    }
   },
@@ -256,7 +269,13 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "stemVowels": "a–i",
+    "imperative": "جِئْ",
+    "passive": {
+     "none": "intransitive: no personal passive (جَاءَ بِـ “to bring” has the impersonal جِيءَ بِهِ)"
+    },
+    "past1sg": "جِئْتُ"
    },
    "contrasts": [
     {
@@ -406,7 +425,19 @@
      "The hamza changes its seat: جَاءَ, جِئْتُ, يَجِيئُونَ, جَاؤُوا."
     ],
     "subtleties": [
-     "Like English, Arabic separates ذَهَبَ (go, away from here) and جَاءَ (come, towards the speaker); Greek έρχομαι = جَاءَ."
+     "Arabic separates ذَهَبَ (go, away from here) and جَاءَ (come, towards the speaker)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Like go and come: ذَهَبَ and جَاءَ."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "έρχομαι = جَاءَ, πηγαίνω = ذَهَبَ."
+     }
     ]
    }
   },
@@ -444,6 +475,16 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "stemVowels": {
+     "none": "an imperative only: no past or present stem"
+    },
+    "imperative": "تَعَالَ",
+    "passive": {
+     "none": "an imperative only: no passive"
+    },
+    "past1sg": {
+     "none": "an imperative only: no past"
     }
    },
    "contrasts": [
@@ -574,7 +615,13 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "stemVowels": "a–i",
+    "imperative": "اِمْشِ",
+    "passive": {
+     "none": "intransitive: no personal passive (only an impersonal one with a preposition)"
+    },
+    "past1sg": "مَشَيْتُ"
    },
    "translit": "mašā",
    "forms": {
@@ -733,7 +780,13 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "stemVowels": "a–u",
+    "imperative": "اُرْكُضْ",
+    "passive": {
+     "none": "intransitive: no personal passive (only an impersonal one with a preposition)"
+    },
+    "past1sg": "رَكَضْتُ"
    },
    "translit": "rakaḍa",
    "forms": {
@@ -891,7 +944,16 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "stemVowels": "a–u",
+    "imperative": "قُدْ",
+    "passive": [
+     {
+      "past": "قِيدَ",
+      "present": "يُقَادُ"
+     }
+    ],
+    "past1sg": "قُدْتُ"
    },
    "translit": "qāda",
    "forms": {
@@ -1054,7 +1116,15 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "stemVowels": {
+     "none": "form III: the vowels are fixed by the form"
+    },
+    "imperative": "سَافِرْ",
+    "passive": {
+     "none": "intransitive: no personal passive (only an impersonal one with a preposition)"
+    },
+    "past1sg": "سَافَرْتُ"
    },
    "translit": "sāfara",
    "forms": {
@@ -1174,7 +1244,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Swahili safari (journey) comes from Arabic سَفَر — and English took safari from Swahili.",
+     "سَفَر is the journey; through East Africa the word went round the world as “safari”.",
      "مُسَافِر is a traveller or a passenger."
     ],
     "pitfalls": [
@@ -1183,6 +1253,18 @@
     ],
     "subtleties": [
      "سَافَرَ is a journey to another town or country; for the daily way to work use ذَهَبَ."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English safari comes, by way of East Africa, from سَفَر."
+     },
+     {
+      "for": "sw",
+      "rel": "same",
+      "text": "Swahili safari (journey) comes from Arabic سَفَر."
+     }
     ]
    }
   },
@@ -1242,7 +1324,13 @@
        "s3"
       ]
      }
-    ]
+    ],
+    "stemVowels": "a–u",
+    "imperative": "عُدْ",
+    "passive": {
+     "none": "intransitive: no personal passive (only an impersonal one with a preposition)"
+    },
+    "past1sg": "عُدْتُ"
    },
    "contrasts": [
     {
@@ -1398,7 +1486,14 @@
      "Hollow verb like قَادَ: يَعُودُ, عُدْتُ (I came back), عُدْ! (come back!)."
     ],
     "subtleties": [
-     "One verb for both directions: عَادَ إِلَى الْبَيْتِ is “go back home” or “come back home” — Greek γυρίζω also covers both."
+     "One verb for both directions: عَادَ إِلَى الْبَيْتِ is “go back home” or “come back home”."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Like γυρίζω, it covers “go back” and “come back”."
+     }
     ]
    }
   },
@@ -1447,7 +1542,16 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "stemVowels": "a–u",
+    "imperative": "اُدْخُلْ",
+    "passive": [
+     {
+      "past": "دُخِلَ",
+      "present": "يُدْخَلُ"
+     }
+    ],
+    "past1sg": "دَخَلْتُ"
    },
    "translit": "daḫala",
    "forms": {
@@ -1615,7 +1719,13 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "stemVowels": "a–u",
+    "imperative": "اُخْرُجْ",
+    "passive": {
+     "none": "intransitive: no personal passive (only an impersonal one with a preposition)"
+    },
+    "past1sg": "خَرَجْتُ"
    },
    "contrasts": [
     {
@@ -1798,7 +1908,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "stemVowels": {
+     "none": "form III: the vowels are fixed by the form"
+    },
+    "imperative": "غَادِرْ",
+    "passive": [
+     {
+      "past": "غُودِرَ",
+      "present": "يُغَادَرُ"
+     }
+    ],
+    "past1sg": "غَادَرْتُ"
    },
    "contrasts": [
     {
@@ -1981,7 +2102,13 @@
        "s2"
       ]
      }
-    ]
+    ],
+    "stemVowels": "a–i",
+    "imperative": "صِلْ",
+    "passive": {
+     "none": "intransitive: no personal passive in “to arrive” (وُصِلَ / يُوصَلُ belongs to “to join, connect”)"
+    },
+    "past1sg": "وَصَلْتُ"
    },
    "translit": "waṣala",
    "forms": {
@@ -2106,7 +2233,14 @@
      "With a place: وَصَلَ إِلَى الْمَدِينَةِ, or directly وَصَلَ الْمَدِينَةَ."
     ],
     "subtleties": [
-     "Greek φτάνω, German ankommen: Arabic says وَصَلَ + إِلَى. Its command form صِلْ! is rarely needed."
+     "German ankommen: Arabic says وَصَلَ + إِلَى. Its command form صِلْ! is rarely needed."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "φτάνω στο σπίτι = وَصَلَ إِلَى الْبَيْتِ."
+     }
     ]
    }
   },
@@ -2144,7 +2278,13 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "stemVowels": "i–a",
+    "imperative": "اِبْقَ",
+    "passive": {
+     "none": "intransitive: no personal passive (only an impersonal one with a preposition)"
+    },
+    "past1sg": "بَقِيتُ"
    },
    "translit": "baqiya",
    "forms": {
@@ -2335,7 +2475,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "stemVowels": {
+     "none": "form VIII: the vowels are fixed by the form"
+    },
+    "imperative": "اِنْتَظِرْ",
+    "passive": [
+     {
+      "past": "اُنْتُظِرَ",
+      "present": "يُنْتَظَرُ"
+     }
+    ],
+    "past1sg": "اِنْتَظَرْتُ"
    },
    "translit": "intaẓara",
    "forms": {
@@ -2443,7 +2594,14 @@
      "The first alif is hamzat al-waṣl: at the start اِنْتَظِرْ!, after a vowel silent: وَانْتَظَرَ."
     ],
     "subtleties": [
-     "Like Greek περιμένω and unlike German warten auf, it takes a direct object."
+     "Unlike German warten auf, it takes a direct object."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Like περιμένω, it takes a direct object: أَنْتَظِرُ الْحَافِلَةَ = περιμένω το λεωφορείο."
+     }
     ]
    }
   },
@@ -2463,6 +2621,7 @@
     "plurals": [
      {
       "form": "حَافِلَات",
+      "translit": "ḥāfilāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -2475,7 +2634,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "حَافِلَةُ",
+      "translit": "ḥāfilatu"
+     }
+    ]
    },
    "gender": "FEM",
    "translit": "ḥāfila",
@@ -2619,6 +2787,7 @@
     "plurals": [
      {
       "form": "قِطَارَات",
+      "translit": "qiṭārāt",
       "kind": "soundFem",
       "declension": "sound",
       "note": "trains",
@@ -2628,6 +2797,7 @@
      },
      {
       "form": "قُطُر",
+      "translit": "quṭur",
       "kind": "broken",
       "pattern": "فُعُل",
       "declension": "triptote",
@@ -2641,7 +2811,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "no other form belongs to one meaning (the plurals do: see plurals)"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "قِطَارُ",
+      "translit": "qiṭāru"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -2773,6 +2952,7 @@
     "plurals": [
      {
       "form": "طَائِرَات",
+      "translit": "ṭāʾirāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -2790,6 +2970,15 @@
       "senses": [
        "s2"
       ]
+     }
+    ],
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "طَائِرَةُ",
+      "translit": "ṭāʾiratu"
      }
     ]
    },
@@ -2927,6 +3116,7 @@
     "plurals": [
      {
       "form": "سَيَّارَات أُجْرَة",
+      "translit": "sayyārāt ʾujra",
       "kind": "soundFem",
       "declension": "sound",
       "note": "the head noun takes the plural: سَيَّارَاتُ أُجْرَةٍ",
@@ -2939,6 +3129,12 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "already a construct phrase: سَيَّارَةُ is in the construct state and أُجْرَة is its genitive; “my …” goes on the last word"
     }
    },
    "gender": "FEM",
@@ -3061,6 +3257,7 @@
     "plurals": [
      {
       "form": "سَيَّارَات",
+      "translit": "sayyārāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -3073,7 +3270,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "سَيَّارَةُ",
+      "translit": "sayyāratu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -3212,6 +3418,7 @@
     "plurals": [
      {
       "form": "دَرَّاجَات",
+      "translit": "darrājāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -3229,6 +3436,15 @@
       "senses": [
        "s2"
       ]
+     }
+    ],
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "دَرَّاجَةُ",
+      "translit": "darrājatu"
      }
     ]
    },
@@ -3366,6 +3582,7 @@
     "plurals": [
      {
       "form": "سُفُن",
+      "translit": "sufun",
       "kind": "broken",
       "pattern": "فُعُل",
       "declension": "triptote",
@@ -3375,6 +3592,7 @@
      },
      {
       "form": "سَفَائِن",
+      "translit": "safāʾin",
       "kind": "broken",
       "pattern": "فَعَائِل",
       "declension": "diptote",
@@ -3388,7 +3606,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "سَفِينَةُ",
+      "translit": "safīnatu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -3530,6 +3757,7 @@
     "plurals": [
      {
       "form": "قَوَارِب",
+      "translit": "qawārib",
       "kind": "broken",
       "pattern": "فَوَاعِل",
       "declension": "diptote",
@@ -3542,7 +3770,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "قَارِبُ",
+      "translit": "qāribu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -3650,7 +3887,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "If it comes from Greek κάραβος, it is a cousin of Modern Greek καράβι (ship)."
+     "Perhaps from Greek κάραβος — or a native word, “the one that comes near” the shore."
     ],
     "pitfalls": [
      "The plural قَوَارِبُ is diptote (no tanwīn): قَوَارِبُ كَثِيرَةٌ.",
@@ -3658,6 +3895,13 @@
     ],
     "subtleties": [
      "قَارِب is small (rowing, fishing); a big ship is سَفِينَة or بَاخِرَة."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "If it comes from Greek κάραβος, it is a cousin of καράβι (ship)."
+     }
     ]
    }
   },
@@ -3673,7 +3917,8 @@
     "derivedFrom": "مَشْي (walking), the maṣdar of مَشَى, in the accusative",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "formation": "adverbial accusative"
    },
    "translit": "mašyan",
    "ref": {
@@ -3749,13 +3994,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German zu Fuß and Greek με τα πόδια name the foot; Arabic says “walking” — or in full مَشْيًا عَلَى الْأَقْدَامِ, walking on the feet."
+     "German zu Fuß names the foot; Arabic says “walking” — or in full مَشْيًا عَلَى الْأَقْدَامِ, walking on the feet."
     ],
     "pitfalls": [
      "Unlike the vehicles (بِالْحَافِلَةِ, بِالسَّيَّارَةِ), “on foot” takes no بِـ: أَذْهَبُ مَشْيًا."
     ],
     "subtleties": [
      "-an is the accusative used as an adverb, as in مَسَاءً (in the evening) and شُكْرًا (thanks)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "με τα πόδια names the feet; Arabic says “walking”: مَشْيًا."
+     }
     ]
    }
   },
@@ -3775,6 +4027,7 @@
     "plurals": [
      {
       "form": "تَذَاكِر",
+      "translit": "taḏākir",
       "kind": "broken",
       "pattern": "تَفَاعِل",
       "declension": "diptote",
@@ -3788,7 +4041,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "تَذْكِرَةُ",
+      "translit": "taḏkiratu"
+     }
+    ]
    },
    "gender": "FEM",
    "translit": "taḏkira",

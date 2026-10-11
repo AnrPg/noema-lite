@@ -27,6 +27,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Kaper"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -116,11 +129,11 @@
     "phrases": [],
     "synonyms": [],
     "etymology": {
-     "text": "Ultimately from Latin capparis, from Ancient Greek κάππαρις (kápparis); German Kaper came through the Romance languages (compare Italian cappero, French câpre).",
+     "text": "Ultimately from Latin capparis, from Ancient Greek κάππαρις (kápparis); German Kaper came through the Romance languages.",
      "src": "Wiktionary (kaikki.org), English caper (the German entry has no etymology)"
     },
     "funFacts": [
-     "Greek κάππαρη (káppari) and German Kaper are the same word; Hebrew calls the caper bush צָלָף (tsalaf).",
+     "Hebrew calls the caper bush צָלָף (tsalaf).",
      "The caper bush grows out of old walls and rocks all around the Mediterranean."
     ],
     "pitfalls": [
@@ -130,7 +143,24 @@
     "subtleties": [
      "The smaller the caper, the finer it is considered; salted capers are rinsed before use."
     ],
-    "synonymsNone": "No synonym: Kapernapfel or Kapernbeere is the larger fruit of the same bush, a different product."
+    "synonymsNone": "No synonym: Kapernapfel or Kapernbeere is the larger fruit of the same bush, a different product.",
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Kaper is the same word as κάππαρη."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "Kaper is the same word as cappero."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "Kaper is the same word as câpre."
+     }
+    ]
    }
   },
   {
@@ -167,6 +197,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Horngurke"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Gurke)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -256,18 +297,30 @@
      }
     ],
     "etymology": {
-     "text": "Horn (“horn”, from Old High German horn, cognate with English horn) + Gurke (“cucumber”, borrowed from Old Polish ogórek, from Byzantine Greek ἀγγούριον).",
+     "text": "Horn (“horn”, from Old High German horn) + Gurke (“cucumber”, borrowed from Old Polish ogórek, from Byzantine Greek ἀγγούριον).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Kiwano is a trade name from New Zealand; the plant itself comes from Africa, where it grows wild in the Kalahari.",
-     "Gurke is the same word as Greek αγγούρι (angoúri) – both from Byzantine Greek ἀγγούριον."
+     "Kiwano is a trade name from New Zealand.\n\nThe plant itself comes from Africa, where it grows wild in the Kalahari.",
+     "Gurke comes from Byzantine Greek ἀγγούριον."
     ],
     "pitfalls": [
      "Shops say Kiwano, botanists Horngurke: both mean the same fruit."
     ],
     "subtleties": [
      "It is a close relative of the cucumber and the melon, and tastes mild, like cucumber with a hint of banana or lime."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Gurke is the same word as αγγούρι."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Horn is English horn."
+     }
     ]
    }
   },
@@ -305,6 +358,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Limabohne"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Bohne)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -328,7 +392,7 @@
      "neutral"
     ],
     "connotation": "neutral",
-    "feeling": "Flat, creamy, pale green or white beans; in English kitchens “butter beans”.",
+    "feeling": "Flat, creamy, pale green or white beans.",
     "senses": [
      {
       "id": "s1",
@@ -394,7 +458,7 @@
      }
     ],
     "etymology": {
-     "text": "Lima (the capital of Peru) + Bohne (“bean”, from Old High German bōna, cognate with English bean).",
+     "text": "Lima (the capital of Peru) + Bohne (“bean”, from Old High German bōna).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -405,6 +469,18 @@
     ],
     "subtleties": [
      "In Germany you find them mostly dried or tinned in international shops."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "English kitchens call them butter beans."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Bohne is related to English bean."
+     }
     ]
    }
   },
@@ -435,6 +511,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Wirsings"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -529,13 +618,30 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English and French name it after Savoy (savoy, chou de Savoie); German took its word from Italian dialect."
+     "German took its word from Italian dialect (verza)."
     ],
     "pitfalls": [
      "In Austria Kohl means Wirsing, not cabbage in general – order carefully in a Viennese restaurant."
     ],
     "subtleties": [
      "Wirsing cooks faster than white cabbage and has a milder taste."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "different",
+      "text": "English names it after Savoy (savoy cabbage).\n\nGerman Wirsing comes from a dialect word of northern Italy (verza)."
+     },
+     {
+      "for": "fr",
+      "rel": "different",
+      "text": "chou de Savoie is named after Savoy.\n\nGerman Wirsing comes from a dialect word of northern Italy (verza)."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "Wirsing comes from a northern Italian dialect word, verza."
+     }
     ]
    }
   },
@@ -573,6 +679,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Guarbohne"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Bohne)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -672,7 +789,19 @@
      "On labels you read Guarkernmehl, not Guarbohne."
     ],
     "subtleties": [
-     "The green pods are eaten young (Hindi gvār phalī); the seeds are the industrial product."
+     "The green pods are eaten young, as a vegetable in India; the seeds are the industrial product."
+    ],
+    "notes": [
+     {
+      "for": "hi",
+      "rel": "same",
+      "text": "Guar is ग्वार (gvār), borrowed from Hindi."
+     },
+     {
+      "for": "hi",
+      "rel": "same",
+      "text": "The young pods are your ग्वार फली (gvār phalī)."
+     }
     ]
    }
   },
@@ -710,6 +839,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Noriblatts"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (das Blatt)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -799,11 +939,11 @@
      }
     ],
     "etymology": {
-     "text": "Japanese 海苔 (nori) + Blatt (“leaf, sheet”, from Old High German blat, cognate with English blade).",
+     "text": "Japanese 海苔 (nori) + Blatt (“leaf, sheet”, from Old High German blat).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The British phycologist Kathleen Drew-Baker discovered the life cycle of the nori alga in 1949, which made nori farming possible; Japanese growers honour her as “Mother of the Sea”.",
+     "The British phycologist Kathleen Drew-Baker discovered the life cycle of the nori alga in 1949, which made nori farming possible.\n\nJapanese growers honour her as “Mother of the Sea”.",
      "Chinese calls it 紫菜 (zǐcài, “purple vegetable”)."
     ],
     "pitfalls": [
@@ -811,6 +951,13 @@
     ],
     "subtleties": [
      "Nori is a red alga, although the sheets look dark green or almost black."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Blatt is related to English blade."
+     }
     ]
    }
   },
@@ -848,6 +995,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Goabohne"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Bohne)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -928,11 +1086,11 @@
      {
       "word": "Flügelbohne",
       "register": "neutral",
-      "nuance": "descriptive name, as in English"
+      "nuance": "descriptive name"
      }
     ],
     "etymology": {
-     "text": "Goa (region of India) + Bohne (“bean”, from Old High German bōna, cognate with English bean).",
+     "text": "Goa (region of India) + Bohne (“bean”, from Old High German bōna).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -943,6 +1101,13 @@
     ],
     "subtleties": [
      "Rich in protein like soybeans, it is sometimes promoted as a crop for the tropics."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Bohne is related to English bean."
+     }
     ]
    }
   },
@@ -973,6 +1138,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Tomatillo"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -1073,7 +1251,7 @@
      "Gender varies: German Wikipedia uses die Tomatillo, “occasionally der Tomatillo”."
     ],
     "subtleties": [
-     "The fruit is sticky under the husk; wash it before use. Tomatillos are used green and sour, not ripe and sweet."
+     "- The fruit is sticky under the husk; wash it before use.\n- Tomatillos are used green and sour, not ripe and sweet."
     ]
    }
   },
@@ -1111,6 +1289,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Spargelbohne"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Bohne)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -1196,12 +1385,19 @@
      "Chinese 豇豆 (jiāngdòu); the plant is a form of the cowpea, the same species as the black-eyed pea."
     ],
     "pitfalls": [
-     "English “yardlong” exaggerates: most pods are 30–60 cm."
+     "Most pods are 30–60 cm long."
     ],
     "subtleties": [
      "They are cooked like green beans but are less juicy and stay firm in stir-fries."
     ],
-    "synonymsNone": "No common German synonym; Asian shops also label it with the English name yardlong bean."
+    "synonymsNone": "No common German synonym; Asian shops also label it with the English name yardlong bean.",
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "The English name yardlong exaggerates: most pods are 30–60 cm."
+     }
+    ]
    }
   },
   {
@@ -1226,6 +1422,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Romanescos"
+    ],
+    "number": "singular only",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a mass noun, month or name of a substance: no diminutive in use"
     }
    },
    "forms": {
@@ -1316,7 +1525,14 @@
      "No plural in Wiktionary: for several say mehrere Köpfe Romanesco."
     ],
     "subtleties": [
-     "Botanically it is a cauliflower, though English often calls it Romanesco broccoli."
+     "Botanically it is a cauliflower, though it is often sold as a broccoli."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English often calls it Romanesco broccoli, but botanically it is a cauliflower."
+     }
     ]
    }
   },
@@ -1354,6 +1570,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Cayennepfeffers"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (der Pfeffer)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -1461,7 +1688,7 @@
      "Pfeffer here is misleading: Cayennepfeffer is a chili (Capsicum), not black pepper (Piper)."
     ],
     "subtleties": [
-     "In everyday German Cayennepfeffer usually means the dried powder; fresh pods are called Cayennechilis or Chilischoten."
+     "In everyday German Cayennepfeffer usually means the dried powder.\n\nFresh pods are called Cayennechilis or Chilischoten."
     ]
    }
   },
@@ -1499,6 +1726,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Meerkohls"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (der Kohl)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -1624,6 +1862,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Habanero"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -1715,10 +1966,10 @@
      "On the Scoville scale habaneros reach a few hundred thousand units – roughly a hundred times a jalapeño."
     ],
     "pitfalls": [
-     "Gender varies: die Habanero (German Wikipedia, as die Chilischote) and der Habanero are both used; plural Habaneros."
+     "Gender varies: die Habanero (German Wikipedia, as die Chilischote) and der Habanero are both used.\n\nPlural Habaneros."
     ],
     "subtleties": [
-     "The heat sits mostly in the white placenta inside; the fruity aroma is the reason cooks still love it."
+     "The heat sits mostly in the white placenta inside.\n\nThe fruity aroma is the reason cooks still love it."
     ]
    }
   },
@@ -1756,6 +2007,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Wakame-Alge"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Alge)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -1894,6 +2156,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Schlangenhaargurke"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Gurke)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -1983,7 +2256,7 @@
      }
     ],
     "etymology": {
-     "text": "Schlange (“snake”, from Old High German slango) + Haar (“hair”, from Old High German hār, cognate with English hair) + Gurke (“cucumber”). The “hair” refers to the fringed flowers.",
+     "text": "Schlange (“snake”, from Old High German slango) + Haar (“hair”, from Old High German hār) + Gurke (“cucumber”). The “hair” refers to the fringed flowers.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -1994,6 +2267,13 @@
     ],
     "subtleties": [
      "It is eaten young and green; ripe fruits turn orange-red, soft and bitter."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Haar is English hair."
+     }
     ]
    }
   },
@@ -2019,6 +2299,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Kombu"
+    ],
+    "number": "singular only",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a mass noun, month or name of a substance: no diminutive in use"
     }
    },
    "forms": {
@@ -2116,6 +2409,13 @@
     ],
     "subtleties": [
      "Do not wash off the white crystals: they are the flavour (mannitol and salts), not dirt."
+    ],
+    "notes": [
+     {
+      "for": "ja",
+      "rel": "same",
+      "text": "Kombu is 昆布 (konbu)."
+     }
     ]
    }
   },
@@ -2148,6 +2448,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Meersalats"
+    ],
+    "number": "singular only",
+    "genderCue": "compound: the last part decides (der Salat)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a mass noun, month or name of a substance: no diminutive in use"
     }
    },
    "forms": {
@@ -2232,13 +2543,20 @@
      "src": "Wiktionary (kaikki.org), for the parts Meer and Salat"
     },
     "funFacts": [
-     "The Latin species name lactuca means “lettuce” – the same image as the German and English names."
+     "The Latin species name lactuca means “lettuce” – the same image as the German name."
     ],
     "pitfalls": [
      "Meersalat is an alga, not a salad – do not confuse with Meeresfrüchtesalat (seafood salad)."
     ],
     "subtleties": [
      "Used as a mass noun: no plural in practice."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "English sea lettuce has the same image as Meersalat."
+     }
     ]
    }
   },
@@ -2271,6 +2589,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Lappentangs"
+    ],
+    "number": "singular only",
+    "genderCue": "compound: the last part decides (der Tang)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a mass noun, month or name of a substance: no diminutive in use"
     }
    },
    "forms": {
@@ -2385,6 +2714,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": {
+     "none": "plural only: no singular"
+    },
+    "number": "plural only",
+    "genderCue": {
+     "none": "plural only: no gender"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "plural only: no diminutive"
     }
    },
    "forms": {
@@ -2473,10 +2815,10 @@
      "Duden has listed Edamame since 2013."
     ],
     "pitfalls": [
-     "Plural only (Duden: Pluralwort): die Edamame sind lecker. There is no singular gender; die is the plural article."
+     "Plural only (Duden: Pluralwort): die Edamame sind lecker.\n\nThere is no singular gender; die is the plural article."
     ],
     "subtleties": [
-     "Edamame are soybeans harvested unripe; the same beans left to ripen become the dry soybeans for tofu and soy sauce."
+     "Edamame are soybeans harvested unripe.\n\nThe same beans left to ripen become the dry soybeans for tofu and soy sauce."
     ]
    }
   },
@@ -2507,6 +2849,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Patissons"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -2639,6 +2994,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Hijiki-Alge"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Alge)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -2771,6 +3137,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Stängelkohls"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (der Kohl)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -2862,13 +3239,25 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German Wikipedia’s article Stängelkohl is the vegetable of Italian cime di rapa; the plant is a turnip, not a broccoli."
+     "The German Wikipedia article Stängelkohl describes the vegetable of the Apulian cime di rapa.\n\nThe plant is a turnip, not a broccoli."
     ],
     "pitfalls": [
-     "Despite the English name broccoli rabe it is no broccoli: botanically it is a form of the turnip (Brassica rapa)."
+     "It is no broccoli: botanically it is a form of the turnip (Brassica rapa)."
     ],
     "subtleties": [
      "Buds, leaves and thin stems are cooked together; blanching reduces the bitterness."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "Despite the English name broccoli rabe it is no broccoli, but a turnip."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Stängelkohl is your cime di rapa."
+     }
     ]
    }
   },
@@ -2906,6 +3295,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Spaghettikürbisses"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (der Kürbis)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -3033,6 +3433,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Zucchiniblüte"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Blüte)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -3122,13 +3533,20 @@
      "src": "Wiktionary (kaikki.org), for the parts Zucchini and Blüte"
     },
     "funFacts": [
-     "Greek κολοκυθοανθοί (stuffed with rice and herbs) and Turkish kabak çiçeği dolması are the same dish idea as Italian fiori di zucca ripieni."
+     "Stuffed zucchini flowers are a classic around the Mediterranean (fiori di zucca ripieni)."
     ],
     "pitfalls": [
      "The female flowers have a little zucchini at the base; if you pick them, there will be no zucchini."
     ],
     "subtleties": [
      "The flowers close in the afternoon; they are picked in the morning and used the same day."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "κολοκυθοανθοί are stuffed Zucchiniblüten."
+     }
     ]
    }
   },
@@ -3166,6 +3584,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Spitzkohls"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (der Kohl)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -3251,7 +3680,7 @@
      }
     ],
     "etymology": {
-     "text": "From spitz (“pointed”) + Kohl (“cabbage”). Cognate with Danish spidskål, Dutch spitskool and Swedish spetskål.",
+     "text": "From spitz (“pointed”) + Kohl (“cabbage”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -3299,6 +3728,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Maiskölbchens"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-chen, -lein: a diminutive → das (even for persons: das Mädchen)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "itself a diminutive (der Kolben → das Kölbchen)"
     }
    },
    "forms": {
@@ -3392,7 +3832,7 @@
      "src": "Wiktionary (kaikki.org), for Maiskolben and Kölbchen"
     },
     "funFacts": [
-     "Chinese 玉米笋 (yùmǐsǔn, “corn shoot”). The cobs are picked a few days after the silk appears, before the kernels develop."
+     "Chinese 玉米笋 (yùmǐsǔn, “corn shoot”).\n\nThe cobs are picked a few days after the silk appears, before the kernels develop."
     ],
     "pitfalls": [
      "-chen nouns are always neuter and do not change in the plural: das Maiskölbchen, die Maiskölbchen."
@@ -3436,6 +3876,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Eichelkürbisses"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (der Kürbis)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -3568,6 +4019,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Zuckererbse"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Erbse)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {

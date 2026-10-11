@@ -267,12 +267,12 @@
   {
    "lang": "ar",
    "fn": "fn.case.basic",
-   "note": "Arabic has three cases, marked by short vowel endings (iʿrāb); the nominative ends in -u (al-baytu, baytun), usually not written."
+   "note": "Arabic has three cases, marked by short vowel endings (iʿrāb).\n\nThe nominative ends in -u (al-baytu, baytun), usually not written."
   },
   {
    "lang": "he",
    "fn": "fn.case.basic",
-   "note": "Hebrew nouns have no cases; the role shows by word order, prepositions and et before a definite object."
+   "note": "Hebrew nouns have no cases.\n\nThe role shows by word order, prepositions and et before a definite object."
   },
   {
    "lang": "zh",
@@ -289,22 +289,22 @@
   {
    "for": "el",
    "rel": "similar",
-   "text": "Cases are familiar (ο δρόμος, τον δρόμο, του δρόμου), and the noun after είναι is nominative as in German. Greek shows the case on the noun ending as well; German mostly on the article. German has a dative, which Greek lacks."
+   "text": "Cases are familiar (ο δρόμος, τον δρόμο, του δρόμου), and the noun after είναι is nominative as in German. But:\n- Greek shows the case on the noun ending as well; German mostly on the article;\n- German has a dative, which Greek lacks."
   },
   {
    "for": "ru",
    "rel": "similar",
-   "text": "Russian has six cases and shows them on the noun ending (стол, стола, столу); German has four and shows them mostly on the article. The nominative after “to be” is the same (Это стол – Das ist ein Tisch)."
+   "text": "Russian has six cases and shows them on the noun ending (стол, стола, столу); German has four and shows them **mostly on the article**.\n\nThe nominative after “to be” is the same:\n→ Это стол – Das ist ein Tisch"
   },
   {
    "for": "es",
    "rel": "new",
-   "text": "Spanish nouns have no cases (only pronouns: yo, me, mí); German shows the case on the article: der Tisch, den Tisch, dem Tisch, des Tisches."
+   "text": "Spanish nouns have no cases (only pronouns: yo, me, mí); German shows the case on the article:\n→ der Tisch, den Tisch, dem Tisch, des Tisches"
   },
   {
    "for": "en",
    "rel": "new",
-   "text": "English shows case only in pronouns (he – him); German shows it on the article too: der Tisch – den Tisch."
+   "text": "English shows case only in pronouns (he – him); German shows it on the article too:\n→ der Tisch – den Tisch"
   },
   {
    "for": "fr",
@@ -314,7 +314,7 @@
   {
    "for": "hi",
    "rel": "different",
-   "text": "Hindi nouns have a direct and an oblique form plus postpositions (laṛkā, laṛke ko), and in the perfective past a transitive subject takes ne (laṛke ne khānā khāyā). A German subject is always nominative, in every tense: Der Junge hat gegessen."
+   "text": "Hindi nouns have a direct and an oblique form plus postpositions (laṛkā, laṛke ko), and in the perfective past a transitive subject takes ne (laṛke ne khānā khāyā).\n\nA German subject is **always nominative**, in every tense:\n→ Der Junge hat gegessen."
   },
   {
    "for": "fa",
@@ -324,57 +324,57 @@
   {
    "for": "mr",
    "rel": "different",
-   "text": "Marathi marks case with endings and postpositions on the noun, and in the perfective past a transitive subject takes -ne. A German subject is always in the nominative, whatever the tense."
+   "text": "Marathi marks case with endings and postpositions on the noun, and in the perfective past a transitive subject takes -ne.\n\nA German subject is **always in the nominative**, whatever the tense."
   },
   {
    "for": "ar",
    "rel": "similar",
-   "text": "Arabic nominative -u, accusative -a, genitive -i (al-kitābu, al-kitāba, al-kitābi) are the same idea; German has a fourth case, the dative, and shows the case mostly on the article. In a nominal sentence both nouns are nominative in Arabic too."
+   "text": "Arabic nominative -u, accusative -a, genitive -i (al-kitābu, al-kitāba, al-kitābi) are the same idea. But:\n- German has a fourth case, the dative;\n- it shows the case mostly on the article.\n\nIn a nominal sentence both nouns are nominative in Arabic too."
   },
   {
    "for": "he",
    "rel": "new",
-   "text": "Hebrew nouns have no cases (only et before a definite object); German shows four cases on the article."
+   "text": "Hebrew nouns have no cases (only et before a definite object).\n\nGerman shows four cases on the article."
   },
   {
    "for": "tr",
    "rel": "similar",
-   "text": "Turkish cases are suffixes on the noun (ev, evi, eve, evde, evden, evin), and the nominative has none (yalın hal); German marks even the nominative, on der / ein."
+   "text": "Turkish cases are suffixes on the noun, and the nominative has none (yalın hal):\n→ ev, evi, eve, evde, evden, evin\n\nGerman marks even the nominative, on der / ein."
   },
   {
    "for": "ja",
    "rel": "different",
-   "text": "Japanese marks roles with particles after the noun (ga, o, ni); German changes the article. The topic (wa) is not a case: a German subject is nominative wherever it stands."
+   "text": "Japanese marks roles with particles after the noun (ga, o, ni); German changes the article.\n\nThe topic (wa) is not a case: a German subject is nominative wherever it stands."
   },
   {
    "for": "ko",
    "rel": "different",
-   "text": "Korean marks the subject with i / ga, the object with eul / reul and the topic with eun / neun; German changes the article instead, and has no topic marker."
+   "text": "Korean marks the subject with i / ga, the object with eul / reul and the topic with eun / neun.\n\nGerman changes the article instead, and has no topic marker."
   },
   {
    "for": "fi",
    "rel": "similar",
-   "text": "Finnish has fifteen cases on the noun, German four on the article. The predicate noun of olla is nominative in both (Hän on opettaja – Er ist Lehrer)."
+   "text": "Finnish has fifteen cases on the noun, German four on the article.\n\nThe predicate noun of olla is nominative in both:\n→ Hän on opettaja – Er ist Lehrer"
   },
   {
    "for": "hu",
    "rel": "similar",
-   "text": "Many case suffixes, the nominative without any; German has only four cases, shown mostly on the article (der, den, dem, des)."
+   "text": "Many case suffixes, the nominative without any.\n\nGerman has only four cases, shown mostly on the article (der, den, dem, des)."
   },
   {
    "for": "sw",
    "rel": "new",
-   "text": "Swahili has no cases: word order and the verb prefixes show who does what. German changes the article for the role: der Mann, den Mann."
+   "text": "Swahili has no cases: word order and the verb prefixes show who does what.\n\nGerman changes the article for the role:\n→ der Mann, den Mann"
   },
   {
    "for": "lg",
    "rel": "new",
-   "text": "Luganda nouns have no case forms; roles show in word order and the verb. German shows them on the article."
+   "text": "Luganda nouns have no case forms; roles show in word order and the verb.\n\nGerman shows them on the article."
   },
   {
    "for": "zh",
    "rel": "new",
-   "text": "Chinese has no cases; word order shows the roles. German changes the article and can therefore move the object first (Den Tisch kaufe ich)."
+   "text": "Chinese has no cases; word order shows the roles.\n\nGerman changes the article and can therefore move the object first:\n→ Den Tisch kaufe ich"
   },
   {
    "for": "vi",
@@ -384,7 +384,47 @@
   {
    "for": "iu",
    "rel": "different",
-   "text": "Inuktitut is ergative: the subject of a transitive verb takes its own case, while the subject of an intransitive verb looks like an object. German puts every subject in the nominative: Der Mann schläft. Der Mann kauft den Tisch."
+   "text": "Inuktitut is ergative: the subject of a transitive verb takes its own case, while the subject of an intransitive verb looks like an object.\n\nGerman puts every subject in the nominative:\n→ Der Mann schläft. Der Mann kauft den Tisch."
+  },
+  {
+   "for": "it",
+   "rel": "new",
+   "text": "Italian nouns have no cases; only pronouns change (io – me – mi).\n\nGerman shows the case on the article:\n→ der Tisch – den Tisch – dem Tisch – des Tisches\n\nAs after essere, the noun after sein keeps the subject form:\n→ Er ist ein Freund."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Albanian has five cases and marks them on the noun (djali, djalin, djalit); German has four and marks them **mostly on the article**:\n→ der Junge, den Jungen, dem Jungen, des Jungen\n\nIn both the dative and the genitive can look alike: djalit – der Frau."
+  },
+  {
+   "for": "pt",
+   "rel": "new",
+   "text": "Portuguese nouns have no cases; only pronouns do (eu – me – mim).\n\nGerman shows the case on the article:\n→ der Tisch – den Tisch – dem Tisch – des Tisches\n\nAs after ser, the noun after sein keeps the subject form:\n→ Er ist ein Freund."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your language has cases, the idea is familiar: German has four and shows them **mostly on the article**, while the noun itself changes little.\n→ der Tisch, den Tisch, dem Tisch, des Tisches"
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If your cases are suffixes on the noun, German moves most of the signal to the article in front:\n→ der Tisch – den Tisch – dem Tisch\n\n- One article form carries case, gender and number together.\n- The nominative is marked too: der, ein."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "new",
+   "text": "If word order alone shows who does what, cases are new: German changes the article for the role (der Mann – den Mann).\n\nThat lets it put the object first without changing the meaning:\n→ Den Mann sehe ich."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If your language shows who does what on the verb, German shows it on the article:\n→ der Mann (subject) – den Mann (object)\n\nEvery subject is nominative, whether the verb has an object or not."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "new",
+   "text": "If your language marks the role of a noun only with an object marker or a preposition, German cases are new:\n- the article changes for the role (der Tisch, den Tisch, dem Tisch);\n- the owner has a case of its own: das Haus des Lehrers."
   }
  ]
 }

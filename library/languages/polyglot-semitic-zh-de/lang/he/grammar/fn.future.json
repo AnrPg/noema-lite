@@ -15,7 +15,7 @@
    "value": "none"
   }
  ],
- "summary": "The Hebrew future (עָתִיד) marks the person mostly with prefixes: אֶ־ “I”, תִּ־ “you (m.)” and “she”, תִּ…־ִי “you (f.)”, יִ־ “he”, נִ־ “we”, תִּ…־וּ “you (pl.)”, יִ…־וּ “they”: אֶזְכֹּר, תִּזְכֹּר, תִּזְכְּרִי, יִזְכֹּר, תִּזְכֹּר, נִזְכֹּר, תִּזְכְּרוּ, יִזְכְּרוּ. One form serves both “you (m.)” and “she” (תִּזְכֹּר). The prefix vowel and the stem vowels depend on the pattern: paʿal יִזְכֹּר / יִגְדַּל / יִשְׁכַּח, hollow יָקוּם, piʿel יְסַיֵּם, hifʿil יַתְחִיל, nifʿal יֵרָדֵם, hitpaʿel יִתְלַבֵּשׁ. As in the past, the 1st and 2nd person often drop the pronoun (מָחָר אֶתְעוֹרֵר בְּשֵׁשׁ). The future is also the everyday form of requests and, after אַל, of prohibitions (אַל תִּשְׁכַּח! — lesson 13), and after שֶׁ it is the verb of wishes and requests: אֲנִי רוֹצֶה שֶׁתְּבַקֵּר אוֹתָנוּ “I want you to visit us”. Plans that are already fixed are often in the present (מָחָר אֲנַחְנוּ נוֹסְעִים), and colloquial הוֹלֵךְ + infinitive means “going to”. The feminine plural forms in ־נָה (תִּזְכֹּרְנָה) are literary; speech uses the masculine plural for women too.",
+ "summary": "The Hebrew future (עָתִיד) marks the person mostly with prefixes: אֶ־ “I”, תִּ־ “you (m.)” and “she”, תִּ…־ִי “you (f.)”, יִ־ “he”, נִ־ “we”, תִּ…־וּ “you (pl.)”, יִ…־וּ “they”: אֶזְכֹּר, תִּזְכֹּר, תִּזְכְּרִי, יִזְכֹּר, תִּזְכֹּר, נִזְכֹּר, תִּזְכְּרוּ, יִזְכְּרוּ. One form serves both “you (m.)” and “she” (תִּזְכֹּר). The prefix vowel and the stem vowels depend on the pattern: paʿal יִזְכֹּר / יִגְדַּל / יִשְׁכַּח, hollow יָקוּם, piʿel יְסַיֵּם, hifʿil יַתְחִיל, nifʿal יֵרָדֵם, hitpaʿel יִתְלַבֵּשׁ. As in the past, the 1st and 2nd person often drop the pronoun (מָחָר אֶתְעוֹרֵר בְּשֵׁשׁ). The future is also the everyday form of requests and, after אַל, of prohibitions (אַל תִּשְׁכַּח! — lesson 13), and after שֶׁ it is the verb of wishes and requests: אֲנִי רוֹצֶה שֶׁתְּבַקֵּר אוֹתָנוּ “I want you to visit us”. Plans that are already fixed are often in the present (מָחָר אֲנַחְנוּ נוֹסְעִים), and colloquial הוֹלֵךְ + infinitive (“go” + infinitive) announces an intention. The feminine plural forms in ־נָה (תִּזְכֹּרְנָה) are literary; speech uses the masculine plural for women too.",
  "blocks": [
   {
    "t": "table",
@@ -189,7 +189,7 @@
    "t": "callout",
    "kind": "tip",
    "title": "Three ways to talk about tomorrow",
-   "text": "The future form: מָחָר נְבַקֵּר אֶת סָבְתָא. The present with a word of time, for fixed plans: מָחָר אֲנַחְנוּ נוֹסְעִים. Colloquial הוֹלֵךְ + infinitive, “going to”: אֲנִי הוֹלֵךְ לְהַזְמִין חֶדֶר."
+   "text": "The future form: מָחָר נְבַקֵּר אֶת סָבְתָא. The present with a word of time, for fixed plans: מָחָר אֲנַחְנוּ נוֹסְעִים. Colloquial הוֹלֵךְ + infinitive, for an intention: אֲנִי הוֹלֵךְ לְהַזְמִין חֶדֶר."
   },
   {
    "t": "callout",
@@ -363,7 +363,7 @@
   {
    "for": "el",
    "rel": "different",
-   "text": "Greek builds the future with θα + verb and chooses an aspect (θα κλείσω / θα κλείνω); Hebrew has one future form with person prefixes: אַזְמִין “I will book”."
+   "text": "Greek builds the future with θα + verb and chooses an aspect (θα κλείσω / θα κλείνω); Hebrew has one future form with person prefixes:\n→ אַזְמִין “I will book”"
   },
   {
    "for": "ru",
@@ -378,7 +378,7 @@
   {
    "for": "en",
    "rel": "different",
-   "text": "No “will”: the future is one word, with the person in front — אַזְמִין “I will book”, נְבַקֵּר “we will visit”. הוֹלֵךְ + infinitive is close to “going to”."
+   "text": "No “will”: the future is one word, with the person in front — אַזְמִין “I will book”, נְבַקֵּר “we will visit”.\n\nהוֹלֵךְ + infinitive is close to “going to”."
   },
   {
    "for": "fr",
@@ -403,7 +403,7 @@
   {
    "for": "mr",
    "rel": "similar",
-   "text": "Marathi too has a one-word future with person endings (मी जाईन, तो जाईल); Hebrew marks the person mostly with prefixes: אֶזְכֹּר, יִזְכֹּר."
+   "text": "Marathi too has a one-word future with person endings (मी जाईन, तो जाईल); Hebrew marks the person mostly with prefixes:\n→ אֶזְכֹּר, יִזְכֹּר"
   },
   {
    "for": "ar",
@@ -413,12 +413,12 @@
   {
    "for": "tr",
    "rel": "different",
-   "text": "Turkish puts the future suffix and the person at the end (rezervasyon yapacağım); Hebrew puts most of the person at the beginning: אַזְמִין."
+   "text": "Turkish puts the future suffix and the person at the end (rezervasyon yapacağım); Hebrew puts most of the person at the beginning:\n→ אַזְמִין"
   },
   {
    "for": "ja",
    "rel": "different",
-   "text": "Japanese has no future form — the non-past and a time word (明日予約する); Hebrew must use the future form: מָחָר אַזְמִין."
+   "text": "Japanese has no future form — the non-past and a time word (明日予約する); Hebrew must use the future form:\n→ מָחָר אַזְמִין"
   },
   {
    "for": "ko",
@@ -438,12 +438,12 @@
   {
    "for": "sw",
    "rel": "similar",
-   "text": "Swahili, too, puts the person in front of the verb, with the future marker -ta- (nitakumbuka “I will remember”); Hebrew fuses person and future into one prefix: אֶזְכֹּר."
+   "text": "Swahili, too, puts the person in front of the verb, with the future marker -ta- (nitakumbuka “I will remember”); Hebrew fuses person and future into one prefix:\n→ אֶזְכֹּר"
   },
   {
    "for": "zh",
    "rel": "different",
-   "text": "Chinese leaves the verb unchanged and adds 要 / 会 / 打算; Hebrew changes the verb itself: אֶזְכֹּר “I will remember”."
+   "text": "Chinese leaves the verb unchanged and adds 要 / 会 / 打算; Hebrew changes the verb itself:\n→ אֶזְכֹּר “I will remember”"
   },
   {
    "for": "vi",
@@ -453,7 +453,47 @@
   {
    "for": "iu",
    "rel": "different",
-   "text": "Inuktitut adds a future suffix inside one long verb word; Hebrew marks the future with a prefix that is also the person: נְבַקֵּר."
+   "text": "Inuktitut adds a future suffix inside one long verb word; Hebrew marks the future with a prefix that is also the person:\n→ נְבַקֵּר"
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Like the Italian futuro (prenoterò), the Hebrew future is one word — אַזְמִין “I will book” — but the person is shown mostly by a prefix (אֶ־, תִּ־, יִ־, נִ־).\n\nAs in Italian, the present also serves for fixed plans:\n→ מָחָר אֲנַחְנוּ נוֹסְעִים “domani partiamo”"
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "Like reservarei and vou reservar, Hebrew has a one-word future (אַזְמִין) and a colloquial “go” + infinitive (אֲנִי הוֹלֵךְ לְהַזְמִין); but the person is marked at the front of the word:\n→ אַזְמִין, תַּזְמִין, נַזְמִין"
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian builds the future with do të + the subjunctive (do të shkoj); Hebrew has a one-word future with person prefixes:\n→ אֵלֵךְ “I will go”, נֵלֵךְ “we will go”"
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your future is an ending or an auxiliary, note that Hebrew marks the person mostly at the start of the word — אֶזְכֹּר, תִּזְכֹּר, יִזְכֹּר, נִזְכֹּר — and that one form serves both “you (m.)” and “she”."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If your language stacks a future suffix and a person suffix at the end of the verb, Hebrew puts the person in front: אַזְמִין “I will book”, נַזְמִין “we will book” — with no separate future marker."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If your language adds a word for “will” before an unchanged verb, Hebrew changes the verb itself:\n→ אֶזְכֹּר “I will remember”, תִּזְכְּרִי “you (f.) will remember”"
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If your language marks the future with an affix inside one long verb word, Hebrew uses a shorter word with the person in front (אַזְמִין “I will book”); the object stays a separate word."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "The prefix conjugation (ʔ- t- y- n- for I, you / she, he, we) is Semitic heritage.\n\nIn Hebrew it is the future itself and needs no extra future particle:\n→ אֶזְכֹּר “I will remember”"
   }
  ]
 }

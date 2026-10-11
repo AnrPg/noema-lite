@@ -103,7 +103,8 @@
     "subtleties": [
      "Non-human plurals take the feminine singular: هٰذِهِ جَزَرَاتٌ (these are carrots); هٰؤُلَاءِ is only for people."
     ]
-   }
+   },
+   "features": {}
   },
   {
    "id": "ar:dhalika",
@@ -221,7 +222,8 @@
     "subtleties": [
      "Things in the plural take the feminine singular: تِلْكَ الْكُتُبُ (those books); أُولٰئِكَ is for people."
     ]
-   }
+   },
+   "features": {}
   },
   {
    "id": "ar:haulai",
@@ -304,7 +306,8 @@
     "subtleties": [
      "The same word serves men and women: هٰؤُلَاءِ الطَّالِبَاتُ (these female students)."
     ]
-   }
+   },
+   "features": {}
   },
   {
    "id": "ar:ulaika",
@@ -390,7 +393,8 @@
     "subtleties": [
      "Before a definite predicate a pronoun is inserted to keep it a sentence: أُولٰئِكَ هُمُ الطُّلَّابُ = those are the students (not “those students”)."
     ]
-   }
+   },
+   "features": {}
   },
   {
    "id": "ar:huna",
@@ -408,7 +412,8 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "formation": "indeclinable particle"
    },
    "translit": "hunā",
    "ref": {
@@ -542,7 +547,8 @@
     "derivedFrom": "هُنَا + ـكَ (the ending of distance)",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "formation": "indeclinable particle"
    },
    "contrasts": [
     {

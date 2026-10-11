@@ -244,7 +244,7 @@
   {
    "lang": "he",
    "fn": "fn.have",
-   "note": "Hebrew has no “to have” either: יֵשׁ לִי (yesh li, “there is to me”) — with the preposition “to”, the twin of Arabic لِي."
+   "note": "Hebrew has no “to have” either:\n→ יֵשׁ לִי (yesh li, “there is to me”)\n\nIt uses the preposition “to”, the twin of Arabic لِي."
   },
   {
    "lang": "de",
@@ -276,12 +276,12 @@
   {
    "for": "ru",
    "rel": "same",
-   "text": "Russian builds “to have” the same way: у меня есть = عِنْدِي, “at me (is)”, and the thing owned is the subject in both (у меня есть брат ≈ عِنْدِي أَخٌ)."
+   "text": "Russian builds “to have” the same way — у меня есть = عِنْدِي, “at me (is)” — and the thing owned is the subject in both:\n→ у меня есть брат ≈ عِنْدِي أَخٌ"
   },
   {
    "for": "tr",
    "rel": "similar",
-   "text": "Turkish says kitabım var (“my book exists”) or bende var (“at me there is”); Arabic says عِنْدِي كِتَابٌ, “at me (is) a book”, with the thing owned as the subject."
+   "text": "Turkish says kitabım var (“my book exists”) or bende var (“at me there is”).\n\nArabic says “at me (is) a book”, with the thing owned as the subject:\n→ عِنْدِي كِتَابٌ"
   },
   {
    "for": "fi",
@@ -296,7 +296,7 @@
   {
    "for": "hi",
    "rel": "same",
-   "text": "Hindi मेरे पास किताब है, “near me (is) a book”, is the same idea as عِنْدِي كِتَابٌ; for relatives Hindi says मेरा एक भाई है, close to Arabic لِي أَخٌ."
+   "text": "Hindi “near me (is) a book” is the same idea:\n→ मेरे पास किताब है — عِنْدِي كِتَابٌ\n\nFor relatives Hindi says मेरा एक भाई है, close to Arabic لِي أَخٌ."
   },
   {
    "for": "mr",
@@ -306,17 +306,17 @@
   {
    "for": "el",
    "rel": "different",
-   "text": "Greek uses the verb έχω with an accusative object (έχω έναν αδερφό); Arabic has no verb — عِنْدِي أَخٌ — and the brother is nominative."
+   "text": "Greek uses the verb έχω with an accusative object (έχω έναν αδερφό).\n\nArabic **has no verb**, and the brother is nominative:\n→ عِنْدِي أَخٌ"
   },
   {
    "for": "es",
    "rel": "different",
-   "text": "Spanish tengo un hermano is a verb with an object; Arabic says عِنْدِي أَخٌ — a preposition with an ending, and the brother is the subject."
+   "text": "Spanish tengo un hermano is a verb with an object. Arabic uses a preposition with an ending, and **the brother is the subject**:\n→ عِنْدِي أَخٌ"
   },
   {
    "for": "en",
    "rel": "different",
-   "text": "English “have” is a verb with an object; Arabic says “at me (is) a brother”, عِنْدِي أَخٌ — so the past is كَانَ عِنْدِي and the negative لَيْسَ عِنْدِي."
+   "text": "English “have” is a verb with an object; Arabic says “at me (is) a brother”:\n→ عِنْدِي أَخٌ\n\nSo the past is كَانَ عِنْدِي and the negative لَيْسَ عِنْدِي."
   },
   {
    "for": "fr",
@@ -357,6 +357,56 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut adds a suffix meaning “have” (-qaq-) to the noun and makes it a verb; Arabic puts the owner after a preposition: عِنْدِي كِتَابٌ."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German haben is a verb with an accusative object (ich habe einen Bruder). Arabic **has no verb**:\n→ عِنْدِي أَخٌ, “at me (is) a brother”\n\nSo:\n- the brother is nominative;\n- the past is كَانَ عِنْدِي;\n- the negative is لَيْسَ عِنْدِي."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese has a verb, 有 (我有书, negated 没有). Arabic **has none**:\n→ عِنْدِي كِتَابٌ, “at me (is) a book”\n\nIt is negated with لَيْسَ — لَيْسَ عِنْدِي كِتَابٌ — and put in the past with كَانَ."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian avere is a verb with an object (ho un fratello).\n\nArabic uses a preposition with an ending, like da me, “at my place” — and **the brother is the subject**:\n→ عِنْدِي أَخٌ"
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian kam is a verb with an object (kam një vëlla). Arabic **has no verb**:\n→ عِنْدِي أَخٌ, “at me (is) a brother”\n\nSo the past is كَانَ عِنْدِي and the negative لَيْسَ عِنْدِي, not a form of “have”."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese ter is a verb with an object (tenho um irmão). Arabic says “at me (is) a brother”:\n→ عِنْدِي أَخٌ\n\nThe brother is the subject, and “I had” is كَانَ عِنْدِي."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your language has a verb “have”, translate it with a place: **عِنْدِي = “at me”**.\n- The thing owned is the subject, in the nominative.\n- The tense is carried by كَانَ."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If you say “I have” as “at me (there is)” or “my … exists”, Arabic is the same idea: a preposition with a pronoun ending + the thing as the subject.\n→ عِنْدِي كِتَابٌ"
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If your language has a verb “have” that also means “there is”, note that Arabic:\n- uses a preposition instead: عِنْدِي, لِي, مَعِي;\n- says “there is” differently: with هُنَاكَ or the place first."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If possession in your language is a suffix on the noun or the verb, Arabic uses a separate preposition with a pronoun ending:\n→ عِنْدِي, عِنْدَكَ, عِنْدَهُ"
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "If your language is Semitic, “have” without a verb is familiar — a preposition with a pronoun. Arabic uses:\n- عِنْدَ most;\n- لِي for relatives;\n- مَعِي for what you carry."
   }
  ]
 }

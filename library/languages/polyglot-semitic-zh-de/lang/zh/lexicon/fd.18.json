@@ -102,14 +102,26 @@
      "src": "morphemes: 但 + 是 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "但 alone is the written ‘but’: 我想去，但没有时间."
+     "但 alone is the written ‘but’:\n→ 我想去，但没有时间."
     ],
     "pitfalls": [
      "It opens its clause, before the subject: …，但是我… — never at the end.",
-     "After 虽然 ‘although’ Chinese expects 但是 in the second clause — where English and German forbid ‘although … but’."
+     "After 虽然 ‘although’ Chinese expects 但是 in the second clause — where German forbids obwohl … aber."
     ],
     "subtleties": [
-     "但是 often comes with 还是 or 也 later in the clause: 但是我还是去了 ‘but I went anyway’."
+     "但是 often comes with 还是 or 也 later in the clause:\n→ 但是我还是去了 ‘but I went anyway’."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English forbids ‘although … but’; Chinese requires it:\n→ 虽然…但是…."
+     },
+     {
+      "for": "fr",
+      "rel": "trap",
+      "text": "French forbids bien que … mais; Chinese requires 虽然…但是…."
+     }
     ]
    },
    "features": {
@@ -121,7 +133,16 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "joins": [
+     "clauses"
+    ]
    }
   },
   {
@@ -225,7 +246,7 @@
      "src": "morphemes: 可 + 是 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "可 alone is a strong spoken intensifier: 这可不行 ‘that really won’t do’."
+     "可 alone is a strong spoken intensifier:\n→ 这可不行 ‘that really won’t do’."
     ],
     "pitfalls": [
      "It opens its clause, before the subject: …，但是我… — never at the end.",
@@ -244,7 +265,16 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "joins": [
+     "clauses"
+    ]
    }
   },
   {
@@ -352,14 +382,21 @@
      "src": "morphemes: 因 + 为 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "A Chinese reason-and-result sentence can mark both halves: 因为…所以… ‘because…, therefore…’ — natural in Chinese, clumsy in English."
+     "A Chinese reason-and-result sentence can mark both halves: 因为…所以… ‘because…, therefore…’ — natural and very common in Chinese."
     ],
     "pitfalls": [
-     "The usual order is reason first: 因为…，所以…. 因为 after the main clause (我不去，因为…) is common in speech, but then 所以 disappears.",
+     "The usual order is reason first:\n→ 因为…，所以….\n\n因为 after the main clause (我不去，因为…) is common in speech, but then 所以 disappears.",
      "Pinyin: yīnwèi (mainland; often yīnwei in speech), yīnwéi in Taiwan."
     ],
     "subtleties": [
      "The word order inside the 因为-clause does not change (unlike German weil, which sends the verb to the end)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "different",
+      "text": "In English ‘because …, so …’ sounds clumsy; in Chinese it is normal."
+     }
     ]
    },
    "features": {
@@ -372,7 +409,17 @@
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
     },
-    "pair": "所以"
+    "pair": "所以",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "position": [
+     "before the subject",
+     "after the subject"
+    ]
    }
   },
   {
@@ -499,7 +546,16 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "joins": [
+     "clauses"
+    ]
    }
   },
   {
@@ -607,13 +663,20 @@
      "src": "morphemes: 然 + 后 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "In casual speech 然后 is a filler, like English ‘and then… and then…’ or ‘so…’."
+     "In casual speech 然后 is a filler that strings a story together:\n→ 然后…然后…."
     ],
     "pitfalls": [
      "然后 ≠ 后来: 然后 joins steps (plans, instructions, stories); 后来 ‘later on’ is only for past events and cannot follow 先."
     ],
     "subtleties": [
-     "先 ‘first’ often prepares 然后: 先…然后… ‘first …, then …’."
+     "先 ‘first’ often prepares 然后:\n→ 先…然后… ‘first …, then …’."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Like English ‘and then… and then…’ or ‘so…’."
+     }
     ]
    },
    "features": {
@@ -625,7 +688,16 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
-    }
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "joins": [
+     "clauses"
+    ]
    }
   },
   {
@@ -732,11 +804,11 @@
      "A Chinese ‘if’ can be said twice: 如果…的话 — at the start and at the end of the condition."
     ],
     "pitfalls": [
-     "The condition comes first; the result clause follows, often with 就 after its subject: 如果你饿了，我们就吃饭.",
+     "The condition comes first; the result clause follows, often with 就 after its subject:\n→ 如果你饿了，我们就吃饭.",
      "No special verb form: Chinese uses the same 如果 for real and unreal conditions (if I were you …)."
     ],
     "subtleties": [
-     "如果 can stand after the subject: 你如果饿了，就吃吧."
+     "如果 can stand after the subject:\n→ 你如果饿了，就吃吧."
     ]
    },
    "features": {
@@ -749,7 +821,17 @@
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
     },
-    "pair": "就"
+    "pair": "就",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "position": [
+     "before the subject",
+     "after the subject"
+    ]
    }
   },
   {
@@ -843,10 +925,10 @@
      "src": "morphemes: 的 + 话 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "In speech 的话 alone is enough for ‘if’: 你累的话 ‘if you’re tired’ — no 如果 needed."
+     "In speech 的话 alone is enough for ‘if’:\n→ 你累的话 ‘if you’re tired’ — no 如果 needed."
     ],
     "pitfalls": [
-     "的话 goes at the END of the condition. 他的话 ‘his words’ (的 + the noun 话) is something else."
+     "的话 goes at the END of the condition.\n\n他的话 ‘his words’ (的 + the noun 话) is something else."
     ],
     "subtleties": [
      "Pronounced dehuà: a toneless de and a 4th-tone huà."
@@ -864,7 +946,11 @@
     },
     "position": [
      "clauseFinal"
-    ]
+    ],
+    "neutralTone": "的 de is toneless, as the particle always is",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    }
    }
   },
   {
@@ -956,13 +1042,30 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Chinese marks a concession at both ends: 虽然…但是… — English ‘although … but’ is a mistake, Chinese without the second word sounds unfinished."
+     "Chinese marks a concession at both ends: 虽然…但是… — without the second word the sentence sounds unfinished."
     ],
     "pitfalls": [
-     "Greek, English and German speakers drop the 但是 / 可是 by habit — keep it: 虽然很贵，但是很好."
+     "Learners whose language forbids ‘although … but’ drop the 但是 / 可是 by habit — keep it:\n→ 虽然很贵，但是很好."
     ],
     "subtleties": [
-     "When both clauses share the subject, 虽然 often stands after it: 他虽然很累，可是很高兴."
+     "When both clauses share the subject, 虽然 often stands after it:\n→ 他虽然很累，可是很高兴."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English ‘although … but’ is a mistake; Chinese 虽然…但是 is right."
+     },
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "Greek αν και … αλλά sounds wrong; Chinese 虽然…但是 is right."
+     },
+     {
+      "for": "de",
+      "rel": "trap",
+      "text": "German obwohl … aber is wrong; Chinese 虽然…但是 is right."
+     }
     ]
    },
    "features": {
@@ -975,7 +1078,17 @@
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
     },
-    "pair": "但是 / 可是"
+    "pair": "但是 / 可是",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "position": [
+     "before the subject",
+     "after the subject"
+    ]
    }
   }
  ],

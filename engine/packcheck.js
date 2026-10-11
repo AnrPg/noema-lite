@@ -1,8 +1,12 @@
 /* noema-lite — pack checks shared by the app (in-browser generators) and the Claude connector (cloud/mcp).
    checkPack(p, expectId, { strict }) → { errors, warnings, counts }
    strict = also check every exercise's own fields (used for packs generated in the browser, where nothing
-   else validated them; the Python validator in the skill is the full check for skill-built packs). */
+   else validated them; the Python validator in the skill is the full check for skill-built packs).
+   i18n (docs/i18n.md): every message here stays English — they are diagnostics with the pack's own field names, read by
+   the AI that repairs its chapter (engine/packgen.js), by Claude through the connector, and by the learner only as the
+   technical detail after a translated sentence (“The pack has 3 error(s): …”, engine/curjobs.js, engine/packgen.js). */
 (function (root) {
+  /* i18n-ignore-start */
   const TYPES = new Set(['mcq', 'tf', 'odd', 'order', 'match', 'bucket', 'cloze', 'spotbug', 'calc', 'scenario', 'free', 'write', 'img_hotspot', 'img_sequence', 'img_reveal', 'img_drag', 'img_label', 'img_select', 'img_occlusion']);
   const BLOCKS = new Set(['p', 'list', 'code', 'diagram', 'table', 'callout', 'compare', 'flow', 'reveal', 'ask', 'terms', 'figure']);
   const ID_RE = /^[a-z0-9][a-z0-9-]{1,60}$/;
@@ -51,6 +55,50 @@
         }
     }
     return E;
+  }
+
+  /* ---- a pack in several languages (pack schema v2, tools/CONTENT_SPEC.md "Packs in several languages"): optional, additive ---- */
+  const LOCALE_RE = /^[a-z]{2,3}(-[A-Z][a-z]{3})?(-(?:[A-Z]{2}|\d{3}))?$/;
+  const I18N_TEXT = ['title', 'appTitle', 'description', 'searchExamples'], I18N_OBJ = ['hero', 'tutor'];
+  /** What a translated exercise must keep (only the words may change): the type, section, picture and everything that decides the answer. */
+  const shape = e => JSON.stringify([e.type, e.section, e.media || null, e.answer ?? null, e.targets || null, e.bugs || null, e.grid || null,
+    ...['options', 'items', 'pairs', 'buckets', 'lines', 'steps'].map(k => Array.isArray(e[k]) ? e[k].length : null),
+    e.type === 'bucket' ? (e.items || []).map(x => x && x.bucket) : null, e.type === 'scenario' ? (e.steps || []).map(st => (st.options || []).map(o => !!o.ok)) : null]);
+  function checkI18n(p, chapters, E, W) {
+    const s = p.subject || {}, own = s.language || 'en';
+    const locOK = (where, loc) => { if (!LOCALE_RE.test(loc)) { E.push(`${where}: "${loc}" is not a locale code (e.g. el, fr, pt-PT, zh-Hant)`); return false; } if (loc === own) { E.push(`${where}: "${loc}" is the pack's own language`); return false; } return true; };
+    if (s.i18n != null) {
+      if (typeof s.i18n !== 'object' || Array.isArray(s.i18n)) E.push('subject.i18n must be an object {locale: {title, description, …}}');
+      else for (const [loc, m] of Object.entries(s.i18n)) {
+        const where = `subject.i18n.${loc}`; if (!locOK(where, loc)) continue;
+        if (!m || typeof m !== 'object') { E.push(`${where} must be an object`); continue; }
+        for (const [k, v] of Object.entries(m)) {
+          if (I18N_TEXT.includes(k)) { if (!isStr(v)) E.push(`${where}.${k} must be a non-empty string`); }
+          else if (I18N_OBJ.includes(k)) { if (!v || typeof v !== 'object' || Object.values(v).some(x => typeof x !== 'string')) E.push(`${where}.${k} must be an object of strings like subject.${k}`); }
+          else E.push(`${where}.${k}: unknown field (allowed: ${[...I18N_TEXT, ...I18N_OBJ].join(', ')})`);
+        }
+      }
+    }
+    if (p.translations == null) return;
+    if (typeof p.translations !== 'object' || Array.isArray(p.translations)) { E.push('translations must be an object {locale: {chapters: [...]}}'); return; }
+    const byId = new Map(chapters.map(c => [c.id, c]));
+    for (const [loc, t] of Object.entries(p.translations)) {
+      const where = `translations.${loc}`; if (!locOK(where, loc)) continue;
+      if (!t || !Array.isArray(t.chapters)) { E.push(`${where}.chapters must be a list of chapters`); continue; }
+      if (!(s.i18n && s.i18n[loc])) W.push(`${where}: add subject.i18n.${loc} (title, description) so the picker shows the translated name`);
+      for (const c of t.chapters) {
+        const src = byId.get(c && c.id); if (!src) { E.push(`${where}: chapter "${c && c.id}" is not a chapter of the pack`); continue; }
+        const ids = (x, k) => (x[k] || []).map(y => y && y.id);
+        if (ids(c, 'sections').join() !== ids(src, 'sections').join()) E.push(`${where}/${c.id}: sections must be the source's (${ids(src, 'sections').join(', ')}), same order`);
+        for (const k of ['exercises', 'flashcards', 'debug']) {
+          const a = new Set(ids(src, k)), b = new Set(ids(c, k)), miss = [...a].filter(x => !b.has(x)), extra = [...b].filter(x => !a.has(x));
+          if (miss.length) E.push(`${where}/${c.id}: ${k} missing: ${miss.slice(0, 8).join(', ')}`);
+          if (extra.length) E.push(`${where}/${c.id}: ${k} not in the source: ${extra.slice(0, 8).join(', ')}`);
+        }
+        const se = new Map((src.exercises || []).map(e => [e.id, e]));
+        for (const e of c.exercises || []) if (se.has(e.id) && shape(e) !== shape(se.get(e.id))) E.push(`${where}/${e.id}: type, section, picture or answer differs from the source (only the words may change)`);
+      }
+    }
   }
 
   function checkPack(p, expectId, { strict = false } = {}) {
@@ -113,8 +161,10 @@
       if (strict) for (const f of c.flashcards || []) if (!isStr(f.q) || !isStr(f.a)) { E.push(`${c.id}: a flashcard needs "q" and "a"`); break; }
       if (!(c.exercises || []).some(e => String(e.type).startsWith('img_'))) W.push(`${c.id}: no visual exercises`);
     }
+    checkI18n(p, chapters, E, W);
     for (const mid of Object.keys(media)) if ((used[mid] || 0) < 3) W.push(`picture ${mid} has ${used[mid] || 0} exercises (aim for >= 3)`);
     return { errors: E, warnings: W, counts: { chapters: chapters.length, sections: secN, exercises: ex, visual: vis, media: Object.keys(media).length } };
   }
+  /* i18n-ignore-end */
   root.NoemaPackCheck = { checkPack, checkExercise, TYPES, BLOCKS, ID_RE };
 })(typeof window !== 'undefined' ? window : globalThis);

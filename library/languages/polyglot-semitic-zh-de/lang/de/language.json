@@ -305,6 +305,8 @@
     "id": "gender",
     "at": "top",
     "title": "gender",
+    "prominent": true,
+    "order": 1,
     "phenomenon": "de.morph.noun.gender",
     "type": "enum",
     "values": [
@@ -322,6 +324,8 @@
    {
     "id": "plurals",
     "title": "plural, per meaning",
+    "prominent": true,
+    "order": 2,
     "phenomenon": "de.morph.noun.plural.bysense",
     "type": "list",
     "none": true,
@@ -334,8 +338,23 @@
     "why": "The plural is not predictable and is learned with the noun; a meaning may have its own plural (Banken / Bänke) or none (das Land = the countryside). A meaning left out of every item has no plural. none: mass nouns (class sgt) and plural-only nouns (class plt)."
    },
    {
+    "id": "genitive",
+    "title": "genitive singular",
+    "prominent": true,
+    "order": 3,
+    "phenomenon": [
+     "de.morph.noun.genitive",
+     "de.morph.noun.weak"
+    ],
+    "type": "strings",
+    "none": true,
+    "why": "The genitive singular shows the declension at a glance: des Tisches / des Tischs (-(e)s), des Jungen (n-declension), des Namens (mixed), der Frau (feminine: no ending). Dictionaries give it with the plural (der Tisch, -(e)s, -e). The first form is the usual one. none: plural-only nouns."
+   },
+   {
     "id": "declension",
     "title": "singular declension",
+    "prominent": true,
+    "order": 4,
     "phenomenon": "de.morph.noun.weak",
     "type": "enum",
     "values": [
@@ -353,21 +372,24 @@
     "why": "strong: des Tisches, dem Tisch (-(e)s in the genitive); weak (n-declension): den / dem / des Jungen; mixed: des Namens, den Namen; feminine: no ending in the singular; adjectival: declined like an adjective (der Verwandte, ein Verwandter)."
    },
    {
-    "id": "compound",
-    "title": "compound parts",
-    "phenomenon": "de.morph.compound",
-    "type": "list",
-    "none": true,
-    "item": {
-     "part": "string",
-     "role": "enum:modifier|head",
-     "linker": "string?"
-    },
-    "why": "The last part (head) gives the gender and the plural, the parts before it narrow the meaning; linker = the joining element (Blume-n-kohl, Geburt-s-tag) or “−e” when the first part loses its final e (Kirsch-tomate). A verb as modifier appears as its stem (wohnen → Wohnzimmer). none: a simple or derived word, or two separate words."
+    "id": "number",
+    "title": "number",
+    "prominent": false,
+    "order": 5,
+    "phenomenon": "de.morph.noun.number.class",
+    "type": "enum",
+    "values": [
+     "singular and plural",
+     "singular only",
+     "plural only"
+    ],
+    "why": "Most nouns have both numbers; mass nouns, months and names of substances are used in the singular only (das Obst, der Reis, die Milch), a few nouns exist only in the plural (die Eltern, die Leute, die Ferien) and have no gender."
    },
    {
     "id": "homonyms",
     "title": "same form, other gender",
+    "prominent": true,
+    "order": 6,
     "phenomenon": "de.morph.noun.homonym.gender",
     "type": "list",
     "none": true,
@@ -379,8 +401,59 @@
     "why": "der Junge (boy) / das Junge (young animal): the article alone tells two words apart. senses: when the other gender belongs to a meaning of this word."
    },
    {
+    "id": "genderCue",
+    "title": "clue to the gender",
+    "prominent": false,
+    "order": 7,
+    "phenomenon": "de.morph.noun.gender.cues",
+    "type": "string",
+    "none": true,
+    "why": "The rule that gives this noun its gender, when there is one: a suffix (-ung, -heit, -keit, -schaft, -ion, -tät, -ie, -in → die; -chen, -lein, -um → das; -ling → der), a meaning class (days, months, seasons, times of day, male persons → der; female persons → die), the last part of a compound, or the tendency of nouns in -e to be feminine. An exception to a rule says so. none: no rule – the article is learned with the noun."
+   },
+   {
+    "id": "pair",
+    "title": "female / male counterpart",
+    "prominent": false,
+    "order": 8,
+    "phenomenon": "de.morph.noun.feminine.in",
+    "type": "list",
+    "none": true,
+    "item": {
+     "form": "string",
+     "lexeme": "lexeme?"
+    },
+    "why": "Person nouns come in pairs: mostly the feminine is made with -in, often with umlaut (der Lehrer → die Lehrerin, der Arzt → die Ärztin, der Koch → die Köchin); some pairs are different words (der Bruder – die Schwester). form: the counterpart with its article; lexeme: when it is in the lexicon. none: not a person noun, or one noun for everyone (das Kind, die Person)."
+   },
+   {
+    "id": "diminutive",
+    "title": "diminutive",
+    "prominent": false,
+    "order": 9,
+    "phenomenon": "de.morph.noun.diminutive",
+    "type": "string",
+    "none": true,
+    "why": "-chen (most nouns) or -lein (after -ch, -g, and in literary style) makes a small or endearing thing, usually with umlaut, and is always neuter: das Haus → das Häuschen, das Buch → das Büchlein. Some diminutives are words of their own (das Brötchen = bread roll, das Plätzchen = biscuit). Given when one is in common use; none says why not."
+   },
+   {
+    "id": "compound",
+    "title": "compound parts",
+    "prominent": false,
+    "order": 10,
+    "phenomenon": "de.morph.compound",
+    "type": "list",
+    "none": true,
+    "item": {
+     "part": "string",
+     "role": "enum:modifier|head",
+     "linker": "string?"
+    },
+    "why": "The last part (head) gives the gender and the plural, the parts before it narrow the meaning; linker = the joining element (Blume-n-kohl, Geburt-s-tag) or “−e” when the first part loses its final e (Kirsch-tomate). A verb as modifier appears as its stem (wohnen → Wohnzimmer). none: a simple or derived word, or two separate words."
+   },
+   {
     "id": "senseForms",
     "title": "forms of one meaning",
+    "prominent": false,
+    "order": 11,
     "phenomenon": "de.lex.polysemy",
     "type": "list",
     "none": true,
@@ -396,27 +469,46 @@
    {
     "id": "principalParts",
     "title": "principal parts",
+    "prominent": true,
+    "order": 1,
     "phenomenon": "de.morph.verb.classes",
     "type": "strings",
     "why": "infinitive – 3rd person singular present – 3rd person singular Präteritum – Partizip II: the four forms every learner memorizes (separable verbs with the particle in place: kommt an, kam an, angekommen)."
    },
    {
-    "id": "conjugation",
-    "title": "conjugation class",
-    "phenomenon": "de.morph.verb.classes",
+    "id": "aux",
+    "title": "perfect auxiliary",
+    "prominent": true,
+    "order": 2,
+    "phenomenon": "de.morph.verb.aux",
     "type": "enum",
     "values": [
-     "weak",
-     "strong",
-     "mixed",
-     "modal",
-     "irregular"
+     "haben",
+     "sein",
+     "both"
     ],
-    "why": "weak: -te, ge-…-t (kaufen); strong: vowel change, ge-…-en (trinken – trank – getrunken); mixed: vowel change with weak endings (rennen – rannte – gerannt); modal: modal verbs (mögen, wollen); irregular: sein, haben."
+    "why": "sein for movement and change of state (ist gegangen), haben for the rest; both: it depends on the meaning or on a direct object (hat das Auto gefahren / ist nach Berlin gefahren) – see auxBySense."
+   },
+   {
+    "id": "auxBySense",
+    "title": "auxiliary per meaning",
+    "prominent": true,
+    "order": 3,
+    "phenomenon": "de.morph.verb.aux",
+    "type": "list",
+    "none": true,
+    "item": {
+     "aux": "enum:haben|sein",
+     "senses": "senses",
+     "when": "string?"
+    },
+    "why": "For verbs with aux “both”: which meaning (or construction) takes which auxiliary. none: one auxiliary for every meaning."
    },
    {
     "id": "presentChange",
     "title": "vowel change in the present (du / er)",
+    "prominent": true,
+    "order": 4,
     "phenomenon": "de.morph.verb.present",
     "type": "enum",
     "values": [
@@ -430,33 +522,10 @@
     "why": "essen → du isst, fahren → du fährst, laufen → du läufst; decides the du-forms and the du-imperative (iss!)."
    },
    {
-    "id": "aux",
-    "title": "perfect auxiliary",
-    "phenomenon": "de.morph.verb.aux",
-    "type": "enum",
-    "values": [
-     "haben",
-     "sein",
-     "both"
-    ],
-    "why": "sein for movement and change of state (ist gegangen), haben for the rest; both: it depends on the meaning or on a direct object (hat das Auto gefahren / ist nach Berlin gefahren) – see auxBySense."
-   },
-   {
-    "id": "auxBySense",
-    "title": "auxiliary per meaning",
-    "phenomenon": "de.morph.verb.aux",
-    "type": "list",
-    "none": true,
-    "item": {
-     "aux": "enum:haben|sein",
-     "senses": "senses",
-     "when": "string?"
-    },
-    "why": "For verbs with aux “both”: which meaning (or construction) takes which auxiliary. none: one auxiliary for every meaning."
-   },
-   {
     "id": "separable",
     "title": "separable particle",
+    "prominent": true,
+    "order": 5,
     "phenomenon": "de.morph.verb.separable",
     "type": "string",
     "none": true,
@@ -465,6 +534,8 @@
    {
     "id": "inseparable",
     "title": "inseparable prefix",
+    "prominent": true,
+    "order": 6,
     "phenomenon": "de.morph.verb.inseparable",
     "type": "enum",
     "values": [
@@ -483,6 +554,8 @@
    {
     "id": "governs",
     "title": "objects and complements, per meaning",
+    "prominent": true,
+    "order": 7,
     "phenomenon": "de.syn.verb.government",
     "type": "list",
     "none": true,
@@ -497,6 +570,8 @@
    {
     "id": "reflexive",
     "title": "reflexive use, per meaning",
+    "prominent": true,
+    "order": 8,
     "phenomenon": "de.morph.verb.reflexive",
     "type": "list",
     "none": true,
@@ -507,8 +582,107 @@
     "why": "A meaning that needs the reflexive pronoun (sich verlassen auf: ich verlasse mich). none: no reflexive meaning."
    },
    {
+    "id": "conjugation",
+    "title": "conjugation class",
+    "prominent": false,
+    "order": 9,
+    "phenomenon": "de.morph.verb.classes",
+    "type": "enum",
+    "values": [
+     "weak",
+     "strong",
+     "mixed",
+     "modal",
+     "irregular"
+    ],
+    "why": "weak: -te, ge-…-t (kaufen); strong: vowel change, ge-…-en (trinken – trank – getrunken); mixed: vowel change with weak endings (rennen – rannte – gerannt); modal: modal verbs (mögen, wollen); irregular: sein, haben."
+   },
+   {
+    "id": "participle",
+    "title": "Partizip II: ge- or not",
+    "prominent": false,
+    "order": 10,
+    "phenomenon": [
+     "de.morph.verb.classes",
+     "de.morph.verb.inseparable"
+    ],
+    "type": "enum",
+    "values": [
+     "ge-",
+     "ge- after the particle",
+     "no ge- (unstressed prefix)",
+     "no ge- (-ieren verb)"
+    ],
+    "why": "ge- is added when the first syllable is stressed (gekauft, gegangen); after a separable particle it goes inside (aufgewacht, angekommen); verbs with an unstressed prefix (be-, er-, ver- …) and verbs in -ieren take none (besucht, vergessen, reserviert)."
+   },
+   {
+    "id": "imperative",
+    "title": "imperative (du – ihr – Sie)",
+    "prominent": false,
+    "order": 11,
+    "phenomenon": "de.morph.verb.imperative",
+    "type": "strings",
+    "none": true,
+    "why": "The du-form is the stem, -e optional (komm(e)!) but needed after -t, -d (warte!) and -er (erinnere!); verbs with e → i/ie keep the change and never take -e (iss!, lies!), verbs with a → ä do not (fahr!, schlaf!). ihr = the present form (kommt!), Sie = the infinitive + Sie (kommen Sie!). sein: sei! seid! seien Sie!. none: verbs without an imperative (modal verbs)."
+   },
+   {
+    "id": "konj2",
+    "title": "Konjunktiv II",
+    "prominent": false,
+    "order": 12,
+    "phenomenon": "de.morph.verb.konj2",
+    "type": "list",
+    "none": true,
+    "item": {
+     "form": "string",
+     "use": "enum:common in speech|mostly written|rare (würde + infinitive instead)"
+    },
+    "why": "The one-word Konjunktiv II (er wäre, hätte, käme, ginge) is common only for sein, haben, werden, the modal verbs and a few frequent strong verbs; for the others it is written style or rare, and speech uses würde + infinitive (er würde essen). none: weak verbs, whose Konjunktiv II is the same as the Präteritum (kaufte) – würde + infinitive is used."
+   },
+   {
+    "id": "endingAdjust",
+    "title": "ending adjustments",
+    "prominent": false,
+    "order": 13,
+    "phenomenon": "de.morph.verb.present",
+    "type": "enum",
+    "values": [
+     "-e- inserted (du wartest, er wartet)",
+     "s-sound stem: du -t (du heißt)",
+     "-ern / -eln stem (wir erinnern, ich erinnere)"
+    ],
+    "none": true,
+    "why": "Stems in -t, -d (and consonant + m/n) insert -e- before -st and -t: du wartest, er wartet, ihr wartet; stems in -s, -ß, -z, -x add only -t in the du-form: du heißt, du reist, du isst; stems in -er / -el take -n (not -en) in the plural forms. none: the endings are added regularly (or the verb is irregular: sein, haben, werden)."
+   },
+   {
+    "id": "spokenPast",
+    "title": "past in speech",
+    "prominent": false,
+    "order": 14,
+    "phenomenon": "de.morph.verb.past.split",
+    "type": "enum",
+    "values": [
+     "Perfekt",
+     "Präteritum",
+     "both"
+    ],
+    "why": "In speech most verbs tell the past in the Perfekt (ich habe gegessen), the Präteritum being written style; sein, haben, werden and the modal verbs use the Präteritum in speech too (ich war, ich hatte, ich wollte). Northern speakers use the Präteritum more, southern speakers hardly at all."
+   },
+   {
+    "id": "ersatzInfinitive",
+    "title": "with another infinitive (Ersatzinfinitiv)",
+    "prominent": false,
+    "order": 15,
+    "phenomenon": "de.morph.verb.modal",
+    "type": "string",
+    "none": true,
+    "why": "Modal verbs (and lassen, sehen, hören, helfen) in the perfect with a dependent infinitive use their infinitive instead of the Partizip II: Ich habe kommen wollen (not gewollt). none: the Partizip II is always used."
+   },
+   {
     "id": "motion",
     "title": "manner of motion",
+    "prominent": false,
+    "order": 16,
     "phenomenon": "de.lex.motion.manner",
     "type": "enum",
     "values": [
@@ -521,8 +695,39 @@
     "why": "German chooses the verb by how one moves: gehen (on foot), fahren (in a vehicle), fliegen (by air); kommen, reisen say nothing about it."
    },
    {
+    "id": "deixis",
+    "title": "direction hin / her",
+    "prominent": false,
+    "order": 17,
+    "phenomenon": "de.lex.deixis.hin.her",
+    "type": "enum",
+    "values": [
+     "hin (away from the speaker)",
+     "her (towards the speaker)"
+    ],
+    "none": true,
+    "why": "hin points away from the speaker, her towards the speaker: Komm herein! (to me) – Geh hinein! (away from me); wohin? – woher?. In speech both often shrink to r- (rein, raus). none: the word marks no direction."
+   },
+   {
+    "id": "posture",
+    "title": "position verb pair",
+    "prominent": false,
+    "order": 18,
+    "phenomenon": "de.lex.position.verbs",
+    "type": "list",
+    "none": true,
+    "item": {
+     "position": "enum:upright|lying|sitting|hanging",
+     "role": "enum:putting (weak, + ACC)|being there (strong, + DAT)",
+     "pair": "string"
+    },
+    "why": "Putting a thing somewhere and its being there are verb pairs by position: stellen – stehen (upright), legen – liegen (lying), setzen – sitzen (sitting), hängen – hängen (hanging). The putting verb is weak and takes the accusative after a two-way preposition, the state verb is strong and takes the dative. none: not one of these verbs."
+   },
+   {
     "id": "senseForms",
     "title": "forms of one meaning",
+    "prominent": false,
+    "order": 19,
     "phenomenon": "de.lex.polysemy",
     "type": "list",
     "none": true,
@@ -538,6 +743,8 @@
    {
     "id": "comparison",
     "title": "comparison",
+    "prominent": true,
+    "order": 1,
     "phenomenon": "de.morph.adj.comparison",
     "type": "enum",
     "values": [
@@ -549,28 +756,118 @@
     "why": "regular: klein – kleiner – am kleinsten; umlaut: alt – älter – am ältesten; irregular: gut – besser – am besten, hoch – höher; not compared: rosa, lila. The forms are in ADJ;CMPR and ADJ;SPRL."
    },
    {
+    "id": "degrees",
+    "title": "comparative and superlative",
+    "prominent": true,
+    "order": 2,
+    "phenomenon": "de.morph.adj.comparison",
+    "type": "strings",
+    "none": true,
+    "why": "The comparative and the predicative superlative (am …sten), with umlaut or irregular forms where the adjective has them: alt – älter – am ältesten, gut – besser – am besten. A second form after a slash is also correct. none: the adjective is not compared."
+   },
+   {
     "id": "stem",
     "title": "stem before an ending",
+    "prominent": true,
+    "order": 3,
     "phenomenon": "de.morph.adj.declension",
     "type": "string",
     "none": true,
     "why": "Some adjectives change before an ending: hoch → hoh- (ein hoher Turm), dunkel → dunkl-, teuer → teur-. none: the ending is added to the base form (or the word takes no endings)."
+   },
+   {
+    "id": "endings",
+    "title": "endings",
+    "prominent": true,
+    "order": 4,
+    "phenomenon": "de.morph.adj.invariable",
+    "type": "enum",
+    "values": [
+     "takes endings",
+     "invariable"
+    ],
+    "why": "Before a noun almost every adjective takes endings (ein alter Mann); a few colour words from other languages take none: ein rosa Kleid, eine lila Tasche (colloquially also rosanes, lilanes, oranges – not standard)."
+   },
+   {
+    "id": "governs",
+    "title": "complement, per meaning",
+    "prominent": true,
+    "order": 5,
+    "phenomenon": [
+     "de.syn.verb.government",
+     "de.syn.dative.experiencer"
+    ],
+    "type": "list",
+    "none": true,
+    "item": {
+     "case": "enum:ACC|DAT|GEN",
+     "prep": "string?",
+     "senses": "senses",
+     "note": "string?"
+    },
+    "why": "Some adjectives take a complement with a fixed preposition and case (froh über + ACC, hungrig nach + DAT) or a dative of the person who feels something (Mir ist kalt). none: no complement of its own."
+   },
+   {
+    "id": "use",
+    "title": "position",
+    "prominent": false,
+    "order": 6,
+    "phenomenon": "de.morph.adj.predicative",
+    "type": "enum",
+    "values": [
+     "attributive and predicative",
+     "attributive only",
+     "predicative only"
+    ],
+    "why": "Most adjectives go before a noun (with endings) and after sein / werden (without): das alte Haus – Das Haus ist alt. Ordinals and words like letzte are used before a noun only; a few words only after the verb (Ich bin schuld)."
    }
   ],
   "ADV": [
    {
     "id": "comparison",
     "title": "comparative and superlative",
+    "prominent": true,
+    "order": 1,
     "phenomenon": "de.morph.adj.comparison",
     "type": "strings",
     "none": true,
     "why": "Some adverbs compare: oft – öfter – am öftesten, bald – eher – am ehesten. none: not compared (or itself a comparative / superlative form)."
+   },
+   {
+    "id": "deixis",
+    "title": "direction hin / her",
+    "prominent": true,
+    "order": 2,
+    "phenomenon": "de.lex.deixis.hin.her",
+    "type": "enum",
+    "values": [
+     "hin (away from the speaker)",
+     "her (towards the speaker)"
+    ],
+    "none": true,
+    "why": "hin points away from the speaker, her towards the speaker: Komm herein! (to me) – Geh hinein! (away from me); wohin? – woher?. In speech both often shrink to r- (rein, raus). none: the word marks no direction."
+   },
+   {
+    "id": "particleUse",
+    "title": "modal-particle use",
+    "prominent": true,
+    "order": 3,
+    "phenomenon": "de.prag.modal.particles",
+    "type": "list",
+    "none": true,
+    "item": {
+     "senses": "senses",
+     "function": "string"
+    },
+    "why": "Unstressed in the middle of the sentence, a modal particle adds the speaker's attitude, not content: ja (as we know), doch (after all, urging), denn (interest in a question), aber / vielleicht (surprise), nur (urging, wishes), auch (asking for confirmation). function: what it signals, with an example. none: the word has no modal-particle meaning."
    }
   ],
   "ADP": [
    {
     "id": "governs",
     "title": "case, per meaning",
+    "prominent": true,
+    "order": 1,
     "phenomenon": "de.syn.prep.government",
     "type": "list",
     "item": {
@@ -583,6 +880,8 @@
    {
     "id": "contractions",
     "title": "merged with the article",
+    "prominent": true,
+    "order": 2,
     "phenomenon": "de.syn.prep.contraction",
     "type": "list",
     "none": true,
@@ -593,12 +892,38 @@
      "register": "string?"
     },
     "why": "in + dem = im, zu + der = zur; some merged forms are colloquial (unterm, übers). none: no merged forms, or the word is itself a merged form."
+   },
+   {
+    "id": "pronominalAdverb",
+    "title": "da- / wo- form",
+    "prominent": true,
+    "order": 3,
+    "phenomenon": "de.morph.pronominal.adverb",
+    "type": "strings",
+    "none": true,
+    "why": "For a thing (not a person) a preposition with a pronoun becomes da(r)- + preposition, in questions wo(r)- + preposition: darauf / worauf (r before a vowel), damit / womit; colloquially dr- (drauf, drin). Ich warte darauf. Worauf wartest du? none: the preposition has no such form."
+   },
+   {
+    "id": "position",
+    "title": "position",
+    "prominent": false,
+    "order": 4,
+    "phenomenon": "de.syn.prep.government",
+    "type": "enum",
+    "values": [
+     "before the noun",
+     "before; after in some phrases",
+     "after the noun"
+    ],
+    "why": "Most prepositions stand before their noun; a few follow it in some uses (meiner Meinung nach) or always (gegenüber can follow: dem Haus gegenüber)."
    }
   ],
   "DET": [
    {
     "id": "adjAfter",
     "title": "adjective endings after it",
+    "prominent": true,
+    "order": 1,
     "phenomenon": "de.morph.adj.declension",
     "type": "enum",
     "values": [
@@ -609,8 +934,22 @@
     "why": "der-words → weak endings (der gute Wein), ein-words → mixed (ein guter Wein), words that show no case themselves → strong (viel guter Wein, einige gute Freunde)."
    },
    {
+    "id": "owner",
+    "title": "owner",
+    "prominent": true,
+    "order": 2,
+    "phenomenon": "de.morph.det.possessive",
+    "type": "string",
+    "classes": [
+     "DET.poss"
+    ],
+    "why": "The possessive agrees with the owner in its stem (mein / dein / sein / ihr …) and with the thing owned in its ending (mein Bruder, meine Schwester). sein is for a masculine or neuter owner, ihr for a feminine owner and for several owners."
+   },
+   {
     "id": "address",
     "title": "addressee",
+    "prominent": true,
+    "order": 3,
     "phenomenon": "de.prag.address",
     "type": "enum",
     "values": [
@@ -624,8 +963,33 @@
     "why": "dein / euer (du, ihr) or Ihr (Sie). none: the owner is not the person spoken to."
    },
    {
+    "id": "standalone",
+    "title": "standing alone (as a pronoun)",
+    "prominent": false,
+    "order": 4,
+    "phenomenon": [
+     "de.morph.det.possessive",
+     "de.syn.demonstrative"
+    ],
+    "type": "strings",
+    "none": true,
+    "why": "Used without a noun, some determiners take forms of their own: ein → einer, eine, ein(e)s; mein → meiner, meine, mein(e)s; der → dessen, deren, denen in the genitive and dative plural. none: the same forms as before a noun."
+   },
+   {
+    "id": "stem",
+    "title": "stem before an ending",
+    "prominent": false,
+    "order": 5,
+    "phenomenon": "de.morph.adj.declension",
+    "type": "string",
+    "none": true,
+    "why": "euer drops its e before an ending (eure, euren), unser may do so in literary style (unsre). none: the endings are added to the base form, or the word takes no endings."
+   },
+   {
     "id": "senseForms",
     "title": "forms of one meaning",
+    "prominent": false,
+    "order": 6,
     "phenomenon": "de.lex.polysemy",
     "type": "list",
     "none": true,
@@ -639,20 +1003,10 @@
   ],
   "PRON": [
    {
-    "id": "address",
-    "title": "addressee",
-    "phenomenon": "de.prag.address",
-    "type": "enum",
-    "values": [
-     "informal",
-     "formal"
-    ],
-    "none": true,
-    "why": "du / ihr (informal) or Sie (formal). none: not a pronoun of address."
-   },
-   {
     "id": "reference",
     "title": "what it refers to",
+    "prominent": true,
+    "order": 1,
     "phenomenon": "de.morph.pron.gender.reference",
     "type": "enum",
     "values": [
@@ -663,8 +1017,43 @@
     "why": "er / sie / es refer to things as well, by the gender of the noun (der Tisch → er); wer asks for persons, was for things."
    },
    {
+    "id": "address",
+    "title": "addressee",
+    "prominent": true,
+    "order": 2,
+    "phenomenon": "de.prag.address",
+    "type": "enum",
+    "values": [
+     "informal",
+     "formal"
+    ],
+    "none": true,
+    "why": "du / ihr (informal) or Sie (formal). none: not a pronoun of address."
+   },
+   {
+    "id": "possessive",
+    "title": "possessive",
+    "prominent": true,
+    "order": 3,
+    "phenomenon": "de.morph.det.possessive",
+    "type": "string",
+    "none": true,
+    "why": "The possessive determiner that belongs to the pronoun: ich → mein, er / es → sein, sie → ihr, Sie → Ihr. none: no possessive of its own."
+   },
+   {
+    "id": "reflexiveForm",
+    "title": "reflexive form",
+    "prominent": true,
+    "order": 4,
+    "phenomenon": "de.morph.verb.reflexive",
+    "type": "string",
+    "why": "The pronoun used when the object is the subject itself: mich / mir, dich / dir, uns, euch – and sich for every third person and for Sie (ich wasche mich, er wäscht sich, Sie waschen sich)."
+   },
+   {
     "id": "senseForms",
     "title": "forms of one meaning",
+    "prominent": false,
+    "order": 5,
     "phenomenon": "de.lex.polysemy",
     "type": "list",
     "none": true,
@@ -680,15 +1069,29 @@
    {
     "id": "ordinal",
     "title": "ordinal (der …)",
+    "prominent": true,
+    "order": 1,
     "phenomenon": "de.num.ordinals",
     "type": "string",
     "why": "The ordinal adjective: -te up to 19 (der zweite), -ste from 20 (der zwanzigste); irregular erste, dritte, siebte (also siebente), achte."
+   },
+   {
+    "id": "inCompounds",
+    "title": "in longer numerals",
+    "prominent": false,
+    "order": 2,
+    "phenomenon": "de.num.unit.ten",
+    "type": "string",
+    "none": true,
+    "why": "Numerals are written as one word up to a million, units before tens joined by und (einundzwanzig, zweihundertvierunddreißig); some numbers change in compounds (sechs → sechzehn, sechzig; sieben → siebzehn, siebzig; drei → dreißig). none: the form is unchanged in compounds, or the word is itself a compound."
    }
   ],
   "SCONJ": [
    {
     "id": "verbPosition",
     "title": "position of the finite verb",
+    "prominent": true,
+    "order": 1,
     "phenomenon": "de.syn.verb.final",
     "type": "enum",
     "values": [
@@ -701,6 +1104,8 @@
    {
     "id": "verbPosition",
     "title": "effect on word order",
+    "prominent": true,
+    "order": 1,
     "phenomenon": "de.syn.v2",
     "type": "enum",
     "values": [
@@ -708,12 +1113,38 @@
      "takes the first place (inversion)"
     ],
     "why": "und, oder, aber, denn stand before the clause and change nothing (…, denn ich habe Hunger); weder / noch take the first place, so the verb follows them (Weder hat er angerufen, noch …)."
+   },
+   {
+    "id": "paired",
+    "title": "paired form",
+    "prominent": true,
+    "order": 2,
+    "phenomenon": "de.syn.paired.conjunctions",
+    "type": "string",
+    "none": true,
+    "why": "Two-part conjunctions: weder … noch (neither … nor), entweder … oder (either … or), zwar … aber (admittedly … but), sowohl … als auch (both … and). none: not part of a pair."
+   },
+   {
+    "id": "particleUse",
+    "title": "modal-particle use",
+    "prominent": false,
+    "order": 3,
+    "phenomenon": "de.prag.modal.particles",
+    "type": "list",
+    "none": true,
+    "item": {
+     "senses": "senses",
+     "function": "string"
+    },
+    "why": "Unstressed in the middle of the sentence, a modal particle adds the speaker's attitude, not content: ja (as we know), doch (after all, urging), denn (interest in a question), aber / vielleicht (surprise), nur (urging, wishes), auch (asking for confirmation). function: what it signals, with an example. none: the word has no modal-particle meaning."
    }
   ],
   "INTJ": [
    {
     "id": "formality",
     "title": "formality",
+    "prominent": true,
+    "order": 1,
     "phenomenon": "de.prag.address",
     "type": "enum",
     "values": [
@@ -722,8 +1153,60 @@
      "formal"
     ],
     "why": "Which situations the formula fits: informal (friends, family: hallo, tschüss), formal (strangers, customers: guten Tag, auf Wiedersehen, wie geht es Ihnen), neutral (both)."
+   },
+   {
+    "id": "reply",
+    "title": "usual reply",
+    "prominent": true,
+    "order": 2,
+    "phenomenon": "de.prag.greetings",
+    "type": "string",
+    "none": true,
+    "why": "Formulas come with their answer: danke – bitte, wie geht's? – gut, danke, und dir?. none: the word is itself an answer."
+   },
+   {
+    "id": "region",
+    "title": "region",
+    "prominent": false,
+    "order": 3,
+    "phenomenon": [
+     "de.prag.greetings",
+     "de.var.pluricentric"
+    ],
+    "type": "string",
+    "none": true,
+    "why": "Where the formula is used, and what other German-speaking regions say instead (Grüß Gott in southern Germany and Austria, Moin in the north, Grüezi in Switzerland). none: used everywhere, with no common regional alternative."
+   },
+   {
+    "id": "particleUse",
+    "title": "modal-particle use",
+    "prominent": false,
+    "order": 4,
+    "phenomenon": "de.prag.modal.particles",
+    "type": "list",
+    "none": true,
+    "item": {
+     "senses": "senses",
+     "function": "string"
+    },
+    "why": "Unstressed in the middle of the sentence, a modal particle adds the speaker's attitude, not content: ja (as we know), doch (after all, urging), denn (interest in a question), aber / vielleicht (surprise), nur (urging, wishes), auch (asking for confirmation). function: what it signals, with an example. none: the word has no modal-particle meaning."
    }
   ],
-  "PART": []
+  "PART": [
+   {
+    "id": "particleUse",
+    "title": "modal-particle use",
+    "prominent": true,
+    "order": 1,
+    "phenomenon": "de.prag.modal.particles",
+    "type": "list",
+    "none": true,
+    "item": {
+     "senses": "senses",
+     "function": "string"
+    },
+    "why": "Unstressed in the middle of the sentence, a modal particle adds the speaker's attitude, not content: ja (as we know), doch (after all, urging), denn (interest in a question), aber / vielleicht (surprise), nur (urging, wishes), auch (asking for confirmation). function: what it signals, with an example. none: the word has no modal-particle meaning."
+   }
+  ]
  }
 }

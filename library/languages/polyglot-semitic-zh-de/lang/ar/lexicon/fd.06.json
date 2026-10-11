@@ -15,7 +15,11 @@
     "kind": "zarf",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "withPronoun": [
+     "عِنْدِي",
+     "عِنْدَهُ"
+    ]
    },
    "contrasts": [
     {
@@ -190,18 +194,55 @@
     },
     "funFacts": [
      "عِنْدَمَا (“when”) is simply عِنْدَ + مَا.",
-     "Russian у меня есть and Turkish bende var say it the same way: “at me (there is)” — Greek, German and English use a verb.",
+     "No verb: “I have” is a place phrase, “at me (there is)” — where German needs the verb haben.",
      "Hebrew says יֵשׁ לִי (yesh li, “there is to me”), with the preposition “to” — the twin of Arabic لِي أَخٌ."
     ],
     "pitfalls": [
      "عِنْدَ is a preposition, not a verb: it does not change for tense. “I had” = كَانَ عِنْدِي; “I don’t have” = لَيْسَ عِنْدِي.",
      "The thing you have is the grammatical subject, so it is nominative and usually indefinite: عِنْدِي جَزَرَةٌ (not جَزَرَةً).",
-     "Unvocalized عند can also be the verb عَنَدَ, “to be stubborn” (root of عِنَاد, stubbornness — Turkish inat)."
+     "Unvocalized عند can also be the verb عَنَدَ, “to be stubborn” (root of عِنَاد, stubbornness)."
     ],
     "subtleties": [
      "عِنْدِي is for what you own or keep at your place, لِي for relations and rights, مَعِي for what you carry right now.",
      "“At” a place is فِي (فِي الْبَيْتِ, at home); “at” a person or a landmark is عِنْدَ (عِنْدَ صَدِيقِي, at my friend’s; عِنْدَ الْبَابِ, at the door).",
      "For a moment in time عِنْدَ is as common as فِي: عِنْدَ الظُّهْرِ, عِنْدَ الْفَجْرِ (at dawn)."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "у меня есть says it the same way: “at me (there is)” = عِنْدِي."
+     },
+     {
+      "for": "hi",
+      "rel": "same",
+      "text": "मेरे पास … है says it the same way: “near me (there is)” = عِنْدِي."
+     },
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "Greek uses a verb, έχω; Arabic says “at me (there is)”: عِنْدِي."
+     },
+     {
+      "for": "en",
+      "rel": "different",
+      "text": "English uses a verb, have; Arabic says “at me (there is)”: عِنْدِي."
+     },
+     {
+      "for": "fr",
+      "rel": "different",
+      "text": "French uses a verb, avoir; Arabic says “at me”, like chez moi: عِنْدِي."
+     },
+     {
+      "for": "tr",
+      "rel": "same",
+      "text": "Turkish bende var says it the same way: “at me (there is)”."
+     },
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "عِنَاد (stubbornness) is Turkish inat."
+     }
     ]
    },
    "prefix": false
@@ -222,6 +263,7 @@
     "plurals": [
      {
       "form": "أُسَر",
+      "translit": "ʾusar",
       "kind": "broken",
       "pattern": "فُعَل",
       "declension": "triptote",
@@ -235,7 +277,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "أُسْرَةُ",
+      "translit": "ʾusratu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -373,7 +424,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish esir (prisoner of war) is Arabic أَسِير, from the same root."
+     "The root أ س ر means “to bind”: the family is the group you are bound to — and أَسِير is a captive."
     ],
     "pitfalls": [
      "Unvocalized أسرة is also أَسِرَّة (beds, the plural of سَرِير) — the vowels and the šadda decide.",
@@ -381,6 +432,13 @@
     ],
     "subtleties": [
      "أُسْرَة is the family as a unit (sociology, forms: الْأُسْرَةُ النَّوَوِيَّةُ, the nuclear family); عَائِلَة is often the wider family."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish esir (prisoner of war) is Arabic أَسِير, from the same root."
+     }
     ]
    }
   },
@@ -399,6 +457,7 @@
     "plurals": [
      {
       "form": "عَائِلَات",
+      "translit": "ʿāʾilāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -408,6 +467,7 @@
      },
      {
       "form": "عَوَائِل",
+      "translit": "ʿawāʾil",
       "kind": "broken",
       "pattern": "فَوَاعِل",
       "declension": "diptote",
@@ -422,7 +482,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "عَائِلَةُ",
+      "translit": "ʿāʾilatu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -560,7 +629,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish aile (family) is this Arabic word."
+     "عَائِلَة is related to عَالَ / يَعُولُ, “to support (a family)”: the family is the household you provide for."
     ],
     "pitfalls": [
      "The hamza sits on a yāʾ seat: عَائِلَة (ʿāʾila); the spelling عايلة is colloquial.",
@@ -568,6 +637,13 @@
     ],
     "subtleties": [
      "In many dialects عَائِلَة (or عِيلَة) is the everyday word, and أُسْرَة sounds formal."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "same",
+      "text": "Turkish aile (family) is this Arabic word."
+     }
     ]
    }
   },
@@ -592,7 +668,17 @@
     "declension": "dual",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "a dual naming father and mother together"
+    },
+    "construct": [
+     {
+      "form": "وَالِدَا",
+      "translit": "wālidā",
+      "note": "a dual: the nūn drops (وَالِدَا الطِّفْلِ)"
+     }
+    ]
    },
    "class": "du",
    "gender": "MASC",
@@ -688,7 +774,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish ebeveyn (parents) is the other Arabic word, أَبَوَيْن; Turkish valide (mother, as in Valide Sultan) is وَالِدَة.",
+     "Arabic has a second word for parents, أَبَوَانِ (accusative and genitive أَبَوَيْنِ), “the two fathers” — the dual of أَب.",
      "The masculine dual covers a man and a woman — Arabic lets the masculine stand for both."
     ],
     "pitfalls": [
@@ -697,6 +783,13 @@
     ],
     "subtleties": [
      "وَالِد / وَالِدَة alone are the respectful “father / mother”: وَالِدِي، وَالِدَتِي."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish ebeveyn (parents) is the other Arabic word, أَبَوَيْن; Turkish valide (mother) is وَالِدَة."
+     }
     ]
    }
   },
@@ -715,6 +808,7 @@
     "plurals": [
      {
       "form": "أُمَّهَات",
+      "translit": "ʾummahāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -728,7 +822,19 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "أَب",
+      "note": "another root"
+     }
+    ],
+    "construct": [
+     {
+      "form": "أُمُّ",
+      "translit": "ʾummu"
+     }
+    ]
    },
    "class": "kin",
    "gender": "FEM",
@@ -883,7 +989,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "أُمَّة (nation, community — Turkish ümmet) is from the same root ء م م.",
+     "أُمَّة (nation, community) is from the same root ء م م.",
      "Hebrew אֵם (em) is the same word."
     ],
     "pitfalls": [
@@ -892,6 +998,13 @@
     ],
     "subtleties": [
      "A woman is often called after her eldest son, أُمُّ أَحْمَدَ — a warm, respectful way to address her."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "أُمَّة (nation, community) is Turkish ümmet."
+     }
     ]
    }
   },
@@ -911,6 +1024,7 @@
     "plurals": [
      {
       "form": "آبَاء",
+      "translit": "ʾābāʾ",
       "kind": "broken",
       "pattern": "أَفْعَال",
       "declension": "triptote",
@@ -925,7 +1039,20 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "أُمّ",
+      "note": "another root"
+     }
+    ],
+    "construct": [
+     {
+      "form": "أَبُو",
+      "translit": "ʾabū",
+      "note": "one of the five nouns: the case is a long vowel (أَبُو / أَبَا / أَبِي)"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -1086,8 +1213,8 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English abbot comes from Aramaic אַבָּא (abba, father) through Greek and Latin — the same Semitic word.",
-     "Turkish ebeveyn (parents) is Arabic أَبَوَيْن, “the two fathers” = father and mother."
+     "Its Aramaic cousin, אַבָּא (abba, father), went through Greek and Latin into the European title of an abbot.",
+     "Its dual أَبَوَانِ, “the two fathers”, means the parents: father and mother."
     ],
     "pitfalls": [
      "One of the “five nouns”: with a possessive it lengthens — أَبُوكَ (nom.), أَبَاكَ (acc.), أَبِيكَ (gen.); but “my father” is أَبِي in every case.",
@@ -1095,6 +1222,43 @@
     ],
     "subtleties": [
      "أَبُو in names and places: أَبُو بَكْرٍ, أَبُو ظَبْيٍ (Abu Dhabi)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English abbot goes back to אַבָּא (abba, “father”) — the same Semitic word as أَب."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "French abbé goes back to אַבָּא (abba, “father”) — the same Semitic word as أَب."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "Italian abate goes back to אַבָּא (abba, “father”) — the same Semitic word as أَب."
+     },
+     {
+      "for": "es",
+      "rel": "similar",
+      "text": "Spanish abad goes back to אַבָּא (abba, “father”) — the same Semitic word as أَب."
+     },
+     {
+      "for": "pt",
+      "rel": "similar",
+      "text": "Portuguese abade goes back to אַבָּא (abba, “father”) — the same Semitic word as أَب."
+     },
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Greek αββάς goes back to אַבָּא (abba, “father”) — the same Semitic word as أَب."
+     },
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish ebeveyn (parents) is Arabic أَبَوَيْن."
+     }
     ]
    }
   },
@@ -1115,6 +1279,7 @@
     "plurals": [
      {
       "form": "أَبْنَاء",
+      "translit": "ʾabnāʾ",
       "kind": "broken",
       "pattern": "أَفْعَال",
       "declension": "triptote",
@@ -1126,6 +1291,7 @@
      },
      {
       "form": "بَنُونَ",
+      "translit": "banūn",
       "kind": "soundMasc",
       "declension": "sound",
       "note": "literary; بَنُو in the names of tribes (بَنُو هَاشِمٍ)",
@@ -1139,7 +1305,22 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "no other form belongs to one meaning (the plurals do: see plurals)"
-    }
+    },
+    "pair": [
+     {
+      "form": "اِبْنَة"
+     },
+     {
+      "form": "بِنْت",
+      "note": "the everyday word for “daughter”"
+     }
+    ],
+    "construct": [
+     {
+      "form": "اِبْنُ",
+      "translit": "ibnu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -1322,6 +1503,7 @@
     "plurals": [
      {
       "form": "بَنَات",
+      "translit": "banāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -1333,7 +1515,18 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "اِبْن"
+     }
+    ],
+    "construct": [
+     {
+      "form": "اِبْنَةُ",
+      "translit": "ibnatu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -1487,6 +1680,7 @@
     "plurals": [
      {
       "form": "إِخْوَة",
+      "translit": "ʾiḫwa",
       "kind": "broken",
       "pattern": "فِعْلَة",
       "declension": "triptote",
@@ -1497,6 +1691,7 @@
      },
      {
       "form": "إِخْوَان",
+      "translit": "ʾiḫwān",
       "kind": "broken",
       "pattern": "فِعْلَان",
       "declension": "triptote",
@@ -1510,7 +1705,19 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "no other form belongs to one meaning (the plurals do: see plurals)"
-    }
+    },
+    "pair": [
+     {
+      "form": "أُخْت"
+     }
+    ],
+    "construct": [
+     {
+      "form": "أَخُو",
+      "translit": "ʾaḫū",
+      "note": "one of the five nouns: the case is a long vowel (أَخُو / أَخَا / أَخِي)"
+     }
+    ]
    },
    "class": "kin",
    "gender": "MASC",
@@ -1673,6 +1880,7 @@
     "plurals": [
      {
       "form": "أَخَوَات",
+      "translit": "ʾaḫawāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -1685,7 +1893,18 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "أَخ"
+     }
+    ],
+    "construct": [
+     {
+      "form": "أُخْتُ",
+      "translit": "ʾuḫtu"
+     }
+    ]
    },
    "class": "kin",
    "gender": "FEM",
@@ -1846,6 +2065,7 @@
     "plurals": [
      {
       "form": "أَزْوَاج",
+      "translit": "ʾazwāj",
       "kind": "broken",
       "pattern": "أَفْعَال",
       "declension": "triptote",
@@ -1859,7 +2079,18 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "زَوْجَة"
+     }
+    ],
+    "construct": [
+     {
+      "form": "زَوْجُ",
+      "translit": "zawju"
+     }
+    ]
    },
    "class": "kin",
    "gender": "MASC",
@@ -1990,14 +2221,26 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "A word with a Greek past: ζεῦγος → Aramaic → Arabic زَوْج; Modern Greek ζευγάρι (pair, couple) comes from the same Greek word.",
-     "Turkish zevç / zevce (husband / wife, dated) are زَوْج / زَوْجَة."
+     "A word with a Greek past: ζεῦγος → Aramaic → Arabic زَوْج — and زَوْج still also means “a pair”.",
+     "In classical Arabic زَوْج is either spouse: the husband and the wife alike."
     ],
     "pitfalls": [
      "In Classical Arabic زَوْج means “spouse” of either sex (Wiktionary also gives “wife”); in modern use “wife” is زَوْجَة."
     ],
     "subtleties": [
      "The dual زَوْجَانِ is “a (married) couple”."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Greek ζευγάρι (pair, couple) comes from the same ζεῦγος as زَوْج."
+     },
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish zevç / zevce (husband / wife, dated) are زَوْج / زَوْجَة."
+     }
     ]
    }
   },
@@ -2016,6 +2259,7 @@
     "plurals": [
      {
       "form": "زَوْجَات",
+      "translit": "zawjāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -2027,7 +2271,18 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "زَوْج"
+     }
+    ],
+    "construct": [
+     {
+      "form": "زَوْجَةُ",
+      "translit": "zawjatu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -2162,13 +2417,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish zevce (wife, dated) is this word."
+     "زَوْجَة is زَوْج + ة; classical Arabic often says زَوْج for the wife too."
     ],
     "pitfalls": [
      "Possessive: زَوْجَتِي, زَوْجَتُكَ — the ة becomes ت before every ending."
     ],
     "subtleties": [
      "Speaking politely about someone's wife, people say حَرَمُهُ or عَقِيلَتُهُ rather than زَوْجَتُهُ."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "same",
+      "text": "Turkish zevce (wife, dated) is this word."
+     }
     ]
    }
   },
@@ -2187,6 +2449,7 @@
     "plurals": [
      {
       "form": "رُضَّع",
+      "translit": "ruḍḍaʿ",
       "kind": "broken",
       "pattern": "فُعَّل",
       "declension": "triptote",
@@ -2199,7 +2462,18 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "رَضِيعَة"
+     }
+    ],
+    "construct": [
+     {
+      "form": "رَضِيعُ",
+      "translit": "raḍīʿu"
+     }
+    ]
    },
    "class": "kin",
    "gender": "MASC",
@@ -2355,7 +2629,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "a plural for grandparents of both sexes"
+    },
+    "construct": [
+     {
+      "form": "أَجْدَادُ",
+      "translit": "ʾajdādu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -2471,7 +2754,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek οι παππούδες also uses the plural of “grandfather” for both grandparents; German has a word of its own, Großeltern."
+     "The plural of “grandfather” covers both grandparents; German has a word of its own, Großeltern."
     ],
     "pitfalls": [
      "It is the masculine plural of جَدّ: it covers grandmothers only in a mixed group; “grandmothers” is جَدَّات.",
@@ -2479,6 +2762,28 @@
     ],
     "subtleties": [
      "To be precise, people say جَدِّي وَجَدَّتِي (my grandfather and grandmother)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "οι παππούδες also uses the plural of “grandfather” for both grandparents."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "Like los abuelos, the plural of “grandfather” covers both grandparents."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Like i nonni, the plural of “grandfather” covers both grandparents."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Like os avós, the plural covers both grandparents."
+     }
     ]
    },
    "gender": "MASC"
@@ -2500,6 +2805,7 @@
     "plurals": [
      {
       "form": "أَجْدَاد",
+      "translit": "ʾajdād",
       "kind": "broken",
       "pattern": "أَفْعَال",
       "declension": "triptote",
@@ -2510,6 +2816,7 @@
      },
      {
       "form": "جُدُود",
+      "translit": "judūd",
       "kind": "broken",
       "pattern": "فُعُول",
       "declension": "triptote",
@@ -2523,7 +2830,18 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "no other form belongs to one meaning (the plurals do: see plurals)"
-    }
+    },
+    "pair": [
+     {
+      "form": "جَدَّة"
+     }
+    ],
+    "construct": [
+     {
+      "form": "جَدُّ",
+      "translit": "jaddu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -2704,6 +3022,7 @@
     "plurals": [
      {
       "form": "جَدَّات",
+      "translit": "jaddāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -2715,7 +3034,18 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "جَدّ"
+     }
+    ],
+    "construct": [
+     {
+      "form": "جَدَّةُ",
+      "translit": "jaddatu"
+     }
+    ]
    },
    "class": "kin",
    "gender": "FEM",
@@ -2859,6 +3189,7 @@
     "plurals": [
      {
       "form": "أَحْفَاد",
+      "translit": "ʾaḥfād",
       "kind": "broken",
       "pattern": "أَفْعَال",
       "declension": "triptote",
@@ -2872,7 +3203,18 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "حَفِيدَة"
+     }
+    ],
+    "construct": [
+     {
+      "form": "حَفِيدُ",
+      "translit": "ḥafīdu"
+     }
+    ]
    },
    "class": "kin",
    "gender": "MASC",
@@ -3012,7 +3354,14 @@
      "أَحْفَاد covers grandsons and granddaughters together: “grandchildren”."
     ],
     "subtleties": [
-     "The feminine is حَفِيدَة; German Enkel / Enkelin and Greek εγγονός / εγγονή pair the same way."
+     "The feminine is حَفِيدَة; German Enkel / Enkelin pair the same way."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "εγγονός / εγγονή pair the same way: حَفِيد / حَفِيدَة."
+     }
     ]
    }
   },
@@ -3031,6 +3380,7 @@
     "plurals": [
      {
       "form": "حَفِيدَات",
+      "translit": "ḥafīdāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -3042,7 +3392,18 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "حَفِيد"
+     }
+    ],
+    "construct": [
+     {
+      "form": "حَفِيدَةُ",
+      "translit": "ḥafīdatu"
+     }
+    ]
    },
    "class": "kin",
    "gender": "FEM",
@@ -3156,13 +3517,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German Enkelin and Greek εγγονή are built from the masculine in the same way: حَفِيد → حَفِيدَة."
+     "German Enkelin is built from the masculine in the same way: حَفِيد → حَفِيدَة."
     ],
     "pitfalls": [
      "Plural حَفِيدَات (girls only); grandchildren in general = أَحْفَاد."
     ],
     "subtleties": [
      "Possessive: حَفِيدَتِي (ة → ت)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "εγγονή is built from the masculine in the same way: حَفِيد → حَفِيدَة."
+     }
     ]
    }
   },
@@ -3181,6 +3549,7 @@
     "plurals": [
      {
       "form": "أَعْمَام",
+      "translit": "ʾaʿmām",
       "kind": "broken",
       "pattern": "أَفْعَال",
       "declension": "triptote",
@@ -3194,7 +3563,18 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "عَمَّة"
+     }
+    ],
+    "construct": [
+     {
+      "form": "عَمُّ",
+      "translit": "ʿammu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -3333,7 +3713,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish amca (father's brother) comes from عَمّ.",
+     "Its feminine عَمَّة is the father’s sister, and اِبْنُ عَمِّي (my father’s brother’s son) is also a warm word for any cousin or kinsman.",
      "Chinese also splits uncles: 叔叔 / 伯伯 are the father's brothers, 舅舅 the mother's — like عَمّ / خَال."
     ],
     "pitfalls": [
@@ -3342,6 +3722,28 @@
     ],
     "subtleties": [
      "Children call any older man عَمُّو or يَا عَمِّي out of respect."
+    ],
+    "notes": [
+     {
+      "for": "hi",
+      "rel": "same",
+      "text": "Hindi splits uncles the same way: चाचा (father’s brother) = عَمّ, मामा (mother’s brother) = خَال."
+     },
+     {
+      "for": "sq",
+      "rel": "same",
+      "text": "Albanian splits uncles the same way: xhaxha (father’s brother) = عَمّ, dajë (mother’s brother) = خَال."
+     },
+     {
+      "for": "en",
+      "rel": "new",
+      "text": "One English “uncle” is two Arabic words: عَمّ (the father’s brother) and خَال (the mother’s brother)."
+     },
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish amca (father’s brother) comes from عَمّ."
+     }
     ]
    }
   },
@@ -3361,6 +3763,7 @@
     "plurals": [
      {
       "form": "أَخْوَال",
+      "translit": "ʾaḫwāl",
       "kind": "broken",
       "pattern": "أَفْعَال",
       "declension": "triptote",
@@ -3371,6 +3774,7 @@
      },
      {
       "form": "خِيلَان",
+      "translit": "ḫīlān",
       "kind": "broken",
       "pattern": "فِعْلَان",
       "declension": "triptote",
@@ -3384,7 +3788,18 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "no other form belongs to one meaning (the plurals do: see plurals)"
-    }
+    },
+    "pair": [
+     {
+      "form": "خَالَة"
+     }
+    ],
+    "construct": [
+     {
+      "form": "خَالُ",
+      "translit": "ḫālu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -3517,7 +3932,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Chinese 舅舅 (jiùjiu) is also only the mother's brother; Turkish uses dayı."
+     "Chinese 舅舅 (jiùjiu) is also only the mother's brother."
     ],
     "pitfalls": [
      "Three look-alikes: خَال (mother's brother), خَال (mole) and خَالٍ (empty, free: خَالٍ مِنَ السُّكَّرِ, sugar-free).",
@@ -3525,6 +3940,18 @@
     ],
     "subtleties": [
      "Arabic always says which side: عَمّ / عَمَّة on the father's side, خَال / خَالَة on the mother's."
+    ],
+    "notes": [
+     {
+      "for": "sq",
+      "rel": "same",
+      "text": "Albanian dajë is also only the mother’s brother = خَال."
+     },
+     {
+      "for": "tr",
+      "rel": "same",
+      "text": "Turkish dayı is also only the mother’s brother."
+     }
     ]
    }
   },
@@ -3543,6 +3970,7 @@
     "plurals": [
      {
       "form": "عَمَّات",
+      "translit": "ʿammāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -3554,7 +3982,18 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "عَمّ"
+     }
+    ],
+    "construct": [
+     {
+      "form": "عَمَّةُ",
+      "translit": "ʿammatu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -3700,6 +4139,7 @@
     "plurals": [
      {
       "form": "خَالَات",
+      "translit": "ḫālāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -3712,7 +4152,18 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": [
+     {
+      "form": "خَال"
+     }
+    ],
+    "construct": [
+     {
+      "form": "خَالَةُ",
+      "translit": "ḫālatu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -3851,11 +4302,18 @@
      "Chinese 姨 (yí, 姨妈) is also the mother's sister — and 阿姨, like خَالَة, is said to older women in general."
     ],
     "pitfalls": [
-     "False friend for Turkish speakers: Turkish hala (the father's sister) comes from خَالَة, but in Arabic خَالَة is the mother's sister (Turkish teyze).",
+     "خَالَة is only the mother's sister; the father's sister is عَمَّة — keep the two apart.",
      "Not the father's sister — that is عَمَّة."
     ],
     "subtleties": [
      "Plural خَالَات; possessive خَالَتِي."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "trap",
+      "text": "False friend: Turkish hala (the father's sister) comes from خَالَة, but in Arabic خَالَة is the mother's sister (Turkish teyze)."
+     }
     ]
    }
   },
@@ -3875,6 +4333,7 @@
     "plurals": [
      {
       "form": "أَقَارِب",
+      "translit": "ʾaqārib",
       "kind": "broken",
       "pattern": "أَفَاعِل",
       "declension": "diptote",
@@ -3885,6 +4344,7 @@
      },
      {
       "form": "أَقْرِبَاء",
+      "translit": "ʾaqribāʾ",
       "kind": "broken",
       "pattern": "أَفْعِلَاء",
       "declension": "diptote",
@@ -3895,6 +4355,7 @@
      },
      {
       "form": "قَرِيبُونَ",
+      "translit": "qarībūn",
       "kind": "soundMasc",
       "declension": "sound",
       "note": "as the adjective “near” (of people)",
@@ -3907,7 +4368,18 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "no other form belongs to one meaning (the plurals do: see plurals)"
-    }
+    },
+    "pair": [
+     {
+      "form": "قَرِيبَة"
+     }
+    ],
+    "construct": [
+     {
+      "form": "قَرِيبُ",
+      "translit": "qarību"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -4056,12 +4528,12 @@
      }
     ],
     "etymology": {
-     "text": "A فَعِيل-type adjective from قَرُبَ (to be near); cognate with Hebrew קָרוֹב (karóv, “close, near”) and Amharic ቅርብ (Wiktionary).",
+     "text": "A فَعِيل-type adjective from قَرُبَ (to be near); cognate with Hebrew קָרוֹב (karóv, “close, near”) (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
      "Hebrew קָרוֹב (karóv) also means both “near” and “relative” — the same Semitic word.",
-     "Turkish akraba (relatives) is the Arabic plural أَقْرِبَاء."
+     "Relatives in the plural are أَقَارِب or أَقْرِبَاء — the word “near” in the plural."
     ],
     "pitfalls": [
      "Two plurals: أَقْرِبَاء and the very common أَقَارِب (الْأَقَارِبُ) — both are diptotes: no -un, and -a for the indefinite genitive.",
@@ -4069,6 +4541,18 @@
     ],
     "subtleties": [
      "A female relative is قَرِيبَة; قَرَابَة is kinship."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "similar",
+      "text": "Turkish akraba (relatives) is the Arabic plural أَقْرِبَاء."
+     },
+     {
+      "for": "am",
+      "rel": "same",
+      "text": "Amharic ቅርብ is a cognate of قَرِيب."
+     }
     ]
    }
   }

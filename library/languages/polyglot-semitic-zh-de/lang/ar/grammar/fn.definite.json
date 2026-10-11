@@ -1,7 +1,7 @@
 {
  "function": "fn.definite",
  "status": "realized",
- "summary": "Arabic marks a definite noun with the prefix al- (الْ), written joined to the noun, and an indefinite noun with nunation (tanwīn: -un, -an, -in). There is no word for “a”: بَيْتٌ = a house, الْبَيْتُ = the house. Before the 14 sun letters (ت ث د ذ ر ز س ش ص ض ط ظ ل ن) the l of al- is assimilated: it carries no sukūn and the next letter gets a šadda — الشَّقَّةُ = aš-šaqqa. Diptotes (نَوَافِذُ، مَصَابِيحُ، طَمَاطِم) never take tanwīn, and indeclinable words in -ā / -ī (كُوسَا، بْرُوكُلِي) show definiteness only by al-. General statements (“I like tomatoes”) use al-: أُحِبُّ الطَّمَاطِمَ.",
+ "summary": "Arabic marks a definite noun with the prefix al- (الْ), written joined to the noun, and an indefinite noun with nunation (tanwīn: -un, -an, -in). There is no separate indefinite article: بَيْتٌ = a house, الْبَيْتُ = the house. Before the 14 sun letters (ت ث د ذ ر ز س ش ص ض ط ظ ل ن) the l of al- is assimilated: it carries no sukūn and the next letter gets a šadda — الشَّقَّةُ = aš-šaqqa. Diptotes (نَوَافِذُ، مَصَابِيحُ، طَمَاطِم) never take tanwīn, and indeclinable words in -ā / -ī (كُوسَا، بْرُوكُلِي) show definiteness only by al-. General statements (“I like tomatoes”) use al-: أُحِبُّ الطَّمَاطِمَ.",
  "procedure": {
   "askYourself": [
    "Is the noun specific (one we both know) or meant in general (“books”, “onions as food”)? → al-",
@@ -254,7 +254,7 @@
   {
    "lang": "he",
    "fn": "fn.definite",
-   "note": "Hebrew הַ־ is a prefix too and Hebrew has no “a” either; instead of sun letters, הַ doubles the next consonant with a dagesh (הַבַּיִת), and there is no tanwīn."
+   "note": "Hebrew הַ־ is a prefix too, and Hebrew has no indefinite article either.\n\n- Instead of sun letters, הַ doubles the next consonant with a dagesh (הַבַּיִת).\n- There is no tanwīn."
   },
   {
    "lang": "de",
@@ -286,27 +286,27 @@
   {
    "for": "en",
    "rel": "similar",
-   "text": "English the and a become a prefix and an ending: الْبَيْتُ (the house), بَيْتٌ (a house). The fossil al- lives on in English words taken from Arabic: alcohol, algebra, alchemy."
+   "text": "English the and a become a prefix and an ending:\n→ الْبَيْتُ (the house), بَيْتٌ (a house)\n\nThe fossil al- lives on in English words taken from Arabic: alcohol, algebra, alchemy."
   },
   {
    "for": "es",
    "rel": "similar",
-   "text": "Spanish loans keep the Arabic article — with the sun-letter assimilation: aceite (الزَّيْت az-zayt), azúcar (السُّكَّر as-sukkar), arroz (الرُّزّ ar-ruzz, a variant of أَرُزّ). Spanish has un / una for “a”; Arabic uses the ending -un."
+   "text": "Spanish loans keep the Arabic article — with the sun-letter assimilation:\n- aceite — الزَّيْت az-zayt\n- azúcar — السُّكَّر as-sukkar\n- arroz — الرُّزّ ar-ruzz, a variant of أَرُزّ\n\nSpanish has un / una for “a”; Arabic uses the ending -un."
   },
   {
    "for": "fr",
    "rel": "similar",
-   "text": "French le / la and un / une become a prefix and an ending: الْبَيْتُ / بَيْتٌ. There is no partitive du / de la: أُرِيدُ قَهْوَةً is “I want (some) coffee”."
+   "text": "French le / la and un / une become a prefix and an ending:\n→ الْبَيْتُ / بَيْتٌ\n\nThere is **no partitive** du / de la: أُرِيدُ قَهْوَةً is “I want (some) coffee”."
   },
   {
    "for": "el",
    "rel": "similar",
-   "text": "Greek has ο / η / το and ένας / μία / ένα; Arabic has one prefix for “the” (الْ, the same for every gender, number and case) and no separate “a”: the ending -un says it."
+   "text": "Greek has ο / η / το and ένας / μία / ένα.\n\nArabic has:\n- one prefix for “the” — الْ, the same for every gender, number and case;\n- no separate “a”: the ending -un says it."
   },
   {
    "for": "ru",
    "rel": "new",
-   "text": "Russian has no articles; Arabic marks every noun: الْبَيْتُ (the house) or بَيْتٌ (a house). Ask: do we both know which one? Then الْ."
+   "text": "Russian has no articles; Arabic marks every noun:\n→ الْبَيْتُ (the house) or بَيْتٌ (a house)\n\n**Ask: do we both know which one? Then الْ.**"
   },
   {
    "for": "hi",
@@ -362,6 +362,56 @@
    "for": "iu",
    "rel": "new",
    "text": "Inuktitut has no articles; Arabic marks every noun as definite (الْ) or indefinite (-un)."
+  },
+  {
+   "for": "de",
+   "rel": "similar",
+   "text": "German der / die / das and ein / eine change for gender and case. Arabic has **one prefix for “the”, الْ**, for every noun, and says “a” with the ending -un:\n→ بَيْتٌ / الْبَيْتُ\n\nThings in general take the article:\n→ Ich mag Kaffee = أُحِبُّ الْقَهْوَةَ"
+  },
+  {
+   "for": "zh",
+   "rel": "new",
+   "text": "Chinese has no articles (一个 means “one”, 这个 “this”); Arabic marks every noun as definite (الْبَيْتُ) or indefinite (بَيْتٌ).\n\n**Ask: do we both know which one? Then الْ** — also for things in general:\n→ 我喜欢咖啡 = أُحِبُّ الْقَهْوَةَ"
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Italian il / la and un / una become a prefix and an ending, with one prefix for every gender and number:\n→ الْبَيْتُ / بَيْتٌ\n\n- As in mi piace il caffè, things in general take the article: أُحِبُّ الْقَهْوَةَ.\n- There is no partitive (del caffè): أُرِيدُ قَهْوَةً."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Albanian also joins the article to the noun — but at the end (shtëpia), with a form for each gender and case.\n\nArabic puts الْ **at the front, the same for every noun**, and says “a” with the ending -un instead of një:\n→ الْبَيْتُ / بَيْتٌ"
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "Portuguese o / a and um / uma become a prefix and an ending:\n→ الْبَيْتُ / بَيْتٌ\n\nMany Portuguese words keep the Arabic article, sun letters included:\n- azeite — الزَّيْت az-zayt\n- açúcar — السُّكَّر as-sukkar\n- arroz — الرُّزّ ar-ruzz"
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your language has articles that change for gender and case, Arabic is simpler:\n- one invariable prefix الْ for “the”;\n- the ending -un for “a”;\n- the case is in the vowel after it."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "new",
+   "text": "If your language has no definite article (perhaps only a definite-object ending), note that Arabic marks **every noun — subject or object** — as definite (الْ) or indefinite (-un).\n\nThings in general take الْ too."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "new",
+   "text": "If your language leaves definiteness to context, Arabic does not: every noun is الْبَيْتُ (the one we know) or بَيْتٌ (a house).\n\nGeneral statements use الْ:\n→ أُحِبُّ الشَّايَ"
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "new",
+   "text": "If your language has no articles, note that Arabic marks every noun as definite (الْ) or indefinite (-un).\n\nBefore the 14 sun letters the l of الْ is not heard:\n→ الشَّقَّةُ"
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "If your language is Semitic, a prefixed article and no separate word for “a” may be familiar.\n\nNew may be:\n- the indefinite ending -un;\n- the sun letters that swallow the l: الشَّقَّةُ (aš-šaqqa)."
   }
  ]
 }

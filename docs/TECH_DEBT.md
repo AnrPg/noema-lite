@@ -13,6 +13,7 @@ what to think about first, and status. Newest at the top.
 | TD-6 | Claude: verify the connector with claude.ai and way A with a real API key | 📋 known gap | 2026-10-06 |
 | TD-7 | Curricula: run once with real Claude / Gemini keys; preparation only while a tab is open | 📋 known gap | 2026-10-07 |
 | TD-8 | Viewer: exact layout for old binary DOC/PPT, Pages/Keynote; PDF text search | 💭 idea | 2026-10-07 |
+| TD-9 | UI translations for ar-EG, de, tr, zh-Hans, zh-Hant (and hi, ja, it, es-ES, sq, pt-PT) | ⏸ postponed by the owner | 2026-10-11 |
 
 ---
 
@@ -96,3 +97,14 @@ Old binary Word/PowerPoint (DOC, PPT), Apple Pages/Keynote and Outlook MSG show 
 (with ⬇️ download for the real program). PPTX shows text and pictures per slide, not the exact layout. PDFs have no
 text layer yet (no select/search inside the viewer). Options: a server-side converter (LibreOffice) — would need
 a backend; pdf.js TextLayer for search.
+
+### TD-9 · UI translations beyond el / ru / fr — ⏸ postponed by the owner (2026-10-11)
+**What:** Claude drafts of every UI catalog (`i18n/<component>/drafts/<locale>.arb`, ≈4,100 keys each) for **ar-EG, de, tr,
+zh-Hans, zh-Hant** (the owner's next priorities, in this order after el, ru, fr: ar, de, tr, zh), then hi, ja, it, es-ES,
+sq, pt-PT. Postponed by the owner to save effort; Greek comes first and is completed.
+**Started before the postponement:** partial de drafts (core, email, characters, shell) and zh-Hans / zh-Hant drafts (core, email, errors) are merged; the other components remain.
+**Ready:** the locales exist in `engine/i18n.js` (flag `off`), glossary drafts in `i18n/glossary/drafts/` (tr missing),
+`node tools/i18n/check.js` enforces each locale's CLDR plurals (ar: zero/one/two/few/many/other), `docs/i18n.md` §5 is the
+how-to. Each locale: ≈200 k characters of drafts → review in Weblate → flag `preview` → `on`.
+**Think first:** Turkish suffixes after placeholders (vowel harmony: rephrase so no suffix follows `{name}`); zh-Hant is
+Taiwan vocabulary, not a conversion of zh-Hans; Arabic: MSA, gender-neutral phrasing, digits from ICU only.

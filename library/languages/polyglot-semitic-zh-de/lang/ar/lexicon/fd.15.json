@@ -26,6 +26,12 @@
     "declension": "diptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a month name: it follows شَهْر in a construct (شَهْرُ …), it does not head one"
     }
    },
    "contrasts": [
@@ -154,6 +160,12 @@
     "declension": "diptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a month name: it follows شَهْر in a construct (شَهْرُ …), it does not head one"
     }
    },
    "contrasts": [
@@ -282,6 +294,12 @@
     "declension": "diptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a month name: it follows شَهْر in a construct (شَهْرُ …), it does not head one"
     }
    },
    "contrasts": [
@@ -410,6 +428,12 @@
     "declension": "diptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a month name: it follows شَهْر in a construct (شَهْرُ …), it does not head one"
     }
    },
    "contrasts": [
@@ -539,6 +563,12 @@
     "declension": "diptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a month name: it follows شَهْر in a construct (شَهْرُ …), it does not head one"
     }
    },
    "contrasts": [
@@ -667,6 +697,12 @@
     "declension": "diptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a month name: it follows شَهْر in a construct (شَهْرُ …), it does not head one"
     }
    },
    "contrasts": [
@@ -795,6 +831,12 @@
     "declension": "diptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a month name: it follows شَهْر in a construct (شَهْرُ …), it does not head one"
     }
    },
    "contrasts": [
@@ -923,6 +965,12 @@
     "declension": "diptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a month name: it follows شَهْر in a construct (شَهْرُ …), it does not head one"
     }
    },
    "contrasts": [
@@ -1052,6 +1100,12 @@
     "declension": "diptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a month name: it follows شَهْر in a construct (شَهْرُ …), it does not head one"
     }
    },
    "contrasts": [
@@ -1180,6 +1234,12 @@
     "declension": "diptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a month name: it follows شَهْر in a construct (شَهْرُ …), it does not head one"
     }
    },
    "contrasts": [
@@ -1308,6 +1368,12 @@
     "declension": "diptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a month name: it follows شَهْر in a construct (شَهْرُ …), it does not head one"
     }
    },
    "contrasts": [
@@ -1436,6 +1502,12 @@
     "declension": "diptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a month name: it follows شَهْر in a construct (شَهْرُ …), it does not head one"
     }
    },
    "contrasts": [
@@ -1564,6 +1636,12 @@
     "declension": "diptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a month name: it follows شَهْر in a construct (شَهْرُ …), it does not head one"
     }
    },
    "contrasts": [
@@ -1652,17 +1730,69 @@
      }
     ],
     "etymology": {
-     "text": "Wiktionary: ultimately from Latin Iānuārius; compare Italian gennaio for the pronunciation.",
+     "text": "Wiktionary: ultimately from Latin Iānuārius.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Like Greek, German and Russian, these names come from Latin: Ιανουάριος, Januar, январь."
+     "These names come from Latin, like German Januar."
     ],
     "pitfalls": [
      "A month name is a diptote proper noun: no tanwīn, and -a in the genitive: فِي يَنَايِرَ."
     ],
     "subtleties": [
-     "These names come from Latin, like Greek, German and Russian month names — easy to recognise."
+     "These names come from Latin, like the German month names — easy to recognise."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "The same name as Ιανουάριος: both come from the Roman calendar."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "The same name as январь: both come from the Roman calendar."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "The same name as January: both come from the Roman calendar."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "The same name as janvier: both come from the Roman calendar."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "The same name as gennaio: both come from the Roman calendar."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "The same name as enero: both come from the Roman calendar."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "The same name as janeiro: both come from the Roman calendar."
+     },
+     {
+      "for": "sq",
+      "rel": "same",
+      "text": "The same name as janar: both come from the Roman calendar."
+     },
+     {
+      "for": "hi",
+      "rel": "same",
+      "text": "The same name as जनवरी: both come from the Roman calendar."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "يَنَايِر sounds close to your gennaio — Wiktionary points to it for the pronunciation."
+     }
     ]
    }
   },
@@ -1692,6 +1822,12 @@
     "declension": "diptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a month name: it follows شَهْر in a construct (شَهْرُ …), it does not head one"
     }
    },
    "contrasts": [
@@ -1780,17 +1916,69 @@
      }
     ],
     "etymology": {
-     "text": "Wiktionary: ultimately from Latin Februarius; compare Italian febbraio for the pronunciation.",
+     "text": "Wiktionary: ultimately from Latin Februarius.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Like Greek, German and Russian, these names come from Latin: Φεβρουάριος, Februar, февраль."
+     "These names come from Latin, like German Februar."
     ],
     "pitfalls": [
      "A month name is a diptote proper noun: no tanwīn, and -a in the genitive: فِي فِبْرَايِرَ."
     ],
     "subtleties": [
-     "These names come from Latin, like Greek, German and Russian month names — easy to recognise."
+     "These names come from Latin, like the German month names — easy to recognise."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "The same name as Φεβρουάριος: both come from the Roman calendar."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "The same name as февраль: both come from the Roman calendar."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "The same name as February: both come from the Roman calendar."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "The same name as février: both come from the Roman calendar."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "The same name as febbraio: both come from the Roman calendar."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "The same name as febrero: both come from the Roman calendar."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "The same name as fevereiro: both come from the Roman calendar."
+     },
+     {
+      "for": "sq",
+      "rel": "different",
+      "text": "Albanian shkurt is a native name; the Arabic name is the Roman one, as in most languages."
+     },
+     {
+      "for": "hi",
+      "rel": "same",
+      "text": "The same name as फ़रवरी: both come from the Roman calendar."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "فِبْرَايِر sounds close to your febbraio — Wiktionary points to it for the pronunciation."
+     }
     ]
    }
   },
@@ -1820,6 +2008,12 @@
     "declension": "diptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a month name: it follows شَهْر in a construct (شَهْرُ …), it does not head one"
     }
    },
    "contrasts": [
@@ -1912,13 +2106,60 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Like Greek, German and Russian, these names come from Latin: Μάρτιος, März, март — the month of Mars."
+     "These names come from Latin, like German März — the month of Mars."
     ],
     "pitfalls": [
      "A month name is a diptote proper noun: no tanwīn, and -a in the genitive: فِي مَارِسَ."
     ],
     "subtleties": [
-     "These names come from Latin, like Greek, German and Russian month names — easy to recognise."
+     "These names come from Latin, like the German month names — easy to recognise."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "The same name as Μάρτιος: both come from the Roman calendar."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "The same name as март: both come from the Roman calendar."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "The same name as March: both come from the Roman calendar."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "The same name as mars: both come from the Roman calendar."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "The same name as marzo: both come from the Roman calendar."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "The same name as marzo: both come from the Roman calendar."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "The same name as março: both come from the Roman calendar."
+     },
+     {
+      "for": "sq",
+      "rel": "same",
+      "text": "The same name as mars: both come from the Roman calendar."
+     },
+     {
+      "for": "hi",
+      "rel": "same",
+      "text": "The same name as मार्च: both come from the Roman calendar."
+     }
     ]
    }
   },
@@ -1948,6 +2189,12 @@
     "declension": "diptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a month name: it follows شَهْر in a construct (شَهْرُ …), it does not head one"
     }
    },
    "contrasts": [
@@ -2040,13 +2287,60 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Like Greek, German and Russian, these names come from Latin: Απρίλιος, April, апрель. Also spelled إِبْرِيل."
+     "These names come from Latin, like German April. Also spelled إِبْرِيل."
     ],
     "pitfalls": [
      "A month name is a diptote proper noun: no tanwīn, and -a in the genitive: فِي أَبْرِيلَ."
     ],
     "subtleties": [
-     "These names come from Latin, like Greek, German and Russian month names — easy to recognise."
+     "These names come from Latin, like the German month names — easy to recognise."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "The same name as Απρίλιος: both come from the Roman calendar."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "The same name as апрель: both come from the Roman calendar."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "The same name as April: both come from the Roman calendar."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "The same name as avril: both come from the Roman calendar."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "The same name as aprile: both come from the Roman calendar."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "The same name as abril: both come from the Roman calendar."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "The same name as abril: both come from the Roman calendar."
+     },
+     {
+      "for": "sq",
+      "rel": "same",
+      "text": "The same name as prill: both come from the Roman calendar."
+     },
+     {
+      "for": "hi",
+      "rel": "same",
+      "text": "The same name as अप्रैल: both come from the Roman calendar."
+     }
     ]
    }
   },
@@ -2076,6 +2370,12 @@
     "declension": "invariable",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a month name: it follows شَهْر in a construct (شَهْرُ …), it does not head one"
     }
    },
    "contrasts": [
@@ -2168,13 +2468,60 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Like Greek, German and Russian, these names come from Latin: Μάιος, Mai, май."
+     "These names come from Latin, like German Mai."
     ],
     "pitfalls": [
      "It ends in a long vowel and never changes: مَايُو, فِي مَايُو."
     ],
     "subtleties": [
-     "These names come from Latin, like Greek, German and Russian month names — easy to recognise."
+     "These names come from Latin, like the German month names — easy to recognise."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "The same name as Μάιος: both come from the Roman calendar."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "The same name as май: both come from the Roman calendar."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "The same name as May: both come from the Roman calendar."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "The same name as mai: both come from the Roman calendar."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "The same name as maggio: both come from the Roman calendar."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "The same name as mayo: both come from the Roman calendar."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "The same name as maio: both come from the Roman calendar."
+     },
+     {
+      "for": "sq",
+      "rel": "same",
+      "text": "The same name as maj: both come from the Roman calendar."
+     },
+     {
+      "for": "hi",
+      "rel": "same",
+      "text": "The same name as मई: both come from the Roman calendar."
+     }
     ]
    }
   },
@@ -2204,6 +2551,12 @@
     "declension": "invariable",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a month name: it follows شَهْر in a construct (شَهْرُ …), it does not head one"
     }
    },
    "contrasts": [
@@ -2296,14 +2649,61 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Like Greek, German and Russian, these names come from Latin: Ιούνιος, Juni, июнь."
+     "These names come from Latin, like German Juni."
     ],
     "pitfalls": [
      "It ends in a long vowel and never changes: يُونْيُو, فِي يُونْيُو.",
      "Egypt also writes يونيه; Morocco uses its own forms (يُونْيُو is shared)."
     ],
     "subtleties": [
-     "These names come from Latin, like Greek, German and Russian month names — easy to recognise."
+     "These names come from Latin, like the German month names — easy to recognise."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "The same name as Ιούνιος: both come from the Roman calendar."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "The same name as июнь: both come from the Roman calendar."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "The same name as June: both come from the Roman calendar."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "The same name as juin: both come from the Roman calendar."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "The same name as giugno: both come from the Roman calendar."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "The same name as junio: both come from the Roman calendar."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "The same name as junho: both come from the Roman calendar."
+     },
+     {
+      "for": "sq",
+      "rel": "different",
+      "text": "Albanian qershor is a native name (the cherry month); the Arabic name is the Roman one, as in most languages."
+     },
+     {
+      "for": "hi",
+      "rel": "same",
+      "text": "The same name as जून: both come from the Roman calendar."
+     }
     ]
    }
   },
@@ -2333,6 +2733,12 @@
     "declension": "invariable",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a month name: it follows شَهْر in a construct (شَهْرُ …), it does not head one"
     }
    },
    "contrasts": [
@@ -2425,14 +2831,61 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Like Greek, German and Russian, these names come from Latin: Ιούλιος, Juli, июль — Julius Caesar’s month."
+     "These names come from Latin, like German Juli — Julius Caesar’s month."
     ],
     "pitfalls": [
      "It ends in a long vowel and never changes: يُولْيُو, فِي يُولْيُو.",
      "Egypt also writes يوليه; Morocco says يوليوز."
     ],
     "subtleties": [
-     "These names come from Latin, like Greek, German and Russian month names — easy to recognise."
+     "These names come from Latin, like the German month names — easy to recognise."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "The same name as Ιούλιος: both come from the Roman calendar."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "The same name as июль: both come from the Roman calendar."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "The same name as July: both come from the Roman calendar."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "The same name as juillet: both come from the Roman calendar."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "The same name as luglio: both come from the Roman calendar."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "The same name as julio: both come from the Roman calendar."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "The same name as julho: both come from the Roman calendar."
+     },
+     {
+      "for": "sq",
+      "rel": "different",
+      "text": "Albanian korrik is a native name (the harvest month); the Arabic name is the Roman one, as in most languages."
+     },
+     {
+      "for": "hi",
+      "rel": "same",
+      "text": "The same name as जुलाई: both come from the Roman calendar."
+     }
     ]
    }
   },
@@ -2462,6 +2915,12 @@
     "declension": "diptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a month name: it follows شَهْر in a construct (شَهْرُ …), it does not head one"
     }
    },
    "contrasts": [
@@ -2554,13 +3013,60 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Like Greek, German and Russian, these names come from Latin: Αύγουστος, August, август — the month of the emperor Augustus."
+     "These names come from Latin, like German August — the month of the emperor Augustus."
     ],
     "pitfalls": [
      "A month name is a diptote proper noun: no tanwīn, and -a in the genitive: فِي أَغُسْطُسَ."
     ],
     "subtleties": [
-     "These names come from Latin, like Greek, German and Russian month names — easy to recognise."
+     "These names come from Latin, like the German month names — easy to recognise."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "The same name as Αύγουστος: both come from the Roman calendar."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "The same name as август: both come from the Roman calendar."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "The same name as August: both come from the Roman calendar."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "The same name as août: both come from the Roman calendar."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "The same name as agosto: both come from the Roman calendar."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "The same name as agosto: both come from the Roman calendar."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "The same name as agosto: both come from the Roman calendar."
+     },
+     {
+      "for": "sq",
+      "rel": "same",
+      "text": "The same name as gusht: both come from the Roman calendar."
+     },
+     {
+      "for": "hi",
+      "rel": "same",
+      "text": "The same name as अगस्त: both come from the Roman calendar."
+     }
     ]
    }
   },
@@ -2590,6 +3096,12 @@
     "declension": "diptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a month name: it follows شَهْر in a construct (شَهْرُ …), it does not head one"
     }
    },
    "contrasts": [
@@ -2682,13 +3194,60 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Like Greek, German and Russian, these names come from Latin: Σεπτέμβριος, September, сентябрь — once the seventh month (septem)."
+     "These names come from Latin, like German September — once the seventh month (septem)."
     ],
     "pitfalls": [
      "A month name is a diptote proper noun: no tanwīn, and -a in the genitive: فِي سِبْتِمْبِرَ."
     ],
     "subtleties": [
-     "These names come from Latin, like Greek, German and Russian month names — easy to recognise."
+     "These names come from Latin, like the German month names — easy to recognise."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "The same name as Σεπτέμβριος: both come from the Roman calendar."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "The same name as сентябрь: both come from the Roman calendar."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "The same name as September: both come from the Roman calendar."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "The same name as septembre: both come from the Roman calendar."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "The same name as settembre: both come from the Roman calendar."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "The same name as septiembre: both come from the Roman calendar."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "The same name as setembro: both come from the Roman calendar."
+     },
+     {
+      "for": "sq",
+      "rel": "same",
+      "text": "The same name as shtator: both come from the Roman calendar."
+     },
+     {
+      "for": "hi",
+      "rel": "same",
+      "text": "The same name as सितंबर: both come from the Roman calendar."
+     }
     ]
    }
   },
@@ -2718,6 +3277,12 @@
     "declension": "diptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a month name: it follows شَهْر in a construct (شَهْرُ …), it does not head one"
     }
    },
    "contrasts": [
@@ -2810,13 +3375,60 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Like Greek, German and Russian, these names come from Latin: Οκτώβριος, Oktober, октябрь — once the eighth month (octo)."
+     "These names come from Latin, like German Oktober — once the eighth month (octo)."
     ],
     "pitfalls": [
      "A month name is a diptote proper noun: no tanwīn, and -a in the genitive: فِي أُكْتُوبِرَ."
     ],
     "subtleties": [
-     "These names come from Latin, like Greek, German and Russian month names — easy to recognise."
+     "These names come from Latin, like the German month names — easy to recognise."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "The same name as Οκτώβριος: both come from the Roman calendar."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "The same name as октябрь: both come from the Roman calendar."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "The same name as October: both come from the Roman calendar."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "The same name as octobre: both come from the Roman calendar."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "The same name as ottobre: both come from the Roman calendar."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "The same name as octubre: both come from the Roman calendar."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "The same name as outubro: both come from the Roman calendar."
+     },
+     {
+      "for": "sq",
+      "rel": "similar",
+      "text": "Albanian tetor is built from tetë (eight), as the Roman name is from octo."
+     },
+     {
+      "for": "hi",
+      "rel": "same",
+      "text": "The same name as अक्टूबर: both come from the Roman calendar."
+     }
     ]
    }
   },
@@ -2846,6 +3458,12 @@
     "declension": "diptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a month name: it follows شَهْر in a construct (شَهْرُ …), it does not head one"
     }
    },
    "contrasts": [
@@ -2938,13 +3556,60 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Like Greek, German and Russian, these names come from Latin: Νοέμβριος, November, ноябрь — once the ninth month (novem)."
+     "These names come from Latin, like German November — once the ninth month (novem)."
     ],
     "pitfalls": [
      "A month name is a diptote proper noun: no tanwīn, and -a in the genitive: فِي نُوفِمْبِرَ."
     ],
     "subtleties": [
-     "These names come from Latin, like Greek, German and Russian month names — easy to recognise."
+     "These names come from Latin, like the German month names — easy to recognise."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "The same name as Νοέμβριος: both come from the Roman calendar."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "The same name as ноябрь: both come from the Roman calendar."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "The same name as November: both come from the Roman calendar."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "The same name as novembre: both come from the Roman calendar."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "The same name as novembre: both come from the Roman calendar."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "The same name as noviembre: both come from the Roman calendar."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "The same name as novembro: both come from the Roman calendar."
+     },
+     {
+      "for": "sq",
+      "rel": "similar",
+      "text": "Albanian nëntor is built from nëntë (nine), as the Roman name is from novem."
+     },
+     {
+      "for": "hi",
+      "rel": "same",
+      "text": "The same name as नवंबर: both come from the Roman calendar."
+     }
     ]
    }
   },
@@ -2974,6 +3639,12 @@
     "declension": "diptote",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "a month name: it follows شَهْر in a construct (شَهْرُ …), it does not head one"
     }
    },
    "contrasts": [
@@ -3063,13 +3734,60 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Like Greek, German and Russian, these names come from Latin: Δεκέμβριος, Dezember, декабрь — once the tenth month (decem)."
+     "These names come from Latin, like German Dezember — once the tenth month (decem)."
     ],
     "pitfalls": [
      "A month name is a diptote proper noun: no tanwīn, and -a in the genitive: فِي دِيسِمْبِرَ."
     ],
     "subtleties": [
-     "These names come from Latin, like Greek, German and Russian month names — easy to recognise."
+     "These names come from Latin, like the German month names — easy to recognise."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "The same name as Δεκέμβριος: both come from the Roman calendar."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "The same name as декабрь: both come from the Roman calendar."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "The same name as December: both come from the Roman calendar."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "The same name as décembre: both come from the Roman calendar."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "The same name as dicembre: both come from the Roman calendar."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "The same name as diciembre: both come from the Roman calendar."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "The same name as dezembro: both come from the Roman calendar."
+     },
+     {
+      "for": "sq",
+      "rel": "similar",
+      "text": "Albanian dhjetor is built from dhjetë (ten), as the Roman name is from decem."
+     },
+     {
+      "for": "hi",
+      "rel": "same",
+      "text": "The same name as दिसंबर: both come from the Roman calendar."
+     }
     ]
    }
   },
@@ -3096,7 +3814,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "رَبِيعُ",
+      "translit": "rabīʿu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "rabīʿ",
@@ -3224,7 +3951,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "صَيْفُ",
+      "translit": "ṣayfu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "ṣayf",
@@ -3346,7 +4082,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "خَرِيفُ",
+      "translit": "ḫarīfu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "ḫarīf",
@@ -3465,7 +4210,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "شِتَاءُ",
+      "translit": "šitāʾu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "šitāʾ",
@@ -3569,6 +4323,7 @@
     "plurals": [
      {
       "form": "أَسَابِيع",
+      "translit": "ʾasābīʿ",
       "kind": "broken",
       "pattern": "أَفَاعِيل",
       "declension": "diptote",
@@ -3581,7 +4336,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "أُسْبُوعُ",
+      "translit": "ʾusbūʿu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -3684,13 +4448,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "From “seven”, like Hebrew שָׁבוּעַ (shavua) from שֶׁבַע (seven) and Greek εβδομάδα from επτά."
+     "From “seven”, like Hebrew שָׁבוּעַ (shavua) from שֶׁבַע (seven)."
     ],
     "pitfalls": [
      "The plural أَسَابِيعُ is diptote: بَعْدَ أَسَابِيعَ (after some weeks)."
     ],
     "subtleties": [
      "“Next week” and “last week” are accusatives of time: الْأُسْبُوعَ الْقَادِمَ, الْأُسْبُوعَ الْمَاضِيَ."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "From “seven”, like εβδομάδα from επτά."
+     }
     ]
    }
   },
@@ -3710,6 +4481,7 @@
     "plurals": [
      {
       "form": "أَشْهُر",
+      "translit": "ʾašhur",
       "kind": "broken",
       "pattern": "أَفْعُل",
       "declension": "triptote",
@@ -3720,6 +4492,7 @@
      },
      {
       "form": "شُهُور",
+      "translit": "šuhūr",
       "kind": "broken",
       "pattern": "فُعُول",
       "declension": "triptote",
@@ -3733,7 +4506,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "no other form belongs to one meaning (the plurals do: see plurals)"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "شَهْرُ",
+      "translit": "šahru"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "šahr",
@@ -3885,6 +4667,7 @@
     "plurals": [
      {
       "form": "سَنَوَات",
+      "translit": "sanawāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -3893,6 +4676,7 @@
      },
      {
       "form": "سِنُونَ",
+      "translit": "sinūn",
       "kind": "soundMasc",
       "declension": "sound",
       "note": "literary (accusative / genitive سِنِينَ)",
@@ -3905,7 +4689,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "سَنَةُ",
+      "translit": "sanatu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -4059,6 +4852,7 @@
     "plurals": [
      {
       "form": "أَعْوَام",
+      "translit": "ʾaʿwām",
       "kind": "broken",
       "pattern": "أَفْعَال",
       "declension": "triptote",
@@ -4071,7 +4865,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "عَامُ",
+      "translit": "ʿāmu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -4202,6 +5005,7 @@
     "plurals": [
      {
       "form": "سَاعَات",
+      "translit": "sāʿāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -4215,7 +5019,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "no other form belongs to one meaning (the plurals do: see plurals)"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "سَاعَةُ",
+      "translit": "sāʿatu"
+     }
+    ]
    },
    "contrasts": [
     {
@@ -4367,6 +5180,13 @@
     ],
     "subtleties": [
      "One word for hour, clock and watch — the context decides."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "There is no word for “o’clock”: five o’clock is “the fifth hour”, السَّاعَةُ الْخَامِسَةُ."
+     }
     ]
    }
   },
@@ -4386,6 +5206,7 @@
     "plurals": [
      {
       "form": "دَقَائِق",
+      "translit": "daqāʾiq",
       "kind": "broken",
       "pattern": "فَعَائِل",
       "declension": "diptote",
@@ -4399,7 +5220,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "دَقِيقَةُ",
+      "translit": "daqīqatu"
+     }
+    ]
    },
    "gender": "FEM",
    "translit": "daqīqa",
@@ -4532,6 +5362,7 @@
     "plurals": [
      {
       "form": "تَوَارِيخ",
+      "translit": "tawārīḫ",
       "kind": "broken",
       "pattern": "تَفَاعِيل",
       "declension": "diptote",
@@ -4546,7 +5377,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "no other form belongs to one meaning (the plurals do: see plurals)"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "تَارِيخُ",
+      "translit": "tārīḫu"
+     }
+    ]
    },
    "gender": "MASC",
    "translit": "tārīḫ",
@@ -4683,6 +5523,7 @@
     "plurals": [
      {
       "form": "أَعْيَاد مِيلَاد",
+      "translit": "ʾaʿyād mīlād",
       "kind": "broken",
       "declension": "triptote",
       "note": "the head noun takes the plural: أَعْيَادُ مِيلَادٍ",
@@ -4701,7 +5542,13 @@
        "s2"
       ]
      }
-    ]
+    ],
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": {
+     "none": "already a construct phrase: عِيد is in the construct state and مِيلَاد is its genitive; “my …” goes on the last word"
+    }
    },
    "gender": "MASC",
    "translit": "ʿīd mīlād",
@@ -4856,6 +5703,7 @@
     "plurals": [
      {
       "form": "عُطْلَات",
+      "translit": "ʿuṭlāt",
       "kind": "soundFem",
       "declension": "sound",
       "senses": [
@@ -4864,6 +5712,7 @@
      },
      {
       "form": "عُطَل",
+      "translit": "ʿuṭal",
       "kind": "broken",
       "pattern": "فُعَل",
       "declension": "triptote",
@@ -4877,7 +5726,16 @@
     "declension": "triptote",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pair": {
+     "none": "not a person: no male / female counterpart"
+    },
+    "construct": [
+     {
+      "form": "عُطْلَةُ",
+      "translit": "ʿuṭlatu"
+     }
+    ]
    },
    "gender": "FEM",
    "translit": "ʿuṭla",
@@ -5021,7 +5879,11 @@
     "kind": "zarf",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "withPronoun": [
+     "قَبْلِي",
+     "قَبْلَهُ"
+    ]
    },
    "translit": "qabla",
    "forms": {
@@ -5144,6 +6006,10 @@
        "s3"
       ]
      }
+    ],
+    "withPronoun": [
+     "بَعْدِي",
+     "بَعْدَهُ"
     ]
    },
    "translit": "baʿda",
@@ -5290,6 +6156,9 @@
     "kind": "harf",
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "withPronoun": {
+     "none": "takes no attached pronoun: a noun or a demonstrative follows (حَتَّى الْمَسَاءِ، مُنْذُ ذٰلِكَ الْيَوْمِ)"
     }
    },
    "contrasts": [
@@ -5430,6 +6299,9 @@
     "kind": "harf",
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "withPronoun": {
+     "none": "takes no attached pronoun: a noun or a demonstrative follows (حَتَّى الْمَسَاءِ، مُنْذُ ذٰلِكَ الْيَوْمِ)"
     }
    },
    "translit": "munḏu",
@@ -5513,7 +6385,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Like German seit and Greek εδώ και, it goes with the present tense: أَعِيشُ هُنَا مُنْذُ سَنَةٍ = Ich wohne seit einem Jahr hier — not a perfect as in English."
+     "Like German seit, it goes with the present tense: أَعِيشُ هُنَا مُنْذُ سَنَةٍ = Ich wohne seit einem Jahr hier."
     ],
     "pitfalls": [
      "For something still going on use the present tense: أَعْمَلُ هُنَا مُنْذُ سَنَتَيْنِ.",
@@ -5521,6 +6393,53 @@
     ],
     "subtleties": [
      "With a past verb it means “ago”: وَصَلَ مُنْذُ سَاعَةٍ (he arrived an hour ago)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "Not a perfect: “I have lived here for a year” is the present, أَعِيشُ هُنَا مُنْذُ سَنَةٍ."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Like εδώ και, it goes with the present: μένω στην Αθήνα εδώ και ένα χρόνο = أَعِيشُ هُنَا مُنْذُ سَنَةٍ."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Like depuis, it goes with the present: j’habite ici depuis un an = أَعِيشُ هُنَا مُنْذُ سَنَةٍ."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Like da, it goes with the present: abito qui da un anno = أَعِيشُ هُنَا مُنْذُ سَنَةٍ."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "Like desde hace, it goes with the present: vivo aquí desde hace un año = أَعِيشُ هُنَا مُنْذُ سَنَةٍ."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Like há, it goes with the present: moro aqui há um ano = أَعِيشُ هُنَا مُنْذُ سَنَةٍ."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "As in живу здесь уже год, the present is used: أَعِيشُ هُنَا مُنْذُ سَنَةٍ."
+     },
+     {
+      "for": "sq",
+      "rel": "same",
+      "text": "As in jetoj këtu prej një viti, the present is used: أَعِيشُ هُنَا مُنْذُ سَنَةٍ."
+     },
+     {
+      "for": "hi",
+      "rel": "same",
+      "text": "As in मैं एक साल से यहाँ रहता हूँ, the present is used: أَعِيشُ هُنَا مُنْذُ سَنَةٍ."
+     }
     ]
    },
    "prefix": false
@@ -5539,7 +6458,11 @@
     "kind": "zarf",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "withPronoun": [
+     "خِلَالِي",
+     "خِلَالَهُ"
+    ]
    },
    "contrasts": [
     {
@@ -5678,7 +6601,11 @@
     "kind": "zarf",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "withPronoun": [
+     "أَثْنَائِي",
+     "أَثْنَاءَهُ"
+    ]
    },
    "contrasts": [
     {
@@ -5793,7 +6720,7 @@
  "absent": [
   {
    "concept": "time.oclock",
-   "reason": "Arabic has no word for “o’clock”.",
+   "reason": "The hour needs no extra word: it is named with السَّاعَةُ + an ordinal.",
    "use": "The hour is said with السَّاعَةُ (the hour) + an ordinal number in the feminine: السَّاعَةُ الْخَامِسَةُ = five o’clock (lit. “the fifth hour”); one o’clock is السَّاعَةُ الْوَاحِدَةُ. “At five” = فِي السَّاعَةِ الْخَامِسَةِ (or عِنْدَ …). In everyday speech the cardinal number is common: السَّاعَة خَمْسَة. The ordinals come later in the course; see the table in “Time: before, after …” (lesson 15)."
   }
  ]

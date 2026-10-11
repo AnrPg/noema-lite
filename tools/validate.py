@@ -1,8 +1,13 @@
 #!/usr/bin/env python3
 """Validate a chapter JSON file (tools/CONTENT_SPEC.md + docs/VISUAL.md).
-Usage: validate.py chNN.json [--media media_meta.json] [--min-visual N]
-  --media       {id: {w, h, regions}} of the subject's pictures (build.py passes it) → checks references & coordinates
-  --min-visual  required visual exercises per chapter (from subject.json authoring.minVisualPerChapter)"""
+Usage: validate.py chNN.json [--media media_meta.json] [--min-visual N] [--source chNN.json]
+       validate.py subject.json --subject [--translations el,fr]
+  --media         {id: {w, h, regions}} of the subject's pictures (build.py passes it) → checks references & coordinates
+  --min-visual    required visual exercises per chapter (from subject.json authoring.minVisualPerChapter)
+  --source        the file is a TRANSLATION (translations/<locale>/chNN.json) of this chapter (as built: base + patches):
+                  same ids, same structure, same answers — only the words differ (CONTENT_SPEC.md "Packs in several languages")
+  --subject       check subject.json: the content language and the optional per-locale metadata (subject.i18n)
+  --translations  (with --subject) the locales the subject has translations/<locale>/ folders for"""
 import json, re, sys
 for _s in (sys.stdout, sys.stderr):   # UTF-8 output on Windows / macOS / Linux alike
     try: _s.reconfigure(encoding='utf-8', errors='replace')
@@ -99,6 +104,91 @@ def check_visual(eid, e):
         if "pass" in e and not (isinstance(e["pass"], (int, float)) and 0 <= e["pass"] <= 1): E(f"{eid}: pass must be 0-1")
 
 def s(x): return isinstance(x,str) and x.strip()!=""
+
+# ---------------- subject packs in several languages (CONTENT_SPEC.md, docs/i18n.md §10) ----------------
+LOCALE_RE = re.compile(r"^[a-z]{2,3}(-[A-Z][a-z]{3})?(-(?:[A-Z]{2}|\d{3}))?$")   # BCP 47: el, pt-PT, zh-Hant
+# the locales a learner can have as UI language (engine/i18n.js LOCALES) + the bare language a regional one falls back to
+UI_LOCALES = {"en", "el", "ru", "fr", "ar-EG", "ar", "de", "hi", "zh-Hans", "zh-Hant", "ja", "it", "es-ES", "es", "sq", "pt-PT", "pt", "tr"}
+I18N_TEXT = ("title", "appTitle", "description", "searchExamples")   # plain strings
+I18N_OBJ = ("hero", "tutor")                                         # objects: a subset of the source's own keys
+
+def check_locale(where, loc, lang):
+    if not isinstance(loc, str) or not LOCALE_RE.match(loc): E(f"{where}: '{loc}' is not a locale code (BCP 47, e.g. el, fr, pt-PT, zh-Hant)"); return False
+    lang = lang or "en"
+    if loc == lang or (loc.split("-")[0] == lang.split("-")[0] and ("-" not in loc or "-" not in lang) and not loc.startswith("zh")): E(f"{where}: '{loc}' is the pack's own language ({lang}) — the source texts are already in it"); return False
+    if loc not in UI_LOCALES: W(f"{where}: '{loc}' is not a UI language of noema-lite (nor the language of one) — no learner would see it")
+    return True
+
+def check_subject(path, translated):
+    subj = json.load(open(path, encoding="utf-8"))
+    lang = subj.get("language", "en")
+    if not isinstance(lang, str) or not LOCALE_RE.match(lang): E(f"language '{lang}' is not a language code (BCP 47, e.g. en, el, de)")
+    tr = subj.get("i18n")
+    if tr is not None:
+        if not isinstance(tr, dict): E("i18n must be an object {locale: {title, description, …}}"); tr = {}
+        for loc, m in tr.items():
+            where = f"i18n.{loc}"
+            if not check_locale(where, loc, lang): continue
+            if not isinstance(m, dict) or not m: E(f"{where}: must be a non-empty object"); continue
+            for k, v in m.items():
+                if k in I18N_TEXT:
+                    if not s(v): E(f"{where}.{k}: must be a non-empty string")
+                    elif not s(subj.get(k)): E(f"{where}.{k}: the subject has no '{k}' to translate")
+                elif k in I18N_OBJ:
+                    src = subj.get(k) if isinstance(subj.get(k), dict) else {}
+                    if not isinstance(v, dict): E(f"{where}.{k}: must be an object like the subject's '{k}'"); continue
+                    for kk, vv in v.items():
+                        if kk not in src: E(f"{where}.{k}.{kk}: the subject's '{k}' has no '{kk}'")
+                        elif not isinstance(vv, str) or (s(src[kk]) and not s(vv)): E(f"{where}.{k}.{kk}: must be a non-empty string")
+                else: E(f"{where}.{k}: unknown field (allowed: {', '.join(I18N_TEXT + I18N_OBJ)})")
+            if "title" not in m: W(f"{where}: no title — the picker shows the source title")
+    for loc in translated:
+        if check_locale(f"translations/{loc}", loc, lang) and loc not in (tr or {}): W(f"translations/{loc}: add subject.i18n.{loc} (title, description) so the picker shows the translated name")
+    print(f"== {path}: language {lang}, metadata in {', '.join(sorted(tr or {})) or '—'}, content in {', '.join(sorted(translated)) or '—'}")
+    for m in errors: print("ERROR:", m)
+    for m in warns: print("WARN:", m)
+    print("OK" if not errors else f"{len(errors)} ERRORS")
+    sys.exit(1 if errors else 0)
+
+def shape(e):
+    """What a translation must keep of an exercise: everything that decides the answer (only the words may change)."""
+    t = e.get("type"); out = {k: e.get(k) for k in ("type", "section", "media", "answer", "multi", "tolerance", "bugs", "grid", "targets", "any", "asCode", "start") if k in e}
+    for k in ("options", "items", "pairs", "buckets", "lines", "steps", "keywords"):
+        if isinstance(e.get(k), list): out["#" + k] = len(e[k])
+    if t == "bucket": out["bucketOf"] = [x.get("bucket") for x in e.get("items", []) if isinstance(x, dict)]
+    if t == "cloze": out["blanks"] = len(re.findall(r"\[\[(.+?)\]\]", e.get("text", "")))
+    if t == "scenario": out["ok"] = [[bool(o.get("ok")) for o in st.get("options", [])] for st in e.get("steps", [])]
+    # own "regions" may be added to carry translated labels (the picture's are in one language); check_visual checks them
+    return out
+
+def check_same(tr, src):
+    """A translation has the source chapter's ids and structure (CONTENT_SPEC.md "Packs in several languages")."""
+    for k in ("id", "num"):
+        if tr.get(k) != src.get(k): E(f"translation: {k} is {tr.get(k)!r}, the source chapter has {src.get(k)!r}")
+    ss, ts = src.get("sections", []), tr.get("sections", [])
+    if [x.get("id") for x in ts] != [x.get("id") for x in ss]: E(f"translation: sections {[x.get('id') for x in ts]} != source {[x.get('id') for x in ss]} (same ids, same order)")
+    else:
+        for a, b in zip(ss, ts):
+            ta, tb = [x.get("t") for x in a.get("blocks", [])], [x.get("t") for x in b.get("blocks", [])]
+            if ta != tb: E(f"translation {a['id']}: blocks {tb} != source {ta} (same blocks, same order)")
+            else:
+                for i, (x, y) in enumerate(zip(a["blocks"], b["blocks"])):
+                    if x.get("t") == "figure" and x.get("media") != y.get("media"): E(f"translation {a['id']} block {i}: figure media '{y.get('media')}' != source '{x.get('media')}'")
+    for k, label in (("exercises", "exercise"), ("debug", "playbook"), ("flashcards", "flashcard")):
+        A, B = {x.get("id"): x for x in src.get(k, [])}, {x.get("id"): x for x in tr.get(k, [])}
+        miss, extra = [i for i in A if i not in B], [i for i in B if i not in A]
+        if miss: E(f"translation: {label}(s) missing: {', '.join(map(str, miss))}")
+        if extra: E(f"translation: {label}(s) not in the source: {', '.join(map(str, extra))}")
+        if k == "exercises":
+            for i in A:
+                if i in B and shape(A[i]) != shape(B[i]):
+                    d = sorted(x for x in set(shape(A[i])) | set(shape(B[i])) if shape(A[i]).get(x) != shape(B[i]).get(x))
+                    E(f"translation {i}: differs from the source in {', '.join(d)} (only the words may change)")
+        if k == "flashcards":
+            for i in A:
+                if i in B and A[i].get("section") != B[i].get("section"): E(f"translation {i}: section differs from the source")
+    if len(tr.get("pitfalls", [])) != len(src.get("pitfalls", [])): E(f"translation: {len(tr.get('pitfalls', []))} pitfalls, the source has {len(src.get('pitfalls', []))}")
+    if len(tr.get("objectives", [])) != len(src.get("objectives", [])): W(f"translation: {len(tr.get('objectives', []))} objectives, the source has {len(src.get('objectives', []))}")
 
 def main(path):
     try:
@@ -237,6 +327,7 @@ def main(path):
         if vkinds < 2: E(f"visual exercises use {vkinds} type(s); need >= 2 different visual types")
         if nfig < 1: E("no 'figure' block in the chapter (docs/VISUAL.md)")
     elif nvis < 3: W(f"only {nvis} visual exercises (docs/VISUAL.md asks for >= 3 per chapter)")
+    if "--source" in ARGS: check_same(ch, json.load(open(ARGS[ARGS.index("--source")+1], encoding="utf-8")))
     risky = sum(1 for e in exs if set(e.get("tags",[]))&{"pitfall","debug","exam"})
     if exs and risky/len(exs)<0.3: W(f"only {risky}/{len(exs)} exercises tagged pitfall/debug/exam")
     print(f"== {path}: {len(secs)} sections, {len(exs)} exercises ({nvis} visual, {nfig} figures), {len(ch.get('debug',[]))} playbooks, {len(ch.get('flashcards',[]))} flashcards, {len(ch.get('pitfalls',[]))} pitfalls")
@@ -246,4 +337,5 @@ def main(path):
     print("OK" if not errors else f"{len(errors)} ERRORS")
     sys.exit(1 if errors else 0)
 
-main(ARGS[0])
+if "--subject" in ARGS: check_subject(ARGS[0], [x for x in (ARGS[ARGS.index("--translations")+1] if "--translations" in ARGS else "").split(",") if x])
+else: main(ARGS[0])

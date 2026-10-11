@@ -2,7 +2,7 @@
  "$schema": "https://json-schema.org/draft/2020-12/schema",
  "$id": "noema.langpack.v1",
  "title": "noema-lite language package (docs/LANGUAGES.md §10.2)",
- "description": "ONE language for ONE language course, as one file: made by `tools/lang_course.py package <course-folder> <code>` (refused while validate_lang.py --strict --lang <code> has errors), checked by langcore.checkLangPackage (the app and the connector) and added to the course by langcore.langApplyPackage. A package fills the course's existing nodes and functions; it never adds a node, a concept, a function or a frame. The parts use the definitions of noema.lang.v1.",
+ "description": "ONE language for ONE language course, as one file: made by `tools/lang_course.py package <course-folder> <code>` (refused while validate_lang.py --strict --lang <code> has errors), checked by langcore.checkLangPackage (the app and the connector) and added to the course by langcore.langApplyPackage. A package fills the course's existing nodes and functions; it never adds a node, a concept, a function or a frame. The parts use the definitions of noema.lang.v1. D19 (docs/language-packs.md §5): the package carries a NEUTRAL master facade (its English texts name no language outside the course), contrast notes for every supported native and every type on every grammar page, profile.notes where a word invites a comparison; locale facades are optional and may come later (tasks lang.facade:<locale>:<code>:<tier>).",
  "type": "object",
  "required": ["format", "course", "code", "name", "built", "language", "lexicon", "grammar", "bank", "phenomena", "checks"],
  "properties": {
@@ -17,7 +17,7 @@
   "lexicon": { "type": "object", "description": "node id → lang/<code>/lexicon/<node>.json (only nodes of the course)", "additionalProperties": { "$ref": "noema.lang.v1#/$defs/lexicon" } },
   "grammar": { "type": "object", "description": "function id → lang/<code>/grammar/<fn>.json (only functions of the course)", "additionalProperties": { "$ref": "noema.lang.v1#/$defs/grammar" } },
   "bank": { "type": "array", "description": "every sentence of lang/<code>/bank/*.json", "items": { "type": "object" } },
-  "fieldExemptions": { "type": "array", "description": "D19: the bank's fieldExemptions ({field, function, reason}) — a field that cannot show a node says why", "items": { "type": "object" } },
+  "fieldExemptions": { "type": "array", "description": "D20: the bank's fieldExemptions ({field, function, reason}) — a field that cannot show a node says why", "items": { "type": "object" } },
   "script": { "type": ["object", "null"], "description": "lang/<code>/script.json (§4.9), when the language has one" },
   "chars": { "type": ["object", "null"], "description": "lang/<code>/chars.json (§4.9), when the language has one" },
   "phenomena": { "$ref": "noema.lang.v1#/$defs/phenomena", "description": "library/languages/_phenomena/<code>.json — the whole catalogue (D14, §4.11)" },
@@ -29,6 +29,12 @@
   "seeAlso": {
    "type": "object", "description": "additions to the other course languages' grammar pages: language code → function id → [seeAlso entries pointing to the new language]",
    "additionalProperties": { "type": "object", "additionalProperties": { "type": "array", "items": { "type": "object", "required": ["lang", "fn"], "properties": { "lang": { "type": "string" }, "fn": { "type": "string" }, "note": { "type": "string" } } } } }
+  },
+  "wordParameters": { "type": "string", "description": "R3: lang/<code>/WORD_PARAMETERS.md — the exhaustive per-part-of-speech map of the word's distinctive parameters (Markdown, a section per POS naming every parameter of language.wordFeatures), written before any word (docs/language-packs.md §2.4)" },
+  "facades": {
+   "type": "object", "description": "D19 (optional, additive): locale facades of the new language's texts — locale → { address → {t, src} } (noema.langfacade.v1 #/$defs/entries; the addresses of tools/schemas/noema.langfacade.fields.json for lang/<code>/* and _phenomena/<code>.json). Written to facades/<locale>/<code>.json and _phenomena/facades/<locale>/<code>.json; a missing address falls back to the master.",
+   "propertyNames": { "pattern": "^[a-z]{2,3}(-[A-Za-z0-9]{2,8})*$" },
+   "additionalProperties": { "$ref": "noema.langfacade.v1#/$defs/entries" }
   },
   "checks": {
    "type": "object", "required": ["validator"],

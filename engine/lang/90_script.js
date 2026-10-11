@@ -21,10 +21,10 @@ const needTranslit = c => { try { return N.needsTranslit(UI.C, UI.L, c); } catch
 function marksSettings() {
   const langs = UI.C.languages.filter(c => LX(c).language.vowelMarks);
   if (!langs.length) return null;
-  return h('div', { class: 'lx-marklevels' }, ...langs.map(c => h('label', { class: 'lx-setrow' }, info(c).flag, ' ', info(c).name, ' — vowel marks: ',
-    h('select', { 'aria-label': `Vowel marks in ${info(c).name}`, 'data-lang': c, onchange: e => { UI.prefs.markLevel = { ...(UI.prefs.markLevel || {}), [c]: e.target.value }; save(); } },
-      ...[['full', 'always all of them'], ['fading', 'fading: on new words, fewer on known ones'], ['none', 'none (unvocalized)']].map(([v2, t]) => h('option', { value: v2, selected: ((UI.prefs.markLevel || {})[c] || 'full') === v2 ? true : null }, t))))),
-    h('p', { class: 'tiny' }, 'Fading: a new word shows every mark; once you know it for reading only the šadda / dagesh stay; once you can write it, none. Drills about the marks always show them.'));
+  return h('div', { class: 'lx-marklevels' }, ...langs.map(c => h('label', { class: 'lx-setrow' }, info(c).flag, ' ', info(c).label, ' — ' + LT('lang.script.marksLabel') + ' ',
+    h('select', { 'aria-label': LT('lang.script.marksIn', { lang: info(c).name }), 'data-lang': c, onchange: e => { UI.prefs.markLevel = { ...(UI.prefs.markLevel || {}), [c]: e.target.value }; save(); } },
+      ...[['full', LT('lang.script.marksFull')], ['fading', LT('lang.script.marksFading')], ['none', LT('lang.script.marksNone')]].map(([v2, t]) => h('option', { value: v2, selected: ((UI.prefs.markLevel || {})[c] || 'full') === v2 ? true : null }, t))))),
+    h('p', { class: 'tiny' }, LT('lang.script.fadingHelp')));
 }
 
 /* ---------- typing in any script: on-screen keyboards, pinyin input, umlauts (§8) ---------- */
@@ -33,7 +33,7 @@ const keyBtn = (label, onclick, extra = {}) => h('button', { type: 'button', cla
  *  box (tone numbers → marks) whose characters are chosen, de the ä ö ü ß buttons. → {el, input, insert} */
 function scriptInput(c, { placeholder = '', onEnter = null, cls = '', autofocus = false } = {}) {
   const X = LX(c), M = N.scriptModule(UI.C, c);
-  const input = h('input', { class: 'noema-input lx-typein2 ' + cls, lang: c, dir: X.language.dir || 'ltr', placeholder, autocomplete: 'off', autocapitalize: 'off', spellcheck: 'false', 'aria-label': placeholder || `Your answer in ${info(c).name}` });
+  const input = h('input', { class: 'noema-input lx-typein2 ' + cls, lang: c, dir: X.language.dir || 'ltr', placeholder, autocomplete: 'off', autocapitalize: 'off', spellcheck: 'false', 'aria-label': placeholder || LT('lang.script.answerIn', { lang: info(c).name }) });
   const wrap = h('div', { class: 'lx-input', 'data-lang': c }, input);
   const insert = s => {
     const a = input.selectionStart ?? input.value.length, b = input.selectionEnd ?? a;
@@ -47,20 +47,20 @@ function scriptInput(c, { placeholder = '', onEnter = null, cls = '', autofocus 
   };
   input.addEventListener('keydown', e => { if (e.key === 'Enter' && onEnter && !e.isComposing) { e.preventDefault(); onEnter(input.value); } });
   if (c === 'de' || X.language.capitalizeFirst) {
-    wrap.append(h('div', { class: 'lx-kbd lx-kbd-de', role: 'group', 'aria-label': 'Special letters' }, ...['ä', 'ö', 'ü', 'ß', 'Ä', 'Ö', 'Ü'].map(ch => keyBtn(ch, () => insert(ch), { 'data-key': ch }))));
+    wrap.append(h('div', { class: 'lx-kbd lx-kbd-de', role: 'group', 'aria-label': LT('lang.script.special') }, ...['ä', 'ö', 'ü', 'ß', 'Ä', 'Ö', 'Ü'].map(ch => keyBtn(ch, () => insert(ch), { 'data-key': ch }))));
   } else if (M?.kind === 'letters' && M.keyboard) {
     const kb = M.keyboard, open = (UI.prefs.kbd || {})[c] !== false;
-    const panel = h('div', { class: 'lx-kbd', lang: c, dir: 'rtl', role: 'group', 'aria-label': `${info(c).name} keyboard`, hidden: open ? null : true },
+    const panel = h('div', { class: 'lx-kbd', lang: c, dir: 'rtl', role: 'group', 'aria-label': LT('lang.script.keyboardOf', { lang: info(c).name }), hidden: open ? null : true },
       ...kb.rows.map(r => h('div', { class: 'lx-kbdrow' }, ...r.split(' ').map(ch => keyBtn(ch, () => insert(ch), { 'data-key': ch, title: M.items[ch]?.name || '' })))),
-      h('div', { class: 'lx-kbdrow lx-kbdmarks' }, ...(kb.marks || []).map(m => keyBtn('◌' + m, () => insert(m), { 'data-key': m, title: M.markInfo[m]?.name || (m === 'ׁ' ? 'shin dot' : m === 'ׂ' ? 'sin dot' : '') }))),
-      h('div', { class: 'lx-kbdrow' }, ...(kb.punct || []).map(p => keyBtn(p, () => insert(p), { 'data-key': p })), keyBtn('␣', () => insert(' '), { class: 'lx-key lx-keywide', 'data-key': ' ', title: 'space' }), keyBtn('⌫', backspace, { class: 'lx-key lx-keywide', title: 'delete' })));
-    const tog = h('button', { type: 'button', class: 'btn ghost small lx-kbdtoggle', 'aria-expanded': open ? 'true' : 'false', title: 'On-screen keyboard', onclick: () => {
+      h('div', { class: 'lx-kbdrow lx-kbdmarks' }, ...(kb.marks || []).map(m => keyBtn('◌' + m, () => insert(m), { 'data-key': m, title: M.markInfo[m]?.name || (m === 'ׁ' ? LT('lang.script.shinDot') : m === 'ׂ' ? LT('lang.script.sinDot') : '') }))),
+      h('div', { class: 'lx-kbdrow' }, ...(kb.punct || []).map(p => keyBtn(p, () => insert(p), { 'data-key': p })), keyBtn('␣', () => insert(' '), { class: 'lx-key lx-keywide', 'data-key': ' ', title: LT('lang.script.space') }), keyBtn('⌫', backspace, { class: 'lx-key lx-keywide', title: LT('lang.script.delete') })));
+    const tog = h('button', { type: 'button', class: 'btn ghost small lx-kbdtoggle', 'aria-expanded': open ? 'true' : 'false', title: LT('lang.script.onScreen'), onclick: () => {
       panel.hidden = !panel.hidden; tog.setAttribute('aria-expanded', panel.hidden ? 'false' : 'true'); UI.prefs.kbd = { ...(UI.prefs.kbd || {}), [c]: !panel.hidden }; save(); input.focus(); } }, '⌨️');
     wrap.insertBefore(tog, input.nextSibling); wrap.append(panel);
   } else if (c === 'zh' || X.language.romanization === 'pinyin') {
     const K = N.known(UI.C, UI.L, c).R;
-    const py = h('input', { class: 'noema-input lx-pyin', lang: 'zh-Latn-pinyin', placeholder: 'pinyin, e.g. ni3hao3 or nihao', autocomplete: 'off', autocapitalize: 'off', spellcheck: 'false', 'aria-label': 'Type pinyin, then choose the characters' });
-    const prev = h('span', { class: 'lx-pyprev', lang: 'zh-Latn-pinyin' }), cands = h('div', { class: 'lx-cands', role: 'listbox', 'aria-label': 'Characters' });
+    const py = h('input', { class: 'noema-input lx-pyin', lang: 'zh-Latn-pinyin', placeholder: LT('lang.script.pyPlaceholder'), autocomplete: 'off', autocapitalize: 'off', spellcheck: 'false', 'aria-label': LT('lang.script.pyLabel') });
+    const prev = h('span', { class: 'lx-pyprev', lang: 'zh-Latn-pinyin' }), cands = h('div', { class: 'lx-cands', role: 'listbox', 'aria-label': LT('lang.script.chars') });
     const refresh = () => {
       const r = N.pinyinCandidates(UI.C, c, py.value, { known: K }); prev.textContent = r.marks ? '→ ' + r.marks : ''; cands.innerHTML = '';
       r.candidates.forEach((x, i) => cands.append(h('button', { type: 'button', class: 'lx-cand', role: 'option', 'data-text': x.text, title: x.gloss, onmousedown: e => e.preventDefault(),
@@ -72,7 +72,7 @@ function scriptInput(c, { placeholder = '', onEnter = null, cls = '', autofocus 
       else if (e.key === 'Enter' && !py.value.trim() && onEnter) { e.preventDefault(); onEnter(input.value); }
       else if (e.key === 'Backspace' && !py.value) { e.preventDefault(); input.value = [...input.value].slice(0, -1).join(''); }
     });
-    wrap.append(h('div', { class: 'lx-pybox' }, h('span', { class: 'tiny' }, '拼 '), py, prev), cands);
+    wrap.append(h('div', { class: 'lx-pybox' }, h('span', { class: 'tiny', lang: 'zh' }, '拼 '), py, prev), cands);   // i18n-ignore (拼: a Chinese sign for pinyin)
   }
   if (autofocus) setTimeout(() => input.focus(), 40);
   return { el: wrap, input, insert };
@@ -82,7 +82,7 @@ function scriptInput(c, { placeholder = '', onEnter = null, cls = '', autofocus 
 function produceTyping(c, lid, onAnswer) {
   const X = LX(c), me = X.lex[lid];
   if (N.scriptModule(UI.C, c)?.kind === 'letters' && needTranslit(c)) return null;
-  const si = scriptInput(c, { placeholder: 'or type it…', cls: 'lx-typein', onEnter: v => {
+  const si = scriptInput(c, { placeholder: LT('lang.script.orType'), cls: 'lx-typein', onEnter: v => {
     const t = N.nfc(v.trim()); if (!t) return;
     const r = N.checkTyped(UI.C, c, lid, t), ok = r.ok || (X.language.capitalizeFirst && t.toLowerCase() === N.nfc(me.lemma).toLowerCase() && me.pos !== 'NOUN');
     onAnswer(ok, t, r);
@@ -125,13 +125,13 @@ function tilesWidget(it, { box, tiles, size, show, check, label }) {
   tiles.forEach((t, i) => pool.append(h('button', { class: 'lx-tile1', 'data-i': i, 'data-t': t, 'aria-label': label ? label(t) : t, onclick: e => {
     if (over || e.currentTarget.disabled) return; built.push({ t, i }); e.currentTarget.disabled = true; draw(); if (built.length === size) end(check(built.map(b => b.t))); } }, t)));
   const undo = h('button', { class: 'btn small ghost', onclick: () => { if (over || !built.length) return; const b = built.pop(); pool.children[b.i].disabled = false; draw(); } }, '⌫');
-  const give = h('button', { class: 'btn small ghost', onclick: () => { if (!over) end(false); } }, 'Show me');
+  const give = h('button', { class: 'btn small ghost', onclick: () => { if (!over) end(false); } }, LT('lang.ex.showMe'));
   draw(); box.append(slot, pool, h('div', { class: 'row' }, undo, give));
 }
 WIDGETS.glyph_form = (it, done) => {
   if (it.kind !== 'join') return scriptChoose(it, done);
   const box = h('div', { class: 'lx-ex lx-exscript lx-exjoin', 'data-kind': 'join', 'data-type': it.type }); box._done = done;
-  box.append(h('div', { class: 'lx-q' }, `Write it in ${info(it.lang).name} — tap its letters in order${it.lang === 'he' ? ' (mind the final forms)' : ' (they join by themselves)'}:`), h('div', { class: 'lx-prompt lx-meaning' }, it.prompt));
+  box.append(h('div', { class: 'lx-q' }, LT(it.lang === 'he' ? 'lang.script.joinAskHe' : 'lang.script.joinAsk', { lang: info(it.lang).name })), h('div', { class: 'lx-prompt lx-meaning' }, it.prompt));
   tilesWidget(it, { box, tiles: it.tiles, size: it.letters.length, show: s => s.join(''), check: s => s.join('') === it.answer, label: t => N.scriptModule(UI.C, it.lang)?.items[t]?.name || t });
   return box;
 };
@@ -139,8 +139,8 @@ WIDGETS.transliterate = scriptChoose;
 WIDGETS.char_compose = (it, done) => {
   if (it.kind !== 'compose') return scriptChoose(it, done);
   const box = h('div', { class: 'lx-ex lx-exscript lx-excompose', 'data-kind': 'compose', 'data-type': it.type }); box._done = done;
-  const LAYOUT = { '⿰': 'left | right', '⿱': 'top / bottom', '⿲': 'left | middle | right', '⿳': 'top / middle / bottom', '⿴': 'outside around inside', '⿵': 'open below', '⿶': 'open above', '⿷': 'open right', '⿸': 'top-left around', '⿹': 'top-right around', '⿺': 'bottom-left around', '⿻': 'overlapping' };
-  box.append(h('div', { class: 'lx-q' }, `Build the character from its parts (${LAYOUT[it.layout] || it.layout}):`), h('div', { class: 'lx-prompt lx-meaning' }, it.prompt, it.reading ? h('span', { class: 'lx-latin tiny', lang: 'zh-Latn-pinyin' }, ' ' + it.reading) : null),
+  const LAYOUT = { '⿰': 'lr', '⿱': 'tb', '⿲': 'lmr', '⿳': 'tmb', '⿴': 'around', '⿵': 'openBelow', '⿶': 'openAbove', '⿷': 'openRight', '⿸': 'tl', '⿹': 'tr', '⿺': 'bl', '⿻': 'overlap' };   // lang.script.layout.<name>
+  box.append(h('div', { class: 'lx-q' }, LT('lang.script.composeAsk', { layout: LAYOUT[it.layout] ? LT('lang.script.layout.' + LAYOUT[it.layout]) : it.layout })), h('div', { class: 'lx-prompt lx-meaning' }, it.prompt, it.reading ? h('span', { class: 'lx-latin tiny', lang: 'zh-Latn-pinyin' }, ' ' + it.reading) : null),
     it.hint ? h('div', { class: 'tiny' }, '💡 ', wordsIn('zh', it.hint)) : null);
   tilesWidget(it, { box, tiles: it.tiles, size: it.answer.length, show: s => s.join(' + '), check: s => s.slice().sort().join('') === it.answer.slice().sort().join('') });
   return box;
@@ -150,7 +150,7 @@ WIDGETS.vowelize = (it, done) => {
   const box = h('div', { class: 'lx-ex lx-exscript lx-exvowel', 'data-kind': 'vowelize', 'data-type': it.type });
   const cur = it.letters.map(l => ({ ...l, mine: [] })); let sel = cur.findIndex(l => !l.sep), over = false;
   const row = h('div', { class: 'lx-vrow', lang: it.lang, dir: X.language.dir || 'rtl' }), preview = h('div', { class: 'lx-w lx-vpreview', lang: it.lang, dir: X.language.dir || 'rtl', 'aria-live': 'polite' });
-  const draw = () => { preview.textContent = N.nfc(cur.map(l => l.base + l.mine.join('')).join('')); row.innerHTML = ''; cur.forEach((l, i) => row.append(l.sep ? h('span', { class: 'lx-vsep' }, l.base) : h('button', { type: 'button', class: 'lx-vletter' + (i === sel ? ' on' : '') + (l.state ? ' ' + l.state : ''), 'data-i': i, 'aria-pressed': i === sel ? 'true' : 'false', 'aria-label': `letter ${i + 1}`,
+  const draw = () => { preview.textContent = N.nfc(cur.map(l => l.base + l.mine.join('')).join('')); row.innerHTML = ''; cur.forEach((l, i) => row.append(l.sep ? h('span', { class: 'lx-vsep' }, l.base) : h('button', { type: 'button', class: 'lx-vletter' + (i === sel ? ' on' : '') + (l.state ? ' ' + l.state : ''), 'data-i': i, 'aria-pressed': i === sel ? 'true' : 'false', 'aria-label': LT('lang.script.letterN', { n: i + 1 }),
     onclick: () => { if (over) return; sel = i; draw(); row.querySelector('.lx-vletter.on')?.focus(); } }, N.nfc(l.base + l.mine.join(''))))); };
   const kindOf = m => M?.markInfo[m]?.kind || 'vowel';
   const put = m => {
@@ -162,7 +162,7 @@ WIDGETS.vowelize = (it, done) => {
   };
   const step = d => { if (over) return; let i = sel; do { i += d; } while (i >= 0 && i < cur.length && cur[i].sep); if (i >= 0 && i < cur.length) { sel = i; draw(); row.querySelector('.lx-vletter.on')?.focus(); } };
   const pal = h('div', { class: 'lx-palette', lang: it.lang }, ...it.palette.map((m, i) => keyBtn(h('span', {}, h('span', { class: 'lx-w', lang: it.lang, dir: X.language.dir }, '◌' + m), h('span', { class: 'tiny' }, ' ' + (M?.markInfo[m]?.name || ''), i < 9 ? h('span', { class: 'lx-k' }, i + 1) : null)), () => put(m), { 'data-mark': m })),
-    keyBtn('∅ clear', () => { if (!over && sel >= 0) { cur[sel].mine = []; draw(); } }, { 'data-mark': '' }));
+    keyBtn('∅ ' + LT('lang.script.clearMarks'), () => { if (!over && sel >= 0) { cur[sel].mine = []; draw(); } }, { 'data-mark': '' }));
   const check = () => {
     if (over) return; over = true;
     let ok = true; for (const l of cur) if (!l.sep) { const r = l.mine.slice().sort().join('') === l.marks.slice().sort().join(''); l.state = r ? 'right' : 'wrong'; if (!r) ok = false; }
@@ -176,8 +176,8 @@ WIDGETS.vowelize = (it, done) => {
     else if (e.key === 'Enter') { e.preventDefault(); check(); }
   });
   draw();
-  box.append(h('div', { class: 'lx-q' }, `Add the vowel marks, letter by letter (tap a letter, then its marks; ← → move, 1–9 marks, Enter checks):`), h('div', { class: 'lx-prompt lx-meaning' }, it.prompt), preview, row, pal,
-    h('div', { class: 'row' }, h('button', { class: 'btn primary small lx-check', onclick: check }, 'Check'), h('button', { class: 'btn ghost small', onclick: () => { if (!over) { cur.forEach(l => l.mine = l.marks.slice()); check(); } } }, 'Show me')));
+  box.append(h('div', { class: 'lx-q' }, LT('lang.script.vowelAsk')), h('div', { class: 'lx-prompt lx-meaning' }, it.prompt), preview, row, pal,
+    h('div', { class: 'row' }, h('button', { class: 'btn primary small lx-check', onclick: check }, LT('lang.ex.check')), h('button', { class: 'btn ghost small', onclick: () => { if (!over) { cur.forEach(l => l.mine = l.marks.slice()); check(); } } }, LT('lang.ex.showMe'))));
   setTimeout(() => box.focus(), 30);
   return box;
 };
@@ -187,15 +187,15 @@ WIDGETS.tone_mark = (it, done) => {
   const syl = h('div', { class: 'lx-tones' });
   const draw = () => { syl.innerHTML = ''; it.chars.forEach((ch, i) => syl.append(h('div', { class: 'lx-tonecol' + (i === cur && !over ? ' on' : ''), 'data-i': i },
     h('div', { class: 'lx-w lx-tonech', lang: 'zh' }, ch), h('div', { class: 'lx-latin', lang: 'zh-Latn-pinyin' }, mine[i] ? N.pinyinNumbersToMarks(it.bases[i] + (mine[i] === 5 ? '' : mine[i])) : it.bases[i]),
-    h('div', { class: 'lx-toneopts' }, ...[1, 2, 3, 4, 5].map(t => h('button', { type: 'button', class: 'lx-tonebtn' + (mine[i] === t ? ' on' : '') + (over ? (t === it.answer[i] ? ' right' : mine[i] === t ? ' wrong' : '') : ''), 'data-tone': t, 'aria-label': `syllable ${i + 1}: tone ${t === 5 ? 'neutral' : t}`,
+    h('div', { class: 'lx-toneopts' }, ...[1, 2, 3, 4, 5].map(t => h('button', { type: 'button', class: 'lx-tonebtn' + (mine[i] === t ? ' on' : '') + (over ? (t === it.answer[i] ? ' right' : mine[i] === t ? ' wrong' : '') : ''), 'data-tone': t, 'aria-label': LT('lang.script.toneLabel', { n: i + 1, tone: t === 5 ? 'neutral' : String(t) }),
       onclick: () => { if (over) return; mine[i] = t; cur = Math.min(i + 1, it.chars.length - 1); draw(); if (mine.every(Boolean)) check(); } }, t === 5 ? '·' : N.pinyinNumbersToMarks('a' + t))))))); };
   const check = () => { if (over) return; over = true; const ok = mine.every((t, i) => t === it.answer[i]); draw(); scriptRecord(it, ok); scriptFb(box, ok, it); done(ok); };
   box.tabIndex = -1;
   box.addEventListener('keydown', e => { if (!over && /^[1-5]$/.test(e.key)) { e.preventDefault(); e.stopPropagation(); mine[cur] = +e.key; cur = Math.min(cur + 1, it.chars.length - 1); draw(); if (mine.every(Boolean)) check(); } });
   draw();
-  box.append(h('div', { class: 'lx-q' }, it.mode === 'spoken' ? 'How is it said? (the tones change in speech)' : 'Mark the tone of every syllable (keys 1–5, 5 = neutral):'),
-    h('div', { class: 'lx-prompt lx-meaning' }, it.prompt, it.mode === 'spoken' ? h('div', { class: 'tiny' }, 'written: ', h('span', { class: 'lx-latin', lang: 'zh-Latn-pinyin' }, it.bases.map((b, i) => N.pinyinNumbersToMarks(b + (it.written[i] === 5 ? '' : it.written[i]))).join(' '))) : null), syl,
-    h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => { if (!over) { mine.fill(0); check(); } } }, 'Show me')));
+  box.append(h('div', { class: 'lx-q' }, LT(it.mode === 'spoken' ? 'lang.script.toneSpoken' : 'lang.script.toneAsk')),
+    h('div', { class: 'lx-prompt lx-meaning' }, it.prompt, it.mode === 'spoken' ? h('div', { class: 'tiny' }, LT('lang.script.written') + ' ', h('span', { class: 'lx-latin', lang: 'zh-Latn-pinyin' }, it.bases.map((b, i) => N.pinyinNumbersToMarks(b + (it.written[i] === 5 ? '' : it.written[i]))).join(' '))) : null), syl,
+    h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => { if (!over) { mine.fill(0); check(); } } }, LT('lang.ex.showMe'))));
   setTimeout(() => box.focus(), 30);
   return box;
 };
@@ -205,25 +205,25 @@ WIDGETS.spell = (it, done) => {
   const out = h('div', { class: 'lx-diff', lang: it.lang, dir: X.language.dir || 'ltr' });
   const finish = (ok, r) => {
     over = true; si.input.disabled = true; scriptRecord(it, ok);
-    if (r && !ok) { out.append(...r.diff.map(d => h('span', { class: 'lx-d d-' + d.op, title: d.op === 'wrong' ? `you: ${d.t} · right: ${d.want}` : d.op }, d.op === 'wrong' ? d.want : d.t))); }
+    if (r && !ok) { out.append(...r.diff.map(d => h('span', { class: 'lx-d d-' + d.op, title: d.op === 'wrong' ? LT('lang.script.youRight', { you: d.t, right: d.want }) : ['same', 'missing', 'extra'].includes(d.op) ? LT('lang.script.op.' + d.op) : d.op }, d.op === 'wrong' ? d.want : d.t))); }
     scriptFb(box, ok, it, r?.notes?.length ? h('ul', { class: 'lx-list tiny' }, ...r.notes.map(n => h('li', {}, n))) : null); done(ok);
   };
-  const si = scriptInput(it.lang, { placeholder: `Type it in ${info(it.lang).name}…`, autofocus: true, onEnter: v => { if (over || !v.trim()) return; const r = N.checkTyped(UI.C, it.lang, it.lex, v, { forms: it.also }); finish(r.ok, r); } });
-  box.append(h('div', { class: 'lx-q' }, `Write it in ${info(it.lang).name}:`), h('div', { class: 'lx-prompt lx-meaning' }, it.concept ? conceptPic(it.concept, 'lx-exemoji') : '', ' ', it.prompt), si.el, out,
-    h('div', { class: 'row' }, h('button', { class: 'btn primary small lx-check', onclick: () => { if (!over && si.input.value.trim()) { const r = N.checkTyped(UI.C, it.lang, it.lex, si.input.value, { forms: it.also }); finish(r.ok, r); } } }, 'Check'),
-      h('button', { class: 'btn ghost small', onclick: () => { if (!over) finish(false, null); } }, 'Show me')));
+  const si = scriptInput(it.lang, { placeholder: LT('lang.script.typeIn', { lang: info(it.lang).name }), autofocus: true, onEnter: v => { if (over || !v.trim()) return; const r = N.checkTyped(UI.C, it.lang, it.lex, v, { forms: it.also }); finish(r.ok, r); } });
+  box.append(h('div', { class: 'lx-q' }, LT('lang.script.writeIn', { lang: info(it.lang).name })), h('div', { class: 'lx-prompt lx-meaning' }, it.concept ? conceptPic(it.concept, 'lx-exemoji') : '', ' ', it.prompt), si.el, out,
+    h('div', { class: 'row' }, h('button', { class: 'btn primary small lx-check', onclick: () => { if (!over && si.input.value.trim()) { const r = N.checkTyped(UI.C, it.lang, it.lex, si.input.value, { forms: it.also }); finish(r.ok, r); } } }, LT('lang.ex.check')),
+      h('button', { class: 'btn ghost small', onclick: () => { if (!over) finish(false, null); } }, LT('lang.ex.showMe'))));
   return box;
 };
 WIDGETS.trace = (it, done) => {
   const X = LX(it.lang), box = h('div', { class: 'lx-ex lx-exscript lx-extrace', 'data-kind': it.check, 'data-type': it.type });
-  const S = 280, cv = h('canvas', { class: 'lx-canvas', width: S * 2, height: S * 2, 'aria-label': `Draw ${it.glyph}`, role: 'img' }), g = cv.getContext('2d');
+  const S = 280, cv = h('canvas', { class: 'lx-canvas', width: S * 2, height: S * 2, 'aria-label': LT('lang.script.draw', { glyph: it.glyph }), role: 'img' }), g = cv.getContext('2d');
   const toBox = (x, y) => [x / S * 1024, 900 - y / S * 1024], toCv = (x, y) => [x / 1024 * S * 2, (900 - y) / 1024 * S * 2];
   const strokes = [], med = it.medians || []; let curStroke = null, next = 0, misses = 0, over = false, hint = false;
   const ghost = () => {
     g.clearRect(0, 0, S * 2, S * 2); g.lineCap = 'round'; g.lineJoin = 'round';
     g.strokeStyle = 'rgba(127,127,127,.25)'; g.lineWidth = 1.5; g.strokeRect(1, 1, S * 2 - 2, S * 2 - 2); g.beginPath(); g.moveTo(S, 0); g.lineTo(S, S * 2); g.moveTo(0, S); g.lineTo(S * 2, S); g.stroke();
     if (it.check === 'medians') med.forEach((m, i) => { g.strokeStyle = i < next ? 'rgba(46,160,90,.85)' : hint && i === next ? 'rgba(230,140,0,.7)' : 'rgba(127,127,127,.22)'; g.lineWidth = 34; g.beginPath(); m.forEach((p, j) => { const [x, y] = toCv(p[0], p[1]); j ? g.lineTo(x, y) : g.moveTo(x, y); }); g.stroke(); });
-    else { g.fillStyle = 'rgba(127,127,127,.18)'; g.font = `${S * 1.3}px ${it.lang === 'ar' ? "'Noto Naskh Arabic', serif" : "'Noto Sans Hebrew', sans-serif"}`; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(it.glyph, S, S * 1.05); }
+    else { g.fillStyle = 'rgba(127,127,127,.18)'; g.font = `${S * 1.3}px ${it.lang === 'ar' ? "'Noto Naskh Arabic', serif" : "'Noto Sans Hebrew', sans-serif"}`; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(it.glyph, S, S * 1.05); }   // i18n-ignore (fonts)
     g.strokeStyle = 'rgba(40,40,40,.9)'; g.lineWidth = 9; for (const s of strokes) { g.beginPath(); s.forEach(([x, y], j) => j ? g.lineTo(x * 2, y * 2) : g.moveTo(x * 2, y * 2)); g.stroke(); }
   };
   const status = h('div', { class: 'tiny lx-tracestatus', 'aria-live': 'polite' });
@@ -235,24 +235,24 @@ WIDGETS.trace = (it, done) => {
     if (it.check !== 'medians' || over) return;
     if (s.length < 2) { strokes.pop(); ghost(); return; }
     const r = N.strokeMatch(s.map(([x, y]) => toBox(x, y)), med[next]);
-    if (r.ok) { next++; strokes.pop(); hint = false; status.textContent = `stroke ${next} of ${med.length} ✓`; if (next === med.length) end(misses <= 1); }
-    else { strokes.pop(); misses++; hint = misses >= 2; status.textContent = r.reversed ? 'the other way round — strokes go from where they start' : `not stroke ${next + 1} — ${hint ? 'follow the orange one' : 'try again'}`; }
+    if (r.ok) { next++; strokes.pop(); hint = false; status.textContent = LT('lang.script.strokeOk', { n: next, of: med.length }) + ' ✓'; if (next === med.length) end(misses <= 1); }
+    else { strokes.pop(); misses++; hint = misses >= 2; status.textContent = r.reversed ? LT('lang.script.reversed') : LT(hint ? 'lang.script.notStrokeHint' : 'lang.script.notStroke', { n: next + 1 }); }
     ghost();
   };
   cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up); cv.addEventListener('pointerleave', up);
-  const end = ok => { if (over) return; over = true; next = med.length; ghost(); scriptRecord(it, ok); scriptFb(box, ok, it, it.check === 'medians' ? h('div', { class: 'tiny' }, `${misses} wrong stroke${misses === 1 ? '' : 's'}`) : null); done(ok); };
+  const end = ok => { if (over) return; over = true; next = med.length; ghost(); scriptRecord(it, ok); scriptFb(box, ok, it, it.check === 'medians' ? h('div', { class: 'tiny' }, LT('lang.script.wrongStrokes', { n: misses })) : null); done(ok); };
   const demo = () => {   // the stroke order, one stroke after another
     if (it.check !== 'medians') return; let i = 0; const was = next; next = 0; ghost();
     const t = setInterval(() => { if (i >= med.length || !box.isConnected) { clearInterval(t); next = over ? med.length : was; ghost(); return; } next = ++i; ghost(); }, 420);
   };
   ghost();
-  box.append(h('div', { class: 'lx-q' }, it.check === 'medians' ? `Write ${it.glyph} stroke by stroke (in the right order):` : `Trace the letter, then compare it with the model:`),
+  box.append(h('div', { class: 'lx-q' }, it.check === 'medians' ? LT('lang.script.strokeAsk', { glyph: it.glyph }) : LT('lang.script.traceAsk')),
     h('div', { class: 'lx-prompt lx-meaning' }, h('span', { class: 'lx-w', lang: it.lang, dir: X.language.dir || 'ltr' }, it.glyph), ' ', h('span', { class: 'tiny' }, [it.prompt, it.reading].filter(Boolean).join(' · '))),
     h('div', { class: 'lx-canvaswrap' }, cv), status,
-    h('div', { class: 'row' }, it.check === 'medians' ? h('button', { class: 'btn ghost small', onclick: demo }, '▶ Stroke order') : null,
-      h('button', { class: 'btn ghost small', onclick: () => { if (!over) { strokes.length = 0; ghost(); } } }, 'Clear'),
-      it.check === 'medians' ? h('button', { class: 'btn ghost small', onclick: () => end(false) }, 'Show me')
-        : [h('button', { class: 'btn primary small lx-selfok', onclick: () => end(true) }, '✓ Looks right'), h('button', { class: 'btn ghost small lx-selfno', onclick: () => end(false) }, '✗ Not yet')]));
+    h('div', { class: 'row' }, it.check === 'medians' ? h('button', { class: 'btn ghost small', onclick: demo }, '▶ ' + LT('lang.script.strokeOrder')) : null,
+      h('button', { class: 'btn ghost small', onclick: () => { if (!over) { strokes.length = 0; ghost(); } } }, LT('lang.script.clear')),
+      it.check === 'medians' ? h('button', { class: 'btn ghost small', onclick: () => end(false) }, LT('lang.ex.showMe'))
+        : [h('button', { class: 'btn primary small lx-selfok', onclick: () => end(true) }, '✓ ' + LT('lang.script.looksRight')), h('button', { class: 'btn ghost small lx-selfno', onclick: () => end(false) }, '✗ ' + LT('lang.script.notYet'))]));
   box._strokeTest = { toBox, med, draw: pts => { if (over) return; curStroke = pts.map(([x, y]) => [x / 1024 * S, (900 - y) / 1024 * S]); strokes.push(curStroke); up(); } };   // tests draw a stroke in box coordinates
   return box;
 };
@@ -264,14 +264,14 @@ function glyphIntro(c, key, done) {
   const ex = Object.values(X.lex).filter(x => !x.prefix && hasGlyph(c, x, key) && x.translit).sort((a, b) => a.lemma.length - b.lemma.length)[0];
   const forms = Object.entries(it.forms || {}).filter(([, f]) => f);
   const box = h('div', { class: 'lx-ex lx-intro lx-glyphintro', 'data-kind': 'glyph_intro', 'data-glyph': key },
-    h('div', { class: 'lx-q' }, `New in ${info(c).flag} ${info(c).name}: ${it.type === 'mark' ? 'a vowel mark' : 'a letter'}`),
+    h('div', { class: 'lx-q' }, LT(it.type === 'mark' ? 'lang.script.newMark' : 'lang.script.newLetter', { lang: info(c).flag + ' ' + info(c).label })),
     h('div', { class: 'lx-prompt' }, h('span', { class: 'lx-w lx-glyph', lang: c, dir: X.language.dir }, it.type === 'mark' ? '◌' + key : key)),
     h('div', { class: 'lx-meaning' }, h('b', {}, it.name), ' · ', h('span', { class: 'lx-latin' }, it.translit || '—'), it.sound ? ` · [${it.sound}]` : '', it.what ? ' · ' + it.what : ''),
     forms.length > 1 ? h('dl', { class: 'lx-parts lx-forms' }, ...forms.flatMap(([p, f]) => [h('dt', {}, p), h('dd', {}, h('span', { class: 'lx-w lx-glyph', lang: c, dir: X.language.dir }, f))])) : null,
     it.note ? h('p', { class: 'tiny' }, it.note) : null,
-    (M.look[key] || []).length ? h('p', { class: 'tiny' }, '👀 Do not mix up with ', ...(M.look[key] || []).flatMap((b, i) => [i ? ' · ' : '', h('span', { class: 'lx-w', lang: c }, b), ' ', M.items[b]?.name || ''])) : null,
+    (M.look[key] || []).length ? h('p', { class: 'tiny' }, '👀 ' + LT('lang.script.mixUp') + ' ', ...(M.look[key] || []).flatMap((b, i) => [i ? ' · ' : '', h('span', { class: 'lx-w', lang: c }, b), ' ', M.items[b]?.name || ''])) : null,
     ex ? h('div', { class: 'lx-ex1' }, word(c, ex.lemma, { lex: ex, marks: 'full' }), h('div', { class: 'tiny' }, ex.translit, ' — ', gloss(c, ex.id))) : null,
-    h('div', { class: 'row' }, h('button', { class: 'btn primary lx-next', onclick: () => { N.introduceGlyph(UI.C, UI.L, c, key, today()); save(); done(true); } }, 'Got it →')));
+    h('div', { class: 'row' }, h('button', { class: 'btn primary lx-next', onclick: () => { N.introduceGlyph(UI.C, UI.L, c, key, today()); save(); done(true); } }, LT('lang.ex.gotIt') + ' ' + arrowOn())));
   return box;
 }
 /** The card of a letter or a character (tap in the lane). */
@@ -280,49 +280,52 @@ function glyphCard(c, key) {
   const words = M.kind === 'chars' ? (M.words[key] || []).slice(0, 12) : Object.values(X.lex).filter(x => !x.prefix && hasGlyph(c, x, key)).slice(0, 10).map(x => x.id);
   const body = M.kind === 'chars'
     ? [h('div', { class: 'lx-prompt' }, h('span', { class: 'lx-w lx-glyph', lang: 'zh' }, key)),
-      h('dl', { class: 'lx-parts' }, ...[['reading', [...(it.readings || []), ...(it.wordReadings || [])].join(' · ')], ['meaning', it.meaning], ['traditional', (it.trad || []).join(' ')], ['parts', it.ids], ['radical', it.radical], ['strokes', it.medians?.length || it.strokes], ['how it is built', [it.etymology?.type, it.etymology?.hint].filter(Boolean).join(': ')]]
-        .filter(([, v2]) => v2).flatMap(([k2, v2]) => [h('dt', {}, k2), h('dd', {}, wordsIn('zh', String(v2)))]))]
+      h('dl', { class: 'lx-parts' }, ...[['reading', [...(it.readings || []), ...(it.wordReadings || [])].join(' · ')], ['meaning', it.meaning], ['traditional', (it.trad || []).join(' ')], ['parts', it.ids], ['radical', it.radical], ['strokes', it.medians?.length || it.strokes], ['built', [it.etymology?.type, it.etymology?.hint].filter(Boolean).join(': ')]]
+        .filter(([, v2]) => v2).flatMap(([k2, v2]) => [h('dt', {}, LT('lang.script.field.' + k2)), h('dd', {}, wordsIn('zh', String(v2)))]))]
     : [h('div', { class: 'lx-prompt' }, h('span', { class: 'lx-w lx-glyph', lang: c, dir: X.language.dir }, it.type === 'mark' ? '◌' + key : key)),
-      h('dl', { class: 'lx-parts' }, ...[['name', it.name], ['transliteration', it.translit], ['sound', it.sound && `[${it.sound}]`], ['what it does', it.what], ['joins', it.joins && { dual: 'to both sides', right: 'only to the letter before it', none: 'to no letter' }[it.joins]], ['note', it.note]].filter(([, v2]) => v2).flatMap(([k2, v2]) => [h('dt', {}, k2), h('dd', {}, v2)])),
+      h('dl', { class: 'lx-parts' }, ...[['name', it.name], ['transliteration', it.translit], ['sound', it.sound && `[${it.sound}]`], ['what', it.what], ['joins', it.joins && (['dual', 'right', 'none'].includes(it.joins) ? LT('lang.script.joins.' + it.joins) : it.joins)], ['note', it.note]].filter(([, v2]) => v2).flatMap(([k2, v2]) => [h('dt', {}, LT('lang.script.field.' + k2)), h('dd', {}, v2)])),
       Object.keys(it.forms || {}).length > 1 ? h('dl', { class: 'lx-parts lx-forms' }, ...Object.entries(it.forms).flatMap(([p, f]) => [h('dt', {}, p), h('dd', {}, h('span', { class: 'lx-w lx-glyph', lang: c, dir: X.language.dir }, f))])) : null];
   const pop = h('div', { class: 'lx-pop', role: 'dialog', 'aria-label': it.name || key, onclick: e => { if (e.target === pop) pop.remove(); } },
     h('div', { class: 'lx-popbox lx-glyphcard', 'data-glyph': key }, h('div', { class: 'row' }, h('b', {}, it.name || it.meaning || key), h('span', { class: 'lx-badge st s-' + st }, STATE_LABEL[st] || st), h('span', { class: 'spacer' }), h('button', { class: 'btn ghost small', onclick: () => pop.remove() }, '✕')),
-      ...body, words.length ? h('div', { class: 'lx-sec' }, h('b', {}, 'In words of the course'), h('ul', { class: 'lx-list' }, ...words.map(id => h('li', {}, word(c, X.lex[id].lemma, { lex: X.lex[id] }), ' — ', gloss(c, id))))) : null,
-      (it.medians || M.kind === 'letters') && it.type !== 'mark' ? h('button', { class: 'btn small', onclick: () => { pop.remove(); runScriptDrill(c, 'trace', { only: key }); } }, '✍️ Trace it') : null));
+      ...body, words.length ? h('div', { class: 'lx-sec' }, h('b', {}, LT('lang.script.inWords')), h('ul', { class: 'lx-list' }, ...words.map(id => h('li', {}, word(c, X.lex[id].lemma, { lex: X.lex[id] }), ' — ', gloss(c, id))))) : null,
+      (it.medians || M.kind === 'letters') && it.type !== 'mark' ? h('button', { class: 'btn small', onclick: () => { pop.remove(); runScriptDrill(c, 'trace', { only: key }); } }, '✍️ ' + LT('lang.script.traceIt')) : null));
   document.body.append(pop);
 }
 
 /* ---------- the 🔤 script lane ---------- */
-const SCRIPT_TITLE = { glyph_form: ['🔣', 'Letter forms'], transliterate: ['🔤', 'Reading'], vowelize: ['◌َ', 'Vowel marks'], tone_mark: ['〽️', 'Tones'], char_compose: ['🧩', 'Building characters'], trace: ['✍️', 'Tracing'], spell: ['⌨️', 'Spelling'], learn: ['🆕', 'The next letters'] };
+const SCRIPT_SIGN = { glyph_form: '🔣', transliterate: '🔤', vowelize: '◌َ', tone_mark: '〽️', char_compose: '🧩', trace: '✍️', spell: '⌨️', learn: '🆕' };
+/** [sign, name] of a script drill (lang.script.drill.<type>). */
+/** The frame's line icon of each script drill (99z_frame.js data-icon). */
+const SCRIPT_ICON = { glyph_form: 'doc', transliterate: 'book', vowelize: 'dots', tone_mark: 'dots', char_compose: 'doc', trace: 'doc', spell: 'doc', learn: 'doc' };
+const SCRIPT_TITLE = new Proxy({}, { get: (o, t) => typeof t === 'string' && SCRIPT_SIGN[t] ? [SCRIPT_SIGN[t], LT('lang.script.drill.' + t)] : undefined });
 function scriptHomeButtons() {
-  return activeLangs().map(c => h('button', { class: 'btn ghost small lx-scriptbtn', 'data-lang': c, onclick: () => go('#/script/' + c) }, '🔤 ', info(c).flag, ' ', N.scriptModule(UI.C, c) ? (N.scriptModule(UI.C, c).kind === 'chars' ? 'Characters' : 'Letters') : 'Spelling'));
+  return activeLangs().map(c => h('button', { class: 'btn ghost small lx-scriptbtn', 'data-lang': c, 'data-icon': 'doc', onclick: () => go('#/script/' + c) }, '🔤 ', info(c).flag, ' ', LT(N.scriptModule(UI.C, c) ? (N.scriptModule(UI.C, c).kind === 'chars' ? 'lang.script.characters' : 'lang.script.letters') : 'lang.script.drill.spell')));
 }
 VIEWS.script = (v, r) => {
   const c = r.arg && UI.C.lang[r.arg] ? r.arg : UI.lang, M = N.scriptModule(UI.C, c), X = LX(c);
   if (c !== UI.lang) { UI.lang = c; UI.prefs.lang = c; save(); }
   v.classList.add('lx-scriptview'); v.dataset.lang = c;
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← Map')),
-    h('h1', {}, '🔤 ', M ? (M.kind === 'chars' ? 'Characters' : 'Letters') : 'Spelling', ' — ', info(c).flag, ' ', info(c).name),
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, arrowBack() + ' ' + LT('lang.card.map'))),
+    h('h1', {}, '🔤 ', LT(M ? (M.kind === 'chars' ? 'lang.script.characters' : 'lang.script.letters') : 'lang.script.drill.spell'), ' — ', info(c).flag, ' ', info(c).label),
     h('div', { class: 'row' }, flagRail(null, c, x => go('#/script/' + x))));
-  const drills = h('div', { class: 'row lx-drills lx-scriptdrills' }, ...N.scriptTypes(UI.C, c).map(t => h('button', { class: 'btn small', 'data-type': t, onclick: () => runScriptDrill(c, t) }, SCRIPT_TITLE[t][0] + ' ' + SCRIPT_TITLE[t][1])),
-    N.scriptTypes(UI.C, c).length > 1 ? h('button', { class: 'btn small primary', 'data-type': 'mix', onclick: () => runScriptDrill(c, null) }, '▶ Mixed') : null);
-  if (!M) {
-    v.append(h('p', { class: 'lx-note' }, `${info(c).name} is written in the ${X.language.script === 'Latn' ? 'Latin alphabet' : X.language.script}${c === 'de' ? ': ä ö ü and ß are letters of their own, every noun starts with a capital letter' : ''}. Spelling drills use the words you have met; the buttons under the answer field type the special letters.`), drills);
+  const drills = h('div', { class: 'row lx-drills lx-scriptdrills' }, ...N.scriptTypes(UI.C, c).map(t => h('button', { class: 'btn small', 'data-type': t, 'data-icon': SCRIPT_ICON[t] || 'doc', onclick: () => runScriptDrill(c, t) }, SCRIPT_TITLE[t][0] + ' ' + SCRIPT_TITLE[t][1])),
+    N.scriptTypes(UI.C, c).length > 1 ? h('button', { class: 'btn small primary', 'data-type': 'mix', 'data-icon': 'gym', onclick: () => runScriptDrill(c, null) }, '▶ ' + LT('lang.script.mixed')) : null);
+  if (!M) {   // how the language is written: an explanation (lang.expl.*, the course's explanation language)
+    v.append(h('p', { class: 'lx-note' }, LE(c === 'de' ? 'lang.expl.script.de' : X.language.script === 'Latn' ? 'lang.expl.script.latin' : 'lang.expl.script.other', { lang: explName(c), script: X.language.script })), drills);
     return;
   }
   const ss = N.scriptState(UI.C, UI.L, c);
   const pct = ss.total ? Math.round(ss.known / ss.total * 100) : 0;
   const fresh = M.kind === 'letters' ? ss.groups.filter(g => ss.open.includes(g.id)).flatMap(g => g.items).filter(x => ss.items[x] === 'ready') : [];
   v.append(h('div', { class: 'lx-card lx-stagemeter', 'data-stage': ss.stage },
-    h('div', { class: 'row' }, h('b', {}, `Stage ${ss.stage} of ${ss.stages}`), h('span', { class: 'tiny' }, `${ss.known} of ${ss.total} ${M.kind === 'chars' ? 'characters' : 'letters and marks'} known · ${ss.introduced} met`), ss.complete ? h('span', { class: 'lx-badge st s-known_p' }, '✅ complete') : null),
+    h('div', { class: 'row' }, h('b', {}, LT('lang.script.stage', { n: ss.stage, of: ss.stages })), h('span', { class: 'tiny' }, LT(M.kind === 'chars' ? 'lang.script.knownChars' : 'lang.script.knownLetters', { known: ss.known, total: ss.total, met: ss.introduced })), ss.complete ? h('span', { class: 'lx-badge st s-known_p' }, '✅ ' + LT('lang.script.complete')) : null),
     h('div', { class: 'lx-progress', role: 'progressbar', 'aria-valuenow': pct, 'aria-valuemin': 0, 'aria-valuemax': 100 }, h('i', { style: { width: pct + '%' } })),
-    h('p', { class: 'tiny' }, M.kind === 'chars' ? 'A character is known when you know a word with it (or from its own drills). The groups follow the lessons.'
-      : ss.complete ? 'Every letter is known: words may now be typed, and transliteration follows your setting.' : 'Letters come in groups of similar shapes; the next group opens when you have practised this one. Until every letter is known, words show their transliteration and you write them with tiles.'),
-    fresh.length ? h('button', { class: 'btn primary lx-learnletters', onclick: () => runScriptDrill(c, 'learn') }, `🆕 Learn ${fresh.length === 1 ? 'the next one' : 'the next ' + Math.min(fresh.length, 6)}`) : null), drills);
+    h('p', { class: 'tiny' }, LT(M.kind === 'chars' ? 'lang.script.charsHelp' : ss.complete ? 'lang.script.lettersDone' : 'lang.script.lettersHelp')),
+    fresh.length ? h('button', { class: 'btn primary lx-learnletters', onclick: () => runScriptDrill(c, 'learn') }, '🆕 ' + LT('lang.script.learnNext', { n: Math.min(fresh.length, 6) })) : null), drills);
   for (const [gi, g] of ss.groups.entries()) {
     const isOpen = ss.open.includes(g.id);
     if (M.kind === 'chars' && !isOpen && g.state === 'new' && gi > ss.groups.findIndex(x => x.state === 'new') + 2) continue;   // characters: the near groups only
-    v.append(h('details', { class: 'lx-sec lx-glyphgroup', open: isOpen ? true : null, 'data-group': g.id }, h('summary', {}, g.title, h('span', { class: 'tiny' }, ` · ${g.known}/${g.items.length} known${isOpen ? '' : g.state === 'new' ? ' · 🔒 later' : ''}`)),
+    v.append(h('details', { class: 'lx-sec lx-glyphgroup', open: isOpen ? true : null, 'data-group': g.id }, h('summary', {}, g.title, h('span', { class: 'tiny' }, ' · ' + LT('lang.script.groupKnown', { known: g.known, n: g.items.length }) + (isOpen ? '' : g.state === 'new' ? ' · 🔒 ' + LT('lang.script.later') : ''))),
       h('div', { class: 'lx-glyphs' + (isOpen || g.state !== 'new' ? '' : ' lx-later') }, ...g.items.map(key => {
         const it = M.items[key], st = ss.items[key];
         return h('button', { class: 'lx-gtile s-' + st, 'data-glyph': key, title: `${it.name || it.meaning || ''} — ${STATE_LABEL[st] || st}`, onclick: () => glyphCard(c, key) },
@@ -350,27 +353,27 @@ function runScriptDrill(c, type, { only = null } = {}) {
   }
   const m = $('.lx-main'); m.innerHTML = '';
   const bar = h('div', { class: 'lx-progress' }, h('i')), stage = h('div', { class: 'lx-stage' });
-  const title = type ? SCRIPT_TITLE[type].join(' ') : '▶ Mixed';
-  m.append(h('div', { class: 'view lx-view lx-session lx-scriptrun', 'data-lang': c, 'data-type': type || 'mix' }, h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => { save(true); go('#/script/' + c); render(); } }, '✕ Stop'), h('b', { class: 'tiny' }, info(c).flag + ' ' + title), bar), stage));
-  if (!queue.length) { stage.append(h('div', { class: 'lx-result' }, h('p', {}, `Nothing to drill here yet in ${info(c).name}: learn some ${N.scriptModule(UI.C, c)?.kind === 'letters' ? 'letters' : 'words'} first.`), h('button', { class: 'btn primary', onclick: () => go('#/script/' + c) }, 'Back'))); return; }
+  const title = type ? SCRIPT_TITLE[type].join(' ') : '▶ ' + LT('lang.script.mixed');
+  m.append(h('div', { class: 'view lx-view lx-session lx-scriptrun', 'data-lang': c, 'data-type': type || 'mix' }, h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => { save(true); go('#/script/' + c); render(); } }, '✕ ' + LT('lang.sess.stop')), h('b', { class: 'tiny' }, info(c).flag + ' ' + title), bar), stage));
+  if (!queue.length) { stage.append(h('div', { class: 'lx-result' }, h('p', {}, LT(N.scriptModule(UI.C, c)?.kind === 'letters' ? 'lang.script.nothingLetters' : 'lang.script.nothingWords', { lang: info(c).name })), h('button', { class: 'btn primary', onclick: () => go('#/script/' + c) }, LT('lang.card.back')))); return; }
   const total = queue.length, stats = { right: 0, wrong: 0 }; let i = 0;
   const next = () => {
     bar.firstChild.style.width = Math.round(i / total * 100) + '%';
     const a = queue.shift(); stage.innerHTML = '';
     if (!a) {
       save(true); bar.firstChild.style.width = '100%';
-      return stage.append(h('div', { class: 'lx-result' }, h('h2', {}, '🎉 Done'), h('p', {}, `${stats.right} right · ${stats.wrong} to practise again`),
-        h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => runScriptDrill(c, type) }, '↻ Again'), h('button', { class: 'btn', onclick: () => go('#/script/' + c) }, 'Back to the letters'))));
+      return stage.append(h('div', { class: 'lx-result' }, h('h2', {}, '🎉 ' + LT('lang.prod.done')), h('p', {}, LT('lang.prod.stats', { right: stats.right, wrong: stats.wrong })),
+        h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => runScriptDrill(c, type) }, '↻ ' + LT('lang.drill.again')), h('button', { class: 'btn', onclick: () => go('#/script/' + c) }, LT('lang.script.backLetters')))));
     }
     i++;
     UI.current = { kind: 'script', lang: c, it: a.item, intro: a.intro };   // what is on screen (tests, the tutor)
     const done = ok => {
       if (a.intro) return next();
       ok ? stats.right++ : stats.wrong++;
-      const b = h('button', { class: 'btn primary lx-next' }, 'Next →'); b.onclick = next; stage.append(h('div', { class: 'row lx-nextrow' }, b)); setTimeout(() => b.focus(), 30);
+      const b = h('button', { class: 'btn primary lx-next' }, LT('lang.drill.next') + ' ' + arrowOn()); b.onclick = next; stage.append(h('div', { class: 'row lx-nextrow' }, b)); setTimeout(() => b.focus(), 30);
     };
     const ex = a.intro ? glyphIntro(c, a.intro, done) : exItem(a.item, done);
-    stage.append(h('div', { class: 'tiny lx-which' }, info(c).flag, ' ', info(c).name), ex);
+    stage.append(h('div', { class: 'tiny lx-which' }, info(c).flag, ' ', info(c).label), ex);
   };
   document.onkeydown = e => {
     if (!$('.lx-scriptrun')) { document.onkeydown = null; return; }

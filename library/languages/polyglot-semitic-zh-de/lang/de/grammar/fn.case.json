@@ -465,7 +465,7 @@
   {
    "lang": "he",
    "fn": "fn.case",
-   "note": "Hebrew nouns have no cases; prepositions take personal endings instead: iti (with me), lo (to him), mimeni (from me)."
+   "note": "Hebrew nouns have no cases; prepositions take personal endings instead:\n→ iti (with me), lo (to him), mimeni (from me)"
   },
   {
    "lang": "zh",
@@ -482,87 +482,87 @@
   {
    "for": "el",
    "rel": "trap",
-   "text": "Greek prepositions take the accusative (με τον αδερφό μου, από τον γιατρό, στο σχολείο); German mostly the dative: mit meinem Bruder, vom Arzt, in der Schule."
+   "text": "Greek prepositions take the accusative (με τον αδερφό μου, από τον γιατρό, στο σχολείο).\n\nGerman ones mostly take the dative:\n→ mit meinem Bruder, vom Arzt, in der Schule"
   },
   {
    "for": "ru",
    "rel": "similar",
-   "text": "Each Russian preposition also fixes a case, and в школе (where) / в школу (where to) is exactly in der Schule / in die Schule. German has only dative and accusative after its everyday prepositions."
+   "text": "Each Russian preposition also fixes a case, and в школе (where) / в школу (where to) is exactly in der Schule / in die Schule.\n\nGerman has **only dative and accusative** after its everyday prepositions."
   },
   {
    "for": "es",
    "rel": "new",
-   "text": "Spanish nouns do not change after a preposition (only pronouns: para mí); German changes the article: für den Vater, mit dem Vater."
+   "text": "Spanish nouns do not change after a preposition (only pronouns: para mí); German changes the article:\n→ für den Vater, mit dem Vater"
   },
   {
    "for": "en",
    "rel": "new",
-   "text": "English changes only pronouns after a preposition (with him); German changes the article too, and the preposition decides the case: mit dem Vater, für den Vater."
+   "text": "English changes only pronouns after a preposition (with him).\n\nGerman changes the article too, and **the preposition decides the case**:\n→ mit dem Vater, für den Vater"
   },
   {
    "for": "fr",
    "rel": "new",
-   "text": "French nouns stay the same after a preposition; German articles change with the preposition’s case: mit der Mutter, für die Mutter."
+   "text": "French nouns stay the same after a preposition; German articles change with the preposition’s case:\n→ mit der Mutter, für die Mutter"
   },
   {
    "for": "hi",
    "rel": "different",
-   "text": "Every Hindi postposition takes the same oblique form (laṛke ke sāth, laṛke ko); German prepositions take different cases (mit dem Jungen, für den Jungen)."
+   "text": "Every Hindi postposition takes the same oblique form (laṛke ke sāth, laṛke ko).\n\nGerman prepositions take **different cases**:\n→ mit dem Jungen, für den Jungen"
   },
   {
    "for": "fa",
    "rel": "new",
-   "text": "Persian nouns do not change after a preposition; German articles change: mit dem Bruder, für den Bruder."
+   "text": "Persian nouns do not change after a preposition; German articles change:\n→ mit dem Bruder, für den Bruder"
   },
   {
    "for": "mr",
    "rel": "different",
-   "text": "Marathi postpositions all take the oblique form of the noun; German prepositions choose between dative and accusative."
+   "text": "Marathi postpositions all take the oblique form of the noun.\n\nGerman prepositions choose between dative and accusative."
   },
   {
    "for": "ar",
    "rel": "different",
-   "text": "Every Arabic preposition takes the genitive (fī l-bayti, maʿa l-walad); German prepositions take the dative or the accusative, and some take either (in der Küche / in die Küche)."
+   "text": "Every Arabic preposition takes the genitive (fī l-bayti, maʿa l-walad).\n\nGerman prepositions take the dative or the accusative, and some take either:\n→ in der Küche / in die Küche"
   },
   {
    "for": "he",
    "rel": "different",
-   "text": "Hebrew nouns do not change after a preposition, and pronouns join it (iti, with me); German keeps the pronoun separate and in its case: mit mir, für dich."
+   "text": "Hebrew nouns do not change after a preposition, and pronouns join it (iti, with me).\n\nGerman keeps the pronoun separate and in its case:\n→ mit mir, für dich"
   },
   {
    "for": "tr",
    "rel": "similar",
-   "text": "Turkish postpositions also govern a case (yemekten önce, ablative); German prepositions come before the noun and govern dative or accusative: vor dem Essen."
+   "text": "Turkish postpositions also govern a case (yemekten önce, ablative).\n\nGerman prepositions come before the noun and govern dative or accusative:\n→ vor dem Essen"
   },
   {
    "for": "ja",
    "rel": "different",
-   "text": "Japanese particles mark the relation directly (gakkō de, gakkō e); German needs a preposition and a case on the article."
+   "text": "Japanese particles mark the relation directly (gakkō de, gakkō e).\n\nGerman needs a preposition and a case on the article."
   },
   {
    "for": "ko",
    "rel": "different",
-   "text": "Korean particles do the work alone (hakgyo-eseo, hakgyo-e); German needs a preposition plus the right case."
+   "text": "Korean particles do the work alone (hakgyo-eseo, hakgyo-e).\n\nGerman needs a preposition plus the right case."
   },
   {
    "for": "fi",
    "rel": "similar",
-   "text": "Finnish postpositions take the genitive (talon edessä); German prepositions come first and take dative or accusative: vor dem Haus."
+   "text": "Finnish postpositions take the genitive (talon edessä); German prepositions come first and take dative or accusative:\n→ vor dem Haus"
   },
   {
    "for": "hu",
    "rel": "different",
-   "text": "Hungarian postpositions leave the noun as it is (a ház előtt); German prepositions change the article: vor dem Haus."
+   "text": "Hungarian postpositions leave the noun as it is (a ház előtt); German prepositions change the article:\n→ vor dem Haus"
   },
   {
    "for": "sw",
    "rel": "new",
-   "text": "Swahili has no cases (na, kwa change nothing); German prepositions put the article in the dative or accusative."
+   "text": "Swahili has no cases (na, kwa change nothing).\n\nGerman prepositions put the article in the dative or accusative."
   },
   {
    "for": "zh",
    "rel": "new",
-   "text": "Chinese nouns never change after 在, 跟 or 给; German articles change after every preposition: mit dem Bus, für den Vater."
+   "text": "Chinese nouns never change after 在, 跟 or 给; German articles change after every preposition:\n→ mit dem Bus, für den Vater"
   },
   {
    "for": "vi",
@@ -572,7 +572,47 @@
   {
    "for": "iu",
    "rel": "different",
-   "text": "Inuktitut expresses these relations with case endings and has no prepositions; German combines a preposition with a case on the article: mit dem Bus, in der Küche."
+   "text": "Inuktitut expresses these relations with case endings and has no prepositions.\n\nGerman combines a preposition with a case on the article:\n→ mit dem Bus, in der Küche"
+  },
+  {
+   "for": "it",
+   "rel": "new",
+   "text": "Italian nouns stay the same after a preposition, which merges with the article (nel, al, dal).\n\nGerman merges too (im, am, zum, vom), but the article also takes **the case the preposition asks for**:\n→ mit dem Vater, für den Vater"
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Albanian prepositions also govern a case:\n- me + accusative (me shokun);\n- nga + nominative (nga shkolla);\n- afër + ablative (afër shkollës).\n\nGerman has two everyday ones, dative and accusative:\n→ mit dem Freund, für den Freund"
+  },
+  {
+   "for": "pt",
+   "rel": "new",
+   "text": "Portuguese nouns do not change after a preposition, which merges with the article (no, na, ao, do).\n\nGerman merges too (im, am, zum, vom), and **the article changes for the preposition’s case**:\n→ mit dem Vater, für den Vater"
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If prepositions in your language govern cases, the system is familiar. Learn the German lists:\n- aus, bei, mit, nach, von, zu + dative;\n- durch, für, ohne, um + accusative;\n- the two-way ones (in der Küche / in die Küche)."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "Where you would add a case suffix or put a postposition after the noun, German puts a preposition before it and the case on the article:\n→ in der Küche, aus der Küche, mit dem Bus"
+  },
+  {
+   "for": "type:isolating",
+   "rel": "new",
+   "text": "Nothing changes after a preposition in your language; in German the article takes the case the preposition asks for:\n→ mit dem Bus, für den Vater, in der Schule\n\n**Learn each preposition together with its case.**"
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "Relations your language packs into word endings are separate prepositions in German, placed before the noun, and the article takes their case:\n→ mit dem Bus, in der Küche"
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "Prepositions before the noun will feel natural, and some merge with the article (im = in dem, zum = zu dem), as yours may merge with “the”.\n\nNew is that **the article changes for the case each preposition asks for**:\n→ mit dem Vater, für den Vater"
   }
  ]
 }

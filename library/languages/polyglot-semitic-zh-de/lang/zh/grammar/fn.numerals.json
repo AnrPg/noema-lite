@@ -335,7 +335,7 @@
   ]
  },
  "traps": [
-  "*两十 → 二十; and inside numbers it is always 二: 十二个, 二十二个 (not *十两个).",
+  "*两十 → 二十; and inside numbers it is always 二:\n→ 十二个, 二十二个 (not *十两个).",
   "10 is 十, never *一十 — but 110 is 一百一十.",
   "*三书 → 三本书: the measure word cannot be left out.",
   "*少人 / *多人 → 人很少 / 很多人: 多 and 少 alone do not stand before a noun.",
@@ -503,72 +503,72 @@
   {
    "for": "el",
    "rel": "different",
-   "text": "Greek numbers are also tens first (είκοσι ένα ~ 二十一), but 1, 3 and 4 agree in gender (ένας / μία / ένα, τρεις / τρία) and the noun is plural. Chinese numbers never change, the noun never changes, and a measure word goes in between."
+   "text": "Greek numbers are also tens first (είκοσι ένα ~ 二十一), but 1, 3 and 4 agree in gender (ένας / μία / ένα, τρεις / τρία) and the noun is plural.\n\nChinese numbers never change, the noun never changes, and a measure word goes in between."
   },
   {
    "for": "ru",
    "rel": "different",
-   "text": "Russian один / одна and два / две agree, and the noun changes its case after numbers (два стола, пять столов). Chinese has nothing to agree: 两张桌子, 五张桌子 — only the measure word."
+   "text": "Russian один / одна and два / две agree, and the noun changes its case after numbers (два стола, пять столов).\n\nChinese has nothing to agree: 两张桌子, 五张桌子 — only the measure word."
   },
   {
    "for": "es",
    "rel": "similar",
-   "text": "Spanish veintiuno is tens first, like 二十一, and uno / una agree with the noun while 一 never changes. Spanish has one word for two; Chinese has 二 for counting and 两 before a measure word."
+   "text": "Spanish veintiuno is tens first, like 二十一, and uno / una agree with the noun while 一 never changes.\n\nSpanish has one word for two; Chinese has 二 for counting and 两 before a measure word."
   },
   {
    "for": "en",
    "rel": "similar",
-   "text": "English twenty-one has the order of 二十一, but eleven to nineteen are irregular; in Chinese even 11–19 are regular: 十一 ‘ten-one’. And the noun takes no -s: 三本书."
+   "text": "English twenty-one has the order of 二十一, but eleven to nineteen are irregular; in Chinese even 11–19 are regular:\n→ 十一 ‘ten-one’.\n\nAnd the noun takes no -s:\n→ 三本书."
   },
   {
    "for": "fr",
    "rel": "trap",
-   "text": "French counts partly in twenties (soixante-dix ‘sixty-ten’ = 70, quatre-vingts ‘four-twenties’ = 80); Chinese is purely decimal: 七十 ‘seven-ten’, 八十 ‘eight-ten’."
+   "text": "French counts partly in twenties (soixante-dix ‘sixty-ten’ = 70, quatre-vingts ‘four-twenties’ = 80); Chinese is purely decimal:\n→ 七十 ‘seven-ten’, 八十 ‘eight-ten’."
   },
   {
    "for": "de",
    "rel": "trap",
-   "text": "German einundzwanzig puts the units first; Chinese 二十一 follows the written order. Where German counts directly (drei Bücher), Chinese adds a measure word: 三本书."
+   "text": "German einundzwanzig puts the units first; Chinese 二十一 follows the written order.\n\nWhere German counts directly (drei Bücher), Chinese adds a measure word:\n→ 三本书."
   },
   {
    "for": "hi",
    "rel": "trap",
-   "text": "Hindi numbers from 11 to 99 are each a separate word, units first (इक्कीस 21, बयालीस 42); Chinese builds every number from ten digits, tens first: 二十一, 四十二. Large numbers: Hindi groups by lakh and crore, Chinese by ten thousand (万, later)."
+   "text": "Hindi numbers from 11 to 99 are each a separate word, units first (इक्कीस 21, बयालीस 42); Chinese builds every number from ten digits, tens first:\n→ 二十一, 四十二.\n\nLarge numbers: Hindi groups by lakh and crore, Chinese by ten thousand (万, later)."
   },
   {
    "for": "fa",
    "rel": "similar",
-   "text": "Persian numbers are tens first, joined by o (bist-o-yek ‘twenty-and-one’); Chinese simply strings them: 二十一. Persian also keeps the noun singular after a number (se ketāb) and may add tā — Chinese must add a measure word."
+   "text": "Persian numbers are tens first, joined by o (bist-o-yek ‘twenty-and-one’); Chinese simply strings them:\n→ 二十一.\n\nPersian also keeps the noun singular after a number (se ketāb) and may add tā — Chinese must add a measure word."
   },
   {
    "for": "mr",
    "rel": "trap",
-   "text": "Marathi has a separate, irregular word for each number up to 100, units first (एकवीस 21); Chinese builds all of them regularly, tens first: 二十一."
+   "text": "Marathi has a separate, irregular word for each number up to 100, units first (एकवीस 21); Chinese builds all of them regularly, tens first:\n→ 二十一."
   },
   {
    "for": "ar",
    "rel": "different",
-   "text": "Arabic says units before tens (wāḥid wa-ʿishrūn ‘one and twenty’), and the numerals 3–10 take the opposite gender of the noun; Chinese says tens first (二十一) and never agrees. Arabic has a dual (kitābān ‘two books’); Chinese says 两本书."
+   "text": "Arabic says units before tens (wāḥid wa-ʿishrūn ‘one and twenty’), and the numerals 3–10 take the opposite gender of the noun; Chinese says tens first (二十一) and never agrees.\n\nArabic has a dual (kitābān ‘two books’); Chinese says 两本书."
   },
   {
    "for": "he",
    "rel": "different",
-   "text": "Hebrew numbers agree in gender with the noun, which is plural; Chinese numbers never change and the noun stays bare: 三本书."
+   "text": "Hebrew numbers agree in gender with the noun, which is plural; Chinese numbers never change and the noun stays bare:\n→ 三本书."
   },
   {
    "for": "tr",
    "rel": "similar",
-   "text": "Turkish also keeps the noun singular after numbers (iki kitap) and says tens first (yirmi bir ~ 二十一); Chinese goes further — the noun never has a plural — and adds a measure word: 两本书."
+   "text": "Turkish also keeps the noun singular after numbers (iki kitap) and says tens first (yirmi bir ~ 二十一); Chinese goes further — the noun never has a plural — and adds a measure word:\n→ 两本书."
   },
   {
    "for": "ja",
    "rel": "same",
-   "text": "Sino-Japanese numbers are built exactly like Chinese ones (二十一 nijūichi), and Japanese also needs counters. 万 man ‘ten thousand’ will be Chinese 万 wàn too."
+   "text": "Sino-Japanese numbers are built exactly like Chinese ones (二十一 nijūichi), and Japanese also needs counters.\n\n万 man ‘ten thousand’ will be Chinese 万 wàn too."
   },
   {
    "for": "ko",
    "rel": "similar",
-   "text": "Sino-Korean numbers (일, 이, 삼 …, 이십일 ‘21’) follow the Chinese pattern exactly, and Korean also needs counters. Korean’s second, native set (하나, 둘, 셋) has no Chinese counterpart; the Chinese split is 二 / 两."
+   "text": "Sino-Korean numbers (일, 이, 삼 …, 이십일 ‘21’) follow the Chinese pattern exactly, and Korean also needs counters.\n\nKorean’s second, native set (하나, 둘, 셋) has no Chinese counterpart; the Chinese split is 二 / 两."
   },
   {
    "for": "fi",
@@ -578,17 +578,17 @@
   {
    "for": "hu",
    "rel": "similar",
-   "text": "Hungarian has two forms of ‘two’ — kettő alone, két before a noun — much like Chinese 二 / 两 (两 before a measure word). Hungarian also keeps the noun singular after numbers (két könyv ~ 两本书)."
+   "text": "Hungarian has two forms of ‘two’ — kettő alone, két before a noun — much like Chinese 二 / 两 (两 before a measure word).\n\nHungarian also keeps the noun singular after numbers (két könyv ~ 两本书)."
   },
   {
    "for": "sw",
    "rel": "different",
-   "text": "Swahili numerals follow the noun, and some agree with its class (vitabu viwili ‘two books’); Chinese numerals come first and never change: 两本书. Swahili ishirini na moja ‘twenty and one’ is tens first, like 二十一."
+   "text": "Swahili numerals follow the noun, and some agree with its class (vitabu viwili ‘two books’); Chinese numerals come first and never change:\n→ 两本书.\n\nSwahili ishirini na moja ‘twenty and one’ is tens first, like 二十一."
   },
   {
    "for": "lg",
    "rel": "different",
-   "text": "Luganda numerals follow the noun and agree with its class (abantu babiri ‘two people’, ebitabo bibiri ‘two books’); Chinese numerals come first and never agree: 两个人, 两本书."
+   "text": "Luganda numerals follow the noun and agree with its class (abantu babiri ‘two people’, ebitabo bibiri ‘two books’); Chinese numerals come first and never agree:\n→ 两个人, 两本书."
   },
   {
    "for": "vi",
@@ -598,7 +598,47 @@
   {
    "for": "iu",
    "rel": "different",
-   "text": "Inuktitut’s traditional numbers are not decimal, and larger numbers are often borrowed today; the noun itself shows singular, dual or plural (inuk, inuuk, inuit). Chinese builds every number from ten digits and never marks number on the noun: 两个人."
+   "text": "Inuktitut’s traditional numbers are not decimal, and larger numbers are often borrowed today; the noun itself shows singular, dual or plural (inuk, inuuk, inuit).\n\nChinese builds every number from ten digits and never marks number on the noun:\n→ 两个人."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Italian ventuno is tens first like 二十一, but 11–16 are irregular (undici, dodici … sedici); Chinese is regular from 11 on: 十一 ‘ten-one’. uno / una agree; 一 never changes, and the noun takes no plural:\n→ 三本书 (tre libri)."
+  },
+  {
+   "for": "sq",
+   "rel": "trap",
+   "text": "Albanian 11–19 put the units first (njëmbëdhjetë ‘one-on-ten’), and 20 / 40 count in twenties (njëzet, dyzet ‘two-twenty’); Chinese is purely decimal and tens first:\n→ 十一 ‘ten-one’, 四十 ‘four-ten’.\n\nThe noun stays bare:\n→ 三本书 (tre libra)."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "Portuguese vinte e um is tens first like 二十一, but 11–15 are irregular (onze … quinze); Chinese 十一 ‘ten-one’ is regular. um / uma and dois / duas agree; 一 and 两 never change, and the noun stays bare:\n→ 两本书."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your numbers agree in gender or case and the noun changes after them, Chinese has nothing to agree: number + measure word + an unchanged noun (两张桌子, 五张桌子).\n\nNote 两, not 二, before a measure word."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If your noun stays singular after a number, Chinese goes further — the noun never has a plural — and adds a measure word:\n→ 两本书.\n\nNumbers are decimal and tens first:\n→ 二十一 ‘two-ten-one’."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "same",
+   "text": "If your numbers are built ‘two-ten-one’ and need a classifier, Chinese is the same:\n→ 二十一, 两本书."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If your traditional numbers are not decimal, or the noun shows dual and plural, Chinese builds every number from ten digits (二十一 ‘two-ten-one’) and never marks number on the noun:\n→ 两个人."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If your language says units before tens, has a dual and matches numbers to the noun’s gender, Chinese says tens first (二十一), has no dual (两本书 ‘two books’) and never agrees."
   }
  ],
  "seeAlso": [

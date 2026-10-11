@@ -18,6 +18,7 @@ os.makedirs(os.path.join(sd, 'sources'), exist_ok=True)
 subprocess.run([sys.executable, os.path.join(S, 'split_pdf.py'), book, os.path.join(sd, 'sources'), '--ranges', '1-12,13-30', '--name', 'ecb'], check=True, capture_output=True)
 open(os.path.join(sd, 'sources', 'σημειώσεις.md'), 'w', encoding='utf-8').write('# Σημειώσεις μαθήματος\n\nNotes travel with the package.\n')
 subj = json.load(open(os.path.join(sd, 'subject.json'), encoding='utf-8')); subj.update(id='pkg-physics', title='Πακέτο φυσικής', language='el')
+subj.pop('i18n', None); shutil.rmtree(os.path.join(sd, 'translations'), ignore_errors=True)   # a one-language package (the fixture's translations are tested by tests/pack_i18n.js)
 json.dump(subj, open(os.path.join(sd, 'subject.json'), 'w', encoding='utf-8'), ensure_ascii=False)
 json.dump({'sources': [
     {'id': 'ecb-1', 'title': 'Βιβλίο — μέρος 1', 'short': 'ECB 1', 'file': 'sources/ecb_p1-12.pdf', 'firstPage': 1, 'pages': '1–12', 'emoji': '📘', 'added': '2026-10-07'},

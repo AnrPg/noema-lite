@@ -128,7 +128,7 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German aber, aver, from Old High German aber, ābar, abur, avur, afur, from Proto-Germanic *aferą (“behind”). Compare Luxembourgish awer (“but”), Low German aver.",
+     "text": "From Middle High German aber, aver, from Old High German aber, ābar, abur, avur, afur, from Proto-Germanic *aferą (“behind”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -144,7 +144,16 @@
     ]
    },
    "features": {
-    "verbPosition": "none (position zero)"
+    "verbPosition": "none (position zero)",
+    "paired": "zwar … aber",
+    "particleUse": [
+     {
+      "senses": [
+       "s2"
+      ],
+      "function": "surprise, emphasis: Das ist aber schön!"
+     }
+    ]
    }
   },
   {
@@ -239,15 +248,22 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "weil is the old word for “while” (die Weile – a while), like English while."
+     "weil is the old word for “while” (die Weile – a while)."
     ],
     "pitfalls": [
      "The finite verb goes to the END of the clause: …, weil ich Durst habe (not *weil ich habe Durst – heard in fast speech, but wrong in writing).",
      "A comma always comes before weil."
     ],
     "subtleties": [
-     "A weil-clause can come first; then the main clause starts with its verb: Weil ich müde bin, gehe ich nach Hause.",
+     "A weil-clause can come first; then the main clause starts with its verb:\n→ Weil ich müde bin, gehe ich nach Hause.",
      "The answer to Warum? is a weil-clause on its own: Weil ich müde bin."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "weil is related to English while."
+     }
     ]
    },
    "features": {
@@ -386,11 +402,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German denne, tenne, from Old High German denna, a variant of danne, from Proto-West Germanic *þan. Doublet of dann. The functional split between denn and dann was prescribed only by the grammarians of the 18th century. Cognate with English then and than.",
+     "text": "From Middle High German denne, tenne, from Old High German denna, a variant of danne, from Proto-West Germanic *þan. Doublet of dann. The functional split between denn and dann was prescribed only by the grammarians of the 18th century.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "denn and dann were one word until 18th-century grammarians split their jobs – both are cousins of English then and than."
+     "denn and dann were one word until 18th-century grammarians split their jobs."
     ],
     "pitfalls": [
      "denn keeps main-clause order: …, denn ich habe Durst (verb second) – compare weil ich Durst habe.",
@@ -398,10 +414,28 @@
     ],
     "subtleties": [
      "In questions denn is a softening particle, not “because”: Was machst du denn?"
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "denn is related to English then and than."
+     }
     ]
    },
    "features": {
-    "verbPosition": "none (position zero)"
+    "verbPosition": "none (position zero)",
+    "paired": {
+     "none": "not part of a two-part conjunction"
+    },
+    "particleUse": [
+     {
+      "senses": [
+       "s2"
+      ],
+      "function": "interest or impatience in a question: Was ist denn los?"
+     }
+    ]
    }
   },
   {
@@ -505,7 +539,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "des is the old genitive “of that”: deshalb, deswegen and Greek γι’ αυτό (“for this”) all point back to the reason just given."
+     "des is the old genitive “of that”: deshalb and deswegen point back to the reason just given."
     ],
     "pitfalls": [
      "deshalb is an adverb, not a conjunction: it takes the first place and the verb follows at once – deshalb esse ich (not *deshalb ich esse)."
@@ -513,11 +547,24 @@
     "subtleties": [
      "It can also stand after the verb: Ich esse deshalb ein Brot.",
      "A comma (or a full stop) comes before it."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "deshalb is built like γι’ αυτό: “for this”."
+     }
     ]
    },
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -619,12 +666,18 @@
      "Like deshalb it takes the first place and the verb follows: deswegen bleiben wir (not *deswegen wir bleiben)."
     ],
     "subtleties": [
-     "deswegen = des + wegen (“because of that”); wegen alone is the preposition “because of” (wegen des Wetters)."
+     "- deswegen = des + wegen (“because of that”);\n- wegen alone is the preposition “because of” (wegen des Wetters)."
     ]
    },
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -657,7 +710,7 @@
      "neutral"
     ],
     "connotation": "neutral",
-    "feeling": "So, therefore – a conclusion; and the “well, so …” that starts a new thought. Not English “also”!",
+    "feeling": "So, therefore – a conclusion; and the “well, so …” that starts a new thought.",
     "senses": [
      {
       "id": "s1",
@@ -763,23 +816,36 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German alles, from Old High German also, alsō (“as, like”); equivalent to all + so. Cognate with English also, as.",
+     "text": "From Middle High German alles, from Old High German also, alsō (“as, like”); equivalent to all + so.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "also and English also come from the same all + so – the meanings went separate ways."
+     "also comes from all + so; its meaning moved to “so, therefore”."
     ],
     "pitfalls": [
-     "False friend: German also = “so, therefore”; English “also” is auch (S09).",
+     "also = “so, therefore”; “too, as well” is auch (S09).",
      "In writing the verb follows at once: also fahre ich (speech sometimes says also ich fahre, after a short pause)."
     ],
     "subtleties": [
      "Also! alone, at the start: “Well …” / “Right, …”."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "also is the same word as English also (and as) – but in German it means “so, therefore”.\n\n“also” is auch."
+     }
     ]
    },
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -917,7 +983,7 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German dann, from Old High German danne, from Proto-West Germanic *þan. Cognate with English then.",
+     "text": "From Middle High German dann, from Old High German danne, from Proto-West Germanic *þan.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -929,11 +995,24 @@
     ],
     "subtleties": [
      "In Wenn …, dann … the dann is optional: Wenn du Hunger hast, (dann) iss etwas."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "dann is related to English then."
+     }
     ]
    },
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -1089,7 +1168,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "wenn, wann and English when are the same old word in different jobs."
+     "wenn and wann are the same old word in different jobs."
     ],
     "pitfalls": [
      "wenn ≠ wann: wann is the question word (Wann kommst du?), wenn joins clauses (Wenn du kommst, …).",
@@ -1098,8 +1177,20 @@
      "The finite verb goes to the END of the clause: …, wenn ich Hunger habe."
     ],
     "subtleties": [
-     "English if and when are both wenn in the present and future; context decides.",
+     "wenn covers a condition and a time in the present and future; context decides.",
      "If the wenn-clause comes first, the main clause starts with its verb: Wenn es kalt ist, trinken wir Tee."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "wenn and wann are related to English when."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "if and when are both wenn in the present and future; context decides."
+     }
     ]
    },
    "features": {
@@ -1212,18 +1303,25 @@
     "synonyms": [],
     "synonymsNone": "No other word introduces an indirect yes/no question; wenn (if) is only for conditions.",
     "etymology": {
-     "text": "From Middle High German obe, ob, from Proto-Germanic *jabai (“when, if”). Compare English if.",
+     "text": "From Middle High German obe, ob, from Proto-Germanic *jabai (“when, if”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "ob and English if go back to the same Proto-Germanic word *jabai."
+     "ob goes back to Proto-Germanic *jabai."
     ],
     "pitfalls": [
-     "“if” = “whether” is ob: Ich weiß nicht, ob er kommt; “if” = a condition is wenn: Wenn er kommt, essen wir.",
+     "- “if” = “whether” is ob: Ich weiß nicht, ob er kommt;\n- “if” = a condition is wenn: Wenn er kommt, essen wir.",
      "The finite verb goes to the END of the clause: …, ob er heute kommt."
     ],
     "subtleties": [
      "Ob …? alone is a wondering question: Ob er heute kommt? (I wonder if he’s coming today.)"
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "ob is related to English if."
+     }
     ]
    },
    "features": {
@@ -1323,11 +1421,11 @@
     "synonyms": [],
     "synonymsNone": "No synonym: dass is the only “that” conjunction; the clause can be left without it (Ich glaube, er kommt).",
     "etymology": {
-     "text": "From Middle High German daȥ, from Old High German daȥ, from Proto-Germanic *þat. Compare Dutch dat, Low German dat, English that. Doublet of das. The distinction from das is purely an orthographical convention.",
+     "text": "From Middle High German daȥ, from Old High German daȥ, from Proto-Germanic *þat. Doublet of das. The distinction from das is purely an orthographical convention.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "dass and das are the same word – the spelling split is only a convention; before 1996 dass was written daß."
+     "dass and das are the same word – the spelling split is only a convention.\n\nBefore 1996 dass was written daß."
     ],
     "pitfalls": [
      "dass (conjunction, ss) vs das (article or pronoun, s): if you can replace it with dieses or welches, write das.",
@@ -1335,6 +1433,13 @@
     ],
     "subtleties": [
      "Speech often drops dass and keeps main-clause order: Ich glaube, er kommt = Ich glaube, dass er kommt."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "dass is related to English that."
+     }
     ]
    },
    "features": {
@@ -1430,7 +1535,7 @@
     ],
     "pitfalls": [
      "The finite verb goes to the END of the clause: …, obwohl es kalt ist.",
-     "obwohl joins (…, obwohl es kalt ist); trotzdem is an adverb with the verb next (Es ist kalt, trotzdem gehen wir)."
+     "- obwohl joins (…, obwohl es kalt ist);\n- trotzdem is an adverb with the verb next (Es ist kalt, trotzdem gehen wir)."
     ],
     "subtleties": [
      "Speech sometimes uses obwohl as a correction with main-clause order: Ich komme mit – obwohl, nein, ich bin zu müde."

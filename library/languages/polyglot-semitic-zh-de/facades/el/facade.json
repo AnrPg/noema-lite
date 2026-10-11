@@ -1,0 +1,43 @@
+{
+ "format": "noema.langfacade/v1",
+ "course": "polyglot-semitic-zh-de",
+ "locale": "el",
+ "master": "en",
+ "status": "preview",
+ "coverage": {
+  "1": {
+   "total": 32371,
+   "done": 32371,
+   "stale": 0,
+   "missing": 0
+  },
+  "2": {
+   "total": 42036,
+   "done": 42036,
+   "stale": 0,
+   "missing": 0
+  },
+  "3": {
+   "total": 22738,
+   "done": 22738,
+   "stale": 0,
+   "missing": 0
+  }
+ },
+ "built": "2026-10-11T21:10:51Z",
+ "files": [
+  "_phenomena/facades/el/ar.json",
+  "_phenomena/facades/el/de.json",
+  "_phenomena/facades/el/he.json",
+  "_phenomena/facades/el/zh.json",
+  "_typology/facades/el.json",
+  "polyglot-semitic-zh-de/facades/el/ar.json",
+  "polyglot-semitic-zh-de/facades/el/core.json",
+  "polyglot-semitic-zh-de/facades/el/de.json",
+  "polyglot-semitic-zh-de/facades/el/he.json",
+  "polyglot-semitic-zh-de/facades/el/zh.json"
+ ],
+ "notes": [
+  "*"
+ ]
+}

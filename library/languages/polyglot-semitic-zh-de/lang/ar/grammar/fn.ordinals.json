@@ -435,17 +435,17 @@
   {
    "lang": "he",
    "fn": "fn.ordinals",
-   "note": "Hebrew ordinals 1–10 are adjectives on a pattern with -i (שְׁלִישִׁי “third”, feminine שְׁלִישִׁית); above ten Hebrew uses cardinals, Arabic keeps ordinals (الْحَادِيَ عَشَرَ)."
+   "note": "Hebrew ordinals 1–10 are adjectives on a pattern with -i (שְׁלִישִׁי “third”, feminine שְׁלִישִׁית).\n\nAbove ten Hebrew uses cardinals; Arabic keeps ordinals (الْحَادِيَ عَشَرَ)."
   },
   {
    "lang": "de",
    "fn": "fn.ordinals",
-   "note": "German ordinals also agree (der dritte Tag, die dritte Stunde) and dates use them (der fünfte Mai); but the clock uses cardinals (um drei Uhr), and halb vier is 3:30, where Arabic says الثَّالِثَةُ وَالنِّصْفُ."
+   "note": "German ordinals also agree (der dritte Tag, die dritte Stunde) and dates use them (der fünfte Mai).\n\nBut the clock uses cardinals (um drei Uhr), and halb vier is 3:30, where Arabic says الثَّالِثَةُ وَالنِّصْفُ."
   },
   {
    "lang": "zh",
    "fn": "fn.ordinals",
-   "note": "Chinese makes ordinals with 第 (第三天) and writes dates from big to small (五月五日); Arabic puts the day first: الْخَامِسُ مِنْ مَايُو."
+   "note": "Chinese makes ordinals with 第 (第三天) and writes dates from big to small (五月五日).\n\nArabic puts the day first: الْخَامِسُ مِنْ مَايُو."
   },
   {
    "lang": "ar",
@@ -475,37 +475,37 @@
   {
    "for": "el",
    "rel": "similar",
-   "text": "Greek ordinals are adjectives that agree too (τρίτος, τρίτη); the Greek clock uses cardinals (στις τρεις), while Arabic uses the feminine ordinal: فِي السَّاعَةِ الثَّالِثَةِ."
+   "text": "Greek ordinals are adjectives that agree too (τρίτος, τρίτη).\n\nThe Greek clock uses cardinals (στις τρεις), while **Arabic uses the feminine ordinal**:\n→ فِي السَّاعَةِ الثَّالِثَةِ"
   },
   {
    "for": "ru",
    "rel": "similar",
-   "text": "Russian ordinals agree like adjectives (третий день, третья неделя), as in Arabic; Russian names the hour in progress with an ordinal (пятый час = after four), while Arabic’s الْخَامِسَةُ is five o’clock exactly."
+   "text": "Russian ordinals agree like adjectives (третий день, третья неделя), as in Arabic.\n\n**Trap:** Russian names the hour in progress with an ordinal (пятый час = after four), while Arabic’s الْخَامِسَةُ is five o’clock exactly."
   },
   {
    "for": "es",
    "rel": "different",
-   "text": "Spanish ordinals agree (primero, primera), but dates use cardinals (el cinco de mayo); formal Arabic uses the ordinal: الْخَامِسُ مِنْ مَايُو."
+   "text": "Spanish ordinals agree (primero, primera), but dates use cardinals (el cinco de mayo).\n\nFormal Arabic uses the ordinal:\n→ الْخَامِسُ مِنْ مَايُو"
   },
   {
    "for": "en",
    "rel": "different",
-   "text": "English adds -th to the number; Arabic builds 3rd–10th from the root on one pattern (ثَالِث، رَابِع، خَامِس) and makes them agree in gender: الْيَوْمُ الثَّالِثُ / السَّاعَةُ الثَّالِثَةُ."
+   "text": "English adds -th to the number. Arabic builds 3rd–10th from the root on one pattern and makes them agree in gender:\n→ ثَالِث، رَابِع، خَامِس\n→ الْيَوْمُ الثَّالِثُ / السَّاعَةُ الثَّالِثَةُ"
   },
   {
    "for": "fr",
    "rel": "different",
-   "text": "French dates use cardinals except the first (le premier mai, le cinq mai); Arabic uses ordinals for every day (الْأَوَّلُ مِنْ مَايُو، الْخَامِسُ مِنْ مَايُو)."
+   "text": "French dates use cardinals except the first (le premier mai, le cinq mai).\n\nArabic uses **ordinals for every day**:\n→ الْأَوَّلُ مِنْ مَايُو، الْخَامِسُ مِنْ مَايُو"
   },
   {
    "for": "de",
    "rel": "similar",
-   "text": "German ordinals agree (der dritte Tag, die dritte Stunde) and dates use them (der fünfte Mai), as in Arabic; the clock differs: um drei Uhr, and halb vier = 3:30, whereas Arabic says الثَّالِثَةُ وَالنِّصْفُ."
+   "text": "German ordinals agree (der dritte Tag, die dritte Stunde) and dates use them (der fünfte Mai), as in Arabic.\n\nThe clock differs: um drei Uhr, and **halb vier = 3:30**, whereas Arabic says:\n→ الثَّالِثَةُ وَالنِّصْفُ"
   },
   {
    "for": "hi",
    "rel": "different",
-   "text": "Hindi has special words for the first ordinals (पहला, दूसरा, तीसरा, चौथा, छठा) and -वाँ for the rest (पाँचवाँ); Arabic forms 3rd–10th regularly on فَاعِل and has special words only for 1st and 2nd."
+   "text": "Hindi has special words for the first ordinals (पहला, दूसरा, तीसरा, चौथा, छठा) and -वाँ for the rest (पाँचवाँ).\n\nArabic forms 3rd–10th **regularly on فَاعِل** and has special words only for 1st and 2nd."
   },
   {
    "for": "fa",
@@ -520,17 +520,17 @@
   {
    "for": "he",
    "rel": "similar",
-   "text": "Hebrew ordinals 1–10 are adjectives too, with -i (שְׁלִישִׁי “third”, רְבִיעִי “fourth”), and agree in gender; above ten Hebrew uses cardinals, while Arabic keeps ordinals (الْحَادِيَ عَشَرَ)."
+   "text": "Hebrew ordinals 1–10 are adjectives too, with -i, and agree in gender:\n→ שְׁלִישִׁי “third”, רְבִיעִי “fourth”\n\nAbove ten Hebrew uses cardinals, while Arabic keeps ordinals: الْحَادِيَ عَشَرَ."
   },
   {
    "for": "tr",
    "rel": "different",
-   "text": "Turkish adds -(I)ncI to the cardinal (üçüncü “third”), and the clock and dates use cardinals (saat üç, beş mayıs); Arabic uses ordinals for both."
+   "text": "Turkish adds -(I)ncI to the cardinal (üçüncü “third”), and the clock and dates use cardinals (saat üç, beş mayıs).\n\nArabic uses **ordinals for both**."
   },
   {
    "for": "ja",
    "rel": "different",
-   "text": "Japanese makes ordinals with 第 or -番目 (三番目) and says the hour with a cardinal + 時 (三時); Arabic uses the feminine ordinal: السَّاعَةُ الثَّالِثَةُ."
+   "text": "Japanese makes ordinals with 第 or -番目 (三番目) and says the hour with a cardinal + 時 (三時).\n\nArabic uses the feminine ordinal:\n→ السَّاعَةُ الثَّالِثَةُ"
   },
   {
    "for": "ko",
@@ -550,7 +550,7 @@
   {
    "for": "sw",
    "rel": "different",
-   "text": "Swahili forms ordinals with -a + the number (siku ya tatu “the third day”) and counts the hours from sunrise (saa moja = seven o’clock); Arabic has a special ordinal form that agrees in gender, and its clock starts at midnight and noon."
+   "text": "Swahili forms ordinals with -a + the number and counts the hours from sunrise:\n→ siku ya tatu — “the third day”\n→ saa moja — seven o’clock\n\nArabic has a special ordinal form that agrees in gender, and **its clock starts at midnight and noon**."
   },
   {
    "for": "lg",
@@ -560,7 +560,7 @@
   {
    "for": "zh",
    "rel": "different",
-   "text": "Chinese makes ordinals with 第 (第三天) and writes dates from big to small (五月五日); Arabic puts the day first: الْخَامِسُ مِنْ مَايُو."
+   "text": "Chinese makes ordinals with 第 (第三天) and writes dates from big to small (五月五日).\n\nArabic puts the day first:\n→ الْخَامِسُ مِنْ مَايُو"
   },
   {
    "for": "vi",
@@ -571,6 +571,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut “first” is sivulliq, “the one in front”, a word of its own; Arabic “first”, أَوَّل, is also not built from “one”, while 3rd–10th follow one pattern (ثَالِث … عَاشِر)."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian ordinals agree (il terzo giorno, la terza ora), but:\n- dates use cardinals except the first (il cinque maggio, il primo maggio);\n- the clock says alle tre.\n\nArabic uses **ordinals for both**:\n→ الْخَامِسُ مِنْ مَايُو, السَّاعَةُ الثَّالِثَةُ"
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian ordinals agree like adjectives (dita e tretë), but dates and the clock use cardinals (më pesë maj, ora tre).\n\nArabic uses **ordinals for both**:\n→ الْخَامِسُ مِنْ مَايُو, السَّاعَةُ الثَّالِثَةُ"
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese ordinals agree (o terceiro dia, a terceira hora), but dates and the clock use cardinals (cinco de maio, às três).\n\nArabic uses **ordinals**:\n→ الْخَامِسُ مِنْ مَايُو, السَّاعَةُ الثَّالِثَةُ"
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your ordinals are adjectives that agree, Arabic ones do too — built from the root of the number on one pattern, فَاعِل.\n→ الْيَوْمُ الثَّالِثُ / السَّاعَةُ الثَّالِثَةُ"
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If you form ordinals with one suffix, Arabic uses **one pattern** instead — the root of the number in فَاعِل — and the ordinal agrees with the noun.\n→ ثَلَاثَة → ثَالِث, خَمْسَة → خَامِس"
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If you make ordinals with a word before the number, note that Arabic:\n- changes the number’s shape: ثَالِث, رَابِع;\n- puts it after the noun as an agreeing adjective."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "new",
+   "text": "Learn:\n- the pattern فَاعِل on the number root (ثَالِث “third”);\n- the special أَوَّل “first”;\n- the use of ordinals for dates and the clock: السَّاعَةُ الثَّالِثَةُ."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "If your language is Semitic, ordinals built from the number root are familiar.\n\nArabic also uses them **for dates and the clock**:\n→ الْخَامِسُ مِنْ مَايُو, السَّاعَةُ الْخَامِسَةُ"
   }
  ]
 }

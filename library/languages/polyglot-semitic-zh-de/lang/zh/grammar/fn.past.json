@@ -367,27 +367,27 @@
   {
    "for": "el",
    "rel": "different",
-   "text": "Greek must choose a past form: ξύπνησα ‘I woke up (once, done)’ or ξυπνούσα ‘I used to wake up / was waking’. Chinese marks only the ‘done’ side, with 了, and only when it matters: 我醒了; the habit has no marker at all (以前我七点醒)."
+   "text": "Greek must choose a past form: ξύπνησα ‘I woke up (once, done)’ or ξυπνούσα ‘I used to wake up / was waking’.\n\nChinese marks only the ‘done’ side, with 了, and only when it matters:\n→ 我醒了; the habit has no marker at all (以前我七点醒)."
   },
   {
    "for": "ru",
    "rel": "similar",
-   "text": "The Russian perfective past (проснулся, встал) is close to verb + 了 (醒了, 起床了), the imperfective past (вставал) to the bare verb with a time word. But Russian also marks gender in the past (встал / встала); the Chinese verb never changes."
+   "text": "The Russian perfective past (проснулся, встал) is close to verb + 了 (醒了, 起床了), the imperfective past (вставал) to the bare verb with a time word.\n\nBut Russian also marks gender in the past (встал / встала); the Chinese verb never changes."
   },
   {
    "for": "es",
    "rel": "similar",
-   "text": "Me levanté (pretérito, done) ~ 我起床了; me levantaba (imperfecto, habit) ~ 以前我…起床, without 了. Ayer ~ 昨天, before the verb."
+   "text": "Me levanté (pretérito, done) ~ 我起床了; me levantaba (imperfecto, habit) ~ 以前我…起床, without 了.\n\nAyer ~ 昨天, before the verb."
   },
   {
    "for": "en",
    "rel": "trap",
-   "text": "English puts every past verb in the past tense (got up, was tired). Chinese adds 了 only for a completed event: ‘I was tired yesterday’ is 昨天我很累, with no 了, and ‘I got up at seven’ can be 我七点起床 when 昨天 already says when."
+   "text": "English puts every past verb in the past tense (got up, was tired).\n\nChinese adds 了 only for a completed event: ‘I was tired yesterday’ is 昨天我很累, with no 了, and ‘I got up at seven’ can be 我七点起床 when 昨天 already says when."
   },
   {
    "for": "fr",
    "rel": "similar",
-   "text": "Passé composé je me suis levé ~ 我起床了; imparfait je me levais (habit) ~ no 了. Chinese has no auxiliary and no participle: the verb stays 起床."
+   "text": "Passé composé je me suis levé ~ 我起床了; imparfait je me levais (habit) ~ no 了.\n\nChinese has no auxiliary and no participle: the verb stays 起床."
   },
   {
    "for": "de",
@@ -432,7 +432,7 @@
   {
    "for": "fi",
    "rel": "different",
-   "text": "Finnish has a past tense with person endings (heräsin ‘I woke up’, heräsit ‘you woke up’); Chinese has no tense and no endings: 我醒了, 你醒了."
+   "text": "Finnish has a past tense with person endings (heräsin ‘I woke up’, heräsit ‘you woke up’); Chinese has no tense and no endings:\n→ 我醒了, 你醒了."
   },
   {
    "for": "hu",
@@ -452,7 +452,47 @@
   {
    "for": "iu",
    "rel": "different",
-   "text": "Inuktitut marks past time with suffixes inside the verb word (nirilauqtunga ‘I ate’); Chinese adds separate words to a verb that never changes: 我吃了."
+   "text": "Inuktitut marks past time with suffixes inside the verb word (nirilauqtunga ‘I ate’); Chinese adds separate words to a verb that never changes:\n→ 我吃了."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Passato prossimo mi sono alzato ~ 我起床了; imperfetto mi alzavo (habit) ~ 以前我…起床, without 了.\n\nBut ieri ero stanco ‘I was tired yesterday’ is 昨天我很累 — no 了, no tense."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Albanian aorist u ngrita ‘I got up’ ~ 我起床了; the imperfect ngrihesha (habit) ~ 以前我…起床, without 了.\n\nAnd dje isha i lodhur ‘I was tired yesterday’ is 昨天我很累 — no 了, no past form."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "Pretérito perfeito levantei-me ~ 我起床了; imperfeito levantava-me (habit) ~ 以前我…起床, without 了. ontem estava cansado ~ 昨天我很累 — no 了."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If every past verb in your language takes a past form, note that Chinese has none: a time word places the event (昨天), and 了 marks only completion — states, adjectives, 是, 在 and habits take no 了:\n→ 昨天我很累."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If your past is an obligatory suffix, 了 may look like one but is not: it marks a completed event and is optional — 我七点起床 is past when 昨天 says so, and ‘I was tired’ is 我很累 with no marker."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "same",
+   "text": "If your language places events in time with time words and optional markers for ‘done’ and ‘not yet’, Chinese is the same:\n→ 昨天, 了, 还没."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If past time is a suffix inside your verb word, Chinese adds separate words to an unchanged verb: a time word (昨天) and, for a completed event, 了 — 我昨天吃了."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If your language has a past (perfect) conjugation with person suffixes, Chinese has one bare verb for every person and time; it marks completion with 了 and leaves the time to words such as 昨天."
   }
  ],
  "seeAlso": [

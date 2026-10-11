@@ -27,6 +27,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Okra"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -120,13 +133,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek μπάμιες, Turkish bamya, Arabic بَامِيَة (bāmiya) and Hebrew בַּמְיָה (bamya) are all the same word – German Bamia comes from it too."
+     "Arabic بَامِيَة (bāmiya) and Hebrew בַּמְיָה (bamya) are the same word, and German Bamia comes from it too."
     ],
     "pitfalls": [
      "Plural Okras; one pod is eine Okra or eine Okraschote."
     ],
     "subtleties": [
      "The slime (mucilage) is wanted in some dishes as a thickener and avoided in others by frying the pods or adding acid."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "μπάμιες is the same word as the German Bamia."
+     }
     ]
    }
   },
@@ -164,6 +184,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Ackerbohne"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Bohne)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -259,11 +290,11 @@
      }
     ],
     "etymology": {
-     "text": "Acker (“field”, from Old High German ackar) + Bohne (“bean”, from Old High German bōna, cognate with English bean).",
+     "text": "Acker (“field”, from Old High German ackar) + Bohne (“bean”, from Old High German bōna).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Arabic فُول (fūl), as in the Egyptian dish fūl medames, and Hebrew פּוֹל (pol) name this bean; Greek says κουκιά, Turkish bakla."
+     "Arabic فُول (fūl), as in the Egyptian dish fūl medames, and Hebrew פּוֹל (pol) name this bean."
     ],
     "pitfalls": [
      "Some people with an inherited enzyme deficiency (G6PD) must not eat them: favism.",
@@ -271,6 +302,18 @@
     ],
     "subtleties": [
      "Before the Phaseolus beans arrived from America, this was the bean of Europe."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "κουκιά are Ackerbohnen."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Bohne is related to English bean."
+     }
     ]
    }
   },
@@ -308,6 +351,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Bittermelone"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Melone)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -446,6 +500,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Flaschenkürbisses"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (der Kürbis)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -534,7 +599,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "It is one of the oldest cultivated plants, used as a container long before pottery; Chinese calls it 葫芦 (húlu)."
+     "It is one of the oldest cultivated plants, used as a container long before pottery.\n\nChinese calls it 葫芦 (húlu)."
     ],
     "pitfalls": [
      "Masculine like Kürbis: der Flaschenkürbis, des Flaschenkürbisses, plural die Flaschenkürbisse."
@@ -571,6 +636,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Artischocke"
+    ],
+    "number": "singular and plural",
+    "genderCue": "most nouns in -e are feminine (die Lampe)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -654,13 +730,25 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The word goes back to Arabic (al-)ḵuršūf; Hebrew has the related חֻרְשָׁף (ḥuršaf), Greek αγκινάρα, Turkish enginar."
+     "The word goes back to Arabic (al-)ḵuršūf; Hebrew has the related חֻרְשָׁף (ḥuršaf)."
     ],
     "pitfalls": [
      "Plural Artischocken. The hairy “choke” inside (das Heu) is not eaten."
     ],
     "subtleties": [
      "The bitter Italian liqueur Cynar is made with artichoke and named after its Latin name Cynara."
+    ],
+    "notes": [
+     {
+      "for": "es",
+      "rel": "similar",
+      "text": "Artischocke and alcachofa both go back to Arabic al-ḵuršūf."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "Artischocke and carciofo both go back to Arabic al-ḵuršūf."
+     }
     ]
    }
   },
@@ -691,6 +779,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Kohlrabis"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -776,17 +877,29 @@
      }
     ],
     "etymology": {
-     "text": "From Italian cavoli rape, plural of cavolo rapa; the first element was altered after Kohl (“cabbage”), which is cognate with the Italian through Latin caulis.",
+     "text": "From Italian cavoli rape, plural of cavolo rapa; the first element was altered after Kohl (“cabbage”), which goes back to the same Latin caulis.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English kohlrabi and Russian кольраби were borrowed from German."
+     "Kohlrabi is one of the German vegetable names that travelled into other languages."
     ],
     "pitfalls": [
      "Masculine: der Kohlrabi, plural die Kohlrabis."
     ],
     "subtleties": [
      "The “bulb” is a thickened stem, not a root."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "English kohlrabi was borrowed from German."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "кольраби was borrowed from German Kohlrabi."
+     }
     ]
    }
   },
@@ -820,6 +933,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Rosenkohls"
+    ],
+    "number": "singular only",
+    "genderCue": "compound: the last part decides (der Kohl)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a mass noun, month or name of a substance: no diminutive in use"
     }
    },
    "forms": {
@@ -911,13 +1035,25 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English and French name it after Brussels (Brussels sprouts, choux de Bruxelles); German names it after its rose-like shape."
+     "German names it after its rose-like shape: Rosen + Kohl."
     ],
     "pitfalls": [
      "No plural: Rosenkohl is uncountable; one sprout is ein Röschen or ein Rosenkohlröschen."
     ],
     "subtleties": [
      "Newer varieties are less bitter than the ones many adults remember from childhood."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "different",
+      "text": "English names it after Brussels (Brussels sprouts); German after its rose-like shape."
+     },
+     {
+      "for": "fr",
+      "rel": "different",
+      "text": "choux de Bruxelles are named after Brussels; Rosenkohl after its rose-like shape."
+     }
     ]
    }
   },
@@ -948,6 +1084,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Chayote"
+    ],
+    "number": "singular and plural",
+    "genderCue": "most nouns in -e are feminine (die Lampe)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -1080,6 +1227,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Wachskürbisses"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (der Kürbis)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -1174,7 +1332,14 @@
      "Masculine like Kürbis: der Wachskürbis, des Wachskürbisses, plural die Wachskürbisse."
     ],
     "subtleties": [
-     "Despite the English name winter melon it is not sweet; it is cooked as a vegetable."
+     "It is not sweet; it is cooked as a vegetable."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "Despite the English name winter melon it is not sweet."
+     }
     ]
    }
   },
@@ -1212,6 +1377,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Schwammgurke"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Gurke)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -1300,13 +1476,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Luffa comes from Arabic لُوفَة (lūfa), the same word as English loofah."
+     "Luffa comes from Arabic لُوفَة (lūfa)."
     ],
     "pitfalls": [
      "Feminine because of Gurke: die Schwammgurke, plural die Schwammgurken."
     ],
     "subtleties": [
      "Only young fruits are edible; ripe ones dry into a fibrous net – the sponge."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Luffa is the same word as English loofah."
+     }
     ]
    }
   },
@@ -1345,6 +1528,17 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Grünkohls"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (der Kohl)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -1458,7 +1652,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "On a Kohlfahrt groups walk through the winter countryside with a handcart of drinks, then eat kale; the best eater may be crowned Kohlkönig."
+     "On a Kohlfahrt groups walk through the winter countryside with a handcart of drinks, then eat kale.\n\nThe best eater may be crowned Kohlkönig."
     ],
     "pitfalls": [
      "The plural Grünkohle is rare; normally uncountable."
@@ -1495,6 +1689,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Pak Chois"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -1584,17 +1791,24 @@
      }
     ],
     "etymology": {
-     "text": "Like English bok choy (Wiktionary): borrowed from Cantonese 白菜 (baak⁶ coi³, “white vegetable”).",
+     "text": "Borrowed from Cantonese 白菜 (baak⁶ coi³, “white vegetable”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
      "In Mandarin 白菜 (báicài) usually means napa cabbage (Chinakohl) – the same characters, a different vegetable."
     ],
     "pitfalls": [
-     "Two words, masculine: der Pak Choi, des Pak Chois, plural die Pak Chois. Also spelled Pak-Choi or Pok Choi."
+     "Two words, masculine: der Pak Choi, des Pak Chois, plural die Pak Chois.\n\nAlso spelled Pak-Choi or Pok Choi."
     ],
     "subtleties": [
      "Both leaves and stalks are eaten; the white stalks stay crunchy when cooked briefly."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Pak Choi is the vegetable called bok choy in English."
+     }
     ]
    }
   },
@@ -1632,6 +1846,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Chinakohls"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (der Kohl)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -1757,6 +1982,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Jalapeños"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -1884,6 +2122,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Rotkohls"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (der Kohl)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -2038,6 +2287,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Feuerbohne"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Bohne)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -2182,6 +2442,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Blattkohls"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (der Kohl)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -2265,7 +2536,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Portuguese caldo verde (“green soup”) is traditionally made with a similar leaf cabbage, couve galega."
+     "In Portugal, caldo verde (“green soup”) is traditionally made with a similar leaf cabbage, couve galega."
     ],
     "pitfalls": [
      "Do not confuse with Grünkohl (kale), which has curly leaves.",
@@ -2273,6 +2544,13 @@
     ],
     "subtleties": [
      "Most Germans know collards only from American food; recipes often keep the English name."
+    ],
+    "notes": [
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Blattkohl is like the couve galega of caldo verde."
+     }
     ]
    }
   },
@@ -2311,6 +2589,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Kirschtomate"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Tomate)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -2404,13 +2693,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek calls them ντοματίνια (domatínia), “little tomatoes”."
+     "Kirschtomate is named after the size and shape of a cherry (Kirsche)."
     ],
     "pitfalls": [
      "Plural Kirschtomaten; mostly used in the plural."
     ],
     "subtleties": [
      "Kirsch- is the combining form of Kirsche, as in Kirschkuchen (cherry cake)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "ντοματίνια are “little tomatoes”; German compares them to cherries: Kirschtomaten."
+     }
     ]
    }
   },
@@ -2448,6 +2744,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Sojasprosse"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Sprosse)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -2585,6 +2892,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Butternusskürbisses"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (der Kürbis)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -2665,7 +2983,7 @@
      {
       "word": "Butternut",
       "register": "neutral",
-      "nuance": "short name, as in English; common on markets"
+      "nuance": "short name; common on markets"
      }
     ],
     "etymology": {
@@ -2681,6 +2999,13 @@
     ],
     "subtleties": [
      "The seeds sit only in the round end; the long neck is solid flesh."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "The short name Butternut is the English one."
+     }
     ]
    }
   },
@@ -2718,6 +3043,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Zuckerschote"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Schote)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -2823,7 +3159,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Chinese calls them 荷兰豆 (hélándòu), “Dutch beans”; French mangetout means “eat-all”."
+     "Chinese calls them 荷兰豆 (hélándòu), “beans from Holland”."
     ],
     "pitfalls": [
      "Pull off the string along the edge before cooking.",
@@ -2831,6 +3167,13 @@
     ],
     "subtleties": [
      "Schote means the pod, so the name tells you that the sweet pod itself is eaten."
+    ],
+    "notes": [
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "mangetout (“eat-all”) is the Zuckerschote."
+     }
     ]
    }
   }

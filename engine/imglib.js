@@ -14,8 +14,11 @@
    Network calls use root.NOEMA_IMG_FETCH (tests) or fetch. */
 (function (root) {
   'use strict';
+  /* i18n-ignore-start — the texts of this file go to Claude (the connector, Create with Claude) and into packs as data (licence
+     notes); errors carry a code (img.*) that the app translates where it shows them (docs/i18n.md §5.2, NoemaI18n.err) */
   const UA = 'noema-lite/1.0 (https://noema-lite.netlify.app; personal study app; picture finder)';
   const BROWSER_UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36';
+  /* i18n-ignore-end */
   const IMG_EXT = /\.(png|jpe?g|gif|webp|svg|tiff?|bmp|avif)$/i;
   const net = () => root.NOEMA_IMG_FETCH || root.fetch.bind(root);
   const timeout = ms => (typeof AbortSignal !== 'undefined' && AbortSignal.timeout ? AbortSignal.timeout(ms) : undefined);
@@ -96,6 +99,7 @@
 
   /* ---------- search ---------- */
   const getJSON = async (url, headers = {}) => { const r = await net()(url, { headers: { 'user-agent': UA, accept: 'application/json', ...headers }, signal: timeout(9000) }); if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); };
+  /* i18n-ignore-start — request headers and licence notes stored with each found picture (data for Claude and the pack) */
   const getText = async (url, headers = {}) => { const r = await net()(url, { headers: { 'user-agent': BROWSER_UA, accept: 'text/html,application/xhtml+xml', 'accept-language': 'en-US,en;q=0.9', ...headers }, signal: timeout(9000) }); if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); };
   const Q = encodeURIComponent;
   const SOURCES = {
@@ -143,6 +147,7 @@
       return (j.data || []).filter(a => a.image_id).map(a => ({ url: `https://www.artic.edu/iiif/2/${a.image_id}/full/1686,/0/default.jpg`, page: `https://www.artic.edu/artworks/${a.id}`, title: a.title, source: 'artic', license: a.is_public_domain ? 'Public domain (CC0)' : 'see the page', credit: strip(a.artist_display).slice(0, 120) }));
     },
   };
+  /* i18n-ignore-end */
   const DEFAULT = ['bing', 'commons', 'openverse', 'duckduckgo'];
   const TOPICAL = { space: ['nasa'], astronomy: ['nasa'], species: ['inaturalist'], animal: ['inaturalist'], plant: ['inaturalist'], medicine: ['wellcome'], history: ['wellcome', 'artic'], art: ['artic'] };
   /** → { results: [...], errors: { source: message } } — the sources run in parallel; one failing does not stop the others. */
@@ -168,29 +173,33 @@
     return /^\d+$/.test(h);
   }
   /** → { bytes: Uint8Array, mime, w, h, url (the picture file), page (where it came from) } — throws a readable error. */
+  /* i18n-ignore-start */
+  /** An error with a code for the app (err.<code> in the UI language) and the English message for Claude and older clients. */
+  const oops = (code, message, params) => Object.assign(new Error(message), { code, ...(params ? { params } : {}) });
   async function fetchPicture(url, { maxBytes = 15 * 1024 * 1024, allowLocal = false } = {}) {
     let target = new URL(resolvePictureUrl(url)), page = null, pageHops = 0;
     for (let hop = 0; hop < 7; hop++) {
-      if (!/^https?:$/.test(target.protocol) || target.username || target.password) throw new Error('only plain http(s) urls');
-      if (blockedHost(target.hostname) && !allowLocal && !root.NOEMA_IMG_ALLOW_LOCAL) throw new Error('this address is not allowed');
+      if (!/^https?:$/.test(target.protocol) || target.username || target.password) throw oops('img.bad_url', 'only plain http(s) urls');
+      if (blockedHost(target.hostname) && !allowLocal && !root.NOEMA_IMG_ALLOW_LOCAL) throw oops('img.blocked', 'this address is not allowed');
       const wiki = /(^|\.)wiki[mp]edia\.org$/.test(target.hostname);
       let r = await net()(target.href, { redirect: 'manual', signal: timeout(12000), headers: { 'user-agent': wiki ? UA : BROWSER_UA, accept: 'image/avif,image/webp,image/*,text/html;q=0.8,*/*;q=0.5' } });
       if (r.status === 429) { await new Promise(res => setTimeout(res, 1500)); r = await net()(target.href, { redirect: 'manual', signal: timeout(12000), headers: { 'user-agent': UA } }); }
       if (r.status >= 300 && r.status < 400 && r.headers.get('location')) { target = new URL(r.headers.get('location'), target); continue; }
-      if (!r.ok) throw new Error(`the site answered ${r.status}`);
+      if (!r.ok) throw oops('img.http', `the site answered ${r.status}`, { status: r.status });
       const type = (r.headers.get('content-type') || '').split(';')[0].trim().toLowerCase();
       if (/^text\/html|application\/xhtml/.test(type)) {
-        if (pageHops >= 2) throw new Error('no picture found on this page');
-        const pic = pageImage(await r.text(), target.href); if (!pic) throw new Error('this page has no main picture — give the image file url');
+        if (pageHops >= 2) throw oops('img.no_picture', 'no picture found on this page');
+        const pic = pageImage(await r.text(), target.href); if (!pic) throw oops('img.no_main_picture', 'this page has no main picture — give the image file url');
         page = page || target.href; pageHops++; target = new URL(resolvePictureUrl(pic)); continue;
       }
-      if (+r.headers.get('content-length') > maxBytes) throw new Error(`larger than ${Math.round(maxBytes / 1048576)} MB`);
-      const bytes = new Uint8Array(await r.arrayBuffer()); if (bytes.byteLength > maxBytes) throw new Error(`larger than ${Math.round(maxBytes / 1048576)} MB`);
-      const sz = imageSize(bytes); if (!sz) throw new Error(`not a picture (${type || 'unknown type'})`);
+      if (+r.headers.get('content-length') > maxBytes) throw oops('img.too_large', `larger than ${Math.round(maxBytes / 1048576)} MB`, { max: Math.round(maxBytes / 1048576) });
+      const bytes = new Uint8Array(await r.arrayBuffer()); if (bytes.byteLength > maxBytes) throw oops('img.too_large', `larger than ${Math.round(maxBytes / 1048576)} MB`, { max: Math.round(maxBytes / 1048576) });
+      const sz = imageSize(bytes); if (!sz) throw oops('img.not_picture', `not a picture (${type || 'unknown type'})`, { type: type || '' });
       return { bytes, mime: sz.mime, w: sz.w, h: sz.h, url: target.href, page };
     }
-    throw new Error('too many redirects');
+    throw oops('img.redirects', 'too many redirects');
   }
+  /* i18n-ignore-end */
   /** A smaller rendering for looking at (Wikimedia thumbnails) — or null. */
   function previewUrl(url, width = 1280) {
     const m = /^https:\/\/upload\.wikimedia\.org(\/[^/]+\/[^/]+)\/([0-9a-f])\/([0-9a-f]{2})\/([^/?#]+)/.exec(String(url)); if (!m || /\/thumb\//.test(url)) return null;

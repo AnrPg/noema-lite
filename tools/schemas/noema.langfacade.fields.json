@@ -1,0 +1,279 @@
+{
+ "format": "noema.langfacade.fields/v1",
+ "about": "D19 (docs/language-packs.md §3): the registry of every text field of a language course — where it lives, its facade address, its tier and its kind. tools/lang_facade.py (extract, parity, lint, task), tools/validate_lang.py (lint) and the runtime (langcore.applyFacade, tools/build.py) read it. A text field that is not listed here is a registry error (`lang_facade.py lint` reports it): add it with its kind.",
+ "address": "<prefix>:<key>/<tail> — prefix and key from the record; tail = the field's path inside the record with the real indexes / object keys (JSON-pointer segments joined by '/', '~' written '~0' and '/' written '~1'). Examples: c:veg.tomato/gloss · g:de:fn.case/blocks/3/text · x:de:Tomate/profile/pitfalls/0 · g:de:fn.case/notes/2/text.",
+ "pattern": "a field path: segments joined by '/'; '*' = any one array index or object key. A field matches only a string value (a pattern ending in an array, e.g. traps/*, matches the strings of that array).",
+ "hash": "src = the first 12 hex digits of sha256 of the master text (UTF-8): a facade entry whose src differs from the master's current hash is stale",
+ "facadeFiles": {
+  "course": "library/languages/<course>/facades/<locale>/<facade>.json — <facade> = core (core/*, course.json) or the language code (lang/<L>/*)",
+  "phenomena": "library/languages/_phenomena/facades/<locale>/<L>.json",
+  "typology": "library/languages/_typology/facades/<locale>.json"
+ },
+ "kinds": {
+  "gloss": "a short translation or label of a meaning (concept gloss, sentence gloss, sense definition, example translation, title): translated whole",
+  "prose": "an explanation in sentences: translated and adapted; target-language words in it stay byte-identical",
+  "mixed": "a cell of a table / quiz that mixes target-language forms with explanation labels: only the label parts are translated; target-language runs, *-marked wrong forms, numbers and pinyin stay byte-identical (parity checks them)",
+  "content": "target-language text or data (forms, sentences, transliterations, enum values the engine compares): never translated, not in a facade",
+  "author-only": "for authors and tools (sources, dates, model notes, gaps): never shown to learners, not in a facade, not linted"
+ },
+ "tiers": {
+  "1": "concept glosses, titles, frames, bank glosses, word senses and contrasts, grammar pages (summary, blocks, procedure, traps, quiz, seeAlso), the overview, typology, script / chars notes, the locale's notes of grammar pages — required before a locale facade can be switched on",
+  "2": "word profiles: examples' translations, collocations, phrases, pitfalls, etymology, fun facts, subtleties, synonyms, feeling, absent, profile notes",
+  "3": "parameter reasons (features.*.none and word-feature notes), language.json word features, phenomena (and their notes), typology features"
+ },
+ "notes": "A field with \"note\": true is the text of a contrast note ({for, rel, text}); the note's `for` is the sibling key `for`. A locale facade carries only the notes it can show: for = its own language code, or any type: / branch: / family: note (docs/language-packs.md §2.1, §3). Every other gloss / prose / mixed field is a GENERAL text: it names no language outside the course (lint); a field with \"provenance\": true may name a language as a source (\"from Persian\", \"borrowed from English\"), never as a comparison.",
+ "structuralKeys": ["id", "format", "lang", "code", "function", "fn", "status", "frame", "functions", "frames", "l", "f", "t", "p", "pos", "gender", "level", "concept", "concepts", "senses", "sense", "subgroup", "field", "tier", "rank", "wikidata", "media", "file", "url", "retrieved", "credit", "license", "origin", "kind", "stage", "step", "prereqs", "lessons", "variantOf", "variant", "tags", "lemmas", "exclude", "punct", "cells", "cell", "paradigmCells", "citationCells", "type", "class", "classes", "bank", "after", "category", "area", "feature", "value", "values", "phenomenon", "typology", "for", "rel", "register", "connotation", "frequency", "domains", "of", "region", "script", "dir", "tokenJoin", "romanization", "variants", "extraTags", "explainLang", "languages", "knownLanguages", "draft", "profiles", "defaults", "missing", "radical", "readings", "trad", "wordReadings", "ids", "semantic", "phonetic", "joins", "finalOf", "sound", "translit", "baseMarks", "lookalikes", "keyboard", "items", "path", "langs", "alsoIn", "evidence", "generators", "needs", "item", "at", "wals", "family", "branch", "nativeName", "pinyin", "py", "alts", "lemma", "word", "form", "forms", "formsAlt", "plene", "checked", "src", "ref", "features", "lexeme", "built", "facades", "flag", "sun", "name", "unicode", "ch", "tokens", "strokes", "medians", "prefix", "measure", "measureNone", "root", "unit", "aux", "binyan", "verbForm", "pattern"],
+ "records": [
+  {
+   "id": "course", "prefix": "k", "scope": "course", "files": "course.json", "at": "", "key": "course", "facade": "core",
+   "fields": [ { "path": "title", "tier": 1, "kind": "gloss" }, { "path": "d19", "kind": "author-only" } ]
+  },
+  {
+   "id": "field", "prefix": "fd", "scope": "course", "files": "core/fields/*.json", "at": "", "key": "{field}", "facade": "core",
+   "fields": [
+    { "path": "title", "tier": 1, "kind": "gloss" },
+    { "path": "subgroups/*/title", "tier": 1, "kind": "gloss" },
+    { "path": "sources/*", "kind": "author-only" }
+   ]
+  },
+  {
+   "id": "concept", "prefix": "c", "scope": "course", "files": "core/fields/*.json", "at": "concepts/*", "key": "{id}", "facade": "core",
+   "fields": [
+    { "path": "gloss", "tier": 1, "kind": "gloss" },
+    { "path": "aka", "tier": 1, "kind": "gloss" },
+    { "path": "note", "tier": 1, "kind": "prose" }
+   ]
+  },
+  {
+   "id": "node", "prefix": "n", "scope": "course", "files": "core/nodes.json", "at": "nodes/*", "key": "{id}", "facade": "core",
+   "fields": [ { "path": "title", "tier": 1, "kind": "gloss" } ]
+  },
+  {
+   "id": "function", "prefix": "f", "scope": "course", "files": "core/functions/*.json", "at": "", "key": "{id}", "facade": "core",
+   "fields": [ { "path": "title", "tier": 1, "kind": "gloss" } ]
+  },
+  {
+   "id": "frame", "prefix": "fr", "scope": "course", "files": "core/frames.json", "at": "frames/*", "key": "{id}", "facade": "core",
+   "fields": [ { "path": "meaning", "tier": 1, "kind": "gloss" } ]
+  },
+  {
+   "id": "media", "prefix": "m", "scope": "course", "files": "core/media/media.json", "at": "items/*", "key": "{id}", "facade": "core",
+   "fields": [
+    { "path": "alt", "tier": 1, "kind": "gloss" },
+    { "path": "lowResOk", "kind": "author-only" }
+   ]
+  },
+  {
+   "id": "types", "prefix": "ty", "scope": "course", "files": "core/typology.json", "at": "", "key": "core", "facade": "core",
+   "fields": [
+    { "path": "intro", "tier": 1, "kind": "prose" },
+    { "path": "spectrum", "tier": 1, "kind": "prose" },
+    { "path": "notes/*/text", "tier": 1, "kind": "prose", "note": true }
+   ]
+  },
+  {
+   "id": "type", "prefix": "ty", "scope": "course", "files": "core/typology.json", "at": "types/*", "key": "{id}", "facade": "core",
+   "fields": [
+    { "path": "name", "tier": 1, "kind": "gloss" },
+    { "path": "summary", "tier": 1, "kind": "prose" },
+    { "path": "learnFirst", "tier": 1, "kind": "prose" },
+    { "path": "languages", "tier": 1, "kind": "prose" },
+    { "path": "examples/*/text", "kind": "content" },
+    { "path": "examples/*/tr", "tier": 1, "kind": "gloss" },
+    { "path": "examples/*/analysis", "tier": 1, "kind": "mixed" }
+   ]
+  },
+  {
+   "id": "grammar", "prefix": "g", "scope": "course", "files": "lang/{L}/grammar/*.json", "at": "", "key": "{L}:{function}", "facade": "{L}",
+   "fields": [
+    { "path": "summary", "tier": 1, "kind": "prose" },
+    { "path": "pathNote", "tier": 1, "kind": "prose" },
+    { "path": "typology/why", "tier": 1, "kind": "prose" },
+    { "path": "typology/alsoShows", "tier": 1, "kind": "prose" },
+    { "path": "facts/*/label", "tier": 1, "kind": "gloss" },
+    { "path": "facts/*/value", "tier": 1, "kind": "prose" },
+    { "path": "peculiarities/*/title", "tier": 1, "kind": "prose" },
+    { "path": "peculiarities/*/text", "tier": 1, "kind": "prose" },
+    { "path": "blocks/*/title", "tier": 1, "kind": "prose" },
+    { "path": "blocks/*/text", "tier": 1, "kind": "prose" },
+    { "path": "blocks/*/caption", "tier": 1, "kind": "prose" },
+    { "path": "blocks/*/label", "tier": 1, "kind": "prose" },
+    { "path": "blocks/*/questions/*", "tier": 1, "kind": "prose" },
+    { "path": "blocks/*/head/*", "tier": 1, "kind": "mixed" },
+    { "path": "blocks/*/rows/*/*", "tier": 1, "kind": "mixed" },
+    { "path": "blocks/*/items/*", "tier": 1, "kind": "mixed" },
+    { "path": "blocks/*/items/*/title", "tier": 1, "kind": "prose" },
+    { "path": "blocks/*/items/*/points/*", "tier": 1, "kind": "prose" },
+    { "path": "blocks/*/items/*/term", "tier": 1, "kind": "mixed" },
+    { "path": "blocks/*/items/*/def", "tier": 1, "kind": "prose" },
+    { "path": "blocks/*/notes/*/text", "tier": 1, "kind": "prose", "note": true },
+    { "path": "procedure/steps/*", "tier": 1, "kind": "prose" },
+    { "path": "procedure/askYourself/*", "tier": 1, "kind": "prose" },
+    { "path": "traps/*", "tier": 1, "kind": "prose" },
+    { "path": "quiz/*/q", "tier": 1, "kind": "mixed" },
+    { "path": "quiz/*/options/*", "tier": 1, "kind": "mixed" },
+    { "path": "quiz/*/answer", "tier": 1, "kind": "mixed" },
+    { "path": "quiz/*/why", "tier": 1, "kind": "prose" },
+    { "path": "seeAlso/*/note", "tier": 1, "kind": "prose" },
+    { "path": "notes/*/text", "tier": 1, "kind": "prose", "note": true }
+   ]
+  },
+  {
+   "id": "lexeme", "prefix": "x", "scope": "course", "files": "lang/{L}/lexicon/*.json", "at": "lexemes/*", "key": "{id}", "facade": "{L}",
+   "fields": [
+    { "path": "role", "tier": 1, "kind": "gloss" },
+    { "path": "contrasts/*/value", "tier": 1, "kind": "gloss" },
+    { "path": "contrasts/*/axis", "tier": 1, "kind": "gloss" },
+    { "path": "profile/senses/*/def", "tier": 1, "kind": "gloss" },
+    { "path": "profile/feeling", "tier": 2, "kind": "prose" },
+    { "path": "profile/examples/*/text", "kind": "content" },
+    { "path": "profile/examples/*/tr", "tier": 2, "kind": "gloss" },
+    { "path": "profile/examples/*/context", "tier": 2, "kind": "gloss" },
+    { "path": "profile/collocations/*/text", "kind": "content" },
+    { "path": "profile/collocations/*/tr", "tier": 2, "kind": "gloss" },
+    { "path": "profile/phrases/*/text", "kind": "content" },
+    { "path": "profile/phrases/*/tr", "tier": 2, "kind": "gloss" },
+    { "path": "profile/phrases/*/meaning", "tier": 2, "kind": "gloss" },
+    { "path": "profile/phrases/*/source", "tier": 2, "kind": "gloss" },
+    { "path": "profile/particleVerbs/*/text", "kind": "content" },
+    { "path": "profile/particleVerbs/*/tr", "tier": 2, "kind": "gloss" },
+    { "path": "profile/antonyms/*/note", "tier": 2, "kind": "gloss" },
+    { "path": "profile/synonyms/*/nuance", "tier": 2, "kind": "prose" },
+    { "path": "profile/synonymsNone", "tier": 2, "kind": "prose" },
+    { "path": "profile/pitfalls/*", "tier": 2, "kind": "prose" },
+    { "path": "profile/subtleties/*", "tier": 2, "kind": "prose" },
+    { "path": "profile/funFacts/*", "tier": 2, "kind": "prose" },
+    { "path": "profile/etymology/text", "tier": 2, "kind": "prose", "provenance": true },
+    { "path": "profile/etymology/src", "kind": "author-only" },
+    { "path": "profile/notes/*/text", "tier": 2, "kind": "prose", "note": true },
+    { "path": "profile/status", "kind": "content" },
+    { "path": "features/*/none", "tier": 3, "kind": "prose" },
+    { "path": "features/*/*/note", "tier": 3, "kind": "prose" },
+    { "path": "features/*/*/what", "tier": 3, "kind": "prose" },
+    { "path": "features/*/*/meaning", "tier": 3, "kind": "prose" },
+    { "path": "features/*/*/when", "tier": 3, "kind": "prose" },
+    { "path": "features/*", "kind": "content" },
+    { "path": "features/*/*", "kind": "content" },
+    { "path": "features/*/*/*", "kind": "content" },
+    { "path": "note", "kind": "author-only" },
+    { "path": "ref/*", "kind": "author-only" },
+    { "path": "ref/override/*", "kind": "author-only" }
+   ]
+  },
+  {
+   "id": "absent", "prefix": "a", "scope": "course", "files": "lang/{L}/lexicon/*.json", "at": "absent/*", "key": "{L}:{concept}", "facade": "{L}",
+   "fields": [
+    { "path": "reason", "tier": 2, "kind": "prose" },
+    { "path": "use", "tier": 2, "kind": "prose" }
+   ]
+  },
+  {
+   "id": "sentence", "prefix": "s", "scope": "course", "files": "lang/{L}/bank/*.json", "at": "sentences/*", "key": "{id}", "facade": "{L}",
+   "fields": [
+    { "path": "gloss", "tier": 1, "kind": "gloss" },
+    { "path": "text", "kind": "content" }
+   ]
+  },
+  {
+   "id": "exemption", "prefix": "fx", "scope": "course", "files": "lang/{L}/bank/*.json", "at": "fieldExemptions/*", "key": "{L}:{field}:{function}", "facade": "{L}",
+   "fields": [ { "path": "reason", "kind": "author-only" } ]
+  },
+  {
+   "id": "language", "prefix": "lg", "scope": "course", "files": "lang/{L}/language.json", "at": "", "key": "{L}", "facade": "{L}",
+   "fields": [
+    { "path": "wordFeatures/*/*/title", "tier": 3, "kind": "gloss" },
+    { "path": "wordFeatures/*/*/why", "tier": 3, "kind": "prose" },
+    { "path": "classes/*/*", "tier": 3, "kind": "prose" },
+    { "path": "wordFeaturesChecklist/*", "kind": "author-only" },
+    { "path": "notes/*/text", "tier": 3, "kind": "prose", "note": true }
+   ]
+  },
+  {
+   "id": "script", "prefix": "sc", "scope": "course", "files": "lang/{L}/script.json", "at": "", "key": "{L}", "facade": "{L}",
+   "fields": [
+    { "path": "letters/*/note", "tier": 1, "kind": "gloss" },
+    { "path": "marks/*/what", "tier": 1, "kind": "gloss" },
+    { "path": "groups/*/title", "tier": 1, "kind": "gloss" },
+    { "path": "letters/*/name", "kind": "content" },
+    { "path": "marks/*/name", "kind": "content" },
+    { "path": "keyboard/rows/*", "kind": "content" },
+    { "path": "about", "kind": "author-only" },
+    { "path": "sources/*", "kind": "author-only" }
+   ]
+  },
+  {
+   "id": "char", "prefix": "ch", "scope": "course", "files": "lang/{L}/chars.json", "at": "chars/*", "key": "{L}:{ch}", "facade": "{L}",
+   "fields": [
+    { "path": "meaning", "tier": 1, "kind": "gloss" },
+    { "path": "etymology/hint", "tier": 1, "kind": "gloss" },
+    { "path": "etymology/type", "kind": "content" }
+   ]
+  },
+  {
+   "id": "chars", "prefix": "chs", "scope": "course", "files": "lang/{L}/chars.json", "at": "", "key": "{L}", "facade": "{L}",
+   "fields": [
+    { "path": "about", "kind": "author-only" },
+    { "path": "sources/*", "kind": "author-only" }
+   ]
+  },
+  {
+   "id": "phenomena", "prefix": "ph", "scope": "phenomena", "files": "{L}.json", "at": "", "key": "{L}", "facade": "{L}",
+   "fields": [
+    { "path": "name", "tier": 3, "kind": "gloss" },
+    { "path": "summary", "tier": 3, "kind": "prose" },
+    { "path": "distinctions/*/axis", "tier": 3, "kind": "gloss" },
+    { "path": "distinctions/*/note", "tier": 3, "kind": "prose" },
+    { "path": "distinctions/*/words/*/value", "tier": 3, "kind": "gloss" },
+    { "path": "polysemy/*/meanings/*/gloss", "tier": 3, "kind": "gloss" },
+    { "path": "polysemy/*/formsDiffer", "tier": 3, "kind": "prose" },
+    { "path": "conceptGaps/*/note", "tier": 3, "kind": "prose" },
+    { "path": "wordFeatures/*/*/title", "tier": 3, "kind": "gloss" },
+    { "path": "wordFeatures/*/*/why", "tier": 3, "kind": "prose" },
+    { "path": "notes/*/text", "tier": 3, "kind": "prose", "note": true },
+    { "path": "sources/*", "kind": "author-only" }
+   ]
+  },
+  {
+   "id": "phenomenon", "prefix": "p", "scope": "phenomena", "files": "{L}.json", "at": "phenomena/*", "key": "{id}", "facade": "{L}",
+   "fields": [
+    { "path": "title", "tier": 3, "kind": "prose" },
+    { "path": "what", "tier": 3, "kind": "prose" },
+    { "path": "alsoNote", "tier": 3, "kind": "prose" },
+    { "path": "examples/*/note", "tier": 3, "kind": "prose" },
+    { "path": "examples/*/text", "kind": "content" },
+    { "path": "notes/*/text", "tier": 3, "kind": "prose", "note": true },
+    { "path": "gap", "kind": "author-only" },
+    { "path": "record", "kind": "author-only" },
+    { "path": "when", "kind": "author-only" },
+    { "path": "model/*", "kind": "author-only" },
+    { "path": "model/*/*", "kind": "author-only" }
+   ]
+  },
+  {
+   "id": "feature", "prefix": "t", "scope": "typology", "files": "features.json", "at": "features/*", "key": "{id}", "facade": "typology",
+   "fields": [
+    { "path": "title", "tier": 3, "kind": "gloss" },
+    { "path": "question", "tier": 3, "kind": "prose" },
+    { "path": "learnerNote", "tier": 3, "kind": "prose" },
+    { "path": "values/*/title", "tier": 3, "kind": "gloss" }
+   ]
+  },
+  {
+   "id": "typology-sources", "prefix": "ts", "scope": "typology", "files": "*.json", "at": "", "key": "_", "facade": "typology",
+   "fields": [
+    { "path": "sources/*", "kind": "author-only" },
+    { "path": "about", "kind": "author-only" },
+    { "path": "supported/*", "kind": "author-only" },
+    { "path": "types/*", "kind": "author-only" }
+   ]
+  },
+  {
+   "id": "profile", "prefix": "tl", "scope": "typology", "files": "languages.json", "at": "languages/*", "key": "{code}", "facade": "typology",
+   "fields": [
+    { "path": "variety", "kind": "author-only" },
+    { "path": "region", "kind": "author-only" },
+    { "path": "sources/*", "kind": "author-only" }
+   ]
+  }
+ ]
+}

@@ -29,6 +29,18 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": {
+     "none": "a loanword: possessive endings are not used; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -99,7 +111,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The word is shared around the region: Arabic بَامِيَة, Turkish bamya, Greek μπάμια; English okra comes from a West African language, probably Igbo (Wiktionary)."
+     "The word is shared around the region: Arabic بَامِيَة is the same word."
     ],
     "pitfalls": [
      "Feminine: בַּמְיָה טְרִיָּה.",
@@ -107,6 +119,23 @@
     ],
     "subtleties": [
      "To keep it less slimy, cooks add lemon or vinegar, or fry the okra before stewing it."
+    ],
+    "notes": [
+     {
+      "for": "tr",
+      "rel": "same",
+      "text": "The same word as bamya."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "The same word as μπάμια."
+     },
+     {
+      "for": "en",
+      "rel": "different",
+      "text": "English okra comes from a West African language; Hebrew uses the regional name, בַּמְיָה."
+     }
     ]
    }
   },
@@ -149,6 +178,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "a loanword: possessive endings are not used; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -227,7 +268,7 @@
      }
     ],
     "etymology": {
-     "text": "Cognate with Aramaic פֹּולא (pōlā, “bean”) and Arabic فُول (fūl, “fava beans”). Ultimately perchance from Proto-Semitic *pūl- (“bean, corn, seed, grains, little pieces”).",
+     "text": "Cognate with Arabic فُول (fūl, “fava beans”). Ultimately perchance from Proto-Semitic *pūl- (“bean, corn, seed, grains, little pieces”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -283,6 +324,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "a loanword: possessive endings are not used; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -366,8 +419,8 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The European word comes from Arabic: الْخُرْشُوف → Spanish alcarchofa → Italian articiocco → English artichoke, Russian артишок — and Hebrew got it back through Russian and Yiddish (Wiktionary).",
-     "Greek αγκινάρα and the Hebrew synonym קִנְרָס both go back to Ancient Greek κινάρα (Wiktionary)."
+     "The European word comes from Arabic: الْخُرْشُوف → Spanish alcarchofa → Italian articiocco — and Hebrew got it back through Russian and Yiddish (Wiktionary).",
+     "The Hebrew synonym קִנְרָס goes back to Ancient Greek κινάρα (Wiktionary)."
     ],
     "pitfalls": [
      "The article takes qamats before א: הָאַרְטִישׁוֹק, הָאַרְטִישׁוֹקִים.",
@@ -375,6 +428,38 @@
     ],
     "subtleties": [
      "We eat the flower bud of a thistle: the fleshy base of its scales and the bottom (תַּחְתִּית)."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Hebrew most probably got the word through артишок."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "English artichoke is the same word, from Arabic through Spanish and Italian."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Italian articiocco (today carciofo) passed the Arabic word on to Europe."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "Spanish alcachofa keeps the Arabic article: الْخُرْشُوف."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "French artichaut is the same word, from Arabic through Italian."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "αγκινάρα and the Hebrew synonym קִנְרָס both go back to κινάρα."
+     }
     ]
    }
   },
@@ -410,6 +495,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": {
+     "none": "a loanword: possessive endings are not used; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -521,6 +618,18 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": {
+     "none": "a compound: “my …” is said with שֶׁל after it (… שֶׁלִּי); the endings go only on the first word in formal style"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -595,14 +704,26 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Each sprout is a bud growing along a tall stem — hence “bud cabbage”; English names it after Brussels and German calls it Rosenkohl, “rose cabbage”."
+     "Each sprout is a bud growing along a tall stem — hence “bud cabbage”; German calls it Rosenkohl, “rose cabbage”."
     ],
     "pitfalls": [
-     "A mass noun in Hebrew: כְּרוּב נִצָּנִים is “Brussels sprouts” (plural in English).",
-     "The article goes on the second word: כְּרוּב הַנִּצָּנִים. Everyday spelling with י: כרוב ניצנים."
+     "A mass noun in Hebrew: כְּרוּב נִצָּנִים stays singular for any number of sprouts.",
+     "- The article goes on the second word:\n→ כְּרוּב הַנִּצָּנִים\n- Everyday spelling with י:\n→ כרוב ניצנים"
     ],
     "subtleties": [
-     "נִצָּנִים are buds or blossoms, as in the Song of Songs (2:12): הַנִּצָּנִים נִרְאוּ בָאָרֶץ, “the blossoms appear on the earth”."
+     "נִצָּנִים are buds or blossoms, as in the Song of Songs (2:12):\n→ הַנִּצָּנִים נִרְאוּ בָאָרֶץ, “the blossoms appear on the earth”"
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "different",
+      "text": "English names it after Brussels; Hebrew after its buds: “bud cabbage”."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English “Brussels sprouts” is plural; כְּרוּב נִצָּנִים is a singular mass noun."
+     }
     ]
    }
   },
@@ -642,6 +763,18 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "a loanword: possessive endings are not used; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -718,7 +851,7 @@
     "synonyms": [],
     "synonymsNone": "No synonym.",
     "etymology": {
-     "text": "Wiktionary has no Hebrew entry. Like English loofah, which Wiktionary gives as “borrowed from Arabic لُوفَة (lūfa)”.",
+     "text": "Wiktionary has no Hebrew entry. From Arabic لُوفَة (lūfa), the source Wiktionary gives for the international word.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -729,6 +862,13 @@
     ],
     "subtleties": [
      "The plural is regular: לוּפוֹת."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "The same word as loofah, from Arabic لُوفَة."
+     }
     ]
    }
   },
@@ -764,6 +904,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": {
+     "none": "a loanword: possessive endings are not used; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -835,14 +987,36 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English kale and German Kohl go back to Latin caulis; Wiktionary even lists English gobi (from Hindi gobhī “cabbage, cauliflower”) among its doublets."
+     "Like German Kohl, it goes back to Latin caulis “stalk, cabbage”."
     ],
     "pitfalls": [
-     "Pronounced keil, as in English; masculine: קֵייל טָרִי.",
+     "- Pronounced keil.\n- Masculine: קֵייל טָרִי.",
      "A young word: older dictionaries do not have it."
     ],
     "subtleties": [
      "Raw kale is often massaged with oil and lemon to soften it."
+    ],
+    "notes": [
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "It goes back to Latin caulis, like cavolo."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "It goes back to Latin caulis, like chou."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "It goes back to Latin caulis, like couve."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Borrowed from *kale* and said the same way: keil."
+     }
     ]
    }
   },
@@ -880,6 +1054,18 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "noun + adjective: both change"
+    ],
+    "possessive": {
+     "none": "a compound: “my …” is said with שֶׁל after it (… שֶׁלִּי); the endings go only on the first word in formal style"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -952,15 +1138,27 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Korean kimchi is usually made from this cabbage.",
-     "German calls it Chinakohl and Russian пекинская капуста, “Peking cabbage”."
+     "Kimchi is usually made from this cabbage.",
+     "German calls it Chinakohl, “China cabbage”, like the Hebrew name."
     ],
     "pitfalls": [
      "Plural agreement: כְּרוּבִים סִינִיִּים; Wiktionary also lists the shorter סִינִים, the usual word for Chinese people.",
-     "In English “Chinese cabbage” can also mean bok choy; in Israeli shops כְּרוּב סִינִי is the elongated Napa cabbage."
+     "In Israeli shops כְּרוּב סִינִי is the elongated Napa cabbage, not bok choy."
     ],
     "subtleties": [
      "Both words take the article: הַכְּרוּב הַסִּינִי."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "Russian says пекинская капуста, “Peking cabbage”; Hebrew says “Chinese cabbage”."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English “Chinese cabbage” can also mean bok choy; כְּרוּב סִינִי is the Napa cabbage."
+     }
     ]
    }
   },
@@ -998,6 +1196,18 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "noun + adjective: both change"
+    ],
+    "possessive": {
+     "none": "a compound: “my …” is said with שֶׁל after it (… שֶׁלִּי); the endings go only on the first word in formal style"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -1072,7 +1282,7 @@
     "synonyms": [],
     "synonymsNone": "No synonym in standard use.",
     "etymology": {
-     "text": "כְּרוּב “cabbage” (from Ancient Greek κράμβη) + אָדֹם “red” (compare Classical Syriac ܐܕܘܡ, Arabic ادوم).",
+     "text": "כְּרוּב “cabbage” (from Ancient Greek κράμβη) + אָדֹם “red” (compare Arabic ادوم).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -1122,6 +1332,18 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "compound: the first word changes"
+    ],
+    "possessive": {
+     "none": "a compound: “my …” is said with שֶׁל after it (… שֶׁלִּי); the endings go only on the first word in formal style"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -1207,7 +1429,7 @@
      "Cherry tomatoes are not an Israeli invention, as is often claimed; Israeli breeders developed long-lasting varieties that helped make them a supermarket staple."
     ],
     "pitfalls": [
-     "In the plural the first word changes and שֶׁרִי stays: עַגְבָנִיּוֹת שֶׁרִי; the article goes on שֶׁרִי: עַגְבָנִיּוֹת הַשֶּׁרִי.",
+     "In the plural the first word changes and שֶׁרִי stays: עַגְבָנִיּוֹת שֶׁרִי; the article goes on שֶׁרִי:\n→ עַגְבָנִיּוֹת הַשֶּׁרִי",
      "Pronounced sheri, not cheri."
     ],
     "subtleties": [
@@ -1254,6 +1476,18 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pluralShape": [
+     "segolate: vowels rebuilt"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -1399,6 +1633,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -1473,7 +1719,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English names it after butter and nuts; Hebrew gave this one squash variety a one-word name of its own."
+     "Hebrew gave this one squash variety a one-word name of its own."
     ],
     "pitfalls": [
      "Feminine: דָּלוֹרִית מְתוּקָה; plural דָּלוֹרִיּוֹת.",
@@ -1481,6 +1727,13 @@
     ],
     "subtleties": [
      "The plural doubles the י, as with כְּרוּבִית → כְּרוּבִיּוֹת."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "different",
+      "text": "English names it after butter and nuts; Hebrew gave it a one-word name, דָּלוֹרִית."
+     }
     ]
    }
   },
@@ -1513,6 +1766,18 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": {
+     "none": "a compound: “my …” is said with שֶׁל after it (… שֶׁלִּי); the endings go only on the first word in formal style"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -1583,7 +1848,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "French mangetout means “eat-all” — you eat the whole pod, as the Hebrew example says."
+     "The whole pod is eaten, as the Hebrew example says; the name itself only says “Chinese peas”."
     ],
     "pitfalls": [
      "The adjective is feminine like אֲפוּנָה: אֲפוּנָה סִינִית, הָאֲפוּנָה הַסִּינִית.",
@@ -1591,6 +1856,13 @@
     ],
     "subtleties": [
      "On its own סִינִית means “Chinese (language)” or “a Chinese woman”; here it is only an adjective."
+    ],
+    "notes": [
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "Like mangetout, “eat-all”, it is eaten pod and all — but the Hebrew name only says “Chinese peas”."
+     }
     ]
    }
   }

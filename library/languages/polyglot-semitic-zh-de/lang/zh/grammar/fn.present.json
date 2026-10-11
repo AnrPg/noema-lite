@@ -145,7 +145,7 @@
   ]
  },
  "traps": [
-  "Don’t look for an ending: 他喝 ‘he drinks’, 你们喝 ‘you drink’ — the same 喝.",
+  "Don’t look for an ending:\n→ 他喝 ‘he drinks’, 你们喝 ‘you drink’ — the same 喝.",
   "*我是喝茶 for ‘I drink tea’ → 我喝茶.",
   "Don’t look for a future tense either: ‘I’ll drink tea tomorrow’ is just 我明天喝茶 (a time word, S14).",
   "了 is not a past tense ending to put on every verb: it marks completion or a change (S14)."
@@ -234,7 +234,7 @@
   {
    "for": "ru",
    "rel": "new",
-   "text": "Russian conjugates for person in the present (ем, ешь, ест) and for gender in the past (ел / ела); Chinese 吃 never changes. The Russian aspect pairs (есть / съесть) meet their Chinese counterparts in 了 and 过."
+   "text": "Russian conjugates for person in the present (ем, ешь, ест) and for gender in the past (ел / ела); Chinese 吃 never changes.\n\nThe Russian aspect pairs (есть / съесть) meet their Chinese counterparts in 了 and 过."
   },
   {
    "for": "es",
@@ -244,7 +244,7 @@
   {
    "for": "en",
    "rel": "similar",
-   "text": "English verbs already change little (I eat, he eats), so Chinese is one step further: no -s, no -ed, no ‘will’. ‘I eat’ and ‘I’m eating’ can both be 我吃; ‘I ate’ is 我吃了, or just a time word."
+   "text": "English verbs already change little (I eat, he eats), so Chinese is one step further: no -s, no -ed, no ‘will’.\n\n‘I eat’ and ‘I’m eating’ can both be 我吃; ‘I ate’ is 我吃了, or just a time word."
   },
   {
    "for": "fr",
@@ -284,7 +284,7 @@
   {
    "for": "tr",
    "rel": "new",
-   "text": "Turkish stacks tense and person suffixes (yiyorum, yedim, yiyeceğim); Chinese has no suffixes at all: 我吃, 我吃了, 我明天吃."
+   "text": "Turkish stacks tense and person suffixes (yiyorum, yedim, yiyeceğim); Chinese has no suffixes at all:\n→ 我吃, 我吃了, 我明天吃."
   },
   {
    "for": "ja",
@@ -309,7 +309,7 @@
   {
    "for": "sw",
    "rel": "new",
-   "text": "Swahili builds each verb from prefixes for person and tense (ninakula ‘I eat’, nilikula ‘I ate’, nitakula ‘I will eat’); Chinese 吃 has none: 我吃, 我吃了, 我明天吃."
+   "text": "Swahili builds each verb from prefixes for person and tense (ninakula ‘I eat’, nilikula ‘I ate’, nitakula ‘I will eat’); Chinese 吃 has none:\n→ 我吃, 我吃了, 我明天吃."
   },
   {
    "for": "lg",
@@ -324,7 +324,47 @@
   {
    "for": "iu",
    "rel": "new",
-   "text": "Inuktitut packs tense, person and much more into one verb word (nirijunga ‘I eat’); Chinese keeps everything separate and the verb unchanged: 我吃."
+   "text": "Inuktitut packs tense, person and much more into one verb word (nirijunga ‘I eat’); Chinese keeps everything separate and the verb unchanged:\n→ 我吃."
+  },
+  {
+   "for": "it",
+   "rel": "new",
+   "text": "Italian conjugation (mangio, mangi, mangia, mangiamo, mangiate, mangiano; ho mangiato; mangerò) disappears: 我吃 for every person and time.\n\nLike mangio, 我吃 can be ‘I eat’, ‘I’m eating’ or, with a time word, ‘I’ll eat’."
+  },
+  {
+   "for": "sq",
+   "rel": "new",
+   "text": "Albanian endings carry person and tense (punoj, punon, punojmë; punova; do të punoj); Chinese 工作 never changes — 我工作, 他们工作 — and time words do the rest."
+  },
+  {
+   "for": "pt",
+   "rel": "new",
+   "text": "Portuguese conjugation (como, comes, come, comemos, comem; comi; comerei) disappears: 我吃 for every person and every time — 我, 你 and time words do that work."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "new",
+   "text": "If your verb endings carry person, number and tense, Chinese has none: 我吃, 你吃, 他们吃 — the pronoun stays, and time words or 了 / 过 do the rest."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "new",
+   "text": "If you stack tense and person suffixes on the verb, Chinese has no suffixes at all: one bare form, with time words and the particles 了, 过, 在 around it."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "same",
+   "text": "If your verbs never change and optional words add time or aspect, Chinese is the same:\n→ 我吃, 我在吃, 我吃了, 我明天吃."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "new",
+   "text": "If tense, person and much more live inside one verb word, Chinese keeps everything separate around an unchanging verb:\n→ 我 + 明天 + 吃."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "new",
+   "text": "If your verbs change for person, number and gender with prefixes and suffixes, a Chinese verb has one form: 吃 for him, her and them, now or tomorrow."
   }
  ],
  "seeAlso": [

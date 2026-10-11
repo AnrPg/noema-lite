@@ -3,10 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>noema-lite</title>
-<meta name="description" content="noema-lite — structured theory, a Socratic AI tutor and gamified practice for any subject.">
+<title>noema-lite</title><!-- i18n-ignore: the app's name -->
+<meta name="description" content="noema-lite — structured theory, a Socratic AI tutor and gamified practice for any subject."><!-- i18n-ignore: for search engines (English); the loader sets it in the UI language: loader.meta.description -->
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235f8d5a' stroke-width='2.4' stroke-linecap='round'><circle cx='5' cy='19' r='2'/><circle cx='19' cy='5' r='2'/><path d='M7 19h7a3.5 3.5 0 0 0 0-7h-4a3.5 3.5 0 0 1 0-7h7'/></svg>">
 <link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="fonts/scripts.css"><!-- Arabic, Hebrew, Devanagari, CJK: fetched only when a page shows that script -->
 <link rel="stylesheet" href="engine/engine.css">
 </head>
 <body>
@@ -19,8 +20,9 @@
 <!-- 3. libraries + loader; the loader mounts the shell, then loads ONE subject pack and starts engine/engine.js -->
 <script src="engine/vendor/marked.umd.js"></script>
 <script src="engine/vendor/purify.min.js"></script>
+<script src="engine/vendor/intl-messageformat.iife.js"></script>
+<script src="engine/i18n/en.js"></script>
 <script src="engine/i18n.js"></script>
-<script src="engine/i18n_shell.js"></script>
 <script src="engine/themes.js"></script>
 <script src="engine/art.js"></script>
 <script src="engine/convos.js"></script>
@@ -31,12 +33,15 @@
 <script src="engine/viewer.js"></script>
 <script src="engine/packcheck.js"></script>
 <script src="engine/llm.js"></script>
+<script src="engine/mt.js"></script>
 <script src="engine/packgen.js"></script>
 <script src="engine/curriculum.js"></script>
 <script src="engine/curjobs.js"></script>
 <script src="engine/curshare.js"></script>
 <script src="engine/curimport.js"></script>
 <script src="engine/curmap.js"></script>
+<script src="engine/catalog.js"></script>
+<script src="engine/search.js"></script>
 <!-- 4. the frame every screen lives in (tabs, Today, Roadmaps, Progress, Me) and the character's reactions -->
 <script src="engine/shell.js"></script>
 <script src="engine/react.js"></script>

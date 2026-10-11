@@ -34,10 +34,12 @@ window.NoemaShell?.registerWorld('lang', {
   menu() { return [/* the Languages tab's ⋮: { label, sub?, icon?, run } */]; },
   today(box, { h, L, open, go, lead }) { /* optional: a "continue" card for the course you were in, on Today; with lead
     (nothing else to continue) draw only the course the learner was in and return true, so it leads the page */ },
+  // the page others see (Me ▾ › Me, docs/PROFILE.md), part "Languages I study": the courses the learner has started
+  studying() { return [/* { id, title, languages: ['ar', 'zh'], words } */]; },
 });
 ```
 
-Every member is optional. `chrome({ tutor })` (and `page`) may name what the character button opens on that page (a
+Every member is optional. `studying` (2026-10-11) is filled on main in engine/loader.js from the courses' own progress; a course may refine it (e.g. levels per language) without changing its shape. `chrome({ tutor })` (and `page`) may name what the character button opens on that page (a
 course: its own tutor). Done on the `languages` branch on 2026-10-09: docs/LANGUAGES.md §8 *Inside the frame*. Without a registered world the Languages tab lists the subjects with `kind: 'language'` (none
 today) and says there are no languages yet. Menus and ⋮ items take `{ label, sub, icon, run, href, danger }` (or `'-'` for a line).
 

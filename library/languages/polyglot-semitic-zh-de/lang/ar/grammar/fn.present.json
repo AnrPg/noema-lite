@@ -489,7 +489,7 @@
   {
    "lang": "he",
    "fn": "fn.present",
-   "note": "Hebrew’s present is a participle that changes by gender and number, not by person (אוֹכֵל، אוֹכֶלֶת، אוֹכְלִים، אוֹכְלוֹת) — so it needs the pronoun; Arabic marks the person with a prefix (أَ، تَ، يَ، نَ). The Hebrew future, though, is the twin of the Arabic present (יֹאכַל — يَأْكُلُ)."
+   "note": "Hebrew’s present is a participle that changes by gender and number, not by person — so it needs the pronoun:\n→ אוֹכֵל، אוֹכֶלֶת، אוֹכְלִים، אוֹכְלוֹת\n\nArabic marks the person with a prefix (أَ، تَ، يَ، نَ). **The Hebrew future, though, is the twin of the Arabic present:**\n→ יֹאכַל — يَأْكُلُ"
   },
   {
    "lang": "de",
@@ -554,7 +554,7 @@
   {
    "for": "hi",
    "rel": "different",
-   "text": "Hindi builds the present with a participle and है (मैं खाता हूँ / खाती हूँ) and shows the speaker’s gender even with “I”; Arabic uses one verb form with a prefix, and its “I” form has no gender (أَطْبُخُ)."
+   "text": "Hindi builds the present with a participle and है and shows the speaker’s gender even with “I”:\n→ मैं खाता हूँ / खाती हूँ\n\nArabic uses one verb form with a prefix, and its “I” form has no gender: أَطْبُخُ."
   },
   {
    "for": "fa",
@@ -610,6 +610,56 @@
    "for": "iu",
    "rel": "similar",
    "text": "Inuktitut also packs the person into the verb, at the end (nirijunga, I eat); Arabic puts it mostly in front (آكُلُ)."
+  },
+  {
+   "for": "de",
+   "rel": "similar",
+   "text": "German also marks the person in the verb (ich koche, du kochst) and has one present for “I cook” and “I am cooking” — أَطْبُخُ.\n\nBut Arabic:\n- marks the person mostly with a prefix: أَطْبُخُ, تَطْبُخُ, يَطْبُخُ;\n- adds gender: تَطْبُخِينَ = du kochst, to a woman;\n- drops the pronoun."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese verbs never change and need a pronoun (我吃, 你吃, 他吃); the Arabic verb carries the person, number and gender itself, so the pronoun is left out:\n→ آكُلُ, تَأْكُلُ, يَأْكُلُ\n\n吃 and 在吃 are one Arabic form: آكُلُ."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "As in Italian, the pronoun is dropped (mangio → آكُلُ) and one present covers “I eat” and “I am eating” (sto mangiando).\n\nBut Arabic marks the person mostly at the front of the verb and adds gender:\n→ تَأْكُلِينَ (you, a woman)"
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "As in Albanian (punoj, punojmë), the verb shows the person and the pronoun is dropped; Arabic shows it mostly with a prefix (أَعْمَلُ, نَعْمَلُ) and adds gender.\n\n→ Punoj and po punoj (I am working) are one Arabic form: أَعْمَلُ"
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "As in Portuguese, the pronoun is dropped (como → آكُلُ) and one present also covers, in context, the future; estou a comer is also آكُلُ.\n\nArabic marks the person mostly with a prefix and adds gender:\n→ تَأْكُلُ / تَأْكُلِينَ"
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your verbs have person endings, Arabic is close: one form per person, the pronoun dropped — but the person is mostly a prefix (أَ, تَ, يَ, نَ), with gender in the 2nd and 3rd person."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If you add person suffixes to a stem, note that Arabic mostly adds a prefix instead (أَطْبُخُ, نَطْبُخُ), sometimes with an ending too (تَطْبُخِينَ, يَطْبُخُونَ)."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "new",
+   "text": "If your verbs never change, the Arabic present carries person, gender and number: أَطْبُخُ (I), تَطْبُخِينَ (you, a woman), يَطْبُخُونَ (they). The pronoun is usually left out."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "similar",
+   "text": "If your verbs already include the subject, the Arabic verb will feel familiar: يَأْكُلُ is “he eats” in one word, and an object pronoun can join it too: يَأْكُلُهُ (he eats it)."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "If your language is Semitic, the prefix conjugation (أَ, تَ, يَ, نَ) is familiar; in Arabic it is the present — and the dictionary lists verbs by the past “he” form: كَتَبَ / يَكْتُبُ."
   }
  ]
 }

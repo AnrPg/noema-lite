@@ -11,7 +11,10 @@
    "prefix": false,
    "translit": "aval",
    "features": {
-    "spelling": "אבל"
+    "spelling": "אבל",
+    "allomorphs": {
+     "none": "one form"
+    }
    },
    "note": "Joins two clauses without changing their word order; a comma usually stands before it, as before German aber.",
    "contrasts": [
@@ -136,7 +139,10 @@
    "prefix": false,
    "translit": "ki",
    "features": {
-    "spelling": "כי"
+    "spelling": "כי",
+    "tense": {
+     "none": "the clause keeps its own tense"
+    }
    },
    "note": "“Because” + a clause (כִּי קַר “because it is cold”); before a noun use בִּגְלַל “because of” (בִּגְלַל הַקֹּר). In formal style כִּי also means “that”.",
    "contrasts": [
@@ -541,7 +547,7 @@
      }
     ],
     "etymology": {
-     "text": "Cognate with Aramaic אֱדַיִן (ʾĕḏáyin, “then, at that time”) and Arabic إِذ (ʔiḏ), إِذَا (ʔiḏā), إِذًا (ʔiḏan) (Wiktionary).",
+     "text": "Cognate with Arabic إِذ (ʔiḏ), إِذَا (ʔiḏā), إِذًا (ʔiḏan) (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -566,7 +572,8 @@
    "prefix": true,
    "translit": "kshe-",
    "features": {
-    "spelling": "כש"
+    "spelling": "כש",
+    "tense": "the future for a future event (כְּשֶׁאֶגְדַּל “when I grow up”), the past for a past one"
    },
    "note": "Written onto the first word of its clause (כְּשֶׁאֲנִי, כְּשֶׁהוּא); like שֶׁ it doubles the next letter when it can (כְּשֶׁזֶּה), but not before א, ה, ח, ע, ר. The formal word is כַּאֲשֶׁר.",
    "contrasts": [
@@ -651,7 +658,14 @@
      "It is written onto the next word: כְּשֶׁאֲנִי, never *כְּשֶׁ אֲנִי."
     ],
     "subtleties": [
-     "For a future event Hebrew uses the future after כְּשֶׁ: כְּשֶׁאֶהְיֶה גָּדוֹל “when I grow up” — unlike English and German."
+     "For a future event Hebrew uses the future after כְּשֶׁ: כְּשֶׁאֶהְיֶה גָּדוֹל “when I grow up” — unlike German (wenn ich groß bin)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "Unlike “when I grow up” (present), Hebrew uses the future: כְּשֶׁאֶהְיֶה גָּדוֹל."
+     }
     ]
    }
   },
@@ -666,7 +680,8 @@
    "prefix": false,
    "translit": "im",
    "features": {
-    "spelling": "אם"
+    "spelling": "אם",
+    "tense": "the future for a condition about the future (אִם יֵרֵד גֶּשֶׁם), the present for a general one (אִם אַתָּה רוֹצֶה)"
    },
    "note": "“If” + a clause; for a future event Hebrew puts the future after it (אִם יֵרֵד גֶּשֶׁם). Also “whether” in reported questions.",
    "ref": {
@@ -777,7 +792,7 @@
      "For a future event use the future after אִם: אִם יֵרֵד גֶּשֶׁם, not the present."
     ],
     "subtleties": [
-     "Like German ob, it also introduces a reported yes/no question: אֲנִי לֹא יוֹדֵעַ אִם … “I don’t know whether …”."
+     "Like German ob, it also introduces a reported yes/no question:\n→ אֲנִי לֹא יוֹדֵעַ אִם … “I don’t know whether …”"
     ]
    }
   },
@@ -792,9 +807,12 @@
    "prefix": true,
    "translit": "she-",
    "features": {
-    "spelling": "ש"
+    "spelling": "ש",
+    "tense": {
+     "none": "the clause keeps its own tense, also in reported speech (אָמַר שֶׁהוּא עָיֵף)"
+    }
    },
-   "note": "Written onto the first word of its clause (שֶׁאַתָּה, שֶׁהוּא). It doubles the next letter when it can (שֶׁזֶּה, שֶׁלֹּא), but not before א, ה, ח, ע, ר. Never left out, unlike English “that”. After a preposition it makes a conjunction: לִפְנֵי שֶׁ, אַחֲרֵי שֶׁ, לַמְרוֹת שֶׁ.",
+   "note": "Written onto the first word of its clause (שֶׁאַתָּה, שֶׁהוּא). It doubles the next letter when it can (שֶׁזֶּה, שֶׁלֹּא), but not before א, ה, ח, ע, ר. Never left out. After a preposition it makes a conjunction: לִפְנֵי שֶׁ, אַחֲרֵי שֶׁ, לַמְרוֹת שֶׁ.",
    "contrasts": [
     {
      "concept": "conj.that",
@@ -902,14 +920,51 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "One letter does the work of English that / which / who and of German dass and der, die, das."
+     "One letter does the work of German dass and der, die, das: “that” and “which, who”."
     ],
     "pitfalls": [
      "It doubles the next letter when it can: שֶׁזֶּה, שֶׁלֹּא — but not before א, ה, ח, ע, ר: שֶׁאֲנִי, שֶׁהוּא.",
      "It is never left out: “I’m glad you’re here” = אֲנִי שָׂמֵחַ שֶׁאַתָּה פֹּה."
     ],
     "subtleties": [
-     "After a preposition it makes a conjunction: לִפְנֵי שֶׁ “before”, אַחֲרֵי שֶׁ “after”, עַד שֶׁ “until”, לַמְרוֹת שֶׁ “although”, מִשּׁוּם שֶׁ “because”."
+     "After a preposition it makes a conjunction:\n→ לִפְנֵי שֶׁ “before”, אַחֲרֵי שֶׁ “after”, עַד שֶׁ “until”, לַמְרוֹת שֶׁ “although”, מִשּׁוּם שֶׁ “because”"
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "Unlike English “that”, שֶׁ is never left out: אֲנִי יוֹדֵעַ שֶׁהוּא פֹּה."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "One letter does the work of that, which and who."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Like que / qui, it introduces both “that” clauses and relative clauses."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Like che, it introduces both “that” clauses and relative clauses."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "Like que, it introduces both “that” clauses and relative clauses."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Like que, it introduces both “that” clauses and relative clauses."
+     },
+     {
+      "for": "ru",
+      "rel": "different",
+      "text": "Russian splits что and который; שֶׁ does both jobs."
+     }
     ]
    }
   },
@@ -927,6 +982,12 @@
     "spelling": "למרות",
     "pronForms": {
      "none": "not used with personal endings (לַמְרוֹת זֹאת “despite this”)"
+    },
+    "suffixSet": {
+     "none": "no personal endings (see the forms with endings)"
+    },
+    "withArticle": {
+     "none": "a separate word: the article stays on the noun (לַמְרוֹת הַ…)"
     }
    },
    "note": "“Despite” + a noun (לַמְרוֹת הַגֶּשֶׁם); “although” + a clause with שֶׁ: לַמְרוֹת שֶׁהוּא עָיֵף. In the sentence bank the שֶׁ is a separate word part, written onto the first word of the clause.",
@@ -1060,7 +1121,10 @@
    "prefix": false,
    "translit": "af al pi",
    "features": {
-    "spelling": "אף על פי"
+    "spelling": "אף על פי",
+    "tense": {
+     "none": "the clause keeps its own tense; it is followed by שֶׁ (אַף עַל פִּי שֶׁ…)"
+    }
    },
    "note": "“Although” — with שֶׁ written onto the first word of the clause: אַף עַל פִּי שֶׁהוּא רָעֵב. More formal than לַמְרוֹת שֶׁ; often abbreviated אע״פ.",
    "contrasts": [

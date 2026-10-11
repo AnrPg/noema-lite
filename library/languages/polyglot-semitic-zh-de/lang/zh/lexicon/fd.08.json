@@ -157,11 +157,11 @@
     ],
     "pitfalls": [
      "Never *没是 — the negation of 是 is 不是.",
-     "Don’t add 了 after 没 + verb: 我没吃 (not *我没吃了).",
+     "Don’t add 了 after 没 + verb:\n→ 我没吃 (not *我没吃了).",
      "In 沉没 (chénmò, ‘to sink’) the same character is read mò."
     ],
     "subtleties": [
-     "没 describes facts, 不 describes will and habits: 我不吃肉 ‘I don’t eat meat’ vs 我没吃肉 ‘I didn’t eat (the) meat’."
+     "没 describes facts, 不 describes will and habits:\n→ 我不吃肉 ‘I don’t eat meat’ vs 我没吃肉 ‘I didn’t eat (the) meat’."
     ]
    },
    "features": {
@@ -176,7 +176,16 @@
     },
     "position": [
      "preverbal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withNeg": {
+     "none": "it is itself the negation"
+    }
    }
   },
   {
@@ -294,16 +303,23 @@
      "src": "morphemes: 什么 + 都"
     },
     "funFacts": [
-     "Chinese builds ‘nothing, nobody, nowhere’ from question words: 什么都不 ‘nothing’, 谁都不 ‘nobody’, 哪儿都不 ‘nowhere’ — like Russian ничего, никто, нигде from что, кто, где."
+     "Chinese builds ‘nothing, nobody, nowhere’ from question words:\n→ 什么都不 ‘nothing’, 谁都不 ‘nobody’, 哪儿都不 ‘nowhere’."
     ],
     "pitfalls": [
-     "The negation comes after 什么都, right before the verb: 我什么都不吃 — never *我不什么都吃.",
+     "The negation comes after 什么都, right before the verb:\n→ 我什么都不吃 — never *我不什么都吃.",
      "Choose the negator as usual: 不 for will and habits (什么都不吃 ‘won’t eat anything’), 没 for facts (什么都没买 ‘bought nothing’), and always 什么都没有 with 有."
     ],
     "subtleties": [
-     "什么都 is a phrase, not one word: 什么 ‘what’ + 都 ‘all’. With 不 / 没 it means ‘nothing’, without a negation ‘everything’; it is kept as one entry for the concept ‘nothing’.",
-     "Without a negation it means ‘everything’: 他什么都吃 ‘he eats everything’.",
-     "什么都 stands before the verb even though it is the object: 我什么都不要 ‘I don’t want anything’."
+     "什么都 is a phrase, not one word:\n→ 什么 ‘what’ + 都 ‘all’.\n\nWith 不 / 没 it means ‘nothing’, without a negation ‘everything’; it is kept as one entry for the concept ‘nothing’.",
+     "Without a negation it means ‘everything’:\n→ 他什么都吃 ‘he eats everything’.",
+     "什么都 stands before the verb even though it is the object:\n→ 我什么都不要 ‘I don’t want anything’."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "Like Russian ничего, никто, нигде, built from что, кто, где."
+     }
     ]
    },
    "role": "什么都 is a phrase, not one word: 什么 ‘what’ + 都 ‘all’. With 不 / 没 it means ‘nothing’, without a negation ‘everything’; it is kept as one entry for the concept ‘nothing’.",
@@ -316,6 +332,13 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
+    },
+    "neutralTone": "么 me is always toneless",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "plural": {
+     "none": "not a personal pronoun: no plural"
     }
    }
   },
@@ -413,14 +436,14 @@
      "src": "morphemes: 没有 + 人"
     },
     "funFacts": [
-     "Like Turkish kimse yok ‘there is nobody’ (yok = ‘there is not’), Chinese says ‘nobody’ with ‘there is not’ — 没有人."
+     "Chinese says ‘nobody’ with ‘there is not’:\n→ 没有人 ‘there is no person’ — like Hebrew אֵין אַף אֶחָד ‘there isn’t anyone’."
     ],
     "pitfalls": [
-     "没有人 opens the sentence: 没有人在家 ‘nobody is at home’ — *人没有在家 would mean ‘the person is not at home’.",
+     "没有人 opens the sentence:\n→ 没有人在家 ‘nobody is at home’ — *人没有在家 would mean ‘the person is not at home’.",
      "As an object Chinese does not use 没有人: ‘I don’t know anybody’ is 我谁都不认识 (S10) — not *我认识没有人."
     ],
     "subtleties": [
-     "没有人 is a phrase, not one word: 没有 ‘there is no’ + 人 ‘person’ — literally ‘there is nobody who …’; it is kept as one entry for the concept ‘nobody’.",
+     "没有人 is a phrase, not one word:\n→ 没有 ‘there is no’ + 人 ‘person’ — literally ‘there is nobody who …’; it is kept as one entry for the concept ‘nobody’.",
      "没有人 = ‘there isn’t anyone (who …)’; for ‘nobody wants / likes’ 谁都不 + verb is just as common."
     ]
    },
@@ -434,6 +457,15 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "plural": {
+     "none": "not a personal pronoun: no plural"
     }
    }
   },
@@ -563,14 +595,21 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "从来 is literally ‘from-come’: ‘from back then until now’. Like English ‘ever’, it needs a negation to mean ‘never’: 从来不 = ‘not ever’."
+     "从来 is literally ‘from-come’: ‘from back then until now’.\n\nWith a negation it means ‘never’:\n→ 从来不 ‘not ever’, 从来没 ‘has never’."
     ],
     "pitfalls": [
      "从来 alone is not ‘never’: say 我从来不吃肉 — *我从来吃肉 is wrong.",
-     "For what has never happened use 从来没 + verb + 过 (过 comes in S14): 我从来没去过中国; for habits 从来不: 我从来不喝酒."
+     "For what has never happened use 从来没 + verb + 过 (过 comes in S14):\n→ 我从来没去过中国;\n→ for habits 从来不: 我从来不喝酒."
     ],
     "subtleties": [
      "从来不 = never, by habit or choice; 从来没 = it has never happened."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Like English ‘ever’, it needs a negation to mean ‘never’."
+     }
     ]
    },
    "features": {
@@ -585,7 +624,14 @@
     },
     "position": [
      "preverbal"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withNeg": "从来不 / 从来没 ‘never’: in this sense 从来 needs the negation"
    }
   },
   {
@@ -688,16 +734,58 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German has weder … noch, Turkish ne … ne, Russian ни … ни; Chinese has no special pair — it says ‘not … also not …’: 不 … 也不 …."
+     "German has weder … noch; Chinese has no special pair — it says ‘not … also not …’:\n→ 不 … 也不 …."
     ],
     "pitfalls": [
-     "也 stands before 不: 我也不喝 — never *我不也喝.",
-     "With 有 and with past facts it is 也没: 我没有哥哥，也没有姐姐; 他没吃肉，也没吃鱼."
+     "也 stands before 不:\n→ 我也不喝 — never *我不也喝.",
+     "With 有 and with past facts it is 也没:\n→ 我没有哥哥，也没有姐姐;\n→ 他没吃肉，也没吃鱼."
     ],
     "subtleties": [
-     "也不 is a phrase, not one word: 也 ‘also’ + 不 ‘not’. Repeated (不 A，也不 B) it gives ‘neither A nor B’; it is kept as one entry because the pair works as the ‘nor’ of the course.",
+     "也不 is a phrase, not one word:\n→ 也 ‘also’ + 不 ‘not’.\n\nRepeated (不 A，也不 B) it gives ‘neither A nor B’; it is kept as one entry because the pair works as the ‘nor’ of the course.",
      "既不 … 也不 … is more formal and emphatic than 不 … 也不 ….",
-     "Before a 4th tone it is said yě bú: 也不要, 也不是."
+     "Before a 4th tone it is said yě bú:\n→ 也不要, 也不是."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "different",
+      "text": "English neither … nor has no special Chinese pair:\n→ 不 … 也不 …."
+     },
+     {
+      "for": "ru",
+      "rel": "different",
+      "text": "Russian ни … ни has no special Chinese pair:\n→ 不 … 也不 …."
+     },
+     {
+      "for": "fr",
+      "rel": "different",
+      "text": "French ni … ni has no special Chinese pair:\n→ 不 … 也不 …."
+     },
+     {
+      "for": "es",
+      "rel": "different",
+      "text": "Spanish ni … ni has no special Chinese pair:\n→ 不 … 也不 …."
+     },
+     {
+      "for": "it",
+      "rel": "different",
+      "text": "Italian né … né has no special Chinese pair:\n→ 不 … 也不 …."
+     },
+     {
+      "for": "pt",
+      "rel": "different",
+      "text": "Portuguese nem … nem has no special Chinese pair:\n→ 不 … 也不 …."
+     },
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "Greek ούτε … ούτε has no special Chinese pair:\n→ 不 … 也不 …."
+     },
+     {
+      "for": "sq",
+      "rel": "different",
+      "text": "Albanian as … as has no special Chinese pair:\n→ 不 … 也不 …."
+     }
     ]
    },
    "role": "也不 is a phrase, not one word: 也 ‘also’ + 不 ‘not’. Repeated (不 A，也不 B) it gives ‘neither A nor B’; it is kept as one entry because the pair works as the ‘nor’ of the course.",
@@ -708,14 +796,23 @@
     "tradPerSense": {
      "none": "written the same in traditional characters"
     },
-    "toneSandhi": "yě bú before a 4th-tone syllable (也不是, 也不去); yě bù before the others (也不吃)"
+    "toneSandhi": "yě bú before a 4th-tone syllable (也不是, 也不去); yě bù before the others (也不吃)",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "joins": [
+     "verb phrases"
+    ]
    }
   }
  ],
  "absent": [
   {
    "concept": "det.none",
-   "reason": "Chinese has no determiner meaning ‘no, not any’ (German kein, Greek κανένας): the verb is negated and the noun stays bare.",
+   "reason": "Chinese has no determiner meaning ‘no, not any’ (German kein): the verb is negated and the noun stays bare.",
    "use": "没有 + noun for ‘have no / there is no’: 我没有哥哥 ‘I have no older brother’, 这里没有盐 ‘there is no salt here’ (一个 drops out); with other verbs 不 / 没 + verb + noun: 我不吃肉 ‘I eat no meat’."
   }
  ]

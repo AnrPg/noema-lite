@@ -21,6 +21,19 @@
     },
     "measure": {
      "none": "a month name is not counted; ‘three months’ is 三个月 (with 个)"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    },
    "ref": {
@@ -106,7 +119,7 @@
     ],
     "pitfalls": [
      "一月 ‘January’ vs 一个月 ‘one month’: the 个 makes it a count.",
-     "‘In January’ needs no ‘in’: 我一月去北京."
+     "‘In January’ needs no ‘in’:\n→ 我一月去北京."
     ],
     "subtleties": [
      "The first month of the lunar calendar is 正月 zhēngyuè, not 一月."
@@ -134,6 +147,19 @@
     },
     "measure": {
      "none": "a month name is not counted; ‘three months’ is 三个月 (with 个)"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    },
    "ref": {
@@ -216,7 +242,7 @@
      "二月 with 二 — never *两月 (两 is for counting: 两个月 ‘two months’)."
     ],
     "subtleties": [
-     "To say something IS in a month, use 在: 我的生日在二月 ‘my birthday is in February’ — for doing something no 在 is needed: 我二月去."
+     "To say something IS in a month, use 在: 我的生日在二月 ‘my birthday is in February’ — for doing something no 在 is needed:\n→ 我二月去."
     ]
    }
   },
@@ -241,6 +267,19 @@
     },
     "measure": {
      "none": "a month name is not counted; ‘three months’ is 三个月 (with 个)"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    },
    "ref": {
@@ -348,6 +387,19 @@
     },
     "measure": {
      "none": "a month name is not counted; ‘three months’ is 三个月 (with 个)"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    },
    "ref": {
@@ -455,6 +507,19 @@
     },
     "measure": {
      "none": "a month name is not counted; ‘three months’ is 三个月 (with 个)"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    },
    "ref": {
@@ -562,6 +627,19 @@
     },
     "measure": {
      "none": "a month name is not counted; ‘three months’ is 三个月 (with 个)"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    },
    "ref": {
@@ -669,6 +747,19 @@
     },
     "measure": {
      "none": "a month name is not counted; ‘three months’ is 三个月 (with 个)"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    },
    "ref": {
@@ -776,6 +867,19 @@
     },
     "measure": {
      "none": "a month name is not counted; ‘three months’ is 三个月 (with 个)"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    },
    "ref": {
@@ -883,6 +987,19 @@
     },
     "measure": {
      "none": "a month name is not counted; ‘three months’ is 三个月 (with 个)"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    },
    "ref": {
@@ -990,6 +1107,19 @@
     },
     "measure": {
      "none": "a month name is not counted; ‘three months’ is 三个月 (with 个)"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    },
    "ref": {
@@ -1072,7 +1202,7 @@
      "十月 shíyuè ‘October’ vs 四月 sìyuè ‘April’: listen for shí (2nd tone) vs sì (4th tone)."
     ],
     "subtleties": [
-     "十一 means ‘eleven’ — and also ‘October 1st’, National Day: 十一我们去旅游."
+     "十一 means ‘eleven’ — and also ‘October 1st’, National Day:\n→ 十一我们去旅游."
     ]
    }
   },
@@ -1097,6 +1227,19 @@
     },
     "measure": {
      "none": "a month name is not counted; ‘three months’ is 三个月 (with 个)"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    },
    "ref": {
@@ -1204,6 +1347,19 @@
     },
     "measure": {
      "none": "a month name is not counted; ‘three months’ is 三个月 (with 个)"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    },
    "ref": {
@@ -1311,7 +1467,20 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1410,13 +1579,20 @@
     },
     "funFacts": [
      "春节 ‘Spring Festival’ is Chinese New Year — in January or February, still winter, but the start of spring in the old calendar.",
-     "Greek άνοιξη is the ‘opening’ (from ανοίγω), German Frühling the ‘early (season)’; the Chinese character shows a sprout in the sun."
+     "German Frühling is the ‘early (season)’; the Chinese character 春 shows a sprout in the sun."
     ],
     "pitfalls": [
      "‘In spring’ needs no ‘in’: 春天我们去公园 — 在春天 is written style."
     ],
     "subtleties": [
-     "The four seasons in a row: 春夏秋冬; with 天: 春天, 夏天, 秋天, 冬天."
+     "The four seasons in a row:\n→ 春夏秋冬;\n→ with 天: 春天, 夏天, 秋天, 冬天."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "Greek άνοιξη is the ‘opening’ (from ανοίγω)."
+     }
     ]
    }
   },
@@ -1441,7 +1617,20 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1554,7 +1743,20 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1644,13 +1846,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "秋 contains 禾 ‘grain’: autumn is harvest time — and German Herbst is a cousin of English harvest."
+     "秋 contains 禾 ‘grain’: autumn is harvest time — and German Herbst first meant ‘harvest’ too."
     ],
     "pitfalls": [
-     "‘In autumn’ needs no preposition: 秋天我们去北京."
+     "‘In autumn’ needs no preposition:\n→ 秋天我们去北京."
     ],
     "subtleties": [
      "British ‘autumn’ and American ‘fall’ are both 秋天; in writing 秋季."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "German Herbst is a cousin of English harvest."
+     }
     ]
    }
   },
@@ -1675,7 +1884,20 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1802,6 +2024,19 @@
     },
     "measure": {
      "none": "周 counts by itself: 两周 ‘two weeks’ (no 个)"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    },
    "contrasts": [
@@ -1930,7 +2165,7 @@
      "周 is a circuit: the week goes round and starts again; 周围 is ‘all around’."
     ],
     "pitfalls": [
-     "周 counts by itself: 两周 ‘two weeks’ — but 星期 takes 个: 两个星期."
+     "周 counts by itself:\n→ 两周 ‘two weeks’ — but 星期 takes 个: 两个星期."
     ],
     "subtleties": [
      "周一 … 周日 are the short day names of timetables and signs (S14)."
@@ -1959,7 +2194,20 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2061,13 +2309,30 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Like Turkish ay (moon and month) and Russian месяц, 月 is both the moon and the month."
+     "月 is both the moon and the month:\n→ 月亮 ‘the moon’, 三月 ‘March’, 一个月 ‘a month’."
     ],
     "pitfalls": [
      "三月 is ‘March’, 三个月 ‘three months’: the 个 makes it a count."
     ],
     "subtleties": [
      "The moon in speech is 月亮; 月 alone is the month (or the moon in poems and compounds: 月饼)."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Russian месяц is also both moon and month."
+     },
+     {
+      "for": "ja",
+      "rel": "same",
+      "text": "Japanese 月 is also both: tsuki ‘moon’, -gatsu / -getsu ‘month’."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English month and moon are cousins."
+     }
     ]
    }
   },
@@ -2094,6 +2359,19 @@
     },
     "measure": {
      "none": "年 is itself a counter: 两年 ‘two years’ (no 个)"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    },
    "ref": {
@@ -2219,8 +2497,8 @@
      "年 first meant ‘harvest’; a folk legend tells of a monster called 年 that was scared off with red paper and firecrackers — the origin story of New Year customs."
     ],
     "pitfalls": [
-     "年 counts by itself: 两年 ‘two years’ — *两个年 is wrong.",
-     "Age is 岁, not 年: 我三十岁."
+     "年 counts by itself:\n→ 两年 ‘two years’ — *两个年 is wrong.",
+     "Age is 岁, not 年:\n→ 我三十岁."
     ],
     "subtleties": [
      "Years are read digit by digit: 2026年 = 二〇二六年 èr líng èr liù nián."
@@ -2249,7 +2527,20 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "every meaning that is counted takes the measure words above"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    },
    "contrasts": [
     {
@@ -2402,7 +2693,20 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    },
    "contrasts": [
     {
@@ -2489,7 +2793,7 @@
      "钟 is both ‘bell’ and ‘clock’: 钟头 ‘clock-head’ is the spoken hour."
     ],
     "pitfalls": [
-     "钟头 always takes 个: 两个钟头 (小时 can drop it in writing)."
+     "钟头 always takes 个:\n→ 两个钟头 (小时 can drop it in writing)."
     ],
     "subtleties": [
      "钟头 is spoken, especially in the north; timetables and forms use 小时."
@@ -2517,6 +2821,19 @@
     },
     "measure": {
      "none": "分钟 counts by itself: 五分钟 ‘five minutes’ (no 个)"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    },
    "contrasts": [
@@ -2604,10 +2921,10 @@
      "十分 shífēn also means ‘very’ (十分好 ‘extremely good’) — 十分钟 is the ten minutes."
     ],
     "pitfalls": [
-     "No measure word: 五分钟, not *五个分钟."
+     "No measure word:\n→ 五分钟, not *五个分钟."
     ],
     "subtleties": [
-     "分钟 is a length of time; the minute on the clock is 分: 八点十分 ‘8:10’."
+     "分钟 is a length of time; the minute on the clock is 分:\n→ 八点十分 ‘8:10’."
     ]
    }
   },
@@ -2635,6 +2952,19 @@
     },
     "measure": {
      "none": "on the clock 分 follows a number directly: 十分 ‘ten (minutes past)’"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    },
    "contrasts": [
@@ -2766,7 +3096,7 @@
      "分 is the knife (刀) that splits (八): an hour divided into minutes, a yuan into cents."
     ],
     "pitfalls": [
-     "In speech the 分 after the minutes often drops: 八点二十 = 八点二十分 ‘8:20’."
+     "In speech the 分 after the minutes often drops:\n→ 八点二十 = 八点二十分 ‘8:20’."
     ],
     "subtleties": [
      "‘A quarter’ is 刻 kè (八点一刻 ‘8:15’), ‘half past’ is 半 (八点半)."
@@ -2796,6 +3126,19 @@
     },
     "measure": {
      "none": "点 follows the number directly: 三点 ‘three o’clock’"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "点儿 diǎnr is the word ‘a bit’ (一点儿), not the clock time"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    },
    "contrasts": [
@@ -2942,7 +3285,7 @@
      "一点 is ‘one o’clock’ — and also ‘a little’; the context decides."
     ],
     "subtleties": [
-     "Big before small: 下午三点 ‘3 p.m.’, 星期一上午十点 ‘Monday, 10 a.m.’."
+     "Big before small:\n→ 下午三点 ‘3 p.m.’, 星期一上午十点 ‘Monday, 10 a.m.’."
     ]
    }
   },
@@ -2967,7 +3310,20 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    },
    "contrasts": [
     {
@@ -3062,7 +3418,14 @@
      "‘What’s the date?’ in speech is 今天几号？ — 日期 is the word of forms and documents."
     ],
     "subtleties": [
-     "Chinese dates go from big to small, year – month – day, the reverse of Greek and German (8.10.2026)."
+     "Chinese dates go from big to small, year – month – day, the reverse of German (8.10.2026)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "Greek dates go small to big (8/10/2026), the reverse of Chinese."
+     }
     ]
    }
   },
@@ -3089,6 +3452,19 @@
     },
     "measure": {
      "none": "号 follows the number directly: 五号 ‘the 5th’"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    },
    "contrasts": [
@@ -3209,11 +3585,11 @@
      "号 began as a shout (號 has a tiger in it); from ‘call, name’ it came to mean ‘number’ — and the number of the day."
     ],
     "pitfalls": [
-     "Speech says 号, writing 日: 五月一号 / 5月1日.",
-     "Month before day: 五月一号 — never *一号五月."
+     "Speech says 号, writing 日:\n→ 五月一号 / 5月1日.",
+     "Month before day:\n→ 五月一号 — never *一号五月."
     ],
     "subtleties": [
-     "号 is also clothing size: 大号, 中号, 小号 — L, M, S."
+     "号 is also clothing size:\n→ 大号, 中号, 小号 — L, M, S."
     ]
    }
   },
@@ -3238,7 +3614,20 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3320,7 +3709,7 @@
      }
     ],
     "etymology": {
-     "text": "生 ‘to be born’ + 日 ‘day’: ‘birth-day’, built like German Geburtstag and English birthday.",
+     "text": "生 ‘to be born’ + 日 ‘day’: ‘birth-day’, built like German Geburtstag.",
      "src": "morphemes: 生 + 日 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
@@ -3332,6 +3721,13 @@
     ],
     "subtleties": [
      "Many older people also keep a birthday in the lunar calendar, so it moves every year."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Built like English birthday."
+     }
     ]
    }
   },
@@ -3356,7 +3752,20 @@
     },
     "measure": [
      "个"
-    ]
+    ],
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "one meaning"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
+    }
    },
    "contrasts": [
     {
@@ -3583,10 +3992,37 @@
      {
       "verb": "放",
       "object": "假",
-      "example": "放了三天假"
+      "example": "放了三天假",
+      "inserts": "了 · a length (放了三天假)"
      }
     ],
-    "neg": "bu+mei"
+    "neg": "bu+mei",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "verbKind": [
+     "action"
+    ],
+    "aspect": [
+     "了",
+     "过",
+     "在"
+    ],
+    "complements": {
+     "none": "takes none"
+    },
+    "redup": {
+     "none": "not doubled: not used for a short, casual action"
+    },
+    "degreeComplement": {
+     "none": "takes no 得 comment of manner or degree"
+    },
+    "object": [
+     "no object"
+    ]
    }
   },
   {
@@ -3611,6 +4047,19 @@
     },
     "measure": {
      "none": "a time word: it is not counted with a measure word"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    },
    "contrasts": [
@@ -3713,14 +4162,26 @@
      "src": "morphemes: 以 + 前 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "很久很久以前 ‘long, long ago’ opens Chinese fairy tales, like Greek Μια φορά κι έναν καιρό."
+     "很久很久以前 ‘long, long ago’ opens Chinese fairy tales."
     ],
     "pitfalls": [
-     "以前 comes AFTER the time or event: 八点以前 ‘before eight’ — German vor acht and Greek πριν από τις οχτώ put it first.",
-     "A past habit with 以前 needs no 了: 以前我常常去."
+     "以前 comes AFTER the time or event: 八点以前 ‘before eight’ — German vor acht puts it first.",
+     "A past habit with 以前 needs no 了:\n→ 以前我常常去."
     ],
     "subtleties": [
-     "Alone at the start, 以前 means ‘in the past, formerly’: 以前我是老师 ‘I used to be a teacher’."
+     "Alone at the start, 以前 means ‘in the past, formerly’:\n→ 以前我是老师 ‘I used to be a teacher’."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "Greek πριν από τις οχτώ puts ‘before’ first; 八点以前 puts it last.\n\nAnd 很久很久以前 is the Chinese Μια φορά κι έναν καιρό."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English ‘before eight’ puts ‘before’ first; 八点以前 puts it last.\n\n很久很久以前 is the Chinese ‘once upon a time’."
+     }
     ]
    }
   },
@@ -3746,6 +4207,19 @@
     },
     "measure": {
      "none": "a time word: it is not counted with a measure word"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    },
    "contrasts": [
@@ -3851,10 +4325,10 @@
      "之 is the classical ‘of’: 之前 is literally ‘its front’ — Classical Chinese inside a modern word."
     ],
     "pitfalls": [
-     "Like 以前, 之前 follows the time: 星期五之前, not *之前星期五."
+     "Like 以前, 之前 follows the time:\n→ 星期五之前, not *之前星期五."
     ],
     "subtleties": [
-     "With a length of time it means ‘ago’: 三天之前 / 三天前 ‘three days ago’."
+     "With a length of time it means ‘ago’:\n→ 三天之前 / 三天前 ‘three days ago’."
     ]
    }
   },
@@ -3880,6 +4354,19 @@
     },
     "measure": {
      "none": "a time word: it is not counted with a measure word"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    },
    "contrasts": [
@@ -4001,7 +4488,7 @@
      "之后 follows the event: 下课之后 ‘after class’ — German nach dem Unterricht puts it first."
     ],
     "subtleties": [
-     "With a length of time it means ‘later’: 三天之后 ‘three days later’."
+     "With a length of time it means ‘later’:\n→ 三天之后 ‘three days later’."
     ]
    }
   },
@@ -4104,10 +4591,10 @@
      "‘Not until’ is said positively: 他直到十二点才回家 ‘only at twelve did he come home’ — 才 ‘only then’ does the work of the negation."
     ],
     "pitfalls": [
-     "‘Not until’ is 直到 … 才 …, without 不: *他直到十二点不回家 is wrong."
+     "‘Not until’ is 直到 … 才 …, without 不:\n→ *他直到十二点不回家 is wrong."
     ],
     "subtleties": [
-     "直到 stresses the long stretch up to the point; after a verb plain 到 is usual: 我睡到九点 ‘I slept until nine’."
+     "直到 stresses the long stretch up to the point; after a verb plain 到 is usual:\n→ 我睡到九点 ‘I slept until nine’."
     ]
    },
    "features": {
@@ -4120,7 +4607,16 @@
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
     },
-    "position": "before"
+    "position": "before",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "alsoVerb": {
+     "none": "only a preposition or a localizer"
+    }
    }
   },
   {
@@ -4238,7 +4734,16 @@
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
     },
-    "position": "before"
+    "position": "before",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "alsoVerb": {
+     "none": "only a preposition or a localizer"
+    }
    }
   },
   {
@@ -4356,7 +4861,16 @@
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
     },
-    "position": "after"
+    "position": "after",
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "alsoVerb": {
+     "none": "only a preposition or a localizer"
+    }
    }
   },
   {
@@ -4381,6 +4895,19 @@
     },
     "measure": {
      "none": "a time word: it is not counted with a measure word"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    },
    "ref": {
@@ -4490,7 +5017,7 @@
      "间 is a gate (门) with the sun (日) shining through the gap — an ‘interval’ in space (之间, S12) and in time (期间)."
     ],
     "pitfalls": [
-     "期间 follows a noun or a named period: 假期期间 ‘during the holidays’; after a verb use …的时候: 吃饭的时候."
+     "期间 follows a noun or a named period:\n→ 假期期间 ‘during the holidays’; after a verb use …的时候: 吃饭的时候."
     ],
     "subtleties": [
      "期间 is a bit formal (news, notices); in speech …的时候 or …里 is usual."
@@ -4526,6 +5053,17 @@
     },
     "measure": {
      "none": "a time word: it is not counted with a measure word"
+    },
+    "neutralTone": "候 hou is toneless in this word (alone: hòu); Taiwan speech often keeps the full tone",
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "measurePerSense": {
+     "none": "not counted with a measure word (see the measure word)"
+    },
+    "men": "no 们",
+    "locative": {
+     "none": "a time word, not a place"
     }
    },
    "role": "time, moment — after a clause, …的时候 is ‘when, while …’ (S15 as a frame of time, S18 as the linking word for ‘when’: 我饿的时候 ‘when I’m hungry’); 什么时候 ‘when?’ (S10)",
@@ -4644,16 +5182,23 @@
      "src": "morphemes: 时 + 候 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "时候 is the moment, 时间 the time you have: 我没有时间 ‘I have no time’ — never *没有时候."
+     "时候 is the moment, 时间 the time you have:\n→ 我没有时间 ‘I have no time’ — never *没有时候."
     ],
     "pitfalls": [
-     "…的时候 comes AFTER the clause: 我吃饭的时候 ‘when I eat’ — English when and German wenn come first.",
+     "…的时候 comes AFTER the clause: 我吃饭的时候 ‘when I eat’ — German wenn comes first.",
      "For ‘I have no time’ use 时间, not 时候.",
      "Not a question: …的时候 is ‘when’ in a statement; the question ‘when?’ is 什么时候 (你什么时候来？)."
     ],
     "subtleties": [
-     "In careful speech 在 opens the frame: 在我小的时候 ‘when I was little’.",
-     "In writing the short …时 replaces …的时候: 吃饭时 ‘while eating’, 到北京时 ‘when (we) arrived in Beijing’."
+     "In careful speech 在 opens the frame:\n→ 在我小的时候 ‘when I was little’.",
+     "In writing the short …时 replaces …的时候:\n→ 吃饭时 ‘while eating’, 到北京时 ‘when (we) arrived in Beijing’."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English when opens its clause; 的时候 closes it:\n→ 我吃饭的时候."
+     }
     ]
    }
   },
@@ -4680,6 +5225,16 @@
     },
     "toneSandhi": {
      "none": "no 一 or 不 in the word"
+    },
+    "neutralTone": {
+     "none": "every syllable keeps its tone"
+    },
+    "erhua": {
+     "none": "no 儿 form in common use"
+    },
+    "withMeasure": "半 + measure word: 半个小时; after a number it follows the measure: 一个半小时",
+    "ordinal": {
+     "none": "a fraction: not counted in order"
     }
    },
    "contrasts": [

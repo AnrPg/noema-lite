@@ -6,7 +6,7 @@
 const THREAD_BUDGET = 3;        // learner attempts per thread before the tutor MUST give the answer
 const MAX_OPEN_THREADS = 2;     // main question + at most one nested sub-question
 const CONVERGE_AFTER = 10;      // learner turns after which the tutor must start converging
-const TELL_ME_RE = /\b(just tell me|tell me the answer|give me the answer|i give up|no idea|i don'?t know|idk|what'?s the answer)\b|δεν ξέρω|πες μου|απάντησέ μου|δώσε μου την απάντηση/i;
+const TELL_ME_RE = /\b(just tell me|tell me the answer|give me the answer|i give up|no idea|i don'?t know|idk|what'?s the answer)\b|δεν ξέρω|πες μου|απάντησέ μου|δώσε μου την απάντηση|не знаю|скажи ответ|просто скажи|дай ответ|сдаюсь|je ne sais pas|dis-moi la réponse|donne-moi la réponse|j['’]abandonne/i;   // i18n-ignore (the learner's words in the languages of the UI)
 
 T.tstate = {};
 function newThreadState() { return { v: 1, threads: [], lessons: [], focus: null, learnerTurns: 0, missingControl: 0, wrapped: false }; }
@@ -35,6 +35,7 @@ function noteLearnerTurn(ts, text, directive) {
 }
 
 /** The TUTOR STATE block appended to the system prompt of every Socratic call. */
+/* i18n-ignore-start */   // a prompt for the AI (English)
 function tutorStateBlock(ts, directive) {
   const open = openThreads(ts);
   const depth = t => { let d = 0, p = t; while (p && p.parent) { d++; p = ts.threads.find(x => x.id === p.parent); } return d; };
@@ -51,10 +52,13 @@ function tutorStateBlock(ts, directive) {
   if (ts.learnerTurns >= CONVERGE_AFTER && open.length && !directive) dir.push('This conversation is long → converge: resolve the open threads within this or the next reply and give the 🎓 summary.');
   if (!open.length && ts.lessons.length && !directive) dir.push('No thread is open → if the learner asked something new, decide afresh (direct answer or ONE new thread). If they just acknowledged, close with **🎓 What you learned:** instead of starting a new chain.');
   if (ts.missingControl) dir.push('Your previous reply lacked the <noema-state> line — you MUST include it.');
+  const lang = inReplyLang('the "question", "answer" and "lesson" texts of the <noema-state> line (the learner reads them in the thread tracker) and the bold headings');
+  if (lang) dir.push(lang.trim());
   lines.push('DIRECTIVES:', ...(dir.length ? dir.map(d => '- ' + d) : ['- (none)']));
   lines.push(`Next new thread id: ${nextThreadId(ts)}.`);
   return lines.join('\n');
 }
+/* i18n-ignore-end */
 
 /** Merge the model's control object into the state. Returns the lessons resolved in this turn. */
 function applyControl(ts, control, seq) {
@@ -76,7 +80,7 @@ function applyControl(ts, control, seq) {
   (control.resolved || []).forEach(r => {
     if (!r) return;
     let t = ts.threads.find(x => x.id === r.id);
-    if (!t) { t = { id: r.id || nextThreadId(ts), question: r.question || '(answered directly)', parent: null, status: 'open', attempts: 0, budget: THREAD_BUDGET, openedAt: seq }; ts.threads.push(t); }
+    if (!t) { t = { id: r.id || nextThreadId(ts), question: r.question || '(answered directly)', parent: null, status: 'open', attempts: 0, budget: THREAD_BUDGET, openedAt: seq }; ts.threads.push(t); }   // i18n-ignore
     resolve(t, r, control.verdict === 'correct' ? 'learner-correct' : 'answered');
   });
   if (control.lesson && !ts.lessons.some(l => l.text === control.lesson)) { const l = { text: String(control.lesson), thread: null, question: null, at: seq }; ts.lessons.push(l); got.push(l); }
@@ -105,13 +109,13 @@ function threadTracker(key, histLen) {
   const add = (...xs) => xs.forEach(x => x && row.append(x));
   if (socr && ts) {
     add(h('span', { class: 'tb-ic' }, open.length ? '🧵' : '✅'),
-      h('div', { class: 'grow tb-txt' }, focus ? h('span', {}, h('b', {}, 'Working on: '), focus.question, ' ', h('span', { class: 'pill ' + ((focus.attempts || 0) >= (focus.budget || THREAD_BUDGET) - 1 ? 'warnpill' : '') }, `try ${Math.min((focus.attempts || 0) + 1, focus.budget || THREAD_BUDGET)}/${focus.budget || THREAD_BUDGET}`)) : h('span', {}, open.length ? `${open.length} open question(s)` : (ts.lessons.length ? 'All questions answered' : 'Ask anything — I’ll answer or guide you, then close with the answer'))),
-      ts.lessons.length ? h('button', { class: 'pill c tb-lessons', onclick: () => bar.classList.toggle('open') }, `📌 ${ts.lessons.length} lesson${ts.lessons.length > 1 ? 's' : ''}`) : null,
-      ts.threads.length ? h('button', { class: 'iconbtn tb-more', title: 'Show all threads', onclick: () => bar.classList.toggle('open') }, '▾') : null);
-  } else add(h('span', { class: 'tb-ic' }, '🎯'), h('div', { class: 'grow tb-txt tiny' }, 'Want the key takeaways of this conversation?'));
-  const actions = h('div', { class: 'tb-actions' },
-    socr && focus ? h('button', { class: 'btn small', onclick: () => sendTutor('Just tell me the answer, please.', false, { directive: 'tellme' }) }, '💡 Just tell me') : null,
-    histLen >= 2 ? h('button', { class: 'btn small primary', onclick: () => sendTutor('Let’s wrap up: give me the answers and what I learned.', false, { directive: 'wrapup' }) }, '🎓 Wrap up') : null);
+      h('div', { class: 'grow tb-txt' }, focus ? h('span', {}, h('b', {}, tE('engine.thr.workingOn') + ' '), focus.question, ' ', h('span', { class: 'pill ' + ((focus.attempts || 0) >= (focus.budget || THREAD_BUDGET) - 1 ? 'warnpill' : '') }, tE('engine.thr.try', { n: Math.min((focus.attempts || 0) + 1, focus.budget || THREAD_BUDGET), of: focus.budget || THREAD_BUDGET }))) : h('span', {}, open.length ? tE('engine.thr.open', { n: open.length }) : (ts.lessons.length ? tE('engine.thr.allAnswered') : tE('engine.thr.askAnything')))),
+      ts.lessons.length ? h('button', { class: 'pill c tb-lessons', onclick: () => bar.classList.toggle('open') }, '📌 ' + tE('engine.thr.lessons', { n: ts.lessons.length })) : null,
+      ts.threads.length ? h('button', { class: 'iconbtn tb-more', title: tE('engine.thr.showAll'), onclick: () => bar.classList.toggle('open') }, '▾') : null);
+  } else add(h('span', { class: 'tb-ic' }, '🎯'), h('div', { class: 'grow tb-txt tiny' }, tE('engine.thr.takeaways')));
+  const actions = h('div', { class: 'tb-actions' },   // the buttons and the message they send (the learner's bubble) speak the UI language; the directive tells the AI what to do
+    socr && focus ? h('button', { class: 'btn small', onclick: () => sendTutor(tE('engine.aimsg.tellMe'), false, { directive: 'tellme' }) }, '💡 ' + tE('engine.thr.tellMe')) : null,
+    histLen >= 2 ? h('button', { class: 'btn small primary', onclick: () => sendTutor(tE('engine.aimsg.wrapUp'), false, { directive: 'wrapup' }) }, '🎓 ' + tE('engine.thr.wrapUp')) : null);
   bar.append(row);
   if (actions.children.length) bar.append(actions);
   if (ts && ts.threads.length) {

@@ -1,0 +1,103 @@
+{
+ "Noto Sans Arabic": {
+  "slug": "noto-sans-arabic",
+  "license": "OFL-1.1",
+  "source": "https://github.com/google/fonts/tree/main/ofl/notosansarabic",
+  "weights": "400–700 (variable)",
+  "files": [
+   {
+    "file": "var.woff2",
+    "chars": 1212,
+    "bytes": 84108
+   }
+  ]
+ },
+ "Noto Naskh Arabic": {
+  "slug": "noto-naskh-arabic",
+  "license": "OFL-1.1",
+  "source": "https://github.com/google/fonts/tree/main/ofl/notonaskharabic",
+  "weights": "400–700 (variable)",
+  "files": [
+   {
+    "file": "var.woff2",
+    "chars": 1212,
+    "bytes": 88516
+   }
+  ]
+ },
+ "Noto Sans Hebrew": {
+  "slug": "noto-sans-hebrew",
+  "license": "OFL-1.1",
+  "source": "https://github.com/google/fonts/tree/main/ofl/notosanshebrew",
+  "weights": "400–700 (variable)",
+  "files": [
+   {
+    "file": "var.woff2",
+    "chars": 134,
+    "bytes": 10292
+   }
+  ]
+ },
+ "Noto Sans Devanagari": {
+  "slug": "noto-sans-devanagari",
+  "license": "OFL-1.1",
+  "source": "https://github.com/google/fonts/tree/main/ofl/notosansdevanagari",
+  "weights": "400–700 (variable)",
+  "files": [
+   {
+    "file": "var.woff2",
+    "chars": 202,
+    "bytes": 79772
+   }
+  ]
+ },
+ "Noto Sans SC": {
+  "slug": "noto-sans-sc",
+  "license": "OFL-1.1",
+  "source": "https://github.com/google/fonts/tree/main/ofl/notosanssc",
+  "weights": "400–700 (variable)",
+  "files": [
+   {
+    "file": "0-var.woff2",
+    "chars": 1200,
+    "bytes": 277700
+   },
+   {
+    "file": "1-var.woff2",
+    "chars": 1200,
+    "bytes": 334548
+   },
+   {
+    "file": "2-var.woff2",
+    "chars": 90,
+    "bytes": 31752
+   }
+  ]
+ },
+ "Noto Sans TC": {
+  "slug": "noto-sans-tc",
+  "license": "OFL-1.1",
+  "source": "https://github.com/google/fonts/tree/main/ofl/notosanstc",
+  "weights": "400–700 (variable)",
+  "files": [
+   {
+    "file": "var.woff2",
+    "chars": 290,
+    "bytes": 64412
+   }
+  ]
+ },
+ "Noto Sans JP": {
+  "slug": "noto-sans-jp",
+  "license": "OFL-1.1",
+  "source": "https://github.com/google/fonts/tree/main/ofl/notosansjp",
+  "weights": "400–700 (variable)",
+  "files": [
+   {
+    "file": "var.woff2",
+    "chars": 493,
+    "bytes": 200272
+   }
+  ]
+ }
+}

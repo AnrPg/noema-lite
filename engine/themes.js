@@ -1,11 +1,12 @@
 /* =====================================================================================
    noema-lite — characters (themes). One character = one theme: palette (light and dark), fonts, the shape of
-   cards, buttons and icon tiles, the still landscape, the collection on Progress, and the tutor's name and face.
+   cards, buttons and icon tiles, the still landscape, the collection on Progress, and the tutor's face; the names and words of the characters are in i18n/characters/.
    Data: 29 characters in three groups (animals, fairy tales, grown-up). Loaded before the loader, so the first
    screen already wears the learner's character. Pictures live in engine/art.js. docs/UI_MAP.md
    ===================================================================================== */
 window.NoemaThemes = (() => {
   'use strict';
+  /* i18n-ignore-start — fonts, colours and shapes, no words for learners */
   /* palette order: bg paper ink ink2 ink3 line acc acc-ink acc-soft t1 t1i t2 t2i t3 t3i t4 t4i deco1 deco2 deco3 · shape: r br ir sw cap */
   const DATA = {"hedge":{"group":"animals","tone":"cute","disp":"Alegreya","dw":700,"dsty":"normal","body":"Alegreya Sans","ru":null,"shape":["20px","14px","13px","1.8","round"],"light":["#faf7f0","#ffffff","#2f2a24","#6b6358","#a39a8c","#ece5d8","#5f8d5a","#ffffff","#e6efe2","#e6efe2","#557a51","#f6ead0","#9a7424","#f5e1dc","#a5584c","#e8e4f2","#6a5f97","#e7eedd","#efe8d6","#dfe8d3"],"dark":["#1b1d18","#24271f","#eeeadf","#b7b0a2","#857e71","#34382c","#9cc596","#1b1d18","#2c3a2a","#2c3a2a","#a9d0a3","#3a3222","#e5c37a","#3b2a27","#e7a497","#2d2a3c","#b9aee6","#22281e","#262920","#283024"]},
     "owl":{"group":"animals","tone":"cute","disp":"EB Garamond","dw":600,"dsty":"normal","body":"Literata","ru":null,"shape":["14px","10px","10px","1.5","round"],"light":["#f8f7fc","#ffffff","#2b2840","#625e7c","#9d99b5","#e9e6f3","#7466b8","#ffffff","#ece8f8","#ece8f8","#5f52a6","#f7efd6","#93721f","#f6e3ea","#a4566f","#e2eef3","#3f7a8e","#ece9f7","#f3f0fb","#e4e0f3"],"dark":["#17162a","#201f36","#eeecfa","#b3aed0","#7f7a9e","#2f2d4a","#b1a6ec","#17162a","#2b2850","#2b2850","#c4bbf5","#3a3322","#e8cf8a","#3a2632","#eeb0c4","#1f3340","#9fd0e0","#1d1c33","#22213a","#25233f"]},
@@ -36,82 +37,24 @@ window.NoemaThemes = (() => {
     "bioF":{"group":"grown","tone":"serious","disp":"Commissioner","dw":700,"dsty":"normal","body":"Ubuntu","ru":null,"shape":["18px","12px","50%","1.6","round"],"light":["#f8f4f5","#ffffff","#33262b","#6e5d63","#aca1a5","#eee2e6","#b0506e","#ffffff","#f5e3e9","#f5e3e9","#9a4862","#f4ebd6","#86682a","#f5e4d8","#a0522d","#e1ecf3","#3a6a8a","#f4eaee","#ecd9e1","#d9b6c4"],"dark":["#170f12","#201519","#ede8ea","#baabb0","#847177","#372a2e","#d39dad","#170f12","#411f2a","#411f2a","#dfb9c5","#39301d","#e3d1ab","#39261d","#e3bdab","#1d2e39","#b0cbde","#21161a","#26191f","#312127"]},
     "hydra":{"group":"grown","tone":"serious","disp":"Noto Serif","dw":700,"dsty":"normal","body":"Noto Sans","ru":null,"shape":["20px","14px","13px","1.8","round"],"light":["#f0f6f5","#ffffff","#213432","#56706c","#9bacaa","#dcebe8","#2f8a83","#ffffff","#dcefed","#dcefed","#2c7b74","#f4ebd6","#86682a","#f5e3df","#a24f3f","#e8e3f3","#5f52a6","#e4f0ee","#d0e6e2","#a9cfc8"],"dark":["#0f1717","#15201f","#e8eded","#abbab9","#718483","#2a3736","#94dbd5","#0f1717","#1f413f","#1f413f","#b3e5e1","#39301d","#e3d1ab","#39221d","#e0b6ae","#221d39","#bab4da","#172321","#1b2927","#243633"]},
     "prism":{"group":"grown","tone":"strict","disp":"Inter","dw":700,"dsty":"normal","body":"Inter","ru":null,"shape":["6px","4px","3px","1.6","square"],"light":["#f7f8fa","#ffffff","#1b1f26","#545c69","#9299a5","#e4e7ec","#3b5bb5","#ffffff","#e5eaf7","#e5eaf7","#33509f","#e7ecef","#46566a","#e3efec","#2e6f63","#f2ece0","#7d6430","#eef0f3","#e9ecf0","#f1f2f5"],"dark":["#0f1217","#171b22","#e7eaef","#a5adb9","#6f7785","#282e38","#8ea7f0","#0f1217","#1f2a47","#1f2a47","#a9bcf3","#232a33","#b8c3d1","#19302b","#94d1c3","#332c1c","#dcc690","#13161c","#151a20","#12151a"]}};
-  /* name · short name · world · the place of level 7 · the collection on Progress · one item of it */
-  const TEXT = {
-    hedge: { en: ['Explorer hedgehog', 'Hedgehog', 'The forest path', 'Deep forest', 'Your tree', 'leaf'], el: ['Σκαντζοχοιράκι εξερευνητής', 'Σκαντζοχοιράκι', 'Το μονοπάτι του δάσους', 'Βαθύ δάσος', 'Το δέντρο σου', 'φύλλο'], ru: ['Ёжик-путешественник', 'Ёжик', 'Лесная тропа', 'Чаща', 'Твоё дерево', 'листок'], fr: ['Hérisson explorateur', 'Hérisson', 'Le sentier de la forêt', 'La forêt profonde', 'Ton arbre', 'feuille'] },
-    owl: { en: ['Treasure-hunter owlet', 'Owlet', 'The tower of books', 'The map room', 'Your library', 'book'], el: ['Κουκουβαγίτσα κυνηγός θησαυρών', 'Κουκουβαγίτσα', 'Ο πύργος με τα βιβλία', 'Η αίθουσα των χαρτών', 'Η βιβλιοθήκη σου', 'βιβλίο'], ru: ['Совёнок — охотник за сокровищами', 'Совёнок', 'Башня книг', 'Зал карт', 'Твоя библиотека', 'книга'], fr: ['Petite chouette chasseuse de trésors', 'Petite chouette', 'La tour aux livres', 'La salle des cartes', 'Ta bibliothèque', 'livre'] },
-    axo: { en: ['Axolotl of the deep', 'Axolotl', 'The coral reef', 'The coral garden', 'Your reef', 'pearl'], el: ['Αξόλοτλ του βυθού', 'Αξόλοτλ', 'Ο κοραλλένιος ύφαλος', 'Κοραλλένιος κήπος', 'Ο ύφαλός σου', 'μαργαριτάρι'], ru: ['Аксолотль из глубин', 'Аксолотль', 'Коралловый риф', 'Коралловый сад', 'Твой риф', 'жемчужина'], fr: ['Axolotl des profondeurs', 'Axolotl', 'Le récif de corail', 'Le jardin de corail', 'Ton récif', 'perle'] },
-    dragon: { en: ['Crystal dragonling', 'Dragonling', 'The cave of gems', 'The crystal cave', 'Your hoard', 'gem'], el: ['Δρακάκι των κρυστάλλων', 'Δρακάκι', 'Η σπηλιά με τα πετράδια', 'Η σπηλιά των κρυστάλλων', 'Ο θησαυρός σου', 'πετράδι'], ru: ['Дракончик кристаллов', 'Дракончик', 'Пещера самоцветов', 'Хрустальная пещера', 'Твой клад', 'самоцвет'], fr: ['Petit dragon des cristaux', 'Petit dragon', 'La grotte aux pierres précieuses', 'La grotte de cristal', 'Ton trésor', 'pierre précieuse'] },
-    alien: { en: ['Alien engineer', 'Alien', 'The space station', 'The ring of Saturn', 'Your solar system', 'planet'], el: ['Εξωγήινος μηχανικός', 'Εξωγήινος', 'Ο διαστημικός σταθμός', 'Ο δακτύλιος του Κρόνου', 'Το ηλιακό σου σύστημα', 'πλανήτης'], ru: ['Инопланетянин-инженер', 'Инопланетянин', 'Космическая станция', 'Кольцо Сатурна', 'Твоя Солнечная система', 'планета'], fr: ['Extraterrestre ingénieur', 'Extraterrestre', 'La station spatiale', 'L’anneau de Saturne', 'Ton système solaire', 'planète'] },
-    bear: { en: ['Pirate bear cub', 'Bear cub', 'Treasure island', 'Pirates’ cove', 'Your chest', 'gold coin'], el: ['Αρκουδάκι πειρατής', 'Αρκουδάκι', 'Το νησί του θησαυρού', 'Ο κόλπος των πειρατών', 'Το σεντούκι σου', 'φλουρί'], ru: ['Медвежонок-пират', 'Медвежонок', 'Остров сокровищ', 'Пиратская бухта', 'Твой сундук', 'золотая монета'], fr: ['Ourson pirate', 'Ourson', 'L’île au trésor', 'La crique des pirates', 'Ton coffre', 'pièce d’or'] },
-    fruit: { en: ['Little mandarin', 'Mandarin', 'The sunny orchard', 'The great orchard', 'Your fruit salad', 'fruit'], el: ['Μανταρινάκι', 'Μανταρινάκι', 'Ο ηλιόλουστος οπωρώνας', 'Ο μεγάλος οπωρώνας', 'Η φρουτοσαλάτα σου', 'φρούτο'], ru: ['Мандаринчик', 'Мандаринчик', 'Солнечный сад', 'Большой сад', 'Твой фруктовый салат', 'фрукт'], fr: ['Petite mandarine', 'Mandarine', 'Le verger ensoleillé', 'Le grand verger', 'Ta salade de fruits', 'fruit'] },
-    knight: { en: ['Little knight', 'Knight', 'The castle on the hill', 'The castle courtyard', 'Your banners', 'banner'], el: ['Ιπποτάκος', 'Ιπποτάκος', 'Το κάστρο στον λόφο', 'Η αυλή του κάστρου', 'Τα λάβαρά σου', 'λάβαρο'], ru: ['Рыцарёнок', 'Рыцарёнок', 'Замок на холме', 'Двор замка', 'Твои знамёна', 'знамя'], fr: ['Petit chevalier', 'Chevalier', 'Le château sur la colline', 'La cour du château', 'Tes bannières', 'bannière'] },
-    berry: { en: ['Strawberry girl', 'Strawberry', 'The strawberry garden', 'The strawberry fair', 'Your strawberry basket', 'strawberry'], el: ['Κοριτσάκι φράουλα', 'Φράουλα', 'Ο κήπος με τις φράουλες', 'Η γιορτή της φράουλας', 'Το καλαθάκι σου', 'φράουλα'], ru: ['Девочка-клубничка', 'Клубничка', 'Клубничный сад', 'Клубничная ярмарка', 'Твоя корзинка клубники', 'клубничка'], fr: ['Petite fraise', 'Fraise', 'Le jardin des fraises', 'La fête des fraises', 'Ton panier de fraises', 'fraise'] },
-    hood: { en: ['Little Red Riding Hood', 'Red Riding Hood', 'The path to Grandma’s', 'The strawberry clearing', 'Your basket', 'flower'], el: ['Κοκκινοσκουφίτσα', 'Κοκκινοσκουφίτσα', 'Το μονοπάτι για τη γιαγιά', 'Το ξέφωτο με τις φράουλες', 'Το καλάθι σου', 'λουλούδι'], ru: ['Красная Шапочка', 'Красная Шапочка', 'Тропинка к бабушке', 'Земляничная поляна', 'Твоя корзинка', 'цветок'], fr: ['Le Petit Chaperon rouge', 'Chaperon rouge', 'Le chemin de mère-grand', 'La clairière aux fraises', 'Ton panier', 'fleur'] },
-    piglet: { en: ['Builder piglet', 'Piglet', 'The brick house', 'The second floor', 'Your house', 'brick'], el: ['Γουρουνάκι χτίστης', 'Γουρουνάκι', 'Το σπίτι με τα τούβλα', 'Ο δεύτερος όροφος', 'Το σπίτι σου', 'τούβλο'], ru: ['Поросёнок-строитель', 'Поросёнок', 'Кирпичный дом', 'Второй этаж', 'Твой дом', 'кирпич'], fr: ['Petit cochon bâtisseur', 'Petit cochon', 'La maison de briques', 'Le premier étage', 'Ta maison', 'brique'] },
-    candy: { en: ['Hansel and Gretel', 'Hansel & Gretel', 'The gingerbread house', 'The forest of crumbs', 'Your sugar house', 'sweet'], el: ['Χάνσελ και Γκρέτελ', 'Χάνσελ & Γκρέτελ', 'Το ζαχαρένιο σπιτάκι', 'Το δάσος με τα ψίχουλα', 'Το ζαχαρένιο σου σπίτι', 'καραμέλα'], ru: ['Гензель и Гретель', 'Гензель и Гретель', 'Пряничный домик', 'Лес хлебных крошек', 'Твой сахарный домик', 'конфета'], fr: ['Hansel et Gretel', 'Hansel et Gretel', 'La maison en pain d’épice', 'La forêt des miettes', 'Ta maison en sucre', 'bonbon'] },
-    jack: { en: ['Jack and the beanstalk', 'Jack', 'The beanstalk to the clouds', 'The castle in the clouds', 'Your beanstalk', 'leaf'], el: ['Ο Τζακ και η φασολιά', 'Τζακ', 'Η φασολιά ως τα σύννεφα', 'Το κάστρο στα σύννεφα', 'Η φασολιά σου', 'φύλλο'], ru: ['Джек и бобовый стебель', 'Джек', 'Бобовый стебель до облаков', 'Замок в облаках', 'Твой бобовый стебель', 'листок'], fr: ['Jack et le haricot magique', 'Jack', 'Le haricot jusqu’aux nuages', 'Le château dans les nuages', 'Ton haricot magique', 'feuille'] },
-    frog: { en: ['The frog prince', 'Frog prince', 'The palace pond', 'The well of the golden ball', 'Your pond', 'water lily'], el: ['Ο πρίγκιπας βάτραχος', 'Βάτραχος', 'Η λίμνη του παλατιού', 'Το πηγάδι με τη χρυσή μπάλα', 'Η λίμνη σου', 'νούφαρο'], ru: ['Принц-лягушонок', 'Лягушонок', 'Пруд у дворца', 'Колодец с золотым мячиком', 'Твой пруд', 'кувшинка'], fr: ['Le prince grenouille', 'Grenouille', 'L’étang du palais', 'Le puits de la balle d’or', 'Ton étang', 'nénuphar'] },
-    puss: { en: ['Puss in Boots', 'Puss', 'The Marquis’s estate', 'The ogre’s castle', 'Your hat', 'feather'], el: ['Ο παπουτσωμένος γάτος', 'Γάτος', 'Τα κτήματα του Μαρκησίου', 'Ο πύργος του μάγου', 'Το καπέλο σου', 'φτερό'], ru: ['Кот в сапогах', 'Кот', 'Владения маркиза', 'Замок людоеда', 'Твоя шляпа', 'перо'], fr: ['Le Chat botté', 'Chat botté', 'Le domaine du marquis', 'Le château de l’ogre', 'Ton chapeau', 'plume'] },
-    wolf: { en: ['Mountain wolf', 'Wolf', 'The ridge at dawn', 'The summit hut', 'Your peaks', 'peak'], el: ['Λύκος των βουνών', 'Λύκος', 'Η οροσειρά την αυγή', 'Το καταφύγιο της κορυφής', 'Οι κορυφές σου', 'κορυφή'], ru: ['Горный волк', 'Волк', 'Хребет на рассвете', 'Приют на вершине', 'Твои вершины', 'вершина'], fr: ['Loup des montagnes', 'Loup', 'La crête à l’aube', 'Le refuge du sommet', 'Tes sommets', 'sommet'] },
-    eagle: { en: ['Eagle pilot', 'Eagle', 'Above the clouds', 'The control tower', 'Your sky chart', 'star'], el: ['Αετός πιλότος', 'Αετός', 'Πάνω από τα σύννεφα', 'Ο πύργος ελέγχου', 'Ο ουράνιος χάρτης σου', 'αστέρι'], ru: ['Орёл-пилот', 'Орёл', 'Над облаками', 'Диспетчерская вышка', 'Твоя звёздная карта', 'звезда'], fr: ['Aigle pilote', 'Aigle', 'Au-dessus des nuages', 'La tour de contrôle', 'Ta carte du ciel', 'étoile'] },
-    robot: { en: ['Lab robot', 'Robot', 'The robotics lab', 'The data centre', 'Your circuit board', 'chip'], el: ['Ρομπότ του εργαστηρίου', 'Ρομπότ', 'Το εργαστήριο ρομποτικής', 'Το κέντρο δεδομένων', 'Η πλακέτα σου', 'τσιπ'], ru: ['Робот из лаборатории', 'Робот', 'Лаборатория робототехники', 'Центр обработки данных', 'Твоя плата', 'чип'], fr: ['Robot de laboratoire', 'Robot', 'Le laboratoire de robotique', 'Le centre de données', 'Ta carte électronique', 'puce'] },
-    heron: { en: ['Grey heron', 'Heron', 'The wetland at dawn', 'The reed lake', 'Your reeds', 'reed'], el: ['Σταχτοτσικνιάς', 'Ερωδιός', 'Ο υγρότοπος την αυγή', 'Η λίμνη με τα καλάμια', 'Οι καλαμιές σου', 'καλάμι'], ru: ['Серая цапля', 'Цапля', 'Болото на рассвете', 'Озеро в камышах', 'Твои камыши', 'камыш'], fr: ['Héron cendré', 'Héron', 'Le marais à l’aube', 'Le lac aux roseaux', 'Tes roseaux', 'roseau'] },
-    prism: { en: ['Prism', 'Prism', 'The grid', 'The core', 'Your facets', 'facet'], el: ['Πρίσμα', 'Πρίσμα', 'Το πλέγμα', 'Ο πυρήνας', 'Οι έδρες σου', 'έδρα'], ru: ['Призма', 'Призма', 'Сетка', 'Ядро', 'Твои грани', 'грань'], fr: ['Prisme', 'Prisme', 'La grille', 'Le noyau', 'Tes facettes', 'facette'] },
-    litM: { en: ['Young philologist', 'Philologist', 'The old library', 'The rare-books room', 'Your bookcase', 'book'], el: ['Νεαρός φιλόλογος', 'Φιλόλογος', 'Η παλιά βιβλιοθήκη', 'Η αίθουσα των σπάνιων βιβλίων', 'Η βιβλιοθήκη σου', 'βιβλίο'], ru: ['Молодой филолог', 'Филолог', 'Старая библиотека', 'Зал редких книг', 'Твой книжный шкаф', 'книга'], fr: ['Jeune philologue', 'Philologue', 'La vieille bibliothèque', 'La salle des livres rares', 'Ta bibliothèque', 'livre'] },
-    litF: { en: ['Bookworm philologist', 'Bookworm', 'The reading room', 'The dictionary archive', 'Your inkwell', 'quill'], el: ['Βιβλιοφάγος φιλόλογος', 'Βιβλιοφάγος', 'Το αναγνωστήριο', 'Το αρχείο των λεξικών', 'Το μελανοδοχείο σου', 'φτερό γραφής'], ru: ['Филолог-книгочей', 'Книгочей', 'Читальный зал', 'Архив словарей', 'Твоя чернильница', 'перо'], fr: ['Philologue dévoreuse de livres', 'Dévoreuse de livres', 'La salle de lecture', 'Les archives des dictionnaires', 'Ton encrier', 'plume'] },
-    techM: { en: ['Tech nerd', 'Nerd', 'The coding den', 'The midnight hackathon', 'Your motherboard', 'microchip'], el: ['Τεχνολογικό σπασικλάκι', 'Σπασικλάκι', 'Η φωλιά του κώδικα', 'Το μεταμεσονύχτιο hackathon', 'Η μητρική σου', 'μικροτσίπ'], ru: ['Компьютерный гик', 'Гик', 'Логово программиста', 'Ночной хакатон', 'Твоя материнская плата', 'микрочип'], fr: ['Geek de l’informatique', 'Geek', 'Le repaire du code', 'Le hackathon de minuit', 'Ta carte mère', 'puce'] },
-    techF: { en: ['Computer genius', 'Genius', 'The server room', 'The night shift', 'Your bathtub of ducks', 'rubber duck'], el: ['Ιδιοφυΐα των υπολογιστών', 'Ιδιοφυΐα', 'Η αίθουσα των server', 'Η νυχτερινή βάρδια', 'Η μπανιέρα με τα παπάκια σου', 'λαστιχένιο παπάκι'], ru: ['Компьютерный гений', 'Гений', 'Серверная', 'Ночная смена', 'Твоя ванна с утятами', 'резиновый утёнок'], fr: ['Génie de l’informatique', 'Génie', 'La salle des serveurs', 'L’équipe de nuit', 'Ta baignoire de canards', 'canard en caoutchouc'] },
-    physM: { en: ['Young physicist', 'Physicist', 'The lecture hall', 'The particle lab', 'Your atoms', 'atom'], el: ['Νεαρός φυσικομαθηματικός', 'Φυσικομαθηματικός', 'Το αμφιθέατρο', 'Το εργαστήριο σωματιδίων', 'Τα άτομά σου', 'άτομο'], ru: ['Молодой физик-математик', 'Физик', 'Лекционный зал', 'Лаборатория частиц', 'Твои атомы', 'атом'], fr: ['Jeune physicien', 'Physicien', 'L’amphithéâtre', 'Le laboratoire des particules', 'Tes atomes', 'atome'] },
-    physF: { en: ['Mathematician and physicist', 'Physicist', 'The observatory', 'The quantum lab', 'Your planets', 'planet'], el: ['Μαθηματικός και φυσικός', 'Φυσικός', 'Το αστεροσκοπείο', 'Το κβαντικό εργαστήριο', 'Οι πλανήτες σου', 'πλανήτης'], ru: ['Математик и физик', 'Физик', 'Обсерватория', 'Квантовая лаборатория', 'Твои планеты', 'планета'], fr: ['Mathématicienne et physicienne', 'Physicienne', 'L’observatoire', 'Le laboratoire quantique', 'Tes planètes', 'planète'] },
-    bioM: { en: ['Biochemist', 'Biochemist', 'The bubbling lab', 'The greenhouse lab', 'Your lab bench', 'flask'], el: ['Βιοχημικός', 'Βιοχημικός', 'Το εργαστήριο που αφρίζει', 'Το εργαστήριο-θερμοκήπιο', 'Ο πάγκος σου', 'φλάσκα'], ru: ['Биохимик', 'Биохимик', 'Бурлящая лаборатория', 'Лаборатория-оранжерея', 'Твой лабораторный стол', 'колба'], fr: ['Biochimiste', 'Biochimiste', 'Le labo qui bouillonne', 'Le labo-serre', 'Ta paillasse', 'fiole'] },
-    bioF: { en: ['Biologist and chemist', 'Biologist', 'The cell lab', 'The DNA vault', 'Your model kit', 'molecule'], el: ['Βιολόγος και χημικός', 'Βιολόγος', 'Το εργαστήριο κυττάρων', 'Το θησαυροφυλάκιο του DNA', 'Το κουτί με τα μοντέλα σου', 'μόριο'], ru: ['Биолог и химик', 'Биолог', 'Лаборатория клеток', 'Хранилище ДНК', 'Твой набор моделей', 'молекула'], fr: ['Biologiste et chimiste', 'Biologiste', 'Le labo des cellules', 'La chambre forte de l’ADN', 'Ta boîte de modèles', 'molécule'] },
-    hydra: { en: ['Polyglot Hydra', 'Hydra', 'The lake of Lerna', 'The tower of languages', 'Your stamp album', 'postage stamp'], el: ['Λερναία Ύδρα', 'Ύδρα', 'Η λίμνη της Λέρνας', 'Ο πύργος των γλωσσών', 'Το άλμπουμ σου', 'γραμματόσημο'], ru: ['Лернейская гидра', 'Гидра', 'Лернейское озеро', 'Башня языков', 'Твой альбом марок', 'марка'], fr: ['Hydre de Lerne', 'Hydre', 'Le lac de Lerne', 'La tour des langues', 'Ton album de timbres', 'timbre'] },
-  };
-  /* The tutor is the character. One name per UI language (picked by the owner on 2026-10-08); characters of fairy tales keep
-     the name their tale gives them in each language, when it gives one (2026-10-09).
-     el: [name, gender m|f|n|p, accusative with article?, nominative with article?] · ru: [name, accusative] · fr: [name, "à …" form] · en: [name] */
-  const NAMES = {
-    hedge: { el: ['Αγκαθούλης', 'm'], en: ['Prickles'], ru: ['Колючка', 'Колючку'], fr: ['Piquou', 'à Piquou'] },
-    owl: { el: ['Γλαυκούλα', 'f'], en: ['Hootie'], ru: ['Угуша', 'Угушу'], fr: ['Chouquette', 'à Chouquette'] },
-    axo: { el: ['Μπουρμπουλήθρα', 'f'], en: ['Axie'], ru: ['Аксолоша', 'Аксолошу'], fr: ['Axolou', 'à Axolou'] },
-    dragon: { el: ['Σπιθούλης', 'm'], en: ['Ember'], ru: ['Искорка', 'Искорку'], fr: ['Étincelle', 'à Étincelle'] },
-    alien: { el: ['Γκατζετάκης', 'm'], en: ['Zib'], ru: ['Винтик', 'Винтика'], fr: ['Bidule', 'à Bidule'] },
-    bear: { el: ['Καπετάν Φλουρής', 'm'], en: ['Captain Honeypaw'], ru: ['Капитан Медок', 'Капитана Медка'], fr: ['Capitaine Miel', 'au Capitaine Miel'] },
-    fruit: { el: ['Ζουμερούλης', 'm'], en: ['Clemmie'], ru: ['Мандаринка', 'Мандаринку'], fr: ['Clémentine', 'à Clémentine'] },
-    knight: { el: ['Σερ Λεβέντης', 'm'], en: ['Sir Pip'], ru: ['Сэр Храбрик', 'Сэра Храбрика'], fr: ['Sire Vaillant', 'à Sire Vaillant'] },
-    berry: { el: ['Φραουλίτσα', 'f'], en: ['Berrie'], ru: ['Клубничка', 'Клубничку'], fr: ['Fraisinette', 'à Fraisinette'] },
-    hood: { el: ['Κοκκινοσκουφίτσα', 'f'], en: ['Little Red Riding Hood'], ru: ['Красная Шапочка', 'Красную Шапочку'], fr: ['Le Petit Chaperon rouge', 'au Petit Chaperon rouge'] },
-    piglet: { el: ['Τουβλάκης', 'm'], en: ['Bricksy'], ru: ['Наф-Наф', 'Наф-Нафа'], fr: ['Naf-Naf', 'à Naf-Naf'] },
-    candy: { el: ['Χάνσελ και Γκρέτελ', 'p', 'τον Χάνσελ και την Γκρέτελ', 'ο Χάνσελ και η Γκρέτελ'], en: ['Hansel and Gretel', null, true], ru: ['Гензель и Гретель', 'Гензеля и Гретель', true], fr: ['Hansel et Gretel', 'à Hansel et Gretel', true] },
-    jack: { el: ['Τζακ', 'm'], en: ['Jack'], ru: ['Джек', 'Джека'], fr: ['Jack', 'à Jack'] },
-    frog: { el: ['Πρίγκιπας Κουάξ', 'm'], en: ['Prince Ribbit'], ru: ['Принц Ква', 'Принца Ква'], fr: ['Prince Croâ', 'au Prince Croâ'] },
-    puss: { el: ['Παπουτσωμένος Γάτος', 'm'], en: ['Puss in Boots'], ru: ['Кот в сапогах', 'Кота в сапогах'], fr: ['Le Chat botté', 'au Chat botté'] },
-    wolf: { el: ['Λυκούργος', 'm'], en: ['Ridge'], ru: ['Север', 'Севера'], fr: ['Mistral', 'à Mistral'] },
-    eagle: { el: ['Αιθέρας', 'm'], en: ['Skye'], ru: ['Беркут', 'Беркута'], fr: ['Aquilon', 'à Aquilon'] },
-    robot: { el: ['Κόβαλτ', 'm'], en: ['Cobalt'], ru: ['Кобальт', 'Кобальта'], fr: ['Cobalt', 'à Cobalt'] },
-    heron: { el: ['Ίριδα', 'f'], en: ['Iris'], ru: ['Ирида', 'Ириду'], fr: ['Iris', 'à Iris'] },
-    prism: { el: ['Πρίσμα', 'n'], en: ['Prism'], ru: ['Призма', 'Призму'], fr: ['Prisme', 'au Prisme'] },
-    litM: { el: ['Έκτορας', 'm'], en: ['Professor Quill'], ru: ['Буквоед', 'Буквоеда'], fr: ['Monsieur Plume', 'à Monsieur Plume'] },
-    litF: { el: ['κα Θάλεια', 'f', 'την κα Θάλεια', 'η κα Θάλεια'], en: ['Paige'], ru: ['Книжница', 'Книжницу'], fr: ['Madame Virgule', 'à Madame Virgule'] },
-    techM: { el: ['Έλιοτ', 'm'], en: ['Byte'], ru: ['Байтик', 'Байтика'], fr: ['Octet', 'à Octet'] },
-    techF: { el: ['Άντα', 'f'], en: ['Pixel'], ru: ['Флешка', 'Флешку'], fr: ['Pixelle', 'à Pixelle'] },
-    physM: { el: ['Καθηγητής Πι', 'm'], en: ['Professor Pi'], ru: ['Профессор Пи', 'Профессора Пи'], fr: ['Professeur Pi', 'au Professeur Pi'] },
-    physF: { el: ['Υπατία', 'f'], en: ['Dr. Quanta'], ru: ['Кванточка', 'Кванточку'], fr: ['Docteure Quanta', 'à la Docteure Quanta'] },
-    bioM: { el: ['Αιμίλιος', 'm'], en: ['Dr. Fizz'], ru: ['Доктор Пробиркин', 'Доктора Пробиркина'], fr: ['Docteur Éprouvette', 'au Docteur Éprouvette'] },
-    bioF: { el: ['Δρ. Ροζαλίν', 'f', 'τη Δρ. Ροζαλίν', 'η Δρ. Ροζαλίν'], en: ['Dr. Helix'], ru: ['Молекулка', 'Молекулку'], fr: ['Docteure Hélice', 'à la Docteure Hélice'] },
-    hydra: { el: ['Πολυλογού', 'f'], en: ['Polly Glot'], ru: ['Гидруша', 'Гидрушу'], fr: ['Hydrette', 'à Hydrette'] },
-  };
+  /* i18n-ignore-end */
+  /* The characters' words live in the catalog i18n/characters/<locale>.arb (docs/i18n.md), keys char.<id>.…: the tutor's name
+     (name; nameNom with article as a subject, nameAcc as an object, nameTo after "to/at" — every language gives the forms it needs,
+     English has the plain name in all four) and the character's title, short title, world, the place of level 7, the collection
+     on Progress and one item of it. Names were picked by the owner on 2026-10-08; fairy-tale characters keep the name their tale
+     gives them in each language (2026-10-09). Hansel and Gretel are two: their name goes with plural verbs (x-plural in en.arb). */
+  const PLURAL = { candy: true };
   const ORDER = Object.keys(DATA);
   const GROUPS = { animals: ORDER.filter(k => DATA[k].group === 'animals'), tales: ORDER.filter(k => DATA[k].group === 'tales'), grown: ORDER.filter(k => DATA[k].group === 'grown') };
   /* a text-friendly face for places where only a character fits (titles of conversations, plain-text buttons) */
   const EMOJI = { hedge: '🦔', owl: '🦉', axo: '🦎', dragon: '🐉', alien: '👽', bear: '🐻', fruit: '🍊', knight: '🛡️', berry: '🍓', hood: '🧺', piglet: '🐷', candy: '🍬', jack: '🌱', frog: '🐸', puss: '🐱', wolf: '🐺', eagle: '🦅', robot: '🤖', heron: '🪶', prism: '🔷',
     litM: '📚', litF: '✒️', techM: '💻', techF: '🖥️', physM: '⚛️', physF: '🪐', bioM: '🧪', bioF: '🧬', hydra: '🐲' };
   const KEYS = ['bg', 'paper', 'ink', 'ink2', 'ink3', 'line', 'acc', 'acc-ink', 'acc-soft', 't1', 't1i', 't2', 't2i', 't3', 't3i', 't4', 't4i', 'deco1', 'deco2', 'deco3'];
-  const SYS = 'ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif';
+  const SYS = '"Noto Sans Arabic","Noto Sans Hebrew","Noto Sans Devanagari",var(--noema-cjk,"Noto Sans SC"),ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif';   // + the scripts’ self-hosted Noto fonts (fonts/scripts.css, docs/i18n.md §2)   // i18n-ignore (font stack)
   const q = f => `"${f}"`;
   const DAY = 864e5, FREE_DAYS = 15, CHANGE_DAYS = 5, PREVIEW_MS = 5 * 60e3, DEFAULT = 'hedge';
 
+  /* i18n-ignore-start — CSS */
   /* ---------- CSS: one block per character; every [data-m] element wears its own theme (the gallery shows each in its own clothes) ---------- */
   function vars(m, dark) {
     const d = DATA[m], c = dark ? d.dark : d.light;
@@ -137,6 +80,7 @@ window.NoemaThemes = (() => {
     // html[data-m][data-m]: outranks the engine's own dark-mode tokens (:root[data-theme=dark] …), so every screen wears the character
     return out + `[data-m],html[data-m][data-m]{${BRIDGE}}\n`;
   }
+  /* i18n-ignore-end */
   function ensureCSS() {
     if (cssDone || typeof document === 'undefined') return; cssDone = true;
     const st = document.createElement('style'); st.id = 'noema-themes'; st.textContent = css(); document.head.append(st);
@@ -194,32 +138,33 @@ window.NoemaThemes = (() => {
   function endPreview(reapply = true) { try { sessionStorage.removeItem('noema-preview'); } catch (e) { } clearInterval(pvTimer); pvTimer = 0; if (reapply) apply(owned()); }
   function watchPreview() { clearInterval(pvTimer); pvTimer = setInterval(() => { if (!preview()) endPreview(); listeners.forEach(f => { try { f(current(), 'tick'); } catch (e) { } }); }, 1000); }
 
-  /* ---------- names: per character and interface language; Greek keeps gender and the accusative ("Ρώτα τον Αγκαθούλη") ---------- */
+  /* ---------- names and words of a character, per interface language, from the catalog (i18n/characters/; English as the fallback).
+     The forms of the tutor's name are the translator's: Greek "Ρώτα τον Αγκαθούλη", Russian "Спроси Колючку", French "Demande à Piquou". ---------- */
   const uiLang = () => { try { return window.NoemaI18n ? NoemaI18n.lang(settingsOf().lang) : 'en'; } catch (e) { return 'en'; } };
-  function grk([n, g, acc, nom]) {
-    if (g === 'p') return { n, nom: nom || 'τα ' + n, acc: acc || 'τα ' + n, pl: true };
-    const art = g === 'm' ? 'τον' : g === 'f' ? (/^([αεηιουωάέήίόύώ]|κ|π|τ|ξ|ψ|μπ|ντ|γκ|τσ|τζ)/i.test(n) ? 'την' : 'τη') : 'το';
-    const an = g === 'm' ? n.split(' ').map(w => w.endsWith('ς') ? w.slice(0, -1) : w).join(' ') : n;
-    return { n, nom: nom || { m: 'ο', f: 'η', n: 'το' }[g] + ' ' + n, acc: acc || art + ' ' + an, pl: false };
-  }
+  /** The UI locale to read a character's words in: the given one when the app offers it, else English. */
+  const charLoc = lang => { try { return (window.NoemaI18n && NoemaI18n.match(lang)) || 'en'; } catch (e) { return 'en'; } };
+  const word = (key, loc) => window.NoemaI18n ? NoemaI18n.t(key, undefined, loc) : key;
   /** tutor('hedge') → { n: 'Αγκαθούλης', nom: 'ο Αγκαθούλης', acc: 'τον Αγκαθούλη', to: 'στον Αγκαθούλη', pl: false } in the interface language. */
   function tutor(m = current(), lang = uiLang()) {
-    const o = NAMES[m] || NAMES[DEFAULT]; lang = o[lang] ? lang : 'en';
-    const e = o[lang];
-    if (lang === 'el') { const g = grk(e); return { ...g, to: 'σ' + g.acc, emoji: EMOJI[m] }; }
-    if (lang === 'ru') return { n: e[0], nom: e[0], acc: e[1] || e[0], to: e[1] || e[0], pl: !!e[2], emoji: EMOJI[m] };
-    if (lang === 'fr') return { n: e[0], nom: e[0], acc: e[0], to: e[1] || 'à ' + e[0], pl: !!e[2], emoji: EMOJI[m] };
-    return { n: e[0], nom: e[0], acc: e[0], to: e[0], pl: !!e[2], emoji: EMOJI[m] };
+    if (!DATA[m]) m = DEFAULT;
+    const loc = charLoc(lang), k = f => `char.${m}.${f}`, n = word(k('name'), loc);
+    // a form a language has not given (yet) is its own plain name, never the English form
+    const form = f => { const v = word(k(f), loc); return loc !== 'en' && v === word(k(f), 'en') ? n : v; };
+    return { n, nom: form('nameNom'), acc: form('nameAcc'), to: form('nameTo'), pl: !!PLURAL[m], emoji: EMOJI[m] };
   }
-  /** [name, short, world, place, collection, item] of a character in the interface language. */
-  function text(m = current(), lang = uiLang()) { const t = TEXT[m] || TEXT[DEFAULT]; const a = t[lang] || t.en; return { name: a[0], short: a[1], world: a[2], place: a[3], coll: a[4], item: a[5] }; }
+  /** { name (the title), short, world, place, coll (the collection), item } of a character in the interface language. */
+  function text(m = current(), lang = uiLang()) {
+    if (!DATA[m]) m = DEFAULT;
+    const loc = charLoc(lang), w = f => word(`char.${m}.${f}`, loc);
+    return { name: w('title'), short: w('short'), world: w('world'), place: w('place'), coll: w('coll'), item: w('item') };
+  }
 
   /* ---------- the rest of the look & feel the learner picks: what to learn and how much "game" ---------- */
   const world = (acc) => settingsOf(acc).world || 'know';                       // know · lang · both
   const game = (acc) => locked() && DATA[cfg().character].tone === 'strict' ? (settingsOf(acc).game === 'off' ? 'off' : 'calm') : (settingsOf(acc).game || (DATA[current(acc)].tone === 'strict' ? 'calm' : 'playful'));   // playful · calm · off
 
   if (typeof window !== 'undefined' && preview()) watchPreview();   // a try that goes on after a reload still ends on time
-  return { DATA, ORDER, GROUPS, EMOJI, NAMES, TEXT, css, ensureCSS, apply, current, owned, preview, startPreview, endPreview, choose, canChange, nextChangeAt, freeUntil, locked, onChange,
+  return { DATA, ORDER, GROUPS, EMOJI, css, ensureCSS, apply, current, owned, preview, startPreview, endPreview, choose, canChange, nextChangeAt, freeUntil, locked, onChange,
     tutor, text, uiLang, world, game, settings: settingsOf, putSettings, tone: (m = current()) => DATA[m].tone, PREVIEW_MS, CHANGE_DAYS, FREE_DAYS };
 })();
 if (window.NoemaThemes) window.NoemaThemes.apply();

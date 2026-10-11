@@ -1,0 +1,907 @@
+{
+  "@@locale": "en",
+  "err.auth.invalid_credentials": "Invalid login credentials",
+  "@err.auth.invalid_credentials": {
+    "description": "Sign-in / account error from the cloud (Supabase Auth), shown in the sign-in form or the sync status. Wrong e-mail or password."
+  },
+  "err.auth.email_not_confirmed": "Email not confirmed",
+  "@err.auth.email_not_confirmed": {
+    "description": "Sign-in / account error from the cloud (Supabase Auth), shown in the sign-in form or the sync status. The learner has not clicked the link in the confirmation e-mail yet."
+  },
+  "err.auth.user_already_exists": "User already registered",
+  "@err.auth.user_already_exists": {
+    "description": "Sign-in / account error from the cloud (Supabase Auth), shown in the sign-in form or the sync status. Sign-up with an e-mail address that already has an account."
+  },
+  "err.auth.email_exists": "A user with this email address has already been registered",
+  "@err.auth.email_exists": {
+    "description": "Sign-in / account error from the cloud (Supabase Auth), shown in the sign-in form or the sync status. Changing the e-mail to one another account uses."
+  },
+  "err.auth.weak_password": "Password should be at least {min, number} characters.",
+  "@err.auth.weak_password": {
+    "description": "Sign-in / account error from the cloud (Supabase Auth), shown in the sign-in form or the sync status. The password is too short. min = the shortest length the server accepts.",
+    "placeholders": {
+      "min": {
+        "type": "int",
+        "example": "6"
+      }
+    }
+  },
+  "err.auth.weak_password_other": "This password is too weak or too easy to guess: choose another one.",
+  "@err.auth.weak_password_other": {
+    "description": "Sign-in / account error from the cloud (Supabase Auth), shown in the sign-in form or the sync status. The server refused the password (missing kinds of characters, or a known leaked password)."
+  },
+  "err.auth.email_rate_limit": "Email rate limit exceeded",
+  "@err.auth.email_rate_limit": {
+    "description": "Sign-in / account error from the cloud (Supabase Auth), shown in the sign-in form or the sync status. Too many e-mails (sign-up, password reset) were sent in a short time."
+  },
+  "err.auth.rate_limit": "Request rate limit reached",
+  "@err.auth.rate_limit": {
+    "description": "Sign-in / account error from the cloud (Supabase Auth), shown in the sign-in form or the sync status. Too many sign-in attempts in a short time."
+  },
+  "err.auth.otp_expired": "Email link is invalid or has expired",
+  "@err.auth.otp_expired": {
+    "description": "Sign-in / account error from the cloud (Supabase Auth), shown in the sign-in form or the sync status. The link of a confirmation / sign-in / reset e-mail was already used or is too old."
+  },
+  "err.auth.email_invalid": "Email address is invalid",
+  "@err.auth.email_invalid": {
+    "description": "Sign-in / account error from the cloud (Supabase Auth), shown in the sign-in form or the sync status. The e-mail address is not valid."
+  },
+  "err.auth.signup_disabled": "Signups not allowed for this instance",
+  "@err.auth.signup_disabled": {
+    "description": "Sign-in / account error from the cloud (Supabase Auth), shown in the sign-in form or the sync status. The owner of this noema-lite site has switched off new accounts."
+  },
+  "err.auth.user_banned": "User is banned",
+  "@err.auth.user_banned": {
+    "description": "Sign-in / account error from the cloud (Supabase Auth), shown in the sign-in form or the sync status. The account was blocked by the site owner."
+  },
+  "err.auth.user_not_found": "User not found",
+  "@err.auth.user_not_found": {
+    "description": "Sign-in / account error from the cloud (Supabase Auth), shown in the sign-in form or the sync status. No account with this e-mail address."
+  },
+  "err.auth.same_password": "New password should be different from the old password.",
+  "@err.auth.same_password": {
+    "description": "Sign-in / account error from the cloud (Supabase Auth), shown in the sign-in form or the sync status. Password change to the same password."
+  },
+  "err.auth.email_not_authorized": "Email address not authorized",
+  "@err.auth.email_not_authorized": {
+    "description": "Sign-in / account error from the cloud (Supabase Auth), shown in the sign-in form or the sync status. The site can only send e-mails to some addresses (its mail settings)."
+  },
+  "err.auth.captcha_failed": "Captcha verification failed",
+  "@err.auth.captcha_failed": {
+    "description": "Sign-in / account error from the cloud (Supabase Auth), shown in the sign-in form or the sync status. The anti-robot check failed."
+  },
+  "err.auth.session_expired": "Your sign-in expired: sign in again.",
+  "@err.auth.session_expired": {
+    "description": "Sign-in / account error from the cloud (Supabase Auth), shown in the sign-in form or the sync status. The session token is no longer valid."
+  },
+  "err.auth.not_signed_in": "Not signed in",
+  "@err.auth.not_signed_in": {
+    "description": "Sign-in / account error from the cloud (Supabase Auth), shown in the sign-in form or the sync status. A cloud action without a signed-in account."
+  },
+  "err.auth.network": "Network error — are you offline? ({detail})",
+  "@err.auth.network": {
+    "description": "Sign-in / account error from the cloud (Supabase Auth), shown in the sign-in form or the sync status. The sign-in server could not be reached. detail = the browser’s technical reason (English).",
+    "placeholders": {
+      "detail": {
+        "type": "String",
+        "example": "Failed to fetch"
+      }
+    }
+  },
+  "err.auth.server": "The sign-in service is not answering (HTTP {status}). Try again in a moment.",
+  "@err.auth.server": {
+    "description": "Sign-in / account error from the cloud (Supabase Auth), shown in the sign-in form or the sync status. The server failed (5xx). status = HTTP status code.",
+    "placeholders": {
+      "status": {
+        "type": "int",
+        "example": "503"
+      }
+    }
+  },
+  "err.cloud.network": "Network error — are you offline? ({detail})",
+  "@err.cloud.network": {
+    "description": "Cloud sync / storage error (Supabase), shown in the sync status, toasts or the self-check. The cloud could not be reached. detail = the browser’s technical reason (English).",
+    "placeholders": {
+      "detail": {
+        "type": "String",
+        "example": "Failed to fetch"
+      }
+    }
+  },
+  "err.cloud.storage_full": "This device’s storage is full: some changes from your other devices could not be saved here.",
+  "@err.cloud.storage_full": {
+    "description": "Cloud sync / storage error (Supabase), shown in the sync status, toasts or the self-check. Browser storage (localStorage) is full."
+  },
+  "err.cloud.keeps_changing": "“{key}” keeps changing on another device: trying again later",
+  "@err.cloud.keeps_changing": {
+    "description": "Cloud sync / storage error (Supabase), shown in the sync status, toasts or the self-check. A synced record changed again on another device three times in a row. key = an internal record name.",
+    "placeholders": {
+      "key": {
+        "type": "String",
+        "example": "s:physics:state"
+      }
+    }
+  },
+  "err.cloud.schema_old": "The database is older than this app (a table or column is missing).",
+  "@err.cloud.schema_old": {
+    "description": "Cloud sync / storage error (Supabase), shown in the sync status, toasts or the self-check. The Supabase database needs the newest cloud/supabase.sql (for the site owner)."
+  },
+  "err.cloud.permission": "The cloud refused this (a permission rule).",
+  "@err.cloud.permission": {
+    "description": "Cloud sync / storage error (Supabase), shown in the sync status, toasts or the self-check. Row-level security refused a read or write."
+  },
+  "err.cloud.too_large": "This file is too big for the cloud storage.",
+  "@err.cloud.too_large": {
+    "description": "Cloud sync / storage error (Supabase), shown in the sync status, toasts or the self-check. An upload is larger than the storage accepts per file."
+  },
+  "err.cloud.rate_limit": "Too many requests to the cloud — try again in a moment.",
+  "@err.cloud.rate_limit": {
+    "description": "Cloud sync / storage error (Supabase), shown in the sync status, toasts or the self-check. HTTP 429 from the cloud."
+  },
+  "err.cloud.server": "The cloud is not answering (HTTP {status}). Try again in a moment.",
+  "@err.cloud.server": {
+    "description": "Cloud sync / storage error (Supabase), shown in the sync status, toasts or the self-check. The server failed (5xx). status = HTTP status code.",
+    "placeholders": {
+      "status": {
+        "type": "int",
+        "example": "503"
+      }
+    }
+  },
+  "err.cloud.selftest.value_missing": "value did not come back",
+  "@err.cloud.selftest.value_missing": {
+    "description": "Self-check of the cloud connection (Me › Cloud › Check the cloud connection): a technical finding shown under a failed check. A value written to the database was not read back."
+  },
+  "err.cloud.selftest.row_missing": "row did not come back",
+  "@err.cloud.selftest.row_missing": {
+    "description": "Self-check of the cloud connection (Me › Cloud › Check the cloud connection): a technical finding shown under a failed check. A row written to the database was not read back."
+  },
+  "err.cloud.selftest.column_missing": "column synced_at missing",
+  "@err.cloud.selftest.column_missing": {
+    "description": "Self-check of the cloud connection (Me › Cloud › Check the cloud connection): a technical finding shown under a failed check. synced_at is a database column name: keep it as is."
+  },
+  "err.cloud.selftest.not_listed": "uploaded file not listed",
+  "@err.cloud.selftest.not_listed": {
+    "description": "Self-check of the cloud connection (Me › Cloud › Check the cloud connection): a technical finding shown under a failed check. An uploaded test file is missing from the file list."
+  },
+  "err.cloud.selftest.content_differs": "downloaded content differs",
+  "@err.cloud.selftest.content_differs": {
+    "description": "Self-check of the cloud connection (Me › Cloud › Check the cloud connection): a technical finding shown under a failed check. The downloaded test file is not what was uploaded."
+  },
+  "err.cloud.selftest.public_unreadable": "public file not readable (bucket must be public)",
+  "@err.cloud.selftest.public_unreadable": {
+    "description": "Self-check of the cloud connection (Me › Cloud › Check the cloud connection): a technical finding shown under a failed check. “bucket” = a Supabase storage folder; the site owner must make it public."
+  },
+  "err.share.invalid_email": "Please type a valid e-mail address.",
+  "@err.share.invalid_email": {
+    "description": "Sharing a subject with a person by e-mail: the address typed is refused."
+  },
+  "err.share.own_email": "That is your own e-mail address.",
+  "@err.share.own_email": {
+    "description": "Sharing a subject with a person by e-mail: the address typed is refused. The learner typed their own address."
+  },
+  "err.files.too_big": "The file is {mb, number, ::group-off} MB — too big for a browser to keep (limit {limit, number, ::group-off} GB).",
+  "@err.files.too_big": {
+    "description": "Source files and subject packages (.noema.zip): error shown in a toast or the import log. mb = the file size in MB, limit = the limit in GB.",
+    "placeholders": {
+      "mb": {
+        "type": "int",
+        "example": "2500"
+      },
+      "limit": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "err.files.no_reader": "The package reader is not available.",
+  "@err.files.no_reader": {
+    "description": "Source files and subject packages (.noema.zip): error shown in a toast or the import log. The zip reader could not be loaded."
+  },
+  "err.files.not_zip": "This file is not a noema-lite package (not a readable zip).",
+  "@err.files.not_zip": {
+    "description": "Source files and subject packages (.noema.zip): error shown in a toast or the import log."
+  },
+  "err.files.no_pack_json": "This zip is not a noema-lite package (no pack.json inside).",
+  "@err.files.no_pack_json": {
+    "description": "Source files and subject packages (.noema.zip): error shown in a toast or the import log. pack.json is a file name: keep it."
+  },
+  "err.files.bad_pack_json": "pack.json inside the package is not valid: {detail}",
+  "@err.files.bad_pack_json": {
+    "description": "Source files and subject packages (.noema.zip): error shown in a toast or the import log. detail = the technical reason (English).",
+    "placeholders": {
+      "detail": {
+        "type": "String",
+        "example": "Unexpected token"
+      }
+    }
+  },
+  "err.files.no_writer": "The package writer is not available.",
+  "@err.files.no_writer": {
+    "description": "Source files and subject packages (.noema.zip): error shown in a toast or the import log. The zip writer could not be loaded."
+  },
+  "err.ai.unauthorized": "The key was not accepted — check that you copied all of it (it starts with sk-ant-), or create a new one.",
+  "@err.ai.unauthorized": {
+    "description": "Error of the AI provider (the learner’s own Claude API key or Gemini key), shown in “Create with Claude”, Roadmaps, the language tutor. HTTP 401. sk-ant- is the start of every Claude API key: keep it."
+  },
+  "err.ai.unauthorized_short": "The Claude API key was not accepted.",
+  "@err.ai.unauthorized_short": {
+    "description": "Error of the AI provider (the learner’s own Claude API key or Gemini key), shown in “Create with Claude”, Roadmaps, the language tutor. HTTP 401 (short form)."
+  },
+  "err.ai.forbidden": "This key is not allowed to do that ({detail}). Use a key from your own workspace.",
+  "@err.ai.forbidden": {
+    "description": "Error of the AI provider (the learner’s own Claude API key or Gemini key), shown in “Create with Claude”, Roadmaps, the language tutor. HTTP 403. detail = the API’s reason (English).",
+    "placeholders": {
+      "detail": {
+        "type": "String",
+        "example": "permission_error"
+      }
+    }
+  },
+  "err.ai.no_credit": "Your Claude API account has no credit left. Add credit: platform.claude.com → Settings → Billing.",
+  "@err.ai.no_credit": {
+    "description": "Error of the AI provider (the learner’s own Claude API key or Gemini key), shown in “Create with Claude”, Roadmaps, the language tutor. The API account is out of prepaid credit. “Settings → Billing” are menu names on platform.claude.com (English site)."
+  },
+  "err.ai.no_credit_short": "Your Claude API account has no credit left (platform.claude.com → Settings → Billing).",
+  "@err.ai.no_credit_short": {
+    "description": "Error of the AI provider (the learner’s own Claude API key or Gemini key), shown in “Create with Claude”, Roadmaps, the language tutor. Short form of err.ai.no_credit."
+  },
+  "err.ai.too_large": "A file is too big for the Claude API ({detail}). Split the PDF or attach fewer files.",
+  "@err.ai.too_large": {
+    "description": "Error of the AI provider (the learner’s own Claude API key or Gemini key), shown in “Create with Claude”, Roadmaps, the language tutor. HTTP 413. detail = the API’s reason (English).",
+    "placeholders": {
+      "detail": {
+        "type": "String",
+        "example": "request_too_large"
+      }
+    }
+  },
+  "err.ai.rate_limited": "Too many requests or the spending limit was reached — waiting and trying again… ({detail})",
+  "@err.ai.rate_limited": {
+    "description": "Error of the AI provider (the learner’s own Claude API key or Gemini key), shown in “Create with Claude”, Roadmaps, the language tutor. HTTP 429; the app retries by itself. detail = the API’s reason (English).",
+    "placeholders": {
+      "detail": {
+        "type": "String",
+        "example": "rate_limit_error"
+      }
+    }
+  },
+  "err.ai.overloaded": "Claude is busy right now — trying again…",
+  "@err.ai.overloaded": {
+    "description": "Error of the AI provider (the learner’s own Claude API key or Gemini key), shown in “Create with Claude”, Roadmaps, the language tutor. HTTP 529 (overloaded); the app retries by itself."
+  },
+  "err.ai.http": "HTTP {status}",
+  "@err.ai.http": {
+    "description": "Error of the AI provider (the learner’s own Claude API key or Gemini key), shown in “Create with Claude”, Roadmaps, the language tutor. An API error without any text. status = HTTP status code.",
+    "placeholders": {
+      "status": {
+        "type": "int",
+        "example": "503"
+      }
+    }
+  },
+  "err.ai.aborted": "Stopped.",
+  "@err.ai.aborted": {
+    "description": "Error of the AI provider (the learner’s own Claude API key or Gemini key), shown in “Create with Claude”, Roadmaps, the language tutor. The learner pressed Stop."
+  },
+  "err.ai.network": "No connection to Claude ({detail}). Check the internet connection and press Resume.",
+  "@err.ai.network": {
+    "description": "Error of the AI provider (the learner’s own Claude API key or Gemini key), shown in “Create with Claude”, Roadmaps, the language tutor. “Create with Claude” lost the connection; Resume is the button that continues the job. detail = technical reason (English).",
+    "placeholders": {
+      "detail": {
+        "type": "String",
+        "example": "Failed to fetch"
+      }
+    }
+  },
+  "err.ai.no_connection": "No connection to {provider}: {detail}",
+  "@err.ai.no_connection": {
+    "description": "Error of the AI provider (the learner’s own Claude API key or Gemini key), shown in “Create with Claude”, Roadmaps, the language tutor. provider = Claude or Gemini (a name), detail = technical reason (English).",
+    "placeholders": {
+      "provider": {
+        "type": "String",
+        "example": "Gemini"
+      },
+      "detail": {
+        "type": "String",
+        "example": "Failed to fetch"
+      }
+    }
+  },
+  "err.ai.skill_unavailable": "Could not load the skill from noema-lite ({status}).",
+  "@err.ai.skill_unavailable": {
+    "description": "Error of the AI provider (the learner’s own Claude API key or Gemini key), shown in “Create with Claude”, Roadmaps, the language tutor. The noema-pack-builder skill file could not be downloaded from this website. status = HTTP status.",
+    "placeholders": {
+      "status": {
+        "type": "int",
+        "example": "503"
+      }
+    }
+  },
+  "err.ai.no_key.device": "No Claude API key on this device.",
+  "@err.ai.no_key.device": {
+    "description": "Error of the AI provider (the learner’s own Claude API key or Gemini key), shown in “Create with Claude”, Roadmaps, the language tutor."
+  },
+  "err.ai.no_key.claude": "Add a Claude API key first (⚙️ Settings → Claude).",
+  "@err.ai.no_key.claude": {
+    "description": "Error of the AI provider (the learner’s own Claude API key or Gemini key), shown in “Create with Claude”, Roadmaps, the language tutor. “Settings → Claude” is the path in the app’s menus."
+  },
+  "err.ai.no_key.gemini": "No Gemini key (⚙️ Settings).",
+  "@err.ai.no_key.gemini": {
+    "description": "Error of the AI provider (the learner’s own Claude API key or Gemini key), shown in “Create with Claude”, Roadmaps, the language tutor."
+  },
+  "err.ai.no_key.any": "Add a Claude API key or a Gemini key first.",
+  "@err.ai.no_key.any": {
+    "description": "Error of the AI provider (the learner’s own Claude API key or Gemini key), shown in “Create with Claude”, Roadmaps, the language tutor."
+  },
+  "err.ai.api_claude": "Claude: {detail}",
+  "@err.ai.api_claude": {
+    "description": "Error of the AI provider (the learner’s own Claude API key or Gemini key), shown in “Create with Claude”, Roadmaps, the language tutor. Any other error of the Claude API. detail = its own message (English).",
+    "placeholders": {
+      "detail": {
+        "type": "String",
+        "example": "invalid_request_error"
+      }
+    }
+  },
+  "err.ai.quota": "Gemini’s free quota is used up for now (429) — wait a minute or use Claude.",
+  "@err.ai.quota": {
+    "description": "Error of the AI provider (the learner’s own Claude API key or Gemini key), shown in “Create with Claude”, Roadmaps, the language tutor. Gemini HTTP 429."
+  },
+  "err.ai.api_gemini": "Gemini {status}: {detail}",
+  "@err.ai.api_gemini": {
+    "description": "Error of the AI provider (the learner’s own Claude API key or Gemini key), shown in “Create with Claude”, Roadmaps, the language tutor. Any other error of the Gemini API. status = HTTP status, detail = its own message (English).",
+    "placeholders": {
+      "status": {
+        "type": "int",
+        "example": "503"
+      },
+      "detail": {
+        "type": "String",
+        "example": "INVALID_ARGUMENT"
+      }
+    }
+  },
+  "err.ai.network_gemini": "Network error — are you online? ({detail})",
+  "@err.ai.network_gemini": {
+    "description": "Error of the AI tutor’s Gemini client (the learner’s free Gemini key): Gemini could not be reached. detail = the browser’s technical message (English).",
+    "placeholders": {
+      "detail": {
+        "type": "String",
+        "example": "Failed to fetch"
+      }
+    }
+  },
+  "err.ai.not_json": "The answer was not valid JSON.",
+  "@err.ai.not_json": {
+    "description": "Error of the AI provider (the learner’s own Claude API key or Gemini key), shown in “Create with Claude”, Roadmaps, the language tutor. The model answered something the app cannot read."
+  },
+  "err.ai.invalid": "The {provider} answer still had problems: {problems}",
+  "@err.ai.invalid": {
+    "description": "Error of the AI provider (the learner’s own Claude API key or Gemini key), shown in “Create with Claude”, Roadmaps, the language tutor. After the repair rounds the answer is still wrong. provider = Claude or Gemini, problems = technical list (English).",
+    "placeholders": {
+      "provider": {
+        "type": "String",
+        "example": "Claude"
+      },
+      "problems": {
+        "type": "String",
+        "example": "$.steps: missing"
+      }
+    }
+  },
+  "err.ai.job.too_long": "Claude has worked for a very long time. Press Resume to let it continue, or Stop.",
+  "@err.ai.job.too_long": {
+    "description": "“Create with Claude” job status (the progress screen; a Roadmap step being prepared). Resume and Stop are the buttons below."
+  },
+  "err.ai.job.budget": "The spending limit of {limit} is reached (≈ {spent} so far). Raise it and press Resume, or stop.",
+  "@err.ai.job.budget": {
+    "description": "“Create with Claude” job status (the progress screen; a Roadmap step being prepared). limit and spent are amounts already formatted with the currency (e.g. $20, $3.40).",
+    "placeholders": {
+      "limit": {
+        "type": "String",
+        "example": "$20"
+      },
+      "spent": {
+        "type": "String",
+        "example": "$3.40"
+      }
+    }
+  },
+  "err.ai.job.refused": "Claude declined to continue: {detail}",
+  "@err.ai.job.refused": {
+    "description": "“Create with Claude” job status (the progress screen; a Roadmap step being prepared). detail = Claude’s own words (any language).",
+    "placeholders": {
+      "detail": {
+        "type": "String",
+        "example": "I can’t help with that."
+      }
+    }
+  },
+  "err.ai.job.stopped": "Stopped — press Resume to continue later.",
+  "@err.ai.job.stopped": {
+    "description": "“Create with Claude” job status (the progress screen; a Roadmap step being prepared). The learner stopped the job."
+  },
+  "err.img.method": "GET only",
+  "@err.img.method": {
+    "description": "Picture service (/api/img, /api/file): why a web picture or document could not be fetched; shown in the “Create with Claude” log and the import log. Lower-case on purpose (it follows “Could not download the picture: ”). Technical: wrong request method."
+  },
+  "err.img.origin": "only for noema-lite pages",
+  "@err.img.origin": {
+    "description": "Picture service (/api/img, /api/file): why a web picture or document could not be fetched; shown in the “Create with Claude” log and the import log. Lower-case on purpose (it follows “Could not download the picture: ”). Another website tried to use the service."
+  },
+  "err.img.bad_origin": "bad origin",
+  "@err.img.bad_origin": {
+    "description": "Picture service (/api/img, /api/file): why a web picture or document could not be fetched; shown in the “Create with Claude” log and the import log. Lower-case on purpose (it follows “Could not download the picture: ”). Technical: the request’s origin is unreadable."
+  },
+  "err.img.no_query": "q parameter missing",
+  "@err.img.no_query": {
+    "description": "Picture service (/api/img, /api/file): why a web picture or document could not be fetched; shown in the “Create with Claude” log and the import log. Lower-case on purpose (it follows “Could not download the picture: ”). Technical: the picture search got no words."
+  },
+  "err.img.bad_url": "url parameter missing or invalid",
+  "@err.img.bad_url": {
+    "description": "Picture service (/api/img, /api/file): why a web picture or document could not be fetched; shown in the “Create with Claude” log and the import log. Lower-case on purpose (it follows “Could not download the picture: ”). Technical: no or a broken address."
+  },
+  "err.img.scheme": "only plain http(s) urls",
+  "@err.img.scheme": {
+    "description": "Picture service (/api/img, /api/file): why a web picture or document could not be fetched; shown in the “Create with Claude” log and the import log. Lower-case on purpose (it follows “Could not download the picture: ”). The address is not a normal web address."
+  },
+  "err.img.blocked": "this address is not allowed",
+  "@err.img.blocked": {
+    "description": "Picture service (/api/img, /api/file): why a web picture or document could not be fetched; shown in the “Create with Claude” log and the import log. Lower-case on purpose (it follows “Could not download the picture: ”). A private / local network address (safety rule)."
+  },
+  "err.img.unreachable": "could not reach the picture: {detail}",
+  "@err.img.unreachable": {
+    "description": "Picture service (/api/img, /api/file): why a web picture or document could not be fetched; shown in the “Create with Claude” log and the import log. Lower-case on purpose (it follows “Could not download the picture: ”). The picture’s website did not answer. detail = technical reason (English).",
+    "placeholders": {
+      "detail": {
+        "type": "String",
+        "example": "Failed to fetch"
+      }
+    }
+  },
+  "err.img.timeout": "could not reach the picture: {detail}",
+  "@err.img.timeout": {
+    "description": "Picture service (/api/img, /api/file): why a web picture or document could not be fetched; shown in the “Create with Claude” log and the import log. Lower-case on purpose (it follows “Could not download the picture: ”). The picture’s website took longer than 10 s. detail = technical reason (English). Translations may say “took too long”.",
+    "placeholders": {
+      "detail": {
+        "type": "String",
+        "example": "The operation was aborted due to timeout"
+      }
+    }
+  },
+  "err.img.upstream": "the picture host answered {status}",
+  "@err.img.upstream": {
+    "description": "Picture service (/api/img, /api/file): why a web picture or document could not be fetched; shown in the “Create with Claude” log and the import log. Lower-case on purpose (it follows “Could not download the picture: ”). The picture’s website refused. status = HTTP status.",
+    "placeholders": {
+      "status": {
+        "type": "int",
+        "example": "404"
+      }
+    }
+  },
+  "err.img.no_main_picture": "this page has no main picture — give the image file url",
+  "@err.img.no_main_picture": {
+    "description": "Picture service (/api/img, /api/file): why a web picture or document could not be fetched; shown in the “Create with Claude” log and the import log. Lower-case on purpose (it follows “Could not download the picture: ”). A web page was given instead of a picture, and it has no main picture."
+  },
+  "err.img.file_type": "this kind of file cannot be previewed ({type})",
+  "@err.img.file_type": {
+    "description": "Picture service (/api/img, /api/file): why a web picture or document could not be fetched; shown in the “Create with Claude” log and the import log. Lower-case on purpose (it follows “Could not download the picture: ”). type = the file’s technical type (e.g. text/html).",
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "example": "text/html"
+      }
+    }
+  },
+  "err.img.not_picture": "not a picture ({type}) — use the direct image url, not the page",
+  "@err.img.not_picture": {
+    "description": "Picture service (/api/img, /api/file): why a web picture or document could not be fetched; shown in the “Create with Claude” log and the import log. Lower-case on purpose (it follows “Could not download the picture: ”). type = the file’s technical type.",
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "example": "application/pdf"
+      }
+    }
+  },
+  "err.img.too_large": "larger than {max, number} MB",
+  "@err.img.too_large": {
+    "description": "Picture service (/api/img, /api/file): why a web picture or document could not be fetched; shown in the “Create with Claude” log and the import log. Lower-case on purpose (it follows “Could not download the picture: ”). max = the limit in MB.",
+    "placeholders": {
+      "max": {
+        "type": "int",
+        "example": "15"
+      }
+    }
+  },
+  "err.img.not_picture_bytes": "not a picture — use the direct image url, not the page",
+  "@err.img.not_picture_bytes": {
+    "description": "Picture service (/api/img, /api/file): why a web picture or document could not be fetched; shown in the “Create with Claude” log and the import log. Lower-case on purpose (it follows “Could not download the picture: ”)."
+  },
+  "err.img.redirects": "too many redirects",
+  "@err.img.redirects": {
+    "description": "Picture service (/api/img, /api/file): why a web picture or document could not be fetched; shown in the “Create with Claude” log and the import log. Lower-case on purpose (it follows “Could not download the picture: ”)."
+  },
+  "err.img.http": "HTTP {status}",
+  "@err.img.http": {
+    "description": "Picture service (/api/img, /api/file): why a web picture or document could not be fetched; shown in the “Create with Claude” log and the import log. Lower-case on purpose (it follows “Could not download the picture: ”). A refusal without any text. status = HTTP status.",
+    "placeholders": {
+      "status": {
+        "type": "int",
+        "example": "503"
+      }
+    }
+  },
+  "err.img.not_picture_page": "not a picture ({type}) — the picture service finds the main picture of a page by itself; if this fails, give the image file url",
+  "@err.img.not_picture_page": {
+    "description": "Picture service (/api/img, /api/file): why a web picture or document could not be fetched; shown in the “Create with Claude” log and the import log. Lower-case on purpose (it follows “Could not download the picture: ”). type = the file’s technical type.",
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "example": "text/html"
+      }
+    }
+  },
+  "err.img.download_failed": "Could not download the picture: {detail}",
+  "@err.img.download_failed": {
+    "description": "Picture service (/api/img, /api/file): why a web picture or document could not be fetched; shown in the “Create with Claude” log and the import log. Lower-case on purpose (it follows “Could not download the picture: ”). detail = the reason (already in the UI language when known).",
+    "placeholders": {
+      "detail": {
+        "type": "String",
+        "example": "too many redirects"
+      }
+    }
+  },
+  "err.img.unreadable": "the file is not a readable picture",
+  "@err.img.unreadable": {
+    "description": "Picture service (/api/img, /api/file): why a web picture or document could not be fetched; shown in the “Create with Claude” log and the import log. Lower-case on purpose (it follows “Could not download the picture: ”)."
+  },
+  "err.img.picture_too_large": "picture larger than {max, number} MB",
+  "@err.img.picture_too_large": {
+    "description": "Picture service (/api/img, /api/file): why a web picture or document could not be fetched; shown in the “Create with Claude” log and the import log. Lower-case on purpose (it follows “Could not download the picture: ”). max = the limit in MB.",
+    "placeholders": {
+      "max": {
+        "type": "int",
+        "example": "15"
+      }
+    }
+  },
+  "err.img.url_scheme": "url must start with https://",
+  "@err.img.url_scheme": {
+    "description": "Picture service (/api/img, /api/file): why a web picture or document could not be fetched; shown in the “Create with Claude” log and the import log. Lower-case on purpose (it follows “Could not download the picture: ”). Claude gave an address that is not a web address."
+  },
+  "err.ui.selftest.step.signIn": "Signed in, token refresh",
+  "@err.ui.selftest.step.signIn": {
+    "description": "Self-check of the cloud connection (Me › Cloud): the name of one check in the list. Short."
+  },
+  "err.ui.selftest.step.profile": "Profile",
+  "@err.ui.selftest.step.profile": {
+    "description": "Self-check of the cloud connection (Me › Cloud): the name of one check in the list. Short."
+  },
+  "err.ui.selftest.step.progress": "Progress sync (key/value)",
+  "@err.ui.selftest.step.progress": {
+    "description": "Self-check of the cloud connection (Me › Cloud): the name of one check in the list. Short."
+  },
+  "err.ui.selftest.step.conversations": "Conversations",
+  "@err.ui.selftest.step.conversations": {
+    "description": "Self-check of the cloud connection (Me › Cloud): the name of one check in the list. Short."
+  },
+  "err.ui.selftest.step.snapshots": "Cloud snapshots",
+  "@err.ui.selftest.step.snapshots": {
+    "description": "Self-check of the cloud connection (Me › Cloud): the name of one check in the list. Short."
+  },
+  "err.ui.selftest.step.files": "Private files (packs, database)",
+  "@err.ui.selftest.step.files": {
+    "description": "Self-check of the cloud connection (Me › Cloud): the name of one check in the list. Short."
+  },
+  "err.ui.selftest.step.public": "Public subjects (Explore)",
+  "@err.ui.selftest.step.public": {
+    "description": "Self-check of the cloud connection (Me › Cloud): the name of one check in the list. Short. Explore is the name of the public catalogue screen."
+  },
+  "err.ui.selftest.step.sharing": "Sharing with a person",
+  "@err.ui.selftest.step.sharing": {
+    "description": "Self-check of the cloud connection (Me › Cloud): the name of one check in the list. Short."
+  },
+  "err.ui.selftest.step.curricula": "Shared curricula",
+  "@err.ui.selftest.step.curricula": {
+    "description": "Self-check of the cloud connection (Me › Cloud): the name of one check in the list. Short. Curricula = Roadmaps shared with others."
+  },
+  "err.ui.selftest.hint.schema": "The database is older than this app: Supabase → SQL Editor → run the newest cloud/supabase.sql once.",
+  "@err.ui.selftest.hint.schema": {
+    "description": "Self-check of the cloud connection: the 👉 hint under a failed check, telling what to do. “Supabase → SQL Editor” are menu names on supabase.com (English); cloud/supabase.sql is a file name."
+  },
+  "err.ui.selftest.hint.session": "Your sign-in expired: sign out and sign in again.",
+  "@err.ui.selftest.hint.session": {
+    "description": "Self-check of the cloud connection: the 👉 hint under a failed check, telling what to do."
+  },
+  "err.ui.selftest.hint.permission": "Permission rule refused it: run the newest cloud/supabase.sql (it resets the rules).",
+  "@err.ui.selftest.hint.permission": {
+    "description": "Self-check of the cloud connection: the 👉 hint under a failed check, telling what to do."
+  },
+  "err.ui.selftest.hint.network": "No connection to Supabase: check the internet / config.js address.",
+  "@err.ui.selftest.hint.network": {
+    "description": "Self-check of the cloud connection: the 👉 hint under a failed check, telling what to do. config.js is a file name."
+  },
+  "err.ui.selftest.hint.unexpected": "Unexpected — copy this line and give it to Claude.",
+  "@err.ui.selftest.hint.unexpected": {
+    "description": "Self-check of the cloud connection: the 👉 hint under a failed check, telling what to do."
+  },
+  "err.ui.files.sizeDiffers": "{file}: size differs from the pack — not attached",
+  "@err.ui.files.sizeDiffers": {
+    "description": "Import log of a subject package: a source file that was not attached. file = the file’s path in the package.",
+    "placeholders": {
+      "file": {
+        "type": "String",
+        "example": "sources/ch1.pdf"
+      }
+    }
+  },
+  "err.ui.files.contentDiffers": "{file}: content differs from the pack — not attached",
+  "@err.ui.files.contentDiffers": {
+    "description": "Import log of a subject package: a source file that was not attached. file = the file’s path in the package.",
+    "placeholders": {
+      "file": {
+        "type": "String",
+        "example": "sources/ch1.pdf"
+      }
+    }
+  },
+  "err.ui.files.attachFailed": "{file}: {error}",
+  "@err.ui.files.attachFailed": {
+    "description": "Import log of a subject package: a source file that was not attached. file = the file’s path in the package. error = the reason (already translated).",
+    "placeholders": {
+      "file": {
+        "type": "String",
+        "example": "ch1.pdf"
+      },
+      "error": {
+        "type": "String",
+        "example": "The package reader is not available."
+      }
+    }
+  },
+  "err.ui.claude.skillUpdating": "Updating the noema-pack-builder skill in your Claude workspace…",
+  "@err.ui.claude.skillUpdating": {
+    "description": "“Create with Claude” progress log (one line, after an emoji): what Claude is doing right now. noema-pack-builder is a name; “skill” is Claude’s term."
+  },
+  "err.ui.claude.skillAdding": "Adding the noema-pack-builder skill to your Claude workspace (only the first time)…",
+  "@err.ui.claude.skillAdding": {
+    "description": "“Create with Claude” progress log (one line, after an emoji): what Claude is doing right now."
+  },
+  "err.ui.claude.picturesEmbedded": "{n, plural, one {# web picture(s) embedded} other {# web picture(s) embedded}}",
+  "@err.ui.claude.picturesEmbedded": {
+    "description": "“Create with Claude” progress log (one line, after an emoji): what Claude is doing right now. Pictures from the web were downloaded into the pack.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "4"
+      }
+    }
+  },
+  "err.ui.claude.picturesFailed": "{n, plural, one {# picture(s) could not be downloaded now — they load from the web when shown: {ids}} other {# picture(s) could not be downloaded now — they load from the web when shown: {ids}}}",
+  "@err.ui.claude.picturesFailed": {
+    "description": "“Create with Claude” progress log (one line, after an emoji): what Claude is doing right now. ids = the pictures’ ids (technical, comma-separated).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "2"
+      },
+      "ids": {
+        "type": "String",
+        "example": "fig1, fig2"
+      }
+    }
+  },
+  "err.ui.claude.searching": "Searching: {query}",
+  "@err.ui.claude.searching": {
+    "description": "“Create with Claude” progress log (one line, after an emoji): what Claude is doing right now. A web search; query = Claude’s search words.",
+    "placeholders": {
+      "query": {
+        "type": "String",
+        "example": "DNA replication fork"
+      }
+    }
+  },
+  "err.ui.claude.reading": "Reading: {url}",
+  "@err.ui.claude.reading": {
+    "description": "“Create with Claude” progress log (one line, after an emoji): what Claude is doing right now. Reading a web page; url = its address.",
+    "placeholders": {
+      "url": {
+        "type": "String",
+        "example": "openstax.org/books/biology"
+      }
+    }
+  },
+  "err.ui.claude.building": "Checking and building the pack",
+  "@err.ui.claude.building": {
+    "description": "“Create with Claude” progress log (one line, after an emoji): what Claude is doing right now."
+  },
+  "err.ui.claude.readingPdf": "Reading the PDF",
+  "@err.ui.claude.readingPdf": {
+    "description": "“Create with Claude” progress log (one line, after an emoji): what Claude is doing right now."
+  },
+  "err.ui.claude.findingPictures": "Finding pictures in the sources",
+  "@err.ui.claude.findingPictures": {
+    "description": "“Create with Claude” progress log (one line, after an emoji): what Claude is doing right now."
+  },
+  "err.ui.claude.drawing": "Drawing diagrams",
+  "@err.ui.claude.drawing": {
+    "description": "“Create with Claude” progress log (one line, after an emoji): what Claude is doing right now."
+  },
+  "err.ui.claude.writingChapters": "Writing chapters",
+  "@err.ui.claude.writingChapters": {
+    "description": "“Create with Claude” progress log (one line, after an emoji): what Claude is doing right now."
+  },
+  "err.ui.claude.working": "Working: {command}",
+  "@err.ui.claude.working": {
+    "description": "“Create with Claude” progress log (one line, after an emoji): what Claude is doing right now. command = the first line of a shell command (technical).",
+    "placeholders": {
+      "command": {
+        "type": "String",
+        "example": "python3 split_pdf.py"
+      }
+    }
+  },
+  "err.ui.claude.fileReading": "Reading {file}",
+  "@err.ui.claude.fileReading": {
+    "description": "“Create with Claude” progress log (one line, after an emoji): what Claude is doing right now. Claude opens a file; file = its name.",
+    "placeholders": {
+      "file": {
+        "type": "String",
+        "example": "ch01.json"
+      }
+    }
+  },
+  "err.ui.claude.fileWriting": "Writing {file}",
+  "@err.ui.claude.fileWriting": {
+    "description": "“Create with Claude” progress log (one line, after an emoji): what Claude is doing right now. Claude writes a file; file = its name.",
+    "placeholders": {
+      "file": {
+        "type": "String",
+        "example": "ch01.json"
+      }
+    }
+  },
+  "err.ui.claude.fetchingPicture": "Fetching a picture: {file}",
+  "@err.ui.claude.fetchingPicture": {
+    "description": "“Create with Claude” progress log (one line, after an emoji): what Claude is doing right now. file = the picture’s file name.",
+    "placeholders": {
+      "file": {
+        "type": "String",
+        "example": "fork.png"
+      }
+    }
+  },
+  "err.ui.claude.searchingPictures": "Searching pictures: {query}",
+  "@err.ui.claude.searchingPictures": {
+    "description": "“Create with Claude” progress log (one line, after an emoji): what Claude is doing right now. query = Claude’s search words.",
+    "placeholders": {
+      "query": {
+        "type": "String",
+        "example": "heart diagram"
+      }
+    }
+  },
+  "err.ui.claude.uploading": "Uploading {file}…",
+  "@err.ui.claude.uploading": {
+    "description": "“Create with Claude” progress log (one line, after an emoji): what Claude is doing right now. A source file goes to the learner’s Claude workspace.",
+    "placeholders": {
+      "file": {
+        "type": "String",
+        "example": "chapter1.pdf"
+      }
+    }
+  },
+  "err.ui.claude.picturesFound": "{n, plural, one {# picture(s) for “{query}”} other {# picture(s) for “{query}”}}",
+  "@err.ui.claude.picturesFound": {
+    "description": "“Create with Claude” progress log (one line, after an emoji): what Claude is doing right now. Result of a picture search; query = the search words.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "12"
+      },
+      "query": {
+        "type": "String",
+        "example": "heart diagram"
+      }
+    }
+  },
+  "err.ui.claude.pictureOk": "{small, select, yes {picture {w, number, ::group-off}×{h, number, ::group-off} (too small)} other {picture {w, number, ::group-off}×{h, number, ::group-off}}}",
+  "@err.ui.claude.pictureOk": {
+    "description": "“Create with Claude” progress log (one line, after an emoji): what Claude is doing right now. A picture arrived; w×h = its size in pixels; small = yes when it is too small to use.",
+    "placeholders": {
+      "small": {
+        "type": "String",
+        "example": "no"
+      },
+      "w": {
+        "type": "int",
+        "example": "1200"
+      },
+      "h": {
+        "type": "int",
+        "example": "800"
+      }
+    }
+  },
+  "err.ui.claude.pdfAsDocuments": "Attaching the PDFs as documents instead",
+  "@err.ui.claude.pdfAsDocuments": {
+    "description": "“Create with Claude” progress log (one line, after an emoji): what Claude is doing right now."
+  },
+  "err.ui.claude.noWebSearch": "Web search is off for this API key (it can be switched on in the Claude Console) — continuing without it",
+  "@err.ui.claude.noWebSearch": {
+    "description": "“Create with Claude” progress log (one line, after an emoji): what Claude is doing right now. Claude Console = Anthropic’s website for API keys (a name)."
+  },
+  "err.ui.claude.noWebFetch": "Web fetch is off for this API key — continuing with web search only",
+  "@err.ui.claude.noWebFetch": {
+    "description": "“Create with Claude” progress log (one line, after an emoji): what Claude is doing right now."
+  },
+  "err.ui.claude.sandboxExpired": "The previous sandbox expired — Claude starts a fresh one and rebuilds from the conversation",
+  "@err.ui.claude.sandboxExpired": {
+    "description": "“Create with Claude” progress log (one line, after an emoji): what Claude is doing right now. The sandbox = Claude’s temporary computer."
+  },
+  "err.ui.claude.noPack": "Claude stopped without a pack. Tell it what to do next (for example: “Continue and finish the pack”).",
+  "@err.ui.claude.noPack": {
+    "description": "“Create with Claude” job status (the progress screen; a Roadmap step being prepared). Shown above an answer box; the learner types a message to Claude (any language works)."
+  },
+  "err.ui.claude.packageReceived": "Package received: {file} ({mb, number, ::.0 group-off} MB, {n, plural, one {# source file(s)} other {# source file(s)}})",
+  "@err.ui.claude.packageReceived": {
+    "description": "“Create with Claude” progress log (one line, after an emoji): what Claude is doing right now. The finished package arrived. file = its file name, mb = its size, n = source files inside.",
+    "placeholders": {
+      "file": {
+        "type": "String",
+        "example": "cell-biology.noema.zip"
+      },
+      "mb": {
+        "type": "number",
+        "example": "12.4"
+      },
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "err.ui.claude.packReceived": "Pack received: {file} ({kb, number, ::group-off} KB)",
+  "@err.ui.claude.packReceived": {
+    "description": "“Create with Claude” progress log (one line, after an emoji): what Claude is doing right now. file = its file name, kb = its size.",
+    "placeholders": {
+      "file": {
+        "type": "String",
+        "example": "cell-biology.json"
+      },
+      "kb": {
+        "type": "int",
+        "example": "420"
+      }
+    }
+  },
+  "err.ui.claude.fileFailed": "{file}: {error}",
+  "@err.ui.claude.fileFailed": {
+    "description": "“Create with Claude” progress log (one line, after an emoji): what Claude is doing right now. A file from Claude could not be read. error = the reason (already translated).",
+    "placeholders": {
+      "file": {
+        "type": "String",
+        "example": "cell-biology.noema.zip"
+      },
+      "error": {
+        "type": "String",
+        "example": "This zip is not a noema-lite package (no pack.json inside)."
+      }
+    }
+  },
+  "err.ui.claude.notAPack": "{file} is not a valid pack: {error}",
+  "@err.ui.claude.notAPack": {
+    "description": "“Create with Claude” progress log (one line, after an emoji): what Claude is doing right now. error = the reason (already translated).",
+    "placeholders": {
+      "file": {
+        "type": "String",
+        "example": "notes.json"
+      },
+      "error": {
+        "type": "String",
+        "example": "Unexpected token"
+      }
+    }
+  }
+}

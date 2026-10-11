@@ -14,31 +14,76 @@
   const jget = (k, d) => { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } };
   const jset = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { } };
   const emit = () => st.listeners.forEach(f => { try { f(status()); } catch (e) { } });
-  const status = () => ({ signedIn: !!session(), syncing: st.syncing, lastSync: st.lastSync, error: st.error, pending: (session() ? Object.keys(jget('noema1:' + (st.autoAcc || 'u_' + session().user.id) + ':meta:unsynced', {})).length : 0) + st.convoPending.size });
+  const status = () => ({ signedIn: !!session(), syncing: st.syncing, lastSync: st.lastSync, error: st.error, errorInfo: st.errorInfo || null, pending: (session() ? Object.keys(jget('noema1:' + (st.autoAcc || 'u_' + session().user.id) + ':meta:unsynced', {})).length : 0) + st.convoPending.size });
   function session() { return jget(SKEY, null); }
   function setSession(s) { if (s) { s.expires_at = s.expires_at || Math.floor(Date.now() / 1000) + (s.expires_in || 3600); jset(SKEY, { access_token: s.access_token, refresh_token: s.refresh_token, expires_at: s.expires_at, user: { id: s.user.id, email: s.user.email, user_metadata: s.user.user_metadata || {} } }); } else localStorage.removeItem(SKEY); }
-  function errMsg(j, r) { return (j && (j.msg || j.message || j.error_description || j.error)) || `HTTP ${r.status}`; }
+  function errMsg(j, r) { return (j && (j.msg || j.message || j.error_description || j.error)) || `HTTP ${r.status}`; }   // i18n-ignore (the server's own English; codeOf names it)
+
+  /* ---------- errors: every error a learner may read has a stable code (the contract: docs/i18n.md §6) ----------
+     .message stays the English text (logs, older callers, regexes), .code + .params give the words in the UI language:
+     NoemaI18n.err(e) → t('err.' + code, params), or the English message for a code without a catalog entry. */
+  const coded = (message, code, params = {}, extra = {}) => Object.assign(new Error(message), { code, params }, extra);
+  const ET = (k, p) => window.NoemaI18n ? NoemaI18n.t(k, p) : k;
+  const errText = e => window.NoemaI18n ? NoemaI18n.err(e) : String((e && e.message) || e);
+  const errInfo = e => e ? { code: e.code || null, params: e.params || {}, message: String(e.message || e) } : null;
+  /** Supabase Auth (GoTrue) error_code → our code. */
+  const AUTH = {
+    invalid_credentials: 'auth.invalid_credentials', email_not_confirmed: 'auth.email_not_confirmed', user_already_exists: 'auth.user_already_exists',
+    email_exists: 'auth.email_exists', over_email_send_rate_limit: 'auth.email_rate_limit', over_request_rate_limit: 'auth.rate_limit',
+    otp_expired: 'auth.otp_expired', email_address_invalid: 'auth.email_invalid', signup_disabled: 'auth.signup_disabled', email_provider_disabled: 'auth.signup_disabled',
+    user_banned: 'auth.user_banned', user_not_found: 'auth.user_not_found', same_password: 'auth.same_password', email_address_not_authorized: 'auth.email_not_authorized',
+    captcha_failed: 'auth.captcha_failed', refresh_token_not_found: 'auth.session_expired', refresh_token_already_used: 'auth.session_expired',
+    session_not_found: 'auth.session_expired', session_expired: 'auth.session_expired', bad_jwt: 'auth.session_expired', no_authorization: 'auth.session_expired',
+  };
+  /* older Auth servers (and the test emulator) send no error_code: recognised by their English message */
+  /* i18n-ignore-start */
+  const AUTH_MSG = [[/invalid login credentials/i, 'invalid_credentials'], [/email not confirmed/i, 'email_not_confirmed'], [/already (been )?registered/i, 'user_already_exists'],
+    [/password should|weak password/i, 'weak_password'], [/email rate limit/i, 'over_email_send_rate_limit'], [/rate limit/i, 'over_request_rate_limit'],
+    [/expired or is invalid|invalid or has expired/i, 'otp_expired'], [/refresh token/i, 'refresh_token_not_found'], [/signups? not allowed/i, 'signup_disabled'],
+    [/unable to validate email|email address .* is invalid/i, 'email_address_invalid'], [/invalid jwt|jwt expired/i, 'bad_jwt']];
+  /* i18n-ignore-end */
+  /** A failed answer of Supabase → [code, params] (docs/i18n.md §6). Codes without a catalog entry (*.unknown) show the server's English. */
+  function codeOf(path, j, status, m) {
+    const o = j && typeof j === 'object' ? j : {};
+    if (/^\/auth\/v1\//.test(path)) {
+      let ec = o.error_code || (typeof o.code === 'string' ? o.code : null);
+      if (!(ec in AUTH) && ec !== 'weak_password') { const hit = AUTH_MSG.find(([re]) => re.test(m)); ec = hit ? hit[1] : ec; }
+      if (ec === 'weak_password') { const min = +(String(m).match(/at least (\d+) characters/i) || [])[1]; return min ? ['auth.weak_password', { min }] : ['auth.weak_password_other', {}]; }
+      if (AUTH[ec]) return [AUTH[ec], {}];
+      if (status === 429) return ['auth.rate_limit', {}];
+      if (status >= 500) return ['auth.server', { status }];
+      return ['auth.unknown', { status, detail: m }];
+    }
+    if (/PGRST205|42P01/.test(o.code || '') || /schema cache|does not exist|Bucket not found/i.test(m)) return ['cloud.schema_old', {}];
+    if (status === 401 || /\bJWT\b/i.test(m)) return ['auth.session_expired', {}];
+    if (o.code === '42501' || status === 403 || /row-level security/i.test(m)) return ['cloud.permission', {}];
+    if (status === 413 || /maximum allowed size|payload too large/i.test(m)) return ['cloud.too_large', {}];
+    if (status === 429) return ['cloud.rate_limit', {}];
+    if (status >= 500) return ['cloud.server', { status }];
+    return ['cloud.unknown', { status, detail: m }];
+  }
+  const failed = (path, j, r) => { const m = errMsg(j, r), [code, params] = codeOf(path, j, r.status, m); return coded(m, code, params, { status: r.status }); };
   async function call(path, { method = 'GET', body, headers = {}, auth = true, raw = false, keepalive = false } = {}) {
     if (auth) await fresh();
     const s = session();
     // Publishable keys (sb_publishable_…) are not JWTs: send them only as `apikey`; the Authorization header carries the user's session token.
     const bearer = auth && s ? s.access_token : (/^sb_/.test(KEY) ? null : KEY);
-    const h = Object.assign({ apikey: KEY }, bearer ? { Authorization: 'Bearer ' + bearer } : {}, body !== undefined && !(body instanceof Blob) ? { 'Content-Type': 'application/json' } : {}, headers);
+    const h = Object.assign({ apikey: KEY }, bearer ? { Authorization: 'Bearer ' + bearer } : {}, body !== undefined && !(body instanceof Blob) ? { 'Content-Type': 'application/json' } : {}, headers);   // i18n-ignore
     const payload = body === undefined ? undefined : (body instanceof Blob || typeof body === 'string' ? body : JSON.stringify(body));
     const size = payload == null ? 0 : (payload instanceof Blob ? payload.size : payload.length * 3);
     if (keepalive && size > 60000) keepalive = false;      // browsers refuse keepalive bodies over 64 KB
     let r;
     try { r = await fetch(BASE + path, { method, headers: h, body: payload, keepalive }); }
-    catch (e) { const er = new Error('Network error — are you offline? (' + e.message + ')'); er.network = true; throw er; }
-    if (raw) { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r; }
+    catch (e) { throw coded('Network error — are you offline? (' + e.message + ')', /^\/auth\//.test(path) ? 'auth.network' : 'cloud.network', { detail: e.message }, { network: true }); }   // i18n-ignore (English .message of err.*.network)
+    if (raw) { if (!r.ok) { let j = null; try { j = await r.clone().json(); } catch (e) { } throw Object.assign(failed(path, j, r), { message: `HTTP ${r.status}` }); } return r; }
     const txt = await r.text(); let j = null; try { j = txt ? JSON.parse(txt) : null; } catch (e) { j = txt; }
-    if (!r.ok) throw new Error(errMsg(j, r));
+    if (!r.ok) throw failed(path, j, r);
     return j;
   }
   async function fresh() {
-    const s = session(); if (!s) throw new Error('Not signed in');
+    const s = session(); if (!s) throw coded('Not signed in', 'auth.not_signed_in');   // i18n-ignore (English .message of err.auth.not_signed_in)
     if (s.expires_at - 60 > Date.now() / 1000) return s;
-    const j = await call('/auth/v1/token?grant_type=refresh_token', { method: 'POST', body: { refresh_token: s.refresh_token }, auth: false }).catch(e => { if (/invalid|expired|not found/i.test(e.message)) setSession(null); throw e; });
+    const j = await call('/auth/v1/token?grant_type=refresh_token', { method: 'POST', body: { refresh_token: s.refresh_token }, auth: false }).catch(e => { if (e.code === 'auth.session_expired' || /invalid|expired|not found/i.test(e.message)) setSession(null); throw e; });
     setSession(j); return session();
   }
   const uid = () => session()?.user.id;
@@ -62,7 +107,7 @@
   const markDirty = (acc, k) => { metaSet(acc, 'unsynced', m => { m[k] = Date.now() * 1000 + (++st.seq % 1000); }); emit(); };
   const clean = (acc, k, mark) => { metaSet(acc, 'unsynced', m => { if (mark === undefined || m[k] === mark) delete m[k]; }); emit(); };   // only if not changed again meanwhile
   const put = (full, v) => { try { localStorage.setItem(full, v); return true; } catch (e) { st.full = true; return false; } };
-  const FULL = 'This device’s storage is full: some changes from your other devices could not be saved here.';
+  const FULL = () => coded('This device’s storage is full: some changes from your other devices could not be saved here.', 'cloud.storage_full');   // i18n-ignore (English .message of err.cloud.storage_full)
   /** keys (full localStorage keys) another device changed → the open subject folds them into what it holds in memory (engine/src/10_core.js) */
   const notify = (acc, keys) => { try { dispatchEvent(new CustomEvent('noema:remote', { detail: { acc, keys } })); } catch (e) { } };
   const serial = fn => (st.chain = (st.chain || Promise.resolve()).catch(() => { }).then(fn));   // one pull or push at a time
@@ -71,7 +116,7 @@
   const pj = s => { try { return JSON.parse(s); } catch (e) { return undefined; } };
   async function restorePoint(acc) {   // before combining drops anything: at most one every 10 minutes
     if (Date.now() - (st.rpAt || 0) < 10 * 60e3) return; st.rpAt = Date.now();
-    try { await window.Noema?.backup?.restorePoint(acc, 'Before combining changes from another device'); } catch (e) { }
+    try { await window.Noema?.backup?.restorePoint(acc, 'Before combining changes from another device', { k: 'engine.bk.pointCombine' }); } catch (e) { }   // i18n-ignore (the stored label for older apps; k: shown in the UI language, engine/src/70_account.js)
   }
 
   /* ---------- combining two copies of a key (progress only grows) ---------- */
@@ -175,7 +220,7 @@
       const row = ((await call('/rest/v1/noema_kv?select=value&key=eq.' + enc(k))) || [])[0];
       const m = row && mergeCurriculum(k, v, row.value); if (m && put(full, m)) { v = m; notify(acc, [full]); }
     }
-    const q = '/rest/v1/noema_kv?key=eq.' + enc(k) + (b ? '&updated_at=eq.' + enc(b) : ''), rep = { Prefer: 'return=representation' };
+    const q = '/rest/v1/noema_kv?key=eq.' + enc(k) + (b ? '&updated_at=eq.' + enc(b) : ''), rep = { Prefer: 'return=representation' };   // i18n-ignore
     if (v == null) {
       if (!b) { clean(acc, k, mark); return; }   // never reached the cloud
       const r = await call(q, { method: 'DELETE', headers: rep, keepalive });
@@ -188,7 +233,7 @@
       if (row) { metaSet(acc, 'base', x => { x[k] = row.updated_at; }); clean(acc, k, mark); return; }
     }
     // refused: another device (or the Claude connector) changed it since this device last saw it
-    if (tries >= 3) throw new Error(`“${k}” keeps changing on another device: trying again later`);
+    if (tries >= 3) throw coded(`“${k}” keeps changing on another device: trying again later`, 'cloud.keeps_changing', { key: k });   // i18n-ignore (English .message of err.cloud.keeps_changing)
     const cur = ((await call('/rest/v1/noema_kv?select=key,value,updated_at&key=eq.' + enc(k))) || [])[0] || null;
     const changed = await resolve(acc, k, cur); if (changed) notify(acc, [changed]);
     const m = meta(acc, 'unsynced')[k]; if (m !== undefined) return pushKey(acc, k, m, keepalive, tries + 1);
@@ -201,19 +246,24 @@
   const LEASE = 'a:inuse', FRESH = 2 * 60e3, BEAT = 30e3;
   const remoteOnly = k => inboxKey(k) || k === LEASE;
   const L = { state: 'unknown', holder: null, acc: null, lastInput: Date.now(), lastBeat: 0, at: null, busy: null };
+  /** This device → { name: English words (older apps show them), os: a code, br: the browser's name } — the "in use" row carries all
+      three; the other device shows os + br in its own language (engine/loader.js, loader.inuse.device), else the name. */
   function deviceName() {
     const u = navigator.userAgent || '';
-    const os = /iPhone/.test(u) ? 'iPhone' : /iPad/.test(u) || (/Macintosh/.test(u) && navigator.maxTouchPoints > 1) ? 'iPad' : /Android/.test(u) ? (/Mobile/.test(u) ? 'Android phone' : 'Android tablet')
-      : /CrOS/.test(u) ? 'Chromebook' : /Mac/.test(u) ? 'Mac' : /Windows/.test(u) ? 'Windows PC' : /Linux/.test(u) ? 'Linux PC' : 'another device';
+    const os = /iPhone/.test(u) ? 'iphone' : /iPad/.test(u) || (/Macintosh/.test(u) && navigator.maxTouchPoints > 1) ? 'ipad' : /Android/.test(u) ? (/Mobile/.test(u) ? 'android_phone' : 'android_tablet')
+      : /CrOS/.test(u) ? 'chromebook' : /Mac/.test(u) ? 'mac' : /Windows/.test(u) ? 'windows' : /Linux/.test(u) ? 'linux' : 'other';
+    /* i18n-ignore-start */   // stored in the "in use" row and read on the OTHER device (in its own language): kept English here, translated where it is shown
+    const name = { iphone: 'iPhone', ipad: 'iPad', android_phone: 'Android phone', android_tablet: 'Android tablet', chromebook: 'Chromebook', mac: 'Mac', windows: 'Windows PC', linux: 'Linux PC', other: 'another device' }[os];
     const br = /Edg\//.test(u) ? 'Edge' : /OPR\//.test(u) ? 'Opera' : /Firefox\//.test(u) ? 'Firefox' : /Chrome\//.test(u) ? 'Chrome' : /Safari\//.test(u) ? 'Safari' : '';
-    return br ? os + ' · ' + br : os;
+    /* i18n-ignore-end */
+    return { name: br ? name + ' · ' + br : name, os, br };
   }
   const rnd = () => Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
   const ME = (() => {
     let dev = null, sid = null;
     try { dev = localStorage.getItem('noema-device:id'); if (!dev) { dev = rnd(); localStorage.setItem('noema-device:id', dev); } } catch (e) { dev = rnd(); }
     try { sid = sessionStorage.getItem('noema:tab'); if (!sid) { sid = rnd(); sessionStorage.setItem('noema:tab', sid); } } catch (e) { sid = rnd(); }   // one per tab, kept across reloads
-    return { dev, sid, name: deviceName() };
+    return { dev, sid, ...deviceName() };
   })();
   const live = v => !!(v && !v.released && Date.now() - (v.at || 0) < FRESH);
   const activeHere = () => document.visibilityState === 'visible' && Date.now() - L.lastInput < FRESH;
@@ -224,7 +274,7 @@
   }
   async function leaseWrite(prevAt, v, keepalive = false) {
     const value = JSON.stringify(v), at = isoAfter(prevAt);
-    const r = prevAt ? await call('/rest/v1/noema_kv?key=eq.' + LEASE + '&updated_at=eq.' + enc(prevAt), { method: 'PATCH', body: { value, updated_at: at }, headers: { Prefer: 'return=representation' }, keepalive })
+    const r = prevAt ? await call('/rest/v1/noema_kv?key=eq.' + LEASE + '&updated_at=eq.' + enc(prevAt), { method: 'PATCH', body: { value, updated_at: at }, headers: { Prefer: 'return=representation' }, keepalive })   // i18n-ignore
       : await call('/rest/v1/noema_kv?on_conflict=user_id,key', { method: 'POST', body: [{ user_id: uid(), key: LEASE, value, updated_at: at }], headers: { Prefer: 'resolution=ignore-duplicates,return=representation' }, keepalive });
     return Array.isArray(r) && r[0] ? r[0].updated_at : null;
   }
@@ -236,7 +286,7 @@
       L.lastBeat = Date.now();
       if (!mine && live(v) && !take) { setLease('other', v); return 'other'; }   // in use elsewhere right now
       if (!take && !activeHere()) { setLease(mine ? 'mine' : 'unknown'); break; }   // nobody is using this tab: don't take it
-      const at = await leaseWrite(row?.updated_at, { sid: ME.sid, dev: ME.dev, name: ME.name, at: Date.now() });
+      const at = await leaseWrite(row?.updated_at, { sid: ME.sid, dev: ME.dev, name: ME.name, os: ME.os, br: ME.br, at: Date.now() });
       if (!at) continue;   // someone wrote it in between: look again
       L.at = at; setLease('mine');
       if (v && !mine) L.tookOver = true;   // another tab or device had it: bring in what it did
@@ -251,21 +301,44 @@
   function leaseRelease() {
     if (L.state !== 'mine' || !L.at || !session()) return;
     const at = L.at; L.at = null; L.state = 'unknown';
-    leaseWrite(at, { sid: ME.sid, dev: ME.dev, name: ME.name, at: Date.now(), released: true }, true).catch(() => { });
+    leaseWrite(at, { sid: ME.sid, dev: ME.dev, name: ME.name, os: ME.os, br: ME.br, at: Date.now(), released: true }, true).catch(() => { });
+  }
+
+  /* ---------- the UI language in the account (user_metadata.locale): Supabase's e-mails are written in it (cloud/email/, docs/i18n.md §6) ----------
+     At sign-up it goes with the new account; afterwards, once per page and language, when NoemaI18n.locale differs from it. */
+  const uiLocale = () => (window.NoemaI18n && NoemaI18n.locale) || null;
+  const localeSent = new Set();
+  async function syncLocale() {
+    const s = session(), loc = uiLocale(); if (!s || !loc || !BASE) return false;
+    const key = s.user.id + '|' + loc;
+    if ((s.user.user_metadata || {}).locale === loc || localeSent.has(key)) return false;
+    localeSent.add(key);
+    try {
+      const u = await call('/auth/v1/user', { method: 'PUT', body: { data: { locale: loc } } });
+      const cur = session(); if (cur && cur.user.id === s.user.id) { cur.user.user_metadata = { ...(cur.user.user_metadata || {}), ...((u && u.user_metadata) || {}), locale: loc }; jset(SKEY, cur); }
+      return true;
+    } catch (e) { console.warn('[cloud] the UI language was not saved in the account', e.message); return false; }   // i18n-ignore
   }
 
   const NoemaCloud = window.NoemaCloud = {
     session, status, onStatus(f) { st.listeners.push(f); },
     /** A raw Supabase call as the signed-in user (row-level security applies) — e.g. engine/curshare.js. */
     api: (path, o) => call(path, o), uid,
-    async init(cfg) { CFG = cfg; BASE = cfg.supabaseUrl.replace(/\/+$/, ''); KEY = cfg.supabaseKey || cfg.supabaseAnonKey || ''; if (session()) { try { await fresh(); } catch (e) { console.warn('[cloud] session refresh failed', e.message); } } },
+    async init(cfg) {
+      CFG = cfg; BASE = cfg.supabaseUrl.replace(/\/+$/, ''); KEY = cfg.supabaseKey || cfg.supabaseAnonKey || '';
+      if (session()) { try { await fresh(); } catch (e) { console.warn('[cloud] session refresh failed', e.message); } }   // i18n-ignore
+      if (window.NoemaI18n && !st.localeHook) { st.localeHook = true; NoemaI18n.onChange(() => { syncLocale(); }); Promise.resolve(NoemaI18n.ready).then(syncLocale, () => { }); }
+    },
+    /** Save the UI language in user_metadata.locale when it differs (→ true when sent); called by itself after boot and on every change. */
+    syncLocale,
     async signUp(email, password, name) {
-      const j = await call('/auth/v1/signup', { method: 'POST', auth: false, body: { email, password, data: { name: name || email.split('@')[0] } } });
+      const data = { name: name || email.split('@')[0] }; if (uiLocale()) data.locale = uiLocale();   // the confirmation e-mail already speaks the learner's language
+      const j = await call('/auth/v1/signup', { method: 'POST', auth: false, body: { email, password, data } });
       const s = j.access_token ? j : (j.session || null);
       if (s && s.access_token) { setSession(s); await this.saveProfile({ name: name || email.split('@')[0] }); return { session: true }; }
       return { session: false };
     },
-    async signIn(email, password) { const j = await call('/auth/v1/token?grant_type=password', { method: 'POST', auth: false, body: { email, password } }); setSession(j); return true; },
+    async signIn(email, password) { const j = await call('/auth/v1/token?grant_type=password', { method: 'POST', auth: false, body: { email, password } }); setSession(j); syncLocale(); return true; },
     async recover(email) { await call('/auth/v1/recover', { method: 'POST', auth: false, body: { email } }); },
     async signOut() { try { await call('/auth/v1/logout', { method: 'POST' }); } catch (e) { } setSession(null); emit(); },
     async saveProfile(p) {
@@ -306,11 +379,11 @@
         // data that never reached the cloud (made offline before this version, or the row was refused) → upload
         Object.keys(window.Noema?.kv?.accountData?.(acc) || {}).forEach(k => { if (!seen.has(k) && !(k in base) && !remoteOnly(k)) markDirty(acc, k); });
         for (const r of conflicts) { const k = await resolve(acc, r.key, r); if (k) keys.push(k); }
-        st.lastSync = Date.now(); st.error = st.full ? FULL : null; st.full = false;
+        const full = st.full ? FULL() : null; st.lastSync = Date.now(); st.error = full ? errText(full) : null; st.errorInfo = errInfo(full); st.full = false;
         if (keys.length) notify(acc, keys);
         try { dispatchEvent(new CustomEvent('noema:pulled', { detail: { acc, changed: keys.length, keys } })); } catch (e) { }   // e.g. the open subject reads its results inbox
         return keys.length;
-      } catch (e) { st.error = e.message; throw e; } finally { st.syncing = false; emit(); }
+      } catch (e) { st.error = errText(e); st.errorInfo = errInfo(e); throw e; } finally { st.syncing = false; emit(); }
     },
     async push(acc = accId(), { keepalive = false } = {}) {
       if (!session() || !Object.keys(meta(acc, 'unsynced')).length) return 0;
@@ -324,15 +397,15 @@
         // the page is being hidden: every request leaves at once (keepalive), a slower loop could be cut off
         if (keepalive) await Promise.all(keys.map(k => pushKey(acc, k, dirty[k], true)));
         else for (const k of keys) await pushKey(acc, k, dirty[k], false);
-        st.lastSync = Date.now(); st.error = null; return keys.length;
-      } catch (e) { st.error = e.message; throw e; } finally { st.syncing = false; emit(); }
+        st.lastSync = Date.now(); st.error = null; st.errorInfo = null; return keys.length;
+      } catch (e) { st.error = errText(e); st.errorInfo = errInfo(e); throw e; } finally { st.syncing = false; emit(); }
     },
     /** Combine two copies of a key (this device's and the cloud's) → { value, lost } — `lost`: something of `local` may be dropped. */
     mergeValue, mergeState, mergeLang,
     /** Rows whose key starts with `prefix` (e.g. the Claude app's answers, a:curin:) — read directly, not mirrored locally. */
     async kvRows(prefix) { return (await call('/rest/v1/noema_kv?select=key,value,updated_at&order=key&key=like.' + enc(prefix + '*'))) || []; },
     async kvDelete(key) { await call('/rest/v1/noema_kv?key=eq.' + enc(key), { method: 'DELETE' }); },
-    /** One device at a time (see "in use" above): state 'mine' | 'other' | 'unknown', holder = { name, sameDevice, at } when 'other'. */
+    /** One device at a time (see "in use" above): state 'mine' | 'other' | 'unknown', holder = { name, os, br, sameDevice, at } when 'other'. */
     lease: {
       get state() { return L.state; }, get holder() { return L.holder; }, device: ME,
       /** Look at the "in use" row and take it if nobody else is using Noema right now; take = true: take it anyway ("Use here"). */
@@ -368,8 +441,8 @@
     async pullConvos(acc = accId()) {
       const mk = 'noema1:' + acc + ':meta:convoPulledAt'; const since = jget(mk, null);
       let col = 'synced_at', rows;
-      try { rows = await call(`/rest/v1/noema_conversations?select=record,updated_at,synced_at&order=synced_at.asc` + (since ? '&synced_at=gt.' + enc(since) : '')); }
-      catch (e) { if (!/synced_at/.test(e.message)) throw e; col = 'updated_at'; rows = await call('/rest/v1/noema_conversations?select=record,updated_at&order=updated_at.asc' + (since ? '&updated_at=gt.' + enc(since) : '')); }
+      try { rows = await call(`/rest/v1/noema_conversations?select=record,updated_at,synced_at&order=synced_at.asc` + (since ? '&synced_at=gt.' + enc(since) : '')); }   // i18n-ignore
+      catch (e) { if (!/synced_at/.test(e.message)) throw e; col = 'updated_at'; rows = await call('/rest/v1/noema_conversations?select=record,updated_at&order=updated_at.asc' + (since ? '&updated_at=gt.' + enc(since) : '')); }   // i18n-ignore
       let n = 0, last = since;
       for (const row of rows || []) {
         const r = row.record; if (!r || !r.id) continue;
@@ -386,12 +459,12 @@
       const rows = [];
       for (const id of ids) { const r = await NoemaConvos.get(acc, id); if (r) rows.push({ user_id: uid(), id: r.id, subject_id: r.subject?.id || null, kind: r.kind, mode: r.mode, title: r.title, context_label: r.context?.label || null, message_count: r.stats.messages, deleted: r.deleted, created_at: r.createdAt, updated_at: r.updatedAt, record: r }); }
       st.syncing = true; emit();
-      try { for (let i = 0; i < rows.length; i += 20) await call('/rest/v1/noema_conversations?on_conflict=user_id,id', { method: 'POST', body: rows.slice(i, i + 20), headers: { Prefer: 'resolution=merge-duplicates,return=minimal' }, keepalive }); st.lastSync = Date.now(); st.error = null; return rows.length; }
-      catch (e) { ids.forEach(i => st.convoPending.add(i)); st.error = e.message; throw e; } finally { st.syncing = false; emit(); }
+      try { for (let i = 0; i < rows.length; i += 20) await call('/rest/v1/noema_conversations?on_conflict=user_id,id', { method: 'POST', body: rows.slice(i, i + 20), headers: { Prefer: 'resolution=merge-duplicates,return=minimal' }, keepalive }); st.lastSync = Date.now(); st.error = null; st.errorInfo = null; return rows.length; }
+      catch (e) { ids.forEach(i => st.convoPending.add(i)); st.error = errText(e); st.errorInfo = errInfo(e); throw e; } finally { st.syncing = false; emit(); }
     },
 
     /* ---------- snapshots (cloud restore points of the whole account) ---------- */
-    async snapshot(label = 'Manual snapshot') {
+    async snapshot(label = 'Manual snapshot') {   // i18n-ignore (stored names: fixed English, matched below and read on every device — engine/src/70_account.js snapLabel shows them in the UI language)
       const data = await Noema.backup.collect(accId(), { includeSecrets: false });
       await call('/rest/v1/noema_snapshots', { method: 'POST', body: [{ user_id: uid(), label, data, size_bytes: JSON.stringify(data).length }], headers: { Prefer: 'return=minimal' } });
       jset('noema1:' + accId() + ':meta:lastSnapshot', Date.now());
@@ -402,9 +475,9 @@
     async autoSnapshot() {
       const last = jget('noema1:' + accId() + ':meta:lastSnapshot', 0);
       if (Date.now() - last < 20 * 3600e3) return;
-      await this.snapshot('Daily auto-snapshot');
+      await this.snapshot('Daily auto-snapshot');   // i18n-ignore
       const list = await this.listSnapshots();
-      const autos = (list || []).filter(s => s.label === 'Daily auto-snapshot');
+      const autos = (list || []).filter(s => s.label === 'Daily auto-snapshot');   // i18n-ignore
       for (const s of autos.slice(30)) await this.deleteSnapshot(s.id).catch(() => { });
     },
 
@@ -431,7 +504,7 @@
       for (const pth of this.partPaths(path, chunks)) {
         const enc2 = pth.split('/').map(encodeURIComponent).join('/');
         const r = isPublic ? await fetch(`${BASE}/storage/v1/object/public/${bucket}/${enc2}`) : await call(`/storage/v1/object/authenticated/${bucket}/${enc2}`, { raw: true });
-        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        if (!r.ok) throw Object.assign(failed('/storage/v1/object', null, r), { message: `HTTP ${r.status}` });
         blobs.push(await r.blob());
       }
       return new Blob(blobs, { type: type || blobs[0]?.type || '' });
@@ -463,6 +536,14 @@
       await this.deleteObjects('noema-public', [`${uid()}/${id}.json`, ...(old?.meta?.filePaths || [])]).catch(() => { });
     },
     async myPublished() { return call(`/rest/v1/noema_public_packs?select=subject_id,title,updated_at,meta&owner=eq.${uid()}`); },
+    /* ---------- the page others see (Me › Me, docs/PROFILE.md): one row per person, readable by everybody once published ---------- */
+    async myPage() { return session() ? ((await call(`/rest/v1/noema_public_profiles?select=*&owner=eq.${uid()}`)) || [])[0] || null : null; },
+    async saveMyPage(p) {
+      const row = { owner: uid(), published: !!p.published, display_name: p.display_name || null, emoji: p.emoji || null, bio: p.bio || null, avatar: p.avatar || null, show: p.show || {}, card: p.card || {}, updated_at: new Date().toISOString() };
+      await call('/rest/v1/noema_public_profiles?on_conflict=owner', { method: 'POST', body: [row], headers: { Prefer: 'resolution=merge-duplicates,return=minimal' } });
+      return row;
+    },
+    async publicPage(owner) { return ((await call(`/rest/v1/noema_public_profiles?select=*&owner=eq.${enc(owner)}`, { auth: !!session() })) || [])[0] || null; },
     /** Upload source files for sharing → { map: { srcId: { path, name, type, size, chunks } }, paths: [every object written] } */
     async uploadShareFiles(bucket, pathOf, files, onProgress) {
       const map = {}, paths = []; let k = 0;
@@ -476,8 +557,8 @@
     },
     async shareWith(email, pack, meta, message, { files = [], onProgress } = {}) {
       const to = String(email || '').trim().toLowerCase();
-      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(to)) throw new Error('Please type a valid e-mail address.');
-      if (to === (session()?.user?.email || '').toLowerCase()) throw new Error('That is your own e-mail address.');
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(to)) throw coded('Please type a valid e-mail address.', 'share.invalid_email');   // i18n-ignore (English .message of err.share.invalid_email)
+      if (to === (session()?.user?.email || '').toLowerCase()) throw coded('That is your own e-mail address.', 'share.own_email');   // i18n-ignore (English .message of err.share.own_email)
       const u = session().user;
       const [row] = await call('/rest/v1/noema_shares', { method: 'POST', body: [{ from_user: uid(), from_email: u.email, from_name: meta.ownerName || u.user_metadata?.name || u.email, to_email: to, subject_id: pack.subject.id, title: pack.subject.title, meta, message: message || null }], headers: { Prefer: 'return=representation' } });
       try {
@@ -501,55 +582,55 @@
     /* ---------- 🩺 self-test against the REAL project with the signed-in account (cleans up after itself) ---------- */
     async selfTest(onStep = () => { }) {
       const out = [];
-      const hint = e => {
+      const hint = e => {   // matched on the English message (the same for every UI language), shown in the UI language
         const m = String(e && e.message || e);
-        if (/PGRST205|Could not find the table|does not exist|Bucket not found|schema cache|synced_at/i.test(m)) return 'The database is older than this app: Supabase → SQL Editor → run the newest cloud/supabase.sql once.';
-        if (/JWT|401|Not signed in|invalid.*token|refresh/i.test(m)) return 'Your sign-in expired: sign out and sign in again.';
-        if (/row-level security|403|permission/i.test(m)) return 'Permission rule refused it: run the newest cloud/supabase.sql (it resets the rules).';
-        if (/Network|Failed to fetch|offline/i.test(m)) return 'No connection to Supabase: check the internet / config.js address.';
-        return 'Unexpected — copy this line and give it to Claude.';
+        if (/PGRST205|Could not find the table|does not exist|Bucket not found|schema cache|synced_at/i.test(m)) return ET('err.ui.selftest.hint.schema');
+        if (/JWT|401|Not signed in|invalid.*token|refresh/i.test(m)) return ET('err.ui.selftest.hint.session');
+        if (/row-level security|403|permission/i.test(m)) return ET('err.ui.selftest.hint.permission');
+        if (/Network|Failed to fetch|offline/i.test(m)) return ET('err.ui.selftest.hint.network');
+        return ET('err.ui.selftest.hint.unexpected');
       };
       const step = async (name, fn) => {
         const t = Date.now(); onStep({ name, running: true });
         try { const note = await fn(); const r = { name, ok: true, ms: Date.now() - t, note: note || '' }; out.push(r); onStep(r); }
-        catch (e) { const r = { name, ok: false, ms: Date.now() - t, error: String(e && e.message || e), hint: hint(e) }; out.push(r); onStep(r); }
+        catch (e) { const r = { name, ok: false, ms: Date.now() - t, error: errText(e), errorInfo: errInfo(e), hint: hint(e) }; out.push(r); onStep(r); }
       };
       const T = Date.now().toString(36), me = uid();
-      await step('Signed in, token refresh', async () => { const s = session(); if (!s) throw new Error('Not signed in'); const j = await call('/auth/v1/token?grant_type=refresh_token', { method: 'POST', body: { refresh_token: s.refresh_token }, auth: false }); setSession(j); return s.user.email; });
-      await step('Profile', async () => { await call('/rest/v1/noema_profiles?select=user_id&limit=1'); });
-      await step('Progress sync (key/value)', async () => {
+      await step(ET('err.ui.selftest.step.signIn'), async () => { const s = session(); if (!s) throw coded('Not signed in', 'auth.not_signed_in'); const j = await call('/auth/v1/token?grant_type=refresh_token', { method: 'POST', body: { refresh_token: s.refresh_token }, auth: false }); setSession(j); return s.user.email; });   // i18n-ignore (English .message)
+      await step(ET('err.ui.selftest.step.profile'), async () => { await call('/rest/v1/noema_profiles?select=user_id&limit=1'); });
+      await step(ET('err.ui.selftest.step.progress'), async () => {
         const key = 'meta:selftest-' + T;
         await call('/rest/v1/noema_kv?on_conflict=user_id,key', { method: 'POST', body: [{ user_id: me, key, value: T, updated_at: new Date().toISOString() }], headers: { Prefer: 'resolution=merge-duplicates,return=minimal' } });
-        const r = await call(`/rest/v1/noema_kv?select=value&key=eq.${enc(key)}`); if (r?.[0]?.value !== T) throw new Error('value did not come back');
+        const r = await call(`/rest/v1/noema_kv?select=value&key=eq.${enc(key)}`); if (r?.[0]?.value !== T) throw coded('value did not come back', 'cloud.selftest.value_missing');   // i18n-ignore (English .message)
         await call(`/rest/v1/noema_kv?key=eq.${enc(key)}`, { method: 'DELETE' });
       });
-      await step('Conversations', async () => {
+      await step(ET('err.ui.selftest.step.conversations'), async () => {
         const id = 'cv_selftest' + T, now = new Date().toISOString();
         await call('/rest/v1/noema_conversations?on_conflict=user_id,id', { method: 'POST', body: [{ user_id: me, id, kind: 'tutor', created_at: now, updated_at: now, record: { id, selftest: true } }], headers: { Prefer: 'resolution=merge-duplicates,return=minimal' } });
         const r = await call(`/rest/v1/noema_conversations?select=id,synced_at&id=eq.${enc(id)}`);
         await call(`/rest/v1/noema_conversations?id=eq.${enc(id)}`, { method: 'DELETE' });
-        if (!r?.[0]) throw new Error('row did not come back'); if (!r[0].synced_at) throw new Error('column synced_at missing');
+        /* i18n-ignore-start */ if (!r?.[0]) throw coded('row did not come back', 'cloud.selftest.row_missing'); if (!r[0].synced_at) throw coded('column synced_at missing', 'cloud.selftest.column_missing'); /* i18n-ignore-end */
       });
-      await step('Cloud snapshots', async () => {
+      await step(ET('err.ui.selftest.step.snapshots'), async () => {
         const [row] = await call('/rest/v1/noema_snapshots', { method: 'POST', body: [{ user_id: me, label: 'self-test ' + T, data: { selftest: true }, size_bytes: 20 }], headers: { Prefer: 'return=representation' } });
         await call('/rest/v1/noema_snapshots?id=eq.' + row.id, { method: 'DELETE' });
       });
-      await step('Private files (packs, database)', async () => {
+      await step(ET('err.ui.selftest.step.files'), async () => {
         const path = `selftest/${T}.json`;
         await this.uploadObject(path, new Blob([JSON.stringify({ T })], { type: 'application/json' }), 'application/json');
-        const list = await this.listObjects('selftest'); if (!(list || []).some(o => o.name === T + '.json')) throw new Error('uploaded file not listed');
-        const back = await (await this.downloadObject(path)).json(); if (back.T !== T) throw new Error('downloaded content differs');
+        const list = await this.listObjects('selftest'); if (!(list || []).some(o => o.name === T + '.json')) throw coded('uploaded file not listed', 'cloud.selftest.not_listed');   // i18n-ignore (English .message)
+        const back = await (await this.downloadObject(path)).json(); if (back.T !== T) throw coded('downloaded content differs', 'cloud.selftest.content_differs');   // i18n-ignore (English .message)
         await this.deleteObjects('noema-private', [`${me}/${path}`]);
       });
-      await step('Public subjects (Explore)', async () => {
+      await step(ET('err.ui.selftest.step.public'), async () => {
         await call('/rest/v1/noema_public_packs?select=subject_id&limit=1');
         const path = `${me}/selftest-${T}.json`;
-        await call(`/storage/v1/object/noema-public/${path}`, { method: 'POST', body: new Blob(['{"ok":1}'], { type: 'application/json' }), headers: { 'Content-Type': 'application/json' } });
+        await call(`/storage/v1/object/noema-public/${path}`, { method: 'POST', body: new Blob(['{"ok":1}'], { type: 'application/json' }), headers: { 'Content-Type': 'application/json' } });   // i18n-ignore
         const r = await fetch(`${BASE}/storage/v1/object/public/noema-public/${path}`); const ok = r.ok;
-        await this.deleteObjects('noema-public', [path]); if (!ok) throw new Error('public file not readable (bucket must be public)');
+        await this.deleteObjects('noema-public', [path]); if (!ok) throw coded('public file not readable (bucket must be public)', 'cloud.selftest.public_unreadable');   // i18n-ignore (English .message)
       });
-      await step('Sharing with a person', async () => { await call('/rest/v1/noema_shares?select=id&limit=1'); await call('/storage/v1/object/list/noema-shared', { method: 'POST', body: { prefix: '', limit: 1 } }); });
-      await step('Shared curricula', async () => { await call('/rest/v1/noema_curricula_shared?select=id&limit=1'); await call('/rest/v1/noema_curriculum_steps?select=node_id&limit=1'); await call('/rest/v1/noema_curriculum_members?select=email&limit=1'); await call('/storage/v1/object/list/noema-curricula', { method: 'POST', body: { prefix: '', limit: 1 } }); });
+      await step(ET('err.ui.selftest.step.sharing'), async () => { await call('/rest/v1/noema_shares?select=id&limit=1'); await call('/storage/v1/object/list/noema-shared', { method: 'POST', body: { prefix: '', limit: 1 } }); });
+      await step(ET('err.ui.selftest.step.curricula'), async () => { await call('/rest/v1/noema_curricula_shared?select=id&limit=1'); await call('/rest/v1/noema_curriculum_steps?select=node_id&limit=1'); await call('/rest/v1/noema_curriculum_members?select=email&limit=1'); await call('/storage/v1/object/list/noema-curricula', { method: 'POST', body: { prefix: '', limit: 1 } }); });
       return out;
     },
 

@@ -11,7 +11,7 @@
    "value": "same"
   }
  ],
- "summary": "In the present tense Hebrew has no verb “to be”: the subject and what it is simply stand side by side — אֲנִי סְטוּדֶנְט “I (am) a student”, הַמּוֹרֶה פֹּה “the teacher (is) here”. This is a nominal sentence. In the past and future the verb הָיָה appears and agrees with the subject: הוּא הָיָה מוֹרֶה “he was a teacher”, הִיא הָיְתָה סְטוּדֶנְטִית, הֵם הָיוּ חֲבֵרִים; הוּא יִהְיֶה / הִיא תִּהְיֶה “he / she will be”. Between two nouns, especially in definitions, a pronoun that agrees with the subject can stand where “is” would be: יֶלֶד הוּא אָדָם “a child is a person”.",
+ "summary": "In the present tense Hebrew has no verb “to be”: the subject and what it is simply stand side by side — אֲנִי סְטוּדֶנְט “I (am) a student”, הַמּוֹרֶה פֹּה “the teacher (is) here”. This is a nominal sentence. In the past and future the verb הָיָה appears and agrees with the subject: הוּא הָיָה מוֹרֶה “he was a teacher”, הִיא הָיְתָה סְטוּדֶנְטִית, הֵם הָיוּ חֲבֵרִים; הוּא יִהְיֶה / הִיא תִּהְיֶה “he / she will be”. Between two nouns, especially in definitions, a pronoun that agrees with the subject can stand between them as a link: יֶלֶד הוּא אָדָם “a child is a person”.",
  "blocks": [
   {
    "t": "compare",
@@ -139,8 +139,8 @@
   {
    "t": "callout",
    "kind": "tip",
-   "title": "The pronoun as “is”",
-   "text": "With a noun subject, especially in definitions, Hebrew can put הוּא / הִיא / הֵם / הֵן where a linking “is / are” would stand: יֶלֶד הוּא אָדָם, יְלָדִים הֵם אֲנָשִׁים. It agrees with the subject. With a pronoun subject it is not used: אֲנִי מוֹרֶה, never *אֲנִי הוּא מוֹרֶה."
+   "title": "The pronoun as a link",
+   "text": "With a noun subject, especially in definitions, Hebrew can put הוּא / הִיא / הֵם / הֵן between subject and predicate as a link: יֶלֶד הוּא אָדָם, יְלָדִים הֵם אֲנָשִׁים. It agrees with the subject. With a pronoun subject it is not used: אֲנִי מוֹרֶה, never *אֲנִי הוּא מוֹרֶה."
   },
   {
    "t": "ask",
@@ -169,10 +169,10 @@
  },
  "traps": [
   "No present “to be”: אֲנִי מוֹרֶה, not *אֲנִי הוּא מוֹרֶה or *אֲנִי הָיָה מוֹרֶה.",
-  "הָיָה means “was”, never “is”.",
+  "הָיָה is the past (“was”), never the present.",
   "Past agreement follows the subject: הַדֶּלֶת הָיְתָה שָׁם (feminine), not *הַדֶּלֶת הָיָה שָׁם.",
   "In the past the pronoun can be dropped (הָיִיתִי סְטוּדֶנְט), in the present it cannot (אֲנִי סְטוּדֶנְט).",
-  "The pronoun copula agrees with the subject, not with the predicate: אִשָּׁה הִיא אָדָם (אִשָּׁה is feminine, although אָדָם is masculine)."
+  "The pronoun copula agrees with the subject, not with the predicate:\n→ אִשָּׁה הִיא אָדָם (אִשָּׁה is feminine, although אָדָם is masculine)"
  ],
  "evidence": {
   "lemmas": [
@@ -259,7 +259,7 @@
   {
    "for": "ru",
    "rel": "same",
-   "text": "Russian too has no “is” in the present and a gendered past: я студент — он был учителем — она была студенткой; Hebrew אֲנִי סְטוּדֶנְט — הוּא הָיָה מוֹרֶה — הִיא הָיְתָה סְטוּדֶנְטִית. One difference: the noun after הָיָה keeps its form (no instrumental like учителем)."
+   "text": "Russian too has no “is” in the present and a gendered past: я студент — он был учителем — она была студенткой; Hebrew אֲנִי סְטוּדֶנְט — הוּא הָיָה מוֹרֶה — הִיא הָיְתָה סְטוּדֶנְטִית.\n\nOne difference: the noun after הָיָה keeps its form (no instrumental like учителем)."
   },
   {
    "for": "ar",
@@ -269,7 +269,7 @@
   {
    "for": "en",
    "rel": "different",
-   "text": "English always says am / is / are; the Hebrew present has no verb at all: אֲנִי סְטוּדֶנְט “I (am) a student”. Do not translate “is” with הוּא after a pronoun."
+   "text": "English always says am / is / are; the Hebrew present has no verb at all:\n→ אֲנִי סְטוּדֶנְט “I (am) a student”\n\nDo not translate “is” with הוּא after a pronoun."
   },
   {
    "for": "de",
@@ -279,7 +279,7 @@
   {
    "for": "el",
    "rel": "different",
-   "text": "Greek always uses είμαι (είμαι φοιτητής); Hebrew drops it in the present. Like ήταν, הָיָה agrees with the subject — and in Hebrew also in gender: הָיָה / הָיְתָה."
+   "text": "Greek always uses είμαι (είμαι φοιτητής); Hebrew drops it in the present.\n\nLike ήταν, הָיָה agrees with the subject — and in Hebrew also in gender:\n→ הָיָה / הָיְתָה"
   },
   {
    "for": "es",
@@ -289,12 +289,12 @@
   {
    "for": "fr",
    "rel": "different",
-   "text": "French always uses être (je suis étudiant); Hebrew says nothing in the present. In the past הָיָה agrees with the subject in gender as well: הוּא הָיָה / הִיא הָיְתָה."
+   "text": "French always uses être (je suis étudiant); Hebrew says nothing in the present.\n\nIn the past הָיָה agrees with the subject in gender as well:\n→ הוּא הָיָה / הִיא הָיְתָה"
   },
   {
    "for": "hi",
    "rel": "different",
-   "text": "Hindi closes the sentence with a form of होना (मैं छात्र हूँ); Hebrew has no present copula and nothing at the end: אֲנִי סְטוּדֶנְט."
+   "text": "Hindi closes the sentence with a form of होना (मैं छात्र हूँ); Hebrew has no present copula and nothing at the end:\n→ אֲנִי סְטוּדֶנְט"
   },
   {
    "for": "fa",
@@ -309,7 +309,7 @@
   {
    "for": "tr",
    "rel": "similar",
-   "text": "Turkish has no separate verb in the present either, but it adds personal endings to the predicate (öğrenciyim “I am a student”); Hebrew adds nothing: אֲנִי סְטוּדֶנְט. For the past Turkish adds -di (öğrenciydim); Hebrew uses the verb הָיָה."
+   "text": "Turkish has no separate verb in the present either, but it adds personal endings to the predicate (öğrenciyim “I am a student”); Hebrew adds nothing:\n→ אֲנִי סְטוּדֶנְט\n\nFor the past Turkish adds -di (öğrenciydim); Hebrew uses the verb הָיָה."
   },
   {
    "for": "ja",
@@ -329,7 +329,7 @@
   {
    "for": "hu",
    "rel": "similar",
-   "text": "Hungarian also drops van in the third person present (ő tanár “he is a teacher”) but keeps vagyok, vagy … for “I, you”; Hebrew drops the verb in every person: אֲנִי מוֹרֶה, אַתָּה מוֹרֶה."
+   "text": "Hungarian also drops van in the third person present (ő tanár “he is a teacher”) but keeps vagyok, vagy … for “I, you”; Hebrew drops the verb in every person:\n→ אֲנִי מוֹרֶה, אַתָּה מוֹרֶה"
   },
   {
    "for": "sw",
@@ -339,7 +339,7 @@
   {
    "for": "zh",
    "rel": "trap",
-   "text": "Chinese 是 links two nouns (我是学生) but is left out before adjectives (他很高); Hebrew uses no linking word for either: אֲנִי סְטוּדֶנְט, הוּא גָּבֹהַּ."
+   "text": "Chinese 是 links two nouns (我是学生) but is left out before adjectives (他很高); Hebrew uses no linking word for either:\n→ אֲנִי סְטוּדֶנְט, הוּא גָּבֹהַּ"
   },
   {
    "for": "vi",
@@ -350,6 +350,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut turns the noun itself into a verb with a suffix and a personal ending (“I-am-a-teacher” in one word); Hebrew leaves the noun as it is and adds nothing in the present."
+  },
+  {
+   "for": "it",
+   "rel": "trap",
+   "text": "Italian always says essere (sono studente); the Hebrew present has no verb:\n→ אֲנִי סְטוּדֶנְט\n\nIn the past one verb, הָיָה, covers both essere and stare (הָיִיתִי בַּבַּיִת “ero / stavo a casa”), and it agrees in gender:\n→ הוּא הָיָה / הִיא הָיְתָה"
+  },
+  {
+   "for": "pt",
+   "rel": "trap",
+   "text": "Portuguese splits ser and estar; in the Hebrew present both are missing — אֲנִי סְטוּדֶנְט (sou estudante), הַסֵּפֶר פֹּה (o livro está aqui).\n\nIn the past both are הָיָה, which agrees in gender:\n→ הוּא הָיָה / הִיא הָיְתָה"
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian always uses jam (jam student); Hebrew says nothing in the present:\n→ אֲנִי סְטוּדֶנְט\n\nIn the past הָיָה also shows gender — הוּא הָיָה / הִיא הָיְתָה — where Albanian ishte is the same for both."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your language conjugates “to be” in every tense, leave it out in the present:\n→ אֲנִי סְטוּדֶנְט, הַסֵּפֶר פֹּה\n\nIt returns only in the past and future (הָיָה, יִהְיֶה), agreeing with the subject."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If your language says “I am …” with an ending on the predicate, Hebrew adds nothing at all:\n→ אֲנִי סְטוּדֶנְט\n\nFor the past it uses a separate verb, הָיָה, between subject and predicate."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "trap",
+   "text": "If your language links two nouns with a copula word but not a noun and an adjective, note that the Hebrew present uses nothing for either:\n→ אֲנִי סְטוּדֶנְט, הוּא גָּבֹהַּ"
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If your language turns a noun into a predicate with an affix, Hebrew simply puts subject and predicate side by side in the present (הִיא מוֹרָה); only the past and future add the verb הָיָה."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "The verbless present is common Semitic: subject and predicate side by side.\n\nUnlike some relatives, Hebrew leaves the predicate unchanged after הָיָה — no accusative:\n→ הוּא הָיָה מוֹרֶה"
   }
  ]
 }
