@@ -41,6 +41,8 @@ const $ = (s, r = document) => r.querySelector(s);
    lang.*) · the course's speaker language (UI.C.explainLang: the course's own explanations come from its data; the few explanations
    this code writes itself are lang.expl.* and follow it when it is a UI locale) · the learned languages (never translated) ---------- */
 const LT = (k, p) => window.NoemaI18n ? NoemaI18n.t(k, p) : k;
+/* an arrow written into a text points along the reading direction: mirrored in a right-to-left interface (docs/i18n.md §5) */
+const arrowBack = () => window.NoemaI18n?.dir === 'rtl' ? '→' : '←', arrowOn = () => window.NoemaI18n?.dir === 'rtl' ? '←' : '→';
 const LE = (k, p) => !window.NoemaI18n ? k : UI.C?.explainLang && NoemaI18n.match(UI.C.explainLang) ? NoemaI18n.t(k, p, UI.C.explainLang) : NoemaI18n.t(k, p);
 /** A list in the UI locale (“a, b, c” in English, as the course always wrote it; “a, b и c” in Russian …). */
 const LLIST = items => window.NoemaI18n && NoemaI18n.locale !== 'en' ? NoemaI18n.fmt.list(items.map(String)) : items.join(', ');
@@ -435,7 +437,7 @@ VIEWS.node = (v, r) => {
   const n = UI.C.nodes[r.arg]; if (!n) return VIEWS.home(v);
   if (n.kind === 'lesson') return VIEWS.lesson(v, r);
   const c = UI.lang, X = LX(c), k = N.known(UI.C, UI.L, c), ns = k.nodes[n.id];
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← ' + LT('lang.card.map'))),
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, arrowBack() + ' ' + LT('lang.card.map'))),
     h('h1', {}, n.title),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); render(); }),
       h('span', { class: 'lx-ns ns-' + ns }, info(c).flag, ' ', STATE_LABEL[ns] || ns)),
@@ -466,7 +468,7 @@ VIEWS.c = (v, r) => {
   const node = UI.C.nodes[LX(UI.lang).owner[cid] || UI.C.owner[cid]];
   const draw = () => {
     v.innerHTML = ''; topbar();
-    v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.length > 1 || !node ? history.back() : go('#/node/' + node.id) }, '← ' + (node ? node.title : LT('lang.card.back')))),
+    v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.length > 1 || !node ? history.back() : go('#/node/' + node.id) }, arrowBack() + ' ' + (node ? node.title : LT('lang.card.back')))),
       h('div', { class: 'lx-cardhead' }, conceptPic(cid, 'lx-bigemoji'), h('div', {}, h('h1', {}, con.gloss), h('div', { class: 'tiny' }, [node ? node.title : '⏳ ' + LT('lang.card.untaughtMeaning'), con.wikidata ? 'Wikidata ' + con.wikidata : null].filter(Boolean).join(' · ')))),   // i18n-ignore (Wikidata: a name)
       h('div', { class: 'row' }, flagRail(cid, UI.lang, x => { UI.lang = x; UI.prefs.lang = x; save(); draw(); }),
         UI.C.languages.length > 1 ? h('button', { class: 'btn small' + (UI.prefs.compare ? ' primary' : ''), onclick: () => { UI.prefs.compare = !UI.prefs.compare; save(); draw(); } }, '⇄ ' + LT('lang.view.cmp')) : null));
@@ -478,7 +480,7 @@ VIEWS.c = (v, r) => {
   };
   draw();
 };
-VIEWS.w = (v, r) => { const c = r.arg, lid = r.arg2; if (!UI.C.lang[c]?.lex[lid]) return VIEWS.home(v); v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.back() }, '← ' + LT('lang.card.back'))), wordCardView(c, lid)); };
+VIEWS.w = (v, r) => { const c = r.arg, lid = r.arg2; if (!UI.C.lang[c]?.lex[lid]) return VIEWS.home(v); v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.back() }, arrowBack() + ' ' + LT('lang.card.back'))), wordCardView(c, lid)); };
 
 function compareTable(cid) {
   const rows = UI.C.languages.map(c => {
@@ -595,7 +597,7 @@ VIEWS.field = (v, r) => {
   const field = UI.C.data.fields.find(f => f.field === fid); if (!field) return VIEWS.home(v);
   const c = UI.lang, k = N.known(UI.C, UI.L, c);
   const all = field.concepts;
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← ' + LT('lang.card.map'))),
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, arrowBack() + ' ' + LT('lang.card.map'))),
     h('h1', {}, '🧺 ', field.title, h('span', { class: 'tiny lx-count' }, ' · ' + LT('lang.field.inAll', { n: all.length }))),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); render(); }),
       h('div', { class: 'lx-seg' }, ...[0, 1, 2, 3].map(t => h('button', { class: tierPick === t ? 'on' : '', onclick: () => go(`#/field/${encodeURIComponent(fid)}/${t}`) }, LT('lang.field.tier' + t)))),
@@ -653,7 +655,7 @@ VIEWS.recall = (v, r) => {
     if (hit) { found.set(hit.id, true); list.prepend(h('span', { class: 'lx-hit' }, word(c, hit.lemma, { sub: false }), ' ', h('span', { class: 'tiny' }, gloss(c, hit.id)))); msg.textContent = `✓ ${LNUM(found.size)}`; }
     else msg.textContent = LT(words.some(x => spellings(c, x).has(t)) ? 'lang.recall.already' : 'lang.recall.notInField');
   });
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.back() }, '← ' + LT('lang.card.back'))),
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.back() }, arrowBack() + ' ' + LT('lang.card.back'))),
     h('h1', {}, '⏱️ ' + LT('lang.recall.title', { field: field.title.toLowerCase(), lang: info(c).flag + ' ' + info(c).label })),
     h('p', { class: 'tiny' }, LT('lang.recall.how')),
     h('div', { class: 'row' }, si.el, clock, h('button', { class: 'btn small', onclick: finish }, LT('lang.recall.done'))), msg, list);
@@ -752,7 +754,7 @@ const PEC_AREAS = ['script', 'orthography', 'phonology', 'morphology', 'syntax',
 /** D18: the peculiarities of a language as a free library (no order): what is new for you first marked, every one readable. */
 VIEWS.peculiar = (v, r) => {
   const c = r.arg && UI.C.lang[r.arg] ? r.arg : UI.lang, W = UI.C.data.world;
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.length > 1 ? history.back() : go('#/') }, '← ' + LT('lang.card.back'))),
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.length > 1 ? history.back() : go('#/') }, arrowBack() + ' ' + LT('lang.card.back'))),
     h('h1', {}, '📚 ' + LT('lang.pec.title', { lang: info(c).name })), h('div', { class: 'row' }, flagRail(null, c, x => go('#/peculiar/' + x))));
   if (!W) return v.append(h('p', { class: 'lx-note' }, LT('lang.pec.noCatalogue')));
   const r2 = N.forLearner(UI.C, c, knowsL()), isNew = new Set(r2.new.map(x => x.p.id)), fam = Object.fromEntries(r2.familiar.map(x => [x.p.id, x.from]));
@@ -783,7 +785,7 @@ VIEWS.settings = (v) => {
       ...[[1, LT('lang.set.depth1')], [2, LT('lang.set.depth2')], [3, LT('lang.set.depth3')]].map(([d, t]) => h('option', { value: d, selected: (S.depth?.[c] ?? 3) === d ? true : null }, t))))));
   const num = (label, key, min, max, def) => h('label', { class: 'lx-setrow' }, label, ' ', h('input', { type: 'number', min, max, value: S[key] || def, onchange: e => { S[key] = Math.max(min, Math.min(max, +e.target.value || def)); save(); } }));
   const tog = (label, key) => h('label', { class: 'lx-check' }, h('input', { type: 'checkbox', checked: UI.prefs[key] !== false ? true : null, onchange: e => { UI.prefs[key] = e.target.checked; save(); } }), ' ', label);
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← ' + LT('lang.card.map'))), h('h1', {}, '⚙️ ' + LT('lang.shell.settings')),
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, arrowBack() + ' ' + LT('lang.card.map'))), h('h1', {}, '⚙️ ' + LT('lang.shell.settings')),
     h('h3', { class: 'lx-h3' }, LT('lang.set.studyNow')), langBox,
     h('p', { class: 'tiny lx-studynote' }, LT(UI.C.languages.length < UI.C.allLanguages.length ? 'lang.study.keptNote' : 'lang.study.note'), ' ',
       window.Noema?.langStudy?.chooser ? h('button', { class: 'btn ghost small lx-studyall', onclick: () => studySheet() }, LT('lang.study.allApp')) : null),
@@ -811,7 +813,7 @@ function sortPool(c, fid, n = 12) {
 VIEWS.sort = (v, r) => {
   const fid = r.arg, field = UI.C.data.fields.find(f => f.field === fid); if (!field) return VIEWS.home(v);
   const c = UI.lang, X = LX(c), pool = sortPool(c, fid);
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/field/' + encodeURIComponent(fid) + '/0') }, '← ' + LT('lang.card.fieldMap'))),
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/field/' + encodeURIComponent(fid) + '/0') }, arrowBack() + ' ' + LT('lang.card.fieldMap'))),
     h('h1', {}, '🧩 ' + LT('lang.field.sortGroups'), h('span', { class: 'tiny' }, ` · ${field.title} · ${info(c).flag} ${info(c).label}`)),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); render(); })));
   if (pool.length < 4) return v.append(h('p', { class: 'lx-note' }, LT('lang.sort.tooFew', { lang: info(c).name, n: pool.length })));
@@ -854,7 +856,7 @@ function partsPool(c) {
 }
 VIEWS.parts = (v, r) => {
   const c = UI.C.lang[r.arg] ? r.arg : UI.lang, X = LX(c), pool = shuffle(partsPool(c)).slice(0, 10);
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← ' + LT('lang.card.map'))),
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, arrowBack() + ' ' + LT('lang.card.map'))),
     h('h1', {}, '🔁 ' + LT('lang.view.parts'), h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).label}`)),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); go('#/parts/' + x); })));
   if (!pool.length) return v.append(h('p', { class: 'lx-note' }, LT('lang.parts.nothing', { lang: info(c).name })));
@@ -869,7 +871,7 @@ VIEWS.parts = (v, r) => {
     const others = qaPartsDistractors(c, p, pid, val, byLabel[pid]);   // forms of the same word first (99_qa.js): another word's form gives the answer away
     const box = h('div', { class: 'lx-ex lx-exparts', 'data-kind': 'parts', 'data-lex': p.id, 'data-label': pid });
     if (!others.length) {   // nothing to choose among: show it and go on
-      box.append(h('div', { class: 'lx-prompt' }, word(c, x.lemma, { lex: x })), h('div', { class: 'lx-q' }, `${label}: `, /[֐-ۿ一-鿿]/.test(val) ? word(c, val, { sub: false }) : val), h('button', { class: 'btn primary lx-next', onclick: next }, LT('lang.drill.next') + ' →'));
+      box.append(h('div', { class: 'lx-prompt' }, word(c, x.lemma, { lex: x })), h('div', { class: 'lx-q' }, `${label}: `, /[֐-ۿ一-鿿]/.test(val) ? word(c, val, { sub: false }) : val), h('button', { class: 'btn primary lx-next', onclick: next }, LT('lang.drill.next') + ' ' + arrowOn()));
       return stage.append(box);
     }
     const opts = shuffle([{ val, ok: true }, ...others.map(o => ({ val: o }))]);
@@ -877,7 +879,7 @@ VIEWS.parts = (v, r) => {
       options(opts.map(o => ({ ...o, label: /[֐-ۿ一-鿿]/.test(o.val) ? word(c, o.val, { sub: false }) : o.val })), (o, b, wrap) => {
         b.classList.add(o.ok ? 'right' : 'wrong'); if (!o.ok) markOpts(wrap, j => opts[j].ok); if (o.ok) right++;
         N.review(UI.C, UI.L, c, p.id, 'r', o.ok ? 'good' : 'again', day); save();
-        box.append(h('div', { class: 'row' }, h('button', { class: 'btn primary lx-next', onclick: next }, LT('lang.drill.next') + ' →')));
+        box.append(h('div', { class: 'row' }, h('button', { class: 'btn primary lx-next', onclick: next }, LT('lang.drill.next') + ' ' + arrowOn())));
       }));
     stage.append(box);
   };
@@ -1065,7 +1067,7 @@ function exIntro(c, lid, done) {
       : card.parts.length ? h('dl', { class: 'lx-parts' }, ...card.parts.slice(0, 4).flatMap(([k, val]) => [h('dt', {}, k), h('dd', {}, /[֐-ۿ一-鿿]/.test(val) ? word(c, val, { sub: false }) : val)])) : null,
     e1 ? h('div', { class: 'lx-ex1' }, word(c, e1.text, { sub: false }), h('div', { class: 'tiny' }, e1.tr)) : null,
     card.sections.find(s => s.key === 'pitfalls') ? h('div', { class: 'lx-warn tiny' }, '⚠️ ', card.sections.find(s => s.key === 'pitfalls').items[0]) : null,
-    h('div', { class: 'row' }, h('button', { class: 'btn primary lx-next', onclick: () => done(true) }, LT('lang.ex.gotIt') + ' →')));
+    h('div', { class: 'row' }, h('button', { class: 'btn primary lx-next', onclick: () => done(true) }, LT('lang.ex.gotIt') + ' ' + arrowOn())));
   return box;
 }
 
@@ -1229,7 +1231,7 @@ function learnerView(c) {
 }
 VIEWS.fn = (v, r) => {
   const fid = r.arg, c = r.arg2 && UI.C.lang[r.arg2] ? r.arg2 : UI.lang; if (!UI.C.functions[fid]) return VIEWS.home(v);
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.length > 1 ? history.back() : go('#/') }, '← ' + LT('lang.card.back'))),
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.length > 1 ? history.back() : go('#/') }, arrowBack() + ' ' + LT('lang.card.back'))),
     h('div', { class: 'row' }, flagRail(null, c, x => go(`#/fn/${encodeURIComponent(fid)}/${x}`))),
     fid === 'fn.overview' ? typologyCard() : null, grammarCard(c, fid));
 };
@@ -1442,7 +1444,7 @@ function runSession(plan, { only = null } = {}) {
       ok ? stats.right++ : stats.wrong++;
       const key = a.kind + a.lang + (a.lex || JSON.stringify([a.it?.sentence, a.it?.prompt, a.it?.kind]));
       if (!ok && a.kind !== 'poly' && !retried.has(key)) { retried.add(key); queue.splice(Math.min(3, queue.length), 0, { ...a, retry: true }); }   // once more, a little later
-      const btn = h('button', { class: 'btn primary lx-next' }, LT('lang.drill.next') + ' →'); btn.onclick = next;
+      const btn = h('button', { class: 'btn primary lx-next' }, LT('lang.drill.next') + ' ' + arrowOn()); btn.onclick = next;
       stage.append(h('div', { class: 'row lx-nextrow' }, btn)); setTimeout(() => btn.focus(), 30);
     };
     UI.current = a;
@@ -1483,7 +1485,7 @@ VIEWS.lesson = (v, r) => {
   const c = langs.includes(UI.lang) ? UI.lang : langs[0], X = LX(c), k = N.known(UI.C, UI.L, c);
   const st = Object.fromEntries(langs.map(x => [x, N.nodeStates(UI.C, UI.L, x)[nid]]));
   const can = langs.filter(x => ['open', 'learning', 'passed', 'known', 'mastered'].includes(st[x]));
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← ' + LT('lang.card.map'))),
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, arrowBack() + ' ' + LT('lang.card.map'))),
     h('h1', {}, h('span', { class: 'lx-step' }, stepLabel(n)), ' ', n.title),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); render(); }),
       ...langs.map(x => h('span', { class: 'lx-ns ns-' + st[x] }, info(x).flag, ' ', STATE_LABEL[st[x]] || st[x], UI.L.langs[x]?.checks?.[nid] ? ' · ' + LT('lang.lesson.pct', { pct: Math.round(UI.L.langs[x].checks[nid].best * 100) }) : ''))),
@@ -1535,7 +1537,7 @@ function runQueue(queue, { nid, langs, title }) {
   m.innerHTML = ''; m.append(h('div', { class: 'view lx-view lx-session lx-lessonrun', 'data-node': nid }, h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => { save(true); go('#/lesson/' + nid); render(); } }, '✕ ' + LT('lang.sess.stop')), h('b', { class: 'tiny' }, title), bar), stage));
   const stats = { right: 0, wrong: 0, introduced: 0 }, results = {}, retried = new Set(); let total = queue.length, i = 0;
   const day = today();
-  const nextBtn = (label = LT('lang.drill.next') + ' →') => { const b = h('button', { class: 'btn primary lx-next' }, label); b.onclick = next; stage.append(h('div', { class: 'row lx-nextrow' }, b)); setTimeout(() => b.focus(), 30); };
+  const nextBtn = (label = LT('lang.drill.next') + ' ' + arrowOn()) => { const b = h('button', { class: 'btn primary lx-next' }, label); b.onclick = next; stage.append(h('div', { class: 'row lx-nextrow' }, b)); setTimeout(() => b.focus(), 30); };
   function next() {
     bar.firstChild.style.width = Math.round(i / Math.max(total, 1) * 100) + '%';
     const a = queue.shift(); if (!a) return finish();
@@ -1543,7 +1545,7 @@ function runQueue(queue, { nid, langs, title }) {
     if (a.kind === 'screen') {
       if (a.make) stage.append(a.make());
       else { let cur = a.langs[0] || langs[0]; const holder = h('div'); const draw = () => { holder.innerHTML = ''; holder.append(grammarCard(cur, a.fn, { compact: true, onPick: x => { cur = x; draw(); } })); }; draw(); stage.append(a.langs.length > 1 ? flagRail(null, cur, x => { cur = x; draw(); }) : null, holder); }
-      return nextBtn(LT('lang.ex.gotIt') + ' →');
+      return nextBtn(LT('lang.ex.gotIt') + ' ' + arrowOn());
     }
     if (a.kind === 'drills') {   // expand into exercises now that the words are known
       const items = [];
@@ -1560,7 +1562,7 @@ function runQueue(queue, { nid, langs, title }) {
       }
       if (!items.length) return finish();
       stage.append(h('div', { class: 'lx-result' }, h('h2', {}, '✔ ' + LT('lang.lesson.theCheck')), h('p', {}, LT('lang.lesson.checkIntro', { n: items.length, flags: uniq(items.map(x => x.it.lang)).map(c => info(c).flag).join(' ') }))));
-      queue.unshift(...shuffle(items)); total += items.length; return nextBtn(LT('lang.lesson.start') + ' →');
+      queue.unshift(...shuffle(items)); total += items.length; return nextBtn(LT('lang.lesson.start') + ' ' + arrowOn());
     }
     const done = ok => {
       if (a.kind === 'intro') { N.introduce(UI.C, UI.L, a.lang, a.lex, day); stats.introduced++; save(); return next(); }
@@ -1805,7 +1807,7 @@ function runPractice(items, { title, back = '#/', again = null }) {
   m.innerHTML = ''; m.append(h('div', { class: 'view lx-view lx-session lx-practice' }, h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => { save(true); go(back); } }, '✕ ' + LT('lang.sess.stop')), h('b', { class: 'tiny' }, title), bar), stage));
   const queue = items.map(it => ({ it })), byFn = {}, retried = new Set(); let total = queue.length, i = 0;
   const day = today();
-  const nextBtn = () => { const b = h('button', { class: 'btn primary lx-next' }, LT('lang.drill.next') + ' →'); b.onclick = next; stage.append(h('div', { class: 'row lx-nextrow' }, b)); setTimeout(() => b.focus(), 30); };
+  const nextBtn = () => { const b = h('button', { class: 'btn primary lx-next' }, LT('lang.drill.next') + ' ' + arrowOn()); b.onclick = next; stage.append(h('div', { class: 'row lx-nextrow' }, b)); setTimeout(() => b.focus(), 30); };
   function next() {
     bar.firstChild.style.width = Math.round(i / Math.max(total, 1) * 100) + '%';
     const a = queue.shift(); if (!a) return finish();
@@ -1859,7 +1861,7 @@ function grammarLaneHome() {
     box.append(h('div', { class: 'lx-card lx-laneh', 'data-lang': c },
       h('div', { class: 'row' }, h('b', {}, info(c).flag, ' ', info(c).label), h('span', { class: 'tiny' }, [LT('lang.glane.points', { n: lane.length }), ...['new', 'practicing', 'solid', 'mastered'].map(s => `${FN_STATE[s]} ${LNUM(n(s))}`)].join(' · ')),
         h('span', { class: 'spacer' }), ready.length ? h('button', { class: 'btn small primary lx-mixed', onclick: () => practiseMixed(c) }, '▶ ' + LT('lang.glane.mixed')) : null,
-        h('button', { class: 'btn small ghost', onclick: () => go('#/grammar/' + c) }, LT('lang.glane.all') + ' →')),
+        h('button', { class: 'btn small ghost', onclick: () => go('#/grammar/' + c) }, LT('lang.glane.all') + ' ' + arrowOn())),
       ...ready.slice(0, 3).map(x => laneRow(c, x))));
   }
   if (!any) box.append(h('p', { class: 'tiny' }, LT('lang.glane.empty')));
@@ -1867,7 +1869,7 @@ function grammarLaneHome() {
 }
 VIEWS.grammar = (v, r) => {
   const c = r.arg && UI.C.lang[r.arg] ? r.arg : UI.lang, lane = N.grammarLane(UI.C, UI.L, c);
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← ' + LT('lang.card.map'))),
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, arrowBack() + ' ' + LT('lang.card.map'))),
     h('h1', {}, '📐 ' + LT('lang.view.grammar'), h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).label}`)),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); go('#/grammar/' + x); }),
       toPractise(lane).length ? h('button', { class: 'btn primary lx-mixed', onclick: () => practiseMixed(c) }, '▶ ' + LT('lang.glane.mixed')) : null),
@@ -2026,14 +2028,14 @@ function deepRun(holder, items, { again = null } = {}) {
       stage.append(h('div', { class: 'lx-result lx-deepdone' }, h('h2', {}, '🏋️ ' + LT('lang.deep.score', { right, n: items.length })),
         h('ul', { class: 'lx-list' }, ...Object.entries(byKind).map(([k, r]) => h('li', {}, `${DEEP_LABEL[k] || k}: ${LNUM(r.c)} / ${LNUM(r.n)}`))),
         h('p', { class: 'tiny' }, LT('lang.deep.eachReview')), newWordsList(),
-        h('div', { class: 'row' }, again ? h('button', { class: 'btn primary', onclick: again }, '↻ ' + LT('lang.drill.again')) : null, h('button', { class: 'btn', onclick: () => history.length > 1 ? history.back() : go('#/') }, '← ' + LT('lang.card.back')))));
+        h('div', { class: 'row' }, again ? h('button', { class: 'btn primary', onclick: again }, '↻ ' + LT('lang.drill.again')) : null, h('button', { class: 'btn', onclick: () => history.length > 1 ? history.back() : go('#/') }, arrowBack() + ' ' + LT('lang.card.back')))));
       return;
     }
     const it = items[i++];
     const el = exItem(it, ok => {
       N.deepRecord(UI.C, UI.L, it.lang, it, ok, day, it.perLex); save();
       if (ok) right++; const t = byKind[it.kind] = byKind[it.kind] || { c: 0, n: 0 }; t.n++; if (ok) t.c++;
-      const b = h('button', { class: 'btn primary lx-next' }, i < items.length ? LT('lang.drill.next') + ' →' : LT('lang.deep.finish')); b.onclick = next;
+      const b = h('button', { class: 'btn primary lx-next' }, i < items.length ? LT('lang.drill.next') + ' ' + arrowOn() : LT('lang.deep.finish')); b.onclick = next;
       stage.append(h('div', { class: 'row lx-nextrow' }, b)); setTimeout(() => b.focus(), 30);
     });
     Object.assign(el.dataset, { kind: it.kind, lang: it.lang, lex: it.lex });
@@ -2067,7 +2069,7 @@ function deepenButton(nid, c) {
 }
 VIEWS.deep = (v, r) => {
   const c = r.arg, lid = r.arg2, x = UI.C.lang[c]?.lex[lid]; if (!x) return VIEWS.home(v);
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.length > 1 ? history.back() : go('#/w/' + c + '/' + encodeURIComponent(lid)) }, '← ' + LT('lang.card.back'))),
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.length > 1 ? history.back() : go('#/w/' + c + '/' + encodeURIComponent(lid)) }, arrowBack() + ' ' + LT('lang.card.back'))),
     h('h1', {}, '🏋️ ', word(c, x.lemma, { lex: x }), h('span', { class: 'tiny' }, ` · ${gloss(c, lid)} · ${info(c).flag} ${info(c).label}`)));
   whenProfiles(c, () => {
     const types = N.deepTypes(UI.C, UI.L, c, lid);
@@ -2080,7 +2082,7 @@ VIEWS.deep = (v, r) => {
 VIEWS.deepen = (v, r) => {
   const nid = r.arg, n = UI.C.nodes[nid]; if (!n) return VIEWS.home(v);
   const c = r.arg2 && UI.C.lang[r.arg2] ? r.arg2 : UI.lang;
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go((n.kind === 'lesson' ? '#/lesson/' : '#/node/') + nid) }, '← ' + n.title)),
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go((n.kind === 'lesson' ? '#/lesson/' : '#/node/') + nid) }, arrowBack() + ' ' + n.title)),
     h('h1', {}, '🏋️ ' + LT('lang.view.deepen'), h('span', { class: 'tiny' }, ` · ${n.title} · ${info(c).flag} ${info(c).label}`)),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); go(`#/deepen/${encodeURIComponent(nid)}/${x}`); })));
   whenProfiles(c, () => {
@@ -2348,7 +2350,7 @@ function cmpLangPicker(redraw) {
 const fnOrder = () => { const at = {}; UI.C.order.forEach((nid, i) => { const f = UI.C.nodes[nid].functions || []; for (const x of (Array.isArray(f) ? f : Object.values(f).flat())) if (!(x in at)) at[x] = i; }); return Object.keys(UI.C.functions).filter(f => f !== 'fn.overview').sort((a, b) => (at[a] ?? 1e9) - (at[b] ?? 1e9)); };
 const STATUS_MARK = { realized: '✓', periphrastic: '≈', absent: '—' };
 VIEWS.cmp = (v, r) => {
-  const back = h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => r.arg ? go('#/cmp') : go('#/') }, '← ' + LT(r.arg ? 'lang.view.cmp' : 'lang.card.map')));
+  const back = h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => r.arg ? go('#/cmp') : go('#/') }, arrowBack() + ' ' + LT(r.arg ? 'lang.view.cmp' : 'lang.card.map')));
   v.append(back);
   if (activeLangs().length < 2) return v.append(h('h1', {}, '⇄ ' + LT('lang.view.cmp')), h('p', { class: 'lx-note' }, LT('lang.poly.needsTwo')));
   const langs = cmpLangs(), redraw = () => render();
@@ -2431,7 +2433,7 @@ VIEWS.poly = (v, r) => {
   if (r.arg2 && UI.C.frames[r.arg2]) opts.frame = r.arg2;
   const items = langs.length >= 2 || type === 'cognate_bridge' ? N.polyItems(UI.C, UI.L, type, opts) : [];
   if (!items.length) {
-    v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/cmp') }, '← ' + LT('lang.view.cmp'))), h('h1', {}, label),
+    v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/cmp') }, arrowBack() + ' ' + LT('lang.view.cmp'))), h('h1', {}, label),
       h('p', { class: 'lx-note lx-polyempty' }, LT(langs.length < 2 ? 'lang.poly.needsTwoDrill' : 'lang.poly.nothingYet')));
     return;
   }
@@ -2452,7 +2454,7 @@ function runPoly(v, items, { title, back }) {
       if (ok) right++;
       if (it.fn && LX(it.lang)?.grammar[it.fn]) N.practiceFunction(UI.C, UI.L, it.lang, it.fn, ok ? 1 : 0, 1, day);
       save();
-      const b = h('button', { class: 'btn primary lx-next' }, LT('lang.drill.next') + ' →'); b.onclick = next; stage.append(h('div', { class: 'row lx-nextrow' }, b)); setTimeout(() => b.focus(), 30);
+      const b = h('button', { class: 'btn primary lx-next' }, LT('lang.drill.next') + ' ' + arrowOn()); b.onclick = next; stage.append(h('div', { class: 'row lx-nextrow' }, b)); setTimeout(() => b.focus(), 30);
     });
     Object.assign(ex.dataset, { kind: it.kind, lang: it.lang, type: it.type });
     stage.append(h('div', { class: 'tiny lx-which' }, (it.langs || it.options || [it.from, it.lang]).filter(Boolean).filter((c, j, a) => UI.C.lang[c] && a.indexOf(c) === j).map(c => info(c).flag).join(' ')), ex);
@@ -2689,7 +2691,7 @@ function runProd(items, { title, back = '#/', lang }) {
   metNew.clear();
   const m = $('.lx-main'), bar = h('div', { class: 'lx-progress' }, h('i')), stage = h('div', { class: 'lx-stage' });
   m.innerHTML = ''; m.append(h('div', { class: 'view lx-view lx-session lx-prodrun', 'data-lang': lang || '' }, h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => { save(true); go(back); render(); } }, '✕ ' + LT('lang.sess.stop')), h('b', { class: 'tiny' }, title), bar), stage));
-  if (!items.length) { stage.append(h('p', { class: 'lx-note' }, LT('lang.prod.nothingHere')), h('button', { class: 'btn', onclick: () => go(back) }, '← ' + LT('lang.card.back'))); return; }
+  if (!items.length) { stage.append(h('p', { class: 'lx-note' }, LT('lang.prod.nothingHere')), h('button', { class: 'btn', onclick: () => go(back) }, arrowBack() + ' ' + LT('lang.card.back'))); return; }
   const queue = items.slice(), total = queue.length, stats = { right: 0, wrong: 0 }, day = today(); let i = 0;
   const next = () => {
     bar.firstChild.style.width = Math.round(i / total * 100) + '%';
@@ -2700,7 +2702,7 @@ function runProd(items, { title, back = '#/', lang }) {
       if (it.fn) N.practiceFunction(UI.C, UI.L, it.lang, it.fn, ok ? 1 : 0, 1, day);
       if ((it.lex || []).length && LX(it.lang).lex[it.lex[0]]) N.review(UI.C, UI.L, it.lang, it.lex[0], 'r', ok ? 'good' : 'again', day);   // the number / month word asked
       save(); ok ? stats.right++ : stats.wrong++;
-      const b = h('button', { class: 'btn primary lx-next' }, LT('lang.drill.next') + ' →'); b.onclick = next; stage.append(h('div', { class: 'row lx-nextrow' }, b)); setTimeout(() => b.focus(), 30);
+      const b = h('button', { class: 'btn primary lx-next' }, LT('lang.drill.next') + ' ' + arrowOn()); b.onclick = next; stage.append(h('div', { class: 'row lx-nextrow' }, b)); setTimeout(() => b.focus(), 30);
     };
     const ex = exItem(it, done);
     stage.append(h('div', { class: 'tiny lx-which' }, info(it.lang).flag, ' ', info(it.lang).label), ex);
@@ -2708,7 +2710,7 @@ function runProd(items, { title, back = '#/', lang }) {
   const finish = () => {
     UI.current = null; save(true); bar.firstChild.style.width = '100%'; stage.innerHTML = '';
     stage.append(h('div', { class: 'lx-result' }, h('h2', {}, '🎉 ' + LT('lang.prod.done')), h('p', {}, LT('lang.prod.stats', { right: stats.right, wrong: stats.wrong })), newWordsList(),
-      h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => go(back) }, '← ' + LT('lang.card.back')), h('button', { class: 'btn', onclick: () => go('#/') }, LT('lang.home.map')))));
+      h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => go(back) }, arrowBack() + ' ' + LT('lang.card.back')), h('button', { class: 'btn', onclick: () => go('#/') }, LT('lang.home.map')))));
   };
   document.onkeydown = e => {
     if (!$('.lx-prodrun')) { document.onkeydown = null; return; }
@@ -2729,7 +2731,7 @@ const WRITE_SETS = [
 VIEWS.write = (v, r) => {
   const c = UI.C.lang[r.arg] ? r.arg : UI.lang, k = N.known(UI.C, UI.L, c);
   if (r.arg2) { const set = WRITE_SETS.find(s => s.id === r.arg2); if (set) return runProd(set.make(c, k), { title: `${set.icon} ${set.title} · ${info(c).flag} ${info(c).label}`, back: '#/write/' + c, lang: c }); }
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← ' + LT('lang.card.map'))),
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, arrowBack() + ' ' + LT('lang.card.map'))),
     h('h1', {}, '✍️ ' + LT('lang.view.write'), h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).label}`)),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); go('#/write/' + x); })),
     h('p', { class: 'tiny' }, LT('lang.write.help', { n: k.R.size })),
@@ -2748,7 +2750,7 @@ VIEWS.read = (v, r) => {
   const c = UI.C.lang[r.arg] ? r.arg : UI.lang, k = N.known(UI.C, UI.L, c);
   if (r.arg2) return readerView(v, c, r.arg2, k);
   const texts = N.readerTexts(UI.C, UI.L, c, { k });
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← ' + LT('lang.card.map'))),
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, arrowBack() + ' ' + LT('lang.card.map'))),
     h('h1', {}, '📖 ' + LT('lang.view.read'), h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).label}`)),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); go('#/read/' + x); })),
     h('p', { class: 'tiny' }, LT('lang.read.help')),
@@ -2760,7 +2762,7 @@ VIEWS.read = (v, r) => {
 function readerView(v, c, id, k) {
   const t = N.readerTexts(UI.C, UI.L, c, { k }).find(x => x.id === id); if (!t) return go('#/read/' + c);
   const X = LX(c); metNew.clear();
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/read/' + c) }, '← ' + LT('lang.read.texts'))), h('h1', {}, '📖 ', t.title));
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/read/' + c) }, arrowBack() + ' ' + LT('lang.read.texts'))), h('h1', {}, '📖 ', t.title));
   v.append(textBody(c, t.sentences.map(sid => X.sentenceById[sid]).map(s => ({ s, unknown: s.req.filter(l => !k.R.has(l)) }))));
   v.append(newWordsList('🆕 ' + LT('lang.read.newInText')) || h('p', { class: 'tiny' }, '✓ ' + LT('lang.prod.onlyKnown')),
     h('div', { class: 'row' }, h('button', { class: 'btn primary lx-readq', onclick: () => runProd(N.readerQuestions(UI.C, UI.L, c, t, { n: 3 }).map(q => ({ ...q, type: 'readq', text: t.sentences })), { title: '📖 ' + LT('lang.read.questionsTitle', { title: t.title }), back: `#/read/${c}/${encodeURIComponent(t.id)}`, lang: c }) }, '❓ ' + LT('lang.read.questions')),
@@ -2787,7 +2789,7 @@ async function aiReader(c, btn) {
     const okRows = rows.filter(x => !x.r.check.unknown.length && x.r.check.unlearned.length <= 1);
     const v = $('.lx-view'); metNew.clear(); for (const x of okRows) noteNew(c, x.r.check.unlearned);
     v.innerHTML = '';
-    v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/read/' + c) }, '← ' + LT('lang.read.texts'))), h('h1', {}, '📖 ', res.data.title, ' ', aiBadge('🤖 ' + LT('lang.read.aiWritten'))),
+    v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/read/' + c) }, arrowBack() + ' ' + LT('lang.read.texts'))), h('h1', {}, '📖 ', res.data.title, ' ', aiBadge('🤖 ' + LT('lang.read.aiWritten'))),
       h('p', { class: 'tiny' }, LT(rows.length > okRows.length ? 'lang.read.passedSome' : 'lang.read.passedAll', { ok: okRows.length, n: rows.length })),
       textBody(c, okRows, { aiGloss: true }), newWordsList('🆕 ' + LT('lang.read.newInText')) || h('p', { class: 'tiny' }, '✓ ' + LT('lang.prod.onlyKnown')));
   } catch (e) { btn.disabled = false; btn.textContent = '⚠️ ' + LT('lang.read.tryAgain', { err: (window.NoemaI18n ? NoemaI18n.err(e) : e.message) || LT('lang.gram.failed') }); console.warn(e); return; }
@@ -3193,7 +3195,7 @@ function glyphIntro(c, key, done) {
     it.note ? h('p', { class: 'tiny' }, it.note) : null,
     (M.look[key] || []).length ? h('p', { class: 'tiny' }, '👀 ' + LT('lang.script.mixUp') + ' ', ...(M.look[key] || []).flatMap((b, i) => [i ? ' · ' : '', h('span', { class: 'lx-w', lang: c }, b), ' ', M.items[b]?.name || ''])) : null,
     ex ? h('div', { class: 'lx-ex1' }, word(c, ex.lemma, { lex: ex, marks: 'full' }), h('div', { class: 'tiny' }, ex.translit, ' — ', gloss(c, ex.id))) : null,
-    h('div', { class: 'row' }, h('button', { class: 'btn primary lx-next', onclick: () => { N.introduceGlyph(UI.C, UI.L, c, key, today()); save(); done(true); } }, LT('lang.ex.gotIt') + ' →')));
+    h('div', { class: 'row' }, h('button', { class: 'btn primary lx-next', onclick: () => { N.introduceGlyph(UI.C, UI.L, c, key, today()); save(); done(true); } }, LT('lang.ex.gotIt') + ' ' + arrowOn())));
   return box;
 }
 /** The card of a letter or a character (tap in the lane). */
@@ -3227,7 +3229,7 @@ VIEWS.script = (v, r) => {
   const c = r.arg && UI.C.lang[r.arg] ? r.arg : UI.lang, M = N.scriptModule(UI.C, c), X = LX(c);
   if (c !== UI.lang) { UI.lang = c; UI.prefs.lang = c; save(); }
   v.classList.add('lx-scriptview'); v.dataset.lang = c;
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← ' + LT('lang.card.map'))),
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, arrowBack() + ' ' + LT('lang.card.map'))),
     h('h1', {}, '🔤 ', LT(M ? (M.kind === 'chars' ? 'lang.script.characters' : 'lang.script.letters') : 'lang.script.drill.spell'), ' — ', info(c).flag, ' ', info(c).label),
     h('div', { class: 'row' }, flagRail(null, c, x => go('#/script/' + x))));
   const drills = h('div', { class: 'row lx-drills lx-scriptdrills' }, ...N.scriptTypes(UI.C, c).map(t => h('button', { class: 'btn small', 'data-type': t, 'data-icon': SCRIPT_ICON[t] || 'doc', onclick: () => runScriptDrill(c, t) }, SCRIPT_TITLE[t][0] + ' ' + SCRIPT_TITLE[t][1])),
@@ -3292,7 +3294,7 @@ function runScriptDrill(c, type, { only = null } = {}) {
     const done = ok => {
       if (a.intro) return next();
       ok ? stats.right++ : stats.wrong++;
-      const b = h('button', { class: 'btn primary lx-next' }, LT('lang.drill.next') + ' →'); b.onclick = next; stage.append(h('div', { class: 'row lx-nextrow' }, b)); setTimeout(() => b.focus(), 30);
+      const b = h('button', { class: 'btn primary lx-next' }, LT('lang.drill.next') + ' ' + arrowOn()); b.onclick = next; stage.append(h('div', { class: 'row lx-nextrow' }, b)); setTimeout(() => b.focus(), 30);
     };
     const ex = a.intro ? glyphIntro(c, a.intro, done) : exItem(a.item, done);
     stage.append(h('div', { class: 'tiny lx-which' }, info(c).flag, ' ', info(c).label), ex);
@@ -3581,7 +3583,7 @@ Object.assign(window.NoemaLangUI, { script: { scriptInput, shownMarks, runScript
       const explain = h('select', { class: 'noema-input lj-in', 'aria-label': LT('lang.claude.explainLabel') }, ...EXPLAIN.map(([v, t]) => h('option', { value: v }, t)));
       const depths = h('div', { class: 'lj-depths' });
       const langsNow = () => [...chosen, ...more.value.split(/[\s,;]+/).map(x => x.trim().toLowerCase()).filter(x => /^[a-z]{2,3}$/.test(x))].filter((x, i, a) => a.indexOf(x) === i);
-      const drawDepth = () => { depths.innerHTML = ''; for (const c of langsNow()) depths.append(h('label', { class: 'lj-depth' }, info(c).flag, ' ', info(c).label, ' ', h('select', { 'aria-label': LT('lang.claude.depthOf', { code: c }), 'data-lang': c, onchange: e => { depth[c] = +e.target.value; } }, ...[[3, LT('lang.claude.depth3')], [2, LT('lang.claude.depth2')], [1, LT('lang.claude.depth1')]].map(([v, t]) => h('option', { value: v, selected: (depth[c] || 3) === v ? '' : null }, t))))); };
+      const drawDepth = () => { depths.innerHTML = ''; for (const c of langsNow()) depths.append(h('label', { class: 'lj-depth' }, info(c).flag, ' ', info(c).label, ' ', h('select', { 'aria-label': LT('lang.claude.depthOf', { lang: window.NoemaI18n ? NoemaI18n.fmt.langName(c) : c }), 'data-lang': c, onchange: e => { depth[c] = +e.target.value; } }, ...[[3, LT('lang.claude.depth3')], [2, LT('lang.claude.depth2')], [1, LT('lang.claude.depth1')]].map(([v, t]) => h('option', { value: v, selected: (depth[c] || 3) === v ? '' : null }, t))))); };
       more.addEventListener('input', drawDepth);
       const chips = h('div', { class: 'lj-chips' }, ...LANGS.map(c => h('button', { class: 'chip lj-lang', type: 'button', 'data-lang': c, 'aria-pressed': 'false', onclick: e => { const b = e.currentTarget; if (chosen.has(c)) chosen.delete(c); else chosen.add(c); b.setAttribute('aria-pressed', chosen.has(c) ? 'true' : 'false'); b.classList.toggle('on', chosen.has(c)); drawDepth(); } }, info(c).flag, ' ', info(c).label)));
       let way = 'claudeapp';
@@ -3627,7 +3629,7 @@ Object.assign(window.NoemaLangUI, { script: { scriptInput, shownMarks, runScript
   VIEWS.claude = (v) => {
     const acc = UI.acc, C = UI.C, rec = getRec(acc, C.id);
     const account = !!C.data.course.account;
-    v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← ' + LT('lang.claude.theCourse'))),
+    v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, arrowBack() + ' ' + LT('lang.claude.theCourse'))),
       h('h1', { class: 'lj-h1' }, '✨ ' + LT('lang.view.claude')), h('p', { class: 'lx-sub' }, LT(account ? 'lang.claude.subAccount' : 'lang.claude.subLibrary')));
     if (!rec) { v.append(h('p', { class: 'lx-note' }, LT('lang.claude.nothingQueued'))); return; }
     const data = C.data, nd0 = account ? N.langNeeds(rec, data) : null, w = N.langWork(rec);
@@ -4017,7 +4019,7 @@ const listenMake = (c, set, k) => N.speechItems(UI.C, UI.L, c, set.type, { k, ma
 VIEWS.listen = (v, r) => {
   const c = UI.C.lang[r.arg] ? r.arg : UI.lang;
   const wait = h('p', { class: 'tiny lx-loading' }, '… ' + LT('lang.listen.looking'));
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← ' + LT('lang.card.map'))),
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, arrowBack() + ' ' + LT('lang.card.map'))),
     h('h1', {}, '🎧 ' + LT('lang.view.listen'), h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).label}`)),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); go('#/listen/' + x); })), wait);
   loadVoices().then(() => {

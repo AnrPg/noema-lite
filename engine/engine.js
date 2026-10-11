@@ -96,6 +96,8 @@ function fmt(s) {               // inline markdown-lite → safe HTML
   return s.replace(/\u0000(\d+)\u0000/g, (_, i) => `<code>${esc(codes[+i])}</code>`);
 }
 const F = s => h('span', { html: fmt(s) });
+/* an arrow written into a text points along the reading direction: mirrored in a right-to-left interface (docs/i18n.md §5) */
+const arrowBack = () => window.NoemaI18n?.dir === 'rtl' ? '→' : '←', arrowOn = () => window.NoemaI18n?.dir === 'rtl' ? '←' : '→';
 const shuffle = a => { a = [...a]; for (let i = a.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [a[i], a[j]] = [a[j], a[i]]; } return a; };
 const norm = s => String(s ?? '').toLowerCase().replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/\s+/g, ' ').trim().replace(/;$/, '').trim();
 const today = () => new Date().toISOString().slice(0, 10);
@@ -213,7 +215,7 @@ const CARD_KEYS_MOVED = (() => {
 let saveT;
 function flushSave() {
   clearTimeout(saveT);
-  const { settings, ...rest } = S; const { srcOn, apiKey, ...glob } = settings;
+  const { settings, ...rest } = S; const { srcOn, apiKey, mt: _mt, ...glob } = settings;   // a:settings.mt is engine/mt.js's own (written there): never written back from this copy
   Noema.kv.set(STATE_KEY, JSON.stringify({ ...rest, srcOn }));
   Noema.geminiKey.set(ACCOUNT.id, apiKey);   // this device only; the default key is not stored
   let cur = {}; try { cur = JSON.parse(Noema.kv.get(SETTINGS_KEY) || '{}'); } catch (e) { }
@@ -1550,7 +1552,7 @@ R.img_sequence = (ex, api) => {
     check: () => picks.length < ex.answer.length ? null : picks.every((r, i) => r.id === ex.answer[i]),
     reveal() {
       picks.forEach((r, i) => badges[r.id]?.classList.add(r.id === ex.answer[i] ? 'right' : 'wrong'));
-      if (!picks.every((r, i) => r.id === ex.answer[i])) st.below.append(h('div', { class: 'fb info' }, h('b', {}, '🧭 ' + tE('engine.vx.correctPath') + ' '), ...ex.answer.flatMap((id, i) => [i ? ' → ' : '', h('span', { class: 'vx-chipref' }, `${i + 1}. ${st.RG[id]?.label || id}`)])));
+      if (!picks.every((r, i) => r.id === ex.answer[i])) st.below.append(h('div', { class: 'fb info' }, h('b', {}, '🧭 ' + tE('engine.vx.correctPath') + ' '), ...ex.answer.flatMap((id, i) => [i ? ' ' + arrowOn() + ' ' : '', h('span', { class: 'vx-chipref' }, `${i + 1}. ${st.RG[id]?.label || id}`)])));
     },
   };
 };
@@ -1898,7 +1900,8 @@ function shareBanner() {
       return;
     }
     const cur = sh.kind === 'curriculum';   // 👥 an invitation to a shared curriculum
-    bar.append(h('span', { class: 'grow' }, cur ? '👥 ' : '📬 ', ...tNodes(cur ? 'engine.share.invite' : 'engine.share.offer', null, { name: h('b', {}, sh.from_name || sh.from_email || tE('engine.share.someone')), title: h('b', {}, sh.title) }), items.length > 1 ? h('span', { class: 'tiny' }, '  ' + tE('engine.share.more', { n: items.length - 1 })) : ''),
+    const tB = h('b', {}, sh.title), mtT = window.NoemaMT ? NoemaMT.toggle(ACCOUNT.id, [NoemaMT.mark(tB, { language: sh.language || sh.meta?.language, kind: cur ? 'shared.roadmap' : 'shared.pack' })]) : null;   // 🌐 its title on request (the personal message is never sent)
+    bar.append(h('span', { class: 'grow' }, cur ? '👥 ' : '📬 ', ...tNodes(cur ? 'engine.share.invite' : 'engine.share.offer', null, { name: h('b', {}, sh.from_name || sh.from_email || tE('engine.share.someone')), title: tB }), items.length > 1 ? h('span', { class: 'tiny' }, '  ' + tE('engine.share.more', { n: items.length - 1 })) : '', mtT ? ' ' : '', mtT || ''),
       h('button', { class: 'btn small primary', onclick: async e => { e.target.disabled = true; try { const s = await Noema.notes.accept(sh); toast(cur ? '👥 ' + tE('engine.share.joined', { title: s.title }) : '✅ ' + tE('engine.share.added', { title: s.title })); confirmBox(tE('engine.share.openNow', { title: s.title }), () => cur ? Noema.curriculumMap(s.curriculum) : Noema.switchTo(ACCOUNT.id, s.id)); } catch (er) { toast('⚠️ ' + errText(er), 5000); e.target.disabled = false; } } }, '✓ ' + (cur ? tE('engine.share.join') : tE('engine.share.accept'))),
       h('button', { class: 'btn small', onclick: async () => { await Noema.notes.reject(sh).catch(er => toast('⚠️ ' + errText(er))); } }, '✕ ' + tE('engine.share.reject')),
       h('button', { class: 'btn small ghost', title: tE('engine.share.laterTip'), onclick: () => { later.add(sh.id); draw(Noema.notes.pending); } }, tE('engine.share.later')));
@@ -2211,7 +2214,7 @@ function sectionView(sid) {
   const pl = h('div', { class: 'progressline' }, h('i', { style: { width: '0%' } }));
   const tail = h('div');
   const v = view(h('div', { class: 'reader' },
-    backBtn(`← ${c.emoji} ` + chTitle(c.num, c.title), '#/ch/' + c.id),
+    backBtn(`${arrowBack()} ${c.emoji} ` + chTitle(c.num, c.title), '#/ch/' + c.id),
     pl,
     explainable(h('div', { class: 'sechead' }, h('div', { class: 'row' }, h('span', { class: 'pill c' }, SHL() ? `${SL('chOf', { n: c.num, of: COURSE.length })} · ${SL('secOf', { n: s._j + 1, of: c.sections.length })}` : tE('engine.sec.nOfM', { n: s._j + 1, of: c.sections.length })), S.read[sid] ? h('span', { class: 'pill', style: { background: 'var(--ok-bg)', color: 'var(--ok)' } }, '✓ ' + SL('read')) : null),
       h('h1', { style: { marginTop: '10px' } }, s.title), s.hook ? h('p', { class: 'hook', html: fmt(s.hook) }) : null), () => ({ label: s.title, text: `The whole section "${s.title}" — ${s.hook || ''} (give me the big picture of this section)`, sec: s, what: 'section' })),   // i18n-ignore (for the AI)
@@ -2267,17 +2270,17 @@ function sectionTail(s, prev, next) {
     exs.length && !STEP_LOCK ? h('button', { class: 'btn ghost', onclick: () => startRun(exs, { title: `🎯 ${s.title}`, count: exs.length, back: '#/s/' + s.id }) }, '🎯 ' + SL('allExercises', { n: exs.length })) : null));
   if (!X) {
     zone.append(h('div', { class: 'secnav' },
-      prev ? h('button', { class: 'btn', onclick: () => go('#/s/' + prev.id) }, '← ' + prev.title) : h('span'),
-      next ? h('button', { class: 'btn primary', onclick: () => go('#/s/' + next.id) }, next.title + ' →') : h('button', { class: 'btn primary', onclick: () => go(`#/ch/${c.id}/practice`) }, '🎯 ' + SL('practiceChapter') + ' →')));
+      prev ? h('button', { class: 'btn', onclick: () => go('#/s/' + prev.id) }, arrowBack() + ' ' + prev.title) : h('span'),
+      next ? h('button', { class: 'btn primary', onclick: () => go('#/s/' + next.id) }, next.title + ' ' + arrowOn()) : h('button', { class: 'btn primary', onclick: () => go(`#/ch/${c.id}/practice`) }, '🎯 ' + SL('practiceChapter') + ' ' + arrowOn())));
     return zone;
   }
   // the frame: one big “Next section” (the next chapter's first one after the last section), the chapter's practice beside it
   const nextCh = !next && COURSE[COURSE.indexOf(c) + 1], to = next || nextCh?.sections[0];
   zone.append(h('nav', { class: 'secnav ns-secnav', 'aria-label': SL('nextSection') },
-    to ? h('button', { class: 'btn primary secnext', onclick: () => go('#/s/' + to.id) }, h('span', { class: 'nx' }, SL('nextSection') + ' →'), h('small', {}, next ? next.title : SL('nextChapterFirst', { n: nextCh.num, title: nextCh.title })))
-      : h('button', { class: 'btn primary secnext', onclick: () => go(`#/ch/${c.id}/practice`) }, h('span', { class: 'nx' }, '🎯 ' + SL('practiceChapter') + ' →')),
+    to ? h('button', { class: 'btn primary secnext', onclick: () => go('#/s/' + to.id) }, h('span', { class: 'nx' }, SL('nextSection') + ' ' + arrowOn()), h('small', {}, next ? next.title : SL('nextChapterFirst', { n: nextCh.num, title: nextCh.title })))
+      : h('button', { class: 'btn primary secnext', onclick: () => go(`#/ch/${c.id}/practice`) }, h('span', { class: 'nx' }, '🎯 ' + SL('practiceChapter') + ' ' + arrowOn())),
     to && !next ? h('button', { class: 'btn', onclick: () => go(`#/ch/${c.id}/practice`) }, '🎯 ' + SL('practiceChapter')) : null,
-    prev ? h('button', { class: 'btn ghost small secprev', title: prev.title, onclick: () => go('#/s/' + prev.id) }, '← ' + SL('prevSection')) : null));
+    prev ? h('button', { class: 'btn ghost small secprev', title: prev.title, onclick: () => go('#/s/' + prev.id) }, arrowBack() + ' ' + SL('prevSection')) : null));
   return zone;
 }
 
@@ -2377,7 +2380,7 @@ function bossView(id) {
   const c = CH[id]; if (!c) return go(HOME());
   setAccent(document.body, c);
   shellChrome({ sub: true, crumbs: [[`${c.emoji} ${c.title}`, '#/ch/' + id], [SL('boss')]], back: '#/ch/' + id + '/practice' });
-  view(backBtn(`← ${c.title}`, '#/ch/' + id),
+  view(backBtn(`${arrowBack()} ${c.title}`, '#/ch/' + id),
     h('div', { class: 'card summary' }, h('div', { class: 'big' }, '👾'), h('h1', {}, tE('engine.boss.title', { num: c.num })),
       h('p', { class: 'muted' }, tE('engine.boss.intro')),
       h('button', { class: 'btn primary', style: { marginTop: '10px' }, onclick: () => {
@@ -2508,7 +2511,7 @@ function drillView(id) {
   const ta = h('textarea', { class: 'answer', placeholder: tE('engine.drill.placeholder') });
   const stage = h('div');
   view(h('div', { class: 'reader' },
-    backBtn(`← ${c.emoji} ` + tE('engine.drill.back', { num: c.num }), `#/ch/${c.id}/debug`),
+    backBtn(`${arrowBack()} ${c.emoji} ` + tE('engine.drill.back', { num: c.num }), `#/ch/${c.id}/debug`),
     h('span', { class: 'pill c' }, '🔧 ' + tE('engine.drill.pill')), h('h1', { style: { margin: '10px 0 14px' }, html: fmt(d.title) }),
     h('div', { class: 'tiny', style: { fontWeight: 700, marginBottom: '6px' } }, tE('engine.drill.symptom')), h('div', { class: 'symptom', html: fmt(d.symptom) }),
     h('h3', { style: { margin: '22px 0 8px' } }, '🧠 ' + tE('engine.drill.askYourself')), ta,
@@ -3089,7 +3092,7 @@ function renderConvoHistory(box) {
   box.append(h('div', { class: 'histhead' },
     h('b', { class: 'grow' }, '🕘 ' + tE('engine.cv.title', { n: all.length }), tip(tE('engine.cv.tip'))),
     all.length ? h('button', { class: 'btn small', onclick: exportAllConvos }, '⬇️ ' + tE('engine.cv.exportAll')) : null,
-    h('button', { class: 'btn small primary', onclick: () => { T.showHistory = false; renderTutor(); } }, '← ' + tE('engine.cv.chat'))));
+    h('button', { class: 'btn small primary', onclick: () => { T.showHistory = false; renderTutor(); } }, arrowBack() + ' ' + tE('engine.cv.chat'))));
   if (others) box.append(h('label', { class: 'row tiny', style: { margin: '2px 0 4px' } }, h('input', { type: 'checkbox', checked: histAllKinds, onchange: e => { histAllKinds = e.target.checked; renderTutor(); } }), tE('engine.cv.alsoShow', { n: others })));
   if (all.length > 3) {
     const inp = h('input', { class: 'histsearch', placeholder: tE('engine.cv.search'), value: histQuery, oninput: e => { histQuery = e.target.value; const pos = e.target.selectionStart; renderTutor(); const ni = $('.histsearch'); if (ni) { ni.focus(); ni.setSelectionRange(pos, pos); } } });
@@ -3373,6 +3376,7 @@ const ACC_VIEWS = {
       accSection('✨', tE('engine.acc.secClaude'), { status: { ok: true, text: hasClaude ? tE('engine.acc.claudeOnDevice') : tE('engine.acc.claudeAppNoKey') }, info: tE('engine.acc.secClaudeInfo'), body: claude }),
       accSection('🗣️', tE('engine.acc.chatLang'), { status: { ok: true, text: chatLang() ? uiLangName(chatLang()) : tE('engine.acc.chatLangAuto', { lang: uiLangName(uiLang()) }) }, body: langBox }),
       opts.only === 'ai' ? null : accSection('🎨', tE('engine.acc.secDisplay'), { open: !!S.settings.apiKey, body: display }),
+      opts.only === 'ai' || !window.NoemaMT ? null : accSection('🌐', t('mt.set.title'), { body: NoemaMT.panel(acc, { heading: false }) }),   // machine translation of shared texts: consent, provider, caps (engine/mt.js, docs/i18n.md §11) — like Me › Language & appearance
       opts.only === 'ai' ? null : accSection('📘', tE('engine.acc.secSubject', { title: SUBJ.title }), { body: subject }),
       h('div', { class: 'row', style: { justifyContent: 'flex-end', marginTop: '16px' } },
         h('button', { class: 'btn primary', 'data-act': 'save-settings', onclick: async () => {
