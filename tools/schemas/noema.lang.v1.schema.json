@@ -71,6 +71,12 @@
      ],
      "description": "required (default): every content word has a full profile"
     },
+    "d19": {
+     "enum": [
+      "lenient"
+     ],
+     "description": "only for a pre-D19 test fixture (tests/fixtures/lang-mini): the D19 / R3 rules of tools/validate_lang.py are warnings, not errors"
+    },
     "facades": {
      "type": "object",
      "description": "D19: the locale facades of this course (facades/<locale>/facade.json), locale → status; a locale is offered as an explanation language when its facade is \"on\" (or \"preview\" on a preview host) and Tier 1 is complete. Optional — without it the master is shown.",

@@ -209,7 +209,12 @@ ok(any('not covered by any phenomenon' in x and 'tone.lexical' in x for x in e),
 # ---------- D19: contrast notes for every supported native + every type; D20: every field brings sentences for the nodes before it ----------
 expect('a page without contrast notes (--d19-strict)', lambda J, d: J('lang/ar/grammar/fn.definite.json', lambda o: o.pop('notes')), 'contrast notes missing (D19: every supported native but ar, every type and branch:Semitic): en, el, ru', d19_strict=True)
 errs = mutated(lambda J, d: J('lang/ar/grammar/fn.definite.json', lambda o: o.pop('notes')))
-ok(not [e for e in errs if 'contrast notes missing' in e], 'without --d19-strict the D19 rules are warnings (the content is being rewritten)')
+ok(not [e for e in errs if 'contrast notes missing' in e], 'a pre-D19 fixture (course.json "d19": "lenient") keeps the D19 rules as warnings')
+def no_flag(o): o.pop('d19', None)
+errs = mutated(lambda J, d: (J('course.json', no_flag), J('lang/ar/grammar/fn.definite.json', lambda o: o.pop('notes'))))
+ok([e for e in errs if 'lang/ar/grammar/fn.definite.json' in e and 'contrast notes missing' in e], 'by default (since 2026-10-11) the D19 rules are errors')
+errs = mutated(lambda J, d: (J('course.json', no_flag), J('lang/ar/grammar/fn.definite.json', lambda o: o.pop('notes'))), d19_lenient=True)
+ok(not [e for e in errs if 'contrast notes missing' in e], '--d19-lenient makes them warnings again')
 full = [{'for': c, 'rel': 'same', 'text': 'x'} for c in ['en', 'el', 'ru', 'fr', 'de', 'hi', 'zh', 'ja', 'it', 'es', 'sq', 'pt', 'tr', 'type:fusional', 'type:agglutinating', 'type:isolating', 'type:polysynthetic', 'branch:Semitic']]
 errs = mutated(lambda J, d: J('lang/ar/grammar/fn.definite.json', lambda o: o.update(notes=full)), d19_strict=True)
 ok(not [e for e in errs if 'lang/ar/grammar/fn.definite.json' in e and 'contrast notes missing' in e], 'a page with a note for every supported native but its own, every type and branch:Semitic passes')
@@ -245,7 +250,7 @@ def de_map(J, d, drop=()):
 e, w = mutated_w(lambda J, d: None, d19_strict=True)
 ok(any('lang/de/WORD_PARAMETERS.md: missing' in x for x in e), 'R3: a language without its WORD_PARAMETERS.md (--d19-strict) → error')
 e, w = mutated_w(lambda J, d: None)
-ok(not any('WORD_PARAMETERS' in x for x in e) and any('lang/de/WORD_PARAMETERS.md: missing' in x for x in w), 'R3: without --d19-strict the missing map is a warning')
+ok(not any('WORD_PARAMETERS' in x for x in e) and any('lang/de/WORD_PARAMETERS.md: missing' in x for x in w), 'R3: in a pre-D19 fixture (d19: lenient) the missing map is a warning')
 e, w = mutated_w(lambda J, d: de_map(J, d), d19_strict=True)
 ok(not any('lang/de/WORD_PARAMETERS.md' in x for x in e), 'R3: a map with a section per part of speech naming every parameter passes')
 e, w = mutated_w(lambda J, d: de_map(J, d, drop=('aux',)), d19_strict=True)

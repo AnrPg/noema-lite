@@ -134,6 +134,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut has singular, dual and plural endings (inuk, inuuk, inuit); German has no dual – two people are zwei Menschen, with the ordinary plural."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian changes the final vowel (libro → libri); German adds endings and often an umlaut: Buch → Bücher."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Like Albanian, German has several plural endings that must be learned with the noun."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese mostly adds -s; German has several plural endings and often an umlaut: Stuhl → Stühle."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "same",
+   "text": "If your language has several plural endings by class, German works the same way: learn the plural with the noun."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "new",
+   "text": "If your language has one plural ending for every noun, German has several, and some change the vowel."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "new",
+   "text": "If your language does not mark the plural on the noun, German does: the noun and its article change."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "same",
+   "text": "German marks the plural on the noun and on its article."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "Like the broken plurals of Semitic languages, some German plurals change the vowel inside the word: Buch → Bücher."
   }
  ]
 }

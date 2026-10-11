@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Validate a language course (docs/LANGUAGES.md §4 and §11). No network, no dependencies.
 
-  python3 tools/validate_lang.py <course-dir> [--lang de] [--strict] [--d19-strict] [--json] [--batch fd.00,fd.01] [--alone]
+  python3 tools/validate_lang.py <course-dir> [--lang de] [--strict] [--d19-lenient] [--json] [--batch fd.00,fd.01] [--alone]
 
 Without --strict a course may be unfinished: a node without its lexicon file in a language is “not prepared yet”
 and a frame without a sentence is reported as a warning. --strict (the tests, a finished course) makes both errors.
@@ -22,7 +22,9 @@ per part of speech naming every parameter of wordFeatures) and wordFeatures with
 every parameter of its part of speech (a value or {"none": "<why>"}: an ERROR); the map covers the checklist of the
 language's type and typological profile (R3_CHECKLIST, R3_TYPE: warnings; wordFeaturesChecklist says why an item is
 not a word parameter).
-These D19 rules and the R3 map file are WARNINGS for now (the content is being rewritten); --d19-strict makes them errors.
+These D19 rules and the R3 map file are ERRORS (since 2026-10-11: the library course passes them). --d19-lenient (or
+"d19": "lenient" in course.json — only for a pre-D19 test fixture such as tests/fixtures/lang-mini) makes them warnings;
+--d19-strict (the old switch, kept) makes them errors even then.
 
 Exit 0 when valid, 1 with the list of problems otherwise. Every check here has a negative test in tests/lang_validate.py.
 """
@@ -456,7 +458,7 @@ R3_TYPE = {   # the minimal map of a morphological type (always, whatever the pr
 
 def check_word_map(v, L, lw, lj, decls, profile, root, R3):
     """R3: the exhaustive per-POS parameter map — lang/<L>/WORD_PARAMETERS.md and wordFeatures (prominent / order) cover
-    the checklist of the language's type and profile. R3 = v.W now (v.E with --d19-strict) for the map file."""
+    the checklist of the language's type and profile. R3 = v.E for the map file (v.W with --d19-lenient)."""
     if not decls: return
     md_path = os.path.join(root, lw, 'WORD_PARAMETERS.md')
     if not os.path.exists(md_path):
@@ -569,16 +571,18 @@ def need_str(v, where, obj, key):
     if not (isinstance(obj.get(key), str) and obj[key].strip()): v.E(where, f'“{key}” is required (text)')
 
 
-def validate(root, only=None, strict=True, batch=None, peers=None, d19_strict=False):
+def validate(root, only=None, strict=True, batch=None, peers=None, d19_strict=False, d19_lenient=False):
     """peers: the other courses whose language paths this one must agree with (D13); default: the course folders next to it.
-    d19_strict: the D19 rules (required notes, the lint of every learner text) are errors, not warnings."""
+    The D19 rules (required notes, the lint of every learner text, the R3 map file) are errors; d19_lenient (or course.json
+    "d19": "lenient", a pre-D19 fixture) makes them warnings; d19_strict makes them errors whatever the course says."""
     v = V(root)
     course = v.load('course.json')
     if not course: return v
     global W_FEAT, W_PROF, W_FAM, W_REF, W_NAMES, W_BRANCH
     W_FEAT, W_PROF, W_FAM, W_REF = world(root)
     W_BRANCH = {re.sub(r'\s*\(.*', '', p.get('branch') or '').strip() for p in W_PROF.values() if p.get('branch')}
-    D19 = v.E if d19_strict else v.W
+    lenient = not d19_strict and (d19_lenient or course.get('d19') == 'lenient')
+    D19 = v.W if lenient else v.E
     if W_PROF and W_REF:
         for c in W_REF:
             if c not in W_PROF: v.E('_typology/reference.json', f'reference language “{c}” has no profile')
@@ -1062,7 +1066,7 @@ def validate(root, only=None, strict=True, batch=None, peers=None, d19_strict=Fa
         for f in lang_facade.lint(root):
             if f.cat == 'required' or f.sev == 'info': continue
             if only and f'/lang/{only}/' not in f.where and f'_phenomena/{only}.json' not in f.where: continue   # --lang: that language's files only
-            if f.cat in ('structure', 'markup'): v.W(f.where, f'{f.msg} (R2 {f.cat})'); continue   # R2: a warning, never --d19-strict
+            if f.cat in ('structure', 'markup'): v.W(f.where, f'{f.msg} (R2 {f.cat})'); continue   # R2: a warning, never an error (docs/language-packs.md §2.3)
             D19(f.where, f'{f.msg} (D19 {f.cat})')
     except Exception as e:   # the lint must never hide the other checks
         v.W('D19 lint', f'not run ({e.__class__.__name__}: {e})')
@@ -1152,7 +1156,7 @@ def main(a):
     if not a: print(__doc__); sys.exit(2)
     batch = set(a[a.index('--batch') + 1].split(',')) if '--batch' in a else None   # a content batch in progress: only these nodes must be complete
     peers = [] if '--alone' in a else None   # --alone: skip the comparison with the other courses (D13)
-    v = validate(a[0], a[a.index('--lang') + 1] if '--lang' in a else None, '--strict' in a, batch, peers, d19_strict='--d19-strict' in a)
+    v = validate(a[0], a[a.index('--lang') + 1] if '--lang' in a else None, '--strict' in a, batch, peers, d19_strict='--d19-strict' in a, d19_lenient='--d19-lenient' in a)
     if '--json' in a: print(json.dumps({'errors': v.errors, 'warnings': v.warns}, ensure_ascii=False, indent=1))
     else:
         for e in v.errors: print('❌', e)

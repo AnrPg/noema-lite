@@ -3774,10 +3774,10 @@
     const CONTENT = new Set(['NOUN', 'VERB', 'ADJ', 'ADV']);
     const GENDERED = new Set(['de', 'ar', 'he', 'fr', 'es', 'it', 'pt', 'ru', 'el', 'hi']);
     // D19 (docs/language-packs.md): every grammar page has a contrast note for each supported native (the UI locales'
-    // languages) but its own language + the five type notes. strict: false while the library content is rewritten — then a
-    // page needs notes for at least D19.minNatives supported natives and the full list is reported only when strict is on.
+    // languages) but its own language + the five type notes. strict: true since 2026-10-11 (the library course passes the
+    // D19 rules; tools/validate_lang.py makes them errors too); strict = false (lenient) asks for at least D19.minNatives.
     const D19 = { natives: ['en', 'el', 'ru', 'fr', 'ar', 'de', 'hi', 'zh', 'ja', 'it', 'es', 'sq', 'pt', 'tr'],
-      groups: ['type:fusional', 'type:agglutinating', 'type:isolating', 'type:polysynthetic', 'branch:Semitic'], minNatives: 5, strict: false };
+      groups: ['type:fusional', 'type:agglutinating', 'type:isolating', 'type:polysynthetic', 'branch:Semitic'], minNatives: 5, strict: true };
     const d19Required = code => [...D19.natives.filter(c => c !== code), ...D19.groups];
     // D18: the reference set (library/languages/_typology/reference.json) with the type of each language — source material since D19
     const REF = { el: 'fusional', ru: 'fusional', es: 'fusional', en: 'fusional', fr: 'fusional', de: 'fusional', hi: 'fusional', fa: 'fusional', mr: 'fusional', ar: 'fusional', he: 'fusional',
@@ -4073,7 +4073,7 @@ ${plan.draft.length ? `\nNodes still being written in the course (course.draft �
 
 ## Final checks, the package, the upload
 \`\`\`
-python3 ${T}/scripts/validate_lang.py ${dir} --strict --d19-strict --lang ${code} --alone   # 0 errors (D19 included)
+python3 ${T}/scripts/validate_lang.py ${dir} --strict --lang ${code} --alone   # 0 errors (D19 included: errors by default)
 python3 ${T}/scripts/lang_facade.py lint ${dir}                                     # D19: nothing for ${code}
 python3 ${T}/scripts/lang_refcheck.py ${dir} --lang ${code}                     # no disagreement (ref.override only with a reason)
 python3 ${T}/scripts/lang_phenomena.py --root work/lang --lang ${code}         # no ❌

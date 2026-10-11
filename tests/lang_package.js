@@ -28,7 +28,7 @@ const readDir = root => N.readCourse(rel => { const p = path.join(root, rel); re
   /* ======================= A. tools + langcore ======================= */
   console.log('— A. the package: tools and langcore');
   // the world next to the course (shared typology + catalogues), the mini course without German
-  for (const d of ['_typology', '_phenomena']) { fs.mkdirSync(path.join(W, d)); for (const f of fs.readdirSync(path.join(LIBL, d))) fs.copyFileSync(path.join(LIBL, d, f), path.join(W, d, f)); }
+  for (const d of ['_typology', '_phenomena']) { fs.mkdirSync(path.join(W, d)); for (const f of fs.readdirSync(path.join(LIBL, d))) if (fs.statSync(path.join(LIBL, d, f)).isFile()) fs.copyFileSync(path.join(LIBL, d, f), path.join(W, d, f)); }
   const B = path.join(W, 'lang-mini'); fs.cpSync(MINI, B, { recursive: true }); fs.rmSync(path.join(B, 'lang', 'de'), { recursive: true });
   const cj = JSON.parse(fs.readFileSync(path.join(B, 'course.json'), 'utf8')); cj.languages = cj.languages.filter(c => c !== 'de'); delete cj.defaults.depth.de;
   fs.writeFileSync(path.join(B, 'course.json'), JSON.stringify(cj, null, 1));

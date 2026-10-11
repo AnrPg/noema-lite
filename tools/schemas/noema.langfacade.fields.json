@@ -26,7 +26,7 @@
  "records": [
   {
    "id": "course", "prefix": "k", "scope": "course", "files": "course.json", "at": "", "key": "course", "facade": "core",
-   "fields": [ { "path": "title", "tier": 1, "kind": "gloss" } ]
+   "fields": [ { "path": "title", "tier": 1, "kind": "gloss" }, { "path": "d19", "kind": "author-only" } ]
   },
   {
    "id": "field", "prefix": "fd", "scope": "course", "files": "core/fields/*.json", "at": "", "key": "{field}", "facade": "core",
