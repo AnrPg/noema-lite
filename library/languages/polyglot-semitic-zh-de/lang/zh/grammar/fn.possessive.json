@@ -538,6 +538,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut marks the owner with a case ending and the thing with a possessive ending — ‘my mother’ is one word, anaanaga. Chinese uses separate words: 我(的)妈妈."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian il mio libro / i miei libri agree with the thing owned, and di puts the owner after it (il libro del professore); Chinese puts owner + 的 first: 老师的书. Familiar: Italian drops the article with close family (mia madre), and Chinese drops 的: 我妈妈."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian puts the possessive and the owner after the thing, with a linking article (libri im ‘my book’, libri i mësuesit ‘the teacher’s book’); Chinese reverses the order: 我的书, 老师的书. 的 is a linker like i, but it follows the owner and precedes the thing."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese o meu livro / os meus livros agree with the thing owned, and de puts the owner after it (o livro do professor); Chinese: owner + 的 + thing — 老师的书, 我的书 — and 我妈妈 without 的 for close family."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your possessives agree with the thing owned and the owner follows in a genitive or with ‘of’, Chinese reverses and simplifies: owner + 的 + thing, nothing changes — 老师的书, 我的书."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If you put the owner first and mark both words (‘teacher-of book-his’), Chinese marks only the owner, with 的: 老师的书 — the thing stays bare."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If your language puts the owner after the thing (‘book of me’), Chinese reverses it: 我的书 — owner, 的, thing; with close family the 的 drops: 我妈妈."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If ‘my mother’ is one word with a possessive ending, Chinese uses separate words: 我(的)妈妈 — the owner first and the noun unchanged."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If your language puts the thing first (a construct form, or a possessive suffix: ‘book-my’), Chinese puts the owner first with 的 and leaves the thing unchanged: 我的书, 老师的书."
   }
  ],
  "seeAlso": [

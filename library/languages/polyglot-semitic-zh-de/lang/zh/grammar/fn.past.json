@@ -453,6 +453,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut marks past time with suffixes inside the verb word (nirilauqtunga ‘I ate’); Chinese adds separate words to a verb that never changes: 我吃了."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Passato prossimo mi sono alzato ~ 我起床了; imperfetto mi alzavo (habit) ~ 以前我…起床, without 了. But ieri ero stanco ‘I was tired yesterday’ is 昨天我很累 — no 了, no tense."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Albanian aorist u ngrita ‘I got up’ ~ 我起床了; the imperfect ngrihesha (habit) ~ 以前我…起床, without 了. And dje isha i lodhur ‘I was tired yesterday’ is 昨天我很累 — no 了, no past form."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "Pretérito perfeito levantei-me ~ 我起床了; imperfeito levantava-me (habit) ~ 以前我…起床, without 了. ontem estava cansado ~ 昨天我很累 — no 了."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If every past verb in your language takes a past form, note that Chinese has none: a time word places the event (昨天), and 了 marks only completion — states, adjectives, 是, 在 and habits take no 了: 昨天我很累."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If your past is an obligatory suffix, 了 may look like one but is not: it marks a completed event and is optional — 我七点起床 is past when 昨天 says so, and ‘I was tired’ is 我很累 with no marker."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "same",
+   "text": "If your language places events in time with time words and optional markers for ‘done’ and ‘not yet’, Chinese is the same: 昨天, 了, 还没."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If past time is a suffix inside your verb word, Chinese adds separate words to an unchanged verb: a time word (昨天) and, for a completed event, 了 — 我昨天吃了."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If your language has a past (perfect) conjugation with person suffixes, Chinese has one bare verb for every person and time; it marks completion with 了 and leaves the time to words such as 昨天."
   }
  ],
  "seeAlso": [

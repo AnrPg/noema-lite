@@ -149,7 +149,7 @@
      {
       "word": "去",
       "register": "neutral",
-      "nuance": "qù: ‘to go (to)’ — the verb of movement (S13): 去学校 ‘go to school’, no ‘to’ needed"
+      "nuance": "qù: ‘to go (to)’ — the verb of movement (S13): 去学校 ‘go to school’, the place right after the verb"
      },
      {
       "word": "往",
@@ -943,10 +943,22 @@
      "关于我们 ‘About us’ is the heading of the ‘about’ page on Chinese websites."
     ],
     "pitfalls": [
-     "A 关于 phrase stands BEFORE the noun with 的 (关于家庭的书 ‘a book about the family’) or opens the sentence — never after the noun as in English."
+     "A 关于 phrase stands BEFORE the noun with 的 (关于家庭的书 ‘a book about the family’) or opens the sentence — never after the noun."
     ],
     "subtleties": [
      "关于 names the subject matter; 对于 says how someone treats or regards it."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "‘a book about the family’ puts ‘about’ after the noun; Chinese puts it before: 关于家庭的书."
+     },
+     {
+      "for": "fr",
+      "rel": "trap",
+      "text": "un livre sur la famille puts sur after the noun; Chinese puts it before: 关于家庭的书."
+     }
     ]
    },
    "features": {
@@ -2847,13 +2859,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "站 ‘station’ is a Mongol word of the Yuan dynasty (ǰam, ‘post station’); the same word reached Russian as ям, whence ямщик ‘coachman’."
+     "站 ‘station’ is a Mongol word of the Yuan dynasty (ǰam, ‘post station’), from the empire’s relay posts."
     ],
     "pitfalls": [
      "车站 is a bus or train station, or a stop; a metro station is 地铁站."
     ],
     "subtleties": [
      "站 also means ‘to stand’: 站在门口 ‘to stand at the door’."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "The same Mongol word reached Russian as ям ‘post station’, whence ямщик ‘coachman’."
+     }
     ]
    }
   },
@@ -3823,7 +3842,7 @@
   },
   {
    "concept": "prep.at",
-   "reason": "Chinese has no separate ‘at’: 在 (known since S01) + place does the job — 在家 ‘at home’, 在学校 ‘at school’, 在车站 ‘at the station’. Greek σε, English at / in and German in / an / bei all become 在.",
+   "reason": "Chinese has no separate ‘at’: 在 (known since S01) + place does the job — 在家 ‘at home’, 在学校 ‘at school’, 在车站 ‘at the station’. German in / an / bei all become 在.",
    "use": "在 + place, before the verb: 我在银行工作 ‘I work at a bank’"
   },
   {

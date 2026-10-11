@@ -325,6 +325,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut shows the person in the verb ending, with singular, dual (‘we two’) and plural, and pronouns are mostly left out. Chinese has no dual and puts the person only in the pronoun: 我们 is ‘we’, however many."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Italian drops the subject (mangio ‘I eat’) because the verb shows it; Chinese verbs show nothing, so 我吃 keeps 我. tu / Lei ↔ 你 / 您 — Lei is one person only, like 您 (several: 你们). io / me / mi change with their role; 我 does not."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Albanian drops the subject (punoj ‘I work’) because the verb shows it; Chinese keeps it: 我工作. ai / ajo ↔ 他 / 她 — the same split, but in Chinese both sound tā. ti / ju ↔ 你 / 您, but ju is also the plural; ‘you all’ is 你们."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "Portuguese often drops the subject (como ‘I eat’); Chinese keeps 我. tu / você / o senhor ↔ 你 / 您, and eles / elas ↔ 他们 / 她们 make the same split: a mixed group takes the masculine form in both. eu / me / mim change with their role; 我 does not."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your pronouns change for case (‘I / me’) and your verb ending makes them optional, Chinese does the opposite: one form for every role (我 is ‘I’ and ‘me’), and the pronoun usually stays because the verb has no ending."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If your pronouns take case endings and your ‘he / she’ is one word, Chinese is close in speech — tā for he, she and it — but its pronouns never change: 我, 我们, 他喜欢我."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "same",
+   "text": "If your pronouns never change and you add a word for the plural, Chinese is the same: 我 → 我们, 你 → 你们. Note 咱们, the ‘we’ that includes the listener."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If person lives in your verb ending (with a dual), Chinese puts it only in a separate pronoun and has no dual: 我们 is ‘we’, however many."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If your language separates masculine and feminine ‘you’ and ‘they’ and attaches pronouns as suffixes, Chinese has one 你, gender only in writing (他 / 她), and pronouns that are always separate words: 他喜欢我."
   }
  ],
  "seeAlso": [

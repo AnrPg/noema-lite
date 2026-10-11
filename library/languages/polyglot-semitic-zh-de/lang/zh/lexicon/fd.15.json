@@ -1410,13 +1410,20 @@
     },
     "funFacts": [
      "春节 ‘Spring Festival’ is Chinese New Year — in January or February, still winter, but the start of spring in the old calendar.",
-     "Greek άνοιξη is the ‘opening’ (from ανοίγω), German Frühling the ‘early (season)’; the Chinese character shows a sprout in the sun."
+     "German Frühling is the ‘early (season)’; the Chinese character 春 shows a sprout in the sun."
     ],
     "pitfalls": [
      "‘In spring’ needs no ‘in’: 春天我们去公园 — 在春天 is written style."
     ],
     "subtleties": [
      "The four seasons in a row: 春夏秋冬; with 天: 春天, 夏天, 秋天, 冬天."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "Greek άνοιξη is the ‘opening’ (from ανοίγω)."
+     }
     ]
    }
   },
@@ -1644,13 +1651,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "秋 contains 禾 ‘grain’: autumn is harvest time — and German Herbst is a cousin of English harvest."
+     "秋 contains 禾 ‘grain’: autumn is harvest time — and German Herbst first meant ‘harvest’ too."
     ],
     "pitfalls": [
      "‘In autumn’ needs no preposition: 秋天我们去北京."
     ],
     "subtleties": [
      "British ‘autumn’ and American ‘fall’ are both 秋天; in writing 秋季."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "German Herbst is a cousin of English harvest."
+     }
     ]
    }
   },
@@ -2061,13 +2075,30 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Like Turkish ay (moon and month) and Russian месяц, 月 is both the moon and the month."
+     "月 is both the moon and the month: 月亮 ‘the moon’, 三月 ‘March’, 一个月 ‘a month’."
     ],
     "pitfalls": [
      "三月 is ‘March’, 三个月 ‘three months’: the 个 makes it a count."
     ],
     "subtleties": [
      "The moon in speech is 月亮; 月 alone is the month (or the moon in poems and compounds: 月饼)."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Russian месяц is also both moon and month."
+     },
+     {
+      "for": "ja",
+      "rel": "same",
+      "text": "Japanese 月 is also both: tsuki ‘moon’, -gatsu / -getsu ‘month’."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English month and moon are cousins."
+     }
     ]
    }
   },
@@ -3062,7 +3093,14 @@
      "‘What’s the date?’ in speech is 今天几号？ — 日期 is the word of forms and documents."
     ],
     "subtleties": [
-     "Chinese dates go from big to small, year – month – day, the reverse of Greek and German (8.10.2026)."
+     "Chinese dates go from big to small, year – month – day, the reverse of German (8.10.2026)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "Greek dates go small to big (8/10/2026), the reverse of Chinese."
+     }
     ]
    }
   },
@@ -3320,7 +3358,7 @@
      }
     ],
     "etymology": {
-     "text": "生 ‘to be born’ + 日 ‘day’: ‘birth-day’, built like German Geburtstag and English birthday.",
+     "text": "生 ‘to be born’ + 日 ‘day’: ‘birth-day’, built like German Geburtstag.",
      "src": "morphemes: 生 + 日 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
@@ -3332,6 +3370,13 @@
     ],
     "subtleties": [
      "Many older people also keep a birthday in the lunar calendar, so it moves every year."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Built like English birthday."
+     }
     ]
    }
   },
@@ -3713,14 +3758,26 @@
      "src": "morphemes: 以 + 前 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "很久很久以前 ‘long, long ago’ opens Chinese fairy tales, like Greek Μια φορά κι έναν καιρό."
+     "很久很久以前 ‘long, long ago’ opens Chinese fairy tales."
     ],
     "pitfalls": [
-     "以前 comes AFTER the time or event: 八点以前 ‘before eight’ — German vor acht and Greek πριν από τις οχτώ put it first.",
+     "以前 comes AFTER the time or event: 八点以前 ‘before eight’ — German vor acht puts it first.",
      "A past habit with 以前 needs no 了: 以前我常常去."
     ],
     "subtleties": [
      "Alone at the start, 以前 means ‘in the past, formerly’: 以前我是老师 ‘I used to be a teacher’."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "Greek πριν από τις οχτώ puts ‘before’ first; 八点以前 puts it last. And 很久很久以前 is the Chinese Μια φορά κι έναν καιρό."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English ‘before eight’ puts ‘before’ first; 八点以前 puts it last. 很久很久以前 is the Chinese ‘once upon a time’."
+     }
     ]
    }
   },
@@ -4647,13 +4704,20 @@
      "时候 is the moment, 时间 the time you have: 我没有时间 ‘I have no time’ — never *没有时候."
     ],
     "pitfalls": [
-     "…的时候 comes AFTER the clause: 我吃饭的时候 ‘when I eat’ — English when and German wenn come first.",
+     "…的时候 comes AFTER the clause: 我吃饭的时候 ‘when I eat’ — German wenn comes first.",
      "For ‘I have no time’ use 时间, not 时候.",
      "Not a question: …的时候 is ‘when’ in a statement; the question ‘when?’ is 什么时候 (你什么时候来？)."
     ],
     "subtleties": [
      "In careful speech 在 opens the frame: 在我小的时候 ‘when I was little’.",
      "In writing the short …时 replaces …的时候: 吃饭时 ‘while eating’, 到北京时 ‘when (we) arrived in Beijing’."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English when opens its clause; 的时候 closes it: 我吃饭的时候."
+     }
     ]
    }
   },

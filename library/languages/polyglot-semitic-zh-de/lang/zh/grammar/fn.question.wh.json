@@ -477,6 +477,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut question words (suna ‘what’, kina ‘who’) usually open the sentence, and the verb takes a question ending; Chinese keeps the statement order and changes nothing but the unknown word."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian fronts the question word (Cosa bevi? Dove vai?); Chinese leaves it where the answer goes: 你喝什么？ 你去哪儿？ — the order of an Italian echo question (Bevi cosa?) is the normal Chinese one."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian fronts the question word (Çfarë pi? ‘what do you drink?’, Ku shkon? ‘where are you going?’); Chinese leaves it in place: 你喝什么？ 你去哪儿？"
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "Colloquial Portuguese already leaves the question word in place (Bebes o quê? Vais aonde?) — the Chinese order: 你喝什么？ 你去哪儿？ Standard O que bebes? fronts it; Chinese never does."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your language moves the question word to the front (perhaps with inversion), Chinese does neither: write the statement and replace the unknown part — 你喝茶 → 你喝什么？ — and add no 吗."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "same",
+   "text": "If your question words stay in place, Chinese ones do too: 你喝什么？ — without endings and without a question particle."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "same",
+   "text": "If your question words stay where the answer goes, Chinese is the same: 你喝什么？ 你去哪儿？ — no fronting, no extra particle."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If your question words open the sentence and the verb takes a question ending, Chinese keeps the statement order and changes only the unknown word: 你去哪儿？"
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If your question word opens the sentence, Chinese leaves it where the answer goes: 你喝什么？ ‘you drink what?’."
   }
  ],
  "seeAlso": [

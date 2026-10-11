@@ -609,7 +609,14 @@
      "家人 means the people: 我的家人 ‘my family (members)’; a family as a unit is 一个家庭."
     ],
     "subtleties": [
-     "我们是家人 ‘we are family’ is also said to close friends — the same image as English."
+     "我们是家人 ‘we are family’ is also said to close friends."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "The same image as English ‘we’re family’."
+     }
     ]
    }
   },
@@ -724,7 +731,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Like German Eltern and Greek γονείς, Chinese has one word for ‘parents’ — but it is simply ‘father-mother’."
+     "Like German Eltern, Chinese has one word for ‘parents’ — but it is simply ‘father-mother’."
     ],
     "pitfalls": [
      "The order is fixed: 父母 ‘father-mother’, never *母父.",
@@ -732,6 +739,13 @@
     ],
     "subtleties": [
      "父母 is neutral to formal; in casual speech people say 我爸妈."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Like Greek γονείς, one word — but built from ‘father’ + ‘mother’."
+     }
     ]
    }
   },
@@ -860,7 +874,7 @@
     },
     "funFacts": [
      "妈 mā, 麻 má ‘hemp’, 马 mǎ ‘horse’, 骂 mà ‘to scold’ — the classic drill of the four tones starts with ‘mother’.",
-     "Like Greek μαμά, Russian мама and German Mama, 妈妈 is a nursery word built on ‘ma’."
+     "Like German Mama, 妈妈 is a nursery word built on ‘ma’ — such words for ‘mother’ are found all over the world."
     ],
     "pitfalls": [
      "The second syllable is toneless: māma, not *māmā.",
@@ -868,6 +882,28 @@
     ],
     "subtleties": [
      "With family words 的 is usually dropped: 我妈妈 ‘my mother’; 我的妈妈 sounds more emphatic or written."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Greek μαμά is the same kind of word."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Russian мама is the same kind of word."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "French maman is the same kind of word."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Italian mamma is the same kind of word."
+     }
     ]
    }
   },
@@ -1108,13 +1144,35 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "bàba sounds like Turkish baba ‘father’ and Arabic bābā ‘dad’ — b/p nursery words for ‘father’ are found worldwide (Greek μπαμπάς, Russian папа, Hebrew אַבָּא)."
+     "bàba sounds like Arabic bābā ‘dad’ and Hebrew אַבָּא (abba) — b/p nursery words for ‘father’ are found worldwide."
     ],
     "pitfalls": [
      "The second syllable is toneless: bàba."
     ],
     "subtleties": [
      "爸爸 and 妈妈 are both how you talk about your parents and how you call them; 父亲 / 母亲 are never used to call them."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Greek μπαμπάς is one of them."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Russian папа is one of them."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "French papa is one of them."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Italian papà is one of them."
+     }
     ]
    }
   },
@@ -1602,7 +1660,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "哥 came into Chinese from the Xianbei word aqa ‘elder brother’ — compare Turkish ağabey (abi) ‘big brother’, from Turkic aka."
+     "哥 came into Chinese from the Xianbei word aqa ‘elder brother’ — a word of the northern steppe peoples, related to Mongolian aq-a."
     ],
     "pitfalls": [
      "There is no everyday word for just ‘brother’: say 哥哥 (older) or 弟弟 (younger). ‘Brothers and sisters’ is 兄弟姐妹.",
@@ -2135,13 +2193,30 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish also splits sisters by age — abla ‘elder sister’ vs kız kardeş — but Chinese does it for brothers too: 哥哥, 弟弟, 姐姐, 妹妹."
+     "Chinese splits siblings by age for both sexes — 哥哥, 弟弟, 姐姐, 妹妹 — and has no everyday word for one ‘sister’ without saying older or younger."
     ],
     "pitfalls": [
      "The second syllable is toneless: mèimei."
     ],
     "subtleties": [
      "妹子 mèizi is slang for ‘girl, young woman’."
+    ],
+    "notes": [
+     {
+      "for": "ja",
+      "rel": "same",
+      "text": "Japanese splits them the same way, with the same characters: 兄 / 弟, 姉 / 妹."
+     },
+     {
+      "for": "en",
+      "rel": "new",
+      "text": "English sister needs ‘older / younger’ added; Chinese must choose 姐姐 or 妹妹."
+     },
+     {
+      "for": "hi",
+      "rel": "similar",
+      "text": "Hindi बहन has no age split, though दीदी is used for an elder sister — Chinese always chooses: 姐姐 or 妹妹."
+     }
     ]
    }
   },
@@ -2263,13 +2338,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Chinese, like English, has ‘sister cities’: 姐妹城市."
+     "Twin towns are 姐妹城市 ‘sister cities’ in Chinese."
     ],
     "pitfalls": [
      "姐妹 says nothing about age: 我有两个姐妹 ‘I have two sisters’ — older or younger."
     ],
     "subtleties": [
-     "Women call close friends 姐妹, as English speakers say ‘sis’."
+     "Women call close friends 姐妹 ‘sisters’."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Like English ‘sister cities’ — and women’s 姐妹 for friends is like ‘sis’."
+     }
     ]
    }
   },
@@ -2397,7 +2479,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Japanese 大丈夫 daijōbu ‘it’s all right’ comes from the same Chinese 大丈夫 ‘a real man’."
+     "大丈夫 ‘a real man, a man of character’ is an old Chinese phrase built on 丈夫."
     ],
     "pitfalls": [
      "zhàngfu with a toneless fu is ‘husband’; zhàngfū with a full tone is the literary ‘man’ in 大丈夫."
@@ -2405,6 +2487,13 @@
     "subtleties": [
      "丈夫 is neutral and fine everywhere; with friends people say 老公, in polite company 我先生.",
      "The literary ‘man, a real man’ survives in sayings: 男子汉大丈夫，说话要算数 ‘a real man keeps his word’ — there the word is read zhàngfū."
+    ],
+    "notes": [
+     {
+      "for": "ja",
+      "rel": "trap",
+      "text": "Japanese 大丈夫 daijōbu ‘it’s all right’ comes from this Chinese 大丈夫 ‘a real man’; and Japanese 丈夫 jōbu means ‘sturdy’, not ‘husband’."
+     }
     ]
    }
   },
@@ -3677,7 +3766,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "婆 ‘grandmother’ is an old Sino-Tibetan word: Burmese still says bhwa: for ‘grandmother’."
+     "婆 ‘grandmother’ is an old word, inherited from Proto-Sino-Tibetan *pʷa-n."
     ],
     "pitfalls": [
      "外婆 is the mother’s mother; the father’s mother is 奶奶. 婆婆 alone means ‘mother-in-law (the husband’s mother)’ in standard Chinese."
@@ -5305,13 +5394,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "婶 squeezes two syllables, 叔 + 母, into one — the way English ‘ma’am’ comes from ‘madam’."
+     "婶 squeezes two syllables, 叔 + 母 ‘uncle’s mother-figure’, into one."
     ],
     "pitfalls": [
      "婶婶 is the wife of 叔叔; the wife of 伯伯 is 伯母, of 舅舅 舅妈."
     ],
     "subtleties": [
      "In the countryside 婶 / 婶子 is a friendly address for a married woman of the village."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "The way English ‘ma’am’ comes from ‘madam’."
+     }
     ]
    }
   },
@@ -6808,13 +6904,25 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English has one ‘niece’, Chinese four: 侄女 (brother’s), 外甥女 (sister’s) — and for a wife’s side further words exist."
+     "Chinese has several words for ‘niece’: 侄女 (a brother’s daughter), 外甥女 (a sister’s daughter) — and the wife’s side has further words."
     ],
     "pitfalls": [
      "外甥女 is your SISTER’s daughter; your brother’s daughter is 侄女."
     ],
     "subtleties": [
      "外 again marks the link through a woman of the family — here your sister."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "new",
+      "text": "English has one ‘niece’ for all of them."
+     },
+     {
+      "for": "de",
+      "rel": "new",
+      "text": "German has one Nichte for all of them."
+     }
     ]
    }
   },

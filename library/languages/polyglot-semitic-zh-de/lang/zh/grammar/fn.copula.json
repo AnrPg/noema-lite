@@ -122,7 +122,7 @@
    "t": "callout",
    "kind": "tip",
    "title": "No articles after 是",
-   "text": "‘I am a student’ is 我是学生 — no word for ‘a’ is needed."
+   "text": "‘I am a student’ is 我是学生 — no article and no 一个 are needed."
   }
  ],
  "procedure": {
@@ -143,7 +143,7 @@
   "*我是好 / *我是很好 → 我很好.",
   "*他是在这里 → 他在这里.",
   "*他没是老师 → 他不是老师 (是 is negated with 不 only).",
-  "*我是一个老师 is possible but usually just 我是老师 — no ‘a’ needed."
+  "*我是一个老师 is possible but usually just 我是老师 — no 一个 needed."
  ],
  "evidence": {
   "lemmas": [
@@ -327,6 +327,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut makes ‘be a teacher’ one verb word: a ‘be’ suffix on the noun plus the person ending. Chinese keeps three separate, unchanging words: 我 + 是 + 老师."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian essere covers sono studente, sono stanco and sono a casa; Chinese splits them: 我是学生, 我很累 (no verb) and 我在家. Like Italian sono studente, 我是学生 needs no article."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian jam conjugates (jam, je, është) and serves nouns, adjectives and places alike (jam student, jam i lodhur, jam në shtëpi); Chinese splits them: 我是学生, 我很累 (no verb), 我在家 — and 是 never changes."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "Portuguese ser / estar prepare you for 是 / 在: sou estudante ~ 我是学生, estou em casa ~ 我在家. Chinese adds a third way: before an adjective there is no verb at all (estou cansado ~ 我很累)."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your ‘to be’ conjugates and serves nouns, adjectives and places alike, split it three ways: 是 + noun (我是学生), no verb before an adjective (我很累), 在 + place (我在家). 是 itself never changes."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If ‘to be’ is a suffix on the noun in your language (or nothing in the third person), Chinese needs the separate word 是 between two nouns in every person (他是学生) — but nothing before an adjective (他很高), and 在 for a place."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "similar",
+   "text": "If your language has a copula for nouns and none before adjectives, Chinese works the same way: 我是学生, 我很累; being somewhere has its own verb, 在: 我在家."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If ‘be a teacher’ is one verb word in your language, Chinese keeps three separate words: 我 + 是 + 老师; before an adjective there is no 是 at all (我很好)."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "trap",
+   "text": "If your language has no ‘is’ in the present, Chinese agrees with you before adjectives (房子很大) but not between two nouns: there 是 is required, in every tense — 我是学生, never *我学生."
   }
  ],
  "seeAlso": [

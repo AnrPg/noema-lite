@@ -1,7 +1,7 @@
 {
  "function": "fn.overview",
  "status": "realized",
- "summary": "Mandarin Chinese (普通话 Pǔtōnghuà, ‘the common speech’) is the standard language of China and Taiwan and has more native speakers than any other language. It is the clearest isolating language of this course: a word never changes its form — no endings for tense, person, number, case or gender. Grammar lives in word order and in small separate words (measure words, particles such as 吗 and 了). Every syllable carries a tone that tells words apart, and the language is written in characters — one character per syllable — with pinyin as the Latin spelling for learners.",
+ "summary": "Mandarin Chinese (普通话 Pǔtōnghuà, ‘the common speech’) is the standard language of China and Taiwan and has more native speakers than any other language. It is the clearest isolating language of this course: a word never changes its form — no endings for tense, person, number, case or gender. Grammar lives in word order and in small separate words (measure words, particles such as 吗 and 了). Every syllable carries a tone that tells words apart, and the language is written in characters — one character per syllable — with pinyin, an alphabetic spelling, as the learner’s aid.",
  "facts": [
   {
    "label": "Family",
@@ -52,7 +52,7 @@
   },
   {
    "title": "No articles, one tā",
-   "text": "There is no ‘the’ or ‘a’: the place in the sentence and 这 / 那 / 一 + measure word do that work. And ‘he’, ‘she’ and ‘it’ are all tā in speech — 他, 她, 它 differ only in writing."
+   "text": "There are no articles: the place in the sentence and 这 / 那 / 一 + measure word do that work. And ‘he’, ‘she’ and ‘it’ are all tā in speech — 他, 她, 它 differ only in writing."
   },
   {
    "title": "Questions keep the statement order",
@@ -63,7 +63,7 @@
    "text": "Everything that describes a noun stands before it, even long phrases: 我的书 ‘my book’; and time and place stand before the verb: 我明天在家吃饭 ‘I eat at home tomorrow’."
   }
  ],
- "pathNote": "Chinese walks the same 19 steps as Arabic, Hebrew and German, but as an isolating language it never learns endings or tables — at each step it learns word order and small grammar words instead. S00 the tones (with the overview). S01 是 links nouns only; 在 is ‘to be somewhere’. S02 你 / 您 — no forms ‘to a man / to a woman’. S03 measure words after 这 / 那 (这本书). S04 no gender and no articles: Chinese shows what it does instead. S05 numbers with measure words, 两 / 二, and no plural (们 only for people). S06 有 for ‘have’ and 的 for ‘my, your’ (dropped with close family: 我妈妈), with the paternal and maternal family words. S07 verbs that never change and the fixed order subject – verb – object. S08 the two negations 不 / 没. S09 questions with 吗, A-not-A and 还是. S10 question words that stay in place. S11 coverbs before the verb (在, 从, 跟, 给) instead of cases. S12 place words after the noun (桌子上). S13 去 / 来, 从…到, travel with 坐 / 骑 before the verb, and commands with 请, 吧 and 别. S14 time before the verb and the aspect particles 了 / 过 (在 for ‘in progress’). S15 no word for ‘at / on / in’ a time; 以前 / 以后 / 的时候 after the clause; dates from big to small. S16 adjectives used like verbs — 很 instead of 是, 的 before a noun. S17 comparison with 比, 更, 最, 没有 and 一样 — the adjective never changes. S18 paired linking words (因为…所以, 虽然…但是, 如果…就), …的时候 after its clause, and no word for ‘that’. Where the fusional languages learn conjugation and declension tables, Chinese learns word order and small grammar words.",
+ "pathNote": "Chinese walks the same 19 steps as Arabic, Hebrew and German, but as an isolating language it never learns endings or tables — at each step it learns word order and small grammar words instead. S00 the tones (with the overview). S01 是 links nouns only; 在 is ‘to be somewhere’. S02 你 / 您 — no forms ‘to a man / to a woman’. S03 measure words after 这 / 那 (这本书). S04 no gender and no articles: Chinese shows what it does instead. S05 numbers with measure words, 两 / 二, and no plural (们 only for people). S06 有 for ‘have’ and 的 for ‘my, your’ (dropped with close family: 我妈妈), with the paternal and maternal family words. S07 verbs that never change and the fixed order subject – verb – object. S08 the two negations 不 / 没. S09 questions with 吗, A-not-A and 还是. S10 question words that stay in place. S11 coverbs before the verb (在, 从, 跟, 给) instead of cases. S12 place words after the noun (桌子上). S13 去 / 来, 从…到, travel with 坐 / 骑 before the verb, and commands with 请, 吧 and 别. S14 time before the verb and the aspect particles 了 / 过 (在 for ‘in progress’). S15 no preposition for a point in time; 以前 / 以后 / 的时候 after the clause; dates from big to small. S16 adjectives used like verbs — 很 instead of 是, 的 before a noun. S17 comparison with 比, 更, 最, 没有 and 一样 — the adjective never changes. S18 paired linking words (因为…所以, 虽然…但是, 如果…就), …的时候 after its clause, and no word for ‘that’. Where the fusional languages learn conjugation and declension tables, Chinese learns word order and small grammar words.",
  "blocks": [
   {
    "t": "callout",
@@ -302,6 +302,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut is the opposite extreme: one long word can be a whole sentence, built from a stem and many suffixes. Chinese words are short and never change; every meaning is a separate word in a fixed order. Verb–object words such as 吃饭 ‘eat-meal’ look like incorporation but are two words that can be split (吃了饭). Pinyin q is not the Inuktitut uvular q but an aspirated, ‘ch’-like sound."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian is SVO like Chinese, and its clear, even vowels suit pinyin; but gender, articles, conjugation and the subjunctive all disappear, and tones and measure words are new. Pinyin z is close to the z of pizza and c is the same with a puff of air; zh, ch, sh are made with the tongue curled back, and ü has no Italian match. There are no double consonants, and characters have no capital letters."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian endings, cases, the suffixed article (libri) and the linking article (i / e) all disappear: a Chinese word never changes. New are tones and measure words. A gift: Albanian y is pinyin ü (女 nǚ), and q / gj are close to pinyin q / j. Traps: pinyin x is not Albanian x but a soft ‘sh’, pinyin zh is not Albanian zh but closer to xh with the tongue curled back, and Chinese has no th / dh. Characters have no capital letters."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese is SVO like Chinese, and ser / estar prepare you for 是 / 在; gender, articles, conjugation and the subjunctive disappear. Nasal vowels have no counterpart: in an / ang the n and ng are real consonants. Pinyin x is close to Portuguese ch / x (a soft ‘sh’), but pinyin ch is an aspirated ‘tch’ with the tongue curled back. Characters have no capital letters."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your language inflects nouns and verbs (gender, case, number, tense, person), almost all of it disappears: a Chinese word never changes. The new tools are word order, measure words, particles (了, 吗, 的) and tones."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If your words grow by adding one suffix per meaning, Chinese is the other extreme: every meaning is a separate short word, and the order (subject – verb – object, modifiers before the noun) carries the grammar. Many habits carry over: no gender, no plural after numbers, modifiers first, a question particle."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "same",
+   "text": "If your language never changes its words and builds grammar from word order and particles (perhaps with tones and classifiers), Chinese is the same type. Learn its order — modifiers before the noun (我的书, 大房子), time and place before the verb — and the characters."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If one long word in your language can be a whole sentence, Chinese is the opposite extreme: short words that never change, one meaning each, in a fixed order. Verb–object words such as 吃饭 ‘eat-meal’ look like one word but split: 吃了饭."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If your words come from consonant roots set into patterns, Chinese builds words by compounding whole syllables (电 + 话 = 电话) and never changes a word inside. Gender, dual, case and the definite prefix disappear; 是 is needed between two nouns where your present may have no verb; and tones, not emphatic or pharyngeal consonants, tell syllables apart."
   }
  ],
  "seeAlso": [

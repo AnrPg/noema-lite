@@ -331,6 +331,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut expresses ‘have’ with a suffix on the noun, inside one verb word (‘brother-have-I’). Chinese keeps separate words: 我 + 有 + 一个哥哥."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian has avere ‘have’ and c’è / ci sono ‘there is / are’ (from essere); Chinese uses 有 for both: ho due fratelli ~ 我有两个哥哥, c’è molta gente ~ 这里有很多人. non ho / non c’è ~ 没有, never *不有."
+  },
+  {
+   "for": "sq",
+   "rel": "same",
+   "text": "Albanian already does what Chinese does: kam ‘I have’ and ka ‘there is’ are one verb (ka shumë njerëz këtu ~ 这里有很多人). But kam conjugates (kam, ke, ka) and is negated with plain nuk; Chinese 有 never changes and has its own negation, 没有."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese has ter ‘have’ and há ‘there is’ (from haver); Chinese uses 有 for both: tenho dois irmãos ~ 我有两个哥哥, há muita gente ~ 这里有很多人. não tenho / não há ~ 没有, never *不有."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your ‘have’ conjugates and ‘there is’ is another construction, Chinese uses one unchanging verb for both: 我有书 (owner first), 桌子上有书 (place first). Its negation is always 没有, never *不有."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If you say ‘at me there is’ with an existence word (and a special word for ‘there isn’t’), Chinese 有 / 没有 is the same pair — but the owner is a plain subject: 我有一个哥哥."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "same",
+   "text": "If one verb in your language means both ‘have’ and ‘there is’, Chinese 有 is the same: 我有两个哥哥, 这里有很多人; its negative is 没有."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If ‘have’ is a suffix inside your verb word, Chinese keeps it as a separate verb with a subject: 我 + 有 + 一个哥哥."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "If your language says ‘at me / to me (there is)’ with one word for ‘there is’, Chinese 有 also does both jobs — but the owner becomes the subject: 我有一本书. The negation of both is 没有."
   }
  ],
  "seeAlso": [

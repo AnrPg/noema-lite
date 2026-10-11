@@ -312,6 +312,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut makes a question with a special verb ending (an interrogative mood); Chinese leaves the verb alone and adds 吗."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian asks by intonation alone (Bevi il tè?); Chinese needs 吗 or verb-不-verb. sì / no become the verb: 喝 / 不喝, 有 / 没有. o ‘or’ splits in Chinese: 还是 in questions, 或者 in statements."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Albanian a at the start marks a yes/no question (A pi çaj? ‘do you drink tea?’); Chinese 吗 does the same job at the end: 你喝茶吗？ po / jo become the verb in Chinese: 喝 / 不喝."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "Portuguese asks by intonation (Bebes chá?) but answers like Chinese, by repeating the verb: — Bebo. / — Não bebo. ~ 喝。/ 不喝。 Chinese adds 吗 or uses 喝不喝. ou splits: 还是 in questions, 或者 in statements."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your language asks by intonation or inversion and answers ‘yes / no’, Chinese adds 吗 (or verb-不-verb) and answers with the verb: 喝 / 不喝, 是 / 不是."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If your question particle follows the word asked about and changes its form, Chinese 吗 always closes the sentence and never changes; answer by repeating the verb: 喝 / 不喝."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "similar",
+   "text": "If your language asks with a final particle or a ‘verb-not’ frame, Chinese has both — 你喝茶吗？ and 你喝不喝茶？ — but never together."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If questions are a special verb ending in your language, Chinese leaves the verb alone and adds 吗, or repeats the verb: 喝不喝？"
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "If a particle at the start marks your yes/no questions, Chinese has one at the end: 吗. Two words for ‘or’ — one for questions, one for statements — match 还是 / 或者."
   }
  ],
  "seeAlso": [

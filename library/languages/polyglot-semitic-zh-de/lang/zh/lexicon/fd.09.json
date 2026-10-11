@@ -149,7 +149,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German oder, Greek ή and Russian или cover every ‘or’; Chinese has two: 还是 asks (‘tea or coffee?’), 或者 states (‘tea or coffee, either is fine’)."
+     "German oder covers every ‘or’; Chinese has two: 还是 asks (‘tea or coffee?’), 或者 states (‘tea or coffee, either is fine’)."
     ],
     "pitfalls": [
      "A 还是 question needs no 吗: 你喝茶还是咖啡？ (not *…咖啡吗？).",
@@ -157,6 +157,48 @@
     ],
     "subtleties": [
      "还 is read hái here; the same character is huán in 还 ‘to give back’."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "Greek ή covers both; Chinese chooses 还是 (questions) or 或者 (statements)."
+     },
+     {
+      "for": "ru",
+      "rel": "trap",
+      "text": "Russian или covers both; Chinese chooses 还是 or 或者."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English or covers both; Chinese chooses 还是 or 或者."
+     },
+     {
+      "for": "fr",
+      "rel": "trap",
+      "text": "French ou covers both; Chinese chooses 还是 or 或者."
+     },
+     {
+      "for": "es",
+      "rel": "trap",
+      "text": "Spanish o covers both; Chinese chooses 还是 or 或者."
+     },
+     {
+      "for": "it",
+      "rel": "trap",
+      "text": "Italian o covers both; Chinese chooses 还是 or 或者."
+     },
+     {
+      "for": "pt",
+      "rel": "trap",
+      "text": "Portuguese ou covers both; Chinese chooses 还是 or 或者."
+     },
+     {
+      "for": "sq",
+      "rel": "trap",
+      "text": "Albanian apo / ose come close: apo is mostly for questions, ose for statements — like 还是 / 或者."
+     }
     ]
    },
    "features": {

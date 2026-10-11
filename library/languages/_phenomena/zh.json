@@ -299,7 +299,7 @@
    "alsoIn": [
     "yue"
    ],
-   "alsoNote": "Japanese also uses full-width 。 and 、, but 、 is its ordinary comma and titles take 『 』.",
+   "alsoNote": "Other languages written with characters also use full-width 。 and 、, with their own rules for commas and title marks.",
    "what": "Chinese uses full-width punctuation: the small circle 。 as full stop, ，for a comma between clauses, the enumeration comma 、 between items of a list, “ ” for quotes and 《 》 for titles of books and films. The question mark and the exclamation mark are full-width too (？！).",
    "examples": [
     {
@@ -324,7 +324,14 @@
    },
    "status": "partial",
    "gap": "A short teaching block (fd.00 or fd.05 with lists) and checking that the bank uses 、 in lists; typed answers should accept ASCII punctuation.",
-   "when": "fd.00 / fd.05"
+   "when": "fd.00 / fd.05",
+   "notes": [
+    {
+     "for": "ja",
+     "rel": "similar",
+     "text": "Japanese also uses full-width 。 and 、, but 、 is its ordinary comma; Chinese keeps ，for clauses and 、 only between list items, and titles take 《 》 rather than 『 』."
+    }
+   ]
   },
   {
    "id": "zh.script.direction",
@@ -750,7 +757,7 @@
    ],
    "specific": true,
    "alsoIn": [],
-   "alsoNote": "Burmese has toneless reduced (minor) syllables, a related but different phenomenon.",
+   "alsoNote": "Some other tonal languages have toneless reduced syllables too — a related but different phenomenon.",
    "what": "Some syllables lose their tone and are said short and light: grammatical particles (吗, 了, 们), the suffix 子 and the second syllable of many words. Sometimes the neutral tone alone separates two words. Taiwan Mandarin uses the neutral tone far less (學生 xuéshēng).",
    "examples": [
     {
@@ -994,7 +1001,7 @@
    "alsoIn": [
     "pl"
    ],
-   "alsoNote": "Serbian distinguishes retroflex and alveolo-palatal affricates (č / ć, dž / đ), but not three full series.",
+   "alsoNote": "Some languages distinguish retroflex and alveolo-palatal affricates, but rarely three full series as Mandarin does.",
    "what": "Mandarin distinguishes zh ch sh r (tongue tip curled back, retroflex), j q x (tongue blade at the hard palate, alveolo-palatal) and z c s (tongue tip at the teeth, dental). Mixing them changes the word (知 zhī ‘know’, 鸡 jī ‘chicken’, 资 zī ‘capital’).",
    "examples": [
     {
@@ -1039,7 +1046,7 @@
    ],
    "specific": true,
    "alsoIn": [],
-   "alsoNote": "Albanian has the front rounded y [y], but not the apical vowel or [ɤ].",
+   "alsoNote": "The front rounded [y] is found in many languages; the apical vowel and [ɤ] are much rarer.",
    "what": "The i after z c s and zh ch sh r is not [i] but a buzzing continuation of the consonant (字 zì, 是 shì, 日 rì). ü is a high front rounded vowel [y] (女 nǚ, 绿 lǜ). Pinyin e alone is a back unrounded vowel [ɤ] (饿 è ‘hungry’).",
    "examples": [
     {
@@ -1068,7 +1075,14 @@
    },
    "status": "partial",
    "gap": "Pronunciation notes in fn.tones / S00 and audio (P9).",
-   "when": "fd.00"
+   "when": "fd.00",
+   "notes": [
+    {
+     "for": "sq",
+     "rel": "similar",
+     "text": "Albanian y is exactly pinyin ü (女 nǚ); the buzzing i of 字 zì, 是 shì and the e of 饿 è have no Albanian match."
+    }
+   ]
   },
   {
    "id": "zh.phon.syllable",
@@ -3292,7 +3306,7 @@
    "alsoIn": [
     "yue"
    ],
-   "alsoNote": "Japanese and Korean put relational place nouns after the noun too (机の上 / 책상 위 'on the desk'), and Amharic frames a place with a preposition plus a postposed place noun.",
+   "alsoNote": "Many languages with postpositions put relational place nouns after the noun in the same way (‘desk’s top’ for ‘on the desk’).",
    "what": "Where something is inside, on or under is said with a place word after the noun: 桌子上 ‘on the table’, 冰箱里 ‘in the fridge’. An ordinary object noun needs such a place word to be a place (在冰箱里, not *在冰箱), while place names and institutions do not (在学校, 在北京). Together with the coverb 在 before the noun, the place is framed from both sides.",
    "examples": [
     {
@@ -3334,7 +3348,14 @@
    },
    "status": "partial",
    "gap": "A per-noun place flag (is a place / needs a localizer) to generate and check *在冰箱 is not declared yet.",
-   "when": "fd.12 (field: place)"
+   "when": "fd.12 (field: place)",
+   "notes": [
+    {
+     "for": "ja",
+     "rel": "same",
+     "text": "Japanese puts a place noun after the noun too: 机の上 ‘on the desk’ ~ 桌子上."
+    }
+   ]
   },
   {
    "id": "zh.syntax.be3",
@@ -3594,7 +3615,7 @@
    "alsoIn": [
     "yue"
    ],
-   "alsoNote": "Vietnamese có … không? frames the verb in a similar way.",
+   "alsoNote": "Some other isolating languages frame the verb in a similar ‘(have) … not?’ question.",
    "what": "A yes/no question adds the particle 吗 at the end of the statement, or repeats the verb with 不 between (A-not-A: 你喝不喝茶？); nothing moves and the voice need not rise. 呢 asks ‘and …?’ (你呢？ ‘and you?’) or softens a question-word question.",
    "examples": [
     {
@@ -3759,7 +3780,7 @@
     "ga",
     "cy"
    ],
-   "alsoNote": "Vietnamese often echoes the verb too, but also has general 'yes' words (vâng, dạ) and không 'no'.",
+   "alsoNote": "Other languages of the region echo the verb too, though many also have general ‘yes’ and ‘no’ words.",
    "what": "Yes/no questions are answered by repeating the verb (or adjective), negated for ‘no’: 要。/ 不要。, 有。/ 没有。; 对 ‘right’ confirms a statement. 是 means ‘yes’ only for questions with 是.",
    "examples": [
     {
@@ -4004,7 +4025,7 @@
     "vi",
     "th"
    ],
-   "alsoNote": "Cantonese 畀 passive has the same structure but is used for neutral events too; Japanese has an adversative passive in -(r)are-.",
+   "alsoNote": "Cantonese 畀 passive has the same structure but is used for neutral events too; some other languages also have a passive mainly for unwelcome events (an adversative passive).",
    "what": "被 marks the passive: object – 被 – (agent) – verb – result. It is used mainly for unwelcome events (stolen, broken, criticised); for neutral events Chinese prefers an active sentence or a topic. Like 把, the verb needs something after it.",
    "examples": [
     {
@@ -4029,7 +4050,14 @@
    },
    "status": "missing",
    "gap": "Lexeme 被, a function with the ‘adversative’ use and a transform active ↔ 被.",
-   "when": "later (core)"
+   "when": "later (core)",
+   "notes": [
+    {
+     "for": "ja",
+     "rel": "similar",
+     "text": "Like the Japanese adversative passive in -(r)are-, 被 is used mainly for unwelcome events: 我的钱包被偷了 ‘my wallet was stolen’."
+    }
+   ]
   },
   {
    "id": "zh.syntax.serial",
@@ -4346,7 +4374,7 @@
    "alsoIn": [
     "yue"
    ],
-   "alsoNote": "Vietnamese pairs its connectives the same way (vì … nên, tuy … nhưng, nếu … thì); Japanese marks 'when' and 'if' at the end of the clause (…時, …なら).",
+   "alsoNote": "Some other isolating languages pair their connectives the same way, and some verb-final languages mark ‘when’ and ‘if’ at the end of the clause.",
    "what": "Clauses are often linked by pairs: 因为…所以 ‘because … so’, 虽然…但是 ‘although … but’, 如果…就 ‘if … then’. ‘When’ and ‘if’ can be marked at the end of their clause (…的时候, …的话). ‘And’ (和) never joins clauses.",
    "examples": [
     {
@@ -4381,7 +4409,14 @@
    },
    "status": "covered",
    "gap": "",
-   "when": "fd.18"
+   "when": "fd.18",
+   "notes": [
+    {
+     "for": "ja",
+     "rel": "similar",
+     "text": "Japanese marks ‘when’ and ‘if’ at the end of the clause (…時, …なら), as 的时候 and 的话 do."
+    }
+   ]
   },
   {
    "id": "zh.syntax.adverbs",
@@ -4527,7 +4562,7 @@
   },
   {
    "id": "zh.nom.yi.indef",
-   "title": "一 + measure word as ‘a’",
+   "title": "一 + measure word for a new thing",
    "area": "syntax",
    "pos": [
     "NUM",
@@ -4541,7 +4576,7 @@
      "value": "one"
     }
    ],
-   "what": "One newly introduced thing can be marked with the numeral 一 ‘one’ + measure word, which works as an indefinite ‘a’: 我买了一本书 ‘I bought a book’. After a verb 一 is often dropped in speech (买了本书), and with a non-specific noun, especially after 是, nothing is used (我是老师 ‘I am a teacher’).",
+   "what": "One newly introduced thing can be marked with the numeral 一 ‘one’ + measure word, which works as an indefinite marker: 我买了一本书 ‘I bought a book’. After a verb 一 is often dropped in speech (买了本书), and with a non-specific noun, especially after 是, nothing is used (我是老师 ‘I am a teacher’).",
    "examples": [
     {
      "text": "我买了一本书。",
@@ -5029,7 +5064,7 @@
    "alsoIn": [
     "yue"
    ],
-   "alsoNote": "Korean, Vietnamese and Hindi also split uncles and aunts by side and by relative age, with their own sets of terms.",
+   "alsoNote": "Many languages of Asia also split uncles and aunts by side and by relative age, each with its own set of terms.",
    "what": "Chinese has no general ‘uncle’, ‘aunt’, ‘cousin’ or ‘grandfather’: the word says whose side (father's or mother's), older or younger, and blood relative or in-law. 叔叔 is the father's younger brother, 伯伯 his elder brother, 舅舅 the mother's brother; 堂 cousins are the children of the father's brothers, all others are 表.",
    "examples": [
     {
@@ -5066,7 +5101,14 @@
    },
    "status": "partial",
    "gap": "A structured kin field (lineage, age, sex, in-law) is not declared, so no sense_split / kin-tree exercise can ask ‘your mother’s brother?’; no family-tree picture.",
-   "when": "fd.06"
+   "when": "fd.06",
+   "notes": [
+    {
+     "for": "hi",
+     "rel": "similar",
+     "text": "Hindi also splits uncles and aunts by side and age: चाचा (father’s younger brother) ~ 叔叔, ताऊ (his elder brother) ~ 伯伯, मामा (mother’s brother) ~ 舅舅."
+    }
+   ]
   },
   {
    "id": "zh.lex.relativeage",
@@ -5563,7 +5605,7 @@
     "yue",
     "vi"
    ],
-   "alsoNote": "Thai, Japanese and Korean also split 'old' for people and for things.",
+   "alsoNote": "Several languages of East and South-East Asia also split ‘old’ for people and for things.",
    "what": "‘Old’ splits: 老 for people, animals and long-standing relations, 旧 for used things; ‘new’ is 新 for things, but ‘young’ for people is 年轻. Age comparison uses 大 / 小 with 比: 他比我大两岁 ‘he is two years older than me’.",
    "examples": [
     {
@@ -5596,7 +5638,14 @@
    },
    "status": "covered",
    "gap": "",
-   "when": "fd.16, fd.17"
+   "when": "fd.16, fd.17",
+   "notes": [
+    {
+     "for": "ja",
+     "rel": "similar",
+     "text": "Japanese splits ‘old’ the same way: 年寄り / 老いた for people, 古い for things — 老 vs 旧."
+    }
+   ]
   },
   {
    "id": "zh.sem.rice",
@@ -5675,7 +5724,7 @@
     "nl",
     "sv"
    ],
-   "alsoNote": "Vietnamese mượn and Thai ยืม mean 'borrow' and become 'lend' with cho / ให้ 'give' before them.",
+   "alsoNote": "Some languages of South-East Asia also turn ‘borrow’ into ‘lend’ with a word for ‘give’ before it.",
    "what": "借 means both ‘borrow’ and ‘lend’; the direction comes from the construction: 跟 / 向 someone 借 ‘borrow from’, 借给 someone ‘lend to’.",
    "examples": [
     {
@@ -5764,7 +5813,7 @@
    "alsoIn": [
     "ja"
    ],
-   "alsoNote": "Cantonese and Korean separate clock points from durations in a similar way (三點 / 三個鐘; 세 시 / 세 시간).",
+   "alsoNote": "Cantonese separates clock points from durations in a similar way (三點 / 三個鐘), and so do some neighbouring languages.",
    "what": "Chinese separates points from amounts of time: 什么时候 ‘when (at what point)’ vs 时间 ‘time (an amount)’; 三点 ‘three o'clock’ vs 三个小时 ‘three hours’; 十分 ‘ten past’ (on the clock) vs 十分钟 ‘ten minutes’.",
    "examples": [
     {
@@ -5974,7 +6023,7 @@
    "alsoIn": [
     "yue"
    ],
-   "alsoNote": "Vietnamese words of Chinese origin behave in a similar way.",
+   "alsoNote": "Words of Chinese origin in neighbouring languages behave in a similar way.",
    "what": "Short, old words have many meanings, and compounds pick one: 天 ‘day’, ‘sky’, ‘weather’ (今天, 天空, 天气); 家 ‘home’, ‘family’, the measure word for businesses and the suffix ‘-ist’; 开 ‘open’, ‘drive’, ‘switch on’, ‘bloom’.",
    "examples": [
     {
@@ -6279,7 +6328,7 @@
     "ja",
     "ko"
    ],
-   "alsoNote": "Vietnamese also uses Sino-Vietnamese four-syllable idioms (thành ngữ).",
+   "alsoNote": "Neighbouring languages that borrowed from Chinese also use four-syllable idioms.",
    "what": "Chengyu are fixed four-character expressions, mostly from classical texts, often with a story behind them. They are frequent in writing and educated speech and cannot be understood word by word.",
    "examples": [
     {
@@ -6405,7 +6454,7 @@
    "alsoIn": [
     "yue"
    ],
-   "alsoNote": "Japanese and Korean avoid 4 for the same reason (shi / sa sound like 'death').",
+   "alsoNote": "Other languages that read 四 with a sound like ‘death’ avoid 4 for the same reason.",
    "what": "Sound-alikes carry luck: 四 sì sounds like 死 sǐ ‘die’ (no 4th floor), 八 bā like 发 fā ‘get rich’, 鱼 yú like 余 yú ‘surplus’ (fish at New Year: 年年有余). A clock is never a gift (送钟 sòng zhōng sounds like 送终 ‘attend a deathbed’).",
    "examples": [
     {
@@ -6432,7 +6481,14 @@
    },
    "status": "partial",
    "gap": "A culture note in fd.05 (numbers) linking the facts, and quiz items.",
-   "when": "fd.05"
+   "when": "fd.05",
+   "notes": [
+    {
+     "for": "ja",
+     "rel": "same",
+     "text": "Japanese avoids 4 for the same reason: shi 四 sounds like 死 ‘death’."
+    }
+   ]
   },
   {
    "id": "zh.culture.names",
@@ -6457,7 +6513,7 @@
     "yue",
     "ko"
    ],
-   "alsoNote": "Japanese, Hungarian and Vietnamese also put the family name first; Japanese titles follow the name too (田中先生).",
+   "alsoNote": "Several other languages also put the family name first, and some put titles after the name too.",
    "what": "The surname comes first and is usually one syllable (王, 李, 张), followed by a one- or two-syllable given name: 王小明. Titles follow the name (王老师). Asking politely for someone's surname is 您贵姓？",
    "examples": [
     {
@@ -6486,7 +6542,14 @@
    },
    "status": "partial",
    "gap": "A greetings block on names and 姓 / 叫, and 姓 as a lexeme.",
-   "when": "fd.02"
+   "when": "fd.02",
+   "notes": [
+    {
+     "for": "ja",
+     "rel": "same",
+     "text": "Japanese also puts the surname first and the title after the name: 田中先生 ~ 王老师."
+    }
+   ]
   },
   {
    "id": "zh.prag.greetings",
@@ -6942,7 +7005,7 @@
    "alsoIn": [
     "yue"
    ],
-   "alsoNote": "Vietnamese also says a word for the gap (một trăm lẻ / linh một '101'), but names each empty place in longer numbers.",
+   "alsoNote": "Some other languages also say a word for the gap, but name each empty place in longer numbers.",
    "what": "A missing place inside a number is said with 零 (once for any number of zeros): 一百零一 = 101, 一千零五 = 1005. 10 is 十, but 110 is 一百一十.",
    "examples": [
     {
@@ -7225,7 +7288,7 @@
      "build_sentence",
      "quiz"
     ],
-    "other": "星期一 … 星期日 lexemes; trap about Greek Δευτέρα"
+    "other": "星期一 … 星期日 lexemes; trap about weekdays counted from Sunday (pitfall + notes)"
    },
    "status": "partial",
    "gap": "The alternatives 周一 … 周日 and 礼拜一 … 礼拜天 (very common in writing and speech) are not recorded as variants.",
@@ -7251,7 +7314,7 @@
     "vi",
     "ko"
    ],
-   "alsoNote": "Japanese keeps the twelve animals but celebrates New Year on 1 January; Mongolian and Tibetan have their own lunisolar New Year with the twelve animals.",
+   "alsoNote": "Neighbouring countries keep the twelve animals too, some with their own lunisolar New Year, some with New Year on 1 January.",
    "what": "Alongside the Gregorian calendar, the traditional lunisolar calendar (农历) fixes the festivals — 春节 Spring Festival, 中秋节 Mid-Autumn — and each year has one of twelve animals (生肖): 2026 is a Year of the Horse. Birthdays may be counted in either calendar.",
    "examples": [
     {
@@ -7278,7 +7341,14 @@
    },
    "status": "missing",
    "gap": "A culture block in fd.15 (months and the year) and lexemes 春节, 农历.",
-   "when": "fd.15"
+   "when": "fd.15",
+   "notes": [
+    {
+     "for": "ja",
+     "rel": "similar",
+     "text": "Japanese keeps the twelve animals (干支) but celebrates New Year on 1 January; Chinese 春节 follows the lunar calendar."
+    }
+   ]
   },
   {
    "id": "zh.culture.age",
@@ -7299,7 +7369,7 @@
    "alsoIn": [
     "yue"
    ],
-   "alsoNote": "Traditional Korean age also counted a newborn as one.",
+   "alsoNote": "Traditional age counting elsewhere in East Asia also counted a newborn as one.",
    "what": "Age is a number + 岁 without 是 (我二十岁). The question depends on whom you ask: 你几岁？ to a child, 你多大？ to a peer, 您多大年纪？ to an older person. Traditionally a newborn counted as one year old (虚岁).",
    "examples": [
     {
@@ -7399,7 +7469,7 @@
    "alsoIn": [
     "yue"
    ],
-   "alsoNote": "Japanese 青, Korean 푸르다 and Vietnamese xanh also cover both green and blue.",
+   "alsoNote": "Several languages of East and South-East Asia also have one basic word covering both green and blue.",
    "what": "Basic colours have a short adjective (红 ‘red’) and a noun with 色 ‘colour’ (红色 ‘red (colour)’). Green 绿 lǜ and blue 蓝 lán are two basic colours; the older 青 covers green, blue and black shades in set words (青菜 ‘green vegetables’, 青天 ‘blue sky’). Colours carry cultural meaning: red for luck and celebration, white for mourning, 黄色 also ‘pornographic’, and a ‘green hat’ (戴绿帽子) for a man whose partner cheats.",
    "examples": [
     {
@@ -7433,7 +7503,14 @@
    },
    "status": "covered",
    "gap": "",
-   "when": "fd.17"
+   "when": "fd.17",
+   "notes": [
+    {
+     "for": "ja",
+     "rel": "same",
+     "text": "Japanese 青 ao also covers green and blue (青信号 ‘green light’), like Chinese 青."
+    }
+   ]
   },
   {
    "id": "zh.culture.sinitic",

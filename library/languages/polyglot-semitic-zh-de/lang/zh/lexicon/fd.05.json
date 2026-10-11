@@ -450,7 +450,7 @@
      "Spoken liǎng: like every 3rd tone, it changes to 2nd before another 3rd tone (两本 liáng běn), though it is still written liǎng."
     ],
     "subtleties": [
-     "两 and 二 are the same number: 二 is the name of the digit, 两 the amount ‘two of something’ — like English ‘two’ vs ‘a pair / both’.",
+     "两 and 二 are the same number: 二 is the name of the digit (counting, 第二, 十二), 两 the amount ‘two of something’ before a measure word (两本书).",
      "In a large number the first 2 may be 两: 两百 / 二百 ‘200’, 两千 ‘2000’, 两万 ‘20 000’ — both are correct, 两 is more colloquial."
     ]
    },
@@ -2022,7 +2022,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "好多 ‘good-many’ is the colloquial twin of 很多 — compare English ‘a good many’."
+     "好多 ‘good-many’ is the colloquial twin of 很多."
     ],
     "pitfalls": [
      "多 alone hardly ever stands before a noun: say 很多书, not *多书.",
@@ -2031,6 +2031,13 @@
     "subtleties": [
      "很 in 很多 is not felt as ‘very’: 很多 is the plain ‘many’; for ‘very many’ say 非常多.",
      "很多 needs no measure word before the noun: 很多书, 很多人."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Compare English ‘a good many’."
+     }
     ]
    },
    "features": {

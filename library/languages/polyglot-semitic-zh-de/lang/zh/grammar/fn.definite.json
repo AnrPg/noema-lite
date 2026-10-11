@@ -11,7 +11,7 @@
    "value": "one"
   }
  ],
- "summary": "Chinese has no articles. A bare noun is read as ‘the’ or ‘a’ from context and from its place: a noun before the verb is usually something known (书在这里 ‘the book is here’, 钥匙不在这里 ‘the keys aren’t here’). To introduce one new thing, Chinese can use 一 + measure word (这是一本书 ‘this is a book’), but often a bare noun is enough (这是书). To point at a known thing, 这 / 那 + measure word (这本书 ‘this book’). From S06 on, 有 adds the other half: 这里有书 ‘there is a book here’ — a new thing after the verb.",
+ "summary": "Chinese has no articles. A bare noun is read as known or new from context and from its place: a noun before the verb is usually something known (书在这里 ‘the book is here’, 钥匙不在这里 ‘the keys aren’t here’). To introduce one new thing, Chinese can use 一 + measure word (这是一本书 ‘this is a book’), but often a bare noun is enough (这是书). To point at a known thing, 这 / 那 + measure word (这本书 ‘this book’). From S06 on, 有 adds the other half: 这里有书 ‘there is a book here’ — a new thing after the verb.",
  "blocks": [
   {
    "t": "table",
@@ -47,7 +47,7 @@
      "a new thing after 有"
     ]
    ],
-   "caption": "The work of ‘the’ and ‘a’",
+   "caption": "Known and new things — without articles",
    "typology": [
     {
      "feature": "nom.definiteArticle",
@@ -62,24 +62,108 @@
   {
    "t": "callout",
    "kind": "pitfall",
-   "title": "这 is not ‘the’",
+   "title": "这 points — it is not an article",
    "text": "这本书 means ‘this book’. A thing that is simply known takes no word at all: 书在这里 ‘the book is here’.",
    "typology": [
     {
      "feature": "nom.definiteArticle",
      "value": "none"
     }
+   ],
+   "notes": [
+    {
+     "for": "en",
+     "rel": "trap",
+     "text": "‘This book’ is 这本书, but ‘the book’ is just 书: never translate ‘the’ with 这."
+    },
+    {
+     "for": "de",
+     "rel": "trap",
+     "text": "der / die / das is not 这: das Buch ist hier is 书在这里; 这本书 is dieses Buch."
+    },
+    {
+     "for": "fr",
+     "rel": "trap",
+     "text": "le livre is just 书 (书在这里 ‘le livre est ici’); 这本书 is ce livre(-ci)."
+    },
+    {
+     "for": "es",
+     "rel": "trap",
+     "text": "el libro is just 书 (书在这里); 这本书 is este libro."
+    },
+    {
+     "for": "it",
+     "rel": "trap",
+     "text": "il libro is just 书 (书在这里); 这本书 is questo libro."
+    },
+    {
+     "for": "pt",
+     "rel": "trap",
+     "text": "o livro is just 书 (书在这里); 这本书 is este livro."
+    },
+    {
+     "for": "el",
+     "rel": "trap",
+     "text": "το βιβλίο is just 书 (书在这里); 这本书 is αυτό το βιβλίο."
+    },
+    {
+     "for": "sq",
+     "rel": "trap",
+     "text": "The ending of libri is not 这: libri është këtu is 书在这里; 这本书 is ky libër."
+    }
    ]
   },
   {
    "t": "callout",
    "kind": "pitfall",
-   "title": "Don’t add 一个 for every ‘a’",
+   "title": "Don’t add 一个 to every new noun",
    "text": "这是书 ‘this is a book’ and 我是学生 ‘I am a student’ need nothing; 一 + measure word stresses ‘one’ or introduces something new.",
    "typology": [
     {
      "feature": "nom.indefiniteArticle",
      "value": "one"
+    }
+   ],
+   "notes": [
+    {
+     "for": "en",
+     "rel": "trap",
+     "text": "‘I am a student’ is 我是学生: the English ‘a’ needs no counterpart, and 一个 means ‘one’ or brings in something new."
+    },
+    {
+     "for": "de",
+     "rel": "trap",
+     "text": "ein / eine has no obligatory counterpart: es ist ein Buch ~ 这是书 or 这是一本书, ich bin Lehrer ~ 我是老师."
+    },
+    {
+     "for": "fr",
+     "rel": "trap",
+     "text": "un / une has no obligatory counterpart: c’est un livre ~ 这是书 or 这是一本书, je suis étudiant ~ 我是学生."
+    },
+    {
+     "for": "es",
+     "rel": "trap",
+     "text": "un / una has no obligatory counterpart: es un libro ~ 这是书 or 这是一本书, soy estudiante ~ 我是学生."
+    },
+    {
+     "for": "it",
+     "rel": "trap",
+     "text": "un / una has no obligatory counterpart: è un libro ~ 这是书 or 这是一本书, sono studente ~ 我是学生."
+    },
+    {
+     "for": "pt",
+     "rel": "trap",
+     "text": "um / uma has no obligatory counterpart: é um livro ~ 这是书 or 这是一本书, sou estudante ~ 我是学生."
+    },
+    {
+     "for": "el",
+     "rel": "trap",
+     "text": "ένας / μία / ένα has no obligatory counterpart: είναι ένα βιβλίο ~ 这是书 or 这是一本书, είμαι φοιτητής ~ 我是学生."
+    },
+    {
+     "for": "sq",
+     "rel": "trap",
+     "text": "një has no obligatory counterpart: është një libër ~ 这是书 or 这是一本书, jam student ~ 我是学生."
     }
    ]
   },
@@ -87,14 +171,14 @@
    "t": "compare",
    "items": [
     {
-     "title": "Known (‘the’)",
+     "title": "Known",
      "points": [
       "bare noun before the verb",
       "书在这里。"
      ]
     },
     {
-     "title": "New (‘a’)",
+     "title": "New",
      "points": [
       "一 + measure word, or after 有 (S06)",
       "这是一本书。"
@@ -108,12 +192,12 @@
    "Is the thing already known to both speakers? → a bare noun, usually before the verb: 书在这里.",
    "Am I introducing one new thing? → 一 + measure word (这是一本书) — or just the bare noun.",
    "Must I point at it? → 这 / 那 + measure word.",
-   "Am I looking for a word for ‘the’? → there is none: usually the bare noun."
+   "Am I looking for a word that marks a thing as known? → there is none: usually the bare noun."
   ]
  },
  "traps": [
-  "Do not translate ‘the’ with 这: 这 means ‘this’.",
-  "Do not add 一个 wherever a translation has ‘a’: 我是老师, not necessarily 我是一个老师.",
+  "Do not use 这 just to mark a known thing: 这 means ‘this’ and points.",
+  "Do not add 一个 to every single new noun: 我是老师, not necessarily 我是一个老师.",
   "A known thing goes before the verb: 钥匙在这里 ‘the keys are here’ — 这里有钥匙 (S06) means ‘there are keys here’."
  ],
  "needs": {},
@@ -133,7 +217,7 @@
  ],
  "quiz": [
   {
-   "q": "How do you say ‘the’ in Chinese?",
+   "q": "How does Chinese mark a thing as known (definite)?",
    "options": [
     "usually nothing — a bare noun",
     "这",
@@ -173,7 +257,7 @@
    "why": "这 + measure word + noun."
   },
   {
-   "q": "Which word is ‘the’ in 钥匙不在这里 (‘the keys aren’t here’)?",
+   "q": "Which word marks 钥匙 as known in 钥匙不在这里 (‘the keys aren’t here’)?",
    "options": [
     "none",
     "这",
@@ -283,6 +367,46 @@
    "for": "iu",
    "rel": "same",
    "text": "Inuktitut has no articles; neither has Chinese."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian il / la / lo / un / una and the partitive del come with nearly every noun; Chinese has none — 我喝咖啡 is bevo il caffè and bevo del caffè alike. 一 + measure word appears only when ‘one’ or a new thing matters."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian marks a known noun with an ending (libër → libri ‘the book’) and a new one with një (një libër); Chinese has neither: 书在这里 ‘the book is here’. 一 + measure word is the counterpart of një, and position does the work of the ending."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese o / a / um / uma come with nearly every noun, even before names and possessives (o João, o meu livro); Chinese has none: 书, 我的书 — 一 + measure word only when ‘one’ or a new thing matters."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your language has articles that agree in gender, number or case, Chinese has none at all: a bare noun is known or new by context and position (书在这里 / 这里有书), and 一 + measure word is not an obligatory article."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If your language has no definite article and marks a known object with a case ending, Chinese marks neither: position does the work — a known thing before the verb (书在这里), a new one after 有 (这里有书)."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "same",
+   "text": "If your language has no articles and uses ‘one’ + classifier for a new thing, Chinese does exactly that (一本书); a bare noun before the verb is a known thing (书在这里)."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "same",
+   "text": "If your language has no articles, neither has Chinese; known and new are shown by position: 书在这里 (known), 这里有书 (new)."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If your language marks a known noun with a definite prefix (repeated on its adjective), Chinese marks nothing: 大房子 is ‘a big house’ or ‘the big house’ by context, and a known thing tends to stand before the verb (书在这里)."
   }
  ],
  "seeAlso": [
@@ -299,7 +423,7 @@
   {
    "lang": "he",
    "fn": "fn.definite",
-   "note": "Hebrew has ha- for ‘the’ and nothing for ‘a’ — like Chinese for ‘a’, but Chinese has no ‘the’ either."
+   "note": "Hebrew marks a known noun with ha- and a new one with nothing — like Chinese for new things, but Chinese has no mark for known ones either."
   }
  ]
 }

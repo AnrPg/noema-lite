@@ -107,14 +107,26 @@
      "src": "morphemes: 星期 + 一 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "Greek Δευτέρα ‘second’, Hebrew יוֹם שֵׁנִי ‘second day’ and Arabic الاثنين ‘the second’ count from Sunday — Chinese counts from Monday: 星期一 ‘week-one’."
+     "Hebrew יוֹם שֵׁנִי ‘second day’ and Arabic الاثنين ‘the second’ count from Sunday — Chinese counts from Monday: 星期一 ‘week-one’."
     ],
     "pitfalls": [
      "No word for ‘on’: 星期一我工作 / 我星期一工作 — 在星期一 is bookish, and the day never goes at the end (*我工作星期一).",
-     "Monday is ONE in Chinese but ‘second’ in Greek: don’t translate Δευτέρα as *星期二."
+     "Monday is ONE in Chinese but ‘second’ in Hebrew and Arabic: don’t translate יוֹם שֵׁנִי or الاثنين as *星期二."
     ],
     "subtleties": [
      "Only Sunday has a name (星期天 / 星期日); Monday to Saturday are just numbers 1–6."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "Greek Δευτέρα ‘second’ is Monday: don’t translate it as *星期二."
+     },
+     {
+      "for": "pt",
+      "rel": "trap",
+      "text": "Portuguese segunda-feira ‘second’ is Monday: don’t translate it as *星期二."
+     }
     ]
    }
   },
@@ -225,13 +237,30 @@
      "src": "morphemes: 星期 + 二 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "Russian вторник (from второй ‘second’) and Chinese 星期二 ‘week-two’ agree: both count from Monday. Greek Τρίτη ‘third’ counts from Sunday."
+     "星期二 ‘week-two’ is Tuesday, the second day counted from Monday; Hebrew יוֹם שְׁלִישִׁי ‘third day’ counts from Sunday."
     ],
     "pitfalls": [
      "It is 星期二 with 二, never *星期两: 两 is only for counting things (两个人), not for names and order."
     ],
     "subtleties": [
      "‘Every Tuesday’ is 每个星期二 or, in writing, 每周二."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Russian вторник (from второй ‘second’) agrees: both count from Monday."
+     },
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "Greek Τρίτη ‘third’ counts from Sunday; 星期二 is ‘two’."
+     },
+     {
+      "for": "pt",
+      "rel": "trap",
+      "text": "Portuguese terça-feira ‘third’ counts from Sunday; 星期二 is ‘two’."
+     }
     ]
    }
   },
@@ -342,13 +371,20 @@
      "src": "morphemes: 星期 + 三 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "German Mittwoch ‘mid-week’ and Russian среда (‘middle’) name Wednesday after its place in the week; Chinese just counts: 3."
+     "German Mittwoch ‘mid-week’ names Wednesday after its place in the week; Chinese just counts: 3."
     ],
     "pitfalls": [
      "The number after 星期 names the day (星期三 ‘Wednesday’); a number before it counts weeks: 三个星期 ‘three weeks’."
     ],
     "subtleties": [
      "In writing and on timetables 周三 is common: 周三下午."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "Russian среда (‘middle’) names it after its place in the week too."
+     }
     ]
    }
   },
@@ -459,13 +495,30 @@
      "src": "morphemes: 星期 + 四 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "Russian четверг (from четвёртый ‘fourth’) is Chinese 星期四 ‘week-four’; Greek Πέμπτη, Hebrew יוֹם חֲמִישִׁי and Arabic الخميس all say ‘fifth’."
+     "Hebrew יוֹם חֲמִישִׁי and Arabic الخميس say ‘fifth’ for Thursday; Chinese 星期四 says ‘four’."
     ],
     "pitfalls": [
      "Listen for the tone: 星期四 xīngqīsì (4th tone) is Thursday; 十 shí (2nd tone) is ‘ten’."
     ],
     "subtleties": [
      "With days and dates 是 can drop: 今天星期四 ‘today is Thursday’ — the time word itself is the predicate."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Russian четверг (from четвёртый ‘fourth’) is exactly 星期四."
+     },
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "Greek Πέμπτη says ‘fifth’; 星期四 says ‘four’."
+     },
+     {
+      "for": "pt",
+      "rel": "trap",
+      "text": "Portuguese quinta-feira says ‘fifth’; 星期四 says ‘four’."
+     }
     ]
    }
   },
@@ -576,13 +629,30 @@
      "src": "morphemes: 星期 + 五 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "Greek Παρασκευή ‘preparation’ (for the Sabbath), Arabic الجمعة ‘the gathering’ (Friday prayer; Turkish cuma comes from it), Russian пятница ‘fifth’ — Chinese 星期五 ‘week-five’ agrees with the Russian."
+     "Arabic الجمعة ‘the gathering’ names Friday after the Friday prayer; Chinese just counts: 星期五 ‘week-five’."
     ],
     "pitfalls": [
      "‘Next Friday’ is 下个星期五 (or 下星期五), ‘last Friday’ 上个星期五: 下 ‘down’ is the future, 上 ‘up’ the past."
     ],
     "subtleties": [
      "星期五晚上 ‘Friday evening’: the bigger unit comes first, as in dates."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "Greek Παρασκευή is the ‘preparation’ (for the Sabbath)."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Russian пятница ‘fifth’ agrees with 星期五."
+     },
+     {
+      "for": "pt",
+      "rel": "trap",
+      "text": "Portuguese sexta-feira says ‘sixth’; 星期五 says ‘five’."
+     }
     ]
    }
   },
@@ -693,13 +763,45 @@
      "src": "morphemes: 星期 + 六 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "Greek Σάββατο, Hebrew שַׁבָּת, Arabic السَّبْت, Russian суббота and German Samstag all come from the Hebrew Sabbath; Chinese simply says ‘week-six’."
+     "Arabic السَّبْت and German Samstag come from the Hebrew שַׁבָּת (Sabbath); Chinese simply says ‘week-six’."
     ],
     "pitfalls": [
      "星期六 is the last numbered day: there is no *星期七 — Sunday is 星期天 / 星期日."
     ],
     "subtleties": [
      "礼拜六 is heard in the south (Shanghai) and in older speech."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "Greek Σάββατο comes from the Sabbath too."
+     },
+     {
+      "for": "ru",
+      "rel": "different",
+      "text": "Russian суббота comes from the Sabbath too."
+     },
+     {
+      "for": "it",
+      "rel": "different",
+      "text": "Italian sabato comes from the Sabbath too."
+     },
+     {
+      "for": "es",
+      "rel": "different",
+      "text": "Spanish sábado comes from the Sabbath too."
+     },
+     {
+      "for": "pt",
+      "rel": "different",
+      "text": "Portuguese sábado comes from the Sabbath too."
+     },
+     {
+      "for": "fr",
+      "rel": "different",
+      "text": "French samedi comes from the Sabbath too."
+     }
     ]
    }
   },
@@ -822,13 +924,45 @@
      "src": "morphemes: 星期 + 天 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "Greek Κυριακή ‘the Lord’s day’, Russian воскресенье ‘resurrection’, Turkish pazar ‘market’, German Sonntag ‘sun-day’ — Chinese calls it the ‘week-day’ (天 ‘day’)."
+     "German Sonntag is the ‘sun-day’; Chinese calls it the ‘week-day’ (天 ‘day’) — or 星期日, with 日 ‘sun, day’."
     ],
     "pitfalls": [
      "*星期七 does not exist: Sunday is 星期天 (spoken) or 星期日 (written)."
     ],
     "subtleties": [
      "星期天 is the everyday spoken form; 星期日 is used on calendars and forms, 周日 on timetables."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "Greek Κυριακή is ‘the Lord’s day’."
+     },
+     {
+      "for": "ru",
+      "rel": "different",
+      "text": "Russian воскресенье is ‘resurrection’."
+     },
+     {
+      "for": "it",
+      "rel": "different",
+      "text": "Italian domenica is ‘the Lord’s day’."
+     },
+     {
+      "for": "es",
+      "rel": "different",
+      "text": "Spanish domingo is ‘the Lord’s day’."
+     },
+     {
+      "for": "pt",
+      "rel": "different",
+      "text": "Portuguese domingo is ‘the Lord’s day’."
+     },
+     {
+      "for": "fr",
+      "rel": "different",
+      "text": "French dimanche is ‘the Lord’s day’."
+     }
     ]
    }
   },
@@ -946,13 +1080,20 @@
      "src": "morphemes: 星期 + 日 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "日 is both ‘sun’ and ‘day’ (日出 ‘sunrise’); German Sonntag and English Sunday are named after the sun."
+     "日 is both ‘sun’ and ‘day’ (日出 ‘sunrise’); German Sonntag is named after the sun as well."
     ],
     "pitfalls": [
      "In conversation 星期日 can sound stiff; with friends say 星期天."
     ],
     "subtleties": [
      "Forms, timetables and calendars use 星期日 or 周日."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "English Sunday is named after the sun as well."
+     }
     ]
    }
   },
@@ -1189,17 +1330,29 @@
      }
     ],
     "etymology": {
-     "text": "周 ‘week’ + 末 ‘end’: ‘week-end’, built exactly like English weekend and German Wochenende.",
+     "text": "周 ‘week’ + 末 ‘end’: ‘week-end’, built exactly like German Wochenende.",
      "src": "morphemes: 周 + 末 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "Greek says Σαββατοκύριακο ‘Saturday-Sunday’; Chinese copies the English idea instead: 周 ‘week’ + 末 ‘end’."
+     "周末 is a modern word, modelled on the ‘week-end’ of other languages: 周 ‘week’ + 末 ‘end’."
     ],
     "pitfalls": [
      "‘At the weekend’ needs no ‘at’: 周末我在家 — *在周末 is only for written style."
     ],
     "subtleties": [
      "周末愉快！ ‘Have a nice weekend!’ is the usual Friday goodbye."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "Greek says Σαββατοκύριακο ‘Saturday-Sunday’; 周末 copies the ‘week-end’ idea instead."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Built exactly like English weekend."
+     }
     ]
    }
   },
@@ -1962,13 +2115,20 @@
      "src": "morphemes: 下 + 午 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "English p.m. is Latin post meridiem ‘after midday’ — exactly 下午 ‘below noon’."
+     "下午 is ‘below noon’ — the hours after midday, like Latin post meridiem ‘after midday’."
     ],
     "pitfalls": [
      "下午三点 ‘3 p.m.’: the part of the day comes first, then the hour."
     ],
     "subtleties": [
      "下午 lasts until about six; after that it is 晚上."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "English p.m. (post meridiem, ‘after midday’) says exactly 下午."
+     }
     ]
    }
   },
@@ -2113,14 +2273,31 @@
      "src": "morphemes: 晚 + 上 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "晚 is both ‘evening’ and ‘late’ — like Spanish tarde ‘afternoon; late’."
+     "晚 is both ‘evening’ and ‘late’."
     ],
     "pitfalls": [
      "‘Tonight’ is 今天晚上 (written 今晚).",
      "晚上好 is the greeting ‘good evening’; 晚安 ‘good night’ is said when going to bed."
     ],
     "subtleties": [
-     "晚上 covers the whole evening and the night until you sleep — English ‘last night’ is usually 昨天晚上."
+     "晚上 covers the whole evening and the night until you sleep — so ‘last night’ is usually 昨天晚上."
+    ],
+    "notes": [
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "Like Spanish tarde ‘afternoon; late’, one word covers both."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Like Portuguese tarde ‘afternoon; late’, one word covers both."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English ‘last night’ is usually 昨天晚上, not 昨天夜里."
+     }
     ]
    }
   },
@@ -2244,13 +2421,25 @@
      "src": "morphemes: 今 + 天 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "Greek σήμερα, German heute and Russian сегодня (сего дня ‘of this day’) are all ‘this day’ — just like 今天."
+     "German heute is also ‘this day’ — just like 今天 ‘now-day’."
     ],
     "pitfalls": [
      "今天 goes before the verb, at the start or after the subject: 今天我不去 / 我今天不去 — never at the end (*我不去今天)."
     ],
     "subtleties": [
      "With days and dates 是 can drop: 今天星期一 ‘today is Monday’."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Greek σήμερα is ‘this day’ too."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Russian сегодня (сего дня ‘of this day’) is ‘this day’ too."
+     }
     ]
    }
   },
@@ -2764,11 +2953,18 @@
      "以后 and 以前 use the same 后 / 前 as 后面 / 前面 (S12): space and time share words, like German vor / nach (vor dem Haus — vor dem Essen)."
     ],
     "pitfalls": [
-     "以后 comes AFTER what it refers to: 吃饭以后 ‘after eating’ — the opposite order of English after and German nach.",
+     "以后 comes AFTER what it refers to: 吃饭以后 ‘after eating’ — the opposite order of German nach.",
      "‘Later’ about the past (‘and then …’) is 后来, not 以后."
     ],
     "subtleties": [
      "Alone at the start, 以后 means ‘from now on, in future’: 以后别这样了 ‘don’t do that again’."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English after comes first; 以后 comes last: 吃饭以后."
+     }
     ]
    }
   },
@@ -3191,17 +3387,29 @@
      }
     ],
     "etymology": {
-     "text": "Phono-semantic compound: semantic 日 ‘sun’ + phonetic 免; from Proto-Sino-Tibetan *mor ‘night’. Wiktionary compares Spanish tarde, which also means both ‘evening’ and ‘late’.",
+     "text": "Phono-semantic compound: semantic 日 ‘sun’ + phonetic 免; from Proto-Sino-Tibetan *mor ‘night’.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "晚 is both ‘evening’ and ‘late’, like Spanish tarde."
+     "晚 is both ‘evening’ and ‘late’: 晚上 ‘evening’, 来晚了 ‘came late’."
     ],
     "pitfalls": [
      "‘I’m late’ (arriving) is 我来晚了 or 我迟到了 — not *我是晚."
     ],
     "subtleties": [
      "晚 + 了 marks a change: 现在很晚了 ‘it’s got late’."
+    ],
+    "notes": [
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "Like Spanish tarde ‘afternoon; late’, one word covers both."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Like Portuguese tarde ‘afternoon; late’, one word covers both."
+     }
     ]
    },
    "features": {
@@ -3341,7 +3549,14 @@
      "A negation follows it: 他总是不吃早饭 ‘he never has breakfast’ (he always doesn’t)."
     ],
     "subtleties": [
-     "Like English ‘always’, 总是 can carry irritation: 你总是这样！ ‘you’re always like this!’"
+     "总是 can carry irritation: 你总是这样！ ‘you’re always like this!’"
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Like English ‘always’."
+     }
     ]
    },
    "features": {
@@ -3707,13 +3922,20 @@
      "src": "morphemes: 有 + 时候 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "Literally ‘there are times’ — like English ‘at times’."
+     "Literally ‘there are times’: 有 + 时候."
     ],
     "pitfalls": [
      "有时候 goes before the verb or at the very start: 有时候我走路 / 我有时候走路 — not at the end."
     ],
     "subtleties": [
      "有时候 … 有时候 … balances two habits: 有时候喝茶，有时候喝咖啡."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Like English ‘at times’."
+     }
     ]
    },
    "features": {

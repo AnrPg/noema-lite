@@ -134,10 +134,52 @@
     ],
     "pitfalls": [
      "Drinks take 喝, not 吃: 喝水, 喝茶 — and soup is drunk: 喝汤.",
-     "吃 is used where English says ‘take’: 吃药 (take medicine)."
+     "Medicine is ‘eaten’ too: 吃药 ‘take medicine’ — 拿药 is only ‘pick up medicine’."
     ],
     "subtleties": [
      "吃 + an experience = to undergo it: 吃苦 (endure hardship), 吃亏 (lose out), 吃惊 (be startled)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "‘take medicine’ is 吃药, not *拿药."
+     },
+     {
+      "for": "de",
+      "rel": "trap",
+      "text": "Medikamente nehmen is 吃药, not *拿药."
+     },
+     {
+      "for": "fr",
+      "rel": "trap",
+      "text": "prendre un médicament is 吃药, not *拿药."
+     },
+     {
+      "for": "es",
+      "rel": "trap",
+      "text": "tomar una medicina is 吃药, not *拿药."
+     },
+     {
+      "for": "it",
+      "rel": "trap",
+      "text": "prendere una medicina is 吃药, not *拿药."
+     },
+     {
+      "for": "pt",
+      "rel": "trap",
+      "text": "tomar um medicamento is 吃药, not *拿药."
+     },
+     {
+      "for": "ru",
+      "rel": "trap",
+      "text": "принимать лекарство is 吃药, not *拿药."
+     },
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "παίρνω φάρμακο is 吃药, not *拿药."
+     }
     ]
    },
    "features": {
@@ -569,7 +611,7 @@
     ],
     "pitfalls": [
      "Mainland standard has a neutral second syllable: xǐhuan; Taiwan says xǐhuān.",
-     "A verb follows directly — no ‘to’: 我喜欢吃玉米."
+     "A verb follows directly, with nothing in between: 我喜欢吃玉米."
     ],
     "subtleties": [
      "我喜欢你 is a typical way to confess feelings; 我爱你 is much heavier.",
@@ -1057,7 +1099,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Like Turkish yemek yapmak and Greek φτιάχνω φαγητό, Chinese says ‘make the meal’ — 做饭.",
+     "Chinese says ‘make the meal’: 做饭 ‘to cook’.",
      "The proverb about the housewife without rice is how Chinese say ‘you can’t make bricks without straw’."
     ],
     "pitfalls": [
@@ -1066,6 +1108,13 @@
     ],
     "subtleties": [
      "做饭 is cooking a meal in general; the technique has its own verb: 炒 ‘stir-fry’, 煮 ‘boil’, 蒸 ‘steam’, 烤 ‘roast, bake’."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Greek φτιάχνω φαγητό is the same picture."
+     }
     ]
    },
    "features": {
@@ -1353,7 +1402,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "酪 may be related to Turkish ayran and Mongolian airag (Pulleyblank’s proposal) — a memory of the dairy cultures of the steppe.",
+     "酪 may be an old loan from the dairy cultures of the northern steppe (Pulleyblank’s proposal).",
      "Dairy is not traditional in Han Chinese cooking, but Yunnan has its own cheeses: 乳饼 and the Bai people’s 乳扇."
     ],
     "pitfalls": [
@@ -1911,7 +1960,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "鸡 jī may imitate the bird’s call (Schuessler); Wiktionary compares Vietnamese gà and Proto-Tai *kaj.",
+     "鸡 jī may imitate the bird’s call (Schuessler).",
      "吃鸡 ‘to eat chicken’ is also gamers’ slang for winning a battle-royale game (from ‘winner winner, chicken dinner’)."
     ],
     "pitfalls": [
@@ -2381,7 +2430,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "In Japanese the same character 湯 (yu) still means ‘hot water’ — the old Chinese meaning.",
+     "The old meaning ‘hot, boiling water’ survives in the idiom 赴汤蹈火 ‘go through boiling water and fire’.",
      "鸡汤 ‘chicken soup’ also means feel-good, inspirational talk (心灵鸡汤 ‘chicken soup for the soul’)."
     ],
     "pitfalls": [
@@ -2390,6 +2439,13 @@
     ],
     "subtleties": [
      "In many southern families soup comes at the start of the meal; in the north it often ends it."
+    ],
+    "notes": [
+     {
+      "for": "ja",
+      "rel": "similar",
+      "text": "Japanese 湯 yu still means ‘hot water’ — the old Chinese meaning; ‘soup’ is 汤 in Chinese."
+     }
     ]
    }
   },
@@ -2501,7 +2557,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English salad, German Salat, Greek σαλάτα, Russian салат and Turkish salata all go back to Latin sal ‘salt’ (salted greens); 沙拉 brings the same word in through English."
+     "German Salat and Chinese 沙拉 go back to Latin sal ‘salt’ (salted greens); 沙拉 brought the word in through English."
     ],
     "pitfalls": [
      "沙拉酱 is often a creamy, mayonnaise-like dressing — not oil and vinegar.",
@@ -2509,6 +2565,48 @@
     ],
     "subtleties": [
      "Raw salads are a Western import; the Chinese table has 凉菜 ‘cold dishes’ instead."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Greek σαλάτα is the same word."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Russian салат is the same word."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "French salade is the same word."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Italian insalata is the same word."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "Spanish ensalada is the same word."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Portuguese salada is the same word."
+     },
+     {
+      "for": "sq",
+      "rel": "same",
+      "text": "Albanian sallatë is the same word."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "English salad is the word 沙拉 imitates."
+     }
     ]
    }
   },
@@ -3330,11 +3428,73 @@
      "Most languages took their word for tea from Chinese: tea, Tee and Hebrew תֵּה from coastal Min tê; çay, чай, τσάι and Arabic شَاي from chá."
     ],
     "pitfalls": [
-     "红茶 ‘red tea’ is what English and German call black tea (Schwarztee); 黑茶 ‘black tea’ is a fermented tea like pu’er.",
+     "红茶 ‘red tea’ is the fully oxidised tea (German Schwarztee); 黑茶 ‘black tea’ is a post-fermented tea such as pu’er.",
      "Tea is counted by the cup or the pot: 一杯茶, 一壶茶."
     ],
     "subtleties": [
      "喝茶 can also mean a relaxed meeting: 有空来喝茶 ‘come over for tea some time’."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English black tea is 红茶; 黑茶 is a different, post-fermented tea such as pu’er."
+     },
+     {
+      "for": "de",
+      "rel": "trap",
+      "text": "Schwarztee is 红茶; 黑茶 is a different, post-fermented tea such as Pu-Erh."
+     },
+     {
+      "for": "fr",
+      "rel": "trap",
+      "text": "Le thé noir is 红茶; 黑茶 is a different, post-fermented tea such as le pu-erh."
+     },
+     {
+      "for": "es",
+      "rel": "trap",
+      "text": "El té negro is 红茶; 黑茶 is a different, post-fermented tea such as el pu-erh."
+     },
+     {
+      "for": "it",
+      "rel": "trap",
+      "text": "Il tè nero is 红茶; 黑茶 is a different, post-fermented tea such as il pu-erh."
+     },
+     {
+      "for": "pt",
+      "rel": "trap",
+      "text": "O chá preto is 红茶; 黑茶 is a different, post-fermented tea such as o pu-erh."
+     },
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "Το μαύρο τσάι is 红茶; 黑茶 is a different, post-fermented tea such as pu-erh."
+     },
+     {
+      "for": "ru",
+      "rel": "trap",
+      "text": "Чёрный чай is 红茶; 黑茶 is a different, post-fermented tea such as пуэр."
+     },
+     {
+      "for": "sq",
+      "rel": "trap",
+      "text": "Çaji i zi is 红茶; 黑茶 is a different, post-fermented tea such as pu-erh."
+     },
+     {
+      "for": "hi",
+      "rel": "trap",
+      "text": "काली चाय is 红茶; 黑茶 is a different, post-fermented tea such as pu-erh."
+     },
+     {
+      "for": "ja",
+      "rel": "same",
+      "text": "Japanese 紅茶 kōcha is the same word for the same tea; 黑茶 is the post-fermented kind (黒茶 kurocha)."
+     },
+     {
+      "for": "ar",
+      "rel": "same",
+      "text": "Many Arabic speakers call it شاي أحمر ‘red tea’ too — that is 红茶; 黑茶 is a post-fermented tea such as pu-erh."
+     }
     ]
    }
   },
@@ -3435,7 +3595,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "One word through the learner’s languages: Arabic قَهْوَة → Turkish kahve → Italian caffè → German Kaffee, Greek καφές, Russian кофе — and Chinese 咖啡."
+     "One word across the course: Arabic قَهْوَة → (Turkish, Italian) → German Kaffee — and Chinese 咖啡."
     ],
     "pitfalls": [
      "Both characters were made for the sound (口 + a phonetic); 咖 is also read gā in 咖喱 ‘curry’.",
@@ -3443,6 +3603,23 @@
     ],
     "subtleties": [
      "咖啡色 ‘coffee colour’ is a common word for brown."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Greek καφές is the same word."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Russian кофе is the same word."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Italian caffè is the link through which it reached most of Europe."
+     }
     ]
    }
   },

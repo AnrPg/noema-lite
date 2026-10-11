@@ -432,7 +432,7 @@
     },
     "funFacts": [
      "To ask a stranger who they are, 您是哪位？ is polite; 你是谁？ can sound blunt.",
-     "Like Russian кто-то / никто, Chinese makes ‘everybody / nobody’ from ‘who’: 谁都 ‘everybody’, 谁都不 ‘nobody’."
+     "Chinese makes ‘everybody / nobody’ from ‘who’: 谁都 ‘everybody’, 谁都不 ‘nobody’."
     ],
     "pitfalls": [
      "No 吗 with 谁: 他是谁？ — 他是谁吗？ is wrong.",
@@ -441,6 +441,13 @@
     "subtleties": [
      "Two readings: shéi (everyday) and shuí (careful or formal speech); both are correct.",
      "With 都 it means ‘everyone’: 谁都喜欢他 ‘everyone likes him’."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "Like Russian кто-то / никто, built from кто."
+     }
     ]
    },
    "features": {
@@ -646,7 +653,7 @@
      "src": "morphemes: 什么 + 时候"
     },
     "funFacts": [
-     "Chinese ‘when?’ is literally ‘what time?’ — English keeps ‘what time?’ for the clock, Chinese uses it for every ‘when’."
+     "Chinese ‘when?’ is literally ‘what time?’ — 什么时候 asks for any time, not only the clock (that is 几点)."
     ],
     "pitfalls": [
      "什么时候 stands before the verb, not at the end: 你什么时候来？ — not *你来什么时候？",
@@ -654,6 +661,13 @@
     ],
     "subtleties": [
      "For the clock time Chinese asks 几点: 你几点吃早饭？; 什么时候 can be a day, a year or a time."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English keeps ‘what time?’ for the clock (几点); 什么时候 is every ‘when?’."
+     }
     ]
    },
    "features": {
@@ -1089,7 +1103,7 @@
      "src": "morphemes: 为 + 什么"
     },
     "funFacts": [
-     "为什么 is ‘for what’ — built like Greek γιατί (για + τι ‘for what’) and English ‘what for’; Turkish neden is ‘from what’ (ne + -den)."
+     "为什么 is ‘for what’: 为 ‘for’ + 什么 ‘what’."
     ],
     "pitfalls": [
      "为什么 stands before the verb or opens the sentence: 你为什么不吃？ / 为什么你不吃？ — not at the end.",
@@ -1097,6 +1111,38 @@
     ],
     "subtleties": [
      "为 is read wèi (4th tone) here, not wéi."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Built like Greek γιατί (για + τι ‘for what’)."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Built like French pourquoi (pour + quoi)."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Built like Italian perché (per + che)."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "Built like Spanish por qué."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Built like Portuguese porquê (por + quê)."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Built like English ‘what for’."
+     }
     ]
    },
    "features": {

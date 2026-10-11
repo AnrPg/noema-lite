@@ -351,6 +351,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut has imperative endings for one, two and several people; Chinese keeps the verb unchanged and adds 你 or 你们 if needed."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian vieni / venite / venga change for number and politeness, and ‘don’t’ uses the infinitive for tu (non venire); Chinese keeps 来 and adds words: 来！ 你们来！ 别来！ Per favore may come last; 请 must come first."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian eja / ejani ‘come’ change for number, and ‘don’t’ is mos before the verb (mos shko ‘don’t go’) — a separate word like 别 (别走！). But the Albanian verb still changes; Chinese 走 never does. Ju lutem may follow the request; 请 must precede it."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese vem / venham / venha change for person and politeness, and ‘don’t’ uses the subjunctive (não venhas); Chinese keeps 来 and adds 请, 别, 吧. Por favor may come last; 请 must come first."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your imperative changes for number, gender or politeness and the negative uses another verb form, Chinese keeps the bare verb for every case: 来！ 你们来！ 请来！ 别来！"
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If your imperative, its polite form and its negative are suffixes, Chinese uses separate words: 请 before the verb for politeness, 别 / 不要 for ‘don’t’, 吧 at the end to soften."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "same",
+   "text": "If your commands use the bare verb with polite or softening particles, Chinese is the same: 请坐, 别走, 我们走吧."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If you have imperative endings for one, two and several people, Chinese keeps the verb unchanged and adds 你 or 你们 if needed: 你们来！"
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If your imperative changes for gender and number and ‘don’t’ uses a different verb form, Chinese keeps one bare verb and puts 别 or 不要 before it: 别来！ 不要走！"
   }
  ],
  "seeAlso": [

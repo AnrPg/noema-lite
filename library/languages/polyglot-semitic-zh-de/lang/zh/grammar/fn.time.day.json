@@ -51,7 +51,7 @@
     [
      "On Monday I work.",
      "星期一我工作。",
-     "no word for ‘on’"
+     "no preposition"
     ],
     [
      "In the evening we eat at home.",
@@ -487,6 +487,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut marks time with suffixes inside the verb word; Chinese marks it only with separate time words before the verb (明天, 星期一), and the verb never changes."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian days are named after planets and gods (lunedì, martedì); Chinese ones are numbered from Monday (星期一, 星期二). Like Chinese, Italian needs no preposition with a day (lunedì lavoro ~ 星期一我工作), but its time words may also go at the end; Chinese ones go before the verb."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian days have names (e hënë ‘Monday’, e martë ‘Tuesday’); Chinese numbers them from Monday: 星期一, 星期二. të hënën ‘on Monday’ needs no preposition, like 星期一 — but Chinese puts it before the verb: 星期一我工作."
+  },
+  {
+   "for": "pt",
+   "rel": "trap",
+   "text": "Portuguese segunda-feira ‘second’ is Monday and terça-feira ‘third’ Tuesday, counted from Sunday; Chinese 星期一 is Monday and 星期二 Tuesday — never translate segunda as *星期二. na segunda needs em; 星期一 needs nothing and stands before the verb."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your days need a preposition or a case (‘on Monday’) and time words can go anywhere, Chinese uses the bare time word before the verb: 星期一我工作, 我明天去."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If your time words come before the verb with no preposition, Chinese is the same (我明天去, 星期一我工作) — but its days are numbered from Monday: 星期一 = 1."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "similar",
+   "text": "If your days are numbered too, check where the count starts: Chinese 星期一 ‘week-one’ is Monday. Time words go before the verb, never at the end."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If time is marked inside your verb word, Chinese marks it only with separate time words before the verb (明天, 星期一); the verb never changes."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "trap",
+   "text": "If your weekdays are counted from Sunday (‘the second’ = Monday), shift by one: Chinese counts from Monday — 星期一 Monday, 星期二 Tuesday."
   }
  ],
  "seeAlso": [

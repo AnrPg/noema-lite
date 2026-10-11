@@ -465,6 +465,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut marks place, goal and source with case endings on the noun (-mi ‘at’, -mut ‘to’, -mit ‘from’); Chinese has no endings and uses separate coverbs before the verb: 在家, 从家."
+  },
+  {
+   "for": "it",
+   "rel": "trap",
+   "text": "Italian puts the phrase after the verb (mangio a casa, lavoro in banca); Chinese before it: 我在家吃饭, 我在银行工作. senza ‘without’ has no Chinese word: 没有 + noun or 不 + verb."
+  },
+  {
+   "for": "sq",
+   "rel": "trap",
+   "text": "Albanian prepositions govern cases and follow the verb (ha në shtëpi ‘he eats at home’, punoj në bankë); Chinese coverb phrases stand before the verb with an unchanged noun: 我在家吃饭, 我在银行工作. pa ‘without’ has no Chinese word: 没有 + noun."
+  },
+  {
+   "for": "pt",
+   "rel": "trap",
+   "text": "Portuguese puts the phrase after the verb (como em casa, trabalho num banco); Chinese puts it before: 我在家吃饭, 我在银行工作. sem ‘without’ has no Chinese word: 没有 + noun or 不 + verb."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your prepositions govern cases and follow the verb, Chinese coverbs take an unchanged noun and stand before the verb: subject – coverb + noun – verb – object (我在家吃饭)."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If place, source and companion are case endings or postpositions before your verb, Chinese also puts them before the verb — but as words in front of the noun: 在家, 从家, 跟朋友 + verb."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "trap",
+   "text": "If your language has verb-like prepositions after the main verb (‘work at bank’), Chinese moves them in front of it: 我在银行工作."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If you mark place and direction with case endings, Chinese uses separate coverbs before the verb — 在家, 从家, 跟朋友 — and the noun never changes."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If your prepositions follow the verb and fuse with the article or take pronoun suffixes, Chinese coverbs stand before the verb with an unchanged noun or pronoun: 我在家吃饭, 我跟他一起去."
   }
  ],
  "seeAlso": [
