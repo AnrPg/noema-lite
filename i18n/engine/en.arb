@@ -491,5 +491,693 @@
   "engine.log.checklistMd": "**Canonical checklist:**",
   "@engine.log.checklistMd": {
     "description": "Saved conversation (Markdown, keep **): heading before the reference list of questions to ask oneself."
+  },
+  "engine.exType.mcq": "Choose",
+  "@engine.exType.mcq": {
+    "description": "Exercise type label on an exercise card (after an emoji). Short. Multiple choice."
+  },
+  "engine.exType.tf": "True / False",
+  "@engine.exType.tf": {
+    "description": "Exercise type label on an exercise card (after an emoji). Short."
+  },
+  "engine.exType.odd": "Odd one out",
+  "@engine.exType.odd": {
+    "description": "Exercise type label on an exercise card (after an emoji). Short. Find the item that does not belong."
+  },
+  "engine.exType.order": "Put in order",
+  "@engine.exType.order": {
+    "description": "Exercise type label on an exercise card (after an emoji). Short."
+  },
+  "engine.exType.match": "Match",
+  "@engine.exType.match": {
+    "description": "Exercise type label on an exercise card (after an emoji). Short. Match pairs."
+  },
+  "engine.exType.bucket": "Sort",
+  "@engine.exType.bucket": {
+    "description": "Exercise type label on an exercise card (after an emoji). Short. Sort items into groups."
+  },
+  "engine.exType.cloze": "Fill the gaps",
+  "@engine.exType.cloze": {
+    "description": "Exercise type label on an exercise card (after an emoji). Short."
+  },
+  "engine.exType.spotbug": "Spot the bug",
+  "@engine.exType.spotbug": {
+    "description": "Exercise type label on an exercise card (after an emoji). Short. Find the wrong line of code."
+  },
+  "engine.exType.calc": "Calculate",
+  "@engine.exType.calc": {
+    "description": "Exercise type label on an exercise card (after an emoji). Short."
+  },
+  "engine.exType.scenario": "Debug simulation",
+  "@engine.exType.scenario": {
+    "description": "Exercise type label on an exercise card (after an emoji). Short. A step-by-step case to diagnose."
+  },
+  "engine.exType.free": "Explain it",
+  "@engine.exType.free": {
+    "description": "Exercise type label on an exercise card (after an emoji). Short. Free written explanation."
+  },
+  "engine.exType.write": "Write the code",
+  "@engine.exType.write": {
+    "description": "Exercise type label on an exercise card (after an emoji). Short."
+  },
+  "engine.exTag.concept": "concept",
+  "@engine.exTag.concept": {
+    "description": "Tag on an exercise card (lowercase in English, a few words)."
+  },
+  "engine.exTag.syntax": "syntax",
+  "@engine.exTag.syntax": {
+    "description": "Tag on an exercise card (lowercase in English, a few words)."
+  },
+  "engine.exTag.pitfall": "pitfall",
+  "@engine.exTag.pitfall": {
+    "description": "Tag on an exercise card (lowercase in English, a few words). After ⚠️: a common mistake."
+  },
+  "engine.exTag.debug": "debug",
+  "@engine.exTag.debug": {
+    "description": "Tag on an exercise card (lowercase in English, a few words). After 🔧."
+  },
+  "engine.exTag.exam": "exam trap",
+  "@engine.exTag.exam": {
+    "description": "Tag on an exercise card (lowercase in English, a few words). After 🎓: a typical exam trick."
+  },
+  "engine.exTag.interview": "interview",
+  "@engine.exTag.interview": {
+    "description": "Tag on an exercise card (lowercase in English, a few words). After 🎤: a typical interview question."
+  },
+  "engine.exTag.calc": "calc",
+  "@engine.exTag.calc": {
+    "description": "Tag on an exercise card (lowercase in English, a few words). After 🧮: a calculation (abbreviated)."
+  },
+  "engine.exTag.compare": "compare",
+  "@engine.exTag.compare": {
+    "description": "Tag on an exercise card (lowercase in English, a few words). After ⚖️: compares two concepts."
+  },
+  "engine.ex.selectAll": "Select ALL that apply ({n, number}).",
+  "@engine.ex.selectAll": {
+    "description": "Hint above a multiple-choice question with several right answers. n = how many are right. “ALL” is stressed.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.ex.true": "True",
+  "@engine.ex.true": {
+    "description": "Answer button of a true/false exercise (after 👍)."
+  },
+  "engine.ex.false": "False",
+  "@engine.ex.false": {
+    "description": "Answer button of a true/false exercise (after 👎)."
+  },
+  "engine.ex.orderHint": "Tap the items below in the right order ↓",
+  "@engine.ex.orderHint": {
+    "description": "Placeholder in an empty “put in order” answer row."
+  },
+  "engine.ex.correctOrder": "Correct order:",
+  "@engine.ex.correctOrder": {
+    "description": "Bold label before the correct order of a “put in order” exercise (shown after a wrong answer)."
+  },
+  "engine.ex.matchHint": "Tap a left item, then its partner on the right.",
+  "@engine.ex.matchHint": {
+    "description": "Instruction of a matching exercise."
+  },
+  "engine.ex.correctPairs": "Correct pairs:",
+  "@engine.ex.correctPairs": {
+    "description": "Bold label before the correct pairs of a matching exercise (after a wrong answer)."
+  },
+  "engine.ex.allSorted": "All sorted — check it!",
+  "@engine.ex.allSorted": {
+    "description": "Shown in the empty pool of a sorting exercise when every item is in a group."
+  },
+  "engine.ex.bucketHint": "Tap an item, then tap its bucket (or drag).",
+  "@engine.ex.bucketHint": {
+    "description": "Instruction of a sorting exercise (items into groups)."
+  },
+  "engine.ex.spotbugHint": "{n, plural, one {Click the buggy line.} other {Click the buggy lines (#).}}",
+  "@engine.ex.spotbugHint": {
+    "description": "Instruction of a “spot the bug” exercise. n = how many lines are wrong.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.ex.fix": "Fix",
+  "@engine.ex.fix": {
+    "description": "Bold heading (after 🔧) above the corrected code of a “spot the bug” exercise."
+  },
+  "engine.ex.step": "Step {n, number}/{of, number}",
+  "@engine.ex.step": {
+    "description": "Pill of a step-by-step simulation exercise: step n of of.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      },
+      "of": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.ex.nextStep": "Next step →",
+  "@engine.ex.nextStep": {
+    "description": "Button to go on to the next step of a simulation exercise."
+  },
+  "engine.ex.freePlaceholder": "Explain in your own words… (aim for 2–5 sentences)",
+  "@engine.ex.freePlaceholder": {
+    "description": "Placeholder of the text box of an “explain it” exercise."
+  },
+  "engine.ex.grading": "Grading…",
+  "@engine.ex.grading": {
+    "description": "Button text (after ✨) while the AI grades the answer."
+  },
+  "engine.ex.missing": "Missing:",
+  "@engine.ex.missing": {
+    "description": "Label (after ➕) before the points the answer missed, in the AI’s grading."
+  },
+  "engine.ex.aiFailedSelf": "{error} — use Self-check instead.",
+  "@engine.ex.aiFailedSelf": {
+    "description": "Shown (after ⚠️) when AI grading failed. error = the error’s text. “Self-check” is the name of the button engine.ex.selfCheck.",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "No Gemini API key. Open ⚙️ Settings."
+      }
+    }
+  },
+  "engine.ex.gradeAI": "Grade with AI",
+  "@engine.ex.gradeAI": {
+    "description": "Button (after ✨) of an “explain it” exercise: the AI grades the answer."
+  },
+  "engine.ex.modelAnswer": "Model answer",
+  "@engine.ex.modelAnswer": {
+    "description": "Heading (after 📘) of the model answer of an “explain it” exercise."
+  },
+  "engine.ex.tickCovered": "Tick what your answer covered",
+  "@engine.ex.tickCovered": {
+    "description": "Heading (after ☑️) of the self-check list of key points."
+  },
+  "engine.ex.done": "Done",
+  "@engine.ex.done": {
+    "description": "Button that finishes the self-check."
+  },
+  "engine.ex.selfCheck": "Self-check",
+  "@engine.ex.selfCheck": {
+    "description": "Button (after 🙋): the learner checks their own answer against the model answer."
+  },
+  "engine.ex.writeLang": "-- write your {lang} here",
+  "@engine.ex.writeLang": {
+    "description": "Placeholder of the code box of a “write the code” exercise, written like a code comment (keep “-- ”). lang = the programming language (e.g. sql).",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "sql"
+      }
+    }
+  },
+  "engine.ex.writeCode": "-- write your code here",
+  "@engine.ex.writeCode": {
+    "description": "Placeholder of the code box of a “write the code” exercise (no language known), written like a code comment."
+  },
+  "engine.ex.writeNote": "Checked locally for the essential keywords; use ✨ AI review for a real code review.",
+  "@engine.ex.writeNote": {
+    "description": "Note under the code box of a “write the code” exercise."
+  },
+  "engine.ex.missingEssentials": "Missing essentials:",
+  "@engine.ex.missingEssentials": {
+    "description": "Label before the keywords missing from the learner’s code."
+  },
+  "engine.ex.refSolution": "Reference solution",
+  "@engine.ex.refSolution": {
+    "description": "Heading (after ✅) of the reference code of a “write the code” exercise."
+  },
+  "engine.ex.reviewing": "Reviewing…",
+  "@engine.ex.reviewing": {
+    "description": "Button text (after ✨) while the AI reviews the code."
+  },
+  "engine.ex.aiReview": "AI review: {score, number}/100 —",
+  "@engine.ex.aiReview": {
+    "description": "Bold start of the AI’s code review (its verdict follows). score = 0–100.",
+    "placeholders": {
+      "score": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.ex.aiReviewBtn": "AI review of my code",
+  "@engine.ex.aiReviewBtn": {
+    "description": "Button (after ✨): the AI reviews the learner’s code."
+  },
+  "engine.ex.difficulty": "difficulty {n, number}",
+  "@engine.ex.difficulty": {
+    "description": "Tooltip of the difficulty dots of an exercise (1–3). Lowercase in English.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.ex.aiMade": "AI-made",
+  "@engine.ex.aiMade": {
+    "description": "Pill (after ✨) on an exercise generated by the AI."
+  },
+  "engine.ex.check": "Check ✓",
+  "@engine.ex.check": {
+    "description": "Button that checks the learner’s answer."
+  },
+  "engine.ex.askTutor": "Ask {tutor}",
+  "@engine.ex.askTutor": {
+    "description": "Button on an exercise (after the tutor’s emoji): ask the AI tutor for a hint. tutor = the tutor’s name.",
+    "placeholders": {
+      "tutor": {
+        "type": "String",
+        "example": "Brick"
+      }
+    }
+  },
+  "engine.ex.finishFirst": "Finish your answer first 🙂",
+  "@engine.ex.finishFirst": {
+    "description": "Nudge when the learner presses Check before answering everything."
+  },
+  "engine.ex.ok.nailed": "Nailed it!",
+  "@engine.ex.ok.nailed": {
+    "description": "Heading of the explanation after a right answer (after ✅). One of several random cheers."
+  },
+  "engine.ex.ok.correct": "Correct!",
+  "@engine.ex.ok.correct": {
+    "description": "Heading after a right answer (after ✅). Random cheer."
+  },
+  "engine.ex.ok.yes": "Yes!",
+  "@engine.ex.ok.yes": {
+    "description": "Heading after a right answer (after 🎉). Random cheer."
+  },
+  "engine.ex.ok.spotOn": "Spot on!",
+  "@engine.ex.ok.spotOn": {
+    "description": "Heading after a right answer (after ✅). Random cheer."
+  },
+  "engine.ex.ok.exactly": "Exactly!",
+  "@engine.ex.ok.exactly": {
+    "description": "Heading after a right answer (after 🔥). Random cheer."
+  },
+  "engine.ex.bad.notQuite": "Not quite — here’s the key",
+  "@engine.ex.bad.notQuite": {
+    "description": "Heading of the explanation after a wrong answer (after 💡). Encouraging."
+  },
+  "engine.ex.bad.learning": "Learning moment",
+  "@engine.ex.bad.learning": {
+    "description": "Heading after a wrong answer (after 🧠). Encouraging."
+  },
+  "engine.ex.bad.close": "Close — look at this",
+  "@engine.ex.bad.close": {
+    "description": "Heading after a wrong answer (after 💡). Encouraging."
+  },
+  "engine.ex.helpSocratic": "Help me get it (Socratic)",
+  "@engine.ex.helpSocratic": {
+    "description": "Button after a wrong answer (after the tutor’s emoji): the AI tutor guides the learner with questions."
+  },
+  "engine.ex.explainDiff": "Explain differently",
+  "@engine.ex.explainDiff": {
+    "description": "Button after a wrong answer (after 💡): the AI explains it another way."
+  },
+  "engine.exType.img_hotspot": "Find it on the image",
+  "@engine.exType.img_hotspot": {
+    "description": "Exercise type label on a picture exercise card (after an emoji). Short."
+  },
+  "engine.exType.img_sequence": "Trace the path",
+  "@engine.exType.img_sequence": {
+    "description": "Exercise type label on a picture exercise card (after an emoji). Short. Tap the parts in order."
+  },
+  "engine.exType.img_reveal": "Reveal & answer",
+  "@engine.exType.img_reveal": {
+    "description": "Exercise type label on a picture exercise card (after an emoji). Short. Uncover tiles, then answer."
+  },
+  "engine.exType.img_drag": "Drag the labels",
+  "@engine.exType.img_drag": {
+    "description": "Exercise type label on a picture exercise card (after an emoji). Short."
+  },
+  "engine.exType.img_label": "Label the image",
+  "@engine.exType.img_label": {
+    "description": "Exercise type label on a picture exercise card (after an emoji). Short. Type the names of parts."
+  },
+  "engine.exType.img_select": "Pick the labels",
+  "@engine.exType.img_select": {
+    "description": "Exercise type label on a picture exercise card (after an emoji). Short. Choose names from drop-down lists."
+  },
+  "engine.exType.img_occlusion": "Cover & recall",
+  "@engine.exType.img_occlusion": {
+    "description": "Exercise type label on a picture exercise card (after an emoji). Short. Parts are covered; recall them one by one."
+  },
+  "engine.vx.creditTip": "Where this picture comes from",
+  "@engine.vx.creditTip": {
+    "description": "Tooltip of the picture’s credit link (author · licence ↗)."
+  },
+  "engine.vx.missing": "Picture “{media}” is missing from this subject pack.",
+  "@engine.vx.missing": {
+    "description": "Error (after 🖼️) when a picture of an exercise is not in the pack. media = the picture’s id.",
+    "placeholders": {
+      "media": {
+        "type": "String",
+        "example": "heart-diagram"
+      }
+    }
+  },
+  "engine.vx.zoomTip": "Bigger picture (Esc to close)",
+  "@engine.vx.zoomTip": {
+    "description": "Tooltip of the ⤢ button that shows a picture full screen."
+  },
+  "engine.vx.zoomAria": "Toggle full screen picture",
+  "@engine.vx.zoomAria": {
+    "description": "Screen-reader label of the ⤢ button."
+  },
+  "engine.vx.stageAria": "Picture. Arrow keys move the crosshair (Shift for small steps), Enter or Space taps, Backspace removes the last tap.",
+  "@engine.vx.stageAria": {
+    "description": "Screen-reader label of an interactive picture (keyboard use)."
+  },
+  "engine.vx.resYou": "you: “{given}”",
+  "@engine.vx.resYou": {
+    "description": "Result row of a picture exercise, after “ — ”: what the learner answered (wrong). given = the answer.",
+    "placeholders": {
+      "given": {
+        "type": "String",
+        "example": "aorta"
+      }
+    }
+  },
+  "engine.vx.resEmpty": "left empty",
+  "@engine.vx.resEmpty": {
+    "description": "Result row of a picture exercise, after “ — ”: the learner gave no answer."
+  },
+  "engine.vx.resTypo": "accepted “{given}” (spelling: {label})",
+  "@engine.vx.resTypo": {
+    "description": "Result row, after “ — ”: an answer with a small typo was accepted. given = the learner’s answer, label = the right spelling.",
+    "placeholders": {
+      "given": {
+        "type": "String",
+        "example": "aortta"
+      },
+      "label": {
+        "type": "String",
+        "example": "aorta"
+      }
+    }
+  },
+  "engine.vx.pinRemoved": "Pin removed.",
+  "@engine.vx.pinRemoved": {
+    "description": "Spoken by screen readers when a pin is removed from the picture."
+  },
+  "engine.vx.pinNofM": "Pin {n, number} of {of, number} placed.",
+  "@engine.vx.pinNofM": {
+    "description": "Spoken by screen readers when a pin is placed (several are needed).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      },
+      "of": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.vx.pinPlaced": "Pin placed. Press Tab to reach the Check button.",
+  "@engine.vx.pinPlaced": {
+    "description": "Spoken by screen readers when the one pin is placed."
+  },
+  "engine.vx.where": "{h, select, left {left} centre {centre} other {right}} {v, select, top {top} middle {middle} other {bottom}} ({x, number}%, {y, number}%)",
+  "@engine.vx.where": {
+    "description": "Spoken by screen readers: where the crosshair is on the picture (horizontal third, vertical third, then x and y in percent).",
+    "placeholders": {
+      "h": {
+        "type": "String",
+        "example": "h"
+      },
+      "v": {
+        "type": "String",
+        "example": "v"
+      },
+      "x": {
+        "type": "int",
+        "example": "3"
+      },
+      "y": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.vx.lastPinRemoved": "Last pin removed.",
+  "@engine.vx.lastPinRemoved": {
+    "description": "Spoken by screen readers when Backspace removes the last pin."
+  },
+  "engine.vx.hotspotMulti": "Tap {n, number} places on the picture (tap a pin again to remove it). Small picture? ⤢ makes it bigger. ⌨️ Tab to the picture, arrows + Enter.",
+  "@engine.vx.hotspotMulti": {
+    "description": "Instruction of a “find it on the image” exercise with n places to find.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.vx.hotspotAny": "Tap one right place on the picture (several are right) — then Check. ⌨️ arrows + Enter.",
+  "@engine.vx.hotspotAny": {
+    "description": "Instruction of a “find it on the image” exercise where any of several places is right."
+  },
+  "engine.vx.hotspotOne": "Tap the right place on the picture — then Check. ⌨️ Tab to the picture, arrows move, Enter taps.",
+  "@engine.vx.hotspotOne": {
+    "description": "Instruction of a “find it on the image” exercise with one place."
+  },
+  "engine.vx.seqCounter": "{n, number} / {of, number} steps",
+  "@engine.vx.seqCounter": {
+    "description": "Counter of a “trace the path” exercise: how many steps tapped of how many.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      },
+      "of": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.vx.noPart": "No part here.",
+  "@engine.vx.noPart": {
+    "description": "Spoken by screen readers: there is no part of the picture under the crosshair."
+  },
+  "engine.vx.seqRemoved": "Removed from step {n, number} on.",
+  "@engine.vx.seqRemoved": {
+    "description": "Spoken by screen readers: the steps from step n on were undone.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.vx.seqStep": "Step {n, number}: {label}.",
+  "@engine.vx.seqStep": {
+    "description": "Spoken by screen readers: a part was added as step n. label = the part’s name.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      },
+      "label": {
+        "type": "String",
+        "example": "left ventricle"
+      }
+    }
+  },
+  "engine.vx.lastStepRemoved": "Last step removed.",
+  "@engine.vx.lastStepRemoved": {
+    "description": "Spoken by screen readers when Backspace removes the last step."
+  },
+  "engine.vx.partStep": "{label} (step {n, number})",
+  "@engine.vx.partStep": {
+    "description": "Spoken by screen readers: the part under the crosshair and the step it already has. label = the part’s name.",
+    "placeholders": {
+      "label": {
+        "type": "String",
+        "example": "left ventricle"
+      },
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.vx.seqHint": "Tap the parts in the right order. Tap a numbered part again to undo from there. ⌨️ arrows + Enter, Backspace undoes.",
+  "@engine.vx.seqHint": {
+    "description": "Instruction of a “trace the path” exercise."
+  },
+  "engine.vx.correctPath": "Correct path:",
+  "@engine.vx.correctPath": {
+    "description": "Bold label (after 🧭) before the correct order of parts, after a wrong answer."
+  },
+  "engine.vx.tilesOpened": "{n, number} / {of, number} tiles opened",
+  "@engine.vx.tilesOpened": {
+    "description": "Counter (after 🔍) of a “reveal & answer” picture exercise.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      },
+      "of": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.vx.revealHint": "tap tiles to uncover the picture — answer as early as you dare: fewer tiles = more XP",
+  "@engine.vx.revealHint": {
+    "description": "Instruction (lowercase start, after the tile counter and “ · ”) of a “reveal & answer” picture exercise."
+  },
+  "engine.vx.dropZone": "Drop zone {n, number}",
+  "@engine.vx.dropZone": {
+    "description": "Screen-reader label of the place where label n is dropped on the picture.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.vx.allPlaced": "All placed — check it! (tap a placed label to move it)",
+  "@engine.vx.allPlaced": {
+    "description": "Shown in the empty label bank of a drag exercise when all labels are placed."
+  },
+  "engine.vx.dragHint": "Drag each label onto its place — or tap a label, then tap the place.",
+  "@engine.vx.dragHint": {
+    "description": "Instruction of a “drag the labels” picture exercise."
+  },
+  "engine.vx.partName": "Name of part {n, number}",
+  "@engine.vx.partName": {
+    "description": "Screen-reader label of the text box for the name of numbered part n.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.vx.labelHint": "Type the name of each numbered part. Enter → next.",
+  "@engine.vx.labelHint": {
+    "description": "Instruction of a “label the image” exercise."
+  },
+  "engine.vx.part": "Part {n, number}",
+  "@engine.vx.part": {
+    "description": "Screen-reader label of the drop-down list for numbered part n.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.vx.choose": "{n, number} · choose…",
+  "@engine.vx.choose": {
+    "description": "Empty first option of the drop-down list of numbered part n.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.vx.selectHint": "Choose the right name at every numbered part.",
+  "@engine.vx.selectHint": {
+    "description": "Instruction of a “pick the labels” picture exercise."
+  },
+  "engine.vx.reveal": "Reveal",
+  "@engine.vx.reveal": {
+    "description": "Button (after 👁) that uncovers the hidden part in a “cover & recall” exercise."
+  },
+  "engine.vx.occQ": "What is hidden here? Say it (or think it) first.",
+  "@engine.vx.occQ": {
+    "description": "Default question of a “cover & recall” exercise."
+  },
+  "engine.vx.nOfM": "{n, number} / {of, number}",
+  "@engine.vx.nOfM": {
+    "description": "Progress of a “cover & recall” exercise: part n of of.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      },
+      "of": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.vx.knew": "I knew it",
+  "@engine.vx.knew": {
+    "description": "Self-rating button (after ✓) in “cover & recall”."
+  },
+  "engine.vx.didnt": "I didn’t",
+  "@engine.vx.didnt": {
+    "description": "Self-rating button (after ✗) in “cover & recall”: I did not know it."
+  },
+  "engine.vx.recalled": "You recalled {n, number} / {of, number}.",
+  "@engine.vx.recalled": {
+    "description": "Bold result of a “cover & recall” exercise.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      },
+      "of": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.vx.strong": "Strong!",
+  "@engine.vx.strong": {
+    "description": "Praise after a good “cover & recall” result."
+  },
+  "engine.vx.comeBack": "These come back soon in your review.",
+  "@engine.vx.comeBack": {
+    "description": "Shown after a weak “cover & recall” result."
+  },
+  "engine.vx.uncovered": "Uncovered: {label}",
+  "@engine.vx.uncovered": {
+    "description": "Spoken by screen readers when a covered label is uncovered. label = the part’s name.",
+    "placeholders": {
+      "label": {
+        "type": "String",
+        "example": "aorta"
+      }
+    }
+  },
+  "engine.vx.nothing": "Nothing here.",
+  "@engine.vx.nothing": {
+    "description": "Spoken by screen readers: nothing under the crosshair on a theory picture."
+  },
+  "engine.vx.hiddenLabel": "A hidden label. Enter peeks.",
+  "@engine.vx.hiddenLabel": {
+    "description": "Spoken by screen readers: the part under the crosshair is covered; Enter uncovers it."
+  },
+  "engine.vx.showLabels": "Show labels",
+  "@engine.vx.showLabels": {
+    "description": "Button (after 👀) on a theory picture: show the names of its parts."
+  },
+  "engine.vx.hideLabels": "Hide labels",
+  "@engine.vx.hideLabels": {
+    "description": "Button (after 🙈) on a theory picture: hide the names (to test yourself)."
+  },
+  "engine.vx.labelsHidden": "Labels hidden: tap a cover to peek.",
+  "@engine.vx.labelsHidden": {
+    "description": "Line next to the labels button when the names on a picture are hidden."
+  },
+  "engine.vx.hoverPart": "Hover or tap a part to see what it is.",
+  "@engine.vx.hoverPart": {
+    "description": "Line on a theory picture (sometimes after 👆): how to explore its parts."
   }
 }

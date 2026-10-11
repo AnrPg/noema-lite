@@ -1,6 +1,6 @@
 /* ===================== Visual exercises & figures — canonical schema: docs/VISUAL.md (noema.visual/v1) ===================== */
 const MEDIA = (Noema.pack && Noema.pack.media) || {};
-Object.assign(TYPE_LABEL, { img_hotspot: '📍 Find it on the image', img_sequence: '🧭 Trace the path', img_reveal: '🧩 Reveal & answer', img_drag: '🏷️ Drag the labels', img_label: '✏️ Label the image', img_select: '🔽 Pick the labels', img_occlusion: '🙈 Cover & recall' });
+Object.assign(TYPE_ICON, { img_hotspot: '📍', img_sequence: '🧭', img_reveal: '🧩', img_drag: '🏷️', img_label: '✏️', img_select: '🔽', img_occlusion: '🙈' });   // labels: engine.exType.img_*
 const isVisual = ex => /^img_/.test(ex.type || '');
 const SVGNS = 'http://www.w3.org/2000/svg';
 function sv(tag, attrs = {}) { const e = document.createElementNS(SVGNS, tag); for (const [k, v] of Object.entries(attrs)) if (v != null) e.setAttribute(k, v); return e; }
@@ -46,12 +46,12 @@ function labelMatch(r, val, fuzzy = true) {
 function vCredit(m) {
   if (!m.credit) return null;
   const txt = m.credit + (m.license && m.license !== 'own' ? ' · ' + m.license : '');
-  return /^https?:\/\//.test(m.url || '') ? h('a', { class: 'tiny vx-credit', href: m.url, target: '_blank', rel: 'noopener', title: 'Where this picture comes from' }, txt + ' ↗') : h('span', { class: 'tiny vx-credit' }, txt);
+  return /^https?:\/\//.test(m.url || '') ? h('a', { class: 'tiny vx-credit', href: m.url, target: '_blank', rel: 'noopener', title: tE('engine.vx.creditTip') }, txt + ' ↗') : h('span', { class: 'tiny vx-credit' }, txt);
 }
 /* ---------- the stage: picture + SVG overlay + positioned controls ---------- */
 function vStage(ex, { regions } = {}) {
   const m = MEDIA[ex.media];
-  if (!m) return { missing: true, el: h('div', { class: 'fb bad' }, `🖼️ Picture “${ex.media}” is missing from this subject pack.`) };
+  if (!m) return { missing: true, el: h('div', { class: 'fb bad' }, '🖼️ ' + tE('engine.vx.missing', { media: ex.media })) };
   const W = m.w, H = m.h;
   const regs = regions || vRegions(ex, m);
   const RG = Object.fromEntries(regs.map(r => [r.id, r]));
@@ -59,10 +59,10 @@ function vStage(ex, { regions } = {}) {
   const svg = sv('svg', { viewBox: `0 0 ${W} ${H}`, class: 'vx-svg', preserveAspectRatio: 'none', 'aria-hidden': 'true' });
   const gOut = sv('g'), gMask = sv('g'), gTop = sv('g'); svg.append(gOut, gMask, gTop);
   const layer = h('div', { class: 'vx-layer' });
-  const stage = h('div', { class: 'vx-stage', style: { aspectRatio: `${W} / ${H}`, maxWidth: `min(${m.mime === 'image/svg+xml' ? '100%' : W + 'px'}, calc(76vh * ${(W / H).toFixed(4)}))` }   /* tall pictures fit on screen; ⤢ for more */ }, img, svg, layer);
+  const stage = h('div', { class: 'vx-stage', style: { aspectRatio: `${W} / ${H}`, maxWidth: `min(${m.mime === 'image/svg+xml' ? '100%' : W + 'px'}, calc(76vh * ${(W / H).toFixed(4)}))` }   /* tall pictures fit on screen; ⤢ for more */ }, img, svg, layer);   // i18n-ignore
   stage.style.setProperty('--ar', String(W / H));
   const below = h('div', { class: 'vx-below' });
-  const zoomBtn = h('button', { class: 'iconbtn vx-zoom', title: 'Bigger picture (Esc to close)', 'aria-label': 'Toggle full screen picture', onclick: () => toggleFull() }, '⤢');
+  const zoomBtn = h('button', { class: 'iconbtn vx-zoom', title: tE('engine.vx.zoomTip'), 'aria-label': tE('engine.vx.zoomAria'), onclick: () => toggleFull() }, '⤢');
   const tools = h('div', { class: 'vx-tools' }, vCredit(m), h('span', { class: 'grow' }), zoomBtn);
   const wrap = h('div', { class: 'vx' }, tools, stage, below);
   // Full screen: the picture moves to <body> (an animated/transformed ancestor would otherwise trap position:fixed)
@@ -114,7 +114,7 @@ function vStage(ex, { regions } = {}) {
       Keys are kept away from the card's global shortcuts while the picture has focus. */
   function keyboard({ tap, undo, describe }) {
     stage.tabIndex = 0; stage.setAttribute('role', 'application');
-    stage.setAttribute('aria-label', 'Picture. Arrow keys move the crosshair (Shift for small steps), Enter or Space taps, Backspace removes the last tap.');
+    stage.setAttribute('aria-label', tE('engine.vx.stageAria'));
     const cross = h('span', { class: 'vx-cross', 'aria-hidden': 'true' }); layer.append(cross);
     const live = h('span', { class: 'vx-sr', 'aria-live': 'polite' }); wrap.append(live);
     let cx = W / 2, cy = H / 2, shown = false;
@@ -168,7 +168,7 @@ function vOverlap(els, stage) {
 function vResults(rows) {
   return h('div', { class: 'vx-results' }, ...rows.map(({ k, r, ok, typo, given }) => h('div', { class: 'vx-res ' + (ok ? 'ok' : 'bad') },
     h('span', { class: 'vx-num' }, k + 1), h('b', {}, ok ? '✓' : '✗'), ' ', F(r.label),
-    !ok ? h('span', { class: 'muted' }, given ? ` — you: “${given}”` : ' — left empty') : typo ? h('span', { class: 'muted' }, ` — accepted “${given}” (spelling: ${r.label})`) : null,
+    !ok ? h('span', { class: 'muted' }, ' — ' + (given ? tE('engine.vx.resYou', { given }) : tE('engine.vx.resEmpty'))) : typo ? h('span', { class: 'muted' }, ' — ' + tE('engine.vx.resTypo', { given, label: r.label })) : null,
     r.note ? h('div', { class: 'tiny', html: fmt(r.note) }) : null)));
 }
 const vHint = text => h('div', { class: 'tiny vx-hint' }, text);
@@ -191,17 +191,17 @@ R.img_hotspot = (ex, api) => {
     if (api.locked()) return '';
     const sb = st.stage.getBoundingClientRect(), sx = sb.width / st.W, sy = sb.height / st.H;
     const near = pins.find(q => Math.hypot((q.x - x) * sx, (q.y - y) * sy) <= 10);
-    if (near) { drop(near); beep('tap'); return 'Pin removed.'; }
+    if (near) { drop(near); beep('tap'); return tE('engine.vx.pinRemoved'); }
     if (!multi) pins.slice().forEach(drop);
     const p = { x, y };
     p.el = h('span', { class: 'vx-pick', style: st.pos(x, y) }, multi ? pins.length + 1 : '');
     pins.push(p); st.layer.append(p.el); beep('tap');
-    return multi ? `Pin ${pins.length} of ${ans.length} placed.` : 'Pin placed. Press Tab to reach the Check button.';
+    return multi ? tE('engine.vx.pinNofM', { n: pins.length, of: ans.length }) : tE('engine.vx.pinPlaced');
   }
   st.stage.addEventListener('click', ev => tapAt(...st.toImg(ev)));
-  const where = (x, y) => `${['left', 'centre', 'right'][Math.min(2, Math.floor(3 * x / st.W))]} ${['top', 'middle', 'bottom'][Math.min(2, Math.floor(3 * y / st.H))]} (${Math.round(100 * x / st.W)}%, ${Math.round(100 * y / st.H)}%)`;
-  st.keyboard({ tap: tapAt, undo: () => { if (api.locked() || !pins.length) return ''; drop(pins[pins.length - 1]); return 'Last pin removed.'; }, describe: where });
-  st.below.prepend(vHint(multi ? `Tap ${ans.length} places on the picture (tap a pin again to remove it). Small picture? ⤢ makes it bigger. ⌨️ Tab to the picture, arrows + Enter.` : any ? 'Tap one right place on the picture (several are right) — then Check. ⌨️ arrows + Enter.' : 'Tap the right place on the picture — then Check. ⌨️ Tab to the picture, arrows move, Enter taps.'));
+  const where = (x, y) => tE('engine.vx.where', { h: ['left', 'centre', 'right'][Math.min(2, Math.floor(3 * x / st.W))], v: ['top', 'middle', 'bottom'][Math.min(2, Math.floor(3 * y / st.H))], x: Math.round(100 * x / st.W), y: Math.round(100 * y / st.H) });   // i18n-ignore (select values)
+  st.keyboard({ tap: tapAt, undo: () => { if (api.locked() || !pins.length) return ''; drop(pins[pins.length - 1]); return tE('engine.vx.lastPinRemoved'); }, describe: where });
+  st.below.prepend(vHint(multi ? tE('engine.vx.hotspotMulti', { n: ans.length }) : any ? tE('engine.vx.hotspotAny') : tE('engine.vx.hotspotOne')));
   return {
     el: st.el,
     check() {
@@ -234,29 +234,29 @@ R.img_sequence = (ex, api) => {
     Object.values(badges).forEach(b => b.remove());
     picks.forEach((r, i) => { const [x, y] = rCenter(r); badges[r.id] = h('span', { class: 'vx-num vx-step', style: st.pos(x, y) }, i + 1); st.layer.append(badges[r.id]); });
     $$('.vx-hov', st.svg).forEach(e => e.classList.toggle('on', picks.some(r => r.id === e.dataset.rid)));
-    counter.textContent = `${picks.length} / ${ex.answer.length} steps`;
+    counter.textContent = tE('engine.vx.seqCounter', { n: picks.length, of: ex.answer.length });
   }
   const counter = h('b', {});
   function tapAt(x, y) {
     if (api.locked()) return '';
     const r = st.hits(x, y, among)[0];
-    if (!r) { st.stage.classList.remove('vx-miss'); void st.stage.offsetWidth; st.stage.classList.add('vx-miss'); return 'No part here.'; }
+    if (!r) { st.stage.classList.remove('vx-miss'); void st.stage.offsetWidth; st.stage.classList.add('vx-miss'); return tE('engine.vx.noPart'); }
     const i = picks.indexOf(r);
     if (i >= 0) picks.splice(i); else if (picks.length < ex.answer.length) { picks.push(r); beep('tap'); }
     draw();
-    return i >= 0 ? `Removed from step ${i + 1} on.` : `Step ${picks.length}: ${r.label || r.id}.`;
+    return i >= 0 ? tE('engine.vx.seqRemoved', { n: i + 1 }) : tE('engine.vx.seqStep', { n: picks.length, label: r.label || r.id });
   }
   st.stage.addEventListener('click', ev => tapAt(...st.toImg(ev)));
-  st.keyboard({ tap: tapAt, undo: () => { if (api.locked() || !picks.length) return ''; picks.pop(); draw(); return 'Last step removed.'; },
-    describe: (x, y) => { const r = st.hits(x, y, among)[0]; hov.set(r?.id); return r ? (r.label || r.id) + (picks.includes(r) ? ` (step ${picks.indexOf(r) + 1})` : '') : 'No part here.'; } });
-  st.below.prepend(h('div', { class: 'tiny vx-hint' }, 'Tap the parts in the right order. Tap a numbered part again to undo from there. ⌨️ arrows + Enter, Backspace undoes. · ', counter));
+  st.keyboard({ tap: tapAt, undo: () => { if (api.locked() || !picks.length) return ''; picks.pop(); draw(); return tE('engine.vx.lastStepRemoved'); },
+    describe: (x, y) => { const r = st.hits(x, y, among)[0]; hov.set(r?.id); return r ? (picks.includes(r) ? tE('engine.vx.partStep', { label: r.label || r.id, n: picks.indexOf(r) + 1 }) : (r.label || r.id)) : tE('engine.vx.noPart'); } });
+  st.below.prepend(h('div', { class: 'tiny vx-hint' }, tE('engine.vx.seqHint') + ' · ', counter));
   draw();
   return {
     el: st.el,
     check: () => picks.length < ex.answer.length ? null : picks.every((r, i) => r.id === ex.answer[i]),
     reveal() {
       picks.forEach((r, i) => badges[r.id]?.classList.add(r.id === ex.answer[i] ? 'right' : 'wrong'));
-      if (!picks.every((r, i) => r.id === ex.answer[i])) st.below.append(h('div', { class: 'fb info' }, h('b', {}, '🧭 Correct path: '), ...ex.answer.flatMap((id, i) => [i ? ' → ' : '', h('span', { class: 'vx-chipref' }, `${i + 1}. ${st.RG[id]?.label || id}`)])));
+      if (!picks.every((r, i) => r.id === ex.answer[i])) st.below.append(h('div', { class: 'fb info' }, h('b', {}, '🧭 ' + tE('engine.vx.correctPath') + ' '), ...ex.answer.flatMap((id, i) => [i ? ' → ' : '', h('span', { class: 'vx-chipref' }, `${i + 1}. ${st.RG[id]?.label || id}`)])));
     },
   };
 };
@@ -277,10 +277,10 @@ R.img_reveal = (ex, api) => {
   });
   const hidden = T.length - start.size;
   const counter = h('b', {});
-  const count = () => { counter.textContent = `🔍 ${opened} / ${hidden} tiles opened`; };
+  const count = () => { counter.textContent = '🔍 ' + tE('engine.vx.tilesOpened', { n: opened, of: hidden }); };
   count();
   const mc = R.mcq({ ...ex, type: 'mcq' }, api);
-  st.below.append(h('div', { class: 'tiny vx-hint' }, counter, ' · tap tiles to uncover the picture — answer as early as you dare: fewer tiles = more XP'), mc.el);
+  st.below.append(h('div', { class: 'tiny vx-hint' }, counter, ' · ' + tE('engine.vx.revealHint')), mc.el);
   return {
     el: st.el, auto: !(ex.multi || (Array.isArray(ex.answer) && ex.answer.length > 1)), keys: mc.keys,
     check: mc.check,
@@ -322,7 +322,7 @@ R.img_drag = (ex, api) => {
   let sel = null;
   const bank = h('div', { class: 'pool vx-bank' });
   const { slots } = vSlots(st, targets, (r, k) => {
-    const z = h('button', { class: 'vx-drop', 'data-k': k, 'aria-label': `Drop zone ${k + 1}`, style: { minWidth: zoneW + 'px' }, onclick: e => { e.stopPropagation(); if (!z._justDragged) tapZone(k); } });
+    const z = h('button', { class: 'vx-drop', 'data-k': k, 'aria-label': tE('engine.vx.dropZone', { n: k + 1 }), style: { minWidth: zoneW + 'px' }, onclick: e => { e.stopPropagation(); if (!z._justDragged) tapZone(k); } });
     // a placed label can be dragged on to another place, or off the picture back to the bank
     vDraggable(z, to => { if (!api.locked() && place.has(k)) put(+to.dataset.k, place.get(k)); }, { enabled: () => !api.locked() && place.has(k), onMiss: () => { if (!api.locked()) { place.delete(k); draw(); } } });
     return z;
@@ -342,10 +342,10 @@ R.img_drag = (ex, api) => {
     bank.innerHTML = '';
     const used = new Set(place.values());
     chips.filter(c => !used.has(c)).forEach(c => bank.append(chipEl(c)));
-    if (!bank.children.length) bank.append(h('span', { class: 'tiny' }, 'All placed — check it! (tap a placed label to move it)'));
+    if (!bank.children.length) bank.append(h('span', { class: 'tiny' }, tE('engine.vx.allPlaced')));
     slots.forEach(s => { const c = place.get(s.k); s.ctl.textContent = c ? c.text : '?'; s.ctl.title = c ? c.text : ''; s.ctl.classList.toggle('filled', !!c); s.ctl.classList.toggle('hot', !!sel && !c); });
   }
-  st.below.prepend(vHint('Drag each label onto its place — or tap a label, then tap the place.'), bank);
+  st.below.prepend(vHint(tE('engine.vx.dragHint')), bank);
   draw();
   const okAt = s => !!place.get(s.k) && norm(place.get(s.k).text) === norm(s.r.label);
   return {
@@ -365,9 +365,9 @@ R.img_label = (ex, api) => {
   const st = vStage(ex); if (st.missing) return vFail(st);
   const targets = vTargets(ex, st.regs);
   if (ex.mask !== false) targets.forEach(r => st.mask(r.id, true));
-  const { slots } = vSlots(st, targets, (r, k) => h('input', { class: 'vx-input', placeholder: `${k + 1} ?`, 'aria-label': `Name of part ${k + 1}`, autocapitalize: 'off', autocomplete: 'off', spellcheck: 'false',
+  const { slots } = vSlots(st, targets, (r, k) => h('input', { class: 'vx-input', placeholder: `${k + 1} ?`, 'aria-label': tE('engine.vx.partName', { n: k + 1 }), autocapitalize: 'off', autocomplete: 'off', spellcheck: 'false',
     onkeydown: e => { if (e.key === 'Enter') { e.preventDefault(); const nx = slots[k + 1]; if (nx) nx.ctl.focus(); else api.check(); } } }));
-  st.below.prepend(vHint('Type the name of each numbered part. Enter → next.'));
+  st.below.prepend(vHint(tE('engine.vx.labelHint')));
   const res = s => labelMatch(s.r, s.ctl.value, ex.fuzzy !== false);
   return {
     el: st.el, focus: () => !st.compact() && slots[0]?.ctl.focus({ preventScroll: true }),
@@ -385,9 +385,9 @@ R.img_select = (ex, api) => {
   const st = vStage(ex); if (st.missing) return vFail(st);
   const targets = vTargets(ex, st.regs);
   if (ex.mask !== false) targets.forEach(r => st.mask(r.id, true));
-  const shared = [...new Set([...targets.map(r => r.label), ...(ex.distractors || [])])].sort((a, b) => a.localeCompare(b));
-  const { slots } = vSlots(st, targets, (r, k) => h('select', { class: 'vx-select', 'aria-label': `Part ${k + 1}` }, h('option', { value: '' }, `${k + 1} · choose…`), ...(r.options || shared).map(o => h('option', { value: o }, o))));
-  st.below.prepend(vHint('Choose the right name at every numbered part.'));
+  const shared = [...new Set([...targets.map(r => r.label), ...(ex.distractors || [])])].sort(uiCompare);
+  const { slots } = vSlots(st, targets, (r, k) => h('select', { class: 'vx-select', 'aria-label': tE('engine.vx.part', { n: k + 1 }) }, h('option', { value: '' }, tE('engine.vx.choose', { n: k + 1 })), ...(r.options || shared).map(o => h('option', { value: o }, o))));
+  st.below.prepend(vHint(tE('engine.vx.selectHint')));
   const okAt = s => norm(s.ctl.value) === norm(s.r.label);
   return {
     el: st.el,
@@ -413,8 +413,8 @@ R.img_occlusion = (ex, api) => {
     panel.innerHTML = '';
     if (k >= targets.length) return finish();
     const r = targets[k];
-    const revealBtn = h('button', { class: 'btn primary', onclick: show }, '👁 Reveal');
-    panel.append(h('div', { class: 'vx-occq' }, h('span', { class: 'vx-num' }, k + 1), h('span', { html: fmt(r.q || 'What is hidden here? Say it (or think it) first.') })), h('div', { class: 'actions' }, revealBtn, h('span', { class: 'tiny' }, `${k + 1} / ${targets.length}`)));
+    const revealBtn = h('button', { class: 'btn primary', onclick: show }, '👁 ' + tE('engine.vx.reveal'));
+    panel.append(h('div', { class: 'vx-occq' }, h('span', { class: 'vx-num' }, k + 1), h('span', { html: fmt(r.q || tE('engine.vx.occQ')) })), h('div', { class: 'actions' }, revealBtn, h('span', { class: 'tiny' }, tE('engine.vx.nOfM', { n: k + 1, of: targets.length }))));
     st.masks[r.id].onclick = () => !api.locked() && show();
     setTimeout(() => revealBtn.focus({ preventScroll: true }), 30);
   }
@@ -424,11 +424,11 @@ R.img_occlusion = (ex, api) => {
     panel.innerHTML = '';
     const rate = ok => { marks[k] = ok; if (ok) knew++; nums[k].classList.add(ok ? 'right' : 'wrong'); st.outline(r.id, ok ? 'right' : 'wrong'); beep(ok ? 'ok' : 'bad'); k++; focusOn(); };
     panel.append(h('div', { class: 'vx-occq' }, h('span', { class: 'vx-num' }, k + 1), h('b', { html: fmt(r.label) }), r.note ? h('div', { class: 'tiny', html: fmt(r.note) }) : null),
-      h('div', { class: 'actions' }, h('button', { class: 'btn small vx-yes', onclick: () => rate(true) }, '✓ I knew it'), h('button', { class: 'btn small vx-no', onclick: () => rate(false) }, '✗ I didn’t')));
+      h('div', { class: 'actions' }, h('button', { class: 'btn small vx-yes', onclick: () => rate(true) }, '✓ ' + tE('engine.vx.knew')), h('button', { class: 'btn small vx-no', onclick: () => rate(false) }, '✗ ' + tE('engine.vx.didnt'))));
   }
   function finish() {
     const pass = ex.pass ?? 0.8, score = knew / targets.length;
-    panel.append(h('div', { class: 'fb ' + (score >= pass ? 'ok' : 'bad') }, h('b', {}, `You recalled ${knew} / ${targets.length}. `), score >= pass ? 'Strong!' : 'These come back soon in your review.'));
+    panel.append(h('div', { class: 'fb ' + (score >= pass ? 'ok' : 'bad') }, h('b', {}, tE('engine.vx.recalled', { n: knew, of: targets.length }) + ' '), score >= pass ? tE('engine.vx.strong') : tE('engine.vx.comeBack')));
     api.done(score >= pass);
   }
   st.below.append(panel);
@@ -459,25 +459,26 @@ function figureBlock(b) {
       pinned ? showTip(r, ...rCenter(r)) : tipEl.classList.remove('on');
     });
     st.keyboard({   // keyboard exploring: arrows move, the part under the crosshair is shown and announced; Enter peeks under a cover
-      tap: (x, y) => { const r = st.hits(x, y)[0]; const m = r && st.masks[r.id]; if (m && !m.classList.contains('off')) { m.classList.add('off'); return 'Uncovered: ' + (r.label || r.id); } return r ? (r.label || r.id) + (r.note ? '. ' + r.note : '') : 'Nothing here.'; },
+      tap: (x, y) => { const r = st.hits(x, y)[0]; const m = r && st.masks[r.id]; if (m && !m.classList.contains('off')) { m.classList.add('off'); return tE('engine.vx.uncovered', { label: r.label || r.id }); } return r ? (r.label || r.id) + (r.note ? '. ' + r.note : '') : tE('engine.vx.nothing'); },
       undo: () => '',
-      describe: (x, y) => { const r = st.hits(x, y)[0]; if (r && covered(r)) { tipEl.classList.remove('on'); return 'A hidden label. Enter peeks.'; } if (r) showTip(r, ...rCenter(r)); else tipEl.classList.remove('on'); return r ? (r.label || r.id) : 'Nothing here.'; } });
+      describe: (x, y) => { const r = st.hits(x, y)[0]; if (r && covered(r)) { tipEl.classList.remove('on'); return tE('engine.vx.hiddenLabel'); } if (r) showTip(r, ...rCenter(r)); else tipEl.classList.remove('on'); return r ? (r.label || r.id) : tE('engine.vx.nothing'); } });
     const named = regs.filter(r => r.label && !/-area$/.test(r.id));
     if (named.length) {   // the labels start hidden (test yourself first); the switch and its line sit on top of the picture
       let hidden = true;
       const say = h('span', { class: 'vx-lbltext' }), hideBtn = h('button', { class: 'btn small vx-lblbtn', type: 'button' });
-      const draw = () => { named.forEach(r => st.mask(r.id, hidden)); hideBtn.textContent = hidden ? '👀 Show labels' : '🙈 Hide labels'; say.textContent = hidden ? 'Labels hidden: tap a cover to peek.' : 'Hover or tap a part to see what it is.'; };
+      const draw = () => { named.forEach(r => st.mask(r.id, hidden)); hideBtn.textContent = hidden ? '👀 ' + tE('engine.vx.showLabels') : '🙈 ' + tE('engine.vx.hideLabels'); say.textContent = hidden ? tE('engine.vx.labelsHidden') : tE('engine.vx.hoverPart'); };
       hideBtn.onclick = () => { hidden = !hidden; draw(); };
       const credit = $('.vx-credit', st.tools); if (credit) st.below.append(h('div', { class: 'vx-figbar' }, credit));
       st.tools.prepend(h('div', { class: 'vx-labelbar' }, hideBtn, say));
       draw();
-    } else st.below.append(h('div', { class: 'row vx-figbar' }, h('span', { class: 'tiny grow' }, '👆 Hover or tap a part to see what it is.')));
+    } else st.below.append(h('div', { class: 'row vx-figbar' }, h('span', { class: 'tiny grow' }, '👆 ' + tE('engine.vx.hoverPart'))));
   }
   if (cap) box.append(h('figcaption', { class: 'caption', html: fmt(cap) }));
   return box;
 }
 
 /* ---------- text versions (tutor context, search) ---------- */
+/* i18n-ignore-start */   // context for the AI's prompts (English)
 function visualAsText(ex) {
   const m = MEDIA[ex.media] || {}; const regs = vRegions(ex, m); const L = id => (regs.find(r => r.id === id) || {}).label || id;
   let t = `Picture: ${m.alt || ex.media}${m.caption ? ' — ' + m.caption : ''}\n`;
@@ -489,3 +490,4 @@ function visualAsText(ex) {
   return t;
 }
 function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions(b, m).filter(r => r.label && !/-area$/.test(r.id)); return `[FIGURE] ${m.alt || b.media}${(b.caption || m.caption) ? ' — ' + (b.caption || m.caption) : ''}${regs.length ? '\nParts: ' + regs.map(r => r.label + (r.note ? ': ' + r.note : '')).join('; ') : ''}`; }
+/* i18n-ignore-end */

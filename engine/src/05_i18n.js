@@ -17,3 +17,5 @@ function stripCh(s) {
   const loc = pre.includes('\u0001') ? '|' + pre.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace('\u0001', '\\d+').replace(/\s+/g, '\\s*') : '';
   return String(s ?? '').replace(new RegExp('^(?:Ch\\d+\\s*·\\s*' + loc + ')'), '');   // i18n-ignore
 }
+/** Sorting words for the learner: the UI language's collator (NoemaI18n.fmt.compare). */
+const uiCompare = (a, b) => window.NoemaI18n?.fmt ? NoemaI18n.fmt.compare(a, b) : String(a ?? '').localeCompare(String(b ?? ''));
