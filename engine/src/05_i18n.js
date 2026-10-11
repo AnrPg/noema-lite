@@ -19,3 +19,15 @@ function stripCh(s) {
 }
 /** Sorting words for the learner: the UI language's collator (NoemaI18n.fmt.compare). */
 const uiCompare = (a, b) => window.NoemaI18n?.fmt ? NoemaI18n.fmt.compare(a, b) : String(a ?? '').localeCompare(String(b ?? ''));
+/** A number / a whole percent (0–100) in the UI language's digits and style (NoemaI18n.fmt). */
+const nf = n => window.NoemaI18n?.fmt ? NoemaI18n.fmt.number(n) : String(n);
+const pctText = p => window.NoemaI18n?.fmt ? NoemaI18n.fmt.percent(p / 100) : p + '%';
+/** "Ch3": a chapter's short number. */
+const chShort = num => tE('engine.common.chShort', { num });
+/** A message with elements in it (a bold name …): tNodes('engine.share.invite', { title }, { name: h('b', {}, who) }) → [text, node, text …]
+    for h()'s children. Each element placeholder must appear once in the message. */
+function tNodes(key, vars, nodes) {
+  const p = { ...(vars || {}) }, marks = [];
+  for (const [k, node] of Object.entries(nodes || {})) { p[k] = '\u0001' + marks.length + '\u0002'; marks.push(node); }
+  return tE(key, p).split(/\u0001(\d+)\u0002/).map((x, j) => j % 2 ? marks[+x] : x).filter(x => x !== '');
+}
