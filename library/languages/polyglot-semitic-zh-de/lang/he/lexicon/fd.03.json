@@ -21,7 +21,13 @@
       ],
       "note": "a separate stem for “these”, the same for both genders"
      }
-    ]
+    ],
+    "suffix": {
+     "none": "not a personal pronoun: it has no ending of its own"
+    },
+    "object": {
+     "none": "not a personal pronoun: as an object it stands after אֶת as it is (אֶת זֶה, אֶת מִי)"
+    }
    },
    "forms": {
     "PRON;SG;MASC": "זֶה",
@@ -184,7 +190,8 @@
       ],
       "note": "“those”: masculine הָהֵם, feminine הָהֵן"
      }
-    ]
+    ],
+    "nounAfter": "a definite noun, which it follows: הַבַּיִת הַהוּא, הַמִּטָּה הַהִיא"
    },
    "forms": {
     "DET;SG;MASC": "הַהוּא",

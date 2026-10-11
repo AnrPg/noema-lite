@@ -43,6 +43,30 @@
       ],
       "note": "only the present + an infinitive: הוֹלֵךְ לִקְנוֹת “is going to buy”"
      }
+    ],
+    "present": "הוֹלֵךְ",
+    "infinitive": "לָלֶכֶת",
+    "imperative": [
+     {
+      "cell": "V;IMP;2;SG;MASC",
+      "form": "לֵךְ"
+     },
+     {
+      "cell": "V;IMP;2;SG;FEM",
+      "form": "לְכִי"
+     },
+     {
+      "cell": "V;IMP;2;PL;MASC",
+      "form": "לְכוּ"
+     }
+    ],
+    "related": [
+     {
+      "form": "הוֹלִיךְ",
+      "binyan": "hifil",
+      "relation": "causative",
+      "note": "“led, walked (someone)”"
+     }
     ]
    },
    "forms": {
@@ -299,6 +323,30 @@
       ],
       "note": "only the imperative, + a verb in the future: בּוֹא נֵלֵךְ “let’s go”"
      }
+    ],
+    "present": "בָּא",
+    "infinitive": "לָבוֹא",
+    "imperative": [
+     {
+      "cell": "V;IMP;2;SG;MASC",
+      "form": "בּוֹא"
+     },
+     {
+      "cell": "V;IMP;2;SG;FEM",
+      "form": "בּוֹאִי"
+     },
+     {
+      "cell": "V;IMP;2;PL;MASC",
+      "form": "בּוֹאוּ"
+     }
+    ],
+    "related": [
+     {
+      "form": "הֵבִיא",
+      "binyan": "hifil",
+      "relation": "causative",
+      "note": "“brought”"
+     }
     ]
    },
    "forms": {
@@ -503,7 +551,31 @@
     "verbalNoun": "רִיצָה",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "present": "רָץ",
+    "infinitive": "לָרוּץ",
+    "imperative": [
+     {
+      "cell": "V;IMP;2;SG;MASC",
+      "form": "רוּץ"
+     },
+     {
+      "cell": "V;IMP;2;SG;FEM",
+      "form": "רוּצִי"
+     },
+     {
+      "cell": "V;IMP;2;PL;MASC",
+      "form": "רוּצוּ"
+     }
+    ],
+    "related": [
+     {
+      "form": "הֵרִיץ",
+      "binyan": "hifil",
+      "relation": "causative",
+      "note": "“made run; ran (a program)”"
+     }
+    ]
    },
    "forms": {
     "V;PST;3;SG;MASC": "רָץ",
@@ -668,7 +740,31 @@
     "verbalNoun": "נְהִיגָה",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "present": "נוֹהֵג",
+    "infinitive": "לִנְהֹג",
+    "imperative": [
+     {
+      "cell": "V;IMP;2;SG;MASC",
+      "form": "נְהַג"
+     },
+     {
+      "cell": "V;IMP;2;SG;FEM",
+      "form": "נַהֲגִי"
+     },
+     {
+      "cell": "V;IMP;2;PL;MASC",
+      "form": "נַהֲגוּ"
+     }
+    ],
+    "related": [
+     {
+      "form": "הִנְהִיג",
+      "binyan": "hifil",
+      "relation": "other",
+      "note": "“led; introduced (a custom)”"
+     }
+    ]
    },
    "forms": {
     "V;PST;3;SG;MASC": "נָהַג",
@@ -847,7 +943,31 @@
     "verbalNoun": "נְסִיעָה",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "present": "נוֹסֵעַ",
+    "infinitive": "לִנְסֹעַ",
+    "imperative": [
+     {
+      "cell": "V;IMP;2;SG;MASC",
+      "form": "סַע"
+     },
+     {
+      "cell": "V;IMP;2;SG;FEM",
+      "form": "סְעִי"
+     },
+     {
+      "cell": "V;IMP;2;PL;MASC",
+      "form": "סְעוּ"
+     }
+    ],
+    "related": [
+     {
+      "form": "הִסִּיעַ",
+      "binyan": "hifil",
+      "relation": "causative",
+      "note": "“drove (someone), gave a ride”"
+     }
+    ]
    },
    "forms": {
     "V;PST;3;SG;MASC": "נָסַע",
@@ -1064,7 +1184,31 @@
     "verbalNoun": "חֲזָרָה",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "present": "חוֹזֵר",
+    "infinitive": "לַחֲזֹר",
+    "imperative": [
+     {
+      "cell": "V;IMP;2;SG;MASC",
+      "form": "חֲזֹר"
+     },
+     {
+      "cell": "V;IMP;2;SG;FEM",
+      "form": "חִזְרִי"
+     },
+     {
+      "cell": "V;IMP;2;PL;MASC",
+      "form": "חִזְרוּ"
+     }
+    ],
+    "related": [
+     {
+      "form": "הֶחְזִיר",
+      "binyan": "hifil",
+      "relation": "causative",
+      "note": "“gave back, returned (something)”"
+     }
+    ]
    },
    "forms": {
     "V;PST;3;SG;MASC": "חָזַר",
@@ -1242,7 +1386,31 @@
     "verbalNoun": "כְּנִיסָה",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "present": "נִכְנָס",
+    "infinitive": "לְהִכָּנֵס",
+    "imperative": [
+     {
+      "cell": "V;IMP;2;SG;MASC",
+      "form": "הִכָּנֵס"
+     },
+     {
+      "cell": "V;IMP;2;SG;FEM",
+      "form": "הִכָּנְסִי"
+     },
+     {
+      "cell": "V;IMP;2;PL;MASC",
+      "form": "הִכָּנְסוּ"
+     }
+    ],
+    "related": [
+     {
+      "form": "הִכְנִיס",
+      "binyan": "hifil",
+      "relation": "causative",
+      "note": "“put in, let in”"
+     }
+    ]
    },
    "forms": {
     "V;PST;3;SG;MASC": "נִכְנַס",
@@ -1452,7 +1620,31 @@
     "verbalNoun": "יְצִיאָה",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "present": "יוֹצֵא",
+    "infinitive": "לָצֵאת",
+    "imperative": [
+     {
+      "cell": "V;IMP;2;SG;MASC",
+      "form": "צֵא"
+     },
+     {
+      "cell": "V;IMP;2;SG;FEM",
+      "form": "צְאִי"
+     },
+     {
+      "cell": "V;IMP;2;PL;MASC",
+      "form": "צְאוּ"
+     }
+    ],
+    "related": [
+     {
+      "form": "הוֹצִיא",
+      "binyan": "hifil",
+      "relation": "causative",
+      "note": "“took out; spent”"
+     }
+    ]
    },
    "forms": {
     "V;PST;3;SG;MASC": "יָצָא",
@@ -1661,6 +1853,30 @@
       ],
       "note": "mostly the imperative: עֲזֹב! “forget it, leave it!”"
      }
+    ],
+    "present": "עוֹזֵב",
+    "infinitive": "לַעֲזֹב",
+    "imperative": [
+     {
+      "cell": "V;IMP;2;SG;MASC",
+      "form": "עֲזֹב"
+     },
+     {
+      "cell": "V;IMP;2;SG;FEM",
+      "form": "עִזְבִי"
+     },
+     {
+      "cell": "V;IMP;2;PL;MASC",
+      "form": "עִזְבוּ"
+     }
+    ],
+    "related": [
+     {
+      "form": "נֶעֱזַב",
+      "binyan": "nifal",
+      "relation": "passive",
+      "note": "“was left, was abandoned”"
+     }
     ]
    },
    "forms": {
@@ -1857,6 +2073,30 @@
       ],
       "note": "mostly the impersonal present: מַגִּיעַ לְךָ “you deserve it”; past הִגִּיעַ לוֹ"
      }
+    ],
+    "present": "מַגִּיעַ",
+    "infinitive": "לְהַגִּיעַ",
+    "imperative": [
+     {
+      "cell": "V;IMP;2;SG;MASC",
+      "form": "הַגַּע"
+     },
+     {
+      "cell": "V;IMP;2;SG;FEM",
+      "form": "הַגִּיעִי"
+     },
+     {
+      "cell": "V;IMP;2;PL;MASC",
+      "form": "הַגִּיעוּ"
+     }
+    ],
+    "related": [
+     {
+      "form": "נָגַע",
+      "binyan": "paal",
+      "relation": "other",
+      "note": "“touched”: the same root, another meaning"
+     }
     ]
    },
    "forms": {
@@ -2027,7 +2267,31 @@
     "verbalNoun": "הִשָּׁאֲרוּת",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "present": "נִשְׁאָר",
+    "infinitive": "לְהִשָּׁאֵר",
+    "imperative": [
+     {
+      "cell": "V;IMP;2;SG;MASC",
+      "form": "הִשָּׁאֵר"
+     },
+     {
+      "cell": "V;IMP;2;SG;FEM",
+      "form": "הִשָּׁאֲרִי"
+     },
+     {
+      "cell": "V;IMP;2;PL;MASC",
+      "form": "הִשָּׁאֲרוּ"
+     }
+    ],
+    "related": [
+     {
+      "form": "הִשְׁאִיר",
+      "binyan": "hifil",
+      "relation": "causative",
+      "note": "“left (something) behind”"
+     }
+    ]
    },
    "forms": {
     "V;PST;3;SG;MASC": "נִשְׁאַר",
@@ -2206,6 +2470,25 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "present": "מְחַכֶּה",
+    "infinitive": "לְחַכּוֹת",
+    "imperative": [
+     {
+      "cell": "V;IMP;2;SG;MASC",
+      "form": "חַכֵּה"
+     },
+     {
+      "cell": "V;IMP;2;SG;FEM",
+      "form": "חַכִּי"
+     },
+     {
+      "cell": "V;IMP;2;PL;MASC",
+      "form": "חַכּוּ"
+     }
+    ],
+    "related": {
+     "none": "no verb of another binyan from this root in everyday use"
     }
    },
    "forms": {
@@ -2367,6 +2650,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "a loanword: possessive endings are not used; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -2510,6 +2805,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -2644,6 +2951,27 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": [
+     {
+      "form": "מְטוֹסִי",
+      "number": "SG",
+      "register": "formal"
+     },
+     {
+      "form": "מְטוֹסַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -2776,6 +3104,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -2915,6 +3255,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -3055,6 +3407,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "plural only: the ending matches the gender"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -3192,6 +3556,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -3337,6 +3713,27 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": [
+     {
+      "form": "סְפִינָתִי",
+      "number": "SG",
+      "register": "formal"
+     },
+     {
+      "form": "סְפִינוֹתַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -3494,6 +3891,18 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "a loanword: possessive endings are not used; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {

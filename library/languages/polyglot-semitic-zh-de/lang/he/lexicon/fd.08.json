@@ -289,7 +289,8 @@
     "position": "before",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "nounAfter": "an indefinite singular noun, in a negative sentence: אֵין לִי שׁוּם בְּעָיָה"
    },
    "note": "Before a noun, with לֹא or אֵין: “no … at all, not any”. Plain “no + noun” needs no word in Hebrew (אֵין לִי מְכוֹנִית “I have no car”); שׁוּם adds emphasis. Same spelling as שׁוּם “garlic”.",
    "contrasts": [
@@ -416,6 +417,12 @@
     "agreement": "masculine",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "suffix": {
+     "none": "not a personal pronoun: it has no ending of its own"
+    },
+    "object": {
+     "none": "not a personal pronoun: as an object it stands as it is"
     }
    },
    "contrasts": [
@@ -528,6 +535,12 @@
     "agreement": "masculine",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "suffix": {
+     "none": "not a personal pronoun: it has no ending of its own"
+    },
+    "object": {
+     "none": "not a personal pronoun: as an object it stands as it is"
     }
    },
    "note": "A two-word lexeme: שׁוּם “any” + דָּבָר “thing”. Tokenized as one word.",
@@ -632,6 +645,12 @@
     "agreement": "masculine",
     "meaningForms": {
      "none": "one meaning"
+    },
+    "suffix": {
+     "none": "not a personal pronoun: it has no ending of its own"
+    },
+    "object": {
+     "none": "not a personal pronoun: as an object it stands as it is"
     }
    },
    "note": "A two-word lexeme: אַף “even” + אֶחָד “one”. Feminine אַף אַחַת. Tokenized as one word.",

@@ -1075,6 +1075,9 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "inflection": {
+     "none": "invariable: one form for every gender and number"
     }
    },
    "note": "Invariable: the same form for a man, a woman and a group.",

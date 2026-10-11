@@ -29,7 +29,10 @@
    "prefix": false,
    "translit": "o",
    "features": {
-    "spelling": "או"
+    "spelling": "או",
+    "allomorphs": {
+     "none": "one form"
+    }
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -508,7 +511,21 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "בְּרוּרָה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "בְּרוּרִים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "בְּרוּרוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "בָּרוּר",

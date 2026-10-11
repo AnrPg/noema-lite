@@ -28,6 +28,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": {
+     "none": "no plural (see the plural)"
+    },
+    "possessive": {
+     "none": "possessive endings are not used with this word; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -162,6 +174,27 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": [
+     {
+      "form": "צַעֲצוּעִי",
+      "number": "SG",
+      "register": "formal"
+     },
+     {
+      "form": "צַעֲצוּעַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -295,6 +328,27 @@
     ],
     "meaningForms": {
      "none": "the same forms in every meaning"
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": [
+     {
+      "form": "מִשְׂחָקִי",
+      "number": "SG",
+      "register": "formal"
+     },
+     {
+      "form": "מִשְׂחָקַי",
+      "number": "PL",
+      "register": "formal"
+     }
+    ],
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -446,6 +500,25 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "present": "מְשַׂחֵק",
+    "infinitive": "לְשַׂחֵק",
+    "imperative": [
+     {
+      "cell": "V;IMP;2;SG;MASC",
+      "form": "שַׂחֵק"
+     },
+     {
+      "cell": "V;IMP;2;SG;FEM",
+      "form": "שַׂחֲקִי"
+     },
+     {
+      "cell": "V;IMP;2;PL;MASC",
+      "form": "שַׂחֲקוּ"
+     }
+    ],
+    "related": {
+     "none": "no verb of another binyan from this root in everyday use"
     }
    },
    "forms": {
@@ -613,7 +686,37 @@
     "verbalNoun": "גְּדִילָה",
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "present": "גָּדֵל",
+    "infinitive": "לִגְדֹּל",
+    "imperative": [
+     {
+      "cell": "V;IMP;2;SG;MASC",
+      "form": "גְּדַל"
+     },
+     {
+      "cell": "V;IMP;2;SG;FEM",
+      "form": "גִּדְלִי"
+     },
+     {
+      "cell": "V;IMP;2;PL;MASC",
+      "form": "גִּדְלוּ"
+     }
+    ],
+    "related": [
+     {
+      "form": "גִּדֵּל",
+      "binyan": "piel",
+      "relation": "causative",
+      "note": "“raised (children), grew (plants)”"
+     },
+     {
+      "form": "הִגְדִּיל",
+      "binyan": "hifil",
+      "relation": "causative",
+      "note": "“made bigger, enlarged”"
+     }
+    ]
    },
    "forms": {
     "V;PST;1;SG": "גָּדַלְתִּי",
@@ -784,7 +887,37 @@
     "verbalNoun": "זְכִירָה",
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "present": "זוֹכֵר",
+    "infinitive": "לִזְכֹּר",
+    "imperative": [
+     {
+      "cell": "V;IMP;2;SG;MASC",
+      "form": "זְכֹר"
+     },
+     {
+      "cell": "V;IMP;2;SG;FEM",
+      "form": "זִכְרִי"
+     },
+     {
+      "cell": "V;IMP;2;PL;MASC",
+      "form": "זִכְרוּ"
+     }
+    ],
+    "related": [
+     {
+      "form": "נִזְכַּר",
+      "binyan": "nifal",
+      "relation": "passive",
+      "note": "in use mostly “recalled, suddenly remembered”"
+     },
+     {
+      "form": "הִזְכִּיר",
+      "binyan": "hifil",
+      "relation": "causative",
+      "note": "“reminded; mentioned”"
+     }
+    ]
    },
    "forms": {
     "V;PST;1;SG": "זָכַרְתִּי",
@@ -948,7 +1081,31 @@
     },
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "present": "שׁוֹכֵחַ",
+    "infinitive": "לִשְׁכֹּחַ",
+    "imperative": [
+     {
+      "cell": "V;IMP;2;SG;MASC",
+      "form": "שְׁכַח"
+     },
+     {
+      "cell": "V;IMP;2;SG;FEM",
+      "form": "שִׁכְחִי"
+     },
+     {
+      "cell": "V;IMP;2;PL;MASC",
+      "form": "שִׁכְחוּ"
+     }
+    ],
+    "related": [
+     {
+      "form": "נִשְׁכַּח",
+      "binyan": "nifal",
+      "relation": "passive",
+      "note": "“was forgotten”"
+     }
+    ]
    },
    "forms": {
     "V;PST;1;SG": "שָׁכַחְתִּי",
@@ -1116,6 +1273,18 @@
     },
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "compound: the first word changes"
+    ],
+    "possessive": {
+     "none": "a compound: “my …” is said with שֶׁל after it (… שֶׁלִּי); the endings go only on the first word in formal style"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {
@@ -1248,7 +1417,22 @@
     },
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": [
+     {
+      "form": "שְׁכֵנָה",
+      "lexeme": "he:shchena"
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "שָׁכֵן",
@@ -1385,7 +1569,22 @@
     },
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "pluralShape": [
+     "regular"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "the ending ־ָה / ־ת shows that it is feminine"
+    },
+    "pair": [
+     {
+      "form": "שָׁכֵן",
+      "lexeme": "he:shachen"
+     }
+    ]
    },
    "forms": {
     "N;SG;INDF": "שְׁכֵנָה",
@@ -1517,6 +1716,18 @@
     ],
     "meaningForms": {
      "none": "one meaning"
+    },
+    "pluralShape": [
+     "segolate: vowels rebuilt"
+    ],
+    "possessive": {
+     "none": "possessive endings only in literary style; “my …” is הַ… שֶׁלִּי"
+    },
+    "genderCue": {
+     "none": "no feminine ending: masculine, as expected"
+    },
+    "pair": {
+     "none": "not a noun for a person"
     }
    },
    "forms": {

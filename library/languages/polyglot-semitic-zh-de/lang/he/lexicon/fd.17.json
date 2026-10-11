@@ -17,7 +17,21 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "לְבָנָה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "לְבָנִים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "לְבָנוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "לָבָן",
@@ -155,7 +169,21 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "שְׁחֹרָה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "שְׁחֹרִים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "שְׁחֹרוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "שָׁחֹר",
@@ -314,7 +342,21 @@
     },
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "אֲדֻמָּה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "אֲדֻמִּים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "אֲדֻמּוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "אָדֹם",
@@ -448,7 +490,21 @@
     },
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "כְּחֻלָּה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "כְּחֻלִּים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "כְּחֻלּוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "כָּחֹל",
@@ -630,7 +686,21 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "יְרֻקָּה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "יְרֻקִּים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "יְרֻקּוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "יָרֹק",
@@ -775,7 +845,21 @@
     },
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "צְהֻבָּה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "צְהֻבִּים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "צְהֻבּוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "צָהֹב",
@@ -905,7 +989,21 @@
     },
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "חוּמָה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "חוּמִים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "חוּמוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "חוּם",
@@ -1020,7 +1118,21 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "אֲפֹרָה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "אֲפֹרִים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "אֲפֹרוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "אָפֹר",
@@ -1154,7 +1266,21 @@
     },
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "כְּתֻמָּה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "כְּתֻמִּים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "כְּתֻמּוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "כָּתֹם",
@@ -1271,7 +1397,21 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "וְרֻדָּה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "וְרֻדִּים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "וְרֻדּוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "וָרֹד",
@@ -1426,7 +1566,21 @@
     },
     "meaningForms": {
      "none": "one meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "סְגֻלָּה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "סְגֻלִּים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "סְגֻלּוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "סָגֹל",
@@ -1572,7 +1726,21 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "בְּהִירָה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "בְּהִירִים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "בְּהִירוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "בָּהִיר",
@@ -1739,7 +1907,21 @@
     },
     "meaningForms": {
      "none": "the same forms in every meaning"
-    }
+    },
+    "inflection": [
+     {
+      "cell": "ADJ;SG;FEM",
+      "form": "כֵּהָה"
+     },
+     {
+      "cell": "ADJ;PL;MASC",
+      "form": "כֵּהִים"
+     },
+     {
+      "cell": "ADJ;PL;FEM",
+      "form": "כֵּהוֹת"
+     }
+    ]
    },
    "forms": {
     "ADJ;SG;MASC": "כֵּהֶה",

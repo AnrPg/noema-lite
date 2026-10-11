@@ -426,7 +426,8 @@
     "wordFields": [
      "prefix",
      "alts",
-     "role"
+     "role",
+     "withArticle"
     ],
     "paradigm": [
      "N;SG;DEF;PFX",
@@ -495,7 +496,9 @@
    "record": "the spellings of each prefix (alts) and the form of the word after a prefix (PFX cells)",
    "model": {
     "wordFields": [
-     "alts"
+     "alts",
+     "allomorphs",
+     "withArticle"
     ],
     "paradigm": [
      "ADP;DEF",
@@ -510,7 +513,7 @@
      "fn.definite"
     ],
     "exercises": [],
-    "other": "alts on he:ve (וּ וַ), he:be, he:min; ADP;DEF / ADP;ALT cells on לְ; 43 nouns have a PFX cell (the noun after a prefix + article). The tokenizer accepts any listed spelling; nothing checks that the right one was chosen."
+    "other": "alts on he:ve (וּ וַ), he:be, he:min; ADP;DEF / ADP;ALT cells on לְ; 43 nouns have a PFX cell (the noun after a prefix + article). The tokenizer accepts any listed spelling; nothing checks that the right one was chosen. R3: allomorphs on the conjunctions (וּ / וִ) and withArticle on the prepositions (בַּ, לַ; מֵהַ)."
    },
    "status": "partial",
    "gap": "A rule or stored variants for every prefix (בְּ, כְּ, וְ, מִ, שֶׁ) and a check that a bank token uses the right one; a choose-the-prefix-vowel drill (vowelize).",
@@ -2008,7 +2011,8 @@
    "record": "gender: MASC or FEM",
    "model": {
     "wordFields": [
-     "gender"
+     "gender",
+     "genderCue"
     ],
     "paradigm": [],
     "grammar": [
@@ -2019,7 +2023,7 @@
      "gender_article",
      "quiz"
     ],
-    "other": "gender required on every noun by the validator (GENDERED_NOUNS); 258 nouns carry it; gender_article drills it."
+    "other": "gender required on every noun by the validator (GENDERED_NOUNS); 258 nouns carry it; gender_article drills it. R3: genderCue flags the nouns whose gender goes against the ending (עִיר, אֶרֶץ, כּוֹס, לַיְלָה)."
    },
    "status": "covered",
    "gap": "",
@@ -2062,7 +2066,8 @@
    "model": {
     "wordFields": [
      "gender",
-     "senses"
+     "senses",
+     "pair"
     ],
     "paradigm": [],
     "grammar": [
@@ -2072,10 +2077,10 @@
     "exercises": [
      "gender_article"
     ],
-    "other": "The two words are separate lexemes with the same concept (he:more / he:mora); their contrasts (axis “gender of the person”) link them. langcore principalParts looks for a cell N;SG;FEM;INDF that Hebrew lexemes never have, so the card shows the pair only through the concept."
+    "other": "The two words are separate lexemes with the same concept (he:more / he:mora); their contrasts (axis “gender of the person”) link them. langcore principalParts looks for a cell N;SG;FEM;INDF that Hebrew lexemes never have, so the card shows the pair only through the concept. R3: pair on every noun links the female / male counterpart (lexeme, and senses where a meaning has its own, בַּעַל ↔ אִשָּׁה)."
    },
    "status": "partial",
-   "gap": "The counterpart on the word card and a “make the feminine” drill.",
+   "gap": "A “make the feminine” drill.",
    "when": "fd.01, fd.10"
   },
   {
@@ -2120,7 +2125,8 @@
     "wordFields": [
      "plurals",
      "gender",
-     "class"
+     "class",
+     "pluralShape"
     ],
     "paradigm": [
      "N;PL;INDF",
@@ -2135,10 +2141,10 @@
      "principal_parts",
      "transform"
     ],
-    "other": "plurals on every noun: the form, its ending (im / ot: a mismatch with the gender is visible) and the meanings it belongs to, with a note where a meaning has its own plural or only the plural (16 nouns: כִּכָּרוֹת / כִּכְּרוֹת, נְיָרוֹת, בָּנִים, נְכָדִים …); none with the reason for mass, plural-only and month nouns. The cells N;PL;INDF / N;PL;DEF hold the forms; fn.plural.noun lists an “agree” generator, which langcore does not implement (ignored)."
+    "other": "plurals on every noun: the form, its ending (im / ot: a mismatch with the gender is visible) and the meanings it belongs to, with a note where a meaning has its own plural or only the plural (16 nouns: כִּכָּרוֹת / כִּכְּרוֹת, נְיָרוֹת, בָּנִים, נְכָדִים …); none with the reason for mass, plural-only and month nouns. The cells N;PL;INDF / N;PL;DEF hold the forms; fn.plural.noun lists an “agree” generator, which langcore does not implement (ignored). R3: pluralShape on every noun says what is irregular (the other gender’s ending, a segolate, a stem change, the plural of another word, compounds)."
    },
    "status": "partial",
-   "gap": "An irregular-stem flag to drive focused drills, and the agree generator.",
+   "gap": "The agree generator.",
    "when": "fd.05"
   },
   {
@@ -2181,7 +2187,10 @@
    "level": "word",
    "record": "carried by the stored forms",
    "model": {
-    "wordFields": [],
+    "wordFields": [
+     "pluralShape",
+     "inflection"
+    ],
     "paradigm": [
      "N;PL;INDF",
      "ADJ;SG;FEM",
@@ -2194,7 +2203,7 @@
     "exercises": [
      "inflect"
     ],
-    "other": "All forms stored; the traps of fn.plural.noun and fn.adjective explain the shortening."
+    "other": "All forms stored; the traps of fn.plural.noun and fn.adjective explain the shortening. R3: pluralShape flags segolates and stem changes on every noun; inflection shows the adjective forms on the card."
    },
    "status": "covered",
    "gap": "",
@@ -2620,7 +2629,9 @@
    "level": "word",
    "record": "possSuffix: everyday / formal / none, with the N;POSS cells (and N;PL;POSS for countable nouns)",
    "model": {
-    "wordFields": [],
+    "wordFields": [
+     "possessive"
+    ],
     "paradigm": [
      "N;POSS;1;SG",
      "N;POSS;2;SG;MASC",
@@ -2633,10 +2644,10 @@
      "inflect",
      "transform"
     ],
-    "other": "13 nouns have the 10 N;POSS cells (singular only); the bank has a Formality variant (שֶׁלִּי ↔ suffix)."
+    "other": "13 nouns have the 10 N;POSS cells (singular only); the bank has a Formality variant (שֶׁלִּי ↔ suffix). R3: possessive on every noun — the 1st-person forms (SG and PL, from the paradigm or Wiktionary’s tables) with their register (everyday for family words, formal otherwise), or none with the reason (loans, mass nouns, compounds, literary only)."
    },
    "status": "partial",
-   "gap": "Plural-possessed forms (אַחַי “my brothers”, יְלָדַי), a register value per noun saying whether the suffix is used in speech, and the possessed forms of more nouns for reading.",
+   "gap": "The possessed forms of more nouns for reading (only the 1st person is stated outside the family words).",
    "when": "fd.06"
   },
   {
@@ -2725,7 +2736,8 @@
    "model": {
     "wordFields": [
      "pronForms",
-     "class"
+     "class",
+     "suffixSet"
     ],
     "paradigm": [
      "ADP;1;SG",
@@ -2741,7 +2753,7 @@
     "exercises": [
      "inflect"
     ],
-    "other": "16 of 31 prepositions state their 10 forms with personal endings (from Wiktionary’s tables: אִתִּי, מִמֶּנִּי, אוֹתִי, עָלַי …); the others say none (שֶׁלִּי … are themselves such forms; time words). Only לְ (class ADP.suffixed) has them as paradigm cells; שֶׁל’s forms are 10 separate lexemes."
+    "other": "16 of 31 prepositions state their 10 forms with personal endings (from Wiktionary’s tables: אִתִּי, מִמֶּנִּי, אוֹתִי, עָלַי …); the others say none (שֶׁלִּי … are themselves such forms; time words). Only לְ (class ADP.suffixed) has them as paradigm cells; שֶׁל’s forms are 10 separate lexemes. R3: suffixSet says which endings a preposition takes (singular-noun, plural-noun, mixed, own stem)."
    },
    "status": "partial",
    "gap": "The forms are facade data, not paradigm cells: the tokenizer does not read אִתִּי, אוֹתוֹ, מִמֶּנּוּ yet, and there are no inflect drills.",
@@ -2780,7 +2792,8 @@
    "record": "the four V;PRS cells",
    "model": {
     "wordFields": [
-     "binyan"
+     "binyan",
+     "present"
     ],
     "paradigm": [
      "V;PRS;SG;MASC",
@@ -2795,7 +2808,7 @@
      "inflect",
      "transform"
     ],
-    "other": "Required cells for every VERB (paradigmCells); bank variants Gender, Number, Addressee."
+    "other": "Required cells for every VERB (paradigmCells); bank variants Gender, Number, Addressee. R3: present (m. sg) on the card."
    },
    "status": "covered",
    "gap": "",
@@ -3025,7 +3038,8 @@
    "record": "the V;IMP cells (2 sg m, 2 sg f, 2 pl)",
    "model": {
     "wordFields": [
-     "role"
+     "role",
+     "imperative"
     ],
     "paradigm": [
      "V;IMP;2;SG;MASC",
@@ -3042,7 +3056,7 @@
      "transform",
      "quiz"
     ],
-    "other": "15 verbs store imperative and 2nd-person future cells; he:al-imp (אַל) has a role; bank variants Mood, Polarity, Formality, Addressee."
+    "other": "15 verbs store imperative and 2nd-person future cells; he:al-imp (אַל) has a role; bank variants Mood, Polarity, Formality, Addressee. R3: imperative on every verb (3 forms, or none with the reason)."
    },
    "status": "covered",
    "gap": "",
@@ -3090,7 +3104,9 @@
    "level": "word",
    "record": "V;NFIN",
    "model": {
-    "wordFields": [],
+    "wordFields": [
+     "infinitive"
+    ],
     "paradigm": [
      "V;NFIN"
     ],
@@ -3102,7 +3118,7 @@
      "inflect",
      "principal_parts"
     ],
-    "other": "V;NFIN is a required cell of every verb."
+    "other": "V;NFIN is a required cell of every verb. R3: infinitive on the card."
    },
    "status": "covered",
    "gap": "",
@@ -3245,15 +3261,16 @@
    "model": {
     "wordFields": [
      "binyan",
-     "root"
+     "root",
+     "related"
     ],
     "paradigm": [],
     "grammar": [],
     "exercises": [],
-    "other": "binyan is recorded but not its relation to other verbs."
+    "other": "binyan is recorded but not its relation to other verbs. R3: related on every verb — the same-root verbs in other binyanim with the relation (passive, causative, transitive / intransitive partner, “become”), from the course and Wiktionary’s “passive counterpart”."
    },
-   "status": "missing",
-   "gap": "Relation links between verbs of one root, a function for voice (passive) and the reflexive (cr.07), and root_pattern drills.",
+   "status": "partial",
+   "gap": "A function for voice (passive) and the reflexive (cr.07), and root_pattern drills.",
    "when": "cr.03, cr.07, later"
   },
   {
@@ -3487,7 +3504,8 @@
    "record": "the 8 ADJ cells",
    "model": {
     "wordFields": [
-     "class"
+     "class",
+     "inflection"
     ],
     "paradigm": [
      "ADJ;SG;MASC",
@@ -3505,7 +3523,7 @@
      "inflect",
      "transform"
     ],
-    "other": "Required 8 cells for every ADJ; class ADJ.inv for בְּסֵדֶר."
+    "other": "Required 8 cells for every ADJ; class ADJ.inv for בְּסֵדֶר. R3: inflection (f. sg, m. pl, f. pl) on the card."
    },
    "status": "covered",
    "gap": "",
@@ -3806,7 +3824,10 @@
    "record": "the gender forms and construct forms of each number (class gender / two / const / dual)",
    "model": {
     "wordFields": [
-     "class"
+     "class",
+     "agreement",
+     "genderForms",
+     "construct"
     ],
     "paradigm": [
      "NUM;MASC",
@@ -3824,7 +3845,7 @@
      "transform",
      "quiz"
     ],
-    "other": "language.json classes NUM.gender, NUM.two, NUM.const, NUM.dual with their cells; fn.numerals with traps; bank variants Gender, Definiteness."
+    "other": "language.json classes NUM.gender, NUM.two, NUM.const, NUM.dual with their cells; fn.numerals with traps; bank variants Gender, Definiteness. R3: agreement (agrees / reversed endings / one form), genderForms and construct on every number."
    },
    "status": "partial",
    "gap": "The colloquial levelling to feminine forms is not described (register note); the number_words drill (digits ↔ words) is not implemented.",
@@ -4202,7 +4223,8 @@
    "record": null,
    "model": {
     "wordFields": [
-     "role"
+     "role",
+     "object"
     ],
     "paradigm": [],
     "grammar": [
@@ -4214,10 +4236,10 @@
      "build_sentence",
      "sentence_meaning"
     ],
-    "other": "he:et (role); fn.object with a Definiteness variant in the bank."
+    "other": "he:et (role); fn.object with a Definiteness variant in the bank. R3: the personal pronouns state their object form (object: אוֹתִי …)."
    },
    "status": "partial",
-   "gap": "The pronoun forms אוֹתִי … אוֹתָן are not stored (see he.morph.prep-suffix); the colloquial אֶת after יֵשׁ (יֵשׁ לִי אֶת הַסֵּפֶר) is mentioned only as non-standard.",
+   "gap": "The colloquial אֶת after יֵשׁ (יֵשׁ לִי אֶת הַסֵּפֶר) is mentioned only as non-standard.",
    "when": "fd.07",
    "notes": [
     {
@@ -4778,7 +4800,8 @@
    "record": null,
    "model": {
     "wordFields": [
-     "prefix"
+     "prefix",
+     "tense"
     ],
     "paradigm": [],
     "grammar": [
@@ -4789,7 +4812,7 @@
      "transform",
      "quiz"
     ],
-    "other": "fn.connectors with traps and bank sentences."
+    "other": "fn.connectors with traps and bank sentences. R3: tense on every subordinating conjunction (the future after כְּשֶׁ / אִם)."
    },
    "status": "covered",
    "gap": "",
@@ -5539,7 +5562,8 @@
    "record": null,
    "model": {
     "wordFields": [
-     "class"
+     "class",
+     "nounAfter"
     ],
     "paradigm": [
      "PRON;1;PL",
@@ -5549,7 +5573,7 @@
     "exercises": [
      "inflect"
     ],
-    "other": "he:kol senses (all / every / any); he:kulam with class PRON.all; no grammar function teaches the definiteness rule."
+    "other": "he:kol senses (all / every / any); he:kulam with class PRON.all; no grammar function teaches the definiteness rule. R3: nounAfter on every determiner states the כָּל הַ… / כָּל … rule."
    },
    "status": "partial",
    "gap": "A short rule (fn.numerals or a quantifier note) and bank sentences contrasting כָּל הַ… / כָּל ….",
