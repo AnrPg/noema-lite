@@ -5938,7 +5938,7 @@
     {
      "for": "fr",
      "rel": "similar",
-     "text": "As in French, no article with jobs (Il est médecin – Er ist Arzt); unlike French, most countries take none (Frankreich, but die Schweiz) and there is no partitive (Ich esse Brot)."
+     "text": "As in French, no article with jobs:\n→ Il est médecin – Er ist Arzt\n\nUnlike French:\n- most countries take none (Frankreich, but die Schweiz);\n- there is no partitive (Ich esse Brot)."
     }
    ]
   },
@@ -6844,7 +6844,7 @@
     {
      "for": "en",
      "rel": "trap",
-     "text": "False friends: Handy is a mobile phone, also means “so”, Ich will is “I want”, Gift is poison, bekommen is to get. Bridges: Haus – house, Buch – book, Mann – man."
+     "text": "False friends:\n- Handy is a mobile phone;\n- also means “so”;\n- Ich will is “I want”;\n- Gift is poison;\n- bekommen is to get.\n\nBridges: Haus – house, Buch – book, Mann – man."
     },
     {
      "for": "el",
@@ -7920,7 +7920,7 @@
     {
      "for": "en",
      "rel": "same",
-     "text": "neither … nor, either … or and both … and are weder … noch, entweder … oder and sowohl … als auch; a fronted weder also puts the verb before the subject, like a fronted neither: Weder habe ich Zeit …"
+     "text": "neither … nor, either … or and both … and are weder … noch, entweder … oder and sowohl … als auch.\n\nA fronted weder also puts the verb before the subject, like a fronted neither:\n→ Weder habe ich Zeit …"
     }
    ]
   }
