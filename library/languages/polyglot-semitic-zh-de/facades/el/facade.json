@@ -19,12 +19,12 @@
   },
   "3": {
    "total": 17999,
-   "done": 9270,
+   "done": 13319,
    "stale": 410,
-   "missing": 8319
+   "missing": 4270
   }
  },
- "built": "2026-10-11T15:54:58Z",
+ "built": "2026-10-11T16:03:22Z",
  "files": [
   "_phenomena/facades/el/ar.json",
   "_phenomena/facades/el/de.json",
