@@ -142,8 +142,8 @@ function vSlots(st, targets, makeCtl) {
     const [x, y] = rCenter(r);
     const s = { r, k, ctl: makeCtl(r, k) };
     s.pin = h('div', { class: 'vx-pin', style: st.pos(x, y) });
-    s.marker = h('span', { class: 'vx-num vx-marker', style: st.pos(x, y) }, k + 1);
-    s.row = h('div', { class: 'vx-row' }, h('span', { class: 'vx-num' }, k + 1));
+    s.marker = h('span', { class: 'vx-num vx-marker', style: st.pos(x, y) }, nf(k + 1));
+    s.row = h('div', { class: 'vx-row' }, h('span', { class: 'vx-num' }, nf(k + 1)));
     st.layer.append(s.pin, s.marker); list.append(s.row);
     return s;
   });
@@ -167,7 +167,7 @@ function vOverlap(els, stage) {
 /** Result list after checking (label / select / drag). */
 function vResults(rows) {
   return h('div', { class: 'vx-results' }, ...rows.map(({ k, r, ok, typo, given }) => h('div', { class: 'vx-res ' + (ok ? 'ok' : 'bad') },
-    h('span', { class: 'vx-num' }, k + 1), h('b', {}, ok ? '✓' : '✗'), ' ', F(r.label),
+    h('span', { class: 'vx-num' }, nf(k + 1)), h('b', {}, ok ? '✓' : '✗'), ' ', F(r.label),
     !ok ? h('span', { class: 'muted' }, ' — ' + (given ? tE('engine.vx.resYou', { given }) : tE('engine.vx.resEmpty'))) : typo ? h('span', { class: 'muted' }, ' — ' + tE('engine.vx.resTypo', { given, label: r.label })) : null,
     r.note ? h('div', { class: 'tiny', html: fmt(r.note) }) : null)));
 }
@@ -405,7 +405,7 @@ R.img_occlusion = (ex, api) => {
   const st = vStage(ex); if (st.missing) return vFail(st);
   const targets = ex.order === 'random' ? shuffle(vTargets(ex, st.regs)) : vTargets(ex, st.regs);
   targets.forEach((r, k) => { st.mask(r.id, true, 'occ'); });
-  const nums = targets.map((r, k) => { const [x, y] = rCenter(r); const n = h('span', { class: 'vx-num vx-marker always', style: st.pos(x, y) }, k + 1); st.layer.append(n); return n; });
+  const nums = targets.map((r, k) => { const [x, y] = rCenter(r); const n = h('span', { class: 'vx-num vx-marker always', style: st.pos(x, y) }, nf(k + 1)); st.layer.append(n); return n; });
   let k = 0, knew = 0; const marks = [];
   const panel = h('div', { class: 'vx-occ' });
   function focusOn() {
@@ -414,7 +414,7 @@ R.img_occlusion = (ex, api) => {
     if (k >= targets.length) return finish();
     const r = targets[k];
     const revealBtn = h('button', { class: 'btn primary', onclick: show }, '👁 ' + tE('engine.vx.reveal'));
-    panel.append(h('div', { class: 'vx-occq' }, h('span', { class: 'vx-num' }, k + 1), h('span', { html: fmt(r.q || tE('engine.vx.occQ')) })), h('div', { class: 'actions' }, revealBtn, h('span', { class: 'tiny' }, tE('engine.vx.nOfM', { n: k + 1, of: targets.length }))));
+    panel.append(h('div', { class: 'vx-occq' }, h('span', { class: 'vx-num' }, nf(k + 1)), h('span', { html: fmt(r.q || tE('engine.vx.occQ')) })), h('div', { class: 'actions' }, revealBtn, h('span', { class: 'tiny' }, tE('engine.vx.nOfM', { n: k + 1, of: targets.length }))));
     st.masks[r.id].onclick = () => !api.locked() && show();
     setTimeout(() => revealBtn.focus({ preventScroll: true }), 30);
   }
@@ -423,7 +423,7 @@ R.img_occlusion = (ex, api) => {
     st.masks[r.id].classList.add('off'); nums[k].classList.add('seen');
     panel.innerHTML = '';
     const rate = ok => { marks[k] = ok; if (ok) knew++; nums[k].classList.add(ok ? 'right' : 'wrong'); st.outline(r.id, ok ? 'right' : 'wrong'); beep(ok ? 'ok' : 'bad'); k++; focusOn(); };
-    panel.append(h('div', { class: 'vx-occq' }, h('span', { class: 'vx-num' }, k + 1), h('b', { html: fmt(r.label) }), r.note ? h('div', { class: 'tiny', html: fmt(r.note) }) : null),
+    panel.append(h('div', { class: 'vx-occq' }, h('span', { class: 'vx-num' }, nf(k + 1)), h('b', { html: fmt(r.label) }), r.note ? h('div', { class: 'tiny', html: fmt(r.note) }) : null),
       h('div', { class: 'actions' }, h('button', { class: 'btn small vx-yes', onclick: () => rate(true) }, '✓ ' + tE('engine.vx.knew')), h('button', { class: 'btn small vx-no', onclick: () => rate(false) }, '✗ ' + tE('engine.vx.didnt'))));
   }
   function finish() {

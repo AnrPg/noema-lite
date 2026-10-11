@@ -51,7 +51,7 @@ R.order = (ex, api) => {
   function draw() {
     seq.innerHTML = ''; pool.innerHTML = '';
     if (!picked.length) seq.append(h('div', { class: 'ph' }, tE('engine.ex.orderHint')));
-    picked.forEach((it, k) => seq.append(h('button', { class: 'chipx', onclick: () => { if (api.locked()) return; picked.splice(k, 1); draw(); } }, h('span', { class: 'no' }, k + 1), F(it.t))));
+    picked.forEach((it, k) => seq.append(h('button', { class: 'chipx', onclick: () => { if (api.locked()) return; picked.splice(k, 1); draw(); } }, h('span', { class: 'no' }, nf(k + 1)), F(it.t))));
     items.filter(it => !picked.includes(it)).forEach(it => pool.append(h('button', { class: 'chipx', onclick: () => { if (api.locked()) return; picked.push(it); draw(); } }, F(it.t))));
   }
   draw();
@@ -76,7 +76,7 @@ R.match = (ex, api) => {
     const used = Object.entries(link);
     Object.values(lb).forEach(b => { b.classList.remove('sel'); b.querySelector('.tag')?.remove(); b.style.borderColor = ''; });
     Object.values(rb).forEach(b => { b.querySelector('.tag')?.remove(); b.style.borderColor = ''; });
-    used.forEach(([l, r], k) => { const c = PAIR_COLORS[k % PAIR_COLORS.length]; [lb[l], rb[r]].forEach(b => { b.style.borderColor = c; b.append(h('span', { class: 'tag', style: { background: c } }, k + 1)); }); });
+    used.forEach(([l, r], k) => { const c = PAIR_COLORS[k % PAIR_COLORS.length]; [lb[l], rb[r]].forEach(b => { b.style.borderColor = c; b.append(h('span', { class: 'tag', style: { background: c } }, nf(k + 1))); }); });
     if (selL != null) lb[selL].classList.add('sel');
   }
   L.forEach(it => { lb[it.i] = h('button', { class: 'mitem', onclick: () => { if (api.locked()) return; if (link[it.i] != null) { delete link[it.i]; } selL = selL === it.i ? null : it.i; paint(); } }, F(it.t)); lcol.append(lb[it.i]); });

@@ -144,7 +144,7 @@ function practiceItems() {
     { label: t('home.mixed'), sub: t('home.mixedSub'), icon: '🎲', href: '#/practice/all' },
     { label: t('home.cards'), sub: t('home.cardsSub'), icon: '🃏', href: '#/cards', badge: dueFc ? t('home.due', { n: dueFc }) : null, tone: 4 },
     Object.keys(PB).length ? { label: t('home.drills'), sub: t('home.drillsSub'), icon: '🔧', href: '#/drills', badge: duePb ? t('home.due', { n: duePb }) : null, tone: 4 } : null,
-    { label: t('home.mistakes'), sub: t('home.mistakesSub'), icon: '🔁', href: '#/mistakes', badge: wrong || null, tone: 3 },
+    { label: t('home.mistakes'), sub: t('home.mistakesSub'), icon: '🔁', href: '#/mistakes', badge: wrong ? nf(wrong) : null, tone: 3 },
     { label: t('home.lightning'), sub: t('home.lightningSub'), icon: '⚡', href: '#/lightning' },
     '-',
     { label: SHL() ? SL('askTutor') : t('home.tutor'), sub: SHL() ? SL(window.NoemaThemes?.tutor?.()?.pl ? 'askTutorSubPl' : 'askTutorSub') : t('home.tutorSub'), icon: TUTOR.avatar, run: () => openTutor(null, 'socratic', null, { intent: INTENT.course }) }];
@@ -289,7 +289,7 @@ function chapterView(id, tab) {
       h('div', { class: 'grow' }, h('div', { class: 'num' }, SL('chOf', { n: c.num, of: COURSE.length })), h('h1', {}, c.title), c.subtitle ? h('p', { class: 'muted', style: { margin: '6px 0 0' } }, c.subtitle) : null, sourceChips(FULL_COURSE.find(x => x.id === c.id) || c)),
       h('div', { class: 'chring' }, ring((p.sr + p.ex) / 2, 76, 9), h('div', { class: 'chringc' }, pctText(Math.round((p.sr + p.ex) * 50))))),
     explainable(h('div', { class: 'mantrabox' }, h('span', {}, '🧭'), F(c.mantra)), () => ({ label: c.mantra, text: `The mental model of chapter ${c.num} "${c.title}": ${c.mantra}`, ch: c, what: 'mental model' })),   // i18n-ignore (for the AI)
-    h('div', { class: 'tabs', role: 'tablist' }, ...tabs.map(([k, l, n]) => h('button', { class: on === k ? 'on' : '', role: 'tab', 'aria-selected': String(on === k), onclick: () => go(`#/ch/${id}/${k}`) }, l, h('span', { class: 'n' }, n)))),
+    h('div', { class: 'tabs', role: 'tablist' }, ...tabs.map(([k, l, n]) => h('button', { class: on === k ? 'on' : '', role: 'tab', 'aria-selected': String(on === k), onclick: () => go(`#/ch/${id}/${k}`) }, l, h('span', { class: 'n' }, nf(n))))),
     body);
   animateRings(v);
   if (on === 'learn') {
@@ -299,7 +299,7 @@ function chapterView(id, tab) {
       h('div', { class: 'path' }, ...c.sections.map((s, i) => {
         const nEx = c.exercises.filter(e => e.section === s.id), nOk = nEx.filter(e => solved(e.id)).length;
         return h('button', { class: 'node' + (S.read[s.id] ? ' done' : ''), style: { animationDelay: i * 35 + 'ms' }, onclick: () => go('#/s/' + s.id) },
-          h('div', { class: 'dot' }, S.read[s.id] ? '✓' : i + 1), h('div', { class: 'grow' }, h('b', {}, s.title), h('small', {}, s.hook || '')),
+          h('div', { class: 'dot' }, S.read[s.id] ? '✓' : nf(i + 1)), h('div', { class: 'grow' }, h('b', {}, s.title), h('small', {}, s.hook || '')),
           h('div', { class: 'meta' }, newBadge(s), h('span', { class: 'pill' + (nOk === nEx.length && nEx.length ? ' c' : '') }, `🎯 ${nf(nOk)}/${nf(nEx.length)}`)));
       })),
       h('div', { class: 'row', style: { marginTop: '22px' } },
@@ -331,9 +331,9 @@ function chapterPractice(c) {
   return choiceList([
     c.exercises.length ? { label: SL('round10'), sub: SL('solvedOf', { n: ok, of: c.exercises.length }), icon: '🎯', cls: 'main', run: () => startRun(c.exercises, { title: '🎯 ' + chTitle(c.num, c.title), count: 10, back: `#/ch/${id}/practice` }) } : null,
     c.exercises.length ? { label: SL('chooseRound'), sub: SL('chooseRoundSub'), icon: '🎛️', href: `#/ch/${id}/filters` } : null,
-    c.flashcards.length ? { label: t('home.cards'), sub: t('home.cardsSub'), icon: '🃏', href: `#/ch/${id}/cards`, badge: dueC ? t('home.due', { n: dueC }) : c.flashcards.length } : null,
-    c.debug.length ? { label: t('home.drills'), sub: t('home.drillsSub'), icon: '🔧', href: `#/ch/${id}/debug`, badge: dueD ? t('home.due', { n: dueD }) : c.debug.length } : null,
-    wrong.length ? { label: t('home.mistakes'), sub: t('home.mistakesSub'), icon: '🔁', badge: wrong.length, run: () => startRun(wrong, { title: '🔁 ' + tE('engine.run.chMistakes', { num: c.num }), count: wrong.length, back: `#/ch/${id}/practice` }) } : null,
+    c.flashcards.length ? { label: t('home.cards'), sub: t('home.cardsSub'), icon: '🃏', href: `#/ch/${id}/cards`, badge: dueC ? t('home.due', { n: dueC }) : nf(c.flashcards.length) } : null,
+    c.debug.length ? { label: t('home.drills'), sub: t('home.drillsSub'), icon: '🔧', href: `#/ch/${id}/debug`, badge: dueD ? t('home.due', { n: dueD }) : nf(c.debug.length) } : null,
+    wrong.length ? { label: t('home.mistakes'), sub: t('home.mistakesSub'), icon: '🔁', badge: nf(wrong.length), run: () => startRun(wrong, { title: '🔁 ' + tE('engine.run.chMistakes', { num: c.num }), count: wrong.length, back: `#/ch/${id}/practice` }) } : null,
     c.exercises.length ? { label: S.boss[id] ? SL('bossBeaten') : SL('boss'), sub: SL('bossSub'), icon: S.boss[id] ? '🏆' : '👾', href: `#/boss/${id}` } : null,
     { label: SL('chSocratic'), sub: SL('chSocraticSub'), icon: TUTOR.avatar, run: () => openTutor({ kind: 'chapter', id }, 'socratic', null, { intent: INTENT.chSocratic }) }]);
 }
@@ -553,7 +553,7 @@ function mistakesView() {
   view(backBtn(t('nav.home'), HOME()), h('h1', {}, t('view.mistakes')),
     h('p', { class: 'muted' }, tE('engine.gym.intro')),
     list.length ? h('div', {}, h('div', { class: 'row', style: { margin: '8px 0 18px' } }, h('button', { class: 'btn primary', onclick: () => startRun(list, { title: t('view.mistakes'), count: 15, back: '#/mistakes' }) }, '▶ ' + tE('engine.gym.train', { n: Math.min(15, list.length), of: list.length }))),
-      h('div', { style: { display: 'grid', gap: '8px' } }, ...COURSE.map(c => { const n = list.filter(e => e._ch === c).length; return n ? h('button', { class: 'node', onclick: () => startRun(list.filter(e => e._ch === c), { title: '🔁 ' + tE('engine.run.chMistakes', { num: c.num }), count: n, back: '#/mistakes' }) }, h('div', { class: 'dot' }, c.emoji), h('div', { class: 'grow' }, h('b', {}, c.title)), h('span', { class: 'pill' }, n)) : null; })))
+      h('div', { style: { display: 'grid', gap: '8px' } }, ...COURSE.map(c => { const n = list.filter(e => e._ch === c).length; return n ? h('button', { class: 'node', onclick: () => startRun(list.filter(e => e._ch === c), { title: '🔁 ' + tE('engine.run.chMistakes', { num: c.num }), count: n, back: '#/mistakes' }) }, h('div', { class: 'dot' }, c.emoji), h('div', { class: 'grow' }, h('b', {}, c.title)), h('span', { class: 'pill' }, nf(n))) : null; })))
       : h('div', { class: 'empty' }, h('div', { class: 'e' }, '✨'), h('p', {}, tE('engine.gym.empty'))));
 }
 function mixedView() {
@@ -726,7 +726,7 @@ function drillView(id) {
     if (g) stage.append(h('div', { class: 'fb ai' }, h('div', { class: 'row' }, h('span', { class: 'score', style: { background: g.score >= 70 ? 'var(--ok)' : g.score >= 45 ? 'var(--warn)' : 'var(--bad)' } }, g.score | 0), h('div', { class: 'grow' }, md(g.feedback)))));
     stage.append(
       h('div', { class: 'ask', style: { marginTop: '18px' } }, h('div', { class: 'hd' }, '🧠 ' + tE('engine.drill.checklist'), h('span', { class: 'tiny', style: { marginLeft: 'auto' } }, tE('engine.drill.tick'))),
-        h('div', { class: 'rubric' }, ...d.askYourself.map((q, i) => h('label', {}, checks[i], h('span', {}, h('b', {}, (i + 1) + '. '), F(q)))))),
+        h('div', { class: 'rubric' }, ...d.askYourself.map((q, i) => h('label', {}, checks[i], h('span', {}, h('b', {}, nf(i + 1) + '. '), F(q)))))),
       d.mnemonic ? h('div', { style: { marginTop: '14px' } }, h('div', { class: 'tiny', style: { fontWeight: 700 } }, tE('engine.drill.hook')), h('div', { class: 'mnemo', html: fmt(d.mnemonic) })) : null,
       h('h3', { style: { margin: '22px 0 10px' } }, '🛠️ ' + tE('engine.drill.steps')), h('div', { class: 'steps' }, ...d.steps.map((s, i) => h('div', { class: 'stepc' }, h('b', { html: `${i + 1}. ` + fmt(s.do) }), s.why ? h('div', { class: 'tiny', style: { color: 'var(--ink2)', fontSize: '14px' }, html: '↳ ' + fmt(s.why) }) : null, s.code ? h('div', { style: { marginTop: '8px' } }, codeBlock(s.code, guessLang(s.code))) : null))),
       h('h3', { style: { margin: '22px 0 10px' } }, '🎯 ' + tE('engine.drill.causes')), h('ul', {}, ...d.rootCauses.map(r => h('li', { html: fmt(r) }))),
