@@ -27,6 +27,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Kaper"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -184,6 +197,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Horngurke"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Gurke)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -334,6 +358,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Limabohne"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Bohne)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -476,6 +511,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Wirsings"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -631,6 +679,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Guarbohne"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Bohne)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -775,6 +834,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Noriblatts"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (das Blatt)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -920,6 +990,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Goabohne"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Bohne)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -1052,6 +1133,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Tomatillo"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -1190,6 +1284,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Spargelbohne"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Bohne)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -1312,6 +1417,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Romanescos"
+    ],
+    "number": "singular only",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a mass noun, month or name of a substance: no diminutive in use"
     }
    },
    "forms": {
@@ -1447,6 +1565,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Cayennepfeffers"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (der Pfeffer)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -1592,6 +1721,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Meerkohls"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (der Kohl)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -1717,6 +1857,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Habanero"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -1849,6 +2002,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Wakame-Alge"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Alge)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -1987,6 +2151,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Schlangenhaargurke"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Gurke)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -2119,6 +2294,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Kombu"
+    ],
+    "number": "singular only",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a mass noun, month or name of a substance: no diminutive in use"
     }
    },
    "forms": {
@@ -2255,6 +2443,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Meersalats"
+    ],
+    "number": "singular only",
+    "genderCue": "compound: the last part decides (der Salat)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a mass noun, month or name of a substance: no diminutive in use"
     }
    },
    "forms": {
@@ -2385,6 +2584,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Lappentangs"
+    ],
+    "number": "singular only",
+    "genderCue": "compound: the last part decides (der Tang)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a mass noun, month or name of a substance: no diminutive in use"
     }
    },
    "forms": {
@@ -2499,6 +2709,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": {
+     "none": "plural only: no singular"
+    },
+    "number": "plural only",
+    "genderCue": {
+     "none": "plural only: no gender"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "plural only: no diminutive"
     }
    },
    "forms": {
@@ -2621,6 +2844,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Patissons"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -2753,6 +2989,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Hijiki-Alge"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Alge)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -2885,6 +3132,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Stängelkohls"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (der Kohl)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -3027,6 +3285,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Spaghettikürbisses"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (der Kürbis)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -3154,6 +3423,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Zucchiniblüte"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Blüte)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -3294,6 +3574,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Spitzkohls"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (der Kohl)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -3427,6 +3718,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Maiskölbchens"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-chen, -lein: a diminutive → das (even for persons: das Mädchen)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "itself a diminutive (der Kolben → das Kölbchen)"
     }
    },
    "forms": {
@@ -3564,6 +3866,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Eichelkürbisses"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (der Kürbis)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {
@@ -3696,6 +4009,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Zuckererbse"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Erbse)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a vegetable or plant name: no diminutive in use"
     }
    },
    "forms": {

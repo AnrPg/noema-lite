@@ -11,6 +11,15 @@
     "comparison": "regular",
     "stem": {
      "none": "the endings are added to the base form (weiß → weiße)"
+    },
+    "degrees": [
+     "weißer",
+     "am weißesten"
+    ],
+    "endings": "takes endings",
+    "use": "attributive and predicative",
+    "governs": {
+     "none": "no complement of its own"
     }
    },
    "forms": {
@@ -217,6 +226,15 @@
     "comparison": "umlaut",
     "stem": {
      "none": "the endings are added to the base form (schwarz → schwarze)"
+    },
+    "degrees": [
+     "schwärzer / schwarzer",
+     "am schwärzesten / am schwarzesten"
+    ],
+    "endings": "takes endings",
+    "use": "attributive and predicative",
+    "governs": {
+     "none": "no complement of its own"
     }
    },
    "forms": {
@@ -466,6 +484,15 @@
     "comparison": "umlaut",
     "stem": {
      "none": "the endings are added to the base form (rot → rote)"
+    },
+    "degrees": [
+     "röter / roter",
+     "am rötesten / am rotesten"
+    ],
+    "endings": "takes endings",
+    "use": "attributive and predicative",
+    "governs": {
+     "none": "no complement of its own"
     }
    },
    "forms": {
@@ -708,6 +735,15 @@
     "comparison": "regular",
     "stem": {
      "none": "the endings are added to the base form (blau → blaue)"
+    },
+    "degrees": [
+     "blauer",
+     "am blauesten / am blausten"
+    ],
+    "endings": "takes endings",
+    "use": "attributive and predicative",
+    "governs": {
+     "none": "no complement of its own"
     }
    },
    "forms": {
@@ -938,6 +974,15 @@
     "comparison": "regular",
     "stem": {
      "none": "the endings are added to the base form (grün → grüne)"
+    },
+    "degrees": [
+     "grüner",
+     "am grünsten"
+    ],
+    "endings": "takes endings",
+    "use": "attributive and predicative",
+    "governs": {
+     "none": "no complement of its own"
     }
    },
    "forms": {
@@ -1158,6 +1203,15 @@
     "comparison": "regular",
     "stem": {
      "none": "the endings are added to the base form (gelb → gelbe)"
+    },
+    "degrees": [
+     "gelber",
+     "am gelbsten"
+    ],
+    "endings": "takes endings",
+    "use": "attributive and predicative",
+    "governs": {
+     "none": "no complement of its own"
     }
    },
    "forms": {
@@ -1344,6 +1398,15 @@
     "comparison": "regular",
     "stem": {
      "none": "the endings are added to the base form (braun → braune)"
+    },
+    "degrees": [
+     "brauner",
+     "am braunsten"
+    ],
+    "endings": "takes endings",
+    "use": "attributive and predicative",
+    "governs": {
+     "none": "no complement of its own"
     }
    },
    "forms": {
@@ -1538,6 +1601,15 @@
     "comparison": "regular",
     "stem": {
      "none": "the endings are added to the base form (grau → graue)"
+    },
+    "degrees": [
+     "grauer",
+     "am grauesten / am grausten"
+    ],
+    "endings": "takes endings",
+    "use": "attributive and predicative",
+    "governs": {
+     "none": "no complement of its own"
     }
    },
    "forms": {
@@ -1742,6 +1814,14 @@
     "comparison": "not compared",
     "stem": {
      "none": "takes no endings (ein rosa Kleid)"
+    },
+    "degrees": {
+     "none": "not compared"
+    },
+    "endings": "invariable",
+    "use": "attributive and predicative",
+    "governs": {
+     "none": "no complement of its own"
     }
    },
    "forms": {
@@ -1859,6 +1939,14 @@
     "comparison": "not compared",
     "stem": {
      "none": "takes no endings (ein rosa Kleid)"
+    },
+    "degrees": {
+     "none": "not compared"
+    },
+    "endings": "invariable",
+    "use": "attributive and predicative",
+    "governs": {
+     "none": "no complement of its own"
     }
    },
    "forms": {
@@ -1993,6 +2081,14 @@
     "comparison": "not compared",
     "stem": {
      "none": "takes no endings (ein rosa Kleid)"
+    },
+    "degrees": {
+     "none": "not compared"
+    },
+    "endings": "invariable",
+    "use": "attributive and predicative",
+    "governs": {
+     "none": "no complement of its own"
     }
    },
    "forms": {
@@ -2104,6 +2200,15 @@
     "comparison": "regular",
     "stem": {
      "none": "the endings are added to the base form (hell → helle)"
+    },
+    "degrees": [
+     "heller",
+     "am hellsten"
+    ],
+    "endings": "takes endings",
+    "use": "attributive and predicative",
+    "governs": {
+     "none": "no complement of its own"
     }
    },
    "forms": {
@@ -2327,7 +2432,16 @@
    ],
    "features": {
     "comparison": "regular",
-    "stem": "dunkl-"
+    "stem": "dunkl-",
+    "degrees": [
+     "dunkler",
+     "am dunkelsten"
+    ],
+    "endings": "takes endings",
+    "use": "attributive and predicative",
+    "governs": {
+     "none": "no complement of its own"
+    }
    },
    "forms": {
     "ADJ": "dunkel",
@@ -2671,6 +2785,12 @@
    "features": {
     "comparison": {
      "none": "itself the comparative of viel (viel – mehr – am meisten)"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -2779,6 +2899,12 @@
    "features": {
     "comparison": {
      "none": "itself the superlative of viel (viel – mehr – am meisten)"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },

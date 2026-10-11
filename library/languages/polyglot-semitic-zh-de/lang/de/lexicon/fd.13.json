@@ -51,6 +51,31 @@
     "motion": "on foot",
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "participle": "ge-",
+    "imperative": [
+     "geh(e)!",
+     "geht!",
+     "gehen Sie!"
+    ],
+    "konj2": [
+     {
+      "form": "ginge",
+      "use": "common in speech"
+     }
+    ],
+    "endingAdjust": {
+     "none": "the endings are added regularly"
+    },
+    "spokenPast": "Perfekt",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": {
+     "none": "the verb marks no direction towards or away from the speaker"
+    },
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
     }
    },
    "forms": {
@@ -325,6 +350,31 @@
     "motion": "any means",
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "participle": "ge-",
+    "imperative": [
+     "komm(e)!",
+     "kommt!",
+     "kommen Sie!"
+    ],
+    "konj2": [
+     {
+      "form": "käme",
+      "use": "common in speech"
+     }
+    ],
+    "endingAdjust": {
+     "none": "the endings are added regularly"
+    },
+    "spokenPast": "Perfekt",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": {
+     "none": "the verb marks no direction towards or away from the speaker"
+    },
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
     }
    },
    "forms": {
@@ -590,6 +640,31 @@
     "motion": "on foot",
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "participle": "ge-",
+    "imperative": [
+     "lauf(e)!",
+     "lauft!",
+     "laufen Sie!"
+    ],
+    "konj2": [
+     {
+      "form": "liefe",
+      "use": "mostly written"
+     }
+    ],
+    "endingAdjust": {
+     "none": "the endings are added regularly"
+    },
+    "spokenPast": "Perfekt",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": {
+     "none": "the verb marks no direction towards or away from the speaker"
+    },
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
     }
    },
    "forms": {
@@ -831,6 +906,31 @@
     "motion": "on foot",
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "participle": "ge-",
+    "imperative": [
+     "renn(e)!",
+     "rennt!",
+     "rennen Sie!"
+    ],
+    "konj2": [
+     {
+      "form": "rennte",
+      "use": "rare (würde + infinitive instead)"
+     }
+    ],
+    "endingAdjust": {
+     "none": "the endings are added regularly"
+    },
+    "spokenPast": "Perfekt",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": {
+     "none": "the verb marks no direction towards or away from the speaker"
+    },
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
     }
    },
    "forms": {
@@ -1035,6 +1135,31 @@
     "motion": "by vehicle",
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "participle": "ge-",
+    "imperative": [
+     "fahr(e)!",
+     "fahrt!",
+     "fahren Sie!"
+    ],
+    "konj2": [
+     {
+      "form": "führe",
+      "use": "rare (würde + infinitive instead)"
+     }
+    ],
+    "endingAdjust": {
+     "none": "the endings are added regularly"
+    },
+    "spokenPast": "Perfekt",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": {
+     "none": "the verb marks no direction towards or away from the speaker"
+    },
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
     }
    },
    "forms": {
@@ -1254,6 +1379,26 @@
     "motion": "any means",
     "senseForms": {
      "none": "one meaning"
+    },
+    "participle": "ge-",
+    "imperative": [
+     "reis(e)!",
+     "reist!",
+     "reisen Sie!"
+    ],
+    "konj2": {
+     "none": "a weak verb: the Konjunktiv II is the Präteritum form (reiste); speech uses würde + infinitive"
+    },
+    "endingAdjust": "s-sound stem: du -t (du heißt)",
+    "spokenPast": "Perfekt",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": {
+     "none": "the verb marks no direction towards or away from the speaker"
+    },
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
     }
    },
    "forms": {
@@ -1436,6 +1581,31 @@
     "motion": "any means",
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "participle": "ge- after the particle",
+    "imperative": [
+     "komm(e) zurück!",
+     "kommt zurück!",
+     "kommen Sie zurück!"
+    ],
+    "konj2": [
+     {
+      "form": "käme zurück",
+      "use": "common in speech"
+     }
+    ],
+    "endingAdjust": {
+     "none": "the endings are added regularly"
+    },
+    "spokenPast": "Perfekt",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": {
+     "none": "the verb marks no direction towards or away from the speaker"
+    },
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
     }
    },
    "forms": {
@@ -1638,6 +1808,29 @@
     "motion": "any means",
     "senseForms": {
      "none": "one meaning"
+    },
+    "participle": "ge- after the particle",
+    "imperative": [
+     "komm(e) herein!",
+     "kommt herein!",
+     "kommen Sie herein!"
+    ],
+    "konj2": [
+     {
+      "form": "käme herein",
+      "use": "common in speech"
+     }
+    ],
+    "endingAdjust": {
+     "none": "the endings are added regularly"
+    },
+    "spokenPast": "Perfekt",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": "her (towards the speaker)",
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
     }
    },
    "forms": {
@@ -1822,6 +2015,29 @@
     "motion": "on foot",
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "participle": "ge- after the particle",
+    "imperative": [
+     "geh(e) hinein!",
+     "geht hinein!",
+     "gehen Sie hinein!"
+    ],
+    "konj2": [
+     {
+      "form": "ginge hinein",
+      "use": "mostly written"
+     }
+    ],
+    "endingAdjust": {
+     "none": "the endings are added regularly"
+    },
+    "spokenPast": "Perfekt",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": "hin (away from the speaker)",
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
     }
    },
    "forms": {
@@ -2006,6 +2222,31 @@
     "motion": "on foot",
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "participle": "ge- after the particle",
+    "imperative": [
+     "geh(e) weg!",
+     "geht weg!",
+     "gehen Sie weg!"
+    ],
+    "konj2": [
+     {
+      "form": "ginge weg",
+      "use": "common in speech"
+     }
+    ],
+    "endingAdjust": {
+     "none": "the endings are added regularly"
+    },
+    "spokenPast": "Perfekt",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": {
+     "none": "the verb marks no direction towards or away from the speaker"
+    },
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
     }
    },
    "forms": {
@@ -2208,6 +2449,29 @@
     "motion": "any means",
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "participle": "no ge- (unstressed prefix)",
+    "imperative": [
+     "verlass(e)!",
+     "verlasst!",
+     "verlassen Sie!"
+    ],
+    "konj2": [
+     {
+      "form": "verließe",
+      "use": "mostly written"
+     }
+    ],
+    "endingAdjust": "s-sound stem: du -t (du heißt)",
+    "spokenPast": "Perfekt",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": {
+     "none": "the verb marks no direction towards or away from the speaker"
+    },
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
     }
    },
    "forms": {
@@ -2419,6 +2683,31 @@
     "motion": "any means",
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "participle": "ge- after the particle",
+    "imperative": [
+     "komm(e) an!",
+     "kommt an!",
+     "kommen Sie an!"
+    ],
+    "konj2": [
+     {
+      "form": "käme an",
+      "use": "common in speech"
+     }
+    ],
+    "endingAdjust": {
+     "none": "the endings are added regularly"
+    },
+    "spokenPast": "Perfekt",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": {
+     "none": "the verb marks no direction towards or away from the speaker"
+    },
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
     }
    },
    "forms": {
@@ -2640,6 +2929,31 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "participle": "ge-",
+    "imperative": [
+     "bleib(e)!",
+     "bleibt!",
+     "bleiben Sie!"
+    ],
+    "konj2": [
+     {
+      "form": "bliebe",
+      "use": "mostly written"
+     }
+    ],
+    "endingAdjust": {
+     "none": "the endings are added regularly"
+    },
+    "spokenPast": "Perfekt",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": {
+     "none": "the verb marks no direction towards or away from the speaker"
+    },
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
     }
    },
    "forms": {
@@ -2862,6 +3176,26 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "participle": "ge-",
+    "imperative": [
+     "warte!",
+     "wartet!",
+     "warten Sie!"
+    ],
+    "konj2": {
+     "none": "a weak verb: the Konjunktiv II is the Präteritum form (wartete); speech uses würde + infinitive"
+    },
+    "endingAdjust": "-e- inserted (du wartest, er wartet)",
+    "spokenPast": "Perfekt",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": {
+     "none": "the verb marks no direction towards or away from the speaker"
+    },
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
     }
    },
    "forms": {
@@ -3140,6 +3474,10 @@
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": "hin (away from the speaker)",
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -3264,6 +3602,10 @@
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": "her (towards the speaker)",
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -3296,6 +3638,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Busses"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -3455,6 +3810,20 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Zuges",
+     "des Zugs"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -3685,6 +4054,18 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Flugzeugs",
+     "des Flugzeuges"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (das Zeug)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -3837,6 +4218,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Taxis"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -3982,6 +4376,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Autos"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -4127,6 +4534,18 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Fahrrads",
+     "des Fahrrades"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (das Rad)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -4273,7 +4692,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "genitive": [
+     "des Schiffes",
+     "des Schiffs"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": "das Schiffchen"
    },
    "forms": {
     "N;NOM;SG": "Schiff",
@@ -4447,6 +4878,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Bootes",
+     "des Boots"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -4684,6 +5129,12 @@
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -4728,6 +5179,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Fahrkarte"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (die Karte)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -4885,6 +5347,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Tickets"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {

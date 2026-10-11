@@ -40,7 +40,12 @@
       "form": "aufs",
       "article": "das"
      }
-    ]
+    ],
+    "pronominalAdverb": [
+     "darauf (drauf)",
+     "worauf"
+    ],
+    "position": "before the noun"
    },
    "ref": {
     "src": "kaikki",
@@ -235,7 +240,12 @@
       "article": "das",
       "register": "colloquial"
      }
-    ]
+    ],
+    "pronominalAdverb": [
+     "darunter (drunter)",
+     "worunter"
+    ],
+    "position": "before the noun"
    },
    "ref": {
     "src": "kaikki",
@@ -366,7 +376,11 @@
     ],
     "contractions": {
      "none": "no merged forms with the article"
-    }
+    },
+    "pronominalAdverb": [
+     "daneben"
+    ],
+    "position": "before the noun"
    },
    "ref": {
     "src": "kaikki",
@@ -507,7 +521,12 @@
       "article": "das",
       "register": "colloquial"
      }
-    ]
+    ],
+    "pronominalAdverb": [
+     "davor",
+     "wovor"
+    ],
+    "position": "before the noun"
    },
    "ref": {
     "src": "kaikki",
@@ -689,7 +708,11 @@
       "article": "das",
       "register": "colloquial"
      }
-    ]
+    ],
+    "pronominalAdverb": [
+     "dahinter"
+    ],
+    "position": "before the noun"
    },
    "ref": {
     "src": "kaikki",
@@ -827,7 +850,11 @@
     ],
     "contractions": {
      "none": "no merged forms with the article"
-    }
+    },
+    "pronominalAdverb": [
+     "dazwischen"
+    ],
+    "position": "before the noun"
    },
    "ref": {
     "src": "kaikki",
@@ -1068,7 +1095,13 @@
     "comparison": [
      "näher",
      "am nächsten"
-    ]
+    ],
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
+    }
    }
   },
   {
@@ -1182,6 +1215,12 @@
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -1343,7 +1382,13 @@
     "comparison": [
      "weiter",
      "am weitesten"
-    ]
+    ],
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
+    }
    }
   },
   {
@@ -1448,6 +1493,12 @@
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -1561,6 +1612,12 @@
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -1701,6 +1758,12 @@
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -1829,6 +1892,12 @@
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -1861,6 +1930,17 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Küche"
+    ],
+    "number": "singular and plural",
+    "genderCue": "most nouns in -e are feminine (die Lampe)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -2013,6 +2093,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Badezimmers"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (das Zimmer)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -2170,7 +2261,21 @@
       ],
       "note": "uninflected before a place name, no plural: in Bad Ems"
      }
-    ]
+    ],
+    "genitive": [
+     "des Bades",
+     "des Bads"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
+    }
    },
    "forms": {
     "N;NOM;SG": "Bad",
@@ -2353,6 +2458,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Schlafzimmers"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (das Zimmer)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -2489,6 +2605,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Wohnzimmers"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (das Zimmer)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -2617,7 +2744,18 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "genitive": [
+     "des Gartens"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": "das Gärtchen"
    },
    "forms": {
     "N;NOM;SG": "Garten",
@@ -2786,6 +2924,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Bodens"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -2972,6 +3123,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Fußbodens"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (der Boden)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -3094,7 +3256,16 @@
     },
     "senseForms": {
      "none": "one meaning"
-    }
+    },
+    "genitive": [
+     "der Treppe"
+    ],
+    "number": "singular and plural",
+    "genderCue": "most nouns in -e are feminine (die Lampe)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": "das Treppchen (also: the winners’ podium)"
    },
    "forms": {
     "N;NOM;SG": "Treppe",
@@ -3228,6 +3399,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Regals"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -3355,6 +3539,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Sofas"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -3489,6 +3686,18 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Kühlschranks",
+     "des Kühlschrankes"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (der Schrank)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {

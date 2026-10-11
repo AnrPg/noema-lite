@@ -37,7 +37,18 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "genitive": [
+     "des Hauses"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": "das Häuschen"
    },
    "forms": {
     "N;NOM;SG": "Haus",
@@ -246,6 +257,17 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Wohnung"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-ung → die",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -398,6 +420,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Zimmers"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -560,7 +595,18 @@
     },
     "senseForms": {
      "none": "one meaning"
-    }
+    },
+    "genitive": [
+     "der Tür"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": "das Türchen"
    },
    "forms": {
     "N;NOM;SG": "Tür",
@@ -739,6 +785,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Fensters"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -908,6 +967,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Wand"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -1083,7 +1155,18 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "genitive": [
+     "des Tisches"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": "das Tischchen"
    },
    "forms": {
     "N;NOM;SG": "Tisch",
@@ -1266,7 +1349,18 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "genitive": [
+     "des Stuhles"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": "das Stühlchen"
    },
    "forms": {
     "N;NOM;SG": "Stuhl",
@@ -1455,7 +1549,18 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "genitive": [
+     "des Bettes"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": "das Bettchen"
    },
    "forms": {
     "N;NOM;SG": "Bett",
@@ -1630,7 +1735,18 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "genitive": [
+     "des Schrankes"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": "das Schränkchen"
    },
    "forms": {
     "N;NOM;SG": "Schrank",
@@ -1787,7 +1903,16 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "genitive": [
+     "der Lampe"
+    ],
+    "number": "singular and plural",
+    "genderCue": "most nouns in -e are feminine (die Lampe)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": "das Lämpchen"
    },
    "forms": {
     "N;NOM;SG": "Lampe",
@@ -1956,7 +2081,18 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "genitive": [
+     "des Buches"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": "das Büchlein"
    },
    "forms": {
     "N;NOM;SG": "Buch",
@@ -2142,6 +2278,19 @@
     ],
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Stiftes"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -2317,6 +2466,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Papiers"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -2493,6 +2655,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Telefons"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -2652,6 +2827,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Handys"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -2795,6 +2983,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Schlüssels"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -2948,7 +3149,16 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "genitive": [
+     "der Tasche"
+    ],
+    "number": "singular and plural",
+    "genderCue": "most nouns in -e are feminine (die Lampe)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": "das Täschchen"
    },
    "forms": {
     "N;NOM;SG": "Tasche",
@@ -3121,7 +3331,16 @@
     },
     "senseForms": {
      "none": "one meaning"
-    }
+    },
+    "genitive": [
+     "der Tasse"
+    ],
+    "number": "singular and plural",
+    "genderCue": "most nouns in -e are feminine (die Lampe)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": "das Tässchen"
    },
    "forms": {
     "N;NOM;SG": "Tasse",
@@ -3294,7 +3513,18 @@
       ],
       "note": "the material: no plural, often without an article (aus Glas)"
      }
-    ]
+    ],
+    "genitive": [
+     "des Glases"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": "das Gläschen"
    },
    "forms": {
     "N;NOM;SG": "Glas",
@@ -3475,6 +3705,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Tellers"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {

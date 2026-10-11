@@ -28,6 +28,17 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Kindheit"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-heit → die",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a time noun: no diminutive"
     }
    },
    "forms": {
@@ -181,6 +192,18 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Spielzeugs",
+     "des Spielzeuges"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (das Zeug)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -328,7 +351,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "genitive": [
+     "des Spiels",
+     "des Spieles"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": "das Spielchen (colloquial: a quick game)"
    },
    "forms": {
     "N;NOM;SG": "Spiel",
@@ -533,6 +568,28 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "participle": "ge-",
+    "imperative": [
+     "spiel(e)!",
+     "spielt!",
+     "spielen Sie!"
+    ],
+    "konj2": {
+     "none": "a weak verb: the Konjunktiv II is the Präteritum form (spielte); speech uses würde + infinitive"
+    },
+    "endingAdjust": {
+     "none": "the endings are added regularly"
+    },
+    "spokenPast": "Perfekt",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": {
+     "none": "the verb marks no direction towards or away from the speaker"
+    },
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
     }
    },
    "forms": {
@@ -709,6 +766,29 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "participle": "ge- after the particle",
+    "imperative": [
+     "wachs(e) auf!",
+     "wachst auf!",
+     "wachsen Sie auf!"
+    ],
+    "konj2": [
+     {
+      "form": "wüchse auf",
+      "use": "rare (würde + infinitive instead)"
+     }
+    ],
+    "endingAdjust": "s-sound stem: du -t (du heißt)",
+    "spokenPast": "Perfekt",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": {
+     "none": "the verb marks no direction towards or away from the speaker"
+    },
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
     }
    },
    "forms": {
@@ -901,6 +981,26 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "participle": "no ge- (unstressed prefix)",
+    "imperative": [
+     "erinnere dich!",
+     "erinnert euch!",
+     "erinnern Sie sich!"
+    ],
+    "konj2": {
+     "none": "a weak verb: the Konjunktiv II is the Präteritum form (erinnerte); speech uses würde + infinitive"
+    },
+    "endingAdjust": "-ern / -eln stem (wir erinnern, ich erinnere)",
+    "spokenPast": "Perfekt",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": {
+     "none": "the verb marks no direction towards or away from the speaker"
+    },
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
     }
    },
    "forms": {
@@ -1076,6 +1176,29 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "participle": "no ge- (unstressed prefix)",
+    "imperative": [
+     "vergiss!",
+     "vergesst!",
+     "vergessen Sie!"
+    ],
+    "konj2": [
+     {
+      "form": "vergäße",
+      "use": "mostly written"
+     }
+    ],
+    "endingAdjust": "s-sound stem: du -t (du heißt)",
+    "spokenPast": "Perfekt",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": {
+     "none": "the verb marks no direction towards or away from the speaker"
+    },
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
     }
    },
    "forms": {
@@ -1259,6 +1382,17 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Kindergartens"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (der Garten)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -1393,6 +1527,21 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Nachbarn",
+     "des Nachbars"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Nachbarin",
+      "lexeme": "de:Nachbarin"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -1550,6 +1699,20 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Nachbarin"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-in: a female person → die",
+    "pair": [
+     {
+      "form": "der Nachbar",
+      "lexeme": "de:Nachbar"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -1681,6 +1844,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": {
+     "none": "plural only: no singular"
+    },
+    "number": "plural only",
+    "genderCue": {
+     "none": "plural only: no gender"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "plural only: no diminutive"
     }
    },
    "forms": {
@@ -1788,6 +1964,12 @@
    "features": {
     "comparison": {
      "none": "itself the comparative of früh (earlier); in this meaning not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    },
    "ref": {

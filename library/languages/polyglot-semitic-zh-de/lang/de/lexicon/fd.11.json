@@ -40,7 +40,12 @@
       "article": "das",
       "lexeme": "de:ins"
      }
-    ]
+    ],
+    "pronominalAdverb": [
+     "darin (drin)",
+     "worin"
+    ],
+    "position": "before the noun"
    },
    "ref": {
     "src": "kaikki",
@@ -230,7 +235,12 @@
       "article": "das",
       "lexeme": "de:ans"
      }
-    ]
+    ],
+    "pronominalAdverb": [
+     "daran (dran)",
+     "woran"
+    ],
+    "position": "before the noun"
    },
    "ref": {
     "src": "kaikki",
@@ -433,7 +443,12 @@
       "article": "dem",
       "lexeme": "de:beim"
      }
-    ]
+    ],
+    "pronominalAdverb": [
+     "dabei",
+     "wobei"
+    ],
+    "position": "before the noun"
    },
    "ref": {
     "src": "kaikki",
@@ -618,7 +633,12 @@
       "article": "der",
       "lexeme": "de:zur"
      }
-    ]
+    ],
+    "pronominalAdverb": [
+     "dazu",
+     "wozu"
+    ],
+    "position": "before the noun"
    },
    "ref": {
     "src": "kaikki",
@@ -813,7 +833,12 @@
     ],
     "contractions": {
      "none": "no merged forms with the article"
-    }
+    },
+    "pronominalAdverb": [
+     "danach",
+     "wonach"
+    ],
+    "position": "before; after in some phrases"
    },
    "ref": {
     "src": "kaikki",
@@ -963,7 +988,12 @@
     ],
     "contractions": {
      "none": "no merged forms with the article"
-    }
+    },
+    "pronominalAdverb": [
+     "daraus (draus)",
+     "woraus"
+    ],
+    "position": "before the noun"
    },
    "ref": {
     "src": "kaikki",
@@ -1143,7 +1173,12 @@
       "article": "dem",
       "lexeme": "de:vom"
      }
-    ]
+    ],
+    "pronominalAdverb": [
+     "davon",
+     "wovon"
+    ],
+    "position": "before the noun"
    },
    "ref": {
     "src": "kaikki",
@@ -1289,7 +1324,12 @@
     ],
     "contractions": {
      "none": "no merged forms with the article"
-    }
+    },
+    "pronominalAdverb": [
+     "damit",
+     "womit"
+    ],
+    "position": "before the noun"
    },
    "ref": {
     "src": "kaikki",
@@ -1402,7 +1442,11 @@
     ],
     "contractions": {
      "none": "no merged forms with the article"
-    }
+    },
+    "pronominalAdverb": {
+     "none": "no da- / wo- form: ohne das, ohne es"
+    },
+    "position": "before the noun"
    },
    "ref": {
     "src": "kaikki",
@@ -1519,7 +1563,12 @@
       "form": "fürs",
       "article": "das"
      }
-    ]
+    ],
+    "pronominalAdverb": [
+     "dafür",
+     "wofür"
+    ],
+    "position": "before the noun"
    },
    "ref": {
     "src": "kaikki",
@@ -1675,7 +1724,12 @@
       "article": "dem",
       "register": "colloquial"
      }
-    ]
+    ],
+    "pronominalAdverb": [
+     "darüber (drüber)",
+     "worüber"
+    ],
+    "position": "before the noun"
    },
    "ref": {
     "src": "kaikki",
@@ -1833,7 +1887,11 @@
     ],
     "contractions": {
      "none": "itself a merged form: in + dem"
-    }
+    },
+    "pronominalAdverb": {
+     "none": "a merged form of preposition + article: the da- / wo- forms belong to the preposition"
+    },
+    "position": "before the noun"
    },
    "role": "in + dem: in the (masc./neut. dative, where?) – im Park, im Büro; in time: im Mai, im Sommer, im Jahr 2026",
    "ref": {
@@ -1857,7 +1915,11 @@
     ],
     "contractions": {
      "none": "itself a merged form: in + das"
-    }
+    },
+    "pronominalAdverb": {
+     "none": "a merged form of preposition + article: the da- / wo- forms belong to the preposition"
+    },
+    "position": "before the noun"
    },
    "role": "in + das: into the (neut. accusative, where to?) – ins Café",
    "ref": {
@@ -1881,7 +1943,11 @@
     ],
     "contractions": {
      "none": "itself a merged form: an + dem"
-    }
+    },
+    "pronominalAdverb": {
+     "none": "a merged form of preposition + article: the da- / wo- forms belong to the preposition"
+    },
+    "position": "before the noun"
    },
    "role": "an + dem: at the, on the (masc./neut. dative) – am Bahnhof, am Fenster; in time: am Montag, am Abend, am Wochenende",
    "ref": {
@@ -1902,7 +1968,11 @@
     ],
     "contractions": {
      "none": "itself a merged form: an + das"
-    }
+    },
+    "pronominalAdverb": {
+     "none": "a merged form of preposition + article: the da- / wo- forms belong to the preposition"
+    },
+    "position": "before the noun"
    },
    "role": "an + das: to the, onto the (neut. accusative) – ans Fenster",
    "ref": {
@@ -1926,7 +1996,11 @@
     ],
     "contractions": {
      "none": "itself a merged form: zu + dem"
-    }
+    },
+    "pronominalAdverb": {
+     "none": "a merged form of preposition + article: the da- / wo- forms belong to the preposition"
+    },
+    "position": "before the noun"
    },
    "role": "zu + dem: to the (masc./neut.) – zum Arzt, zum Bahnhof",
    "ref": {
@@ -1950,7 +2024,11 @@
     ],
     "contractions": {
      "none": "itself a merged form: zu + der"
-    }
+    },
+    "pronominalAdverb": {
+     "none": "a merged form of preposition + article: the da- / wo- forms belong to the preposition"
+    },
+    "position": "before the noun"
    },
    "role": "zu + der: to the (fem.) – zur Schule, zur Post",
    "ref": {
@@ -1974,7 +2052,11 @@
     ],
     "contractions": {
      "none": "itself a merged form: bei + dem"
-    }
+    },
+    "pronominalAdverb": {
+     "none": "a merged form of preposition + article: the da- / wo- forms belong to the preposition"
+    },
+    "position": "before the noun"
    },
    "role": "bei + dem: at the (masc./neut.) – beim Arzt",
    "ref": {
@@ -1998,7 +2080,11 @@
     ],
     "contractions": {
      "none": "itself a merged form: von + dem"
-    }
+    },
+    "pronominalAdverb": {
+     "none": "a merged form of preposition + article: the da- / wo- forms belong to the preposition"
+    },
+    "position": "before the noun"
    },
    "role": "von + dem: from the, of the (masc./neut.) – vom Markt, vom Arzt",
    "ref": {
@@ -2137,6 +2223,12 @@
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -2255,6 +2347,12 @@
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -2289,6 +2387,17 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Schule"
+    ],
+    "number": "singular and plural",
+    "genderCue": "most nouns in -e are feminine (die Lampe)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -2488,6 +2597,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Universität"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-tät → die",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -2623,6 +2743,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Uni"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -2752,6 +2885,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Arbeit"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -2935,6 +3081,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Büros"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -3099,6 +3258,18 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Geschäfts",
+     "des Geschäftes"
+    ],
+    "number": "singular and plural",
+    "genderCue": "most nouns with Ge- are neuter (das Geschäft)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -3272,6 +3443,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Ladens"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -3430,6 +3614,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Supermarkts",
+     "des Supermarktes"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -3565,6 +3763,20 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Marktes",
+     "des Markts"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -3717,6 +3929,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Restaurants"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -3861,6 +4086,19 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Cafés"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -3997,6 +4235,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Krankenhauses"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (das Haus)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -4137,6 +4386,17 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Apotheke"
+    ],
+    "number": "singular and plural",
+    "genderCue": "most nouns in -e are feminine (die Lampe)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -4290,6 +4550,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Bank"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -4441,6 +4714,19 @@
     ],
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Post"
+    ],
+    "number": "singular only",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a mass noun, month or name of a substance: no diminutive in use"
     }
    },
    "forms": {
@@ -4587,6 +4873,18 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Bahnhofs",
+     "des Bahnhofes"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (der Hof)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -4750,6 +5048,17 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Flughafens"
+    ],
+    "number": "singular and plural",
+    "genderCue": "compound: the last part decides (der Hafen)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -4896,7 +5205,16 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "genitive": [
+     "der Straße"
+    ],
+    "number": "singular and plural",
+    "genderCue": "most nouns in -e are feminine (die Lampe)",
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": "das Sträßchen"
    },
    "forms": {
     "N;NOM;SG": "Straße",
@@ -5075,7 +5393,18 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "genitive": [
+     "des Platzes"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": "das Plätzchen (also a word of its own: a biscuit)"
    },
    "forms": {
     "N;NOM;SG": "Platz",
@@ -5279,6 +5608,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Parks",
+     "des Parkes"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
     }
    },
    "forms": {
@@ -5413,7 +5756,18 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "genitive": [
+     "der Stadt"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": "das Städtchen"
    },
    "forms": {
     "N;NOM;SG": "Stadt",
@@ -5588,7 +5942,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "genitive": [
+     "des Dorfes",
+     "des Dorfs"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": "das Dörfchen"
    },
    "forms": {
     "N;NOM;SG": "Dorf",
@@ -5753,7 +6119,21 @@
       ],
       "note": "only singular, with the article: auf dem Land, aufs Land"
      }
-    ]
+    ],
+    "genitive": [
+     "des Landes",
+     "des Lands"
+    ],
+    "number": "singular and plural",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "no diminutive in common use"
+    }
    },
    "forms": {
     "N;NOM;SG": "Land",

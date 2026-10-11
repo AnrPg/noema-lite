@@ -21,6 +21,15 @@
     "comparison": "umlaut",
     "stem": {
      "none": "the endings are added to the base form (groß → große)"
+    },
+    "degrees": [
+     "größer",
+     "am größten"
+    ],
+    "endings": "takes endings",
+    "use": "attributive and predicative",
+    "governs": {
+     "none": "no complement of its own"
     }
    },
    "forms": {
@@ -273,7 +282,16 @@
    ],
    "features": {
     "comparison": "irregular",
-    "stem": "hoh-"
+    "stem": "hoh-",
+    "degrees": [
+     "höher",
+     "am höchsten"
+    ],
+    "endings": "takes endings",
+    "use": "attributive and predicative",
+    "governs": {
+     "none": "no complement of its own"
+    }
    },
    "forms": {
     "ADJ": "hoch",
@@ -508,6 +526,15 @@
     "comparison": "regular",
     "stem": {
      "none": "the endings are added to the base form (klein → kleine)"
+    },
+    "degrees": [
+     "kleiner",
+     "am kleinsten"
+    ],
+    "endings": "takes endings",
+    "use": "attributive and predicative",
+    "governs": {
+     "none": "no complement of its own"
     }
    },
    "forms": {
@@ -730,6 +757,15 @@
     "comparison": "umlaut",
     "stem": {
      "none": "the endings are added to the base form (lang → lange)"
+    },
+    "degrees": [
+     "länger",
+     "am längsten"
+    ],
+    "endings": "takes endings",
+    "use": "attributive and predicative",
+    "governs": {
+     "none": "no complement of its own"
     }
    },
    "forms": {
@@ -944,6 +980,15 @@
     "comparison": "umlaut",
     "stem": {
      "none": "the endings are added to the base form (kurz → kurze)"
+    },
+    "degrees": [
+     "kürzer",
+     "am kürzesten"
+    ],
+    "endings": "takes endings",
+    "use": "attributive and predicative",
+    "governs": {
+     "none": "no complement of its own"
     }
    },
    "forms": {
@@ -1162,7 +1207,22 @@
     "comparison": "regular",
     "stem": {
      "none": "the endings are added to the base form (schlecht → schlechte)"
-    }
+    },
+    "degrees": [
+     "schlechter",
+     "am schlechtesten"
+    ],
+    "endings": "takes endings",
+    "use": "attributive and predicative",
+    "governs": [
+     {
+      "case": "DAT",
+      "senses": [
+       "s2"
+      ],
+      "note": "the person who feels it: Mir ist schlecht."
+     }
+    ]
    },
    "forms": {
     "ADJ": "schlecht",
@@ -1382,6 +1442,15 @@
     "comparison": "regular",
     "stem": {
      "none": "the endings are added to the base form (neu → neue)"
+    },
+    "degrees": [
+     "neuer",
+     "am neuesten / am neusten"
+    ],
+    "endings": "takes endings",
+    "use": "attributive and predicative",
+    "governs": {
+     "none": "no complement of its own"
     }
    },
    "forms": {
@@ -1649,6 +1718,15 @@
     "comparison": "umlaut",
     "stem": {
      "none": "the endings are added to the base form (alt → alte)"
+    },
+    "degrees": [
+     "älter",
+     "am ältesten"
+    ],
+    "endings": "takes endings",
+    "use": "attributive and predicative",
+    "governs": {
+     "none": "no complement of its own"
     }
    },
    "forms": {
@@ -1885,6 +1963,15 @@
     "comparison": "umlaut",
     "stem": {
      "none": "the endings are added to the base form (jung → junge)"
+    },
+    "degrees": [
+     "jünger",
+     "am jüngsten"
+    ],
+    "endings": "takes endings",
+    "use": "attributive and predicative",
+    "governs": {
+     "none": "no complement of its own"
     }
    },
    "forms": {
@@ -2079,7 +2166,22 @@
     "comparison": "regular",
     "stem": {
      "none": "the endings are added to the base form (heiß → heiße)"
-    }
+    },
+    "degrees": [
+     "heißer",
+     "am heißesten"
+    ],
+    "endings": "takes endings",
+    "use": "attributive and predicative",
+    "governs": [
+     {
+      "case": "DAT",
+      "senses": [
+       "s1"
+      ],
+      "note": "the person who feels it: Mir ist heiß."
+     }
+    ]
    },
    "forms": {
     "ADJ": "heiß",
@@ -2289,7 +2391,22 @@
     "comparison": "umlaut",
     "stem": {
      "none": "the endings are added to the base form (kalt → kalte)"
-    }
+    },
+    "degrees": [
+     "kälter",
+     "am kältesten"
+    ],
+    "endings": "takes endings",
+    "use": "attributive and predicative",
+    "governs": [
+     {
+      "case": "DAT",
+      "senses": [
+       "s1"
+      ],
+      "note": "the person who feels it: Mir ist kalt."
+     }
+    ]
    },
    "forms": {
     "ADJ": "kalt",
@@ -2520,7 +2637,22 @@
     "comparison": "umlaut",
     "stem": {
      "none": "the endings are added to the base form (warm → warme)"
-    }
+    },
+    "degrees": [
+     "wärmer",
+     "am wärmsten"
+    ],
+    "endings": "takes endings",
+    "use": "attributive and predicative",
+    "governs": [
+     {
+      "case": "DAT",
+      "senses": [
+       "s1"
+      ],
+      "note": "the person who feels it: Mir ist warm."
+     }
+    ]
    },
    "forms": {
     "ADJ": "warm",
@@ -2732,6 +2864,15 @@
     "comparison": "regular",
     "stem": {
      "none": "the endings are added to the base form (schön → schöne)"
+    },
+    "degrees": [
+     "schöner",
+     "am schönsten"
+    ],
+    "endings": "takes endings",
+    "use": "attributive and predicative",
+    "governs": {
+     "none": "no complement of its own"
     }
    },
    "forms": {
@@ -2945,6 +3086,15 @@
     "comparison": "regular",
     "stem": {
      "none": "the endings are added to the base form (hässlich → hässliche)"
+    },
+    "degrees": [
+     "hässlicher",
+     "am hässlichsten"
+    ],
+    "endings": "takes endings",
+    "use": "attributive and predicative",
+    "governs": {
+     "none": "no complement of its own"
     }
    },
    "forms": {
@@ -3144,6 +3294,15 @@
     "comparison": "regular",
     "stem": {
      "none": "the endings are added to the base form (leicht → leichte)"
+    },
+    "degrees": [
+     "leichter",
+     "am leichtesten"
+    ],
+    "endings": "takes endings",
+    "use": "attributive and predicative",
+    "governs": {
+     "none": "no complement of its own"
     }
    },
    "forms": {
@@ -3392,6 +3551,15 @@
     "comparison": "regular",
     "stem": {
      "none": "the endings are added to the base form (einfach → einfache)"
+    },
+    "degrees": [
+     "einfacher",
+     "am einfachsten"
+    ],
+    "endings": "takes endings",
+    "use": "attributive and predicative",
+    "governs": {
+     "none": "no complement of its own"
     }
    },
    "forms": {
@@ -3637,6 +3805,15 @@
     "comparison": "regular",
     "stem": {
      "none": "the endings are added to the base form (schwer → schwere)"
+    },
+    "degrees": [
+     "schwerer",
+     "am schwersten"
+    ],
+    "endings": "takes endings",
+    "use": "attributive and predicative",
+    "governs": {
+     "none": "no complement of its own"
     }
    },
    "forms": {
@@ -3852,6 +4029,15 @@
     "comparison": "regular",
     "stem": {
      "none": "the endings are added to the base form (schwierig → schwierige)"
+    },
+    "degrees": [
+     "schwieriger",
+     "am schwierigsten"
+    ],
+    "endings": "takes endings",
+    "use": "attributive and predicative",
+    "governs": {
+     "none": "no complement of its own"
     }
    },
    "forms": {
@@ -4037,6 +4223,15 @@
     "comparison": "regular",
     "stem": {
      "none": "the endings are added to the base form (billig → billige)"
+    },
+    "degrees": [
+     "billiger",
+     "am billigsten"
+    ],
+    "endings": "takes endings",
+    "use": "attributive and predicative",
+    "governs": {
+     "none": "no complement of its own"
     }
    },
    "forms": {
@@ -4248,6 +4443,15 @@
     "comparison": "regular",
     "stem": {
      "none": "the endings are added to the base form (günstig → günstige)"
+    },
+    "degrees": [
+     "günstiger",
+     "am günstigsten"
+    ],
+    "endings": "takes endings",
+    "use": "attributive and predicative",
+    "governs": {
+     "none": "no complement of its own"
     }
    },
    "forms": {
@@ -4424,7 +4628,16 @@
    ],
    "features": {
     "comparison": "regular",
-    "stem": "teur-"
+    "stem": "teur-",
+    "degrees": [
+     "teurer",
+     "am teuersten"
+    ],
+    "endings": "takes endings",
+    "use": "attributive and predicative",
+    "governs": {
+     "none": "no complement of its own"
+    }
    },
    "forms": {
     "ADJ": "teuer",
@@ -4642,7 +4855,23 @@
     "comparison": "regular",
     "stem": {
      "none": "the endings are added to the base form (glücklich → glückliche)"
-    }
+    },
+    "degrees": [
+     "glücklicher",
+     "am glücklichsten"
+    ],
+    "endings": "takes endings",
+    "use": "attributive and predicative",
+    "governs": [
+     {
+      "case": "ACC",
+      "prep": "über",
+      "senses": [
+       "s1"
+      ],
+      "note": "glücklich über die Nachricht"
+     }
+    ]
    },
    "forms": {
     "ADJ": "glücklich",
@@ -4846,7 +5075,23 @@
     "comparison": "regular",
     "stem": {
      "none": "the endings are added to the base form (froh → frohe)"
-    }
+    },
+    "degrees": [
+     "froher",
+     "am frohsten / am frohesten"
+    ],
+    "endings": "takes endings",
+    "use": "attributive and predicative",
+    "governs": [
+     {
+      "case": "ACC",
+      "prep": "über",
+      "senses": [
+       "s1"
+      ],
+      "note": "froh über das Geschenk"
+     }
+    ]
    },
    "forms": {
     "ADJ": "froh",
@@ -5059,7 +5304,23 @@
     "comparison": "regular",
     "stem": {
      "none": "the endings are added to the base form (traurig → traurige)"
-    }
+    },
+    "degrees": [
+     "trauriger",
+     "am traurigsten"
+    ],
+    "endings": "takes endings",
+    "use": "attributive and predicative",
+    "governs": [
+     {
+      "case": "ACC",
+      "prep": "über",
+      "senses": [
+       "s1"
+      ],
+      "note": "traurig über den Abschied"
+     }
+    ]
    },
    "forms": {
     "ADJ": "traurig",
@@ -5256,7 +5517,22 @@
     "comparison": "regular",
     "stem": {
      "none": "ends in -e: only -r, -s, -n, -m are added (müder)"
-    }
+    },
+    "degrees": [
+     "müder",
+     "am müdesten"
+    ],
+    "endings": "takes endings",
+    "use": "attributive and predicative",
+    "governs": [
+     {
+      "case": "ACC",
+      "senses": [
+       "s2"
+      ],
+      "note": "etwas müde sein (es müde sein); formal + GEN: der Sache müde"
+     }
+    ]
    },
    "forms": {
     "ADJ": "müde",
@@ -5460,7 +5736,23 @@
     "comparison": "regular",
     "stem": {
      "none": "the endings are added to the base form (hungrig → hungrige)"
-    }
+    },
+    "degrees": [
+     "hungriger",
+     "am hungrigsten"
+    ],
+    "endings": "takes endings",
+    "use": "attributive and predicative",
+    "governs": [
+     {
+      "case": "DAT",
+      "prep": "nach",
+      "senses": [
+       "s2"
+      ],
+      "note": "hungrig nach Erfolg"
+     }
+    ]
    },
    "forms": {
     "ADJ": "hungrig",
@@ -5655,6 +5947,15 @@
     "comparison": "regular",
     "stem": {
      "none": "the endings are added to the base form (durstig → durstige)"
+    },
+    "degrees": [
+     "durstiger",
+     "am durstigsten"
+    ],
+    "endings": "takes endings",
+    "use": "attributive and predicative",
+    "governs": {
+     "none": "no complement of its own"
     }
    },
    "forms": {
@@ -5815,6 +6116,15 @@
     "comparison": "regular",
     "stem": {
      "none": "the endings are added to the base form (schnell → schnelle)"
+    },
+    "degrees": [
+     "schneller",
+     "am schnellsten"
+    ],
+    "endings": "takes endings",
+    "use": "attributive and predicative",
+    "governs": {
+     "none": "no complement of its own"
     }
    },
    "forms": {
@@ -6035,6 +6345,15 @@
     "comparison": "regular",
     "stem": {
      "none": "the endings are added to the base form (langsam → langsame)"
+    },
+    "degrees": [
+     "langsamer",
+     "am langsamsten"
+    ],
+    "endings": "takes endings",
+    "use": "attributive and predicative",
+    "governs": {
+     "none": "no complement of its own"
     }
    },
    "forms": {
@@ -6254,6 +6573,19 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Hungers"
+    ],
+    "number": "singular only",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a mass noun, month or name of a substance: no diminutive in use"
     }
    },
    "forms": {
@@ -6427,6 +6759,20 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Durstes",
+     "des Dursts"
+    ],
+    "number": "singular only",
+    "genderCue": {
+     "none": "no rule: the article is learned with the noun"
+    },
+    "pair": {
+     "none": "not a person noun"
+    },
+    "diminutive": {
+     "none": "a mass noun, month or name of a substance: no diminutive in use"
     }
    },
    "forms": {

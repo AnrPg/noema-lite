@@ -35,6 +35,28 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "participle": "ge- after the particle",
+    "imperative": [
+     "wach(e) auf!",
+     "wacht auf!",
+     "wachen Sie auf!"
+    ],
+    "konj2": {
+     "none": "a weak verb: the Konjunktiv II is the Präteritum form (wachte auf); speech uses würde + infinitive"
+    },
+    "endingAdjust": {
+     "none": "the endings are added regularly"
+    },
+    "spokenPast": "Perfekt",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": {
+     "none": "the verb marks no direction towards or away from the speaker"
+    },
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
     }
    },
    "forms": {
@@ -215,6 +237,35 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "participle": "ge- after the particle",
+    "imperative": [
+     "steh(e) auf!",
+     "steht auf!",
+     "stehen Sie auf!"
+    ],
+    "konj2": [
+     {
+      "form": "stünde auf",
+      "use": "mostly written"
+     },
+     {
+      "form": "stände auf",
+      "use": "rare (würde + infinitive instead)"
+     }
+    ],
+    "endingAdjust": {
+     "none": "the endings are added regularly"
+    },
+    "spokenPast": "Perfekt",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": {
+     "none": "the verb marks no direction towards or away from the speaker"
+    },
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
     }
    },
    "forms": {
@@ -415,6 +466,31 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "participle": "ge-",
+    "imperative": [
+     "wasch(e)!",
+     "wascht!",
+     "waschen Sie!"
+    ],
+    "konj2": [
+     {
+      "form": "wüsche",
+      "use": "rare (würde + infinitive instead)"
+     }
+    ],
+    "endingAdjust": {
+     "none": "the endings are added regularly"
+    },
+    "spokenPast": "Perfekt",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": {
+     "none": "the verb marks no direction towards or away from the speaker"
+    },
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
     }
    },
    "forms": {
@@ -616,6 +692,28 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "participle": "ge-",
+    "imperative": [
+     "dusch(e)!",
+     "duscht!",
+     "duschen Sie!"
+    ],
+    "konj2": {
+     "none": "a weak verb: the Konjunktiv II is the Präteritum form (duschte); speech uses würde + infinitive"
+    },
+    "endingAdjust": {
+     "none": "the endings are added regularly"
+    },
+    "spokenPast": "Perfekt",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": {
+     "none": "the verb marks no direction towards or away from the speaker"
+    },
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
     }
    },
    "forms": {
@@ -784,6 +882,31 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "participle": "ge- after the particle",
+    "imperative": [
+     "zieh(e) an!",
+     "zieht an!",
+     "ziehen Sie an!"
+    ],
+    "konj2": [
+     {
+      "form": "zöge an",
+      "use": "mostly written"
+     }
+    ],
+    "endingAdjust": {
+     "none": "the endings are added regularly"
+    },
+    "spokenPast": "Perfekt",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": {
+     "none": "the verb marks no direction towards or away from the speaker"
+    },
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
     }
    },
    "forms": {
@@ -996,6 +1119,28 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "participle": "ge-",
+    "imperative": [
+     "frühstück(e)!",
+     "frühstückt!",
+     "frühstücken Sie!"
+    ],
+    "konj2": {
+     "none": "a weak verb: the Konjunktiv II is the Präteritum form (frühstückte); speech uses würde + infinitive"
+    },
+    "endingAdjust": {
+     "none": "the endings are added regularly"
+    },
+    "spokenPast": "Perfekt",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": {
+     "none": "the verb marks no direction towards or away from the speaker"
+    },
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
     }
    },
    "forms": {
@@ -1141,6 +1286,31 @@
     "motion": "on foot",
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "participle": "ge- after the particle",
+    "imperative": [
+     "geh(e) los!",
+     "geht los!",
+     "gehen Sie los!"
+    ],
+    "konj2": [
+     {
+      "form": "ginge los",
+      "use": "common in speech"
+     }
+    ],
+    "endingAdjust": {
+     "none": "the endings are added regularly"
+    },
+    "spokenPast": "Perfekt",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": {
+     "none": "the verb marks no direction towards or away from the speaker"
+    },
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
     }
    },
    "forms": {
@@ -1364,6 +1534,31 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "participle": "ge- after the particle",
+    "imperative": [
+     "fang(e) an!",
+     "fangt an!",
+     "fangen Sie an!"
+    ],
+    "konj2": [
+     {
+      "form": "finge an",
+      "use": "mostly written"
+     }
+    ],
+    "endingAdjust": {
+     "none": "the endings are added regularly"
+    },
+    "spokenPast": "Perfekt",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": {
+     "none": "the verb marks no direction towards or away from the speaker"
+    },
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
     }
    },
    "forms": {
@@ -1583,6 +1778,35 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "participle": "no ge- (unstressed prefix)",
+    "imperative": [
+     "beginn(e)!",
+     "beginnt!",
+     "beginnen Sie!"
+    ],
+    "konj2": [
+     {
+      "form": "begänne",
+      "use": "rare (würde + infinitive instead)"
+     },
+     {
+      "form": "begönne",
+      "use": "rare (würde + infinitive instead)"
+     }
+    ],
+    "endingAdjust": {
+     "none": "the endings are added regularly"
+    },
+    "spokenPast": "Perfekt",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": {
+     "none": "the verb marks no direction towards or away from the speaker"
+    },
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
     }
    },
    "forms": {
@@ -1762,6 +1986,28 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "participle": "ge- after the particle",
+    "imperative": [
+     "hör(e) auf!",
+     "hört auf!",
+     "hören Sie auf!"
+    ],
+    "konj2": {
+     "none": "a weak verb: the Konjunktiv II is the Präteritum form (hörte auf); speech uses würde + infinitive"
+    },
+    "endingAdjust": {
+     "none": "the endings are added regularly"
+    },
+    "spokenPast": "Perfekt",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": {
+     "none": "the verb marks no direction towards or away from the speaker"
+    },
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
     }
    },
    "forms": {
@@ -1984,6 +2230,26 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "participle": "no ge- (unstressed prefix)",
+    "imperative": [
+     "beende!",
+     "beendet!",
+     "beenden Sie!"
+    ],
+    "konj2": {
+     "none": "a weak verb: the Konjunktiv II is the Präteritum form (beendete); speech uses würde + infinitive"
+    },
+    "endingAdjust": "-e- inserted (du wartest, er wartet)",
+    "spokenPast": "Perfekt",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": {
+     "none": "the verb marks no direction towards or away from the speaker"
+    },
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
     }
    },
    "forms": {
@@ -2138,6 +2404,31 @@
     "motion": "any means",
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "participle": "ge- after the particle",
+    "imperative": [
+     "komm(e) heim!",
+     "kommt heim!",
+     "kommen Sie heim!"
+    ],
+    "konj2": [
+     {
+      "form": "käme heim",
+      "use": "common in speech"
+     }
+    ],
+    "endingAdjust": {
+     "none": "the endings are added regularly"
+    },
+    "spokenPast": "Perfekt",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": {
+     "none": "the verb marks no direction towards or away from the speaker"
+    },
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
     }
    },
    "forms": {
@@ -2318,6 +2609,31 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "participle": "ge- after the particle",
+    "imperative": [
+     "schlaf(e) ein!",
+     "schlaft ein!",
+     "schlafen Sie ein!"
+    ],
+    "konj2": [
+     {
+      "form": "schliefe ein",
+      "use": "mostly written"
+     }
+    ],
+    "endingAdjust": {
+     "none": "the endings are added regularly"
+    },
+    "spokenPast": "Perfekt",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": {
+     "none": "the verb marks no direction towards or away from the speaker"
+    },
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
     }
    },
    "forms": {
@@ -2499,6 +2815,31 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "participle": "ge-",
+    "imperative": [
+     "schlaf(e)!",
+     "schlaft!",
+     "schlafen Sie!"
+    ],
+    "konj2": [
+     {
+      "form": "schliefe",
+      "use": "mostly written"
+     }
+    ],
+    "endingAdjust": {
+     "none": "the endings are added regularly"
+    },
+    "spokenPast": "Perfekt",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": {
+     "none": "the verb marks no direction towards or away from the speaker"
+    },
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
     }
    },
    "forms": {

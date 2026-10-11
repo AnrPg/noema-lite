@@ -144,7 +144,16 @@
     ]
    },
    "features": {
-    "verbPosition": "none (position zero)"
+    "verbPosition": "none (position zero)",
+    "paired": "zwar … aber",
+    "particleUse": [
+     {
+      "senses": [
+       "s2"
+      ],
+      "function": "surprise, emphasis: Das ist aber schön!"
+     }
+    ]
    }
   },
   {
@@ -415,7 +424,18 @@
     ]
    },
    "features": {
-    "verbPosition": "none (position zero)"
+    "verbPosition": "none (position zero)",
+    "paired": {
+     "none": "not part of a two-part conjunction"
+    },
+    "particleUse": [
+     {
+      "senses": [
+       "s2"
+      ],
+      "function": "interest or impatience in a question: Was ist denn los?"
+     }
+    ]
    }
   },
   {
@@ -539,6 +559,12 @@
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -646,6 +672,12 @@
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -808,6 +840,12 @@
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -969,6 +1007,12 @@
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },

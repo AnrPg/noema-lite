@@ -107,7 +107,10 @@
     ]
    },
    "features": {
-    "ordinal": "nullte"
+    "ordinal": "nullte",
+    "inCompounds": {
+     "none": "not used to build other numerals"
+    }
    }
   },
   {
@@ -189,7 +192,8 @@
     ]
    },
    "features": {
-    "ordinal": "erste"
+    "ordinal": "erste",
+    "inCompounds": "ein- (einundzwanzig, einhundert); eins only at the end (hunderteins); ein, eine before a noun"
    }
   },
   {
@@ -274,7 +278,8 @@
     ]
    },
    "features": {
-    "ordinal": "zweite"
+    "ordinal": "zweite",
+    "inCompounds": "zwan- in zwanzig; zwo in speech (to keep it apart from drei)"
    }
   },
   {
@@ -363,7 +368,8 @@
     ]
    },
    "features": {
-    "ordinal": "dritte"
+    "ordinal": "dritte",
+    "inCompounds": "drei- (dreizehn), but dreißig with -ßig (not -zig)"
    }
   },
   {
@@ -439,7 +445,10 @@
     ]
    },
    "features": {
-    "ordinal": "vierte"
+    "ordinal": "vierte",
+    "inCompounds": {
+     "none": "unchanged in compounds (vierzehn, vierzig)"
+    }
    }
   },
   {
@@ -523,7 +532,10 @@
     ]
    },
    "features": {
-    "ordinal": "fünfte"
+    "ordinal": "fünfte",
+    "inCompounds": {
+     "none": "unchanged in compounds (fünfzehn, fünfzig)"
+    }
    }
   },
   {
@@ -599,7 +611,8 @@
     ]
    },
    "features": {
-    "ordinal": "sechste"
+    "ordinal": "sechste",
+    "inCompounds": "sech- in sechzehn, sechzig (the s is dropped)"
    }
   },
   {
@@ -689,7 +702,8 @@
     ]
    },
    "features": {
-    "ordinal": "siebte"
+    "ordinal": "siebte",
+    "inCompounds": "sieb- in siebzehn, siebzig"
    }
   },
   {
@@ -765,7 +779,10 @@
     ]
    },
    "features": {
-    "ordinal": "achte"
+    "ordinal": "achte",
+    "inCompounds": {
+     "none": "unchanged in compounds (achtzehn, achtzig)"
+    }
    }
   },
   {
@@ -841,7 +858,10 @@
     ]
    },
    "features": {
-    "ordinal": "neunte"
+    "ordinal": "neunte",
+    "inCompounds": {
+     "none": "unchanged in compounds (neunzehn, neunzig)"
+    }
    }
   },
   {
@@ -917,7 +937,8 @@
     ]
    },
    "features": {
-    "ordinal": "zehnte"
+    "ordinal": "zehnte",
+    "inCompounds": "-zehn in 13–19 (dreizehn); the tens end in -zig instead (zwanzig)"
    }
   },
   {
@@ -994,7 +1015,10 @@
     ]
    },
    "features": {
-    "ordinal": "elfte"
+    "ordinal": "elfte",
+    "inCompounds": {
+     "none": "unchanged in compounds (elfhundert)"
+    }
    }
   },
   {
@@ -1078,7 +1102,10 @@
     ]
    },
    "features": {
-    "ordinal": "zwölfte"
+    "ordinal": "zwölfte",
+    "inCompounds": {
+     "none": "unchanged in compounds (zwölfhundert)"
+    }
    }
   },
   {
@@ -1149,7 +1176,10 @@
     ]
    },
    "features": {
-    "ordinal": "dreizehnte"
+    "ordinal": "dreizehnte",
+    "inCompounds": {
+     "none": "itself a compound (unit + zehn)"
+    }
    }
   },
   {
@@ -1220,7 +1250,10 @@
     ]
    },
    "features": {
-    "ordinal": "vierzehnte"
+    "ordinal": "vierzehnte",
+    "inCompounds": {
+     "none": "itself a compound (unit + zehn)"
+    }
    }
   },
   {
@@ -1291,7 +1324,10 @@
     ]
    },
    "features": {
-    "ordinal": "fünfzehnte"
+    "ordinal": "fünfzehnte",
+    "inCompounds": {
+     "none": "itself a compound (unit + zehn)"
+    }
    }
   },
   {
@@ -1363,7 +1399,10 @@
     ]
    },
    "features": {
-    "ordinal": "sechzehnte"
+    "ordinal": "sechzehnte",
+    "inCompounds": {
+     "none": "itself a compound (unit + zehn)"
+    }
    }
   },
   {
@@ -1435,7 +1474,10 @@
     ]
    },
    "features": {
-    "ordinal": "siebzehnte"
+    "ordinal": "siebzehnte",
+    "inCompounds": {
+     "none": "itself a compound (unit + zehn)"
+    }
    }
   },
   {
@@ -1506,7 +1548,10 @@
     ]
    },
    "features": {
-    "ordinal": "achtzehnte"
+    "ordinal": "achtzehnte",
+    "inCompounds": {
+     "none": "itself a compound (unit + zehn)"
+    }
    }
   },
   {
@@ -1577,7 +1622,10 @@
     ]
    },
    "features": {
-    "ordinal": "neunzehnte"
+    "ordinal": "neunzehnte",
+    "inCompounds": {
+     "none": "itself a compound (unit + zehn)"
+    }
    }
   },
   {
@@ -1649,7 +1697,8 @@
     ]
    },
    "features": {
-    "ordinal": "zwanzigste"
+    "ordinal": "zwanzigste",
+    "inCompounds": "units before the tens, joined by und: einundzwanzig, zweiundzwanzig"
    }
   },
   {
@@ -1711,7 +1760,8 @@
     ]
    },
    "features": {
-    "ordinal": "dreißigste"
+    "ordinal": "dreißigste",
+    "inCompounds": "units before the tens, joined by und: einunddreißig, zweiunddreißig"
    }
   },
   {
@@ -1783,7 +1833,8 @@
     ]
    },
    "features": {
-    "ordinal": "vierzigste"
+    "ordinal": "vierzigste",
+    "inCompounds": "units before the tens, joined by und: einundvierzig, zweiundvierzig"
    }
   },
   {
@@ -1845,7 +1896,8 @@
     ]
    },
    "features": {
-    "ordinal": "fünfzigste"
+    "ordinal": "fünfzigste",
+    "inCompounds": "units before the tens, joined by und: einundfünfzig, zweiundfünfzig"
    }
   },
   {
@@ -1907,7 +1959,8 @@
     ]
    },
    "features": {
-    "ordinal": "sechzigste"
+    "ordinal": "sechzigste",
+    "inCompounds": "units before the tens, joined by und: einundsechzig, zweiundsechzig"
    }
   },
   {
@@ -1969,7 +2022,8 @@
     ]
    },
    "features": {
-    "ordinal": "siebzigste"
+    "ordinal": "siebzigste",
+    "inCompounds": "units before the tens, joined by und: einundsiebzig, zweiundsiebzig"
    }
   },
   {
@@ -2031,7 +2085,8 @@
     ]
    },
    "features": {
-    "ordinal": "achtzigste"
+    "ordinal": "achtzigste",
+    "inCompounds": "units before the tens, joined by und: einundachtzig, zweiundachtzig"
    }
   },
   {
@@ -2093,7 +2148,8 @@
     ]
    },
    "features": {
-    "ordinal": "neunzigste"
+    "ordinal": "neunzigste",
+    "inCompounds": "units before the tens, joined by und: einundneunzig, zweiundneunzig"
    }
   },
   {
@@ -2180,7 +2236,8 @@
     ]
    },
    "features": {
-    "ordinal": "hundertste"
+    "ordinal": "hundertste",
+    "inCompounds": "hundert or einhundert; one word: hundertzwanzig, zweihunderteins"
    }
   },
   {
@@ -2259,7 +2316,8 @@
     ]
    },
    "features": {
-    "ordinal": "tausendste"
+    "ordinal": "tausendste",
+    "inCompounds": "tausend or eintausend; one word below a million: zweitausendvierundzwanzig"
    }
   },
   {
@@ -2282,6 +2340,12 @@
     "adjAfter": "strong",
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "standalone": {
+     "none": "the same forms as before a noun"
+    },
+    "stem": {
+     "none": "the endings are added to the base form"
     }
    },
    "forms": {
@@ -2443,6 +2507,12 @@
     "adjAfter": "strong",
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "standalone": {
+     "none": "the same forms as before a noun"
+    },
+    "stem": {
+     "none": "the endings are added to the base form"
     }
    },
    "forms": {
@@ -2699,6 +2769,12 @@
     "adjAfter": "strong",
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "standalone": {
+     "none": "the same forms as before a noun"
+    },
+    "stem": {
+     "none": "takes no endings"
     }
    }
   },
@@ -2791,6 +2867,12 @@
     "adjAfter": "strong",
     "senseForms": {
      "none": "one meaning"
+    },
+    "standalone": {
+     "none": "the same forms as before a noun"
+    },
+    "stem": {
+     "none": "takes no endings"
     }
    }
   },
@@ -2813,7 +2895,13 @@
       ],
       "note": "never inflected, only after sein: Die Milch ist alle."
      }
-    ]
+    ],
+    "standalone": {
+     "none": "the same forms as before a noun"
+    },
+    "stem": {
+     "none": "the endings are added to the base form"
+    }
    },
    "forms": {
     "DET;NOM;PL": "alle",
@@ -2952,6 +3040,12 @@
     "adjAfter": "strong",
     "senseForms": {
      "none": "one meaning"
+    },
+    "standalone": {
+     "none": "the same forms as before a noun"
+    },
+    "stem": {
+     "none": "the endings are added to the base form"
     }
    },
    "forms": {
@@ -3080,6 +3174,12 @@
     "adjAfter": "weak",
     "senseForms": {
      "none": "one meaning"
+    },
+    "standalone": {
+     "none": "the same forms as before a noun"
+    },
+    "stem": {
+     "none": "the endings are added to the base form"
     }
    },
    "forms": {

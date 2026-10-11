@@ -116,7 +116,21 @@
     ]
    },
    "features": {
-    "formality": "neutral"
+    "formality": "neutral",
+    "reply": {
+     "none": "itself an answer"
+    },
+    "region": {
+     "none": "used everywhere, with no common regional alternative"
+    },
+    "particleUse": [
+     {
+      "senses": [
+       "s2"
+      ],
+      "function": "something known or obvious, or surprise: Das weißt du ja. – Du bist ja schon da!"
+     }
+    ]
    }
   },
   {
@@ -240,7 +254,16 @@
     ]
    },
    "features": {
-    "formality": "neutral"
+    "formality": "neutral",
+    "reply": {
+     "none": "itself an answer"
+    },
+    "region": {
+     "none": "used everywhere, with no common regional alternative"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
+    }
    }
   },
   {
@@ -396,7 +419,12 @@
     ]
    },
    "features": {
-    "formality": "informal"
+    "formality": "informal",
+    "reply": "Hallo! (the same greeting back)",
+    "region": "everywhere; regional alternatives: Moin (northern Germany), Servus (Bavaria, Austria), Hoi / Sali (Switzerland)",
+    "particleUse": {
+     "none": "no modal-particle use"
+    }
    }
   },
   {
@@ -504,7 +532,12 @@
     ]
    },
    "features": {
-    "formality": "formal"
+    "formality": "formal",
+    "reply": "Guten Tag! (the same)",
+    "region": "everywhere; Grüß Gott is the usual greeting in southern Germany and Austria, Grüezi in Switzerland",
+    "particleUse": {
+     "none": "no modal-particle use"
+    }
    }
   },
   {
@@ -599,7 +632,14 @@
     ]
    },
    "features": {
-    "formality": "neutral"
+    "formality": "neutral",
+    "reply": "Guten Morgen! – casually Morgen!",
+    "region": {
+     "none": "used everywhere, with no common regional alternative"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
+    }
    }
   },
   {
@@ -692,7 +732,14 @@
     ]
    },
    "features": {
-    "formality": "neutral"
+    "formality": "neutral",
+    "reply": "Guten Abend!",
+    "region": {
+     "none": "used everywhere, with no common regional alternative"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
+    }
    }
   },
   {
@@ -798,7 +845,14 @@
     ]
    },
    "features": {
-    "formality": "neutral"
+    "formality": "neutral",
+    "reply": "Gute Nacht! – Schlaf gut!",
+    "region": {
+     "none": "used everywhere, with no common regional alternative"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
+    }
    }
   },
   {
@@ -912,7 +966,12 @@
     ]
    },
    "features": {
-    "formality": "formal"
+    "formality": "formal",
+    "reply": "Auf Wiedersehen!",
+    "region": "everywhere; also Auf Wiederschauen (southern Germany, Austria)",
+    "particleUse": {
+     "none": "no modal-particle use"
+    }
    }
   },
   {
@@ -1049,7 +1108,12 @@
     ]
    },
    "features": {
-    "formality": "informal"
+    "formality": "informal",
+    "reply": "Tschüss! – Ciao!",
+    "region": "everywhere; Servus or Pfiat di (Bavaria, Austria), Ade (Swabia), Ciao / Salü (Switzerland)",
+    "particleUse": {
+     "none": "no modal-particle use"
+    }
    }
   },
   {
@@ -1136,7 +1200,14 @@
     ]
    },
    "features": {
-    "formality": "neutral"
+    "formality": "neutral",
+    "reply": "Bis später! – Bis dann!",
+    "region": {
+     "none": "used everywhere, with no common regional alternative"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
+    }
    }
   },
   {
@@ -1223,7 +1294,14 @@
     ]
    },
    "features": {
-    "formality": "neutral"
+    "formality": "neutral",
+    "reply": "Bis bald!",
+    "region": {
+     "none": "used everywhere, with no common regional alternative"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
+    }
    }
   },
   {
@@ -1362,7 +1440,14 @@
     ]
    },
    "features": {
-    "formality": "informal"
+    "formality": "informal",
+    "reply": "Gut, danke. Und dir?",
+    "region": {
+     "none": "used everywhere, with no common regional alternative"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
+    }
    }
   },
   {
@@ -1453,7 +1538,14 @@
     ]
    },
    "features": {
-    "formality": "informal"
+    "formality": "informal",
+    "reply": "Gut, danke. Und dir?",
+    "region": {
+     "none": "used everywhere, with no common regional alternative"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
+    }
    }
   },
   {
@@ -1548,7 +1640,14 @@
     ]
    },
    "features": {
-    "formality": "formal"
+    "formality": "formal",
+    "reply": "Gut, danke. Und Ihnen?",
+    "region": {
+     "none": "used everywhere, with no common regional alternative"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
+    }
    }
   },
   {
@@ -1565,6 +1664,15 @@
     "comparison": "irregular",
     "stem": {
      "none": "the endings are added to the base form (gut → gute)"
+    },
+    "degrees": [
+     "besser",
+     "am besten"
+    ],
+    "endings": "takes endings",
+    "use": "attributive and predicative",
+    "governs": {
+     "none": "no complement of its own"
     }
    },
    "forms": {
@@ -1866,6 +1974,29 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "participle": "ge-",
+    "imperative": [
+     "heiß(e)!",
+     "heißt!",
+     "heißen Sie!"
+    ],
+    "konj2": [
+     {
+      "form": "hieße",
+      "use": "mostly written"
+     }
+    ],
+    "endingAdjust": "s-sound stem: du -t (du heißt)",
+    "spokenPast": "both",
+    "ersatzInfinitive": {
+     "none": "not a modal verb: the Partizip II is always used"
+    },
+    "deixis": {
+     "none": "the verb marks no direction towards or away from the speaker"
+    },
+    "posture": {
+     "none": "not one of the position verbs (stellen – stehen, legen – liegen, setzen – sitzen, hängen)"
     }
    },
    "forms": {
@@ -2135,7 +2266,14 @@
     ]
    },
    "features": {
-    "formality": "neutral"
+    "formality": "neutral",
+    "reply": "Freut mich auch! – Mich auch!",
+    "region": {
+     "none": "used everywhere, with no common regional alternative"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
+    }
    }
   },
   {
@@ -2263,7 +2401,14 @@
     ]
    },
    "features": {
-    "formality": "neutral"
+    "formality": "neutral",
+    "reply": "Bitte! – Bitte schön! – Gern geschehen!",
+    "region": {
+     "none": "used everywhere, with no common regional alternative"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
+    }
    }
   },
   {
@@ -2438,6 +2583,12 @@
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -2566,7 +2717,14 @@
     ]
    },
    "features": {
-    "formality": "neutral"
+    "formality": "neutral",
+    "reply": "Kein Problem! – Macht nichts!",
+    "region": {
+     "none": "used everywhere, with no common regional alternative"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
+    }
    }
   },
   {
@@ -2674,7 +2832,14 @@
     ]
    },
    "features": {
-    "formality": "neutral"
+    "formality": "neutral",
+    "reply": "Schon gut. – Macht nichts.",
+    "region": {
+     "none": "used everywhere, with no common regional alternative"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
+    }
    }
   }
  ],

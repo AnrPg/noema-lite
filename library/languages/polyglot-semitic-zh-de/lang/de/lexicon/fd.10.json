@@ -17,7 +17,11 @@
     "reference": "things",
     "senseForms": {
      "none": "every meaning uses the same forms"
-    }
+    },
+    "possessive": {
+     "none": "no possessive of its own"
+    },
+    "reflexiveForm": "sich"
    },
    "forms": {
     "PRON;NOM": "was",
@@ -275,6 +279,12 @@
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -302,7 +312,9 @@
       ],
       "note": "the genitive (formal); in speech: von wem?"
      }
-    ]
+    ],
+    "possessive": "wessen (whose?)",
+    "reflexiveForm": "sich"
    },
    "forms": {
     "PRON;NOM": "wer",
@@ -617,6 +629,12 @@
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -761,6 +779,12 @@
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -884,6 +908,12 @@
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -1002,6 +1032,12 @@
     "adjAfter": "strong",
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "standalone": {
+     "none": "the same forms as before a noun"
+    },
+    "stem": {
+     "none": "the endings are added to the base form"
     }
    }
   },
@@ -1024,6 +1060,12 @@
     "adjAfter": "strong",
     "senseForms": {
      "none": "one meaning"
+    },
+    "standalone": {
+     "none": "the same forms as before a noun"
+    },
+    "stem": {
+     "none": "the endings are added to the base form"
     }
    },
    "forms": {
@@ -1132,6 +1174,12 @@
     "adjAfter": "weak",
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "standalone": {
+     "none": "the same forms as before a noun"
+    },
+    "stem": {
+     "none": "the endings are added to the base form"
     }
    },
    "forms": {
@@ -1394,6 +1442,12 @@
    "features": {
     "comparison": {
      "none": "not compared"
+    },
+    "deixis": {
+     "none": "marks no direction towards or away from the speaker"
+    },
+    "particleUse": {
+     "none": "no modal-particle use"
     }
    }
   },
@@ -1431,6 +1485,21 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Arztes",
+     "des Arzts"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Ärztin",
+      "lexeme": "de:Ärztin"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -1596,6 +1665,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Ärztin"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-in: a female person → die",
+    "pair": [
+     {
+      "form": "der Arzt",
+      "lexeme": "de:Arzt"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -1733,6 +1816,24 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Krankenpflegers"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Krankenpflegerin",
+      "lexeme": "de:Krankenpflegerin"
+     },
+     {
+      "form": "die Krankenschwester",
+      "lexeme": "de:Krankenschwester"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -1880,6 +1981,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Krankenpflegerin"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-in: a female person → die",
+    "pair": [
+     {
+      "form": "der Krankenpfleger",
+      "lexeme": "de:Krankenpfleger"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -2024,6 +2139,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Krankenschwester"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a female person → die",
+    "pair": [
+     {
+      "form": "der Krankenpfleger",
+      "lexeme": "de:Krankenpfleger"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -2159,6 +2288,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Ingenieurs"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Ingenieurin",
+      "lexeme": "de:Ingenieurin"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -2305,6 +2448,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Ingenieurin"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-in: a female person → die",
+    "pair": [
+     {
+      "form": "der Ingenieur",
+      "lexeme": "de:Ingenieur"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -2429,6 +2586,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Fahrers"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Fahrerin",
+      "lexeme": "de:Fahrerin"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -2574,6 +2745,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Fahrerin"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-in: a female person → die",
+    "pair": [
+     {
+      "form": "der Fahrer",
+      "lexeme": "de:Fahrer"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -2704,6 +2889,21 @@
     ],
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Kochs",
+     "des Koches"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Köchin",
+      "lexeme": "de:Köchin"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -2858,6 +3058,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Köchin"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-in: a female person → die",
+    "pair": [
+     {
+      "form": "der Koch",
+      "lexeme": "de:Koch"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -2985,6 +3199,20 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Verkäufers"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Verkäuferin",
+      "lexeme": "de:Verkäuferin"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -3134,6 +3362,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Verkäuferin"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-in: a female person → die",
+    "pair": [
+     {
+      "form": "der Verkäufer",
+      "lexeme": "de:Verkäufer"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -3262,6 +3504,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Arbeiters"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Arbeiterin",
+      "lexeme": "de:Arbeiterin"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -3398,6 +3654,20 @@
     },
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "der Arbeiterin"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-in: a female person → die",
+    "pair": [
+     {
+      "form": "der Arbeiter",
+      "lexeme": "de:Arbeiter"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -3545,6 +3815,21 @@
     ],
     "senseForms": {
      "none": "every meaning uses the same forms"
+    },
+    "genitive": [
+     "des Bauern",
+     "des Bauers"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Bäuerin",
+      "lexeme": "de:Bäuerin"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -3741,6 +4026,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Bäuerin"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-in: a female person → die",
+    "pair": [
+     {
+      "form": "der Bauer",
+      "lexeme": "de:Bauer"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -3872,6 +4171,21 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Landwirts",
+     "des Landwirtes"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Landwirtin",
+      "lexeme": "de:Landwirtin"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -4018,6 +4332,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Landwirtin"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-in: a female person → die",
+    "pair": [
+     {
+      "form": "der Landwirt",
+      "lexeme": "de:Landwirt"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -4142,6 +4470,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Polizisten"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Polizistin",
+      "lexeme": "de:Polizistin"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -4288,6 +4630,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Polizistin"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-in: a female person → die",
+    "pair": [
+     {
+      "form": "der Polizist",
+      "lexeme": "de:Polizist"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -4412,6 +4768,21 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Anwalts",
+     "des Anwaltes"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Anwältin",
+      "lexeme": "de:Anwältin"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -4563,6 +4934,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Anwältin"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-in: a female person → die",
+    "pair": [
+     {
+      "form": "der Anwalt",
+      "lexeme": "de:Anwalt"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -4690,6 +5075,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "des Künstlers"
+    ],
+    "number": "singular and plural",
+    "genderCue": "a male person → der",
+    "pair": [
+     {
+      "form": "die Künstlerin",
+      "lexeme": "de:Künstlerin"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
@@ -4846,6 +5245,20 @@
     },
     "senseForms": {
      "none": "one meaning"
+    },
+    "genitive": [
+     "der Künstlerin"
+    ],
+    "number": "singular and plural",
+    "genderCue": "-in: a female person → die",
+    "pair": [
+     {
+      "form": "der Künstler",
+      "lexeme": "de:Künstler"
+     }
+    ],
+    "diminutive": {
+     "none": "a person noun: a diminutive is not in use (it would sound childish or belittling)"
     }
    },
    "forms": {
