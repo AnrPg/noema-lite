@@ -379,6 +379,20 @@
  "wordFeatures": {
   "NOUN": [
    {
+    "id": "gender",
+    "title": "gender",
+    "at": "top",
+    "type": "enum",
+    "values": [
+     "MASC",
+     "FEM"
+    ],
+    "phenomenon": "ar.morph.gender",
+    "why": "Drives the agreement of adjectives, verbs and pronouns and the polarity of the numbers 3–10.",
+    "prominent": true,
+    "order": 1
+   },
+   {
     "id": "plurals",
     "title": "plurals",
     "type": "list",
@@ -394,20 +408,6 @@
     },
     "phenomenon": "ar.morph.plural.broken",
     "why": "The plural is learned with the noun: its kind (broken, sound masculine -ūna, sound feminine -āt), its pattern and declension, and the meanings it belongs to (بُيُوت houses / أَبْيَات verses). “none” for mass nouns, names and words used only in the singular. Each plural also gives its transliteration (pausal).",
-    "prominent": true,
-    "order": 1
-   },
-   {
-    "id": "gender",
-    "title": "gender",
-    "at": "top",
-    "type": "enum",
-    "values": [
-     "MASC",
-     "FEM"
-    ],
-    "phenomenon": "ar.morph.gender",
-    "why": "Drives the agreement of adjectives, verbs and pronouns and the polarity of the numbers 3–10.",
     "prominent": true,
     "order": 2
    },

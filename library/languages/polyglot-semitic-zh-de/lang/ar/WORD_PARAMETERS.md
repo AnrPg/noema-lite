@@ -1,7 +1,7 @@
 # Arabic (Modern Standard) — the distinctive parameters of a word, per part of speech (R3, D14)
 
 The map behind `language.json` → `wordFeatures`. Every declared parameter is stated by **every** word of its part of
-speech (a value, or `{"none": "<why>"}`); `prominent` parameters are shown right under the word, in `order`.
+speech (a value, or `{"none": "<why>"}`); `prominent` parameters are shown right under the word, in `order` (nouns: the gender as a short chip, then every plural with its meanings).
 Status: **declared** = existed before R3 · **added** = added by R3 (2026-10-11) · **n.a.** = considered and not a word
 parameter here (the reason says where the information lives instead).
 
@@ -17,8 +17,8 @@ past-1st-person form agrees with the course's paradigms and with Wiktionary. Cou
 
 | # | parameter | why it is distinctive | prominent | status |
 |---|---|---|---|---|
-| 1 | `plurals` (per meaning) | every plural, each with the meanings it belongs to (بُيُوت houses / أَبْيَات verses), its kind (broken, sound -ūna, sound -āt), pattern, declension, a note, and its **transliteration** (`translit`, pausal); a noun may have two or three | ✓ | declared (`translit` added) |
-| 2 | `gender` (top level) | masculine / feminine: agreement and the polarity of 3–10; covert feminines (شَمْس، أُمّ) are not predictable | ✓ | declared |
+| 1 | `gender` (top level) | masculine / feminine: agreement and the polarity of 3–10; covert feminines (شَمْس، أُمّ) are not predictable | ✓ | declared |
+| 2 | `plurals` (per meaning) | every plural, each with the meanings it belongs to (بُيُوت houses / أَبْيَات verses), its kind (broken, sound -ūna, sound -āt), pattern, declension, a note, and its **transliteration** (`translit`, pausal); a noun may have two or three | ✓ | declared (`translit` added) |
 | 3 | `dual` | -āni, with ة → ت (سَنَتَانِ) and irregular duals (أَبَوَانِ) | ✓ | declared |
 | 4 | `human` | plurals of people agree in the plural, all other plurals as feminine singular | ✓ | declared |
 | 5 | `declension` | triptote / diptote (no tanwīn, genitive -a) / defective (-in) / invariable — of the singular | ✓ | declared |
