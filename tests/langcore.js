@@ -328,7 +328,8 @@ ok(!fnCard.hasProfile && fnCard.gloss.includes('definite direct object') && fnCa
     'explanationLocale: the native language’s facade, else the UI locale’s, else the master');
   ok(X({ native: el, facades: { el: 'preview' } }) === 'en' && X({ native: el, facades: { el: 'preview' }, preview: true }) === 'el' && X({ native: el, facades: { el: 'draft' }, preview: true }) === 'en' && X({ native: el, facades: { el: 'draft' }, drafts: true }) === 'el',
     'explanationLocale: preview facades only on preview hosts, drafts only with config.i18nDrafts');
-  ok(X({ native: el, facades: { el: { status: 'on', coverage: { tier1: 0.6 } } } }) === 'en' && X({ native: el, facades: { el: { status: 'on', coverage: { tier1: 1 } } } }) === 'el', 'explanationLocale: a facade is offered only with Tier 1 complete');
+  ok(X({ native: el, facades: { el: { status: 'on', coverage: { 1: { total: 10, done: 6, stale: 0, missing: 4 } } } } }) === 'en' && X({ native: el, facades: { el: { status: 'on', coverage: { 1: { total: 10, done: 8, stale: 2, missing: 0 }, 2: { total: 5, done: 0, stale: 0, missing: 5 } } } } }) === 'el',
+    'explanationLocale: a facade is offered only with Tier 1 complete (lang_facade.py coverage; stale texts still count)');
   ok(X({ native: el, override: 'en', facades: { el: 'on' } }) === 'en' && X({ native: nat({ code: 'ru' }), override: 'el', facades: { el: 'on', ru: 'on' } }) === 'el' && X({ native: el, override: 'de', facades: { el: 'on' } }) === 'el',
     'explanationLocale: the learner’s choice (settings.speaker) first, when it can be shown');
   ok(X({ native: nat({ code: 'zh' }), uiLocale: 'zh-Hant', facades: { 'zh-Hans': 'on', 'zh-Hant': 'on' } }) === 'zh-Hant' && X({ native: nat({ code: 'es' }), facades: { 'es-ES': 'on' } }) === 'es-ES' && X({ native: nat({ code: 'ar' }), facades: ['ar-EG'] }) === 'ar-EG',
@@ -346,7 +347,7 @@ ok(!fnCard.hasProfile && fnCard.gloss.includes('definite direct object') && fnCa
   const d = N.readCourse(rp, lp), C0 = N.course(d), before = JSON.stringify(d.langs.de.grammar['fn.definite']);
   const texts = {}; for (const f of fs.readdirSync(FX).filter(f => f !== 'facade.json')) Object.assign(texts, JSON.parse(fs.readFileSync(path.join(FX, f), 'utf8')));
   const head = JSON.parse(fs.readFileSync(path.join(FX, 'facade.json'), 'utf8')), fac = { locale: head.locale, status: head.status, texts };
-  ok(N.facadeAddress('g:de:fn.definite/blocks/0/rows/0/0').join('|') === 'g|de:fn.definite|blocks,0,rows,0,0' && N.facadeAddress('x:ar:khala/profile/pitfalls/0')[1] === 'ar:khala' && !N.facadeAddress('zz:x/y') && Object.keys(N.facadeTexts(fac)).length === Object.keys(texts).length,
+  ok(N.facadeAddress('g:de:fn.definite/blocks/0/rows/0/0').join('|') === 'g|de:fn.definite|blocks,0,rows,0,0' && N.facadeAddress('x:ar:khala/profile/pitfalls/0')[1] === 'ar:khala' && !N.facadeAddress('zz:x/y') && N.facadeAddress('ty:core/intro')[0] === 'ty' && Object.keys(N.facadeTexts(fac)).length === Object.keys(texts).length,
     'facade addresses: a root + an id + a JSON pointer; unknown roots are ignored');
   const D = N.applyFacade(d, fac), CF = N.course(D), g = CF.lang.de.grammar['fn.definite'];
   ok(CF.explainLang === 'el' && CF.masterLang === 'en' && C0.explainLang === 'en' && C0.masterLang === 'en' && JSON.stringify(d.langs.de.grammar['fn.definite']) === before && N.applyFacade(d, { locale: 'en', texts }) === d,
@@ -364,6 +365,10 @@ ok(!fnCard.hasProfile && fnCard.gloss.includes('definite direct object') && fnCa
     'the parallel sentences are the same through the facade (s.mk from the master), though the two glosses now differ');
   { const D2 = JSON.parse(JSON.stringify(d)); D2.course.explainLang = 'el'; D2.course.masterLang = 'en'; for (const s of D2.langs.de.bank) if (s.id === 'de.c01_04.001') s.gloss = 'Woke up at six.';
     const C2 = N.course(D2); ok(N.clockOf(C2, 'de', C2.lang.de.sentenceById['de.c01_04.001']) === null, 'a gloss that is not the master’s is never read (no stamp, no time)'); }
+  { const [code, fid] = (() => { for (const c of C0.languages) for (const [f, g] of Object.entries(C0.lang[c].grammar)) if ((g.quiz || []).length && g.quiz[0].options.includes(g.quiz[0].answer)) return [c, f]; return []; })();
+    const q = C0.lang[code].grammar[fid].quiz[0], at = q.options.indexOf(q.answer), qf = { locale: 'el', texts: { [`g:${code}:${fid}/quiz/0/answer`]: 'μια μετάφραση που δεν είναι επιλογή', ...Object.fromEntries(q.options.map((o, i) => [`g:${code}:${fid}/quiz/0/options/${i}`, 'επιλογή ' + i])) } };
+    const q2 = N.course(N.applyFacade(d, qf)).lang[code].grammar[fid].quiz[0];
+    ok(q2.answer === 'επιλογή ' + at && q2.options.includes(q2.answer), `a quiz through a facade: its answer is the option it was in the master, whatever the translation says (${code} ${fid})`); }
   { const st = N.masterStamps(d); ok(Object.keys(st).length === C0.languages.reduce((n, c) => n + C0.lang[c].sentences.length, 0) && st['de.c01_04.118'].date.m === 5 && st['de.c01_04.001'].time.h === 6 && /^[0-9a-z]+$/.test(st['de.c01_04.001'].mk.k),
     'masterStamps: a meaning key for every sentence, the time and the date where one is named (what tools/build.py stores)'); }
   // word profiles: translated texts, the bridges still parse the master's

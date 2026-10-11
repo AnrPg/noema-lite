@@ -282,8 +282,14 @@
     }
     return ai;
   }
-  /** Is a locale facade complete enough to be offered (§3.1: Tier 1)? coverage.tier1 as a share, a boolean or {complete}; no coverage = trusted. */
-  const facadeTier1 = f => { const t = f && typeof f === 'object' && f.coverage ? f.coverage.tier1 : undefined; return t == null || t === true || (typeof t === 'number' && t >= 1) || !!(t && typeof t === 'object' && (t.complete || t.share >= 1)); };
+  /** Is a locale facade complete enough to be offered (§3.1: Tier 1)? coverage["1"] = {total, done, stale, missing} as tools/lang_facade.py
+   *  writes it: no address missing (stale ones are still shown until refreshed); no coverage = trusted. */
+  const facadeTier1 = f => {
+    const cov = f && typeof f === 'object' ? f.coverage : null, t = cov ? (cov['1'] ?? cov.tier1) : undefined;
+    if (t == null || t === true) return true;
+    if (typeof t === 'number') return t >= 1;
+    return typeof t === 'object' && !(t.missing > 0) && (t.done || 0) + (t.stale || 0) >= (t.total || 0);
+  };
   /** May a facade be shown? status on; preview on a deploy-preview host; draft with config.i18nDrafts — and Tier 1 complete. */
   function facadeUsable(f, { preview = false, drafts = false } = {}) {
     const st = typeof f === 'string' ? f : f && f.status;
@@ -317,19 +323,26 @@
   /** The roots of the addresses: prefix → (data, id) → the object the JSON-pointer tail starts from (the registry of the fields:
    *  tools/schemas/noema.langfacade.fields.json). */
   const FACADE_ROOTS = {
+    k: d => d.course || null,
+    fd: (d, id) => (d.fields || []).find(f => f.field === id) || null,
     c: (d, id) => { for (const f of d.fields || []) { const x = (f.concepts || []).find(c => c.id === id); if (x) return x; } return null; },
-    fld: (d, id) => (d.fields || []).find(f => f.field === id || f.id === id) || null,
     n: (d, id) => (d.nodes || []).find(x => x.id === id) || null,
     f: (d, id) => (d.functions || []).find(x => x.id === id) || null,
     fr: (d, id) => (d.frames || []).find(x => x.id === id) || null,
-    s: (d, id) => { for (const L of Object.values(d.langs || {})) { const s = (L.bank || []).find(x => x.id === id); if (s) return s; } return null; },
+    m: (d, id) => (d.media && d.media[id]) || null,
+    ty: (d, id) => !d.typology ? null : id === 'core' ? d.typology : (d.typology.types || []).find(t => t.id === id) || null,
+    g: (d, id) => { const [code, ...rest] = id.split(':'); return (d.langs && d.langs[code] && d.langs[code].grammar[rest.join(':')]) || null; },
     x: (d, id) => { const L = d.langs && d.langs[id.split(':')[0]]; for (const f of Object.values((L && L.lexicon) || {})) { const x = (f.lexemes || []).find(l => l.id === id); if (x) return x; } return null; },
     a: (d, id) => { const [code, ...rest] = id.split(':'), cid = rest.join(':'), L = d.langs && d.langs[code]; for (const f of Object.values((L && L.lexicon) || {})) { const x = (f.absent || []).find(a => a.concept === cid); if (x) return x; } return null; },
-    g: (d, id) => { const [code, ...rest] = id.split(':'); return (d.langs && d.langs[code] && d.langs[code].grammar[rest.join(':')]) || null; },
-    l: (d, id) => (d.langs && d.langs[id] && d.langs[id].language) || null,
+    s: (d, id) => { for (const L of Object.values(d.langs || {})) { const s = (L.bank || []).find(x => x.id === id); if (s) return s; } return null; },
+    lg: (d, id) => (d.langs && d.langs[id] && d.langs[id].language) || null,
+    sc: (d, id) => (d.langs && d.langs[id] && d.langs[id].script) || null,
+    chs: (d, id) => (d.langs && d.langs[id] && d.langs[id].chars) || null,
+    ch: (d, id) => { const [code, ...rest] = id.split(':'), z = d.langs && d.langs[code] && d.langs[code].chars; return (z && (z.chars || []).find(e => e.ch === rest.join(':'))) || null; },
     p: (d, id) => { for (const ps of Object.values((d.world && d.world.phenomena) || {})) { const p = ps.find(x => x.id === id); if (p) return p; } return null; },
     t: (d, id) => ((d.world && d.world.features) || []).find(x => x.id === id) || null,
-    ty: d => d.typology || null,
+    tl: (d, id) => ((d.world && d.world.languages) || []).find(x => x.code === id) || null,
+    fx: () => null, ph: () => null, ts: () => null,   // in the registry, not in the app's data (bank exemptions, a catalogue's head, sources)
   };
   /** An address → [prefix, id, [pointer segments]] or null (c:veg.carrot/gloss → ['c', 'veg.carrot', ['gloss']]). */
   function facadeAddress(addr) {
@@ -385,6 +398,11 @@
       if (a[0] === 'x' && a[2][0] === 'profile') keepMasterProfile(obj.profile);
       facadeSet(obj, a[2], text);
     }
+    // a quiz's answer is one of its options (they are compared): it follows the option it was in the master, whatever the translation says
+    for (const [code, L] of Object.entries(out.langs || {})) for (const [fid, g] of Object.entries(L.grammar || {})) (g.quiz || []).forEach((q, i) => {
+      const m = data.langs[code].grammar[fid].quiz[i], at = m && Array.isArray(m.options) ? m.options.indexOf(m.answer) : -1;
+      if (at >= 0 && Array.isArray(q.options) && typeof q.options[at] === 'string') q.answer = q.options[at];
+    });
     out.course = { ...out.course, explainLang: locale, masterLang: master, facade: { locale, status: (facade && facade.status) || 'on' } };
     return out;
   }
