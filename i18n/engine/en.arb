@@ -3811,5 +3811,359 @@
   "engine.cl.allSynced": "All changes synced",
   "@engine.cl.allSynced": {
     "description": "Tooltip of the sync dot."
+  },
+  "engine.help.moreInfo": "More info",
+  "@engine.help.moreInfo": {
+    "description": "Screen-reader label of the small ⓘ that shows an explanation."
+  },
+  "engine.help.how": "How?",
+  "@engine.help.how": {
+    "description": "Default label of a button (after a guide’s emoji) that opens a setup guide."
+  },
+  "engine.setup.gemini": "The AI tutor is off: add your free Gemini key.",
+  "@engine.setup.gemini": {
+    "description": "Setup banner on the subject’s page during the first sessions (after 🔑)."
+  },
+  "engine.setup.backup": "Your progress lives only in this browser: turn on backups (folder, Google Drive or cloud).",
+  "@engine.setup.backup": {
+    "description": "Setup banner (after 💾)."
+  },
+  "engine.setup.setUp": "Set up",
+  "@engine.setup.setUp": {
+    "description": "Setup banner button."
+  },
+  "engine.setup.dismiss": "Dismiss",
+  "@engine.setup.dismiss": {
+    "description": "Tooltip of the ✕ that hides an item of the setup banner."
+  },
+  "engine.setup.optional": "Optional · shown during your first sessions ({n, number}/{of, number})",
+  "@engine.setup.optional": {
+    "description": "Small line under the setup banner: n = sessions so far, of = how many sessions it shows.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      },
+      "of": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "engine.setup.allGuides": "all setup guides",
+  "@engine.setup.allGuides": {
+    "description": "Link at the end of the setup banner’s small line (opens Help). Lowercase."
+  },
+  "engine.guide.mcpPlaceholder": "<your site>/mcp",
+  "@engine.guide.mcpPlaceholder": {
+    "description": "In the Claude setup guide when the site’s address is unknown: a placeholder for “the address of your noema-lite website + /mcp”. Keep “/mcp”."
+  },
+  "engine.guide.gemini.title": "Get your free Gemini API key",
+  "@engine.guide.gemini.title": {
+    "description": "Title (after 🔑) of a setup guide in Help."
+  },
+  "engine.guide.gemini.who": "Everyone who wants the AI tutor",
+  "@engine.guide.gemini.who": {
+    "description": "Setup guide “Get your free Gemini API key” (Account menu › ❓ Help): who the guide is for (after 👤)."
+  },
+  "engine.guide.gemini.step1": "Open **Google AI Studio** → https://aistudio.google.com/apikey and sign in with your Google account.",
+  "@engine.guide.gemini.step1": {
+    "description": "Setup guide “Get your free Gemini API key” (Account menu › ❓ Help): step 1. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.gemini.step2": "Click **Create API key** (accept the terms if asked) and copy the key (it starts with `AIza…`).",
+  "@engine.guide.gemini.step2": {
+    "description": "Setup guide “Get your free Gemini API key” (Account menu › ❓ Help): step 2. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.gemini.step3": "In this app: **⚙️ Settings → Gemini API key** → paste → **🔍 Detect models** → **🧪 Test**. You should see “Brick is ready”.",
+  "@engine.guide.gemini.step3": {
+    "description": "Setup guide “Get your free Gemini API key” (Account menu › ❓ Help): step 3. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.gemini.step4": "Done. On a cloud account the key follows you privately to all your devices; on a local profile it stays in this browser.",
+  "@engine.guide.gemini.step4": {
+    "description": "Setup guide “Get your free Gemini API key” (Account menu › ❓ Help): step 4. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.gemini.note1": "The key is personal — don’t share it. Each friend uses their own (it is free with generous limits).",
+  "@engine.guide.gemini.note1": {
+    "description": "Setup guide “Get your free Gemini API key” (Account menu › ❓ Help): note 1 (after 💡). Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.gemini.note2": "Without a key everything works except the tutor, AI grading and AI-generated questions.",
+  "@engine.guide.gemini.note2": {
+    "description": "Setup guide “Get your free Gemini API key” (Account menu › ❓ Help): note 2 (after 💡). Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.backupFolder.title": "Automatic backups to a folder (Google Drive / iCloud too)",
+  "@engine.guide.backupFolder.title": {
+    "description": "Title (after 📁) of a setup guide in Help."
+  },
+  "engine.guide.backupFolder.who": "Chrome, Edge or Brave on a computer",
+  "@engine.guide.backupFolder.who": {
+    "description": "Setup guide “Automatic backups to a folder (Google Drive / iCloud too)” (Account menu › ❓ Help): who the guide is for (after 👤)."
+  },
+  "engine.guide.backupFolder.step1": "Account menu (your emoji, top-right) → **💾 Backup & restore → 📁 Automatic backups** → **Choose backup folder**.",
+  "@engine.guide.backupFolder.step1": {
+    "description": "Setup guide “Automatic backups to a folder (Google Drive / iCloud too)” (Account menu › ❓ Help): step 1. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.backupFolder.step2": "Pick your profile folder, e.g. **noema-lite/accounts/{acc}** (any folder works). The app creates **backups/** and **conversations/** inside it.",
+  "@engine.guide.backupFolder.step2": {
+    "description": "Setup guide “Automatic backups to a folder (Google Drive / iCloud too)” (Account menu › ❓ Help): step 2. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them. acc = the profile’s id.",
+    "placeholders": {
+      "acc": {
+        "type": "String",
+        "example": "anr"
+      }
+    }
+  },
+  "engine.guide.backupFolder.step3": "From now on: a backup file every few minutes when something changed (and when you leave), and every AI conversation as **.json + .md** within ~20 seconds.",
+  "@engine.guide.backupFolder.step3": {
+    "description": "Setup guide “Automatic backups to a folder (Google Drive / iCloud too)” (Account menu › ❓ Help): step 3. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.backupFolder.step4": "**Off-site for free:** install **Google Drive for desktop** (https://www.google.com/drive/download/) and choose a folder inside **Google Drive → My Drive** — or a folder in **iCloud Drive**. Your backups then reach the cloud automatically.",
+  "@engine.guide.backupFolder.step4": {
+    "description": "Setup guide “Automatic backups to a folder (Google Drive / iCloud too)” (Account menu › ❓ Help): step 4. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.backupFolder.step5": "After a browser restart the browser may ask again: open the menu and click **Resume** once.",
+  "@engine.guide.backupFolder.step5": {
+    "description": "Setup guide “Automatic backups to a folder (Google Drive / iCloud too)” (Account menu › ❓ Help): step 5. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.backupFolder.note1": "Safari/Firefox can’t write to folders: use **Download backup** instead (or a cloud account).",
+  "@engine.guide.backupFolder.note1": {
+    "description": "Setup guide “Automatic backups to a folder (Google Drive / iCloud too)” (Account menu › ❓ Help): note 1 (after 💡). Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.restore.title": "Restoring data",
+  "@engine.guide.restore.title": {
+    "description": "Title (after ♻️) of a setup guide in Help."
+  },
+  "engine.guide.restore.who": "Everyone",
+  "@engine.guide.restore.who": {
+    "description": "Setup guide “Restoring data” (Account menu › ❓ Help): who the guide is for (after 👤)."
+  },
+  "engine.guide.restore.step1": "**Restore points** (this device) are created automatically before every restore or reset — the quickest undo.",
+  "@engine.guide.restore.step1": {
+    "description": "Setup guide “Restoring data” (Account menu › ❓ Help): step 1. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.restore.step2": "**From a file:** 💾 Backup & restore → Restore from a backup file → choose **Replace** (exact copy), **Merge** (backup wins on conflicts) or **New profile** (side by side).",
+  "@engine.guide.restore.step2": {
+    "description": "Setup guide “Restoring data” (Account menu › ❓ Help): step 2. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.restore.step3": "**Cloud accounts:** ☁️ Cloud → Cloud snapshots → Restore (a snapshot of the current state is taken first).",
+  "@engine.guide.restore.step3": {
+    "description": "Setup guide “Restoring data” (Account menu › ❓ Help): step 3. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.restore.step4": "**Everything (owner):** the SQLite database in noema-lite/data can recreate any file of any past version: `python3 tools/db_restore.py list`.",
+  "@engine.guide.restore.step4": {
+    "description": "Setup guide “Restoring data” (Account menu › ❓ Help): step 4. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.cloudUser.title": "Use a cloud account (study from anywhere)",
+  "@engine.guide.cloudUser.title": {
+    "description": "Title (after ☁️) of a setup guide in Help."
+  },
+  "engine.guide.cloudUser.who": "You and your friends",
+  "@engine.guide.cloudUser.who": {
+    "description": "Setup guide “Use a cloud account (study from anywhere)” (Account menu › ❓ Help): who the guide is for (after 👤)."
+  },
+  "engine.guide.cloudUser.step1": "Open the website{hasSite, select, yes { ({site})} other {}} on any device → **☁️ Sign in / create a cloud account**.",
+  "@engine.guide.cloudUser.step1": {
+    "description": "Setup guide “Use a cloud account (study from anywhere)” (Account menu › ❓ Help): step 1. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them. hasSite = yes/no: whether the site’s address {site} is known.",
+    "placeholders": {
+      "hasSite": {
+        "type": "String",
+        "example": "yes"
+      },
+      "site": {
+        "type": "String",
+        "example": "https://noema.example.org"
+      }
+    }
+  },
+  "engine.guide.cloudUser.step2": "Create the account (email + password). If asked, confirm the email from your inbox, then sign in.",
+  "@engine.guide.cloudUser.step2": {
+    "description": "Setup guide “Use a cloud account (study from anywhere)” (Account menu › ❓ Help): step 2. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.cloudUser.step3": "Add your Gemini key (⚙️ Settings) once on each device: it stays in that browser. Progress, flashcards, conversations and settings sync automatically.",
+  "@engine.guide.cloudUser.step3": {
+    "description": "Setup guide “Use a cloud account (study from anywhere)” (Account menu › ❓ Help): step 3. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.cloudUser.step4": "Already studied locally? In the local app: account menu → ☁️ Cloud → sign in → **⬆️ Copy this profile into my cloud account**.",
+  "@engine.guide.cloudUser.step4": {
+    "description": "Setup guide “Use a cloud account (study from anywhere)” (Account menu › ❓ Help): step 4. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.cloudUser.note1": "Your data is private to your account (row-level security). A daily snapshot is kept for 30 days.",
+  "@engine.guide.cloudUser.note1": {
+    "description": "Setup guide “Use a cloud account (study from anywhere)” (Account menu › ❓ Help): note 1 (after 💡). Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.cloudOwner.title": "Set up the cloud (owner, once)",
+  "@engine.guide.cloudOwner.title": {
+    "description": "Title (after 🛠️) of a setup guide in Help."
+  },
+  "engine.guide.cloudOwner.who": "Only the owner of this installation",
+  "@engine.guide.cloudOwner.who": {
+    "description": "Setup guide “Set up the cloud (owner, once)” (Account menu › ❓ Help): who the guide is for (after 👤)."
+  },
+  "engine.guide.cloudOwner.step1": "**Supabase** (accounts + sync): https://supabase.com → New project (region Frankfurt) → **SQL Editor** → run the whole file **cloud/supabase.sql**.",
+  "@engine.guide.cloudOwner.step1": {
+    "description": "Setup guide “Set up the cloud (owner, once)” (Account menu › ❓ Help): step 1. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.cloudOwner.step2": "Supabase: the **Project URL** is `https://<project-ref>.supabase.co` (the ref is in your dashboard address) and the **publishable key** (`sb_publishable_…`) is under **Project Settings → API Keys** → put both in **config.js** (or give them to Claude). Never share the secret key or the database password.",
+  "@engine.guide.cloudOwner.step2": {
+    "description": "Setup guide “Set up the cloud (owner, once)” (Account menu › ❓ Help): step 2. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.cloudOwner.step3": "**Netlify** (website): https://app.netlify.com → Add new site → Import from GitHub → pick the repo → Deploy (settings come from netlify.toml).",
+  "@engine.guide.cloudOwner.step3": {
+    "description": "Setup guide “Set up the cloud (owner, once)” (Account menu › ❓ Help): step 3. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.cloudOwner.step4": "Supabase → **Authentication → URL Configuration → Site URL** = your Netlify address.",
+  "@engine.guide.cloudOwner.step4": {
+    "description": "Setup guide “Set up the cloud (owner, once)” (Account menu › ❓ Help): step 4. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.cloudOwner.step5": "Full step-by-step guide with screenshots-level detail: **cloud/README.md** in the repository.",
+  "@engine.guide.cloudOwner.step5": {
+    "description": "Setup guide “Set up the cloud (owner, once)” (Account menu › ❓ Help): step 5. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.github.title": "Keep the repository on GitHub (owner)",
+  "@engine.guide.github.title": {
+    "description": "Title (after 🐙) of a setup guide in Help."
+  },
+  "engine.guide.github.who": "Only the owner",
+  "@engine.guide.github.who": {
+    "description": "Setup guide “Keep the repository on GitHub (owner)” (Account menu › ❓ Help): who the guide is for (after 👤)."
+  },
+  "engine.guide.github.step1": "Install **GitHub Desktop** (https://desktop.github.com) and sign in.",
+  "@engine.guide.github.step1": {
+    "description": "Setup guide “Keep the repository on GitHub (owner)” (Account menu › ❓ Help): step 1. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.github.step2": "**File → Add Local Repository** → choose Documents/MyApps/noema-lite.",
+  "@engine.guide.github.step2": {
+    "description": "Setup guide “Keep the repository on GitHub (owner)” (Account menu › ❓ Help): step 2. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.github.step3": "**Publish repository** → keep **Keep this code private** ticked.",
+  "@engine.guide.github.step3": {
+    "description": "Setup guide “Keep the repository on GitHub (owner)” (Account menu › ❓ Help): step 3. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.github.step4": "Whenever Claude has made changes: open GitHub Desktop → **Push origin**. Netlify then updates the website automatically.",
+  "@engine.guide.github.step4": {
+    "description": "Setup guide “Keep the repository on GitHub (owner)” (Account menu › ❓ Help): step 4. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.claude.title": "Set up Claude and create subjects (three ways)",
+  "@engine.guide.claude.title": {
+    "description": "Title (after ✨) of a setup guide in Help."
+  },
+  "engine.guide.claude.who": "Everyone",
+  "@engine.guide.claude.who": {
+    "description": "Setup guide “Set up Claude and create subjects (three ways)” (Account menu › ❓ Help): who the guide is for (after 👤)."
+  },
+  "engine.guide.claude.step1": "Account menu → 📚 Subjects → **✨ Create a subject with Claude** (or the same button in the subject picker). The window shows every step, numbered, with ⓘ tips.",
+  "@engine.guide.claude.step1": {
+    "description": "Setup guide “Set up Claude and create subjects (three ways)” (Account menu › ❓ Help): step 1. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.claude.step2": "**Way A — here in noema-lite:** create a Claude Console account (platform.claude.com), add a little credit, create an API key and paste it in the window. noema-lite uploads the skill, sends your files to Claude and imports the finished subject — you never leave the app. You see the cost live and set a limit.",
+  "@engine.guide.claude.step2": {
+    "description": "Setup guide “Set up Claude and create subjects (three ways)” (Account menu › ❓ Help): step 2. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.claude.step3": "**Way B — in the Claude app or website:** with your Claude plan (Free, Pro, Max): switch on code execution, add the connector **Customize → Connectors → + Add → Add custom connector** with the address {mcp} (the same for everyone and every device), then attach your sources in a new chat and send the prompt from the window.",
+  "@engine.guide.claude.step3": {
+    "description": "Setup guide “Set up Claude and create subjects (three ways)” (Account menu › ❓ Help): step 3. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them. mcp = the connector’s address.",
+    "placeholders": {
+      "mcp": {
+        "type": "String",
+        "example": "https://noema.example.org/mcp"
+      }
+    }
+  },
+  "engine.guide.claude.step4": "**Way C — a whole Roadmap with your Claude plan (⭐ recommended for Roadmaps, usually the cheapest):** set up the connector as in way B, then in 🧭 Roadmaps choose **💬 Claude app** when you create or import a Roadmap. Copy the one message noema-lite shows into a Claude chat: Claude builds the Roadmap, plans the chapters and prepares the queued steps; they appear on the Roadmap by themselves. No API cost — the bigger the Roadmap, the bigger the saving.",
+  "@engine.guide.claude.step4": {
+    "description": "Setup guide “Set up Claude and create subjects (three ways)” (Account menu › ❓ Help): step 4. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.claude.step5": "Claude reads everything, adds pictures (from your sources, from the web and its own diagrams / graphs) and builds the pack; the new subject appears in your picker.",
+  "@engine.guide.claude.step5": {
+    "description": "Setup guide “Set up Claude and create subjects (three ways)” (Account menu › ❓ Help): step 5. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.claude.step6": "Share it if you like: 🔗 on the subject → public (🌍 Explore) or with one person.",
+  "@engine.guide.claude.step6": {
+    "description": "Setup guide “Set up Claude and create subjects (three ways)” (Account menu › ❓ Help): step 6. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.claude.note1": "Way A: your API key stays on this device only. Way B: noema-lite never sees your Claude login.",
+  "@engine.guide.claude.note1": {
+    "description": "Setup guide “Set up Claude and create subjects (three ways)” (Account menu › ❓ Help): note 1 (after 💡). Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.claude.note2": "Updates are additive: Claude keeps all ids, so your progress stays.",
+  "@engine.guide.claude.note2": {
+    "description": "Setup guide “Set up Claude and create subjects (three ways)” (Account menu › ❓ Help): note 2 (after 💡). Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.curricula.title": "Roadmaps: from a goal to a Roadmap of steps",
+  "@engine.guide.curricula.title": {
+    "description": "Title (after 🧭) of a setup guide in Help."
+  },
+  "engine.guide.curricula.who": "Everyone with a Claude API key or a Gemini key",
+  "@engine.guide.curricula.who": {
+    "description": "Setup guide “Roadmaps: from a goal to a Roadmap of steps” (Account menu › ❓ Help): who the guide is for (after 👤)."
+  },
+  "engine.guide.curricula.step1": "Subject picker → **🧭 Roadmaps** (or 🧭 in the top bar) → **➕ New Roadmap**.",
+  "@engine.guide.curricula.step1": {
+    "description": "Setup guide “Roadmaps: from a goal to a Roadmap of steps” (Account menu › ❓ Help): step 1. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.curricula.step2": "Type what you want to master, your starting point and the depth. Four AI agents lay it out: **every prerequisite** (from several sciences), **the whole goal** (aspects, sub-topics, synthesis) and **applications**; then they plan the chapters of every step.",
+  "@engine.guide.curricula.step2": {
+    "description": "Setup guide “Roadmaps: from a goal to a Roadmap of steps” (Account menu › ❓ Help): step 2. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.curricula.step3": "The Roadmap shows three parts. **open** steps (green open padlock) can be studied; **🔒 locked** ones show their information and chapters but open only when their prerequisites are mastered.",
+  "@engine.guide.curricula.step3": {
+    "description": "Setup guide “Roadmaps: from a goal to a Roadmap of steps” (Account menu › ❓ Help): step 3. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.curricula.step4": "Every step becomes a full subject (theory, exercises, flashcards, drills, tutor), prepared in the background a few steps ahead while the app is open — with Claude from official sources found on the web, or with Gemini and Google Search.",
+  "@engine.guide.curricula.step4": {
+    "description": "Setup guide “Roadmaps: from a goal to a Roadmap of steps” (Account menu › ❓ Help): step 4. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.curricula.step5": "A step is **✅ mastered** when all its sections are read and 80 % of its exercises solved — or with **🎓 I already know this** (8 of 10 in a short test).",
+  "@engine.guide.curricula.step5": {
+    "description": "Setup guide “Roadmaps: from a goal to a Roadmap of steps” (Account menu › ❓ Help): step 5. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.curricula.step6": "Already have a subject for a step? On the step: **📦 Use a subject I have**. Only that step is re-planned to follow the subject (🔄 until its new plan is here); it is never generated. Subjects on no step wait on the **📚 Shelf** (bottom of the subject picker): study them there, or **🧭 Put on a Roadmap…**.",
+  "@engine.guide.curricula.step6": {
+    "description": "Setup guide “Roadmaps: from a goal to a Roadmap of steps” (Account menu › ❓ Help): step 6. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.curricula.note1": "Roadmaps and prepared steps are saved in your account (cloud) like your subjects.",
+  "@engine.guide.curricula.note1": {
+    "description": "Setup guide “Roadmaps: from a goal to a Roadmap of steps” (Account menu › ❓ Help): note 1 (after 💡). Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.curricula.note2": "Claude costs a few dollars per prepared step (limit per step in ⚙️ of the Roadmap); Gemini’s free quota is limited.",
+  "@engine.guide.curricula.note2": {
+    "description": "Setup guide “Roadmaps: from a goal to a Roadmap of steps” (Account menu › ❓ Help): note 2 (after 💡). Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.friends.title": "Invite friends",
+  "@engine.guide.friends.title": {
+    "description": "Title (after 👥) of a setup guide in Help."
+  },
+  "engine.guide.friends.who": "You",
+  "@engine.guide.friends.who": {
+    "description": "Setup guide “Invite friends” (Account menu › ❓ Help): who the guide is for (after 👤)."
+  },
+  "engine.guide.friends.step1": "Send them the website link{hasSite, select, yes { ({site})} other {}}.",
+  "@engine.guide.friends.step1": {
+    "description": "Setup guide “Invite friends” (Account menu › ❓ Help): step 1. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them. hasSite = yes/no: whether the site’s address {site} is known.",
+    "placeholders": {
+      "hasSite": {
+        "type": "String",
+        "example": "yes"
+      },
+      "site": {
+        "type": "String",
+        "example": "https://noema.example.org"
+      }
+    }
+  },
+  "engine.guide.friends.step2": "Each friend creates their **own cloud account** — they see the shared subjects, never your progress, conversations or key.",
+  "@engine.guide.friends.step2": {
+    "description": "Setup guide “Invite friends” (Account menu › ❓ Help): step 2. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.friends.step3": "Each friend adds **their own free Gemini key** (guide: “Get your free Gemini API key”).",
+  "@engine.guide.friends.step3": {
+    "description": "Setup guide “Invite friends” (Account menu › ❓ Help): step 3. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.friends.step4": "Want to give them one of your subjects? Subject picker → **🔗** on the subject → *Share with a person* (their e-mail) — they get a 🔔 and accept. Or **🌍 Make it public** so everybody finds it in Explore.",
+  "@engine.guide.friends.step4": {
+    "description": "Setup guide “Invite friends” (Account menu › ❓ Help): step 4. Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.guide.friends.note1": "Supabase’s built-in email service sends only a few emails per hour: for more than a handful of friends, either turn off “Confirm email” (Authentication → Providers → Email) or connect your own SMTP.",
+  "@engine.guide.friends.note1": {
+    "description": "Setup guide “Invite friends” (Account menu › ❓ Help): note 1 (after 💡). Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
   }
 }

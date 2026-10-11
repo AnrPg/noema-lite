@@ -7,3 +7,4 @@ engine.new.stat_*
 engine.deck.st_*
 engine.cv.kind_*
 engine.cv.mode_*
+engine.guide.*
