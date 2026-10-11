@@ -81,7 +81,7 @@ const sentencesFor = (data, code, fns) => mini.langs[code].bank.filter(s => (s.f
   e = N.checkLangAnswer(rec, data, tDef, { grammar: gDef, bank: wrong });
   ok(e.some(x => /“esst” is not the V;PRS;3;SG form of de:essen \(“isst”\)/.test(x)), 'a sentence token that is not its paradigm cell is refused: ' + (e[0] || '').slice(0, 110));
   const noNotes = clone(gDef); noNotes.notes = noNotes.notes.slice(0, 3);
-  ok(N.checkLangAnswer(rec, data, tDef, { grammar: noNotes, bank: sDef }).some(x => /contrast notes \(D19\) missing: .*it, es, sq, pt, type:fusional/.test(x)), 'a grammar page with notes for too few supported natives is refused (D19)');
+  ok(N.checkLangAnswer(rec, data, tDef, { grammar: noNotes, bank: sDef }).some(x => /contrast notes \(D19\) missing: en, fr, ar, hi, zh, ja, it, sq, pt, type:fusional.*\(now at least 5 supported natives: 3\)/.test(x)), 'a grammar page with notes for too few supported natives is refused (D19)');
   ok(!N.checkLangAnswer(rec, data, tDef, { grammar: gDef, bank: sDef }).some(x => /D19/.test(x)), 'while the content is rewritten (LANGJOBS.D19.strict off) a page with notes for most supported natives passes');
   N.LANGJOBS.D19.strict = true;
   const strictE = N.checkLangAnswer(rec, data, tDef, { grammar: gDef, bank: sDef });
