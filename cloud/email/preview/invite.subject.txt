@@ -1,0 +1,1 @@
+{{ $l := printf "%v" .Data.locale }}{{ if eq $l "el" }}Σε προσκαλούν στο noema-lite{{ else if eq $l "ru" }}Тебя приглашают в noema-lite{{ else if eq $l "fr" }}Tu es invité·e sur noema-lite{{ else }}You are invited to noema-lite{{ end }}

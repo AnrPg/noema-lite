@@ -1,0 +1,1 @@
+{{ $l := printf "%v" .Data.locale }}{{ if eq $l "el" }}Ο κωδικός επιβεβαίωσής σου για το noema-lite{{ else if eq $l "ru" }}Твой код подтверждения noema-lite{{ else if eq $l "fr" }}Ton code de confirmation noema-lite{{ else }}Your noema-lite confirmation code{{ end }}

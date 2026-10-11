@@ -1,0 +1,1 @@
+{{ $l := printf "%v" .Data.locale }}{{ if eq $l "el" }}Επιβεβαίωσε τη νέα σου διεύθυνση e-mail{{ else if eq $l "ru" }}Подтверди новый адрес e-mail{{ else if eq $l "fr" }}Confirme ta nouvelle adresse e-mail{{ else }}Confirm your new e-mail address{{ end }}
