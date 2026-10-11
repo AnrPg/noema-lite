@@ -125,8 +125,12 @@ function frameHome(v, acts, hold) {
   const langItems = rows.map(row => {
     const c = row.dataset.lang, bs = [...row.querySelectorAll('button')]; bs.forEach(b => hold.append(b));
     const k = N.known(UI.C, UI.L, c), kn = Object.values(k.state).filter(s => ['known_r', 'known_p', 'mastered'].includes(s)).length;
-    return { label: info(c).name, sub: kn ? `${kn} words known` : null, flag: info(c).flag, key: 'lang-' + c, run: () => frameSheet(`${info(c).flag} ${info(c).name}`, () => bs.map(b => frameAct(b))) };
+    const added = (course.added || {})[c], rm = added ? [{ label: 'Remove this language', sub: 'Added through Claude', icon: 'trash', key: 'remove-' + c, run: () => NoemaLangUI.claude.removeAdded(c) }] : [];
+    return { label: info(c).name, sub: kn ? `${kn} words known` : added ? 'Added through Claude' : null, flag: info(c).flag, key: 'lang-' + c, run: () => frameSheet(`${info(c).flag} ${info(c).name}`, () => [...bs.map(b => frameAct(b)), ...rm]) };
   });
+  // ⋮ › a language added by a package (docs/LANGUAGES.md §10.2) › Remove this language
+  for (const c of Object.keys(course.added || {})) if (UI.C.lang[c]) acts.push({ label: info(c).name, sub: 'Added through Claude', flag: info(c).flag, icon: 'globe', key: 'added-' + c,
+    run: () => frameSheet(`${info(c).flag} ${info(c).name}`, () => [{ label: 'Remove this language', sub: 'It leaves this course on every device; your progress is kept', icon: 'trash', key: 'remove-' + c, run: () => NoemaLangUI.claude.removeAdded(c) }]) });
   const poly = [...v.querySelectorAll('.lx-polydrills button')], drills = [...v.querySelectorAll('.lx-drills button:not(summary)')];
   poly.forEach(b => hold.append(b)); drills.forEach(b => hold.append(b));
   if (poly.length) langItems.push({ label: 'Across your languages', sub: 'Compare, bridges, which language', icon: 'globe', key: 'across', run: () => frameSheet('Across your languages', () => poly.map(b => frameAct(b))) });

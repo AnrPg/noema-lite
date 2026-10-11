@@ -105,6 +105,25 @@ The connector runs the app's own code for this (`engine/llm.js`, `curriculum.js`
 In noema-lite: ❓ Help → Set up Claude → **C** (⭐ recommended for curricula — usually the cheapest), and the
 “💬 Claude app” choice when creating or importing a curriculum.
 
+## D. A whole language in one prompt (connector + skill)
+
+The learner says one sentence in the Claude app — *"add Persian to my polyglot course"* — and Claude builds a complete
+**language package** (docs/LANGUAGES.md §10.2: one language for one course, `noema.langpack/v1`) and saves it into the
+learner's account; the app adds the language to the course on every device. Tools:
+* `noema_language_package_guide` (course id or title — a library course or the learner's own —, language code or name) →
+  the complete instructions of the skill `noema-language-builder` specialised for that course and language: the
+  playbook's steps in order (docs/NEW_LANGUAGE_PLAYBOOK.md), the batches with the node ids of THIS course, the toolkit
+  (`/downloads/noema-language-builder.zip`) and course file links, the checks, the progress file, the upload. With it
+  Claude needs no skill installed. Prompt `add_language` (claude.ai: **+ → noema-lite → Add a language to my course**).
+* `noema_lang_package_start` (course, language code) → a signed upload URL (2 h) into the learner's private storage
+  `langs/<course>.lang-<code>.json` and the exact `curl` command (like `noema_start_upload`).
+* `noema_lang_package_finish` (course, language code) → downloads the file, checks it with the app's own
+  `checkLangPackage` against the course (the library course file of the website, or the account course) and records
+  `a:langpack:<course>:<code>` (synced to every device); a refused package comes back with every problem listed.
+The connector stores no secret and writes only the learner's own storage and keys. The work itself (≈ 25 batches, each a
+sub-agent with the audit turn) needs a sandbox that runs long tasks — Claude Code or the Claude app / Cowork with code
+execution; a plain chat cannot do it. Tested by `tests/lang_package.js`.
+
 ## One-time setup (owner)
 
 1. **Supabase → Authentication → OAuth Server**: enable the OAuth 2.1 server, turn on **dynamic client
@@ -123,6 +142,9 @@ In noema-lite: ❓ Help → Set up Claude → **C** (⭐ recommended for curricu
   (numbered steps, tips, FAQ), phone layout, `/api/img` safety.
 * `tests/connector.js` — way B: 401 + resource metadata, protocol, every tool, toolkit + prompt,
   upload → check → register, refusal of broken packs, consent page, the subject in the picker.
+* `tests/lang_package.js` — way D: the package round trip (`lang_course.py package` / `unpack --package`), the check that
+  refuses a wrong form, a missing facade or a new node, start / finish (signed URL, the record, the problems listed), the
+  app with the added language after a reload and on a second device, Remove, phone width.
 * `tests/curriculum_app.js` — way C: a curriculum built and planned by the connector as the learner's Claude (wrong
   answers sent back, the inbox, the app applying it), a step prepared and picked up, the learner's PDF by signed link and
   not uploaded twice, the by-hand path (copy / paste, step bundle, 📥 package), Set up Claude → C, phone.

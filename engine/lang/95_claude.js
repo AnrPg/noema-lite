@@ -61,10 +61,70 @@
     return { data: N.langApplyPatch(JSON.parse(JSON.stringify(lib)), patch), patch };
   }
 
+  /* ---------- §10.2 the learner's language packages: records a:langpack:<course>:<code> (synced keys, written by the connector),
+     files langs/<course>.lang-<code>.json in the private storage, cached on the device by the record's time ---------- */
+  const PKP = (acc, cid) => `noema1:${acc}:a:langpack:${cid}:`;
+  function packRecords(acc, cid) {
+    const p = PKP(acc, cid), out = [];
+    for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k && k.startsWith(p)) { const r = jparse(localStorage.getItem(k)); if (r?.code) out.push(r); } }
+    return out.sort((a, b) => String(a.code).localeCompare(String(b.code)));
+  }
+  const PACKS = {};   // acc|course → the packages laid over the open course (again after a merge rebuilds it)
+  async function loadPack(acc, cid, r) {
+    const k = devKey(acc, 'langpack', cid + ':' + r.code), c = await devGet(k);
+    if (c?.pkg && c.at === r.at) return c.pkg;
+    if (cloudAcc(acc)) { const p = await cloudGet(r.path || N.langPackPath(cid, r.code)); if (p?.code === r.code) { await devPut(k, { at: r.at, pkg: p }); return p; } }
+    return c?.pkg || null;   // offline: the copy this device has
+  }
+  const applyPacks = (data, pk) => (pk || []).reduce((d, p) => { try { return N.langApplyPackage(d, p); } catch (e) { console.warn('[langpack]', e); return d; } }, data);
+  /** The course with the learner's packages laid over it (a new object: the library pack stays as the website sent it). */
+  async function withPackages(acc, cid, data) {
+    const rs = packRecords(acc, cid);
+    const pk = rs.length ? (await Promise.all(rs.map(r => loadPack(acc, cid, r).catch(() => null)))).filter(Boolean) : [];
+    PACKS[acc + '|' + cid] = pk;
+    return applyPacks(data, pk);
+  }
+  /** Remove a language a package added: the record (synced — every device drops it), the file, the device copy. */
+  async function removePackage(acc, cid, code) {
+    const key = PKP(acc, cid) + code;
+    if (window.Noema?.kv?.del) Noema.kv.del(key); else localStorage.removeItem(key);
+    await devPut(devKey(acc, 'langpack', cid + ':' + code), null);
+    if (UI.acc === acc && UI.id === cid && UI.L) {   // the learner's choice of languages forgets it; adding it again makes it active again
+      UI.prefs.addedSeen = (UI.prefs.addedSeen || []).filter(c => c !== code);
+      UI.L.settings.languages = (UI.L.settings.languages || []).filter(c => c !== code); if (UI.prefs.lang === code) delete UI.prefs.lang;
+      save(true);
+    }
+    if (cloudAcc(acc)) {
+      await NoemaCloud.push(acc).catch(e => console.warn('[langpack] push', e));
+      await NoemaCloud.deleteObjects('noema-private', [`${NoemaCloud.session().user.id}/${N.langPackPath(cid, code)}`]).catch(e => console.warn('[langpack] delete', e));
+    }
+  }
+  /** A language a package added becomes active once for a learner who chose their languages before (called by start). */
+  function activateAdded() {
+    const added = Object.keys(UI.C?.data.course.added || {}); if (!added.length) return;
+    const seen = UI.prefs.addedSeen || [], fresh = added.filter(c => !seen.includes(c)); if (!fresh.length) return;
+    UI.L.settings.languages = [...new Set([...(UI.L.settings.languages || UI.C.languages), ...fresh])];
+    UI.prefs.addedSeen = [...seen, ...fresh]; save();
+  }
+  /** ⋮ › the language › Remove this language (and the course settings): asks, removes, opens the course again without it. */
+  async function removeAdded(code) {
+    const a = UI.C?.data.course.added?.[code]; if (!a) return;
+    if (!confirm(`Remove ${a.name || info(code).name} from “${UI.C.data.course.title}”?\n\nThe language leaves this course on every device. Your progress in it is kept: adding it again through Claude brings it back.`)) return;
+    await removePackage(UI.acc, UI.id, code);
+    toast(`${a.name || info(code).name} removed from the course`, 2500);
+    setTimeout(() => location.reload(), 300);
+  }
+  const addedPanel = () => {
+    const added = UI.C.data.course.added || {}, codes = Object.keys(added); if (!codes.length) return null;
+    return h('div', { class: 'lj-added' }, h('h3', { class: 'lx-h3' }, 'Languages added through Claude'),
+      ...codes.map(c => h('div', { class: 'row lj-addedrow', 'data-lang': c }, h('span', {}, info(c).flag, ' ', h('b', {}, added[c].name || info(c).name), added[c].built ? h('span', { class: 'tiny' }, ' · made ' + String(added[c].built).slice(0, 10)) : null),
+        h('button', { class: 'btn small ghost lj-remove', 'data-lang': c, onclick: () => removeAdded(c) }, 'Remove this language'))));
+  };
+
   /* ---------- the course that is open: rebuilt after a merge ---------- */
   function refresh(acc, cid, data) {
     if (UI.acc !== acc || UI.id !== cid || !UI.C) return;
-    UI.C = N.course(data); const prof = (window.NOEMA_LANGPROFILES || {})[cid]; if (prof) N.addProfiles(UI.C, prof);
+    UI.C = N.course(applyPacks(data, PACKS[acc + '|' + cid])); const prof = (window.NOEMA_LANGPROFILES || {})[cid]; if (prof) N.addProfiles(UI.C, prof);
     UI.L = N.fromKV(UI.C, N.toKV(UI.C, UI.L));
     if (!document.querySelector('.lx-session')) render();
   }
@@ -149,8 +209,9 @@
   }
 
   /* ---------- for the loader: an account course to open, a library course with the learner's patch ---------- */
-  async function loadCourse(acc, cid) { await poll(acc, { only: cid }).catch(() => { }); return loadContent(acc, cid); }
+  async function loadCourse(acc, cid) { await poll(acc, { only: cid }).catch(() => { }); return withPackages(acc, cid, await loadContent(acc, cid)); }
   async function withPatch(acc, cid, data) {
+    data = await withPackages(acc, cid, data);   // the learner's language packages first (§10.2), then the refills
     const rec = getRec(acc, cid); if (!rec || rec.origin !== 'library') return data;   // no refills yet: the course as built
     await poll(acc, { only: cid }).catch(() => { });
     return N.langApplyPatch(data, await loadPatch(acc, cid));
@@ -302,6 +363,7 @@
   VIEWS.fn = (v, r) => {
     fn0(v, r);
     const fid = r.arg, c = r.arg2 && UI.C.lang[r.arg2] ? r.arg2 : UI.lang; if (!UI.C.functions[fid] || !LX(c).grammar[fid] || UI.C.functions[fid].category === 'overview') return;
+    if ((UI.C.data.course.added || {})[c]) return;   // a language added by a package: no refills for it yet (§10.2)
     const cmp = (UI.C.data.compare || {})[fid];
     if (cmp) {
       const head = h('thead', {}, h('tr', {}, h('th', {}, ''), ...UI.C.languages.map(x => h('th', {}, info(x).flag, ' ', info(x).name))));
@@ -319,6 +381,11 @@
       } }, f.state === 'ready' ? '✨ Ask Claude for even more sentences' : '✨ Ask Claude for more sentences with what I know'))));
   };
 
-  Object.assign(window.NoemaLangUI, { newCourse, claude: { records, getRec, putRec, loadCourse, withPatch, loadContent, saveContent, loadPatch, create, runTask, runQueue, copyTask, paste, poll, startPolling, queueRefill, libraryData } });
+  // the course settings: the languages added through Claude, each with Remove (§10.2)
+  const settings0 = VIEWS.settings;
+  VIEWS.settings = (v, r) => { settings0(v, r); const p = addedPanel(); if (p) { const tail = [...v.children].reverse().find(x => x.tagName === 'P'); tail ? tail.before(p) : v.append(p); } };
+
+  Object.assign(window.NoemaLangUI, { newCourse, claude: { records, getRec, putRec, loadCourse, withPatch, loadContent, saveContent, loadPatch, create, runTask, runQueue, copyTask, paste, poll, startPolling, queueRefill, libraryData,
+    packRecords, withPackages, removePackage, removeAdded, activateAdded } });
   addEventListener('noema:remote', e => { if (UI.C && e.detail?.acc === UI.acc && (e.detail.keys || []).some(k => k.includes(':a:langcourse:' + UI.id)) && UI.view === 'claude') render(); });
 })();

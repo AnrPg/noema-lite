@@ -493,8 +493,11 @@
   /* ---------------- language courses (docs/LANGUAGES.md): their own runtime and UI, loaded instead of the subject engine ---------------- */
   /** The account's own language courses, made through Claude (docs/LANGUAGES.md §10.1): records a:langcourse:<id>. */
   const langAccount = acc => ls.keys(`${P}${acc}:a:langcourse:`).map(k => jget(k, null)).filter(r => r && r.origin === 'account' && r.id);
-  const langMeta = id => { const m = (REG.languages || []).find(x => 'lang:' + x.id === id); if (m) return { ...m, id: 'lang:' + m.id, courseId: m.id, kind: 'language' };
-    const r = KV.acc && langAccount(KV.acc).find(x => 'lang:' + x.id === id); return r ? { id: 'lang:' + r.id, courseId: r.id, title: r.title, languages: r.languages, kind: 'language', account: true } : null; };
+  /** The languages the learner added to a course with a language package (records a:langpack:<course>:<code>, docs/LANGUAGES.md §10.2). */
+  const langAdded = (acc, cid) => acc ? ls.keys(`${P}${acc}:a:langpack:${cid}:`).map(k => jget(k, null)).filter(r => r && r.code).map(r => r.code) : [];
+  const withAdded = (langs, cid) => [...(langs || []), ...langAdded(KV.acc, cid).filter(c => !(langs || []).includes(c))];
+  const langMeta = id => { const m = (REG.languages || []).find(x => 'lang:' + x.id === id); if (m) return { ...m, languages: withAdded(m.languages, m.id), id: 'lang:' + m.id, courseId: m.id, kind: 'language' };
+    const r = KV.acc && langAccount(KV.acc).find(x => 'lang:' + x.id === id); return r ? { id: 'lang:' + r.id, courseId: r.id, title: r.title, languages: withAdded(r.languages, r.id), kind: 'language', account: true } : null; };
   let langCSS = null;
   const loadLangUI = async () => { const base = window.NOEMA_ENGINE_BASE || 'engine/'; await (langCSS || (langCSS = loadCSS(base + 'langui.css'))); if (!window.NoemaLang) await loadScript(base + 'langcore.js'); if (!window.NoemaLangUI) await loadScript(base + 'langui.js'); };
   /** A course's content: an account course from the device / the cloud; a library course with the learner's private refills (docs/LANGUAGES.md §10.1). */

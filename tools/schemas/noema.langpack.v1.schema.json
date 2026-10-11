@@ -1,0 +1,42 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "noema.langpack.v1",
+ "title": "noema-lite language package (docs/LANGUAGES.md §10.2)",
+ "description": "ONE language for ONE language course, as one file: made by `tools/lang_course.py package <course-folder> <code>` (refused while validate_lang.py --strict --lang <code> has errors), checked by langcore.checkLangPackage (the app and the connector) and added to the course by langcore.langApplyPackage. A package fills the course's existing nodes and functions; it never adds a node, a concept, a function or a frame. The parts use the definitions of noema.lang.v1.",
+ "type": "object",
+ "required": ["format", "course", "code", "name", "built", "language", "lexicon", "grammar", "bank", "phenomena", "checks"],
+ "properties": {
+  "format": { "const": "noema.langpack/v1" },
+  "course": { "type": "string", "pattern": "^[a-z0-9-]+$", "description": "the course id (a library course or the learner's account course)" },
+  "code": { "type": "string", "pattern": "^[a-z]{2,3}$", "description": "ISO 639 code of the language; new to the course" },
+  "name": { "type": "string", "description": "the language's name in English (e.g. Persian)" },
+  "nativeName": { "type": "string" },
+  "flag": { "type": "string", "description": "an emoji flag shown with the language (optional)" },
+  "built": { "type": "string", "description": "ISO time the package was made" },
+  "language": { "$ref": "noema.lang.v1#/$defs/language", "description": "lang/<code>/language.json" },
+  "lexicon": { "type": "object", "description": "node id → lang/<code>/lexicon/<node>.json (only nodes of the course)", "additionalProperties": { "$ref": "noema.lang.v1#/$defs/lexicon" } },
+  "grammar": { "type": "object", "description": "function id → lang/<code>/grammar/<fn>.json (only functions of the course)", "additionalProperties": { "$ref": "noema.lang.v1#/$defs/grammar" } },
+  "bank": { "type": "array", "description": "every sentence of lang/<code>/bank/*.json", "items": { "type": "object" } },
+  "fieldExemptions": { "type": "array", "description": "D19: the bank's fieldExemptions ({field, function, reason}) — a field that cannot show a node says why", "items": { "type": "object" } },
+  "script": { "type": ["object", "null"], "description": "lang/<code>/script.json (§4.9), when the language has one" },
+  "chars": { "type": ["object", "null"], "description": "lang/<code>/chars.json (§4.9), when the language has one" },
+  "phenomena": { "$ref": "noema.lang.v1#/$defs/phenomena", "description": "library/languages/_phenomena/<code>.json — the whole catalogue (D14, §4.11)" },
+  "typology": {
+   "type": "object", "description": "the language's entry for library/languages/_typology/languages.json — only when the library has no profile for it (D16)",
+   "required": ["code", "name", "typology", "values"],
+   "properties": { "code": { "type": "string" }, "name": { "type": "string" }, "family": { "type": "string" }, "typology": { "enum": ["isolating", "agglutinating", "fusional", "polysynthetic"] }, "values": { "type": "object", "additionalProperties": { "type": "string" } } }
+  },
+  "seeAlso": {
+   "type": "object", "description": "additions to the other course languages' grammar pages: language code → function id → [seeAlso entries pointing to the new language]",
+   "additionalProperties": { "type": "object", "additionalProperties": { "type": "array", "items": { "type": "object", "required": ["lang", "fn"], "properties": { "lang": { "type": "string" }, "fn": { "type": "string" }, "note": { "type": "string" } } } } }
+  },
+  "checks": {
+   "type": "object", "required": ["validator"],
+   "properties": {
+    "validator": { "type": "object", "required": ["errors"], "properties": { "errors": { "const": 0 }, "warnings": { "type": "integer" }, "strict": { "const": true } } },
+    "refcheck": { "type": "object", "properties": { "words": { "type": "integer" }, "problems": { "type": "integer" }, "unverified": { "type": "integer" }, "offline": { "type": "boolean" } } },
+    "phenomena": { "type": "object", "properties": { "phenomena": { "type": "integer" }, "covered": { "type": "integer" }, "partial": { "type": "integer" }, "missing": { "type": "integer" }, "errors": { "type": "integer" } } }
+   }
+  }
+ }
+}

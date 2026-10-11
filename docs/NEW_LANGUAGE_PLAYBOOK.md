@@ -30,6 +30,34 @@ suite is green. While a lesson is written in some languages only, the course kee
 **Placeholders.** Replace `<LANG>` (the name, e.g. Persian), `<code>` (ISO 639-1, e.g. `fa`), `<type>` (fusional /
 agglutinating / isolating / polysynthetic) and `<course>` (e.g. `polyglot-semitic-zh-de`).
 
+## One prompt: the skill and the connector
+
+The same prompts, run by Claude itself from ONE sentence of the learner — *"add Persian to my polyglot course"* — in an
+environment with a sandbox and sub-agents (Claude Code, or the Claude app / Cowork with code execution and the noema-lite
+connector). docs/LANGUAGES.md §10.2 is the contract.
+
+* **The skill** `skill/noema-language-builder/SKILL.md` (`noema-language-builder.zip`; also `LANGUAGE_BUILDER.md` in the
+  noema-pack-builder toolkit) carries this playbook, the brief templates, `AGENT_BRIEF.md` and `mkbrief.py`, so it works
+  without the repository. It unpacks the course into the sandbox (`lang_course.py unpack … --world`), runs prompts 1–14
+  **in order, each as a fresh sub-agent** with its brief (`mkbrief.py … --course-dir work/lang/<course> --sandbox`: the
+  repository paths become the sandbox's), gives every content step its audit turn, runs the checks after each step, keeps
+  `work/<code>-progress.json` (a run that stops resumes at the first step not marked done), and at the end makes ONE file:
+  `python3 scripts/lang_course.py package work/lang/<course> <code> -o work/<code>.langpack.json` (refused while
+  `validate_lang.py --strict --lang <code>` has errors).
+* **The upload**: `noema_lang_package_start` (course, code) → `curl` → `noema_lang_package_finish`, which checks the package
+  exactly as the app does (`checkLangPackage`) and records it in the learner's account; the app adds the language to the
+  course on every device (a lane, a chip, a row on the course home) and ⋮ › the language › *Remove this language* takes it
+  away again.
+* **Without the skill**: the connector's `noema_language_package_guide` (course, language) returns the same instructions
+  specialised for that course and language — the batches with their node ids, the toolkit and course links, the upload —
+  and the prompt **"Add a language to my course"** starts it in the Claude app.
+* **In the sandbox, prompt 2 shrinks**: the engine (LANG_INFO, tokenizer, script module and keyboard, speech tag) is code
+  of this repository; the skill reports what the language would need there and the app falls back to its defaults
+  (Intl name, 🏳️ or the package's flag, space tokenization over the stored forms).
+* **Scale and honesty**: ≈ 25 batches of hours of careful work. A plain chat without a sandbox cannot do it; the skill
+  says so instead of trying. The audit turn is never skipped and no form is invented; the final report lists what was
+  written, what is absent and what a native speaker should check.
+
 ---
 
 ## Prompt 1 — Typology and phenomena
