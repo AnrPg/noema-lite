@@ -30,6 +30,7 @@
    "type": "object", "description": "additions to the other course languages' grammar pages: language code → function id → [seeAlso entries pointing to the new language]",
    "additionalProperties": { "type": "object", "additionalProperties": { "type": "array", "items": { "type": "object", "required": ["lang", "fn"], "properties": { "lang": { "type": "string" }, "fn": { "type": "string" }, "note": { "type": "string" } } } } }
   },
+  "wordParameters": { "type": "string", "description": "R3: lang/<code>/WORD_PARAMETERS.md — the exhaustive per-part-of-speech map of the word's distinctive parameters (Markdown, a section per POS naming every parameter of language.wordFeatures), written before any word (docs/language-packs.md §2.4)" },
   "facades": {
    "type": "object", "description": "D19 (optional, additive): locale facades of the new language's texts — locale → { address → {t, src} } (noema.langfacade.v1 #/$defs/entries; the addresses of tools/schemas/noema.langfacade.fields.json for lang/<code>/* and _phenomena/<code>.json). Written to facades/<locale>/<code>.json and _phenomena/facades/<locale>/<code>.json; a missing address falls back to the master.",
    "propertyNames": { "pattern": "^[a-z]{2,3}(-[A-Za-z0-9]{2,8})*$" },

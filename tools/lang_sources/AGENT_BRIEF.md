@@ -4,8 +4,8 @@ You work on the language courses of noema-lite. **`docs/LANGUAGE_RULES.md` is bi
 else, then the sections of `docs/LANGUAGES.md` your task touches. In short:
 
 - **D19 FIRST — taught through the learner's native language** (`docs/language-packs.md`). Every learner reads the
-  explanations in their native language (supported: **en el ru fr ar de hi zh ja it es sq pt**, the UI locales' languages)
-  and gets comparisons with THAT language only — or with its type / branch / family. So every general text you write
+  explanations in their native language (supported: **en el ru fr ar de hi zh ja it es sq pt tr**, the UI locales' languages)
+  and sees the comparisons with their own languages first (R1) — or the note for its type / branch / family. So every general text you write
   (summary, blocks, procedure, traps, quiz, seeAlso, facts, word profiles, `features.*.none`, phenomena, titles) names
   **no language outside the course** and explains nothing through English grammar ("no ‘do’", "-ing", "is not ‘the’");
   it says what the language does. Every comparison is a **contrast note** `{for, rel, text}`: on **every grammar page**
@@ -14,6 +14,15 @@ else, then the sections of `docs/LANGUAGES.md` your task touches. In short:
   that invites a comparison; `notes` on phenomena. A note names only its own language (examples in it, in its script),
   the course languages and the point. Notes are written in English (the master); the locale facades
   (`facades/<locale>/`) are separate tasks. Etymologies may name a source language ("borrowed from Persian").
+- **R1–R3 (2026-10-11, with D19; `docs/language-packs.md` §2.2–§2.4).** **R1** — three sections of comparisons: “From your
+  languages” (the native's note first, then one per C1 / C2 language), “Among the languages you are learning” (the other
+  course languages), “From other languages” (folded, every other note); a locale facade translates all notes. **R2** —
+  notes, pitfalls, subtleties, fun facts and feeling are **structured**, in this Markdown subset only: paragraphs
+  separated by a blank line; `- ` / `1. ` lists for two or more points; `**bold**` for the one key sentence or word;
+  `*italic*` for a cited word; an example on its own line starting with `→ ` (`→ ich habe gegessen — έχω φάει`); no
+  headings, links, HTML, tables, code. **R3** — a language's **first step, before any word**, is the exhaustive
+  per-part-of-speech map of the word's distinctive parameters (`lang/<code>/WORD_PARAMETERS.md` + `wordFeatures` with
+  `prominent` / `order`); every word states every parameter of its part of speech (a value or `{"none": "<why>"}`).
 
 - **D13 one common order** — never teach a subject (node, grammar function, concept) earlier or later in one language than
   in the others; a needed move is reported, not made.

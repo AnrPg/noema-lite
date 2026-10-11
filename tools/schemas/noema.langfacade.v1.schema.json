@@ -11,7 +11,7 @@
    "properties": {
     "format": { "const": "noema.langfacade/v1" },
     "course": { "type": "string", "pattern": "^[a-z0-9-]+$", "description": "the course id" },
-    "locale": { "type": "string", "pattern": "^[a-z]{2,3}(-[A-Za-z0-9]{2,8})*$", "description": "a UI locale of docs/i18n.md §2 (en el ru fr ar-EG de hi zh-Hans zh-Hant ja it es-ES sq pt-PT)" },
+    "locale": { "type": "string", "pattern": "^[a-z]{2,3}(-[A-Za-z0-9]{2,8})*$", "description": "a UI locale of docs/i18n.md §2 (en el ru fr ar-EG de hi zh-Hans zh-Hant ja it es-ES sq pt-PT tr); a locale facade carries every note (R1)" },
     "master": { "const": "en", "description": "the language of the master texts" },
     "status": { "enum": ["draft", "preview", "on"], "description": "draft: shown only with config.i18nDrafts; preview: on deploy previews; on: offered as an explanation language (with Tier 1 complete)" },
     "coverage": {

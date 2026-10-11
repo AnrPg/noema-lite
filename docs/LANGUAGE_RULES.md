@@ -8,9 +8,9 @@ wins and this file is fixed in the same commit. `tests/lang_rules.py` fails when
 missing here or when one of the places below does not point to this file.
 
 > **First rule — D19: every language is taught through the learner's native language** (contract: `docs/language-packs.md`).
-> Supported natives = the languages of the UI locales: **en el ru fr ar de hi zh ja it es sq pt**. A learner with a
-> supported native reads every explanation in it and gets comparisons with it only; any other learner reads the UI
-> language and gets comparisons with the type / branch / family of their language. So everything you write is
+> Supported natives = the languages of the UI locales: **en el ru fr ar de hi zh ja it es sq pt tr**. A learner with a
+> supported native reads every explanation in it; any other learner reads the UI language and gets the note for the
+> type / branch / family of their language. So everything you write is
 > **neutral** — a general text (summary, blocks, traps, procedure, quiz, seeAlso, facts, word profiles, `features.*.none`,
 > phenomena, typology, titles) names **no language outside the course** and never explains through English grammar
 > (no "no ‘do’", "-ing", "is not ‘the’") — and every comparison is a **contrast note** `{for, rel, text}`: on **every
@@ -19,6 +19,21 @@ missing here or when one of the places below does not point to this file.
 > `notes` on phenomena. Notes are written in English (the master) with examples in the note's own language; provenance
 > ("borrowed from English") is allowed in etymologies. Locale facades (`facades/<locale>/`) are separate, later tasks.
 > Check: `python3 tools/lang_facade.py lint <course>`; `tools/validate_lang.py` (warnings now, errors with `--d19-strict`).
+>
+> **R1–R3 (2026-10-11, with D19; `docs/language-packs.md` §2.2–§2.4).**
+> **R1** — comparisons are shown in **three sections**: “From your languages” (the native's note **first**, then one per
+> language the learner speaks at **C1 / C2**; an unsupported native: its `branch:` ▸ `family:` ▸ `type:` note), “Among the
+> languages you are learning” (the other course languages), “From other languages” (**folded**, every other note). So:
+> a note for **every** supported native (tr included) and every type; a locale facade translates **all** notes.
+> **R2** — a note (and pitfalls, subtleties, fun facts, feeling) is **structured**, in this Markdown subset only:
+> paragraphs separated by a blank line · `- ` / `1. ` lists for two or more points · `**bold**` for the one key sentence
+> or word · `*italic*` for a cited word · an example on its own line starting with `→ ` — no headings, links, HTML,
+> tables or code. Example: `"Like Greek, German builds the perfect with **have + participle**.\n\n→ ich habe gegessen — έχω φάει"`.
+> **R3** — **first step of a language package, before any word**: the exhaustive per-part-of-speech map of the word's
+> distinctive parameters — `lang/<L>/WORD_PARAMETERS.md` (a section per POS naming every parameter: values, why it is
+> learned with the word, its phenomenon) + `language.json` `wordFeatures` (with `prominent` / `order`, the most important
+> first). Every word states every parameter of its POS (a value or `{"none": "<why>"}`). The validator checks the map,
+> every word, and the checklist of the language's type (`wordFeaturesChecklist` says why an item is not a word parameter).
 
 Where it is enforced: `CLAUDE.md` and `AGENTS.md` (read by code agents), `README.md` (🌍 Languages), the skill
 (`references/LANGUAGE_RULES.md` in the skill zip, step "Language courses" in `SKILL.md`; the skill
@@ -93,9 +108,13 @@ package `tools/lang_course.py package` and `langcore.checkLangPackage`, which th
 - [ ] Every word I write states its whole facade, every meaning is a concept or `of`, every shared concept has contrasts (D14, D15).
 - [ ] **D19 first:** my general texts name no language outside the course and explain nothing through English (D16,
       D19); every comparison is a note (`for`: a supported native, `type:…`, `branch:…`, `family:…`); every grammar page
-      I write has a note for **each supported native** (en el ru fr ar de hi zh ja it es sq pt, without the page's own
+      I write has a note for **each supported native** (en el ru fr ar de hi zh ja it es sq pt tr, without the page's own
       language) and `type:fusional`, `type:agglutinating`, `type:isolating`, `type:polysynthetic`, `branch:Semitic`;
       words that invite a comparison get `profile.notes`; `python3 tools/lang_facade.py lint <course>` shows nothing of mine.
+- [ ] **R2:** every note (and pitfall, subtlety, fun fact, feeling) of more than one point is structured — `- ` lists,
+      `→ ` example lines, a blank line between paragraphs, at most two `**bold**`; no headings, links, HTML, tables, code.
+- [ ] **R3:** a new language starts with `lang/<L>/WORD_PARAMETERS.md` + `wordFeatures` (`prominent`, `order`) — before
+      any word; every word I write states every parameter of its part of speech (a value or `{"none": "<why>"}`).
 - [ ] Every word in my sentences is in the lexicon with its full facade; a field I write brings sentences for every
       non-vocabulary node before it (D20).
 - [ ] I grounded every fact; the validator (`--strict`), refcheck and `lang_phenomena.py` pass; the catalogue of

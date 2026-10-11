@@ -74,30 +74,23 @@ try:
     cell = next((t for t in ts if t.kind == 'mixed' and F.runs(t)), None)
     ans = {g.addr: 'Ελληνική περίληψη ' + ' '.join(F.runs(g)), 'f:fn.definite/title': 'Το οριστικό άρθρο'}
     if note_el: ans[note_el.addr] = 'Σημείωση για Έλληνες: ' + note_el.text
-    if note_ru: ans[note_ru.addr] = 'not for el'
+    if note_ru: ans[note_ru.addr] = 'Σημείωση για ρωσόφωνους: ' + note_ru.text
     if cell: ans[cell.addr] = 'χωρίς τις μορφές'
     af = os.path.join(d, 'el.json'); json.dump(ans, open(af, 'w', encoding='utf-8'), ensure_ascii=False)
     n, refused = F.merge(c, 'el', [af])
-    ok(n == len(ans) - (1 if note_ru else 0) and (not note_ru or any('does not belong' in b for b in refused)),
-       f'merge el: {n} texts in, a note for ru refused ({refused[:1]})')
+    ok(n == len(ans) and not refused, f'merge el: {n} texts in, a note for ru too (R1: a facade translates every note) {refused[:1]}')
     r = F.parity(c, 'el')
     probs = {a: st for a, st, _ in r['problems']}
     ok(probs.get(g.addr) is None and probs.get('f:fn.definite/title') is None, 'parity el: translated entries are done')
     ok(not cell or probs.get(cell.addr) == 'broken', 'parity el: a cell that lost its target-language forms is “broken”')
-    ok(sum(1 for st in probs.values() if st == 'missing') == len(shown) - len([a for a in ans if a != (note_ru.addr if note_ru else None)]),
-       'parity el: every other address is missing (notes for other languages are not expected)')
+    ok(sum(1 for st in probs.values() if st == 'missing') == len(shown) - len(ans),
+       'parity el: every other address is missing (notes for other languages included, R1)')
+    ok(not note_ru or F.tier_of(note_ru, 'el') == 3 and (not note_el or F.tier_of(note_el, 'el') == note_el.tier), 'R1: a note for another language is Tier 3 in the el facade, the el note keeps its tier')
     # a changed master text makes its entry stale
     p = os.path.join(c, 'core', 'functions', 'fn.definite.json'); o = json.load(open(p, encoding='utf-8')); o['title'] += ' (new)'
     json.dump(o, open(p, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
     r = F.parity(c, 'el')
     ok({a: st for a, st, _ in r['problems']}.get('f:fn.definite/title') == 'stale', 'parity el: a changed master text makes the entry stale')
-    # a facade carrying a note it cannot show
-    if note_ru:
-        fp = F.facade_file(c, 'el', *note_ru.facade)
-        fd = json.load(open(fp, encoding='utf-8')) if os.path.exists(fp) else {}; fd[note_ru.addr] = {'t': 'x', 'src': F.text_hash(note_ru.text)}; json.dump(fd, open(fp, 'w', encoding='utf-8'), ensure_ascii=False)
-        r = F.parity(c, 'el', write=False)
-        ok(note_ru.addr in r['forbidden'], 'parity el: a note for ru in the el facade is reported')
-        ok(any(f.cat == 'facade-note' for f in F.lint(c, 'el')), 'lint --locale el: the note for ru is an error')
     # tasks
     out = os.path.join(d, 'tasks')
     written, todo = F.make_tasks(c, 'el', {1, 2, 3}, max_chars=2000, out=out)
@@ -105,7 +98,8 @@ try:
     task0 = json.load(open(written[0][0], encoding='utf-8')) if written else {}
     sizes = [[len(it['text']) for it in json.load(open(fn, encoding='utf-8'))['items']] for fn, _, _ in written]
     ok(written and all(sum(z) <= 2000 or len(z) == 1 for z in sizes) and sum(map(len, sizes)) == todo, f'task el: {todo} texts in {len(written)} chunks of ≤ 2000 characters')
-    ok(all(not it.get('for') or F.shows('el', it['for']) for it in items), 'task el: only the notes an el learner sees')
+    ok(any(it.get('for') and not F.shows('el', it['for']) for it in items) or not note_ru, 'task el: the notes for other languages too (R1)')
+    ok('**bold**' in task0.get('instructions', '') and '→ ' in task0.get('instructions', ''), 'task el: keep the R2 markup')
     ok('Greek' in task0.get('instructions', '') and 'byte-identical' in task0.get('instructions', '') and task0.get('glossary'), 'task el: instructions in the learner’s terms and the el glossary')
 finally:
     shutil.rmtree(d, ignore_errors=True)
@@ -145,6 +139,32 @@ for s, want in [('Borrowed from English tomato.', True), ('From Persian, via Tur
     hits = [n for n in en.find(s) if not F.provenance_ok(s, n[2], n[3])]
     ok((not hits) == want, f'etymology “{s}” → {"provenance (allowed)" if want else "comparison (flagged)"}')
 ok(not en.find('Written in Latin letters; Arabic and Hebrew too.'), '“Latin letters” and the course languages are not outside names')
+# false positives cut (2026-10-11): provenance in every field, older stages, varieties, cuisine / plant / people, quoted glosses
+CL = ['ar', 'he', 'zh', 'de']
+def flagged(s, prov=False, own=None):
+    return sorted({n[1] for n in en.find(s) if n[0] != own and not F.exempt(s, n[2], n[3], n[1], CL, prov_field=prov, own=own)})
+for s, want in [('A word with a Greek past, from Aramaic.', []), ('Borrowed via Persian into Turkish.', []),
+                ('In Egyptian Arabic and Levantine the q is a glottal stop.', []), ('Cantonese keeps final -p -t -k.', []),
+                ('Swiss German has no Präteritum.', []), ('From Proto-Sino-Tibetan *sjərl.', []), ('Sino-Tibetan languages share it.', []),
+                ('Welsh onion and Japanese restaurants.', []), ('A leafy green in Indian, Greek and Arab kitchens.', []),
+                ('German Bier → Italian birra → Arabic بِيرَة.', []), ('יְוָנִי “Greek” in short spelling.', []),
+                ('Its name is the same Persian word.', []), ('The Latin genus name Chenopodium.', []),
+                ('Unlike English, the verb comes first.', ['English']), ('Pronounced as in French.', ['French']),
+                ('Persian and Urdu write the same mark.', ['Persian', 'Urdu'])]:
+    got = flagged(s)
+    ok(got == want, f'lint names “{s}” → {want or "exempt"}' + ('' if got == want else f' (got {got})'))
+ok(flagged('From Proto-Sino-Tibetan *b-tsoŋ; cognate with Tibetan btsong.', prov=True) == [], 'etymology: a cognate in an unsupported language (Tibetan) is provenance')
+ok(flagged('Cognate with Greek κύκλος and English wheel.', prov=True) == ['English', 'Greek'], 'etymology: a cognate in a supported native is a comparison (→ a note for it)')
+ok(flagged('Ottoman Turkish was written in this script.', own='tr') == [], 'a note for tr may name an older stage of Turkish')
+fs = lint_with(lambda c: edit(c, 'lang/de/grammar/fn.definite.json', lambda o: o['notes'].append({'for': 'fa', 'rel': 'new', 'text': 'Unlike Vietnamese and Urdu, …'})))
+ok(not has(fs, 'note-names', 'Vietnamese'), 'a note for an unsupported language is not linted for names (folded section, R1)')
+# R2: the structured Markdown subset
+long1 = 'This is a long comparison that squashes several points into one paragraph, ' * 4
+ok([c_ for c_, _ in F.structure(long1)] == ['structure'], 'R2: a note > 220 characters in one paragraph → structure warning')
+ok(F.structure('The rule.\n\n- point one\n- point two\n→ ich habe gegessen — έχω φάει') == [], 'R2: paragraphs, a list and an example line pass')
+ok(F.structure('Short and **clear**, with *ein* cited.') == [], 'R2: one short sentence with bold / italic passes')
+ok({c_ for c_, _ in F.structure('## Title\n<b>x</b> [a](http://x) `code`')} == {'markup'}, 'R2: headings, HTML, links, code → markup warning')
+ok(F.starred('**bold** and *italic* but *gegesst') == ['*gegesst'], 'R2: Markdown emphasis is not a starred wrong form')
 el = F.NameMatcher('el', ['de', 'ar', 'he', 'zh'], allow={'el'})
 ok(el.find('Όπως στα αγγλικά') and not el.find('Στα αραβικά και στα ελληνικά'), 'el names: “αγγλικά” found (inflected), Arabic (a course language) and Greek (the locale’s own) not')
 print(f'\n{fails} FAILED' if fails else '\nALL PASSED'); sys.exit(1 if fails else 0)
