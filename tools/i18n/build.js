@@ -10,7 +10,7 @@ const NOT_IN_APP = new Set(['email']);
 
 const ACC = { a: 'á', b: 'ƀ', c: 'ç', d: 'ď', e: 'é', f: 'ƒ', g: 'ĝ', h: 'ĥ', i: 'í', j: 'ĵ', k: 'ķ', l: 'ļ', m: 'ɱ', n: 'ñ', o: 'ó', p: 'þ', q: 'ǫ', r: 'ŕ', s: 'š', t: 'ţ', u: 'ú', v: 'ṽ', w: 'ŵ', x: 'ẋ', y: 'ý', z: 'ž',
   A: 'Á', B: 'Ɓ', C: 'Ç', D: 'Ď', E: 'É', F: 'Ƒ', G: 'Ĝ', H: 'Ĥ', I: 'Í', J: 'Ĵ', K: 'Ķ', L: 'Ļ', M: 'Ṁ', N: 'Ñ', O: 'Ó', P: 'Þ', Q: 'Ǫ', R: 'Ŕ', S: 'Š', T: 'Ţ', U: 'Ú', V: 'Ṽ', W: 'Ŵ', X: 'Ẋ', Y: 'Ý', Z: 'Ž' };
-const accent = s => s.replace(/[A-Za-z]/g, ch => ACC[ch] || ch);
+const accent = s => s.replace(/<\/?[a-z][a-z0-9]*>|[A-Za-z]/g, ch => ch.length > 1 ? ch : ACC[ch] || ch);   // the tags a message may hold (<b>, <code>: trx() turns them into elements) stay as they are
 const longer = s => { const pad = Math.round(s.replace(/\s/g, '').length * 0.4); return s + (pad ? ' ' + '·'.repeat(Math.min(pad, 40)) : ''); };
 function pseudo(msg, rtl) {
   let ast; try { ast = parse(msg); } catch (e) { return msg; }

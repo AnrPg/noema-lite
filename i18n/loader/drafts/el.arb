@@ -455,5 +455,14 @@
   "loader.viewer.kind.youtube": "Βίντεο YouTube",
   "loader.viewer.kind.web": "Ιστοσελίδα",
   "loader.meta.description": "noema-lite — δομημένη θεωρία, ένας σωκρατικός δάσκαλος ΤΝ και εξάσκηση σαν παιχνίδι για κάθε μάθημα.",
-  "loader.inuse.device": "{os, select, iphone {iPhone} ipad {iPad} android_phone {κινητό Android} android_tablet {tablet Android} chromebook {Chromebook} mac {Mac} windows {υπολογιστής Windows} linux {υπολογιστής Linux} other {άλλη συσκευή}}{browser, select, none {} other { · {browser}}}"
+  "loader.inuse.device": "{os, select, iphone {iPhone} ipad {iPad} android_phone {κινητό Android} android_tablet {tablet Android} chromebook {Chromebook} mac {Mac} windows {υπολογιστής Windows} linux {υπολογιστής Linux} other {άλλη συσκευή}}{browser, select, none {} other { · {browser}}}",
+  "loader.group.data-cloud": "Μηχανική δεδομένων & cloud",
+  "loader.group.ai-cs": "Τεχνητή νοημοσύνη & Πληροφορική",
+  "loader.group.life-sciences": "Επιστήμες ζωής",
+  "loader.group.physics": "Φυσική & Ιατρική φυσική",
+  "loader.group.chemistry": "Χημεία",
+  "loader.group.math": "Μαθηματικά & Στατιστική",
+  "loader.group.social-sciences": "Κοινωνικές επιστήμες & Φιλοσοφία",
+  "loader.group.economics": "Οικονομικά & Επιχειρήσεις",
+  "loader.group.languages": "Γλώσσες"
 }

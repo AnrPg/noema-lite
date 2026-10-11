@@ -4,3 +4,4 @@ loader.convo.mode.*
 loader.convo.md.*
 loader.viewer.kind.*
 loader.viewer.mail.*
+loader.group.*

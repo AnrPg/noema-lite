@@ -455,5 +455,14 @@
   "loader.viewer.kind.youtube": "Vidéo YouTube",
   "loader.viewer.kind.web": "Page web",
   "loader.meta.description": "noema-lite — de la théorie structurée, un tuteur IA socratique et de la pratique ludique pour n’importe quelle matière.",
-  "loader.inuse.device": "{os, select, iphone {iPhone} ipad {iPad} android_phone {téléphone Android} android_tablet {tablette Android} chromebook {Chromebook} mac {Mac} windows {PC Windows} linux {PC Linux} other {un autre appareil}}{browser, select, none {} other { · {browser}}}"
+  "loader.inuse.device": "{os, select, iphone {iPhone} ipad {iPad} android_phone {téléphone Android} android_tablet {tablette Android} chromebook {Chromebook} mac {Mac} windows {PC Windows} linux {PC Linux} other {un autre appareil}}{browser, select, none {} other { · {browser}}}",
+  "loader.group.data-cloud": "Ingénierie des données et du cloud",
+  "loader.group.ai-cs": "IA et informatique",
+  "loader.group.life-sciences": "Sciences de la vie",
+  "loader.group.physics": "Physique et physique médicale",
+  "loader.group.chemistry": "Chimie",
+  "loader.group.math": "Mathématiques et statistiques",
+  "loader.group.social-sciences": "Sciences sociales et philosophie",
+  "loader.group.economics": "Économie et entreprise",
+  "loader.group.languages": "Langues"
 }

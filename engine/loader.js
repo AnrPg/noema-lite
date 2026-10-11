@@ -433,6 +433,8 @@
     setTimeout(() => toastL(tr('pick.onShelf', { title: s.title || s.id }, acc), 6000), 3800);
   }
   /** The Shelf's subjects as chips, by group: tap = study it; ✏️ edit · 🔗 share · 🧭 put it on a map. → { list, draw(subs) } */
+  /** A library group's name (library/groups.json) in the UI language: loader.group.<id>; a group the catalog does not know keeps its title. */
+  const groupTitle = (g, acc) => g.id === 'other' ? tr('pick.other', null, acc) : window.NoemaI18n?.has?.('loader.group.' + g.id) ? tr('loader.group.' + g.id, null, acc) : g.title;
   function shelfChips(acc, { q, onPick, onChange }) {
     const groups = (REG.groups || []).slice(); if (!groups.some(g => g.id === 'other')) groups.push({ id: 'other', title: tr('pick.other', null, acc), emoji: '✨' });
     const list = el('div'); let subs = [];
@@ -442,7 +444,7 @@
       groups.forEach(g => {
         const items = subs.filter(s => (groups.some(x => x.id === s.group) ? s.group : 'other') === g.id && (!term || (s.title + ' ' + (s.description || '')).toLowerCase().includes(term)));
         if (!items.length) return;
-        list.append(el('div', { class: 'noema-group' }, el('div', { class: 'noema-grouphead' }, `${g.emoji || ''} ${g.title}`),
+        list.append(el('div', { class: 'noema-group' }, el('div', { class: 'noema-grouphead' }, `${g.emoji || ''} ${groupTitle(g, acc)}`),
           el('div', { class: 'noema-chips' }, ...items.map(s => { n++; const pct = Math.round(subjectProgress(acc, s) * 100);
             const chip = el('button', { class: 'noema-chip' + (s.id === KV.subj ? ' on' : ''), style: { animationDelay: n * 35 + 'ms' }, title: s.description || '', onclick: () => onPick(s) },
               el('span', { class: 'e' }, s.emoji || '📘'), el('span', { class: 't' }, s.title), s.origin !== 'library' ? el('span', { class: 'o', title: s.sharedBy ? tr('loader.chip.sharedBy', { name: s.sharedBy }) : s.publicOwner ? tr('loader.chip.from', { name: s.publicOwner }) : '' }, s.origin === 'private' ? '🔒' : s.sharedBy ? '🤝' : s.publicFrom ? '🌍' : '📥') : null, s.updateAvailable ? el('span', { class: 'o', title: tr('loader.chip.update') }, '✨') : null, pct ? el('span', { class: 'p' }, fmtPct(pct)) : null);

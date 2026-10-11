@@ -224,7 +224,7 @@ const ACC_VIEWS = {
       accSection('⬆️', tE('engine.bk.secRestore'), { info: tE('engine.bk.restoreInfo'),
         body: [h('p', { class: 'tiny' }, tE('engine.bk.oldFile')),
           h('label', { class: 'btn' }, '📂 ' + tE('engine.bk.chooseFile'), h('input', { type: 'file', accept: '.json', style: { display: 'none' }, onchange: async e => {
-            let obj; try { obj = Noema.backup.validate(JSON.parse(await e.target.files[0].text())); } catch (er) { toast('⚠️ ' + errText(er), 4000); return; }
+            let obj; try { let raw; try { raw = JSON.parse(await e.target.files[0].text()); } catch (pe) { throw new Error(tE('loader.backup.notBackup')); } obj = Noema.backup.validate(raw); } catch (er) { toast('⚠️ ' + errText(er), 4000); return; }   // not JSON at all: the same words as any other file that is not a backup (the parser's English stays out)
             modal((b, c2) => b.append(h('h3', {}, tE('engine.bk.restoreTitle')), h('p', { class: 'muted' }, tE('engine.bk.fileInfo', { name: obj.account.name, when: fmtWhen(obj.createdAt), items: Object.keys(obj.data).length, convs: (obj.conversations || []).length })),
               ACCOUNT.kind === 'cloud' ? h('p', { class: 'tiny' }, tE('engine.bk.cloudWarn')) : null,
               h('div', { style: { display: 'grid', gap: '8px' } },
