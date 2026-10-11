@@ -272,6 +272,18 @@
     ],
     "subtleties": [
      "As a collective it takes masculine singular agreement: الْبَصَلُ رَخِيصٌ الْيَوْمَ (onions are cheap today)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English shallot itself comes from the city of Ascalon (عَسْقَلَان)."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "French échalote comes from the city of Ascalon (عَسْقَلَان)."
+     }
     ]
    }
   },
@@ -815,12 +827,12 @@
      {
       "for": "fr",
       "rel": "similar",
-      "text": "French aubergine comes, through Catalan, from Arabic al-bāḏinjān."
+      "text": "French aubergine comes from Arabic al-bāḏinjān."
      },
      {
       "for": "en",
       "rel": "similar",
-      "text": "British English aubergine comes, through French and Catalan, from Arabic al-bāḏinjān."
+      "text": "British English aubergine comes from Arabic al-bāḏinjān."
      },
      {
       "for": "it",
@@ -835,7 +847,7 @@
      {
       "for": "hi",
       "rel": "similar",
-      "text": "Hindi बैंगन and Arabic بَاذِنْجَان go back to the same Sanskrit word, वातिङ्गण (vātiṅgaṇa)."
+      "text": "Hindi बैंगन and Arabic بَاذِنْجَان go back to the same old Indian word, वातिङ्गण (vātiṅgaṇa)."
      },
      {
       "for": "en",
@@ -1118,7 +1130,7 @@
      {
       "for": "en",
       "rel": "similar",
-      "text": "English potato itself comes from batata, the Taíno name of the sweet potato, via Spanish."
+      "text": "English potato itself comes from batata, a Caribbean name of the sweet potato."
      },
      {
       "for": "es",
@@ -1134,6 +1146,11 @@
       "for": "fr",
       "rel": "same",
       "text": "French patate douce is built the same way: بَطَاطَا حُلْوَة."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "American “yam” often means the sweet potato: that is بَطَاطَا حُلْوَة, not يَام."
      }
     ]
    }
@@ -1257,7 +1274,7 @@
      {
       "for": "el",
       "rel": "similar",
-      "text": "Greek μπιζέλι also comes from the Italian word for peas — you already half-know بَازِلَّاء."
+      "text": "Greek μπιζέλι comes from the same word for peas as بَازِلَّاء — you already half-know it."
      },
      {
       "for": "it",
@@ -1381,22 +1398,22 @@
      {
       "for": "el",
       "rel": "similar",
-      "text": "Greek σπανάκι is the same Persian word."
+      "text": "Greek σπανάκι is the same word, which came from Iran."
      },
      {
       "for": "en",
       "rel": "similar",
-      "text": "English spinach comes, through Medieval Latin, from this word."
+      "text": "English spinach comes from this word."
      },
      {
       "for": "fr",
       "rel": "similar",
-      "text": "French épinard comes, through Medieval Latin, from this word."
+      "text": "French épinard comes from this word."
      },
      {
       "for": "it",
       "rel": "similar",
-      "text": "Italian spinaci comes, through Medieval Latin, from this word."
+      "text": "Italian spinaci comes from this word."
      },
      {
       "for": "es",
@@ -1939,37 +1956,37 @@
      {
       "for": "el",
       "rel": "similar",
-      "text": "Greek πιπέρι goes back to the same Sanskrit word, pippalī."
+      "text": "Greek πιπέρι goes back to the same ancient Indian word, pippalī."
      },
      {
       "for": "en",
       "rel": "similar",
-      "text": "English pepper goes back to the same Sanskrit word, pippalī."
+      "text": "English pepper goes back to the same ancient Indian word, pippalī."
      },
      {
       "for": "fr",
       "rel": "similar",
-      "text": "French poivre goes back to the same Sanskrit word, pippalī."
+      "text": "French poivre goes back to the same ancient Indian word, pippalī."
      },
      {
       "for": "it",
       "rel": "similar",
-      "text": "Italian pepe goes back to the same Sanskrit word, pippalī."
+      "text": "Italian pepe goes back to the same ancient Indian word, pippalī."
      },
      {
       "for": "ru",
       "rel": "similar",
-      "text": "Russian перец goes back to the same Sanskrit word, pippalī."
+      "text": "Russian перец goes back to the same ancient Indian word, pippalī."
      },
      {
       "for": "sq",
       "rel": "similar",
-      "text": "Albanian piper goes back to the same Sanskrit word, pippalī."
+      "text": "Albanian piper goes back to the same ancient Indian word, pippalī."
      },
      {
       "for": "hi",
       "rel": "similar",
-      "text": "Hindi पीपल (long pepper) and Arabic فِلْفِل go back to the same Sanskrit word, पिप्पली (pippalī)."
+      "text": "Hindi पीपल (long pepper) and Arabic فِلْفِل go back to the same old word, पिप्पली (pippalī)."
      }
     ]
    }
@@ -2926,7 +2943,7 @@
      {
       "for": "el",
       "rel": "similar",
-      "text": "You hear φασόλια / φασούλια in فَاصُولِيَا: it came to Arabic from Greek, through Turkish."
+      "text": "You hear φασόλια / φασούλια in فَاصُولِيَا: the word came to Arabic from Greek."
      },
      {
       "for": "ru",
@@ -2936,7 +2953,7 @@
      {
       "for": "it",
       "rel": "similar",
-      "text": "Italian fagioli is a cousin of فَاصُولِيَا: both go back to Greek φασίολος."
+      "text": "Italian fagioli is a cousin of فَاصُولِيَا: both go back to ancient φασίολος."
      },
      {
       "for": "sq",

@@ -139,32 +139,32 @@
      {
       "for": "en",
       "rel": "similar",
-      "text": "English ginger goes back, through Latin zingiber, to the same South Indian word as زَنْجَبِيل."
+      "text": "English ginger goes back to the same South Indian word as زَنْجَبِيل."
      },
      {
       "for": "fr",
       "rel": "similar",
-      "text": "French gingembre goes back, through Latin zingiber, to the same South Indian word as زَنْجَبِيل."
+      "text": "French gingembre goes back to the same South Indian word as زَنْجَبِيل."
      },
      {
       "for": "it",
       "rel": "similar",
-      "text": "Italian zenzero goes back, through Latin zingiber, to the same South Indian word as زَنْجَبِيل."
+      "text": "Italian zenzero goes back to the same South Indian word as زَنْجَبِيل."
      },
      {
       "for": "es",
       "rel": "similar",
-      "text": "Spanish jengibre goes back, through Latin zingiber, to the same South Indian word as زَنْجَبِيل."
+      "text": "Spanish jengibre goes back to the same South Indian word as زَنْجَبِيل."
      },
      {
       "for": "pt",
       "rel": "similar",
-      "text": "Portuguese gengibre goes back, through Latin zingiber, to the same South Indian word as زَنْجَبِيل."
+      "text": "Portuguese gengibre goes back to the same South Indian word as زَنْجَبِيل."
      },
      {
       "for": "el",
       "rel": "similar",
-      "text": "Ancient Greek ζιγγίβερις is the same South Indian word as زَنْجَبِيل."
+      "text": "ζιγγίβερις, the old Greek name of ginger, is the same South Indian word as زَنْجَبِيل."
      },
      {
       "for": "ru",
@@ -174,12 +174,12 @@
      {
       "for": "sq",
       "rel": "similar",
-      "text": "Albanian xhenxhefil is the same word, through Turkish zencefil."
+      "text": "Albanian xhenxhefil is the same word."
      },
      {
       "for": "hi",
       "rel": "similar",
-      "text": "The South Indian word behind زَنْجَبِيل is also the source of Sanskrit शृङ्गवेर (śṛṅgavera, ginger)."
+      "text": "The South Indian word behind زَنْجَبِيل is also the source of शृङ्गवेर (śṛṅgavera, ginger)."
      },
      {
       "for": "tr",
@@ -811,27 +811,27 @@
      {
       "for": "en",
       "rel": "different",
-      "text": "English dandelion is “lion’s tooth” (dent-de-lion); the Persian name inside Arabic means “the poor man’s herb”."
+      "text": "English dandelion is “lion’s tooth” (dent-de-lion); the name inside Arabic means “the poor man’s herb”."
      },
      {
       "for": "fr",
       "rel": "different",
-      "text": "French dent-de-lion is “lion’s tooth”; the Persian name inside Arabic means “the poor man’s herb”."
+      "text": "French dent-de-lion is “lion’s tooth”; the name inside Arabic means “the poor man’s herb”."
      },
      {
       "for": "it",
       "rel": "different",
-      "text": "Italian dente di leone is “lion’s tooth”; the Persian name inside Arabic means “the poor man’s herb”."
+      "text": "Italian dente di leone is “lion’s tooth”; the name inside Arabic means “the poor man’s herb”."
      },
      {
       "for": "es",
       "rel": "different",
-      "text": "Spanish diente de león is “lion’s tooth”; the Persian name inside Arabic means “the poor man’s herb”."
+      "text": "Spanish diente de león is “lion’s tooth”; the name inside Arabic means “the poor man’s herb”."
      },
      {
       "for": "pt",
       "rel": "different",
-      "text": "Portuguese dente-de-leão is “lion’s tooth”; the Persian name inside Arabic means “the poor man’s herb”."
+      "text": "Portuguese dente-de-leão is “lion’s tooth”; the name inside Arabic means “the poor man’s herb”."
      }
     ]
    }
@@ -1162,27 +1162,27 @@
      {
       "for": "en",
       "rel": "similar",
-      "text": "English endive goes back, through Greek and Latin, to this Semitic word."
+      "text": "English endive goes back to this Semitic word."
      },
      {
       "for": "fr",
       "rel": "similar",
-      "text": "French endive goes back, through Greek and Latin, to this Semitic word."
+      "text": "French endive goes back to this Semitic word."
      },
      {
       "for": "it",
       "rel": "similar",
-      "text": "Italian indivia goes back, through Greek and Latin, to this Semitic word."
+      "text": "Italian indivia goes back to this Semitic word."
      },
      {
       "for": "es",
       "rel": "similar",
-      "text": "Spanish endibia goes back, through Greek and Latin, to this Semitic word."
+      "text": "Spanish endibia goes back to this Semitic word."
      },
      {
       "for": "pt",
       "rel": "similar",
-      "text": "Portuguese endívia goes back, through Greek and Latin, to this Semitic word."
+      "text": "Portuguese endívia goes back to this Semitic word."
      },
      {
       "for": "el",
@@ -2839,31 +2839,12 @@
   {
    "concept": "veg.shallot",
    "reason": "No single established word for the shallot.",
-   "use": "كُرَّاثٌ أَنْدَلُسِيٌّ (Wiktionary’s translation), or the European loan شالوت in shops and recipes",
-   "notes": [
-    {
-     "for": "en",
-     "rel": "similar",
-     "text": "English shallot itself comes from the city of Ascalon (عَسْقَلَان)."
-    },
-    {
-     "for": "fr",
-     "rel": "similar",
-     "text": "French échalote comes from the city of Ascalon (عَسْقَلَان)."
-    }
-   ]
+   "use": "كُرَّاثٌ أَنْدَلُسِيٌّ (Wiktionary’s translation), or the European loan شالوت in shops and recipes"
   },
   {
    "concept": "veg.yam",
    "reason": "True yams (Dioscorea) are not grown in most Arab countries; no established word.",
-   "use": "the English loan يَام (Wiktionary’s translation table)",
-   "notes": [
-    {
-     "for": "en",
-     "rel": "trap",
-     "text": "American “yam” often means the sweet potato: that is بَطَاطَا حُلْوَة, not يَام."
-    }
-   ]
+   "use": "the English loan يَام (Wiktionary’s translation table)"
   },
   {
    "concept": "veg.mustardgreens",

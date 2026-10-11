@@ -94,7 +94,7 @@
     "synonyms": [],
     "synonymsNone": "No other independent “I”; as object or possessor Arabic uses the suffixes ـنِي / ـي (forms, not synonyms).",
     "etymology": {
-     "text": "Inherited from Proto-Semitic *ʔanāku; cognate with Hebrew אֲנִי (aní) and Amharic እኔ (enē); compare Egyptian jnk (Coptic ⲁⲛⲟⲕ, anok).",
+     "text": "Inherited from Proto-Semitic *ʔanāku; cognate with Hebrew אֲנִי (aní); compare Egyptian jnk (Coptic ⲁⲛⲟⲕ, anok).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -106,6 +106,13 @@
     ],
     "subtleties": [
      "أَنَا before a verb adds emphasis or contrast: أَنَا آكُلُ = it is I who eat (not someone else)."
+    ],
+    "notes": [
+     {
+      "for": "am",
+      "rel": "same",
+      "text": "Amharic እኔ (enē) is a cognate of أَنَا."
+     }
     ]
    }
   },
@@ -466,6 +473,13 @@
     ],
     "subtleties": [
      "Between a subject and a definite predicate, هُوَ / هِيَ can act like a copula (ḍamīr al-faṣl): الْمُشْكِلَةُ هِيَ الْوَقْتُ = the problem is time."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "There is no word for “it”: a thing is هُوَ or هِيَ by its gender."
+     }
     ]
    }
   },
@@ -1258,6 +1272,13 @@
     ],
     "subtleties": [
      "The present forms (يَكُونُ …) do exist: for the future (سَيَكُونُ), for habits and general truths, and after أَنْ (يَجِبُ أَنْ يَكُونَ = he must be)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "There is no word for “used to”: كُنْتُ أَلْعَبُ is “I used to play” and “I was playing”."
+     }
     ]
    }
   },
@@ -3306,14 +3327,7 @@
   {
    "concept": "pron.it",
    "reason": "Arabic has no neuter and no neuter pronoun: every thing is masculine or feminine, and a pronoun that refers to it takes its gender.",
-   "use": "هُوَ for a masculine thing (الْبَابُ؟ هُوَ هُنَا — the door? it is here), هِيَ for a feminine thing and for any non-human plural (الْغُرْفَةُ؟ هِيَ هُنَاكَ; الْكُتُبُ؟ هِيَ هُنَا).",
-   "notes": [
-    {
-     "for": "en",
-     "rel": "trap",
-     "text": "There is no word for “it”: a thing is هُوَ or هِيَ by its gender."
-    }
-   ]
+   "use": "هُوَ for a masculine thing (الْبَابُ؟ هُوَ هُنَا — the door? it is here), هِيَ for a feminine thing and for any non-human plural (الْغُرْفَةُ؟ هِيَ هُنَاكَ; الْكُتُبُ؟ هِيَ هُنَا)."
   },
   {
    "concept": "det.def",

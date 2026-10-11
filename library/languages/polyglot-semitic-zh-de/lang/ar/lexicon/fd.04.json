@@ -226,7 +226,7 @@
      }
     ],
     "etymology": {
-     "text": "From Proto-Semitic *bayt- (Wiktionary, which compares Amharic ቤት bēt); Hebrew בַּיִת (bayit) is the same word.",
+     "text": "From Proto-Semitic *bayt- (Wiktionary); Hebrew בַּיִת (bayit) is the same word.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -239,6 +239,13 @@
     ],
     "subtleties": [
      "بَيْت is “home” too: فِي الْبَيْتِ = at home; أَهْلُ الْبَيْتِ = the household."
+    ],
+    "notes": [
+     {
+      "for": "am",
+      "rel": "same",
+      "text": "Amharic ቤት (bēt) is a cognate of بَيْت."
+     }
     ]
    }
   },
@@ -1206,7 +1213,7 @@
      {
       "for": "el",
       "rel": "same",
-      "text": "Greek τάβλι (backgammon) is the same word: both from Latin tabula."
+      "text": "Greek τάβλι (backgammon) is the same word: both from the Roman tabula, a board."
      },
      {
       "for": "tr",
@@ -2145,7 +2152,7 @@
      {
       "for": "hi",
       "rel": "same",
-      "text": "Hindi किताब is this word, through Persian — feminine in Hindi, masculine in Arabic."
+      "text": "Hindi किताब is this word — feminine in Hindi, masculine in Arabic."
      },
      {
       "for": "tr",
@@ -3081,7 +3088,7 @@
      {
       "for": "sq",
       "rel": "similar",
-      "text": "Albanian hejbe (saddlebag) comes, through Turkish, from حَقِيبَة."
+      "text": "Albanian hejbe (saddlebag) comes from حَقِيبَة."
      },
      {
       "for": "tr",
@@ -3243,12 +3250,12 @@
      {
       "for": "el",
       "rel": "similar",
-      "text": "Greek φλιτζάνι (cup) comes, through Turkish fincan, from فِنْجَان — itself from Greek πίναξ: a round trip."
+      "text": "Greek φλιτζάνι (cup) comes from فِنْجَان — itself from Greek πίναξ: a round trip."
      },
      {
       "for": "sq",
       "rel": "similar",
-      "text": "Albanian filxhan (cup) comes, through Turkish, from فِنْجَان."
+      "text": "Albanian filxhan (cup) comes from فِنْجَان."
      },
      {
       "for": "tr",
@@ -3573,12 +3580,12 @@
      {
       "for": "el",
       "rel": "similar",
-      "text": "Greek σαγάνι (a shallow pan) — and σαγανάκι, named after it — comes, through Turkish sahan, from صَحْن."
+      "text": "Greek σαγάνι (a shallow pan) — and σαγανάκι, named after it — comes from صَحْن."
      },
      {
       "for": "sq",
       "rel": "similar",
-      "text": "Albanian sahan (a deep dish) comes, through Turkish, from صَحْن."
+      "text": "Albanian sahan (a deep dish) comes from صَحْن."
      },
      {
       "for": "tr",

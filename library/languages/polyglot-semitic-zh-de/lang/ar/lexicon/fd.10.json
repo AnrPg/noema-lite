@@ -482,7 +482,7 @@
      }
     ],
     "etymology": {
-     "text": "From Proto-Semitic *mann-; cognates include Aramaic מן (man), Geʿez መኑ (männu) and Amharic ማን (man) (Wiktionary).",
+     "text": "From Proto-Semitic *mann-; cognates include Aramaic מן (man) and Geʿez መኑ (männu) (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -502,6 +502,11 @@
       "for": "am",
       "rel": "same",
       "text": "Amharic ማን (man), “who”, is the same Semitic word (Wiktionary)."
+     },
+     {
+      "for": "am",
+      "rel": "same",
+      "text": "Amharic ማን (man) is a cognate of مَنْ."
      }
     ]
    }
@@ -785,17 +790,17 @@
      {
       "for": "el",
       "rel": "similar",
-      "text": "Greek κέφι (high spirits) comes, through Turkish keyif, from the noun كَيْف."
+      "text": "Greek κέφι (high spirits) comes from the noun كَيْف."
      },
      {
       "for": "ru",
       "rel": "similar",
-      "text": "Russian кайф (pleasure, a high) comes, through Turkish, from the noun كَيْف."
+      "text": "Russian кайф (pleasure, a high) comes from the noun كَيْف."
      },
      {
       "for": "sq",
       "rel": "similar",
-      "text": "Albanian qejf (pleasure, good mood) comes, through Turkish, from the noun كَيْف."
+      "text": "Albanian qejf (pleasure, good mood) comes from the noun كَيْف."
      },
      {
       "for": "tr",

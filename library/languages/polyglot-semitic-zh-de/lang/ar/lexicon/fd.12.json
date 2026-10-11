@@ -1109,7 +1109,7 @@
      }
     ],
     "etymology": {
-     "text": "A faʿīl-type stative adjective from قَرُبَ (qaruba, “to be near”); cognate with Hebrew קָרוֹב (karóv, “close, near”) and Amharic ቅርብ (Wiktionary).",
+     "text": "A faʿīl-type stative adjective from قَرُبَ (qaruba, “to be near”); cognate with Hebrew קָרוֹב (karóv, “close, near”) (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -1122,6 +1122,13 @@
     "subtleties": [
      "The same word is the noun “relative” (lesson 6), with the plurals أَقَارِبُ / أَقْرِبَاءُ; as “near” its plural is قَرِيبُونَ.",
      "Wiktionary: the feminine can also be قَرِيب, as in the Qurʾān: إِنَّ رَحْمَتَ اللّٰهِ قَرِيبٌ (7:56)."
+    ],
+    "notes": [
+     {
+      "for": "am",
+      "rel": "same",
+      "text": "Amharic ቅርብ is a cognate of قَرِيب."
+     }
     ]
    }
   },
@@ -3110,17 +3117,17 @@
      {
       "for": "fr",
       "rel": "similar",
-      "text": "French canapé is the same word, from Greek κωνωπεῖον."
+      "text": "French canapé is the same word, from ancient κωνωπεῖον, a couch with a mosquito net."
      },
      {
       "for": "it",
       "rel": "similar",
-      "text": "Italian canapè is the same word, from Greek κωνωπεῖον."
+      "text": "Italian canapè is the same word, from ancient κωνωπεῖον, a couch with a mosquito net."
      },
      {
       "for": "en",
       "rel": "similar",
-      "text": "English canopy is the same word, from Greek κωνωπεῖον."
+      "text": "English canopy is the same word, from ancient κωνωπεῖον, a couch with a mosquito net."
      }
     ]
    }

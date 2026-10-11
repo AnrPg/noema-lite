@@ -960,7 +960,7 @@
      }
     ],
     "etymology": {
-     "text": "Adjective of the root ق ص ر (q ṣ r); Wiktionary: cognate with Hebrew קצר (katsár, “short”) and Amharic አጭር (ač̣ər, “short”).",
+     "text": "Adjective of the root ق ص ر (q ṣ r); Wiktionary: cognate with Hebrew קצר (katsár, “short”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -972,6 +972,13 @@
     ],
     "subtleties": [
      "“Short of …, lacking” is not قَصِير but نَاقِص."
+    ],
+    "notes": [
+     {
+      "for": "am",
+      "rel": "same",
+      "text": "Amharic አጭር (ač̣ər, “short”) is a cognate of قَصِير."
+     }
     ]
    }
   },
@@ -2821,7 +2828,7 @@
      }
     ],
     "etymology": {
-     "text": "Wiktionary: derived from the active participle of بَرَدَ (barada, “to be cold, to freeze”); cognate with Amharic ብርድ (bɨrd, cold).",
+     "text": "Wiktionary: derived from the active participle of بَرَدَ (barada, “to be cold, to freeze”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -2832,6 +2839,13 @@
     ],
     "subtleties": [
      "Weather: الْجَوُّ بَارِدٌ (it is cold) — a sentence with no verb."
+    ],
+    "notes": [
+     {
+      "for": "am",
+      "rel": "same",
+      "text": "Amharic ብርድ (bɨrd, cold) is a cognate."
+     }
     ]
    }
   },
@@ -4039,7 +4053,7 @@
      }
     ],
     "etymology": {
-     "text": "Wiktionary: an adjective of the pattern فَعِيل from the verb رَخُصَ (“to be cheap”); cognate with Amharic ርካሽ (rɨkaš, “cheap”).",
+     "text": "Wiktionary: an adjective of the pattern فَعِيل from the verb رَخُصَ (“to be cheap”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [

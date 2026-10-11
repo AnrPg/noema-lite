@@ -303,27 +303,27 @@
      {
       "for": "en",
       "rel": "similar",
-      "text": "English borage comes from Medieval Latin borrago — perhaps from Arabic أَبُو الْعَرَقِ, “father of sweat”."
+      "text": "English borage comes from the medieval name borrago — perhaps from Arabic أَبُو الْعَرَقِ, “father of sweat”."
      },
      {
       "for": "fr",
       "rel": "similar",
-      "text": "French bourrache comes from Medieval Latin borrago — perhaps from Arabic أَبُو الْعَرَقِ, “father of sweat”."
+      "text": "French bourrache comes from the medieval name borrago — perhaps from Arabic أَبُو الْعَرَقِ, “father of sweat”."
      },
      {
       "for": "it",
       "rel": "similar",
-      "text": "Italian borragine comes from Medieval Latin borrago — perhaps from Arabic أَبُو الْعَرَقِ, “father of sweat”."
+      "text": "Italian borragine comes from the medieval name borrago — perhaps from Arabic أَبُو الْعَرَقِ, “father of sweat”."
      },
      {
       "for": "es",
       "rel": "similar",
-      "text": "Spanish borraja comes from Medieval Latin borrago — perhaps from Arabic أَبُو الْعَرَقِ, “father of sweat”."
+      "text": "Spanish borraja comes from the medieval name borrago — perhaps from Arabic أَبُو الْعَرَقِ, “father of sweat”."
      },
      {
       "for": "pt",
       "rel": "similar",
-      "text": "Portuguese borragem comes from Medieval Latin borrago — perhaps from Arabic أَبُو الْعَرَقِ, “father of sweat”."
+      "text": "Portuguese borragem comes from the medieval name borrago — perhaps from Arabic أَبُو الْعَرَقِ, “father of sweat”."
      }
     ]
    }
@@ -722,17 +722,17 @@
      {
       "for": "ru",
       "rel": "same",
-      "text": "Russian ревень comes from the same Persian word as رَاوَنْد."
+      "text": "Russian ревень comes from the same word, from Iran, as رَاوَنْد."
      },
      {
       "for": "el",
       "rel": "same",
-      "text": "Greek ραβέντι comes, through Turkish, from the same Persian word as رَاوَنْد."
+      "text": "Greek ραβέντι comes from the same word, from Iran, as رَاوَنْد."
      },
      {
       "for": "en",
       "rel": "different",
-      "text": "English rhubarb goes back to Medieval Latin rheubarbarum, not to the Persian رَاوَنْد."
+      "text": "English rhubarb goes back to the medieval name rheubarbarum, not to رَاوَنْد."
      },
      {
       "for": "tr",
@@ -860,7 +860,7 @@
      {
       "for": "en",
       "rel": "similar",
-      "text": "English galangal comes from this Arabic word through Old French."
+      "text": "English galangal comes from this Arabic word."
      },
      {
       "for": "fr",

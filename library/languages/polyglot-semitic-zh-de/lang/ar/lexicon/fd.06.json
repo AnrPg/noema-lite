@@ -1165,32 +1165,32 @@
      {
       "for": "en",
       "rel": "similar",
-      "text": "English abbot comes from Aramaic אַבָּא (abba, father) — the same Semitic word as أَب."
+      "text": "English abbot goes back to אַבָּא (abba, “father”) — the same Semitic word as أَب."
      },
      {
       "for": "fr",
       "rel": "similar",
-      "text": "French abbé comes from Aramaic אַבָּא (abba, father) — the same Semitic word as أَب."
+      "text": "French abbé goes back to אַבָּא (abba, “father”) — the same Semitic word as أَب."
      },
      {
       "for": "it",
       "rel": "similar",
-      "text": "Italian abate comes from Aramaic אַבָּא (abba, father) — the same Semitic word as أَب."
+      "text": "Italian abate goes back to אַבָּא (abba, “father”) — the same Semitic word as أَب."
      },
      {
       "for": "es",
       "rel": "similar",
-      "text": "Spanish abad comes from Aramaic אַבָּא (abba, father) — the same Semitic word as أَب."
+      "text": "Spanish abad goes back to אַבָּא (abba, “father”) — the same Semitic word as أَب."
      },
      {
       "for": "pt",
       "rel": "similar",
-      "text": "Portuguese abade comes from Aramaic אַבָּא (abba, father) — the same Semitic word as أَب."
+      "text": "Portuguese abade goes back to אַבָּא (abba, “father”) — the same Semitic word as أَب."
      },
      {
       "for": "el",
       "rel": "similar",
-      "text": "Greek αββάς comes from Aramaic אַבָּא (abba, father) — the same Semitic word as أَب."
+      "text": "Greek αββάς goes back to אַבָּא (abba, “father”) — the same Semitic word as أَب."
      },
      {
       "for": "tr",
@@ -4254,7 +4254,7 @@
      }
     ],
     "etymology": {
-     "text": "A فَعِيل-type adjective from قَرُبَ (to be near); cognate with Hebrew קָרוֹב (karóv, “close, near”) and Amharic ቅርብ (Wiktionary).",
+     "text": "A فَعِيل-type adjective from قَرُبَ (to be near); cognate with Hebrew קָרוֹב (karóv, “close, near”) (Wiktionary).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -4273,6 +4273,11 @@
       "for": "tr",
       "rel": "similar",
       "text": "Turkish akraba (relatives) is the Arabic plural أَقْرِبَاء."
+     },
+     {
+      "for": "am",
+      "rel": "same",
+      "text": "Amharic ቅርብ is a cognate of قَرِيب."
      }
     ]
    }

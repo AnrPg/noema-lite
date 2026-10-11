@@ -348,7 +348,7 @@
   {
    "for": "el",
    "rel": "new",
-   "text": "Greek builds words from stems and endings (γράφω, γραφείο, γράμμα); Arabic weaves three root consonants into vowel patterns (كَتَبَ, مَكْتَب, كِتَاب). أَرُزّ (rice) is the same word as ὄρυζα, borrowed through Aramaic — a loan with no usable root."
+   "text": "Greek builds words from stems and endings (γράφω, γραφείο, γράμμα); Arabic weaves three root consonants into vowel patterns (كَتَبَ, مَكْتَب, كِتَاب). أَرُزّ (rice) is the same word as ὄρυζα, borrowed — a loan with no usable root."
   },
   {
    "for": "ru",
@@ -373,7 +373,7 @@
   {
    "for": "hi",
    "rel": "similar",
-   "text": "Hindi borrowed whole Arabic word families through Persian — इल्म (knowledge), आलिम (scholar), मालूम (known) all come from ع ل م; in Arabic the patterns behind them are living rules."
+   "text": "Hindi borrowed whole Arabic word families — इल्म (knowledge), आलिम (scholar), मालूम (known) all come from ع ل م; in Arabic the patterns behind them are living rules."
   },
   {
    "for": "fa",

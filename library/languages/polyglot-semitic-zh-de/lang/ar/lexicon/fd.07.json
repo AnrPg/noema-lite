@@ -963,7 +963,7 @@
      {
       "for": "sq",
       "rel": "similar",
-      "text": "Albanian muhabet (a friendly chat) comes, through Turkish, from مَحَبَّة."
+      "text": "Albanian muhabet (a friendly chat) comes from مَحَبَّة."
      },
      {
       "for": "tr",
@@ -2182,7 +2182,7 @@
      {
       "for": "it",
       "rel": "similar",
-      "text": "Italian riso and Arabic أَرُزّ both go back to Greek ὄρυζα."
+      "text": "Italian riso and Arabic أَرُزّ both go back to ancient ὄρυζα."
      }
     ]
    }
@@ -2921,22 +2921,22 @@
      {
       "for": "el",
       "rel": "similar",
-      "text": "Greek ζάχαρη is a cousin from the same Sanskrit word."
+      "text": "Greek ζάχαρη is a cousin, from the same ancient Indian word."
      },
      {
       "for": "ru",
       "rel": "similar",
-      "text": "Russian сахар is a cousin from the same Sanskrit word."
+      "text": "Russian сахар is a cousin, from the same ancient Indian word."
      },
      {
       "for": "sq",
       "rel": "similar",
-      "text": "Albanian sheqer is a cousin from the same Sanskrit word, through Persian and Turkish."
+      "text": "Albanian sheqer is a cousin, from the same ancient Indian word."
      },
      {
       "for": "hi",
       "rel": "similar",
-      "text": "Hindi शक्कर and Sanskrit शर्करा are the source of سُكَّر, through Persian."
+      "text": "سُكَّر goes back to the old Indian word शर्करा (śarkarā), the ancestor of Hindi शक्कर."
      }
     ]
    }
