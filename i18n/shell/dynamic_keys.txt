@@ -4,3 +4,4 @@ sh.group_*     # engine/shell.js: L('group_' + g) — character groups on the Ch
 sh.mode*       # engine/src/20_ai.js: SL('mode' + MODE_WORDS[k]) and SL('mode' + … + 'Sub'); engine/shell.js cvMode()
 sh.greet*      # engine/src/20_ai.js: SL('greet' + MODE_WORDS[mode]) — the tutor's first message per mode
 sh.rx.*        # engine/react.js: NoemaShell.L('rx.' + occasion) — the character's reactions
+sh.sr_*   # engine/search.js: L(k) adds the sr_ prefix

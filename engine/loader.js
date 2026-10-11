@@ -1589,6 +1589,8 @@
     share(s) { return shareDialog(Noema.account.id, s); },
     editSubject(s, o) { return editSubject(Noema.account.id, s, o); }, deleteSubject(s) { return deleteSubject(Noema.account.id, s); }, setHidden(id, h) { return setHidden(Noema.account.id, id, h); },
     toast: toastL, getPackById: (acc, id) => getPack(acc, { id, origin: 'imported' }),
+    /* the search (engine/search.js) indexes the language courses too: which ones this account has, and a course's content */
+    langCourses: () => langCourses(KV.acc), langData: meta => langData(KV.acc, meta),
     curricula() { if (SHELL() && NoemaShell.mounted) return NoemaShell.go('#/learn'); return window.NoemaCurMap?.library(Noema.account.id); },
     curriculumMap(cid, focus) { if (SHELL() && NoemaShell.mounted) return NoemaShell.go('#/map/' + encodeURIComponent(cid) + (focus ? '/' + encodeURIComponent(focus) : '')); return window.NoemaCurMap?.map(Noema.account.id, cid, { focus }); }, explore() { return explore(Noema.account.id); }, publicSubjects() { return publicSubjects(Noema.account.id); }, plain: { text: t => plainOn() ? plainText(t) : t, tree: plainTree, watch: plainWatch }, infoCard, packInfo, langTag, localizedSubject,
     removeLocalAccount(id) { const rm = jget(P + 'accounts:removed', []); rm.push(id); jset(P + 'accounts:removed', rm); jset(P + 'accounts', jget(P + 'accounts', []).filter(a => a.id !== id)); },

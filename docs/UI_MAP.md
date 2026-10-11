@@ -13,7 +13,7 @@ test suites run that way. `tests/shell.js` checks the new homes.
 | Place | What is there |
 |---|---|
 | **Tabs** (bottom on phones, a rail on the left from 760 px) | Today · Knowledge · Languages (only if chosen) · Discover · Progress |
-| **Top bar** | ← back · crumbs (where you are; tap a crumb to go there) · the page's own buttons · **⋮** · 🔔 · **Me** (your emoji, with the sync dot) |
+| **Top bar** | ← back · crumbs (where you are; tap a crumb to go there) · the page's own buttons · **⋮** · 🔎 search (also `/`, Ctrl K; the page `#/search`, docs/SEARCH.md) · 🔔 · **Me** (your emoji, with the sync dot) |
 | **The character** (bottom right) | Ask the tutor. Full body on navigation pages, a small face while you read or practise |
 | **Share bar** (under the top bar) | Pending shares, invitations and updates: Accept / Join / Reject / Update / Keep mine / Later |
 | Phones | The top bar slides away while you read and comes back after a deliberate scroll up |

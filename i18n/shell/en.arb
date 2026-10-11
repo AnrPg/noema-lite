@@ -2503,31 +2503,31 @@
   },
   "sh.menuMeSub": "Your page, as others see it",
   "@sh.menuMeSub": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Your page, as others see it”. In the code: L('menuMeSub'), icon: 'user', href: '#/profile' },"
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Your page, as others see it”. In the code: L('menuMeSub'), icon: 'user', href: '#/profile' },"
   },
   "sh.settings": "Settings",
   "@sh.settings": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Settings”. In the code: L('settings'), sub: L('settingsSub'), icon: 'gear', href: '#/me' },"
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Settings”. In the code: L('settings'), sub: L('settingsSub'), icon: 'gear', href: '#/me' },"
   },
   "sh.settingsSub": "Character, AI, appearance, data",
   "@sh.settingsSub": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Character, AI, appearance, data”. In the code: L('settingsSub'), icon: 'gear', href: '#/me' },"
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Character, AI, appearance, data”. In the code: L('settingsSub'), icon: 'gear', href: '#/me' },"
   },
   "sh.subjectsSub": "By Roadmap, station and chapter",
   "@sh.subjectsSub": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “By Roadmap, station and chapter”. In the code: L('subjectsSub'), icon: 'book', href: '#/subjects' },"
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “By Roadmap, station and chapter”. In the code: L('subjectsSub'), icon: 'book', href: '#/subjects' },"
   },
   "sh.switchAccount": "Switch account",
   "@sh.switchAccount": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Switch account”. In the code: L('switchAccount'), icon: 'people', run: () => N().openAccountPicker?.() },"
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Switch account”. In the code: L('switchAccount'), icon: 'people', run: () => N().openAccountPicker?.() },"
   },
   "sh.logOut": "Log out",
   "@sh.logOut": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Log out”. In the code: L('logOut'), icon: 'logout', run: logOut }], { down: !rail });"
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Log out”. In the code: L('logOut'), icon: 'logout', run: logOut }], { down: !rail });"
   },
   "sh.logOutQ": "Log out of “{name}”? Your progress stays in your cloud account; you sign in again with your e-mail and password.",
   "@sh.logOutQ": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Log out of “{name}”? Your progress stays in your cloud account; you sign in again with your e-mail and password.”. In the code: L('logOutQ', { name: a.name || a.email || '' }))) return; await C?.push(a.id).catch(() => { }); awai",
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Log out of “{name}”? Your progress stays in your cloud account; you sign in again with your e-mail and password.”. In the code: L('logOutQ', { name: a.name || a.email || '' }))) return; await C?.push(a.id).catch(() => { }); awai",
     "placeholders": {
       "name": {
         "type": "String"
@@ -2536,135 +2536,135 @@
   },
   "sh.logOutTip": "Leave this account on this device; the profile list opens",
   "@sh.logOutTip": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Leave this account on this device; the profile list opens”. In the code: L('logOutTip'))));"
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Leave this account on this device; the profile list opens”. In the code: L('logOutTip'))));"
   },
   "sh.pfEditTip": "Change your picture, the few words about you and what others see",
   "@sh.pfEditTip": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Change your picture, the few words about you and what others see”. In the code: L('pfEditTip')),"
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Change your picture, the few words about you and what others see”. In the code: L('pfEditTip')),"
   },
   "sh.pfEdit": "Edit my page",
   "@sh.pfEdit": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Edit my page”. In the code: L('pfEdit')), L('pfEditTip')),"
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Edit my page”. In the code: L('pfEdit')), L('pfEditTip')),"
   },
   "sh.pfDone": "Done",
   "@sh.pfDone": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Done”. In the code: L('pfDone')))));"
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Done”. In the code: L('pfDone')))));"
   },
   "sh.pfPhoto": "Change picture",
   "@sh.pfPhoto": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Change picture”."
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Change picture”."
   },
   "sh.pfPhotoAdd": "Add a picture",
   "@sh.pfPhotoAdd": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Add a picture”."
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Add a picture”."
   },
   "sh.pfPhotoDel": "Remove picture",
   "@sh.pfPhotoDel": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Remove picture”. In the code: L('pfPhotoDel'));"
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Remove picture”. In the code: L('pfPhotoDel'));"
   },
   "sh.pfPhotoBad": "That picture could not be read.",
   "@sh.pfPhotoBad": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “That picture could not be read.”. In the code: L('pfPhotoBad'), 4000); } } });"
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “That picture could not be read.”. In the code: L('pfPhotoBad'), 4000); } } });"
   },
   "sh.pfBio": "About me",
   "@sh.pfBio": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “About me”. In the code: L('pfBio') }); bio.value = p.bio || '';"
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “About me”. In the code: L('pfBio') }); bio.value = p.bio || '';"
   },
   "sh.pfBioPh": "A few words about you and what you study",
   "@sh.pfBioPh": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “A few words about you and what you study”. In the code: L('pfBioPh'), 'aria-label': L('pfBio') }); bio.value = p.bio || '';"
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “A few words about you and what you study”. In the code: L('pfBioPh'), 'aria-label': L('pfBio') }); bio.value = p.bio || '';"
   },
   "sh.pfShow": "What others see",
   "@sh.pfShow": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “What others see”. In the code: L('pfShow')), h('p', { class: 'tiny' }, L('pfShowSub')), h('div', { class: 'ns-list ns-pfsws' }, ..."
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “What others see”. In the code: L('pfShow')), h('p', { class: 'tiny' }, L('pfShowSub')), h('div', { class: 'ns-list ns-pfsws' }, ..."
   },
   "sh.pfShowSub": "Everything stays private until you publish your page. Then only what you switch on here is shown.",
   "@sh.pfShowSub": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Everything stays private until you publish your page. Then only what you switch on here is shown.”. In the code: L('pfShowSub')), h('div', { class: 'ns-list ns-pfsws' }, ...sw),"
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Everything stays private until you publish your page. Then only what you switch on here is shown.”. In the code: L('pfShowSub')), h('div', { class: 'ns-list ns-pfsws' }, ...sw),"
   },
   "sh.pfProgress": "Progress",
   "@sh.pfProgress": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Progress”."
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Progress”."
   },
   "sh.pfProgressSub": "Level, XP, streak, chapters completed",
   "@sh.pfProgressSub": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Level, XP, streak, chapters completed”."
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Level, XP, streak, chapters completed”."
   },
   "sh.pfAch": "Achievements",
   "@sh.pfAch": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Achievements”."
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Achievements”."
   },
   "sh.pfAchSub": "The treasures you found",
   "@sh.pfAchSub": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “The treasures you found”."
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “The treasures you found”."
   },
   "sh.pfLangs": "Languages I study",
   "@sh.pfLangs": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Languages I study”."
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Languages I study”."
   },
   "sh.pfLangsSub": "Your language courses",
   "@sh.pfLangsSub": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Your language courses”."
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Your language courses”."
   },
   "sh.pfTopics": "Topics I study",
   "@sh.pfTopics": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Topics I study”."
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Topics I study”."
   },
   "sh.pfTopicsSub": "Your Roadmaps and the subjects you study",
   "@sh.pfTopicsSub": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Your Roadmaps and the subjects you study”."
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Your Roadmaps and the subjects you study”."
   },
   "sh.pfShares": "What I share",
   "@sh.pfShares": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “What I share”."
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “What I share”."
   },
   "sh.pfSharesSub": "Your public Roadmaps and subjects",
   "@sh.pfSharesSub": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Your public Roadmaps and subjects”."
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Your public Roadmaps and subjects”."
   },
   "sh.pfPublish": "Publish my page",
   "@sh.pfPublish": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Publish my page”."
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Publish my page”."
   },
   "sh.pfPublishTip": "Anyone with noema-lite can then see your page, with only the parts you switched on",
   "@sh.pfPublishTip": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Anyone with noema-lite can then see your page, with only the parts you switched on”. In the code: L('pfPublishTip')) : null,"
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Anyone with noema-lite can then see your page, with only the parts you switched on”. In the code: L('pfPublishTip')) : null,"
   },
   "sh.pfUnpublish": "Make it private",
   "@sh.pfUnpublish": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Make it private”."
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Make it private”."
   },
   "sh.pfPublic": "Your page is public",
   "@sh.pfPublic": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Your page is public”."
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Your page is public”."
   },
   "sh.pfPrivate": "Only you see this page",
   "@sh.pfPrivate": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Only you see this page”."
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Only you see this page”."
   },
   "sh.pfSaved": "Saved",
   "@sh.pfSaved": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Saved”. In the code: L('pfSaved'), 2000); } catch (er) { toast(L('pfCloudErr', { e: er.message }), 5000); }"
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Saved”. In the code: L('pfSaved'), 2000); } catch (er) { toast(L('pfCloudErr', { e: er.message }), 5000); }"
   },
   "sh.pfNeedCloud": "To publish your page, sign in with a cloud account (Settings › Data and sync).",
   "@sh.pfNeedCloud": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “To publish your page, sign in with a cloud account (Settings › Data and sync).”. In the code: L('pfNeedCloud')), acts));"
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “To publish your page, sign in with a cloud account (Settings › Data and sync).”. In the code: L('pfNeedCloud')), acts));"
   },
   "sh.pfLink": "Copy the link",
   "@sh.pfLink": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Copy the link”. In the code: L('pfLink'), url)); } }, svg('link'), L('pfLink')), L('pfLinkTip')) : null);"
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Copy the link”. In the code: L('pfLink'), url)); } }, svg('link'), L('pfLink')), L('pfLinkTip')) : null);"
   },
   "sh.pfLinkTip": "The address of your page, to send to someone",
   "@sh.pfLinkTip": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “The address of your page, to send to someone”. In the code: L('pfLinkTip')) : null);"
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “The address of your page, to send to someone”. In the code: L('pfLinkTip')) : null);"
   },
   "sh.pfLinkCopied": "Link copied",
   "@sh.pfLinkCopied": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Link copied”. In the code: L('pfLinkCopied'), 2500), () => prompt(L('pfLink'), url)); } }, svg('link'), L('pfLink')), L('pfLink"
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Link copied”. In the code: L('pfLinkCopied'), 2500), () => prompt(L('pfLink'), url)); } }, svg('link'), L('pfLink')), L('pfLink"
   },
   "sh.pfLevel": "Level {lv, number}",
   "@sh.pfLevel": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Level {lv}”. In the code: L('pfLevel', { lv: pr.level }), 1), pill(L('pfXp', { xp: (pr.xp || 0).toLocaleString(lang()) }), 2),",
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Level {lv}”. In the code: L('pfLevel', { lv: pr.level }), 1), pill(L('pfXp', { xp: pr.xp || 0 }), 2), pr.streak ? pill(L('stre",
     "placeholders": {
       "lv": {
         "type": "int"
@@ -2673,7 +2673,7 @@
   },
   "sh.pfXp": "{xp, number} XP",
   "@sh.pfXp": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “{xp} XP”. In the code: L('pfXp', { xp: (pr.xp || 0).toLocaleString(lang()) }), 2), pr.streak ? pill(L('streakDays', { n: ",
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “{xp} XP”. In the code: L('pfXp', { xp: pr.xp || 0 }), 2), pr.streak ? pill(L('streakDays', { n: pr.streak }).replace(/\\.$",
     "placeholders": {
       "xp": {
         "type": "int"
@@ -2682,7 +2682,7 @@
   },
   "sh.pfWords": "{n, number} words",
   "@sh.pfWords": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “{n} words”. In the code: L('pfWords', { n: x.words }) : null].filter(Boolean).join(' · ')))))) : none()),",
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “{n} words”. In the code: L('pfWords', { n: x.words }) : null].filter(Boolean).join(' · ')))))) : none()),",
     "placeholders": {
       "n": {
         "type": "int"
@@ -2691,15 +2691,15 @@
   },
   "sh.pfNone": "Nothing here yet.",
   "@sh.pfNone": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Nothing here yet.”. In the code: L('pfNone')), pr = card.progress;"
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Nothing here yet.”. In the code: L('pfNone')), pr = card.progress;"
   },
   "sh.pfMissing": "This page is private, or it does not exist.",
   "@sh.pfMissing": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “This page is private, or it does not exist.”. In the code: L('pfMissing')))); return; }"
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “This page is private, or it does not exist.”. In the code: L('pfMissing')))); return; }"
   },
   "sh.pfCloudErr": "Could not reach the cloud: {e}",
   "@sh.pfCloudErr": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Could not reach the cloud: {e}”. In the code: L('pfCloudErr', { e: er.message }), 5000); } draw(); } }, svg(p.published ? 'lock' : 'globe'), L(p.p",
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Could not reach the cloud: {e}”. In the code: L('pfCloudErr', { e: er.message }), 5000); } draw(); } }, svg(p.published ? 'lock' : 'globe'), L(p.p",
     "placeholders": {
       "e": {
         "type": "String"
@@ -2708,7 +2708,7 @@
   },
   "sh.pfOpen": "{who}: their page",
   "@sh.pfOpen": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “{who}: their page”. In the code: L('pfOpen', { who: x.owner_name || '…' }), onclick: () => go('#/u/' + encodeURIComponent(x.owner)) }",
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “{who}: their page”. In the code: L('pfOpen', { who: x.owner_name || '…' }), onclick: () => go('#/u/' + encodeURIComponent(x.owner)) }",
     "placeholders": {
       "who": {
         "type": "String"
@@ -2717,15 +2717,15 @@
   },
   "sh.pfSharedRm": "Roadmaps",
   "@sh.pfSharedRm": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Roadmaps”. In the code: L('pfSharedRm')) : null, rl.length ? h('div', { class: 'ns-list' }, ...rl.map((x, i) => h('button', "
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Roadmaps”. In the code: L('pfSharedRm')) : null, rl.length ? h('div', { class: 'ns-list' }, ...rl.map((x, i) => h('button', "
   },
   "sh.pfSharedSubj": "Subjects",
   "@sh.pfSharedSubj": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Subjects”. In the code: L('pfSharedSubj')) : null, sl.length ? h('div', { class: 'ns-list' }, ...sl.map((x, i) => h('button'"
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Subjects”. In the code: L('pfSharedSubj')) : null, sl.length ? h('div', { class: 'ns-list' }, ...sl.map((x, i) => h('button'"
   },
   "sh.pfUpdated": "Updated {date}",
   "@sh.pfUpdated": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Updated {date}”. In the code: L('pfUpdated', { date: fmtDate(r.updated_at) })));",
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Updated {date}”. In the code: L('pfUpdated', { date: fmtDate(r.updated_at) })));",
     "placeholders": {
       "date": {
         "type": "String"
@@ -2734,11 +2734,11 @@
   },
   "sh.subjLead": "Grouped by Roadmap and station; open a group to see its subjects and chapters. Subjects on no Roadmap are on the Shelf.",
   "@sh.subjLead": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Grouped by Roadmap and station; open a group to see its subjects and chapters. Subjects on no Roadmap are on the Shelf.”. In the code: L('subjLead')));"
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Grouped by Roadmap and station; open a group to see its subjects and chapters. Subjects on no Roadmap are on the Shelf.”. In the code: L('subjLead')));"
   },
   "sh.subjStations": "{n, plural, one {# station} other {# stations}}",
   "@sh.subjStations": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “{n} stations”. In the code: L('subjStations', { n: ids.length }), 1)],",
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “{n} stations”. In the code: L('subjStations', { n: ids.length }), 1)],",
     "placeholders": {
       "n": {
         "type": "int"
@@ -2747,45 +2747,778 @@
   },
   "sh.subjHidden": "Hidden subjects",
   "@sh.subjHidden": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Hidden subjects”. In the code: L('subjHidden') }, svg('eye')) : null, pct ? pill(pct + '%', 2) : chs.length ? pill(L('nChapters', {"
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Hidden subjects”. In the code: L('subjHidden') }, svg('eye')) : null, pct ? pill(pct + '%', 2) : chs.length ? pill(L('nChapters', {"
   },
   "sh.subjHide": "Hide from the subject list",
   "@sh.subjHide": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Hide from the subject list”."
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Hide from the subject list”."
   },
   "sh.subjShow": "Show in the subject list",
   "@sh.subjShow": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Show in the subject list”."
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Show in the subject list”."
   },
   "sh.subjOpen": "Open",
   "@sh.subjOpen": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Open”. In the code: L('subjOpen'))),"
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Open”. In the code: L('subjOpen'))),"
   },
   "sh.subjNone": "No subjects yet.",
   "@sh.subjNone": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “No subjects yet.”. In the code: L('subjNone')))]));"
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “No subjects yet.”. In the code: L('subjNone')))]));"
   },
   "sh.bCreate": "Create with Claude",
   "@sh.bCreate": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Create with Claude”. In the code: L('bCreate')), L('createClaudeSub')),"
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Create with Claude”. In the code: L('bCreate')), L('createClaudeSub')),"
   },
   "sh.bShelf": "Shelf",
   "@sh.bShelf": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Shelf”. In the code: L('bShelf')), L('bShelfTip')),"
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Shelf”. In the code: L('bShelf')), L('bShelfTip')),"
   },
   "sh.bImport": "Import",
   "@sh.bImport": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Import”. In the code: L('bImport')), L('importFileSub'))));"
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Import”. In the code: L('bImport')), L('importFileSub'))));"
   },
   "sh.bShelfTip": "The subjects that are on no Roadmap",
   "@sh.bShelfTip": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “The subjects that are on no Roadmap”. In the code: L('bShelfTip')),"
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “The subjects that are on no Roadmap”. In the code: L('bShelfTip')),"
   },
   "sh.exportCurTip": "Export “{title}” with its source files (.zip)",
   "@sh.exportCurTip": {
-    "description": "Frame (engine/shell.js), the Me menu and the page others see: “Export “{title}” with its source files (.zip)”.",
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Export “{title}” with its source files (.zip)”.",
     "placeholders": {
       "title": {
+        "type": "String"
+      }
+    }
+  },
+  "sh.sr_search": "Search",
+  "@sh.sr_search": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Search”. In the code: L('sr_search'), 'aria-label': L('sr_search'), 'aria-keyshortcuts': '/', onclick: () => window.NoemaS"
+  },
+  "sh.sr_placeholder": "Search everything…",
+  "@sh.sr_placeholder": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Search everything…”."
+  },
+  "sh.sr_openPage": "Open in a page",
+  "@sh.sr_openPage": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Open in a page”."
+  },
+  "sh.sr_exact": "Exact match",
+  "@sh.sr_exact": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Exact match”."
+  },
+  "sh.sr_more": "+{n, number} more",
+  "@sh.sr_more": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “+{n} more”.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "sh.sr_none": "Nothing found for “{q}”.",
+  "@sh.sr_none": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Nothing found for “{q}”.”.",
+    "placeholders": {
+      "q": {
+        "type": "String"
+      }
+    }
+  },
+  "sh.sr_noneTip": "Try another word, or fewer filters.",
+  "@sh.sr_noneTip": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Try another word, or fewer filters.”."
+  },
+  "sh.sr_typeMore": "Type at least two letters.",
+  "@sh.sr_typeMore": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Type at least two letters.”."
+  },
+  "sh.sr_indexing": "Hold on: I am leafing through every page of the app, so nothing escapes your search ({done, number} of {total, number}).",
+  "@sh.sr_indexing": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Hold on: I am leafing through every page of the app, so nothing escapes your search ({done} of {total}).”.",
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "sh.sr_indexingWhat": "This happens once on each device, then only for what changes. What is found so far is shown below.",
+  "@sh.sr_indexingWhat": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “This happens once on each device, then only for what changes. What is found so far is shown below.”."
+  },
+  "sh.sr_results": "{n, plural, one {# result} other {# results}}",
+  "@sh.sr_results": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “{n} results”.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "sh.sr_filters": "Filters",
+  "@sh.sr_filters": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Filters”."
+  },
+  "sh.sr_filtersN": "Filters ({n, number})",
+  "@sh.sr_filtersN": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Filters ({n})”.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "sh.sr_all": "All",
+  "@sh.sr_all": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “All”."
+  },
+  "sh.sr_world": "Part of the app",
+  "@sh.sr_world": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Part of the app”."
+  },
+  "sh.sr_scope": "Where",
+  "@sh.sr_scope": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Where”."
+  },
+  "sh.sr_everywhere": "Everywhere",
+  "@sh.sr_everywhere": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Everywhere”."
+  },
+  "sh.sr_hereIs": "Here: {title}",
+  "@sh.sr_hereIs": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Here: {title}”.",
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "sh.sr_lang": "Language",
+  "@sh.sr_lang": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Language”."
+  },
+  "sh.sr_status": "Status",
+  "@sh.sr_status": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Status”."
+  },
+  "sh.sr_stUnread": "Not read yet",
+  "@sh.sr_stUnread": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Not read yet”."
+  },
+  "sh.sr_stUnsolved": "Not solved yet",
+  "@sh.sr_stUnsolved": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Not solved yet”."
+  },
+  "sh.sr_stWrong": "My mistakes",
+  "@sh.sr_stWrong": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “My mistakes”."
+  },
+  "sh.sr_clear": "Clear the filters",
+  "@sh.sr_clear": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Clear the filters”."
+  },
+  "sh.sr_t_roadmap": "Roadmaps",
+  "@sh.sr_t_roadmap": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Roadmaps”."
+  },
+  "sh.sr_t_station": "Stations",
+  "@sh.sr_t_station": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Stations”."
+  },
+  "sh.sr_t_subject": "Subjects",
+  "@sh.sr_t_subject": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Subjects”."
+  },
+  "sh.sr_t_chapter": "Chapters",
+  "@sh.sr_t_chapter": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Chapters”."
+  },
+  "sh.sr_t_section": "Sections",
+  "@sh.sr_t_section": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Sections”."
+  },
+  "sh.sr_t_theory": "Theory",
+  "@sh.sr_t_theory": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Theory”."
+  },
+  "sh.sr_t_exercise": "Exercises",
+  "@sh.sr_t_exercise": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Exercises”."
+  },
+  "sh.sr_t_card": "Flashcards",
+  "@sh.sr_t_card": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Flashcards”."
+  },
+  "sh.sr_t_trap": "Traps",
+  "@sh.sr_t_trap": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Traps”."
+  },
+  "sh.sr_t_drill": "Debug drills",
+  "@sh.sr_t_drill": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Debug drills”."
+  },
+  "sh.sr_t_source": "Sources",
+  "@sh.sr_t_source": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Sources”."
+  },
+  "sh.sr_t_convo": "Conversations",
+  "@sh.sr_t_convo": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Conversations”."
+  },
+  "sh.sr_t_word": "Words",
+  "@sh.sr_t_word": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Words”."
+  },
+  "sh.sr_t_meaning": "Meanings",
+  "@sh.sr_t_meaning": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Meanings”."
+  },
+  "sh.sr_t_grammar": "Grammar",
+  "@sh.sr_t_grammar": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Grammar”."
+  },
+  "sh.sr_t_lesson": "Lessons",
+  "@sh.sr_t_lesson": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Lessons”."
+  },
+  "sh.sr_t_field": "Vocabulary fields",
+  "@sh.sr_t_field": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Vocabulary fields”."
+  },
+  "sh.sr_t_sentence": "Sentences",
+  "@sh.sr_t_sentence": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Sentences”."
+  },
+  "sh.sr_t_phenomenon": "Peculiarities",
+  "@sh.sr_t_phenomenon": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Peculiarities”."
+  },
+  "sh.sr_1_roadmap": "Roadmap",
+  "@sh.sr_1_roadmap": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Roadmap”."
+  },
+  "sh.sr_1_station": "Station",
+  "@sh.sr_1_station": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Station”."
+  },
+  "sh.sr_1_subject": "Subject",
+  "@sh.sr_1_subject": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Subject”."
+  },
+  "sh.sr_1_chapter": "Chapter",
+  "@sh.sr_1_chapter": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Chapter”."
+  },
+  "sh.sr_1_section": "Section",
+  "@sh.sr_1_section": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Section”."
+  },
+  "sh.sr_1_theory": "Theory",
+  "@sh.sr_1_theory": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Theory”."
+  },
+  "sh.sr_1_exercise": "Exercise",
+  "@sh.sr_1_exercise": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Exercise”."
+  },
+  "sh.sr_1_card": "Flashcard",
+  "@sh.sr_1_card": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Flashcard”."
+  },
+  "sh.sr_1_trap": "Trap",
+  "@sh.sr_1_trap": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Trap”."
+  },
+  "sh.sr_1_drill": "Debug drill",
+  "@sh.sr_1_drill": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Debug drill”."
+  },
+  "sh.sr_1_source": "Source",
+  "@sh.sr_1_source": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Source”."
+  },
+  "sh.sr_1_convo": "Conversation",
+  "@sh.sr_1_convo": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Conversation”."
+  },
+  "sh.sr_1_word": "Word",
+  "@sh.sr_1_word": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Word”."
+  },
+  "sh.sr_1_meaning": "Meaning",
+  "@sh.sr_1_meaning": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Meaning”."
+  },
+  "sh.sr_1_grammar": "Grammar",
+  "@sh.sr_1_grammar": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Grammar”."
+  },
+  "sh.sr_1_lesson": "Lesson",
+  "@sh.sr_1_lesson": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Lesson”."
+  },
+  "sh.sr_1_field": "Vocabulary field",
+  "@sh.sr_1_field": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Vocabulary field”."
+  },
+  "sh.sr_1_sentence": "Sentence",
+  "@sh.sr_1_sentence": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Sentence”."
+  },
+  "sh.sr_1_phenomenon": "Peculiarity",
+  "@sh.sr_1_phenomenon": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Peculiarity”."
+  },
+  "sh.sr_f_title": "Title",
+  "@sh.sr_f_title": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Title”."
+  },
+  "sh.sr_f_description": "Description",
+  "@sh.sr_f_description": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Description”."
+  },
+  "sh.sr_f_subtitle": "Subtitle",
+  "@sh.sr_f_subtitle": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Subtitle”."
+  },
+  "sh.sr_f_objectives": "Objectives",
+  "@sh.sr_f_objectives": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Objectives”."
+  },
+  "sh.sr_f_mantra": "Mental model",
+  "@sh.sr_f_mantra": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Mental model”."
+  },
+  "sh.sr_f_hook": "Introduction",
+  "@sh.sr_f_hook": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Introduction”."
+  },
+  "sh.sr_f_question": "Question",
+  "@sh.sr_f_question": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Question”."
+  },
+  "sh.sr_f_options": "Choices",
+  "@sh.sr_f_options": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Choices”."
+  },
+  "sh.sr_f_front": "Front",
+  "@sh.sr_f_front": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Front”."
+  },
+  "sh.sr_f_back": "Back",
+  "@sh.sr_f_back": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Back”."
+  },
+  "sh.sr_f_text": "Text",
+  "@sh.sr_f_text": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Text”."
+  },
+  "sh.sr_f_fix": "Fix",
+  "@sh.sr_f_fix": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Fix”."
+  },
+  "sh.sr_f_symptom": "Symptom",
+  "@sh.sr_f_symptom": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Symptom”."
+  },
+  "sh.sr_f_steps": "Steps",
+  "@sh.sr_f_steps": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Steps”."
+  },
+  "sh.sr_f_file": "File",
+  "@sh.sr_f_file": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “File”."
+  },
+  "sh.sr_f_goal": "Goal",
+  "@sh.sr_f_goal": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Goal”."
+  },
+  "sh.sr_f_summary": "Summary",
+  "@sh.sr_f_summary": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Summary”."
+  },
+  "sh.sr_f_goals": "Learning goals",
+  "@sh.sr_f_goals": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Learning goals”."
+  },
+  "sh.sr_f_chapters": "Chapters",
+  "@sh.sr_f_chapters": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Chapters”."
+  },
+  "sh.sr_f_word": "Word",
+  "@sh.sr_f_word": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Word”."
+  },
+  "sh.sr_f_forms": "Forms",
+  "@sh.sr_f_forms": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Forms”."
+  },
+  "sh.sr_f_reading": "Reading",
+  "@sh.sr_f_reading": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Reading”."
+  },
+  "sh.sr_f_meanings": "Meanings",
+  "@sh.sr_f_meanings": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Meanings”."
+  },
+  "sh.sr_f_sentence": "Sentence",
+  "@sh.sr_f_sentence": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Sentence”."
+  },
+  "sh.sr_f_translation": "Translation",
+  "@sh.sr_f_translation": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Translation”."
+  },
+  "sh.sr_f_examples": "Examples",
+  "@sh.sr_f_examples": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Examples”."
+  },
+  "sh.sr_f_meaning": "Meaning",
+  "@sh.sr_f_meaning": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Meaning”."
+  },
+  "sh.sr_f_words": "Words",
+  "@sh.sr_f_words": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Words”."
+  },
+  "sh.sr_f_said": "What was said",
+  "@sh.sr_f_said": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “What was said”."
+  },
+  "sh.sr_b_paragraph": "Theory paragraph",
+  "@sh.sr_b_paragraph": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Theory paragraph”."
+  },
+  "sh.sr_b_list": "List",
+  "@sh.sr_b_list": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “List”."
+  },
+  "sh.sr_b_code": "Code",
+  "@sh.sr_b_code": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Code”."
+  },
+  "sh.sr_b_diagram": "Diagram",
+  "@sh.sr_b_diagram": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Diagram”."
+  },
+  "sh.sr_b_table": "Table",
+  "@sh.sr_b_table": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Table”."
+  },
+  "sh.sr_b_note": "Note",
+  "@sh.sr_b_note": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Note”."
+  },
+  "sh.sr_b_comparison": "Comparison",
+  "@sh.sr_b_comparison": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Comparison”."
+  },
+  "sh.sr_b_process": "Process",
+  "@sh.sr_b_process": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Process”."
+  },
+  "sh.sr_b_question": "Question",
+  "@sh.sr_b_question": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Question”."
+  },
+  "sh.sr_b_questions": "Questions",
+  "@sh.sr_b_questions": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Questions”."
+  },
+  "sh.sr_b_terms": "Terms",
+  "@sh.sr_b_terms": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Terms”."
+  },
+  "sh.sr_b_figure": "Figure",
+  "@sh.sr_b_figure": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Figure”."
+  },
+  "sh.sr_via_tutor": "from the character button",
+  "@sh.sr_via_tutor": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “from the character button”."
+  },
+  "sh.sr_via_explainThis": "from “Explain this”",
+  "@sh.sr_via_explainThis": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “from “Explain this””."
+  },
+  "sh.sr_via_explainDifferently": "from “Explain differently”",
+  "@sh.sr_via_explainDifferently": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “from “Explain differently””."
+  },
+  "sh.sr_via_helpSocratic": "from “Help me get it”",
+  "@sh.sr_via_helpSocratic": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “from “Help me get it””."
+  },
+  "sh.sr_via_askHint": "from “Ask” before answering",
+  "@sh.sr_via_askHint": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “from “Ask” before answering”."
+  },
+  "sh.sr_via_cardHint": "from a flashcard (hint)",
+  "@sh.sr_via_cardHint": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “from a flashcard (hint)”."
+  },
+  "sh.sr_via_cardExplain": "from a flashcard (explain)",
+  "@sh.sr_via_cardExplain": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “from a flashcard (explain)”."
+  },
+  "sh.sr_via_section_socratic": "from “Socratic dialogue” on a section",
+  "@sh.sr_via_section_socratic": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “from “Socratic dialogue” on a section”."
+  },
+  "sh.sr_via_section_debug": "from “Case simulation” on a section",
+  "@sh.sr_via_section_debug": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “from “Case simulation” on a section”."
+  },
+  "sh.sr_via_section_interview": "from “Interview me” on a section",
+  "@sh.sr_via_section_interview": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “from “Interview me” on a section”."
+  },
+  "sh.sr_via_chapterSocratic": "from “Socratic review” of a chapter",
+  "@sh.sr_via_chapterSocratic": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “from “Socratic review” of a chapter”."
+  },
+  "sh.sr_via_drillRoleplay": "from a debug drill",
+  "@sh.sr_via_drillRoleplay": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “from a debug drill”."
+  },
+  "sh.sr_via_lang": "from a language course",
+  "@sh.sr_via_lang": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “from a language course”."
+  },
+  "sh.sr_whereEx": "exercise {n, number} of chapter {c}",
+  "@sh.sr_whereEx": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “exercise {n} of chapter {c}”.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "c": {
+        "type": "String"
+      }
+    }
+  },
+  "sh.sr_whereBlock": "{kind} in “{sec, number}”",
+  "@sh.sr_whereBlock": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “{kind} in “{sec}””.",
+    "placeholders": {
+      "kind": {
+        "type": "String"
+      },
+      "sec": {
+        "type": "int"
+      }
+    }
+  },
+  "sh.sr_whereCard": "flashcard of chapter {c}",
+  "@sh.sr_whereCard": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “flashcard of chapter {c}”.",
+    "placeholders": {
+      "c": {
+        "type": "String"
+      }
+    }
+  },
+  "sh.sr_whereSec": "section “{sec, number}”",
+  "@sh.sr_whereSec": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “section “{sec}””.",
+    "placeholders": {
+      "sec": {
+        "type": "int"
+      }
+    }
+  },
+  "sh.sr_whereCh": "chapter {c}",
+  "@sh.sr_whereCh": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “chapter {c}”.",
+    "placeholders": {
+      "c": {
+        "type": "String"
+      }
+    }
+  },
+  "sh.sr_whereDrill": "debug drill “{t}”",
+  "@sh.sr_whereDrill": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “debug drill “{t}””.",
+    "placeholders": {
+      "t": {
+        "type": "String"
+      }
+    }
+  },
+  "sh.sr_practise": "Practise these results",
+  "@sh.sr_practise": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Practise these results”."
+  },
+  "sh.sr_practiseNone": "Nothing to practise among these results: exercises, flashcards and words can be practised.",
+  "@sh.sr_practiseNone": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Nothing to practise among these results: exercises, flashcards and words can be practised.”."
+  },
+  "sh.sr_roundOf": "Practice round {i} of {n, number}: {title}",
+  "@sh.sr_roundOf": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Practice round {i} of {n}: {title}”.",
+    "placeholders": {
+      "i": {
+        "type": "String"
+      },
+      "n": {
+        "type": "int"
+      },
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "sh.sr_next": "Next: {title}",
+  "@sh.sr_next": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Next: {title}”.",
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "sh.sr_roundEnd": "End the round",
+  "@sh.sr_roundEnd": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “End the round”."
+  },
+  "sh.sr_roundDone": "The round is over. Well done!",
+  "@sh.sr_roundDone": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “The round is over. Well done!”."
+  },
+  "sh.sr_pEx": "{n, plural, one {# exercise} other {# exercises}}",
+  "@sh.sr_pEx": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “{n} exercises”.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "sh.sr_pCards": "{n, plural, one {# flashcard} other {# flashcards}}",
+  "@sh.sr_pCards": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “{n} flashcards”.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "sh.sr_pWords": "words of “{title}”",
+  "@sh.sr_pWords": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “words of “{title}””.",
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "sh.sr_save": "Keep this search",
+  "@sh.sr_save": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Keep this search”."
+  },
+  "sh.sr_saved": "Kept in “Saved searches” as “{name}”",
+  "@sh.sr_saved": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Kept in “Saved searches” as “{name}””.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sh.sr_nameIt": "A name for this search",
+  "@sh.sr_nameIt": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “A name for this search”."
+  },
+  "sh.sr_collections": "Saved searches",
+  "@sh.sr_collections": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Saved searches”."
+  },
+  "sh.sr_collectionsSub": "Searches you kept. Open one to see its results again, always up to date.",
+  "@sh.sr_collectionsSub": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Searches you kept. Open one to see its results again, always up to date.”."
+  },
+  "sh.sr_collectionsN": "{n, plural, one {# saved search} other {Saved searches (#)}}",
+  "@sh.sr_collectionsN": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Saved searches ({n})”. In the code: L('sr_collectionsN', { n: nCol })) : null));",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "Saved": {
+        "type": "String"
+      }
+    }
+  },
+  "sh.sr_kinds": "What to show",
+  "@sh.sr_kinds": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “What to show”."
+  },
+  "sh.sr_recent": "Recent searches",
+  "@sh.sr_recent": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Recent searches”."
+  },
+  "sh.sr_rename": "Rename",
+  "@sh.sr_rename": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Rename”."
+  },
+  "sh.sr_del": "Delete",
+  "@sh.sr_del": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Delete”."
+  },
+  "sh.sr_delSure": "Delete the saved search “{name}”? Only the search goes; everything it finds stays.",
+  "@sh.sr_delSure": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Delete the saved search “{name}”? Only the search goes; everything it finds stays.”.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sh.sr_copyLink": "Copy the link",
+  "@sh.sr_copyLink": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Copy the link”."
+  },
+  "sh.sr_linkCopied": "Link copied",
+  "@sh.sr_linkCopied": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Link copied”."
+  },
+  "sh.sr_open": "Open",
+  "@sh.sr_open": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Open”."
+  },
+  "sh.sr_nItems": "{n, plural, one {# found} other {# found}}",
+  "@sh.sr_nItems": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “{n} found”.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "sh.sr_collection": "Saved search",
+  "@sh.sr_collection": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Saved search”."
+  },
+  "sh.sr_inLang": "in {lang}",
+  "@sh.sr_inLang": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “in {lang}”.",
+    "placeholders": {
+      "lang": {
+        "type": "String"
+      }
+    }
+  },
+  "sh.sr_backToResults": "Back to the results",
+  "@sh.sr_backToResults": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: “Back to the results”."
+  },
+  "sh.sr_quoted": "“{t}”",
+  "@sh.sr_quoted": {
+    "description": "Frame (engine/shell.js), search everything (engine/search.js) / the Me menu: ““{t}””.",
+    "placeholders": {
+      "t": {
         "type": "String"
       }
     }
