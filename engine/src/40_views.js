@@ -368,7 +368,7 @@ function renderBlock(b, i) {
 /* i18n-ignore-start */   // the kind of a part, and its text: words of the AI's prompt (explainItem)
 const BLOCK_WHAT = { p: 'paragraph', list: 'list', code: 'code example', figure: 'figure', diagram: 'diagram', table: 'table', callout: 'note', compare: 'comparison', flow: 'process', reveal: 'question', ask: 'set of questions', terms: 'set of terms' };
 function explainParts(el, b, s) {
-  explainable(el, () => ({ label: b.title || b.label || b.caption || (b.t === 'figure' ? (MEDIA[b.media]?.alt || 'this figure') : blockText(b)), text: blockText(b), sec: s, what: BLOCK_WHAT[b.t] || 'part of the lesson' }));
+  explainable(el, () => ({ label: b.title || b.label || b.caption || (b.t === 'figure' ? (MEDIA[b.media]?.alt || tE('engine.aimsg.thisFigure')) : blockText(b)), text: blockText(b), sec: s, what: BLOCK_WHAT[b.t] || 'part of the lesson' }));
   if (b.t === 'compare') $$('.compare > div', el).forEach((d, k) => { const it = b.items[k]; if (it) explainable(d, () => ({ label: it.title, text: it.title + ':\n' + it.points.map(p => '- ' + p).join('\n') + '\n\n(Compared with: ' + b.items.filter(x => x !== it).map(x => x.title).join(', ') + ')', sec: s, what: 'card' })); });
   if (b.t === 'terms') $$('.term', el).forEach((d, k) => { const t = b.items[k]; if (t) explainable(d, () => ({ label: t.term, text: `${t.term}: ${t.def}`, sec: s, what: 'term' })); });
   if (b.t === 'list') $$('li', el).forEach((d, k) => { const x = b.items[k]; if (x && String(x).length > 30) explainable(d, () => ({ label: x, text: x + '\n\n(One item of the list:\n' + blockText(b) + ')', sec: s, what: 'point' })); });
@@ -434,8 +434,9 @@ function sectionView(sid) {
   }
   draw();
 }
-const SEC_ASK = { socratic: ['Start a Socratic session on "{t}". Begin by probing what I already think.', 'secSocratic'], debug: ['Start a debugging simulation related to "{t}".', 'secDebug'], interview: ['Interview me about "{t}".', 'secInterview'] };   // i18n-ignore: the learner's first messages to the AI (prompts)
-function askSection(s, mode) { const [msg, intent] = SEC_ASK[mode]; openTutor({ kind: 'section', id: s.id }, mode, msg.replace('{t}', s.title), { intent: INTENT[intent] }); }
+/** The section's AI buttons: [the learner's first message (their bubble, in the UI language), the task for the AI]. */
+const SEC_ASK = { socratic: ['engine.aimsg.secSocratic', 'secSocratic'], debug: ['engine.aimsg.secDebug', 'secDebug'], interview: ['engine.aimsg.secInterview', 'secInterview'] };
+function askSection(s, mode) { const [msg, intent] = SEC_ASK[mode]; openTutor({ kind: 'section', id: s.id }, mode, tE(msg, { title: s.title }), { intent: INTENT[intent] }); }
 function sectionTail(s, prev, next) {
   const c = s._ch;
   const exs = c.exercises.filter(e => e.section === s.id);
@@ -668,10 +669,10 @@ function flashDeck(body, cards) {
 /* i18n-ignore-start */   // the card as context for the AI and the learner's first messages to it (prompts)
 function askAboutCard(c, turned) {
   const ctx = { kind: 'exercise', id: 'fc:' + c.key, text: `Flashcard (chapter ${c._ch.num} “${c._ch.title}”)\nFront: ${c.q}\nBack: ${c.a}` };
-  if (turned) openTutor(ctx, 'explain', 'Explain this flashcard to me in more depth, with an example.');
-  else openTutor(ctx, 'hint', 'Give me a hint for this flashcard — don\'t tell me the answer.', { intent: INTENT.exHint('') });
-}
 /* i18n-ignore-end */
+  if (turned) openTutor(ctx, 'explain', tE('engine.aimsg.cardExplain'));   // the learner's first messages: their bubble, in the UI language
+  else openTutor(ctx, 'hint', tE('engine.aimsg.cardHint'), { intent: INTENT.exHint('') });
+}
 
 /* ---------- debug drills ---------- */
 function countDuePlaybooks() { return Object.values(PB).filter(d => S.pb[d.id] && S.pb[d.id].due <= today()).length; }
@@ -712,7 +713,7 @@ function drillView(id) {
       h('button', { class: 'btn primary', onclick: () => reveal(null) }, '👀 ' + tE('engine.drill.reveal')),
       h('button', { class: 'btn ai', onclick: async e => { if (!ta.value.trim()) { ta.classList.add('shake'); setTimeout(() => ta.classList.remove('shake'), 500); return; } const b = e.currentTarget; b.disabled = true; b.textContent = '✨ ' + tE('engine.ex.grading'); try { const g = await aiDrillGrade(d, ta.value); reveal(g); } catch (er) { toast('⚠️ ' + errText(er), 4000); reveal(null); } } }, '✨ ' + tE('engine.drill.grade')),
       h('button', { class: 'btn', onclick: () => orderDrill() }, '🔢 ' + tE('engine.drill.order')),
-      h('button', { class: 'btn', onclick: () => openTutor({ kind: 'playbook', id }, 'debug', `Run a debugging simulation based on this playbook: "${d.title}". Give me only the symptom and let me investigate.`, { intent: INTENT.pbRoleplay }) }, '🎭 ' + tE('engine.drill.roleplay', { tutor: TUTOR.name }))),   // i18n-ignore (the learner's first message to the AI: a prompt)
+      h('button', { class: 'btn', onclick: () => openTutor({ kind: 'playbook', id }, 'debug', tE('engine.aimsg.pbRoleplay', { title: d.title }), { intent: INTENT.pbRoleplay }) }, '🎭 ' + tE('engine.drill.roleplay', { tutor: TUTOR.name }))),   // the learner's first message: their bubble, in the UI language
     stage));
   function orderDrill() {
     stage.innerHTML = '';

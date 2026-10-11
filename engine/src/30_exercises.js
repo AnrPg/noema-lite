@@ -374,9 +374,10 @@ function askAIAbout(ex, mode, given = '') {
   const m = mode === 'explain' ? 'explain' : mode === 'socratic' ? 'socratic' : 'hint';
   const key = ex.id + '|' + m;
   T.hist[key] = []; delete T.tstate[key];
-  const mine = given ? ` (I answered: ${given.length > 300 ? given.slice(0, 300) + '…' : given})` : '';
-  if (m === 'explain') openTutor(ctx, 'explain', `I got this exercise wrong${mine}. Explain it to me differently.`, { intent: INTENT.exExplain(given) });
-  else if (m === 'socratic') openTutor(ctx, 'socratic', `I got this exercise wrong${mine}. Help me get it — don't just give me the answer.`, { intent: INTENT.exSocratic(given) });
-  else openTutor(ctx, 'hint', 'Give me a hint for this exercise — don\'t tell me the answer.', { intent: INTENT.exHint(given) });
+  // the learner's first message (their bubble, in the UI language); the task for the AI is the INTENT (English)
+  const mine = { answered: given ? 'yes' : 'no', given: given.length > 300 ? given.slice(0, 300) + '…' : given };
+  if (m === 'explain') openTutor(ctx, 'explain', tE('engine.aimsg.exExplain', mine), { intent: INTENT.exExplain(given) });
+  else if (m === 'socratic') openTutor(ctx, 'socratic', tE('engine.aimsg.exSocratic', mine), { intent: INTENT.exSocratic(given) });
+  else openTutor(ctx, 'hint', tE('engine.aimsg.exHint'), { intent: INTENT.exHint(given) });
 }
 /* i18n-ignore-end */
