@@ -120,7 +120,7 @@ ok(f.state === 'locked' && f.needs.NOUN[0] === 1 && f.unlockBy[0] === 'veg.1', `
 learnNode('de', 'veg.1', 'known_r');
 k = N.known(C, L, 'de');
 f = N.feasibility(C, L, 'de', 'fn.definite', { k });
-ok(f.state === 'thin' && f.sentences === 6, `after Vegetables I: thin (${f.sentences} sentences < 12, counted as D19 does: ≤ ⌈30 %⌉ unknown words)`);
+ok(f.state === 'thin' && f.sentences === 6, `after Vegetables I: thin (${f.sentences} sentences < 12, counted as D20 does: ≤ ⌈30 %⌉ unknown words)`);
 ok(N.feasibility(C, L, 'de', 'fn.definite', { k, minSentences: 4 }).state === 'ready', '…ready when the threshold is met');
 ok(N.feasibility(C, L, 'zh', 'fn.plural.noun').state === 'absent', 'a function absent in Chinese is reported as absent');
 // property: whatever the learner knows, the selected sentences only use known words; open nodes have done prerequisites
@@ -284,7 +284,7 @@ ok(!fnCard.hasProfile && fnCard.gloss.includes('definite direct object') && fnCa
         if (x.sentence) { const S = C.lang[c].sentenceById[x.sentence], un = S.req.filter(l => !kk.R.has(l)); if (un.length > S.cap || un.some(l => !(x.unknown || []).includes(l))) only = false; }
       } }
   }
-  ok(only, '60 random learners: every item has at most ⌈30 %⌉ unknown words (D19), all listed as 🆕');
+  ok(only, '60 random learners: every item has at most ⌈30 %⌉ unknown words (D20), all listed as 🆕');
   // strictKnown: only known words
   let strict = true;
   { const T = N.newLearner(C); passFoundations(T); const kk = N.known(C, T, 'de');

@@ -13,3 +13,8 @@ node_modules/
 _to_delete/
 # Finder / iCloud duplicates ("file 2.ext")
 * 2.*
+# D19: the English master as a facade is generated (python3 tools/lang_facade.py extract <course>) — reproducible, not committed
+library/languages/*/facades/en/
+library/languages/_phenomena/facades/en/
+library/languages/_typology/facades/en.json
+library/languages/*/facades/*/tasks/

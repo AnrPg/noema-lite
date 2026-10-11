@@ -3,13 +3,26 @@
 **Who must follow this file:** every agent and every person that writes code, content, briefs, tools or designs for the
 language courses — Claude Code sessions, Cowork sessions, subagents that write words, grammar or sentences, the Claude
 skill (`noema-pack-builder`), the connector's tasks, and anyone changing the language part. It is the short, binding
-form of the decisions D1–D19 in `docs/LANGUAGES.md` (the full contract). If the two ever disagree, `docs/LANGUAGES.md`
+form of the decisions D1–D20 in `docs/LANGUAGES.md` (the full contract). If the two ever disagree, `docs/LANGUAGES.md`
 wins and this file is fixed in the same commit. `tests/lang_rules.py` fails when a decision of `docs/LANGUAGES.md` is
 missing here or when one of the places below does not point to this file.
 
+> **First rule — D19: every language is taught through the learner's native language** (contract: `docs/language-packs.md`).
+> Supported natives = the languages of the UI locales: **en el ru fr ar de hi zh ja it es sq pt**. A learner with a
+> supported native reads every explanation in it and gets comparisons with it only; any other learner reads the UI
+> language and gets comparisons with the type / branch / family of their language. So everything you write is
+> **neutral** — a general text (summary, blocks, traps, procedure, quiz, seeAlso, facts, word profiles, `features.*.none`,
+> phenomena, typology, titles) names **no language outside the course** and never explains through English grammar
+> (no "no ‘do’", "-ing", "is not ‘the’") — and every comparison is a **contrast note** `{for, rel, text}`: on **every
+> grammar page** one for each supported native except the page's language, plus `type:fusional`, `type:agglutinating`,
+> `type:isolating`, `type:polysynthetic`, `branch:Semitic` (a type note names no language); `profile.notes` on words;
+> `notes` on phenomena. Notes are written in English (the master) with examples in the note's own language; provenance
+> ("borrowed from English") is allowed in etymologies. Locale facades (`facades/<locale>/`) are separate, later tasks.
+> Check: `python3 tools/lang_facade.py lint <course>`; `tools/validate_lang.py` (warnings now, errors with `--d19-strict`).
+
 Where it is enforced: `CLAUDE.md` and `AGENTS.md` (read by code agents), `README.md` (🌍 Languages), the skill
 (`references/LANGUAGE_RULES.md` in the skill zip, step "Language courses" in `SKILL.md`; the skill
-`noema-language-builder`, which adds a whole language as a package — docs/LANGUAGES.md §10.2: D13–D19 apply to a package
+`noema-language-builder`, which adds a whole language as a package — docs/LANGUAGES.md §10.2: D13–D20 apply to a package
 exactly as to the library), the content-agent brief
 (`tools/lang_sources/AGENT_BRIEF.md`, which every brief for a language task starts with), and the validators
 (`tools/validate_lang.py`, `tools/lang_phenomena.py`, part of `tests/run_e2e.sh` and of `tools/build.py`; for a language
@@ -28,7 +41,9 @@ package `tools/lang_course.py package` and `langcore.checkLangPackage`, which th
    `lang_refcheck.fetch`, WALS, reference grammars). Leave out what you are not sure of; `ref.override` only with a reason.
 
 ## B. Model and content — the decisions
-- **D1** Explanations in the course's `explainLang` (default English); the tutor in `chatLang`.
+- **D1** Explanations are written once in the **master facade** (English, `explainLang: "en"`); each learner reads them
+  in their explanation locale (native if supported, else the UI language — D19) through the locale facades; the tutor
+  in `chatLang`, else the explanation locale.
 - **D2** Progress is per language; the concept DAG is shared.
 - **D3** Automatic exercises use only stored, validated data (bank, paradigms); an LLM never writes an answer key.
 - **D4** Pilot languages ar, he, zh, de — the rules hold for every language added later.
@@ -57,12 +72,17 @@ package `tools/lang_course.py package` and `langcore.checkLangPackage`, which th
   and writing, culture) added indefinitely, each placed on the common order (D13) and written to all the rules above.
 
 - **D18** **The learner's languages decide what is explained.** Settings list the learner's languages with levels;
-  native / C2 ones make parts familiar (hidden in one line); a language without a profile is inferred from its family or
-  type. Every grammar page carries **comparison notes** for the reference set (fusional: el, ru, es, en, fr, de, hi, fa,
-  mr; Semitic: ar, he; agglutinating: tr, ja, ko, fi, hu, sw, lg; isolating: zh, vi; polysynthetic: iu — at least 8 of
-  them per page, all four types); Claude / Gemini may add notes for other languages only on the learner's request with
-  their key. The peculiarities of each language form a free library.
-- **D19** **Vocabulary is its own track; every other aspect uses any vocabulary.** Sentences prefer the learner's known
+  the native one makes parts familiar (hidden in one line, naming no other language — D19); a language without a profile
+  is inferred from its family or type. Every grammar page carries **contrast notes** for every supported native and the
+  five type notes (D19); the older reference set (fa, mr, tr, ko, fi, hu, sw, lg, vi, iu) is kept as source material,
+  never shown; Claude / Gemini may add a note for an unsupported native only on the learner's request with their key. The
+  peculiarities of each language form a free library.
+- **D19** **Taught through the learner's native language.** Explanations in the native language if supported (else the UI
+  language), comparisons with it only (else with its type / branch / family); no English or other outside language as a
+  reference point. Neutral core + neutral English master + contrast notes for every supported native and type (required
+  on every grammar page; `profile.notes`; phenomenon `notes`) + locale facades (`facades/<locale>/`, addresses in
+  `tools/schemas/noema.langfacade.fields.json`, made with `tools/lang_facade.py task`, checked with `parity` / `lint`).
+- **D20** **Vocabulary is its own track; every other aspect uses any vocabulary.** Sentences prefer the learner's known
   words but may contain unknown ones — at most ⌈30 %⌉ of the words, in production too — shown with 🆕, the word card on
   hover / tap and a list at the end of the lesson. Every word used anywhere has its full facade. Every field brings
   ≥ 2 sentences for every non-vocabulary node before it on the common order (or a reason in `fieldExemptions`).
@@ -71,10 +91,13 @@ package `tools/lang_course.py package` and `langcore.checkLangPackage`, which th
 - [ ] I read `docs/LANGUAGE_RULES.md` and the sections of `docs/LANGUAGES.md` my task touches.
 - [ ] Nothing I add or move breaks the common order of any language of any course (D13) — the validator checks it.
 - [ ] Every word I write states its whole facade, every meaning is a concept or `of`, every shared concept has contrasts (D14, D15).
-- [ ] My texts describe the language (D16); comparisons with other languages go into `notes` (`for`: a language, a
-      type or a family), and every grammar page has notes for at least 8 reference languages of all four types (D18).
+- [ ] **D19 first:** my general texts name no language outside the course and explain nothing through English (D16,
+      D19); every comparison is a note (`for`: a supported native, `type:…`, `branch:…`, `family:…`); every grammar page
+      I write has a note for **each supported native** (en el ru fr ar de hi zh ja it es sq pt, without the page's own
+      language) and `type:fusional`, `type:agglutinating`, `type:isolating`, `type:polysynthetic`, `branch:Semitic`;
+      words that invite a comparison get `profile.notes`; `python3 tools/lang_facade.py lint <course>` shows nothing of mine.
 - [ ] Every word in my sentences is in the lexicon with its full facade; a field I write brings sentences for every
-      non-vocabulary node before it (D19).
+      non-vocabulary node before it (D20).
 - [ ] I grounded every fact; the validator (`--strict`), refcheck and `lang_phenomena.py` pass; the catalogue of
       phenomena is updated for what I added (status, gap).
 - [ ] I touched only the files my task allows, and reported doubtful cases.

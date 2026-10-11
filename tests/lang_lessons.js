@@ -119,8 +119,8 @@ async function runThrough(page, wrongIn = []) {
   await page.evaluate(() => { const U = NoemaLangUI.UI, N = window.NoemaLang; for (const id of Object.keys(U.C.lang.de.lex).slice(0, 6)) N.review(U.C, U.L, 'de', id, 'r', true, 0); });
   await page.goto(url + '?account=anr&subject=' + SUBJ + '#/fn/fn.plural.noun/de'); await wait(900);
   if (await page.locator('.lx-gram .lx-tok').count()) { await page.locator('.lx-gram .lx-tok').first().click(); await wait(200);
-    ok(await page.locator('.lx-pop .lx-card').count() === 1, 'D19: a word of a sentence opens its card on tap (its meaning on hover)'); await page.click('.lx-pop button:has-text("✕")'); }
-  else ok(false, 'D19: the example sentences are shown word by word');
+    ok(await page.locator('.lx-pop .lx-card').count() === 1, 'D20: a word of a sentence opens its card on tap (its meaning on hover)'); await page.click('.lx-pop button:has-text("✕")'); }
+  else ok(false, 'D20: the example sentences are shown word by word');
   ok(!E.length, 'no page errors ' + JSON.stringify(E.slice(0, 3)));
   await browser.close(); fs.rmSync(ROOT, { recursive: true, force: true });
   console.log(fails ? `\n${fails} FAILED` : '\nALL PASSED'); process.exit(fails ? 1 : 0);

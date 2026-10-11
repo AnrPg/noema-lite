@@ -81,7 +81,12 @@ const sentencesFor = (data, code, fns) => mini.langs[code].bank.filter(s => (s.f
   e = N.checkLangAnswer(rec, data, tDef, { grammar: gDef, bank: wrong });
   ok(e.some(x => /“esst” is not the V;PRS;3;SG form of de:essen \(“isst”\)/.test(x)), 'a sentence token that is not its paradigm cell is refused: ' + (e[0] || '').slice(0, 110));
   const noNotes = clone(gDef); noNotes.notes = noNotes.notes.slice(0, 3);
-  ok(N.checkLangAnswer(rec, data, tDef, { grammar: noNotes, bank: sDef }).some(x => /comparison notes for the reference set: 3 of at least 8/.test(x)), 'a grammar page without notes for 8 reference languages of all four types is refused (D18)');
+  ok(N.checkLangAnswer(rec, data, tDef, { grammar: noNotes, bank: sDef }).some(x => /contrast notes \(D19\) missing: en, fr, ar, hi, zh, ja, it, sq, pt, type:fusional.*\(now at least 5 supported natives: 3\)/.test(x)), 'a grammar page with notes for too few supported natives is refused (D19)');
+  ok(!N.checkLangAnswer(rec, data, tDef, { grammar: gDef, bank: sDef }).some(x => /D19/.test(x)), 'while the content is rewritten (LANGJOBS.D19.strict off) a page with notes for most supported natives passes');
+  N.LANGJOBS.D19.strict = true;
+  const strictE = N.checkLangAnswer(rec, data, tDef, { grammar: gDef, bank: sDef });
+  N.LANGJOBS.D19.strict = false;
+  ok(strictE.some(x => /contrast notes \(D19\) missing: it, sq, pt, type:fusional, type:agglutinating, type:isolating, type:polysynthetic, branch:Semitic/.test(x)), 'with LANGJOBS.D19.strict every supported native but the page’s language and the five type notes are required');
   const joined = clone(sDef); joined[0].text = joined[0].text + ' ';
   ok(N.checkLangAnswer(rec, data, tDef, { grammar: gDef, bank: joined }).some(x => /≠ the tokens joined/.test(x)), 'text ≠ the joined tokens is refused');
   ok(!N.checkLangAnswer(rec, data, tDef, { grammar: gDef, bank: sDef }).length && sDef.length >= 3, `fn.definite in German with ${sDef.length} sentences passes`);
@@ -265,7 +270,7 @@ const sentencesFor = (data, code, fns) => mini.langs[code].bank.filter(s => (s.f
     const sD = sentencesFor(dataNow, 'de', ['fn.definite']).filter(s => s.functions.includes('fn.definite'));
     claudeAnswers.push({ grammar: { ...gD, notes: [] }, bank: sD }, { grammar: gD, bank: sD });
     await p.click('.lj-task[data-task="function:fn.definite:de"] .lj-run'); await wait(1500);
-    ok(claudeCalls.length === 2 && /comparison notes for the reference set/.test(JSON.stringify(claudeCalls[1].messages)) && claudeCalls[0].tool_choice?.name === 'answer', '▶ the app asks Claude (a tool call); the check sends the problems back and Claude repairs its answer');
+    ok(claudeCalls.length === 2 && /contrast notes \(D19\)/.test(JSON.stringify(claudeCalls[1].messages)) && claudeCalls[0].tool_choice?.name === 'answer', '▶ the app asks Claude (a tool call); the check sends the problems back and Claude repairs its answer');
     ok(await p.evaluate(() => !!NoemaLangUI.UI.C.lang.de.grammar['fn.definite'] && NoemaLangUI.UI.C.lang.de.sentences.length) === sD.length && !(await p.$('.lj-task[data-task="function:fn.definite:de"]')), `the answer is merged: the realization + ${sD.length} sentences; the task leaves the queue`);
     await p.click('.lj-task[data-task="node:veg.2:de"] .lj-copy'); await wait(300);
     const copied = await p.evaluate(() => navigator.clipboard.readText());

@@ -1,7 +1,7 @@
 /* P5 — the grammar lane (docs/LANGUAGES.md §6.3, §6.4, §7.3, §7.5, §8):
    1. langcore: the ten exercise types (paradigm, analyze, morph_build, root_pattern, agree, contrast, parse, gloss, proofread, combine)
       over the mini course and the pilot course, every answer checked against the stored data; offered automatically; feasibility
-      by the D19 rule; the lane, practice blocks, the session's grammar step; a property test over random learners (only known
+      by the D20 rule; the lane, practice blocks, the session's grammar step; a property test over random learners (only known
       words, ≤ ⌈30 %⌉ unknown per sentence, all listed).
    2. tools/validate_lang.py: the generators' types, parameters, cells, lemmas, filters, and empty pools under --strict.
    3. In a real browser over the pilot course: the widgets (check, reveal, keyboard, lang + dir, phone width), the 📐 lane on the
@@ -46,7 +46,7 @@ const MINI = path.join(__dirname, 'fixtures', 'lang-mini'), M = load(MINI);
   for (const d of [0, 4, 8]) N.practiceFunction(M, L, 'de', 'fn.plural.noun', 9, 10, d);
   ok(N.functionState(M, L, 'de', 'fn.plural.noun') === 'mastered' && N.exercises(M, L, 'de', 'fn.plural.noun', { rng: seeded(4) }).every(x => x.rows.every(r => r.hidden)), 'mastered: every cell hidden');
   g.generators = keep;
-  // feasibility (§7.3, D19)
+  // feasibility (§7.3, D20)
   const F = N.newLearner(M); passLessons(M, F);
   for (const id of M.lang.ar.byNode['veg.1']) N.review(M, F, 'ar', id, 'r', true, 0);
   const fa = N.feasibility(M, F, 'ar', 'fn.definite');
@@ -54,7 +54,7 @@ const MINI = path.join(__dirname, 'fixtures', 'lang-mini'), M = load(MINI);
   for (const id of [...M.lang.de.byNode['core.1'], ...M.lang.de.byNode['veg.1']]) N.review(M, F, 'de', id, 'r', true, 0);
   const kd = N.known(M, F, 'de'), fd = N.feasibility(M, F, 'de', 'fn.definite', { k: kd });
   ok(fd.sentences === N.selectSentences(M, 'de', { known: kd.R, functions: ['fn.definite'], maxUnknown: 'auto' }).length && fd.sentences > N.selectSentences(M, 'de', { known: kd.R, functions: ['fn.definite'] }).length,
-    `D19: the light counts the sentences the exercises use (≤ ⌈30 %⌉ unknown): ${fd.sentences}`);
+    `D20: the light counts the sentences the exercises use (≤ ⌈30 %⌉ unknown): ${fd.sentences}`);
   const z = N.newLearner(M), fz = N.feasibility(M, z, 'de', 'fn.definite');
   ok(fz.state === 'locked' && fz.unlockBy.length > 0, `🔒 names what unlocks it: ${fz.unlockBy[0]}`);
 }
@@ -157,7 +157,7 @@ const lexOf = x => C.lang[x.lang].lex[x.lex], S = (c, id) => C.lang[c].sentenceB
   const bad = byKind.combine.filter(x => { const s = S(x.lang, x.sentence); return x.answers[0] !== s.text || x.sources.some((t, i) => S(x.lang, x.sentences[i]).text !== t) || !N.checkBuilt(C, x.lang, x, s.tokens.filter(t => !t.p).map(t => t.t)); });
   ok(!bad.length, `combine: ${byKind.combine.length} sentences (${langsOf('combine')}) — e.g. ${byKind.combine[0] && byKind.combine[0].sources.join(' + ') + ' → ' + byKind.combine[0].answers[0]}`);
 }
-{ // property: random learners — every item uses known words, or ≤ ⌈30 %⌉ unknown per sentence, all listed as 🆕 (D19)
+{ // property: random learners — every item uses known words, or ≤ ⌈30 %⌉ unknown per sentence, all listed as 🆕 (D20)
   let only = true, items = 0; const why = [];
   for (let seed = 1; seed <= 3; seed++) {
     const rr = seeded(seed * 7919), T = N.newLearner(C); passLessons(C, T);
@@ -329,7 +329,7 @@ ok(!ws.errors.length && ws.warnings.some(w => /generator 5 \(agree\): makes no e
   ok(await page.$('.lx-practicedone') !== null, 'the block ends with its results');
   await page.setViewportSize({ width: 1200, height: 900 });
 
-  // D19: an item with words not learned yet — 🆕, the card on tap, the list at the end
+  // D20: an item with words not learned yet — 🆕, the card on tap, the list at the end
   const d19 = await page.evaluate(() => {
     const N = NoemaLang, { C } = NoemaLangUI.UI, T = N.newLearner(C);
     for (const nid of C.order.filter(n => C.nodes[n].kind === 'lesson' && C.lang.de.applies[n]).slice(0, 12)) { for (const id of C.lang.de.byNode[nid] || []) N.review(C, T, 'de', id, 'r', true, 0); N.recordCheck(C, T, 'de', nid, 1, 0); }
@@ -341,7 +341,7 @@ ok(!ws.errors.length && ws.warnings.some(w => /generator 5 \(agree\): makes no e
   const pop = hasNew && await page.locator('.lx-pop').count() === 1;
   await page.evaluate(() => document.querySelector('.lx-pop')?.remove());
   const it19 = await page.evaluate(() => NoemaLangUI.UI.current?.it); if (it19) { await answer(page, it19, true); await wait(60); await page.click('.lx-stage .lx-next'); await wait(100); }
-  ok(hasNew && pop && await page.locator('.lx-newlist').count() === 1, `D19: a ${d19} item marks the words not learned yet 🆕, opens their card on tap and lists them at the end`);
+  ok(hasNew && pop && await page.locator('.lx-newlist').count() === 1, `D20: a ${d19} item marks the words not learned yet 🆕, opens their card on tap and lists them at the end`);
 
   ok(!E.length, 'no page errors ' + JSON.stringify(E.slice(0, 3)));
   await browser.close();
