@@ -1,0 +1,3 @@
+/* right-to-left interfaces (docs/i18n.md §5): the course's explanations keep their own direction (the explanation language,
+   usually left to right) — each paragraph takes the direction of its first letter */
+:root[dir=rtl] :is(.lx-summary,.lx-q,.lx-stmt,.lx-extext,.lx-ex1,.lx-ex,.lx-ptext,.lx-deeptext,.lx-tmsg,.lx-tmsg p,.lx-tmsg li,.lx-host h1,.lx-host h3,.lx-host summary,.lx-host td,.lx-host th){unicode-bidi:plaintext}
