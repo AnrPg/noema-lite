@@ -379,5 +379,121 @@
   "roadmap.material.prepared": "This step has already been prepared.",
   "@roadmap.material.prepared": {
     "description": "Error when changing the pages of a step’s file after its subject was made."
+  },
+  "roadmap.jobs.task.dag": "Agent 1 — the Roadmap: every prerequisite, the goal, its applications",
+  "@roadmap.jobs.task.dag": {
+    "description": "Name of the next task for the learner’s Claude app (“Next task: …”): the first agent builds the map."
+  },
+  "roadmap.jobs.task.audit": "Agent 1b — are the prerequisites complete?",
+  "@roadmap.jobs.task.audit": {
+    "description": "Name of the next task for the learner’s Claude app: a second agent checks the prerequisites."
+  },
+  "roadmap.jobs.task.expand": "Agent 2 — the whole goal, in depth",
+  "@roadmap.jobs.task.expand": {
+    "description": "Name of the next task for the learner’s Claude app: the goal is expanded into its parts."
+  },
+  "roadmap.jobs.task.plan": "Agent 3 — the chapters of {n, plural, one {# step} other {# steps}}: {list}",
+  "@roadmap.jobs.task.plan": {
+    "description": "Name of the next task for the learner’s Claude app: plan the chapters of some steps. list = their titles, separated by “ · ”.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      },
+      "list": {
+        "type": "String",
+        "example": "Vectors · Matrices · Eigenvalues"
+      }
+    }
+  },
+  "roadmap.jobs.planned": "planned: {list}",
+  "@roadmap.jobs.planned": {
+    "description": "Log line after the Claude app planned the chapters of some steps. list = their titles, comma-separated.",
+    "placeholders": {
+      "list": {
+        "type": "String",
+        "example": "Vectors, Matrices"
+      }
+    }
+  },
+  "roadmap.jobs.log": "Claude app — {kind, select, dag {Agent 1} audit {Agent 1b} expand {Agent 2} other {Agent 3}}: {line}",
+  "@roadmap.jobs.log": {
+    "description": "Log line of a Roadmap: the learner’s Claude app did a task of one of the agents. kind = which agent; line = what it did (e.g. “✓ 24 prerequisites, …”).",
+    "placeholders": {
+      "kind": {
+        "type": "String",
+        "example": "dag"
+      },
+      "line": {
+        "type": "String",
+        "example": "✓ planned: Vectors"
+      }
+    }
+  },
+  "roadmap.jobs.stepReady": "“{title}” — prepared by your Claude app — is ready to study",
+  "@roadmap.jobs.stepReady": {
+    "description": "Toast: a step the learner’s Claude app prepared has arrived. title = the step’s title.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "DNA replication"
+      }
+    }
+  },
+  "roadmap.jobs.attached": "“{subject}” now teaches “{step}”{replan, select, yes { — that step is being re-planned} other {}}",
+  "@roadmap.jobs.attached": {
+    "description": "Toast: Claude saved a subject for a step the learner named; it teaches that step from now on. replan = yes when the step’s chapters are planned again.",
+    "placeholders": {
+      "subject": {
+        "type": "String",
+        "example": "Molecular biology"
+      },
+      "step": {
+        "type": "String",
+        "example": "DNA replication"
+      },
+      "replan": {
+        "type": "String",
+        "example": "yes"
+      }
+    }
+  },
+  "roadmap.jobs.notHere": "This Roadmap is not on this device.",
+  "@roadmap.jobs.notHere": {
+    "description": "Error when the learner pastes Claude’s answer for a Roadmap that is not on this device."
+  },
+  "roadmap.jobs.taskDone": "This task is already done (or the Roadmap changed) — copy the current task again.",
+  "@roadmap.jobs.taskDone": {
+    "description": "Error when the learner pastes Claude’s answer to a task that is no longer open."
+  },
+  "roadmap.jobs.notJson": "That is not a JSON answer — paste exactly what Claude answered (the JSON object).",
+  "@roadmap.jobs.notJson": {
+    "description": "Error when the pasted text is not the JSON object Claude answered."
+  },
+  "roadmap.jobs.noZip": "The package writer is not available.",
+  "@roadmap.jobs.noZip": {
+    "description": "Error: the app cannot write the .zip bundle of a step (its zip library did not load)."
+  },
+  "roadmap.jobs.notPackage": "This file is not a noema-lite package (.noema.zip) or pack (.json).",
+  "@roadmap.jobs.notPackage": {
+    "description": "Error when importing a step’s package: the file is neither a .noema.zip package nor a .json pack."
+  },
+  "roadmap.jobs.notPack": "This file is not a noema-lite subject pack.",
+  "@roadmap.jobs.notPack": {
+    "description": "Error when importing a step’s package: the file is not a subject pack."
+  },
+  "roadmap.jobs.packErrors": "The pack has {n, number} error(s): {list}",
+  "@roadmap.jobs.packErrors": {
+    "description": "Error when importing a step’s package that fails the checks. list = the first technical errors (English, separated by “; ”).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "4"
+      },
+      "list": {
+        "type": "String",
+        "example": "ch01: no sections"
+      }
+    }
   }
 }

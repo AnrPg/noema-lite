@@ -48,5 +48,20 @@
   "roadmap.material.locked": "Этот этап уже подготовлен — его материалы больше нельзя менять.",
   "roadmap.material.noFiles": "В этой установке файлы недоступны.",
   "roadmap.material.notFound": "Не найдено.",
-  "roadmap.material.prepared": "Этот этап уже подготовлен."
+  "roadmap.material.prepared": "Этот этап уже подготовлен.",
+  "roadmap.jobs.task.dag": "Агент 1 — дорожная карта: все основы, цель, её применения",
+  "roadmap.jobs.task.audit": "Агент 1b — все ли основы на месте?",
+  "roadmap.jobs.task.expand": "Агент 2 — вся цель, в глубину",
+  "roadmap.jobs.task.plan": "{n, plural, one {Агент 3 — главы # этапа: {list}} few {Агент 3 — главы # этапов: {list}} many {Агент 3 — главы # этапов: {list}} other {Агент 3 — главы # этапа: {list}}}",
+  "roadmap.jobs.planned": "спланировано: {list}",
+  "roadmap.jobs.log": "Приложение Claude — {kind, select, dag {Агент 1} audit {Агент 1b} expand {Агент 2} other {Агент 3}}: {line}",
+  "roadmap.jobs.stepReady": "«{title}» — подготовлен твоим приложением Claude — готов к изучению",
+  "roadmap.jobs.attached": "Предмет «{subject}» теперь ведёт этап «{step}»{replan, select, yes { — этот этап перепланируется} other {}}",
+  "roadmap.jobs.notHere": "Этой дорожной карты нет на этом устройстве.",
+  "roadmap.jobs.taskDone": "Это задание уже выполнено (или дорожная карта изменилась) — скопируй текущее задание заново.",
+  "roadmap.jobs.notJson": "Это не ответ в формате JSON — вставь ровно то, что ответил Claude (объект JSON).",
+  "roadmap.jobs.noZip": "Создание пакета недоступно.",
+  "roadmap.jobs.notPackage": "Этот файл не является пакетом noema-lite (.noema.zip) или паком (.json).",
+  "roadmap.jobs.notPack": "Этот файл не является пакетом предмета noema-lite.",
+  "roadmap.jobs.packErrors": "{n, plural, one {В пакете # ошибка: {list}} few {В пакете # ошибки: {list}} many {В пакете # ошибок: {list}} other {В пакете # ошибки: {list}}}"
 }

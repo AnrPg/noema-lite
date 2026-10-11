@@ -48,5 +48,20 @@
   "roadmap.material.locked": "Αυτός ο σταθμός έχει ήδη ετοιμαστεί — το υλικό του δεν αλλάζει πια.",
   "roadmap.material.noFiles": "Τα αρχεία δεν είναι διαθέσιμα σε αυτή την εγκατάσταση.",
   "roadmap.material.notFound": "Δεν βρέθηκε.",
-  "roadmap.material.prepared": "Αυτός ο σταθμός έχει ήδη ετοιμαστεί."
+  "roadmap.material.prepared": "Αυτός ο σταθμός έχει ήδη ετοιμαστεί.",
+  "roadmap.jobs.task.dag": "Πράκτορας 1 — ο Οδικός χάρτης: κάθε προαπαιτούμενο, ο στόχος, οι εφαρμογές του",
+  "roadmap.jobs.task.audit": "Πράκτορας 1β — είναι πλήρη τα προαπαιτούμενα;",
+  "roadmap.jobs.task.expand": "Πράκτορας 2 — ολόκληρος ο στόχος, σε βάθος",
+  "roadmap.jobs.task.plan": "{n, plural, one {Πράκτορας 3 — τα κεφάλαια # σταθμού: {list}} other {Πράκτορας 3 — τα κεφάλαια # σταθμών: {list}}}",
+  "roadmap.jobs.planned": "σχεδιάστηκαν: {list}",
+  "roadmap.jobs.log": "Εφαρμογή Claude — {kind, select, dag {Πράκτορας 1} audit {Πράκτορας 1β} expand {Πράκτορας 2} other {Πράκτορας 3}}: {line}",
+  "roadmap.jobs.stepReady": "Το «{title}» — το ετοίμασε η εφαρμογή Claude σου — είναι έτοιμο για μελέτη",
+  "roadmap.jobs.attached": "Το «{subject}» διδάσκει πλέον τον σταθμό «{step}»{replan, select, yes { — ο σταθμός ξανασχεδιάζεται} other {}}",
+  "roadmap.jobs.notHere": "Αυτός ο Οδικός χάρτης δεν είναι σε αυτή τη συσκευή.",
+  "roadmap.jobs.taskDone": "Αυτή η εργασία έχει ήδη γίνει (ή ο Οδικός χάρτης άλλαξε) — αντίγραψε ξανά την τρέχουσα εργασία.",
+  "roadmap.jobs.notJson": "Αυτό δεν είναι απάντηση JSON — επικόλλησε ακριβώς ό,τι απάντησε το Claude (το αντικείμενο JSON).",
+  "roadmap.jobs.noZip": "Η δημιουργία πακέτου δεν είναι διαθέσιμη.",
+  "roadmap.jobs.notPackage": "Αυτό το αρχείο δεν είναι πακέτο noema-lite (.noema.zip) ούτε pack (.json).",
+  "roadmap.jobs.notPack": "Αυτό το αρχείο δεν είναι πακέτο θέματος του noema-lite.",
+  "roadmap.jobs.packErrors": "{n, plural, one {Το πακέτο έχει # σφάλμα: {list}} other {Το πακέτο έχει # σφάλματα: {list}}}"
 }

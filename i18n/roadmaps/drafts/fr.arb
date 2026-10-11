@@ -48,5 +48,20 @@
   "roadmap.material.locked": "Cette étape est déjà préparée — ses documents ne peuvent plus changer.",
   "roadmap.material.noFiles": "Les fichiers ne sont pas disponibles dans cette installation.",
   "roadmap.material.notFound": "Introuvable.",
-  "roadmap.material.prepared": "Cette étape est déjà préparée."
+  "roadmap.material.prepared": "Cette étape est déjà préparée.",
+  "roadmap.jobs.task.dag": "Agent 1 — le parcours : chaque prérequis, l’objectif, ses applications",
+  "roadmap.jobs.task.audit": "Agent 1b — les prérequis sont-ils complets ?",
+  "roadmap.jobs.task.expand": "Agent 2 — tout l’objectif, en profondeur",
+  "roadmap.jobs.task.plan": "{n, plural, one {Agent 3 — les chapitres de # étape : {list}} many {Agent 3 — les chapitres de # étapes : {list}} other {Agent 3 — les chapitres de # étapes : {list}}}",
+  "roadmap.jobs.planned": "planifiées : {list}",
+  "roadmap.jobs.log": "Application Claude — {kind, select, dag {Agent 1} audit {Agent 1b} expand {Agent 2} other {Agent 3}} : {line}",
+  "roadmap.jobs.stepReady": "« {title} » — préparée par ton application Claude — est prête à être étudiée",
+  "roadmap.jobs.attached": "« {subject} » enseigne désormais « {step} »{replan, select, yes { — cette étape est replanifiée} other {}}",
+  "roadmap.jobs.notHere": "Ce parcours n’est pas sur cet appareil.",
+  "roadmap.jobs.taskDone": "Cette tâche est déjà faite (ou le parcours a changé) — copie à nouveau la tâche actuelle.",
+  "roadmap.jobs.notJson": "Ce n’est pas une réponse JSON — colle exactement ce que Claude a répondu (l’objet JSON).",
+  "roadmap.jobs.noZip": "La création de paquet n’est pas disponible.",
+  "roadmap.jobs.notPackage": "Ce fichier n’est ni un paquet noema-lite (.noema.zip) ni un pack (.json).",
+  "roadmap.jobs.notPack": "Ce fichier n’est pas un pack de matière noema-lite.",
+  "roadmap.jobs.packErrors": "{n, plural, one {Le pack contient # erreur : {list}} many {Le pack contient # erreurs : {list}} other {Le pack contient # erreurs : {list}}}"
 }
