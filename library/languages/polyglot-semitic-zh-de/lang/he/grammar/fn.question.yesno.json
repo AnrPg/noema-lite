@@ -393,6 +393,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut marks a question with an interrogative verb ending (such as -vit “you?”); Hebrew leaves the verb as it is and uses intonation."
+  },
+  {
+   "for": "it",
+   "rel": "same",
+   "text": "As in Italian, intonation alone makes the question: Vuoi un caffè? ~ אַתָּה רוֹצֶה קָפֶה? Formal Hebrew may also open with הַאִם, which has no Italian counterpart."
+  },
+  {
+   "for": "pt",
+   "rel": "same",
+   "text": "As in Portuguese, intonation alone turns a statement into a question (Queres café? ~ אַתָּה רוֹצֶה קָפֶה?), and a short answer often repeats the verb: — רוֹצֶה! (— Quero!). Formal Hebrew may add הַאִם at the start."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Albanian a at the start (A do kafe?) is the counterpart of formal הַאִם (הַאִם אַתָּה רוֹצֶה קָפֶה?); everyday Hebrew drops it and uses intonation alone."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your language inverts the verb or adds a helper verb in questions, Hebrew does neither: the statement with a rising voice is the question — אַתָּה רוֹצֶה קָפֶה?"
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If your language adds a question particle or suffix after a word, everyday Hebrew adds nothing; only formal style puts הַאִם at the very start."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If your language ends a question with a particle, everyday Hebrew uses the rising voice alone (formal הַאִם goes at the start); a short answer often repeats the verb: — רוֹצֶה!"
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If your language marks a question inside the verb word, Hebrew leaves the verb as it is; the voice — or formal הַאִם at the start — makes the question."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "Many Semitic languages have a question particle at the start of the sentence; Hebrew’s is הַאִם, but speech usually drops it and lets intonation do the job."
   }
  ]
 }

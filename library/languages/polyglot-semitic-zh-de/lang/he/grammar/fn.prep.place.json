@@ -481,6 +481,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut says where something is with a location noun carrying a case ending, after the thing it relates to; Hebrew uses a preposition before the noun: עַל הַשֻּׁלְחָן."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "sopra, sotto, accanto a, davanti a, dietro, tra ~ עַל, מִתַּחַת לְ, לְיַד, לִפְנֵי, מֵאֲחוֹרֵי, בֵּין; and vicino a / lontano da has the same “to / from” split as קָרוֹב לְ / רָחוֹק מִ. But Hebrew needs no verb in the present: הַסֵּפֶר עַל הַשֻּׁלְחָן."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "em cima de, debaixo de, ao lado de, à frente de, atrás de, entre ~ עַל, מִתַּחַת לְ, לְיַד, לִפְנֵי, מֵאֲחוֹרֵי, בֵּין — and no estar: הַסֵּפֶר עַל הַשֻּׁלְחָן. Where Portuguese says perto de / longe de, Hebrew says קָרוֹב לְ “close to” / רָחוֹק מִ “far from”."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "mbi, nën, pranë, para, prapa, midis ~ עַל, מִתַּחַת לְ, לְיַד, לִפְנֵי, מֵאֲחוֹרֵי, בֵּין; but Albanian puts the noun into a case (pranë shtëpisë), while Hebrew needs no case and no verb: הַסֵּפֶר עַל הַשֻּׁלְחָן."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your language says where something is with a posture verb and a case, Hebrew needs neither: הַסֵּפֶר עַל הַשֻּׁלְחָן “the book (is) on the table”. Only מִתַּחַת and בֵּין need a second preposition, לְ."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If your language says “the table’s top-on” with suffixes, Hebrew puts one preposition before the noun: עַל הַשֻּׁלְחָן. “Close to” and “far from” keep a to / from split: קָרוֹב לְ, רָחוֹק מִ."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If your language frames the noun with a word before and a place word after, Hebrew uses only the word before: עַל הַשֻּׁלְחָן, מִתַּחַת לַשֻּׁלְחָן — and needs no verb for “be at”."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If spatial relations are affixes inside a verb or noun word in your language, Hebrew uses separate prepositions, several built from body words: לִפְנֵי “to the face of”, לְיַד “at the hand of”."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "עַל, תַּחַת, בֵּין and the body-part prepositions (לִפְנֵי “to the face of”) have relatives across the branch; Hebrew puts no case after them and no verb in the present."
   }
  ]
 }

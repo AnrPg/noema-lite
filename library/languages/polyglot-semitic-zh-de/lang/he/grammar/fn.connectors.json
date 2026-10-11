@@ -440,6 +440,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut joins clauses with verb moods (endings meaning “because”, “when”, “if”) rather than separate words; Hebrew uses linking words — כִּי, כְּשֶׁ, אִם — and changes nothing in the verb."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "che ~ שֶׁ, quando ~ כְּשֶׁ, se ~ אִם, perché ~ כִּי, ma ~ אֲבָל, and the word order stays as in a main clause. As with quando sarò grande, Hebrew uses the future after כְּשֶׁ (כְּשֶׁאֶהְיֶה גָּדוֹל) — and after אִם too, where Italian usually says se piove."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "que ~ שֶׁ, quando ~ כְּשֶׁ, se ~ אִם, porque ~ כִּי, mas ~ אֲבָל. Where Portuguese uses the future subjunctive (quando eu for grande, se chover), Hebrew uses the plain future: כְּשֶׁאֶהְיֶה גָּדוֹל, אִם יֵרֵד גֶּשֶׁם."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "që ~ שֶׁ, kur ~ כְּשֶׁ, nëse ~ אִם, sepse ~ כִּי, por ~ אֲבָל; as in Albanian, the clause keeps its word order. And like që, שֶׁ is not left out: אֲנִי יוֹדֵעַ שֶׁהוּא פֹּה."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your language links clauses with conjunctions and keeps their order, Hebrew is familiar: the linking word goes first (כִּי, אִם, שֶׁ) and nothing moves. New: שֶׁ and כְּשֶׁ are written onto the next word."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If your language builds subordinate clauses with verb suffixes at the end of the clause, Hebrew does the opposite: a linking word at the start (כִּי, כְּשֶׁ, אִם, שֶׁ) and an unchanged verb inside."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If your language pairs connectors (“because … so …”) or reports speech without a “that”, Hebrew uses one connector and always says שֶׁ before a reported clause: אֲנִי יוֹדֵעַ שֶׁהוּא פֹּה."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If your language joins clauses with affixes on the verb, Hebrew uses separate linking words before the clause, and the verb inside it does not change: כִּי אֲנִי עָיֵף, כְּשֶׁהוּא בָּא."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "Semitic languages commonly link clauses with a word before the clause and keep its order. Hebrew’s “that”, שֶׁ, is a one-letter prefix, and it is never left out: אֲנִי שָׂמֵחַ שֶׁאַתָּה פֹּה."
   }
  ]
 }

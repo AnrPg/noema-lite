@@ -534,6 +534,46 @@
    "for": "iu",
    "rel": "similar",
    "text": "Inuktitut adds a comparative suffix and puts the thing compared in the ablative case (“from”); Hebrew has no suffix, but uses מִ “from” the same way: גָּדוֹל יוֹתֵר מֵהַבַּיִת."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "più … di ~ יוֹתֵר … מִ, il più ~ הֲכִי: as in Italian, comparison uses words, not endings. But Hebrew has no irregular migliore — “better” is טוֹב יוֹתֵר — and “than” is מִ, the word for “from”."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "mais … do que ~ יוֹתֵר … מִ, o mais ~ הֲכִי. Hebrew has no irregular melhor or maior: טוֹב יוֹתֵר, גָּדוֹל יוֹתֵר. And “than” is מִ, the word for “from”: גָּדוֹל יוֹתֵר מֵהַדִּירָה."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Like Albanian më (më i madh se / nga …), Hebrew compares with a word, יוֹתֵר — and nga “from” for “than” is exactly Hebrew מִ: גָּדוֹל יוֹתֵר מֵהַבַּיִת. më i madhi “the biggest” ~ הֲכִי גָּדוֹל."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your adjectives have comparative endings and irregular forms, forget them: Hebrew uses words only — יוֹתֵר “more”, הֲכִי “most” — and even “better” is just טוֹב יוֹתֵר."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If your language compares with a “from” case and an optional “more”, Hebrew works the same way with separate words: גָּדוֹל יוֹתֵר מֵהַבַּיִת — מִ “from” before the noun."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "similar",
+   "text": "As in your language, the adjective has no comparative form: comparison is done with words (יוֹתֵר, הֲכִי, כְּמוֹ). But the adjective still agrees in gender and number: גְּבֹהָה יוֹתֵר for a woman."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If your language compares with an affix inside the verb or adjective word, Hebrew uses separate words around an unchanged adjective: יוֹתֵר גָּדוֹל מִ…, הֲכִי גָּדוֹל."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "Semitic languages commonly say “than” with “from”, as Hebrew does with מִ. If yours has a special comparative pattern for adjectives, Hebrew has none: just יוֹתֵר + the adjective."
   }
  ]
 }

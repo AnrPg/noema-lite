@@ -361,6 +361,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut negates with a suffix inside the verb (-nngit-); Hebrew uses the word לֹא before the verb, and אֵין for “there isn’t”."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "As in Italian, a negative word after the verb keeps the negation: non voglio niente ~ אֲנִי לֹא רוֹצֶה כְּלוּם. But before the verb Hebrew still needs לֹא: אַף אֶחָד לֹא אוֹכֵל, where Italian says nessuno mangia."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "As in Portuguese, a negative word after the verb keeps the negation: não quero nada ~ אֲנִי לֹא רוֹצֶה כְּלוּם. Before the verb Hebrew still needs לֹא (אַף אֶחָד לֹא אוֹכֵל), where Portuguese says ninguém come."
+  },
+  {
+   "for": "sq",
+   "rel": "same",
+   "text": "As in Albanian, double negation is required: nuk dua asgjë ~ אֲנִי לֹא רוֹצֶה כְּלוּם, askush nuk ha ~ אַף אֶחָד לֹא אוֹכֵל. And nuk ka “there isn’t” matches אֵין: אֵין לֶחֶם."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "trap",
+   "text": "If your language allows only one negation per clause, unlearn it: Hebrew keeps לֹא beside every negative word — אֲנִי לֹא רוֹצֶה כְּלוּם, אַף אֶחָד לֹא בָּא."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If your language negates inside the verb with a suffix, Hebrew uses a separate word before it, לֹא, in every tense; and “there isn’t / don’t have” is a word of its own, אֵין."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "similar",
+   "text": "If your language has one negator for verbs and another for “not have / there isn’t”, Hebrew splits the same way: לֹא before the verb, אֵין for absence — and לֹא stays with negative words: אַף פַּעַם לֹא."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If negation in your language is an affix inside the verb word, Hebrew puts the separate word לֹא right before the verb; a negative word such as כְּלוּם “nothing” goes with it, not instead of it."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "As in many Semitic languages, there is a general “not” (לֹא) and a negative of existence (אֵין, the opposite of יֵשׁ). Hebrew uses one לֹא for every tense."
   }
  ]
 }

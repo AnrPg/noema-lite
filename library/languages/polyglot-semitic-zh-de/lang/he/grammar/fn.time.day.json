@@ -457,6 +457,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut makes time words with case endings (ullumi “today”, from ullu “day” + -mi “at”); Hebrew uses the article: הַיּוֹם “today”, literally “the day”."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian names the days after planets and gods (lunedì, martedì …) — except sabato, which comes from שַׁבָּת. Hebrew numbers the others from Sunday: יוֹם שֵׁנִי “second day” is Monday."
+  },
+  {
+   "for": "pt",
+   "rel": "same",
+   "text": "Portuguese numbers the weekdays just as Hebrew does: segunda-feira ~ יוֹם שֵׁנִי “second day” (Monday), terça-feira ~ יוֹם שְׁלִישִׁי … sexta-feira ~ יוֹם שִׁשִּׁי, and sábado comes from שַׁבָּת. Only Sunday differs: domingo, but יוֹם רִאשׁוֹן “first day”."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian names the days after planets and gods (e hënë, e martë …); Hebrew numbers them from Sunday — יוֹם רִאשׁוֹן, יוֹם שֵׁנִי … — and only Saturday has a name, שַׁבָּת."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your language marks “on Monday” with a case or an article, Hebrew uses only בְּ (בְּיוֹם שֵׁנִי); and the article alone turns a part of the day into “this …”: הַבֹּקֶר “this morning”."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If your language adds a locative suffix to the day, Hebrew puts בְּ in front: בְּיוֹם שֵׁנִי, בַּבֹּקֶר. And the week counts from Sunday, so יוֹם שֵׁנִי “second day” is Monday."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "trap",
+   "text": "If your language numbers the weekdays, Hebrew does too — but counting from Sunday: יוֹם רִאשׁוֹן “first day” is Sunday, יוֹם שֵׁנִי is Monday, and only Saturday has a name, שַׁבָּת."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If time of day is a verb affix in your language, Hebrew uses separate time words, usually at the start of the sentence: בַּבֹּקֶר אֲנִי שׁוֹתֶה קָפֶה."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "Counting the weekdays from Sunday and naming Saturday after the Sabbath is shared by many Semitic calendars; the Hebrew day names are numbers: יוֹם רִאשׁוֹן, יוֹם שֵׁנִי … and שַׁבָּת."
   }
  ]
 }

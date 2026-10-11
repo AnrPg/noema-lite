@@ -321,6 +321,46 @@
    "for": "iu",
    "rel": "new",
    "text": "Inuktitut shows the person (singular, dual or plural) in the verb ending and has no gender; Hebrew pronouns are separate words that mark gender: הוּא / הִיא, אַתָּה / אַתְּ."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "There is no Lei of politeness: everyone is אַתָּה / אַתְּ. As in Italian, subject pronouns can be dropped — but only in the past and future; in the present they must stay: אֲנִי סְטוּדֶנְט. And “you” has gender: אַתָּה (m.) / אַתְּ (f.)."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "There is no tu / você / o senhor choice: everyone is אַתָּה / אַתְּ. As with eles / elas, הֵם / הֵן split “they” — and Hebrew also splits “you”: אַתָּה / אַתְּ, אַתֶּם / אַתֶּן."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Like ai / ajo and ata / ato, Hebrew splits “he / she” and “they” (הוּא / הִיא, הֵם / הֵן) — and also “you” by gender (אַתָּה / אַתְּ); a mixed group is masculine, as with ata. There is no polite ju."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your language has a polite plural “you” and drops pronouns freely, both change: Hebrew has no polite form, and in the present the pronoun must be said: אֲנִי סְטוּדֶנְט."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "new",
+   "text": "If one pronoun covers “he, she, it” in your language, Hebrew must choose: הוּא (m.) or הִיא (f.), also for things — and “you” has gender too: אַתָּה / אַתְּ."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "new",
+   "text": "If your pronouns have no gender and form the plural with a suffix, Hebrew has ten separate pronouns, with gender in “you”, “he / she” and “they”: אַתָּה / אַתְּ, הוּא / הִיא, הֵם / הֵן."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If person is marked mainly on your verb, note that the Hebrew present has no person marking: the separate pronoun is required (אֲנִי אוֹכֵל); in the past and future the ending carries it."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "The pronouns are Semitic cousins (אֲנִי, אַתָּה / אַתְּ, הוּא / הִיא), with gender in the 2nd and 3rd person; Modern Hebrew has no dual pronouns."
   }
  ]
 }

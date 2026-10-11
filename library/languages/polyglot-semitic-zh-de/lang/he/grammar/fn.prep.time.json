@@ -567,6 +567,46 @@
    "for": "iu",
    "rel": "similar",
    "text": "Inuktitut uses the same locative ending for “at a place” and “at a time” (ullumi “today”, from ullu “day”); Hebrew likewise uses בְּ for both: בַּבַּיִת, בַּבֹּקֶר."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "alle cinque, lunedì, a maggio, in estate → Hebrew uses בְּ for all four. As with da + present (sono qui da gennaio), a state that still lasts takes the present after מֵאָז: הוּא פֹּה מֵאָז יָנוּאָר. e mezza ~ וָחֵצִי, meno un quarto ~ רֶבַע לְ…."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "às cinco, na segunda-feira, em maio, no verão → בְּ for all four. desde + present (estou cá desde janeiro) works like מֵאָז + present: הוּא פֹּה מֵאָז יָנוּאָר. e meia ~ וָחֵצִי, um quarto para as … ~ רֶבַע לְ…."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "në orën pesë, të hënën, në maj, në verë → Hebrew uses בְּ for all: בְּחָמֵשׁ, בְּיוֹם שֵׁנִי, בְּמַאי, בַּקַּיִץ. As with që nga + present (jam këtu që nga janari), a state that still lasts takes the present after מֵאָז."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your language needs a different preposition or case for hours, days, months and seasons, Hebrew uses one prefix for all: בְּ. A state that still lasts takes the present after מֵאָז: הוּא פֹּה מֵאָז יָנוּאָר."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If your language marks time with a locative suffix, Hebrew uses the prefix בְּ before the time word (בְּחָמֵשׁ, בְּמַאי); “until” and “since” are separate words, עַד and מֵאָז."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If time words in your language simply stand before the verb, Hebrew usually adds בְּ (בְּיוֹם שֵׁנִי, בַּקַּיִץ), and the time phrase may open or close the sentence."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If time is marked with affixes in the verb, Hebrew uses separate time phrases with בְּ, לִפְנֵי, אַחֲרֵי, עַד, מֵאָז — the verb itself shows only past, present or future."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "The Hebrew lunar months (נִיסָן, תַּמּוּז, אֱלוּל …) carry old Mesopotamian names that other Semitic calendars share. For a point in time Hebrew uses one prefix, בְּ."
   }
  ]
 }

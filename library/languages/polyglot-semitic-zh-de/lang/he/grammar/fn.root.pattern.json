@@ -521,6 +521,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut builds long words by adding suffix after suffix to a stem; Hebrew keeps words short and changes their inside — the vowels around the root consonants."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian derives with suffixes (cucinare, cucina, cuoco); Hebrew keeps three consonants and changes the vowel pattern around them: ב־שׁ־ל → בִּשֵּׁל “cooked”, מְבַשֵּׁל “cooks”, בִּשּׁוּל “cooking”."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese builds words with suffixes (cozinhar, cozinha, cozinheiro); Hebrew pours a consonant root into patterns: ב־שׁ־ל → בִּשֵּׁל, מְבַשֵּׁל, בִּשּׁוּל."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian derives with suffixes (gatuaj, gatim, gatues); Hebrew keeps a root of three consonants and changes the vowels and pattern letters around it: ב־שׁ־ל → בִּשֵּׁל, בִּשּׁוּל, מְבַשֵּׁל."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your language changes vowels inside some words (strong verbs, ablaut), Hebrew makes that the main system: a consonant root in vowel patterns — כ־ת־ב: כָּתַב, מִכְתָּב, כְּתָב."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If your language adds suffixes to an unchanging stem, Hebrew does the reverse: the consonants stay and the vowels inside change, with a few letters around them (כ־ת־ב → כָּתַב, מִכְתָּב). Find the root by stripping the pattern."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "new",
+   "text": "If your words are unchangeable syllables joined into compounds, the root is a new idea: three consonants carry the meaning, vowel patterns the grammar (א־כ־ל → אָכַל, אוֹכֵל, אֹכֶל)."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If your words are built by stacking many morphemes, Hebrew builds differently: a fixed root threaded through a vowel pattern gives short words (אָכַל, אֹכֶל, מַאֲכָל), not long chains."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "Roots and patterns are the Semitic hallmark: many Hebrew roots will be familiar (א־כ־ל “eat”, כ־ת־ב “write”, שׁ־ל־ם “peace”), and the binyanim correspond to the verb stems of your language."
   }
  ]
 }

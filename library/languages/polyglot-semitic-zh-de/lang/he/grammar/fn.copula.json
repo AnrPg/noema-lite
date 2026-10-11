@@ -350,6 +350,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut turns the noun itself into a verb with a suffix and a personal ending (“I-am-a-teacher” in one word); Hebrew leaves the noun as it is and adds nothing in the present."
+  },
+  {
+   "for": "it",
+   "rel": "trap",
+   "text": "Italian always says essere (sono studente); the Hebrew present has no verb: אֲנִי סְטוּדֶנְט. In the past one verb, הָיָה, covers both essere and stare (הָיִיתִי בַּבַּיִת “ero / stavo a casa”), and it agrees in gender: הוּא הָיָה / הִיא הָיְתָה."
+  },
+  {
+   "for": "pt",
+   "rel": "trap",
+   "text": "Portuguese splits ser and estar; in the Hebrew present both are missing — אֲנִי סְטוּדֶנְט (sou estudante), הַסֵּפֶר פֹּה (o livro está aqui). In the past both are הָיָה, which agrees in gender: הוּא הָיָה / הִיא הָיְתָה."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian always uses jam (jam student); Hebrew says nothing in the present: אֲנִי סְטוּדֶנְט. In the past הָיָה also shows gender — הוּא הָיָה / הִיא הָיְתָה — where Albanian ishte is the same for both."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your language conjugates “to be” in every tense, leave it out in the present: אֲנִי סְטוּדֶנְט, הַסֵּפֶר פֹּה. It returns only in the past and future (הָיָה, יִהְיֶה), agreeing with the subject."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If your language says “I am …” with an ending on the predicate, Hebrew adds nothing at all: אֲנִי סְטוּדֶנְט. For the past it uses a separate verb, הָיָה, between subject and predicate."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "trap",
+   "text": "If your language links two nouns with a copula word but not a noun and an adjective, note that the Hebrew present uses nothing for either: אֲנִי סְטוּדֶנְט, הוּא גָּבֹהַּ."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If your language turns a noun into a predicate with an affix, Hebrew simply puts subject and predicate side by side in the present (הִיא מוֹרָה); only the past and future add the verb הָיָה."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "The verbless present is common Semitic: subject and predicate side by side. Unlike some relatives, Hebrew leaves the predicate unchanged after הָיָה — no accusative: הוּא הָיָה מוֹרֶה."
   }
  ]
 }

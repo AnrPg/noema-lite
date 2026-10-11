@@ -536,6 +536,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut grades the past by distance in suffixes on one long verb; Hebrew has one past form for every distance, with separate words of time (אֶתְמוֹל, לִפְנֵי שָׁנָה)."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Where Italian chooses between passato prossimo, passato remoto and imperfetto (mi sono alzato, mi alzavo), Hebrew has one simple form: קַמְתִּי. As in Italian, the ending shows the person, so the pronoun is left out in the 1st and 2nd person."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese chooses between pretérito perfeito and imperfeito (levantei-me, levantava-me); Hebrew has one past form, קַמְתִּי, and says habits with הָיָה + present. As in Portuguese, the ending shows the person and the pronoun is dropped."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian chooses between the aorist (u ngrita), the imperfect (ngrihesha) and the perfect (jam ngritur); Hebrew has just קַמְתִּי. As in Albanian, the ending shows the person, so the pronoun is left out."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your language has several pasts or aspects, Hebrew has one simple past with person endings (קַמְתִּי, קַמְתָּ, קָמָה); habits are said with הָיָה + present."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "Like a past suffix followed by a person suffix, the Hebrew past puts the person at the end (קַמְתִּי, קַמְנוּ). But the ending also carries gender (קַמְתָּ / קַמְתְּ), and the stem vowels change with the pattern."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If your verbs never change and particles or time words show the past, Hebrew changes the verb itself: קַמְתִּי “I got up”, קָמָה “she got up” — the ending says who and when."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If your past is an affix in a long verb word that also holds the object, the Hebrew past is short — stem + person ending (קַמְתִּי) — and objects remain separate words."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "The suffix conjugation is common Semitic (-tī “I”, -nū “we”); in Hebrew it is purely a past tense, with no dual and one form for “they”: קָמוּ."
   }
  ]
 }

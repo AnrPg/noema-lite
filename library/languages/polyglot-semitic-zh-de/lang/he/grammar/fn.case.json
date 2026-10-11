@@ -271,6 +271,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut marks where / where to / where from with case endings (-mi, -mut, -mit); Hebrew uses prefixes with an unchanged noun."
+  },
+  {
+   "for": "it",
+   "rel": "same",
+   "text": "As in Italian (in casa, a casa, da casa), the preposition alone carries the meaning, and as in nella / alla the article fuses with it: בַּבַּיִת, לַבַּיִת. But a casa is both “at home” and “(to) home”; Hebrew separates בַּבַּיִת and הַבַּיְתָה / לַבַּיִת."
+  },
+  {
+   "for": "pt",
+   "rel": "same",
+   "text": "As in Portuguese (em casa, para casa, de casa), the preposition carries the meaning and the noun stays the same. em + o → no fuses just as בְּ + הַ → בַּ: no quarto ~ בַּחֶדֶר."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian puts the noun into a case after each preposition (në shtëpi, nga shtëpia, me shokun); Hebrew nouns never change after a preposition: בַּבַּיִת, מֵהַבַּיִת, עִם הֶחָבֵר."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your prepositions demand a case, drop that habit: after a Hebrew preposition the noun is unchanged (בָּעִיר, לָעִיר, מֵהָעִיר). Only its first letters may change spelling."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If your language says “in / to / from” with suffixes on the noun, Hebrew uses three prefixes in front of it — בָּעִיר, לָעִיר, מֵהָעִיר — and the noun itself does not change."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "same",
+   "text": "As in your language, the noun never changes; only the preposition does: בָּעִיר / לָעִיר / מֵהָעִיר. New is that בְּ, לְ, מִ are written onto the noun."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If your language puts location and direction inside a long verb or noun word, Hebrew keeps them in short prepositions before an unchanged noun: בָּעִיר, לָעִיר, מֵהָעִיר."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "The prepositions are old Semitic (בְּ, לְ, מִן, עַל, אֶל have relatives across the branch), but Hebrew puts no case on the noun after them: בַּבַּיִת, מִן הַבַּיִת."
   }
  ]
 }

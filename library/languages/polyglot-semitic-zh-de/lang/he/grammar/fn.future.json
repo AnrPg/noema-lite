@@ -454,6 +454,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut adds a future suffix inside one long verb word; Hebrew marks the future with a prefix that is also the person: נְבַקֵּר."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Like the Italian futuro (prenoterò), the Hebrew future is one word — אַזְמִין “I will book” — but the person is shown mostly by a prefix (אֶ־, תִּ־, יִ־, נִ־). As in Italian, the present also serves for fixed plans: מָחָר אֲנַחְנוּ נוֹסְעִים “domani partiamo”."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "Like reservarei and vou reservar, Hebrew has a one-word future (אַזְמִין) and a colloquial “go” + infinitive (אֲנִי הוֹלֵךְ לְהַזְמִין); but the person is marked at the front of the word: אַזְמִין, תַּזְמִין, נַזְמִין."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian builds the future with do të + the subjunctive (do të shkoj); Hebrew has a one-word future with person prefixes: אֵלֵךְ “I will go”, נֵלֵךְ “we will go”."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your future is an ending or an auxiliary, note that Hebrew marks the person mostly at the start of the word — אֶזְכֹּר, תִּזְכֹּר, יִזְכֹּר, נִזְכֹּר — and that one form serves both “you (m.)” and “she”."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If your language stacks a future suffix and a person suffix at the end of the verb, Hebrew puts the person in front: אַזְמִין “I will book”, נַזְמִין “we will book” — with no separate future marker."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If your language adds a word for “will” before an unchanged verb, Hebrew changes the verb itself: אֶזְכֹּר “I will remember”, תִּזְכְּרִי “you (f.) will remember”."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If your language marks the future with an affix inside one long verb word, Hebrew uses a shorter word with the person in front (אַזְמִין “I will book”); the object stays a separate word."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "The prefix conjugation (ʔ- t- y- n- for I, you / she, he, we) is Semitic heritage. In Hebrew it is the future itself and needs no extra future particle: אֶזְכֹּר “I will remember”."
   }
  ]
 }

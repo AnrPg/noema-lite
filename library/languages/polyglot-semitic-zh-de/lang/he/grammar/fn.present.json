@@ -533,6 +533,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut verbs carry the person and number (singular, dual, plural) of the subject — and of the object; the Hebrew present carries only the gender and number of the subject, and the object is a separate word."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian endings show the person (mangio, mangi, mangia), so io can go; the Hebrew present shows gender and number instead, so אֲנִי must stay — and a woman says אֲנִי אוֹכֶלֶת. One form also covers sto mangiando."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese endings show the person (como, comes, come); the Hebrew present shows gender and number, so the pronoun must be said: אֲנִי אוֹכֵל / אֲנִי אוֹכֶלֶת — like obrigado / obrigada, the form follows the speaker. One form also covers estou a comer."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian endings show the person (punoj, punon, punojmë); the Hebrew present shows gender and number instead (עוֹבֵד / עוֹבֶדֶת / עוֹבְדִים / עוֹבְדוֹת), so the pronoun must stay. Albanian po punoj “I am working” is simply אֲנִי עוֹבֵד."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your verbs change for the person, the Hebrew present will surprise you: four forms by gender and number only (אוֹכֵל, אוֹכֶלֶת, אוֹכְלִים, אוֹכְלוֹת), so the pronoun must always be said."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If your language adds person suffixes to the verb, the Hebrew present has none: the pronoun shows the person, the ending shows gender and number — אֲנִי אוֹכֶלֶת (a woman), אֲנַחְנוּ אוֹכְלִים."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "similar",
+   "text": "As in your language, one form covers a habit and an action in progress. But the Hebrew verb changes for gender and number: הוּא אוֹכֵל, הִיא אוֹכֶלֶת, הֵם אוֹכְלִים."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If your verb carries subject and object affixes, the Hebrew present carries only gender and number; subject and object are separate words: אֲנִי אוֹכֵל אֶת הַלֶּחֶם."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "The Hebrew present is the old active participle (the qōtēl pattern), so it inflects like an adjective — for gender and number, not person. If your language uses the prefix conjugation for the present, in Hebrew that is the future."
   }
  ]
 }

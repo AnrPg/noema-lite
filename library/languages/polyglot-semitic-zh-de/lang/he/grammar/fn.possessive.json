@@ -451,6 +451,46 @@
    "for": "iu",
    "rel": "similar",
    "text": "Inuktitut marks the owner with a suffix on the noun — “my house” is one word; Hebrew has such suffixes too (אָחִי), but everyday speech uses שֶׁל: הַבַּיִת שֶׁלִּי."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "As in il mio libro, the noun keeps its article: הַסֵּפֶר שֶׁלִּי. But שֶׁלִּי follows the noun and never agrees with it, and “his” and “her” are different words (שֶׁלּוֹ / שֶׁלָּהּ) where Italian has suo / sua by the thing owned."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "As in o meu livro, the noun keeps its article: הַסֵּפֶר שֶׁלִּי. But שֶׁלִּי follows the noun and never changes for it (הַסְּפָרִים שֶׁלִּי ~ os meus livros), and “his” and “her” differ (שֶׁלּוֹ / שֶׁלָּהּ), where seu / sua follow the thing owned."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Albanian also puts the possessive after a definite noun: libri im ~ הַסֵּפֶר שֶׁלִּי, motra ime ~ הָאָחוֹת שֶׁלִּי. But im / ime agree with the thing owned, while שֶׁלִּי never changes."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your possessives agree with the thing owned, stop: שֶׁלִּי, שֶׁלּוֹ, שֶׁלָּהּ change only for the owner, and they follow a definite noun: הַסֵּפֶר שֶׁלִּי, הַמִּטָּה שֶׁלִּי."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If your language marks the owner with a suffix on the noun, Hebrew has that too (אָחִי “my brother”), but uses it mainly in formal style; everyday Hebrew says הָאָח שֶׁלִּי."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If the owner comes first with a linking word in your language, Hebrew reverses the order: the noun with the article, then שֶׁל + owner — הַסֵּפֶר שֶׁלִּי, הַתִּיק שֶׁל דָּנָה."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "similar",
+   "text": "If possession in your language is an affix on the noun, the formal Hebrew suffix is similar (אָחִי, אִשְׁתִּי); in everyday speech Hebrew uses a separate word after the noun: הָאָח שֶׁלִּי."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "Possessive suffixes on the noun (אָחִי, בֵּיתִי) are common Semitic; Modern Hebrew keeps them for formal style and some family words, and in everyday speech says הַבַּיִת שֶׁלִּי."
   }
  ]
 }

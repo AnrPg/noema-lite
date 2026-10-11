@@ -399,6 +399,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut asks “how are you?” with a single verb word ending in “you” (Qanuippit?); Hebrew uses a phrase, and the “your” in it changes for a man or a woman (שְׁלוֹמְךָ / שְׁלוֹמֵךְ)."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "שָׁלוֹם is hello and goodbye, just like ciao. There is no tu / Lei choice: everyone is אַתָּה / אַתְּ. What changes is the gender of “you”: מַה שְּׁלוֹמְךָ? to a man, מַה שְּׁלוֹמֵךְ? to a woman."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "As obrigado / obrigada follows the speaker’s gender, Hebrew greetings follow the listener’s: מַה שְּׁלוֹמְךָ? to a man, מַה שְּׁלוֹמֵךְ? to a woman. There is no tu / você / o senhor choice: everyone is אַתָּה / אַתְּ."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "There is no ti / ju choice of respect: everyone is אַתָּה / אַתְּ. The time of day works as in Albanian (mirëmëngjes ~ בֹּקֶר טוֹב, mirëmbrëma ~ עֶרֶב טוֹב, natën e mirë ~ לַיְלָה טוֹב), but “how are you?” changes for a man or a woman."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your language has a polite plural “you”, drop it: Hebrew uses אַתָּה / אַתְּ with everyone. What changes is the listener’s gender: מַה שְּׁלוֹמְךָ / מַה שְּׁלוֹמֵךְ."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If your language shows politeness with verb endings or special forms, Hebrew greetings stay the same for everyone: politeness comes from words (בְּבַקָּשָׁה, סְלִיחָה) and titles, and the form changes only for the listener’s gender."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "similar",
+   "text": "Like fixed greeting phrases in your language, Hebrew ones barely change — but “how are you?” changes with the listener’s gender (מַה שְּׁלוֹמְךָ / מַה שְּׁלוֹמֵךְ); the gender-free מַה נִּשְׁמַע? avoids the choice."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If a greeting in your language is a whole inflected verb, Hebrew greetings are short set phrases (בֹּקֶר טוֹב, לְהִתְרָאוֹת); only the “your” in מַה שְּׁלוֹמְךָ / שְׁלוֹמֵךְ changes for the listener."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "same",
+   "text": "The root of peace, ש־ל־ם, greets across the Semitic world, and the reply pattern בֹּקֶר טוֹב — בֹּקֶר אוֹר (“morning of light”) may be familiar. Hebrew also marks the listener’s gender in “your”: שְׁלוֹמְךָ / שְׁלוֹמֵךְ."
   }
  ]
 }
