@@ -316,7 +316,7 @@ def build_img_function(out_dir):
     print('img →', os.path.relpath(os.path.join(out_dir, 'img.mjs'), ROOT))
 
 def google_fonts_url():
-    """The one-file bundle cannot carry fonts/ (several MB): it asks Google Fonts for the same families (offline: system fonts)."""
+    """The one-file bundle cannot carry fonts/ (several MB): it asks Google Fonts for the same families, the scripts' Noto ones included (offline: system fonts)."""
     fams = json.load(open(os.path.join(ROOT, 'fonts', 'fonts.json'), encoding='utf-8'))
     q = []
     for name, f in fams.items():
@@ -326,6 +326,8 @@ def google_fonts_url():
         elif f.get('variable'): spec = f'wght@{min(w)}..{max(w)}'
         else: spec = 'wght@' + ';'.join(map(str, w))
         q.append('family=' + name.replace(' ', '+') + ':' + spec)
+    # the scripts' Noto families (fonts/scripts.css, made by tools/fonts_subset.py): Google serves them in unicode-range slices too
+    for name in json.load(open(os.path.join(ROOT, 'fonts', 'scripts.json'), encoding='utf-8')): q.append('family=' + name.replace(' ', '+') + ':wght@400..700')
     return 'https://fonts.googleapis.com/css2?' + '&'.join(q) + '&display=swap'
 
 def build_bundle(metas):

@@ -52,3 +52,27 @@ These are self-hosted copies of Google Fonts, so the app (the site and every pag
 | Fira Code | OFL-1.1 | 400–700 (variable) | yes | yes | [Google Fonts](https://fonts.google.com/specimen/Fira+Code) |
 | STIX Two Text | OFL-1.1 | 400–700 (variable) | yes | yes | [Google Fonts](https://fonts.google.com/specimen/STIX+Two+Text) |
 | Fira Sans Condensed | OFL-1.1 | 700 | yes | yes | [Google Fonts](https://fonts.google.com/specimen/Fira+Sans+Condensed) |
+
+## The scripts' fonts (Arabic, Hebrew, Devanagari, Chinese, Japanese)
+
+`scripts.css` / `scripts.json` and the `noto-*` folders are made by `python3 tools/fonts_subset.py` (fonttools + brotli) from the
+variable Noto fonts of the google/fonts repository (OFL-1.1, `<slug>/LICENSE.txt`), weights 400–700, no hinting. Every rule has a
+`unicode-range` and `font-display: swap`, so a browser downloads a file only when a page shows one of its characters; the font
+stacks (`--font` in `engine/src/10_base.css`, `SYS` in `engine/themes.js`) list them before the system fonts, the Han font
+following the UI locale (`--noema-cjk`: SC, TC for zh-Hant, JP for ja). The course's own text keeps its families
+(`'Noto Naskh Arabic'`, `'Noto Sans Hebrew'`, `'Noto Sans SC'` in `engine/lang/*.css`).
+
+| Family | Used for | Characters | Size |
+|---|---|---|---|
+| Noto Sans Arabic | the ar-EG interface | the Arabic blocks | 82 KB |
+| Noto Naskh Arabic | Arabic in the language courses | the Arabic blocks | 86 KB |
+| Noto Sans Hebrew | Hebrew in the courses | the Hebrew block | 10 KB |
+| Noto Sans Devanagari | the hi interface | the Devanagari blocks | 78 KB |
+| Noto Sans SC | the zh-Hans interface, Chinese in the courses | the zh-Hans catalogs + the courses + CJK punctuation (3 slices) | 629 KB |
+| Noto Sans TC | the zh-Hant interface | the zh-Hant catalogs + CJK punctuation | 63 KB |
+| Noto Sans JP | the ja interface | the ja catalogs + kana + CJK punctuation | 196 KB |
+
+Total ≈ 1.1 MB. **Re-run the script when a zh-Hans / zh-Hant / ja catalog or a course changes** (`tests/i18n_rtl.js` warns when a
+catalog character is missing; it is then drawn in the system font). `--common` adds the level-1 characters of GB 2312 / Big5 /
+JIS X 0208 (≈ +3–5 MB) if user content should be covered too. The one-file bundle asks Google Fonts for these families as well
+(when online), like the families above.
