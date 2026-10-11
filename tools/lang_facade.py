@@ -14,14 +14,19 @@ extract    the master (English, inline in the course files) as a facade: facades
            master is the translators' reference); --shown-only keeps only the notes an English native sees.
            The output is generated and reproducible: it is not committed (.gitignore).
 parity     a locale facade against the master: every address present, nothing stale (src = hash of the master text),
-           target-language runs preserved, no note the locale cannot show; counts per tier / field / language.
+           target-language runs preserved; counts per tier / field / language. A locale facade carries EVERY note (R1: the
+           folded “From other languages” section is in the explanation language too); the locale's own notes and the
+           type / branch / family notes are Tier 1, the notes for other languages Tier 3.
            Writes facades/<loc>/PARITY.md.
 lint       the D19 rules: every text field is registered (tools/schemas/noema.langfacade.fields.json); general texts name
            no language outside the course (CLDR names: babel, else tools/i18n/langnames/<locale>.json) — provenance cues
-           allowed in etymologies; English-anchored explanations (“no ‘do’”, “-ing”, “is not ‘the’”) flagged; notes: `for`
+           cues (from / borrowed / via / Proto- / Old …), older stages, varieties of the course languages (Egyptian,
+           Cantonese, Swiss German), cuisine / plant / people adjectives (Welsh onion) and quoted glosses are exempt in every
+           field, cognates in an etymology too unless they compare with a supported native; English-anchored explanations (“no ‘do’”, “-ing”, “is not ‘the’”) flagged; notes: `for`
            allowed, a note names only its own language, a type note none; every grammar page has the required notes
            (every supported native but the page's own language + type:fusional, type:agglutinating, type:isolating,
-           type:polysynthetic, branch:Semitic). With --locale: the facade's texts and notes too.
+           type:polysynthetic, branch:Semitic); R2: notes and comparison-like texts use the structured Markdown subset
+           (warnings: a long paragraph without structure, markup outside the subset). With --locale: the facade's texts and notes too.
 task       translation chunks for Claude (instructions, the locale's glossary from i18n/glossary/, the items to translate);
            merge writes the answers ({address: text}) into the facade with the master's hash.
 roundtrip  extract → strip every registered text → re-apply = byte-identical files (the parity of the English master).
@@ -42,17 +47,18 @@ GLOSSARY_DIR = os.path.join(REPO, 'i18n', 'glossary')
 
 MASTER = 'en'
 SUPPORTED = ['en', 'el', 'ru', 'fr', 'ar', 'de', 'hi', 'zh', 'ja', 'it', 'es', 'sq', 'pt', 'tr']        # supported natives = the UI locales' languages
-LOCALES = ['en', 'el', 'ru', 'fr', 'ar-EG', 'de', 'hi', 'zh-Hans', 'zh-Hant', 'ja', 'it', 'es-ES', 'sq', 'pt-PT']
+LOCALES = ['en', 'el', 'ru', 'fr', 'ar-EG', 'de', 'hi', 'zh-Hans', 'zh-Hant', 'ja', 'it', 'es-ES', 'sq', 'pt-PT', 'tr']
 TYPES = ['fusional', 'agglutinating', 'isolating', 'polysynthetic']
 REQUIRED_GROUPS = ['type:fusional', 'type:agglutinating', 'type:isolating', 'type:polysynthetic', 'branch:Semitic']
 GROUP_PREFIXES = ('type:', 'branch:', 'family:')
 TEXT_KINDS = ('gloss', 'prose', 'mixed')
 REGISTER = {'el': 'εσύ', 'ru': 'ты', 'fr': 'tu', 'de': 'du', 'it': 'tu', 'es': 'tú', 'pt': 'tu (pt-PT)', 'sq': 'ti', 'hi': 'आप',
-            'ja': 'です/ます', 'zh': '你', 'ar': 'أنت (Modern Standard Arabic, gender-neutral phrasing where possible)', 'en': 'you'}
+            'ja': 'です/ます', 'zh': '你', 'tr': 'sen', 'ar': 'أنت (Modern Standard Arabic, gender-neutral phrasing where possible)', 'en': 'you'}
 TYPOGRAPHY = {'fr': 'a narrow no-break space (U+202F) before ? ! : ; and « » quotes', 'el': '; as the question mark and « » quotes',
               'ru': '« » quotes', 'de': '„…“ quotes', 'es': '¿…? ¡…! and « » or “ ” quotes', 'it': '« » or “ ” quotes',
               'pt': '« » or “ ” quotes', 'sq': '“ ” or « » quotes', 'ja': '「」 quotes, full-width punctuation',
-              'zh': '“ ” quotes, full-width punctuation', 'ar': 'Arabic punctuation (، ؛ ؟)', 'hi': 'the danda । at sentence end is optional; standard Latin punctuation is fine'}
+              'zh': '“ ” quotes, full-width punctuation', 'ar': 'Arabic punctuation (، ؛ ؟)', 'hi': 'the danda । at sentence end is optional; standard Latin punctuation is fine',
+              'tr': '“ ” or « » quotes; keep dotted/dotless i (İ i / I ı) exactly'}
 
 
 def locale_lang(loc):
@@ -65,7 +71,9 @@ def text_hash(text):
 
 
 def shows(loc, for_):
-    """Does a facade for this locale carry (and a learner of this language see) a note for `for_`? (§2.2, §3)"""
+    """Is a note for `for_` one of the locale's OWN notes (its language, or a type / branch / family)? — the notes of the
+    first section “From your languages” for a learner of this language (§2.2). A locale facade carries ALL notes (R1: the
+    folded third section “From other languages” is shown in the explanation language too); its own notes are Tier 1."""
     return isinstance(for_, str) and (for_ == locale_lang(loc) or for_.startswith(GROUP_PREFIXES))
 
 
@@ -295,8 +303,14 @@ def write_manifest(course, loc, texts, entries, status, notes, out=None):
     return man
 
 
-def for_locale(texts, loc, all_notes=False):
+def for_locale(texts, loc, all_notes=True):
+    """The texts a locale facade carries: every text, every note (R1). all_notes=False: only the locale's own notes."""
     return [t for t in texts if not t.note or all_notes or shows(loc, t.for_)]
+
+
+def tier_of(t, loc):
+    """A note for another language (the folded “From other languages” section, R1) is Tier 3 in a locale facade."""
+    return 3 if t.note and loc != MASTER and not shows(loc, t.for_) else t.tier
 
 
 def extract(course, loc=MASTER, all_notes=True, out=None, reg=None):
@@ -318,7 +332,7 @@ def extract(course, loc=MASTER, all_notes=True, out=None, reg=None):
 SCRIPT_RUN = re.compile(r'[֐-׿יִ-ﭏ؀-ۿݐ-ݿࢠ-ࣿﭐ-﷿ﹰ-﻿'
                         r'㐀-䶿一-鿿豈-﫿　-〿]+(?:[ ‌‍]?[֐-׿יִ-ﭏ؀-ۿݐ-ݿࢠ-ࣿﭐ-﷿ﹰ-﻿㐀-䶿一-鿿豈-﫿]+)*')
 LATIN_MARKED = re.compile(r"[A-Za-zʾʿ'’\-]*[À-ÖØ-öø-ɏḀ-ỿʾʿ][A-Za-zÀ-ÖØ-öø-ɏḀ-ỿʾʿ'’\-]*")
-STARRED = re.compile(r'\*[^\s,;.)\]]+')
+STARRED = re.compile(r'\*[^\s,;.)\]]+')   # filtered by starred(): the Markdown emphasis of R2 is not a form
 NUMBER = re.compile(r'\d+(?:[.,:]\d+)*')
 WORD = re.compile(r"[^\W\d_]+(?:['’\-][^\W\d_]+)*")
 
@@ -336,10 +350,22 @@ def lang_forms(course, L):
     return out
 
 
+def starred(s):
+    """Wrong / reconstructed forms (*gegesst, *paʕala) — not the Markdown emphasis of R2 (**key**, *cited*)."""
+    out = []
+    for m in STARRED.finditer(s):
+        a, b = m.start(), m.end()
+        if (a and s[a - 1] == '*') or s[a + 1:a + 2] == '*': continue   # ** bold
+        w = m.group().rstrip('*')
+        if m.group().endswith('*') or s[b:b + 1] == '*': continue        # *italic*
+        out.append(w)
+    return out
+
+
 def runs(t, forms=None):
     """The parts of a master text that every locale keeps byte-identical."""
     s = t.text
-    out = SCRIPT_RUN.findall(s) + STARRED.findall(s) + NUMBER.findall(s) + [w for w in LATIN_MARKED.findall(s) if len(w) > 1]
+    out = SCRIPT_RUN.findall(s) + starred(s) + NUMBER.findall(s) + [w for w in LATIN_MARKED.findall(s) if len(w) > 1]
     if t.kind == 'mixed' and forms:
         ws = WORD.findall(s)
         if ws and all(w.lower() in forms for w in ws): out.append(s.strip())   # a cell written in the language itself
@@ -350,7 +376,7 @@ def runs(t, forms=None):
 def parity(course, loc, out=None, write=True, reg=None):
     texts, unreg, dup = collect(course, reg)
     entries, man = load_facade(course, loc, texts, out)
-    all_notes = bool(man and man.get('notes') == ['*'])
+    all_notes = not man or man.get('notes') in (None, ['*'])   # R1: every facade carries every note
     want = for_locale(texts, loc, all_notes)
     by_addr = {t.addr: t for t in texts}
     forms = {L: lang_forms(course, L) for L in course_langs(course)}
@@ -369,9 +395,9 @@ def parity(course, loc, out=None, write=True, reg=None):
            'problems': [(t.addr, st, lost) for t, st, lost in rows if st != 'done']}
     for t, st, lost in rows:
         fl = os.path.relpath(facade_file(course, loc, *t.facade, out=out), out or lib_of(course))
-        for bucket, k in ((res['tiers'], str(t.tier)), (res['files'], fl), (res['fields'], f'{t.rec}:{t.pat}')):
+        for bucket, k in ((res['tiers'], str(tier_of(t, loc))), (res['files'], fl), (res['fields'], f'{t.rec}:{t.pat}')):
             bucket[k][st] += 1; bucket[k]['total'] += 1
-        res['chars'][str(t.tier)] += len(t.text)
+        res['chars'][str(tier_of(t, loc))] += len(t.text)
     res['ok'] = not res['problems'] and not orphans and not forbidden and not unreg and not dup
     if write:
         p = os.path.join(os.path.dirname(manifest_path(course, loc, out)), 'PARITY.md')
@@ -460,8 +486,8 @@ class NameMatcher:
                 if c not in allow and n not in course_names: cand.setdefault(n, c)
             cand = {n: c for n, c in cand.items() if len(n) >= 4 or n == 'Lao'}
             for n in EN_SKIP: cand.pop(n, None)
-            for c in allow:   # the course's own names are never outside it
-                for n in COURSE_ALIASES.get(c, []): cand.pop(n, None)
+            for c in allow:   # the course's own names (and the varieties of its languages) are never outside it
+                for n in COURSE_ALIASES.get(c, []) + sorted(VARIETIES.get(c, ())): cand.pop(n, None)
             self.items = sorted(cand.items(), key=lambda x: -len(x[0]))
             self.rx = re.compile(r'(?<![\w-])(' + '|'.join(re.escape(n) for n, _ in self.items) + r')(?![\w-])') if self.items else None
             self.code = dict(self.items)
@@ -499,24 +525,118 @@ class NameMatcher:
         return out
 
 
-PROV_BEFORE = re.compile(r'\b(?:from|borrowed|borrowing|loan|loanword|loan-word|via|through|calque[sd]?|derived|derives|adopted|taken|'
-                         r'ultimately|origin|originally|coined|transmitted|entered|reached)\b[^.;:!?]*$', re.I)
-PROV_AFTER = re.compile(r'^[\s\w-]{0,12}?\b(?:origin|loan|loanword|borrowing|source|etymon|root)\b', re.I)
-COMPARE_BEFORE = re.compile(r'\b(?:cognate|cognates|compare|cf\.?|like|unlike|as in|related to|same as|akin|similar|resembles|'
-                            r'equivalent|corresponds?|false friend|also in|just as)\b[^.;:!?]*$', re.I)
+PROV_BEFORE = re.compile(r'\b(?:from|borrowed|borrowing|borrowings|loan|loans|loanword|loanwords|loan-word|via|through|calque[sd]?|calque of|derived|derives|'
+                         r'adopted|taken|ultimately|origin|originally|coined|transmitted|entered|reached|inherited|descends?|goes back|went back|'
+                         r'back to|came|comes|travelled|traveled|passed|influenced|influence|after|translation of|translates|translating|'
+                         r'translated|matching|match of|renders?|rendering|modell?ed on|gave|spread|wanderword|doublet|followed|half|import of)\b[^.;:!?]*$', re.I)
+PROV_AFTER = re.compile(r'^[\s\w/-]{0,12}?\b(?:origin|origins|original|loan|loans|loanword|loanwords|borrowing|borrowings|source|etymon|root|roots|'
+                        r'name|names|nickname|word|words|term|terms|spelling|calque|etymology|past|history|form|forms|entry|entries|letters?|'
+                        r'alphabet|script|kanji|plural|pronunciation|way|import|numbers|numerals|sound|in sound)\b', re.I)
+COMPARE_BEFORE = re.compile(r'\b(?:cognate|cognates|compare[sd]?|cf\.?|like|unlike|as in|related to|same as|akin|similar|similarly|'
+                            r'resembles?|equivalent|corresponds?|false friends?|also in|just as|different from|differs?|whereas|while in|'
+                            r'speakers of|learners of|matches|shared with|cousin|cousins)\b[^.;:!?]*$', re.I)
+SAME_SOURCE = re.compile(r'\bthe same\s+$', re.I)   # “the same Persian word”: one source, not a comparison
+IS_FORM = re.compile(r'\b(?:is|are)\s+(?:the\s+|a\s+|an\s+)?$', re.I)   # “каперсы is the Greek κάππαρις”, “Cousine is French cousine”
+PART_OF = re.compile(r'^\s+[^\s+]+(?:\s+\([^)]*\))?(?:\s+[^\s+]+)?\s*\+')   # Greek τῆλε + φωνή, Japanese 海苔 (nori) + Blatt
+GLOSS_PAREN = re.compile(r'[^\x00-\x7f]\s*\(\s*$')   # 希腊人 (Greek)
+OWN_SCRIPT_FORM = re.compile(r'^\s+[^\x00-\x7f]')
+ARROW = re.compile(r'→|←|>\s*$|^\s*>')
+# older stages and languages without living native speakers: naming them is etymology or history, never a comparison a learner could use
+STAGE_WORDS = (r'Old|Middle|Ancient|Classical|Medieval|Mediaeval|Late|Early|Byzantine|Vulgar|Biblical|Koine|Koiné|Archaic|Imperial|'
+               r'Babylonian|Assyrian|Mishnaic|Hellenistic|Ecclesiastical|Church|Scholarly|Botanical|Scientific|Neo')
+STAGE_BEFORE = re.compile(r'(?:\b(?:Proto|Pre)-|\b(?:' + STAGE_WORDS + r')[\s-]+(?:\w+\s+)?)$')   # Old High …, Proto-…, Late Latin
+STAGE_NAME = re.compile(r'^(?:(?:Proto|Pre)-|(?:' + STAGE_WORDS + r')\s)')
+HISTORIC = {'Latin', 'Ancient Greek', 'Akkadian', 'Ugaritic', 'Phoenician', 'Punic', 'Sumerian', 'Elamite', 'Hittite', 'Gothic', 'Sanskrit',
+            'Pali', 'Avestan', 'Ge’ez', "Ge'ez", 'Geez', 'Geʿez', 'Coptic', 'Egyptian', 'Ancient Egyptian', 'Syriac', 'Classical Syriac', 'Aramaic',
+            'Old Norse', 'Anglo-Saxon', 'Ottoman', 'Ottoman Turkish', 'Old South Arabian', 'Sogdian', 'Parthian', 'Tocharian', 'Etruscan',
+            'Oscan', 'Umbrian', 'Hebrew (Biblical)', 'Literary Chinese', 'Classical Chinese', 'Bactrian', 'Xianbei', 'Safaitic', 'Prussian'}
+# a following word that shows the name is not about a language: cooking, plants, places, people (Welsh onion, Greek and Turkish families)
+NOT_A_LANGUAGE_NOUN = re.compile(
+    r'^(?:\s*(?:,|and|or|/)\s*[A-Z][\w-]+)*(?:\s+[a-z][\w-]+)?\s+(?:'
+    r'cuisine|cooking|cookery|kitchen|kitchens|food|foods|dish|dishes|meal|meals|soup|soups|stew|curry|curries|salad|salads|'
+    r'recipe|recipes|restaurant|restaurants|menu|menus|market|markets|shop|shops|bakery|bakeries|cafés?|bar|bars|breakfast|tea|teas|coffee|beer|wine|'
+    r'liqueur|cheese|bread|laverbread|pastry|sweets|dessert|desserts|fries|aspic|borscht|horchata|style|variety|varieties|cultivar|cultivars|'
+    r'vegetable|vegetables|plant|plants|leaf|leaves|greens|brassica|brassicas|fruit|fruits|tree|trees|flower|flowers|thistle|speciality|specialty|'
+    r'cucumber|cucumbers|onion|onions|cabbage|cabbages|lettuce|mustard|radish|radishes|chives|garlic|leek|leeks|melon|melons|'
+    r'pear|pears|plum|plums|cherry|cherries|lemon|lemons|lime|limes|orange|oranges|pepper|peppers|chili|chilli|chillies|pea|peas|'
+    r'seaweed|seaweeds|spinach|cress|parsley|basil|mint|herbs?|spices?|rice|noodles|dumplings|bean|beans|lentils?|grain|'
+    r'garden|gardens|church|churches|coast|coasts|island|islands|mountains?|valley|gulf|Gulf|sea|Sea|harbour|harbor|port|Guiana|Riviera|Alps|'
+    r'empire|Empire|kings?|court|army|Academy|academy|city|cities|town|towns|village|villages|'
+    r'people|peoples|families|family|themselves|traders?|merchants?|settlers?|immigrants?|cooks?|chefs?|farmers?|monks?|scholars?|botanists?|'
+    r'tradition|traditions|custom|customs|festival|festivals|holiday|holidays|calendar|culture|art|music|carpets?|rugs?|'
+    r'medicine|herbalists?|farming|growers?|scientists?|galleons|ships|sailors|explorers|Wikipedia|dashi|kimchi|symbolism|elegance|products)\b')
+GRAMMAR_AFTER = re.compile(r'^\s*\b(?:has|had|have|is|uses|marks|puts|says|grammar|verbs?|nouns?|cases?|tenses?|speakers?|learners?)\b', re.I)
+# varieties of the course languages (CLDR lists some as languages of their own): a variety of a course language is the course
+VARIETIES = {'ar': {'Egyptian', 'Levantine', 'Gulf', 'Maghrebi', 'Moroccan', 'Najdi', 'Hejazi', 'Iraqi', 'Sudanese', 'Tunisian', 'Algerian',
+                    'Libyan', 'Hassaniya', 'Hassaniyya', 'Yemeni', 'Palestinian', 'Syrian', 'Lebanese', 'Jordanian', 'Bedouin'},
+             'de': {'Bavarian', 'Alemannic', 'Swabian', 'Colognian', 'Kölsch', 'Low German', 'Swiss German', 'Austrian German',
+                    'Palatine German', 'Upper Saxon', 'Franconian', 'Walser'},
+             'zh': {'Cantonese', 'Hakka', 'Hokkien', 'Teochew', 'Shanghainese', 'Min Nan', 'Min', 'Wu', 'Gan', 'Xiang', 'Jin',
+                    'Taiwanese', 'Taiwanese Hokkien'},
+             'he': {'Mishnaic Hebrew', 'Biblical Hebrew', 'Modern Hebrew'}}
+NAME_EN = {'ar': 'Arabic', 'he': 'Hebrew', 'zh': 'Chinese', 'de': 'German', 'en': 'English', 'el': 'Greek', 'ru': 'Russian', 'fr': 'French',
+           'hi': 'Hindi', 'ja': 'Japanese', 'it': 'Italian', 'es': 'Spanish', 'sq': 'Albanian', 'pt': 'Portuguese', 'tr': 'Turkish'}
+SUPPORTED_NAMES = {NAME_EN[c] for c in SUPPORTED}
+
+
+def _last(rx, s):
+    m = None
+    for m in rx.finditer(s): pass
+    return m.start() if m else -1
+
+
+def _clause(text, start, n=60):
+    return re.split(r'[.;!?]', text[max(0, start - n):start])[-1]
 
 
 def provenance_ok(text, start, end):
-    """A language named as the source of a word (allowed in etymologies), not as a comparison."""
-    before = text[max(0, start - 60):start]
-    before = re.split(r'[.;!?]', before)[-1]
-    if COMPARE_BEFORE.search(before): return False
-    return bool(PROV_BEFORE.search(before) or PROV_AFTER.match(text[end:]))
+    """A language named as the source of a word (provenance, allowed in every field), not as a comparison.
+    The cue nearest to the name decides: “Like English rice, it goes back to Greek ὄρυζα” — Greek is provenance."""
+    before = _clause(text, start); after = text[end:]
+    if SAME_SOURCE.search(before) and PROV_AFTER.match(after): return True          # the same Persian word
+    if IS_FORM.search(before) and not COMPARE_BEFORE.search(before.split(',')[-1]): return True   # … is the Greek κάππαρις
+    if PART_OF.match(after): return True                                            # a part of a compound
+    if ARROW.search(text[max(0, start - 4):start]) or ARROW.search(after[:40].split('.')[0]): return True   # German Bier → Italian birra →
+    p, c = PROV_BEFORE.search(before), COMPARE_BEFORE.search(before)
+    if c and (not p or c.start() > p.start()) and not (p and _last(re.compile(r'\b(?:from|through|via|back to|borrowed)\b', re.I), before) > c.start()):
+        return False
+    return bool(p or PROV_AFTER.match(after))
 
 
 def compared(text, start):
     before = re.split(r'[.;!?(]', text[max(0, start - 40):start])[-1]
     return bool(COMPARE_BEFORE.search(before))
+
+
+def quoted(text, start, end):
+    """A name inside quotes is a gloss or a cited phrase (יְוָנִי “Greek”, ‘England, English’), not a reference point."""
+    before = text[max(0, start - 40):start]
+    o = max(before.rfind('“'), before.rfind('‘'))
+    c = max([m.start() for m in re.finditer(r'”|’(?!\w)', before)] or [-1])   # it’s: an apostrophe, not a closing quote
+    return GLOSS_PAREN.search(before) is not None or (o > c and bool(re.match(r'^[^“‘]{0,40}?(?:”|’(?!\w))', text[end:])))
+
+
+def historic(text, start, name):
+    """An older stage (Proto-…, Old …, Middle …, Classical …) or a language without living native speakers (Latin, Akkadian …)."""
+    return name in HISTORIC or bool(STAGE_NAME.match(name)) or bool(STAGE_BEFORE.search(text[max(0, start - 30):start]))
+
+
+def exempt(text, start, end, name, course_codes=(), prov_field=False, own=None):
+    """Why a name of a language in a text is NOT a comparison with that language (None: it is one, or may be).
+    Shared by every field: provenance, older stages, varieties of the course languages, cuisine / plant / people adjectives,
+    quoted glosses; in an etymology (prov_field) a language no learner has as a supported native (cognate with Tibetan)."""
+    after = text[end:]
+    for c in course_codes:   # a variety of a course language: Egyptian (Arabic), Bavarian (German), Cantonese
+        if name in VARIETIES.get(c, ()): return 'variety'
+        for n in [NAME_EN.get(c)] + COURSE_ALIASES.get(c, []):
+            if n and re.match(r'\s+' + re.escape(n) + r'\b', after): return 'variety'
+    if own and NAME_EN.get(own) and NAME_EN[own] in name: return 'own'      # Ottoman Turkish in a note for tr: the learner's own language
+    if NOT_A_LANGUAGE_NOUN.match(after): return 'not a language'
+    if quoted(text, start, end): return 'quoted'
+    if provenance_ok(text, start, end): return 'provenance'
+    if historic(text, start, name) and not GRAMMAR_AFTER.match(after): return 'etymology'
+    if prov_field and (name not in SUPPORTED_NAMES or not compared(text, start)): return 'etymology'   # cognate with Tibetan; Japanese 海苔 (nori)
+    return None
 
 
 ANCHORED = [
@@ -528,6 +648,31 @@ ANCHORED = [
     (re.compile(r'\bphrasal verbs?\b', re.I), 'explains through English phrasal verbs'),
     (re.compile(r'\b(?:do|does|did)-support\b|\bno [‘\'"“]?do[’\'"”]?\b(?! not)', re.I), 'explains through English “do”'),
 ]
+
+
+# ---------------------------------------------------------------- R2: the structured Markdown subset of notes
+# paragraphs (\n\n) · "- " / "1. " lists · **bold** (one or two) · *italic* · an example on its own line ("→ …" or a list item);
+# no headings, links, HTML, tables or code (the app adds the language heading and the chip; it builds DOM nodes, never innerHTML)
+STRUCT_LONG = 220
+MD_FORBIDDEN = [
+    (re.compile(r'(?m)^\s{0,3}#{1,6}\s'), 'a heading'),
+    (re.compile(r'\[[^\]\n]+\]\([^)\s]+\)|https?://'), 'a link'),
+    (re.compile(r'</?[A-Za-z][A-Za-z0-9]*(?:\s[^<>]*)?/?>'), 'HTML'),
+    (re.compile(r'(?m)^\s*\|.*\|\s*$'), 'a table'),
+    (re.compile(r'`'), 'code'),
+]
+
+
+def structure(text):
+    """R2 → [(category, message)]: a long note squashed into one paragraph, markup outside the subset, too much bold."""
+    out = []
+    s = text or ''
+    for rx, what in MD_FORBIDDEN:
+        if rx.search(s): out.append(('markup', f'{what} in a note: the Markdown subset has paragraphs, "- " / "1. " lists, **bold**, *italic* and "→ " example lines only (R2)'))
+    if len(s) > STRUCT_LONG and '\n' not in s.strip():
+        out.append(('structure', f'{len(s)} characters in one paragraph: two or more points → a "- " list, a rule + its example → the example on its own line ("→ …"), paragraphs separated by a blank line (R2)'))
+    if len(re.findall(r'\*\*[^*\n]+\*\*', s)) > 2: out.append(('structure', 'more than two **bold** parts: bold only the one key sentence or word (R2)'))
+    return out
 
 
 def anchored(text):
@@ -571,6 +716,8 @@ def lint(course, loc=None, texts=None, unreg=None, reg=None, langs=None):
     profiles, families, branches = typology_world(course)
     en = NameMatcher('en', langs)
     for t in texts:
+        if t.note or t.field.get('structured') or t.pat.split('/')[-2:-1] in (['pitfalls'], ['subtleties'], ['funFacts']) or t.pat.endswith('profile/feeling'):
+            for cat, msg in structure(t.text): F('warn', cat, t.where(), msg)   # R2: a structured Markdown subset
         if t.note:
             f = t.for_ or ''
             if f.startswith('type:'):
@@ -580,16 +727,16 @@ def lint(course, loc=None, texts=None, unreg=None, reg=None, langs=None):
             elif f.startswith('family:'):
                 if families and f[7:] not in families: F('warn', 'note-for', t.where(), f'unknown family “{f[7:]}”')
             elif f not in SUPPORTED:
-                F('info', 'note-source', t.where(), f'a note for “{f}” (not a supported native): kept as source material, never shown')
+                F('info', 'note-source', t.where(), f'a note for “{f}” (not a supported native): shown only in the folded “From other languages” section (R1)')
+                continue   # not a learner's native: its names are not linted
             own = {f} if f in profiles or f in SUPPORTED else set()
-            names = [n for n in en.find(t.text) if n[0] not in own]
+            names = [n for n in en.find(t.text) if n[0] not in own and not exempt(t.text, n[2], n[3], n[1], langs, own=f)]
             if names:
                 what = 'a type / branch / family note names no language' if f.startswith(GROUP_PREFIXES) else f'a note for {f} names only its own language and the course languages'
                 F('warn', 'note-names', t.where(), f'{what}: {", ".join(sorted({n[1] for n in names}))}')
             continue
-        names = en.find(t.text)
-        if t.prov: names = [n for n in names if not provenance_ok(t.text, n[2], n[3])]
-        if t.kind == 'gloss':   # a gloss may BE about a language (Englisch = “English”, “I speak English”, “Welsh onion”): only a comparison counts
+        names = [n for n in en.find(t.text) if not exempt(t.text, n[2], n[3], n[1], langs, prov_field=t.prov or t.pat.split('/')[-1] == 'use')]
+        if t.kind == 'gloss':   # a gloss may BE about a language (Englisch = “English”, “I speak English”): only a comparison counts
             names = [n for n in names if compared(t.text, n[2])]
         if names:
             F('warn', 'names', t.where(), f'names a language outside the course ({", ".join(sorted({n[1] for n in names}))}): a comparison goes into a note for that language (profile.notes / notes), the general text says what the language does')
@@ -624,8 +771,7 @@ def lint_facade(course, loc, texts):
         t = by_addr.get(a)
         if not t: continue
         if t.note:
-            if not shows(loc, t.for_): out.append(Finding('error', 'facade-note', a, f'a note for {t.for_} in the {loc} facade: it carries only {locale_lang(loc)} and type / branch / family notes'))
-            elif t.for_.startswith(GROUP_PREFIXES) and nm_all.find(e.get('t', '')):
+            if t.for_.startswith(GROUP_PREFIXES) and nm_all.find(e.get('t', '')):
                 out.append(Finding('warn', 'facade-names', a, 'a type note names a language: ' + ', '.join(sorted({n[1] for n in nm_all.find(e['t'])}))))
             continue
         hits = nm_all.find(e.get('t', '')) if not t.prov else [n for n in nm_all.find(e.get('t', '')) if n[0] != locale_lang(loc)]
@@ -662,15 +808,17 @@ def task_instructions(loc, course_langs_names):
         f'4. No language outside the course is a reference point. Never add English (or any other language) to a text; where the English master explains through '
         f'English grammar (“no ‘do’”, “-ing form”, “is not ‘the’”), say what the course language does in its own terms. {name} may be named only in the notes for “{lang}”.',
         f'5. Notes (items with "for"): a note for “{lang}” speaks to a native {name} speaker — adapt it freely and give its examples in {name} (in its own script); '
-        'a type / branch note (type:…, branch:…) names no language at all.',
-        '6. Use the glossary for the app’s terms. Keep markup characters (·, →, ‹ ›, ___, line breaks) where they are.',
+        'a type / branch note (type:…, branch:…) names no language at all; a note for another language (the folded section “From other languages”, R1) '
+        'is translated faithfully and keeps that language\'s examples byte-identical.',
+        '6. Use the glossary for the app’s terms. Keep the markup exactly (R2): line breaks, blank lines between paragraphs, "- " and "1. " list items, '
+        '**bold**, *italic*, "→ " example lines, and ·, ‹ ›, ___ where they are.',
         '7. Answer with ONE JSON object {"<address>": "<translated text>"} containing every address of "items" and nothing else. '
         f'Then save it and run: python3 tools/lang_facade.py merge <course> --locale {loc} <answers.json> && python3 tools/lang_facade.py parity <course> --locale {loc}'])
 
 
 def make_tasks(course, loc, tiers, only=None, max_chars=12000, out=None, reg=None):
     texts, unreg, dup = collect(course, reg)
-    want = [t for t in for_locale(texts, loc) if t.tier in tiers]
+    want = [t for t in for_locale(texts, loc) if tier_of(t, loc) in tiers]
     entries, man = load_facade(course, loc, texts)
     todo = [t for t in want if not (entries.get(t.addr) and entries[t.addr].get('src') == text_hash(t.text))]
     if only:
@@ -715,7 +863,6 @@ def merge(course, loc, answer_files, by='claude', reg=None):
         for a, v in ans.items():
             t = by_addr.get(a)
             if not t: bad.append(f'{a}: not an address of the master'); continue
-            if t.note and not shows(loc, t.for_): bad.append(f'{a}: a note for {t.for_} does not belong in the {loc} facade'); continue
             txt = v.get('t') if isinstance(v, dict) else v
             if not isinstance(txt, str) or not txt.strip(): bad.append(f'{a}: empty'); continue
             p = facade_file(course, loc, *t.facade)
@@ -725,7 +872,7 @@ def merge(course, loc, answer_files, by='claude', reg=None):
     order = {t.addr: i for i, t in enumerate(texts)}
     for p, d in files.items(): wjson(p, OrderedDict(sorted(d.items(), key=lambda kv: order.get(kv[0], 1 << 30))))
     entries, man = load_facade(course, loc, texts)
-    write_manifest(course, loc, for_locale(texts, loc), entries, (man or {}).get('status', 'draft'), [locale_lang(loc), 'type:*', 'branch:*', 'family:*'])
+    write_manifest(course, loc, for_locale(texts, loc), entries, (man or {}).get('status', 'draft'), ['*'])
     return n, bad
 
 

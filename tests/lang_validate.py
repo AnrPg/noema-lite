@@ -210,7 +210,7 @@ ok(any('not covered by any phenomenon' in x and 'tone.lexical' in x for x in e),
 expect('a page without contrast notes (--d19-strict)', lambda J, d: J('lang/ar/grammar/fn.definite.json', lambda o: o.pop('notes')), 'contrast notes missing (D19: every supported native but ar, every type and branch:Semitic): en, el, ru', d19_strict=True)
 errs = mutated(lambda J, d: J('lang/ar/grammar/fn.definite.json', lambda o: o.pop('notes')))
 ok(not [e for e in errs if 'contrast notes missing' in e], 'without --d19-strict the D19 rules are warnings (the content is being rewritten)')
-full = [{'for': c, 'rel': 'same', 'text': 'x'} for c in ['en', 'el', 'ru', 'fr', 'de', 'hi', 'zh', 'ja', 'it', 'es', 'sq', 'pt', 'type:fusional', 'type:agglutinating', 'type:isolating', 'type:polysynthetic', 'branch:Semitic']]
+full = [{'for': c, 'rel': 'same', 'text': 'x'} for c in ['en', 'el', 'ru', 'fr', 'de', 'hi', 'zh', 'ja', 'it', 'es', 'sq', 'pt', 'tr', 'type:fusional', 'type:agglutinating', 'type:isolating', 'type:polysynthetic', 'branch:Semitic']]
 errs = mutated(lambda J, d: J('lang/ar/grammar/fn.definite.json', lambda o: o.update(notes=full)), d19_strict=True)
 ok(not [e for e in errs if 'lang/ar/grammar/fn.definite.json' in e and 'contrast notes missing' in e], 'a page with a note for every supported native but its own, every type and branch:Semitic passes')
 expect('a note for an unknown branch', lambda J, d: J('lang/he/grammar/fn.definite.json', lambda o: o['notes'].append({'for': 'branch:Klingonic', 'rel': 'new', 'text': '…'})), 'unknown branch “Klingonic”')
