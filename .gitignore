@@ -18,3 +18,6 @@ library/languages/*/facades/en/
 library/languages/_phenomena/facades/en/
 library/languages/_typology/facades/en.json
 library/languages/*/facades/*/tasks/
+
+# local note: what was left to check (not shared)
+PENDING_CHECKS.md
