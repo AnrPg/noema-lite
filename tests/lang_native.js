@@ -1,8 +1,10 @@
-/* D19 — a language course taught through the learner's native language (docs/language-packs.md §2.2, §3), in a real browser over
-   the pilot course: the course asks once for the native language; a Greek native sees only the Greek notes (no English ones) and,
-   with a locale facade switched on, the explanations in Greek; a Turkish native (not a supported native) sees the notes for the
-   type of their language and never the note for Turkish; an English native sees the English notes; through a facade the texts
-   change and the exercises do not. The facade is tests/fixtures/lang-facade/el, built into course.expl.el.js by tools/build.py
+/* D19 / R1 / R2 — a language course taught through the learner's native language (docs/language-packs.md §2.2, §3), in a real
+   browser over the pilot course: the course asks once for the native language; a Greek native sees the Greek notes first (no
+   English ones among their languages) and, with a locale facade switched on, the explanations in Greek; with English at C1 and
+   learning Arabic + German, an Arabic page shows “From your languages” (Greek, then English), “Among the languages you are
+   learning” (German) and the folded “From other languages”; notes in the Markdown subset are drawn as lists; a Turkish native
+   sees the Turkish notes; a native language without notes sees those of its type; through a facade the texts change and the
+   exercises do not. The facade is tests/fixtures/lang-facade/el, built into course.expl.el.js by tools/build.py
    in a copy of the prepared repo (with two test notes added to that copy).
    Usage: node tests/lang_native.js <prepared-repo-dir>   (built with tools/build.py) */
 const { chromium } = require(process.env.PW || 'playwright');
@@ -13,6 +15,7 @@ let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m)
 const wait = ms => new Promise(r => setTimeout(r, ms));
 const COURSE = 'polyglot-semitic-zh-de', SUBJ = 'lang:' + COURSE, FN = 'fn.definite';
 const AGG = 'TEST · If your language adds one ending per meaning, expect German to pack gender, number and case into one small word.';
+const MD_DE = 'TEST-MD · Two points:\n- **Gender** decides the article\n- the article *declines* with the case\n→ der Tisch — the table';
 
 /** A copy of the prepared repo with the fixture facade (el) and two test notes, built. */
 function prepared() {
@@ -22,6 +25,8 @@ function prepared() {
   fs.cpSync(path.join(__dirname, 'fixtures', 'lang-facade', 'el'), path.join(cdir, 'facades', 'el'), { recursive: true });
   const gf = path.join(cdir, 'lang', 'de', 'grammar', FN + '.json'), g = JSON.parse(fs.readFileSync(gf, 'utf8'));
   g.notes.push({ for: 'type:agglutinating', rel: 'new', text: AGG }); fs.writeFileSync(gf, JSON.stringify(g, null, 1));
+  const af = path.join(cdir, 'lang', 'ar', 'grammar', FN + '.json'), ga = JSON.parse(fs.readFileSync(af, 'utf8'));   // R2: a note in the Markdown subset
+  ga.notes.find(n => n.for === 'de').text = MD_DE; fs.writeFileSync(af, JSON.stringify(ga, null, 1));
   // a word with profile.notes (the new place of the comparisons of a word, §2.1)
   let word = null;
   for (const f of fs.readdirSync(path.join(cdir, 'lang', 'de', 'lexicon'))) {
@@ -50,7 +55,9 @@ function prepared() {
   const open = async (hash = '') => { await page.goto('about:blank'); await page.goto(url + '?account=anr&subject=' + SUBJ + hash);   // a fresh start each time (a hash alone would not reload)
     await page.waitForSelector('.lx-main .lx-view', { timeout: 20000 }).catch(() => { }); await wait(900); };
   const setNative = n => page.evaluate(n => { const k = 'noema1:anr:a:settings'; const s = JSON.parse(localStorage.getItem(k) || '{}'); if (n) s.native = n; else delete s.native; localStorage.setItem(k, JSON.stringify(s)); }, n);
-  const notesFor = () => page.locator('.lx-notesbox [data-for]').evaluateAll(els => els.map(e => e.dataset.for));
+  const uniq = a => [...new Set(a)];
+  const notesFor = (sec = 'yours', root = '.lx-gram') => page.locator(`${root} [data-cmp="${sec}"] [data-for]`).evaluateAll(els => els.map(e => e.dataset.for)).then(uniq);
+  const setCourse = s => page.evaluate(s => { const U = NoemaLangUI.UI; Object.assign(U.L.settings, s); NoemaLangUI.save(true); }, s);
   const ex = () => page.evaluate(() => document.documentElement.lang + '|' + NoemaLangUI.UI.C.explainLang);
   await page.goto(url); await page.evaluate(() => localStorage.clear());
 
@@ -68,7 +75,9 @@ function prepared() {
   ok(await ex() === 'el|el', 'the explanations are in Greek (the facade of the native language is on): ' + await ex());
   { const t = await page.locator('.lx-gram').textContent(), mine = await notesFor();
     ok(/Τα γερμανικά δείχνουν το οριστικό/.test(t) && /Το οριστικό και το αόριστο άρθρο/.test(t) && /ο\/η\/το \(οριστικό\)/.test(t) && /der Tisch/.test(t), 'the facade’s texts at their addresses (summary, title, a table label); the German forms untouched');
-    ok(mine.length === 1 && mine[0] === 'el' && /Τα ο \/ η \/ το/.test(await page.locator('.lx-notesbox').innerText()) && !/the \/ a work the same way/.test(t), 'only the Greek note, itself translated — no English note, no other language (' + mine.join(', ') + ')'); }
+    const yours = (await page.locator('.lx-gram [data-cmp="yours"]').allInnerTexts()).join('\n');
+    ok(mine.join() === 'el' && /Τα ο \/ η \/ το/.test(yours) && !/the \/ a work the same way/.test(yours), 'from your languages: only the Greek note, itself translated — no English note (' + mine.join(', ') + ')');
+    ok(await page.locator('.lx-gram details[data-cmp="others"]:not([open])').count() >= 1 && !(await page.locator('.lx-gram details[data-cmp="others"][open]').count()) && (await notesFor('others')).includes('en'), 'the other languages’ notes (English among them) are in the folded “From other languages”'); }
   await page.screenshot({ path: SHOTS + '/lx_native_el.png' });
   { const r = await page.evaluate(() => {
       const N = NoemaLang, U = NoemaLangUI.UI, C0 = N.course(U.data), CF = U.C, L = N.newLearner(C0);
@@ -80,21 +89,41 @@ function prepared() {
     });
     ok(r.gloss === 'Σήμερα ξύπνησα στις έξι.' && r.master[0] && JSON.stringify(r.master) === JSON.stringify(r.facade), `through the facade the exercises are the same (clock, date, parallel sentences, ${r.master[3].split('|').length} grammar items with their answers)`); }
   if (word) { await open('#/w/de/' + encodeURIComponent(word));
-    const w = await page.locator('.lx-wnotes [data-for]').evaluateAll(els => els.map(e => e.dataset.for));
-    ok(w.join() === 'el', 'a word card shows its profile.notes for the native language only (' + w.join(', ') + ')'); }
+    const w = await notesFor('yours', '.lx-card'), o = await notesFor('others', '.lx-card');
+    ok(w.join() === 'el' && o.join() === 'en,tr,type:agglutinating', 'a word card shows its profile.notes: the native language’s, the others folded (' + w.join(', ') + ' | ' + o.join(', ') + ')'); }
+  console.log('— the Greek native speaks English at C1 and learns Arabic and German');
+  await open(); await setCourse({ knows: [{ code: 'en', level: 'C1' }], languages: ['ar', 'de'] });
+  await open('#/fn/' + FN + '/ar'); await wait(400);
+  { const heads = await page.locator('.lx-gram [data-cmp="yours"] .lx-cg-name').allInnerTexts();
+    ok((await notesFor()).join() === 'el,en' && heads[0] === 'Ελληνικά' && heads[1] === 'English' && await page.locator('.lx-gram [data-cmp="yours"] .lx-cg-lvl').first().innerText() === 'C1',
+      'from your languages: Greek first, then English (C1), each under its own name (' + (await notesFor()).join(', ') + ' · ' + heads.join(', ') + ')');
+    const lrn = await notesFor('learning'), oth = await notesFor('others');
+    ok(lrn.join() === 'de' && await page.locator('.lx-gram [data-cmp="learning"] .lx-cg-also button').count() >= 1 && !lrn.includes('he') && !lrn.includes('zh'),
+      'among the languages you are learning: German (its note and the link to its page), not the course languages not studied (' + lrn.join(', ') + ')');
+    ok(await page.locator('.lx-gram details[data-cmp="others"]:not([open])').count() >= 1 && !(await page.locator('.lx-gram details[data-cmp="others"][open]').count()) && oth.includes('fr') && oth.includes('zh') && oth.includes('type:fusional') && !oth.includes('el') && !oth.includes('en') && !oth.includes('de'),
+      'from other languages: folded, with every other note (fr, zh, the types …) and none shown above (' + oth.length + ')');
+    const md = page.locator('.lx-gram [data-cmp="learning"] .lx-md', { hasText: 'TEST-MD' });
+    ok(await md.locator('ul.lx-md-list > li').count() === 2 && await md.locator('strong').innerText() === 'Gender' && await md.locator('em').innerText() === 'declines' && /der Tisch/.test(await md.locator('.lx-md-ex').innerText()) && !(await md.innerText()).includes('**'),
+      'R2: a note in the Markdown subset is drawn as a list, bold, italic and an example line (no stars left)'); }
+  await page.screenshot({ path: SHOTS + '/lx_native_sections.png', fullPage: true });
+  if (word) { await open('#/w/de/' + encodeURIComponent(word)); ok((await notesFor('yours', '.lx-card')).join() === 'el,en', 'the word card too: Greek, then English (C1)'); }
+  await setCourse({ knows: [], languages: ['ar', 'he', 'zh', 'de'] });
   await open('#/settings');
   ok(await page.locator('.lx-nativesel').inputValue() === 'el' && await page.locator('.lx-speaker option').count() === 3, 'course settings: the native language, and “Explanations in” (automatic · English · Greek)');
 
-  console.log('— a Turkish native (not a supported native)');
+  console.log('— a Turkish native (a supported native since 2026-10-11)');
   await setNative({ code: 'tr' }); await open('#/fn/' + FN + '/de');
-  { const mine = await notesFor(), t = await page.locator('.lx-notesbox').innerText();
-    ok(await ex() === 'en|en' && mine.join() === 'type:agglutinating' && t.includes(AGG), 'the notes for the type of their language (agglutinating), in the master’s language: ' + mine.join(', '));
-    ok(!mine.includes('tr') && !/Turkish/.test(t), 'never the note written for Turkish (source material only)'); }
-  if (word) { await open('#/w/de/' + encodeURIComponent(word)); ok((await page.locator('.lx-wnotes [data-for]').evaluateAll(els => els.map(e => e.dataset.for))).join() === 'type:agglutinating', 'the word card too: the type’s note, not Turkish'); }
+  { const mine = await notesFor();
+    ok(await ex() === 'en|en' && mine.join() === 'tr' && (await notesFor('others')).includes('type:agglutinating'), 'the Turkish note from their language; the type notes with the others: ' + mine.join(', ')); }
+  if (word) { await open('#/w/de/' + encodeURIComponent(word)); ok((await notesFor('yours', '.lx-card')).join() === 'tr', 'the word card too: the Turkish note'); }
+  console.log('— a native language without notes of its own (Estonian)');
+  await setNative({ code: 'et' }); await open('#/fn/' + FN + '/de');
+  { const mine = await notesFor(), t = (await page.locator('.lx-gram [data-cmp="yours"]').allInnerTexts()).join('\n');
+    ok(mine.join() === 'type:agglutinating' && t.includes(AGG), 'the notes for the type of their language (agglutinating), at its place: ' + mine.join(', ')); }
 
   console.log('— an English native');
   await setNative({ code: 'en' }); await open('#/fn/' + FN + '/de');
-  { const mine = await notesFor(); ok(await ex() === 'en|en' && mine.join() === 'en' && /the \/ a work the same way/.test(await page.locator('.lx-notesbox').innerText()), 'only the English note: ' + mine.join(', ')); }
+  { const mine = await notesFor(); ok(await ex() === 'en|en' && mine.join() === 'en' && /the \/ a work the same way/.test((await page.locator('.lx-gram [data-cmp="yours"]').allInnerTexts()).join('\n')), 'only the English note: ' + mine.join(', ')); }
   await open('#/settings'); await page.selectOption('.lx-speaker', 'el'); await wait(900);
   await open('#/fn/' + FN + '/de');
   ok(await ex() === 'el|el' && /Τα γερμανικά/.test(await page.locator('.lx-gram').innerText()) && (await notesFor()).join() === 'en', 'the learner may choose the explanation language (settings.speaker): Greek texts, still the notes of their own language');

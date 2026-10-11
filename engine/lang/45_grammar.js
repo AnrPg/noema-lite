@@ -7,9 +7,9 @@ function blocks(c, list) {
   return (list || []).map(b => {
     const el = block1(c, b, t);
     if (!el || !b) return el;
-    const mine = N.contrastFor(b.notes, nativeL()), from = N.familiarFrom(UI.C, b.typology, knowsL(c));   // D19: only the learner's native language (or its type)
-    const body = mine.length ? h('div', {}, el, notesList(mine, c)) : el;
-    // D18: a part the learner knows from a native / C2 language is folded into one line
+    const notes = notesSections(b.notes, c, { compact: true }), from = N.familiarFrom(UI.C, b.typology, knowsL(c));   // R1: from the learner's languages · among the languages they learn
+    const body = notes.length ? h('div', {}, el, ...notes) : el;
+    // D18: a part the learner knows from their native / C1 / C2 languages is folded into one line
     return from.length ? h('details', { class: 'lx-familiar' }, h('summary', {}, '✓ ' + LT('lang.gram.familiarShow', { from: LLIST(from) })), body) : body;
   });
 }
@@ -20,7 +20,7 @@ function block1(c, b, t) {
     if (b.t === 'table') return h('div', { class: 'lx-compare' }, h('table', {}, b.head ? h('thead', {}, h('tr', {}, ...b.head.map(x => h('th', {}, t(x))))) : null,
       h('tbody', {}, ...(b.rows || []).map(r => h('tr', {}, ...r.map(x => h('td', {}, t(x))))))), b.caption ? h('div', { class: 'tiny' }, b.caption) : null);
     if (b.t === 'callout') return h('div', { class: 'lx-callout k-' + (b.kind || 'key') }, b.title ? h('b', {}, b.title + ' ') : null, t(b.text));
-    if (b.t === 'compare') return h('div', { class: 'lx-cmpblk' }, ...(b.items || []).map(it => h('div', {}, h('b', {}, t(it.title)), h('ul', { class: 'lx-list' }, ...(it.points || []).map(x => h('li', {}, t(x)))))));
+    if (b.t === 'compare') return h('div', { class: 'lx-cmpblk' }, ...(b.items || []).map(it => h('div', {}, h('b', {}, t(it.title)), h('ul', { class: 'lx-list' }, ...(it.points || []).map(x => h('li', {}, mdView(x, { forLang: c, inline: true })))))));   // R2
     if (b.t === 'flow') return h('div', { class: 'lx-flow' }, ...(b.items || []).map((x, i) => [i ? h('span', { class: 'lx-arrow' }, '→') : null, h('span', { class: 'chip' }, t(x))]));
     if (b.t === 'ask') return h('div', { class: 'lx-callout k-tip', 'data-sec': 'ask' }, h('b', {}, (b.title || LE('lang.expl.askYourself')) + ' '), h('ul', { class: 'lx-list' }, ...(b.questions || []).map(x => h('li', {}, t(x)))));
     if (b.t === 'terms') return h('dl', { class: 'lx-parts' }, ...(b.items || []).flatMap(x => [h('dt', {}, x.term), h('dd', {}, t(x.def))]));
@@ -28,23 +28,16 @@ function block1(c, b, t) {
     return b.text ? h('p', {}, t(b.text)) : null;
   }
 }
-const REL_SIGN = { same: '=', similar: '≈', different: '≠', new: '✨', trap: '⚠️' };
-const REL_LABEL = new Proxy({}, { get: (o, r) => typeof r === 'string' && REL_SIGN[r] ? REL_SIGN[r] + ' ' + LT('lang.gram.rel.' + r) : undefined });   // lang.gram.rel.<rel>
-/** Comparison notes in a list: who it is for (the native language, or its type / branch / family), how it relates, the text — foreign script in its font (c: the language on screen). */
-function notesList(notes, c = UI.lang) {
-  return h('ul', { class: 'lx-list lx-notes' }, ...notes.map(n => h('li', { 'data-for': n.for }, h('b', {}, capFirst(langName(n.for))), ' ', h('span', { class: 'lx-badge ctx' }, REL_LABEL[n.rel] || n.rel || ''), n.ai ? h('span', { class: 'lx-badge reg' }, LT('lang.gram.aiBadge')) : null, ' ', wordsIn(c, n.text))));
-}
-/** Comparison notes (D19): only those for the learner's native language — or, when it is not supported, for its branch, family or type
- *  (N.contrastFor). No notes for other languages, no fold of them; nothing until the native language is known. */
-function notesView(c, notes, fid) {
+/** Comparison notes (R1): the two sections — from the learner's languages (native first, then C1 / C2) and among the languages they
+ *  learn (with the links to them: seeAlso) — and, on request, Claude / Gemini for a native language the course has no note for. Until
+ *  the native language is known only the second section. → [element …] */
+function notesView(c, notes, fid, seeAlso = []) {
   const all = [...(notes || []), ...((UI.prefs.aiNotes || {})[c + '|' + fid] || [])];
-  const nat = nativeL(), mine = N.contrastFor(all, nat);
+  const nat = nativeL();
   const wantAI = UI.L.settings.aiNotes && window.NoemaLLM?.pick?.(UI.acc);
   const missing = nat && !all.some(n => (n.ai || nat.supported) && (n.for === nat.code || n.for === nat.name)) ? [nat] : [];   // D18: Claude / Gemini may write one for the learner's own language
-  const box = h('div', { class: 'lx-notesbox' });
-  box.append(mine.length ? h('div', { class: 'lx-callout k-key' }, h('b', {}, '🧭 ' + LT('lang.gram.fromYours') + ' '), notesList(mine, c)) : null,
-    wantAI && fid && missing.length ? h('button', { class: 'btn small', onclick: e => aiNotes(c, fid, missing, e.target) }, '✨ ' + LT('lang.gram.notesFor', { langs: LLIST(missing.map(k => k.name || langName(k.code))) })) : null);
-  return box;
+  const btn = wantAI && fid && missing.length ? h('button', { class: 'btn small', onclick: e => aiNotes(c, fid, missing, e.target) }, '✨ ' + LT('lang.gram.notesFor', { langs: LLIST(missing.map(k => k.name || langName(k.code))) })) : null;
+  return contrastView(contrastL(all, c, seeAlso), { fid, tail: btn });
 }
 /** D18: Claude / Gemini write notes for the learner's languages that the course has none for — only on request, with their key. */
 async function aiNotes(c, fid, langsWanted, btn) {
@@ -59,11 +52,12 @@ ${g.summary}
 
 For each of these languages the learner speaks, write ONE note (1–2 sentences, concrete, correct; give a word or form of that language when it helps) saying how the same point looks there and what transfers, what is new or what misleads: ${langsWanted.map(k => (k.name || profileOf(k.code)?.name || langDisplay(k.code)) + (k.code ? ` (code ${k.code})` : '')).join('; ')}.
 Use "for" = the code given (or the name when there is none). rel = same | similar | different | new | trap. If you are not sure about a language, leave it out.
-Write the notes in the language with code "${UI.C.explainLang}". ${N.nativeRule(nativeL())}` });
+Format of a text: one short sentence stays a sentence; two or more points are a list ("- " at the start of each line); an example goes on its own line starting with "→ "; **bold** for the one key word or sentence, *italic* for words cited; no headings, links or HTML.
+Write the notes in the language with code "${UI.C.explainLang}". ${N.nativeRule(nativeL(), N.ruleLangs(UI.C, UI.L, nativeL()))}` });
     /* i18n-ignore-end */
     const notes = (r.data.notes || []).map(n => ({ ...n, ai: true }));
     UI.prefs.aiNotes = { ...(UI.prefs.aiNotes || {}), [c + '|' + fid]: [...((UI.prefs.aiNotes || {})[c + '|' + fid] || []), ...notes] }; save();
-    btn.replaceWith(notesList(notes, c));
+    btn.replaceWith(...contrastView(N.contrastFor(notes, nativeL()), { compact: true }));
   } catch (e) { btn.disabled = false; btn.textContent = '✨ ' + ((window.NoemaI18n ? NoemaI18n.err(e) : e.message) || LT('lang.gram.failed')); }
 }
 /** Mixed text: runs of Arabic, Hebrew or Chinese script get their own span (font, direction), the rest stays as it is. */
@@ -108,12 +102,12 @@ function grammarCard(c, fid, { compact = false, onPick = null } = {}) {
     h('p', { class: 'lx-summary' }, wordsIn(c, g.summary)),
     ...blocks(c, g.blocks),
     g.procedure?.askYourself?.length ? h('div', { class: 'lx-callout k-tip', 'data-sec': 'ask' }, h('b', {}, '🤔 ' + LT('lang.gram.askYourself') + ' '), h('ol', { class: 'lx-list' }, ...g.procedure.askYourself.map(x => h('li', {}, wordsIn(c, x))))) : null,
-    g.traps?.length ? h('div', { class: 'lx-callout k-pitfall' }, h('b', {}, '⚠️ ' + LT('lang.gram.traps') + ' '), h('ul', { class: 'lx-list' }, ...g.traps.map(x => h('li', {}, wordsIn(c, x))))) : null,
+    g.traps?.length ? h('div', { class: 'lx-callout k-pitfall' }, h('b', {}, '⚠️ ' + LT('lang.gram.traps') + ' '), h('ul', { class: 'lx-list' }, ...g.traps.map(x => h('li', {}, mdView(x, { forLang: c, inline: true }))))) : null,
     ex.length ? h('details', { class: 'lx-sec', open: compact ? null : true }, h('summary', {}, LT('lang.gram.inSentences') + ' ', h('span', { class: 'tiny' }, LNUM(ex.length))),
       ...ex.map(s => h('div', { class: 'lx-ex' }, h('div', { class: 'lx-extext' }, sentenceView(c, s, s.unknown)), h('div', { class: 'lx-tr' }, s.gloss), s.unknown.length ? h('div', { class: 'tiny' }, '🆕 ', s.unknown.map(l => LX(c).lex[l].lemma + ' = ' + gloss(c, l)).join(' · ')) : h('div', { class: 'tiny' }, '✓ ' + LT('lang.gram.fitsWords'))))) : null,
-    notesView(c, g.notes, fid),
-    (g.seeAlso || []).length ? h('div', { class: 'lx-callout k-key', 'data-sec': 'also' }, h('b', {}, '🔗 ' + LT('lang.gram.seeAlso') + ' '), h('ul', { class: 'lx-list' }, ...g.seeAlso.map(x => h('li', {},
-      h('button', { class: 'btn ghost small', onclick: () => go(`#/fn/${encodeURIComponent(x.fn || fid)}/${x.lang}`) }, info(x.lang).flag + ' ' + (UI.C.functions[x.fn || fid]?.title || x.fn)), ' ', x.note || '')))) : null,
+    ...notesView(c, g.notes, fid, (g.seeAlso || []).filter(x => x.lang !== c)),   // R1: the links to the other course languages sit with their notes
+    (g.seeAlso || []).some(x => x.lang === c) ? h('div', { class: 'lx-callout k-key', 'data-sec': 'also' }, h('b', {}, '🔗 ' + LT('lang.gram.seeAlso') + ' '), h('ul', { class: 'lx-list' }, ...g.seeAlso.filter(x => x.lang === c).map(x => h('li', {},
+      h('button', { class: 'btn ghost small', onclick: () => go(`#/fn/${encodeURIComponent(x.fn || fid)}/${x.lang}`) }, info(x.lang).flag + ' ' + (UI.C.functions[x.fn || fid]?.title || x.fn)), ' ', x.note ? mdView(x.note, { forLang: c, inline: true }) : '')))) : null,
     acrossLanguages(fid, c, onPick || (x => go(`#/fn/${encodeURIComponent(fid)}/${x}`))),
     polyFnStrip(fid));   // P6: the comparison strip, the compare lane
 }
@@ -124,9 +118,10 @@ function typologyCard() {
   return h('article', { class: 'lx-card lx-typology' }, h('h3', {}, '🧬 ' + LE('lang.expl.fourWays')), h('p', {}, T.intro),
     ...T.types.map(t => h('details', { class: 'lx-sec', open: true, 'data-type': t.id }, h('summary', {}, h('b', {}, t.name), ' ', UI.C.languages.filter(c => LX(c).typology === t.id).map(c => info(c).flag).join(' ')),
       h('p', {}, t.summary), t.learnFirst ? h('p', { class: 'tiny' }, '🧭 ' + LE('lang.expl.learnFirst') + ' ', t.learnFirst) : null,
-      ...t.examples.map(e => h('div', { class: 'lx-ex' }, h('div', { class: 'lx-extext' }, info(e.lang).flag, ' ', UI.C.lang[e.lang] ? word(e.lang, e.text, { sub: false }) : h('span', { lang: e.lang }, e.text)), e.tr ? h('div', { class: 'lx-tr' }, e.tr) : null, h('div', { class: 'tiny' }, wordsIn('en', e.analysis)))),
+      ...t.examples.map(e => h('div', { class: 'lx-ex' }, h('div', { class: 'lx-extext' }, info(e.lang).flag, ' ', UI.C.lang[e.lang] ? word(e.lang, e.text, { sub: false }) : h('span', { lang: e.lang }, e.text)), e.tr ? h('div', { class: 'lx-tr' }, e.tr) : null, h('div', { class: 'tiny' }, scriptRuns(e.analysis, e.lang)))),
       t.languages ? h('p', { class: 'tiny' }, LE('lang.expl.languages') + ' ', t.languages) : null)),
-    T.spectrum ? h('div', { class: 'lx-callout k-key' }, h('b', {}, LE('lang.expl.spectrum') + ' '), T.spectrum) : null);
+    T.spectrum ? h('div', { class: 'lx-callout k-key' }, h('b', {}, LE('lang.expl.spectrum') + ' '), T.spectrum) : null,
+    ...contrastView(contrastL(T.notes, null)));   // R1: the four types seen from the learner's languages and the ones they learn
 }
 function overviewCard(c, g) {
   const T = UI.C.data.typology, type = T?.types.find(t => t.id === g.typology?.type);
@@ -138,7 +133,7 @@ function overviewCard(c, g) {
     h('h4', {}, '✨ ' + LT('lang.gram.special')),
     h('ul', { class: 'lx-list' }, ...(g.peculiarities || []).map(p => h('li', {}, h('b', {}, p.title), ' — ', wordsIn(c, p.text)))),
     g.pathNote ? h('div', { class: 'lx-callout k-tip' }, h('b', {}, '🛤️ ' + LT('lang.gram.path') + ' '), wordsIn(c, g.pathNote)) : null,
-    notesView(c, g.notes, 'fn.overview'),
+    ...notesView(c, g.notes, 'fn.overview', g.seeAlso || []),
     h('p', {}, h('button', { class: 'btn small', onclick: () => go('#/peculiar/' + c) }, '📚 ' + LT('lang.gram.library', { lang: info(c).name }))),
     learnerView(c),
     others.length ? h('p', { class: 'tiny' }, LT('lang.gram.sameOverview') + ' ', ...others.map(x => h('button', { class: 'btn ghost small', onclick: () => go(`#/fn/fn.overview/${x}`) }, info(x).flag + ' ' + info(x).label))) : null);
