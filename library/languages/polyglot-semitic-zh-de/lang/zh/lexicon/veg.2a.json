@@ -894,7 +894,7 @@
     },
     "funFacts": [
      "German Löwenzahn ‘lion’s tooth’ is named after the toothed leaves; Chinese 蒲公英 is a plant name of its own.",
-     "Children blow the seed heads away: 吹蒲公英."
+     "Children blow the seed heads away:\n→ 吹蒲公英."
     ],
     "pitfalls": [
      "英 here is ‘blossom’, not ‘England, English’ (英国, 英语)."
@@ -1131,7 +1131,7 @@
      "In Chinese 菊苣 is chicory / Belgian endive and 苦苣 is curly endive — keep the two apart."
     ],
     "subtleties": [
-     "菊 in plant names marks the daisy family: 菊苣, 菊芋, 苦菊."
+     "菊 in plant names marks the daisy family:\n→ 菊苣, 菊芋, 苦菊."
     ],
     "notes": [
      {
@@ -3106,7 +3106,7 @@
      "A translation name: many Chinese speakers won’t know it; 野菜 (‘wild vegetables’) is a different, general word."
     ],
     "subtleties": [
-     "苣 turns up in lettuce-type names: 莴苣, 菊苣, 苦苣, 野苣."
+     "苣 turns up in lettuce-type names:\n→ 莴苣, 菊苣, 苦苣, 野苣."
     ]
    }
   },
@@ -3353,7 +3353,7 @@
      "src": "character composition; Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "白萝卜 is a winter staple: 冬吃萝卜夏吃姜 ‘eat radish in winter, ginger in summer’, says a proverb."
+     "白萝卜 is a winter staple:\n→ 冬吃萝卜夏吃姜 ‘eat radish in winter, ginger in summer’, says a proverb."
     ],
     "pitfalls": [
      "卜 is toneless: báiluóbo."
@@ -3708,7 +3708,7 @@
      {
       "for": "en",
       "rel": "different",
-      "text": "English calls it red onion; Chinese sees purple: 紫洋葱."
+      "text": "English calls it red onion; Chinese sees purple:\n→ 紫洋葱."
      }
     ]
    }

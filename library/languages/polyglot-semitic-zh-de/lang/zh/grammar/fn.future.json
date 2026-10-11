@@ -311,12 +311,12 @@
   {
    "for": "es",
    "rel": "similar",
-   "text": "Iré (future tense) ~ 我会去; voy a ir ‘I’m going to go’ ~ 我要去 / 我打算去. Like Spanish mañana voy, Chinese often uses the plain verb with a time word: 我明天去."
+   "text": "Iré (future tense) ~ 我会去; voy a ir ‘I’m going to go’ ~ 我要去 / 我打算去.\n\nLike Spanish mañana voy, Chinese often uses the plain verb with a time word:\n→ 我明天去."
   },
   {
    "for": "en",
    "rel": "similar",
-   "text": "‘Will’ ~ 会 (a prediction), ‘be going to’ ~ 要 / 打算, ‘I’m leaving tomorrow’ ~ 我明天走 with no extra word. ‘Won’t’ is 不会, not 不要."
+   "text": "‘Will’ ~ 会 (a prediction), ‘be going to’ ~ 要 / 打算, ‘I’m leaving tomorrow’ ~ 我明天走 with no extra word.\n\n‘Won’t’ is 不会, not 不要."
   },
   {
    "for": "fr",
@@ -341,7 +341,7 @@
   {
    "for": "ar",
    "rel": "different",
-   "text": "Arabic marks the future with سَ / سَوْفَ before the conjugated imperfect (سَأُسَافِرُ ‘I will travel’); Chinese has no conjugation: 我会去, 我要去."
+   "text": "Arabic marks the future with سَ / سَوْفَ before the conjugated imperfect (سَأُسَافِرُ ‘I will travel’); Chinese has no conjugation:\n→ 我会去, 我要去."
   },
   {
    "for": "he",
@@ -356,7 +356,7 @@
   {
    "for": "ja",
    "rel": "same",
-   "text": "Japanese has no future tense either: 明日行きます is ‘I go / I’ll go tomorrow’, like 我明天去; つもり ‘intention’ ~ 打算."
+   "text": "Japanese has no future tense either:\n→ 明日行きます is ‘I go / I’ll go tomorrow’, like 我明天去;\n→ つもり ‘intention’ ~ 打算."
   },
   {
    "for": "ko",
@@ -396,7 +396,7 @@
   {
    "for": "sq",
    "rel": "similar",
-   "text": "Albanian do të + verb (do të shkoj ‘I will go’) is a particle before the verb, like 会 / 要; but the Albanian verb still changes for person (do të shkosh ‘you will go’). Chinese: 我会去, 你会去."
+   "text": "Albanian do të + verb (do të shkoj ‘I will go’) is a particle before the verb, like 会 / 要; but the Albanian verb still changes for person (do të shkosh ‘you will go’).\n\nChinese: 我会去, 你会去."
   },
   {
    "for": "pt",
@@ -411,12 +411,12 @@
   {
    "for": "type:agglutinating",
    "rel": "different",
-   "text": "If your future is a suffix with person endings, Chinese uses separate words before an unchanged verb — 我会去, 我要去, 我打算去 — or just a time word: 我明天去."
+   "text": "If your future is a suffix with person endings, Chinese uses separate words before an unchanged verb — 我会去, 我要去, 我打算去 — or just a time word:\n→ 我明天去."
   },
   {
    "for": "type:isolating",
    "rel": "same",
-   "text": "If your language marks the future with optional particles or just a time word, Chinese is the same: 我明天去; 会 and 要 add prediction or decision, and 快要 … 了 frames ‘about to’."
+   "text": "If your language marks the future with optional particles or just a time word, Chinese is the same:\n→ 我明天去;\n\n会 and 要 add prediction or decision, and 快要 … 了 frames ‘about to’."
   },
   {
    "for": "branch:Semitic",

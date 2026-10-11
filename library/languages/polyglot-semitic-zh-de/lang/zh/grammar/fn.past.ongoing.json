@@ -322,7 +322,7 @@
   {
    "for": "ar",
    "rel": "similar",
-   "text": "Arabic كَانَ + imperfect (كَانَ يَلْعَبُ ‘he used to play / he was playing’) does with an auxiliary what Chinese does with a frame word: 以前他常常玩 / 那时候他在玩."
+   "text": "Arabic كَانَ + imperfect (كَانَ يَلْعَبُ ‘he used to play / he was playing’) does with an auxiliary what Chinese does with a frame word:\n→ 以前他常常玩 / 那时候他在玩."
   },
   {
    "for": "he",
@@ -372,7 +372,7 @@
   {
    "for": "sq",
    "rel": "similar",
-   "text": "The Albanian imperfect (luaja) is both ‘was playing’ and ‘used to play’, and po luaja stresses the ongoing moment — like 在玩. For the habit Chinese uses a past frame and the bare verb: 小时候我常常玩."
+   "text": "The Albanian imperfect (luaja) is both ‘was playing’ and ‘used to play’, and po luaja stresses the ongoing moment — like 在玩.\n\nFor the habit Chinese uses a past frame and the bare verb:\n→ 小时候我常常玩."
   },
   {
    "for": "pt",
@@ -397,7 +397,7 @@
   {
    "for": "branch:Semitic",
    "rel": "similar",
-   "text": "If your language builds the past habitual with ‘was’ + an imperfect verb, Chinese does that job with a frame word and the bare verb (以前他常常玩), and ‘was doing at that moment’ with 在: 那时候他在玩."
+   "text": "If your language builds the past habitual with ‘was’ + an imperfect verb, Chinese does that job with a frame word and the bare verb (以前他常常玩), and ‘was doing at that moment’ with 在:\n→ 那时候他在玩."
   }
  ],
  "seeAlso": [
@@ -409,12 +409,12 @@
   {
    "lang": "ar",
    "fn": "fn.past.ongoing",
-   "note": "Arabic كَانَ + imperfect (كَانَ يَلْعَبُ ‘he used to play / was playing’); Chinese: 以前常常玩 / 那时候在玩."
+   "note": "Arabic كَانَ + imperfect (كَانَ يَلْعَبُ ‘he used to play / was playing’); Chinese:\n→ 以前常常玩 / 那时候在玩."
   },
   {
    "lang": "he",
    "fn": "fn.past.ongoing",
-   "note": "Hebrew past of הָיָה + participle (הָיִיתִי מְשַׂחֵק ‘I used to play’); Chinese: 以前 / 小时候 + bare verb."
+   "note": "Hebrew past of הָיָה + participle (הָיִיתִי מְשַׂחֵק ‘I used to play’); Chinese:\n→ 以前 / 小时候 + bare verb."
   },
   {
    "lang": "zh",

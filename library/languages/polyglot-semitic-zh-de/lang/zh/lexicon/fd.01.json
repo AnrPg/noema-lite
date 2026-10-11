@@ -138,13 +138,13 @@
      "The character 我 was first a drawing of a weapon with a toothed blade; it only stands for ‘I’ because the words sounded alike."
     ],
     "pitfalls": [
-     "我 is both ‘I’ and ‘me’ — no case change: 他喜欢我 ‘he likes me’.",
+     "我 is both ‘I’ and ‘me’ — no case change:\n→ 他喜欢我 ‘he likes me’.",
      "‘My’ is 我的 + noun (我的菜); 的 is dropped only before relatives and close relations (我妈妈, 我朋友).",
-     "Third-tone sandhi: 我很好 wǒ hěn hǎo is spoken wó hén hǎo (written tones stay)."
+     "Third-tone sandhi:\n→ 我很好 wǒ hěn hǎo is spoken wó hén hǎo (written tones stay)."
     ],
     "subtleties": [
      "Chinese leaves out 我 when it is obvious: asked 你喜欢吗？ you can answer just 喜欢。",
-     "In formal writing 我 can mean ‘our’: 我国 (our country), 我校 (our school)."
+     "In formal writing 我 can mean ‘our’:\n→ 我国 (our country), 我校 (our school)."
     ]
    },
    "features": {
@@ -770,7 +770,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Spoken Chinese has one third-person pronoun, tā. 他, 她 and 它 are distinctions of writing only — introduced in the early 20th century.",
+     "Spoken Chinese has one third-person pronoun, tā.\n\n他, 她 and 它 are distinctions of writing only — introduced in the early 20th century.",
      "它 began as a drawing of a snake; the snake later got its own character 蛇, with the insect radical 虫."
     ],
     "pitfalls": [
@@ -779,23 +779,23 @@
     ],
     "subtleties": [
      "Many people write 他 or 她 for their own pet, to show affection.",
-     "In writing 它 also refers to abstract things: 这个问题很重要，我们要解决它 ‘this problem is important, we must solve it’."
+     "In writing 它 also refers to abstract things:\n→ 这个问题很重要，我们要解决它 ‘this problem is important, we must solve it’."
     ],
     "notes": [
      {
       "for": "en",
       "rel": "trap",
-      "text": "English needs ‘it’ in such answers (It’s here); Chinese mostly leaves 它 out: 在这儿."
+      "text": "English needs ‘it’ in such answers (It’s here); Chinese mostly leaves 它 out:\n→ 在这儿."
      },
      {
       "for": "de",
       "rel": "trap",
-      "text": "German needs a pronoun (Es ist hier / Das ist hier); Chinese mostly leaves 它 out: 在这儿."
+      "text": "German needs a pronoun (Es ist hier / Das ist hier); Chinese mostly leaves 它 out:\n→ 在这儿."
      },
      {
       "for": "fr",
       "rel": "trap",
-      "text": "French says Il est ici / Le voici; Chinese mostly leaves 它 out: 在这儿."
+      "text": "French says Il est ici / Le voici; Chinese mostly leaves 它 out:\n→ 在这儿."
      }
     ]
    },
@@ -924,11 +924,11 @@
      "Chinese has only one plural ending for pronouns: 我们, 你们, 他们 — the same 们 everywhere."
     ],
     "pitfalls": [
-     "们 is not a general plural: 我们, 学生们 — but never *西红柿们.",
+     "们 is not a general plural:\n→ 我们, 学生们 — but never *西红柿们.",
      "我们 may exclude the listener; when you mean ‘you and I’, northerners prefer 咱们."
     ],
     "subtleties": [
-     "Before group nouns 的 is usually dropped: 我们学校 (our school), 我们公司 (our company)."
+     "Before group nouns 的 is usually dropped:\n→ 我们学校 (our school), 我们公司 (our company)."
     ]
    },
    "features": {
@@ -1039,7 +1039,7 @@
      "咱们 makes audible a difference that is often left to context: ‘we including you’ (咱们) vs ‘we, perhaps without you’ (我们)."
     ],
     "pitfalls": [
-     "Never use 咱们 when the listener is not part of the group: 我们明天走，你呢？ (not *咱们).",
+     "Never use 咱们 when the listener is not part of the group:\n→ 我们明天走，你呢？ (not *咱们).",
      "Tone: zán (2nd tone)."
     ],
     "subtleties": [
@@ -1285,7 +1285,7 @@
      "For things, Chinese usually repeats the noun or leaves the pronoun out rather than saying 它们."
     ],
     "subtleties": [
-     "他们 also works generically: 他们说… ‘they say…, people say…’."
+     "他们 also works generically:\n→ 他们说… ‘they say…, people say…’."
     ]
    },
    "features": {
@@ -1686,14 +1686,14 @@
      "In Classical Chinese 是 meant ‘this’ — the modern ‘is’ grew out of the pronoun."
     ],
     "pitfalls": [
-     "No 是 before adjectives: 西红柿很红 (the tomato is red), not *西红柿是红.",
+     "No 是 before adjectives:\n→ 西红柿很红 (the tomato is red), not *西红柿是红.",
      "The negation is always 不是 (bú shì), never *没是.",
      "As ‘yes’, 是 fits questions with 是 or confirms a statement; to 你要吗？ answer 要。, to 你有吗？ answer 有。"
     ],
     "subtleties": [
-     "是 can also say what fills a place: 桌子上都是书 ‘the table is covered with books’.",
+     "是 can also say what fills a place:\n→ 桌子上都是书 ‘the table is covered with books’.",
      "是的 is a softer, very common ‘yes’; a bare 是 can sound like ‘Yes, sir’.",
-     "To agree with what someone just said, 对 (duì, ‘right, correct’) is the most common ‘yes’: 你是老师？— 对。"
+     "To agree with what someone just said, 对 (duì, ‘right, correct’) is the most common ‘yes’:\n→ 你是老师？— 对。"
     ]
    },
    "features": {
@@ -1852,16 +1852,16 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "和 can also mean ‘Japanese’: 和服 (kimono), 和食 (Japanese cuisine)."
+     "和 can also mean ‘Japanese’:\n→ 和服 (kimono), 和食 (Japanese cuisine)."
     ],
     "pitfalls": [
      "和 joins nouns, not sentences: ‘I eat and he drinks’ is 我吃，他喝 — not *我吃和他喝.",
-     "In a list of three, 和 goes only before the last item: 西红柿、黄瓜和土豆.",
+     "In a list of three, 和 goes only before the last item:\n→ 西红柿、黄瓜和土豆.",
      "Other readings: hè (附和 ‘to echo’), huó (和面 ‘to knead dough’), hú (winning at mahjong)."
     ],
     "subtleties": [
-     "Verbs and adjectives are joined with 又…又…, 也 or 而且, not 和: 又便宜又新鲜 ‘cheap and fresh’.",
-     "For ‘with (a person)’ 和 and 跟 are interchangeable before 一起: 我和 / 跟朋友一起吃饭; 跟 is more colloquial (S11)."
+     "Verbs and adjectives are joined with 又…又…, 也 or 而且, not 和:\n→ 又便宜又新鲜 ‘cheap and fresh’.",
+     "For ‘with (a person)’ 和 and 跟 are interchangeable before 一起:\n→ 我和 / 跟朋友一起吃饭;\n\n跟 is more colloquial (S11)."
     ],
     "notes": [
      {
@@ -2053,13 +2053,13 @@
      "The progressive use (他在吃饭 ‘he is eating’) grew out of the place meaning — literally ‘he is at eating’."
     ],
     "pitfalls": [
-     "Known thing + 在 + place: 西红柿在这里 ‘the tomatoes are here’. Place + 有 + new thing: 这里有西红柿 ‘there are tomatoes here’.",
+     "Known thing + 在 + place:\n→ 西红柿在这里 ‘the tomatoes are here’.\n\nPlace + 有 + new thing:\n→ 这里有西红柿 ‘there are tomatoes here’.",
      "Negate with 不: 他不在 ‘he isn’t in’.",
      "Progressive 在 vs place 在: 他在吃饭 ‘he is eating’, 他在家吃饭 ‘he eats at home’ (or ‘is eating at home’) — the place version has a place after 在."
     ],
     "subtleties": [
-     "在 + place goes before the verb: 我在家吃饭, not *我吃饭在家.",
-     "The progressive can be strengthened with 正 and 呢: 他正在吃饭呢 ‘he’s eating right now’; its negation is 没(在): 他没在吃饭."
+     "在 + place goes before the verb:\n→ 我在家吃饭, not *我吃饭在家.",
+     "The progressive can be strengthened with 正 and 呢:\n→ 他正在吃饭呢 ‘he’s eating right now’; its negation is 没(在): 他没在吃饭."
     ]
    },
    "features": {
@@ -2412,7 +2412,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "女 is the radical of many characters: 妈 (mother), 姐 (elder sister), 她 (she) — and 好 ‘good’ is 女 ‘woman’ + 子 ‘child’."
+     "女 is the radical of many characters:\n→ 妈 (mother), 姐 (elder sister), 她 (she) — and 好 ‘good’ is 女 ‘woman’ + 子 ‘child’."
     ],
     "pitfalls": [
      "‘Female student’ is 女学生 or 女生, not *女人学生.",
@@ -2555,7 +2555,7 @@
     ],
     "pitfalls": [
      "A boy is 男孩, a grown man 男人 — don’t mix them up.",
-     "No 们 after a number: 两个男孩, not *两个男孩们."
+     "No 们 after a number:\n→ 两个男孩, not *两个男孩们."
     ],
     "subtleties": [
      "男孩, 男孩子 and 男孩儿 are one word in plain, fuller and erhua form."
@@ -2859,7 +2859,7 @@
      "A child is never 小人 — 小人 means a petty, mean person."
     ],
     "subtleties": [
-     "孩子们 is the children as a group, but not after a number: 三个孩子."
+     "孩子们 is the children as a group, but not after a number:\n→ 三个孩子."
     ]
    }
   },
@@ -3047,11 +3047,11 @@
      "As a component 人 often becomes 亻 on the left of a character: 你, 他, 们 and 位 all contain it."
     ],
     "pitfalls": [
-     "Counted with a measure word: 三个人 — but members of a household are counted with 口: 我家有四口人.",
-     "‘People’ is usually just 人 (很多人); 人们 never takes a number: *三个人们."
+     "Counted with a measure word: 三个人 — but members of a household are counted with 口:\n→ 我家有四口人.",
+     "‘People’ is usually just 人 (很多人); 人们 never takes a number:\n→ *三个人们."
     ],
     "subtleties": [
-     "Nationalities are country + 人: 希腊人 (Greek), 德国人 (German), 中国人 (Chinese).",
+     "Nationalities are country + 人:\n→ 希腊人 (Greek), 德国人 (German), 中国人 (Chinese).",
      "人 is the second syllable of 男人 and 女人, but each of those is a word of its own."
     ]
    }
@@ -3374,7 +3374,7 @@
      "Count with a measure word: 三个学生, or formally 三名学生 — never *三学生."
     ],
     "subtleties": [
-     "名 is the measure word of official counts (news, forms): 两名学生 ‘two students’."
+     "名 is the measure word of official counts (news, forms):\n→ 两名学生 ‘two students’."
     ]
    }
   },
@@ -3532,12 +3532,12 @@
      "Teachers’ Day is 10 September in mainland China; Taiwan celebrates it on 28 September, Confucius’ traditional birthday."
     ],
     "pitfalls": [
-     "老师 is a title placed after the surname: 王老师 — not *老师王; address your teacher as 老师, not by first name.",
+     "老师 is a title placed after the surname:\n→ 王老师 — not *老师王; address your teacher as 老师, not by first name.",
      "老 here does not mean ‘old’: a 25-year-old teacher is still 老师."
     ],
     "subtleties": [
      "In mainland China 老师 has spread as a polite address for writers, artists and other experts.",
-     "Measure word: 一位老师 (polite) or 一个老师; 位 is never used for yourself: 我是老师, not *我是一位老师."
+     "Measure word: 一位老师 (polite) or 一个老师; 位 is never used for yourself:\n→ 我是老师, not *我是一位老师."
     ]
    }
   },
@@ -3691,27 +3691,27 @@
     ],
     "pitfalls": [
      "Tone changes: yí before a 4th tone (一个 yí ge, 一下 yí xià), yì before the other tones (一本 yì běn, 一张 yì zhāng), but yī when counting, in numbers and at the end (第一 dì-yī, 十一 shíyī).",
-     "Between 一 and the noun there must be a measure word: 一本书, never *一书."
+     "Between 一 and the noun there must be a measure word:\n→ 一本书, never *一书."
     ],
     "subtleties": [
-     "Chinese uses 一 + measure word only when ‘one’ or a new thing matters: 这是书 ‘this is a book’ is fine.",
-     "一 + measure word introduces one new thing; a thing already known goes bare before the verb: 书在这里 ‘the book is here’."
+     "Chinese uses 一 + measure word only when ‘one’ or a new thing matters:\n→ 这是书 ‘this is a book’ is fine.",
+     "一 + measure word introduces one new thing; a thing already known goes bare before the verb:\n→ 书在这里 ‘the book is here’."
     ],
     "notes": [
      {
       "for": "en",
       "rel": "trap",
-      "text": "Don’t add 一个 for every English ‘a’: 这是书 ‘this is a book’, 我是学生 ‘I am a student’."
+      "text": "Don’t add 一个 for every English ‘a’:\n→ 这是书 ‘this is a book’, 我是学生 ‘I am a student’."
      },
      {
       "for": "de",
       "rel": "trap",
-      "text": "Don’t add 一个 for every ein: 这是书 ‘das ist ein Buch’."
+      "text": "Don’t add 一个 for every ein:\n→ 这是书 ‘das ist ein Buch’."
      },
      {
       "for": "fr",
       "rel": "trap",
-      "text": "Don’t add 一个 for every un / une: 这是书 ‘c’est un livre’."
+      "text": "Don’t add 一个 for every un / une:\n→ 这是书 ‘c’est un livre’."
      }
     ]
    },

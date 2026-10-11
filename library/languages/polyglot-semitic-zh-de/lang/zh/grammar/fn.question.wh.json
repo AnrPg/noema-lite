@@ -244,7 +244,7 @@
   ]
  },
  "traps": [
-  "*什么你喝？ — the object stays after the verb: 你喝什么？",
+  "*什么你喝？ — the object stays after the verb:\n→ 你喝什么？",
   "*你喝什么吗？ for ‘what do you drink?’ — with 吗, 什么 means ‘anything’.",
   "*你来什么时候？ → 你什么时候来？ (time before the verb).",
   "*几人, *几书 → 几个人, 几本书 (几 needs a measure word).",
@@ -381,7 +381,7 @@
   {
    "for": "el",
    "rel": "different",
-   "text": "Greek brings the question word to the front (Τι πίνεις;); Chinese leaves it where the answer goes: 你喝什么？"
+   "text": "Greek brings the question word to the front (Τι πίνεις;); Chinese leaves it where the answer goes:\n→ 你喝什么？"
   },
   {
    "for": "ru",
@@ -391,17 +391,17 @@
   {
    "for": "es",
    "rel": "different",
-   "text": "Spanish fronts the question word and often inverts (¿Qué bebes tú?); Chinese changes nothing: 你喝什么？"
+   "text": "Spanish fronts the question word and often inverts (¿Qué bebes tú?); Chinese changes nothing:\n→ 你喝什么？"
   },
   {
    "for": "en",
    "rel": "trap",
-   "text": "English fronts the question word and adds ‘do’ (What do you drink?); Chinese does neither: 你喝什么？ ‘you drink what?’. *什么你喝？ is the typical mistake."
+   "text": "English fronts the question word and adds ‘do’ (What do you drink?); Chinese does neither:\n→ 你喝什么？ ‘you drink what?’.\n\n*什么你喝？ is the typical mistake."
   },
   {
    "for": "fr",
    "rel": "similar",
-   "text": "Colloquial French already leaves the question word in place (Tu bois quoi ? Tu vas où ?) — the Chinese order: 你喝什么？ 你去哪里？"
+   "text": "Colloquial French already leaves the question word in place (Tu bois quoi ? Tu vas où ?) — the Chinese order:\n→ 你喝什么？ 你去哪里？"
   },
   {
    "for": "de",
@@ -426,12 +426,12 @@
   {
    "for": "ar",
    "rel": "different",
-   "text": "Arabic fronts the question word (mādhā tashrabu?); Chinese leaves it in place: 你喝什么？"
+   "text": "Arabic fronts the question word (mādhā tashrabu?); Chinese leaves it in place:\n→ 你喝什么？"
   },
   {
    "for": "he",
    "rel": "different",
-   "text": "Hebrew fronts the question word (ma ata shote?); Chinese leaves it in place: 你喝什么？"
+   "text": "Hebrew fronts the question word (ma ata shote?); Chinese leaves it in place:\n→ 你喝什么？"
   },
   {
    "for": "tr",
@@ -451,12 +451,12 @@
   {
    "for": "fi",
    "rel": "different",
-   "text": "Finnish fronts the question word (Mitä sinä juot?); Chinese leaves it in place: 你喝什么？"
+   "text": "Finnish fronts the question word (Mitä sinä juot?); Chinese leaves it in place:\n→ 你喝什么？"
   },
   {
    "for": "hu",
    "rel": "different",
-   "text": "Hungarian puts the question word right before the verb (Mit iszol?); Chinese puts it where the answer goes, usually after the verb: 你喝什么？"
+   "text": "Hungarian puts the question word right before the verb (Mit iszol?); Chinese puts it where the answer goes, usually after the verb:\n→ 你喝什么？"
   },
   {
    "for": "sw",
@@ -466,7 +466,7 @@
   {
    "for": "lg",
    "rel": "same",
-   "text": "Luganda leaves the question word after the verb (Ogenda wa? ‘you go where?’), as Chinese does: 你去哪里？"
+   "text": "Luganda leaves the question word after the verb (Ogenda wa? ‘you go where?’), as Chinese does:\n→ 你去哪里？"
   },
   {
    "for": "vi",
@@ -486,7 +486,7 @@
   {
    "for": "sq",
    "rel": "different",
-   "text": "Albanian fronts the question word (Çfarë pi? ‘what do you drink?’, Ku shkon? ‘where are you going?’); Chinese leaves it in place: 你喝什么？ 你去哪儿？"
+   "text": "Albanian fronts the question word (Çfarë pi? ‘what do you drink?’, Ku shkon? ‘where are you going?’); Chinese leaves it in place:\n→ 你喝什么？ 你去哪儿？"
   },
   {
    "for": "pt",
@@ -511,19 +511,19 @@
   {
    "for": "type:polysynthetic",
    "rel": "different",
-   "text": "If your question words open the sentence and the verb takes a question ending, Chinese keeps the statement order and changes only the unknown word: 你去哪儿？"
+   "text": "If your question words open the sentence and the verb takes a question ending, Chinese keeps the statement order and changes only the unknown word:\n→ 你去哪儿？"
   },
   {
    "for": "branch:Semitic",
    "rel": "different",
-   "text": "If your question word opens the sentence, Chinese leaves it where the answer goes: 你喝什么？ ‘you drink what?’."
+   "text": "If your question word opens the sentence, Chinese leaves it where the answer goes:\n→ 你喝什么？ ‘you drink what?’."
   }
  ],
  "seeAlso": [
   {
    "lang": "de",
    "fn": "fn.question.wh",
-   "note": "German moves the W-word to the front and the verb into second place (Was trinkst du?); Chinese moves nothing: 你喝什么？"
+   "note": "German moves the W-word to the front and the verb into second place (Was trinkst du?); Chinese moves nothing:\n→ 你喝什么？"
   },
   {
    "lang": "ar",

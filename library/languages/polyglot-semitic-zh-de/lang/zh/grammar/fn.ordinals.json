@@ -282,12 +282,12 @@
     {
      "for": "en",
      "rel": "trap",
-     "text": "English reads years in pairs (nineteen ninety-five); Chinese reads every digit: 一九九五年."
+     "text": "English reads years in pairs (nineteen ninety-five); Chinese reads every digit:\n→ 一九九五年."
     },
     {
      "for": "de",
      "rel": "trap",
-     "text": "German reads years in hundreds (neunzehnhundertfünfundneunzig); Chinese reads every digit: 一九九五年."
+     "text": "German reads years in hundreds (neunzehnhundertfünfundneunzig); Chinese reads every digit:\n→ 一九九五年."
     }
    ]
   },
@@ -487,7 +487,7 @@
   {
    "for": "el",
    "rel": "different",
-   "text": "Greek ordinals are adjectives that agree (πρώτος, πρώτη, πρώτο), and dates use cardinals except the first (πρώτη Μαΐου but δύο Μαΐου); Chinese ordinals never agree, and dates use plain numbers throughout: 五月一号, 五月二号."
+   "text": "Greek ordinals are adjectives that agree (πρώτος, πρώτη, πρώτο), and dates use cardinals except the first (πρώτη Μαΐου but δύο Μαΐου); Chinese ordinals never agree, and dates use plain numbers throughout:\n→ 五月一号, 五月二号."
   },
   {
    "for": "ru",
@@ -532,7 +532,7 @@
   {
    "for": "he",
    "rel": "different",
-   "text": "Hebrew ordinals agree in gender (רִאשׁוֹן / רִאשׁוֹנָה) and exist only up to ten; above ten the cardinal is used. Chinese builds every ordinal with 第."
+   "text": "Hebrew ordinals agree in gender (רִאשׁוֹן / רִאשׁוֹנָה) and exist only up to ten; above ten the cardinal is used.\n\nChinese builds every ordinal with 第."
   },
   {
    "for": "tr",
@@ -562,7 +562,7 @@
   {
    "for": "sw",
    "rel": "similar",
-   "text": "Swahili forms ordinals with -a + number (kitabu cha tatu ‘the third book’), with kwanza ‘first’ and pili ‘second’; Chinese uses 第 + number + measure word: 第三本书."
+   "text": "Swahili forms ordinals with -a + number (kitabu cha tatu ‘the third book’), with kwanza ‘first’ and pili ‘second’; Chinese uses 第 + number + measure word:\n→ 第三本书."
   },
   {
    "for": "vi",
@@ -577,32 +577,32 @@
   {
    "for": "it",
    "rel": "different",
-   "text": "Italian ordinals agree (primo / prima) and are regular from 11 on with -esimo (undicesimo); dates use cardinals except the first (il primo maggio, il due maggio). Chinese 第 + number never changes, and dates use plain numbers throughout: 五月一号, 五月二号."
+   "text": "Italian ordinals agree (primo / prima) and are regular from 11 on with -esimo (undicesimo); dates use cardinals except the first (il primo maggio, il due maggio).\n\nChinese 第 + number never changes, and dates use plain numbers throughout:\n→ 五月一号, 五月二号."
   },
   {
    "for": "sq",
    "rel": "different",
-   "text": "Albanian ordinals take the linking article and agree (i parë / e parë ‘first’, i dytë ‘second’), and dates use cardinals (më 1 maj); Chinese builds every ordinal with 第 for any noun (第一个, 第一天), and the date with a plain number: 五月一号."
+   "text": "Albanian ordinals take the linking article and agree (i parë / e parë ‘first’, i dytë ‘second’), and dates use cardinals (më 1 maj); Chinese builds every ordinal with 第 for any noun (第一个, 第一天), and the date with a plain number:\n→ 五月一号."
   },
   {
    "for": "pt",
    "rel": "different",
-   "text": "Portuguese ordinals agree (primeiro / primeira) and above ten are compounds to learn (décimo primeiro ‘eleventh’); Chinese builds every one with 第: 第十一. Dates use cardinals in both (2 de maio ~ 五月二号), but Chinese goes big → small: 2026年五月二号."
+   "text": "Portuguese ordinals agree (primeiro / primeira) and above ten are compounds to learn (décimo primeiro ‘eleventh’); Chinese builds every one with 第:\n→ 第十一.\n\nDates use cardinals in both (2 de maio ~ 五月二号), but Chinese goes big → small: 2026年五月二号."
   },
   {
    "for": "type:fusional",
    "rel": "different",
-   "text": "If your ordinals are adjectives with irregular forms and agreement, Chinese has one rule: 第 + the unchanged number (第一, 第二, 第十一), and a measure word before a noun: 第三个孩子."
+   "text": "If your ordinals are adjectives with irregular forms and agreement, Chinese has one rule: 第 + the unchanged number (第一, 第二, 第十一), and a measure word before a noun:\n→ 第三个孩子."
   },
   {
    "for": "type:agglutinating",
    "rel": "similar",
-   "text": "If you form ordinals with one suffix for every number, Chinese has the same idea as a prefix: 第 + number — 第一, 第二, 第一百."
+   "text": "If you form ordinals with one suffix for every number, Chinese has the same idea as a prefix:\n→ 第 + number — 第一, 第二, 第一百."
   },
   {
    "for": "type:isolating",
    "rel": "same",
-   "text": "If your ordinals are a word before the number, Chinese is the same: 第 + number; months and weekdays use the bare number (三月, 星期三)."
+   "text": "If your ordinals are a word before the number, Chinese is the same:\n→ 第 + number; months and weekdays use the bare number (三月, 星期三)."
   },
   {
    "for": "branch:Semitic",

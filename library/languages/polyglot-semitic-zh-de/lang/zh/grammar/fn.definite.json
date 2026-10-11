@@ -197,8 +197,8 @@
  },
  "traps": [
   "Do not use 这 just to mark a known thing: 这 means ‘this’ and points.",
-  "Do not add 一个 to every single new noun: 我是老师, not necessarily 我是一个老师.",
-  "A known thing goes before the verb: 钥匙在这里 ‘the keys are here’ — 这里有钥匙 (S06) means ‘there are keys here’."
+  "Do not add 一个 to every single new noun:\n→ 我是老师, not necessarily 我是一个老师.",
+  "A known thing goes before the verb:\n→ 钥匙在这里 ‘the keys are here’ — 这里有钥匙 (S06) means ‘there are keys here’."
  ],
  "needs": {},
  "generators": [
@@ -271,7 +271,7 @@
   {
    "for": "el",
    "rel": "different",
-   "text": "Greek uses ο / η / το for known things and ένας / μία / ένα for new ones; Chinese has no ‘the’, and 一 + measure word is the counterpart of ένας. Position does the rest: a known thing stands before the verb (书在这里)."
+   "text": "Greek uses ο / η / το for known things and ένας / μία / ένα for new ones; Chinese has no ‘the’, and 一 + measure word is the counterpart of ένας.\n\nPosition does the rest: a known thing stands before the verb (书在这里)."
   },
   {
    "for": "ru",
@@ -286,7 +286,7 @@
   {
    "for": "en",
    "rel": "different",
-   "text": "English the / a are obligatory; Chinese has neither. Word order does the work of ‘the’: a known thing before the verb (书在这里 ‘the book is here’), a new thing after 有 (这里有书 ‘there is a book here’)."
+   "text": "English the / a are obligatory; Chinese has neither.\n\nWord order does the work of ‘the’: a known thing before the verb (书在这里 ‘the book is here’), a new thing after 有 (这里有书 ‘there is a book here’)."
   },
   {
    "for": "fr",
@@ -306,7 +306,7 @@
   {
    "for": "fa",
    "rel": "similar",
-   "text": "Persian has no ‘the’; a new thing gets -i or yek (ketābi ‘a book’), a known object rā. Chinese has only 一 + measure word for ‘a’ and nothing for ‘the’ or a known object."
+   "text": "Persian has no ‘the’; a new thing gets -i or yek (ketābi ‘a book’), a known object rā.\n\nChinese has only 一 + measure word for ‘a’ and nothing for ‘the’ or a known object."
   },
   {
    "for": "mr",
@@ -326,7 +326,7 @@
   {
    "for": "tr",
    "rel": "same",
-   "text": "Turkish has no ‘the’ and uses bir for ‘a’ — exactly 一 + measure word. A known object takes -ı in Turkish (kitabı okudum); Chinese marks it with nothing."
+   "text": "Turkish has no ‘the’ and uses bir for ‘a’ — exactly 一 + measure word.\n\nA known object takes -ı in Turkish (kitabı okudum); Chinese marks it with nothing."
   },
   {
    "for": "ja",
@@ -371,12 +371,12 @@
   {
    "for": "it",
    "rel": "different",
-   "text": "Italian il / la / lo / un / una and the partitive del come with nearly every noun; Chinese has none — 我喝咖啡 is bevo il caffè and bevo del caffè alike. 一 + measure word appears only when ‘one’ or a new thing matters."
+   "text": "Italian il / la / lo / un / una and the partitive del come with nearly every noun; Chinese has none — 我喝咖啡 is bevo il caffè and bevo del caffè alike.\n\n一 + measure word appears only when ‘one’ or a new thing matters."
   },
   {
    "for": "sq",
    "rel": "different",
-   "text": "Albanian marks a known noun with an ending (libër → libri ‘the book’) and a new one with një (një libër); Chinese has neither: 书在这里 ‘the book is here’. 一 + measure word is the counterpart of një, and position does the work of the ending."
+   "text": "Albanian marks a known noun with an ending (libër → libri ‘the book’) and a new one with një (një libër); Chinese has neither:\n→ 书在这里 ‘the book is here’.\n\n一 + measure word is the counterpart of një, and position does the work of the ending."
   },
   {
    "for": "pt",
@@ -401,7 +401,7 @@
   {
    "for": "type:polysynthetic",
    "rel": "same",
-   "text": "If your language has no articles, neither has Chinese; known and new are shown by position: 书在这里 (known), 这里有书 (new)."
+   "text": "If your language has no articles, neither has Chinese; known and new are shown by position:\n→ 书在这里 (known), 这里有书 (new)."
   },
   {
    "for": "branch:Semitic",

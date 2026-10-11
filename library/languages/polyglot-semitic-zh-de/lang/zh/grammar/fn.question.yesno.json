@@ -221,17 +221,17 @@
   {
    "for": "ru",
    "rel": "different",
-   "text": "Russian asks by intonation (Ты пьёшь чай?) or with literary ли; Chinese adds 吗 at the end. да / нет become the verb: 喝 / 不喝, 有 / 没有."
+   "text": "Russian asks by intonation (Ты пьёшь чай?) or with literary ли; Chinese adds 吗 at the end. да / нет become the verb:\n→ 喝 / 不喝, 有 / 没有."
   },
   {
    "for": "es",
    "rel": "different",
-   "text": "Spanish asks by intonation (¿Bebes té?); Chinese adds 吗. sí / no become the verb: 喝 / 不喝."
+   "text": "Spanish asks by intonation (¿Bebes té?); Chinese adds 吗. sí / no become the verb:\n→ 喝 / 不喝."
   },
   {
    "for": "en",
    "rel": "different",
-   "text": "English inverts or uses ‘do’ (Do you drink tea?); Chinese keeps the statement and adds 吗: 你喝茶吗？ There is no all-purpose yes / no: 喝 / 不喝, 是 / 不是. To a negative question 对 confirms the negative (‘right, I don’t’)."
+   "text": "English inverts or uses ‘do’ (Do you drink tea?); Chinese keeps the statement and adds 吗: 你喝茶吗？ There is no all-purpose yes / no:\n→ 喝 / 不喝, 是 / 不是.\n\nTo a negative question 对 confirms the negative (‘right, I don’t’)."
   },
   {
    "for": "fr",
@@ -246,7 +246,7 @@
   {
    "for": "hi",
    "rel": "similar",
-   "text": "Hindi क्या at the start marks a yes/no question without changing the order (क्या तुम चाय पीते हो?) — like 吗, but at the beginning. हाँ / नहीं become the verb in Chinese."
+   "text": "Hindi क्या at the start marks a yes/no question without changing the order (क्या तुम चाय पीते हो?) — like 吗, but at the beginning.\n\nहाँ / नहीं become the verb in Chinese."
   },
   {
    "for": "fa",
@@ -276,17 +276,17 @@
   {
    "for": "ja",
    "rel": "same",
-   "text": "Japanese か at the end of the sentence (お茶を飲みますか) is exactly 吗. Japanese はい to a negative question also confirms the negative — like Chinese 对."
+   "text": "Japanese か at the end of the sentence (お茶を飲みますか) is exactly 吗.\n\nJapanese はい to a negative question also confirms the negative — like Chinese 对."
   },
   {
    "for": "ko",
    "rel": "different",
-   "text": "Korean marks questions with the verb ending and intonation (차 마셔요?); Chinese adds the separate word 吗. Korean 네 to a negative question confirms the negative — like 对."
+   "text": "Korean marks questions with the verb ending and intonation (차 마셔요?); Chinese adds the separate word 吗.\n\nKorean 네 to a negative question confirms the negative — like 对."
   },
   {
    "for": "fi",
    "rel": "similar",
-   "text": "Finnish puts -ko / -kö on the first word and moves the verb first (Juotko teetä?); Chinese changes nothing and adds 吗. But Finnish answers by repeating the verb (Juon / En juo) — exactly like 喝 / 不喝."
+   "text": "Finnish puts -ko / -kö on the first word and moves the verb first (Juotko teetä?); Chinese changes nothing and adds 吗.\n\nBut Finnish answers by repeating the verb (Juon / En juo) — exactly like 喝 / 不喝."
   },
   {
    "for": "hu",
@@ -321,22 +321,22 @@
   {
    "for": "sq",
    "rel": "similar",
-   "text": "Albanian a at the start marks a yes/no question (A pi çaj? ‘do you drink tea?’); Chinese 吗 does the same job at the end: 你喝茶吗？ po / jo become the verb in Chinese: 喝 / 不喝."
+   "text": "Albanian a at the start marks a yes/no question (A pi çaj? ‘do you drink tea?’); Chinese 吗 does the same job at the end: 你喝茶吗？ po / jo become the verb in Chinese:\n→ 喝 / 不喝."
   },
   {
    "for": "pt",
    "rel": "similar",
-   "text": "Portuguese asks by intonation (Bebes chá?) but answers like Chinese, by repeating the verb: — Bebo. / — Não bebo. ~ 喝。/ 不喝。 Chinese adds 吗 or uses 喝不喝. ou splits: 还是 in questions, 或者 in statements."
+   "text": "Portuguese asks by intonation (Bebes chá?) but answers like Chinese, by repeating the verb: — Bebo.\n\n/ — Não bebo.\n\n~ 喝。/ 不喝。 Chinese adds 吗 or uses 喝不喝. ou splits: 还是 in questions, 或者 in statements."
   },
   {
    "for": "type:fusional",
    "rel": "different",
-   "text": "If your language asks by intonation or inversion and answers ‘yes / no’, Chinese adds 吗 (or verb-不-verb) and answers with the verb: 喝 / 不喝, 是 / 不是."
+   "text": "If your language asks by intonation or inversion and answers ‘yes / no’, Chinese adds 吗 (or verb-不-verb) and answers with the verb:\n→ 喝 / 不喝, 是 / 不是."
   },
   {
    "for": "type:agglutinating",
    "rel": "similar",
-   "text": "If your question particle follows the word asked about and changes its form, Chinese 吗 always closes the sentence and never changes; answer by repeating the verb: 喝 / 不喝."
+   "text": "If your question particle follows the word asked about and changes its form, Chinese 吗 always closes the sentence and never changes; answer by repeating the verb:\n→ 喝 / 不喝."
   },
   {
    "for": "type:isolating",
@@ -346,12 +346,12 @@
   {
    "for": "type:polysynthetic",
    "rel": "different",
-   "text": "If questions are a special verb ending in your language, Chinese leaves the verb alone and adds 吗, or repeats the verb: 喝不喝？"
+   "text": "If questions are a special verb ending in your language, Chinese leaves the verb alone and adds 吗, or repeats the verb:\n→ 喝不喝？"
   },
   {
    "for": "branch:Semitic",
    "rel": "similar",
-   "text": "If a particle at the start marks your yes/no questions, Chinese has one at the end: 吗. Two words for ‘or’ — one for questions, one for statements — match 还是 / 或者."
+   "text": "If a particle at the start marks your yes/no questions, Chinese has one at the end:\n→ 吗.\n\nTwo words for ‘or’ — one for questions, one for statements — match 还是 / 或者."
   }
  ],
  "seeAlso": [
@@ -363,7 +363,7 @@
   {
    "lang": "ar",
    "fn": "fn.question.yesno",
-   "note": "Arabic opens the question with hal or ʾa-; Chinese closes it with 吗. Arabic أَمْ ‘or’ in questions vs أَوْ in statements is the same split as 还是 / 或者."
+   "note": "Arabic opens the question with hal or ʾa-; Chinese closes it with 吗.\n\nArabic أَمْ ‘or’ in questions vs أَوْ in statements is the same split as 还是 / 或者."
   },
   {
    "lang": "he",

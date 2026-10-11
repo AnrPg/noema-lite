@@ -387,22 +387,22 @@
   {
    "for": "el",
    "rel": "new",
-   "text": "Greek counts nouns directly (τρία βιβλία ‘three books’); measure words appear only with masses (ένα φλιτζάνι καφέ ~ 一杯咖啡). In Chinese every counted noun needs one: 三本书."
+   "text": "Greek counts nouns directly (τρία βιβλία ‘three books’); measure words appear only with masses (ένα φλιτζάνι καφέ ~ 一杯咖啡).\n\nIn Chinese every counted noun needs one:\n→ 三本书."
   },
   {
    "for": "ru",
    "rel": "new",
-   "text": "Russian counts directly and changes the noun after the number (две книги, пять книг); Chinese never changes the noun but puts a measure word in between: 两本书, 五本书. Colloquial штука (три штуки) is the nearest cousin of 个."
+   "text": "Russian counts directly and changes the noun after the number (две книги, пять книг); Chinese never changes the noun but puts a measure word in between:\n→ 两本书, 五本书.\n\nColloquial штука (три штуки) is the nearest cousin of 个."
   },
   {
    "for": "es",
    "rel": "new",
-   "text": "Spanish counts directly (tres libros) and uses measure words only for masses (una taza de café ~ 一杯咖啡, un trozo de pan ~ 一块面包). In Chinese the slot is obligatory for every noun."
+   "text": "Spanish counts directly (tres libros) and uses measure words only for masses (una taza de café ~ 一杯咖啡, un trozo de pan ~ 一块面包).\n\nIn Chinese the slot is obligatory for every noun."
   },
   {
    "for": "en",
    "rel": "new",
-   "text": "English needs measure words only for mass nouns (a cup of tea, a piece of bread, a head of lettuce); Chinese needs one for every noun, even countable ones: 一本书 ‘a book’, 一个人 ‘a person’."
+   "text": "English needs measure words only for mass nouns (a cup of tea, a piece of bread, a head of lettuce); Chinese needs one for every noun, even countable ones:\n→ 一本书 ‘a book’, 一个人 ‘a person’."
   },
   {
    "for": "fr",
@@ -412,22 +412,22 @@
   {
    "for": "de",
    "rel": "similar",
-   "text": "German has measure nouns for masses (eine Tasse Kaffee, ein Stück Kuchen, ein Blatt Papier) and Stück even for countables in shops (drei Stück); Chinese makes this obligatory for every noun, with the choice by shape (本, 张, 把)."
+   "text": "German has measure nouns for masses (eine Tasse Kaffee, ein Stück Kuchen, ein Blatt Papier) and Stück even for countables in shops (drei Stück).\n\nChinese makes this obligatory for every noun, with the choice by shape (本, 张, 把)."
   },
   {
    "for": "hi",
    "rel": "new",
-   "text": "Hindi counts directly (तीन किताबें ‘three books’) and uses measure words only for masses (एक कप चाय ~ 一杯茶). Chinese drops the plural ending but requires the measure word: 三本书."
+   "text": "Hindi counts directly (तीन किताबें ‘three books’) and uses measure words only for masses (एक कप चाय ~ 一杯茶).\n\nChinese drops the plural ending but requires the measure word:\n→ 三本书."
   },
   {
    "for": "fa",
    "rel": "similar",
-   "text": "Persian already has an optional classifier: do tā ketāb ‘two books’ (tā ~ 个), nafar for people (se nafar ~ 三个人). Chinese makes the classifier obligatory and has many more, chosen by shape and kind."
+   "text": "Persian already has an optional classifier: do tā ketāb ‘two books’ (tā ~ 个), nafar for people (se nafar ~ 三个人).\n\nChinese makes the classifier obligatory and has many more, chosen by shape and kind."
   },
   {
    "for": "mr",
    "rel": "new",
-   "text": "Marathi counts directly and marks the plural on the noun (तीन पुस्तके ‘three books’); Chinese marks no plural but needs a measure word: 三本书."
+   "text": "Marathi counts directly and marks the plural on the noun (तीन पुस्तके ‘three books’); Chinese marks no plural but needs a measure word:\n→ 三本书."
   },
   {
    "for": "ar",
@@ -442,22 +442,22 @@
   {
    "for": "tr",
    "rel": "similar",
-   "text": "Turkish tane is an optional classifier (iki tane kitap ‘two books’) — Chinese 个 in all but obligation. Turkish keeps the noun singular after numbers, as Chinese always does."
+   "text": "Turkish tane is an optional classifier (iki tane kitap ‘two books’) — Chinese 个 in all but obligation.\n\nTurkish keeps the noun singular after numbers, as Chinese always does."
   },
   {
    "for": "ja",
    "rel": "similar",
-   "text": "Japanese counters work the same way (枚 mai for flat things, 冊 satsu for books, 匹 hiki for small animals), but the same character can mislead: Japanese 本 hon counts long, thin things, Chinese 本 counts books — long things take 根 or 支. Japanese can put the counter after the noun (本を三冊); Chinese always says 三本书."
+   "text": "Japanese counters work the same way (枚 mai for flat things, 冊 satsu for books, 匹 hiki for small animals), but the same character can mislead: Japanese 本 hon counts long, thin things, Chinese 本 counts books — long things take 根 or 支.\n\nJapanese can put the counter after the noun (本を三冊); Chinese always says 三本书."
   },
   {
    "for": "ko",
    "rel": "similar",
-   "text": "Korean counters are close relatives: 개 (個) ~ 个, 장 (張) for paper and tickets ~ 张, 명 (名) for people ~ 名, 병 ~ 瓶. Korean puts them after the noun (사과 세 개), Chinese before it (三个苹果). Trap: Korean 잔 (盞) counts cups, Chinese 盏 counts lamps — cups are 杯."
+   "text": "Korean counters are close relatives: 개 (個) ~ 个, 장 (張) for paper and tickets ~ 张, 명 (名) for people ~ 名, 병 ~ 瓶.\n\nKorean puts them after the noun (사과 세 개), Chinese before it (三个苹果).\n\nTrap: Korean 잔 (盞) counts cups, Chinese 盏 counts lamps — cups are 杯."
   },
   {
    "for": "fi",
    "rel": "new",
-   "text": "Finnish counts directly, with the noun in the partitive singular (kolme kirjaa); Chinese never changes the noun but inserts a measure word: 三本书."
+   "text": "Finnish counts directly, with the noun in the partitive singular (kolme kirjaa); Chinese never changes the noun but inserts a measure word:\n→ 三本书."
   },
   {
    "for": "hu",
@@ -467,42 +467,42 @@
   {
    "for": "sw",
    "rel": "different",
-   "text": "Swahili counts with numerals that follow the noun and agree with its class (vitabu vitatu ‘three books’). Noun classes sort things by kind, a little like Chinese measure words — but in Chinese the measure word is a separate word before the noun: 三本书."
+   "text": "Swahili counts with numerals that follow the noun and agree with its class (vitabu vitatu ‘three books’).\n\nNoun classes sort things by kind, a little like Chinese measure words — but in Chinese the measure word is a separate word before the noun:\n→ 三本书."
   },
   {
    "for": "lg",
    "rel": "different",
-   "text": "Luganda numerals follow the noun and agree with its class (ebitabo bisatu ‘three books’). Chinese numerals never agree; the class-like information goes into the measure word before the noun: 三本书."
+   "text": "Luganda numerals follow the noun and agree with its class (ebitabo bisatu ‘three books’).\n\nChinese numerals never agree; the class-like information goes into the measure word before the noun:\n→ 三本书."
   },
   {
    "for": "vi",
    "rel": "same",
-   "text": "Vietnamese classifiers work just like Chinese ones: hai quyển sách ‘two books’ (quyển ~ 本), một cái bàn ‘a table’. Only the demonstrative differs: quyển sách này, but 这本书."
+   "text": "Vietnamese classifiers work just like Chinese ones: hai quyển sách ‘two books’ (quyển ~ 本), một cái bàn ‘a table’.\n\nOnly the demonstrative differs: quyển sách này, but 这本书."
   },
   {
    "for": "iu",
    "rel": "new",
-   "text": "Inuktitut has no classifiers: numbers stand with the noun, which itself shows singular, dual or plural (inuk, inuuk, inuit). Chinese never marks number on the noun, but always puts a measure word after the number."
+   "text": "Inuktitut has no classifiers: numbers stand with the noun, which itself shows singular, dual or plural (inuk, inuuk, inuit).\n\nChinese never marks number on the noun, but always puts a measure word after the number."
   },
   {
    "for": "it",
    "rel": "new",
-   "text": "Italian counts directly (tre libri) and uses measure words only for masses (una tazza di caffè ~ 一杯咖啡, un pezzo di pane ~ 一块面包). In Chinese every counted noun needs one: 三本书, 一个人."
+   "text": "Italian counts directly (tre libri) and uses measure words only for masses (una tazza di caffè ~ 一杯咖啡, un pezzo di pane ~ 一块面包).\n\nIn Chinese every counted noun needs one:\n→ 三本书, 一个人."
   },
   {
    "for": "sq",
    "rel": "new",
-   "text": "Albanian counts directly (tre libra) and uses measure words for masses (një filxhan kafe ~ 一杯咖啡, një copë bukë ~ 一块面包). Colloquial copë in counting (dy copë ‘two pieces’) is the nearest thing to 个; in Chinese the slot is obligatory: 两本书."
+   "text": "Albanian counts directly (tre libra) and uses measure words for masses (një filxhan kafe ~ 一杯咖啡, një copë bukë ~ 一块面包).\n\nColloquial copë in counting (dy copë ‘two pieces’) is the nearest thing to 个; in Chinese the slot is obligatory:\n→ 两本书."
   },
   {
    "for": "pt",
    "rel": "new",
-   "text": "Portuguese counts directly (três livros) and uses measure words only for masses (uma chávena de café ~ 一杯咖啡, um pedaço de pão ~ 一块面包). Chinese needs one for every counted noun: 三本书."
+   "text": "Portuguese counts directly (três livros) and uses measure words only for masses (uma chávena de café ~ 一杯咖啡, um pedaço de pão ~ 一块面包).\n\nChinese needs one for every counted noun:\n→ 三本书."
   },
   {
    "for": "type:fusional",
    "rel": "new",
-   "text": "If your language counts nouns directly and marks number or gender on them, Chinese does neither: the noun never changes, but a measure word stands between number and noun (三本书, 这张桌子). Learn each noun with its measure word, as you learn a gender."
+   "text": "If your language counts nouns directly and marks number or gender on them, Chinese does neither: the noun never changes, but a measure word stands between number and noun (三本书, 这张桌子).\n\nLearn each noun with its measure word, as you learn a gender."
   },
   {
    "for": "type:agglutinating",
@@ -512,12 +512,12 @@
   {
    "for": "type:isolating",
    "rel": "same",
-   "text": "If your language uses classifiers, Chinese works the same way: number / 这 / 那 + measure word + noun (两本书, 这张桌子). The individual measure words differ, so learn them with each noun."
+   "text": "If your language uses classifiers, Chinese works the same way: number / 这 / 那 + measure word + noun (两本书, 这张桌子).\n\nThe individual measure words differ, so learn them with each noun."
   },
   {
    "for": "type:polysynthetic",
    "rel": "new",
-   "text": "If your nouns themselves show singular, dual or plural, Chinese nouns show nothing — instead a measure word follows the number: 两个人, 三本书."
+   "text": "If your nouns themselves show singular, dual or plural, Chinese nouns show nothing — instead a measure word follows the number:\n→ 两个人, 三本书."
   },
   {
    "for": "branch:Semitic",
