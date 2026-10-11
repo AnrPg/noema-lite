@@ -142,6 +142,178 @@
   "@lc.expl.no": {
     "description": "Language course, word card: the value “no” of a yes/no parameter of the word."
   },
+  "lc.expl.param.present": "present",
+  "@lc.expl.param.present": {
+    "description": "Language course, word card, the parameters under the word (R3): label of the German verb’s present-tense forms that change (du fährst · er fährt). Short, lower case."
+  },
+  "lc.expl.param.preterite": "simple past (Präteritum)",
+  "@lc.expl.param.preterite": {
+    "description": "Language course, word card, the parameters under the word (R3): label of the German verb’s simple past form (fuhr). Keep the German term “Präteritum” in brackets. Short, lower case."
+  },
+  "lc.expl.param.participle": "past participle (Partizip II)",
+  "@lc.expl.param.participle": {
+    "description": "Language course, word card, the parameters under the word (R3): label of the German verb’s past participle, shown with its auxiliary (ist gefahren, hat gegessen). Keep the German term “Partizip II” in brackets. Short, lower case."
+  },
+  "lc.expl.fv.broken": "broken",
+  "@lc.expl.fv.broken": {
+    "description": "Language course, word card, the parameters under the word (R3): kind of an Arabic plural: a “broken” (internal) plural, made by changing the vowels inside the word. One or two words, lower case."
+  },
+  "lc.expl.fv.soundMasc": "sound masculine",
+  "@lc.expl.fv.soundMasc": {
+    "description": "Language course, word card, the parameters under the word (R3): kind of an Arabic plural: the sound masculine plural (ending -ūna). Lower case."
+  },
+  "lc.expl.fv.soundFem": "sound feminine",
+  "@lc.expl.fv.soundFem": {
+    "description": "Language course, word card, the parameters under the word (R3): kind of an Arabic plural: the sound feminine plural (ending -āt). Lower case."
+  },
+  "lc.expl.fv.triptote": "triptote",
+  "@lc.expl.fv.triptote": {
+    "description": "Language course, word card, the parameters under the word (R3): Arabic declension class: a noun with three case endings (grammar term). Lower case."
+  },
+  "lc.expl.fv.diptote": "diptote",
+  "@lc.expl.fv.diptote": {
+    "description": "Language course, word card, the parameters under the word (R3): Arabic declension class: a noun with only two case endings (grammar term). Lower case."
+  },
+  "lc.expl.fv.defective": "defective",
+  "@lc.expl.fv.defective": {
+    "description": "Language course, word card, the parameters under the word (R3): a declension or root class: “defective” (Arabic nouns ending in -in / roots with a weak last letter; grammar term). Lower case."
+  },
+  "lc.expl.fv.invariable": "invariable",
+  "@lc.expl.fv.invariable": {
+    "description": "Language course, word card, the parameters under the word (R3): a declension class: a word whose ending never changes. Lower case."
+  },
+  "lc.expl.fv.sound": "sound",
+  "@lc.expl.fv.sound": {
+    "description": "Language course, word card, the parameters under the word (R3): the declension of a sound (regular) plural, or a sound (regular) root. Lower case."
+  },
+  "lc.expl.fv.active": "active",
+  "@lc.expl.fv.active": {
+    "description": "Language course, word card, the parameters under the word (R3): kind of a participle: active (the one who does it). Lower case."
+  },
+  "lc.expl.fv.passive": "passive",
+  "@lc.expl.fv.passive": {
+    "description": "Language course, word card, the parameters under the word (R3): kind of a participle: passive (the one to whom it is done). Lower case."
+  },
+  "lc.expl.fv.weak": "weak",
+  "@lc.expl.fv.weak": {
+    "description": "Language course, word card, the parameters under the word (R3): a conjugation or declension class: weak (German grammar term: regular verbs; weak adjective endings). Lower case."
+  },
+  "lc.expl.fv.strong": "strong",
+  "@lc.expl.fv.strong": {
+    "description": "Language course, word card, the parameters under the word (R3): a conjugation or declension class: strong (German grammar term: verbs with a vowel change; strong adjective endings). Lower case."
+  },
+  "lc.expl.fv.mixed": "mixed",
+  "@lc.expl.fv.mixed": {
+    "description": "Language course, word card, the parameters under the word (R3): a conjugation or declension class: mixed (German grammar term). Lower case."
+  },
+  "lc.expl.fv.modal": "modal",
+  "@lc.expl.fv.modal": {
+    "description": "Language course, word card, the parameters under the word (R3): a German conjugation class: modal verbs (können, müssen …). Lower case."
+  },
+  "lc.expl.fv.irregular": "irregular",
+  "@lc.expl.fv.irregular": {
+    "description": "Language course, word card, the parameters under the word (R3): a conjugation or comparison class: irregular. Lower case."
+  },
+  "lc.expl.fv.none": "none",
+  "@lc.expl.fv.none": {
+    "description": "Language course, word card, the parameters under the word (R3): the value “none” of a parameter (e.g. Hebrew: no preposition or object marker). Lower case."
+  },
+  "lc.expl.fv.dual": "dual",
+  "@lc.expl.fv.dual": {
+    "description": "Language course, word card, the parameters under the word (R3): an Arabic declension class: the dual (forms for “two”). Lower case."
+  },
+  "lc.expl.fv.hollow": "hollow",
+  "@lc.expl.fv.hollow": {
+    "description": "Language course, word card, the parameters under the word (R3): an Arabic root class: “hollow” root (weak middle letter و / ي; grammar term). Lower case."
+  },
+  "lc.expl.fv.assimilated": "assimilated",
+  "@lc.expl.fv.assimilated": {
+    "description": "Language course, word card, the parameters under the word (R3): an Arabic root class: “assimilated” root (weak first letter و / ي; grammar term). Lower case."
+  },
+  "lc.expl.fv.doubled": "doubled",
+  "@lc.expl.fv.doubled": {
+    "description": "Language course, word card, the parameters under the word (R3): an Arabic root class: “doubled” (geminate) root (same 2nd and 3rd letter; grammar term). Lower case."
+  },
+  "lc.expl.fv.hamzated": "hamzated",
+  "@lc.expl.fv.hamzated": {
+    "description": "Language course, word card, the parameters under the word (R3): an Arabic root class: a root with a hamza (ء) among its letters (grammar term). Lower case."
+  },
+  "lc.expl.fv.regular": "regular",
+  "@lc.expl.fv.regular": {
+    "description": "Language course, word card, the parameters under the word (R3): a comparison or root class: regular. Lower case."
+  },
+  "lc.expl.fv.feminine": "feminine",
+  "@lc.expl.fv.feminine": {
+    "description": "Language course, word card, the parameters under the word (R3): a German noun declension class: the feminine declension (no ending in the singular). Lower case."
+  },
+  "lc.expl.fv.adjectival": "adjectival",
+  "@lc.expl.fv.adjectival": {
+    "description": "Language course, word card, the parameters under the word (R3): a German declension class: declined like an adjective (der Deutsche, ein Deutscher). Lower case."
+  },
+  "lc.expl.fv.informal": "informal",
+  "@lc.expl.fv.informal": {
+    "description": "Language course, word card, the parameters under the word (R3): a German pronoun or word: informal (du, hallo). Lower case."
+  },
+  "lc.expl.fv.formal": "formal",
+  "@lc.expl.fv.formal": {
+    "description": "Language course, word card, the parameters under the word (R3): a German pronoun or word: formal (Sie, guten Tag). Lower case."
+  },
+  "lc.expl.fv.neutral": "neutral",
+  "@lc.expl.fv.neutral": {
+    "description": "Language course, word card, the parameters under the word (R3): a German word’s formality: neutral (neither formal nor informal). Lower case."
+  },
+  "lc.expl.fv.noChange": "no change",
+  "@lc.expl.fv.noChange": {
+    "description": "Language course, word card, the parameters under the word (R3): German verb, present tense of du / er: the stem vowel does not change. Lower case."
+  },
+  "lc.expl.fv.notCompared": "not compared",
+  "@lc.expl.fv.notCompared": {
+    "description": "Language course, word card, the parameters under the word (R3): a German adjective or adverb without comparative and superlative. Lower case."
+  },
+  "lc.expl.fv.umlaut": "umlaut",
+  "@lc.expl.fv.umlaut": {
+    "description": "Language course, word card, the parameters under the word (R3): a German adjective compared with an umlaut (alt → älter). Keep “umlaut” or use the usual grammar term. Lower case."
+  },
+  "lc.expl.fv.foreign": "foreign",
+  "@lc.expl.fv.foreign": {
+    "description": "Language course, word card, the parameters under the word (R3): a German plural of a foreign word (Museum → Museen). Lower case."
+  },
+  "lc.expl.fv.clfGeneral": "general",
+  "@lc.expl.fv.clfGeneral": {
+    "description": "Language course, word card, the parameters under the word (R3): a Chinese measure word’s kind: the general measure word (个). Lower case."
+  },
+  "lc.expl.fv.clfSortal": "sortal",
+  "@lc.expl.fv.clfSortal": {
+    "description": "Language course, word card, the parameters under the word (R3): a Chinese measure word’s kind: a sortal classifier (for a kind of thing: 本 for books). Lower case."
+  },
+  "lc.expl.fv.clfContainer": "container",
+  "@lc.expl.fv.clfContainer": {
+    "description": "Language course, word card, the parameters under the word (R3): a Chinese measure word’s kind: a container (杯 cup, 瓶 bottle). Lower case."
+  },
+  "lc.expl.fv.clfPartitive": "partitive",
+  "@lc.expl.fv.clfPartitive": {
+    "description": "Language course, word card, the parameters under the word (R3): a Chinese measure word’s kind: a part of a whole (片 slice, 块 piece). Lower case."
+  },
+  "lc.expl.fv.clfUnit": "unit",
+  "@lc.expl.fv.clfUnit": {
+    "description": "Language course, word card, the parameters under the word (R3): a Chinese measure word’s kind: a unit of measure (公斤 kilo, 米 metre). Lower case."
+  },
+  "lc.expl.fv.clfCollective": "collective",
+  "@lc.expl.fv.clfCollective": {
+    "description": "Language course, word card, the parameters under the word (R3): a Chinese measure word’s kind: a group (群 crowd, 双 pair). Lower case."
+  },
+  "lc.expl.fv.clfVerbal": "verbal",
+  "@lc.expl.fv.clfVerbal": {
+    "description": "Language course, word card, the parameters under the word (R3): a Chinese measure word’s kind: counts actions (次 times, 遍 times through). Lower case."
+  },
+  "lc.expl.fv.before": "before",
+  "@lc.expl.fv.before": {
+    "description": "Language course, word card, the parameters under the word (R3): position of a word: before the word it goes with. Lower case."
+  },
+  "lc.expl.fv.after": "after",
+  "@lc.expl.fv.after": {
+    "description": "Language course, word card, the parameters under the word (R3): position of a word: after the word it goes with. Lower case."
+  },
   "lc.expl.tag.NOM": "nominative",
   "@lc.expl.tag.NOM": {
     "description": "Language course: a grammatical feature in words — case. Used in labels such as “nominative · singular”, in table rows and as an answer option. Lower case, short."

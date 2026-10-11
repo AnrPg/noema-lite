@@ -92,7 +92,8 @@ function exIntro(c, lid, done) {
     h('div', { class: 'lx-q' }, LT('lang.ex.newIn', { lang: info(c).flag + ' ' + info(c).label })),
     h('div', { class: 'lx-prompt' }, word(c, me.lemma, { lex: me })),
     h('div', { class: 'lx-meaning' }, me.senses?.[0] ? conceptPic(me.senses[0], 'lx-exemoji') : '', ' ', card.gloss),
-    card.parts.length ? h('dl', { class: 'lx-parts' }, ...card.parts.slice(0, 4).flatMap(([k, val]) => [h('dt', {}, k), h('dd', {}, /[֐-ۿ一-鿿]/.test(val) ? word(c, val, { sub: false }) : val)])) : null,
+    card.params?.length ? paramsBlock(c, card.params, { compact: true, max: 5 })   // R3: the word's main parameters
+      : card.parts.length ? h('dl', { class: 'lx-parts' }, ...card.parts.slice(0, 4).flatMap(([k, val]) => [h('dt', {}, k), h('dd', {}, /[֐-ۿ一-鿿]/.test(val) ? word(c, val, { sub: false }) : val)])) : null,
     e1 ? h('div', { class: 'lx-ex1' }, word(c, e1.text, { sub: false }), h('div', { class: 'tiny' }, e1.tr)) : null,
     card.sections.find(s => s.key === 'pitfalls') ? h('div', { class: 'lx-warn tiny' }, '⚠️ ', card.sections.find(s => s.key === 'pitfalls').items[0]) : null,
     h('div', { class: 'row' }, h('button', { class: 'btn primary lx-next', onclick: () => done(true) }, LT('lang.ex.gotIt') + ' →')));
