@@ -15,6 +15,8 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
 const until = async (fn, ms = 15000, step = 200) => { const t = Date.now(); while (Date.now() - t < ms) { try { if (await fn()) return true; } catch (e) { } await wait(step); } return false; };
 function errs(page, bag) { page.on('pageerror', e => bag.push('PAGEERROR ' + e.message)); page.on('console', m => { if (m.type() === 'error' && !/net::ERR|404|Failed to load resource/.test(m.text())) bag.push(m.text()); }); }
 const texts = (page, sel) => page.$$eval(sel, l => l.map(x => x.textContent.trim()));
+/** open a folded group of results on the search page */
+const openGroup = async (page, ty) => { await until(() => page.$(`.ns-srgrp[data-ty="${ty}"] .ns-srfold`), 8000); if (!(await page.$(`.ns-srgrp.open[data-ty="${ty}"]`))) await page.click(`.ns-srgrp[data-ty="${ty}"] .ns-srfold`); await wait(200); };
 const ready = async page => { await wait(600); return until(() => page.evaluate(() => { const I = NoemaSearch.index(); return !I.state.busy && I.records().length > 0; }), 60000, 300); };
 
 (async () => {
@@ -44,14 +46,20 @@ const ready = async page => { await wait(600); return until(() => page.evaluate(
   ok((await page.evaluate(() => location.hash)).startsWith('#/search?q=kinetic'), 'Enter opens the search page, with its own address');
 
   console.log('B. the page');
-  await until(() => page.$('.ns-searchview .ns-srchip'));
-  const chips = await page.$$eval('.ns-srchip', l => l.map(x => x.dataset.ty));
-  ok(chips[0] === 'all' && chips.includes('theory'), 'kind chips with counts: ' + chips.join(', '));
-  await page.click('.ns-srchip[data-ty="theory"]'); await wait(400);
-  ok((await page.evaluate(() => location.hash)).includes('t=theory') && await page.$$eval('.ns-srout .ns-sr', l => l.length && l.every(x => x.dataset.ty === 'theory' || x.closest('.ns-srexact'))), 'a chip filters the kinds; the address keeps it');
-  ok(await page.$eval('.ns-srfilters', f => f.hidden) , 'filters are folded under “Filters ▾”');
+  await until(() => page.$('.ns-searchview .ns-srgrp'));
+  ok(await page.$eval('.ns-srfilters', f => f.hidden) && !(await page.$('.ns-srchip:visible')), 'a quiet page: the kinds and the other filters are folded under “Filters ▾”');
+  ok(await page.$$eval('.ns-srgrp:not(.ns-srexact)', l => l.length && l.every(g => !g.classList.contains('open') && g.querySelector('.ns-srlist').hidden)), 'every group of results starts folded, with its count');
+  await openGroup(page, 'theory');
+  ok(await page.$$eval('.ns-srgrp[data-ty="theory"] .ns-sr', l => l.length >= 1 && l.length <= 3), 'open, a group shows its first 3 (and “+N more” below when there are more)');
+  ok(!(await page.$('.ns-srpractise')), 'no “Practise” while the results hold things that cannot be practised');
   await page.click('.ns-srfilt'); await wait(200);
+  const chips = await page.$$eval('.ns-srfilters .ns-srchip', l => l.map(x => x.dataset.ty));
+  ok(chips[0] === 'all' && chips.includes('theory'), 'Filters ▾: what to show, with counts: ' + chips.join(', '));
+  await page.click('.ns-srchip[data-ty="theory"]'); await wait(400);
+  await openGroup(page, 'theory');
+  ok((await page.evaluate(() => location.hash)).includes('t=theory') && await page.$$eval('.ns-srout .ns-sr', l => l.length && l.every(x => x.dataset.ty === 'theory' || x.closest('.ns-srexact'))), 'a kind chip filters the results; the address keeps it');
   ok(await page.$eval('.ns-srfilters', f => !f.hidden && f.textContent.includes('Not read yet')), 'filters: status (unread, unsolved, wrong)');
+  ok(await page.evaluate(() => /leafing through every page/.test(NoemaSearch.words.en.indexing) && /ξεφυλλίζω/.test(NoemaSearch.words.el.indexing)), 'while the app is read for the first time, a friendly line says what is happening');
   await page.goto(url + '#/search?q=squared%20velocity'); await page.reload(); await ready(page); await until(() => page.$('.ns-srexact'), 8000);
   ok(await page.$('.ns-srexact .ns-sr[data-ty="trap"]'), 'an exact title goes on top: the trap “Squared velocity”');
   await page.screenshot({ path: SHOTS + '/sr_b_page.png', fullPage: true });
@@ -59,11 +67,11 @@ const ready = async page => { await wait(600); return until(() => page.evaluate(
   console.log('C. stable addresses');
   await page.click('.ns-srexact .ns-sr[data-ty="trap"]');
   ok(await until(() => page.evaluate(() => /^#\/ch\/ch01\/traps\/p/.test(location.hash) && document.querySelector('[data-pid].ns-hit'))), 'a trap opens in its chapter’s Traps, highlighted: ' + await page.evaluate(() => location.hash));
-  await page.goto(url + '#/search?q=kinetic&t=theory'); await page.reload(); await ready(page); await until(() => page.$('.ns-sr[data-ty="theory"]'), 8000);
+  await page.goto(url + '#/search?q=kinetic&t=theory'); await page.reload(); await ready(page); await openGroup(page, 'theory');
   await page.click('.ns-sr[data-ty="theory"]');
   ok(await until(() => page.evaluate(() => /^#\/s\/ch01-s01\/b/.test(location.hash) && document.querySelector('[data-bid].ns-hit'))), 'a theory block opens in its section, scrolled to and highlighted');
-  await page.goto(url + '#/search?q=formula%20for&t=card'); await page.reload(); await ready(page); await until(() => page.$('.ns-sr[data-ty="card"]'), 8000);
-  await page.click('.ns-sr[data-ty="card"]');
+  await page.goto(url + '#/search?q=formula%20for&t=card'); await page.reload(); await ready(page); await until(() => page.$('.ns-srgrp[data-ty="card"], .ns-srexact .ns-sr[data-ty="card"]'), 8000); if (await page.$('.ns-srgrp[data-ty="card"]')) await openGroup(page, 'card');
+  await page.locator('.ns-sr[data-ty="card"]:visible', { hasText: 'Formula for' }).first().click();
   ok(await until(() => page.evaluate(() => location.hash === '#/cards/ch01-f001' && document.body.textContent.includes('Formula for'))), 'a flashcard opens alone, by its id');
 
   console.log('D. conversations');
@@ -71,7 +79,8 @@ const ready = async page => { await wait(600); return until(() => page.evaluate(
     context: { type: 'exercise', id: 'ch01-e001', label: 'Exercise', origin: { via: 'explainDifferently', ex: 'ch01-e001' } }, messages: [{ role: 'user', content: 'why is the velocity squared in kinetic energy?' }, { role: 'assistant', content: 'Because work adds up over distance.' }] }); });
   await page.goto(url + '#/search?q=velocity%20squared'); await page.reload(); await ready(page);
   await until(() => page.evaluate(() => NoemaSearch.index().records().some(r => r.ty === 'convo')), 20000);
-  ok(await until(() => page.$('.ns-srgrp[data-ty="convo"] .ns-sr, .ns-srexact .ns-sr[data-ty="convo"]'), 10000), 'conversations are their own group');
+  ok(await until(() => page.$('.ns-srgrp[data-ty="convo"]'), 10000), 'conversations are their own group');
+  await openGroup(page, 'convo');
   const via = await page.$eval('.ns-sr[data-ty="convo"] .ns-srvia', x => x.textContent).catch(() => '');
   ok(/Explain/i.test(via) && via.includes('“Explain differently”') && /exercise 1 of chapter 1/.test(via), 'with the style and where it began: ' + via);
   await page.click('.ns-sr[data-ty="convo"]');
@@ -79,15 +88,22 @@ const ready = async page => { await wait(600); return until(() => page.evaluate(
 
   console.log('E. collections and the practice round');
   await page.goto(url + '#/search?q=energy'); await page.reload(); await ready(page); await until(() => page.$('.ns-srsave'), 8000);
+  ok((await page.$eval('.ns-srsave', b => b.textContent)) === 'Keep this search', 'the button says what it does: “Keep this search”');
   answer = 'Energy things'; await page.click('.ns-srsave'); await wait(500);
   ok(await page.evaluate(() => NoemaSearch.collections().some(c => c.name === 'Energy things' && c.p.q === 'energy')) && (await page.evaluate(() => location.hash)).includes('c=q'), 'save the search as a collection (kept with the account)');
   await page.goto(url + '#/search'); await page.reload(); await until(() => page.$('.ns-srcols'), 8000);
-  ok((await texts(page, '.ns-srcols .ns-item b')).includes('Energy things'), 'the empty page lists the collections');
+  ok((await texts(page, '.ns-srcols .ns-item b')).includes('Energy things') && (await texts(page, '.ns-srcols .ns-label'))[0] === 'Saved searches', 'the empty page lists the saved searches');
+  await page.goto(url + '#/search?q=kinetic'); await page.reload(); await until(() => page.$('#ns-top .ns-menubtn'), 8000);
+  await page.click('#ns-top .ns-menubtn'); await page.waitForSelector('.ns-pop');
+  ok((await texts(page, '.ns-pop button')).some(t => t.startsWith('Saved searches (1)')), 'the search page’s ⋮ leads to the saved searches');
+  await page.locator('.ns-pop button', { hasText: 'Saved searches' }).first().click(); await wait(600);
+  ok(await page.evaluate(() => location.hash === '#/search') && await page.$('.ns-srcols'), '… which open the list');
   ok(await page.$('.ns-srrecent'), '… and recent searches on this device');
   await page.click('.ns-srcols .ns-menubtn'); await page.waitForSelector('.ns-pop');
   answer = 'Energy'; await page.locator('.ns-pop button', { hasText: 'Rename' }).first().click(); await wait(400);
   ok(await page.evaluate(() => NoemaSearch.collections()[0]?.name === 'Energy'), 'rename a collection');
-  await page.goto(url + '#/search?q=E_k'); await page.reload(); await ready(page); await until(() => page.$('.ns-srpractise'), 8000);
+  await page.goto(url + '#/search?q=E_k&t=exercise,card'); await page.reload(); await ready(page);
+  ok(await until(() => page.$('.ns-srpractise'), 8000), '“Practise these results” shows when the filter keeps only things that can be practised');
   await page.click('.ns-srpractise');
   ok(await until(() => page.evaluate(() => location.hash === '#/srun' && NoemaSearch.round()?.steps?.length > 0), 15000), 'Practise these results: a round, its first step opens: ' + await page.evaluate(() => JSON.stringify(NoemaSearch.round()?.steps?.map(s => s.kind))));
   await page.screenshot({ path: SHOTS + '/sr_e_round.png' });
@@ -96,16 +112,18 @@ const ready = async page => { await wait(600); return until(() => page.evaluate(
   await page.evaluate(() => NoemaSearch.goStep(1)); await wait(1200);
   ok(await until(() => page.evaluate(() => location.hash === '#/srun' && NoemaSearch.round()?.i === 1 && document.body.textContent.includes('Formula for'))), 'the next step: the flashcards found');
   await page.evaluate(() => NoemaSearch.goStep(99)); await wait(800);
-  ok(await page.evaluate(() => !NoemaSearch.round() && location.hash.startsWith('#/search?q=E_k')), 'the end of the round goes back to the results');
+  ok(await page.evaluate(() => !NoemaSearch.round() && location.hash.startsWith('#/search?q=E_k&t=exercise')), 'the end of the round goes back to the results');
   await page.goto(url + '#/search'); await page.reload(); await until(() => page.$('.ns-srcols'), 8000);
   await page.click('.ns-srcols .ns-menubtn'); await page.waitForSelector('.ns-pop');
   await page.locator('.ns-pop button', { hasText: 'Delete' }).first().click(); await wait(400);
   ok(await page.evaluate(() => NoemaSearch.collections().length === 0), 'delete a collection');
 
   console.log('F. Greek');
-  await page.evaluate(() => NoemaThemes.putSettings({ lang: 'el' })); await page.goto(url + '#/search?q=kinetic'); await page.reload(); await ready(page); await until(() => page.$('.ns-srchip'), 8000);
+  await page.evaluate(() => NoemaThemes.putSettings({ lang: 'el' })); await page.goto(url + '#/search?q=kinetic'); await page.reload(); await ready(page); await until(() => page.$('.ns-srfilt'), 8000);
+  await page.click('.ns-srfilt'); await wait(200);
   ok(await page.$eval('.ns-srchip[data-ty="all"]', b => b.textContent.startsWith('Όλα')) && (await page.$eval('.ns-srfilt', b => b.textContent)).startsWith('Φίλτρα'), 'Greek words: ' + (await texts(page, '.ns-srchip')).join(' · '));
-  ok(await page.$eval('.ns-sr .ns-srw', x => x.textContent.trim() === 'Γνώσεις'), 'Knowledge = Γνώσεις on each result');
+  await openGroup(page, 'theory');
+  ok(await page.$eval('.ns-srgrp[data-ty="theory"] .ns-sr .ns-srw', x => x.textContent.trim() === 'Γνώσεις'), 'Knowledge = Γνώσεις on each result');
 
   ok(!E.length, 'no page errors: ' + E.slice(0, 5).join(' | '));
   await browser.close();

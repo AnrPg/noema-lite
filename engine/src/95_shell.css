@@ -721,7 +721,16 @@ body.ns-on .cm-tmap .cm-nextup{box-shadow:none}
 .ns-srbar{position:relative}
 .ns-srin{width:100%;font-size:1.05rem;padding-inline:14px}
 .ns-searchview{gap:14px}
-.ns-srrow{display:flex;align-items:flex-start;gap:8px;flex-wrap:nowrap}
+.ns-srrow{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ns-srrow .ns-sracts{margin:0;gap:8px}
+.ns-srkinds{display:grid;gap:8px}
+.ns-srkgrp{display:grid;gap:4px}
+.ns-srkgrp small{font-size:.76rem}
+.ns-srkinds .ns-srchips{flex-wrap:wrap;overflow:visible}
+.ns-srfold{width:100%;background:none;border:0;padding:6px 0;color:inherit;cursor:pointer;text-align:left}
+.ns-srfold .ns-chev{margin-left:auto;transition:transform .2s;color:var(--ink3)}
+.ns-srgrp.open .ns-srfold .ns-chev{transform:rotate(90deg)}
+.ns-srprog{display:grid;gap:4px}
 .ns-srchips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0;padding-bottom:2px}
 .ns-srchip{flex:none;display:inline-flex;align-items:center;gap:6px;min-height:32px;padding:0 12px;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink2);font-size:.86rem;font-weight:700;white-space:nowrap}
 .ns-srchip .n{font-weight:400;color:var(--ink3);font-size:.8rem}

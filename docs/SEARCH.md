@@ -16,21 +16,27 @@ the page, collections, the practice round, its words), engine hooks in `engine/s
 |---|---|
 | 🔎 in the top bar, `/`, Ctrl K / ⌘K | The quick sheet: type, see the best 3 of each kind; Enter or "Open in a page" opens the page |
 | `#/search?q=…` | The page. Everything it shows lives in the address, so it can be bookmarked, shared and saved |
-| Knowledge tab | A quiet "Collections (N)" link next to the Shelf link |
+| Knowledge tab | A quiet "Saved searches (N)" link next to the Shelf link |
+| ⋮ on the search page | Saved searches (N); on a saved search also practise, rename, copy link, delete |
 
 Address keys: `q` the words · `w` `know`/`lang` · `t` kinds (comma list) · `h` + `it` the place the search was opened
 from (`subj:<id>`, `cur:<id>`, `course:<id>`) and its title · `in=1` only there · `lg` a language code · `st`
 `unread`/`unsolved`/`wrong` · `c` the collection shown.
 
 Default scope is everywhere; when opened from a subject, a Roadmap or a course the sheet and the filters offer
-"Here: <title>". Filters (folded under "Filters ▾"): side (only when the learner learns both), scope, language, status.
-Kind chips with counts filter the kinds (several at once).
+"Here: <title>". The page stays quiet: everything that narrows the results is folded under "Filters ▾": what to show
+(kind chips with counts, several at once, grouped Knowledge · Languages · Conversations), side (only when the learner
+learns both), scope, language, status.
+
+While the app is read for the first time on a device (or after an update of the index format), a friendly line says so
+and shows how far it is; results found so far appear at once. Later only changed sources are read again.
 
 ## 2. Results
 
 Grouped by kind, always in this order: Roadmap · Station · Subject · Chapter · Section · Theory · Exercise · Flashcard ·
 Trap · Debug drill · Source · Word · Meaning · Grammar · Lesson · Field · Sentence · Peculiarity · Conversation.
-Exact matches (a title or a word equal to the query) go on top and are not repeated in their group.
+Exact matches (a title or a word equal to the query) go on top and are not repeated in their group. On the page every
+group starts folded with its count; opened, it shows 3 results and "+N more" below.
 
 Each result shows: kind · the field that matched (Chapter · Subtitle, Theory · Table, Station · Learning goals…), a
 **Knowledge** or **Languages** pill, the title, a snippet with the words marked and a little before and after, and
@@ -89,12 +95,14 @@ origin: { via, ex?, sec?, ch?, bid?, card?, drill?, what?, world?, course?, lang
 course). The result shows e.g. *Explain · from "Explain differently" · exercise 3 of chapter 2 «…»* or *Socratic ·
 from "Explain this" · table in "Metastore"*. Older conversations without `origin` show what their context says.
 
-## 6. Collections and the practice round
+## 6. Saved searches and the practice round
 
-A collection is a saved search (its address keys and a name), kept with the account (`a:searches`, synced). The empty
-search page lists collections (⋮: open, practise, rename, copy link, delete) and the last 8 searches of this device.
+"Keep this search" saves the search (its address keys and a name) with the account (`a:searches`, synced; called
+collections in the code). Opened again, a saved search shows its results as they are now. The empty search page lists
+the saved searches (⋮: open, practise, rename, copy link, delete) and the last 8 searches of this device.
 
-"Practise these results" builds a round from what is shown: per subject its exercises found (≤60) then its flashcards
+"Practise these results" shows only when Filters ▾ keeps nothing but kinds that can be practised (exercises,
+flashcards, words, meanings, vocabulary fields, lessons). It builds a round from what is shown: per subject its exercises found (≤60) then its flashcards
 found (≤60), and per language course the recall drill of the vocabulary fields of the words and meanings found, and
 the lessons found (≤8 language steps). Steps run one after another (`#/srun` in the engine, the language routes for
 the language steps); the end of each step offers "Next: …" and the end of the round returns to the results. The round

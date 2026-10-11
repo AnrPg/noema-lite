@@ -16,7 +16,7 @@ window.NoemaSearch = (() => {
   const T = {
     en: {
       search: 'Search', placeholder: 'Search everything…', openPage: 'Open in a page', exact: 'Exact match', more: '+{n} more', none: 'Nothing found for “{q}”.', noneTip: 'Try another word, or fewer filters.',
-      typeMore: 'Type at least two letters.', indexing: 'Preparing the search: {done} of {total}', indexingWhat: 'reading {what}', results: '{n} results', results1: '1 result',
+      typeMore: 'Type at least two letters.', indexing: 'Hold on: I am leafing through every page of the app, so nothing escapes your search ({done} of {total}).', indexingWhat: 'This happens once on each device, then only for what changes. What is found so far is shown below.', results: '{n} results', results1: '1 result',
       filters: 'Filters', filtersN: 'Filters ({n})', all: 'All', world: 'Part of the app', scope: 'Where', everywhere: 'Everywhere', hereIs: 'Here: {title}', lang: 'Language', status: 'Status',
       stUnread: 'Not read yet', stUnsolved: 'Not solved yet', stWrong: 'My mistakes', clear: 'Clear the filters',
       t_roadmap: 'Roadmaps', t_station: 'Stations', t_subject: 'Subjects', t_chapter: 'Chapters', t_section: 'Sections', t_theory: 'Theory', t_exercise: 'Exercises', t_card: 'Flashcards', t_trap: 'Traps', t_drill: 'Debug drills', t_source: 'Sources', t_convo: 'Conversations',
@@ -33,13 +33,13 @@ window.NoemaSearch = (() => {
       whereEx: 'exercise {n} of chapter {c}', whereBlock: '{kind} in “{sec}”', whereCard: 'flashcard of chapter {c}', whereSec: 'section “{sec}”', whereCh: 'chapter {c}', whereDrill: 'debug drill “{t}”',
       practise: 'Practise these results', practiseNone: 'Nothing to practise among these results: exercises, flashcards and words can be practised.', roundOf: 'Practice round {i} of {n}: {title}', next: 'Next: {title}', roundEnd: 'End the round', roundDone: 'The round is over. Well done!',
       pEx: '{n} exercises', pEx1: '1 exercise', pCards: '{n} flashcards', pCards1: '1 flashcard', pWords: 'words of “{title}”',
-      save: 'Save as a collection', saved: 'Saved as “{name}”', nameIt: 'Name of the collection', collections: 'My collections', collectionsSub: 'Saved searches: they update by themselves.', collectionsN: 'Collections ({n})', collectionsN1: '1 collection',
-      recent: 'Recent searches', rename: 'Rename', del: 'Delete', delSure: 'Delete the collection “{name}”? The things in it stay where they are.', copyLink: 'Copy the link', linkCopied: 'Link copied', open: 'Open', nItems: '{n} found', nItems1: '1 found', collection: 'Collection',
+      save: 'Keep this search', saved: 'Kept in “Saved searches” as “{name}”', nameIt: 'A name for this search', collections: 'Saved searches', collectionsSub: 'Searches you kept. Open one to see its results again, always up to date.', collectionsN: 'Saved searches ({n})', collectionsN1: '1 saved search',
+      kinds: 'What to show', recent: 'Recent searches', rename: 'Rename', del: 'Delete', delSure: 'Delete the saved search “{name}”? Only the search goes; everything it finds stays.', copyLink: 'Copy the link', linkCopied: 'Link copied', open: 'Open', nItems: '{n} found', nItems1: '1 found', collection: 'Saved search',
       inLang: 'in {lang}',
     },
     el: {
       search: 'Αναζήτηση', placeholder: 'Αναζήτηση σε όλα…', openPage: 'Άνοιγμα σε σελίδα', exact: 'Ακριβές ταίριασμα', more: '+{n} ακόμη', none: `Δεν βρέθηκε τίποτα για «${NB}{q}${NB}».`, noneTip: 'Δοκίμασε άλλη λέξη ή λιγότερα φίλτρα.',
-      typeMore: 'Γράψε τουλάχιστον δύο γράμματα.', indexing: 'Ετοιμάζω την αναζήτηση: {done} από {total}', indexingWhat: 'διαβάζω «{what}»', results: '{n} αποτελέσματα', results1: '1 αποτέλεσμα',
+      typeMore: 'Γράψε τουλάχιστον δύο γράμματα.', indexing: `Μια στιγμή: ξεφυλλίζω όλες τις σελίδες της εφαρμογής, για να μη σου ξεφύγει τίποτα (${NB}{done} από {total}${NB}).`, indexingWhat: 'Γίνεται μία φορά σε κάθε συσκευή και μετά μόνο για ό,τι αλλάζει. Όσα βρέθηκαν ως τώρα φαίνονται παρακάτω.', results: '{n} αποτελέσματα', results1: '1 αποτέλεσμα',
       filters: 'Φίλτρα', filtersN: 'Φίλτρα ({n})', all: 'Όλα', world: 'Μέρος της εφαρμογής', scope: 'Πού', everywhere: 'Παντού', hereIs: 'Εδώ: {title}', lang: 'Γλώσσα', status: 'Κατάσταση',
       stUnread: 'Αδιάβαστα', stUnsolved: 'Άλυτες', stWrong: 'Τα λάθη μου', clear: 'Καθάρισμα φίλτρων',
       t_roadmap: 'Οδικοί χάρτες', t_station: 'Σταθμοί', t_subject: 'Θέματα', t_chapter: 'Κεφάλαια', t_section: 'Ενότητες', t_theory: 'Θεωρία', t_exercise: 'Ασκήσεις', t_card: 'Κάρτες', t_trap: 'Παγίδες', t_drill: 'Ασκήσεις εντοπισμού σφαλμάτων', t_source: 'Πηγές', t_convo: 'Συζητήσεις',
@@ -56,13 +56,13 @@ window.NoemaSearch = (() => {
       whereEx: 'άσκηση {n} του κεφ. {c}', whereBlock: `{kind} στην ενότητα «${NB}{sec}${NB}»`, whereCard: 'κάρτα του κεφ. {c}', whereSec: `ενότητα «${NB}{sec}${NB}»`, whereCh: 'κεφάλαιο {c}', whereDrill: `άσκηση εντοπισμού σφαλμάτων «${NB}{t}${NB}»`,
       practise: 'Εξάσκηση σε αυτά τα αποτελέσματα', practiseNone: 'Δεν υπάρχει κάτι για εξάσκηση εδώ: εξάσκηση γίνεται σε ασκήσεις, κάρτες και λέξεις.', roundOf: 'Γύρος εξάσκησης {i} από {n}: {title}', next: 'Επόμενο: {title}', roundEnd: 'Τέλος γύρου', roundDone: 'Ο γύρος τελείωσε. Μπράβο!',
       pEx: '{n} ασκήσεις', pEx1: '1 άσκηση', pCards: '{n} κάρτες', pCards1: '1 κάρτα', pWords: `λέξεις του «${NB}{title}${NB}»`,
-      save: 'Αποθήκευση ως συλλογή', saved: `Αποθηκεύτηκε ως «${NB}{name}${NB}»`, nameIt: 'Όνομα της συλλογής', collections: 'Οι συλλογές μου', collectionsSub: 'Αποθηκευμένες αναζητήσεις που ενημερώνονται μόνες τους.', collectionsN: 'Συλλογές ({n})', collectionsN1: '1 συλλογή',
-      recent: 'Πρόσφατες αναζητήσεις', rename: 'Μετονομασία', del: 'Διαγραφή', delSure: `Διαγραφή της συλλογής «${NB}{name}${NB}»; Όσα έχει μένουν στη θέση τους.`, copyLink: 'Αντιγραφή συνδέσμου', linkCopied: 'Ο σύνδεσμος αντιγράφηκε', open: 'Άνοιγμα', nItems: '{n} βρέθηκαν', nItems1: '1 βρέθηκε', collection: 'Συλλογή',
+      save: 'Κράτα αυτή την αναζήτηση', saved: `Κρατήθηκε στις «${NB}Αποθηκευμένες αναζητήσεις${NB}» ως «${NB}{name}${NB}»`, nameIt: 'Ένα όνομα για αυτή την αναζήτηση', collections: 'Αποθηκευμένες αναζητήσεις', collectionsSub: 'Αναζητήσεις που κράτησες. Άνοιξε μία για να δεις ξανά τα αποτελέσματά της, πάντα ενημερωμένα.', collectionsN: 'Αποθηκευμένες αναζητήσεις ({n})', collectionsN1: '1 αποθηκευμένη αναζήτηση',
+      kinds: 'Τι να δείχνει', recent: 'Πρόσφατες αναζητήσεις', rename: 'Μετονομασία', del: 'Διαγραφή', delSure: `Διαγραφή της αποθηκευμένης αναζήτησης «${NB}{name}${NB}»; Φεύγει μόνο η αναζήτηση· όσα βρίσκει μένουν.`, copyLink: 'Αντιγραφή συνδέσμου', linkCopied: 'Ο σύνδεσμος αντιγράφηκε', open: 'Άνοιγμα', nItems: '{n} βρέθηκαν', nItems1: '1 βρέθηκε', collection: 'Αποθηκευμένη αναζήτηση',
       inLang: 'στα {lang}',
     },
     ru: {
       search: 'Поиск', placeholder: 'Искать везде…', openPage: 'Открыть на странице', exact: 'Точное совпадение', more: 'ещё {n}', none: `По запросу «${NB}{q}${NB}» ничего не найдено.`, noneTip: 'Попробуй другое слово или меньше фильтров.',
-      typeMore: 'Введи хотя бы две буквы.', indexing: 'Готовлю поиск: {done} из {total}', indexingWhat: 'читаю «{what}»', results: 'Найдено: {n}', results1: 'Найдено: 1',
+      typeMore: 'Введи хотя бы две буквы.', indexing: 'Минутку: листаю все страницы приложения, чтобы от поиска ничего не ускользнуло ({done} из {total}).', indexingWhat: 'Это происходит один раз на каждом устройстве, потом только для того, что меняется. Найденное пока — ниже.', results: 'Найдено: {n}', results1: 'Найдено: 1',
       filters: 'Фильтры', filtersN: 'Фильтры ({n})', all: 'Всё', world: 'Часть приложения', scope: 'Где', everywhere: 'Везде', hereIs: 'Здесь: {title}', lang: 'Язык', status: 'Состояние',
       stUnread: 'Не прочитано', stUnsolved: 'Не решено', stWrong: 'Мои ошибки', clear: 'Сбросить фильтры',
       t_roadmap: 'Дорожные карты', t_station: 'Станции', t_subject: 'Предметы', t_chapter: 'Главы', t_section: 'Разделы', t_theory: 'Теория', t_exercise: 'Упражнения', t_card: 'Карточки', t_trap: 'Ловушки', t_drill: 'Поиск неисправностей', t_source: 'Источники', t_convo: 'Беседы',
@@ -79,13 +79,13 @@ window.NoemaSearch = (() => {
       whereEx: 'упражнение {n} главы {c}', whereBlock: `{kind} в разделе «${NB}{sec}${NB}»`, whereCard: 'карточка главы {c}', whereSec: `раздел «${NB}{sec}${NB}»`, whereCh: 'глава {c}', whereDrill: `«${NB}{t}${NB}»`,
       practise: 'Потренироваться на этих результатах', practiseNone: 'Здесь нечего тренировать: тренируются упражнения, карточки и слова.', roundOf: 'Тренировка {i} из {n}: {title}', next: 'Дальше: {title}', roundEnd: 'Закончить', roundDone: 'Тренировка окончена. Молодец!',
       pEx: 'Упражнений: {n}', pEx1: '1 упражнение', pCards: 'Карточек: {n}', pCards1: '1 карточка', pWords: `слова «${NB}{title}${NB}»`,
-      save: 'Сохранить как подборку', saved: `Сохранено как «${NB}{name}${NB}»`, nameIt: 'Название подборки', collections: 'Мои подборки', collectionsSub: 'Сохранённые поиски: обновляются сами.', collectionsN: 'Подборки ({n})', collectionsN1: '1 подборка',
-      recent: 'Недавние поиски', rename: 'Переименовать', del: 'Удалить', delSure: `Удалить подборку «${NB}{name}${NB}»? Всё найденное останется на месте.`, copyLink: 'Скопировать ссылку', linkCopied: 'Ссылка скопирована', open: 'Открыть', nItems: 'Найдено: {n}', nItems1: 'Найдено: 1', collection: 'Подборка',
+      save: 'Сохранить этот поиск', saved: `Сохранено в «${NB}Сохранённых поисках${NB}» как «${NB}{name}${NB}»`, nameIt: 'Название для этого поиска', collections: 'Сохранённые поиски', collectionsSub: 'Твои сохранённые поиски. Открой любой, чтобы снова увидеть результаты, всегда свежие.', collectionsN: 'Сохранённые поиски ({n})', collectionsN1: '1 сохранённый поиск',
+      kinds: 'Что показывать', recent: 'Недавние поиски', rename: 'Переименовать', del: 'Удалить', delSure: `Удалить сохранённый поиск «${NB}{name}${NB}»? Удалится только поиск, найденное останется.`, copyLink: 'Скопировать ссылку', linkCopied: 'Ссылка скопирована', open: 'Открыть', nItems: 'Найдено: {n}', nItems1: 'Найдено: 1', collection: 'Сохранённый поиск',
       inLang: '({lang})',
     },
     fr: {
       search: 'Recherche', placeholder: 'Rechercher partout…', openPage: 'Ouvrir dans une page', exact: 'Correspondance exacte', more: '+{n} de plus', none: `Rien trouvé pour «${NB}{q}${NB}».`, noneTip: 'Essaie un autre mot, ou moins de filtres.',
-      typeMore: 'Tape au moins deux lettres.', indexing: 'Je prépare la recherche${NB}: {done} sur {total}', indexingWhat: 'je lis «${NB}{what}${NB}»', results: '{n} résultats', results1: '1 résultat',
+      typeMore: 'Tape au moins deux lettres.', indexing: `Un instant${NB}: je feuillette toutes les pages de l’app pour que rien n’échappe à ta recherche (${NB}{done} sur {total}${NB}).`, indexingWhat: 'Cela se fait une fois par appareil, puis seulement pour ce qui change. Ce qui est déjà trouvé s’affiche plus bas.', results: '{n} résultats', results1: '1 résultat',
       filters: 'Filtres', filtersN: 'Filtres ({n})', all: 'Tout', world: 'Partie de l’app', scope: 'Où', everywhere: 'Partout', hereIs: `Ici${NB}: {title}`, lang: 'Langue', status: 'État',
       stUnread: 'Pas encore lu', stUnsolved: 'Pas encore résolu', stWrong: 'Mes erreurs', clear: 'Effacer les filtres',
       t_roadmap: 'Parcours', t_station: 'Étapes', t_subject: 'Matières', t_chapter: 'Chapitres', t_section: 'Sections', t_theory: 'Théorie', t_exercise: 'Exercices', t_card: 'Cartes', t_trap: 'Pièges', t_drill: 'Diagnostics', t_source: 'Sources', t_convo: 'Conversations',
@@ -100,10 +100,10 @@ window.NoemaSearch = (() => {
       via_cardHint: 'depuis une carte (indice)', via_cardExplain: 'depuis une carte (explication)', via_section_socratic: 'depuis le dialogue socratique d’une section', via_section_debug: 'depuis la simulation de cas d’une section', via_section_interview: 'depuis l’entretien sur une section',
       via_chapterSocratic: 'depuis la révision socratique d’un chapitre', via_drillRoleplay: 'depuis un diagnostic', via_lang: 'depuis un cours de langue',
       whereEx: 'exercice {n} du chapitre {c}', whereBlock: `{kind} dans «${NB}{sec}${NB}»`, whereCard: 'carte du chapitre {c}', whereSec: `section «${NB}{sec}${NB}»`, whereCh: 'chapitre {c}', whereDrill: `diagnostic «${NB}{t}${NB}»`,
-      practise: 'S’entraîner sur ces résultats', practiseNone: 'Rien à travailler ici${NB}: on s’entraîne sur les exercices, les cartes et les mots.', roundOf: 'Entraînement {i} sur {n}${NB}: {title}', next: `Suite${NB}: {title}`, roundEnd: 'Terminer', roundDone: 'L’entraînement est fini. Bravo${NB}!',
+      practise: 'S’entraîner sur ces résultats', practiseNone: `Rien à travailler ici${NB}: on s’entraîne sur les exercices, les cartes et les mots.`, roundOf: 'Entraînement {i} sur {n}${NB}: {title}', next: `Suite${NB}: {title}`, roundEnd: 'Terminer', roundDone: 'L’entraînement est fini. Bravo${NB}!',
       pEx: '{n} exercices', pEx1: '1 exercice', pCards: '{n} cartes', pCards1: '1 carte', pWords: `les mots de «${NB}{title}${NB}»`,
-      save: 'Enregistrer comme collection', saved: `Enregistrée sous «${NB}{name}${NB}»`, nameIt: 'Nom de la collection', collections: 'Mes collections', collectionsSub: 'Des recherches enregistrées qui se mettent à jour toutes seules.', collectionsN: 'Collections ({n})', collectionsN1: '1 collection',
-      recent: 'Recherches récentes', rename: 'Renommer', del: 'Supprimer', delSure: `Supprimer la collection «${NB}{name}${NB}»${NB}? Ce qu’elle contient reste à sa place.`, copyLink: 'Copier le lien', linkCopied: 'Lien copié', open: 'Ouvrir', nItems: '{n} trouvés', nItems1: '1 trouvé', collection: 'Collection',
+      save: 'Garder cette recherche', saved: `Gardée dans «${NB}Recherches enregistrées${NB}» sous «${NB}{name}${NB}»`, nameIt: 'Un nom pour cette recherche', collections: 'Recherches enregistrées', collectionsSub: 'Les recherches que tu as gardées. Ouvre-en une pour revoir ses résultats, toujours à jour.', collectionsN: 'Recherches enregistrées ({n})', collectionsN1: '1 recherche enregistrée',
+      kinds: 'Quoi montrer', recent: 'Recherches récentes', rename: 'Renommer', del: 'Supprimer', delSure: `Supprimer la recherche enregistrée «${NB}{name}${NB}»${NB}? Seule la recherche part${NB}; ce qu’elle trouve reste.`, copyLink: 'Copier le lien', linkCopied: 'Lien copié', open: 'Ouvrir', nItems: '{n} trouvés', nItems1: '1 trouvé', collection: 'Recherche enregistrée',
       inLang: 'en {lang}',
     },
   };
@@ -262,7 +262,9 @@ window.NoemaSearch = (() => {
   }
 
   /* ---------- the groups of results ---------- */
-  function groupsEl(res, q, ctx, { per = 5, compact = false, onOpen } = {}) {
+  const OPEN = { q: null, set: new Set() };   // the groups opened on the page, kept while the results redraw for the same words
+  function groupsEl(res, q, ctx, { per = 5, compact = false, fold = false, onOpen } = {}) {
+    if (OPEN.q !== q) { OPEN.q = q; OPEN.set = new Set(); }
     const { h, pill } = ctx, box = h('div', { class: 'ns-srgroups' + (compact ? ' compact' : '') });
     const top = new Set(res.exact.slice(0, compact ? 2 : 4).map(x => x.r.k));   // shown on top: not again in their group
     if (res.exact.length) {
@@ -274,10 +276,16 @@ window.NoemaSearch = (() => {
       const body = h('div', { class: 'ns-srlist' });
       let n = Math.min(per, list.length);
       const moreBtn = h('button', { class: 'linkish ns-srmore' });
+      const head = [h('span', { class: 'ns-label' }, L('t_' + ty)), pill(String(all.length), ty === 'convo' ? 4 : TYPE_TONE(ty))];
       const drawN = () => { body.replaceChildren(...list.slice(0, n).map(x => resultEl(x, q, ctx, { onOpen }))); moreBtn.hidden = n >= list.length; moreBtn.textContent = L('more', { n: list.length - n }); };
       moreBtn.onclick = () => { n = Math.min(list.length, n + (compact ? 10 : 20)); drawN(); };
       drawN();
-      sec.append(h('div', { class: 'ns-srh' }, h('span', { class: 'ns-label' }, L('t_' + ty)), pill(String(all.length), ty === 'convo' ? 4 : TYPE_TONE(ty))), body, moreBtn);
+      if (fold) {   // the page: every group folded; open, it shows its first few and "+N more"
+        const isOpen = () => OPEN.set.has(ty);
+        const hb = h('button', { class: 'ns-srh ns-srfold', 'aria-expanded': String(isOpen()), onclick: () => { isOpen() ? OPEN.set.delete(ty) : OPEN.set.add(ty); paint(); } }, ...head, h('span', { class: 'ns-chev', 'aria-hidden': 'true' }, '›'));
+        const paint = () => { const o = isOpen(); hb.setAttribute('aria-expanded', String(o)); sec.classList.toggle('open', o); body.hidden = !o; if (!o) moreBtn.hidden = true; else drawN(); };
+        sec.append(hb, body, moreBtn); paint();
+      } else sec.append(h('div', { class: 'ns-srh' }, ...head), body, moreBtn);
       box.append(sec);
     }
     return box;
@@ -289,7 +297,7 @@ window.NoemaSearch = (() => {
     const { h } = ctx, I = index(), line = h('div', { class: 'ns-srprog', role: 'status', 'aria-live': 'polite' });
     const paint = st => {
       line.hidden = !st.busy;
-      if (st.busy) line.replaceChildren(h('span', {}, L('indexing', { done: st.done, total: st.total }), st.label ? ' · ' + L('indexingWhat', { what: st.label }) : ''), h('i', { class: 'ns-srprogbar', style: { width: Math.round((st.done / Math.max(1, st.total)) * 100) + '%' } }));
+      if (st.busy) line.replaceChildren(h('b', {}, L('indexing', { done: Math.min(st.done + 1, st.total), total: st.total })), h('span', { class: 'tiny ns-muted' }, L('indexingWhat')), h('i', { class: 'ns-srprogbar', style: { width: Math.round((st.done / Math.max(1, st.total)) * 100) + '%' } }));
     };
     let last = -1;
     const off = I.on(st => { if (!line.isConnected) { off(); return; } paint(st); if (st.done !== last) { last = st.done; onChange?.(); } });
@@ -320,7 +328,7 @@ window.NoemaSearch = (() => {
       };
       inp.addEventListener('input', () => { clearTimeout(t); t = setTimeout(draw, 120); });
       inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); pageBtn.click(); } });
-      body.append(h('div', { class: 'ns-srbar' }, inp), hereSeg, progressEl(ctx, () => { if (inp.value.trim().length >= 2) draw(); }), out, h('div', { class: 'row ns-srfoot' }, pageBtn));
+      body.append(h('div', { class: 'ns-srbar' }, inp), hereSeg, progressEl(ctx, () => { if (inp.value.trim().length >= 2) draw(); }), out, h('div', { class: 'row ns-srfoot' }, pageBtn, collections().length ? h('button', { class: 'btn small ghost ns-srgosaved', onclick: () => { close(); X.go('#/search'); } }, L('collectionsN', { n: collections().length })) : null));
       draw();
       setTimeout(() => inp.focus(), 60);
     }, { cls: 'ns-srsheet' });
@@ -334,15 +342,16 @@ window.NoemaSearch = (() => {
     let P = parse();
     const I = warm();
     const coll = P.c ? collections().find(x => x.id === P.c) : null;
-    const v = pg({ tab: null, crumbs: [[L('search')], ...(coll ? [[coll.name]] : [])], back: null, cls: 'ns-searchview', menu: coll ? collMenu(coll, ctx) : null });
+    const savedItem = () => { const n = collections().length; return { label: L('collections') + (n ? ` (${n})` : ''), sub: L('collectionsSub'), icon: 'star', run: () => go('#/search') }; };
+    const v = pg({ tab: null, crumbs: [[L('search')], ...(coll ? [[coll.name]] : [])], back: null, cls: 'ns-searchview', menu: () => [savedItem(), ...(coll ? ['-', ...collMenu(coll, ctx)().filter(x => x.label !== L('open'))] : [])] });
     const inp = h('input', { class: 'noema-input ns-srin', type: 'search', value: P.q || '', placeholder: L('placeholder'), 'aria-label': L('search'), enterkeyhint: 'search', autocomplete: 'off' });
     const roundBox = h('div', { class: 'ns-srroundbox' });
     const actions = h('div', { class: 'row ns-sracts' });
-    const typeChips = h('div', { class: 'ns-srchips', role: 'group', 'aria-label': L('t_theory') });
+    const typeChips = h('div', { class: 'ns-srkinds', role: 'group', 'aria-label': L('kinds') });
     const filtBtn = h('button', { class: 'btn small ghost ns-srfilt', 'aria-expanded': 'false', onclick: () => { filt.hidden = !filt.hidden; filtBtn.setAttribute('aria-expanded', String(!filt.hidden)); } });
     const filt = h('div', { class: 'ns-panel ns-srfilters', hidden: true });
     const out = h('div', { class: 'ns-srout' });
-    v.append(h('div', { class: 'ns-srbar' }, inp), roundBox, progressEl(ctx, () => draw()), h('div', { class: 'row ns-srrow' }, typeChips, filtBtn), filt, actions, out);
+    v.append(h('div', { class: 'ns-srbar' }, inp), roundBox, progressEl(ctx, () => draw()), h('div', { class: 'row ns-srrow' }, filtBtn, actions), filt, out);
     const setP = (patch, { replace = true } = {}) => {
       P = { ...P, ...patch }; for (const k of Object.keys(P)) if (!P[k]) delete P[k];
       if (P.c && !sameQuery(collections().find(x => x.id === P.c)?.p, P)) delete P.c;
@@ -366,11 +375,11 @@ window.NoemaSearch = (() => {
       if (hereNowP) rows.push(seg(L('scope'), P.in ? 'here' : '', [['', L('everywhere')], ['here', L('hereIs', { title: hereNowP.title })]], k => setP({ in: k ? '1' : '' })));
       if (P.w !== 'know' && w !== 'know' && langs.length > 1) rows.push(seg(L('lang'), P.lg || '', [['', L('all')], ...langs.map(c => [c, langName(c)])], k => setP({ lg: k })));
       if (P.w !== 'lang' && w !== 'lang') rows.push(seg(L('status'), P.st || '', [['', L('all')], ['unread', L('stUnread')], ['unsolved', L('stUnsolved')], ['wrong', L('stWrong')]], k => setP({ st: k })));
-      const n = ['w', 'in', 'lg', 'st'].filter(k => P[k]).length;
-      if (n) rows.push(h('button', { class: 'linkish', onclick: () => setP({ w: '', in: '', lg: '', st: '' }) }, L('clear')));
-      filt.replaceChildren(...rows);
+      const n = ['w', 'in', 'lg', 'st', 't'].filter(k => P[k]).length;
+      if (n) rows.push(h('button', { class: 'linkish', onclick: () => setP({ w: '', in: '', lg: '', st: '', t: '' }) }, L('clear')));
+      filt.replaceChildren(...(res.total ? [h('div', { class: 'ns-srfrow' }, h('span', { class: 'ns-label' }, L('kinds')), typeChips)] : []), ...rows);
       filtBtn.textContent = (n ? L('filtersN', { n }) : L('filters')) + ' ▾';
-      filtBtn.hidden = !rows.length;
+      filtBtn.hidden = !rows.length && !res.total;
     }
     function drawChips(res) {
       const types = listOf(P.t);
@@ -378,12 +387,16 @@ window.NoemaSearch = (() => {
         if (!k) return setP({ t: '' });
         const s = new Set(types); s.has(k) ? s.delete(k) : s.add(k); setP({ t: [...s].join(',') });
       } }, label, h('span', { class: 'n' }, String(n)));
-      typeChips.replaceChildren(...(res.total ? [chip('', L('all'), res.total, !types.length), ...res.groups.map(([ty, l]) => chip(ty, L('t_' + ty), l.length, types.includes(ty)))] : []));
+      const T3 = C().TYPES, part = (label, tys) => { const g = res.groups.filter(([ty]) => tys.includes(ty)); return g.length ? h('div', { class: 'ns-srkgrp' }, label ? h('small', { class: 'ns-muted' }, label) : null, h('div', { class: 'ns-srchips' }, ...g.map(([ty, l]) => chip(ty, L('t_' + ty), l.length, types.includes(ty))))) : null; };
+      const two = res.groups.some(([ty]) => T3.know.includes(ty)) && res.groups.some(([ty]) => T3.lang.includes(ty));
+      typeChips.replaceChildren(...(res.total ? [h('div', { class: 'ns-srchips' }, chip('', L('all'), res.total, !types.length)),
+        part(two ? S().L('knowledge') : '', T3.know), part(two ? S().L('languages') : '', T3.lang), part('', T3.both)].filter(Boolean) : []));
     }
     function drawActions(res) {
       const sv = collections().find(x => sameQuery(x.p, P));
+      const kinds = listOf(P.t), canPractise = kinds.length && kinds.every(t => PRACTISABLE.includes(t));   // only when the filter keeps things that can be practised
       actions.replaceChildren(...(res.shownTotal ? [
-        h('button', { class: 'btn small primary ns-srpractise', onclick: () => practise(res, P) }, L('practise')),
+        canPractise ? h('button', { class: 'btn small primary ns-srpractise', onclick: () => practise(res, P) }, L('practise')) : null,
         sv ? h('span', { class: 'ns-pill ns-srsaved' }, L('collection'), ': ', sv.name) : h('button', { class: 'btn small ghost ns-srsave', onclick: () => saveCollection(P, ctx) }, L('save'))] : []));
     }
     function drawEmpty() {
@@ -402,7 +415,7 @@ window.NoemaSearch = (() => {
       const res = run(P);
       drawFilters(res); drawChips(res); drawActions(res);
       if (!res.total) { out.replaceChildren(h('div', { class: 'ns-panel ns-empty' }, ctx.faceEl(undefined, 'breathe'), h('p', {}, L('none', { q })), h('p', { class: 'tiny ns-muted' }, L('noneTip')))); return; }
-      out.replaceChildren(h('p', { class: 'tiny ns-muted ns-srcount' }, L('results', { n: res.shownTotal })), groupsEl(res, q, ctx, { per: 5 }));
+      out.replaceChildren(h('p', { class: 'tiny ns-muted ns-srcount' }, L('results', { n: res.shownTotal })), groupsEl(res, q, ctx, { per: 3, fold: true }));
     }
     drawnFor = v;
     I.load().then(() => { if (v.isConnected) draw(); });
@@ -436,6 +449,7 @@ window.NoemaSearch = (() => {
 
   /* ---------- "Practise these results": one round, place by place ---------- */
   const ROUND = 'noema-device:searchRound';
+  const PRACTISABLE = ['exercise', 'card', 'word', 'meaning', 'field', 'lesson'];
   const round = () => { try { return JSON.parse(sessionStorage.getItem(ROUND) || 'null'); } catch (e) { return null; } };
   const putRound = R => { try { R ? sessionStorage.setItem(ROUND, JSON.stringify(R)) : sessionStorage.removeItem(ROUND); } catch (e) { } };
   /** The steps of a round from the results shown: per subject its exercises, then its flashcards; per language course the
