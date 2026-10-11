@@ -441,5 +441,6 @@
   "sh.syncErr": "Erreur de synchronisation : {e}",
   "sh.syncing": "Synchronisation…",
   "sh.syncWait": "Des changements attendent la synchronisation",
-  "sh.synced": "Tout est synchronisé"
+  "sh.synced": "Tout est synchronisé",
+  "sh.fontSample": "Aa Bonsoir"
 }

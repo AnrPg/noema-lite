@@ -44,11 +44,11 @@ window.NoemaShell = (() => {
   const settings = () => { try { return JSON.parse(localStorage.getItem(`noema1:${acc()}:a:settings`) || '{}') || {}; } catch (e) { return {}; } };
   const uiPref = () => settings().lang;
   const lang = () => window.NoemaI18n ? NoemaI18n.lang(uiPref()) : 'en';
-  function tv(m) { const t = TH()?.tutor(m) || { n: 'Tutor', nom: 'Tutor', acc: 'Tutor', to: 'Tutor' }; return { tutor: t.n, tutorAcc: t.acc, tutorTo: t.to, tutorNom: t.nom, Tutor: t.nom ? t.nom[0].toUpperCase() + t.nom.slice(1) : t.n }; }
+  function tv(m) { let t = TH()?.tutor(m); if (!t) { const n = window.NoemaI18n ? NoemaI18n.t('sh.tutorDefault', null, uiPref()) : 'Tutor'; t = { n, nom: n, acc: n, to: n }; } return { tutor: t.n, tutorAcc: t.acc, tutorTo: t.to, tutorNom: t.nom, Tutor: t.nom ? t.nom[0].toUpperCase() + t.nom.slice(1) : t.n }; }   // i18n-ignore (English only without the i18n runtime)
   const L = (k, v) => window.NoemaI18n ? NoemaI18n.t('sh.' + k, { ...tv(), ...(v || {}) }, uiPref()) : k;
   /** A sentence with some of its values in bold (names and titles stay text, never markup) */
   function rich(k, vals) { const names = Object.keys(vals), marks = Object.fromEntries(names.map((n, i) => [n, `\u0001${i}\u0001`])); return L(k, marks).split('\u0001').map((x, i) => i % 2 ? h('b', {}, vals[names[+x]]) : x); }
-  const fmtDate = (t, o = { day: 'numeric', month: 'long' }) => { try { return new Date(t).toLocaleDateString(lang(), o); } catch (e) { return new Date(t).toDateString(); } };
+  const fmtDate = (t, o = { day: 'numeric', month: 'long' }) => { try { return window.NoemaI18n ? NoemaI18n.fmt.date(t, o) : new Date(t).toLocaleDateString(lang(), o); } catch (e) { return new Date(t).toDateString(); } };
   const today = () => new Date().toISOString().slice(0, 10);
   const toast = (m, ms) => (N()?.toast || (x => console.log(x)))(m, ms);
 
@@ -137,7 +137,7 @@ window.NoemaShell = (() => {
   function tabsList() {
     const w = TH()?.world() || 'know', t = [['today', '#/', svg('sun'), L('today')]];
     if (w !== 'lang') t.push(['learn', '#/learn', svg('path'), L('knowledge')]);
-    if (w !== 'know') t.push(['lang', '#/lang', h('span', { class: 'ns-tx' }, '文A'), L('languages')]);
+    if (w !== 'know') t.push(['lang', '#/lang', h('span', { class: 'ns-tx' }, '文A'), L('languages')]);   // i18n-ignore (文A: the Languages icon)
     t.push(['discover', '#/discover', svg('compass'), L('discover')], ['progress', '#/progress', svg('star'), L('progress')]);
     return t;
   }
@@ -355,7 +355,7 @@ window.NoemaShell = (() => {
     return h('div', { class: 'ns-panel ns-empty' }, faceEl(undefined, 'breathe'), h('h2', {}, L('welcomeTitle')), h('p', { class: 'ns-muted' }, L('welcomeText')),
       h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => CM()?.create(acc(), { onStudy }) }, L('newRoadmap')), h('button', { class: 'btn', onclick: () => go('#/discover') }, L('discover')), h('button', { class: 'btn ghost', onclick: () => go('#/shelf') }, L('shelf'))));
   }
-  const ago = t => { const d = Math.round((Date.now() - t) / DAY); return d <= 0 ? L('today').toLowerCase() : d === 1 ? L('yesterday') : L('daysAgo', { n: d }); };
+  const ago = t => { const d = Math.round((Date.now() - t) / DAY); return d <= 0 ? (window.NoemaI18n ? NoemaI18n.fmt.lower(L('today')) : L('today').toLowerCase()) : d === 1 ? L('yesterday') : L('daysAgo', { n: d }); };
   /** Review / mistakes live in each subject: one subject → go straight there; several → choose. */
   function reviewGo(kind, per) {
     const list = per.filter(x => kind === 'gym' ? x.wr : x.fc + x.pb);
@@ -531,9 +531,9 @@ window.NoemaShell = (() => {
     const m = TH()?.current() || 'hedge', tx = TH()?.text(m) || {}, st = N().stats?.get() || { xp: 0, xpDay: {} }, sn = N().stats?.streakNow() || 0, lv = LEVEL(st.xp || 0);
     const v = page({ tab: 'progress', crumbs: [[L('progress')]], corner: true }, h('h1', {}, L('yourProgress')));
     v.append(h('section', { class: 'ns-panel ns-level' }, h('div', { class: 'ns-ringwrap' }, ring(lv.into / lv.need, 132, 11), h('div', { class: 'ringc' }, h('span', { class: 'tiny' }, L('level')), h('b', {}, lv.lv))),
-      h('div', { class: 'grow' }, h('span', { class: 'ns-label' }, tx.place || ''), h('h2', {}, L('xpToLevel', { n: lv.need - lv.into, lv: lv.lv + 1 })), h('p', { class: 'ns-muted' }, L('xpTotal', { xp: (st.xp || 0).toLocaleString(lang()) })))));
+      h('div', { class: 'grow' }, h('span', { class: 'ns-label' }, tx.place || ''), h('h2', {}, L('xpToLevel', { n: lv.need - lv.into, lv: lv.lv + 1 })), h('p', { class: 'ns-muted' }, L('xpTotal', { xp: st.xp || 0 })))));
     // the week as stepping stones; the 7th holds a small chest
-    const days = [...Array(7)].map((_, i) => { const d = new Date(Date.now() - (6 - i) * DAY); return { k: d.toISOString().slice(0, 10), l: d.toLocaleDateString(lang(), { weekday: 'narrow' }) }; });
+    const days = [...Array(7)].map((_, i) => { const d = new Date(Date.now() - (6 - i) * DAY); return { k: d.toISOString().slice(0, 10), l: fmtDate(d, { weekday: 'narrow' }) }; });
     const stones = [[40, 90], [110, 70], [180, 84], [250, 62], [320, 78], [390, 58], [460, 72]];
     const did = days.map(d => (st.xpDay || {})[d.k] > 0);
     const trail = `<svg class="ns-trail" viewBox="0 0 500 130" role="img" aria-label="${L('trailAria', { n: did.filter(Boolean).length })}"><path d="M40 90 Q75 60 110 70 T180 84 T250 62 T320 78 T390 58 T460 72" fill="none" stroke="var(--ink3)" stroke-width="2" stroke-dasharray="3 7" opacity=".6"/>`
@@ -647,7 +647,7 @@ window.NoemaShell = (() => {
       h('div', {}, h('span', { class: 'ns-label' }, L('companion')), h('h1', {}, L('character'))),
       h('p', { class: 'ns-muted' }, L('characterIntro')),
       h('p', { class: 'tiny' }, locked ? L('charLockedLong') : Date.now() < TH().freeUntil() ? L('freeUntil', { date: fmtDate(TH().freeUntil()) }) : can ? L('canChangeNow') : L('changedOn', { date: fmtDate(at), next: fmtDate(TH().nextChangeAt()) })));
-    const sample = { el: 'Αα Καλησπέρα', en: 'Aa Good evening', ru: 'Аа Добрый вечер', fr: 'Aa Bonsoir' }[lang()] || 'Aa';
+    const sample = L('fontSample');   // “Aa” + a greeting in the UI language: how each font looks
     for (const g of ['animals', 'tales', 'grown']) {
       const gal = h('div', { class: 'ns-gal' }); v.append(charGroup(g, gal));
       for (const k of TH().GROUPS[g]) {
