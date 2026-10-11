@@ -244,7 +244,7 @@ function cmpLangPicker(redraw) {
 const fnOrder = () => { const at = {}; UI.C.order.forEach((nid, i) => { const f = UI.C.nodes[nid].functions || []; for (const x of (Array.isArray(f) ? f : Object.values(f).flat())) if (!(x in at)) at[x] = i; }); return Object.keys(UI.C.functions).filter(f => f !== 'fn.overview').sort((a, b) => (at[a] ?? 1e9) - (at[b] ?? 1e9)); };
 const STATUS_MARK = { realized: '✓', periphrastic: '≈', absent: '—' };
 VIEWS.cmp = (v, r) => {
-  const back = h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => r.arg ? go('#/cmp') : go('#/') }, '← ' + LT(r.arg ? 'lang.view.cmp' : 'lang.card.map')));
+  const back = h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => r.arg ? go('#/cmp') : go('#/') }, arrowBack() + ' ' + LT(r.arg ? 'lang.view.cmp' : 'lang.card.map')));
   v.append(back);
   if (activeLangs().length < 2) return v.append(h('h1', {}, '⇄ ' + LT('lang.view.cmp')), h('p', { class: 'lx-note' }, LT('lang.poly.needsTwo')));
   const langs = cmpLangs(), redraw = () => render();
@@ -327,7 +327,7 @@ VIEWS.poly = (v, r) => {
   if (r.arg2 && UI.C.frames[r.arg2]) opts.frame = r.arg2;
   const items = langs.length >= 2 || type === 'cognate_bridge' ? N.polyItems(UI.C, UI.L, type, opts) : [];
   if (!items.length) {
-    v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/cmp') }, '← ' + LT('lang.view.cmp'))), h('h1', {}, label),
+    v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/cmp') }, arrowBack() + ' ' + LT('lang.view.cmp'))), h('h1', {}, label),
       h('p', { class: 'lx-note lx-polyempty' }, LT(langs.length < 2 ? 'lang.poly.needsTwoDrill' : 'lang.poly.nothingYet')));
     return;
   }
@@ -348,7 +348,7 @@ function runPoly(v, items, { title, back }) {
       if (ok) right++;
       if (it.fn && LX(it.lang)?.grammar[it.fn]) N.practiceFunction(UI.C, UI.L, it.lang, it.fn, ok ? 1 : 0, 1, day);
       save();
-      const b = h('button', { class: 'btn primary lx-next' }, LT('lang.drill.next') + ' →'); b.onclick = next; stage.append(h('div', { class: 'row lx-nextrow' }, b)); setTimeout(() => b.focus(), 30);
+      const b = h('button', { class: 'btn primary lx-next' }, LT('lang.drill.next') + ' ' + arrowOn()); b.onclick = next; stage.append(h('div', { class: 'row lx-nextrow' }, b)); setTimeout(() => b.focus(), 30);
     });
     Object.assign(ex.dataset, { kind: it.kind, lang: it.lang, type: it.type });
     stage.append(h('div', { class: 'tiny lx-which' }, (it.langs || it.options || [it.from, it.lang]).filter(Boolean).filter((c, j, a) => UI.C.lang[c] && a.indexOf(c) === j).map(c => info(c).flag).join(' ')), ex);

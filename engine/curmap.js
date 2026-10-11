@@ -9,6 +9,7 @@ window.NoemaCurMap = (() => {
   const toast = (m, ms) => window.Noema.toast?.(m, ms);
   // i18n (docs/i18n.md): the words of this file are in i18n/roadmaps-map/ (keys roadmap.map.*); numbers/dates via NoemaI18n.fmt
   const CM = (k, p) => window.NoemaI18n ? window.NoemaI18n.t(k, p) : k;
+  const cmBack = () => window.NoemaI18n?.dir === 'rtl' ? '→' : '←', cmOn = () => window.NoemaI18n?.dir === 'rtl' ? '←' : '→';   // arrows in texts follow the reading direction (docs/i18n.md §5)
   const cmNum = n => window.NoemaI18n ? window.NoemaI18n.fmt.number(n) : String(n);
   const errMsg = e => window.NoemaI18n ? window.NoemaI18n.err(e) : (e?.message || String(e));   // an error's words (its code's message, else its English text)
   /** 🌐 a text another learner shared (docs/i18n.md §11): marked for machine translation (engine/mt.js), with its stored language. */
@@ -164,7 +165,7 @@ window.NoemaCurMap = (() => {
         }
       };
       box.append(head('🌍 ' + CM('roadmap.map.lib.explore'), CM('roadmap.map.pub.lead') + ' ' + SHARE_RULES()), q, window.NoemaMT?.bar(acc, grid) || null, grid,
-        el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small ghost', onclick: () => { close(); library(acc, { onStudy }); } }, '← ' + CM('roadmap.map.pub.mine')), el('button', { class: 'btn small', onclick: close }, CM('roadmap.map.close'))));
+        el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small ghost', onclick: () => { close(); library(acc, { onStudy }); } }, cmBack() + ' ' + CM('roadmap.map.pub.mine')), el('button', { class: 'btn small', onclick: close }, CM('roadmap.map.close'))));
       SH().explore().then(l => { all = l || []; drawList(); }).catch(e => { grid.innerHTML = ''; grid.append(el('p', { class: 'cg-warn' }, '⚠️ ' + errMsg(e))); });
     });
   }
@@ -304,7 +305,7 @@ window.NoemaCurMap = (() => {
         if (attachFirst.checked) c.attachFirst = true;   // 📦 the map waits for the learner's own subjects before its steps are planned
         C().save(acc, c); close(); progress(acc, c, { onStudy, start: true });
       } }, '🧭 ' + CM('roadmap.map.new.build'));
-      box.append(el('button', { class: 'btn small ghost cg-back', onclick: () => { close(); library(acc, { onStudy }); } }, '← ' + CM('roadmap.map.lib.title')),
+      box.append(el('button', { class: 'btn small ghost cg-back', onclick: () => { close(); library(acc, { onStudy }); } }, cmBack() + ' ' + CM('roadmap.map.lib.title')),
         head('➕ ' + CM('roadmap.map.lib.new'), CM('roadmap.map.new.lead')),
         el('ol', { class: 'cg-steps' },
           el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, CM('roadmap.map.new.whichAi')), tip(el('div', {}, el('p', {}, ...boldMd(CM('roadmap.map.new.whichAiApp'))), el('p', {}, ...boldMd(CM('roadmap.map.new.whichAiKey')))))), PP.box),
@@ -499,7 +500,7 @@ window.NoemaCurMap = (() => {
         finally { wl?.release?.(); ctl = null; paint(); }
         if (c.status === 'ready') { G().kick(); }
       }
-      box.append(el('button', { class: 'btn small ghost cg-back', onclick: () => { if (ctl && !confirm(CM('roadmap.map.build.leaveConfirm'))) return; ctl?.abort(); close(); library(acc, { onStudy }); } }, '← ' + CM('roadmap.map.lib.title')),
+      box.append(el('button', { class: 'btn small ghost cg-back', onclick: () => { if (ctl && !confirm(CM('roadmap.map.build.leaveConfirm'))) return; ctl?.abort(); close(); library(acc, { onStudy }); } }, cmBack() + ' ' + CM('roadmap.map.lib.title')),
         head(`🧭 “${c.title || c.goal}”`, c.imported ? `${langLabel(c.language)} · ` + CM('roadmap.map.build.yours', { n: Object.keys(c.nodes).length }) + ` · ${c.learner || CM('roadmap.map.build.fromBasics')}` : `${langLabel(c.language)} · ${CM('roadmap.map.build.depth', { d: String(c.depth) })} · ${c.learner || CM('roadmap.map.build.fromBasics')}`), stages, bar, status, appBox, actions,
         el('details', { class: 'cg-logbox', open: true }, el('summary', {}, CM('roadmap.map.build.log')), log));
       paint(); if (start || c.status === 'building') run();
@@ -920,7 +921,7 @@ window.NoemaCurMap = (() => {
         sec(CM('roadmap.map.guide.f4'),
           el('p', {}, CM('roadmap.map.guide.f4a'))));
       /* i18n-ignore-end */
-      box.append(el('button', { class: 'btn small ghost cg-back', onclick: () => { close(); library(acc, { onStudy }); } }, '← ' + CM('roadmap.map.lib.title')),
+      box.append(el('button', { class: 'btn small ghost cg-back', onclick: () => { close(); library(acc, { onStudy }); } }, cmBack() + ' ' + CM('roadmap.map.lib.title')),
         head('📥 ' + CM('roadmap.map.lib.import'), CM('roadmap.map.imp.lead')),
         el('ol', { class: 'cg-steps' },
           el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, CM('roadmap.map.imp.s1')), tip(mapGuide)),
@@ -1098,7 +1099,7 @@ window.NoemaCurMap = (() => {
         page ? null : member ? null : el('button', { class: 'btn small cm-sharetool', title: CM('roadmap.map.lib.shareTip'), onclick: () => shareCurriculum(acc, cid, { onDone: () => drawMap() }) }, '👥'),
         page ? null : el('button', { class: 'btn small', title: CM('roadmap.map.map.settingsTip'), onclick: () => settings() }, '⚙️'));
       const seg = page ? el('div', { class: 'ns-seg small cm-viewseg', role: 'radiogroup', 'aria-label': SL('mapOrList', 'Map or list') }, ...[[false, SL('viewMap', 'Map')], [true, SL('viewList', 'List')]].map(([v, l]) => el('button', { class: 'cm-vbtn', 'data-list': String(v), role: 'radio', onclick: () => setList(v) }, l))) : null;   // i18n-ignore (SL: the English fallback of an sh.* key of i18n/shell)
-      box.append(el('div', { class: 'cm-top' }, page ? null : el('button', { class: 'btn small ghost', onclick: () => { close(); toLibrary(); } }, '← ' + CM('roadmap.map.lib.title')), el('div', { class: 'cm-title' }, el('b', {}, (page ? '' : '🧭 ') + (c.title || c.goal)), sum), seg, tools, page ? null : el('button', { class: 'btn small', 'aria-label': CM('roadmap.map.close'), onclick: close }, '✕')),
+      box.append(el('div', { class: 'cm-top' }, page ? null : el('button', { class: 'btn small ghost', onclick: () => { close(); toLibrary(); } }, cmBack() + ' ' + CM('roadmap.map.lib.title')), el('div', { class: 'cm-title' }, el('b', {}, (page ? '' : '🧭 ') + (c.title || c.goal)), sum), seg, tools, page ? null : el('button', { class: 'btn small', 'aria-label': CM('roadmap.map.close'), onclick: close }, '✕')),
         holdBar, appBar, shareBar, el('div', { class: 'cm-body' }, scroller, panel),
         page ? null : legend());
 
@@ -1401,7 +1402,7 @@ window.NoemaCurMap = (() => {
             const opts = el('div', { class: 'cm-opts' }, ...q.options.map((o, k) => el('button', { class: 'btn', onclick: () => {
               const ok = k === q.answer; if (ok) right++;
               [...opts.children].forEach((b, kk) => { b.disabled = true; if (kk === q.answer) b.classList.add('ok'); else if (kk === k) b.classList.add('bad'); });
-              body.append(el('p', { class: 'tiny' }, (ok ? '✅ ' : '❌ ') + (q.explain || '')), el('button', { class: 'btn primary', onclick: () => { i++; ask(); } }, i + 1 < qs.length ? CM('roadmap.map.test.next') + ' →' : CM('roadmap.map.test.result')));
+              body.append(el('p', { class: 'tiny' }, (ok ? '✅ ' : '❌ ') + (q.explain || '')), el('button', { class: 'btn primary', onclick: () => { i++; ask(); } }, i + 1 < qs.length ? CM('roadmap.map.test.next') + ' ' + cmOn() : CM('roadmap.map.test.result')));
             } }, o)));
             body.append(opts);
           };

@@ -14,7 +14,7 @@ function sortPool(c, fid, n = 12) {
 VIEWS.sort = (v, r) => {
   const fid = r.arg, field = UI.C.data.fields.find(f => f.field === fid); if (!field) return VIEWS.home(v);
   const c = UI.lang, X = LX(c), pool = sortPool(c, fid);
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/field/' + encodeURIComponent(fid) + '/0') }, '← ' + LT('lang.card.fieldMap'))),
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/field/' + encodeURIComponent(fid) + '/0') }, arrowBack() + ' ' + LT('lang.card.fieldMap'))),
     h('h1', {}, '🧩 ' + LT('lang.field.sortGroups'), h('span', { class: 'tiny' }, ` · ${field.title} · ${info(c).flag} ${info(c).label}`)),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); render(); })));
   if (pool.length < 4) return v.append(h('p', { class: 'lx-note' }, LT('lang.sort.tooFew', { lang: info(c).name, n: pool.length })));
@@ -57,7 +57,7 @@ function partsPool(c) {
 }
 VIEWS.parts = (v, r) => {
   const c = UI.C.lang[r.arg] ? r.arg : UI.lang, X = LX(c), pool = shuffle(partsPool(c)).slice(0, 10);
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← ' + LT('lang.card.map'))),
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, arrowBack() + ' ' + LT('lang.card.map'))),
     h('h1', {}, '🔁 ' + LT('lang.view.parts'), h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).label}`)),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); go('#/parts/' + x); })));
   if (!pool.length) return v.append(h('p', { class: 'lx-note' }, LT('lang.parts.nothing', { lang: info(c).name })));
@@ -72,7 +72,7 @@ VIEWS.parts = (v, r) => {
     const others = qaPartsDistractors(c, p, pid, val, byLabel[pid]);   // forms of the same word first (99_qa.js): another word's form gives the answer away
     const box = h('div', { class: 'lx-ex lx-exparts', 'data-kind': 'parts', 'data-lex': p.id, 'data-label': pid });
     if (!others.length) {   // nothing to choose among: show it and go on
-      box.append(h('div', { class: 'lx-prompt' }, word(c, x.lemma, { lex: x })), h('div', { class: 'lx-q' }, `${label}: `, /[֐-ۿ一-鿿]/.test(val) ? word(c, val, { sub: false }) : val), h('button', { class: 'btn primary lx-next', onclick: next }, LT('lang.drill.next') + ' →'));
+      box.append(h('div', { class: 'lx-prompt' }, word(c, x.lemma, { lex: x })), h('div', { class: 'lx-q' }, `${label}: `, /[֐-ۿ一-鿿]/.test(val) ? word(c, val, { sub: false }) : val), h('button', { class: 'btn primary lx-next', onclick: next }, LT('lang.drill.next') + ' ' + arrowOn()));
       return stage.append(box);
     }
     const opts = shuffle([{ val, ok: true }, ...others.map(o => ({ val: o }))]);
@@ -80,7 +80,7 @@ VIEWS.parts = (v, r) => {
       options(opts.map(o => ({ ...o, label: /[֐-ۿ一-鿿]/.test(o.val) ? word(c, o.val, { sub: false }) : o.val })), (o, b, wrap) => {
         b.classList.add(o.ok ? 'right' : 'wrong'); if (!o.ok) markOpts(wrap, j => opts[j].ok); if (o.ok) right++;
         N.review(UI.C, UI.L, c, p.id, 'r', o.ok ? 'good' : 'again', day); save();
-        box.append(h('div', { class: 'row' }, h('button', { class: 'btn primary lx-next', onclick: next }, LT('lang.drill.next') + ' →')));
+        box.append(h('div', { class: 'row' }, h('button', { class: 'btn primary lx-next', onclick: next }, LT('lang.drill.next') + ' ' + arrowOn())));
       }));
     stage.append(box);
   };

@@ -157,7 +157,7 @@ function learnerView(c) {
 }
 VIEWS.fn = (v, r) => {
   const fid = r.arg, c = r.arg2 && UI.C.lang[r.arg2] ? r.arg2 : UI.lang; if (!UI.C.functions[fid]) return VIEWS.home(v);
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.length > 1 ? history.back() : go('#/') }, '← ' + LT('lang.card.back'))),
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.length > 1 ? history.back() : go('#/') }, arrowBack() + ' ' + LT('lang.card.back'))),
     h('div', { class: 'row' }, flagRail(null, c, x => go(`#/fn/${encodeURIComponent(fid)}/${x}`))),
     fid === 'fn.overview' ? typologyCard() : null, grammarCard(c, fid));
 };

@@ -4,7 +4,7 @@ VIEWS.field = (v, r) => {
   const field = UI.C.data.fields.find(f => f.field === fid); if (!field) return VIEWS.home(v);
   const c = UI.lang, k = N.known(UI.C, UI.L, c);
   const all = field.concepts;
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← ' + LT('lang.card.map'))),
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, arrowBack() + ' ' + LT('lang.card.map'))),
     h('h1', {}, '🧺 ', field.title, h('span', { class: 'tiny lx-count' }, ' · ' + LT('lang.field.inAll', { n: all.length }))),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); render(); }),
       h('div', { class: 'lx-seg' }, ...[0, 1, 2, 3].map(t => h('button', { class: tierPick === t ? 'on' : '', onclick: () => go(`#/field/${encodeURIComponent(fid)}/${t}`) }, LT('lang.field.tier' + t)))),
@@ -62,7 +62,7 @@ VIEWS.recall = (v, r) => {
     if (hit) { found.set(hit.id, true); list.prepend(h('span', { class: 'lx-hit' }, word(c, hit.lemma, { sub: false }), ' ', h('span', { class: 'tiny' }, gloss(c, hit.id)))); msg.textContent = `✓ ${LNUM(found.size)}`; }
     else msg.textContent = LT(words.some(x => spellings(c, x).has(t)) ? 'lang.recall.already' : 'lang.recall.notInField');
   });
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.back() }, '← ' + LT('lang.card.back'))),
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.back() }, arrowBack() + ' ' + LT('lang.card.back'))),
     h('h1', {}, '⏱️ ' + LT('lang.recall.title', { field: field.title.toLowerCase(), lang: info(c).flag + ' ' + info(c).label })),
     h('p', { class: 'tiny' }, LT('lang.recall.how')),
     h('div', { class: 'row' }, si.el, clock, h('button', { class: 'btn small', onclick: finish }, LT('lang.recall.done'))), msg, list);
@@ -161,7 +161,7 @@ const PEC_AREAS = ['script', 'orthography', 'phonology', 'morphology', 'syntax',
 /** D18: the peculiarities of a language as a free library (no order): what is new for you first marked, every one readable. */
 VIEWS.peculiar = (v, r) => {
   const c = r.arg && UI.C.lang[r.arg] ? r.arg : UI.lang, W = UI.C.data.world;
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.length > 1 ? history.back() : go('#/') }, '← ' + LT('lang.card.back'))),
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.length > 1 ? history.back() : go('#/') }, arrowBack() + ' ' + LT('lang.card.back'))),
     h('h1', {}, '📚 ' + LT('lang.pec.title', { lang: info(c).name })), h('div', { class: 'row' }, flagRail(null, c, x => go('#/peculiar/' + x))));
   if (!W) return v.append(h('p', { class: 'lx-note' }, LT('lang.pec.noCatalogue')));
   const r2 = N.forLearner(UI.C, c, knowsL()), isNew = new Set(r2.new.map(x => x.p.id)), fam = Object.fromEntries(r2.familiar.map(x => [x.p.id, x.from]));
@@ -192,7 +192,7 @@ VIEWS.settings = (v) => {
       ...[[1, LT('lang.set.depth1')], [2, LT('lang.set.depth2')], [3, LT('lang.set.depth3')]].map(([d, t]) => h('option', { value: d, selected: (S.depth?.[c] ?? 3) === d ? true : null }, t))))));
   const num = (label, key, min, max, def) => h('label', { class: 'lx-setrow' }, label, ' ', h('input', { type: 'number', min, max, value: S[key] || def, onchange: e => { S[key] = Math.max(min, Math.min(max, +e.target.value || def)); save(); } }));
   const tog = (label, key) => h('label', { class: 'lx-check' }, h('input', { type: 'checkbox', checked: UI.prefs[key] !== false ? true : null, onchange: e => { UI.prefs[key] = e.target.checked; save(); } }), ' ', label);
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← ' + LT('lang.card.map'))), h('h1', {}, '⚙️ ' + LT('lang.shell.settings')),
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, arrowBack() + ' ' + LT('lang.card.map'))), h('h1', {}, '⚙️ ' + LT('lang.shell.settings')),
     h('h3', { class: 'lx-h3' }, LT('lang.set.studyNow')), langBox,
     h('p', { class: 'tiny lx-studynote' }, LT(UI.C.languages.length < UI.C.allLanguages.length ? 'lang.study.keptNote' : 'lang.study.note'), ' ',
       window.Noema?.langStudy?.chooser ? h('button', { class: 'btn ghost small lx-studyall', onclick: () => studySheet() }, LT('lang.study.allApp')) : null),

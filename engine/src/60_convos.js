@@ -230,7 +230,7 @@ function renderConvoHistory(box) {
   box.append(h('div', { class: 'histhead' },
     h('b', { class: 'grow' }, '🕘 ' + tE('engine.cv.title', { n: all.length }), tip(tE('engine.cv.tip'))),
     all.length ? h('button', { class: 'btn small', onclick: exportAllConvos }, '⬇️ ' + tE('engine.cv.exportAll')) : null,
-    h('button', { class: 'btn small primary', onclick: () => { T.showHistory = false; renderTutor(); } }, '← ' + tE('engine.cv.chat'))));
+    h('button', { class: 'btn small primary', onclick: () => { T.showHistory = false; renderTutor(); } }, arrowBack() + ' ' + tE('engine.cv.chat'))));
   if (others) box.append(h('label', { class: 'row tiny', style: { margin: '2px 0 4px' } }, h('input', { type: 'checkbox', checked: histAllKinds, onchange: e => { histAllKinds = e.target.checked; renderTutor(); } }), tE('engine.cv.alsoShow', { n: others })));
   if (all.length > 3) {
     const inp = h('input', { class: 'histsearch', placeholder: tE('engine.cv.search'), value: histQuery, oninput: e => { histQuery = e.target.value; const pos = e.target.selectionStart; renderTutor(); const ni = $('.histsearch'); if (ni) { ni.focus(); ni.setSelectionRange(pos, pos); } } });
