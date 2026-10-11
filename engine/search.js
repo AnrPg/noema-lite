@@ -10,111 +10,9 @@
 window.NoemaSearch = (() => {
   'use strict';
   const C = () => window.NoemaCatalog, N = () => window.Noema, S = () => window.NoemaShell;
-  const NB = ' ';
 
-  /* ---------- words (merged as sh.sr_*: the shell's L() reads them) ---------- */
-  const T = {
-    en: {
-      search: 'Search', placeholder: 'Search everything…', openPage: 'Open in a page', exact: 'Exact match', more: '+{n} more', none: 'Nothing found for “{q}”.', noneTip: 'Try another word, or fewer filters.',
-      typeMore: 'Type at least two letters.', indexing: 'Hold on: I am leafing through every page of the app, so nothing escapes your search ({done} of {total}).', indexingWhat: 'This happens once on each device, then only for what changes. What is found so far is shown below.', results: '{n} results', results1: '1 result',
-      filters: 'Filters', filtersN: 'Filters ({n})', all: 'All', world: 'Part of the app', scope: 'Where', everywhere: 'Everywhere', hereIs: 'Here: {title}', lang: 'Language', status: 'Status',
-      stUnread: 'Not read yet', stUnsolved: 'Not solved yet', stWrong: 'My mistakes', clear: 'Clear the filters',
-      t_roadmap: 'Roadmaps', t_station: 'Stations', t_subject: 'Subjects', t_chapter: 'Chapters', t_section: 'Sections', t_theory: 'Theory', t_exercise: 'Exercises', t_card: 'Flashcards', t_trap: 'Traps', t_drill: 'Debug drills', t_source: 'Sources', t_convo: 'Conversations',
-      t_word: 'Words', t_meaning: 'Meanings', t_grammar: 'Grammar', t_lesson: 'Lessons', t_field: 'Vocabulary fields', t_sentence: 'Sentences', t_phenomenon: 'Peculiarities',
-      '1_roadmap': 'Roadmap', '1_station': 'Station', '1_subject': 'Subject', '1_chapter': 'Chapter', '1_section': 'Section', '1_theory': 'Theory', '1_exercise': 'Exercise', '1_card': 'Flashcard', '1_trap': 'Trap', '1_drill': 'Debug drill', '1_source': 'Source', '1_convo': 'Conversation',
-      '1_word': 'Word', '1_meaning': 'Meaning', '1_grammar': 'Grammar', '1_lesson': 'Lesson', '1_field': 'Vocabulary field', '1_sentence': 'Sentence', '1_phenomenon': 'Peculiarity',
-      f_title: 'Title', f_description: 'Description', f_subtitle: 'Subtitle', f_objectives: 'Objectives', f_mantra: 'Mental model', f_hook: 'Introduction', f_question: 'Question', f_options: 'Choices', f_front: 'Front', f_back: 'Back',
-      f_text: 'Text', f_fix: 'Fix', f_symptom: 'Symptom', f_steps: 'Steps', f_file: 'File', f_goal: 'Goal', f_summary: 'Summary', f_goals: 'Learning goals', f_chapters: 'Chapters', f_word: 'Word', f_forms: 'Forms',
-      f_reading: 'Reading', f_meanings: 'Meanings', f_sentence: 'Sentence', f_translation: 'Translation', f_examples: 'Examples', f_meaning: 'Meaning', f_words: 'Words', f_said: 'What was said',
-      b_paragraph: 'Theory paragraph', b_list: 'List', b_code: 'Code', b_diagram: 'Diagram', b_table: 'Table', b_note: 'Note', b_comparison: 'Comparison', b_process: 'Process', b_question: 'Question', b_questions: 'Questions', b_terms: 'Terms', b_figure: 'Figure',
-      via_tutor: 'from the character button', via_explainThis: 'from “Explain this”', via_explainDifferently: 'from “Explain differently”', via_helpSocratic: 'from “Help me get it”', via_askHint: 'from “Ask” before answering',
-      via_cardHint: 'from a flashcard (hint)', via_cardExplain: 'from a flashcard (explain)', via_section_socratic: 'from “Socratic dialogue” on a section', via_section_debug: 'from “Case simulation” on a section', via_section_interview: 'from “Interview me” on a section',
-      via_chapterSocratic: 'from “Socratic review” of a chapter', via_drillRoleplay: 'from a debug drill', via_lang: 'from a language course',
-      whereEx: 'exercise {n} of chapter {c}', whereBlock: '{kind} in “{sec}”', whereCard: 'flashcard of chapter {c}', whereSec: 'section “{sec}”', whereCh: 'chapter {c}', whereDrill: 'debug drill “{t}”',
-      practise: 'Practise these results', practiseNone: 'Nothing to practise among these results: exercises, flashcards and words can be practised.', roundOf: 'Practice round {i} of {n}: {title}', next: 'Next: {title}', roundEnd: 'End the round', roundDone: 'The round is over. Well done!',
-      pEx: '{n} exercises', pEx1: '1 exercise', pCards: '{n} flashcards', pCards1: '1 flashcard', pWords: 'words of “{title}”',
-      save: 'Keep this search', saved: 'Kept in “Saved searches” as “{name}”', nameIt: 'A name for this search', collections: 'Saved searches', collectionsSub: 'Searches you kept. Open one to see its results again, always up to date.', collectionsN: 'Saved searches ({n})', collectionsN1: '1 saved search',
-      kinds: 'What to show', recent: 'Recent searches', rename: 'Rename', del: 'Delete', delSure: 'Delete the saved search “{name}”? Only the search goes; everything it finds stays.', copyLink: 'Copy the link', linkCopied: 'Link copied', open: 'Open', nItems: '{n} found', nItems1: '1 found', collection: 'Saved search',
-      inLang: 'in {lang}',
-    },
-    el: {
-      search: 'Αναζήτηση', placeholder: 'Αναζήτηση σε όλα…', openPage: 'Άνοιγμα σε σελίδα', exact: 'Ακριβές ταίριασμα', more: '+{n} ακόμη', none: `Δεν βρέθηκε τίποτα για «${NB}{q}${NB}».`, noneTip: 'Δοκίμασε άλλη λέξη ή λιγότερα φίλτρα.',
-      typeMore: 'Γράψε τουλάχιστον δύο γράμματα.', indexing: `Μια στιγμή: ξεφυλλίζω όλες τις σελίδες της εφαρμογής, για να μη σου ξεφύγει τίποτα (${NB}{done} από {total}${NB}).`, indexingWhat: 'Γίνεται μία φορά σε κάθε συσκευή και μετά μόνο για ό,τι αλλάζει. Όσα βρέθηκαν ως τώρα φαίνονται παρακάτω.', results: '{n} αποτελέσματα', results1: '1 αποτέλεσμα',
-      filters: 'Φίλτρα', filtersN: 'Φίλτρα ({n})', all: 'Όλα', world: 'Μέρος της εφαρμογής', scope: 'Πού', everywhere: 'Παντού', hereIs: 'Εδώ: {title}', lang: 'Γλώσσα', status: 'Κατάσταση',
-      stUnread: 'Αδιάβαστα', stUnsolved: 'Άλυτες', stWrong: 'Τα λάθη μου', clear: 'Καθάρισμα φίλτρων',
-      t_roadmap: 'Οδικοί χάρτες', t_station: 'Σταθμοί', t_subject: 'Θέματα', t_chapter: 'Κεφάλαια', t_section: 'Ενότητες', t_theory: 'Θεωρία', t_exercise: 'Ασκήσεις', t_card: 'Κάρτες', t_trap: 'Παγίδες', t_drill: 'Ασκήσεις εντοπισμού σφαλμάτων', t_source: 'Πηγές', t_convo: 'Συζητήσεις',
-      t_word: 'Λέξεις', t_meaning: 'Σημασίες', t_grammar: 'Γραμματική', t_lesson: 'Μαθήματα', t_field: 'Θεματικά πεδία', t_sentence: 'Προτάσεις', t_phenomenon: 'Ιδιαιτερότητες',
-      '1_roadmap': 'Οδικός χάρτης', '1_station': 'Σταθμός', '1_subject': 'Θέμα', '1_chapter': 'Κεφάλαιο', '1_section': 'Ενότητα', '1_theory': 'Θεωρία', '1_exercise': 'Άσκηση', '1_card': 'Κάρτα', '1_trap': 'Παγίδα', '1_drill': 'Άσκηση εντοπισμού σφαλμάτων', '1_source': 'Πηγή', '1_convo': 'Συζήτηση',
-      '1_word': 'Λέξη', '1_meaning': 'Σημασία', '1_grammar': 'Γραμματική', '1_lesson': 'Μάθημα', '1_field': 'Θεματικό πεδίο', '1_sentence': 'Πρόταση', '1_phenomenon': 'Ιδιαιτερότητα',
-      f_title: 'Τίτλος', f_description: 'Περιγραφή', f_subtitle: 'Υπότιτλος', f_objectives: 'Στόχοι', f_mantra: 'Νοητικό μοντέλο', f_hook: 'Εισαγωγή', f_question: 'Ερώτηση', f_options: 'Επιλογές', f_front: 'Μπροστά', f_back: 'Πίσω',
-      f_text: 'Κείμενο', f_fix: 'Λύση', f_symptom: 'Σύμπτωμα', f_steps: 'Βήματα', f_file: 'Αρχείο', f_goal: 'Στόχος', f_summary: 'Σύνοψη', f_goals: 'Μαθησιακοί στόχοι', f_chapters: 'Κεφάλαια', f_word: 'Λέξη', f_forms: 'Τύποι',
-      f_reading: 'Προφορά', f_meanings: 'Σημασίες', f_sentence: 'Πρόταση', f_translation: 'Μετάφραση', f_examples: 'Παραδείγματα', f_meaning: 'Σημασία', f_words: 'Λέξεις', f_said: 'Όσα ειπώθηκαν',
-      b_paragraph: 'Παράγραφος θεωρίας', b_list: 'Λίστα', b_code: 'Κώδικας', b_diagram: 'Διάγραμμα', b_table: 'Πίνακας', b_note: 'Σημείωση', b_comparison: 'Σύγκριση', b_process: 'Ροή', b_question: 'Ερώτηση', b_questions: 'Ερωτήσεις', b_terms: 'Όροι', b_figure: 'Εικόνα',
-      via_tutor: 'από το κουμπί του χαρακτήρα', via_explainThis: 'από το «Εξήγησέ το»', via_explainDifferently: 'από το «Εξήγησέ το αλλιώς»', via_helpSocratic: 'από το «Βοήθησέ με να το καταλάβω»', via_askHint: 'από το «Ρώτα» πριν την απάντηση',
-      via_cardHint: 'από κάρτα (υπόδειξη)', via_cardExplain: 'από κάρτα (εξήγηση)', via_section_socratic: 'από τον «Σωκρατικό διάλογο» σε ενότητα', via_section_debug: 'από την «Προσομοίωση βλάβης» σε ενότητα', via_section_interview: 'από τη «Συνέντευξη» σε ενότητα',
-      via_chapterSocratic: 'από τη «Σωκρατική επανάληψη» κεφαλαίου', via_drillRoleplay: 'από άσκηση εντοπισμού σφαλμάτων', via_lang: 'από μάθημα γλώσσας',
-      whereEx: 'άσκηση {n} του κεφ. {c}', whereBlock: `{kind} στην ενότητα «${NB}{sec}${NB}»`, whereCard: 'κάρτα του κεφ. {c}', whereSec: `ενότητα «${NB}{sec}${NB}»`, whereCh: 'κεφάλαιο {c}', whereDrill: `άσκηση εντοπισμού σφαλμάτων «${NB}{t}${NB}»`,
-      practise: 'Εξάσκηση σε αυτά τα αποτελέσματα', practiseNone: 'Δεν υπάρχει κάτι για εξάσκηση εδώ: εξάσκηση γίνεται σε ασκήσεις, κάρτες και λέξεις.', roundOf: 'Γύρος εξάσκησης {i} από {n}: {title}', next: 'Επόμενο: {title}', roundEnd: 'Τέλος γύρου', roundDone: 'Ο γύρος τελείωσε. Μπράβο!',
-      pEx: '{n} ασκήσεις', pEx1: '1 άσκηση', pCards: '{n} κάρτες', pCards1: '1 κάρτα', pWords: `λέξεις του «${NB}{title}${NB}»`,
-      save: 'Κράτα αυτή την αναζήτηση', saved: `Κρατήθηκε στις «${NB}Αποθηκευμένες αναζητήσεις${NB}» ως «${NB}{name}${NB}»`, nameIt: 'Ένα όνομα για αυτή την αναζήτηση', collections: 'Αποθηκευμένες αναζητήσεις', collectionsSub: 'Αναζητήσεις που κράτησες. Άνοιξε μία για να δεις ξανά τα αποτελέσματά της, πάντα ενημερωμένα.', collectionsN: 'Αποθηκευμένες αναζητήσεις ({n})', collectionsN1: '1 αποθηκευμένη αναζήτηση',
-      kinds: 'Τι να δείχνει', recent: 'Πρόσφατες αναζητήσεις', rename: 'Μετονομασία', del: 'Διαγραφή', delSure: `Διαγραφή της αποθηκευμένης αναζήτησης «${NB}{name}${NB}»; Φεύγει μόνο η αναζήτηση· όσα βρίσκει μένουν.`, copyLink: 'Αντιγραφή συνδέσμου', linkCopied: 'Ο σύνδεσμος αντιγράφηκε', open: 'Άνοιγμα', nItems: '{n} βρέθηκαν', nItems1: '1 βρέθηκε', collection: 'Αποθηκευμένη αναζήτηση',
-      inLang: 'στα {lang}',
-    },
-    ru: {
-      search: 'Поиск', placeholder: 'Искать везде…', openPage: 'Открыть на странице', exact: 'Точное совпадение', more: 'ещё {n}', none: `По запросу «${NB}{q}${NB}» ничего не найдено.`, noneTip: 'Попробуй другое слово или меньше фильтров.',
-      typeMore: 'Введи хотя бы две буквы.', indexing: 'Минутку: листаю все страницы приложения, чтобы от поиска ничего не ускользнуло ({done} из {total}).', indexingWhat: 'Это происходит один раз на каждом устройстве, потом только для того, что меняется. Найденное пока — ниже.', results: 'Найдено: {n}', results1: 'Найдено: 1',
-      filters: 'Фильтры', filtersN: 'Фильтры ({n})', all: 'Всё', world: 'Часть приложения', scope: 'Где', everywhere: 'Везде', hereIs: 'Здесь: {title}', lang: 'Язык', status: 'Состояние',
-      stUnread: 'Не прочитано', stUnsolved: 'Не решено', stWrong: 'Мои ошибки', clear: 'Сбросить фильтры',
-      t_roadmap: 'Дорожные карты', t_station: 'Станции', t_subject: 'Предметы', t_chapter: 'Главы', t_section: 'Разделы', t_theory: 'Теория', t_exercise: 'Упражнения', t_card: 'Карточки', t_trap: 'Ловушки', t_drill: 'Поиск неисправностей', t_source: 'Источники', t_convo: 'Беседы',
-      t_word: 'Слова', t_meaning: 'Значения', t_grammar: 'Грамматика', t_lesson: 'Уроки', t_field: 'Тематические поля', t_sentence: 'Предложения', t_phenomenon: 'Особенности',
-      '1_roadmap': 'Дорожная карта', '1_station': 'Станция', '1_subject': 'Предмет', '1_chapter': 'Глава', '1_section': 'Раздел', '1_theory': 'Теория', '1_exercise': 'Упражнение', '1_card': 'Карточка', '1_trap': 'Ловушка', '1_drill': 'Поиск неисправности', '1_source': 'Источник', '1_convo': 'Беседа',
-      '1_word': 'Слово', '1_meaning': 'Значение', '1_grammar': 'Грамматика', '1_lesson': 'Урок', '1_field': 'Тематическое поле', '1_sentence': 'Предложение', '1_phenomenon': 'Особенность',
-      f_title: 'Название', f_description: 'Описание', f_subtitle: 'Подзаголовок', f_objectives: 'Цели', f_mantra: 'Мысленная модель', f_hook: 'Введение', f_question: 'Вопрос', f_options: 'Варианты', f_front: 'Лицевая сторона', f_back: 'Обратная сторона',
-      f_text: 'Текст', f_fix: 'Решение', f_symptom: 'Симптом', f_steps: 'Шаги', f_file: 'Файл', f_goal: 'Цель', f_summary: 'Кратко', f_goals: 'Учебные цели', f_chapters: 'Главы', f_word: 'Слово', f_forms: 'Формы',
-      f_reading: 'Чтение', f_meanings: 'Значения', f_sentence: 'Предложение', f_translation: 'Перевод', f_examples: 'Примеры', f_meaning: 'Значение', f_words: 'Слова', f_said: 'Что было сказано',
-      b_paragraph: 'Абзац теории', b_list: 'Список', b_code: 'Код', b_diagram: 'Схема', b_table: 'Таблица', b_note: 'Заметка', b_comparison: 'Сравнение', b_process: 'Процесс', b_question: 'Вопрос', b_questions: 'Вопросы', b_terms: 'Термины', b_figure: 'Рисунок',
-      via_tutor: 'с кнопки персонажа', via_explainThis: 'с кнопки «Объясни это»', via_explainDifferently: 'с кнопки «Объясни иначе»', via_helpSocratic: 'с кнопки «Помоги понять»', via_askHint: 'с кнопки «Спроси» до ответа',
-      via_cardHint: 'с карточки (подсказка)', via_cardExplain: 'с карточки (объяснение)', via_section_socratic: 'из «Сократического диалога» по разделу', via_section_debug: 'из «Разбора случая» по разделу', via_section_interview: 'из «Собеседования» по разделу',
-      via_chapterSocratic: 'из «Сократического повторения» главы', via_drillRoleplay: 'из поиска неисправности', via_lang: 'из языкового курса',
-      whereEx: 'упражнение {n} главы {c}', whereBlock: `{kind} в разделе «${NB}{sec}${NB}»`, whereCard: 'карточка главы {c}', whereSec: `раздел «${NB}{sec}${NB}»`, whereCh: 'глава {c}', whereDrill: `«${NB}{t}${NB}»`,
-      practise: 'Потренироваться на этих результатах', practiseNone: 'Здесь нечего тренировать: тренируются упражнения, карточки и слова.', roundOf: 'Тренировка {i} из {n}: {title}', next: 'Дальше: {title}', roundEnd: 'Закончить', roundDone: 'Тренировка окончена. Молодец!',
-      pEx: 'Упражнений: {n}', pEx1: '1 упражнение', pCards: 'Карточек: {n}', pCards1: '1 карточка', pWords: `слова «${NB}{title}${NB}»`,
-      save: 'Сохранить этот поиск', saved: `Сохранено в «${NB}Сохранённых поисках${NB}» как «${NB}{name}${NB}»`, nameIt: 'Название для этого поиска', collections: 'Сохранённые поиски', collectionsSub: 'Твои сохранённые поиски. Открой любой, чтобы снова увидеть результаты, всегда свежие.', collectionsN: 'Сохранённые поиски ({n})', collectionsN1: '1 сохранённый поиск',
-      kinds: 'Что показывать', recent: 'Недавние поиски', rename: 'Переименовать', del: 'Удалить', delSure: `Удалить сохранённый поиск «${NB}{name}${NB}»? Удалится только поиск, найденное останется.`, copyLink: 'Скопировать ссылку', linkCopied: 'Ссылка скопирована', open: 'Открыть', nItems: 'Найдено: {n}', nItems1: 'Найдено: 1', collection: 'Сохранённый поиск',
-      inLang: '({lang})',
-    },
-    fr: {
-      search: 'Recherche', placeholder: 'Rechercher partout…', openPage: 'Ouvrir dans une page', exact: 'Correspondance exacte', more: '+{n} de plus', none: `Rien trouvé pour «${NB}{q}${NB}».`, noneTip: 'Essaie un autre mot, ou moins de filtres.',
-      typeMore: 'Tape au moins deux lettres.', indexing: `Un instant${NB}: je feuillette toutes les pages de l’app pour que rien n’échappe à ta recherche (${NB}{done} sur {total}${NB}).`, indexingWhat: 'Cela se fait une fois par appareil, puis seulement pour ce qui change. Ce qui est déjà trouvé s’affiche plus bas.', results: '{n} résultats', results1: '1 résultat',
-      filters: 'Filtres', filtersN: 'Filtres ({n})', all: 'Tout', world: 'Partie de l’app', scope: 'Où', everywhere: 'Partout', hereIs: `Ici${NB}: {title}`, lang: 'Langue', status: 'État',
-      stUnread: 'Pas encore lu', stUnsolved: 'Pas encore résolu', stWrong: 'Mes erreurs', clear: 'Effacer les filtres',
-      t_roadmap: 'Parcours', t_station: 'Étapes', t_subject: 'Matières', t_chapter: 'Chapitres', t_section: 'Sections', t_theory: 'Théorie', t_exercise: 'Exercices', t_card: 'Cartes', t_trap: 'Pièges', t_drill: 'Diagnostics', t_source: 'Sources', t_convo: 'Conversations',
-      t_word: 'Mots', t_meaning: 'Sens', t_grammar: 'Grammaire', t_lesson: 'Leçons', t_field: 'Champs lexicaux', t_sentence: 'Phrases', t_phenomenon: 'Particularités',
-      '1_roadmap': 'Parcours', '1_station': 'Étape', '1_subject': 'Matière', '1_chapter': 'Chapitre', '1_section': 'Section', '1_theory': 'Théorie', '1_exercise': 'Exercice', '1_card': 'Carte', '1_trap': 'Piège', '1_drill': 'Diagnostic', '1_source': 'Source', '1_convo': 'Conversation',
-      '1_word': 'Mot', '1_meaning': 'Sens', '1_grammar': 'Grammaire', '1_lesson': 'Leçon', '1_field': 'Champ lexical', '1_sentence': 'Phrase', '1_phenomenon': 'Particularité',
-      f_title: 'Titre', f_description: 'Description', f_subtitle: 'Sous-titre', f_objectives: 'Objectifs', f_mantra: 'Modèle mental', f_hook: 'Introduction', f_question: 'Question', f_options: 'Choix', f_front: 'Recto', f_back: 'Verso',
-      f_text: 'Texte', f_fix: 'Correction', f_symptom: 'Symptôme', f_steps: 'Étapes', f_file: 'Fichier', f_goal: 'But', f_summary: 'Résumé', f_goals: 'Objectifs d’apprentissage', f_chapters: 'Chapitres', f_word: 'Mot', f_forms: 'Formes',
-      f_reading: 'Lecture', f_meanings: 'Sens', f_sentence: 'Phrase', f_translation: 'Traduction', f_examples: 'Exemples', f_meaning: 'Sens', f_words: 'Mots', f_said: 'Ce qui a été dit',
-      b_paragraph: 'Paragraphe de théorie', b_list: 'Liste', b_code: 'Code', b_diagram: 'Schéma', b_table: 'Tableau', b_note: 'Note', b_comparison: 'Comparaison', b_process: 'Processus', b_question: 'Question', b_questions: 'Questions', b_terms: 'Termes', b_figure: 'Figure',
-      via_tutor: 'depuis le bouton du personnage', via_explainThis: 'depuis «${NB}Explique-moi ça${NB}»', via_explainDifferently: 'depuis «${NB}Explique autrement${NB}»', via_helpSocratic: 'depuis «${NB}Aide-moi à comprendre${NB}»', via_askHint: 'depuis «${NB}Demander${NB}» avant de répondre',
-      via_cardHint: 'depuis une carte (indice)', via_cardExplain: 'depuis une carte (explication)', via_section_socratic: 'depuis le dialogue socratique d’une section', via_section_debug: 'depuis la simulation de cas d’une section', via_section_interview: 'depuis l’entretien sur une section',
-      via_chapterSocratic: 'depuis la révision socratique d’un chapitre', via_drillRoleplay: 'depuis un diagnostic', via_lang: 'depuis un cours de langue',
-      whereEx: 'exercice {n} du chapitre {c}', whereBlock: `{kind} dans «${NB}{sec}${NB}»`, whereCard: 'carte du chapitre {c}', whereSec: `section «${NB}{sec}${NB}»`, whereCh: 'chapitre {c}', whereDrill: `diagnostic «${NB}{t}${NB}»`,
-      practise: 'S’entraîner sur ces résultats', practiseNone: `Rien à travailler ici${NB}: on s’entraîne sur les exercices, les cartes et les mots.`, roundOf: 'Entraînement {i} sur {n}${NB}: {title}', next: `Suite${NB}: {title}`, roundEnd: 'Terminer', roundDone: 'L’entraînement est fini. Bravo${NB}!',
-      pEx: '{n} exercices', pEx1: '1 exercice', pCards: '{n} cartes', pCards1: '1 carte', pWords: `les mots de «${NB}{title}${NB}»`,
-      save: 'Garder cette recherche', saved: `Gardée dans «${NB}Recherches enregistrées${NB}» sous «${NB}{name}${NB}»`, nameIt: 'Un nom pour cette recherche', collections: 'Recherches enregistrées', collectionsSub: 'Les recherches que tu as gardées. Ouvre-en une pour revoir ses résultats, toujours à jour.', collectionsN: 'Recherches enregistrées ({n})', collectionsN1: '1 recherche enregistrée',
-      kinds: 'Quoi montrer', recent: 'Recherches récentes', rename: 'Renommer', del: 'Supprimer', delSure: `Supprimer la recherche enregistrée «${NB}{name}${NB}»${NB}? Seule la recherche part${NB}; ce qu’elle trouve reste.`, copyLink: 'Copier le lien', linkCopied: 'Lien copié', open: 'Ouvrir', nItems: '{n} trouvés', nItems1: '1 trouvé', collection: 'Recherche enregistrée',
-      inLang: 'en {lang}',
-    },
-  };
-  // the French lines above use ${NB} inside plain quotes in a few places: make them the real no-break space
-  for (const w of Object.values(T)) for (const k in w) w[k] = String(w[k]).replace(/\$\{NB\}/g, NB);
-  function mergeWords() {
-    const I = window.NoemaI18n; if (!I) return false;
-    for (const [l, words] of Object.entries(T)) { const B = I.bundles[l] || (I.bundles[l] = {}); for (const [k, v] of Object.entries(words)) B['sh.sr_' + k] = v; }
-    return true;
-  }
-  if (!mergeWords()) addEventListener('DOMContentLoaded', mergeWords);
+  /* ---------- words: in engine/i18n_shell.js as sr_* (every interface language), read through the shell's L() ---------- */
+  const T = (() => { const out = {}; for (const [l, w] of Object.entries(window.NOEMA_SHELL_WORDS || {})) { out[l] = {}; for (const k in w) if (k.startsWith('sr_')) out[l][k.slice(3)] = w[k]; } return out; })();
   const L = (k, v) => S() ? S().L('sr_' + k, v) : (T.en[k] || k);
 
   /* ---------- the learner's data ---------- */
@@ -229,12 +127,12 @@ window.NoemaSearch = (() => {
     const chN = id => I.byKey(`s:${sj}:ch:${id}`)?.x?.n || '?';
     const short = t => { t = String(t || ''); return t.length > 60 ? t.slice(0, 58) + '…' : t; };
     let where = null;
-    if (o.ex || x.ctx === 'exercise' && x.ctxId && !String(x.ctxId).startsWith('fc:')) { const e = I.byKey(`s:${sj}:ex:${o.ex || x.ctxId}`); if (e) where = L('whereEx', { n: e.x?.n || '?', c: chN(e.x?.ch) }) + ` «${short(e.ti)}»`; }
-    else if (o.card || String(x.ctxId || '').startsWith('fc:')) { const key = o.card || String(x.ctxId).slice(3), cd = I.byKey(`s:${sj}:fc:${key}`); if (cd) where = L('whereCard', { c: chN(cd.x?.ch) }) + ` «${short(cd.ti)}»`; }
+    if (o.ex || x.ctx === 'exercise' && x.ctxId && !String(x.ctxId).startsWith('fc:')) { const e = I.byKey(`s:${sj}:ex:${o.ex || x.ctxId}`); if (e) where = L('whereEx', { n: e.x?.n || '?', c: chN(e.x?.ch) }) + ' ' + L('quoted', { t: short(e.ti) }); }
+    else if (o.card || String(x.ctxId || '').startsWith('fc:')) { const key = o.card || String(x.ctxId).slice(3), cd = I.byKey(`s:${sj}:fc:${key}`); if (cd) where = L('whereCard', { c: chN(cd.x?.ch) }) + ' ' + L('quoted', { t: short(cd.ti) }); }
     else if (o.bid && (o.sec || x.sec)) { const b = I.byKey(`s:${sj}:b:${o.sec || x.sec}:${o.bid}`); if (b) where = L('whereBlock', { kind: L('b_' + (b.x?.bt || 'paragraph')), sec: b.pa[b.pa.length - 1] || '' }); }
     else if (o.drill || x.ctx === 'playbook') { const d = I.byKey(`s:${sj}:dr:${o.drill || x.ctxId}`); if (d) where = L('whereDrill', { t: short(d.ti) }); }
     if (!where && (o.sec || x.sec || x.ctx === 'section')) { const s = I.byKey(`s:${sj}:s:${o.sec || x.sec || x.ctxId}`); if (s) where = L('whereSec', { sec: short(s.ti) }); }
-    if (!where && (o.ch || x.ch || x.ctx === 'chapter')) { const id = o.ch || x.ch || x.ctxId, c = I.byKey(`s:${sj}:ch:${id}`); if (c) where = L('whereCh', { c: c.x?.n || '?' }) + ` «${short(c.ti)}»`; }
+    if (!where && (o.ch || x.ch || x.ctx === 'chapter')) { const id = o.ch || x.ch || x.ctxId, c = I.byKey(`s:${sj}:ch:${id}`); if (c) where = L('whereCh', { c: c.x?.n || '?' }) + ' ' + L('quoted', { t: short(c.ti) }); }
     if (!where && x.label) where = short(x.label);
     if (where) bits.push(where);
     return bits.join(' · ');

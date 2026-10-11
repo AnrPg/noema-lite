@@ -2265,14 +2265,14 @@ function searchRunView() {
   if (st.kind === 'ex') {
     const list = st.ids.map(id => EX[id]).filter(Boolean);
     if (!list.length) return after ? after.run() : go(R.back);
-    return startRun(list, { title: '🔎 ' + st.title, count: list.length, back: R.back, after });
+    return startRun(list, { title: st.title, count: list.length, back: R.back, after });
   }
   const keys = new Set(st.keys || []), cards = allCards().filter(c => keys.has(c.key));
   if (!cards.length) return after ? after.run() : go(R.back);
-  shellChrome({ sub: true, crumbs: [['🔎 ' + st.title]], back: R.back, reading: true });
+  shellChrome({ sub: true, crumbs: [[st.title]], back: R.back, reading: true });
   const body = h('div');
-  view(h('h1', {}, '🔎 ' + st.title), body);
-  flashDeck(body, cards, { all: true, onDone: () => h('div', { class: 'row', style: { justifyContent: 'center' } }, after ? h('button', { class: 'btn primary ns-srnext', onclick: after.run }, after.label) : null, h('button', { class: 'btn', onclick: () => go(R.back) }, 'Done')) });
+  view(h('h1', {}, st.title), body);
+  flashDeck(body, cards, { all: true, onDone: () => h('div', { class: 'row', style: { justifyContent: 'center' } }, after ? h('button', { class: 'btn primary ns-srnext', onclick: after.run }, after.label) : null, h('button', { class: 'btn', onclick: () => go(R.back) }, t('sh.sr_backToResults'))) });
 }
 function mistakesList() { return ALL_EX.filter(e => S.res[e.id] && S.res[e.id].last === false); }
 function mistakesView() {
