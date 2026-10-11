@@ -403,27 +403,27 @@
   {
    "for": "de",
    "rel": "different",
-   "text": "German mein / dein / sein are words before the noun that agree with the thing owned; Arabic uses endings after the noun that change only with the owner: كِتَابِي, كِتَابُكَ, كِتَابُهُ. As with sein / ihr, Arabic tells his from her: كِتَابُهُ / كِتَابُهَا."
+   "text": "German mein / dein / sein are words before the noun that agree with the thing owned; Arabic uses **endings after the noun that change only with the owner**:\n→ كِتَابِي, كِتَابُكَ, كِتَابُهُ\n\nAs with sein / ihr, Arabic tells his from her:\n→ كِتَابُهُ / كِتَابُهَا"
   },
   {
    "for": "zh",
    "rel": "different",
-   "text": "Chinese puts 我的 before the noun (我的书); Arabic adds an ending after it: كِتَابِي. 你的 has two Arabic forms by gender, كِتَابُكَ / كِتَابُكِ, and the noun takes no article: كِتَابِي, never *الْكِتَابِي."
+   "text": "Chinese puts 我的 before the noun (我的书); Arabic adds an ending after it: كِتَابِي.\n\n- 你的 has two Arabic forms by gender: كِتَابُكَ / كِتَابُكِ.\n- The noun takes no article: كِتَابِي, never *الْكِتَابِي."
   },
   {
    "for": "it",
    "rel": "different",
-   "text": "Italian puts the article and an agreeing possessive before the noun (il mio libro, la mia casa); Arabic adds an ending after the noun and no article: كِتَابِي, بَيْتِي. Il suo libro is both كِتَابُهُ (his) and كِتَابُهَا (her)."
+   "text": "Italian puts the article and an agreeing possessive before the noun; Arabic adds an ending after the noun and no article:\n→ il mio libro, la mia casa — كِتَابِي, بَيْتِي\n\nIl suo libro is both كِتَابُهُ (his) and كِتَابُهَا (her)."
   },
   {
    "for": "sq",
    "rel": "similar",
-   "text": "Albanian also puts the possessive after the noun (libri im, “the book my”) and tells his from her (libri i tij / libri i saj), as Arabic does with كِتَابُهُ / كِتَابُهَا; but the Arabic possessive is an ending joined to the noun: كِتَابِي."
+   "text": "Albanian also puts the possessive after the noun and tells his from her, as Arabic does:\n→ libri im — “the book my”\n→ libri i tij / libri i saj — كِتَابُهُ / كِتَابُهَا\n\nBut the Arabic possessive is **an ending joined to the noun**: كِتَابِي."
   },
   {
    "for": "pt",
    "rel": "similar",
-   "text": "Portuguese o livro dele / o livro dela tells his from her after the noun, as Arabic does with endings: كِتَابُهُ / كِتَابُهَا. O meu livro has an article; كِتَابِي has none — the ending makes it definite."
+   "text": "Portuguese o livro dele / o livro dela tells his from her after the noun, as Arabic does with endings: كِتَابُهُ / كِتَابُهَا.\n\nO meu livro has an article; كِتَابِي has none — **the ending makes it definite**."
   },
   {
    "for": "type:fusional",

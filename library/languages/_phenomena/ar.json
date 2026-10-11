@@ -5202,7 +5202,7 @@
     {
      "for": "el",
      "rel": "similar",
-     "text": "Greek took Arabic words, mostly in the time of the sultans: χαΐρι (خَيْر), κέφι (كَيْف), φλιτζάνι (فِنْجَان), μαχαλάς (مَحَلَّة); and Arabic took many from Greek: قَلَم (κάλαμος), فُنْدُق (πανδοκεῖον)."
+     "text": "Greek took Arabic words, mostly in the time of the sultans:\n→ χαΐρι (خَيْر), κέφι (كَيْف), φλιτζάνι (فِنْجَان), μαχαλάς (مَحَلَّة)\n\nAnd Arabic took many from Greek:\n→ قَلَم (κάλαμος), فُنْدُق (πανδοκεῖον)"
     },
     {
      "for": "ru",
@@ -5967,7 +5967,7 @@
     {
      "for": "tr",
      "rel": "similar",
-     "text": "Turkish also avoids two consonants at the start of a word (*istasyon* for “station”), but allows syllables that begin with a vowel; Arabic starts every syllable with a consonant, at least the glottal stop ء."
+     "text": "Turkish also avoids two consonants at the start of a word (*istasyon* for “station”), but allows syllables that begin with a vowel.\n\nArabic starts every syllable with a consonant, at least the glottal stop ء."
     }
    ]
   },

@@ -368,7 +368,7 @@
   {
    "for": "fa",
    "rel": "similar",
-   "text": "Persian uses Arabic broken plurals for many Arabic loanwords (کتب, اخبار) besides its own -hā / -ān, and even the Arabic ending -āt (سبزیجات, vegetables); in Arabic these are the normal plurals."
+   "text": "Persian uses, besides its own -hā / -ān:\n- Arabic broken plurals for many Arabic loanwords: کتب, اخبار;\n- even the Arabic ending -āt: سبزیجات, vegetables.\n\nIn Arabic these are the normal plurals."
   },
   {
    "for": "tr",
@@ -418,7 +418,7 @@
   {
    "for": "de",
    "rel": "similar",
-   "text": "German also has many plural types, some with a vowel change inside (Buch → Bücher, Mann → Männer); in Arabic the inside change is the most common kind (كِتَاب → كُتُب, رَجُل → رِجَال), and there is a dual for two. Learn every noun with its plural, as in German."
+   "text": "German also has many plural types, some with a vowel change inside:\n→ Buch → Bücher, Mann → Männer\n\nIn Arabic the inside change is the most common kind, and there is a dual for two:\n→ كِتَاب → كُتُب, رَجُل → رِجَال\n\n**Learn every noun with its plural, as in German.**"
   },
   {
    "for": "zh",
@@ -428,12 +428,12 @@
   {
    "for": "it",
    "rel": "different",
-   "text": "Italian changes the final vowel (libro → libri, casa → case); most Arabic plurals change the inside of the word (كِتَاب → كُتُب), two take the dual (كِتَابَانِ), and plurals of things agree as feminine singular: هٰذِهِ الْكُتُبُ."
+   "text": "Italian changes the final vowel:\n→ libro → libri, casa → case\n\nIn Arabic:\n- most plurals change the inside of the word: كِتَاب → كُتُب;\n- two take the dual: كِتَابَانِ;\n- plurals of things agree as feminine singular: هٰذِهِ الْكُتُبُ."
   },
   {
    "for": "sq",
    "rel": "similar",
-   "text": "Albanian has many plural types, including vowel changes inside the word (dash → desh, natë → net); in Arabic that is the most common kind (قَلَم → أَقْلَام, بَيْت → بُيُوت), and two take the dual: قَلَمَانِ."
+   "text": "Albanian has many plural types, including vowel changes inside the word:\n→ dash → desh, natë → net\n\nIn Arabic that is the most common kind, and two take the dual:\n→ قَلَم → أَقْلَام, بَيْت → بُيُوت\n→ قَلَمَانِ"
   },
   {
    "for": "pt",

@@ -289,7 +289,7 @@
   {
    "for": "el",
    "rel": "similar",
-   "text": "Greek also drops the pronoun because the verb ending shows the person (τρώω), and has gender in the 3rd person (αυτός / αυτή / αυτό). Arabic also marks the gender of “you” (أَنْتَ / أَنْتِ) and has no neuter: a thing is هُوَ or هِيَ."
+   "text": "Greek also drops the pronoun because the verb ending shows the person (τρώω), and has gender in the 3rd person (αυτός / αυτή / αυτό).\n\nArabic also:\n- marks the gender of “you”: أَنْتَ / أَنْتِ;\n- has no neuter: a thing is هُوَ or هِيَ."
   },
   {
    "for": "ru",
@@ -299,12 +299,12 @@
   {
    "for": "es",
    "rel": "similar",
-   "text": "As in Spanish, the pronoun is dropped before a verb (como → آكُلُ), and “they” and “you (plural)” have masculine and feminine forms (ellos / ellas ≈ هُمْ / هُنَّ, vosotros / vosotras ≈ أَنْتُمْ / أَنْتُنَّ). New: the singular “you” also has gender, and there are dual pronouns."
+   "text": "As in Spanish, the pronoun is dropped before a verb (como → آكُلُ), and “they” and “you (plural)” have masculine and feminine forms:\n→ ellos / ellas ≈ هُمْ / هُنَّ\n→ vosotros / vosotras ≈ أَنْتُمْ / أَنْتُنَّ\n\nNew: **the singular “you” also has gender**, and there are dual pronouns."
   },
   {
    "for": "en",
    "rel": "new",
-   "text": "English shows gender only in he / she / it; Arabic shows it in “you” (أَنْتَ to a man, أَنْتِ to a woman) and in “they” too, has no “it” (a thing is هُوَ or هِيَ), and usually leaves the pronoun out before a verb."
+   "text": "English shows gender only in he / she / it. Arabic:\n- shows it in “you” (أَنْتَ to a man, أَنْتِ to a woman) and in “they” too;\n- has no “it”: a thing is هُوَ or هِيَ;\n- usually leaves the pronoun out before a verb."
   },
   {
    "for": "fr",
@@ -324,7 +324,7 @@
   {
    "for": "fa",
    "rel": "different",
-   "text": "Persian او is both he and she, and شما is the polite “you”; Arabic splits “you” and “they” by gender and has no polite pronoun. Like Persian, it drops the pronoun because the verb ending shows the person."
+   "text": "Persian او is both he and she, and شما is the polite “you”; Arabic splits “you” and “they” by gender and has no polite pronoun.\n\nLike Persian, it drops the pronoun because the verb ending shows the person."
   },
   {
    "for": "mr",
@@ -379,7 +379,7 @@
   {
    "for": "vi",
    "rel": "different",
-   "text": "Vietnamese uses kinship words as pronouns (anh, chị, em, ông, bà), chosen by age and respect; Arabic has one fixed set chosen by person, number and gender, and one “we” for chúng ta and chúng tôi."
+   "text": "Vietnamese uses kinship words as pronouns (anh, chị, em, ông, bà), chosen by age and respect.\n\nArabic has one fixed set chosen by person, number and gender, and one “we” for chúng ta and chúng tôi."
   },
   {
    "for": "iu",
@@ -389,17 +389,17 @@
   {
    "for": "it",
    "rel": "similar",
-   "text": "As in Italian, the pronoun is dropped before a verb (mangio → آكُلُ); Arabic adds gender to “you” (أَنْتَ / أَنْتِ) and to “they” (هُمْ / هُنَّ), and a thing is هُوَ or هِيَ by its gender. There is no polite Lei."
+   "text": "As in Italian, the pronoun is dropped before a verb (mangio → آكُلُ). Arabic:\n- adds gender to “you” (أَنْتَ / أَنْتِ) and to “they” (هُمْ / هُنَّ);\n- makes a thing هُوَ or هِيَ by its gender.\n\nThere is no polite Lei."
   },
   {
    "for": "sq",
    "rel": "similar",
-   "text": "Albanian also splits “they” by gender (ata / ato = هُمْ / هُنَّ) and drops the pronoun before a verb; Arabic also splits “you” — أَنْتَ / أَنْتِ, أَنْتُمْ / أَنْتُنَّ — and has dual pronouns for two people."
+   "text": "Albanian also splits “they” by gender (ata / ato = هُمْ / هُنَّ) and drops the pronoun before a verb. Arabic also:\n- splits “you”: أَنْتَ / أَنْتِ, أَنْتُمْ / أَنْتُنَّ;\n- has dual pronouns for two people."
   },
   {
    "for": "pt",
    "rel": "similar",
-   "text": "As in Portuguese, the pronoun is dropped (como → آكُلُ) and “they” has two forms (eles / elas = هُمْ / هُنَّ); Arabic also splits the singular “you” (أَنْتَ / أَنْتِ), has dual pronouns, and no polite você / o senhor."
+   "text": "As in Portuguese, the pronoun is dropped (como → آكُلُ) and “they” has two forms (eles / elas = هُمْ / هُنَّ). Arabic also:\n- splits the singular “you”: أَنْتَ / أَنْتِ;\n- has dual pronouns;\n- has no polite você / o senhor."
   },
   {
    "for": "type:fusional",

@@ -564,17 +564,17 @@
   {
    "lang": "he",
    "fn": "fn.comparison",
-   "note": "Hebrew has no special form: יוֹתֵר גָּדוֹל מִ… (more big than), הֲכִי גָּדוֹל (the biggest); its “than” is מִ / מֵאֲשֶׁר — the same מִן as Arabic مِنْ."
+   "note": "Hebrew has no special form; its “than” is מִ / מֵאֲשֶׁר — the same מִן as Arabic مِنْ.\n→ יוֹתֵר גָּדוֹל מִ… (more big than)\n→ הֲכִי גָּדוֹל (the biggest)"
   },
   {
    "lang": "de",
    "fn": "fn.comparison",
-   "note": "German: größer als, am größten / der größte — endings; Arabic changes the whole pattern of the word (كَبِير → أَكْبَر), and its “than” is “from” (مِنْ) where German has als."
+   "note": "German uses endings: größer als, am größten / der größte.\n\nArabic changes the whole pattern of the word (كَبِير → أَكْبَر), and its “than” is “from” (مِنْ) where German has als."
   },
   {
    "lang": "zh",
    "fn": "fn.comparison",
-   "note": "Chinese leaves the adjective alone: A 比 B 大 (A is bigger than B), 最大 (the biggest), 更 (even more)."
+   "note": "Chinese leaves the adjective alone:\n- A 比 B 大 — A is bigger than B\n- 最大 — the biggest\n- 更 — even more"
   },
   {
    "lang": "ar",
@@ -636,17 +636,17 @@
   {
    "for": "ru",
    "rel": "different",
-   "text": "Russian has a comparative in -ее / -е (быстрее, больше) with чем or the genitive (старше брата); Arabic has the pattern أَفْعَل with مِنْ."
+   "text": "Russian has a comparative in -ее / -е with чем or the genitive:\n→ быстрее, больше; старше брата\n\nArabic has the pattern أَفْعَل with مِنْ."
   },
   {
    "for": "es",
    "rel": "different",
-   "text": "Spanish says más grande que; Arabic changes the adjective (أَكْبَرُ) and says مِنْ for que. As with mejor and peor, “better” and “worse” are words of their own: أَفْضَلُ, أَسْوَأُ."
+   "text": "Spanish says más grande que; Arabic changes the adjective (أَكْبَرُ) and says مِنْ for que.\n\nAs with mejor and peor, “better” and “worse” are words of their own:\n→ أَفْضَلُ, أَسْوَأُ"
   },
   {
    "for": "en",
    "rel": "similar",
-   "text": "English bigger / biggest use endings; Arabic has one pattern for both — أَكْبَرُ (bigger), الْأَكْبَرُ (the biggest) — and its “than” is مِنْ, “from”."
+   "text": "English bigger / biggest use endings. Arabic has **one pattern for both**, and its “than” is مِنْ, “from”:\n→ أَكْبَرُ (bigger), الْأَكْبَرُ (the biggest)"
   },
   {
    "for": "fr",
@@ -686,37 +686,37 @@
   {
    "for": "de",
    "rel": "similar",
-   "text": "German has endings (größer, am größten) and als for “than”; Arabic has one pattern for both degrees, أَكْبَرُ, and says مِنْ (“from”) for als. As besser is not a form of gut, أَفْضَلُ is not a form of جَيِّد."
+   "text": "German has endings (größer, am größten) and als for “than”.\n\nArabic has **one pattern for both degrees**, أَكْبَرُ, and says مِنْ (“from”) for als.\n\nAs besser is not a form of gut, أَفْضَلُ is not a form of جَيِّد."
   },
   {
    "for": "zh",
    "rel": "different",
-   "text": "Chinese compares with 比 and leaves the adjective unchanged (房子比公寓大); Arabic changes the adjective itself (كَبِير → أَكْبَرُ) and puts مِنْ after it: الْبَيْتُ أَكْبَرُ مِنَ الشَّقَّةِ. 最大 is الْأَكْبَرُ."
+   "text": "Chinese compares with 比 and leaves the adjective unchanged:\n→ 房子比公寓大\n\nArabic changes the adjective itself (كَبِير → أَكْبَرُ) and puts مِنْ after it:\n→ الْبَيْتُ أَكْبَرُ مِنَ الشَّقَّةِ\n\n最大 is الْأَكْبَرُ."
   },
   {
    "for": "it",
    "rel": "similar",
-   "text": "Italian says più grande di — and di is close to Arabic مِنْ, “from”; but Arabic changes the adjective itself: أَكْبَرُ. Like maggiore, migliore and peggiore, the Arabic forms are words of their own, and the article makes a superlative: il più grande = الْأَكْبَرُ."
+   "text": "Italian says più grande di — and di is close to Arabic مِنْ, “from”; but Arabic **changes the adjective itself**: أَكْبَرُ.\n\n- Like maggiore, migliore and peggiore, the Arabic forms are words of their own.\n- The article makes a superlative: il più grande = الْأَكْبَرُ."
   },
   {
    "for": "sq",
    "rel": "different",
-   "text": "Albanian puts më before the adjective (më i madh se); Arabic changes the adjective itself (كَبِير → أَكْبَرُ) and says مِنْ (“from”) for se. The superlative with the article, më i madhi, is الْأَكْبَرُ."
+   "text": "Albanian puts më before the adjective (më i madh se). Arabic changes the adjective itself and says مِنْ (“from”) for se:\n→ كَبِير → أَكْبَرُ\n\nThe superlative with the article, më i madhi, is الْأَكْبَرُ."
   },
   {
    "for": "pt",
    "rel": "similar",
-   "text": "Portuguese has a few one-word comparatives (maior, melhor, pior) next to mais … do que; Arabic makes every simple adjective into one — أَكْبَرُ, أَصْغَرُ, أَجْمَلُ — and, as in o maior, the article makes it a superlative: الْأَكْبَرُ."
+   "text": "Portuguese has a few one-word comparatives (maior, melhor, pior) next to mais … do que.\n\nArabic **makes every simple adjective into one**:\n→ أَكْبَرُ, أَصْغَرُ, أَجْمَلُ\n\nAs in o maior, the article makes it a superlative: الْأَكْبَرُ."
   },
   {
    "for": "type:fusional",
    "rel": "similar",
-   "text": "If your language forms comparatives with an ending, Arabic does it with a pattern: the root goes into أَفْعَل (كَبِير → أَكْبَرُ), the same form for “bigger” and, with the article, “the biggest”."
+   "text": "If your language forms comparatives with an ending, Arabic does it with a pattern: the root goes into أَفْعَل — the same form for “bigger” and, with the article, “the biggest”.\n→ كَبِير → أَكْبَرُ"
   },
   {
    "for": "type:agglutinating",
    "rel": "different",
-   "text": "If you compare with a word for “more” and put the standard in the “from” case, half of it transfers: Arabic’s “than” is مِنْ, “from”; but the adjective changes its pattern: أَكْبَرُ مِنْ."
+   "text": "If you compare with a word for “more” and put the standard in the “from” case, half of it transfers:\n- Arabic’s “than” is مِنْ, “from”;\n- but the adjective changes its pattern: أَكْبَرُ مِنْ."
   },
   {
    "for": "type:isolating",

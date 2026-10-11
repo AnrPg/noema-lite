@@ -68,7 +68,7 @@
     {
      "for": "el",
      "rel": "trap",
-     "text": "Greek σε covers in, at and to (στο σπίτι, πάω στο σχολείο, στον γιατρό); Arabic splits it: فِي, إِلَى, عِنْدَ. Greek με is مَعَ for company but بِـ for a tool or an ingredient (καφές με γάλα = قَهْوَةٌ بِالْحَلِيبِ)."
+     "text": "Greek σε covers in, at and to (στο σπίτι, πάω στο σχολείο, στον γιατρό); Arabic splits it: فِي, إِلَى, عِنْدَ.\n\nGreek με is مَعَ for company but بِـ for a tool or an ingredient:\n→ καφές με γάλα = قَهْوَةٌ بِالْحَلِيبِ"
     }
    ]
   },
@@ -468,12 +468,12 @@
   {
    "lang": "he",
    "fn": "fn.prep.core",
-   "note": "Hebrew writes its three commonest prepositions together with the noun — בְּ (in), לְ (to, for), מִ (from) — where Arabic attaches only بِـ and لِـ; Hebrew בְּ is the everyday “in”, Arabic says فِي. Hebrew עִם (with) is Arabic مَعَ with the letters swapped."
+   "note": "Hebrew writes its three commonest prepositions together with the noun — בְּ (in), לְ (to, for), מִ (from) — where Arabic attaches only بِـ and لِـ.\n\n- Hebrew בְּ is the everyday “in”, Arabic says فِي.\n- Hebrew עִם (with) is Arabic مَعَ with the letters swapped."
   },
   {
    "lang": "de",
    "fn": "fn.prep.core",
-   "note": "German keeps one preposition and changes the case: in der Schule (where?) / in die Schule (where to?). Arabic keeps one case (the genitive) and changes the preposition: فِي الْمَدْرَسَةِ / إِلَى الْمَدْرَسَةِ."
+   "note": "German keeps one preposition and changes the case:\n→ in der Schule (where?) / in die Schule (where to?)\n\nArabic keeps one case (the genitive) and changes the preposition:\n→ فِي الْمَدْرَسَةِ / إِلَى الْمَدْرَسَةِ"
   },
   {
    "lang": "zh",
@@ -526,7 +526,7 @@
   {
    "for": "fa",
    "rel": "similar",
-   "text": "Persian prepositions also come first — در (in), به (to), از (from), با (with), برای (for), بی (without) — and match فِي, إِلَى, مِنْ, مَعَ, لِـ, بِدُونِ almost one to one; only با covers both company and tool, where Arabic splits مَعَ / بِـ."
+   "text": "Persian prepositions also come first and match the Arabic ones almost one to one:\n→ در (in), به (to), از (from), با (with), برای (for), بی (without)\n→ فِي, إِلَى, مِنْ, مَعَ, لِـ, بِدُونِ\n\nOnly با covers both company and tool, **where Arabic splits مَعَ / بِـ**."
   },
   {
    "for": "mr",
@@ -596,7 +596,7 @@
   {
    "for": "pt",
    "rel": "similar",
-   "text": "Portuguese em / a / de match فِي / إِلَى / مِنْ (na escola, à escola, da escola), com is مَعَ (or بِـ for a tool), sem is بِدُونِ. As in comigo, Arabic joins the pronoun to the preposition — مَعِي — but with every preposition."
+   "text": "Portuguese prepositions match the Arabic ones:\n- em / a / de — فِي / إِلَى / مِنْ (na escola, à escola, da escola);\n- com — مَعَ (or بِـ for a tool);\n- sem — بِدُونِ.\n\nAs in comigo, Arabic joins the pronoun to the preposition — مَعِي — **but with every preposition**."
   },
   {
    "for": "type:fusional",
@@ -611,7 +611,7 @@
   {
    "for": "type:isolating",
    "rel": "similar",
-   "text": "If your language uses prepositions with unchanged nouns, the order is the same; Arabic adds the genitive ending after them, and has one-letter prepositions joined to the word: بِالْحَلِيبِ, لِأَخِي."
+   "text": "If your language uses prepositions with unchanged nouns, the order is the same. Arabic adds:\n- the genitive ending after them;\n- one-letter prepositions joined to the word: بِالْحَلِيبِ, لِأَخِي."
   },
   {
    "for": "type:polysynthetic",

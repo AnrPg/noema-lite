@@ -349,12 +349,12 @@
   {
    "lang": "de",
    "fn": "fn.past.ongoing",
-   "note": "German uses the plain Präteritum or Perfekt with früher / immer (früher spielte ich auf der Straße); Arabic marks the habit with كَانَ + present."
+   "note": "German uses the plain Präteritum or Perfekt with früher / immer:\n→ früher spielte ich auf der Straße\n\nArabic marks the habit with كَانَ + present."
   },
   {
    "lang": "zh",
    "fn": "fn.past.ongoing",
-   "note": "Chinese uses 以前 / 常常 for a past habit and 在 / 正在 for an action in progress; the verb does not change. Arabic uses كَانَ + present for both."
+   "note": "Chinese uses 以前 / 常常 for a past habit and 在 / 正在 for an action in progress; the verb does not change.\n\nArabic uses كَانَ + present for both."
   },
   {
    "lang": "ar",
@@ -380,37 +380,37 @@
   {
    "for": "el",
    "rel": "similar",
-   "text": "Greek has a one-word imperfect for both meanings (έπαιζα “I was playing / used to play”); Arabic expresses the same two meanings with two verbs, كَانَ + present (كُنْتُ أَلْعَبُ)."
+   "text": "Greek has a one-word imperfect for both meanings (έπαιζα “I was playing / used to play”).\n\nArabic expresses the same two meanings with two verbs, كَانَ + present:\n→ كُنْتُ أَلْعَبُ"
   },
   {
    "for": "ru",
    "rel": "similar",
-   "text": "Russian uses the imperfective past for both (я играл “I was playing / used to play”); Arabic builds it from كَانَ + present (كُنْتُ أَلْعَبُ)."
+   "text": "Russian uses the imperfective past for both (я играл “I was playing / used to play”); Arabic builds it from كَانَ + present:\n→ كُنْتُ أَلْعَبُ"
   },
   {
    "for": "es",
    "rel": "similar",
-   "text": "The imperfecto (jugaba) covers habit and background like كُنْتُ أَلْعَبُ; Arabic needs two words, and the preterite (jugué) matches the plain past لَعِبْتُ."
+   "text": "- The imperfecto (jugaba) covers habit and background like كُنْتُ أَلْعَبُ; Arabic needs two words.\n- The preterite (jugué) matches the plain past لَعِبْتُ."
   },
   {
    "for": "en",
    "rel": "new",
-   "text": "English splits “was playing” from “used to / would play”; Arabic has one construction for both, كُنْتُ أَلْعَبُ, and no word for “used to”."
+   "text": "English splits “was playing” from “used to / would play”.\n\nArabic has **one construction for both**, كُنْتُ أَلْعَبُ, and no word for “used to”."
   },
   {
    "for": "fr",
    "rel": "similar",
-   "text": "The imparfait (je jouais) has both meanings, like كُنْتُ أَلْعَبُ; the passé composé (j’ai joué) matches the plain past لَعِبْتُ."
+   "text": "- The imparfait (je jouais) has both meanings, like كُنْتُ أَلْعَبُ.\n- The passé composé (j’ai joué) matches the plain past لَعِبْتُ."
   },
   {
    "for": "de",
    "rel": "different",
-   "text": "German uses the same Präteritum or Perfekt for an event and a habit and adds früher or immer; Arabic marks the ongoing or habitual past in the verb phrase: كَانَ + present."
+   "text": "German uses the same Präteritum or Perfekt for an event and a habit and adds früher or immer.\n\nArabic marks the ongoing or habitual past **in the verb phrase**: كَانَ + present."
   },
   {
    "for": "hi",
    "rel": "similar",
-   "text": "Hindi has a habitual past (मैं खेलता था “I used to play”) and a progressive past (मैं खेल रहा था); Arabic uses one construction, كَانَ + present, for both — also built with “was”."
+   "text": "Hindi has a habitual past (मैं खेलता था “I used to play”) and a progressive past (मैं खेल रहा था).\n\nArabic uses **one construction, كَانَ + present**, for both — also built with “was”."
   },
   {
    "for": "fa",
@@ -430,7 +430,7 @@
   {
    "for": "tr",
    "rel": "different",
-   "text": "Turkish has suffixes for the past progressive (oynuyordum) and the past habit (oynardım); Arabic has no such forms and uses كَانَ + present."
+   "text": "Turkish has suffixes for the past progressive (oynuyordum) and the past habit (oynardım).\n\nArabic has no such forms and uses كَانَ + present."
   },
   {
    "for": "ja",
@@ -460,7 +460,7 @@
   {
    "for": "zh",
    "rel": "different",
-   "text": "Chinese marks “in progress” with 在 / 正在 and a past habit with 以前 / 常常 (我以前常常在街上玩); the verb does not change. Arabic uses كَانَ + present."
+   "text": "Chinese marks “in progress” with 在 / 正在 and a past habit with 以前 / 常常; the verb does not change:\n→ 我以前常常在街上玩\n\nArabic uses كَانَ + present."
   },
   {
    "for": "vi",
@@ -475,37 +475,37 @@
   {
    "for": "it",
    "rel": "similar",
-   "text": "The imperfetto (giocavo) covers habit and background like كُنْتُ أَلْعَبُ; Arabic needs two verbs, and the passato remoto / prossimo (giocai, ho giocato) matches the plain past لَعِبْتُ."
+   "text": "- The imperfetto (giocavo) covers habit and background like كُنْتُ أَلْعَبُ; Arabic needs two verbs.\n- The passato remoto / prossimo (giocai, ho giocato) matches the plain past لَعِبْتُ."
   },
   {
    "for": "sq",
    "rel": "similar",
-   "text": "The Albanian imperfect (luaja, “I was playing / I used to play”) is one word for both meanings; Arabic says it with two verbs, كَانَ + present: كُنْتُ أَلْعَبُ."
+   "text": "The Albanian imperfect (luaja, “I was playing / I used to play”) is one word for both meanings.\n\nArabic says it with **two verbs, كَانَ + present**:\n→ كُنْتُ أَلْعَبُ"
   },
   {
    "for": "pt",
    "rel": "similar",
-   "text": "The pretérito imperfeito (jogava) covers habit and background like كُنْتُ أَلْعَبُ, and so does estava a jogar; the pretérito perfeito (joguei) matches the plain past لَعِبْتُ."
+   "text": "- The pretérito imperfeito (jogava) covers habit and background like كُنْتُ أَلْعَبُ, and so does estava a jogar.\n- The pretérito perfeito (joguei) matches the plain past لَعِبْتُ."
   },
   {
    "for": "type:fusional",
    "rel": "similar",
-   "text": "If your language has an imperfect that covers habits and background, Arabic builds the same meaning with two words: كَانَ (was) + the present, both agreeing with the subject."
+   "text": "If your language has an imperfect that covers habits and background, Arabic builds the same meaning with **two words**: كَانَ (was) + the present, both agreeing with the subject."
   },
   {
    "for": "type:agglutinating",
    "rel": "similar",
-   "text": "If you stack a habit or progressive suffix and a past suffix on one verb, Arabic spreads them over two verbs — كَانَ for the past, the present for the ongoing action: كُنَّا نُسَافِرُ."
+   "text": "If you stack a habit or progressive suffix and a past suffix on one verb, Arabic spreads them over two verbs:\n- كَانَ for the past;\n- the present for the ongoing action.\n→ كُنَّا نُسَافِرُ"
   },
   {
    "for": "type:isolating",
    "rel": "different",
-   "text": "If the verb never changes and time words carry the meaning, note that Arabic changes both verbs for the person — كُنْتُ أَلْعَبُ, كَانَتْ تَلْعَبُ —; time words like دَائِمًا still help."
+   "text": "If the verb never changes and time words carry the meaning, note that Arabic **changes both verbs for the person**; time words like دَائِمًا still help.\n→ كُنْتُ أَلْعَبُ, كَانَتْ تَلْعَبُ"
   },
   {
    "for": "branch:Semitic",
    "rel": "same",
-   "text": "If your language is Semitic, “was” + a present form for habits is familiar; Arabic uses كَانَ + the prefix present, both agreeing: كُنْتُ أَلْعَبُ."
+   "text": "If your language is Semitic, “was” + a present form for habits is familiar.\n\nArabic uses كَانَ + the prefix present, both agreeing:\n→ كُنْتُ أَلْعَبُ"
   }
  ]
 }

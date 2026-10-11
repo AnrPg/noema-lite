@@ -203,12 +203,12 @@
   {
    "lang": "he",
    "fn": "fn.agreement",
-   "note": "Hebrew agrees in gender and number the same way but gives plurals of things plural agreement (הַסְּפָרִים הָאֵלֶּה, these books) — switch the rule when you change language."
+   "note": "Hebrew agrees in gender and number the same way, but gives plurals of things **plural** agreement:\n→ הַסְּפָרִים הָאֵלֶּה, these books\n\nSwitch the rule when you change language."
   },
   {
    "lang": "de",
    "fn": "fn.agreement",
-   "note": "German agreement runs through articles and adjective endings in four cases (ein großes Haus); plurals of things are simply plural (die Bücher … sie)."
+   "note": "German agreement runs through articles and adjective endings in four cases:\n→ ein großes Haus\n\nPlurals of things are simply plural (die Bücher … sie)."
   },
   {
    "lang": "zh",
@@ -234,32 +234,32 @@
   {
    "for": "el",
    "rel": "similar",
-   "text": "Greek words that point to a noun also follow its gender and number — but Greek plurals stay plural (αυτά τα βιβλία), while Arabic plurals of things become feminine singular (هٰذِهِ الْكُتُبُ)."
+   "text": "Greek words that point to a noun also follow its gender and number.\n\nBut Greek plurals stay plural, while **Arabic plurals of things become feminine singular**:\n→ αυτά τα βιβλία — هٰذِهِ الْكُتُبُ"
   },
   {
    "for": "ru",
    "rel": "trap",
-   "text": "Russian plurals of things take plural agreement (эти книги … они); in Arabic they take the feminine singular: هٰذِهِ الْكُتُبُ، الْكُتُبُ؟ هِيَ هُنَا."
+   "text": "Russian plurals of things take plural agreement:\n→ эти книги … они\n\nIn Arabic they take **the feminine singular**:\n→ هٰذِهِ الْكُتُبُ، الْكُتُبُ؟ هِيَ هُنَا."
   },
   {
    "for": "es",
    "rel": "trap",
-   "text": "Spanish estos libros … ellos stays plural; Arabic says هٰذِهِ الْكُتُبُ … هِيَ — “this (f.) books … she”."
+   "text": "Spanish estos libros … ellos stays plural; Arabic says “this (f.) books … she”:\n→ هٰذِهِ الْكُتُبُ … هِيَ"
   },
   {
    "for": "en",
    "rel": "new",
-   "text": "English has almost no agreement (this / these); Arabic makes “this”, “it”, adjectives and verbs follow the noun’s gender and number — and plurals of things count as “she”."
+   "text": "English has almost no agreement (this / these).\n\nArabic makes “this”, “it”, adjectives and verbs follow the noun’s gender and number — and **plurals of things count as “she”**."
   },
   {
    "for": "fr",
    "rel": "trap",
-   "text": "French ces livres … ils; Arabic هٰذِهِ الْكُتُبُ … هِيَ: the feminine singular for things in the plural."
+   "text": "French ces livres … ils stays plural; Arabic uses **the feminine singular for things in the plural**:\n→ هٰذِهِ الْكُتُبُ … هِيَ"
   },
   {
    "for": "hi",
    "rel": "similar",
-   "text": "Hindi adjectives and verbs follow the noun’s gender and number (बड़ा घर, बड़ी किताब), as Arabic ones do; new is the Arabic rule that things in the plural agree as feminine singular."
+   "text": "Hindi adjectives and verbs follow the noun’s gender and number, as Arabic ones do:\n→ बड़ा घर, बड़ी किताब\n\nNew is the Arabic rule that **things in the plural agree as feminine singular**."
   },
   {
    "for": "fa",
@@ -314,42 +314,42 @@
   {
    "for": "de",
    "rel": "trap",
-   "text": "German plurals all take die and sie, whatever the gender (die Bücher … sie); Arabic splits them: plurals of people take plural agreement (هٰؤُلَاءِ طُلَّابٌ، هُمْ هُنَاكَ), plurals of things the feminine singular — هٰذِهِ الْكُتُبُ، هِيَ هُنَا."
+   "text": "German plurals all take die and sie, whatever the gender:\n→ die Bücher … sie\n\nArabic splits them:\n- plurals of people take plural agreement: هٰؤُلَاءِ طُلَّابٌ، هُمْ هُنَاكَ\n- plurals of things take **the feminine singular**: هٰذِهِ الْكُتُبُ، هِيَ هُنَا"
   },
   {
    "for": "zh",
    "rel": "new",
-   "text": "Chinese words never agree (这本书, 这些书, 它们); Arabic “this”, “he / she” and later adjectives and verbs follow the noun’s gender and number — and plurals of things count as feminine singular: هٰذِهِ الْكُتُبُ."
+   "text": "Chinese words never agree:\n→ 这本书, 这些书, 它们\n\nIn Arabic, “this”, “he / she” and later adjectives and verbs follow the noun’s gender and number — and **plurals of things count as feminine singular**:\n→ هٰذِهِ الْكُتُبُ"
   },
   {
    "for": "it",
    "rel": "trap",
-   "text": "Italian questi libri … sono qui stays plural; Arabic says هٰذِهِ الْكُتُبُ … هِيَ هُنَا — “this (f.) books … she is here”: plurals of things agree as feminine singular."
+   "text": "Italian questi libri … sono qui stays plural. Arabic says “this (f.) books … she is here”:\n→ هٰذِهِ الْكُتُبُ … هِيَ هُنَا\n\n**Plurals of things agree as feminine singular.**"
   },
   {
    "for": "sq",
    "rel": "trap",
-   "text": "Albanian këta libra … ata janë këtu stays plural; Arabic plurals of things agree as feminine singular: هٰذِهِ الْكُتُبُ, الْكُتُبُ؟ هِيَ هُنَا."
+   "text": "Albanian këta libra … ata janë këtu stays plural; Arabic plurals of things agree as **feminine singular**:\n→ هٰذِهِ الْكُتُبُ, الْكُتُبُ؟ هِيَ هُنَا."
   },
   {
    "for": "pt",
    "rel": "trap",
-   "text": "Portuguese estes livros … eles estão aqui stays plural; Arabic says هٰذِهِ الْكُتُبُ … هِيَ هُنَا — the feminine singular for every plural of things."
+   "text": "Portuguese estes livros … eles estão aqui stays plural. Arabic uses **the feminine singular for every plural of things**:\n→ هٰذِهِ الْكُتُبُ … هِيَ هُنَا"
   },
   {
    "for": "type:fusional",
    "rel": "similar",
-   "text": "If words in your language already agree with the noun in gender and number, the system is familiar; the one Arabic twist is that plurals of things agree as feminine singular: هٰذِهِ الْكُتُبُ."
+   "text": "If words in your language already agree with the noun in gender and number, the system is familiar.\n\nThe one Arabic twist: **plurals of things agree as feminine singular**.\n→ هٰذِهِ الْكُتُبُ"
   },
   {
    "for": "type:agglutinating",
    "rel": "new",
-   "text": "If your demonstratives and adjectives never change, Arabic is new: هٰذَا بَابٌ / هٰذِهِ غُرْفَةٌ — so the gender of every noun must be known to choose them."
+   "text": "If your demonstratives and adjectives never change, Arabic is new:\n→ هٰذَا بَابٌ / هٰذِهِ غُرْفَةٌ\n\nSo **the gender of every noun must be known** to choose them."
   },
   {
    "for": "type:isolating",
    "rel": "new",
-   "text": "If your words never change for gender or number, learn every noun with its gender: it decides هٰذَا / هٰذِهِ and هُوَ / هِيَ; plurals of things take هٰذِهِ / هِيَ."
+   "text": "If your words never change for gender or number, **learn every noun with its gender**: it decides هٰذَا / هٰذِهِ and هُوَ / هِيَ.\n\nPlurals of things take هٰذِهِ / هِيَ."
   },
   {
    "for": "type:polysynthetic",
@@ -359,7 +359,7 @@
   {
    "for": "branch:Semitic",
    "rel": "similar",
-   "text": "If your language is Semitic, gender agreement is familiar; the rule that plurals of things agree as feminine singular (هٰذِهِ الْكُتُبُ, الْكُتُبُ؟ هِيَ هُنَا) may be new."
+   "text": "If your language is Semitic, gender agreement is familiar.\n\nThe rule that **plurals of things agree as feminine singular** may be new:\n→ هٰذِهِ الْكُتُبُ, الْكُتُبُ؟ هِيَ هُنَا"
   }
  ]
 }

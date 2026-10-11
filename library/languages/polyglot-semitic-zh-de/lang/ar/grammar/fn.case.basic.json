@@ -193,12 +193,12 @@
   {
    "lang": "de",
    "fn": "fn.case.basic",
-   "note": "German has four cases (Nominativ, Akkusativ, Dativ, Genitiv), carried mostly by the article (der / den / dem / des); Arabic has three, carried by the noun’s own ending."
+   "note": "German has four cases (Nominativ, Akkusativ, Dativ, Genitiv), carried mostly by the article (der / den / dem / des).\n\nArabic has three, carried by the noun’s own ending."
   },
   {
    "lang": "he",
    "fn": "fn.case.basic",
-   "note": "Modern Hebrew has no cases — it lost the old Semitic case endings that Arabic keeps; only word order and prepositions (אֶת before a definite object) show the role."
+   "note": "Modern Hebrew has no cases — it lost the old Semitic case endings that Arabic keeps.\n\nOnly word order and prepositions (אֶת before a definite object) show the role."
   },
   {
    "lang": "zh",
@@ -229,7 +229,7 @@
   {
    "for": "el",
    "rel": "similar",
-   "text": "Greek also puts both the subject and the predicate of a “be” sentence in the nominative (ο Γιάννης είναι δάσκαλος); Arabic does the same in a verbless sentence — but after كَانَ the predicate turns accusative."
+   "text": "Greek also puts both the subject and the predicate of a “be” sentence in the nominative:\n→ ο Γιάννης είναι δάσκαλος\n\nArabic does the same in a verbless sentence — but **after كَانَ the predicate turns accusative**."
   },
   {
    "for": "ru",
@@ -244,7 +244,7 @@
   {
    "for": "en",
    "rel": "new",
-   "text": "English shows case only in pronouns (I / me, he / him); every Arabic noun has three endings: الْبَيْتُ, الْبَيْتَ, الْبَيْتِ."
+   "text": "English shows case only in pronouns (I / me, he / him); every Arabic noun has three endings:\n→ الْبَيْتُ, الْبَيْتَ, الْبَيْتِ"
   },
   {
    "for": "fr",
@@ -314,42 +314,42 @@
   {
    "for": "de",
    "rel": "similar",
-   "text": "German has four cases and shows them mostly on the article (der / den / dem / des); Arabic has three and shows them on the noun itself, with one short vowel: الْبَيْتُ, الْبَيْتَ, الْبَيْتِ. As in German, the predicate of “be” is nominative (er ist Lehrer = هُوَ مُعَلِّمٌ) — but after كَانَ it turns accusative."
+   "text": "German has four cases and shows them mostly on the article (der / den / dem / des).\n\nArabic has three and shows them **on the noun itself**, with one short vowel:\n→ الْبَيْتُ, الْبَيْتَ, الْبَيْتِ\n\nAs in German, the predicate of “be” is nominative — but after كَانَ it turns accusative:\n→ er ist Lehrer = هُوَ مُعَلِّمٌ"
   },
   {
    "for": "zh",
    "rel": "new",
-   "text": "Chinese nouns never change; word order and prepositions show the role. Every Arabic noun has three endings — -u, -a, -i — and the -u (nominative) marks the subject and the predicate of a verbless sentence: الْكِتَابُ هُنَا."
+   "text": "Chinese nouns never change; word order and prepositions show the role.\n\nEvery Arabic noun has three endings — -u, -a, -i. The -u (nominative) marks the subject and the predicate of a verbless sentence:\n→ الْكِتَابُ هُنَا"
   },
   {
    "for": "it",
    "rel": "new",
-   "text": "Italian nouns have no cases (only pronouns change: io / me, lui / lo); Arabic nouns change their last vowel: -u for the subject, -a for the object, -i after a preposition."
+   "text": "Italian nouns have no cases (only pronouns change: io / me, lui / lo).\n\nArabic nouns change their last vowel:\n- -u for the subject;\n- -a for the object;\n- -i after a preposition."
   },
   {
    "for": "sq",
    "rel": "similar",
-   "text": "Albanian also declines nouns, with five cases fused with the article (libri, librin, librit); Arabic has three, carried by one short vowel — الْكِتَابُ, الْكِتَابَ, الْكِتَابِ — and, as in Albanian, the subject is nominative."
+   "text": "Albanian also declines nouns, with five cases fused with the article:\n→ libri, librin, librit\n\nArabic has three, carried by one short vowel — and, as in Albanian, the subject is nominative:\n→ الْكِتَابُ, الْكِتَابَ, الْكِتَابِ"
   },
   {
    "for": "pt",
    "rel": "new",
-   "text": "Portuguese nouns have no cases (only pronouns change: eu / me / mim); in Arabic the last vowel of every noun shows its role: -u, -a, -i."
+   "text": "Portuguese nouns have no cases (only pronouns change: eu / me / mim).\n\nIn Arabic **the last vowel of every noun shows its role**: -u, -a, -i."
   },
   {
    "for": "type:fusional",
    "rel": "similar",
-   "text": "If your nouns have case endings, the idea is familiar; Arabic has only three cases, and one short vowel (-u, -a, -i) carries them — mostly dropped in everyday speech, written in careful Arabic."
+   "text": "If your nouns have case endings, the idea is familiar.\n\nArabic has only three cases, and one short vowel (-u, -a, -i) carries them — mostly dropped in everyday speech, written in careful Arabic."
   },
   {
    "for": "type:agglutinating",
    "rel": "similar",
-   "text": "If your language adds a case suffix, note that Arabic has only three cases and marks the subject too (-u); the ending is a short vowel, not a syllable, and the article goes in front: الْبَيْتُ."
+   "text": "If your language adds a case suffix, note that Arabic:\n- has only three cases and marks the subject too (-u);\n- uses a short vowel as the ending, not a syllable;\n- puts the article in front: الْبَيْتُ."
   },
   {
    "for": "type:isolating",
    "rel": "new",
-   "text": "If your nouns never change, the three endings are new: -u for the subject and predicate, -a for the object, -i after a preposition. At the end of a phrase they are not pronounced."
+   "text": "If your nouns never change, the three endings are new:\n- -u for the subject and predicate;\n- -a for the object;\n- -i after a preposition.\n\nAt the end of a phrase they are not pronounced."
   },
   {
    "for": "type:polysynthetic",
@@ -359,7 +359,7 @@
   {
    "for": "branch:Semitic",
    "rel": "new",
-   "text": "If your language is Semitic, roots and patterns will be familiar but perhaps not case: Arabic keeps the old Semitic three cases, -u, -a, -i, which most sister languages have lost."
+   "text": "If your language is Semitic, roots and patterns will be familiar but perhaps not case.\n\nArabic keeps **the old Semitic three cases**, -u, -a, -i, which most sister languages have lost."
   }
  ]
 }

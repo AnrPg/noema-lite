@@ -254,7 +254,7 @@
   {
    "lang": "he",
    "fn": "fn.copula",
-   "note": "Hebrew also drops “to be” in the present (אֲנִי סְטוּדֶנְט); its past הָיָה works like كَانَ, and a pronoun can link two definite words, as in Arabic الرَّجُلُ هُوَ الْمُعَلِّمُ."
+   "note": "Hebrew also drops “to be” in the present (אֲנִי סְטוּדֶנְט).\n- Its past הָיָה works like كَانَ.\n- A pronoun can link two definite words, as in Arabic الرَّجُلُ هُوَ الْمُعَلِّمُ."
   },
   {
    "lang": "zh",
@@ -264,7 +264,7 @@
   {
    "lang": "de",
    "fn": "fn.copula",
-   "note": "German needs the verb every time (ich bin, du bist, er ist) — but like Arabic it uses no article with a profession: Ich bin Lehrer = أَنَا مُعَلِّمٌ."
+   "note": "German needs the verb every time (ich bin, du bist, er ist).\n\nBut like Arabic it uses no article with a profession:\n→ Ich bin Lehrer = أَنَا مُعَلِّمٌ"
   },
   {
    "lang": "ar",
@@ -286,12 +286,12 @@
   {
    "for": "ru",
    "rel": "same",
-   "text": "Russian has no present “to be” either: Я студент = أَنَا طَالِبٌ; its past был / была agrees in gender like كَانَ / كَانَتْ. One difference: after كَانَ the predicate is accusative (كَانَ طَالِبًا), where Russian uses the nominative or the instrumental (был студентом)."
+   "text": "Russian has no present “to be” either: Я студент = أَنَا طَالِبٌ. Its past был / была agrees in gender like كَانَ / كَانَتْ.\n\n**One difference:** after كَانَ the predicate is accusative, where Russian uses the nominative or the instrumental:\n→ كَانَ طَالِبًا — был студентом"
   },
   {
    "for": "tr",
    "rel": "similar",
-   "text": "Turkish has no separate verb either (öğrenciyim); Arabic does not even add an ending: أَنَا طَالِبٌ. For the past Turkish adds -di (öğrenciydim), Arabic uses the verb كَانَ (كُنْتُ طَالِبًا)."
+   "text": "Turkish has no separate verb either (öğrenciyim); Arabic does not even add an ending:\n→ أَنَا طَالِبٌ\n\nFor the past Turkish adds -di (öğrenciydim); Arabic uses the verb كَانَ:\n→ كُنْتُ طَالِبًا"
   },
   {
    "for": "hu",
@@ -301,22 +301,22 @@
   {
    "for": "el",
    "rel": "different",
-   "text": "Greek needs είμαι in every person (είμαι φοιτητής); Arabic says nothing in the present — أَنَا طَالِبٌ — and uses كَانَ only for the past and the future."
+   "text": "Greek needs είμαι in every person (είμαι φοιτητής).\n\nArabic **says nothing in the present** and uses كَانَ only for the past and the future:\n→ أَنَا طَالِبٌ"
   },
   {
    "for": "es",
    "rel": "different",
-   "text": "Spanish chooses between ser and estar (soy estudiante, estoy aquí); Arabic uses no verb for either in the present: أَنَا طَالِبٌ, أَنَا هُنَا."
+   "text": "Spanish chooses between ser and estar (soy estudiante, estoy aquí); Arabic uses **no verb for either** in the present:\n→ أَنَا طَالِبٌ, أَنَا هُنَا"
   },
   {
    "for": "en",
    "rel": "different",
-   "text": "English cannot drop am / is / are; Arabic has nothing in their place: الرَّجُلُ مُعَلِّمٌ, “the man (is) a teacher” — and no “a” either, the ending -un says it."
+   "text": "English cannot drop am / is / are; Arabic has **nothing in their place** — and no “a” either, the ending -un says it:\n→ الرَّجُلُ مُعَلِّمٌ, “the man (is) a teacher”"
   },
   {
    "for": "fr",
    "rel": "different",
-   "text": "French needs être (je suis étudiant); Arabic needs no verb in the present — but, as in French, a bare profession takes no article: أَنَا طَالِبٌ."
+   "text": "French needs être (je suis étudiant); Arabic needs no verb in the present.\n\nBut, as in French, a bare profession takes no article:\n→ أَنَا طَالِبٌ"
   },
   {
    "for": "de",
@@ -381,37 +381,37 @@
   {
    "for": "it",
    "rel": "different",
-   "text": "Italian needs essere (sono studente) — but, as in Arabic, a bare profession takes no article: أَنَا طَالِبٌ. Arabic drops the verb in the present and uses كَانَ for the past, with the predicate in the accusative: كُنْتُ طَالِبًا."
+   "text": "Italian needs essere (sono studente) — but, as in Arabic, a bare profession takes no article: أَنَا طَالِبٌ.\n\nArabic **drops the verb in the present** and uses كَانَ for the past, with the predicate in the accusative:\n→ كُنْتُ طَالِبًا"
   },
   {
    "for": "sq",
    "rel": "different",
-   "text": "Albanian needs jam in every person (jam student); Arabic says nothing in the present — أَنَا طَالِبٌ — and uses كَانَ only for the past and the future, with an accusative predicate."
+   "text": "Albanian needs jam in every person (jam student).\n\nArabic **says nothing in the present** and uses كَانَ only for the past and the future, with an accusative predicate:\n→ أَنَا طَالِبٌ"
   },
   {
    "for": "pt",
    "rel": "different",
-   "text": "Portuguese chooses ser or estar (sou estudante, estou aqui); Arabic uses no verb for either in the present: أَنَا طَالِبٌ, أَنَا هُنَا. As in sou professor, a profession takes no article."
+   "text": "Portuguese chooses ser or estar (sou estudante, estou aqui); Arabic uses **no verb for either** in the present:\n→ أَنَا طَالِبٌ, أَنَا هُنَا\n\nAs in sou professor, a profession takes no article."
   },
   {
    "for": "type:fusional",
    "rel": "different",
-   "text": "If your language needs a form of “be” in every present sentence, drop it in Arabic: الرَّجُلُ مُعَلِّمٌ. It comes back as كَانَ in the past, with an accusative predicate."
+   "text": "If your language needs a form of “be” in every present sentence, **drop it in Arabic**:\n→ الرَّجُلُ مُعَلِّمٌ\n\nIt comes back as كَانَ in the past, with an accusative predicate."
   },
   {
    "for": "type:agglutinating",
    "rel": "similar",
-   "text": "If your language makes “be” with a suffix or leaves it out, the verbless sentence is familiar; Arabic adds nothing at all in the present (أَنَا طَالِبٌ) and uses the verb كَانَ for the past."
+   "text": "If your language makes “be” with a suffix or leaves it out, the verbless sentence is familiar.\n\nArabic adds nothing at all in the present (أَنَا طَالِبٌ) and uses the verb كَانَ for the past."
   },
   {
    "for": "type:isolating",
    "rel": "different",
-   "text": "If your language needs a linking word between two nouns but none before an adjective, note that Arabic needs nothing in either case: أَنَا طَالِبٌ, أَنَا مُتْعَبٌ."
+   "text": "If your language needs a linking word between two nouns but none before an adjective, note that Arabic needs nothing in either case:\n→ أَنَا طَالِبٌ, أَنَا مُتْعَبٌ"
   },
   {
    "for": "type:polysynthetic",
    "rel": "different",
-   "text": "If your language turns a noun into a verb with a “be” suffix, note that Arabic adds nothing in the present: subject and predicate just stand side by side, both nominative."
+   "text": "If your language turns a noun into a verb with a “be” suffix, note that Arabic adds nothing in the present.\n\nSubject and predicate just stand side by side, both nominative."
   },
   {
    "for": "branch:Semitic",

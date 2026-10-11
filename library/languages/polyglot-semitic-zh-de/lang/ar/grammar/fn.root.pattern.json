@@ -348,7 +348,7 @@
   {
    "for": "el",
    "rel": "new",
-   "text": "Greek builds words from stems and endings (γράφω, γραφείο, γράμμα); Arabic weaves three root consonants into vowel patterns (كَتَبَ, مَكْتَب, كِتَاب). أَرُزّ (rice) is the same word as ὄρυζα, borrowed — a loan with no usable root."
+   "text": "Greek builds words from stems and endings; Arabic weaves three root consonants into vowel patterns:\n→ γράφω, γραφείο, γράμμα\n→ كَتَبَ, مَكْتَب, كِتَاب\n\nأَرُزّ (rice) is the same word as ὄρυζα, borrowed — a loan with no usable root."
   },
   {
    "for": "ru",
@@ -388,7 +388,7 @@
   {
    "for": "tr",
    "rel": "similar",
-   "text": "Turkish already has whole Arabic root families: kitap, kâtip (clerk), mektup (letter), mektep (school) all come from ك ت ب; ilim, âlim, muallim, malumat from ع ل م. In Arabic you learn the patterns behind them."
+   "text": "Turkish already has whole Arabic root families:\n- kitap, kâtip (clerk), mektup (letter), mektep (school) all come from ك ت ب;\n- ilim, âlim, muallim, malumat from ع ل م.\n\n**In Arabic you learn the patterns behind them.**"
   },
   {
    "for": "ja",
@@ -428,12 +428,12 @@
   {
    "for": "de",
    "rel": "different",
-   "text": "German builds families with prefixes, suffixes and some vowel changes (fahren, Fahrer, Fuhre, fuhr); Arabic does it all with vowels and extra letters around three root consonants: كَتَبَ, كَاتِب, كِتَاب, مَكْتَب. Ablaut as in singen / sang / gesungen is the closest German idea."
+   "text": "German builds families with prefixes, suffixes and some vowel changes (fahren, Fahrer, Fuhre, fuhr); Arabic does it all with vowels and extra letters around three root consonants:\n→ كَتَبَ, كَاتِب, كِتَاب, مَكْتَب\n\nAblaut as in singen / sang / gesungen is **the closest German idea**."
   },
   {
    "for": "zh",
    "rel": "new",
-   "text": "Chinese builds words by combining syllables (厨 + 房 = 厨房); Arabic weaves three root consonants into patterns: ط ب خ → طَبَخَ (to cook), مَطْبَخ (kitchen), طَبَّاخ (a cook). Find the root, and a whole family opens."
+   "text": "Chinese builds words by combining syllables (厨 + 房 = 厨房); Arabic weaves three root consonants into patterns:\n→ ط ب خ → طَبَخَ (to cook), مَطْبَخ (kitchen), طَبَّاخ (a cook)\n\n**Find the root, and a whole family opens.**"
   },
   {
    "for": "it",
