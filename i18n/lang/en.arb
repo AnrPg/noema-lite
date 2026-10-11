@@ -1969,5 +1969,1077 @@
         "example": "6"
       }
     }
+  },
+  "lang.poly.bridge.cognate": "related",
+  "@lang.poly.bridge.cognate": {
+    "description": "Badge (after 🌉) of a bridge between words of two languages: they are related (cognates)."
+  },
+  "lang.poly.bridge.loan": "loan",
+  "@lang.poly.bridge.loan": {
+    "description": "Badge (after 🔁): a loanword from the other language."
+  },
+  "lang.poly.bridge.falseFriend": "false friend",
+  "@lang.poly.bridge.falseFriend": {
+    "description": "Badge (after ⚠️): a false friend (looks alike, means something else)."
+  },
+  "lang.poly.via.root": "same root",
+  "@lang.poly.via.root": {
+    "description": "Badge: why two words are linked — the same root."
+  },
+  "lang.poly.via.etymology": "etymology",
+  "@lang.poly.via.etymology": {
+    "description": "Badge: why two words are linked — their etymology."
+  },
+  "lang.poly.via.source": "same source",
+  "@lang.poly.via.source": {
+    "description": "Badge: why two words are linked — borrowed from the same source."
+  },
+  "lang.poly.via.pitfall": "noted",
+  "@lang.poly.via.pitfall": {
+    "description": "Badge: why two words are linked — the course notes it as a pitfall."
+  },
+  "lang.poly.todayLabel": "Languages of today’s session",
+  "@lang.poly.todayLabel": {
+    "description": "Accessible name of the row of language chips for today."
+  },
+  "lang.poly.today": "Today:",
+  "@lang.poly.today": {
+    "description": "Label (after 📅) before the chips of today’s languages."
+  },
+  "lang.poly.leaveOut": "Leave {lang} out today",
+  "@lang.poly.leaveOut": {
+    "description": "Tooltip of a selected chip of today’s languages. {lang} = language name.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.poly.takeToo": "Take {lang} today too",
+  "@lang.poly.takeToo": {
+    "description": "Tooltip of an unselected chip of today’s languages.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.poly.tomorrowAll": "tomorrow all of them again",
+  "@lang.poly.tomorrowAll": {
+    "description": "After today’s languages (after “ — ”) when some are left out."
+  },
+  "lang.poly.acrossLabel": "Across your languages:",
+  "@lang.poly.acrossLabel": {
+    "description": "Label (after 🌐) before the polyglot drills on the course home."
+  },
+  "lang.poly.drill.which_language": "Which language?",
+  "@lang.poly.drill.which_language": {
+    "description": "Polyglot drill (after 🔤): guess which of your languages a word or sentence is in."
+  },
+  "lang.poly.drill.cognate_bridge": "Bridges",
+  "@lang.poly.drill.cognate_bridge": {
+    "description": "Polyglot drill (after 🌉): related words across languages."
+  },
+  "lang.poly.drill.parallel_translate": "Translate across",
+  "@lang.poly.drill.parallel_translate": {
+    "description": "Polyglot drill (after 🔀): say the same sentence in another of your languages."
+  },
+  "lang.poly.drill.parallel_align": "Align the words",
+  "@lang.poly.drill.parallel_align": {
+    "description": "Polyglot drill (after 🧷): match the words of the same sentence in several languages."
+  },
+  "lang.poly.drill.compare_rule": "Which holds where?",
+  "@lang.poly.drill.compare_rule": {
+    "description": "Polyglot drill (after ⚖️): for which language does each statement hold."
+  },
+  "lang.poly.whichSentence": "Which of your languages is this sentence in?",
+  "@lang.poly.whichSentence": {
+    "description": "Question of the “which language” exercise for a sentence."
+  },
+  "lang.poly.whichWord": "Which of your languages is this word from?",
+  "@lang.poly.whichWord": {
+    "description": "Question of the “which language” exercise for a word."
+  },
+  "lang.poly.pairNote": "It has a relative in another of your languages, asked with it: keep the two apart.",
+  "@lang.poly.pairNote": {
+    "description": "Feedback note (after ⇄) when the word has a related word in another course language, asked together."
+  },
+  "lang.poly.falseFriendAsk": "Related look-alikes — which pair is a false friend (it does not mean the same)?",
+  "@lang.poly.falseFriendAsk": {
+    "description": "Question of the false-friend exercise."
+  },
+  "lang.poly.knownAsk": "A word of {other}, one of your languages — which {lang} word is linked to it by its origin?",
+  "@lang.poly.knownAsk": {
+    "description": "Question of a bridge exercise: a word of a language the learner knows ({other}), which word of the course language ({lang}) shares its origin.",
+    "placeholders": {
+      "other": {
+        "type": "String",
+        "example": "Greek"
+      },
+      "lang": {
+        "type": "String",
+        "example": "German"
+      }
+    }
+  },
+  "lang.poly.relatedAsk": "Which {lang} word is related to it?",
+  "@lang.poly.relatedAsk": {
+    "description": "Question of a bridge exercise. {lang} = language name.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.poly.saySame": "{from} → {to}: say the same",
+  "@lang.poly.saySame": {
+    "description": "Question of the “translate across” exercise: {from} and {to} = flag and language name.",
+    "placeholders": {
+      "from": {
+        "type": "String",
+        "example": "🇩🇪 German"
+      },
+      "to": {
+        "type": "String",
+        "example": "🇨🇳 Chinese"
+      }
+    }
+  },
+  "lang.poly.theMeaning": "the meaning",
+  "@lang.poly.theMeaning": {
+    "description": "Folded hint in the “translate across” exercise: the meaning of the sentence."
+  },
+  "lang.poly.alignStep": "{i, number} / {n, number} · Tap the word that means “{word}” in {langs}.",
+  "@lang.poly.alignStep": {
+    "description": "Status line of the align exercise: step i of n; {word} = a word of the learned language, {langs} = language names joined (“A and B”).",
+    "placeholders": {
+      "i": {
+        "type": "int",
+        "example": "1"
+      },
+      "n": {
+        "type": "int",
+        "example": "4"
+      },
+      "word": {
+        "type": "String",
+        "example": "Haus"
+      },
+      "langs": {
+        "type": "String",
+        "example": "Hebrew and Chinese"
+      }
+    }
+  },
+  "lang.poly.alignWrong": "Not that one — “{word}” is {gloss}.",
+  "@lang.poly.alignWrong": {
+    "description": "Status in the align exercise after a wrong tap. {word} = a word of the learned language, {gloss} = its meaning.",
+    "placeholders": {
+      "word": {
+        "type": "String",
+        "example": "Haus"
+      },
+      "gloss": {
+        "type": "String",
+        "example": "house"
+      }
+    }
+  },
+  "lang.poly.allMatched": "All matched",
+  "@lang.poly.allMatched": {
+    "description": "Feedback of the align exercise (after ✅) without mistakes."
+  },
+  "lang.poly.wrongTaps": "{n, plural, one {# wrong tap} other {# wrong taps}}",
+  "@lang.poly.wrongTaps": {
+    "description": "Feedback of the align exercise (after ❌).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "lang.poly.alignAsk": "The same meaning in {n, number} languages — match the words",
+  "@lang.poly.alignAsk": {
+    "description": "Question of the align exercise.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "lang.poly.whoseAsk": "{title} — whose page says this?",
+  "@lang.poly.whoseAsk": {
+    "description": "Question of the “which holds where” exercise (whose grammar page says the statement). {title} = the grammar point.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Plural"
+      }
+    }
+  },
+  "lang.poly.holdsAsk": "{title} — for which language does each statement hold? (one or more)",
+  "@lang.poly.holdsAsk": {
+    "description": "Question of the “which holds where” exercise. {title} = the grammar point.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Plural"
+      }
+    }
+  },
+  "lang.poly.compareBadge": "compare",
+  "@lang.poly.compareBadge": {
+    "description": "Badge (after ≈) of a link to a word of the learner’s language: worth comparing."
+  },
+  "lang.poly.linked": "linked",
+  "@lang.poly.linked": {
+    "description": "Badge (after 🔗) of a link to a word of the learner’s language."
+  },
+  "lang.poly.inLane": "In the compare lane",
+  "@lang.poly.inLane": {
+    "description": "Button (after ⇄): open this in the compare lane."
+  },
+  "lang.poly.sideBySide": "Side by side",
+  "@lang.poly.sideBySide": {
+    "description": "Folded section (after ⇄) on a grammar page: the comparison strip."
+  },
+  "lang.poly.features": "{n, number} features",
+  "@lang.poly.features": {
+    "description": "Count after “Side by side”: typological features compared.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "lang.poly.status": "status",
+  "@lang.poly.status": {
+    "description": "Row header of the comparison strip: whether the language has the point."
+  },
+  "lang.poly.ownForm": "its own form",
+  "@lang.poly.ownForm": {
+    "description": "Comparison strip (after ✓): the language has its own form for the point."
+  },
+  "lang.poly.fromProfile": "from the language’s profile",
+  "@lang.poly.fromProfile": {
+    "description": "Tooltip of a value in the comparison strip that comes from the language’s profile."
+  },
+  "lang.poly.unknown": "unknown",
+  "@lang.poly.unknown": {
+    "description": "A value of the comparison strip that is not known."
+  },
+  "lang.poly.cmpLangs": "Languages to compare",
+  "@lang.poly.cmpLangs": {
+    "description": "Accessible name of the chips that choose the languages to compare."
+  },
+  "lang.poly.needsTwo": "Comparing needs two languages: choose them in ⚙️ Settings.",
+  "@lang.poly.needsTwo": {
+    "description": "Compare page with one active language."
+  },
+  "lang.poly.cmpTitle": "Compare your languages",
+  "@lang.poly.cmpTitle": {
+    "description": "Title of the compare lane (after ⇄)."
+  },
+  "lang.poly.grammarSide": "Grammar side by side",
+  "@lang.poly.grammarSide": {
+    "description": "Section of the compare lane (after 📖)."
+  },
+  "lang.poly.st.realized": "realized",
+  "@lang.poly.st.realized": {
+    "description": "Tooltip in the compare lane: the language has the grammar point."
+  },
+  "lang.poly.st.periphrastic": "periphrastic",
+  "@lang.poly.st.periphrastic": {
+    "description": "Tooltip in the compare lane: the language expresses it with other means."
+  },
+  "lang.poly.st.absent": "absent",
+  "@lang.poly.st.absent": {
+    "description": "Tooltip in the compare lane: the language does not have the point."
+  },
+  "lang.poly.st.other": "{status}",
+  "@lang.poly.st.other": {
+    "description": "Tooltip in the compare lane for an unusual status code (shown as it is).",
+    "placeholders": {
+      "status": {
+        "type": "String",
+        "example": "partial"
+      }
+    }
+  },
+  "lang.poly.sameMeaning": "The same meaning in every language",
+  "@lang.poly.sameMeaning": {
+    "description": "Section of the compare lane (after 🧩): parallel sentences."
+  },
+  "lang.poly.frames": "{n, number} frames",
+  "@lang.poly.frames": {
+    "description": "Count after “The same meaning in every language”: sentence frames.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "lang.poly.sentences": "{n, number} sentences",
+  "@lang.poly.sentences": {
+    "description": "Count on a frame row in the compare lane.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "4"
+      }
+    }
+  },
+  "lang.poly.bridgesTitle": "Bridges between them",
+  "@lang.poly.bridgesTitle": {
+    "description": "Section of the compare lane (after 🌉): related words between the languages."
+  },
+  "lang.poly.sameSentence": "The same sentence in each:",
+  "@lang.poly.sameSentence": {
+    "description": "Label before the meaning of the sentence shown in every language."
+  },
+  "lang.poly.notWrittenIn": "Not written yet in {langs}",
+  "@lang.poly.notWrittenIn": {
+    "description": "Note (after ⏳) on a compared grammar point: languages without its page yet ({langs} = list of names).",
+    "placeholders": {
+      "langs": {
+        "type": "String",
+        "example": "Hebrew, German"
+      }
+    }
+  },
+  "lang.poly.strip": "The comparison strip",
+  "@lang.poly.strip": {
+    "description": "Section (after 📊) of a compared grammar point."
+  },
+  "lang.poly.stripHelp": "The values of the shared typology (rows that differ are marked); a value not tagged on the page comes from the language’s profile.",
+  "@lang.poly.stripHelp": {
+    "description": "Explanation of the comparison strip."
+  },
+  "lang.poly.relate": "How they relate",
+  "@lang.poly.relate": {
+    "description": "Section (after 🔗) of a compared grammar point: pointers between the languages."
+  },
+  "lang.poly.newInSentences": "Words in these sentences you have not learned yet",
+  "@lang.poly.newInSentences": {
+    "description": "Title (after 🆕) of the list of new words met in the compared sentences."
+  },
+  "lang.poly.meaningsCount": "{n, number} meanings said in at least two of your languages.",
+  "@lang.poly.meaningsCount": {
+    "description": "Count on a frame’s compare page.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "6"
+      }
+    }
+  },
+  "lang.poly.flagCard": "the flag card",
+  "@lang.poly.flagCard": {
+    "description": "Link (after →) from a compared concept to its card with the flags."
+  },
+  "lang.poly.needsTwoDrill": "This needs two languages: choose them in ⚙️ Settings.",
+  "@lang.poly.needsTwoDrill": {
+    "description": "Polyglot drill with one active language."
+  },
+  "lang.poly.nothingYet": "Nothing to ask yet: learn some words in at least two of your languages first (the items use only words you have met).",
+  "@lang.poly.nothingYet": {
+    "description": "Polyglot drill with nothing to ask yet."
+  },
+  "lang.prod.aiJudged": "AI-judged",
+  "@lang.prod.aiJudged": {
+    "description": "Badge (after 🤖) on an answer judged by an AI model."
+  },
+  "lang.prod.aiJudgedTitle": "Judged by an AI model with your own key — the course’s stored answers stay the reference",
+  "@lang.prod.aiJudgedTitle": {
+    "description": "Tooltip of the AI badge."
+  },
+  "lang.prod.keyPlaceholder": "Gemini API key (AIza…)",
+  "@lang.prod.keyPlaceholder": {
+    "description": "Placeholder of the input for the learner’s Gemini API key. Keep “AIza…”."
+  },
+  "lang.prod.keyLabel": "Gemini API key",
+  "@lang.prod.keyLabel": {
+    "description": "Accessible name of the Gemini key input."
+  },
+  "lang.prod.keyNeeded": "The AI needs your own key.",
+  "@lang.prod.keyNeeded": {
+    "description": "Bold lead-in (after 🔑) of the box that explains how to add an AI key."
+  },
+  "lang.prod.keyHow": "Get a free Gemini key at {link} and paste it here — it stays on this device only (never synced, never in a backup). A Claude API key works too: add it in the app’s ⚙️ Settings → Claude of any subject.",
+  "@lang.prod.keyHow": {
+    "description": "How to get an AI key. {link} = a link to aistudio.google.com/apikey (keep it where the sentence needs it).",
+    "placeholders": {
+      "link": {
+        "type": "String",
+        "example": "aistudio.google.com/apikey"
+      }
+    }
+  },
+  "lang.prod.keySaved": "Key saved on this device.",
+  "@lang.prod.keySaved": {
+    "description": "After saving the AI key (after ✅)."
+  },
+  "lang.prod.keySave": "Save the key",
+  "@lang.prod.keySave": {
+    "description": "Button: save the AI key."
+  },
+  "lang.prod.notInCourseTitle": "not in the course (check it in a dictionary)",
+  "@lang.prod.notInCourseTitle": {
+    "description": "Tooltip of a word of an AI text that the course does not have."
+  },
+  "lang.prod.onlyKnown": "Only words you know.",
+  "@lang.prod.onlyKnown": {
+    "description": "Under a text (after ✓): every word is known to the learner."
+  },
+  "lang.prod.notInCourse": "Not in the course:",
+  "@lang.prod.notInCourse": {
+    "description": "Label (after ❓) before words of an AI text that are not in the course."
+  },
+  "lang.prod.answerIn": "your answer in {lang}",
+  "@lang.prod.answerIn": {
+    "description": "Accessible name of the answer field. {lang} = language name.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.prod.correct": "Correct",
+  "@lang.prod.correct": {
+    "description": "AI verdict (after ✅)."
+  },
+  "lang.prod.acceptable": "Acceptable",
+  "@lang.prod.acceptable": {
+    "description": "AI verdict (after 🟡)."
+  },
+  "lang.prod.notRight": "Not right yet",
+  "@lang.prod.notRight": {
+    "description": "AI verdict (after ❌)."
+  },
+  "lang.prod.aiCorrNotKey": "AI correction (not the answer key):",
+  "@lang.prod.aiCorrNotKey": {
+    "description": "Label before the AI’s corrected sentence."
+  },
+  "lang.prod.notStored": "This answer is not one the course has stored. An AI could judge it:",
+  "@lang.prod.notStored": {
+    "description": "Feedback (after 🤷) when an open answer is not stored and no AI key is set; the key box follows."
+  },
+  "lang.prod.asking": "asking the AI…",
+  "@lang.prod.asking": {
+    "description": "Wait message (after 🤖)."
+  },
+  "lang.prod.couldNotJudge": "The AI could not judge it: {err}",
+  "@lang.prod.couldNotJudge": {
+    "description": "Error (after ⚠️) when the AI judging failed. {err} = the reason.",
+    "placeholders": {
+      "err": {
+        "type": "String",
+        "example": "network error"
+      }
+    }
+  },
+  "lang.prod.courseAnswer": "The course’s answer:",
+  "@lang.prod.courseAnswer": {
+    "description": "Label before the course’s stored answer."
+  },
+  "lang.prod.rightVariant": "Right — the course writes it:",
+  "@lang.prod.rightVariant": {
+    "description": "Feedback (after ✅): the answer is right, written a bit differently by the course (shown after)."
+  },
+  "lang.prod.right": "Right:",
+  "@lang.prod.right": {
+    "description": "Feedback (after ✅) before the right answer."
+  },
+  "lang.prod.ctrlEnter": "Ctrl + Enter checks",
+  "@lang.prod.ctrlEnter": {
+    "description": "Hint beside the check button of a text field."
+  },
+  "lang.prod.typeInstead": "Type it instead",
+  "@lang.prod.typeInstead": {
+    "description": "Button (after ⌨️): type the sentence instead of using tiles."
+  },
+  "lang.prod.sayIn": "Say it in {lang}:",
+  "@lang.prod.sayIn": {
+    "description": "Question of the translate exercise. {lang} = language name.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.prod.expand": "Expand the sentence",
+  "@lang.prod.expand": {
+    "description": "Question of the expand exercise (after ➕)."
+  },
+  "lang.prod.rewrite": "Rewrite the sentence",
+  "@lang.prod.rewrite": {
+    "description": "Question of the rewrite exercise (after 🔁)."
+  },
+  "lang.prod.openAnswer": "open answer",
+  "@lang.prod.openAnswer": {
+    "description": "Badge (after 🤖): the exercise has no single stored answer."
+  },
+  "lang.prod.openAnswerNote": "judged by the AI with your key; the words are checked against the course",
+  "@lang.prod.openAnswerNote": {
+    "description": "After the “open answer” badge."
+  },
+  "lang.prod.yourWords": "Your words:",
+  "@lang.prod.yourWords": {
+    "description": "Label before the learner’s answer checked word by word."
+  },
+  "lang.prod.useWords": "Use these words (any form):",
+  "@lang.prod.useWords": {
+    "description": "Guided writing: label before the words to use."
+  },
+  "lang.prod.writeIn": "Write in {lang}…",
+  "@lang.prod.writeIn": {
+    "description": "Placeholder of the guided-writing field.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.prod.checkedByCourse": "Checked by the course:",
+  "@lang.prod.checkedByCourse": {
+    "description": "Guided writing (after ✔): label before which required words were used."
+  },
+  "lang.prod.nSentences": "{n, plural, one {# sentence} other {# sentences}}",
+  "@lang.prod.nSentences": {
+    "description": "Guided writing: how many sentences the learner wrote.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "lang.prod.rubricNeedsAI": "The rubric (grammar, vocabulary, spelling, cohesion) needs an AI:",
+  "@lang.prod.rubricNeedsAI": {
+    "description": "Guided writing without an AI key; the key box follows."
+  },
+  "lang.prod.aiReads": "the AI reads your text…",
+  "@lang.prod.aiReads": {
+    "description": "Wait message (after 🤖)."
+  },
+  "lang.prod.couldNotGrade": "The AI could not grade it: {err}",
+  "@lang.prod.couldNotGrade": {
+    "description": "Error (after ⚠️) when the AI grading failed.",
+    "placeholders": {
+      "err": {
+        "type": "String",
+        "example": "network error"
+      }
+    }
+  },
+  "lang.prod.checkText": "Check my text",
+  "@lang.prod.checkText": {
+    "description": "Button of the guided writing."
+  },
+  "lang.prod.rubric": "The rubric",
+  "@lang.prod.rubric": {
+    "description": "Title of the AI’s rubric of a text."
+  },
+  "lang.prod.aspect.grammar": "grammar",
+  "@lang.prod.aspect.grammar": {
+    "description": "Aspect of the writing rubric."
+  },
+  "lang.prod.aspect.vocabulary": "vocabulary",
+  "@lang.prod.aspect.vocabulary": {
+    "description": "Aspect of the writing rubric."
+  },
+  "lang.prod.aspect.spelling": "spelling",
+  "@lang.prod.aspect.spelling": {
+    "description": "Aspect of the writing rubric."
+  },
+  "lang.prod.aspect.cohesion": "cohesion",
+  "@lang.prod.aspect.cohesion": {
+    "description": "Aspect of the writing rubric."
+  },
+  "lang.prod.aiCorr": "AI correction:",
+  "@lang.prod.aiCorr": {
+    "description": "Label before the AI’s corrected text."
+  },
+  "lang.prod.theText": "The text",
+  "@lang.prod.theText": {
+    "description": "Folded text above a reading question (after 📖)."
+  },
+  "lang.prod.nothingHere": "Nothing to practise here yet with the words you know — learn the lesson it needs first.",
+  "@lang.prod.nothingHere": {
+    "description": "A writing/reading set with no item yet."
+  },
+  "lang.prod.done": "Done",
+  "@lang.prod.done": {
+    "description": "Title at the end of a writing or reading set (after 🎉)."
+  },
+  "lang.prod.stats": "{right, number} right · {wrong, number} to practise again",
+  "@lang.prod.stats": {
+    "description": "Result at the end of a writing or reading set.",
+    "placeholders": {
+      "right": {
+        "type": "int",
+        "example": "6"
+      },
+      "wrong": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "lang.write.translate": "Translate",
+  "@lang.write.translate": {
+    "description": "Writing set (title)."
+  },
+  "lang.write.translateWhat": "the meaning → the sentence (tiles first, typing when you know the words)",
+  "@lang.write.translateWhat": {
+    "description": "What the writing set “Translate” asks."
+  },
+  "lang.write.rewrite": "Rewrite and expand",
+  "@lang.write.rewrite": {
+    "description": "Writing set (title)."
+  },
+  "lang.write.rewriteWhat": "the same sentence under a constraint, or with a detail more",
+  "@lang.write.rewriteWhat": {
+    "description": "What the writing set “Rewrite and expand” asks."
+  },
+  "lang.write.compose": "Guided writing",
+  "@lang.write.compose": {
+    "description": "Writing set (title)."
+  },
+  "lang.write.composeWhat": "a few sentences on a topic with given words — a rubric per aspect",
+  "@lang.write.composeWhat": {
+    "description": "What the writing set “Guided writing” asks."
+  },
+  "lang.write.register": "Register and dialogue",
+  "@lang.write.register": {
+    "description": "Writing set (title)."
+  },
+  "lang.write.registerWhat": "the right formula for the person; the fitting answer",
+  "@lang.write.registerWhat": {
+    "description": "What the writing set “Register and dialogue” asks."
+  },
+  "lang.write.numbers": "Numbers",
+  "@lang.write.numbers": {
+    "description": "Writing set (title)."
+  },
+  "lang.write.numbersWhat": "digits ↔ words, counting things",
+  "@lang.write.numbersWhat": {
+    "description": "What the writing set “Numbers” asks."
+  },
+  "lang.write.clock": "The clock",
+  "@lang.write.clock": {
+    "description": "Writing set (title)."
+  },
+  "lang.write.clockWhat": "what time does it say?",
+  "@lang.write.clockWhat": {
+    "description": "What the writing set “The clock” asks."
+  },
+  "lang.write.date": "Dates",
+  "@lang.write.date": {
+    "description": "Writing set (title)."
+  },
+  "lang.write.dateWhat": "months, days, ordinals, dates in sentences",
+  "@lang.write.dateWhat": {
+    "description": "What the writing set “Dates” asks."
+  },
+  "lang.write.help": "Sentences with the words you know ({n, number}); a few new ones are marked 🆕. The course’s stored sentences decide; other answers are judged by the AI with your key and marked “AI-judged”.",
+  "@lang.write.help": {
+    "description": "Explanation on the writing lane. {n} = words known. Keep 🆕. “AI-judged” = lang.prod.aiJudged.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "120"
+      }
+    }
+  },
+  "lang.write.ready": "{n, number} ready",
+  "@lang.write.ready": {
+    "description": "On a writing set card: how many items are ready.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "8"
+      }
+    }
+  },
+  "lang.write.learnMore": "learn more words first",
+  "@lang.write.learnMore": {
+    "description": "On a writing set card with nothing ready yet."
+  },
+  "lang.read.help": "Short texts made of the course’s sentences, at most one new word per sentence. Tap a word for its card.",
+  "@lang.read.help": {
+    "description": "Explanation on the reading lane."
+  },
+  "lang.read.aiText": "A new text written by the AI (checked against your words)",
+  "@lang.read.aiText": {
+    "description": "Button (after ✨) on the reading lane."
+  },
+  "lang.read.aiNeedsKey": "New texts written by an AI need your key (see Writing).",
+  "@lang.read.aiNeedsKey": {
+    "description": "Note (after ✨) on the reading lane without an AI key."
+  },
+  "lang.read.noText": "No text yet with the words you know in {lang} — learn a few lessons first.",
+  "@lang.read.noText": {
+    "description": "Reading lane with no text yet. {lang} = language name.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.read.cardNew": "{n, number} sentences · 🆕 {u, plural, one {# new word} other {# new words}}",
+  "@lang.read.cardNew": {
+    "description": "On a text card: its sentences and its new words. Keep 🆕.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "6"
+      },
+      "u": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "lang.read.cardKnown": "{n, number} sentences · ✓ only words you know",
+  "@lang.read.cardKnown": {
+    "description": "On a text card without new words. Keep ✓.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "6"
+      }
+    }
+  },
+  "lang.read.texts": "Texts",
+  "@lang.read.texts": {
+    "description": "Back button (after ←) to the list of texts."
+  },
+  "lang.read.newInText": "New words in this text",
+  "@lang.read.newInText": {
+    "description": "Title (after 🆕) of the list of new words of a text."
+  },
+  "lang.read.questionsTitle": "{title} — questions",
+  "@lang.read.questionsTitle": {
+    "description": "Title of the questions run on a text (after 📖). {title} = the text’s title.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "At the market"
+      }
+    }
+  },
+  "lang.read.questions": "Questions on the text",
+  "@lang.read.questions": {
+    "description": "Button (after ❓)."
+  },
+  "lang.read.talkTutor": "Talk about it with the tutor",
+  "@lang.read.talkTutor": {
+    "description": "Button (after 🎓)."
+  },
+  "lang.read.showMeaning": "show the meaning",
+  "@lang.read.showMeaning": {
+    "description": "Tooltip and accessible name of the 👁 button after a sentence."
+  },
+  "lang.read.aiWritten": "AI-written · checked",
+  "@lang.read.aiWritten": {
+    "description": "Badge (after 🤖) on a text written by the AI and checked by the course."
+  },
+  "lang.read.passedAll": "{ok, number} of {n, number} sentences passed the check (every word in the course, at most one new word per sentence). The meanings are the AI’s translation.",
+  "@lang.read.passedAll": {
+    "description": "Under an AI text when every sentence passed.",
+    "placeholders": {
+      "ok": {
+        "type": "int",
+        "example": "6"
+      },
+      "n": {
+        "type": "int",
+        "example": "6"
+      }
+    }
+  },
+  "lang.read.passedSome": "{ok, number} of {n, number} sentences passed the check (every word in the course, at most one new word per sentence); the others are left out. The meanings are the AI’s translation.",
+  "@lang.read.passedSome": {
+    "description": "Under an AI text when some sentences were left out.",
+    "placeholders": {
+      "ok": {
+        "type": "int",
+        "example": "4"
+      },
+      "n": {
+        "type": "int",
+        "example": "6"
+      }
+    }
+  },
+  "lang.read.tryAgain": "{err} — try again",
+  "@lang.read.tryAgain": {
+    "description": "Button text (after ⚠️) when writing an AI text failed.",
+    "placeholders": {
+      "err": {
+        "type": "String",
+        "example": "network error"
+      }
+    }
+  },
+  "lang.tutor.intent.explain": "Explain this rule",
+  "@lang.tutor.intent.explain": {
+    "description": "Tutor button (after 📘)."
+  },
+  "lang.tutor.intent.compare": "Compare the languages",
+  "@lang.tutor.intent.compare": {
+    "description": "Tutor button (after ⇄)."
+  },
+  "lang.tutor.intent.quiz": "Quiz this node",
+  "@lang.tutor.intent.quiz": {
+    "description": "Tutor button (after ❓): a quiz on this course step."
+  },
+  "lang.tutor.intent.chat": "A conversation at my level",
+  "@lang.tutor.intent.chat": {
+    "description": "Tutor button (after 💬 or 🎓)."
+  },
+  "lang.tutor.msg.explain": "Explain this rule to me.",
+  "@lang.tutor.msg.explain": {
+    "description": "The learner’s first message to the tutor for the “explain” button (shown as theirs)."
+  },
+  "lang.tutor.msg.compare": "How does this point work in the other languages of the course?",
+  "@lang.tutor.msg.compare": {
+    "description": "The learner’s first message for the “compare” button."
+  },
+  "lang.tutor.msg.quiz": "Quiz me on this.",
+  "@lang.tutor.msg.quiz": {
+    "description": "The learner’s first message for the “quiz” button."
+  },
+  "lang.tutor.msg.chat": "Let’s talk — at my level, please.",
+  "@lang.tutor.msg.chat": {
+    "description": "The learner’s first message for the “conversation” button."
+  },
+  "lang.tutor.msg.hint": "I am on an exercise and want a hint, not the answer.",
+  "@lang.tutor.msg.hint": {
+    "description": "The learner’s first message when they ask the tutor for a hint."
+  },
+  "lang.tutor.placeholder": "Your message…",
+  "@lang.tutor.placeholder": {
+    "description": "Placeholder of the tutor’s message field."
+  },
+  "lang.tutor.msgLabel": "your message to the tutor",
+  "@lang.tutor.msgLabel": {
+    "description": "Accessible name of the tutor’s message field."
+  },
+  "lang.tutor.langLabel": "language of the tutor’s explanations",
+  "@lang.tutor.langLabel": {
+    "description": "Accessible name of the select of the tutor’s language."
+  },
+  "lang.tutor.close": "Close",
+  "@lang.tutor.close": {
+    "description": "Tooltip of the ✕ button of the tutor drawer."
+  },
+  "lang.tutor.closeLabel": "Close the tutor",
+  "@lang.tutor.closeLabel": {
+    "description": "Accessible name of the ✕ button of the tutor drawer."
+  },
+  "lang.tutor.needsKey": "{what} needs an AI key — add one below.",
+  "@lang.tutor.needsKey": {
+    "description": "Tutor drawer: a button was pressed without an AI key. {what} = the button’s label.",
+    "placeholders": {
+      "what": {
+        "type": "String",
+        "example": "📘 Explain this rule"
+      }
+    }
+  },
+  "lang.tutor.rule": "Uses the {lang} words you know ({n, number}); at most one new word per sentence, glossed. Its words are checked against the course.",
+  "@lang.tutor.rule": {
+    "description": "The tutor’s rule, under its buttons. {lang} = language name, {n} = words known.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      },
+      "n": {
+        "type": "int",
+        "example": "120"
+      }
+    }
+  },
+  "lang.tutor.pick": "Pick what you want, or just write.",
+  "@lang.tutor.pick": {
+    "description": "Tutor drawer before the first message (with an AI key)."
+  },
+  "lang.tutor.addKey": "Each button above works once you have added a key.",
+  "@lang.tutor.addKey": {
+    "description": "Tutor drawer without an AI key."
+  },
+  "lang.tutor.inCourse": "In the course:",
+  "@lang.tutor.inCourse": {
+    "description": "Label under a tutor message before its sentences checked against the course."
+  },
+  "lang.tutor.rowLabel": "Tutor:",
+  "@lang.tutor.rowLabel": {
+    "description": "Label (after 🎓) before the tutor buttons of a page."
+  },
+  "lang.frame.tutor": "Tutor",
+  "@lang.frame.tutor": {
+    "description": "Subtitle of a tutor action moved into the frame’s ⋮ menu."
+  },
+  "lang.frame.practice": "Practice",
+  "@lang.frame.practice": {
+    "description": "Label of the “Practice ▾” drop-down that holds a page’s other drills."
+  },
+  "lang.frame.explainedIn": "explained in {lang}",
+  "@lang.frame.explainedIn": {
+    "description": "Under the course title in the frame, when the title already names the languages. {lang} = the explanation language’s name.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      }
+    }
+  },
+  "lang.frame.session": "Today’s session",
+  "@lang.frame.session": {
+    "description": "Small label of the big card on the course home (the session’s counts are its title)."
+  },
+  "lang.frame.today": "Today",
+  "@lang.frame.today": {
+    "description": "Small label of the big card on the course home when nothing is due."
+  },
+  "lang.frame.todaysLangs": "Today’s languages",
+  "@lang.frame.todaysLangs": {
+    "description": "Menu item and sheet title: which languages today’s session covers."
+  },
+  "lang.frame.todaysLangsSub": "The languages of today’s session; tomorrow all of them again.",
+  "@lang.frame.todaysLangsSub": {
+    "description": "Explanation at the top of the “Today’s languages” sheet."
+  },
+  "lang.frame.nextLessons": "{n, plural, one {Next lesson} other {Next lessons}}",
+  "@lang.frame.nextLessons": {
+    "description": "Section label on the course home in the frame (one or more lessons follow).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "lang.frame.removeLang": "Remove this language",
+  "@lang.frame.removeLang": {
+    "description": "Action in a language’s sheet: remove a language that was added through Claude."
+  },
+  "lang.frame.addedClaude": "Added through Claude",
+  "@lang.frame.addedClaude": {
+    "description": "Subtitle of a language that a Claude package added to the course."
+  },
+  "lang.frame.wordsKnown": "{n, number} words known",
+  "@lang.frame.wordsKnown": {
+    "description": "Subtitle of a language row on the course home: words known.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "42"
+      }
+    }
+  },
+  "lang.frame.removeLangSub": "It leaves this course on every device; your progress is kept",
+  "@lang.frame.removeLangSub": {
+    "description": "Subtitle of “Remove this language”."
+  },
+  "lang.frame.across": "Across your languages",
+  "@lang.frame.across": {
+    "description": "Row and sheet title on the course home: the drills across several languages."
+  },
+  "lang.frame.acrossSub": "Compare, bridges, which language",
+  "@lang.frame.acrossSub": {
+    "description": "Subtitle of “Across your languages”."
+  },
+  "lang.frame.drills": "Drills",
+  "@lang.frame.drills": {
+    "description": "Row and sheet title on the course home: the drills."
+  },
+  "lang.frame.drillsSub": "Principal parts, sorting fields",
+  "@lang.frame.drillsSub": {
+    "description": "Subtitle of “Drills”."
+  },
+  "lang.frame.signs": "What the signs mean",
+  "@lang.frame.signs": {
+    "description": "Menu item and sheet title: the legend of the signs on the course map."
+  },
+  "lang.frame.more": "More ({n, number} {what, select, examples {examples} items {items} other {more}})",
+  "@lang.frame.more": {
+    "description": "Button under a long list that shows the rest: how many more examples, items, or (other) entries.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "7"
+      },
+      "what": {
+        "type": "String",
+        "example": "examples"
+      }
+    }
+  },
+  "lang.frame.gram.from": "From your languages",
+  "@lang.frame.gram.from": {
+    "description": "Folded section of a grammar point: notes from the learner’s languages."
+  },
+  "lang.frame.gram.ask": "Ask yourself",
+  "@lang.frame.gram.ask": {
+    "description": "Folded section of a grammar point: the questions to ask yourself."
+  },
+  "lang.frame.gram.traps": "Traps",
+  "@lang.frame.gram.traps": {
+    "description": "Folded section of a grammar point: its traps."
+  },
+  "lang.frame.gram.more": "More about this point",
+  "@lang.frame.gram.more": {
+    "description": "Folded section of a grammar point: the rest of its explanation."
+  },
+  "lang.frame.gram.examples": "Sentences",
+  "@lang.frame.gram.examples": {
+    "description": "Folded section of a grammar point: example sentences."
+  },
+  "lang.frame.gram.also": "See also",
+  "@lang.frame.gram.also": {
+    "description": "Folded section of a grammar point: related points."
+  },
+  "lang.frame.gram.other": "In your other languages",
+  "@lang.frame.gram.other": {
+    "description": "Folded section of a grammar point: the same point in the other course languages."
+  },
+  "lang.frame.ask": "Ask {name}",
+  "@lang.frame.ask": {
+    "description": "Button on every exercise (the tutor character’s face): ask the tutor for a hint. {name} = the character’s name.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Noema"
+      }
+    }
+  },
+  "lang.frame.askYourTutor": "Ask your tutor",
+  "@lang.frame.askYourTutor": {
+    "description": "As lang.frame.ask, when the character has no name."
+  },
+  "lang.tutor.hintMsg": "I am on this exercise and want a hint, not the answer: «{q}»",
+  "@lang.tutor.hintMsg": {
+    "description": "The learner’s message sent to the language tutor (shown in the tutor drawer as theirs) when they ask for a hint on an exercise. {q} = the exercise’s question.",
+    "placeholders": {
+      "q": {
+        "type": "String",
+        "example": "What does it mean? Hund"
+      }
+    }
   }
 }
