@@ -181,8 +181,8 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "From the Indo-European root for “bright, shine” – the same root as Russian свет (light).",
-     "English white and German weiß are one Germanic word."
+     "weiß comes from the Indo-European root for “bright, shine”.",
+     "The ß of weiß is an old Germanic t that became s: Proto-Germanic *hwītaz."
     ],
     "pitfalls": [
      "weiß is also a form of wissen: ich weiß / er weiß = I know / he knows. Die Wand ist weiß – Ich weiß es."
@@ -190,6 +190,18 @@
     "subtleties": [
      "As a noun a colour is neuter and capitalised: das Weiß (ein helles Weiß).",
      "Comparison exists but is rare for colours: weißer, am weißesten."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "weiß shares its root with свет (light)."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "weiß and white are one Germanic word; German ß often matches English t: weiß – white, Wasser – water."
+     }
     ]
    }
   },
@@ -413,11 +425,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German swarz, from Old High German swarz, from Proto-West Germanic *swart, from Proto-Germanic *swartaz, from Proto-Indo-European *swerd- (“dirty, dark, black”). Compare Dutch zwart, English swart and swarthy, Yiddish שוואַרץ (shvarts).",
+     "text": "From Middle High German swarz, from Old High German swarz, from Proto-West Germanic *swart, from Proto-Germanic *swartaz, from Proto-Indo-European *swerd- (“dirty, dark, black”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English swarthy (dark-skinned) is a cousin of schwarz."
+     "schwarz goes back to a root meaning “dirty, dark”."
     ],
     "pitfalls": [
      "schwarz- in verbs means “illegal”: schwarzfahren (ride without a ticket), schwarzarbeiten (work off the books)."
@@ -425,6 +437,13 @@
     "subtleties": [
      "As a noun a colour is neuter and capitalised: das Schwarz (ein helles Schwarz).",
      "Comparison with umlaut: schwärzer, am schwärzesten (schwarzer also exists)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "schwarz is related to English swart and swarthy."
+     }
     ]
    }
   },
@@ -649,11 +668,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German rōt (“red, red-haired”), from Old High German rōt, from Proto-West Germanic *raud, from Proto-Germanic *raudaz, from Proto-Indo-European *h₁rowdʰós, from *h₁rewdʰ-. Compare Dutch rood, English red, Danish rød.",
+     "text": "From Middle High German rōt (“red, red-haired”), from Old High German rōt, from Proto-West Germanic *raud, from Proto-Germanic *raudaz, from Proto-Indo-European *h₁rowdʰós, from *h₁rewdʰ-.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The same Indo-European root gave Greek ερυθρός (red – the Ερυθρά Θάλασσα, Red Sea) and Latin ruber."
+     "rot goes back to the Indo-European word for red, *h₁rowdʰós."
     ],
     "pitfalls": [
      "rot werden = to blush (not “to become red” in general)."
@@ -662,6 +681,18 @@
      "As a noun a colour is neuter and capitalised: das Rot (ein helles Rot).",
      "Comparison: röter / roter, am rötesten / am rotesten – both exist, rarely needed.",
      "Light and dark shades are one word: hellrot, dunkelrot (ein dunkelrotes Auto)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "rot shares its Indo-European root with ερυθρός – the Ερυθρά Θάλασσα is das Rote Meer."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "rot is related to English red."
+     }
     ]
    }
   },
@@ -870,15 +901,27 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Russian splits blue into two basic colours, синий (dark) and голубой (light); German, like English, has one: blau, with hellblau and dunkelblau."
+     "German has one basic word for blue, blau; shades are compounds: hellblau, dunkelblau."
     ],
     "pitfalls": [
-     "blau sein = to be drunk (colloquial) – it never means “sad” like English “feeling blue”."
+     "blau sein = to be drunk (colloquial); blau says nothing about mood."
     ],
     "subtleties": [
      "As a noun a colour is neuter and capitalised: das Blau (ein helles Blau).",
      "Comparison exists but is rare for colours: blauer, am blauesten. (am blausten also).",
      "Light and dark shades are one word: hellblau, dunkelblau (ein dunkelblaues Auto)."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "trap",
+      "text": "синий and голубой are both blau in German: dunkelblau, hellblau."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "blau never means sad as in “feeling blue”; blau sein means to be drunk."
+     }
     ]
    }
   },
@@ -1082,7 +1125,7 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German grüene, from Old High German gruoni, gruoen, from Proto-West Germanic *grōnī, from Proto-Germanic *grōniz. Compare Dutch groen, English green, Danish grøn.",
+     "text": "From Middle High German grüene, from Old High German gruoni, gruoen, from Proto-West Germanic *grōnī, from Proto-Germanic *grōniz.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -1094,6 +1137,13 @@
     "subtleties": [
      "As a noun a colour is neuter and capitalised: das Grün (ein helles Grün).",
      "Comparison exists but is rare for colours: grüner, am grünsten."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "grün is related to English green."
+     }
     ]
    }
   },
@@ -1249,11 +1299,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German gel (inflected gelwe), from Old High German gelo, from Proto-West Germanic *gelu, from Proto-Germanic *gelwaz. The form gelb comes from the inflected stem. Cognate with Dutch geel, English yellow.",
+     "text": "From Middle High German gel (inflected gelwe), from Old High German gelo, from Proto-West Germanic *gelu, from Proto-Germanic *gelwaz. The form gelb comes from the inflected stem.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "From the Indo-European colour root that also gave Russian жёлтый (yellow), зелёный (green) and Greek χλωρός (pale green)."
+     "gelb comes from an Indo-European colour root for yellow and green."
     ],
     "pitfalls": [
      "das Gelbe vom Ei is the yolk (literally “the yellow of the egg”); the egg white is das Eiweiß."
@@ -1261,6 +1311,23 @@
     "subtleties": [
      "As a noun a colour is neuter and capitalised: das Gelb (ein helles Gelb).",
      "Comparison exists but is rare for colours: gelber, am gelbsten."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "gelb shares its root with жёлтый (yellow) and зелёный (green)."
+     },
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "gelb shares its Indo-European root with χλωρός (pale green)."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "gelb is related to English yellow."
+     }
     ]
    }
   },
@@ -1441,7 +1508,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English brown and German braun are one Germanic word."
+     "braun is an old Germanic colour word; it also gave the names Bruno and Braun."
     ],
     "pitfalls": [
      "In political talk braun refers to the Nazis and the far right – mind the context."
@@ -1449,6 +1516,13 @@
     "subtleties": [
      "As a noun a colour is neuter and capitalised: das Braun (ein helles Braun).",
      "Comparison: brauner, am braunsten (colloquial bräuner)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "braun and English brown are one Germanic word."
+     }
     ]
    }
   },
@@ -1634,18 +1708,25 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German grā, from Old High German grāo, from Proto-West Germanic *grāu. Compare English gray, grey.",
+     "text": "From Middle High German grā, from Old High German grāo, from Proto-West Germanic *grāu.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
      "eine graue Maus (“a grey mouse”) is a plain, unremarkable person."
     ],
     "pitfalls": [
-     "English writes grey or gray; German has only grau."
+     "grau has one spelling and is declined normally: ein graues Haus, die grauen Haare."
     ],
     "subtleties": [
      "As a noun a colour is neuter and capitalised: das Grau (ein helles Grau).",
      "Comparison exists but is rare for colours: grauer, am grauesten. (am grausten also)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English writes grey or gray; German has only grau."
+     }
     ]
    }
   },
@@ -1738,14 +1819,31 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The fruit is also die Apfelsine (“apple from China”) in the north – like Russian апельсин; Greek πορτοκάλι, Turkish portakal and Arabic بُرْتُقَال name it after Portugal."
+     "The fruit is also die Apfelsine (“apple from China”) in the north; Arabic بُرْتُقَال names it after Portugal."
     ],
     "pitfalls": [
      "Before a noun it traditionally stays unchanged: ein orange Kleid, eine orange Tasche, mit dem orange Auto. Everyday speech often adds endings with an extra -n- (ein orangenes Auto) – that is colloquial and many teachers mark it wrong; in writing use it unchanged or the compound orange-farben (ein orangefarbenes Kleid)."
     ],
     "subtleties": [
-     "Pronounced the French way: o-RAHNG-zhe, with the zh of Journal.",
+     "Pronounced as in its source language: [oˈʁãːʒə] or [oˈʁaŋʒə], with the ʒ of Journal.",
      "Capitalised, die Orange is the fruit."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "апельсин is the same word as Apfelsine, “apple from China”."
+     },
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "πορτοκάλι names the fruit after Portugal, as Arabic بُرْتُقَال does; German says Orange or Apfelsine."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "orange is said almost as in French, with a final [ə]: [oˈʁãːʒə]."
+     }
     ]
    }
   },
@@ -1856,13 +1954,30 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "rosa is simply Latin rosa, “rose” – Greek ροζ and Russian розовый also name the colour after the rose."
+     "rosa is simply Latin rosa, “rose”."
     ],
     "pitfalls": [
      "Before a noun it traditionally stays unchanged: ein rosa Kleid, eine rosa Tasche, mit dem rosa Auto. Everyday speech often adds endings with an extra -n- (ein rosanes Kleid) – that is colloquial and many teachers mark it wrong; in writing use it unchanged or the compound rosa-farben (ein rosafarbenes Kleid)."
     ],
     "subtleties": [
      "rosa is pale pink; strong pink is pink."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "ροζ also names the colour after the rose."
+     },
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "розовый also names the colour after the rose."
+     },
+     {
+      "for": "it",
+      "rel": "trap",
+      "text": "rosa is the same word, but German rosa takes no ending in careful speech: ein rosa Kleid."
+     }
     ]
    }
   },
@@ -2178,7 +2293,7 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German hel (“resounding, loud, shining, bright”), from Old High German hel (“resounding”), from Proto-Germanic *halliz (“resounding”), from Proto-Indo-European *kelh₁- (“to call, make noise”). Cognate with Dutch hel.",
+     "text": "From Middle High German hel (“resounding, loud, shining, bright”), from Old High German hel (“resounding”), from Proto-Germanic *halliz (“resounding”), from Proto-Indo-European *kelh₁- (“to call, make noise”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -2186,11 +2301,18 @@
      "am helllichten Tag (in broad daylight) has three l’s in a row since the 1996 spelling reform."
     ],
     "pitfalls": [
-     "hell is not English “hell” (die Hölle), and not “light” in weight (leicht)."
+     "hell means bright, light in colour; light in weight is leicht."
     ],
     "subtleties": [
      "Shades are one word: hellblau, hellgrün, hellrot.",
      "Comparison: heller, am hellsten."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "hell is not English hell (that is die Hölle)."
+     }
     ]
    }
   },
@@ -2394,7 +2516,7 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German tunkel, from Old High German tunkal, tuncal (“dark”), from Proto-Germanic *dunkalaz (“dark”), from Proto-Indo-European *dʰengʷ- (“to smoke, fume”). Cognate to Dutch donker (“dark”).",
+     "text": "From Middle High German tunkel, from Old High German tunkal, tuncal (“dark”), from Proto-Germanic *dunkalaz (“dark”), from Proto-Indo-European *dʰengʷ- (“to smoke, fume”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -2524,11 +2646,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German mēre, from Old High German mēro, from Proto-West Germanic *maiʀō, from Proto-Germanic *maizô, from Proto-Indo-European *mē- (“many”). See English more.",
+     "text": "From Middle High German mēre, from Old High German mēro, from Proto-West Germanic *maiʀō, from Proto-Germanic *maizô, from Proto-Indo-European *mē- (“many”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "mehr and English more are one word, from Proto-Germanic *maizô."
+     "mehr is an old irregular comparative: viel – mehr – am meisten."
     ],
     "pitfalls": [
      "mehr never takes an ending: mehr Bücher, mehr Milch (not *mehre).",
@@ -2537,6 +2659,13 @@
     "subtleties": [
      "mehrere is a different word: mehrere Bücher = several books.",
      "viel – mehr – am meisten: the comparison of viel."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "mehr and English more are one word, from Proto-Germanic *maizô."
+     }
     ]
    },
    "features": {
@@ -2627,17 +2756,24 @@
      }
     ],
     "etymology": {
-     "text": "The superlative of viel (comparative mehr, superlative am meisten). meist- is from Old High German meist, from Proto-Germanic *maist, *maistaz. Compare Dutch meest, English most, Danish mest.",
+     "text": "The superlative of viel (comparative mehr, superlative am meisten). meist- is from Old High German meist, from Proto-Germanic *maist, *maistaz.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "meist- and English most are one word."
+     "meist- is the old superlative of viel, Old High German meist."
     ],
     "pitfalls": [
      "“Most people / most children” is die meisten Leute / die meisten Kinder, not *am meisten Leute."
     ],
     "subtleties": [
      "am meisten is built like am größten, am schnellsten: am + -sten."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "meist- and English most are one word."
+     }
     ]
    },
    "features": {
@@ -2793,11 +2929,11 @@
     "synonyms": [],
     "synonymsNone": "No synonym for “than”: als is the only word after a comparative in standard German.",
     "etymology": {
-     "text": "From Middle High German alles, from Old High German also, alsō (“as, like”); equivalent to all + so. Compare English as.",
+     "text": "From Middle High German alles, from Old High German also, alsō (“as, like”); equivalent to all + so.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "als comes from all + so – the same pair that gave English also and, worn down, as."
+     "als comes from all + so (Old High German alsō)."
     ],
     "pitfalls": [
      "than = als, not wie: größer als ich. *größer wie ich is colloquial/regional and counts as an error in writing; “as … as” is so … wie (so groß wie ich).",
@@ -2806,6 +2942,13 @@
     ],
     "subtleties": [
      "A clause with als (when) has the verb at the end: Als ich jung war, …"
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "The pair all + so also gave English also and, worn down, as – which is why German also (so, therefore) is a false friend."
+     }
     ]
    },
    "features": {

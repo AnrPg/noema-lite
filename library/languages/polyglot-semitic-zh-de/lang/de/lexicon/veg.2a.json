@@ -114,13 +114,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English ginger, Arabic زَنْجَبِيل (zanjabīl) and Turkish zencefil go back to the same ancient word from South India as German Ingwer."
+     "Ingwer and Arabic زَنْجَبِيل (zanjabīl) go back to the same ancient word from South India."
     ],
     "pitfalls": [
      "Masculine: der Ingwer. The plural (die Ingwer) is rare; as food it is uncountable: Ich kaufe Ingwer, ein Stück Ingwer."
     ],
     "subtleties": [
      "One piece of the root is usually called eine Ingwerknolle or ein Stück Ingwer, although botanically it is a rhizome, not a root."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English ginger goes back to the same ancient word as Ingwer."
+     }
     ]
    }
   },
@@ -248,13 +255,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Ancient Greek μάραθον meant fennel – the battlefield of Marathon was a “place of fennel”, and Modern Greek still says μάραθο."
+     "Ancient Greek μάραθον meant fennel – the battlefield of Marathon was a “place of fennel”."
     ],
     "pitfalls": [
      "The plural looks like the singular: ein Fenchel, zwei Fenchel; only the dative plural adds -n (mit Fencheln)."
     ],
     "subtleties": [
      "Fenchel can mean the vegetable bulb or the spice (the seeds). Gemüsefenchel or Knollenfenchel is the bulb, Fenchelsamen the seeds."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "μάραθο is Fenchel."
+     }
     ]
    }
   },
@@ -365,7 +379,7 @@
      }
     ],
     "etymology": {
-     "text": "Like English manioc (Wiktionary): from French manioc, through Portuguese mandioca, ultimately from Old Tupi mani’oka.",
+     "text": "From French manioc, through Portuguese mandioca, ultimately from Old Tupi mani’oka.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -377,6 +391,18 @@
     ],
     "subtleties": [
      "In recipes you also meet Cassava (from Taíno via Spanish) and the Spanish name Yuca – all for the same root."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Maniok is English manioc."
+     },
+     {
+      "for": "pt",
+      "rel": "similar",
+      "text": "Maniok goes back, through French, to mandioca."
+     }
     ]
    }
   },
@@ -514,7 +540,7 @@
     },
     "funFacts": [
      "The German asparagus season traditionally ends on 24 June, St John’s Day (Johannistag).",
-     "Greek σπαράγγι, English asparagus and German Spargel all go back to Latin asparagus, from Greek ἀσπάραγος."
+     "Spargel goes back to Latin asparagus, from Greek ἀσπάραγος."
     ],
     "pitfalls": [
      "Usually uncountable: Ich esse gern Spargel. Plural die Spargel (also Spargeln), dative mit Spargeln.",
@@ -522,6 +548,18 @@
     ],
     "subtleties": [
      "Germans traditionally prefer white asparagus (Bleichspargel); green asparagus became common only in recent decades."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Spargel is σπαράγγι: both from ἀσπάραγος."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Spargel and English asparagus both come from Latin asparagus."
+     }
     ]
    }
   },
@@ -636,11 +674,11 @@
      }
     ],
     "etymology": {
-     "text": "From a Polynesian language (Duden); compare Māori taro, the source of English taro (Wiktionary).",
+     "text": "From a Polynesian language (Duden).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "In Cyprus taro is κολοκάσι (kolokasi), from Ancient Greek κολοκάσιον; Arabic قُلْقَاس (qulqās) comes from the same Greek word."
+     "Arabic قُلْقَاس (qulqās) comes from Ancient Greek κολοκάσιον."
     ],
     "pitfalls": [
      "Masculine: der Taro, des Taros, plural die Taros.",
@@ -648,6 +686,13 @@
     ],
     "subtleties": [
      "In German Taro normally means the starchy corm; the large leaves are eaten too, but are rarely sold in Germany."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "In Cyprus Taro is κολοκάσι, from κολοκάσιον."
+     }
     ]
    }
   },
@@ -902,18 +947,45 @@
      }
     ],
     "etymology": {
-     "text": "In the literal sense inherited from Middle High German lewenzan, Löwe (“lion”) + -n- + Zahn (“tooth”). The botanical sense is a 16th-century calque of Latin dēns leōnis, whence also English dandelion.",
+     "text": "In the literal sense inherited from Middle High German lewenzan, Löwe (“lion”) + -n- + Zahn (“tooth”). The botanical sense is a 16th-century calque of Latin dēns leōnis.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
      "Löwenzahn is also the name of a long-running German children’s TV programme (ZDF, since 1981).",
-     "English dandelion comes from French dent-de-lion, the same “lion’s tooth” image."
+     "Löwenzahn names the plant after its jagged leaves: “lion’s tooth”."
     ],
     "pitfalls": [
      "Plural Löwenzähne (several plants); the greens are uncountable: Ich esse gern Löwenzahn."
     ],
     "subtleties": [
      "The name comes from the jagged, tooth-like leaves; the white seed head is called Pusteblume."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English dandelion (dent de lion) has the same image: “lion’s tooth”."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "Löwenzahn has the image of dent-de-lion, another name of the pissenlit."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "Löwenzahn has the image of dente di leone."
+     },
+     {
+      "for": "es",
+      "rel": "similar",
+      "text": "Löwenzahn is diente de león, word for word."
+     },
+     {
+      "for": "pt",
+      "rel": "similar",
+      "text": "Löwenzahn is dente-de-leão, word for word."
+     }
     ]
    }
   },
@@ -1046,11 +1118,11 @@
      }
     ],
     "etymology": {
-     "text": "From Speise (“food”) + Rübe (“beet, turnip”); Rübe is from Middle High German rüebe, Old High German ruoba, from Proto-West Germanic *rōbijā (compare Latin rāpa, Proto-Slavic *rěpa).",
+     "text": "From Speise (“food”) + Rübe (“beet, turnip”); Rübe is from Middle High German rüebe, Old High German ruoba, from Proto-West Germanic *rōbijā.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Russian репа (repa), the turnip of the folk tale Репка (“The Enormous Turnip”), is compared with Latin rāpa and German Rübe.",
+     "Speiserübe is the “food beet”: Speise (food) + Rübe.",
      "In Switzerland children carve turnips (Räben) into lanterns for the Räbeliechtli processions in November."
     ],
     "pitfalls": [
@@ -1058,6 +1130,13 @@
     ],
     "subtleties": [
      "Speise- (“food”) distinguishes it from Futterrüben (fodder beets) and Zuckerrüben (sugar beets)."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "Rübe is related to репа – the turnip of the folk tale Репка. Rübe is related to репа (turnip)."
+     }
     ]
    }
   },
@@ -1293,13 +1372,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Purslane is γλιστρίδα (glistrída) in Greek and semizotu in Turkish – both popular in summer salads."
+     "Purslane is popular in summer salads around the Mediterranean."
     ],
     "pitfalls": [
      "The plural Portulake is rare; as a salad green it is uncountable."
     ],
     "subtleties": [
      "For a leafy vegetable it is unusually rich in omega-3 fatty acids, which made it popular in health food."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Portulak is γλιστρίδα."
+     }
     ]
    }
   },
@@ -1419,13 +1505,20 @@
     },
     "funFacts": [
      "The French name topinambour comes from the Tupinambá, a people of Brazil, although the plant is from North America.",
-     "The English name is misleading: the tuber has nothing to do with Jerusalem and is not an artichoke."
+     "The tuber is no artichoke: the plant is a sunflower."
     ],
     "pitfalls": [
      "Gender varies: der or die Topinambur (Wiktionary lists both). Plural Topinamburen."
     ],
     "subtleties": [
      "The plant is a sunflower (Helianthus); its yellow flowers look like small sunflowers."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "The English name Jerusalem artichoke is misleading: no Jerusalem, no artichoke."
+     }
     ]
    }
   },
@@ -1572,7 +1665,7 @@
      }
     ],
     "etymology": {
-     "text": "From brennen (“to burn”) + Nessel (“nettle”); Nessel is from Old High German neȥȥila, cognate with English nettle and Dutch netel.",
+     "text": "From brennen (“to burn”) + Nessel (“nettle”); Nessel is from Old High German neȥȥila.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -1584,6 +1677,13 @@
     ],
     "subtleties": [
      "German Nesselsucht (hives, urticaria) and Latin Urtica both take their name from the nettle’s sting."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Nessel is English nettle."
+     }
     ]
    }
   },
@@ -1701,7 +1801,7 @@
      {
       "word": "Ramsen",
       "register": "regional",
-      "nuance": "old regional name, related to English ramsons"
+      "nuance": "old regional name"
      }
     ],
     "etymology": {
@@ -1717,6 +1817,13 @@
     ],
     "subtleties": [
      "Unlike Knoblauch, you eat the leaves, not the bulb."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Ramsen is related to English ramsons."
+     }
     ]
    }
   },
@@ -1830,13 +1937,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Russian пастернак (pasternak) means parsnip – it is the surname of the writer Boris Pasternak."
+     "Pastinake comes from Latin pastinaca."
     ],
     "pitfalls": [
      "Do not confuse with Petersilienwurzel (root parsley), which looks very similar but is smaller and tastes of parsley."
     ],
     "subtleties": [
      "Its sweetness increases after frost, so it is a typical winter vegetable."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "пастернак is Pastinake – the surname of Boris Pasternak."
+     }
     ]
    }
   },
@@ -2114,7 +2228,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The Austrian Kren comes from a Slavic word: Russian хрен (khren) and Czech křen are its relatives.",
+     "The Austrian Kren comes from a Slavic word.",
      "At the Jewish Passover Seder, horseradish often serves as the bitter herb (maror), in Hebrew חֲזֶרֶת (ḥazeret)."
     ],
     "pitfalls": [
@@ -2123,6 +2237,13 @@
     ],
     "subtleties": [
      "The sharpness comes from mustard oils released only when the root is grated, so it is grated just before serving."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Austrian Kren is хрен."
+     }
     ]
    }
   },
@@ -2266,7 +2387,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English swede is short for “Swedish turnip”."
+     "Steckrüben were a famine food in the hard winter of 1916/17, the Steckrübenwinter."
     ],
     "pitfalls": [
      "Not the same as Speiserübe (turnip, white flesh): the Steckrübe is larger, with yellow flesh.",
@@ -2274,6 +2395,13 @@
     ],
     "subtleties": [
      "Because of the wartime “turnip winter”, the Steckrübe was long seen as poor people’s food; today it is back in regional cooking."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "different",
+      "text": "English swede is short for “Swedish turnip”; German says Steckrübe."
+     }
     ]
    }
   },
@@ -2521,7 +2649,7 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German kresse, from Old High German kressa, from Proto-West Germanic *krassjā. Cognate with English cress.",
+     "text": "From Middle High German kresse, from Old High German kressa, from Proto-West Germanic *krassjā.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -2532,6 +2660,13 @@
     ],
     "subtleties": [
      "In German Kresse usually means the small seedlings sold in trays and cut with scissors; Brunnenkresse is watercress."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Kresse is related to English cress."
+     }
     ]
    }
   },
@@ -2897,7 +3032,7 @@
      }
     ],
     "etymology": {
-     "text": "Yams- (compare English yam, borrowed from Portuguese inhame and Spanish ñame, likely from Wolof ñàmbi) + Wurzel (“root”).",
+     "text": "Yams- (via English yam, from Portuguese inhame or Spanish ñame, likely from Wolof ñàmbi) + Wurzel (“root”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -3038,7 +3173,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Arabic calls chard سِلْق (silq); Turkish says pazı."
+     "Arabic calls chard سِلْق (silq)."
     ],
     "pitfalls": [
      "The plural Mangolde is rare; normally uncountable: Ich kaufe Mangold.",
@@ -3288,13 +3423,25 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek ρόκα, Turkish roka and Arabic جَرْجِير (jarjīr) all name the same salad plant."
+     "Arabic calls this salad plant جَرْجِير (jarjīr)."
     ],
     "pitfalls": [
      "No plural: Rucola is uncountable. Feminine in Wiktionary: die Rucola."
     ],
     "subtleties": [
      "Rucola sounds modern and Mediterranean; the older German name Rauke sounds botanical or old-fashioned."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Rucola is ρόκα."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Rucola is borrowed with its Italian spelling; the older German word is Rauke."
+     }
     ]
    }
   },
@@ -3843,7 +3990,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Japanese 大根 (daikon) means “big root”; Chinese calls it 萝卜 (luóbo).",
+     "Chinese calls the long white radish 萝卜 (luóbo).",
      "Rettich and Radieschen both go back to Latin rādīx (“root”)."
     ],
     "pitfalls": [
@@ -3852,6 +3999,13 @@
     ],
     "subtleties": [
      "Bavarians salt the slices so that the Radi “weeps” (gives off water) before eating; this takes away some of the sharpness."
+    ],
+    "notes": [
+     {
+      "for": "ja",
+      "rel": "same",
+      "text": "大根 (daikon), “big root”, is the long white Rettich."
+     }
     ]
    }
   },
@@ -4632,7 +4786,7 @@
      }
     ],
     "etymology": {
-     "text": "Via a Romance language (compare French endive, Italian indivia), from Late Latin intibus.",
+     "text": "Via a Romance language, from Late Latin intibus.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -4640,10 +4794,27 @@
     ],
     "pitfalls": [
      "Plural Endivien; four syllables: En-di-vi-e.",
-     "False friend: American English “Belgian endive” is Chicorée, not Endivie."
+     "Endivie is the curly or broad-leaved salad; the white, pointed heads are Chicorée."
     ],
     "subtleties": [
      "Endivie, Chicorée and Radicchio are all bitter relatives in the genus Cichorium."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "American English “Belgian endive” is Chicorée, not Endivie."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Endivie is endive."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Endivie is indivia."
+     }
     ]
    }
   }

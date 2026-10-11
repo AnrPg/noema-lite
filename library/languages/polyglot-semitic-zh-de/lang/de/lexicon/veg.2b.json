@@ -120,13 +120,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek μπάμιες, Turkish bamya, Arabic بَامِيَة (bāmiya) and Hebrew בַּמְיָה (bamya) are all the same word – German Bamia comes from it too."
+     "Arabic بَامِيَة (bāmiya) and Hebrew בַּמְיָה (bamya) are the same word, and German Bamia comes from it too."
     ],
     "pitfalls": [
      "Plural Okras; one pod is eine Okra or eine Okraschote."
     ],
     "subtleties": [
      "The slime (mucilage) is wanted in some dishes as a thickener and avoided in others by frying the pods or adding acid."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "μπάμιες is the same word as the German Bamia."
+     }
     ]
    }
   },
@@ -259,11 +266,11 @@
      }
     ],
     "etymology": {
-     "text": "Acker (“field”, from Old High German ackar) + Bohne (“bean”, from Old High German bōna, cognate with English bean).",
+     "text": "Acker (“field”, from Old High German ackar) + Bohne (“bean”, from Old High German bōna).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Arabic فُول (fūl), as in the Egyptian dish fūl medames, and Hebrew פּוֹל (pol) name this bean; Greek says κουκιά, Turkish bakla."
+     "Arabic فُول (fūl), as in the Egyptian dish fūl medames, and Hebrew פּוֹל (pol) name this bean."
     ],
     "pitfalls": [
      "Some people with an inherited enzyme deficiency (G6PD) must not eat them: favism.",
@@ -271,6 +278,18 @@
     ],
     "subtleties": [
      "Before the Phaseolus beans arrived from America, this was the bean of Europe."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "κουκιά are Ackerbohnen."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Bohne is related to English bean."
+     }
     ]
    }
   },
@@ -654,13 +673,25 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The word goes back to Arabic (al-)ḵuršūf; Hebrew has the related חֻרְשָׁף (ḥuršaf), Greek αγκινάρα, Turkish enginar."
+     "The word goes back to Arabic (al-)ḵuršūf; Hebrew has the related חֻרְשָׁף (ḥuršaf)."
     ],
     "pitfalls": [
      "Plural Artischocken. The hairy “choke” inside (das Heu) is not eaten."
     ],
     "subtleties": [
      "The bitter Italian liqueur Cynar is made with artichoke and named after its Latin name Cynara."
+    ],
+    "notes": [
+     {
+      "for": "es",
+      "rel": "similar",
+      "text": "Artischocke and alcachofa both go back to Arabic al-ḵuršūf."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "Artischocke and carciofo both go back to Arabic al-ḵuršūf."
+     }
     ]
    }
   },
@@ -780,13 +811,25 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English kohlrabi and Russian кольраби were borrowed from German."
+     "Kohlrabi is one of the German vegetable names that travelled into other languages."
     ],
     "pitfalls": [
      "Masculine: der Kohlrabi, plural die Kohlrabis."
     ],
     "subtleties": [
      "The “bulb” is a thickened stem, not a root."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "English kohlrabi was borrowed from German."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "кольраби was borrowed from German Kohlrabi."
+     }
     ]
    }
   },
@@ -911,13 +954,25 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English and French name it after Brussels (Brussels sprouts, choux de Bruxelles); German names it after its rose-like shape."
+     "German names it after its rose-like shape: Rosen + Kohl."
     ],
     "pitfalls": [
      "No plural: Rosenkohl is uncountable; one sprout is ein Röschen or ein Rosenkohlröschen."
     ],
     "subtleties": [
      "Newer varieties are less bitter than the ones many adults remember from childhood."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "different",
+      "text": "English names it after Brussels (Brussels sprouts); German after its rose-like shape."
+     },
+     {
+      "for": "fr",
+      "rel": "different",
+      "text": "choux de Bruxelles are named after Brussels; Rosenkohl after its rose-like shape."
+     }
     ]
    }
   },
@@ -1174,7 +1229,14 @@
      "Masculine like Kürbis: der Wachskürbis, des Wachskürbisses, plural die Wachskürbisse."
     ],
     "subtleties": [
-     "Despite the English name winter melon it is not sweet; it is cooked as a vegetable."
+     "It is not sweet; it is cooked as a vegetable."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "Despite the English name winter melon it is not sweet."
+     }
     ]
    }
   },
@@ -1300,13 +1362,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Luffa comes from Arabic لُوفَة (lūfa), the same word as English loofah."
+     "Luffa comes from Arabic لُوفَة (lūfa)."
     ],
     "pitfalls": [
      "Feminine because of Gurke: die Schwammgurke, plural die Schwammgurken."
     ],
     "subtleties": [
      "Only young fruits are edible; ripe ones dry into a fibrous net – the sponge."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Luffa is the same word as English loofah."
+     }
     ]
    }
   },
@@ -1584,7 +1653,7 @@
      }
     ],
     "etymology": {
-     "text": "Like English bok choy (Wiktionary): borrowed from Cantonese 白菜 (baak⁶ coi³, “white vegetable”).",
+     "text": "Borrowed from Cantonese 白菜 (baak⁶ coi³, “white vegetable”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -1595,6 +1664,13 @@
     ],
     "subtleties": [
      "Both leaves and stalks are eaten; the white stalks stay crunchy when cooked briefly."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Pak Choi is the vegetable called bok choy in English."
+     }
     ]
    }
   },
@@ -2273,6 +2349,13 @@
     ],
     "subtleties": [
      "Most Germans know collards only from American food; recipes often keep the English name."
+    ],
+    "notes": [
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Blattkohl is like the couve galega of caldo verde."
+     }
     ]
    }
   },
@@ -2404,13 +2487,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek calls them ντοματίνια (domatínia), “little tomatoes”."
+     "Kirschtomate is named after the size and shape of a cherry (Kirsche)."
     ],
     "pitfalls": [
      "Plural Kirschtomaten; mostly used in the plural."
     ],
     "subtleties": [
      "Kirsch- is the combining form of Kirsche, as in Kirschkuchen (cherry cake)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "ντοματίνια are “little tomatoes”; German compares them to cherries: Kirschtomaten."
+     }
     ]
    }
   },
@@ -2665,7 +2755,7 @@
      {
       "word": "Butternut",
       "register": "neutral",
-      "nuance": "short name, as in English; common on markets"
+      "nuance": "short name; common on markets"
      }
     ],
     "etymology": {
@@ -2681,6 +2771,13 @@
     ],
     "subtleties": [
      "The seeds sit only in the round end; the long neck is solid flesh."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "The short name Butternut is the English one."
+     }
     ]
    }
   },
@@ -2823,7 +2920,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Chinese calls them 荷兰豆 (hélándòu), “Dutch beans”; French mangetout means “eat-all”."
+     "Chinese calls them 荷兰豆 (hélándòu), “beans from Holland”."
     ],
     "pitfalls": [
      "Pull off the string along the edge before cooking.",
@@ -2831,6 +2928,13 @@
     ],
     "subtleties": [
      "Schote means the pod, so the name tells you that the sweet pod itself is eaten."
+    ],
+    "notes": [
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "mangetout (“eat-all”) is the Zuckerschote."
+     }
     ]
    }
   }

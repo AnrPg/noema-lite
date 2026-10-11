@@ -203,13 +203,13 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German ëȥȥen, from Old High German ëȥȥan, from Proto-West Germanic *etan, from Proto-Germanic *etaną, from Proto-Indo-European *h₁ed-. Cognate with Dutch eten, English eat, Swedish äta; non-Germanic cognates include Latin edō and Russian есть (jestʹ).",
+     "text": "From Middle High German ëȥȥen, from Old High German ëȥȥan, from Proto-West Germanic *etan, from Proto-Germanic *etaną, from Proto-Indo-European *h₁ed-.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
      "Animals do not “essen” in German, they “fressen” – using fressen for a person is rude or jokey.",
      "The past participle is gegessen, with an extra -ge-; the old form gessen is obsolete.",
-     "Greek τρώω, Russian есть / кушать, Turkish yemek: Russian есть is a cousin of essen and English eat (Indo-European *h₁ed-)."
+     "essen goes back to Indo-European *h₁ed-."
     ],
     "pitfalls": [
      "Stem vowel e → i: du isst, er isst (not *esst); du isst and er isst are spelled the same.",
@@ -219,6 +219,18 @@
     ],
     "subtleties": [
      "Soup is eaten in German (Suppe essen), not drunk."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "essen is related to English eat."
+     },
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "essen and есть (to eat) are cognates."
+     }
     ]
    }
   },
@@ -412,13 +424,13 @@
     ],
     "antonyms": [],
     "etymology": {
-     "text": "From Middle High German trinken, from Old High German trinkan (attested since the 8th century), from Proto-West Germanic *drinkan. Cognates include Dutch drinken, English drink, Swedish dricka and Gothic 𐌳𐍂𐌹𐌲𐌺𐌰𐌽 (drigkan).",
+     "text": "From Middle High German trinken, from Old High German trinkan (attested since the 8th century), from Proto-West Germanic *drinkan.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
      "Kaffee und Kuchen: in Germany “Kaffee trinken” in the afternoon is a small meal with cake, not just a drink.",
      "das Trinkgeld (“drink money”) is the German word for a tip in a restaurant or a taxi.",
-     "trinken and English drink are the same Germanic verb (Dutch drinken, Swedish dricka)."
+     "trinken is an old strong verb: trinken – trank – getrunken."
     ],
     "pitfalls": [
      "Without an object, Er trinkt usually means “he drinks (too much alcohol)”.",
@@ -428,6 +440,13 @@
     ],
     "subtleties": [
      "Wollen wir einen Kaffee trinken gehen? is an invitation to meet and talk, not only to drink coffee."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "trinken is related to English drink."
+     }
     ]
    },
    "formsAlt": {
@@ -581,7 +600,7 @@
       "text": "die Katze im Sack kaufen",
       "tr": "to buy the cat in the sack",
       "kind": "idiom",
-      "meaning": "to buy something without having seen it (English: to buy a pig in a poke)",
+      "meaning": "to buy something without having seen it",
       "register": "neutral"
      },
      {
@@ -630,11 +649,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German koufen, from Old High German koufōn, from Proto-West Germanic *kaupōn, an early borrowing of Latin caupō (“innkeeper, petty trader”). Related to English cheap and Swedish köpa.",
+     "text": "From Middle High German koufen, from Old High German koufōn, from Proto-West Germanic *kaupōn, an early borrowing of Latin caupō (“innkeeper, petty trader”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The Danish cognate is in Copenhagen: København = “merchants' harbour”."
+     "kaufen goes back to Latin caupo (small trader, innkeeper)."
     ],
     "pitfalls": [
      "einkaufen is “to go shopping” in general; kaufen needs an object: Ich kaufe Brot. / Ich gehe einkaufen.",
@@ -643,6 +662,18 @@
     ],
     "subtleties": [
      "Kauf mir was! – with a dative, kaufen means buying for someone."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "die Katze im Sack kaufen is “to buy a pig in a poke”."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "kaufen is related to English cheap, which first meant trade."
+     }
     ]
    },
    "formsAlt": {
@@ -845,12 +876,12 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German mugen, from Old High German mugan, from Proto-West Germanic *magan, from Proto-Germanic *maganą, from Proto-Indo-European *megʰ-. Compare Dutch mogen, English may. The sense “to like” developed in the 16th century from negated nicht mögen (“not to be able to” → “not to like doing”); the old sense “to be able to” fell out of use in the 17th century.",
+     "text": "From Middle High German mugen, from Old High German mugan, from Proto-West Germanic *magan, from Proto-Germanic *maganą, from Proto-Indo-European *megʰ-. The sense “to like” developed in the 16th century from negated nicht mögen (“not to be able to” → “not to like doing”); the old sense “to be able to” fell out of use in the 17th century.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "mögen is a cousin of English may and might: it once meant “to be able”.",
-     "Greek θα ήθελα, Russian я хотел бы, English I would like: German packs the polite “would like” into one word, möchte."
+     "mögen once meant “to be able” – compare möglich (possible) and vermögen.",
+     "German packs the polite “would like” into one word: möchte."
     ],
     "pitfalls": [
      "For activities German prefers gern + verb: Ich schwimme gern (I like swimming), rather than Ich mag schwimmen.",
@@ -861,6 +892,28 @@
     "subtleties": [
      "Ich mag dich (I like you) – Ich hab dich lieb (I'm fond of you, family and friends) – Ich liebe dich (I love you).",
      "möchte (would like) is the polite way to ask for something; Ich will … can sound demanding."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "θα ήθελα is one word in German: ich möchte."
+     },
+     {
+      "for": "ru",
+      "rel": "different",
+      "text": "я хотел бы is one word in German: ich möchte."
+     },
+     {
+      "for": "en",
+      "rel": "different",
+      "text": "I would like is one word in German: ich möchte."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "mögen is related to English may."
+     }
     ]
    }
   },
@@ -1042,21 +1095,43 @@
     ],
     "antonyms": [],
     "etymology": {
-     "text": "From Middle High German wollen, wöllen, wellen, from Old High German wollen, wellen, from a blend of Proto-West Germanic *willjan and *walljan, from Proto-Germanic *wiljaną and *waljaną, ultimately from Proto-Indo-European *welh₁-. Compare Dutch willen, English will.",
+     "text": "From Middle High German wollen, wöllen, wellen, from Old High German wollen, wellen, from a blend of Proto-West Germanic *willjan and *walljan, from Proto-Germanic *wiljaną and *waljaną, ultimately from Proto-Indo-European *welh₁-.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English “will” was once “to want”, too – that sense survives in “if you will” and in “willing”.",
-     "Greek θέλω να πιω τσάι, Russian хочу пить чай and Turkish çay içmek istiyorum keep the two verbs side by side; German splits them around the object: Ich will Tee trinken."
+     "wollen is the verb of wanting: Ich will Kaffee = I want coffee.",
+     "German puts the object between the two verbs: Ich will Tee trinken."
     ],
     "pitfalls": [
-     "False friend: German Ich will = I want, not “I will”. The future is werden: Ich werde kommen.",
+     "Ich will = I want; the future is werden: Ich werde kommen.",
      "Ich will einen Kaffee can sound rude when ordering – say Ich möchte … or Ich hätte gern …",
      "ich will and er will have no ending – like all modal verbs (ich kann, ich muss, ich mag).",
      "A second verb goes to the very end as an infinitive: Ich will Tee trinken. (not *Ich will trinken Tee)"
     ],
     "subtleties": [
      "Like other modal verbs, wollen often drops a verb of motion: Ich will nach Hause. Willst du mit?"
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English will once meant “to want” too – it survives in “if you will” and “willing”."
+     },
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "θέλω να πιω τσάι keeps the two verbs together; German splits them around the object: Ich will Tee trinken."
+     },
+     {
+      "for": "ru",
+      "rel": "different",
+      "text": "хочу пить чай keeps the two verbs together; German splits them around the object: Ich will Tee trinken."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "wollen is related to English will, but ich will means “I want”: the future is ich werde."
+     }
     ]
    }
   },
@@ -1275,8 +1350,8 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "der Koch (the cook) and die Küche (the kitchen) – like English cook and kitchen – come from Latin coquus and coquīna.",
-     "kochen means both “to cook” and “to boil” (Das Wasser kocht); Greek separates μαγειρεύω (to cook) and βράζω (to boil), as English separates cook and boil."
+     "der Koch (the cook) and die Küche (the kitchen) come from Latin coquus and coquīna.",
+     "kochen means both “to cook” and “to boil”: Ich koche Suppe. Das Wasser kocht."
     ],
     "pitfalls": [
      "Regular verb: ich koche, du kochst, er kocht – no vowel change.",
@@ -1285,6 +1360,23 @@
     "subtleties": [
      "Kaffee kochen and Tee kochen mean “to make coffee / tea”, even with a machine.",
      "Used alone, Ich koche means “I’m cooking (a meal)”: Heute koche ich!"
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Koch and Küche are related to English cook and kitchen."
+     },
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "μαγειρεύω and βράζω are both kochen: Ich koche Suppe. Das Wasser kocht."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "cook and boil are both kochen: Das Wasser kocht = the water is boiling."
+     }
     ]
    }
   },
@@ -1464,7 +1556,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Russian хлеб comes from the old Germanic word for bread (*hlaibaz) – the word that lives on in German Laib and English loaf.",
+     "The old Germanic word for bread, *hlaibaz, lives on in Laib (a loaf).",
      "German bread culture (Deutsche Brotkultur) is on Germany’s national list of intangible cultural heritage, with thousands of registered kinds of bread."
     ],
     "pitfalls": [
@@ -1473,6 +1565,18 @@
     ],
     "subtleties": [
      "Abendbrot (“evening bread”) is the evening meal in the north and east – traditionally cold, with bread, cheese and cold meat."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "хлеб was borrowed from the old Germanic word for bread that lives on in Laib."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Laib is English loaf."
+     }
     ]
    }
   },
@@ -1617,14 +1721,41 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Käse, English cheese and Spanish queso all come from Latin cāseus; Greek τυρί, Russian сыр and Turkish peynir have other origins."
+     "Käse comes from Latin cāseus."
     ],
     "pitfalls": [
-     "der Käse is masculine (Greek το τυρί is neuter, Russian сыр masculine).",
+     "der Käse is masculine, despite the -e.",
      "Plural Käse (kinds of cheese), dative plural Käsen; genitive des Käses."
     ],
     "subtleties": [
      "Uncountable for the food: Ich mag Käse. ein Käse is a whole cheese or a kind of cheese."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Käse and English cheese both come from Latin cāseus."
+     },
+     {
+      "for": "es",
+      "rel": "similar",
+      "text": "Käse and queso both come from Latin cāseus."
+     },
+     {
+      "for": "pt",
+      "rel": "similar",
+      "text": "Käse and queijo both come from Latin cāseus."
+     },
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "το τυρί is neuter, der Käse masculine."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "der Käse is masculine, like сыр."
+     }
     ]
    }
   },
@@ -1783,20 +1914,47 @@
     "synonyms": [],
     "synonymsNone": "No synonym: Ei is the only word for egg.",
     "etymology": {
-     "text": "Inherited from Middle High German ei and Old High German ei, from Proto-West Germanic *aij, from Proto-Germanic *ajją, from Proto-Indo-European *h₂ōwyóm. Cognate with Yiddish איי (ey), Dutch ei, English ey and egg, Danish æg.",
+     "text": "Inherited from Middle High German ei and Old High German ei, from Proto-West Germanic *aij, from Proto-Germanic *ajją, from Proto-Indo-European *h₂ōwyóm.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English once had its own word ey (plural eyren), the twin of German Ei; egg came from Old Norse. In 1490 the printer William Caxton told of a merchant who asked a woman for “eggys” and was told she spoke no French – she only knew “eyren”.",
-     "Ei, Latin ovum, Ancient Greek ᾠόν (modern αυγό) and Russian яйцо all go back to one Indo-European word for egg."
+     "Ei is an old Germanic word; the plural adds -er: das Ei – die Eier.",
+     "Ei goes back to an Indo-European word for egg."
     ],
     "pitfalls": [
      "Plural Eier (dative Eiern): ein Ei, zwei Eier.",
      "In slang Eier means testicles – Eier haben = to have guts. Harmless in the kitchen, but jokes are everywhere."
     ],
     "subtleties": [
-     "das Ei is neuter, like Greek το αυγό; Russian яйцо is neuter too.",
+     "das Ei is neuter: ein Ei, zwei Eier.",
      "Ostereier (Easter eggs) are painted or made of chocolate; der Osterhase (Easter bunny) brings them."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English once had its own word ey (plural eyren), the twin of Ei; egg came from Old Norse. In 1490 William Caxton told of a woman who did not understand “eggys”, only “eyren”. Ei is related to English egg (and the old form ey)."
+     },
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Ei and αυγό (ᾠόν) go back to one Indo-European word."
+     },
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "Ei and яйцо go back to one Indo-European word."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "das Ei is neuter, like το αυγό."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "das Ei is neuter, like яйцо."
+     }
     ]
    }
   },
@@ -1944,8 +2102,8 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English splits meat and flesh and took beef, pork and mutton from Norman French; German keeps one word and builds compounds: Rindfleisch (cow meat = beef), Schweinefleisch (pig meat = pork).",
-     "Fleisch and English flesh are the same Germanic word."
+     "German keeps one word and builds compounds: Rindfleisch (beef), Schweinefleisch (pork), Hähnchenfleisch.",
+     "Fleisch means both meat and the flesh of a body or a fruit (Fruchtfleisch)."
     ],
     "pitfalls": [
      "No plural: kinds of meat are Fleischsorten.",
@@ -1953,6 +2111,18 @@
     ],
     "subtleties": [
      "Many Germans do not count fish as Fleisch: Ich esse kein Fleisch, nur Fisch."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "different",
+      "text": "English splits meat and flesh and took beef, pork and mutton from Norman French; German says Fleisch and builds compounds."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Fleisch and English flesh are the same Germanic word."
+     }
     ]
    }
   },
@@ -2120,7 +2290,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Fisch and Latin piscis are the same Indo-European word: Germanic turned p into f, as in Vater – pater, Fuß – pes."
+     "Fisch shows the Germanic change of p into f, as in Vater and Fuß."
     ],
     "pitfalls": [
      "For the food, no article and no plural: Ich esse gern Fisch. einen Fisch is a whole fish.",
@@ -2128,6 +2298,28 @@
     ],
     "subtleties": [
      "In German Fisch is usually not Fleisch: a person who eats fish but no meat says Ich esse kein Fleisch."
+    ],
+    "notes": [
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "Fisch and pesce are one Indo-European word: Germanic turned p into f (Vater – padre, Fuß – piede)."
+     },
+     {
+      "for": "es",
+      "rel": "similar",
+      "text": "Fisch and pez are one Indo-European word: Germanic turned p into f (Vater – padre, Fuß – pie)."
+     },
+     {
+      "for": "pt",
+      "rel": "similar",
+      "text": "Fisch and peixe are one Indo-European word: Germanic turned p into f (Vater – pai, Fuß – pé)."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "Fisch and poisson are one Indo-European word: Germanic turned p into f (Vater – père, Fuß – pied)."
+     }
     ]
    }
   },
@@ -2301,7 +2493,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Hähnchen is literally “little rooster”, yet it names any chicken for the table. Greek κοτόπουλο (from κότα, hen) and Russian курица (hen) name the food after the hen instead."
+     "Hähnchen is literally “little rooster”, yet it names any chicken for the table."
     ],
     "pitfalls": [
      "Huhn is the live animal (a hen); for food Germans in Germany usually say Hähnchen: Ich esse Hähnchen.",
@@ -2309,6 +2501,18 @@
     ],
     "subtleties": [
      "Every noun in -chen is neuter: das Hähnchen, das Brötchen, das Mädchen – even though der Hahn is masculine."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "κοτόπουλο names the food after the hen (κότα); German after the rooster: Hähnchen."
+     },
+     {
+      "for": "ru",
+      "rel": "different",
+      "text": "курица names the food after the hen; German after the rooster: Hähnchen."
+     }
     ]
    }
   },
@@ -2433,7 +2637,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Reis came via Latin from Ancient Greek ὄρυζα – the word behind modern Greek ρύζι and English rice.",
+     "Reis came via Latin from Ancient Greek ὄρυζα.",
      "Chinese separates the plant 稻, the raw grain 米 and cooked rice 饭; German says Reis for all three."
     ],
     "pitfalls": [
@@ -2442,6 +2646,18 @@
     ],
     "subtleties": [
      "Milchreis (rice cooked in milk with sugar and cinnamon) is eaten as a sweet main meal, not only as dessert."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Reis is ρύζι: both from ὄρυζα."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Reis and English rice both come from Greek ὄρυζα."
+     }
     ]
    }
   },
@@ -2608,8 +2824,8 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English supper comes from French souper, “to have soup” – the evening meal was soup.",
-     "Russian суп (from French soupe) and Greek σούπα belong to the same family of words."
+     "Soup is eaten, not drunk: eine Suppe essen.",
+     "Suppe belongs to a family of words that spread from French soupe."
     ],
     "pitfalls": [
      "Soup is eaten in German: Suppe essen, not *Suppe trinken.",
@@ -2617,6 +2833,23 @@
     ],
     "subtleties": [
      "A Suppe in Germany is often a starter; an Eintopf is a whole meal in one pot."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English supper comes from French souper, “to have soup” – the evening meal was soup."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "суп (from French soupe) is the same word."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "σούπα is the same word."
+     }
     ]
    }
   },
@@ -2789,7 +3022,7 @@
     },
     "funFacts": [
      "Salat goes back to salt (Latin sal): the first salads were salted greens.",
-     "Greek σαλάτα, Russian салат, Turkish salata and English salad are the same Romance word – of these, only German and Russian also use it for the lettuce plant."
+     "Salat means both the dish and the lettuce plant: ein Kopf Salat."
     ],
     "pitfalls": [
      "Salat means both “lettuce” and “salad” – Kartoffelsalat has no lettuce at all.",
@@ -2797,6 +3030,23 @@
     ],
     "subtleties": [
      "For the plant it is often used without an article, like a mass noun: Salat waschen, Salat pflanzen."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "σαλάτα is only the dish; the plant (μαρούλι) is also Salat in German."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "салат, like Salat, is both the dish and the lettuce."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "Salat is salad and lettuce: ein Kopf Salat is a head of lettuce."
+     }
     ]
    }
   },
@@ -2916,7 +3166,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English fruit, Greek φρούτο and Russian фрукты come from Latin frūctus – in German that word is Frucht, while the fruit in the bowl is Obst."
+     "Frucht (from Latin frūctus) is the botanical word; the fruit in the bowl is Obst."
     ],
     "pitfalls": [
      "Obst has no plural and no ein: say Obst (some fruit), ein Stück Obst (a piece of fruit) or name the fruit (ein Apfel).",
@@ -2924,6 +3174,23 @@
     ],
     "subtleties": [
      "Obst means the sweet fruit of trees and bushes that you eat raw; tomatoes and cucumbers are botanically fruits but Gemüse in the kitchen."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English fruit is Obst in the bowl; Frucht is the botanical word."
+     },
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "φρούτα in the bowl are Obst; Frucht is the botanical word."
+     },
+     {
+      "for": "ru",
+      "rel": "trap",
+      "text": "фрукты in the bowl are Obst; Frucht is the botanical word."
+     }
     ]
    }
   },
@@ -3064,18 +3331,40 @@
     "synonyms": [],
     "synonymsNone": "No synonym; varieties have names (Boskop, Elstar, Gala).",
     "etymology": {
-     "text": "From Middle High German apfel, from Old High German apful, from Proto-West Germanic *applu, from Proto-Germanic *apluz (compare Dutch appel, English apple), from Proto-Indo-European *h₂ébōl.",
+     "text": "From Middle High German apfel, from Old High German apful, from Proto-West Germanic *applu, from Proto-Germanic *apluz, from Proto-Indo-European *h₂ébōl.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Apfel, English apple and Russian яблоко go back to the same Indo-European word; Greek μήλο and Turkish elma are unrelated."
+     "Apfel goes back to an old Indo-European word for apple, *h₂ébōl."
     ],
     "pitfalls": [
      "Plural with umlaut: der Apfel – die Äpfel (dative den Äpfeln).",
-     "der Apfel is masculine (Greek το μήλο neuter, Russian яблоко neuter)."
+     "der Apfel is masculine; plural die Äpfel."
     ],
     "subtleties": [
      "In compounds it is Apfel-: Apfelsaft, Apfelkuchen, Apfelschorle (apple juice with sparkling water)."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "Apfel and яблоко go back to the same Indo-European word."
+     },
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "το μήλο is neuter, der Apfel masculine."
+     },
+     {
+      "for": "ru",
+      "rel": "trap",
+      "text": "яблоко is neuter, der Apfel masculine."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Apfel is English apple."
+     }
     ]
    }
   },
@@ -3222,7 +3511,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "A travelling word: Sanskrit śarkarā → Persian šakar → Arabic سُكَّر (sukkar) → Italian zucchero → German Zucker. Greek ζάχαρη, Russian сахар, Turkish şeker, Hebrew סוּכָּר and English sugar come from the same source."
+     "A travelling word: Sanskrit śarkarā → Persian šakar → Arabic سُكَّر (sukkar) → Italian zucchero → German Zucker. Hebrew סוּכָּר comes from the same source."
     ],
     "pitfalls": [
      "der Zucker is masculine; uncountable in the kitchen (Ich nehme keinen Zucker).",
@@ -3230,6 +3519,28 @@
     ],
     "subtleties": [
      "Süßstoff is sweetener, not sugar; zuckerfrei = sugar-free."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "ζάχαρη comes from the same travelling word as Zucker."
+     },
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "сахар comes from the same travelling word as Zucker."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English sugar comes from the same travelling word as Zucker."
+     },
+     {
+      "for": "hi",
+      "rel": "similar",
+      "text": "Zucker goes back to Sanskrit शर्करा (śarkarā) – the word behind शक्कर (śakkar)."
+     }
     ]
    }
   },
@@ -3380,18 +3691,45 @@
      }
     ],
     "etymology": {
-     "text": "Inherited from Middle High German salz, from Old High German salz, from Proto-West Germanic *salt, from Proto-Germanic *saltą, from Proto-Indo-European *séh₂l-. Compare Dutch zout, English salt, Danish salt.",
+     "text": "Inherited from Middle High German salz, from Old High German salz, from Proto-West Germanic *salt, from Proto-Germanic *saltą, from Proto-Indo-European *séh₂l-.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Salz, Latin sal, Ancient Greek ἅλς (modern αλάτι) and Russian соль all come from one Indo-European word; Latin salārium – the root of English salary – is linked to salt."
+     "Salz goes back to an Indo-European word for salt; Salär (a salary) is linked to salt through Latin salārium."
     ],
     "pitfalls": [
-     "das Salz is neuter, like Greek το αλάτι; Russian соль is feminine.",
+     "das Salz is neuter.",
      "Plural Salze only in chemistry (Mineralsalze) and for kinds of salt."
     ],
     "subtleties": [
      "salzig = salty; versalzen = too salty: Die Suppe ist versalzen."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Salz and αλάτι (ἅλς) come from one Indo-European word."
+     },
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "Salz and соль come from one Indo-European word."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "The root of salary, Latin salārium, is linked to salt as well."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "das Salz is neuter, like το αλάτι."
+     },
+     {
+      "for": "ru",
+      "rel": "trap",
+      "text": "соль is feminine, das Salz neuter."
+     }
     ]
    }
   },
@@ -3570,18 +3908,45 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German waȥȥer, from Old High German waȥȥar, from Proto-West Germanic *watar, from Proto-Germanic *watōr, from Proto-Indo-European *wédōr, collective of *wódr̥. Compare Dutch water, English water, Danish vand.",
+     "text": "From Middle High German waȥȥer, from Old High German waȥȥar, from Proto-West Germanic *watar, from Proto-Germanic *watōr, from Proto-Indo-European *wédōr, collective of *wódr̥.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Wasser, English water, Russian вода and Ancient Greek ὕδωρ (as in hydro-) share one Indo-European root; Russian водка is literally “little water”."
+     "Wasser shares one Indo-European root with the hydro- of Hydrant and Hydrokultur."
     ],
     "pitfalls": [
      "Ordering ein Wasser brings bottled mineral water, often sparkling: ask for stilles Wasser or Leitungswasser if you want still or tap water.",
-     "das Wasser is neuter (Greek το νερό neuter; Russian вода feminine)."
+     "das Wasser is neuter."
     ],
     "subtleties": [
      "Plural Wasser (servings, kinds: zwei Wasser, bitte) or Wässer (mineral waters, fruit brandies – rarer)."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "Wasser and вода share one Indo-European root – водка is “little water”."
+     },
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Wasser and ὕδωρ (υδρο-) share one Indo-European root."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "das Wasser is neuter, like το νερό."
+     },
+     {
+      "for": "ru",
+      "rel": "trap",
+      "text": "вода is feminine, das Wasser neuter."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Wasser is related to English water."
+     }
     ]
    }
   },
@@ -3729,7 +4094,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Tea reached Europe by two roads: by sea from Hokkien tê (German Tee, English tea, Hebrew תֵּה), by land from chá (Russian чай, Turkish çay, Greek τσάι, Arabic شَاي). Mandarin says 茶 chá."
+     "Tea reached Europe by two roads: by sea from Hokkien tê (Tee, Hebrew תֵּה), by land from chá (Arabic شَاي). Mandarin says 茶 chá."
     ],
     "pitfalls": [
      "der Tee is masculine – like der Kaffee, der Saft, der Wein; but das Wasser, das Bier, die Milch.",
@@ -3738,6 +4103,33 @@
     "subtleties": [
      "Tee covers herbal infusions too: Pfefferminztee, Kamillentee, Früchtetee.",
      "In East Frisia strong black tea is a ritual, with rock sugar (Kluntje) and cream."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "English tea came by the same sea road as Tee."
+     },
+     {
+      "for": "ru",
+      "rel": "different",
+      "text": "чай came by the land road (chá); Tee by the sea road (tê)."
+     },
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "τσάι came by the land road (chá); Tee by the sea road (tê)."
+     },
+     {
+      "for": "hi",
+      "rel": "different",
+      "text": "चाय (chāy) came by the land road (chá); Tee by the sea road (tê)."
+     },
+     {
+      "for": "ja",
+      "rel": "different",
+      "text": "茶 (cha) is the land form chá; German Tee came by sea from tê."
+     }
     ]
    }
   },
@@ -3890,7 +4282,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Kaffee travelled from Arabic قَهْوَة (qahwa) through Ottoman Turkish kahve, Italian caffè and French café; Turkish kahve, Greek καφές, Russian кофе and Hebrew קָפֶה belong to the same chain."
+     "Kaffee travelled from Arabic قَهْوَة (qahwa) through Ottoman Turkish kahve, Italian caffè and French café; Hebrew קָפֶה belongs to the same chain."
     ],
     "pitfalls": [
      "der Kaffee (the drink, in Germany usually stressed on the first syllable: KAF-fee) – das Café (a coffee house, stressed on the second: Ca-FÉ).",
@@ -3899,6 +4291,18 @@
     "subtleties": [
      "Kaffee kochen is the everyday way to say “make coffee”, even with a machine.",
      "Austria stresses Kaf-FEE and has its own coffee words: Melange, Brauner, Verlängerter."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "καφές belongs to the same chain as Kaffee."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "кофе belongs to the same chain as Kaffee."
+     }
     ]
    }
   },
@@ -4026,14 +4430,36 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "die Milchstraße is the Milky Way: Greek γαλαξίας, from γάλα (milk), gave English galaxy – the same picture of milk spilled across the sky."
+     "die Milchstraße (the Milky Way) shows milk spilled across the sky; Galaxie, from Greek γάλα (milk), has the same picture."
     ],
     "pitfalls": [
-     "die Milch is feminine (Greek το γάλα and Russian молоко are neuter).",
+     "die Milch is feminine.",
      "No plural in normal use."
     ],
     "subtleties": [
      "In the EU the name Milch is reserved for animal milk, so oat milk is sold as Haferdrink – though people say Hafermilch."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "γαλαξίας, from γάλα, is the same picture as die Milchstraße."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "galaxy (from Greek γάλα, milk) has the same picture as die Milchstraße."
+     },
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "το γάλα is neuter, die Milch feminine."
+     },
+     {
+      "for": "ru",
+      "rel": "trap",
+      "text": "молоко is neuter, die Milch feminine."
+     }
     ]
    }
   },
@@ -4203,7 +4629,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Saft and English sap are the same Germanic word."
+     "Saft is also strength: ohne Saft und Kraft (feeble)."
     ],
     "pitfalls": [
      "Plural with umlaut: der Saft – die Säfte.",
@@ -4211,6 +4637,13 @@
     ],
     "subtleties": [
      "Colloquially Saft is power: Der Akku hat keinen Saft mehr (the battery is flat)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Saft and English sap are the same Germanic word."
+     }
     ]
    }
   },
@@ -4370,7 +4803,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Wein, English wine and Russian вино come from Latin vīnum, a cousin of Ancient Greek οἶνος (as in oenology); modern Greek says κρασί."
+     "Wein comes from Latin vīnum."
     ],
     "pitfalls": [
      "der Wein (wine) – weinen (to cry): Ich weine = I am crying.",
@@ -4378,6 +4811,23 @@
     ],
     "subtleties": [
      "Wein also means the vine itself; the grape is die Weintraube."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Wein and English wine both come from Latin vīnum."
+     },
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "Wein and вино both come from Latin vīnum."
+     },
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "οίνος (οινολογία) is a cousin of Wein; the everyday word κρασί is unrelated."
+     }
     ]
    }
   },
@@ -4533,19 +4983,46 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German bier, from Old High German bior, from Proto-West Germanic *beuʀ, from Proto-Germanic *beuzą (“beer”). Akin to Dutch bier, English beer, Icelandic bjór.",
+     "text": "From Middle High German bier, from Old High German bior, from Proto-West Germanic *beuʀ, from Proto-Germanic *beuzą (“beer”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
      "The Bavarian Reinheitsgebot of 1516 allowed only water, barley and hops in beer – yeast was not yet understood.",
-     "Italian birra, Greek μπίρα and Turkish bira all go back to German Bier."
+     "Bier travelled from German into many languages."
     ],
     "pitfalls": [
-     "das Bier is neuter (Greek η μπίρα feminine, Russian пиво neuter).",
+     "das Bier is neuter.",
      "Ordering: zwei Bier (two glasses); zwei Biere means two kinds or two bottles."
     ],
     "subtleties": [
      "Beer is jokingly called flüssiges Brot (liquid bread), especially in Bavaria."
+    ],
+    "notes": [
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "birra goes back to German Bier."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "μπίρα goes back to German Bier."
+     },
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "η μπίρα is feminine, das Bier neuter."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "das Bier is neuter, like пиво."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Bier is related to English beer."
+     }
     ]
    }
   },
@@ -4689,7 +5166,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Frühstück is an “early piece” (of bread); English breakfast breaks the night’s fast; Turkish kahvaltı comes from kahve altı, “under (before) the coffee”."
+     "Frühstück is an “early piece” (of bread)."
     ],
     "pitfalls": [
      "To “have breakfast” Germans usually use the verb frühstücken: Wir frühstücken um acht.",
@@ -4697,6 +5174,13 @@
     ],
     "subtleties": [
      "In hotels: Übernachtung mit Frühstück = bed and breakfast."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "different",
+      "text": "English breakfast breaks the night’s fast; Frühstück is an “early piece”."
+     }
     ]
    }
   },
@@ -4840,7 +5324,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek μεσημεριανό (from μεσημέρι, midday) and Turkish öğle yemeği (noon meal) name lunch by the time of day, just like Mittagessen."
+     "Mittagessen names lunch by the time of day: Mittag + Essen."
     ],
     "pitfalls": [
      "das Mittagessen is neuter, like das Essen (the meal); plural Mittagessen.",
@@ -4848,6 +5332,13 @@
     ],
     "subtleties": [
      "At lunchtime colleagues greet each other with Mahlzeit! (“mealtime!”)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "μεσημεριανό names lunch by the time of day, like Mittagessen."
+     }
     ]
    }
   },
@@ -4988,7 +5479,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German names its meals by the time of day – Frühstück (early), Mittagessen (midday), Abendessen (evening) – and Greek does the same: πρωινό, μεσημεριανό, βραδινό."
+     "German names its meals by the time of day: Frühstück (early), Mittagessen (midday), Abendessen (evening)."
     ],
     "pitfalls": [
      "das Abendessen is neuter; plural Abendessen.",
@@ -4996,6 +5487,13 @@
     ],
     "subtleties": [
      "Guten Appetit! is said before any meal; Abendbrot hints at a simple cold supper."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "πρωινό, μεσημεριανό, βραδινό name the meals by the time of day, as Frühstück, Mittagessen, Abendessen do."
+     }
     ]
    }
   }

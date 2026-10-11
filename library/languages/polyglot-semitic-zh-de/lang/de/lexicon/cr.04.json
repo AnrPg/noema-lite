@@ -505,7 +505,7 @@
     "synonyms": [],
     "synonymsNone": "An ordinal number has no synonym; it can be written as a figure with a dot (4.).",
     "etymology": {
-     "text": "From Middle High German vierde, from Old High German fiordo, from Proto-West Germanic *feurþō; equivalent to vier + -te. Cognate with Dutch vierde, English fourth.",
+     "text": "From Middle High German vierde, from Old High German fiordo, from Proto-West Germanic *feurþō; equivalent to vier + -te.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -516,6 +516,13 @@
     ],
     "subtleties": [
      "Regular from vier: vier + -te."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "vierte is related to English fourth."
+     }
     ]
    },
    "class": "attr"
@@ -633,17 +640,24 @@
     "synonyms": [],
     "synonymsNone": "An ordinal number has no synonym; it can be written as a figure with a dot (5.).",
     "etymology": {
-     "text": "From Old High German fimfto, from Proto-Germanic *fimftô; equivalent to fünf + -te. Cognate with English fifth.",
+     "text": "From Old High German fimfto, from Proto-Germanic *fimftô; equivalent to fünf + -te.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English fifth and German fünfte both keep the f-sound of five / fünf."
+     "fünfte keeps the sound of fünf: fünf → fünfte."
     ],
     "pitfalls": [
      "Regular: fünf + -te = fünfte; the umlaut stays."
     ],
     "subtleties": [
      "In German schools, die fünfte Klasse is the first year of secondary school in most states."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "fünfte is related to English fifth; both keep the f-sound of five / fünf."
+     }
     ]
    },
    "class": "attr"
@@ -1425,11 +1439,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German lest, a contraction of leȥȥest, from Old High German leȥȥist, the superlative of laȥ (“slow, sluggish”), cognate with English late.",
+     "text": "From Middle High German lest, a contraction of leȥȥest, from Old High German leȥȥist, the superlative of laȥ (“slow, sluggish”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English last and German letzte both go back to a superlative of late."
+     "letzte goes back to an old superlative meaning “latest”."
     ],
     "pitfalls": [
      "letzte Woche = last week (the one before this); die letzte Woche can also mean the final week (of the holidays). Context decides.",
@@ -1438,6 +1452,13 @@
     "subtleties": [
      "letzt- was once a superlative of an old word for late: last is “latest”.",
      "Never used predicatively without an ending: Er war der Letzte (he was the last one)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "letzte is built like English last: both are old superlatives of a word for “late”."
+     }
     ]
    },
    "class": "attr"
@@ -1673,11 +1694,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German halp, from Old High German halb, from Proto-Germanic *halbaz. Compare Dutch half, English half.",
+     "text": "From Middle High German halp, from Old High German halb, from Proto-Germanic *halbaz.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The same “half to the next hour” clock is used in Dutch (half acht) and in the Scandinavian languages."
+     "halb counts towards the next hour: halb acht = 7:30."
     ],
     "pitfalls": [
      "halb counts towards the next hour: halb acht = 7:30, not 8:30. Think: half (on the way to) eight.",
@@ -1686,6 +1707,18 @@
     "subtleties": [
      "In speech the 12-hour clock is normal: um halb acht (morning or evening); official times use 24 hours: 19:30 = neunzehn Uhr dreißig.",
      "anderthalb / eineinhalb = one and a half; zweieinhalb = two and a half."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "половина восьмого is halb acht: both count towards the next hour."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "halb is related to English half."
+     }
     ]
    }
   },
@@ -1942,11 +1975,11 @@
      }
     ],
     "etymology": {
-     "text": "Jahr (“year”) + hundert (“hundred”). Compare Dutch jaarhonderd.",
+     "text": "Jahr (“year”) + hundert (“hundred”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The 1900s are das zwanzigste Jahrhundert – like in English, the century number is one higher than the hundreds."
+     "The 1900s are das zwanzigste Jahrhundert: the century number is one higher than the hundreds."
     ],
     "pitfalls": [
      "Centuries are ordinal numbers: im 19. Jahrhundert = im neunzehnten Jahrhundert (dot = ordinal).",

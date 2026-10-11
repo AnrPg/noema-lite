@@ -613,12 +613,19 @@
     ],
     "pitfalls": [
      "In a month = im (in + dem): im Mai – not *in Mai.",
-     "Mai is written with ai (not *Mei) and sounds like English “my”."
+     "Mai is written with ai (not *Mei) and said [maɪ̯]."
     ],
     "subtleties": [
      "Months are masculine: der Mai. With a date: am 3. Mai (am dritten Mai).",
      "Der Wonnemonat Mai (the month of delight) is the poetic name.",
      "In many villages a decorated tree, der Maibaum, is set up on 1 May."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Mai sounds like English my."
+     }
     ]
    }
   },
@@ -1201,15 +1208,22 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Oktober is “the eighth” (Latin octo, Greek ὀκτώ); its festival, the Oktoberfest, mostly takes place in September."
+     "Oktober is “the eighth” (Latin octo); its festival, the Oktoberfest, mostly takes place in September."
     ],
     "pitfalls": [
      "In a month = im (in + dem): im Oktober – not *in Oktober.",
-     "Spelt with k in German: Oktober (English October)."
+     "Spelt with k: Oktober."
     ],
     "subtleties": [
      "Months are masculine: der Oktober. With a date: am 3. Oktober (am dritten Oktober).",
      "The 3rd of October is the Day of German Unity (Tag der Deutschen Einheit), the national holiday."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "Oktober is spelt with k, unlike October."
+     }
     ]
    }
   },
@@ -1437,15 +1451,22 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Dezember is “the tenth” (Latin decem, Greek δέκα) – although it is the twelfth month today."
+     "Dezember is “the tenth” (Latin decem) – although it is the twelfth month today."
     ],
     "pitfalls": [
      "In a month = im (in + dem): im Dezember – not *in Dezember.",
-     "Spelt with z: Dezember (English December)."
+     "Spelt with z: Dezember."
     ],
     "subtleties": [
      "Months are masculine: der Dezember. With a date: am 3. Dezember (am dritten Dezember).",
      "New Year’s Eve is Silvester in German, after Pope Sylvester I, whose feast day is 31 December."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "Dezember is spelt with z, unlike December."
+     }
     ]
    }
   },
@@ -1573,7 +1594,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Frühling is “the early one” (früh + -ling) of the year; Greek άνοιξη is the “opening” (ανοίγω); Turkish ilkbahar is the “first bahar” and autumn sonbahar the “last bahar”."
+     "Frühling is “the early one” (früh + -ling) of the year."
     ],
     "pitfalls": [
      "In a season = im (in + dem): im Frühling – not *in Frühling; all four seasons are masculine.",
@@ -1581,6 +1602,13 @@
     ],
     "subtleties": [
      "Frühjahr and Frühling mean the same; Frühjahr is neuter: das Frühjahr."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "άνοιξη is the “opening” (ανοίγω); German names spring the early one: Frühling."
+     }
     ]
    }
   },
@@ -1709,11 +1737,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German sumer, from Old High German sumar, from Proto-West Germanic *sumar. The -o- is of Central and Low German origin; southern dialects say Summer. Cognate with Dutch zomer, English summer.",
+     "text": "From Middle High German sumer, from Old High German sumar, from Proto-West Germanic *sumar. The -o- is of Central and Low German origin; southern dialects say Summer.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Sommer is English summer; the southern dialects still say Summer, as English does."
+     "Southern dialects still say Summer."
     ],
     "pitfalls": [
      "In a season = im (in + dem): im Sommer – not *in Sommer; all four seasons are masculine.",
@@ -1721,6 +1749,13 @@
     ],
     "subtleties": [
      "Altweibersommer (“old women’s summer”) is a warm spell in early autumn – an Indian summer."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Sommer is related to English summer."
+     }
     ]
    }
   },
@@ -1844,11 +1879,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German herbest, from Old High German herbist, from Proto-West Germanic *harbist. Compare Dutch herfst, English harvest.",
+     "text": "From Middle High German herbest, from Old High German herbist, from Proto-West Germanic *harbist.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Herbst is English harvest – in Old English hærfest was the name of the season itself, before autumn and fall."
+     "Herbst first meant the harvest, then the harvest season."
     ],
     "pitfalls": [
      "In a season = im (in + dem): im Herbst – not *in Herbst; all four seasons are masculine.",
@@ -1856,6 +1891,13 @@
     ],
     "subtleties": [
      "der Herbst des Lebens = the autumn of one’s life (old age), a literary image."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "In Old English hærfest was the name of the season itself, before autumn and fall. Herbst is related to English harvest: autumn is harvest time."
+     }
     ]
    }
   },
@@ -1976,11 +2018,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German winder, winter, from Old High German wintar, from Proto-West Germanic *wintru, from Proto-Germanic *wintruz. Compare Dutch winter, English winter, Danish vinter.",
+     "text": "From Middle High German winder, winter, from Old High German wintar, from Proto-West Germanic *wintru, from Proto-Germanic *wintruz.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Winter is spelt exactly as in English and Dutch – one of the easiest words for an English speaker."
+     "Winter is masculine, like all the seasons: der Frühling, der Sommer, der Herbst, der Winter."
     ],
     "pitfalls": [
      "In a season = im (in + dem): im Winter – not *in Winter; all four seasons are masculine.",
@@ -1988,6 +2030,13 @@
     ],
     "subtleties": [
      "der Winterschlaf (winter sleep) is the word for hibernation."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Winter is spelt exactly as in English."
+     }
     ]
    }
   },
@@ -2118,11 +2167,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German woche, from Old High German wohha, from Proto-West Germanic *wikā, from Proto-Germanic *wikǭ, from Proto-Indo-European *weyg- (“to bend, wind, turn”). Compare Yiddish וואָך (vokh), English week, Dutch week.",
+     "text": "From Middle High German woche, from Old High German wohha, from Proto-West Germanic *wikā, from Proto-Germanic *wikǭ, from Proto-Indo-European *weyg- (“to bend, wind, turn”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Woche and English week go back to a root meaning “to turn, change” – the week as one turn of the days."
+     "Woche goes back to a root meaning “to turn, change” – the week as one turn of the days."
     ],
     "pitfalls": [
      "Feminine: die Woche, plural die Wochen.",
@@ -2131,6 +2180,13 @@
     ],
     "subtleties": [
      "The week starts on Monday in Germany (and ISO calendars), not on Sunday."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Woche is related to English week."
+     }
     ]
    }
   },
@@ -2250,11 +2306,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German mānōt, from Old High German mānōd, from Proto-West Germanic *mānōþ. See also Mond (moon). Compare Dutch maand, English month, Danish måned.",
+     "text": "From Middle High German mānōt, from Old High German mānōd, from Proto-West Germanic *mānōþ. See also Mond (moon).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "month and moon are linked in many languages: German Monat / Mond, Greek μήνας / μήνη (moon), and Hebrew חֹדֶשׁ (month) belongs to חָדָשׁ (new) – the new moon."
+     "Monat and Mond (moon) are linked; Hebrew חֹדֶשׁ (month) belongs to חָדָשׁ (new) – the new moon."
     ],
     "pitfalls": [
      "Masculine: der Monat (not *das): einen Monat, diesen Monat.",
@@ -2262,6 +2318,18 @@
     ],
     "subtleties": [
      "Monat and Mond (moon) are one family – a month was measured by the moon."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Monat and Mond are linked as μήνας and μήνη are."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Monat and Mond are linked as month and moon are."
+     }
     ]
    }
   },
@@ -2416,7 +2484,7 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German jār, from Old High German jār, from Proto-West Germanic *jār. Compare Dutch jaar, English year, Danish år. Doublet of Uhr.",
+     "text": "From Middle High German jār, from Old High German jār, from Proto-West Germanic *jār. Doublet of Uhr.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -2429,6 +2497,13 @@
     "subtleties": [
      "Age: Ich bin 30 Jahre alt (or just Ich bin 30).",
      "Jahreszeit = season (“year-time”)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Jahr is related to English year."
+     }
     ]
    }
   },
@@ -2589,11 +2664,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German stunde, from Old High German stunta, from Proto-West Germanic *stundu, from Proto-Germanic *stundō (“point in time, hour”). Cognate with dated Dutch stond, English stound (“a while”).",
+     "text": "From Middle High German stunde, from Old High German stunta, from Proto-West Germanic *stundu, from Proto-Germanic *stundō (“point in time, hour”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek ώρα is both “hour” and “o’clock”; German splits them into Stunde (duration) and Uhr (clock time)."
+     "German splits the hour as a duration (Stunde) from the clock time (Uhr): zwei Stunden – zwei Uhr."
     ],
     "pitfalls": [
      "Stunde = an hour of duration (zwei Stunden); Uhr = the time on the clock (zwei Uhr).",
@@ -2602,6 +2677,18 @@
     "subtleties": [
      "A school “hour” is 45 minutes: eine Schulstunde.",
      "stündlich = hourly."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "ώρα is both hour and o’clock; German splits them: zwei Stunden (δύο ώρες) – zwei Uhr (δύο η ώρα)."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Stunde is related to the old English word stound (“a while”)."
+     }
     ]
    }
   },
@@ -2916,7 +3003,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Uhr comes from Greek ὥρα – a Greek speaker hears the same word: ώρα is both “hour” and “time”; German kept the clock sense."
+     "Uhr comes from Greek ὥρα through Latin hora; German kept the clock sense: Es ist acht Uhr."
     ],
     "pitfalls": [
      "Uhr (clock time) vs. Stunde (duration): Es ist zwei Uhr. – Ich warte zwei Stunden.",
@@ -2925,6 +3012,13 @@
     "subtleties": [
      "Official times use 24 hours: um 20 Uhr (= 8 p.m.); minutes follow Uhr: 8:15 = acht Uhr fünfzehn.",
      "Wie spät ist es? and Wie viel Uhr ist es? both ask the time."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Uhr is ώρα – but German kept only the clock sense; an hour is eine Stunde."
+     }
     ]
    }
   },
@@ -3350,11 +3444,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German urloup. Related to erlauben (“to allow”). Cognate with English leave (“time off, permission to be away”).",
+     "text": "From Middle High German urloup.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Urlaub was “permission to leave” – the English leave in “annual leave” is the same word, from the root of erlauben (to allow)."
+     "Urlaub was “permission to leave”, from the root of erlauben (to allow)."
     ],
     "pitfalls": [
      "Urlaub is the time off from your job (Ich habe zwei Wochen Urlaub); school and university breaks are Ferien (plural only).",
@@ -3363,6 +3457,13 @@
     "subtleties": [
      "in Urlaub fahren and in den Urlaub fahren are both correct.",
      "Urlaub nehmen = to take days off (from the employer)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Urlaub is related to English leave (“time off”): both first meant permission."
+     }
     ]
    }
   },
@@ -3492,7 +3593,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Latin feriae (festival days) also gave English fair (a market) and Spanish feria."
+     "Ferien comes from Latin feriae (festival days)."
     ],
     "pitfalls": [
      "Ferien has no singular: die Ferien sind …, in den Ferien – never *eine Ferie.",
@@ -3500,6 +3601,23 @@
     ],
     "subtleties": [
      "Each German state has its own school holiday dates, so the summer holidays are staggered across the country."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Latin feriae also gave English fair (a market)."
+     },
+     {
+      "for": "es",
+      "rel": "similar",
+      "text": "Latin feriae also gave feria."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Ferien is ferie: holidays."
+     }
     ]
    }
   },
@@ -3754,20 +3872,37 @@
     "synonyms": [],
     "synonymsNone": "A preposition has no true synonym; the neighbouring prepositions are compared in the pitfalls.",
     "etymology": {
-     "text": "From Middle High German sīt, from Old High German sīd, from Proto-Germanic *sīþuz. Akin to Old English sīþ. Related to Dutch sedert and sinds.",
+     "text": "From Middle High German sīt, from Old High German sīd, from Proto-Germanic *sīþuz.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek and Russian use the present here too: Μένω εδώ από το 2020 / Я живу здесь два года – German works the same way; English is the odd one out with “have been living”."
+     "seit takes the present for what is still going on: Ich wohne seit zwei Jahren hier."
     ],
     "pitfalls": [
-     "seit + PRESENT tense for something still going on: Ich wohne seit drei Jahren hier (not *habe … gewohnt, as English “have lived”).",
+     "seit + PRESENT tense for something still going on: Ich wohne seit drei Jahren hier (not *habe … gewohnt).",
      "seit always takes the dative: seit einem Jahr, seit zwei Wochen (Wochen = dative plural), seit dem Sommer.",
      "seit (since / for, still going on) ≠ vor (ago): vor zwei Jahren = two years ago."
     ],
     "subtleties": [
      "Seit wann …? (since when) and Wie lange schon …? both ask how long something has been going on.",
      "seit is also a conjunction: seit ich hier wohne … (since I have been living here)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Μένω εδώ από το 2020 uses the present, as Ich wohne seit 2020 hier does."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Я живу здесь два года uses the present, as Ich wohne seit zwei Jahren hier does."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "“I have lived here for three years” is Ich wohne seit drei Jahren hier – present tense, not *habe … gewohnt."
+     }
     ]
    }
   },
@@ -4069,11 +4204,11 @@
     "synonyms": [],
     "synonymsNone": "A preposition has no true synonym; the neighbouring prepositions are compared in the pitfalls.",
     "etymology": {
-     "text": "From Middle High German umbe, ümbe, from Old High German umbi, from Proto-West Germanic *umbi. Cognate with Dutch om.",
+     "text": "From Middle High German umbe, ümbe, from Old High German umbi, from Proto-West Germanic *umbi.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "um is a cousin of Greek ἀμφί (amphí, “around”, as in amphitheatre) and Latin ambi-."
+     "um goes back to Proto-Germanic *umbi (“around”)."
     ],
     "pitfalls": [
      "um is only for clock times: um acht Uhr – but am Montag (days), im Mai (months), in der Nacht.",
@@ -4082,6 +4217,13 @@
     "subtleties": [
      "um takes the accusative: um den Tisch, um die Ecke.",
      "um … zu + infinitive = in order to (a later step)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "um is a cousin of αμφί (as in αμφιθέατρο)."
+     }
     ]
    }
   }

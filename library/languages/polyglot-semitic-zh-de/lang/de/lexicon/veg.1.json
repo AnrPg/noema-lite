@@ -537,6 +537,13 @@
     ],
     "subtleties": [
      "In slang, Kartoffel can be a mocking name for a German; it is usually teasing, but it can hurt."
+    ],
+    "notes": [
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "Kartoffel comes from tartufolo, “little truffle” – a diminutive of tartufo."
+     }
     ]
    }
   },
@@ -836,17 +843,29 @@
      }
     ],
     "etymology": {
-     "text": "Borrowed from Old Polish ogórek, from Byzantine Greek ἀγγούριον (angoúrion, “cucumber”). Cognate with Dutch augurk, English gherkin.",
+     "text": "Borrowed from Old Polish ogórek, from Byzantine Greek ἀγγούριον (angoúrion, “cucumber”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Gurke reached German through Polish from Byzantine Greek ἀγγούριον – the same word as Modern Greek αγγούρι."
+     "Gurke reached German through Polish from Byzantine Greek ἀγγούριον."
     ],
     "pitfalls": [
-     "German Gurke covers both the fresh cucumber and the small pickle; English separates cucumber and gherkin."
+     "German Gurke covers both the fresh cucumber and the small pickled one (Gewürzgurke, saure Gurke)."
     ],
     "subtleties": [
      "In colloquial speech a Gurke is a lame old car or a useless device – context tells you which “cucumber” is meant."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Gurke is the same word as αγγούρι: both come from Byzantine ἀγγούριον, German through Polish."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English separates cucumber and gherkin; German Gurke is both, and a gherkin is a Gewürzgurke. Gurke is related to the word gherkin."
+     }
     ]
    }
   },
@@ -975,10 +994,22 @@
      "Aubergine and Austrian Melanzani are doublets – two borrowings that go back to the same source."
     ],
     "pitfalls": [
-     "French spelling and pronunciation: Au- is said [o] and -g- like the s in “pleasure”: [obɛʁˈʒiːnə]."
+     "A French spelling and pronunciation: Au- is said [o] and g is [ʒ], as in Garage: [obɛʁˈʒiːnə]."
     ],
     "subtleties": [
      "aubergine is also a colour word: ein auberginefarbenes Kleid (an aubergine-coloured dress)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "The g of Aubergine is the sound of s in “pleasure”."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Aubergine is said almost as in French, with a clear final -e: [obɛʁˈʒiːnə]."
+     }
     ]
    }
   },
@@ -1120,14 +1151,26 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The orange carrot is usually credited to Dutch growers of the 17th century; older carrots were mostly purple or yellow."
+     "The orange carrot is usually credited to growers in the Netherlands in the 17th century; older carrots were mostly purple or yellow."
     ],
     "pitfalls": [
-     "Spelling: German Karotte has one r and two t's; English carrot has two r's and one t."
+     "Spelling: Karotte has one r and two t."
     ],
     "subtleties": [
      "“Carrot and stick” is not said with Karotte in German: Zuckerbrot und Peitsche (“sweet bread and whip”).",
      "Which word people use (Karotte, Möhre, Gelbe Rübe, Rüebli) tells you where they are from."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English carrot has two r and one t; German Karotte is the other way round."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Karotte is spelled like carotte, with K: one r, two t."
+     }
     ]
    }
   },
@@ -1259,7 +1302,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English potato itself comes from batata, the Caribbean word for the sweet potato."
+     "Batate goes back to batata, the Caribbean (Taíno) word for the sweet potato."
     ],
     "pitfalls": [
      "In Switzerland ß is written ss: Süsskartoffel.",
@@ -1267,6 +1310,23 @@
     ],
     "subtleties": [
      "Despite the name, the sweet potato belongs to the bindweed family (Windengewächse), not to the nightshade family like the potato."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English potato itself comes from batata, the Caribbean word for the sweet potato."
+     },
+     {
+      "for": "pt",
+      "rel": "trap",
+      "text": "batata is the ordinary potato (Kartoffel); batata-doce is Süßkartoffel or Batate."
+     },
+     {
+      "for": "es",
+      "rel": "trap",
+      "text": "In Spain batata is Batate (Süßkartoffel) and patata is Kartoffel."
+     }
     ]
    }
   },
@@ -1395,7 +1455,7 @@
     "synonyms": [],
     "synonymsNone": "No everyday synonym: Zuckererbse (sugar pea) and Kichererbse (chickpea) are different plants or kinds.",
     "etymology": {
-     "text": "From Middle High German erbīz, erwīz, arwīz, ar(e)weiz, from Old High German arawīz, araweiz, from Proto-West Germanic *arwīt, *arwait. Cognate with Dutch erwt, Swedish ärta.",
+     "text": "From Middle High German erbīz, erwīz, arwīz, ar(e)weiz, from Old High German arawīz, araweiz, from Proto-West Germanic *arwīt, *arwait.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -1524,13 +1584,25 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Italian spinace, like English spinach, goes back to Arabic إِسْفَانَاخ (ʔisfānāḵ), from Classical Persian."
+     "Spinat came through Italian spinace from Arabic إِسْفَانَاخ (ʔisfānāḵ), itself from Classical Persian."
     ],
     "pitfalls": [
      "Masculine: der Spinat. It is normally uncountable; the plural Spinate is only used for kinds of spinach."
     ],
     "subtleties": [
      "In shops you choose between Blattspinat (whole leaves) and Rahmspinat (chopped, with cream) – often frozen."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English spinach goes back to the same Arabic word."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Spinat was borrowed from spinace (today spinaci)."
+     }
     ]
    }
   },
@@ -1641,7 +1713,7 @@
       "text": "sich die Radieschen von unten ansehen",
       "tr": "to look at the radishes from below",
       "kind": "idiom",
-      "meaning": "to be dead and buried (like English “to push up daisies”)",
+      "meaning": "to be dead and buried",
       "register": "colloquial"
      }
     ],
@@ -1652,7 +1724,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Radieschen goes back to Latin rādīx “root” – the same word as English radish and radical."
+     "Radieschen goes back to Latin rādīx “root”."
     ],
     "pitfalls": [
      "das Radieschen (small red radish) is not der Rettich (large, usually white radish).",
@@ -1660,6 +1732,13 @@
     ],
     "subtleties": [
      "Words in -chen are always neuter and do not change in the plural: das Radieschen, die Radieschen."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "die Radieschen von unten ansehen is the German “push up daisies”. Radieschen goes back to Latin rādīx – the same word as English radish and radical."
+     }
     ]
    }
   },
@@ -1773,7 +1852,7 @@
     "synonyms": [],
     "synonymsNone": "No synonym in standard German; kinds are named by compounds (Hokkaido-Kürbis, Butternusskürbis, Riesenkürbis).",
     "etymology": {
-     "text": "From Middle High German kürbiȥ, from Old High German kurbiȥ, from Proto-West Germanic *kurbit (ultimately from Latin cucurbita). Cognate with Luxembourgish Kürbis, Yiddish קירבעס (kirbes).",
+     "text": "From Middle High German kürbiȥ, from Old High German kurbiȥ, from Proto-West Germanic *kurbit (ultimately from Latin cucurbita).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -1783,7 +1862,14 @@
      "-is → -isse: der Kürbis, des Kürbisses, die Kürbisse, den Kürbissen."
     ],
     "subtleties": [
-     "Kürbis covers what English splits into pumpkin, squash and gourd; kinds are named with compounds: Hokkaido-Kürbis, Butternusskürbis."
+     "Kürbis covers pumpkins, squashes and gourds alike; kinds are named with compounds: Hokkaido-Kürbis, Butternusskürbis."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English splits pumpkin, squash and gourd; German says Kürbis for all of them."
+     }
     ]
    }
   },
@@ -1944,7 +2030,7 @@
      }
     ],
     "etymology": {
-     "text": "From Spanish chile, from Classical Nahuatl chīlli (etymology of the English cognate chili).",
+     "text": "From Spanish chile, from Classical Nahuatl chīlli.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -1956,6 +2042,13 @@
     ],
     "subtleties": [
      "Chili can mean the fresh pod, the powder or the dish; context decides."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Chili is the same word as English chili."
+     }
     ]
    }
   },
@@ -2265,7 +2358,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "A boxer's swollen ear is a Blumenkohlohr, just like English “cauliflower ear”.",
+     "A boxer’s swollen ear is a Blumenkohlohr, a “cauliflower ear”.",
      "Both Blumenkohl and Austrian Karfiol (Italian cavolfiore) mean “flower cabbage”."
     ],
     "pitfalls": [
@@ -2273,6 +2366,18 @@
     ],
     "subtleties": [
      "The florets are called Röschen, “little roses”."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Blumenkohlohr is exactly the English cauliflower ear."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "Austrian Karfiol is cavolfiore, and Blumenkohl translates it: flower + cabbage."
+     }
     ]
    }
   },
@@ -2415,7 +2520,14 @@
      "Spelling with kk: Brokkoli (the Italian spelling Broccoli is also accepted)."
     ],
     "subtleties": [
-     "Most Germans say it with a long o, [ˈbroːkoli] – unlike Italian broccoli with a short o."
+     "Most Germans say it with a long o: [ˈbroːkoli]."
+    ],
+    "notes": [
+     {
+      "for": "it",
+      "rel": "trap",
+      "text": "Most Germans say [ˈbroːkoli] with a long o, unlike broccoli with a short one; the usual spelling is Brokkoli."
+     }
     ]
    }
   },
@@ -2548,7 +2660,7 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German louch, from Old High German louh, from Proto-West Germanic *lauk, from Proto-Germanic *laukaz. Compare Low German Look, Dutch look, English leek, Danish løg, Swedish lök.",
+     "text": "From Middle High German louch, from Old High German louh, from Proto-West Germanic *lauk, from Proto-Germanic *laukaz.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -2559,6 +2671,13 @@
     ],
     "subtleties": [
      "As slang (Du Lauch!) it is an insult for a skinny, weak person – common among young people."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Lauch is related to English leek."
+     }
     ]
    }
   },
@@ -2993,6 +3112,13 @@
     ],
     "subtleties": [
      "German uses the Italian plural zucchini as its singular; the “correct” Italian singular der Zucchino is rare."
+    ],
+    "notes": [
+     {
+      "for": "it",
+      "rel": "trap",
+      "text": "German uses the plural zucchini as a singular – die Zucchini is one courgette; zucchino is rare."
+     }
     ]
    }
   },
@@ -3161,7 +3287,7 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German bone, from Old High German bōna, from Proto-West Germanic *baunu, from Proto-Germanic *baunō, from Proto-Indo-European *bʰabʰ- (“bean”). Compare Dutch boon, English bean, Danish bønne.",
+     "text": "From Middle High German bone, from Old High German bōna, from Proto-West Germanic *baunu, from Proto-Germanic *baunō, from Proto-Indo-European *bʰabʰ- (“bean”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -3172,6 +3298,13 @@
     ],
     "subtleties": [
      "eine Bohnenstange (“beanpole”) is a very tall, thin person."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Bohne is related to English bean."
+     }
     ]
    }
   },
@@ -3437,7 +3570,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Sellerie goes back to Ancient Greek σέλινον – Modern Greek still calls celery σέλινο."
+     "Sellerie goes back to Ancient Greek σέλινον."
     ],
     "pitfalls": [
      "In Germany plain Sellerie usually means the round celeriac root; for the stalks say Staudensellerie or Stangensellerie.",
@@ -3445,6 +3578,13 @@
     ],
     "subtleties": [
      "Staude refers to the bushy, perennial plant – the stalks grow as a dense bunch."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Sellerie is σέλινο: the word came from Greek through Italian and French."
+     }
     ]
    }
   },
@@ -3573,11 +3713,18 @@
      "des Mais can also be the genitive of der Mai (May) – the two words only look alike."
     ],
     "pitfalls": [
-     "False friend: German Korn is grain (or a grain spirit), not corn; corn is Mais.",
+     "Korn is grain (or a grain spirit); maize is Mais.",
      "Usually no plural: for one cob say ein Maiskolben."
     ],
     "subtleties": [
      "Mais is both the farm crop (Futtermais, animal feed) and the vegetable (Zuckermais)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "Korn is not corn: it is grain; corn is Mais."
+     }
     ]
    }
   }

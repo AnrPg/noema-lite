@@ -157,11 +157,11 @@
      }
     ],
     "etymology": {
-     "text": "From auf- (“up”) + wachen (“to be awake”), from Middle High German wachen, from Old High German wahhēn, from Proto-Germanic *wakāną; cognate with English wake.",
+     "text": "From auf- (“up”) + wachen (“to be awake”), from Middle High German wachen, from Old High German wahhēn, from Proto-Germanic *wakāną.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "wachen alone means “to keep watch, to stay awake” (am Bett wachen), the same root as English wake and watch."
+     "wachen alone means “to keep watch, to stay awake” (am Bett wachen)."
     ],
     "pitfalls": [
      "aufwachen is intransitive: you wake up by yourself. To wake someone else is wecken: Ich wecke dich um sieben – not *Ich wache dich auf.",
@@ -170,6 +170,13 @@
     "subtleties": [
      "Separable: the particle goes to the end (Ich wache um sechs auf), and ge- goes inside: aufgewacht.",
      "aufwachen is the moment of waking; aufstehen is getting out of bed – Germans often say both: Ich wache um sechs auf und stehe um halb sieben auf."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "wachen has the same root as English wake and watch. wachen is related to English wake."
+     }
     ]
    }
   },
@@ -337,7 +344,7 @@
      }
     ],
     "etymology": {
-     "text": "From auf- + stehen (“to stand”), from Middle High German stān, stēn, Old High German stān. Cognate with Dutch opstaan.",
+     "text": "From auf- + stehen (“to stand”), from Middle High German stān, stēn, Old High German stān.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -548,7 +555,7 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German waschen, from Old High German wascan, waskan, from Proto-West Germanic *waskan. Cognate with Dutch wassen, English wash, Danish vaske.",
+     "text": "From Middle High German waschen, from Old High German wascan, waskan, from Proto-West Germanic *waskan.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -562,6 +569,13 @@
     "subtleties": [
      "sich waschen (accusative: Ich wasche mich) = to wash oneself; sich etwas waschen (dative: Ich wasche mir die Haare) = to wash a part of oneself.",
      "Strong verb: waschen – wäscht – wusch – gewaschen."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "waschen is related to English wash."
+     }
     ]
    }
   },
@@ -1681,11 +1695,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German beginnen, from Old High German biginnan, from Proto-Germanic *biginnaną. Cognate with Dutch beginnen and English begin.",
+     "text": "From Middle High German beginnen, from Old High German biginnan, from Proto-Germanic *biginnaną.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English begin – began – begun and German beginnen – begann – begonnen show the same Germanic vowel change."
+     "beginnen – begann – begonnen shows the Germanic vowel change of strong verbs."
     ],
     "pitfalls": [
      "Strong and irregular: beginnen – begann – begonnen; not *beginnte, *gebeginnt.",
@@ -1693,7 +1707,14 @@
     ],
     "subtleties": [
      "In speech anfangen is far more common; beginnen is the word of timetables, programmes and writing.",
-     "A cognate of English begin: the meaning and even the vowels of the past (begann – began, begonnen – begun) match."
+     "The vowel changes twice: beginnen – begann – begonnen."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "beginnen – begann – begonnen matches begin – began – begun, vowels included."
+     }
     ]
    }
   },
@@ -2243,7 +2264,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English home and German Heim are the same word; heim- in verbs keeps the meaning “homewards”."
+     "Heim means home; heim- in verbs keeps the meaning “homewards”: heimgehen, heimfahren."
     ],
     "pitfalls": [
      "Everywhere you can also say nach Hause kommen, the most frequent expression.",
@@ -2252,6 +2273,13 @@
     "subtleties": [
      "Separable: Ich komme heim – kam heim – heimgekommen.",
      "heim (homewards) is related to das Heim (home) and die Heimat; it also forms heimgehen, heimfahren and the noun das Heimweh (homesickness)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Heim is the same word as English home."
+     }
     ]
    }
   },
@@ -2614,11 +2642,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German slāfen, from Old High German slāfan, from Proto-West Germanic *slāpan. Compare Low German slapen, Dutch slapen, English sleep.",
+     "text": "From Middle High German slāfen, from Old High German slāfan, from Proto-West Germanic *slāpan.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English sleep and German schlafen are the same Germanic word: s before l, m, n, w became sch in German (sleep – schlafen, snow – Schnee, swim – schwimmen)."
+     "In German, s before l, m, n, w became sch: schlafen, Schnee, schwimmen."
     ],
     "pitfalls": [
      "du schläfst, er schläft (a → ä); ihr schlaft.",
@@ -2628,6 +2656,13 @@
     "subtleties": [
      "schlafen takes haben (it is a state), but einschlafen takes sein (a change).",
      "Darüber muss ich schlafen = I need to sleep on it."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "sleep – schlafen, snow – Schnee, swim – schwimmen: German turned s before l, n, w into sch."
+     }
     ]
    }
   }
