@@ -5,13 +5,25 @@
 > facts, word profiles, `features.*.none`, phenomena) names **no language outside the course** and never explains through
 > English grammar ("no ‘do’", "-ing", "is not ‘the’") — English is only the language the master is written in. Every
 > comparison is a **contrast note** `{for, rel, text}`: on every grammar page one for **each supported native** (en el ru
-> fr ar de hi zh ja it es sq pt — the UI locales' languages — without the page's own language) and the five type notes
+> fr ar de hi zh ja it es sq pt tr — the UI locales' languages — without the page's own language) and the five type notes
 > (`type:fusional`, `type:agglutinating`, `type:isolating`, `type:polysynthetic`, `branch:Semitic`; a type note names no
 > language: "If your language …"); `profile.notes` on a word that invites a comparison (cognates, false friends); `notes`
 > on phenomena. A note names only its own language (examples in it, in its script), the course languages and the point.
 > The **locale facades** (the texts translated into el, ru, fr …) are separate, later tasks: `python3 tools/lang_facade.py
 > task library/languages/<course> --locale <loc> --tier 1`. Every content prompt runs `python3 tools/lang_facade.py lint
 > library/languages/<course>` and leaves nothing of its own there.
+>
+> **R1–R3 (2026-10-11, with D19; `docs/language-packs.md` §2.2–§2.4).** **R1** — a learner sees the comparisons in three
+> sections: “From your languages” (the native's note first, then one per C1 / C2 language), “Among the languages you are
+> learning” (the other course languages), “From other languages” (folded: every other note); so every supported native
+> (tr included) and every type has its note. **R2** — every note (and pitfall, subtlety, fun fact, feeling) is
+> **structured**, in this Markdown subset only: paragraphs separated by a blank line; `- ` / `1. ` lists for two or more
+> points; `**bold**` for the one key sentence or word; `*italic*` for a cited word; an example on its own line starting
+> with `→ ` (`→ ich habe gegessen — έχω φάει`); no headings, links, HTML, tables, code. **R3** — **prompt 1 maps the word's
+> parameters before any word is written**: `lang/<code>/WORD_PARAMETERS.md` (every part of speech, every parameter
+> distinctive for its words, exhaustively), which prompt 2 turns into `wordFeatures` with `prominent` / `order`; every
+> word then states every parameter (a value or `{"none": "<why>"}`), and `tools/validate_lang.py` checks the map, every
+> word and the checklist of the language's type.
 
 A language package is too big for one prompt: a single session runs out of attention long before the last word, and quality
 drops where nobody looks. This playbook breaks it into **25 prompts**, each one a fresh Claude Code session in the repo,
@@ -22,8 +34,8 @@ be repeated or resumed without the others.
 
 | # | Prompt | What it produces | Turns |
 |---|---|---|---|
-| 1 | Typology and phenomena | the language's profile in `_typology/` and its catalogue of phenomena | 2 (write, then audit) |
-| 2 | The facade and the engine | `language.json` (every word parameter, paradigms), reference checks, script/keyboard/speech support, the language in `course.json` | 2 |
+| 1 | Typology, phenomena, the word's parameters | the language's profile in `_typology/`, its catalogue of phenomena and **the map of its word parameters** (`WORD_PARAMETERS.md`, R3) | 2 (write, then audit) |
+| 2 | The facade and the engine | `language.json` (every word parameter of the map, with prominent / order; paradigms), reference checks, script/keyboard/speech support, the language in `course.json` | 2 |
 | 3–8 | Foundations F1–F6 | S00–S18: words, grammar pages, sentences | 2 each |
 | 9–11 | Vegetables V1–V3 | the field, tiers 1–3 | 1–2 each |
 | 12 | Core K1 | C01–C04 (and later K2–K12, one prompt per 4 lessons, as the core is written) | 2 each |
@@ -75,7 +87,7 @@ connector). docs/LANGUAGES.md §10.2 is the contract.
 
 ---
 
-## Prompt 1 — Typology and phenomena
+## Prompt 1 — Typology, phenomena and the map of the word's parameters (R3: the first step)
 
 ```
 Read docs/LANGUAGE_RULES.md (binding), then docs/LANGUAGES.md D13–D20, §4.11 and §4.7.1, and tools/lang_sources/AGENT_BRIEF.md.
@@ -89,10 +101,21 @@ We are adding <LANG> (<code>) to the course library/languages/<course>. This ses
    phenomenon's notes — for supported natives and types — where they help), status "missing" and "when"
    left empty (nothing is taught yet), distinctions and polysemy for the words the course will need (look at
    core/fields/*.json glosses). Use the catalogues of the other course languages as models of depth and format.
+   Notes are structured (R2: "- " lists, "→ " example lines, a blank line between paragraphs).
+3. library/languages/<course>/lang/<code>/WORD_PARAMETERS.md — R3, before ANY word: the exhaustive map of the parameters
+   distinctive for words of <LANG>, one "## <POS>" section per part of speech (NOUN, VERB, ADJ, ADV, PRON, DET, ADP, NUM,
+   CCONJ, SCONJ, PART, INTJ, CLF … whatever the language has): for every parameter its id, what it records, its values,
+   why it is learned with the word, its phenomenon, whether it can be "none" (and when), and its prominence on the word
+   card (the most important first). From the catalogue (every phenomenon of level "word" is a parameter) and reference
+   grammars. Examples of depth: Arabic nouns — every plural with the meanings it belongs to, dual, gender, human, root,
+   pattern; German verbs — Präteritum, Partizip II, haben / sein, the present-tense vowel change, separable prefix, case
+   government; Hebrew — binyan, root, construct form, plurals; Chinese — measure words, traditional forms, readings per
+   sense, separable verbs. Cover the checklist of the language's type and profile (R3_CHECKLIST / R3_TYPE in
+   tools/validate_lang.py).
 Ground every claim (WALS, a reference grammar, Wiktionary via tools/lang_refcheck.fetch); leave out what you cannot ground.
 Checks: python3 tools/lang_phenomena.py --lang <code> (no ❌), python3 tools/lang_facade.py lint library/languages/<course>
 (nothing in _phenomena/<code>.json) and python3 tests/lang_rules.py. Commit on branch lang-<code>.
-Report: number of phenomena by area, what you were unsure of.
+Report: number of phenomena by area, the parameters per part of speech, what you were unsure of.
 ```
 
 ## Prompt 2 — The facade and the engine
@@ -103,8 +126,11 @@ and library/languages/_phenomena/<code>.json (written in the last session).
 Add <LANG> (<code>) to library/languages/<course>:
 1. lang/<code>/language.json: name, nativeName, script, dir, tokenJoin, vowelMarks / romanization, typology "<type>",
    citationCells and paradigmCells per POS and class (UniMorph tags as the other languages use), extraTags, and wordFeatures
-   — EVERY parameter a word of this language must state, per POS (D14), each tied to its phenomenon. Model it on the other
-   languages' language.json; every phenomenon of level "word" in the catalogue must be recorded by a parameter.
+   — EVERY parameter of lang/<code>/WORD_PARAMETERS.md (written in prompt 1), per POS (D14, R3), each tied to its
+   phenomenon, with "prominent" (shown right under the word on the card) and "order" (the most important first); a
+   checklist item that is not a word parameter in <LANG> goes into "wordFeaturesChecklist": {"<feature>": "<why>"}.
+   Model it on the other languages' language.json; every phenomenon of level "word" in the catalogue must be recorded by
+   a parameter.
 2. The reference checker: tools/lang_refcheck.py must fetch and compare <code> (Wiktionary language name, tag mapping,
    vowel marks / plene spelling if the script has them). Test it on 20 common words.
 3. The engine: LANG_INFO (name, flag, font) in engine/lang/00_base.js; tokenizer needs in engine/langcore.js (clitics,
@@ -112,7 +138,7 @@ Add <LANG> (<code>) to library/languages/<course>:
    engine/lang/90_script.js); the speech tag (SPEECH_TAGS) — each with a test in the matching tests/lang_*.js file.
 4. course.json: add "<code>" to languages (and to typology paths if its type is new: core/typology.json).
 Do NOT write words, grammar pages or sentences yet. Checks: python3 tools/build.py site bundle; python3 tools/validate_lang.py
-library/languages/<course> (0 errors; missing content is a warning); python3 tests/lang_validate.py; node tests/langcore.js;
+library/languages/<course> (0 errors; missing content is a warning; no R3 warning for <code>); python3 tests/lang_validate.py; node tests/langcore.js;
 python3 tools/lang_phenomena.py --lang <code>. Commit. Report: the parameters per POS, what the engine needed.
 ```
 
@@ -128,7 +154,7 @@ Read /tmp/brief.txt completely before you start, then docs/LANGUAGE_RULES.md and
 one lesson at a time — D19 first (neutral texts, contrast notes): (A) the words of the lesson with their full facade and
 profile, grounded in Wiktionary; (B) the grammar
 page of each function of the lesson (status, blocks, ask yourself, traps, evidence, generators, seeAlso, typology tags —
-neutral texts, and every grammar page with a contrast note for EACH supported native but <code> (en el ru fr ar de hi zh ja it es sq pt) and the five type notes type:fusional, type:agglutinating, type:isolating, type:polysynthetic, branch:Semitic (D19)); words that invite a comparison get profile.notes; (C) the sentences (≥ 15 per lesson, every new word, every function in ≥ 8,
+neutral texts, and every grammar page with a contrast note for EACH supported native but <code> (en el ru fr ar de hi zh ja it es sq pt tr) and the five type notes type:fusional, type:agglutinating, type:isolating, type:polysynthetic, branch:Semitic (D19)); words that invite a comparison get profile.notes; every note structured (R2); every word states every parameter of WORD_PARAMETERS.md (R3); (C) the sentences (≥ 15 per lesson, every new word, every function in ≥ 8,
 variant pairs); (D) the catalogue's status for what the lesson teaches. Run the checks after EACH lesson, not only at the end
 (+ python3 tools/lang_facade.py lint library/languages/<course>: nothing of yours, no missing note on your pages).
 Commit when all checks pass, and give the report the brief asks for.
@@ -155,7 +181,7 @@ K1 `cr.01,cr.02,cr.03,cr.04`, then K2 `cr.05…cr.08` … K12 `cr.45…cr.48` �
 Make your brief and follow it exactly:
   python3 tools/lang_sources/mkbrief.py core --course <course> --lang <code> --batch K<n> --nodes <nodes> > /tmp/brief.txt
 Read it completely. Before adding any word, search the <code> lexicon for the concept id (D15: a word you have may already
-carry it as another meaning). D19 first: neutral texts; every grammar page with a contrast note for EACH supported native but <code> (en el ru fr ar de hi zh ja it es sq pt) and the five type notes type:fusional, type:agglutinating, type:isolating, type:polysynthetic, branch:Semitic (D19).
+carry it as another meaning). D19 first: neutral texts; every grammar page with a contrast note for EACH supported native but <code> (en el ru fr ar de hi zh ja it es sq pt tr) and the five type notes type:fusional, type:agglutinating, type:isolating, type:polysynthetic, branch:Semitic (D19).
 Work lesson by lesson (words → grammar pages → sentences → catalogue), checks after each lesson (+ lang_facade.py lint).
 Commit when all checks pass; report as the brief asks.
 ```
@@ -168,9 +194,9 @@ Read docs/LANGUAGE_RULES.md and docs/LANGUAGES.md §4.7 (seeAlso), §4.7.1, §4.
 named here:
 1. seeAlso both ways: every grammar page of <code> points to the same point in the other course languages, and every other
    language's page of a function <code> also has gets a seeAlso to <code> (one line: what is parallel or different).
-2. If <code> is a supported native (in "supported" of _typology/reference.json: en el ru fr ar de hi zh ja it es sq pt):
+2. If <code> is a supported native (in "supported" of _typology/reference.json: en el ru fr ar de hi zh ja it es sq pt tr):
    a contrast note for <code> on EVERY grammar page of the other course languages (D19 requires it; concrete, correct, one
-   to three sentences, examples in <code>). seeAlso notes compare course languages only (they are general texts).
+   to three sentences or a short structured list (R2), examples in <code>). seeAlso notes compare course languages only (they are general texts).
 3. Bridges: cognates and loans between <code> and the other course languages that the etymologies support
    (tests/lang_poly.js shows how they are found); report false friends.
 Checks: python3 tools/validate_lang.py library/languages/<course> --strict --d19-strict --lang <code>; python3 tools/lang_refcheck.py
@@ -204,7 +230,8 @@ Audit what you just wrote before we finish: (1) go through docs/LANGUAGE_RULES.m
 (3) look for words you used in sentences that have no lexeme, paradigm cells you left empty, glosses that do not match
 the sentence, notes that compare with a language you are not sure about, a general text that names a language outside the
 course or explains through English, a grammar page without a note for every supported native and type (D19; run
-python3 tools/lang_facade.py lint); (4) fix, re-run the checks, amend the commit,
+python3 tools/lang_facade.py lint), a long note squashed into one paragraph (R2), a word missing one of its parameters
+(R3); (4) fix, re-run the checks, amend the commit,
 and tell me what you changed.
 ```
 
