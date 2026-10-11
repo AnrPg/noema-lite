@@ -775,11 +775,28 @@
     ],
     "pitfalls": [
      "There is no ‘dummy it’: ‘It is me’ is 是我, ‘It is raining’ is 下雨了 — no 它.",
-     "For things Chinese uses 它 much less than English uses ‘it’: asked where the phone is, people answer 在这儿 ‘(it is) here’, without 它."
+     "For things Chinese rarely uses 它: asked where the phone is, people answer 在这儿 ‘(it is) here’, with no pronoun at all."
     ],
     "subtleties": [
      "Many people write 他 or 她 for their own pet, to show affection.",
      "In writing 它 also refers to abstract things: 这个问题很重要，我们要解决它 ‘this problem is important, we must solve it’."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English needs ‘it’ in such answers (It’s here); Chinese mostly leaves 它 out: 在这儿."
+     },
+     {
+      "for": "de",
+      "rel": "trap",
+      "text": "German needs a pronoun (Es ist hier / Das ist hier); Chinese mostly leaves 它 out: 在这儿."
+     },
+     {
+      "for": "fr",
+      "rel": "trap",
+      "text": "French says Il est ici / Le voici; Chinese mostly leaves 它 out: 在这儿."
+     }
     ]
    },
    "features": {
@@ -1019,7 +1036,7 @@
      "src": "morphemes and character composition"
     },
     "funFacts": [
-     "English has no single word for inclusive ‘we’; Chinese 咱们 makes the difference audible."
+     "咱们 makes audible a difference that is often left to context: ‘we including you’ (咱们) vs ‘we, perhaps without you’ (我们)."
     ],
     "pitfalls": [
      "Never use 咱们 when the listener is not part of the group: 我们明天走，你呢？ (not *咱们).",
@@ -1027,6 +1044,18 @@
     ],
     "subtleties": [
      "Typical of northern Mandarin; in the south and in Taiwan most people just say 我们."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "new",
+      "text": "English ‘we’ covers both; 咱们 is the ‘we’ that includes the listener, 我们 may leave them out."
+     },
+     {
+      "for": "de",
+      "rel": "new",
+      "text": "German wir covers both; 咱们 is the ‘we’ that includes the listener."
+     }
     ]
    },
    "features": {
@@ -1833,6 +1862,13 @@
     "subtleties": [
      "Verbs and adjectives are joined with 又…又…, 也 or 而且, not 和: 又便宜又新鲜 ‘cheap and fresh’.",
      "For ‘with (a person)’ 和 and 跟 are interchangeable before 一起: 我和 / 跟朋友一起吃饭; 跟 is more colloquial (S11)."
+    ],
+    "notes": [
+     {
+      "for": "ja",
+      "rel": "similar",
+      "text": "和 is the 和 of 和食 washoku and 和服 wafuku: the old name 倭 / 和 (Wa) for Japan, read hé in Chinese."
+     }
     ]
    },
    "features": {
@@ -2654,7 +2690,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Calling a 25-year-old woman 女孩 is normal and friendly in Chinese — unlike ‘girl’ in some English contexts."
+     "Calling a 25-year-old woman 女孩 is normal and friendly in Chinese."
     ],
     "pitfalls": [
      "女孩 vs 女人: a girl or young woman is 女孩; 女人 is a (mature) woman.",
@@ -2662,6 +2698,13 @@
     ],
     "subtleties": [
      "女孩, 女孩子 and 女孩儿 are one word in plain, fuller and erhua form."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "‘girl’ for an adult woman can sound condescending in English; 女孩 for a young woman does not."
+     }
     ]
    }
   },
@@ -3651,8 +3694,25 @@
      "Between 一 and the noun there must be a measure word: 一本书, never *一书."
     ],
     "subtleties": [
-     "Chinese needs 一 + measure word much less often than English needs ‘a’: 这是书 ‘this is a book’ is fine.",
+     "Chinese uses 一 + measure word only when ‘one’ or a new thing matters: 这是书 ‘this is a book’ is fine.",
      "一 + measure word introduces one new thing; a thing already known goes bare before the verb: 书在这里 ‘the book is here’."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "Don’t add 一个 for every English ‘a’: 这是书 ‘this is a book’, 我是学生 ‘I am a student’."
+     },
+     {
+      "for": "de",
+      "rel": "trap",
+      "text": "Don’t add 一个 for every ein: 这是书 ‘das ist ein Buch’."
+     },
+     {
+      "for": "fr",
+      "rel": "trap",
+      "text": "Don’t add 一个 for every un / une: 这是书 ‘c’est un livre’."
+     }
     ]
    },
    "features": {

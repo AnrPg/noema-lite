@@ -121,13 +121,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "计划 is one of many modern words that Chinese and Japanese share: 計画 keikaku."
+     "计划 is one of many modern words shared by the languages written with Chinese characters."
     ],
     "pitfalls": [
      "Taiwan writes 計畫, Hong Kong and many older texts 計劃 — both are correct traditional spellings."
     ],
     "subtleties": [
      "计划 sounds organised, often written down; for a simple personal intention people say 打算: 你明天有什么打算？"
+    ],
+    "notes": [
+     {
+      "for": "ja",
+      "rel": "same",
+      "text": "Japanese 計画 keikaku is the same word, written the same way."
+     }
     ]
    },
    "features": {

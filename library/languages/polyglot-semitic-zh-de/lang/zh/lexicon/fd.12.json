@@ -2710,13 +2710,20 @@
      "src": "morphemes: 洗手 + 间"
     },
     "funFacts": [
-     "洗手间 is a euphemism built exactly like English ‘washroom’."
+     "洗手间 ‘hand-washing room’ is a polite euphemism for the toilet."
     ],
     "pitfalls": [
      "洗手间 means the toilet, not a room only for washing hands."
     ],
     "subtleties": [
      "我去一下洗手间 is the polite way to excuse yourself."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Built exactly like English ‘washroom’."
+     }
     ]
    }
   },
@@ -3669,13 +3676,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The word travelled far: Arabic صُفَّة ṣuffa ‘bench’ → Turkish sofa → English sofa (Greek σοφάς, German Sofa) → Chinese 沙发."
+     "The word travelled far: Arabic صُفَّة ṣuffa ‘bench’ → Turkish sofa → English sofa → Chinese 沙发 (and German Sofa)."
     ],
     "pitfalls": [
      "沙发 is a sound loan: 沙 ‘sand’ and 发 ‘to send’ carry no meaning here."
     ],
     "subtleties": [
      "‘On the sofa’ is 沙发上: 坐在沙发上."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Greek σοφάς is the same travelling word."
+     }
     ]
    }
   },
@@ -3786,13 +3800,20 @@
      "src": "morphemes: 冰 + 箱"
     },
     "funFacts": [
-     "冰箱 is an ‘ice box’, like the old English icebox; Cantonese says 雪柜 ‘snow cabinet’."
+     "冰箱 is an ‘ice box’; Cantonese says 雪柜 ‘snow cabinet’."
     ],
     "pitfalls": [
      "‘In the fridge’ is 冰箱里 — the 里 is required."
     ],
     "subtleties": [
      "台 is the measure word for machines: 一台冰箱, 一台电脑."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Like the old English icebox."
+     }
     ]
    }
   }

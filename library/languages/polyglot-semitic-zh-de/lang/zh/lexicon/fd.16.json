@@ -1009,7 +1009,7 @@
     },
     "funFacts": [
      "好 is 女 ‘woman’ + 子 ‘child’ — the classic picture of ‘good’.",
-     "好 is everywhere in greetings: 你好 ‘hello’ (‘you good’), 早上好 ‘good morning’, 好久不见 ‘long time no see’ — English borrowed that last one word for word."
+     "好 is everywhere in greetings: 你好 ‘hello’ (‘you good’), 早上好 ‘good morning’, 好久不见 ‘long time no see’."
     ],
     "pitfalls": [
      "很好 is a ready-made unit (‘fine’, ‘very good’), and 不好 is ‘bad, not good’: 天气不好. For ‘very good’ alone, say 很好 or 非常好.",
@@ -1019,6 +1019,13 @@
      "好 + verb makes ‘nice to …’: 好吃 (food), 好喝 (drinks), 好看 (looks, films), 好听 (sounds); 难 + verb is the opposite: 难吃, 难看.",
      "In speech 好 before an adjective is an exclamation: 好冷！ ‘so cold!’",
      "One syllable: it goes straight before the noun (大房子); with 很 it needs 的 (很大的房子)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English ‘long time no see’ is a word-for-word copy of 好久不见."
+     }
     ]
    },
    "features": {
@@ -1803,7 +1810,7 @@
      "老师 ‘teacher’, 老公 ‘husband’ and 老虎 ‘tiger’ all start with 老, and none of them has to be old: there 老 is only a prefix of respect or habit."
     ],
     "pitfalls": [
-     "Calling someone 老 to their face (你很老) is as rude as in English; say 年纪大 or nothing.",
+     "Calling someone 老 to their face (你很老) is rude; say 年纪大 or nothing — though 老 before a surname (老王) is friendly.",
      "老 is for people and long-standing things; worn things are 旧: 旧手机, not *老手机 (unless you mean ‘my good old phone’)."
     ],
     "subtleties": [
@@ -3891,7 +3898,7 @@
      "src": "morphemes: 高 + 兴 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "高兴 is literally ‘high mood’ — like English ‘in high spirits’."
+     "高兴 is literally ‘high mood’."
     ],
     "pitfalls": [
      "兴 here is xìng (4th tone), not xīng as in 兴奋 xīngfèn ‘excited’.",
@@ -3900,6 +3907,13 @@
     "subtleties": [
      "不高兴 usually means ‘annoyed, upset’, not just ‘not happy’.",
      "Two syllables: as an attribute it takes 的: 高兴的孩子."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Like English ‘in high spirits’."
+     }
     ]
    },
    "features": {
@@ -4340,7 +4354,7 @@
      "src": "morphemes: 伤 + 心 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "伤心 ‘hurt-heart’ is the English ‘heartbroken’; its mirror word is 开心 ‘open-heart’ = happy."
+     "伤心 ‘hurt-heart’ is sadness; its mirror word is 开心 ‘open-heart’ = happy."
     ],
     "pitfalls": [
      "伤心 is strong: for small disappointments 难过 or 不高兴 fit better."
@@ -4348,6 +4362,13 @@
     "subtleties": [
      "The two halves can split: 伤了他的心 ‘broke his heart’.",
      "Two syllables: as an attribute it takes 的: 伤心的孩子."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "伤心 is the English ‘heartbroken’."
+     }
     ]
    },
    "features": {

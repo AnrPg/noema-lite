@@ -2132,14 +2132,21 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English ‘paper tiger’ is a calque of the Chinese 纸老虎.",
-     "Papermaking is one of China’s ‘Four Great Inventions’; Cai Lun (蔡伦) improved it around 105 CE. English paper and German Papier come from Greek πάπυρος ‘papyrus’ — a different material."
+     "纸老虎 ‘paper tiger’ — something that looks strong but is not — spread from Chinese into many languages.",
+     "Papermaking is one of China’s ‘Four Great Inventions’; Cai Lun (蔡伦) improved it around 105 CE. German Papier comes from Greek πάπυρος ‘papyrus’ — a different material."
     ],
     "pitfalls": [
      "Paper is counted by the sheet: 一张纸 ‘a sheet of paper’ — no 个."
     ],
     "subtleties": [
      "纸 is in many words: 报纸 newspaper, 纸币 banknote, 剪纸 paper-cutting."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English ‘paper tiger’ is a calque of 纸老虎, and English paper comes from πάπυρος too."
+     }
     ]
    }
   },
@@ -2428,13 +2435,20 @@
      "src": "morphemes: 电 + 话 (Wiktionary)"
     },
     "funFacts": [
-     "Greek τηλέφωνο is ‘far voice’, the old official German Fernsprecher ‘far speaker’ — Chinese 电话 is ‘electric speech’."
+     "The old official German Fernsprecher is a ‘far speaker’ — Chinese 电话 is ‘electric speech’."
     ],
     "pitfalls": [
      "‘To call someone’ is 给 + person + 打电话: 我给你打电话 — 打 ‘hit’ is the verb."
     ],
     "subtleties": [
      "In speech 电话 often means the call or the number rather than the device."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "Greek τηλέφωνο is ‘far voice’; 电话 is ‘electric speech’."
+     }
     ]
    }
   },
@@ -2890,7 +2904,24 @@
      "杯子 is the cup itself; 杯 is the measure ‘a cup of’: 一个杯子 ‘a cup’, but 一杯茶 ‘a cup of tea’."
     ],
     "subtleties": [
-     "Chinese does not split cup and glass as English does: any drinking vessel can be 杯子."
+     "Chinese need not split cup and glass: any drinking vessel can be 杯子 (a glass one is 玻璃杯)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "different",
+      "text": "English splits cup and glass; 杯子 covers both."
+     },
+     {
+      "for": "de",
+      "rel": "different",
+      "text": "German splits Tasse and Glas; 杯子 covers both."
+     },
+     {
+      "for": "fr",
+      "rel": "different",
+      "text": "French splits tasse and verre; 杯子 covers both."
+     }
     ]
    }
   },

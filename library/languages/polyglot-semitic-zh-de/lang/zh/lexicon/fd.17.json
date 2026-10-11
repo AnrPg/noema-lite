@@ -390,11 +390,18 @@
      "黑色幽默 ‘black humour’ was translated word for word from English."
     ],
     "pitfalls": [
-     "Black hair and eyes are just 黑: 黑头发, 黑眼睛 — where English says ‘dark eyes’."
+     "Black hair and eyes are simply 黑: 黑头发, 黑眼睛 — 深 ‘dark’ is for colours, not for eyes."
     ],
     "subtleties": [
      "‘What colour is it?’ = 是什么颜色的？ — 颜色 yánsè is ‘colour’.",
      "The colour as a noun: before a noun it takes 的 (白色的车), as a predicate 是…的 (车是白色的), and alone it is the colour itself (我喜欢白色)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "‘dark eyes’ and ‘dark hair’ are 黑眼睛, 黑头发 — not *深眼睛."
+     }
     ]
    }
   },
@@ -663,11 +670,73 @@
      "Money at New Year comes in a 红包 ‘red envelope’."
     ],
     "pitfalls": [
-     "红茶 ‘red tea’ is what English calls BLACK tea."
+     "红茶 ‘red tea’ is the fully oxidised tea, named after its reddish brew; 黑茶 ‘black tea’ is a different, post-fermented kind such as pu’er."
     ],
     "subtleties": [
      "‘What colour is it?’ = 是什么颜色的？ — 颜色 yánsè is ‘colour’.",
      "The colour as a noun: before a noun it takes 的 (白色的车), as a predicate 是…的 (车是白色的), and alone it is the colour itself (我喜欢白色)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English black tea is 红茶; 黑茶 is a different, post-fermented tea such as pu’er."
+     },
+     {
+      "for": "de",
+      "rel": "trap",
+      "text": "Schwarztee is 红茶; 黑茶 is a different, post-fermented tea such as Pu-Erh."
+     },
+     {
+      "for": "fr",
+      "rel": "trap",
+      "text": "Le thé noir is 红茶; 黑茶 is a different, post-fermented tea such as le pu-erh."
+     },
+     {
+      "for": "es",
+      "rel": "trap",
+      "text": "El té negro is 红茶; 黑茶 is a different, post-fermented tea such as el pu-erh."
+     },
+     {
+      "for": "it",
+      "rel": "trap",
+      "text": "Il tè nero is 红茶; 黑茶 is a different, post-fermented tea such as il pu-erh."
+     },
+     {
+      "for": "pt",
+      "rel": "trap",
+      "text": "O chá preto is 红茶; 黑茶 is a different, post-fermented tea such as o pu-erh."
+     },
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "Το μαύρο τσάι is 红茶; 黑茶 is a different, post-fermented tea such as pu-erh."
+     },
+     {
+      "for": "ru",
+      "rel": "trap",
+      "text": "Чёрный чай is 红茶; 黑茶 is a different, post-fermented tea such as пуэр."
+     },
+     {
+      "for": "sq",
+      "rel": "trap",
+      "text": "Çaji i zi is 红茶; 黑茶 is a different, post-fermented tea such as pu-erh."
+     },
+     {
+      "for": "hi",
+      "rel": "trap",
+      "text": "काली चाय is 红茶; 黑茶 is a different, post-fermented tea such as pu-erh."
+     },
+     {
+      "for": "ja",
+      "rel": "same",
+      "text": "Japanese 紅茶 kōcha is the same word for the same tea; 黑茶 is the post-fermented kind (黒茶 kurocha)."
+     },
+     {
+      "for": "ar",
+      "rel": "same",
+      "text": "Many Arabic speakers call it شاي أحمر ‘red tea’ too — that is 红茶; 黑茶 is a post-fermented tea such as pu-erh."
+     }
     ]
    }
   },
@@ -2087,7 +2156,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Like English, Chinese names the colour after the fruit: 橙子 chéngzi ‘orange’ → 橙色."
+     "Chinese names the colour after the fruit: 橙子 chéngzi ‘orange’ → 橙色 ‘orange (colour)’."
     ],
     "pitfalls": [
      "橙 chéng (2nd tone) — the fruit is 橙子, the juice 橙汁."
@@ -2095,6 +2164,48 @@
     "subtleties": [
      "‘What colour is it?’ = 是什么颜色的？ — 颜色 yánsè is ‘colour’.",
      "The colour as a noun: before a noun it takes 的 (白色的车), as a predicate 是…的 (车是白色的), and alone it is the colour itself (我喜欢白色)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Like English orange, the colour is named after the fruit."
+     },
+     {
+      "for": "de",
+      "rel": "same",
+      "text": "Like German orange (from Orange, the fruit), the colour is named after the fruit."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Like French orange, the colour is named after the fruit."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "Like Spanish naranja, the colour is named after the fruit."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Like Italian arancione (from arancia), the colour is named after the fruit."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Like Portuguese cor de laranja, the colour is named after the fruit."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Like Greek πορτοκαλί (from πορτοκάλι), the colour is named after the fruit."
+     },
+     {
+      "for": "sq",
+      "rel": "same",
+      "text": "Like Albanian portokalli (from portokall), the colour is named after the fruit."
+     }
     ]
    }
   },

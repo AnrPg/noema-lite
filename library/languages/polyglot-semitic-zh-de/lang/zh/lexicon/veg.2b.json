@@ -105,7 +105,7 @@
      "src": "character composition; Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Arabic بَامِيَة (bāmiya), Hebrew בָּמְיָה (bamya), Turkish bamya and Greek μπάμιες are all the same word for okra."
+     "Arabic بَامِيَة (bāmiya) and Hebrew בָּמְיָה (bamya) are the same word for okra; Chinese 秋葵 ‘autumn mallow’ is a native name."
     ],
     "pitfalls": [
      "秋葵 (okra) is not 葵花 or 向日葵 (sunflower), although in dated Taiwanese Hokkien 秋葵 did mean sunflower (Wiktionary).",
@@ -113,6 +113,13 @@
     ],
     "subtleties": [
      "The slime (黏液) is what thickens stews; dry cooking or acid keeps okra less slimy."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Greek μπάμιες is the same word as Arabic bāmiya."
+     }
     ]
    }
   },
@@ -217,13 +224,20 @@
     },
     "funFacts": [
      "Favism — a dangerous reaction to broad beans in people with G6PD deficiency — is called 蚕豆病 ‘broad-bean disease’ in Chinese.",
-     "Arabic فُول (fūl, as in ful medames), Hebrew פּוֹל (pol) and Greek κουκιά are the same bean."
+     "Arabic فُول (fūl, as in ful medames) and Hebrew פּוֹל (pol) are the same bean."
     ],
     "pitfalls": [
      "蚕 cán (2nd tone) is the silkworm; 蚕豆 ≠ 豌豆 (pea) — though in Southern Wu dialects 蚕豆 does mean the pea (Wiktionary)."
     ],
     "subtleties": [
      "胡 ‘foreign (from the north-west)’ marks old imports: 胡豆, 胡萝卜, 胡椒."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Greek κουκιά are the same bean."
+     }
     ]
    }
   },
@@ -590,7 +604,7 @@
      "src": "character composition; Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English artichoke goes back, via Italian and Spanish (alcachofa), to Arabic الخَرْشُوف (al-kharshūf); Turkish enginar and Greek αγκινάρα are other names for it.",
+     "Arabic الخَرْشُوف (al-kharshūf) gave the plant its name in many languages around the Mediterranean and beyond.",
      "Despite 朝鲜蓟 ‘Korean thistle’, the plant comes from the Mediterranean, not Korea."
     ],
     "pitfalls": [
@@ -598,6 +612,38 @@
     ],
     "subtleties": [
      "雅枝竹 shows how Cantonese borrows by sound: yaa5 zi1 zuk1 ≈ ‘artichoke’."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English artichoke goes back, via Italian, to Arabic al-kharshūf."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "Italian carciofo (northern articiocco) comes from Arabic al-kharshūf."
+     },
+     {
+      "for": "es",
+      "rel": "similar",
+      "text": "Spanish alcachofa keeps the Arabic article al-."
+     },
+     {
+      "for": "pt",
+      "rel": "similar",
+      "text": "Portuguese alcachofra keeps the Arabic article al-."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "French artichaut comes, via Italian, from Arabic al-kharshūf."
+     },
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "Greek αγκινάρα is a name of Greek origin (from κινάρα), not from Arabic."
+     }
     ]
    }
   },
@@ -819,13 +865,50 @@
      "src": "character composition; Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English and Greek name it after Brussels (λαχανάκια Βρυξελλών ‘little cabbages of Brussels’), German after a rose (Rosenkohl), Chinese after a hug."
+     "German names it after a rose (Rosenkohl), Chinese after a hug: 抱子 ‘holding children’ — the little sprouts cling to the stalk."
     ],
     "pitfalls": [
      "Not baby cabbages: it is its own cultivar of the same species (Brassica oleracea)."
     ],
     "subtleties": [
      "甘蓝 is the species name behind many brassicas: 紫甘蓝, 羽衣甘蓝, 球茎甘蓝, 抱子甘蓝."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "different",
+      "text": "English names it after Brussels."
+     },
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "Greek names it after Brussels: λαχανάκια Βρυξελλών."
+     },
+     {
+      "for": "fr",
+      "rel": "different",
+      "text": "French names it after Brussels: chou de Bruxelles."
+     },
+     {
+      "for": "it",
+      "rel": "different",
+      "text": "Italian names it after Brussels: cavolini di Bruxelles."
+     },
+     {
+      "for": "es",
+      "rel": "different",
+      "text": "Spanish names it after Brussels: col de Bruselas."
+     },
+     {
+      "for": "pt",
+      "rel": "different",
+      "text": "Portuguese names it after Brussels: couve-de-bruxelas."
+     },
+     {
+      "for": "ru",
+      "rel": "different",
+      "text": "Russian names it after Brussels: брюссельская капуста."
+     }
     ]
    }
   },
@@ -935,7 +1018,7 @@
      "src": "character composition; Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English chayote comes from Nahuatl chayohtli — the plant is from Mexico.",
+     "The plant is from Mexico; 佛手 ‘Buddha’s hand’ describes the fruit’s folded, finger-like shape.",
      "In Taiwan the young chayote shoots are a popular green called 龙须菜 ‘dragon’s whiskers’."
     ],
     "pitfalls": [
@@ -943,6 +1026,18 @@
     ],
     "subtleties": [
      "The plant is a climbing gourd; one vine produces a huge crop, which keeps it cheap."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English chayote comes, via Spanish, from Nahuatl chayohtli."
+     },
+     {
+      "for": "es",
+      "rel": "similar",
+      "text": "Spanish chayote comes from Nahuatl chayohtli."
+     }
     ]
    }
   },
@@ -1167,13 +1262,20 @@
      "src": "character composition; Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Bath ‘loofahs’ are dried luffa fruits; English loofah comes from Egyptian Arabic لُوف (lūf)."
+     "Bath sponges (丝瓜络) are dried luffa fruits — the net of fibres left inside; Egyptian Arabic لُوف (lūf) gave the plant its European name."
     ],
     "pitfalls": [
      "In Cantonese areas 丝瓜 is the ridged, angled luffa (‘Chinese okra’), and the smooth one is 水瓜 (Wiktionary)."
     ],
     "subtleties": [
      "Eat it young; once fibrous it’s only good for sponges."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English loofah is that Egyptian Arabic word."
+     }
     ]
    }
   },
@@ -1425,13 +1527,20 @@
      "src": "character composition; Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English bok choy and pak choi come from Cantonese 白菜 (baak6 coi3)."
+     "Cantonese 白菜 (baak6 coi3) gave this vegetable its name on menus far beyond China."
     ],
     "pitfalls": [
      "Mandarin 小白菜 = Cantonese 白菜 (bok choy); Mandarin 白菜 = napa cabbage."
     ],
     "subtleties": [
      "上海青 has green stems; the classic 小白菜 has white stems."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English bok choy and pak choi come from Cantonese 白菜 (baak6 coi3)."
+     }
     ]
    }
   },
@@ -1860,13 +1969,20 @@
      "src": "character composition; Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The big white Greek γίγαντες (‘giants’), baked with tomato, are runner beans."
+     "The plant is also grown for its bright scarlet flowers."
     ],
     "pitfalls": [
      "荷包豆 (runner bean) ≠ 荷兰豆 (snow pea) — 荷包 ‘purse’ vs 荷兰 ‘Holland’."
     ],
     "subtleties": [
      "Both the young pods and the dried beans are eaten."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "The big white Greek γίγαντες (‘giants’), baked with tomato, are these beans."
+     }
     ]
    }
   },
@@ -2207,13 +2323,20 @@
      "src": "character composition; Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English ‘butternut’ praises its buttery, nutty flesh; Chinese kept only the butter."
+     "奶油 ‘cream, butter’ praises the smooth, buttery flesh."
     ],
     "pitfalls": [
      "奶油 is cream (butter is usually 黄油) — the name is a loose translation, and there is no dairy in the squash."
     ],
     "subtleties": [
      "A recent import; markets also sell it simply as 南瓜."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English butternut praises its buttery, nutty flesh; Chinese kept only the butter."
+     }
     ]
    }
   },
@@ -2306,7 +2429,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "In the Netherlands nobody calls it ‘Dutch’: the Dutch word is peultje."
+     "The Dutch themselves do not call it a ‘Dutch’ pea: the name only made sense to those who got it from Dutch traders."
     ],
     "pitfalls": [
      "荷兰豆 (snow pea, eaten in the pod) ≠ 豌豆 (shelled peas) ≠ 荷包豆 (runner bean)."

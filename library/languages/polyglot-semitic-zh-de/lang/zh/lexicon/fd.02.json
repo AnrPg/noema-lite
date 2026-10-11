@@ -426,13 +426,25 @@
      "src": "morphemes: 晚上 + 好 (Wiktionary)"
     },
     "funFacts": [
-     "晚 means both ‘evening’ and ‘late’ — like Spanish tarde."
+     "晚 means both ‘evening’ and ‘late’: 晚上 ‘evening’, 晚了 ‘it’s late’."
     ],
     "pitfalls": [
      "晚上好 greets; 晚安 says ‘good night’ when parting or going to bed."
     ],
     "subtleties": [
      "In everyday life 晚上好 can sound formal; friends meeting in the evening say 你好 or just the name."
+    ],
+    "notes": [
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "Like Spanish tarde ‘afternoon; late’, one word covers both."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Like Portuguese tarde ‘afternoon; late’, one word covers both."
+     }
     ]
    },
    "features": {
@@ -521,7 +533,7 @@
      "Pinyin: wǎn’ān — the apostrophe shows where the syllable break is."
     ],
     "subtleties": [
-     "In messages 晚安 often ends a late conversation, like ‘night!’ in English."
+     "In messages 晚安 often ends a late conversation — a short ‘good night!’ before going offline."
     ]
    },
    "features": {
@@ -637,13 +649,35 @@
      "src": "morphemes: 再 + 见 (Wiktionary)"
     },
     "funFacts": [
-     "The same picture as German Auf Wiedersehen, Russian до свидания, Hebrew לְהִתְרָאוֹת and Arabic إِلَى اللِّقَاء: ‘until we see / meet again’."
+     "The same picture as German Auf Wiedersehen, Hebrew לְהִתְרָאוֹת and Arabic إِلَى اللِّقَاء: ‘until we see / meet again’."
     ],
     "pitfalls": [
      "It is just ‘goodbye’ — said even when you will never meet again."
     ],
     "subtleties": [
      "A class says goodbye with 老师再见！, the teacher answers 同学们再见！"
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Russian до свидания ‘until meeting’ is the same picture."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "French au revoir is the same picture."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Italian arrivederci is the same picture."
+     },
+     {
+      "for": "sq",
+      "rel": "same",
+      "text": "Albanian mirupafshim ‘may we see each other well’ is the same picture."
+     }
     ]
    },
    "features": {
@@ -2140,12 +2174,29 @@
      "Whoever says 我请客 ‘I’m inviting’ pays the bill — and friends sometimes argue over who gets to."
     ],
     "pitfalls": [
-     "请 goes before the verb: 请坐 — never at the end like English ‘…, please’.",
+     "请 goes before the verb: 请坐 — never at the end of the request.",
      "For a favour 请 alone can sound stiff; 麻烦你… or 能不能… is more natural."
     ],
     "subtleties": [
      "On its own, 请！ or 您请！ with a gesture means ‘after you / go ahead / help yourself’.",
      "On signs, 请勿 means ‘please do not’: 请勿吸烟 ‘no smoking’."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "‘Sit down, please’ may end with please; 请 cannot: 请坐."
+     },
+     {
+      "for": "fr",
+      "rel": "trap",
+      "text": "s’il vous plaît can close a request; 请 cannot: 请坐."
+     },
+     {
+      "for": "de",
+      "rel": "trap",
+      "text": "bitte can go anywhere (Setzen Sie sich bitte); 请 only before the verb: 请坐."
+     }
     ]
    },
    "features": {

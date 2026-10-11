@@ -118,7 +118,7 @@
     },
     "funFacts": [
      "Simplification merged two characters: 薑 ‘ginger’ and the surname 姜 are both 姜 on the Mainland, but stay distinct in Taiwan and Hong Kong.",
-     "English ginger, German Ingwer, Arabic زَنْجَبِيل (zanjabīl) and Turkish zencefil all go back to one Indic word; Chinese 姜 is unrelated — an inherited Sino-Tibetan word."
+     "German Ingwer and Arabic زَنْجَبِيل (zanjabīl) go back to one Indic word; Chinese 姜 is unrelated — an inherited Sino-Tibetan word."
     ],
     "pitfalls": [
      "姜 has 女 at the bottom; 美 (měi, ‘beautiful’) has 大 — easy to mix up.",
@@ -126,6 +126,13 @@
     ],
     "subtleties": [
      "嫩姜 (young ginger) is mild and often pickled; 老姜 (old ginger) is fibrous and hot — which is what the saying 姜还是老的辣 plays on."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English ginger comes from the same Indic word."
+     }
     ]
    }
   },
@@ -259,7 +266,7 @@
     },
     "funFacts": [
      "In Lu Xun’s story 孔乙己 the scholar Kong Yiji eats 茴香豆 — broad beans cooked with 茴香 spice — and boasts that the 回 of 茴 can be written four ways.",
-     "Greek μάραθο is fennel — and the town of Marathon is named after the fennel that grew there."
+     "Fennel seed (小茴香) is one of the spices of 五香粉, five-spice powder."
     ],
     "pitfalls": [
      "In recipes 茴香 alone can mean star anise (short for 八角茴香) — check whether it is a spice or a vegetable.",
@@ -267,6 +274,13 @@
     ],
     "subtleties": [
      "小茴香 is fennel seed; 大茴香 or 八角 is star anise, a different plant with a similar smell."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Greek μάραθο is fennel — and the town of Marathon is named after the fennel that grew there."
+     }
     ]
    }
   },
@@ -502,7 +516,7 @@
      "src": "character composition; Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English asparagus, German Spargel, Greek σπαράγγι and Russian спаржа all come from Greek ἀσπάραγος.",
+     "German Spargel comes, through Latin, from Greek ἀσπάραγος.",
      "White asparagus is the same plant as green, grown under mounds of soil so it never sees light."
     ],
     "pitfalls": [
@@ -511,6 +525,23 @@
     ],
     "subtleties": [
      "German Spargelzeit (asparagus season, April–June) is often explained in Chinese as 白芦笋季."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "English asparagus comes from the same Greek word."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Greek σπαράγγι is the same word."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Russian спаржа comes from the same Greek word."
+     }
     ]
    }
   },
@@ -624,7 +655,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "In Cyprus taro is κολοκάσι — a name from the plant’s Latin genus Colocasia — and a traditional Cypriot dish.",
+     "Taro is a festival food: at the Mid-Autumn Festival many southern families eat boiled taro.",
      "Bright purple ‘taro’ desserts are often coloured: taro flesh itself is pale with purple flecks."
     ],
     "pitfalls": [
@@ -634,6 +665,13 @@
     ],
     "subtleties": [
      "毛芋头 ‘hairy taro’ are the small side corms; the big central corm is sold for taro paste and cakes."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "In Cyprus taro is κολοκάσι — from the genus name Colocasia — a traditional Cypriot dish."
+     }
     ]
    }
   },
@@ -855,14 +893,31 @@
      "src": "character composition; Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English dandelion comes from French dent de lion ‘lion’s tooth’, and German Löwenzahn says the same — both after the toothed leaves.",
-     "Russian одуванчик comes from дуть ‘to blow’ — the same game as Chinese 吹蒲公英."
+     "German Löwenzahn ‘lion’s tooth’ is named after the toothed leaves; Chinese 蒲公英 is a plant name of its own.",
+     "Children blow the seed heads away: 吹蒲公英."
     ],
     "pitfalls": [
      "英 here is ‘blossom’, not ‘England, English’ (英国, 英语)."
     ],
     "subtleties": [
      "As food it counts as a 野菜 (wild vegetable); in pharmacies it is a common herb of Chinese medicine."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "English dandelion comes from French dent de lion ‘lion’s tooth’."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "French dent-de-lion ‘lion’s tooth’ names the leaves."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Russian одуванчик comes from дуть ‘to blow’ — the same game as 吹蒲公英."
+     }
     ]
    }
   },
@@ -1069,14 +1124,21 @@
      "src": "character composition; Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English chicory and German Zichorie come, via Latin cichorium, from Greek κιχώριον.",
+     "German Zichorie comes, via Latin cichorium, from Greek κιχώριον.",
      "Chicory-root coffee (German Zichorienkaffee) was a common coffee substitute in Germany in hard times."
     ],
     "pitfalls": [
-     "English ‘endive’ and ‘chicory’ swap meanings between British and American usage; in Chinese 菊苣 is chicory/Belgian endive and 苦苣 is curly endive."
+     "In Chinese 菊苣 is chicory / Belgian endive and 苦苣 is curly endive — keep the two apart."
     ],
     "subtleties": [
      "菊 in plant names marks the daisy family: 菊苣, 菊芋, 苦菊."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English ‘endive’ and ‘chicory’ swap meanings between British and American usage; go by the plant: 菊苣 chicory / Belgian endive, 苦苣 curly endive."
+     }
     ]
    }
   },
@@ -1186,13 +1248,20 @@
      "src": "character composition; Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Purslane is γλιστρίδα in Greek and semizotu in Turkish — in both countries a classic summer salad with yogurt."
+     "Purslane grows as a weed in fields and gardens and is eaten as a cold dressed vegetable (凉拌马齿苋)."
     ],
     "pitfalls": [
      "齿 chǐ is 3rd tone: mǎ + chǐ follows tone sandhi in speech (máchǐxiàn), which is why Wiktionary lists both pronunciations."
     ],
     "subtleties": [
      "苋菜 (amaranth greens) is a different vegetable; 马齿苋 is gathered as a 野菜 (wild green) and also sold in markets."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "In Greece γλιστρίδα is a classic summer salad with yogurt."
+     }
     ]
    }
   },
@@ -1297,13 +1366,25 @@
      "src": "character composition; Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Neither from Jerusalem nor an artichoke: the English name is often explained as a corruption of Italian girasole ‘sunflower’; German Topinambur is named after the Tupinambá people of Brazil."
+     "German Topinambur is named after the Tupinambá people of Brazil; Chinese 菊芋 ‘chrysanthemum taro’ describes the flower and the tuber."
     ],
     "pitfalls": [
      "洋姜 is not ginger (姜) at all — the knobbly shape gave it the name."
     ],
     "subtleties": [
      "菊芋 is the botanical and standard name; 洋姜 is what you hear at the market and on pickle jars."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "Neither from Jerusalem nor an artichoke: English ‘Jerusalem artichoke’ is often explained from Italian girasole ‘sunflower’."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "Italian girasole ‘sunflower’ — the plant is a sunflower — and topinambur are both used."
+     }
     ]
    }
   },
@@ -1400,7 +1481,7 @@
      "src": "character composition; Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek τσουκνίδα (nettle) goes into spring pies, τσουκνιδόπιτα; Russian крапива into green soup.",
+     "The young tips lose their sting when cooked.",
      "Nettle fibre was once woven like linen; German Nesseltuch (‘nettle cloth’) still names a plain cotton fabric."
     ],
     "pitfalls": [
@@ -1408,6 +1489,18 @@
     ],
     "subtleties": [
      "Most Chinese speakers know the plant as a stinging weed and from the word 荨麻疹; eating nettles is more of a European habit."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Greek τσουκνίδα goes into spring pies, τσουκνιδόπιτα."
+     },
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "Russian крапива goes into green soup."
+     }
     ]
    }
   },
@@ -1502,17 +1595,24 @@
      }
     ],
     "etymology": {
-     "text": "熊 (‘bear’) + 葱 (‘onion, scallion’): a calque of the species name Allium ursinum, ‘bear’s allium’ — the same image as German Bärlauch and English bear’s garlic.",
+     "text": "熊 (‘bear’) + 葱 (‘onion, scallion’): a calque of the species name Allium ursinum, ‘bear’s allium’ — the same image as German Bärlauch.",
      "src": "character composition; Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German Bärlauch, English bear’s garlic and Chinese 熊葱 all keep the bear of the Latin name."
+     "German Bärlauch and Chinese 熊葱 both keep the bear of the Latin name."
     ],
     "pitfalls": [
      "Wild-garlic leaves look like those of poisonous lily of the valley (铃兰) and autumn crocus — foragers crush a leaf to check for the garlic smell."
     ],
     "subtleties": [
      "Rarely sold in China; the word is met mainly in translations, botany and European recipes."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "English bear’s garlic keeps the bear too."
+     }
     ]
    }
   },
@@ -1605,13 +1705,20 @@
      "src": "character composition; Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Russian пастернак means parsnip — so the poet Boris Pasternak’s surname is ‘Parsnip’; German says Pastinake."
+     "German Pastinake comes from the Latin name pastinaca."
     ],
     "pitfalls": [
      "防风 alone is a Chinese medicinal herb, not the vegetable — keep the 欧."
     ],
     "subtleties": [
      "欧 in plant names marks plants from Europe, as 洋 (‘overseas’) does in 洋葱, 洋姜."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "Russian пастернак means parsnip — so the poet Boris Pasternak’s surname is ‘Parsnip’."
+     }
     ]
    }
   },
@@ -1704,13 +1811,20 @@
      "src": "character composition; Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Russian щавель goes into зелёные щи (green shchi), the summer ‘green borscht’."
+     "The 酸 ‘sour’ of 酸模 names its lemony taste."
     ],
     "pitfalls": [
      "模 is read mó here (as in 模范), not mú (as in 模样)."
     ],
     "subtleties": [
      "The sourness comes from oxalic acid (草酸), so sorrel is eaten in moderation."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "Russian щавель goes into зелёные щи, the summer ‘green shchi’."
+     }
     ]
    }
   },
@@ -1809,13 +1923,20 @@
     },
     "funFacts": [
      "Most ‘wasabi’ outside Japan is horseradish coloured green; real wasabi is 山葵.",
-     "Austrian and Bavarian German Kren is a loan from Slavic — Russian хрен, the same root."
+     "Austrian and Bavarian German Kren is a loan from Slavic."
     ],
     "pitfalls": [
      "辣根 (horseradish) is not 山葵 (wasabi), although tubes of paste are sold under both names."
     ],
     "subtleties": [
      "In Chinese restaurants the green paste is usually called 芥末, even though it is neither mustard nor wasabi."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Russian хрен is that same Slavic word."
+     }
     ]
    }
   },
@@ -1909,13 +2030,20 @@
      "src": "character composition; Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English ‘swede’ is short for ‘Swedish turnip’; in Germany the Steckrübe was the famine food of the ‘turnip winter’ (Steckrübenwinter) of 1916–17."
+     "In Germany the Steckrübe was the famine food of the ‘turnip winter’ (Steckrübenwinter) of 1916–17."
     ],
     "pitfalls": [
      "Not 芜菁 (turnip): a rutabaga is bigger, yellow-fleshed and has a purple top."
     ],
     "subtleties": [
      "Long descriptive names like this are typical for vegetables rarely grown in China."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English ‘swede’ is short for ‘Swedish turnip’."
+     }
     ]
    }
   },
@@ -2251,13 +2379,25 @@
      "src": "character composition; Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English shallot and German Schalotte go back, via Latin, to the city of Ashkelon (Hebrew אַשְׁקְלוֹן) — the plant’s Latin name is Allium ascalonicum."
+     "German Schalotte goes back, via Latin, to the city of Ashkelon (Hebrew אַשְׁקְלוֹן) — the plant’s Latin name is Allium ascalonicum."
     ],
     "pitfalls": [
      "Not 紫洋葱 (red onion): shallots are smaller and grow in clusters of bulbs."
     ],
     "subtleties": [
      "头 keeps its 2nd tone here (hóngcōngtóu), unlike the toneless 头 of 芋头 yùtou."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "English shallot comes from the same Ashkelon."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "French échalote comes from the same Ashkelon."
+     }
     ]
    }
   },
@@ -2369,10 +2509,17 @@
     ],
     "pitfalls": [
      "药 is toneless in 山药: shānyao.",
-     "In American English ‘yam’ often means a sweet potato (红薯) — 山药 is a true yam, a different plant."
+     "山药 is a true yam — not the sweet potato (红薯), a different plant."
     ],
     "subtleties": [
      "In some northern dialects 山药 means sweet potato or potato (Wiktionary); standard Mandarin uses it for the Chinese yam."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "In American English ‘yam’ often means a sweet potato (红薯); 山药 is a true yam."
+     }
     ]
    }
   },
@@ -2481,13 +2628,20 @@
     },
     "funFacts": [
      "Sichuan 榨菜, the 雪里蕻 of Jiangnan and Cantonese-Hakka 梅菜 are all made from varieties of mustard.",
-     "English mustard comes from Latin mustum ‘grape must’, which was mixed with the ground seeds."
+     "The seeds of mustard plants are ground into 芥末, the sharp mustard paste."
     ],
     "pitfalls": [
      "芥 has two readings: jiè (芥末 ‘mustard’, 芥菜) and, colloquially, gài (芥菜 gàicài, 芥蓝 gàilán) — Wiktionary lists both."
     ],
     "subtleties": [
      "芥蓝 (gai lan, ‘Chinese kale’) is a different vegetable despite sharing 芥."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English mustard comes from Latin mustum ‘grape must’, which was mixed with the ground seeds."
+     }
     ]
    }
   },
@@ -2823,7 +2977,7 @@
      "src": "character composition; Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Italian rucola, German Rucola/Rauke, Greek ρόκα, Turkish roka and English rocket all go back to Latin eruca."
+     "German Rucola / Rauke goes back to Latin eruca; Chinese 芝麻菜 ‘sesame vegetable’ is named after its nutty, sesame-like taste."
     ],
     "pitfalls": [
      "麻 is toneless in 芝麻: zhīmacài.",
@@ -2831,6 +2985,23 @@
     ],
     "subtleties": [
      "The leaves get hotter and more peppery as the plant grows older."
+    ],
+    "notes": [
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Italian rucola is the word German borrowed."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Greek ρόκα comes from the same Latin eruca."
+     },
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "English rocket comes from the same Latin eruca."
+     }
     ]
    }
   },
@@ -3182,13 +3353,20 @@
      "src": "character composition; Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Japanese daikon, written 大根 ‘big root’, is the same vegetable."
+     "白萝卜 is a winter staple: 冬吃萝卜夏吃姜 ‘eat radish in winter, ginger in summer’, says a proverb."
     ],
     "pitfalls": [
      "卜 is toneless: báiluóbo."
     ],
     "subtleties": [
      "胡萝卜 (carrot) is the ‘foreign radish’; 白 is what marks the native white one."
+    ],
+    "notes": [
+     {
+      "for": "ja",
+      "rel": "same",
+      "text": "Japanese daikon 大根 ‘big root’ is the same vegetable."
+     }
     ]
    }
   },
@@ -3287,13 +3465,25 @@
      "src": "character composition; Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English ‘cos’ is traditionally traced to the Greek island of Kos; in Greece this long-leaved type is the everyday μαρούλι."
+     "Its long, crisp leaves stay crunchy, which makes it the usual lettuce of salads on Western-style menus."
     ],
     "pitfalls": [
      "油麦菜 (a long-leaved Chinese lettuce eaten cooked) looks similar but is a different variety."
     ],
     "subtleties": [
      "Wiktionary’s first meaning of plain 生菜 is ‘romaine lettuce’; in shops 罗马生菜 makes the variety explicit."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English ‘cos’ is traditionally traced to the Greek island of Kos."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "In Greece this long-leaved type is the everyday μαρούλι."
+     }
     ]
    }
   },
@@ -3384,7 +3574,7 @@
     "synonyms": [],
     "synonymsNone": "No other established name; it is the red variety of 菊苣 (chicory).",
     "etymology": {
-     "text": "红 (‘red’) + 菊苣 (‘chicory’): ‘red chicory’, like Italian radicchio rosso.",
+     "text": "红 (‘red’) + 菊苣 (‘chicory’): ‘red chicory’.",
      "src": "character composition; Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -3395,6 +3585,13 @@
     ],
     "subtleties": [
      "An imported, restaurant vegetable in China; many people meet it only in salad mixes."
+    ],
+    "notes": [
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Like Italian radicchio rosso."
+     }
     ]
    }
   },
@@ -3499,13 +3696,20 @@
      "src": "character composition; Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish also sees it as purple: mor soğan ‘purple onion’, just like Chinese 紫洋葱, while English and German call it red."
+     "Chinese sees it as purple — 紫洋葱 — while German calls it red (rote Zwiebel)."
     ],
     "pitfalls": [
      "紫洋葱 (red onion) vs 紫甘蓝 (red cabbage) — the same 紫, different vegetables."
     ],
     "subtleties": [
      "A descriptive compound rather than a dictionary word: Wiktionary has no page for it, and 红洋葱 is just as normal."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "different",
+      "text": "English calls it red onion; Chinese sees purple: 紫洋葱."
+     }
     ]
    }
   },
@@ -3611,13 +3815,20 @@
      "src": "character composition; Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The English name ‘iceberg’ comes from the heads being shipped across the US packed in ice."
+     "球 ‘ball’ names the tight, round head."
     ],
     "pitfalls": [
      "Not 卷心菜 (cabbage), although both form round heads."
     ],
     "subtleties": [
      "In Chinese cooking iceberg is also blanched or stir-fried, e.g. with oyster sauce, not only eaten raw."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "different",
+      "text": "English ‘iceberg’ comes from the heads being shipped across the US packed in ice."
+     }
     ]
    }
   },
@@ -3716,13 +3927,25 @@
      "src": "character composition; Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English endive goes back through Latin to Greek, and Greek still calls the plant αντίδι."
+     "苦 ‘bitter’ names its pleasantly bitter leaves."
     ],
     "pitfalls": [
      "苦苣菜 (sow thistle, Sonchus) is a different, wild plant despite the similar name."
     ],
     "subtleties": [
      "Curly frisée and broad-leaved escarole are both Cichorium endivia."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Greek still calls the plant αντίδι, the source of ‘endive’."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English endive goes back through Latin to Greek."
+     }
     ]
    }
   }

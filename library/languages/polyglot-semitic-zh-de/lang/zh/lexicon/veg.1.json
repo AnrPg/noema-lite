@@ -345,7 +345,7 @@
      }
     ],
     "etymology": {
-     "text": "番 (‘foreign’, historically the non-Han peoples) + 茄 (‘eggplant’): the ‘foreign eggplant’. Wiktionary compares Thai มะเขือเทศ, also ‘foreign eggplant’.",
+     "text": "番 (‘foreign’, historically the non-Han peoples) + 茄 (‘eggplant’): the ‘foreign eggplant’.",
      "src": "Wiktionary (kaikki.org); character composition"
     },
     "funFacts": [
@@ -1174,7 +1174,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Chinese photographers say 茄子 because ‘qiézi’ makes you smile, like ‘cheese’."
+     "Chinese photographers say 茄子 because ‘qiézi’ pulls the mouth into a smile."
     ],
     "pitfalls": [
      "子 is toneless: qiézi.",
@@ -1183,6 +1183,13 @@
     ],
     "subtleties": [
      "Measure words vary with shape and region: 一个, 一根 or 一条茄子."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "The Chinese counterpart of saying ‘cheese’ for the camera."
+     }
     ]
    }
   },

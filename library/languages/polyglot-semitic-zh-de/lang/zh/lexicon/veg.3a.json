@@ -351,7 +351,7 @@
     },
     "funFacts": [
      "Quinoa is 藜麦 in Chinese — ‘goosefoot grain’ — because it is a Chenopodium like fat hen.",
-     "English ‘goosefoot’ and German Gänsefuß (fat hen is Weißer Gänsefuß) both describe the leaf shape."
+     "German Gänsefuß (fat hen is Weißer Gänsefuß) names the plant after its leaf, shaped like a goose’s foot."
     ],
     "pitfalls": [
      "藜 lí is not 梨 lí (pear) or 黎 lí (dawn; the Li people) — same sound, different characters.",
@@ -359,6 +359,13 @@
     ],
     "subtleties": [
      "The young leaves look dusted with white-grey powder — that is the 灰 ‘grey’ of its everyday names."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "English ‘goosefoot’ uses the same image."
+     }
     ]
    }
   },
@@ -706,8 +713,8 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The ‘Welsh’ in English Welsh onion has nothing to do with Wales: it is usually explained from Old English welisc ‘foreign’.",
-     "Japanese negi (ネギ) is the same species."
+     "Shandong’s 章丘大葱 is famous for plants over a metre tall, with a white shaft as long as an arm.",
+     "In northern cooking 大葱 is eaten raw, dipped in sauce or rolled in a pancake (煎饼卷大葱)."
     ],
     "pitfalls": [
      "In Singapore Hokkien and Teochew, 大葱 means the round onion (洋葱) — Wiktionary.",
@@ -715,6 +722,18 @@
     ],
     "subtleties": [
      "With 大葱 the white shaft (葱白) is the prized part; with 小葱 people mostly use the chopped green (葱花)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "The ‘Welsh’ of English Welsh onion has nothing to do with Wales: it is usually explained from Old English welisc ‘foreign’."
+     },
+     {
+      "for": "ja",
+      "rel": "same",
+      "text": "Japanese 長ネギ naganegi is the same species, used the same way."
+     }
     ]
    }
   },
@@ -825,13 +844,30 @@
     },
     "funFacts": [
      "Chinese rhubarb root travelled the Silk Road as a medicine; Europe imported it long before it started eating the stalks.",
-     "English rhubarb and German Rhabarber come from Medieval Latin rha barbarum, ‘foreign rha’."
+     "German Rhabarber goes back to Medieval Latin rha barbarum, ‘foreign rha’ — the root came from beyond the borders, much of it from China."
     ],
     "pitfalls": [
      "In Chinese, 大黄 first suggests the medicinal root; say 食用大黄 when you mean the sour vegetable."
     ],
     "subtleties": [
      "Botanically a vegetable (a leaf stalk), rhubarb is cooked like fruit, with plenty of sugar."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "English rhubarb comes from the same rha barbarum."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "French rhubarbe comes from the same rha barbarum."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Italian rabarbaro comes from the same rha barbarum."
+     }
     ]
    }
   },
@@ -942,7 +978,7 @@
     },
     "funFacts": [
      "The ‘water chestnuts’ in Chinese takeaway dishes are this corm: it stays crunchy even when cooked.",
-     "English ‘water chestnut’ is also used for 菱角 (water caltrop) — two unrelated plants."
+     "荸荠 and 菱角 (water caltrop) are two unrelated water plants with starchy, nut-like parts — keep their names apart."
     ],
     "pitfalls": [
      "Pronounced bíqi, with a toneless second syllable in standard Mainland speech (Wiktionary also gives bíqí).",
@@ -950,6 +986,13 @@
     ],
     "subtleties": [
      "马蹄 is so common in the south that many Cantonese speakers never say 荸荠."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English ‘water chestnut’ is used for both 荸荠 and 菱角."
+     }
     ]
    }
   },
@@ -1052,7 +1095,7 @@
     },
     "funFacts": [
      "菱形 — ‘caltrop shape’ — is the Chinese word for a rhombus or diamond.",
-     "English ‘caltrop’ is a spiked weapon scattered against horses; the nut’s horns gave the plant its name."
+     "The 角 ‘horn’ of 菱角 is the nut’s pair of sharp, curved horns."
     ],
     "pitfalls": [
      "Standard pinyin is língjiao with a toneless 角 (Wiktionary also gives língjiǎo); 角 alone is jiǎo.",
@@ -1061,6 +1104,13 @@
     ],
     "subtleties": [
      "In Taishanese 菱角 can also mean a spinning top (Wiktionary)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English ‘caltrop’ is a spiked weapon scattered against horses; the nut’s horns gave the plant that name."
+     }
     ]
    }
   },
@@ -1286,17 +1336,29 @@
      }
     ],
     "etymology": {
-     "text": "豆 (‘bean’) + 薯 (‘tuber’): the ‘bean tuber’ — the plant is a legume with bean-like pods, just as English ‘yam bean’ says.",
+     "text": "豆 (‘bean’) + 薯 (‘tuber’): the ‘bean tuber’ — the plant is a legume with bean-like pods.",
      "src": "character composition; Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Jícama comes from Nahuatl xicamatl; Spanish galleons carried it from Mexico to the Philippines, and from there it reached China."
+     "The plant comes from Mexico: Spanish galleons carried it to the Philippines, and from there it reached China."
     ],
     "pitfalls": [
      "地瓜 means jícama in Sichuan and parts of central China, but the sweet potato in the north and in Taiwan."
     ],
     "subtleties": [
      "Briefly cooked it stays crunchy, so it is used like water chestnut in stir-fries."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "English ‘yam bean’ says the same; jicama is the Spanish name, from Nahuatl xicamatl."
+     },
+     {
+      "for": "es",
+      "rel": "similar",
+      "text": "Spanish jícama comes from Nahuatl xicamatl."
+     }
     ]
    }
   },
@@ -1521,7 +1583,7 @@
      "src": "character composition; Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English galangal is thought to go back, through Arabic خَلَنْجَان (khalanjān) and Persian, to Chinese 高良姜 — ‘ginger from Gaoliang’, an old place name in Guangdong."
+     "Arabic خَلَنْجَان (khalanjān), and through it the European names of galangal, are thought to go back via Persian to Chinese 高良姜 — ‘ginger from Gaoliang’, an old place name in Guangdong."
     ],
     "pitfalls": [
      "南姜 is not just ‘southern ginger’: it is a different plant (Alpinia), woody and resinous — don’t swap it 1:1 for 姜.",
@@ -1529,6 +1591,23 @@
     ],
     "subtleties": [
      "南姜 is the kitchen name heard in Guangdong and in Thai recipes; 高良姜 is the name in Chinese medicine."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English galangal is one of those names."
+     },
+     {
+      "for": "de",
+      "rel": "similar",
+      "text": "German Galgant is one of those names."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "French galanga is one of those names."
+     }
     ]
    }
   },
@@ -1758,14 +1837,21 @@
      "src": "character composition"
     },
     "funFacts": [
-     "English ‘glasswort’ comes from its ash, once used to make glass (soda ash).",
+     "Its ash was once burned for soda ash, used to make glass and soap.",
      "In Britain it is called marsh samphire."
     ],
     "pitfalls": [
-     "Not the rock samphire or sea fennel (Crithmum), which English also calls samphire."
+     "Not the rock samphire or sea fennel (Crithmum), 海茴香 — a different plant."
     ],
     "subtleties": [
      "Promoted in China as a 海洋蔬菜 (sea vegetable) that can be grown on salty coastal land."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English ‘samphire’ covers both this plant and rock samphire (海茴香); ‘glasswort’ comes from the glass-making ash."
+     }
     ]
    }
   },
@@ -2185,13 +2271,20 @@
      "src": "character composition"
     },
     "funFacts": [
-     "French crosne is named after the village of Crosne near Paris, where it was first grown in France in the 1880s."
+     "In France it was first grown in the 1880s, in the village of Crosne near Paris, which gave it its name there."
     ],
     "pitfalls": [
      "宝塔菜 is also heard for romanesco (宝塔花菜) — context decides."
     ],
     "subtleties": [
      "The tubers wilt within days of digging, one reason they are mostly sold pickled."
+    ],
+    "notes": [
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "French crosne is named after that village."
+     }
     ]
    }
   },
@@ -2308,7 +2401,7 @@
      "src": "character composition; Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek ἀμάραντος, the source of ‘amaranth’, means ‘unfading’.",
+     "苋菜 is one of China’s oldest greens; the red-leaved kind colours its cooking juice — and the rice it is served on — pink.",
      "The grain amaranth of the Aztecs belongs to the same genus (苋属)."
     ],
     "pitfalls": [
@@ -2316,6 +2409,18 @@
     ],
     "subtleties": [
      "Red, green and two-coloured kinds are sold; the red one stains rice pink, which children love."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Greek αμάραντος ‘unfading’ is the source of the plant’s European name, amaranth."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English amaranth comes from Greek ἀμάραντος ‘unfading’."
+     }
     ]
    }
   },
@@ -2424,13 +2529,20 @@
      "src": "character composition"
     },
     "funFacts": [
-     "English calls it ‘walking onion’: the top-heavy stalk bends over and the bulbs root where they touch the ground."
+     "The top-heavy stalk bends over and the bulbs root where they touch the ground — the plant ‘walks’ across the bed."
     ],
     "pitfalls": [
      "Not a kind of 大葱: it is a hybrid of the Welsh onion (葱) and a shallot-type onion."
     ],
     "subtleties": [
      "A garden curiosity in China (grown here and there, e.g. in Yanbian) rather than a market vegetable."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Hence the English name walking onion."
+     }
     ]
    }
   },
@@ -2538,7 +2650,7 @@
      "src": "character composition; Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English celtuce (celery + lettuce) was coined by an American seed company in the 20th century."
+     "莴笋 is grown for its thick stem, peeled and eaten crisp, raw or stir-fried; its leaves (莴笋叶) are eaten too."
     ],
     "pitfalls": [
      "莴笋 is not a bamboo shoot (竹笋), despite 笋."
@@ -2546,6 +2658,13 @@
     "subtleties": [
      "Leaves are sold separately as 莴笋叶; the leaf lettuce 油麦菜 is a different vegetable.",
      "In some dialects 莴笋 also means lettuce (Wiktionary); in standard Mandarin lettuce is 生菜."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English celtuce (celery + lettuce) was coined by an American seed company in the 20th century."
+     }
     ]
    }
   },
@@ -2648,13 +2767,20 @@
      "src": "character composition; Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "In Korean it is gosari (고사리), essential in bibimbap; in Japanese, warabi."
+     "Bracken fiddleheads are gathered wild in spring and usually blanched or dried before cooking."
     ],
     "pitfalls": [
      "Bracken contains ptaquiloside, a carcinogen: soak and cook it, and eat it in moderation."
     ],
     "subtleties": [
      "Dried fiddleheads (干蕨菜) are soaked before cooking, like other dried mountain greens."
+    ],
+    "notes": [
+     {
+      "for": "ja",
+      "rel": "same",
+      "text": "Japanese warabi 蕨 is the same plant and the same character."
+     }
     ]
    }
   },
@@ -2759,14 +2885,26 @@
     },
     "funFacts": [
      "Tiger nuts were eaten in ancient Egypt and have been found in tombs.",
-     "Spanish horchata de chufa, from Valencia, is made from them."
+     "The tubers taste sweet and nutty and can be pressed into a milky drink."
     ],
     "pitfalls": [
      "莎 is suō here (as in 莎草 ‘sedge’); shā is only for names and transcriptions such as 莎士比亚.",
-     "Not a nut and not a bean, despite English ‘nut’ and Chinese 豆."
+     "Not a bean, despite 豆: it is the tuber of a sedge."
     ],
     "subtleties": [
      "The wild form, yellow nutsedge, is one of the world’s most troublesome weeds."
+    ],
+    "notes": [
+     {
+      "for": "es",
+      "rel": "similar",
+      "text": "Spanish horchata de chufa, from Valencia, is made from these tubers (chufas)."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "Not a nut either, despite the English ‘tiger nut’."
+     }
     ]
    }
   }
@@ -2800,7 +2938,7 @@
   {
    "concept": "veg.samphire",
    "reason": "Rock samphire (sea fennel, Crithmum maritimum) is not eaten in China; there is no everyday word and Wiktionary has none.",
-   "use": "Botanical name 海茴香 (‘sea fennel’). Not to be confused with glasswort, 海蓬子, which English also calls samphire."
+   "use": "Botanical name 海茴香 (‘sea fennel’). Not to be confused with glasswort, 海蓬子."
   },
   {
    "concept": "veg.oca",

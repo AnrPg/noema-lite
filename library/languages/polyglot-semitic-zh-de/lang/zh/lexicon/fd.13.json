@@ -569,7 +569,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Japanese still reads 走る (hashiru) as ‘to run’ — the Classical meaning of 走; modern Mandarin slowed it down to ‘walk’."
+     "走 first meant ‘to run’; modern Mandarin slowed it down to ‘walk’ — the old meaning lives on in 走马观花 ‘look at flowers from a galloping horse’."
     ],
     "pitfalls": [
      "我走了 does not mean ‘I walked’ but ‘I’m leaving’ — 走 is also the everyday ‘to leave’.",
@@ -578,6 +578,13 @@
     "subtleties": [
      "Directions are given with 走: 往前走 ‘go straight on’, 往左走 ‘go left’.",
      "Doubled, 走走 / 走一走 is a relaxed ‘take a little walk’."
+    ],
+    "notes": [
+     {
+      "for": "ja",
+      "rel": "trap",
+      "text": "Japanese 走る hashiru still means ‘to run’ — the Classical meaning; Mandarin 走 is ‘walk’, and ‘run’ is 跑."
+     }
     ]
    },
    "features": {
@@ -730,7 +737,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Like English run, 跑 now also runs programs: 程序在跑 ‘the program is running’ — a meaning borrowed from English."
+     "跑 now also runs programs: 程序在跑 ‘the program is running’ — a meaning borrowed from English."
     ],
     "pitfalls": [
      "Running as a sport is 跑步 (verb + object): 我每天跑步 — a bare *我每天跑 sounds unfinished.",
@@ -1112,10 +1119,17 @@
     ],
     "pitfalls": [
      "开 + vehicle is ‘drive’ (开车, 开出租车) — but a bicycle or a horse is 骑, and riding as a passenger is 坐.",
-     "English ‘open’ and ‘switch on’ are both 开; ‘close’ and ‘switch off’ are both 关."
+     "开 is both ‘open’ and ‘switch on’ (开门, 开灯); 关 is both ‘close’ and ‘switch off’ (关门, 关灯)."
     ],
     "subtleties": [
      "With a plane 开 is ‘to fly (as the pilot)’: 开飞机; 开船 is a boat setting off, or steering it."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English splits open / switch on and close / switch off; Chinese uses 开 and 关 for both."
+     }
     ]
    },
    "features": {
@@ -3519,7 +3533,7 @@
      "src": "morphemes: 飞 + 机 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "German Flugzeug ‘fly-thing’ and Chinese 飞机 ‘fly-machine’ are built the same way; Russian самолёт is a ‘self-flyer’."
+     "German Flugzeug ‘fly-thing’ and Chinese 飞机 ‘fly-machine’ are built the same way."
     ],
     "pitfalls": [
      "‘To fly (somewhere)’ as a passenger is 坐飞机; 飞 alone is what birds and planes do.",
@@ -3527,6 +3541,13 @@
     ],
     "subtleties": [
      "机 ‘machine’ is in many modern words: 手机 ‘phone’, 司机 ‘driver’, 机场 ‘airport’."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "different",
+      "text": "Russian самолёт is a ‘self-flyer’."
+     }
     ]
    }
   },
@@ -3785,11 +3806,11 @@
      }
     ],
     "etymology": {
-     "text": "汽 ‘steam, vapour’ + 车 ‘vehicle’ — first a steam-driven vehicle; in Japanese 汽車 still means a (steam) train.",
+     "text": "汽 ‘steam, vapour’ + 车 ‘vehicle’ — first a steam-driven vehicle.",
      "src": "morphemes: 汽 + 车 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "In Japanese the same characters 汽車 (kisha) mean a train, an older meaning that Mandarin has dropped."
+     "汽车 ‘steam vehicle’ kept its name when cars stopped running on steam."
     ],
     "pitfalls": [
      "汽 is ‘steam, vapour’ (汽水 ‘soda’), not 气 ‘air’ — a common miswriting.",
@@ -3797,6 +3818,13 @@
     ],
     "subtleties": [
      "In speech 车 alone usually does: 你有车吗？ ‘do you have a car?’."
+    ],
+    "notes": [
+     {
+      "for": "ja",
+      "rel": "trap",
+      "text": "Japanese 汽車 kisha is a (steam) train — an older meaning Mandarin has dropped; a car is 汽车 in Chinese, 自動車 in Japanese."
+     }
     ]
    }
   },
@@ -3955,7 +3983,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "If the Tocharian theory is right, 车 is a distant cousin of Greek κύκλος ‘wheel, circle’ and English wheel."
+     "If the Tocharian theory is right, 车 came with the horse and chariot from Indo-European speakers of the steppe."
     ],
     "pitfalls": [
      "车 is any vehicle: 坐车 can be the bus, a taxi or a car — the context tells.",
@@ -3963,6 +3991,18 @@
     ],
     "subtleties": [
      "In compounds 车 names the vehicles: 火车, 汽车, 自行车, 出租车, 公交车."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "If so, 车 is a distant cousin of Greek κύκλος ‘wheel, circle’."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "If so, 车 is a distant cousin of English wheel."
+     }
     ]
    }
   },
@@ -4364,13 +4404,20 @@
      "src": "morphemes: 走 + 路 (Wiktionary (kaikki.org) character entries)"
     },
     "funFacts": [
-     "German zu Fuß, Greek με τα πόδια and Turkish yürüyerek all name the foot or the walking; Chinese simply puts the verb 走路 before the main verb: 走路去."
+     "German zu Fuß names the foot; Chinese simply puts the verb 走路 ‘walk’ before the main verb: 走路去."
     ],
     "pitfalls": [
      "‘On foot’ is not a phrase with 脚 ‘foot’ — it is 走路 + 去 / 来: 我走路去."
     ],
     "subtleties": [
      "With a duration: 走路十分钟 ‘ten minutes’ walk’; with a place: 走路去公园."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "Greek με τα πόδια names the feet; Chinese puts the verb 走路 before the main verb: 走路去."
+     }
     ]
    },
    "features": {
