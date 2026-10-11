@@ -474,7 +474,8 @@
   /* ---------- the learner ---------- */
   function newLearner(C, settings = {}) {
     const L = { course: C.id, settings: { languages: settings.languages || C.languages.slice(), depth: { ...(C.data.course.defaults?.depth || {}), ...(settings.depth || {}) },
-      batch: settings.batch || C.data.course.defaults?.batch || 12, ...(settings.knows ? { knows: settings.knows } : {}), ...(settings.aiNotes ? { aiNotes: true } : {}) }, langs: {} };
+      batch: settings.batch || C.data.course.defaults?.batch || 12, ...(settings.knows ? { knows: settings.knows } : {}), ...(settings.aiNotes ? { aiNotes: true } : {}),
+      ...(settings.speaker ? { speaker: settings.speaker } : {}) }, langs: {} };   // D19: the learner's choice of the explanation locale
     for (const code of C.languages) L.langs[code] = { items: {}, fns: {}, checks: {} };
     return L;
   }

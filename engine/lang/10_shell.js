@@ -116,6 +116,7 @@ function viewLabel(r) {
 function render() {
   if (!UI.C || !shown()) return;
   const r = route(); UI.view = r.name;
+  if (!document.querySelector('.lx-session')) applyExplanationLocale();   // D19: the native language may have changed (Me › Language and appearance, another device)
   if (FR.on) document.documentElement.lang = UI.C.explainLang;
   topbar();
   const m = $('.lx-main'); m.innerHTML = ''; window.scrollTo(0, 0);

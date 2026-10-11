@@ -118,3 +118,7 @@ img.lx-temoji{width:56px;height:56px}img.lx-bigemoji{width:132px;height:100px}im
 /* phones: long words (German compounds, glosses) wrap instead of pushing the page sideways */
 .lx-stage{overflow-wrap:anywhere;min-width:0}
 .lx-sortbins{grid-template-columns:repeat(auto-fit,minmax(min(170px,100%),1fr))}
+/* D19: the native-language picker (⚙️ settings, the home's question once) — never wider than a phone */
+.lx-native{display:flex;flex-direction:column;gap:6px;max-width:100%}.lx-native select,.lx-native input{max-width:100%;min-width:0}
+.lx-nativeother{display:flex;flex-wrap:wrap;gap:6px}.lx-nativeother[hidden]{display:none}
+.lx-native-ask{display:flex;flex-direction:column;gap:6px;align-items:flex-start;overflow-wrap:anywhere}

@@ -113,13 +113,13 @@ function nativePicker(onPick = () => { }) {
     cur && !known ? h('option', { value: '=', selected: true }, cur.name || cur.code) : null,
     h('option', { value: '*' }, LT('lang.native.other')));
   const typeNames = Object.fromEntries((UI.C.data.typology?.types || []).map(t => [t.id, t.name]));
-  const other = h('div', { class: 'lx-nativeother row', hidden: true });
+  const other = h('div', { class: 'lx-nativeother', hidden: true });
   const name = h('input', { class: 'noema-input', 'aria-label': LT('lang.native.name'), placeholder: LT('lang.native.name') });
   const type = h('select', { 'aria-label': LT('lang.native.type') }, ...N.TYPES.map(t => h('option', { value: t }, typeNames[t] || t)));
   const fams = [...new Set((W?.languages || []).map(l => l.family))].sort(cmp);
   const fam = h('select', { 'aria-label': LT('lang.native.family') }, h('option', { value: '' }, LT('lang.native.familyUnknown')), ...fams.map(f => h('option', { value: f }, f)));
   const put = v => { putAccSettings({ native: v || undefined }); nativeMemo = null; onPick(nativeL()); };
-  other.append(name, type, fam, h('button', { class: 'btn small primary', onclick: () => { const n = name.value.trim(); if (!n) return name.focus(); put({ name: n, type: type.value, ...(fam.value ? { family: fam.value } : {}) }); } }, LT('lang.native.save')));
+  other.append(name, type, fam, h('button', { class: 'btn small', onclick: () => { const n = name.value.trim(); if (!n) return name.focus(); put({ name: n, type: type.value, ...(fam.value ? { family: fam.value } : {}) }); } }, LT('lang.native.save')));
   sel.onchange = () => { other.hidden = sel.value !== '*'; if (sel.value === '*') return name.focus(); if (sel.value !== '=') put(sel.value ? { code: sel.value } : null); };
   box.append(sel, other);
   return box;
