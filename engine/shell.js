@@ -435,7 +435,7 @@ window.NoemaShell = (() => {
       own ? { label: L('shareSubject'), sub: L('shareSubjectSub'), icon: 'share', run: () => N().share(s) } : null,
       { label: L('exportPackage'), sub: L('exportPackageSub'), icon: 'download', run: async () => { try { const p = await N().loadSubject(acc(), s.id); await N().exportPackage(acc(), p); } catch (e) { toast(e.message, 4000); } } }], { label: L('moreFor', { title: s.title }) });
     return h('div', { class: 'ns-itemwrap noema-chipwrap' }, h('button', { class: 'ns-item ns-subj', 'data-subject': s.id, style: { animationDelay: i * 25 + 'ms' }, title: s.description || '', onclick: () => open(s.id) }, icoTxt(s.emoji || (s.title || '?').trim()[0].toUpperCase(), (i % 4) + 1, 'emo'),
-      h('span', { class: 't' }, h('b', {}, s.title, s.updateAvailable ? h('span', { class: 'ns-upd', title: L('updateWaiting') }, ' ', svg('spark')) : ''), h('small', {}, [s.counts?.chapters ? L('nChapters', { n: s.counts.chapters }) : null, s.sharedBy ? L('sharedBy', { who: s.sharedBy }) : s.publicOwner ? L('from', { who: s.publicOwner }) : s.origin === 'private' ? L('privateSubj') : null].filter(Boolean).join(' · '))),
+      h('span', { class: 't' }, h('b', {}, s.title, N().langTag?.(s) || '', s.updateAvailable ? h('span', { class: 'ns-upd', title: L('updateWaiting') }, ' ', svg('spark')) : ''), h('small', {}, [s.counts?.chapters ? L('nChapters', { n: s.counts.chapters }) : null, s.sharedBy ? L('sharedBy', { who: s.sharedBy }) : s.publicOwner ? L('from', { who: s.publicOwner }) : s.origin === 'private' ? L('privateSubj') : null].filter(Boolean).join(' · '))),
       pct ? pill(pct + '%', 2) : chev()), menu);
   }
   const subjectPct = s => { const st = stateOf(s.id); if (!st || !s.counts?.exercises) return 0; return Math.min(1, Object.values(st.res || {}).filter(r => r.ok > 0).length / s.counts.exercises); };
@@ -488,7 +488,7 @@ window.NoemaShell = (() => {
         ico('map', (i % 4) + 1), h('span', { class: 't' }, h('b', {}, x.title), h('small', {}, [x.description, L('rmPubMeta', { who: x.owner_name || '…', n: x.steps, p: x.prepared })].filter(Boolean).join(' · '))),
         h('span', { class: 'ns-pill' }, L(x.have ? (x.own ? 'rmYours' : 'rmJoined') : 'rmJoin')))
       : h('button', { class: 'ns-item ns-pubitem', 'data-id': x.id, onclick: e => busy(e.currentTarget, () => studyIt(x, s => open(s.id))) },
-        icoTxt(x.emoji || (x.title || '?').slice(0, 1), (i % 4) + 1, x.emoji ? 'emo' : 'txt'), h('span', { class: 't' }, h('b', {}, x.title), x.description ? h('small', {}, x.description) : null), chev());
+        icoTxt(x.emoji || (x.title || '?').slice(0, 1), (i % 4) + 1, x.emoji ? 'emo' : 'txt'), h('span', { class: 't' }, h('b', {}, x.title, N().langTag?.(x) || ''), x.description ? h('small', {}, x.description) : null), chev());
     if (!items.length) { q.hidden = true; body.replaceChildren(h('div', { class: 'ns-panel ns-empty' }, faceEl(undefined, 'breathe'), h('p', {}, L(rm ? 'noPublicRoadmaps' : 'noPublicSubjects')))); return; }
     const DOMS = CU()?.DOMAINS || ['other'];
     const sections = h('div', { class: 'ns-doms' }, ...DOMS.map(d => [d, items.filter(x => (x.domain || 'other') === d)]).filter(([, l]) => l.length).map(([d, l]) =>

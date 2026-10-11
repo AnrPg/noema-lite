@@ -203,8 +203,8 @@ function homeView() {
   const mantra = SUBJ.hero?.mantra || SUBJ.description;
   // the frame: one plain header (a step of which Roadmap · the title · one line · one bar); the classic screens keep the emoji and the step banner
   const top = X ? [st ? h('button', { class: 'ns-kicker subjkicker', title: SL('openMap'), onclick: () => Noema.curriculumMap(Noema.node.id, Noema.node.node) }, SL('stationOf', { title: st.info.c.title || st.info.c.goal }), ' ›') : null,
-      h('h1', { class: 'herohead' }, SUBJ.title), mantra ? h('p', { class: 'mantra', html: fmt(mantra) }) : null]
-    : [h('div', { class: 'subjtop' }, h('span', { class: 'subjemo' }, SUBJ.emoji || '📘'), h('div', { class: 'grow' }, h('h1', { class: 'herohead' }, SUBJ.title), mantra ? h('p', { class: 'mantra', html: fmt(mantra) }) : null))];
+      h('h1', { class: 'herohead' }, SUBJ.title, Noema.langTag?.(SUBJ) || ''), mantra ? h('p', { class: 'mantra', html: fmt(mantra) }) : null]
+    : [h('div', { class: 'subjtop' }, h('span', { class: 'subjemo' }, SUBJ.emoji || '📘'), h('div', { class: 'grow' }, h('h1', { class: 'herohead' }, SUBJ.title, Noema.langTag?.(SUBJ) || ''), mantra ? h('p', { class: 'mantra', html: fmt(mantra) }) : null))];
   const barW = st ? Math.round(Math.min(st.read, st.solved / NoemaCurriculum.PASS) * 100) : Math.round((p.sr + p.ex) * 50);
   const barTip = st ? (st.done ? SL('stationDone') : SL('stationMastery', { ...pr, p: Math.round(NoemaCurriculum.PASS * 100) })) : SL('subjProgress', pr);
   const v = view(

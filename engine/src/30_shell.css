@@ -40,6 +40,8 @@
 .noema-chip .e{font-size:20px}
 .noema-chip .p{font-size:11.5px;padding:1px 7px;border-radius:999px;background:var(--ok-bg);color:var(--ok)}
 .noema-chip .o{font-size:13px}
+/* the language of a pack's content when it is not the UI language (docs/i18n.md §10) */
+.noema-langtag{display:inline-block;font-size:10.5px;font-weight:750;letter-spacing:.04em;line-height:1;padding:3px 5px;border-radius:5px;border:1px solid currentColor;opacity:.62;vertical-align:middle;margin-inline-start:6px;flex:none}
 .noema-ovfoot{margin-top:18px;padding-top:14px;border-top:1px solid var(--line)}
 .subjchip{display:inline-flex;align-items:center;gap:7px;padding:7px 13px;border-radius:999px;background:var(--c-bg);color:var(--ink);font-weight:750;font-size:14px;border:1.5px solid color-mix(in srgb,var(--c) 40%,transparent);transition:transform .15s;max-width:240px}
 .subjchip:hover{transform:translateY(-1px)}

@@ -181,6 +181,56 @@
     todayXP() { return this.get().xpDay[today()] || 0; },
   };
 
+  /* ---------------- subject packs in several languages (docs/i18n.md §10, pack schema v2) ----------------
+     The UI language never changes a pack's content by itself; a pack MAY offer its metadata (subject.i18n) and its chapters
+     (pack.translations) in other languages, and the learner sees them when the pack has their UI locale (or its language:
+     es-ES → es; never English for someone else). Otherwise: the pack's own texts, with a small tag naming their language. */
+  const uiLoc = () => window.NoemaI18n ? NoemaI18n.lang(uiPref()) : 'en';
+  const langKey = t => { const x = String(t || 'en'); return /^zh-/i.test(x) ? x.toLowerCase() : x.split('-')[0].toLowerCase(); };
+  /** The one of `offered` to show (a key of subject.i18n / pack.translations), or null: the pack's own texts. */
+  function packLocale(offered, own) {
+    const ui = uiLoc(), keys = (offered || []).filter(x => typeof x === 'string');
+    if (!keys.length) return null;
+    const want = (window.NoemaI18n?.chain ? NoemaI18n.chain(ui) : [ui]).filter(t => t !== 'en' || langKey(ui) === 'en');
+    for (const t of want) {
+      if (t.toLowerCase() === String(own || 'en').toLowerCase()) return null;
+      const k = keys.find(x => x.toLowerCase() === t.toLowerCase()); if (k) return k;
+    }
+    return null;
+  }
+  /** A subject (pack.subject, a registry entry, packmeta) as the learner sees it: title, description, hero, tutor… in their
+      language when the pack offers it (metaLocale), and the language its content is shown in (contentLang). */
+  function localizedSubject(s) {
+    if (!s || typeof s !== 'object') return s;
+    const own = s.language || 'en', out = { ...s, contentLang: packLocale(s.contentLocales, own) || own };
+    const loc = s.i18n && typeof s.i18n === 'object' ? packLocale(Object.keys(s.i18n), own) : null;
+    if (!loc) return out;
+    const L = s.i18n[loc] || {}; out.metaLocale = loc;
+    for (const k of ['title', 'appTitle', 'description', 'searchExamples']) if (typeof L[k] === 'string' && L[k].trim()) out[k] = L[k];
+    for (const k of ['hero', 'tutor']) if (L[k] && typeof L[k] === 'object') out[k] = { ...(s[k] || {}), ...L[k] };
+    return out;
+  }
+  /** The chapters to study: the pack's translation for loc (same ids, so progress is shared), chapter by chapter; a chapter
+      without a translation — or whose sections differ — stays in the pack's language; items a translation lacks (a later
+      patch) are kept from the source, so nothing is lost. */
+  function translatedChapters(pack, loc) {
+    const tr = new Map((pack.translations?.[loc]?.chapters || []).map(c => [c.id, c]));
+    const ids = (x, k) => (x[k] || []).map(y => y.id).join();
+    return (pack.chapters || []).map(c => {
+      const t = tr.get(c.id); if (!t || ids(t, 'sections') !== ids(c, 'sections')) return c;
+      const fill = k => { const have = new Set((t[k] || []).map(x => x.id)); return [...(t[k] || []), ...(c[k] || []).filter(x => x.id && !have.has(x.id))]; };
+      return { ...t, src: c.src ?? t.src, exercises: fill('exercises'), flashcards: fill('flashcards'), debug: fill('debug'), pitfalls: t.pitfalls || c.pitfalls || [] };
+    });
+  }
+  /** A small tag with the language of a subject's content, when it is not the UI language (null otherwise). */
+  function langTag(s) {
+    if (!s || s.kind === 'language' || String(s.id || '').startsWith('lang:')) return null;
+    const code = s.contentLang || s.language || 'en';
+    if (langKey(code) === langKey(uiLoc())) return null;
+    const name = window.NoemaI18n ? NoemaI18n.fmt.langName(code) : code, label = tr('packs.langTag', { lang: name });
+    return el('span', { class: 'noema-langtag', title: label, 'aria-label': label, 'data-lang': code }, String(code).split('-')[0].toUpperCase());
+  }
+
   /* ---------------- subjects visible to an account ---------------- */
   async function importedPacks(acc) { try { return (await IDB.entries('packs', acc + '|')).map(([k, v]) => v); } catch (e) { return []; } }
   async function subjectsFor(acc) {
@@ -198,12 +248,13 @@
       const newer = !!(extra.version && extra.version !== (p.version || null));
       list.push(newer
         ? { ...m, ...extra, origin: 'imported', counts: extra.counts || p.counts || countPack(p), version: extra.version, updateAvailable: true }
-        : { ...extra, ...m, origin: 'imported', counts: p.counts || countPack(p), version: p.version, sharedBy: extra.sharedBy, publicFrom: extra.publicFrom, publicOwner: extra.publicOwner,
+        : { ...extra, ...m, origin: 'imported', counts: p.counts || countPack(p), version: p.version, sharedBy: extra.sharedBy, publicFrom: extra.publicFrom, publicOwner: extra.publicOwner, contentLocales: Object.keys(p.translations || {}),
           chapters: (p.chapters || []).map(c => ({ id: c.id, num: c.num, sections: (c.sections || []).length })) });
     });
     // imported packs known from synced metadata (e.g. imported on another device, stored in the cloud)
     ls.keys(`${P}${acc}:a:packmeta:`).forEach(k => { const m = jget(k, null); if (m && !list.some(s => s.id === m.id)) list.push({ ...m, origin: 'imported' }); });
-    return list.map(s => ({ ...s, ...subjOverride(acc, s.id), hidden: hidden.has(s.id) }));
+    return list.map(s => { const L = localizedSubject(s), mine = L.metaLocale ? { _origTitle: L.title, _origDesc: L.description || '' } : {};   // ✏️: saving the translated words unchanged keeps no override
+      return { ...L, ...mine, ...subjOverride(acc, s.id), hidden: hidden.has(s.id) }; });
   }
   /* ---------- your own name / description for any subject (synced; the pack itself is not changed) ---------- */
   function subjOverride(acc, id) { const o = jget(KV.accountKey('subjoverride:' + id, acc), null); if (!o) return {}; const r = {}; if (o.title) r.title = o.title; if (o.description != null) r.description = o.description; if (o.emoji) r.emoji = o.emoji; return r; }
@@ -230,7 +281,7 @@
       const done = () => { close(); onChange?.(); };
       box.append(brandHead(`${s.emoji || '📘'} ${tr('loader.edit.title', { title: s.title })}`, s.origin === 'library' ? tr('loader.edit.libraryNote') : tr('loader.edit.ownNote')),
         el('div', { class: 'noema-form' }, el('label', { class: 'cg-field' }, tr('loader.edit.name'), title), el('label', { class: 'cg-field' }, tr('loader.edit.desc'), desc),
-          el('div', { class: 'row' }, el('button', { class: 'btn primary', onclick: () => { const t = title.value.trim(); if (!t) { title.focus(); return; } setSubjOverride(acc, s.id, { title: t === (s._origTitle || '') ? '' : t, description: desc.value.trim() }); toastL('✔ ' + tr('loader.edit.saved')); done(); } }, tr('loader.edit.save')),
+          el('div', { class: 'row' }, el('button', { class: 'btn primary', onclick: () => { const t = title.value.trim(); if (!t) { title.focus(); return; } setSubjOverride(acc, s.id, { title: t === (s._origTitle || '') ? '' : t, description: s._origDesc != null && desc.value.trim() === s._origDesc ? '' : desc.value.trim() }); toastL('✔ ' + tr('loader.edit.saved')); done(); } }, tr('loader.edit.save')),
             jget(KV.accountKey('subjoverride:' + s.id, acc), null) ? el('button', { class: 'btn small ghost', onclick: () => { KV.del(KV.accountKey('subjoverride:' + s.id, acc)); toastL('↩ ' + tr('loader.edit.restored')); done(); } }, '↩ ' + tr('loader.edit.restore')) : null)),
         el('div', { class: 'nx-sec' }, el('h4', {}, '🙈 ' + tr('loader.edit.removeTitle')), el('p', { class: 'tiny' }, tr('loader.edit.removeText')),
           el('button', { class: 'btn small', onclick: () => { setHidden(acc, s.id, true); toastL('🙈 ' + tr('loader.edit.hidden')); done(); } }, '🙈 ' + tr('loader.edit.hide'))),
@@ -445,7 +496,7 @@
         list.append(el('div', { class: 'noema-group' }, el('div', { class: 'noema-grouphead' }, `${g.emoji || ''} ${g.title}`),
           el('div', { class: 'noema-chips' }, ...items.map(s => { n++; const pct = Math.round(subjectProgress(acc, s) * 100);
             const chip = el('button', { class: 'noema-chip' + (s.id === KV.subj ? ' on' : ''), style: { animationDelay: n * 35 + 'ms' }, title: s.description || '', onclick: () => onPick(s) },
-              el('span', { class: 'e' }, s.emoji || '📘'), el('span', { class: 't' }, s.title), s.origin !== 'library' ? el('span', { class: 'o', title: s.sharedBy ? tr('loader.chip.sharedBy', { name: s.sharedBy }) : s.publicOwner ? tr('loader.chip.from', { name: s.publicOwner }) : '' }, s.origin === 'private' ? '🔒' : s.sharedBy ? '🤝' : s.publicFrom ? '🌍' : '📥') : null, s.updateAvailable ? el('span', { class: 'o', title: tr('loader.chip.update') }, '✨') : null, pct ? el('span', { class: 'p' }, fmtPct(pct)) : null);
+              el('span', { class: 'e' }, s.emoji || '📘'), el('span', { class: 't' }, s.title), langTag(s), s.origin !== 'library' ? el('span', { class: 'o', title: s.sharedBy ? tr('loader.chip.sharedBy', { name: s.sharedBy }) : s.publicOwner ? tr('loader.chip.from', { name: s.publicOwner }) : '' }, s.origin === 'private' ? '🔒' : s.sharedBy ? '🤝' : s.publicFrom ? '🌍' : '📥') : null, s.updateAvailable ? el('span', { class: 'o', title: tr('loader.chip.update') }, '✨') : null, pct ? el('span', { class: 'p' }, fmtPct(pct)) : null);
             const edit = el('button', { class: 'noema-editbtn', title: tr('loader.chip.editTip'), 'aria-label': tr('loader.chip.editLabel', { title: s.title }), onclick: e => { e.stopPropagation(); editSubject(acc, s, { onChange }); } }, '✏️');
             const toMap = window.NoemaCurMap?.attachDialog ? el('button', { class: 'noema-mapbtn', title: tr('pick.putOnMap', null, acc), 'aria-label': `${tr('pick.putOnMap', null, acc)} ${s.title}`, onclick: e => { e.stopPropagation(); NoemaCurMap.attachDialog(acc, { subject: s, onDone: onChange }); } }, '🧭') : null;
             return el('span', { class: 'noema-chipwrap' }, chip, edit, s.origin === 'library' ? null : el('button', { class: 'noema-sharebtn', title: tr('loader.edit.share'), 'aria-label': tr('loader.chip.shareLabel', { title: s.title }), onclick: e => { e.stopPropagation(); shareDialog(acc, s); } }, '🔗'), toMap); }))));
@@ -729,6 +780,7 @@
       restricted: Object.values(media).filter(m => m.restricted).length,
       language: p.subject.language || '', version: p.version || null, sizeKB: Math.round(JSON.stringify(p).length / 1024),
       ownerName: (getAccount(acc) || {}).name || '', math: !!p.subject.features?.math, code: !!p.subject.features?.code,
+      ...(p.subject.i18n ? { i18n: p.subject.i18n } : {}), ...(p.translations ? { contentLocales: Object.keys(p.translations) } : {}),   // docs/i18n.md §10
     };
   }
   /** A readable info card: stats, chapters (numbered list), sources (with links). */
@@ -761,7 +813,7 @@
     if (p.sharedFiles) { Object.defineProperty(p, '_sharedFiles', { value: p.sharedFiles, enumerable: false, configurable: true }); delete p.sharedFiles; }   // fetched by the caller (attachShared), not stored
     await embedWebPictures(acc, p);
     await IDB.put('packs', acc + '|' + p.subject.id, p);
-    KV.set(KV.accountKey('packmeta:' + p.subject.id, acc), JSON.stringify({ ...p.subject, counts: p.counts, version: p.version || null, ...extra }));
+    KV.set(KV.accountKey('packmeta:' + p.subject.id, acc), JSON.stringify({ ...p.subject, counts: p.counts, version: p.version || null, ...(p.translations ? { contentLocales: Object.keys(p.translations) } : {}), ...extra }));
     if (isCloudAcc(acc)) await NoemaCloud.uploadPack(p).catch(e => console.warn(e));
     window.NoemaCurriculum?.Edit?.refreshAssigned?.(acc, p.subject.id, p);   // 📦 a new version of a subject that teaches steps: those steps follow it
     return { ...p.subject, origin: 'imported', counts: p.counts, ...extra };
@@ -837,8 +889,9 @@
     let pub = [];
     try { if (window.NoemaCloud && CFG.supabaseUrl) pub = (await NoemaCloud.listPublic()) || []; } catch (e) { console.warn('[explore]', e.message); }
     const mine = new Map((await subjectsFor(acc)).map(s => [s.id, s]));
-    const lib = (REG.subjects || []).filter(s => !s.owner).map(s => ({ kind: 'library', id: s.id, title: s.title, emoji: s.emoji, description: s.description, language: s.language, counts: s.counts, meta: { counts: s.counts, chapters: s.chapters, sources: s.sources, language: s.language } }));
-    const users = pub.map(r => ({ kind: 'public', id: r.subject_id, owner: r.owner, owner_name: r.owner_name, title: r.title, emoji: r.emoji, description: r.description, language: r.language, counts: r.meta?.counts || {}, meta: r.meta || {}, updated_at: r.updated_at }));
+    const lib = (REG.subjects || []).filter(s => !s.owner).map(localizedSubject).map(s => ({ kind: 'library', id: s.id, title: s.title, emoji: s.emoji, description: s.description, language: s.language, contentLang: s.contentLang, counts: s.counts, meta: { counts: s.counts, chapters: s.chapters, sources: s.sources, language: s.language } }));
+    const users = pub.map(r => { const L = localizedSubject({ title: r.title, description: r.description, language: r.language || undefined, i18n: r.meta?.i18n, contentLocales: r.meta?.contentLocales });
+      return { kind: 'public', id: r.subject_id, owner: r.owner, owner_name: r.owner_name, title: L.title, emoji: r.emoji, description: L.description, language: r.language, contentLang: L.contentLang, counts: r.meta?.counts || {}, meta: r.meta || {}, updated_at: r.updated_at }; });
     const all = [...lib, ...users].map(s => ({ ...s, domain: window.NoemaCurriculum?.domainOf ? NoemaCurriculum.domainOf({ group: s.group || s.meta?.group || (REG.subjects || []).find(x => x.id === s.id)?.group, title: s.title, description: s.description }) : 'other' }));
     const study = async (s, choose) => {
       if (s.kind === 'library') return choose(s);
@@ -896,7 +949,7 @@
             onpointermove: e => { if (startXY && Math.hypot(e.clientX - startXY[0], e.clientY - startXY[1]) > 10) clearTimeout(pressT); },
             onpointerup: () => clearTimeout(pressT), onpointercancel: () => clearTimeout(pressT),
             oncontextmenu: e => { if (touch || held) e.preventDefault(); } },
-            el('span', { class: 'nx-emo' }, s.emoji || '📘'), el('b', {}, s.title));
+            el('span', { class: 'nx-emo' }, s.emoji || '📘'), el('b', {}, s.title), langTag(s));
           grid.append(card);
         });
       };
@@ -1432,7 +1485,7 @@
     editSubject(s, o) { return editSubject(Noema.account.id, s, o); }, deleteSubject(s) { return deleteSubject(Noema.account.id, s); }, setHidden(id, h) { return setHidden(Noema.account.id, id, h); },
     toast: toastL, getPackById: (acc, id) => getPack(acc, { id, origin: 'imported' }),
     curricula() { if (SHELL() && NoemaShell.mounted) return NoemaShell.go('#/learn'); return window.NoemaCurMap?.library(Noema.account.id); },
-    curriculumMap(cid, focus) { if (SHELL() && NoemaShell.mounted) return NoemaShell.go('#/map/' + encodeURIComponent(cid) + (focus ? '/' + encodeURIComponent(focus) : '')); return window.NoemaCurMap?.map(Noema.account.id, cid, { focus }); }, explore() { return explore(Noema.account.id); }, publicSubjects() { return publicSubjects(Noema.account.id); }, plain: { text: t => plainOn() ? plainText(t) : t, tree: plainTree, watch: plainWatch }, infoCard, packInfo,
+    curriculumMap(cid, focus) { if (SHELL() && NoemaShell.mounted) return NoemaShell.go('#/map/' + encodeURIComponent(cid) + (focus ? '/' + encodeURIComponent(focus) : '')); return window.NoemaCurMap?.map(Noema.account.id, cid, { focus }); }, explore() { return explore(Noema.account.id); }, publicSubjects() { return publicSubjects(Noema.account.id); }, plain: { text: t => plainOn() ? plainText(t) : t, tree: plainTree, watch: plainWatch }, infoCard, packInfo, langTag, localizedSubject,
     removeLocalAccount(id) { const rm = jget(P + 'accounts:removed', []); rm.push(id); jset(P + 'accounts:removed', rm); jset(P + 'accounts', jget(P + 'accounts', []).filter(a => a.id !== id)); },
     wipeAccountData(id) { ls.keys(`${P}${id}:`).forEach(k => ls.del(k)); },
     setCurrent(acc, subj) { jset(P + 'current', { acc, subj }); },
@@ -1524,10 +1577,12 @@
     }
     let pack;
     try { pack = await getPack(acc.id, meta); } catch (e) { if (SHELL() && NoemaShell.mounted) { document.body.classList.remove('noema-booting'); document.getElementById('noema-splash')?.remove(); NoemaShell.noEngine(errMsg(e)); return; } document.body.append(el('div', { class: 'empty' }, el('div', { class: 'e' }, '⚠️'), el('p', {}, errMsg(e)), el('button', { class: 'btn', onclick: () => Noema.switchTo(acc.id, null) }, tr('loader.chooseAnother')))); return; }
-    Noema.pack = pack; Noema.subject = Object.assign({ tutor: {}, hero: {}, features: {} }, pack.subject, subjOverride(acc.id, pack.subject.id));
+    const own = pack.subject.language || 'en', contentLoc = packLocale(Object.keys(pack.translations || {}), own);   // docs/i18n.md §10
+    Noema.pack = pack; Noema.subject = Object.assign({ tutor: {}, hero: {}, features: {} }, localizedSubject({ ...pack.subject, contentLocales: Object.keys(pack.translations || {}) }), subjOverride(acc.id, pack.subject.id));
+    if (contentLoc) Object.assign(Noema.subject, { language: contentLoc, sourceLanguage: own });   // the content (and the tutor's replies) in the learner's language
     Noema.subjectMeta = meta;   // where it comes from (origin: library, private, shared, public…), for the subject's ⋮
     Noema.node = stepOf(acc.id, meta, pack);   // a curriculum step? (made for it, or 📦 attached to it)
-    window.COURSE = pack.chapters; window.SOURCES = pack.sources || { sources: [], chapters: {}, patches: {} };
+    window.COURSE = contentLoc ? translatedChapters(pack, contentLoc) : pack.chapters; window.SOURCES = pack.sources || { sources: [], chapters: {}, patches: {} };
     if (!background) document.title = `${Noema.subject.title} · ${CFG.appName}`;
     if (!SHELL() || !NoemaShell.mounted) document.documentElement.lang = Noema.subject.language || 'en';   // correct capitals, hyphenation and fonts for the subject's language (e.g. Greek without accents in CAPS); in the frame each route sets it
     if (background) Noema.backgroundEngine = true;
