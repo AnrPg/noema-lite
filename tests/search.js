@@ -59,7 +59,7 @@ const ready = async page => { await wait(600); return until(() => page.evaluate(
   await openGroup(page, 'theory');
   ok((await page.evaluate(() => location.hash)).includes('t=theory') && await page.$$eval('.ns-srout .ns-sr', l => l.length && l.every(x => x.dataset.ty === 'theory' || x.closest('.ns-srexact'))), 'a kind chip filters the results; the address keeps it');
   ok(await page.$eval('.ns-srfilters', f => !f.hidden && f.textContent.includes('Not read yet')), 'filters: status (unread, unsolved, wrong)');
-  ok(await page.evaluate(() => /leafing through every page/.test(NoemaSearch.words.en.indexing) && /ξεφυλλίζω/.test(NoemaSearch.words.el.indexing)), 'while the app is read for the first time, a friendly line says what is happening');
+  ok(await page.evaluate(async () => { await NoemaI18n.load('el'); const c = NoemaI18n.catalogs; return /leafing through every page/.test(c.en.m['sh.sr_indexing']) && /ξεφυλλίζω/.test(c.el.m['sh.sr_indexing'] || (c.el.d || {})['sh.sr_indexing']); }), 'while the app is read for the first time, a friendly line says what is happening');
   await page.goto(url + '#/search?q=squared%20velocity'); await page.reload(); await ready(page); await until(() => page.$('.ns-srexact'), 8000);
   ok(await page.$('.ns-srexact .ns-sr[data-ty="trap"]'), 'an exact title goes on top: the trap “Squared velocity”');
   await page.screenshot({ path: SHOTS + '/sr_b_page.png', fullPage: true });

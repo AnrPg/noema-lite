@@ -406,5 +406,5 @@ window.NoemaSearch = (() => {
   /* ---------- warm the index a little after start, when the learner has searched on this device before ---------- */
   addEventListener('load', () => setTimeout(() => { try { if (acc() && jget(`noema1:${acc()}:meta:searchUsed`, 0) && S()?.mounted) { const I = index(); I.load().then(() => I.refresh()); } } catch (e) { } }, 8000));
 
-  return { quick, page, run, parse, pageHash, hereNow, collections, round, after, goStep, index, sources, openRec, words: T };
+  return { quick, page, run, parse, pageHash, hereNow, collections, round, after, goStep, index, sources, openRec };
 })();
