@@ -218,8 +218,10 @@
     if (w.graph) parts.push('build its map');
     if (w.graph || w.toPlan.length) parts.push('plan the chapters of its steps');
     if (w.steps.length) parts.push(`prepare ${Math.min(count, w.steps.length) > 1 ? `the next ${Math.min(count, w.steps.length)} queued steps, one after the other` : 'the next queued step'}`);
-    return `Use the noema-lite connector to work on my noema-lite curriculum “${c.title || c.goal}” (id ${c.id}): ${parts.join(', then ') || 'see what is left to do'}.\nCall noema_curriculum_task with curriculum_id "${c.id}" and follow what it returns; after each accepted answer or saved step call it again — ${count > 1 ? `stop after ${count} prepared steps or` : 'stop after one prepared step or'} when it says there is nothing left. Do not ask me questions — choose sensible defaults.`;
+    return `Use the noema-lite connector to work on my noema-lite curriculum “${c.title || c.goal}” (id ${c.id}): ${parts.join(', then ') || 'see what is left to do'}.\nCall noema_curriculum_task with curriculum_id "${c.id}" and follow what it returns; after each accepted answer or saved step call it again — ${count > 1 ? `stop after ${count} prepared steps or` : 'stop after one prepared step or'} when it says there is nothing left. Do not ask me questions — choose sensible defaults.${talkIn(c)}`;
   }
+  /** The language the learner reads Claude's messages in (engine/llm.js replyLang), when it is not English: the curriculum keeps its own. */
+  const talkIn = c => { const r = L()?.replyLang?.(); return !r || /^en\b/.test(r.code) ? '' : ` Write your messages to me in ${r.name}${r.address ? ` (${r.address})` : ''}; the curriculum itself stays in ${LANGN(c)}.`; };
   /* i18n-ignore-end */
 
   /* ======================= in the app: the inbox, pasted answers, step bundles and packages ======================= */
