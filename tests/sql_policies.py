@@ -47,7 +47,7 @@ alter default privileges in schema public grant all on tables to anon, authentic
     psql(sql); psql(sql)
     ok(True, 'cloud/supabase.sql runs, and runs again (idempotent)')
     tables = psql("select tablename from pg_tables where schemaname='public' and tablename like 'noema_%' and rowsecurity order by 1")
-    ok(tables == ['noema_conversations', 'noema_curricula_shared', 'noema_curriculum_members', 'noema_curriculum_steps', 'noema_kv', 'noema_profiles', 'noema_public_packs', 'noema_shares', 'noema_snapshots'], 'nine noema_ tables, all with row-level security: ' + ', '.join(tables))
+    ok(tables == ['noema_conversations', 'noema_curricula_shared', 'noema_curriculum_members', 'noema_curriculum_steps', 'noema_kv', 'noema_profiles', 'noema_public_packs', 'noema_public_profiles', 'noema_shares', 'noema_snapshots'], 'ten noema_ tables, all with row-level security: ' + ', '.join(tables))
     A, B, C = (str(uuid.uuid4()) for _ in range(3)); EA, EB, EC = 'anna@example.com', 'bob@example.com', 'carl@example.com'
     psql(f"insert into auth.users values ('{A}','{EA}'),('{B}','{EB}'),('{C}','{EC}')")
     # own data
@@ -63,6 +63,13 @@ alter default privileges in schema public grant all on tables to anon, authentic
     ok(psql("select title from noema_public_packs", role='anon') == ['Heart anatomy'], 'public packs are listed for everybody, even signed-out visitors')
     ok(psql("update noema_public_packs set title='hacked' where subject_id='heart-anatomy' returning 1", B, EB) == [] and psql("select title from noema_public_packs", A, EA) == ['Heart anatomy'], 'only the owner can change a public pack')
     ok(psql(f"insert into noema_public_packs (owner, subject_id, title) values ('{A}', 'fake', 'x')", B, EB, expect_error=True), 'nobody can publish in someone else’s name')
+    # the page others see (§11): private until published, written only by its owner, a picture only as data:image/…
+    psql("insert into noema_public_profiles (display_name, bio, show, card) values ('Anna', 'Hearts.', '{\"progress\":true}', '{\"progress\":{\"level\":2}}')", A, EA)
+    ok(psql("select bio from noema_public_profiles", A, EA) == ['Hearts.'] and psql("select bio from noema_public_profiles", B, EB) == [] and psql("select bio from noema_public_profiles", role='anon') == [], 'a page is private until published: only its owner reads it')
+    psql("update noema_public_profiles set published = true", A, EA)
+    ok(psql("select display_name from noema_public_profiles", role='anon') == ['Anna'] and psql("select card->'progress'->>'level' from noema_public_profiles", B, EB) == ['2'], 'published: everybody reads it, signed-out visitors too')
+    ok(psql("update noema_public_profiles set bio='hacked' returning 1", B, EB) == [] and psql(f"insert into noema_public_profiles (owner, bio) values ('{A}', 'x')", B, EB, expect_error=True), 'nobody else can change it or write one in its owner’s name')
+    ok(psql("update noema_public_profiles set avatar = 'data:text/html;base64,PHNjcmlwdD4='", A, EA, expect_error=True) and not psql("update noema_public_profiles set avatar = 'data:image/jpeg;base64,/9j/4AAQ' returning 1", A, EA) == [], 'the picture is only ever an image (data:image/jpeg|png|webp)')
     ok(psql(f"insert into storage.objects (bucket_id, name) values ('noema-public', '{A}/heart-anatomy.json') returning 1", A, EA) == ['1'], 'owner uploads the public pack file into their folder')
     ok(psql(f"insert into storage.objects (bucket_id, name) values ('noema-public', '{A}/evil.json')", B, EB, expect_error=True), 'others cannot upload into that folder')
     # shares

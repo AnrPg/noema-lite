@@ -2,7 +2,7 @@
    Enforces per-user isolation like the RLS policies in cloud/supabase.sql. Also serves a static folder. */
 const http = require('http'), fs = require('fs'), path = require('path'), crypto = require('crypto');
 function start({ port = 54321, staticDir = null, configOverride = null, maxObject = Infinity } = {}) {   // maxObject: like Supabase's per-file upload limit
-  const users = {}, tokens = {}, kv = {}, snaps = [], profiles = {}, files = {}, signed = {}, pubFiles = {}, shrFiles = {}, pubPacks = [], shares = []; let snapId = 1;
+  const users = {}, tokens = {}, kv = {}, snaps = [], profiles = {}, files = {}, signed = {}, pubFiles = {}, shrFiles = {}, pubPacks = [], shares = [], pages = {}; let snapId = 1;
   const json = (res, code, obj, extra = {}) => { res.writeHead(code, Object.assign({ 'Content-Type': 'application/json' }, cors, extra)); res.end(obj === undefined ? '' : JSON.stringify(obj)); };
   const cors = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'authorization,apikey,content-type,prefer,x-upsert', 'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE,OPTIONS' };
   const session = u => { const at = crypto.randomUUID(), rt = crypto.randomUUID(); tokens[at] = u.id; tokens['r:' + rt] = u.id; return { access_token: at, refresh_token: rt, expires_in: 3600, token_type: 'bearer', user: { id: u.id, email: u.email, user_metadata: u.meta } }; };
@@ -103,6 +103,13 @@ function start({ port = 54321, staticDir = null, configOverride = null, maxObjec
       sharedCurricula(req, res, p, u, uid, data, buf); if (res.headersSent) return;
       // ---- anonymous reads: public packs + public bucket
       if (p === '/rest/v1/noema_public_packs' && req.method === 'GET') { const o = q('owner'); return json(res, 200, pubPacks.filter(r => !o || r.owner === o).slice().sort((a, b) => a.updated_at < b.updated_at ? 1 : -1)); }
+      // ---- the page others see (cloud/supabase.sql §11): readable by all once published, by its owner always; written by its owner
+      if (p === '/rest/v1/noema_public_profiles') {
+        if (req.method === 'GET') { const o = q('owner'); return json(res, 200, Object.values(pages).filter(r => (r.published || r.owner === uid) && (!o || r.owner === o))); }
+        if (!uid) return json(res, 401, { message: 'JWT required' });
+        if (req.method === 'POST') { for (const r of data) { if (r.owner !== uid || (r.avatar && !/^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+/=]+$/.test(r.avatar)) || (r.bio || '').length > 600) return json(res, 403, { message: 'new row violates row-level security policy' }); pages[uid] = Object.assign({ published: false, show: {}, card: {} }, pages[uid] || {}, r); } return json(res, 201); }
+        if (req.method === 'DELETE') { delete pages[uid]; return json(res, 204); }
+      }
       let pm;
       if ((pm = p.match(/^\/storage\/v1\/object\/public\/noema-public\/(.+)$/))) { const k = decodeURIComponent(pm[1]); if (!pubFiles[k]) return json(res, 404, { message: 'not found' }); res.writeHead(200, Object.assign({ 'Content-Type': pubFiles[k].type || 'application/octet-stream' }, cors)); return res.end(pubFiles[k].data); }
       if (p.startsWith('/rest/v1/') || p.startsWith('/storage/v1/')) { if (!uid) return json(res, 401, { message: 'JWT required' }); }
@@ -210,7 +217,7 @@ function start({ port = 54321, staticDir = null, configOverride = null, maxObjec
       json(res, 404, { message: 'not found ' + p });
     });
   });
-  server.log = []; server.state = { users, kv, snaps, files, profiles, convs: {}, authz: {}, consents: [], callbacks: [], pubFiles, shrFiles, pubPacks, shares, curs, mems, steps, curFiles, stepWrites: 0 };
+  server.log = []; server.state = { users, kv, snaps, files, profiles, convs: {}, authz: {}, consents: [], callbacks: [], pubFiles, shrFiles, pubPacks, shares, pages, curs, mems, steps, curFiles, stepWrites: 0 };
   return new Promise(r => server.listen(port, () => r(server)));
 }
 module.exports = { start };

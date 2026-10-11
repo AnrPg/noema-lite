@@ -155,6 +155,19 @@ async function signUp(browser, email, name) {
   ok(!srv.state.pubPacks.some(r => r.subject_id === 'heart-test') && !Object.keys(srv.state.pubFiles).some(k => k.startsWith(`${anna}/heart-test`)), 'withdrawing a public subject removes its public files too');
   await A.p.click('.noema-ovbox button:has-text("Close") >> nth=-1').catch(() => { });
 
+  console.log('— the page others see (Me ▾ › Me): private until published');
+  { const pic = 'data:image/jpeg;base64,' + Buffer.from('not really a jpeg').toString('base64');
+    await A.p.evaluate(pic => NoemaCloud.saveMyPage({ published: false, display_name: 'Anna', bio: 'Hearts and lungs.', avatar: pic, show: { progress: true }, card: { progress: { level: 3, xp: 420, streak: 2, chapters: 5 } } }), pic);
+    const anna2 = Object.values(srv.state.users).find(u => u.email === 'anna@example.com').id;
+    ok(srv.state.pages[anna2] && !srv.state.pages[anna2].published && (await A.p.evaluate(() => NoemaCloud.myPage())).bio === 'Hearts and lungs.', 'saved in the cloud, private: only Anna reads it');
+    ok(await B.p.evaluate(id => NoemaCloud.publicPage(id), anna2) === null, 'Bob cannot see Anna’s page before she publishes it');
+    await A.p.evaluate(pic => NoemaCloud.saveMyPage({ published: true, display_name: 'Anna', bio: 'Hearts and lungs.', avatar: pic, show: { progress: true }, card: { progress: { level: 3, xp: 420, streak: 2, chapters: 5 } } }), pic);
+    const seen = await B.p.evaluate(id => NoemaCloud.publicPage(id), anna2);
+    ok(seen && seen.published && seen.display_name === 'Anna' && seen.card.progress.level === 3 && seen.avatar === pic, 'published: Bob sees her name, words, picture and the parts she switched on');
+    ok(await B.p.evaluate(async () => { try { await NoemaCloud.saveMyPage({ published: true, avatar: 'data:text/html;base64,PHNjcmlwdD4=' }); return false; } catch (e) { return true; } }), 'only a picture (data:image/…) is accepted as the page’s picture');
+    await A.p.evaluate(() => NoemaCloud.saveMyPage({ published: false, display_name: 'Anna' }));
+    ok(await B.p.evaluate(id => NoemaCloud.publicPage(id), anna2) === null, 'made private again: gone for Bob'); }
+
   console.log('— 🩺 self-test');
   await B.p.evaluate(() => openAccountMenu('cloud')); await wait(600);
   await B.p.click('summary:has-text("Check the cloud connection")'); await B.p.click('button:has-text("Run the check")'); await wait(2500);
