@@ -208,10 +208,12 @@ window.NoemaLLM = (() => {
     try { endo = new Intl.DisplayNames([tag], { type: 'language' }).of(tag) || ''; } catch (e) { }
     return endo && endo !== en ? `${en} (${endo})` : en;
   }
-  /** → { code, auto, name, address }. pref: the chatLang setting ('' = automatic); without it, the account's settings are read. */
-  function replyLang(acc, pref) {
+  /** → { code, auto, name, address }. pref: the chatLang setting ('' = automatic); without it, the settings of the account (acc, else the open one) are read.
+      uiLocale: the UI language (default: NoemaI18n.locale). */
+  function replyLang(acc, pref, uiLocale) {
+    if (pref == null && !acc) { try { acc = window.Noema?.account?.id || JSON.parse(localStorage.getItem('noema1:current') || '{}').acc; } catch (e) { } }   // the open account
     const set = (pref != null ? pref : acc ? settingsOf(acc).chatLang : '') || '';
-    const ui = window.NoemaI18n?.locale || 'en', code = set || (/^(en-XA|ar-XB)$/.test(ui) ? 'en' : ui);
+    const ui = uiLocale || window.NoemaI18n?.locale || 'en', code = set || (/^(en-XA|ar-XB)$/.test(ui) ? 'en' : ui);
     return { code, auto: !set, name: langLabel(code), address: ADDRESS[baseOf(code)] || '' };
   }
   const sameLang = (a, b) => baseOf(a) === baseOf(b);

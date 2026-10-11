@@ -65,7 +65,7 @@ const ACC_VIEWS = {
       h('div', { class: 'field' }, h('label', {}, tE('engine.acc.geminiModel')), sel,
         h('div', { class: 'row' },
           h('button', { class: 'btn small', onclick: async () => { S.settings.apiKey = key.value.trim(); gstat.textContent = tE('engine.acc.detecting'); try { const ms = await detectModels(); sel.innerHTML = ''; ms.forEach(m => sel.append(h('option', { value: m, selected: m === S.settings.model }, m))); gstat.textContent = tE('engine.acc.foundModels', { n: ms.length, model: S.settings.model }); } catch (e) { gstat.textContent = '⚠️ ' + errText(e); } } }, '🔍 ' + tE('engine.acc.detectModels')),
-          h('button', { class: 'btn small', onclick: async () => { S.settings.apiKey = key.value.trim(); S.settings.model = sel.value; save(); gstat.textContent = tE('engine.acc.testing'); try { const t = await gemini({ contents: [{ role: 'user', parts: [{ text: 'Reply with exactly: Brick is ready 🦉' }] }], temperature: 0 }); gstat.textContent = '✅ ' + t.trim().slice(0, 80); } catch (e) { gstat.textContent = '⚠️ ' + errText(e); } } }, '🧪 ' + tE('engine.acc.test'))),   // i18n-ignore (a prompt)
+          h('button', { class: 'btn small', onclick: async () => { S.settings.apiKey = key.value.trim(); S.settings.model = sel.value; save(); gstat.textContent = tE('engine.acc.testing'); try { const t = await gemini({ contents: [{ role: 'user', parts: [{ text: 'Reply with exactly: ' + tE('engine.acc.testReply') }] }], temperature: 0 }); gstat.textContent = '✅ ' + t.trim().slice(0, 80); } catch (e) { gstat.textContent = '⚠️ ' + errText(e); } } }, '🧪 ' + tE('engine.acc.test'))),   // i18n-ignore (a prompt)
         gstat));
     // — Claude (optional): the API key for ✨ Create with Claude and curricula; never synced
     const ckey = h('input', { type: 'password', value: CL ? CL.Key.get(acc) : '', placeholder: 'sk-ant-…', autocomplete: 'off', spellcheck: 'false', 'aria-label': tE('engine.acc.claudeKey') });   // i18n-ignore (the shape of a key)
@@ -117,7 +117,7 @@ const ACC_VIEWS = {
     body.append(
       accSection('🤖', tE('engine.acc.secGemini'), { status: { ok: !!S.settings.apiKey, text: S.settings.apiKey ? tE('engine.acc.keySet') : tE('engine.acc.noKey') }, open: !S.settings.apiKey, body: geminiBox }),
       accSection('✨', tE('engine.acc.secClaude'), { status: { ok: true, text: hasClaude ? tE('engine.acc.claudeOnDevice') : tE('engine.acc.claudeAppNoKey') }, info: tE('engine.acc.secClaudeInfo'), body: claude }),
-      accSection('🗣️', tE('engine.acc.chatLang'), { status: { ok: true, text: chatLang() ? uiLangName(chatLang()) : tE('engine.acc.asCourse') }, body: langBox }),
+      accSection('🗣️', tE('engine.acc.chatLang'), { status: { ok: true, text: chatLang() ? uiLangName(chatLang()) : tE('engine.acc.chatLangAuto', { lang: uiLangName(uiLang()) }) }, body: langBox }),
       opts.only === 'ai' ? null : accSection('🎨', tE('engine.acc.secDisplay'), { open: !!S.settings.apiKey, body: display }),
       opts.only === 'ai' ? null : accSection('📘', tE('engine.acc.secSubject', { title: SUBJ.title }), { body: subject }),
       h('div', { class: 'row', style: { justifyContent: 'flex-end', marginTop: '16px' } },
