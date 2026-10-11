@@ -52,7 +52,7 @@ function applyExplanationLocale() {
   const swap = fac => {
     const kv = UI.L ? N.toKV(UI.C, UI.L) : null;
     UI.facade = fac ? { ...fac, locale: fac.locale || loc } : null; UI.C = buildCourse(UI.data);
-    if (kv) UI.L = N.fromKV(UI.C, kv);
+    if (kv) { const st = UI.L.settings; UI.L = N.fromKV(UI.C, kv); UI.L.settings = st; }   // every setting kept as it is (fromKV keeps only the known ones)
     if (UI.profMap) N.addProfiles(UI.C, facadeProfMap(UI.profMap));
     nativeMemo = null;
   };
