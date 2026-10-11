@@ -46,7 +46,7 @@
 .lx-readtext .lx-reader{font-size:18px}
 .lx-tutorrow{margin:8px 0;flex-wrap:wrap}
 /* the tutor drawer */
-.lx-tutor{position:fixed;top:0;right:0;bottom:0;width:min(440px,100vw);box-sizing:border-box;z-index:40;display:flex;flex-direction:column;gap:8px;padding:12px;background:var(--bg,#fff);border-left:1px solid var(--line);box-shadow:-8px 0 30px rgba(0,0,0,.15)}
+.lx-tutor{position:fixed;top:0;inset-inline-end:0;bottom:0;width:min(440px,100vw);box-sizing:border-box;z-index:40;display:flex;flex-direction:column;gap:8px;padding:12px;background:var(--bg,#fff);border-inline-start:1px solid var(--line);box-shadow:-8px 0 30px rgba(0,0,0,.15)}
 .lx-thead{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.lx-thead .spacer{flex:1}
 .lx-tctx{max-width:100%;overflow:hidden;text-overflow:ellipsis}
 .lx-tlang{max-width:150px;padding:4px 6px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:inherit}
@@ -61,5 +61,5 @@
 .lx-tcomp{display:flex;gap:6px;align-items:flex-end}.lx-tin{flex:1;min-width:0;resize:none;padding:8px 10px;border-radius:12px;border:1.5px solid var(--line);background:var(--card);color:inherit;font:inherit}
 @media (max-width:640px){
   .lx-lanegrid{grid-template-columns:1fr}.lx-prompt.lx-digits{font-size:38px}.lx-src{font-size:22px}.lx-reader{font-size:19px;padding:10px 12px}
-  .lx-tutor{width:100vw;border-left:0}
+  .lx-tutor{width:100vw;border-inline-start:0}
 }
