@@ -132,11 +132,18 @@
      "Freud's “Ego” is das Ich in the German original: Das Ich und das Es (“The Ego and the Id”, 1923)."
     ],
     "pitfalls": [
-     "ich is written lower-case inside a sentence – unlike English “I”.",
+     "ich is written lower-case inside a sentence; only the polite Sie, Ihnen and Ihr take a capital.",
      "Pick the case: ich (subject), mich (direct object: Er sieht mich), mir (indirect object or after a dative preposition: mit mir)."
     ],
     "subtleties": [
      "“It's me” is Ich bin's / Ich bin es – the verb agrees with ich, not with es."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "Unlike English I, ich has no capital letter inside a sentence: Kann ich kommen?"
+     }
     ]
    }
   },
@@ -257,7 +264,7 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German du, duo, dū, from Old High German dū (akin to Old Saxon thū and English thou), from Proto-West Germanic *þū, from Proto-Germanic *þū, from Proto-Indo-European *túh₂.",
+     "text": "From Middle High German du, duo, dū, from Old High German dū, from Proto-West Germanic *þū, from Proto-Germanic *þū, from Proto-Indo-European *túh₂.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -271,6 +278,13 @@
     "subtleties": [
      "In letters and e-mails du/dich/dir may be capitalized (Du, Dich, Dir) as a sign of respect; both spellings are correct.",
      "Many companies, start-ups and online services address everyone with du; IKEA in Germany famously does."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "du is related to English thou."
+     }
     ]
    }
   },
@@ -672,7 +686,7 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German siu, si, from Old High German siu, si, from Proto-West Germanic *si(j)u, *sī, from Proto-Germanic *sī. Cognate with Gothic 𐍃𐌹 (si).",
+     "text": "From Middle High German siu, si, from Old High German siu, si, from Proto-West Germanic *si(j)u, *sī, from Proto-Germanic *sī.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -779,7 +793,7 @@
     "synonyms": [],
     "synonymsNone": "No synonym; in colloquial speech man can replace wir (Man geht jetzt. = We're going now).",
     "etymology": {
-     "text": "From Middle High German wir, from Old High German wir, from Proto-West Germanic *wiʀ, from Proto-Germanic *wīz, from Proto-Indo-European *wéy. Compare Dutch wij, English we, Danish vi.",
+     "text": "From Middle High German wir, from Old High German wir, from Proto-West Germanic *wiʀ, from Proto-Germanic *wīz, from Proto-Indo-European *wéy.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -790,6 +804,13 @@
     ],
     "subtleties": [
      "bei uns means “at our home” or “in our country/region”, depending on context."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "wir is related to English we."
+     }
     ]
    }
   },
@@ -1127,11 +1148,11 @@
     ],
     "antonyms": [],
     "etymology": {
-     "text": "Inherited from Middle High German sīn, from Old High German sīn, from Proto-West Germanic *sīn, an analogical infinitive within the suppletive paradigm of “to be” built on Proto-Indo-European *h₁es- (“to be, exist”); it replaced the older infinitive wesan (*wesaną “to be, remain”), and forms from *beuną (“to be, exist, become”) also enter the paradigm. Cognate with Dutch zijn.",
+     "text": "Inherited from Middle High German sīn, from Old High German sīn, from Proto-West Germanic *sīn, an analogical infinitive within the suppletive paradigm of “to be” built on Proto-Indo-European *h₁es- (“to be, exist”); it replaced the older infinitive wesan (*wesaną “to be, remain”), and forms from *beuną (“to be, exist, become”) also enter the paradigm.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The paradigm mixes old roots: ist/sind (like Latin est, sunt), bin/bist (like English be), war/gewesen (from old wesan, like English was)."
+     "The paradigm mixes three old roots: ist / sind (Indo-European *h₁es-), bin / bist (*bʰuH-, “become”) and war / gewesen (old wesan, “to remain”)."
     ],
     "pitfalls": [
      "Feelings of cold, heat or sickness use the dative: Mir ist kalt / Mir ist schlecht. Ich bin kalt means “I am cold-hearted”.",
@@ -1140,6 +1161,33 @@
     ],
     "subtleties": [
      "sein is also the possessive “his”/“its” (sein Buch) – a different word with the same spelling."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "bin and bist share a root with English be, and war with was."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "ist and sind share their root with est and sont."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "ist and sind share their root with è and sono."
+     },
+     {
+      "for": "es",
+      "rel": "similar",
+      "text": "ist and sind share their root with es and son."
+     },
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "ist is related to есть."
+     }
     ]
    }
   },
@@ -1240,7 +1288,7 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German unde, from Old High German unti, from Proto-Germanic *andi, *anþi, from Proto-Indo-European *h₂énti. Compare Dutch en, English and.",
+     "text": "From Middle High German unde, from Old High German unti, from Proto-Germanic *andi, *anþi, from Proto-Indo-European *h₂énti.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -1251,6 +1299,13 @@
     ],
     "subtleties": [
      "No comma before und in a simple list (Tomaten, Gurken und Zwiebeln); between two full main clauses the comma is optional."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "und is related to English and."
+     }
     ]
    },
    "features": {
@@ -1386,7 +1441,7 @@
     "synonyms": [],
     "synonymsNone": "A personal pronoun has no synonym; only its case forms change (es, es, ihm).",
     "etymology": {
-     "text": "From Middle High German ëȥ, from Old High German iȥ, from Proto-Germanic *it (“it”). Compare English it, which instead descends from Proto-Germanic *hit (“it”). Cognate with Yiddish עס (es).",
+     "text": "From Middle High German ëȥ, from Old High German iȥ, from Proto-Germanic *it (“it”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -1400,6 +1455,13 @@
     "subtleties": [
      "In speech es often shrinks to ’s: Wie geht’s?, Gibt’s Kaffee?",
      "For a girl (das Mädchen) grammar says es, but in everyday speech people often switch to sie once the girl is known by name."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "es corresponds to English it, which goes back to an older form with h- (hit)."
+     }
     ]
    }
   },
@@ -1531,11 +1593,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German ir, from Old High German ir, from Proto-West Germanic *jiʀ, from Proto-Germanic *jīz. Cognate with Low German ji, jie, Yiddish איר (ir), Dutch jij, gij, je, Middle Dutch ir, English ye, Gothic 𐌾𐌿𐍃 (jūs).",
+     "text": "From Middle High German ir, from Old High German ir, from Proto-West Germanic *jiʀ, from Proto-Germanic *jīz.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "ihr is related to English ye (as in “O ye of little faith”).",
+     "ihr is the old plural “you” of the Germanic languages: Old High German ir.",
      "Bavarian and Austrian dialects say es and enk for ihr and euch – forms that go back to an old dual (“you two”)."
     ],
     "pitfalls": [
@@ -1544,6 +1606,13 @@
     ],
     "subtleties": [
      "ihr is only for people you would each address with du. A group of adults you say Sie to is addressed with Sie: Wie geht es Ihnen?"
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "ihr is related to English ye (as in “O ye of little faith”)."
+     }
     ]
    }
   },
@@ -1937,7 +2006,7 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German vrouwe, from Old High German frouwa (“mistress”), from Proto-West Germanic *frauwjā, from Proto-Germanic *frawjǭ, a feminine form of *frawjô (“lord”). Cognate with Old Saxon frūa, Old Norse freyja and frú (hence Icelandic frú and Norwegian frue).",
+     "text": "From Middle High German vrouwe, from Old High German frouwa (“mistress”), from Proto-West Germanic *frauwjā, from Proto-Germanic *frawjǭ, a feminine form of *frawjô (“lord”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -2148,11 +2217,11 @@
      }
     ],
     "etymology": {
-     "text": "Fixed nominalisation of Middle High German jung (“young”), from Old High German jung (“young”). Its recognition as the normal standard word for “boy” is based on Central and Low German usage and fully asserted itself only in the 20th century (compare Knabe). The common plural Jungs (Jungens) is also from Low German. Cognate with English young.",
+     "text": "Fixed nominalisation of Middle High German jung (“young”), from Old High German jung (“young”). Its recognition as the normal standard word for “boy” is based on Central and Low German usage and fully asserted itself only in the 20th century (compare Knabe). The common plural Jungs (Jungens) is also from Low German.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Junge is simply the adjective jung (“young”) used as a noun – “the young one”; English young is the same word."
+     "Junge is simply the adjective jung (“young”) used as a noun – “the young one”."
     ],
     "pitfalls": [
      "Weak noun: every form except the nominative singular ends in -n: den Jungen, dem Jungen, des Jungen, die Jungen.",
@@ -2161,6 +2230,13 @@
     "subtleties": [
      "Standard plural die Jungen; in speech die Jungs is the usual plural.",
      "In Austria, Switzerland and southern Germany the everyday word is der Bub."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "jung is English young, and Junge is “the young one”."
+     }
     ]
    }
   },
@@ -2318,7 +2394,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Mädchen = Magd (maid) + -chen (little): literally “little maid” – related to English maiden.",
+     "Mädchen = Magd (maid) + -chen (little): literally “little maid”.",
      "Mark Twain mocked it in “The Awful German Language” (1880): “In German, a young lady has no sex, while a turnip has.”"
     ],
     "pitfalls": [
@@ -2328,6 +2404,13 @@
     "subtleties": [
      "Grammar asks for es (Das Mädchen … es …), but once the girl is known by name people usually say sie.",
      "The genitive adds -s (des Mädchens); all other singular and plural forms are Mädchen."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Magd in Mädchen is related to English maid and maiden."
+     }
     ]
    }
   },
@@ -2497,8 +2580,8 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English took kindergarten (“children’s garden”) from German – Friedrich Fröbel opened the first one in 1840.",
-     "Kind goes back to the root *ǵenh₁- “to give birth”, the same root as Greek γένος (genos) and Latin genus."
+     "Friedrich Fröbel opened the first Kindergarten (“children’s garden”) in 1840; the word has since travelled into many languages.",
+     "Kind goes back to the Indo-European root *ǵenh₁- “to give birth”."
     ],
     "pitfalls": [
      "Neuter: das Kind, ein Kind, es.",
@@ -2507,6 +2590,38 @@
     "subtleties": [
      "Kind is “child” at any age when you mean someone’s son or daughter: Meine Kinder sind 30 und 32.",
      "Genitive des Kindes or des Kinds; the old dative dem Kinde survives in set phrases."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "English kindergarten is this German word."
+     },
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "детский сад is a loan translation of Kindergarten."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "jardin d’enfants is a loan translation of Kindergarten."
+     },
+     {
+      "for": "es",
+      "rel": "similar",
+      "text": "jardín de infancia is a loan translation of Kindergarten."
+     },
+     {
+      "for": "pt",
+      "rel": "similar",
+      "text": "jardim de infância is a loan translation of Kindergarten."
+     },
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Kind shares its root with γένος and γεννώ."
+     }
     ]
    }
   },
@@ -2651,8 +2766,8 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Latin persona first meant the mask of an actor – hence also English person and personality.",
-     "Russian персона (persona) exists too, but is formal or ironic – the everyday Russian word is человек."
+     "Latin persona first meant an actor’s mask.",
+     "die Person is feminine even when it means a man: Er ist eine nette Person – sie …"
     ],
     "pitfalls": [
      "Always feminine, even for a man: Er ist eine nette Person – sie (the person) …",
@@ -2660,6 +2775,18 @@
     ],
     "subtleties": [
      "Person counts heads (Tisch für vier Personen); Mensch stresses the human being (Er ist ein guter Mensch); Leute is plural only."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Person is English person; both come from persona, an actor’s mask."
+     },
+     {
+      "for": "ru",
+      "rel": "trap",
+      "text": "персона exists too, but is formal or ironic; the everyday word is человек – while German Person is neutral and common."
+     }
     ]
    }
   },
@@ -2791,11 +2918,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German liute, from Old High German liuti, also liudi, from Proto-West Germanic *liud(i), from Proto-Germanic *liudīz (“people”), from Proto-Indo-European *h₁lewdʰ- (“man, people”). Compare Dutch lieden, Old English lēode (“people”), Polish ludzie, Russian люди (ljudi).",
+     "text": "From Middle High German liute, from Old High German liuti, also liudi, from Proto-West Germanic *liud(i), from Proto-Germanic *liudīz (“people”), from Proto-Indo-European *h₁lewdʰ- (“man, people”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Leute and Russian люди are cognates; the same root gave Greek ελεύθερος (eléftheros, “free” – “belonging to the people”, not a slave)."
+     "Leute goes back to the Indo-European word for “people”, *h₁lewdʰ-."
     ],
     "pitfalls": [
      "Plural only: there is no singular *Leut. One person = eine Person or ein Mensch.",
@@ -2804,6 +2931,18 @@
     "subtleties": [
      "die Leute often means “people in general”, “they”: Die Leute reden viel.",
      "With a number, Leute is everyday speech (drei Leute); official texts say Personen."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "Leute and люди are cognates."
+     },
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "The root of Leute also gave ελεύθερος (“free” – belonging to the people, not a slave)."
+     }
     ]
    }
   },
@@ -2975,18 +3114,30 @@
      }
     ],
     "etymology": {
-     "text": "Inherited from Middle High German vriunt, from Old High German friunt, from Proto-West Germanic *friund, from Proto-Germanic *frijōndz (“lit., the loving one; lover, loved one, friend”), from a derivative of Proto-Indo-European *preyH-. Cognate with Dutch vriend, English friend, Yiddish פֿרײַנד (fraynd), Gothic 𐍆𐍂𐌹𐌾𐍉𐌽𐌳𐍃 (frijōnds).",
+     "text": "Inherited from Middle High German vriunt, from Old High German friunt, from Proto-West Germanic *friund, from Proto-Germanic *frijōndz (“lit., the loving one; lover, loved one, friend”), from a derivative of Proto-Indo-European *preyH-.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Freund literally means “the loving one”: it is an old present participle of a verb “to love”, like English friend and Yiddish fraynd."
+     "Freund literally means “the loving one”: it is an old present participle of a verb “to love”."
     ],
     "pitfalls": [
      "mein Freund / meine Freundin usually means boyfriend / girlfriend; for “a friend” say ein Freund von mir / eine Freundin von mir.",
      "Feminine: die Freundin (plural Freundinnen); a mixed group is die Freunde."
     ],
     "subtleties": [
-     "German separates Freund (a real friend) from Bekannter (an acquaintance) more strictly than English “friend”."
+     "German separates Freund (a close friend) from Bekannter (an acquaintance) strictly: ein Freund is someone close."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Freund and English friend are the same word."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English “friend” is wider: many people an English speaker calls friends are Bekannte in German."
+     }
     ]
    }
   },
@@ -3272,15 +3423,32 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "From Latin studens, “the one who strives, is eager” (studēre); Russian студент has the same source."
+     "From Latin studens, “the one who strives, is eager” (studēre)."
     ],
     "pitfalls": [
-     "Student is only for university or college. A pupil at school is a Schüler – a classic mistake for speakers of English and Greek.",
+     "Student is only for university or college. A pupil at school is a Schüler.",
      "Weak noun: den/dem/des Studenten, plural die Studenten.",
      "No article for what someone is: Ich bin Student (not *ein Student)."
     ],
     "subtleties": [
      "Gender-neutral official German often says die Studierenden (“those who study”)."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "студент has the same source (studens) and the same meaning: only at university."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English student also means a school pupil; German Student is only at university – a pupil is a Schüler."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "φοιτητής is Student, μαθητής is Schüler – the same split as in German."
+     }
     ]
    }
   },
@@ -3565,11 +3733,23 @@
      "Schule comes through Latin schola from Greek σχολή (scholí), which first meant “leisure” – time free for learning."
     ],
     "pitfalls": [
-     "Schüler = pupil at school; Student = university student. Greek μαθητής and English “student” cover both – German does not.",
+     "Schüler = pupil at school; Student = university student – German keeps them strictly apart.",
      "Plural Schüler (no change), dative Schülern."
     ],
     "subtleties": [
      "A Schüler stays a Schüler until the Abitur (final exam), even at 19."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English student covers school and university; German says Schüler at school and Student at university."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "μαθητής is Schüler, φοιτητής is Student; Schule is σχολή / σχολείο."
+     }
     ]
    }
   },
@@ -3861,7 +4041,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "lehren (to teach) and lernen (to learn) are from the same root; English lore is related."
+     "lehren (to teach) and lernen (to learn) are from the same root."
     ],
     "pitfalls": [
      "No article for a job: Ich bin Lehrer (not *ein Lehrer) – unless you add an adjective (ein guter Lehrer).",
@@ -3869,6 +4049,13 @@
     ],
     "subtleties": [
      "At university a teacher is a Dozent or Professor, not a Lehrer."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English lore and learn are related to lehren and lernen."
+     }
     ]
    }
   },
@@ -4149,7 +4336,7 @@
     "synonyms": [],
     "synonymsNone": "No synonym; the demonstratives dieser and the stressed der/die/das point more strongly.",
     "etymology": {
-     "text": "From Middle High German dër, from Old High German dër, replacing the original masculine and feminine nominative forms from Proto-Germanic *sa by analogy with the adjective inflection. Cognate with Yiddish דער (der).",
+     "text": "From Middle High German dër, from Old High German dër, replacing the original masculine and feminine nominative forms from Proto-Germanic *sa by analogy with the adjective inflection.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -4292,11 +4479,11 @@
     "synonyms": [],
     "synonymsNone": "No synonym; colloquially ein is shortened to 'n (Hast du 'n Stift?).",
     "etymology": {
-     "text": "From Middle High German ein, from Old High German ein. Compare Dutch een, English one, Danish en.",
+     "text": "From Middle High German ein, from Old High German ein.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English a/an and one are the same word historically – just like German ein."
+     "ein is both the article “a” and the number “one” – one word in German."
     ],
     "pitfalls": [
      "ein has no plural: a tomato = eine Tomate, tomatoes = Tomaten (no article).",
@@ -4304,6 +4491,13 @@
     ],
     "subtleties": [
      "Its negative is kein: eine Tomate → keine Tomate."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English a / an and one were once the same word, as ein still is."
+     }
     ]
    }
   }

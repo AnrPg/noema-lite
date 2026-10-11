@@ -649,6 +649,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut has no separate class of adjectives: a quality is a verb or a suffix on the noun (-rjuaq, big). German adjectives are words of their own, with endings before the noun."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Most Italian adjectives follow the noun and agree everywhere, after essere too (una casa grande, la casa è grande); a German adjective comes before the noun with an ending chosen by the article and stays bare after sein: ein großes Haus, Das Haus ist groß. As in Italian ho fame / ho sete, German says Ich habe Hunger / Durst."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "An Albanian adjective follows the noun with its linking article (një shtëpi e madhe, djali i mirë) and keeps it after jam (shtëpia është e madhe); a German adjective comes before the noun with an ending and stays bare after sein: ein großes Haus, Das Haus ist groß. Kam uri / kam etje is exactly Ich habe Hunger / Durst."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Most Portuguese adjectives follow the noun and always agree (uma casa grande, a casa é grande); a German adjective comes before the noun, takes an ending chosen by the article and stays bare after sein: ein großes Haus, Das Haus ist groß. Tenho fome / tenho sede is the German Ich habe Hunger / Durst."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If adjectives in your language agree in gender, number and case, the idea is familiar. New is that the German ending also depends on the word in front (der große Tisch, ein großer Tisch, großer Hunger) and that it disappears after sein: Der Tisch ist groß."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "new",
+   "text": "If your adjectives never change, the endings before a German noun are the hard part: one ending (-e, -er, -es, -en, -em) carries gender, number and case at once and is chosen by the article in front. After sein the adjective stays bare, as you are used to: Das Haus ist groß."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "new",
+   "text": "If your adjectives never change and can stand as a predicate on their own, two things are new: before a noun a German adjective always takes an ending (ein großes Haus), and as a predicate it needs sein (Das Haus ist groß)."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "new",
+   "text": "If a quality is a verb or a suffix on the noun in your language, German adjectives are separate words placed before the noun with an ending chosen by the article (ein großes Haus); as a predicate they follow sein: Das Haus ist groß."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If adjectives in your language follow the noun and repeat its gender, number and definiteness, German turns this round: the adjective comes first, the article in front decides its ending (der große Tisch, ein großer Tisch), and after sein it never agrees: Die Tür ist groß."
   }
  ]
 }

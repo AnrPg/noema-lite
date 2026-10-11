@@ -424,7 +424,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "In French hôtel also means a large town house or a public building (hôtel de ville = town hall); German borrowed only the inn meaning."
+     "Hotel came from French with only one of its meanings, the inn."
     ],
     "pitfalls": [
      "das Hotel is neuter; plural die Hotels (with -s, as many borrowed words).",
@@ -433,6 +433,13 @@
     "subtleties": [
      "im Hotel (in the hotel, where) – ins Hotel (to the hotel, where to).",
      "Hotels are rated with stars: ein Vier-Sterne-Hotel."
+    ],
+    "notes": [
+     {
+      "for": "fr",
+      "rel": "different",
+      "text": "hôtel also means a mansion or a public building (hôtel de ville); German Hotel is only the inn."
+     }
     ]
    }
   },
@@ -1039,7 +1046,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English coffer (a strongbox) is the same word – from Old French cofre."
+     "Koffer comes from Old French cofre (a chest)."
     ],
     "pitfalls": [
      "The plural has no ending: der Koffer – die Koffer; dative plural den Koffern.",
@@ -1048,6 +1055,18 @@
     "subtleties": [
      "die Koffer packen can also mean to leave for good: Er hat die Koffer gepackt.",
      "In Austria Koffer is also an insult (idiot) – a different word of the same form."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English coffer (a strongbox) is the same word."
+     },
+     {
+      "for": "fr",
+      "rel": "trap",
+      "text": "Koffer is the same word as coffre, but means a suitcase (valise)."
+     }
     ]
    }
   },
@@ -1177,7 +1196,7 @@
      }
     ],
     "etymology": {
-     "text": "Back-formation from Ausländer (“foreigner”), from Middle High German ūzlender; by surface analysis aus + Land. Compare English outland.",
+     "text": "Back-formation from Ausländer (“foreigner”), from Middle High German ūzlender; by surface analysis aus + Land.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -1190,6 +1209,13 @@
     "subtleties": [
      "The opposite is das Inland (home country): im In- und Ausland (at home and abroad).",
      "der Ausländer / die Ausländerin = foreigner; the word can sound distancing, so people often say Menschen aus dem Ausland."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Ausland is built like English outland: aus + Land."
+     }
     ]
    }
   },
@@ -1348,11 +1374,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German besuochen (“to seek, use, visit, investigate”), from Old High German bisuohhen, by surface analysis be- + suchen (“to seek”). Cognate with Dutch bezoeken, Swedish besöka, English beseech.",
+     "text": "From Middle High German besuochen (“to seek, use, visit, investigate”), from Old High German bisuohhen, by surface analysis be- + suchen (“to seek”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English beseech is a cousin of besuchen: both are “be- + seek”."
+     "besuchen is be- + suchen (to seek)."
     ],
     "pitfalls": [
      "besuchen takes a direct object (accusative): Ich besuche dich – not *Ich besuche zu dir.",
@@ -1361,6 +1387,13 @@
     "subtleties": [
      "besuchen also means to attend: eine Schule besuchen, einen Kurs besuchen.",
      "der Besuch is the visit and the visitors: Wir haben Besuch (we have guests)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "besuchen is related to English beseech."
+     }
     ]
    }
   },
@@ -2280,7 +2313,7 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German wërden, from Old High German wërdan, from Proto-Germanic *werþaną. Cognate with Dutch worden, obsolete English worth (“to become”), and Latin vertō (“to turn”). The use as a future auxiliary is a Middle High German innovation.",
+     "text": "From Middle High German wërden, from Old High German wërdan, from Proto-Germanic *werþaną. The use as a future auxiliary is a Middle High German innovation.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -2288,7 +2321,7 @@
     ],
     "pitfalls": [
      "werden is not “want”: Ich will kommen = I want to come; Ich werde kommen = I will come.",
-     "bekommen is a false friend: it means to get, to receive – not to become (that is werden).",
+     "Do not confuse bekommen (to get, to receive) with werden (to become).",
      "du wirst, er wird – the vowel changes and the d of the stem disappears in du wirst; ihr werdet.",
      "With the future the infinitive goes to the very end: Ich werde morgen nach Berlin fahren."
     ],
@@ -2296,6 +2329,18 @@
      "As a full verb it takes sein in the perfect: Er ist Lehrer geworden; as the passive auxiliary the participle is worden (Das Haus ist gebaut worden).",
      "werden + infinitive can also express a guess about the present: Er wird schon zu Hause sein (he’s probably at home by now).",
      "Präteritum wurde; the old form ward appears in literature."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "bekommen is a false friend: it means to get, not to become (that is werden)."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "werden is related to obsolete English worth (“to become”), still heard in “woe worth the day”."
+     }
     ]
    }
   }

@@ -291,7 +291,14 @@
    },
    "status": "partial",
    "gap": "Comma placement is never trained (a `proofread` item); „…“ never appears in the bank; the ordinal dot is explained (fn.ordinals) but bank sentences write ordinals as words.",
-   "when": "fd.18"
+   "when": "fd.18",
+   "notes": [
+    {
+     "for": "ru",
+     "rel": "similar",
+     "text": "Commas by syntax and the decimal comma are as in Russian; quotation marks are „…“ instead of «…»."
+    }
+   ]
   },
   {
    "id": "de.phon.vowel.length",
@@ -523,7 +530,29 @@
    },
    "status": "partial",
    "gap": "An `ipa` parameter per word is not declared yet: Wiktionary (kaikki) gives a pronunciation for 491 of the 575 German words, but not for 84 (rare vegetables, phrases such as bis später, compounds such as Badezimmer), and a transcription is not made up without a source. `ipa` per lexeme; a short pronunciation page with the Greek χ comparison.",
-   "when": "fd.00"
+   "when": "fd.00",
+   "notes": [
+    {
+     "for": "el",
+     "rel": "similar",
+     "text": "χ has the same two sounds: [ç] in χέρι, [x] in χαρά. In Greek the vowel after it decides, in German the vowel before: ich – ach."
+    },
+    {
+     "for": "ru",
+     "rel": "similar",
+     "text": "х is the ach-sound (Bach); the ich-sound is close to the soft х of химия."
+    },
+    {
+     "for": "es",
+     "rel": "similar",
+     "text": "j (jota) is close to the ach-sound (Bach); the ich-sound of ich, Milch is new."
+    },
+    {
+     "for": "ar",
+     "rel": "similar",
+     "text": "خ is close to the ach-sound (Bach); the ich-sound of ich, Milch is new."
+    }
+   ]
   },
   {
    "id": "de.phon.r.l",
@@ -1222,7 +1251,14 @@
    },
    "status": "partial",
    "gap": "An `ipa` parameter per word is not declared yet: Wiktionary (kaikki) gives a pronunciation for 491 of the 575 German words, but not for 84 (rare vegetables, phrases such as bis später, compounds such as Badezimmer), and a transcription is not made up without a source. `ipa` with stress per lexeme; separable vs inseparable verbs linked to stress on the verb card.",
-   "when": "fd.13"
+   "when": "fd.13",
+   "notes": [
+    {
+     "for": "en",
+     "rel": "similar",
+     "text": "Stress on the stem is familiar; German also stresses separable prefixes (ˈankommen) but never inseparable ones (verˈstehen)."
+    }
+   ]
   },
   {
    "id": "de.morph.noun.gender",
@@ -1458,7 +1494,19 @@
    },
    "status": "covered",
    "gap": "",
-   "when": "fd.05"
+   "when": "fd.05",
+   "notes": [
+    {
+     "for": "el",
+     "rel": "similar",
+     "text": "Plurals by declension class are familiar, but German classes are learned noun by noun, often with umlaut, and the dative plural adds -n: den Kindern."
+    },
+    {
+     "for": "ru",
+     "rel": "similar",
+     "text": "Plurals by declension class are familiar, but German classes are learned noun by noun, often with umlaut, and the dative plural adds -n: den Kindern."
+    }
+   ]
   },
   {
    "id": "de.morph.no.dual",
@@ -1556,7 +1604,24 @@
    },
    "status": "partial",
    "gap": "No exercise asks for the plural of one meaning (Bänke for benches); inflect still drills the N;*;PL cells, which hold only the first plural.",
-   "when": "fd.05 / fd.11"
+   "when": "fd.05 / fd.11",
+   "notes": [
+    {
+     "for": "ru",
+     "rel": "same",
+     "text": "листы / листья is the same idea as Banken / Bänke, Wörter / Worte."
+    },
+    {
+     "for": "it",
+     "rel": "same",
+     "text": "bracci / braccia is the same idea as Banken / Bänke, Wörter / Worte."
+    },
+    {
+     "for": "en",
+     "rel": "similar",
+     "text": "brothers / brethren is a relic of what German still has: Banken / Bänke, Wörter / Worte."
+    }
+   ]
   },
   {
    "id": "de.morph.umlaut",
@@ -1625,7 +1690,14 @@
    },
    "status": "partial",
    "gap": "No overview page that ties the umlaut together; no exercise sorts words by these patterns yet.",
-   "when": "fd.05"
+   "when": "fd.05",
+   "notes": [
+    {
+     "for": "en",
+     "rel": "similar",
+     "text": "man – men, foot – feet, old – elder are relics of what German does all the time: Mann – Männer, alt – älter."
+    }
+   ]
   },
   {
    "id": "de.morph.noun.case",
@@ -1696,7 +1768,19 @@
    },
    "status": "partial",
    "gap": "The genitive is stored but never taught (only während + GEN in fn.prep.time); the `analyze` and `parse` exercises (form → case) are not implemented.",
-   "when": "fd.04 / fd.07 / fd.11"
+   "when": "fd.04 / fd.07 / fd.11",
+   "notes": [
+    {
+     "for": "el",
+     "rel": "similar",
+     "text": "The Greek article declines for case too, but the Greek noun also changes; the German noun mostly stays: der Tisch, den Tisch, dem Tisch."
+    },
+    {
+     "for": "sq",
+     "rel": "similar",
+     "text": "As the Albanian linking articles do, the German article carries the case – but it stands before the noun, and the noun hardly changes."
+    }
+   ]
   },
   {
    "id": "de.syn.alignment",
@@ -1904,7 +1988,19 @@
    },
    "status": "partial",
    "gap": "Drills do not yet pick the weak nouns from declension (fn.case still lists them by hand); Herr is not in the course.",
-   "when": "fd.07 / fd.11"
+   "when": "fd.07 / fd.11",
+   "notes": [
+    {
+     "for": "ru",
+     "rel": "similar",
+     "text": "Declension classes are familiar; this one adds -(e)n everywhere except the nominative: der Junge, den Jungen, dem Jungen."
+    },
+    {
+     "for": "el",
+     "rel": "similar",
+     "text": "Declension classes are familiar; this one adds -(e)n everywhere except the nominative: der Junge, den Jungen, dem Jungen."
+    }
+   ]
   },
   {
    "id": "de.morph.noun.adjectival",
@@ -2571,7 +2667,34 @@
    },
    "status": "covered",
    "gap": "",
-   "when": "fd.04"
+   "when": "fd.04",
+   "notes": [
+    {
+     "for": "el",
+     "rel": "same",
+     "text": "ο / η / το and ένας / μία / ένα decline as der / ein do, and ein is also the number one, like ένας."
+    },
+    {
+     "for": "fr",
+     "rel": "similar",
+     "text": "le / la / un / une change for gender and number; German articles also change for case: der, den, dem, des."
+    },
+    {
+     "for": "es",
+     "rel": "similar",
+     "text": "el / la / un / una change for gender and number; German articles also change for case: der, den, dem, des."
+    },
+    {
+     "for": "it",
+     "rel": "similar",
+     "text": "il / la / un / una change for gender and number; German articles also change for case: der, den, dem, des."
+    },
+    {
+     "for": "pt",
+     "rel": "similar",
+     "text": "o / a / um / uma change for gender and number; German articles also change for case: der, den, dem, des."
+    }
+   ]
   },
   {
    "id": "de.morph.fusion",
@@ -2691,7 +2814,34 @@
    },
    "status": "covered",
    "gap": "",
-   "when": "fd.06"
+   "when": "fd.06",
+   "notes": [
+    {
+     "for": "sq",
+     "rel": "same",
+     "text": "As with i tij / e saj, the owner picks the word (sein / ihr) and the owned noun the ending."
+    },
+    {
+     "for": "en",
+     "rel": "similar",
+     "text": "his / her pick by the owner, like sein / ihr; German adds an ending for the thing owned: seine Schwester."
+    },
+    {
+     "for": "fr",
+     "rel": "trap",
+     "text": "son / sa agree only with the thing owned; German first picks by the owner: seine Frau (his), ihre Frau (her)."
+    },
+    {
+     "for": "es",
+     "rel": "trap",
+     "text": "su does not show the owner; German does: seine Frau (his), ihre Frau (her)."
+    },
+    {
+     "for": "it",
+     "rel": "trap",
+     "text": "suo / sua agree only with the thing owned; German first picks by the owner: seine Frau (his), ihre Frau (her)."
+    }
+   ]
   },
   {
    "id": "de.morph.no.possessive.affixes",
@@ -3003,7 +3153,19 @@
    },
    "status": "missing",
    "gap": "A lexeme de:man (PRON, forms man/einen/einem) and a function (impersonal statements) with bank sentences.",
-   "when": "later (cr.04: man kann / man muss)"
+   "when": "later (cr.04: man kann / man muss)",
+   "notes": [
+    {
+     "for": "fr",
+     "rel": "same",
+     "text": "man is on: Hier spricht man Deutsch – Ici on parle allemand."
+    },
+    {
+     "for": "en",
+     "rel": "similar",
+     "text": "man is the generic one / you: Das macht man nicht."
+    }
+   ]
   },
   {
    "id": "de.morph.pron.es",
@@ -3068,7 +3230,19 @@
    },
    "status": "partial",
    "gap": "es gibt + accusative as a construction with bank sentences (fd.06); weather verbs come with a weather field. A lexeme for geben (or a construction lexeme es gibt) with bank sentences in fd.06 / fd.11.",
-   "when": "fd.06"
+   "when": "fd.06",
+   "notes": [
+    {
+     "for": "en",
+     "rel": "same",
+     "text": "es regnet and es gibt work like it rains and there is."
+    },
+    {
+     "for": "fr",
+     "rel": "same",
+     "text": "es regnet and es gibt work like il pleut and il y a."
+    }
+   ]
   },
   {
    "id": "de.morph.verb.reflexive",
@@ -3128,7 +3302,14 @@
    },
    "status": "partial",
    "gap": "Reflexive pronoun forms (PRON cells with REFL) and the cr.07 lesson.",
-   "when": "cr.07"
+   "when": "cr.07",
+   "notes": [
+    {
+     "for": "ru",
+     "rel": "different",
+     "text": "German uses a separate pronoun where Russian adds -ся: sich waschen – мыться; ich wasche mich."
+    }
+   ]
   },
   {
    "id": "de.morph.no.object.marking",
@@ -3255,7 +3436,14 @@
    },
    "status": "missing",
    "gap": "Lexemes (or a derived table per preposition) and a lesson after the verbs with prepositional objects.",
-   "when": "later (after cr.03)"
+   "when": "later (after cr.03)",
+   "notes": [
+    {
+     "for": "en",
+     "rel": "similar",
+     "text": "darauf, womit are like the formal English thereon, wherewith – but everyday in German."
+    }
+   ]
   },
   {
    "id": "de.morph.adj.declension",
@@ -3382,7 +3570,39 @@
    },
    "status": "covered",
    "gap": "",
-   "when": "fd.16"
+   "when": "fd.16",
+   "notes": [
+    {
+     "for": "en",
+     "rel": "similar",
+     "text": "The predicative adjective is invariable as in English, but the adverb has no -ly: schnell = fast and quickly."
+    },
+    {
+     "for": "fr",
+     "rel": "trap",
+     "text": "Your predicative adjective agrees; the German one never does: Die Tür ist groß, Die Türen sind groß."
+    },
+    {
+     "for": "es",
+     "rel": "trap",
+     "text": "Your predicative adjective agrees; the German one never does: Die Tür ist groß, Die Türen sind groß."
+    },
+    {
+     "for": "it",
+     "rel": "trap",
+     "text": "Your predicative adjective agrees; the German one never does: Die Tür ist groß, Die Türen sind groß."
+    },
+    {
+     "for": "el",
+     "rel": "trap",
+     "text": "Your predicative adjective agrees; the German one never does: Die Tür ist groß, Die Türen sind groß."
+    },
+    {
+     "for": "ru",
+     "rel": "trap",
+     "text": "Your predicative adjective agrees; the German one never does: Die Tür ist groß, Die Türen sind groß."
+    }
+   ]
   },
   {
    "id": "de.morph.adj.comparison",
@@ -3692,7 +3912,19 @@
    },
    "status": "partial",
    "gap": "The word card does not show the Präteritum and the Partizip II from principalParts yet (langcore shows the du / er forms and the auxiliary); no ablaut-series exercise; V;PST;* and V;PTCP;PST are not required cells in language.json, and the foundation verbs store only V;PST;3;SG.",
-   "when": "cr.01"
+   "when": "cr.01",
+   "notes": [
+    {
+     "for": "en",
+     "rel": "same",
+     "text": "sing – sang – sung and walk – walked are the same two classes: singen – sang – gesungen, sagen – sagte – gesagt."
+    },
+    {
+     "for": "el",
+     "rel": "similar",
+     "text": "Principal parts are familiar from Greek irregular verbs; German strong verbs change the vowel: trinken – trank – getrunken."
+    }
+   ]
   },
   {
    "id": "de.morph.verb.modal",
@@ -3874,7 +4106,14 @@
    },
    "status": "partial",
    "gap": "No drill that contrasts separable and inseparable verbs, and no stress information (no ipa).",
-   "when": "fd.13 / cr.01"
+   "when": "fd.13 / cr.01",
+   "notes": [
+    {
+     "for": "ru",
+     "rel": "similar",
+     "text": "Like Russian prefixes, be-, ver-, er- stay on the verb and change its meaning: stehen – verstehen, kommen – bekommen."
+    }
+   ]
   },
   {
    "id": "de.morph.no.incorporation",
@@ -3978,7 +4217,39 @@
    },
    "status": "partial",
    "gap": "South German / Austrian sein with stehen, sitzen, liegen is not recorded (those verbs are not course words).",
-   "when": "cr.01"
+   "when": "cr.01",
+   "notes": [
+    {
+     "for": "fr",
+     "rel": "similar",
+     "text": "avoir / être are chosen as haben / sein are, but reflexive verbs take haben: Ich habe mich gewaschen (je me suis lavé)."
+    },
+    {
+     "for": "it",
+     "rel": "similar",
+     "text": "avere / essere are chosen as haben / sein are, but reflexive verbs take haben: Ich habe mich gewaschen (mi sono lavato)."
+    },
+    {
+     "for": "en",
+     "rel": "different",
+     "text": "Your perfect uses only “have”; German uses sein for movement and change of state: Ich bin gegangen, Ich bin aufgewacht."
+    },
+    {
+     "for": "es",
+     "rel": "different",
+     "text": "Your perfect uses only “have”; German uses sein for movement and change of state: Ich bin gegangen, Ich bin aufgewacht."
+    },
+    {
+     "for": "el",
+     "rel": "different",
+     "text": "Your perfect uses only “have”; German uses sein for movement and change of state: Ich bin gegangen, Ich bin aufgewacht."
+    },
+    {
+     "for": "sq",
+     "rel": "different",
+     "text": "Your perfect uses only “have”; German uses sein for movement and change of state: Ich bin gegangen, Ich bin aufgewacht."
+    }
+   ]
   },
   {
    "id": "de.morph.verb.past.split",
@@ -4046,7 +4317,19 @@
    },
    "status": "partial",
    "gap": "sein, haben, the modals and the other verbs of the foundations store only V;PST;3;SG (their lexicon files predate cr.01), so the bank can use war / hatte only with er / sie / es; their full Präteritum rows are needed.",
-   "when": "cr.01"
+   "when": "cr.01",
+   "notes": [
+    {
+     "for": "fr",
+     "rel": "same",
+     "text": "Perfekt in speech, Präteritum in writing is the split between passé composé and passé simple."
+    },
+    {
+     "for": "it",
+     "rel": "similar",
+     "text": "Like the passato remoto in the north, the Präteritum is mostly written; speech uses the Perfekt."
+    }
+   ]
   },
   {
    "id": "de.morph.verb.future",
@@ -4330,7 +4613,29 @@
    },
    "status": "missing",
    "gap": "werden lexeme and a passive lesson with `transform` (active ↔ passive).",
-   "when": "later"
+   "when": "later",
+   "notes": [
+    {
+     "for": "es",
+     "rel": "same",
+     "text": "es abierta / está abierta match wird geöffnet (action) / ist geöffnet (state)."
+    },
+    {
+     "for": "pt",
+     "rel": "same",
+     "text": "é aberta / está aberta match wird geöffnet (action) / ist geöffnet (state)."
+    },
+    {
+     "for": "it",
+     "rel": "similar",
+     "text": "viene aperta / è aperta match wird geöffnet (action) / ist geöffnet (state)."
+    },
+    {
+     "for": "en",
+     "rel": "similar",
+     "text": "gets opened / is open come close to wird geöffnet (action) / ist geöffnet (state)."
+    }
+   ]
   },
   {
    "id": "de.morph.no.antipassive",
@@ -4559,7 +4864,39 @@
    },
    "status": "partial",
    "gap": "A zu-infinitive cell for separable verbs and a lesson (cr.04 / later).",
-   "when": "cr.04 / later"
+   "when": "cr.04 / later",
+   "notes": [
+    {
+     "for": "en",
+     "rel": "same",
+     "text": "zu is like to before an infinitive, and modals take the bare infinitive as in English: Ich kann gehen."
+    },
+    {
+     "for": "fr",
+     "rel": "similar",
+     "text": "zu works like de before an infinitive: Ich versuche zu schlafen (j’essaie de dormir); after modals no zu."
+    },
+    {
+     "for": "it",
+     "rel": "similar",
+     "text": "zu works like di before an infinitive: Ich versuche zu schlafen (cerco di dormire); after modals no zu."
+    },
+    {
+     "for": "es",
+     "rel": "similar",
+     "text": "Ich versuche zu schlafen (intento dormir): German puts zu before the infinitive; after modals no zu."
+    },
+    {
+     "for": "el",
+     "rel": "new",
+     "text": "Greek has no infinitive; German uses one, with zu (Ich versuche zu schlafen) or bare after modals (Ich kann schlafen)."
+    },
+    {
+     "for": "ru",
+     "rel": "different",
+     "text": "Russian has no infinitive marker; German adds zu except after modals: Ich versuche zu schlafen, Ich kann schlafen."
+    }
+   ]
   },
   {
    "id": "de.syn.no.serial.converbs",
@@ -5054,7 +5391,24 @@
    },
    "status": "covered",
    "gap": "",
-   "when": "fd.09"
+   "when": "fd.09",
+   "notes": [
+    {
+     "for": "fr",
+     "rel": "same",
+     "text": "doch is si: Tu ne bois pas de café ? – Si !"
+    },
+    {
+     "for": "ar",
+     "rel": "same",
+     "text": "doch is بَلَى (balā): the “yes” against a negative."
+    },
+    {
+     "for": "en",
+     "rel": "new",
+     "text": "English has no such word: Doch! = Yes, I do!"
+    }
+   ]
   },
   {
    "id": "de.syn.prep.government",
@@ -5178,7 +5532,14 @@
    },
    "status": "partial",
    "gap": "The `contrast` exercise (Akk vs Dat with the reason) is not implemented.",
-   "when": "fd.12 / fd.13"
+   "when": "fd.12 / fd.13",
+   "notes": [
+    {
+     "for": "ru",
+     "rel": "same",
+     "text": "в школе / в школу is exactly in der Schule / in die Schule: location dative, goal accusative."
+    }
+   ]
   },
   {
    "id": "de.syn.verb.government",
@@ -5302,7 +5663,34 @@
    },
    "status": "partial",
    "gap": "Bank sentences with Mir ist kalt/warm/schlecht and a transform (person change); gefallen in cr.03. Angst, Recht, Glück, Zeit are not lexemes; the collocation is not a stored unit.",
-   "when": "fd.16"
+   "when": "fd.16",
+   "notes": [
+    {
+     "for": "ru",
+     "rel": "same",
+     "text": "мне холодно is Mir ist kalt; мне нравится works like the dative of gefallen: Das gefällt mir."
+    },
+    {
+     "for": "fr",
+     "rel": "trap",
+     "text": "j’ai faim is Ich habe Hunger, but j’ai froid is Mir ist kalt, not *Ich habe kalt."
+    },
+    {
+     "for": "es",
+     "rel": "trap",
+     "text": "tengo hambre is Ich habe Hunger, but tengo frío is Mir ist kalt, not *Ich habe kalt."
+    },
+    {
+     "for": "it",
+     "rel": "trap",
+     "text": "ho fame is Ich habe Hunger, but ho freddo is Mir ist kalt, not *Ich habe kalt."
+    },
+    {
+     "for": "pt",
+     "rel": "trap",
+     "text": "tenho fome is Ich habe Hunger, but tenho frio is Mir ist kalt, not *Ich habe kalt."
+    }
+   ]
   },
   {
    "id": "de.syn.prep.contraction",
@@ -5369,7 +5757,39 @@
    },
    "status": "covered",
    "gap": "",
-   "when": "fd.11"
+   "when": "fd.11",
+   "notes": [
+    {
+     "for": "fr",
+     "rel": "same",
+     "text": "au, du are like zum, vom: preposition and article in one word."
+    },
+    {
+     "for": "it",
+     "rel": "same",
+     "text": "nel, al, del are like im, am, zum."
+    },
+    {
+     "for": "pt",
+     "rel": "same",
+     "text": "no, do, ao are like im, vom, zum."
+    },
+    {
+     "for": "es",
+     "rel": "same",
+     "text": "al, del are like zum, vom."
+    },
+    {
+     "for": "el",
+     "rel": "same",
+     "text": "στο, στη, στον are like im, zur, zum."
+    },
+    {
+     "for": "en",
+     "rel": "new",
+     "text": "English has no such forms: German says im Park, zum Arzt, never *in dem Park in normal speech."
+    }
+   ]
   },
   {
    "id": "de.syn.article.use",
@@ -5427,7 +5847,14 @@
    },
    "status": "partial",
    "gap": "Country names are not course words; no exercise contrasts ‘article / no article’.",
-   "when": "fd.01 / fd.13"
+   "when": "fd.01 / fd.13",
+   "notes": [
+    {
+     "for": "fr",
+     "rel": "similar",
+     "text": "As in French, no article with jobs (Il est médecin – Er ist Arzt); unlike French, most countries take none (Frankreich, but die Schweiz) and there is no partitive (Ich esse Brot)."
+    }
+   ]
   },
   {
    "id": "de.syn.das.ist",
@@ -5480,7 +5907,14 @@
    },
    "status": "covered",
    "gap": "",
-   "when": "fd.01 / fd.03"
+   "when": "fd.01 / fd.03",
+   "notes": [
+    {
+     "for": "fr",
+     "rel": "similar",
+     "text": "Das sind meine Eltern is ce sont mes parents; and Das bin ich agrees too, where French says c’est moi."
+    }
+   ]
   },
   {
    "id": "de.syn.no.be.split",
@@ -5617,7 +6051,24 @@
    },
    "status": "missing",
    "gap": "Present participle cells (V;PTCP;PRS) and a reading-level lesson.",
-   "when": "later (reading)"
+   "when": "later (reading)",
+   "notes": [
+    {
+     "for": "ru",
+     "rel": "same",
+     "text": "der um acht ankommende Zug is built like прибывающий в восемь поезд."
+    },
+    {
+     "for": "ja",
+     "rel": "similar",
+     "text": "Putting the whole description before the noun is familiar: 8時に着く電車 – der um acht ankommende Zug."
+    },
+    {
+     "for": "en",
+     "rel": "new",
+     "text": "English has no such construction; it says the train arriving at eight."
+    }
+   ]
   },
   {
    "id": "de.syn.seit.present",
@@ -5687,7 +6138,39 @@
    },
    "status": "covered",
    "gap": "",
-   "when": "fd.15"
+   "when": "fd.15",
+   "notes": [
+    {
+     "for": "fr",
+     "rel": "same",
+     "text": "depuis + present: J’habite ici depuis trois ans – Ich wohne seit drei Jahren hier."
+    },
+    {
+     "for": "es",
+     "rel": "same",
+     "text": "desde hace + present: Vivo aquí desde hace tres años – Ich wohne seit drei Jahren hier."
+    },
+    {
+     "for": "it",
+     "rel": "same",
+     "text": "da + present: Abito qui da tre anni – Ich wohne seit drei Jahren hier."
+    },
+    {
+     "for": "ru",
+     "rel": "same",
+     "text": "The present, as in Я живу здесь три года: Ich wohne seit drei Jahren hier."
+    },
+    {
+     "for": "ar",
+     "rel": "same",
+     "text": "مُنْذُ + present, as in أَسْكُنُ هُنَا مُنْذُ ثَلَاثِ سَنَوَاتٍ: Ich wohne seit drei Jahren hier."
+    },
+    {
+     "for": "en",
+     "rel": "trap",
+     "text": "English uses the perfect (I have lived here for three years); German the present: Ich wohne seit drei Jahren hier."
+    }
+   ]
   },
   {
    "id": "de.syn.adverb.s",
@@ -5742,7 +6225,14 @@
    },
    "status": "covered",
    "gap": "",
-   "when": "fd.14"
+   "when": "fd.14",
+   "notes": [
+    {
+     "for": "en",
+     "rel": "similar",
+     "text": "I work nights has the same old -s: nachts, montags, abends."
+    }
+   ]
   },
   {
    "id": "de.lex.motion.manner",
@@ -6032,7 +6522,14 @@
    },
    "status": "partial",
    "gap": "A `deixis` feature on particles and verbs; more pairs (herauf/hinauf, heraus/hinaus) with the movement field.",
-   "when": "fd.13"
+   "when": "fd.13",
+   "notes": [
+    {
+     "for": "ru",
+     "rel": "similar",
+     "text": "куда / откуда split the questions like wohin / woher; hin / her also add the direction to the verb: hingehen, herkommen."
+    }
+   ]
   },
   {
    "id": "de.lex.splits",
@@ -6095,7 +6592,29 @@
    },
    "status": "partial",
    "gap": "The `sense_split` exercise (sort contexts into the words) is listed in §6.2 but not implemented.",
-   "when": "fd.11 / fd.18"
+   "when": "fd.11 / fd.18",
+   "notes": [
+    {
+     "for": "fr",
+     "rel": "same",
+     "text": "kennen / wissen split like connaître / savoir."
+    },
+    {
+     "for": "es",
+     "rel": "same",
+     "text": "kennen / wissen split like conocer / saber."
+    },
+    {
+     "for": "it",
+     "rel": "same",
+     "text": "kennen / wissen split like conoscere / sapere."
+    },
+    {
+     "for": "pt",
+     "rel": "same",
+     "text": "kennen / wissen split like conhecer / saber."
+    }
+   ]
   },
   {
    "id": "de.lex.polysemy",
@@ -6173,27 +6692,27 @@
    "examples": [
     {
      "text": "das Handy",
-     "note": "mobile phone (not ‘handy’)"
+     "note": "mobile phone"
     },
     {
      "text": "also",
-     "note": "so, therefore (English ‘also’ = auch)"
+     "note": "so, therefore (“too, as well” is auch)"
     },
     {
      "text": "Ich will Kaffee.",
-     "note": "I want coffee (not ‘I will’)"
+     "note": "I want coffee (the future is werden)"
     },
     {
-     "text": "die Apotheke ↔ η αποθήκη",
-     "note": "pharmacy ↔ storeroom"
+     "text": "die Apotheke · das Gift",
+     "note": "pharmacy · poison"
     },
     {
-     "text": "Haus – house; Buch – book; Mann – man",
-     "note": "Germanic cognates"
+     "text": "Haus, Buch, Mann",
+     "note": "inherited words"
     },
     {
-     "text": "Schule ← σχολή; Telefon",
-     "note": "Greek-origin words"
+     "text": "Schule; Telefon",
+     "note": "words of Greek origin"
     }
    ],
    "level": "word",
@@ -6216,7 +6735,24 @@
    },
    "status": "partial",
    "gap": "bridges.json with kind falseFriend and the `cognate_bridge` exercise. bridges.json and the `etymology_link` / `cognate_bridge` exercises.",
-   "when": "fd.00 → all"
+   "when": "fd.00 → all",
+   "notes": [
+    {
+     "for": "en",
+     "rel": "trap",
+     "text": "False friends: Handy is a mobile phone, also means “so”, Ich will is “I want”, Gift is poison, bekommen is to get. Bridges: Haus – house, Buch – book, Mann – man."
+    },
+    {
+     "for": "el",
+     "rel": "trap",
+     "text": "die Apotheke is the same word as αποθήκη but means φαρμακείο; Schule comes from σχολή, Telefon from τῆλε + φωνή."
+    },
+    {
+     "for": "fr",
+     "rel": "trap",
+     "text": "Chef is the boss (chef), but eventuell means possibly, like éventuellement; Gift is poison."
+    }
+   ]
   },
   {
    "id": "de.lex.register",
@@ -6663,7 +7199,19 @@
    },
    "status": "partial",
    "gap": "The missing particles as lexemes, and an exercise (which particle fits the situation).",
-   "when": "fd.09 / later"
+   "when": "fd.09 / later",
+   "notes": [
+    {
+     "for": "ru",
+     "rel": "similar",
+     "text": "ja and doch work a little like же and ведь, but in the middle of the clause: Du bist ja nass!"
+    },
+    {
+     "for": "ja",
+     "rel": "similar",
+     "text": "Like your sentence-final particles (ね, よ), ja, doch, mal colour the sentence – but they stand in the middle: Komm doch mal her!"
+    }
+   ]
   },
   {
    "id": "de.prag.politeness",
@@ -6819,7 +7367,34 @@
    },
    "status": "partial",
    "gap": "variants exist only on nouns (not on greetings, verbs, particles); typed answers do not accept variants; region-wide spelling (CH ss) is not a rule; Swiss diglossia not explained.",
-   "when": "fd.00 → all"
+   "when": "fd.00 → all",
+   "notes": [
+    {
+     "for": "ar",
+     "rel": "similar",
+     "text": "Swiss German speech beside written Standard German resembles the split between spoken dialect and written Standard Arabic."
+    },
+    {
+     "for": "en",
+     "rel": "similar",
+     "text": "Several national standards are familiar from British and American English: German has German, Austrian and Swiss standards."
+    },
+    {
+     "for": "es",
+     "rel": "similar",
+     "text": "Several national standards are familiar from Spanish in Spain and in the Americas: German has German, Austrian and Swiss standards."
+    },
+    {
+     "for": "pt",
+     "rel": "similar",
+     "text": "Several national standards are familiar from Portuguese in Portugal and Brazil: German has German, Austrian and Swiss standards."
+    },
+    {
+     "for": "fr",
+     "rel": "similar",
+     "text": "Several national standards are familiar from French in France, Belgium, Switzerland and Canada: German has German, Austrian and Swiss standards."
+    }
+   ]
   },
   {
    "id": "de.culture.meals",
@@ -6966,7 +7541,7 @@
     },
     {
      "text": "eine Milliarde",
-     "note": "10⁹ = English billion"
+     "note": "10⁹ (10¹² is eine Billion)"
     }
    ],
    "level": "word",
@@ -6987,7 +7562,39 @@
    },
    "status": "partial",
    "gap": "Composite numbers are not lexemes and no `number_words` generator exists to build and check them from the rule. Numbers beyond 1000 (a later numbers node).",
-   "when": "fd.05"
+   "when": "fd.05",
+   "notes": [
+    {
+     "for": "en",
+     "rel": "trap",
+     "text": "eine Milliarde is a billion (10⁹); eine Billion is a trillion (10¹²)."
+    },
+    {
+     "for": "fr",
+     "rel": "same",
+     "text": "Milliarde and Billion are milliard (10⁹) and billion (10¹²)."
+    },
+    {
+     "for": "it",
+     "rel": "same",
+     "text": "Milliarde and Billion are miliardo (10⁹) and bilione (10¹²)."
+    },
+    {
+     "for": "es",
+     "rel": "same",
+     "text": "Milliarde is mil millones (10⁹), Billion is billón (10¹²)."
+    },
+    {
+     "for": "pt",
+     "rel": "same",
+     "text": "Milliarde is mil milhões (10⁹), Billion is bilião (10¹²)."
+    },
+    {
+     "for": "ru",
+     "rel": "same",
+     "text": "Milliarde is миллиард (10⁹); Billion is 10¹², not биллион."
+    }
+   ]
   },
   {
    "id": "de.num.clock",

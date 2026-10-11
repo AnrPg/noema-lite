@@ -169,11 +169,11 @@
     "synonyms": [],
     "synonymsNone": "A preposition has no true synonym; the neighbouring prepositions are compared in the pitfalls.",
     "etymology": {
-     "text": "From Middle High German ūf, from Old High German ūf, from Proto-Germanic *upp. Compare Dutch op, English up.",
+     "text": "From Middle High German ūf, from Old High German ūf, from Proto-Germanic *upp.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "auf is English up: aufstehen = to get up, auf! (colloquial) = open."
+     "auf also means “up” and “open”: aufstehen (to get up), Die Tür ist auf (colloquial: open)."
     ],
     "pitfalls": [
      "Two-way preposition: Wo? (where) + dative – Das Buch ist auf dem Tisch; Wohin? (where to) + accusative – Ich lege das Buch auf den Tisch.",
@@ -181,6 +181,13 @@
     ],
     "subtleties": [
      "Open places take auf, not in: auf dem Markt, auf dem Platz, auf der Straße."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "auf is related to English up."
+     }
     ]
    }
   },
@@ -309,11 +316,11 @@
     "synonyms": [],
     "synonymsNone": "A preposition has no true synonym; the neighbouring prepositions are compared in the pitfalls.",
     "etymology": {
-     "text": "From Middle High German under, unter, from Old High German untar, from Proto-West Germanic *undar. Compare Old Saxon undar, Dutch onder, English under.",
+     "text": "From Middle High German under, unter, from Old High German untar, from Proto-West Germanic *undar.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "unter, Dutch onder and English under are one Germanic word."
+     "unter is an old Germanic word: Old High German untar."
     ],
     "pitfalls": [
      "Two-way preposition: Wo? (where) + dative – Die Tasche ist unter dem Tisch; Wohin? (where to) + accusative – Ich stelle die Tasche unter den Tisch.",
@@ -321,6 +328,13 @@
     ],
     "subtleties": [
      "unter uns gesagt = between you and me."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "unter is related to English under."
+     }
     ]
    }
   },
@@ -433,7 +447,7 @@
     "synonyms": [],
     "synonymsNone": "A preposition has no true synonym; the neighbouring prepositions are compared in the pitfalls.",
     "etymology": {
-     "text": "Inherited from Middle High German nëben, enëben, from Old High German in ebanī (“in a line, level with”). Cognate with Dutch neven, compare English anent.",
+     "text": "Inherited from Middle High German nëben, enëben, from Old High German in ebanī (“in a line, level with”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -444,6 +458,13 @@
     ],
     "subtleties": [
      "nebenan (next door) and der Nachbar (neighbour) are handy companions: Mein Nachbar wohnt nebenan."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "neben is related to the old English word anent (“beside, about”)."
+     }
     ]
    }
   },
@@ -603,11 +624,11 @@
     "synonyms": [],
     "synonymsNone": "A preposition has no true synonym; the neighbouring prepositions are compared in the pitfalls.",
     "etymology": {
-     "text": "From Middle High German vore, vor, from Old High German fora. Cognate with Dutch voor; compare English fore.",
+     "text": "From Middle High German vore, vor, from Old High German fora.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "vor is English fore (before, forehead) and a cousin of Greek πρό (pró)."
+     "vor goes back to Proto-Germanic *fura."
     ],
     "pitfalls": [
      "Two-way preposition: Wo? (where) + dative – Das Auto steht vor dem Haus; Wohin? (where to) + accusative – Ich fahre das Auto vor das Haus.",
@@ -617,6 +638,18 @@
     "subtleties": [
      "vor + a time = “ago”: vor einer Woche (a week ago) – always dative.",
      "before + a verb is the conjunction bevor (Bevor ich esse, …), not vor."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "vor is a cousin of πρό."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "vor is related to English fore (before)."
+     }
     ]
    }
   },
@@ -741,7 +774,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "hinter and English behind / hind (as in hindsight) share the same Germanic root *hind-."
+     "hinter goes back to the Germanic root *hind-."
     ],
     "pitfalls": [
      "Two-way preposition: Wo? (where) + dative – Der Garten ist hinter dem Haus; Wohin? (where to) + accusative – Wir gehen hinter das Haus.",
@@ -749,6 +782,13 @@
     ],
     "subtleties": [
      "hinter is the opposite of vor; the adverbs are hinten (at the back) and vorne (at the front)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "hinter and English behind / hind (hindsight) share one root."
+     }
     ]
    }
   },
@@ -879,13 +919,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "zwischen contains the old word for “two” (zwei) – like English between (“by two”) and twin."
+     "zwischen contains the old word for “two” (zwei)."
     ],
     "pitfalls": [
      "Two-way preposition: Wo? (where) + dative – zwischen dem Sofa und dem Regal; Wohin? (where to) + accusative – zwischen das Sofa und das Regal. Both nouns take the case."
     ],
     "subtleties": [
      "zwischen also works for time: zwischen acht und neun Uhr."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "zwischen contains “two”, like English between and twin."
+     }
     ]
    }
   },
@@ -996,11 +1043,11 @@
      }
     ],
     "etymology": {
-     "text": "Inherited from Middle High German nāh, from Old High German nāh. Compare English nigh. Doublet of nach.",
+     "text": "Inherited from Middle High German nāh, from Old High German nāh. Doublet of nach.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "nah is English nigh (as in “the end is nigh”) – and neighbour is the “nigh-dweller”, German Nachbar."
+     "nah is the root of Nachbar, the “near-dweller”."
     ],
     "pitfalls": [
      "nah alone or with an/bei: Das Hotel ist nah am Strand. – “Near the station” is more often in der Nähe vom Bahnhof / des Bahnhofs.",
@@ -1008,6 +1055,13 @@
     ],
     "subtleties": [
      "nah also means emotionally close: Wir stehen uns sehr nah."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "nah is related to English nigh."
+     }
     ]
    },
    "features": {
@@ -1108,7 +1162,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Nähe and nah are one family – like Greek κοντά and κοντινός."
+     "Nähe and nah are one family."
     ],
     "pitfalls": [
      "in der Nähe von + dative: in der Nähe vom Park (von dem → vom).",
@@ -1116,6 +1170,13 @@
     ],
     "subtleties": [
      "Ist hier in der Nähe …? is the standard question when you look for something."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Nähe and nah are one family, as κοντά and κοντινός are."
+     }
     ]
    },
    "features": {
@@ -1257,11 +1318,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German wīt, from Old High German wīt, from Proto-Germanic *wīdaz. Compare Dutch wijd, English wide.",
+     "text": "From Middle High German wīt, from Old High German wīt, from Proto-Germanic *wīdaz.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "weit is English wide; English “far” is German fern (as in Fernseher, “far-seer” = TV)."
+     "weit means far as well as wide; fern is far away (Fernseher, “far-seer” = TV)."
     ],
     "pitfalls": [
      "weit means “far” – and “wide”: ein weites Land (a vast country), eine weite Hose (wide trousers).",
@@ -1269,6 +1330,13 @@
     ],
     "subtleties": [
      "Wie weit ist es? asks the distance; So weit, so gut = so far, so good."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "weit is English wide, but it also means far: Der Flughafen ist weit."
+     }
     ]
    },
    "features": {
@@ -1617,7 +1685,7 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German linkes, originally the genitive of linc (whence modern link); by surface analysis link + -s. Cognate with Dutch links.",
+     "text": "From Middle High German linkes, originally the genitive of linc (whence modern link); by surface analysis link + -s.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -1737,13 +1805,25 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "rechts and recht (right, law) are one word – like English right and Greek δεξιά / δεξιός (right, skilful)."
+     "rechts and recht (right, law, correct) are one word."
     ],
     "pitfalls": [
      "rechts (on the right) is different from recht (right, correct; quite): Du hast recht. – Das ist recht gut."
     ],
     "subtleties": [
      "rechts vor links: at crossings without signs, the car coming from the right goes first."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "rechts and recht are one word, like English right."
+     },
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "rechts and recht are one word, like δεξιά and δεξιός (right, skilful)."
+     }
     ]
    },
    "features": {
@@ -1873,7 +1953,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Küche, kochen and Koch all come from Latin coquere (to cook), like English kitchen and cook."
+     "Küche, kochen and Koch all come from Latin coquere (to cook)."
     ],
     "pitfalls": [
      "die Küche (kitchen) vs der Kuchen (cake): Der Kuchen ist in der Küche.",
@@ -1881,6 +1961,13 @@
     ],
     "subtleties": [
      "In German flat adverts, EBK = Einbauküche (fitted kitchen) – many flats are rented without one!"
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Küche and Koch are related to English kitchen and cook."
+     }
     ]
    }
   },
@@ -2020,7 +2107,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Zimmer once meant timber (English timber is the same word): a room was what was built of wood."
+     "Zimmer once meant timber: a room was what was built of wood."
     ],
     "pitfalls": [
      "Asking for the toilet: Wo ist die Toilette? – not *Wo ist das Badezimmer? (that sounds as if you want a shower).",
@@ -2028,6 +2115,13 @@
     ],
     "subtleties": [
      "Many German flats have the toilet in the bathroom; a separate WC is called Gäste-WC."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Zimmer is the same word as English timber."
+     }
     ]
    }
   },
@@ -2203,11 +2297,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German bat, from Old High German bad, from Proto-West Germanic *baþ, from Proto-Germanic *baþą. Related to bähen.",
+     "text": "From Middle High German bat, from Old High German bad, from Proto-West Germanic *baþ, from Proto-Germanic *baþą.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Bad is English bath; the city of Bath in England and Baden-Baden in Germany are both named after their hot springs."
+     "Baden-Baden and the many towns called Bad … are named after their hot springs."
     ],
     "pitfalls": [
      "Plural with umlaut: die Bäder.",
@@ -2215,6 +2309,13 @@
     ],
     "subtleties": [
      "In flat adverts Bad is the bathroom; Wanne (tub) or Dusche (shower) says what is in it."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Bad is English bath; the city of Bath is named after its hot springs too."
+     }
     ]
    }
   },
@@ -2336,7 +2437,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "schlafen (to sleep) is English sleep – Schlafzimmer is literally “sleep room”."
+     "Schlafzimmer is literally “sleep room”."
     ],
     "pitfalls": [
      "Plural = singular: die Schlafzimmer; dative plural den Schlafzimmern.",
@@ -2344,6 +2445,13 @@
     ],
     "subtleties": [
      "Schlafzimmerblick (“bedroom look”) is a dreamy, sleepy look."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "schlafen is English sleep."
+     }
     ]
    }
   },
@@ -2606,18 +2714,35 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German garte, from Old High German garto, from Proto-West Germanic *gardō. Cognate with English yard, and through French with English garden.",
+     "text": "From Middle High German garte, from Old High German garto, from Proto-West Germanic *gardō.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The same root gave Russian город (town – once a fenced place) and Turkish has bahçe (from Persian)."
+     "Garten first meant a fenced place."
     ],
     "pitfalls": [
      "der Garten (masculine), plural die Gärten.",
      "im Garten (where) – in den Garten (where to)."
     ],
     "subtleties": [
-     "Kindergarten went into English from German (Friedrich Fröbel, 1840)."
+     "A Kindergarten (Friedrich Fröbel, 1840) is a Garten for children."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "город (once a fenced place) comes from the same root as Garten."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Garten is related to English yard, and – through a borrowing – to garden."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "Garten is related to jardin, which came from the Germanic word."
+     }
     ]
    }
   },
@@ -2784,11 +2909,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German boden, bodem, from Old High German bodam, from Proto-West Germanic *bodm. Cognate with English bottom, Dutch bodem.",
+     "text": "From Middle High German boden, bodem, from Old High German bodam, from Proto-West Germanic *bodm.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Boden is English bottom; the Bodensee (Lake Constance) is named after the old palace of Bodman."
+     "The Bodensee (Lake Constance) is named after the old palace of Bodman."
     ],
     "pitfalls": [
      "Plural with umlaut: die Böden.",
@@ -2796,6 +2921,13 @@
     ],
     "subtleties": [
      "Boden has many senses: floor, ground, soil, bottom, attic – the context decides."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Boden is related to English bottom."
+     }
     ]
    }
   },
@@ -3059,6 +3191,13 @@
     ],
     "subtleties": [
      "Treppenwitz: the clever reply you think of too late, on the stairs going out (French l’esprit de l’escalier)."
+    ],
+    "notes": [
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Treppenwitz is l’esprit de l’escalier."
+     }
     ]
    }
   },
@@ -3305,7 +3444,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Sofa travelled from Arabic صُفَّة (a raised bench) via Turkish sofa to Europe – Turkish sofa today is a hall or an entrance room."
+     "Sofa travelled from Arabic صُفَّة (a raised bench) through Turkish to Europe."
     ],
     "pitfalls": [
      "das Sofa (neuter), plural die Sofas.",
@@ -3442,7 +3581,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Kühlschrank is built like Greek ψυγείο (from ψύχω, to cool): named after the cold, not after the food."
+     "Kühlschrank is a “cool cupboard”: named after the cold, not after the food."
     ],
     "pitfalls": [
      "im Kühlschrank (where: dative) – in den Kühlschrank (where to: accusative).",
@@ -3450,6 +3589,13 @@
     ],
     "subtleties": [
      "Kühlschrank is literally “cool cupboard”; a freezer is der Gefrierschrank or das Gefrierfach."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Kühlschrank is built like ψυγείο (from ψύχω): named after the cold."
+     }
     ]
    }
   }

@@ -411,6 +411,46 @@
    "for": "iu",
    "rel": "new",
    "text": "The person of the subject is an ending of the verb, and separate pronouns are used mainly for emphasis; there is no gender. German needs a separate pronoun in every clause and gives things er, sie or es by the noun’s gender."
+  },
+  {
+   "for": "it",
+   "rel": "trap",
+   "text": "Italian leaves the pronoun out (Sono stanco); German must say Ich bin müde. Lei takes the 3rd singular, but Sie always takes the plural form: Sie sind. For things German needs a pronoun by gender: der Tisch → er, die Lampe → sie, das Buch → es."
+  },
+  {
+   "for": "sq",
+   "rel": "trap",
+   "text": "Albanian leaves the pronoun out (Jam i lodhur); German must say Ich bin müde. Polite Ju is the 2nd plural; Sie takes the form of “they”: Sie sind. As with ai / ajo for things, the pronoun follows the noun’s gender – but German adds a neuter: das Buch → es."
+  },
+  {
+   "for": "pt",
+   "rel": "trap",
+   "text": "Portuguese leaves the pronoun out (Sou professor); German must say Ich bin Lehrer. o senhor / você take the 3rd singular, but Sie always takes the plural form: Sie sind. For things German says er, sie, es by gender: der Tisch → er."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "trap",
+   "text": "If your language can drop the subject pronoun, German cannot: Ich bin müde, not *Bin müde. er / sie / es follow the noun’s gender for things too, and polite Sie takes the 3rd person plural: Sie sind."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If your verb ending shows the person and the pronoun is often left out, German still needs the pronoun: Ich bin müde. “He” and “she” are two words, er and sie, and things are er, sie or es by the noun’s gender."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If pronouns can be left out when the context is clear, note that the German subject pronoun is always said and changes the verb: ich bin, du bist, er ist. Things are er, sie or es by gender."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If the subject is a prefix or suffix of your verb, German adds a separate pronoun before the verb that can never be left out: ich komme, du kommst, sie kommt."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If your “you” and “they” change for a man or a woman, note that German splits only he / she / it (er, sie, es): du, ihr and sie (they) serve for both sexes. The pronoun is never left out: Ich bin müde."
   }
  ]
 }

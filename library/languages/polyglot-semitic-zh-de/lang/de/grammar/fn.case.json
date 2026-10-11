@@ -573,6 +573,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut expresses these relations with case endings and has no prepositions; German combines a preposition with a case on the article: mit dem Bus, in der Küche."
+  },
+  {
+   "for": "it",
+   "rel": "new",
+   "text": "Italian nouns stay the same after a preposition, which merges with the article (nel, al, dal); German merges too (im, am, zum, vom), but the article also takes the case the preposition asks for: mit dem Vater, für den Vater."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Albanian prepositions also govern a case – me + accusative (me shokun), nga + nominative (nga shkolla), afër + ablative (afër shkollës); German has two everyday ones, dative and accusative: mit dem Freund, für den Freund."
+  },
+  {
+   "for": "pt",
+   "rel": "new",
+   "text": "Portuguese nouns do not change after a preposition, which merges with the article (no, na, ao, do); German merges too (im, am, zum, vom), and the article changes for the preposition’s case: mit dem Vater, für den Vater."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If prepositions in your language govern cases, the system is familiar: learn the German lists – aus, bei, mit, nach, von, zu + dative; durch, für, ohne, um + accusative – and the two-way ones (in der Küche / in die Küche)."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "Where you would add a case suffix or put a postposition after the noun, German puts a preposition before it and the case on the article: in der Küche, aus der Küche, mit dem Bus."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "new",
+   "text": "Nothing changes after a preposition in your language; in German the article takes the case the preposition asks for: mit dem Bus, für den Vater, in der Schule. Learn each preposition together with its case."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "Relations your language packs into word endings are separate prepositions in German, placed before the noun, and the article takes their case: mit dem Bus, in der Küche."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "Prepositions before the noun will feel natural, and some merge with the article (im = in dem, zum = zu dem), as yours may merge with “the”. New is that the article changes for the case each preposition asks for: mit dem Vater, für den Vater."
   }
  ]
 }

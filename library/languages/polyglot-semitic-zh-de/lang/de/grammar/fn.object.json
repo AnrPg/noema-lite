@@ -415,6 +415,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut leaves the object unmarked, marks the subject of a transitive verb instead (ergative), and shows both persons in the verb ending; German marks the object in the accusative, shows only the subject on the verb, and never builds the object into the verb."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian object pronouns go before the verb (lo mangio); German ones follow it: Ich esse ihn. Italian nouns never show the object, while German marks it on the masculine article: Ich trinke den Kaffee / einen Kaffee."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Albanian marks the object on the noun (djali → djalin, vajza → vajzën) and often repeats it with a short pronoun (e pashë djalin); German marks it only on the masculine article (der Junge → den Jungen) and never adds a pronoun: Ich sehe den Jungen."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese object pronouns cling to the verb (como-o, não o como); German ones simply follow it: Ich esse ihn. Portuguese nouns never show the object, while German changes the masculine article: Ich trinke den Kaffee / einen Kaffee."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your language marks the object with a case, the accusative is familiar; German shows it only on the masculine article (der → den, ein → einen) and on pronouns (mich, dich, ihn) – feminine, neuter and plural look like the nominative."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If your object takes a case suffix (perhaps only when it is definite), German marks it on the article instead, and only in the masculine: den Kaffee, einen Kaffee. The object usually follows the verb: Ich trinke den Kaffee."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "new",
+   "text": "If position alone marks the object, German adds a form – der Kaffee → Ich trinke den Kaffee – and because the form shows the role, the object can even come first: Den Kaffee trinke ich."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If the object is built into your verb, in German it is a separate word after the verb, in the accusative: Ich esse einen Apfel. Ich mag dich. Verbs like essen and trinken can also stand without any object."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "If you mark a definite object with a particle or attach object pronouns to the verb, German marks the object on the masculine article (den Kaffee) and uses separate pronouns after the verb: Ich mag dich. Ich sehe ihn."
   }
  ]
 }

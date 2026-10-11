@@ -257,18 +257,30 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German boretsch, buretsch, reflecting a Romance pronunciation of Medieval Latin borāgō. Compare French bourrache.",
+     "text": "From Middle High German boretsch, buretsch, reflecting a Romance pronunciation of Medieval Latin borāgō.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
      "Borage is one of the seven herbs of the Frankfurter Grüne Soße, together with parsley, chives, chervil, cress, sorrel and salad burnet.",
-     "English borage, French bourrache and German Borretsch all come from Medieval Latin borago."
+     "Borretsch comes from Medieval Latin borago."
     ],
     "pitfalls": [
      "No plural in normal use: say Borretschblätter (leaves) or Borretschpflanzen (plants)."
     ],
     "subtleties": [
      "Only young leaves are used: older ones are very hairy. The flowers are a garnish and turn pink when they fade."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English borage is the same word as Borretsch, from medieval borago."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "Borretsch is related to French bourrache."
+     }
     ]
    }
   },
@@ -408,6 +420,13 @@
     ],
     "subtleties": [
      "Botanically Gänsefuß is the whole genus; the edible weed is the Weiße Gänsefuß. Like spinach it contains oxalic acid, so it is usually cooked."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Chenopodium is χήνα + πόδι – exactly Gänsefuß."
+     }
     ]
    }
   },
@@ -561,6 +580,13 @@
     ],
     "subtleties": [
      "The cut root browns quickly; Japanese recipes soak it in water or vinegar water."
+    ],
+    "notes": [
+     {
+      "for": "ja",
+      "rel": "same",
+      "text": "Klettenwurzel is ゴボウ (gobō)."
+     }
     ]
    }
   },
@@ -687,13 +713,20 @@
     },
     "funFacts": [
      "Most “wasabi” paste outside Japan is horseradish with mustard and green colouring; real wasabi is expensive.",
-     "Chinese writes 山葵 (shānkuí) with the same characters as Japanese, but usually calls the paste 芥末 (jièmo)."
+     "Chinese writes the plant 山葵 (shānkuí) but usually calls the paste 芥末 (jièmo)."
     ],
     "pitfalls": [
      "Gender: der Wasabi (Wiktionary); the plural is identical and hardly used."
     ],
     "subtleties": [
      "The burning comes from volatile mustard oils: it rises into the nose and fades quickly, unlike the heat of chili."
+    ],
+    "notes": [
+     {
+      "for": "ja",
+      "rel": "same",
+      "text": "Wasabi is わさび (山葵); Chinese writes the plant with the same characters but calls the paste 芥末."
+     }
     ]
    }
   },
@@ -829,13 +862,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Chinese 葱 (cōng) and Japanese negi (ねぎ) are mostly this species, not the European onion."
+     "Chinese 葱 (cōng) is mostly this species, not the common onion."
     ],
     "pitfalls": [
      "It is not an onion for winter storage: the name refers to its frost hardiness."
     ],
     "subtleties": [
      "In shops Frühlingszwiebel covers both young common onions and Welsh onions; gardeners keep the names apart."
+    ],
+    "notes": [
+     {
+      "for": "ja",
+      "rel": "same",
+      "text": "ねぎ (negi) is mostly this species – Winterzwiebel, not the 玉ねぎ (Zwiebel)."
+     }
     ]
    }
   },
@@ -967,7 +1007,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The name says “foreign (barbarian) rheum”: the root came to the Greeks from beyond their world. Greek ραβέντι, Turkish ravent and Russian ревень are related names.",
+     "The name says “foreign (barbarian) rheum”: the root came to the Greeks from beyond their world.",
      "Medicinal rhubarb root is Chinese 大黄 (dàhuáng, “big yellow”)."
     ],
     "pitfalls": [
@@ -977,7 +1017,19 @@
     "subtleties": [
      "Botanically a vegetable (a leafstalk), but in the kitchen treated like fruit; the traditional harvest ends on Johanni, 24 June."
     ],
-    "synonymsNone": "No other standard word; Swiss and Austrian German also say Rhabarber."
+    "synonymsNone": "No other standard word; Swiss and Austrian German also say Rhabarber.",
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "ραβέντι is a related name."
+     },
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "ревень is a related name."
+     }
+    ]
    }
   },
   {
@@ -1230,17 +1282,29 @@
      }
     ],
     "etymology": {
-     "text": "Wasser (“water”, from Old High German waȥȥar) + Nuss (“nut”, from Old High German nuȥ, cognate with English nut).",
+     "text": "Wasser (“water”, from Old High German waȥȥar) + Nuss (“nut”, from Old High German nuȥ).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
      "Chinese 菱角 (língjiao). People in Europe gathered water caltrops as food since prehistoric times."
     ],
     "pitfalls": [
-     "Do not mix up Wassernuss (Trapa) and Wasserkastanie (Eleocharis) – English “water chestnut” can mean both."
+     "Do not mix up Wassernuss (Trapa) and Wasserkastanie (Eleocharis): they are different plants."
     ],
     "subtleties": [
      "The raw nut is not eaten; it is boiled or roasted, and the starchy kernel tastes like chestnut."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English “water chestnut” can mean both Wassernuss and Wasserkastanie."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Nuss is related to English nut."
+     }
     ]
    }
   },
@@ -1367,7 +1431,7 @@
      }
     ],
     "etymology": {
-     "text": "Yams (“yam”) + Bohne (“bean”, from Old High German bōna, cognate with English bean): a bean plant with a yam-like root.",
+     "text": "Yams (“yam”) + Bohne (“bean”, from Old High German bōna): a bean plant with a yam-like root.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -1379,6 +1443,13 @@
     ],
     "subtleties": [
      "In Germany it is a niche product; recipes usually write Jicama, while Yambohne is the dictionary and botany name."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Bohne is related to English bean."
+     }
     ]
    }
   },
@@ -1653,7 +1724,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Turkish yer bademi means the same as Erdmandel: “earth almond”. In Egypt tiger nuts are called حَبّ العَزِيز (ḥabb al-ʿazīz).",
+     "Erdmandel means “earth almond”. In Egypt tiger nuts are called حَبّ العَزِيز (ḥabb al-ʿazīz).",
      "Tiger nuts were found as grave goods in ancient Egyptian tombs."
     ],
     "pitfalls": [
@@ -1661,6 +1732,13 @@
     ],
     "subtleties": [
      "Dried tiger nuts are hard and are soaked before eating or making milk."
+    ],
+    "notes": [
+     {
+      "for": "es",
+      "rel": "similar",
+      "text": "Erdmandel is chufa, the nut of horchata de chufa."
+     }
     ]
    }
   },
@@ -2173,13 +2251,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English Good King Henry, German Guter Heinrich: the plant has a man’s name in both languages."
+     "The plant bears a man’s name: Guter Heinrich, “good Henry”."
     ],
     "pitfalls": [
      "Gut is declined like an adjective: der Gute Heinrich, des Guten Heinrichs, but Guter Heinrich without an article. Write both parts with a capital letter."
     ],
     "subtleties": [
      "Botanists moved it from the goosefoot genus Chenopodium to Blitum, but cooks still treat it like fat hen and spinach."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "In English it is Good King Henry – a man’s name too."
+     }
     ]
    }
   },
@@ -2433,20 +2518,42 @@
     "phrases": [],
     "synonyms": [],
     "etymology": {
-     "text": "Meer (“sea”, from Old High German meri, cognate with Latin mare) + Fenchel (“fennel”, ultimately from Latin fēnuculum).",
+     "text": "Meer (“sea”, from Old High German meri) + Fenchel (“fennel”, ultimately from Latin fēnuculum).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek κρίταμο (krítamo) is the same plant, a classic Greek pickle.",
+     "Pickled sea fennel is a classic of Mediterranean coasts.",
      "Shakespeare’s King Lear mentions a samphire gatherer on the cliffs of Dover: “dreadful trade!”"
     ],
     "pitfalls": [
-     "English “samphire” is also used for glasswort (Queller); in German these are two different words."
+     "Do not confuse Meerfenchel with Queller (glasswort): two different plants and two different words."
     ],
     "subtleties": [
      "It is not related to fennel; the name comes from the fennel-like smell and feathery leaves."
     ],
-    "synonymsNone": "No common German synonym: the plant is rare in German-speaking countries, and cooks sometimes use the French name criste marine instead."
+    "synonymsNone": "No common German synonym: the plant is rare in German-speaking countries, and cooks sometimes use the French name criste marine instead.",
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "κρίταμο is this plant – the classic Greek pickle."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "English “samphire” is used for Meerfenchel and for glasswort (Queller); German keeps them apart."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "Meer is related to mare (sea)."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "Meer is related to mer (sea)."
+     }
+    ]
    }
   },
   {
@@ -2570,17 +2677,24 @@
      }
     ],
     "etymology": {
-     "text": "From Low German Queller, from Middle Low German queller, quelder, cognate with Dutch kwelder (“salt marsh”); probably from quellen (“to soak, swell with water”) + -er.",
+     "text": "From Low German Queller, from Middle Low German queller, quelder; probably from quellen (“to soak, swell with water”) + -er.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The ash of glasswort was once used to make glass and soap – hence the English name."
+     "The ash of Queller was once used to make glass and soap."
     ],
     "pitfalls": [
      "Usually used without plural as a mass noun; the plural is the same form: die Queller."
     ],
     "subtleties": [
      "The plants store salt, so they need no extra salt; rinse them and cook only briefly."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "The glass made from its ash gave the English name glasswort."
+     }
     ]
    }
   },
@@ -2829,7 +2943,7 @@
      }
     ],
     "etymology": {
-     "text": "Palme (“palm”, from Latin palma) + Herz (“heart”, from Old High German hërza, cognate with English heart).",
+     "text": "Palme (“palm”, from Latin palma) + Herz (“heart”, from Old High German hërza).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -2840,6 +2954,23 @@
     ],
     "subtleties": [
      "Usually used in the plural for the product (Palmherzen); one piece is ein Palmherz or eine Stange Palmherz."
+    ],
+    "notes": [
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "Palmherz translates palmito."
+     },
+     {
+      "for": "pt",
+      "rel": "same",
+      "text": "Palmherz translates palmito."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Herz is related to English heart."
+     }
     ]
    }
   },
@@ -3371,7 +3502,7 @@
      {
       "word": "Amaranth",
       "register": "neutral",
-      "nuance": "spelling variant, as in English"
+      "nuance": "spelling variant with -th"
      }
     ],
     "etymology": {
@@ -3379,7 +3510,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Greek βλίτα (vlíta), boiled amaranth greens with lemon and oil, is a classic summer dish; Chinese 苋菜 (xiàncài) is amaranth greens too.",
+     "Boiled amaranth greens with lemon and oil are a summer dish around the Mediterranean; Chinese 苋菜 (xiàncài) is amaranth greens too.",
      "Amaranth was a staple grain of the Aztecs."
     ],
     "pitfalls": [
@@ -3388,6 +3519,18 @@
     ],
     "subtleties": [
      "The same plants give grain (the seeds) and greens (the leaves); some species are common garden weeds."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Amaranth is spelled as in English."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "βλίτα are Amarant leaves."
+     }
     ]
    }
   },
@@ -3514,7 +3657,7 @@
      }
     ],
     "etymology": {
-     "text": "From Winter (“winter”) + Kresse (“cress”, from Old High German kressa, cognate with English cress).",
+     "text": "From Winter (“winter”) + Kresse (“cress”, from Old High German kressa).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -3525,6 +3668,13 @@
     ],
     "subtleties": [
      "Older leaves become bitter; pick young ones or the winter rosettes."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Kresse is related to English cress."
+     }
     ]
    }
   },
@@ -3656,13 +3806,25 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English calls it walking onion: the heavy stalks bend, the bulblets touch the ground and root, so the plant “walks” across the bed."
+     "The heavy stalks bend, the bulblets touch the ground and root, so the plant “walks” across the bed."
     ],
     "pitfalls": [
      "Etage is pronounced the French way: [eˈtaːʒə]."
     ],
     "subtleties": [
      "You can eat the green leaves like spring onions and the bulblets like small onions or shallots."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "That is why English calls it walking onion."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Etage is étage (floor), said [eˈtaːʒə]: an Etagenzwiebel grows in storeys."
+     }
     ]
    }
   },

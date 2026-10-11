@@ -349,6 +349,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut verbs agree with subject and object in person and number in one ending, but there is no gender. German agreement inside the noun phrase follows the gender of the noun."
+  },
+  {
+   "for": "it",
+   "rel": "trap",
+   "text": "Italian adjectives agree after essere too (il tavolo è nuovo, la lampada è nuova); German ones stay bare after sein: Der Tisch ist neu, die Lampe ist neu. Before the noun German adds case to gender and number: ein neuer Tisch, mit einem neuen Tisch."
+  },
+  {
+   "for": "sq",
+   "rel": "trap",
+   "text": "Albanian adjectives keep their linking article and agree after jam too (libri është i ri, tryeza është e re); German predicate adjectives never change: Das Buch ist neu, der Tisch ist neu. A pronoun follows the noun’s gender in both, but the genders differ: tryeza (feminine) → ajo, der Tisch → er."
+  },
+  {
+   "for": "pt",
+   "rel": "trap",
+   "text": "Portuguese adjectives agree after ser and estar too (a casa é pequena); German ones agree only before the noun: das kleine Haus, but Das Haus ist klein. As with ele / ela, a thing is er, sie or es by its grammatical gender – a mesa → ela, but der Tisch → er."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "Agreement in gender and number will feel natural. New is that German agreement stops at sein (Der Tisch ist groß, Die Türen sind groß) and that the article and the adjective share one signal: der große Tisch, ein großer Tisch."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "new",
+   "text": "If determiners and adjectives never change in your language, German agreement is new: the article, dieser, mein and the adjective before a noun all change with its gender, number and case. A pronoun takes the noun’s gender even for things: der Tisch → er."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "new",
+   "text": "In German the words around a noun change with it: der / die / das, dieser / diese / dieses, ein großer / eine große / ein großes. Learn every noun with its article – everything around it depends on that gender."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If your language marks agreement on the verb for subject and object, German adds agreement inside the noun phrase: the article and the adjective follow the noun’s gender (ein großer Tisch, eine große Lampe), while the verb agrees only with the subject."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "trap",
+   "text": "If your adjectives agree after the noun and also in the predicate, note that German agreement stops at sein: Die Tür ist groß, Die Türen sind groß. Before a noun the adjective does agree – with three genders, not two, and with a case."
   }
  ]
 }

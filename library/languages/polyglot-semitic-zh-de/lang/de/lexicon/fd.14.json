@@ -119,11 +119,11 @@
     "synonyms": [],
     "synonymsNone": "A day of the week has no synonym in standard German; regional words are given as variants.",
     "etymology": {
-     "text": "From Middle High German mōntac, māntac, from Old High German mānotag, from Proto-West Germanic *mānini dag (“day of the moon”), equivalent to Mond + Tag. Compare Dutch maandag, English Monday, Danish mandag.",
+     "text": "From Middle High German mōntac, māntac, from Old High German mānotag, from Proto-West Germanic *mānini dag (“day of the moon”), equivalent to Mond + Tag.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Montag is the “moon day” (Mond + Tag), a calque of Latin dies Lunae; Greek Δευτέρα and Hebrew יוֹם שֵׁנִי count instead: “the second (day)”, and Chinese says 星期一, “week-one”."
+     "Montag is the “moon day” (Mond + Tag), a calque of Latin dies Lunae; Hebrew יוֹם שֵׁנִי counts instead (“the second day”), and Chinese says 星期一, “week-one”."
     ],
     "pitfalls": [
      "On a day = am (an + dem): am Montag – not *in Montag or *an Montag without the article.",
@@ -132,6 +132,38 @@
     "subtleties": [
      "Every Monday = montags (lower case, with -s: an adverb): Montags ist das Museum geschlossen.",
      "Ein blauer Montag is a Monday someone skips work (blaumachen = to skive off)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "Δευτέρα counts the days; German names Montag after the moon."
+     },
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Montag is the moon day, like lundi."
+     },
+     {
+      "for": "it",
+      "rel": "same",
+      "text": "Montag is the moon day, like lunedì."
+     },
+     {
+      "for": "es",
+      "rel": "same",
+      "text": "Montag is the moon day, like lunes."
+     },
+     {
+      "for": "pt",
+      "rel": "different",
+      "text": "segunda-feira counts the days; German names Montag after the moon."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Montag is related to English Monday."
+     }
     ]
    }
   },
@@ -242,11 +274,11 @@
     "synonyms": [],
     "synonymsNone": "A day of the week has no synonym in standard German; regional words are given as variants.",
     "etymology": {
-     "text": "Spread via the Lower Rhineland from Middle Low German dingesdach and Middle Dutch dinsendach, replacing older High German forms (Middle High German ziestac, Bavarian Ertag). Probably from Proto-Germanic *þingas-dagaz (“day of Thingsus”, a Germanic god, or “day of the Thing”, the council). Cognate with Dutch dinsdag.",
+     "text": "Spread via the Lower Rhineland from Middle Low German dingesdach and Middle Dutch dinsendach, replacing older High German forms (Middle High German ziestac, Bavarian Ertag). Probably from Proto-Germanic *þingas-dagaz (“day of Thingsus”, a Germanic god, or “day of the Thing”, the council).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English Tuesday is Tiw’s day; German took a different name from the north – southern dialects still say Ertag or Zischtig."
+     "Dienstag comes from the name of a Germanic god (Thingsus); southern dialects still say Ertag or Zischtig."
     ],
     "pitfalls": [
      "On a day = am (an + dem): am Dienstag – not *in Dienstag or *an Dienstag without the article.",
@@ -254,6 +286,13 @@
     ],
     "subtleties": [
      "Every Tuesday = dienstags (lower case, with -s: an adverb): Dienstags kochen wir immer Suppe."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "different",
+      "text": "English Tuesday is Tiw’s day; German took a different name from the north."
+     }
     ]
    }
   },
@@ -364,11 +403,11 @@
     "synonyms": [],
     "synonymsNone": "A day of the week has no synonym in standard German; regional words are given as variants.",
     "etymology": {
-     "text": "From Middle High German mittewoche, from Old High German mittawehha (literally “middle of the week”), calqued on Ecclesiastical Latin media hebdomas. Equivalent to Mitte (“middle”) + Woche (“week”); it became masculine after the other weekdays. Compare English midweek.",
+     "text": "From Middle High German mittewoche, from Old High German mittawehha (literally “middle of the week”), calqued on Ecclesiastical Latin media hebdomas. Equivalent to Mitte (“middle”) + Woche (“week”); it became masculine after the other weekdays.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Mittwoch is “mid-week” – the old “Odin’s day” (English Wednesday) was dropped in German long ago; Greek Τετάρτη and Hebrew יוֹם רְבִיעִי count it as “the fourth (day)”."
+     "Mittwoch is “mid-week” – the old “Odin’s day” was dropped in German long ago; Hebrew יוֹם רְבִיעִי counts it as “the fourth (day)”."
     ],
     "pitfalls": [
      "On a day = am (an + dem): am Mittwoch – not *in Mittwoch or *an Mittwoch without the article.",
@@ -376,6 +415,23 @@
     ],
     "subtleties": [
      "Every Wednesday = mittwochs (lower case, with -s: an adverb): Mittwochs gehe ich zu Fuß zur Arbeit."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "different",
+      "text": "English Wednesday keeps Odin’s day; German says Mittwoch, “mid-week”."
+     },
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "Τετάρτη counts it as the fourth day; German says Mittwoch, “mid-week”."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Mittwoch is built like English midweek."
+     }
     ]
    }
   },
@@ -486,11 +542,11 @@
     "synonyms": [],
     "synonymsNone": "A day of the week has no synonym in standard German; regional words are given as variants.",
     "etymology": {
-     "text": "From Middle High German donerstac, from Old High German donarestag, from Proto-West Germanic *Þunras dag (“day of the thunder god”). Compare Dutch donderdag, English Thursday, Danish torsdag.",
+     "text": "From Middle High German donerstac, from Old High German donarestag, from Proto-West Germanic *Þunras dag (“day of the thunder god”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Donnerstag is the day of Donar (Thor), the thunder god – der Donner is still “thunder”; it translates Latin dies Iovis (Jupiter’s day), Greek Πέμπτη is simply “the fifth”."
+     "Donnerstag is the day of Donar (Thor), the thunder god – der Donner is still “thunder”; it translates Latin dies Iovis (Jupiter’s day)."
     ],
     "pitfalls": [
      "On a day = am (an + dem): am Donnerstag – not *in Donnerstag or *an Donnerstag without the article.",
@@ -498,6 +554,18 @@
     ],
     "subtleties": [
      "Every Thursday = donnerstags (lower case, with -s: an adverb): Donnerstags essen wir im Restaurant."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "Πέμπτη is simply “the fifth”; Donnerstag is the thunder god’s day."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Donnerstag is related to English Thursday."
+     }
     ]
    }
   },
@@ -612,7 +680,7 @@
     "synonyms": [],
     "synonymsNone": "A day of the week has no synonym in standard German; regional words are given as variants.",
     "etymology": {
-     "text": "From Middle High German vrītac, from Old High German frīatag, from Proto-West Germanic *Frījā dag (“day of Frigg”), calque of Latin dies Veneris. Compare Dutch vrijdag, English Friday, Danish fredag.",
+     "text": "From Middle High German vrītac, from Old High German frīatag, from Proto-West Germanic *Frījā dag (“day of Frigg”), calque of Latin dies Veneris.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -625,6 +693,13 @@
     "subtleties": [
      "Every Friday = freitags (lower case, with -s: an adverb): Freitags isst er immer Fisch.",
      "Karfreitag (Good Friday) is a public holiday all over Germany."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Freitag is related to English Friday."
+     }
     ]
    }
   },
@@ -746,11 +821,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German sameȥtac, from Old High German sambaȥtag (“Sabbath day”), from Gothic *sambatō, an alteration of Biblical sabbatō, from Koine Greek σάββατον (sábbaton, “Sabbath”). Compare French samedi, Hungarian szombat.",
+     "text": "From Middle High German sameȥtac, from Old High German sambaȥtag (“Sabbath day”), from Gothic *sambatō, an alteration of Biblical sabbatō, from Koine Greek σάββατον (sábbaton, “Sabbath”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Samstag, Greek Σάββατο, Russian суббота, Arabic السَّبْت (as-sabt) and Hebrew שַׁבָּת (shabbat) all come from or share the Semitic word for the Sabbath – one word across the course languages."
+     "Samstag, Arabic السَّبْت (as-sabt) and Hebrew שַׁבָּת (shabbat) all come from or share the Semitic word for the Sabbath – one word across the course languages."
     ],
     "pitfalls": [
      "On a day = am (an + dem): am Samstag – not *in Samstag or *an Samstag without the article.",
@@ -759,6 +834,23 @@
     "subtleties": [
      "Every Saturday = samstags (lower case, with -s: an adverb): Samstags spielt mein Sohn Fußball.",
      "Many shops close early on Saturday in small towns; on Sunday almost all are closed."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Samstag and Σάββατο both come from the Sabbath."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "Samstag and суббота both come from the Sabbath."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "Samstag and samedi both go back to the word Sabbath."
+     }
     ]
    }
   },
@@ -873,11 +965,11 @@
     "synonyms": [],
     "synonymsNone": "A day of the week has no synonym in standard German; regional words are given as variants.",
     "etymology": {
-     "text": "From Middle High German sunne(n)tac, from Old High German sunnūntag, from late Proto-West Germanic *sunnōn dag (“day of the sun”), a calque of Latin diēs Sōlis. Equivalent to Sonne + Tag. Compare Dutch zondag, English Sunday.",
+     "text": "From Middle High German sunne(n)tac, from Old High German sunnūntag, from late Proto-West Germanic *sunnōn dag (“day of the sun”), a calque of Latin diēs Sōlis. Equivalent to Sonne + Tag.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Sonntag is the “sun day”; Greek Κυριακή is “the Lord’s day”, and Hebrew יוֹם רִאשׁוֹן (“first day”) and Arabic الأَحَد (“the one”) count it as the first day – the week begins on Sunday there."
+     "Sonntag is the “sun day”; Hebrew יוֹם רִאשׁוֹן (“first day”) and Arabic الأَحَد (“the one”) count it as the first day – the week begins on Sunday there."
     ],
     "pitfalls": [
      "On a day = am (an + dem): am Sonntag – not *in Sonntag or *an Sonntag without the article.",
@@ -886,6 +978,23 @@
     "subtleties": [
      "Every Sunday = sonntags (lower case, with -s: an adverb): Sonntags sind die Geschäfte zu.",
      "Sonntagsruhe: by law most shops are closed on Sundays and public holidays."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "Κυριακή is the Lord’s day; Sonntag is the sun day."
+     },
+     {
+      "for": "ru",
+      "rel": "different",
+      "text": "воскресенье is the day of the Resurrection; Sonntag is the sun day."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Sonntag is related to English Sunday."
+     }
     ]
    }
   },
@@ -1007,7 +1116,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Wochenende copies English weekend piece by piece – Greek also uses its own word, Σαββατοκύριακο (“Saturday-Sunday”)."
+     "Wochenende is built piece by piece: Woche + -n- + Ende."
     ],
     "pitfalls": [
      "Neuter (because of das Ende): das Wochenende.",
@@ -1015,6 +1124,18 @@
     ],
     "subtleties": [
      "Wochenende is a loan translation of English weekend – one of many words German built from its own parts on an English model."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Wochenende copies English weekend piece by piece."
+     },
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "Σαββατοκύριακο names the two days; Wochenende is “week end”."
+     }
     ]
    }
   },
@@ -1215,7 +1336,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Tag and English day are the same word; Greek ημέρα gives the “ephemeral” (lasting a day)."
+     "Tag is masculine, and so are all the days: der Montag … der Sonntag."
     ],
     "pitfalls": [
      "Masculine: der Tag, plural die Tage, dative plural den Tagen.",
@@ -1225,6 +1346,13 @@
     "subtleties": [
      "Guten Tag is said from late morning to early evening; Tag! alone is a short casual greeting.",
      "Reichstag and Bundestag are “diets”: assemblies that once met on a fixed day."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Tag and English day are the same word."
+     }
     ]
    }
   },
@@ -1372,7 +1500,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Nacht, English night, Greek νύχτα (νύξ), Latin nox and Russian ночь all come from Proto-Indo-European *nókʷts."
+     "Nacht comes from Proto-Indo-European *nókʷts."
     ],
     "pitfalls": [
      "At night = in der Nacht (in + dative feminine) – the one part of the day that does not take am: am Morgen, am Abend, but in der Nacht.",
@@ -1381,6 +1509,43 @@
     "subtleties": [
      "heute Nacht means tonight or last night – context decides: Heute Nacht habe ich schlecht geschlafen (last night).",
      "nachts (lower case) = at night, every night: Nachts ist es hier ruhig."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Nacht and English night are one word."
+     },
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "Nacht and νύχτα (νύξ) come from one Indo-European word."
+     },
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "Nacht and ночь come from one Indo-European word."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "Nacht and nuit come from one Indo-European word."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "Nacht and notte come from one Indo-European word."
+     },
+     {
+      "for": "es",
+      "rel": "similar",
+      "text": "Nacht and noche come from one Indo-European word."
+     },
+     {
+      "for": "pt",
+      "rel": "similar",
+      "text": "Nacht and noite come from one Indo-European word."
+     }
     ]
    }
   },
@@ -1561,11 +1726,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German morgen, from Old High German morgan, from Proto-West Germanic *morgan, from Proto-Germanic *murganaz, from Proto-Indo-European *merkʷ- (“to blink, twinkle”). Compare Dutch morgen, English morn and morrow, Swedish morgon.",
+     "text": "From Middle High German morgen, from Old High German morgan, from Proto-West Germanic *morgan, from Proto-Germanic *murganaz, from Proto-Indo-European *merkʷ- (“to blink, twinkle”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "morgen (tomorrow) grew out of der Morgen: “in the morning” came to mean “the next morning” – English morrow and morning did the same."
+     "morgen (tomorrow) grew out of der Morgen: “in the morning” came to mean “the next morning”."
     ],
     "pitfalls": [
      "der Morgen (morning, capital M) ≠ morgen (tomorrow, lower case); tomorrow morning is morgen früh (not *morgen Morgen).",
@@ -1574,6 +1739,13 @@
     ],
     "subtleties": [
      "Plural die Morgen (same as the singular): Die Morgen sind jetzt kalt."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English morrow and morning went the same way. Morgen is related to English morn and morrow."
+     }
     ]
    }
   },
@@ -1704,11 +1876,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German mittetac, from Old High German mittitac, compound of mitti (see Mitte) and tac (see Tag). Cognate with Dutch middag.",
+     "text": "From Middle High German mittetac, from Old High German mittitac, compound of mitti (see Mitte) and tac (see Tag).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Mittag is “mid-day” (Mitte + Tag), like Dutch middag and Greek μεσημέρι (μέσος + ημέρα, “middle of the day”)."
+     "Mittag is “mid-day” (Mitte + Tag)."
     ],
     "pitfalls": [
      "Mittag is a time of day; the meal is das Mittagessen (fd.07): Zu Mittag gibt es Suppe.",
@@ -1717,6 +1889,13 @@
     "subtleties": [
      "Mittag is not a point but a span, roughly 12 to 2 – noon exactly is zwölf Uhr.",
      "mittags (lower case) = at midday, every midday."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Mittag is built like μεσημέρι: middle of the day."
+     }
     ]
    }
   },
@@ -1839,11 +2018,11 @@
      }
     ],
     "etymology": {
-     "text": "nach (“after”) + Mittag (“midday”). Compare Dutch namiddag.",
+     "text": "nach (“after”) + Mittag (“midday”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Nachmittag is “after-midday”, the same idea as Latin post meridiem (p.m.) and Greek απόγευμα (after the lunch, γεύμα)."
+     "Nachmittag is “after-midday”."
     ],
     "pitfalls": [
      "In the afternoon = am Nachmittag; every afternoon = nachmittags.",
@@ -1851,6 +2030,18 @@
     ],
     "subtleties": [
      "Kaffee und Kuchen at about 3–4 p.m. is a German afternoon institution, especially on Sundays."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Nachmittag is the p.m., post meridiem: “after midday”."
+     },
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "απόγευμα is after the meal (γεύμα); Nachmittag is after midday."
+     }
     ]
    }
   },
@@ -2003,11 +2194,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German ābent, from Old High German āband, from Proto-West Germanic *ābanþ, from Proto-Germanic *ēbanþs. Compare Dutch avond, English even (evening) and eve.",
+     "text": "From Middle High German ābent, from Old High German āband, from Proto-West Germanic *ābanþ, from Proto-Germanic *ēbanþs.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Abend is English eve and evening – Christmas Eve is Heiligabend, the “holy evening”."
+     "Christmas Eve is Heiligabend, the “holy evening”."
     ],
     "pitfalls": [
      "In the evening = am Abend; every evening = abends.",
@@ -2016,6 +2207,13 @@
     "subtleties": [
      "Abend has a long -a- and the stress on A-; plural die Abende.",
      "Heiligabend is Christmas Eve – the main day of Christmas in Germany, when presents are given."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Abend is related to English evening and eve."
+     }
     ]
    }
   },
@@ -2137,11 +2335,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German hiute, from Old High German hiutu, a contraction of *hiu tagu, from Proto-Germanic *hinō dagō (“on this day”). Compare Old English hēodæġ and Dutch heden.",
+     "text": "From Middle High German hiute, from Old High German hiutu, a contraction of *hiu tagu, from Proto-Germanic *hinō dagō (“on this day”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "heute is literally “this day” (*hiu tagu) – Greek σήμερα (from ἡμέρα, day) and Turkish bugün (bu gün, “this day”) are built the same way."
+     "heute is literally “this day” (*hiu tagu)."
     ],
     "pitfalls": [
      "heute + a part of the day: heute Morgen, heute Mittag, heute Abend (capital letters), but tonight in bed = heute Nacht.",
@@ -2149,6 +2347,13 @@
     ],
     "subtleties": [
      "das Heute (noun) = the present: im Hier und Heute."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "heute is “this day”, built like σήμερα."
+     }
     ]
    },
    "features": {
@@ -2242,11 +2447,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German morgene, from Old High German morgane, from Proto-West Germanic *morgin. Cognate with English morrow, morn.",
+     "text": "From Middle High German morgene, from Old High German morgane, from Proto-West Germanic *morgin.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English “morrow” (tomorrow) is the same word; the morning became the next morning in both languages."
+     "der Morgen became morgen: the morning turned into the next morning."
     ],
     "pitfalls": [
      "morgen (tomorrow, small m) ≠ der Morgen (morning, capital M).",
@@ -2255,6 +2460,13 @@
     ],
     "subtleties": [
      "übermorgen = the day after tomorrow, vorgestern = the day before yesterday."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "morgen is related to English morrow (tomorrow)."
+     }
     ]
    },
    "features": {
@@ -2364,11 +2576,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German gestern, from Old High German gesteron, from Proto-West Germanic *gesteran. Cognate with English yester(day) and Dutch gisteren.",
+     "text": "From Middle High German gestern, from Old High German gesteron, from Proto-West Germanic *gesteran.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "gestern is the yester- of English yesterday; Greek χθες and Latin heri share the same old root."
+     "gestern goes back to an old Indo-European word for “yesterday”."
     ],
     "pitfalls": [
      "gestern needs the past: Gestern war ich zu Hause (war = was, the past of sein – the past comes in the next stage).",
@@ -2376,6 +2588,18 @@
     ],
     "subtleties": [
      "gestern Abend, gestern Morgen: the part of the day keeps its capital letter."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "gestern and χθες share one old root."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "gestern is related to English yester- (yesterday)."
+     }
     ]
    },
    "features": {
@@ -2484,17 +2708,24 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German iez, ieze, iezuo, from Old High German iozuo (“straightaway, at once”), equivalent to je + zu. Compare English yet and Yiddish יעצט (yetst).",
+     "text": "From Middle High German iez, ieze, iezuo, from Old High German iozuo (“straightaway, at once”), equivalent to je + zu.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "jetzt is related to English yet; Yiddish יעצט (yetst) is the same word written in Hebrew letters."
+     "jetzt goes back to Middle High German iezuo, “now, at once”."
     ],
     "pitfalls": [
      "jetzt (now) and gleich (in a moment) are different: Ich komme gleich = I’m coming in a minute."
     ],
     "subtleties": [
      "jetzt is also a filler word that adds urgency: Jetzt sag mal … (Come on, tell me …)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "jetzt is related to English yet."
+     }
     ]
    },
    "features": {
@@ -2601,7 +2832,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Bis später, bis bald, bis morgen: German says goodbye by naming when you meet again – like Greek τα λέμε αργότερα / αύριο."
+     "Bis später, bis bald, bis morgen: German says goodbye by naming when you meet again."
     ],
     "pitfalls": [
      "später is the comparative of spät (late, later) but works as its own adverb: Ich komme später.",
@@ -2609,6 +2840,13 @@
     ],
     "subtleties": [
      "nachher is “later today”; später can be minutes or years away."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Bis später / bis morgen is τα λέμε αργότερα / αύριο."
+     }
     ]
    },
    "features": {
@@ -2702,11 +2940,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German balde, from Old High German baldo, adverb of bald (“bold, quick”), from Proto-Germanic *balþaz. Cognate with Dutch boud, English bold.",
+     "text": "From Middle High German balde, from Old High German baldo, adverb of bald (“bold, quick”), from Proto-Germanic *balþaz.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "bald is English bold: being “bold” once meant being quick and keen, so “quickly” became “soon”."
+     "bald once meant “bold, quick, keen”, so “quickly” became “soon”."
     ],
     "pitfalls": [
      "bald (soon) vs. gleich (in a moment): Ich komme gleich (in a minute) – Ich komme bald (soon, some time).",
@@ -2714,6 +2952,13 @@
     ],
     "subtleties": [
      "bald … bald … = now … now …: bald hier, bald dort."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "bald is related to English bold, but means soon."
+     }
     ]
    },
    "features": {
@@ -2845,7 +3090,7 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German vrüe, vrüeje, from Old High German fruoi, from Proto-West Germanic *frō(ī) (“early”). Cognate with Dutch vroeg.",
+     "text": "From Middle High German vrüe, vrüeje, from Old High German fruoi, from Proto-West Germanic *frō(ī) (“early”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -2967,7 +3212,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Asking “how late is it?” for the time is typically German; Greek asks τι ώρα είναι; (what hour is it?), like Wie viel Uhr ist es?"
+     "Wie spät ist es? (“how late is it?”) and Wie viel Uhr ist es? both ask the time."
     ],
     "pitfalls": [
      "To be late = zu spät kommen (not *spät sein): Ich komme zu spät.",
@@ -2976,6 +3221,13 @@
     "subtleties": [
      "später is its comparative and also the adverb “later”.",
      "die Verspätung = the delay (of a train)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "τι ώρα είναι; is Wie viel Uhr ist es? – German also asks Wie spät ist es?"
+     }
     ]
    },
    "features": {
@@ -3115,11 +3367,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German iemer, from Old High German iomēr (“always”), from io (“ever”) + mēr (“more”). Cognate with Dutch immer.",
+     "text": "From Middle High German iemer, from Old High German iomēr (“always”), from io (“ever”) + mēr (“more”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "immer is literally “ever more” (io + mēr) – English “evermore” is built the same way."
+     "immer is literally “ever more” (io + mēr)."
     ],
     "pitfalls": [
      "immer noch / noch immer = still (not *immer alone): Er wartet immer noch.",
@@ -3127,6 +3379,13 @@
     ],
     "subtleties": [
      "immer wieder = again and again; immer mit der Ruhe = take it easy."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "immer is built like English evermore."
+     }
     ]
    },
    "features": {
@@ -3225,11 +3484,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German ofte, oft, from Old High German ofta, ofto, from Proto-Germanic *ufta. Cognate with Dutch oft, English oft and often.",
+     "text": "From Middle High German ofte, oft, from Old High German ofta, ofto, from Proto-Germanic *ufta.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "oft is English oft (as in oft-quoted) – English added -en to make often."
+     "oft is the everyday word; öfter means “more often, now and then”."
     ],
     "pitfalls": [
      "Comparative öfter (more often), with umlaut: Ich komme öfter.",
@@ -3237,6 +3496,13 @@
     ],
     "subtleties": [
      "öfter alone also means “now and then, quite often”: Ich sehe ihn öfter."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "oft is English oft (often)."
+     }
     ]
    },
    "features": {
@@ -3335,7 +3601,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "manchmal is literally “some times” – exactly the English sometimes, piece by piece."
+     "manchmal is literally “some times”: manch + Mal."
     ],
     "pitfalls": [
      "manchmal is one word, lower case.",
@@ -3343,6 +3609,13 @@
     ],
     "subtleties": [
      "das Mal (time, occasion) builds einmal (once), zweimal (twice), jedes Mal (every time), manchmal (some times)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "manchmal is English sometimes, piece by piece."
+     }
     ]
    },
    "features": {
@@ -3452,13 +3725,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The -s is an old genitive (“of the morning”), like English “of a morning” or the -s of English nowadays."
+     "The -s is an old genitive: “of the morning”."
     ],
     "pitfalls": [
      "morgens (lower case, -s) = in the mornings, as a habit; am Morgen = in the morning (one or in general); morgen = tomorrow."
     ],
     "subtleties": [
      "The same pattern: mittags, nachmittags, abends, nachts, montags, sonntags – all habitual, all lower case."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "The -s works like English “of a morning” or the -s of nowadays."
+     }
     ]
    },
    "features": {

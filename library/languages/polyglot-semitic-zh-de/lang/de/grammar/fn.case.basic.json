@@ -385,6 +385,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut is ergative: the subject of a transitive verb takes its own case, while the subject of an intransitive verb looks like an object. German puts every subject in the nominative: Der Mann schläft. Der Mann kauft den Tisch."
+  },
+  {
+   "for": "it",
+   "rel": "new",
+   "text": "Italian nouns have no cases; only pronouns change (io – me – mi). German shows the case on the article: der Tisch – den Tisch – dem Tisch – des Tisches. As after essere, the noun after sein keeps the subject form: Er ist ein Freund."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Albanian has five cases and marks them on the noun (djali, djalin, djalit); German has four and marks them mostly on the article (der Junge, den Jungen, dem Jungen, des Jungen). In both the dative and the genitive can look alike: djalit – der Frau."
+  },
+  {
+   "for": "pt",
+   "rel": "new",
+   "text": "Portuguese nouns have no cases; only pronouns do (eu – me – mim). German shows the case on the article: der Tisch – den Tisch – dem Tisch – des Tisches. As after ser, the noun after sein keeps the subject form: Er ist ein Freund."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your language has cases, the idea is familiar: German has four and shows them mostly on the article (der Tisch, den Tisch, dem Tisch, des Tisches), while the noun itself changes little."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If your cases are suffixes on the noun, German moves most of the signal to the article in front (der Tisch – den Tisch – dem Tisch), and one article form carries case, gender and number together. The nominative is marked too: der, ein."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "new",
+   "text": "If word order alone shows who does what, cases are new: German changes the article for the role (der Mann – den Mann), which lets it put the object first without changing the meaning: Den Mann sehe ich."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If your language shows who does what on the verb, German shows it on the article: der Mann (subject) – den Mann (object). Every subject is nominative, whether the verb has an object or not."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "new",
+   "text": "If your language marks the role of a noun only with an object marker or a preposition, German cases are new: the article changes for the role (der Tisch, den Tisch, dem Tisch), and the owner has a case of its own: das Haus des Lehrers."
   }
  ]
 }

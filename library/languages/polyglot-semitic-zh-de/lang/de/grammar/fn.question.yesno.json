@@ -221,7 +221,7 @@
     "Tust du Tee trinken?"
    ],
    "answer": "Trinkst du Tee?",
-   "why": "The verb moves to the front; no “do”."
+   "why": "The conjugated verb itself moves to the front – tun is not a helper verb."
   },
   {
    "q": "Isst du kein Fleisch? – ___! (Yes, I do.)",
@@ -396,6 +396,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut shows a question with a special verb ending (the interrogative mood); German keeps the verb form and moves it to the front."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "Italian asks by intonation alone (Bevi tè?); German moves the verb to the front: Trinkst du Tee?. For “yes” against a negative German has one word, doch, where Italian needs a phrase (sì che lo bevo): Trinkst du keinen Kaffee? – Doch!"
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian asks with a at the start or by intonation (A pi çaj?); German moves the verb to the front instead: Trinkst du Tee?. po is ja, jo is nein, and for “yes” against a negative German has the special word doch."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese asks by intonation (Bebes chá?) and often answers with the verb (Bebo.); German moves the verb to the front (Trinkst du Tee?) and answers ja / nein. “Yes” to a negative question is doch: Não bebes café? – Doch!"
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If your yes/no questions use intonation or a particle, German moves the conjugated verb to the front instead (Trinkst du Tee?) and needs no helper verb. doch answers “yes” to a negative question."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If you ask with a question particle or suffix and keep the verb at the end, German has no particle: the verb itself moves to the front – Trinkst du Tee? – and the voice usually rises."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If you add a particle at the end or repeat the verb with a negative, German moves the verb to the front instead: Trinkst du Tee?. doch answers “yes” to a negative question: Trinkst du keinen Kaffee? – Doch!"
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If a question is a suffix on your verb, German shows it by word order: the conjugated verb comes first (Trinkst du Tee?), and nothing is added to the verb."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If you ask with a particle before the statement or with intonation alone, German moves the verb itself to the front: Trinkst du Tee?. “Yes” against a negative question is the special word doch: Isst du kein Fleisch? – Doch!"
   }
  ]
 }

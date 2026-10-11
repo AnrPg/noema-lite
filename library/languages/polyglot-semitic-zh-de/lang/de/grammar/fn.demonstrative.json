@@ -370,6 +370,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut has a large set of pointing words that also tell whether the thing is up, down, inside, outside or out of sight, and they take case endings. German manages with dieser and adds hier, da or dort."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "questo / quello agree like dieser, and neither takes an article (questo libro – dieses Buch); but in speech quello is usually der … da: der Mann da (quell’uomo). For naming things one unchanging das does it all: Questo è un tavolo / Questi sono bambini – Das ist ein Tisch / Das sind Kinder."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "ky / kjo (this) and ai / ajo (that) split by distance and gender; German dieser has three genders (dieser, diese, dieses) and in speech marks “that” with da: der Mann da. Ky është një libër / Këta janë fëmijë – Das ist ein Buch / Das sind Kinder: the pointing das never changes."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese has three degrees (este, esse, aquele); German has dieser and in speech adds hier / da / dort for distance: das Buch hier, das Buch da, das Buch dort. Like isto / isso, the pointing das never changes: Das ist ein Tisch, Das sind Kinder."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your demonstratives agree in gender, number and case, dieser is easy: it has exactly the endings of der (dieser, diese, dieses, diesen …). The everyday “that” is der … da, and the pointing das (Das ist …) never changes."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If your words for this and that never change, note that dieser takes the endings of der (dieser Mann, diese Frau, dieses Kind) and that distance is usually added with hier / da: das Buch hier, das Buch da."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If “this / that” needs a measure word in your language, German needs none, but dieser changes with the gender, number and case of the noun: dieser Mann, diese Frau, dieses Kind, diese Kinder."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If your demonstratives are many and mark position or visibility in detail, German is simpler: dieser plus the place words hier (here), da (there) and dort (over there) – der Mann da, das Haus dort."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "If your this / that change for gender and number, dieser is familiar; it adds a neuter and a case (dieser Mann, diese Frau, dieses Kind, diesen Mann), always stands before the noun and never takes an article as well: dieses Haus."
   }
  ]
 }

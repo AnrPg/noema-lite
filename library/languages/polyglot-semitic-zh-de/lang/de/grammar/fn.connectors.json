@@ -103,7 +103,7 @@
     [
      "so, therefore",
      "also",
-     "a conclusion; verb next (also never means “too” – that is auch)"
+     "a conclusion; verb next (“too, as well” is auch)"
     ],
     [
      "then",
@@ -238,7 +238,7 @@
   "Subordinate clause first → the main clause starts with the verb: Wenn es kalt ist, bleiben wir zu Hause.",
   "als for one event in the past, wenn for present / future / repeated, wann for questions.",
   "if = whether → ob; if = condition → wenn.",
-  "also = so, therefore – never “too” (that is auch).",
+  "also = so, therefore (a conclusion); “too, as well” is auch.",
   "dass (conjunction) vs das (article / pronoun).",
   "A comma before weil, dass, wenn, ob, obwohl, aber, denn."
  ],
@@ -375,14 +375,14 @@
    "why": "The weil-clause fills the first place → the main clause starts with its verb."
   },
   {
-   "q": "German “also” means …",
+   "q": "also means …",
    "options": [
     "so, therefore",
-    "also, too",
+    "too, as well",
     "always"
    ],
    "answer": "so, therefore",
-   "why": "False friend: English “also” is auch."
+   "why": "also draws a conclusion: Ich bin müde, also gehe ich nach Hause. “Too, as well” is auch."
   },
   {
    "q": "Wir gehen in den Park, ___ es kalt ist. (although)",
@@ -517,6 +517,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut expresses “because”, “when” and “if” with special verb endings (moods) instead of conjunctions; German uses a separate word (weil, wenn) and moves the verb to the end."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "perché, che, se, quando leave the word order alone; German weil, dass, wenn, ob send the verb to the end: …, weil ich Hunger habe. se splits into wenn (condition) and ob (whether), quando into wenn (present, repeated) and als (once in the past)."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "sepse, që, nëse, kur keep the normal order; German weil, dass, wenn, ob send the verb to the end: …, weil ich Durst habe. nëse splits into wenn (condition) and ob (whether), and after deshalb or also (prandaj, pra) the verb comes at once: deshalb esse ich."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "porque, que, se, quando leave the order alone; German weil, dass, wenn, ob put the verb last: …, weil ich Durst habe. se splits into wenn (condition) and ob (whether), quando into wenn and als (one event in the past)."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "different",
+   "text": "If subordinate clauses in your language keep the normal order, the verb-final rule is the novelty: …, weil ich müde bin. Watch the adverbs deshalb, also, dann too: they take the first place, so the verb follows at once."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "If your verb comes last and clauses are joined with suffixes, the verb-final order after weil, dass, wenn will feel natural (…, weil ich müde bin); new are the separate linking words at the start of the clause and the comma before them."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If your clauses keep one order whatever joins them, German has three patterns: und / aber change nothing, deshalb / also put the verb right after them, and weil / dass / wenn send it to the end of the clause."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "Where your language may join ideas with verb suffixes, German uses separate linking words, and each group fixes the word order: aber (no change), deshalb (verb next), weil (verb last): …, weil ich müde bin."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If your words for “because”, “that” and “if” leave the order of the clause unchanged, note that German subordinate clauses send the verb to the end: …, weil ich Durst habe; …, dass er kommt. Only und, oder, aber, denn change nothing."
   }
  ]
 }

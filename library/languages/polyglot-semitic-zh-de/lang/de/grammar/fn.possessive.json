@@ -488,6 +488,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut marks possession with endings on the noun owned (and a case on the owner); German uses a separate word before the noun: mein, dein, sein, ihr."
+  },
+  {
+   "for": "it",
+   "rel": "trap",
+   "text": "Italian puts the article before the possessive (la mia casa, il suo libro); German never does: mein Haus, sein Buch. suo can be his, her or your (Lei); German chooses by the owner: sein, ihr, Ihr."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian puts the possessive after the definite noun (babai im, shtëpia ime); German puts it in the article’s place before the noun: mein Vater, meine Mutter. As with i tij / i saj, the owner decides between sein and ihr, and the owned noun gives the ending: seine Frau, ihr Mann."
+  },
+  {
+   "for": "pt",
+   "rel": "trap",
+   "text": "Portuguese puts the article before the possessive (a minha casa), and seu can mean his, her, their or your; German has no article (mein Haus) and keeps the owners apart: sein, ihr, Ihr – as dele / dela do."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your possessives agree with the thing owned, German ones do too (mein Vater, meine Mutter), but the word is chosen by the owner: sein for a male or neuter owner, ihr for a female one – seine Frau, ihr Mann."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If ownership is a suffix on the noun in your language, German uses a word before it, in place of the article (mein Haus, dein Buch), and its ending follows the noun owned: meine Mutter, meinen Schlüssel."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If one unchanging particle marks the owner, German has a set of words (mein, dein, sein, ihr …) that also change with the thing owned: mein Buch, meine Mutter, meinen Bruder."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "If possession is marked on the noun itself, German uses separate words before it (mein, dein, sein, ihr …), chosen by the owner and ending like the article: mein Haus, meine Mutter."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If you attach the owner to the noun as a suffix, German puts a separate word before it, in place of the article: mein Buch, meine Mutter. The owner chooses sein or ihr, as your suffixes for “his” and “her” do; the ending follows the noun owned."
   }
  ]
 }

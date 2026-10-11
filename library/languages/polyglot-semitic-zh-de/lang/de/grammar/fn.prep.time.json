@@ -510,6 +510,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut marks “at”, “since”, “until” mostly with endings on the noun or the verb; German puts a preposition before the time word and the article in its case: am Montag, seit einer Woche."
+  },
+  {
+   "for": "it",
+   "rel": "trap",
+   "text": "le otto e mezza counts from eight; halb neun names nine. alle otto, lunedì, a maggio become um acht, am Montag, im Mai. Abito qui da tre anni uses the present, as Ich wohne seit drei Jahren hier does; tre anni fa puts “ago” after the time, vor drei Jahren before it."
+  },
+  {
+   "for": "sq",
+   "rel": "trap",
+   "text": "tetë e gjysmë counts from eight; halb neun names nine. në orën tetë, të hënën, në maj become um acht, am Montag, im Mai. para dy javësh is built like vor zwei Wochen, and gjatë + ablative works like während + genitive: während der Woche."
+  },
+  {
+   "for": "pt",
+   "rel": "trap",
+   "text": "oito e meia counts from eight; halb neun names nine. às oito, na segunda-feira, em maio become um acht, am Montag, im Mai. Moro aqui há três anos uses the present, as Ich wohne seit drei Jahren hier does – and há três anos (ago) is vor drei Jahren."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "trap",
+   "text": "If your half hours count from the hour before, halb neun is the trap: it is 8:30, the half on the way to nine. seit takes the present for what is still going on: Ich wohne seit drei Jahren hier."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If time is a suffix on the noun or a postposition in your language, German puts a preposition before it, chosen by the kind of time: um acht Uhr, am Montag, im Mai; “ago” comes before the time too: vor zwei Wochen."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "Where your “before” / “after” follows the time, German puts the preposition first and chooses it by the kind of time: um acht Uhr, am Montag, im Mai, vor zwei Wochen, nach der Arbeit."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "German expresses time with separate prepositions before the noun, chosen by the kind of time: um (clock), am (day), im (month, season); vor is before or ago, nach after, seit + present since."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "similar",
+   "text": "If one preposition (“in”) serves for hours, days and months, German uses three: um acht Uhr, am Montag, im Mai. If your word for “before” also means “ago”, it matches vor: vor dem Frühstück, vor zwei Wochen."
   }
  ]
 }

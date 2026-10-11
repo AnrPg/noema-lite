@@ -528,6 +528,46 @@
    "for": "iu",
    "rel": "similar",
    "text": "Inuktitut endings answer where / where to / where from (-mi, -mut, -mit), as German Wo? / Wohin? / Woher? do with prepositions and case."
+  },
+  {
+   "for": "it",
+   "rel": "different",
+   "text": "andare is any way of going; German splits gehen (on foot), fahren (by vehicle) and fliegen (by plane). a / in cover “where” and “where to” alike (sono a Roma, vado a Roma); German says in Rom / nach Rom, im Park / in den Park – and da + person (vado dal medico) is zum Arzt."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "në covers “where” and “where to” alike (jam në park / shkoj në park), and te both “at” and “to” a person (jam te mjeku / shkoj te mjeku); German splits them: im Park / in den Park, beim Arzt / zum Arzt. shkoj is any way of going – German says gehen on foot, fahren by vehicle."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "ir is any way of going; German separates gehen (on foot), fahren (by vehicle) and fliegen (by plane). em says where and a / para where to (estou em Lisboa / vou para Lisboa) – German adds a case on top: im Park (dative) / in den Park (accusative)."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your language uses one preposition with two cases for “where” and “where to”, the German two-way prepositions work the same way: im Park (dative) / in den Park (accusative). New are the separable particles at the end of the clause: Der Zug kommt um acht an."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "similar",
+   "text": "Your locative, directional and source suffixes become three German questions with prepositions: Wo? (im Park), Wohin? (in den Park, nach Berlin, zum Arzt), Woher? (aus Berlin, vom Arzt). The preposition depends on the kind of place, not only on the direction."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "similar",
+   "text": "If you add direction words after the verb (towards me, away from me, in, out), those are the German particles her- / hin- (herein, hinaus) – but German puts them at the end of the clause: Kommen Sie herein! Where and where to also differ by case: im Park / in den Park."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "Where your language packs direction and manner into the verb, German spreads them out: the verb says how (gehen, fahren, fliegen), a preposition with a case says where to (in den Park, zum Arzt), and a particle at the end the direction: Er kommt herein."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If one verb “go” and one preposition “to” serve for every goal, German chooses the verb by the means (gehen, fahren, fliegen) and the preposition by the kind of goal: nach Berlin, zum Arzt, in den Park. The question words are built like yours: wohin (to where), woher (from where)."
   }
  ]
 }

@@ -102,11 +102,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German ja, from Old High German ja, jā (“yes”), from Proto-Germanic *ja (“yes”). Cognate with Yiddish יאָ (yo).",
+     "text": "From Middle High German ja, from Old High German ja, jā (“yes”), from Proto-Germanic *ja (“yes”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The famous unstressed ja in the middle of sentences (Du bist ja nass!) is one of the German modal particles that have no direct English equivalent."
+     "The famous unstressed ja in the middle of sentences (Du bist ja nass!) is one of the German modal particles: it adds “as we can see” and has no fixed translation."
     ],
     "pitfalls": [
      "Answering a negative question with ja is ambiguous: Magst du keine Tomaten? – Doch! (Yes, I do.) / Nein. (No, I don't.)"
@@ -219,17 +219,24 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German nein, from a contraction of Old High German ni ein (“not one”). Compare Old English nān, from ne ān (Modern English none, further contracted to no).",
+     "text": "From Middle High German nein, from a contraction of Old High German ni ein (“not one”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "nein literally means “not one” – the same pattern as English none (ne + one)."
+     "nein literally means “not one” (ne + ein)."
     ],
     "pitfalls": [
      "nein answers a question; inside a sentence the negation is nicht or kein: Ich mag keine Zwiebeln (not *Ich mag nein Zwiebeln)."
     ],
     "subtleties": [
      "To contradict a negative statement you say doch, not ja: Du magst keinen Spinat. – Doch!"
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "nein is built like English none (ne + one); English no is a worn-down form of the same word."
+     }
     ]
    },
    "features": {
@@ -367,7 +374,7 @@
      }
     ],
     "etymology": {
-     "text": "Originally used as a call to the ferryman on the other side of the bank; related to Old High German holā, emphatic imperative of holōn (“to fetch, used especially in hailing a ferryman”). Also see French holà (“hey! stop!”).",
+     "text": "Originally used as a call to the ferryman on the other side of the bank; related to Old High German holā, emphatic imperative of holōn (“to fetch, used especially in hailing a ferryman”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -379,6 +386,13 @@
     "subtleties": [
      "On the phone many Germans answer with their surname (Weber?) rather than Hallo.",
      "Hallo works at any time of day; Guten Morgen / Tag / Abend depend on the hour."
+    ],
+    "notes": [
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "hallo may be compared with holà (“hey! stop!”)."
+     }
     ]
    },
    "features": {
@@ -474,11 +488,11 @@
      }
     ],
     "etymology": {
-     "text": "Short for ich wünsche einen guten Tag! (“I wish [you] a good day!”), hence the accusative form of the adjective. Compare Yiddish אַ גוטן טאָג (a gutn tog).",
+     "text": "Short for ich wünsche einen guten Tag! (“I wish [you] a good day!”), hence the accusative form of the adjective.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The Yiddish greeting a gutn tog is the same formula."
+     "guten Tag is an accusative: (Ich wünsche Ihnen) einen guten Tag."
     ],
     "pitfalls": [
      "guten, with -en: it is an accusative (einen guten Tag wünschen), never *gute Tag.",
@@ -570,7 +584,7 @@
      }
     ],
     "etymology": {
-     "text": "guten (masculine accusative of gut, “good”) + Morgen (“morning”), as in ich wünsche einen guten Morgen. Compare Yiddish גוט־מאָרגן (gut-morgn).",
+     "text": "guten (masculine accusative of gut, “good”) + Morgen (“morning”), as in ich wünsche einen guten Morgen.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -876,7 +890,7 @@
      }
     ],
     "etymology": {
-     "text": "Literally, “until our reunion; that we may see again”. Probably a calque of French au revoir. Compare Italian arrivederci, Dutch tot ziens.",
+     "text": "Literally, “until our reunion; that we may see again”. Probably a calque of French au revoir.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -888,6 +902,13 @@
     ],
     "subtleties": [
      "Auf Wiedersehen is polite but not cold: shop staff say it to every customer. With friends it sounds stiff – use Tschüss."
+    ],
+    "notes": [
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "auf Wiedersehen is built like arrivederci: “until seeing again”."
+     }
     ]
    },
    "features": {
@@ -992,17 +1013,39 @@
      }
     ],
     "etymology": {
-     "text": "Borrowed from German Low German tschüß from earlier adjüs, from Dutch adjuus, from Spanish adiós or French adieu. (Compare the origin of moin.)",
+     "text": "Borrowed from German Low German tschüß from earlier adjüs, from Dutch adjuus, from Spanish adiós or French adieu.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "tschüss is a distant cousin of Spanish adiós and French adieu – “(I commend you) to God”."
+     "tschüss goes back, through Low German atschüs, to a Romance farewell meaning “(I commend you) to God”."
     ],
     "pitfalls": [
      "Spelling: tschüss and tschüs are both correct; tschüß is the old spelling."
     ],
     "subtleties": [
      "Once northern, tschüss is now used all over Germany, and in shops it is often neutral rather than informal; in the south people also say Servus, Ade or Pfiat di."
+    ],
+    "notes": [
+     {
+      "for": "es",
+      "rel": "similar",
+      "text": "tschüss is a distant cousin of adiós."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "tschüss is a distant cousin of adieu."
+     },
+     {
+      "for": "pt",
+      "rel": "similar",
+      "text": "tschüss is a distant cousin of adeus."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "tschüss is a distant cousin of addio."
+     }
     ]
    },
    "features": {
@@ -1267,11 +1310,11 @@
      }
     ],
     "etymology": {
-     "text": "From wie geht es dir. Literally, “how does it go?”; compare English how's it going?, French comment ça va?.",
+     "text": "From wie geht es dir. Literally, “how does it go?”.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "French ça va, Greek τι κάνεις and Russian как дела? ask the same thing in other images: going, doing, affairs."
+     "wie geht’s? asks how things “go”."
     ],
     "pitfalls": [
      "Spelling: wie geht's (apostrophe for the dropped e of es); wie gehts without it is also allowed."
@@ -1279,6 +1322,43 @@
     "subtleties": [
      "Wie geht's? is a real question: Germans often give a real answer (Ganz gut, ein bisschen müde …) – it is not just “hi”.",
      "It is neutral enough to use with colleagues you say Sie to; the full formal question is Wie geht es Ihnen?"
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "τι κάνεις; asks what you do; German asks how it goes: wie geht’s?"
+     },
+     {
+      "for": "ru",
+      "rel": "different",
+      "text": "как дела? asks about your affairs; German asks how it goes: wie geht’s?"
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "wie geht’s? is built like English how’s it going?"
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "wie geht’s? is built like comment ça va ? – “how does it go?”."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "wie geht’s? is built like come va? – “how does it go?”."
+     },
+     {
+      "for": "es",
+      "rel": "similar",
+      "text": "wie geht’s? is built like ¿cómo va? – “how does it go?”."
+     },
+     {
+      "for": "pt",
+      "rel": "similar",
+      "text": "wie geht’s? is built like como vai? – “how does it go?”."
+     }
     ]
    },
    "features": {
@@ -1708,11 +1788,11 @@
      }
     ],
     "etymology": {
-     "text": "Inherited from Middle High German guot, from Old High German guot, from Proto-West Germanic *gōd, from Proto-Germanic *gōdaz, from Proto-Indo-European *gʰedʰ- (“to unite, be associated, suit”). Cognate with Dutch goed, English good, Danish god, Swedish god.",
+     "text": "Inherited from Middle High German guot, from Old High German guot, from Proto-West Germanic *gōd, from Proto-Germanic *gōdaz, from Proto-Indo-European *gʰedʰ- (“to unite, be associated, suit”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "gut is the same word as English good and Dutch goed; Guten Tag is literally “good day”.",
+     "Guten Tag is literally “good day”, in the accusative.",
      "German school marks run from 1 (sehr gut) to 6 (ungenügend); 2 is gut."
     ],
     "pitfalls": [
@@ -1723,6 +1803,13 @@
      "German uses one word for good and well: Er singt gut (he sings well).",
      "Before a noun it takes endings (ein guter Freund, eine gute Idee); after sein it does not (Das Buch ist gut).",
      "The answer ganz gut means “okay, not bad” – less than gut."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "gut is related to English good."
+     }
     ]
    }
   },
@@ -1934,11 +2021,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German heiȥen, from Old High German heiȥan, from Proto-West Germanic *haitan, from Proto-Germanic *haitaną. Cognate with Yiddish הייסן (heysn), Dutch heten, Old Norse heita, Gothic 𐌷𐌰𐌹𐍄𐌰𐌽 (haitan); compare also English hest, behest.",
+     "text": "From Middle High German heiȥen, from Old High German heiȥan, from Proto-West Germanic *haitan, from Proto-Germanic *haitaną.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Old English had the same verb: hātan, “to be called” – it survives only in the archaic English hight (“named”)."
+     "heißen once also meant “to bid, to order”: Wer hat dich das geheißen? (old-fashioned)."
     ],
     "pitfalls": [
      "du heißt, not *heißst: the ending -st loses its s after ß (as after s, z: du sitzt).",
@@ -1948,6 +2035,13 @@
     "subtleties": [
      "Ich heiße Anna is the everyday way; Mein Name ist Anna sounds more official; Ich bin Anna is casual.",
      "In Switzerland it is spelled heissen (no ß)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "Older English had the same verb, hātan, “to be called”; it survives in archaic hight (“named”). heißen is related to the old English word hest (behest), “a command”."
+     }
     ]
    }
   },
@@ -2151,7 +2245,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "danken (to thank) and denken (to think) are related – just like English thank and think."
+     "danken (to thank) and denken (to think) are related."
     ],
     "pitfalls": [
      "A bare Danke! when someone offers you something often means “no, thanks”. To accept, say Ja, bitte! or Ja, gern!",
@@ -2159,6 +2253,13 @@
     ],
     "subtleties": [
      "Formal: Ich danke Ihnen / Vielen Dank; warm: Danke schön; casual: Danke dir!"
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "danken and denken are related, just like English thank and think."
+     }
     ]
    },
    "features": {
@@ -2311,15 +2412,27 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "bitte is the verb bitten (“to ask, request”), cut down from ich bitte; English bid (“to ask, to pray”) is its cousin."
+     "bitte is the verb bitten (“to ask, request”), cut down from ich bitte."
     ],
     "pitfalls": [
-     "One word for two English ones: bitte = please AND you’re welcome.",
+     "One word, two uses: bitte = please and you’re welcome (Danke! – Bitte!).",
      "To ask someone to repeat, say Wie bitte? – a bare Was? sounds rude."
     ],
     "subtleties": [
      "bitte goes almost anywhere in a request: Bitte setzen Sie sich! / Setzen Sie sich bitte! – mid-sentence it sounds softer.",
      "Bitte schön / bitte sehr are warmer than bitte alone."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English bid (“to ask, to pray”) is a cousin of bitten."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "bitte is both please and you’re welcome: Danke! – Bitte!"
+     }
     ]
    },
    "features": {

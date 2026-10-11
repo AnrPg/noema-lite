@@ -494,6 +494,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut marks past time with suffixes inside the long verb word and distinguishes how long ago it happened; German has one past and builds it with separate words (auxiliary + participle)."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Like the passato prossimo, the Perfekt is the spoken past and chooses haben or sein as avere / essere: Ich bin gegangen (sono andato). But reflexive verbs take haben (Ich habe mich angezogen – mi sono vestito), and there is no imperfetto: mangiavo is Ich aß or Ich habe gegessen, with a time word."
+  },
+  {
+   "for": "sq",
+   "rel": "different",
+   "text": "Albanian separates the simple past (hëngra), the imperfect (haja) and the perfect (kam ngrënë); German has no aspect – Ich habe gegessen is the everyday past for all of them. Movement verbs take kam in Albanian (kam ardhur) but sein in German: Ich bin gekommen."
+  },
+  {
+   "for": "pt",
+   "rel": "trap",
+   "text": "Ich habe gegessen is the everyday past – comi, not tenho comido (which says a repeated or continuing action). German also uses sein for movement (Ich bin gegangen – fui), and it has no imperfeito: comia is Ich aß, with a word like früher or gerade."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your language has a perfect with “have” and perhaps “be”, the Perfekt is familiar – but it is the plain spoken past, also with a past time word (Ich habe gestern gefrühstückt), and it does not separate finished from ongoing actions."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If your past is a suffix on the verb, the German Perfekt splits it in two: the helper (habe, bin) second and the participle (ge-…-t / ge-…-en) at the very end: Ich bin um sechs aufgestanden."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "new",
+   "text": "If your verb never changes and a particle or a time word marks the past, German must change the verb – Ich habe gefrühstückt, Ich bin aufgestanden – even when gestern already says it."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "Where your language adds tense inside one long verb, German builds its spoken past from two words with a bracket around the rest: the helper second, the participle last – Ich habe den Kaffee getrunken."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If your past is a conjugation of the root with person suffixes, the German spoken past uses a helper (haben or sein) and a participle at the end: Ich habe gegessen, Ich bin gekommen. Strong verbs change the vowel of the participle, a little like a pattern: trinken → getrunken, nehmen → genommen."
   }
  ]
 }

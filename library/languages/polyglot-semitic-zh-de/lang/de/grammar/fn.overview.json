@@ -5,7 +5,7 @@
  "facts": [
   {
    "label": "Family",
-   "value": "Indo-European › Germanic › West Germanic (with Dutch, Frisian, English, Luxembourgish and Yiddish)"
+   "value": "Indo-European › Germanic › West Germanic"
   },
   {
    "label": "Script and direction",
@@ -252,6 +252,46 @@
    "for": "iu",
    "rel": "different",
    "text": "German words are long only as compounds of nouns (Haustür, Kleiderschrank); a sentence is still several words, and the verb does not take in its object – German has no incorporation. Every subject is in the nominative, the subject of a transitive verb included (no ergative), and there is no antipassive: the object is simply left out (Ich esse)."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "Articles, gender, a verb ending for every person and a perfect with avere / essere (Ich habe gegessen, Ich bin gegangen – ho mangiato, sono andato) are familiar. New are the neuter (das), the four cases on the article, the obligatory subject pronoun (Ich komme, not *Komme) and the verb-second order; ü and ö are new vowels, and z is always [ts]: Zeit."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "Albanian is fusional too: cases, gender, a perfect with kam and an article on almost every noun – but Albanian puts the definite article at the end of the noun (libri), German before it (das Buch). German adds a full neuter, never drops the subject pronoun and puts the verb second. ë is close to the unstressed German e of bitte, and y is ü (Tür)."
+  },
+  {
+   "for": "pt",
+   "rel": "similar",
+   "text": "Articles, gender and a verb that changes for every person are familiar; new are the neuter (das), the four cases on the article, the obligatory subject pronoun and the verb-second order. German has no nasal vowels – the n of Bahnhof is always said – and a final -e is never swallowed: bitte, Lampe."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your language is fusional too, the main ideas – gender, case, endings that carry several meanings at once, irregular verbs – are familiar. Expect gender and case to sit mostly on the article (der, den, dem, des), plus a neuter, an obligatory subject pronoun and the verb-second order."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "German endings are not stacked one per meaning: one ending carries several meanings at once (dem = dative + singular + masculine or neuter) and depends on the word class, so you learn tables, not single suffixes. Compounds, though, are built the way you build words: Haus + Tür → Haustür."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "new",
+   "text": "Nearly everything changes form in German: articles (der, den, dem), verbs (ich gehe, du gehst), nouns (Buch, Bücher). There are no tones and no measure words, every noun has a gender learned with its article, and the word order is strict: the verb is second."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "German words are long only as noun compounds (Kleiderschrank); a sentence is still several words, the object is never built into the verb, and every subject is nominative. The verb takes only a person ending and stands second."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "German builds words from stems and endings, not from roots and patterns, though the umlaut (Buch → Bücher) is a little like a pattern. Expect three genders instead of two, a separate article that changes for case, no dual, a verb sein that is never left out, and letters that keep one shape and run left to right."
   }
  ]
 }

@@ -229,12 +229,12 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German grōȥ, from Old High German grōȥ, akin to Old Saxon grōt, compare Dutch groot. More at English great.",
+     "text": "From Middle High German grōȥ, from Old High German grōȥ, akin to Old Saxon grōt, compare Dutch groot.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "groß is the same word as English great and Dutch groot.",
-     "groß- in family words works like English grand-: Großvater, Großmutter, Großeltern (S06).",
+     "groß has an irregular comparative with umlaut: größer, am größten.",
+     "groß- in family words: Großvater, Großmutter, Großeltern (S06).",
      "Swiss Standard German writes no ß: gross, grösser."
     ],
     "pitfalls": [
@@ -245,6 +245,13 @@
      "mein großer Bruder / meine große Schwester = my older brother / sister, not necessarily taller.",
      "Height is said with groß: Ich bin 1,70 (Meter) groß.",
      "Before a noun it takes an ending (ein großes Haus, der große Tisch); after sein it takes none (Das Haus ist groß)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "groß is the same word as English great, and groß- works like grand-."
+     }
     ]
    }
   },
@@ -465,11 +472,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German hōch, from Old High German hōh, from Proto-West Germanic *hauh, from Proto-Germanic *hauhaz, from Proto-Indo-European *kewk-. Compare Dutch hoog, English high, Swedish hög. The declension from the stem hoh- goes back to Old High German -h-, which became /x/ at the end of a syllable but stayed /h/ (later silent) elsewhere; standard German kept this alternation only in hoch.",
+     "text": "From Middle High German hōch, from Old High German hōh, from Proto-West Germanic *hauh, from Proto-Germanic *hauhaz, from Proto-Indo-European *kewk-. The declension from the stem hoh- goes back to Old High German -h-, which became /x/ at the end of a syllable but stayed /h/ (later silent) elsewhere; standard German kept this alternation only in hoch.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "hoch, Dutch hoog and English high are the same Germanic word.",
+     "hoch loses its c before an ending: ein hohes Haus.",
      "Hochdeutsch (High German) was first named after the higher, southern part of the German-speaking lands, not after being “better” German."
     ],
     "pitfalls": [
@@ -478,6 +485,13 @@
     ],
     "subtleties": [
      "People are groß, never hoch; a building can be both: ein hohes Haus (tall) / ein großes Haus (big, roomy)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "hoch is related to English high."
+     }
     ]
    }
   },
@@ -675,11 +689,11 @@
      }
     ],
     "etymology": {
-     "text": "Inherited from Middle High German klein, kleine, from Old High German kleini, from Proto-West Germanic *klainī (“shining, fine, splendid, tender”). Cognate with Dutch klein and English clean.",
+     "text": "Inherited from Middle High German klein, kleine, from Old High German kleini, from Proto-West Germanic *klainī (“shining, fine, splendid, tender”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "klein is related to English clean – the old meaning was “fine, delicate”."
+     "klein once meant “fine, delicate”."
     ],
     "pitfalls": [
      "Short of a person is klein (Sie ist klein), not kurz – kurz is for length and time."
@@ -687,6 +701,13 @@
     "subtleties": [
      "mein kleiner Bruder = my younger brother, whatever his height.",
      "Comparison: kleiner, am kleinsten (der kleinste …)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "klein is related to English clean, but means small."
+     }
     ]
    }
   },
@@ -1106,11 +1127,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German kurz, from Old High German kurz, from Proto-West Germanic *kurt, from Latin curtus. Cognate with Dutch and Low German kort, English curt, Swedish kort.",
+     "text": "From Middle High German kurz, from Old High German kurz, from Proto-West Germanic *kurt, from Latin curtus.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "kurz is an early loan from Latin curtus – the same source as English curt."
+     "kurz is an early loan from Latin curtus."
     ],
     "pitfalls": [
      "Of a person’s height, short is klein: Er ist klein (not *Er ist kurz).",
@@ -1118,6 +1139,13 @@
     ],
     "subtleties": [
      "kurz also means “for a moment”: Ich gehe kurz zum Bäcker."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "kurz is related to English curt."
+     }
     ]
    }
   },
@@ -1320,11 +1348,11 @@
      }
     ],
     "etymology": {
-     "text": "From earlier slecht, from Middle High German slëht, from Old High German slëht (see also schlicht), from Proto-Germanic *slihtaz. Cognate with English slight, Dutch slecht.",
+     "text": "From earlier slecht, from Middle High German slëht, from Old High German slëht (see also schlicht), from Proto-Germanic *slihtaz.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "schlecht once meant “straight, plain, simple” (still in schlicht, plain) and slid to “bad”; its cousin English slight went to “small”."
+     "schlecht once meant “straight, plain, simple” (still in schlicht, plain) and slid to “bad”."
     ],
     "pitfalls": [
      "Mir ist schlecht = I feel sick (nauseous); Mir geht es schlecht = I’m not well; Ich bin schlecht = I’m bad (at something / a bad person).",
@@ -1332,6 +1360,13 @@
     ],
     "subtleties": [
      "Comparison: schlechter, am schlechtesten (der schlechteste …)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "schlecht is related to English slight, but means bad."
+     }
     ]
    }
   },
@@ -1550,17 +1585,54 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German niuwe, from Old High German niuwi, from Proto-West Germanic *niwi, from Proto-Germanic *niwjaz, from Proto-Indo-European *néwos. Compare Dutch nieuw, English new, Danish ny.",
+     "text": "From Middle High German niuwe, from Old High German niuwi, from Proto-West Germanic *niwi, from Proto-Germanic *niwjaz, from Proto-Indo-European *néwos.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Proto-Indo-European *néwos also gave Greek νέος, Latin novus and Russian новый."
+     "neu goes back to Proto-Indo-European *néwos."
     ],
     "pitfalls": [
      "The opposite for things is alt (ein altes Auto) – the same alt as for people."
     ],
     "subtleties": [
      "Two superlatives: am neuesten and am neusten (der neueste / der neuste) – both standard."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "similar",
+      "text": "neu and νέος go back to one Indo-European word."
+     },
+     {
+      "for": "ru",
+      "rel": "similar",
+      "text": "neu and новый go back to one Indo-European word."
+     },
+     {
+      "for": "it",
+      "rel": "similar",
+      "text": "neu and nuovo go back to one Indo-European word."
+     },
+     {
+      "for": "fr",
+      "rel": "similar",
+      "text": "neu and neuf go back to one Indo-European word."
+     },
+     {
+      "for": "es",
+      "rel": "similar",
+      "text": "neu and nuevo go back to one Indo-European word."
+     },
+     {
+      "for": "pt",
+      "rel": "similar",
+      "text": "neu and novo go back to one Indo-European word."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "neu is related to English new."
+     }
     ]
    }
   },
@@ -1774,19 +1846,31 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German alt, from Old High German alt, from Proto-West Germanic *ald, from Proto-Germanic *aldaz, from Proto-Indo-European *altós, *h₂eltós, from *h₂el- (“grow, nourish”). Compare Dutch oud, Low German old, West Frisian âld, English old.",
+     "text": "From Middle High German alt, from Old High German alt, from Proto-West Germanic *ald, from Proto-Germanic *aldaz, from Proto-Indo-European *altós, *h₂eltós, from *h₂el- (“grow, nourish”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "The root *h₂el- (“to grow”) is also in Latin alere (to nourish): old first meant “grown up”."
+     "The root *h₂el- means “to grow”: old first meant “grown up”."
     ],
     "pitfalls": [
      "ein älterer Herr is “an elderly gentleman” – the comparative makes him younger than ein alter Herr.",
      "Comparison with umlaut: älter, am ältesten."
     ],
     "subtleties": [
-     "One word for things and people, where Greek says παλιός (things) and ηλικιωμένος / γέρος (people), and English adds elderly.",
+     "One word for things and people: ein altes Haus, ein alter Mann (politely: ein älterer Herr).",
      "Age: Ich bin zwanzig (Jahre alt)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "trap",
+      "text": "παλιός (things) and ηλικιωμένος / γέρος (people) are both alt."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English adds elderly; German politely says ein älterer Herr."
+     }
     ]
    }
   },
@@ -1962,11 +2046,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German junc, from Old High German jung, from Proto-West Germanic *jung, from Proto-Germanic *jungaz, from Proto-Indo-European *h₂yuh₁n̥ḱós. Compare Dutch jong, English young, Danish ung.",
+     "text": "From Middle High German junc, from Old High German jung, from Proto-West Germanic *jung, from Proto-Germanic *jungaz, from Proto-Indo-European *h₂yuh₁n̥ḱós.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English young, Dutch jong and German jung are the same Germanic word."
+     "jung – jünger – am jüngsten, with umlaut."
     ],
     "pitfalls": [
      "der Junge (the boy, S01) is a noun with a capital J; junge with a small j is the adjective: der junge Mann.",
@@ -1974,6 +2058,13 @@
     ],
     "subtleties": [
      "der Junge (the boy) is simply the adjective jung used as a noun – “the young one”."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "jung is related to English young."
+     }
     ]
    }
   },
@@ -2166,17 +2257,24 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German and Old High German heiz, from Proto-West Germanic *hait. Akin to Old Saxon het, Dutch heet, English hot, Danish hed.",
+     "text": "From Middle High German and Old High German heiz, from Proto-West Germanic *hait.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "heiß, Dutch heet and English hot are one Germanic word."
+     "heiß is said of weather and food; of a person it means attractive (colloquial)."
     ],
     "pitfalls": [
      "To say you feel hot: Mir ist heiß (dative). Ich bin heiß means “I’m hot” in the sexual sense."
     ],
     "subtleties": [
      "Comparison: heißer, am heißesten (der heißeste …)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "heiß is related to English hot."
+     }
     ]
    }
   },
@@ -2388,11 +2486,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German and Old High German kalt, from Proto-West Germanic *kald. Cognate to Low German kold, Dutch koud, English cold, Danish kold.",
+     "text": "From Middle High German and Old High German kalt, from Proto-West Germanic *kald.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "kalt, Dutch koud and English cold are one Germanic word."
+     "Mir ist kalt: the person who feels cold is in the dative."
     ],
     "pitfalls": [
      "Mir ist kalt = I feel cold. Ich bin kalt means “I’m cold-hearted”.",
@@ -2400,6 +2498,13 @@
     ],
     "subtleties": [
      "die Kaltmiete is the rent without heating and other costs; die Warmmiete includes them."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "kalt is related to English cold."
+     }
     ]
    }
   },
@@ -2597,7 +2702,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "warm is spelled and means the same in German and English."
+     "warm – wärmer – am wärmsten, with umlaut."
     ],
     "pitfalls": [
      "How you feel: Mir ist warm (dative), not *Ich bin warm.",
@@ -2605,6 +2710,13 @@
     ],
     "subtleties": [
      "warm essen = to eat a cooked, hot meal (Wir essen mittags warm)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "warm is spelled and means the same as English warm."
+     }
     ]
    }
   },
@@ -2811,7 +2923,7 @@
     },
     "funFacts": [
      "Danke schön and Bitte schön (S02) contain schön.",
-     "Yiddish sheyn (שיין), as in a sheyne meydl, is the same word."
+     "schön also makes many polite phrases: Danke schön! Schönen Tag noch!"
     ],
     "pitfalls": [
      "schön is much wider than “beautiful”: ein schöner Tag = a nice day; Schön! = good, fine."
@@ -3232,18 +3344,30 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German līht, from Old High German līht, from Proto-West Germanic *lį̄ht, from Proto-Germanic *linhtaz, ultimately from Proto-Indo-European *h₁lengʷʰ-. Compare English light, Dutch licht, Danish let.",
+     "text": "From Middle High German līht, from Old High German līht, from Proto-West Germanic *lį̄ht, from Proto-Germanic *linhtaz, ultimately from Proto-Indo-European *h₁lengʷʰ-.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "leicht covers weight and difficulty, just like its opposite schwer – and like Russian лёгкий (light; easy)."
+     "leicht covers weight and difficulty, just like its opposite schwer."
     ],
     "pitfalls": [
-     "leicht is not “light” as in brightness – that is hell (S17)."
+     "leicht is about weight and difficulty; light in colour is hell (S17)."
     ],
     "subtleties": [
      "leicht vs einfach: Die Prüfung ist leicht (not hard) / Die Lösung ist einfach (not complicated) – often both are possible.",
      "Comparison: leichter, am leichtesten (der leichteste …)."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "leicht covers weight and difficulty, like лёгкий."
+     },
+     {
+      "for": "en",
+      "rel": "trap",
+      "text": "leicht is light in weight (and easy), not light as in brightness – that is hell."
+     }
     ]
    }
   },
@@ -3466,11 +3590,11 @@
      }
     ],
     "etymology": {
-     "text": "From ein- + -fach. Compare English onefold.",
+     "text": "From ein- + -fach.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Latin simplex (sim- “one” + -plex “-fold”) made English simple the same way; Greek απλός (simple; single, not double) works the same way."
+     "einfach is ein + fach (“-fold”): “one-fold”, simple."
     ],
     "pitfalls": [
      "As an adverb einfach often means “just, simply”: Komm einfach! = Just come! – not “come easily”."
@@ -3478,6 +3602,18 @@
     "subtleties": [
      "-fach counts “-fold”: einfach, zweifach, dreifach – einfach is literally “onefold”.",
      "Comparison: einfacher, am einfachsten (der einfachste …)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "einfach works like απλός: simple and single, not double."
+     },
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "einfach is built like the old English onefold: ein + fach (“fold”)."
+     }
     ]
    }
   },
@@ -3679,7 +3815,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Like Russian тяжёлый, schwer is both “heavy” and “hard” (eine schwere Arbeit = hard work).",
+     "schwer is both “heavy” and “hard” (eine schwere Arbeit = hard work).",
      "die Schwerkraft = gravity."
     ],
     "pitfalls": [
@@ -3688,6 +3824,13 @@
     "subtleties": [
      "Es fällt mir schwer = I find it hard (dative, like Mir ist kalt).",
      "Comparison: schwerer, am schwersten (der schwerste …)."
+    ],
+    "notes": [
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "schwer is both heavy and hard, like тяжёлый."
+     }
     ]
    }
   },
@@ -4459,17 +4602,24 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German tiure, from Old High German tiuri, from Proto-West Germanic *diurī, from Proto-Germanic *diurijaz, akin to Old Saxon diuri, compare Dutch duur, English dear, Icelandic dýr, and Swedish dyr.",
+     "text": "From Middle High German tiure, from Old High German tiuri, from Proto-West Germanic *diurī, from Proto-Germanic *diurijaz.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "teuer is the same word as English dear – which also means both “expensive” and “beloved”."
+     "teuer once also meant “beloved, precious”, as in the old-fashioned mein Teuerster."
     ],
     "pitfalls": [
      "The e before r drops when an ending follows: ein teures Auto, die teure Wohnung (not *teueres); comparative teurer."
     ],
     "subtleties": [
      "teurer is both the comparative (more expensive) and the strong masculine form (teurer Wein)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "English dear still means both “expensive” and “beloved”. teuer is English dear in its old sense “expensive”."
+     }
     ]
    }
   },
@@ -4661,13 +4811,20 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "das Glück means both happiness and luck, so glücklich is both happy and lucky – like Greek ευτυχία (happiness, good fortune)."
+     "das Glück means both happiness and luck, so glücklich is both happy and lucky."
     ],
     "pitfalls": [
      "glücklich is strong and lasting; “glad about something” is froh: Ich bin froh, dass du hier bist."
     ],
     "subtleties": [
      "Comparison: glücklicher, am glücklichsten (der glücklichste …)."
+    ],
+    "notes": [
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "Glück is both happiness and luck, like ευτυχία."
+     }
     ]
    }
   },
@@ -4870,17 +5027,24 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German vrō, from Old High German frō, frao, from Proto-Germanic *frawaz (“quick, glad”). Compare Dutch vrolijk, whence also English frolic.",
+     "text": "From Middle High German vrō, from Old High German frō, frao, from Proto-Germanic *frawaz (“quick, glad”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English frolic comes from Dutch vrolijk, a cousin of froh."
+     "froh is “glad, cheerful”: Frohe Weihnachten! (Merry Christmas)"
     ],
     "pitfalls": [
      "froh mostly comes after sein with a reason (froh über …, froh, dass …); before a noun it is common mainly in wishes: Frohe Weihnachten!"
     ],
     "subtleties": [
      "Superlative am frohsten or am frohesten – rarely needed."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "froh is related to English frolic, which came in as a loan."
+     }
     ]
    }
   },
@@ -5059,11 +5223,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German trūrec, from Old High German trūrag. By surface analysis, Trauer + -ig. Cognate with Dutch treurig (“sad, gloomy”), English dreary.",
+     "text": "From Middle High German trūrec, from Old High German trūrag. By surface analysis, Trauer + -ig.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "traurig is a cousin of English dreary."
+     "traurig belongs to trauern (to mourn)."
     ],
     "pitfalls": [
      "Sad about something: traurig über + accusative (traurig über die Nachricht)."
@@ -5071,6 +5235,13 @@
     "subtleties": [
      "die Trauer = grief, mourning – traurig is its adjective.",
      "Comparison: trauriger, am traurigsten (der traurigste …)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "traurig is related to English dreary."
+     }
     ]
    }
   },
@@ -5264,7 +5435,7 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German müede, muode, from Old High German muodi, from Proto-West Germanic *mōþī. Cognate to Dutch moe.",
+     "text": "From Middle High German müede, muode, from Old High German muodi, from Proto-West Germanic *mōþī.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -5441,18 +5612,35 @@
      }
     ],
     "etymology": {
-     "text": "From Proto-Germanic *hungragaz, *hungrugaz (“hungry”). By surface analysis, Hunger + -ig. Compare Dutch hongerig, English hungry.",
+     "text": "From Proto-Germanic *hungragaz, *hungrugaz (“hungry”). By surface analysis, Hunger + -ig.",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "English hungry and Dutch hongerig are built the same way: noun + -y / -ig."
+     "hungrig is built from the noun: Hunger + -ig."
     ],
     "pitfalls": [
      "In everyday speech Ich habe Hunger is more usual than Ich bin hungrig."
     ],
     "subtleties": [
-     "The opposite is satt (full, not hungry any more) – like Greek χορτάτος, Russian сытый, Turkish tok.",
+     "The opposite is satt (full, not hungry any more): Ich bin satt.",
      "Comparison: hungriger, am hungrigsten (der hungrigste …)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "hungrig is built like English hungry: noun + -ig / -y."
+     },
+     {
+      "for": "el",
+      "rel": "same",
+      "text": "satt is χορτάτος."
+     },
+     {
+      "for": "ru",
+      "rel": "same",
+      "text": "satt is сытый."
+     }
     ]
    }
   },
@@ -5813,7 +6001,7 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German snël, from Old High German snël (“nimble, brave, quick, lively”), from Proto-West Germanic *snel, from Proto-Germanic *snellaz (“active, bold, quick”). Cognate with Dutch snel, Low German snell, English snell.",
+     "text": "From Middle High German snël, from Old High German snël (“nimble, brave, quick, lively”), from Proto-West Germanic *snel, from Proto-Germanic *snellaz (“active, bold, quick”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
@@ -5824,6 +6012,13 @@
     ],
     "subtleties": [
      "Comparison: schneller, am schnellsten (der schnellste …)."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "similar",
+      "text": "schnell is related to the old English word snell (“quick”)."
+     }
     ]
    }
   },
@@ -6181,7 +6376,7 @@
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "German “has” hunger like French (j’ai faim); Greek and Russian use a verb or an adjective (πεινάω, я голоден)."
+     "German “has” hunger: Ich habe Hunger."
     ],
     "pitfalls": [
      "No article: Ich habe Hunger (not *einen Hunger); negation with kein: Ich habe keinen Hunger."
@@ -6189,6 +6384,23 @@
     "subtleties": [
      "Ich habe Hunger is the everyday way to say “I’m hungry”; Ich bin hungrig is correct but less common.",
      "Hunger has no plural."
+    ],
+    "notes": [
+     {
+      "for": "fr",
+      "rel": "same",
+      "text": "Ich habe Hunger is built like j’ai faim."
+     },
+     {
+      "for": "el",
+      "rel": "different",
+      "text": "πεινάω is a verb; German “has” hunger: Ich habe Hunger."
+     },
+     {
+      "for": "ru",
+      "rel": "different",
+      "text": "я голоден uses an adjective; German “has” hunger: Ich habe Hunger."
+     }
     ]
    },
    "role": "hunger – in Ich habe Hunger (I’m hungry), the everyday way to say it; the adjective is hungrig"
@@ -6319,11 +6531,11 @@
      }
     ],
     "etymology": {
-     "text": "From Middle High German durst, from Old High German durst, thurst, from Proto-West Germanic *þurstu, from Proto-Germanic *þurstuz, from Proto-Indo-European *ters- (“dry”). Akin to Old Dutch thursti (modern dorst), Old English þurst (modern thirst), and Old Saxon thurst.",
+     "text": "From Middle High German durst, from Old High German durst, thurst, from Proto-West Germanic *þurstu, from Proto-Germanic *þurstuz, from Proto-Indo-European *ters- (“dry”).",
      "src": "Wiktionary (kaikki.org)"
     },
     "funFacts": [
-     "Durst and English thirst go back to a root meaning “dry”."
+     "Durst goes back to a root meaning “dry”."
     ],
     "pitfalls": [
      "No article: Ich habe Durst (not *einen Durst); negation: Ich habe keinen Durst."
@@ -6331,6 +6543,13 @@
     "subtleties": [
      "Ich habe Durst is more usual than Ich bin durstig.",
      "Genitive des Durstes or des Dursts; no plural."
+    ],
+    "notes": [
+     {
+      "for": "en",
+      "rel": "same",
+      "text": "Durst is English thirst."
+     }
     ]
    },
    "role": "thirst – in Ich habe Durst (I’m thirsty), the everyday way to say it; the adjective is durstig"

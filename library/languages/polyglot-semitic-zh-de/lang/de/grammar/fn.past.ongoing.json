@@ -154,12 +154,19 @@
   {
    "t": "callout",
    "kind": "pitfall",
-   "title": "No “was …-ing”, no “used to” verb",
+   "title": "No progressive or habitual verb form",
    "text": "Not *Ich war spielend. Say Ich spielte (gerade). For a habit add früher or immer: Früher spielte ich Fußball. In colloquial speech, in some regions, a progressive with am + noun-like infinitive is heard (Ich war am Kochen); the written standard uses gerade: Ich kochte gerade.",
    "typology": [
     {
      "feature": "verb.progressive",
      "value": "optional"
+    }
+   ],
+   "notes": [
+    {
+     "for": "en",
+     "rel": "trap",
+     "text": "Neither “was …-ing” nor “used to” has a German verb form: not *Ich war spielend, but Ich spielte gerade; I used to play football = Früher spielte ich Fußball."
     }
    ]
   },
@@ -190,7 +197,7 @@
   "ich schlief, er schlief – strong verbs have no ending in ich and er.",
   "Not *Ich war spielend; not *Ich pflegte zu spielen in everyday speech (formal only).",
   "Als ich ein Kind war … (one period) – not *Wenn ich ein Kind war …",
-  "früher (in the past) is not “earlier today”: Früher wohnte ich in Berlin = I used to live in Berlin.",
+  "früher means “in the past, formerly” (Früher wohnte ich in Berlin); a moment earlier the same day is vorhin: Vorhin war er hier.",
   "Als die Mutter kam, schlief das Baby – after the als-clause the verb comes first: not *…, das Baby schlief."
  ],
  "evidence": {
@@ -456,6 +463,46 @@
    "for": "iu",
    "rel": "different",
    "text": "Inuktitut expresses many such meanings with suffixes inside the verb word; German uses separate words – früher, immer, oft, gerade – with the past form."
+  },
+  {
+   "for": "it",
+   "rel": "trap",
+   "text": "There is no imperfetto: giocavo and giocai / ho giocato are all spielte (or habe gespielt), and stavo giocando is spielte gerade. The habit is said with früher, immer, oft: Früher spielte ich Fußball (giocavo a calcio)."
+  },
+  {
+   "for": "sq",
+   "rel": "trap",
+   "text": "Albanian has an imperfect for habits and background (luaja, flija) and po for an action in progress (po luaja); German has one Präteritum (spielte, schlief) and adds früher, immer or gerade: Früher spielte ich oft im Garten."
+  },
+  {
+   "for": "pt",
+   "rel": "trap",
+   "text": "There is no imperfeito: brincava and brinquei are both spielte (or habe gespielt), and estava a brincar is spielte gerade. The habit is said with früher, immer, oft: Früher spielte ich oft im Garten."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "trap",
+   "text": "If your language has an imperfect or another past for habits and background, German does not: the Präteritum (spielte) or the Perfekt serves for finished events too, and früher, immer, gerade or an als-clause carry the meaning."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If your verb takes suffixes for “was doing” or “used to”, German has no such forms: it uses the plain past and adds a word – früher, gerade, immer, oft: Früher spielte ich oft im Garten."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "similar",
+   "text": "As with your time words and aspect markers, German says habit and background with words – früher, oft, gerade, als … – but the verb itself must still be in the past: Früher spielte ich. Als er kam, schlief ich."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "Where your verb carries suffixes for habitual or ongoing action, German uses the plain past (Präteritum or Perfekt) and separate words for the meaning: früher, immer, oft, gerade, als …"
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "trap",
+   "text": "If you say “used to” or “was doing” with the past of “to be” plus a verb, do not copy it into German (*Ich war spielend): use the plain past with früher, immer or gerade – Früher spielte ich oft im Garten."
   }
  ]
 }

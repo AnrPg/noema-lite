@@ -516,6 +516,46 @@
    "for": "iu",
    "rel": "new",
    "text": "German has a strict word-order rule that a time word triggers: whatever comes first, the conjugated verb is second (Heute koche ich). Inuktitut verbs usually come at the end, and word order is freer."
+  },
+  {
+   "for": "it",
+   "rel": "similar",
+   "text": "lunedì (moon day) is Montag; il lunedì (every Monday) is montags, and where Italian needs no preposition German says am Montag. After a time word German puts the verb before the subject: Lunedì vado al lavoro – Am Montag gehe ich zur Arbeit."
+  },
+  {
+   "for": "sq",
+   "rel": "similar",
+   "text": "e hënë (moon) is Montag and e diel (sun) Sonntag, as in German; të hënën is am Montag, and nesër / pasnesër match morgen / übermorgen. After a time word German puts the verb before the subject: Të hënën shkoj në punë – Am Montag gehe ich zur Arbeit."
+  },
+  {
+   "for": "pt",
+   "rel": "different",
+   "text": "Portuguese numbers the weekdays (segunda-feira, terça-feira …); German names them: Montag (moon day), Sonntag (sun day). na segunda-feira / às segundas-feiras are am Montag / montags, and after a time word the verb comes first: Na segunda vou trabalhar – Am Montag gehe ich zur Arbeit."
+  },
+  {
+   "for": "type:fusional",
+   "rel": "similar",
+   "text": "If your language marks “on Monday” with a case or a preposition, German uses am (an + dem): am Montag, am Abend – but in der Nacht. New is verb-second after a time word: Am Montag gehe ich zur Arbeit."
+  },
+  {
+   "for": "type:agglutinating",
+   "rel": "different",
+   "text": "If “on Monday” is a suffix on your day name, German puts am before it (am Montag) and makes an -s adverb for a habit (montags). A time word first moves the verb before the subject: Morgen fahre ich."
+  },
+  {
+   "for": "type:isolating",
+   "rel": "different",
+   "text": "If time words simply stand before the verb, German does the same but keeps the verb second, so the subject moves behind it: Am Montag gehe ich zur Arbeit – not *Am Montag ich gehe."
+  },
+  {
+   "for": "type:polysynthetic",
+   "rel": "different",
+   "text": "German time words are separate adverbs and phrases (heute, morgen, am Montag, abends); when one opens the sentence, the verb comes next and the subject after it: Heute koche ich."
+  },
+  {
+   "for": "branch:Semitic",
+   "rel": "different",
+   "text": "If your weekdays are numbered (first day, second day …), German names them: Montag (moon day), Sonntag (sun day), Donnerstag (Donar’s day); the week starts on Monday, and “on a day” is am: am Montag."
   }
  ]
 }
