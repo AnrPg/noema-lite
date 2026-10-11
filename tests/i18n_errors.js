@@ -142,7 +142,8 @@ function contract(w, e, what, enParams) {
   ok(w.NoemaI18n.t('err.' + ev.error.code, ev.error.params, 'en') === ev.error.message, 'the English catalog text equals the proxy’s message');
 
   console.log('the contract table (docs/i18n.md §6)');
-  const doc = fs.readFileSync(path.join(ROOT, 'docs/i18n.md'), 'utf8'), sec = doc.slice(doc.indexOf('## 6.'));
+  const doc = fs.readFileSync(path.join(ROOT, 'docs/i18n.md'), 'utf8'), at6 = doc.indexOf('## 6.'), end6 = doc.indexOf('\n## ', at6 + 1);
+  const sec = doc.slice(at6, end6 > 0 ? end6 : undefined);   // §6 only: later sections have tables of files (`config.js` …), not codes
   const listed = [...sec.matchAll(/^\| `([a-z_]+(?:\.[a-z_]+)+)`/gm)].map(m => m[1]);
   ok(listed.length > 60, listed.length + ' codes in the table');
   const enCat = JSON.parse(fs.readFileSync(path.join(ROOT, 'i18n/errors/en.arb'), 'utf8'));

@@ -538,7 +538,7 @@ window.NoemaShell = (() => {
     const days = [...Array(7)].map((_, i) => { const d = new Date(Date.now() - (6 - i) * DAY); return { k: d.toISOString().slice(0, 10), l: fmtDate(d, { weekday: 'narrow' }) }; });
     const stones = [[40, 90], [110, 70], [180, 84], [250, 62], [320, 78], [390, 58], [460, 72]];
     const did = days.map(d => (st.xpDay || {})[d.k] > 0);
-    const trail = `<svg class="ns-trail" viewBox="0 0 500 130" role="img" aria-label="${L('trailAria', { n: did.filter(Boolean).length })}"><path d="M40 90 Q75 60 110 70 T180 84 T250 62 T320 78 T390 58 T460 72" fill="none" stroke="var(--ink3)" stroke-width="2" stroke-dasharray="3 7" opacity=".6"/>`
+    const trail = `<svg class="ns-trail" viewBox="0 0 500 130" role="img" aria-label="${L('trailAria', { n: did.filter(Boolean).length }).replace(/[&<>"]/g, c => '&#' + c.charCodeAt(0) + ';')}"><path d="M40 90 Q75 60 110 70 T180 84 T250 62 T320 78 T390 58 T460 72" fill="none" stroke="var(--ink3)" stroke-width="2" stroke-dasharray="3 7" opacity=".6"/>`
       + stones.map(([x, y], i) => did[i] ? `<ellipse cx="${x}" cy="${y}" rx="20" ry="9" fill="var(--t2)" stroke="var(--t2i)" stroke-width="1.5"/>` : `<ellipse cx="${x}" cy="${y}" rx="20" ry="9" fill="none" stroke="var(--ink3)" stroke-width="1.5" stroke-dasharray="4 4"/>`).join('')
       + `<rect x="447" y="42" width="26" height="18" rx="4" fill="var(--t2)" stroke="var(--t2i)" stroke-width="1.5"/><path d="M447 50 h26" stroke="var(--t2i)" stroke-width="1.5"/>`
       + days.map((d, i) => `<text x="${stones[i][0]}" y="${stones[i][1] + 28}" text-anchor="middle" font-size="15" font-weight="700" fill="var(--ink3)">${d.l}</text>`).join('')
@@ -718,7 +718,7 @@ window.NoemaShell = (() => {
     build({ head, body, close, refocus }); refocus(); return close;
   }
   const cvTitle = r => r.title || String(r.messages.find(m => m.role === 'user')?.content || '').replace(/\s+/g, ' ').slice(0, 60) || L('untitled');
-  const cvMode = r => { if (r.kind && r.kind !== 'tutor') return window.NoemaConvos?.KIND_NAME?.[r.kind] || r.kind; const m = String(r.mode || ''), v = L('mode' + m.charAt(0).toUpperCase() + m.slice(1)); return v.startsWith('sh.') ? m : v; };
+  const cvMode = r => { if (r.kind && r.kind !== 'tutor') return window.NoemaConvos?.KIND_NAME?.[r.kind] || r.kind; const m = String(r.mode || ''), k = 'mode' + m.charAt(0).toUpperCase() + m.slice(1); return m && window.NoemaI18n?.has('sh.' + k) ? L(k) : m; };   // a mode the catalog does not know: its code (a missing key no longer comes back as the key)
   const cvWhat = r => !r.context || r.context.type === 'course' ? '' : r.context.type === 'exercise' ? L('forExercise') : r.context.label || '';   // a whole-subject chat needs no label (it read like a filter)
   const cvText = t => String(t || '').replace(/<noema-state>[\s\S]*?<\/noema-state>/g, '').trim();
   function cvMd(t) { const d = h('div', { class: 'ns-md' }); if (window.marked && window.DOMPurify) d.innerHTML = DOMPurify.sanitize(marked.parse(cvText(t))); else d.textContent = cvText(t); return d; }

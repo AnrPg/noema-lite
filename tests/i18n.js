@@ -81,11 +81,26 @@ ok(F.list(['α', 'β', 'γ']) === 'α, β και γ', 'list in el: ' + F.list(['
 ok(['ω', 'α', 'Ά'].sort(F.compare).join('') === 'αΆω', 'collation in el: ' + ['ω', 'α', 'Ά'].sort(F.compare).join(''));
 ok(F.upper('άλμα') === 'ΆΛΜΑ' || F.upper('άλμα') === 'ΑΛΜΑ', 'locale-aware upper case');
 ok(/πριν από 3 ημέρες|πριν 3 ημέρες/.test(F.ago(Date.now() - 3 * 86400e3)), 'relative time: ' + F.ago(Date.now() - 3 * 86400e3));
+{ let r; try { r = [F.date(undefined), F.date('not a date'), F.time(NaN), F.date(0)]; } catch (e) { r = e.message; }
+  ok(Array.isArray(r) && r[0] === '' && r[1] === '' && r[2] === '' && /1970/.test(r[3]), 'a missing or broken time stamp formats as "" (no RangeError): ' + JSON.stringify(r)); }
+{ const big = [...Array(3000)].map((_, i) => 'θέμα ' + ((i * 7919) % 3001)), t0 = Date.now(); big.sort(F.compare);
+  ok(big[0] === 'θέμα 0' && big[1] === 'θέμα 1' && big[2] === 'θέμα 2' && Date.now() - t0 < 1500, `a sort with fmt.compare is fast (${Date.now() - t0} ms for 3000) and numeric`); }
 
 console.log('catalog checks');
 const chk = cp.spawnSync('node', [path.join(ROOT, 'tools/i18n/check.js'), '--json'], { encoding: 'utf8' });
 const res = JSON.parse(chk.stdout);
 ok(!res.errors.length, `tools/i18n/check.js: ${res.errors.length} error(s)${res.errors.length ? ' — ' + res.errors.slice(0, 5).join(' | ') : ''}`);
+{ // every key the code asks for by its literal name exists in English (else the learner reads the key's last word, e.g. “noteAiBadge”)
+  const EN = boot().NOEMA_I18N.en.m, bad = [];
+  const files = ['loader', 'shell', 'curmap', 'curriculum', 'curshare', 'curjobs', 'curimport', 'packgen', 'cloud', 'claude', 'mt', 'themes', 'react', 'convos', 'viewer', 'imglib', 'srcfiles', 'langcore'].map(f => `engine/${f}.js`)
+    .concat(...['src', 'lang'].map(d => fs.readdirSync(path.join(ROOT, 'engine', d)).filter(f => f.endsWith('.js')).map(f => `engine/${d}/${f}`)));
+  for (const f of files) {
+    const src = fs.readFileSync(path.join(ROOT, f), 'utf8');
+    for (const m of src.matchAll(/\b(?:t|tr|trx|tE|T|LT|LE|rt|lcX|lcU|lcEn|lcXP|lcUP|lcT)\(\s*'([a-z][A-Za-z0-9]*(?:\.[A-Za-z0-9_-]+)+)'(?=\s*[,)])/g)) if (EN[m[1]] == null) bad.push(`${f}: ${m[1]}`);
+    if (f === 'engine/shell.js') for (const m of src.matchAll(/\b(?:L|rich)\(\s*'([A-Za-z0-9_]+)'(?=\s*[,)])/g)) if (EN['sh.' + m[1]] == null) bad.push(`${f}: sh.${m[1]}`);
+  }
+  ok(!bad.length, `every literal key in the code is in the English catalog${bad.length ? ' — missing: ' + bad.join(' | ') : ''}`);
+}
 const icu = require(path.join(ROOT, 'tools/i18n/check.js'));
 ok(icu.apostropheHazard("l'{x}") && !icu.apostropheHazard('l’{x}') && !icu.apostropheHazard("it''s {x}"), "the apostrophe check catches l'{x}");
 
