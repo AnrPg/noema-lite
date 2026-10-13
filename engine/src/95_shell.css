@@ -616,7 +616,7 @@ body.ns-on .cm-tmap .cm-nextup{box-shadow:none}
 @media (min-width:760px){.cm-page .cm-panel{width:min(420px,42%)}}
 
 /* ---------- big reactions: a small stage with the character and its props; never takes clicks ---------- */
-.ns-fx{position:relative;z-index:45}
+.ns-fx{position:fixed;inset:0;overflow:clip;pointer-events:none;z-index:45}
 .ns-cele{position:fixed;z-index:45;pointer-events:none;inset-inline-end:24px;top:64px;width:240px;display:flex;flex-direction:column;align-items:center;gap:2px;animation:ns-celein .45s cubic-bezier(.2,1.4,.4,1) both}
 .ns-cele.out{animation:ns-fadeout .4s ease-in forwards}
 .ns-cele.still{top:72px}

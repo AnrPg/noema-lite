@@ -114,7 +114,7 @@ const ENDONYMS = new Set();
 for (const a of 'abcdefghijklmnopqrstuvwxyz') for (const b of 'abcdefghijklmnopqrstuvwxyz') { try { const c = a + b, n = new Intl.DisplayNames([c], { type: 'language', fallback: 'none' }).of(c); if (n && n !== c && (c === 'en' || n !== new Intl.DisplayNames(['en'], { type: 'language' }).of(c))) ENDONYMS.add(n.toLowerCase()); } catch (e) { } }
 ENDONYMS.delete('english');   // “English” only in a language picker (below): elsewhere it is a word the code wrote
 // a parameter that holds a provider's, a server's or the browser's own words (docs/i18n.md §6.1: `detail` stays as it is)
-const PARAM_ALLOW = [/\{"error"/, /^\(?\d{3}\)?:/, /Failed to fetch|NetworkError|Load failed/];
+const PARAM_ALLOW = [/\{"error"/, /^\(?\d{3}\)?:/, /failed to fetch|fetch failed|networkerror|load failed/i];
 /** Places whose words are kept on purpose (input for a parser, …) — each with its reason. */
 const WHERE_ALLOW = [
   [/\bcm-(ex|tree)\b|cm-rules > tbody > tr > td|td > code/, 'the Roadmap import guide: its syntax column and examples are input for the parser (curimport.js), kept as it reads them'],
