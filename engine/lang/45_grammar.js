@@ -68,7 +68,7 @@ function wordsIn(c, s) {
   while ((m = re.exec(s))) {
     if (m.index > last) out.push(s.slice(last, m.index));
     const run = m[0], code = /[֐-׿יִ-ﭏ]/.test(run) ? 'he' : /[؀-ۿݐ-ݿﭐ-﷿ﹰ-﻿]/.test(run) ? 'ar' : 'zh';
-    out.push(UI.C.lang[code] ? word(code, run, { sub: false }) : h('span', { lang: code, dir: code === 'zh' ? 'ltr' : 'rtl' }, run));
+    out.push(UI.C.lang[code] ? runView(code, run) : h('span', { lang: code, dir: code === 'zh' ? 'ltr' : 'rtl' }, run));
     last = m.index + run.length;
   }
   if (last < s.length) out.push(s.slice(last));
@@ -119,7 +119,7 @@ function typologyCard() {
   return h('article', { class: 'lx-card lx-typology' }, h('h3', {}, '🧬 ' + LE('lang.expl.fourWays')), h('p', {}, T.intro),
     ...T.types.map(t => h('details', { class: 'lx-sec', open: true, 'data-type': t.id }, h('summary', {}, h('b', {}, t.name), ' ', UI.C.languages.filter(c => LX(c).typology === t.id).map(c => info(c).flag).join(' ')),
       h('p', {}, t.summary), t.learnFirst ? h('p', { class: 'tiny' }, '🧭 ' + LE('lang.expl.learnFirst') + ' ', t.learnFirst) : null,
-      ...t.examples.map(e => h('div', { class: 'lx-ex' }, h('div', { class: 'lx-extext' }, info(e.lang).flag, ' ', UI.C.lang[e.lang] ? word(e.lang, e.text, { sub: false }) : h('span', { lang: e.lang }, e.text)), e.tr ? h('div', { class: 'lx-tr' }, e.tr) : null, h('div', { class: 'tiny' }, scriptRuns(e.analysis, e.lang)))),
+      ...t.examples.map(e => h('div', { class: 'lx-ex' }, h('div', { class: 'lx-extext' }, info(e.lang).flag, ' ', UI.C.lang[e.lang] ? runView(e.lang, e.text) : h('span', { lang: e.lang }, e.text)), e.tr ? h('div', { class: 'lx-tr' }, e.tr) : null, h('div', { class: 'tiny' }, scriptRuns(e.analysis, e.lang)))),
       t.languages ? h('p', { class: 'tiny' }, LE('lang.expl.languages') + ' ', t.languages) : null)),
     T.spectrum ? h('div', { class: 'lx-callout k-key' }, h('b', {}, LE('lang.expl.spectrum') + ' '), T.spectrum) : null,
     ...contrastView(contrastL(T.notes, null)));   // R1: the four types seen from the learner's languages and the ones they learn

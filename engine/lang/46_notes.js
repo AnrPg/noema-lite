@@ -50,7 +50,7 @@ function scriptRuns(s, forLang = null) {
     if (!sc || sc[0] === skip) continue;
     if (m.index > last) out.push(s.slice(last, m.index));
     const code = sc[2](forLang, run);
-    const e = UI.C?.lang[code] ? word(code, run, { sub: false }) : h('span', { lang: code, dir: RTL.has(code) ? 'rtl' : null }, run);
+    const e = UI.C?.lang[code] ? runView(code, run) : h('span', { lang: code, dir: RTL.has(code) ? 'rtl' : null }, run);
     if (e && e.dataset) e.dataset.inline = '1';   // a run inside prose: no 🔊 button of its own (98_speech.js)
     out.push(e);
     last = m.index + run.length;
