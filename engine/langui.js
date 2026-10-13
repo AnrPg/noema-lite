@@ -138,6 +138,65 @@ function wordPopup(c, lid) {
     h('div', { class: 'lx-popbox' }, h('div', { class: 'row' }, h('b', {}, gloss(c, lid)), h('button', { class: 'btn ghost small', onclick: () => pop.remove() }, '✕')), wordCardView(c, lid)));
   document.body.append(pop);
 }
+const vocalMemo = new WeakMap();
+/** The written forms of a language with vowel marks, without their last marks → the words they belong to (splitRun). */
+function vocalIndex(X) {
+  let m = vocalMemo.get(X); if (m) return m;
+  m = new Map();
+  const put = (f, l) => { if (!/\p{M}/u.test(f)) return; const k = N.nfc(f).replace(/\p{M}+$/u, ''); (m.get(k) || m.set(k, new Set()).get(k)).add(l); };
+  for (const [f, ms] of X.forms) for (const x of ms) put(f, x.l);
+  for (const [l, x] of Object.entries(X.lex)) if (x.lemma) put(x.lemma, l);
+  vocalMemo.set(X, m); return m;
+}
+/** The words of a course language anywhere on screen (every .lx-w: word(), the runs in explanations and notes, examples, lists …):
+ *  the coloured underline is the language's colour (§9.5). splitRun marks the words the course knows in such a text (.lx-rw), so that
+ *  linkRuns can make them open their card. Only exact readings, never a guess: a vocalized word must agree with a written form of it in
+ *  every mark but the last ones (the case ending: كِتَاب = كِتَابٌ), so كَتَبَ “he wrote” is not taken for كُتُب “books”; a word with
+ *  several readings stays plain. */
+function splitRun(run, code, text) {
+  const X = LX(code), s = N.nfc(text);
+  const one = ls => { ls = new Set([...ls].filter(l => X.lex[l])); return ls.size === 1 ? [...ls][0] : null; };
+  const exact = (t, matches) => !/\p{M}/u.test(t) ? one(matches.map(m => m.l)) : one(vocalIndex(X).get(t.replace(/\p{M}+$/u, '')) || []);
+  let toks = null; try { toks = N.tokenize(UI.C, code, s); } catch (err) { }
+  if (!toks) return;
+  const parts = []; let at = 0;
+  for (const k of toks) {
+    if (k.p || k.unknown) continue;
+    const i = s.indexOf(k.t, at); if (i < 0) return;
+    const last = k.parts ? k.parts[k.parts.length - 1] : k, l = exact(last.t, last.matches || []); if (!l) continue;
+    if (i > at) parts.push(shownMarks(code, s.slice(at, i), null));
+    parts.push(h('span', { class: 'lx-rw', 'data-l': l }, shownMarks(code, k.t, X.lex[l])));
+    at = i + k.t.length;
+  }
+  if (!parts.length) return;
+  if (at < s.length) parts.push(shownMarks(code, s.slice(at), null));
+  run.classList.add('lx-run'); run.replaceChildren(...parts);
+}
+/** The words of every .lx-w open their card on tap (meaning on hover, Enter / Space from the keyboard); a run says its language on hover.
+ *  Not inside an exercise's prompt or options (the same rule as the 🔊 buttons, 98_speech.js): there the word stays plain. */
+{
+  const SKIP = 'button, a, .lx-opts, .lx-opt, select, option, label, .lx-tile, .lx-tile1, .lx-slot, .lx-tiles, .lx-cands, .lx-hidecol, .lx-input, .lx-diff, .lx-tutor';   // i18n-ignore (selectors)
+  const IN_STAGE = '.lx-fb, .lx-ref, .lx-intro, .lx-readtext, .lx-gram, .lx-typology, .lx-overview';   // i18n-ignore (selectors)
+  const linkable = el => !el.closest(SKIP) && !(el.closest('.lx-stage') && !el.closest(IN_STAGE));
+  const linkRuns = root => {
+    if (!UI.C) return;
+    for (const run of root.querySelectorAll('.lx-w[lang]:not(.lx-tok):not([data-lk])')) {
+      run.dataset.lk = '1';
+      const c = run.getAttribute('lang'); if (!UI.C.lang[c] || !linkable(run)) continue;
+      if (!run.title) run.title = info(c).label;   // what the coloured underline means
+      if (!run.children.length && run.textContent.trim()) splitRun(run, c, run.dataset.say || run.textContent);   // data-say: the stored text, not the faded display
+      for (const w of run.querySelectorAll('.lx-rw[data-l]')) if (LX(c).lex[w.dataset.l]) {
+        w.classList.add('lx-tok'); w.tabIndex = 0; w.setAttribute('role', 'button'); w.title = gloss(c, w.dataset.l);
+      }
+    }
+  };
+  const open = (e, w) => { e.stopPropagation(); e.preventDefault(); wordPopup(w.closest('.lx-run').getAttribute('lang'), w.dataset.l); };
+  document.addEventListener('click', e => { const w = e.target.closest?.('.lx-rw.lx-tok'); if (w) open(e, w); });
+  document.addEventListener('keydown', e => { const w = (e.key === 'Enter' || e.key === ' ') && e.target.closest?.('.lx-rw.lx-tok'); if (w) open(e, w); });
+  let pending = false;
+  new MutationObserver(() => { if (pending) return; pending = true; queueMicrotask(() => { pending = false; try { linkRuns(document.body || document.documentElement); } catch (err) { console.warn(err); } }); })
+    .observe(document.documentElement, { childList: true, subtree: true });
+}
 /** Words met before they were learned (D20): remembered per session, listed at the end of a lesson. */
 const metNew = new Map();
 function noteNew(c, ids) { for (const l of ids || []) metNew.set(c + '|' + l, { c, l }); }
