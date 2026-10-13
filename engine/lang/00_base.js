@@ -134,32 +134,43 @@ function wordPopup(c, lid) {
     h('div', { class: 'lx-popbox' }, h('div', { class: 'row' }, h('b', {}, gloss(c, lid)), h('button', { class: 'btn ghost small', onclick: () => pop.remove() }, '✕')), wordCardView(c, lid)));
   document.body.append(pop);
 }
-const vocalMemo = new WeakMap();
-/** The written forms of a language with vowel marks, without their last marks → the words they belong to (splitRun). */
-function vocalIndex(X) {
-  let m = vocalMemo.get(X); if (m) return m;
-  m = new Map();
-  const put = (f, l) => { if (!/\p{M}/u.test(f)) return; const k = N.nfc(f).replace(/\p{M}+$/u, ''); (m.get(k) || m.set(k, new Set()).get(k)).add(l); };
-  for (const [f, ms] of X.forms) for (const x of ms) put(f, x.l);
-  for (const [l, x] of Object.entries(X.lex)) if (x.lemma) put(x.lemma, l);
-  vocalMemo.set(X, m); return m;
+const formsMemo = new WeakMap();
+/** A word of the course → every way the course writes it (its lemma and its forms; splitRun). */
+function formsOf(X, l) {
+  let m = formsMemo.get(X);
+  if (!m) { m = new Map(); for (const [f, ms] of X.forms) for (const x of ms) (m.get(x.l) || m.set(x.l, []).get(x.l)).push(f); formsMemo.set(X, m); }
+  return [X.lex[l]?.lemma, ...(m.get(l) || [])].filter(Boolean);
+}
+/** Two spellings of a word agree: the same letters, and where both carry vowel marks the same vowels (the marks of the last letter —
+ *  the case ending — and the marks that only double or close a letter left aside). كِتَاب agrees with كِتَابٌ, كَتَبَ not with كُتُب. */
+const NO_VOWEL = /[\u0651\u0652\u0670\u05BC\u05BD\u05BF\u05C1\u05C2]/gu;
+function sameWord(code, a, b) {
+  const sk = t => N.stripMarks(code, t);
+  if (sk(a) !== sk(b)) return false;
+  const cells = t => { const out = []; for (const ch of N.nfc(t)) { if (/\p{M}/u.test(ch)) { if (out.length) out[out.length - 1] += ch.replace(NO_VOWEL, ''); } else out.push(''); } return out; };
+  const x = cells(a), y = cells(b);
+  return x.every((v, i) => i === x.length - 1 || !v || !y[i] || [...v].sort().join('') === [...y[i]].sort().join(''));
 }
 /** The words of a course language anywhere on screen (every .lx-w: word(), the runs in explanations and notes, examples, lists …):
  *  the coloured underline is the language's colour (§9.5). splitRun marks the words the course knows in such a text (.lx-rw), so that
- *  linkRuns can make them open their card. Only exact readings, never a guess: a vocalized word must agree with a written form of it in
- *  every mark but the last ones (the case ending: كِتَاب = كِتَابٌ), so كَتَبَ “he wrote” is not taken for كُتُب “books”; a word with
- *  several readings stays plain. */
+ *  linkRuns can make them open their card. A word of several readings: the one written exactly so, else the one whose spelling agrees
+ *  (vowel marks included), else the first; a vocalized spelling that agrees with none (كَتَبَ “he wrote” against كُتُب “books”) stays plain. */
+function wordOf(code, X, t, matches) {
+  const ls = [...new Set(matches.map(m => m.l))].filter(l => X.lex[l]); if (!ls.length) return null;
+  const nt = N.nfc(t), lemmaIs = l => N.nfc(X.lex[l].lemma || '') === nt;
+  if (!/\p{M}/u.test(nt)) return ls.find(lemmaIs) || ls.find(l => N.stripMarks(code, X.lex[l].lemma || '') === nt) || ls[0];
+  const ok = ls.filter(l => formsOf(X, l).some(f => /\p{M}/u.test(f) && sameWord(code, nt, f)));   // the unvocalized keys of the form index agree with anything
+  return ok.find(lemmaIs) || ok[0] || null;
+}
 function splitRun(run, code, text) {
   const X = LX(code), s = N.nfc(text);
-  const one = ls => { ls = new Set([...ls].filter(l => X.lex[l])); return ls.size === 1 ? [...ls][0] : null; };
-  const exact = (t, matches) => !/\p{M}/u.test(t) ? one(matches.map(m => m.l)) : one(vocalIndex(X).get(t.replace(/\p{M}+$/u, '')) || []);
   let toks = null; try { toks = N.tokenize(UI.C, code, s); } catch (err) { }
   if (!toks) return;
   const parts = []; let at = 0;
   for (const k of toks) {
     if (k.p || k.unknown) continue;
     const i = s.indexOf(k.t, at); if (i < 0) return;
-    const last = k.parts ? k.parts[k.parts.length - 1] : k, l = exact(last.t, last.matches || []); if (!l) continue;
+    const last = k.parts ? k.parts[k.parts.length - 1] : k, l = wordOf(code, X, last.t, last.matches || []); if (!l) continue;
     if (i > at) parts.push(shownMarks(code, s.slice(at, i), null));
     parts.push(h('span', { class: 'lx-rw', 'data-l': l }, shownMarks(code, k.t, X.lex[l])));
     at = i + k.t.length;
@@ -179,8 +190,8 @@ function splitRun(run, code, text) {
     for (const run of root.querySelectorAll('.lx-w[lang]:not(.lx-tok):not([data-lk])')) {
       run.dataset.lk = '1';
       const c = run.getAttribute('lang'); if (!UI.C.lang[c] || !linkable(run)) continue;
-      if (!run.title) run.title = info(c).label;   // what the coloured underline means
       if (!run.children.length && run.textContent.trim()) splitRun(run, c, run.dataset.say || run.textContent);   // data-say: the stored text, not the faded display
+      if (!run.title) run.title = info(c).label + (run.querySelector('.lx-rw') ? '' : ' · ' + LT('lang.prod.notInCourseTitle'));   // what the coloured underline means; no card to open
       for (const w of run.querySelectorAll('.lx-rw[data-l]')) if (LX(c).lex[w.dataset.l]) {
         w.classList.add('lx-tok'); w.tabIndex = 0; w.setAttribute('role', 'button'); w.title = gloss(c, w.dataset.l);
       }
