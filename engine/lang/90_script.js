@@ -236,7 +236,7 @@ WIDGETS.trace = (it, done) => {
     if (s.length < 2) { strokes.pop(); ghost(); return; }
     const r = N.strokeMatch(s.map(([x, y]) => toBox(x, y)), med[next]);
     if (r.ok) { next++; strokes.pop(); hint = false; status.textContent = LT('lang.script.strokeOk', { n: next, of: med.length }) + ' ✓'; if (next === med.length) end(misses <= 1); }
-    else { strokes.pop(); misses++; hint = misses >= 2; status.textContent = r.reversed ? LT('lang.script.reversed') : LT(hint ? 'lang.script.notStrokeHint' : 'lang.script.notStroke', { n: next + 1 }); }
+    else { strokes.pop(); misses++; hint = misses >= 2; status.textContent = hint ? LT('lang.script.notStrokeHint', { n: next + 1 }) : r.reversed ? LT('lang.script.reversed') : LT('lang.script.notStroke', { n: next + 1 }); }
     ghost();
   };
   cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up); cv.addEventListener('pointerleave', up);

@@ -243,7 +243,7 @@ const cur = p => p.evaluate(() => NoemaCurriculum.list(Noema.account?.id || Obje
   A.slowPlan = 1200;
   await q.click('.cg-go');
   ok(await until(async () => /Agent 3/.test(await q.locator('.cg-log').innerText()), 15000), 'Gemini agents run (graph, audit, expansion, now chapter plans)');
-  await q.click('button:has-text("Stop")'); await wait(1500);
+  await q.locator('button:has-text("Stop")').click({ force: true }); await wait(1500);
   const dagBefore = A.gemDag; A.slowPlan = 0;
   ok(/Paused|stopped|Continue/.test(await q.locator('.noema-ovbox').last().innerText()), 'Stop pauses the build');
   await q.click('button:has-text("Continue")');

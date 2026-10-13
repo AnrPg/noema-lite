@@ -231,7 +231,10 @@ window.NoemaCurMap = (() => {
     const wrap = el('div', { class: 'cm-apppanel' });
     let count = 1, pasteOut = null;
     const draw = () => {
-      const c = C().get(acc, cid); if (!c) return; const w = J().work(c); wrap.innerHTML = '';
+      const c = C().get(acc, cid); if (!c) return; const w = J().work(c);
+      const manualOpen = !!wrap.querySelector('.cm-manual[open]');
+      const draft = wrap.querySelector('.cm-paste')?.value || '';
+      wrap.innerHTML = '';
       const todo = [w.graph ? CM('roadmap.map.app.todoGraph', { i: { dag: 1, audit: 2, expand: 3 }[w.graph] }) : null, w.toPlan.length ? CM('roadmap.map.app.todoPlan', { n: w.toPlan.length }) : null, w.steps.length ? CM('roadmap.map.app.todoSteps', { n: w.steps.length }) : null].filter(Boolean);
       const A = J().App; const ago = A.last ? Math.max(0, Math.round((Date.now() - A.last) / 1000)) : null;
       const cnt = el('select', { class: 'noema-input cm-count', 'aria-label': CM('roadmap.map.app.countAria'), onchange: e => { count = +e.target.value; } }, ...[1, 2, 3, 5].map(n => el('option', { value: n }, CM('roadmap.map.app.countOpt', { n })))); cnt.value = String(count);
@@ -245,6 +248,10 @@ window.NoemaCurMap = (() => {
           el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, CM('roadmap.map.app.s3'))), el('p', { class: 'tiny' }, CM('roadmap.map.app.s3text') + ' ', A.error ? el('span', { class: 'cg-warn' }, '⚠️ ' + A.error + ' ') : null, ago != null ? (ago < 5 ? CM('roadmap.map.app.lastCheckNow') : CM('roadmap.map.app.lastCheckAgo', { n: ago })) + ' ' : ''),
             el('button', { class: 'btn small cm-checknow', onclick: async e => { e.currentTarget.disabled = true; const n = await A.poll(acc).catch(() => 0); toast('💬 ' + (n ? CM('roadmap.map.app.results', { n }) : CM('roadmap.map.app.nothingNew')), 2500); draw(); } }, '⟳ ' + CM('roadmap.map.app.checkNow')))),
         w.done ? null : manual(c, w));
+      const nextManual = wrap.querySelector('.cm-manual');
+      if (manualOpen) nextManual?.setAttribute('open', '');
+      const nextPaste = nextManual?.querySelector('.cm-paste');
+      if (nextPaste) nextPaste.value = draft;
     };
     const manual = (c, w) => {
       const t = A0(); const box = el('details', { class: 'cg-faq cm-manual' }, el('summary', {}, CM('roadmap.map.man.title')));
@@ -259,6 +266,7 @@ window.NoemaCurMap = (() => {
             if (r.errors) { const msg = `Your answer has these problems:\n- ${r.errors.slice(0, 30).join('\n- ')}\nFix ALL of them and send the complete corrected JSON object again.`; pasteOut = el('div', { class: 'cg-kstat bad' }, '⚠️ ' + CM('roadmap.map.man.problems', { n: r.errors.length, list: r.errors.slice(0, 3).join(' · ') + (r.errors.length > 3 ? ' …' : '') }) + ' ', el('button', { class: 'btn small', onclick: e => copy(msg, e.currentTarget) }, '📋 ' + CM('roadmap.map.man.copyProblems'))); }   // i18n-ignore (msg: for Claude)
             else pasteOut = el('div', { class: 'cg-kstat ok' }, '✓ ' + CM('roadmap.map.man.accepted') + r.line.replace(/^\s*✓?/, ' —'));
             draw(); wrap.querySelector('.cm-manual')?.setAttribute('open', '');
+            if (!r.errors) { const next = wrap.querySelector('.cm-paste'); if (next) next.value = ''; }
           } }, '✔ ' + CM('roadmap.map.man.useAnswer'))), out);
       }
       if (w.steps.length) {
