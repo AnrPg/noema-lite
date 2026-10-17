@@ -1340,6 +1340,49 @@
   "@lang.lesson.locked": {
     "description": "On a locked lesson (after 🔒)."
   },
+  "lang.step.wl": "Words: the lesson",
+  "@lang.step.wl": {
+    "description": "Lesson ladder step 1: meeting the words of the lesson"
+  },
+  "lang.step.wp": "Words: practice",
+  "@lang.step.wp": {
+    "description": "Lesson ladder step 2: practising the words"
+  },
+  "lang.step.tr": "Theory: reading",
+  "@lang.step.tr": {
+    "description": "Lesson ladder step 3: reading the theory (grammar, syntax, culture)"
+  },
+  "lang.step.tp": "Theory: practice",
+  "@lang.step.tp": {
+    "description": "Lesson ladder step 4: practising the theory, then the lesson check"
+  },
+  "lang.step.continue": "Continue · {step}",
+  "@lang.step.continue": {
+    "description": "The one primary button of a lesson; step = the name of the next ladder step",
+    "placeholders": {
+      "step": { "type": "String" }
+    }
+  },
+  "lang.step.review": "Review the lesson",
+  "@lang.step.review": {
+    "description": "Button of a lesson whose four steps are all done"
+  },
+  "lang.words.newTip": "New word",
+  "@lang.words.newTip": {
+    "description": "Hover text of a word the learner has not been taught yet (dotted amber underline)"
+  },
+  "lang.tile.reveal": "Not met yet · tap to show",
+  "@lang.tile.reveal": {
+    "description": "Hover/tap hint of a blurred word tile (a word not met yet): tap to show it"
+  },
+  "lang.translit.hide": "Hide transliteration",
+  "@lang.translit.hide": {
+    "description": "Button hint: hide the transliteration / pinyin line under foreign words"
+  },
+  "lang.translit.show": "Show transliteration",
+  "@lang.translit.show": {
+    "description": "Button hint: show the transliteration / pinyin line under foreign words"
+  },
   "lang.lesson.check": "Lesson check",
   "@lang.lesson.check": {
     "description": "Button (after ✔): only the lesson’s check (a short test)."

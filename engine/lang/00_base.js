@@ -83,13 +83,21 @@ function conceptPic(cid, cls = 'lx-temoji') {
   return img;
 }
 
+/** D23: the small on-screen switch for the line under foreign words (transliteration / pinyin); only where a studied language has one. */
+function translitToggle() {
+  if (!activeLangs().some(c => LX(c).language.script !== 'Latn' && LX(c).language.romanization)) return null;
+  const off = () => UI.prefs.translit === false, b = h('button', { class: 'btn ghost small lx-translit', 'aria-pressed': String(!off()), onclick: () => {
+    const hide = !off(); UI.prefs.translit = !hide; UI.prefs.pinyin = !hide; save(); document.body.classList.toggle('lx-nohelp', hide); b.title = LT(hide ? 'lang.translit.show' : 'lang.translit.hide'); b.setAttribute('aria-pressed', String(!hide)); if (!$('.lx-session')) render();
+  } }, 'Aa·');
+  b.title = LT(off() ? 'lang.translit.show' : 'lang.translit.hide'); return b;
+}
 /** A foreign word as the learner should see it: right font and direction; vowel marks on/off; transliteration or pinyin under it. */
 function word(code, text, { lex = null, cls = '', sub = true, marks = null } = {}) {
   const X = LX(code), shown = shownMarks(code, text, lex, marks);   // vowel marks: full · fading · none (P4, 90_script.js)
   const e = h('span', { class: 'lx-w ' + cls, lang: code, dir: X.language.dir || 'ltr' }, shown);
   if (!sub || !lex) return e;
   const helper = code === 'zh' && UI.prefs.pinyin !== false && lex.pinyin && text === lex.lemma ? lex.pinyin.replace(/\s+/g, '')
-    : X.language.vowelMarks && (UI.prefs.translit !== false || needTranslit(code)) && lex.translit && text === lex.lemma ? lex.translit : null;   // always until the letters are known (§5.5)
+    : (X.language.vowelMarks || (X.language.script !== 'Latn' && X.language.romanization)) && (UI.prefs.translit !== false || needTranslit(code)) && lex.translit && text === lex.lemma ? lex.translit : null;   // always until the letters are known (§5.5)
   return helper ? h('span', { class: 'lx-wbox' }, e, h('span', { class: 'lx-help', lang: code === 'zh' ? 'zh-Latn-pinyin' : 'und-Latn' }, helper)) : e;
 }
 /* ---------- the learner's native language (D19, docs/language-packs.md §2.2) and words met before they are learned (D20) ---------- */
@@ -187,6 +195,7 @@ function splitRun(run, code, text) {
   const linkable = el => !el.closest(SKIP) && !(el.closest('.lx-stage') && !el.closest(IN_STAGE));
   const linkRuns = root => {
     if (!UI.C) return;
+    const kn = {}, fresh = (c, l) => { try { const k = kn[c] = kn[c] || N.known(UI.C, UI.L, c); return k.state[l] === 'locked' || k.state[l] === 'ready'; } catch (err) { return false; } };   // D24: not taught to this learner yet
     for (const run of root.querySelectorAll('.lx-w[lang]:not(.lx-tok):not([data-lk])')) {
       run.dataset.lk = '1';
       const c = run.getAttribute('lang'); if (!UI.C.lang[c] || !linkable(run)) continue;
@@ -194,6 +203,7 @@ function splitRun(run, code, text) {
       if (!run.title) run.title = info(c).label + (run.querySelector('.lx-rw') ? '' : ' · ' + LT('lang.prod.notInCourseTitle'));   // what the coloured underline means; no card to open
       for (const w of run.querySelectorAll('.lx-rw[data-l]')) if (LX(c).lex[w.dataset.l]) {
         w.classList.add('lx-tok'); w.tabIndex = 0; w.setAttribute('role', 'button'); w.title = gloss(c, w.dataset.l);
+        if (fresh(c, w.dataset.l)) { w.classList.add('lx-newword'); w.title = LT('lang.words.newTip') + ' · ' + w.title; }
       }
     }
   };
@@ -269,6 +279,8 @@ function foldRemote(e) {
 }
 addEventListener('noema:remote', foldRemote);
 const today = () => N.dayNumber();
+/** D25: the course's title names only the languages the learner studies (a title made of language names is rebuilt from them). */
+const courseTitle = () => { const c = UI.C.data.course, names = (UI.C.languages || []).map(x => info(x).label), all = (c.languages || []).map(x => info(x).label); return all.length && all.every(n => c.title.includes(n)) && names.length ? names.join(' · ') : c.title; };
 const activeLangs = () => (UI.L.settings.languages || UI.C.languages).filter(c => UI.C.lang[c]);
 /* ---------- D21: the learner chooses the languages to study (docs/LANGUAGES.md §8 *Languages to study*) ----------
    One answer for the whole app: a:settings.studyLangs (synced, in backups) — the languages the learner studies, in every course

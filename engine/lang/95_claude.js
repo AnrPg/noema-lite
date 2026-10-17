@@ -114,7 +114,7 @@
   /** ⋮ › the language › Remove this language (and the course settings): asks, removes, opens the course again without it. */
   async function removeAdded(code) {
     const a = UI.C?.data.course.added?.[code]; if (!a) return;
-    if (!confirm(LT('lang.claude.removeAsk', { lang: a.name || info(code).name, title: UI.C.data.course.title }) + '\n\n' + LT('lang.claude.removeAskSub'))) return;
+    if (!confirm(LT('lang.claude.removeAsk', { lang: a.name || info(code).name, title: courseTitle() }) + '\n\n' + LT('lang.claude.removeAskSub'))) return;
     await removePackage(UI.acc, UI.id, code);
     toast(LT('lang.claude.removed', { lang: a.name || info(code).name }), 2500);
     setTimeout(() => location.reload(), 300);

@@ -331,7 +331,7 @@ window.NoemaShell = (() => {
     const p = (location.hash || '#/').replace(/^#\/?/, '').split('?')[0].split('/').map(x => { try { return decodeURIComponent(x); } catch (e) { return x; } });
     if (ENGINE_ROUTES.has(p[0]) && N()?.subject?.id && !isLang(N().subject)) return { kind: 'subj', id: N().subject.id, title: N().subject.title };
     if (p[0] === 'map' && p[1]) { const c = CU()?.get(acc(), p[1]); if (c) return { kind: 'cur', id: c.id, title: shortTitle(c) }; }
-    if (p[0] === 'lang' && p[1]) return { kind: 'course', id: p[1], title: (window.NOEMA_REGISTRY?.languages || []).find(x => x.id === p[1])?.title || p[1] };
+    if (p[0] === 'lang' && p[1]) return { kind: 'course', id: p[1], title: window.NoemaLangUI?.titleOf?.(p[1]) || (window.NOEMA_REGISTRY?.languages || []).find(x => x.id === p[1])?.title || p[1] };
     if (p[0] === 'search') return window.NoemaSearch?.hereNow?.() || null;
     return null;
   }

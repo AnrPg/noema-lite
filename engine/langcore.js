@@ -626,10 +626,27 @@
     const L = { course: C.id, settings: { languages: settings.languages || C.languages.slice(), depth: { ...(C.data.course.defaults?.depth || {}), ...(settings.depth || {}) },
       batch: settings.batch || C.data.course.defaults?.batch || 12, ...(settings.knows ? { knows: settings.knows } : {}), ...(settings.aiNotes ? { aiNotes: true } : {}),
       ...(settings.speaker ? { speaker: settings.speaker } : {}) }, langs: {} };   // D19: the learner's choice of the explanation locale
-    for (const code of C.languages) L.langs[code] = { items: {}, fns: {}, checks: {} };
+    for (const code of C.languages) L.langs[code] = { items: {}, fns: {}, checks: {}, steps: {} };
     return L;
   }
-  const ensureLang = (L, code) => { const S = L.langs[code] = L.langs[code] || { items: {}, fns: {}, checks: {} }; S.checks = S.checks || {}; return S; };
+  const ensureLang = (L, code) => { const S = L.langs[code] = L.langs[code] || { items: {}, fns: {}, checks: {}, steps: {} }; S.checks = S.checks || {}; S.steps = S.steps || {}; return S; };
+  /** The ladder of a lesson (D22): ① wl words: the lesson · ② wp words: practice · ③ tr theory: reading · ④ tp theory: practice (+ the check).
+   *  Each step opens when the one before is done. wl, wp and tp are read from what the learner did (words introduced, both tracks practised, the check
+   *  passed); only the reading of the theory is stored (steps[nid].tr = the day). → {steps: [{id, done, open}], next: id | null, done} for one language. */
+  const LESSON_STEPS = ['wl', 'wp', 'tr', 'tp'];
+  function lessonSteps(C, L, code, nid) {
+    const X = C.lang[code], S = L.langs[code] || {}, ids = X.byNode[nid] || [], items = S.items || {};
+    const intro = ids.every(id => { const it = items[id]; return it && (it.seen != null || it.r || it.p); });
+    const practised = intro && ids.every(id => { const it = items[id]; return it.r && it.p; });
+    const passed = (S.checks?.[nid]?.best || 0) >= PASS;
+    const done = { wl: intro || passed, wp: practised || passed, tr: !!S.steps?.[nid]?.tr || passed, tp: passed };   // a lesson passed before the ladder counts as all four done
+    let open = true; const steps = LESSON_STEPS.map(id => { const st = { id, done: done[id], open }; open = open && done[id]; return st; });
+    const next = (steps.find(x => !x.done) || {}).id || null;
+    return { steps, next, done: !next };
+  }
+  function recordStep(C, L, code, nid, step, day) {
+    const S = ensureLang(L, code), o = S.steps[nid] = S.steps[nid] || {}; if (o[step] == null) o[step] = day; return o;
+  }
   /** The result of a lesson check (§6.7): score 0…1. The best result counts; ≥ 0.8 passes the lesson (§5.2). */
   function recordCheck(C, L, code, nid, score, day) {
     if (C.nodes[nid]?.kind !== 'lesson') throw new Error(`${nid} is not a lesson`);
@@ -718,7 +735,10 @@
       if (rank(s) >= rank('learning')) R.add(id);
       if (rank(s) >= rank('known_r')) P.add(id);
     }
-    return { R, P, state, nodes: ns };
+    // D23: while any foundation lesson (S00–S18) is not done in this language, sentences use only words the learner has practised
+    const found = C.order.filter(n => C.nodes[n].stage === 'foundations' && C.lang[code].applies[n]), strict = found.some(n => !['known', 'mastered', 'passed', 'skipped', 'unprepared', 'na'].includes(ns[n]));
+    if (strict) R.strict = P.strict = true;
+    return { R, P, state, nodes: ns, strict };
   }
   /** The state of a concept in a language (for the flag dot): the best state of its words; 'absent' when the language has no word. */
   function conceptState(C, L, code, cid, k) {
@@ -754,7 +774,7 @@
   /** Sentences for an exercise or an example. maxUnknown: a number, or 'auto' = at most ⌈30 %⌉ of the sentence's words
    *  unknown to the learner (D20: every aspect but vocabulary trains with any vocabulary). Fewest unknown words first. */
   function selectSentences(C, code, opts = {}) {
-    const X = C.lang[code], K = opts.known || new Set(), max = opts.maxUnknown || 0;
+    const X = C.lang[code], K = opts.known || new Set(), max = K.strict ? 0 : opts.maxUnknown || 0;   // D23: in the foundations no unknown word, whatever the caller asks
     return X.sentences.filter(s => {
       if (opts.frame && s.frame !== opts.frame) return false;
       if (opts.variants === false && s.variantOf) return false;
@@ -1361,6 +1381,7 @@
       for (const [id, it] of Object.entries(S.items)) { const n = X.lex[id]?.node; if (!n) continue; const k = `lang:${code}:node:${n}`; (kv[k] = kv[k] || { items: {} }).items[id] = it; }
       for (const [fid, f] of Object.entries(S.fns)) kv[`lang:${code}:fn:${fid}`] = f;
       for (const [nid, ch] of Object.entries(S.checks || {})) { const k = `lang:${code}:node:${nid}`; (kv[k] = kv[k] || { items: {} }).check = ch; }
+      for (const [nid, st] of Object.entries(S.steps || {})) { const k = `lang:${code}:node:${nid}`; (kv[k] = kv[k] || { items: {} }).steps = st; }   // D22: the ladder's stored step
       if (S.script && Object.keys(S.script.items || {}).length) kv[`lang:${code}:script`] = S.script;   // the script stage (§5.5)
     }
     return kv;
@@ -1369,7 +1390,7 @@
     const L = newLearner(C, kv.settings || {});
     for (const [k, v] of Object.entries(kv)) {
       let m = k.match(/^lang:([^:]+):node:(.+)$/);
-      if (m && C.lang[m[1]]) { Object.assign(ensureLang(L, m[1]).items, v.items || {}); if (v.check) ensureLang(L, m[1]).checks[m[2]] = v.check; continue; }
+      if (m && C.lang[m[1]]) { Object.assign(ensureLang(L, m[1]).items, v.items || {}); if (v.check) ensureLang(L, m[1]).checks[m[2]] = v.check; if (v.steps && typeof v.steps === 'object') ensureLang(L, m[1]).steps[m[2]] = { ...v.steps }; continue; }
       m = k.match(/^lang:([^:]+):fn:(.+)$/);
       if (m && C.lang[m[1]]) ensureLang(L, m[1]).fns[m[2]] = v;
       m = k.match(/^lang:([^:]+):script$/);
@@ -1385,7 +1406,7 @@
     readCourse, course, studyLangs, forLearner, learnerProfiles, prototype, familiarFrom, notesFor, SUPPORTED_NATIVES, setExplainLocale, nativeOf, nativeKnows, speaksOf, contrastFor, contrastNotes, explanationLocale, facadeUsable, nativeRule, ruleLangs, noteMarkdown,
     applyFacade, facadeProfiles, facadeAddress, facadeTexts, masterStamps, UNKNOWN_SHARE, newLearner, introduce, review, sm2, itemState, nodeStates, nodeState, known, conceptState, ITEM_STATES,
     practiceFunction, functionState, selectSentences, feasibility, lookup, tokenize, analyze, planSession, toKV, fromKV, dayNumber, wordCard, principalParts,
-    TYPES, applies, pathGroups, lessonFunctions, addProfiles, recordCheck, nextLessons, exercises, checkBuilt, wordItems, lessonCheck, cellLabel, variantLabel, shuffled, PASS };
+    TYPES, applies, pathGroups, lessonFunctions, addProfiles, recordCheck, lessonSteps, recordStep, LESSON_STEPS, nextLessons, exercises, checkBuilt, wordItems, lessonCheck, cellLabel, variantLabel, shuffled, PASS };
   API.wordParams = wordParams;   // R3: the word's parameters under the word
   /* ---------- P4 — Scripts and input: letters, characters, positional forms, vowel marks, tones, typed answers (§4.9, §5.5, §6.1, §8) ---------- */
   const ZWJ = '\u200d';
@@ -2449,7 +2470,7 @@
       if (miss) { bad++; unknown.push(miss[0]); out.push({ t: k.t, l: miss[0], new: true }); continue; }
       const last = ls[ls.length - 1]; out.push({ t: k.t, l: last.find(l => K.has(l)) || last[0] });
     }
-    const cap = maxUnknown === 'auto' ? Math.ceil(UNKNOWN_SHARE * words) : (+maxUnknown || 0);
+    const cap = K.strict ? 0 : maxUnknown === 'auto' ? Math.ceil(UNKNOWN_SHARE * words) : (+maxUnknown || 0);   // D23: foundations: only known words
     return { tokens: out, target, words, unknown: uniqStr(unknown), outside: out.filter(x => x.out).length, cap, ok: bad <= cap };
   }
   /** The tokens with the target replaced by a gap (its attached prefixes stay). */
@@ -3422,7 +3443,7 @@
     const fam = {};
     for (const s of X.sentences) {
       if (s.variantOf || !s.gloss) continue;
-      const unknown = s.req.filter(l => !K.has(l)); if (unknown.length > (opts.maxUnknown ?? 1)) continue;
+      const unknown = s.req.filter(l => !K.has(l)); if (unknown.length > (K.strict ? 0 : opts.maxUnknown ?? 1)) continue;
       (fam[frameFamily(s.frame)] = fam[frameFamily(s.frame)] || []).push({ s, unknown });
     }
     const out = [];
@@ -4050,7 +4071,7 @@ into the learners' languages (locale facades) are not part of the package.
 * If the run is interrupted, it resumes from the progress file (below). Tell the learner how far you got.
 
 ## Binding rules
-Read ${T}/references/LANGUAGE_RULES.md (D1–D21) and ${T}/references/language-packs.md (D19) first, then ${T}/references/LANGUAGES.md §4 and §10.2. D13–D20 apply to the
+Read ${T}/references/LANGUAGE_RULES.md (D1–D25) and ${T}/references/language-packs.md (D19) first, then ${T}/references/LANGUAGES.md §4 and §10.2. D13–D20 apply to the
 package: the language fills the course's existing nodes and functions in the course's order — it never adds a node, concept,
 function or frame (report what you would add instead); every word states its whole facade (D14); every meaning is a concept
 (D15); no built-in point of view (D16); taught through the native language — neutral texts, contrast notes for every supported
@@ -4598,7 +4619,7 @@ ${name} (tokenizer, script, keyboard, voice), and the list of work/${code}-nativ
     const claimKey = (cid, tid) => `${CLAIM}${cid}:${tid}`;
 
     /* ---------- the task as text (the connector, a copied task, the in-app runner) ---------- */
-    const RULES = `The binding rules (docs/LANGUAGE_RULES.md, D1–D21 — read the whole file: noema_authoring_guide part "languages", or references/LANGUAGE_RULES.md of the skill):
+    const RULES = `The binding rules (docs/LANGUAGE_RULES.md, D1–D25 — read the whole file: noema_authoring_guide part "languages", or references/LANGUAGE_RULES.md of the skill):
 - D19 FIRST — the language is taught through each learner's NATIVE language (docs/language-packs.md): supported natives = ${D19.natives.join(' ')} (the app's UI locales). Every general text you write (summary, blocks, procedure, traps, quiz, seeAlso, facts, word profiles, features.*.none, phenomena) names NO language outside the course and never explains through English grammar ("no ‘do’", "-ing", "is not ‘the’"): it says what the language does (the course languages may be compared; an etymology may name a source language). Every comparison is a contrast note {for, rel: same|similar|different|new|trap, text}: on EVERY grammar page one for each supported native except the page's language and one each for ${D19.groups.join(', ')} (a type note names no language: "If your language …"); a word that invites a comparison gets profile.notes. A note names only its own language (examples in it), the course languages and the point. Translations into the learners' languages (locale facades) are separate tasks.
 - R1–R3 (with D19, docs/language-packs.md §2.2–§2.4): R1 the learner sees the comparisons in three sections — "From your languages" (the native's note first, then one per C1/C2 language), "Among the languages you are learning", "From other languages" (folded, every other note) — so every supported native and type gets its note; R2 every note, pitfall, subtlety, fun fact and feeling is STRUCTURED in a Markdown subset: paragraphs separated by a blank line, "- " / "1. " lists for two or more points, **bold** for the one key sentence or word, *italic* for a cited word, an example on its own line starting with "→ "; no headings, links, HTML, tables or code; R3 every word states EVERY parameter of its part of speech declared in wordFeatures (lang/<code>/WORD_PARAMETERS.md is the map, made before any word), the most distinctive first on the word card.
 - D1 every gloss, rule text, trap and feedback is written once in the master facade: English (the course's explainLang), neutral (D19); learners read it in their own language through locale facades.

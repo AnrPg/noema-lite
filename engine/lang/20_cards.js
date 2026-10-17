@@ -21,11 +21,12 @@ VIEWS.node = (v, r) => {
 function conceptTile(c, { cid, lex }, k) {
   const X = LX(c), lids = cid ? (X.byConcept[cid] || []) : [lex], absent = cid && X.absent[cid];
   const st = cid ? N.conceptState(UI.C, UI.L, c, cid, k) : k.state[lex];
-  const visible = !['locked', 'ready'].includes(st) || UI.prefs.peek;
-  return h('button', { class: 'lx-tile s-' + st, onclick: () => go(cid ? '#/c/' + cid : '#/w/' + c + '/' + lex), title: STATE_LABEL[st] || '' },
+  const unmet = ['locked', 'ready'].includes(st) && !UI.prefs.peek;   // D22: every word is shown; the ones not met yet are blurred until tapped
+  const tile = h('button', { class: 'lx-tile s-' + st + (unmet ? ' lx-blur' : ''), onclick: () => { if (tile.classList.contains('lx-blur')) { tile.classList.remove('lx-blur'); return; } go(cid ? '#/c/' + cid : '#/w/' + c + '/' + lex); }, title: unmet ? LT('lang.tile.reveal') : STATE_LABEL[st] || '' },
     cid ? conceptPic(cid) : h('span', { class: 'lx-temoji' }, '🔤'),
-    h('span', { class: 'lx-tword' }, absent ? h('i', { class: 'tiny' }, '— ' + LT('lang.card.noWordShort')) : visible ? lids.map((id, i) => [i ? ' · ' : '', word(c, X.lex[id].lemma, { sub: false })]) : '?'),
+    h('span', { class: 'lx-tword' }, absent ? h('i', { class: 'tiny' }, '— ' + LT('lang.card.noWordShort')) : lids.map((id, i) => [i ? ' · ' : '', word(c, X.lex[id].lemma, { lex: X.lex[id] })])),
     h('span', { class: 'lx-tgloss' }, cid ? UI.C.concepts[cid].gloss : gloss(c, lex)));
+  return tile;
 }
 
 /* ---------- a concept: the flag card (one language at a time) + compare ---------- */
