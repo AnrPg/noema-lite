@@ -269,6 +269,8 @@ function foldRemote(e) {
 }
 addEventListener('noema:remote', foldRemote);
 const today = () => N.dayNumber();
+/** D25: the course's title names only the languages the learner studies (a title made of language names is rebuilt from them). */
+const courseTitle = () => { const c = UI.C.data.course, names = (UI.C.languages || []).map(x => info(x).label), all = (c.languages || []).map(x => info(x).label); return all.length && all.every(n => c.title.includes(n)) && names.length ? names.join(' · ') : c.title; };
 const activeLangs = () => (UI.L.settings.languages || UI.C.languages).filter(c => UI.C.lang[c]);
 /* ---------- D21: the learner chooses the languages to study (docs/LANGUAGES.md §8 *Languages to study*) ----------
    One answer for the whole app: a:settings.studyLangs (synced, in backups) — the languages the learner studies, in every course

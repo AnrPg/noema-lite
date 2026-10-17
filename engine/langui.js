@@ -273,6 +273,8 @@ function foldRemote(e) {
 }
 addEventListener('noema:remote', foldRemote);
 const today = () => N.dayNumber();
+/** D25: the course's title names only the languages the learner studies (a title made of language names is rebuilt from them). */
+const courseTitle = () => { const c = UI.C.data.course, names = (UI.C.languages || []).map(x => info(x).label), all = (c.languages || []).map(x => info(x).label); return all.length && all.every(n => c.title.includes(n)) && names.length ? names.join(' · ') : c.title; };
 const activeLangs = () => (UI.L.settings.languages || UI.C.languages).filter(c => UI.C.lang[c]);
 /* ---------- D21: the learner chooses the languages to study (docs/LANGUAGES.md §8 *Languages to study*) ----------
    One answer for the whole app: a:settings.studyLangs (synced, in backups) — the languages the learner studies, in every course
@@ -314,7 +316,7 @@ function start({ acc, id, data, host = null, onRoute = null }) {
   applyExplanationLocale();   // D19: the explanations in the learner's native language (its facade), when one is on
   UI.lang = UI.prefs.lang && UI.C.lang[UI.prefs.lang] ? UI.prefs.lang : activeLangs()[0];
   FR.on = !!host; FR.host = host; FR.onRoute = onRoute; FR.base = host ? '#/lang/' + encodeURIComponent(id) : '';
-  document.title = `${UI.C.data.course.title} · noema-lite`;   // i18n-ignore (the course title and the app name)
+  document.title = `${courseTitle()} · noema-lite`;   // i18n-ignore (the course title and the app name)
   document.documentElement.lang = UI.C.explainLang;
   document.body.classList.add('lx');
   if (host) { host.replaceChildren(h('div', { class: 'lx-top lx-subbar', role: 'tablist', 'aria-label': LT('lang.shell.yourLanguages') }), h('div', { class: 'lx-main' })); frameWatch(host); }   // inside the frame: its top bar and tabs stay
@@ -405,7 +407,7 @@ function topbar() {
   const explain = h('span', { class: 'chip lx-explain', title: LT('lang.shell.explainTitle') }, '💬 ' + info(UI.C.explainLang).name);
   if (FR.on) { t.append(...chips, h('span', { class: 'spacer' }), explain); return; }   // the frame has the title (crumbs), ⚙️ and the other courses (⋮)
   t.append(
-    h('div', { class: 'brand', onclick: () => go('#/') }, h('div', { class: 'logo' }, '🌍'), h('span', { class: 'lx-title' }, UI.C.data.course.title)),
+    h('div', { class: 'brand', onclick: () => go('#/') }, h('div', { class: 'logo' }, '🌍'), h('span', { class: 'lx-title' }, courseTitle())),
     h('span', { class: 'spacer' }), explain, ...chips,
     h('button', { class: 'iconbtn', title: LT('lang.shell.settings'), onclick: () => go('#/settings') }, '⚙️'),
     h('button', { class: 'iconbtn', title: LT('lang.shell.otherSubject'), onclick: () => window.Noema?.openSubjectPicker ? Noema.openSubjectPicker() : null }, '📚'));
@@ -448,7 +450,7 @@ function frameSummary(v) {
   try {
     const b = v.querySelector('.lx-lessonbtn'), nid = b?.dataset.node, n = nid && UI.C.nodes[nid];
     const k = `noema1:${UI.acc}:meta:langsum`, all = JSON.parse(localStorage.getItem(k) || '{}') || {};
-    all[UI.id] = { at: Date.now(), title: UI.C.data.course.title, next: n ? { node: nid, step: stepLabel(n), title: n.title } : null, lang: UI.lang };
+    all[UI.id] = { at: Date.now(), title: courseTitle(), next: n ? { node: nid, step: stepLabel(n), title: n.title } : null, lang: UI.lang };
     localStorage.setItem(k, JSON.stringify(all));
   } catch (e) { }
 }
@@ -464,7 +466,7 @@ function flagRail(cid, current, onPick) {
 
 /* ---------- home ---------- */
 VIEWS.home = (v) => {
-  if (studyChoice().none) { const ask = studyAsk(true); if (ask) { v.append(h('h1', {}, UI.C.data.course.title), ask); return; } }   // D21: none of the chosen languages is in this course
+  if (studyChoice().none) { const ask = studyAsk(true); if (ask) { v.append(h('h1', {}, courseTitle()), ask); return; } }   // D21: none of the chosen languages is in this course
   const plan = N.planSession(UI.C, UI.L, { day: today(), minutes: UI.L.settings.minutes || 20, languages: todayLangs() });   // today's languages (P6, §9.6)
   const nRev = plan.steps.filter(s => s.kind === 'review').reduce((a, s) => a + s.items.length, 0);
   const learn = plan.steps.find(s => s.kind === 'learn'), lessons = plan.steps.filter(s => s.kind === 'lesson');
@@ -472,7 +474,7 @@ VIEWS.home = (v) => {
   const counts = LT(nScript ? 'lang.home.sessionCountsScript' : 'lang.home.sessionCounts', { rev: nRev, nNew, script: nScript });   // the frame's big card shows them (data-rest)
   const ask = studyAsk(); if (ask) v.append(ask);   // D21: “Which languages do you want to study?” until the learner answers
   v.append(h('div', { class: 'lx-hero' },
-    h('h1', {}, UI.C.data.course.title),
+    h('h1', {}, courseTitle()),
     h('p', { class: 'lx-sub' }, LT('lang.home.sub', { langs: UI.C.languages.map(c => info(c).flag + ' ' + info(c).label).join(' · '), lang: info(UI.C.explainLang).name })),
     h('div', { class: 'row' },
       h('button', { class: 'btn primary lx-go', disabled: !(nRev || nNew || nScript), 'data-go': nRev || nNew || nScript ? 'session' : 'none', 'data-rest': counts, onclick: () => runSession(plan) }, nRev || nNew || nScript ? '▶ ' + LT('lang.home.session', { counts }) : '✅ ' + LT('lang.home.nothingDue')),
@@ -1540,7 +1542,7 @@ function runSession(plan, { only = null } = {}) {
 }
 /** The word profiles arrive after the start: a word card on screen is drawn again with them. */
 function addProfiles(map) { UI.profMap = map; const n = N.addProfiles(UI.C, facadeProfMap(map)); UI.profiles = true; if (n && ['c', 'w', 'node', 'field'].includes(UI.view) && !$('.lx-session')) render(); return n; }
-window.NoemaLangUI = { start, render, go, toHash, innerHash, FR, UI, addProfiles, save, foldRemote, ex: { exPicture, exRecognize, exProduce, exItem } };
+window.NoemaLangUI = { titleOf: id => (UI.id === id && UI.C ? courseTitle() : null), start, render, go, toHash, innerHash, FR, UI, addProfiles, save, foldRemote, ex: { exPicture, exRecognize, exProduce, exItem } };
 
 /* ---- 55_lesson.js ---- */
 /* ---------- the foundations: lessons that teach words, grammar and sentences together, every language at the same step (§6.7, D9–D11) ---------- */
@@ -2961,7 +2963,7 @@ function persistTutor(key, ctx, hist, provider) {
   try {
     if (!window.NoemaConvos || !window.Noema?.idb) return;
     const id = TT.ids[key] = TT.ids[key] || NoemaConvos.newId();
-    NoemaConvos.put(UI.acc, { id, kind: 'tutor', mode: 'lang-' + (ctx.intent || 'chat'), subject: { id: 'lang:' + UI.id, title: UI.C.data.course.title },
+    NoemaConvos.put(UI.acc, { id, kind: 'tutor', mode: 'lang-' + (ctx.intent || 'chat'), subject: { id: 'lang:' + UI.id, title: courseTitle() },
       context: { type: ctx.fn ? 'function' : ctx.node ? 'node' : 'course', id: (ctx.fn || ctx.node || null) && `${ctx.lang}:${ctx.fn || ctx.node}`, label: ctxLabelOf(ctx) },
       model: { provider: provider === 'claude' ? 'anthropic' : 'google', name: null },
       messages: hist.filter(m => m.role !== 'error').map(m => ({ role: m.role, content: m.text, t: m.t })) }).catch(() => { });
@@ -3505,7 +3507,7 @@ Object.assign(window.NoemaLangUI, { script: { scriptInput, shownMarks, runScript
   /** ⋮ › the language › Remove this language (and the course settings): asks, removes, opens the course again without it. */
   async function removeAdded(code) {
     const a = UI.C?.data.course.added?.[code]; if (!a) return;
-    if (!confirm(LT('lang.claude.removeAsk', { lang: a.name || info(code).name, title: UI.C.data.course.title }) + '\n\n' + LT('lang.claude.removeAskSub'))) return;
+    if (!confirm(LT('lang.claude.removeAsk', { lang: a.name || info(code).name, title: courseTitle() }) + '\n\n' + LT('lang.claude.removeAskSub'))) return;
     await removePackage(UI.acc, UI.id, code);
     toast(LT('lang.claude.removed', { lang: a.name || info(code).name }), 2500);
     setTimeout(() => location.reload(), 300);
@@ -4418,8 +4420,8 @@ function frameTidy(v, r) {
 function frameHome(v, acts, hold) {
   const S = FS(), hero = v.querySelector('.lx-hero'), course = UI.C.data.course;
   const go1 = hero.querySelector('.lx-go'), todayRow = v.querySelector('.lx-today');
-  const names = UI.C.languages.map(c => info(c).label), named = names.every(n => course.title.includes(n));
-  const head = h('div', { class: 'lx-fhead' }, h('h1', {}, course.title), h('p', { class: 'ns-muted lx-fsub' }, named ? LT('lang.frame.explainedIn', { lang: info(UI.C.explainLang).name }) : LT('lang.home.sub', { langs: names.join(' · '), lang: info(UI.C.explainLang).name })));
+  const names = UI.C.languages.map(c => info(c).label), named = names.every(n => courseTitle().includes(n));
+  const head = h('div', { class: 'lx-fhead' }, h('h1', {}, courseTitle()), h('p', { class: 'ns-muted lx-fsub' }, named ? LT('lang.frame.explainedIn', { lang: info(UI.C.explainLang).name }) : LT('lang.home.sub', { langs: names.join(' · '), lang: info(UI.C.explainLang).name })));
   // the one primary action (what it is: data-go = session | start | none, its words without the label: data-rest)
   const txt = framePlain(go1?.textContent || ''), session = go1?.dataset.go === 'session', start = go1?.dataset.go === 'start' ? [txt, go1.dataset.rest || txt] : null, none = !go1 || go1.disabled;
   const todays = todayLangs();

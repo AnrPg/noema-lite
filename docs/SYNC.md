@@ -65,7 +65,7 @@ the way `engine/src/10_core.js` does for `S`.
 ## Language courses
 
 The keys `s:lang:<course>:…` (docs/LANGUAGES.md §5.6) have their own rule in `mergeValue` (`mergeLang`): per word and track the
-later review wins, the earliest first-seen day is kept, a lesson check keeps the best score and the most tries, and a grammar
+later review wins, the earliest first-seen day is kept, a lesson check keeps the best score and the most tries, the lesson ladder's read-the-theory step keeps its earliest day (D22), and a grammar
 function's log keeps every day. The open course listens for `noema:remote` and folds the stored copies into what it holds
 (`foldRemote` in `engine/lang/00_base.js`). Tested by `tests/lang_sync.js` (two browsers, the Supabase emulator).
 The learner's **language packages** (docs/LANGUAGES.md §10.2) are records `a:langpack:<course>:<code>` written by the Claude
