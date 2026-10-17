@@ -3,7 +3,7 @@
 **Who must follow this file:** every agent and every person that writes code, content, briefs, tools or designs for the
 language courses — Claude Code sessions, Cowork sessions, subagents that write words, grammar or sentences, the Claude
 skill (`noema-pack-builder`), the connector's tasks, and anyone changing the language part. It is the short, binding
-form of the decisions D1–D21 in `docs/LANGUAGES.md` (the full contract). If the two ever disagree, `docs/LANGUAGES.md`
+form of the decisions D1–D25 in `docs/LANGUAGES.md` (the full contract). If the two ever disagree, `docs/LANGUAGES.md`
 wins and this file is fixed in the same commit. `tests/lang_rules.py` fails when a decision of `docs/LANGUAGES.md` is
 missing here or when one of the places below does not point to this file.
 
@@ -105,6 +105,24 @@ package `tools/lang_course.py package` and `langcore.checkLangPackage`, which th
   A course teaches only the chosen languages it has — every view, generator, comparison, polyglot item, tutor context and
   Claude task works among them only; the progress of the others is kept. Content is still written for every language of a
   course (a learner may choose any of them); code never assumes all course languages are studied (`activeLangs()`, `C.languages`).
+- **D22** **Vocabulary and theory are two tracks, each read-then-practise.** Vocabulary = the lesson's words with all that belongs
+  to a word (forms, etymology, phonology, collocations, register, uses in context). Theory = everything else (grammar,
+  syntax, culture, script, pragmatics). A lesson is a ladder of four steps, each opening when the one before is done:
+  words: lesson → words: practice → theory: reading → theory: practice (+ the check). Words first. One “Continue” button
+  names the next step; never one button for both (“Μάθε”). Write every lesson so that it splits this way (words in `lexicon`,
+  points in `functions`; nothing of a word's facade only in a grammar page, nothing of grammar only in a word card).
+- **D23** **In the foundations (S00–S18) only words taught so far appear** in examples, sentences, drills and checks: the
+  words of this lesson or an earlier one on the common order — no unknown share (D20's ⌈30 %⌉ starts at C01). Write
+  bank sentences for a foundation function with only such words; the validator lists, per language and lesson, how many
+  sentences are usable (fewer than 6 is a gap to fill). A word that appears before its lesson is shown with the **new-word
+  marker** (dotted amber underline, “new word” on hover; computed per learner by the app — nothing to write in the data).
+- **D24** **Transliteration is always shown in the foundations** for every non-Latin-script language: every word the learner
+  sees in S00–S18, and the word card of every word that appears there, carries `translit` (pinyin with tone marks for
+  zh) — a small line under the word; the learner can hide it with a toggle. A foundation word without `translit` /
+  `pinyin` is an error.
+- **D25** **The languages loaded decide what the app shows**: titles, addresses (`#/lang`, never a list of languages),
+  chips, comparison, map flags, lanes, today's languages, tutor context come from the languages studied now. A lesson
+  title names its subject, never a language; code never assumes all course languages are loaded (`activeLangs()`).
 
 ## C. Checklist for every task (copy it into every brief)
 - [ ] I read `docs/LANGUAGE_RULES.md` and the sections of `docs/LANGUAGES.md` my task touches.
@@ -121,6 +139,9 @@ package `tools/lang_course.py package` and `langcore.checkLangPackage`, which th
       any word; every word I write states every parameter of its part of speech (a value or `{"none": "<why>"}`).
 - [ ] Every word in my sentences is in the lexicon with its full facade; a field I write brings sentences for every
       non-vocabulary node before it (D20).
+- [ ] **D22–D24:** a lesson's words and its theory are separate (words in the lexicon with their whole facade, points in
+      functions); every sentence, example and exercise of S00–S18 uses only words of this lesson or earlier; every foundation
+      word of a non-Latin-script language has `translit` / `pinyin`; titles name subjects, not languages (D25).
 - [ ] I grounded every fact; the validator (`--strict`), refcheck and `lang_phenomena.py` pass; the catalogue of
       phenomena is updated for what I added (status, gap).
 - [ ] I touched only the files my task allows, and reported doubtful cases.

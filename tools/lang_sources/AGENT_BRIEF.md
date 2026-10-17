@@ -38,6 +38,13 @@ else, then the sections of `docs/LANGUAGES.md` your task touches. In short:
 - **D20 vocabulary track** — sentences for grammar and the other aspects may use any word of the lexicon (≤ ⌈30 %⌉
   unknown to the learner at run time); every word you use exists with its full facade; a field brings ≥ 2 sentences for
   every non-vocabulary node before it.
+- **D22 words and theory** — a lesson is a ladder: words (lesson, practice) then theory (reading, practice). Everything
+  that belongs to a word (forms, etymology, phonology, collocations, register, uses in context) lives in the word's
+  facade; grammar, syntax, culture and pragmatics in functions.
+- **D23 foundations use only words taught so far** — in S00–S18 every example, bank sentence, drill and check uses only
+  the words of that lesson or an earlier one on the common order (no ⌈30 %⌉ share; that starts at C01). The validator
+  lists the usable sentences per lesson; fill the gaps you find. Titles name subjects, never languages (D25).
+- **D24 transliteration** — every foundation word of a non-Latin-script language has `translit` (zh: `pinyin`, tone marks).
 - **D9–D12, D17** — complete thematic groups, words that combine, the grammar per type, the open-ended course.
 - **Correctness first** — ground every form and fact (Wiktionary via `tools/lang_refcheck.py` `fetch`, WALS, grammars);
   leave out what you are not sure of; edit only the files your task allows; report doubtful cases.
