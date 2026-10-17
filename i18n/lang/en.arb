@@ -1367,6 +1367,22 @@
   "@lang.step.review": {
     "description": "Button of a lesson whose four steps are all done"
   },
+  "lang.words.newTip": "New word",
+  "@lang.words.newTip": {
+    "description": "Hover text of a word the learner has not been taught yet (dotted amber underline)"
+  },
+  "lang.tile.reveal": "Not met yet · tap to show",
+  "@lang.tile.reveal": {
+    "description": "Hover/tap hint of a blurred word tile (a word not met yet): tap to show it"
+  },
+  "lang.translit.hide": "Hide transliteration",
+  "@lang.translit.hide": {
+    "description": "Button hint: hide the transliteration / pinyin line under foreign words"
+  },
+  "lang.translit.show": "Show transliteration",
+  "@lang.translit.show": {
+    "description": "Button hint: show the transliteration / pinyin line under foreign words"
+  },
   "lang.lesson.check": "Lesson check",
   "@lang.lesson.check": {
     "description": "Button (after ✔): only the lesson’s check (a short test)."

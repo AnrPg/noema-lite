@@ -13,6 +13,7 @@ function start({ acc, id, data, host = null, onRoute = null }) {
   document.title = `${courseTitle()} · noema-lite`;   // i18n-ignore (the course title and the app name)
   document.documentElement.lang = UI.C.explainLang;
   document.body.classList.add('lx');
+  document.body.classList.toggle('lx-nohelp', UI.prefs.translit === false);
   if (host) { host.replaceChildren(h('div', { class: 'lx-top lx-subbar', role: 'tablist', 'aria-label': LT('lang.shell.yourLanguages') }), h('div', { class: 'lx-main' })); frameWatch(host); }   // inside the frame: its top bar and tabs stay
   else document.body.append(h('header', { class: 'topbar lx-top' }), h('main', { class: 'lx-main' }));
   if (!wired) {

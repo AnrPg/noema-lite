@@ -639,7 +639,7 @@
     const intro = ids.every(id => { const it = items[id]; return it && (it.seen != null || it.r || it.p); });
     const practised = intro && ids.every(id => { const it = items[id]; return it.r && it.p; });
     const passed = (S.checks?.[nid]?.best || 0) >= PASS;
-    const done = { wl: intro, wp: practised, tr: !!S.steps?.[nid]?.tr || (passed && practised), tp: passed && practised };
+    const done = { wl: intro || passed, wp: practised || passed, tr: !!S.steps?.[nid]?.tr || passed, tp: passed };   // a lesson passed before the ladder counts as all four done
     let open = true; const steps = LESSON_STEPS.map(id => { const st = { id, done: done[id], open }; open = open && done[id]; return st; });
     const next = (steps.find(x => !x.done) || {}).id || null;
     return { steps, next, done: !next };

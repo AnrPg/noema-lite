@@ -113,7 +113,7 @@ package `tools/lang_course.py package` and `langcore.checkLangPackage`, which th
   points in `functions`; nothing of a word's facade only in a grammar page, nothing of grammar only in a word card).
 - **D23** **In the foundations (S00–S18) only words taught so far appear** in examples, sentences, drills and checks: the
   words of this lesson or an earlier one on the common order — no unknown share (D20's ⌈30 %⌉ starts at C01). Write
-  bank sentences for a foundation function with only such words; the validator lists, per language and lesson, how many
+  bank sentences for a foundation function with only such words; `node tools/lang_strict_report.js <course-dir>` lists, per language and lesson, how many
   sentences are usable (fewer than 6 is a gap to fill). A word that appears before its lesson is shown with the **new-word
   marker** (dotted amber underline, “new word” on hover; computed per learner by the app — nothing to write in the data).
 - **D24** **Transliteration is always shown in the foundations** for every non-Latin-script language: every word the learner

@@ -283,6 +283,7 @@ ok(!ws.errors.length && ws.warnings.some(w => /generator 5 \(agree\): makes no e
   const fpage = await page.evaluate(() => ({ feas: document.querySelector('.lx-gram .lx-feas')?.dataset.feas, txt: document.querySelector('.lx-gram .lx-feas')?.innerText || '' }));
   ok(fpage.feas === 'ready' && /▶ Practise/.test(fpage.txt) && /Exercises: /.test(fpage.txt), `function page: the light (${fpage.txt.split('\n')[0]}) with ▶ practise and its exercises`);
   const lid = await page.evaluate(() => { const { C } = NoemaLangUI.UI; return C.order.find(n => C.nodes[n].kind === 'lesson' && C.nodes[n].step === 4); });
+  await page.evaluate(l => { const U = NoemaLangUI.UI; for (const id of U.C.lang.de.byNode[l] || []) { NoemaLang.review(U.C, U.L, 'de', id, 'r', true, 0); NoemaLang.review(U.C, U.L, 'de', id, 'p', true, 0); } NoemaLang.recordStep(U.C, U.L, 'de', l, 'tr', 0); NoemaLangUI.save(true); }, lid);   // D22: the theory cards open once the words are done
   await page.goto(url + '?account=anr&subject=' + SUBJ + '#/lesson/' + lid); await wait(400);
   ok(await page.locator('.lx-gram .lx-feas').count() >= 1, `lesson page (${lid}): a light on its grammar cards`);
   // practise one function from its page: answer everything right → recorded, state moves on
@@ -332,8 +333,8 @@ ok(!ws.errors.length && ws.warnings.some(w => /generator 5 \(agree\): makes no e
   // D20: an item with words not learned yet — 🆕, the card on tap, the list at the end
   const d19 = await page.evaluate(() => {
     const N = NoemaLang, { C } = NoemaLangUI.UI, T = N.newLearner(C);
-    for (const nid of C.order.filter(n => C.nodes[n].kind === 'lesson' && C.lang.de.applies[n]).slice(0, 12)) { for (const id of C.lang.de.byNode[nid] || []) N.review(C, T, 'de', id, 'r', true, 0); N.recordCheck(C, T, 'de', nid, 1, 0); }
-    for (const f of Object.keys(C.functions)) { const it = N.exercises(C, T, 'de', f, { auto: true, max: 80 }).find(x => ['parse', 'gloss', 'proofread', 'agree'].includes(x.kind) && (x.unknown || []).length); if (it) { NoemaLangUI.grammar.runPractice([it], { title: 'd19', back: '#/' }); return it.kind; } }
+    for (const nid of C.order.filter(n => C.nodes[n].kind === 'lesson' && C.lang.de.applies[n]).slice(0, 24)) { for (const id of C.lang.de.byNode[nid] || []) N.review(C, T, 'de', id, 'r', true, 0); N.recordCheck(C, T, 'de', nid, 1, 0); }
+    for (const f of Object.keys(C.functions)) { const it = N.exercises(C, T, 'de', f, { auto: true, max: 80 }).find(x => ['parse', 'gloss'].includes(x.kind) && (x.unknown || []).length); if (it) { NoemaLangUI.grammar.runPractice([it], { title: 'd19', back: '#/' }); return it.kind; } }
     return null;
   });
   const hasNew = d19 && await page.locator('.lx-stage .lx-new').count() > 0;

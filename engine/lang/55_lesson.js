@@ -27,8 +27,8 @@ VIEWS.lesson = (v, r) => {
       ...langs.map(x => h('span', { class: 'lx-ns ns-' + st[x] }, info(x).flag, ' ', STATE_LABEL[st[x]] || st[x], UI.L.langs[x]?.checks?.[nid] ? ' · ' + LT('lang.lesson.pct', { pct: Math.round(UI.L.langs[x].checks[nid].best * 100) }) : ''))),
     can.length ? ladderList(nid, can) : null,
     h('div', { class: 'row lx-actions' },
-      can.length ? continueButton(nid, can) : h('span', { class: 'lx-note' }, '🔒 ' + LT('lang.lesson.locked')), deepenButton(nid, c)));
-  const lad = can.length ? ladderOf(nid, can) : null, theoryOpen = !lad || lad.steps.find(x => x.id === 'tr').open;   // D22: the theory is read after the words
+      can.length ? continueButton(nid, can) : h('span', { class: 'lx-note' }, '🔒 ' + LT('lang.lesson.locked')), deepenButton(nid, c), translitToggle()));
+  const theoryOpen = !can.includes(c) || ladderOf(nid, [c]).steps.find(x => x.id === 'tr').open;   // D22: the theory is read after the words
   const fns = N.lessonFunctions(UI.C, c, nid);
   if (theoryOpen) {
   if (fns.includes('fn.overview')) v.append(typologyCard());
@@ -84,7 +84,7 @@ function runLesson(nid, langs, { checkOnly = false, step = null } = {}) {
 function runQueue(queue, { nid, langs, title, step }) {
   metNew.clear();   // the 🆕 words of this run, listed at the end (D20)
   const m = $('.lx-main'), bar = h('div', { class: 'lx-progress' }, h('i')), stage = h('div', { class: 'lx-stage' });
-  m.innerHTML = ''; m.append(h('div', { class: 'view lx-view lx-session lx-lessonrun', 'data-node': nid }, h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => { save(true); go('#/lesson/' + nid); render(); } }, '✕ ' + LT('lang.sess.stop')), h('b', { class: 'tiny' }, title), bar), stage));
+  m.innerHTML = ''; m.append(h('div', { class: 'view lx-view lx-session lx-lessonrun', 'data-node': nid }, h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => { save(true); go('#/lesson/' + nid); render(); } }, '✕ ' + LT('lang.sess.stop')), h('b', { class: 'tiny' }, title), translitToggle(), bar), stage));
   const stats = { right: 0, wrong: 0, introduced: 0 }, results = {}, retried = new Set(); let total = queue.length, i = 0;
   const day = today();
   const nextBtn = (label = LT('lang.drill.next') + ' ' + arrowOn()) => { const b = h('button', { class: 'btn primary lx-next' }, label); b.onclick = next; stage.append(h('div', { class: 'row lx-nextrow' }, b)); setTimeout(() => b.focus(), 30); };

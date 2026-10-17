@@ -87,13 +87,21 @@ function conceptPic(cid, cls = 'lx-temoji') {
   return img;
 }
 
+/** D23: the small on-screen switch for the line under foreign words (transliteration / pinyin); only where a studied language has one. */
+function translitToggle() {
+  if (!activeLangs().some(c => LX(c).language.script !== 'Latn' && LX(c).language.romanization)) return null;
+  const off = () => UI.prefs.translit === false, b = h('button', { class: 'btn ghost small lx-translit', 'aria-pressed': String(!off()), onclick: () => {
+    const hide = !off(); UI.prefs.translit = !hide; UI.prefs.pinyin = !hide; save(); document.body.classList.toggle('lx-nohelp', hide); b.title = LT(hide ? 'lang.translit.show' : 'lang.translit.hide'); b.setAttribute('aria-pressed', String(!hide)); if (!$('.lx-session')) render();
+  } }, 'Aa·');
+  b.title = LT(off() ? 'lang.translit.show' : 'lang.translit.hide'); return b;
+}
 /** A foreign word as the learner should see it: right font and direction; vowel marks on/off; transliteration or pinyin under it. */
 function word(code, text, { lex = null, cls = '', sub = true, marks = null } = {}) {
   const X = LX(code), shown = shownMarks(code, text, lex, marks);   // vowel marks: full · fading · none (P4, 90_script.js)
   const e = h('span', { class: 'lx-w ' + cls, lang: code, dir: X.language.dir || 'ltr' }, shown);
   if (!sub || !lex) return e;
   const helper = code === 'zh' && UI.prefs.pinyin !== false && lex.pinyin && text === lex.lemma ? lex.pinyin.replace(/\s+/g, '')
-    : X.language.vowelMarks && (UI.prefs.translit !== false || needTranslit(code)) && lex.translit && text === lex.lemma ? lex.translit : null;   // always until the letters are known (§5.5)
+    : (X.language.vowelMarks || (X.language.script !== 'Latn' && X.language.romanization)) && (UI.prefs.translit !== false || needTranslit(code)) && lex.translit && text === lex.lemma ? lex.translit : null;   // always until the letters are known (§5.5)
   return helper ? h('span', { class: 'lx-wbox' }, e, h('span', { class: 'lx-help', lang: code === 'zh' ? 'zh-Latn-pinyin' : 'und-Latn' }, helper)) : e;
 }
 /* ---------- the learner's native language (D19, docs/language-packs.md §2.2) and words met before they are learned (D20) ---------- */
@@ -191,6 +199,7 @@ function splitRun(run, code, text) {
   const linkable = el => !el.closest(SKIP) && !(el.closest('.lx-stage') && !el.closest(IN_STAGE));
   const linkRuns = root => {
     if (!UI.C) return;
+    const kn = {}, fresh = (c, l) => { try { const k = kn[c] = kn[c] || N.known(UI.C, UI.L, c); return k.state[l] === 'locked' || k.state[l] === 'ready'; } catch (err) { return false; } };   // D24: not taught to this learner yet
     for (const run of root.querySelectorAll('.lx-w[lang]:not(.lx-tok):not([data-lk])')) {
       run.dataset.lk = '1';
       const c = run.getAttribute('lang'); if (!UI.C.lang[c] || !linkable(run)) continue;
@@ -198,6 +207,7 @@ function splitRun(run, code, text) {
       if (!run.title) run.title = info(c).label + (run.querySelector('.lx-rw') ? '' : ' · ' + LT('lang.prod.notInCourseTitle'));   // what the coloured underline means; no card to open
       for (const w of run.querySelectorAll('.lx-rw[data-l]')) if (LX(c).lex[w.dataset.l]) {
         w.classList.add('lx-tok'); w.tabIndex = 0; w.setAttribute('role', 'button'); w.title = gloss(c, w.dataset.l);
+        if (fresh(c, w.dataset.l)) { w.classList.add('lx-newword'); w.title = LT('lang.words.newTip') + ' · ' + w.title; }
       }
     }
   };
@@ -319,6 +329,7 @@ function start({ acc, id, data, host = null, onRoute = null }) {
   document.title = `${courseTitle()} · noema-lite`;   // i18n-ignore (the course title and the app name)
   document.documentElement.lang = UI.C.explainLang;
   document.body.classList.add('lx');
+  document.body.classList.toggle('lx-nohelp', UI.prefs.translit === false);
   if (host) { host.replaceChildren(h('div', { class: 'lx-top lx-subbar', role: 'tablist', 'aria-label': LT('lang.shell.yourLanguages') }), h('div', { class: 'lx-main' })); frameWatch(host); }   // inside the frame: its top bar and tabs stay
   else document.body.append(h('header', { class: 'topbar lx-top' }), h('main', { class: 'lx-main' }));
   if (!wired) {
@@ -527,11 +538,12 @@ VIEWS.node = (v, r) => {
 function conceptTile(c, { cid, lex }, k) {
   const X = LX(c), lids = cid ? (X.byConcept[cid] || []) : [lex], absent = cid && X.absent[cid];
   const st = cid ? N.conceptState(UI.C, UI.L, c, cid, k) : k.state[lex];
-  const visible = !['locked', 'ready'].includes(st) || UI.prefs.peek;
-  return h('button', { class: 'lx-tile s-' + st, onclick: () => go(cid ? '#/c/' + cid : '#/w/' + c + '/' + lex), title: STATE_LABEL[st] || '' },
+  const unmet = ['locked', 'ready'].includes(st) && !UI.prefs.peek;   // D22: every word is shown; the ones not met yet are blurred until tapped
+  const tile = h('button', { class: 'lx-tile s-' + st + (unmet ? ' lx-blur' : ''), onclick: () => { if (tile.classList.contains('lx-blur')) { tile.classList.remove('lx-blur'); return; } go(cid ? '#/c/' + cid : '#/w/' + c + '/' + lex); }, title: unmet ? LT('lang.tile.reveal') : STATE_LABEL[st] || '' },
     cid ? conceptPic(cid) : h('span', { class: 'lx-temoji' }, '🔤'),
-    h('span', { class: 'lx-tword' }, absent ? h('i', { class: 'tiny' }, '— ' + LT('lang.card.noWordShort')) : visible ? lids.map((id, i) => [i ? ' · ' : '', word(c, X.lex[id].lemma, { sub: false })]) : '?'),
+    h('span', { class: 'lx-tword' }, absent ? h('i', { class: 'tiny' }, '— ' + LT('lang.card.noWordShort')) : lids.map((id, i) => [i ? ' · ' : '', word(c, X.lex[id].lemma, { lex: X.lex[id] })])),
     h('span', { class: 'lx-tgloss' }, cid ? UI.C.concepts[cid].gloss : gloss(c, lex)));
+  return tile;
 }
 
 /* ---------- a concept: the flag card (one language at a time) + compare ---------- */
@@ -1574,8 +1586,8 @@ VIEWS.lesson = (v, r) => {
       ...langs.map(x => h('span', { class: 'lx-ns ns-' + st[x] }, info(x).flag, ' ', STATE_LABEL[st[x]] || st[x], UI.L.langs[x]?.checks?.[nid] ? ' · ' + LT('lang.lesson.pct', { pct: Math.round(UI.L.langs[x].checks[nid].best * 100) }) : ''))),
     can.length ? ladderList(nid, can) : null,
     h('div', { class: 'row lx-actions' },
-      can.length ? continueButton(nid, can) : h('span', { class: 'lx-note' }, '🔒 ' + LT('lang.lesson.locked')), deepenButton(nid, c)));
-  const lad = can.length ? ladderOf(nid, can) : null, theoryOpen = !lad || lad.steps.find(x => x.id === 'tr').open;   // D22: the theory is read after the words
+      can.length ? continueButton(nid, can) : h('span', { class: 'lx-note' }, '🔒 ' + LT('lang.lesson.locked')), deepenButton(nid, c), translitToggle()));
+  const theoryOpen = !can.includes(c) || ladderOf(nid, [c]).steps.find(x => x.id === 'tr').open;   // D22: the theory is read after the words
   const fns = N.lessonFunctions(UI.C, c, nid);
   if (theoryOpen) {
   if (fns.includes('fn.overview')) v.append(typologyCard());
@@ -1631,7 +1643,7 @@ function runLesson(nid, langs, { checkOnly = false, step = null } = {}) {
 function runQueue(queue, { nid, langs, title, step }) {
   metNew.clear();   // the 🆕 words of this run, listed at the end (D20)
   const m = $('.lx-main'), bar = h('div', { class: 'lx-progress' }, h('i')), stage = h('div', { class: 'lx-stage' });
-  m.innerHTML = ''; m.append(h('div', { class: 'view lx-view lx-session lx-lessonrun', 'data-node': nid }, h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => { save(true); go('#/lesson/' + nid); render(); } }, '✕ ' + LT('lang.sess.stop')), h('b', { class: 'tiny' }, title), bar), stage));
+  m.innerHTML = ''; m.append(h('div', { class: 'view lx-view lx-session lx-lessonrun', 'data-node': nid }, h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => { save(true); go('#/lesson/' + nid); render(); } }, '✕ ' + LT('lang.sess.stop')), h('b', { class: 'tiny' }, title), translitToggle(), bar), stage));
   const stats = { right: 0, wrong: 0, introduced: 0 }, results = {}, retried = new Set(); let total = queue.length, i = 0;
   const day = today();
   const nextBtn = (label = LT('lang.drill.next') + ' ' + arrowOn()) => { const b = h('button', { class: 'btn primary lx-next' }, label); b.onclick = next; stage.append(h('div', { class: 'row lx-nextrow' }, b)); setTimeout(() => b.focus(), 30); };
