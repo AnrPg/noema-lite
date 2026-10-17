@@ -139,7 +139,7 @@ async function runToEnd(page, max = 200) { for (let i = 0; i < max; i++) { const
     for (let i = 0; i < 160; i++) { if (!sawNew && await page.$('.lx-stage .lx-new')) { sawNew = true; await page.click('.lx-stage .lx-new >> nth=0'); await wait(150); ok(await page.locator('.lx-pop .lx-card').count() === 1, 'D20: a 🆕 word opens its card'); await page.click('.lx-pop button:has-text("✕")'); } if (await act(page) === 'end') break; await wait(50); }
     ok(await page.locator('.lx-result').count() === 1 && (!sawNew || await page.locator('.lx-result .lx-newlist li').count() > 0), 'D20: ✍️ translate runs to its end' + (sawNew ? ' and lists the 🆕 words' : ''));
     // a lesson passed before and failed now: said as it is; the next lesson offered
-    await hash(page, '#/lesson/fd.01'); await page.click('button:has-text("Lesson check")'); await wait(200);
+    await hash(page, '#/lesson/fd.01'); await page.click('.lx-continue'); await wait(200);
     for (let i = 0; i < 400; i++) { const st = await page.evaluate(() => !!document.querySelector('.lx-result h2')?.textContent.includes('Lesson check done')); if (st) break;
       if (await act(page) === 'end') break; await wait(40); }
     const res = await page.evaluate(() => [...document.querySelectorAll('.lx-result li[data-lang]')].map(li => li.textContent));

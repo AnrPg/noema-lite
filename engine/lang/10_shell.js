@@ -177,7 +177,7 @@ VIEWS.home = (v) => {
   if (lessons.length) v.append(h('h2', { class: 'lx-h2' }, '🧱 ' + LT(lessons.some(st => UI.C.nodes[st.node].stage === 'core') ? 'lang.home.nextLesson' : 'lang.home.nextFoundation')), h('div', { class: 'lx-lessons' }, ...lessons.map(st => {
     const n = UI.C.nodes[st.node];
     return h('div', { class: 'lx-card lx-lessonbtn', 'data-node': st.node }, h('div', {}, h('span', { class: 'lx-step' }, stepLabel(n)), ' ', h('b', {}, n.title), h('div', { class: 'tiny' }, st.langs.map(c => info(c).flag + ' ' + info(c).label).join(' · '))),
-      h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => go('#/lesson/' + st.node) }, LT('lang.home.open')), h('button', { class: 'btn primary', onclick: () => runLesson(st.node, st.langs) }, '▶ ' + LT('lang.home.learn'))));
+      h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => go('#/lesson/' + st.node) }, LT('lang.home.open')), continueButton(st.node, st.langs)));
   })));
   v.append(h('div', { class: 'row lx-drills' }, h('span', { class: 'tiny' }, '🏋️ ' + LT('lang.home.drills') + ' '),
     h('button', { class: 'btn ghost small', 'data-icon': 'gym', onclick: () => go('#/parts/' + UI.lang) }, '🔁 ' + LT('lang.view.parts')), ...scriptHomeButtons(),

@@ -45,7 +45,7 @@ async function answer(page, right = true) {
 async function runThrough(page, wrongIn = []) {
   for (let guard = 0; guard < 400; guard++) {
     await wait(30);
-    if (await page.$('.lx-result:has-text("Lesson check done"), .lx-result:has-text("Well done")')) return true;
+    if (await page.$('.lx-result:has-text("Lesson check done"), .lx-result:has-text("Well done")')) { const more = await page.$('.lx-result .lx-continue'); if (!more) return true; await more.click(); continue; }   // D22: the ladder, step by step
     const cur = await page.evaluate(() => { const c = NoemaLangUI.UI.current; return c ? { check: !!c.check, lang: c.lang || c.it?.lang, shown: !!document.querySelector('.lx-stage .lx-ex') } : null; });
     if (cur?.shown && !(await page.$('.lx-stage .lx-next'))) { await answer(page, !(cur.check && wrongIn.includes(cur.lang))); continue; }
     const nx = await page.$('.lx-stage .lx-next'); if (nx) { await nx.click(); continue; }
@@ -68,7 +68,7 @@ async function runThrough(page, wrongIn = []) {
   // ---------- S00: the types of languages, the overview, the quiz ----------
   ok(await page.locator('.lx-native-ask').count() === 1, 'D19: a course asks once for the native language while it is not known');
   await page.evaluate(() => { const k = 'noema1:anr:a:settings'; localStorage.setItem(k, JSON.stringify({ ...JSON.parse(localStorage.getItem(k) || '{}'), native: { code: 'tr' } })); });   // D19: a Turkish native speaker
-  await page.click('.lx-lessonbtn button:has-text("Learn")'); await wait(300);
+  await page.click('.lx-lessonbtn .lx-continue'); await wait(300);
   ok(await page.locator('.lx-typology [data-type]').count() === 4 && /Isolating[\s\S]*🇨🇳/.test(await page.locator('.lx-typology').innerText()), 'S00 begins with the four types; each course language under its type');
   await page.click('.lx-stage .lx-next'); await wait(200);
   ok(await page.locator('.lx-overview').count() === 1 && /special from the very beginning/.test(await page.locator('.lx-overview').innerText()), 'then the overview of the language with its peculiarities');
@@ -87,8 +87,8 @@ async function runThrough(page, wrongIn = []) {
   await page.goto(url + '?account=anr&subject=' + SUBJ + '#/'); await wait(900);
   const cards = await page.locator('.lx-lessonbtn').allInnerTexts();
   ok(cards.length === 2 && /S00[\s\S]*Hebrew/.test(cards[0]) && /S01[\s\S]*Arabic · 🇨🇳 Chinese · 🇩🇪 German/.test(cards[1]), 'home: Hebrew repeats S00, the others go on to S01 together');
-  await page.click('.lx-lessonbtn[data-node="fd.01"] button:has-text("Learn")'); await wait(300);
-  ok(await page.locator('.lx-gram').count() === 1, 'S01 starts with its grammar');
+  await page.click('.lx-lessonbtn[data-node="fd.01"] .lx-continue'); await wait(300);
+  ok(await page.evaluate(() => NoemaLangUI.UI.current?.kind === 'intro') && await page.locator('.lx-gram').count() === 0, 'D22: S01 starts with its words (theory comes after the words)');
   ok(await runThrough(page), 'S01 runs to the end: grammar, the word in three languages, drills, the check');
   const st2 = await page.evaluate(() => { const { C, L } = NoemaLangUI.UI; return Object.fromEntries(C.languages.map(c => [c, NoemaLang.nodeStates(C, L, c)])); });
   ok(st2.ar['fd.01'] === 'passed' && st2.ar['core.1'] === 'open' && st2.de['fd.01x'] === 'open' && st2.de['core.1'] === 'locked' && st2.zh['core.1'] === 'open', 'after S01: core.1 opens in Arabic and Chinese; German first has its extra lesson');
