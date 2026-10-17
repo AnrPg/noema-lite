@@ -362,6 +362,8 @@
   "sh.nextSection": "Nächster Abschnitt",
   "sh.prevSection": "Vorheriger Abschnitt",
   "sh.nextChapterFirst": "Kapitel {n, number} · {title}",
+  "sh.nextChapterBtn": "Weiter: {title}",
+  "sh.nextStepBtn": "Nächster Schritt: {title}",
   "sh.allWays": "Alle Arten zu üben",
   "sh.trapsIntro": "Die Details, die man leicht verwechselt, und die klassischen Fehler dieses Kapitels.",
   "sh.trapDrill": "Fallen",

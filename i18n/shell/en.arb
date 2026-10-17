@@ -2071,6 +2071,16 @@
       }
     }
   },
+  "sh.nextChapterBtn": "Next: {title}",
+  "@sh.nextChapterBtn": {
+    "description": "Button at the end of a chapter page: go to the next chapter. title = that chapter's title.",
+    "placeholders": { "title": { "type": "String" } }
+  },
+  "sh.nextStepBtn": "Next step: {title}",
+  "@sh.nextStepBtn": {
+    "description": "Button on the last chapter of a subject that is a Roadmap step: open the Roadmap's next step. title = that step's title.",
+    "placeholders": { "title": { "type": "String" } }
+  },
   "sh.allWays": "All the ways to practise",
   "@sh.allWays": {
     "description": "Back link (after ‹) from a practice sub-page to the list of all ways to practise the chapter."

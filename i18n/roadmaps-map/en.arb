@@ -3086,6 +3086,14 @@
       }
     }
   },
+  "roadmap.map.pnl.lockedHead": "Locked. Master these first:",
+  "@roadmap.map.pnl.lockedHead": {
+    "description": "Side panel of a locked Roadmap step, above the list of the steps it needs (each with its progress)."
+  },
+  "roadmap.map.pnl.preLocked": "locked",
+  "@roadmap.map.pnl.preLocked": {
+    "description": "In that list: a needed step that is itself still locked (refers to the step)."
+  },
   "roadmap.map.pnl.preparedLocked": "Prepared by {who} — it is yours to study when it opens",
   "@roadmap.map.pnl.preparedLocked": {
     "description": "Locked step of a shared Roadmap that another member prepared.",

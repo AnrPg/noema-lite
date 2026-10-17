@@ -578,6 +578,8 @@
   "roadmap.map.pnl.knowIt": "Я это уже знаю",
   "roadmap.map.pnl.undoMastered": "Отменить «пройден»",
   "roadmap.map.pnl.locked": "Закрыт. Сначала пройди эти: {list}",
+  "roadmap.map.pnl.lockedHead": "Закрыт. Сначала пройди:",
+  "roadmap.map.pnl.preLocked": "закрыт",
   "roadmap.map.pnl.preparedLocked": "Подготовлен: {who} — изучишь, когда он откроется",
   "roadmap.map.pnl.mastered": "{test, select, yes {Пройден (входной тест)} other {Пройден}}",
   "roadmap.map.pnl.progress": "Прогресс: прочитано {read} · решено {solved} упражнений (нужно 100 % прочитано + 80 % решено)",
