@@ -362,6 +362,8 @@
   "sh.nextSection": "Следующий раздел",
   "sh.prevSection": "Предыдущий раздел",
   "sh.nextChapterFirst": "Глава {n, number} · {title}",
+  "sh.nextChapterBtn": "Далее: {title}",
+  "sh.nextStepBtn": "Следующий шаг: {title}",
   "sh.allWays": "Все способы практики",
   "sh.trapsIntro": "Детали, которые легко перепутать, и типичные ошибки этой главы.",
   "sh.trapDrill": "Ловушки",

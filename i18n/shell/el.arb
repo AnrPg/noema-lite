@@ -362,6 +362,8 @@
   "sh.nextSection": "Επόμενη ενότητα",
   "sh.prevSection": "Προηγούμενη ενότητα",
   "sh.nextChapterFirst": "Κεφάλαιο {n, number} · {title}",
+  "sh.nextChapterBtn": "Επόμενο: {title}",
+  "sh.nextStepBtn": "Επόμενο βήμα: {title}",
   "sh.allWays": "Όλοι οι τρόποι εξάσκησης",
   "sh.trapsIntro": "Οι λεπτομέρειες που μπερδεύονται εύκολα και τα κλασικά λάθη του κεφαλαίου.",
   "sh.trapDrill": "Παγίδες",

@@ -578,6 +578,8 @@
   "roadmap.map.pnl.knowIt": "Je le sais déjà",
   "roadmap.map.pnl.undoMastered": "Annuler « maîtrisée »",
   "roadmap.map.pnl.locked": "Verrouillée. Maîtrise d’abord celles-ci : {list}",
+  "roadmap.map.pnl.lockedHead": "Verrouillée. Maîtrise d’abord :",
+  "roadmap.map.pnl.preLocked": "verrouillée",
   "roadmap.map.pnl.preparedLocked": "Préparée par {who} — tu pourras l’étudier quand elle s’ouvrira",
   "roadmap.map.pnl.mastered": "{test, select, yes {Maîtrisée (test de placement)} other {Maîtrisée}}",
   "roadmap.map.pnl.progress": "Progression : {read} lu · {solved} des exercices résolus (il faut 100 % lu + 80 % résolu)",

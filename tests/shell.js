@@ -87,6 +87,10 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
   const ch = await page.evaluate(() => COURSE[0].id), sec = await page.evaluate(() => COURSE[0].sections[0].id);
   await page.goto(url + '#/ch/' + ch); await until(() => page.$('.chhead'));
   ok(await page.$$eval('.tabs button', l => l.length) === 3, 'a chapter: Theory · Practice · Traps');
+  { const many = await page.evaluate(() => COURSE.length > 1), t = await page.$eval('.nextch', b => b.textContent).catch(() => '');
+    ok(!many || (t.startsWith('Next: ') && t.includes(await page.evaluate(() => COURSE[1].title))), 'a chapter page offers the next chapter by its title: ' + t);
+    if (many) { await page.click('.nextch'); await wait(400); ok(await page.evaluate(() => location.hash === '#/ch/' + COURSE[1].id), '→ opens the next chapter');
+      await page.click('#ns-top .ns-back'); await wait(400); ok(await page.evaluate(c => location.hash === '#/ch/' + c, ch), '← returns to the chapter it came from (not the chapter list)'); } }
   await page.click('.tabs button:nth-child(2)'); await wait(300);
   ok(await page.$$eval('.plist .pitem', l => l.length) >= 3, 'Practice: the ways to practise the chapter, one list');
   await page.click('.tabs button:nth-child(3)'); await wait(300);
@@ -276,6 +280,12 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
   await page.click('.cm-panel.on .cm-srcbtn'); await until(() => page.$('.cm-srcbox .cm-srcrow'), 5000);
   ok(await page.$('.cm-srcbox .cm-srcrow'), '📚 lists the sources the step is taught from');
   await page.click('.cm-srcbox .cm-srchead button'); await wait(300);
+  { const t = await page.$eval('.cm-panel.on .cm-lock', d => d.innerText);
+    ok(/Master these first:/.test(t) && await page.$$eval('.cm-panel.on .cm-prereqs li', l => l.length) >= 1 && !/https?:|#\/|,\s*$/.test(t), 'a locked step lists the steps it needs by title, each with where it stands (no addresses): ' + t.replace(/\n/g, ' | ')); }
+  await page.click('.cm-panel.on .cm-readtheory'); await until(() => page.$('.subjhead'), 8000);
+  ok(await page.evaluate(() => location.hash) === '#/subject' && await page.$('.lockbar'), '📖 Read the theory opens the step’s subject for reading, not Today');
+  await page.click('#ns-top .ns-back'); await wait(600);
+  ok(await page.evaluate(c => location.hash.startsWith('#/map/' + c), cid), '← from the subject goes back to the Roadmap it came from: ' + await page.evaluate(() => location.hash));
   await page.goto(url + '#/subject'); await until(() => page.$('.subjhead'));
   ok(await page.$('.lockbar'), 'the subject of a locked step opens for reading, with a quiet note');
   await page.goto(url + '#/cards'); await wait(500);
