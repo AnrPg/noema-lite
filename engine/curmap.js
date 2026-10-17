@@ -1241,7 +1241,6 @@ window.NoemaCurMap = (() => {
       function showPanel(id) {
         c = C().get(acc, cid) || c; const n = c.nodes[id]; if (!n) return; const st = C().statuses(acc, c)[id]; const pk = n.pack || {}; const key = c.id + '/' + id;
         const T = x => c.nodes[x]?.title || x;
-        const missing = st.parents.filter(p => !C().statuses(acc, c)[p].mastered);
         const live = G().live[key];
         panel.innerHTML = ''; panel.classList.add('on');
         const act = el('div', { class: 'cm-actions' });
@@ -1291,13 +1290,23 @@ window.NoemaCurMap = (() => {
           if (!st.mastered) act.append(el('button', { class: 'btn small cm-knowit', onclick: () => test(id) }, '🎓 ' + CM('roadmap.map.pnl.knowIt')));
           else if (st.how === 'test' || st.how === 'manual') act.append(el('button', { class: 'btn small ghost', onclick: () => { C().setMastered(acc, c, id, null); drawMap(); showPanel(id); } }, '↩ ' + CM('roadmap.map.pnl.undoMastered')));
         } else {
-          act.append(el('p', { class: 'cm-lock' }, '🔒 ', ...rich(CM('roadmap.map.pnl.locked', { list: '\u0001' }), { '\u0001': missing.map((p, i) => [i ? ', ' : '', el('a', { href: '#', onclick: e => { e.preventDefault(); sel = p; drawMap(); showPanel(p); scrollToNode(p); } }, T(p))]) })));
+          // 🔒 the steps it needs, each with where it stands (tap one: it is shown on the map)
+          const all = C().statuses(acc, c);
+          act.append(el('div', { class: 'cm-lock' }, el('p', {}, '🔒 ' + CM('roadmap.map.pnl.lockedHead')),
+            el('ul', { class: 'cm-prereqs' }, ...st.parents.map(p => { const q = all[p] || {};
+              return el('li', { class: q.mastered ? 'done' : '' }, el('a', { href: '#', onclick: e => { e.preventDefault(); sel = p; drawMap(); showPanel(p); scrollToNode(p); } }, T(p)), ' ',
+                el('span', { class: 'tiny' }, q.mastered ? '✓ ' + CM('roadmap.map.pnl.mastered', { test: 'no' }) : q.open ? pctTxt(((q.read || 0) + (q.score || 0)) / 2) : '🔒 ' + CM('roadmap.map.pnl.preLocked')));
+            }))));
           const rx = c.shared && !c.shared.ended ? c.remote?.[id] : null;   // 👥 also for a locked step: who prepared / prepares it
           if (rx && !rx.mine) act.append(el('p', { class: 'tiny cm-byline' }, rx.status === 'ready' ? '⚡ ' + CM('roadmap.map.pnl.preparedLocked', { who: rx.by || CM('roadmap.map.st.anotherMember') }) : '⏳ ' + CM('roadmap.map.pnl.othersPrep', { who: rx.by || CM('roadmap.map.pnl.anotherMemberCap') })));
           // 📖 a prepared step can be read before it opens; its exercises wait (the subject opens read-only, engine/src/40_views.js stepLock)
           const readBtn = run => el('button', { class: 'btn small cm-readtheory', title: SL('readTheorySub', 'The exercises open when the step opens'), onclick: run }, '📖 ' + SL('readTheory', 'Read the theory'));   // i18n-ignore (SL: the English fallback of an sh.* key of i18n/shell)
           if (pk.id && pk.status === 'ready') act.append(readBtn(() => study(pk.id, id)));
           else if (rx?.status === 'ready') act.append(readBtn(async e => { const b = e.currentTarget; b.disabled = true; try { study(await SH().download(acc, cid, id), id); } catch (er) { toast('⚠️ ' + errMsg(er), 6000); b.disabled = false; } }));
+          // not prepared yet: reading it prepares it first (the exercises still wait until the step opens)
+          else if (pk.status === 'generating' || G().busy() === key) act.append(el('div', { class: 'cm-live' }, '⏳ ' + CM('roadmap.map.pnl.preparing')));
+          else if (pk.status === 'app') act.append(el('div', { class: 'cm-live cm-appq' }, '💬 ' + CM('roadmap.map.pnl.waitingApp')));
+          else if (!rx && !(member && !n.chapters?.length)) act.append(readBtn(() => { G().request(c, id, { resume: true }); toast?.('⏳ ' + CM('roadmap.map.pnl.preparingToast', { title: n.title }), 5000); setTimeout(() => showPanel(id), 50); }));
         }
         const prog = st.mastered ? '✅ ' + CM('roadmap.map.pnl.mastered', { test: st.how === 'test' ? 'yes' : 'no' }) : pk.status === 'ready' ? CM('roadmap.map.pnl.progress', { read: pctTxt(st.read), solved: pctTxt(st.score) }) : '';
         const md = (n.chapters || []).map((ch, i) => `${i + 1}. **${String(ch.title).replace(/([*_`\\[\]])/g, '\\$1')}**`).join('\n');

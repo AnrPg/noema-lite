@@ -96,7 +96,7 @@ window.NoemaShell = (() => {
     F.land = h('div', { class: 'ns-land', 'aria-hidden': 'true' });
     F.pv = h('div', { class: 'ns-pvslot' });
     F.brand = h('button', { class: 'ns-brand', 'aria-label': L('today'), onclick: () => go('#/') });
-    F.back = h('button', { class: 'ns-back', 'aria-label': L('back'), onclick: () => chromeNow.back ? go(chromeNow.back) : history.back() }, '←');
+    F.back = h('button', { class: 'ns-back', 'aria-label': L('back'), onclick: goBack }, '←');
     F.crumbs = h('nav', { class: 'ns-crumbs', 'aria-label': L('where') });
     F.acts = h('div', { class: 'ns-acts' });
     F.bellBadge = h('span', { class: 'bellbadge' });
@@ -120,7 +120,8 @@ window.NoemaShell = (() => {
     document.body.append(F.fab, F.fx, F.layer);
     drawMe(); drawTabs(); paintCharacter(); wireNotes(); wireSync(); wireScroll();
     TH()?.onChange((m, why) => { if (why === 'tick') { drawPreview(); return; } paintCharacter(m); if (ENGINE?.retheme) ENGINE.retheme(); if (!F.layer.querySelector('.ns-onb')) route(); });
-    addEventListener('hashchange', route);
+    noteTrail();
+    addEventListener('hashchange', () => { noteTrail(); route(); restoreScroll(); });
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') { if (closePops()) return; if (F.layer.firstChild && !F.layer.querySelector('[data-sticky]')) { F.layer.replaceChildren(); return; } }
       // / or Ctrl/⌘ K: search (not while typing, not over a window that must be answered)
@@ -166,6 +167,27 @@ window.NoemaShell = (() => {
     F.top.classList.remove('hide');
   }
   const go = hash => { if (location.hash === hash || (hash === '#/' && !location.hash)) route(); else location.hash = hash; };
+  /* ← back: the screens of this tab in the order they were seen (sessionStorage), so ← returns to the screen the learner
+     came from, whatever way led there. Every screen keeps its own stable address (shareable, reload-proof); the trail only
+     remembers the way. With no trail (a shared link, a bookmark, a new tab) ← goes to the screen's parent. */
+  const TRAIL = 'noema-trail', here0 = () => location.hash || '#/';
+  const trailGet = () => { try { const t = JSON.parse(sessionStorage.getItem(TRAIL)); return Array.isArray(t) ? t : []; } catch (e) { return []; } };
+  const trailPut = t => { try { sessionStorage.setItem(TRAIL, JSON.stringify(t.slice(-60))); } catch (e) { } };
+  let backTo = null;   // the address ← (or the browser's back) is returning to: its scroll position comes back too
+  function noteTrail() {
+    const t = trailGet(), now = here0();
+    if (t.length && t[t.length - 1].h === now) return;
+    if (t.length > 1 && t[t.length - 2].h === now) { backTo = t.pop() && t[t.length - 1]; trailPut(t); return; }   // back, by ← or by the browser
+    const top = t[t.length - 1];
+    if (top && top.at > lastInput && Date.now() - top.at < 1500) t.pop();   // a screen that forwarded on its own (no click, no key): ← skips it
+    else if (top) top.y = Math.round(scrollY);   // the screen being left (it has not been redrawn yet)
+    backTo = null; t.push({ h: now, y: 0, at: Date.now() }); trailPut(t);
+  }
+  let lastInput = 0; ['pointerdown', 'keydown'].forEach(k => addEventListener(k, () => { lastInput = Date.now(); }, true));
+  function restoreScroll() { const b = backTo; if (!b || !b.y) return; [60, 250].forEach(ms => setTimeout(() => { if (here0() === b.h && scrollY < 4) scrollTo({ top: b.y }); }, ms)); }
+  /** The parent of an address when there is no trail: the screen's own idea of its parent, else one level up. */
+  const parentOf = hash => chromeNow.back || (hash.replace(/\/[^/]*$/, '') || '#/');
+  function goBack() { const t = trailGet(); go(t.length > 1 && t[t.length - 1].h === here0() ? t[t.length - 2].h : parentOf(here0())); }
 
   /* ---------- ⋮ menus and small pop-overs ---------- */
   function closePops() { const p = document.querySelectorAll('.ns-pop'); p.forEach(x => x.remove()); document.querySelectorAll('[data-pop][aria-expanded="true"]').forEach(b => b.setAttribute('aria-expanded', 'false')); return p.length > 0; }

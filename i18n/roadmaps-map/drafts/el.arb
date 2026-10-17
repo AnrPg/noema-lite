@@ -578,6 +578,8 @@
   "roadmap.map.pnl.knowIt": "Το ξέρω ήδη",
   "roadmap.map.pnl.undoMastered": "Αναίρεση του «κατακτήθηκε»",
   "roadmap.map.pnl.locked": "Κλειδωμένος. Κατάκτησε πρώτα αυτούς: {list}",
+  "roadmap.map.pnl.lockedHead": "Κλειδωμένος. Κατάκτησε πρώτα:",
+  "roadmap.map.pnl.preLocked": "κλειδωμένος",
   "roadmap.map.pnl.preparedLocked": "Ετοιμάστηκε από: {who} — θα τον μελετήσεις όταν ανοίξει",
   "roadmap.map.pnl.mastered": "{test, select, yes {Κατακτήθηκε (τεστ κατάταξης)} other {Κατακτήθηκε}}",
   "roadmap.map.pnl.progress": "Πρόοδος: {read} διαβασμένο · {solved} των ασκήσεων λυμένο (χρειάζεται 100 % διαβασμένο + 80 % λυμένο)",

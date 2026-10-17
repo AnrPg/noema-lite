@@ -273,6 +273,15 @@ function chapterMenu(c) {
     { label: timerT ? SL('focusStop') : SL('focusSprint'), sub: SL('focusSprintSub'), icon: 'clock', run: () => focusSprint() }, '-',
     { label: SL('allChapters'), icon: 'list', href: HOME() }];
 }
+/** → the next chapter; after the last one, the next step of the Roadmap this subject teaches (on its map). */
+function nextAfterChapter(c) {
+  const nx = COURSE[COURSE.indexOf(c) + 1];
+  if (nx) return h('button', { class: 'btn nextch', title: nx.title, onclick: () => go('#/ch/' + nx.id) }, SL('nextChapterBtn', { title: nx.title }) + ' ' + arrowOn());
+  const CU = window.NoemaCurriculum, acc = ACCOUNT?.id, at = CU?.stepsOf && acc ? CU.stepsOf(acc, SUBJ.id)[0] : null; if (!at) return null;
+  const all = CU.statuses(acc, at.c), ord = CU.order(at.c).filter(x => at.c.nodes[x]);
+  const to = ord.find(x => (all[x]?.parents || []).includes(at.nid)) || CU.nextUp(acc, at.c).find(x => x !== at.nid);
+  return to ? h('button', { class: 'btn nextch', title: at.c.nodes[to].title, onclick: () => go('#/map/' + encodeURIComponent(at.c.id) + '/' + encodeURIComponent(to)) }, SL('nextStepBtn', { title: at.c.nodes[to].title }) + ' ' + arrowOn()) : null;
+}
 function chapterView(id, tab, focus) {
   const c = CH[id]; if (!c) return go(HOME());
   setAccent(document.body, c);
@@ -305,6 +314,7 @@ function chapterView(id, tab, focus) {
       })),
       h('div', { class: 'row', style: { marginTop: '22px' } },
         nextSec ? h('button', { class: 'btn primary', onclick: () => go('#/s/' + nextSec.id) }, (S.read[c.sections[0].id] ? SL('continueSec', { title: nextSec.title }) : SL('startReading'))) : h('button', { class: 'btn primary', onclick: () => go(`#/ch/${id}/practice`) }, '🎯 ' + SL('practiceChapter')),
+        nextAfterChapter(c),
         h('button', { class: 'btn ghost', onclick: () => openTutor({ kind: 'chapter', id, origin: { via: 'chapterSocratic', ch: id } }, 'socratic', null, { intent: INTENT.chSocratic }) }, `${TUTOR.avatar} ${SL('chSocratic')}`)));
   } else if (on === 'practice') {
     if (STEP_LOCK) body.append(lockNote());
