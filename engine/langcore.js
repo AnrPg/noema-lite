@@ -960,7 +960,7 @@
       sec('etymology', lcU('lc.ui.card.etymology'), p.etymology ? [p.etymology] : []),
       sec('funFacts', lcU('lc.ui.card.funFacts'), p.funFacts),
     ].filter(Boolean);
-    return { lex: lexId, lang: code, lemma: lx.lemma, pos: lx.pos, concept, gloss: concept ? C.concepts[concept]?.gloss : (lx.role || ''), parts: principalParts(C, code, lx), params: wordParams(C, lx, code),
+    return { lex: lexId, lang: code, lemma: lx.lemma, pos: lx.pos, concept, gloss: concept ? C.concepts[concept]?.gloss : (lx.role || ''), parts: principalParts(C, code, lx), params: wordParams(C, lx, code, L),
       state: k.state[lexId], flags, frequency: p.frequency || null, status: p.status || null, register: [].concat(p.register || []), connotation: p.connotation || null,
       intensity: p.intensity ?? null, feeling: p.feeling || '', synonymsNone: p.synonymsNone || '', examples, sections, hasProfile: !!lx.profile };
   }
@@ -1039,7 +1039,14 @@
    *  declaration order; every stated parameter prominent, except those shown with the headword and the `none`s (folded) — but “no plural”.
    *  German adds the forms learned with the word: der/die/das + word, genitive; present (du / er, with the vowel change), simple past,
    *  past participle with hat / ist (per meaning when the auxiliary depends on it). Principal parts no parameter shows are added at the end. */
-  function wordParams(C, lexOrId, code) {
+  /** D26: a grammar function counts as taught to the learner once its lesson's theory is read (step tr) or the lesson is passed; a function no lesson of the language teaches never hides anything. */
+  function fnTaught(C, L, code, fn) {
+    const nid = C.order.find(n => C.nodes[n].kind === 'lesson' && C.lang[code].applies[n] && lessonFunctions(C, code, n).includes(fn));
+    if (!nid) return true;
+    const S = (L && L.langs && L.langs[code]) || {};
+    return !!(S.steps?.[nid]?.tr) || (S.checks?.[nid]?.best || 0) >= PASS;
+  }
+  function wordParams(C, lexOrId, code, L) {
     const X = C.lang[code]; if (!X) return [];
     const lx = typeof lexOrId === 'string' ? X.lex[lexOrId] : lexOrId; if (!lx) return [];
     const decl = ((X.language.wordFeatures || {})[lx.pos] || []), key = lx.class ? lx.pos + '.' + lx.class : lx.pos, F = lx.features || {};
@@ -1144,7 +1151,8 @@
       derive('part:' + id, p.label, [{ ...val0(), forms: [form(p.value)] }], 5000, ++n);
     }
     for (const r of rows) if (typeof r.prominent !== 'boolean') r.prominent = r.none != null ? PARAM_NONE_TELLS.has(r.id) : !PARAM_IN_HEAD.has(r.id);
-    return rows.map((r, i) => [r, i]).sort((a, b) => a[0].order - b[0].order || a[1] - b[1]).map(([r]) => r);
+    const shown = L ? rows.filter(r => { const d = decl.find(x => x.id === r.id); return !d || !d.from || [].concat(d.from).every(fn => fnTaught(C, L, code, fn)); }) : rows;   // D26: a parameter whose grammar is not taught yet stays out of the card
+    return shown.map((r, i) => [r, i]).sort((a, b) => a[0].order - b[0].order || a[1] - b[1]).map(([r]) => r);
   }
 
   /* ---------- exercises made from stored data (§6.7 generators) — every answer comes from the course files ---------- */
@@ -4071,7 +4079,7 @@ into the learners' languages (locale facades) are not part of the package.
 * If the run is interrupted, it resumes from the progress file (below). Tell the learner how far you got.
 
 ## Binding rules
-Read ${T}/references/LANGUAGE_RULES.md (D1–D25) and ${T}/references/language-packs.md (D19) first, then ${T}/references/LANGUAGES.md §4 and §10.2. D13–D20 apply to the
+Read ${T}/references/LANGUAGE_RULES.md (D1–D26) and ${T}/references/language-packs.md (D19) first, then ${T}/references/LANGUAGES.md §4 and §10.2. D13–D20 apply to the
 package: the language fills the course's existing nodes and functions in the course's order — it never adds a node, concept,
 function or frame (report what you would add instead); every word states its whole facade (D14); every meaning is a concept
 (D15); no built-in point of view (D16); taught through the native language — neutral texts, contrast notes for every supported
@@ -4619,7 +4627,7 @@ ${name} (tokenizer, script, keyboard, voice), and the list of work/${code}-nativ
     const claimKey = (cid, tid) => `${CLAIM}${cid}:${tid}`;
 
     /* ---------- the task as text (the connector, a copied task, the in-app runner) ---------- */
-    const RULES = `The binding rules (docs/LANGUAGE_RULES.md, D1–D25 — read the whole file: noema_authoring_guide part "languages", or references/LANGUAGE_RULES.md of the skill):
+    const RULES = `The binding rules (docs/LANGUAGE_RULES.md, D1–D26 — read the whole file: noema_authoring_guide part "languages", or references/LANGUAGE_RULES.md of the skill):
 - D19 FIRST — the language is taught through each learner's NATIVE language (docs/language-packs.md): supported natives = ${D19.natives.join(' ')} (the app's UI locales). Every general text you write (summary, blocks, procedure, traps, quiz, seeAlso, facts, word profiles, features.*.none, phenomena) names NO language outside the course and never explains through English grammar ("no ‘do’", "-ing", "is not ‘the’"): it says what the language does (the course languages may be compared; an etymology may name a source language). Every comparison is a contrast note {for, rel: same|similar|different|new|trap, text}: on EVERY grammar page one for each supported native except the page's language and one each for ${D19.groups.join(', ')} (a type note names no language: "If your language …"); a word that invites a comparison gets profile.notes. A note names only its own language (examples in it), the course languages and the point. Translations into the learners' languages (locale facades) are separate tasks.
 - R1–R3 (with D19, docs/language-packs.md §2.2–§2.4): R1 the learner sees the comparisons in three sections — "From your languages" (the native's note first, then one per C1/C2 language), "Among the languages you are learning", "From other languages" (folded, every other note) — so every supported native and type gets its note; R2 every note, pitfall, subtlety, fun fact and feeling is STRUCTURED in a Markdown subset: paragraphs separated by a blank line, "- " / "1. " lists for two or more points, **bold** for the one key sentence or word, *italic* for a cited word, an example on its own line starting with "→ "; no headings, links, HTML, tables or code; R3 every word states EVERY parameter of its part of speech declared in wordFeatures (lang/<code>/WORD_PARAMETERS.md is the map, made before any word), the most distinctive first on the word card.
 - D1 every gloss, rule text, trap and feedback is written once in the master facade: English (the course's explainLang), neutral (D19); learners read it in their own language through locale facades.
@@ -4739,6 +4747,66 @@ ${task.kind === KIND.compare || task.kind === KIND.core ? '' : `5. python3 scrip
   }
   /** The voice for a tag: the learner's choice (by name) when the device has it, else the best match; null when none speaks it. */
   function pickVoice(voices, tag, name) { const vs = voicesFor(voices, tag); return (name && vs.find(v => v.name === name)) || vs[0] || null; }
+  /* ---------- reading help for text without a stored romanization (D24): rules for pointed Hebrew and vowelled Arabic ---------- */
+  const HE_C = { 'א': '', 'ב': 'v', 'ג': 'g', 'ד': 'd', 'ה': 'h', 'ו': 'v', 'ז': 'z', 'ח': 'ch', 'ט': 't', 'י': 'y', 'כ': 'ch', 'ך': 'ch', 'ל': 'l', 'מ': 'm', 'ם': 'm', 'נ': 'n', 'ן': 'n', 'ס': 's', 'ע': '', 'פ': 'f', 'ף': 'f', 'צ': 'ts', 'ץ': 'ts', 'ק': 'k', 'ר': 'r', 'ש': 'sh', 'ת': 't' };
+  const HE_HARD = { 'ב': 'b', 'כ': 'k', 'ך': 'k', 'פ': 'p', 'ף': 'p' };
+  const HE_V = { 'ְ': '', 'ֱ': 'e', 'ֲ': 'a', 'ֳ': 'o', 'ִ': 'i', 'ֵ': 'e', 'ֶ': 'e', 'ַ': 'a', 'ָ': 'a', 'ֹ': 'o', 'ֺ': 'o', 'ֻ': 'u' };
+  function romanizeHe(text) {
+    const cs = [...nfc(text)], out = []; let i = 0;
+    const isL = ch => /[א-ת]/.test(ch), isM = ch => /[֑-ׇ]/.test(ch);
+    const words = []; let cur = [];
+    while (i < cs.length) { const ch = cs[i]; if (isL(ch)) { const marks = []; let j = i + 1; while (j < cs.length && isM(cs[j])) marks.push(cs[j++]); cur.push({ ch, marks }); i = j; } else { if (cur.length) words.push({ w: cur }), cur = []; words.push({ raw: ch }); i++; } }
+    if (cur.length) words.push({ w: cur });
+    return words.map(wd => {
+      if (!wd.w) return wd.raw === '־' ? '-' : wd.raw;
+      const L = wd.w; let s = '';
+      L.forEach((l, k) => {
+        const m = new Set(l.marks), last = k === L.length - 1, prev = L[k - 1], next = L[k + 1], vow = [...m].filter(x => x in HE_V && x !== 'ְ');
+        const dag = m.has('ּ'), shva = m.has('ְ');
+        if (l.ch === 'ו' && !vow.length && !shva) { if (dag && k > 0) { s += 'u'; return; } if (m.has('ֹ') || (prev && new Set(prev.marks).has('ֹ'))) return; }
+        if (l.ch === 'ו' && m.has('ֹ')) { s += 'o'; return; }
+        if (l.ch === 'י' && !vow.length && prev) { const pm = new Set(prev.marks); if (pm.has('ִ')) return; if (pm.has('ֵ') || pm.has('ֶ')) { s += 'i'; return; } if (pm.has('ַ') || pm.has('ָ')) { s += 'i'; return; } }
+        if (l.ch === 'ה' && last && !vow.length && k > 0) return;
+        if (l.ch === 'א' || l.ch === 'ע') { if (!vow.length) return; if (k > 0) s += "'"; }
+        else if (l.ch === 'ש') s += m.has('ׂ') ? 's' : 'sh';
+        else if (l.ch === 'ת' || l.ch === 'ט') s += 't';
+        else s += dag && HE_HARD[l.ch] ? HE_HARD[l.ch] : (l.ch === 'ו' ? 'v' : HE_C[l.ch]);
+        if (l.ch === 'ח' && last && vow.some(x => x === 'ַ')) { s += ''; }   // patah furtive: the vowel is said before the letter
+        if (vow.length) { const v = HE_V[vow[0]]; if (l.ch === 'ח' && last && vow[0] === 'ַ') s = s.slice(0, -2) + 'a' + 'ch'; else s += v; }
+      });
+      return s;
+    }).join('');
+  }
+  const AR_C = { 'ء': 'ʾ', 'أ': 'ʾ', 'إ': 'ʾ', 'ؤ': 'ʾ', 'ئ': 'ʾ', 'آ': 'ʾā', 'ب': 'b', 'ت': 't', 'ث': 'ṯ', 'ج': 'j', 'ح': 'ḥ', 'خ': 'ḫ', 'د': 'd', 'ذ': 'ḏ', 'ر': 'r', 'ز': 'z', 'س': 's', 'ش': 'š', 'ص': 'ṣ', 'ض': 'ḍ', 'ط': 'ṭ', 'ظ': 'ẓ', 'ع': 'ʿ', 'غ': 'ġ', 'ف': 'f', 'ق': 'q', 'ك': 'k', 'ل': 'l', 'م': 'm', 'ن': 'n', 'ه': 'h', 'ة': 'a', 'ى': 'ā', 'ـ': '' };
+  function romanizeAr(text) {
+    const cs = [...nfc(text).replace(/ـ/g, '')], out = []; const isM = ch => /[ً-ٰٟ]/.test(ch), isL = ch => /[ء-يٱ]/.test(ch);
+    const Ls = []; let i = 0;
+    while (i < cs.length) { if (isL(cs[i])) { const marks = new Set(); let j = i + 1; while (j < cs.length && isM(cs[j])) marks.add(cs[j++]); Ls.push({ ch: cs[i], m: marks }); i = j; } else { Ls.push({ raw: cs[i] }); i++; } }
+    let s = '';
+    Ls.forEach((l, k) => {
+      if (l.raw != null) { s += l.raw; return; }
+      const { ch, m } = l, prev = Ls[k - 1], next = Ls[k + 1], wordStart = !prev || prev.raw != null, wordEnd = !next || next.raw != null;
+      const has = x => m.has(x), pm = prev && prev.m;
+      let c = '';
+      if (ch === 'ا' || ch === 'ٱ') { if (prev && prev.m && prev.m.has('َ') && !prev.m.has('ّx')) { s += 'ā'.slice(1) === '' ? '' : ''; s = s.replace(/a$/, 'ā'); } return; }
+      if (ch === 'و' || ch === 'ي') {
+        const longV = pm && !m.size && ((ch === 'و' && pm.has('ُ')) || (ch === 'ي' && pm.has('ِ')));
+        if (longV) { s = s.replace(/[ui]$/, ch === 'و' ? 'ū' : 'ī'); return; }
+        if (pm && !m.size && ((ch === 'و' && pm.has('َ')) || (ch === 'ي' && pm.has('َ')))) { s += ch === 'و' ? 'w' : 'y'; return; }
+        c = ch === 'و' ? 'w' : 'y';
+      } else c = AR_C[ch] != null ? AR_C[ch] : '';
+      if (ch === 'ة') c = wordEnd && !m.size ? '' : 't';
+      if (ch === 'ى') { s = s.replace(/a$/, ''); s += 'ā'; return; }
+      if (has('ّ')) { if (ch === 'ي' && wordEnd) { s = s.replace(/i$/, '') + 'ī'; return; } c += c; }
+      s += c;
+      if (has('َ')) s += 'a'; else if (has('ُ')) s += 'u'; else if (has('ِ')) s += 'i';
+      if (has('ً')) s += 'an'; if (has('ٌ')) s += 'un'; if (has('ٍ')) s += 'in';
+      if (has('ٰ')) s += 'ā';
+    });
+    return s;
+  }
+  /** The romanization of a word of text in a course language without a stored one: ar, he (by rules; the stored romanization of a lexeme always wins), else null. */
+  const romanize = (code, text) => code === 'he' ? romanizeHe(text) : code === 'ar' ? romanizeAr(text) : null;
   /** The text sent to the voice: the stored text as written (vowel marks included — not the faded display). */
   const speechText = (C, code, text) => nfc(text).replace(/\s+/g, ' ').trim();
 
@@ -4989,7 +5057,7 @@ ${task.kind === KIND.compare || task.kind === KIND.core ? '' : `5. python3 scrip
   for (const type of SPEECH_TYPES) GEN[type] = ctx => speechItems(ctx.C, ctx.L, ctx.code, type, { k: ctx.k, rng: ctx.rng, max: ctx.max, fn: ctx.fid,
     words: ctx.gen?.lemmas || (['dictation', 'listen_meaning', 'shadowing', 'speak'].includes(type) ? [] : undefined), pos: ctx.gen?.pos, sentences: ['dictation', 'listen_meaning', 'shadowing', 'speak'].includes(type) && !ctx.gen?.lemmas ? ctx.bank() : undefined, wordsOnly: !!ctx.gen?.lemmas });
   API.GEN = GEN;
-  Object.assign(API, { SPEECH_TAGS, SPEECH_RATE, SPEECH_TYPES, speechTag, voicesFor, pickVoice, speechText, setSpeechCaps, soundKey, homophones, spokenTones, speechItems, checkDictation, checkSpoken, spokenFold, speechRecord, speechPlan, getSpeechCaps: () => SPEECH_CAPS });   // P9 — listening and speaking
+  Object.assign(API, { romanize, fnTaught, SPEECH_TAGS, SPEECH_RATE, SPEECH_TYPES, speechTag, voicesFor, pickVoice, speechText, setSpeechCaps, soundKey, homophones, spokenTones, speechItems, checkDictation, checkSpoken, spokenFold, speechRecord, speechPlan, getSpeechCaps: () => SPEECH_CAPS });   // P9 — listening and speaking
   /* ---------- extensions by phase (P4 script, P5 grammar, P6 polyglot, P7 production): each adds its functions with Object.assign(API, {…}) in its own section below ---------- */
   root.NoemaLang = API;
   if (typeof module !== 'undefined' && module.exports) module.exports = API;

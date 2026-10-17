@@ -101,7 +101,7 @@ function paramsBlock(c, params, { compact = false, max = 6 } = {}) {
 }
 /** One line for a list of words: “plural: die Männer · genitive: des Mannes” (the first prominent parameters, as text). */
 function paramsLine(c, lid, max = 2) {
-  let ps = []; try { ps = N.wordParams(UI.C, lid, c); } catch (e) { return null; }
+  let ps = []; try { ps = N.wordParams(UI.C, lid, c, UI.L); } catch (e) { return null; }
   const bits = ps.filter(r => r.prominent && r.none == null && r.values.some(v => v.forms.length)).slice(0, max)
     .map(r => [r.title + ': ', ...r.values.flatMap((v, i) => [i ? ' · ' : '', ...v.forms.filter(f => f.role !== 'pattern').map(f => f.latin ? f.text : word(c, f.text, { sub: false }))])]);
   return bits.length ? h('span', { class: 'lx-pline tiny' }, ...bits.flatMap((b, i) => [i ? ' · ' : ' (', ...b]), ')') : null;
@@ -112,11 +112,8 @@ function wordCardView(c, lid, concept) {
   const badge = (t, cls = '') => t ? h('span', { class: 'lx-badge ' + cls }, t) : null;
   const ex = e => h('div', { class: 'lx-ex' },
     h('div', { class: 'lx-extext' }, word(c, e.text, { sub: false })),
-    e.py && UI.prefs.pinyin !== false ? h('div', { class: 'lx-help' }, e.py) : null,
-    X.language.vowelMarks && UI.prefs.marks !== false ? h('div', { class: 'lx-plain', lang: c, dir: X.language.dir }, e.plain) : null,
     h('div', { class: 'lx-tr' }, e.tr),
-    h('div', { class: 'lx-chips' }, badge('🎭 ' + regWords(e.register), 'reg'), badge('📍 ' + e.context, 'ctx'), e.senseDef ? badge('≈ ' + e.senseDef, 'sense') : null,
-      e.unknown?.length ? badge('🆕 ' + LT('lang.card.newWords', { n: e.unknown.length }), 'new') : null));
+    h('div', { class: 'lx-chips' }, badge('🎭 ' + regWords(e.register), 'reg'), badge('📍 ' + e.context, 'ctx'), e.senseDef ? badge('≈ ' + e.senseDef, 'sense') : null));   // the words not taught yet carry the dotted underline (D24); no count "relative to nothing"
   const sec = {
     senses: items => h('ol', { class: 'lx-senses' }, ...items.map(s => h('li', { class: s.current ? 'lx-cur' : null },
       h('b', {}, s.def), ' ', badge(regWords(s.register), 'reg'), s.domains ? badge(s.domains.map(d => codeWord('lang.expl.domain.', d)).join(', '), 'ctx') : null,

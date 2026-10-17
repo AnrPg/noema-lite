@@ -46,3 +46,14 @@ body.lx,body.lx :is(article,main,section,.lx-card,.lx-ex)[lang]:not(.lx-w){--lc:
 .lx-polystrip{margin:6px 0 12px}
 .lx-ow{font-style:italic}
 @media (max-width:640px){.lx-atok{font-size:18px;padding:3px 8px}.lx-roman{font-size:24px}.lx-cmprow{padding:8px 10px}}
+
+/* one line under a word: solid in the language's colour; a word not taught yet: the same line dotted (D24) */
+.lx-w.lx-run{text-decoration:none}
+.lx-w.lx-run .lx-rw,.lx-sent .lx-tok{text-decoration-line:underline;text-decoration-style:solid;text-decoration-color:color-mix(in srgb,var(--lc,transparent) 70%,transparent);text-decoration-thickness:2px;text-underline-offset:.3em}
+.lx-newword,.lx-sent .lx-tok.lx-new{text-decoration-style:dotted!important}
+.lx-rw,.lx-tok{ruby-position:under}
+rt.lx-help{font-size:.58em;font-style:italic;font-family:system-ui,sans-serif;color:var(--ink2);ruby-position:under;line-height:1.1;text-align:center;font-feature-settings:normal}
+.lx-help.lx-br{font-size:.7em;font-family:system-ui,sans-serif}
+.lx-nohelp .lx-help{display:none}
+ruby.lx-rw,ruby.lx-tok{line-height:2.2}
+ruby.lx-rw,ruby.lx-tok{margin-inline:.1em}

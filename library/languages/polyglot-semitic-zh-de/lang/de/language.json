@@ -335,7 +335,8 @@
      "senses": "senses",
      "note": "string?"
     },
-    "why": "The plural is not predictable and is learned with the noun; a meaning may have its own plural (Banken / Bänke) or none (das Land = the countryside). A meaning left out of every item has no plural. none: mass nouns (class sgt) and plural-only nouns (class plt)."
+    "why": "The plural is not predictable and is learned with the noun; a meaning may have its own plural (Banken / Bänke) or none (das Land = the countryside). A meaning left out of every item has no plural. none: mass nouns (class sgt) and plural-only nouns (class plt).",
+    "from": "fn.plural.noun"
    },
    {
     "id": "genitive",
@@ -348,7 +349,8 @@
     ],
     "type": "strings",
     "none": true,
-    "why": "The genitive singular shows the declension at a glance: des Tisches / des Tischs (-(e)s), des Jungen (n-declension), des Namens (mixed), der Frau (feminine: no ending). Dictionaries give it with the plural (der Tisch, -(e)s, -e). The first form is the usual one. none: plural-only nouns."
+    "why": "The genitive singular shows the declension at a glance: des Tisches / des Tischs (-(e)s), des Jungen (n-declension), des Namens (mixed), der Frau (feminine: no ending). Dictionaries give it with the plural (der Tisch, -(e)s, -e). The first form is the usual one. none: plural-only nouns.",
+    "from": "fn.case"
    },
    {
     "id": "declension",
@@ -369,7 +371,8 @@
      "NOUN.sgt",
      "NOUN.adj"
     ],
-    "why": "strong: des Tisches, dem Tisch (-(e)s in the genitive); weak (n-declension): den / dem / des Jungen; mixed: des Namens, den Namen; feminine: no ending in the singular; adjectival: declined like an adjective (der Verwandte, ein Verwandter)."
+    "why": "strong: des Tisches, dem Tisch (-(e)s in the genitive); weak (n-declension): den / dem / des Jungen; mixed: des Namens, den Namen; feminine: no ending in the singular; adjectival: declined like an adjective (der Verwandte, ein Verwandter).",
+    "from": "fn.case"
    },
    {
     "id": "number",
@@ -447,7 +450,8 @@
      "role": "enum:modifier|head",
      "linker": "string?"
     },
-    "why": "The last part (head) gives the gender and the plural, the parts before it narrow the meaning; linker = the joining element (Blume-n-kohl, Geburt-s-tag) or “−e” when the first part loses its final e (Kirsch-tomate). A verb as modifier appears as its stem (wohnen → Wohnzimmer). none: a simple or derived word, or two separate words."
+    "why": "The last part (head) gives the gender and the plural, the parts before it narrow the meaning; linker = the joining element (Blume-n-kohl, Geburt-s-tag) or “−e” when the first part loses its final e (Kirsch-tomate). A verb as modifier appears as its stem (wohnen → Wohnzimmer). none: a simple or derived word, or two separate words.",
+    "from": "fn.word.formation"
    },
    {
     "id": "senseForms",
@@ -473,7 +477,8 @@
     "order": 1,
     "phenomenon": "de.morph.verb.classes",
     "type": "strings",
-    "why": "infinitive – 3rd person singular present – 3rd person singular Präteritum – Partizip II: the four forms every learner memorizes (separable verbs with the particle in place: kommt an, kam an, angekommen)."
+    "why": "infinitive – 3rd person singular present – 3rd person singular Präteritum – Partizip II: the four forms every learner memorizes (separable verbs with the particle in place: kommt an, kam an, angekommen).",
+    "from": "fn.past"
    },
    {
     "id": "aux",
@@ -487,7 +492,8 @@
      "sein",
      "both"
     ],
-    "why": "sein for movement and change of state (ist gegangen), haben for the rest; both: it depends on the meaning or on a direct object (hat das Auto gefahren / ist nach Berlin gefahren) – see auxBySense."
+    "why": "sein for movement and change of state (ist gegangen), haben for the rest; both: it depends on the meaning or on a direct object (hat das Auto gefahren / ist nach Berlin gefahren) – see auxBySense.",
+    "from": "fn.past"
    },
    {
     "id": "auxBySense",
@@ -502,7 +508,8 @@
      "senses": "senses",
      "when": "string?"
     },
-    "why": "For verbs with aux “both”: which meaning (or construction) takes which auxiliary. none: one auxiliary for every meaning."
+    "why": "For verbs with aux “both”: which meaning (or construction) takes which auxiliary. none: one auxiliary for every meaning.",
+    "from": "fn.past"
    },
    {
     "id": "presentChange",
@@ -519,7 +526,8 @@
      "au>äu",
      "irregular"
     ],
-    "why": "essen → du isst, fahren → du fährst, laufen → du läufst; decides the du-forms and the du-imperative (iss!)."
+    "why": "essen → du isst, fahren → du fährst, laufen → du läufst; decides the du-forms and the du-imperative (iss!).",
+    "from": "fn.present"
    },
    {
     "id": "separable",
@@ -529,7 +537,8 @@
     "phenomenon": "de.morph.verb.separable",
     "type": "string",
     "none": true,
-    "why": "The stressed particle goes to the end of the clause (Ich komme morgen an), ge- and zu go inside it (angekommen, anzukommen)."
+    "why": "The stressed particle goes to the end of the clause (Ich komme morgen an), ge- and zu go inside it (angekommen, anzukommen).",
+    "from": "fn.past"
    },
    {
     "id": "inseparable",
@@ -549,7 +558,8 @@
      "zer"
     ],
     "none": true,
-    "why": "An unstressed prefix that never separates and takes no ge- in the participle (verlassen – verlassen)."
+    "why": "An unstressed prefix that never separates and takes no ge- in the participle (verlassen – verlassen).",
+    "from": "fn.past"
    },
    {
     "id": "governs",
@@ -565,7 +575,8 @@
      "senses": "senses",
      "note": "string?"
     },
-    "why": "The case of each object (helfen + DAT, kaufen + ACC (+ DAT)), a preposition the verb chooses (warten auf + ACC), or a predicative nominative (Ich heiße Anna). none: the verb takes no object in any meaning."
+    "why": "The case of each object (helfen + DAT, kaufen + ACC (+ DAT)), a preposition the verb chooses (warten auf + ACC), or a predicative nominative (Ich heiße Anna). none: the verb takes no object in any meaning.",
+    "from": "fn.case"
    },
    {
     "id": "reflexive",
@@ -579,7 +590,8 @@
      "case": "enum:ACC|DAT",
      "senses": "senses"
     },
-    "why": "A meaning that needs the reflexive pronoun (sich verlassen auf: ich verlasse mich). none: no reflexive meaning."
+    "why": "A meaning that needs the reflexive pronoun (sich verlassen auf: ich verlasse mich). none: no reflexive meaning.",
+    "from": "fn.reflexive"
    },
    {
     "id": "conjugation",
@@ -595,7 +607,8 @@
      "modal",
      "irregular"
     ],
-    "why": "weak: -te, ge-…-t (kaufen); strong: vowel change, ge-…-en (trinken – trank – getrunken); mixed: vowel change with weak endings (rennen – rannte – gerannt); modal: modal verbs (mögen, wollen); irregular: sein, haben."
+    "why": "weak: -te, ge-…-t (kaufen); strong: vowel change, ge-…-en (trinken – trank – getrunken); mixed: vowel change with weak endings (rennen – rannte – gerannt); modal: modal verbs (mögen, wollen); irregular: sein, haben.",
+    "from": "fn.present"
    },
    {
     "id": "participle",
@@ -613,7 +626,8 @@
      "no ge- (unstressed prefix)",
      "no ge- (-ieren verb)"
     ],
-    "why": "ge- is added when the first syllable is stressed (gekauft, gegangen); after a separable particle it goes inside (aufgewacht, angekommen); verbs with an unstressed prefix (be-, er-, ver- …) and verbs in -ieren take none (besucht, vergessen, reserviert)."
+    "why": "ge- is added when the first syllable is stressed (gekauft, gegangen); after a separable particle it goes inside (aufgewacht, angekommen); verbs with an unstressed prefix (be-, er-, ver- …) and verbs in -ieren take none (besucht, vergessen, reserviert).",
+    "from": "fn.past"
    },
    {
     "id": "imperative",
@@ -623,7 +637,8 @@
     "phenomenon": "de.morph.verb.imperative",
     "type": "strings",
     "none": true,
-    "why": "The du-form is the stem, -e optional (komm(e)!) but needed after -t, -d (warte!) and -er (erinnere!); verbs with e → i/ie keep the change and never take -e (iss!, lies!), verbs with a → ä do not (fahr!, schlaf!). ihr = the present form (kommt!), Sie = the infinitive + Sie (kommen Sie!). sein: sei! seid! seien Sie!. none: verbs without an imperative (modal verbs)."
+    "why": "The du-form is the stem, -e optional (komm(e)!) but needed after -t, -d (warte!) and -er (erinnere!); verbs with e → i/ie keep the change and never take -e (iss!, lies!), verbs with a → ä do not (fahr!, schlaf!). ihr = the present form (kommt!), Sie = the infinitive + Sie (kommen Sie!). sein: sei! seid! seien Sie!. none: verbs without an imperative (modal verbs).",
+    "from": "fn.imperative"
    },
    {
     "id": "konj2",
@@ -753,7 +768,8 @@
      "irregular",
      "not compared"
     ],
-    "why": "regular: klein – kleiner – am kleinsten; umlaut: alt – älter – am ältesten; irregular: gut – besser – am besten, hoch – höher; not compared: rosa, lila. The forms are in ADJ;CMPR and ADJ;SPRL."
+    "why": "regular: klein – kleiner – am kleinsten; umlaut: alt – älter – am ältesten; irregular: gut – besser – am besten, hoch – höher; not compared: rosa, lila. The forms are in ADJ;CMPR and ADJ;SPRL.",
+    "from": "fn.comparison"
    },
    {
     "id": "degrees",
@@ -763,7 +779,8 @@
     "phenomenon": "de.morph.adj.comparison",
     "type": "strings",
     "none": true,
-    "why": "The comparative and the predicative superlative (am …sten), with umlaut or irregular forms where the adjective has them: alt – älter – am ältesten, gut – besser – am besten. A second form after a slash is also correct. none: the adjective is not compared."
+    "why": "The comparative and the predicative superlative (am …sten), with umlaut or irregular forms where the adjective has them: alt – älter – am ältesten, gut – besser – am besten. A second form after a slash is also correct. none: the adjective is not compared.",
+    "from": "fn.comparison"
    },
    {
     "id": "stem",
@@ -773,7 +790,8 @@
     "phenomenon": "de.morph.adj.declension",
     "type": "string",
     "none": true,
-    "why": "Some adjectives change before an ending: hoch → hoh- (ein hoher Turm), dunkel → dunkl-, teuer → teur-. none: the ending is added to the base form (or the word takes no endings)."
+    "why": "Some adjectives change before an ending: hoch → hoh- (ein hoher Turm), dunkel → dunkl-, teuer → teur-. none: the ending is added to the base form (or the word takes no endings).",
+    "from": "fn.adjective"
    },
    {
     "id": "endings",
@@ -786,7 +804,8 @@
      "takes endings",
      "invariable"
     ],
-    "why": "Before a noun almost every adjective takes endings (ein alter Mann); a few colour words from other languages take none: ein rosa Kleid, eine lila Tasche (colloquially also rosanes, lilanes, oranges – not standard)."
+    "why": "Before a noun almost every adjective takes endings (ein alter Mann); a few colour words from other languages take none: ein rosa Kleid, eine lila Tasche (colloquially also rosanes, lilanes, oranges – not standard).",
+    "from": "fn.adjective"
    },
    {
     "id": "governs",
@@ -805,7 +824,8 @@
      "senses": "senses",
      "note": "string?"
     },
-    "why": "Some adjectives take a complement with a fixed preposition and case (froh über + ACC, hungrig nach + DAT) or a dative of the person who feels something (Mir ist kalt). none: no complement of its own."
+    "why": "Some adjectives take a complement with a fixed preposition and case (froh über + ACC, hungrig nach + DAT) or a dative of the person who feels something (Mir ist kalt). none: no complement of its own.",
+    "from": "fn.case"
    },
    {
     "id": "use",
@@ -831,7 +851,8 @@
     "phenomenon": "de.morph.adj.comparison",
     "type": "strings",
     "none": true,
-    "why": "Some adverbs compare: oft – öfter – am öftesten, bald – eher – am ehesten. none: not compared (or itself a comparative / superlative form)."
+    "why": "Some adverbs compare: oft – öfter – am öftesten, bald – eher – am ehesten. none: not compared (or itself a comparative / superlative form).",
+    "from": "fn.comparison"
    },
    {
     "id": "deixis",
@@ -875,7 +896,8 @@
      "senses": "senses?",
      "when": "string?"
     },
-    "why": "Every preposition decides the case of its noun; the two-way prepositions (in, an, auf …) take the dative for where? and the accusative for where to?, and some meanings take only one (über “about” + ACC, am Montag + DAT). A meaning that is not prepositional (zu “too”, auf “open”) is in no item. A contraction (im, zum) states the case of its article; senses: omitted."
+    "why": "Every preposition decides the case of its noun; the two-way prepositions (in, an, auf …) take the dative for where? and the accusative for where to?, and some meanings take only one (über “about” + ACC, am Montag + DAT). A meaning that is not prepositional (zu “too”, auf “open”) is in no item. A contraction (im, zum) states the case of its article; senses: omitted.",
+    "from": "fn.case"
    },
    {
     "id": "contractions",
@@ -891,7 +913,8 @@
      "lexeme": "lexeme?",
      "register": "string?"
     },
-    "why": "in + dem = im, zu + der = zur; some merged forms are colloquial (unterm, übers). none: no merged forms, or the word is itself a merged form."
+    "why": "in + dem = im, zu + der = zur; some merged forms are colloquial (unterm, übers). none: no merged forms, or the word is itself a merged form.",
+    "from": "fn.prep.core"
    },
    {
     "id": "pronominalAdverb",
@@ -901,7 +924,8 @@
     "phenomenon": "de.morph.pronominal.adverb",
     "type": "strings",
     "none": true,
-    "why": "For a thing (not a person) a preposition with a pronoun becomes da(r)- + preposition, in questions wo(r)- + preposition: darauf / worauf (r before a vowel), damit / womit; colloquially dr- (drauf, drin). Ich warte darauf. Worauf wartest du? none: the preposition has no such form."
+    "why": "For a thing (not a person) a preposition with a pronoun becomes da(r)- + preposition, in questions wo(r)- + preposition: darauf / worauf (r before a vowel), damit / womit; colloquially dr- (drauf, drin). Ich warte darauf. Worauf wartest du? none: the preposition has no such form.",
+    "from": "fn.connectors"
    },
    {
     "id": "position",
@@ -931,7 +955,8 @@
      "mixed",
      "strong"
     ],
-    "why": "der-words → weak endings (der gute Wein), ein-words → mixed (ein guter Wein), words that show no case themselves → strong (viel guter Wein, einige gute Freunde)."
+    "why": "der-words → weak endings (der gute Wein), ein-words → mixed (ein guter Wein), words that show no case themselves → strong (viel guter Wein, einige gute Freunde).",
+    "from": "fn.adjective"
    },
    {
     "id": "owner",
@@ -943,7 +968,8 @@
     "classes": [
      "DET.poss"
     ],
-    "why": "The possessive agrees with the owner in its stem (mein / dein / sein / ihr …) and with the thing owned in its ending (mein Bruder, meine Schwester). sein is for a masculine or neuter owner, ihr for a feminine owner and for several owners."
+    "why": "The possessive agrees with the owner in its stem (mein / dein / sein / ihr …) and with the thing owned in its ending (mein Bruder, meine Schwester). sein is for a masculine or neuter owner, ihr for a feminine owner and for several owners.",
+    "from": "fn.possessive"
    },
    {
     "id": "address",
@@ -1038,7 +1064,8 @@
     "phenomenon": "de.morph.det.possessive",
     "type": "string",
     "none": true,
-    "why": "The possessive determiner that belongs to the pronoun: ich → mein, er / es → sein, sie → ihr, Sie → Ihr. none: no possessive of its own."
+    "why": "The possessive determiner that belongs to the pronoun: ich → mein, er / es → sein, sie → ihr, Sie → Ihr. none: no possessive of its own.",
+    "from": "fn.possessive"
    },
    {
     "id": "reflexiveForm",
@@ -1047,7 +1074,8 @@
     "order": 4,
     "phenomenon": "de.morph.verb.reflexive",
     "type": "string",
-    "why": "The pronoun used when the object is the subject itself: mich / mir, dich / dir, uns, euch – and sich for every third person and for Sie (ich wasche mich, er wäscht sich, Sie waschen sich)."
+    "why": "The pronoun used when the object is the subject itself: mich / mir, dich / dir, uns, euch – and sich for every third person and for Sie (ich wasche mich, er wäscht sich, Sie waschen sich).",
+    "from": "fn.reflexive"
    },
    {
     "id": "senseForms",
@@ -1073,7 +1101,8 @@
     "order": 1,
     "phenomenon": "de.num.ordinals",
     "type": "string",
-    "why": "The ordinal adjective: -te up to 19 (der zweite), -ste from 20 (der zwanzigste); irregular erste, dritte, siebte (also siebente), achte."
+    "why": "The ordinal adjective: -te up to 19 (der zweite), -ste from 20 (der zwanzigste); irregular erste, dritte, siebte (also siebente), achte.",
+    "from": "fn.ordinals"
    },
    {
     "id": "inCompounds",
@@ -1097,7 +1126,8 @@
     "values": [
      "at the end of its clause"
     ],
-    "why": "A subordinating conjunction sends the finite verb to the end of its clause (…, weil ich Hunger habe)."
+    "why": "A subordinating conjunction sends the finite verb to the end of its clause (…, weil ich Hunger habe).",
+    "from": "fn.connectors"
    }
   ],
   "CCONJ": [
@@ -1112,7 +1142,8 @@
      "none (position zero)",
      "takes the first place (inversion)"
     ],
-    "why": "und, oder, aber, denn stand before the clause and change nothing (…, denn ich habe Hunger); weder / noch take the first place, so the verb follows them (Weder hat er angerufen, noch …)."
+    "why": "und, oder, aber, denn stand before the clause and change nothing (…, denn ich habe Hunger); weder / noch take the first place, so the verb follows them (Weder hat er angerufen, noch …).",
+    "from": "fn.connectors"
    },
    {
     "id": "paired",
@@ -1122,7 +1153,8 @@
     "phenomenon": "de.syn.paired.conjunctions",
     "type": "string",
     "none": true,
-    "why": "Two-part conjunctions: weder … noch (neither … nor), entweder … oder (either … or), zwar … aber (admittedly … but), sowohl … als auch (both … and). none: not part of a pair."
+    "why": "Two-part conjunctions: weder … noch (neither … nor), entweder … oder (either … or), zwar … aber (admittedly … but), sowohl … als auch (both … and). none: not part of a pair.",
+    "from": "fn.connectors"
    },
    {
     "id": "particleUse",

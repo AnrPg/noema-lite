@@ -30,7 +30,7 @@ function loadVoices(ms = 1200) {
   refreshVoices();
   if (SP.voices.length || !synthOK()) return Promise.resolve(SP.voices);
   return new Promise(res => {
-    let over = false; const end = () => { if (over) return; over = true; refreshVoices(); res(SP.voices); };
+    let over = false, retried = false; const end = () => { if (over) return; over = true; refreshVoices(); res(SP.voices); };
     try { speechSynthesis.addEventListener('voiceschanged', end, { once: true }); } catch (e) { }
     setTimeout(end, ms);
   });
@@ -57,7 +57,15 @@ function say(c, text, { slow = false } = {}) {
   u.rate = slow || spPrefs().rate === 'slow' ? N.SPEECH_RATE.slow : N.SPEECH_RATE.normal;
   return new Promise(res => {
     let over = false; const end = ok => { if (over) return; over = true; if (SP.utter === u) SP.utter = null; res(ok); };
-    u.onend = () => end(true); u.onerror = e => end(e && (e.error === 'interrupted' || e.error === 'canceled'));
+    u.onend = () => end(true);
+    u.onerror = e => {
+      const code = e && e.error; if (code === 'interrupted' || code === 'canceled') return end(true);
+      if (!retried && v) {   // the chosen voice failed (some phones list voices they cannot play): once more with the language only, the engine picks its own
+        retried = true; const u2 = new SpeechSynthesisUtterance(u.text); u2.lang = u.lang; u2.rate = u.rate; u2.onend = u.onend; u2.onerror = u.onerror; SP.utter = u2;
+        try { speechSynthesis.cancel(); } catch (x) { } setTimeout(() => { try { speechSynthesis.speak(u2); } catch (x) { end(false); } }, 80); return;
+      }
+      toast(LT('lang.speech.failed', { lang: langLabel(c), code: code || 'error' })); end(false);   // said aloud to the learner (with the browser's code), never silent
+    };
     SP.utter = u;   // keep it alive until it ends
     const go = () => { try { speechSynthesis.resume?.(); } catch (e) { } try { speechSynthesis.speak(u); } catch (e) { end(false); } };
     let busy = false; try { busy = speechSynthesis.speaking || speechSynthesis.pending; } catch (e) { }

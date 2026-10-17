@@ -99,7 +99,8 @@
      "takes 很",
      "no degree adverb"
     ],
-    "why": "Most adjectives take 很, 非常, 太, 有点: a bare adjective predicate sounds like a contrast (这个大，那个小), so a plain statement takes an unstressed 很. 区别词 and words of identity (一样) take none. none: a phrase that already has its degree word (很好, 还好)."
+    "why": "Most adjectives take 很, 非常, 太, 有点: a bare adjective predicate sounds like a contrast (这个大，那个小), so a plain statement takes an unstressed 很. 区别词 and words of identity (一样) take none. none: a phrase that already has its degree word (很好, 还好).",
+    "from": "fn.adjective"
    },
    {
     "id": "redup",
@@ -1375,7 +1376,8 @@
      "着",
      "在"
     ],
-    "why": "Which of 了 (done, a change), 过 (ever, once before), 着 (a lasting state: 坐着, 开着) and 在 (in progress: 在吃) the verb takes. State verbs, the copula and auxiliaries take none (*是了, *会着), change-of-state verbs no 在 or 着 (*在醒来 …), with the reason."
+    "why": "Which of 了 (done, a change), 过 (ever, once before), 着 (a lasting state: 坐着, 开着) and 在 (in progress: 在吃) the verb takes. State verbs, the copula and auxiliaries take none (*是了, *会着), change-of-state verbs no 在 or 着 (*在醒来 …), with the reason.",
+    "from": "fn.aspect"
    },
    {
     "id": "verbKind",
@@ -1413,7 +1415,8 @@
      "form": "string",
      "gloss": "string?"
     },
-    "why": "The usual complements after the verb: a result (吃完, 洗干净), a direction (走进, 想起来) and the potential with 得 / 不 inside (吃不下, 睡不着, 来得及). With a separable verb the complement goes between its parts (洗完澡). none: the verb takes none, with the reason."
+    "why": "The usual complements after the verb: a result (吃完, 洗干净), a direction (走进, 想起来) and the potential with 得 / 不 inside (吃不下, 睡不着, 来得及). With a separable verb the complement goes between its parts (洗完澡). none: the verb takes none, with the reason.",
+    "from": "fn.aspect"
    },
    {
     "id": "redup",

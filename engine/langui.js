@@ -87,6 +87,18 @@ function conceptPic(cid, cls = 'lx-temoji') {
   return img;
 }
 
+/** D24: how a written word is read, in Latin letters: the stored romanization of its lexeme when the text is its lemma, pinyin for Chinese words, else
+    rules for pointed Hebrew / vowelled Arabic (langcore romanize); null where the language has none (Latin script). */
+function romanTok(code, text, lexId) {
+  const X = LX(code), lj = X.language; if (!lj || lj.script === 'Latn' || !lj.romanization) return null;
+  const lx = lexId && X.lex[lexId], nt = N.nfc(String(text));
+  if (lx && code === 'zh') return lx.pinyin ? lx.pinyin.replace(/\s+/g, '') : null;
+  if (lx && lx.translit && (N.nfc(lx.lemma || '') === nt || (!/\p{M}/u.test(nt) && N.stripMarks(code, lx.lemma || '') === nt))) return lx.translit;   // the lemma, or its plain spelling
+  return N.romanize(code, nt) || (lx && lx.translit) || null;
+}
+/** Is the run inside a sentence of another language (prose with its own words around it)? Then the reading goes in [square brackets] after the word. */
+const wantRoman = code => UI.prefs.translit !== false || needTranslit(code);   // the learner's setting, but always until the letters are known (§5.5)
+const inProse = run => { const p = run.parentElement; if (!p) return false; let t = ''; for (const n of p.childNodes) if (n !== run && n.nodeType === 3) t += n.textContent; return /\p{L}/u.test(t); };
 /** D23: the small on-screen switch for the line under foreign words (transliteration / pinyin); only where a studied language has one. */
 function translitToggle() {
   if (!activeLangs().some(c => LX(c).language.script !== 'Latn' && LX(c).language.romanization)) return null;
@@ -100,8 +112,8 @@ function word(code, text, { lex = null, cls = '', sub = true, marks = null } = {
   const X = LX(code), shown = shownMarks(code, text, lex, marks);   // vowel marks: full · fading · none (P4, 90_script.js)
   const e = h('span', { class: 'lx-w ' + cls, lang: code, dir: X.language.dir || 'ltr' }, shown);
   if (!sub || !lex) return e;
-  const helper = code === 'zh' && UI.prefs.pinyin !== false && lex.pinyin && text === lex.lemma ? lex.pinyin.replace(/\s+/g, '')
-    : (X.language.vowelMarks || (X.language.script !== 'Latn' && X.language.romanization)) && (UI.prefs.translit !== false || needTranslit(code)) && lex.translit && text === lex.lemma ? lex.translit : null;   // always until the letters are known (§5.5)
+  const helper = code === 'zh' ? (UI.prefs.pinyin !== false && lex.pinyin && text === lex.lemma ? lex.pinyin.replace(/\s+/g, '') : null)
+    : (UI.prefs.translit !== false || needTranslit(code)) ? romanTok(code, text, lex.id) : null;   // always until the letters are known (§5.5)
   return helper ? h('span', { class: 'lx-wbox' }, e, h('span', { class: 'lx-help', lang: code === 'zh' ? 'zh-Latn-pinyin' : 'und-Latn' }, helper)) : e;
 }
 /* ---------- the learner's native language (D19, docs/language-packs.md §2.2) and words met before they are learned (D20) ---------- */
@@ -132,8 +144,9 @@ function sentenceView(c, s, unknown = []) {
   for (const k of s.tokens) {
     const l = k.l || (k.parts || []).map(p => p.l).filter(x => x && X.lex[x]).slice(-1)[0];
     if (k.p || !l || !X.lex[l]) { parts.push({ t: k.t, el: h('span', { lang: c }, k.t) }); continue; }
-    const isNew = un.has(l), el = h('span', { class: 'lx-w lx-tok' + (isNew ? ' lx-new' : ''), lang: c, title: (isNew ? '🆕 ' : '') + gloss(c, l), tabindex: '0',
-      onclick: e => { e.stopPropagation(); wordPopup(c, l); } }, shownMarks(c, k.t, X.lex[l]));
+    const isNew = un.has(l), rm = wantRoman(c) ? romanTok(c, k.t, l) : null;
+    const el = h(rm ? 'ruby' : 'span', { class: 'lx-w lx-tok' + (isNew ? ' lx-new' : ''), lang: c, title: (isNew ? '🆕 ' : '') + gloss(c, l), tabindex: '0',
+      onclick: e => { e.stopPropagation(); wordPopup(c, l); } }, shownMarks(c, k.t, X.lex[l]), rm ? h('rt', { class: 'lx-help', lang: 'und-Latn', dir: 'ltr' }, rm) : null);
     parts.push({ t: k.t, el });
   }
   const sp = X.language.tokenJoin !== 'none';
@@ -184,7 +197,10 @@ function splitRun(run, code, text) {
     const i = s.indexOf(k.t, at); if (i < 0) return;
     const last = k.parts ? k.parts[k.parts.length - 1] : k, l = wordOf(code, X, last.t, last.matches || []); if (!l) continue;
     if (i > at) parts.push(shownMarks(code, s.slice(at, i), null));
-    parts.push(h('span', { class: 'lx-rw', 'data-l': l }, shownMarks(code, k.t, X.lex[l])));
+    const rm = run.parentElement?.classList.contains('lx-wbox') || !wantRoman(code) ? null : romanTok(code, k.t, l);   // the word's own box already has its reading
+    parts.push(!rm ? h('span', { class: 'lx-rw', 'data-l': l }, shownMarks(code, k.t, X.lex[l]))
+      : inProse(run) ? h('span', { class: 'lx-rw', 'data-l': l }, shownMarks(code, k.t, X.lex[l]), h('span', { class: 'lx-help lx-br', lang: 'und-Latn', dir: 'ltr' }, ' [' + rm + ']'))
+      : h('ruby', { class: 'lx-rw', 'data-l': l }, shownMarks(code, k.t, X.lex[l]), h('rt', { class: 'lx-help', lang: 'und-Latn', dir: 'ltr' }, rm)));
     at = i + k.t.length;
   }
   if (!parts.length) return;
@@ -618,7 +634,7 @@ function paramsBlock(c, params, { compact = false, max = 6 } = {}) {
 }
 /** One line for a list of words: “plural: die Männer · genitive: des Mannes” (the first prominent parameters, as text). */
 function paramsLine(c, lid, max = 2) {
-  let ps = []; try { ps = N.wordParams(UI.C, lid, c); } catch (e) { return null; }
+  let ps = []; try { ps = N.wordParams(UI.C, lid, c, UI.L); } catch (e) { return null; }
   const bits = ps.filter(r => r.prominent && r.none == null && r.values.some(v => v.forms.length)).slice(0, max)
     .map(r => [r.title + ': ', ...r.values.flatMap((v, i) => [i ? ' · ' : '', ...v.forms.filter(f => f.role !== 'pattern').map(f => f.latin ? f.text : word(c, f.text, { sub: false }))])]);
   return bits.length ? h('span', { class: 'lx-pline tiny' }, ...bits.flatMap((b, i) => [i ? ' · ' : ' (', ...b]), ')') : null;
@@ -629,11 +645,8 @@ function wordCardView(c, lid, concept) {
   const badge = (t, cls = '') => t ? h('span', { class: 'lx-badge ' + cls }, t) : null;
   const ex = e => h('div', { class: 'lx-ex' },
     h('div', { class: 'lx-extext' }, word(c, e.text, { sub: false })),
-    e.py && UI.prefs.pinyin !== false ? h('div', { class: 'lx-help' }, e.py) : null,
-    X.language.vowelMarks && UI.prefs.marks !== false ? h('div', { class: 'lx-plain', lang: c, dir: X.language.dir }, e.plain) : null,
     h('div', { class: 'lx-tr' }, e.tr),
-    h('div', { class: 'lx-chips' }, badge('🎭 ' + regWords(e.register), 'reg'), badge('📍 ' + e.context, 'ctx'), e.senseDef ? badge('≈ ' + e.senseDef, 'sense') : null,
-      e.unknown?.length ? badge('🆕 ' + LT('lang.card.newWords', { n: e.unknown.length }), 'new') : null));
+    h('div', { class: 'lx-chips' }, badge('🎭 ' + regWords(e.register), 'reg'), badge('📍 ' + e.context, 'ctx'), e.senseDef ? badge('≈ ' + e.senseDef, 'sense') : null));   // the words not taught yet carry the dotted underline (D24); no count "relative to nothing"
   const sec = {
     senses: items => h('ol', { class: 'lx-senses' }, ...items.map(s => h('li', { class: s.current ? 'lx-cur' : null },
       h('b', {}, s.def), ' ', badge(regWords(s.register), 'reg'), s.domains ? badge(s.domains.map(d => codeWord('lang.expl.domain.', d)).join(', '), 'ctx') : null,
@@ -3864,7 +3877,7 @@ function loadVoices(ms = 1200) {
   refreshVoices();
   if (SP.voices.length || !synthOK()) return Promise.resolve(SP.voices);
   return new Promise(res => {
-    let over = false; const end = () => { if (over) return; over = true; refreshVoices(); res(SP.voices); };
+    let over = false, retried = false; const end = () => { if (over) return; over = true; refreshVoices(); res(SP.voices); };
     try { speechSynthesis.addEventListener('voiceschanged', end, { once: true }); } catch (e) { }
     setTimeout(end, ms);
   });
@@ -3891,7 +3904,15 @@ function say(c, text, { slow = false } = {}) {
   u.rate = slow || spPrefs().rate === 'slow' ? N.SPEECH_RATE.slow : N.SPEECH_RATE.normal;
   return new Promise(res => {
     let over = false; const end = ok => { if (over) return; over = true; if (SP.utter === u) SP.utter = null; res(ok); };
-    u.onend = () => end(true); u.onerror = e => end(e && (e.error === 'interrupted' || e.error === 'canceled'));
+    u.onend = () => end(true);
+    u.onerror = e => {
+      const code = e && e.error; if (code === 'interrupted' || code === 'canceled') return end(true);
+      if (!retried && v) {   // the chosen voice failed (some phones list voices they cannot play): once more with the language only, the engine picks its own
+        retried = true; const u2 = new SpeechSynthesisUtterance(u.text); u2.lang = u.lang; u2.rate = u.rate; u2.onend = u.onend; u2.onerror = u.onerror; SP.utter = u2;
+        try { speechSynthesis.cancel(); } catch (x) { } setTimeout(() => { try { speechSynthesis.speak(u2); } catch (x) { end(false); } }, 80); return;
+      }
+      toast(LT('lang.speech.failed', { lang: langLabel(c), code: code || 'error' })); end(false);   // said aloud to the learner (with the browser's code), never silent
+    };
     SP.utter = u;   // keep it alive until it ends
     const go = () => { try { speechSynthesis.resume?.(); } catch (e) { } try { speechSynthesis.speak(u); } catch (e) { end(false); } };
     let busy = false; try { busy = speechSynthesis.speaking || speechSynthesis.pending; } catch (e) { }

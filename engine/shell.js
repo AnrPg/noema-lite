@@ -215,7 +215,7 @@ window.NoemaShell = (() => {
     return pop;
   }
   let tipT = 0;
-  function tip(text) { F.layer.querySelector('.ns-tip')?.remove(); const t = h('div', { class: 'ns-tip', role: 'status' }, text); F.layer.append(t); clearTimeout(tipT); tipT = setTimeout(() => t.remove(), 5500); }
+  function tip(text) { F.layer.querySelector('.ns-tip')?.remove(); const parts = String(text).split(/(?<=[.!?;·])\s+(?=\S)/).filter(Boolean), t = h('div', { class: 'ns-tip', role: 'status', onclick: () => t.remove() }, ...(parts.length > 1 ? parts.map(x => h('p', {}, x)) : [text])); F.layer.append(t); clearTimeout(tipT); tipT = setTimeout(() => t.remove(), Math.max(5500, String(text).length * 70)); }   // a long hint reads as short lines, stays long enough to read, and goes on a tap
   const hint = text => h('button', { class: 'ns-hint', 'aria-label': L('whatIsThis'), title: L('whatIsThis'), onclick: e => { e.stopPropagation(); tip(text); } }, 'i');
   /** A sheet from the bottom (phones) / the right (wide screens). build(body, close) */
   function sheet(title, build, { cls = '' } = {}) {

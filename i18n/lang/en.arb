@@ -358,16 +358,6 @@
       }
     }
   },
-  "lang.card.newWords": "{n, plural, one {# new word} other {# new words}}",
-  "@lang.card.newWords": {
-    "description": "Badge (after 🆕) under an example sentence: how many of its words are new to the learner.",
-    "placeholders": {
-      "n": {
-        "type": "int",
-        "example": "3"
-      }
-    }
-  },
   "lang.card.thisMeaning": "this meaning",
   "@lang.card.thisMeaning": {
     "description": "Badge (after ←) on the meaning of a word that the current card is about."
@@ -2555,9 +2545,9 @@
   "@lang.write.dateWhat": {
     "description": "What the writing set “Dates” asks."
   },
-  "lang.write.help": "Sentences with the words you know ({n, number}); a few new ones are marked 🆕. The course's stored sentences decide; other answers are judged by the AI with your key and marked “AI-judged”.",
+  "lang.write.help": "Sentences with the words you know ({n, number}). A few new words are allowed; they have a dotted underline. The lesson's stored sentences decide the result. Other answers are judged by the AI with your key and marked “judged by AI”.",
   "@lang.write.help": {
-    "description": "Explanation on the writing lane. {n} = words known. Keep 🆕. “AI-judged” = lang.prod.aiJudged.",
+    "description": "Explanation on the writing lane. {n} = words known. Say “dotted underline”; the sign 🆕 is no longer used. “AI-judged” = lang.prod.aiJudged.",
     "placeholders": {
       "n": {
         "type": "int",
@@ -2603,7 +2593,7 @@
   },
   "lang.read.cardNew": "{n, number} sentences · 🆕 {u, plural, one {# new word} other {# new words}}",
   "@lang.read.cardNew": {
-    "description": "On a text card: its sentences and its new words. Keep 🆕.",
+    "description": "On a text card: its sentences and its new words. Say “dotted underline”; the sign 🆕 is no longer used.",
     "placeholders": {
       "n": {
         "type": "int",
@@ -4007,6 +3997,14 @@
         "type": "String",
         "example": "Greek"
       }
+    }
+  },
+  "lang.speech.failed": "🔇 Your browser could not say this {lang} text ({code}). Try another voice in Settings > Listening.",
+  "@lang.speech.failed": {
+    "description": "Toast when the browser could not speak a word; code is the browser's error name",
+    "placeholders": {
+      "lang": { "type": "String" },
+      "code": { "type": "String" }
     }
   },
   "lang.speech.listen": "Listen ({lang})",

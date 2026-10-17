@@ -64,6 +64,7 @@ ok(!bad.length, `every word of the pilot course gets its parameters (${bad.slice
     await pg.goto(url + '?account=anr&subject=' + SUBJ + hash);
     await pg.waitForFunction(() => window.NoemaLangUI?.UI?.C && document.querySelector('.lx-main .lx-view'), null, { timeout: 60000 });
     await pg.waitForFunction(() => { const U = NoemaLangUI.UI; return U.profiles || Object.values(U.C.lang.de.lex).some(x => x.profile); }, null, { timeout: 20000 }).catch(() => { });
+    if (!pg.__taught) await pg.evaluate(() => { const U = NoemaLangUI.UI; U.L.langs = U.L.langs || {}; for (const c of ['ar', 'de', 'he', 'zh']) { const S = U.L.langs[c] = U.L.langs[c] || {}; S.checks = S.checks || {}; for (const n of U.C.order) if (U.C.nodes[n].kind === 'lesson') S.checks[n] = Object.assign({}, S.checks[n], { best: 100 }); } });   // D26: this test looks at the full card, so every lesson counts as taught
     await pg.evaluate(() => NoemaLangUI.render ? NoemaLangUI.render() : window.dispatchEvent(new HashChangeEvent('hashchange'))); await wait(400);
   };
   const W = (c, id) => `#/w/${c}/${encodeURIComponent(id)}`;
