@@ -99,8 +99,8 @@ function frameTidy(v, r) {
 function frameHome(v, acts, hold) {
   const S = FS(), hero = v.querySelector('.lx-hero'), course = UI.C.data.course;
   const go1 = hero.querySelector('.lx-go'), todayRow = v.querySelector('.lx-today');
-  const names = UI.C.languages.map(c => info(c).label), named = names.every(n => course.title.includes(n));
-  const head = h('div', { class: 'lx-fhead' }, h('h1', {}, course.title), h('p', { class: 'ns-muted lx-fsub' }, named ? LT('lang.frame.explainedIn', { lang: info(UI.C.explainLang).name }) : LT('lang.home.sub', { langs: names.join(' · '), lang: info(UI.C.explainLang).name })));
+  const names = UI.C.languages.map(c => info(c).label), named = names.every(n => courseTitle().includes(n));
+  const head = h('div', { class: 'lx-fhead' }, h('h1', {}, courseTitle()), h('p', { class: 'ns-muted lx-fsub' }, named ? LT('lang.frame.explainedIn', { lang: info(UI.C.explainLang).name }) : LT('lang.home.sub', { langs: names.join(' · '), lang: info(UI.C.explainLang).name })));
   // the one primary action (what it is: data-go = session | start | none, its words without the label: data-rest)
   const txt = framePlain(go1?.textContent || ''), session = go1?.dataset.go === 'session', start = go1?.dataset.go === 'start' ? [txt, go1.dataset.rest || txt] : null, none = !go1 || go1.disabled;
   const todays = todayLangs();

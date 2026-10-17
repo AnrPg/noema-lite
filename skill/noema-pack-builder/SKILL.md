@@ -134,7 +134,7 @@ back `<subject_id>.noema.zip`.
 
 ## Language courses (🌍 Languages)
 Foreign-language courses are not subject packs. **Read `references/LANGUAGE_RULES.md` first — it is binding for every
-task on a language course** (the short form of decisions D1–D21; with the connector: `noema_authoring_guide` part
+task on a language course** (the short form of decisions D1–D25; with the connector: `noema_authoring_guide` part
 "languages"); the full contract is `references/LANGUAGES.md`. Courses are checked with `tools/validate_lang.py`,
 `tools/lang_refcheck.py` and `tools/lang_phenomena.py`. The hard rules, in short:
 0. **Taught through the learner's native language** (D19, `references/language-packs.md` — first): supported natives =
@@ -163,6 +163,10 @@ task on a language course** (the short form of decisions D1–D21; with the conn
 6. **No built-in point of view** (D16): describe a language for a learner of ANY background — its typological profile (`_typology/languages.json`) and phenomena tagged with feature values, covering everything it has or lacks; never "unlike English…". What is new for a learner is computed from their languages.
 8. **Contrast notes, not inline comparisons** (D16, D18, D19): general texts name no outside language; every grammar page gets `notes` for every supported native but its own language and the five type notes (`_typology/reference.json`: `supported`, `types`).
 9. **Vocabulary is its own track** (D20): sentences for the other aspects may hold up to ⌈30 %⌉ unknown words (each in the lexicon with its full facade); every field you write brings ≥ 2 sentences for every non-vocabulary node before it.
+10. **Words and theory are two tracks** (D22): a lesson is a ladder of four steps — words: lesson → words: practice → theory: reading → theory: practice. Everything that belongs to a word (forms, etymology, phonology, collocations, register, uses in context) goes in the word's facade, never only in a grammar page; grammar, syntax, culture and pragmatics go in functions.
+11. **Foundations (S00–S18) use only words taught so far** (D23): every example, sentence, drill and check of a foundation lesson uses only the words of that lesson or an earlier one on the common order (D20's ⌈30 %⌉ share starts at C01). Write the bank sentences of a foundation function with such words only; the validator reports how many are usable per lesson. Words met before their lesson get the new-word marker from the app (nothing to write).
+12. **Transliteration in the foundations** (D24): for every language with a non-Latin script every foundation word carries `translit` (zh: `pinyin` with tone marks) — shown under the word in lessons, examples, exercises and on its word card; the learner can hide it. A foundation word without it is an error.
+13. **Titles name subjects, not languages** (D25): the app shows only the languages loaded, so a lesson title or summary never lists the course's languages.
 7. **The course never ends** (D17): foundations → core C01–C48 → open-ended advanced modules, each placed on the common order.
 
 **Tasks of a language course** (the learner's ✨ new course, ✨ more sentences — connector: `noema_lang_courses` →

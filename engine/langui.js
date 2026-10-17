@@ -87,13 +87,21 @@ function conceptPic(cid, cls = 'lx-temoji') {
   return img;
 }
 
+/** D23: the small on-screen switch for the line under foreign words (transliteration / pinyin); only where a studied language has one. */
+function translitToggle() {
+  if (!activeLangs().some(c => LX(c).language.script !== 'Latn' && LX(c).language.romanization)) return null;
+  const off = () => UI.prefs.translit === false, b = h('button', { class: 'btn ghost small lx-translit', 'aria-pressed': String(!off()), onclick: () => {
+    const hide = !off(); UI.prefs.translit = !hide; UI.prefs.pinyin = !hide; save(); document.body.classList.toggle('lx-nohelp', hide); b.title = LT(hide ? 'lang.translit.show' : 'lang.translit.hide'); b.setAttribute('aria-pressed', String(!hide)); if (!$('.lx-session')) render();
+  } }, 'Aa·');
+  b.title = LT(off() ? 'lang.translit.show' : 'lang.translit.hide'); return b;
+}
 /** A foreign word as the learner should see it: right font and direction; vowel marks on/off; transliteration or pinyin under it. */
 function word(code, text, { lex = null, cls = '', sub = true, marks = null } = {}) {
   const X = LX(code), shown = shownMarks(code, text, lex, marks);   // vowel marks: full · fading · none (P4, 90_script.js)
   const e = h('span', { class: 'lx-w ' + cls, lang: code, dir: X.language.dir || 'ltr' }, shown);
   if (!sub || !lex) return e;
   const helper = code === 'zh' && UI.prefs.pinyin !== false && lex.pinyin && text === lex.lemma ? lex.pinyin.replace(/\s+/g, '')
-    : X.language.vowelMarks && (UI.prefs.translit !== false || needTranslit(code)) && lex.translit && text === lex.lemma ? lex.translit : null;   // always until the letters are known (§5.5)
+    : (X.language.vowelMarks || (X.language.script !== 'Latn' && X.language.romanization)) && (UI.prefs.translit !== false || needTranslit(code)) && lex.translit && text === lex.lemma ? lex.translit : null;   // always until the letters are known (§5.5)
   return helper ? h('span', { class: 'lx-wbox' }, e, h('span', { class: 'lx-help', lang: code === 'zh' ? 'zh-Latn-pinyin' : 'und-Latn' }, helper)) : e;
 }
 /* ---------- the learner's native language (D19, docs/language-packs.md §2.2) and words met before they are learned (D20) ---------- */
@@ -191,6 +199,7 @@ function splitRun(run, code, text) {
   const linkable = el => !el.closest(SKIP) && !(el.closest('.lx-stage') && !el.closest(IN_STAGE));
   const linkRuns = root => {
     if (!UI.C) return;
+    const kn = {}, fresh = (c, l) => { try { const k = kn[c] = kn[c] || N.known(UI.C, UI.L, c); return k.state[l] === 'locked' || k.state[l] === 'ready'; } catch (err) { return false; } };   // D24: not taught to this learner yet
     for (const run of root.querySelectorAll('.lx-w[lang]:not(.lx-tok):not([data-lk])')) {
       run.dataset.lk = '1';
       const c = run.getAttribute('lang'); if (!UI.C.lang[c] || !linkable(run)) continue;
@@ -198,6 +207,7 @@ function splitRun(run, code, text) {
       if (!run.title) run.title = info(c).label + (run.querySelector('.lx-rw') ? '' : ' · ' + LT('lang.prod.notInCourseTitle'));   // what the coloured underline means; no card to open
       for (const w of run.querySelectorAll('.lx-rw[data-l]')) if (LX(c).lex[w.dataset.l]) {
         w.classList.add('lx-tok'); w.tabIndex = 0; w.setAttribute('role', 'button'); w.title = gloss(c, w.dataset.l);
+        if (fresh(c, w.dataset.l)) { w.classList.add('lx-newword'); w.title = LT('lang.words.newTip') + ' · ' + w.title; }
       }
     }
   };
@@ -273,6 +283,8 @@ function foldRemote(e) {
 }
 addEventListener('noema:remote', foldRemote);
 const today = () => N.dayNumber();
+/** D25: the course's title names only the languages the learner studies (a title made of language names is rebuilt from them). */
+const courseTitle = () => { const c = UI.C.data.course, names = (UI.C.languages || []).map(x => info(x).label), all = (c.languages || []).map(x => info(x).label); return all.length && all.every(n => c.title.includes(n)) && names.length ? names.join(' · ') : c.title; };
 const activeLangs = () => (UI.L.settings.languages || UI.C.languages).filter(c => UI.C.lang[c]);
 /* ---------- D21: the learner chooses the languages to study (docs/LANGUAGES.md §8 *Languages to study*) ----------
    One answer for the whole app: a:settings.studyLangs (synced, in backups) — the languages the learner studies, in every course
@@ -314,9 +326,10 @@ function start({ acc, id, data, host = null, onRoute = null }) {
   applyExplanationLocale();   // D19: the explanations in the learner's native language (its facade), when one is on
   UI.lang = UI.prefs.lang && UI.C.lang[UI.prefs.lang] ? UI.prefs.lang : activeLangs()[0];
   FR.on = !!host; FR.host = host; FR.onRoute = onRoute; FR.base = host ? '#/lang/' + encodeURIComponent(id) : '';
-  document.title = `${UI.C.data.course.title} · noema-lite`;   // i18n-ignore (the course title and the app name)
+  document.title = `${courseTitle()} · noema-lite`;   // i18n-ignore (the course title and the app name)
   document.documentElement.lang = UI.C.explainLang;
   document.body.classList.add('lx');
+  document.body.classList.toggle('lx-nohelp', UI.prefs.translit === false);
   if (host) { host.replaceChildren(h('div', { class: 'lx-top lx-subbar', role: 'tablist', 'aria-label': LT('lang.shell.yourLanguages') }), h('div', { class: 'lx-main' })); frameWatch(host); }   // inside the frame: its top bar and tabs stay
   else document.body.append(h('header', { class: 'topbar lx-top' }), h('main', { class: 'lx-main' }));
   if (!wired) {
@@ -405,7 +418,7 @@ function topbar() {
   const explain = h('span', { class: 'chip lx-explain', title: LT('lang.shell.explainTitle') }, '💬 ' + info(UI.C.explainLang).name);
   if (FR.on) { t.append(...chips, h('span', { class: 'spacer' }), explain); return; }   // the frame has the title (crumbs), ⚙️ and the other courses (⋮)
   t.append(
-    h('div', { class: 'brand', onclick: () => go('#/') }, h('div', { class: 'logo' }, '🌍'), h('span', { class: 'lx-title' }, UI.C.data.course.title)),
+    h('div', { class: 'brand', onclick: () => go('#/') }, h('div', { class: 'logo' }, '🌍'), h('span', { class: 'lx-title' }, courseTitle())),
     h('span', { class: 'spacer' }), explain, ...chips,
     h('button', { class: 'iconbtn', title: LT('lang.shell.settings'), onclick: () => go('#/settings') }, '⚙️'),
     h('button', { class: 'iconbtn', title: LT('lang.shell.otherSubject'), onclick: () => window.Noema?.openSubjectPicker ? Noema.openSubjectPicker() : null }, '📚'));
@@ -448,7 +461,7 @@ function frameSummary(v) {
   try {
     const b = v.querySelector('.lx-lessonbtn'), nid = b?.dataset.node, n = nid && UI.C.nodes[nid];
     const k = `noema1:${UI.acc}:meta:langsum`, all = JSON.parse(localStorage.getItem(k) || '{}') || {};
-    all[UI.id] = { at: Date.now(), title: UI.C.data.course.title, next: n ? { node: nid, step: stepLabel(n), title: n.title } : null, lang: UI.lang };
+    all[UI.id] = { at: Date.now(), title: courseTitle(), next: n ? { node: nid, step: stepLabel(n), title: n.title } : null, lang: UI.lang };
     localStorage.setItem(k, JSON.stringify(all));
   } catch (e) { }
 }
@@ -464,7 +477,7 @@ function flagRail(cid, current, onPick) {
 
 /* ---------- home ---------- */
 VIEWS.home = (v) => {
-  if (studyChoice().none) { const ask = studyAsk(true); if (ask) { v.append(h('h1', {}, UI.C.data.course.title), ask); return; } }   // D21: none of the chosen languages is in this course
+  if (studyChoice().none) { const ask = studyAsk(true); if (ask) { v.append(h('h1', {}, courseTitle()), ask); return; } }   // D21: none of the chosen languages is in this course
   const plan = N.planSession(UI.C, UI.L, { day: today(), minutes: UI.L.settings.minutes || 20, languages: todayLangs() });   // today's languages (P6, §9.6)
   const nRev = plan.steps.filter(s => s.kind === 'review').reduce((a, s) => a + s.items.length, 0);
   const learn = plan.steps.find(s => s.kind === 'learn'), lessons = plan.steps.filter(s => s.kind === 'lesson');
@@ -472,7 +485,7 @@ VIEWS.home = (v) => {
   const counts = LT(nScript ? 'lang.home.sessionCountsScript' : 'lang.home.sessionCounts', { rev: nRev, nNew, script: nScript });   // the frame's big card shows them (data-rest)
   const ask = studyAsk(); if (ask) v.append(ask);   // D21: “Which languages do you want to study?” until the learner answers
   v.append(h('div', { class: 'lx-hero' },
-    h('h1', {}, UI.C.data.course.title),
+    h('h1', {}, courseTitle()),
     h('p', { class: 'lx-sub' }, LT('lang.home.sub', { langs: UI.C.languages.map(c => info(c).flag + ' ' + info(c).label).join(' · '), lang: info(UI.C.explainLang).name })),
     h('div', { class: 'row' },
       h('button', { class: 'btn primary lx-go', disabled: !(nRev || nNew || nScript), 'data-go': nRev || nNew || nScript ? 'session' : 'none', 'data-rest': counts, onclick: () => runSession(plan) }, nRev || nNew || nScript ? '▶ ' + LT('lang.home.session', { counts }) : '✅ ' + LT('lang.home.nothingDue')),
@@ -481,7 +494,7 @@ VIEWS.home = (v) => {
   if (lessons.length) v.append(h('h2', { class: 'lx-h2' }, '🧱 ' + LT(lessons.some(st => UI.C.nodes[st.node].stage === 'core') ? 'lang.home.nextLesson' : 'lang.home.nextFoundation')), h('div', { class: 'lx-lessons' }, ...lessons.map(st => {
     const n = UI.C.nodes[st.node];
     return h('div', { class: 'lx-card lx-lessonbtn', 'data-node': st.node }, h('div', {}, h('span', { class: 'lx-step' }, stepLabel(n)), ' ', h('b', {}, n.title), h('div', { class: 'tiny' }, st.langs.map(c => info(c).flag + ' ' + info(c).label).join(' · '))),
-      h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => go('#/lesson/' + st.node) }, LT('lang.home.open')), h('button', { class: 'btn primary', onclick: () => runLesson(st.node, st.langs) }, '▶ ' + LT('lang.home.learn'))));
+      h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => go('#/lesson/' + st.node) }, LT('lang.home.open')), continueButton(st.node, st.langs)));
   })));
   v.append(h('div', { class: 'row lx-drills' }, h('span', { class: 'tiny' }, '🏋️ ' + LT('lang.home.drills') + ' '),
     h('button', { class: 'btn ghost small', 'data-icon': 'gym', onclick: () => go('#/parts/' + UI.lang) }, '🔁 ' + LT('lang.view.parts')), ...scriptHomeButtons(),
@@ -525,11 +538,12 @@ VIEWS.node = (v, r) => {
 function conceptTile(c, { cid, lex }, k) {
   const X = LX(c), lids = cid ? (X.byConcept[cid] || []) : [lex], absent = cid && X.absent[cid];
   const st = cid ? N.conceptState(UI.C, UI.L, c, cid, k) : k.state[lex];
-  const visible = !['locked', 'ready'].includes(st) || UI.prefs.peek;
-  return h('button', { class: 'lx-tile s-' + st, onclick: () => go(cid ? '#/c/' + cid : '#/w/' + c + '/' + lex), title: STATE_LABEL[st] || '' },
+  const unmet = ['locked', 'ready'].includes(st) && !UI.prefs.peek;   // D22: every word is shown; the ones not met yet are blurred until tapped
+  const tile = h('button', { class: 'lx-tile s-' + st + (unmet ? ' lx-blur' : ''), onclick: () => { if (tile.classList.contains('lx-blur')) { tile.classList.remove('lx-blur'); return; } go(cid ? '#/c/' + cid : '#/w/' + c + '/' + lex); }, title: unmet ? LT('lang.tile.reveal') : STATE_LABEL[st] || '' },
     cid ? conceptPic(cid) : h('span', { class: 'lx-temoji' }, '🔤'),
-    h('span', { class: 'lx-tword' }, absent ? h('i', { class: 'tiny' }, '— ' + LT('lang.card.noWordShort')) : visible ? lids.map((id, i) => [i ? ' · ' : '', word(c, X.lex[id].lemma, { sub: false })]) : '?'),
+    h('span', { class: 'lx-tword' }, absent ? h('i', { class: 'tiny' }, '— ' + LT('lang.card.noWordShort')) : lids.map((id, i) => [i ? ' · ' : '', word(c, X.lex[id].lemma, { lex: X.lex[id] })])),
     h('span', { class: 'lx-tgloss' }, cid ? UI.C.concepts[cid].gloss : gloss(c, lex)));
+  return tile;
 }
 
 /* ---------- a concept: the flag card (one language at a time) + compare ---------- */
@@ -1540,7 +1554,7 @@ function runSession(plan, { only = null } = {}) {
 }
 /** The word profiles arrive after the start: a word card on screen is drawn again with them. */
 function addProfiles(map) { UI.profMap = map; const n = N.addProfiles(UI.C, facadeProfMap(map)); UI.profiles = true; if (n && ['c', 'w', 'node', 'field'].includes(UI.view) && !$('.lx-session')) render(); return n; }
-window.NoemaLangUI = { start, render, go, toHash, innerHash, FR, UI, addProfiles, save, foldRemote, ex: { exPicture, exRecognize, exProduce, exItem } };
+window.NoemaLangUI = { titleOf: id => (UI.id === id && UI.C ? courseTitle() : null), start, render, go, toHash, innerHash, FR, UI, addProfiles, save, foldRemote, ex: { exPicture, exRecognize, exProduce, exItem } };
 
 /* ---- 55_lesson.js ---- */
 /* ---------- the foundations: lessons that teach words, grammar and sentences together, every language at the same step (§6.7, D9–D11) ---------- */
@@ -1548,6 +1562,17 @@ const stepLabel = n => n.step == null ? '' : n.stage === 'core' ? 'C' + String(n
 const lessonLangs = nid => activeLangs().filter(c => LX(c).applies[nid]);
 /** Words of a lesson in one language that are still to be introduced. */
 const toIntroduce = (c, nid, k) => (LX(c).byNode[nid] || []).filter(id => k.state[id] === 'ready');
+
+/** D22: the lesson's ladder over the languages learned together (wl → wp → tr → tp): a step is done when it is done in every language. */
+function ladderOf(nid, langs) {
+  const per = langs.map(c => N.lessonSteps(UI.C, UI.L, c, nid));
+  let open = true; const steps = N.LESSON_STEPS.map((id, i) => { const done = per.every(p => p.steps[i].done), st = { id, done, open }; open = open && done; return st; });
+  const next = (steps.find(x => !x.done) || {}).id || null;
+  return { steps, next, done: !next };
+}
+const stepTitle = id => LT('lang.step.' + id);
+/** The one primary button of a lesson: Continue · <next step> (all done: review). */
+const continueButton = (nid, langs, cls = 'btn primary') => { const L = ladderOf(nid, langs); return h('button', { class: cls + ' lx-continue', 'data-step': L.next || 'done', onclick: () => runLesson(nid, langs) }, '▶ ' + (L.next ? LT('lang.step.continue', { step: stepTitle(L.next) }) : LT('lang.step.review'))); };
 
 VIEWS.lesson = (v, r) => {
   const nid = r.arg, n = UI.C.nodes[nid]; if (!n || n.kind !== 'lesson') return VIEWS.home(v);
@@ -1559,12 +1584,15 @@ VIEWS.lesson = (v, r) => {
     h('h1', {}, h('span', { class: 'lx-step' }, stepLabel(n)), ' ', n.title),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); render(); }),
       ...langs.map(x => h('span', { class: 'lx-ns ns-' + st[x] }, info(x).flag, ' ', STATE_LABEL[st[x]] || st[x], UI.L.langs[x]?.checks?.[nid] ? ' · ' + LT('lang.lesson.pct', { pct: Math.round(UI.L.langs[x].checks[nid].best * 100) }) : ''))),
+    can.length ? ladderList(nid, can) : null,
     h('div', { class: 'row lx-actions' },
-      can.length ? h('button', { class: 'btn primary', 'data-icon': can.every(x => !toIntroduce(x, nid, N.known(UI.C, UI.L, x)).length) ? 'gym' : 'plus', onclick: () => runLesson(nid, can) }, '▶ ' + LT(can.every(x => !toIntroduce(x, nid, N.known(UI.C, UI.L, x)).length) ? 'lang.lesson.practiseFlags' : 'lang.lesson.learnFlags', { flags: can.map(x => info(x).flag).join(' ') })) : h('span', { class: 'lx-note' }, '🔒 ' + LT('lang.lesson.locked')),
-      can.length ? h('button', { class: 'btn', 'data-icon': 'check', onclick: () => runLesson(nid, can, { checkOnly: true }) }, '✔ ' + LT('lang.lesson.check')) : null, deepenButton(nid, c)));
+      can.length ? continueButton(nid, can) : h('span', { class: 'lx-note' }, '🔒 ' + LT('lang.lesson.locked')), deepenButton(nid, c), translitToggle()));
+  const theoryOpen = !can.includes(c) || ladderOf(nid, [c]).steps.find(x => x.id === 'tr').open;   // D22: the theory is read after the words
   const fns = N.lessonFunctions(UI.C, c, nid);
+  if (theoryOpen) {
   if (fns.includes('fn.overview')) v.append(typologyCard());
   v.append(h('h2', { class: 'lx-h2' }, '📖 ' + LT('lang.lesson.grammarIn', { lang: info(c).name })), ...fns.map(f => grammarCard(c, f, { compact: true, onPick: x => { UI.lang = x; UI.prefs.lang = x; save(); render(); } })));
+  }
   // the same step in the other languages: their own extra points (D10)
   const extra = langs.filter(x => x !== c).map(x => [x, N.lessonFunctions(UI.C, x, nid).filter(f => !fns.includes(f))]).filter(([, f]) => f.length);
   if (extra.length) v.append(h('div', { class: 'lx-callout k-key' }, h('b', {}, '🔗 ' + LT('lang.lesson.othersLearn') + ' '),
@@ -1577,34 +1605,45 @@ VIEWS.lesson = (v, r) => {
   }
 };
 
-/** Run a lesson for some languages together: grammar (the first time) → a batch of words in every language → drills → the check once every word is in. */
-function runLesson(nid, langs, { checkOnly = false } = {}) {
-  const n = UI.C.nodes[nid], day = today(), batch = UI.L.settings.batch || 12, queue = [];
-  const K = Object.fromEntries(langs.map(c => [c, N.known(UI.C, UI.L, c)]));
-  const fresh = langs.filter(c => (LX(c).byNode[nid] || []).every(id => K[c].state[id] === 'ready') && !UI.L.langs[c]?.checks?.[nid]);
-  if (!checkOnly) {
-    // ① grammar — the first time only (it stays on the lesson page)
-    const fns = uniq(langs.flatMap(c => N.lessonFunctions(UI.C, c, nid)));
-    if (fresh.length) {
-      if (fns.includes('fn.overview') && UI.C.data.typology) queue.push({ kind: 'screen', make: () => typologyCard() });
-      for (const f of fns) queue.push({ kind: 'screen', fn: f, langs: fresh.filter(c => N.lessonFunctions(UI.C, c, nid).includes(f)) });
-    }
-    // ② words: a batch of ideas, each in every language one after the other
-    const ideas = [];
-    for (const cid of n.concepts) { const e = langs.flatMap(c => (LX(c).byConcept[cid] || []).filter(id => K[c].state[id] === 'ready' && LX(c).lex[id].node === nid).slice(0, 1).map(id => ({ lang: c, lex: id }))); if (e.length) ideas.push(e); }
-    for (const c of langs) for (const id of toIntroduce(c, nid, K[c])) if (!(LX(c).lex[id].senses || []).length) ideas.push([{ lang: c, lex: id }]);
-    for (const e of ideas.slice(0, batch)) { for (const x of e) queue.push({ kind: 'intro', ...x }); for (const x of e) queue.push({ kind: 'rec', ...x }); for (const x of e) queue.push({ kind: 'prod', ...x }); }
-    // ③ drills and sentences of the lesson's grammar, from what is known by then (made when reached)
-    queue.push({ kind: 'drills' });
-  }
-  queue.push({ kind: 'check' });
-  runQueue(queue, { nid, langs, title: `${stepLabel(n)} ${n.title}` });
+function ladderList(nid, langs) {
+  const L = ladderOf(nid, langs);
+  return h('ol', { class: 'lx-ladder' }, ...L.steps.map(st => h('li', { class: st.done ? 'done' : st.id === L.next ? 'now' : st.open ? 'open' : 'later', 'data-step': st.id }, (st.done ? '✓ ' : '') + stepTitle(st.id))));
 }
 
-function runQueue(queue, { nid, langs, title }) {
+/** Run a lesson for some languages together: grammar (the first time) → a batch of words in every language → drills → the check once every word is in. */
+function runLesson(nid, langs, { checkOnly = false, step = null } = {}) {
+  const n = UI.C.nodes[nid], batch = UI.L.settings.batch || 12, queue = [];
+  const K = Object.fromEntries(langs.map(c => [c, N.known(UI.C, UI.L, c)]));
+  const lad = ladderOf(nid, langs);
+  step = checkOnly ? 'tp' : step && lad.steps.find(x => x.id === step)?.open ? step : lad.next || 'tp';   // D22: only the step that is open
+  if (step === 'wl') {
+    // words, in a lesson form: a batch of ideas, each in every language one after the other (the "Got it" introduces them)
+    const ideas = [];
+    for (const cid of n.concepts) { const e = langs.flatMap(c => (LX(c).byConcept[cid] || []).filter(id => K[c].state[id] === 'ready' && LX(c).lex[id].node === nid).slice(0, 1).map(id => ({ lang: c, lex: id }))); if (e.length) ideas.push(e); }
+    for (const c of langs) for (const id of toIntroduce(c, nid, K[c])) if (!(LX(c).lex[id].senses || []).length && !ideas.some(e => e.some(x => x.lang === c && x.lex === id))) ideas.push([{ lang: c, lex: id }]);
+    for (const e of ideas.slice(0, batch)) for (const x of e) queue.push({ kind: 'intro', ...x });
+  } else if (step === 'wp') {
+    // practice of the words just met: recognising, then producing
+    const todo = langs.flatMap(c => (LX(c).byNode[nid] || []).filter(id => K[c].state[id] !== 'ready' && !((UI.L.langs[c]?.items?.[id] || {}).r && (UI.L.langs[c]?.items?.[id] || {}).p)).map(id => ({ lang: c, lex: id }))).slice(0, batch * 2);
+    for (const x of todo) queue.push({ kind: 'rec', ...x }); for (const x of todo) queue.push({ kind: 'prod', ...x });
+  } else if (step === 'tr') {
+    // theory: read the grammar of the lesson (and the typology overview), then it counts as read
+    const fns = uniq(langs.flatMap(c => N.lessonFunctions(UI.C, c, nid)));
+    if (fns.includes('fn.overview') && UI.C.data.typology) queue.push({ kind: 'screen', make: () => typologyCard() });
+    for (const f of fns) queue.push({ kind: 'screen', fn: f, langs: langs.filter(c => N.lessonFunctions(UI.C, c, nid).includes(f)) });
+    queue.push({ kind: 'mark', step: 'tr' });
+  } else {
+    // theory practice: drills and sentences of the lesson's grammar (made when reached), then the check
+    queue.push({ kind: 'drills' }, { kind: 'check' });
+  }
+  if (!queue.length) queue.push({ kind: 'mark', step });
+  runQueue(queue, { nid, langs, title: `${stepLabel(n)} ${n.title} · ${stepTitle(step)}`, step });
+}
+
+function runQueue(queue, { nid, langs, title, step }) {
   metNew.clear();   // the 🆕 words of this run, listed at the end (D20)
   const m = $('.lx-main'), bar = h('div', { class: 'lx-progress' }, h('i')), stage = h('div', { class: 'lx-stage' });
-  m.innerHTML = ''; m.append(h('div', { class: 'view lx-view lx-session lx-lessonrun', 'data-node': nid }, h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => { save(true); go('#/lesson/' + nid); render(); } }, '✕ ' + LT('lang.sess.stop')), h('b', { class: 'tiny' }, title), bar), stage));
+  m.innerHTML = ''; m.append(h('div', { class: 'view lx-view lx-session lx-lessonrun', 'data-node': nid }, h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => { save(true); go('#/lesson/' + nid); render(); } }, '✕ ' + LT('lang.sess.stop')), h('b', { class: 'tiny' }, title), translitToggle(), bar), stage));
   const stats = { right: 0, wrong: 0, introduced: 0 }, results = {}, retried = new Set(); let total = queue.length, i = 0;
   const day = today();
   const nextBtn = (label = LT('lang.drill.next') + ' ' + arrowOn()) => { const b = h('button', { class: 'btn primary lx-next' }, label); b.onclick = next; stage.append(h('div', { class: 'row lx-nextrow' }, b)); setTimeout(() => b.focus(), 30); };
@@ -1617,6 +1656,7 @@ function runQueue(queue, { nid, langs, title }) {
       else { let cur = a.langs[0] || langs[0]; const holder = h('div'); const draw = () => { holder.innerHTML = ''; holder.append(grammarCard(cur, a.fn, { compact: true, onPick: x => { cur = x; draw(); } })); }; draw(); stage.append(a.langs.length > 1 ? flagRail(null, cur, x => { cur = x; draw(); }) : null, holder); }
       return nextBtn(LT('lang.ex.gotIt') + ' ' + arrowOn());
     }
+    if (a.kind === 'mark') { if (a.step === 'tr') for (const c of langs) N.recordStep(UI.C, UI.L, c, nid, 'tr', day); save(true); return next(); }
     if (a.kind === 'drills') {   // expand into exercises now that the words are known
       const items = [];
       for (const c of langs) { const k = N.known(UI.C, UI.L, c); for (const f of N.lessonFunctions(UI.C, c, nid)) if (f !== 'fn.overview') for (const it of N.exercises(UI.C, UI.L, c, f, { k, max: 4 })) items.push({ kind: 'item', it }); }
@@ -1663,7 +1703,7 @@ function runQueue(queue, { nid, langs, title }) {
       Object.keys(results).length ? h('ul', {}, ...Object.entries(results).map(([c, R]) => h('li', { 'data-lang': c }, info(c).flag, ' ', info(c).label, ': ' + LT('lang.lesson.score', { c: R.c, n: R.n, pct: Math.round(R.c / R.n * 100) }) + ' — ', !['passed', 'known', 'mastered'].includes(st[c]) ? LT('lang.lesson.notYet') : R.c / R.n >= N.PASS ? '✔ ' + LT('lang.state.passed') : '✔ ' + LT('lang.lesson.passedBefore', { best: Math.round((UI.L.langs[c]?.checks?.[nid]?.best ?? 1) * 100) })))) : null,
       langs.some(c => toIntroduce(c, nid, N.known(UI.C, UI.L, c)).length) ? h('p', { class: 'tiny' }, LT('lang.lesson.moreWaiting')) : null,
       newWordsList(),
-      h('div', { class: 'row' }, qaNextLessonButton(nid, langs), h('button', { class: 'btn' + (qaNextLessonButton(nid, langs) ? '' : ' primary'), onclick: () => go('#/lesson/' + nid) }, LT('lang.lesson.back')), h('button', { class: 'btn', onclick: () => go('#/') }, LT('lang.home.map')))));
+      h('div', { class: 'row' }, step !== 'tp' && ladderOf(nid, langs).next ? continueButton(nid, langs) : qaNextLessonButton(nid, langs), h('button', { class: 'btn' + (qaNextLessonButton(nid, langs) ? '' : ' primary'), onclick: () => go('#/lesson/' + nid) }, LT('lang.lesson.back')), h('button', { class: 'btn', onclick: () => go('#/') }, LT('lang.home.map')))));
   }
   document.onkeydown = e => {
     if (!$('.lx-session')) { document.onkeydown = null; return; }
@@ -2961,7 +3001,7 @@ function persistTutor(key, ctx, hist, provider) {
   try {
     if (!window.NoemaConvos || !window.Noema?.idb) return;
     const id = TT.ids[key] = TT.ids[key] || NoemaConvos.newId();
-    NoemaConvos.put(UI.acc, { id, kind: 'tutor', mode: 'lang-' + (ctx.intent || 'chat'), subject: { id: 'lang:' + UI.id, title: UI.C.data.course.title },
+    NoemaConvos.put(UI.acc, { id, kind: 'tutor', mode: 'lang-' + (ctx.intent || 'chat'), subject: { id: 'lang:' + UI.id, title: courseTitle() },
       context: { type: ctx.fn ? 'function' : ctx.node ? 'node' : 'course', id: (ctx.fn || ctx.node || null) && `${ctx.lang}:${ctx.fn || ctx.node}`, label: ctxLabelOf(ctx) },
       model: { provider: provider === 'claude' ? 'anthropic' : 'google', name: null },
       messages: hist.filter(m => m.role !== 'error').map(m => ({ role: m.role, content: m.text, t: m.t })) }).catch(() => { });
@@ -3505,7 +3545,7 @@ Object.assign(window.NoemaLangUI, { script: { scriptInput, shownMarks, runScript
   /** ⋮ › the language › Remove this language (and the course settings): asks, removes, opens the course again without it. */
   async function removeAdded(code) {
     const a = UI.C?.data.course.added?.[code]; if (!a) return;
-    if (!confirm(LT('lang.claude.removeAsk', { lang: a.name || info(code).name, title: UI.C.data.course.title }) + '\n\n' + LT('lang.claude.removeAskSub'))) return;
+    if (!confirm(LT('lang.claude.removeAsk', { lang: a.name || info(code).name, title: courseTitle() }) + '\n\n' + LT('lang.claude.removeAskSub'))) return;
     await removePackage(UI.acc, UI.id, code);
     toast(LT('lang.claude.removed', { lang: a.name || info(code).name }), 2500);
     setTimeout(() => location.reload(), 300);
@@ -4418,8 +4458,8 @@ function frameTidy(v, r) {
 function frameHome(v, acts, hold) {
   const S = FS(), hero = v.querySelector('.lx-hero'), course = UI.C.data.course;
   const go1 = hero.querySelector('.lx-go'), todayRow = v.querySelector('.lx-today');
-  const names = UI.C.languages.map(c => info(c).label), named = names.every(n => course.title.includes(n));
-  const head = h('div', { class: 'lx-fhead' }, h('h1', {}, course.title), h('p', { class: 'ns-muted lx-fsub' }, named ? LT('lang.frame.explainedIn', { lang: info(UI.C.explainLang).name }) : LT('lang.home.sub', { langs: names.join(' · '), lang: info(UI.C.explainLang).name })));
+  const names = UI.C.languages.map(c => info(c).label), named = names.every(n => courseTitle().includes(n));
+  const head = h('div', { class: 'lx-fhead' }, h('h1', {}, courseTitle()), h('p', { class: 'ns-muted lx-fsub' }, named ? LT('lang.frame.explainedIn', { lang: info(UI.C.explainLang).name }) : LT('lang.home.sub', { langs: names.join(' · '), lang: info(UI.C.explainLang).name })));
   // the one primary action (what it is: data-go = session | start | none, its words without the label: data-rest)
   const txt = framePlain(go1?.textContent || ''), session = go1?.dataset.go === 'session', start = go1?.dataset.go === 'start' ? [txt, go1.dataset.rest || txt] : null, none = !go1 || go1.disabled;
   const todays = todayLangs();

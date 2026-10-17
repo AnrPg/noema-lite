@@ -166,6 +166,7 @@
       const items = { ...(b.items || {}) }; for (const [id, it] of Object.entries(a.items || {})) items[id] = mergeLangItem(it, items[id]);
       const out = { ...b, ...a, items }, ca = a.check, cb = b.check;
       if (isObj(ca) && isObj(cb)) { const n = (ca.day || 0) >= (cb.day || 0) ? ca : cb; out.check = { ...n, best: Math.max(ca.best || 0, cb.best || 0), tries: Math.max(ca.tries || 0, cb.tries || 0) }; }
+      if (isObj(a.steps) || isObj(b.steps)) { const st = { ...(b.steps || {}) }; for (const [x, d] of Object.entries(a.steps || {})) st[x] = st[x] == null ? d : Math.min(st[x], d); out.steps = st; }   // the ladder's stored steps (D22): the earliest day of each
       return out;
     }
     if (/:lang:[^:]+:script$/.test(k)) {   // the script stage (letters / characters, P4): per letter and track the later review wins, as for words

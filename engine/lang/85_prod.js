@@ -415,7 +415,7 @@ function persistTutor(key, ctx, hist, provider) {
   try {
     if (!window.NoemaConvos || !window.Noema?.idb) return;
     const id = TT.ids[key] = TT.ids[key] || NoemaConvos.newId();
-    NoemaConvos.put(UI.acc, { id, kind: 'tutor', mode: 'lang-' + (ctx.intent || 'chat'), subject: { id: 'lang:' + UI.id, title: UI.C.data.course.title },
+    NoemaConvos.put(UI.acc, { id, kind: 'tutor', mode: 'lang-' + (ctx.intent || 'chat'), subject: { id: 'lang:' + UI.id, title: courseTitle() },
       context: { type: ctx.fn ? 'function' : ctx.node ? 'node' : 'course', id: (ctx.fn || ctx.node || null) && `${ctx.lang}:${ctx.fn || ctx.node}`, label: ctxLabelOf(ctx) },
       model: { provider: provider === 'claude' ? 'anthropic' : 'google', name: null },
       messages: hist.filter(m => m.role !== 'error').map(m => ({ role: m.role, content: m.text, t: m.t })) }).catch(() => { });

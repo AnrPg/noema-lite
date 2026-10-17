@@ -262,7 +262,7 @@ if (fs.existsSync(path.join(PILOT, 'course.json'))) {
     const { C, L } = NoemaLangUI.UI, its = NoemaLang.deepItems(C, L, 'de', C.lang.de.byNode['fd.06'], { max: 200, perWord: 99, types: ['example_cloze', 'sense_pick'] });
     return its.find(it => (it.unknown || []).length) || null;
   });
-  ok(!!found, 'some German sentence items carry 🆕 words (D20: ≤ ⌈30 %⌉ of the words)');
+  ok(!found, 'D23: in the foundations (fd.06) no sentence item carries a word not taught yet (0 % unknown; from C01 D20 allows ≤ ⌈30 %⌉)');
 
   // ---------- phones ----------
   await page.setViewportSize({ width: 390, height: 844 });
