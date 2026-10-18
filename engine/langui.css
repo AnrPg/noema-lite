@@ -219,9 +219,8 @@ ruby.lx-rw,ruby.lx-tok,ruby.lx-ru{margin-inline:.1em}
 .lx-asplabel { font-size: .72rem; letter-spacing: .04em; text-transform: uppercase; opacity: .7; margin-left: 8px; }
 div.lx-asp, article.lx-asp, section.lx-asp, button.lx-asp { background: color-mix(in srgb, hsl(var(--asp) 60% 60%) 9%, var(--card, #fff)) !important; border-left: 3px solid hsl(var(--asp) 45% 65% / .6); }
 .lx-asp { --asp: 200; }
-.lx-asp.lx-asp-phonology { --asp: 20; } .lx-asp.lx-asp-morphology { --asp: 150; } .lx-asp.lx-asp-syntax { --asp: 215; } .lx-asp.lx-asp-semantics { --asp: 275; }
-.lx-asp.lx-asp-lexicon { --asp: 45; } .lx-asp.lx-asp-pragmatics { --asp: 335; } .lx-asp.lx-asp-writing { --asp: 100; } .lx-asp.lx-asp-listening { --asp: 185; }
-.lx-asp.lx-asp-reading { --asp: 240; } .lx-asp.lx-asp-grammar { --asp: 170; }
+.lx-asp.lx-asp-sounds { --asp: 20; } .lx-asp.lx-asp-writing { --asp: 100; } .lx-asp.lx-asp-grammar { --asp: 150; } .lx-asp.lx-asp-meaning { --asp: 275; } .lx-asp.lx-asp-use { --asp: 335; }
+.lx-asp.lx-asp-idioms { --asp: 45; } .lx-asp.lx-asp-etymology { --asp: 75; } .lx-asp.lx-asp-sayings { --asp: 5; } .lx-asp.lx-asp-culture { --asp: 300; } .lx-asp.lx-asp-listening { --asp: 185; } .lx-asp.lx-asp-reading { --asp: 240; }
 .lx-asp.lx-asp-parts { --asp: 35; } .lx-asp.lx-asp-recall { --asp: 195; } .lx-asp.lx-asp-peculiar { --asp: 305; } .lx-asp.lx-asp-lanes { --asp: 75; } .lx-asp.lx-asp-culture { --asp: 5; }
 
 /* the language home: aspect tiles, the shelf of vocabulary topics, the tools */
@@ -241,6 +240,12 @@ div.lx-asp, article.lx-asp, section.lx-asp, button.lx-asp { background: color-mi
 .lx-book:hover::after, .lx-book:focus-visible::after { opacity: 1; }
 @keyframes lx-bookin { from { opacity: 0; transform: translateY(14px) rotate(var(--lean)); } to { opacity: 1; transform: rotate(var(--lean)); } }
 @media (prefers-reduced-motion: reduce) { .lx-book { animation: none; transition: none; } .lx-lhaspects .lx-lhtile { transition: none; } }
+
+.lx-aspbox { padding: 12px 14px; border-radius: 14px; margin: 10px 0; }
+.lx-asplist { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+.lx-aspentry { display: grid; grid-template-columns: minmax(90px, 160px) 1fr; gap: 12px; padding: 8px 0; border-bottom: 1px solid hsl(var(--asp) 30% 70% / .3); }
+.lx-aspword { font-size: 1.1rem; text-decoration: none; color: inherit; }
+@media (max-width: 640px) { .lx-aspentry { grid-template-columns: 1fr; gap: 2px; } }
 /* P7 — production and reading (docs/LANGUAGES.md §6.5, §8 Tutor): the writing and reading lanes, their widgets, the tutor drawer */
 .lx-prodlanes{margin:8px 0 4px}
 .lx-lanes{display:grid;gap:8px}

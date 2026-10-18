@@ -13,10 +13,11 @@ function evenGrid(cls, tiles) {
   draw(); if (mq.addEventListener) mq.addEventListener('change', () => { if (g.isConnected) draw(); });
   return g;
 }
-/** The aspects of one language the home offers: [aspect, address, how many points]. Only an aspect the language has something for. */
+/** The aspects of one language the home offers: [aspect, address, how many grammar points]. A grammar aspect only when the language has points in it; the ones read from the word profiles always. */
 function langAspects(c) {
-  const X = LX(c), fns = Object.keys(X.grammar).filter(f => X.grammar[f] && X.grammar[f].status !== 'absent' && aspectOf(f)), n = a => fns.filter(f => aspectOf(f) === a).length;
-  return [['grammar', '#/grammar/' + c, fns.length], ...ASPECT_ORDER.filter(a => n(a)).map(a => [a, '#/aspects/' + c + '/' + a, n(a)]), ['writing', '#/aspects/' + c + '/writing', 0], ['listening', '#/aspects/' + c + '/listening', 0], ['reading', '#/aspects/' + c + '/reading', 0]];
+  const X = LX(c), fns = Object.keys(X.grammar).filter(f => X.grammar[f] && X.grammar[f].status !== 'absent' && aspectOf(f)), n = a => fns.filter(f => aspectOf(f) === a).length, pg = a => '#/aspects/' + c + '/' + a;
+  return [['sounds', pg('sounds'), n('sounds')], ['writing', pg('writing'), 0], ['grammar', pg('grammar'), n('grammar')], ['meaning', pg('meaning'), n('meaning')], ['use', pg('use'), n('use')],
+    ['idioms', pg('idioms'), 0], ['etymology', pg('etymology'), 0], ['sayings', pg('sayings'), 0], ['culture', pg('culture'), 0], ['listening', '#/listen/' + c, 0], ['reading', '#/read/' + c, 0]].filter(x => !['sounds', 'meaning'].includes(x[0]) || x[2] > 0);
 }
 /** What is not an aspect of the language but a way to practise or look at it: [view name, address]. */
 function langTools(c) {
@@ -59,7 +60,7 @@ function langHome(v) {
   }
   const asp = langAspects(c);
   v.append(h('h2', { class: 'lx-h2' }, LT('lang.hub.aspects')), evenGrid('lx-lhaspects', asp.map(([a, to, n]) =>
-    h('button', { class: 'lx-lhtile lx-asp lx-asp-' + a, 'data-aspect': a, onclick: () => go(to) }, h('b', {}, a === 'grammar' ? LT('lang.view.grammar') : LT('lang.aspect.' + a)), n ? h('span', { class: 'tiny' }, LT('lang.hub.points', { n })) : null))));
+    h('button', { class: 'lx-lhtile lx-asp lx-asp-' + a, 'data-aspect': a, onclick: () => go(to) }, h('b', {}, LT('lang.aspect.' + a)), n ? h('span', { class: 'tiny' }, LT('lang.hub.points', { n })) : null))));
   const topics = (UI.C.data.fields || []).filter(f => (f.subgroups || []).length > 1);
   if (topics.length) v.append(h('h2', { class: 'lx-h2' }, LT('lang.hub.shelf')), topicShelf(topics));
   const tools = langTools(c);

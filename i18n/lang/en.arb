@@ -116,28 +116,12 @@
   "@lang.view.aspects": {
     "description": "Aspect: a side of a language (label of a theory section / group in the library)."
   },
-  "lang.aspect.phonology": "Sounds",
-  "@lang.aspect.phonology": {
-    "description": "Aspect: a side of a language (label of a theory section / group in the library)."
-  },
   "lang.aspect.morphology": "Word forms",
   "@lang.aspect.morphology": {
     "description": "Aspect: a side of a language (label of a theory section / group in the library)."
   },
   "lang.aspect.syntax": "Sentences",
   "@lang.aspect.syntax": {
-    "description": "Aspect: a side of a language (label of a theory section / group in the library)."
-  },
-  "lang.aspect.semantics": "Meaning",
-  "@lang.aspect.semantics": {
-    "description": "Aspect: a side of a language (label of a theory section / group in the library)."
-  },
-  "lang.aspect.lexicon": "Vocabulary",
-  "@lang.aspect.lexicon": {
-    "description": "Aspect: a side of a language (label of a theory section / group in the library)."
-  },
-  "lang.aspect.pragmatics": "Use",
-  "@lang.aspect.pragmatics": {
     "description": "Aspect: a side of a language (label of a theory section / group in the library)."
   },
   "lang.aspect.writing": "Writing",
@@ -152,7 +136,50 @@
   "@lang.aspect.reading": {
     "description": "Aspect: a side of a language (label of a theory section / group in the library)."
   },
-  "lang.aspect.culture": "Culture & folk tradition",
+  "lang.aspect.sounds": "Sounds",
+  "@lang.aspect.sounds": {
+    "description": "Aspect: a side of a language (tile / page title)."
+  },
+  "lang.aspect.grammar": "Grammar",
+  "@lang.aspect.grammar": {
+    "description": "Aspect: a side of a language (tile / page title)."
+  },
+  "lang.aspect.meaning": "Meaning and vocabulary",
+  "@lang.aspect.meaning": {
+    "description": "Aspect: a side of a language (tile / page title)."
+  },
+  "lang.aspect.use": "Use and register",
+  "@lang.aspect.use": {
+    "description": "Aspect: a side of a language (tile / page title)."
+  },
+  "lang.aspect.idioms": "Idioms",
+  "@lang.aspect.idioms": {
+    "description": "Aspect: a side of a language (tile / page title)."
+  },
+  "lang.aspect.etymology": "Etymology",
+  "@lang.aspect.etymology": {
+    "description": "Aspect: a side of a language (tile / page title)."
+  },
+  "lang.aspect.sayings": "Folk tradition",
+  "@lang.aspect.sayings": {
+    "description": "Aspect: a side of a language (tile / page title)."
+  },
+  "lang.aspect.filter": "Filter by word or text",
+  "@lang.aspect.filter": {
+    "description": "Aspect page: placeholder of the filter box."
+  },
+  "lang.aspect.none": "Nothing recorded for this aspect yet.",
+  "@lang.aspect.none": {
+    "description": "Aspect page: no entries."
+  },
+  "lang.aspect.count": "{n, plural, one {# entry} other {# entries}}",
+  "@lang.aspect.count": {
+    "description": "Aspect page: how many entries are listed.",
+    "placeholders": {
+      "n": { "type": "int" }
+    }
+  },
+  "lang.aspect.culture": "Culture",
   "@lang.aspect.culture": {
     "description": "Aspect: a side of a language (label of a theory section / group in the library)."
   },
@@ -203,7 +230,7 @@
   "@lang.hub.shelf": {
     "description": "Language home: heading of the shelf of vocabulary topics (one book per topic)."
   },
-  "lang.hub.tools": "Drills and curiosities",
+  "lang.hub.tools": "Drills and peculiarities",
   "@lang.hub.tools": {
     "description": "Language home: heading of the drills and tools that are not aspects of the language."
   },
