@@ -19,7 +19,7 @@
    {
     "id": "pinyin",
     "title": "pinyin (dictionary tones)",
-    "prominent": true,
+    "prominent": false,
     "order": 7,
     "phenomenon": "zh.phon.tones",
     "type": "string",
@@ -53,7 +53,7 @@
    {
     "id": "tradPerSense",
     "title": "traditional characters per meaning",
-    "prominent": true,
+    "prominent": false,
     "order": 6,
     "phenomenon": "zh.orth.trad.manytoone",
     "type": "list",
@@ -77,7 +77,7 @@
    {
     "id": "predicative",
     "title": "as a predicate",
-    "prominent": true,
+    "prominent": false,
     "order": 1,
     "phenomenon": "zh.syntax.adjpred",
     "type": "enum",
@@ -90,7 +90,7 @@
    {
     "id": "degree",
     "title": "takes 很 (degree adverbs)",
-    "prominent": true,
+    "prominent": false,
     "order": 2,
     "phenomenon": "zh.syntax.adjpred",
     "type": "enum",
@@ -105,7 +105,7 @@
    {
     "id": "redup",
     "title": "reduplication",
-    "prominent": true,
+    "prominent": false,
     "order": 3,
     "phenomenon": "zh.morph.reduplication",
     "type": "string",
@@ -152,7 +152,7 @@
    {
     "id": "pinyin",
     "title": "pinyin (dictionary tones)",
-    "prominent": true,
+    "prominent": false,
     "order": 5,
     "phenomenon": "zh.phon.tones",
     "type": "string",
@@ -186,7 +186,7 @@
    {
     "id": "tradPerSense",
     "title": "traditional characters per meaning",
-    "prominent": true,
+    "prominent": false,
     "order": 4,
     "phenomenon": "zh.orth.trad.manytoone",
     "type": "list",
@@ -210,7 +210,7 @@
    {
     "id": "position",
     "title": "before or after its noun",
-    "prominent": true,
+    "prominent": false,
     "order": 1,
     "phenomenon": "zh.syntax.localizers",
     "type": "enum",
@@ -255,7 +255,7 @@
    {
     "id": "pinyin",
     "title": "pinyin (dictionary tones)",
-    "prominent": true,
+    "prominent": false,
     "order": 5,
     "phenomenon": "zh.phon.tones",
     "type": "string",
@@ -289,7 +289,7 @@
    {
     "id": "tradPerSense",
     "title": "traditional characters per meaning",
-    "prominent": true,
+    "prominent": false,
     "order": 4,
     "phenomenon": "zh.orth.trad.manytoone",
     "type": "list",
@@ -313,7 +313,7 @@
    {
     "id": "position",
     "title": "where the adverb stands",
-    "prominent": true,
+    "prominent": false,
     "order": 1,
     "phenomenon": "zh.syntax.adverbs",
     "type": "strings",
@@ -327,7 +327,7 @@
    {
     "id": "withNeg",
     "title": "with a negation (不 / 没)",
-    "prominent": true,
+    "prominent": false,
     "order": 2,
     "phenomenon": "zh.syntax.negation",
     "type": "string",
@@ -359,7 +359,7 @@
    {
     "id": "pinyin",
     "title": "pinyin (dictionary tones)",
-    "prominent": true,
+    "prominent": false,
     "order": 4,
     "phenomenon": "zh.phon.tones",
     "type": "string",
@@ -393,7 +393,7 @@
    {
     "id": "tradPerSense",
     "title": "traditional characters per meaning",
-    "prominent": true,
+    "prominent": false,
     "order": 3,
     "phenomenon": "zh.orth.trad.manytoone",
     "type": "list",
@@ -458,7 +458,7 @@
    {
     "id": "pinyin",
     "title": "pinyin (dictionary tones)",
-    "prominent": true,
+    "prominent": false,
     "order": 5,
     "phenomenon": "zh.phon.tones",
     "type": "string",
@@ -492,7 +492,7 @@
    {
     "id": "tradPerSense",
     "title": "traditional characters per meaning",
-    "prominent": true,
+    "prominent": false,
     "order": 4,
     "phenomenon": "zh.orth.trad.manytoone",
     "type": "list",
@@ -565,7 +565,7 @@
    {
     "id": "pinyin",
     "title": "pinyin (dictionary tones)",
-    "prominent": true,
+    "prominent": false,
     "order": 4,
     "phenomenon": "zh.phon.tones",
     "type": "string",
@@ -599,7 +599,7 @@
    {
     "id": "tradPerSense",
     "title": "traditional characters per meaning",
-    "prominent": true,
+    "prominent": false,
     "order": 3,
     "phenomenon": "zh.orth.trad.manytoone",
     "type": "list",
@@ -654,7 +654,7 @@
    {
     "id": "pinyin",
     "title": "pinyin (dictionary tones)",
-    "prominent": true,
+    "prominent": false,
     "order": 4,
     "phenomenon": "zh.phon.tones",
     "type": "string",
@@ -688,7 +688,7 @@
    {
     "id": "tradPerSense",
     "title": "traditional characters per meaning",
-    "prominent": true,
+    "prominent": false,
     "order": 3,
     "phenomenon": "zh.orth.trad.manytoone",
     "type": "list",
@@ -751,7 +751,7 @@
    {
     "id": "pinyin",
     "title": "pinyin (dictionary tones)",
-    "prominent": true,
+    "prominent": false,
     "order": 5,
     "phenomenon": "zh.phon.tones",
     "type": "string",
@@ -785,7 +785,7 @@
    {
     "id": "tradPerSense",
     "title": "traditional characters per meaning",
-    "prominent": true,
+    "prominent": false,
     "order": 4,
     "phenomenon": "zh.orth.trad.manytoone",
     "type": "list",
@@ -819,7 +819,7 @@
    {
     "id": "measurePerSense",
     "title": "measure word(s) per meaning",
-    "prominent": true,
+    "prominent": false,
     "order": 2,
     "phenomenon": "zh.syntax.measure",
     "type": "list",
@@ -884,7 +884,7 @@
    {
     "id": "pinyin",
     "title": "pinyin (dictionary tones)",
-    "prominent": true,
+    "prominent": false,
     "order": 6,
     "phenomenon": "zh.phon.tones",
     "type": "string",
@@ -918,7 +918,7 @@
    {
     "id": "tradPerSense",
     "title": "traditional characters per meaning",
-    "prominent": true,
+    "prominent": false,
     "order": 5,
     "phenomenon": "zh.orth.trad.manytoone",
     "type": "list",
@@ -942,7 +942,7 @@
    {
     "id": "withMeasure",
     "title": "with a measure word",
-    "prominent": true,
+    "prominent": false,
     "order": 1,
     "phenomenon": [
      "zh.syntax.measure",
@@ -955,7 +955,7 @@
    {
     "id": "ordinal",
     "title": "ordinal (第 …)",
-    "prominent": true,
+    "prominent": false,
     "order": 2,
     "phenomenon": "zh.num.ordinal",
     "type": "string",
@@ -987,7 +987,7 @@
    {
     "id": "pinyin",
     "title": "pinyin (dictionary tones)",
-    "prominent": true,
+    "prominent": false,
     "order": 4,
     "phenomenon": "zh.phon.tones",
     "type": "string",
@@ -1021,7 +1021,7 @@
    {
     "id": "tradPerSense",
     "title": "traditional characters per meaning",
-    "prominent": true,
+    "prominent": false,
     "order": 3,
     "phenomenon": "zh.orth.trad.manytoone",
     "type": "list",
@@ -1083,7 +1083,7 @@
    {
     "id": "pinyin",
     "title": "pinyin (dictionary tones)",
-    "prominent": true,
+    "prominent": false,
     "order": 4,
     "phenomenon": "zh.phon.tones",
     "type": "string",
@@ -1117,7 +1117,7 @@
    {
     "id": "tradPerSense",
     "title": "traditional characters per meaning",
-    "prominent": true,
+    "prominent": false,
     "order": 3,
     "phenomenon": "zh.orth.trad.manytoone",
     "type": "list",
@@ -1141,7 +1141,7 @@
    {
     "id": "plural",
     "title": "plural form",
-    "prominent": true,
+    "prominent": false,
     "order": 1,
     "phenomenon": "zh.morph.men",
     "type": "string",
@@ -1173,7 +1173,7 @@
    {
     "id": "pinyin",
     "title": "pinyin (dictionary tones)",
-    "prominent": true,
+    "prominent": false,
     "order": 5,
     "phenomenon": "zh.phon.tones",
     "type": "string",
@@ -1207,7 +1207,7 @@
    {
     "id": "tradPerSense",
     "title": "traditional characters per meaning",
-    "prominent": true,
+    "prominent": false,
     "order": 4,
     "phenomenon": "zh.orth.trad.manytoone",
     "type": "list",
@@ -1276,7 +1276,7 @@
    {
     "id": "pinyin",
     "title": "pinyin (dictionary tones)",
-    "prominent": true,
+    "prominent": false,
     "order": 11,
     "phenomenon": "zh.phon.tones",
     "type": "string",
@@ -1310,7 +1310,7 @@
    {
     "id": "tradPerSense",
     "title": "traditional characters per meaning",
-    "prominent": true,
+    "prominent": false,
     "order": 10,
     "phenomenon": "zh.orth.trad.manytoone",
     "type": "list",
@@ -1350,7 +1350,7 @@
    {
     "id": "neg",
     "title": "negated with 不, 没 or both",
-    "prominent": true,
+    "prominent": false,
     "order": 2,
     "phenomenon": "zh.syntax.negation",
     "type": "enum",

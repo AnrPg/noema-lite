@@ -25,7 +25,7 @@ of the word's distinctive parameters — `lang/<code>/WORD_PARAMETERS.md` + `wor
 every word states every parameter of its part of speech (a value or `{"none": "<why>"}`); the validator checks the map,
 every word and the checklist of the language's type.
 
-**Then read `references/LANGUAGE_RULES.md` (binding, D1–D27).** The full contract is `references/LANGUAGES.md`
+**Then read `references/LANGUAGE_RULES.md` (binding, D1–D28).** The full contract is `references/LANGUAGES.md`
 (§4 the content model, §6.7 generators, §7.4 refills, §10 these tasks, §11 the checks). The JSON Schema of every file:
 `schemas/noema.lang.v1.schema.json`. The mini course in the repository (`tests/fixtures/lang-mini`) is a small,
 hand-checked example of every file.

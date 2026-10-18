@@ -3,7 +3,7 @@
 **Who must follow this file:** every agent and every person that writes code, content, briefs, tools or designs for the
 language courses — Claude Code sessions, Cowork sessions, subagents that write words, grammar or sentences, the Claude
 skill (`noema-pack-builder`), the connector's tasks, and anyone changing the language part. It is the short, binding
-form of the decisions D1–D27 in `docs/LANGUAGES.md` (the full contract). If the two ever disagree, `docs/LANGUAGES.md`
+form of the decisions D1–D28 in `docs/LANGUAGES.md` (the full contract). If the two ever disagree, `docs/LANGUAGES.md`
 wins and this file is fixed in the same commit. `tests/lang_rules.py` fails when a decision of `docs/LANGUAGES.md` is
 missing here or when one of the places below does not point to this file.
 
@@ -139,6 +139,10 @@ package `tools/lang_course.py package` and `langcore.checkLangPackage`, which th
   writing) needs exercises in the practice of the lesson that teaches the word, and the lesson's check must ask about every
   section the lesson's words carry. Registers, traps and synonym shades come first: they are where learners go wrong. A
   section with data and no exercise is a defect, not a gap to leave.
+- **D28** **A card shows the parameters that differ; the rest sit under “More”.** Store every parameter a word can carry, but set
+  `prominent: true` only on those that vary from word to word and cannot be worked out (gender, plural, governed case,
+  binyan, measure word). A parameter that is almost always the same, follows a rule, or is rare gets `prominent: false` (it is
+  folded under “More”). Never list the reading (`translit`, `pinyin`): it is under the word.
 
 ## C. Checklist for every task (copy it into every brief)
 - [ ] I read `docs/LANGUAGE_RULES.md` and the sections of `docs/LANGUAGES.md` my task touches.

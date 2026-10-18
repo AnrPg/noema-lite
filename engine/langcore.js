@@ -4079,7 +4079,7 @@ into the learners' languages (locale facades) are not part of the package.
 * If the run is interrupted, it resumes from the progress file (below). Tell the learner how far you got.
 
 ## Binding rules
-Read ${T}/references/LANGUAGE_RULES.md (D1–D27) and ${T}/references/language-packs.md (D19) first, then ${T}/references/LANGUAGES.md §4 and §10.2. D13–D20 apply to the
+Read ${T}/references/LANGUAGE_RULES.md (D1–D28) and ${T}/references/language-packs.md (D19) first, then ${T}/references/LANGUAGES.md §4 and §10.2. D13–D20 apply to the
 package: the language fills the course's existing nodes and functions in the course's order — it never adds a node, concept,
 function or frame (report what you would add instead); every word states its whole facade (D14); every meaning is a concept
 (D15); no built-in point of view (D16); taught through the native language — neutral texts, contrast notes for every supported
@@ -4627,7 +4627,7 @@ ${name} (tokenizer, script, keyboard, voice), and the list of work/${code}-nativ
     const claimKey = (cid, tid) => `${CLAIM}${cid}:${tid}`;
 
     /* ---------- the task as text (the connector, a copied task, the in-app runner) ---------- */
-    const RULES = `The binding rules (docs/LANGUAGE_RULES.md, D1–D27 — read the whole file: noema_authoring_guide part "languages", or references/LANGUAGE_RULES.md of the skill):
+    const RULES = `The binding rules (docs/LANGUAGE_RULES.md, D1–D28 — read the whole file: noema_authoring_guide part "languages", or references/LANGUAGE_RULES.md of the skill):
 - D19 FIRST — the language is taught through each learner's NATIVE language (docs/language-packs.md): supported natives = ${D19.natives.join(' ')} (the app's UI locales). Every general text you write (summary, blocks, procedure, traps, quiz, seeAlso, facts, word profiles, features.*.none, phenomena) names NO language outside the course and never explains through English grammar ("no ‘do’", "-ing", "is not ‘the’"): it says what the language does (the course languages may be compared; an etymology may name a source language). Every comparison is a contrast note {for, rel: same|similar|different|new|trap, text}: on EVERY grammar page one for each supported native except the page's language and one each for ${D19.groups.join(', ')} (a type note names no language: "If your language …"); a word that invites a comparison gets profile.notes. A note names only its own language (examples in it), the course languages and the point. Translations into the learners' languages (locale facades) are separate tasks.
 - R1–R3 (with D19, docs/language-packs.md §2.2–§2.4): R1 the learner sees the comparisons in three sections — "From your languages" (the native's note first, then one per C1/C2 language), "Among the languages you are learning", "From other languages" (folded, every other note) — so every supported native and type gets its note; R2 every note, pitfall, subtlety, fun fact and feeling is STRUCTURED in a Markdown subset: paragraphs separated by a blank line, "- " / "1. " lists for two or more points, **bold** for the one key sentence or word, *italic* for a cited word, an example on its own line starting with "→ "; no headings, links, HTML, tables or code; R3 every word states EVERY parameter of its part of speech declared in wordFeatures (lang/<code>/WORD_PARAMETERS.md is the map, made before any word), the most distinctive first on the word card.
 - D1 every gloss, rule text, trap and feedback is written once in the master facade: English (the course's explainLang), neutral (D19); learners read it in their own language through locale facades.
@@ -4785,7 +4785,7 @@ ${task.kind === KIND.compare || task.kind === KIND.core ? '' : `5. python3 scrip
     let s = '';
     Ls.forEach((l, k) => {   // the article: ال- is «al-», with the sun letters «aṭ-ṭ…» (the lām is assimilated and the next letter carries a šadda)
       const n1 = Ls[k + 1], n2 = Ls[k + 2], st = !Ls[k - 1] || Ls[k - 1].raw != null;
-      if (st && (l.ch === 'ا' || l.ch === 'ٱ') && n1 && n1.ch === 'ل' && !n1.m.size && n2 && n2.ch && l.m.size === 0 || (st && (l.ch === 'ا' || l.ch === 'ٱ') && n1 && n1.ch === 'ل' && n2 && n2.ch && n2.m.has('ّ'))) { l.art = true; n1.skip = true; if (n2.m.has('ّ') && AR_C[n2.ch] != null) { n2.nodouble = true; l.sun = AR_C[n2.ch]; } }
+      if (st && (l.ch === 'ا' || l.ch === 'ٱ') && !l.m.size && n1 && n1.ch === 'ل' && [...n1.m].every(x => x === 'ْ') && n2 && n2.ch) { l.art = true; n1.skip = true; if (n2.m.has('ّ') && AR_C[n2.ch] != null) { n2.nodouble = true; l.sun = AR_C[n2.ch]; } }
     });
     Ls.forEach((l, k) => {
       if (l.raw != null) { s += l.raw; return; }

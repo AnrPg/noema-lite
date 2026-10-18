@@ -355,7 +355,7 @@
    {
     "id": "declension",
     "title": "singular declension",
-    "prominent": true,
+    "prominent": false,
     "order": 4,
     "phenomenon": "de.morph.noun.weak",
     "type": "enum",
@@ -543,7 +543,7 @@
    {
     "id": "inseparable",
     "title": "inseparable prefix",
-    "prominent": true,
+    "prominent": false,
     "order": 6,
     "phenomenon": "de.morph.verb.inseparable",
     "type": "enum",
@@ -774,7 +774,7 @@
    {
     "id": "degrees",
     "title": "comparative and superlative",
-    "prominent": true,
+    "prominent": false,
     "order": 2,
     "phenomenon": "de.morph.adj.comparison",
     "type": "strings",
@@ -785,7 +785,7 @@
    {
     "id": "stem",
     "title": "stem before an ending",
-    "prominent": true,
+    "prominent": false,
     "order": 3,
     "phenomenon": "de.morph.adj.declension",
     "type": "string",
@@ -796,7 +796,7 @@
    {
     "id": "endings",
     "title": "endings",
-    "prominent": true,
+    "prominent": false,
     "order": 4,
     "phenomenon": "de.morph.adj.invariable",
     "type": "enum",
@@ -846,7 +846,7 @@
    {
     "id": "comparison",
     "title": "comparative and superlative",
-    "prominent": true,
+    "prominent": false,
     "order": 1,
     "phenomenon": "de.morph.adj.comparison",
     "type": "strings",
@@ -857,7 +857,7 @@
    {
     "id": "deixis",
     "title": "direction hin / her",
-    "prominent": true,
+    "prominent": false,
     "order": 2,
     "phenomenon": "de.lex.deixis.hin.her",
     "type": "enum",
@@ -902,7 +902,7 @@
    {
     "id": "contractions",
     "title": "merged with the article",
-    "prominent": true,
+    "prominent": false,
     "order": 2,
     "phenomenon": "de.syn.prep.contraction",
     "type": "list",
@@ -919,7 +919,7 @@
    {
     "id": "pronominalAdverb",
     "title": "da- / wo- form",
-    "prominent": true,
+    "prominent": false,
     "order": 3,
     "phenomenon": "de.morph.pronominal.adverb",
     "type": "strings",
@@ -946,7 +946,7 @@
    {
     "id": "adjAfter",
     "title": "adjective endings after it",
-    "prominent": true,
+    "prominent": false,
     "order": 1,
     "phenomenon": "de.morph.adj.declension",
     "type": "enum",
@@ -961,7 +961,7 @@
    {
     "id": "owner",
     "title": "owner",
-    "prominent": true,
+    "prominent": false,
     "order": 2,
     "phenomenon": "de.morph.det.possessive",
     "type": "string",
@@ -974,7 +974,7 @@
    {
     "id": "address",
     "title": "addressee",
-    "prominent": true,
+    "prominent": false,
     "order": 3,
     "phenomenon": "de.prag.address",
     "type": "enum",
@@ -1045,7 +1045,7 @@
    {
     "id": "address",
     "title": "addressee",
-    "prominent": true,
+    "prominent": false,
     "order": 2,
     "phenomenon": "de.prag.address",
     "type": "enum",
@@ -1059,7 +1059,7 @@
    {
     "id": "possessive",
     "title": "possessive",
-    "prominent": true,
+    "prominent": false,
     "order": 3,
     "phenomenon": "de.morph.det.possessive",
     "type": "string",
@@ -1097,7 +1097,7 @@
    {
     "id": "ordinal",
     "title": "ordinal (der …)",
-    "prominent": true,
+    "prominent": false,
     "order": 1,
     "phenomenon": "de.num.ordinals",
     "type": "string",
@@ -1119,7 +1119,7 @@
    {
     "id": "verbPosition",
     "title": "position of the finite verb",
-    "prominent": true,
+    "prominent": false,
     "order": 1,
     "phenomenon": "de.syn.verb.final",
     "type": "enum",
@@ -1134,7 +1134,7 @@
    {
     "id": "verbPosition",
     "title": "effect on word order",
-    "prominent": true,
+    "prominent": false,
     "order": 1,
     "phenomenon": "de.syn.v2",
     "type": "enum",

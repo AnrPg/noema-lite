@@ -642,7 +642,8 @@ function paramRow(c, r, compact) {
 /** The parameters block (R3): the prominent ones always visible, in the declared order; the rest (and the uninformative “none”s) folded.
  *  compact (lesson intro, lists): the first prominent ones only, without meanings and notes. */
 function paramsBlock(c, params, { compact = false, max = 6 } = {}) {
-  if (!params || !params.length) return null;
+  params = (params || []).filter(r => r.id !== 'translit' && r.id !== 'pinyin');   // the reading is already under the word
+  if (!params.length) return null;
   const top = params.filter(r => r.prominent), rest = params.filter(r => !r.prominent);
   if (compact) { const rows = top.filter(r => r.none == null).slice(0, max); return rows.length ? h('div', { class: 'lx-params lx-pcompact' }, ...rows.map(r => paramRow(c, r, true))) : null; }
   return h('section', { class: 'lx-params', 'aria-label': LT('lang.card.params.label') },

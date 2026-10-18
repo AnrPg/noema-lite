@@ -189,7 +189,7 @@
    {
     "id": "pluralShape",
     "title": "how the plural is built",
-    "prominent": true,
+    "prominent": false,
     "order": 3,
     "phenomenon": [
      "he.morph.plural",
@@ -213,7 +213,7 @@
    {
     "id": "construct",
     "title": "construct forms (“the … of”)",
-    "prominent": true,
+    "prominent": false,
     "order": 4,
     "phenomenon": "he.morph.construct",
     "type": "list",
@@ -230,7 +230,7 @@
    {
     "id": "possessive",
     "title": "with a possessive ending (“my …”)",
-    "prominent": true,
+    "prominent": false,
     "order": 5,
     "phenomenon": "he.morph.poss-suffix",
     "type": "list",
@@ -257,7 +257,7 @@
    {
     "id": "pattern",
     "title": "noun pattern (mishkal)",
-    "prominent": true,
+    "prominent": false,
     "order": 7,
     "phenomenon": "he.morph.mishkal",
     "type": "string",
@@ -268,7 +268,7 @@
    {
     "id": "spelling",
     "title": "everyday spelling (no vowel points)",
-    "prominent": true,
+    "prominent": false,
     "order": 8,
     "phenomenon": "he.orth.ktiv-male",
     "type": "string",
@@ -364,7 +364,7 @@
    {
     "id": "rootClass",
     "title": "weak-root class (gizra)",
-    "prominent": true,
+    "prominent": false,
     "order": 3,
     "phenomenon": "he.morph.weak-roots",
     "type": "strings",
@@ -411,7 +411,7 @@
    {
     "id": "infinitive",
     "title": "infinitive (to …)",
-    "prominent": true,
+    "prominent": false,
     "order": 6,
     "phenomenon": "he.morph.infinitive",
     "type": "string",
@@ -434,7 +434,7 @@
    {
     "id": "spelling",
     "title": "everyday spelling (no vowel points)",
-    "prominent": true,
+    "prominent": false,
     "order": 8,
     "phenomenon": "he.orth.ktiv-male",
     "type": "string",
@@ -513,7 +513,7 @@
    {
     "id": "inflection",
     "title": "feminine and plural",
-    "prominent": true,
+    "prominent": false,
     "order": 1,
     "phenomenon": "he.morph.adjective",
     "type": "list",
@@ -539,7 +539,7 @@
    {
     "id": "pattern",
     "title": "adjective pattern",
-    "prominent": true,
+    "prominent": false,
     "order": 3,
     "phenomenon": "he.morph.adj-patterns",
     "type": "string",
@@ -564,7 +564,7 @@
    {
     "id": "spelling",
     "title": "everyday spelling (no vowel points)",
-    "prominent": true,
+    "prominent": false,
     "order": 5,
     "phenomenon": "he.orth.ktiv-male",
     "type": "string",
@@ -610,7 +610,7 @@
    {
     "id": "spelling",
     "title": "everyday spelling (no vowel points)",
-    "prominent": true,
+    "prominent": false,
     "order": 2,
     "phenomenon": "he.orth.ktiv-male",
     "type": "string",
@@ -676,7 +676,7 @@
    {
     "id": "construct",
     "title": "form before a noun (construct)",
-    "prominent": true,
+    "prominent": false,
     "order": 3,
     "phenomenon": "he.numbers.gender",
     "type": "list",
@@ -692,7 +692,7 @@
    {
     "id": "position",
     "title": "position relative to the noun",
-    "prominent": true,
+    "prominent": false,
     "order": 4,
     "phenomenon": "he.syntax.word-order",
     "type": "enum",
@@ -705,7 +705,7 @@
    {
     "id": "spelling",
     "title": "everyday spelling (no vowel points)",
-    "prominent": true,
+    "prominent": false,
     "order": 5,
     "phenomenon": "he.orth.ktiv-male",
     "type": "string",
@@ -755,7 +755,7 @@
    {
     "id": "object",
     "title": "as a definite direct object",
-    "prominent": true,
+    "prominent": false,
     "order": 3,
     "phenomenon": "he.syntax.object-et",
     "type": "string",
@@ -766,7 +766,7 @@
    {
     "id": "spelling",
     "title": "everyday spelling (no vowel points)",
-    "prominent": true,
+    "prominent": false,
     "order": 4,
     "phenomenon": "he.orth.ktiv-male",
     "type": "string",
@@ -815,7 +815,7 @@
    {
     "id": "position",
     "title": "position relative to the noun",
-    "prominent": true,
+    "prominent": false,
     "order": 2,
     "phenomenon": "he.syntax.word-order",
     "type": "enum",
@@ -828,7 +828,7 @@
    {
     "id": "spelling",
     "title": "everyday spelling (no vowel points)",
-    "prominent": true,
+    "prominent": false,
     "order": 3,
     "phenomenon": "he.orth.ktiv-male",
     "type": "string",
@@ -864,7 +864,7 @@
    {
     "id": "prefix",
     "title": "written onto the next word",
-    "prominent": true,
+    "prominent": false,
     "order": 1,
     "phenomenon": "he.orth.prefix-clitics",
     "type": "bool",
@@ -889,7 +889,7 @@
    {
     "id": "suffixSet",
     "title": "type of personal endings",
-    "prominent": true,
+    "prominent": false,
     "order": 3,
     "phenomenon": "he.morph.prep-suffix",
     "type": "enum",
@@ -906,7 +906,7 @@
    {
     "id": "withArticle",
     "title": "with the article",
-    "prominent": true,
+    "prominent": false,
     "order": 4,
     "phenomenon": [
      "he.orth.prefix-clitics",
@@ -919,7 +919,7 @@
    {
     "id": "spelling",
     "title": "everyday spelling (no vowel points)",
-    "prominent": true,
+    "prominent": false,
     "order": 5,
     "phenomenon": "he.orth.ktiv-male",
     "type": "string",
@@ -950,7 +950,7 @@
    {
     "id": "allomorphs",
     "title": "forms by the next sound",
-    "prominent": true,
+    "prominent": false,
     "order": 2,
     "phenomenon": "he.orth.prefix-vowels",
     "type": "string",
@@ -960,7 +960,7 @@
    {
     "id": "spelling",
     "title": "everyday spelling (no vowel points)",
-    "prominent": true,
+    "prominent": false,
     "order": 3,
     "phenomenon": "he.orth.ktiv-male",
     "type": "string",
@@ -981,7 +981,7 @@
    {
     "id": "prefix",
     "title": "written onto the next word",
-    "prominent": true,
+    "prominent": false,
     "order": 1,
     "phenomenon": "he.orth.prefix-clitics",
     "type": "bool",
@@ -1001,7 +1001,7 @@
    {
     "id": "spelling",
     "title": "everyday spelling (no vowel points)",
-    "prominent": true,
+    "prominent": false,
     "order": 3,
     "phenomenon": "he.orth.ktiv-male",
     "type": "string",
@@ -1047,7 +1047,7 @@
    {
     "id": "spelling",
     "title": "everyday spelling (no vowel points)",
-    "prominent": true,
+    "prominent": false,
     "order": 3,
     "phenomenon": "he.orth.ktiv-male",
     "type": "string",
@@ -1068,7 +1068,7 @@
    {
     "id": "spelling",
     "title": "everyday spelling (no vowel points)",
-    "prominent": true,
+    "prominent": false,
     "order": 1,
     "phenomenon": "he.orth.ktiv-male",
     "type": "string",
