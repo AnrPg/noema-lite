@@ -433,7 +433,23 @@ function applyExplanationLocale() {
 /** Is the course on screen? (inside the frame the learner may be on another tab) */
 const shown = () => !FR.on || (!!FR.host?.isConnected && innerHash() != null);
 function go(hash) { const full = toHash(hash); if (location.hash === full) render(); else location.hash = full; }
-function route() { const p = (innerHash() || '#/').slice(2).split('/').map(x => { try { return decodeURIComponent(x); } catch (e) { return x; } }); return { name: p[0] || 'home', arg: p[1] || null, arg2: p[2] || null }; }
+/** Views that take the language as their first argument (#/listen/he), and the ones that take it as their second (#/fn/<fid>/he, #/w/he/<word>). */
+const LANG_ARG1 = ['script', 'listen', 'read', 'write', 'grammar', 'parts', 'peculiar', 'recall', 'aspects', 'w'], LANG_ARG2 = ['fn'];
+function route() {
+  const p = (innerHash() || '#/').slice(2).split('/').map(x => { try { return decodeURIComponent(x); } catch (e) { return x; } });
+  const r = { name: p[0] || 'home', arg: p[1] || null, arg2: p[2] || null };
+  if (UI.scope) {   // a page of one language (#/lang/he/…): the language in the rest of the address is that one — one source of truth
+    if (LANG_ARG1.includes(r.name)) r.arg = UI.scope; else if (LANG_ARG2.includes(r.name)) r.arg2 = UI.scope;
+  }
+  return r;
+}
+/** The address of the same page for another language: the codes of the course's languages in it become the new one. */
+const inScope = (inner, c) => inner.split('/').map(x => UI.C.lang[x] ? c : x).join('/');
+/** The strip of languages follows what the page picks (a page of all languages that shows one language at a time): the chip of that language is on. */
+function syncStrip() {
+  if (UI.scope || !FR.on) return;
+  document.querySelectorAll('.lx-subbar .lx-flagchip, .lx-top .lx-flagchip').forEach(b => b.classList.toggle('on', FR.pick ? b.dataset.lang === FR.pick.cur : b.classList.contains('lx-allchip')));
+}
 
 function topbar() {
   const t = $('.lx-top'); if (!t) return; t.innerHTML = '';
@@ -444,11 +460,12 @@ function topbar() {
       h('span', { class: 'lx-flag' }, info(c).flag), c.toUpperCase(), h('span', { class: 'lx-ring', style: { '--p': total ? Math.round(kn / total * 100) : 0 } }));
   });
   const explain = h('span', { class: 'chip lx-explain', title: LT('lang.shell.explainTitle') }, '💬 ' + info(UI.C.explainLang).name);
-  if (FR.on) {   // the strip of your languages: All · one chip per language; a chip opens the same page for that language (the address carries it)
-    const inner = (innerHash() || '#/').replace(/^#\/?/, ''), tail = inner ? '/' + inner : '';
-    const to = c => { const b = c ? '#/lang/' + encodeURIComponent(c) : '#/lang/' + encodeURIComponent(UI.id); location.hash = b + tail; };
-    const all = h('button', { class: 'chip lx-flagchip lx-allchip' + (UI.scope ? '' : ' on'), title: LT('lang.hub.allTip'), onclick: () => to(null) }, LT('lang.hub.all'));
-    t.append(all, ...activeLangs().map(c => { const b = chips[activeLangs().indexOf(c)]; b.classList.toggle('on', c === UI.scope); b.onclick = null; b.addEventListener('click', () => to(c)); return b; }), h('span', { class: 'spacer' }), explain); return;
+  if (FR.on) {   // the strip of your languages: All · one chip per language. On a page of one language a chip opens the same page for that language (the address carries it); on a page of all, it picks the language shown
+    const inner = (innerHash() || '#/').replace(/^#\/?/, '');
+    const open = c => { location.hash = (c ? '#/lang/' + encodeURIComponent(c) : '#/lang/' + encodeURIComponent(UI.id)) + (inner ? '/' + (c ? inScope(inner, c) : inner) : ''); };
+    const all = h('button', { class: 'chip lx-flagchip lx-allchip' + (UI.scope ? '' : ' on'), title: LT('lang.hub.allTip'), onclick: () => open(null) }, LT('lang.hub.all'));
+    const pick = c => { if (!UI.scope && FR.pick) FR.pick.fn(c); else open(c); };
+    t.append(all, ...activeLangs().map((c, i) => { const b = chips[i]; b.classList.toggle('on', c === UI.scope); b.onclick = () => pick(c); return b; }), h('span', { class: 'spacer' }), explain); syncStrip(); return;
   }   // the frame has the title (crumbs), ⚙️ and the other courses (⋮)
   t.append(
     h('div', { class: 'brand', onclick: () => go('#/') }, h('div', { class: 'logo' }, '🌍'), h('span', { class: 'lx-title' }, courseTitle())),
@@ -475,6 +492,7 @@ function viewLabel(r) {
 }
 function render() {
   if (!UI.C || !shown()) return;
+  FR.pick = null; if (UI.scope) UI.lang = UI.scope;   // one picker, one source of truth
   const r = route(); UI.view = r.name;
   if (!document.querySelector('.lx-session') && studyChoice().langs.join() !== UI.C.languages.join()) return restudy();   // D21: the choice changed elsewhere
   if (!document.querySelector('.lx-session')) applyExplanationLocale();   // D19: the native language may have changed (Me › Language and appearance, another device)
@@ -501,6 +519,7 @@ function frameSummary(v) {
 /** A row of flag buttons for a card: one per course language, with the state of the concept in it. */
 function flagRail(cid, current, onPick) {
   if (UI.C.languages.length < 2) return null;   // D21: one language studied — a course of one language, no switch
+  if (FR.on) { if (!UI.scope) { FR.pick = { cur: current, fn: onPick }; syncStrip(); } return null; }   // in the frame the strip of languages is the only picker
   return h('div', { class: 'lx-rail', role: 'tablist', 'aria-label': LT('lang.shell.languages') }, ...UI.C.languages.map(c => {
     const st = cid ? N.conceptState(UI.C, UI.L, c, cid) : null;
     return h('button', { class: 'lx-railbtn' + (c === current ? ' on' : ''), 'data-lang': c, role: 'tab', 'aria-selected': c === current ? 'true' : 'false', title: `${info(c).label} — ${STATE_LABEL[st] || ''}`, onclick: () => onPick(c) },
@@ -553,11 +572,25 @@ function nodeList() {
    the language has (its libraries, topics, drills). A tap on a language opens this page, never a lesson. ---------- */
 /** The languages the page shows: the one in the address, else all the learner studies. */
 const scopeLangs = () => UI.scope && UI.C.lang[UI.scope] ? [UI.scope] : activeLangs();
-/** The library of one language: [view name, address, shown?] — the labels are the views' own (lang.view.<name>). */
-function langLibrary(c) {
-  const lj = LX(c).language, nonLatin = lj.script !== 'Latn';
-  return [['script', '#/script/' + c, nonLatin], ['listen', '#/listen/' + c, true], ['read', '#/read/' + c, true], ['write', '#/write/' + c, true], ['grammar', '#/grammar/' + c, true], ['aspects', '#/aspects/' + c, true],
-    ['parts', '#/parts/' + c, true], ['peculiar', '#/peculiar/' + c, !!UI.C.data.world], ['recall', '#/recall/' + c, true], ['lanes', '#/lanes', UI.C.languages.length > 1]].filter(x => x[2]);
+/** The aspects of one language the home offers: [aspect, address, how many points]. Only an aspect the language has something for. */
+function langAspects(c) {
+  const X = LX(c), fns = Object.keys(X.grammar).filter(f => X.grammar[f] && X.grammar[f].status !== 'absent' && aspectOf(f)), n = a => fns.filter(f => aspectOf(f) === a).length;
+  return [...ASPECT_ORDER.filter(a => n(a)).map(a => [a, '#/aspects/' + c + '/' + a, n(a)]), ['writing', '#/aspects/' + c + '/writing', 0], ['listening', '#/aspects/' + c + '/listening', 0], ['reading', '#/aspects/' + c + '/reading', 0]];
+}
+/** What is not an aspect of the language but a way to practise or look at it: [view name, address]. */
+function langTools(c) {
+  return [['parts', '#/parts/' + c], ['recall', '#/recall/' + c], ['peculiar', '#/peculiar/' + c, !!UI.C.data.world], ['lanes', '#/lanes', UI.C.languages.length > 1]].filter(x => x[2] !== false);
+}
+/** The topics of the vocabulary as a shelf of books: one book per topic, each its own colour, height and lean. */
+function topicShelf(topics) {
+  const PAL = [350, 28, 48, 95, 150, 185, 215, 255, 290, 320], hash = t => [...t].reduce((a, ch) => (a * 31 + ch.charCodeAt(0)) % 997, 7), per = 7, rows = [];
+  for (let i = 0; i < topics.length; i += per) rows.push(topics.slice(i, i + per));
+  return h('div', { class: 'lx-shelf' }, ...rows.map((row, ri) => h('div', { class: 'lx-shelfrow' }, ...row.map((f, i) => {
+    const k = hash(f.field), n = PAL[(ri * 3 + i * 3 + k % 3) % PAL.length], len = [...f.title].length, w = 38 + (k % 4) * 5, ht = 96 + (k % 5) * 8 + Math.min(len, 26) * 4, lean = (k % 7 === 0 ? 7 : k % 11 === 0 ? -6 : 0);
+    const book = h('button', { class: 'lx-book', title: f.title, onclick: () => go('#/sort/' + encodeURIComponent(f.field)) }, h('span', { class: 'lx-spine' }, f.title));
+    for (const [k, v] of Object.entries({ '--h': n, '--bw': w + 'px', '--bh': ht + 'px', '--lean': lean + 'deg', '--d': (ri * per + i) * 70 + 'ms' })) book.style.setProperty(k, v);   // custom properties need setProperty
+    return book;
+  }))));
 }
 function langHome(v) {
   const c = UI.scope, X = LX(c), inf = info(c), k = N.known(UI.C, UI.L, c);
@@ -582,13 +615,12 @@ function langHome(v) {
       ...(all || path.length <= to - from ? [] : [h('button', { class: 'lx-lhstep', onclick: () => draw(true) }, '… +' + (path.length - (to - from)))])); };
     draw(false); v.append(h('h2', { class: 'lx-h2' }, LT('lang.hub.path')), row);
   }
-  v.append(h('h2', { class: 'lx-h2' }, LT('lang.hub.library')), h('div', { class: 'lx-lhlib' }, ...langLibrary(c).map(([name, to]) => h('button', { class: 'lx-lhtile', 'data-view': name, onclick: () => go(to) }, LT('lang.view.' + name)))));
+  v.append(h('h2', { class: 'lx-h2' }, LT('lang.hub.aspects', { lang: inf.label })), h('div', { class: 'lx-lhaspects' }, ...langAspects(c).map(([a, to, n]) =>
+    h('button', { class: 'lx-lhtile lx-asp lx-asp-' + a, 'data-aspect': a, onclick: () => go(to) }, h('b', {}, LT('lang.aspect.' + a)), n ? h('span', { class: 'tiny' }, LT('lang.hub.points', { n })) : null))));
   const topics = (UI.C.data.fields || []).filter(f => (f.subgroups || []).length > 1);
-  if (topics.length) v.append(h('h2', { class: 'lx-h2' }, LT('lang.hub.topics')), h('div', { class: 'lx-lhlib' }, ...topics.map(f => h('button', { class: 'lx-lhtile', onclick: () => go('#/sort/' + encodeURIComponent(f.field)) }, f.title))));
-  v.append(h('div', { class: 'row lx-lhmore' },
-    h('button', { class: 'btn ghost small', onclick: () => { location.hash = '#/search'; } }, '🔎 ' + LT('lang.hub.search')),
-    UI.C.languages.length > 1 ? h('button', { class: 'btn ghost small', onclick: () => go('#/cmp') }, '⇄ ' + LT('lang.view.cmp')) : null,
-    h('button', { class: 'btn ghost small', onclick: () => go('#/settings') }, LT('lang.view.settings'))));
+  if (topics.length) v.append(h('h2', { class: 'lx-h2' }, LT('lang.hub.shelf')), topicShelf(topics));
+  const tools = langTools(c);
+  v.append(h('h2', { class: 'lx-h2' }, LT('lang.hub.tools')), h('div', { class: 'lx-lhlib' }, ...tools.map(([name, to]) => h('button', { class: 'lx-lhtile lx-lhtool', 'data-view': name, onclick: () => go(to) }, LT('lang.view.' + name)))));
 }
 
 /* ---- 13_aspects.js ---- */
@@ -601,18 +633,17 @@ const aspectRank = fid => { const i = ASPECT_ORDER.indexOf(aspectOf(fid)); retur
 const aspectLabel = a => h('span', { class: 'lx-asplabel' }, LT('lang.aspect.' + a));
 /** The library of one language by aspect: its grammar points grouped by the side of the language they are about, then the views for writing, listening & speaking, reading and culture. */
 VIEWS.aspects = (v, r) => {
-  const c = r.arg && UI.C.lang[r.arg] ? r.arg : UI.lang, X = LX(c);
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go(UI.scope ? '#/' : '#/') }, arrowBack() + ' ' + LT('lang.card.map'))),
+  const c = r.arg && UI.C.lang[r.arg] ? r.arg : UI.lang, X = LX(c), only = ASPECT_ORDER.concat(['writing', 'listening', 'reading']).includes(r.arg2) ? r.arg2 : null;
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, arrowBack() + ' ' + LT('lang.card.map'))),
     h('h1', {}, LT('lang.view.aspects'), h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).label}`)));
   const fns = Object.keys(X.grammar).filter(f => X.grammar[f] && X.grammar[f].status !== 'absent' && aspectOf(f));
-  const sec = (a, items) => items.length ? h('section', { class: 'lx-card lx-asp lx-asp-' + a, 'data-aspect': a }, h('h3', {}, aspectLabel(a)),
+  const sec = (a, items) => items.length && (!only || only === a) ? h('section', { class: 'lx-card lx-asp lx-asp-' + a, 'data-aspect': a }, h('h3', {}, aspectLabel(a)),
     h('div', { class: 'lx-lhlib' }, ...items)) : null;
   const btn = (txt, to) => h('button', { class: 'lx-lhtile', onclick: () => go(to) }, txt);
-  const lj = X.language, nonLatin = lj.script !== 'Latn';
-  for (const a of ASPECT_ORDER) v.append(sec(a, fns.filter(f => aspectOf(f) === a).sort((x, y) => UI.C.order.indexOf(UI.C.functions[x].after?.[0]) - UI.C.order.indexOf(UI.C.functions[y].after?.[0])).map(f => btn(UI.C.functions[f].title, '#/fn/' + encodeURIComponent(f) + '/' + c))));
-  v.append(sec('writing', [nonLatin ? btn(LT('lang.view.script'), '#/script/' + c) : null, btn(LT('lang.view.write'), '#/write/' + c)].filter(Boolean)),
-    sec('listening', [btn(LT('lang.view.listen'), '#/listen/' + c)]), sec('reading', [btn(LT('lang.view.read'), '#/read/' + c)]),
-    UI.C.data.world ? sec('culture', [btn(LT('lang.view.peculiar'), '#/peculiar/' + c)]) : null);
+  const nonLatin = X.language.script !== 'Latn', first = f => UI.C.order.indexOf((UI.C.functions[f].after || [])[0]);
+  v.append(...[...ASPECT_ORDER.map(a => sec(a, fns.filter(f => aspectOf(f) === a).sort((x, y) => first(x) - first(y)).map(f => btn(UI.C.functions[f].title, '#/fn/' + encodeURIComponent(f) + '/' + c)))),
+    sec('writing', [nonLatin ? btn(LT('lang.view.script'), '#/script/' + c) : null, btn(LT('lang.view.write'), '#/write/' + c)].filter(Boolean)),
+    sec('listening', [btn(LT('lang.view.listen'), '#/listen/' + c)]), sec('reading', [btn(LT('lang.view.read'), '#/read/' + c)])].filter(Boolean));
 };
 
 /* ---- 20_cards.js ---- */
@@ -4607,22 +4638,15 @@ function frameHome(v, acts, hold) {
     const nid = b.dataset.node, n = UI.C.nodes[nid];
     return { label: n.title, sub: framePlain(b.querySelector('.tiny')?.textContent || ''), txt: stepLabel(n) || '·', run: () => go('#/lesson/' + nid) };
   })));
-  // your languages: one row each, its lanes in a sheet
-  const rows = [...v.querySelectorAll('.lx-prodlanes .lx-lanerow[data-lang]')];
-  const langItems = rows.map(row => {
-    const c = row.dataset.lang, bs = [...row.querySelectorAll('button')]; bs.forEach(b => hold.append(b));
-    const k = N.known(UI.C, UI.L, c), kn = Object.values(k.state).filter(s => ['known_r', 'known_p', 'mastered'].includes(s)).length;
-    const added = (course.added || {})[c], rm = added ? [{ label: LT('lang.frame.removeLang'), sub: LT('lang.frame.addedClaude'), icon: 'trash', key: 'remove-' + c, run: () => NoemaLangUI.claude.removeAdded(c) }] : [];
-    return { label: info(c).label, sub: kn ? LT('lang.frame.wordsKnown', { n: kn }) : added ? LT('lang.frame.addedClaude') : null, flag: info(c).flag, key: 'lang-' + c, run: () => frameSheet(`${info(c).flag} ${info(c).label}`, () => [...bs.map(b => frameAct(b)), ...rm]) };
-  });
+  // your languages are the strip at the top and each one's own home: no list of them here; what only the combined course has (across languages, drills) is in ⋮
+  for (const row of v.querySelectorAll('.lx-prodlanes .lx-lanerow[data-lang]')) row.querySelectorAll('button').forEach(b => hold.append(b));
   // ⋮ › a language added by a package (docs/LANGUAGES.md §10.2) › Remove this language
   for (const c of Object.keys(course.added || {})) if (UI.C.lang[c]) acts.push({ label: info(c).label, sub: LT('lang.frame.addedClaude'), flag: info(c).flag, icon: 'globe', key: 'added-' + c,
     run: () => frameSheet(`${info(c).flag} ${info(c).label}`, () => [{ label: LT('lang.frame.removeLang'), sub: LT('lang.frame.removeLangSub'), icon: 'trash', key: 'remove-' + c, run: () => NoemaLangUI.claude.removeAdded(c) }]) });
   const poly = [...v.querySelectorAll('.lx-polydrills button')], drills = [...v.querySelectorAll('.lx-drills button:not(summary)')];
   poly.forEach(b => hold.append(b)); drills.forEach(b => hold.append(b));
-  if (poly.length) langItems.push({ label: LT('lang.frame.across'), sub: LT('lang.frame.acrossSub'), icon: 'globe', key: 'across', run: () => frameSheet(LT('lang.frame.across'), () => poly.map(b => frameAct(b))) });
-  if (drills.length) langItems.push({ label: LT('lang.frame.drills'), sub: LT('lang.frame.drillsSub'), icon: 'gym', key: 'drills', run: () => frameSheet(LT('lang.frame.drills'), () => drills.map(b => frameAct(b))) });
-  if (langItems.length) out.push(h('span', { class: 'ns-label' }, LT('lang.shell.yourLanguages')), frameList(langItems));
+  if (poly.length) acts.push({ label: LT('lang.frame.across'), sub: LT('lang.frame.acrossSub'), icon: 'globe', key: 'across', run: () => frameSheet(LT('lang.frame.across'), () => poly.map(b => frameAct(b))) });
+  if (drills.length) acts.push({ label: LT('lang.frame.drills'), sub: LT('lang.frame.drillsSub'), icon: 'gym', key: 'drills', run: () => frameSheet(LT('lang.frame.drills'), () => drills.map(b => frameAct(b))) });
   // the map: the steps near you; the signs explained on demand
   const nodes = v.querySelector('.lx-nodes'), legend = v.querySelector('.lx-maplegend'), more = v.querySelector('.lx-mapmore');
   if (nodes) {

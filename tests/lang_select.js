@@ -134,7 +134,7 @@ console.log('A. the chosen languages in langcore');
   ok(await U(() => NoemaLangUI.UI.C.languages.join() + '|' + NoemaLangUI.UI.lang) === 'ar,de|de', 'German opens its course, with German on screen and Arabic beside it');
   ok(await p.locator('.lx-lhhead[data-lang="de"]').count() === 1 && /#\/lang\/de$/.test(await p.evaluate(() => location.hash)), 'a tap on German: German\'s own home (#/lang/de), not a lesson (D29)');
   await p.click('.lx-allchip'); await p.waitForSelector('.lx-fhome', { timeout: 30000 }); await wait(400);
-  ok(await p.locator('.lx-fhome .ns-item[data-act^="lang-"]').count() === 2, 'All: the course home, a row per chosen language (2)');
+  ok(await p.locator('.lx-fhome .ns-item[data-act^="lang-"]').count() === 0 && await p.locator('.lx-allchip').count() === 1 && await p.locator('.lx-flagchip[data-lang]').count() === 2, 'All: the course home, no list of languages — the strip has All + the two chosen');
   await p.click('.ns-tab[data-tab="today"]'); await until(() => p.$('.ns-langgo'));
   ok(/🇸🇦 🇩🇪/.test(await p.innerText('.ns-langgo')) && !/🇨🇳/.test(await p.innerText('.ns-langgo')), 'Today: the course’s card with the chosen languages');
   await p.goto(url + '?account=anr#/lang'); await until(() => p.$('.ns-studychange'));
@@ -142,8 +142,8 @@ console.log('A. the chosen languages in langcore');
   await p.click('.ns-sheet .noema-study-lang[data-lang="ar"]'); await p.click('.ns-sheet .noema-study-ok'); await until(async () => (await p.$$('.ns-studylang')).length === 1);
   ok((await p.$$eval('.ns-studylang', l => l.map(x => x.dataset.lang))).join() === 'de', 'changed on the tab: German only');
   await p.click(`.ns-langitem[data-course="${COURSE}"]`); await p.waitForSelector('.lx-host .lx-main .lx-view', { timeout: 30000 }); await wait(600);
-  ok(await U(() => NoemaLangUI.UI.C.languages.join()) === 'de' && await p.locator('.lx-fhome .ns-item[data-act^="lang-"]').count() === 1 && await p.locator('.lx-fhome .ns-item[data-act="across"]').count() === 0,
-    'the course: German only — one row, no “Across your languages”');
+  ok(await U(() => NoemaLangUI.UI.C.languages.join()) === 'de' && await p.locator('.lx-flagchip[data-lang]').count() === 1 && await p.locator('.lx-fhome .ns-item[data-act="across"]').count() === 0,
+    'the course: German only — one chip in the strip, no “Across your languages”');
   ok(!E.length, 'no page errors ' + JSON.stringify(E.slice(0, 3)));
   await b.close(); end();
 })();

@@ -172,18 +172,6 @@
   "@lang.hub.path": {
     "description": "Language home: heading of the row of lessons."
   },
-  "lang.hub.library": "Library",
-  "@lang.hub.library": {
-    "description": "Language home: heading of the grid of everything the language has."
-  },
-  "lang.hub.topics": "Topics",
-  "@lang.hub.topics": {
-    "description": "Language home: heading of the topic drills."
-  },
-  "lang.hub.search": "Search",
-  "@lang.hub.search": {
-    "description": "Language home: button to the app-wide search."
-  },
   "lang.hub.all": "All",
   "@lang.hub.all": {
     "description": "Strip of languages: the chip for all languages together."
@@ -199,6 +187,28 @@
   "lang.hub.fullTable": "Full table",
   "@lang.hub.fullTable": {
     "description": "Word card: link to the full comparison table."
+  },
+  "lang.hub.aspects": "Aspects of {lang}",
+  "@lang.hub.aspects": {
+    "description": "Language home: heading of the aspect tiles; {lang} = the language.",
+    "placeholders": {
+      "lang": { "type": "String" }
+    }
+  },
+  "lang.hub.points": "{n, plural, one {# point} other {# points}}",
+  "@lang.hub.points": {
+    "description": "Aspect tile: how many grammar points it holds.",
+    "placeholders": {
+      "n": { "type": "int" }
+    }
+  },
+  "lang.hub.shelf": "Vocabulary topics",
+  "@lang.hub.shelf": {
+    "description": "Language home: heading of the shelf of vocabulary topics (one book per topic)."
+  },
+  "lang.hub.tools": "Practice and tools",
+  "@lang.hub.tools": {
+    "description": "Language home: heading of the drills and tools that are not aspects of the language."
   },
   "lang.view.claude": "Through Claude",
   "@lang.view.claude": {

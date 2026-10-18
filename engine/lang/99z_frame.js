@@ -124,22 +124,15 @@ function frameHome(v, acts, hold) {
     const nid = b.dataset.node, n = UI.C.nodes[nid];
     return { label: n.title, sub: framePlain(b.querySelector('.tiny')?.textContent || ''), txt: stepLabel(n) || '·', run: () => go('#/lesson/' + nid) };
   })));
-  // your languages: one row each, its lanes in a sheet
-  const rows = [...v.querySelectorAll('.lx-prodlanes .lx-lanerow[data-lang]')];
-  const langItems = rows.map(row => {
-    const c = row.dataset.lang, bs = [...row.querySelectorAll('button')]; bs.forEach(b => hold.append(b));
-    const k = N.known(UI.C, UI.L, c), kn = Object.values(k.state).filter(s => ['known_r', 'known_p', 'mastered'].includes(s)).length;
-    const added = (course.added || {})[c], rm = added ? [{ label: LT('lang.frame.removeLang'), sub: LT('lang.frame.addedClaude'), icon: 'trash', key: 'remove-' + c, run: () => NoemaLangUI.claude.removeAdded(c) }] : [];
-    return { label: info(c).label, sub: kn ? LT('lang.frame.wordsKnown', { n: kn }) : added ? LT('lang.frame.addedClaude') : null, flag: info(c).flag, key: 'lang-' + c, run: () => frameSheet(`${info(c).flag} ${info(c).label}`, () => [...bs.map(b => frameAct(b)), ...rm]) };
-  });
+  // your languages are the strip at the top and each one's own home: no list of them here; what only the combined course has (across languages, drills) is in ⋮
+  for (const row of v.querySelectorAll('.lx-prodlanes .lx-lanerow[data-lang]')) row.querySelectorAll('button').forEach(b => hold.append(b));
   // ⋮ › a language added by a package (docs/LANGUAGES.md §10.2) › Remove this language
   for (const c of Object.keys(course.added || {})) if (UI.C.lang[c]) acts.push({ label: info(c).label, sub: LT('lang.frame.addedClaude'), flag: info(c).flag, icon: 'globe', key: 'added-' + c,
     run: () => frameSheet(`${info(c).flag} ${info(c).label}`, () => [{ label: LT('lang.frame.removeLang'), sub: LT('lang.frame.removeLangSub'), icon: 'trash', key: 'remove-' + c, run: () => NoemaLangUI.claude.removeAdded(c) }]) });
   const poly = [...v.querySelectorAll('.lx-polydrills button')], drills = [...v.querySelectorAll('.lx-drills button:not(summary)')];
   poly.forEach(b => hold.append(b)); drills.forEach(b => hold.append(b));
-  if (poly.length) langItems.push({ label: LT('lang.frame.across'), sub: LT('lang.frame.acrossSub'), icon: 'globe', key: 'across', run: () => frameSheet(LT('lang.frame.across'), () => poly.map(b => frameAct(b))) });
-  if (drills.length) langItems.push({ label: LT('lang.frame.drills'), sub: LT('lang.frame.drillsSub'), icon: 'gym', key: 'drills', run: () => frameSheet(LT('lang.frame.drills'), () => drills.map(b => frameAct(b))) });
-  if (langItems.length) out.push(h('span', { class: 'ns-label' }, LT('lang.shell.yourLanguages')), frameList(langItems));
+  if (poly.length) acts.push({ label: LT('lang.frame.across'), sub: LT('lang.frame.acrossSub'), icon: 'globe', key: 'across', run: () => frameSheet(LT('lang.frame.across'), () => poly.map(b => frameAct(b))) });
+  if (drills.length) acts.push({ label: LT('lang.frame.drills'), sub: LT('lang.frame.drillsSub'), icon: 'gym', key: 'drills', run: () => frameSheet(LT('lang.frame.drills'), () => drills.map(b => frameAct(b))) });
   // the map: the steps near you; the signs explained on demand
   const nodes = v.querySelector('.lx-nodes'), legend = v.querySelector('.lx-maplegend'), more = v.querySelector('.lx-mapmore');
   if (nodes) {

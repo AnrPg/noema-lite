@@ -235,13 +235,17 @@ window.NoemaSearch = (() => {
 
   /* ---------- #/search: the page ---------- */
   let drawnFor = null;
+  /** The last address that was not the search page: where the back arrow of the page goes. */
+  let outside = /^#\/search/.test(location.hash) ? '' : location.hash;
+  window.addEventListener('hashchange', () => { if (!/^#\/search/.test(location.hash)) outside = location.hash; });
   function page(ctx) {
     const { h, pill, page: pg, go, menuButton } = ctx;
     let P = parse();
+    if (!P.q && !P.w && !P.c && /^#\/lang(\/|$)/.test(outside)) P.w = 'lang';   // opened from the languages: searches there
     const I = warm();
     const coll = P.c ? collections().find(x => x.id === P.c) : null;
     const savedItem = () => { const n = collections().length; return { label: L('collections') + (n ? ` (${n})` : ''), sub: L('collectionsSub'), icon: 'star', run: () => go('#/search') }; };
-    const v = pg({ tab: null, crumbs: [[L('search')], ...(coll ? [[coll.name]] : [])], back: null, cls: 'ns-searchview', menu: () => [savedItem(), ...(coll ? ['-', ...collMenu(coll, ctx)().filter(x => x.label !== L('open'))] : [])] });
+    const v = pg({ tab: null, crumbs: [[L('search')], ...(coll ? [[coll.name]] : [])], back: outside || '#/', cls: 'ns-searchview', menu: () => [savedItem(), ...(coll ? ['-', ...collMenu(coll, ctx)().filter(x => x.label !== L('open'))] : [])] });
     const inp = h('input', { class: 'noema-input ns-srin', type: 'search', value: P.q || '', placeholder: L('placeholder'), 'aria-label': L('search'), enterkeyhint: 'search', autocomplete: 'off' });
     const roundBox = h('div', { class: 'ns-srroundbox' });
     const actions = h('div', { class: 'row ns-sracts' });
@@ -298,13 +302,14 @@ window.NoemaSearch = (() => {
         sv ? h('span', { class: 'ns-pill ns-srsaved' }, L('collection'), ': ', sv.name) : h('button', { class: 'btn small ghost ns-srsave', onclick: () => saveCollection(P, ctx) }, L('save'))].filter(Boolean) : []));
     }
     function drawEmpty() {
-      const cols = collections(), rec = recents();
+      const mine = p => !P.w || (p.w || '') === P.w;   // searching in one world lists only that world's saved and recent searches
+      const cols = collections().filter(c => mine(c.p)), rec = recents().filter(mine);
       const it = (title, sub, run, menu) => h('div', { class: 'ns-itemwrap' }, h('button', { class: 'ns-item', onclick: run }, h('span', { class: 't' }, h('b', {}, title), sub ? h('small', {}, sub) : null), h('span', { class: 'ns-chev', 'aria-hidden': 'true' }, '›')), menu || null);
-      out.replaceChildren(
+      out.replaceChildren(...[
         cols.length ? h('section', { class: 'ns-srcols' }, h('span', { class: 'ns-label' }, L('collections')), h('p', { class: 'tiny ns-muted' }, L('collectionsSub')),
           h('div', { class: 'ns-list' }, ...cols.map(c => { const n = run(c.p).shownTotal; return it(c.name, [describe(c.p), L('nItems', { n })].filter(Boolean).join(' · '), () => go(pageHash({ ...c.p, c: c.id })), menuButton(collMenu(c, ctx), { label: S().L('moreFor', { title: c.name }) })); }))) : null,
         rec.length ? h('section', { class: 'ns-srrecent' }, h('span', { class: 'ns-label' }, L('recent')), h('div', { class: 'ns-list' }, ...rec.map(p => it(p.q, describe(p), () => go(pageHash(p)))))) : null,
-        !cols.length && !rec.length ? h('p', { class: 'ns-muted' }, L('typeMore')) : null);
+        !cols.length && !rec.length ? h('p', { class: 'ns-muted' }, L('typeMore')) : null].filter(Boolean));   // replaceChildren turns a null into the text "null"
     }
     function draw() {
       drawRound(roundBox, ctx);
