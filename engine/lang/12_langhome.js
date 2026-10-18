@@ -17,11 +17,11 @@ function evenGrid(cls, tiles) {
 function langAspects(c) {
   const X = LX(c), fns = Object.keys(X.grammar).filter(f => X.grammar[f] && X.grammar[f].status !== 'absent' && aspectOf(f)), n = a => fns.filter(f => aspectOf(f) === a).length, pg = a => '#/aspects/' + c + '/' + a;
   return [['sounds', pg('sounds'), n('sounds')], ['writing', pg('writing'), 0], ['grammar', pg('grammar'), n('grammar')], ['meaning', pg('meaning'), n('meaning')], ['use', pg('use'), n('use')],
-    ['idioms', pg('idioms'), 0], ['etymology', pg('etymology'), 0], ['sayings', pg('sayings'), 0], ['culture', pg('culture'), 0], ['listening', '#/listen/' + c, 0], ['reading', '#/read/' + c, 0]].filter(x => !['sounds', 'meaning'].includes(x[0]) || x[2] > 0);
+    ['etymology', pg('etymology'), 0], ['culture', pg('culture'), 0], ['listening', '#/listen/' + c + '/listening', 0], ['speaking', '#/listen/' + c + '/speaking', 0], ['reading', '#/read/' + c, 0]].filter(x => !['sounds', 'meaning'].includes(x[0]) || x[2] > 0);
 }
 /** What is not an aspect of the language but a way to practise or look at it: [view name, address]. */
 function langTools(c) {
-  return [['parts', '#/parts/' + c], ['recall', '#/recall/' + c], ['peculiar', '#/peculiar/' + c, !!UI.C.data.world], ['lanes', '#/lanes', UI.C.languages.length > 1]].filter(x => x[2] !== false);
+  return [['parts', '#/parts/' + c], ['recall', '#/recall/' + c], ['peculiar', '#/peculiar/' + c, !!UI.C.data.world]].filter(x => x[2] !== false);
 }
 /** The topics of the vocabulary as a shelf of books: one book per topic, each its own colour, height and lean. */
 function topicShelf(topics) {
@@ -50,6 +50,7 @@ function langHome(v) {
     nid ? h('div', {}, h('span', { class: 'lx-step' }, stepLabel(UI.C.nodes[nid])), ' ', h('b', {}, UI.C.nodes[nid].title)) : h('div', {}, h('b', {}, LT('lang.hub.allDone'))),
     h('div', { class: 'row' }, nid ? continueButton(nid, [c]) : null,
       nRev || nNew ? h('button', { class: nid ? 'btn' : 'btn primary', 'data-go': 'session', onclick: () => runSession(plan) }, '▶ ' + LT('lang.home.session', { counts })) : h('span', { class: 'tiny' }, '✅ ' + LT('lang.home.nothingDue')))));
+  if (UI.C.languages.length > 1) v.append(h('button', { class: 'lx-lhlanes lx-asp lx-asp-lanes', 'data-view': 'lanes', onclick: () => go('#/lanes') }, h('b', {}, '⇉ ' + LT('lang.view.lanes')), h('span', { class: 'tiny' }, LT('lang.hub.lanesTip'))));
   const path = UI.C.order.filter(id => UI.C.nodes[id].kind === 'lesson' && X.applies[id]);
   if (path.length) {   // the lessons: a window around where you are; the rest one tap away
     const dn = path.map(id => ladderOf(id, [c]).done), at = Math.max(0, dn.indexOf(false)), from = Math.max(0, at - 2), to = Math.min(path.length, from + 12);

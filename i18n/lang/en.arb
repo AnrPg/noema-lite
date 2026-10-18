@@ -128,9 +128,29 @@
   "@lang.aspect.writing": {
     "description": "Aspect: a side of a language (label of a theory section / group in the library)."
   },
-  "lang.aspect.listening": "Listening & speaking",
+  "lang.aspect.listening": "Listening",
   "@lang.aspect.listening": {
     "description": "Aspect: a side of a language (label of a theory section / group in the library)."
+  },
+  "lang.aspect.speaking": "Speaking",
+  "@lang.aspect.speaking": {
+    "description": "Aspect page: heading of a part of the page, or an aspect title."
+  },
+  "lang.aspect.part.idioms": "Idioms",
+  "@lang.aspect.part.idioms": {
+    "description": "Aspect page: heading of a part of the page, or an aspect title."
+  },
+  "lang.aspect.part.registers": "Registers and shades",
+  "@lang.aspect.part.registers": {
+    "description": "Aspect page: heading of a part of the page, or an aspect title."
+  },
+  "lang.aspect.part.sayings": "Proverbs and sayings",
+  "@lang.aspect.part.sayings": {
+    "description": "Aspect page: heading of a part of the page, or an aspect title."
+  },
+  "lang.aspect.part.facts": "Fun facts",
+  "@lang.aspect.part.facts": {
+    "description": "Aspect page: heading of a part of the page, or an aspect title."
   },
   "lang.aspect.reading": "Reading",
   "@lang.aspect.reading": {
@@ -148,20 +168,12 @@
   "@lang.aspect.meaning": {
     "description": "Aspect: a side of a language (tile / page title)."
   },
-  "lang.aspect.use": "Use and register",
+  "lang.aspect.use": "Use and idioms",
   "@lang.aspect.use": {
-    "description": "Aspect: a side of a language (tile / page title)."
-  },
-  "lang.aspect.idioms": "Idioms",
-  "@lang.aspect.idioms": {
     "description": "Aspect: a side of a language (tile / page title)."
   },
   "lang.aspect.etymology": "Etymology",
   "@lang.aspect.etymology": {
-    "description": "Aspect: a side of a language (tile / page title)."
-  },
-  "lang.aspect.sayings": "Folk tradition",
-  "@lang.aspect.sayings": {
     "description": "Aspect: a side of a language (tile / page title)."
   },
   "lang.aspect.filter": "Filter by word or text",
@@ -179,7 +191,7 @@
       "n": { "type": "int" }
     }
   },
-  "lang.aspect.culture": "Culture",
+  "lang.aspect.culture": "Culture and folk tradition",
   "@lang.aspect.culture": {
     "description": "Aspect: a side of a language (label of a theory section / group in the library)."
   },
@@ -214,6 +226,10 @@
   "lang.hub.fullTable": "Full table",
   "@lang.hub.fullTable": {
     "description": "Word card: link to the full comparison table."
+  },
+  "lang.hub.lanesTip": "The same idea in all your languages, side by side",
+  "@lang.hub.lanesTip": {
+    "description": "Short line under the Parallel lanes button on a language home"
   },
   "lang.hub.aspects": "Study areas",
   "@lang.hub.aspects": {

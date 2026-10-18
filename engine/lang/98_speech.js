@@ -297,24 +297,24 @@ async function readAloud(btn, c) {
 
 /* ---------- 🎧 the lane ---------- */
 const LISTEN_SETS = [
-  { id: 'hear', type: 'listen_pick', icon: '🔊', get title() { return LT('lang.listen.hear'); }, get what() { return LT('lang.listen.hearWhat'); } },
-  { id: 'sentences', type: 'listen_meaning', icon: '👂', get title() { return LT('lang.listen.sentences'); }, get what() { return LT('lang.listen.sentencesWhat'); } },
-  { id: 'dictation', type: 'dictation', icon: '✍️', get title() { return LT('lang.listen.dictation'); }, get what() { return LT('lang.listen.dictationWhat'); } },
-  { id: 'shadow', type: 'shadowing', icon: '🗣️', get title() { return LT('lang.listen.shadow'); }, get what() { return LT('lang.listen.shadowWhat'); } },
-  { id: 'speak', type: 'speak', icon: '🎤', get title() { return LT('lang.listen.speak'); }, get what() { return LT('lang.listen.speakWhat'); } },
-  { id: 'tones', type: 'listen_tone', icon: '🎵', get title() { return LT('lang.listen.tones'); }, get what() { return LT('lang.listen.tonesWhat'); }, only: c => c === 'zh' || LX(c).language.romanization === 'pinyin' }];
+  { id: 'hear', g: 'listen', type: 'listen_pick', icon: '🔊', get title() { return LT('lang.listen.hear'); }, get what() { return LT('lang.listen.hearWhat'); } },
+  { id: 'sentences', g: 'listen', type: 'listen_meaning', icon: '👂', get title() { return LT('lang.listen.sentences'); }, get what() { return LT('lang.listen.sentencesWhat'); } },
+  { id: 'dictation', g: 'listen', type: 'dictation', icon: '✍️', get title() { return LT('lang.listen.dictation'); }, get what() { return LT('lang.listen.dictationWhat'); } },
+  { id: 'shadow', g: 'speak', type: 'shadowing', icon: '🗣️', get title() { return LT('lang.listen.shadow'); }, get what() { return LT('lang.listen.shadowWhat'); } },
+  { id: 'speak', g: 'speak', type: 'speak', icon: '🎤', get title() { return LT('lang.listen.speak'); }, get what() { return LT('lang.listen.speakWhat'); } },
+  { id: 'tones', g: 'listen', type: 'listen_tone', icon: '🎵', get title() { return LT('lang.listen.tones'); }, get what() { return LT('lang.listen.tonesWhat'); }, only: c => c === 'zh' || LX(c).language.romanization === 'pinyin' }];
 const listenMake = (c, set, k) => N.speechItems(UI.C, UI.L, c, set.type, { k, max: 8, caps: pushCaps() });
 VIEWS.listen = (v, r) => {
   const c = UI.C.lang[r.arg] ? r.arg : UI.lang;
   const wait = h('p', { class: 'tiny lx-loading' }, '… ' + LT('lang.listen.looking'));
   v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, arrowBack() + ' ' + LT('lang.card.map'))),
-    h('h1', {}, '🎧 ' + LT('lang.view.listen'), h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).label}`)),
+    h('h1', {}, '🎧 ' + LT(r.arg2 === 'listening' || r.arg2 === 'speaking' ? 'lang.aspect.' + r.arg2 : 'lang.view.listen'), h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).label}`)),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); go('#/listen/' + x); })), wait);
   loadVoices().then(() => {
     if (route().name !== 'listen' || !wait.isConnected) return;
     wait.remove();
     const k = N.known(UI.C, UI.L, c);
-    if (r.arg2) { const set = LISTEN_SETS.find(s => s.id === r.arg2); if (set) return runProd(listenMake(c, set, k), { title: `${set.icon} ${set.title} · ${info(c).flag} ${info(c).label}`, back: '#/listen/' + c, lang: c }); }
+    if (r.arg2 && !['listening', 'speaking'].includes(r.arg2)) { const set = LISTEN_SETS.find(s => s.id === r.arg2); if (set) return runProd(listenMake(c, set, k), { title: `${set.icon} ${set.title} · ${info(c).flag} ${info(c).label}`, back: '#/listen/' + c, lang: c }); }
     const v0 = voiceOf(c);
     v.append(h('div', { class: 'lx-callout k-key lx-devline' },
       h('div', {}, v0 ? '🔊 ' + LT('lang.listen.voice', { name: v0.name, tag: v0.lang }) : '🔇 ' + LT('lang.listen.noVoiceLane', { lang: info(c).name })),
@@ -325,6 +325,7 @@ VIEWS.listen = (v, r) => {
     const grid = h('div', { class: 'lx-lanegrid' });
     for (const set of LISTEN_SETS) {
       if (set.only && !set.only(c)) continue;
+      if ((r.arg2 === 'listening' && set.g !== 'listen') || (r.arg2 === 'speaking' && set.g !== 'speak')) continue;   // the aspects Listening and Speaking show their own lanes
       const n = listenMake(c, set, k).length;
       grid.append(h('button', { class: 'lx-lanecard', 'data-set': set.id, disabled: n ? null : true, onclick: () => go(`#/listen/${c}/${set.id}`) },
         h('span', { class: 'lx-laneicon' }, set.icon), h('b', {}, set.title), h('span', { class: 'tiny' }, set.what), h('span', { class: 'tiny lx-lanen' }, n ? LT('lang.write.ready', { n }) : !v0 && set.type !== 'speak' ? LT('lang.listen.needsVoice') : LT('lang.write.learnMore'))));

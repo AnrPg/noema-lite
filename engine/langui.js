@@ -587,11 +587,11 @@ function evenGrid(cls, tiles) {
 function langAspects(c) {
   const X = LX(c), fns = Object.keys(X.grammar).filter(f => X.grammar[f] && X.grammar[f].status !== 'absent' && aspectOf(f)), n = a => fns.filter(f => aspectOf(f) === a).length, pg = a => '#/aspects/' + c + '/' + a;
   return [['sounds', pg('sounds'), n('sounds')], ['writing', pg('writing'), 0], ['grammar', pg('grammar'), n('grammar')], ['meaning', pg('meaning'), n('meaning')], ['use', pg('use'), n('use')],
-    ['idioms', pg('idioms'), 0], ['etymology', pg('etymology'), 0], ['sayings', pg('sayings'), 0], ['culture', pg('culture'), 0], ['listening', '#/listen/' + c, 0], ['reading', '#/read/' + c, 0]].filter(x => !['sounds', 'meaning'].includes(x[0]) || x[2] > 0);
+    ['etymology', pg('etymology'), 0], ['culture', pg('culture'), 0], ['listening', '#/listen/' + c + '/listening', 0], ['speaking', '#/listen/' + c + '/speaking', 0], ['reading', '#/read/' + c, 0]].filter(x => !['sounds', 'meaning'].includes(x[0]) || x[2] > 0);
 }
 /** What is not an aspect of the language but a way to practise or look at it: [view name, address]. */
 function langTools(c) {
-  return [['parts', '#/parts/' + c], ['recall', '#/recall/' + c], ['peculiar', '#/peculiar/' + c, !!UI.C.data.world], ['lanes', '#/lanes', UI.C.languages.length > 1]].filter(x => x[2] !== false);
+  return [['parts', '#/parts/' + c], ['recall', '#/recall/' + c], ['peculiar', '#/peculiar/' + c, !!UI.C.data.world]].filter(x => x[2] !== false);
 }
 /** The topics of the vocabulary as a shelf of books: one book per topic, each its own colour, height and lean. */
 function topicShelf(topics) {
@@ -620,6 +620,7 @@ function langHome(v) {
     nid ? h('div', {}, h('span', { class: 'lx-step' }, stepLabel(UI.C.nodes[nid])), ' ', h('b', {}, UI.C.nodes[nid].title)) : h('div', {}, h('b', {}, LT('lang.hub.allDone'))),
     h('div', { class: 'row' }, nid ? continueButton(nid, [c]) : null,
       nRev || nNew ? h('button', { class: nid ? 'btn' : 'btn primary', 'data-go': 'session', onclick: () => runSession(plan) }, '▶ ' + LT('lang.home.session', { counts })) : h('span', { class: 'tiny' }, '✅ ' + LT('lang.home.nothingDue')))));
+  if (UI.C.languages.length > 1) v.append(h('button', { class: 'lx-lhlanes lx-asp lx-asp-lanes', 'data-view': 'lanes', onclick: () => go('#/lanes') }, h('b', {}, '⇉ ' + LT('lang.view.lanes')), h('span', { class: 'tiny' }, LT('lang.hub.lanesTip'))));
   const path = UI.C.order.filter(id => UI.C.nodes[id].kind === 'lesson' && X.applies[id]);
   if (path.length) {   // the lessons: a window around where you are; the rest one tap away
     const dn = path.map(id => ladderOf(id, [c]).done), at = Math.max(0, dn.indexOf(false)), from = Math.max(0, at - 2), to = Math.min(path.length, from + 12);
@@ -650,22 +651,27 @@ const aspectRank = fid => { const i = ASPECT_ORDER.indexOf(aspectOf(fid)); retur
 /** The label of a grammar card: its aspect, and for grammar whether it is about the forms of words or about sentences. */
 const aspectText = fid => { const a = aspectOf(fid), cat = UI.C.functions[fid]?.category; return a ? LT('lang.aspect.' + a) + (a === 'grammar' ? ' · ' + LT('lang.aspect.' + (cat === 'syntax' ? 'syntax' : 'morphology')) : '') : ''; };
 const aspectLabel = fid => h('span', { class: 'lx-asplabel' }, aspectText(fid));
-/** The aspects built from the word profiles: the section of the card that holds them and which of its items belong. */
+/** What the word profiles hold, in parts: the section of the card and which of its items belong ('registers' reads the words that are not plain neutral everyday ones). */
 const PHRASE_IDIOM = ['idiom', 'fixed expression', 'colloquial', 'slang'], PHRASE_FOLK = ['proverb', 'saying'];
-const PROFILE_ASPECTS = {
+const PROFILE_PARTS = {
   idioms: { sec: 'phrases', keep: it => PHRASE_IDIOM.includes(it.kind) },
+  registers: { sec: null },
   sayings: { sec: 'phrases', keep: it => PHRASE_FOLK.includes(it.kind) },
+  facts: { sec: 'funFacts', keep: () => true },
   etymology: { sec: 'etymology', keep: () => true },
-  culture: { sec: 'funFacts', keep: () => true },
 };
-const ASPECT_PAGES = ['sounds', 'writing', 'grammar', 'meaning', 'use', 'idioms', 'etymology', 'sayings', 'culture'];
+/** The aspect pages: grammar points of the aspect (by category), then these parts. Idioms belong to how a language is used; proverbs and fun facts to its culture. */
+const PAGE_PARTS = { use: ['idioms', 'registers'], culture: ['sayings', 'facts'], etymology: ['etymology'] };
+const ASPECT_PAGES = ['sounds', 'writing', 'grammar', 'meaning', 'use', 'etymology', 'culture'];
 const ASPECT_VIEWS = { writing: c => (LX(c).language.script !== 'Latn' ? ['script', 'write'] : ['write']) };
 /** One entry of a profile aspect: the word, then what the profile says (the same renderers as the card's sections). */
 function aspectEntry(c, lx, key, it) {
   const T = x => mdView(x, { forLang: c, inline: true });
   const head = h('a', { class: 'lx-aspword', href: '#/w/' + c + '/' + encodeURIComponent(lx.id) }, word(c, lx.lemma, { lex: lx }));
   let body;
-  if (key === 'phrases') body = h('div', {}, word(c, it.text, { sub: false }), ' ', it.register ? h('span', { class: 'lx-badge reg' }, regWords(it.register)) : null, h('div', { class: 'tiny' }, '“' + it.tr + '” — ', h('b', {}, it.meaning), it.source ? ' (' + it.source + ')' : ''));
+  if (key === 'use') body = h('div', {}, it.regs.length ? h('span', { class: 'lx-badge reg' }, regWords(it.regs)) : null, it.conn && it.conn !== 'neutral' ? h('span', { class: 'lx-badge' }, CONNOTATION[it.conn] + ' ' + LT('lang.card.conn.' + it.conn)) : null,
+    it.status && it.status !== 'current' ? h('span', { class: 'lx-badge ctx' }, codeWord('lang.expl.status.', it.status)) : null, ' ', h('span', { class: 'tiny' }, gloss(c, lx.id)));
+  else if (key === 'phrases') body = h('div', {}, word(c, it.text, { sub: false }), ' ', it.register ? h('span', { class: 'lx-badge reg' }, regWords(it.register)) : null, h('div', { class: 'tiny' }, '“' + it.tr + '” — ', h('b', {}, it.meaning), it.source ? ' (' + it.source + ')' : ''));
   else if (key === 'etymology') body = h('div', {}, it.text, h('span', { class: 'tiny' }, it.src ? ' — ' + it.src : ''));
   else body = h('div', {}, '💡 ', T(it));
   return h('div', { class: 'lx-aspentry' }, head, body);
@@ -687,29 +693,32 @@ VIEWS.aspects = (v, r) => {
       sec.append(h('div', { class: 'row' }, h('button', { class: 'btn small', onclick: () => go('#/grammar/' + c) }, '📐 ' + LT('lang.view.grammar'))));
     } else sec.append(h('div', { class: 'lx-lhlib' }, ...fns.map(fbtn)));
   }
-  const P = PROFILE_ASPECTS[a], extra = a === 'use' ? 'use' : null;
-  if (P || extra) whenProfiles(c, () => {
-    const rows = [];
+  const parts = PAGE_PARTS[a] || [];
+  if (parts.length) whenProfiles(c, () => {
+    const rows = Object.fromEntries(parts.map(k => [k, []]));
     for (const lx of Object.values(X.lex)) {
       let card; try { card = N.wordCard(UI.C, UI.L, c, lx.id); } catch (e) { continue; }
-      if (P) { const s = card.sections.find(x => x.key === P.sec); for (const it of (s?.items || []).filter(P.keep)) rows.push([lx, P.sec, it]); }
-      else {   // use: the words that are not plain neutral everyday words
-        const p = lx.profile || {}, regs = [].concat(p.register || []).filter(x => x !== 'neutral');
-        if (regs.length || (p.connotation && p.connotation !== 'neutral') || (p.status && p.status !== 'current')) rows.push([lx, 'use', { regs, conn: p.connotation, status: p.status }]);
+      for (const k of parts) {
+        const P = PROFILE_PARTS[k];
+        if (P.sec) { const sc = card.sections.find(x => x.key === P.sec); for (const it of (sc?.items || []).filter(P.keep)) rows[k].push([lx, P.sec, it]); }
+        else { const p = lx.profile || {}, regs = [].concat(p.register || []).filter(x => x !== 'neutral');
+          if (regs.length || (p.connotation && p.connotation !== 'neutral') || (p.status && p.status !== 'current')) rows[k].push([lx, 'use', { regs, conn: p.connotation, status: p.status }]); }
       }
     }
-    const list = h('div', { class: 'lx-asplist' }), shown = 40;
-    const draw = (all, q) => {
-      const f = rows.filter(([lx, k, it]) => !q || (lx.lemma + ' ' + JSON.stringify(it)).toLowerCase().includes(q));
-      list.replaceChildren(...[...f.slice(0, all ? f.length : shown).map(([lx, k, it]) => k === 'use' ? h('div', { class: 'lx-aspentry' }, h('a', { class: 'lx-aspword', href: '#/w/' + c + '/' + encodeURIComponent(lx.id) }, word(c, lx.lemma, { lex: lx })),
-        h('div', {}, it.regs.length ? h('span', { class: 'lx-badge reg' }, regWords(it.regs)) : null, it.conn && it.conn !== 'neutral' ? h('span', { class: 'lx-badge' }, CONNOTATION[it.conn] + ' ' + LT('lang.card.conn.' + it.conn)) : null,
-          it.status && it.status !== 'current' ? h('span', { class: 'lx-badge ctx' }, codeWord('lang.expl.status.', it.status)) : null, ' ', h('span', { class: 'tiny' }, gloss(c, lx.id)))) : aspectEntry(c, lx, k, it)),
-        !all && f.length > shown ? h('button', { class: 'btn ghost small', onclick: () => draw(true, q) }, LT('lang.frame.more', { n: f.length - shown, what: '' }).trim()) : null].filter(Boolean));   // replaceChildren turns a null into the text "null"
-    };
-    const inp = h('input', { class: 'noema-input', type: 'search', placeholder: LT('lang.aspect.filter'), 'aria-label': LT('lang.aspect.filter') });
-    inp.addEventListener('input', () => draw(false, inp.value.trim().toLowerCase()));
-    if (!rows.length) sec.append(h('p', { class: 'lx-note' }, LT('lang.aspect.none')));
-    else { sec.append(h('p', { class: 'tiny' }, LT('lang.aspect.count', { n: rows.length })), inp, list); draw(false, ''); }
+    for (const k of parts) {
+      const list = h('div', { class: 'lx-asplist' }), all = rows[k], shown = 40, box = h('section', { class: 'lx-aspart', 'data-part': k });
+      const draw = (full, q) => {
+        const f = all.filter(([lx, , it]) => !q || (lx.lemma + ' ' + JSON.stringify(it)).toLowerCase().includes(q));
+        list.replaceChildren(...[...f.slice(0, full ? f.length : shown).map(([lx, key, it]) => aspectEntry(c, lx, key, it)),
+          !full && f.length > shown ? h('button', { class: 'btn ghost small', onclick: () => draw(true, q) }, LT('lang.frame.more', { n: f.length - shown, what: '' }).trim()) : null].filter(Boolean));   // replaceChildren turns a null into the text "null"
+      };
+      const inp = h('input', { class: 'noema-input', type: 'search', placeholder: LT('lang.aspect.filter'), 'aria-label': LT('lang.aspect.filter') });
+      inp.addEventListener('input', () => draw(false, inp.value.trim().toLowerCase()));
+      if (parts.length > 1) box.append(h('h3', {}, LT('lang.aspect.part.' + k)));
+      if (!all.length) box.append(h('p', { class: 'lx-note' }, LT('lang.aspect.none')));
+      else { box.append(h('p', { class: 'tiny' }, LT('lang.aspect.count', { n: all.length })), inp, list); draw(false, ''); }
+      sec.append(box);
+    }
   }, sec);
   const vs = ASPECT_VIEWS[a] ? ASPECT_VIEWS[a](c) : [];
   if (vs.length) sec.append(h('div', { class: 'lx-lhlib' }, ...vs.map(n => h('button', { class: 'lx-lhtile', onclick: () => go('#/' + n + '/' + c) }, LT('lang.view.' + n)))));
@@ -4343,24 +4352,24 @@ async function readAloud(btn, c) {
 
 /* ---------- 🎧 the lane ---------- */
 const LISTEN_SETS = [
-  { id: 'hear', type: 'listen_pick', icon: '🔊', get title() { return LT('lang.listen.hear'); }, get what() { return LT('lang.listen.hearWhat'); } },
-  { id: 'sentences', type: 'listen_meaning', icon: '👂', get title() { return LT('lang.listen.sentences'); }, get what() { return LT('lang.listen.sentencesWhat'); } },
-  { id: 'dictation', type: 'dictation', icon: '✍️', get title() { return LT('lang.listen.dictation'); }, get what() { return LT('lang.listen.dictationWhat'); } },
-  { id: 'shadow', type: 'shadowing', icon: '🗣️', get title() { return LT('lang.listen.shadow'); }, get what() { return LT('lang.listen.shadowWhat'); } },
-  { id: 'speak', type: 'speak', icon: '🎤', get title() { return LT('lang.listen.speak'); }, get what() { return LT('lang.listen.speakWhat'); } },
-  { id: 'tones', type: 'listen_tone', icon: '🎵', get title() { return LT('lang.listen.tones'); }, get what() { return LT('lang.listen.tonesWhat'); }, only: c => c === 'zh' || LX(c).language.romanization === 'pinyin' }];
+  { id: 'hear', g: 'listen', type: 'listen_pick', icon: '🔊', get title() { return LT('lang.listen.hear'); }, get what() { return LT('lang.listen.hearWhat'); } },
+  { id: 'sentences', g: 'listen', type: 'listen_meaning', icon: '👂', get title() { return LT('lang.listen.sentences'); }, get what() { return LT('lang.listen.sentencesWhat'); } },
+  { id: 'dictation', g: 'listen', type: 'dictation', icon: '✍️', get title() { return LT('lang.listen.dictation'); }, get what() { return LT('lang.listen.dictationWhat'); } },
+  { id: 'shadow', g: 'speak', type: 'shadowing', icon: '🗣️', get title() { return LT('lang.listen.shadow'); }, get what() { return LT('lang.listen.shadowWhat'); } },
+  { id: 'speak', g: 'speak', type: 'speak', icon: '🎤', get title() { return LT('lang.listen.speak'); }, get what() { return LT('lang.listen.speakWhat'); } },
+  { id: 'tones', g: 'listen', type: 'listen_tone', icon: '🎵', get title() { return LT('lang.listen.tones'); }, get what() { return LT('lang.listen.tonesWhat'); }, only: c => c === 'zh' || LX(c).language.romanization === 'pinyin' }];
 const listenMake = (c, set, k) => N.speechItems(UI.C, UI.L, c, set.type, { k, max: 8, caps: pushCaps() });
 VIEWS.listen = (v, r) => {
   const c = UI.C.lang[r.arg] ? r.arg : UI.lang;
   const wait = h('p', { class: 'tiny lx-loading' }, '… ' + LT('lang.listen.looking'));
   v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, arrowBack() + ' ' + LT('lang.card.map'))),
-    h('h1', {}, '🎧 ' + LT('lang.view.listen'), h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).label}`)),
+    h('h1', {}, '🎧 ' + LT(r.arg2 === 'listening' || r.arg2 === 'speaking' ? 'lang.aspect.' + r.arg2 : 'lang.view.listen'), h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).label}`)),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); go('#/listen/' + x); })), wait);
   loadVoices().then(() => {
     if (route().name !== 'listen' || !wait.isConnected) return;
     wait.remove();
     const k = N.known(UI.C, UI.L, c);
-    if (r.arg2) { const set = LISTEN_SETS.find(s => s.id === r.arg2); if (set) return runProd(listenMake(c, set, k), { title: `${set.icon} ${set.title} · ${info(c).flag} ${info(c).label}`, back: '#/listen/' + c, lang: c }); }
+    if (r.arg2 && !['listening', 'speaking'].includes(r.arg2)) { const set = LISTEN_SETS.find(s => s.id === r.arg2); if (set) return runProd(listenMake(c, set, k), { title: `${set.icon} ${set.title} · ${info(c).flag} ${info(c).label}`, back: '#/listen/' + c, lang: c }); }
     const v0 = voiceOf(c);
     v.append(h('div', { class: 'lx-callout k-key lx-devline' },
       h('div', {}, v0 ? '🔊 ' + LT('lang.listen.voice', { name: v0.name, tag: v0.lang }) : '🔇 ' + LT('lang.listen.noVoiceLane', { lang: info(c).name })),
@@ -4371,6 +4380,7 @@ VIEWS.listen = (v, r) => {
     const grid = h('div', { class: 'lx-lanegrid' });
     for (const set of LISTEN_SETS) {
       if (set.only && !set.only(c)) continue;
+      if ((r.arg2 === 'listening' && set.g !== 'listen') || (r.arg2 === 'speaking' && set.g !== 'speak')) continue;   // the aspects Listening and Speaking show their own lanes
       const n = listenMake(c, set, k).length;
       grid.append(h('button', { class: 'lx-lanecard', 'data-set': set.id, disabled: n ? null : true, onclick: () => go(`#/listen/${c}/${set.id}`) },
         h('span', { class: 'lx-laneicon' }, set.icon), h('b', {}, set.title), h('span', { class: 'tiny' }, set.what), h('span', { class: 'tiny lx-lanen' }, n ? LT('lang.write.ready', { n }) : !v0 && set.type !== 'speak' ? LT('lang.listen.needsVoice') : LT('lang.write.learnMore'))));
