@@ -188,12 +188,9 @@
   "@lang.hub.fullTable": {
     "description": "Word card: link to the full comparison table."
   },
-  "lang.hub.aspects": "Aspects of {lang}",
+  "lang.hub.aspects": "Study areas",
   "@lang.hub.aspects": {
-    "description": "Language home: heading of the aspect tiles; {lang} = the language.",
-    "placeholders": {
-      "lang": { "type": "String" }
-    }
+    "description": "Language home: heading of the aspect tiles (the sides of the language to study)."
   },
   "lang.hub.points": "{n, plural, one {# point} other {# points}}",
   "@lang.hub.points": {
@@ -206,7 +203,7 @@
   "@lang.hub.shelf": {
     "description": "Language home: heading of the shelf of vocabulary topics (one book per topic)."
   },
-  "lang.hub.tools": "Practice and tools",
+  "lang.hub.tools": "Drills and curiosities",
   "@lang.hub.tools": {
     "description": "Language home: heading of the drills and tools that are not aspects of the language."
   },

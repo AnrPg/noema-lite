@@ -39,8 +39,8 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
   await p.goto(url + '?account=anr#/lang/he/listen/ar'); await wait(1800);
   ok(await p.evaluate(() => NoemaLangUI.UI.lang === 'he' && !!document.querySelector('.lx-view h1')?.textContent.includes('🇮🇱') || NoemaLangUI.UI.lang === 'he'), 'a stale language in the address (listen/ar under he) is ignored: the page is about Hebrew');
   await p.goto(url + '?account=anr#/lang/he'); await p.waitForSelector('.lx-lhhead', { timeout: 25000 }).catch(() => { }); await wait(400);
-  ok(await q('.lx-lhaspects .lx-lhtile') >= 4 && await q('.lx-book') >= 5 && await q('.lx-lhtool') >= 2, 'the home: aspect tiles, a shelf with a book per topic, and the tools (parts, name-them-all, peculiarities) apart');
-  ok(await q('.lx-lhmore') === 0 && await q('.lx-lhtile[data-view=peculiar]') === 1 && await q('.lx-lhaspects [data-view=peculiar]') === 0, 'peculiarities are a tool, not an aspect; no dropdown of search/compare/settings');
+  ok(await q('.lx-lhaspects:not(.lx-lhtools) .lx-lhtile') >= 4 && await q('.lx-lhaspects [data-aspect=grammar]') === 1 && await p.evaluate(() => [...document.querySelectorAll('.lx-evengrid')].every(g => { const n = [...g.children].map(r => r.children.length); return Math.min(...n) > 1 && Math.max(...n) - Math.min(...n) <= 1; })) && await q('.lx-book') >= 5 && await q('.lx-lhtool') >= 2, 'the home: aspect tiles, a shelf with a book per topic, and the tools (parts, name-them-all, peculiarities) apart');
+  ok(await q('.lx-lhmore') === 0 && await q('.lx-lhtile[data-view=peculiar]') === 1 && await q('.lx-lhaspects:not(.lx-lhtools) [data-view=peculiar]') === 0, 'peculiarities are a tool, not an aspect; no dropdown of search/compare/settings');
   await p.goto(url + '?account=anr#/lang/polyglot-semitic-zh-de'); await p.waitForSelector('.lx-fhome', { timeout: 25000 }).catch(() => { }); await wait(300);
   ok(await q('.lx-fhome .ns-item[data-act^="lang-"]') === 0 && !/Your languages|Οι γλώσσες σου/i.test(await p.locator('.lx-fhome').innerText()), 'the combined home has no “Your languages” section');
   // search: no stray text, a way back, only the languages' own saved searches

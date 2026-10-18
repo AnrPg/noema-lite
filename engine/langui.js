@@ -572,10 +572,21 @@ function nodeList() {
    the language has (its libraries, topics, drills). A tap on a language opens this page, never a lesson. ---------- */
 /** The languages the page shows: the one in the address, else all the learner studies. */
 const scopeLangs = () => UI.scope && UI.C.lang[UI.scope] ? [UI.scope] : activeLangs();
+/** Tiles in rows that hold the same number of tiles (as far as the count allows) and fill the width: never a row with one tile alone.
+    Wide screens take up to 5 in a row, narrow ones up to 3; the rows are drawn again when the width class changes. */
+function evenGrid(cls, tiles) {
+  const g = h('div', { class: cls + ' lx-evengrid' }), mq = window.matchMedia ? window.matchMedia('(max-width: 640px)') : { matches: false };
+  const draw = () => {
+    const n = tiles.length, max = mq.matches ? 3 : 5, rows = Math.ceil(n / max), base = Math.floor(n / rows), extra = n % rows; let at = 0;
+    g.replaceChildren(...Array.from({ length: rows }, (_, i) => { const k = base + (i < extra ? 1 : 0), row = h('div', { class: 'lx-evenrow' }, ...tiles.slice(at, at + k)); row.style.setProperty('--n', k); at += k; return row; }));
+  };
+  draw(); if (mq.addEventListener) mq.addEventListener('change', () => { if (g.isConnected) draw(); });
+  return g;
+}
 /** The aspects of one language the home offers: [aspect, address, how many points]. Only an aspect the language has something for. */
 function langAspects(c) {
   const X = LX(c), fns = Object.keys(X.grammar).filter(f => X.grammar[f] && X.grammar[f].status !== 'absent' && aspectOf(f)), n = a => fns.filter(f => aspectOf(f) === a).length;
-  return [...ASPECT_ORDER.filter(a => n(a)).map(a => [a, '#/aspects/' + c + '/' + a, n(a)]), ['writing', '#/aspects/' + c + '/writing', 0], ['listening', '#/aspects/' + c + '/listening', 0], ['reading', '#/aspects/' + c + '/reading', 0]];
+  return [['grammar', '#/grammar/' + c, fns.length], ...ASPECT_ORDER.filter(a => n(a)).map(a => [a, '#/aspects/' + c + '/' + a, n(a)]), ['writing', '#/aspects/' + c + '/writing', 0], ['listening', '#/aspects/' + c + '/listening', 0], ['reading', '#/aspects/' + c + '/reading', 0]];
 }
 /** What is not an aspect of the language but a way to practise or look at it: [view name, address]. */
 function langTools(c) {
@@ -586,8 +597,9 @@ function topicShelf(topics) {
   const PAL = [350, 28, 48, 95, 150, 185, 215, 255, 290, 320], hash = t => [...t].reduce((a, ch) => (a * 31 + ch.charCodeAt(0)) % 997, 7), per = 7, rows = [];
   for (let i = 0; i < topics.length; i += per) rows.push(topics.slice(i, i + per));
   return h('div', { class: 'lx-shelf' }, ...rows.map((row, ri) => h('div', { class: 'lx-shelfrow' }, ...row.map((f, i) => {
-    const k = hash(f.field), n = PAL[(ri * 3 + i * 3 + k % 3) % PAL.length], len = [...f.title].length, w = 38 + (k % 4) * 5, ht = 96 + (k % 5) * 8 + Math.min(len, 26) * 4, lean = (k % 7 === 0 ? 7 : k % 11 === 0 ? -6 : 0);
-    const book = h('button', { class: 'lx-book', title: f.title, onclick: () => go('#/sort/' + encodeURIComponent(f.field)) }, h('span', { class: 'lx-spine' }, f.title));
+    const k = hash(f.field), n = PAL[(ri * 3 + i * 3 + k % 3) % PAL.length], len = [...f.title].length, w = 46 + (k % 4) * 5, ht = 104 + (k % 5) * 8 + Math.min(len, 34) * 7, lean = (k % 7 === 0 ? 7 : k % 11 === 0 ? -6 : 0);
+    const book = h('button', { class: 'lx-book', 'aria-label': f.title, onclick: () => go('#/sort/' + encodeURIComponent(f.field)) }, h('span', { class: 'lx-spine' }, f.title));
+    book.dataset.tip = f.title;
     for (const [k, v] of Object.entries({ '--h': n, '--bw': w + 'px', '--bh': ht + 'px', '--lean': lean + 'deg', '--d': (ri * per + i) * 70 + 'ms' })) book.style.setProperty(k, v);   // custom properties need setProperty
     return book;
   }))));
@@ -615,12 +627,13 @@ function langHome(v) {
       ...(all || path.length <= to - from ? [] : [h('button', { class: 'lx-lhstep', onclick: () => draw(true) }, '… +' + (path.length - (to - from)))])); };
     draw(false); v.append(h('h2', { class: 'lx-h2' }, LT('lang.hub.path')), row);
   }
-  v.append(h('h2', { class: 'lx-h2' }, LT('lang.hub.aspects', { lang: inf.label })), h('div', { class: 'lx-lhaspects' }, ...langAspects(c).map(([a, to, n]) =>
-    h('button', { class: 'lx-lhtile lx-asp lx-asp-' + a, 'data-aspect': a, onclick: () => go(to) }, h('b', {}, LT('lang.aspect.' + a)), n ? h('span', { class: 'tiny' }, LT('lang.hub.points', { n })) : null))));
+  const asp = langAspects(c);
+  v.append(h('h2', { class: 'lx-h2' }, LT('lang.hub.aspects')), evenGrid('lx-lhaspects', asp.map(([a, to, n]) =>
+    h('button', { class: 'lx-lhtile lx-asp lx-asp-' + a, 'data-aspect': a, onclick: () => go(to) }, h('b', {}, a === 'grammar' ? LT('lang.view.grammar') : LT('lang.aspect.' + a)), n ? h('span', { class: 'tiny' }, LT('lang.hub.points', { n })) : null))));
   const topics = (UI.C.data.fields || []).filter(f => (f.subgroups || []).length > 1);
   if (topics.length) v.append(h('h2', { class: 'lx-h2' }, LT('lang.hub.shelf')), topicShelf(topics));
   const tools = langTools(c);
-  v.append(h('h2', { class: 'lx-h2' }, LT('lang.hub.tools')), h('div', { class: 'lx-lhlib' }, ...tools.map(([name, to]) => h('button', { class: 'lx-lhtile lx-lhtool', 'data-view': name, onclick: () => go(to) }, LT('lang.view.' + name)))));
+  v.append(h('h2', { class: 'lx-h2' }, LT('lang.hub.tools')), evenGrid('lx-lhaspects lx-lhtools', tools.map(([name, to]) => h('button', { class: 'lx-lhtile lx-lhtool lx-asp lx-asp-' + name, 'data-view': name, onclick: () => go(to) }, h('b', {}, LT('lang.view.' + name))))));
 }
 
 /* ---- 13_aspects.js ---- */

@@ -221,19 +221,24 @@ div.lx-asp, article.lx-asp, section.lx-asp, button.lx-asp { background: color-mi
 .lx-asp { --asp: 200; }
 .lx-asp.lx-asp-phonology { --asp: 20; } .lx-asp.lx-asp-morphology { --asp: 150; } .lx-asp.lx-asp-syntax { --asp: 215; } .lx-asp.lx-asp-semantics { --asp: 275; }
 .lx-asp.lx-asp-lexicon { --asp: 45; } .lx-asp.lx-asp-pragmatics { --asp: 335; } .lx-asp.lx-asp-writing { --asp: 100; } .lx-asp.lx-asp-listening { --asp: 185; }
-.lx-asp.lx-asp-reading { --asp: 240; } .lx-asp.lx-asp-culture { --asp: 5; }
+.lx-asp.lx-asp-reading { --asp: 240; } .lx-asp.lx-asp-grammar { --asp: 170; }
+.lx-asp.lx-asp-parts { --asp: 35; } .lx-asp.lx-asp-recall { --asp: 195; } .lx-asp.lx-asp-peculiar { --asp: 305; } .lx-asp.lx-asp-lanes { --asp: 75; } .lx-asp.lx-asp-culture { --asp: 5; }
 
 /* the language home: aspect tiles, the shelf of vocabulary topics, the tools */
-.lx-lhaspects { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+.lx-evengrid { display: flex; flex-direction: column; gap: 10px; }
+.lx-evenrow { display: grid; grid-template-columns: repeat(var(--n, 3), minmax(0, 1fr)); gap: 10px; }
+.lx-lhtools .lx-lhtile { min-height: 56px; justify-content: center; }
 .lx-lhaspects .lx-lhtile { display: flex; flex-direction: column; gap: 4px; min-height: 76px; padding: 12px 14px; border-radius: 14px; border: 1px solid hsl(var(--asp) 40% 70% / .45); border-left-width: 1px; transition: transform .18s ease, box-shadow .18s ease; }
 .lx-lhaspects .lx-lhtile:hover, .lx-lhaspects .lx-lhtile:focus-visible { transform: translateY(-2px); box-shadow: 0 6px 16px hsl(var(--asp) 40% 50% / .16); }
 .lx-lhtool { opacity: .9; }
 .lx-shelf { display: flex; flex-direction: column; gap: 6px; max-width: 600px; }
 .lx-shelfrow { display: flex; align-items: flex-end; gap: 3px; padding: 0 10px; min-height: 190px; border-bottom: 10px solid hsl(30 28% 74%); border-radius: 0 0 4px 4px; background: linear-gradient(hsl(30 30% 96% / .0), hsl(30 30% 90% / .35)); }
-.lx-book { --h: 200; width: var(--bw); height: var(--bh); padding: 0; border: 0; cursor: pointer; border-radius: 3px 3px 1px 1px; color: hsl(var(--h) 35% 22%); background: linear-gradient(90deg, hsl(var(--h) 45% 76%), hsl(var(--h) 50% 82%) 40%, hsl(var(--h) 45% 72%)); box-shadow: inset 0 0 0 1px hsl(var(--h) 35% 55% / .35), 2px 0 3px #0001;
+.lx-book { --h: 200; width: var(--bw); height: var(--bh); padding: 0; border: 0; cursor: pointer; position: relative; border-radius: 3px 3px 1px 1px; color: hsl(var(--h) 35% 22%); background: linear-gradient(90deg, hsl(var(--h) 45% 76%), hsl(var(--h) 50% 82%) 40%, hsl(var(--h) 45% 72%)); box-shadow: inset 0 0 0 1px hsl(var(--h) 35% 55% / .35), 2px 0 3px #0001;
   transform-origin: bottom left; transform: rotate(var(--lean)); margin-left: calc(var(--lean) * 1px); animation: lx-bookin .5s ease both; animation-delay: var(--d); transition: transform .22s ease; }
 .lx-book:hover, .lx-book:focus-visible { transform: rotate(var(--lean)) translateY(-10px); }
-.lx-spine { display: block; writing-mode: vertical-rl; text-orientation: mixed; font-size: .74rem; line-height: 1; padding: 8px 0; max-height: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin: 0 auto; }
+.lx-spine { display: block; writing-mode: vertical-rl; text-orientation: mixed; font-size: .98rem; font-weight: 700; line-height: 1.1; padding: 10px 0; max-height: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin: 0 auto; }
+.lx-book::after { content: attr(data-tip); position: absolute; left: 50%; bottom: calc(100% + 6px); transform: translateX(-50%); padding: 4px 9px; border-radius: 8px; background: #3b2a30; color: #fff; font-size: .8rem; font-weight: 600; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .15s ease; z-index: 5; }
+.lx-book:hover::after, .lx-book:focus-visible::after { opacity: 1; }
 @keyframes lx-bookin { from { opacity: 0; transform: translateY(14px) rotate(var(--lean)); } to { opacity: 1; transform: rotate(var(--lean)); } }
 @media (prefers-reduced-motion: reduce) { .lx-book { animation: none; transition: none; } .lx-lhaspects .lx-lhtile { transition: none; } }
 /* P7 — production and reading (docs/LANGUAGES.md §6.5, §8 Tutor): the writing and reading lanes, their widgets, the tutor drawer */
