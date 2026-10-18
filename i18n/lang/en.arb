@@ -124,6 +124,86 @@
   "@lang.aspect.syntax": {
     "description": "Aspect: a side of a language (label of a theory section / group in the library)."
   },
+  "lang.aspect.tag.Mood": "Mood",
+  "@lang.aspect.tag.Mood": {
+    "description": "Group heading on the Grammar page: word forms that inflect for this feature (Mood)"
+  },
+  "lang.aspect.tag.Gender": "Gender",
+  "@lang.aspect.tag.Gender": {
+    "description": "Group heading on the Grammar page: word forms that inflect for this feature (Gender)"
+  },
+  "lang.aspect.tag.Definiteness": "Definiteness",
+  "@lang.aspect.tag.Definiteness": {
+    "description": "Group heading on the Grammar page: word forms that inflect for this feature (Definiteness)"
+  },
+  "lang.aspect.tag.Deixis": "Pointing words",
+  "@lang.aspect.tag.Deixis": {
+    "description": "Group heading on the Grammar page: word forms that inflect for this feature (Deixis)"
+  },
+  "lang.aspect.tag.Number": "Number",
+  "@lang.aspect.tag.Number": {
+    "description": "Group heading on the Grammar page: word forms that inflect for this feature (Number)"
+  },
+  "lang.aspect.tag.Case": "Case",
+  "@lang.aspect.tag.Case": {
+    "description": "Group heading on the Grammar page: word forms that inflect for this feature (Case)"
+  },
+  "lang.aspect.tag.Tense": "Tense",
+  "@lang.aspect.tag.Tense": {
+    "description": "Group heading on the Grammar page: word forms that inflect for this feature (Tense)"
+  },
+  "lang.aspect.tag.Voice": "Voice",
+  "@lang.aspect.tag.Voice": {
+    "description": "Group heading on the Grammar page: word forms that inflect for this feature (Voice)"
+  },
+  "lang.aspect.tag.Degree": "Degree",
+  "@lang.aspect.tag.Degree": {
+    "description": "Group heading on the Grammar page: word forms that inflect for this feature (Degree)"
+  },
+  "lang.aspect.tag.Person": "Person",
+  "@lang.aspect.tag.Person": {
+    "description": "Group heading on the Grammar page: word forms that inflect for this feature (Person)"
+  },
+  "lang.aspect.tag.Aspect": "Verbal aspect",
+  "@lang.aspect.tag.Aspect": {
+    "description": "Group heading on the Grammar page: word forms that inflect for this feature (Aspect)"
+  },
+  "lang.aspect.tag.Possession": "Possession",
+  "@lang.aspect.tag.Possession": {
+    "description": "Group heading on the Grammar page: word forms that inflect for this feature (Possession)"
+  },
+  "lang.aspect.tag.Polarity": "Negation",
+  "@lang.aspect.tag.Polarity": {
+    "description": "Group heading on the Grammar page: word forms that inflect for this feature (Polarity)"
+  },
+  "lang.aspect.tag.Tone": "Tone",
+  "@lang.aspect.tag.Tone": {
+    "description": "Group heading on the Grammar page: word forms that inflect for this feature (Tone)"
+  },
+  "lang.aspect.tag.Politeness": "Politeness",
+  "@lang.aspect.tag.Politeness": {
+    "description": "Group heading on the Grammar page: word forms that inflect for this feature (Politeness)"
+  },
+  "lang.aspect.tag.other": "Other forms",
+  "@lang.aspect.tag.other": {
+    "description": "Group heading on the Grammar page: forms or points that fit no feature group"
+  },
+  "lang.aspect.facet.reg": "Register",
+  "@lang.aspect.facet.reg": {
+    "description": "Filter chip row label on the Use and idioms page (reg)"
+  },
+  "lang.aspect.facet.conn": "Shade",
+  "@lang.aspect.facet.conn": {
+    "description": "Filter chip row label on the Use and idioms page (conn)"
+  },
+  "lang.aspect.facet.status": "Status",
+  "@lang.aspect.facet.status": {
+    "description": "Filter chip row label on the Use and idioms page (status)"
+  },
+  "lang.aspect.facet.all": "All",
+  "@lang.aspect.facet.all": {
+    "description": "Filter chip row label on the Use and idioms page (all)"
+  },
   "lang.aspect.writing": "Writing",
   "@lang.aspect.writing": {
     "description": "Aspect: a side of a language (label of a theory section / group in the library)."

@@ -20,6 +20,7 @@ const fm = C.foldMap('Ärger über Straße');
 ok(fm.t === 'arger uber strasse' && fm.map[fm.t.indexOf('strasse') + 5] === 'Ärger über Straße'.indexOf('ß'), 'foldMap: every folded letter knows where it came from (to cut snippets)');
 ok(C.plain('Kinetic **energy** is $E_k = \\tfrac{1}{2} m v^2$, see [docs](http://x)') === 'Kinetic energy is E_k = 1/2 m v^2, see docs', 'plain(): no markdown, links or math markup');
 
+ok(C.fold('ǧamal ḵubz ṯalāṯa ġayn') === 'jamal khubz thalatha ghayn', 'scholarly letters read as the plain ones typed (š sh, ǧ j, ḵ kh, ṯ th, ġ gh)');
 console.log('B. stable ids');
 const blocks = [{ t: 'p', text: 'One' }, { t: 'p', text: 'Two' }, { t: 'p', text: 'One' }];
 const ids = C.blockIds(blocks);
@@ -72,6 +73,9 @@ ok(r1.exact.some(x => x.r.ty === 'section') && r1.exact.some(x => x.r.ty === 'th
 const r2 = C.search(all, 'wacht auf');
 ok(r2.groups[0]?.[0] === 'word' && r2.groups[0][1][0].r.ti === 'aufwachen', 'a word is found by any of its forms (“wacht auf” → aufwachen)');
 ok(C.search(all, 'xing3').exact[0]?.r.ti.startsWith('醒') && C.search(all, 'xing').total >= 1, 'Chinese: pinyin with or without tone numbers finds 醒');
+const ar = C.fromLangCourse({ course: { id: 'ar', title: 'Ar' }, fields: [{ field: 'f', title: 'Home', concepts: [{ id: 'n.dish', gloss: 'dish' }] }], nodes: [{ id: 'n1', kind: 'lesson', title: 'Home', concepts: ['n.dish'] }], functions: [],
+  langs: { ar: { language: { name: 'Arabic' }, lexicon: { n1: { lexemes: [{ id: 'ar:sahn', lemma: 'صَحْن', translit: 'ṣaḥn', senses: ['n.dish'] }, { id: 'he:shalom', lemma: 'שָׁלוֹם', translit: 'šālôm', senses: ['n.dish'] }] } }, grammar: {}, bank: [] } } }, { courseId: 'ar', title: 'Ar' });
+ok(['صحن', 'صَحْن', 'ṣaḥn', 'sahn', 'SAHN'].every(q => C.search(ar, q).total >= 1) && ['שלום', 'šālôm', 'shalom'].every(q => C.search(ar, q).total >= 1), 'transliteration: a word is found in its own script, scholarly Latin (ṣaḥn, šālôm) or plain Latin (sahn, shalom)');
 ok(C.search(all, 'metastore', { w: 'lang' }).total === 0 && C.search(all, 'wake', { w: 'know' }).total === 0, 'filter: one side of the app');
 ok(C.search(all, 'aufwachen', { types: ['sentence'] }).total === 0 && C.search(all, 'aufgewacht', { types: ['sentence'] }).total === 1, 'filter: kinds');
 ok(C.search(all, 'wake', { langs: ['zh'] }).groups.every(([, l]) => l.every(x => x.r.lg.includes('zh'))), 'filter: languages');

@@ -14,10 +14,14 @@
 
   /* ---------- text ---------- */
   const MARKS = /[̀-֑ͯ-ׇֽֿׁׂׅׄؐ-ًؚ-ٰٟۖ-ۭ᪰-᫿᷀-᷿⃐-⃿︠-︯]/g;
+  /** Scholarly Latin letters read as the plain letters people type: š = sh, č = ch, ž = zh, ḵ / ẖ / ḫ = kh, ṯ = th, ḏ = dh, ġ = gh
+      (so «ṣaḥn», «sahn» and «صحن» are one search; dots, macrons, ʿ and ʾ are dropped by MARKS below). */
+  const TRANSLIT_TO = { 's\u030c': 'sh', 'c\u030c': 'ch', 'z\u030c': 'zh', 'k\u0331': 'kh', 'h\u0331': 'kh', 'h\u032e': 'kh', 't\u0331': 'th', 'd\u0331': 'dh', 'g\u0307': 'gh', 'g\u0331': 'gh', 'g\u030c': 'j', 'j\u030c': 'j' };
+  const TRANSLIT = /([sczkhtdgj])([\u030c\u0331\u032e\u0307])/g;
   /** The form texts are compared in: no accents, tones or vowel points, lower case, ß = ss, ς = σ, every space one ' '.
       Works character by character (foldMap relies on it). */
   function foldChar(ch) {
-    return ch.normalize('NFKD').replace(MARKS, '').toLowerCase().replace(/ß/g, 'ss').replace(/ς/g, 'σ').replace(/[\u0640\u02be\u02bf]/g, '').replace(/ى/g, 'ي')
+    return ch.normalize('NFKD').toLowerCase().replace(TRANSLIT, (m, b, d) => TRANSLIT_TO[b + d] || m).replace(MARKS, '').replace(/ß/g, 'ss').replace(/ς/g, 'σ').replace(/[\u0640\u02be\u02bf]/g, '').replace(/ى/g, 'ي')
       .replace(/[‘’ʼ`´]/g, "'").replace(/[“”«»„]/g, '"').replace(/\s/g, ' ');
   }
   const FOLD_CACHE = new Map();
