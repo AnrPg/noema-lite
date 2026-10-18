@@ -158,3 +158,4 @@ img.lx-temoji{width:56px;height:56px}img.lx-bigemoji{width:132px;height:100px}im
 .lx-ladder{list-style:none;display:flex;flex-wrap:wrap;gap:6px 14px;padding:0;margin:10px 0 0;font-size:.9em;color:var(--muted,#8a7b80)}
 .lx-ladder li{opacity:.55}.lx-ladder li.done{opacity:.8}.lx-ladder li.now{opacity:1;font-weight:600;color:inherit}
 .lx-blur .lx-tword{filter:blur(6px);cursor:pointer}.lx-nohelp .lx-help{display:none}.lx-translit{margin-inline-start:auto}
+.lx-nextword{display:flex;justify-content:flex-end;margin:18px 0 6px}

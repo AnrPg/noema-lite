@@ -52,25 +52,29 @@ function say(c, text, { slow = false } = {}) {
   if (!SP.voices.length) refreshVoices();
   const v = SP.voices.length ? voiceOf(c) : null;
   if (SP.voices.length && !v) { noVoice(c); return Promise.resolve(false); }
-  const u = new SpeechSynthesisUtterance(UI.C?.lang[c] ? N.speechText(UI.C, c, text) : String(text));
-  u.lang = tagOf(c); if (v) u.voice = v;   // voices not listed yet (first click on some browsers): the engine picks one for the language
-  u.rate = slow || spPrefs().rate === 'slow' ? N.SPEECH_RATE.slow : N.SPEECH_RATE.normal;
+  const known = !!UI.C?.lang[c], rate = slow || spPrefs().rate === 'slow' ? N.SPEECH_RATE.slow : N.SPEECH_RATE.normal;
+  const make = (txt, voice) => { const u = new SpeechSynthesisUtterance(txt); u.lang = tagOf(c); if (voice) u.voice = voice; u.rate = rate; return u; };   // voices not listed yet (first click on some browsers): the engine picks one for the language
+  const t1 = known ? N.speechText(UI.C, c, text) : String(text), t2 = known ? N.speechPlain(UI.C, c, text) : String(text);
+  /* Attempts, each given a few seconds to start: the chosen voice, then the language only, then the text without vowel marks.
+     Chrome and Safari silently drop an utterance queued right after another (nothing fires), so a start that never comes is tried again. */
+  const tries = [[t1, v], [t1, null], [t2, null]].filter((x, i, a) => i === 0 || x[0] !== a[i - 1][0] || x[1] !== a[i - 1][1]);
   return new Promise(res => {
-    let over = false; const end = ok => { if (over) return; over = true; if (SP.utter === u) SP.utter = null; res(ok); };
-    u.onend = () => end(true);
-    u.onerror = e => {
-      const code = e && e.error; if (code === 'interrupted' || code === 'canceled') return end(true);
-      if (!retried && v) {   // the chosen voice failed (some phones list voices they cannot play): once more with the language only, the engine picks its own
-        retried = true; const u2 = new SpeechSynthesisUtterance(u.text); u2.lang = u.lang; u2.rate = u.rate; u2.onend = u.onend; u2.onerror = u.onerror; SP.utter = u2;
-        try { speechSynthesis.cancel(); } catch (x) { } setTimeout(() => { try { speechSynthesis.speak(u2); } catch (x) { end(false); } }, 80); return;
-      }
-      toast(LT('lang.speech.failed', { lang: langLabel(c), code: code || 'error' })); end(false);   // said aloud to the learner (with the browser's code), never silent
+    let over = false, k = -1, timer = 0, cur = null;
+    const end = ok => { if (over) return; over = true; clearTimeout(timer); if (SP.utter === cur) SP.utter = null; res(ok); };
+    const next = code => {
+      clearTimeout(timer); k++;
+      if (k >= tries.length) { toast(LT('lang.speech.failed', { lang: langLabel(c), code: code || 'no-start' })); return end(false); }
+      const u = cur = make(tries[k][0], tries[k][1]); let started = false;
+      u.onstart = () => { started = true; clearTimeout(timer); timer = setTimeout(() => end(true), 4000 + String(text).length * 180); };   // some engines never fire 'end'
+      u.onend = () => end(true);
+      u.onerror = e => { const er = e && e.error; if (er === 'interrupted' || er === 'canceled') return end(true); u.onerror = u.onend = null; next(er); };
+      SP.utter = u;   // keep it alive until it ends
+      const go = () => { if (over || cur !== u) return; try { speechSynthesis.resume?.(); } catch (x) { } try { speechSynthesis.speak(u); } catch (x) { next('speak'); } };
+      let busy = false; try { busy = speechSynthesis.speaking || speechSynthesis.pending || speechSynthesis.paused; } catch (x) { }
+      if (busy || k) { try { speechSynthesis.cancel(); } catch (x) { } setTimeout(go, 120); } else go();
+      timer = setTimeout(() => { let sp = false; try { sp = speechSynthesis.speaking; } catch (x) { } if (!started && !sp && !over && cur === u) { u.onerror = u.onend = null; next(''); } }, 2500);   // never started: next attempt
     };
-    SP.utter = u;   // keep it alive until it ends
-    const go = () => { try { speechSynthesis.resume?.(); } catch (e) { } try { speechSynthesis.speak(u); } catch (e) { end(false); } };
-    let busy = false; try { busy = speechSynthesis.speaking || speechSynthesis.pending; } catch (e) { }
-    if (busy) { try { speechSynthesis.cancel(); } catch (e) { } setTimeout(go, 80); } else go();
-    setTimeout(() => end(true), 4000 + String(text).length * 180);   // some engines never fire 'end'
+    next();
     if (!SP.voices.length) loadVoices();   // for the next time
   });
 }

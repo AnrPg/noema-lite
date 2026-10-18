@@ -3,7 +3,7 @@
 **Who must follow this file:** every agent and every person that writes code, content, briefs, tools or designs for the
 language courses — Claude Code sessions, Cowork sessions, subagents that write words, grammar or sentences, the Claude
 skill (`noema-pack-builder`), the connector's tasks, and anyone changing the language part. It is the short, binding
-form of the decisions D1–D26 in `docs/LANGUAGES.md` (the full contract). If the two ever disagree, `docs/LANGUAGES.md`
+form of the decisions D1–D27 in `docs/LANGUAGES.md` (the full contract). If the two ever disagree, `docs/LANGUAGES.md`
 wins and this file is fixed in the same commit. `tests/lang_rules.py` fails when a decision of `docs/LANGUAGES.md` is
 missing here or when one of the places below does not point to this file.
 
@@ -134,6 +134,11 @@ package `tools/lang_course.py package` and `langcore.checkLangPackage`, which th
   `wordFeatures` entry whose grammar comes later a `from` — the id of the function (core/functions) whose lesson teaches
   it (`from: "fn.reflexive"`); the validator checks the id. In a foundation lesson the card of a word never names a thing
   the learner has not met; if you need a term the course has not taught, teach it first or leave it out.
+- **D27** **Everything a word's card teaches is trained and tested.** Each section of a card (meanings, parameters, registers,
+  synonyms by shade, antonyms, traps and confusables, collocations, idioms, usage notes, etymology, culture, pronunciation,
+  writing) needs exercises in the practice of the lesson that teaches the word, and the lesson's check must ask about every
+  section the lesson's words carry. Registers, traps and synonym shades come first: they are where learners go wrong. A
+  section with data and no exercise is a defect, not a gap to leave.
 
 ## C. Checklist for every task (copy it into every brief)
 - [ ] I read `docs/LANGUAGE_RULES.md` and the sections of `docs/LANGUAGES.md` my task touches.

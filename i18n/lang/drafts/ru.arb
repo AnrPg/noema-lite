@@ -697,6 +697,8 @@
   "lang.speech.noVoice": "На этом устройстве нет голоса ({lang})",
   "lang.speech.noVoiceToast": "На этом устройстве нет голоса ({lang}) — добавь его в системных настройках речи и перезагрузи страницу.",
   "lang.speech.failed": "🔇 Браузер не смог произнести этот текст ({lang}) ({code}). Попробуйте другой голос в Настройках > Аудирование.",
+  "lang.card.nextWord": "Следующее слово · {word}",
+  "lang.card.lastWord": "Слова закончились · назад к {lesson}",
   "lang.speech.listen": "Слушать ({lang})",
   "lang.speech.playIn": "Воспроизвести ({lang})",
   "lang.speech.play": "Слушать",

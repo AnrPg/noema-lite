@@ -697,6 +697,8 @@
   "lang.speech.noVoice": "Pas de voix ({lang}) sur cet appareil",
   "lang.speech.noVoiceToast": "Pas de voix ({lang}) sur cet appareil — ajoutes-en une dans les réglages vocaux du système, puis recharge.",
   "lang.speech.failed": "🔇 Votre navigateur n'a pas pu lire ce texte ({lang}) ({code}). Essayez une autre voix dans Réglages > Écoute.",
+  "lang.card.nextWord": "Mot suivant · {word}",
+  "lang.card.lastWord": "Tous les mots vus · retour à {lesson}",
   "lang.speech.listen": "Écouter ({lang})",
   "lang.speech.playIn": "Lire ({lang})",
   "lang.speech.play": "Écouter",

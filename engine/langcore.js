@@ -4079,7 +4079,7 @@ into the learners' languages (locale facades) are not part of the package.
 * If the run is interrupted, it resumes from the progress file (below). Tell the learner how far you got.
 
 ## Binding rules
-Read ${T}/references/LANGUAGE_RULES.md (D1–D26) and ${T}/references/language-packs.md (D19) first, then ${T}/references/LANGUAGES.md §4 and §10.2. D13–D20 apply to the
+Read ${T}/references/LANGUAGE_RULES.md (D1–D27) and ${T}/references/language-packs.md (D19) first, then ${T}/references/LANGUAGES.md §4 and §10.2. D13–D20 apply to the
 package: the language fills the course's existing nodes and functions in the course's order — it never adds a node, concept,
 function or frame (report what you would add instead); every word states its whole facade (D14); every meaning is a concept
 (D15); no built-in point of view (D16); taught through the native language — neutral texts, contrast notes for every supported
@@ -4627,7 +4627,7 @@ ${name} (tokenizer, script, keyboard, voice), and the list of work/${code}-nativ
     const claimKey = (cid, tid) => `${CLAIM}${cid}:${tid}`;
 
     /* ---------- the task as text (the connector, a copied task, the in-app runner) ---------- */
-    const RULES = `The binding rules (docs/LANGUAGE_RULES.md, D1–D26 — read the whole file: noema_authoring_guide part "languages", or references/LANGUAGE_RULES.md of the skill):
+    const RULES = `The binding rules (docs/LANGUAGE_RULES.md, D1–D27 — read the whole file: noema_authoring_guide part "languages", or references/LANGUAGE_RULES.md of the skill):
 - D19 FIRST — the language is taught through each learner's NATIVE language (docs/language-packs.md): supported natives = ${D19.natives.join(' ')} (the app's UI locales). Every general text you write (summary, blocks, procedure, traps, quiz, seeAlso, facts, word profiles, features.*.none, phenomena) names NO language outside the course and never explains through English grammar ("no ‘do’", "-ing", "is not ‘the’"): it says what the language does (the course languages may be compared; an etymology may name a source language). Every comparison is a contrast note {for, rel: same|similar|different|new|trap, text}: on EVERY grammar page one for each supported native except the page's language and one each for ${D19.groups.join(', ')} (a type note names no language: "If your language …"); a word that invites a comparison gets profile.notes. A note names only its own language (examples in it), the course languages and the point. Translations into the learners' languages (locale facades) are separate tasks.
 - R1–R3 (with D19, docs/language-packs.md §2.2–§2.4): R1 the learner sees the comparisons in three sections — "From your languages" (the native's note first, then one per C1/C2 language), "Among the languages you are learning", "From other languages" (folded, every other note) — so every supported native and type gets its note; R2 every note, pitfall, subtlety, fun fact and feeling is STRUCTURED in a Markdown subset: paragraphs separated by a blank line, "- " / "1. " lists for two or more points, **bold** for the one key sentence or word, *italic* for a cited word, an example on its own line starting with "→ "; no headings, links, HTML, tables or code; R3 every word states EVERY parameter of its part of speech declared in wordFeatures (lang/<code>/WORD_PARAMETERS.md is the map, made before any word), the most distinctive first on the word card.
 - D1 every gloss, rule text, trap and feedback is written once in the master facade: English (the course's explainLang), neutral (D19); learners read it in their own language through locale facades.
@@ -4783,8 +4783,14 @@ ${task.kind === KIND.compare || task.kind === KIND.core ? '' : `5. python3 scrip
     const Ls = []; let i = 0;
     while (i < cs.length) { if (isL(cs[i])) { const marks = new Set(); let j = i + 1; while (j < cs.length && isM(cs[j])) marks.add(cs[j++]); Ls.push({ ch: cs[i], m: marks }); i = j; } else { Ls.push({ raw: cs[i] }); i++; } }
     let s = '';
+    Ls.forEach((l, k) => {   // the article: ال- is «al-», with the sun letters «aṭ-ṭ…» (the lām is assimilated and the next letter carries a šadda)
+      const n1 = Ls[k + 1], n2 = Ls[k + 2], st = !Ls[k - 1] || Ls[k - 1].raw != null;
+      if (st && (l.ch === 'ا' || l.ch === 'ٱ') && n1 && n1.ch === 'ل' && !n1.m.size && n2 && n2.ch && l.m.size === 0 || (st && (l.ch === 'ا' || l.ch === 'ٱ') && n1 && n1.ch === 'ل' && n2 && n2.ch && n2.m.has('ّ'))) { l.art = true; n1.skip = true; if (n2.m.has('ّ') && AR_C[n2.ch] != null) { n2.nodouble = true; l.sun = AR_C[n2.ch]; } }
+    });
     Ls.forEach((l, k) => {
       if (l.raw != null) { s += l.raw; return; }
+      if (l.skip) return;
+      if (l.art) { s += 'a' + (l.sun ? l.sun + '-' : 'l-'); return; }
       const { ch, m } = l, prev = Ls[k - 1], next = Ls[k + 1], wordStart = !prev || prev.raw != null, wordEnd = !next || next.raw != null;
       const has = x => m.has(x), pm = prev && prev.m;
       let c = '';
@@ -4797,7 +4803,7 @@ ${task.kind === KIND.compare || task.kind === KIND.core ? '' : `5. python3 scrip
       } else c = AR_C[ch] != null ? AR_C[ch] : '';
       if (ch === 'ة') c = wordEnd && !m.size ? '' : 't';
       if (ch === 'ى') { s = s.replace(/a$/, ''); s += 'ā'; return; }
-      if (has('ّ')) { if (ch === 'ي' && wordEnd) { s = s.replace(/i$/, '') + 'ī'; return; } c += c; }
+      if (has('ّ') && !l.nodouble) { if (ch === 'ي' && wordEnd) { s = s.replace(/i$/, '') + 'ī'; return; } c += c; }
       s += c;
       if (has('َ')) s += 'a'; else if (has('ُ')) s += 'u'; else if (has('ِ')) s += 'i';
       if (has('ً')) s += 'an'; if (has('ٌ')) s += 'un'; if (has('ٍ')) s += 'in';
@@ -4808,7 +4814,10 @@ ${task.kind === KIND.compare || task.kind === KIND.core ? '' : `5. python3 scrip
   /** The romanization of a word of text in a course language without a stored one: ar, he (by rules; the stored romanization of a lexeme always wins), else null. */
   const romanize = (code, text) => code === 'he' ? romanizeHe(text) : code === 'ar' ? romanizeAr(text) : null;
   /** The text sent to the voice: the stored text as written (vowel marks included — not the faded display). */
-  const speechText = (C, code, text) => nfc(text).replace(/\s+/g, ' ').trim();
+  /** What the voice is given: Hebrew without niqqud and cantillation (the browsers' Hebrew voices then read only the punctuation); the rest as stored. */
+  const speechText = (C, code, text) => { let t = nfc(text).replace(/\s+/g, ' ').trim(); if (code === 'he') t = t.replace(/[\u0591-\u05C7]/g, ''); return t; };
+  /** The fallback for a voice that fails on vowel marks: Arabic without harakat too. */
+  const speechPlain = (C, code, text) => speechText(C, code, text).replace(code === 'ar' ? /[\u064B-\u065F\u0670\u0640]/g : /$^/, '');
 
   /* what the device can do (the UI sets it; in Node everything is assumed possible) */
   let SPEECH_CAPS = null;
@@ -5057,7 +5066,7 @@ ${task.kind === KIND.compare || task.kind === KIND.core ? '' : `5. python3 scrip
   for (const type of SPEECH_TYPES) GEN[type] = ctx => speechItems(ctx.C, ctx.L, ctx.code, type, { k: ctx.k, rng: ctx.rng, max: ctx.max, fn: ctx.fid,
     words: ctx.gen?.lemmas || (['dictation', 'listen_meaning', 'shadowing', 'speak'].includes(type) ? [] : undefined), pos: ctx.gen?.pos, sentences: ['dictation', 'listen_meaning', 'shadowing', 'speak'].includes(type) && !ctx.gen?.lemmas ? ctx.bank() : undefined, wordsOnly: !!ctx.gen?.lemmas });
   API.GEN = GEN;
-  Object.assign(API, { romanize, fnTaught, SPEECH_TAGS, SPEECH_RATE, SPEECH_TYPES, speechTag, voicesFor, pickVoice, speechText, setSpeechCaps, soundKey, homophones, spokenTones, speechItems, checkDictation, checkSpoken, spokenFold, speechRecord, speechPlan, getSpeechCaps: () => SPEECH_CAPS });   // P9 — listening and speaking
+  Object.assign(API, { romanize, fnTaught, SPEECH_TAGS, SPEECH_RATE, SPEECH_TYPES, speechTag, voicesFor, pickVoice, speechText, speechPlain, setSpeechCaps, soundKey, homophones, spokenTones, speechItems, checkDictation, checkSpoken, spokenFold, speechRecord, speechPlan, getSpeechCaps: () => SPEECH_CAPS });   // P9 — listening and speaking
   /* ---------- extensions by phase (P4 script, P5 grammar, P6 polyglot, P7 production): each adds its functions with Object.assign(API, {…}) in its own section below ---------- */
   root.NoemaLang = API;
   if (typeof module !== 'undefined' && module.exports) module.exports = API;

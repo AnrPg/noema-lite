@@ -143,7 +143,10 @@ function sentenceView(c, s, unknown = []) {
   const X = LX(c), un = new Set(unknown), parts = [];
   for (const k of s.tokens) {
     const l = k.l || (k.parts || []).map(p => p.l).filter(x => x && X.lex[x]).slice(-1)[0];
-    if (k.p || !l || !X.lex[l]) { parts.push({ t: k.t, el: h('span', { lang: c }, k.t) }); continue; }
+    if (k.p || !l || !X.lex[l]) {
+      const rm0 = !k.p && wantRoman(c) && /\p{M}/u.test(k.t) ? N.romanize(c, N.nfc(k.t)) : null;   // not in the course: still read by rule (Hebrew / Arabic with vowel marks)
+      parts.push({ t: k.t, el: rm0 ? h('ruby', { class: 'lx-ru', lang: c }, k.t, h('rt', { class: 'lx-help', lang: 'und-Latn', dir: 'ltr' }, rm0)) : h('span', { lang: c }, k.t) }); continue;
+    }
     const isNew = un.has(l), rm = wantRoman(c) ? romanTok(c, k.t, l) : null;
     const el = h(rm ? 'ruby' : 'span', { class: 'lx-w lx-tok' + (isNew ? ' lx-new' : ''), lang: c, title: (isNew ? '🆕 ' : '') + gloss(c, l), tabindex: '0',
       onclick: e => { e.stopPropagation(); wordPopup(c, l); } }, shownMarks(c, k.t, X.lex[l]), rm ? h('rt', { class: 'lx-help', lang: 'und-Latn', dir: 'ltr' }, rm) : null);
@@ -192,16 +195,24 @@ function splitRun(run, code, text) {
   let toks = null; try { toks = N.tokenize(UI.C, code, s); } catch (err) { }
   if (!toks) return;
   const parts = []; let at = 0;
+  const quiet = run.parentElement?.classList.contains('lx-wbox') || !wantRoman(code);   // the word's own box already has its reading
+  const reading = (k, cls, l, body) => {   // a word with its reading under it, or in [brackets] inside prose
+    const rm = quiet ? null : romanTok(code, k.t, l), at0 = l ? { 'data-l': l } : {};
+    return !rm ? h('span', { class: cls, ...at0 }, body)
+      : inProse(run) ? h('span', { class: cls, ...at0 }, body, h('span', { class: 'lx-help lx-br', lang: 'und-Latn', dir: 'ltr' }, ' [' + rm + ']'))
+      : h('ruby', { class: cls, ...at0 }, body, h('rt', { class: 'lx-help', lang: 'und-Latn', dir: 'ltr' }, rm));
+  };
   for (const k of toks) {
-    if (k.p || k.unknown) continue;
+    if (k.p) continue;
     const i = s.indexOf(k.t, at); if (i < 0) return;
-    const last = k.parts ? k.parts[k.parts.length - 1] : k, l = wordOf(code, X, last.t, last.matches || []); if (!l) continue;
+    const last = k.parts ? k.parts[k.parts.length - 1] : k, l = k.unknown ? null : wordOf(code, X, last.t, last.matches || []);
+    if (!l) {   // not in the course: no card, but the learner still gets its reading (rule-based, Hebrew / Arabic)
+      if (quiet || !/\p{L}/u.test(k.t) || !/\p{M}/u.test(k.t) || !N.romanize(code, N.nfc(k.t))) continue;   // only words that carry their vowel marks can be read by rule
+      if (i > at) parts.push(shownMarks(code, s.slice(at, i), null));
+      parts.push(reading(k, 'lx-ru', null, shownMarks(code, k.t, null))); at = i + k.t.length; continue;
+    }
     if (i > at) parts.push(shownMarks(code, s.slice(at, i), null));
-    const rm = run.parentElement?.classList.contains('lx-wbox') || !wantRoman(code) ? null : romanTok(code, k.t, l);   // the word's own box already has its reading
-    parts.push(!rm ? h('span', { class: 'lx-rw', 'data-l': l }, shownMarks(code, k.t, X.lex[l]))
-      : inProse(run) ? h('span', { class: 'lx-rw', 'data-l': l }, shownMarks(code, k.t, X.lex[l]), h('span', { class: 'lx-help lx-br', lang: 'und-Latn', dir: 'ltr' }, ' [' + rm + ']'))
-      : h('ruby', { class: 'lx-rw', 'data-l': l }, shownMarks(code, k.t, X.lex[l]), h('rt', { class: 'lx-help', lang: 'und-Latn', dir: 'ltr' }, rm)));
-    at = i + k.t.length;
+    parts.push(reading(k, 'lx-rw', l, shownMarks(code, k.t, X.lex[l]))); at = i + k.t.length;
   }
   if (!parts.length) return;
   if (at < s.length) parts.push(shownMarks(code, s.slice(at), null));
@@ -577,6 +588,12 @@ VIEWS.c = (v, r) => {
     if (X.absent[cid]) v.append(h('div', { class: 'lx-absent' }, h('b', {}, info(UI.lang).flag + ' ' + LT('lang.card.noWordFor', { lang: info(UI.lang).name }) + ' '), X.absent[cid].reason, X.absent[cid].use ? h('div', {}, LT('lang.card.instead') + ' ', h('b', {}, X.absent[cid].use)) : null));
     else if (node && !X.prepared[node.id]) v.append(h('p', { class: 'lx-note' }, '⏳ ' + LT('lang.card.unwrittenIn', { lang: info(UI.lang).name })));
     for (const lid of lids) v.append(wordCardView(UI.lang, lid, cid));
+    if (node) {   // on to the next word of the same lesson, or back to the lesson after the last
+      const order = node.concepts || [], at = order.indexOf(cid), nx = at >= 0 ? order[at + 1] : null;
+      v.append(h('div', { class: 'lx-nextword' }, nx
+        ? h('button', { class: 'btn primary', onclick: () => go('#/c/' + encodeURIComponent(nx)) }, LT('lang.card.nextWord', { word: UI.C.concepts[nx]?.gloss || nx }) + ' →')
+        : h('button', { class: 'btn', onclick: () => go('#/node/' + node.id) }, LT('lang.card.lastWord', { lesson: node.title }))));
+    }
   };
   draw();
 };
@@ -673,7 +690,7 @@ function wordCardView(c, lid, concept) {
       h('div', { class: 'lx-lemma' }, word(c, lx.lemma, { lex: lx })),
       h('div', { class: 'lx-meta' }, h('div', {}, h('b', {}, card.gloss)), h('div', { class: 'lx-chips' },
         badge(STATE_LABEL[card.state] || card.state, 'st s-' + card.state), badge(card.frequency, 'freq'), badge(card.status && card.status !== 'current' ? codeWord('lang.expl.status.', card.status) : null, 'reg'),
-        ...card.register.map(r => badge('🎭 ' + regWord(r), 'reg')), badge(card.connotation && CONNOTATION[card.connotation] ? CONNOTATION[card.connotation] + ' ' + LT('lang.card.conn.' + card.connotation) : null, 'ctx'),
+        ...card.register.map(r => badge('🎭 ' + regWord(r), 'reg')), badge(card.connotation && card.connotation !== 'neutral' && CONNOTATION[card.connotation] ? CONNOTATION[card.connotation] + ' ' + LT('lang.card.conn.' + card.connotation) : null, 'ctx'),
         card.intensity ? badge(LT('lang.card.strength', { dots: '●'.repeat(card.intensity) + '○'.repeat(5 - card.intensity) }), 'ctx') : null))),
     card.params?.length ? paramsBlock(c, card.params)   // R3: the word's parameters, right under it
       : card.parts.length ? h('dl', { class: 'lx-parts' }, ...card.parts.flatMap(([k, val]) => [h('dt', {}, k), h('dd', {}, /[֐-ۿ一-鿿]/.test(val) ? word(c, val, { sub: false }) : val)])) : null,
@@ -3899,25 +3916,29 @@ function say(c, text, { slow = false } = {}) {
   if (!SP.voices.length) refreshVoices();
   const v = SP.voices.length ? voiceOf(c) : null;
   if (SP.voices.length && !v) { noVoice(c); return Promise.resolve(false); }
-  const u = new SpeechSynthesisUtterance(UI.C?.lang[c] ? N.speechText(UI.C, c, text) : String(text));
-  u.lang = tagOf(c); if (v) u.voice = v;   // voices not listed yet (first click on some browsers): the engine picks one for the language
-  u.rate = slow || spPrefs().rate === 'slow' ? N.SPEECH_RATE.slow : N.SPEECH_RATE.normal;
+  const known = !!UI.C?.lang[c], rate = slow || spPrefs().rate === 'slow' ? N.SPEECH_RATE.slow : N.SPEECH_RATE.normal;
+  const make = (txt, voice) => { const u = new SpeechSynthesisUtterance(txt); u.lang = tagOf(c); if (voice) u.voice = voice; u.rate = rate; return u; };   // voices not listed yet (first click on some browsers): the engine picks one for the language
+  const t1 = known ? N.speechText(UI.C, c, text) : String(text), t2 = known ? N.speechPlain(UI.C, c, text) : String(text);
+  /* Attempts, each given a few seconds to start: the chosen voice, then the language only, then the text without vowel marks.
+     Chrome and Safari silently drop an utterance queued right after another (nothing fires), so a start that never comes is tried again. */
+  const tries = [[t1, v], [t1, null], [t2, null]].filter((x, i, a) => i === 0 || x[0] !== a[i - 1][0] || x[1] !== a[i - 1][1]);
   return new Promise(res => {
-    let over = false; const end = ok => { if (over) return; over = true; if (SP.utter === u) SP.utter = null; res(ok); };
-    u.onend = () => end(true);
-    u.onerror = e => {
-      const code = e && e.error; if (code === 'interrupted' || code === 'canceled') return end(true);
-      if (!retried && v) {   // the chosen voice failed (some phones list voices they cannot play): once more with the language only, the engine picks its own
-        retried = true; const u2 = new SpeechSynthesisUtterance(u.text); u2.lang = u.lang; u2.rate = u.rate; u2.onend = u.onend; u2.onerror = u.onerror; SP.utter = u2;
-        try { speechSynthesis.cancel(); } catch (x) { } setTimeout(() => { try { speechSynthesis.speak(u2); } catch (x) { end(false); } }, 80); return;
-      }
-      toast(LT('lang.speech.failed', { lang: langLabel(c), code: code || 'error' })); end(false);   // said aloud to the learner (with the browser's code), never silent
+    let over = false, k = -1, timer = 0, cur = null;
+    const end = ok => { if (over) return; over = true; clearTimeout(timer); if (SP.utter === cur) SP.utter = null; res(ok); };
+    const next = code => {
+      clearTimeout(timer); k++;
+      if (k >= tries.length) { toast(LT('lang.speech.failed', { lang: langLabel(c), code: code || 'no-start' })); return end(false); }
+      const u = cur = make(tries[k][0], tries[k][1]); let started = false;
+      u.onstart = () => { started = true; clearTimeout(timer); timer = setTimeout(() => end(true), 4000 + String(text).length * 180); };   // some engines never fire 'end'
+      u.onend = () => end(true);
+      u.onerror = e => { const er = e && e.error; if (er === 'interrupted' || er === 'canceled') return end(true); u.onerror = u.onend = null; next(er); };
+      SP.utter = u;   // keep it alive until it ends
+      const go = () => { if (over || cur !== u) return; try { speechSynthesis.resume?.(); } catch (x) { } try { speechSynthesis.speak(u); } catch (x) { next('speak'); } };
+      let busy = false; try { busy = speechSynthesis.speaking || speechSynthesis.pending || speechSynthesis.paused; } catch (x) { }
+      if (busy || k) { try { speechSynthesis.cancel(); } catch (x) { } setTimeout(go, 120); } else go();
+      timer = setTimeout(() => { let sp = false; try { sp = speechSynthesis.speaking; } catch (x) { } if (!started && !sp && !over && cur === u) { u.onerror = u.onend = null; next(''); } }, 2500);   // never started: next attempt
     };
-    SP.utter = u;   // keep it alive until it ends
-    const go = () => { try { speechSynthesis.resume?.(); } catch (e) { } try { speechSynthesis.speak(u); } catch (e) { end(false); } };
-    let busy = false; try { busy = speechSynthesis.speaking || speechSynthesis.pending; } catch (e) { }
-    if (busy) { try { speechSynthesis.cancel(); } catch (e) { } setTimeout(go, 80); } else go();
-    setTimeout(() => end(true), 4000 + String(text).length * 180);   // some engines never fire 'end'
+    next();
     if (!SP.voices.length) loadVoices();   // for the next time
   });
 }

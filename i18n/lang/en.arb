@@ -4007,6 +4007,20 @@
       "code": { "type": "String" }
     }
   },
+  "lang.card.nextWord": "Next word · {word}",
+  "@lang.card.nextWord": {
+    "description": "Button at the bottom of a word page: go to the next word of the same lesson",
+    "placeholders": {
+      "word": { "type": "String" }
+    }
+  },
+  "lang.card.lastWord": "All words done · back to {lesson}",
+  "@lang.card.lastWord": {
+    "description": "Button at the bottom of the last word page of a lesson: back to the lesson",
+    "placeholders": {
+      "lesson": { "type": "String" }
+    }
+  },
   "lang.speech.listen": "Listen ({lang})",
   "@lang.speech.listen": {
     "description": "Tooltip and accessible name of a 🔊 button after a word or sentence. {lang} = language name.",

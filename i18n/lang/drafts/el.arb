@@ -697,6 +697,8 @@
   "lang.speech.noVoice": "Δεν υπάρχει φωνή για τα {lang} σε αυτή τη συσκευή",
   "lang.speech.noVoiceToast": "Δεν υπάρχει φωνή για τα {lang} σε αυτή τη συσκευή — πρόσθεσε μία στις ρυθμίσεις ομιλίας του συστήματος και μετά φόρτωσε ξανά τη σελίδα.",
   "lang.speech.failed": "🔇 Ο browser δεν μπόρεσε να πει αυτό το κείμενο ({lang}) ({code}). Δοκίμασε άλλη φωνή στις Ρυθμίσεις > Ακρόαση.",
+  "lang.card.nextWord": "Επόμενη λέξη · {word}",
+  "lang.card.lastWord": "Τέλος λέξεων · πίσω στο {lesson}",
   "lang.speech.listen": "Άκου ({lang})",
   "lang.speech.playIn": "Αναπαραγωγή ({lang})",
   "lang.speech.play": "Άκου",

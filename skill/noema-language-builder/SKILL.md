@@ -57,9 +57,9 @@ toolkit the same files sit next to `LANGUAGE_BUILDER.md` (this text). Everything
   skip an audit turn. At the end say what a native speaker should still check.
 
 ## 1. Binding rules
-Read `$T/references/LANGUAGE_RULES.md` (D1–D26, binding) and `$T/references/language-packs.md` (D19, the contract of the
+Read `$T/references/LANGUAGE_RULES.md` (D1–D27, binding) and `$T/references/language-packs.md` (D19, the contract of the
 explanation layers) before anything else, then `$T/references/LANGUAGES.md` §4 (the content model) and §10.2 (the
-package). D13–D26 apply to the package exactly as to the library: the new language
+package). D13–D27 apply to the package exactly as to the library: the new language
 **fills the course's existing nodes and grammar functions** in the course's order — it never adds a node, concept,
 function or frame (report what you would add instead); every word states its whole facade (D14); every meaning is a
 concept (D15); no built-in point of view (D16); **taught through the native language (D19)**: neutral texts, and every

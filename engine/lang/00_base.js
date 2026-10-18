@@ -139,7 +139,10 @@ function sentenceView(c, s, unknown = []) {
   const X = LX(c), un = new Set(unknown), parts = [];
   for (const k of s.tokens) {
     const l = k.l || (k.parts || []).map(p => p.l).filter(x => x && X.lex[x]).slice(-1)[0];
-    if (k.p || !l || !X.lex[l]) { parts.push({ t: k.t, el: h('span', { lang: c }, k.t) }); continue; }
+    if (k.p || !l || !X.lex[l]) {
+      const rm0 = !k.p && wantRoman(c) && /\p{M}/u.test(k.t) ? N.romanize(c, N.nfc(k.t)) : null;   // not in the course: still read by rule (Hebrew / Arabic with vowel marks)
+      parts.push({ t: k.t, el: rm0 ? h('ruby', { class: 'lx-ru', lang: c }, k.t, h('rt', { class: 'lx-help', lang: 'und-Latn', dir: 'ltr' }, rm0)) : h('span', { lang: c }, k.t) }); continue;
+    }
     const isNew = un.has(l), rm = wantRoman(c) ? romanTok(c, k.t, l) : null;
     const el = h(rm ? 'ruby' : 'span', { class: 'lx-w lx-tok' + (isNew ? ' lx-new' : ''), lang: c, title: (isNew ? '🆕 ' : '') + gloss(c, l), tabindex: '0',
       onclick: e => { e.stopPropagation(); wordPopup(c, l); } }, shownMarks(c, k.t, X.lex[l]), rm ? h('rt', { class: 'lx-help', lang: 'und-Latn', dir: 'ltr' }, rm) : null);
@@ -188,16 +191,24 @@ function splitRun(run, code, text) {
   let toks = null; try { toks = N.tokenize(UI.C, code, s); } catch (err) { }
   if (!toks) return;
   const parts = []; let at = 0;
+  const quiet = run.parentElement?.classList.contains('lx-wbox') || !wantRoman(code);   // the word's own box already has its reading
+  const reading = (k, cls, l, body) => {   // a word with its reading under it, or in [brackets] inside prose
+    const rm = quiet ? null : romanTok(code, k.t, l), at0 = l ? { 'data-l': l } : {};
+    return !rm ? h('span', { class: cls, ...at0 }, body)
+      : inProse(run) ? h('span', { class: cls, ...at0 }, body, h('span', { class: 'lx-help lx-br', lang: 'und-Latn', dir: 'ltr' }, ' [' + rm + ']'))
+      : h('ruby', { class: cls, ...at0 }, body, h('rt', { class: 'lx-help', lang: 'und-Latn', dir: 'ltr' }, rm));
+  };
   for (const k of toks) {
-    if (k.p || k.unknown) continue;
+    if (k.p) continue;
     const i = s.indexOf(k.t, at); if (i < 0) return;
-    const last = k.parts ? k.parts[k.parts.length - 1] : k, l = wordOf(code, X, last.t, last.matches || []); if (!l) continue;
+    const last = k.parts ? k.parts[k.parts.length - 1] : k, l = k.unknown ? null : wordOf(code, X, last.t, last.matches || []);
+    if (!l) {   // not in the course: no card, but the learner still gets its reading (rule-based, Hebrew / Arabic)
+      if (quiet || !/\p{L}/u.test(k.t) || !/\p{M}/u.test(k.t) || !N.romanize(code, N.nfc(k.t))) continue;   // only words that carry their vowel marks can be read by rule
+      if (i > at) parts.push(shownMarks(code, s.slice(at, i), null));
+      parts.push(reading(k, 'lx-ru', null, shownMarks(code, k.t, null))); at = i + k.t.length; continue;
+    }
     if (i > at) parts.push(shownMarks(code, s.slice(at, i), null));
-    const rm = run.parentElement?.classList.contains('lx-wbox') || !wantRoman(code) ? null : romanTok(code, k.t, l);   // the word's own box already has its reading
-    parts.push(!rm ? h('span', { class: 'lx-rw', 'data-l': l }, shownMarks(code, k.t, X.lex[l]))
-      : inProse(run) ? h('span', { class: 'lx-rw', 'data-l': l }, shownMarks(code, k.t, X.lex[l]), h('span', { class: 'lx-help lx-br', lang: 'und-Latn', dir: 'ltr' }, ' [' + rm + ']'))
-      : h('ruby', { class: 'lx-rw', 'data-l': l }, shownMarks(code, k.t, X.lex[l]), h('rt', { class: 'lx-help', lang: 'und-Latn', dir: 'ltr' }, rm)));
-    at = i + k.t.length;
+    parts.push(reading(k, 'lx-rw', l, shownMarks(code, k.t, X.lex[l]))); at = i + k.t.length;
   }
   if (!parts.length) return;
   if (at < s.length) parts.push(shownMarks(code, s.slice(at), null));
