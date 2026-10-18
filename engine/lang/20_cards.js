@@ -37,13 +37,18 @@ VIEWS.c = (v, r) => {
     v.innerHTML = ''; topbar();
     v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.length > 1 || !node ? history.back() : go('#/node/' + node.id) }, arrowBack() + ' ' + (node ? node.title : LT('lang.card.back')))),
       h('div', { class: 'lx-cardhead' }, conceptPic(cid, 'lx-bigemoji'), h('div', {}, h('h1', {}, con.gloss), h('div', { class: 'tiny' }, [node ? node.title : '⏳ ' + LT('lang.card.untaughtMeaning'), con.wikidata ? 'Wikidata ' + con.wikidata : null].filter(Boolean).join(' · ')))),   // i18n-ignore (Wikidata: a name)
-      h('div', { class: 'row' }, flagRail(cid, UI.lang, x => { UI.lang = x; UI.prefs.lang = x; save(); draw(); }),
-        UI.C.languages.length > 1 ? h('button', { class: 'btn small' + (UI.prefs.compare ? ' primary' : ''), onclick: () => { UI.prefs.compare = !UI.prefs.compare; save(); draw(); } }, '⇄ ' + LT('lang.view.cmp')) : null));
-    if (UI.prefs.compare && UI.C.languages.length > 1) v.append(compareTable(cid), polyConceptStrip(cid));   // + the bridges among its words (P6)
+      h('div', { class: 'row' }, flagRail(cid, UI.lang, x => { UI.lang = x; UI.prefs.lang = x; save(); draw(); })));
     const X = LX(UI.lang), lids = X.byConcept[cid] || [];
     if (X.absent[cid]) v.append(h('div', { class: 'lx-absent' }, h('b', {}, info(UI.lang).flag + ' ' + LT('lang.card.noWordFor', { lang: info(UI.lang).name }) + ' '), X.absent[cid].reason, X.absent[cid].use ? h('div', {}, LT('lang.card.instead') + ' ', h('b', {}, X.absent[cid].use)) : null));
     else if (node && !X.prepared[node.id]) v.append(h('p', { class: 'lx-note' }, '⏳ ' + LT('lang.card.unwrittenIn', { lang: info(UI.lang).name })));
     for (const lid of lids) v.append(wordCardView(UI.lang, lid, cid));
+    if (UI.C.languages.length > 1) {   // the same meaning in the other languages: folded under the word (the full table is one link away)
+      const det = h('details', { class: 'lx-others', open: !!UI.prefs.compare });
+      det.addEventListener('toggle', () => { UI.prefs.compare = det.open; save(); });
+      det.append(h('summary', {}, LT('lang.hub.otherLangs')), compareTable(cid), polyConceptStrip(cid),   // + the bridges among its words (P6)
+        h('a', { class: 'lx-fulltable', href: FR.on ? toHash('#/cmp/c/' + cid) : '#/cmp/c/' + cid }, LT('lang.hub.fullTable') + ' →'));
+      v.append(det);
+    }
     if (node) {   // on to the next word of the same lesson, or back to the lesson after the last
       const order = node.concepts || [], at = order.indexOf(cid), nx = at >= 0 ? order[at + 1] : null;
       v.append(h('div', { class: 'lx-nextword' }, nx

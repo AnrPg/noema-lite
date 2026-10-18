@@ -134,7 +134,7 @@ back `<subject_id>.noema.zip`.
 
 ## Language courses (🌍 Languages)
 Foreign-language courses are not subject packs. **Read `references/LANGUAGE_RULES.md` first — it is binding for every
-task on a language course** (the short form of decisions D1–D28; with the connector: `noema_authoring_guide` part
+task on a language course** (the short form of decisions D1–D29; with the connector: `noema_authoring_guide` part
 "languages"); the full contract is `references/LANGUAGES.md`. Courses are checked with `tools/validate_lang.py`,
 `tools/lang_refcheck.py` and `tools/lang_phenomena.py`. The hard rules, in short:
 0. **Taught through the learner's native language** (D19, `references/language-packs.md` — first): supported natives =

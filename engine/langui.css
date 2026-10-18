@@ -199,6 +199,29 @@ rt.lx-help{font-size:.58em;font-style:italic;font-family:system-ui,sans-serif;co
 ruby.lx-rw,ruby.lx-tok,ruby.lx-ru{line-height:2.6}
 rt.lx-help{padding-top:.45em}
 ruby.lx-rw,ruby.lx-tok,ruby.lx-ru{margin-inline:.1em}
+
+/* ---------- the home of one language (#/lang/<code>) and the folded “In other languages” ---------- */
+.lx-lhhead { display: flex; align-items: center; gap: 12px; margin: 4px 0 10px; }
+.lx-lhhead h1 { margin: 0; }
+.lx-lhflag { font-size: 2rem; }
+.lx-lhgo { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 14px; border: 1px solid var(--line, #0002); border-radius: 12px; background: color-mix(in srgb, var(--accent, #7a8) 8%, transparent); }
+.lx-lhpath, .lx-lhlib { display: flex; flex-wrap: wrap; gap: 6px; }
+.lx-lhstep, .lx-lhtile { border: 1px solid var(--line, #0002); background: transparent; color: inherit; border-radius: 10px; padding: 6px 12px; cursor: pointer; font: inherit; }
+.lx-lhstep.d { opacity: .55; }
+.lx-lhstep.n { border-color: var(--accent, #7a8); background: color-mix(in srgb, var(--accent, #7a8) 14%, transparent); }
+.lx-lhtile { min-width: 110px; text-align: left; }
+.lx-lhmore { margin-top: 14px; }
+.lx-others { margin: 14px 0; border: 1px solid var(--line, #0002); border-radius: 10px; padding: 6px 12px; }
+.lx-others > summary { cursor: pointer; font-weight: 600; }
+.lx-fulltable { display: inline-block; margin-top: 8px; }
+
+/* aspects: a small label and a pale tint per side of the language (no icons) */
+.lx-asplabel { font-size: .72rem; letter-spacing: .04em; text-transform: uppercase; opacity: .7; margin-left: 8px; }
+div.lx-asp, article.lx-asp, section.lx-asp { background: color-mix(in srgb, hsl(var(--asp) 60% 60%) 9%, var(--card, #fff)) !important; border-left: 3px solid hsl(var(--asp) 45% 65% / .6); }
+.lx-asp { --asp: 200; }
+.lx-asp.lx-asp-phonology { --asp: 20; } .lx-asp.lx-asp-morphology { --asp: 150; } .lx-asp.lx-asp-syntax { --asp: 215; } .lx-asp.lx-asp-semantics { --asp: 275; }
+.lx-asp.lx-asp-lexicon { --asp: 45; } .lx-asp.lx-asp-pragmatics { --asp: 335; } .lx-asp.lx-asp-writing { --asp: 100; } .lx-asp.lx-asp-listening { --asp: 185; }
+.lx-asp.lx-asp-reading { --asp: 240; } .lx-asp.lx-asp-culture { --asp: 5; }
 /* P7 — production and reading (docs/LANGUAGES.md §6.5, §8 Tutor): the writing and reading lanes, their widgets, the tutor drawer */
 .lx-prodlanes{margin:8px 0 4px}
 .lx-lanes{display:grid;gap:8px}

@@ -311,7 +311,7 @@ function foldRemote(e) {
 addEventListener('noema:remote', foldRemote);
 const today = () => N.dayNumber();
 /** D25: the course's title names only the languages the learner studies (a title made of language names is rebuilt from them). */
-const courseTitle = () => { const c = UI.C.data.course, names = (UI.C.languages || []).map(x => info(x).label), all = (c.languages || []).map(x => info(x).label); return all.length && all.every(n => c.title.includes(n)) && names.length ? names.join(' · ') : c.title; };
+const courseTitle = () => { if (UI.scope) return info(UI.scope).label; const c = UI.C.data.course, names = (UI.C.languages || []).map(x => info(x).label), all = (c.languages || []).map(x => info(x).label); return all.length && all.every(n => c.title.includes(n)) && names.length ? names.join(' · ') : c.title; };
 const activeLangs = () => (UI.L.settings.languages || UI.C.languages).filter(c => UI.C.lang[c]);
 /* ---------- D21: the learner chooses the languages to study (docs/LANGUAGES.md §8 *Languages to study*) ----------
    One answer for the whole app: a:settings.studyLangs (synced, in backups) — the languages the learner studies, in every course
@@ -345,14 +345,15 @@ function toggleStudy(code, on) {
 let wired = false;
 /** Open a course. host: an element inside the frame (the course is drawn there, its addresses live under #/lang/<course>/…,
     onRoute({ view, label, home }) tells the frame where the learner is); without it the course takes the whole page. */
-function start({ acc, id, data, host = null, onRoute = null }) {
+function start({ acc, id, data, host = null, onRoute = null, base = null, scope = null }) {
   if (UI.C && UI.acc) save(true);   // another course was open in this page (the frame opens one after the other)
   UI.acc = acc; UI.id = id; UI.data = data; UI.facade = null; UI.profMap = null; UI.L = null; UI.C = buildCourse(data); UI.L = loadLearner(); UI.day = today(); UI.profiles = false;
   window.NoemaLangUI?.claude?.activateAdded?.();   // a language a package added (docs/LANGUAGES.md §10.2) is active once
   if (studyChoice().langs.join() !== UI.C.languages.join()) { save(true); UI.C = buildCourse(data); UI.L = loadLearner(); }   // D21: … and studied
   applyExplanationLocale();   // D19: the explanations in the learner's native language (its facade), when one is on
   UI.lang = UI.prefs.lang && UI.C.lang[UI.prefs.lang] ? UI.prefs.lang : activeLangs()[0];
-  FR.on = !!host; FR.host = host; FR.onRoute = onRoute; FR.base = host ? '#/lang/' + encodeURIComponent(id) : '';
+  UI.scope = scope && UI.C.lang[scope] ? scope : null; if (UI.scope) UI.lang = UI.scope;   // #/lang/<code>: the page is about one language
+  FR.on = !!host; FR.host = host; FR.onRoute = onRoute; FR.base = host ? base || '#/lang/' + encodeURIComponent(id) : '';
   document.title = `${courseTitle()} · noema-lite`;   // i18n-ignore (the course title and the app name)
   document.documentElement.lang = UI.C.explainLang;
   document.body.classList.add('lx');
@@ -443,7 +444,12 @@ function topbar() {
       h('span', { class: 'lx-flag' }, info(c).flag), c.toUpperCase(), h('span', { class: 'lx-ring', style: { '--p': total ? Math.round(kn / total * 100) : 0 } }));
   });
   const explain = h('span', { class: 'chip lx-explain', title: LT('lang.shell.explainTitle') }, '💬 ' + info(UI.C.explainLang).name);
-  if (FR.on) { t.append(...chips, h('span', { class: 'spacer' }), explain); return; }   // the frame has the title (crumbs), ⚙️ and the other courses (⋮)
+  if (FR.on) {   // the strip of your languages: All · one chip per language; a chip opens the same page for that language (the address carries it)
+    const inner = (innerHash() || '#/').replace(/^#\/?/, ''), tail = inner ? '/' + inner : '';
+    const to = c => { const b = c ? '#/lang/' + encodeURIComponent(c) : '#/lang/' + encodeURIComponent(UI.id); location.hash = b + tail; };
+    const all = h('button', { class: 'chip lx-flagchip lx-allchip' + (UI.scope ? '' : ' on'), title: LT('lang.hub.allTip'), onclick: () => to(null) }, LT('lang.hub.all'));
+    t.append(all, ...activeLangs().map(c => { const b = chips[activeLangs().indexOf(c)]; b.classList.toggle('on', c === UI.scope); b.onclick = null; b.addEventListener('click', () => to(c)); return b; }), h('span', { class: 'spacer' }), explain); return;
+  }   // the frame has the title (crumbs), ⚙️ and the other courses (⋮)
   t.append(
     h('div', { class: 'brand', onclick: () => go('#/') }, h('div', { class: 'logo' }, '🌍'), h('span', { class: 'lx-title' }, courseTitle())),
     h('span', { class: 'spacer' }), explain, ...chips,
@@ -452,7 +458,7 @@ function topbar() {
 }
 const VIEWS = {};
 /** Where the learner is, in words: the last crumb of the frame. */
-const VIEW_NAMES = ['lanes', 'settings', 'claude', 'grammar', 'write', 'read', 'script', 'listen', 'cmp', 'poly', 'sort', 'parts', 'peculiar', 'recall', 'deep', 'deepen'];
+const VIEW_NAMES = ['lanes', 'settings', 'claude', 'grammar', 'write', 'read', 'script', 'listen', 'cmp', 'poly', 'sort', 'parts', 'peculiar', 'recall', 'deep', 'deepen', 'aspects'];
 const VIEW_LABEL = new Proxy({}, { get: (o, k) => VIEW_NAMES.includes(k) ? LT('lang.view.' + k) : undefined });   // lang.view.<name>
 function viewLabel(r) {
   const C = UI.C, fl = c => C.lang[c] ? info(c).flag + ' ' : '';
@@ -504,6 +510,7 @@ function flagRail(cid, current, onPick) {
 
 /* ---------- home ---------- */
 VIEWS.home = (v) => {
+  if (UI.scope) return langHome(v);   // the home of one language (12_langhome.js)
   if (studyChoice().none) { const ask = studyAsk(true); if (ask) { v.append(h('h1', {}, courseTitle()), ask); return; } }   // D21: none of the chosen languages is in this course
   const plan = N.planSession(UI.C, UI.L, { day: today(), minutes: UI.L.settings.minutes || 20, languages: todayLangs() });   // today's languages (P6, §9.6)
   const nRev = plan.steps.filter(s => s.kind === 'review').reduce((a, s) => a + s.items.length, 0);
@@ -540,6 +547,73 @@ function nodeList() {
       h('div', { class: 'lx-nodestates' }, ...UI.C.languages.map(c => h('span', { class: 'lx-ns ns-' + st[c][nid], title: `${info(c).label}: ${STATE_LABEL[st[c][nid]] || st[c][nid]}` }, info(c).flag, ' ', (STATE_LABEL[st[c][nid]] || st[c][nid])))));
   }));
 }
+
+/* ---- 12_langhome.js ---- */
+/* ---------- the home of one language (#/lang/<code>): the central page about it — where you are, what is next, and everything else
+   the language has (its libraries, topics, drills). A tap on a language opens this page, never a lesson. ---------- */
+/** The languages the page shows: the one in the address, else all the learner studies. */
+const scopeLangs = () => UI.scope && UI.C.lang[UI.scope] ? [UI.scope] : activeLangs();
+/** The library of one language: [view name, address, shown?] — the labels are the views' own (lang.view.<name>). */
+function langLibrary(c) {
+  const lj = LX(c).language, nonLatin = lj.script !== 'Latn';
+  return [['script', '#/script/' + c, nonLatin], ['listen', '#/listen/' + c, true], ['read', '#/read/' + c, true], ['write', '#/write/' + c, true], ['grammar', '#/grammar/' + c, true], ['aspects', '#/aspects/' + c, true],
+    ['parts', '#/parts/' + c, true], ['peculiar', '#/peculiar/' + c, !!UI.C.data.world], ['recall', '#/recall/' + c, true], ['lanes', '#/lanes', UI.C.languages.length > 1]].filter(x => x[2]);
+}
+function langHome(v) {
+  const c = UI.scope, X = LX(c), inf = info(c), k = N.known(UI.C, UI.L, c);
+  const total = Object.keys(X.lex).length, kn = Object.values(k.state).filter(s => ['known_r', 'known_p', 'mastered'].includes(s)).length;
+  const plan = N.planSession(UI.C, UI.L, { day: today(), minutes: UI.L.settings.minutes || 20, languages: [c] });
+  const nRev = plan.steps.filter(s => s.kind === 'review').reduce((a, s) => a + s.items.length, 0);
+  const learn = plan.steps.find(s => s.kind === 'learn'), nNew = learn ? learn.concepts.reduce((a, x) => a + x.langs.length, 0) : 0;
+  const lessons = plan.steps.filter(s => s.kind === 'lesson'), nid = lessons[0]?.node;
+  const counts = LT('lang.home.sessionCounts', { rev: nRev, nNew });
+  v.append(h('div', { class: 'lx-lhhead', 'data-lang': c },
+    h('span', { class: 'lx-flag lx-lhflag' }, inf.flag),
+    h('div', {}, h('h1', {}, inf.label), h('div', { class: 'tiny' }, [X.language.nativeName && X.language.nativeName !== inf.label ? X.language.nativeName : null, LT('lang.hub.known', { kn, total })].filter(Boolean).join(' · ')))));
+  v.append(h('div', { class: 'lx-lhgo' },
+    nid ? h('div', {}, h('span', { class: 'lx-step' }, stepLabel(UI.C.nodes[nid])), ' ', h('b', {}, UI.C.nodes[nid].title)) : h('div', {}, h('b', {}, LT('lang.hub.allDone'))),
+    h('div', { class: 'row' }, nid ? continueButton(nid, [c]) : null,
+      nRev || nNew ? h('button', { class: nid ? 'btn' : 'btn primary', 'data-go': 'session', onclick: () => runSession(plan) }, '▶ ' + LT('lang.home.session', { counts })) : h('span', { class: 'tiny' }, '✅ ' + LT('lang.home.nothingDue')))));
+  const path = UI.C.order.filter(id => UI.C.nodes[id].kind === 'lesson' && X.applies[id]);
+  if (path.length) {   // the lessons: a window around where you are; the rest one tap away
+    const dn = path.map(id => ladderOf(id, [c]).done), at = Math.max(0, dn.indexOf(false)), from = Math.max(0, at - 2), to = Math.min(path.length, from + 12);
+    const chip = (id, i) => h('button', { class: 'lx-lhstep' + (dn[i] ? ' d' : i === at ? ' n' : ''), title: UI.C.nodes[id].title, onclick: () => go('#/lesson/' + id) }, stepLabel(UI.C.nodes[id]));
+    const row = h('div', { class: 'lx-lhpath' }), draw = all => { row.replaceChildren(...path.map((id, i) => [id, i]).filter(([, i]) => all || (i >= from && i < to)).map(([id, i]) => chip(id, i)),
+      ...(all || path.length <= to - from ? [] : [h('button', { class: 'lx-lhstep', onclick: () => draw(true) }, '… +' + (path.length - (to - from)))])); };
+    draw(false); v.append(h('h2', { class: 'lx-h2' }, LT('lang.hub.path')), row);
+  }
+  v.append(h('h2', { class: 'lx-h2' }, LT('lang.hub.library')), h('div', { class: 'lx-lhlib' }, ...langLibrary(c).map(([name, to]) => h('button', { class: 'lx-lhtile', 'data-view': name, onclick: () => go(to) }, LT('lang.view.' + name)))));
+  const topics = (UI.C.data.fields || []).filter(f => (f.subgroups || []).length > 1);
+  if (topics.length) v.append(h('h2', { class: 'lx-h2' }, LT('lang.hub.topics')), h('div', { class: 'lx-lhlib' }, ...topics.map(f => h('button', { class: 'lx-lhtile', onclick: () => go('#/sort/' + encodeURIComponent(f.field)) }, f.title))));
+  v.append(h('div', { class: 'row lx-lhmore' },
+    h('button', { class: 'btn ghost small', onclick: () => { location.hash = '#/search'; } }, '🔎 ' + LT('lang.hub.search')),
+    UI.C.languages.length > 1 ? h('button', { class: 'btn ghost small', onclick: () => go('#/cmp') }, '⇄ ' + LT('lang.view.cmp')) : null,
+    h('button', { class: 'btn ghost small', onclick: () => go('#/settings') }, LT('lang.view.settings'))));
+}
+
+/* ---- 13_aspects.js ---- */
+/* ---------- aspects (D29): the sides of a language — sound, writing, forms, sentences, meaning, use, culture — each a labelled, pale-tinted section
+   in a lesson's theory, and the library “By aspect” that lists the same sections of one language together. ---------- */
+const ASPECT_ORDER = ['phonology', 'morphology', 'syntax', 'semantics', 'lexicon', 'pragmatics'];
+/** The aspect of a grammar function: its category (morphosyntax reads as morphology). */
+const aspectOf = fid => { const c = UI.C.functions[fid]?.category; return c === 'morphosyntax' ? 'morphology' : ASPECT_ORDER.includes(c) ? c : null; };
+const aspectRank = fid => { const i = ASPECT_ORDER.indexOf(aspectOf(fid)); return i < 0 ? ASPECT_ORDER.length : i; };
+const aspectLabel = a => h('span', { class: 'lx-asplabel' }, LT('lang.aspect.' + a));
+/** The library of one language by aspect: its grammar points grouped by the side of the language they are about, then the views for writing, listening & speaking, reading and culture. */
+VIEWS.aspects = (v, r) => {
+  const c = r.arg && UI.C.lang[r.arg] ? r.arg : UI.lang, X = LX(c);
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go(UI.scope ? '#/' : '#/') }, arrowBack() + ' ' + LT('lang.card.map'))),
+    h('h1', {}, LT('lang.view.aspects'), h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).label}`)));
+  const fns = Object.keys(X.grammar).filter(f => X.grammar[f] && X.grammar[f].status !== 'absent' && aspectOf(f));
+  const sec = (a, items) => items.length ? h('section', { class: 'lx-card lx-asp lx-asp-' + a, 'data-aspect': a }, h('h3', {}, aspectLabel(a)),
+    h('div', { class: 'lx-lhlib' }, ...items)) : null;
+  const btn = (txt, to) => h('button', { class: 'lx-lhtile', onclick: () => go(to) }, txt);
+  const lj = X.language, nonLatin = lj.script !== 'Latn';
+  for (const a of ASPECT_ORDER) v.append(sec(a, fns.filter(f => aspectOf(f) === a).sort((x, y) => UI.C.order.indexOf(UI.C.functions[x].after?.[0]) - UI.C.order.indexOf(UI.C.functions[y].after?.[0])).map(f => btn(UI.C.functions[f].title, '#/fn/' + encodeURIComponent(f) + '/' + c))));
+  v.append(sec('writing', [nonLatin ? btn(LT('lang.view.script'), '#/script/' + c) : null, btn(LT('lang.view.write'), '#/write/' + c)].filter(Boolean)),
+    sec('listening', [btn(LT('lang.view.listen'), '#/listen/' + c)]), sec('reading', [btn(LT('lang.view.read'), '#/read/' + c)]),
+    UI.C.data.world ? sec('culture', [btn(LT('lang.view.peculiar'), '#/peculiar/' + c)]) : null);
+};
 
 /* ---- 20_cards.js ---- */
 /* ---------- a node: its ideas, in the chosen language ---------- */
@@ -581,13 +655,18 @@ VIEWS.c = (v, r) => {
     v.innerHTML = ''; topbar();
     v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.length > 1 || !node ? history.back() : go('#/node/' + node.id) }, arrowBack() + ' ' + (node ? node.title : LT('lang.card.back')))),
       h('div', { class: 'lx-cardhead' }, conceptPic(cid, 'lx-bigemoji'), h('div', {}, h('h1', {}, con.gloss), h('div', { class: 'tiny' }, [node ? node.title : '⏳ ' + LT('lang.card.untaughtMeaning'), con.wikidata ? 'Wikidata ' + con.wikidata : null].filter(Boolean).join(' · ')))),   // i18n-ignore (Wikidata: a name)
-      h('div', { class: 'row' }, flagRail(cid, UI.lang, x => { UI.lang = x; UI.prefs.lang = x; save(); draw(); }),
-        UI.C.languages.length > 1 ? h('button', { class: 'btn small' + (UI.prefs.compare ? ' primary' : ''), onclick: () => { UI.prefs.compare = !UI.prefs.compare; save(); draw(); } }, '⇄ ' + LT('lang.view.cmp')) : null));
-    if (UI.prefs.compare && UI.C.languages.length > 1) v.append(compareTable(cid), polyConceptStrip(cid));   // + the bridges among its words (P6)
+      h('div', { class: 'row' }, flagRail(cid, UI.lang, x => { UI.lang = x; UI.prefs.lang = x; save(); draw(); })));
     const X = LX(UI.lang), lids = X.byConcept[cid] || [];
     if (X.absent[cid]) v.append(h('div', { class: 'lx-absent' }, h('b', {}, info(UI.lang).flag + ' ' + LT('lang.card.noWordFor', { lang: info(UI.lang).name }) + ' '), X.absent[cid].reason, X.absent[cid].use ? h('div', {}, LT('lang.card.instead') + ' ', h('b', {}, X.absent[cid].use)) : null));
     else if (node && !X.prepared[node.id]) v.append(h('p', { class: 'lx-note' }, '⏳ ' + LT('lang.card.unwrittenIn', { lang: info(UI.lang).name })));
     for (const lid of lids) v.append(wordCardView(UI.lang, lid, cid));
+    if (UI.C.languages.length > 1) {   // the same meaning in the other languages: folded under the word (the full table is one link away)
+      const det = h('details', { class: 'lx-others', open: !!UI.prefs.compare });
+      det.addEventListener('toggle', () => { UI.prefs.compare = det.open; save(); });
+      det.append(h('summary', {}, LT('lang.hub.otherLangs')), compareTable(cid), polyConceptStrip(cid),   // + the bridges among its words (P6)
+        h('a', { class: 'lx-fulltable', href: FR.on ? toHash('#/cmp/c/' + cid) : '#/cmp/c/' + cid }, LT('lang.hub.fullTable') + ' →'));
+      v.append(det);
+    }
     if (node) {   // on to the next word of the same lesson, or back to the lesson after the last
       const order = node.concepts || [], at = order.indexOf(cid), nx = at >= 0 ? order[at + 1] : null;
       v.append(h('div', { class: 'lx-nextword' }, nx
@@ -1285,8 +1364,9 @@ function grammarCard(c, fid, { compact = false, onPick = null } = {}) {
   const ex = N.selectSentences(UI.C, c, { known: k.R, functions: [fid], maxUnknown: 'auto' }).slice(0, compact ? 3 : 8);
   ex.forEach(s => noteNew(c, s.unknown));
   const from = Array.isArray(g.typology) ? N.familiarFrom(UI.C, g.typology, knowsL(c)) : [];
-  return h('article', { class: 'lx-card lx-gram', lang: UI.C.explainLang, 'data-fn': fid, 'data-lang': c },
-    h('div', { class: 'lx-cardtop' }, h('h3', {}, info(c).flag, ' ', fn.title), g.status !== 'realized' ? h('span', { class: 'lx-badge reg' }, STATUS_LABEL[g.status]) : null),
+  const asp = typeof aspectOf === 'function' ? aspectOf(fid) : null;
+  return h('article', { class: 'lx-card lx-gram' + (asp ? ' lx-asp lx-asp-' + asp : ''), lang: UI.C.explainLang, 'data-fn': fid, 'data-lang': c, 'data-aspect': asp || null },
+    h('div', { class: 'lx-cardtop' }, h('h3', {}, info(c).flag, ' ', fn.title), asp ? aspectLabel(asp) : null, g.status !== 'realized' ? h('span', { class: 'lx-badge reg' }, STATUS_LABEL[g.status]) : null),
     from.length ? h('div', { class: 'tiny lx-familiarline' }, '✓ ' + LT('lang.gram.worksAsIn', { from: LLIST(from) })) : null,
     typeof feasibilityBar === 'function' ? feasibilityBar(c, fid, compact) : null,   // P5: the feasibility light (§7.3) and ▶ practise
     h('p', { class: 'lx-summary' }, wordsIn(c, g.summary)),
@@ -1590,7 +1670,7 @@ window.NoemaLangUI = { titleOf: id => (UI.id === id && UI.C ? courseTitle() : nu
 /* ---- 55_lesson.js ---- */
 /* ---------- the foundations: lessons that teach words, grammar and sentences together, every language at the same step (§6.7, D9–D11) ---------- */
 const stepLabel = n => n.step == null ? '' : n.stage === 'core' ? 'C' + String(n.step - 18).padStart(2, '0') : 'S' + String(n.step).padStart(2, '0');
-const lessonLangs = nid => activeLangs().filter(c => LX(c).applies[nid]);
+const lessonLangs = nid => scopeLangs().filter(c => LX(c).applies[nid]);
 /** Words of a lesson in one language that are still to be introduced. */
 const toIntroduce = (c, nid, k) => (LX(c).byNode[nid] || []).filter(id => k.state[id] === 'ready');
 
@@ -1622,7 +1702,7 @@ VIEWS.lesson = (v, r) => {
   const fns = N.lessonFunctions(UI.C, c, nid);
   if (theoryOpen) {
   if (fns.includes('fn.overview')) v.append(typologyCard());
-  v.append(h('h2', { class: 'lx-h2' }, '📖 ' + LT('lang.lesson.grammarIn', { lang: info(c).name })), ...fns.map(f => grammarCard(c, f, { compact: true, onPick: x => { UI.lang = x; UI.prefs.lang = x; save(); render(); } })));
+  v.append(h('h2', { class: 'lx-h2' }, '📖 ' + LT('lang.lesson.grammarIn', { lang: info(c).name })), ...[...fns].sort((x, y) => aspectRank(x) - aspectRank(y)).map(f => grammarCard(c, f, { compact: true, onPick: x => { UI.lang = x; UI.prefs.lang = x; save(); render(); } })));
   }
   // the same step in the other languages: their own extra points (D10)
   const extra = langs.filter(x => x !== c).map(x => [x, N.lessonFunctions(UI.C, x, nid).filter(f => !fns.includes(f))]).filter(([, f]) => f.length);
@@ -2262,6 +2342,7 @@ const LAND = items => window.NoemaI18n && NoemaI18n.locale !== 'en' ? NoemaI18n.
 
 /* ---------- today's languages (§9.6): chosen on the home among the active ones, for today only ---------- */
 function todayLangs() {
+  if (UI.scope) return [UI.scope];   // the page is about one language
   const act = activeLangs(), t = UI.prefs.today;
   if (!t || t.day !== today()) return act;
   const l = act.filter(c => (t.langs || []).includes(c));
@@ -3052,7 +3133,7 @@ const tutorRow = (ctx, intents) => h('div', { class: 'row lx-tutorrow' }, h('spa
   ...intents.map(x => h('button', { class: 'btn ghost small', 'data-intent': x, onclick: () => openLangTutor({ ...ctx, intent: x }) }, INTENT_LABEL[x])));
 {
   const home = VIEWS.home;
-  VIEWS.home = (v, r) => { home(v, r); const map = v.querySelector('.lx-maphead') || [...v.querySelectorAll('h2')].find(x => /The map/.test(x.textContent)); const lanes = prodLanes(); map ? map.before(lanes) : v.append(lanes); };   // i18n-ignore (the map's head is found by its class)
+  VIEWS.home = (v, r) => { home(v, r); if (UI.scope) return; const map = v.querySelector('.lx-maphead') || [...v.querySelectorAll('h2')].find(x => /The map/.test(x.textContent)); const lanes = prodLanes(); map ? map.before(lanes) : v.append(lanes); };   // i18n-ignore (the map's head is found by its class)
   const fn = VIEWS.fn;
   VIEWS.fn = (v, r) => { fn(v, r); const fid = r.arg; if (!UI.C.functions[fid] || fid === 'fn.overview') return; const c = r.arg2 && UI.C.lang[r.arg2] ? r.arg2 : UI.lang; v.querySelector('.lx-gram')?.before(tutorRow({ lang: c, fn: fid }, ['explain', 'compare', 'quiz'])); };
   const lesson = VIEWS.lesson;
@@ -4231,7 +4312,7 @@ function sessionSpeechItems(plan) {
 }
 {
   const home = VIEWS.home;
-  VIEWS.home = (v, r) => { home(v, r); const after = v.querySelector('.lx-prodlanes'), lanes = speechLanes(); if (after) after.after(lanes); else { const map = v.querySelector('.lx-maphead') || [...v.querySelectorAll('h2')].find(x => /The map/.test(x.textContent)); map ? map.before(lanes) : v.append(lanes); } };   // i18n-ignore (found by its class)
+  VIEWS.home = (v, r) => { home(v, r); if (UI.scope) return; const after = v.querySelector('.lx-prodlanes'), lanes = speechLanes(); if (after) after.after(lanes); else { const map = v.querySelector('.lx-maphead') || [...v.querySelectorAll('h2')].find(x => /The map/.test(x.textContent)); map ? map.before(lanes) : v.append(lanes); } };   // i18n-ignore (found by its class)
   const settings = VIEWS.settings;
   VIEWS.settings = (v, r) => { settings(v, r); const tail = [...v.children].reverse().find(x => x.tagName === 'P'); const s = speechSettings(); tail ? tail.before(s) : v.append(s); loadVoices().then(() => { const o = v.querySelector('.lx-speechset'); if (o && !o.contains(document.activeElement)) o.replaceWith(speechSettings()); }); };
   const read = VIEWS.read;
@@ -4491,7 +4572,7 @@ function frameTidy(v, r) {
   // one primary action per screen: the first one stays primary, the others become plain buttons
   [...v.querySelectorAll('.btn.primary')].filter(b => !b.closest('.lx-moved, .lx-stage, .lx-session')).slice(1).forEach(b => b.classList.remove('primary'));
   // the languages switch of the older top bar says nothing new here: each page that shows one language has its flag rail, the home a row per language
-  const sub = FR.host?.querySelector('.lx-subbar'); if (sub) sub.hidden = true;
+  const sub = FR.host?.querySelector('.lx-subbar'); if (sub) sub.hidden = activeLangs().length < 2;   // the strip of your languages (All · each one)
   framePlainTree(v);
   return acts;
 }

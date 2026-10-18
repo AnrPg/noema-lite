@@ -366,7 +366,7 @@ function sessionSpeechItems(plan) {
 }
 {
   const home = VIEWS.home;
-  VIEWS.home = (v, r) => { home(v, r); const after = v.querySelector('.lx-prodlanes'), lanes = speechLanes(); if (after) after.after(lanes); else { const map = v.querySelector('.lx-maphead') || [...v.querySelectorAll('h2')].find(x => /The map/.test(x.textContent)); map ? map.before(lanes) : v.append(lanes); } };   // i18n-ignore (found by its class)
+  VIEWS.home = (v, r) => { home(v, r); if (UI.scope) return; const after = v.querySelector('.lx-prodlanes'), lanes = speechLanes(); if (after) after.after(lanes); else { const map = v.querySelector('.lx-maphead') || [...v.querySelectorAll('h2')].find(x => /The map/.test(x.textContent)); map ? map.before(lanes) : v.append(lanes); } };   // i18n-ignore (found by its class)
   const settings = VIEWS.settings;
   VIEWS.settings = (v, r) => { settings(v, r); const tail = [...v.children].reverse().find(x => x.tagName === 'P'); const s = speechSettings(); tail ? tail.before(s) : v.append(s); loadVoices().then(() => { const o = v.querySelector('.lx-speechset'); if (o && !o.contains(document.activeElement)) o.replaceWith(speechSettings()); }); };
   const read = VIEWS.read;

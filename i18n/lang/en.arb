@@ -112,6 +112,94 @@
   "@lang.view.settings": {
     "description": "Name of a page of a language course: the course settings."
   },
+  "lang.view.aspects": "By aspect",
+  "@lang.view.aspects": {
+    "description": "Aspect: a side of a language (label of a theory section / group in the library)."
+  },
+  "lang.aspect.phonology": "Sounds",
+  "@lang.aspect.phonology": {
+    "description": "Aspect: a side of a language (label of a theory section / group in the library)."
+  },
+  "lang.aspect.morphology": "Word forms",
+  "@lang.aspect.morphology": {
+    "description": "Aspect: a side of a language (label of a theory section / group in the library)."
+  },
+  "lang.aspect.syntax": "Sentences",
+  "@lang.aspect.syntax": {
+    "description": "Aspect: a side of a language (label of a theory section / group in the library)."
+  },
+  "lang.aspect.semantics": "Meaning",
+  "@lang.aspect.semantics": {
+    "description": "Aspect: a side of a language (label of a theory section / group in the library)."
+  },
+  "lang.aspect.lexicon": "Vocabulary",
+  "@lang.aspect.lexicon": {
+    "description": "Aspect: a side of a language (label of a theory section / group in the library)."
+  },
+  "lang.aspect.pragmatics": "Use",
+  "@lang.aspect.pragmatics": {
+    "description": "Aspect: a side of a language (label of a theory section / group in the library)."
+  },
+  "lang.aspect.writing": "Writing",
+  "@lang.aspect.writing": {
+    "description": "Aspect: a side of a language (label of a theory section / group in the library)."
+  },
+  "lang.aspect.listening": "Listening & speaking",
+  "@lang.aspect.listening": {
+    "description": "Aspect: a side of a language (label of a theory section / group in the library)."
+  },
+  "lang.aspect.reading": "Reading",
+  "@lang.aspect.reading": {
+    "description": "Aspect: a side of a language (label of a theory section / group in the library)."
+  },
+  "lang.aspect.culture": "Culture & folk tradition",
+  "@lang.aspect.culture": {
+    "description": "Aspect: a side of a language (label of a theory section / group in the library)."
+  },
+  "lang.hub.known": "{kn, number} of {total, number} words known",
+  "@lang.hub.known": {
+    "description": "Under a language’s name on its home page: {kn} words known of {total}.",
+    "placeholders": {
+      "kn": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "lang.hub.allDone": "You have been through the whole path",
+  "@lang.hub.allDone": {
+    "description": "Language home: nothing left on the path."
+  },
+  "lang.hub.path": "Path",
+  "@lang.hub.path": {
+    "description": "Language home: heading of the row of lessons."
+  },
+  "lang.hub.library": "Library",
+  "@lang.hub.library": {
+    "description": "Language home: heading of the grid of everything the language has."
+  },
+  "lang.hub.topics": "Topics",
+  "@lang.hub.topics": {
+    "description": "Language home: heading of the topic drills."
+  },
+  "lang.hub.search": "Search",
+  "@lang.hub.search": {
+    "description": "Language home: button to the app-wide search."
+  },
+  "lang.hub.all": "All",
+  "@lang.hub.all": {
+    "description": "Strip of languages: the chip for all languages together."
+  },
+  "lang.hub.allTip": "All your languages together",
+  "@lang.hub.allTip": {
+    "description": "Tooltip of the “All” chip."
+  },
+  "lang.hub.otherLangs": "In other languages",
+  "@lang.hub.otherLangs": {
+    "description": "Word card: folded section with the same meaning in the other languages."
+  },
+  "lang.hub.fullTable": "Full table",
+  "@lang.hub.fullTable": {
+    "description": "Word card: link to the full comparison table."
+  },
   "lang.view.claude": "Through Claude",
   "@lang.view.claude": {
     "description": "Name of a page of a language course: the tasks Claude writes for the course."

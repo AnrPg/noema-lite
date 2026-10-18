@@ -676,14 +676,18 @@
     paint();
     return box;
   }
-  /** Open a language's course: the one you were last in that has it, else the first; the language is the one on screen there. */
-  function studyOpen(acc, code) {
+  /** The course that opens for a language: the one you were last in that has it, else the first. */
+  function studyCourse(acc, code) {
     const last = jget(LANG_LAST(acc), null), cs = langCourses(acc).filter(m => (m.languages || []).includes(code) && langChosen(acc, m).includes(code));
-    const m = cs.find(x => x.courseId === last) || cs[0]; if (!m) return;
+    return cs.find(x => x.courseId === last) || cs[0] || null;
+  }
+  /** Open a language: its own home page (#/lang/<code>), about that language only. */
+  function studyOpen(acc, code) {
+    const m = studyCourse(acc, code); if (!m) return;
     const UIx = window.NoemaLangUI?.UI;
     if (UIx?.id === m.courseId && UIx.C?.lang[code]) { UIx.lang = code; UIx.prefs.lang = code; }
     else { const k = `${P}${acc}:s:lang:${m.courseId}:prefs`, pr = jget(k, {}) || {}; pr.lang = code; KV.set(k, JSON.stringify(pr)); }
-    langOpen(m.courseId);
+    NoemaShell.go('#/lang/' + encodeURIComponent(code));
   }
   const langDay = () => { const d = new Date(); return Math.floor((d.getTime() - d.getTimezoneOffset() * 60000) / 864e5); };   // = NoemaLang.dayNumber
   const langHash = id => '#/lang/' + encodeURIComponent(id);
@@ -750,13 +754,16 @@
   /** #/lang/<course>/… : the course inside the frame. The course is started once and re-drawn on every address of it. */
   let langOpening = null;
   async function langRoute(parts, ctx) {
-    const S = window.NoemaShell, { h, L } = ctx, acc = KV.acc, id = parts[0], meta = langMeta('lang:' + id), base = langHash(id);
+    const S = window.NoemaShell, { h, L } = ctx, acc = KV.acc;
+    let id = parts[0], scope = null, meta = langMeta('lang:' + id);
+    if (!meta) { const m = studyCourse(acc, id); if (m) { scope = id; id = m.courseId; meta = langMeta('lang:' + id); } }   // #/lang/<code>: the home of one language
+    const base = scope ? '#/lang/' + encodeURIComponent(scope) : langHash(id), key = id + '|' + (scope || '');
     if (!meta) { document.body.classList.remove('lx-frame'); ctx.page({ crumbs: [[L('languages'), '#/lang'], [id]], menu: langMenu(null) }, h('div', { class: 'ns-panel ns-empty' }, S.faceEl(undefined, 'breathe'), h('p', {}, L('langMissing')), h('button', { class: 'btn primary', onclick: () => S.go('#/lang') }, L('languages')))); return; }
     jset(LANG_LAST(acc), id); Noema.setCurrent(acc, meta.id);   // a reload comes back here; Today's card continues it
     const UI = window.NoemaLangUI?.UI, host = ctx.main.querySelector('.lx-host');
-    if (host && host.dataset.course === id && UI?.id === id && NoemaLangUI.FR.host === host) { document.body.classList.add('lx', 'lx-frame'); NoemaLangUI.render(); return; }
+    if (host && host.dataset.course === key && UI?.id === id && NoemaLangUI.FR.host === host) { document.body.classList.add('lx', 'lx-frame'); NoemaLangUI.render(); return; }
     const top = { crumbs: [[L('languages'), '#/lang'], [meta.title]], back: '#/lang', menu: () => langMenu(id) };
-    const nhost = h('div', { class: 'lx-host', 'data-course': id }, h('div', { class: 'ns-wait' }, S.faceEl(undefined, 'breathe')));
+    const nhost = h('div', { class: 'lx-host', 'data-course': key }, h('div', { class: 'ns-wait' }, S.faceEl(undefined, 'breathe')));
     ctx.page(top, nhost);
     const mine = langOpening = {};
     let data = UI?.id === id && UI.C ? UI.C.data : null;   // the course was open a moment ago (the learner went to another tab): what it holds now
@@ -764,7 +771,7 @@
     if (langOpening !== mine || !nhost.isConnected) return;   // the learner went elsewhere meanwhile
     if (data instanceof Error) { nhost.replaceChildren(h('div', { class: 'ns-panel ns-empty' }, h('p', {}, errMsg(data)), h('button', { class: 'btn', onclick: () => S.go('#/lang') }, L('languages')))); return; }
     document.body.classList.add('lx-frame');
-    NoemaLangUI.start({ acc, id: meta.courseId, data, host: nhost, onRoute: r => S.chrome({ tab: 'lang', crumbs: [[L('languages'), '#/lang'], [NoemaLangUI.titleOf(meta.courseId) || meta.title, r.home ? null : base], ...(r.label ? [[r.label]] : [])], back: r.home ? '#/lang' : base, menu: () => [...(r.acts || []), r.acts?.length ? '-' : null, ...langMenu(id)], menuLabel: L('langMore'), reading: ['lesson', 'node', 'c', 'w', 'fn', 'read', 'peculiar', 'field', 'cmp'].includes(r.view), tutor: () => NoemaLangUI.prod?.openLangTutor({}) }) });
+    NoemaLangUI.start({ acc, id: meta.courseId, data, host: nhost, base, scope, onRoute: r => S.chrome({ tab: 'lang', crumbs: [[L('languages'), '#/lang'], [NoemaLangUI.titleOf(meta.courseId) || meta.title, r.home ? null : base], ...(r.label ? [[r.label]] : [])], back: r.home ? '#/lang' : base, menu: () => [...(r.acts || []), r.acts?.length ? '-' : null, ...langMenu(id)], menuLabel: L('langMore'), reading: ['lesson', 'node', 'c', 'w', 'fn', 'read', 'peculiar', 'field', 'cmp'].includes(r.view), tutor: () => NoemaLangUI.prod?.openLangTutor({}) }) });
     if (!langRoute.polling) { langRoute.polling = true; NoemaLangUI.claude.startPolling(acc); }
     langProfiles(meta);
   }

@@ -89,7 +89,7 @@ function frameTidy(v, r) {
   // one primary action per screen: the first one stays primary, the others become plain buttons
   [...v.querySelectorAll('.btn.primary')].filter(b => !b.closest('.lx-moved, .lx-stage, .lx-session')).slice(1).forEach(b => b.classList.remove('primary'));
   // the languages switch of the older top bar says nothing new here: each page that shows one language has its flag rail, the home a row per language
-  const sub = FR.host?.querySelector('.lx-subbar'); if (sub) sub.hidden = true;
+  const sub = FR.host?.querySelector('.lx-subbar'); if (sub) sub.hidden = activeLangs().length < 2;   // the strip of your languages (All · each one)
   framePlainTree(v);
   return acts;
 }
