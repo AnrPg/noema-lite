@@ -26,11 +26,14 @@ choose sensible defaults, say them in one line, and carry on.
 Decide the shape the material calls for, the same way the app's **📚 From your sources** does (docs/FROM_SOURCES.md):
 - **One subject** — one coherent topic that fits in up to 18 chapters (a chapter holds about 25 dense pages, so up to
   ~300 pages). A concise treatise is a full course, never a lesser choice: it lands on the learner's Shelf.
-- **A Roadmap** — several distinct topics that build on each other, or more than one subject can hold. The connector
-  cannot create a map: say so in one line and point the learner to 📚 From your sources in the app (choose *My Claude app*,
-  paste the task here, paste your JSON answer back), or to 📥 Import a Roadmap with a map you write for them (`📎` file
-  references with pages on each step).
-Say your choice and its reason in one line and carry on with the subject unless the learner wants the Roadmap.
+- **A Roadmap** — several distinct topics that build on each other, or more than one subject can hold. Read every file
+  first (pages, outline), then make it with `noema_create_roadmap(plan_json, language, learner)`: a step per topic, each
+  with its role, its prerequisites (refs of earlier steps) and the files and pages it is made from (`"lectures/cells.pdf
+  pp. 1–40"`), plus `files` listing EVERY file the learner gave you with its pages — every file must be used. It is checked
+  like the app's own proposal; fix every listed problem and send it again. Then go on as in *Curricula* below: plan the
+  chapters of its steps and prepare the steps, from the files of this chat. Without the connector, point the learner to
+  📚 From your sources in the app (choose *My Claude app*, paste the task here, paste your JSON answer back).
+Say your choice and its reason in one line and carry on with it unless the learner wants the other shape.
 When the message already carries **“The learner confirmed this chapter plan”** (sent by the app), do not decide again:
 write exactly those chapters, in that order, each from the pages it names.
 
@@ -129,7 +132,7 @@ that every file the user gave you (or each of its parts) is there.
 ## Curricula: steps, maps and chapter plans (noema-lite connector)
 A noema-lite **curriculum** is a map of steps; every step becomes a subject pack. When the learner asks you to work on one
 (“prepare the next step of my curriculum…”, or the prompt *Work on my noema-lite curriculum*):
-1. `noema_curricula` shows what waits; `noema_curriculum_task(curriculum_id)` returns the next task as complete instructions.
+1. A new Roadmap from the learner's own material: `noema_create_roadmap` (§0b). `noema_curricula` shows what waits; `noema_curriculum_task(curriculum_id)` returns the next task as complete instructions.
 2. **Map / chapter-plan tasks** (agents of the curriculum): think it through, then `noema_curriculum_submit(curriculum_id,
    task_id, result_json)` with ONE JSON object matching the task's schema. It is checked like the app's own agents — fix
    every listed problem and submit again. Then ask for the next task. A chapter-plan task for steps with the learner's

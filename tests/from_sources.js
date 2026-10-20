@@ -5,7 +5,8 @@
    In the browser against the Supabase emulator + scripted Claude: the wizard from 🧭 Roadmaps, the AI reads the outline and
    first lines (a wrong answer goes back with its problems), both shapes ready and flippable, a Roadmap made from it (only the
    chapter planner runs, each step gets its files and pages), one subject made with ✨ Create with Claude filled in (the
-   confirmed chapter plan is Claude's brief; it lands on the Shelf), and the Claude app by copy and paste.
+   confirmed chapter plan is Claude's brief; it lands on the Shelf), the Claude app by copy and paste, and the connector's
+   noema_create_roadmap (the learner's Claude read the files in its chat; the app picks the Roadmap up on its next sync).
    Usage: node tests/from_sources.js <prepared-repo-dir> */
 const { chromium } = require(process.env.PW || 'playwright');
 const path = require('path'), fs = require('fs'), http = require('http'), vm = require('vm'), crypto = require('crypto'), { execFileSync } = require('child_process');
@@ -199,6 +200,26 @@ c.save()`, path.join(TF, 'dna-replication.pdf')]);
     await p.fill('.cm-src .cm-paste', 'Here you go:\n' + JSON.stringify(PLAN)); await p.click('.cm-srcuse'); await wait(200);
     ok(await p.locator('.cm-srcshape').count() === 2 && await p.locator('.cm-srccopymsg').count() === 1, 'a good answer: the proposal, and the subject can be made in the Claude app (a message to paste)');
     await p.screenshot({ path: SHOTS + '/src2_app.png', fullPage: true });
+
+    console.log('— the connector: the learner’s Claude makes the Roadmap (noema_create_roadmap)');
+    const fn = path.join(require('os').tmpdir(), `noema-mcp-src-${process.pid}.mjs`);
+    const MCP = ['engine/packcheck.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js', 'engine/langcore.js', 'engine/curimport.js', 'engine/sourceplan.js'];   // = tools/build.py MCP_ENGINE
+    ok(MCP.every(f => fs.readFileSync(path.join(ROOT, 'tools/build.py'), 'utf8').includes(`'${f}'`)), 'the connector bundles the From-your-sources code');
+    fs.writeFileSync(fn, `const CFG = ${JSON.stringify({ siteUrl: BASE, supabaseUrl: BASE, supabaseKey: 'sb_publishable_test', library: [] })};\nconst DOCS = ${JSON.stringify({ workflow: 'SKILL', content: 'C', visual: 'V' })};\nglobalThis.window = globalThis;\n` + MCP.map(f => fs.readFileSync(path.join(ROOT, f), 'utf8')).join('\n') + '\n' + fs.readFileSync(path.join(ROOT, 'cloud/mcp/server.mjs'), 'utf8'));
+    const { default: handler } = await import(fn);
+    const T = (await (await fetch(BASE + '/auth/v1/token?grant_type=password', { method: 'POST', headers: { apikey: 'k', 'content-type': 'application/json' }, body: JSON.stringify({ email: 'iro@example.com', password: 'secret123' }) })).json()).access_token;
+    let rpc = 0; const tool = async (name, args = {}) => { const r = await handler(new Request(BASE + '/mcp', { method: 'POST', headers: { 'content-type': 'application/json', authorization: 'Bearer ' + T }, body: JSON.stringify({ jsonrpc: '2.0', id: ++rpc, method: 'tools/call', params: { name, arguments: args } }) })); const j = await r.json(); return { text: j.result.content.map(x => x.text || '').join('\n'), err: !!j.result.isError }; };
+    const RM = { title: 'Cell biology', summary: 'From membranes to signalling.', files: [{ path: 'lectures/cells.pdf', pages: 80 }, { path: 'notes/signals.md' }],
+      steps: [{ ref: 'm', title: 'Membranes', role: 'foundation', files: ['lectures/cells.pdf pp. 1–40'] }, { ref: 's', title: 'Cell signalling', role: 'aspect', prerequisites: ['m'], files: ['lectures/cells.pdf pp. 41–80', 'notes/signals.md'] }] };
+    const bad = await tool('noema_create_roadmap', { plan_json: JSON.stringify({ ...RM, steps: [RM.steps[0], { ...RM.steps[1], files: ['lectures/cells.pdf pp. 41–95'] }] }), language: 'en' });
+    ok(bad.err && /pages|not used: notes\/signals\.md/.test(bad.text), 'a Roadmap with pages outside a file and a file left out goes back with its problems: ' + bad.text.split('\n').slice(1, 3).join(' '));
+    const made = await tool('noema_create_roadmap', { plan_json: JSON.stringify(RM), language: 'en', learner: 'a second-year biology student' });
+    const cid2 = (made.text.match(/\((c[a-z0-9]+)\)/) || [])[1];
+    ok(!made.err && cid2 && /2 steps, 1 links?/.test(made.text) && /noema_curriculum_task/.test(made.text), 'a good one is made: ' + made.text.split('\n')[0]);
+    const task = await tool('noema_curriculum_task', { curriculum_id: cid2 });
+    ok(/chapters of 2 steps/.test(task.text) && /in the Claude chat where this Roadmap was made/.test(task.text) && /“Cell signalling”: lectures\/cells\.pdf pp\. 41–80; notes\/signals\.md/.test(task.text), 'its first task plans the chapters, from the files of that chat, page by page');
+    await p.evaluate(() => NoemaCloud.pull(Noema.account.id));
+    ok(await until(() => p.evaluate(id => { const c = NoemaCurriculum.get(Noema.account.id, id); return c && c.provider === 'claudeapp' && c.fromSources?.via === 'connector' && Object.keys(c.nodes).length === 2; }, cid2), 10000), 'the app has it after a sync: a Roadmap the Claude app works on, made from sources');
     ok(!E.length, 'no page errors ' + E.join(' | '));
   } catch (e) { ok(false, 'crashed: ' + e.stack); await p.screenshot({ path: SHOTS + '/src_fail.png', fullPage: true }).catch(() => { }); }
   await browser.close(); api.close(); srv.close?.();

@@ -451,7 +451,17 @@ window.NoemaCurImport = (() => {
 
   /** The parsed map → a saved curriculum (no DAG agents). assignments: [{ file, targets: [{ id, range }] }] —
       every file is stored ONCE for the curriculum and linked to each of its steps (with pages when given). */
-  async function create(acc, parsed, { title, language = 'en', learner = '', provider = 'auto', prefetch = 3, nodeBudget = 8, assignments = [], source = '', onLog = () => { } } = {}) {
+  async function create(acc, parsed, { assignments = [], onLog = () => { }, ...o } = {}) {
+    const c = record(parsed, o);
+    C().save(acc, c);
+    const items = {};   // step → [{ file, range }]
+    for (const a of assignments) for (const t of a.targets || []) if (c.nodes[t.id]) (items[t.id] = items[t.id] || []).push({ file: a.file, range: t.range || null });
+    const total = Object.values(items).reduce((x, v) => x + v.length, 0); let k = 0;
+    for (const [nid, list] of Object.entries(items)) { await C().Edit.addMaterial(acc, c.id, nid, list, { onLog: m => onLog(`(${Math.min(total, ++k)}/${total}) ${m}`) }); }
+    return C().get(acc, c.id);
+  }
+  /** The curriculum record of a parsed map, not saved (create saves it; the connector stores it in the account). */
+  function record(parsed, { title, language = 'en', learner = '', provider = 'auto', prefetch = 3, nodeBudget = 8, source = '' } = {}) {
     const c = C().blank({ goal: title || parsed.title || rt('roadmap.import.defaultTitle'), language, learner, provider, prefetch, nodeBudget, depth: 'imported' });
     c.title = c.goal;
     c.imported = { format: parsed.format, ai: !!parsed.ai, at: new Date().toISOString(), text: String(source).slice(0, 20000) };
@@ -460,13 +470,8 @@ window.NoemaCurImport = (() => {
     const needPlan = Object.values(c.nodes).some(n => !n.chapters.length);
     c.stage = needPlan ? 'plan' : 'done'; c.status = needPlan ? 'building' : 'ready';
     c.log = [{ t: Date.now(), m: '📥 ' + rt('roadmap.import.log', { how: parsed.ai ? 'ai' : parsed.format, n: Object.keys(c.nodes).length, links: c.edges.length }) }];
-    C().save(acc, c);
-    const items = {};   // step → [{ file, range }]
-    for (const a of assignments) for (const t of a.targets || []) if (c.nodes[t.id]) (items[t.id] = items[t.id] || []).push({ file: a.file, range: t.range || null });
-    const total = Object.values(items).reduce((x, v) => x + v.length, 0); let k = 0;
-    for (const [nid, list] of Object.entries(items)) { await C().Edit.addMaterial(acc, c.id, nid, list, { onLog: m => onLog(`(${Math.min(total, ++k)}/${total}) ${m}`) }); }
-    return C().get(acc, c.id);
+    return c;
   }
 
-  return { parse, aiRead, matchFiles, unzipMaterial, create, detect, fixCaps, parseOutline, treeToGraph, parseMermaid, parseArrows, parseJSON, parseRef, refMatches, splitFileSection, S_IMPORT };
+  return { parse, aiRead, matchFiles, unzipMaterial, create, detect, fixCaps, parseOutline, treeToGraph, parseMermaid, parseArrows, parseJSON, parseRef, refMatches, splitFileSection, record, S_IMPORT };
 })();

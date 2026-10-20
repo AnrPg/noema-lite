@@ -142,7 +142,7 @@ ${describe(inv).slice(0, 60000)}
   }
   /** The problems of an answer (empty = fine): files that are not the learner's, files left out, page ranges outside the file,
       refs, cycles. */
-  function check(d, inv) {
+  function check(d, inv, { only = '' } = {}) {
     const e = [];
     const resolve = s => { const r = I().parseRef(s); return { r, it: inv.find(it => I().refMatches(r, it.path)) }; };
     const used = { course: new Set(), roadmap: new Set() };
@@ -152,7 +152,7 @@ ${describe(inv).slice(0, 60000)}
     if (refs.size !== steps.length) e.push('roadmap: refs must be unique');
     for (const s of steps) { files(`roadmap step ${s.ref}`, s.files, 'roadmap'); for (const p of s.prerequisites || []) if (!refs.has(p)) e.push(`roadmap step ${s.ref}: unknown prerequisite "${p}"`); }
     if (steps.length && C()?.topo && !C().topo(steps.map(s => s.ref), steps.flatMap(s => (s.prerequisites || []).filter(p => refs.has(p)).map(p => ({ from: p, to: s.ref }))))) e.push('roadmap: the prerequisites form a cycle');
-    for (const k of ['course', 'roadmap']) { const miss = inv.filter(it => !used[k].has(it.path)).map(it => it.path); if (miss.length) e.push(`${k}: these files are not used: ${miss.slice(0, 12).join(', ')}`); }
+    for (const k of only ? [only] : ['course', 'roadmap']) { const miss = inv.filter(it => !used[k].has(it.path)).map(it => it.path); if (miss.length) e.push(`${k}: these files are not used: ${miss.slice(0, 12).join(', ')}`); }
     return e;
   }
   const SYSTEM = 'You are a curriculum designer. You read a description of a learner\'s study material and decide whether it is best taught as one concise subject or as a Roadmap of several subjects. You never invent material: every chapter and step comes from the files. Answer only through the requested structure.';
@@ -199,6 +199,27 @@ ${describe(inv).slice(0, 60000)}
     const assignments = I().matchFiles(parsed, files).map(m => ({ file: m.file, targets: m.targets.filter(t => parsed.nodes[t.id]) })).filter(a => a.targets.length);
     return { parsed, assignments };
   }
+  /* i18n-ignore-start (problems for Claude) */
+  /** The connector's way (noema_create_roadmap): the learner's Claude read the files in its own chat and sends the Roadmap
+      { title, summary, steps: [{ ref, title, summary, role, prerequisites, files }], files: [{ path, pages }] } — checked like
+      the app's own proposal → { parsed, chat: { nodeId: ["file pp. a–b", …] } } (the files stay in that chat) or { errors }. */
+  function fromClaude(d) {
+    const e = [], steps = Array.isArray(d?.steps) ? d.steps : [];
+    if (!d?.title || typeof d.title !== 'string') e.push('title is missing');
+    if (steps.length < 2) e.push('steps: at least 2 steps (one topic is one subject: build it as a pack instead)');
+    if (steps.length > MAX_STEPS) e.push(`steps: at most ${MAX_STEPS}`);
+    steps.forEach((s, i) => { if (!s?.ref || !s?.title) e.push(`step ${i + 1}: ref and title are required`); if (s && !ROLES.includes(s.role)) s.role = 'aspect'; if (s) s.prerequisites = s.prerequisites || []; });
+    if (e.length) return { errors: e };
+    const inv = (Array.isArray(d.files) ? d.files : []).filter(f => f?.path).map(f => ({ path: String(f.path), name: String(f.path).split('/').pop(), pages: +f.pages || 0, paged: +f.pages > 0 }));
+    const plan = { title: d.title, summary: d.summary || '', roadmap: { steps: steps.map(s => ({ ref: String(s.ref), title: s.title, summary: s.summary || '', role: s.role, prerequisites: s.prerequisites.map(String), files: inv.length ? s.files || [] : [] })) } };
+    const errs = inv.length ? check(plan, inv, { only: 'roadmap' }) : check(plan, [], { only: 'roadmap' });
+    if (errs.length) return { errors: errs };
+    if (!inv.length) plan.roadmap.steps.forEach((s, i) => { s.files = steps[i].files || []; });   // no file list: the steps' files are taken as Claude names them
+    const parsed = I().parse(mapText(plan)), chat = {};
+    for (const n of Object.values(parsed.nodes)) if (n.fileRefs?.length) chat[n.id] = n.fileRefs.map(r => r.range ? `${r.path} pp. ${r.range[0]}–${r.range[1]}` : r.path);
+    return { parsed, chat, plan };
+  }
+  /* i18n-ignore-end */
   /* i18n-ignore-start — the brief of the subject (for Claude) */
   /** The subject alternative as the brief Claude builds it from: the confirmed chapter plan, each chapter with its pages. */
   function courseBrief(plan) {
@@ -209,5 +230,5 @@ ${describe(inv).slice(0, 60000)}
   const courseMessage = (plan, inv, { language = '', goal = '' } = {}) => `Please make a noema-lite subject for me with the noema-lite connector, from the files I attach (${inv.map(it => it.name).join(', ')}).\nTitle: ${plan.title}\n${language ? `Language: ${language}\n` : ''}${goal ? `My goal: ${goal}\n` : ''}\n${courseBrief(plan)}`;
   /* i18n-ignore-end */
 
-  return { inventory, estimate, propose, task, fromAnswer, check, roadmapImport, mapText, courseBrief, courseMessage, units, S_PLAN, COURSE_MAX };
+  return { inventory, estimate, propose, task, fromAnswer, fromClaude, check, roadmapImport, mapText, courseBrief, courseMessage, units, S_PLAN, COURSE_MAX };
 })();

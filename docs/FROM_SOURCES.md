@@ -47,8 +47,20 @@ and chosen — the name (from the proposal unless the learner typed one), and th
   and attach the files in a Claude chat with the noema-lite connector, which saves the subject (docs/CLAUDE_CONNECTOR.md).
   The skill knows the same rule and follows a confirmed plan as it is (skill/noema-pack-builder/SKILL.md §0b).
 
+## 5. In Claude — the connector makes the Roadmap itself
+When the learner gives the material to their own Claude (skill §0b), Claude decides the shape by the same rule. One subject:
+it builds the pack as usual. A Roadmap: `noema_create_roadmap(plan_json, language, learner)` with `{ title, summary, steps:
+[{ ref, title, summary, role, prerequisites, files }], files: [{ path, pages }] }`. `fromClaude()` checks it like the app's own
+proposal (only the Roadmap shape: every listed file used, pages inside their file, unique refs, known prerequisites, no
+cycle), `NoemaCurImport.record()` builds the curriculum (provider `claudeapp`, `fromSources.via = 'connector'`) and the
+connector stores it as `a:curriculum:<id>`; the app takes it on its next sync. The files stay in that Claude chat: each step
+keeps `chatFiles` (`"file pp. a–b"`), and the chapter-plan and step tasks of `noema_curriculum_task` list them as THE sources
+("in the Claude chat where this Roadmap was made"). `sourceplan.js` and `curimport.js` are bundled into the connector
+(`tools/build.py` → `MCP_ENGINE`).
+
 ## Tests
 `tests/from_sources.js`: the estimate, the checks, a pasted answer, the import and the brief without a browser; then in the
 browser (Supabase emulator, scripted Claude) the wizard from 🧭 Roadmaps, a wrong AI answer sent back, both shapes, a Roadmap
 made from it (only the chapter planner runs; files and pages on their steps), one subject through Create with Claude (on the
-Shelf; the plan is the brief) and the Claude app by copy and paste.
+Shelf; the plan is the brief), the Claude app by copy and paste, and the connector's `noema_create_roadmap` (a wrong Roadmap
+sent back, a good one stored, its chapter-plan task naming the chat's files, the app picking it up on sync).
