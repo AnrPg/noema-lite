@@ -53,7 +53,8 @@ it builds the pack as usual. A Roadmap: `noema_create_roadmap(plan_json, languag
 [{ ref, title, summary, role, prerequisites, files }], files: [{ path, pages }] }`. `fromClaude()` checks it like the app's own
 proposal (only the Roadmap shape: every listed file used, pages inside their file, unique refs, known prerequisites, no
 cycle), `NoemaCurImport.record()` builds the curriculum (provider `claudeapp`, `fromSources.via = 'connector'`) and the
-connector stores it as `a:curriculum:<id>`; the app takes it on its next sync. The files stay in that Claude chat: each step
+connector stores it as `a:curriculum:<id>`; the app takes it on its next sync. Unless `prepare: false`, every step is
+queued for the Claude app in study order (reviewed), so `noema_curriculum_task` hands out the chapter plans, then each step. The files stay in that Claude chat: each step
 keeps `chatFiles` (`"file pp. a–b"`), and the chapter-plan and step tasks of `noema_curriculum_task` list them as THE sources
 ("in the Claude chat where this Roadmap was made"). `sourceplan.js` and `curimport.js` are bundled into the connector
 (`tools/build.py` → `MCP_ENGINE`).
