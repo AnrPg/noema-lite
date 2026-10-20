@@ -121,5 +121,14 @@
   "roadmap.gen.naming": "Придумываю название предмета…",
   "roadmap.gen.chapter": "Глава {i, number}/{n, number}: {title}",
   "roadmap.gen.chapterDone": "разделов: {sections, number} · упражнений: {exercises, number} · карточек: {flashcards, number}",
-  "roadmap.gen.invalid": "Созданный пакет некорректен: {list}"
+  "roadmap.gen.invalid": "Созданный пакет некорректен: {list}",
+  "roadmap.src.reasonSize": "{files, plural, one {# файл} few {# файла} many {# файлов} other {# файла}}, всего около {pages, plural, one {# страницы} few {# страниц} many {# страниц} other {# страницы}}",
+  "roadmap.src.reasonFits": "Одна тема, которая умещается в {n, plural, one {# главу} few {# главы} many {# глав} other {# главы}}: компактный предмет",
+  "roadmap.src.reasonTooBig": "Слишком много для одного предмета: материала примерно на {n, plural, one {# главу} few {# главы} many {# глав} other {# главы}}",
+  "roadmap.src.reasonParts": "Файлы образуют {n, plural, one {# часть} few {# отдельные части} many {# отдельных частей} other {# отдельной части}}, которые опираются друг на друга",
+  "roadmap.src.reasonEstimate": "Оценка по размерам и оглавлениям, без ИИ",
+  "roadmap.src.partN": "Часть {n, number}",
+  "roadmap.src.pagesOf": "{title}, с. {a, number}–{b, number}",
+  "roadmap.src.needFiles": "Сначала добавь материалы.",
+  "roadmap.src.notJson": "Это не ответ в формате JSON. Вставь весь ответ Claude."
 }

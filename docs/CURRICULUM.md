@@ -9,6 +9,9 @@ Every step of a curriculum **is a normal subject pack**: the same home page, the
 types, picture exercises), flashcards, debug drills, mistakes gym, Socratic tutor, sources, sync and
 backups. The only additions are the 🧭 **Map** button and a banner with the step's mastery.
 
+> **Starting from a pile of material?** 📚 *From your sources* (docs/FROM_SOURCES.md) proposes a Roadmap or one subject and
+> then uses §6b (a Roadmap) or ✨ Create with Claude (a subject).
+
 ## 1. Building a curriculum (four agents)
 
 Subject picker → **🧭 Curricula** → **➕ New curriculum**. You give the goal, the language, your

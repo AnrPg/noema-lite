@@ -254,6 +254,7 @@ ${job.kind === 'node' ? (job.files?.length ? NODE_FILES : NODE_SOURCES) : `1. Th
     }
     const lines = [`Create a noema-lite subject pack.`, `Title: ${job.title}`, `Subject id: ${job.subjectId}`, `Language of the material: ${job.language || 'same as the sources'}`, `My goal: ${job.goal || 'understanding'}`];
     if (job.notes) lines.push(`Notes from me: ${job.notes}`);
+    if (job.brief) lines.push(job.brief);   // 📚 From your sources: the chapter plan the learner confirmed (docs/FROM_SOURCES.md)
     if (job.links?.length) lines.push(`Links to read as sources (use web search / your knowledge of them; the sandbox has no internet):\n- ${job.links.join('\n- ')}`);
     lines.push(`Uploaded sources: ${files.map(f => f.name).join(', ') || '(none — use the links and your knowledge, and say so)'}`);
     const blocks = [{ type: 'text', text: lines.join('\n') }];

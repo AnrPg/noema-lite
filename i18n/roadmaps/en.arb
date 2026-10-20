@@ -965,5 +965,89 @@
         "example": "ch01: no sections"
       }
     }
+  },
+  "roadmap.src.reasonSize": "{files, plural, one {# file} other {# files}}, about {pages, plural, one {# page} other {# pages}} in all",
+  "@roadmap.src.reasonSize": {
+    "description": "Reason in the “From your sources” proposal: how much material there is.",
+    "placeholders": {
+      "files": {
+        "type": "int",
+        "example": "3"
+      },
+      "pages": {
+        "type": "int",
+        "example": "240"
+      }
+    }
+  },
+  "roadmap.src.reasonFits": "One topic that fits in {n, plural, one {# chapter} other {# chapters}}: a concise subject",
+  "@roadmap.src.reasonFits": {
+    "description": "Reason: the material fits one subject.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "roadmap.src.reasonTooBig": "Too much for one subject: about {n, plural, one {# chapter} other {# chapters}} of material",
+  "@roadmap.src.reasonTooBig": {
+    "description": "Reason: the material is more than one subject can hold.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "roadmap.src.reasonParts": "The files form {n, plural, one {# part} other {# separate parts}} that build on each other",
+  "@roadmap.src.reasonParts": {
+    "description": "Reason: the material falls into parts (the steps).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "roadmap.src.reasonEstimate": "Estimated from the sizes and outlines, without AI",
+  "@roadmap.src.reasonEstimate": {
+    "description": "Reason line when no AI made the proposal."
+  },
+  "roadmap.src.partN": "Part {n, number}",
+  "@roadmap.src.partN": {
+    "description": "Title of a part of a long file without an outline.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "roadmap.src.pagesOf": "{title}, pp. {a, number}–{b, number}",
+  "@roadmap.src.pagesOf": {
+    "description": "Title of a chapter or step made from a page range of one file. title = the file’s name.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Biology"
+      },
+      "a": {
+        "type": "int",
+        "example": "1"
+      },
+      "b": {
+        "type": "int",
+        "example": "25"
+      }
+    }
+  },
+  "roadmap.src.needFiles": "Add some material first.",
+  "@roadmap.src.needFiles": {
+    "description": "Error: no files."
+  },
+  "roadmap.src.notJson": "This is not the JSON answer. Paste Claude’s whole answer.",
+  "@roadmap.src.notJson": {
+    "description": "Error: the pasted text is not Claude’s JSON answer."
   }
 }

@@ -1,2 +1,5 @@
 roadmap.map.kd.*
 roadmap.map.level.*
+roadmap.map.src.goal.*
+roadmap.map.src.shape.*
+roadmap.map.src.shapeSub.*

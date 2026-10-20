@@ -1328,7 +1328,7 @@
     return { key, model, checkKey, ok: () => keyOk, steps };
   }
 
-  function claudeGuide(acc = KV.acc, { onDone, way } = {}) {
+  function claudeGuide(acc = KV.acc, { onDone, way, preset = null } = {}) {   // preset: files, title, language, goal, notes, brief (📚 From your sources: the subject's confirmed chapter plan)
     overlay((box, close) => {
       box.classList.add('cg-box');
       const done = s => { close(); if (onDone) onDone(s); else Noema.switchTo(acc, s.id); };
@@ -1370,6 +1370,7 @@
         const goal = el('select', { class: 'noema-input' }, ...[['exam', tr('loader.cg.a.goalExam')], ['understanding', tr('loader.cg.a.goalUnderstand')], ['project', tr('loader.cg.a.goalProject')]].map(([v, t]) => el('option', { value: v }, t)));
         const notes = el('textarea', { class: 'noema-input', rows: 2, placeholder: tr('loader.cg.a.notesPlaceholder') });
         const budget = el('input', { class: 'noema-input cg-budget', type: 'number', min: '1', step: '1', value: String(jget(KV.accountKey('claudeBudget', acc), 15)) });
+        if (preset) { files.push(...(preset.files || [])); drawFiles(); title.value = preset.title || ''; if ([...lang.options].some(o => o.value === preset.language)) lang.value = preset.language; if (preset.goal) goal.value = preset.goal; notes.value = preset.notes || ''; }
         const err = el('div', { class: 'tiny cg-kstat bad' });
         const go = el('button', { class: 'btn primary cg-go', onclick: async () => {
           err.textContent = '';
@@ -1382,7 +1383,7 @@
           const logs = el('div', { class: 'tiny' }); box.append(logs);
           try {
             const job = await C.create({ acc, key: key.value.trim(), model: model.value, title: title.value.trim(), subjectId: sid, language: lang.value, goal: goal.value, notes: notes.value.trim(),
-              links: links.value.split('\n').map(x => x.trim()).filter(x => /^https?:\/\//.test(x)), files, budget: b, onLog: t => { logs.textContent = t; } });
+              links: links.value.split('\n').map(x => x.trim()).filter(x => /^https?:\/\//.test(x)), files, budget: b, brief: preset?.brief || '', onLog: t => { logs.textContent = t; } });
             progress(job, { start: true });
           } catch (e) { go.disabled = false; go.textContent = '🚀 ' + tr('loader.cg.a.start'); err.textContent = '❌ ' + errMsg(e); logs.remove(); }
         } }, '🚀 ' + tr('loader.cg.a.start'));
