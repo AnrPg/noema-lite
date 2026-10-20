@@ -1,4 +1,4 @@
-/* 🗄️ The vault (engine/vault.js, docs/VAULT.md) against the Supabase emulator (rules of cloud/supabase.sql §12).
+/* 🗄️ The vault (engine/vault.js, docs/VAULT.md) against the Supabase emulator (rules of cloud/supabase.sql §13).
    Without a browser: the search in any script (Greek in plain and scholarly Latin letters, accents or not), the format checks
    by the first bytes (a program renamed .pdf is refused), the filters across universities and years.
    In the browser: Discover › Vault, an upload of several files with the required fields (a program, an SVG and a fake PDF

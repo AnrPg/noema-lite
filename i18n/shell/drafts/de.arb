@@ -448,5 +448,8 @@
   "sh.fromSources": "Aus deinem Material",
   "sh.fromSourcesSub": "Alle deine Dateien auf einmal: ein Fach oder eine Roadmap, je nach Inhalt",
   "sh.vault": "Tresor",
-  "sh.vaultSub": "Mitschriften, Altklausuren und Lösungen von Studierenden"
+  "sh.vaultSub": "Mitschriften, Altklausuren und Lösungen von Studierenden",
+  "sh.people": "Kontakte",
+  "sh.peopleSub": "Mit Kommilitonen chatten, Lernpartner, Lerngruppen",
+  "sh.peopleN": "Kontakte: {n, plural, one {# neu} other {# neu}}"
 }

@@ -187,5 +187,14 @@
   "vault.subject.communication": "Επικοινωνία και ΜΜΕ",
   "vault.subject.theology": "Θεολογία",
   "vault.subject.sports": "Επιστήμη φυσικής αγωγής",
-  "vault.subject.other": "Άλλο"
+  "vault.subject.other": "Άλλο",
+  "vault.aGroup": "μια ομάδα μελέτης",
+  "vault.g.group": "Ομάδα μελέτης",
+  "vault.f.group": "Ομάδα",
+  "vault.groupNote": "Ο φάκελος της ομάδας «{name}»: αυτά τα αρχεία τα βλέπουν μόνο τα μέλη της.",
+  "vault.fileGone": "Αυτό το αρχείο δεν υπάρχει πια στο θησαυροφυλάκιο.",
+  "vault.sendTo": "Αποστολή σε…",
+  "vault.shareWith": "Ποιος το βλέπει",
+  "vault.everyone": "Όλοι",
+  "vault.onlyGroup": "Μόνο η ομάδα «{name}»"
 }

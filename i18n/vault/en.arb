@@ -907,5 +907,53 @@
   "vault.subject.other": "Other",
   "@vault.subject.other": {
     "description": "A field of study in the vault’s shared list of subjects."
+  },
+  "vault.aGroup": "a study group",
+  "@vault.aGroup": {
+    "description": "Name of a study group the app does not know."
+  },
+  "vault.g.group": "Study group",
+  "@vault.g.group": {
+    "description": "Filter group: the files of one of my study groups."
+  },
+  "vault.f.group": "Group",
+  "@vault.f.group": {
+    "description": "Filter and fact: the study group a file belongs to."
+  },
+  "vault.groupNote": "The folder of “{name}”: only its members see these files.",
+  "@vault.groupNote": {
+    "description": "Note above the files of a group.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Genetics 2025"
+      }
+    }
+  },
+  "vault.fileGone": "That file is not in the vault any more.",
+  "@vault.fileGone": {
+    "description": "Toast when a file sent in a chat is gone."
+  },
+  "vault.sendTo": "Send to…",
+  "@vault.sendTo": {
+    "description": "Button: send this file to a chat."
+  },
+  "vault.shareWith": "Who sees it",
+  "@vault.shareWith": {
+    "description": "Field of the upload: everyone or one study group."
+  },
+  "vault.everyone": "Everyone",
+  "@vault.everyone": {
+    "description": "Option: the whole vault."
+  },
+  "vault.onlyGroup": "Only “{name}”",
+  "@vault.onlyGroup": {
+    "description": "Option: only one study group.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Genetics 2025"
+      }
+    }
   }
 }
