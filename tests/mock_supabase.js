@@ -26,6 +26,57 @@ function start({ port = 54321, staticDir = null, configOverride = null, maxObjec
   const repr = (req, res, code, rows) => /representation/.test(req.headers.prefer || '') ? json(res, code, rows) : json(res, code === 201 ? 201 : 204);
   const folder = k => k.split('/');
   const canWriteFile = (k, uid) => { const f = folder(k), a = access(f[0], uid); return (f[1] === 'steps' && f[2] === uid && ['owner', 'member'].includes(a)) || (f[1] === 'files' && a === 'owner'); };
+  /* ---------- 🗄️ the vault: table noema_vault_files (own rows only), view noema_vault (no uploader), ratings, reports,
+     the rpcs noema_vault_finish / noema_vault_count, bucket noema-vault (rules as in cloud/supabase.sql §12) ---------- */
+  const vfiles = [], vrat = [], vrep = [], vhits = new Set(), vobj = {};
+  const VKINDS = ['notes', 'slides', 'exam', 'exam_solved', 'exercises', 'lab', 'summary', 'book', 'recording', 'other'];
+  const VPATH = /^files\/[0-9a-f-]{36}\.(pdf|docx?|odt|rtf|txt|md|tex|pptx?|odp|xlsx?|ods|csv|epub|png|jpe?g|gif|webp|heic|mp3|m4a|wav|ogg|flac|mp4|webm|mov)$/;
+  const tidy = s => String(s || '').trim().replace(/\s+/g, ' ');
+  const vtally = id => { const f = vfiles.find(x => x.id === id); if (!f) return; const r = vrat.filter(x => x.file_id === id); f.rating_sum = r.reduce((a, x) => a + x.stars, 0); f.rating_n = r.length;
+    f.reports = vrep.filter(x => x.file_id === id).length; if (f.reports >= 3 && f.status === 'ok') f.status = 'hidden'; };
+  const vview = (f, uid) => { const { uploader, show_name, uploader_name, reports, ...rest } = f; return { ...rest, uploader_name: show_name ? uploader_name : null, mine: uploader === uid }; };
+  function vault(req, res, p, u, uid, data, buf) {
+    const M = req.method, sp = [...u.searchParams.entries()];
+    if (!/^\/(rest\/v1\/(noema_vault|rpc\/noema_vault)|storage\/v1\/object\/(authenticated\/)?noema-vault)/.test(p)) return;
+    if (!uid) return json(res, 401, { message: 'JWT required' });
+    if (p === '/rest/v1/noema_vault' && M === 'GET') return json(res, 200, filt(vfiles.filter(f => f.status === 'ok' || f.uploader === uid).map(f => vview(f, uid)), sp).sort((a, b) => a.created_at < b.created_at ? 1 : -1));
+    if (p === '/rest/v1/noema_vault_files') {
+      const mine = filt(vfiles.filter(f => f.uploader === uid), sp);
+      if (M === 'GET') return json(res, 200, mine);
+      if (M === 'POST') { for (const r of data) {
+        const used = vfiles.filter(f => f.uploader === uid).reduce((a, f) => a + f.size, 0);
+        if (r.uploader && r.uploader !== uid) return rls(res);
+        if (!VKINDS.includes(r.kind) || !VPATH.test(r.path || '') || !(r.size > 0 && r.size <= 20971520) || !r.title || !r.university || !r.department || !r.course || !r.year || !(r.semester >= 1 && r.semester <= 12) || !/^[a-z][a-z_]{1,40}$/.test(r.subject || '') || !r.language) return json(res, 400, { code: '23514', message: 'new row violates check constraint' });
+        if (used + r.size > 52428800) return json(res, 400, { code: 'P0001', message: `vault quota: ${used} of 52428800 bytes used` });
+        if (vfiles.some(f => f.path === r.path || f.id === r.id)) return dupe(res);
+        vfiles.push({ id: r.id || crypto.randomUUID(), ...r, uploader: uid, university: tidy(r.university), department: tidy(r.department), course: tidy(r.course), professor: tidy(r.professor) || null,
+          uploader_name: r.show_name ? (profiles[uid]?.display_name || users[uid]?.meta?.name || null) : null, status: 'pending', rating_sum: 0, rating_n: 0, downloads: 0, used: 0, reports: 0, created_at: now() }); }
+        return json(res, 201); }
+      if (M === 'PATCH') { const keep = ['id', 'uploader', 'status', 'path', 'size', 'mime', 'file_name', 'rating_sum', 'rating_n', 'downloads', 'used', 'reports', 'created_at'];
+        for (const f of mine) { const o = { ...f }; Object.assign(f, data); for (const k of keep) f[k] = o[k]; f.uploader_name = f.show_name ? (profiles[uid]?.display_name || users[uid]?.meta?.name || null) : null; } return json(res, 204); }
+      if (M === 'DELETE') { for (const f of mine) vfiles.splice(vfiles.indexOf(f), 1); return json(res, 204); }
+    }
+    if (p === '/rest/v1/noema_vault_ratings') {
+      if (M === 'GET') return json(res, 200, vrat.filter(r => r.user_id === uid));
+      if (M === 'POST') { for (const r of data) { if (r.user_id !== uid || !(r.stars >= 1 && r.stars <= 5)) return rls(res); const i = vrat.findIndex(x => x.file_id === r.file_id && x.user_id === uid); if (i >= 0) vrat[i] = r; else vrat.push(r); vtally(r.file_id); } return json(res, 201); }
+    }
+    if (p === '/rest/v1/noema_vault_reports') {
+      if (M === 'GET') return json(res, 200, vrep.filter(r => r.reporter === uid));
+      if (M === 'POST') { for (const r of data) { if (r.reporter !== uid) return rls(res); if (vrep.some(x => x.file_id === r.file_id && x.reporter === uid)) return dupe(res); vrep.push(r); vtally(r.file_id); } return json(res, 201); }
+    }
+    if (p === '/rest/v1/rpc/noema_vault_finish') { const f = vfiles.find(x => x.id === data.fid && x.uploader === uid); if (!f) return json(res, 400, { message: 'not your file' });
+      const o = vobj[f.path]; if (!o) return json(res, 400, { message: 'the file is not uploaded yet' }); if (o.data.length !== f.size) return json(res, 400, { message: `size mismatch: ${o.data.length} uploaded, ${f.size} announced` });
+      if (f.status === 'pending') f.status = 'ok'; return json(res, 200, 'ok'); }
+    if (p === '/rest/v1/rpc/noema_vault_count') { const f = vfiles.find(x => x.id === data.fid && x.status === 'ok'); const k = data.fid + ':' + uid + ':' + data.what;
+      if (f && ['download', 'used'].includes(data.what) && !vhits.has(k)) { vhits.add(k); if (data.what === 'download') f.downloads++; else f.used++; } return json(res, 200, null); }
+    let m;
+    if ((m = p.match(/^\/storage\/v1\/object\/noema-vault\/(.+)$/)) && M === 'POST') { const k = decodeURIComponent(m[1]); if (!vfiles.some(f => f.path === k && f.uploader === uid)) return rls(res);
+      if (buf.length > 20971520) return json(res, 413, { message: 'Payload too large' }); vobj[k] = { data: buf, type: req.headers['content-type'] }; return json(res, 200, { Key: 'noema-vault/' + k }); }
+    if ((m = p.match(/^\/storage\/v1\/object\/authenticated\/noema-vault\/(.+)$/))) { const k = decodeURIComponent(m[1]); if (!vfiles.some(f => f.path === k && (f.status === 'ok' || f.uploader === uid)) || !vobj[k]) return json(res, 404, { message: 'Object not found' });
+      res.writeHead(200, Object.assign({ 'Content-Type': vobj[k].type || 'application/octet-stream' }, cors)); return res.end(vobj[k].data); }
+    if (p === '/storage/v1/object/noema-vault' && M === 'DELETE') { for (const k of data.prefixes || []) if (vfiles.some(f => f.path === k && f.uploader === uid)) delete vobj[k]; return json(res, 200, []); }
+    return json(res, 404, { message: 'not found ' + p });
+  }
   function sharedCurricula(req, res, p, u, uid, data, buf) {
     const sp = [...u.searchParams.entries()], M = req.method, em = emailOf(uid);
     if (p === '/rest/v1/noema_curricula_shared') {
@@ -101,6 +152,7 @@ function start({ port = 54321, staticDir = null, configOverride = null, maxObjec
       const q = k => (u.searchParams.get(k) || '').replace(/^(eq|gt)\./, '');
       // ---- 👥 shared curricula (rules as in cloud/supabase.sql §10; anonymous reads of public ones)
       sharedCurricula(req, res, p, u, uid, data, buf); if (res.headersSent) return;
+      vault(req, res, p, u, uid, data, buf); if (res.headersSent) return;
       // ---- anonymous reads: public packs + public bucket
       if (p === '/rest/v1/noema_public_packs' && req.method === 'GET') { const o = q('owner'); return json(res, 200, pubPacks.filter(r => !o || r.owner === o).slice().sort((a, b) => a.updated_at < b.updated_at ? 1 : -1)); }
       // ---- the page others see (cloud/supabase.sql §11): readable by all once published, by its owner always; written by its owner
@@ -217,7 +269,7 @@ function start({ port = 54321, staticDir = null, configOverride = null, maxObjec
       json(res, 404, { message: 'not found ' + p });
     });
   });
-  server.log = []; server.state = { users, kv, snaps, files, profiles, convs: {}, authz: {}, consents: [], callbacks: [], pubFiles, shrFiles, pubPacks, shares, pages, curs, mems, steps, curFiles, stepWrites: 0 };
+  server.log = []; server.state = { users, kv, snaps, files, profiles, convs: {}, authz: {}, consents: [], callbacks: [], pubFiles, shrFiles, pubPacks, shares, pages, curs, mems, steps, curFiles, stepWrites: 0, vfiles, vrat, vrep, vobj };
   return new Promise(r => server.listen(port, () => r(server)));
 }
 module.exports = { start };

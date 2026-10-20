@@ -346,5 +346,174 @@ drop policy if exists "own public page"       on public.noema_public_profiles;
 create policy "public pages readable" on public.noema_public_profiles for select to anon, authenticated using (published or owner = (select auth.uid()));
 create policy "own public page"       on public.noema_public_profiles for all to authenticated using (owner = (select auth.uid())) with check (owner = (select auth.uid()));
 
--- 12) Check: should list the 10 noema_ tables with rls_enabled = true
+-- 12) 🗄️ THE VAULT (docs/VAULT.md): files students share — notes, slides, past exams (with or without solutions),
+--     exercise sets, lab work, summaries, books, recordings. Strictly organised: every file carries its university,
+--     department, course, year, semester, type, subject (a key of the app's shared list) and language — required — so
+--     the folders (university › department › course › year › type) and every filter work across all of them.
+--     ANONYMOUS: the uploader is kept here for deleting and take-downs, but nobody else can read it: the table shows
+--     each person only their own rows; everybody reads the view noema_vault, which has no uploader column (only the
+--     name of those who chose to show it, taken from their profile). Free plan: files ≤ 20 MB, ≤ 50 MB per person.
+--     A file is 'pending' until noema_vault_finish() has seen it in storage with its size; three reports hide it.
+create table if not exists public.noema_vault_files (
+  id            uuid primary key default gen_random_uuid(),
+  uploader      uuid not null default auth.uid() references auth.users(id) on delete cascade,
+  show_name     boolean not null default false,
+  uploader_name text,
+  status        text not null default 'pending' check (status in ('pending', 'ok', 'hidden')),
+  title         text not null check (char_length(title) between 1 and 160),
+  description   text check (char_length(description) <= 1000),
+  university    text not null check (char_length(university) between 2 and 120),
+  department    text not null check (char_length(department) between 2 and 120),
+  course        text not null check (char_length(course) between 2 and 160),
+  professor     text check (char_length(professor) <= 120),
+  year          int  not null check (year between 1950 and 2100),
+  semester      int  not null check (semester between 1 and 12),
+  kind          text not null check (kind in ('notes', 'slides', 'exam', 'exam_solved', 'exercises', 'lab', 'summary', 'book', 'recording', 'other')),
+  subject       text not null check (subject ~ '^[a-z][a-z_]{1,40}$'),
+  language      text not null check (language ~ '^[a-z]{2,3}(-[A-Za-z]{2,4})?$'),
+  has_exercises boolean not null default false,
+  has_solutions boolean not null default false,
+  handwritten   boolean not null default false,
+  file_name     text not null check (char_length(file_name) <= 200),
+  mime          text not null check (mime ~ '^(application/(pdf|msword|rtf|epub\+zip|vnd\.ms-excel|vnd\.ms-powerpoint|vnd\.openxmlformats-officedocument\.(wordprocessingml\.document|presentationml\.presentation|spreadsheetml\.sheet)|vnd\.oasis\.opendocument\.(text|presentation|spreadsheet)|x-tex)|text/(plain|markdown|csv|x-tex)|image/(png|jpeg|gif|webp|heic)|audio/(mpeg|mp4|x-m4a|wav|x-wav|ogg|flac)|video/(mp4|webm|quicktime))$'),
+  size          bigint not null check (size > 0 and size <= 20971520),
+  pages         int check (pages is null or pages between 0 and 100000),
+  path          text not null unique check (path ~ '^files/[0-9a-f-]{36}\.(pdf|docx?|odt|rtf|txt|md|tex|pptx?|odp|xlsx?|ods|csv|epub|png|jpe?g|gif|webp|heic|mp3|m4a|wav|ogg|flac|mp4|webm|mov)$'),   -- only these formats: no programs, scripts, archives or SVG
+  rating_sum    int not null default 0,
+  rating_n      int not null default 0,
+  downloads     int not null default 0,
+  used          int not null default 0,
+  reports       int not null default 0,
+  created_at    timestamptz not null default now()
+);
+create index if not exists noema_vault_files_where on public.noema_vault_files (university, department, course, year, kind);
+create index if not exists noema_vault_files_up    on public.noema_vault_files (uploader);
+create table if not exists public.noema_vault_ratings (
+  file_id uuid not null references public.noema_vault_files(id) on delete cascade,
+  user_id uuid not null default auth.uid() references auth.users(id) on delete cascade,
+  stars   int  not null check (stars between 1 and 5),
+  at      timestamptz not null default now(),
+  primary key (file_id, user_id)
+);
+create table if not exists public.noema_vault_reports (
+  file_id  uuid not null references public.noema_vault_files(id) on delete cascade,
+  reporter uuid not null default auth.uid() references auth.users(id) on delete cascade,
+  reason   text not null check (reason in ('copyright', 'live_exam', 'wrong', 'abuse', 'spam', 'other')),
+  note     text check (char_length(note) <= 600),
+  at       timestamptz not null default now(),
+  primary key (file_id, reporter)
+);
+create table if not exists public.noema_vault_hits (   -- one download / one "made a course from it" per person and file
+  file_id uuid not null references public.noema_vault_files(id) on delete cascade,
+  user_id uuid not null default auth.uid() references auth.users(id) on delete cascade,
+  what    text not null check (what in ('download', 'used')),
+  primary key (file_id, user_id, what)
+);
+alter table public.noema_vault_files   enable row level security;
+alter table public.noema_vault_ratings enable row level security;
+alter table public.noema_vault_reports enable row level security;
+alter table public.noema_vault_hits    enable row level security;
+drop policy if exists "own vault files"   on public.noema_vault_files;
+drop policy if exists "own vault ratings" on public.noema_vault_ratings;
+drop policy if exists "own vault reports" on public.noema_vault_reports;
+create policy "own vault files"   on public.noema_vault_files   for all to authenticated using (uploader = (select auth.uid())) with check (uploader = (select auth.uid()));
+create policy "own vault ratings" on public.noema_vault_ratings for all to authenticated using (user_id = (select auth.uid())) with check (user_id = (select auth.uid()));
+create policy "own vault reports" on public.noema_vault_reports for select to authenticated using (reporter = (select auth.uid()));
+drop policy if exists "add vault reports" on public.noema_vault_reports;
+create policy "add vault reports" on public.noema_vault_reports for insert to authenticated with check (reporter = (select auth.uid()));
+-- (noema_vault_hits: no policy — written only by noema_vault_count)
+
+-- what an uploader may set: the description of the file. Counters, status, size and path are the server's.
+create or replace function public.noema_vault_guard() returns trigger language plpgsql security definer set search_path = public as $$
+declare used_bytes bigint; nm text;
+begin
+  if current_setting('noema.vault', true) = 'server' then return new; end if;
+  if tg_op = 'INSERT' then new.uploader := auth.uid(); end if;
+  new.university := regexp_replace(btrim(new.university), '\s+', ' ', 'g'); new.department := regexp_replace(btrim(new.department), '\s+', ' ', 'g');
+  new.course := regexp_replace(btrim(new.course), '\s+', ' ', 'g'); new.professor := nullif(regexp_replace(btrim(coalesce(new.professor, '')), '\s+', ' ', 'g'), '');
+  select display_name into nm from public.noema_profiles where user_id = new.uploader;
+  new.uploader_name := case when new.show_name then coalesce(nullif(btrim(nm), ''), new.uploader_name) else null end;
+  if tg_op = 'INSERT' then
+    new.status := 'pending'; new.rating_sum := 0; new.rating_n := 0; new.downloads := 0; new.used := 0; new.reports := 0; new.created_at := now();
+    select coalesce(sum(size), 0) into used_bytes from public.noema_vault_files where uploader = new.uploader;
+    if used_bytes + new.size > 52428800 then raise exception 'vault quota: % of 52428800 bytes used', used_bytes using errcode = 'P0001'; end if;
+  else
+    new.id := old.id; new.uploader := old.uploader; new.status := old.status; new.path := old.path; new.size := old.size; new.mime := old.mime; new.file_name := old.file_name;
+    new.rating_sum := old.rating_sum; new.rating_n := old.rating_n; new.downloads := old.downloads; new.used := old.used; new.reports := old.reports; new.created_at := old.created_at;
+  end if;
+  return new;
+end $$;
+drop trigger if exists noema_vault_guard on public.noema_vault_files;
+create trigger noema_vault_guard before insert or update on public.noema_vault_files for each row execute function public.noema_vault_guard();
+
+-- everybody's view of the vault: no uploader, only the files that are there (and one's own, whatever their status)
+create or replace view public.noema_vault as
+  select id, case when show_name then uploader_name end as uploader_name, (uploader = auth.uid()) as mine, status, title, description,
+         university, department, course, professor, year, semester, kind, subject, language, has_exercises, has_solutions, handwritten,
+         file_name, mime, size, pages, path, rating_sum, rating_n, downloads, used, created_at
+  from public.noema_vault_files where status = 'ok' or uploader = auth.uid();
+revoke all on public.noema_vault from anon;
+grant select on public.noema_vault to authenticated;
+
+create or replace function public.noema_vault_finish(fid uuid) returns text language plpgsql security definer set search_path = public, storage as $$
+declare f public.noema_vault_files; got bigint;
+begin
+  select * into f from public.noema_vault_files where id = fid and uploader = auth.uid();
+  if not found then raise exception 'not your file'; end if;
+  select (metadata->>'size')::bigint into got from storage.objects where bucket_id = 'noema-vault' and name = f.path;
+  if got is null then raise exception 'the file is not uploaded yet'; end if;
+  if got <> f.size then raise exception 'size mismatch: % uploaded, % announced', got, f.size; end if;
+  perform set_config('noema.vault', 'server', true);
+  update public.noema_vault_files set status = 'ok' where id = fid and status = 'pending';
+  return 'ok';
+end $$;
+create or replace function public.noema_vault_count(fid uuid, what text) returns void language plpgsql security definer set search_path = public as $$
+begin
+  if auth.uid() is null or what not in ('download', 'used') then return; end if;
+  insert into public.noema_vault_hits (file_id, user_id, what) select fid, auth.uid(), what where exists (select 1 from public.noema_vault_files where id = fid and status = 'ok') on conflict do nothing;
+  if found then
+    perform set_config('noema.vault', 'server', true);
+    if what = 'download' then update public.noema_vault_files set downloads = downloads + 1 where id = fid; else update public.noema_vault_files set used = used + 1 where id = fid; end if;
+  end if;
+end $$;
+create or replace function public.noema_vault_tally() returns trigger language plpgsql security definer set search_path = public as $$
+declare fid uuid := coalesce(new.file_id, old.file_id);
+begin
+  perform set_config('noema.vault', 'server', true);
+  if tg_table_name = 'noema_vault_ratings' then
+    update public.noema_vault_files f set rating_sum = coalesce(r.s, 0), rating_n = coalesce(r.n, 0) from (select sum(stars) s, count(*) n from public.noema_vault_ratings where file_id = fid) r where f.id = fid;
+  else
+    update public.noema_vault_files f set reports = r.n, status = case when r.n >= 3 and f.status = 'ok' then 'hidden' else f.status end
+      from (select count(*) n from public.noema_vault_reports where file_id = fid) r where f.id = fid;
+  end if;
+  return null;
+end $$;
+drop trigger if exists noema_vault_rated on public.noema_vault_ratings;
+drop trigger if exists noema_vault_reported on public.noema_vault_reports;
+create trigger noema_vault_rated    after insert or update or delete on public.noema_vault_ratings for each row execute function public.noema_vault_tally();
+create trigger noema_vault_reported after insert or delete on public.noema_vault_reports for each row execute function public.noema_vault_tally();
+create or replace function public.noema_vault_readable(obj text) returns boolean language sql stable security definer set search_path = public as $$
+  select exists (select 1 from public.noema_vault_files where path = obj and (status = 'ok' or uploader = auth.uid())) $$;
+create or replace function public.noema_vault_writable(obj text) returns boolean language sql stable security definer set search_path = public as $$
+  select exists (select 1 from public.noema_vault_files where path = obj and uploader = auth.uid()) $$;
+
+-- the files: noema-vault/files/<id>.<ext> — no person in the path
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types) values ('noema-vault', 'noema-vault', false, 20971520, array[
+  'application/pdf', 'application/msword', 'application/rtf', 'application/epub+zip', 'application/vnd.ms-excel', 'application/vnd.ms-powerpoint',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.oasis.opendocument.text', 'application/vnd.oasis.opendocument.presentation',
+  'application/vnd.oasis.opendocument.spreadsheet', 'application/x-tex', 'text/plain', 'text/markdown', 'text/csv', 'text/x-tex',
+  'image/png', 'image/jpeg', 'image/gif', 'image/webp', 'image/heic', 'audio/mpeg', 'audio/mp4', 'audio/x-m4a', 'audio/wav', 'audio/x-wav', 'audio/ogg', 'audio/flac',
+  'video/mp4', 'video/webm', 'video/quicktime'])
+on conflict (id) do update set public = false, file_size_limit = 20971520, allowed_mime_types = excluded.allowed_mime_types;
+drop policy if exists "noema vault read"   on storage.objects;
+drop policy if exists "noema vault insert" on storage.objects;
+drop policy if exists "noema vault delete" on storage.objects;
+drop policy if exists "noema vault update" on storage.objects;
+create policy "noema vault read"   on storage.objects for select to authenticated using       (bucket_id = 'noema-vault' and public.noema_vault_readable(name));
+create policy "noema vault insert" on storage.objects for insert to authenticated with check (bucket_id = 'noema-vault' and public.noema_vault_writable(name));
+create policy "noema vault update" on storage.objects for update to authenticated using       (bucket_id = 'noema-vault' and public.noema_vault_writable(name));
+create policy "noema vault delete" on storage.objects for delete to authenticated using       (bucket_id = 'noema-vault' and public.noema_vault_writable(name));
+
+-- 13) Check: should list the 14 noema_ tables with rls_enabled = true
 select tablename, rowsecurity as rls_enabled from pg_tables where schemaname = 'public' and tablename like 'noema_%' order by 1;

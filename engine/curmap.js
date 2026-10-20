@@ -1445,7 +1445,7 @@ window.NoemaCurMap = (() => {
   /** In a node's subject: the curriculum it belongs to, mastery so far, back to the map. */
   function nodeInfo(acc, ref) { const c = C().get(acc, ref?.id); const n = c?.nodes[ref?.node]; if (!n) return null; const st = C().nodeStatus(acc, c, ref.node); return { c, n, st }; }
   /* ======================= 📚 From your sources: a Roadmap or one subject (engine/sourceplan.js, docs/FROM_SOURCES.md) ======================= */
-  function fromSources(acc, { onStudy } = {}) {
+  function fromSources(acc, { onStudy, files: preset = [] } = {}) {   // files: material to start with (e.g. from 🗄️ the vault)
     const P = window.NoemaSourcePlan, I = window.NoemaCurImport;
     overlay((box, close) => {
       box.classList.add('cg-box', 'cm-src');
@@ -1471,6 +1471,7 @@ window.NoemaCurMap = (() => {
         ondrop: e => { e.preventDefault(); drop.classList.remove('on'); addFiles([...e.dataTransfer.files]); } }, pick, CM('roadmap.map.src.choose'), el('span', { class: 'tiny' }, ' ' + CM('roadmap.map.src.drag')));
       const dirBtn = el('button', { class: 'btn small ghost', onclick: () => pickDir.click() }, CM('roadmap.map.src.folder'));
       const count = el('div', { class: 'tiny' });
+      if (preset.length) setTimeout(() => addFiles(preset), 0);
       const title = el('input', { class: 'noema-input cm-srctitle', placeholder: CM('roadmap.map.src.titlePh') });
       const lang = el('select', { class: 'noema-input' }, ...Object.keys(C().LANG).map(v => el('option', { value: v }, langLabel(v)))); lang.value = (navigator.language || 'en').slice(0, 2) in C().LANG ? (navigator.language || 'en').slice(0, 2) : 'en';
       const goal = el('select', { class: 'noema-input' }, ...['exam', 'understanding', 'project'].map(v => el('option', { value: v }, CM('roadmap.map.src.goal.' + v))));

@@ -3548,5 +3548,13 @@
   "sh.fromSourcesSub": "All your files at once: one subject or a Roadmap, as they call for",
   "@sh.fromSourcesSub": {
     "description": "Subtitle of “From your sources”."
+  },
+  "sh.vault": "Vault",
+  "@sh.vault": {
+    "description": "Discover item: the shared file vault (notes, past exams, solutions…). One word."
+  },
+  "sh.vaultSub": "Notes, past exams and solutions that students share",
+  "@sh.vaultSub": {
+    "description": "Subtitle of the Vault item."
   }
 }

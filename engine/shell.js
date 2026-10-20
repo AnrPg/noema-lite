@@ -341,6 +341,12 @@ window.NoemaShell = (() => {
     NoemaSearch.page({ page, h, L, go, open, sheet, menuButton, faceEl, pill, svg, ico, chev, main: F.main });
   };
 
+  /* ---------- 🗄️ the vault (#/vault?…): engine/vault.js draws it ---------- */
+  PAGES.vault = () => {
+    if (!window.NoemaVault) { page({ tab: 'discover', crumbs: [[L('vault')]] }, h('p', { class: 'ns-muted' }, '…')); return; }
+    NoemaVault.page({ page, h, L, go, open, sheet, modal, menuButton, popMenu, faceEl, pill, svg, ico, chev });
+  };
+
   /* ======================= pages ======================= */
   /* ---------- Today: where you left off, what is due, the day's goal ---------- */
   PAGES[''] = () => {
@@ -568,6 +574,7 @@ window.NoemaShell = (() => {
     page({ tab: 'discover', crumbs: [[L('discover')]], corner: true },
       h('h1', {}, L('discover')),
       h('div', { class: 'ns-list' },
+        item('vault', 1, L('vault'), L('vaultSub'), () => go('#/vault'), 'ns-vault'),
         item('search', 4, L('exploreShared'), w === 'lang' ? L('exploreLangSub') : L('exploreSub'), () => go('#/explore/subjects'), 'ns-explore'),
         w !== 'lang' ? item('people', 2, L('exploreRoadmaps'), L('exploreRoadmapsSub'), () => go('#/explore'), 'ns-explorerm') : null,
         w !== 'lang' && CM()?.fromSources ? item('upload', 3, L('fromSources'), L('fromSourcesSub'), () => CM().fromSources(acc(), { onStudy }), 'ns-fromsrc') : null,

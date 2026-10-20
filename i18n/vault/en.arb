@@ -1,0 +1,911 @@
+{
+  "@@locale": "en",
+  "vault.title": "Vault",
+  "@vault.title": {
+    "description": "Name of the shared file vault (page title, Discover item). One word."
+  },
+  "vault.lead": "Notes, past exams, solutions, slides and recordings that students share. Whoever uploads stays anonymous.",
+  "@vault.lead": {
+    "description": "Lead line under the Vault title."
+  },
+  "vault.signIn": "The vault is shared between accounts: sign in to a cloud account to browse it and share files.",
+  "@vault.signIn": {
+    "description": "Shown on the Vault page when the learner has no cloud account signed in."
+  },
+  "vault.signInBtn": "Sign in or create an account",
+  "@vault.signInBtn": {
+    "description": "Button on the Vault page when signed out."
+  },
+  "vault.search": "Search the vault",
+  "@vault.search": {
+    "description": "Screen-reader label of the Vault search field."
+  },
+  "vault.searchPh": "Search: course, university, professor, title…",
+  "@vault.searchPh": {
+    "description": "Placeholder of the Vault search field."
+  },
+  "vault.upload": "Upload",
+  "@vault.upload": {
+    "description": "Button: upload files to the vault. One word."
+  },
+  "vault.view": "View",
+  "@vault.view": {
+    "description": "Screen-reader label of the Files / Folders switch."
+  },
+  "vault.files": "Files",
+  "@vault.files": {
+    "description": "Switch option: a flat list of files."
+  },
+  "vault.folders": "Folders",
+  "@vault.folders": {
+    "description": "Switch option: browse by university › department › course › year › type."
+  },
+  "vault.sort": "Sort",
+  "@vault.sort": {
+    "description": "Screen-reader label of the sort menu."
+  },
+  "vault.sort.new": "Newest",
+  "@vault.sort.new": {
+    "description": "Sort option."
+  },
+  "vault.sort.rating": "Best rated",
+  "@vault.sort.rating": {
+    "description": "Sort option."
+  },
+  "vault.sort.downloads": "Most downloaded",
+  "@vault.sort.downloads": {
+    "description": "Sort option."
+  },
+  "vault.sort.year": "Academic year",
+  "@vault.sort.year": {
+    "description": "Sort option: the most recent academic year first."
+  },
+  "vault.filters": "Filters",
+  "@vault.filters": {
+    "description": "Button that opens the filters."
+  },
+  "vault.filtersN": "{n, plural, one {# filter} other {# filters}}",
+  "@vault.filtersN": {
+    "description": "The filters button when some are in use.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "vault.removeFilter": "Remove the filter {what}",
+  "@vault.removeFilter": {
+    "description": "Screen-reader label of a filter chip.",
+    "placeholders": {
+      "what": {
+        "type": "String",
+        "example": "Biology"
+      }
+    }
+  },
+  "vault.clear": "Clear all",
+  "@vault.clear": {
+    "description": "Link: remove every filter."
+  },
+  "vault.any": "Any",
+  "@vault.any": {
+    "description": "First option of a filter menu: no filter."
+  },
+  "vault.loading": "Loading the vault…",
+  "@vault.loading": {
+    "description": "While the list loads."
+  },
+  "vault.offline": "The vault could not be loaded. Check the connection and try again.",
+  "@vault.offline": {
+    "description": "Error when the list cannot be read."
+  },
+  "vault.results": "{n, plural, one {# file} other {# files}}",
+  "@vault.results": {
+    "description": "How many files match.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "vault.nFiles": "{n, plural, one {# file} other {# files}}",
+  "@vault.nFiles": {
+    "description": "Count of files in a folder.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "vault.none": "No file matches. Try fewer filters or other words.",
+  "@vault.none": {
+    "description": "Empty result."
+  },
+  "vault.emptyVault": "The vault is empty so far. Be the first to share your notes.",
+  "@vault.emptyVault": {
+    "description": "Empty vault."
+  },
+  "vault.allUniversities": "All universities",
+  "@vault.allUniversities": {
+    "description": "Root of the folder path."
+  },
+  "vault.myUploads": "My uploads",
+  "@vault.myUploads": {
+    "description": "Menu item and filter: only the files I uploaded."
+  },
+  "vault.myUploadsSub": "Only what you shared, with its status",
+  "@vault.myUploadsSub": {
+    "description": "Subtitle of “My uploads”."
+  },
+  "vault.howItWorks": "How the vault works",
+  "@vault.howItWorks": {
+    "description": "Menu item that explains the vault."
+  },
+  "vault.about1": "Every file has its place: university › department › course › year › type. Its subject, semester and language are noted too, so you can search across all places, for example biology notes of any university, 3rd semester.",
+  "@vault.about1": {
+    "description": "How it works, paragraph 1."
+  },
+  "vault.about2": "Nobody sees who uploaded a file, unless that person chose to show their name. The app keeps it privately, only to let you delete your files and to take down files that break the rules.",
+  "@vault.about2": {
+    "description": "How it works, paragraph 2."
+  },
+  "vault.about3": "Only documents, slides, spreadsheets, e-books, pictures, audio and video are accepted: no programs, scripts or archives. A file can be up to {mb} MB, and each person can share up to {quota} MB in all.",
+  "@vault.about3": {
+    "description": "How it works, paragraph 3.",
+    "placeholders": {
+      "mb": {
+        "type": "int",
+        "example": "3"
+      },
+      "quota": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "vault.about4": "Share only what is yours to share or free to share. Solutions of past exams are welcome; answers to an exam that has not been held yet are not.",
+  "@vault.about4": {
+    "description": "How it works, paragraph 4."
+  },
+  "vault.about5": "Anyone can report a file. After three reports it is hidden until it is checked.",
+  "@vault.about5": {
+    "description": "How it works, paragraph 5."
+  },
+  "vault.g.where": "Where",
+  "@vault.g.where": {
+    "description": "Filter group / form section: university, department, course, professor."
+  },
+  "vault.g.when": "When",
+  "@vault.g.when": {
+    "description": "Filter group: year and semester."
+  },
+  "vault.g.whatWhen": "What and when",
+  "@vault.g.whatWhen": {
+    "description": "Form section: year, semester, type, subject, language."
+  },
+  "vault.g.type": "Type",
+  "@vault.g.type": {
+    "description": "Filter group: the kind of material."
+  },
+  "vault.g.subject": "Subject",
+  "@vault.g.subject": {
+    "description": "Filter group: the field of study."
+  },
+  "vault.g.contents": "Contents",
+  "@vault.g.contents": {
+    "description": "Filter group / form section: exercises, solutions, handwritten or typed."
+  },
+  "vault.g.format": "Format",
+  "@vault.g.format": {
+    "description": "Filter group: language and file type."
+  },
+  "vault.g.quality": "Quality",
+  "@vault.g.quality": {
+    "description": "Filter group: rating."
+  },
+  "vault.g.use": "Use",
+  "@vault.g.use": {
+    "description": "Filter group: already used in a noema course."
+  },
+  "vault.f.university": "University",
+  "@vault.f.university": {
+    "description": "Field / filter label."
+  },
+  "vault.f.department": "Department",
+  "@vault.f.department": {
+    "description": "Field / filter label: faculty or department."
+  },
+  "vault.f.course": "Course",
+  "@vault.f.course": {
+    "description": "Field / filter label: the university course (class)."
+  },
+  "vault.f.professor": "Professor",
+  "@vault.f.professor": {
+    "description": "Field / filter label: who teaches the course."
+  },
+  "vault.f.year": "Academic year",
+  "@vault.f.year": {
+    "description": "Field / filter label."
+  },
+  "vault.f.semester": "Semester",
+  "@vault.f.semester": {
+    "description": "Field / filter label."
+  },
+  "vault.f.when": "When",
+  "@vault.f.when": {
+    "description": "Detail row: year and semester."
+  },
+  "vault.f.type": "Type",
+  "@vault.f.type": {
+    "description": "Field label: the kind of material."
+  },
+  "vault.f.subject": "Subject",
+  "@vault.f.subject": {
+    "description": "Field / filter label: the field of study, from a shared list."
+  },
+  "vault.f.language": "Language",
+  "@vault.f.language": {
+    "description": "Field / filter label: the language the file is written in."
+  },
+  "vault.f.contents": "Contents",
+  "@vault.f.contents": {
+    "description": "Detail row."
+  },
+  "vault.f.file": "File",
+  "@vault.f.file": {
+    "description": "Detail row: file name and size."
+  },
+  "vault.f.sharedBy": "Shared by",
+  "@vault.f.sharedBy": {
+    "description": "Detail row: the uploader’s name, or “anonymously”."
+  },
+  "vault.f.rating": "Rating",
+  "@vault.f.rating": {
+    "description": "Filter label."
+  },
+  "vault.anonymous": "someone who stays anonymous",
+  "@vault.anonymous": {
+    "description": "Value of “Shared by” when the uploader did not show a name."
+  },
+  "vault.semN": "Semester {n, number}",
+  "@vault.semN": {
+    "description": "A semester (1–12).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "vault.yearSem": "{year}, semester {sem, number}",
+  "@vault.yearSem": {
+    "description": "Where a file sits in time: academic year and semester.",
+    "placeholders": {
+      "year": {
+        "type": "String",
+        "example": "2023"
+      },
+      "sem": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "vault.c.exercises": "Has exercises",
+  "@vault.c.exercises": {
+    "description": "Content chip / checkbox."
+  },
+  "vault.c.solutions": "Has solutions",
+  "@vault.c.solutions": {
+    "description": "Content chip / checkbox."
+  },
+  "vault.c.handwritten": "Handwritten",
+  "@vault.c.handwritten": {
+    "description": "Content chip / checkbox."
+  },
+  "vault.c.typed": "Typed",
+  "@vault.c.typed": {
+    "description": "Content chip: not handwritten."
+  },
+  "vault.c.used": "Used in a noema course",
+  "@vault.c.used": {
+    "description": "Use chip: someone already made a course from it."
+  },
+  "vault.r.3": "3 stars or more",
+  "@vault.r.3": {
+    "description": "Rating filter option."
+  },
+  "vault.r.4": "4 stars or more",
+  "@vault.r.4": {
+    "description": "Rating filter option."
+  },
+  "vault.ft.doc": "Documents",
+  "@vault.ft.doc": {
+    "description": "File type chip."
+  },
+  "vault.ft.slides": "Slides",
+  "@vault.ft.slides": {
+    "description": "File type chip."
+  },
+  "vault.ft.sheet": "Spreadsheets",
+  "@vault.ft.sheet": {
+    "description": "File type chip."
+  },
+  "vault.ft.book": "E-books",
+  "@vault.ft.book": {
+    "description": "File type chip."
+  },
+  "vault.ft.image": "Pictures",
+  "@vault.ft.image": {
+    "description": "File type chip."
+  },
+  "vault.ft.audio": "Audio",
+  "@vault.ft.audio": {
+    "description": "File type chip."
+  },
+  "vault.ft.video": "Video",
+  "@vault.ft.video": {
+    "description": "File type chip."
+  },
+  "vault.ft.text": "Plain text",
+  "@vault.ft.text": {
+    "description": "File type chip: txt, md, tex."
+  },
+  "vault.kind.notes": "Lecture notes",
+  "@vault.kind.notes": {
+    "description": "Type of material."
+  },
+  "vault.kind.slides": "Slides",
+  "@vault.kind.slides": {
+    "description": "Type of material."
+  },
+  "vault.kind.exam": "Past exam",
+  "@vault.kind.exam": {
+    "description": "Type of material."
+  },
+  "vault.kind.exam_solved": "Exam with solutions",
+  "@vault.kind.exam_solved": {
+    "description": "Type of material."
+  },
+  "vault.kind.exercises": "Exercise set",
+  "@vault.kind.exercises": {
+    "description": "Type of material."
+  },
+  "vault.kind.lab": "Lab work",
+  "@vault.kind.lab": {
+    "description": "Type of material."
+  },
+  "vault.kind.summary": "Summary",
+  "@vault.kind.summary": {
+    "description": "Type of material."
+  },
+  "vault.kind.book": "Book",
+  "@vault.kind.book": {
+    "description": "Type of material."
+  },
+  "vault.kind.recording": "Recording",
+  "@vault.kind.recording": {
+    "description": "Type of material: lecture audio or video."
+  },
+  "vault.kind.other": "Other",
+  "@vault.kind.other": {
+    "description": "Type of material: anything else for study."
+  },
+  "vault.status.pending": "Not finished",
+  "@vault.status.pending": {
+    "description": "Status pill of one’s own upload that never finished."
+  },
+  "vault.status.hidden": "Hidden",
+  "@vault.status.hidden": {
+    "description": "Status pill of one’s own file hidden after reports."
+  },
+  "vault.status.ok": "Shared",
+  "@vault.status.ok": {
+    "description": "Status of a visible file."
+  },
+  "vault.statusLong.pending": "This upload did not finish, so nobody else sees it. Delete it and upload the file again.",
+  "@vault.statusLong.pending": {
+    "description": "Detail of a pending file."
+  },
+  "vault.statusLong.hidden": "This file was reported several times and is hidden until it is checked. Only you see it.",
+  "@vault.statusLong.hidden": {
+    "description": "Detail of a hidden file."
+  },
+  "vault.ratingN": "{n, plural, one {# rating} other {# ratings}}",
+  "@vault.ratingN": {
+    "description": "How many people rated a file.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "vault.noRating": "Not rated yet",
+  "@vault.noRating": {
+    "description": "No ratings."
+  },
+  "vault.downloadsN": "{n, plural, =0 {Not downloaded yet} one {# download} other {# downloads}}",
+  "@vault.downloadsN": {
+    "description": "Download count.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "vault.usedN": "{n, plural, one {used in # course} other {used in # courses}}",
+  "@vault.usedN": {
+    "description": "How many noema courses were made from it.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "vault.pagesN": "{n, plural, one {# page} other {# pages}}",
+  "@vault.pagesN": {
+    "description": "Page count of a PDF.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "vault.download": "Download",
+  "@vault.download": {
+    "description": "Button."
+  },
+  "vault.preview": "Preview",
+  "@vault.preview": {
+    "description": "Button: show the file here."
+  },
+  "vault.makeCourse": "Make a course from it",
+  "@vault.makeCourse": {
+    "description": "Button: open “From your sources” with this file."
+  },
+  "vault.rate": "Your rating",
+  "@vault.rate": {
+    "description": "Label of the five stars."
+  },
+  "vault.starsN": "{n, plural, one {# star} other {# stars}}",
+  "@vault.starsN": {
+    "description": "Screen-reader label of a star button.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "vault.edit": "Edit",
+  "@vault.edit": {
+    "description": "Button: change the details of one’s own file."
+  },
+  "vault.editTitle": "Edit the details",
+  "@vault.editTitle": {
+    "description": "Title of the edit dialog."
+  },
+  "vault.delete": "Delete",
+  "@vault.delete": {
+    "description": "Button: delete one’s own file."
+  },
+  "vault.deleteAsk": "Delete “{title}” from the vault for everyone?",
+  "@vault.deleteAsk": {
+    "description": "Confirmation before deleting.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Genetics notes"
+      }
+    }
+  },
+  "vault.deleted": "Deleted.",
+  "@vault.deleted": {
+    "description": "Toast after deleting."
+  },
+  "vault.report": "Report",
+  "@vault.report": {
+    "description": "Button: report a file."
+  },
+  "vault.reported": "You reported it.",
+  "@vault.reported": {
+    "description": "Instead of the Report button once reported."
+  },
+  "vault.reportTitle": "Report this file",
+  "@vault.reportTitle": {
+    "description": "Title of the report dialog."
+  },
+  "vault.reportLead": "Nobody sees who reported. After three reports the file is hidden until it is checked.",
+  "@vault.reportLead": {
+    "description": "Lead of the report dialog."
+  },
+  "vault.reason": "Reason",
+  "@vault.reason": {
+    "description": "Screen-reader label of the reason menu."
+  },
+  "vault.reason.copyright": "It is not theirs to share (copyright)",
+  "@vault.reason.copyright": {
+    "description": "Report reason."
+  },
+  "vault.reason.live_exam": "Answers to an exam not held yet",
+  "@vault.reason.live_exam": {
+    "description": "Report reason."
+  },
+  "vault.reason.wrong": "Wrong course, year or type",
+  "@vault.reason.wrong": {
+    "description": "Report reason."
+  },
+  "vault.reason.abuse": "Offensive or harmful",
+  "@vault.reason.abuse": {
+    "description": "Report reason."
+  },
+  "vault.reason.spam": "Spam or not study material",
+  "@vault.reason.spam": {
+    "description": "Report reason."
+  },
+  "vault.reason.other": "Something else",
+  "@vault.reason.other": {
+    "description": "Report reason."
+  },
+  "vault.reportNote": "What is wrong? (optional)",
+  "@vault.reportNote": {
+    "description": "Placeholder of the report note."
+  },
+  "vault.sendReport": "Send the report",
+  "@vault.sendReport": {
+    "description": "Button."
+  },
+  "vault.reportThanks": "Thank you. The report is in.",
+  "@vault.reportThanks": {
+    "description": "Toast after reporting."
+  },
+  "vault.cancel": "Cancel",
+  "@vault.cancel": {
+    "description": "Button."
+  },
+  "vault.save": "Save",
+  "@vault.save": {
+    "description": "Button."
+  },
+  "vault.uploadTitle": "Share files in the vault",
+  "@vault.uploadTitle": {
+    "description": "Title of the upload dialog."
+  },
+  "vault.uploadLead": "Add one or more files from the same course, then say where they belong. Every field with * is needed, so others can find them.",
+  "@vault.uploadLead": {
+    "description": "Lead of the upload dialog."
+  },
+  "vault.chooseFiles": "Choose files",
+  "@vault.chooseFiles": {
+    "description": "Drop zone button."
+  },
+  "vault.dragHere": "or drag them here",
+  "@vault.dragHere": {
+    "description": "Next to “Choose files”."
+  },
+  "vault.formats": "PDF, Word, PowerPoint, Excel, OpenDocument, text, e-books, pictures, audio and video, up to {mb} MB each. No programs, scripts or archives.",
+  "@vault.formats": {
+    "description": "Accepted formats.",
+    "placeholders": {
+      "mb": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "vault.quota": "You share {used} of {max}. Each file up to {mb} MB.",
+  "@vault.quota": {
+    "description": "How much of the personal quota is used.",
+    "placeholders": {
+      "used": {
+        "type": "String",
+        "example": "12.5 MB"
+      },
+      "max": {
+        "type": "String",
+        "example": "50 MB"
+      },
+      "mb": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "vault.fileTitle": "Title",
+  "@vault.fileTitle": {
+    "description": "Field: the title of a file."
+  },
+  "vault.removeFile": "Remove {name}",
+  "@vault.removeFile": {
+    "description": "Screen-reader label of ✕ next to a file.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "notes.pdf"
+      }
+    }
+  },
+  "vault.choose": "Choose…",
+  "@vault.choose": {
+    "description": "First option of a required menu."
+  },
+  "vault.descPh": "What is in it, which chapters, anything useful (optional)",
+  "@vault.descPh": {
+    "description": "Placeholder of the description."
+  },
+  "vault.showName": "Show my name with these files",
+  "@vault.showName": {
+    "description": "Checkbox, off by default: otherwise the upload is anonymous."
+  },
+  "vault.anonTip": "Off: nobody sees that you shared them. The app keeps it only so you can delete them.",
+  "@vault.anonTip": {
+    "description": "Under “Show my name”."
+  },
+  "vault.rules": "These files are mine to share or free to share, and none holds answers to an exam that has not been held yet.",
+  "@vault.rules": {
+    "description": "Required checkbox before uploading."
+  },
+  "vault.uploadBtn": "Share in the vault",
+  "@vault.uploadBtn": {
+    "description": "Primary button of the upload dialog."
+  },
+  "vault.uploading": "Uploading {i, number} of {n, number}…",
+  "@vault.uploading": {
+    "description": "Progress on the button.",
+    "placeholders": {
+      "i": {
+        "type": "int",
+        "example": "3"
+      },
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "vault.uploaded": "{n, plural, one {# file is in the vault.} other {# files are in the vault.}}",
+  "@vault.uploaded": {
+    "description": "Toast after uploading.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "vault.failed": "{name} was not uploaded: {why}",
+  "@vault.failed": {
+    "description": "Error of one file.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "notes.pdf"
+      },
+      "why": {
+        "type": "String",
+        "example": "Network error"
+      }
+    }
+  },
+  "vault.needFile": "Add at least one file the vault accepts.",
+  "@vault.needFile": {
+    "description": "Upload error."
+  },
+  "vault.needRules": "Tick the box above to confirm the files may be shared.",
+  "@vault.needRules": {
+    "description": "Upload error."
+  },
+  "vault.needTitle": "Every file needs a title.",
+  "@vault.needTitle": {
+    "description": "Upload error."
+  },
+  "vault.missing": "Still needed: {what}",
+  "@vault.missing": {
+    "description": "Upload error: the required fields left empty.",
+    "placeholders": {
+      "what": {
+        "type": "String",
+        "example": "University, Course"
+      }
+    }
+  },
+  "vault.badFormat": "The vault does not take this kind of file.",
+  "@vault.badFormat": {
+    "description": "Problem of a file: format not allowed."
+  },
+  "vault.tooBig": "Bigger than {mb} MB.",
+  "@vault.tooBig": {
+    "description": "Problem of a file.",
+    "placeholders": {
+      "mb": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "vault.empty": "The file is empty.",
+  "@vault.empty": {
+    "description": "Problem of a file."
+  },
+  "vault.quotaFull": "Your {mb} MB in the vault would be full. Delete something of yours first.",
+  "@vault.quotaFull": {
+    "description": "Problem of a file: over the personal quota.",
+    "placeholders": {
+      "mb": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "vault.notWhatItSays": "This file is not what its name says, so it is not accepted.",
+  "@vault.notWhatItSays": {
+    "description": "Problem of a file: its content does not match its extension."
+  },
+  "vault.subject.math": "Mathematics",
+  "@vault.subject.math": {
+    "description": "A field of study in the vault’s shared list of subjects."
+  },
+  "vault.subject.statistics": "Statistics",
+  "@vault.subject.statistics": {
+    "description": "A field of study in the vault’s shared list of subjects."
+  },
+  "vault.subject.physics": "Physics",
+  "@vault.subject.physics": {
+    "description": "A field of study in the vault’s shared list of subjects."
+  },
+  "vault.subject.chemistry": "Chemistry",
+  "@vault.subject.chemistry": {
+    "description": "A field of study in the vault’s shared list of subjects."
+  },
+  "vault.subject.biology": "Biology",
+  "@vault.subject.biology": {
+    "description": "A field of study in the vault’s shared list of subjects."
+  },
+  "vault.subject.medicine": "Medicine",
+  "@vault.subject.medicine": {
+    "description": "A field of study in the vault’s shared list of subjects."
+  },
+  "vault.subject.nursing": "Nursing",
+  "@vault.subject.nursing": {
+    "description": "A field of study in the vault’s shared list of subjects."
+  },
+  "vault.subject.pharmacy": "Pharmacy",
+  "@vault.subject.pharmacy": {
+    "description": "A field of study in the vault’s shared list of subjects."
+  },
+  "vault.subject.dentistry": "Dentistry",
+  "@vault.subject.dentistry": {
+    "description": "A field of study in the vault’s shared list of subjects."
+  },
+  "vault.subject.veterinary": "Veterinary medicine",
+  "@vault.subject.veterinary": {
+    "description": "A field of study in the vault’s shared list of subjects."
+  },
+  "vault.subject.cs": "Computer science",
+  "@vault.subject.cs": {
+    "description": "A field of study in the vault’s shared list of subjects."
+  },
+  "vault.subject.electrical": "Electrical engineering",
+  "@vault.subject.electrical": {
+    "description": "A field of study in the vault’s shared list of subjects."
+  },
+  "vault.subject.mechanical": "Mechanical engineering",
+  "@vault.subject.mechanical": {
+    "description": "A field of study in the vault’s shared list of subjects."
+  },
+  "vault.subject.civil": "Civil engineering",
+  "@vault.subject.civil": {
+    "description": "A field of study in the vault’s shared list of subjects."
+  },
+  "vault.subject.chemical_eng": "Chemical engineering",
+  "@vault.subject.chemical_eng": {
+    "description": "A field of study in the vault’s shared list of subjects."
+  },
+  "vault.subject.architecture": "Architecture",
+  "@vault.subject.architecture": {
+    "description": "A field of study in the vault’s shared list of subjects."
+  },
+  "vault.subject.economics": "Economics",
+  "@vault.subject.economics": {
+    "description": "A field of study in the vault’s shared list of subjects."
+  },
+  "vault.subject.business": "Business",
+  "@vault.subject.business": {
+    "description": "A field of study in the vault’s shared list of subjects."
+  },
+  "vault.subject.accounting": "Accounting and finance",
+  "@vault.subject.accounting": {
+    "description": "A field of study in the vault’s shared list of subjects."
+  },
+  "vault.subject.law": "Law",
+  "@vault.subject.law": {
+    "description": "A field of study in the vault’s shared list of subjects."
+  },
+  "vault.subject.political": "Political science",
+  "@vault.subject.political": {
+    "description": "A field of study in the vault’s shared list of subjects."
+  },
+  "vault.subject.sociology": "Sociology",
+  "@vault.subject.sociology": {
+    "description": "A field of study in the vault’s shared list of subjects."
+  },
+  "vault.subject.psychology": "Psychology",
+  "@vault.subject.psychology": {
+    "description": "A field of study in the vault’s shared list of subjects."
+  },
+  "vault.subject.education": "Education",
+  "@vault.subject.education": {
+    "description": "A field of study in the vault’s shared list of subjects."
+  },
+  "vault.subject.philosophy": "Philosophy",
+  "@vault.subject.philosophy": {
+    "description": "A field of study in the vault’s shared list of subjects."
+  },
+  "vault.subject.history": "History",
+  "@vault.subject.history": {
+    "description": "A field of study in the vault’s shared list of subjects."
+  },
+  "vault.subject.archaeology": "Archaeology",
+  "@vault.subject.archaeology": {
+    "description": "A field of study in the vault’s shared list of subjects."
+  },
+  "vault.subject.literature": "Literature",
+  "@vault.subject.literature": {
+    "description": "A field of study in the vault’s shared list of subjects."
+  },
+  "vault.subject.linguistics": "Linguistics",
+  "@vault.subject.linguistics": {
+    "description": "A field of study in the vault’s shared list of subjects."
+  },
+  "vault.subject.languages": "Foreign languages",
+  "@vault.subject.languages": {
+    "description": "A field of study in the vault’s shared list of subjects."
+  },
+  "vault.subject.arts": "Fine arts and design",
+  "@vault.subject.arts": {
+    "description": "A field of study in the vault’s shared list of subjects."
+  },
+  "vault.subject.music": "Music",
+  "@vault.subject.music": {
+    "description": "A field of study in the vault’s shared list of subjects."
+  },
+  "vault.subject.geography": "Geography",
+  "@vault.subject.geography": {
+    "description": "A field of study in the vault’s shared list of subjects."
+  },
+  "vault.subject.geology": "Geology",
+  "@vault.subject.geology": {
+    "description": "A field of study in the vault’s shared list of subjects."
+  },
+  "vault.subject.environment": "Environmental science",
+  "@vault.subject.environment": {
+    "description": "A field of study in the vault’s shared list of subjects."
+  },
+  "vault.subject.agriculture": "Agriculture",
+  "@vault.subject.agriculture": {
+    "description": "A field of study in the vault’s shared list of subjects."
+  },
+  "vault.subject.communication": "Media and communication",
+  "@vault.subject.communication": {
+    "description": "A field of study in the vault’s shared list of subjects."
+  },
+  "vault.subject.theology": "Theology",
+  "@vault.subject.theology": {
+    "description": "A field of study in the vault’s shared list of subjects."
+  },
+  "vault.subject.sports": "Sport science",
+  "@vault.subject.sports": {
+    "description": "A field of study in the vault’s shared list of subjects."
+  },
+  "vault.subject.other": "Other",
+  "@vault.subject.other": {
+    "description": "A field of study in the vault’s shared list of subjects."
+  }
+}
