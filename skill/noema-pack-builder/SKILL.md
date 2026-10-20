@@ -22,6 +22,18 @@ Subject title and id (`lowercase-with-hyphens`), language of the material (the t
 the learner's goal (exam / understanding / project), math or code features. If the user is vague,
 choose sensible defaults, say them in one line, and carry on.
 
+## 0b. One subject or a Roadmap? (when the learner gives a pile of material without saying)
+Decide the shape the material calls for, the same way the app's **📚 From your sources** does (docs/FROM_SOURCES.md):
+- **One subject** — one coherent topic that fits in up to 18 chapters (a chapter holds about 25 dense pages, so up to
+  ~300 pages). A concise treatise is a full course, never a lesser choice: it lands on the learner's Shelf.
+- **A Roadmap** — several distinct topics that build on each other, or more than one subject can hold. The connector
+  cannot create a map: say so in one line and point the learner to 📚 From your sources in the app (choose *My Claude app*,
+  paste the task here, paste your JSON answer back), or to 📥 Import a Roadmap with a map you write for them (`📎` file
+  references with pages on each step).
+Say your choice and its reason in one line and carry on with the subject unless the learner wants the Roadmap.
+When the message already carries **“The learner confirmed this chapter plan”** (sent by the app), do not decide again:
+write exactly those chapters, in that order, each from the pages it names.
+
 ## 1. Read every source completely
 - PDFs: `python3 scripts/pdf_text.py FILE.pdf > text.txt` (page-numbered). Read all of it, in chunks.
 - Files of any size are fine (the app and the connector store big files in parts). Split a PDF only when you WANT the

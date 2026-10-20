@@ -137,6 +137,7 @@ mastered station and the last 5 seconds of a timed round can bring a big reactio
 |---|---|
 | CL1 ➕ New curriculum | Knowledge › + New Roadmap; Knowledge ⋮; Discover; Today ⋮ |
 | CL2 📥 Import a map | Knowledge ⋮; Discover |
+| — | **From your sources** (new 2026-10-20): Discover; Shelf ⋮; 🧭 Roadmaps (classic). One subject or a Roadmap, proposed from your files. docs/FROM_SOURCES.md |
 | CL3 🌍 Explore curricula | Knowledge ⋮ › Roadmaps others share; Discover. A page (`#/explore`): the public Roadmaps in folded sections by domain; typing in the search shows only the results |
 | CL4 invitations | Top of the Knowledge tab, and the share bar |
 | CL5 curriculum card | Roadmap card on Knowledge (progress bar); tap opens the map, or the build progress |

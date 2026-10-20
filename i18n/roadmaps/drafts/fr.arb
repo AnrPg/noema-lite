@@ -121,5 +121,14 @@
   "roadmap.gen.naming": "Choix du nom de la matière…",
   "roadmap.gen.chapter": "Chapitre {i, number}/{n, number} : {title}",
   "roadmap.gen.chapterDone": "{sections, plural, one {# section} many {# sections} other {# sections}} · {exercises, plural, one {# exercice} many {# exercices} other {# exercices}} · {flashcards, plural, one {# carte} many {# cartes} other {# cartes}}",
-  "roadmap.gen.invalid": "Le pack généré n’est pas valide : {list}"
+  "roadmap.gen.invalid": "Le pack généré n’est pas valide : {list}",
+  "roadmap.src.reasonSize": "{files, plural, one {# fichier} many {# fichiers} other {# fichiers}}, environ {pages, plural, one {# page} many {# pages} other {# pages}} en tout",
+  "roadmap.src.reasonFits": "Un seul sujet qui tient en {n, plural, one {# chapitre} many {# chapitres} other {# chapitres}} : une matière concise",
+  "roadmap.src.reasonTooBig": "Trop pour une seule matière : environ {n, plural, one {# chapitre} many {# chapitres} other {# chapitres}} de contenu",
+  "roadmap.src.reasonParts": "Les fichiers forment {n, plural, one {# partie} many {# parties distinctes} other {# parties distinctes}} qui s’appuient les unes sur les autres",
+  "roadmap.src.reasonEstimate": "Estimation d’après les tailles et les sommaires, sans IA",
+  "roadmap.src.partN": "Partie {n, number}",
+  "roadmap.src.pagesOf": "{title}, p. {a, number}–{b, number}",
+  "roadmap.src.needFiles": "Ajoute d’abord du matériel.",
+  "roadmap.src.notJson": "Ce n’est pas la réponse JSON. Colle toute la réponse de Claude."
 }

@@ -121,5 +121,14 @@
   "roadmap.gen.naming": "Δίνεται όνομα στο θέμα…",
   "roadmap.gen.chapter": "Κεφάλαιο {i, number}/{n, number}: {title}",
   "roadmap.gen.chapterDone": "{sections, plural, one {# ενότητα} other {# ενότητες}} · {exercises, plural, one {# άσκηση} other {# ασκήσεις}} · {flashcards, plural, one {# κάρτα} other {# κάρτες}}",
-  "roadmap.gen.invalid": "Το πακέτο που δημιουργήθηκε δεν είναι έγκυρο: {list}"
+  "roadmap.gen.invalid": "Το πακέτο που δημιουργήθηκε δεν είναι έγκυρο: {list}",
+  "roadmap.src.reasonSize": "{files, plural, one {# αρχείο} other {# αρχεία}}, περίπου {pages, plural, one {# σελίδα} other {# σελίδες}} συνολικά",
+  "roadmap.src.reasonFits": "Ένα θέμα που χωράει σε {n, plural, one {# κεφάλαιο} other {# κεφάλαια}}: ένα περιεκτικό μάθημα",
+  "roadmap.src.reasonTooBig": "Πολύ για ένα θέμα: υλικό για περίπου {n, plural, one {# κεφάλαιο} other {# κεφάλαια}}",
+  "roadmap.src.reasonParts": "Τα αρχεία σχηματίζουν {n, plural, one {# μέρος} other {# ξεχωριστά μέρη}} που χτίζονται το ένα πάνω στο άλλο",
+  "roadmap.src.reasonEstimate": "Εκτίμηση από τα μεγέθη και τα περιεχόμενα, χωρίς AI",
+  "roadmap.src.partN": "Μέρος {n, number}",
+  "roadmap.src.pagesOf": "{title}, σ. {a, number}–{b, number}",
+  "roadmap.src.needFiles": "Πρόσθεσε πρώτα υλικό.",
+  "roadmap.src.notJson": "Δεν είναι η απάντηση JSON. Επικόλλησε ολόκληρη την απάντηση του Claude."
 }

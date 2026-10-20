@@ -2074,12 +2074,20 @@
   "sh.nextChapterBtn": "Next: {title}",
   "@sh.nextChapterBtn": {
     "description": "Button at the end of a chapter page: go to the next chapter. title = that chapter's title.",
-    "placeholders": { "title": { "type": "String" } }
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
   },
   "sh.nextStepBtn": "Next step: {title}",
   "@sh.nextStepBtn": {
     "description": "Button on the last chapter of a subject that is a Roadmap step: open the Roadmap's next step. title = that step's title.",
-    "placeholders": { "title": { "type": "String" } }
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
   },
   "sh.allWays": "All the ways to practise",
   "@sh.allWays": {
@@ -3532,5 +3540,13 @@
         "type": "String"
       }
     }
+  },
+  "sh.fromSources": "From your sources",
+  "@sh.fromSources": {
+    "description": "Discover / Shelf ⋮ item: give all your study material at once; the app proposes one subject or a Roadmap. Short."
+  },
+  "sh.fromSourcesSub": "All your files at once: one subject or a Roadmap, as they call for",
+  "@sh.fromSourcesSub": {
+    "description": "Subtitle of “From your sources”."
   }
 }

@@ -470,7 +470,7 @@ window.NoemaShell = (() => {
     draw();
   };
   function shelfMenu() {
-    return [{ label: L('importFile'), sub: L('importFileSub'), icon: 'upload', run: importFile }, { label: L('createClaude'), sub: L('createClaudeSub'), icon: 'spark', run: () => N().claudeGuide({ onDone: s => landedOpen(s) }) },
+    return [CM()?.fromSources ? { label: L('fromSources'), sub: L('fromSourcesSub'), icon: 'upload', run: () => CM().fromSources(acc(), { onStudy }) } : null, { label: L('importFile'), sub: L('importFileSub'), icon: 'upload', run: importFile }, { label: L('createClaude'), sub: L('createClaudeSub'), icon: 'spark', run: () => N().claudeGuide({ onDone: s => landedOpen(s) }) },
       { label: L('exploreShared'), icon: 'globe', href: '#/explore/subjects' }, { label: L('allSubjects'), sub: L('allSubjectsSub'), icon: 'book', run: () => N().openSubjectPicker?.() }];
   }
   function shelfItem(s, i, refresh) {
@@ -570,6 +570,7 @@ window.NoemaShell = (() => {
       h('div', { class: 'ns-list' },
         item('search', 4, L('exploreShared'), w === 'lang' ? L('exploreLangSub') : L('exploreSub'), () => go('#/explore/subjects'), 'ns-explore'),
         w !== 'lang' ? item('people', 2, L('exploreRoadmaps'), L('exploreRoadmapsSub'), () => go('#/explore'), 'ns-explorerm') : null,
+        w !== 'lang' && CM()?.fromSources ? item('upload', 3, L('fromSources'), L('fromSourcesSub'), () => CM().fromSources(acc(), { onStudy }), 'ns-fromsrc') : null,
         w !== 'lang' ? item('map', 1, L('newRoadmap'), L('newRoadmapSub'), () => CM()?.create(acc(), { onStudy }), 'ns-create') : null,
         w !== 'lang' ? item('spark', 2, L('createClaude'), L('createClaudeSub'), () => N().claudeGuide({ onDone: s => landedOpen(s) })) : null,
         w !== 'know' && WORLDS.lang?.create ? item(icoTxt('文A', 3), 3, L('newLanguage'), L('newLanguageSub'), () => WORLDS.lang.create()) : null,
