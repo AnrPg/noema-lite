@@ -729,7 +729,7 @@ window.NoemaArt = (() => {
     eye: '<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>', pause: '<path d="M8 5v14M16 5v14"/>',
     logout: '<path d="M15 4h4v16h-4M10 8l-4 4 4 4M6 12h10"/>', mic: '<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>',
     bug: '<rect x="7" y="8" width="10" height="12" rx="5"/><path d="M12 8v12M7 13H3M21 13h-4M8 9 5 6M16 9l3-3M7 18l-3 2M17 18l3 2M9 6a3 3 0 0 1 6 0"/>',
-    send: '<path d="M4 12l16-8-6 16-2-6z"/>', filter: '<path d="M4 5h16l-6 8v6l-4-2v-4z"/>', info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5h.01"/>',
+    send: '<path d="M4 12l16-8-6 16-2-6z"/>', vault: '<path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M3 10h18"/>', filter: '<path d="M4 5h16l-6 8v6l-4-2v-4z"/>', info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5h.01"/>',
     fire: '<path d="M12 21c4 0 7-2.7 7-6.5 0-4-3-6-4-9-1 2-2 3-3.5 3.5C11 6 10 4 10 3c-3 2.5-5 6-5 10 0 4.5 3 8 7 8z"/>',
     home: '<path d="M4 11l8-7 8 7v9H4z"/><path d="M10 20v-6h4v6"/>', crown: '<path d="M4 18h16M5 15l-1-9 5 4 3-6 3 6 5-4-1 9z"/>', expand: '<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>',
   };

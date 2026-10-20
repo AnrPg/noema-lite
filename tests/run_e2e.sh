@@ -28,6 +28,7 @@ node "$ROOT/tests/imglib.js" "$ROOT"
 node "$ROOT/tests/curriculum.js" "$T"
 node "$ROOT/tests/curriculum_import.js" "$T"
 node "$ROOT/tests/from_sources.js" "$T"   # 📚 From your sources: one subject or a Roadmap (docs/FROM_SOURCES.md)
+node "$ROOT/tests/vault.js" "$T"          # 🗄️ the vault: shared study files (docs/VAULT.md)
 node "$ROOT/tests/curriculum_app.js" "$T"
 node "$ROOT/tests/curriculum_share.js" "$T"
 node "$ROOT/tests/shelf.js" "$T"
