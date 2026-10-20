@@ -30,8 +30,9 @@ Decide the shape the material calls for, the same way the app's **📚 From your
   first (pages, outline), then make it with `noema_create_roadmap(plan_json, language, learner)`: a step per topic, each
   with its role, its prerequisites (refs of earlier steps) and the files and pages it is made from (`"lectures/cells.pdf
   pp. 1–40"`), plus `files` listing EVERY file the learner gave you with its pages — every file must be used. It is checked
-  like the app's own proposal; fix every listed problem and send it again. Then go on as in *Curricula* below: plan the
-  chapters of its steps and prepare the steps, from the files of this chat. Without the connector, point the learner to
+  like the app's own proposal; fix every listed problem and send it again. Every step is queued for you in study order
+  (`prepare: false` makes only the map). Then go on as in *Curricula* below: `noema_curriculum_task` hands you the chapter
+  plans, then the steps one by one — each from its files and pages in this chat. Without the connector, point the learner to
   📚 From your sources in the app (choose *My Claude app*, paste the task here, paste your JSON answer back).
 Say your choice and its reason in one line and carry on with it unless the learner wants the other shape.
 When the message already carries **“The learner confirmed this chapter plan”** (sent by the app), do not decide again:
