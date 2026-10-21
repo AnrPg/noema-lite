@@ -84,11 +84,24 @@ came from goes in `cite` (below) and in the chapter's `sources`; the app shows i
 - ✗ "Complete the Round 1 Q15 answer." → ✓ "Parquet is a file format. Which three guarantees does it **not** give by itself?"
 - ✗ "Put the distinctions in the order the source lists them." → order only what has a real order (a process, a lifecycle).
 
-**Q2 · Every question of the sources, answered and checked.** List every question / problem / exercise of the sources in
-the chapter's map (`sourceQuestions`). Each becomes ≥ 1 exercise with its full text (verbatim, or completed with what it
-silently assumes) and `cite.sq` = its id in the map. Solve it twice, independently, and compare with each other and with
-the source's answer; recompute numbers with a script; run code / SQL where you can. A wrong source answer is corrected,
-and the explanation says so.
+**Q2 · Every exercise of the sources, in full.** List every exercise / question / problem / worked example of the sources
+in the chapter's map (`sourceQuestions`); none is left out. Each becomes ≥ 1 exercise with its full text (verbatim, or
+completed with what it silently assumes) and `cite.sq` = its id in the map. Each says where its answer comes from:
+- `"answerFrom": "source"`: the source gives the solution. Its result is taken as correct, **no second check**; but the
+  exercise's explanation is **rewritten in your own words, more detailed, insightful and explanatory** than the source's
+  (why each step, the idea behind it, the tempting mistake).
+- `"answerFrom": "claude"`: the source gives no solution. Solve it twice, independently, and compare; recompute numbers
+  with a script; run code / SQL where you can. `"check"` says how it was double-checked.
+
+**Q2b · Three kinds of table in every chapter's theory** (`theory.tables`). A `table` block names its `kind`:
+- `"compare"` · a **comparative matrix**: the concepts that get confused, side by side against the same criteria
+  (≥ 3 columns: the criterion + ≥ 2 concepts; ≥ 2 rows).
+- `"summary"` · a table that **categorises or sums up** the chapter's concepts (what belongs where, the key facts at a
+  glance; ≥ 2 columns, ≥ 3 rows).
+- `"breakdown"` · related concepts **brought together and broken down across columns of different parameters** (one row
+  per concept, one column per parameter: ≥ 4 columns, ≥ 2 rows).
+Put each where it teaches (the summary often closes a section). A chapter with genuinely nothing to put in one kind gives
+the reason in `map.unfit["table.<kind>"]`.
 
 **Q3 · Knowledge map first** (`map/chNN.json`, below). Write it before the chapter; every exercise names its learnable
 (`lr`); every source question and every point of the pages is in it.
@@ -161,7 +174,8 @@ some learnable's `kp`.
             "focus": ["concept", "syntax", "pitfall", "debug", "compare"],
             "modes": ["contradiction", "reverse", "whatif", "causal", "distinguish", "translate"] },
   "unfit": { "dialectic": "pure syntax, nothing to argue" },
-  "sourceQuestions": [ { "id": "ch03-q01", "text": "full text…", "answer": "checked solution…", "cite": {"src": "r1", "loc": "Q14"} } ] }
+  "sourceQuestions": [ { "id": "ch03-q01", "text": "full text…", "answer": "the solution…", "answerFrom": "source|claude",
+                       "check": "how it was double-checked (answerFrom claude)", "cite": {"src": "r1", "loc": "Q14"} } ] }
 ```
 - `level` ∈ foundation · core · advanced (the order of the sections follows it).
 - `cats` ⊂ pitfall · confusable · falsefriend · detail · sequence · multipart · nomenclature · acronym · formula · edge ·
@@ -226,7 +240,7 @@ Math (subjects with `features.math`): `$…$` inline, `$$…$$` display (KaTeX).
 - `{"t":"list","items":["...","..."],"ordered":false}`
 - `{"t":"code","lang":"sql|python|bash|yaml|text","code":"multi\nline","caption":"optional"}`
 - `{"t":"diagram","text":"ASCII art\nmulti-line","caption":"optional"}`
-- `{"t":"table","head":["Axis","Options"],"rows":[["..",".."]],"caption":"optional"}`
+- `{"t":"table","kind":"compare|summary|breakdown","head":["Axis","Options"],"rows":[["..",".."]],"caption":"optional"}`  (every chapter has all three kinds, Q2b)
 - `{"t":"callout","kind":"key|pitfall|tip|exam|warn|analogy|debug|interview","title":"...","text":"..."}`
 - `{"t":"compare","items":[{"title":"Classic","points":["..",".."]},{"title":"Serverless","points":[".."]}]}`  (2–3 items)
 - `{"t":"flow","items":["READ","WRITE","VALIDATE","COMMIT"],"caption":"optional"}`   (a process chain, 2–9 short steps)

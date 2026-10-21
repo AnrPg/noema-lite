@@ -120,7 +120,10 @@ For every chapter, before any theory or exercise, write `work/<id>/map/chNN.json
    `taughtIn` and is not taught again.
 2. `learnables`: what the learner must be able to do, each grouping points (`kp`), ordered foundation → advanced.
 3. `fits` / `unfit`: every exercise type, focus tag and paradigm (`mode`) either fits the chapter or has a reason why not.
-4. `sourceQuestions`: **every question / problem of the sources**, full text, and an answer you solved twice and checked.
+4. `sourceQuestions`: **every exercise / question / problem / worked example of the sources, none left out**, full
+   text. `answerFrom: "source"` when the source solves it: take its result as correct (no second check) but rewrite the
+   explanation in your own words, more detailed, insightful and explanatory. `answerFrom: "claude"` when it does not:
+   solve it twice, independently, compare, and say how in `check`.
 5. Plan the facades: each learnable becomes several exercises of different types (the same idea as mcq, tf, calc,
    cloze…). About 300 exercises per chapter is a mild target, never a cap.
    The critical-thinking types make the deeper facades: `flaw` (the wrong line of a worked solution + why), `case`
@@ -139,7 +142,9 @@ exercise type and focus tag that fits the chapter ≥ 3 times** (its map's `fits
 Sizes are only a guide, never a target. Plan the exercises as a grid (learnables × types) before writing them.
 
 `work/<id>/chapters/chNN.json`, one per chapter, exactly as `CONTENT_SPEC.md` says: theory blocks
-(short, concrete, one idea each), comparisons side by side, `ask` blocks and `debug` playbooks for
+(short, concrete, one idea each), comparisons side by side, **all three kinds of table** (`kind`:
+`compare` = a comparative matrix, `summary` = a table that categorises or sums up the concepts, `breakdown` = related
+concepts broken down across columns of different parameters; CONTENT_SPEC.md Q2b), `ask` blocks and `debug` playbooks for
 everything diagnostic, pitfalls, 20–50 flashcards, ≥ 5 exercises per section (every type several
 times, ≥ 30 % tagged pitfall/debug/exam), explanations that teach why the right answer is right and
 why the tempting one is wrong. Write chapters with Python scripts (json.dump) rather than by hand.

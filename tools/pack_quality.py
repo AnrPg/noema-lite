@@ -156,7 +156,15 @@ def check_quality(ch, features=(), types=None):
     cited = {(e.get("cite") or {}).get("sq") for e in exs if isinstance(e.get("cite"), dict)}
     for qid, q in sq.items():
         if not (isinstance(q.get("text"), str) and q["text"].strip() and isinstance(q.get("answer"), str) and q["answer"].strip()): add("source.questions", f"{qid}: needs its full text and its checked answer")
+        if q.get("answerFrom") not in ("source", "claude"): add("source.questions", f"{qid}: answerFrom must be 'source' (the source's own solution) or 'claude' (solved here)")
+        elif q["answerFrom"] == "claude" and not (isinstance(q.get("check"), str) and q["check"].strip()): add("source.questions", f"{qid}: solved here, so say in check how the answer was double-checked")
         if qid not in cited: add("source.questions", f"{qid}: no exercise cites it (cite.sq)")
+    # theory.tables
+    tabs = [b for s in ch.get("sections") or [] for b in s.get("blocks") or [] if isinstance(b, dict) and b.get("t") == "table"]
+    for k, need in C["theory.tables"]["kinds"].items():
+        if isinstance(unfit.get("table." + k), str) and unfit["table." + k].strip(): continue
+        ok = [b for b in tabs if b.get("kind") == k and len(b.get("head") or []) >= need["cols"] and len(b.get("rows") or []) >= need["rows"]]
+        if not ok: add("theory.tables", f"no {k} table (a table block with kind '{k}', >= {need['cols']} columns and >= {need['rows']} rows): {need['what']}")
     # review.done
     r = ch.get("review"); c = C["review.done"]
     if not isinstance(r, dict): add("review.done", "no second-pass review (review/" + cid + ".json)")
