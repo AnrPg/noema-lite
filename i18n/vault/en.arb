@@ -921,5 +921,17 @@
   "vault.moreActions": "More",
   "@vault.moreActions": {
     "description": "Tile opening the menu of rarer actions (edit, delete, report)."
+  },
+  "vault.sortBy": "Sort by",
+  "@vault.sortBy": {
+    "description": "Label before the sort order list."
+  },
+  "vault.pinnedFolders": "Pinned folders",
+  "@vault.pinnedFolders": {
+    "description": "Tooltip of the button that lists the pinned folders."
+  },
+  "vault.removePin": "Unpin {name}",
+  "@vault.removePin": {
+    "description": "× on a pinned folder chip."
   }
 }

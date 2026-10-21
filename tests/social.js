@@ -219,7 +219,7 @@ c = canvas.Canvas(sys.argv[1]); c.drawString(72, 720, 'Genetics summary'); c.sho
     await iro.screenshot({ path: SHOTS + '/so4_phone.png', fullPage: false });
     await iro.evaluate(async () => { await NoemaI18n.use('el'); location.hash = '#/people'; NoemaShell.route(); }); await wait(900);
     const el = await iro.locator('.so-view').innerText();
-    ok(/Επαφές/.test(el) && /Συνομιλίες/.test(el) && /Ομάδες/.test(el), 'Greek menus: ' + el.split('\n').slice(0, 2).join(' · '));
+    ok(/Φίλοι/.test(el) && /Συνομιλίες/.test(el) && /Ομάδες/.test(el), 'Greek menus: ' + el.split('\n').slice(0, 2).join(' · '));
     await iro.screenshot({ path: SHOTS + '/so5_greek.png', fullPage: true });
     const odd = []; for (const p of [iro, nikos, eleni]) odd.push(...(await p.evaluate(() => window.__toasts || [])).filter(t => /Cannot read|undefined|null|TypeError/.test(t)));
     ok(!odd.length, 'no broken messages shown to anyone ' + odd.join(' | '));

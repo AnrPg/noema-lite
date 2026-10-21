@@ -186,5 +186,8 @@
   "vault.filedHere": "Classés directement sous {name}",
   "vault.actions": "Que faire de ce fichier",
   "vault.makeCourseShort": "Créer un cours",
-  "vault.moreActions": "Plus"
+  "vault.moreActions": "Plus",
+  "vault.sortBy": "Trier par",
+  "vault.pinnedFolders": "Dossiers épinglés",
+  "vault.removePin": "Désépingler {name}"
 }

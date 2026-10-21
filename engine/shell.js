@@ -151,7 +151,7 @@ window.NoemaShell = (() => {
     t.push(['discover', '#/discover', svg('compass'), L('discover')]);
     // the vault and people are places of their own, not corners of Discover (people: cloud accounts only)
     t.push(['vault', '#/vault', svg('vault'), L('vault')]);
-    if (social()) t.push(['people', '#/people', svg('chat'), L('people')]);
+    if (social()) t.push(['people', '#/people', svg('community'), L('people')]);
     t.push(['progress', '#/progress', svg('star'), L('progress')]);
     return t;
   }

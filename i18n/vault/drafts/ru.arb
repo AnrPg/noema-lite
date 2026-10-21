@@ -186,5 +186,8 @@
   "vault.filedHere": "Прямо в «{name}»",
   "vault.actions": "Что сделать с файлом",
   "vault.makeCourseShort": "Сделать курс",
-  "vault.moreActions": "Ещё"
+  "vault.moreActions": "Ещё",
+  "vault.sortBy": "Сортировка",
+  "vault.pinnedFolders": "Закреплённые папки",
+  "vault.removePin": "Открепить: {name}"
 }

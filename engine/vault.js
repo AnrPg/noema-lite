@@ -125,15 +125,25 @@ window.NoemaVault = (() => {
       return out.sort((a, b) => b[0] - a[0] || name(a[1]).length - name(b[1]).length).slice(0, n).map(x => x[1]);
     }
     /** the fields a text names (a title, a course: "Σημειώσεις Γενετικής" → Genetics), the most specific first */
-    function fromText(text, n = 6) {
+    function fromText(text, n = 8) {
       const toks = fold(text).split(/[^\p{L}\p{N}]+/u).filter(Boolean); if (!toks.length) return [];
       const like = (t, w) => w.length >= 5 ? t.startsWith(w.slice(0, Math.max(4, w.length - 2))) : t === w;   // endings differ (Γενετική, Γενετικής)
       const hits = [];
       for (const id of byId.keys()) { if (byId.get(id).status !== 'accepted') continue;
         for (const nm of allNames(id)) { const ws = fold(nm).split(/[^\p{L}\p{N}]+/u).filter(Boolean); if (!ws.length || ws.join('').length < 4) continue;
           if (toks.some((_, i) => ws.every((w, j) => toks[i + j] && like(toks[i + j], w)))) { hits.push([ws.length, nm.length, id]); break; } } }
-      const ids = hits.sort((a, b) => b[0] - a[0] || b[1] - a[1]).map(x => x[2]);
-      return ids.filter(id => !ids.some(o => o !== id && up(o).has(id))).slice(0, n);   // Medical physics, not also Physics
+      // an abbreviation written in capitals: AI → Artificial intelligence, ML → Machine learning
+      const caps = new Set((String(text).match(/\b[A-Z\u0391-\u03A9\u0410-\u042F]{2,5}\b/gu) || []).map(fold));
+      if (caps.size) for (const id of byId.keys()) { if (byId.get(id).status !== 'accepted') continue;
+        const nm = byId.get(id).names?.en || ''; const ws = fold(nm).split(/[^\p{L}\p{N}]+/u).filter(w => w.length > 2);   // the English name's initials
+        if (ws.length >= 2 && caps.has(ws.map(w => w[0]).join(''))) hits.push([ws.length, nm.length, id]); }
+      let ids = hits.sort((a, b) => b[0] - a[0] || b[1] - a[1]).map(x => x[2]);
+      ids = [...new Set(ids)].filter(id => !ids.some(o => o !== id && up(o).has(id)));   // Medical physics, not also Physics
+      // then the field that begins with a word of the text (systems → Systems engineering), one per word
+      // (only when the names gave few: the words of matched names are left out, and so are the fields above a match)
+      if (ids.length < 3) { const used = new Set(ids.flatMap(id => formsOf(id).join(' ').split(/\s+/)));
+        for (const w of [...new Set(toks.filter(t => t.length >= 5 && !used.has(t)))]) for (const id of find(w, 1)) if (!ids.includes(id) && !ids.some(o => up(o).has(id)) && formsOf(id).some(x => x.startsWith(w.slice(0, Math.max(5, w.length - 2))))) ids.push(id); }
+      return ids.slice(0, n);
     }
     /** read once (the browser keeps a copy; it is read again when a field changed, or a day later) */
     function load() {
@@ -236,7 +246,9 @@ window.NoemaVault = (() => {
     const openFilters = () => sheet(T('filters'), body => { body.append(fhead, filt); drawFilters(); }, { cls: 'vt-filtsheet' });
     const chips = h('div', { class: 'vt-active' });
     const out = h('div', { class: 'vt-out' }, h('p', { class: 'ns-muted' }, T('loading')));
-    v.append(h('div', { class: 'row vt-bar' }, inp, upBtn), h('div', { class: 'row vt-row' }, viewSeg, filtBtn, sortSel), chips, out);
+    // one tidy row: how the list is ordered and what is filtered on the left; files or folders, as two icons, on the right
+    const sortL = h('label', { class: 'vt-sortl' }, h('span', { class: 'tiny ns-muted' }, T('sortBy')), sortSel);
+    v.append(h('div', { class: 'row vt-bar' }, inp, upBtn), h('div', { class: 'row vt-row' }, sortL, filtBtn, h('span', { class: 'grow' }), viewSeg), chips, out);
     const setP = patch => { P = { ...P, ...patch }; for (const k of Object.keys(P)) if (!P[k]) delete P[k]; history.replaceState(null, '', location.pathname + location.search + hashOf(P)); draw(); };
     let t = 0; inp.addEventListener('input', () => { clearTimeout(t); t = setTimeout(() => setP({ q: inp.value.trim() }), 140); });
     let all = [];
@@ -295,15 +307,22 @@ window.NoemaVault = (() => {
       const by = P.by === 'field' ? 'field' : 'school', path = (P.f || '').split('›').filter(Boolean);
       const LV = by === 'field' ? path.map(() => 'field') : SCHOOL, depth = Math.min(path.length, LV.length);
       const here = list.filter(f => path.slice(0, depth).every((p, i) => { const vs = valsOf(f, LV[i]); return vs.length ? vs.some(v => String(v) === p || same(v, p)) : p === NONE; }));
-      const ways = h('div', { class: 'ns-seg small vt-ways', role: 'radiogroup', 'aria-label': T('folders') }, ...[['school', T('bySchool')], ['field', T('byField')]].map(([k, l]) =>
-        h('button', { class: by === k ? 'on' : '', role: 'radio', 'aria-checked': String(by === k), 'data-by': k, onclick: () => setP({ by: k === 'school' ? '' : k, f: '' }) }, l)));
+      // the two ways in: a small toggle at the end of the path row (rarely changed)
+      const ways = h('div', { class: 'ns-seg small vt-ways', role: 'radiogroup', 'aria-label': T('folders') }, ...[['school', T('bySchool'), '🏛'], ['field', T('byField'), '🧭']].map(([k, l, e]) =>
+        h('button', { class: by === k ? 'on' : '', role: 'radio', 'aria-checked': String(by === k), 'aria-label': l, title: l, 'data-by': k, onclick: () => setP({ by: k === 'school' ? '' : k, f: '' }) }, e)));   // i18n-ignore (🏛 🧭)
       const label = path.slice(0, depth).map((p, i) => folderName(LV[i], p)).join(' › ');
       const mine = pins(), pinned = mine.some(x => x.by === by && x.f === (P.f || ''));
-      const pinBtn = depth ? h('button', { class: 'linkish tiny vt-pin', onclick: () => { putPins(pinned ? mine.filter(x => !(x.by === by && x.f === P.f)) : [{ by, f: P.f, label }, ...mine]); draw(); } }, pinned ? T('unpin') : T('pin')) : null;
-      const pinRow = mine.length ? h('div', { class: 'row vt-pins' }, h('small', { class: 'tiny ns-muted' }, T('pinned')), ...mine.map(x => h('button', { class: 'chip', onclick: () => setP({ by: x.by === 'school' ? '' : x.by, f: x.f }) }, x.label))) : null;
+      const pinBtn = depth ? h('button', { class: 'ns-iconbtn vt-pin' + (pinned ? ' on' : ''), 'aria-pressed': String(pinned), title: pinned ? T('unpin') : T('pin'), 'aria-label': pinned ? T('unpin') : T('pin'),
+        onclick: () => { putPins(pinned ? mine.filter(x => !(x.by === by && x.f === P.f)) : [{ by, f: P.f, label }, ...mine]); draw(); } }, '📌') : null;   // i18n-ignore (📌)
+      // the pinned folders: behind one button; each opens its folder, × forgets it
+      const pinList = h('div', { class: 'vt-pinlist', hidden: true }, ...mine.map(x => h('span', { class: 'chip vt-pinchip' },
+        h('button', { class: 'linkish', onclick: () => setP({ by: x.by === 'school' ? '' : x.by, f: x.f }) }, x.label),
+        h('button', { class: 'vt-chipx', title: T('removePin', { name: x.label }), 'aria-label': T('removePin', { name: x.label }), onclick: () => { putPins(pins().filter(y => !(y.by === x.by && y.f === x.f))); draw(); } }, '×'))));   // i18n-ignore (×)
+      const pinsBtn = mine.length ? h('button', { class: 'btn small ghost vt-pinsbtn', 'aria-expanded': 'false', title: T('pinnedFolders'), onclick: e => { pinList.hidden = !pinList.hidden; e.currentTarget.setAttribute('aria-expanded', String(!pinList.hidden)); } }, '📌 ', num(mine.length), ' ▾') : null;   // i18n-ignore (📌 ▾)
       const crumbs = h('nav', { class: 'vt-path', 'aria-label': T('folders') }, h('button', { class: 'linkish', onclick: () => setP({ f: '' }) }, by === 'school' ? T('allSchools') : T('allFields')),
         ...path.slice(0, depth).flatMap((p, i) => [h('span', { 'aria-hidden': 'true' }, ' › '), h('button', { class: 'linkish', onclick: () => setP({ f: path.slice(0, i + 1).join('›') }) }, folderName(LV[i], p))]), pinBtn ? ' ' : null, pinBtn);
-      const head = [pinRow, ways, crumbs].filter(Boolean);
+      const pinRow = h('div', { class: 'row vt-fhead2' }, crumbs, h('span', { class: 'grow' }), pinsBtn, ways);
+      const head = [pinRow, pinList];
       if (by === 'field') return h('div', {}, ...head, fieldFolder(list, path));
       if (depth >= LV.length) return h('div', {}, ...head, ending(here));
       const lev = LV[depth], kids = values(here.flatMap(f => valsOf(f, lev).map(v => ({ [lev]: v }))), lev), none = here.filter(f => !valsOf(f, lev).length).length;
@@ -341,7 +360,7 @@ window.NoemaVault = (() => {
           h('div', { class: 'ns-list vt-list' }, ...sorted.filter(f => f.kind === k).slice(0, 300).map(card)))));
     }
     function draw() {
-      viewSeg.replaceChildren(...[['', T('files')], ['folders', T('folders')]].map(([k, l]) => h('button', { class: (P.v || '') === k ? 'on' : '', role: 'radio', 'aria-checked': String((P.v || '') === k), 'data-v': k || 'files', onclick: () => setP({ v: k, f: '', by: '' }) }, l)));
+      viewSeg.replaceChildren(...[['', T('files'), '📄'], ['folders', T('folders'), '📁']].map(([k, l, e]) => h('button', { class: (P.v || '') === k ? 'on' : '', role: 'radio', 'aria-checked': String((P.v || '') === k), 'aria-label': l, title: l, 'data-v': k || 'files', onclick: () => setP({ v: k, f: '', by: '' }) }, e)));   // i18n-ignore (📄 📁)
       sortSel.value = P.sort || 'new';
       drawFilters();
       const list = filter(all, P);
@@ -366,7 +385,8 @@ window.NoemaVault = (() => {
       const drawStars = () => starRow.replaceChildren(...[1, 2, 3, 4, 5].map(n => h('button', { class: 'vt-star' + ((mineR[f.id] || 0) >= n ? ' on' : ''), role: 'radio', 'aria-checked': String(mineR[f.id] === n), 'aria-label': T('starsN', { n }), disabled: f.mine || null,
         onclick: e => busy(e.currentTarget, async () => { await Server.rate(f.id, n); mineR[f.id] = n; drawStars(); onChange(); }) }, '★')));   // i18n-ignore (the star sign)
       drawStars();
-      const tile = (icon, label, cls, onclick, title) => h('button', { class: 'vt-tile ' + cls, title: title || label, onclick }, h('span', { class: 'vt-tileico', 'aria-hidden': 'true' }, svg(icon)), h('span', { class: 'vt-tilelb' }, label));
+      // icons only (no label is ever cut, in any language); the words in the tooltip and for screen readers
+      const tile = (icon, label, cls, onclick, title) => h('button', { class: 'vt-tile ' + cls, title: title || label, 'aria-label': title || label, onclick }, h('span', { class: 'vt-tileico', 'aria-hidden': 'true' }, svg(icon)));
       const more = f.mine ? [{ label: T('edit'), icon: 'edit', cls: 'vt-edit', run: () => edit(ctx, f, onChange) },
         { label: T('delete'), icon: 'trash', cls: 'vt-delete', danger: true, run: () => { if (!confirm(T('deleteAsk', { title: f.title }))) return; Server.remove(f).then(() => { close(); toast(T('deleted'), 3000); onChange(); }, e => toast('⚠️ ' + (window.NoemaI18n ? NoemaI18n.err(e) : e.message), 6000)); } }]
         : mineRep[f.id] ? [] : [{ label: T('report'), icon: 'flag', cls: 'vt-report', run: () => report(ctx, f, () => { mineRep[f.id] = 'x'; close(); onChange(); }) }];
@@ -381,7 +401,7 @@ window.NoemaVault = (() => {
           canPreview ? tile('eye', T('preview'), 'vt-prevbtn', e => busy(e.currentTarget, async () => previewWin(ctx, f, await Server.blob(f)))) : null,
           window.NoemaSocial && f.status === 'ok' ? tile('send', T('sendTo'), 'vt-sendto', () => NoemaSocial.sendTo(ctx, { kind: 'vault', id: f.id, title: f.title }, { title: f.title })) : null,
           window.NoemaCurMap?.fromSources ? tile('spark', T('makeCourseShort'), 'vt-course', e => busy(e.currentTarget, async () => { const file = await getFile(); close(); Server.count(f.id, 'used'); NoemaCurMap.fromSources(acc(), { files: [file], onStudy: id => N()?.open?.(id) }); }), T('makeCourse')) : null,
-          more.length ? h('span', { class: 'vt-moremenu' }, ctx.menuButton(more, { label: T('moreActions'), cls: 'vt-tile vt-moretile', content: h('span', { class: 'vt-tilein' }, h('span', { class: 'vt-tileico', 'aria-hidden': 'true' }, '⋮'), h('span', { class: 'vt-tilelb' }, T('moreActions'))) })) : null),   // i18n-ignore (⋮)
+          more.length ? h('span', { class: 'vt-moremenu' }, ctx.menuButton(more, { label: T('moreActions'), cls: 'vt-tile vt-moretile', content: h('span', { class: 'vt-tileico', 'aria-hidden': 'true' }, '⋮') })) : null),   // i18n-ignore (⋮)
         f.mine ? null : h('div', { class: 'vt-rate' }, h('span', { class: 'ns-label' }, T('rate')), mineRep[f.id] ? null : starRow, mineRep[f.id] ? h('span', { class: 'tiny ns-muted' }, T('reported')) : null));
     }, { cls: 'vt-sheet' });
   }
@@ -426,13 +446,15 @@ window.NoemaVault = (() => {
     const year = new Date().getFullYear();
     // where and when: optional (they differ from place to place); what and in which language: always
     const [uL, u] = txt('university', T('f.university'), { req: false, dl: 'vt-dl-u' }), [dL, d] = txt('department', T('f.department'), { req: false, dl: 'vt-dl-d' }), [cL, c] = txt('course', T('f.course'), { req: false, max: 160, dl: 'vt-dl-c' }), [pL, p] = txt('professor', T('f.professor'), { req: false, dl: 'vt-dl-p' });
-    cL.firstChild.append(' ', h('small', { class: 'tiny ns-muted vt-hint' }, T('courseHint')));   // its own name, not the field
+    c.placeholder = T('courseHint'); c.title = T('courseHint');   // its own name, not the field: a hint in the box, so the boxes stay in line
     const [yL, y] = pickOf('year', T('f.year'), Array.from({ length: year - 1979 }, (_, i) => [String(year - i), String(year - i)]), init.year ? String(init.year) : '', { req: false, none: T('unspecified') });
     const [sL, s] = pickOf('semester', T('f.semester'), Array.from({ length: 12 }, (_, i) => [String(i + 1), semName(i + 1)]), init.semester ? String(init.semester) : '', { req: false, none: T('semAny') });
     const [kL, k] = pickOf('kind', T('f.type'), KINDS.map(x => [x, T('kind.' + x)]), init.kind || '');
     const pick = fieldPicker(h, fieldsOf(init), () => [text(), c.value].join(' · '), () => ({ title: text(), course: c.value.trim() }));
-    const bL = h('div', { class: 'vt-fld vt-fieldsfld' }, h('span', { class: 'ns-label' }, T('f.fields') + ' *'), h('small', { class: 'tiny ns-muted vt-hint' }, T('fieldHelp')), pick.el);
-    c.addEventListener('change', () => pick.suggest());
+    const help = h('small', { class: 'tiny ns-muted vt-help', hidden: true }, T('fieldHelp'));
+    const bL = h('div', { class: 'vt-fld vt-fieldsfld' }, h('span', { class: 'ns-label' }, T('f.fields') + ' *', h('button', { type: 'button', class: 'vt-info', title: T('fieldHelp'), 'aria-label': T('fieldHelp'), 'aria-expanded': 'false',
+      onclick: e => { help.hidden = !help.hidden; e.currentTarget.setAttribute('aria-expanded', String(!help.hidden)); } }, 'ⓘ')), help, pick.el);   // i18n-ignore (ⓘ)
+    let ct = 0; c.addEventListener('input', () => { clearTimeout(ct); ct = setTimeout(() => pick.suggest(), 400); });
     // a past exam without its year is of little use: say so (still not required)
     const yHint = h('small', { class: 'tiny ns-muted vt-yhint', hidden: true }, T('yearForExams'));
     const hintY = () => { yHint.hidden = !(/^exam/.test(k.value) && !y.value); }; k.addEventListener('change', hintY); y.addEventListener('change', hintY); yL.append(yHint);
@@ -481,7 +503,7 @@ window.NoemaVault = (() => {
     function draw() {
       box.replaceChildren(...chosen.map(id => h('button', { type: 'button', class: 'chip on vt-fchip', 'data-id': id, title: T('removeField', { name: Fields.name(id) }), onclick: () => { chosen = chosen.filter(x => x !== id); draw(); } },
         Fields.name(id) + (Fields.get(id)?.status === 'proposed' ? ' · ' + T('proposedPill') : '') + ' ×')));   // i18n-ignore (×)
-      const ideas = [...new Set([...Fields.fromText(textOf()), ...fromOthers])].filter(id => !chosen.includes(id) && Fields.get(id)).slice(0, 6);
+      const ideas = [...new Set([...fromOthers, ...Fields.fromText(textOf())])].filter(id => !chosen.includes(id) && Fields.get(id)).slice(0, 8);
       sug.replaceChildren(...(ideas.length ? [h('small', { class: 'tiny ns-muted' }, T('suggested')), ...ideas.map(id => h('button', { type: 'button', class: 'chip vt-fsugchip', 'data-id': id, title: under(id) ? T('fieldIn', { parents: under(id) }) : null, onclick: () => add(id) }, '+ ' + Fields.name(id)))] : []));
       const w = q.value.trim().replace(/\s+/g, ' ');
       if (w.length < 2) { res.replaceChildren(); return; }

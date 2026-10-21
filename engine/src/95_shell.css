@@ -900,9 +900,9 @@ body.ns-on .ns-hit{outline:2px solid var(--acc);outline-offset:6px;border-radius
 .so-pageacts{gap:8px;margin:12px 0;flex-wrap:wrap}.so-pageacts .btn{display:inline-flex;align-items:center;gap:4px}
 @media (min-width:900px){.so-msgs{max-height:calc(100dvh - 190px)}}
 /* 🗄️ a file's actions: one row of tiles (icon over a short label), rarer ones behind ⋮; the preview in its own window */
-.vt-acts{display:grid;grid-template-columns:repeat(auto-fit,minmax(72px,1fr));gap:6px;margin:12px 0}
+.vt-acts{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0;align-items:center}
 .vt-acts>.ns-menu,.vt-moremenu{display:flex;min-width:0}.vt-moremenu>.ns-menu{display:flex;flex:1;position:relative}
-.vt-sheet .vt-tile{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-width:0;padding:10px 4px;border:1px solid var(--line);border-radius:var(--br);background:var(--paper);color:inherit;font:inherit;font-size:.8rem;line-height:1.15;cursor:pointer;text-align:center;transition:background .15s,border-color .15s}
+.vt-sheet .vt-tile{flex:0 0 auto;width:48px;height:48px;display:flex;align-items:center;justify-content:center;padding:0;border-radius:50%!important;border:1px solid var(--line);border-radius:var(--br);background:var(--paper);color:inherit;font:inherit;font-size:.8rem;line-height:1.15;cursor:pointer;text-align:center;transition:background .15s,border-color .15s}
 .vt-sheet .vt-tile:hover,.vt-sheet .vt-tile:focus-visible{border-color:var(--acc)}
 .vt-sheet .vt-tile.primary{background:var(--acc);border-color:var(--acc);color:var(--acc-ink)}
 .vt-sheet .vt-tile[disabled]{opacity:.55;cursor:default}
@@ -924,3 +924,25 @@ body.ns-on .ns-hit{outline:2px solid var(--acc);outline-offset:6px;border-radius
 .vt-chipx{margin-inline-start:6px;display:inline-grid;place-items:center;width:16px;height:16px;border-radius:50%;background:rgba(0,0,0,.12);font-size:.8em;line-height:1}
 .vt-fpick .vt-fres{display:flex;flex-direction:column;gap:4px;margin:6px 0}.vt-fpick .vt-fchips,.vt-fpick .vt-fsug{gap:6px;flex-wrap:wrap;margin:6px 0}
 .vt-directhead{font-size:.95rem;margin:14px 0 6px}
+
+/* 🗄️ folders: the two ways in, pins, files grouped by type; the form's ⓘ */
+.vt-ways{display:inline-flex;margin:4px 0 16px}
+.vt-path{margin:0 0 12px}
+.vt-pins{gap:6px;flex-wrap:wrap;align-items:center;margin:0 0 12px}
+.vt-kindgroup{margin:14px 0}.vt-kindhead{font-size:.95rem;margin:0 0 6px;display:flex;gap:6px;align-items:baseline}
+.vt-endchips{margin:0 0 10px}
+.vt-langs{gap:6px;flex-wrap:wrap;margin:0 0 6px}
+.vt-yhint{display:block;margin-top:4px}
+.vt-info{background:none;border:0;padding:0 4px;margin-inline-start:4px;font-size:.95rem;line-height:1;color:inherit;opacity:.6;cursor:help;text-transform:none;letter-spacing:0}
+.vt-info:hover,.vt-info[aria-expanded="true"]{opacity:1}
+.vt-help[hidden]{display:none}.vt-help{display:block;margin:2px 0 6px;font-weight:400;text-transform:none;letter-spacing:0}
+/* 🗄️ the toolbar: sort + filters on the left, files/folders (two icons) on the right; the folder row: path, 📌, ways */
+.vt-row{align-items:center;gap:8px;flex-wrap:nowrap}.vt-row .grow{flex:1}
+.vt-sortl{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}.vt-sortl .vt-sort{width:auto}
+.vt-viewseg button,.vt-ways button{min-width:36px;font-size:1rem;line-height:1}
+.vt-fhead2{align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 10px}.vt-fhead2 .grow{flex:1}.vt-fhead2 .vt-path{margin:0}
+.vt-ways{margin:0}
+.vt-pin{opacity:.45}.vt-pin.on,.vt-pin:hover{opacity:1}
+.vt-pinlist{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}.vt-pinlist[hidden]{display:none}
+.vt-pinchip{display:inline-flex;align-items:center;gap:2px}.vt-pinchip .vt-chipx{border:0;cursor:pointer;color:inherit}
+@media (max-width:520px){.vt-sortl>span{display:none}}

@@ -186,5 +186,8 @@
   "vault.filedHere": "Στο ίδιο το «{name}»",
   "vault.actions": "Τι κάνεις με αυτό το αρχείο",
   "vault.makeCourseShort": "Φτιάξε μάθημα",
-  "vault.moreActions": "Περισσότερα"
+  "vault.moreActions": "Περισσότερα",
+  "vault.sortBy": "Ταξινόμηση",
+  "vault.pinnedFolders": "Καρφιτσωμένοι φάκελοι",
+  "vault.removePin": "Ξεκαρφίτσωμα: {name}"
 }
