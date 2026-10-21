@@ -70,7 +70,7 @@ try:
         exs.append(e)
     points = [{"id": f"ch01-k{i + 1:02d}", "text": f"Point {i + 1}", "level": ["foundation", "core", "advanced"][i % 3], "cite": {"src": "s1"}} for i in range(20)]
     m = {"format": "noema.map/v1", "chapter": "ch01", "points": points, "learnables": [{"id": f"ch01-l{i + 1:02d}", "kp": [points[i]["id"]], "goal": "g"} for i in range(20)],
-         "fits": {"types": T9, "focus": TG, "modes": M6}, "unfit": {x: "nothing to argue about here" for x in Q["vocab"]["modes"][6:]},
+         "fits": {"types": T9, "focus": TG, "modes": M6}, "unfit": {**{x: "nothing to argue about here" for x in Q["vocab"]["modes"][6:]}, **{t: "this short sample chapter has no use for it" for t in ("flaw", "case", "predict", "tree", "inquiry", "debate")}},
          "sourceQuestions": [{"id": "ch01-q01", "text": "The full question.", "answer": "Its checked answer.", "cite": {"src": "s1", "loc": "Q1"}}]}
     json.dump(m, open(os.path.join(d, "map", "ch01.json"), "w"))
     r = P("check", d, "map"); ok(r.returncode == 0, "map: a complete knowledge map passes" + ("" if r.returncode == 0 else "\n" + r.stdout))

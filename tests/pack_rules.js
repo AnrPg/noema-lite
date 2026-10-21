@@ -73,7 +73,7 @@ function goodQ() {
     ...(i === 1 ? { cats: ['confusable'], with: ['ch01-k03'] } : {}), ...(i >= 20 ? { taughtIn: 'cur-step-0' } : {}) }));
   const learnables = Array.from({ length: 20 }, (_, i) => ({ id: `ch01-l${String(i + 1).padStart(2, '0')}`, kp: [points[i].id], goal: 'g' }));
   return { id: 'ch01', sections: [{ id: 'ch01-s01', blocks: [{ t: 'p', text: 'The force between two charges falls with distance.' }] }], flashcards: [{ id: 'ch01-f001', q: 'Q', a: 'A' }], exercises: ex,
-    map: { format: 'noema.map/v1', chapter: 'ch01', points, learnables, fits: { types: T9, focus: TG6, modes: M6 }, unfit: Object.fromEntries(QV.modes.slice(6).map(m => [m, 'nothing in this chapter to argue about'])),
+    map: { format: 'noema.map/v1', chapter: 'ch01', points, learnables, fits: { types: T9, focus: TG6, modes: M6 }, unfit: Object.fromEntries([...QV.modes.slice(6).map(m => [m, 'nothing in this chapter to argue about']), ...['flaw', 'case', 'predict', 'tree', 'inquiry', 'debate'].map(t => [t, 'this short sample chapter has no use for it'])]),
       sourceQuestions: [{ id: 'ch01-q01', text: 'Full text of the source question.', answer: 'Its checked answer.', cite: { src: 'book', loc: 'Q1' } }] },
     review: { format: 'noema.review/v1', chapter: 'ch01', rubric: learnables.slice(0, 15).map(l => ({ lr: l.id, ok: true })), blind: { solved: 40, mismatches: [{ id: 'ch01-e003', fixed: true }] } } };
 }

@@ -260,6 +260,12 @@ IDs: `chNN-eNNN`, unique, sequential.
 | `scenario` | `steps:[{"prompt":..,"code":opt,"options":[{"text":..,"ok":true/false,"fb":"feedback"}]}]` | debugging simulations: each step = "what do you check/do next?". 2–5 steps, exactly one ok per step, every option has `fb`. |
 | `free` | `model:"model answer"`, `rubric:["key point",...]` | explain-in-your-own-words / interview answers. Graded by Gemini or self-check. |
 | `write` | `solution:"code"`, `keywords:["merge into","when matched",...]`, `lang` | learner writes real syntax; local check = all keywords present (case-insensitive substring) |
+| `flaw` | `lines:[str]` (≥ 3: a worked solution, argument or code), `flaws:[line indexes]`, `reasons:[str]` (2–5), `reason:int`, optional `fix`, `asCode`/`lang` for code | **find the flaw**: the learner taps the wrong line(s) AND picks why; both must be right. Distractor reasons are the tempting misreadings. |
+| `case` | `q` = the situation; `parts:[{q, type: "mcq"\|"tf"\|"calc", …that type's fields, optional explain}]` (2–4) | **case**: one realistic situation, several questions about it, each marked on its own; right only when every part is right. |
+| `predict` | `options` + `answer:int` (+ `why`), or `answer:number` + `tolerance` + `unit`; `outcome:"what actually happens"` | **predict before you see**: the learner commits first; `outcome` is shown after. Great for `whatif` / `perturb`. |
+| `tree` | `start:"a"`, `nodes:{id:{q, options:[{text, ok, fb, to?}]}}` | **decision tree**: one `ok` per node; `to` names the next node (none = the end); every wrong option's `fb` says where that branch leads. The right path must end without a loop. |
+| `inquiry` | `options:[str]` (3–5 questions, tests or experiments), `scores:[0–3 per option]` with exactly one highest, `why:[str per option]` | **best question**: which one tells you the most? Values are shown afterwards. |
+| `debate` | `q` = the claim; `sides:[{position, counters:[str] (2–4), best:int, why:[str per counter]}]` (2–3) | **debate**: the learner takes ANY side (not graded), then picks the strongest objection to it. Pairs well with `mode: "dialectic"`. |
 | `img_hotspot` `img_sequence` `img_reveal` `img_drag` `img_label` `img_select` `img_occlusion` | `media` + regions/targets/answer… | **visual exercises — full schema in docs/VISUAL.md** |
 
 ## Debug playbook

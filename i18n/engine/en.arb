@@ -4333,5 +4333,149 @@
   "engine.guide.friends.note1": "Supabase’s built-in email service sends only a few emails per hour: for more than a handful of friends, either turn off “Confirm email” (Authentication → Providers → Email) or connect your own SMTP.",
   "@engine.guide.friends.note1": {
     "description": "Setup guide “Invite friends” (Account menu › ❓ Help): note 1 (after 💡). Markdown: keep **bold**, `code`, links and file names; use the same names for the app’s buttons and menus as your translation of them."
+  },
+  "engine.exType.flaw": "Find the flaw",
+  "@engine.exType.flaw": {
+    "description": "Exercise type label on an exercise card (after an emoji). Short. The learner finds the wrong line in a worked solution, argument or code."
+  },
+  "engine.exType.case": "Case",
+  "@engine.exType.case": {
+    "description": "Exercise type label (after an emoji). Short. One situation with several questions about it."
+  },
+  "engine.exType.predict": "Predict",
+  "@engine.exType.predict": {
+    "description": "Exercise type label (after an emoji). Short. The learner predicts what will happen before seeing it."
+  },
+  "engine.exType.tree": "Decision tree",
+  "@engine.exType.tree": {
+    "description": "Exercise type label (after an emoji). Short. The learner walks a decision tree step by step."
+  },
+  "engine.exType.inquiry": "Best question",
+  "@engine.exType.inquiry": {
+    "description": "Exercise type label (after an emoji). Short. The learner picks the question, test or experiment that tells the most."
+  },
+  "engine.exType.debate": "Debate",
+  "@engine.exType.debate": {
+    "description": "Exercise type label (after an emoji). Short. The learner takes a side and picks the strongest objection to it."
+  },
+  "engine.ex.flawHint": "Tap the {n, plural, one {line} other {# lines}} with the flaw, then say why it is wrong.",
+  "@engine.ex.flawHint": {
+    "description": "Hint above a “Find the flaw” exercise. n = how many lines are wrong."
+  },
+  "engine.ex.flawWhy": "Why is it wrong?",
+  "@engine.ex.flawWhy": {
+    "description": "Label above the reasons in a “Find the flaw” exercise."
+  },
+  "engine.ex.casePart": "Question {n} of {of}",
+  "@engine.ex.casePart": {
+    "description": "Label of one question inside a case exercise. n, of = numbers."
+  },
+  "engine.ex.predictHint": "Commit to a prediction first, then see what happens.",
+  "@engine.ex.predictHint": {
+    "description": "Hint above a “Predict” exercise."
+  },
+  "engine.ex.outcome": "What actually happens:",
+  "@engine.ex.outcome": {
+    "description": "After answering a “Predict” exercise: the real outcome follows."
+  },
+  "engine.ex.treePath": "Your path",
+  "@engine.ex.treePath": {
+    "description": "Small heading above the choices the learner made in a decision tree."
+  },
+  "engine.ex.inquiryHint": "Which question, test or experiment tells you the most? Pick one.",
+  "@engine.ex.inquiryHint": {
+    "description": "Hint above a “Best question” exercise."
+  },
+  "engine.ex.inquiryValue": "Value {n} of 3",
+  "@engine.ex.inquiryValue": {
+    "description": "Tooltip of the dots that show how much an option tells (0–3) after answering."
+  },
+  "engine.ex.debatePick": "Take a side (any side is fine):",
+  "@engine.ex.debatePick": {
+    "description": "Debate exercise: label above the positions. No side is graded."
+  },
+  "engine.ex.debateCounter": "Now pick the strongest objection to your side:",
+  "@engine.ex.debateCounter": {
+    "description": "Debate exercise: label above the objections, after the learner took a side."
+  },
+  "engine.ex.conf": "How sure?",
+  "@engine.ex.conf": {
+    "description": "Quiet label before three chips above every exercise answer. Short."
+  },
+  "engine.ex.conf_sure": "Sure",
+  "@engine.ex.conf_sure": {
+    "description": "Confidence chip: the learner is sure. One word."
+  },
+  "engine.ex.conf_think": "Think so",
+  "@engine.ex.conf_think": {
+    "description": "Confidence chip: the learner thinks so. Short."
+  },
+  "engine.ex.conf_guess": "Guessing",
+  "@engine.ex.conf_guess": {
+    "description": "Confidence chip: the learner is guessing. One word."
+  },
+  "engine.ex.confWrong": "A confident mistake: it goes to the front of your Mistakes gym.",
+  "@engine.ex.confWrong": {
+    "description": "After a wrong answer the learner marked “Sure”."
+  },
+  "engine.ex.confLucky": "Right, but a guess: it comes back soon.",
+  "@engine.ex.confLucky": {
+    "description": "After a right answer the learner marked “Guessing”."
+  },
+  "engine.ex.report": "Report a problem",
+  "@engine.ex.report": {
+    "description": "Tooltip and label of the ⚑ button on every exercise."
+  },
+  "engine.ex.reported": "Reported. Tap to change",
+  "@engine.ex.reported": {
+    "description": "Tooltip of the ⚑ button after the learner reported the exercise."
+  },
+  "engine.ex.reportTitle": "What is wrong with this exercise?",
+  "@engine.ex.reportTitle": {
+    "description": "Title of the report dialog."
+  },
+  "engine.ex.report_wrong": "The answer is wrong",
+  "@engine.ex.report_wrong": {
+    "description": "Report reason."
+  },
+  "engine.ex.report_unclear": "Unclear or ambiguous",
+  "@engine.ex.report_unclear": {
+    "description": "Report reason."
+  },
+  "engine.ex.report_source": "It points to the source instead of saying it",
+  "@engine.ex.report_source": {
+    "description": "Report reason: the exercise says e.g. “see Q2” or “page 5” instead of writing the item out."
+  },
+  "engine.ex.report_trivial": "Too easy or trivial",
+  "@engine.ex.report_trivial": {
+    "description": "Report reason."
+  },
+  "engine.ex.report_typo": "Typo or translation",
+  "@engine.ex.report_typo": {
+    "description": "Report reason."
+  },
+  "engine.ex.report_other": "Something else",
+  "@engine.ex.report_other": {
+    "description": "Report reason."
+  },
+  "engine.ex.reportNote": "Details (optional)",
+  "@engine.ex.reportNote": {
+    "description": "Placeholder of the note in the report dialog."
+  },
+  "engine.ex.reportSend": "Send",
+  "@engine.ex.reportSend": {
+    "description": "Button of the report dialog."
+  },
+  "engine.ex.reportSaved": "Thanks, saved. It is used when the pack is revised.",
+  "@engine.ex.reportSaved": {
+    "description": "Toast after reporting an exercise."
+  },
+  "engine.ex.citeOpen": "Where this comes from: open the source here",
+  "@engine.ex.citeOpen": {
+    "description": "Tooltip of the small source chip shown after answering an exercise."
+  },
+  "engine.run.sibling": "Same idea, another angle",
+  "@engine.run.sibling": {
+    "description": "Small tag in a practice round on an exercise added after a wrong answer: the same point asked another way."
   }
 }

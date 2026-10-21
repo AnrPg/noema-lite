@@ -289,6 +289,33 @@ textarea.answer.code{font-family:var(--mono);font-size:13.5px;background:var(--c
 textarea.answer:focus{border-color:var(--c)}
 .scstep{border-inline-start:3px solid var(--c);padding-block:4px;padding-inline:16px 0;margin:14px 0;animation:slideIn .4s}
 .scstep .sp{font-weight:700;margin-bottom:8px}
+.codelines.prose{background:var(--bg2);color:var(--ink);font-family:inherit;font-size:15px}
+.codelines.prose button{white-space:normal;font-family:inherit;color:var(--ink);padding-block:6px}
+.codelines.prose button:hover{background:var(--c-bg)}
+.codelines.prose button.sel{background:color-mix(in srgb,var(--warn) 18%,transparent)}
+.codelines.prose button.right{background:var(--ok-bg)}
+.codelines.prose button.wrong{background:var(--bad-bg)}
+.casepart{border-inline-start:3px solid var(--line);padding-block:2px;padding-inline:14px 0;margin:14px 0}
+.casepart .sp{font-weight:600;margin-bottom:8px}
+.casepart.ok{border-color:var(--ok)}.casepart.bad{border-color:var(--bad)}
+.casepart .fb{margin-top:8px}
+.treepath{margin:4px 0 0;padding-inline-start:20px;font-size:13.5px;color:var(--ink2)}
+.treepath:empty{display:none}
+.opt.dim{opacity:.62}
+.opt .value{letter-spacing:1px;color:var(--c);font-weight:800}
+.confrow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:0 0 10px}
+.confrow .tiny{margin-inline-end:2px}
+.confchip{font-size:12px;padding:3px 9px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink2);display:inline-flex;gap:5px;align-items:center}
+.confchip span[aria-hidden]{letter-spacing:-1px;font-size:9px;opacity:.7}
+.confchip[aria-pressed=true]{border-color:var(--c);background:var(--c-bg);color:var(--ink)}
+.confrow.locked .confchip:not([aria-pressed=true]){opacity:.4}
+.confnote{margin-top:8px}
+@media (max-width:480px){.confrow>.tiny{display:none}}
+.exflag{background:none;border:0;color:var(--ink3,var(--ink2));opacity:.35;font-size:14px;padding:2px 6px;cursor:pointer;margin-inline-start:4px}
+.exflag:hover,.exflag:focus-visible{opacity:.9}
+.exflag.on{opacity:.9;color:var(--warn)}
+.excite{margin-top:10px}
+.sibpill{margin-inline-start:8px;font-weight:600}
 .fb{border-radius:14px;padding:12px 14px;margin-top:12px;font-size:15px;animation:slideIn .3s}
 .fb.ok{background:var(--ok-bg)}
 .fb.bad{background:var(--bad-bg)}

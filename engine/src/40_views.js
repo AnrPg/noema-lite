@@ -522,10 +522,25 @@ function practiceSetup(body, c) {
   upd();
 }
 function runOrder(list) {
-  // unsolved & previously-wrong first, then the rest; shuffled inside groups
-  const g1 = [], g2 = [], g3 = [];
-  list.forEach(e => { const r = S.res[e.id]; if (!r) g1.push(e); else if (r.last === false) g2.push(e); else g3.push(e); });
-  return [...shuffle(g2), ...shuffle(g1), ...shuffle(g3)];
+  // previously wrong first (confident mistakes first of all; right-but-guessed with them), then unsolved, then the rest; shuffled inside groups
+  const g0 = [], g1 = [], g2 = [], g3 = [];
+  list.forEach(e => { const r = S.res[e.id]; if (!r) g1.push(e); else if (r.last === false && r.conf === 'sure') g0.push(e); else if (r.last === false || r.conf === 'guess') g2.push(e); else g3.push(e); });
+  return spreadFacades([...shuffle(g0), ...shuffle(g2), ...shuffle(g1), ...shuffle(g3)]);
+}
+/** Facades of one learnable (same `lr`, CONTENT_SPEC.md) never come one after the other: each is pushed back past the next exercise of another learnable. */
+function spreadFacades(list) {
+  const out = [], wait = [];
+  for (const e of list) {
+    const i = wait.findIndex(w => !w.lr || w.lr !== out[out.length - 1]?.lr); if (i >= 0) out.push(...wait.splice(i, 1));
+    if (e.lr && e.lr === out[out.length - 1]?.lr) wait.push(e); else out.push(e);
+  }
+  return out.concat(wait);
+}
+/** After a wrong answer: one sibling of the same learnable in another exercise type, not yet in this round (SRS "siblings"). */
+function siblingOf(ex, list) {
+  if (!ex.lr) return null;
+  const inRound = new Set(list.map(e => e.id));
+  return shuffle(ALL_EX.filter(e => e.lr === ex.lr && e._ch === ex._ch && e.type !== ex.type && !inRound.has(e.id)))[0] || null;
 }
 function startRun(list, opt = {}) {
   RUN = { list: (opt.keepOrder ? list : runOrder(list)).slice(0, opt.count || 10), i: 0, ok: 0, xp0: S.xp, wrong: [], title: opt.title || tE('engine.run.practice'), back: opt.back || HOME(), lives: opt.lives || 0, boss: opt.boss || null, after: opt.after || null };   // after: { label, run } — what comes next (a round made from search results)
@@ -541,13 +556,13 @@ function runView() {
   setAccent(document.body, ex._ch);
   setTutorContext({ kind: 'section', id: ex.section });
   const nextBtn = h('button', { class: 'btn primary', 'data-next': '1', style: { display: 'none' }, onclick: () => { R0.i++; runView(); } }, R0.i + 1 < R0.list.length ? tE('engine.run.next') : tE('engine.run.finish'));
-  const card = exerciseCard(ex, { showSection: true, onDone: (ok) => { if (ok) R0.ok++; else { R0.wrong.push(ex); if (R0.lives) { R0.lives--; $('.hearts') && ($('.hearts').textContent = '❤️'.repeat(R0.lives) + '🤍'.repeat(3 - R0.lives)); } } if (R0.lives === 0 && R0.boss) nextBtn.textContent = tE('engine.run.seeResult'); nextBtn.style.display = ''; nextBtn.classList.add('pop'); setTimeout(() => nextBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 300); } });
+  const card = exerciseCard(ex, { showSection: true, onDone: (ok) => { if (ok) R0.ok++; else { R0.wrong.push(ex); if (!R0.boss) { const sib = siblingOf(ex, R0.list); if (sib) { R0.list.splice(Math.min(R0.i + 3, R0.list.length), 0, sib); R0.sib = R0.sib || new Set(); R0.sib.add(sib.id); } } if (R0.lives) { R0.lives--; $('.hearts') && ($('.hearts').textContent = '❤️'.repeat(R0.lives) + '🤍'.repeat(3 - R0.lives)); } } if (R0.lives === 0 && R0.boss) nextBtn.textContent = tE('engine.run.seeResult'); nextBtn.style.display = ''; nextBtn.classList.add('pop'); setTimeout(() => nextBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 300); } });
   view(h('div', { class: 'runner' },
     h('div', { class: 'runtop' }, h('button', { class: 'iconbtn', title: tE('engine.run.quit'), onclick: () => go(R0.back) }, '✕'),
       h('div', { class: 'bar' }, h('i', { style: { width: (R0.i / R0.list.length * 100) + '%' } })),
       R0.boss ? h('span', { class: 'hearts' }, '❤️'.repeat(R0.lives) + '🤍'.repeat(3 - R0.lives)) : null,
       h('b', { class: 'tiny' }, `${nf(R0.i + 1)}/${nf(R0.list.length)}`)),
-    h('div', { class: 'tiny', style: { marginBottom: '8px', fontWeight: 700 } }, R0.title),
+    h('div', { class: 'tiny', style: { marginBottom: '8px', fontWeight: 700 } }, R0.title, R0.sib?.has(ex.id) ? h('span', { class: 'pill sibpill' }, '↻ ' + tE('engine.run.sibling')) : null),
     card, h('div', { class: 'row', style: { justifyContent: 'flex-end' } }, nextBtn)));
 }
 function runSummary() {

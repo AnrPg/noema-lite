@@ -308,12 +308,17 @@ function exerciseCard(ex, { onDone, compact = false, noXP = false, showSection =
   const actions = h('div', { class: 'actions' });
   const checkBtn = h('button', { class: 'btn primary', onclick: () => doCheck() }, tE('engine.ex.check'));
   const nudge = h('span', { class: 'tiny' });
-  if (!w.selfDone && !w.auto && !['tf'].includes(ex.type) && !(ex.type === 'mcq' && !ex.multi && !Array.isArray(ex.answer)) && ex.type !== 'odd') actions.append(checkBtn, nudge);
+  const oneTap = ['tf', 'odd', 'inquiry', 'debate'].includes(ex.type) || (['mcq', 'predict'].includes(ex.type) && Array.isArray(ex.options) && !ex.multi && !Array.isArray(ex.answer));
+  if (!w.selfDone && !w.auto && !oneTap) actions.append(checkBtn, nudge);
+  const conf = ex._ai ? null : confidenceRow(() => locked);   // "How sure?" before answering (optional): a confident mistake goes first in the Mistakes gym
+  if (conf) card.insertBefore(conf.el, w.el);
   const ask = () => askAIAbout(ex, null, givenOf(w));
+  const flag = ex._ai ? null : reportBtn(ex);
   if (SHL()) {   // the frame: a quiet "Ask <character>" in the card's top corner
     card.classList.add('has-ask');
     const b = askBuddyBtn(ask); b.style.marginLeft = showSection && SEC[ex.section] ? '8px' : 'auto'; head.append(b);
-  } else actions.append(h('span', { class: 'grow' }), h('button', { class: 'btn ghost small', onclick: ask }, `${TUTOR.avatar} ` + tE('engine.ex.askTutor', { tutor: TUTOR.name })));
+    if (flag) head.append(flag);
+  } else actions.append(h('span', { class: 'grow' }), flag, h('button', { class: 'btn ghost small', onclick: ask }, `${TUTOR.avatar} ` + tE('engine.ex.askTutor', { tutor: TUTOR.name })));
   card.append(actions);
   function doCheck() {
     if (locked || w.selfDone || !w.check) return;
@@ -327,10 +332,14 @@ function exerciseCard(ex, { onDone, compact = false, noXP = false, showSection =
     if (!selfReported) w.reveal?.();
     checkBtn.remove(); nudge.remove();
     if (ok) { beep('ok'); card.classList.add('pop'); } else { beep('bad'); card.classList.remove('shake'); void card.offsetWidth; card.classList.add('shake'); }
-    if (!ex._ai) record(ex, ok);
+    const sure = conf?.value() || null; conf?.lock();
+    if (!ex._ai) record(ex, ok, true, sure);
     const xp = ok ? 4 + ex.difficulty * 4 + (w.bonus?.() || 0) : 1;
     if (!noXP) addXP(xp, card);
     const exp = h('div', { class: 'explain ' + (ok ? 'ok' : 'bad') }, h('div', { class: 'hd' }, ok ? pickOne([['✅', 'nailed'], ['✅', 'correct'], ['🎉', 'yes'], ['✅', 'spotOn'], ['🔥', 'exactly']].map(([i, k]) => i + ' ' + tE('engine.ex.ok.' + k))) : pickOne([['💡', 'notQuite'], ['🧠', 'learning'], ['💡', 'close']].map(([i, k]) => i + ' ' + tE('engine.ex.bad.' + k)))), h('div', { html: fmt(ex.explain || '') }));
+    if (sure === 'sure' && !ok) exp.append(h('div', { class: 'tiny confnote' }, '⚠️ ' + tE('engine.ex.confWrong')));
+    else if (sure === 'guess' && ok) exp.append(h('div', { class: 'tiny confnote' }, '🎲 ' + tE('engine.ex.confLucky')));
+    const cite = citeChip(ex); if (cite) exp.append(cite);
     if (!ok) exp.append(h('div', { class: 'row', style: { marginTop: '10px' } },
       h('button', { class: 'btn small ai', onclick: () => askAIAbout(ex, 'socratic', givenOf(w)) }, `${TUTOR.avatar} ` + tE('engine.ex.helpSocratic')),
       h('button', { class: 'btn small', onclick: () => askAIAbout(ex, 'explain', givenOf(w)) }, '💡 ' + tE('engine.ex.explainDiff'))));
@@ -344,6 +353,40 @@ function exerciseCard(ex, { onDone, compact = false, noXP = false, showSection =
   return card;
 }
 const pickOne = a => a[Math.random() * a.length | 0];
+/** "How sure?" — three quiet chips above the answer; optional, kept with the answer (S.res[id].conf). */
+function confidenceRow(isLocked) {
+  let v = null; const chips = [['sure', '●●●'], ['think', '●●○'], ['guess', '●○○']].map(([k, dots]) => {
+    const b = h('button', { class: 'confchip', type: 'button', 'aria-pressed': 'false', title: tE('engine.ex.conf_' + k), onclick: () => { if (isLocked()) return; v = v === k ? null : k; chips.forEach(c => c.setAttribute('aria-pressed', String(c._k === v))); } },
+      h('span', { 'aria-hidden': 'true' }, dots), h('span', { class: 'lbl' }, tE('engine.ex.conf_' + k)));
+    b._k = k; return b;
+  });
+  const el = h('div', { class: 'confrow', role: 'group', 'aria-label': tE('engine.ex.conf') }, h('span', { class: 'tiny' }, tE('engine.ex.conf')), ...chips);
+  return { el, value: () => v, lock: () => el.classList.add('locked') };
+}
+/** ⚑ Report a problem with this exercise: kept in the subject's state (S.flags[id]) for the next revision of the pack. */
+function reportBtn(ex) {
+  const done = () => !!S.flags?.[ex.id];
+  const b = h('button', { class: 'exflag' + (done() ? ' on' : ''), type: 'button', title: done() ? tE('engine.ex.reported') : tE('engine.ex.report'), 'aria-label': tE('engine.ex.report'), onclick: e => {
+    e.stopPropagation();
+    modal((box, close) => {
+      const reasons = ['wrong', 'unclear', 'source', 'trivial', 'typo', 'other'];
+      let why = S.flags?.[ex.id]?.why || null;
+      const opts = reasons.map(r => { const o = h('button', { class: 'opt' + (r === why ? ' sel' : ''), type: 'button', onclick: () => { why = r; opts.forEach(x => x.classList.toggle('sel', x === o)); } }, h('span', {}, tE('engine.ex.report_' + r))); return o; });
+      const note = h('textarea', { class: 'answer', rows: 3, placeholder: tE('engine.ex.reportNote') }); note.value = S.flags?.[ex.id]?.note || '';
+      box.append(h('h3', {}, '⚑ ' + tE('engine.ex.reportTitle')), h('div', { class: 'opts' }, ...opts), note,
+        h('div', { class: 'row', style: { marginTop: '14px', justifyContent: 'flex-end' } }, h('button', { class: 'btn', onclick: close }, tE('engine.core.cancel')),
+          h('button', { class: 'btn primary', onclick: () => { if (!why) { opts[0].parentElement.classList.add('shake'); return; } S.flags = S.flags || {}; S.flags[ex.id] = { why, note: note.value.trim().slice(0, 2000), t: Date.now() }; save(); b.classList.add('on'); b.title = tE('engine.ex.reported'); close(); toast('⚑ ' + tE('engine.ex.reportSaved')); } }, tE('engine.ex.reportSend'))));
+    });
+  } }, '⚑');
+  return b;
+}
+/** Where the exercise comes from (cite: lineage metadata, never in the text): a small chip after the answer; opens the source at that page. */
+function citeChip(ex) {
+  const c = ex.cite, s = c && SRC_BY_ID[c.src]; if (!s) return null;
+  const page = +(String(c.loc || '').match(/^\s*(?:p\.?|pp\.?|page|σ\.|стр\.?)\s*(\d+)/i) || [])[1] || null;
+  const label = (s.short || s.title) + (c.loc ? ' · ' + c.loc : '');
+  return h('div', { class: 'srcrefs excite' }, h('button', { class: 'srcref', type: 'button', title: tE('engine.ex.citeOpen'), onclick: () => openSource(c.src, { page }) }, h('span', { class: 'e' }, s.emoji || '📘'), h('span', {}, label)));
+}
 /* i18n-ignore-start */   // the exercise as context for the AI's prompts, and the learner's first messages to the AI (prompts: English)
 function exerciseAsText(ex) {
   let t = `Exercise (${ex.type}): ${ex.q || ''}\n`;
@@ -358,6 +401,7 @@ function exerciseAsText(ex) {
   if (ex.lines) t += 'Code lines:\n' + ex.lines.join('\n') + '\nBug lines (0-based): ' + ex.bugs + '\nFix: ' + ex.fix + '\n';
   if (ex.type === 'calc') t += 'Answer: ' + ex.answer + ' ' + (ex.unit || '') + '\n';
   if (ex.steps) t += 'Steps: ' + ex.steps.map(s => s.prompt + ' [correct: ' + s.options.find(o => o.ok).text + ']').join(' | ') + '\n';
+  t += typeAsText(ex);
   if (ex.model) t += 'Model answer: ' + ex.model + '\n';
   if (ex.solution) t += 'Solution:\n' + ex.solution + '\n';
   t += 'Explanation: ' + (ex.explain || '');
