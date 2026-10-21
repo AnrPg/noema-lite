@@ -2,7 +2,7 @@
 
 Decided with the user on 2026-10-20 (thread "Sources workflow, vault, social, study buddies"). Students share lecture notes,
 slides, past exams (with or without solutions), exercise sets, lab work, summaries, books, recordings and any other study
-material. Code: `engine/vault.js` (page `#/vault`, Discover › Vault), `cloud/supabase.sql` §12, words `i18n/vault/`.
+material. Code: `engine/vault.js` (page `#/vault`, Discover › Vault), `cloud/supabase.sql` §13, words `i18n/vault/`.
 Test: `tests/vault.js`.
 
 ## 1. Strictly organised, searchable across every branch
@@ -58,10 +58,16 @@ docs/FROM_SOURCES.md), five stars, Report, and Edit / Delete for one's own files
 their status (*not finished*, *hidden*).
 
 ## 5. Setting it up
-Run `cloud/supabase.sql` again in the Supabase SQL editor: §12 adds the tables, the view, the functions and the bucket. It
+Run `cloud/supabase.sql` again in the Supabase SQL editor: §13 adds the tables, the view, the functions and the bucket. It
 is idempotent. The SQL is tested on Postgres 16 with stub `auth` and `storage` schemas: owner-only rows, the view without
 the uploader, the size check on finish, frozen counters, the quota, ratings, one download per person, three reports hide,
 storage reads and writes, refused formats.
 
-## Later (the next PRs)
-Study groups get a shared vault folder (social, feature 3). Files can be shared in DMs. Moderation gets a page for the owner.
+## 6. Study groups and conversations (docs/SOCIAL.md)
+A file may belong to a study group (`room`): only its members see, count and download it, and Discover › Vault shows it
+under the filter *Study group* (`#/vault?g=<group>`), the group's own folder. Uploading from there sets *Who sees it* to the
+group. A file's sheet has **Send to…**: a conversation, a group or a buddy, with a line. The 50 MB per person count the vault
+and the files sent in conversations together (`noema_used_bytes`).
+
+## Later
+Moderation gets a page for the owner.

@@ -34,8 +34,8 @@ create schema auth; create table auth.users (id uuid primary key, email text);
 create function auth.uid() returns uuid language sql stable as $$ select nullif(current_setting('request.jwt.claim.sub', true), '')::uuid $$;
 create function auth.jwt() returns jsonb language sql stable as $$ select coalesce(nullif(current_setting('request.jwt.claims', true), ''), '{}')::jsonb $$;
 create schema storage;
-create table storage.buckets (id text primary key, name text, public boolean, file_size_limit bigint);
-create table storage.objects (id uuid primary key default gen_random_uuid(), bucket_id text, name text, owner uuid default auth.uid());
+create table storage.buckets (id text primary key, name text, public boolean, file_size_limit bigint, allowed_mime_types text[]);
+create table storage.objects (id uuid primary key default gen_random_uuid(), bucket_id text, name text, owner uuid default auth.uid(), metadata jsonb);
 alter table storage.objects enable row level security;
 create function storage.foldername(name text) returns text[] language sql immutable as $$ select (string_to_array(name, '/'))[1:array_length(string_to_array(name, '/'), 1) - 1] $$;
 grant usage on schema public, auth, storage to anon, authenticated;
@@ -47,7 +47,9 @@ alter default privileges in schema public grant all on tables to anon, authentic
     psql(sql); psql(sql)
     ok(True, 'cloud/supabase.sql runs, and runs again (idempotent)')
     tables = psql("select tablename from pg_tables where schemaname='public' and tablename like 'noema_%' and rowsecurity order by 1")
-    ok(tables == ['noema_conversations', 'noema_curricula_shared', 'noema_curriculum_members', 'noema_curriculum_steps', 'noema_kv', 'noema_profiles', 'noema_public_packs', 'noema_public_profiles', 'noema_shares', 'noema_snapshots'], 'ten noema_ tables, all with row-level security: ' + ', '.join(tables))
+    ok(tables == ['noema_blocks', 'noema_buddies', 'noema_chat_files', 'noema_conversations', 'noema_curricula_shared', 'noema_curriculum_members', 'noema_curriculum_steps', 'noema_kv',
+                  'noema_message_reports', 'noema_messages', 'noema_people', 'noema_profiles', 'noema_public_packs', 'noema_public_profiles', 'noema_room_members', 'noema_room_roadmaps',
+                  'noema_rooms', 'noema_shares', 'noema_snapshots', 'noema_vault_files', 'noema_vault_hits', 'noema_vault_ratings', 'noema_vault_reports'], 'the 23 noema_ tables, all with row-level security: ' + ', '.join(tables))
     A, B, C = (str(uuid.uuid4()) for _ in range(3)); EA, EB, EC = 'anna@example.com', 'bob@example.com', 'carl@example.com'
     psql(f"insert into auth.users values ('{A}','{EA}'),('{B}','{EB}'),('{C}','{EC}')")
     # own data
@@ -140,6 +142,68 @@ alter default privileges in schema public grant all on tables to anon, authentic
     ok(psql("delete from noema_curriculum_steps where node_id='n1' returning 1", A, EA) == ['1'], 'the owner may remove a step (it can then be prepared again)')
     psql("delete from noema_curricula_shared where id='cabc12'", A, EA)
     ok(psql("select count(*) from noema_curriculum_steps", A, EA) == ['0'] and psql("select count(*) from noema_curriculum_members", A, EA) == ['0'], 'stopping the sharing removes its members and steps')
+
+    # 👥 people, study buddies, conversations, study groups (§12, docs/SOCIAL.md)
+    print('— people, buddies, conversations, study groups')
+    P = {k: str(uuid.uuid4()) for k in 'abcde'}; PE = {k: f'{k}@social.example' for k in 'abcde'}
+    psql('insert into auth.users values ' + ','.join(f"('{P[k]}','{PE[k]}')" for k in 'abcde'))
+    q = lambda k, sql, **o: psql(sql, P[k], PE[k], **o)
+    q('a', "insert into noema_people (display_name, search) values ('  Anna   K ', 'anna k')"); q('b', "insert into noema_people (display_name, search, dm_from) values ('Βασίλης', 'βασιλης vasilis basiles', 'everyone')")
+    q('c', "insert into noema_people (display_name, findable) values ('Hidden Chris', false)"); q('d', "insert into noema_people (display_name) values ('Dora')"); q('e', "insert into noema_people (display_name) values ('Eve')")
+    ok(q('a', f"insert into noema_people (user_id, display_name) values ('{P['b']}', 'fake')", expect_error=True), 'nobody writes someone else’s row')
+    ok(q('a', "select display_name from noema_people order by 1") == ['Anna K', 'Dora', 'Eve', 'Βασίλης'] and q('a', "select display_name from noema_people where search ilike '%vasil%'") == ['Βασίλης'], 'findable people only (the name tidied), found in Latin letters')
+    ok(q('a', f"select noema_buddy_ask('{P['c']}')", expect_error=True) and q('a', f"select noema_buddy_ask('{P['d']}')") == ['asked'] and q('a', f"select noema_buddy_ask('{P['d']}')") == ['asked'], 'one cannot ask someone hidden and unknown; a request is made once')
+    ok(q('a', f"insert into noema_buddies values ('{min(P['a'], P['e'])}', '{max(P['a'], P['e'])}', '{P['a']}', 'buddies')", expect_error=True), 'nobody makes a friendship by hand')
+    ok(q('d', f"select noema_buddy_answer('{P['a']}', true)") == ['buddies'], 'the other person accepts')
+    ok(q('a', f"select noema_dm_open('{P['b']}') is not null") == ['t'] and q('a', f"select noema_dm_open('{P['e']}')", expect_error=True) and q('a', f"select noema_dm_open('{P['d']}') is not null") == ['t'], 'a conversation: with someone who takes messages from everyone, or a buddy; not with a stranger whose setting is buddies')
+    q('a', "insert into noema_messages (room, body) select id, 'hi Vasilis' from noema_rooms where kind = 'dm' and dm_key like '%" + P['b'] + "%'")
+    ok(q('a', f"insert into noema_messages (room, body, author) select id, 'hi Dora', '{P['d']}' from noema_rooms where dm_key like '%{P['d']}%' returning author") == [P['a']] and q('a', "insert into noema_messages (room, body) select id, '' from noema_rooms limit 1", expect_error=True), 'a message is always its sender’s (the author is the server’s); no empty message')
+    ok(q('d', "select kind, unread, last_body from noema_inbox()") == ['dm|1|hi Dora'] and q('d', f"select display_name from noema_people where user_id = '{P['a']}'") == ['Anna K'], 'the inbox: one unread; a buddy reads the name')
+    q('b', "insert into noema_messages (room, body) select id, 'hello Anna' from noema_rooms where kind = 'dm'")
+    ok(q('b', "select count(*) from noema_messages") == ['2'], 'one may answer someone who wrote first (Anna takes messages only from buddies)')
+    ok(q('e', "select count(*) from noema_messages") == ['0'], 'others read nothing')
+    q('d', f"insert into noema_blocks (blocked) values ('{P['a']}')")
+    ok(q('d', "select count(*) from noema_buddies") == ['0'] and q('a', f"insert into noema_messages (room, body) select id, 'still?' from noema_rooms where dm_key like '%{P['d']}%'", expect_error=True)
+       and q('a', f"select noema_buddy_ask('{P['d']}')", expect_error=True) and q('a', f"select count(*) from noema_people where user_id = '{P['d']}'") == ['0'], 'a block ends the friendship, the messages, the requests and the search')
+    g = q('a', "select noema_group_create('Genetics 2025', 'a study group', 'Univ of Crete', 'Genetics')")[0]
+    ok(q('a', f"select noema_room_invite('{g}', '{P['b']}')") == ['invited'] and q('a', f"select noema_room_invite('{g}', '{P['c']}')", expect_error=True), 'invitations follow the other person’s setting')
+    ok(q('a', f"insert into noema_room_members (room, user_id, status) values ('{g}', '{P['c']}', 'joined')", expect_error=True), 'nobody is added by hand')
+    q('a', f"update noema_rooms set join_code = 'abcdefghijkl12', kind = 'dm' where id = '{g}'")
+    ok(q('a', f"select kind, join_code from noema_rooms where id = '{g}'") == ['group|abcdefghijkl12'], 'the owner makes an invitation link; the kind of a room stays')
+    ok(q('b', "select status, name from noema_inbox() where kind = 'group'") == ['invited|Genetics 2025'] and q('b', f"select count(*) from noema_messages where room = '{g}'") == ['0'], 'the invited person sees the invitation, not the messages')
+    q('b', f"update noema_room_members set status = 'joined' where user_id = '{P['b']}' and room = '{g}'")
+    ok(q('b', f"update noema_room_members set role = 'owner' where user_id = '{P['b']}' and room = '{g}'", expect_error=True) and q('b', f"select status, role from noema_room_members where user_id = '{P['b']}' and room = '{g}'") == ['joined|member'], 'they join, and cannot make themselves owner')
+    ok(q('c', "select name, members, mine is null from noema_room_peek('abcdefghijkl12')") == ['Genetics 2025|2|t'] and q('c', "select noema_room_join('abcdefghijkl12') is not null") == ['t'] and q('c', "select noema_room_peek('nope00000000')") == [], 'the link shows the group, then joins it; a wrong code shows nothing')
+    ok(q('c', f"update noema_room_members set status = 'left' where user_id = '{P['b']}' and room = '{g}'", expect_error=True) or q('b', f"select status from noema_room_members where user_id = '{P['b']}' and room = '{g}'") == ['joined'], 'a member cannot remove another')
+    q('c', f"insert into noema_chat_files (path, room, name, mime, size) values ('rooms/{g}/22222222-2222-2222-2222-222222222222.pdf', '{g}', 'notes.pdf', 'application/pdf', 100)")
+    ok(q('c', f"insert into noema_chat_files (path, room, name, mime, size) values ('rooms/{g}/33333333-2222-2222-2222-222222222222.exe', '{g}', 'x.exe', 'application/pdf', 100)", expect_error=True), 'a program is refused by the path check')
+    ok(q('c', f"insert into noema_messages (room, body, att) values ('{g}', 'my notes', jsonb_build_object('kind', 'file', 'path', 'rooms/{g}/22222222-2222-2222-2222-222222222222.pdf'))", expect_error=True), 'a file that is not finished cannot be sent')
+    q('c', f"insert into storage.objects (bucket_id, name, metadata) values ('noema-chat', 'rooms/{g}/22222222-2222-2222-2222-222222222222.pdf', '{{\"size\":100}}')")
+    ok(q('c', f"select noema_chat_finish('rooms/{g}/22222222-2222-2222-2222-222222222222.pdf')") == ['ok'], 'finished once storage has it with its size')
+    q('c', f"insert into noema_messages (room, body, att) values ('{g}', 'my notes', jsonb_build_object('kind', 'file', 'path', 'rooms/{g}/22222222-2222-2222-2222-222222222222.pdf', 'name', 'notes.pdf'))")
+    ok(q('b', "select att->>'name' from noema_messages where att is not null") == ['notes.pdf'] and q('b', "select count(*) from storage.objects where bucket_id = 'noema-chat'") == ['1']
+       and q('d', "select count(*) from storage.objects where bucket_id = 'noema-chat'") == ['0'], 'members read the file; others do not')
+    q('e', "select noema_room_join('abcdefghijkl12')")
+    for k in 'eab': q(k, "insert into noema_message_reports (message, reason) select id, 'spam' from noema_messages where body = 'my notes'")
+    ok(q('b', "select count(*) from noema_messages where body = 'my notes'") == ['0'] and q('c', "select hidden, reports from noema_messages where body = 'my notes'") == ['t|3'], 'three reports hide a message (its author still sees it)')
+    q('c', "update noema_messages set body = 'edited', hidden = false where body = 'my notes'")
+    ok(q('c', "select body, hidden, edited_at is not null from noema_messages where body = 'edited'") == ['edited|t|t'], 'editing changes the text only')
+    q('c', "update noema_messages set deleted = true where body = 'edited'")
+    ok(q('c', "select body, att is null from noema_messages where deleted") == ['|t'], 'deleting clears the text and the attachment')
+    q('a', f"update noema_room_members set status = 'left' where user_id = '{P['a']}' and room = '{g}'")
+    ok(q('b', f"select role from noema_room_members where room = '{g}' and user_id = '{P['b']}'") == ['owner'], 'when the owner leaves, the oldest member becomes owner')
+    q('b', "insert into noema_curricula_shared (id, title, record) values ('cbroad1', 'B road', '{}')"); q('b', f"insert into noema_room_roadmaps (room, curriculum) values ('{g}', 'cbroad1')")
+    ok(q('c', "select noema_cur_access('cbroad1')") == ['public'] and q('d', "select coalesce(noema_cur_access('cbroad1'), 'none')") == ['none'], 'a Roadmap shared in a group: its members may join it, others do not see it')
+    ok(q('c', f"insert into noema_curriculum_members (curriculum, email, user_id, status) values ('cbroad1', '{PE['c']}', '{P['c']}', 'joined') returning status") == ['joined'], '…and a member joins it')
+    ok(q('c', f"insert into noema_room_roadmaps (room, curriculum) values ('{g}', 'cbroad1x')", expect_error=True), 'only one’s own (or a public) Roadmap is shared')
+    vid = '55555555-1111-1111-1111-111111111111'
+    q('c', f"insert into noema_vault_files (id, title, university, department, course, year, semester, kind, subject, language, file_name, mime, size, path, room) values ('{vid}', 'Group notes', 'Uni', 'Dept', 'Course', 2024, 1, 'notes', 'biology', 'en', 'g.pdf', 'application/pdf', 10, 'files/{vid}.pdf', '{g}')")
+    q('c', f"insert into storage.objects (bucket_id, name, metadata) values ('noema-vault', 'files/{vid}.pdf', '{{\"size\": 10}}')"); q('c', f"select noema_vault_finish('{vid}')")
+    ok(q('b', "select count(*) from noema_vault where room is not null") == ['1'] and q('d', "select count(*) from noema_vault where room is not null") == ['0'], 'a group’s vault folder: its members only')
+    ok(q('d', f"insert into noema_vault_files (title, university, department, course, year, semester, kind, subject, language, file_name, mime, size, path, room) values ('x', 'Uni', 'Dept', 'Course', 2024, 1, 'notes', 'biology', 'en', 'g.pdf', 'application/pdf', 10, 'files/66666666-1111-1111-1111-111111111111.pdf', '{g}')", expect_error=True), '…and only they put files in it')
+    for n in '78': q('e', f"insert into noema_chat_files (path, room, name, mime, size) values ('rooms/{g}/{n * 8}-2222-2222-2222-222222222222.pdf', '{g}', 'a.pdf', 'application/pdf', 20971520)")
+    ok(q('e', "insert into noema_vault_files (title, university, department, course, year, semester, kind, subject, language, file_name, mime, size, path) values ('big', 'Uni', 'Dept', 'Course', 2024, 1, 'notes', 'biology', 'en', 'g.pdf', 'application/pdf', 20971520, 'files/77777777-1111-1111-1111-111111111111.pdf')", expect_error=True), 'the 50 MB count the vault and the files sent in conversations together')
+    ok(psql("select count(*) from noema_people", role='anon') == ['0'] and psql("select count(*) from noema_messages", role='anon') == ['0'], 'signed-out visitors see no one and nothing')
 finally:
     subprocess.run(as_pg + [f'{BIN}/pg_ctl', '-D', data, 'stop', '-m', 'immediate'], capture_output=True)
     shutil.rmtree(data, ignore_errors=True)

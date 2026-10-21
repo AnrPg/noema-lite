@@ -1,0 +1,10 @@
+social.bond.*
+social.from.*
+social.role.*
+social.reason.*
+social.att.*
+social.err.*
+social.about*
+social.g.*
+social.mute*
+social.unmute*

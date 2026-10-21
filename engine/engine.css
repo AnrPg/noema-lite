@@ -1868,6 +1868,80 @@ body.ns-on .cm-tmap .cm-nextup{box-shadow:none}
 body.ns-on .ns-hit{outline:2px solid var(--acc);outline-offset:6px;border-radius:8px;transition:outline-color 1.2s}
 @media (prefers-reduced-motion:reduce){.ns-sr{animation:none}}
 .ns-searchview [hidden],.ns-srsheet [hidden]{display:none!important}
+/* 🗄️ the vault (engine/vault.js, docs/VAULT.md) */
+.vt-lead{margin-top:-4px}
+.vt-bar{gap:8px;flex-wrap:nowrap}.vt-bar .vt-q{flex:1;min-width:0}.vt-upbtn{flex:none;display:inline-flex;align-items:center;gap:4px}
+.vt-row{gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0}.vt-row .vt-sort{width:auto;margin-left:auto}
+.vt-filtbtn{display:inline-flex;align-items:center;gap:4px}
+.vt-filters[hidden]{display:none}
+.vt-filters{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin-bottom:10px}
+.vt-fgroup{display:flex;flex-direction:column;gap:6px}.vt-fhead{font-size:.8rem;color:var(--ink3);text-transform:uppercase;letter-spacing:.04em}
+.vt-fbody{display:flex;flex-direction:column;gap:6px}.vt-fbody .ns-srchips{flex-wrap:wrap;display:flex;gap:6px}
+.vt-f{display:flex;flex-direction:column;gap:2px}.vt-f select{width:100%}
+.vt-active{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}.vt-active:empty{display:none}
+.vt-file .vt-meta{display:flex;gap:8px;align-items:center;color:var(--ink3);white-space:nowrap}
+.vt-path{display:flex;flex-wrap:wrap;gap:2px;align-items:center;margin:0 0 8px;font-size:.92rem}
+.vt-facts{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:10px 0}.vt-facts dt{color:var(--ink3)}.vt-facts dd{margin:0}
+.vt-acts,.vt-more{gap:8px;flex-wrap:wrap;margin:10px 0}.vt-acts .btn,.vt-more .btn{display:inline-flex;align-items:center;gap:4px}
+.vt-preview:empty{display:none}.vt-preview{margin:8px 0}.vt-preview img,.vt-preview video{max-width:100%;border-radius:var(--br)}
+.vt-preview iframe{width:100%;height:60vh;border:1px solid var(--line);border-radius:var(--br)}.vt-preview audio{width:100%}
+.vt-preview pre{max-height:50vh;overflow:auto;white-space:pre-wrap;font-size:.85rem;background:var(--paper);padding:10px;border-radius:var(--br)}
+.vt-stars{display:inline-flex;gap:2px}.vt-star{background:none;border:0;font-size:1.4rem;line-height:1;color:var(--line);cursor:pointer;padding:2px}.vt-star.on{color:var(--t3i,#c9a227)}
+.vt-rate{display:flex;align-items:center;gap:10px}
+.vt-form{display:flex;flex-direction:column;gap:10px}.vt-fs{border:1px solid var(--line);border-radius:var(--br);padding:8px 10px;display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px}
+.vt-fs legend{font-size:.8rem;color:var(--ink3);padding:0 4px}.vt-fs textarea{grid-column:1/-1}.vt-fs .row{grid-column:1/-1;gap:12px;flex-wrap:wrap}
+.vt-fld{display:flex;flex-direction:column;gap:2px}.vt-check{display:inline-flex;align-items:center;gap:6px}
+.vt-files{list-style:none;padding:0;margin:6px 0;display:flex;flex-direction:column;gap:6px}.vt-files li{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.vt-files li .vt-title{flex:1;min-width:140px}.vt-files li.bad{color:var(--bad,#b3261e)}.vt-problem{flex-basis:100%}
+.vt-anon{display:flex;flex-direction:column;gap:2px}.vt-rulesrow{margin-top:6px;align-items:flex-start}
+@media (max-width:560px){.vt-row .vt-sort{margin-left:0}}
+.vt-grouppill{font-size:.72rem}.vt-groupnote{margin:0 0 8px}.vt-wherefld{max-width:420px}
+/* 👥 people, conversations, study groups (engine/social.js, docs/SOCIAL.md) */
+.so-view [hidden]{display:none!important}
+.so-lead{margin-top:-4px}.so-find{width:100%;margin:4px 0 8px}
+.so-found{margin-bottom:10px}.so-found .ns-label{display:block;margin-bottom:4px}
+.so-tabs{margin:6px 0 12px}.so-tabs button{display:inline-flex;align-items:center;gap:6px}
+.so-count{display:inline-flex;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--acc);color:var(--paper,#fff);font-size:.72rem;align-items:center;justify-content:center;font-weight:600}
+.so-face{font-weight:600}
+.so-room .t{min-width:0}.so-prev{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.so-room.unread b{font-weight:700}.so-when{display:flex;flex-direction:column;align-items:flex-end;gap:3px;color:var(--ink3);white-space:nowrap}
+.so-invite{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}.so-invite .grow{min-width:140px;display:flex;flex-direction:column}
+.so-person{display:flex;align-items:center;gap:8px}.so-who{display:flex;align-items:center;gap:10px;flex:1;min-width:0;background:none;border:0;padding:0;text-align:start;color:inherit;font:inherit;cursor:pointer}
+.so-who .t{display:flex;flex-direction:column;min-width:0}.so-who small{color:var(--ink3)}
+.so-groups>.row{margin-bottom:10px}.so-joinby{margin-top:14px}.so-joinby summary{cursor:pointer;color:var(--ink3)}.so-joinby .row{gap:8px;margin-top:6px;flex-wrap:nowrap}.so-code{flex:1;min-width:0}
+.so-first{margin-bottom:10px}.so-first .row{gap:8px;flex-wrap:wrap}
+.so-personhead h2{margin:0}.so-personacts,.so-personmore{gap:8px;flex-wrap:wrap;margin:10px 0}.so-personacts .btn,.so-personmore .btn{display:inline-flex;align-items:center;gap:4px}
+/* a conversation: the messages fill the screen, the box to write stays at the bottom */
+.so-chatview{display:flex;flex-direction:column;min-height:calc(100dvh - 120px)}
+.so-grouphead{margin:0 0 6px}.so-earlier{align-self:center;margin-bottom:6px}
+.so-msgs{flex:1;display:flex;flex-direction:column;gap:2px;overflow-y:auto;max-height:calc(100dvh - 210px);padding:4px 2px 8px;overscroll-behavior:contain}
+.so-day{align-self:center;margin:10px 0 4px;text-transform:capitalize}
+.so-msg{display:flex;align-items:flex-end;gap:2px;max-width:min(560px,88%);align-self:flex-start;flex-wrap:wrap}
+.so-msg.head{margin-top:8px}.so-msg.mine{align-self:flex-end;flex-direction:row-reverse}
+.so-author{flex-basis:100%;background:none;border:0;padding:0 10px;color:var(--ink3);cursor:pointer;text-align:start}
+.so-bubble{background:var(--card,#fff);border:1px solid var(--line);border-radius:14px;padding:6px 10px;min-width:60px;max-width:100%}
+.so-msg.mine .so-bubble{background:color-mix(in srgb,var(--acc) 10%,var(--card,#fff));border-color:color-mix(in srgb,var(--acc) 22%,var(--line))}
+.so-msg.deleted .so-bubble{background:none}
+.so-text{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.so-time{display:block;text-align:end;color:var(--ink3);margin-top:2px}
+.so-msgmenu{opacity:.35;width:28px;height:28px}.so-msg:hover .so-msgmenu,.so-msgmenu:focus-visible,.so-msgmenu[aria-expanded="true"]{opacity:1}
+.so-hiddennote{color:var(--bad,#b3261e);margin:0 0 4px}
+.so-att{border:1px dashed var(--line);border-radius:10px;padding:6px 8px;margin:4px 0;display:flex;flex-direction:column;gap:6px}
+.so-atthead{display:flex;align-items:center;gap:8px;min-width:0}.so-atthead b{overflow-wrap:anywhere}.so-emo{font-size:1.3rem}
+.so-att .row{gap:6px;flex-wrap:wrap}.so-att .btn{display:inline-flex;align-items:center;gap:4px}
+.so-attprev:empty{display:none}.so-attprev img,.so-attprev video{max-width:100%;max-height:50vh;border-radius:8px}.so-attprev audio{width:100%}.so-attprev iframe{width:100%;height:55vh;border:1px solid var(--line);border-radius:8px}
+.so-empty{align-self:center;text-align:center;margin:auto 0}
+.so-status:empty{display:none}.so-status{padding:2px 6px}
+.so-composer{display:flex;align-items:flex-end;gap:6px;position:sticky;bottom:0;background:var(--bg,var(--paper));padding:8px 0 calc(8px + env(safe-area-inset-bottom))}
+.so-box{flex:1;min-width:0;resize:none;max-height:160px;line-height:1.35}.so-send{flex:none;display:inline-flex;align-items:center;justify-content:center;min-width:44px}
+.so-composer .ns-menu .ns-pop{bottom:44px;top:auto}
+/* a study group's page */
+.so-grouptop h1{margin:0}.so-about{white-space:pre-wrap}.so-sec{margin:12px 0;display:flex;flex-direction:column;gap:8px}
+.so-sec .btn{align-self:flex-start;display:inline-flex;align-items:center;gap:4px}.so-linkbox .row{gap:8px;flex-wrap:wrap}
+.so-member{display:flex;align-items:center;gap:8px}.so-leave{margin:16px 0}
+.so-joincard{display:flex;flex-direction:column;gap:10px}.so-joincard .row{gap:8px}
+.so-pageacts{gap:8px;margin:12px 0;flex-wrap:wrap}.so-pageacts .btn{display:inline-flex;align-items:center;gap:4px}
+@media (min-width:900px){.so-msgs{max-height:calc(100dvh - 190px)}}
 
 /* ---- 97_rtl.css ---- */
 /* ---------- right-to-left interfaces (docs/i18n.md §5: logical properties everywhere; here what they cannot say) ---------- */

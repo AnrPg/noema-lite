@@ -187,5 +187,14 @@
   "vault.subject.communication": "Медиа и коммуникации",
   "vault.subject.theology": "Теология",
   "vault.subject.sports": "Физкультура и спорт",
-  "vault.subject.other": "Другое"
+  "vault.subject.other": "Другое",
+  "vault.aGroup": "учебная группа",
+  "vault.g.group": "Учебная группа",
+  "vault.f.group": "Группа",
+  "vault.groupNote": "Папка группы «{name}»: эти файлы видят только её участники.",
+  "vault.fileGone": "Этого файла больше нет в хранилище.",
+  "vault.sendTo": "Отправить…",
+  "vault.shareWith": "Кто видит",
+  "vault.everyone": "Все",
+  "vault.onlyGroup": "Только «{name}»"
 }

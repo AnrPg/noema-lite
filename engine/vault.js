@@ -6,7 +6,7 @@
    › year › type) and every filter work across all of them ("biology notes, any university, any year, 3rd semester").
    Anonymous: the server keeps the uploader for deleting and take-downs, nobody else sees it (view noema_vault); a person
    may choose to show their name. Restrictive: only the formats of FORMATS (no programs, scripts, archives or SVG), each
-   file checked by its first bytes, ≤ 20 MB a file, ≤ 50 MB a person; reports hide a file (cloud/supabase.sql §12).
+   file checked by its first bytes, ≤ 20 MB a file, ≤ 50 MB a person; reports hide a file (cloud/supabase.sql §13).
    The page: #/vault?q=…&<filters> (Files or Folders); the list is read once and filtered here, so a search matches the
    words in any script, accents or not, Greek and Cyrillic also in Latin letters.
    ===================================================================================== */
@@ -69,7 +69,7 @@ window.NoemaVault = (() => {
   const forms = s => { const f = fold(s); return [f, latin(f, GR), latin(f, GR2)]; };
   const matches = (hay, q) => { const H = forms(hay); return forms(q).every(() => true) && q.split(/\s+/).filter(Boolean).every(w => { const W = forms(w); return W.some(x => H.some(y => y.includes(x))); }); };
 
-  /* ---------- the server (row-level security applies: cloud/supabase.sql §12) ---------- */
+  /* ---------- the server (row-level security applies: cloud/supabase.sql §13) ---------- */
   const api = (path, o) => CL().api(path, o);
   const Server = {
     list: () => api('/rest/v1/noema_vault?select=*&order=created_at.desc&limit=5000'),
@@ -93,7 +93,7 @@ window.NoemaVault = (() => {
   };
 
   /* ---------- the page's settings, in the address: #/vault?q=…&u=…&sem=3&k=notes,exam … ---------- */
-  const KEYS = ['q', 'v', 'f', 'u', 'd', 'c', 'p', 'y', 'sem', 'k', 'sub', 'x', 'sol', 'hw', 'lg', 'ft', 'r', 'used', 'mine', 'sort'];
+  const KEYS = ['q', 'v', 'f', 'u', 'd', 'c', 'p', 'y', 'sem', 'k', 'sub', 'x', 'sol', 'hw', 'lg', 'ft', 'r', 'used', 'mine', 'g', 'sort', 'id'];   // g: a study group's folder · id: open that file
   const parse = () => { const q = new URLSearchParams((location.hash.split('?')[1] || '')); const P = {}; for (const k of KEYS) if (q.get(k)) P[k] = q.get(k); return P; };
   const hashOf = P => { const q = new URLSearchParams(); for (const k of KEYS) if (P[k]) q.set(k, P[k]); const s = q.toString(); return '#/vault' + (s ? '?' + s : ''); };
   const listOf = s => String(s || '').split(',').filter(Boolean);
@@ -105,7 +105,7 @@ window.NoemaVault = (() => {
     return all.filter(f => (!P.u || same(f.university, P.u)) && (!P.d || same(f.department, P.d)) && (!P.c || same(f.course, P.c)) && (!P.p || same(f.professor || '', P.p))
       && (!P.y || String(f.year) === P.y) && (!P.sem || String(f.semester) === P.sem) && (!k.length || k.includes(f.kind)) && (!P.sub || f.subject === P.sub)
       && (!P.x || f.has_exercises) && (!P.sol || f.has_solutions) && (!P.hw || (P.hw === 'hand' ? f.handwritten : !f.handwritten)) && (!P.lg || f.language === P.lg)
-      && (!ft.length || ft.includes(groupOf(f))) && (!P.r || (f.rating_n && f.rating_sum / f.rating_n >= +P.r)) && (!P.used || f.used > 0) && (!P.mine || f.mine)
+      && (!ft.length || ft.includes(groupOf(f))) && (!P.r || (f.rating_n && f.rating_sum / f.rating_n >= +P.r)) && (!P.used || f.used > 0) && (!P.mine || f.mine) && (!P.g || f.room === P.g)
       && (!P.q || matches([f.title, f.description, f.university, f.department, f.course, f.professor, f.file_name, T('kind.' + f.kind), T('subject.' + f.subject), f.uploader_name].filter(Boolean).join(' · '), P.q)));
   }
   const SORTS = { new: (a, b) => String(b.created_at).localeCompare(String(a.created_at)), rating: (a, b) => stars(b) - stars(a) || b.rating_n - a.rating_n, downloads: (a, b) => b.downloads - a.downloads, year: (a, b) => b.year - a.year };
@@ -123,10 +123,12 @@ window.NoemaVault = (() => {
   const LANGS = () => Object.keys(window.NoemaCurriculum?.LANG || { en: 1, el: 1, de: 1, fr: 1, es: 1, it: 1, ru: 1 });
   const where = f => [f.course, f.university, T('yearSem', { year: f.year, sem: f.semester })].join(' · ');
   const GICON = { doc: 'doc', slides: 'grid', sheet: 'rows', book: 'book', image: 'eye', audio: 'mic', video: 'play', text: 'doc' };
-  let cache = null, mineR = {}, mineRep = {};
+  let cache = null, mineR = {}, mineRep = {}, groups = [];   // groups: my study groups [{ id, name }] (engine/social.js)
+  const groupName = id => groups.find(g => g.id === id)?.name || T('aGroup');
   async function load(force = false) {
     if (cache && !force) return cache;
-    const [rows, rt, rp] = await Promise.all([Server.list(), Server.myRatings().catch(() => []), Server.myReports().catch(() => [])]);
+    const [rows, rt, rp, gs] = await Promise.all([Server.list(), Server.myRatings().catch(() => []), Server.myReports().catch(() => []), window.NoemaSocial ? NoemaSocial.groups().catch(() => []) : []]);
+    groups = gs || [];
     cache = rows || []; mineR = Object.fromEntries((rt || []).map(r => [r.file_id, r.stars])); mineRep = Object.fromEntries((rp || []).map(r => [r.file_id, r.reason]));
     return cache;
   }
@@ -143,7 +145,7 @@ window.NoemaVault = (() => {
       return;
     }
     const inp = h('input', { class: 'noema-input ns-srin vt-q', type: 'search', value: P.q || '', placeholder: T('searchPh'), 'aria-label': T('search'), autocomplete: 'off' });
-    const upBtn = h('button', { class: 'btn primary vt-upbtn', onclick: () => upload(ctx, () => refresh(true)) }, svg('upload'), ' ', T('upload'));
+    const upBtn = h('button', { class: 'btn primary vt-upbtn', onclick: () => upload(ctx, () => refresh(true), { room: P.g || '' }) }, svg('upload'), ' ', T('upload'));
     const viewSeg = h('div', { class: 'ns-seg small vt-viewseg', role: 'radiogroup', 'aria-label': T('view') });
     const filtBtn = h('button', { class: 'btn small ghost vt-filtbtn', 'aria-expanded': 'false', onclick: () => { filt.hidden = !filt.hidden; filtBtn.setAttribute('aria-expanded', String(!filt.hidden)); } });
     const sortSel = h('select', { class: 'noema-input small vt-sort', 'aria-label': T('sort'), onchange: () => setP({ sort: sortSel.value === 'new' ? '' : sortSel.value }) }, ...Object.keys(SORTS).map(k => h('option', { value: k }, T('sort.' + k))));
@@ -173,13 +175,14 @@ window.NoemaVault = (() => {
         group(T('g.contents'), h('div', { class: 'ns-srchips' }, chip('x', '1', T('c.exercises')), chip('sol', '1', T('c.solutions')), chip('hw', 'hand', T('c.handwritten')), chip('hw', 'typed', T('c.typed')))),
         group(T('g.format'), sel(T('f.language'), 'lg', values(all, 'language').map(x => [x.v, langName(x.v)])), h('div', { class: 'ns-srchips' }, ...GROUPS.map(g => chip('ft', g, T('ft.' + g), true)))),
         group(T('g.quality'), sel(T('f.rating'), 'r', [['3', T('r.3')], ['4', T('r.4')]])),
-        group(T('g.use'), h('div', { class: 'ns-srchips' }, chip('used', '1', T('c.used')))));
-      const n = KEYS.filter(k => !['q', 'v', 'f', 'sort'].includes(k) && P[k]).length;
+        group(T('g.use'), h('div', { class: 'ns-srchips' }, chip('used', '1', T('c.used')))),
+        groups.length ? group(T('g.group'), sel(T('f.group'), 'g', groups.map(g => [g.id, g.name]), { bare: true })) : null);
+      const n = KEYS.filter(k => !['q', 'v', 'f', 'sort', 'id'].includes(k) && P[k]).length;
       filtBtn.replaceChildren(svg('filter'), ' ', n ? T('filtersN', { n }) : T('filters'));
       // the filters in use, each one removable
       const label = k => ({ u: P.u, d: P.d, c: P.c, p: P.p, y: P.y, sem: T('semN', { n: +P.sem }), k: listOf(P.k).map(x => T('kind.' + x)).join(', '), sub: T('subject.' + P.sub), x: T('c.exercises'), sol: T('c.solutions'),
-        hw: T(P.hw === 'hand' ? 'c.handwritten' : 'c.typed'), lg: langName(P.lg), ft: listOf(P.ft).map(x => T('ft.' + x)).join(', '), r: T('r.' + P.r), used: T('c.used'), mine: T('myUploads') })[k];
-      const on = KEYS.filter(k => !['q', 'v', 'f', 'sort'].includes(k) && P[k]);
+        hw: T(P.hw === 'hand' ? 'c.handwritten' : 'c.typed'), lg: langName(P.lg), ft: listOf(P.ft).map(x => T('ft.' + x)).join(', '), r: T('r.' + P.r), used: T('c.used'), mine: T('myUploads'), g: groupName(P.g) })[k];
+      const on = KEYS.filter(k => !['q', 'v', 'f', 'sort', 'id'].includes(k) && P[k]);
       chips.replaceChildren(...on.map(k => h('button', { class: 'ns-srchip on vt-chip', 'data-f': k, 'aria-label': T('removeFilter', { what: label(k) }), onclick: () => setP({ [k]: '' }) }, label(k), ' ✕')),
         on.length > 1 ? h('button', { class: 'linkish', onclick: () => setP(Object.fromEntries(on.map(k => [k, '']))) }, T('clear')) : '');
     }
@@ -187,7 +190,7 @@ window.NoemaVault = (() => {
       const rating = f.rating_n ? `★ ${num(Math.round(stars(f) * 10) / 10)}` : '';
       return h('button', { class: 'ns-item vt-file', 'data-id': f.id, onclick: () => details(ctx, f, () => refresh(true)) }, ico(GICON[groupOf(f)] || 'doc', (i % 4) + 1),
         h('span', { class: 't' }, h('b', {}, f.title), h('small', {}, [T('kind.' + f.kind), where(f)].join(' · '))),
-        h('span', { class: 'vt-meta tiny' }, f.mine && f.status !== 'ok' ? pill(T('status.' + f.status)) : null, rating ? h('span', { title: T('ratingN', { n: f.rating_n }) }, rating) : null, f.downloads ? h('span', { title: T('downloadsN', { n: f.downloads }) }, '⬇ ' + num(f.downloads)) : null), chev());   // i18n-ignore (★ ⬇: signs)
+        h('span', { class: 'vt-meta tiny' }, f.room ? pill(groupName(f.room), 2, 'vt-grouppill') : null, f.mine && f.status !== 'ok' ? pill(T('status.' + f.status)) : null, rating ? h('span', { title: T('ratingN', { n: f.rating_n }) }, rating) : null, f.downloads ? h('span', { title: T('downloadsN', { n: f.downloads }) }, '⬇ ' + num(f.downloads)) : null), chev());   // i18n-ignore (★ ⬇: signs)
     }
     function files(list) {
       const sorted = [...list].sort(SORTS[P.sort] || SORTS.new);
@@ -211,7 +214,8 @@ window.NoemaVault = (() => {
       sortSel.value = P.sort || 'new';
       drawFilters();
       const list = filter(all, P);
-      out.replaceChildren(h('p', { class: 'tiny ns-muted vt-count' }, T('results', { n: list.length })), P.v === 'folders' ? folders(list) : files(list));
+      out.replaceChildren(P.g ? h('p', { class: 'ns-panel tiny vt-groupnote' }, T('groupNote', { name: groupName(P.g) })) : null, h('p', { class: 'tiny ns-muted vt-count' }, T('results', { n: list.length })), P.v === 'folders' ? folders(list) : files(list));
+      if (P.id) { const f = all.find(x => x.id === P.id); setP({ id: '' }); if (f) details(ctx, f, () => refresh(true)); else toast(T('fileGone'), 4000); }   // a vault file sent in a conversation
     }
     refresh(false);
   }
@@ -223,7 +227,7 @@ window.NoemaVault = (() => {
       const facts = [[T('f.university'), f.university], [T('f.department'), f.department], [T('f.course'), f.course], [T('f.professor'), f.professor], [T('f.when'), T('yearSem', { year: f.year, sem: f.semester })],
         [T('f.type'), T('kind.' + f.kind)], [T('f.subject'), T('subject.' + f.subject)], [T('f.language'), langName(f.language)],
         [T('f.contents'), [f.has_exercises && T('c.exercises'), f.has_solutions && T('c.solutions'), T(f.handwritten ? 'c.handwritten' : 'c.typed')].filter(Boolean).join(' · ')],
-        [T('f.file'), `${f.file_name} · ${mb(f.size)}${f.pages ? ' · ' + T('pagesN', { n: f.pages }) : ''}`], [T('f.sharedBy'), f.uploader_name || T('anonymous')]].filter(([, x]) => x);
+        [T('f.file'), `${f.file_name} · ${mb(f.size)}${f.pages ? ' · ' + T('pagesN', { n: f.pages }) : ''}`], [T('f.sharedBy'), f.uploader_name || T('anonymous')], [T('f.group'), f.room ? groupName(f.room) : null]].filter(([, x]) => x);
       const prev = h('div', { class: 'vt-preview' });
       const busy = async (b, fn) => { b.disabled = true; try { await fn(); } catch (e) { toast('⚠️ ' + (window.NoemaI18n ? NoemaI18n.err(e) : e.message), 6000); } b.disabled = false; };
       const getFile = async () => new File([await Server.blob(f)], f.file_name, { type: f.mime });
@@ -239,7 +243,8 @@ window.NoemaVault = (() => {
         h('p', { class: 'tiny ns-muted' }, [f.rating_n ? T('ratingN', { n: f.rating_n }) : T('noRating'), T('downloadsN', { n: f.downloads }), f.used ? T('usedN', { n: f.used }) : ''].filter(Boolean).join(' · ')),
         h('div', { class: 'row vt-acts' },
           h('button', { class: 'btn primary vt-download', onclick: e => busy(e.currentTarget, async () => { const file = await getFile(); const a = document.createElement('a'); a.href = URL.createObjectURL(file); a.download = f.file_name; document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 60000); Server.count(f.id, 'download'); }) }, svg('download'), ' ', T('download')),
-          canPreview ? h('button', { class: 'btn ghost vt-prevbtn', onclick: e => busy(e.currentTarget, async () => { await preview(h, prev, f, await Server.blob(f)); e.currentTarget.remove(); }) }, svg('eye'), ' ', T('preview')) : null,
+          canPreview ? h('button', { class: 'btn ghost vt-prevbtn', onclick: e => { const b = e.currentTarget; busy(b, async () => { await preview(h, prev, f, await Server.blob(f)); b.remove(); }); } }, svg('eye'), ' ', T('preview')) : null,
+          window.NoemaSocial && f.status === 'ok' ? h('button', { class: 'btn ghost vt-sendto', onclick: () => NoemaSocial.sendTo(ctx, { kind: 'vault', id: f.id, title: f.title }, { title: f.title }) }, svg('send'), ' ', T('sendTo')) : null,
           window.NoemaCurMap?.fromSources ? h('button', { class: 'btn ghost vt-course', onclick: e => busy(e.currentTarget, async () => { const file = await getFile(); close(); Server.count(f.id, 'used'); NoemaCurMap.fromSources(acc(), { files: [file], onStudy: id => N()?.open?.(id) }); }) }, svg('spark'), ' ', T('makeCourse')) : null),
         prev,
         f.mine ? null : h('div', { class: 'vt-rate' }, h('span', { class: 'ns-label' }, T('rate')), starRow),
@@ -307,10 +312,12 @@ window.NoemaVault = (() => {
     };
     return { el, read };
   }
-  async function upload(ctx, onDone) {
+  async function upload(ctx, onDone, { room = '' } = {}) {
     const { h } = ctx;
     let all = []; try { all = await load(); } catch (e) { }
-    const used = () => all.filter(f => f.mine).reduce((a, f) => a + (f.size || 0), 0);
+    let usedBytes = all.filter(f => f.mine).reduce((a, f) => a + (f.size || 0), 0);
+    if (window.NoemaSocial) usedBytes = await NoemaSocial.Server.used().catch(() => usedBytes);   // the files sent in conversations count too
+    const used = () => usedBytes;
     dialog(ctx, T('uploadTitle'), (body, close) => {
       let items = [];   // [{ file, title, problem }]
       const pick = h('input', { type: 'file', multiple: true, accept: ACCEPT, class: 'vt-pick', style: { display: 'none' }, onchange: e => { add([...e.target.files]); e.target.value = ''; } });
@@ -319,6 +326,9 @@ window.NoemaVault = (() => {
       const flist = h('ul', { class: 'vt-files' }), quota = h('div', { class: 'tiny ns-muted vt-quota' });
       const form = fields(h, all);
       const ok = h('input', { type: 'checkbox', class: 'vt-rules' });
+      // who sees it: everybody, or only the members of one of my study groups (its own folder)
+      const where = groups.length ? h('select', { class: 'noema-input vt-where', 'aria-label': T('shareWith') }, h('option', { value: '' }, T('everyone')), ...groups.map(g => h('option', { value: g.id }, T('onlyGroup', { name: g.name })))) : null;
+      if (where) where.value = groups.some(g => g.id === room) ? room : '';
       const err = h('div', { class: 'cg-kstat bad vt-err', role: 'alert' });
       const go = h('button', { class: 'btn primary vt-go', onclick: send }, T('uploadBtn'));
       async function add(list) {
@@ -344,13 +354,14 @@ window.NoemaVault = (() => {
           go.textContent = T('uploading', { i: n + 1, n: good.length });
           let pages = null;
           if (/\.pdf$/i.test(x.file.name) && window.NoemaViewer?.extract) { try { pages = (await NoemaViewer.extract(x.file, { maxPages: 1 })).pageCount || null; } catch (e) { } }
-          try { await Server.upload({ ...r.meta, title: x.title.trim().slice(0, 160), pages }, x.file); n++; items = items.filter(y => y !== x); drawFiles(); }
+          try { await Server.upload({ ...r.meta, title: x.title.trim().slice(0, 160), pages, ...(where?.value ? { room: where.value } : {}) }, x.file); n++; usedBytes += x.file.size; items = items.filter(y => y !== x); drawFiles(); }
           catch (e) { err.textContent = T('failed', { name: x.file.name, why: window.NoemaI18n ? NoemaI18n.err(e) : e.message }); go.disabled = false; go.textContent = T('uploadBtn'); if (n) onDone(); return; }
         }
         close(); toast(T('uploaded', { n }), 4000); onDone();
       }
       drawFiles();
       body.append(h('p', { class: 'tiny ns-muted' }, T('uploadLead')), drop, h('p', { class: 'tiny ns-muted vt-formats' }, T('formats', { mb: 20 })), flist, quota, form.el,
+        where ? h('label', { class: 'vt-fld vt-wherefld' }, h('span', { class: 'ns-label' }, T('shareWith')), where) : null,
         h('label', { class: 'vt-check vt-rulesrow' }, ok, ' ', T('rules')), err, h('div', { class: 'row' }, go, h('button', { class: 'btn ghost', onclick: close }, T('cancel'))));
     }, { cls: 'vt-upload' });
   }

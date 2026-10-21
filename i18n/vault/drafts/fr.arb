@@ -187,5 +187,14 @@
   "vault.subject.communication": "Communication et médias",
   "vault.subject.theology": "Théologie",
   "vault.subject.sports": "STAPS",
-  "vault.subject.other": "Autre"
+  "vault.subject.other": "Autre",
+  "vault.aGroup": "un groupe d’étude",
+  "vault.g.group": "Groupe d’étude",
+  "vault.f.group": "Groupe",
+  "vault.groupNote": "Le dossier de « {name} » : seuls ses membres voient ces fichiers.",
+  "vault.fileGone": "Ce fichier n’est plus dans le coffre.",
+  "vault.sendTo": "Envoyer à…",
+  "vault.shareWith": "Qui le voit",
+  "vault.everyone": "Tout le monde",
+  "vault.onlyGroup": "Seulement « {name} »"
 }
