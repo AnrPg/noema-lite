@@ -158,7 +158,7 @@ window.NoemaSocial = (() => {
   const TAB = 'noema-social-tab';
   function home(ctx) {
     const { h, page: pg, svg } = ctx;
-    const v = pg({ tab: null, crumbs: [[T('title')]], cls: 'so-view', menu: () => [
+    const v = pg({ tab: 'people', crumbs: [[T('title')]], cls: 'so-view', menu: () => [
       { label: T('privacy'), sub: T('privacySub'), icon: 'lock', run: () => privacy(ctx) },
       { label: T('blocked'), sub: T('blockedSub'), icon: 'flag', run: () => blockedList(ctx) },
       { label: T('howItWorks'), icon: 'info', run: () => about(ctx) }] });
@@ -310,7 +310,7 @@ window.NoemaSocial = (() => {
   async function chat(ctx, rid) {
     const { h, page: pg, svg } = ctx;
     clearInterval(poll);
-    const v = pg({ tab: null, crumbs: [[T('title'), '#/people'], ['…']], back: '#/people', cls: 'so-view so-chatview', fab: false }, h('p', { class: 'ns-muted' }, T('loading')));
+    const v = pg({ tab: 'people', crumbs: [[T('title'), '#/people'], ['…']], back: '#/people', cls: 'so-view so-chatview', fab: false }, h('p', { class: 'ns-muted' }, T('loading')));
     if (!on()) { v.replaceChildren(); return signedOut(ctx, v); }
     let room, members;
     try { [room, members] = await Promise.all([Server.room(rid), Server.members(rid)]); } catch (e) { v.replaceChildren(h('div', { class: 'ns-panel ns-empty' }, h('p', {}, why(e)))); return; }
@@ -319,7 +319,7 @@ window.NoemaSocial = (() => {
     const myRow = members.find(m => m.user_id === me()) || {}, dm = room.kind === 'dm', other = dm ? members.find(m => m.user_id !== me())?.user_id : null;
     const title = dm ? nameOf(other) : room.name;
     const mute = async () => { await Server.member(rid, me(), { muted: !myRow.muted }); myRow.muted = !myRow.muted; toast(T(myRow.muted ? 'mutedToast' : 'unmutedToast'), 2500); refresh().catch(() => { }); };
-    ctx.chrome({ tab: null, crumbs: [[T('title'), '#/people'], [title]], back: '#/people', fab: false, menu: () => dm ? [
+    ctx.chrome({ tab: 'people', crumbs: [[T('title'), '#/people'], [title]], back: '#/people', fab: false, menu: () => dm ? [
       { label: nameOf(other), sub: T('personSub'), icon: 'user', run: () => person(ctx, other) },
       { label: T(myRow.muted ? 'unmute' : 'mute'), icon: 'bell', run: mute },
       { label: T('fromVault'), sub: T('fromVaultSub'), icon: 'vault', run: () => ctx.go('#/vault') }] : [
@@ -502,14 +502,14 @@ window.NoemaSocial = (() => {
   /* ======================= #/group/<room>: a study group — members, invitations, its files, its Roadmaps ======================= */
   async function group(ctx, rid) {
     const { h, page: pg, svg } = ctx;
-    const v = pg({ tab: null, crumbs: [[T('title'), '#/people'], ['…']], back: '#/chat/' + rid, cls: 'so-view so-groupview' }, h('p', { class: 'ns-muted' }, T('loading')));
+    const v = pg({ tab: 'people', crumbs: [[T('title'), '#/people'], ['…']], back: '#/chat/' + rid, cls: 'so-view so-groupview' }, h('p', { class: 'ns-muted' }, T('loading')));
     if (!on()) { v.replaceChildren(); return signedOut(ctx, v); }
     let room, members, rms;
     try { [room, members, rms] = await Promise.all([Server.room(rid), Server.members(rid), Server.roadmaps(rid).catch(() => [])]); } catch (e) { v.replaceChildren(h('div', { class: 'ns-panel ns-empty' }, h('p', {}, why(e)))); return; }
     if (!room || room.kind !== 'group') { v.replaceChildren(h('div', { class: 'ns-panel ns-empty' }, h('p', {}, T('roomGone')))); return; }
     await names(members.map(m => m.user_id)).catch(() => { });
     const myRole = members.find(m => m.user_id === me() && m.status === 'joined')?.role, boss = myRole === 'owner' || myRole === 'admin';
-    ctx.chrome({ tab: null, crumbs: [[T('title'), '#/people'], [room.name, '#/chat/' + rid], [T('groupInfo')]], back: '#/chat/' + rid });
+    ctx.chrome({ tab: 'people', crumbs: [[T('title'), '#/people'], [room.name, '#/chat/' + rid], [T('groupInfo')]], back: '#/chat/' + rid });
     const again = () => group(ctx, rid);
     const joined = members.filter(m => m.status === 'joined'), invited = members.filter(m => m.status === 'invited');
     const curs = await Server.curricula(rms.map(r => r.curriculum)).catch(() => []);
@@ -572,7 +572,7 @@ window.NoemaSocial = (() => {
   /* ======================= #/join/<code>: an invitation link ======================= */
   async function joinPage(ctx, code) {
     const { h, page: pg } = ctx;
-    const v = pg({ tab: null, crumbs: [[T('title'), '#/people'], [T('joinLink')]], back: '#/people', cls: 'so-view' }, h('p', { class: 'ns-muted' }, T('loading')));
+    const v = pg({ tab: 'people', crumbs: [[T('title'), '#/people'], [T('joinLink')]], back: '#/people', cls: 'so-view' }, h('p', { class: 'ns-muted' }, T('loading')));
     if (!on()) { v.replaceChildren(); return signedOut(ctx, v); }
     const g = await Server.peek(code).catch(() => null);
     if (!g) { v.replaceChildren(h('div', { class: 'ns-panel ns-empty' }, ctx.faceEl(undefined, 'breathe'), h('p', {}, T('err.badLink')))); return; }

@@ -45,11 +45,13 @@ alter default privileges in schema public grant all on tables to anon, authentic
 """)
     sql = open(os.path.join(ROOT, 'cloud', 'supabase.sql'), encoding='utf-8').read()
     psql(sql); psql(sql)
-    ok(True, 'cloud/supabase.sql runs, and runs again (idempotent)')
+    seed = open(os.path.join(ROOT, 'cloud', 'vault_fields_seed.sql'), encoding='utf-8').read()
+    psql(seed); psql(seed)
+    ok(True, 'cloud/supabase.sql runs, and runs again (idempotent); so does the seed of the vault fields')
     tables = psql("select tablename from pg_tables where schemaname='public' and tablename like 'noema_%' and rowsecurity order by 1")
-    ok(tables == ['noema_blocks', 'noema_buddies', 'noema_chat_files', 'noema_conversations', 'noema_curricula_shared', 'noema_curriculum_members', 'noema_curriculum_steps', 'noema_kv',
+    ok(tables == ['noema_admins', 'noema_blocks', 'noema_buddies', 'noema_chat_files', 'noema_conversations', 'noema_curricula_shared', 'noema_curriculum_members', 'noema_curriculum_steps', 'noema_kv',
                   'noema_message_reports', 'noema_messages', 'noema_people', 'noema_profiles', 'noema_public_packs', 'noema_public_profiles', 'noema_room_members', 'noema_room_roadmaps',
-                  'noema_rooms', 'noema_shares', 'noema_snapshots', 'noema_vault_files', 'noema_vault_hits', 'noema_vault_ratings', 'noema_vault_reports'], 'the 23 noema_ tables, all with row-level security: ' + ', '.join(tables))
+                  'noema_rooms', 'noema_shares', 'noema_snapshots', 'noema_vault_fields', 'noema_vault_files', 'noema_vault_hits', 'noema_vault_ratings', 'noema_vault_reports'], 'the 25 noema_ tables, all with row-level security: ' + ', '.join(tables))
     A, B, C = (str(uuid.uuid4()) for _ in range(3)); EA, EB, EC = 'anna@example.com', 'bob@example.com', 'carl@example.com'
     psql(f"insert into auth.users values ('{A}','{EA}'),('{B}','{EB}'),('{C}','{EC}')")
     # own data
@@ -201,8 +203,31 @@ alter default privileges in schema public grant all on tables to anon, authentic
     q('c', f"insert into storage.objects (bucket_id, name, metadata) values ('noema-vault', 'files/{vid}.pdf', '{{\"size\": 10}}')"); q('c', f"select noema_vault_finish('{vid}')")
     ok(q('b', "select count(*) from noema_vault where room is not null") == ['1'] and q('d', "select count(*) from noema_vault where room is not null") == ['0'], 'a group’s vault folder: its members only')
     ok(q('d', f"insert into noema_vault_files (title, university, department, course, year, semester, kind, subject, language, file_name, mime, size, path, room) values ('x', 'Uni', 'Dept', 'Course', 2024, 1, 'notes', 'biology', 'en', 'g.pdf', 'application/pdf', 10, 'files/66666666-1111-1111-1111-111111111111.pdf', '{g}')", expect_error=True), '…and only they put files in it')
+    ok(q('d', "insert into noema_vault_files (title, kind, subject, language, file_name, mime, size, path) values ('Glossary', 'other', 'physics', 'el,ru', 'g.pdf', 'application/pdf', 10, 'files/66666666-1111-1111-1111-111111111111.pdf') returning coalesce(university, '-') || coalesce(semester::text, '-')") == ['--'], 'a file without university, course, year or semester, in two languages')
+    ok(q('d', "insert into noema_vault_files (title, kind, subject, language, file_name, mime, size, path) values ('x', 'other', 'physics', 'el;ru', 'g.pdf', 'application/pdf', 10, 'files/77777777-1111-1111-1111-111111111111.pdf')", expect_error=True), 'languages are codes separated by commas')
     for n in '78': q('e', f"insert into noema_chat_files (path, room, name, mime, size) values ('rooms/{g}/{n * 8}-2222-2222-2222-222222222222.pdf', '{g}', 'a.pdf', 'application/pdf', 20971520)")
     ok(q('e', "insert into noema_vault_files (title, university, department, course, year, semester, kind, subject, language, file_name, mime, size, path) values ('big', 'Uni', 'Dept', 'Course', 2024, 1, 'notes', 'biology', 'en', 'g.pdf', 'application/pdf', 20971520, 'files/77777777-1111-1111-1111-111111111111.pdf')", expect_error=True), 'the 50 MB count the vault and the files sent in conversations together')
+    # 🧭 the fields of the vault (§13b)
+    ok(q('d', "select fields from noema_vault where title = 'Glossary'") == ['{Q413}'], 'an app from before the fields sends a subject: it becomes its field (physics → Q413)')
+    ok(q('d', "select names->>'el' from noema_vault_fields where id = 'Q1120908'") == ['Ιατρική φυσική'] and set(q('d', "select unnest(parents) from noema_vault_fields where id = 'Q1120908'")) >= {'Q413', 'Q11190'}, 'the seed: Medical physics, in Greek too, under Physics and under Medicine')
+    ok(q('d', "select noema_vault_field_propose('ιατρική φυσική', 'el')") == ['Q1120908'], 'proposing a known name (any language, any case) gives the known field')
+    u = q('d', "select noema_vault_field_propose('Quantum biology of birds', 'en', array['Q7100', 'nope'])")[0]
+    ok(u.startswith('u_') and q('d', f"select status, parents from noema_vault_fields where id = '{u}'") == ['proposed|{Q7100}'] and q('e', f"select count(*) from noema_vault_fields where id = '{u}'") == ['0'], 'a new field is proposed (unknown parents dropped); only its proposer sees it')
+    ok(q('d', f"insert into noema_vault_files (title, kind, fields, language, file_name, mime, size, path) values ('Birds', 'notes', array['{u}', 'Q7100'], 'en', 'g.pdf', 'application/pdf', 10, 'files/88888888-1111-1111-1111-111111111111.pdf') returning cardinality(fields)") == ['2']
+       and q('e', f"insert into noema_vault_files (title, kind, fields, language, file_name, mime, size, path) values ('x', 'notes', array['{u}'], 'en', 'g.pdf', 'application/pdf', 10, 'files/99999999-1111-1111-1111-111111111111.pdf')", expect_error=True)
+       and q('e', "insert into noema_vault_files (title, kind, language, file_name, mime, size, path) values ('x', 'notes', 'en', 'g.pdf', 'application/pdf', 10, 'files/99999999-1111-1111-1111-111111111111.pdf')", expect_error=True), 'the proposer files under it at once; others cannot; a file needs a field')
+    ok(q('d', "select noema_vault_fields_queue(array['en'])", expect_error=True) and q('d', "select noema_vault_fields_save('[]')", expect_error=True), 'only admins see the queue and change fields')
+    psql(f"insert into noema_admins (user_id) values ('{P['a']}')")
+    qq = json.loads(q('a', "select noema_vault_fields_queue(array['en', 'el'], 5)")[0])
+    ok([x['id'] for x in qq['proposed']] == [u] and qq['proposed'][0]['titles'] == ['Birds'] and qq['counts']['untranslated'] > 0 and all('el' in x['missing'] for x in qq['untranslated']), 'the queue: the proposal with its files, and fields missing a name')
+    ok(q('a', f"select noema_vault_fields_save('[{{\"id\": \"Q413\", \"parents\": [\"Q1120908\"]}}]')", expect_error=True), 'a parent below the field is refused (the graph stays a DAG)')
+    q('a', f"select noema_vault_fields_save('[{{\"id\": \"{u}\", \"names\": {{\"en\": \"Quantum biology\", \"el\": \"Κβαντική βιολογία\"}}, \"add_parents\": [\"Q413\"], \"status\": \"accepted\"}}]')")
+    ok(q('e', f"select names->>'el', parents from noema_vault_fields where id = '{u}'") == ['Κβαντική βιολογία|{Q413,Q7100}'], 'Claude accepts it with its names and one more parent: everybody sees it')
+    nid = json.loads(q('a', "select noema_vault_fields_save('[{\"names\": {\"en\": \"Bird biology\"}, \"parents\": [\"Q420\"]}]')")[0])['saved'][0]
+    q('a', f"select noema_vault_fields_save('[{{\"id\": \"{u}\", \"merge_into\": \"{nid}\"}}]')")
+    ok(q('d', "select fields from noema_vault where title = 'Birds'") == ['{' + nid + ',Q7100}'] or q('d', "select fields from noema_vault where title = 'Birds'") == ['{Q7100,' + nid + '}'], 'a merge moves the files to the other field')
+    ok(q('e', f"select status, merged_into from noema_vault_fields where id = '{u}'") == [] and 'Quantum biology' in q('e', f"select array_to_string(aliases, '|') from noema_vault_fields where id = '{nid}'")[0], '…and its names become the other’s aliases (search still finds it)')
+    ok(psql("select count(*) from noema_vault_fields", role='anon', expect_error=True) or psql("select count(*) from noema_vault_fields", role='anon') == ['0'], 'signed-out visitors read no fields')
     ok(psql("select count(*) from noema_people", role='anon') == ['0'] and psql("select count(*) from noema_messages", role='anon') == ['0'], 'signed-out visitors see no one and nothing')
 finally:
     subprocess.run(as_pg + [f'{BIN}/pg_ctl', '-D', data, 'stop', '-m', 'immediate'], capture_output=True)

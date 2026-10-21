@@ -357,12 +357,20 @@
     async _pull(acc) {
       st.syncing = true; emit();
       try {
-        const rows = await call('/rest/v1/noema_kv?select=key,value,updated_at&order=key');
+        // first only the keys and their version stamps (a few KB); then the values of the rows that changed — a sync
+        // where nothing changed no longer downloads every curriculum and subject state again (megabytes each time)
+        const heads = await call('/rest/v1/noema_kv?select=key,updated_at&order=key');
         const pre = 'noema1:' + acc + ':', base = meta(acc, 'base'), dirty = meta(acc, 'unsynced'), seen = new Set(), keys = [], conflicts = [];
-        for (const r of rows || []) {
-          if (remoteOnly(r.key)) continue;   // answers from the Claude app (read and deleted by engine/curjobs.js), its runs' claims, other apps' results (engine/src/15_inbox.js), the "in use" row: never stored here
-          seen.add(r.key);
-          if (base[r.key] === r.updated_at) continue;   // the cloud still has the version this copy comes from
+        const want = (heads || []).filter(r => !remoteOnly(r.key) && base[r.key] !== r.updated_at).map(r => r.key), got = new Map();
+        for (let i = 0; i < want.length; i += 40) {   // short enough addresses
+          const list = want.slice(i, i + 40).map(k => '"' + k.replace(/\\/g, '\\\\').replace(/"/g, '\\"') + '"').join(',');
+          for (const r of (await call('/rest/v1/noema_kv?select=key,value,updated_at&key=in.' + enc('(' + list + ')'))) || []) got.set(r.key, r);
+        }
+        for (const h of heads || []) {
+          if (remoteOnly(h.key)) continue;   // answers from the Claude app (read and deleted by engine/curjobs.js), its runs' claims, other apps' results (engine/src/15_inbox.js), the "in use" row: never stored here
+          seen.add(h.key);
+          if (base[h.key] === h.updated_at) continue;   // the cloud still has the version this copy comes from
+          const r = got.get(h.key); if (!r) continue;   // deleted between the two requests: the next pull sees it
           const local = localStorage.getItem(pre + r.key);
           // changed here too (or a copy that never synced with this version): combine; else simply take the cloud's
           if (r.key in dirty || (base[r.key] === undefined && local != null && local !== r.value)) { conflicts.push(r); continue; }

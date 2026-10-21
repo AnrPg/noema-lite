@@ -1,6 +1,5 @@
 vault.sort.*
 vault.kind.*
-vault.subject.*
 vault.ft.*
 vault.r.*
 vault.reason.*

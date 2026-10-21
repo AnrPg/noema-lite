@@ -21,3 +21,4 @@ library/languages/*/facades/*/tasks/
 
 # local note: what was left to check (not shared)
 PENDING_CHECKS.md
+tools/vault_fields/.cache/

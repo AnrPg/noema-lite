@@ -38,6 +38,9 @@ async function sb(path, token, { method = 'GET', body, headers = {}, raw = false
   const t = await r.text(); return t ? JSON.parse(t) : null;
 }
 
+/** The UI locales every accepted vault field is named in (= tools/i18n/icu.js, tools/vault_fields/build_seed.py). */
+const VAULT_LOCALES = ['en', 'el', 'ru', 'fr', 'ar-EG', 'de', 'hi', 'zh-Hans', 'zh-Hant', 'ja', 'it', 'es-ES', 'sq', 'pt-PT', 'tr'];
+
 /* ---------- pack checks: engine/packcheck.js (shared with the app), prepended by tools/build.py ---------- */
 // tools/pack_rules.json: a pack made with the current toolkit (built since QUALITY.since, or hand-written) must declare
 // subject.authoring.rules >= 2 and meet the quality rules (errors: authoring.by claude); older packs keep working (TD-11).
@@ -443,6 +446,12 @@ const TOOLS = [
     inputSchema: { type: 'object', properties: { course_id: { type: 'string', description: 'the course the package is for (library course id, or the learner\'s own course)' }, language: { type: 'string', description: 'the ISO 639 code of the language in the package' } }, required: ['course_id', 'language'] } },
   { name: 'noema_lang_package_finish', description: 'Step 2: checks the uploaded language package exactly as noema-lite does (every form against its paradigm cells, the facade of every word, sentences, grammar pages, the catalogue of phenomena, the parallel order — and that it fills the course\'s nodes without adding any) and, when it passes, records it in the learner\'s account: the app adds the language to the course on every device. Otherwise it lists every problem — fix them, package again, upload again.',
     inputSchema: { type: 'object', properties: { course_id: { type: 'string' }, language: { type: 'string', description: 'the ISO 639 code' } }, required: ['course_id', 'language'] } },
+  { name: 'noema_vault_fields_queue', description: 'The field graph of the noema-lite vault (docs/VAULT.md §Fields: fields of study, each under one or more parents — a DAG, e.g. Medical physics under Physics AND Medicine; top: the ten ISCED-F broad fields b_ed … b_sv; Wikidata ids Q…; fields people proposed u_…). For admins of the app (the person in noema_admins): what waits — fields people PROPOSED (their name in one language, the parents they chose, how many files use them and some titles) and accepted fields still MISSING a name in some UI locale. Then decide with noema_vault_fields_save: accept (with names in every locale and the right parents), merge into an existing field, or reject; and fill the missing names.',
+    inputSchema: { type: 'object', properties: { limit: { type: 'integer', description: 'How many of each (default 50, max 200)' } } }, annotations: { readOnlyHint: true } },
+  { name: 'noema_vault_fields_find', description: 'Find fields of the vault\'s field graph by name (any language, part of a word is enough): id, names, parents, status. Use it to find the ids of parents before noema_vault_fields_save, and to see whether a field already exists (then merge, never duplicate).',
+    inputSchema: { type: 'object', properties: { query: { type: 'string' }, ids: { type: 'array', items: { type: 'string' }, description: 'Or: these ids (also shows their children)' } } }, annotations: { readOnlyHint: true } },
+  { name: 'noema_vault_fields_save', description: 'Change the vault\'s field graph (admins only); everybody sees accepted fields at once. items: [{"id"?, "names"? {locale: name} (ADDED to its names), "aliases"? [other names, abbreviations], "parents"? [ids] (replace) | "add_parents"? [ids], "status"? "accepted"|"rejected", "merge_into"? id (its files and children move there, its names become aliases), "note"?}] — no id: a new accepted field (enrich the graph: missing sub-fields, extra parents). Rules: a short, natural, usual name in EVERY UI locale (' + VAULT_LOCALES.join(' ') + '), as a university of that language names the field (capital first letter where the script has one); every sensible parent (a field may sit in many places) but never a parent below the field; a duplicate of an existing field is merged, not accepted; a proposal that is not a field of study (a course code, a person, junk) is merged into the closest field or rejected.',
+    inputSchema: { type: 'object', properties: { items_json: { type: 'string', description: 'The items, a JSON array (≤ 200)' } }, required: ['items_json'] } },
   { name: 'noema_curriculum_submit', description: 'Submit your answer to a map / chapter-plan task from noema_curriculum_task. It is checked exactly as noema-lite checks its own agents; problems come back as a list — fix all of them and submit again. Accepted answers reach the learner\'s app by themselves.',
     inputSchema: { type: 'object', properties: { curriculum_id: { type: 'string' }, task_id: { type: 'string', description: 'the task id given with the task (e.g. "dag", "plan:a,b,c")' }, result_json: { type: 'string', description: 'ONE JSON object matching the task\'s JSON Schema' } }, required: ['curriculum_id', 'task_id', 'result_json'] } },
 ];
@@ -756,6 +765,35 @@ async function callTool(name, args, ctx) {
       return text(`✅ ${pkg.name} (${code}) is in the learner's noema-lite account for “${pc.title}”: ${words} words (${absent} absent) in ${rec.counts.nodes} nodes, ${rec.counts.grammar} grammar pages, ${rec.counts.sentences} sentences, ${rec.counts.phenomena} phenomena.` +
         `\nThe app adds it to the course by itself on every device the next time the course opens: a lane in ⫴ parallel lanes, a chip, a row on the course home (⋮ › ${pkg.name} › Remove this language takes it away again).` +
         `\nTell the learner what was written, what is absent, and what a native speaker should still check (work/${code}-native-check.md).`);
+    }
+    case 'noema_vault_fields_queue': {
+      const lim = Math.max(1, Math.min(200, +args?.limit || 50));
+      const q = await sb('/rest/v1/rpc/noema_vault_fields_queue', token, { method: 'POST', body: { locales: VAULT_LOCALES, lim } }).catch(e => ({ error: e.message }));
+      if (q?.error) return fail(/admins only/.test(q.error) ? 'Only the app\'s admins (table noema_admins, docs/VAULT.md §Fields) review the vault\'s fields; this account is not one.' : q.error);
+      return text(`Vault fields: ${q.counts.accepted} accepted, ${q.counts.proposed} proposed, ${q.counts.untranslated} accepted ones missing a name in some locale.\n` +
+        `Every locale: ${VAULT_LOCALES.join(' ')}. Decide with noema_vault_fields_save (find parents with noema_vault_fields_find).\n\nPROPOSED:\n${JSON.stringify(q.proposed, null, 1)}\n\nMISSING NAMES:\n${JSON.stringify(q.untranslated)}`);
+    }
+    case 'noema_vault_fields_find': {
+      const sel = 'select=id,names,parents,status,aliases';
+      const ids = (Array.isArray(args?.ids) ? args.ids : []).map(String).filter(x => /^(Q\d+|b_[a-z]{2}|u_[0-9a-f]{12})$/.test(x)).slice(0, 50);
+      if (ids.length) {
+        const [rows, kids] = await Promise.all([sb(`/rest/v1/noema_vault_fields?${sel}&id=in.(${ids.join(',')})`, token), sb(`/rest/v1/noema_vault_fields?select=id,names->>en&parents=ov.{${ids.join(',')}}&status=eq.accepted&limit=300`, token)]);
+        return text(JSON.stringify({ fields: rows, children: kids }));
+      }
+      const w = String(args?.query || '').trim().replace(/[*,()"\\]/g, ' ').trim().slice(0, 60);
+      if (w.length < 2) return fail('query: at least 2 letters (or ids)');
+      const or = ['en', 'el', 'ru', 'fr', 'de', 'es-ES', 'it'].map(l => `names->>${l}.ilike.*${w}*`).join(',');
+      const rows = await sb(`/rest/v1/noema_vault_fields?${sel}&or=(${encodeURIComponent(or)},id.eq.${encodeURIComponent(w)})&limit=40`, token);
+      return text(rows.length ? JSON.stringify(rows) : 'No field has that name (in en el ru fr de es it). Try another word, or another language.');
+    }
+    case 'noema_vault_fields_save': {
+      let items; try { items = JSON.parse(String(args?.items_json || '')); } catch { return fail('items_json is not valid JSON — send ONE JSON array.'); }
+      if (!Array.isArray(items) || !items.length || items.length > 200) return fail('items_json: an array of 1 to 200 items');
+      const lacks = items.filter(it => !it.merge_into && it.status !== 'rejected' && (it.status === 'accepted' || !it.id) && VAULT_LOCALES.some(l => !String(it.names?.[l] || '').trim())).map(it => it.id || it.names?.en || '?');
+      if (lacks.length) return fail(`An accepted field needs its name in every UI locale (${VAULT_LOCALES.join(' ')}); missing in: ${lacks.slice(0, 20).join(', ')}.`);
+      const r = await sb('/rest/v1/rpc/noema_vault_fields_save', token, { method: 'POST', body: { items } }).catch(e => ({ error: e.message }));
+      if (r?.error) return fail(r.error.replace(/^Supabase \d+: /, '') + '\nNothing was saved (all or nothing): fix it and send all items again.');
+      return text(`✅ Saved ${r.saved.length} field(s): ${r.saved.join(', ')}. Everybody sees accepted fields at once. Call noema_vault_fields_queue for what still waits.`);
     }
     case 'noema_curriculum_submit': {
       const pk = await pickCurriculum(token, String(args?.curriculum_id || '').trim()); if (pk.error) return fail(pk.error);

@@ -62,7 +62,7 @@ c = canvas.Canvas(sys.argv[1]); c.drawString(72, 720, 'Genetics summary'); c.sho
   try {
     console.log('— finding someone, and the buddies rule');
     nikos = await person('Νίκος Παπαδάκης', 'nikos@example.com');
-    ok(await nikos.locator('#ns-people').isVisible(), 'a cloud account has the People button in the top bar');
+    ok(await nikos.locator('#ns-people').isVisible(), 'a cloud account has the People tab in the side bar');
     await nikos.click('#ns-people'); await wait(800);
     ok(/#\/people/.test(nikos.url()) && await until(() => nikos.locator('.so-first').count()), 'People opens; the first time it says others can now find you, and how to change it');
     ok(S.people[uidOf('nikos@example.com')]?.display_name === 'Νίκος Παπαδάκης' && S.people[uidOf('nikos@example.com')].dm_from === 'buddies', 'his row: his name, findable, messages from buddies only (the default)');
@@ -171,7 +171,7 @@ c = canvas.Canvas(sys.argv[1]); c.drawString(72, 720, 'Genetics summary'); c.sho
     await iro.click('.vt-upbtn'); await wait(300); await iro.setInputFiles('.vt-upload .vt-pick', [PDF]); await wait(500);
     const fld = k => `.vt-upload [data-k="${k}"]`;
     await iro.fill(fld('university'), 'University of Crete'); await iro.fill(fld('department'), 'Biology'); await iro.fill(fld('course'), 'Genetics');
-    await iro.selectOption(fld('year'), '2023'); await iro.selectOption(fld('semester'), '3'); await iro.selectOption(fld('kind'), 'summary'); await iro.selectOption(fld('subject'), 'biology');
+    await iro.selectOption(fld('year'), '2023'); await iro.selectOption(fld('semester'), '3'); await iro.selectOption(fld('kind'), 'summary'); await iro.fill(fld('fieldq'), 'Biology'); await wait(300); await iro.press(fld('fieldq'), 'Enter');
     ok(await iro.inputValue('.vt-where') === g.id, 'uploading from the group’s folder: “Who sees it” is the group');
     await iro.check('.vt-rules'); await iro.click('.vt-go');
     ok(await until(() => srv.state.vfiles.some(f => f.room === g.id && f.status === 'ok'), 20000), 'the file is in the group’s folder');

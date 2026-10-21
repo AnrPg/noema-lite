@@ -29,6 +29,11 @@ function start({ port = 54321, staticDir = null, configOverride = null, maxObjec
   /* ---------- 🗄️ the vault: table noema_vault_files (own rows only), view noema_vault (no uploader), ratings, reports,
      the rpcs noema_vault_finish / noema_vault_count, bucket noema-vault (rules as in cloud/supabase.sql §13) ---------- */
   const vfiles = [], vrat = [], vrep = [], vhits = new Set(), vobj = {};
+  /* 🧭 the fields (§13b): the seed of tools/vault_fields, proposals (seen by their proposer), an app from before them sends a subject */
+  const vfields = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'tools/vault_fields/fields.json'), 'utf8')).map(f => ({ ...f, aliases: [], status: 'accepted', source: 'seed', updated_at: '2026-10-21T00:00:00.000Z' }));
+  const VSUBJ = Object.fromEntries(fs.readFileSync(path.join(__dirname, '..', 'tools/vault_fields/subjects_map.txt'), 'utf8').split('\n').filter(l => l && l[0] !== '#').map(l => l.trim().split(/\s+/)));
+  const fsees = (f, uid) => f.status === 'accepted' || (f.status === 'proposed' && f.proposed_by === uid);
+  const ffold = x => String(x || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
   /* ---------- 👥 people, buddies, conversations, study groups (tests/mock_social.js, cloud/supabase.sql §12) ---------- */
   const so = require('./mock_social')({ json, filt, rls, dupe, repr, users, profiles, vfiles, curs });
   const vsees = (f, uid) => (f.status === 'ok' && (!f.room || so.joined(f.room, uid))) || f.uploader === uid;   // a group's files: its members
@@ -42,6 +47,23 @@ function start({ port = 54321, staticDir = null, configOverride = null, maxObjec
     const M = req.method, sp = [...u.searchParams.entries()];
     if (!/^\/(rest\/v1\/(noema_vault|rpc\/noema_vault)|storage\/v1\/object\/(authenticated\/)?noema-vault)/.test(p)) return;
     if (!uid) return json(res, 401, { message: 'JWT required' });
+    if (p === '/rest/v1/noema_vault_fields' && M === 'GET') {
+      const rows = vfields.filter(f => fsees(f, uid));
+      if (u.searchParams.get('select') === 'updated_at') return json(res, 200, [{ updated_at: rows.map(f => f.updated_at).sort().pop() }]);
+      const off = +u.searchParams.get('offset') || 0, lim = Math.min(+u.searchParams.get('limit') || 1000, 1000);   // Supabase's max rows
+      return json(res, 200, filt(rows, sp.filter(([k]) => k !== 'status')).sort((a, b) => a.id < b.id ? -1 : 1).slice(off, off + lim)); }
+    if (p === '/rest/v1/rpc/noema_vault_field_propose') {
+      const nm = tidy(data.name); if (nm.length < 2 || nm.length > 80) return json(res, 400, { code: 'P0001', message: 'name: 2 to 80 characters' });
+      const same = vfields.find(f => fsees(f, uid) && [...Object.values(f.names), ...f.aliases].some(x => ffold(x) === ffold(nm))); if (same) return json(res, 200, same.id);
+      const id = 'u_' + crypto.randomBytes(6).toString('hex');
+      vfields.push({ id, names: { [data.lang]: nm }, aliases: [], parents: (data.parents || []).filter(x => vfields.some(f => f.id === x && f.status === 'accepted')), status: 'proposed', source: 'user', proposed_by: uid, updated_at: now() });
+      return json(res, 200, id); }
+    if (p === '/rest/v1/rpc/noema_vault_field_suggest') {   // the fields of others' files with a similar title (a shared word of 5+ letters) or the same course
+      const words = t => new Set(ffold(t).split(/[^\p{L}\p{N}]+/u).filter(w => w.length >= 5)), mine = words(data.title), n = {};
+      for (const f of vfiles) if (f.status === 'ok' && !f.room && f.uploader !== uid && ([...words(f.title)].some(w => mine.has(w)) || (data.course && f.course && ffold(f.course) === ffold(data.course)))) for (const x of f.fields) n[x] = (n[x] || 0) + 1;
+      return json(res, 200, Object.entries(n).sort((a, b) => b[1] - a[1]).slice(0, 8).map(([field, c]) => ({ field, n: c }))); }
+    if (/^\/rest\/v1\/rpc\/noema_vault_fields_(queue|save)$/.test(p)) return json(res, 400, { code: 'P0001', message: 'admins only' });
+    const known = (ids, uid) => ids.length >= 1 && ids.length <= 12 && ids.every(x => vfields.some(f => f.id === x && fsees(f, uid)));
     if (p === '/rest/v1/noema_vault' && M === 'GET') return json(res, 200, filt(vfiles.filter(f => vsees(f, uid)).map(f => vview(f, uid)), sp).sort((a, b) => a.created_at < b.created_at ? 1 : -1));
     if (p === '/rest/v1/noema_vault_files') {
       const mine = filt(vfiles.filter(f => f.uploader === uid), sp);
@@ -50,13 +72,15 @@ function start({ port = 54321, staticDir = null, configOverride = null, maxObjec
         const used = so.used(uid);
         if (r.room && !(so.joined(r.room, uid) && so.state.rooms[r.room]?.kind === 'group')) return json(res, 400, { code: 'P0001', message: 'not a member of this group' });
         if (r.uploader && r.uploader !== uid) return rls(res);
-        if (!VKINDS.includes(r.kind) || !VPATH.test(r.path || '') || !(r.size > 0 && r.size <= 20971520) || !r.title || !r.university || !r.department || !r.course || !r.year || !(r.semester >= 1 && r.semester <= 12) || !/^[a-z][a-z_]{1,40}$/.test(r.subject || '') || !r.language) return json(res, 400, { code: '23514', message: 'new row violates check constraint' });
+        if (!VKINDS.includes(r.kind) || !VPATH.test(r.path || '') || !(r.size > 0 && r.size <= 20971520) || !r.title || (r.semester != null && !(r.semester >= 1 && r.semester <= 12)) || !r.language) return json(res, 400, { code: '23514', message: 'new row violates check constraint' });
+        r.fields = [...new Set(r.fields?.length ? r.fields : r.subject ? [VSUBJ[r.subject] || 'b_ah'] : [])];
+        if (!known(r.fields, uid)) return json(res, 400, { code: 'P0001', message: 'unknown field' });
         if (used + r.size > 52428800) return json(res, 400, { code: 'P0001', message: `vault quota: ${used} of 52428800 bytes used` });
         if (vfiles.some(f => f.path === r.path || f.id === r.id)) return dupe(res);
-        vfiles.push({ id: r.id || crypto.randomUUID(), ...r, uploader: uid, university: tidy(r.university), department: tidy(r.department), course: tidy(r.course), professor: tidy(r.professor) || null,
+        vfiles.push({ id: r.id || crypto.randomUUID(), ...r, uploader: uid, university: tidy(r.university) || null, department: tidy(r.department) || null, course: tidy(r.course) || null, professor: tidy(r.professor) || null,
           room: r.room || null, uploader_name: r.show_name ? (profiles[uid]?.display_name || users[uid]?.meta?.name || null) : null, status: 'pending', rating_sum: 0, rating_n: 0, downloads: 0, used: 0, reports: 0, created_at: now() }); }
         return json(res, 201); }
-      if (M === 'PATCH') { const keep = ['id', 'room', 'uploader', 'status', 'path', 'size', 'mime', 'file_name', 'rating_sum', 'rating_n', 'downloads', 'used', 'reports', 'created_at'];
+      if (M === 'PATCH') { if (data.fields && !known(data.fields, uid)) return json(res, 400, { code: 'P0001', message: 'unknown field' }); const keep = ['id', 'room', 'uploader', 'status', 'path', 'size', 'mime', 'file_name', 'rating_sum', 'rating_n', 'downloads', 'used', 'reports', 'created_at'];
         for (const f of mine) { const o = { ...f }; Object.assign(f, data); for (const k of keep) f[k] = o[k]; f.uploader_name = f.show_name ? (profiles[uid]?.display_name || users[uid]?.meta?.name || null) : null; } return json(res, 204); }
       if (M === 'DELETE') { for (const f of mine) vfiles.splice(vfiles.indexOf(f), 1); return json(res, 204); }
     }
@@ -199,7 +223,10 @@ function start({ port = 54321, staticDir = null, configOverride = null, maxObjec
       if (p === '/rest/v1/noema_kv') {
         kv[uid] = kv[uid] || {};
         const kq = u.searchParams.get('key') || '', likeRe = /^like\./.test(kq) ? new RegExp('^' + kq.slice(5).replace(/[.+?^${}()|[\]\\]/g, '\\$&').replace(/\*/g, '.*') + '$') : null;   // PostgREST like.<pattern> (* = %)
-        if (req.method === 'GET') return json(res, 200, Object.entries(kv[uid]).filter(([key]) => likeRe ? likeRe.test(key) : !q('key') || key === decodeURIComponent(q('key'))).sort(([a], [b]) => a < b ? -1 : 1).map(([key, v]) => ({ key, value: v.value, updated_at: v.updated_at })));
+        // PostgREST in.("k1","k2") (quoted, \" and \\ escaped)
+        const inSet = /^in\./.test(kq) ? new Set([...kq.slice(3).matchAll(/"((?:[^"\\]|\\.)*)"/g)].map(m => m[1].replace(/\\(.)/g, '$1'))) : null;
+        const sel = (u.searchParams.get('select') || '*').split(','); if (sel.includes('*')) sel.push('value');
+        if (req.method === 'GET') return json(res, 200, Object.entries(kv[uid]).filter(([key]) => likeRe ? likeRe.test(key) : inSet ? inSet.has(key) : !q('key') || key === decodeURIComponent(q('key'))).sort(([a], [b]) => a < b ? -1 : 1).map(([key, v]) => sel.includes('value') ? { key, value: v.value, updated_at: v.updated_at } : { key, updated_at: v.updated_at }));
         if (req.method === 'POST') {   // upsert (merge-duplicates) or insert-if-absent (ignore-duplicates); return=representation → the rows written
           const pref = req.headers.prefer || '', keep = /ignore-duplicates/.test(pref), out = [];
           for (const r of data) { if (r.user_id !== uid) return json(res, 403, { message: 'new row violates row-level security policy' }); if (keep && kv[uid][r.key]) continue; kv[uid][r.key] = { value: r.value, updated_at: r.updated_at }; out.push({ user_id: uid, key: r.key, value: r.value, updated_at: r.updated_at }); }
@@ -274,7 +301,7 @@ function start({ port = 54321, staticDir = null, configOverride = null, maxObjec
       json(res, 404, { message: 'not found ' + p });
     });
   });
-  server.log = []; server.state = { users, kv, snaps, files, profiles, convs: {}, authz: {}, consents: [], callbacks: [], pubFiles, shrFiles, pubPacks, shares, pages, curs, mems, steps, curFiles, stepWrites: 0, vfiles, vrat, vrep, vobj, social: so.state };
+  server.log = []; server.state = { users, kv, snaps, files, profiles, convs: {}, authz: {}, consents: [], callbacks: [], pubFiles, shrFiles, pubPacks, shares, pages, curs, mems, steps, curFiles, stepWrites: 0, vfiles, vrat, vrep, vobj, vfields, social: so.state };
   return new Promise(r => server.listen(port, () => r(server)));
 }
 module.exports = { start };

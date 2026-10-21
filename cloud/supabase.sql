@@ -799,8 +799,9 @@ create policy "noema chat delete" on storage.objects for delete to authenticated
 
 -- 13) 🗄️ THE VAULT (docs/VAULT.md): files students share — notes, slides, past exams (with or without solutions),
 --     exercise sets, lab work, summaries, books, recordings. Strictly organised: every file carries its university,
---     department, course, year, semester, type, subject (a key of the app's shared list) and language — required — so
---     the folders (university › department › course › year › type) and every filter work across all of them.
+--     department, course, year and semester when known (they differ from place to place: all optional), and always its type,
+--     fields (§13b: 1–12 of the shared graph of fields) and languages (one or more: el,ru), so the folders (university › department ›
+--     course › year › type; what is not given: a folder of its own) and every filter work across all of them.
 --     ANONYMOUS: the uploader is kept here for deleting and take-downs, but nobody else can read it: the table shows
 --     each person only their own rows; everybody reads the view noema_vault, which has no uploader column (only the
 --     name of those who chose to show it, taken from their profile). Free plan: files ≤ 20 MB, ≤ 50 MB per person.
@@ -814,15 +815,16 @@ create table if not exists public.noema_vault_files (
   status        text not null default 'pending' check (status in ('pending', 'ok', 'hidden')),
   title         text not null check (char_length(title) between 1 and 160),
   description   text check (char_length(description) <= 1000),
-  university    text not null check (char_length(university) between 2 and 120),
-  department    text not null check (char_length(department) between 2 and 120),
-  course        text not null check (char_length(course) between 2 and 160),
+  university    text check (char_length(university) between 2 and 120),
+  department    text check (char_length(department) between 2 and 120),
+  course        text check (char_length(course) between 2 and 160),
   professor     text check (char_length(professor) <= 120),
-  year          int  not null check (year between 1950 and 2100),
-  semester      int  not null check (semester between 1 and 12),
+  year          int  check (year between 1950 and 2100),
+  semester      int  check (semester between 1 and 12),   -- none: any semester
   kind          text not null check (kind in ('notes', 'slides', 'exam', 'exam_solved', 'exercises', 'lab', 'summary', 'book', 'recording', 'other')),
-  subject       text not null check (subject ~ '^[a-z][a-z_]{1,40}$'),
-  language      text not null check (language ~ '^[a-z]{2,3}(-[A-Za-z]{2,4})?$'),
+  subject       text check (subject ~ '^[a-z][a-z_]{1,40}$'),   -- before the fields (§13b): a key of the app's old fixed list
+  fields        text[] not null default '{}',                     -- §13b: 1–12 fields of the shared graph
+  language      text not null check (language ~ '^[a-z]{2,3}(-[A-Za-z]{2,4})?(,[a-z]{2,3}(-[A-Za-z]{2,4})?){0,7}$'),   -- one or more: el,ru
   has_exercises boolean not null default false,
   has_solutions boolean not null default false,
   handwritten   boolean not null default false,
@@ -840,6 +842,12 @@ create table if not exists public.noema_vault_files (
   created_at    timestamptz not null default now()
 );
 alter table public.noema_vault_files add column if not exists room uuid references public.noema_rooms(id) on delete cascade;   -- (made before 2026-10-21 without it)
+alter table public.noema_vault_files add column if not exists fields text[] not null default '{}';   -- §13b
+-- (made before the evening of 2026-10-21: university, department, course, year and semester required, one language)
+alter table public.noema_vault_files alter column university drop not null, alter column department drop not null, alter column course drop not null,
+  alter column year drop not null, alter column semester drop not null;
+alter table public.noema_vault_files drop constraint if exists noema_vault_files_language_check;
+alter table public.noema_vault_files add constraint noema_vault_files_language_check check (language ~ '^[a-z]{2,3}(-[A-Za-z]{2,4})?(,[a-z]{2,3}(-[A-Za-z]{2,4})?){0,7}$');
 create index if not exists noema_vault_files_where on public.noema_vault_files (university, department, course, year, kind);
 create index if not exists noema_vault_files_up    on public.noema_vault_files (uploader);
 create table if not exists public.noema_vault_ratings (
@@ -883,8 +891,8 @@ declare used_bytes bigint; nm text;
 begin
   if current_setting('noema.vault', true) = 'server' then return new; end if;
   if tg_op = 'INSERT' then new.uploader := auth.uid(); end if;
-  new.university := regexp_replace(btrim(new.university), '\s+', ' ', 'g'); new.department := regexp_replace(btrim(new.department), '\s+', ' ', 'g');
-  new.course := regexp_replace(btrim(new.course), '\s+', ' ', 'g'); new.professor := nullif(regexp_replace(btrim(coalesce(new.professor, '')), '\s+', ' ', 'g'), '');
+  new.university := nullif(regexp_replace(btrim(new.university), '\s+', ' ', 'g'), ''); new.department := nullif(regexp_replace(btrim(new.department), '\s+', ' ', 'g'), '');
+  new.course := nullif(regexp_replace(btrim(new.course), '\s+', ' ', 'g'), ''); new.professor := nullif(regexp_replace(btrim(coalesce(new.professor, '')), '\s+', ' ', 'g'), '');
   select display_name into nm from public.noema_profiles where user_id = new.uploader;
   new.uploader_name := case when new.show_name then coalesce(nullif(btrim(nm), ''), new.uploader_name) else null end;
   if tg_op = 'INSERT' then
@@ -905,7 +913,7 @@ create trigger noema_vault_guard before insert or update on public.noema_vault_f
 create or replace view public.noema_vault as
   select id, case when show_name then uploader_name end as uploader_name, (uploader = auth.uid()) as mine, status, title, description,
          university, department, course, professor, year, semester, kind, subject, language, has_exercises, has_solutions, handwritten,
-         file_name, mime, size, pages, path, rating_sum, rating_n, downloads, used, created_at, room
+         file_name, mime, size, pages, path, rating_sum, rating_n, downloads, used, created_at, room, fields
   from public.noema_vault_files where (status = 'ok' and (room is null or public.noema_room_joined(room))) or uploader = auth.uid();   -- a group's files: its members
 revoke all on public.noema_vault from anon;
 grant select on public.noema_vault to authenticated;
@@ -970,5 +978,176 @@ create policy "noema vault insert" on storage.objects for insert to authenticate
 create policy "noema vault update" on storage.objects for update to authenticated using       (bucket_id = 'noema-vault' and public.noema_vault_writable(name));
 create policy "noema vault delete" on storage.objects for delete to authenticated using       (bucket_id = 'noema-vault' and public.noema_vault_writable(name));
 
--- 14) Check: should list the 23 noema_ tables with rls_enabled = true
+-- 13b) 🧭 THE FIELDS OF THE VAULT (docs/VAULT.md §Fields): a shared graph of fields of study. A field may sit under many
+--     parents (Medical physics under Physics and under Medicine: a DAG, not a tree); a file carries 1–12 fields. The top
+--     are the ten broad fields of ISCED-F 2013 (b_ed … b_sv), below them disciplines from Wikidata (ids Q…), then fields
+--     people propose (u_…). Every accepted field has its name in every UI locale (names: {"en": …, "el": …}) and is seen
+--     by everybody at once. People PROPOSE a field (noema_vault_field_propose: 'proposed', seen by its proposer, usable on
+--     their own files at once); Claude, through the noema connector, accepts, translates, places, merges or rejects them
+--     (noema_vault_fields_save, only for the people in noema_admins). The seed: cloud/vault_fields_seed.sql (run it after
+--     this script; tools/vault_fields/build_seed.py makes it).
+create extension if not exists pg_trgm;
+create table if not exists public.noema_vault_fields (
+  id          text primary key check (id ~ '^(Q[0-9]{1,12}|b_[a-z]{2}|u_[0-9a-f]{12})$'),
+  names       jsonb not null check (jsonb_typeof(names) = 'object' and names <> '{}'::jsonb),   -- locale → name
+  aliases     text[] not null default '{}' check (cardinality(aliases) <= 40),                  -- other names, any language (search)
+  parents     text[] not null default '{}' check (cardinality(parents) <= 12),
+  status      text not null default 'proposed' check (status in ('accepted', 'proposed', 'rejected', 'merged')),
+  merged_into text,
+  source      text not null default 'user' check (source in ('isced', 'wikidata', 'user', 'claude')),
+  proposed_by uuid references auth.users(id) on delete set null,
+  note        text check (char_length(note) <= 600),
+  created_at  timestamptz not null default now(),
+  updated_at  timestamptz not null default now()
+);
+create index if not exists noema_vault_fields_parents on public.noema_vault_fields using gin (parents);
+-- who may accept and translate fields (Claude works as one of them through the connector): add yourself with
+--   insert into public.noema_admins (user_id) select id from auth.users where email = 'you@example.com';
+create table if not exists public.noema_admins (
+  user_id uuid primary key references auth.users(id) on delete cascade,
+  at      timestamptz not null default now()
+);
+alter table public.noema_vault_fields enable row level security;
+alter table public.noema_admins       enable row level security;
+create or replace function public.noema_is_admin() returns boolean language sql stable security definer set search_path = public as $$
+  select exists (select 1 from public.noema_admins where user_id = auth.uid()) $$;
+drop policy if exists "vault fields: accepted, mine, admins" on public.noema_vault_fields;
+create policy "vault fields: accepted, mine, admins" on public.noema_vault_fields for select to authenticated
+  using (status = 'accepted' or proposed_by = (select auth.uid()) or public.noema_is_admin());   -- writing: only the functions below
+drop policy if exists "admins: self" on public.noema_admins;
+create policy "admins: self" on public.noema_admins for select to authenticated using (user_id = (select auth.uid()));
+
+-- the fields of the files (made before the fields: one key of the app's fixed list in "subject"; the column: §13)
+alter table public.noema_vault_files alter column subject drop not null;
+create or replace function public.noema_vault_subject_field(s text) returns text language sql immutable as $$
+  select case s when 'math' then 'Q395' when 'statistics' then 'Q12483' when 'physics' then 'Q413' when 'chemistry' then 'Q2329' when 'biology' then 'Q420' when 'medicine' then 'Q11190' when 'nursing' then 'Q121176' when 'pharmacy' then 'Q614304' when 'dentistry' then 'Q12128' when 'veterinary' then 'Q170201' when 'cs' then 'Q21198' when 'electrical' then 'Q43035' when 'mechanical' then 'Q101333' when 'civil' then 'Q77590' when 'chemical_eng' then 'Q83588' when 'architecture' then 'Q12271' when 'economics' then 'Q8134' when 'business' then 'Q2043282' when 'accounting' then 'Q4116214' when 'law' then 'Q7748' when 'political' then 'Q36442' when 'sociology' then 'Q21201' when 'psychology' then 'Q9418' when 'education' then 'Q8434' when 'philosophy' then 'Q5891' when 'history' then 'Q309' when 'archaeology' then 'Q23498' when 'literature' then 'Q8242' when 'linguistics' then 'Q8162' when 'languages' then 'b_ah' when 'arts' then 'Q735' when 'music' then 'Q638' when 'geography' then 'Q1071' when 'geology' then 'Q1069' when 'environment' then 'Q188847' when 'agriculture' then 'Q11451' when 'communication' then 'Q11024' when 'theology' then 'Q34178' when 'sports' then 'Q1298380' else 'b_ah' end $$;
+do $$ begin
+  perform set_config('noema.vault', 'server', true);
+  update public.noema_vault_files set fields = array[public.noema_vault_subject_field(subject)] where cardinality(fields) = 0 and subject is not null and subject <> 'other';
+  update public.noema_vault_files set fields = array['b_sv'] where cardinality(fields) = 0;
+  perform set_config('noema.vault', '', true);
+end $$;
+alter table public.noema_vault_files drop constraint if exists noema_vault_files_fields_check;
+alter table public.noema_vault_files add constraint noema_vault_files_fields_check check (cardinality(fields) between 1 and 12);
+create index if not exists noema_vault_files_fields on public.noema_vault_files using gin (fields);
+-- the files' fields: known ones (accepted, or proposed by the uploader); an app from before the fields sends a subject
+create or replace function public.noema_vault_fields_guard() returns trigger language plpgsql security definer set search_path = public as $$
+begin
+  if current_setting('noema.vault', true) = 'server' then return new; end if;
+  if cardinality(new.fields) = 0 and new.subject is not null then new.fields := array[public.noema_vault_subject_field(new.subject)]; end if;
+  new.fields := array(select distinct x from unnest(new.fields) x);
+  if exists (select 1 from unnest(new.fields) x where not exists (select 1 from public.noema_vault_fields f where f.id = x and (f.status = 'accepted' or (f.status = 'proposed' and f.proposed_by = auth.uid())))) then
+    raise exception 'unknown field' using errcode = 'P0001';
+  end if;
+  return new;
+end $$;
+drop trigger if exists noema_vault_fields_guard on public.noema_vault_files;
+create trigger noema_vault_fields_guard before insert or update on public.noema_vault_files for each row execute function public.noema_vault_fields_guard();
+
+-- 🧭 propose a field: the same name (any language) of a known field gives that field back; ≤ 10 proposals a day
+create or replace function public.noema_vault_field_propose(name text, lang text, parents text[] default '{}') returns text language plpgsql security definer set search_path = public as $$
+declare nm text := regexp_replace(btrim(coalesce(name, '')), '\s+', ' ', 'g'); found_id text; nid text;
+begin
+  if auth.uid() is null then raise exception 'not signed in'; end if;
+  if char_length(nm) not between 2 and 80 then raise exception 'name: 2 to 80 characters' using errcode = 'P0001'; end if;
+  if lang !~ '^[a-z]{2,3}(-[A-Za-z]{2,4})?$' then raise exception 'bad language' using errcode = 'P0001'; end if;
+  select f.id into found_id from public.noema_vault_fields f
+    where f.status in ('accepted', 'proposed') and (f.status = 'accepted' or f.proposed_by = auth.uid())
+      and (exists (select 1 from jsonb_each_text(f.names) e where lower(e.value) = lower(nm)) or exists (select 1 from unnest(f.aliases) a where lower(a) = lower(nm)))
+    order by (f.status = 'accepted') desc limit 1;
+  if found_id is not null then return found_id; end if;
+  if (select count(*) from public.noema_vault_fields where proposed_by = auth.uid() and created_at > now() - interval '1 day') >= 10 then
+    raise exception 'too many proposals today' using errcode = 'P0001';
+  end if;
+  nid := 'u_' || substr(md5(gen_random_uuid()::text), 1, 12);
+  insert into public.noema_vault_fields (id, names, parents, status, source, proposed_by)
+    values (nid, jsonb_build_object(lang, nm), array(select distinct p from unnest(coalesce(parents, '{}')) p where exists (select 1 from public.noema_vault_fields f where f.id = p and f.status = 'accepted') limit 12), 'proposed', 'user', auth.uid());
+  return nid;
+end $$;
+
+-- 🧭 what others chose for files like this one: fields of files with a similar title or course (counts only, nobody's name)
+create or replace function public.noema_vault_field_suggest(title text, course text default null) returns table (field text, n int) language sql stable security definer set search_path = public as $$
+  select x, count(*)::int from public.noema_vault_files v, unnest(v.fields) x
+  where v.status = 'ok' and v.room is null and v.uploader <> auth.uid()
+    and (similarity(lower(v.title), lower(coalesce(title, ''))) > 0.35 or (coalesce(course, '') <> '' and v.course is not null and similarity(lower(v.course), lower(course)) > 0.45))
+    and exists (select 1 from public.noema_vault_fields f where f.id = x and f.status = 'accepted')
+  group by x order by 2 desc limit 8 $$;
+
+-- 🧭 for Claude (admins): what waits — the proposals (with how many files use them) and accepted fields missing a name
+create or replace function public.noema_vault_fields_queue(locales text[], lim int default 50) returns jsonb language plpgsql stable security definer set search_path = public as $$
+begin
+  if not public.noema_is_admin() then raise exception 'admins only'; end if;
+  return jsonb_build_object(
+    'proposed', coalesce((select jsonb_agg(jsonb_build_object('id', f.id, 'names', f.names, 'parents', f.parents, 'created_at', f.created_at,
+        'files', (select count(*) from public.noema_vault_files v where f.id = any(v.fields)),
+        'titles', (select jsonb_agg(t) from (select v.title t from public.noema_vault_files v where f.id = any(v.fields) limit 5) q)))
+      from (select * from public.noema_vault_fields where status = 'proposed' order by created_at limit lim) f), '[]'::jsonb),
+    'untranslated', coalesce((select jsonb_agg(jsonb_build_object('id', f.id, 'names', f.names, 'missing', (select jsonb_agg(l) from unnest(locales) l where not f.names ? l)))
+      from (select * from public.noema_vault_fields f2 where status = 'accepted' and exists (select 1 from unnest(locales) l where not f2.names ? l) order by id limit lim) f), '[]'::jsonb),
+    'counts', jsonb_build_object('accepted', (select count(*) from public.noema_vault_fields where status = 'accepted'),
+      'proposed', (select count(*) from public.noema_vault_fields where status = 'proposed'),
+      'untranslated', (select count(*) from public.noema_vault_fields f2 where status = 'accepted' and exists (select 1 from unnest(locales) l where not f2.names ? l))));
+end $$;
+
+-- 🧭 for Claude (admins): change fields. Each item: {"id"?, "names"? (added to the names), "aliases"? (added), "parents"?
+--     (replace) | "add_parents"?, "status"? accepted|rejected, "merge_into"? (its files and children move there), "note"?}.
+--     No id: a new accepted field. A parent must exist and must not be the field or below it (the graph stays a DAG).
+create or replace function public.noema_vault_fields_save(items jsonb) returns jsonb language plpgsql security definer set search_path = public as $$
+declare it jsonb; fid text; ps text[]; tgt text; done jsonb := '[]'::jsonb; cur public.noema_vault_fields;
+begin
+  if not public.noema_is_admin() then raise exception 'admins only'; end if;
+  if jsonb_typeof(items) <> 'array' or jsonb_array_length(items) > 200 then raise exception 'items: an array of at most 200'; end if;
+  for it in select * from jsonb_array_elements(items) loop
+    fid := it->>'id';
+    if fid is null then
+      fid := 'u_' || substr(md5(gen_random_uuid()::text), 1, 12);
+      insert into public.noema_vault_fields (id, names, status, source) values (fid, coalesce(it->'names', '{}'::jsonb), 'accepted', 'claude');
+    end if;
+    select * into cur from public.noema_vault_fields where id = fid for update;
+    if not found then raise exception 'no field %', fid; end if;
+    if it ? 'names' then
+      if exists (select 1 from jsonb_each(it->'names') e where jsonb_typeof(e.value) <> 'string' or e.key !~ '^[a-z]{2,3}(-[A-Za-z]{2,4})?$' or char_length(e.value #>> '{}') not between 1 and 120) then raise exception 'bad names for %', fid; end if;
+      update public.noema_vault_fields set names = names || (it->'names') where id = fid;
+    end if;
+    if it ? 'aliases' then
+      update public.noema_vault_fields set aliases = (select array(select distinct a from unnest(aliases || array(select jsonb_array_elements_text(it->'aliases'))) a limit 40)) where id = fid;
+    end if;
+    if it ? 'parents' or it ? 'add_parents' then
+      ps := case when it ? 'parents' then array(select jsonb_array_elements_text(it->'parents')) else cur.parents || array(select jsonb_array_elements_text(it->'add_parents')) end;
+      ps := array(select distinct p from unnest(ps) p);
+      if exists (select 1 from unnest(ps) p where not exists (select 1 from public.noema_vault_fields f where f.id = p and f.status = 'accepted')) then raise exception 'unknown parent for %', fid; end if;
+      if fid = any(ps) or exists (with recursive down(id) as (select f.id from public.noema_vault_fields f where fid = any(f.parents)
+            union select f.id from public.noema_vault_fields f join down on down.id = any(f.parents)) select 1 from down where down.id = any(ps)) then
+        raise exception 'a parent of % is below it', fid;
+      end if;
+      update public.noema_vault_fields set parents = ps where id = fid;
+    end if;
+    if it ? 'note' then update public.noema_vault_fields set note = it->>'note' where id = fid; end if;
+    tgt := it->>'merge_into';
+    if tgt is not null then
+      if tgt = fid or not exists (select 1 from public.noema_vault_fields where id = tgt and status = 'accepted') then raise exception 'bad merge target for %', fid; end if;
+      perform set_config('noema.vault', 'server', true);
+      update public.noema_vault_files set fields = array(select distinct case when x = fid then tgt else x end from unnest(fields) x) where fid = any(fields);
+      update public.noema_vault_fields set parents = array(select distinct case when x = fid then tgt else x end from unnest(parents) x) where fid = any(parents) and id <> tgt;
+      update public.noema_vault_fields set parents = array_remove(parents, fid) where id = tgt;
+      update public.noema_vault_fields set status = 'merged', merged_into = tgt,
+        aliases = (select array(select distinct a from unnest(public.noema_vault_fields.aliases || array(select value from jsonb_each_text(names))) a limit 40)) where id = fid;
+      update public.noema_vault_fields t set aliases = (select array(select distinct a from unnest(t.aliases || array(select value from jsonb_each_text(m.names))) a limit 40))
+        from public.noema_vault_fields m where t.id = tgt and m.id = fid;
+    elsif it->>'status' in ('accepted', 'rejected') then
+      if it->>'status' = 'accepted' and not ((select names from public.noema_vault_fields where id = fid) ? 'en') then raise exception '% needs an English name to be accepted', fid; end if;
+      if it->>'status' = 'rejected' and exists (select 1 from public.noema_vault_files v where fid = any(v.fields)) then raise exception '% is used by files: merge it instead', fid; end if;
+      update public.noema_vault_fields set status = it->>'status' where id = fid;
+    end if;
+    update public.noema_vault_fields set updated_at = now() where id = fid;
+    done := done || to_jsonb(fid);
+  end loop;
+  return jsonb_build_object('saved', done);
+end $$;
+revoke execute on function public.noema_vault_fields_queue(text[], int) from anon;
+revoke execute on function public.noema_vault_fields_save(jsonb) from anon;
+revoke execute on function public.noema_vault_field_propose(text, text, text[]) from anon;
+revoke execute on function public.noema_vault_field_suggest(text, text) from anon;
+
+-- 14) Check: should list the 25 noema_ tables with rls_enabled = true
 select tablename, rowsecurity as rls_enabled from pg_tables where schemaname = 'public' and tablename like 'noema_%' order by 1;
