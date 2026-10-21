@@ -3697,5 +3697,265 @@
   "roadmap.map.guide.c.ownLine": "a line of its own at the end",
   "@roadmap.map.guide.c.ownLine": {
     "description": "Import guide, left column, after the syntax “📎 Files — ” (keep “📎 Files”, the parser reads it)."
+  },
+  "roadmap.map.src.title": "From your sources",
+  "@roadmap.map.src.title": {
+    "description": "Title of the “From your sources” wizard and its button: give all your study material at once; the app proposes one subject or a Roadmap. Short."
+  },
+  "roadmap.map.src.lead": "Give all your material at once: the app proposes one subject or a Roadmap, and you decide.",
+  "@roadmap.map.src.lead": {
+    "description": "Lead line under the wizard title; also the button tooltip."
+  },
+  "roadmap.map.src.material": "Your material",
+  "@roadmap.map.src.material": {
+    "description": "Step 1 heading of the wizard: the files to use."
+  },
+  "roadmap.map.src.materialTip": "PDFs, slides, documents, notes, pictures, recordings, a folder or a .zip. The files are read on this device; only their outlines and first lines go to the AI that makes the proposal.",
+  "@roadmap.map.src.materialTip": {
+    "description": "ⓘ of step 1: what can be given and what leaves the device."
+  },
+  "roadmap.map.src.choose": "Choose files",
+  "@roadmap.map.src.choose": {
+    "description": "Drop zone button: pick files."
+  },
+  "roadmap.map.src.drag": "or drag them here",
+  "@roadmap.map.src.drag": {
+    "description": "Next to “Choose files” in the drop zone."
+  },
+  "roadmap.map.src.folder": "Add a folder",
+  "@roadmap.map.src.folder": {
+    "description": "Button: add every file of a folder (its sub-folders kept)."
+  },
+  "roadmap.map.src.remove": "Remove {name}",
+  "@roadmap.map.src.remove": {
+    "description": "Screen-reader label of ✕ next to a file. name = the file name.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "book.pdf"
+      }
+    }
+  },
+  "roadmap.map.src.nFiles": "{n, plural, one {# file} other {# files}} · {size}",
+  "@roadmap.map.src.nFiles": {
+    "description": "Count of the files added and their total size (size = e.g. “12.5 MB”).",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      },
+      "size": {
+        "type": "String",
+        "example": "12.5 MB"
+      }
+    }
+  },
+  "roadmap.map.src.titlePh": "Name (optional: the proposal suggests one)",
+  "@roadmap.map.src.titlePh": {
+    "description": "Placeholder of the name field."
+  },
+  "roadmap.map.src.lang": "Language",
+  "@roadmap.map.src.lang": {
+    "description": "Field label: the language the subject or Roadmap is written in."
+  },
+  "roadmap.map.src.goal": "Your goal",
+  "@roadmap.map.src.goal": {
+    "description": "Field label: why the learner studies this."
+  },
+  "roadmap.map.src.goal.exam": "Pass an exam",
+  "@roadmap.map.src.goal.exam": {
+    "description": "Option of “Your goal”."
+  },
+  "roadmap.map.src.goal.understanding": "Understand it deeply",
+  "@roadmap.map.src.goal.understanding": {
+    "description": "Option of “Your goal”."
+  },
+  "roadmap.map.src.goal.project": "Use it in a project",
+  "@roadmap.map.src.goal.project": {
+    "description": "Option of “Your goal”."
+  },
+  "roadmap.map.src.notes": "Notes",
+  "@roadmap.map.src.notes": {
+    "description": "Field label: free notes for the plan."
+  },
+  "roadmap.map.src.notesPh": "Anything the plan should know: what to skip, what matters most…",
+  "@roadmap.map.src.notesPh": {
+    "description": "Placeholder of the notes field."
+  },
+  "roadmap.map.src.who": "Who reads it",
+  "@roadmap.map.src.who": {
+    "description": "Step 2 heading: who reads the material and makes the proposal."
+  },
+  "roadmap.map.src.whoTip": "With a Claude or Gemini key the proposal comes at once. With your Claude app you copy one message and paste its answer back. Without AI the app estimates from the sizes and outlines.",
+  "@roadmap.map.src.whoTip": {
+    "description": "ⓘ of step 2."
+  },
+  "roadmap.map.src.reader": "Read by",
+  "@roadmap.map.src.reader": {
+    "description": "Label of the menu: who reads the material."
+  },
+  "roadmap.map.src.readKey": "AI with my key",
+  "@roadmap.map.src.readKey": {
+    "description": "Option: the AI of the learner’s own Claude or Gemini key."
+  },
+  "roadmap.map.src.readApp": "My Claude app (copy and paste)",
+  "@roadmap.map.src.readApp": {
+    "description": "Option: the learner’s Claude app, by copying a task and pasting the answer."
+  },
+  "roadmap.map.src.readEstimate": "Without AI (an estimate)",
+  "@roadmap.map.src.readEstimate": {
+    "description": "Option: no AI; the app estimates from sizes and outlines."
+  },
+  "roadmap.map.src.read": "Read my material",
+  "@roadmap.map.src.read": {
+    "description": "Primary button of step 2: read the files and make the proposal."
+  },
+  "roadmap.map.src.reading": "Reading {file}",
+  "@roadmap.map.src.reading": {
+    "description": "Progress line while the files are read. file = “(2/5) book.pdf”.",
+    "placeholders": {
+      "file": {
+        "type": "String",
+        "example": "(2/5) book.pdf"
+      }
+    }
+  },
+  "roadmap.map.src.thinking": "Choosing the best shape for it…",
+  "@roadmap.map.src.thinking": {
+    "description": "Progress line while the AI decides between one subject and a Roadmap."
+  },
+  "roadmap.map.src.needFiles": "Add some material first.",
+  "@roadmap.map.src.needFiles": {
+    "description": "Error: “Read my material” with no files."
+  },
+  "roadmap.map.src.appTitle": "Ask your Claude app",
+  "@roadmap.map.src.appTitle": {
+    "description": "Step heading: get the proposal from the learner’s Claude app by copy and paste."
+  },
+  "roadmap.map.src.appTip": "Copy the task, paste it into a new Claude chat, then paste Claude’s whole answer here. Claude sees only the outlines and first lines, not the files.",
+  "@roadmap.map.src.appTip": {
+    "description": "ⓘ of that step."
+  },
+  "roadmap.map.src.copyTask": "Copy the task",
+  "@roadmap.map.src.copyTask": {
+    "description": "Button: copy the task for Claude."
+  },
+  "roadmap.map.src.pastePh": "Paste Claude’s answer here",
+  "@roadmap.map.src.pastePh": {
+    "description": "Placeholder of the answer box."
+  },
+  "roadmap.map.src.orEstimate": "Estimate without AI instead",
+  "@roadmap.map.src.orEstimate": {
+    "description": "Button: skip Claude and let the app estimate."
+  },
+  "roadmap.map.src.proposal": "The proposal",
+  "@roadmap.map.src.proposal": {
+    "description": "Step heading: the proposed shape, with its reasons."
+  },
+  "roadmap.map.src.proposalTip": "Both shapes are ready: pick the other one if you prefer. A subject on the Shelf is a full course, just like a step of a Roadmap.",
+  "@roadmap.map.src.proposalTip": {
+    "description": "ⓘ of the proposal."
+  },
+  "roadmap.map.src.shape.course": "One subject",
+  "@roadmap.map.src.shape.course": {
+    "description": "Choice card: the material as one subject (chapters)."
+  },
+  "roadmap.map.src.shape.roadmap": "A Roadmap",
+  "@roadmap.map.src.shape.roadmap": {
+    "description": "Choice card: the material as a Roadmap (steps)."
+  },
+  "roadmap.map.src.shapeSub.course": "Chapters in one course, on the Shelf",
+  "@roadmap.map.src.shapeSub.course": {
+    "description": "Line on the “One subject” card."
+  },
+  "roadmap.map.src.shapeSub.roadmap": "Steps that open one after another, each a whole subject",
+  "@roadmap.map.src.shapeSub.roadmap": {
+    "description": "Line on the “A Roadmap” card."
+  },
+  "roadmap.map.src.recommended": "Recommended",
+  "@roadmap.map.src.recommended": {
+    "description": "Badge on the proposed shape."
+  },
+  "roadmap.map.src.nChapters": "{n, plural, one {# chapter} other {# chapters}}",
+  "@roadmap.map.src.nChapters": {
+    "description": "Size on the “One subject” card.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "roadmap.map.src.nSteps": "{n, plural, one {# step} other {# steps}}",
+  "@roadmap.map.src.nSteps": {
+    "description": "Size on the “A Roadmap” card.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "roadmap.map.src.name": "Name",
+  "@roadmap.map.src.name": {
+    "description": "Field label: the name of the subject or Roadmap."
+  },
+  "roadmap.map.src.seeChapters": "See the {n, plural, one {chapter} other {# chapters}}",
+  "@roadmap.map.src.seeChapters": {
+    "description": "Fold that lists the proposed chapters, with their files and pages.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "roadmap.map.src.seeSteps": "See the {n, plural, one {step} other {# steps}}",
+  "@roadmap.map.src.seeSteps": {
+    "description": "Fold that lists the proposed steps, with their files and pages.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "roadmap.map.src.build": "Build it",
+  "@roadmap.map.src.build": {
+    "description": "Last step heading: make the chosen shape."
+  },
+  "roadmap.map.src.buildRoadmapTip": "Every file is stored once and linked to its steps with their pages. Each step’s chapters are planned from those pages, and you review every step before it is prepared.",
+  "@roadmap.map.src.buildRoadmapTip": {
+    "description": "ⓘ of the last step for a Roadmap."
+  },
+  "roadmap.map.src.makeRoadmap": "Make the Roadmap",
+  "@roadmap.map.src.makeRoadmap": {
+    "description": "Primary button: create the Roadmap."
+  },
+  "roadmap.map.src.buildCourseTip": "The chapter plan becomes Claude’s brief: each chapter is written from its pages. The subject lands on the Shelf, and you can put it on a Roadmap later.",
+  "@roadmap.map.src.buildCourseTip": {
+    "description": "ⓘ of the last step for one subject."
+  },
+  "roadmap.map.src.makeHere": "Make it here with my Claude key",
+  "@roadmap.map.src.makeHere": {
+    "description": "Primary button: build the subject in the app with the learner’s Claude API key (opens Create with Claude, filled in)."
+  },
+  "roadmap.map.src.noKeyCourse": "A subject is written by Claude: in your Claude app (below), or here with a Claude key from Settings.",
+  "@roadmap.map.src.noKeyCourse": {
+    "description": "Shown when there is no Claude key."
+  },
+  "roadmap.map.src.orApp": "Or in my Claude app",
+  "@roadmap.map.src.orApp": {
+    "description": "Fold: build the subject in the Claude app instead."
+  },
+  "roadmap.map.src.appCourse": "In a new Claude chat with the noema-lite connector, attach these files: {files}. Then paste the message.",
+  "@roadmap.map.src.appCourse": {
+    "description": "How to build the subject in the Claude app. files = the file names.",
+    "placeholders": {
+      "files": {
+        "type": "String",
+        "example": "book.pdf, notes.md"
+      }
+    }
   }
 }

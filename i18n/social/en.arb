@@ -1,0 +1,961 @@
+{
+  "@@locale": "en",
+  "social.title": "People",
+  "@social.title": {
+    "description": "Name of the people page (conversations, study buddies, study groups); also the top-bar button. One word."
+  },
+  "social.lead": "Talk with classmates, find study buddies and keep study groups with their own files and Roadmaps.",
+  "@social.lead": {
+    "description": "Lead line under the People title."
+  },
+  "social.signIn": "Conversations go through the cloud: sign in to a cloud account to talk with others.",
+  "@social.signIn": {
+    "description": "Shown when the learner has no cloud account signed in."
+  },
+  "social.signInBtn": "Sign in or create an account",
+  "@social.signInBtn": {
+    "description": "Button when signed out."
+  },
+  "social.loading": "Loading…",
+  "@social.loading": {
+    "description": "While a list loads."
+  },
+  "social.offline": "This could not be loaded. Check the connection and try again.",
+  "@social.offline": {
+    "description": "Error when the lists cannot be read."
+  },
+  "social.find": "Find people by name",
+  "@social.find": {
+    "description": "Screen-reader label of the people search field."
+  },
+  "social.findPh": "Find people by name…",
+  "@social.findPh": {
+    "description": "Placeholder of the people search field."
+  },
+  "social.foundN": "{n, plural, one {# person} other {# people}}",
+  "@social.foundN": {
+    "description": "How many people the search found.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "social.foundNone": "Nobody with that name. People who hid themselves from search cannot be found.",
+  "@social.foundNone": {
+    "description": "Empty people search."
+  },
+  "social.chats": "Chats",
+  "@social.chats": {
+    "description": "Tab: the conversations."
+  },
+  "social.buddies": "Buddies",
+  "@social.buddies": {
+    "description": "Tab: the study buddies. One word."
+  },
+  "social.groups": "Groups",
+  "@social.groups": {
+    "description": "Tab: the study groups."
+  },
+  "social.newN": "{n, plural, one {# new} other {# new}}",
+  "@social.newN": {
+    "description": "Screen-reader label of a count of new things.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "social.firstNote": "Others can now find you by your name, {name}, and your study buddies can message you. You can change this in Privacy.",
+  "@social.firstNote": {
+    "description": "Note shown the first time the People page opens.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Anna"
+      }
+    }
+  },
+  "social.gotIt": "Got it",
+  "@social.gotIt": {
+    "description": "Button: close the first-time note."
+  },
+  "social.you": "You:",
+  "@social.you": {
+    "description": "Before the preview of my own last message in the list of chats."
+  },
+  "social.youName": "{name} (you)",
+  "@social.youName": {
+    "description": "A member row that is me.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Anna"
+      }
+    }
+  },
+  "social.someone": "Someone",
+  "@social.someone": {
+    "description": "Name used when a person’s name is unknown."
+  },
+  "social.muted": "Muted",
+  "@social.muted": {
+    "description": "Tooltip of the muted sign on a chat."
+  },
+  "social.groupNoMsgs": "No messages yet",
+  "@social.groupNoMsgs": {
+    "description": "Preview of a group without messages."
+  },
+  "social.invitedTo": "You are invited to this study group · {n, plural, one {# member} other {# members}}",
+  "@social.invitedTo": {
+    "description": "Under an invitation to a group.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "social.join": "Join",
+  "@social.join": {
+    "description": "Button: join a group."
+  },
+  "social.decline": "Decline",
+  "@social.decline": {
+    "description": "Button: refuse an invitation or a request."
+  },
+  "social.noChats": "No conversations yet. Find a classmate above, or start a study group.",
+  "@social.noChats": {
+    "description": "Empty chats tab."
+  },
+  "social.requestsGot": "Asked to be your study buddy",
+  "@social.requestsGot": {
+    "description": "Section: buddy requests I received."
+  },
+  "social.myBuddies": "Study buddies",
+  "@social.myBuddies": {
+    "description": "Section: my study buddies."
+  },
+  "social.requestsSent": "You asked",
+  "@social.requestsSent": {
+    "description": "Section: buddy requests I sent."
+  },
+  "social.noBuddies": "No study buddies yet. Search for a classmate by name and ask them.",
+  "@social.noBuddies": {
+    "description": "Empty buddies tab."
+  },
+  "social.newGroup": "New study group",
+  "@social.newGroup": {
+    "description": "Button and dialog title."
+  },
+  "social.newGroupLead": "A group has its own chat, its own folder of the vault and the Roadmaps you share in it. Invite your buddies, or share an invitation link.",
+  "@social.newGroupLead": {
+    "description": "Lead of the new group dialog."
+  },
+  "social.noGroups": "You are in no study group yet.",
+  "@social.noGroups": {
+    "description": "Empty groups tab."
+  },
+  "social.joinLink": "Invitation link",
+  "@social.joinLink": {
+    "description": "Section and label: a link that lets people join a group."
+  },
+  "social.linkPh": "Paste an invitation link",
+  "@social.linkPh": {
+    "description": "Placeholder: paste a group invitation link."
+  },
+  "social.open": "Open",
+  "@social.open": {
+    "description": "Button."
+  },
+  "social.ask": "Ask to be buddies",
+  "@social.ask": {
+    "description": "Button: send a study buddy request."
+  },
+  "social.asked": "You asked {name} to be your study buddy.",
+  "@social.asked": {
+    "description": "Toast after a buddy request.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Anna"
+      }
+    }
+  },
+  "social.nowBuddies": "You and {name} are study buddies now.",
+  "@social.nowBuddies": {
+    "description": "Toast when a request is accepted.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Anna"
+      }
+    }
+  },
+  "social.accept": "Accept",
+  "@social.accept": {
+    "description": "Button: accept a buddy request."
+  },
+  "social.message": "Message",
+  "@social.message": {
+    "description": "Button: open the conversation with this person."
+  },
+  "social.waiting": "Waiting for an answer",
+  "@social.waiting": {
+    "description": "After a buddy request I sent."
+  },
+  "social.theirPage": "Their page",
+  "@social.theirPage": {
+    "description": "Button: open the person’s public page."
+  },
+  "social.cancelAsk": "Take back the request",
+  "@social.cancelAsk": {
+    "description": "Button: cancel my buddy request."
+  },
+  "social.unbuddy": "Stop being buddies",
+  "@social.unbuddy": {
+    "description": "Button: end the study buddy link."
+  },
+  "social.unbuddyQ": "Stop being study buddies with {name}? Your conversation stays.",
+  "@social.unbuddyQ": {
+    "description": "Confirm question.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Anna"
+      }
+    }
+  },
+  "social.block": "Block",
+  "@social.block": {
+    "description": "Button: block this person."
+  },
+  "social.blockQ": "Block {name}? They will not find you, message you or invite you, and you stop being buddies.",
+  "@social.blockQ": {
+    "description": "Confirm question.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Anna"
+      }
+    }
+  },
+  "social.blockedToast": "{name} is blocked.",
+  "@social.blockedToast": {
+    "description": "Toast after blocking.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Anna"
+      }
+    }
+  },
+  "social.unblock": "Unblock",
+  "@social.unblock": {
+    "description": "Button."
+  },
+  "social.privacy": "Privacy",
+  "@social.privacy": {
+    "description": "Menu item and sheet: who can find and message me."
+  },
+  "social.privacySub": "Who can find you and message you",
+  "@social.privacySub": {
+    "description": "Subtitle of Privacy."
+  },
+  "social.blocked": "Blocked people",
+  "@social.blocked": {
+    "description": "Menu item and sheet title."
+  },
+  "social.blockedSub": "Unblock someone",
+  "@social.blockedSub": {
+    "description": "Subtitle of Blocked people."
+  },
+  "social.blockedLead": "They cannot find you, message you or invite you.",
+  "@social.blockedLead": {
+    "description": "Lead of the blocked list."
+  },
+  "social.blockedNone": "You blocked nobody.",
+  "@social.blockedNone": {
+    "description": "Empty blocked list."
+  },
+  "social.howItWorks": "How it works",
+  "@social.howItWorks": {
+    "description": "Menu item."
+  },
+  "social.about1": "People find you by the name of your account. You decide in Privacy whether you can be found, and who may start a conversation with you or invite you to a group: your study buddies (the default), everyone, or nobody.",
+  "@social.about1": {
+    "description": "How it works, paragraph 1."
+  },
+  "social.about2": "Messages are kept on the server so they reach every device; only the people of the conversation can read them, and reported messages can be checked.",
+  "@social.about2": {
+    "description": "How it works, paragraph 2."
+  },
+  "social.about3": "You can send files (the formats of the vault), your subjects, your Roadmaps and files of the vault. Files count towards your {mb} MB, together with the vault.",
+  "@social.about3": {
+    "description": "How it works, paragraph 3.",
+    "placeholders": {
+      "mb": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "social.about4": "Block anyone who bothers you. Three reports hide a message in a group.",
+  "@social.about4": {
+    "description": "How it works, paragraph 4."
+  },
+  "social.shownAs": "Others see you as {name}. Change your name in Settings › Profile.",
+  "@social.shownAs": {
+    "description": "Top of the Privacy sheet.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Anna"
+      }
+    }
+  },
+  "social.findable": "Others can find me by my name",
+  "@social.findable": {
+    "description": "Switch in Privacy."
+  },
+  "social.findableSub": "Off: only your buddies and the people of your groups see you.",
+  "@social.findableSub": {
+    "description": "Explanation of the findable switch."
+  },
+  "social.dmFrom": "Who may message or invite me",
+  "@social.dmFrom": {
+    "description": "Label in Privacy."
+  },
+  "social.dmFromSub": "Anyone may always answer a conversation you started.",
+  "@social.dmFromSub": {
+    "description": "Explanation under it."
+  },
+  "social.from.buddies": "Buddies",
+  "@social.from.buddies": {
+    "description": "Option: only my study buddies."
+  },
+  "social.from.everyone": "Everyone",
+  "@social.from.everyone": {
+    "description": "Option: anyone."
+  },
+  "social.from.nobody": "Nobody",
+  "@social.from.nobody": {
+    "description": "Option: nobody."
+  },
+  "social.save": "Save",
+  "@social.save": {
+    "description": "Button."
+  },
+  "social.saved": "Saved",
+  "@social.saved": {
+    "description": "Toast."
+  },
+  "social.cancel": "Cancel",
+  "@social.cancel": {
+    "description": "Button."
+  },
+  "social.create": "Create",
+  "@social.create": {
+    "description": "Button: create the group."
+  },
+  "social.needName": "Give the group a name.",
+  "@social.needName": {
+    "description": "Error: the group name is missing."
+  },
+  "social.g.name": "Name",
+  "@social.g.name": {
+    "description": "Field: the group’s name."
+  },
+  "social.g.about": "What the group is for",
+  "@social.g.about": {
+    "description": "Field: the group’s description."
+  },
+  "social.g.university": "University",
+  "@social.g.university": {
+    "description": "Field."
+  },
+  "social.g.course": "Course",
+  "@social.g.course": {
+    "description": "Field."
+  },
+  "social.g.emoji": "Emoji",
+  "@social.g.emoji": {
+    "description": "Field: one emoji for the group."
+  },
+  "social.personSub": "Buddies, their page, block",
+  "@social.personSub": {
+    "description": "Menu item subtitle: the person’s sheet."
+  },
+  "social.mute": "Mute",
+  "@social.mute": {
+    "description": "Menu item: no badge for this conversation."
+  },
+  "social.unmute": "Unmute",
+  "@social.unmute": {
+    "description": "Menu item."
+  },
+  "social.mutedToast": "Muted: new messages here no longer count in the badge.",
+  "@social.mutedToast": {
+    "description": "Toast."
+  },
+  "social.unmutedToast": "Unmuted",
+  "@social.unmutedToast": {
+    "description": "Toast."
+  },
+  "social.fromVault": "Send a vault file",
+  "@social.fromVault": {
+    "description": "Menu item."
+  },
+  "social.fromVaultSub": "Open a file in the vault and choose Send to",
+  "@social.fromVaultSub": {
+    "description": "Subtitle."
+  },
+  "social.fromVaultHow": "Open a file and choose Send to.",
+  "@social.fromVaultHow": {
+    "description": "Toast when going to the vault to pick a file."
+  },
+  "social.groupInfo": "Group",
+  "@social.groupInfo": {
+    "description": "Menu item and crumb: the group’s page (members, link, Roadmaps)."
+  },
+  "social.groupInfoSub": "Members, invitations, Roadmaps",
+  "@social.groupInfoSub": {
+    "description": "Subtitle."
+  },
+  "social.groupFiles": "Group files",
+  "@social.groupFiles": {
+    "description": "Button and menu item: the group’s folder in the vault."
+  },
+  "social.groupFilesSub": "Its own folder of the vault",
+  "@social.groupFilesSub": {
+    "description": "Subtitle."
+  },
+  "social.messages": "Messages",
+  "@social.messages": {
+    "description": "Screen-reader label of the message list."
+  },
+  "social.earlier": "Earlier messages",
+  "@social.earlier": {
+    "description": "Button: load older messages."
+  },
+  "social.write": "Write a message",
+  "@social.write": {
+    "description": "Screen-reader label of the message box."
+  },
+  "social.writePh": "Message…",
+  "@social.writePh": {
+    "description": "Placeholder of the message box."
+  },
+  "social.send": "Send",
+  "@social.send": {
+    "description": "Button: send the message."
+  },
+  "social.attach": "Attach",
+  "@social.attach": {
+    "description": "Button: attach a file, subject, Roadmap."
+  },
+  "social.att.file": "File",
+  "@social.att.file": {
+    "description": "Attachment kind and menu item."
+  },
+  "social.att.subject": "Subject",
+  "@social.att.subject": {
+    "description": "Attachment kind: one of my subjects (study packs)."
+  },
+  "social.att.roadmap": "Roadmap",
+  "@social.att.roadmap": {
+    "description": "Attachment kind. Keep the product word Roadmap (one or two words)."
+  },
+  "social.att.vault": "Vault file",
+  "@social.att.vault": {
+    "description": "Attachment kind: a file of the vault."
+  },
+  "social.attFileSub": "A document, picture, recording… up to {mb} MB",
+  "@social.attFileSub": {
+    "description": "Subtitle.",
+    "placeholders": {
+      "mb": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "social.attSubjectSub": "They can add it to their subjects",
+  "@social.attSubjectSub": {
+    "description": "Subtitle."
+  },
+  "social.attRoadmapSub": "They can join it, with their own progress",
+  "@social.attRoadmapSub": {
+    "description": "Subtitle."
+  },
+  "social.membersN": "{n, plural, one {# member} other {# members}}",
+  "@social.membersN": {
+    "description": "Count of group members.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "social.dmEmpty": "Say hello to {name}.",
+  "@social.dmEmpty": {
+    "description": "Empty conversation with one person.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Anna"
+      }
+    }
+  },
+  "social.groupEmpty": "No messages yet. Start the conversation.",
+  "@social.groupEmpty": {
+    "description": "Empty group conversation."
+  },
+  "social.roomGone": "This conversation is not there, or you are no longer in it.",
+  "@social.roomGone": {
+    "description": "A conversation that cannot be opened."
+  },
+  "social.sending": "Sending {name}…",
+  "@social.sending": {
+    "description": "While a file is sent.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "notes.pdf"
+      }
+    }
+  },
+  "social.edit": "Edit",
+  "@social.edit": {
+    "description": "Menu item / button."
+  },
+  "social.edited": "edited",
+  "@social.edited": {
+    "description": "After the time of an edited message."
+  },
+  "social.delete": "Delete",
+  "@social.delete": {
+    "description": "Menu item."
+  },
+  "social.deleteQ": "Delete this message for everyone?",
+  "@social.deleteQ": {
+    "description": "Confirm question."
+  },
+  "social.deletedMsg": "Message deleted",
+  "@social.deletedMsg": {
+    "description": "In place of a deleted message."
+  },
+  "social.hiddenMine": "Hidden from the others after reports.",
+  "@social.hiddenMine": {
+    "description": "Note on my own message hidden by reports."
+  },
+  "social.copy": "Copy the text",
+  "@social.copy": {
+    "description": "Menu item."
+  },
+  "social.copied": "Copied",
+  "@social.copied": {
+    "description": "Toast."
+  },
+  "social.more": "More",
+  "@social.more": {
+    "description": "Screen-reader label of a ⋮ menu."
+  },
+  "social.report": "Report",
+  "@social.report": {
+    "description": "Menu item: report a message."
+  },
+  "social.reportTitle": "Report this message",
+  "@social.reportTitle": {
+    "description": "Dialog title."
+  },
+  "social.reportLead": "Three reports hide a message in a group. To stop someone writing to you, block them.",
+  "@social.reportLead": {
+    "description": "Lead of the report dialog."
+  },
+  "social.reason": "Reason",
+  "@social.reason": {
+    "description": "Label of the reason menu."
+  },
+  "social.reason.harassment": "Harassment or abuse",
+  "@social.reason.harassment": {
+    "description": "Report reason."
+  },
+  "social.reason.spam": "Spam or advertising",
+  "@social.reason.spam": {
+    "description": "Report reason."
+  },
+  "social.reason.live_exam": "Answers to an exam not held yet",
+  "@social.reason.live_exam": {
+    "description": "Report reason."
+  },
+  "social.reason.copyright": "Someone else’s copyright",
+  "@social.reason.copyright": {
+    "description": "Report reason."
+  },
+  "social.reason.other": "Something else",
+  "@social.reason.other": {
+    "description": "Report reason."
+  },
+  "social.reportNote": "What is wrong? (optional)",
+  "@social.reportNote": {
+    "description": "Placeholder."
+  },
+  "social.sendReport": "Send the report",
+  "@social.sendReport": {
+    "description": "Button."
+  },
+  "social.reportThanks": "Thank you, the report was sent.",
+  "@social.reportThanks": {
+    "description": "Toast."
+  },
+  "social.show": "Show",
+  "@social.show": {
+    "description": "Button: show a picture, play a recording, open a PDF."
+  },
+  "social.download": "Download",
+  "@social.download": {
+    "description": "Button."
+  },
+  "social.makeCourse": "Make a course of it",
+  "@social.makeCourse": {
+    "description": "Button: start the From your sources flow with this file."
+  },
+  "social.subjectCounts": "{ch, plural, one {# chapter} other {# chapters}} · {ex, plural, one {# exercise} other {# exercises}}",
+  "@social.subjectCounts": {
+    "description": "Under a subject sent in a chat.",
+    "placeholders": {
+      "ch": {
+        "type": "int",
+        "example": "3"
+      },
+      "ex": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "social.addSubject": "Add to my subjects",
+  "@social.addSubject": {
+    "description": "Button on a subject sent in a chat."
+  },
+  "social.subjectAdded": "“{title}” is in your subjects now.",
+  "@social.subjectAdded": {
+    "description": "Toast.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Genetics"
+      }
+    }
+  },
+  "social.openNow": "Open “{title}” now?",
+  "@social.openNow": {
+    "description": "Confirm question.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Genetics"
+      }
+    }
+  },
+  "social.joinRm": "Join",
+  "@social.joinRm": {
+    "description": "Button: join a shared Roadmap."
+  },
+  "social.joinedRm": "You joined “{title}”. Your progress is your own.",
+  "@social.joinedRm": {
+    "description": "Toast after joining a Roadmap.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Genetics"
+      }
+    }
+  },
+  "social.noSubjects": "You have no subject to send yet.",
+  "@social.noSubjects": {
+    "description": "Empty picker."
+  },
+  "social.noRoadmaps": "You have no Roadmap to share yet.",
+  "@social.noRoadmaps": {
+    "description": "Empty picker."
+  },
+  "social.roadmapLead": "Who gets it can join it and study it with their own progress. A Roadmap someone shared with you can be passed on only when it is public.",
+  "@social.roadmapLead": {
+    "description": "Lead of the Roadmap picker."
+  },
+  "social.invite": "Invite",
+  "@social.invite": {
+    "description": "Button: invite people to the group."
+  },
+  "social.inviteLead": "Invite your study buddies, or find someone by name. They join when they accept.",
+  "@social.inviteLead": {
+    "description": "Lead of the invite sheet."
+  },
+  "social.invitedNow": "Invited",
+  "@social.invitedNow": {
+    "description": "After inviting someone; also under an invited member."
+  },
+  "social.noBuddiesToInvite": "All your buddies are in the group already, or you have none yet.",
+  "@social.noBuddiesToInvite": {
+    "description": "Invite sheet without buddies."
+  },
+  "social.done": "Done",
+  "@social.done": {
+    "description": "Button."
+  },
+  "social.chat": "Chat",
+  "@social.chat": {
+    "description": "Button: open the group conversation."
+  },
+  "social.linkLead": "Whoever has the link can join. Turn it off to stop that.",
+  "@social.linkLead": {
+    "description": "Lead of the invitation link section."
+  },
+  "social.linkOn": "Make a link",
+  "@social.linkOn": {
+    "description": "Button: create an invitation link."
+  },
+  "social.linkOff": "Turn the link off",
+  "@social.linkOff": {
+    "description": "Button."
+  },
+  "social.copyLink": "Copy the link",
+  "@social.copyLink": {
+    "description": "Button."
+  },
+  "social.linkCopied": "Link copied",
+  "@social.linkCopied": {
+    "description": "Toast."
+  },
+  "social.linkNone": "The group has no invitation link. Its owner or admins can make one.",
+  "@social.linkNone": {
+    "description": "For plain members."
+  },
+  "social.groupRoadmaps": "Roadmaps of the group",
+  "@social.groupRoadmaps": {
+    "description": "Section."
+  },
+  "social.noGroupRoadmaps": "No Roadmap shared here yet.",
+  "@social.noGroupRoadmaps": {
+    "description": "Empty section."
+  },
+  "social.shareRoadmap": "Share a Roadmap",
+  "@social.shareRoadmap": {
+    "description": "Button."
+  },
+  "social.rmShared": "“{title}” is shared with the group.",
+  "@social.rmShared": {
+    "description": "Toast.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Genetics"
+      }
+    }
+  },
+  "social.byName": "by {name}",
+  "@social.byName": {
+    "description": "Who made a Roadmap.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Anna"
+      }
+    }
+  },
+  "social.members": "Members",
+  "@social.members": {
+    "description": "Section."
+  },
+  "social.role.owner": "Owner",
+  "@social.role.owner": {
+    "description": "Role in a group."
+  },
+  "social.role.admin": "Admin",
+  "@social.role.admin": {
+    "description": "Role in a group."
+  },
+  "social.role.member": "Member",
+  "@social.role.member": {
+    "description": "Role in a group."
+  },
+  "social.makeAdmin": "Make admin",
+  "@social.makeAdmin": {
+    "description": "Member menu."
+  },
+  "social.unmakeAdmin": "No longer admin",
+  "@social.unmakeAdmin": {
+    "description": "Member menu."
+  },
+  "social.removeMember": "Remove from the group",
+  "@social.removeMember": {
+    "description": "Member menu."
+  },
+  "social.removeQ": "Remove {name} from the group?",
+  "@social.removeQ": {
+    "description": "Confirm question.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Anna"
+      }
+    }
+  },
+  "social.leave": "Leave the group",
+  "@social.leave": {
+    "description": "Button."
+  },
+  "social.leaveQ": "Leave “{name}”? You can come back with an invitation.",
+  "@social.leaveQ": {
+    "description": "Confirm question.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Anna"
+      }
+    }
+  },
+  "social.joinLead": "Joining shows you the group’s chat, its files and its Roadmaps. The members see your name.",
+  "@social.joinLead": {
+    "description": "On the invitation link page."
+  },
+  "social.sendTo": "Send to…",
+  "@social.sendTo": {
+    "description": "Button and sheet: send something to a chat."
+  },
+  "social.sendWhat": "Sending “{title}”",
+  "@social.sendWhat": {
+    "description": "Top of the Send to sheet.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Genetics notes"
+      }
+    }
+  },
+  "social.sendLinePh": "Add a line (optional)",
+  "@social.sendLinePh": {
+    "description": "Placeholder."
+  },
+  "social.sent": "Sent: {title}",
+  "@social.sent": {
+    "description": "Toast.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Genetics notes"
+      }
+    }
+  },
+  "social.groupWord": "Study group",
+  "@social.groupWord": {
+    "description": "Under a group in the Send to list."
+  },
+  "social.buddyWord": "Study buddy",
+  "@social.buddyWord": {
+    "description": "Under a person in the Send to list."
+  },
+  "social.noOneYet": "No conversation or buddy yet. Find people on the People page.",
+  "@social.noOneYet": {
+    "description": "Empty Send to list."
+  },
+  "social.bond.buddies": "Study buddy",
+  "@social.bond.buddies": {
+    "description": "Relation shown under a person."
+  },
+  "social.bond.asked": "You asked",
+  "@social.bond.asked": {
+    "description": "Relation: I sent a request."
+  },
+  "social.bond.theyAsked": "Asks to be your study buddy",
+  "@social.bond.theyAsked": {
+    "description": "Relation: they sent me a request."
+  },
+  "social.bond.blocked": "Blocked",
+  "@social.bond.blocked": {
+    "description": "Relation."
+  },
+  "social.err.noMessages": "This person takes messages only from their study buddies. Ask them to be buddies first.",
+  "@social.err.noMessages": {
+    "description": "Refusal."
+  },
+  "social.err.noInvites": "This person takes invitations only from their study buddies.",
+  "@social.err.noInvites": {
+    "description": "Refusal."
+  },
+  "social.err.blocked": "That is not possible with this person.",
+  "@social.err.blocked": {
+    "description": "Refusal when a block is involved (does not say who blocked whom)."
+  },
+  "social.err.quota": "Your {mb} MB are full (the vault and the files you sent together). Delete something first.",
+  "@social.err.quota": {
+    "description": "Refusal.",
+    "placeholders": {
+      "mb": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "social.err.slow": "Too many messages at once. Wait a moment.",
+  "@social.err.slow": {
+    "description": "Refusal (rate limit)."
+  },
+  "social.err.manyAsks": "You have many open requests. Wait for some answers first.",
+  "@social.err.manyAsks": {
+    "description": "Refusal."
+  },
+  "social.err.manyGroups": "You made many groups today. Try again tomorrow.",
+  "@social.err.manyGroups": {
+    "description": "Refusal."
+  },
+  "social.err.full": "The group is full.",
+  "@social.err.full": {
+    "description": "Refusal."
+  },
+  "social.err.badLink": "This invitation link does not work (any more).",
+  "@social.err.badLink": {
+    "description": "Refusal."
+  },
+  "social.err.noPerson": "This person cannot be found.",
+  "@social.err.noPerson": {
+    "description": "Refusal."
+  },
+  "social.err.notMember": "You are not a member of this group.",
+  "@social.err.notMember": {
+    "description": "Refusal."
+  },
+  "social.err.attachment": "That attachment cannot be sent here.",
+  "@social.err.attachment": {
+    "description": "Refusal."
+  },
+  "social.err.noPack": "This subject could not be read on this device.",
+  "@social.err.noPack": {
+    "description": "Error."
+  },
+  "social.err.packBig": "This subject is over {mb} MB, too big to send.",
+  "@social.err.packBig": {
+    "description": "Error.",
+    "placeholders": {
+      "mb": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "social.err.notYourRoadmap": "This Roadmap is {owner}’s. Only its owner can share it while it is private.",
+  "@social.err.notYourRoadmap": {
+    "description": "Error.",
+    "placeholders": {
+      "owner": {
+        "type": "String",
+        "example": "Anna"
+      }
+    }
+  }
+}

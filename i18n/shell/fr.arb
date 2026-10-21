@@ -440,5 +440,12 @@
   "sh.syncing": "Synchronisation…",
   "sh.syncWait": "Des changements attendent la synchronisation",
   "sh.synced": "Tout est synchronisé",
-  "sh.fontSample": "Aa Bonsoir"
+  "sh.fontSample": "Aa Bonsoir",
+  "sh.fromSources": "À partir de tes sources",
+  "sh.fromSourcesSub": "Tous tes fichiers d’un coup : une matière ou un parcours, selon ce qu’ils demandent",
+  "sh.vault": "Coffre",
+  "sh.vaultSub": "Notes, annales et corrigés partagés par les étudiants",
+  "sh.people": "Contacts",
+  "sh.peopleSub": "Discute avec tes camarades, partenaires et groupes d’étude",
+  "sh.peopleN": "Contacts : {n, plural, one {# nouveau} many {# nouveaux} other {# nouveaux}}"
 }

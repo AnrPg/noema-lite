@@ -101,9 +101,11 @@ window.NoemaShell = (() => {
     F.acts = h('div', { class: 'ns-acts' });
     F.bellBadge = h('span', { class: 'bellbadge' });
     F.find = h('button', { class: 'ns-iconbtn ns-find', id: 'ns-find', title: L('sr_search'), 'aria-label': L('sr_search'), 'aria-keyshortcuts': '/', onclick: () => window.NoemaSearch?.quick(here()) }, svg('search'));   // 🔎 everything, everywhere (engine/search.js)
+    F.peopleBadge = h('span', { class: 'bellbadge' });
+    F.people = h('button', { class: 'ns-iconbtn bell ns-peoplebtn', id: 'ns-people', title: L('people'), 'aria-label': L('people'), hidden: true, onclick: () => go('#/people') }, svg('chat'), F.peopleBadge);   // 👥 conversations, buddies, groups (engine/social.js)
     F.bell = h('button', { class: 'ns-iconbtn bell', id: 'bellbtn', title: L('notifications'), 'aria-label': L('notifications'), onclick: openNotes }, svg('bell'), F.bellBadge);
     F.topMe = h('button', { class: 'ns-me acchip', id: 'ns-topme', title: L('me'), 'aria-label': L('meLong'), onclick: () => go('#/me') }, h('span', { class: 'ns-meemo' }), h('i', { class: 'syncdot', id: 'syncdot' }));
-    F.top = h('header', { class: 'ns-top', id: 'ns-top' }, F.back, F.crumbs, F.acts, F.find, F.bell, F.topMe);
+    F.top = h('header', { class: 'ns-top', id: 'ns-top' }, F.back, F.crumbs, F.acts, F.find, F.people, F.bell, F.topMe);
     F.share = h('div', { class: 'sharebar', role: 'status' });
     F.tabs = h('nav', { class: 'ns-tabs', 'aria-label': L('mainNav') });
     F.railMe = h('button', { class: 'ns-railme', 'data-pop': '1', 'aria-haspopup': 'menu', 'aria-expanded': 'false', onclick: e => { e.stopPropagation(); meMenu(F.railMe, true); } }, h('span', { class: 'ns-me' }, h('span', { class: 'ns-meemo' })), h('span', { class: 'ns-mename' }, L('me')));
@@ -118,7 +120,7 @@ window.NoemaShell = (() => {
     document.body.prepend(F.land, F.pv, F.brand, F.top, F.share, F.tabs, F.railMe);
     if (!F.main.isConnected) document.body.append(F.main);
     document.body.append(F.fab, F.fx, F.layer);
-    drawMe(); drawTabs(); paintCharacter(); wireNotes(); wireSync(); wireScroll();
+    drawMe(); drawTabs(); paintCharacter(); wireNotes(); wireSocial(); wireSync(); wireScroll();
     TH()?.onChange((m, why) => { if (why === 'tick') { drawPreview(); return; } paintCharacter(m); if (ENGINE?.retheme) ENGINE.retheme(); if (!F.layer.querySelector('.ns-onb')) route(); });
     noteTrail();
     addEventListener('hashchange', () => { noteTrail(); route(); restoreScroll(); });
@@ -260,6 +262,13 @@ window.NoemaShell = (() => {
       h('button', { class: 'btn small primary', onclick: async e => { e.target.disabled = true; try { const s = await N().notes.accept(sh); toast(L(cur ? 'joinedToast' : 'addedToast', { title: s.title })); subjCache = null; if (confirm(L('openNow', { title: s.title }))) accepted(s); } catch (er) { toast(er.message, 5000); e.target.disabled = false; } } }, cur ? L('join') : L('accept')),
       h('button', { class: 'btn small', onclick: async () => { await N().notes.reject(sh).catch(er => toast(er.message)); } }, L('reject')), laterBtn);
   }
+  /* ---------- 👥 people: the top bar's button and what waits there (cloud accounts) ---------- */
+  function wireSocial() {
+    const S = window.NoemaSocial; if (!S || N()?.account?.kind !== 'cloud' || !window.NoemaCloud?.session?.()) return;
+    F.people.hidden = false; S.start();
+    S.onChange(() => { const n = S.waiting(); F.peopleBadge.textContent = n || ''; F.peopleBadge.style.display = n ? '' : 'none'; F.people.classList.toggle('has', !!n);
+      F.people.setAttribute('aria-label', n ? L('peopleN', { n }) : L('people')); });
+  }
   /* ---------- the sync dot on "Me" (cloud accounts) ---------- */
   function wireSync() {
     const dot = F.topMe.querySelector('.syncdot'), C = window.NoemaCloud;
@@ -339,6 +348,19 @@ window.NoemaShell = (() => {
   PAGES.search = () => {
     if (!window.NoemaSearch) { page({ tab: null, crumbs: [[L('sr_search')]] }, h('p', { class: 'ns-muted' }, '…')); return; }
     NoemaSearch.page({ page, h, L, go, open, sheet, menuButton, faceEl, pill, svg, ico, chev, main: F.main });
+  };
+
+  /* ---------- 🗄️ the vault (#/vault?…): engine/vault.js draws it ---------- */
+  PAGES.vault = () => {
+    if (!window.NoemaVault) { page({ tab: 'discover', crumbs: [[L('vault')]] }, h('p', { class: 'ns-muted' }, '…')); return; }
+    NoemaVault.page({ page, h, L, go, open, sheet, modal, menuButton, popMenu, faceEl, pill, svg, ico, chev });
+  };
+
+  /* ---------- 👥 people (#/people, #/chat/<room>, #/group/<room>, #/join/<code>): engine/social.js draws them ---------- */
+  const socialCtx = () => ({ page, h, L, go, open, sheet, modal, chrome, menuButton, popMenu, faceEl, pill, svg, ico, icoTxt, chev, fitRow });
+  for (const k of ['people', 'chat', 'group', 'join']) PAGES[k] = args => {
+    if (!window.NoemaSocial) { page({ tab: null, crumbs: [[L('people')]] }, h('p', { class: 'ns-muted' }, '…')); return; }
+    NoemaSocial.page(k, args || [], socialCtx());
   };
 
   /* ======================= pages ======================= */
@@ -470,7 +492,7 @@ window.NoemaShell = (() => {
     draw();
   };
   function shelfMenu() {
-    return [{ label: L('importFile'), sub: L('importFileSub'), icon: 'upload', run: importFile }, { label: L('createClaude'), sub: L('createClaudeSub'), icon: 'spark', run: () => N().claudeGuide({ onDone: s => landedOpen(s) }) },
+    return [CM()?.fromSources ? { label: L('fromSources'), sub: L('fromSourcesSub'), icon: 'upload', run: () => CM().fromSources(acc(), { onStudy }) } : null, { label: L('importFile'), sub: L('importFileSub'), icon: 'upload', run: importFile }, { label: L('createClaude'), sub: L('createClaudeSub'), icon: 'spark', run: () => N().claudeGuide({ onDone: s => landedOpen(s) }) },
       { label: L('exploreShared'), icon: 'globe', href: '#/explore/subjects' }, { label: L('allSubjects'), sub: L('allSubjectsSub'), icon: 'book', run: () => N().openSubjectPicker?.() }];
   }
   function shelfItem(s, i, refresh) {
@@ -568,8 +590,11 @@ window.NoemaShell = (() => {
     page({ tab: 'discover', crumbs: [[L('discover')]], corner: true },
       h('h1', {}, L('discover')),
       h('div', { class: 'ns-list' },
+        item('vault', 1, L('vault'), L('vaultSub'), () => go('#/vault'), 'ns-vault'),
+        item('chat', 2, L('people'), L('peopleSub'), () => go('#/people'), 'ns-people'),
         item('search', 4, L('exploreShared'), w === 'lang' ? L('exploreLangSub') : L('exploreSub'), () => go('#/explore/subjects'), 'ns-explore'),
         w !== 'lang' ? item('people', 2, L('exploreRoadmaps'), L('exploreRoadmapsSub'), () => go('#/explore'), 'ns-explorerm') : null,
+        w !== 'lang' && CM()?.fromSources ? item('upload', 3, L('fromSources'), L('fromSourcesSub'), () => CM().fromSources(acc(), { onStudy }), 'ns-fromsrc') : null,
         w !== 'lang' ? item('map', 1, L('newRoadmap'), L('newRoadmapSub'), () => CM()?.create(acc(), { onStudy }), 'ns-create') : null,
         w !== 'lang' ? item('spark', 2, L('createClaude'), L('createClaudeSub'), () => N().claudeGuide({ onDone: s => landedOpen(s) })) : null,
         w !== 'know' && WORLDS.lang?.create ? item(icoTxt('文A', 3), 3, L('newLanguage'), L('newLanguageSub'), () => WORLDS.lang.create()) : null,
@@ -804,7 +829,7 @@ window.NoemaShell = (() => {
     let r = null; try { r = id && window.NoemaCloud ? await NoemaCloud.publicPage(id) : null; } catch (e) { v.replaceChildren(h('div', { class: 'ns-panel ns-empty' }, h('p', {}, L('pfCloudErr', { e: e.message })))); return; }
     if (!r || !r.published) { v.replaceChildren(h('div', { class: 'ns-panel ns-empty' }, faceEl(undefined, 'breathe'), h('p', {}, L('pfMissing')))); return; }
     chrome({ tab: null, crumbs: [[r.display_name || '…']], back: '#/discover' });
-    v.replaceChildren(...pageView(r, { owner: id }), h('p', { class: 'tiny ns-muted' }, L('pfUpdated', { date: fmtDate(r.updated_at) })));
+    v.replaceChildren(...pageView(r, { owner: id }), window.NoemaSocial?.personActions(socialCtx(), id), h('p', { class: 'tiny ns-muted' }, L('pfUpdated', { date: fmtDate(r.updated_at) })));
   };
   /** The page itself (yours as others see it, or somebody's): picture, name, a few words, then the parts that are shown */
   function pageView(r, { owner, mine = false }) {

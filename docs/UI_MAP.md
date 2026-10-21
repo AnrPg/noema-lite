@@ -137,6 +137,9 @@ mastered station and the last 5 seconds of a timed round can bring a big reactio
 |---|---|
 | CL1 ➕ New curriculum | Knowledge › + New Roadmap; Knowledge ⋮; Discover; Today ⋮ |
 | CL2 📥 Import a map | Knowledge ⋮; Discover |
+| — | **From your sources** (new 2026-10-20): Discover; Shelf ⋮; 🧭 Roadmaps (classic). One subject or a Roadmap, proposed from your files. docs/FROM_SOURCES.md |
+| — | **Vault** (new 2026-10-20): Discover › Vault (#/vault). Shared study files: Files or Folders, Filters, Upload; a file's sheet: Download, Preview, Make a course from it, rate, Report; ⋮ My uploads, How the vault works. docs/VAULT.md |
+| — | **People** (new 2026-10-20): the top bar's 💬 (a count: unread messages, invitations, buddy requests) and Discover › People (#/people). Find by name; tabs Chats · Buddies · Groups; ⋮ Privacy, Blocked people, How it works. A conversation #/chat/<id> (⋮ the person or the group, mute, its files; + attach a file, subject, Roadmap, vault file; ⋮ on a message: edit, delete, copy, report). A group #/group/<id> (members and roles, invite, invitation link, Roadmaps, files, edit, leave); an invitation link #/join/<code>. Someone's page #/u/<id> has Message and Ask to be buddies. docs/SOCIAL.md |
 | CL3 🌍 Explore curricula | Knowledge ⋮ › Roadmaps others share; Discover. A page (`#/explore`): the public Roadmaps in folded sections by domain; typing in the search shows only the results |
 | CL4 invitations | Top of the Knowledge tab, and the share bar |
 | CL5 curriculum card | Roadmap card on Knowledge (progress bar); tap opens the map, or the build progress |

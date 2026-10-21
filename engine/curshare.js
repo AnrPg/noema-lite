@@ -338,7 +338,7 @@
     return inv.map(i => { const c = curs.find(x => x.id === i.curriculum); return c ? { ...i, title: c.title, owner_name: c.owner_name, owner: c.owner, description: c.description, language: c.language, meta: c.meta || {} } : null; }).filter(Boolean);
   };
   /** Join (an invitation, or a public curriculum) → this person's copy of the map; their progress is their own. */
-  Share.join = async (acc, cid) => {
+  Share.join = async (acc, cid, { viaRoom = false } = {}) => {   // viaRoom: shared in a conversation or study group (docs/SOCIAL.md)
     need(acc);
     const row = ((await api(`${T.cur}?select=*&id=eq.${enc(cid)}`)) || [])[0];   // i18n-ignore (REST queries)
     if (!row) throw new Error(rt('roadmap.share.gone'));
@@ -346,7 +346,7 @@
     const em = CL().session().user.email.toLowerCase(), body = { status: 'joined', user_id: me(), name: myName(acc), responded_at: new Date().toISOString() };
     const upd = await api(`${T.mem}?curriculum=eq.${enc(cid)}&email=eq.${enc(em)}`, { method: 'PATCH', body, headers: { Prefer: 'return=representation' } }).catch(e => { throw /row-level|403|permission/i.test(e.message) ? new Error(rt('roadmap.share.cannotJoin')) : e; });   // i18n-ignore (REST queries)
     if (!upd?.length) {
-      if (!row.public) throw new Error(rt('roadmap.share.inviteOnly'));
+      if (!row.public && !viaRoom) throw new Error(rt('roadmap.share.inviteOnly'));
       await api(T.mem, { method: 'POST', body: [{ curriculum: cid, email: em, ...body }], headers: { Prefer: 'return=minimal' } }).catch(e => { throw dup(e) || /row-level|403/i.test(e.message) ? new Error(rt('roadmap.share.removed')) : e; });
     }
     const local = C().get(acc, cid);

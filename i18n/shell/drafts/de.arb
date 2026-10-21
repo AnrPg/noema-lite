@@ -444,5 +444,12 @@
   "sh.fontSample": "Aa Guten Abend",
   "sh.native": "Muttersprache",
   "sh.nativeTip": "Die Sprachkurse erklären über sie: Vergleiche nur mit deiner Sprache, und die Erklärungen in ihr, sobald sie übersetzt sind. Eine andere Sprache wählst du in den Einstellungen eines Sprachkurses.",
-  "sh.nativeNone": "– nicht festgelegt –"
+  "sh.nativeNone": "– nicht festgelegt –",
+  "sh.fromSources": "Aus deinem Material",
+  "sh.fromSourcesSub": "Alle deine Dateien auf einmal: ein Fach oder eine Roadmap, je nach Inhalt",
+  "sh.vault": "Tresor",
+  "sh.vaultSub": "Mitschriften, Altklausuren und Lösungen von Studierenden",
+  "sh.people": "Kontakte",
+  "sh.peopleSub": "Mit Kommilitonen chatten, Lernpartner, Lerngruppen",
+  "sh.peopleN": "Kontakte: {n, plural, one {# neu} other {# neu}}"
 }
