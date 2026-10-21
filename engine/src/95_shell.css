@@ -922,7 +922,7 @@ body.ns-on .ns-hit{outline:2px solid var(--acc);outline-offset:6px;border-radius
 .vt-filtsheet .vt-filters{grid-template-columns:1fr;margin:0}
 .vt-fhead{justify-content:space-between;align-items:center;gap:8px;position:sticky;top:0;z-index:1;background:var(--paper);padding:4px 0 10px}
 .vt-chipx{margin-inline-start:6px;display:inline-grid;place-items:center;width:16px;height:16px;border-radius:50%;background:rgba(0,0,0,.12);font-size:.8em;line-height:1}
-.vt-fpick .vt-fres{display:flex;flex-direction:column;gap:4px;margin:6px 0}.vt-fpick .vt-fchips,.vt-fpick .vt-fsug{gap:6px;flex-wrap:wrap;margin:6px 0}
+.vt-fpick .vt-fres{display:flex;flex-direction:column;gap:4px;margin:6px 0;max-height:340px;overflow-y:auto}.vt-fpick .vt-fchips{gap:6px;flex-wrap:wrap;margin:6px 0}
 .vt-directhead{font-size:.95rem;margin:14px 0 6px}
 
 /* 🗄️ folders: the two ways in, pins, files grouped by type; the form's ⓘ */
@@ -939,10 +939,13 @@ body.ns-on .ns-hit{outline:2px solid var(--acc);outline-offset:6px;border-radius
 /* 🗄️ the toolbar: sort + filters on the left, files/folders (two icons) on the right; the folder row: path, 📌, ways */
 .vt-row{align-items:center;gap:8px;flex-wrap:nowrap}.vt-row .grow{flex:1}
 .vt-sortl{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}.vt-sortl .vt-sort{width:auto}
-.vt-viewseg button,.vt-ways button{min-width:36px;font-size:1rem;line-height:1}
+.vt-viewseg button{min-width:36px;line-height:1;display:inline-flex;align-items:center;justify-content:center}.vt-viewseg button svg,.vt-pin svg,.vt-pinsbtn svg,.vt-filtbtn svg{width:18px;height:18px}
+.vt-ways button{font-size:.85rem}
 .vt-fhead2{align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 10px}.vt-fhead2 .grow{flex:1}.vt-fhead2 .vt-path{margin:0}
 .vt-ways{margin:0}
 .vt-pin{opacity:.45}.vt-pin.on,.vt-pin:hover{opacity:1}
 .vt-pinlist{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}.vt-pinlist[hidden]{display:none}
 .vt-pinchip{display:inline-flex;align-items:center;gap:2px}.vt-pinchip .vt-chipx{border:0;cursor:pointer;color:inherit}
 @media (max-width:520px){.vt-sortl>span{display:none}}
+.vt-upbtn,.vt-clearall{display:inline-flex;align-items:center;gap:6px}.vt-upbtn svg.i,.vt-filtbtn svg.i,.vt-clearall svg.i{width:17px;height:17px;flex:none}
+.vt-fchip{max-width:100%;white-space:normal;text-align:start}

@@ -99,10 +99,10 @@ window.NoemaVault = (() => {
 
   /* ---------- 🧭 the fields: one shared graph (cloud/supabase.sql §13b); a field may sit under many parents ---------- */
   const Fields = (() => {
-    let byId = new Map(), kids = new Map(), ups = new Map(), hay = new Map(), loading = null;
+    let byId = new Map(), kids = new Map(), ups = new Map(), hay = new Map(), words = null, loading = null;
     const loc = () => window.NoemaI18n?.locale || globalThis.document?.documentElement?.lang || 'en';
     function set(rows) {
-      byId = new Map(rows.map(r => [r.id, r])); kids = new Map(); ups = new Map(); hay = new Map();
+      byId = new Map(rows.map(r => [r.id, r])); kids = new Map(); ups = new Map(); hay = new Map(); words = null;
       for (const r of rows) for (const p of r.parents || []) { if (!kids.has(p)) kids.set(p, []); kids.get(p).push(r.id); }
     }
     const get = id => byId.get(id);
@@ -114,6 +114,23 @@ window.NoemaVault = (() => {
     const up = id => { let s = ups.get(id); if (s) return s; s = new Set(); const st = [id]; while (st.length) { const x = st.pop(); if (s.has(x)) continue; s.add(x); for (const p of byId.get(x)?.parents || []) st.push(p); } ups.set(id, s); return s; };
     const children = id => (kids.get(id) || []).filter(x => byId.get(x)?.status === 'accepted' || byId.get(x)?.status === 'proposed');
     const roots = () => [...byId.values()].filter(r => !(r.parents || []).length && r.status === 'accepted').map(r => r.id);
+    /** w is a word of v with at most one typo (two in long words), comparing w with v's start of the same length */
+    const near = (w, v) => { const k = w.length >= 7 ? 2 : 1; if (v.length < w.length - k) return false;
+      for (const t of new Set([v.slice(0, w.length), v.slice(0, w.length + 1), v.slice(0, Math.max(1, w.length - 1))])) if (dist(w, t, k) <= k) return true; return false; };
+    const dist = (a, b, k) => { if (Math.abs(a.length - b.length) > k) return k + 1; let p = Array.from({ length: b.length + 1 }, (_, j) => j), pp = null;
+      for (let i = 1; i <= a.length; i++) { const c = [i]; let lo = i;
+        for (let j = 1; j <= b.length; j++) { c[j] = Math.min(p[j] + 1, c[j - 1] + 1, p[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+          if (pp && i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) c[j] = Math.min(c[j], pp[j - 2] + 1);   // swapped letters count once
+          lo = Math.min(lo, c[j]); }
+        if (lo > k) return k + 1; pp = p; p = c; }
+      return p[b.length]; };
+    /** every word of every name → its fields, and the initials of every name → its fields (built once per graph) */
+    const index = () => { if (words) return words; const W = new Map(), I = new Map(), put = (m, k, id) => { let x = m.get(k); if (!x) m.set(k, x = new Set()); x.add(id); };
+      for (const id of byId.keys()) for (const x of formsOf(id)) { const ws = x.split(/[^\p{L}\p{N}]+/u).filter(Boolean);
+        for (const w of ws) if (w.length >= 3) put(W, w, id); }
+      for (const id of byId.keys()) for (const nm of new Set([byId.get(id).names?.en, name(id)])) {   // initials: of the English name and of the name in the menus' language
+        const ws = fold(nm || '').split(/[^\p{L}\p{N}]+/u).filter(w => w.length > 2), ini = ws.map(w => w[0]).join(''); if (ws.length >= 2) put(I, ini, id); }
+      return words = { words: W, inits: I }; };
     const formsOf = id => { let f = hay.get(id); if (!f) { f = allNames(id).flatMap(forms); hay.set(id, f); } return f; };
     /** fields whose names (any language) start with or contain the words; the closest first */
     function find(q, n = 12) {
@@ -122,6 +139,15 @@ window.NoemaVault = (() => {
       for (const id of byId.keys()) { let best = 0;
         for (const x of formsOf(id)) for (const w of W) { const sc = x === w ? 4 : x.startsWith(w) ? 3 : x.includes(' ' + w) ? 2 : x.includes(w) ? 1 : 0; if (sc > best) best = sc; }
         if (best) out.push([best, id]); }
+      // and the near misses: initials (ml → Machine learning), then a typo or two (genitcs → Genetics)
+      const seen = new Map(out.map(x => [x[1], x])), give = (id, sc) => { const o = seen.get(id); if (o) o[0] = Math.max(o[0], sc); else { const r = [sc, id]; seen.set(id, r); out.push(r); } };
+      const ix = index(), q1 = W[0].replace(/\s+/g, ''), tw = W[0].split(/\s+/).filter(Boolean);
+      if (/^[\p{L}]{2,5}$/u.test(q1)) for (const id of ix.inits.get(q1) || []) give(id, (q1.length <= 3 ? 3.5 : 2.5) + Math.min(allNames(id).length, 30) / 1000);   // the better known first
+      if (out.length < n && tw.every(w => w.length >= 4)) {
+        let ids = null;
+        for (const w of tw) { const got = new Set(); for (const [v, s2] of ix.words) if ((v[0] === w[0] || v[1] === w[1]) && near(w, v)) for (const id of s2) got.add(id); ids = ids ? new Set([...ids].filter(x => got.has(x))) : got; }
+        for (const id of ids || []) give(id, .5);
+      }
       return out.sort((a, b) => b[0] - a[0] || name(a[1]).length - name(b[1]).length).slice(0, n).map(x => x[1]);
     }
     /** the fields a text names (a title, a course: "Σημειώσεις Γενετικής" → Genetics), the most specific first */
@@ -308,17 +334,17 @@ window.NoemaVault = (() => {
       const LV = by === 'field' ? path.map(() => 'field') : SCHOOL, depth = Math.min(path.length, LV.length);
       const here = list.filter(f => path.slice(0, depth).every((p, i) => { const vs = valsOf(f, LV[i]); return vs.length ? vs.some(v => String(v) === p || same(v, p)) : p === NONE; }));
       // the two ways in: a small toggle at the end of the path row (rarely changed)
-      const ways = h('div', { class: 'ns-seg small vt-ways', role: 'radiogroup', 'aria-label': T('folders') }, ...[['school', T('bySchool'), '🏛'], ['field', T('byField'), '🧭']].map(([k, l, e]) =>
-        h('button', { class: by === k ? 'on' : '', role: 'radio', 'aria-checked': String(by === k), 'aria-label': l, title: l, 'data-by': k, onclick: () => setP({ by: k === 'school' ? '' : k, f: '' }) }, e)));   // i18n-ignore (🏛 🧭)
+      const ways = h('div', { class: 'ns-seg small vt-ways', role: 'radiogroup', 'aria-label': T('folders') }, ...[['school', T('waySchool')], ['field', T('wayField')]].map(([k, l]) =>
+        h('button', { class: by === k ? 'on' : '', role: 'radio', 'aria-checked': String(by === k), title: k === 'school' ? T('bySchool') : T('byField'), 'data-by': k, onclick: () => setP({ by: k === 'school' ? '' : k, f: '' }) }, l)));
       const label = path.slice(0, depth).map((p, i) => folderName(LV[i], p)).join(' › ');
       const mine = pins(), pinned = mine.some(x => x.by === by && x.f === (P.f || ''));
       const pinBtn = depth ? h('button', { class: 'ns-iconbtn vt-pin' + (pinned ? ' on' : ''), 'aria-pressed': String(pinned), title: pinned ? T('unpin') : T('pin'), 'aria-label': pinned ? T('unpin') : T('pin'),
-        onclick: () => { putPins(pinned ? mine.filter(x => !(x.by === by && x.f === P.f)) : [{ by, f: P.f, label }, ...mine]); draw(); } }, '📌') : null;   // i18n-ignore (📌)
+        onclick: () => { putPins(pinned ? mine.filter(x => !(x.by === by && x.f === P.f)) : [{ by, f: P.f, label }, ...mine]); draw(); } }, svg('pushpin')) : null;
       // the pinned folders: behind one button; each opens its folder, × forgets it
       const pinList = h('div', { class: 'vt-pinlist', hidden: true }, ...mine.map(x => h('span', { class: 'chip vt-pinchip' },
         h('button', { class: 'linkish', onclick: () => setP({ by: x.by === 'school' ? '' : x.by, f: x.f }) }, x.label),
         h('button', { class: 'vt-chipx', title: T('removePin', { name: x.label }), 'aria-label': T('removePin', { name: x.label }), onclick: () => { putPins(pins().filter(y => !(y.by === x.by && y.f === x.f))); draw(); } }, '×'))));   // i18n-ignore (×)
-      const pinsBtn = mine.length ? h('button', { class: 'btn small ghost vt-pinsbtn', 'aria-expanded': 'false', title: T('pinnedFolders'), onclick: e => { pinList.hidden = !pinList.hidden; e.currentTarget.setAttribute('aria-expanded', String(!pinList.hidden)); } }, '📌 ', num(mine.length), ' ▾') : null;   // i18n-ignore (📌 ▾)
+      const pinsBtn = mine.length ? h('button', { class: 'btn small ghost vt-pinsbtn', 'aria-expanded': 'false', title: T('pinnedFolders'), 'aria-label': T('pinnedFolders'), onclick: e => { pinList.hidden = !pinList.hidden; e.currentTarget.setAttribute('aria-expanded', String(!pinList.hidden)); } }, svg('pushpin'), ' ', num(mine.length), ' ', chev()) : null;
       const crumbs = h('nav', { class: 'vt-path', 'aria-label': T('folders') }, h('button', { class: 'linkish', onclick: () => setP({ f: '' }) }, by === 'school' ? T('allSchools') : T('allFields')),
         ...path.slice(0, depth).flatMap((p, i) => [h('span', { 'aria-hidden': 'true' }, ' › '), h('button', { class: 'linkish', onclick: () => setP({ f: path.slice(0, i + 1).join('›') }) }, folderName(LV[i], p))]), pinBtn ? ' ' : null, pinBtn);
       const pinRow = h('div', { class: 'row vt-fhead2' }, crumbs, h('span', { class: 'grow' }), pinsBtn, ways);
@@ -360,7 +386,7 @@ window.NoemaVault = (() => {
           h('div', { class: 'ns-list vt-list' }, ...sorted.filter(f => f.kind === k).slice(0, 300).map(card)))));
     }
     function draw() {
-      viewSeg.replaceChildren(...[['', T('files'), '📄'], ['folders', T('folders'), '📁']].map(([k, l, e]) => h('button', { class: (P.v || '') === k ? 'on' : '', role: 'radio', 'aria-checked': String((P.v || '') === k), 'aria-label': l, title: l, 'data-v': k || 'files', onclick: () => setP({ v: k, f: '', by: '' }) }, e)));   // i18n-ignore (📄 📁)
+      viewSeg.replaceChildren(...[['', T('files'), 'doc'], ['folders', T('folders'), 'vault']].map(([k, l, e]) => h('button', { class: (P.v || '') === k ? 'on' : '', role: 'radio', 'aria-checked': String((P.v || '') === k), 'aria-label': l, title: l, 'data-v': k || 'files', onclick: () => setP({ v: k, f: '', by: '' }) }, svg(e))));
       sortSel.value = P.sort || 'new';
       drawFilters();
       const list = filter(all, P);
@@ -496,21 +522,22 @@ window.NoemaVault = (() => {
       (from the title and course, and from what others chose for files like it), or propose a new one. */
   function fieldPicker(h, init, textOf, askOf) {
     let chosen = [...init], fromOthers = [], t = 0;
-    const box = h('div', { class: 'row vt-fchips' }), sug = h('div', { class: 'row vt-fsug' }), res = h('div', { class: 'vt-fres' }), note = h('small', { class: 'tiny ns-muted vt-fnote', hidden: true }, T('proposed'));
+    const box = h('div', { class: 'row vt-fchips' }), res = h('div', { class: 'vt-fres' }), note = h('small', { class: 'tiny ns-muted vt-fnote', hidden: true }, T('proposed'));
     const q = h('input', { class: 'noema-input', type: 'search', 'data-k': 'fieldq', placeholder: T('fieldSearchPh'), 'aria-label': T('f.fields'), autocomplete: 'off' });
     const under = id => (Fields.get(id)?.parents || []).map(Fields.name).join(', ');
     const add = id => { if (!chosen.includes(id) && chosen.length < 12) chosen.push(id); q.value = ''; draw(); };
     function draw() {
       box.replaceChildren(...chosen.map(id => h('button', { type: 'button', class: 'chip on vt-fchip', 'data-id': id, title: T('removeField', { name: Fields.name(id) }), onclick: () => { chosen = chosen.filter(x => x !== id); draw(); } },
         Fields.name(id) + (Fields.get(id)?.status === 'proposed' ? ' · ' + T('proposedPill') : '') + ' ×')));   // i18n-ignore (×)
-      const ideas = [...new Set([...fromOthers, ...Fields.fromText(textOf())])].filter(id => !chosen.includes(id) && Fields.get(id)).slice(0, 8);
-      sug.replaceChildren(...(ideas.length ? [h('small', { class: 'tiny ns-muted' }, T('suggested')), ...ideas.map(id => h('button', { type: 'button', class: 'chip vt-fsugchip', 'data-id': id, title: under(id) ? T('fieldIn', { parents: under(id) }) : null, onclick: () => add(id) }, '+ ' + Fields.name(id)))] : []));
-      const w = q.value.trim().replace(/\s+/g, ' ');
-      if (w.length < 2) { res.replaceChildren(); return; }
-      const hits = Fields.find(w).filter(id => !chosen.includes(id)), known = Fields.find(w, 1).some(id => Fields.allNames(id).some(x => fold(x) === fold(w)));
-      res.replaceChildren(...hits.map(id => h('button', { type: 'button', class: 'ns-item vt-fopt', 'data-id': id, onclick: () => add(id) }, h('span', { class: 't' }, h('b', {}, Fields.name(id)), under(id) ? h('small', {}, T('fieldIn', { parents: under(id) })) : null))),
-        hits.length ? null : h('p', { class: 'tiny ns-muted' }, T('noFieldMatch')),
-        known || w.length > 80 ? null : h('button', { type: 'button', class: 'btn small ghost vt-propose', title: T('proposeHint'), onclick: e => propose(e.currentTarget, w) }, T('proposeField', { name: w })));
+      // one list: what the typed letters find (also with a typo, or by initials), then what the title, the course and others' files suggest
+      const w = q.value.trim().replace(/\s+/g, ' '), typed = w.length >= 2 ? Fields.find(w) : [];
+      const ideas = [...new Set([...fromOthers, ...Fields.fromText(textOf())])].filter(id => Fields.get(id));
+      const list = [...new Set([...typed, ...ideas])].filter(id => !chosen.includes(id)).slice(0, w.length >= 2 ? 14 : 8);
+      const known = w.length >= 2 && Fields.find(w, 1).some(id => Fields.allNames(id).some(x => fold(x) === fold(w)));
+      res.replaceChildren(...[w.length >= 2 && !typed.length ? h('p', { class: 'tiny ns-muted' }, T('noFieldMatch')) : null, ...list.map(id => { const sg = !typed.includes(id), pa = under(id) ? T('fieldIn', { parents: under(id) }) : '';
+        return h('button', { type: 'button', class: 'ns-item vt-fopt' + (sg ? ' vt-fsugopt' : ''), 'data-id': id, onclick: () => add(id) },
+          h('span', { class: 't' }, h('b', {}, Fields.name(id)), pa || sg ? h('small', {}, [sg ? T('suggested') : '', pa].filter(Boolean).join(' · ')) : null)); }),   // i18n-ignore (·)
+        w.length < 2 || known || w.length > 80 ? null : h('button', { type: 'button', class: 'btn small ghost vt-propose', title: T('proposeHint'), onclick: e => propose(e.currentTarget, w) }, T('proposeField', { name: w }))].filter(Boolean));
     }
     async function propose(b, w) {
       b.disabled = true;
@@ -528,7 +555,7 @@ window.NoemaVault = (() => {
     const suggest = () => { draw(); const a = askOf(); const k = a.title + '|' + a.course; if (k === asked || (!a.title && !a.course)) return; asked = k;
       Server.suggest(a.title, a.course).then(r => { fromOthers = (r || []).map(x => x.field); draw(); }).catch(() => { }); };
     draw(); suggest();
-    return { el: h('div', { class: 'vt-fpick' }, box, q, res, sug, note), ids: () => [...chosen], suggest };
+    return { el: h('div', { class: 'vt-fpick' }, box, q, res, note), ids: () => [...chosen], suggest };
   }
   async function upload(ctx, onDone, { room = '' } = {}) {
     const { h } = ctx;
