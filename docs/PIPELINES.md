@@ -86,7 +86,8 @@ The chapter's **knowledge map** `map/chNN.json` comes first (format in `tools/CO
 - `fits` declares the exercise types, focus tags and paradigms (`mode`) that make sense for the chapter; every other
   value has a reason in `unfit`. The code types without `features.code`, `calc` without `features.math` and the picture
   types in a chapter without a picture are unfit by themselves.
-- `sourceQuestions`: every question the material asks, with its checked answer.
+- `sourceQuestions`: every exercise, question and problem of the material, in full, with its answer: `answerFrom`
+  `source` (taken as correct, no second check, explained more deeply) or `claude` (solved twice; `check` says how).
 
 | Check | Rule |
 | --- | --- |
@@ -96,6 +97,7 @@ The chapter's **knowledge map** `map/chNN.json` comes first (format in `tools/CO
 | mix.think | recall ≤ 25 %, apply or higher ≥ 40 %, ≥ 3 critical-thinking exercises (analyze, evaluate, create) |
 | mix.order (warning) | easier exercises first inside a section |
 | lr.link, lr.facades, cats.facades | every exercise names `lr` and `think`; every learnable, and every point with a category, ≥ 2 exercises in ≥ 2 types |
+| theory.tables | the theory has a `compare` matrix, a `summary` table and a `breakdown` table (kinds, sizes: CONTENT_SPEC Q2b) |
 | source.questions, cite.present | every source question has an exercise citing it (`cite.sq`); every exercise keeps its origin in `cite` |
 | self.contained | no text points at the source's structure ("Q2", "page 5", "the source says") |
 | explain.depth, mcq.why | explanations ≥ 2 sentences; a why for every option |

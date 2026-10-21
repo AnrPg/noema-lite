@@ -277,7 +277,17 @@
    {
     "id": "source.questions",
     "level": "error",
-    "what": "every question of the sources (map.sourceQuestions) has an answer and an exercise that cites it (cite.sq)"
+    "what": "every exercise / question / problem of the sources (map.sourceQuestions) is in the chapter, written out in full, with its answer: answerFrom 'source' (the source's own solution: its result is taken as correct, no second check, but the exercise's explanation is rewritten more detailed, insightful and explanatory than the source's) or 'claude' (solved here, then double-checked: check says how), and an exercise that cites it (cite.sq)"
+   },
+   {
+    "id": "theory.tables",
+    "level": "error",
+    "kinds": {
+     "compare": {"cols": 3, "rows": 2, "what": "a comparative matrix: concepts side by side against the same criteria"},
+     "summary": {"cols": 2, "rows": 3, "what": "a table that categorises or sums up the chapter's concepts"},
+     "breakdown": {"cols": 4, "rows": 2, "what": "related concepts brought together and broken down across columns of different parameters"}
+    },
+    "what": "the theory has all three kinds of table (a table block's kind: compare, summary, breakdown), each big enough to be one; a chapter with nothing to put in one gives the reason in map.unfit['table.<kind>']"
    },
    {
     "id": "cite.present",
