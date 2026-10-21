@@ -42,6 +42,8 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
   const names = (tl.json?.result?.tools || []).map(t => t.name);
   ok(['noema_whoami', 'noema_authoring_guide', 'noema_list_subjects', 'noema_get_pack_url', 'noema_start_upload', 'noema_finish_upload', 'noema_save_pack', 'noema_pipeline', 'noema_save_translation'].every(n => names.includes(n)), 'tools/list: ' + names.join(', '));
   const tool = async (name, args) => (await call({ jsonrpc: '2.0', id: 3, method: 'tools/call', params: { name, arguments: args } }, T)).json?.result;
+  ok(['noema_vault_fields_queue', 'noema_vault_fields_find', 'noema_vault_fields_save'].every(n => names.includes(n)) && /Only the app's admins/.test((await tool('noema_vault_fields_queue', {})).content[0].text)
+    && /every UI locale/.test((await tool('noema_vault_fields_save', { items_json: '[{"names":{"en":"Bird biology"}}]' })).content[0].text), 'vault fields: the tools for Claude; only admins review; an accepted field needs a name in every locale');
   const g = await tool('noema_authoring_guide', { part: 'visual' });
   ok(/minExercisesPerPicture|Pictures from the sources/.test(g.content[0].text), 'authoring guide returns the visual contract');
   ok(/claude-user@example\.com/.test((await tool('noema_whoami', {})).content[0].text), 'whoami shows the connected account');

@@ -140,7 +140,7 @@
   "@vault.howItWorks": {
     "description": "Menu item that explains the vault."
   },
-  "vault.about1": "Every file has its place: university › department › course › year › type. Its subject, semester and language are noted too, so you can search across all places, for example biology notes of any university, 3rd semester.",
+  "vault.about1": "Every file has its type, its fields (Medical physics sits under Physics and under Medicine) and its languages, and, when known, its university, department, course, year and semester. The folders go by school or by field, and the search looks in all of it: for example biology notes of any university, 3rd semester.",
   "@vault.about1": {
     "description": "How it works, paragraph 1."
   },
@@ -744,166 +744,6 @@
   "@vault.notWhatItSays": {
     "description": "Problem of a file: its content does not match its extension."
   },
-  "vault.subject.math": "Mathematics",
-  "@vault.subject.math": {
-    "description": "A field of study in the vault’s shared list of subjects."
-  },
-  "vault.subject.statistics": "Statistics",
-  "@vault.subject.statistics": {
-    "description": "A field of study in the vault’s shared list of subjects."
-  },
-  "vault.subject.physics": "Physics",
-  "@vault.subject.physics": {
-    "description": "A field of study in the vault’s shared list of subjects."
-  },
-  "vault.subject.chemistry": "Chemistry",
-  "@vault.subject.chemistry": {
-    "description": "A field of study in the vault’s shared list of subjects."
-  },
-  "vault.subject.biology": "Biology",
-  "@vault.subject.biology": {
-    "description": "A field of study in the vault’s shared list of subjects."
-  },
-  "vault.subject.medicine": "Medicine",
-  "@vault.subject.medicine": {
-    "description": "A field of study in the vault’s shared list of subjects."
-  },
-  "vault.subject.nursing": "Nursing",
-  "@vault.subject.nursing": {
-    "description": "A field of study in the vault’s shared list of subjects."
-  },
-  "vault.subject.pharmacy": "Pharmacy",
-  "@vault.subject.pharmacy": {
-    "description": "A field of study in the vault’s shared list of subjects."
-  },
-  "vault.subject.dentistry": "Dentistry",
-  "@vault.subject.dentistry": {
-    "description": "A field of study in the vault’s shared list of subjects."
-  },
-  "vault.subject.veterinary": "Veterinary medicine",
-  "@vault.subject.veterinary": {
-    "description": "A field of study in the vault’s shared list of subjects."
-  },
-  "vault.subject.cs": "Computer science",
-  "@vault.subject.cs": {
-    "description": "A field of study in the vault’s shared list of subjects."
-  },
-  "vault.subject.electrical": "Electrical engineering",
-  "@vault.subject.electrical": {
-    "description": "A field of study in the vault’s shared list of subjects."
-  },
-  "vault.subject.mechanical": "Mechanical engineering",
-  "@vault.subject.mechanical": {
-    "description": "A field of study in the vault’s shared list of subjects."
-  },
-  "vault.subject.civil": "Civil engineering",
-  "@vault.subject.civil": {
-    "description": "A field of study in the vault’s shared list of subjects."
-  },
-  "vault.subject.chemical_eng": "Chemical engineering",
-  "@vault.subject.chemical_eng": {
-    "description": "A field of study in the vault’s shared list of subjects."
-  },
-  "vault.subject.architecture": "Architecture",
-  "@vault.subject.architecture": {
-    "description": "A field of study in the vault’s shared list of subjects."
-  },
-  "vault.subject.economics": "Economics",
-  "@vault.subject.economics": {
-    "description": "A field of study in the vault’s shared list of subjects."
-  },
-  "vault.subject.business": "Business",
-  "@vault.subject.business": {
-    "description": "A field of study in the vault’s shared list of subjects."
-  },
-  "vault.subject.accounting": "Accounting and finance",
-  "@vault.subject.accounting": {
-    "description": "A field of study in the vault’s shared list of subjects."
-  },
-  "vault.subject.law": "Law",
-  "@vault.subject.law": {
-    "description": "A field of study in the vault’s shared list of subjects."
-  },
-  "vault.subject.political": "Political science",
-  "@vault.subject.political": {
-    "description": "A field of study in the vault’s shared list of subjects."
-  },
-  "vault.subject.sociology": "Sociology",
-  "@vault.subject.sociology": {
-    "description": "A field of study in the vault’s shared list of subjects."
-  },
-  "vault.subject.psychology": "Psychology",
-  "@vault.subject.psychology": {
-    "description": "A field of study in the vault’s shared list of subjects."
-  },
-  "vault.subject.education": "Education",
-  "@vault.subject.education": {
-    "description": "A field of study in the vault’s shared list of subjects."
-  },
-  "vault.subject.philosophy": "Philosophy",
-  "@vault.subject.philosophy": {
-    "description": "A field of study in the vault’s shared list of subjects."
-  },
-  "vault.subject.history": "History",
-  "@vault.subject.history": {
-    "description": "A field of study in the vault’s shared list of subjects."
-  },
-  "vault.subject.archaeology": "Archaeology",
-  "@vault.subject.archaeology": {
-    "description": "A field of study in the vault’s shared list of subjects."
-  },
-  "vault.subject.literature": "Literature",
-  "@vault.subject.literature": {
-    "description": "A field of study in the vault’s shared list of subjects."
-  },
-  "vault.subject.linguistics": "Linguistics",
-  "@vault.subject.linguistics": {
-    "description": "A field of study in the vault’s shared list of subjects."
-  },
-  "vault.subject.languages": "Foreign languages",
-  "@vault.subject.languages": {
-    "description": "A field of study in the vault’s shared list of subjects."
-  },
-  "vault.subject.arts": "Fine arts and design",
-  "@vault.subject.arts": {
-    "description": "A field of study in the vault’s shared list of subjects."
-  },
-  "vault.subject.music": "Music",
-  "@vault.subject.music": {
-    "description": "A field of study in the vault’s shared list of subjects."
-  },
-  "vault.subject.geography": "Geography",
-  "@vault.subject.geography": {
-    "description": "A field of study in the vault’s shared list of subjects."
-  },
-  "vault.subject.geology": "Geology",
-  "@vault.subject.geology": {
-    "description": "A field of study in the vault’s shared list of subjects."
-  },
-  "vault.subject.environment": "Environmental science",
-  "@vault.subject.environment": {
-    "description": "A field of study in the vault’s shared list of subjects."
-  },
-  "vault.subject.agriculture": "Agriculture",
-  "@vault.subject.agriculture": {
-    "description": "A field of study in the vault’s shared list of subjects."
-  },
-  "vault.subject.communication": "Media and communication",
-  "@vault.subject.communication": {
-    "description": "A field of study in the vault’s shared list of subjects."
-  },
-  "vault.subject.theology": "Theology",
-  "@vault.subject.theology": {
-    "description": "A field of study in the vault’s shared list of subjects."
-  },
-  "vault.subject.sports": "Sport science",
-  "@vault.subject.sports": {
-    "description": "A field of study in the vault’s shared list of subjects."
-  },
-  "vault.subject.other": "Other",
-  "@vault.subject.other": {
-    "description": "A field of study in the vault’s shared list of subjects."
-  },
   "vault.aGroup": "a study group",
   "@vault.aGroup": {
     "description": "Name of a study group the app does not know."
@@ -990,7 +830,7 @@
   "@vault.courseHint": {
     "description": "Small hint next to the Course label in the upload form."
   },
-  "vault.fieldHelp": "The broad field, the same everywhere: it brings together files of similar courses from other schools and in other languages.",
+  "vault.fieldHelp": "What the material is about, the same everywhere, unlike the course name. Choose every field that fits (Medical physics, Radiology…): the file shows under each of them in the folders, and students of other schools and languages find it.",
   "@vault.fieldHelp": {
     "description": "Explains the Field (subject) under its list in the upload form, and as its tooltip."
   },
@@ -1025,5 +865,61 @@
   "vault.pinned": "Pinned:",
   "@vault.pinned": {
     "description": "Before the chips of the pinned folders."
+  },
+  "vault.f.fields": "Fields",
+  "@vault.f.fields": {
+    "description": "Label of the fields of a file (form, file page)."
+  },
+  "vault.fieldSearchPh": "Find a field: physics, radiology, law…",
+  "@vault.fieldSearchPh": {
+    "description": "Placeholder of the field search in the upload form."
+  },
+  "vault.fieldIn": "in {parents}",
+  "@vault.fieldIn": {
+    "description": "Under a field: the fields it sits under (comma list)."
+  },
+  "vault.suggested": "Suggested:",
+  "@vault.suggested": {
+    "description": "Before suggested fields (from the title, the course, and what others chose)."
+  },
+  "vault.proposeField": "Propose “{name}” as a new field",
+  "@vault.proposeField": {
+    "description": "Button when no field has the name typed."
+  },
+  "vault.proposeHint": "It goes under the fields you chose already. You can use it right away; it is then checked, translated and placed for everyone.",
+  "@vault.proposeHint": {
+    "description": "Tooltip of the propose button."
+  },
+  "vault.proposed": "Proposed: you can use it now; it is reviewed before others see it.",
+  "@vault.proposed": {
+    "description": "Note after proposing a new field."
+  },
+  "vault.proposedPill": "proposed",
+  "@vault.proposedPill": {
+    "description": "Mark on a chosen field still waiting for review."
+  },
+  "vault.removeField": "Remove {name}",
+  "@vault.removeField": {
+    "description": "Tooltip of a chosen field chip."
+  },
+  "vault.noFieldMatch": "No field by that name.",
+  "@vault.noFieldMatch": {
+    "description": "Field search found nothing."
+  },
+  "vault.filedHere": "Filed under {name} itself",
+  "@vault.filedHere": {
+    "description": "Heading, by-field folders: the files filed under this field, not under a field below it."
+  },
+  "vault.actions": "What to do with this file",
+  "@vault.actions": {
+    "description": "Group label (screen readers) of a file's action buttons."
+  },
+  "vault.makeCourseShort": "Make a course",
+  "@vault.makeCourseShort": {
+    "description": "Short label of the tile that makes a course from a vault file (the full sentence is its tooltip)."
+  },
+  "vault.moreActions": "More",
+  "@vault.moreActions": {
+    "description": "Tile opening the menu of rarer actions (edit, delete, report)."
   }
 }

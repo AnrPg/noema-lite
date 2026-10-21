@@ -208,7 +208,7 @@ window.NoemaShell = (() => {
   }
   function popMenu(anchor, items, { down = true } = {}) {
     const list = (items || []).filter(Boolean);
-    const pop = h('div', { class: 'ns-pop' + (down ? ' down' : ''), role: 'menu' }, ...list.map(it => it === '-' ? h('hr') : h('button', { role: 'menuitem', class: it.danger ? 'danger' : '', disabled: it.disabled || null, onclick: e => { e.stopPropagation(); closePops(); it.href ? go(it.href) : it.run?.(e); } },
+    const pop = h('div', { class: 'ns-pop' + (down ? ' down' : ''), role: 'menu' }, ...list.map(it => it === '-' ? h('hr') : h('button', { role: 'menuitem', class: [it.danger ? 'danger' : '', it.cls || ''].join(' ').trim() || null, disabled: it.disabled || null, onclick: e => { e.stopPropagation(); closePops(); it.href ? go(it.href) : it.run?.(e); } },
       it.icon ? h('span', { class: 'mi' }, typeof it.icon === 'string' && it.icon.length > 2 && ART()?.I[it.icon] ? svg(it.icon) : it.icon) : null, h('span', { class: 'mt' }, it.label, it.sub ? h('small', {}, it.sub) : null), it.badge ? pill(it.badge, it.tone || 1) : null)));
     anchor.parentElement.append(pop); anchor.setAttribute('aria-expanded', 'true');
     // keep it on screen
