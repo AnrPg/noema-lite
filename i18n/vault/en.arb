@@ -1001,5 +1001,29 @@
   "vault.misc": "Misc",
   "@vault.misc": {
     "description": "Folders view: the folder of the files that do not give this detail (no school, …)."
+  },
+  "vault.bySchool": "By school",
+  "@vault.bySchool": {
+    "description": "Folders view: the way in through university › department › course (the default)."
+  },
+  "vault.byField": "By field",
+  "@vault.byField": {
+    "description": "Folders view: the way in through the fields."
+  },
+  "vault.allSchools": "All schools",
+  "@vault.allSchools": {
+    "description": "Folders view by school: the first crumb."
+  },
+  "vault.pin": "Pin this folder",
+  "@vault.pin": {
+    "description": "Link next to the crumbs: keep this folder at the top of the folders view."
+  },
+  "vault.unpin": "Unpin",
+  "@vault.unpin": {
+    "description": "Link next to the crumbs of a pinned folder."
+  },
+  "vault.pinned": "Pinned:",
+  "@vault.pinned": {
+    "description": "Before the chips of the pinned folders."
   }
 }

@@ -1972,6 +1972,7 @@ body.ns-on .ns-hit{outline:2px solid var(--acc);outline-offset:6px;border-radius
 .vt-active{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}.vt-active:empty{display:none}
 .vt-file .vt-meta{display:flex;gap:8px;align-items:center;color:var(--ink3);white-space:nowrap}
 .vt-path{display:flex;flex-wrap:wrap;gap:2px;align-items:center;margin:0 0 8px;font-size:.92rem}
+.vt-ways{display:inline-flex;margin:0 0 10px} .vt-pins{gap:6px;margin:0 0 10px;align-items:center} .vt-pin{margin-inline-start:8px} .vt-endchips{margin:0 0 6px} .vt-kindhead{font-size:1rem;margin:16px 0 6px} .vt-kindhead small{font-weight:400}
 .vt-facts{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:10px 0}.vt-facts dt{color:var(--ink3)}.vt-facts dd{margin:0}
 .vt-acts,.vt-more{gap:8px;flex-wrap:wrap;margin:10px 0}.vt-acts .btn,.vt-more .btn{display:inline-flex;align-items:center;gap:4px}
 .vt-preview:empty{display:none}.vt-preview{margin:8px 0}.vt-preview img,.vt-preview video{max-width:100%;border-radius:var(--br)}

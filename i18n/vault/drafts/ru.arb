@@ -206,5 +206,11 @@
   "vault.courseHint": "(точно так, как его называют в вашем вузе)",
   "vault.fieldHelp": "Широкая область, одна для всех: объединяет файлы похожих курсов других вузов и на других языках.",
   "vault.allFields": "Все области",
-  "vault.misc": "Прочее"
+  "vault.misc": "Прочее",
+  "vault.bySchool": "По вузу",
+  "vault.byField": "По области",
+  "vault.allSchools": "Все вузы",
+  "vault.pin": "Закрепить папку",
+  "vault.unpin": "Открепить",
+  "vault.pinned": "Закреплённые:"
 }

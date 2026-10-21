@@ -93,11 +93,12 @@ window.NoemaVault = (() => {
   };
 
   /* ---------- the page's settings, in the address: #/vault?q=…&u=…&sem=3&k=notes,exam … ---------- */
-  const KEYS = ['q', 'v', 'f', 'u', 'd', 'c', 'p', 'y', 'sem', 'k', 'sub', 'x', 'sol', 'hw', 'lg', 'ft', 'r', 'used', 'mine', 'g', 'sort', 'id'];   // g: a study group's folder · id: open that file
+  const KEYS = ['q', 'v', 'by', 'f', 'u', 'd', 'c', 'p', 'y', 'sem', 'k', 'sub', 'x', 'sol', 'hw', 'lg', 'ft', 'r', 'used', 'mine', 'g', 'sort', 'id'];   // g: a study group's folder · id: open that file
   const parse = () => { const q = new URLSearchParams((location.hash.split('?')[1] || '')); const P = {}; for (const k of KEYS) if (q.get(k)) P[k] = q.get(k); return P; };
   const hashOf = P => { const q = new URLSearchParams(); for (const k of KEYS) if (P[k]) q.set(k, P[k]); const s = q.toString(); return '#/vault' + (s ? '?' + s : ''); };
   const listOf = s => String(s || '').split(',').filter(Boolean);
-  const LEVELS = ['subject', 'language', 'university', 'kind'];   // the folders: a view of the one table, never copies (a file of two languages: in both)
+  /* the folders: a view of the one table, never copies. Two ways in — by school (the default) and by field — then the files, grouped by type */
+  const WAYS = { school: ['university', 'department', 'course'], field: ['subject'] };
   const same = (a, b) => fold(a) === fold(b);
   /* a file's languages: a list (el,ru) · university, department, course, year, semester: optional (null: not given; no semester: any) */
   const NONE = '-';   // the folder of the files without that detail (in the address: f=-›…)
@@ -191,13 +192,13 @@ window.NoemaVault = (() => {
         group(T('g.format'), sel(T('f.language'), 'lg', values(all.flatMap(f => langsOf(f).map(language => ({ language }))), 'language').map(x => [x.v, langName(x.v)])), h('div', { class: 'ns-srchips' }, ...GROUPS.map(g => chip('ft', g, T('ft.' + g), true)))),
         group(T('g.quality'), sel(T('f.rating'), 'r', [['3', T('r.3')], ['4', T('r.4')]])),
         group(T('g.use'), h('div', { class: 'ns-srchips' }, chip('used', '1', T('c.used')))),
-        groups.length ? group(T('g.group'), sel(T('f.group'), 'g', groups.map(g => [g.id, g.name]), { bare: true })) : null);
-      const n = KEYS.filter(k => !['q', 'v', 'f', 'sort', 'id'].includes(k) && P[k]).length;
+        groups.length ? group(T('g.group'), sel(T('f.group'), 'g', groups.map(g => [g.id, g.name]), { bare: true })) : '');   // '' not null: the DOM would write "null"
+      const n = KEYS.filter(k => !['q', 'v', 'by', 'f', 'sort', 'id'].includes(k) && P[k]).length;
       filtBtn.replaceChildren(svg('filter'), ' ', n ? T('filtersN', { n }) : T('filters'));
       // the filters in use, each one removable
       const label = k => ({ u: uni(P.u), d: P.d, c: P.c, p: P.p, y: P.y, sem: semName(P.sem), k: listOf(P.k).map(x => T('kind.' + x)).join(', '), sub: subj(P.sub), x: T('c.exercises'), sol: T('c.solutions'),
         hw: T(P.hw === 'hand' ? 'c.handwritten' : 'c.typed'), lg: langName(P.lg), ft: listOf(P.ft).map(x => T('ft.' + x)).join(', '), r: T('r.' + P.r), used: T('c.used'), mine: T('myUploads'), g: groupName(P.g) })[k];
-      const on = KEYS.filter(k => !['q', 'v', 'f', 'sort', 'id'].includes(k) && P[k]);
+      const on = KEYS.filter(k => !['q', 'v', 'by', 'f', 'sort', 'id'].includes(k) && P[k]);
       chips.replaceChildren(...on.map(k => h('button', { class: 'ns-srchip on vt-chip', 'data-f': k, 'aria-label': T('removeFilter', { what: label(k) }), onclick: () => setP({ [k]: '' }) }, label(k), ' ✕')),
         on.length > 1 ? h('button', { class: 'linkish', onclick: () => setP(Object.fromEntries(on.map(k => [k, '']))) }, T('clear')) : '');
     }
@@ -212,23 +213,46 @@ window.NoemaVault = (() => {
       return sorted.length ? h('div', { class: 'ns-list vt-list' }, ...sorted.slice(0, 300).map(card)) : empty();
     }
     const empty = () => h('div', { class: 'ns-panel ns-empty vt-empty' }, ctx.faceEl(undefined, 'breathe'), h('p', {}, all.length ? T('none') : T('emptyVault')), h('button', { class: 'btn small primary', onclick: () => upload(ctx, () => refresh(true)) }, T('upload')));
-    /* 📁 the folders: field › language › school › type, the filters applied; a file without that detail: Misc */
-    const valsOf = (f, lev) => lev === 'language' ? langsOf(f) : given(f[lev]) ? [f[lev]] : [];
-    const folderName = (lev, v) => v === NONE ? T('misc') : lev === 'kind' ? T('kind.' + v) : lev === 'subject' ? subj(v) : lev === 'language' ? langName(v) : String(v);
+    /* 📁 the folders: school › department › course, or field; at the end the files by type, with chips for language, year, semester */
+    const valsOf = (f, lev) => given(f[lev]) ? [f[lev]] : [];
+    const folderName = (lev, v) => v === NONE ? T('misc') : lev === 'subject' ? subj(v) : String(v);
+    const pinKey = () => `noema1:${acc()}:a:vaultpins`;
+    const pins = () => { try { return JSON.parse(N()?.kv?.get(pinKey()) || '[]'); } catch (e) { return []; } };
+    const putPins = l => N()?.kv?.set(pinKey(), JSON.stringify(l.slice(0, 12)));
     function folders(list) {
-      const path = (P.f || '').split('›').filter(Boolean), depth = path.length;
-      const here = list.filter(f => path.every((p, i) => { const vs = valsOf(f, LEVELS[i]); return vs.length ? vs.some(v => String(v) === p || (LEVELS[i] === 'university' && same(v, p))) : p === NONE; }));
-      const crumbs = h('nav', { class: 'vt-path', 'aria-label': T('folders') }, h('button', { class: 'linkish', onclick: () => setP({ f: '' }) }, T('allFields')),
-        ...path.flatMap((p, i) => [h('span', { 'aria-hidden': 'true' }, ' › '), h('button', { class: 'linkish', onclick: () => setP({ f: path.slice(0, i + 1).join('›') }) }, folderName(LEVELS[i], p))]));
-      if (depth >= LEVELS.length) return h('div', {}, crumbs, files(here));
-      const lev = LEVELS[depth], kids = values(here.flatMap(f => valsOf(f, lev).map(v => ({ [lev]: v }))), lev), none = here.filter(f => !valsOf(f, lev).length).length;
+      const by = P.by === 'field' ? 'field' : 'school', LV = WAYS[by];
+      const path = (P.f || '').split('›').filter(Boolean), depth = Math.min(path.length, LV.length);
+      const here = list.filter(f => path.slice(0, depth).every((p, i) => { const vs = valsOf(f, LV[i]); return vs.length ? vs.some(v => String(v) === p || same(v, p)) : p === NONE; }));
+      const ways = h('div', { class: 'ns-seg small vt-ways', role: 'radiogroup', 'aria-label': T('folders') }, ...[['school', T('bySchool')], ['field', T('byField')]].map(([k, l]) =>
+        h('button', { class: by === k ? 'on' : '', role: 'radio', 'aria-checked': String(by === k), 'data-by': k, onclick: () => setP({ by: k === 'school' ? '' : k, f: '' }) }, l)));
+      const label = path.slice(0, depth).map((p, i) => folderName(LV[i], p)).join(' › ');
+      const mine = pins(), pinned = mine.some(x => x.by === by && x.f === (P.f || ''));
+      const pinBtn = depth ? h('button', { class: 'linkish tiny vt-pin', onclick: () => { putPins(pinned ? mine.filter(x => !(x.by === by && x.f === P.f)) : [{ by, f: P.f, label }, ...mine]); draw(); } }, pinned ? T('unpin') : T('pin')) : null;
+      const pinRow = mine.length ? h('div', { class: 'row vt-pins' }, h('small', { class: 'tiny ns-muted' }, T('pinned')), ...mine.map(x => h('button', { class: 'chip', onclick: () => setP({ by: x.by === 'school' ? '' : x.by, f: x.f }) }, x.label))) : null;
+      const crumbs = h('nav', { class: 'vt-path', 'aria-label': T('folders') }, h('button', { class: 'linkish', onclick: () => setP({ f: '' }) }, by === 'school' ? T('allSchools') : T('allFields')),
+        ...path.slice(0, depth).flatMap((p, i) => [h('span', { 'aria-hidden': 'true' }, ' › '), h('button', { class: 'linkish', onclick: () => setP({ f: path.slice(0, i + 1).join('›') }) }, folderName(LV[i], p))]), pinBtn ? ' ' : null, pinBtn);
+      const head = [pinRow, ways, crumbs].filter(Boolean);
+      if (depth >= LV.length) return h('div', {}, ...head, ending(here));
+      const lev = LV[depth], kids = values(here.flatMap(f => valsOf(f, lev).map(v => ({ [lev]: v }))), lev), none = here.filter(f => !valsOf(f, lev).length).length;
       kids.sort((a, b) => b.n - a.n || folderName(lev, a.v).localeCompare(folderName(lev, b.v)));
       if (none) kids.push({ v: NONE, n: none });
-      return h('div', {}, crumbs, kids.length ? h('div', { class: 'ns-list vt-folders' }, ...kids.map(x => h('button', { class: 'ns-item vt-folder', 'data-v': String(x.v), onclick: () => setP({ f: [...path, String(x.v)].join('›') }) },
+      return h('div', {}, ...head, kids.length ? h('div', { class: 'ns-list vt-folders' }, ...kids.map(x => h('button', { class: 'ns-item vt-folder', 'data-v': String(x.v), onclick: () => setP({ f: [...path.slice(0, depth), String(x.v)].join('›') }) },
         h('span', { class: 'ns-ico' }, svg('vault')), h('span', { class: 't' }, h('b', {}, folderName(lev, x.v)), h('small', {}, T('nFiles', { n: x.n }))), chev()))) : empty());
     }
+    /** The end of a way: chips for the languages, years and semesters there (each one a filter), then the files by type. */
+    function ending(list) {
+      if (!list.length) return empty();
+      const chipsOf = (key, vals, name) => vals.length > 1 ? vals.map(v => h('button', { class: 'ns-srchip' + (P[key] === String(v) ? ' on' : ''), 'data-f': key, 'data-v': String(v), onclick: () => setP({ [key]: P[key] === String(v) ? '' : String(v) }) }, name(v))) : [];
+      const uniq = a => [...new Set(a)];
+      const bar = [...chipsOf('lg', uniq(list.flatMap(langsOf)), langName), ...chipsOf('y', uniq(list.map(f => f.year).filter(Boolean)).sort((a, b) => b - a), String),
+        ...chipsOf('sem', uniq(list.map(f => f.semester).filter(Boolean)).sort((a, b) => a - b), semName)];
+      const sorted = [...list].sort(SORTS[P.sort] || SORTS.new), kinds = KINDS.filter(k => sorted.some(f => f.kind === k));
+      return h('div', {}, bar.length ? h('div', { class: 'ns-srchips vt-endchips' }, ...bar) : null,
+        ...kinds.map(k => h('section', { class: 'vt-kindgroup', 'data-kind': k }, h('h3', { class: 'vt-kindhead' }, T('kind.' + k), ' ', h('small', { class: 'ns-muted' }, num(sorted.filter(f => f.kind === k).length))),
+          h('div', { class: 'ns-list vt-list' }, ...sorted.filter(f => f.kind === k).slice(0, 300).map(card)))));
+    }
     function draw() {
-      viewSeg.replaceChildren(...[['', T('files')], ['folders', T('folders')]].map(([k, l]) => h('button', { class: (P.v || '') === k ? 'on' : '', role: 'radio', 'aria-checked': String((P.v || '') === k), 'data-v': k || 'files', onclick: () => setP({ v: k, f: '' }) }, l)));
+      viewSeg.replaceChildren(...[['', T('files')], ['folders', T('folders')]].map(([k, l]) => h('button', { class: (P.v || '') === k ? 'on' : '', role: 'radio', 'aria-checked': String((P.v || '') === k), 'data-v': k || 'files', onclick: () => setP({ v: k, f: '', by: '' }) }, l)));
       sortSel.value = P.sort || 'new';
       drawFilters();
       const list = filter(all, P);

@@ -3,7 +3,7 @@
    by the first bytes (a program renamed .pdf is refused), the filters across universities and years.
    In the browser: the Vault tab, an upload of several files with the required fields (a program, an SVG and a fake PDF
    refused; the rules box; the quota), anonymous by default; another person's file with their name shown; the filters
-   (biology notes of any university, 3rd semester), the folders (field › language › school › type, Misc for what is not given), the search
+   (biology notes of any university, 3rd semester), the folders (by school or by field, Misc for what is not given; the files by type; pins), the search
    in Latin letters, a file's page (preview, download counted once, rating, report — hidden after three), "Make a course
    from it" opening 📚 From your sources with the file, editing and deleting one's own file, the phone width, Greek menus.
    Usage: node tests/vault.js <prepared-repo-dir> */
@@ -138,12 +138,17 @@ await p.selectOption(fld('subject'), 'biology');
     await p.fill('.vt-q', ''); await wait(400);
     await p.click('.vt-viewseg [data-v="folders"]'); await wait(200);
     const top = await p.locator('.vt-folder').allInnerTexts();
-    ok(top.length === 1 && /Biology\s+3 files/.test(top[0]), 'folders: the fields with their counts: ' + top.join(' | '));
-    await p.click('.vt-folder[data-v="biology"]'); await wait(150);
-    const langs = await p.locator('.vt-folder').allInnerTexts();
-    ok(langs.some(t => /English\s+2 files/.test(t)) && langs.some(t => /Russian\s+2 files/.test(t)) && langs.some(t => /Greek\s+1 file/.test(t)), 'a file of two languages is in both language folders (the same file, not a copy): ' + langs.join(' | '));
-    for (const v of ['ru', 'University of Crete', 'notes']) { await p.click(`.vt-folder[data-v="${v}"]`); await wait(150); }
-    ok(await p.locator('.vt-file').count() === 2 && /All fields › Biology › Russian › University of Crete › Lecture notes/.test((await p.locator('.vt-path').innerText()).replace(/\s+/g, ' ')), 'field › language › school › type, then the files');
+    ok(await p.locator('.vt-ways [data-by="school"].on').count() === 1 && top.length === 2 && top.some(t => /University of Crete\s+2 files/.test(t)) && top.some(t => /Πανεπιστήμιο Αθηνών\s+1 file/.test(t)), 'folders by school (the default): the universities with their counts');
+    for (const v of ['University of Crete', 'Biology', 'Genetics']) { await p.click(`.vt-folder[data-v="${v}"]`); await wait(150); }
+    ok(/All schools › University of Crete › Biology › Genetics/.test((await p.locator('.vt-path').innerText()).replace(/\s+/g, ' ')) && await p.locator('.vt-kindgroup[data-kind="notes"] .vt-file').count() === 2, 'school › department › course, then the files grouped by type');
+    ok(!/\bnull\b/.test(await p.locator('.vt-view').innerText()), 'no stray “null” on the page');
+    ok(await p.locator('.vt-endchips [data-f="lg"]').count() === 2, 'chips for the languages there (English, Russian)');
+    await p.click('.vt-pin'); await wait(150);
+    ok(await p.locator('.vt-pins .chip', { hasText: 'University of Crete › Biology › Genetics' }).count() === 1, 'a folder can be pinned');
+    await p.click('.vt-ways [data-by="field"]'); await wait(150);
+    ok((await p.locator('.vt-folder').allInnerTexts()).some(t => /Biology\s+3 files/.test(t)), 'by field: Biology, 3 files');
+    await p.click('.vt-pins .chip'); await wait(150);
+    ok(await p.locator('.vt-kindgroup .vt-file').count() === 2, 'the pinned folder opens again');
     await p.screenshot({ path: SHOTS + '/vt2_folders.png', fullPage: true });
     await p.click('.vt-path button.linkish >> nth=0'); await p.click('.vt-viewseg [data-v="files"]'); await wait(200);
 

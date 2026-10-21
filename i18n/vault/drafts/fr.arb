@@ -206,5 +206,11 @@
   "vault.courseHint": "(exactement comme votre établissement l’appelle)",
   "vault.fieldHelp": "Le domaine général, le même partout : il réunit les fichiers de cours semblables d’autres établissements et dans d’autres langues.",
   "vault.allFields": "Tous les domaines",
-  "vault.misc": "Divers"
+  "vault.misc": "Divers",
+  "vault.bySchool": "Par établissement",
+  "vault.byField": "Par domaine",
+  "vault.allSchools": "Tous les établissements",
+  "vault.pin": "Épingler ce dossier",
+  "vault.unpin": "Désépingler",
+  "vault.pinned": "Épinglés :"
 }
