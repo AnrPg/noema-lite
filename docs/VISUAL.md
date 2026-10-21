@@ -128,7 +128,7 @@ Rules:
    names + hotspot a reasoning question + occlusion), plus a `figure` in the section that teaches it.
    Enforced by `"authoring": {"minVisualPerChapter": 3, "minExercisesPerPicture": 3}`.
 2. A chapter **with** pictures: ≥ 1 `figure`, ≥ 3 visual exercises of ≥ 2 visual types, and every picture exercise
-   type ≥ 3 times (`tools/pack_rules.json`, `"minPerKind": 3`). A chapter with no picture that teaches has none —
+   type that fits ≥ 3 times (`tools/pack_rules.json`; the chapter's map declares what fits). A chapter with no picture that teaches has none —
    that is fine and is not an error.
 3. **Information value first.** A picture earns its place only if it teaches something the text
    alone does not (where things are, what they look like, how they connect, how a quantity behaves).

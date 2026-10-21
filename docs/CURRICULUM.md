@@ -91,7 +91,7 @@ mastered-by-test step can be undone. A step **opens** when all its prerequisites
   call per planned chapter in noema-lite's own format (contract from `tools/CONTENT_SPEC.md` +
   `docs/VISUAL.md`, shipped as `engine/authoring.js`), with 0–2 diagrams per chapter (only where they teach) drawn by the JS
   diagram kit (flow, cycle, hub, layers, tree, compare — SVG + clickable regions) and picture exercises
-  on them. Each chapter is checked by `engine/packcheck.js` (strict) plus quantity rules (≥ 4 exercises per section; every type, difficulty and focus tag ≥ 3 times per chapter, `tools/pack_rules.json`; ≥ 3 picture exercises when the chapter has a diagram; ≥ 25 % pitfall/debug/exam; flashcards, pitfalls…) and
+  on them. Each chapter is checked by `engine/packcheck.js` (strict) plus quantity rules (≥ 4 exercises per section; `engine/packcheck.js` strict; ≥ 3 picture exercises when the chapter has a diagram; ≥ 25 % pitfall/debug/exam; flashcards, pitfalls…) and
   repaired by Gemini when needed. Progress is saved per chapter (resumes after a reload).
 * Two devices never build the same step (a lock in the synced key `a:curgen:<id>`, renewed every minute).
 

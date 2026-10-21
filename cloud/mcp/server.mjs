@@ -41,8 +41,8 @@ async function sb(path, token, { method = 'GET', body, headers = {}, raw = false
 /* ---------- pack checks: engine/packcheck.js (shared with the app), prepended by tools/build.py ---------- */
 // tools/pack_rules.json: a pack made with the current toolkit (built since QUALITY.since, or hand-written) must declare
 // subject.authoring.rules >= 2 and meet the quality rules (errors: authoring.by claude); older packs keep working (TD-11).
-// Packs without the quality rules: the quantity rules of authoring.minPerKind, always for a curriculum step (cur-…).
-const checkPack = (p, expectId) => globalThis.NoemaPackCheck.checkPack(p, expectId, { requireQuality: true, balance: p?.subject?.authoring?.minPerKind ?? (/^cur-/.test(p?.subject?.id || '') ? 3 : undefined) });
+// Packs without the quality rules: only the quantity rules their own authoring.minPerKind asks for.
+const checkPack = (p, expectId) => globalThis.NoemaPackCheck.checkPack(p, expectId, { requireQuality: true });
 
 async function register(token, uid, p, counts, extra = {}) {
   const meta = { ...p.subject, counts: { ...(p.counts || {}), ...counts }, version: p.version || null, ...(p.translations ? { contentLocales: Object.keys(p.translations) } : {}), via: 'claude', updatedAt: new Date().toISOString(), ...extra };

@@ -272,15 +272,21 @@ IDs: `chNN-eNNN`, unique, sequential.
 ```
 
 ## Quantity guide
-Enforced per chapter by `tools/pack_rules.json` (one rule list, read by `validate.py` / `make_pack.py` / `build.py` and by
-`engine/packcheck.js` for the app, the Gemini generator and the connector's `noema_finish_upload`):
-* **every exercise type ≥ 3 times**: `mcq tf odd order match bucket cloze scenario free` always; `spotbug write` when
-  `features.code`; `calc` when `features.math`; the 7 picture types when the chapter has a picture (rule 8);
-* **every difficulty** 1, 2 and 3 **≥ 3 times**;
-* **every focus tag ≥ 3 times**: `concept pitfall debug exam interview compare` always; `syntax` with code, `calc` with math;
-* an optional type or tag the chapter uses anyway needs 3 too. `subject.authoring.minPerKind` (3, written by
-  `start_subject.py`) sets the number; packs made before 2026-10-21 have none and get warnings; chapters of such a pack
-  that is being extended (`unpack.py`) warn, new chapters must pass.
+Checked per chapter by `tools/pack_rules.json` (one rule list, read by `validate.py` / `make_pack.py` / `build.py` and by
+`engine/packcheck.js` for the app, the Gemini generator and the connector's `noema_finish_upload`; the steps in order:
+`docs/PIPELINES.md`). For packs with `subject.authoring.rules` ≥ 2 (written by `start_subject.py`):
+* **only what fits**: the chapter's map (`map/chNN.json` `fits`) declares the exercise types, focus tags and paradigms
+  (`mode`) that make sense for it; every other value has a reason in `unfit` (code types without `features.code`,
+  `calc` without `features.math` and the picture types without a picture are unfit by themselves);
+* **every type and focus tag that fits ≥ 3 times**, every paradigm that fits ≥ 2 times;
+* **difficulty 1 / 2 / 3 ≈ 20 / 25 / 55 %** (± 5), **recall ≤ 25 %**, apply or higher ≥ 40 %, ≥ 3 critical-thinking items;
+* **every learnable** ≥ 2 exercises in ≥ 2 types; every map point not taught earlier sits in a learnable (exhaustive).
+* **Sizes are a mild suggestion, never an error or a warning**: about 2 facades per learnable in the core set and a
+  reserve without a cap; 40–70 learnables per node give ~80–140 core and 160–280 exercises in all; above ~180 in the
+  core, think about splitting the node.
+Errors when `authoring.by` is claude or gemini, warnings for learner or import packs. Older packs without `rules` keep the
+earlier quantity rules of their own `authoring.minPerKind`, if they have one; chapters of a pack being extended
+(`unpack.py`) warn.
 Also: ≥ 5 exercises per section, ≥ 2 quick ones each; ≥ 30% of exercises tagged `pitfall`, `debug` or `exam`.
 Be exhaustive rather than brief: depth and coverage beat polish.
 

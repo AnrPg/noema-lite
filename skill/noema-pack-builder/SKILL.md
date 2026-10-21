@@ -17,6 +17,13 @@ learner opens each source file at the pages the chapters cite.
 
 Scripts live in `scripts/` next to this file (Python 3, standard library + Pillow; for PDFs any of poppler, PyMuPDF, or pypdf + pypdfium2).
 
+**Work through a flow, step by step (`references/PIPELINES.md`).** First find the flow, then let each step's check say it
+is done before the next one — never skip a step:
+`python3 scripts/pipeline.py detect --sources N --topics N` (or `--step`, `--extend`, `--bridge`, `--translate`…) →
+after `start_subject.py`: `python3 scripts/pipeline.py start <flow> work/<id>` → repeat `pipeline.py next work/<id>` /
+`pipeline.py check work/<id> <step>` (connector calls and judgements: `pipeline.py done work/<id> <step> --note "…"`).
+A change to a file re-opens its step and every step after it. Without the skill, `noema_pipeline` gives the same flows.
+
 ## 0. Agree on the basics (one short message, then work)
 Subject title and id (`lowercase-with-hyphens`), language of the material (the tutor answers in it),
 the learner's goal (exam / understanding / project), math or code features. If the user is vague,
@@ -91,7 +98,7 @@ count. Look in all three places below, keep only the valuable ones:
    the picture with Pillow and look at the result before using them.
 
 **Every picture gets ≥ 3 exercises of ≥ 2 visual types** + a `figure` block in the section that teaches it; a chapter
-with pictures has every picture exercise type ≥ 3 times (step 4). A chapter without a picture that teaches has none.
+with pictures has every picture exercise type that fits it ≥ 3 times (step 4). A chapter without a picture that teaches has none.
 
 ## 3b. Sources: one entry per file or link, every chapter mapped to ALL its sources
 Give every PDF (also each part of a split PDF), document, web page, video and conversation its own entry in
@@ -122,10 +129,11 @@ For every chapter, before any theory or exercise, write `work/<id>/map/chNN.json
 > one idea per block, a concrete example or analogy for every abstract idea, lists and tables over prose, a `reveal`
 > "think first" before the key point, a `hook` per section, short question stems, no block over ~60 words.
 
-**Every chapter, checked by `make_pack.py` (`pack_rules.json`): every exercise type ≥ 3 times** (`mcq tf odd order
-match bucket cloze scenario free`; `spotbug write` with code; `calc` with math; the 7 picture types when the chapter
-has pictures), **every difficulty 1, 2, 3 ≥ 3 times, every focus tag ≥ 3 times** (`concept pitfall debug exam
-interview compare`; `syntax` with code, `calc` with math). Plan the exercises as a grid before writing them.
+**Every chapter, checked by `make_pack.py` (`pack_rules.json`, the rules in `references/PIPELINES.md` §4): every
+exercise type and focus tag that fits the chapter ≥ 3 times** (its map's `fits`; every other value has a reason in
+`unfit`; `spotbug write` need code, `calc` math, the picture types a picture), every paradigm that fits ≥ 2 times,
+**difficulty ≈ 20 / 25 / 55 %, recall ≤ 25 %, apply or higher ≥ 40 %**, every learnable ≥ 2 exercises in ≥ 2 types.
+Sizes are only a guide, never a target. Plan the exercises as a grid (learnables × types) before writing them.
 
 `work/<id>/chapters/chNN.json`, one per chapter, exactly as `CONTENT_SPEC.md` says: theory blocks
 (short, concrete, one idea each), comparisons side by side, `ask` blocks and `debug` playbooks for
@@ -279,7 +287,7 @@ pack is not changed. Contract and rules: `references/BRIDGE.md` (or `noema_bridg
 ## Quality bar (check before saving)
 - Every source detail is taught **and** tested; nothing invented; obvious source errors corrected and noted.
 - ADHD-friendly throughout: short paragraphs, one idea per block, examples, think-first reveals.
-- Every type, difficulty and focus tag ≥ 3 times per chapter (make_pack.py checks it).
+- Every type and focus tag that fits ≥ 3 times per chapter, the difficulty and `think` mix, every learnable in ≥ 2 types (make_pack.py checks it).
 - Pictures: only those that teach, from all three places, each verified, licensed, sharp, ≥ 3 exercises each.
 - Q1–Q8: no exercise or theory points at a source; every source question is an exercise, solved twice; the map is
   exhaustive; difficulty, `think` and paradigm mix as above; blind solve and review done (`review/chNN.json`).
