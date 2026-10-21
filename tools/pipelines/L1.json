@@ -1,0 +1,18 @@
+{
+ "format": "noema.pipeline/v1",
+ "id": "L1",
+ "title": "Γ1 · A task of a language course",
+ "when": "noema_lang_task: content for an existing language course.",
+ "steps": [
+  "classify",
+  "L.brief",
+  "L.task",
+  "L.order",
+  "L.words",
+  "L.grammar",
+  "L.notes",
+  "L.sentences",
+  "L.exercises",
+  "L.green"
+ ]
+}

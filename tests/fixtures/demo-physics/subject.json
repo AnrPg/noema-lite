@@ -21,7 +21,9 @@
  },
  "authoring": {
   "minVisualPerChapter": 3,
-  "minExercisesPerPicture": 3
+  "minExercisesPerPicture": 3,
+  "rules": 2,
+  "by": "import"
  },
  "i18n": {
   "el": {

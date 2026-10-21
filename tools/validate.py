@@ -1,14 +1,21 @@
 #!/usr/bin/env python3
 """Validate a chapter JSON file (tools/CONTENT_SPEC.md + docs/VISUAL.md).
-Usage: validate.py chNN.json [--media media_meta.json] [--min-visual N] [--source chNN.json]
+Usage: validate.py chNN.json [--media media_meta.json] [--min-visual N] [--quality error|warn] [--balance N | --balance-warn N] [--features code,math] [--source chNN.json]
        validate.py subject.json --subject [--translations el,fr]
   --media         {id: {w, h, regions}} of the subject's pictures (build.py passes it) → checks references & coordinates
   --min-visual    required visual exercises per chapter (from subject.json authoring.minVisualPerChapter)
+  --balance       every exercise type, difficulty and focus tag at least N times in the chapter (tools/pack_rules.json;
+                  N from subject.json authoring.minPerKind) — errors; --balance-warn N: the same as warnings (older packs)
+  --quality       the quality rules of tools/pack_rules.json "quality" (tools/pack_quality.py; packs with authoring.rules >= 2):
+                  the chapter's knowledge map (chapter.map), fits, the mix of difficulty and thinking, learnables with >= 2
+                  versions, self-contained texts, explanations, the review (chapter.review). error: issues of level "error"
+                  are errors (Claude/Gemini-made packs); warn: every issue is a warning (learner-made or imported packs)
+  --features      the subject's features that are on (code, math): they make spotbug, write, calc, syntax required
   --source        the file is a TRANSLATION (translations/<locale>/chNN.json) of this chapter (as built: base + patches):
                   same ids, same structure, same answers — only the words differ (CONTENT_SPEC.md "Packs in several languages")
   --subject       check subject.json: the content language and the optional per-locale metadata (subject.i18n)
   --translations  (with --subject) the locales the subject has translations/<locale>/ folders for"""
-import json, re, sys
+import json, os, re, sys
 for _s in (sys.stdout, sys.stderr):   # UTF-8 output on Windows / macOS / Linux alike
     try: _s.reconfigure(encoding='utf-8', errors='replace')
     except Exception: pass
@@ -28,6 +35,10 @@ TYPES = {"mcq","tf","odd","order","match","bucket","cloze","spotbug","calc","sce
 ARGS = sys.argv[1:]
 MEDIA = json.load(open(ARGS[ARGS.index("--media")+1], encoding="utf-8")) if "--media" in ARGS else None
 MIN_VISUAL = int(ARGS[ARGS.index("--min-visual")+1]) if "--min-visual" in ARGS else 0
+QUALITY = ARGS[ARGS.index("--quality")+1] if "--quality" in ARGS else None
+BALANCE = int(ARGS[ARGS.index("--balance")+1]) if "--balance" in ARGS else 0
+BALANCE_WARN = int(ARGS[ARGS.index("--balance-warn")+1]) if "--balance-warn" in ARGS else 0
+FEATURES = {x for x in (ARGS[ARGS.index("--features")+1] if "--features" in ARGS else "").split(",") if x}
 RID = re.compile(r"^[a-z0-9][a-z0-9_-]*$")
 
 def check_regions(where, regions, IW=None, IH=None):
@@ -102,6 +113,20 @@ def check_visual(eid, e):
             for x in targets:
                 if x in R and "options" in R[x] and R[x].get("label") not in R[x]["options"]: E(f"{eid}/{x}: options must include the label")
         if "pass" in e and not (isinstance(e["pass"], (int, float)) and 0 <= e["pass"] <= 1): E(f"{eid}: pass must be 0-1")
+
+def load_rules():
+    """The shared quantity rules (tools/pack_rules.json, next to this script; engine/packcheck.js RULES is the same list)."""
+    return json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "pack_rules.json"), encoding="utf-8"))["rules"]
+
+def check_balance(exs, n, features, report):
+    """Every rule of pack_rules.json, per chapter: each required value (and each optional one the chapter uses) >= n times.
+    report(message) is E or W. Messages start with the rule id, e.g. "[balance.type] img_reveal: 1 exercise(s), need >= 3"."""
+    for r in load_rules():
+        need = set(r["always"]) | {v for f in features for v in r["features"].get(f, [])}
+        optional = {v for vs in r["features"].values() for v in vs}
+        have = Counter(v for e in exs for v in (e.get(r["field"]) or [] if r["field"] == "tags" else [e.get(r["field"])]))
+        for v in sorted(need | (optional & set(have)), key=str):
+            if have[v] < n: report(f"[{r['id']}] {v}: {have[v]} exercise(s), need >= {n} per chapter ({r['what']}, tools/pack_rules.json)")
 
 def s(x): return isinstance(x,str) and x.strip()!=""
 
@@ -318,15 +343,20 @@ def main(path):
     for sid in sids:
         if per_sec[sid]<3: W(f"{sid}: only {per_sec[sid]} exercises")
         if quick[sid]<2: W(f"{sid}: only {quick[sid]} quick exercises")
-    for t in TYPES - VTYPES:
-        if tc[t]<2: W(f"type '{t}' used {tc[t]}x (<2)")
+    if not (QUALITY or BALANCE or BALANCE_WARN):   # the full rules: pack_quality.py / check_balance (pack_rules.json)
+        for t in TYPES - VTYPES:
+            if tc[t]<2: W(f"type '{t}' used {tc[t]}x (<2)")
     nvis = sum(tc[t] for t in VTYPES); vkinds = sum(1 for t in VTYPES if tc[t])
     nfig = sum(1 for sec in secs for b in sec.get("blocks", []) if b.get("t") == "figure")
-    if MIN_VISUAL:
+    if MIN_VISUAL and (nvis or nfig):   # pictures only where they teach (docs/VISUAL.md §5): a chapter with none is fine
         if nvis < MIN_VISUAL: E(f"only {nvis} visual exercises (subject requires >= {MIN_VISUAL} per chapter, docs/VISUAL.md)")
         if vkinds < 2: E(f"visual exercises use {vkinds} type(s); need >= 2 different visual types")
         if nfig < 1: E("no 'figure' block in the chapter (docs/VISUAL.md)")
-    elif nvis < 3: W(f"only {nvis} visual exercises (docs/VISUAL.md asks for >= 3 per chapter)")
+    elif nfig and nvis < 3: W(f"only {nvis} visual exercises on the chapter's pictures (docs/VISUAL.md asks for >= 3)")
+    if QUALITY:
+        from pack_quality import check_quality
+        for level, _rule, msg in check_quality(ch, FEATURES): (E if level == "error" and QUALITY == "error" else W)(msg.split(": ", 1)[1] if msg.startswith(cid + ": ") else msg)
+    elif BALANCE or BALANCE_WARN: check_balance(exs, BALANCE or BALANCE_WARN, FEATURES | ({"pictures"} if nvis or nfig else set()), E if BALANCE else W)
     if "--source" in ARGS: check_same(ch, json.load(open(ARGS[ARGS.index("--source")+1], encoding="utf-8")))
     risky = sum(1 for e in exs if set(e.get("tags",[]))&{"pitfall","debug","exam"})
     if exs and risky/len(exs)<0.3: W(f"only {risky}/{len(exs)} exercises tagged pitfall/debug/exam")

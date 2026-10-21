@@ -14,6 +14,155 @@
   const strs = (a, min = 1) => Array.isArray(a) && a.length >= min && a.every(isStr);
   const intIn = (v, n) => Number.isInteger(v) && v >= 0 && v < n;
 
+  /** The quantity rules every new pack meets, per chapter — the SAME list as tools/pack_rules.json (validate.py / make_pack.py read
+      that file; tests/pack_rules.js checks the two agree). Add a rule there and here. */
+  const RULES = [{id: 'balance.type', what: 'every exercise type', field: 'type', min: 3, always: ['mcq', 'tf', 'odd', 'order', 'match', 'bucket', 'cloze', 'scenario', 'free'], features: {'code': ['spotbug', 'write'], 'math': ['calc'], 'pictures': ['img_hotspot', 'img_sequence', 'img_reveal', 'img_drag', 'img_label', 'img_select', 'img_occlusion']}}, {id: 'balance.difficulty', what: 'every difficulty', field: 'difficulty', min: 3, always: [1, 2, 3], features: {}}, {id: 'balance.tag', what: 'every focus tag', field: 'tags', min: 3, always: ['concept', 'pitfall', 'debug', 'exam', 'interview', 'compare'], features: {'code': ['syntax'], 'math': ['calc']}}];
+  /** checkBalance(chapter, subject, { min }) → [{ rule, chapter, value, have, need, msg }]: every required value of every rule (and
+      every optional one the chapter uses) at least `min` times (default: each rule's own min). subject.features.code / .math make
+      the rules' `features` values required; 'pictures' when the chapter has a picture (docs/VISUAL.md §5: only pictures that teach). The caller decides whether the issues are errors or warnings (checkPack). */
+  function checkBalance(c, subject, { min } = {}) {
+    const ex = c?.exercises || [], out = [];
+    const pics = ex.some(e => String(e.type).startsWith('img_')) || (c?.sections || []).some(s => (s.blocks || []).some(b => b.t === 'figure'));
+    const on = [...Object.entries(subject?.features || {}).filter(([, v]) => v).map(([k]) => k), ...(pics ? ['pictures'] : [])];   // pictures: only a chapter that has one
+    for (const r of RULES) {
+      const n = min ?? r.min, have = new Map();
+      for (const e of ex) for (const v of r.field === 'tags' ? (e.tags || []) : [e[r.field]]) have.set(v, (have.get(v) || 0) + 1);
+      const optional = new Set(Object.values(r.features).flat());
+      const need = new Set([...r.always, ...on.flatMap(f => r.features[f] || []), ...[...have.keys()].filter(v => optional.has(v))]);
+      for (const v of need) if ((have.get(v) || 0) < n) out.push({ rule: r.id, chapter: c.id, value: v, have: have.get(v) || 0, need: n, msg: `${c.id}: [${r.id}] ${v}: ${have.get(v) || 0} exercise(s), need >= ${n} per chapter (${r.what}, tools/pack_rules.json)` });
+    }
+    return out;
+  }
+
+  /** The quality rules of packs with subject.authoring.rules >= 2 — the SAME object as tools/pack_rules.json "quality" and the SAME
+      checks as tools/pack_quality.py (tests/pack_rules.js compares both on the same chapters). docs/PIPELINES.md §4. */
+  const QUALITY = {"version": 2, "vocab": {"types": ["bucket", "calc", "cloze", "free", "img_drag", "img_hotspot", "img_label", "img_occlusion", "img_reveal", "img_select", "img_sequence", "match", "mcq", "odd", "order", "scenario", "spotbug", "tf", "write"], "think": ["recall", "explain", "apply", "discriminate", "analyze", "evaluate", "create"], "applyPlus": ["apply", "discriminate", "analyze", "evaluate", "create"], "critical": ["analyze", "evaluate", "create"], "modes": ["contradiction", "reverse", "whatif", "perturb", "causal", "distinguish", "translate", "ambiguity", "feynman", "combine", "dialectic"], "cats": ["pitfall", "confusable", "falsefriend", "detail", "sequence", "multipart", "nomenclature", "acronym", "formula", "edge", "recent", "hard-understand", "hard-remember"], "levels": ["foundation", "core", "advanced"], "tags": ["concept", "syntax", "pitfall", "debug", "exam", "interview", "calc", "compare"]}, "autoUnfit": {"code": ["spotbug", "write", "syntax"], "math": ["calc"], "pictures": ["img_hotspot", "img_sequence", "img_reveal", "img_drag", "img_label", "img_select", "img_occlusion"]}, "checks": [{"id": "map.present", "level": "error", "what": "the chapter has its knowledge map (map/chNN.json → chapter.map)"}, {"id": "map.refs", "level": "error", "what": "points and learnables are well formed: unique ids, known levels and categories, every kp / with id exists"}, {"id": "map.exhaustive", "level": "error", "what": "every knowledge point is in a learnable, or names the earlier DAG node that taught it (taughtIn)"}, {"id": "fit.declared", "level": "error", "what": "every exercise type, focus tag and paradigm is in fits, or has a reason in unfit"}, {"id": "fit.types", "level": "error", "min": 3, "what": "every type in fits.types"}, {"id": "fit.focus", "level": "error", "min": 3, "what": "every focus tag in fits.focus"}, {"id": "mode.coverage", "level": "error", "min": 2, "what": "every paradigm in fits.modes"}, {"id": "mix.difficulty", "level": "error", "target": {"1": 20, "2": 25, "3": 55}, "tol": 5, "what": "difficulty 1/2/3 = 20/25/55 % of the chapter"}, {"id": "mix.think", "level": "error", "recallMax": 25, "applyPlusMin": 40, "criticalMin": 3, "what": "recall <= 25 %, apply or higher >= 40 %, critical thinking (analyze/evaluate/create) >= 3 exercises"}, {"id": "mix.order", "level": "warn", "maxInversions": 25, "what": "inside a section, easier exercises come first"}, {"id": "lr.link", "level": "error", "what": "every exercise names its learnable (lr), its kind of thinking (think) and, if any, a known paradigm (mode)"}, {"id": "lr.facades", "level": "error", "min": 2, "types": 2, "what": "every learnable has >= 2 versions in >= 2 exercise types"}, {"id": "cats.facades", "level": "error", "min": 2, "types": 2, "what": "every knowledge point with a category has >= 2 exercises in >= 2 types"}, {"id": "source.questions", "level": "error", "what": "every question of the sources (map.sourceQuestions) has an answer and an exercise that cites it (cite.sq)"}, {"id": "cite.present", "level": "error", "what": "every exercise keeps where it comes from in cite {src, loc} (metadata, never in the text)"}, {"id": "self.contained", "level": "error", "what": "no exercise, card or theory text points at the source's structure (question numbers, pages, paragraphs, 'the source says')", "patterns": ["\\bQ\\d{1,3}\\b", "\\bRound \\d+\\b", "\\bp\\.\\s?\\d+", "\\bpages? \\d+", "\\bparagraphs? \\d+", "\\b(?:in|from|according to|see) the (?:source|document|slides?|pdf|handout|reading|text above)\\b", "\\bthe (?:source|document|slides?|pdf|handout) (?:says|states|mentions|shows|lists|gives)\\b", "\\bin the order (?:the source|it is) (?:gives|mentions|lists)", "σελ(?:ίδα|\\.)\\s?\\d+", "(?:η|την|στην|της) πηγή", "σύμφωνα με το κείμενο", "παράγραφο \\d+"]}, {"id": "explain.depth", "level": "error", "minChars": 80, "minSentences": 2, "what": "the explanation says why the answer is right and why the tempting wrong one is wrong (>= 2 sentences, >= 80 characters)"}, {"id": "mcq.why", "level": "error", "what": "every mcq / odd option has its why"}, {"id": "trivial.answer", "level": "error", "minWords": 2, "what": "the right option is not written in the question"}, {"id": "trivial.longest", "level": "warn", "ratio": 1.6, "what": "the right option is not by far the longest"}, {"id": "review.done", "level": "error", "rubricMin": 15, "what": "the second-pass review (review/chNN.json → chapter.review): rubric on >= 15 learnables (or all), every exercise solved blind, every mismatch fixed"}], "notes": ["Strictness: subject.authoring.rules >= 2 turns these checks on (start_subject.py writes 2). Errors when subject.authoring.by is 'claude' or 'gemini', warnings when it is 'learner' or 'import'. Packs without authoring.rules are not checked (made before 2026-10-21; TD-11).", "The connector (noema_finish_upload, noema_save_pack) refuses a pack built since 'since' (pack.builtAt, or no builtAt at all) that has no subject.authoring.rules >= 2, so a pack cannot skip the checks by leaving the field out. Older packs keep working unchanged.", "autoUnfit: a value that cannot fit the chapter needs no reason in unfit — the code types without subject.features.code, calc without .math, picture types when the chapter has no picture (pictures only where they teach, docs/VISUAL.md §5).", "Counts are never checked: about 2 versions per learnable is the core set; there is no upper limit (docs/PIPELINES.md §4, a mild suggestion only)."], "since": "2026-10-22T00:00:00Z"};
+  const qv = v => v == null ? 'none' : `"${v}"`, pct = x => String(Math.floor(x + 0.5));
+  const qnorm = t => String(t || '').toLowerCase().replace(/[^\p{L}\p{N}_\s]/gu, ' ').replace(/\s+/g, ' ').trim();
+  const qsent = t => String(t || '').trim().split(/[.!?;;。]+(?:\s+|$)/u).filter(s => s.trim().length > 1).length;
+  const QSKIP = new Set(['id', 'section', 'src', 'cite', 'media', 'lr', 'think', 'mode', 'type', 'tags', 'regions', 'targets', 'kp', 'with']);
+  function* qstrings(x, skip) {
+    if (typeof x === 'string') yield x;
+    else if (Array.isArray(x)) { for (const v of x) yield* qstrings(v, skip); }
+    else if (x && typeof x === 'object') { for (const [k, v] of Object.entries(x)) if (!skip.has(k)) yield* qstrings(v, skip); }
+  }
+  /** checkQuality(chapter, subject) → [{ level: 'error'|'warn', rule, msg }]. chapter.map = map/chNN.json, chapter.review = review/chNN.json. */
+  function checkQuality(ch, subject) {
+    const V = QUALITY.vocab, C = Object.fromEntries(QUALITY.checks.map(c => [c.id, c])), out = [], cid = ch?.id ?? '?';
+    const add = (rule, msg) => out.push({ level: C[rule].level, rule, msg: `${cid}: [${rule}] ${msg}` });
+    const exs = ch?.exercises || [], features = Object.entries(subject?.features || {}).filter(([, v]) => v).map(([k]) => k);
+    let m = ch?.map;
+    if (!m || typeof m !== 'object' || Array.isArray(m)) { add('map.present', `no knowledge map (write map/${cid}.json before the exercises)`); m = {}; }
+    const points = m.points || [], lrs = m.learnables || [];
+    const P = new Map(points.filter(p => p && typeof p === 'object').map(p => [p.id, p])), L = new Map(lrs.filter(l => l && typeof l === 'object').map(l => [l.id, l]));
+    let seen = new Set();
+    for (const p of points) {
+      const pid = p.id;
+      if (!pid || seen.has(pid)) add('map.refs', `point id ${qv(pid)} missing or repeated`);
+      seen.add(pid);
+      if (!isStr(p.text)) add('map.refs', `${pid}: needs its text`);
+      if (!V.levels.includes(p.level)) add('map.refs', `${pid}: level must be one of ${V.levels.join(', ')}`);
+      for (const c of p.cats || []) if (!V.cats.includes(c)) add('map.refs', `${pid}: unknown category ${qv(c)}`);
+      for (const w of p.with || []) if (!P.has(w) && !/^ch\d+-k/.test(String(w))) add('map.refs', `${pid}: with ${qv(w)} is not a knowledge point`);
+      if ('taughtIn' in p && !isStr(p.taughtIn)) add('map.refs', `${pid}: taughtIn must name the earlier step or chapter`);
+    }
+    seen = new Set();
+    for (const l of lrs) {
+      const lid = l.id;
+      if (!lid || seen.has(lid)) add('map.refs', `learnable id ${qv(lid)} missing or repeated`);
+      seen.add(lid);
+      if (!(l.kp || []).length) add('map.refs', `${lid}: kp must list its knowledge points`);
+      for (const k of l.kp || []) if (!P.has(k)) add('map.refs', `${lid}: kp ${qv(k)} is not a point of the map`);
+    }
+    const inlr = new Set(lrs.flatMap(l => l.kp || []));
+    for (const p of points) if (!inlr.has(p.id) && !p.taughtIn) add('map.exhaustive', `${p.id}: in no learnable and no taughtIn`);
+    const fits = m.fits || {}, unfit = m.unfit || {};
+    const pics = exs.some(e => String(e.type || '').startsWith('img_')) || (ch?.sections || []).some(s => (s.blocks || []).some(b => b.t === 'figure'));
+    const auto = new Set();
+    for (const [f, vals] of Object.entries(QUALITY.autoUnfit)) if (!(f === 'pictures' ? pics : features.includes(f))) vals.forEach(v => auto.add(v));
+    const used = k => new Set(exs.flatMap(e => k === 'tags' ? (e.tags || []) : [e[k]]).filter(v => v != null));
+    for (const [key, universe, field] of [['types', V.types, 'type'], ['focus', V.tags, 'tags'], ['modes', V.modes, 'mode']]) {
+      const fv = fits[key] || [];
+      for (const v of fv) if (!universe.includes(v)) add('fit.declared', `fits.${key}: unknown value ${qv(v)}`);
+      for (const v of universe) { if (fv.includes(v) || auto.has(v)) continue; if (!isStr(unfit[v])) add('fit.declared', `${key} ${v}: put it in fits.${key} or give the reason in unfit.${v}`); }
+      for (const v of [...used(field)].filter(v => !fv.includes(v)).sort()) if (universe.includes(v)) add('fit.declared', `${v} is used but not in fits.${key}`);
+    }
+    for (const [key, field, rule] of [['types', 'type', 'fit.types'], ['focus', 'tags', 'fit.focus'], ['modes', 'mode', 'mode.coverage']]) {
+      const n = C[rule].min;
+      for (const v of fits[key] || []) { const have = exs.filter(e => field === 'tags' ? (e.tags || []).includes(v) : e[field] === v).length; if (have < n) add(rule, `${v}: ${have} exercise(s), need >= ${n}`); }
+    }
+    const N = exs.length;
+    if (N) {
+      let c = C['mix.difficulty'];
+      for (const [d, p] of Object.entries(c.target)) { const share = 100 * exs.filter(e => String(e.difficulty) === d).length / N; if (Math.abs(share - p) > c.tol) add('mix.difficulty', `difficulty ${d}: ${pct(share)} %, need ${p} ± ${c.tol} %`); }
+      c = C['mix.think'];
+      const rec = 100 * exs.filter(e => e.think === 'recall').length / N, app = 100 * exs.filter(e => V.applyPlus.includes(e.think)).length / N, cri = exs.filter(e => V.critical.includes(e.think)).length;
+      if (rec > c.recallMax) add('mix.think', `recall ${pct(rec)} %, at most ${c.recallMax} %`);
+      if (app < c.applyPlusMin) add('mix.think', `apply or higher ${pct(app)} %, need >= ${c.applyPlusMin} %`);
+      if (cri < c.criticalMin) add('mix.think', `critical thinking (analyze/evaluate/create) ${cri} exercise(s), need >= ${c.criticalMin}`);
+    }
+    for (const s of ch?.sections || []) {
+      const ds = exs.filter(e => e.section === s.id).map(e => e.difficulty || 0), pairs = ds.length * (ds.length - 1) / 2;
+      let inv = 0; for (let i = 0; i < ds.length; i++) for (let j = i + 1; j < ds.length; j++) if (ds[i] > ds[j]) inv++;
+      if (pairs && 100 * inv / pairs > C['mix.order'].maxInversions) add('mix.order', `${s.id}: put the easier exercises first`);
+    }
+    const sq = new Map((m.sourceQuestions || []).filter(q => q && typeof q === 'object').map(q => [q.id, q]));
+    const pats = C['self.contained'].patterns.map(p => new RegExp(p, 'i'));
+    const contained = (where, x, skip = QSKIP) => {
+      for (const t of qstrings(x, skip)) for (const p of pats) { const hit = p.exec(t); if (hit) { add('self.contained', `${where}: “${hit[0]}” points at the source; write the example or question out in full`); return; } }
+    };
+    for (const e of exs) {
+      const eid = e.id;
+      if (!L.has(e.lr)) add('lr.link', `${eid}: lr ${qv(e.lr)} is not a learnable of the map`);
+      if (!V.think.includes(e.think)) add('lr.link', `${eid}: think must be one of ${V.think.join(', ')}`);
+      if (e.mode != null && !V.modes.includes(e.mode)) add('lr.link', `${eid}: unknown mode ${qv(e.mode)}`);
+      const ci = e.cite;
+      if (!(ci && typeof ci === 'object' && !Array.isArray(ci) && isStr(ci.src))) add('cite.present', `${eid}: cite {src, loc} missing`);
+      else if (ci.sq != null && !sq.has(ci.sq)) add('source.questions', `${eid}: cite.sq ${qv(ci.sq)} is not a source question of the map`);
+      if (e.type !== 'scenario') { const ex = e.explain || '', c = C['explain.depth']; if (ex.trim().length < c.minChars || qsent(ex) < c.minSentences) add('explain.depth', `${eid}: the explanation is too short (why right, why the tempting wrong one is wrong)`); }
+      if (e.type === 'mcq' || e.type === 'odd') {
+        const opts = e.options || [], why = e.why;
+        if (!(Array.isArray(why) && why.length === opts.length && why.every(isStr))) add('mcq.why', `${eid}: needs a why for every option`);
+        const ai = Number.isInteger(e.answer) ? e.answer : null;
+        if (ai != null && ai >= 0 && ai < opts.length) {
+          const right = qnorm(opts[ai]);
+          if (e.type === 'mcq' && right.split(' ').filter(Boolean).length >= C['trivial.answer'].minWords && qnorm(e.q).includes(right)) add('trivial.answer', `${eid}: the right option is written in the question`);
+          const others = opts.filter((o, i) => i !== ai).map(o => String(o).length);
+          if (e.type === 'mcq' && others.length && String(opts[ai]).length >= C['trivial.longest'].ratio * Math.max(...others)) add('trivial.longest', `${eid}: the right option is by far the longest`);
+        }
+      }
+      contained(eid, e);
+    }
+    for (const f of ch?.flashcards || []) contained(f.id || 'flashcard', f);
+    const bskip = new Set([...QSKIP, 't', 'lang', 'code']);
+    for (const s of ch?.sections || []) for (const b of s.blocks || []) if (!['code', 'diagram', 'figure'].includes(b.t)) contained(s.id, b, bskip);
+    const byLr = new Map(); for (const e of exs) { if (!byLr.has(e.lr)) byLr.set(e.lr, []); byLr.get(e.lr).push(e.type); }
+    let c = C['lr.facades'];
+    for (const lid of L.keys()) { const ts = byLr.get(lid) || []; if (ts.length < c.min || new Set(ts).size < c.types) add('lr.facades', `${lid}: ${ts.length} exercise(s) in ${new Set(ts).size} type(s), need >= ${c.min} in >= ${c.types}`); }
+    c = C['cats.facades'];
+    for (const p of points) {
+      if (!(p.cats || []).length || p.taughtIn) continue;
+      const ts = lrs.filter(l => (l.kp || []).includes(p.id)).flatMap(l => byLr.get(l.id) || []);
+      if (ts.length < c.min || new Set(ts).size < c.types) add('cats.facades', `${p.id} (${p.cats.join(', ')}): ${ts.length} exercise(s) in ${new Set(ts).size} type(s), need >= ${c.min} in >= ${c.types}`);
+    }
+    const cited = new Set(exs.filter(e => e.cite && typeof e.cite === 'object').map(e => e.cite.sq));
+    for (const [qid, q] of sq) {
+      if (!(isStr(q.text) && isStr(q.answer))) add('source.questions', `${qid}: needs its full text and its checked answer`);
+      if (!cited.has(qid)) add('source.questions', `${qid}: no exercise cites it (cite.sq)`);
+    }
+    const r = ch?.review; c = C['review.done'];
+    if (!r || typeof r !== 'object' || Array.isArray(r)) add('review.done', `no second-pass review (review/${cid}.json)`);
+    else {
+      const rub = new Set((r.rubric || []).filter(x => x && typeof x === 'object' && L.has(x.lr)).map(x => x.lr)), need = Math.min(c.rubricMin, L.size);
+      if (rub.size < need) add('review.done', `the rubric covers ${rub.size} learnable(s), need ${need}`);
+      const b = r.blind || {};
+      if (!Number.isInteger(b.solved) || b.solved < N) add('review.done', `blind re-solve: ${b.solved ?? 0} of ${N} exercises solved`);
+      const open = (b.mismatches || []).filter(x => !(x && typeof x === 'object' && x.fixed === true)).map(x => x?.id);
+      if (open.length) add('review.done', `blind re-solve: mismatches not fixed: ${open.slice(0, 8).join(', ')}`);
+    }
+    return out;
+  }
+
   /** The fields one exercise needs so the engine can show and grade it. */
   function checkExercise(e, media) {
     const E = []; const t = e.type; const bad = m => E.push(`${e.id}: ${m}`);
@@ -101,7 +250,11 @@
     }
   }
 
-  function checkPack(p, expectId, { strict = false } = {}) {
+  /** balance: the minimum of RULES per chapter. Default: the pack's own subject.authoring.minPerKind (Gemini generator);
+      a pack that does not say gets the issues as warnings; 0 = off. A number → errors.
+      quality (QUALITY, packs with subject.authoring.rules >= 2): errors when subject.authoring.by is claude or gemini, else warnings.
+      requireQuality (the connector): a pack built since QUALITY.since (or with no builtAt) must have authoring.rules >= 2. */
+  function checkPack(p, expectId, { strict = false, balance, requireQuality = false } = {}) {
     const E = [], W = [];
     if (!p || p.format !== 'noema-pack') E.push('format must be "noema-pack"');
     const s = p?.subject || {};
@@ -159,7 +312,15 @@
         if (strict) E.push(...checkExercise(e, media));
       }
       if (strict) for (const f of c.flashcards || []) if (!isStr(f.q) || !isStr(f.a)) { E.push(`${c.id}: a flashcard needs "q" and "a"`); break; }
-      if (!(c.exercises || []).some(e => String(e.type).startsWith('img_'))) W.push(`${c.id}: no visual exercises`);
+          }
+    const auth = s.authoring || {}, qual = Number(auth.rules) >= QUALITY.version;
+    if (requireQuality && !qual && (!p?.builtAt || p.builtAt >= QUALITY.since)) E.push(`subject.authoring.rules must be ${QUALITY.version} (and authoring.by "claude"): new packs meet the quality rules of tools/pack_rules.json — start the subject with start_subject.py and rebuild with make_pack.py`);
+    if (qual) {
+      const hard = ['claude', 'gemini'].includes(auth.by);
+      for (const c of chapters) for (const i of checkQuality(c, s)) (i.level === 'error' && hard ? E : W).push(i.msg);
+    } else {
+      const per = balance ?? auth.minPerKind;
+      if (per !== 0) for (const c of chapters) for (const i of checkBalance(c, s, { min: per ?? undefined })) (per ? E : W).push(i.msg);
     }
     checkI18n(p, chapters, E, W);
     for (const mid of Object.keys(media)) if ((used[mid] || 0) < 3) W.push(`picture ${mid} has ${used[mid] || 0} exercises (aim for >= 3)`);
@@ -241,5 +402,5 @@
     return { errors: E, warnings: W, counts: { entries: entries.length, senses, stale, sections: Object.keys(secs).length, previews, anchors: anchors.length } };
   }
   /* i18n-ignore-end */
-  root.NoemaPackCheck = { checkPack, checkExercise, checkBridge, TYPES, BLOCKS, ID_RE };
+  root.NoemaPackCheck = { checkPack, checkExercise, checkBalance, checkQuality, checkBridge, RULES, QUALITY, TYPES, BLOCKS, ID_RE };
 })(typeof window !== 'undefined' ? window : globalThis);

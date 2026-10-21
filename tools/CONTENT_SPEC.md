@@ -56,14 +56,141 @@ The app imports the package with its files (📥, "Create with Claude", or the c
 every packaged file); files can also be attached later in the app (📎 in the source's card).
 
 ## Pedagogy rules (non-negotiable)
+> **0. ADHD-friendly, everywhere — the first rule, it shapes every block, card and exercise.** Paragraphs of 1–3 short
+> sentences; **one idea per block**; a concrete example or analogy for every abstract idea; lists and tables instead of
+> long prose; a `reveal` "think first" prompt before the key point; a `hook` that says why the section matters; short
+> question stems; no walls of text (a block over ~60 words is split). Read every section back as a tired learner would:
+> if the eye cannot find the point in a few seconds, rewrite it.
+
 1. **Coverage**: teach AND test every concept, number, caveat, trap, worked example and test question of the sources. Repeated material is taught once (best version). Every source exercise/test question becomes ≥1 exercise with its solution as the explanation.
 2. **Diagnostic thinking first**: wherever the source describes failures, errors, anomalies, misconceptions, differential diagnoses or "first thing to check", build a `debug` playbook with an ordered `askYourself` list (first-person questions), an `ask` block in the section, ≥1 `scenario` and ≥1 `order` exercise. Long playbooks get a `mnemonic`.
 3. **Pitfalls / exam traps** → callout (pitfall/exam/warn) + chapter `pitfalls` entry + ≥1 exercise tagged pitfall/exam.
 4. **Co-location**: related concepts in the same section; comparisons side by side (`compare`/`table`); each exercise attached to its section; 2–4 `quick` exercises per section.
-5. **ADHD-friendly**: 1–3 sentence paragraphs, concrete examples, analogies, one idea per block, `reveal` "think first" prompts.
+5. **ADHD-friendly**: see rule 0 above — it applies to every rule here.
 6. **Accuracy**: faithful to the sources; correct clear errors (and say so in the coverage notes); no invented facts.
 7. Diagrams redrawn cleanly (≤70 chars wide). Explanations teach (why right + why the tempting wrong answer is wrong). Every exercise type used several times per chapter.
-8. **Visual learning (mandatory, docs/VISUAL.md §5–6)**: (a) extract **every picture of the sources** (`tools/extract_images.py`) — photos, figures, charts, vector diagrams; (b) **augment from the web** with high-quality, information-rich **photographs and diagrams** — any licence for personal study, always with the source recorded (url, credit, licence; `tools/fetch_image.py`), even when the sources have none; (c) redraw diagrams and plot **function graphs** where the subject has them (`tools/svgkit.py` Diagram / Plot). Verify each picture is correct, relevant and sharp. **Every picture gets ≥ 3 exercises of ≥ 2 visual types**; every chapter ≥ 1 `figure` + ≥ 3 visual exercises. Enforced by `"authoring": {"minVisualPerChapter": 3, "minExercisesPerPicture": 3}`.
+8. **Visual learning (docs/VISUAL.md §5–6) — only pictures with high teaching value.** A picture is used only when it teaches something the text alone cannot (where things are, what they look like, how they connect, how a quantity behaves); **no picture is better than a decorative or weak one**, and pictures are never added to meet a count. Look for them in three places: (a) the pictures of the sources (`tools/extract_images.py`), (b) the web — high-quality, information-rich photographs and diagrams, any licence for personal study, always with the source recorded (`tools/fetch_image.py`), (c) redrawn diagrams and **function graphs** where the subject has them (`tools/svgkit.py`). Verify each picture is correct, relevant and sharp. **Every picture gets ≥ 3 exercises of ≥ 2 visual types** and a `figure`; a chapter that has pictures has ≥ 3 visual exercises and every picture exercise type ≥ 3 times (tools/pack_rules.json). A chapter without a picture that teaches has none. Enforced by `"authoring": {"minVisualPerChapter": 3, "minExercisesPerPicture": 3, "minPerKind": 3}`.
+
+## Quality rules Q1–Q8 (binding for every chapter Claude or Gemini writes)
+The learner never reads the sources. The app is the only place they learn from, so every lesson and exercise must stand
+on its own and train real understanding. Lineage stays, but as data, not as text the learner must decode.
+
+**Q1 · Self-contained.** No exercise, card, playbook or theory block points at the structure of a source: no question
+numbers ("Q2", "Round 1 Q14", "Exercise 3"), no pages / paragraphs / sections ("p. 1", "σ. 23", "§2"), no "the source",
+"the author", "the conversation", "the example dataset on p. 1", "in the order the source lists them". When a source
+example or question is needed, **write it out in full** in the exercise (`q`, `code`, a table in the theory). Where it
+came from goes in `cite` (below) and in the chapter's `sources`; the app shows it as a small chip **after** the answer.
+- ✗ "What was the bug in Q2?" → ✓ the Q2 code itself in `code`, then "Which line makes this query return duplicates?"
+- ✗ "Complete the Round 1 Q15 answer." → ✓ "Parquet is a file format. Which three guarantees does it **not** give by itself?"
+- ✗ "Put the distinctions in the order the source lists them." → order only what has a real order (a process, a lifecycle).
+
+**Q2 · Every question of the sources, answered and checked.** List every question / problem / exercise of the sources in
+the chapter's map (`sourceQuestions`). Each becomes ≥ 1 exercise with its full text (verbatim, or completed with what it
+silently assumes) and `cite.sq` = its id in the map. Solve it twice, independently, and compare with each other and with
+the source's answer; recompute numbers with a script; run code / SQL where you can. A wrong source answer is corrected,
+and the explanation says so.
+
+**Q3 · Knowledge map first** (`map/chNN.json`, below). Write it before the chapter; every exercise names its learnable
+(`lr`); every source question and every point of the pages is in it.
+
+**Q4 · From the foundations up.** Per chapter, difficulty 1 / 2 / 3 ≈ **20 / 25 / 55 %** (±5). Inside each section the
+exercises go from easy to hard. Foundations are never skipped: every learnable of the map is taught and tested, not only the
+hard ones.
+
+**Q5 · Fewer trivial exercises.** Every exercise states its kind of thinking in `think`: `recall`, `explain`, `apply`,
+`discriminate`, `analyze`, `evaluate` or `create`. Per chapter `recall` ≤ 25 % and `apply` or higher ≥ 40 %. Trivial =
+the answer is in the prompt; the right option stands out (longest, the only one without "always" / "never"); no one would
+pick the distractors (distractors must be real misconceptions); a `tf` that copies a theory sentence; a one-word answer
+that needs no thinking. Keep a few easy ones, make most of them make the learner think.
+
+**Q6 · The hard categories, exhaustively — on top of the basics.** Every learnable the map tags with a category (below)
+gets ≥ 2 exercises of different types and its own treatment in the theory (`compare` side by side for confusables, `flow`
+for sequences, `terms` for acronyms and nomenclature, a callout for traps and edge cases, a `mnemonic` for what is hard to
+remember).
+
+**Q7 · Theory of high value.** Each section: hook → the basic idea → the mechanism (why) → a self-contained example →
+contrast with what it is confused with → edge cases → a `reveal` "think first". Every acronym is expanded at first use and
+listed in a `terms` block. Never "the source says".
+
+**Q8 · Explanations that teach, answers that were checked.** `explain` says why the right answer is right **and** why the
+tempting wrong one is wrong (≥ 2 sentences); every `mcq` has `why` for every option. After writing, **solve blind**: answer
+every exercise without looking at its key; fix or rewrite every one where you disagree with the key or found it ambiguous.
+Then **review** a sample (below).
+
+### One learnable, many facades
+Several exercises may test the same learnable in different types — the same fact as an `mcq`, a `tf`, a `calc`, a `cloze`.
+This is wanted: write the learnables first, then the facades. Roughly 300 exercises per chapter is a good size; it is a
+**mild suggestion**, never a hard limit (the checker only warns).
+
+### Coverage that must hold in every chapter
+- every exercise type that fits the chapter (the map's `fits.types`) — about 3 or more each;
+- every focus that makes sense (`tags` and the map's categories);
+- `think`: recall ≤ 25 %, apply or higher ≥ 40 %;
+- difficulty ≈ 20 / 25 / 55 %;
+- most (ideally all) learning paradigms that fit (`fits.modes`) in ≥ 2 exercises each (`mode`, below).
+
+### Learning paradigms (`mode`) — with the existing exercise types
+| `mode` | what the learner does | typical types |
+|---|---|---|
+| `contradiction` | two right-looking statements that cannot both hold: which premise breaks, which principle resolves it | mcq, free |
+| `reverse` | given the answer / output, find the question / input | mcq, write |
+| `whatif` | "what changes if X were different?" (counterfactual) | mcq, scenario |
+| `perturb` | a small change of a parameter: predict the effect | calc, mcq |
+| `causal` | fill the missing steps of a chain of reasoning | cloze with bank, order |
+| `distinguish` | sort descriptions between 2–3 confusable concepts | bucket, odd |
+| `translate` | code ↔ words ↔ diagram ↔ formula | match, write, img_* |
+| `ambiguity` | an under-specified problem: which clarifying question first | scenario |
+| `feynman` | explain it to a beginner / a child | free (audience in the rubric) |
+| `combine` | connect two concepts from different chapters | free, mcq |
+| `dialectic` | a thesis and a critique: find the synthesis ("when each holds") | mcq, free |
+
+### The knowledge map — `map/chNN.json` (written before the chapter)
+`points` is the exhaustive inventory: **every** knowledge point and concept of the chapter's pages, never a selection. A
+point an earlier step of the Roadmap already taught carries `taughtIn` and is not taught again; every other point sits in
+some learnable's `kp`.
+```json
+{ "format": "noema.map/v1", "chapter": "ch03",
+  "points": [ { "id": "ch03-k07", "text": "MERGE fails when several source rows match one target row", "level": "core",
+                "cats": ["pitfall", "edge"], "cite": {"src": "ecb", "loc": "p. 41"} },
+              { "id": "ch03-k08", "text": "DELETE vs TRUNCATE: TRUNCATE keeps no per-row history", "level": "foundation",
+                "cats": ["confusable"], "with": ["ch03-k09"], "cite": {"src": "ecb", "loc": "p. 44"} },
+              { "id": "ch03-k02", "text": "The Delta transaction log", "level": "foundation", "cite": {"src": "ecb", "loc": "p. 40"},
+                "taughtIn": "<earlier node or chapter id>" } ],
+  "learnables": [ { "id": "ch03-l01", "kp": ["ch03-k07"], "goal": "Predict and fix a MERGE that matches several rows" } ],
+  "fits": { "types": ["mcq", "tf", "cloze", "write", "spotbug", "scenario", "order", "match"],
+            "focus": ["concept", "syntax", "pitfall", "debug", "compare"],
+            "modes": ["contradiction", "reverse", "whatif", "causal", "distinguish", "translate"] },
+  "unfit": { "dialectic": "pure syntax, nothing to argue" },
+  "sourceQuestions": [ { "id": "ch03-q01", "text": "full text…", "answer": "checked solution…", "cite": {"src": "r1", "loc": "Q14"} } ] }
+```
+- `level` ∈ foundation · core · advanced (the order of the sections follows it).
+- `cats` ⊂ pitfall · confusable · falsefriend · detail · sequence · multipart · nomenclature · acronym · formula · edge ·
+  recent · hard-understand · hard-remember; `with` names the other point(s) of a confusable / false-friend pair.
+- Every exercise type, focus tag and mode is either in `fits` or has a reason in `unfit`.
+- Steps: (1) list every point of the pages; (2) one pass per category; (3) list the source questions; (4) group the points
+  into learnables, foundation → advanced; (5) decide what fits; (6) plan the facades of every learnable.
+
+### Fields this adds to an exercise
+`lr` (the learnable it tests — required), `think` ∈ recall · explain · apply · discriminate · analyze · evaluate · create,
+`mode` (optional, the ids above), `cite` `{ "src": "<source id>", "loc": "p. 41", "sq": "ch03-q01" }` — lineage, shown only
+after answering, never in the text; `sq` names the source question the exercise reproduces (each one needs ≥ 1).
+
+### Mix per chapter (checked)
+recall ≤ 25 %; apply or higher (apply, discriminate, analyze, evaluate, create) ≥ 40 %; analyze / evaluate / create ≥ 3;
+difficulty 20 / 25 / 55 % (±5); every learnable and every categorised point ≥ 2 exercises of ≥ 2 types; every fitting
+type and focus ≥ 3, every fitting mode ≥ 2. Exercise counts are only a mild note, never an error.
+
+### The review — `review/chNN.json` (written after the blind solve)
+```json
+{ "format": "noema.review/v1", "chapter": "ch03",
+  "rubric": [ { "lr": "ch03-l01", "ok": true, "notes": "distractor C was implausible — rewritten" } ],
+  "blind": { "solved": 312, "mismatches": [ { "id": "ch03-e044", "fixed": true } ] } }
+```
+- `blind`: you answered every exercise without its key; every disagreement is listed and fixed (key corrected or the
+  exercise rewritten until unambiguous).
+- `rubric`: ≥ 15 learnables (all of them if fewer) checked for self-containment, depth, real distractors and teaching
+  explanations; whatever falls short is rewritten. If you can start a sub-agent, let one that has not read the sources do it.
+- `make_pack.py` embeds the map and a summary of the review in the chapter (`chapter.map`, `chapter.review`).
 
 ## Inline text format (all text fields)
 `**bold**`, `*italic*`, `` `inline code` ``, and `\n` for a line break. No HTML.
@@ -115,6 +242,7 @@ Math (subjects with `features.math`): `$…$` inline, `$$…$$` display (KaTeX).
   "explain": "Teaching explanation shown after answering." }
 ```
 `tags` ⊂ {concept, syntax, pitfall, debug, exam, interview, calc, compare}.
+Quality fields (Q1–Q8 above): `"lr": "ch05-l03"`, `"think": "apply"`, optional `"mode": "whatif"`, optional `"cite": {"src": "ecb", "loc": "p. 41", "sq": "ch05-q02"}`.
 IDs: `chNN-eNNN`, unique, sequential.
 
 ### Types (extra fields)
@@ -144,8 +272,22 @@ IDs: `chNN-eNNN`, unique, sequential.
 ```
 
 ## Quantity guide
-Roughly ≥ 5 exercises per section, every section has ≥ 2 quick ones. ≥ 3 visual exercises + ≥ 1 figure per chapter. Every exercise type appears ≥ 2× per chapter
-(`mcq`, `tf` and `cloze` more). ≥ 30% of exercises tagged `pitfall`, `debug` or `exam`.
+Checked per chapter by `tools/pack_rules.json` (one rule list, read by `validate.py` / `make_pack.py` / `build.py` and by
+`engine/packcheck.js` for the app, the Gemini generator and the connector's `noema_finish_upload`; the steps in order:
+`docs/PIPELINES.md`). For packs with `subject.authoring.rules` ≥ 2 (written by `start_subject.py`):
+* **only what fits**: the chapter's map (`map/chNN.json` `fits`) declares the exercise types, focus tags and paradigms
+  (`mode`) that make sense for it; every other value has a reason in `unfit` (code types without `features.code`,
+  `calc` without `features.math` and the picture types without a picture are unfit by themselves);
+* **every type and focus tag that fits ≥ 3 times**, every paradigm that fits ≥ 2 times;
+* **difficulty 1 / 2 / 3 ≈ 20 / 25 / 55 %** (± 5), **recall ≤ 25 %**, apply or higher ≥ 40 %, ≥ 3 critical-thinking items;
+* **every learnable** ≥ 2 exercises in ≥ 2 types; every map point not taught earlier sits in a learnable (exhaustive).
+* **Sizes are a mild suggestion, never an error or a warning**: about 2 facades per learnable in the core set and a
+  reserve without a cap; 40–70 learnables per node give ~80–140 core and 160–280 exercises in all; above ~180 in the
+  core, think about splitting the node.
+Errors when `authoring.by` is claude or gemini, warnings for learner or import packs. Older packs without `rules` keep the
+earlier quantity rules of their own `authoring.minPerKind`, if they have one; chapters of a pack being extended
+(`unpack.py`) warn.
+Also: ≥ 5 exercises per section, ≥ 2 quick ones each; ≥ 30% of exercises tagged `pitfall`, `debug` or `exam`.
 Be exhaustive rather than brief: depth and coverage beat polish.
 
 ## Also produce

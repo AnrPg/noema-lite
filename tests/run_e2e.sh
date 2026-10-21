@@ -17,6 +17,9 @@ node "$ROOT/tests/e2e.js" "$T"
 node "$ROOT/tests/socratic.js" "$T"
 node "$ROOT/tests/visual.js" "$T"
 python3 "$ROOT/tests/validate_visual.py"
+node "$ROOT/tests/pack_rules.js"   # the quality rules, Python and JS alike (tools/pack_rules.json, docs/PIPELINES.md §4)
+python3 "$ROOT/tests/pipelines.py"   # the content flows, step by step (tools/pipelines/, docs/PIPELINES.md)
+python3 "$ROOT/tests/quality_fixtures.py"   # the Q1–Q8 good/bad exercise samples (tools/CONTENT_SPEC.md)
 python3 "$ROOT/tests/validate_pack_i18n.py"   # packs in several languages: subject.i18n, translated chapters (docs/i18n.md §10)
 (cd "$T" && python3 tests/package_sources.py)
 node "$ROOT/tests/connector.js" "$T"

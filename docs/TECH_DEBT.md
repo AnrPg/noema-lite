@@ -113,3 +113,14 @@ Taiwan vocabulary, not a conversion of zh-Hans; Arabic: MSA, gender-neutral phra
 **What:** the aspect sections of a theory lesson (D29) exist for what the data already says (sounds, word forms, sentences, meaning, vocabulary, use — from the grammar points' `category`) and the library lists writing, listening & speaking and reading. **Etymology, folk tradition and culture** are not sections of the lessons: grammar points carry no such category, so each language needs new content per lesson (and exercises for it, D27) before the lesson can show them.
 **Size:** large — new writing per language and lesson, a data field (e.g. `aspect` on lesson blocks), validator rules, exercise generators and tests; roughly a content project per language.
 **Think first:** decide the data shape (a lesson-level `aspects: {etymology: [...], culture: [...]}` or an `aspect` on each block) and one pilot language; D27 (every section trained and tested) applies; do it through the language agent's rules (docs/LANGUAGE_RULES.md).
+
+### TD-11 · Existing packs written before the quality rules Q1–Q8 — ⏸ parked by the owner (2026-10-21)
+**What:** packs built before 2026-10-21 (the Databricks Prerequisite Round 1 and Round 2 steps above all) do not follow
+CONTENT_SPEC "Quality rules Q1–Q8". About 30 % of their exercises point at the source ("Round 1 Q14", "p. 1", "the
+source"), 15–22 % of their theory blocks do the same, Round 2 has 78 % one-line explanations and 85 % difficulty 2. They
+have no knowledge map (`map/chNN.json`), no `lr` / `think` / `mode` / `cite` on exercises and no review.
+**Size:** medium per pack — a map per chapter, then rewritten exercises and blocks. Progress is keyed by ids, so this needs
+a patch kind that rewrites an item in place while keeping its id (`reviseExercises` / `reviseBlocks`); today patches only
+append.
+**Think first:** the new patch kind and its validator rule first; then one pilot chapter; the checker already only warns
+on packs without `subject.authoring.rules`, so nothing breaks meanwhile.

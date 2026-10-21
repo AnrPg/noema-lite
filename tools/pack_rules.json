@@ -1,0 +1,339 @@
+{
+ "format": "noema.packrules/v1",
+ "about": "The rules every new subject pack meets, per chapter. ONE file, read by tools/validate.py + tools/pack_quality.py (skill make_pack.py, tools/build.py) and copied into engine/packcheck.js RULES / QUALITY (app, Gemini generator, connector); tests/pack_rules.js checks the copies agree and that both checkers give the same issues. 'rules': the quantity rules of packs with subject.authoring.minPerKind (Gemini generator). 'quality': the full rules of packs with subject.authoring.rules >= 2 (docs/PIPELINES.md §4, tools/CONTENT_SPEC.md).",
+ "rules": [
+  {
+   "id": "balance.type",
+   "what": "every exercise type",
+   "field": "type",
+   "min": 3,
+   "always": [
+    "mcq",
+    "tf",
+    "odd",
+    "order",
+    "match",
+    "bucket",
+    "cloze",
+    "scenario",
+    "free"
+   ],
+   "features": {
+    "code": [
+     "spotbug",
+     "write"
+    ],
+    "math": [
+     "calc"
+    ],
+    "pictures": [
+     "img_hotspot",
+     "img_sequence",
+     "img_reveal",
+     "img_drag",
+     "img_label",
+     "img_select",
+     "img_occlusion"
+    ]
+   }
+  },
+  {
+   "id": "balance.difficulty",
+   "what": "every difficulty",
+   "field": "difficulty",
+   "min": 3,
+   "always": [
+    1,
+    2,
+    3
+   ],
+   "features": {}
+  },
+  {
+   "id": "balance.tag",
+   "what": "every focus tag",
+   "field": "tags",
+   "min": 3,
+   "always": [
+    "concept",
+    "pitfall",
+    "debug",
+    "exam",
+    "interview",
+    "compare"
+   ],
+   "features": {
+    "code": [
+     "syntax"
+    ],
+    "math": [
+     "calc"
+    ]
+   }
+  }
+ ],
+ "notes": [
+  "A value under 'features' is required when the subject has that feature (subject.features.code / .math) or, for 'pictures', when the chapter has a picture (a figure block or a picture exercise): pictures only where they teach (docs/VISUAL.md §5), never to meet a count. A chapter that uses an optional value anyway needs the minimum too.",
+  "subject.authoring.minPerKind overrides every 'min' (start_subject.py writes 3). 0 turns the rules off: only for packs made before 2026-10-21.",
+  "Chapters of an older pack being extended (skill unpack.py) get warnings, new chapters errors."
+ ],
+ "quality": {
+  "version": 2,
+  "vocab": {
+   "types": [
+    "bucket",
+    "calc",
+    "cloze",
+    "free",
+    "img_drag",
+    "img_hotspot",
+    "img_label",
+    "img_occlusion",
+    "img_reveal",
+    "img_select",
+    "img_sequence",
+    "match",
+    "mcq",
+    "odd",
+    "order",
+    "scenario",
+    "spotbug",
+    "tf",
+    "write"
+   ],
+   "think": [
+    "recall",
+    "explain",
+    "apply",
+    "discriminate",
+    "analyze",
+    "evaluate",
+    "create"
+   ],
+   "applyPlus": [
+    "apply",
+    "discriminate",
+    "analyze",
+    "evaluate",
+    "create"
+   ],
+   "critical": [
+    "analyze",
+    "evaluate",
+    "create"
+   ],
+   "modes": [
+    "contradiction",
+    "reverse",
+    "whatif",
+    "perturb",
+    "causal",
+    "distinguish",
+    "translate",
+    "ambiguity",
+    "feynman",
+    "combine",
+    "dialectic"
+   ],
+   "cats": [
+    "pitfall",
+    "confusable",
+    "falsefriend",
+    "detail",
+    "sequence",
+    "multipart",
+    "nomenclature",
+    "acronym",
+    "formula",
+    "edge",
+    "recent",
+    "hard-understand",
+    "hard-remember"
+   ],
+   "levels": [
+    "foundation",
+    "core",
+    "advanced"
+   ],
+   "tags": [
+    "concept",
+    "syntax",
+    "pitfall",
+    "debug",
+    "exam",
+    "interview",
+    "calc",
+    "compare"
+   ]
+  },
+  "autoUnfit": {
+   "code": [
+    "spotbug",
+    "write",
+    "syntax"
+   ],
+   "math": [
+    "calc"
+   ],
+   "pictures": [
+    "img_hotspot",
+    "img_sequence",
+    "img_reveal",
+    "img_drag",
+    "img_label",
+    "img_select",
+    "img_occlusion"
+   ]
+  },
+  "checks": [
+   {
+    "id": "map.present",
+    "level": "error",
+    "what": "the chapter has its knowledge map (map/chNN.json → chapter.map)"
+   },
+   {
+    "id": "map.refs",
+    "level": "error",
+    "what": "points and learnables are well formed: unique ids, known levels and categories, every kp / with id exists"
+   },
+   {
+    "id": "map.exhaustive",
+    "level": "error",
+    "what": "every knowledge point is in a learnable, or names the earlier DAG node that taught it (taughtIn)"
+   },
+   {
+    "id": "fit.declared",
+    "level": "error",
+    "what": "every exercise type, focus tag and paradigm is in fits, or has a reason in unfit"
+   },
+   {
+    "id": "fit.types",
+    "level": "error",
+    "min": 3,
+    "what": "every type in fits.types"
+   },
+   {
+    "id": "fit.focus",
+    "level": "error",
+    "min": 3,
+    "what": "every focus tag in fits.focus"
+   },
+   {
+    "id": "mode.coverage",
+    "level": "error",
+    "min": 2,
+    "what": "every paradigm in fits.modes"
+   },
+   {
+    "id": "mix.difficulty",
+    "level": "error",
+    "target": {
+     "1": 20,
+     "2": 25,
+     "3": 55
+    },
+    "tol": 5,
+    "what": "difficulty 1/2/3 = 20/25/55 % of the chapter"
+   },
+   {
+    "id": "mix.think",
+    "level": "error",
+    "recallMax": 25,
+    "applyPlusMin": 40,
+    "criticalMin": 3,
+    "what": "recall <= 25 %, apply or higher >= 40 %, critical thinking (analyze/evaluate/create) >= 3 exercises"
+   },
+   {
+    "id": "mix.order",
+    "level": "warn",
+    "maxInversions": 25,
+    "what": "inside a section, easier exercises come first"
+   },
+   {
+    "id": "lr.link",
+    "level": "error",
+    "what": "every exercise names its learnable (lr), its kind of thinking (think) and, if any, a known paradigm (mode)"
+   },
+   {
+    "id": "lr.facades",
+    "level": "error",
+    "min": 2,
+    "types": 2,
+    "what": "every learnable has >= 2 versions in >= 2 exercise types"
+   },
+   {
+    "id": "cats.facades",
+    "level": "error",
+    "min": 2,
+    "types": 2,
+    "what": "every knowledge point with a category has >= 2 exercises in >= 2 types"
+   },
+   {
+    "id": "source.questions",
+    "level": "error",
+    "what": "every question of the sources (map.sourceQuestions) has an answer and an exercise that cites it (cite.sq)"
+   },
+   {
+    "id": "cite.present",
+    "level": "error",
+    "what": "every exercise keeps where it comes from in cite {src, loc} (metadata, never in the text)"
+   },
+   {
+    "id": "self.contained",
+    "level": "error",
+    "what": "no exercise, card or theory text points at the source's structure (question numbers, pages, paragraphs, 'the source says')",
+    "patterns": [
+     "\\bQ\\d{1,3}\\b",
+     "\\bRound \\d+\\b",
+     "\\bp\\.\\s?\\d+",
+     "\\bpages? \\d+",
+     "\\bparagraphs? \\d+",
+     "\\b(?:in|from|according to|see) the (?:source|document|slides?|pdf|handout|reading|text above)\\b",
+     "\\bthe (?:source|document|slides?|pdf|handout) (?:says|states|mentions|shows|lists|gives)\\b",
+     "\\bin the order (?:the source|it is) (?:gives|mentions|lists)",
+     "σελ(?:ίδα|\\.)\\s?\\d+",
+     "(?:η|την|στην|της) πηγή",
+     "σύμφωνα με το κείμενο",
+     "παράγραφο \\d+"
+    ]
+   },
+   {
+    "id": "explain.depth",
+    "level": "error",
+    "minChars": 80,
+    "minSentences": 2,
+    "what": "the explanation says why the answer is right and why the tempting wrong one is wrong (>= 2 sentences, >= 80 characters)"
+   },
+   {
+    "id": "mcq.why",
+    "level": "error",
+    "what": "every mcq / odd option has its why"
+   },
+   {
+    "id": "trivial.answer",
+    "level": "error",
+    "minWords": 2,
+    "what": "the right option is not written in the question"
+   },
+   {
+    "id": "trivial.longest",
+    "level": "warn",
+    "ratio": 1.6,
+    "what": "the right option is not by far the longest"
+   },
+   {
+    "id": "review.done",
+    "level": "error",
+    "rubricMin": 15,
+    "what": "the second-pass review (review/chNN.json → chapter.review): rubric on >= 15 learnables (or all), every exercise solved blind, every mismatch fixed"
+   }
+  ],
+  "notes": [
+   "Strictness: subject.authoring.rules >= 2 turns these checks on (start_subject.py writes 2). Errors when subject.authoring.by is 'claude' or 'gemini', warnings when it is 'learner' or 'import'. Packs without authoring.rules are not checked (made before 2026-10-21; TD-11).",
+   "The connector (noema_finish_upload, noema_save_pack) refuses a pack built since 'since' (pack.builtAt, or no builtAt at all) that has no subject.authoring.rules >= 2, so a pack cannot skip the checks by leaving the field out. Older packs keep working unchanged.",
+   "autoUnfit: a value that cannot fit the chapter needs no reason in unfit — the code types without subject.features.code, calc without .math, picture types when the chapter has no picture (pictures only where they teach, docs/VISUAL.md §5).",
+   "Counts are never checked: about 2 versions per learnable is the core set; there is no upper limit (docs/PIPELINES.md §4, a mild suggestion only)."
+  ],
+  "since": "2026-10-22T00:00:00Z"
+ }
+}

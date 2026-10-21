@@ -78,13 +78,15 @@ and not needed, because the connector's `noema_get_toolkit` hands Claude the sam
   registration), the user signs in to noema-lite and approves on `<site>/oauth/consent`, and every tool
   call carries the **user's own access token** — row-level security applies exactly as in the app.
   The function holds **no secrets**.
-* Tools: `noema_whoami`, `noema_authoring_guide`, `noema_get_toolkit` (the scripts, when the skill is not
+* Tools: `noema_whoami`, `noema_pipeline` (which content flow this is and its steps in order, each with its check —
+  docs/PIPELINES.md; called first), `noema_authoring_guide`, `noema_get_toolkit` (the scripts, when the skill is not
   installed), `noema_list_subjects`, `noema_get_pack_url`, `noema_start_upload` → `curl` →
   `noema_finish_upload` (checks the pack **and its source files**: every file make_pack.py packaged — each part of
   a split PDF — must be in the account's storage with the recorded size; missing ones come back as ready `curl`
   commands with signed URLs (files over 45 MB as `split` + one `curl` per part, since Supabase takes ≤ 50 MB per
   object — so there is no size limit), and the subject is registered only when all are there, together with the synced file
-  index so every device shows 👁), `noema_save_pack` (small packs inline; same file check),
+  index so every device shows 👁; it also runs the quality rules of docs/PIPELINES.md §4 and refuses a pack built since
+  2026-10-22 without `subject.authoring.rules` ≥ 2), `noema_save_pack` (small packs inline; same file check),
   `noema_start_source_upload` (one extra file). Prompt `create_subject` (claude.ai: **+ → noema-lite → Create a noema-lite subject**).
 * Without the connector: Claude hands over the package `<id>.noema.zip` → 📥 Import subject pack (pack + source files).
 * **文A language help** (docs/BRIDGE.md): `noema_bridge_guide` (the format and workflow, the account's bridges, the mistakes

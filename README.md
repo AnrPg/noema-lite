@@ -26,8 +26,8 @@ accounts/<profile>/
   account.json             local profile seed (name, emoji, "about me" for the tutor)
   backups/                 suggested target for the app's automatic folder backups
   packs/<id>/              PRIVATE subjects of this profile (never published to the website)
-tools/                     build, validate, new_subject, source_text, db_sync, db_restore, svgkit (diagrams), CONTENT_SPEC.md, schemas/
-docs/                      LANGUAGES.md (foreign languages, polyglot — design + plan), VISUAL.md (picture exercises — canonical schema), CLAUDE_CONNECTOR.md, TUTORING.md, CONVERSATIONS.md, VAULT.md (the shared file vault), SEARCH.md (search, stable addresses, collections), BRIDGE.md (文A language help: a pack's words in the learner's own language), FROM_SOURCES.md (from a pile of material to a Roadmap or one subject), TECH_DEBT.md
+tools/                     build, validate, pack_quality, pipeline (+ pipelines/), new_subject, source_text, db_sync, db_restore, svgkit (diagrams), CONTENT_SPEC.md, schemas/
+docs/                      LANGUAGES.md (foreign languages, polyglot — design + plan), VISUAL.md (picture exercises — canonical schema), CLAUDE_CONNECTOR.md, TUTORING.md, CONVERSATIONS.md, VAULT.md (the shared file vault), SEARCH.md (search, stable addresses, collections), BRIDGE.md (文A language help: a pack's words in the learner's own language), FROM_SOURCES.md (from a pile of material to a Roadmap or one subject), PIPELINES.md (every content flow, step by step, and the quality rules), TECH_DEBT.md
 cloud/                     supabase.sql (schema + row-level security), the setup guide, mcp/server.mjs (the Claude connector)
 skill/noema-pack-builder/  the Claude skill users add to their own Claude (zip built into the website)
 data/noema-lite.db     SQLite backup database (GENERATED, git-ignored; upload it to the cloud from the app)
@@ -63,7 +63,7 @@ Every chapter shows the sources it comes from; the original files (PDFs, slides,
 ## Adding a subject (through Claude)
 In the app: **✨ Create with Claude** — any user can do it, three ways (docs/CLAUDE_CONNECTOR.md): **A.** here in the app with their own Claude API key (the app uploads the skill, runs Claude and imports the result), **B.** in the Claude app/website with their Claude plan + the noema-lite connector, or **C.** a whole curriculum with their Claude plan (the connector hands Claude the curriculum's tasks; recommended for curricula). Finished subjects can be shared: 🔗 on a subject → public (🌍 Explore) or to one person (🔔), see docs/SHARING.md. Or, for the shared library:
 1. Give Claude the sources (PDFs, links, notes) + subject name, group, goal (exam / understanding / project) and language.
-2. Claude scaffolds it (`tools/new_subject.py`), reads every page, writes chapters per `tools/CONTENT_SPEC.md`, draws pictures and builds **several visual exercises per chapter** per `docs/VISUAL.md`, validates, builds and tests.
+2. Claude finds its flow and follows it step by step (`tools/pipeline.py`, docs/PIPELINES.md: every way content is made, each step checked): scaffolds it (`tools/new_subject.py`), reads every page, writes each chapter's exhaustive knowledge map first, then the chapters per `tools/CONTENT_SPEC.md` (every type and paradigm that fits the chapter, difficulty ≈ 20/25/55, recall ≤ 25 %, several exercises per learnable), pictures only where they teach per `docs/VISUAL.md`, solves every exercise blind, reviews, validates (`tools/pack_rules.json`, the same checks in the app and the connector), builds and tests.
 3. The new subject appears as a chip in the picker. New sources for an existing subject are merged **additively** (patches) — your progress is never lost.
 
 ## Profiles, privacy & data

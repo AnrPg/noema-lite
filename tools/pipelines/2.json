@@ -1,0 +1,20 @@
+{
+ "format": "noema.pipeline/v1",
+ "id": "2",
+ "title": "A Roadmap step → its subject",
+ "when": "noema_curriculum_task hands over one step to build as a pack.",
+ "steps": [
+  "classify",
+  "start_subject",
+  "map",
+  "pictures",
+  "write",
+  "blind_solve",
+  "review",
+  "checks",
+  "upload",
+  "translate",
+  "bridges",
+  "next"
+ ]
+}

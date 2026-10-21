@@ -16,7 +16,9 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
   ok(/\/library\/\*\n(  .+\n)*  Access-Control-Allow-Origin: \*\n/.test(fs.readFileSync(path.join(ROOT, 'dist/site/_headers'), 'utf8')), '_headers: the public library allows cross-origin reads');
   // the function exactly as tools/build.py generates it, but pointed at the emulator
   const CFG = { siteUrl: BASE, supabaseUrl: BASE, supabaseKey: 'sb_publishable_test', storageChunkBytes: 4500, library: [{ id: 'databricks', title: 'Databricks', counts: { chapters: 13, exercises: 1715 } }] };
-  const DOCS = { workflow: fs.readFileSync(path.join(ROOT, 'skill/noema-pack-builder/SKILL.md'), 'utf8'), content: fs.readFileSync(path.join(ROOT, 'tools/CONTENT_SPEC.md'), 'utf8'), visual: fs.readFileSync(path.join(ROOT, 'docs/VISUAL.md'), 'utf8'), bridge: fs.readFileSync(path.join(ROOT, 'docs/BRIDGE.md'), 'utf8') };
+  const DOCS = { workflow: fs.readFileSync(path.join(ROOT, 'skill/noema-pack-builder/SKILL.md'), 'utf8'), content: fs.readFileSync(path.join(ROOT, 'tools/CONTENT_SPEC.md'), 'utf8'), visual: fs.readFileSync(path.join(ROOT, 'docs/VISUAL.md'), 'utf8'), bridge: fs.readFileSync(path.join(ROOT, 'docs/BRIDGE.md'), 'utf8'), pipelines: fs.readFileSync(path.join(ROOT, 'docs/PIPELINES.md'), 'utf8'),
+    pipelineSteps: JSON.parse(fs.readFileSync(path.join(ROOT, 'tools/pipelines/steps.json'), 'utf8')).steps,
+    pipelineFlows: Object.fromEntries(fs.readdirSync(path.join(ROOT, 'tools/pipelines')).map(f => JSON.parse(fs.readFileSync(path.join(ROOT, 'tools/pipelines', f), 'utf8'))).filter(f => f.format === 'noema.pipeline/v1').map(f => [f.id, f])) };
   const fn = path.join(os.tmpdir(), `noema-mcp-${process.pid}.mjs`);
   fs.writeFileSync(fn, `const CFG = ${JSON.stringify(CFG)};\nconst DOCS = ${JSON.stringify(DOCS)};\nglobalThis.window = globalThis;\n` + ['engine/packcheck.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js'].map(f => fs.readFileSync(path.join(ROOT, f), 'utf8') + '\n').join('') + fs.readFileSync(path.join(ROOT, 'cloud/mcp/server.mjs'), 'utf8'));   // as tools/build.py (MCP_ENGINE)   // as tools/build.py assembles it
   const { default: handler } = await import(fn);
@@ -38,7 +40,7 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
   ok((await call({ jsonrpc: '2.0', method: 'notifications/initialized' }, T)).status === 202, 'notifications get 202 Accepted');
   const tl = await call({ jsonrpc: '2.0', id: 2, method: 'tools/list' }, T);
   const names = (tl.json?.result?.tools || []).map(t => t.name);
-  ok(['noema_whoami', 'noema_authoring_guide', 'noema_list_subjects', 'noema_get_pack_url', 'noema_start_upload', 'noema_finish_upload', 'noema_save_pack'].every(n => names.includes(n)), 'tools/list: ' + names.join(', '));
+  ok(['noema_whoami', 'noema_authoring_guide', 'noema_list_subjects', 'noema_get_pack_url', 'noema_start_upload', 'noema_finish_upload', 'noema_save_pack', 'noema_pipeline'].every(n => names.includes(n)), 'tools/list: ' + names.join(', '));
   const tool = async (name, args) => (await call({ jsonrpc: '2.0', id: 3, method: 'tools/call', params: { name, arguments: args } }, T)).json?.result;
   const g = await tool('noema_authoring_guide', { part: 'visual' });
   ok(/minExercisesPerPicture|Pictures from the sources/.test(g.content[0].text), 'authoring guide returns the visual contract');
@@ -104,6 +106,20 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
   ok(fb.isError && /section nope not found/.test(fb.content[0].text) && !srv.state.kv[uid]['a:packmeta:broken-pack'], 'a broken pack is refused with the list of errors');
   const small = JSON.parse(JSON.stringify(pack)); small.subject.id = 'tiny-inline'; small.subject.title = 'Tiny inline';
   ok(!(await tool('noema_save_pack', { pack_json: JSON.stringify(small) })).isError && srv.state.kv[uid]['a:packmeta:tiny-inline'], 'save_pack stores a small pack inline');
+  // the quality rules (docs/PIPELINES.md §4): a new pack cannot skip them by leaving subject.authoring.rules out; older packs keep working
+  const norules = JSON.parse(JSON.stringify(small)); norules.subject.id = 'no-rules-new'; norules.subject.authoring = { minVisualPerChapter: 3 }; norules.builtAt = '2026-11-02T10:00:00Z';
+  const nr = await tool('noema_save_pack', { pack_json: JSON.stringify(norules) });
+  ok(nr.isError && /subject\.authoring\.rules must be 2/.test(nr.content[0].text) && !srv.state.kv[uid]['a:packmeta:no-rules-new'], 'a pack built since 2026-10-22 without subject.authoring.rules is refused');
+  const old = JSON.parse(JSON.stringify(norules)); old.subject.id = 'no-rules-old'; old.builtAt = '2026-10-01T10:00:00Z';
+  ok(!(await tool('noema_save_pack', { pack_json: JSON.stringify(old) })).isError && srv.state.kv[uid]['a:packmeta:no-rules-old'], 'an older pack without the rules is still accepted');
+  const strictQ = JSON.parse(JSON.stringify(small)); strictQ.subject.id = 'claude-quality'; strictQ.subject.authoring = { rules: 2, by: 'claude' };
+  const sq = await tool('noema_save_pack', { pack_json: JSON.stringify(strictQ) });
+  ok(sq.isError && /\[map\.present\]/.test(sq.content[0].text), 'a pack Claude wrote is held to the quality rules (no knowledge map → refused)');
+  // noema_pipeline: the same flows as tools/pipeline.py
+  const pd = (await tool('noema_pipeline', { action: 'detect', facts: { sources: 2 } })).content[0].text;
+  ok(/^Flow 4: Sources → one subject/.test(pd) && /pipeline\.py check work\/<id> map/.test(pd) && /call noema_finish_upload/.test(pd), 'noema_pipeline detect: 2 files, one topic → flow 4 with its checks');
+  ok(/^Flow 1:/.test((await tool('noema_pipeline', { action: 'detect', facts: { sources: 3, topics: 4 } })).content[0].text) && /^Flow 2:/.test((await tool('noema_pipeline', { action: 'detect', facts: { step: true } })).content[0].text), 'detect: several topics → 1, a Roadmap step → 2');
+  ok(/L2 · Γ2/.test((await tool('noema_pipeline', { action: 'flows' })).content[0].text) && (await tool('noema_pipeline', { action: 'steps', flow: 'x' })).isError, 'noema_pipeline flows lists every flow; an unknown flow is an error');
   // 文A language bridges (docs/BRIDGE.md): checked as the app checks them, stored where the app reads them
   ok(names.includes('noema_bridge_guide') && names.includes('noema_save_bridge'), 'tools: noema_bridge_guide + noema_save_bridge');
   const lp = (await call({ jsonrpc: '2.0', id: 5, method: 'prompts/get', params: { name: 'language_help', arguments: { subject: 'tiny-inline', native: 'ar' } } }, T)).json?.result;

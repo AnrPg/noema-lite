@@ -1,0 +1,198 @@
+{
+ "about": "Real exercises from the Databricks Prerequisite packs (2026-10) that break CONTENT_SPEC Q1 (and Q5/Q8). Every one must be reported by the quality checker. `_from` and `_why` are notes for people.",
+ "exercises": [
+  {
+   "id": "ch01-e001",
+   "type": "mcq",
+   "section": "ch01-s01",
+   "difficulty": 2,
+   "tags": [
+    "exam",
+    "compare"
+   ],
+   "quick": true,
+   "q": "Which statement correctly separates the two pruning mechanisms of Round 1 Q14?",
+   "explain": "Column pruning = fewer **columns**. Data skipping / partition / clustering pruning = fewer **files / regions**. The tempting swap (option 2) is exactly the confusion Q14 tests.",
+   "options": [
+    "Column pruning reduces the columns read; data skipping / partition / clustering pruning reduces the files or regions scanned",
+    "Column pruning reduces the files scanned; data skipping reduces the columns read",
+    "Both reduce columns; only partition pruning reduces files",
+    "They are two names for the same mechanism"
+   ],
+   "answer": 0,
+   "why": [
+    "Correct.",
+    "Swapped: this is the classic confusion.",
+    "Only column pruning works on columns; skipping works on files/regions.",
+    "They are distinct mechanisms; the course separates them later."
+   ],
+   "_from": "Databricks Prerequisite Round 2 ch01-e001",
+   "_why": "source-pointer: \"Round 1 Q14\""
+  },
+  {
+   "id": "ch01-e005",
+   "type": "cloze",
+   "section": "ch01-s01",
+   "difficulty": 2,
+   "tags": [
+    "concept",
+    "exam"
+   ],
+   "quick": false,
+   "q": "Complete the Round 1 Q15 answer.",
+   "explain": "This sentence is worth knowing word for word: it is the reason Delta Lake exists on top of Parquet.",
+   "text": "Parquet describes how data is stored in [[files]]; by itself it does not provide the transaction [[history]], [[atomic]] commits, coherent [[snapshots]] and table-state management required for database-like [[concurrent]] modifications.",
+   "bank": [
+    "tables",
+    "columns",
+    "isolated",
+    "partitions"
+   ],
+   "_from": "Databricks Prerequisite Round 2 ch01-e005",
+   "_why": "source-pointer: \"Round 1 Q15\"; explanation teaches nothing"
+  },
+  {
+   "id": "ch01-e027",
+   "type": "order",
+   "section": "ch01-s02",
+   "difficulty": 3,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Put the Round 1 distinctions in the order the source lists them (first four).",
+   "explain": "The list continues: table ≠ storage directory, storage ≠ compute, physical file existence ≠ current table membership, metadata ≠ data, Unity Catalog ≠ Delta Lake.",
+   "items": [
+    "Spark ≠ Databricks",
+    "Spark ≠ Delta",
+    "Delta ≠ Parquet",
+    "table ≠ file"
+   ],
+   "_from": "Databricks Prerequisite Round 2 ch01-e027",
+   "_why": "source-pointer + memorising the order of the source's list"
+  },
+  {
+   "id": "ch01-e008",
+   "type": "tf",
+   "section": "ch01-s02",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": true,
+   "q": "According to the current documentation quoted in the source, Delta Lake is the default table format on Databricks.",
+   "explain": "True: Delta is the default; it is built around Parquet plus a transaction log.",
+   "answer": true,
+   "_from": "Databricks Prerequisite Round 2 ch01-e008",
+   "_why": "source-pointer: \"quoted in the source\"; tf copies a theory sentence"
+  },
+  {
+   "id": "ch02-e002",
+   "type": "mcq",
+   "section": "ch02-s01",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": true,
+   "q": "In the source's example, which step is `SELECT ...` from PostgreSQL producing raw orders?",
+   "explain": "Taking data out of the source system is **Extract**.",
+   "options": [
+    "Extract",
+    "Transform",
+    "Load",
+    "Validate"
+   ],
+   "answer": 0,
+   "_from": "Databricks Prerequisite Round 2 ch02-e002",
+   "_why": "source-pointer: \"the source's example\"; one-line explanation"
+  },
+  {
+   "id": "ch01-e008",
+   "type": "cloze",
+   "section": "ch01-s02",
+   "difficulty": 2,
+   "tags": [
+    "syntax"
+   ],
+   "quick": true,
+   "q": "Fill in the query exactly as in the source.",
+   "text": "SELECT [[customer_id]], [[SUM]](amount)\nFROM [[orders]]\nGROUP BY [[customer_id]];",
+   "asCode": true,
+   "explain": "The source's compute example aggregates the amount per customer from the orders table. Note GROUP BY repeats the non-aggregated column customer_id.",
+   "_from": "Databricks Prerequisite Round 1 ch01-e008",
+   "_why": "source-pointer: \"exactly as in the source\""
+  },
+  {
+   "id": "ch01-e009",
+   "type": "mcq",
+   "section": "ch01-s02",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "In the example dataset (customers, orders, products), what does the source say must happen 'when nobody is processing them'?",
+   "options": [
+    "They must be loaded into executor RAM",
+    "Something must store those bytes",
+    "They can be deleted and recomputed",
+    "They must be converted to a table"
+   ],
+   "answer": 1,
+   "why": [
+    "Wrong: RAM belongs to compute and disappears.",
+    "Right: storage keeps them.",
+    "Wrong: nothing in the source says data is recomputed — it persists.",
+    "Wrong: the point here is persistence, not table semantics."
+   ],
+   "explain": "This sentence introduces the storage responsibility. The tempting 'load into RAM' answer confuses storage with compute.",
+   "_from": "Databricks Prerequisite Round 1 ch01-e009",
+   "_why": "source-pointer: \"the example dataset\", \"the source say\""
+  },
+  {
+   "id": "ch01-e011",
+   "type": "odd",
+   "section": "ch01-s02",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": true,
+   "q": "Which item is NOT a table of the example dataset on p. 1?",
+   "options": [
+    "customers",
+    "orders",
+    "products",
+    "sales"
+   ],
+   "answer": 3,
+   "explain": "The p. 1 dataset is customers, orders, products. `sales` appears later (Exercise 2 on p. 6 and the slow-query thought experiment), not here.",
+   "_from": "Databricks Prerequisite Round 1 ch01-e011",
+   "_why": "source-pointer: \"on p. 1\" — trivia about the source, not knowledge"
+  },
+  {
+   "id": "ch01-e014",
+   "type": "cloze",
+   "section": "ch01-s03",
+   "difficulty": 3,
+   "tags": [
+    "syntax",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "Rebuild the Azure URI of the source.",
+   "text": "[[abfss]]://[[data]]@[[company]].[[dfs]].core.windows.net/orders/...",
+   "bank": [
+    "abfs",
+    "blob",
+    "s3a",
+    "gcs"
+   ],
+   "asCode": true,
+   "explain": "Scheme `abfss`, container `data`, then `@`, storage account `company`, then the `dfs.core.windows.net` host. The container comes **before** the `@`.",
+   "_from": "Databricks Prerequisite Round 1 ch01-e014",
+   "_why": "source-pointer: \"the URI of the source\""
+  }
+ ]
+}

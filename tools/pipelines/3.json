@@ -1,0 +1,11 @@
+{
+ "format": "noema.pipeline/v1",
+ "id": "3",
+ "title": "Plan the chapters and fill the queue",
+ "when": "The Roadmap exists; its steps need chapter plans and a queue.",
+ "steps": [
+  "classify",
+  "plan",
+  "next"
+ ]
+}
