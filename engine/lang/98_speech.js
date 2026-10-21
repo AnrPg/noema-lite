@@ -30,7 +30,7 @@ function loadVoices(ms = 1200) {
   refreshVoices();
   if (SP.voices.length || !synthOK()) return Promise.resolve(SP.voices);
   return new Promise(res => {
-    let over = false; const end = () => { if (over) return; over = true; refreshVoices(); res(SP.voices); };
+    let over = false, retried = false; const end = () => { if (over) return; over = true; refreshVoices(); res(SP.voices); };
     try { speechSynthesis.addEventListener('voiceschanged', end, { once: true }); } catch (e) { }
     setTimeout(end, ms);
   });
@@ -52,17 +52,29 @@ function say(c, text, { slow = false } = {}) {
   if (!SP.voices.length) refreshVoices();
   const v = SP.voices.length ? voiceOf(c) : null;
   if (SP.voices.length && !v) { noVoice(c); return Promise.resolve(false); }
-  const u = new SpeechSynthesisUtterance(UI.C?.lang[c] ? N.speechText(UI.C, c, text) : String(text));
-  u.lang = tagOf(c); if (v) u.voice = v;   // voices not listed yet (first click on some browsers): the engine picks one for the language
-  u.rate = slow || spPrefs().rate === 'slow' ? N.SPEECH_RATE.slow : N.SPEECH_RATE.normal;
+  const known = !!UI.C?.lang[c], rate = slow || spPrefs().rate === 'slow' ? N.SPEECH_RATE.slow : N.SPEECH_RATE.normal;
+  const make = (txt, voice) => { const u = new SpeechSynthesisUtterance(txt); u.lang = tagOf(c); if (voice) u.voice = voice; u.rate = rate; return u; };   // voices not listed yet (first click on some browsers): the engine picks one for the language
+  const t1 = known ? N.speechText(UI.C, c, text) : String(text), t2 = known ? N.speechPlain(UI.C, c, text) : String(text);
+  /* Attempts, each given a few seconds to start: the chosen voice, then the language only, then the text without vowel marks.
+     Chrome and Safari silently drop an utterance queued right after another (nothing fires), so a start that never comes is tried again. */
+  const tries = [[t1, v], [t1, null], [t2, null]].filter((x, i, a) => i === 0 || x[0] !== a[i - 1][0] || x[1] !== a[i - 1][1]);
   return new Promise(res => {
-    let over = false; const end = ok => { if (over) return; over = true; if (SP.utter === u) SP.utter = null; res(ok); };
-    u.onend = () => end(true); u.onerror = e => end(e && (e.error === 'interrupted' || e.error === 'canceled'));
-    SP.utter = u;   // keep it alive until it ends
-    const go = () => { try { speechSynthesis.resume?.(); } catch (e) { } try { speechSynthesis.speak(u); } catch (e) { end(false); } };
-    let busy = false; try { busy = speechSynthesis.speaking || speechSynthesis.pending; } catch (e) { }
-    if (busy) { try { speechSynthesis.cancel(); } catch (e) { } setTimeout(go, 80); } else go();
-    setTimeout(() => end(true), 4000 + String(text).length * 180);   // some engines never fire 'end'
+    let over = false, k = -1, timer = 0, cur = null;
+    const end = ok => { if (over) return; over = true; clearTimeout(timer); if (SP.utter === cur) SP.utter = null; res(ok); };
+    const next = code => {
+      clearTimeout(timer); k++;
+      if (k >= tries.length) { toast(LT('lang.speech.failed', { lang: langLabel(c), code: code || 'no-start' })); return end(false); }
+      const u = cur = make(tries[k][0], tries[k][1]); let started = false;
+      u.onstart = () => { started = true; clearTimeout(timer); timer = setTimeout(() => end(true), 4000 + String(text).length * 180); };   // some engines never fire 'end'
+      u.onend = () => end(true);
+      u.onerror = e => { const er = e && e.error; if (er === 'interrupted' || er === 'canceled') return end(true); u.onerror = u.onend = null; next(er); };
+      SP.utter = u;   // keep it alive until it ends
+      const go = () => { if (over || cur !== u) return; try { speechSynthesis.resume?.(); } catch (x) { } try { speechSynthesis.speak(u); } catch (x) { next('speak'); } };
+      let busy = false; try { busy = speechSynthesis.speaking || speechSynthesis.pending || speechSynthesis.paused; } catch (x) { }
+      if (busy || k) { try { speechSynthesis.cancel(); } catch (x) { } setTimeout(go, 120); } else go();
+      timer = setTimeout(() => { let sp = false; try { sp = speechSynthesis.speaking; } catch (x) { } if (!started && !sp && !over && cur === u) { u.onerror = u.onend = null; next(''); } }, 2500);   // never started: next attempt
+    };
+    next();
     if (!SP.voices.length) loadVoices();   // for the next time
   });
 }
@@ -285,24 +297,24 @@ async function readAloud(btn, c) {
 
 /* ---------- 🎧 the lane ---------- */
 const LISTEN_SETS = [
-  { id: 'hear', type: 'listen_pick', icon: '🔊', get title() { return LT('lang.listen.hear'); }, get what() { return LT('lang.listen.hearWhat'); } },
-  { id: 'sentences', type: 'listen_meaning', icon: '👂', get title() { return LT('lang.listen.sentences'); }, get what() { return LT('lang.listen.sentencesWhat'); } },
-  { id: 'dictation', type: 'dictation', icon: '✍️', get title() { return LT('lang.listen.dictation'); }, get what() { return LT('lang.listen.dictationWhat'); } },
-  { id: 'shadow', type: 'shadowing', icon: '🗣️', get title() { return LT('lang.listen.shadow'); }, get what() { return LT('lang.listen.shadowWhat'); } },
-  { id: 'speak', type: 'speak', icon: '🎤', get title() { return LT('lang.listen.speak'); }, get what() { return LT('lang.listen.speakWhat'); } },
-  { id: 'tones', type: 'listen_tone', icon: '🎵', get title() { return LT('lang.listen.tones'); }, get what() { return LT('lang.listen.tonesWhat'); }, only: c => c === 'zh' || LX(c).language.romanization === 'pinyin' }];
+  { id: 'hear', g: 'listen', type: 'listen_pick', icon: '🔊', get title() { return LT('lang.listen.hear'); }, get what() { return LT('lang.listen.hearWhat'); } },
+  { id: 'sentences', g: 'listen', type: 'listen_meaning', icon: '👂', get title() { return LT('lang.listen.sentences'); }, get what() { return LT('lang.listen.sentencesWhat'); } },
+  { id: 'dictation', g: 'listen', type: 'dictation', icon: '✍️', get title() { return LT('lang.listen.dictation'); }, get what() { return LT('lang.listen.dictationWhat'); } },
+  { id: 'shadow', g: 'speak', type: 'shadowing', icon: '🗣️', get title() { return LT('lang.listen.shadow'); }, get what() { return LT('lang.listen.shadowWhat'); } },
+  { id: 'speak', g: 'speak', type: 'speak', icon: '🎤', get title() { return LT('lang.listen.speak'); }, get what() { return LT('lang.listen.speakWhat'); } },
+  { id: 'tones', g: 'listen', type: 'listen_tone', icon: '🎵', get title() { return LT('lang.listen.tones'); }, get what() { return LT('lang.listen.tonesWhat'); }, only: c => c === 'zh' || LX(c).language.romanization === 'pinyin' }];
 const listenMake = (c, set, k) => N.speechItems(UI.C, UI.L, c, set.type, { k, max: 8, caps: pushCaps() });
 VIEWS.listen = (v, r) => {
   const c = UI.C.lang[r.arg] ? r.arg : UI.lang;
   const wait = h('p', { class: 'tiny lx-loading' }, '… ' + LT('lang.listen.looking'));
   v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, arrowBack() + ' ' + LT('lang.card.map'))),
-    h('h1', {}, '🎧 ' + LT('lang.view.listen'), h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).label}`)),
+    h('h1', {}, '🎧 ' + LT(r.arg2 === 'listening' || r.arg2 === 'speaking' ? 'lang.aspect.' + r.arg2 : 'lang.view.listen'), h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).label}`)),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); go('#/listen/' + x); })), wait);
   loadVoices().then(() => {
     if (route().name !== 'listen' || !wait.isConnected) return;
     wait.remove();
     const k = N.known(UI.C, UI.L, c);
-    if (r.arg2) { const set = LISTEN_SETS.find(s => s.id === r.arg2); if (set) return runProd(listenMake(c, set, k), { title: `${set.icon} ${set.title} · ${info(c).flag} ${info(c).label}`, back: '#/listen/' + c, lang: c }); }
+    if (r.arg2 && !['listening', 'speaking'].includes(r.arg2)) { const set = LISTEN_SETS.find(s => s.id === r.arg2); if (set) return runProd(listenMake(c, set, k), { title: `${set.icon} ${set.title} · ${info(c).flag} ${info(c).label}`, back: '#/listen/' + c, lang: c }); }
     const v0 = voiceOf(c);
     v.append(h('div', { class: 'lx-callout k-key lx-devline' },
       h('div', {}, v0 ? '🔊 ' + LT('lang.listen.voice', { name: v0.name, tag: v0.lang }) : '🔇 ' + LT('lang.listen.noVoiceLane', { lang: info(c).name })),
@@ -313,6 +325,7 @@ VIEWS.listen = (v, r) => {
     const grid = h('div', { class: 'lx-lanegrid' });
     for (const set of LISTEN_SETS) {
       if (set.only && !set.only(c)) continue;
+      if ((r.arg2 === 'listening' && set.g !== 'listen') || (r.arg2 === 'speaking' && set.g !== 'speak')) continue;   // the aspects Listening and Speaking show their own lanes
       const n = listenMake(c, set, k).length;
       grid.append(h('button', { class: 'lx-lanecard', 'data-set': set.id, disabled: n ? null : true, onclick: () => go(`#/listen/${c}/${set.id}`) },
         h('span', { class: 'lx-laneicon' }, set.icon), h('b', {}, set.title), h('span', { class: 'tiny' }, set.what), h('span', { class: 'tiny lx-lanen' }, n ? LT('lang.write.ready', { n }) : !v0 && set.type !== 'speak' ? LT('lang.listen.needsVoice') : LT('lang.write.learnMore'))));
@@ -354,7 +367,7 @@ function sessionSpeechItems(plan) {
 }
 {
   const home = VIEWS.home;
-  VIEWS.home = (v, r) => { home(v, r); const after = v.querySelector('.lx-prodlanes'), lanes = speechLanes(); if (after) after.after(lanes); else { const map = v.querySelector('.lx-maphead') || [...v.querySelectorAll('h2')].find(x => /The map/.test(x.textContent)); map ? map.before(lanes) : v.append(lanes); } };   // i18n-ignore (found by its class)
+  VIEWS.home = (v, r) => { home(v, r); if (UI.scope) return; const after = v.querySelector('.lx-prodlanes'), lanes = speechLanes(); if (after) after.after(lanes); else { const map = v.querySelector('.lx-maphead') || [...v.querySelectorAll('h2')].find(x => /The map/.test(x.textContent)); map ? map.before(lanes) : v.append(lanes); } };   // i18n-ignore (found by its class)
   const settings = VIEWS.settings;
   VIEWS.settings = (v, r) => { settings(v, r); const tail = [...v.children].reverse().find(x => x.tagName === 'P'); const s = speechSettings(); tail ? tail.before(s) : v.append(s); loadVoices().then(() => { const o = v.querySelector('.lx-speechset'); if (o && !o.contains(document.activeElement)) o.replaceWith(speechSettings()); }); };
   const read = VIEWS.read;

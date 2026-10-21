@@ -45,6 +45,9 @@ else, then the sections of `docs/LANGUAGES.md` your task touches. In short:
   the words of that lesson or an earlier one on the common order (no ⌈30 %⌉ share; that starts at C01). The validator
   lists the usable sentences per lesson; fill the gaps you find. Titles name subjects, never languages (D25).
 - **D24 transliteration** — every foundation word of a non-Latin-script language has `translit` (zh: `pinyin`, tone marks).
+- **D26 parameters after their grammar** — a `wordFeatures` entry whose grammar a later lesson teaches carries `from` (function id); a word card in a lesson never shows a term the learner has not met. Write Hebrew / Arabic examples with vowel marks (the app derives their Latin reading).
+- **D27 everything a card teaches is trained and tested** — every section of a word card (registers, traps / confusables, synonym shades, antonyms, collocations, idioms, usage, etymology, culture, pronunciation, writing) has exercises in the lesson's practice and questions in its check; registers, traps and synonym shades first.
+- **D28 main parameters vs “More”** — `prominent: true` only for parameters that vary and cannot be worked out; constant, rule-made or rare ones are `prominent: false`; the reading is never listed.
 - **D9–D12, D17** — complete thematic groups, words that combine, the grammar per type, the open-ended course.
 - **Correctness first** — ground every form and fact (Wiktionary via `tools/lang_refcheck.py` `fetch`, WALS, grammars);
   leave out what you are not sure of; edit only the files your task allows; report doubtful cases.

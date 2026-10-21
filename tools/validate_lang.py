@@ -474,6 +474,8 @@ def check_word_map(v, L, lw, lj, decls, profile, root, R3):
             dw = f'{lw}/language.json · wordFeatures.{pos}.{d.get("id")}'
             if 'prominent' in d and not isinstance(d['prominent'], bool): v.E(dw, 'prominent must be true or false (R3)')
             if 'order' in d and (isinstance(d['order'], bool) or not isinstance(d['order'], (int, float))): v.E(dw, 'order must be a number (R3)')
+            for fr in ([d['from']] if isinstance(d.get('from'), str) else d.get('from') or []):   # D26: the grammar that has to be taught before the parameter appears on a word card
+                if not os.path.exists(os.path.join(root, 'core', 'functions', f'{fr}.json')): v.E(dw, f'from: “{fr}” is not a function of the course (core/functions)')
     unordered = [p for p in R3_CONTENT if len(decls.get(p) or []) > 1 and not any('order' in d or 'prominent' in d for d in decls[p])]
     if unordered: v.W(f'{lw}/language.json · wordFeatures', f'{", ".join(unordered)}: declare how the word card shows the parameters (prominent, order — the most important first; default: declaration order, R3)')
     ok = lj.get('wordFeaturesChecklist') or {}

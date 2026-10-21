@@ -96,8 +96,9 @@ function grammarCard(c, fid, { compact = false, onPick = null } = {}) {
   const ex = N.selectSentences(UI.C, c, { known: k.R, functions: [fid], maxUnknown: 'auto' }).slice(0, compact ? 3 : 8);
   ex.forEach(s => noteNew(c, s.unknown));
   const from = Array.isArray(g.typology) ? N.familiarFrom(UI.C, g.typology, knowsL(c)) : [];
-  return h('article', { class: 'lx-card lx-gram', lang: UI.C.explainLang, 'data-fn': fid, 'data-lang': c },
-    h('div', { class: 'lx-cardtop' }, h('h3', {}, info(c).flag, ' ', fn.title), g.status !== 'realized' ? h('span', { class: 'lx-badge reg' }, STATUS_LABEL[g.status]) : null),
+  const asp = typeof aspectOf === 'function' ? aspectOf(fid) : null;
+  return h('article', { class: 'lx-card lx-gram' + (asp ? ' lx-asp lx-asp-' + asp : ''), lang: UI.C.explainLang, 'data-fn': fid, 'data-lang': c, 'data-aspect': asp || null },
+    h('div', { class: 'lx-cardtop' }, h('h3', {}, info(c).flag, ' ', fn.title), asp ? aspectLabel(fid) : null, g.status !== 'realized' ? h('span', { class: 'lx-badge reg' }, STATUS_LABEL[g.status]) : null),
     from.length ? h('div', { class: 'tiny lx-familiarline' }, '✓ ' + LT('lang.gram.worksAsIn', { from: LLIST(from) })) : null,
     typeof feasibilityBar === 'function' ? feasibilityBar(c, fid, compact) : null,   // P5: the feasibility light (§7.3) and ▶ practise
     h('p', { class: 'lx-summary' }, wordsIn(c, g.summary)),

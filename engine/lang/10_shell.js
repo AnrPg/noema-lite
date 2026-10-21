@@ -2,14 +2,15 @@
 let wired = false;
 /** Open a course. host: an element inside the frame (the course is drawn there, its addresses live under #/lang/<course>/…,
     onRoute({ view, label, home }) tells the frame where the learner is); without it the course takes the whole page. */
-function start({ acc, id, data, host = null, onRoute = null }) {
+function start({ acc, id, data, host = null, onRoute = null, base = null, scope = null }) {
   if (UI.C && UI.acc) save(true);   // another course was open in this page (the frame opens one after the other)
   UI.acc = acc; UI.id = id; UI.data = data; UI.facade = null; UI.profMap = null; UI.L = null; UI.C = buildCourse(data); UI.L = loadLearner(); UI.day = today(); UI.profiles = false;
   window.NoemaLangUI?.claude?.activateAdded?.();   // a language a package added (docs/LANGUAGES.md §10.2) is active once
   if (studyChoice().langs.join() !== UI.C.languages.join()) { save(true); UI.C = buildCourse(data); UI.L = loadLearner(); }   // D21: … and studied
   applyExplanationLocale();   // D19: the explanations in the learner's native language (its facade), when one is on
   UI.lang = UI.prefs.lang && UI.C.lang[UI.prefs.lang] ? UI.prefs.lang : activeLangs()[0];
-  FR.on = !!host; FR.host = host; FR.onRoute = onRoute; FR.base = host ? '#/lang/' + encodeURIComponent(id) : '';
+  UI.scope = scope && UI.C.lang[scope] ? scope : null; if (UI.scope) UI.lang = UI.scope;   // #/lang/<code>: the page is about one language
+  FR.on = !!host; FR.host = host; FR.onRoute = onRoute; FR.base = host ? base || '#/lang/' + encodeURIComponent(id) : '';
   document.title = `${courseTitle()} · noema-lite`;   // i18n-ignore (the course title and the app name)
   document.documentElement.lang = UI.C.explainLang;
   document.body.classList.add('lx');
@@ -89,7 +90,23 @@ function applyExplanationLocale() {
 /** Is the course on screen? (inside the frame the learner may be on another tab) */
 const shown = () => !FR.on || (!!FR.host?.isConnected && innerHash() != null);
 function go(hash) { const full = toHash(hash); if (location.hash === full) render(); else location.hash = full; }
-function route() { const p = (innerHash() || '#/').slice(2).split('/').map(x => { try { return decodeURIComponent(x); } catch (e) { return x; } }); return { name: p[0] || 'home', arg: p[1] || null, arg2: p[2] || null }; }
+/** Views that take the language as their first argument (#/listen/he), and the ones that take it as their second (#/fn/<fid>/he, #/w/he/<word>). */
+const LANG_ARG1 = ['script', 'listen', 'read', 'write', 'grammar', 'parts', 'peculiar', 'recall', 'aspects', 'w'], LANG_ARG2 = ['fn'];
+function route() {
+  const p = (innerHash() || '#/').slice(2).split('/').map(x => { try { return decodeURIComponent(x); } catch (e) { return x; } });
+  const r = { name: p[0] || 'home', arg: p[1] || null, arg2: p[2] || null };
+  if (UI.scope) {   // a page of one language (#/lang/he/…): the language in the rest of the address is that one — one source of truth
+    if (LANG_ARG1.includes(r.name)) r.arg = UI.scope; else if (LANG_ARG2.includes(r.name)) r.arg2 = UI.scope;
+  }
+  return r;
+}
+/** The address of the same page for another language: the codes of the course's languages in it become the new one. */
+const inScope = (inner, c) => inner.split('/').map(x => UI.C.lang[x] ? c : x).join('/');
+/** The strip of languages follows what the page picks (a page of all languages that shows one language at a time): the chip of that language is on. */
+function syncStrip() {
+  if (UI.scope || !FR.on) return;
+  document.querySelectorAll('.lx-subbar .lx-flagchip, .lx-top .lx-flagchip').forEach(b => b.classList.toggle('on', FR.pick ? b.dataset.lang === FR.pick.cur : b.classList.contains('lx-allchip')));
+}
 
 function topbar() {
   const t = $('.lx-top'); if (!t) return; t.innerHTML = '';
@@ -100,7 +117,13 @@ function topbar() {
       h('span', { class: 'lx-flag' }, info(c).flag), c.toUpperCase(), h('span', { class: 'lx-ring', style: { '--p': total ? Math.round(kn / total * 100) : 0 } }));
   });
   const explain = h('span', { class: 'chip lx-explain', title: LT('lang.shell.explainTitle') }, '💬 ' + info(UI.C.explainLang).name);
-  if (FR.on) { t.append(...chips, h('span', { class: 'spacer' }), explain); return; }   // the frame has the title (crumbs), ⚙️ and the other courses (⋮)
+  if (FR.on) {   // the strip of your languages: All · one chip per language. On a page of one language a chip opens the same page for that language (the address carries it); on a page of all, it picks the language shown
+    const inner = (innerHash() || '#/').replace(/^#\/?/, '');
+    const open = c => { location.hash = (c ? '#/lang/' + encodeURIComponent(c) : '#/lang/' + encodeURIComponent(UI.id)) + (inner ? '/' + (c ? inScope(inner, c) : inner) : ''); };
+    const all = h('button', { class: 'chip lx-flagchip lx-allchip' + (UI.scope ? '' : ' on'), title: LT('lang.hub.allTip'), onclick: () => open(null) }, LT('lang.hub.all'));
+    const pick = c => { if (!UI.scope && FR.pick) FR.pick.fn(c); else open(c); };
+    t.append(all, ...activeLangs().map((c, i) => { const b = chips[i]; b.classList.toggle('on', c === UI.scope); b.onclick = () => pick(c); return b; }), h('span', { class: 'spacer' }), explain); syncStrip(); return;
+  }   // the frame has the title (crumbs), ⚙️ and the other courses (⋮)
   t.append(
     h('div', { class: 'brand', onclick: () => go('#/') }, h('div', { class: 'logo' }, '🌍'), h('span', { class: 'lx-title' }, courseTitle())),
     h('span', { class: 'spacer' }), explain, ...chips,
@@ -109,7 +132,7 @@ function topbar() {
 }
 const VIEWS = {};
 /** Where the learner is, in words: the last crumb of the frame. */
-const VIEW_NAMES = ['lanes', 'settings', 'claude', 'grammar', 'write', 'read', 'script', 'listen', 'cmp', 'poly', 'sort', 'parts', 'peculiar', 'recall', 'deep', 'deepen'];
+const VIEW_NAMES = ['lanes', 'settings', 'claude', 'grammar', 'write', 'read', 'script', 'listen', 'cmp', 'poly', 'sort', 'parts', 'peculiar', 'recall', 'deep', 'deepen', 'aspects'];
 const VIEW_LABEL = new Proxy({}, { get: (o, k) => VIEW_NAMES.includes(k) ? LT('lang.view.' + k) : undefined });   // lang.view.<name>
 function viewLabel(r) {
   const C = UI.C, fl = c => C.lang[c] ? info(c).flag + ' ' : '';
@@ -126,6 +149,7 @@ function viewLabel(r) {
 }
 function render() {
   if (!UI.C || !shown()) return;
+  FR.pick = null; if (UI.scope) UI.lang = UI.scope;   // one picker, one source of truth
   const r = route(); UI.view = r.name;
   if (!document.querySelector('.lx-session') && studyChoice().langs.join() !== UI.C.languages.join()) return restudy();   // D21: the choice changed elsewhere
   if (!document.querySelector('.lx-session')) applyExplanationLocale();   // D19: the native language may have changed (Me › Language and appearance, another device)
@@ -152,6 +176,7 @@ function frameSummary(v) {
 /** A row of flag buttons for a card: one per course language, with the state of the concept in it. */
 function flagRail(cid, current, onPick) {
   if (UI.C.languages.length < 2) return null;   // D21: one language studied — a course of one language, no switch
+  if (FR.on) { if (!UI.scope) { FR.pick = { cur: current, fn: onPick }; syncStrip(); } return null; }   // in the frame the strip of languages is the only picker
   return h('div', { class: 'lx-rail', role: 'tablist', 'aria-label': LT('lang.shell.languages') }, ...UI.C.languages.map(c => {
     const st = cid ? N.conceptState(UI.C, UI.L, c, cid) : null;
     return h('button', { class: 'lx-railbtn' + (c === current ? ' on' : ''), 'data-lang': c, role: 'tab', 'aria-selected': c === current ? 'true' : 'false', title: `${info(c).label} — ${STATE_LABEL[st] || ''}`, onclick: () => onPick(c) },
@@ -161,6 +186,7 @@ function flagRail(cid, current, onPick) {
 
 /* ---------- home ---------- */
 VIEWS.home = (v) => {
+  if (UI.scope) return langHome(v);   // the home of one language (12_langhome.js)
   if (studyChoice().none) { const ask = studyAsk(true); if (ask) { v.append(h('h1', {}, courseTitle()), ask); return; } }   // D21: none of the chosen languages is in this course
   const plan = N.planSession(UI.C, UI.L, { day: today(), minutes: UI.L.settings.minutes || 20, languages: todayLangs() });   // today's languages (P6, §9.6)
   const nRev = plan.steps.filter(s => s.kind === 'review').reduce((a, s) => a + s.items.length, 0);

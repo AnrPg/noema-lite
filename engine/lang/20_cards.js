@@ -37,13 +37,24 @@ VIEWS.c = (v, r) => {
     v.innerHTML = ''; topbar();
     v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.length > 1 || !node ? history.back() : go('#/node/' + node.id) }, arrowBack() + ' ' + (node ? node.title : LT('lang.card.back')))),
       h('div', { class: 'lx-cardhead' }, conceptPic(cid, 'lx-bigemoji'), h('div', {}, h('h1', {}, con.gloss), h('div', { class: 'tiny' }, [node ? node.title : '⏳ ' + LT('lang.card.untaughtMeaning'), con.wikidata ? 'Wikidata ' + con.wikidata : null].filter(Boolean).join(' · ')))),   // i18n-ignore (Wikidata: a name)
-      h('div', { class: 'row' }, flagRail(cid, UI.lang, x => { UI.lang = x; UI.prefs.lang = x; save(); draw(); }),
-        UI.C.languages.length > 1 ? h('button', { class: 'btn small' + (UI.prefs.compare ? ' primary' : ''), onclick: () => { UI.prefs.compare = !UI.prefs.compare; save(); draw(); } }, '⇄ ' + LT('lang.view.cmp')) : null));
-    if (UI.prefs.compare && UI.C.languages.length > 1) v.append(compareTable(cid), polyConceptStrip(cid));   // + the bridges among its words (P6)
+      h('div', { class: 'row' }, flagRail(cid, UI.lang, x => { UI.lang = x; UI.prefs.lang = x; save(); draw(); })));
     const X = LX(UI.lang), lids = X.byConcept[cid] || [];
     if (X.absent[cid]) v.append(h('div', { class: 'lx-absent' }, h('b', {}, info(UI.lang).flag + ' ' + LT('lang.card.noWordFor', { lang: info(UI.lang).name }) + ' '), X.absent[cid].reason, X.absent[cid].use ? h('div', {}, LT('lang.card.instead') + ' ', h('b', {}, X.absent[cid].use)) : null));
     else if (node && !X.prepared[node.id]) v.append(h('p', { class: 'lx-note' }, '⏳ ' + LT('lang.card.unwrittenIn', { lang: info(UI.lang).name })));
     for (const lid of lids) v.append(wordCardView(UI.lang, lid, cid));
+    if (UI.C.languages.length > 1) {   // the same meaning in the other languages: folded under the word (the full table is one link away)
+      const det = h('details', { class: 'lx-others', open: !!UI.prefs.compare });
+      det.addEventListener('toggle', () => { UI.prefs.compare = det.open; save(); });
+      det.append(h('summary', {}, LT('lang.hub.otherLangs')), compareTable(cid), polyConceptStrip(cid),   // + the bridges among its words (P6)
+        h('a', { class: 'lx-fulltable', href: FR.on ? toHash('#/cmp/c/' + cid) : '#/cmp/c/' + cid }, LT('lang.hub.fullTable') + ' →'));
+      v.append(det);
+    }
+    if (node) {   // on to the next word of the same lesson, or back to the lesson after the last
+      const order = node.concepts || [], at = order.indexOf(cid), nx = at >= 0 ? order[at + 1] : null;
+      v.append(h('div', { class: 'lx-nextword' }, nx
+        ? h('button', { class: 'btn primary', onclick: () => go('#/c/' + encodeURIComponent(nx)) }, LT('lang.card.nextWord', { word: UI.C.concepts[nx]?.gloss || nx }) + ' →')
+        : h('button', { class: 'btn', onclick: () => go('#/node/' + node.id) }, LT('lang.card.lastWord', { lesson: node.title }))));
+    }
   };
   draw();
 };
@@ -92,7 +103,8 @@ function paramRow(c, r, compact) {
 /** The parameters block (R3): the prominent ones always visible, in the declared order; the rest (and the uninformative “none”s) folded.
  *  compact (lesson intro, lists): the first prominent ones only, without meanings and notes. */
 function paramsBlock(c, params, { compact = false, max = 6 } = {}) {
-  if (!params || !params.length) return null;
+  params = (params || []).filter(r => r.id !== 'translit' && r.id !== 'pinyin');   // the reading is already under the word
+  if (!params.length) return null;
   const top = params.filter(r => r.prominent), rest = params.filter(r => !r.prominent);
   if (compact) { const rows = top.filter(r => r.none == null).slice(0, max); return rows.length ? h('div', { class: 'lx-params lx-pcompact' }, ...rows.map(r => paramRow(c, r, true))) : null; }
   return h('section', { class: 'lx-params', 'aria-label': LT('lang.card.params.label') },
@@ -101,7 +113,7 @@ function paramsBlock(c, params, { compact = false, max = 6 } = {}) {
 }
 /** One line for a list of words: “plural: die Männer · genitive: des Mannes” (the first prominent parameters, as text). */
 function paramsLine(c, lid, max = 2) {
-  let ps = []; try { ps = N.wordParams(UI.C, lid, c); } catch (e) { return null; }
+  let ps = []; try { ps = N.wordParams(UI.C, lid, c, UI.L); } catch (e) { return null; }
   const bits = ps.filter(r => r.prominent && r.none == null && r.values.some(v => v.forms.length)).slice(0, max)
     .map(r => [r.title + ': ', ...r.values.flatMap((v, i) => [i ? ' · ' : '', ...v.forms.filter(f => f.role !== 'pattern').map(f => f.latin ? f.text : word(c, f.text, { sub: false }))])]);
   return bits.length ? h('span', { class: 'lx-pline tiny' }, ...bits.flatMap((b, i) => [i ? ' · ' : ' (', ...b]), ')') : null;
@@ -112,11 +124,8 @@ function wordCardView(c, lid, concept) {
   const badge = (t, cls = '') => t ? h('span', { class: 'lx-badge ' + cls }, t) : null;
   const ex = e => h('div', { class: 'lx-ex' },
     h('div', { class: 'lx-extext' }, word(c, e.text, { sub: false })),
-    e.py && UI.prefs.pinyin !== false ? h('div', { class: 'lx-help' }, e.py) : null,
-    X.language.vowelMarks && UI.prefs.marks !== false ? h('div', { class: 'lx-plain', lang: c, dir: X.language.dir }, e.plain) : null,
     h('div', { class: 'lx-tr' }, e.tr),
-    h('div', { class: 'lx-chips' }, badge('🎭 ' + regWords(e.register), 'reg'), badge('📍 ' + e.context, 'ctx'), e.senseDef ? badge('≈ ' + e.senseDef, 'sense') : null,
-      e.unknown?.length ? badge('🆕 ' + LT('lang.card.newWords', { n: e.unknown.length }), 'new') : null));
+    h('div', { class: 'lx-chips' }, badge('🎭 ' + regWords(e.register), 'reg'), badge('📍 ' + e.context, 'ctx'), e.senseDef ? badge('≈ ' + e.senseDef, 'sense') : null));   // the words not taught yet carry the dotted underline (D24); no count "relative to nothing"
   const sec = {
     senses: items => h('ol', { class: 'lx-senses' }, ...items.map(s => h('li', { class: s.current ? 'lx-cur' : null },
       h('b', {}, s.def), ' ', badge(regWords(s.register), 'reg'), s.domains ? badge(s.domains.map(d => codeWord('lang.expl.domain.', d)).join(', '), 'ctx') : null,
@@ -143,7 +152,7 @@ function wordCardView(c, lid, concept) {
       h('div', { class: 'lx-lemma' }, word(c, lx.lemma, { lex: lx })),
       h('div', { class: 'lx-meta' }, h('div', {}, h('b', {}, card.gloss)), h('div', { class: 'lx-chips' },
         badge(STATE_LABEL[card.state] || card.state, 'st s-' + card.state), badge(card.frequency, 'freq'), badge(card.status && card.status !== 'current' ? codeWord('lang.expl.status.', card.status) : null, 'reg'),
-        ...card.register.map(r => badge('🎭 ' + regWord(r), 'reg')), badge(card.connotation && CONNOTATION[card.connotation] ? CONNOTATION[card.connotation] + ' ' + LT('lang.card.conn.' + card.connotation) : null, 'ctx'),
+        ...card.register.map(r => badge('🎭 ' + regWord(r), 'reg')), badge(card.connotation && card.connotation !== 'neutral' && CONNOTATION[card.connotation] ? CONNOTATION[card.connotation] + ' ' + LT('lang.card.conn.' + card.connotation) : null, 'ctx'),
         card.intensity ? badge(LT('lang.card.strength', { dots: '●'.repeat(card.intensity) + '○'.repeat(5 - card.intensity) }), 'ctx') : null))),
     card.params?.length ? paramsBlock(c, card.params)   // R3: the word's parameters, right under it
       : card.parts.length ? h('dl', { class: 'lx-parts' }, ...card.parts.flatMap(([k, val]) => [h('dt', {}, k), h('dd', {}, /[֐-ۿ一-鿿]/.test(val) ? word(c, val, { sub: false }) : val)])) : null,

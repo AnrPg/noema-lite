@@ -3,7 +3,7 @@
 **Who must follow this file:** every agent and every person that writes code, content, briefs, tools or designs for the
 language courses — Claude Code sessions, Cowork sessions, subagents that write words, grammar or sentences, the Claude
 skill (`noema-pack-builder`), the connector's tasks, and anyone changing the language part. It is the short, binding
-form of the decisions D1–D25 in `docs/LANGUAGES.md` (the full contract). If the two ever disagree, `docs/LANGUAGES.md`
+form of the decisions D1–D29 in `docs/LANGUAGES.md` (the full contract). If the two ever disagree, `docs/LANGUAGES.md`
 wins and this file is fixed in the same commit. `tests/lang_rules.py` fails when a decision of `docs/LANGUAGES.md` is
 missing here or when one of the places below does not point to this file.
 
@@ -115,14 +115,35 @@ package `tools/lang_course.py package` and `langcore.checkLangPackage`, which th
   words of this lesson or an earlier one on the common order — no unknown share (D20's ⌈30 %⌉ starts at C01). Write
   bank sentences for a foundation function with only such words; `node tools/lang_strict_report.js <course-dir>` lists, per language and lesson, how many
   sentences are usable (fewer than 6 is a gap to fill). A word that appears before its lesson is shown with the **new-word
-  marker** (dotted amber underline, “new word” on hover; computed per learner by the app — nothing to write in the data).
+  marker** (the word's underline — the language's own colour, one line only — becomes dotted; “new word” on hover; computed
+  per learner by the app — nothing to write in the data). No count of “new words” is written or shown: new always means
+  “not taught to this learner yet”, and the dotted line says it word by word.
 - **D24** **Transliteration is always shown in the foundations** for every non-Latin-script language: every word the learner
   sees in S00–S18, and the word card of every word that appears there, carries `translit` (pinyin with tone marks for
   zh) — a small line under the word; the learner can hide it with a toggle. A foundation word without `translit` /
-  `pinyin` is an error.
+  `pinyin` is an error. It is shown **wherever the foreign script is shown** — sentences, examples, notes, lists, word-card
+  tables — always in Latin letters, aligned under its word, or in [square brackets] after the word inside running text. The
+  app reads a stored `translit` / `pinyin` first and, for a pointed Hebrew / vowelled Arabic form that has none, makes it by
+  rules (so write the vowel marks in every example); never write the plain-script spelling as if it were a transliteration.
 - **D25** **The languages loaded decide what the app shows**: titles, addresses (`#/lang`, never a list of languages),
   chips, comparison, map flags, lanes, today's languages, tutor context come from the languages studied now. A lesson
   title names its subject, never a language; code never assumes all course languages are loaded (`activeLangs()`).
+
+- **D26** **A word's parameter appears only after its grammar is taught.** The card of a word shows a parameter (reflexive form,
+  possessive, case government, plural pattern …) only once the lesson that teaches it has been read or passed: give every
+  `wordFeatures` entry whose grammar comes later a `from` — the id of the function (core/functions) whose lesson teaches
+  it (`from: "fn.reflexive"`); the validator checks the id. In a foundation lesson the card of a word never names a thing
+  the learner has not met; if you need a term the course has not taught, teach it first or leave it out.
+- **D27** **Everything a word's card teaches is trained and tested.** Each section of a card (meanings, parameters, registers,
+  synonyms by shade, antonyms, traps and confusables, collocations, idioms, usage notes, etymology, culture, pronunciation,
+  writing) needs exercises in the practice of the lesson that teaches the word, and the lesson's check must ask about every
+  section the lesson's words carry. Registers, traps and synonym shades come first: they are where learners go wrong. A
+  section with data and no exercise is a defect, not a gap to leave.
+- **D28** **A card shows the parameters that differ; the rest sit under “More”.** Store every parameter a word can carry, but set
+- **D29** **A language has its own home and address.** Tapping a language opens `#/lang/<code>` — a home with where you are (Continue), the path, the study areas (aspects) of the language as tiles — grammar is ONE aspect (word forms and sentences), beside sounds, writing, meaning, use and idioms, etymology, culture and folk tradition, listening, speaking, reading — the vocabulary topics as a shelf of books and, apart, the tools that are not aspects (principal parts, name-them-all, peculiarities, parallel lanes) — never a lesson; the course id stays out of addresses. The strip *All · each language* is the only language picker on every page (never a second rail); on a language's page the language in the address is the page's language, always. No “Your languages” list on the combined home. A word shows the other languages folded under it (*In other languages*, link to the full table); no Compare toggle. A grammar point's `category` decides its aspect (phonology → sounds; morphology, morphosyntax, syntax → grammar; semantics, lexicon → meaning; pragmatics → use) and its lesson card carries that label; etymology, idioms and use (registers), culture and folk tradition (proverbs, sayings, fun facts) are read from the word profile sections of the same names — so author those sections richly.
+  `prominent: true` only on those that vary from word to word and cannot be worked out (gender, plural, governed case,
+  binyan, measure word). A parameter that is almost always the same, follows a rule, or is rare gets `prominent: false` (it is
+  folded under “More”). Never list the reading (`translit`, `pinyin`): it is under the word.
 
 ## C. Checklist for every task (copy it into every brief)
 - [ ] I read `docs/LANGUAGE_RULES.md` and the sections of `docs/LANGUAGES.md` my task touches.

@@ -87,6 +87,18 @@ function conceptPic(cid, cls = 'lx-temoji') {
   return img;
 }
 
+/** D24: how a written word is read, in Latin letters: the stored romanization of its lexeme when the text is its lemma, pinyin for Chinese words, else
+    rules for pointed Hebrew / vowelled Arabic (langcore romanize); null where the language has none (Latin script). */
+function romanTok(code, text, lexId) {
+  const X = LX(code), lj = X.language; if (!lj || lj.script === 'Latn' || !lj.romanization) return null;
+  const lx = lexId && X.lex[lexId], nt = N.nfc(String(text));
+  if (lx && code === 'zh') return lx.pinyin ? lx.pinyin.replace(/\s+/g, '') : null;
+  if (lx && lx.translit && (N.nfc(lx.lemma || '') === nt || (!/\p{M}/u.test(nt) && N.stripMarks(code, lx.lemma || '') === nt))) return lx.translit;   // the lemma, or its plain spelling
+  return N.romanize(code, nt) || (lx && lx.translit) || null;
+}
+/** Is the run inside a sentence of another language (prose with its own words around it)? Then the reading goes in [square brackets] after the word. */
+const wantRoman = code => UI.prefs.translit !== false || needTranslit(code);   // the learner's setting, but always until the letters are known (§5.5)
+const inProse = run => { const p = run.parentElement; if (!p) return false; let t = ''; for (const n of p.childNodes) if (n !== run && n.nodeType === 3) t += n.textContent; return /\p{L}/u.test(t); };
 /** D23: the small on-screen switch for the line under foreign words (transliteration / pinyin); only where a studied language has one. */
 function translitToggle() {
   if (!activeLangs().some(c => LX(c).language.script !== 'Latn' && LX(c).language.romanization)) return null;
@@ -100,8 +112,8 @@ function word(code, text, { lex = null, cls = '', sub = true, marks = null } = {
   const X = LX(code), shown = shownMarks(code, text, lex, marks);   // vowel marks: full · fading · none (P4, 90_script.js)
   const e = h('span', { class: 'lx-w ' + cls, lang: code, dir: X.language.dir || 'ltr' }, shown);
   if (!sub || !lex) return e;
-  const helper = code === 'zh' && UI.prefs.pinyin !== false && lex.pinyin && text === lex.lemma ? lex.pinyin.replace(/\s+/g, '')
-    : (X.language.vowelMarks || (X.language.script !== 'Latn' && X.language.romanization)) && (UI.prefs.translit !== false || needTranslit(code)) && lex.translit && text === lex.lemma ? lex.translit : null;   // always until the letters are known (§5.5)
+  const helper = code === 'zh' ? (UI.prefs.pinyin !== false && lex.pinyin && text === lex.lemma ? lex.pinyin.replace(/\s+/g, '') : null)
+    : (UI.prefs.translit !== false || needTranslit(code)) ? romanTok(code, text, lex.id) : null;   // always until the letters are known (§5.5)
   return helper ? h('span', { class: 'lx-wbox' }, e, h('span', { class: 'lx-help', lang: code === 'zh' ? 'zh-Latn-pinyin' : 'und-Latn' }, helper)) : e;
 }
 /* ---------- the learner's native language (D19, docs/language-packs.md §2.2) and words met before they are learned (D20) ---------- */
@@ -131,9 +143,13 @@ function sentenceView(c, s, unknown = []) {
   const X = LX(c), un = new Set(unknown), parts = [];
   for (const k of s.tokens) {
     const l = k.l || (k.parts || []).map(p => p.l).filter(x => x && X.lex[x]).slice(-1)[0];
-    if (k.p || !l || !X.lex[l]) { parts.push({ t: k.t, el: h('span', { lang: c }, k.t) }); continue; }
-    const isNew = un.has(l), el = h('span', { class: 'lx-w lx-tok' + (isNew ? ' lx-new' : ''), lang: c, title: (isNew ? '🆕 ' : '') + gloss(c, l), tabindex: '0',
-      onclick: e => { e.stopPropagation(); wordPopup(c, l); } }, shownMarks(c, k.t, X.lex[l]));
+    if (k.p || !l || !X.lex[l]) {
+      const rm0 = !k.p && wantRoman(c) && /\p{M}/u.test(k.t) ? N.romanize(c, N.nfc(k.t)) : null;   // not in the course: still read by rule (Hebrew / Arabic with vowel marks)
+      parts.push({ t: k.t, el: rm0 ? h('ruby', { class: 'lx-ru', lang: c }, k.t, h('rt', { class: 'lx-help', lang: 'und-Latn', dir: 'ltr' }, rm0)) : h('span', { lang: c }, k.t) }); continue;
+    }
+    const isNew = un.has(l), rm = wantRoman(c) ? romanTok(c, k.t, l) : null;
+    const el = h(rm ? 'ruby' : 'span', { class: 'lx-w lx-tok' + (isNew ? ' lx-new' : ''), lang: c, title: (isNew ? '🆕 ' : '') + gloss(c, l), tabindex: '0',
+      onclick: e => { e.stopPropagation(); wordPopup(c, l); } }, shownMarks(c, k.t, X.lex[l]), rm ? h('rt', { class: 'lx-help', lang: 'und-Latn', dir: 'ltr' }, rm) : null);
     parts.push({ t: k.t, el });
   }
   const sp = X.language.tokenJoin !== 'none';
@@ -179,13 +195,24 @@ function splitRun(run, code, text) {
   let toks = null; try { toks = N.tokenize(UI.C, code, s); } catch (err) { }
   if (!toks) return;
   const parts = []; let at = 0;
+  const quiet = run.parentElement?.classList.contains('lx-wbox') || !wantRoman(code);   // the word's own box already has its reading
+  const reading = (k, cls, l, body) => {   // a word with its reading under it, or in [brackets] inside prose
+    const rm = quiet ? null : romanTok(code, k.t, l), at0 = l ? { 'data-l': l } : {};
+    return !rm ? h('span', { class: cls, ...at0 }, body)
+      : inProse(run) ? h('span', { class: cls, ...at0 }, body, h('span', { class: 'lx-help lx-br', lang: 'und-Latn', dir: 'ltr' }, ' [' + rm + ']'))
+      : h('ruby', { class: cls, ...at0 }, body, h('rt', { class: 'lx-help', lang: 'und-Latn', dir: 'ltr' }, rm));
+  };
   for (const k of toks) {
-    if (k.p || k.unknown) continue;
+    if (k.p) continue;
     const i = s.indexOf(k.t, at); if (i < 0) return;
-    const last = k.parts ? k.parts[k.parts.length - 1] : k, l = wordOf(code, X, last.t, last.matches || []); if (!l) continue;
+    const last = k.parts ? k.parts[k.parts.length - 1] : k, l = k.unknown ? null : wordOf(code, X, last.t, last.matches || []);
+    if (!l) {   // not in the course: no card, but the learner still gets its reading (rule-based, Hebrew / Arabic)
+      if (quiet || !/\p{L}/u.test(k.t) || !/\p{M}/u.test(k.t) || !N.romanize(code, N.nfc(k.t))) continue;   // only words that carry their vowel marks can be read by rule
+      if (i > at) parts.push(shownMarks(code, s.slice(at, i), null));
+      parts.push(reading(k, 'lx-ru', null, shownMarks(code, k.t, null))); at = i + k.t.length; continue;
+    }
     if (i > at) parts.push(shownMarks(code, s.slice(at, i), null));
-    parts.push(h('span', { class: 'lx-rw', 'data-l': l }, shownMarks(code, k.t, X.lex[l])));
-    at = i + k.t.length;
+    parts.push(reading(k, 'lx-rw', l, shownMarks(code, k.t, X.lex[l]))); at = i + k.t.length;
   }
   if (!parts.length) return;
   if (at < s.length) parts.push(shownMarks(code, s.slice(at), null));
@@ -284,7 +311,7 @@ function foldRemote(e) {
 addEventListener('noema:remote', foldRemote);
 const today = () => N.dayNumber();
 /** D25: the course's title names only the languages the learner studies (a title made of language names is rebuilt from them). */
-const courseTitle = () => { const c = UI.C.data.course, names = (UI.C.languages || []).map(x => info(x).label), all = (c.languages || []).map(x => info(x).label); return all.length && all.every(n => c.title.includes(n)) && names.length ? names.join(' · ') : c.title; };
+const courseTitle = () => { if (UI.scope) return info(UI.scope).label; const c = UI.C.data.course, names = (UI.C.languages || []).map(x => info(x).label), all = (c.languages || []).map(x => info(x).label); return all.length && all.every(n => c.title.includes(n)) && names.length ? names.join(' · ') : c.title; };
 const activeLangs = () => (UI.L.settings.languages || UI.C.languages).filter(c => UI.C.lang[c]);
 /* ---------- D21: the learner chooses the languages to study (docs/LANGUAGES.md §8 *Languages to study*) ----------
    One answer for the whole app: a:settings.studyLangs (synced, in backups) — the languages the learner studies, in every course
@@ -318,14 +345,15 @@ function toggleStudy(code, on) {
 let wired = false;
 /** Open a course. host: an element inside the frame (the course is drawn there, its addresses live under #/lang/<course>/…,
     onRoute({ view, label, home }) tells the frame where the learner is); without it the course takes the whole page. */
-function start({ acc, id, data, host = null, onRoute = null }) {
+function start({ acc, id, data, host = null, onRoute = null, base = null, scope = null }) {
   if (UI.C && UI.acc) save(true);   // another course was open in this page (the frame opens one after the other)
   UI.acc = acc; UI.id = id; UI.data = data; UI.facade = null; UI.profMap = null; UI.L = null; UI.C = buildCourse(data); UI.L = loadLearner(); UI.day = today(); UI.profiles = false;
   window.NoemaLangUI?.claude?.activateAdded?.();   // a language a package added (docs/LANGUAGES.md §10.2) is active once
   if (studyChoice().langs.join() !== UI.C.languages.join()) { save(true); UI.C = buildCourse(data); UI.L = loadLearner(); }   // D21: … and studied
   applyExplanationLocale();   // D19: the explanations in the learner's native language (its facade), when one is on
   UI.lang = UI.prefs.lang && UI.C.lang[UI.prefs.lang] ? UI.prefs.lang : activeLangs()[0];
-  FR.on = !!host; FR.host = host; FR.onRoute = onRoute; FR.base = host ? '#/lang/' + encodeURIComponent(id) : '';
+  UI.scope = scope && UI.C.lang[scope] ? scope : null; if (UI.scope) UI.lang = UI.scope;   // #/lang/<code>: the page is about one language
+  FR.on = !!host; FR.host = host; FR.onRoute = onRoute; FR.base = host ? base || '#/lang/' + encodeURIComponent(id) : '';
   document.title = `${courseTitle()} · noema-lite`;   // i18n-ignore (the course title and the app name)
   document.documentElement.lang = UI.C.explainLang;
   document.body.classList.add('lx');
@@ -405,7 +433,23 @@ function applyExplanationLocale() {
 /** Is the course on screen? (inside the frame the learner may be on another tab) */
 const shown = () => !FR.on || (!!FR.host?.isConnected && innerHash() != null);
 function go(hash) { const full = toHash(hash); if (location.hash === full) render(); else location.hash = full; }
-function route() { const p = (innerHash() || '#/').slice(2).split('/').map(x => { try { return decodeURIComponent(x); } catch (e) { return x; } }); return { name: p[0] || 'home', arg: p[1] || null, arg2: p[2] || null }; }
+/** Views that take the language as their first argument (#/listen/he), and the ones that take it as their second (#/fn/<fid>/he, #/w/he/<word>). */
+const LANG_ARG1 = ['script', 'listen', 'read', 'write', 'grammar', 'parts', 'peculiar', 'recall', 'aspects', 'w'], LANG_ARG2 = ['fn'];
+function route() {
+  const p = (innerHash() || '#/').slice(2).split('/').map(x => { try { return decodeURIComponent(x); } catch (e) { return x; } });
+  const r = { name: p[0] || 'home', arg: p[1] || null, arg2: p[2] || null };
+  if (UI.scope) {   // a page of one language (#/lang/he/…): the language in the rest of the address is that one — one source of truth
+    if (LANG_ARG1.includes(r.name)) r.arg = UI.scope; else if (LANG_ARG2.includes(r.name)) r.arg2 = UI.scope;
+  }
+  return r;
+}
+/** The address of the same page for another language: the codes of the course's languages in it become the new one. */
+const inScope = (inner, c) => inner.split('/').map(x => UI.C.lang[x] ? c : x).join('/');
+/** The strip of languages follows what the page picks (a page of all languages that shows one language at a time): the chip of that language is on. */
+function syncStrip() {
+  if (UI.scope || !FR.on) return;
+  document.querySelectorAll('.lx-subbar .lx-flagchip, .lx-top .lx-flagchip').forEach(b => b.classList.toggle('on', FR.pick ? b.dataset.lang === FR.pick.cur : b.classList.contains('lx-allchip')));
+}
 
 function topbar() {
   const t = $('.lx-top'); if (!t) return; t.innerHTML = '';
@@ -416,7 +460,13 @@ function topbar() {
       h('span', { class: 'lx-flag' }, info(c).flag), c.toUpperCase(), h('span', { class: 'lx-ring', style: { '--p': total ? Math.round(kn / total * 100) : 0 } }));
   });
   const explain = h('span', { class: 'chip lx-explain', title: LT('lang.shell.explainTitle') }, '💬 ' + info(UI.C.explainLang).name);
-  if (FR.on) { t.append(...chips, h('span', { class: 'spacer' }), explain); return; }   // the frame has the title (crumbs), ⚙️ and the other courses (⋮)
+  if (FR.on) {   // the strip of your languages: All · one chip per language. On a page of one language a chip opens the same page for that language (the address carries it); on a page of all, it picks the language shown
+    const inner = (innerHash() || '#/').replace(/^#\/?/, '');
+    const open = c => { location.hash = (c ? '#/lang/' + encodeURIComponent(c) : '#/lang/' + encodeURIComponent(UI.id)) + (inner ? '/' + (c ? inScope(inner, c) : inner) : ''); };
+    const all = h('button', { class: 'chip lx-flagchip lx-allchip' + (UI.scope ? '' : ' on'), title: LT('lang.hub.allTip'), onclick: () => open(null) }, LT('lang.hub.all'));
+    const pick = c => { if (!UI.scope && FR.pick) FR.pick.fn(c); else open(c); };
+    t.append(all, ...activeLangs().map((c, i) => { const b = chips[i]; b.classList.toggle('on', c === UI.scope); b.onclick = () => pick(c); return b; }), h('span', { class: 'spacer' }), explain); syncStrip(); return;
+  }   // the frame has the title (crumbs), ⚙️ and the other courses (⋮)
   t.append(
     h('div', { class: 'brand', onclick: () => go('#/') }, h('div', { class: 'logo' }, '🌍'), h('span', { class: 'lx-title' }, courseTitle())),
     h('span', { class: 'spacer' }), explain, ...chips,
@@ -425,7 +475,7 @@ function topbar() {
 }
 const VIEWS = {};
 /** Where the learner is, in words: the last crumb of the frame. */
-const VIEW_NAMES = ['lanes', 'settings', 'claude', 'grammar', 'write', 'read', 'script', 'listen', 'cmp', 'poly', 'sort', 'parts', 'peculiar', 'recall', 'deep', 'deepen'];
+const VIEW_NAMES = ['lanes', 'settings', 'claude', 'grammar', 'write', 'read', 'script', 'listen', 'cmp', 'poly', 'sort', 'parts', 'peculiar', 'recall', 'deep', 'deepen', 'aspects'];
 const VIEW_LABEL = new Proxy({}, { get: (o, k) => VIEW_NAMES.includes(k) ? LT('lang.view.' + k) : undefined });   // lang.view.<name>
 function viewLabel(r) {
   const C = UI.C, fl = c => C.lang[c] ? info(c).flag + ' ' : '';
@@ -442,6 +492,7 @@ function viewLabel(r) {
 }
 function render() {
   if (!UI.C || !shown()) return;
+  FR.pick = null; if (UI.scope) UI.lang = UI.scope;   // one picker, one source of truth
   const r = route(); UI.view = r.name;
   if (!document.querySelector('.lx-session') && studyChoice().langs.join() !== UI.C.languages.join()) return restudy();   // D21: the choice changed elsewhere
   if (!document.querySelector('.lx-session')) applyExplanationLocale();   // D19: the native language may have changed (Me › Language and appearance, another device)
@@ -468,6 +519,7 @@ function frameSummary(v) {
 /** A row of flag buttons for a card: one per course language, with the state of the concept in it. */
 function flagRail(cid, current, onPick) {
   if (UI.C.languages.length < 2) return null;   // D21: one language studied — a course of one language, no switch
+  if (FR.on) { if (!UI.scope) { FR.pick = { cur: current, fn: onPick }; syncStrip(); } return null; }   // in the frame the strip of languages is the only picker
   return h('div', { class: 'lx-rail', role: 'tablist', 'aria-label': LT('lang.shell.languages') }, ...UI.C.languages.map(c => {
     const st = cid ? N.conceptState(UI.C, UI.L, c, cid) : null;
     return h('button', { class: 'lx-railbtn' + (c === current ? ' on' : ''), 'data-lang': c, role: 'tab', 'aria-selected': c === current ? 'true' : 'false', title: `${info(c).label} — ${STATE_LABEL[st] || ''}`, onclick: () => onPick(c) },
@@ -477,6 +529,7 @@ function flagRail(cid, current, onPick) {
 
 /* ---------- home ---------- */
 VIEWS.home = (v) => {
+  if (UI.scope) return langHome(v);   // the home of one language (12_langhome.js)
   if (studyChoice().none) { const ask = studyAsk(true); if (ask) { v.append(h('h1', {}, courseTitle()), ask); return; } }   // D21: none of the chosen languages is in this course
   const plan = N.planSession(UI.C, UI.L, { day: today(), minutes: UI.L.settings.minutes || 20, languages: todayLangs() });   // today's languages (P6, §9.6)
   const nRev = plan.steps.filter(s => s.kind === 'review').reduce((a, s) => a + s.items.length, 0);
@@ -513,6 +566,182 @@ function nodeList() {
       h('div', { class: 'lx-nodestates' }, ...UI.C.languages.map(c => h('span', { class: 'lx-ns ns-' + st[c][nid], title: `${info(c).label}: ${STATE_LABEL[st[c][nid]] || st[c][nid]}` }, info(c).flag, ' ', (STATE_LABEL[st[c][nid]] || st[c][nid])))));
   }));
 }
+
+/* ---- 12_langhome.js ---- */
+/* ---------- the home of one language (#/lang/<code>): the central page about it — where you are, what is next, and everything else
+   the language has (its libraries, topics, drills). A tap on a language opens this page, never a lesson. ---------- */
+/** The languages the page shows: the one in the address, else all the learner studies. */
+const scopeLangs = () => UI.scope && UI.C.lang[UI.scope] ? [UI.scope] : activeLangs();
+/** Tiles in rows that hold the same number of tiles (as far as the count allows) and fill the width: never a row with one tile alone.
+    Wide screens take up to 5 in a row, narrow ones up to 3; the rows are drawn again when the width class changes. */
+function evenGrid(cls, tiles) {
+  const g = h('div', { class: cls + ' lx-evengrid' }), mq = window.matchMedia ? window.matchMedia('(max-width: 640px)') : { matches: false };
+  const draw = () => {
+    const n = tiles.length, max = mq.matches ? 3 : 5, rows = Math.ceil(n / max), base = Math.floor(n / rows), extra = n % rows; let at = 0;
+    g.replaceChildren(...Array.from({ length: rows }, (_, i) => { const k = base + (i < extra ? 1 : 0), row = h('div', { class: 'lx-evenrow' }, ...tiles.slice(at, at + k)); row.style.setProperty('--n', k); at += k; return row; }));
+  };
+  draw(); if (mq.addEventListener) mq.addEventListener('change', () => { if (g.isConnected) draw(); });
+  return g;
+}
+/** The aspects of one language the home offers: [aspect, address, how many grammar points]. A grammar aspect only when the language has points in it; the ones read from the word profiles always. */
+function langAspects(c) {
+  const X = LX(c), fns = Object.keys(X.grammar).filter(f => X.grammar[f] && X.grammar[f].status !== 'absent' && aspectOf(f)), n = a => fns.filter(f => aspectOf(f) === a).length, pg = a => '#/aspects/' + c + '/' + a;
+  return [['sounds', pg('sounds'), n('sounds')], ['writing', pg('writing'), 0], ['grammar', pg('grammar'), n('grammar')], ['meaning', pg('meaning'), n('meaning')], ['use', pg('use'), n('use')],
+    ['etymology', pg('etymology'), 0], ['culture', pg('culture'), 0], ['listening', '#/listen/' + c + '/listening', 0], ['speaking', '#/listen/' + c + '/speaking', 0], ['reading', '#/read/' + c, 0]].filter(x => !['sounds', 'meaning'].includes(x[0]) || x[2] > 0);
+}
+/** What is not an aspect of the language but a way to practise or look at it: [view name, address]. */
+function langTools(c) {
+  return [['parts', '#/parts/' + c], ['recall', '#/recall/' + c], ['peculiar', '#/peculiar/' + c, !!UI.C.data.world]].filter(x => x[2] !== false);
+}
+/** The topics of the vocabulary as a shelf of books: one book per topic, each its own colour, height and lean. */
+function topicShelf(topics) {
+  const PAL = [350, 28, 48, 95, 150, 185, 215, 255, 290, 320], hash = t => [...t].reduce((a, ch) => (a * 31 + ch.charCodeAt(0)) % 997, 7), per = 7, rows = [];
+  for (let i = 0; i < topics.length; i += per) rows.push(topics.slice(i, i + per));
+  return h('div', { class: 'lx-shelf' }, ...rows.map((row, ri) => h('div', { class: 'lx-shelfrow' }, ...row.map((f, i) => {
+    const k = hash(f.field), n = PAL[(ri * 3 + i * 3 + k % 3) % PAL.length], len = [...f.title].length, w = 46 + (k % 4) * 5, ht = 104 + (k % 5) * 8 + Math.min(len, 34) * 7, lean = (k % 7 === 0 ? 7 : k % 11 === 0 ? -6 : 0);
+    const book = h('button', { class: 'lx-book', 'aria-label': f.title, onclick: () => go('#/sort/' + encodeURIComponent(f.field)) }, h('span', { class: 'lx-spine' }, f.title));
+    book.dataset.tip = f.title;
+    for (const [k, v] of Object.entries({ '--h': n, '--bw': w + 'px', '--bh': ht + 'px', '--lean': lean + 'deg', '--d': (ri * per + i) * 70 + 'ms' })) book.style.setProperty(k, v);   // custom properties need setProperty
+    return book;
+  }))));
+}
+function langHome(v) {
+  const c = UI.scope, X = LX(c), inf = info(c), k = N.known(UI.C, UI.L, c);
+  const total = Object.keys(X.lex).length, kn = Object.values(k.state).filter(s => ['known_r', 'known_p', 'mastered'].includes(s)).length;
+  const plan = N.planSession(UI.C, UI.L, { day: today(), minutes: UI.L.settings.minutes || 20, languages: [c] });
+  const nRev = plan.steps.filter(s => s.kind === 'review').reduce((a, s) => a + s.items.length, 0);
+  const learn = plan.steps.find(s => s.kind === 'learn'), nNew = learn ? learn.concepts.reduce((a, x) => a + x.langs.length, 0) : 0;
+  const lessons = plan.steps.filter(s => s.kind === 'lesson'), nid = lessons[0]?.node;
+  const counts = LT('lang.home.sessionCounts', { rev: nRev, nNew });
+  v.append(h('div', { class: 'lx-lhhead', 'data-lang': c },
+    h('span', { class: 'lx-flag lx-lhflag' }, inf.flag),
+    h('div', {}, h('h1', {}, inf.label), h('div', { class: 'tiny' }, [X.language.nativeName && X.language.nativeName !== inf.label ? X.language.nativeName : null, LT('lang.hub.known', { kn, total })].filter(Boolean).join(' · ')))));
+  v.append(h('div', { class: 'lx-lhgo' },
+    nid ? h('div', {}, h('span', { class: 'lx-step' }, stepLabel(UI.C.nodes[nid])), ' ', h('b', {}, UI.C.nodes[nid].title)) : h('div', {}, h('b', {}, LT('lang.hub.allDone'))),
+    h('div', { class: 'row' }, nid ? continueButton(nid, [c]) : null,
+      nRev || nNew ? h('button', { class: nid ? 'btn' : 'btn primary', 'data-go': 'session', onclick: () => runSession(plan) }, '▶ ' + LT('lang.home.session', { counts })) : h('span', { class: 'tiny' }, '✅ ' + LT('lang.home.nothingDue')))));
+  if (UI.C.languages.length > 1) v.append(h('button', { class: 'lx-lhlanes lx-asp lx-asp-lanes', 'data-view': 'lanes', onclick: () => go('#/lanes') }, h('b', {}, '⇉ ' + LT('lang.view.lanes')), h('span', { class: 'tiny' }, LT('lang.hub.lanesTip'))));
+  const path = UI.C.order.filter(id => UI.C.nodes[id].kind === 'lesson' && X.applies[id]);
+  if (path.length) {   // the lessons: a window around where you are; the rest one tap away
+    const dn = path.map(id => ladderOf(id, [c]).done), at = Math.max(0, dn.indexOf(false)), from = Math.max(0, at - 2), to = Math.min(path.length, from + 12);
+    const chip = (id, i) => h('button', { class: 'lx-lhstep' + (dn[i] ? ' d' : i === at ? ' n' : ''), title: UI.C.nodes[id].title, onclick: () => go('#/lesson/' + id) }, stepLabel(UI.C.nodes[id]));
+    const row = h('div', { class: 'lx-lhpath' }), draw = all => { row.replaceChildren(...path.map((id, i) => [id, i]).filter(([, i]) => all || (i >= from && i < to)).map(([id, i]) => chip(id, i)),
+      ...(all || path.length <= to - from ? [] : [h('button', { class: 'lx-lhstep', onclick: () => draw(true) }, '… +' + (path.length - (to - from)))])); };
+    draw(false); v.append(h('h2', { class: 'lx-h2' }, LT('lang.hub.path')), row);
+  }
+  const asp = langAspects(c);
+  v.append(h('h2', { class: 'lx-h2' }, LT('lang.hub.aspects')), evenGrid('lx-lhaspects', asp.map(([a, to, n]) =>
+    h('button', { class: 'lx-lhtile lx-asp lx-asp-' + a, 'data-aspect': a, onclick: () => go(to) }, h('b', {}, LT('lang.aspect.' + a)), n ? h('span', { class: 'tiny' }, LT('lang.hub.points', { n })) : null))));
+  const topics = (UI.C.data.fields || []).filter(f => (f.subgroups || []).length > 1);
+  if (topics.length) v.append(h('h2', { class: 'lx-h2' }, LT('lang.hub.shelf')), topicShelf(topics));
+  const tools = langTools(c);
+  v.append(h('h2', { class: 'lx-h2' }, LT('lang.hub.tools')), evenGrid('lx-lhaspects lx-lhtools', tools.map(([name, to]) => h('button', { class: 'lx-lhtile lx-lhtool lx-asp lx-asp-' + name, 'data-view': name, onclick: () => go(to) }, h('b', {}, LT('lang.view.' + name))))));
+}
+
+/* ---- 13_aspects.js ---- */
+/* ---------- aspects (D29): the sides of a language one studies — sounds, writing, grammar, meaning, use, idioms, etymology, folk tradition, culture,
+   listening & speaking, reading. A grammar point belongs to one by its category (morphology and syntax are both grammar); the others are
+   read from what the word profiles already hold (etymology, phrases, fun facts, registers). Each lesson's grammar card carries its aspect as a label
+   and a pale tint; the language home lists the aspects as tiles; #/aspects/<code>/<aspect> is the page of one. ---------- */
+const ASPECT_OF_CAT = { phonology: 'sounds', morphology: 'grammar', morphosyntax: 'grammar', syntax: 'grammar', semantics: 'meaning', lexicon: 'meaning', pragmatics: 'use' };
+const ASPECT_ORDER = ['sounds', 'grammar', 'meaning', 'use'];
+/** The aspect of a grammar function (by its category), or null. */
+const aspectOf = fid => ASPECT_OF_CAT[UI.C.functions[fid]?.category] || null;
+const aspectRank = fid => { const i = ASPECT_ORDER.indexOf(aspectOf(fid)); return i < 0 ? ASPECT_ORDER.length : i; };
+/** The label of a grammar card: its aspect, and for grammar whether it is about the forms of words or about sentences. */
+const aspectText = fid => { const a = aspectOf(fid), cat = UI.C.functions[fid]?.category; return a ? LT('lang.aspect.' + a) + (a === 'grammar' ? ' · ' + LT('lang.aspect.' + (cat === 'syntax' ? 'syntax' : 'morphology')) : '') : ''; };
+const aspectLabel = fid => h('span', { class: 'lx-asplabel' }, aspectText(fid));
+/** What the word profiles hold, in parts: the section of the card and which of its items belong ('registers' reads the words that are not plain neutral everyday ones). */
+const PHRASE_IDIOM = ['idiom', 'fixed expression', 'colloquial', 'slang'], PHRASE_FOLK = ['proverb', 'saying'];
+const PROFILE_PARTS = {
+  idioms: { sec: 'phrases', keep: it => PHRASE_IDIOM.includes(it.kind) },
+  registers: { sec: null },
+  sayings: { sec: 'phrases', keep: it => PHRASE_FOLK.includes(it.kind) },
+  facts: { sec: 'funFacts', keep: () => true },
+  etymology: { sec: 'etymology', keep: () => true },
+};
+/** The aspect pages: grammar points of the aspect (by category), then these parts. Idioms belong to how a language is used; proverbs and fun facts to its culture. */
+const PAGE_PARTS = { use: ['idioms', 'registers'], culture: ['sayings', 'facts'], etymology: ['etymology'] };
+const ASPECT_PAGES = ['sounds', 'writing', 'grammar', 'meaning', 'use', 'etymology', 'culture'];
+const ASPECT_VIEWS = { writing: c => (LX(c).language.script !== 'Latn' ? ['script', 'write'] : ['write']) };
+/** One entry of a profile aspect: the word, then what the profile says (the same renderers as the card's sections). */
+function aspectEntry(c, lx, key, it) {
+  const T = x => mdView(x, { forLang: c, inline: true });
+  const head = h('a', { class: 'lx-aspword', href: '#/w/' + c + '/' + encodeURIComponent(lx.id) }, word(c, lx.lemma, { lex: lx }));
+  let body;
+  if (key === 'use') body = h('div', {}, it.regs.length ? h('span', { class: 'lx-badge reg' }, regWords(it.regs)) : null, it.conn && it.conn !== 'neutral' ? h('span', { class: 'lx-badge' }, CONNOTATION[it.conn] + ' ' + LT('lang.card.conn.' + it.conn)) : null,
+    it.status && it.status !== 'current' ? h('span', { class: 'lx-badge ctx' }, codeWord('lang.expl.status.', it.status)) : null, ' ', h('span', { class: 'tiny' }, gloss(c, lx.id)));
+  else if (key === 'phrases') body = h('div', {}, word(c, it.text, { sub: false }), ' ', it.register ? h('span', { class: 'lx-badge reg' }, regWords(it.register)) : null, h('div', { class: 'tiny' }, '“' + it.tr + '” — ', h('b', {}, it.meaning), it.source ? ' (' + it.source + ')' : ''));
+  else if (key === 'etymology') body = h('div', {}, it.text, h('span', { class: 'tiny' }, it.src ? ' — ' + it.src : ''));
+  else body = h('div', {}, '💡 ', T(it));
+  return h('div', { class: 'lx-aspentry' }, head, body);
+}
+VIEWS.aspects = (v, r) => {
+  const c = r.arg && UI.C.lang[r.arg] ? r.arg : UI.lang, X = LX(c), a = ASPECT_PAGES.includes(r.arg2) ? r.arg2 : null;
+  if (!a) return VIEWS.home(v);
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, arrowBack() + ' ' + LT('lang.card.map'))),
+    h('h1', {}, LT('lang.aspect.' + a), h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).label}`)));
+  const sec = h('div', { class: 'lx-asp lx-asp-' + a + ' lx-aspbox', 'data-aspect': a });
+  v.append(sec);
+  const fns = Object.keys(X.grammar).filter(f => X.grammar[f] && X.grammar[f].status !== 'absent' && aspectOf(f) === a).sort((x, y) => UI.C.order.indexOf((UI.C.functions[x].after || [])[0]) - UI.C.order.indexOf((UI.C.functions[y].after || [])[0]));
+  const fbtn = f => h('button', { class: 'lx-lhtile', onclick: () => go('#/fn/' + encodeURIComponent(f) + '/' + c) }, UI.C.functions[f].title);
+  if (fns.length) {
+    if (a === 'grammar') {   // word forms by the feature they inflect (tense, number, case…), sentences by level; each group folds
+      const fold = (title, n, body, open) => { const d = h('details', { class: 'lx-aspfold' }, h('summary', {}, h('b', {}, title), h('span', { class: 'tiny' }, ' · ' + n)), body); d.open = !!open; return d; };
+      const forms = fns.filter(f => UI.C.functions[f].category !== 'syntax'), sent = fns.filter(f => UI.C.functions[f].category === 'syntax');
+      const KNOWN_TAGS = ['Mood', 'Number', 'Case', 'Tense', 'Voice', 'Degree', 'Person', 'Aspect', 'Possession', 'Polarity', 'Tone', 'Politeness', 'Gender', 'Definiteness', 'Deixis'], tagOf = f => KNOWN_TAGS.find(t => (UI.C.functions[f].tags || []).includes(t)) || 'other', tags = [...new Set(forms.map(tagOf))].sort((x, y) => (x === 'other') - (y === 'other') || forms.filter(f => tagOf(f) === y).length - forms.filter(f => tagOf(f) === x).length);
+      const lib = l => h('div', { class: 'lx-lhlib' }, ...l.map(fbtn));
+      if (forms.length) sec.append(h('h3', {}, LT('lang.aspect.morphology')), ...tags.map(t => { const l = forms.filter(f => tagOf(f) === t); return fold(LT('lang.aspect.tag.' + t), l.length, lib(l)); }));
+      if (sent.length) { const lv = [...new Set(sent.map(f => UI.C.functions[f].level || ''))].sort();
+        sec.append(h('h3', {}, LT('lang.aspect.syntax')), ...lv.map(x => { const l = sent.filter(f => (UI.C.functions[f].level || '') === x); return fold(x || LT('lang.aspect.tag.other'), l.length, lib(l)); })); }
+      sec.append(h('div', { class: 'row' }, h('button', { class: 'btn small', onclick: () => go('#/grammar/' + c) }, '📐 ' + LT('lang.view.grammar'))));
+    } else sec.append(h('div', { class: 'lx-lhlib' }, ...fns.map(fbtn)));
+  }
+  const parts = PAGE_PARTS[a] || [];
+  if (parts.length) whenProfiles(c, () => {
+    const rows = Object.fromEntries(parts.map(k => [k, []]));
+    for (const lx of Object.values(X.lex)) {
+      let card; try { card = N.wordCard(UI.C, UI.L, c, lx.id); } catch (e) { continue; }
+      for (const k of parts) {
+        const P = PROFILE_PARTS[k];
+        if (P.sec) { const sc = card.sections.find(x => x.key === P.sec); for (const it of (sc?.items || []).filter(P.keep)) rows[k].push([lx, P.sec, it]); }
+        else { const p = lx.profile || {}, regs = [].concat(p.register || []).filter(x => x !== 'neutral');
+          if (regs.length || (p.connotation && p.connotation !== 'neutral') || (p.status && p.status !== 'current')) rows[k].push([lx, 'use', { regs, conn: p.connotation, status: p.status }]); }
+      }
+    }
+    const FACETS = { idioms: ['reg'], registers: ['reg', 'conn', 'status'] }, fold = x => (window.NoemaCatalog ? NoemaCatalog.fold(x) : String(x).toLowerCase());
+    const facetLabel = (f, v) => f === 'reg' ? regWord(v) : f === 'conn' ? CONNOTATION[v] + ' ' + LT('lang.card.conn.' + v) : codeWord('lang.expl.status.', v);
+    const metaOf = (key, it) => key === 'use' ? { reg: it.regs, conn: it.conn && it.conn !== 'neutral' ? [it.conn] : [], status: it.status && it.status !== 'current' ? [it.status] : [] } : { reg: [].concat(it.register || []).filter(x => x !== 'neutral'), conn: [], status: [] };
+    for (const k of parts) {   // each part is a section that folds (closed), with its own text filter and, where the data has them, chips by register / shade / status
+      const list = h('div', { class: 'lx-asplist' }), all = rows[k], shown = 40, box = h('details', { class: 'lx-aspart lx-aspfold', 'data-part': k }), pick = {};
+      const draw = (full) => {
+        const q = fold(inp.value.trim()), f = all.filter(([lx, key, it]) => (!q || fold(lx.lemma + ' ' + (lx.translit || '') + ' ' + (lx.pinyin || '') + ' ' + JSON.stringify(it)).includes(q)) &&
+          Object.entries(pick).every(([fc, v]) => !v || metaOf(key, it)[fc].includes(v)));
+        list.replaceChildren(...[...f.slice(0, full ? f.length : shown).map(([lx, key, it]) => aspectEntry(c, lx, key, it)),
+          !full && f.length > shown ? h('button', { class: 'btn ghost small', onclick: () => draw(true) }, LT('lang.frame.more', { n: f.length - shown, what: '' }).trim()) : null].filter(Boolean));   // replaceChildren turns a null into the text "null"
+        cnt.textContent = LT('lang.aspect.count', { n: f.length });
+      };
+      const inp = h('input', { class: 'noema-input', type: 'search', placeholder: LT('lang.aspect.filter'), 'aria-label': LT('lang.aspect.filter') }), cnt = h('p', { class: 'tiny' });
+      inp.addEventListener('input', () => draw(false));
+      box.append(h('summary', {}, h('b', {}, LT('lang.aspect.part.' + k)), h('span', { class: 'tiny' }, ' · ' + all.length)));
+      if (!all.length) box.append(h('p', { class: 'lx-note' }, LT('lang.aspect.none')));
+      else {
+        const chips = [];
+        for (const fc of FACETS[k] || []) {
+          const vals = [...new Set(all.flatMap(([, key, it]) => metaOf(key, it)[fc]))].filter(Boolean).sort(); if (vals.length < 2) continue;
+          const row = h('div', { class: 'lx-facet', 'data-facet': fc }, h('span', { class: 'tiny' }, LT('lang.aspect.facet.' + fc))), bs = [];
+          for (const v of [null, ...vals]) { const b = h('button', { class: 'lx-chip' + (v == null ? ' on' : ''), 'aria-pressed': String(v == null), 'data-v': v || '', onclick: () => { pick[fc] = v; bs.forEach(x => { const on = x === b; x.classList.toggle('on', on); x.setAttribute('aria-pressed', String(on)); }); draw(false); } }, v == null ? LT('lang.aspect.facet.all') : facetLabel(fc, v)); bs.push(b); row.append(b); }
+          chips.push(row);
+        }
+        box.append(cnt, ...chips, inp, list); draw(false);
+      }
+      box.open = parts.length === 1;   // a page with one section shows it; with several they are closed
+      sec.append(box);
+    }
+  }, sec);
+  const vs = ASPECT_VIEWS[a] ? ASPECT_VIEWS[a](c) : [];
+  if (vs.length) sec.append(h('div', { class: 'lx-lhlib' }, ...vs.map(n => h('button', { class: 'lx-lhtile', onclick: () => go('#/' + n + '/' + c) }, LT('lang.view.' + n)))));
+};
 
 /* ---- 20_cards.js ---- */
 /* ---------- a node: its ideas, in the chosen language ---------- */
@@ -554,13 +783,24 @@ VIEWS.c = (v, r) => {
     v.innerHTML = ''; topbar();
     v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.length > 1 || !node ? history.back() : go('#/node/' + node.id) }, arrowBack() + ' ' + (node ? node.title : LT('lang.card.back')))),
       h('div', { class: 'lx-cardhead' }, conceptPic(cid, 'lx-bigemoji'), h('div', {}, h('h1', {}, con.gloss), h('div', { class: 'tiny' }, [node ? node.title : '⏳ ' + LT('lang.card.untaughtMeaning'), con.wikidata ? 'Wikidata ' + con.wikidata : null].filter(Boolean).join(' · ')))),   // i18n-ignore (Wikidata: a name)
-      h('div', { class: 'row' }, flagRail(cid, UI.lang, x => { UI.lang = x; UI.prefs.lang = x; save(); draw(); }),
-        UI.C.languages.length > 1 ? h('button', { class: 'btn small' + (UI.prefs.compare ? ' primary' : ''), onclick: () => { UI.prefs.compare = !UI.prefs.compare; save(); draw(); } }, '⇄ ' + LT('lang.view.cmp')) : null));
-    if (UI.prefs.compare && UI.C.languages.length > 1) v.append(compareTable(cid), polyConceptStrip(cid));   // + the bridges among its words (P6)
+      h('div', { class: 'row' }, flagRail(cid, UI.lang, x => { UI.lang = x; UI.prefs.lang = x; save(); draw(); })));
     const X = LX(UI.lang), lids = X.byConcept[cid] || [];
     if (X.absent[cid]) v.append(h('div', { class: 'lx-absent' }, h('b', {}, info(UI.lang).flag + ' ' + LT('lang.card.noWordFor', { lang: info(UI.lang).name }) + ' '), X.absent[cid].reason, X.absent[cid].use ? h('div', {}, LT('lang.card.instead') + ' ', h('b', {}, X.absent[cid].use)) : null));
     else if (node && !X.prepared[node.id]) v.append(h('p', { class: 'lx-note' }, '⏳ ' + LT('lang.card.unwrittenIn', { lang: info(UI.lang).name })));
     for (const lid of lids) v.append(wordCardView(UI.lang, lid, cid));
+    if (UI.C.languages.length > 1) {   // the same meaning in the other languages: folded under the word (the full table is one link away)
+      const det = h('details', { class: 'lx-others', open: !!UI.prefs.compare });
+      det.addEventListener('toggle', () => { UI.prefs.compare = det.open; save(); });
+      det.append(h('summary', {}, LT('lang.hub.otherLangs')), compareTable(cid), polyConceptStrip(cid),   // + the bridges among its words (P6)
+        h('a', { class: 'lx-fulltable', href: FR.on ? toHash('#/cmp/c/' + cid) : '#/cmp/c/' + cid }, LT('lang.hub.fullTable') + ' →'));
+      v.append(det);
+    }
+    if (node) {   // on to the next word of the same lesson, or back to the lesson after the last
+      const order = node.concepts || [], at = order.indexOf(cid), nx = at >= 0 ? order[at + 1] : null;
+      v.append(h('div', { class: 'lx-nextword' }, nx
+        ? h('button', { class: 'btn primary', onclick: () => go('#/c/' + encodeURIComponent(nx)) }, LT('lang.card.nextWord', { word: UI.C.concepts[nx]?.gloss || nx }) + ' →')
+        : h('button', { class: 'btn', onclick: () => go('#/node/' + node.id) }, LT('lang.card.lastWord', { lesson: node.title }))));
+    }
   };
   draw();
 };
@@ -609,7 +849,8 @@ function paramRow(c, r, compact) {
 /** The parameters block (R3): the prominent ones always visible, in the declared order; the rest (and the uninformative “none”s) folded.
  *  compact (lesson intro, lists): the first prominent ones only, without meanings and notes. */
 function paramsBlock(c, params, { compact = false, max = 6 } = {}) {
-  if (!params || !params.length) return null;
+  params = (params || []).filter(r => r.id !== 'translit' && r.id !== 'pinyin');   // the reading is already under the word
+  if (!params.length) return null;
   const top = params.filter(r => r.prominent), rest = params.filter(r => !r.prominent);
   if (compact) { const rows = top.filter(r => r.none == null).slice(0, max); return rows.length ? h('div', { class: 'lx-params lx-pcompact' }, ...rows.map(r => paramRow(c, r, true))) : null; }
   return h('section', { class: 'lx-params', 'aria-label': LT('lang.card.params.label') },
@@ -618,7 +859,7 @@ function paramsBlock(c, params, { compact = false, max = 6 } = {}) {
 }
 /** One line for a list of words: “plural: die Männer · genitive: des Mannes” (the first prominent parameters, as text). */
 function paramsLine(c, lid, max = 2) {
-  let ps = []; try { ps = N.wordParams(UI.C, lid, c); } catch (e) { return null; }
+  let ps = []; try { ps = N.wordParams(UI.C, lid, c, UI.L); } catch (e) { return null; }
   const bits = ps.filter(r => r.prominent && r.none == null && r.values.some(v => v.forms.length)).slice(0, max)
     .map(r => [r.title + ': ', ...r.values.flatMap((v, i) => [i ? ' · ' : '', ...v.forms.filter(f => f.role !== 'pattern').map(f => f.latin ? f.text : word(c, f.text, { sub: false }))])]);
   return bits.length ? h('span', { class: 'lx-pline tiny' }, ...bits.flatMap((b, i) => [i ? ' · ' : ' (', ...b]), ')') : null;
@@ -629,11 +870,8 @@ function wordCardView(c, lid, concept) {
   const badge = (t, cls = '') => t ? h('span', { class: 'lx-badge ' + cls }, t) : null;
   const ex = e => h('div', { class: 'lx-ex' },
     h('div', { class: 'lx-extext' }, word(c, e.text, { sub: false })),
-    e.py && UI.prefs.pinyin !== false ? h('div', { class: 'lx-help' }, e.py) : null,
-    X.language.vowelMarks && UI.prefs.marks !== false ? h('div', { class: 'lx-plain', lang: c, dir: X.language.dir }, e.plain) : null,
     h('div', { class: 'lx-tr' }, e.tr),
-    h('div', { class: 'lx-chips' }, badge('🎭 ' + regWords(e.register), 'reg'), badge('📍 ' + e.context, 'ctx'), e.senseDef ? badge('≈ ' + e.senseDef, 'sense') : null,
-      e.unknown?.length ? badge('🆕 ' + LT('lang.card.newWords', { n: e.unknown.length }), 'new') : null));
+    h('div', { class: 'lx-chips' }, badge('🎭 ' + regWords(e.register), 'reg'), badge('📍 ' + e.context, 'ctx'), e.senseDef ? badge('≈ ' + e.senseDef, 'sense') : null));   // the words not taught yet carry the dotted underline (D24); no count "relative to nothing"
   const sec = {
     senses: items => h('ol', { class: 'lx-senses' }, ...items.map(s => h('li', { class: s.current ? 'lx-cur' : null },
       h('b', {}, s.def), ' ', badge(regWords(s.register), 'reg'), s.domains ? badge(s.domains.map(d => codeWord('lang.expl.domain.', d)).join(', '), 'ctx') : null,
@@ -660,7 +898,7 @@ function wordCardView(c, lid, concept) {
       h('div', { class: 'lx-lemma' }, word(c, lx.lemma, { lex: lx })),
       h('div', { class: 'lx-meta' }, h('div', {}, h('b', {}, card.gloss)), h('div', { class: 'lx-chips' },
         badge(STATE_LABEL[card.state] || card.state, 'st s-' + card.state), badge(card.frequency, 'freq'), badge(card.status && card.status !== 'current' ? codeWord('lang.expl.status.', card.status) : null, 'reg'),
-        ...card.register.map(r => badge('🎭 ' + regWord(r), 'reg')), badge(card.connotation && CONNOTATION[card.connotation] ? CONNOTATION[card.connotation] + ' ' + LT('lang.card.conn.' + card.connotation) : null, 'ctx'),
+        ...card.register.map(r => badge('🎭 ' + regWord(r), 'reg')), badge(card.connotation && card.connotation !== 'neutral' && CONNOTATION[card.connotation] ? CONNOTATION[card.connotation] + ' ' + LT('lang.card.conn.' + card.connotation) : null, 'ctx'),
         card.intensity ? badge(LT('lang.card.strength', { dots: '●'.repeat(card.intensity) + '○'.repeat(5 - card.intensity) }), 'ctx') : null))),
     card.params?.length ? paramsBlock(c, card.params)   // R3: the word's parameters, right under it
       : card.parts.length ? h('dl', { class: 'lx-parts' }, ...card.parts.flatMap(([k, val]) => [h('dt', {}, k), h('dd', {}, /[֐-ۿ一-鿿]/.test(val) ? word(c, val, { sub: false }) : val)])) : null,
@@ -700,8 +938,10 @@ VIEWS.field = (v, r) => {
 };
 
 /* ---------- ⏱️ name them all: free recall of a whole field ---------- */
+/** Scholarly letters as typed in plain Latin (same table as the search: engine/catalog.js fold): šālôm = shalom, ǧamal = jamal. */
+const PLAIN_LATIN = { 's\u030c': 'sh', 'c\u030c': 'ch', 'z\u030c': 'zh', 'k\u0331': 'kh', 'h\u0331': 'kh', 'h\u032e': 'kh', 't\u0331': 'th', 'd\u0331': 'dh', 'g\u0307': 'gh', 'g\u0331': 'gh', 'g\u030c': 'j', 'j\u030c': 'j' };
 function fold(code, s) {
-  let t = N.stripMarks(code, N.nfc(String(s))).toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[\s'’\-·]+/g, '');
+  let t = N.stripMarks(code, N.nfc(String(s))).toLowerCase().normalize('NFKD').replace(/([sczkhtdgj])([\u030c\u0331\u032e\u0307])/g, (m, b, d) => PLAIN_LATIN[b + d] || m).replace(/[̀-ͯ]/g, '').replace(/[\s'’\-·]+/g, '');
   return t.replace(/ß/g, 'ss');
 }
 /** Every way the learner may type a word: any form, without vowel marks, full spelling, transliteration, pinyin with or without tones. */
@@ -1254,8 +1494,9 @@ function grammarCard(c, fid, { compact = false, onPick = null } = {}) {
   const ex = N.selectSentences(UI.C, c, { known: k.R, functions: [fid], maxUnknown: 'auto' }).slice(0, compact ? 3 : 8);
   ex.forEach(s => noteNew(c, s.unknown));
   const from = Array.isArray(g.typology) ? N.familiarFrom(UI.C, g.typology, knowsL(c)) : [];
-  return h('article', { class: 'lx-card lx-gram', lang: UI.C.explainLang, 'data-fn': fid, 'data-lang': c },
-    h('div', { class: 'lx-cardtop' }, h('h3', {}, info(c).flag, ' ', fn.title), g.status !== 'realized' ? h('span', { class: 'lx-badge reg' }, STATUS_LABEL[g.status]) : null),
+  const asp = typeof aspectOf === 'function' ? aspectOf(fid) : null;
+  return h('article', { class: 'lx-card lx-gram' + (asp ? ' lx-asp lx-asp-' + asp : ''), lang: UI.C.explainLang, 'data-fn': fid, 'data-lang': c, 'data-aspect': asp || null },
+    h('div', { class: 'lx-cardtop' }, h('h3', {}, info(c).flag, ' ', fn.title), asp ? aspectLabel(fid) : null, g.status !== 'realized' ? h('span', { class: 'lx-badge reg' }, STATUS_LABEL[g.status]) : null),
     from.length ? h('div', { class: 'tiny lx-familiarline' }, '✓ ' + LT('lang.gram.worksAsIn', { from: LLIST(from) })) : null,
     typeof feasibilityBar === 'function' ? feasibilityBar(c, fid, compact) : null,   // P5: the feasibility light (§7.3) and ▶ practise
     h('p', { class: 'lx-summary' }, wordsIn(c, g.summary)),
@@ -1559,7 +1800,7 @@ window.NoemaLangUI = { titleOf: id => (UI.id === id && UI.C ? courseTitle() : nu
 /* ---- 55_lesson.js ---- */
 /* ---------- the foundations: lessons that teach words, grammar and sentences together, every language at the same step (§6.7, D9–D11) ---------- */
 const stepLabel = n => n.step == null ? '' : n.stage === 'core' ? 'C' + String(n.step - 18).padStart(2, '0') : 'S' + String(n.step).padStart(2, '0');
-const lessonLangs = nid => activeLangs().filter(c => LX(c).applies[nid]);
+const lessonLangs = nid => scopeLangs().filter(c => LX(c).applies[nid]);
 /** Words of a lesson in one language that are still to be introduced. */
 const toIntroduce = (c, nid, k) => (LX(c).byNode[nid] || []).filter(id => k.state[id] === 'ready');
 
@@ -1591,7 +1832,7 @@ VIEWS.lesson = (v, r) => {
   const fns = N.lessonFunctions(UI.C, c, nid);
   if (theoryOpen) {
   if (fns.includes('fn.overview')) v.append(typologyCard());
-  v.append(h('h2', { class: 'lx-h2' }, '📖 ' + LT('lang.lesson.grammarIn', { lang: info(c).name })), ...fns.map(f => grammarCard(c, f, { compact: true, onPick: x => { UI.lang = x; UI.prefs.lang = x; save(); render(); } })));
+  v.append(h('h2', { class: 'lx-h2' }, '📖 ' + LT('lang.lesson.grammarIn', { lang: info(c).name })), ...[...fns].sort((x, y) => aspectRank(x) - aspectRank(y)).map(f => grammarCard(c, f, { compact: true, onPick: x => { UI.lang = x; UI.prefs.lang = x; save(); render(); } })));
   }
   // the same step in the other languages: their own extra points (D10)
   const extra = langs.filter(x => x !== c).map(x => [x, N.lessonFunctions(UI.C, x, nid).filter(f => !fns.includes(f))]).filter(([, f]) => f.length);
@@ -2231,6 +2472,7 @@ const LAND = items => window.NoemaI18n && NoemaI18n.locale !== 'en' ? NoemaI18n.
 
 /* ---------- today's languages (§9.6): chosen on the home among the active ones, for today only ---------- */
 function todayLangs() {
+  if (UI.scope) return [UI.scope];   // the page is about one language
   const act = activeLangs(), t = UI.prefs.today;
   if (!t || t.day !== today()) return act;
   const l = act.filter(c => (t.langs || []).includes(c));
@@ -3021,7 +3263,7 @@ const tutorRow = (ctx, intents) => h('div', { class: 'row lx-tutorrow' }, h('spa
   ...intents.map(x => h('button', { class: 'btn ghost small', 'data-intent': x, onclick: () => openLangTutor({ ...ctx, intent: x }) }, INTENT_LABEL[x])));
 {
   const home = VIEWS.home;
-  VIEWS.home = (v, r) => { home(v, r); const map = v.querySelector('.lx-maphead') || [...v.querySelectorAll('h2')].find(x => /The map/.test(x.textContent)); const lanes = prodLanes(); map ? map.before(lanes) : v.append(lanes); };   // i18n-ignore (the map's head is found by its class)
+  VIEWS.home = (v, r) => { home(v, r); if (UI.scope) return; const map = v.querySelector('.lx-maphead') || [...v.querySelectorAll('h2')].find(x => /The map/.test(x.textContent)); const lanes = prodLanes(); map ? map.before(lanes) : v.append(lanes); };   // i18n-ignore (the map's head is found by its class)
   const fn = VIEWS.fn;
   VIEWS.fn = (v, r) => { fn(v, r); const fid = r.arg; if (!UI.C.functions[fid] || fid === 'fn.overview') return; const c = r.arg2 && UI.C.lang[r.arg2] ? r.arg2 : UI.lang; v.querySelector('.lx-gram')?.before(tutorRow({ lang: c, fn: fid }, ['explain', 'compare', 'quiz'])); };
   const lesson = VIEWS.lesson;
@@ -3864,7 +4106,7 @@ function loadVoices(ms = 1200) {
   refreshVoices();
   if (SP.voices.length || !synthOK()) return Promise.resolve(SP.voices);
   return new Promise(res => {
-    let over = false; const end = () => { if (over) return; over = true; refreshVoices(); res(SP.voices); };
+    let over = false, retried = false; const end = () => { if (over) return; over = true; refreshVoices(); res(SP.voices); };
     try { speechSynthesis.addEventListener('voiceschanged', end, { once: true }); } catch (e) { }
     setTimeout(end, ms);
   });
@@ -3886,17 +4128,29 @@ function say(c, text, { slow = false } = {}) {
   if (!SP.voices.length) refreshVoices();
   const v = SP.voices.length ? voiceOf(c) : null;
   if (SP.voices.length && !v) { noVoice(c); return Promise.resolve(false); }
-  const u = new SpeechSynthesisUtterance(UI.C?.lang[c] ? N.speechText(UI.C, c, text) : String(text));
-  u.lang = tagOf(c); if (v) u.voice = v;   // voices not listed yet (first click on some browsers): the engine picks one for the language
-  u.rate = slow || spPrefs().rate === 'slow' ? N.SPEECH_RATE.slow : N.SPEECH_RATE.normal;
+  const known = !!UI.C?.lang[c], rate = slow || spPrefs().rate === 'slow' ? N.SPEECH_RATE.slow : N.SPEECH_RATE.normal;
+  const make = (txt, voice) => { const u = new SpeechSynthesisUtterance(txt); u.lang = tagOf(c); if (voice) u.voice = voice; u.rate = rate; return u; };   // voices not listed yet (first click on some browsers): the engine picks one for the language
+  const t1 = known ? N.speechText(UI.C, c, text) : String(text), t2 = known ? N.speechPlain(UI.C, c, text) : String(text);
+  /* Attempts, each given a few seconds to start: the chosen voice, then the language only, then the text without vowel marks.
+     Chrome and Safari silently drop an utterance queued right after another (nothing fires), so a start that never comes is tried again. */
+  const tries = [[t1, v], [t1, null], [t2, null]].filter((x, i, a) => i === 0 || x[0] !== a[i - 1][0] || x[1] !== a[i - 1][1]);
   return new Promise(res => {
-    let over = false; const end = ok => { if (over) return; over = true; if (SP.utter === u) SP.utter = null; res(ok); };
-    u.onend = () => end(true); u.onerror = e => end(e && (e.error === 'interrupted' || e.error === 'canceled'));
-    SP.utter = u;   // keep it alive until it ends
-    const go = () => { try { speechSynthesis.resume?.(); } catch (e) { } try { speechSynthesis.speak(u); } catch (e) { end(false); } };
-    let busy = false; try { busy = speechSynthesis.speaking || speechSynthesis.pending; } catch (e) { }
-    if (busy) { try { speechSynthesis.cancel(); } catch (e) { } setTimeout(go, 80); } else go();
-    setTimeout(() => end(true), 4000 + String(text).length * 180);   // some engines never fire 'end'
+    let over = false, k = -1, timer = 0, cur = null;
+    const end = ok => { if (over) return; over = true; clearTimeout(timer); if (SP.utter === cur) SP.utter = null; res(ok); };
+    const next = code => {
+      clearTimeout(timer); k++;
+      if (k >= tries.length) { toast(LT('lang.speech.failed', { lang: langLabel(c), code: code || 'no-start' })); return end(false); }
+      const u = cur = make(tries[k][0], tries[k][1]); let started = false;
+      u.onstart = () => { started = true; clearTimeout(timer); timer = setTimeout(() => end(true), 4000 + String(text).length * 180); };   // some engines never fire 'end'
+      u.onend = () => end(true);
+      u.onerror = e => { const er = e && e.error; if (er === 'interrupted' || er === 'canceled') return end(true); u.onerror = u.onend = null; next(er); };
+      SP.utter = u;   // keep it alive until it ends
+      const go = () => { if (over || cur !== u) return; try { speechSynthesis.resume?.(); } catch (x) { } try { speechSynthesis.speak(u); } catch (x) { next('speak'); } };
+      let busy = false; try { busy = speechSynthesis.speaking || speechSynthesis.pending || speechSynthesis.paused; } catch (x) { }
+      if (busy || k) { try { speechSynthesis.cancel(); } catch (x) { } setTimeout(go, 120); } else go();
+      timer = setTimeout(() => { let sp = false; try { sp = speechSynthesis.speaking; } catch (x) { } if (!started && !sp && !over && cur === u) { u.onerror = u.onend = null; next(''); } }, 2500);   // never started: next attempt
+    };
+    next();
     if (!SP.voices.length) loadVoices();   // for the next time
   });
 }
@@ -4119,24 +4373,24 @@ async function readAloud(btn, c) {
 
 /* ---------- 🎧 the lane ---------- */
 const LISTEN_SETS = [
-  { id: 'hear', type: 'listen_pick', icon: '🔊', get title() { return LT('lang.listen.hear'); }, get what() { return LT('lang.listen.hearWhat'); } },
-  { id: 'sentences', type: 'listen_meaning', icon: '👂', get title() { return LT('lang.listen.sentences'); }, get what() { return LT('lang.listen.sentencesWhat'); } },
-  { id: 'dictation', type: 'dictation', icon: '✍️', get title() { return LT('lang.listen.dictation'); }, get what() { return LT('lang.listen.dictationWhat'); } },
-  { id: 'shadow', type: 'shadowing', icon: '🗣️', get title() { return LT('lang.listen.shadow'); }, get what() { return LT('lang.listen.shadowWhat'); } },
-  { id: 'speak', type: 'speak', icon: '🎤', get title() { return LT('lang.listen.speak'); }, get what() { return LT('lang.listen.speakWhat'); } },
-  { id: 'tones', type: 'listen_tone', icon: '🎵', get title() { return LT('lang.listen.tones'); }, get what() { return LT('lang.listen.tonesWhat'); }, only: c => c === 'zh' || LX(c).language.romanization === 'pinyin' }];
+  { id: 'hear', g: 'listen', type: 'listen_pick', icon: '🔊', get title() { return LT('lang.listen.hear'); }, get what() { return LT('lang.listen.hearWhat'); } },
+  { id: 'sentences', g: 'listen', type: 'listen_meaning', icon: '👂', get title() { return LT('lang.listen.sentences'); }, get what() { return LT('lang.listen.sentencesWhat'); } },
+  { id: 'dictation', g: 'listen', type: 'dictation', icon: '✍️', get title() { return LT('lang.listen.dictation'); }, get what() { return LT('lang.listen.dictationWhat'); } },
+  { id: 'shadow', g: 'speak', type: 'shadowing', icon: '🗣️', get title() { return LT('lang.listen.shadow'); }, get what() { return LT('lang.listen.shadowWhat'); } },
+  { id: 'speak', g: 'speak', type: 'speak', icon: '🎤', get title() { return LT('lang.listen.speak'); }, get what() { return LT('lang.listen.speakWhat'); } },
+  { id: 'tones', g: 'listen', type: 'listen_tone', icon: '🎵', get title() { return LT('lang.listen.tones'); }, get what() { return LT('lang.listen.tonesWhat'); }, only: c => c === 'zh' || LX(c).language.romanization === 'pinyin' }];
 const listenMake = (c, set, k) => N.speechItems(UI.C, UI.L, c, set.type, { k, max: 8, caps: pushCaps() });
 VIEWS.listen = (v, r) => {
   const c = UI.C.lang[r.arg] ? r.arg : UI.lang;
   const wait = h('p', { class: 'tiny lx-loading' }, '… ' + LT('lang.listen.looking'));
   v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, arrowBack() + ' ' + LT('lang.card.map'))),
-    h('h1', {}, '🎧 ' + LT('lang.view.listen'), h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).label}`)),
+    h('h1', {}, '🎧 ' + LT(r.arg2 === 'listening' || r.arg2 === 'speaking' ? 'lang.aspect.' + r.arg2 : 'lang.view.listen'), h('span', { class: 'tiny' }, ` · ${info(c).flag} ${info(c).label}`)),
     h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); go('#/listen/' + x); })), wait);
   loadVoices().then(() => {
     if (route().name !== 'listen' || !wait.isConnected) return;
     wait.remove();
     const k = N.known(UI.C, UI.L, c);
-    if (r.arg2) { const set = LISTEN_SETS.find(s => s.id === r.arg2); if (set) return runProd(listenMake(c, set, k), { title: `${set.icon} ${set.title} · ${info(c).flag} ${info(c).label}`, back: '#/listen/' + c, lang: c }); }
+    if (r.arg2 && !['listening', 'speaking'].includes(r.arg2)) { const set = LISTEN_SETS.find(s => s.id === r.arg2); if (set) return runProd(listenMake(c, set, k), { title: `${set.icon} ${set.title} · ${info(c).flag} ${info(c).label}`, back: '#/listen/' + c, lang: c }); }
     const v0 = voiceOf(c);
     v.append(h('div', { class: 'lx-callout k-key lx-devline' },
       h('div', {}, v0 ? '🔊 ' + LT('lang.listen.voice', { name: v0.name, tag: v0.lang }) : '🔇 ' + LT('lang.listen.noVoiceLane', { lang: info(c).name })),
@@ -4147,6 +4401,7 @@ VIEWS.listen = (v, r) => {
     const grid = h('div', { class: 'lx-lanegrid' });
     for (const set of LISTEN_SETS) {
       if (set.only && !set.only(c)) continue;
+      if ((r.arg2 === 'listening' && set.g !== 'listen') || (r.arg2 === 'speaking' && set.g !== 'speak')) continue;   // the aspects Listening and Speaking show their own lanes
       const n = listenMake(c, set, k).length;
       grid.append(h('button', { class: 'lx-lanecard', 'data-set': set.id, disabled: n ? null : true, onclick: () => go(`#/listen/${c}/${set.id}`) },
         h('span', { class: 'lx-laneicon' }, set.icon), h('b', {}, set.title), h('span', { class: 'tiny' }, set.what), h('span', { class: 'tiny lx-lanen' }, n ? LT('lang.write.ready', { n }) : !v0 && set.type !== 'speak' ? LT('lang.listen.needsVoice') : LT('lang.write.learnMore'))));
@@ -4188,7 +4443,7 @@ function sessionSpeechItems(plan) {
 }
 {
   const home = VIEWS.home;
-  VIEWS.home = (v, r) => { home(v, r); const after = v.querySelector('.lx-prodlanes'), lanes = speechLanes(); if (after) after.after(lanes); else { const map = v.querySelector('.lx-maphead') || [...v.querySelectorAll('h2')].find(x => /The map/.test(x.textContent)); map ? map.before(lanes) : v.append(lanes); } };   // i18n-ignore (found by its class)
+  VIEWS.home = (v, r) => { home(v, r); if (UI.scope) return; const after = v.querySelector('.lx-prodlanes'), lanes = speechLanes(); if (after) after.after(lanes); else { const map = v.querySelector('.lx-maphead') || [...v.querySelectorAll('h2')].find(x => /The map/.test(x.textContent)); map ? map.before(lanes) : v.append(lanes); } };   // i18n-ignore (found by its class)
   const settings = VIEWS.settings;
   VIEWS.settings = (v, r) => { settings(v, r); const tail = [...v.children].reverse().find(x => x.tagName === 'P'); const s = speechSettings(); tail ? tail.before(s) : v.append(s); loadVoices().then(() => { const o = v.querySelector('.lx-speechset'); if (o && !o.contains(document.activeElement)) o.replaceWith(speechSettings()); }); };
   const read = VIEWS.read;
@@ -4448,7 +4703,7 @@ function frameTidy(v, r) {
   // one primary action per screen: the first one stays primary, the others become plain buttons
   [...v.querySelectorAll('.btn.primary')].filter(b => !b.closest('.lx-moved, .lx-stage, .lx-session')).slice(1).forEach(b => b.classList.remove('primary'));
   // the languages switch of the older top bar says nothing new here: each page that shows one language has its flag rail, the home a row per language
-  const sub = FR.host?.querySelector('.lx-subbar'); if (sub) sub.hidden = true;
+  const sub = FR.host?.querySelector('.lx-subbar'); if (sub) sub.hidden = activeLangs().length < 2;   // the strip of your languages (All · each one)
   framePlainTree(v);
   return acts;
 }
@@ -4483,22 +4738,15 @@ function frameHome(v, acts, hold) {
     const nid = b.dataset.node, n = UI.C.nodes[nid];
     return { label: n.title, sub: framePlain(b.querySelector('.tiny')?.textContent || ''), txt: stepLabel(n) || '·', run: () => go('#/lesson/' + nid) };
   })));
-  // your languages: one row each, its lanes in a sheet
-  const rows = [...v.querySelectorAll('.lx-prodlanes .lx-lanerow[data-lang]')];
-  const langItems = rows.map(row => {
-    const c = row.dataset.lang, bs = [...row.querySelectorAll('button')]; bs.forEach(b => hold.append(b));
-    const k = N.known(UI.C, UI.L, c), kn = Object.values(k.state).filter(s => ['known_r', 'known_p', 'mastered'].includes(s)).length;
-    const added = (course.added || {})[c], rm = added ? [{ label: LT('lang.frame.removeLang'), sub: LT('lang.frame.addedClaude'), icon: 'trash', key: 'remove-' + c, run: () => NoemaLangUI.claude.removeAdded(c) }] : [];
-    return { label: info(c).label, sub: kn ? LT('lang.frame.wordsKnown', { n: kn }) : added ? LT('lang.frame.addedClaude') : null, flag: info(c).flag, key: 'lang-' + c, run: () => frameSheet(`${info(c).flag} ${info(c).label}`, () => [...bs.map(b => frameAct(b)), ...rm]) };
-  });
+  // your languages are the strip at the top and each one's own home: no list of them here; what only the combined course has (across languages, drills) is in ⋮
+  for (const row of v.querySelectorAll('.lx-prodlanes .lx-lanerow[data-lang]')) row.querySelectorAll('button').forEach(b => hold.append(b));
   // ⋮ › a language added by a package (docs/LANGUAGES.md §10.2) › Remove this language
   for (const c of Object.keys(course.added || {})) if (UI.C.lang[c]) acts.push({ label: info(c).label, sub: LT('lang.frame.addedClaude'), flag: info(c).flag, icon: 'globe', key: 'added-' + c,
     run: () => frameSheet(`${info(c).flag} ${info(c).label}`, () => [{ label: LT('lang.frame.removeLang'), sub: LT('lang.frame.removeLangSub'), icon: 'trash', key: 'remove-' + c, run: () => NoemaLangUI.claude.removeAdded(c) }]) });
   const poly = [...v.querySelectorAll('.lx-polydrills button')], drills = [...v.querySelectorAll('.lx-drills button:not(summary)')];
   poly.forEach(b => hold.append(b)); drills.forEach(b => hold.append(b));
-  if (poly.length) langItems.push({ label: LT('lang.frame.across'), sub: LT('lang.frame.acrossSub'), icon: 'globe', key: 'across', run: () => frameSheet(LT('lang.frame.across'), () => poly.map(b => frameAct(b))) });
-  if (drills.length) langItems.push({ label: LT('lang.frame.drills'), sub: LT('lang.frame.drillsSub'), icon: 'gym', key: 'drills', run: () => frameSheet(LT('lang.frame.drills'), () => drills.map(b => frameAct(b))) });
-  if (langItems.length) out.push(h('span', { class: 'ns-label' }, LT('lang.shell.yourLanguages')), frameList(langItems));
+  if (poly.length) acts.push({ label: LT('lang.frame.across'), sub: LT('lang.frame.acrossSub'), icon: 'globe', key: 'across', run: () => frameSheet(LT('lang.frame.across'), () => poly.map(b => frameAct(b))) });
+  if (drills.length) acts.push({ label: LT('lang.frame.drills'), sub: LT('lang.frame.drillsSub'), icon: 'gym', key: 'drills', run: () => frameSheet(LT('lang.frame.drills'), () => drills.map(b => frameAct(b))) });
   // the map: the steps near you; the signs explained on demand
   const nodes = v.querySelector('.lx-nodes'), legend = v.querySelector('.lx-maplegend'), more = v.querySelector('.lx-mapmore');
   if (nodes) {
