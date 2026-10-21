@@ -20,7 +20,7 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
 const until = async (fn, ms = 30000, step = 250) => { const t = Date.now(); while (Date.now() - t < ms) { try { if (await fn()) return true; } catch (e) { } await wait(step); } return false; };
 const PORT = 54371, BASE = `http://localhost:${PORT}`, APORT = 54372, ABASE = `http://localhost:${APORT}`;
 const KEY = 'sk-ant-api03-' + 'k'.repeat(40);
-const FX = JSON.parse(fs.readFileSync(path.join(ROOT, 'library/subjects/demo-physics/pack.json'), 'utf8'));
+const FX = (p => (p.translations.fr = { chapters: JSON.parse(fs.readFileSync(path.join(ROOT, 'library/subjects/demo-physics/tr.fr.json'), 'utf8')).chapters }, p))(JSON.parse(fs.readFileSync(path.join(ROOT, 'library/subjects/demo-physics/pack.json'), 'utf8')));   // the French chapter inline, as an older pack carries it
 
 /* ---------- a scripted Claude: the chapter planner ---------- */
 const A = { plans: [], slow: 0 };

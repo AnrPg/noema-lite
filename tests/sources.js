@@ -25,7 +25,7 @@ const TF = path.join(ROOT, 'dist/site/testfiles');
   const gia = Object.values(srv.state.users).find(u => u.email === 'gia@example.com').id;
 
   // a Greek pack shaped like a real one: one chapter drawing on four sources, mapped to only one of them
-  const fx = JSON.parse(fs.readFileSync(path.join(ROOT, 'library/subjects/demo-physics/pack.json'), 'utf8'));
+  const fx = (p => (p.translations.fr = { chapters: JSON.parse(fs.readFileSync(path.join(ROOT, 'library/subjects/demo-physics/tr.fr.json'), 'utf8')).chapters }, p))(JSON.parse(fs.readFileSync(path.join(ROOT, 'library/subjects/demo-physics/pack.json'), 'utf8')));   // the French chapter inline, as an older pack carries it
   fx.subject = { ...fx.subject, id: 'kytt', title: 'Κυτταροσκελετός', language: 'el', owner: null }; fx.version = 'k1';
   fx.sources = { sources: [
     { id: 'chat', title: 'Μάθημα «Teach Cytoskeleton» (συνομιλία ChatGPT)', subtitle: 'Πλήρες DAG', pages: 'όλο', added: '2026-10-07', emoji: '💬' },
