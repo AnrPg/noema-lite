@@ -39,9 +39,10 @@ async function sb(path, token, { method = 'GET', body, headers = {}, raw = false
 }
 
 /* ---------- pack checks: engine/packcheck.js (shared with the app), prepended by tools/build.py ---------- */
-// tools/pack_rules.json (every exercise type, difficulty and focus tag >= 3 per chapter): the pack's own authoring.minPerKind,
-// and always for a curriculum step (cur-…), so a step made without make_pack.py is held to it too; other old packs only warn
-const checkPack = (p, expectId) => globalThis.NoemaPackCheck.checkPack(p, expectId, { balance: p?.subject?.authoring?.minPerKind ?? (/^cur-/.test(p?.subject?.id || '') ? 3 : undefined) });
+// tools/pack_rules.json: a pack made with the current toolkit (built since QUALITY.since, or hand-written) must declare
+// subject.authoring.rules >= 2 and meet the quality rules (errors: authoring.by claude); older packs keep working (TD-11).
+// Packs without the quality rules: the quantity rules of authoring.minPerKind, always for a curriculum step (cur-…).
+const checkPack = (p, expectId) => globalThis.NoemaPackCheck.checkPack(p, expectId, { requireQuality: true, balance: p?.subject?.authoring?.minPerKind ?? (/^cur-/.test(p?.subject?.id || '') ? 3 : undefined) });
 
 async function register(token, uid, p, counts, extra = {}) {
   const meta = { ...p.subject, counts: { ...(p.counts || {}), ...counts }, version: p.version || null, ...(p.translations ? { contentLocales: Object.keys(p.translations) } : {}), via: 'claude', updatedAt: new Date().toISOString(), ...extra };
@@ -371,6 +372,9 @@ const TOOLS = [
     inputSchema: { type: 'object', properties: { subject_id: { type: 'string' }, curriculum_id: { type: 'string', description: 'optional, with step: attach the saved subject to this step of one of the learner\'s curricula (it then teaches that step; only that step is re-planned). Without it the subject goes to the learner\'s 📚 Shelf.' }, step: { type: 'string', description: 'optional: the step (id or title) of curriculum_id that this subject teaches' } }, required: ['subject_id'] } },
   { name: 'noema_save_pack', description: 'Save a SMALL pack (≤ 1.5 MB of JSON) passed inline as text. For bigger packs (pictures!) use noema_start_upload + noema_finish_upload.',
     inputSchema: { type: 'object', properties: { pack_json: { type: 'string', description: 'The whole noema-pack JSON document as a string' }, curriculum_id: { type: 'string', description: 'optional, with step: attach the saved subject to this step of one of the learner\'s curricula (it then teaches that step; only that step is re-planned). Without it the subject goes to the learner\'s 📚 Shelf.' }, step: { type: 'string', description: 'optional: the step (id or title) of curriculum_id that this subject teaches' } }, required: ['pack_json'] } },
+  { name: 'noema_pipeline', description: 'Which content flow is this, and its steps in order (docs/PIPELINES.md). Call it FIRST for any content work: a Roadmap from sources or a goal, one Roadmap step, one subject, an addition, a translation, a language bridge, an import, a language-course task or a new language. action "detect" with the facts of the request gives the flow; "steps" gives each step: what to do, how it is checked (the local command python3 scripts/pipeline.py check …, a connector call, or a judgement) and its doc; "flows" lists every flow. In the sandbox the same steps run with scripts/pipeline.py (start → next → check), which records run.json; never skip a strict step.',
+    inputSchema: { type: 'object', properties: { action: { type: 'string', enum: ['detect', 'steps', 'flows'] }, flow: { type: 'string', description: 'with steps: the flow id (1, 1b, 2 … 8, L1, L2)' },
+      facts: { type: 'object', description: 'with detect: what the learner gave and asked', properties: { sources: { type: 'integer', description: 'how many source files' }, topics: { type: 'integer', description: 'how many topics building on each other' }, goal: { type: 'boolean' }, step: { type: 'boolean', description: 'a Roadmap step handed over by noema_curriculum_task' }, queue: { type: 'boolean' }, extend: { type: 'boolean', description: 'material for a subject that exists' }, bridge: { type: 'boolean' }, translate: { type: 'boolean' }, import: { type: 'boolean' }, lang_task: { type: 'boolean' }, new_language: { type: 'boolean' } } } }, required: ['action'] }, annotations: { readOnlyHint: true } },
   { name: 'noema_bridge_guide', description: 'Language help (文A, docs/BRIDGE.md) for students who study a subject in a language that is not their own: a sidecar per pack × native language with the words of the pack in the meaning they have IN it, translated, plus per section the key words and a short preview. Returns the format, the workflow (tools/bridge.py todo → core.json → <native>.json → check → build → noema_save_bridge), the bridges this account already has and the mistakes learners reported in them. Works for any pair of languages (tested: every direction among English, Greek, Russian and Arabic). Read it before writing a bridge.',
     inputSchema: { type: 'object', properties: { subject_id: { type: 'string', description: 'Optional: only this pack' } } }, annotations: { readOnlyHint: true } },
   { name: 'noema_save_bridge', description: 'Save one built language bridge (format "noema-bridge", made by tools/bridge.py build, ≤ 1.5 MB) to the learner\'s account, for one of their own packs or a library pack. It is checked exactly as the app checks it (against the pack: its id, its language, plain text only, no function words); problems come back as a list. On success every device of the learner shows the 文A help for that pack and native language.',
@@ -515,6 +519,19 @@ async function callTool(name, args, ctx) {
       if ((CFG.library || []).some(s => s.id === p.subject.id)) return fail(`"${p.subject.id}" is a library subject id — use a new id.`);
       await sb(`/storage/v1/object/${base}${p.subject.id}.json`, token, { method: 'POST', body: raw, headers: { 'content-type': 'application/json', 'x-upsert': 'true' } });
       return complete(token, uid, p.subject.id, p, res, fail, text, user, { curriculum_id: args?.curriculum_id, step: args?.step });
+    }
+    case 'noema_pipeline': {
+      const F = DOCS.pipelineFlows || {}, S = DOCS.pipelineSteps || {}, act = args?.action;
+      const show = f => `Flow ${f.id}: ${f.title} — ${f.when}\n\nIn the sandbox: python3 scripts/pipeline.py start ${f.id} work/<id> (then next → check after each step).\n\n` + f.steps.map((id, i) => { const x = S[id] || {}, c = x.check || {};
+        return `${i + 1}. ${id} — ${x.title}${x.gate === 'planned' ? ' (planned, not enforced yet)' : x.gate === 'review' ? ' (recorded)' : ''}${x.per ? ' · per chapter' : ''}\n   ${x.what}\n   check: ${c.local || c.run ? `python3 scripts/pipeline.py check work/<id> ${id}` : c.mcp ? `call ${c.mcp}, then pipeline.py done work/<id> ${id} --note "…"` : `${c.manual} → pipeline.py done work/<id> ${id} --note "…"`}${x.doc ? `\n   doc: ${x.doc}` : ''}`; }).join('\n');
+      if (act === 'flows') return text(Object.values(F).map(f => `${f.id} · ${f.title} — ${f.when}\n   ${f.steps.join(' → ')}`).join('\n'));
+      if (act === 'steps') { const f = F[String(args?.flow || '')]; return f ? text(show(f)) : fail(`unknown flow "${args?.flow}" — flows: ${Object.keys(F).join(', ')}`); }
+      if (act === 'detect') {   // the same order as tools/pipeline.py detect
+        const x = args?.facts || {}, id = x.new_language ? 'L2' : x.lang_task ? 'L1' : x.import ? '8' : x.bridge ? '6' : x.translate ? '7' : x.extend ? '5' : x.step ? '2' : x.queue ? '3'
+          : x.goal && !x.sources ? '1b' : (x.topics || 0) > 1 ? '1' : x.sources || x.goal ? '4' : null;
+        return id ? text(show(F[id])) : fail('Say what the learner gave: facts.sources, facts.topics, goal, step, queue, extend, bridge, translate, import, lang_task, new_language.');
+      }
+      return fail('action: detect, steps or flows');
     }
     case 'noema_bridge_guide': {
       const ix = await kvGet(token, 'a:bridges', {}), reps = (await kvGet(token, 'a:bridgeReports', [])).filter(r => !sid || r.pack === sid);

@@ -1,0 +1,18 @@
+{
+ "format": "noema.pipeline/v1",
+ "id": "5",
+ "title": "Add to an existing subject",
+ "when": "New material for a subject that exists (unpack.py, patches/): new chapters must pass, older ones only warn.",
+ "steps": [
+  "classify",
+  "map",
+  "pictures",
+  "write",
+  "blind_solve",
+  "review",
+  "checks",
+  "upload",
+  "translate",
+  "bridges"
+ ]
+}

@@ -31,10 +31,24 @@ for w in mrep + fwarns:
     if w.startswith('WARN'): print(w)
 auth = meta.get('authoring') or {}
 per_pic = int(auth.get('minExercisesPerPicture', 3)); min_vis = int(auth.get('minVisualPerChapter', 3))
-# every exercise type, difficulty and focus tag >= minPerKind times per chapter (pack_rules.json); chapters of an older pack
-# being extended (unpack.py) only warn, new chapters must pass
-per_kind = int(auth.get('minPerKind', 3)); feats = ','.join(k for k, v in (meta.get('features') or {}).items() if v)
-balance = lambda cid: (['--balance-warn' if cid in base_chapters else '--balance', str(per_kind), '--features', feats] if per_kind else [])
+feats = ','.join(k for k, v in (meta.get('features') or {}).items() if v)
+if int(auth.get('rules', 0)) >= 2:
+    # the quality rules (tools/pack_rules.json "quality", docs/PIPELINES.md §4): every chapter needs its knowledge map
+    # (map/chNN.json, written BEFORE the exercises) and its second-pass review (review/chNN.json); both go into the pack
+    # (chapter.map for the Info window, chapter.review). Errors for packs made by Claude/Gemini, warnings for the learner's own.
+    level = 'error' if auth.get('by', 'claude') in ('claude', 'gemini') else 'warn'
+    for c in chapters:
+        for k, sub in (('map', 'map'), ('review', 'review')):
+            f = os.path.join(sdir, sub, c['id'] + '.json')
+            if os.path.exists(f):
+                try: c[k] = json.load(open(f, encoding='utf-8'))
+                except Exception as e: errs.append(f'ERROR {sub}/{c["id"]}.json: invalid JSON ({e})')
+    balance = lambda cid: ['--quality', 'warn' if cid in base_chapters else level, '--features', feats]
+else:
+    # older subjects: every exercise type, difficulty and focus tag >= minPerKind times per chapter (pack_rules.json "rules");
+    # chapters of an older pack being extended (unpack.py) only warn
+    per_kind = int(auth.get('minPerKind', 0))
+    balance = lambda cid: (['--balance-warn' if cid in base_chapters else '--balance', str(per_kind), '--features', feats] if per_kind else [])
 used = Counter(e.get('media') for c in chapters for e in c['exercises'] if e['type'].startswith('img_'))
 for m in media:
     if used[m] < per_pic: errs.append(f'ERROR media {m}: used by {used[m]} exercise(s); every picture needs >= {per_pic}')
@@ -45,7 +59,7 @@ with tempfile.TemporaryDirectory() as td:
         r = subprocess.run([sys.executable, os.path.join(HERE, 'validate.py'), p, '--media', mp, '--min-visual', str(min_vis), *balance(c['id'])], capture_output=True, text=True)
         print(r.stdout.splitlines()[0] if r.stdout else c['id'])
         for l in r.stdout.splitlines():
-            if l.startswith('WARN: [balance'): print(f'{c["id"]}: ' + l)
+            if l.startswith('WARN: ['): print(f'{c["id"]}: ' + l)
         errs += [f'{c["id"]}: ' + l for l in r.stdout.splitlines() if l.startswith('ERROR')]
     if translations or 'i18n' in meta:   # the other languages: subject.i18n, and every translated chapter against its source
         r = subprocess.run([sys.executable, os.path.join(HERE, 'validate.py'), os.path.join(sdir, 'subject.json'), '--subject', '--translations', ','.join(translations)], capture_output=True, text=True)

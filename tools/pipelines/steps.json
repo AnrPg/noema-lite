@@ -1,0 +1,470 @@
+{
+ "format": "noema.steps/v1",
+ "about": "Every step a pipeline can name (docs/PIPELINES.md §3). check: local = pipeline.py checks it itself; run = a command that must exit 0; mcp = a connector call the run records with pipeline.py done; manual = a judgement the run records with pipeline.py done --note. gate: strict (must pass), review (record it), planned (shown, not yet enforced). per: chapter = once per chapter.",
+ "steps": {
+  "classify": {
+   "title": "Which flow is this?",
+   "what": "Run pipeline.py detect with what the learner gave and asked, then pipeline.py start <flow>. Every later step follows the flow's list; never skip a strict step.",
+   "produces": [
+    "run.json"
+   ],
+   "check": {
+    "local": "run"
+   },
+   "doc": "references/PIPELINES.md §2",
+   "gate": "strict"
+  },
+  "shape": {
+   "title": "Shape of the Roadmap",
+   "what": "Decide focus, the size of the core (maxCore) and the perspectives, and ask the learner only what is essential.",
+   "check": {
+    "mcp": "noema_create_roadmap"
+   },
+   "doc": "docs/CURRICULUM.md",
+   "gate": "strict"
+  },
+  "dag": {
+   "title": "The map (DAG)",
+   "what": "The steps and their prerequisites: noema_create_roadmap, then the \"dag\" agent task of noema_curriculum_task.",
+   "needs": [
+    "shape"
+   ],
+   "check": {
+    "mcp": "noema_curriculum_submit"
+   },
+   "doc": "docs/CURRICULUM.md",
+   "gate": "strict"
+  },
+  "audit": {
+   "title": "Audit the map",
+   "what": "The \"audit\" agent task: missing prerequisites, cycles, steps too big.",
+   "needs": [
+    "dag"
+   ],
+   "check": {
+    "mcp": "noema_curriculum_submit"
+   },
+   "doc": "docs/CURRICULUM.md",
+   "gate": "strict"
+  },
+  "expand": {
+   "title": "Expand the map",
+   "what": "The \"expand\" agent task: split steps that are too big (a step whose core set would pass ~180 exercises is a candidate — a mild suggestion, never a cut of knowledge points).",
+   "needs": [
+    "audit"
+   ],
+   "check": {
+    "mcp": "noema_curriculum_submit"
+   },
+   "doc": "docs/CURRICULUM.md, references/PIPELINES.md §4",
+   "gate": "strict"
+  },
+  "plan": {
+   "title": "Chapter plan",
+   "what": "The plan of each step's chapters with its requiredCoverage (noema_curriculum_task \"plan\").",
+   "needs": [
+    "dag"
+   ],
+   "check": {
+    "mcp": "noema_curriculum_submit"
+   },
+   "doc": "docs/CURRICULUM.md",
+   "gate": "strict"
+  },
+  "start_subject": {
+   "title": "Start the subject folder",
+   "what": "python3 scripts/start_subject.py work <id> \"Title\" --lang <code> [--code] [--math]: writes authoring.rules 2 (the quality rules) and the map/ and review/ folders.",
+   "produces": [
+    "subject.json"
+   ],
+   "check": {
+    "local": "subject"
+   },
+   "doc": "SKILL.md",
+   "gate": "strict"
+  },
+  "map": {
+   "title": "Knowledge map (before any exercise)",
+   "what": "For every chapter map/chNN.json: EVERY knowledge point of the material (exhaustive; points an earlier DAG node taught get taughtIn), its level and categories (13 hunts), confusable pairs (with), the learnables, fits/unfit (every type, focus tag and paradigm that fits, a reason for each that does not) and every question of the sources.",
+   "needs": [
+    "start_subject"
+   ],
+   "produces": [
+    "map/{ch}.json"
+   ],
+   "check": {
+    "local": "map"
+   },
+   "doc": "references/CONTENT_SPEC.md, references/PIPELINES.md §4",
+   "gate": "strict",
+   "per": "chapter"
+  },
+  "pictures": {
+   "title": "Pictures that teach",
+   "what": "Only pictures with high teaching value: from the sources (never all of them), the web or drawn diagrams. A chapter may have none. Each picture gets >= 3 picture exercises.",
+   "needs": [
+    "map"
+   ],
+   "check": {
+    "manual": "every picture kept teaches something the text alone cannot show"
+   },
+   "doc": "references/VISUAL.md §5",
+   "gate": "review"
+  },
+  "write": {
+   "title": "Theory and exercises",
+   "what": "chapters/chNN.json from the map: self-contained theory and exercises (no pointers to the source structure), several versions (facades) of each learnable in different types, every exercise with lr, think, cite (and mode where it uses a paradigm).",
+   "needs": [
+    "map"
+   ],
+   "produces": [
+    "chapters/{ch}.json"
+   ],
+   "check": {
+    "local": "write"
+   },
+   "doc": "references/CONTENT_SPEC.md",
+   "gate": "strict",
+   "per": "chapter"
+  },
+  "blind_solve": {
+   "title": "Blind re-solve",
+   "what": "Solve every exercise without looking at the key; record solved and every mismatch in review/chNN.json \"blind\", fix each one (fixed: true). (The review step hashes review/chNN.json for both.)",
+   "needs": [
+    "write"
+   ],
+   "check": {
+    "local": "blind"
+   },
+   "doc": "references/PIPELINES.md §4",
+   "gate": "strict",
+   "per": "chapter"
+  },
+  "review": {
+   "title": "Second-pass review",
+   "what": "The rubric on >= 15 learnables (or all) in review/chNN.json \"rubric\"; fix what fails.",
+   "needs": [
+    "blind_solve"
+   ],
+   "produces": [
+    "review/{ch}.json"
+   ],
+   "check": {
+    "local": "review"
+   },
+   "doc": "references/PIPELINES.md §4",
+   "gate": "strict",
+   "per": "chapter"
+  },
+  "checks": {
+   "title": "Every check (make_pack.py)",
+   "what": "python3 scripts/make_pack.py work/<id>: the quality rules of tools/pack_rules.json on every chapter. Never deliver a pack that fails.",
+   "needs": [
+    "review"
+   ],
+   "produces": [
+    "build/{id}.json"
+   ],
+   "check": {
+    "local": "pack"
+   },
+   "doc": "references/PIPELINES.md §4",
+   "gate": "strict"
+  },
+  "upload": {
+   "title": "Save to the learner's account",
+   "what": "noema_start_upload → curl → noema_finish_upload (it checks the pack again and asks for the source files).",
+   "needs": [
+    "checks"
+   ],
+   "check": {
+    "mcp": "noema_finish_upload"
+   },
+   "doc": "SKILL.md",
+   "gate": "strict"
+  },
+  "translate": {
+   "title": "Translations (en + el)",
+   "what": "Every pack in at least English and Greek, whatever its language (translations/<locale>/chNN.json). Required by the learner; the check lands with PR B.",
+   "produces": [
+    "translations/{locale}/{ch}.json"
+   ],
+   "check": {
+    "local": "translations"
+   },
+   "doc": "references/CONTENT_SPEC.md \"Packs in several languages\"",
+   "gate": "planned"
+  },
+  "bridges": {
+   "title": "Language help 文A (en, el, ru, ar)",
+   "what": "A bridge into each of en, el, ru, ar other than the pack's language, everyday words included (learners may be A2/B1): bridge.py todo / build / check, then noema_save_bridge.",
+   "needs": [
+    "checks"
+   ],
+   "produces": [
+    "bridges/*.json"
+   ],
+   "check": {
+    "local": "bridges"
+   },
+   "doc": "references/BRIDGE.md",
+   "gate": "strict"
+  },
+  "next": {
+   "title": "The next step",
+   "what": "noema_curriculum_task again: the next queued step, or tell the learner what is ready.",
+   "check": {
+    "mcp": "noema_curriculum_task"
+   },
+   "doc": "docs/CURRICULUM.md",
+   "gate": "review"
+  },
+  "import": {
+   "title": "Import a map or a subject",
+   "what": "Check the file (validate.py / checkPack) and import it: a pack the learner made is held to the rules as warnings only.",
+   "check": {
+    "local": "pack"
+   },
+   "doc": "docs/CURRICULUM.md",
+   "gate": "review"
+  },
+  "L.brief": {
+   "title": "Brief and contract first",
+   "what": "Start from tools/lang_sources/AGENT_BRIEF.md and the checklist §C of docs/LANGUAGE_RULES.md (A1: contract first; a plan change goes into docs/LANGUAGES.md and LANGUAGE_RULES.md first).",
+   "check": {
+    "manual": "the brief names D13, D14/D15, D19, R2, R3, D20, D22–D24, D25"
+   },
+   "doc": "docs/LANGUAGE_RULES.md",
+   "gate": "strict"
+  },
+  "L.phenomena": {
+   "title": "Phenomena catalogue (D14, D16)",
+   "what": "library/languages/_phenomena/<code>.json: what the language has and has not, in the shared typology.",
+   "needs": [
+    "L.brief"
+   ],
+   "check": {
+    "run": [
+     "python3",
+     "{lt}/lang_phenomena.py",
+     "--lang",
+     "{lang}"
+    ]
+   },
+   "doc": "docs/LANGUAGE_RULES.md D14, D16",
+   "gate": "strict"
+  },
+  "L.params": {
+   "title": "Word parameters (R3, D28)",
+   "what": "WORD_PARAMETERS.md and wordFeatures BEFORE any word.",
+   "needs": [
+    "L.phenomena"
+   ],
+   "check": {
+    "run": [
+     "python3",
+     "{lt}/validate_lang.py",
+     "{course}",
+     "--lang",
+     "{lang}"
+    ]
+   },
+   "doc": "docs/LANGUAGE_RULES.md R3",
+   "gate": "strict"
+  },
+  "L.order": {
+   "title": "The common order (D13, D10)",
+   "what": "Every topic at its place in the common order of all language paths.",
+   "needs": [
+    "L.params"
+   ],
+   "check": {
+    "run": [
+     "python3",
+     "{lt}/validate_lang.py",
+     "{course}",
+     "--lang",
+     "{lang}"
+    ]
+   },
+   "doc": "docs/LANGUAGE_RULES.md D13",
+   "gate": "strict"
+  },
+  "L.words": {
+   "title": "Words with their whole facade (D14, D15, D5, D6, D24)",
+   "what": "Every meaning a concept, inflection tables, transliteration.",
+   "needs": [
+    "L.order"
+   ],
+   "check": {
+    "run": [
+     "python3",
+     "{lt}/validate_lang.py",
+     "{course}",
+     "--lang",
+     "{lang}",
+     "--strict"
+    ]
+   },
+   "doc": "docs/LANGUAGE_RULES.md D14, D15",
+   "gate": "strict"
+  },
+  "L.grounding": {
+   "title": "Grounding (refcheck)",
+   "what": "Every word and form checked against the references.",
+   "needs": [
+    "L.words"
+   ],
+   "check": {
+    "run": [
+     "python3",
+     "{lt}/lang_refcheck.py",
+     "{course}",
+     "--lang",
+     "{lang}",
+     "--offline"
+    ]
+   },
+   "doc": "docs/LANGUAGE_RULES.md",
+   "gate": "strict"
+  },
+  "L.grammar": {
+   "title": "Grammar points (D9, D12, D22, D26)",
+   "what": "Grammar apart from the words, with its category.",
+   "needs": [
+    "L.words"
+   ],
+   "check": {
+    "run": [
+     "python3",
+     "{lt}/validate_lang.py",
+     "{course}",
+     "--lang",
+     "{lang}",
+     "--strict"
+    ]
+   },
+   "doc": "docs/LANGUAGE_RULES.md",
+   "gate": "strict"
+  },
+  "L.notes": {
+   "title": "Notes for every native (D19, R1, R2)",
+   "what": "Structured contrast notes for every supported native language and for the types (branch:…).",
+   "needs": [
+    "L.grammar"
+   ],
+   "check": {
+    "run": [
+     "python3",
+     "{lt}/lang_facade.py",
+     "lint",
+     "{course}",
+     "--strict"
+    ]
+   },
+   "doc": "docs/LANGUAGE_RULES.md D19, R2",
+   "gate": "strict"
+  },
+  "L.sentences": {
+   "title": "Sentences from taught words only (D20, D23)",
+   "what": "In S00–S18 only words already taught; new words marked.",
+   "needs": [
+    "L.words"
+   ],
+   "check": {
+    "run": [
+     "node",
+     "{lt}/lang_strict_report.js",
+     "{course}"
+    ]
+   },
+   "doc": "docs/LANGUAGE_RULES.md D22–D24",
+   "gate": "strict"
+  },
+  "L.exercises": {
+   "title": "Exercises from stored data (D3, D27)",
+   "what": "Exercises only from stored, checked data; every card item is practised.",
+   "needs": [
+    "L.sentences"
+   ],
+   "check": {
+    "run": [
+     "python3",
+     "{lt}/validate_lang.py",
+     "{course}",
+     "--lang",
+     "{lang}",
+     "--strict"
+    ]
+   },
+   "doc": "docs/LANGUAGE_RULES.md D3, D27",
+   "gate": "strict"
+  },
+  "L.package": {
+   "title": "The language package (§10.2)",
+   "what": "python3 tools/lang_course.py package <course> <code>, then noema_lang_package_start → curl → noema_lang_package_finish.",
+   "needs": [
+    "L.exercises",
+    "L.notes",
+    "L.grounding"
+   ],
+   "check": {
+    "run": [
+     "python3",
+     "{lt}/lang_course.py",
+     "package",
+     "{course}",
+     "{lang}",
+     "-o",
+     "{tmp}/langpack.json"
+    ]
+   },
+   "doc": "docs/LANGUAGES.md §10.2",
+   "gate": "strict"
+  },
+  "L.facades": {
+   "title": "Explanations in every UI language (D1, D19)",
+   "what": "facades/<locale>/: the translated explanations, a separate task.",
+   "needs": [
+    "L.package"
+   ],
+   "check": {
+    "run": [
+     "python3",
+     "{lt}/lang_facade.py",
+     "parity",
+     "{course}",
+     "--locale",
+     "{locale}",
+     "--no-write"
+    ]
+   },
+   "doc": "docs/LANGUAGE_RULES.md D1",
+   "gate": "strict"
+  },
+  "L.task": {
+   "title": "A task of an existing course",
+   "what": "noema_lang_task → answer → check every answer with the toolkit → noema_lang_submit.",
+   "needs": [
+    "L.brief"
+   ],
+   "check": {
+    "mcp": "noema_lang_submit"
+   },
+   "doc": "docs/LANGUAGES.md",
+   "gate": "strict"
+  },
+  "L.green": {
+   "title": "Green before commit (A2)",
+   "what": "tools/build.py and tests/run_e2e.sh (tests/lang_frame.js skipped while in development), tests/lang_rules.py.",
+   "check": {
+    "run": [
+     "python3",
+     "{root}/tests/lang_rules.py"
+    ]
+   },
+   "doc": "docs/LANGUAGE_RULES.md A2",
+   "gate": "review"
+  }
+ }
+}

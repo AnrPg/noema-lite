@@ -1,0 +1,15 @@
+{
+ "format": "noema.pipeline/v1",
+ "id": "1b",
+ "title": "Goal → Roadmap",
+ "when": "The learner names a goal and no sources (\"I want to become a data engineer\").",
+ "steps": [
+  "classify",
+  "shape",
+  "dag",
+  "audit",
+  "expand",
+  "plan",
+  "next"
+ ]
+}

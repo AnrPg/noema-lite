@@ -1,0 +1,12 @@
+{
+ "format": "noema.pipeline/v1",
+ "id": "7",
+ "title": "Translate a pack",
+ "when": "A pack into another language.",
+ "steps": [
+  "classify",
+  "translate",
+  "checks",
+  "upload"
+ ]
+}

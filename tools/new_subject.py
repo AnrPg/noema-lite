@@ -18,10 +18,10 @@ grp = opt('--group', 'other')
 if grp not in groups: sys.exit(f'unknown group {grp}; choose one of {groups} (or add it to library/groups.json)')
 d = os.path.join(ACC, opt('--private'), 'packs', sid) if '--private' in a else os.path.join(LIB, 'subjects', sid)
 if os.path.exists(d): sys.exit(f'{d} exists')
-for sub in ('chapters', 'patches', 'sources', 'coverage', 'authoring', 'media'): os.makedirs(os.path.join(d, sub))
+for sub in ('chapters', 'patches', 'sources', 'coverage', 'authoring', 'media', 'map', 'review'): os.makedirs(os.path.join(d, sub))
 wj(os.path.join(d, 'subject.json'), {'id': sid, 'title': title, 'appTitle': f'{title} Quest', 'emoji': opt('--emoji', '📘'), 'group': grp, 'description': '', 'language': opt('--lang', 'en'),
    'features': {'math': '--math' in a, 'code': '--code' in a}, 'hero': {'headline': f'Master **{title}**, one bite at a time.', 'mantra': ''}, 'searchExamples': '',
-   'authoring': {'minVisualPerChapter': 3, 'minExercisesPerPicture': 3, 'minPerKind': 3},
+   'authoring': {'minVisualPerChapter': 3, 'minExercisesPerPicture': 3, 'rules': 2, 'by': 'claude'},
    'tutor': {'name': 'Brick', 'avatar': '🦉', 'domain': title, 'prior': '', 'examples': '', 'interviewer': f'an examiner for {title}', 'simulation': '', 'terminology': '', 'examinerRole': f'{title} examiner'}})
 wj(os.path.join(d, 'media', 'media.json'), {'format': 'noema.media/v1', 'items': []})
 wj(os.path.join(d, 'sources.json'), {'sources': [], 'chapters': {}, 'patches': {}})

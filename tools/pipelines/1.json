@@ -1,0 +1,25 @@
+{
+ "format": "noema.pipeline/v1",
+ "id": "1",
+ "title": "Sources → Roadmap → every step",
+ "when": "The learner gives a pile of material that is several topics building on each other (more than one subject can hold).",
+ "steps": [
+  "classify",
+  "shape",
+  "dag",
+  "audit",
+  "expand",
+  "plan",
+  "start_subject",
+  "map",
+  "pictures",
+  "write",
+  "blind_solve",
+  "review",
+  "checks",
+  "upload",
+  "translate",
+  "bridges",
+  "next"
+ ]
+}

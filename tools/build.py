@@ -79,8 +79,15 @@ def build_packs():
         if errs: print('\n'.join(errs)); failed.append(meta['id']); continue
         translations = load_translations(sdir, chapters)   # translations/<locale>/chNN.json (CONTENT_SPEC.md "Packs in several languages")
         auth = meta.get('authoring') or {}
-        # tools/pack_rules.json: every exercise type, difficulty and focus tag >= minPerKind per chapter (subjects made since 2026-10-21)
-        balance = ('--balance', str(auth['minPerKind']), '--features', ','.join(k for k, v in (meta.get('features') or {}).items() if v)) if auth.get('minPerKind') else ()
+        feats = ','.join(k for k, v in (meta.get('features') or {}).items() if v)
+        if int(auth.get('rules', 0)) >= 2:   # the quality rules (tools/pack_rules.json "quality"): map/chNN.json + review/chNN.json go into the chapter
+            for c in chapters:
+                for k in ('map', 'review'):
+                    f = os.path.join(sdir, k, c['id'] + '.json')
+                    if os.path.exists(f): c[k] = rj(f)
+            balance = ('--quality', 'error' if auth.get('by', 'claude') in ('claude', 'gemini') else 'warn', '--features', feats)
+        else:   # older subjects: every exercise type, difficulty and focus tag >= minPerKind per chapter (pack_rules.json "rules")
+            balance = ('--balance', str(auth['minPerKind']), '--features', feats) if auth.get('minPerKind') else ()
         if not validate(chapters, meta['id'], media, int(auth.get('minVisualPerChapter', 0)), sdir, translations, balance): failed.append(meta['id']); continue
         meta = dict(meta); meta['owner'] = owner
         counts = {'chapters': len(chapters), 'sections': sum(len(c['sections']) for c in chapters), 'exercises': sum(len(c['exercises']) for c in chapters),
@@ -255,7 +262,7 @@ def build_site(metas):
     wt(os.path.join(out, '_headers'), '/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n/engine/*\n  Cache-Control: public, max-age=300\n/engine/vendor/pdfjs/*.mjs\n  Content-Type: text/javascript; charset=utf-8\n/engine/vendor/pdfjs/wasm/*.wasm\n  Content-Type: application/wasm\n/library/*\n  Cache-Control: public, max-age=300\n  Access-Control-Allow-Origin: *\n/fonts/*\n  Cache-Control: public, max-age=604800\n')
     print('site →', os.path.relpath(out, ROOT))
 
-SKILL_TOOLS = ['noema_lib.py', 'bridge.py', 'validate.py', 'pack_rules.json', 'svgkit.py', 'extract_images.py', 'fetch_image.py', 'find_images.py']
+SKILL_TOOLS = ['noema_lib.py', 'bridge.py', 'validate.py', 'pack_rules.json', 'pack_quality.py', 'pipeline.py', 'svgkit.py', 'extract_images.py', 'fetch_image.py', 'find_images.py']
 LANG_SKILL_TOOLS = ['validate_lang.py', 'lang_refcheck.py', 'langlib.py', 'lang_course.py', 'lang_script.py', 'lang_phenomena.py', 'lang_readback.js', 'lang_facade.py']
 def lang_builder_files():
     """The skill noema-language-builder (docs/LANGUAGES.md §10.2): (source, path inside the skill folder). The playbook, the brief
@@ -292,6 +299,8 @@ def build_skill(out_zip):
         for f in sorted(glob.glob(os.path.join(src, '**', '*'), recursive=True)):
             if os.path.isfile(f) and '__pycache__' not in f: z.write(f, os.path.join('noema-pack-builder', os.path.relpath(f, src)))
         for t in SKILL_TOOLS: z.write(os.path.join(ROOT, 'tools', t), f'noema-pack-builder/scripts/{t}')
+        for f in sorted(glob.glob(os.path.join(ROOT, 'tools', 'pipelines', '*.json'))): z.write(f, f'noema-pack-builder/scripts/pipelines/{os.path.basename(f)}')   # docs/PIPELINES.md
+        if os.path.exists(os.path.join(ROOT, 'docs', 'PIPELINES.md')): z.write(os.path.join(ROOT, 'docs', 'PIPELINES.md'), 'noema-pack-builder/references/PIPELINES.md')
         z.write(os.path.join(ROOT, 'tools', 'CONTENT_SPEC.md'), 'noema-pack-builder/references/CONTENT_SPEC.md')
         z.write(os.path.join(ROOT, 'docs', 'VISUAL.md'), 'noema-pack-builder/references/VISUAL.md')
         if os.path.exists(os.path.join(ROOT, 'docs', 'BRIDGE.md')): z.write(os.path.join(ROOT, 'docs', 'BRIDGE.md'), 'noema-pack-builder/references/BRIDGE.md')
@@ -328,6 +337,10 @@ def build_mcp_function(metas, out_dir):
     rd = lambda p: open(os.path.join(ROOT, p), encoding='utf-8').read()
     docs = {'workflow': rd('skill/noema-pack-builder/SKILL.md'), 'content': rd('tools/CONTENT_SPEC.md'), 'visual': rd('docs/VISUAL.md')}
     if os.path.exists(os.path.join(ROOT, 'docs', 'BRIDGE.md')): docs['bridge'] = rd('docs/BRIDGE.md')   # 文A language bridges (noema_bridge_guide)
+    # the content flows (noema_pipeline, docs/PIPELINES.md): the doc, the step library and every flow
+    if os.path.exists(os.path.join(ROOT, 'docs', 'PIPELINES.md')): docs['pipelines'] = rd('docs/PIPELINES.md')
+    docs['pipelineSteps'] = rj(os.path.join(ROOT, 'tools', 'pipelines', 'steps.json'))['steps']
+    docs['pipelineFlows'] = {f['id']: f for f in (rj(x) for x in sorted(glob.glob(os.path.join(ROOT, 'tools', 'pipelines', '*.json')))) if f.get('format') == 'noema.pipeline/v1'}
     if os.path.exists(os.path.join(ROOT, 'docs', 'LANGUAGE_RULES.md')): docs['languages'] = rd('docs/LANGUAGE_RULES.md') + ('\n\n---\n\n' + rd('skill/noema-pack-builder/LANGUAGES.md') if os.path.exists(os.path.join(ROOT, 'skill', 'noema-pack-builder', 'LANGUAGES.md')) else '') + ('\n\n---\n\n' + rd('docs/language-packs.md') if os.path.exists(os.path.join(ROOT, 'docs', 'language-packs.md')) else '')   # D19: the contract of the explanation layers   # language courses: the binding rules + how to answer a task
     code = (f'/* GENERATED by tools/build.py from cloud/mcp/server.mjs — do not edit */\nconst CFG = {json.dumps(cfg, ensure_ascii=False)};\nconst DOCS = {json.dumps(docs, ensure_ascii=False)};\n'
             + MCP_PRELUDE + ''.join(rd(f) + '\n' for f in MCP_ENGINE) + rd('cloud/mcp/server.mjs') + '\nexport const config = { path: ["/mcp", "/.well-known/oauth-protected-resource", "/.well-known/oauth-protected-resource/mcp"] };\n')

@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
 """Validate a chapter JSON file (tools/CONTENT_SPEC.md + docs/VISUAL.md).
-Usage: validate.py chNN.json [--media media_meta.json] [--min-visual N] [--balance N | --balance-warn N] [--features code,math] [--source chNN.json]
+Usage: validate.py chNN.json [--media media_meta.json] [--min-visual N] [--quality error|warn] [--balance N | --balance-warn N] [--features code,math] [--source chNN.json]
        validate.py subject.json --subject [--translations el,fr]
   --media         {id: {w, h, regions}} of the subject's pictures (build.py passes it) → checks references & coordinates
   --min-visual    required visual exercises per chapter (from subject.json authoring.minVisualPerChapter)
   --balance       every exercise type, difficulty and focus tag at least N times in the chapter (tools/pack_rules.json;
                   N from subject.json authoring.minPerKind) — errors; --balance-warn N: the same as warnings (older packs)
+  --quality       the quality rules of tools/pack_rules.json "quality" (tools/pack_quality.py; packs with authoring.rules >= 2):
+                  the chapter's knowledge map (chapter.map), fits, the mix of difficulty and thinking, learnables with >= 2
+                  versions, self-contained texts, explanations, the review (chapter.review). error: issues of level "error"
+                  are errors (Claude/Gemini-made packs); warn: every issue is a warning (learner-made or imported packs)
   --features      the subject's features that are on (code, math): they make spotbug, write, calc, syntax required
   --source        the file is a TRANSLATION (translations/<locale>/chNN.json) of this chapter (as built: base + patches):
                   same ids, same structure, same answers — only the words differ (CONTENT_SPEC.md "Packs in several languages")
@@ -31,6 +35,7 @@ TYPES = {"mcq","tf","odd","order","match","bucket","cloze","spotbug","calc","sce
 ARGS = sys.argv[1:]
 MEDIA = json.load(open(ARGS[ARGS.index("--media")+1], encoding="utf-8")) if "--media" in ARGS else None
 MIN_VISUAL = int(ARGS[ARGS.index("--min-visual")+1]) if "--min-visual" in ARGS else 0
+QUALITY = ARGS[ARGS.index("--quality")+1] if "--quality" in ARGS else None
 BALANCE = int(ARGS[ARGS.index("--balance")+1]) if "--balance" in ARGS else 0
 BALANCE_WARN = int(ARGS[ARGS.index("--balance-warn")+1]) if "--balance-warn" in ARGS else 0
 FEATURES = {x for x in (ARGS[ARGS.index("--features")+1] if "--features" in ARGS else "").split(",") if x}
@@ -338,7 +343,7 @@ def main(path):
     for sid in sids:
         if per_sec[sid]<3: W(f"{sid}: only {per_sec[sid]} exercises")
         if quick[sid]<2: W(f"{sid}: only {quick[sid]} quick exercises")
-    if not (BALANCE or BALANCE_WARN):   # the full rule is check_balance (pack_rules.json)
+    if not (QUALITY or BALANCE or BALANCE_WARN):   # the full rules: pack_quality.py / check_balance (pack_rules.json)
         for t in TYPES - VTYPES:
             if tc[t]<2: W(f"type '{t}' used {tc[t]}x (<2)")
     nvis = sum(tc[t] for t in VTYPES); vkinds = sum(1 for t in VTYPES if tc[t])
@@ -348,7 +353,10 @@ def main(path):
         if vkinds < 2: E(f"visual exercises use {vkinds} type(s); need >= 2 different visual types")
         if nfig < 1: E("no 'figure' block in the chapter (docs/VISUAL.md)")
     elif nfig and nvis < 3: W(f"only {nvis} visual exercises on the chapter's pictures (docs/VISUAL.md asks for >= 3)")
-    if BALANCE or BALANCE_WARN: check_balance(exs, BALANCE or BALANCE_WARN, FEATURES | ({"pictures"} if nvis or nfig else set()), E if BALANCE else W)
+    if QUALITY:
+        from pack_quality import check_quality
+        for level, _rule, msg in check_quality(ch, FEATURES): (E if level == "error" and QUALITY == "error" else W)(msg.split(": ", 1)[1] if msg.startswith(cid + ": ") else msg)
+    elif BALANCE or BALANCE_WARN: check_balance(exs, BALANCE or BALANCE_WARN, FEATURES | ({"pictures"} if nvis or nfig else set()), E if BALANCE else W)
     if "--source" in ARGS: check_same(ch, json.load(open(ARGS[ARGS.index("--source")+1], encoding="utf-8")))
     risky = sum(1 for e in exs if set(e.get("tags",[]))&{"pitfall","debug","exam"})
     if exs and risky/len(exs)<0.3: W(f"only {risky}/{len(exs)} exercises tagged pitfall/debug/exam")

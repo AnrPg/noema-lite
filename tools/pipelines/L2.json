@@ -1,0 +1,22 @@
+{
+ "format": "noema.pipeline/v1",
+ "id": "L2",
+ "title": "Γ2 · A new language in a course",
+ "when": "\"Add Persian to my course\": a whole language package.",
+ "steps": [
+  "classify",
+  "L.brief",
+  "L.phenomena",
+  "L.params",
+  "L.order",
+  "L.words",
+  "L.grounding",
+  "L.grammar",
+  "L.notes",
+  "L.sentences",
+  "L.exercises",
+  "L.package",
+  "L.facades",
+  "L.green"
+ ]
+}

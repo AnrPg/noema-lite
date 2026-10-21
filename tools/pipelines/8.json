@@ -1,0 +1,10 @@
+{
+ "format": "noema.pipeline/v1",
+ "id": "8",
+ "title": "Import a map or a subject",
+ "when": "The learner brings a Roadmap file or a pack they made.",
+ "steps": [
+  "classify",
+  "import"
+ ]
+}

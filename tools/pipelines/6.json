@@ -1,0 +1,10 @@
+{
+ "format": "noema.pipeline/v1",
+ "id": "6",
+ "title": "Language help 文A",
+ "when": "A bridge for a pack into the learner's language.",
+ "steps": [
+  "classify",
+  "bridges"
+ ]
+}
