@@ -325,7 +325,8 @@ window.NoemaVault = (() => {
     const empty = () => h('div', { class: 'ns-panel ns-empty vt-empty' }, ctx.faceEl(undefined, 'breathe'), h('p', {}, all.length ? T('none') : T('emptyVault')), h('button', { class: 'btn small primary', onclick: () => upload(ctx, () => refresh(true)) }, T('upload')));
     /* 📁 the folders: school › department › course, or down the field graph; at the end the files by type, with chips for language, year, semester */
     const valsOf = (f, lev) => given(f[lev]) ? [f[lev]] : [];
-    const folderName = (lev, v) => v === NONE ? T('misc') : lev === 'field' ? Fields.name(v) : String(v);
+    const MISC = { university: () => T('miscUniversity'), department: () => T('miscDepartment'), course: () => T('miscCourse'), field: () => T('miscField') };   // “Other departments”: the level shows in the name
+    const folderName = (lev, v) => v === NONE ? MISC[lev]() : lev === 'field' ? Fields.name(v) : String(v);
     const pinKey = () => `noema1:${acc()}:a:vaultpins`;
     const pins = () => { try { return JSON.parse(N()?.kv?.get(pinKey()) || '[]'); } catch (e) { return []; } };
     const putPins = l => N()?.kv?.set(pinKey(), JSON.stringify(l.slice(0, 12)));
@@ -386,11 +387,11 @@ window.NoemaVault = (() => {
           h('div', { class: 'ns-list vt-list' }, ...sorted.filter(f => f.kind === k).slice(0, 300).map(card)))));
     }
     function draw() {
-      viewSeg.replaceChildren(...[['', T('files'), 'doc'], ['folders', T('folders'), 'vault']].map(([k, l, e]) => h('button', { class: (P.v || '') === k ? 'on' : '', role: 'radio', 'aria-checked': String((P.v || '') === k), 'aria-label': l, title: l, 'data-v': k || 'files', onclick: () => setP({ v: k, f: '', by: '' }) }, svg(e))));
+      viewSeg.replaceChildren(...[['files', T('files'), 'doc'], ['', T('folders'), 'vault']].map(([k, l, e]) => h('button', { class: (P.v || '') === k ? 'on' : '', role: 'radio', 'aria-checked': String((P.v || '') === k), 'aria-label': l, title: l, 'data-v': k || 'folders', onclick: () => setP({ v: k, f: '', by: '' }) }, svg(e))));
       sortSel.value = P.sort || 'new';
       drawFilters();
       const list = filter(all, P);
-      out.replaceChildren(P.g ? h('p', { class: 'ns-panel tiny vt-groupnote' }, T('groupNote', { name: groupName(P.g) })) : '', h('p', { class: 'tiny ns-muted vt-count' }, T('results', { n: list.length })), P.v === 'folders' ? folders(list) : files(list));
+      out.replaceChildren(P.g ? h('p', { class: 'ns-panel tiny vt-groupnote' }, T('groupNote', { name: groupName(P.g) })) : '', P.v === 'files' ? files(list) : folders(list), h('p', { class: 'tiny ns-muted vt-count' }, T('results', { n: list.length })));   // the count: a quiet line at the end, not a heading
       if (P.id) { const f = all.find(x => x.id === P.id); setP({ id: '' }); if (f) details(ctx, f, () => refresh(true)); else toast(T('fileGone'), 4000); }   // a vault file sent in a conversation
     }
     refresh(false);

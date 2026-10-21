@@ -2082,6 +2082,7 @@ body.ns-on .ns-hit{outline:2px solid var(--acc);outline-offset:6px;border-radius
 @media (max-width:520px){.vt-sortl>span{display:none}}
 .vt-upbtn,.vt-clearall{display:inline-flex;align-items:center;gap:6px}.vt-upbtn svg.i,.vt-filtbtn svg.i,.vt-clearall svg.i{width:17px;height:17px;flex:none}
 .vt-fchip{max-width:100%;white-space:normal;text-align:start}
+.vt-view .vt-count{margin:18px 0 0;text-align:end;font-size:.72rem;opacity:.6}
 
 /* ---- 97_rtl.css ---- */
 /* ---------- right-to-left interfaces (docs/i18n.md §5: logical properties everywhere; here what they cannot say) ---------- */

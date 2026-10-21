@@ -838,9 +838,21 @@
   "@vault.allFields": {
     "description": "Folders view: the first crumb (field › language › school › type)."
   },
-  "vault.misc": "Misc",
-  "@vault.misc": {
-    "description": "Folders view: the folder of the files that do not give this detail (no school, …)."
+  "vault.miscUniversity": "Other schools",
+  "@vault.miscUniversity": {
+    "description": "Folders view: the folder of the files that name no school (university) (for example a file with no university). Name it after its level so the path shows where one is: \"Other X\", plural, natural."
+  },
+  "vault.miscDepartment": "Other departments",
+  "@vault.miscDepartment": {
+    "description": "Folders view: the folder of the files that name no department (for example a file with no university). Name it after its level so the path shows where one is: \"Other X\", plural, natural."
+  },
+  "vault.miscCourse": "Other courses",
+  "@vault.miscCourse": {
+    "description": "Folders view: the folder of the files that name no course (for example a file with no university). Name it after its level so the path shows where one is: \"Other X\", plural, natural."
+  },
+  "vault.miscField": "Other fields",
+  "@vault.miscField": {
+    "description": "Folders view: the folder of the files that name no field (for example a file with no university). Name it after its level so the path shows where one is: \"Other X\", plural, natural."
   },
   "vault.bySchool": "By school",
   "@vault.bySchool": {

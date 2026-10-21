@@ -106,7 +106,10 @@ c.save()`, f, text, String(pages)]); return f; };
     ok(await p.locator('.ns-tab[data-tab="vault"]').count() === 1 && await p.locator('.ns-tab[data-tab="people"]').count() === 1 && !(await p.locator('.ns-top #ns-people').count()), 'the Vault and People are tabs of the side bar, not in Discover or the top bar');
     await p.click('.ns-tab[data-tab="vault"]'); await wait(600);
     ok(await p.locator('.ns-tab[data-tab="vault"].on').count() === 1, 'the Vault tab is lit on its page');
-    ok(/#\/vault/.test(p.url()) && await p.locator('.vt-view h1').innerText() === 'Vault' && await until(() => p.locator('.vt-file').count().then(n => n === 1)), 'the Vault page: one file so far');
+    ok(/#\/vault/.test(p.url()) && await p.locator('.vt-view h1').innerText() === 'Vault' && await until(() => p.locator('.vt-folder').count().then(n => n >= 1)) && await p.locator('.vt-viewseg [data-v="folders"].on').count() === 1, 'the Vault page opens on the folders');
+    ok(await p.evaluate(() => { const c = document.querySelector('.vt-count'), l = document.querySelector('.vt-fhead2'); return !!c && !!l && c.getBoundingClientRect().top > l.getBoundingClientRect().bottom && !c.previousElementSibling?.matches?.('.vt-toolbar, .vt-row') && parseFloat(getComputedStyle(c).opacity) < .8; }), 'the count is a quiet line at the end, not above the folders');
+    await p.click('.vt-viewseg [data-v="files"]'); await wait(200);
+    ok(await until(() => p.locator('.vt-file').count().then(n => n === 1)), 'files view: one file so far');
     await p.click('.vt-upbtn'); await wait(300);
     await p.setInputFiles('.vt-upload .vt-pick', [F1, F2, EXE, SVG, FAKE]); await wait(600);
     const lis = await p.locator('.vt-files li').allInnerTexts();
@@ -241,6 +244,17 @@ c.save()`, f, text, String(pages)]); return f; };
     const el = await p.locator('.vt-view').innerText();
     ok(/Θησαυροφυλάκιο/.test(el) && /Ανέβασμα/.test(el) && /Φίλτρα/.test(el), 'Greek menus: ' + el.split('\n').slice(0, 2).join(' · '));
     await p.screenshot({ path: SHOTS + '/vt4_greek.png', fullPage: true });
+    const aid = '0b9a3c55-1d2e-4f00-8a11-22c3d4e5f6aa';   // a file that names only its course (the user's case: Λοιπά › Λοιπά › AI engineering)
+    ok((await rest(T2, '/rest/v1/noema_vault_files', { method: 'POST', body: JSON.stringify([{ id: aid, title: 'AI notes', course: 'AI engineering', kind: 'notes', fields: ['Q11660'], language: 'en', file_name: 'ai.pdf', mime: 'application/pdf', size: 10, path: `files/${aid}.pdf` }]) })).ok, 'a file with a course but no school or department');
+    srv.state.vfiles.find(f => f.id === aid).status = 'ok';   // as after its upload finished
+    await p.goto(BASE + '/#/vault'); await wait(300); await p.reload(); await wait(1200);
+    await p.evaluate(async () => { await NoemaI18n.use('el'); NoemaShell.route(); }); await wait(800);
+    await until(() => p.locator('.vt-folder[data-v="-"]').count());
+    ok(/Λοιπές σχολές/.test(await p.locator('.vt-folder[data-v="-"]').innerText()), 'its folder is called “Λοιπές σχολές”, not just “Λοιπά”');
+    await p.click('.vt-folder[data-v="-"]'); await wait(200); await p.click('.vt-folder[data-v="-"]'); await wait(200);
+    const crumb = (await p.locator('.vt-path').innerText()).replace(/\s+/g, ' ');
+    ok(/Λοιπές σχολές › Λοιπά τμήματα/.test(crumb) && /AI engineering/.test(await p.locator('.vt-folder').innerText()), 'the path tells the level: ' + crumb);
+    await p.screenshot({ path: SHOTS + '/vt5_misc.png', fullPage: true });
     ok(!E.length, 'no page errors ' + E.join(' | '));
   } catch (e) { ok(false, 'crashed: ' + e.stack); await p.screenshot({ path: SHOTS + '/vt_fail.png', fullPage: true }).catch(() => { }); }
   await browser.close(); srv.close?.();
