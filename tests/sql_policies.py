@@ -30,7 +30,7 @@ try:
     psql(r"""
 create extension if not exists pgcrypto;
 create role anon nologin; create role authenticated nologin;
-create schema auth; create table auth.users (id uuid primary key, email text);
+create schema auth; create table auth.users (id uuid primary key, email text, raw_user_meta_data jsonb);
 create function auth.uid() returns uuid language sql stable as $$ select nullif(current_setting('request.jwt.claim.sub', true), '')::uuid $$;
 create function auth.jwt() returns jsonb language sql stable as $$ select coalesce(nullif(current_setting('request.jwt.claims', true), ''), '{}')::jsonb $$;
 create schema storage;
@@ -204,6 +204,8 @@ alter default privileges in schema public grant all on tables to anon, authentic
     ok(q('b', "select count(*) from noema_vault where room is not null") == ['1'] and q('d', "select count(*) from noema_vault where room is not null") == ['0'], 'a group’s vault folder: its members only')
     ok(q('d', f"insert into noema_vault_files (title, university, department, course, year, semester, kind, subject, language, file_name, mime, size, path, room) values ('x', 'Uni', 'Dept', 'Course', 2024, 1, 'notes', 'biology', 'en', 'g.pdf', 'application/pdf', 10, 'files/66666666-1111-1111-1111-111111111111.pdf', '{g}')", expect_error=True), '…and only they put files in it')
     ok(q('d', "insert into noema_vault_files (title, kind, subject, language, file_name, mime, size, path) values ('Glossary', 'other', 'physics', 'el,ru', 'g.pdf', 'application/pdf', 10, 'files/66666666-1111-1111-1111-111111111111.pdf') returning coalesce(university, '-') || coalesce(semester::text, '-')") == ['--'], 'a file without university, course, year or semester, in two languages')
+    ok(q('d', "insert into noema_vault_files (title, kind, fields, language, file_name, mime, size, path, show_name) values ('Named', 'notes', '{Q413}', 'en', 'n.pdf', 'application/pdf', 10, 'files/12121212-1111-1111-1111-111111111111.pdf', true) returning uploader_name") == ['Dora']
+       and q('d', "update noema_vault_files set show_name = false where title = 'Named' returning coalesce(uploader_name, '-')") == ['-'], '“show my name”: the name of the People page when there is no profile; off again: anonymous')
     ok(q('d', "insert into noema_vault_files (title, kind, subject, language, file_name, mime, size, path) values ('x', 'other', 'physics', 'el;ru', 'g.pdf', 'application/pdf', 10, 'files/77777777-1111-1111-1111-111111111111.pdf')", expect_error=True), 'languages are codes separated by commas')
     for n in '78': q('e', f"insert into noema_chat_files (path, room, name, mime, size) values ('rooms/{g}/{n * 8}-2222-2222-2222-222222222222.pdf', '{g}', 'a.pdf', 'application/pdf', 20971520)")
     ok(q('e', "insert into noema_vault_files (title, university, department, course, year, semester, kind, subject, language, file_name, mime, size, path) values ('big', 'Uni', 'Dept', 'Course', 2024, 1, 'notes', 'biology', 'en', 'g.pdf', 'application/pdf', 20971520, 'files/77777777-1111-1111-1111-111111111111.pdf')", expect_error=True), 'the 50 MB count the vault and the files sent in conversations together')

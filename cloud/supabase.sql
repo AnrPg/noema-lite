@@ -885,6 +885,17 @@ drop policy if exists "add vault reports" on public.noema_vault_reports;
 create policy "add vault reports" on public.noema_vault_reports for insert to authenticated with check (reporter = (select auth.uid()));
 -- (noema_vault_hits: no policy — written only by noema_vault_count)
 
+-- the name a person shows on their files (when they choose to): their profile's, their People page's, or their account's
+create or replace function public.noema_vault_name(u uuid) returns text language sql stable security definer set search_path = public as $$
+  select coalesce((select nullif(btrim(display_name), '') from public.noema_profiles where user_id = u),
+                  (select nullif(btrim(display_name), '') from public.noema_people where user_id = u),
+                  (select nullif(btrim(coalesce(raw_user_meta_data->>'name', raw_user_meta_data->>'full_name', raw_user_meta_data->>'display_name')), '') from auth.users where id = u)) $$;
+-- (files shared before 2026-10-22 with "show my name" but no name found: filled in)
+do $$ begin
+  perform set_config('noema.vault', 'server', true);
+  update public.noema_vault_files set uploader_name = public.noema_vault_name(uploader) where show_name and uploader_name is null;
+  perform set_config('noema.vault', '', true);
+end $$;
 -- what an uploader may set: the description of the file. Counters, status, size and path are the server's.
 create or replace function public.noema_vault_guard() returns trigger language plpgsql security definer set search_path = public as $$
 declare used_bytes bigint; nm text;
@@ -893,8 +904,8 @@ begin
   if tg_op = 'INSERT' then new.uploader := auth.uid(); end if;
   new.university := nullif(regexp_replace(btrim(new.university), '\s+', ' ', 'g'), ''); new.department := nullif(regexp_replace(btrim(new.department), '\s+', ' ', 'g'), '');
   new.course := nullif(regexp_replace(btrim(new.course), '\s+', ' ', 'g'), ''); new.professor := nullif(regexp_replace(btrim(coalesce(new.professor, '')), '\s+', ' ', 'g'), '');
-  select display_name into nm from public.noema_profiles where user_id = new.uploader;
-  new.uploader_name := case when new.show_name then coalesce(nullif(btrim(nm), ''), new.uploader_name) else null end;
+  nm := public.noema_vault_name(new.uploader);   -- the name others see: the profile's, else the People page's, else the account's
+  new.uploader_name := case when new.show_name then coalesce(nm, nullif(btrim(new.uploader_name), '')) else null end;
   if tg_op = 'INSERT' then
     new.status := 'pending'; new.rating_sum := 0; new.rating_n := 0; new.downloads := 0; new.used := 0; new.reports := 0; new.created_at := now();
     if new.room is not null and not (public.noema_room_joined(new.room) and exists (select 1 from public.noema_rooms where id = new.room and kind = 'group')) then raise exception 'not a member of this group' using errcode = 'P0001'; end if;

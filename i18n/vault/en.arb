@@ -846,6 +846,14 @@
   "@vault.bySchool": {
     "description": "Folders view: the way in through university › department › course (the default)."
   },
+  "vault.waySchool": "School",
+  "@vault.waySchool": {
+    "description": "Folders view: short label of the toggle that opens the folders by university › department › course. One short word."
+  },
+  "vault.wayField": "Field",
+  "@vault.wayField": {
+    "description": "Folders view: short label of the toggle that opens the folders by field of study. One short word."
+  },
   "vault.byField": "By field",
   "@vault.byField": {
     "description": "Folders view: the way in through the fields."
@@ -878,9 +886,9 @@
   "@vault.fieldIn": {
     "description": "Under a field: the fields it sits under (comma list)."
   },
-  "vault.suggested": "Suggested:",
+  "vault.suggested": "Suggested",
   "@vault.suggested": {
-    "description": "Before suggested fields (from the title, the course, and what others chose)."
+    "description": "A field in the list that comes from the title, the course, or what others chose (not from the typed letters); shown small next to its parent fields."
   },
   "vault.proposeField": "Propose “{name}” as a new field",
   "@vault.proposeField": {
@@ -921,5 +929,17 @@
   "vault.moreActions": "More",
   "@vault.moreActions": {
     "description": "Tile opening the menu of rarer actions (edit, delete, report)."
+  },
+  "vault.sortBy": "Sort by",
+  "@vault.sortBy": {
+    "description": "Label before the sort order list."
+  },
+  "vault.pinnedFolders": "Pinned folders",
+  "@vault.pinnedFolders": {
+    "description": "Tooltip of the button that lists the pinned folders."
+  },
+  "vault.removePin": "Unpin {name}",
+  "@vault.removePin": {
+    "description": "× on a pinned folder chip."
   }
 }

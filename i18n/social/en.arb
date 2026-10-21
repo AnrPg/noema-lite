@@ -1,6 +1,6 @@
 {
   "@@locale": "en",
-  "social.title": "People",
+  "social.title": "Buddies",
   "@social.title": {
     "description": "Name of the people page (conversations, study buddies, study groups); also the top-bar button. One word."
   },
@@ -860,7 +860,7 @@
   "@social.buddyWord": {
     "description": "Under a person in the Send to list."
   },
-  "social.noOneYet": "No conversation or buddy yet. Find people on the People page.",
+  "social.noOneYet": "No conversation or buddy yet. Find people on the Buddies page.",
   "@social.noOneYet": {
     "description": "Empty Send to list."
   },

@@ -3557,7 +3557,7 @@
   "@sh.vaultSub": {
     "description": "Subtitle of the Vault item."
   },
-  "sh.people": "People",
+  "sh.people": "Buddies",
   "@sh.people": {
     "description": "Top-bar button and Discover item: conversations, study buddies, study groups (engine/social.js). One word."
   },
@@ -3565,7 +3565,7 @@
   "@sh.peopleSub": {
     "description": "Discover item subtitle."
   },
-  "sh.peopleN": "People: {n, plural, one {# new} other {# new}}",
+  "sh.peopleN": "Buddies: {n, plural, one {# new} other {# new}}",
   "@sh.peopleN": {
     "description": "Screen-reader label of the top-bar button with new things.",
     "placeholders": {
