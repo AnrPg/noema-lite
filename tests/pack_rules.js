@@ -126,5 +126,31 @@ ok(r.code === 1 && /ERROR: \[self\.contained\] ch01-e005: “Q14”/.test(r.out)
 r = VQ('--quality', 'warn');
 ok(r.code === 0 && /WARN: \[self\.contained\]/.test(r.out), 'validate.py --quality warn: a warning only');
 fs.rmSync(qd, { recursive: true, force: true });
+// the languages every new pack gets (pack_rules.json "languages", docs/PIPELINES.md §4b) and the translation files
+ok(JSON.stringify(file.languages) === JSON.stringify(P.LANGS), 'engine/packcheck.js LANGS is exactly tools/pack_rules.json "languages"');
+const RL = P.requiredLocales;
+ok(JSON.stringify(RL('en')) === JSON.stringify({ translations: ['el', 'ru'], bridges: ['el', 'ru', 'ar'] }) && JSON.stringify(RL('el-GR').translations) === '["en","ru"]' && JSON.stringify(RL('ar').translations) === '["en","el","ru"]' && RL('de').bridges.length === 4,
+  'requiredLocales: en, el, ru translations and en, el, ru, ar bridges, minus the pack\'s own language');
+{
+  const src = { id: 'ch01', sections: [{ id: 'ch01-s01', blocks: [{ t: 'p', text: 'Hello' }, { t: 'code', lang: 'python', code: 'print(1)' }] }], exercises: [{ id: 'ch01-e001', type: 'mcq', section: 'ch01-s01', options: ['a', 'b'], answer: 0 }], flashcards: [], debug: [] };
+  const pk = { subject: { id: 'tiny', language: 'en' }, version: 'v1', chapters: [src, { id: 'ch02', sections: [], exercises: [] }] };
+  const tf = ch => ({ format: 'noema-translation', v: 1, pack: 'tiny', locale: 'el', version: 'v1', chapters: [ch] });
+  const good = JSON.parse(JSON.stringify(src)); good.sections[0].blocks[0].text = 'Γεια'; good.exercises[0].options = ['α', 'β'];
+  let t = P.checkTranslation(tf(good), pk);
+  ok(!t.errors.length && t.warnings.some(w => /not translated yet: ch02/.test(w)), 'checkTranslation: a good translation passes; a chapter not translated yet is a warning');
+  const badA = JSON.parse(JSON.stringify(good)); badA.exercises[0].answer = 1;
+  const badC = JSON.parse(JSON.stringify(good)); badC.sections[0].blocks[1].code = 'εκτύπωσε(1)';
+  ok(P.checkTranslation(tf(badA), pk).errors.some(e => /answer differs/.test(e)) && P.checkTranslation(tf(badC), pk).errors.some(e => /code blocks must stay/.test(e)), 'checkTranslation: a changed answer or code is refused');
+  ok(P.checkTranslation({ ...tf(good), locale: 'en' }, pk).errors.some(e => /pack's own language/.test(e)) && P.checkTranslation({ ...tf(good), pack: 'other' }, pk).errors.some(e => /another subject/.test(e)), 'checkTranslation: its own language or another pack is refused');
+  ok(P.checkTranslation({ ...tf(good), version: 'v0' }, pk).warnings.some(w => /made for pack version v0/.test(w)), 'checkTranslation: made for another version → a warning');
+  const stub = { format: 'noema-pack', subject: { id: 'tiny', title: 'T', language: 'en', i18n: { el: { title: 'Τ' } } }, chapters: [], translations: { el: { file: true, chapters: 1 } } };
+  ok(!P.checkPack(stub).errors.some(e => /translations/.test(e)) && P.checkPack({ ...stub, translations: { el: { file: 'yes' } } }).errors.some(e => /translations\.el/.test(e)), 'checkPack: a pack that names a translation in its own file is valid');
+  // the same rule for code in validate.py --source
+  const tdir = fs.mkdtempSync(path.join(os.tmpdir(), 'tr-')), A = { ...src, num: 1, title: 'T', subtitle: 's', emoji: 'x', mantra: 'm', objectives: ['o'], pitfalls: [] }, B = JSON.parse(JSON.stringify(A)); B.sections[0].blocks[1].code = 'x = 2';
+  fs.writeFileSync(path.join(tdir, 'a.json'), JSON.stringify(A)); fs.writeFileSync(path.join(tdir, 'b.json'), JSON.stringify(B));
+  let out = ''; try { out = execFileSync('python3', [path.join(ROOT, 'tools', 'validate.py'), path.join(tdir, 'b.json'), '--source', path.join(tdir, 'a.json')], { encoding: 'utf8' }); } catch (e) { out = String(e.stdout || ''); }
+  ok(/code must stay exactly/.test(out), 'validate.py --source: a translated code block is refused too');
+  fs.rmSync(tdir, { recursive: true, force: true });
+}
 fs.rmSync(td, { recursive: true, force: true });
 console.log(`\n${n} checks passed`);

@@ -100,13 +100,33 @@ def load_translations(sdir, chapters):
         if chs: out[os.path.basename(d)] = chs
     return out
 
-def pack_i18n(pack, translations):
+def pack_i18n(pack, translations, external=False):
     """Pack schema v2 (additive): a pack that offers other languages (subject.i18n or translations) says "v": 2 and
     carries "translations": {locale: {"chapters": [...]}}; old apps read it as before (they ignore the new fields).
+    external=True: each translation goes in its own file (translation_file) and the pack only names it,
+    {locale: {"file": true, "chapters": n}} — a learner downloads only the language they read (docs/i18n.md §10).
     Returns what the content hash adds for the translations (None when there are none, so older hashes stay the same)."""
-    if translations: pack['translations'] = {loc: {'chapters': chs} for loc, chs in translations.items()}
+    if translations: pack['translations'] = {loc: ({'file': True, 'chapters': len(chs)} if external else {'chapters': chs}) for loc, chs in translations.items()}
     if translations or (pack.get('subject') or {}).get('i18n'): pack['v'] = 2
     return translations or None
+
+def translation_file(pack, loc, chapters):
+    """One noema-translation file: the chapters of one language, with the pack's ids (docs/i18n.md §10)."""
+    return {'format': 'noema-translation', 'v': 1, 'pack': pack['subject']['id'], 'locale': loc, 'source': pack['subject'].get('language') or 'en',
+            'version': pack.get('version'), 'chapters': chapters}
+
+def languages():
+    """tools/pack_rules.json "languages": the translations and 文A bridges every new pack gets."""
+    here = os.path.dirname(os.path.abspath(__file__))
+    for f in (os.path.join(here, 'pack_rules.json'), os.path.join(ROOT, 'tools', 'pack_rules.json')):
+        if os.path.exists(f): return rj(f).get('languages') or {}
+    return {}
+
+def required_locales(own):
+    """→ (translations, bridges) every new pack in language OWN gets: the lists of pack_rules.json minus its own language."""
+    L = languages(); o = (own or 'en').split('-')[0].lower()
+    keep = lambda xs: [x for x in xs if x.split('-')[0].lower() != o]
+    return keep(L.get('translations') or []), keep(L.get('bridges') or [])
 
 def content_hash(obj):
     return hashlib.sha256(json.dumps(obj, sort_keys=True, ensure_ascii=False).encode('utf-8')).hexdigest()[:16]
@@ -304,13 +324,15 @@ def package_sources(sdir, sources, chapters, base_ids=()):
             if isinstance(r, dict) and r.get('id') and r['id'] not in ids: errs.append(f'ERROR {c["id"]}: "sources" names unknown source "{r["id"]}"')
     return out, files, errs, warns
 
-def write_bundle(path, pack, files):
-    """The package the app imports: a zip with pack.json + sources/<file> for every packaged source file."""
+def write_bundle(path, pack, files, extra=None):
+    """The package the app imports: a zip with pack.json + sources/<file> for every packaged source file
+    (+ extra: {"translations/<locale>.json": object} — the translations in their own files)."""
     import zipfile
     os.makedirs(os.path.dirname(os.path.abspath(path)) or '.', exist_ok=True)
     tmp = path + '.tmp'
     with zipfile.ZipFile(tmp, 'w', zipfile.ZIP_DEFLATED) as z:
         z.writestr('pack.json', json.dumps(pack, ensure_ascii=False, separators=(',', ':')))
+        for name, obj in (extra or {}).items(): z.writestr(name, json.dumps(obj, ensure_ascii=False, separators=(',', ':')))
         for sid, p, rel in files:
             # PDFs / pictures / media are already compressed: store them (fast, no size gain lost)
             comp = zipfile.ZIP_STORED if os.path.splitext(rel)[1].lower() in ('.pdf', '.png', '.jpg', '.jpeg', '.webp', '.zip', '.mp4', '.mp3', '.m4a', '.docx', '.pptx', '.xlsx', '.epub', '.heic') else zipfile.ZIP_DEFLATED

@@ -12,6 +12,9 @@ Commands (SUBJ = a subject folder, or a pack .json with its bridges/ folder besi
   python3 tools/bridge.py todo SUBJ [--chapters ch01,ch02] [--limit 400]   content words no entry covers yet (most frequent first)
   python3 tools/bridge.py coverage SUBJ [--native el]                      share of the content words covered, per chapter
   python3 tools/bridge.py check SUBJ                                       core + every native: errors, stale or missing translations, orphan anchors
+  python3 tools/bridge.py require SUBJ                                     check + a bridge into every language a new pack needs (pack_rules.json
+                                                                           "languages": en, el, ru, ar minus its own), each covering >= 90 % of the
+                                                                           content words and >= 80 % of the everyday ones
   python3 tools/bridge.py stamp SUBJ --native el                           record the current meaning (src) of every translation (after a review)
   python3 tools/bridge.py build SUBJ --native el [-o out.json]             one noema-bridge file (to import with 📥 or save through the connector)
   python3 tools/bridge.py senses SUBJ [--word order]                       every place of a word with several senses, and the sense it gets there
@@ -231,23 +234,46 @@ def src_of(e, s):
 
 # ---------- coverage ----------
 def coverage(pack, entries, keep=(), chapters=None):
-    """→ {'all': (covered, total), chapter id: (covered, total)} over the content words of the theory."""
-    lang = pack['subject'].get('language', 'en'); idx = Index(list(entries) + [{'k': k} for k in keep])   # keep: names left as they are count as covered
-    res = {'all': [0, 0]}
+    """→ {'all': (covered, total), 'everyday': (covered, total), chapter id: (covered, total)} over the content words of
+    the theory. 'everyday': the words of band 1 (or no band) and every word no entry covers yet — a bridge for A2/B1
+    learners must not skip the everyday words (tools/pack_rules.json "languages".bridgeCoverage)."""
+    lang = pack['subject'].get('language', 'en'); idx = Index(list(entries) + [{'k': k, 'band': 3} for k in keep])   # keep: names left as they are count as covered
+    res = {'all': [0, 0], 'everyday': [0, 0]}
     for cid, sid, blocks in sections(pack, chapters):
         r = res.setdefault(cid, [0, 0])
         for bid, texts in blocks:
             for t in texts:
                 spans = idx.find(t)
-                cov = [False] * len(t)
-                for i, j, _e in spans:
-                    for x in range(i, j): cov[x] = True
+                cov = [None] * len(t)
+                for i, j, e in spans:
+                    for x in range(i, j): cov[x] = e
                 for tok, i, j in tokenize(t):
                     if not content_token(tok, lang): continue
-                    ok = cov[i]
+                    e = cov[i]
                     r[1] += 1; res['all'][1] += 1
-                    if ok: r[0] += 1; res['all'][0] += 1
+                    if e is not None: r[0] += 1; res['all'][0] += 1
+                    if e is None or (e.get('band') or 1) == 1:
+                        res['everyday'][1] += 1
+                        if e is not None: res['everyday'][0] += 1
     return res
+
+def required(pack):
+    """The natives every new pack gets a bridge into (tools/pack_rules.json "languages", minus the pack's language) and the minimum coverage."""
+    from noema_lib import languages
+    L = languages(); own = (pack['subject'].get('language') or 'en').split('-')[0].lower()
+    return [x for x in L.get('bridges') or [] if x.split('-')[0].lower() != own], L.get('bridgeCoverage') or {}
+
+def require(pack, bdir):
+    """check() + a bridge into every required native, each covering enough of the content words and of the everyday ones."""
+    E, W = check(pack, bdir)
+    if E and E[0] == 'no bridges/core.json': return E, W
+    want, mins = required(pack); have = set(natives(bdir))
+    for nat in want:
+        if nat not in have: E.append(f'no bridge into {nat} yet (bridges/{nat}.json): every new pack gets 文A help in {", ".join(want)}'); continue
+        b = build(pack, bdir, nat); ev = b.get('everyday', 0)
+        if b['coverage'] < mins.get('all', 0): E.append(f'{nat}: covers {b["coverage"]:.0%} of the content words, at least {mins["all"]:.0%} (bridge.py todo lists the rest)')
+        if ev < mins.get('everyday', 0): E.append(f'{nat}: covers {ev:.0%} of the everyday words, at least {mins["everyday"]:.0%} — learners at A2/B1 need them too (bridge.py todo)')
+    return E, W
 
 def todo(pack, entries, keep=(), chapters=None, limit=400):
     lang = pack['subject'].get('language', 'en'); idx = Index(list(entries) + [{'k': k} for k in keep]); cnt = {}; ex = {}
@@ -352,9 +378,9 @@ def build(pack, bdir, nat):
     anchors = [a for a in core.get('anchors') or [] if a.get('k') in have and any(s['id'] == str(a.get('sense')) for e in entries if e['k'] == a['k'] for s in e['senses'])]
     cov = coverage(pack, entries, core.get('keep') or [])
     full = [c['id'] for c in pack['chapters'] if cov.get(c['id'], [0, 0])[1] and cov[c['id']][0] / cov[c['id']][1] >= 0.95]
-    allc = cov['all']
+    allc, evc = cov['all'], cov['everyday']
     b = {'format': 'noema-bridge', 'v': 1, 'pack': pack['subject']['id'], 'source': core.get('source') or pack['subject'].get('language', 'en'), 'native': L.get('native', nat), 'status': st,
-         'coverage': round(allc[0] / allc[1], 4) if allc[1] else 0, 'chapters': full, 'of': len(pack['chapters']), 'entries': entries, 'sections': secs, 'anchors': anchors}
+         'coverage': round(allc[0] / allc[1], 4) if allc[1] else 0, 'everyday': round(evc[0] / evc[1], 4) if evc[1] else 0, 'chapters': full, 'of': len(pack['chapters']), 'entries': entries, 'sections': secs, 'anchors': anchors}
     if L.get('updated'): b['updated'] = L['updated']
     return b
 
@@ -487,7 +513,7 @@ def build_library(sdir, pack, root=None):
 def main(argv):
     import argparse
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument('cmd', choices=['todo', 'coverage', 'check', 'stamp', 'build', 'senses', 'anchor', 'terms'])
+    ap.add_argument('cmd', choices=['todo', 'coverage', 'check', 'require', 'stamp', 'build', 'senses', 'anchor', 'terms'])
     ap.add_argument('--dry', action='store_true'); ap.add_argument('--word')
     ap.add_argument('subject'); ap.add_argument('--native'); ap.add_argument('--chapters'); ap.add_argument('--limit', type=int, default=400); ap.add_argument('-o', '--out')
     a = ap.parse_args(argv)
@@ -498,8 +524,8 @@ def main(argv):
         ents = build(pack, bdir, a.native)['entries'] if a.native else core['entries']
         cov = coverage(pack, ents, core.get('keep') or [], chs)
         for k, (x, n) in cov.items(): print(f'{k:>8}: {x}/{n} = {x / n:.1%}' if n else f'{k:>8}: -')
-    elif a.cmd == 'check':
-        E, W = check(pack, bdir)
+    elif a.cmd in ('check', 'require'):
+        E, W = (check if a.cmd == 'check' else require)(pack, bdir)
         for w in W: print('WARN', w)
         for e in E: print('ERROR', e)
         print(f'{len(E)} error(s), {len(W)} warning(s)'); return 1 if E else 0
@@ -518,7 +544,7 @@ def main(argv):
     elif a.cmd == 'build':
         if not a.native: ap.error('--native is required')
         b = build(pack, bdir, a.native); out = a.out or os.path.join(bdir, f'{pack["subject"]["id"]}.{a.native}.bridge.json')
-        wj(out, b); print(f'{out}: {len(b["entries"])} words, {b["coverage"]:.0%} covered, chapters {", ".join(b["chapters"]) or "-"}')
+        wj(out, b); print(f'{out}: {len(b["entries"])} words, {b["coverage"]:.0%} covered ({b["everyday"]:.0%} of the everyday words), chapters {", ".join(b["chapters"]) or "-"}')
     return 0
 
 if __name__ == '__main__':

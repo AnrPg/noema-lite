@@ -1049,5 +1049,23 @@
   "roadmap.src.notJson": "This is not the JSON answer. Paste Claude’s whole answer.",
   "@roadmap.src.notJson": {
     "description": "Error: the pasted text is not Claude’s JSON answer."
+  },
+  "roadmap.gen.translating": "Translating into {lang}: chapter {i, number}/{n, number}",
+  "@roadmap.gen.translating": {
+    "description": "Progress line while the app translates a generated chapter (a 🌐 is shown before it). {lang} = language name.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      },
+      "i": {
+        "type": "int",
+        "example": "2"
+      },
+      "n": {
+        "type": "int",
+        "example": "8"
+      }
+    }
   }
 }

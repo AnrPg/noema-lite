@@ -235,6 +235,26 @@ Each chapter has "diagrams": 0–2 objects — only a diagram with real teaching
       run.chapters.push(m.chapter); Object.assign(run.media, m.media); await keep();
       onLog('   ✓ ' + rt('roadmap.gen.chapterDone', { sections: m.chapter.sections.length, exercises: m.chapter.exercises.length, flashcards: m.chapter.flashcards.length }));
     }
+    // 3b. translations — every chapter in English, Greek and Russian too (minus the step's own language; tools/pack_rules.json
+    //     "languages"): the same JSON with only the words translated, checked like an imported translation
+    run.tr = run.tr || {};
+    for (const loc of window.NoemaPackCheck.requiredLocales(c.language || 'en').translations) {
+      const done = run.tr[loc] = run.tr[loc] || [];
+      for (let i = done.length; i < run.chapters.length; i++) {
+        if (signal?.aborted) throw new (L().LLMError)('Stopped.', 0, 'aborted');   // i18n-ignore (an internal signal: kind 'aborted')
+        const src = run.chapters[i], name = window.NoemaI18n ? NoemaI18n.fmt.langName(loc) : loc;
+        onLog('🌐 ' + rt('roadmap.gen.translating', { lang: name, i: i + 1, n: run.chapters.length }));
+        /* i18n-ignore-start — the prompt and the checks of the translation */
+        const { data, usage } = await L().json({ acc, provider: 'gemini', model, signal, maxTokens: 65536, name: 'translation',
+          system: `You are a professional translator of course material. Translate one chapter of a study pack from ${lang} into ${loc} (${name}), naturally and precisely, with the subject's established terms in ${loc}. Answer in JSON only.`,
+          prompt: `Translate every text the learner reads in this chapter (titles, theory, questions, options, explanations, feedback, cards, playbooks, pitfalls) into ${loc}. Keep EXACTLY: every "id", "type", "section", "media", "t", "kind", "answer", "ok", "bucket", "to", numbers, the order and length of every list, every code block and inline code, formulas and LaTeX, and the [[…]] gaps of cloze texts (translate the words inside them). Return the whole chapter.\n\n${JSON.stringify(src)}`,
+          schema: { type: 'object', required: ['id', 'sections', 'exercises'] },
+          validate: d => window.NoemaPackCheck.checkTranslation({ format: 'noema-translation', v: 1, pack: packId, locale: loc, chapters: [d] }, { subject: { id: packId, language: c.language || 'en' }, chapters: [src] }).errors.slice(0, 30),
+          onRepair: e => onLog('   ↻ ' + rt('roadmap.fixing', { n: e.length })) });
+        /* i18n-ignore-end */
+        add(usage); done.push({ ...data, id: src.id, src: src.src, ...(src.sources ? { sources: src.sources } : {}) }); await keep();
+      }
+    }
     // 4. assemble — the subject's texts are pack content (in the curriculum's language or neutral), not the app's words
     /* i18n-ignore-start */
     const M = run.meta;
@@ -243,6 +263,7 @@ Each chapter has "diagrams": 0–2 objects — only a diagram with real teaching
     const sources = run.material ? { sources: run.material.map(m => ({ id: m.srcId, title: m.name.replace(/\.[a-z0-9]+$/i, ''), fileName: m.name, file: 'sources/' + m.name, pages: m.range ? `${m.range[0]}–${m.range[1]}` : m.pageCount ? `1–${m.pageCount}` : '', added: new Date().toISOString().slice(0, 10), emoji: '📄' })), chapters: Object.fromEntries(run.chapters.map(ch => [ch.id, ch.src])), patches: {} } : { sources: [{ id: 'web', title: 'Web research (Gemini + Google Search)', subtitle: (run.sources || []).map(s => s.title).slice(0, 6).join(' · '), added: new Date().toISOString().slice(0, 10), emoji: '🔎' },
       ...(run.sources || []).map((s, i) => ({ id: 's' + (i + 1), title: s.title, url: s.url, added: new Date().toISOString().slice(0, 10), emoji: '🌐' }))], chapters: Object.fromEntries(run.chapters.map(ch => [ch.id, 'web'])), patches: {} };
     const pack = { format: 'noema-pack', v: 1, subject, sources, chapters: run.chapters, media: run.media, builtAt: new Date().toISOString(), generatedBy: 'gemini', curriculum: { id: c.id, node: nodeId } };
+    if (Object.keys(run.tr).length) { pack.v = 2; pack.translations = Object.fromEntries(Object.entries(run.tr).map(([loc, chs]) => [loc, { chapters: chs }])); }   // the app keeps each in its own file (loader storeTranslations)
     /* i18n-ignore-end */
     const r = window.NoemaPackCheck.checkPack(pack, packId, { strict: true });
     if (r.errors.length) throw new Error(rt('roadmap.gen.invalid', { list: r.errors.slice(0, 3).join('; ') }));   // the errors: English diagnostics (engine/packcheck.js)

@@ -38,8 +38,15 @@ json.dump({'from': os.path.basename(a[0]), 'sourcesWithFiles': kept, 'chapters':
 for c in p['chapters']:
     c = {k: v for k, v in c.items() if not k.startswith('_')}
     json.dump(c, open(os.path.join(d, 'chapters', c['id'] + '.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+def tr_chapters(loc, t):   # inline, or in its own file: translations/<locale>.json in the package, or <id>.tr.<locale>.json beside the .json
+    if isinstance(t.get('chapters'), list): return t['chapters']
+    if bundle and f'translations/{loc}.json' in bundle.namelist(): return json.loads(bundle.read(f'translations/{loc}.json').decode('utf-8')).get('chapters') or []
+    here = os.path.dirname(os.path.abspath(a[0])); f = os.path.join(here, f'{sid}.tr.{loc}.json')
+    for g in (f, os.path.join(here, f'tr.{loc}.json')):   # (tr.<locale>.json: a library subject's, beside its pack.json)
+        if os.path.exists(g): return json.load(open(g, encoding='utf-8')).get('chapters') or []
+    print(f'⚠️ translation {loc}: its file is not here ({os.path.basename(f)}) — translate the chapters again or get the file'); return []
 for loc, t in (p.get('translations') or {}).items():   # a pack in several languages: translations/<locale>/chNN.json
-    for c in t.get('chapters', []):
+    for c in tr_chapters(loc, t):
         c = {k: v for k, v in c.items() if not k.startswith('_')}
         os.makedirs(os.path.join(d, 'translations', loc), exist_ok=True)
         json.dump(c, open(os.path.join(d, 'translations', loc, c['id'] + '.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)

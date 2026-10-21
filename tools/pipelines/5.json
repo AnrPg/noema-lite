@@ -10,9 +10,9 @@
   "write",
   "blind_solve",
   "review",
-  "checks",
-  "upload",
   "translate",
-  "bridges"
+  "bridges",
+  "checks",
+  "upload"
  ]
 }

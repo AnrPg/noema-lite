@@ -247,9 +247,12 @@ the existing sources keep the files the learner already has, and only NEW source
 by them). Add new chapters (next `chNN`) or `patches/*.json` with `appendBlocks` / `appendExercises`
 (reserve a fresh id range, e.g. `chNN-e7NN`), register the new source in `sources.json` (its file in `work/<id>/sources/`), rebuild, save.
 
-## Translations (optional — only when the user asks)
-A pack is written in one language (`subject.language`). It may also offer other languages; a learner whose app speaks
-one of them sees it, everyone else sees the original with a small language tag. Never required, never invented unasked.
+## Translations — every pack in English, Greek and Russian (flow step `translate`)
+A pack is written in one language (`subject.language`). **Every new pack also gets full translations into English, Greek
+and Russian — each of them that is not its own language** (the learner's rule; `pack_rules.json` "languages",
+`references/PIPELINES.md` §4b). A learner whose app speaks one of them sees it, everyone else sees the original with a
+small language tag. Other languages only when the user asks. `pipeline.py check work/<id> translate` says which chapters
+are still missing.
 - **Name and description**: in `subject.json` add `"i18n": { "el": { "title": "…", "description": "…" } }` (also
   `appTitle`, `searchExamples`, `hero`, `tutor` — only fields the subject has). Locale codes: `el ru fr de it es-ES pt-PT sq
   tr ar-EG hi ja zh-Hans zh-Hant en` or a bare language (`es`, `pt`).
@@ -257,10 +260,15 @@ one of them sees it, everyone else sees the original with a small language tag. 
   SAME ids, sections, blocks, exercises, cards, playbooks, pitfalls and answers — only the words change. Translate
   naturally for learners of that language, keep `$…$` math and code unchanged. A chapter you do not translate stays in
   the original language. Updating a translated pack: add the new items to every translation too.
-- `make_pack.py` validates both (same ids/structure/answers) and builds the pack with `"v": 2`; `unpack.py` gives the
+- `make_pack.py` validates both (same ids/structure/answers/code) and builds the pack with `"v": 2`; each translation is
+  its own file, `build/<id>.tr.<locale>.json` (and `translations/<locale>.json` in the package). `noema_finish_upload`
+  asks for each one with ready `curl` commands; `noema_save_translation` adds one later. `unpack.py` gives the
   translations back in `translations/`. Contract: `references/CONTENT_SPEC.md` → "Packs in several languages".
 
-## Language help — 文A bridges (optional — only when the user asks)
+## Language help — 文A bridges: every pack into English, Greek, Russian and Arabic (flow step `bridges`)
+Every new pack gets a bridge into each of en, el, ru, ar that is not its own language, **everyday words included** (≥ 90 %
+of the content words and ≥ 80 % of the everyday ones; `python3 scripts/bridge.py require <pack>` checks it). Other
+languages when the user asks.
 For a learner who studies the pack in a language that is not their own ("my student is Russian, the pack is Greek"): a
 **bridge** gives the pack's words, in the meaning they have IN the pack, in the learner's language. It is a sidecar; the
 pack is not changed. Contract and rules: `references/BRIDGE.md` (or `noema_bridge_guide`).

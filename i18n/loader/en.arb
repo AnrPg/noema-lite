@@ -2625,5 +2625,39 @@
   "loader.study.otherCoursesSub": "They teach none of the languages you chose. Open one to choose among its languages.",
   "@loader.study.otherCoursesSub": {
     "description": "D21: Languages tab — the line inside the folded “other courses”."
+  },
+  "loader.tr.attached": "Translation into {lang} added to “{title}”",
+  "@loader.tr.attached": {
+    "description": "Toast after importing a translation file of a subject (a 🌐 is shown before it). {lang} = language name, {title} = subject title.",
+    "placeholders": {
+      "lang": {
+        "type": "String",
+        "example": "Greek"
+      },
+      "title": {
+        "type": "String",
+        "example": "Cell biology"
+      }
+    }
+  },
+  "loader.tr.noSubject": "This translation belongs to a subject you don't have yet ({id}). Import the subject first.",
+  "@loader.tr.noSubject": {
+    "description": "Error when a translation file is imported but its subject is not in the account. {id} = the subject's id.",
+    "placeholders": {
+      "id": {
+        "type": "String",
+        "example": "cell-biology"
+      }
+    }
+  },
+  "loader.tr.invalid": "This translation does not match its subject: {list}",
+  "@loader.tr.invalid": {
+    "description": "Error when an imported translation file differs from its subject. {list} = technical details in English.",
+    "placeholders": {
+      "list": {
+        "type": "String",
+        "example": "sections must be the source's"
+      }
+    }
   }
 }

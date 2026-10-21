@@ -158,9 +158,11 @@
   },
   "checks": {
    "title": "Every check (make_pack.py)",
-   "what": "python3 scripts/make_pack.py work/<id>: the quality rules of tools/pack_rules.json on every chapter. Never deliver a pack that fails.",
+   "what": "python3 scripts/make_pack.py work/<id>: the quality rules of tools/pack_rules.json on every chapter, every translation against its chapter. Never deliver a pack that fails.",
    "needs": [
-    "review"
+    "review",
+    "translate",
+    "bridges"
    ],
    "produces": [
     "build/{id}.json"
@@ -173,7 +175,7 @@
   },
   "upload": {
    "title": "Save to the learner's account",
-   "what": "noema_start_upload → curl → noema_finish_upload (it checks the pack again and asks for the source files).",
+   "what": "noema_start_upload → curl → noema_finish_upload (it checks the pack again, then asks for the source files and the translations), then noema_save_bridge for each bridge.",
    "needs": [
     "checks"
    ],
@@ -184,22 +186,25 @@
    "gate": "strict"
   },
   "translate": {
-   "title": "Translations (en + el)",
-   "what": "Every pack in at least English and Greek, whatever its language (translations/<locale>/chNN.json). Required by the learner; the check lands with PR B.",
+   "title": "Translations (en, el, ru)",
+   "what": "A full translation of every chapter into each of English, Greek and Russian other than the pack's language (translations/<locale>/chNN.json: same ids, sections, answers and code; only the words change). make_pack.py writes each as its own file (build/<id>.tr.<locale>.json) and noema_finish_upload asks for them.",
    "produces": [
     "translations/{locale}/{ch}.json"
    ],
    "check": {
     "local": "translations"
    },
-   "doc": "references/CONTENT_SPEC.md \"Packs in several languages\"",
-   "gate": "planned"
+   "doc": "references/CONTENT_SPEC.md \"Packs in several languages\", references/PIPELINES.md §4b",
+   "gate": "strict",
+   "needs": [
+    "review"
+   ]
   },
   "bridges": {
    "title": "Language help 文A (en, el, ru, ar)",
-   "what": "A bridge into each of en, el, ru, ar other than the pack's language, everyday words included (learners may be A2/B1): bridge.py todo / build / check, then noema_save_bridge.",
+   "what": "A 文A bridge into each of en, el, ru, ar other than the pack's language, everyday words included (learners may be A2/B1): bridge.py todo / build / check — it covers >= 90 % of the content words and >= 80 % of the everyday ones. Save each with noema_save_bridge after the upload.",
    "needs": [
-    "checks"
+    "review"
    ],
    "produces": [
     "bridges/*.json"
@@ -207,7 +212,7 @@
    "check": {
     "local": "bridges"
    },
-   "doc": "references/BRIDGE.md",
+   "doc": "references/BRIDGE.md, references/PIPELINES.md §4b",
    "gate": "strict"
   },
   "next": {

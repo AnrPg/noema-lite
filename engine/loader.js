@@ -222,6 +222,66 @@
       return { ...t, src: c.src ?? t.src, exercises: fill('exercises'), flashcards: fill('flashcards'), debug: fill('debug'), pitfalls: t.pitfalls || c.pitfalls || [] };
     });
   }
+  /* A translation can live in its own file (noema-translation, docs/i18n.md §10): the pack then says
+     translations: { "<locale>": { file: true, chapters: n } } and the chapters are fetched only for the learner who reads
+     that language — the library's tr.<locale>.js, this device (IndexedDB "packs", key tr|<account>|<subject>|<locale>), or
+     the account's storage (packs/<subject>.tr.<locale>.json). Packs with the chapters inline work as before. */
+  const trKey = (acc, id, loc) => `tr|${acc}|${id}|${loc}`;
+  /** Fill pack.translations[loc].chapters from wherever the file is → true when the chapters are there. */
+  async function loadTranslation(acc, meta, pack, loc) {
+    const t = pack?.translations?.[loc]; if (!t) return false;
+    if (Array.isArray(t.chapters)) return true;
+    const id = pack.subject.id, ok = f => f && f.format === 'noema-translation' && f.pack === id && Array.isArray(f.chapters);
+    let f = window.NOEMA_TRANSLATIONS?.[`${id}|${loc}`];
+    const lib = meta?.trLocales?.[loc]?.path;
+    if (!ok(f) && lib) { await loadScript(lib).catch(() => { }); f = window.NOEMA_TRANSLATIONS?.[`${id}|${loc}`]; }
+    if (!ok(f)) f = await IDB.get('packs', trKey(acc, id, loc)).catch(() => null);
+    if ((!ok(f) || (pack.version && f.version && f.version !== pack.version)) && isCloudAcc(acc)) {   // none here, or made for another version: the account's copy
+      const r = await NoemaCloud.downloadObject(`packs/${id}.tr.${loc}.json`).then(x => x.json()).catch(() => null);
+      if (ok(r)) { f = r; IDB.put('packs', trKey(acc, id, loc), r).catch(() => { }); }
+    }
+    if (!ok(f)) { console.warn('[noema] translation not found', id, loc); return false; }
+    pack.translations[loc] = { ...t, chapters: f.chapters };
+    return true;
+  }
+  /** Keep a pack's translations in their own files (this device + the account), the pack only names them. */
+  async function storeTranslations(acc, p) {
+    for (const [loc, t] of Object.entries(p.translations || {})) {
+      if (!t || !Array.isArray(t.chapters)) continue;
+      const f = { format: 'noema-translation', v: 1, pack: p.subject.id, locale: loc, source: p.subject.language || 'en', version: p.version || null, chapters: t.chapters };
+      await IDB.put('packs', trKey(acc, p.subject.id, loc), f).catch(() => { });
+      if (isCloudAcc(acc)) await NoemaCloud.uploadObject(`packs/${p.subject.id}.tr.${loc}.json`, new Blob([JSON.stringify(f)], { type: 'application/json' }), 'application/json').catch(e => console.warn(e));
+      p.translations[loc] = { file: true, chapters: t.chapters.length };
+    }
+    return p;
+  }
+  /** A copy of the pack with every translation inline (to share, publish or save as a package: it must stand alone). */
+  async function inlineTranslations(acc, meta, pack) {
+    if (!pack?.translations) return pack;
+    const p = { ...pack, translations: { ...pack.translations } };
+    for (const loc of Object.keys(p.translations)) if (!(await loadTranslation(acc, meta, p, loc))) delete p.translations[loc];
+    if (!Object.keys(p.translations).length) delete p.translations;
+    return p;
+  }
+  /** A noema-translation file imported on its own (📥): checked against the subject it belongs to, then kept like the others. */
+  async function attachTranslation(acc, f) {
+    const meta = (await subjectsFor(acc)).find(x => x.id === f.pack);
+    if (!meta) throw new Error(tr('loader.tr.noSubject', { id: String(f.pack || '') }));
+    const pack = await getPack(acc, meta), r = NoemaPackCheck.checkTranslation(f, pack);
+    if (r.errors.length) throw new Error(tr('loader.tr.invalid', { list: r.errors.slice(0, 3).join('; ') }));   // the errors: English diagnostics (engine/packcheck.js)
+    await IDB.put('packs', trKey(acc, f.pack, f.locale), f);
+    if (isCloudAcc(acc)) await NoemaCloud.uploadObject(`packs/${f.pack}.tr.${f.locale}.json`, new Blob([JSON.stringify(f)], { type: 'application/json' }), 'application/json').catch(e => console.warn(e));
+    if (meta.origin === 'imported') {   // the subject now names it, on every device
+      const p = { ...pack, translations: { ...(pack.translations || {}), [f.locale]: { file: true, chapters: f.chapters.length } } };
+      for (const [loc, t] of Object.entries(p.translations)) if (Array.isArray(t?.chapters)) p.translations[loc] = { file: true, chapters: t.chapters.length };
+      await IDB.put('packs', acc + '|' + p.subject.id, p);
+      const pm = KV.accountKey('packmeta:' + p.subject.id, acc), cur = jget(pm, null) || {};
+      KV.set(pm, JSON.stringify({ ...cur, contentLocales: Object.keys(p.translations) }));
+      if (isCloudAcc(acc)) await NoemaCloud.uploadPack(p).catch(e => console.warn(e));
+      if (window.NOEMA_PACKS) delete window.NOEMA_PACKS[p.subject.id];
+    }
+    return { title: meta.title || meta.id, locale: f.locale };
+  }
   /** A small tag with the language of a subject's content, when it is not the UI language (null otherwise). */
   function langTag(s) {
     if (!s || s.kind === 'language' || String(s.id || '').startsWith('lang:')) return null;
@@ -263,9 +323,11 @@
   /** Delete a subject that belongs to this account (imported / made with Claude / shared with you / from Explore / a curriculum step):
       this device, the cloud copy, its metadata and source files. Progress is kept (it returns if the pack is imported again). */
   async function deleteSubject(acc, s) {
+    const locs = Object.keys((await IDB.get('packs', acc + '|' + s.id).catch(() => null))?.translations || {});   // its translations go with it (docs/i18n.md §10)
     await IDB.del('packs', acc + '|' + s.id).catch(() => { });
+    for (const l of locs) await IDB.del('packs', trKey(acc, s.id, l)).catch(() => { });
     KV.del(KV.accountKey('packmeta:' + s.id, acc)); KV.del(KV.accountKey('subjoverride:' + s.id, acc));
-    if (isCloudAcc(acc)) await NoemaCloud.deleteObjects('noema-private', [`${NoemaCloud.session().user.id}/packs/${s.id}.json`]).catch(e => console.warn('[delete subject]', e));
+    if (isCloudAcc(acc)) await NoemaCloud.deleteObjects('noema-private', [`${NoemaCloud.session().user.id}/packs/${s.id}.json`, ...locs.map(l => `${NoemaCloud.session().user.id}/packs/${s.id}.tr.${l}.json`)]).catch(e => console.warn('[delete subject]', e));
     if (window.NoemaSrcFiles) await NoemaSrcFiles.removeAll(acc, s.id).catch(() => { });
     if (s.curriculum && window.NoemaCurriculum) { const c = NoemaCurriculum.get(acc, s.curriculum); if (c?.nodes[s.node]) { c.nodes[s.node].pack = null; NoemaCurriculum.save(acc, c); } }
     // 📦 every other step it teaches (attached to them): the step is planned and prepared the usual way again
@@ -846,6 +908,11 @@
       return s;
     }
     let p; try { p = JSON.parse(await file.text()); } catch (e) { throw new Error(tr('loader.import.notPackOrPackage')); }
+    if (p?.format === 'noema-translation') {   // a translation of a subject the learner has (docs/i18n.md §10)
+      const r = await attachTranslation(acc, p);
+      toastL('🌐 ' + tr('loader.tr.attached', { lang: window.NoemaI18n ? NoemaI18n.fmt.langName(r.locale) : r.locale, title: r.title }), 4000);
+      return null;
+    }
     if (p?.format === 'noema-bridge' && window.NoemaBridge) {   // 文A language help for a subject the learner has (docs/BRIDGE.md): attached, the pack is not changed
       const r = await NoemaBridge.attach(acc, p);
       toastL('文A ' + tr('bridge.attached', { lang: window.NoemaI18n ? NoemaI18n.fmt.langName(r.native) : r.native, title: r.title }), 4000);   // i18n-ignore (the icon)
@@ -864,6 +931,7 @@
     let clean = await IDB.get('packs', acc + '|' + pack.subject.id).catch(() => null);
     if (!clean) { const m = (REG.subjects || []).find(x => x.id === pack.subject.id); if (m?.path) clean = await fetch(m.path.replace(/pack\.js$/, 'pack.json')).then(r => r.ok ? r.json() : null).catch(() => null); }
     if (clean) pack = clean;
+    pack = await inlineTranslations(acc, (REG.subjects || []).find(x => x.id === pack.subject.id), pack);   // the package stands alone
     try { const n = await NoemaSrcFiles.downloadBundle(acc, pack); toastL(`⬇️ ${pack.subject.id}.noema.zip` + (n ? ' ' + tr('loader.export.withFiles', { n }) : ''), 3000); }   // i18n-ignore (a file name)
     catch (e) { toastL('⚠️ ' + errMsg(e), 4000); }
   }
@@ -922,6 +990,7 @@
     p.counts = p.counts || countPack(p);
     if (p.sharedFiles) { Object.defineProperty(p, '_sharedFiles', { value: p.sharedFiles, enumerable: false, configurable: true }); delete p.sharedFiles; }   // fetched by the caller (attachShared), not stored
     await embedWebPictures(acc, p);
+    await storeTranslations(acc, p);   // translations in their own files (docs/i18n.md §10)
     await IDB.put('packs', acc + '|' + p.subject.id, p);
     KV.set(KV.accountKey('packmeta:' + p.subject.id, acc), JSON.stringify({ ...p.subject, counts: p.counts, version: p.version || null, ...(p.translations ? { contentLocales: Object.keys(p.translations) } : {}), ...extra }));
     if (isCloudAcc(acc)) await NoemaCloud.uploadPack(p).catch(e => console.warn(e));
@@ -940,7 +1009,7 @@
 
   /* ---- 🔗 share dialog: public + with a person ---- */
   async function shareDialog(acc, s) {
-    let pack; try { pack = await getPack(acc, s); } catch (e) { toastL('⚠️ ' + errMsg(e), 4000); return; }
+    let pack; try { pack = await inlineTranslations(acc, s, await getPack(acc, s)); } catch (e) { toastL('⚠️ ' + errMsg(e), 4000); return; }   // a shared or public copy carries its translations (docs/i18n.md §10)
     const meta = packInfo(pack, acc);
     overlay((box, close) => {
       const draw = async () => {
@@ -1601,7 +1670,7 @@
     accounts: allAccounts, getAccount, saveLocalAccount, subjectsFor, pickSubject, shelf, loadSubject, stepOf, openShelf: (acc, opts) => openShelf(acc || Noema.account?.id || KV.acc, opts || {}), pickAccount, importPackFile, importPack, exportPackage, overlay, claudeSetupView: (acc, opts) => claudeSetupView(acc, opts || {}), claudeGuide: opts => claudeGuide(Noema.account?.id || KV.acc, opts || {}), notes: Notes, shareRow, updateText, updateLabel,
     share(s) { return shareDialog(Noema.account.id, s); },
     editSubject(s, o) { return editSubject(Noema.account.id, s, o); }, deleteSubject(s) { return deleteSubject(Noema.account.id, s); }, setHidden(id, h) { return setHidden(Noema.account.id, id, h); },
-    toast: toastL, getPackById: (acc, id) => getPack(acc, { id, origin: 'imported' }),
+    toast: toastL, getPackById: (acc, id) => getPack(acc, { id, origin: 'imported' }), inlineTranslations: (acc, pack) => inlineTranslations(acc, null, pack),
     /* the search (engine/search.js) indexes the language courses too: which ones this account has, and a course's content */
     langCourses: () => langCourses(KV.acc), langData: meta => langData(KV.acc, meta),
     curricula() { if (SHELL() && NoemaShell.mounted) return NoemaShell.go('#/learn'); return window.NoemaCurMap?.library(Noema.account.id); },
@@ -1697,7 +1766,9 @@
     }
     let pack;
     try { pack = await getPack(acc.id, meta); } catch (e) { if (SHELL() && NoemaShell.mounted) { document.body.classList.remove('noema-booting'); document.getElementById('noema-splash')?.remove(); NoemaShell.noEngine(errMsg(e)); return; } document.body.append(el('div', { class: 'empty' }, el('div', { class: 'e' }, '⚠️'), el('p', {}, errMsg(e)), el('button', { class: 'btn', onclick: () => Noema.switchTo(acc.id, null) }, tr('loader.chooseAnother')))); return; }
-    const own = pack.subject.language || 'en', contentLoc = packLocale(Object.keys(pack.translations || {}), own);   // docs/i18n.md §10
+    const own = pack.subject.language || 'en';
+    let contentLoc = packLocale(Object.keys(pack.translations || {}), own);   // docs/i18n.md §10
+    if (contentLoc && !(await loadTranslation(acc.id, meta, pack, contentLoc))) contentLoc = null;   // its own file could not be had: the pack's own texts
     Noema.pack = pack; Noema.subject = Object.assign({ tutor: {}, hero: {}, features: {} }, localizedSubject({ ...pack.subject, contentLocales: Object.keys(pack.translations || {}) }), subjOverride(acc.id, pack.subject.id));
     if (contentLoc) Object.assign(Noema.subject, { language: contentLoc, sourceLanguage: own });   // the content (and the tutor's replies) in the learner's language
     Noema.subjectMeta = meta;   // where it comes from (origin: library, private, shared, public…), for the subject's ⋮

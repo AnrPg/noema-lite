@@ -127,6 +127,8 @@ function vendors() {
         if (/Create the identity/.test(first)) return reply(JSON.stringify({ title: 'Transcription', emoji: '🧬', description: 'From DNA to RNA.', headline: 'Master **transcription**', mantra: 'Polymerase reads, RNA follows.', searchExamples: 'promoter, polymerase', math: false, code: false, tutor: { name: 'Pol', avatar: '🦉', domain: 'transcription', examples: 'lac operon', interviewer: 'a biologist', simulation: 'a mutant promoter', terminology: '"promoter"', examinerRole: 'examiner' } }));
         const m = first.match(/Write chapter (\d+) of (\d+) now: “([^”]+)”/);
         if (m) return reply(JSON.stringify(F.chapter(+m[1], m[3], { broken: false })));
+        const tl = first.match(/^Translate every text the learner reads in this chapter[^]*? into ([a-zA-Z-]+)\.[^]*?Return the whole chapter\.\n\n([^]*?)(?:\n\nReturn exactly one JSON object[^]*)?$/);   // 3b: the chapter in en/el/ru (same JSON, the words translated)
+        if (tl) { const ch = JSON.parse(tl[2]); A.gemTr = (A.gemTr || 0) + 1; return reply(JSON.stringify({ ...ch, title: `[${tl[1]}] ${ch.title}` })); }
         return J(res, 400, { error: { message: 'unscripted gemini call' } });
       }
       if (req.headers['x-api-key'] !== KEY) return J(res, 401, { error: { type: 'authentication_error', message: 'invalid x-api-key' } });

@@ -120,13 +120,18 @@ def local_check(kind, d, run):
             r = subprocess.run([sys.executable, find("make_pack.py"), d, td], capture_output=True, text=True)
         tail = (r.stdout + r.stderr).strip().splitlines()[-25:]
         return r.returncode == 0, tail
-    if kind == "translations":
-        s = rj(os.path.join(d, "subject.json")) or {}; own = s.get("language", "en")
-        need = [x for x in ("en", "el") if x != own]
-        have = [x for x in need if glob.glob(os.path.join(d, "translations", x, "ch*.json"))]
-        return set(have) == set(need), [f"translations needed: {', '.join(need) or 'none'}; present: {', '.join(have) or 'none'} (enforced with PR B)"]
-    if kind == "bridges":
-        r = subprocess.run([sys.executable, find("bridge.py"), "check", d], capture_output=True, text=True)
+    if kind == "translations":   # a full translation of every chapter into en, el, ru minus the pack's language (pack_rules.json "languages")
+        from noema_lib import required_locales
+        s = rj(os.path.join(d, "subject.json")) or {}; need, _b = required_locales(s.get("language", "en"))
+        chs = sorted(chapters_of(d, "chapters")); ok = bool(chs)
+        if not chs: return False, ["no chapters yet"]
+        for loc in need:
+            miss = [c for c in chs if not os.path.exists(os.path.join(d, "translations", loc, c + ".json"))]
+            ok = ok and not miss
+            L.append(f"{loc}: " + (f"missing {', '.join(miss)} (translations/{loc}/chNN.json)" if miss else f"all {len(chs)} chapters"))
+        return ok, L + ["each is checked against its chapter by make_pack.py (step checks)"]
+    if kind == "bridges":   # a bridge into en, el, ru, ar minus the pack's language, with enough of the content and everyday words
+        r = subprocess.run([sys.executable, find("bridge.py"), "require", d], capture_output=True, text=True)
         return r.returncode == 0, (r.stdout + r.stderr).strip().splitlines()[-20:]
     return False, [f"unknown local check {kind}"]
 

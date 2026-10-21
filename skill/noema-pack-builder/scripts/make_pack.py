@@ -12,7 +12,7 @@ for _s in (sys.stdout, sys.stderr):   # UTF-8 output on Windows / macOS / Linux 
     except Exception: pass
 from collections import Counter
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
-from noema_lib import load_subject, load_media, content_hash, package_sources, write_bundle, load_translations, pack_i18n
+from noema_lib import load_subject, load_media, content_hash, package_sources, write_bundle, load_translations, pack_i18n, translation_file, required_locales
 a = sys.argv[1:]
 if not a: print(__doc__); sys.exit(1)
 sdir = os.path.abspath(a[0])
@@ -81,15 +81,24 @@ counts = {'chapters': len(chapters), 'sections': sum(len(c['sections']) for c in
 meta = dict(meta); meta['owner'] = None
 pack = {'format': 'noema-pack', 'v': 1, 'subject': meta, 'sources': sources, 'chapters': chapters, 'media': media, 'counts': counts,
         'builtAt': datetime.datetime.now(datetime.timezone.utc).replace(microsecond=0).isoformat(), 'builtWith': 'noema-pack-builder skill'}
-tr = pack_i18n(pack, translations)   # pack schema v2 when the pack offers other languages
+tr = pack_i18n(pack, translations, external=True)   # pack schema v2; each translation in its own file (docs/i18n.md §10)
 pack['version'] = content_hash({'s': meta, 'src': sources, 'c': chapters, 'm': {k: v.get('sha') or v.get('url') for k, v in media.items()}, **({'t': tr} if tr else {})})
 counts['sourceFiles'] = len(files)
 jout = os.path.join(sdir, 'build', meta['id'] + '.json'); os.makedirs(os.path.dirname(jout), exist_ok=True)
 with open(jout, 'w', encoding='utf-8') as f: json.dump(pack, f, ensure_ascii=False, separators=(',', ':'))
+trfiles = {loc: translation_file(pack, loc, chs) for loc, chs in translations.items()}
+for loc, t in trfiles.items():   # build/<id>.tr.<locale>.json: what noema_finish_upload asks for, one file per language
+    with open(os.path.join(sdir, 'build', f"{meta['id']}.tr.{loc}.json"), 'w', encoding='utf-8') as f: json.dump(t, f, ensure_ascii=False, separators=(',', ':'))
 os.makedirs(out_dir, exist_ok=True)
 out = os.path.join(out_dir, meta['id'] + '.noema.zip')
-write_bundle(out, pack, files)
+write_bundle(out, pack, files, {f'translations/{loc}.json': t for loc, t in trfiles.items()})
 mb = lambda n: f'{n / 1048576:.1f} MB' if n >= 1048576 else f'{n // 1024} KB'
 print(f'\n✓ {out}  ({mb(os.path.getsize(out))}) · {counts["chapters"]} chapters · {counts["exercises"]} exercises ({counts["visual"]} visual) · {counts["media"]} pictures · {len(files)} source file(s)')
 for sid, p, rel in files: print(f'   📎 {sid}: {rel} ({mb(os.path.getsize(p))})')
 print(f'  pack alone (for the connector upload): {jout}')
+for loc in trfiles: print(f'  translation {loc}: ' + os.path.join(sdir, 'build', f"{meta['id']}.tr.{loc}.json"))
+if int((meta.get('authoring') or {}).get('rules', 0)) >= 2:   # the languages every new pack gets (pack_rules.json "languages"; pipeline steps translate + bridges)
+    want_t, want_b = required_locales(meta.get('language'))
+    have_b = {os.path.splitext(os.path.basename(x))[0] for x in __import__('glob').glob(os.path.join(sdir, 'bridges', '*.json'))} - {'core'}
+    miss_t, miss_b = [l for l in want_t if l not in translations], [l for l in want_b if l not in have_b]
+    if miss_t or miss_b: print('  still to do before the flow ends: ' + '; '.join(x for x in (miss_t and 'translations ' + ', '.join(miss_t) + ' (translations/<locale>/chNN.json)', miss_b and '文A bridges ' + ', '.join(miss_b) + ' (bridges/<native>.json, tools/bridge.py)') if x))

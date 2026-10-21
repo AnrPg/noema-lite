@@ -109,8 +109,9 @@ its glosses sit under the words in the same way. A learner whose native language
 
 ### 2.3 The built file (what the app reads)
 `tools/bridge.py build` merges the core and one native into `{ "format": "noema-bridge", "v": 1, pack, source, native,
-status, coverage, chapters, of, entries[{k, pos, forms, band, key, senses[{id, t, gloss, note, st}]}],
+status, coverage, everyday, chapters, of, entries[{k, pos, forms, band, key, senses[{id, t, gloss, note, st}]}],
 sections{sid: {terms, preview}}, anchors }`. `coverage` = share of the pack's content words an entry or `keep` covers;
+`everyday` = the same for the everyday words (entries of band 1 or without a band, and every word no entry covers yet);
 `chapters` = the chapters covered ≥ 95 %. The library build (`tools/build.py`) writes it as
 `library/subjects/<id>/bridge.<native>.js` and records `bridgeLocales` in the registry (path, status, coverage,
 chapters, previews, entries) — that is where the badge comes from, without loading any bridge.
@@ -136,7 +137,8 @@ python3 tools/bridge.py todo SUBJ --chapters ch01      # content words no entry 
 # write bridges/core.json (entries, senses as used here, keep, key words per section, anchors where a word has 2 senses)
 # write bridges/<native>.json (a translation per sense, natural for a student; a preview per section)
 python3 tools/bridge.py check SUBJ                     # 0 errors: function words, unknown sections, orphan anchors, missing / stale translations
-python3 tools/bridge.py coverage SUBJ --native ru      # per chapter
+python3 tools/bridge.py coverage SUBJ --native ru      # per chapter, all and everyday words
+python3 tools/bridge.py require SUBJ                   # check + a bridge into every language a new pack needs, enough coverage
 python3 tools/bridge.py senses SUBJ --word order        # a word with two senses: every place and the sense it gets there
 # add cues to its senses (core.json), then
 python3 tools/bridge.py anchor SUBJ                     # anchors from the cues (a person's anchors are kept and win)
@@ -152,6 +154,11 @@ the student's own lectures would use, then a plain explanation in brackets when 
 (*снимок (состояние на момент версии)*). Names, product names and code stay as they are (`keep`). A preview tells what
 the section is about in 2–4 sentences; it never replaces the section. Work chapter by chapter, most important first:
 a chapter is useful when it is complete.
+
+**Every new pack needs them** (docs/PIPELINES.md §4b, `tools/pack_rules.json` "languages"): a bridge into each of
+English, Greek, Russian and Arabic that is not the pack's language, covering ≥ 90 % of the content words and ≥ 80 % of the
+everyday ones — learners may be at A2/B1, so the everyday words of the explanations count, not only the field's terms.
+`bridge.py require` is the flow's `bridges` step; `noema_save_bridge` says when a saved bridge is below the minimum.
 
 ## 5. Phases
 1. **Done (PR #29)** — the core (matching, the card, glosses, levels, fading, the badge, "Before you read"), import, the tool,

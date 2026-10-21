@@ -87,14 +87,35 @@ try:
     rv["rubric"] = [{"lr": f"ch01-l{i + 1:02d}", "ok": True} for i in range(15)]; json.dump(rv, open(os.path.join(d, "review", "ch01.json"), "w"))
     ok(P("check", d, "review").returncode == 0, "review: rubric on 15 learnables")
     ok(P("done", d, "pictures", "--note", "no picture teaches here; none kept").returncode == 0, "pictures: a judgement, recorded with a note")
+    # the languages every new pack gets (pack_rules.json "languages"): an English pack → translations el, ru; bridges el, ru, ar
+    r = P("check", d, "translate"); ok(r.returncode == 1 and "el: missing ch01" in r.stdout and "ru: missing ch01" in r.stdout and "en:" not in r.stdout, "translate: an English pack needs el and ru (never its own language)")
+    for loc in ("el", "ru"):
+        os.makedirs(os.path.join(d, "translations", loc), exist_ok=True); json.dump(ch, open(os.path.join(d, "translations", loc, "ch01.json"), "w"))
+    ok(P("check", d, "translate").returncode == 0, "translate: every chapter in el and ru")
+    r = P("check", d, "bridges"); ok(r.returncode == 1 and "no bridges/core.json" in r.stdout, "bridges: none yet → fails")
+    sys.path.insert(0, sk); import bridge as BR
+    pk0 = {"subject": sj, "chapters": [ch]}
+    words = BR.todo(pk0, [], (), None, 5000)
+    core = {"format": "noema-bridge-core", "v": 1, "pack": "demo-coulomb", "source": "en", "entries": [{"k": w["word"], "band": 1, "senses": [{"id": "1", "gloss": "g"}]} for w in words]}
+    os.makedirs(os.path.join(d, "bridges"), exist_ok=True); json.dump(core, open(os.path.join(d, "bridges", "core.json"), "w"))
+    loc = lambda nat, part=1.0: {"format": "noema-bridge-locale", "v": 1, "native": nat, "status": "draft", "t": {f"{w['word']}#1": {"t": "x"} for w in words[:max(1, int(len(words) * part))]}}
+    for nat in ("el", "ru"): json.dump(loc(nat), open(os.path.join(d, "bridges", nat + ".json"), "w"))
+    r = P("check", d, "bridges"); ok(r.returncode == 1 and "no bridge into ar" in r.stdout, "bridges: el and ru are not enough — ar too")
+    json.dump(loc("ar", 0.5), open(os.path.join(d, "bridges", "ar.json"), "w"))
+    r = P("check", d, "bridges"); ok(r.returncode == 1 and "ar: covers" in r.stdout and "everyday words" in r.stdout, "bridges: a bridge with half the words is below the minimum (all and everyday words)")
+    json.dump(loc("ar"), open(os.path.join(d, "bridges", "ar.json"), "w"))
+    r = P("check", d, "bridges"); ok(r.returncode == 0, "bridges: el, ru, ar, each covering the content and the everyday words" + ("" if r.returncode == 0 else "\n" + r.stdout))
     r = P("check", d, "checks"); ok(r.returncode == 0 and "✓" in r.stdout, "checks: make_pack.py builds the pack with every quality rule" + ("" if r.returncode == 0 else "\n" + r.stdout))
     pk = json.load(open(os.path.join(d, "build", "demo-coulomb.json"), encoding="utf-8"))
     ok(pk["chapters"][0]["map"]["format"] == "noema.map/v1" and pk["chapters"][0]["review"]["blind"]["solved"] == 40, "the pack carries chapter.map (Info window) and chapter.review")
+    t_el = json.load(open(os.path.join(d, "build", "demo-coulomb.tr.el.json"), encoding="utf-8"))
+    ok(pk["translations"] == {"el": {"file": True, "chapters": 1}, "ru": {"file": True, "chapters": 1}} and t_el["format"] == "noema-translation" and t_el["version"] == pk["version"] and t_el["chapters"][0]["id"] == "ch01",
+       "make_pack.py: each translation in its own file (build/<id>.tr.<locale>.json), the pack only names them")
     ex = json.load(open(os.path.join(d, "chapters", "ch01.json"))); ex["exercises"][4]["q"] = "As in Q14 of the source, what happens?"; json.dump(ex, open(os.path.join(d, "chapters", "ch01.json"), "w"))
     st = P("status", d).stdout
     ok("write          stale" in st and "checks         stale" in st and "map            done" in st, "a change to the chapter makes write and every later step stale, not the map")
     r = P("check", d, "checks"); ok(r.returncode == 1 and r.stdout.startswith("first: review"), "checks: refused while an earlier step is stale")
-    ok(P("check", d, "write").returncode == 0 and P("check", d, "blind_solve").returncode == 0 and P("check", d, "review").returncode == 0, "write, blind_solve, review: checked again")
+    ok(all(P("check", d, x).returncode == 0 for x in ("write", "blind_solve", "review", "translate", "bridges")), "write, blind_solve, review, translate, bridges: checked again")
     r = P("check", d, "checks"); ok(r.returncode == 1 and "[self.contained]" in r.stdout, "checks: make_pack.py refuses the pointer to the source (self.contained)")
     ok(P("next", d).stdout.startswith("next: checks"), "next: the first step that is not done")
 finally:
