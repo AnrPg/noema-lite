@@ -92,6 +92,37 @@ async function indexSourceFiles(token, uid, sid, srcs, known = new Map()) {
   for (const x of srcs) { const name = x.fileName || String(x.file).split('/').pop(); const ref = known.get(x.sha256); ix[x.id] = { name: extOf(name) === extOf(x.file) ? name : name + '.' + extOf(x.file), type: x.mime || '', size: x.size, sha256: x.sha256, added: now, cloud: true, via: 'claude', ...(ref ? { ref } : chunksOf(x) ? { chunks: chunksOf(x) } : {}) }; }
   await sb('/rest/v1/noema_kv?on_conflict=user_id,key', token, { method: 'POST', body: [{ user_id: uid, key, value: JSON.stringify(ix), updated_at: now }], headers: { Prefer: 'resolution=merge-duplicates,return=minimal' } });
 }
+/* ---------- translations in their own files (docs/i18n.md §10): packs/<id>.tr.<locale>.json beside the pack ---------- */
+const PC = () => globalThis.NoemaPackCheck;
+const trPath = (uid, sid, loc) => `${uid}/packs/${sid}.tr.${loc}.json`;
+const trNamed = p => Object.entries(p?.translations || {}).filter(([, t]) => t && t.file === true).map(([loc]) => loc);
+async function signUrl(token, path) { const r = await sb(`/storage/v1/object/upload/sign/noema-private/${path}`, token, { method: 'POST', headers: { 'x-upsert': 'true' } }); return `${CFG.supabaseUrl.replace(/\/$/, '')}/storage/v1${r.url}`; }
+const trCurl = async (token, uid, sid, loc) => `# translation ${loc}\ncurl -sS -X PUT -H "Content-Type: application/json" -H "x-upsert: true" -H "apikey: ${CFG.supabaseKey}" --data-binary @work/${sid}/build/${sid}.tr.${loc}.json "${await signUrl(token, trPath(uid, sid, loc))}"`;
+/** Every translation the pack names is in the account and matches it → { missing: [loc], bad: ["loc: errors"] } */
+async function translationStatus(token, uid, sid, p) {
+  const out = { missing: [], bad: [] };
+  for (const loc of trNamed(p)) {
+    const f = await storageJSON(token, trPath(uid, sid, loc));
+    if (!f) { out.missing.push(loc); continue; }
+    const r = PC().checkTranslation(f, p); if (r.errors.length) out.bad.push(`${loc}: ${r.errors.slice(0, 6).join('; ')}`);
+  }
+  return out;
+}
+/** The pack with its translations inline (a shared copy stands alone). */
+async function withTranslations(token, uid, sid, p) {
+  const locs = trNamed(p); if (!locs.length) return p;
+  const q = { ...p, translations: { ...p.translations } };
+  for (const loc of locs) { const f = await storageJSON(token, trPath(uid, sid, loc)); if (f?.chapters) q.translations[loc] = { chapters: f.chapters }; else delete q.translations[loc]; }
+  return q;
+}
+/** What a new pack (subject.authoring.rules >= 2) still needs at the end of its flow: translations and 文A bridges (pack_rules.json "languages"). */
+async function languagesTodo(token, p) {
+  if (!(Number(p?.subject?.authoring?.rules) >= 2)) return '';
+  const want = PC().requiredLocales(p.subject.language || 'en'), have = Object.keys(p.translations || {}).map(x => x.split('-')[0].toLowerCase());
+  const br = Object.keys((await kvGet(token, 'a:bridges', {}))[p.subject.id] || {});
+  const mt = want.translations.filter(l => !have.includes(l)), mb = want.bridges.filter(l => !br.includes(l));
+  return mt.length || mb.length ? `\n🌐 Still to do before this subject's flow ends (every new pack gets them, docs/PIPELINES.md §4b):${mt.length ? ` full translations into ${mt.join(', ')} (translations/<locale>/chNN.json → make_pack.py → noema_finish_upload again, or noema_save_translation)` : ''}${mt.length && mb.length ? ';' : ''}${mb.length ? ` 文A bridges into ${mb.join(', ')} (tools/bridge.py → noema_save_bridge)` : ''}.` : `\n🌐 Translations (${want.translations.join(', ') || '—'}) and 文A bridges (${want.bridges.join(', ')}) are all there.`;
+}
 /** 👥 A step of a shared curriculum is saved → the other participants get it (the pack now; its source files follow when
     the learner's app opens — it publishes them with the step). Somebody else's version that came first stays the shared one. */
 async function publishStep(token, uid, step, p, files) {
@@ -120,19 +151,24 @@ async function complete(token, uid, sid, p, res, fail, text, user = null, attach
     }
     await indexSourceFiles(token, uid, sid, need, known);
   }
+  const ts = await translationStatus(token, uid, sid, p);
+  if (ts.bad.length) return fail(`The pack is valid, but ${ts.bad.length} of its translations do not match it — fix them (same ids, sections, answers and code as the pack), rebuild with make_pack.py and upload them again:\n- ${ts.bad.join('\n- ')}`);
+  if (ts.missing.length) return fail(`The pack is valid, but ${ts.missing.length} of its translations are not in the account yet: ${ts.missing.join(', ')}. The subject is NOT saved yet. Upload them — run in your sandbox, from the folder that contains work/ (make_pack.py wrote them to work/${sid}/build/):\n\n` +
+    (await Promise.all(ts.missing.map(loc => trCurl(token, uid, sid, loc)))).join('\n\n') + `\n\nThen call noema_finish_upload with subject_id "${sid}" again.`);
   await register(token, uid, p, res.counts, step ? { curriculum: step.c.id, node: step.nid, curTitle: step.c.title } : {});
   let more = '';
   if (step) {
     await kvPut(token, uid, CJ().inboxKey(step.c.id), { v: 1, kind: 'step', nid: step.nid, packId: sid, version: p.version || null, at: new Date().toISOString(), via: 'claude-app' });
     await releaseStep(token, step.c.id, step.nid).catch(() => { });   // saved: its claim ends (the inbox entry + the subject keep it out of the queue)
-    if (sharedOn(step.c)) more += await publishStep(token, uid, step, p, need.length);
+    if (sharedOn(step.c)) more += await publishStep(token, uid, step, await withTranslations(token, uid, sid, p), need.length);
     const left = CJ().work(await curState(token, step.c, uid)).steps.length;
     more += `\n🧭 This is the step “${step.c.nodes[step.nid].title}” of the curriculum “${step.c.title}”: it appears ready on the learner's map by itself (the app picks it up when it is open or next opened).` + (left ? `\n${left} more step(s) are queued — call noema_curriculum_task with curriculum_id "${step.c.id}" for the next one, if the learner asked for more.` : '');
   } else if (attach.step) {
     const a = await attachToStep(token, uid, sid, p, attach.curriculum_id, attach.step).catch(e => ({ error: e.message }));
     more += a.error ? `\n⚠️ Saved, but not attached to a step: ${a.error}\n📚 Until then it is on the learner's Shelf.` : '\n' + a.line;
   } else more += `\n📚 It is not on a step of any of the learner's curricula, so it is on their 📚 Shelf (study it from there, or “Put on a map…”). To attach it to a step of a curriculum, call this tool again with curriculum_id and step.`;
-  return text(summary(p, res) + (need.length ? `\n📎 ${need.length} source file(s) attached — the learner opens them with 👁 in 📚 Sources, at the cited pages.` : '') + more);
+  more += await languagesTodo(token, p).catch(() => '');
+  return text(summary(p, res) + (need.length ? `\n📎 ${need.length} source file(s) attached — the learner opens them with 👁 in 📚 Sources, at the cited pages.` : '') + (trNamed(p).length ? `\n🌐 Translations: ${trNamed(p).join(', ')}.` : '') + more);
 }
 
 /* ---------- curricula (the app's own code: engine/curriculum.js + engine/curjobs.js) ---------- */
@@ -379,6 +415,8 @@ const TOOLS = [
     inputSchema: { type: 'object', properties: { subject_id: { type: 'string', description: 'Optional: only this pack' } } }, annotations: { readOnlyHint: true } },
   { name: 'noema_save_bridge', description: 'Save one built language bridge (format "noema-bridge", made by tools/bridge.py build, ≤ 1.5 MB) to the learner\'s account, for one of their own packs or a library pack. It is checked exactly as the app checks it (against the pack: its id, its language, plain text only, no function words); problems come back as a list. On success every device of the learner shows the 文A help for that pack and native language.',
     inputSchema: { type: 'object', properties: { bridge_json: { type: 'string', description: 'The whole bridge file as JSON text' } }, required: ['bridge_json'] } },
+  { name: 'noema_save_translation', description: 'Save one full translation of a subject (format "noema-translation": the chapters in one language, same ids, sections, answers and code as the pack; make_pack.py writes work/<id>/build/<id>.tr.<locale>.json) to the learner\'s account, beside their pack. Every new pack gets full translations into English, Greek and Russian (minus its own language, docs/PIPELINES.md §4b). Small files: pass translation_json; bigger ones: call with subject_id + locale only to get an upload URL, upload, then call again with the same subject_id + locale. It is checked against the pack exactly as the app checks it; the pack then names the language and every device shows the subject in it.',
+    inputSchema: { type: 'object', properties: { subject_id: { type: 'string', description: 'The subject (pack.subject.id) — one of the learner\'s own packs' }, locale: { type: 'string', description: 'The language of the translation (e.g. el, ru, en)' }, translation_json: { type: 'string', description: 'Optional: the whole translation file as JSON text (≤ 1.5 MB)' } }, required: ['subject_id', 'locale'] } },
   { name: 'noema_image_search', description: 'Search pictures for a pack on the whole web and in open collections at once: Bing Images and DuckDuckGo Images (any site — what a Google image search shows too), Wikimedia Commons, Openverse, NASA, iNaturalist, Wellcome Collection, Art Institute of Chicago. Returns candidates (image url, page, size, licence, credit). The packs are for the learner\'s personal study: any licence is fine, the source is recorded. Look at the best ones with noema_image_fetch.',
     inputSchema: { type: 'object', properties: { query: { type: 'string', description: 'What the picture shows, usually in English (e.g. "DNA replication fork diagram labeled")' }, n: { type: 'integer', description: 'How many (default 12, max 30)' }, sources: { type: 'array', items: { type: 'string', enum: ['bing', 'duckduckgo', 'commons', 'openverse', 'nasa', 'inaturalist', 'wellcome', 'artic'] }, description: 'Only these (default: bing, commons, openverse, duckduckgo)' } }, required: ['query'] }, annotations: { readOnlyHint: true } },
   { name: 'noema_image_fetch', description: 'Get one picture from the web — an image url, OR a page: Wikimedia / Wikipedia file pages (any language, “#/media/File:…”) and any other page are resolved to their picture. Shows you the picture and returns its file url, size (W×H pixels for regions) and a ready media.json entry ("fetch": "app": the noema-lite app downloads and embeds it). Use it when your sandbox cannot download the picture itself (no network to that site) — or simply to look at a candidate.',
@@ -414,7 +452,7 @@ const PROMPTS = [{
   name: 'create_subject', title: 'Create a noema-lite subject', description: 'Turn the files attached to this chat into a noema-lite subject pack and save it to your account.',
   arguments: [{ name: 'title', description: 'Subject title, e.g. Human heart anatomy', required: true }, { name: 'language', description: 'Language of the material (en, el, …)', required: false }, { name: 'goal', description: 'exam / understanding / project', required: false }],
   text: a => `Create a noema-lite subject pack from the sources attached to this chat${a.title ? ` — title: "${a.title}"` : ''}${a.language ? `, language: ${a.language}` : ''}${a.goal ? `, goal: ${a.goal}` : ''}.\n` +
-    `Call noema_pipeline first (action detect) and follow its steps in order. Use the noema-pack-builder skill if you have it; otherwise call noema_get_toolkit and noema_authoring_guide first. Cover every detail of the sources and follow the quality rules Q1–Q8 (knowledge map per chapter first; self-contained exercises that never point to "Q2", pages or "the source"; every question in the sources answered and checked; difficulty about 20/25/55 %; blind solve and review at the end), include all three kinds of pictures (from the sources, from the web, drawn diagrams / function graphs) with several picture exercises each, put every attached file in the package (if you split a PDF: its parts, each its own source, never the unsplit original too), validate with make_pack.py, and save the pack AND its source files to my noema-lite account with the noema-lite tools (noema_finish_upload asks for the files). Do not ask me questions unless something essential is missing — choose sensible defaults.`,
+    `Call noema_pipeline first (action detect) and follow its steps in order. Use the noema-pack-builder skill if you have it; otherwise call noema_get_toolkit and noema_authoring_guide first. Cover every detail of the sources and follow the quality rules Q1–Q8 (knowledge map per chapter first; self-contained exercises that never point to "Q2", pages or "the source"; every question in the sources answered and checked; difficulty about 20/25/55 %; blind solve and review at the end), include all three kinds of pictures (from the sources, from the web, drawn diagrams / function graphs) with several picture exercises each, put every attached file in the package (if you split a PDF: its parts, each its own source, never the unsplit original too), translate every chapter into English, Greek and Russian (those that are not the material's language) and make 文A bridges into English, Greek, Russian and Arabic, everyday words included, validate with make_pack.py, and save the pack AND its source files and translations to my noema-lite account with the noema-lite tools (noema_finish_upload asks for the files; noema_save_bridge for each bridge). Do not ask me questions unless something essential is missing — choose sensible defaults.`,
 }, {
   name: 'language_help', title: 'Language help for a noema-lite subject', description: 'Make 文A language help for a subject the learner studies in a language that is not their own: the subject\'s words, in the meaning they have in it, in the learner\'s language — with your Claude plan.',
   arguments: [{ name: 'subject', description: 'The subject (its name or id)', required: true }, { name: 'native', description: 'The learner\'s own language (en, el, ru, ar, …)', required: true }, { name: 'chapters', description: 'Which chapters (default: all, the first ones first)', required: false }],
@@ -435,7 +473,7 @@ const PROMPTS = [{
 
 /* ---------- 文A language bridges (docs/BRIDGE.md): <uid>/bridges/<pack>.<native>.json + the index a:bridges, as the app's engine/bridge.js keeps them ---------- */
 const hash36 = s => { let h1 = 0x811c9dc5, h2 = 0; s = String(s); for (let i = 0; i < s.length; i++) { const c = s.charCodeAt(i); h1 = Math.imul(h1 ^ c, 16777619) >>> 0; h2 = (h2 * 31 + c) >>> 0; } return (h1.toString(36) + h2.toString(36)).slice(0, 10); };   // = engine/catalog.js hash36
-const bridgeSummary = b => ({ v: hash36(JSON.stringify(b.entries || []) + JSON.stringify(b.sections || {}) + JSON.stringify(b.anchors || [])), status: b.status, coverage: typeof b.coverage === 'number' ? b.coverage : null,
+const bridgeSummary = b => ({ v: hash36(JSON.stringify(b.entries || []) + JSON.stringify(b.sections || {}) + JSON.stringify(b.anchors || [])), status: b.status, coverage: typeof b.coverage === 'number' ? b.coverage : null, everyday: typeof b.everyday === 'number' ? b.everyday : null,
   chapters: (b.chapters || []).length || null, of: b.of || null, previews: Object.values(b.sections || {}).filter(x => x?.preview).length, entries: (b.entries || []).length, at: Date.now(), via: 'claude' });   // = engine/bridge.js summary()
 const kvGet = async (token, key, d) => { const r = await sb(`/rest/v1/noema_kv?select=value&key=eq.${encodeURIComponent(key)}`, token).catch(() => []); try { return JSON.parse(r?.[0]?.value ?? 'null') ?? d; } catch (e) { return d; } };
 async function packFor(token, uid, id) {
@@ -539,6 +577,29 @@ async function callTool(name, args, ctx) {
       const lib = (CFG.library || []).filter(m => m.bridgeLocales && (!sid || m.id === sid)).map(m => `- ${m.id} (library) → ${Object.entries(m.bridgeLocales).map(([n, x]) => `${n} ${Math.round((x.coverage || 0) * 100)}% ${x.status}`).join(', ')}`);
       return text(`${DOCS.bridge || 'docs/BRIDGE.md is missing in this build.'}\n\n---\n\nThis account's bridges:\n${mine.join('\n') || '(none yet)'}\n\nLibrary bridges:\n${lib.join('\n') || '(none)'}\n\nMistakes learners reported (${reps.length}):\n${reps.slice(-40).map(r => `- ${r.pack} → ${r.native} · ${r.k}#${r.sense} (“${r.form}” in ${r.sid}): ${r.note || '(no note)'}`).join('\n') || '(none)'}`);
     }
+    case 'noema_save_translation': {
+      const loc = String(args?.locale || '').trim();
+      if (!ID_RE.test(sid)) return fail('subject_id: the pack\'s id (lowercase letters, digits, hyphens)');
+      if (!/^[a-z]{2,3}(-[A-Z][a-z]{3})?(-(?:[A-Z]{2}|\d{3}))?$/.test(loc)) return fail('locale: a language code such as el, ru, en, pt-PT');
+      const p = await storageJSON(token, `${uid}/packs/${sid}.json`); if (!p) return fail(`No pack "${sid}" in this account (noema_list_subjects). Save the pack first (noema_finish_upload).`);
+      let f, raw = String(args?.translation_json || '');
+      if (raw) {
+        if (raw.length > MAX_INLINE) return fail(`Too big for inline saving (${Math.round(raw.length / 1024)} KB): call noema_save_translation with subject_id and locale only, for an upload URL.`);
+        try { f = JSON.parse(raw); } catch (e) { return fail('translation_json is not valid JSON: ' + e.message); }
+      } else {
+        f = await storageJSON(token, trPath(uid, sid, loc));
+        if (!f) return text(`Upload the translation — run in your sandbox (URL valid 2 h):\n\n${await trCurl(token, uid, sid, loc)}\n\nThen call noema_save_translation with subject_id "${sid}" and locale "${loc}" again.`);
+      }
+      if (f.locale !== loc) return fail(`The file says locale "${f.locale}", you asked for "${loc}".`);
+      const r = PC().checkTranslation(f, p);
+      if (r.errors.length) return fail(`${r.errors.length} error(s):\n- ${r.errors.slice(0, 40).join('\n- ')}`);
+      if (raw) await sb(`/storage/v1/object/noema-private/${trPath(uid, sid, loc)}`, token, { method: 'POST', body: raw, headers: { 'content-type': 'application/json', 'x-upsert': 'true' } });
+      const q = { ...p, v: 2, translations: { ...(p.translations || {}), [loc]: { file: true, chapters: f.chapters.length } } };
+      await sb(`/storage/v1/object/${base}${sid}.json`, token, { method: 'POST', body: JSON.stringify(q), headers: { 'content-type': 'application/json', 'x-upsert': 'true' } });
+      const pm = await kvGet(token, 'a:packmeta:' + sid, null);
+      if (pm) await kvPut(token, uid, 'a:packmeta:' + sid, { ...pm, contentLocales: Object.keys(q.translations), updatedAt: new Date().toISOString() });
+      return text(`✅ Saved: “${p.subject.title}” in ${loc} — ${f.chapters.length} of ${(p.chapters || []).length} chapters.${r.warnings.length ? `\n${r.warnings.length} warning(s):\n- ${r.warnings.slice(0, 20).join('\n- ')}` : ''}\nThe learner sees the subject in this language when their app is in it.` + await languagesTodo(token, q).catch(() => ''));
+    }
     case 'noema_save_bridge': {
       const raw = String(args?.bridge_json || '');
       if (raw.length > MAX_INLINE) return fail(`Too big (${Math.round(raw.length / 1024)} KB > 1.5 MB): build it per native language, and keep notes short.`);
@@ -552,7 +613,8 @@ async function callTool(name, args, ctx) {
       await sb(`/storage/v1/object/noema-private/${uid}/bridges/${b.pack}.${nat}.json`, token, { method: 'POST', body: raw, headers: { 'content-type': 'application/json', 'x-upsert': 'true' } });
       const ix = await kvGet(token, 'a:bridges', {}); ix[b.pack] = { ...(ix[b.pack] || {}), [nat]: bridgeSummary(b) }; await kvPut(token, uid, 'a:bridges', ix);
       const c = res.counts || {};
-      return text(`✅ Saved: 文A ${b.pack} → ${nat} (${b.status}) — ${(b.entries || []).length} words${typeof b.coverage === 'number' ? `, ${Math.round(b.coverage * 100)}% of the content words` : ''}${c.anchors ? `, ${c.anchors} anchors` : ''}.${res.warnings.length ? `\n${res.warnings.length} warning(s):\n- ${res.warnings.slice(0, 20).join('\n- ')}` : ''}\nThe learner sees it on the pack's sections after the next sync (reload the app).`);
+      const mins = PC().LANGS.bridgeCoverage || {}, low = [typeof b.coverage === 'number' && b.coverage < mins.all ? `the content words ${Math.round(b.coverage * 100)}% < ${Math.round(mins.all * 100)}%` : '', typeof b.everyday === 'number' && b.everyday < mins.everyday ? `the everyday words ${Math.round(b.everyday * 100)}% < ${Math.round(mins.everyday * 100)}%` : ''].filter(Boolean);
+      return text(`✅ Saved: 文A ${b.pack} → ${nat} (${b.status}) — ${(b.entries || []).length} words${typeof b.coverage === 'number' ? `, ${Math.round(b.coverage * 100)}% of the content words` : ''}${typeof b.everyday === 'number' ? `, ${Math.round(b.everyday * 100)}% of the everyday ones` : ''}${low.length ? ` ⚠️ below the minimum for a new pack (${low.join('; ')}): add the words bridge.py todo lists, build and save again` : ''}${c.anchors ? `, ${c.anchors} anchors` : ''}.${res.warnings.length ? `\n${res.warnings.length} warning(s):\n- ${res.warnings.slice(0, 20).join('\n- ')}` : ''}\nThe learner sees it on the pack's sections after the next sync (reload the app).`);
     }
     case 'noema_image_search': {
       const q = String(args?.query || '').trim(); if (!q) return fail('query is empty');
@@ -722,7 +784,7 @@ async function handle(m, ctx) {
       case 'initialize': {
         const want = m.params?.protocolVersion;
         return ok({ protocolVersion: PROTOCOLS.includes(want) ? want : PROTOCOLS[0], capabilities: { tools: { listChanged: false }, prompts: { listChanged: false } }, serverInfo: { name: 'noema-lite', title: 'noema-lite study packs', version: VERSION },
-          instructions: 'noema-lite turns study sources into interactive subject packs. A pile of material that is several topics building on each other (or more than one subject can hold) becomes a Roadmap instead: noema_create_roadmap, then noema_curriculum_task. For any content work call noema_pipeline first (action detect): it names the flow and its steps in order, each with its check. Before building a pack, use the noema-pack-builder skill if it is installed; otherwise call noema_get_toolkit (scripts) and noema_authoring_guide (the contract). Every chapter follows the quality rules Q1–Q8 of the contract: an exhaustive knowledge map first (map/chNN.json), self-contained exercises (never "Q2", pages or "the source" in the text; the origin goes in "cite"), every source question answered and checked, then a blind solve and review (review/chNN.json). Save finished packs with noema_start_upload → curl → noema_finish_upload (or noema_save_pack for small ones); noema_finish_upload then asks for the source files packaged with the pack (the PDFs exactly as split) — upload them with the commands it returns and call it again. Pictures: search the whole web with noema_image_search (Bing / DuckDuckGo Images + open collections; any licence is fine for the learner\'s personal study, record the source) and look at / get one with noema_image_fetch (pages and Wikimedia file pages are resolved to the picture). Curricula (maps of steps): noema_curricula shows what is waiting; noema_curriculum_task gives the next task as complete instructions (answer map / plan tasks with noema_curriculum_submit; build a step as a pack with the given subject_id and save it as usual) — call it again after each accepted answer or saved step. Language courses: noema_lang_courses → noema_lang_task → noema_lang_submit (check every answer with the toolkit first); every language is taught through the learner\'s native language (D19): neutral texts, contrast notes for every supported native and type. A whole new language for a course ("add Persian to my course"): noema_language_package_guide gives the complete instructions; save the package with noema_lang_package_start → curl → noema_lang_package_finish.' });
+          instructions: 'noema-lite turns study sources into interactive subject packs. A pile of material that is several topics building on each other (or more than one subject can hold) becomes a Roadmap instead: noema_create_roadmap, then noema_curriculum_task. For any content work call noema_pipeline first (action detect): it names the flow and its steps in order, each with its check. Before building a pack, use the noema-pack-builder skill if it is installed; otherwise call noema_get_toolkit (scripts) and noema_authoring_guide (the contract). Every chapter follows the quality rules Q1–Q8 of the contract: an exhaustive knowledge map first (map/chNN.json), self-contained exercises (never "Q2", pages or "the source" in the text; the origin goes in "cite"), every source question answered and checked, then a blind solve and review (review/chNN.json). Every new pack also gets full translations into English, Greek and Russian (those that are not its own language) and 文A bridges into English, Greek, Russian and Arabic with the everyday words too. Save finished packs with noema_start_upload → curl → noema_finish_upload (or noema_save_pack for small ones); noema_finish_upload then asks for the source files packaged with the pack (the PDFs exactly as split) and its translation files — upload them with the commands it returns and call it again; noema_save_translation adds a translation later, noema_save_bridge each bridge. Pictures: search the whole web with noema_image_search (Bing / DuckDuckGo Images + open collections; any licence is fine for the learner\'s personal study, record the source) and look at / get one with noema_image_fetch (pages and Wikimedia file pages are resolved to the picture). Curricula (maps of steps): noema_curricula shows what is waiting; noema_curriculum_task gives the next task as complete instructions (answer map / plan tasks with noema_curriculum_submit; build a step as a pack with the given subject_id and save it as usual) — call it again after each accepted answer or saved step. Language courses: noema_lang_courses → noema_lang_task → noema_lang_submit (check every answer with the toolkit first); every language is taught through the learner\'s native language (D19): neutral texts, contrast notes for every supported native and type. A whole new language for a course ("add Persian to my course"): noema_language_package_guide gives the complete instructions; save the package with noema_lang_package_start → curl → noema_lang_package_finish.' });
       }
       case 'notifications/initialized': case 'notifications/cancelled': return null;
       case 'ping': return ok({});

@@ -99,6 +99,13 @@ window.NoemaSrcFiles = (() => {
     let pack; try { pack = JSON.parse(await pj.async('string')); } catch (e) { throw coded('pack.json inside the package is not valid: ' + e.message, 'files.bad_pack_json', { detail: e.message }); }
     /* i18n-ignore-end */
     const root = pj.name.replace(/pack\.json$/, '');
+    for (const [loc, t] of Object.entries(pack.translations || {})) {   // a translation in its own file travels as translations/<locale>.json (docs/i18n.md §10)
+      if (Array.isArray(t?.chapters)) continue;
+      const f = z.file(root + 'translations/' + loc + '.json'); let x = null;
+      try { x = f ? JSON.parse(await f.async('string')) : null; } catch (e) { }
+      if (Array.isArray(x?.chapters)) pack.translations[loc] = { chapters: x.chapters }; else delete pack.translations[loc];
+    }
+    if (pack.translations && !Object.keys(pack.translations).length) delete pack.translations;
     return { pack, file: async path => { const f = z.file(root + path); return f ? f.async('blob') : null; } };
   }
   /** Attach the packaged files of a pack (from a package, or from Claude's outputs) to its sources — each checked

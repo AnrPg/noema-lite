@@ -1,6 +1,6 @@
 {
  "format": "noema.packrules/v1",
- "about": "The rules every new subject pack meets, per chapter. ONE file, read by tools/validate.py + tools/pack_quality.py (skill make_pack.py, tools/build.py) and copied into engine/packcheck.js RULES / QUALITY (app, Gemini generator, connector); tests/pack_rules.js checks the copies agree and that both checkers give the same issues. 'rules': the quantity rules of packs with subject.authoring.minPerKind (Gemini generator). 'quality': the full rules of packs with subject.authoring.rules >= 2 (docs/PIPELINES.md §4, tools/CONTENT_SPEC.md).",
+ "about": "The rules every new subject pack meets, per chapter. ONE file, read by tools/validate.py + tools/pack_quality.py (skill make_pack.py, tools/build.py) and copied into engine/packcheck.js RULES / QUALITY (app, Gemini generator, connector); tests/pack_rules.js checks the copies agree and that both checkers give the same issues. 'rules': the quantity rules of packs with subject.authoring.minPerKind (Gemini generator). 'quality': the full rules of packs with subject.authoring.rules >= 2 (docs/PIPELINES.md §4, tools/CONTENT_SPEC.md). \"languages\": the translations and bridges every new pack gets (docs/PIPELINES.md §4b).",
  "rules": [
   {
    "id": "balance.type",
@@ -341,5 +341,25 @@
    "Counts are never checked: about 2 versions per learnable is the core set; there is no upper limit (docs/PIPELINES.md §4, a mild suggestion only)."
   ],
   "since": "2026-10-22T00:00:00Z"
+ },
+ "languages": {
+  "version": 1,
+  "translations": [
+   "en",
+   "el",
+   "ru"
+  ],
+  "bridges": [
+   "en",
+   "el",
+   "ru",
+   "ar"
+  ],
+  "bridgeCoverage": {
+   "everyday": 0.8,
+   "all": 0.9
+  },
+  "since": "2026-10-22T00:00:00Z",
+  "what": "Every pack with subject.authoring.rules >= 2 ends its flow with a full translation into each of 'translations' and a 文A bridge into each of 'bridges', always minus the pack's own language (user rule 2026-10-21). A translation is its own file (noema-translation, <id>.tr.<locale>.json; docs/i18n.md §10) with the pack's ids, structure and answers. A bridge covers >= bridgeCoverage.all of the content words of the theory and >= bridgeCoverage.everyday of the everyday ones (band 1, and every word no entry covers yet). Checked at the end of the flow (tools/pipeline.py steps translate and bridges; noema_finish_upload lists what is missing), never on the first upload."
  }
 }

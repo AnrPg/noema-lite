@@ -32,18 +32,18 @@ python3 scripts/pipeline.py status work/demo                # every step: todo /
 - When a file a done step produced changes, that step **and every step after it** becomes `stale` and is checked again
   (a change to a chapter after the review re-opens write → blind_solve → review → checks; the map stays done).
 - `status` exits 1 while a strict step is open. `review` gates are a judgement recorded with `done --note`; `planned`
-  steps (translations, until PR C) are listed and not required.
+  steps are listed and not required.
 
 ## 2. Flows
 
 | Id | Flow | When | Steps |
 | --- | --- | --- | --- |
-| 1 | Sources → Roadmap → every step | a pile of material, several topics building on each other | classify → shape → dag → audit → expand → plan → start_subject → map → pictures → write → blind_solve → review → checks → upload → translate → bridges → next |
+| 1 | Sources → Roadmap → every step | a pile of material, several topics building on each other | classify → shape → dag → audit → expand → plan → start_subject → map → pictures → write → blind_solve → review → translate → bridges → checks → upload → next |
 | 1b | Goal → Roadmap | a goal and no sources | classify → shape → dag → audit → expand → plan → next |
-| 2 | A Roadmap step → its subject | `noema_curriculum_task` hands over one step | classify → start_subject → map → pictures → write → blind_solve → review → checks → upload → translate → bridges → next |
+| 2 | A Roadmap step → its subject | `noema_curriculum_task` hands over one step | classify → start_subject → map → pictures → write → blind_solve → review → translate → bridges → checks → upload → next |
 | 3 | Plan the chapters, fill the queue | the Roadmap exists | classify → plan → next |
-| 4 | Sources → one subject | the material fits one subject | classify → start_subject → map → pictures → write → blind_solve → review → checks → upload → translate → bridges |
-| 5 | Add to an existing subject | new material (`unpack.py`, `patches/`) | classify → map → pictures → write → blind_solve → review → checks → upload → translate → bridges |
+| 4 | Sources → one subject | the material fits one subject | classify → start_subject → map → pictures → write → blind_solve → review → translate → bridges → checks → upload |
+| 5 | Add to an existing subject | new material (`unpack.py`, `patches/`) | classify → map → pictures → write → blind_solve → review → translate → bridges → checks → upload |
 | 6 | Language help 文A | a bridge for a pack | classify → bridges |
 | 7 | Translate a pack | a pack into another language | classify → translate → checks → upload |
 | 8 | Import a map or a subject | a Roadmap file or a pack the learner made | classify → import |
@@ -65,10 +65,10 @@ python3 scripts/pipeline.py status work/demo                # every step: todo /
 | write | `validate.py` on the chapters |
 | blind_solve | `review/chNN.json` `blind`: every exercise solved without the key, every mismatch fixed |
 | review | `review/chNN.json` `rubric` on ≥ 15 learnables (or all) |
-| checks | `make_pack.py` builds the pack with every quality rule (§4) |
-| upload | `noema_finish_upload` / `noema_save_pack` accepts it (the same checks again) |
-| translate | the translated chapters exist and validate (planned) |
-| bridges | `bridge.py check` for en, el, ru, ar (docs/BRIDGE.md) |
+| translate | every chapter has its translation into each of en, el, ru that is not the pack's language (§4b) |
+| bridges | `bridge.py require`: a bridge into each of en, el, ru, ar that is not the pack's language, with enough coverage (§4b) |
+| checks | `make_pack.py` builds the pack with every quality rule (§4) and checks every translation against its chapter |
+| upload | `noema_finish_upload` / `noema_save_pack` accepts it (the same checks again, then the source files and the translations), then `noema_save_bridge` per bridge |
 | L.* | the language tools: `validate_lang.py`, `lang_phenomena.py`, `lang_refcheck.py --offline`, `lang_facade.py lint / parity`, `lang_strict_report.js`, `lang_course.py package`, `tests/lang_rules.py` |
 
 ## 4. The quality rules (per chapter)
@@ -105,6 +105,29 @@ The chapter's **knowledge map** `map/chNN.json` comes first (format in `tools/CO
 **Sizes are a mild suggestion only — never an error or a warning.** About 2 facades per learnable make the core set,
 plus a reserve without a cap. 40–70 learnables per node give ~80–140 core exercises and 160–280 in all; above ~180 in the
 core, think about splitting the node.
+
+## 4b. Languages: translations and 文A bridges (every new pack)
+
+`tools/pack_rules.json` → `languages` (copied into `engine/packcheck.js` as `LANGS`). Every pack with
+`subject.authoring.rules` ≥ 2 ends its flow with:
+
+| Pack language | Full translations | 文A bridges |
+| --- | --- | --- |
+| en | el, ru | el, ru, ar |
+| el | en, ru | en, ru, ar |
+| ru | en, el | en, el, ar |
+| ar | en, el, ru | en, el, ru |
+| any other | en, el, ru | en, el, ru, ar |
+
+- **A translation** is the whole chapter with only the words changed: same ids, sections, blocks, exercises, cards,
+  playbooks, answers and code (`checkTranslation` in `engine/packcheck.js`, `validate.py --source`). Each is its own file
+  (`noema-translation`, `<id>.tr.<locale>.json`; docs/i18n.md §10), so a learner downloads only their language. The
+  connector stores it beside the pack (`packs/<id>.tr.<locale>.json`), the library as `tr.<locale>.js`; shared and
+  public copies carry their translations inline.
+- **A bridge** covers ≥ 90 % of the content words of the theory and ≥ 80 % of the everyday ones (band 1, and every word
+  no entry covers yet), because learners may be at A2/B1 (`bridge.py require`; docs/BRIDGE.md).
+- Checked at the end of the flow, never on the first upload: `noema_finish_upload` lists what is still missing.
+- The Gemini generator translates every chapter into the same languages (`engine/packgen.js`, step 3b).
 
 ## 5. Tests
 

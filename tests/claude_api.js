@@ -71,7 +71,7 @@ function messages(body, res, J) {
   globalThis.NOEMA_IMG_FETCH = async url => { const u = new URL(url); if (u.hostname === 'www.bing.com') return new Response('<a m="{&quot;murl&quot;:&quot;https://pubs.example.edu/heart.png&quot;,&quot;purl&quot;:&quot;https://pubs.example.edu/heart&quot;,&quot;t&quot;:&quot;Heart&quot;}"></a>', { headers: { 'content-type': 'text/html' } }); return new Response('down', { status: 503 }); };
   const api = claudeApi(); await new Promise(r => api.listen(APORT, r));
   // the pack Claude "builds": the demo fixture + two web pictures that the APP must download ("fetch": "app")
-  const fx = JSON.parse(fs.readFileSync(path.join(ROOT, 'library/subjects/demo-physics/pack.json'), 'utf8'));
+  const fx = (p => (p.translations.fr = { chapters: JSON.parse(fs.readFileSync(path.join(ROOT, 'library/subjects/demo-physics/tr.fr.json'), 'utf8')).chapters }, p))(JSON.parse(fs.readFileSync(path.join(ROOT, 'library/subjects/demo-physics/pack.json'), 'utf8')));   // the French chapter inline, as an older pack carries it
   fx.subject = { ...fx.subject, id: 'heart-by-claude', title: 'Heart by Claude', owner: null }; fx.version = 'hbc-1';
   // Claude split heart.pdf into two parts and packaged them (make_pack.py): <id>.noema.zip = pack.json + sources/…
   const crypto = require('crypto'); const JSZip = require(path.join(ROOT, 'engine/vendor/viewer/jszip.min.js'));

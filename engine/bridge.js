@@ -102,7 +102,7 @@ window.NoemaBridge = (() => {
   /** The account's own bridges (synced index): { packId: { native: { v, status, coverage, chapters, of, previews, entries, at } } } */
   const index = acc => jget(aKey(accNow(acc), 'bridges'), {}) || {};
   const regEntry = id => (window.NOEMA_REGISTRY?.subjects || []).find(s => s.id === id) || null;
-  const summary = b => ({ v: hash36(JSON.stringify(b.entries || []) + JSON.stringify(b.sections || {}) + JSON.stringify(b.anchors || [])), status: b.status, coverage: typeof b.coverage === 'number' ? b.coverage : null,
+  const summary = b => ({ v: hash36(JSON.stringify(b.entries || []) + JSON.stringify(b.sections || {}) + JSON.stringify(b.anchors || [])), status: b.status, coverage: typeof b.coverage === 'number' ? b.coverage : null, everyday: typeof b.everyday === 'number' ? b.everyday : null,
     chapters: (b.chapters || []).length || null, of: b.of || null, previews: Object.values(b.sections || {}).filter(s => s?.preview).length, entries: (b.entries || []).length, at: Date.now() });
   /** Every native language with a bridge for this pack → { code: { status, coverage, chapters, of, previews, own } } (the account's own wins). */
   function available(acc, packId, subj) {

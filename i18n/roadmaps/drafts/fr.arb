@@ -130,5 +130,6 @@
   "roadmap.src.partN": "Partie {n, number}",
   "roadmap.src.pagesOf": "{title}, p. {a, number}–{b, number}",
   "roadmap.src.needFiles": "Ajoute d’abord du matériel.",
-  "roadmap.src.notJson": "Ce n’est pas la réponse JSON. Colle toute la réponse de Claude."
+  "roadmap.src.notJson": "Ce n’est pas la réponse JSON. Colle toute la réponse de Claude.",
+  "roadmap.gen.translating": "Traduction en {lang} : chapitre {i, number}/{n, number}"
 }

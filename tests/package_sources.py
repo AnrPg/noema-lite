@@ -60,7 +60,7 @@ sources([P1, P2, NT, WEB], [{'id': 'ecb-1', 'pages': 'σ. 3–5'}, {'id': 'ecb-2
 r = mk(); check(r.returncode == 0, 'make_pack.py builds the package', r.stdout + r.stderr)
 check('WARN ch01: cites ecb-2 "σ. 40" but sources/ecb_p13-30.pdf has pages 13–30' in r.stdout, 'citations outside a part\'s pages are reported', r.stdout)
 zp = os.path.join(T, 'out', 'demo-physics.noema.zip'); z = zipfile.ZipFile(zp)
-check(sorted(z.namelist()) == ['pack.json', 'sources/ecb_p1-12.pdf', 'sources/ecb_p13-30.pdf', 'sources/σημειώσεις.docx'], 'the package holds pack.json + every source file, exactly as split', str(z.namelist()))
+check(sorted(z.namelist()) == ['pack.json', 'sources/ecb_p1-12.pdf', 'sources/ecb_p13-30.pdf', 'sources/σημειώσεις.docx', 'translations/fr.json'], 'the package holds pack.json, every source file exactly as split, and each translation in its own file', str(z.namelist()))
 p = json.loads(z.read('pack.json')); ss = {s['id']: s for s in p['sources']['sources']}
 check(all(ss[i]['sha256'] == hashlib.sha256(z.read(ss[i]['file'])).hexdigest() and ss[i]['size'] == len(z.read(ss[i]['file'])) for i in ('ecb-1', 'ecb-2', 'notes')), 'each packaged source records size + sha256 of its file')
 check(ss['ecb-1']['pageCount'] == 12 and ss['ecb-2']['pageCount'] == 18 and ss['ecb-2']['firstPage'] == 13 and ss['ecb-1']['mime'] == 'application/pdf' and ss['notes']['fileName'] == 'σημειώσεις.docx', 'page count, firstPage, type and original name are recorded')

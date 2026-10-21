@@ -235,6 +235,13 @@ def shape(e):
     if t == "bucket": out["bucketOf"] = [x.get("bucket") for x in e.get("items", []) if isinstance(x, dict)]
     if t == "cloze": out["blanks"] = len(re.findall(r"\[\[(.+?)\]\]", e.get("text", "")))
     if t == "scenario": out["ok"] = [[bool(o.get("ok")) for o in st.get("options", [])] for st in e.get("steps", [])]
+    # the thinking types (flaw, case, predict, tree, inquiry, debate): what decides their answer
+    if t == "flaw": out.update(flaws=e.get("flaws"), reason=e.get("reason"), **{"#reasons": len(e.get("reasons") or [])})
+    if t == "case": out["parts"] = [[p.get("type"), p.get("answer"), len(p.get("options") or []), p.get("tolerance")] for p in e.get("parts") or [] if isinstance(p, dict)]
+    if t == "predict": out["outcome?"] = "outcome" in e
+    if t == "tree": out["nodes"] = {k: [[bool(o.get("ok")), o.get("to")] for o in (n.get("options") or []) if isinstance(o, dict)] for k, n in (e.get("nodes") or {}).items() if isinstance(n, dict)}
+    if t == "inquiry": out["scores"] = e.get("scores")
+    if t == "debate": out["sides"] = [[s.get("best"), len(s.get("counters") or [])] for s in e.get("sides") or [] if isinstance(s, dict)]
     # own "regions" may be added to carry translated labels (the picture's are in one language); check_visual checks them
     return out
 
@@ -251,6 +258,7 @@ def check_same(tr, src):
             else:
                 for i, (x, y) in enumerate(zip(a["blocks"], b["blocks"])):
                     if x.get("t") == "figure" and x.get("media") != y.get("media"): E(f"translation {a['id']} block {i}: figure media '{y.get('media')}' != source '{x.get('media')}'")
+                    if x.get("t") == "code" and (x.get("code") if "code" in x else x.get("text")) != (y.get("code") if "code" in y else y.get("text")): E(f"translation {a['id']} block {i}: code must stay exactly as the source's (translate the words around it, not the code)")
     for k, label in (("exercises", "exercise"), ("debug", "playbook"), ("flashcards", "flashcard")):
         A, B = {x.get("id"): x for x in src.get(k, [])}, {x.get("id"): x for x in tr.get(k, [])}
         miss, extra = [i for i in A if i not in B], [i for i in B if i not in A]

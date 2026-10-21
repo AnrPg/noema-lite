@@ -430,7 +430,7 @@
     if (cur && cur.author !== uid && (cur.status === 'ready' || Date.parse(cur.claimed_until || '') > Date.now())) {   // somebody else's: I keep my own version, theirs is the shared one
       patchNode(acc, cid, nid, { own: true }); await Share.refresh(acc, cid).catch(() => { }); return { taken: cur };
     }
-    const pack = await root.Noema.getPackById(acc, pid);
+    const pack = await root.Noema.getPackById(acc, pid).then(p => root.Noema.inlineTranslations ? root.Noema.inlineTranslations(acc, p) : p);   // the shared copy carries its translations (docs/i18n.md §10)
     const store = C().curStore(cid), ix = SF() ? SF().index(acc, pid) : {};
     const files = [];   // its own source files (the curriculum's material travels once, with the map)
     if (SF()) for (const [src, m] of Object.entries(ix)) { if (m.ref?.subj === store) continue; const rec = await SF().get(acc, pid, src).catch(() => null); if (rec?.blob) files.push({ srcId: src, blob: rec.blob, name: rec.name || m.name, type: rec.type || m.type || '' }); }

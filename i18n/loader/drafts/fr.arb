@@ -478,5 +478,8 @@
   "loader.study.yours": "Tes langues",
   "loader.study.courses": "Cours",
   "loader.study.otherCourses": "{n, plural, one {# autre cours} many {# autres cours} other {# autres cours}}",
-  "loader.study.otherCoursesSub": "Ils n’enseignent aucune des langues que tu as choisies. Ouvres-en un pour choisir parmi ses langues."
+  "loader.study.otherCoursesSub": "Ils n’enseignent aucune des langues que tu as choisies. Ouvres-en un pour choisir parmi ses langues.",
+  "loader.tr.attached": "Traduction en {lang} ajoutée à « {title} »",
+  "loader.tr.noSubject": "Cette traduction appartient à une matière que vous n’avez pas encore ({id}). Importez d’abord la matière.",
+  "loader.tr.invalid": "Cette traduction ne correspond pas à sa matière : {list}"
 }

@@ -37,6 +37,7 @@
   /** The quality rules of packs with subject.authoring.rules >= 2 — the SAME object as tools/pack_rules.json "quality" and the SAME
       checks as tools/pack_quality.py (tests/pack_rules.js compares both on the same chapters). docs/PIPELINES.md §4. */
   const QUALITY = {"version": 2, "vocab": {"types": ["bucket", "calc", "case", "cloze", "debate", "flaw", "free", "img_drag", "img_hotspot", "img_label", "img_occlusion", "img_reveal", "img_select", "img_sequence", "inquiry", "match", "mcq", "odd", "order", "predict", "scenario", "spotbug", "tf", "tree", "write"], "think": ["recall", "explain", "apply", "discriminate", "analyze", "evaluate", "create"], "applyPlus": ["apply", "discriminate", "analyze", "evaluate", "create"], "critical": ["analyze", "evaluate", "create"], "modes": ["contradiction", "reverse", "whatif", "perturb", "causal", "distinguish", "translate", "ambiguity", "feynman", "combine", "dialectic"], "cats": ["pitfall", "confusable", "falsefriend", "detail", "sequence", "multipart", "nomenclature", "acronym", "formula", "edge", "recent", "hard-understand", "hard-remember"], "levels": ["foundation", "core", "advanced"], "tags": ["concept", "syntax", "pitfall", "debug", "exam", "interview", "calc", "compare"]}, "autoUnfit": {"code": ["spotbug", "write", "syntax"], "math": ["calc"], "pictures": ["img_hotspot", "img_sequence", "img_reveal", "img_drag", "img_label", "img_select", "img_occlusion"]}, "checks": [{"id": "map.present", "level": "error", "what": "the chapter has its knowledge map (map/chNN.json → chapter.map)"}, {"id": "map.refs", "level": "error", "what": "points and learnables are well formed: unique ids, known levels and categories, every kp / with id exists"}, {"id": "map.exhaustive", "level": "error", "what": "every knowledge point is in a learnable, or names the earlier DAG node that taught it (taughtIn)"}, {"id": "fit.declared", "level": "error", "what": "every exercise type, focus tag and paradigm is in fits, or has a reason in unfit"}, {"id": "fit.types", "level": "error", "min": 3, "what": "every type in fits.types"}, {"id": "fit.focus", "level": "error", "min": 3, "what": "every focus tag in fits.focus"}, {"id": "mode.coverage", "level": "error", "min": 2, "what": "every paradigm in fits.modes"}, {"id": "mix.difficulty", "level": "error", "target": {"1": 20, "2": 25, "3": 55}, "tol": 5, "what": "difficulty 1/2/3 = 20/25/55 % of the chapter"}, {"id": "mix.think", "level": "error", "recallMax": 25, "applyPlusMin": 40, "criticalMin": 3, "what": "recall <= 25 %, apply or higher >= 40 %, critical thinking (analyze/evaluate/create) >= 3 exercises"}, {"id": "mix.order", "level": "warn", "maxInversions": 25, "what": "inside a section, easier exercises come first"}, {"id": "lr.link", "level": "error", "what": "every exercise names its learnable (lr), its kind of thinking (think) and, if any, a known paradigm (mode)"}, {"id": "lr.facades", "level": "error", "min": 2, "types": 2, "what": "every learnable has >= 2 versions in >= 2 exercise types"}, {"id": "cats.facades", "level": "error", "min": 2, "types": 2, "what": "every knowledge point with a category has >= 2 exercises in >= 2 types"}, {"id": "source.questions", "level": "error", "what": "every question of the sources (map.sourceQuestions) has an answer and an exercise that cites it (cite.sq)"}, {"id": "cite.present", "level": "error", "what": "every exercise keeps where it comes from in cite {src, loc} (metadata, never in the text)"}, {"id": "self.contained", "level": "error", "what": "no exercise, card or theory text points at the source's structure (question numbers, pages, paragraphs, 'the source says')", "patterns": ["\\bQ\\d{1,3}\\b", "\\bRound \\d+\\b", "\\bp\\.\\s?\\d+", "\\bpages? \\d+", "\\bparagraphs? \\d+", "\\b(?:in|from|according to|see) the (?:source|document|slides?|pdf|handout|reading|text above)\\b", "\\bthe (?:source|document|slides?|pdf|handout) (?:says|states|mentions|shows|lists|gives)\\b", "\\bin the order (?:the source|it is) (?:gives|mentions|lists)", "σελ(?:ίδα|\\.)\\s?\\d+", "(?:η|την|στην|της) πηγή", "σύμφωνα με το κείμενο", "παράγραφο \\d+"]}, {"id": "explain.depth", "level": "error", "minChars": 80, "minSentences": 2, "what": "the explanation says why the answer is right and why the tempting wrong one is wrong (>= 2 sentences, >= 80 characters)"}, {"id": "mcq.why", "level": "error", "what": "every mcq / odd option has its why"}, {"id": "trivial.answer", "level": "error", "minWords": 2, "what": "the right option is not written in the question"}, {"id": "trivial.longest", "level": "warn", "ratio": 1.6, "what": "the right option is not by far the longest"}, {"id": "review.done", "level": "error", "rubricMin": 15, "what": "the second-pass review (review/chNN.json → chapter.review): rubric on >= 15 learnables (or all), every exercise solved blind, every mismatch fixed"}], "notes": ["Strictness: subject.authoring.rules >= 2 turns these checks on (start_subject.py writes 2). Errors when subject.authoring.by is 'claude' or 'gemini', warnings when it is 'learner' or 'import'. Packs without authoring.rules are not checked (made before 2026-10-21; TD-11).", "The connector (noema_finish_upload, noema_save_pack) refuses a pack built since 'since' (pack.builtAt, or no builtAt at all) that has no subject.authoring.rules >= 2, so a pack cannot skip the checks by leaving the field out. Older packs keep working unchanged.", "autoUnfit: a value that cannot fit the chapter needs no reason in unfit — the code types without subject.features.code, calc without .math, picture types when the chapter has no picture (pictures only where they teach, docs/VISUAL.md §5).", "Counts are never checked: about 2 versions per learnable is the core set; there is no upper limit (docs/PIPELINES.md §4, a mild suggestion only)."], "since": "2026-10-22T00:00:00Z"};
+  const LANGS = {"version": 1, "translations": ["en", "el", "ru"], "bridges": ["en", "el", "ru", "ar"], "bridgeCoverage": {"everyday": 0.8, "all": 0.9}, "since": "2026-10-22T00:00:00Z", "what": "Every pack with subject.authoring.rules >= 2 ends its flow with a full translation into each of 'translations' and a 文A bridge into each of 'bridges', always minus the pack's own language (user rule 2026-10-21). A translation is its own file (noema-translation, <id>.tr.<locale>.json; docs/i18n.md §10) with the pack's ids, structure and answers. A bridge covers >= bridgeCoverage.all of the content words of the theory and >= bridgeCoverage.everyday of the everyday ones (band 1, and every word no entry covers yet). Checked at the end of the flow (tools/pipeline.py steps translate and bridges; noema_finish_upload lists what is missing), never on the first upload."};
   const qv = v => v == null ? 'none' : `"${v}"`, pct = x => String(Math.floor(x + 0.5));
   const qnorm = t => String(t || '').toLowerCase().replace(/[^\p{L}\p{N}_\s]/gu, ' ').replace(/\s+/g, ' ').trim();
   const qsent = t => String(t || '').trim().split(/[.!?;;。]+(?:\s+|$)/u).filter(s => s.trim().length > 1).length;
@@ -239,7 +240,13 @@
   /** What a translated exercise must keep (only the words may change): the type, section, picture and everything that decides the answer. */
   const shape = e => JSON.stringify([e.type, e.section, e.media || null, e.answer ?? null, e.targets || null, e.bugs || null, e.grid || null,
     ...['options', 'items', 'pairs', 'buckets', 'lines', 'steps'].map(k => Array.isArray(e[k]) ? e[k].length : null),
-    e.type === 'bucket' ? (e.items || []).map(x => x && x.bucket) : null, e.type === 'scenario' ? (e.steps || []).map(st => (st.options || []).map(o => !!o.ok)) : null]);
+    e.type === 'bucket' ? (e.items || []).map(x => x && x.bucket) : null, e.type === 'scenario' ? (e.steps || []).map(st => (st.options || []).map(o => !!o.ok)) : null,
+    // the thinking types (flaw, case, predict, tree, inquiry, debate): what decides their answer
+    e.type === 'flaw' ? [e.flaws ?? null, e.reason ?? null, (e.reasons || []).length] : null,
+    e.type === 'case' ? (e.parts || []).map(p => p && [p.type, p.answer ?? null, (p.options || []).length, p.tolerance ?? null]) : null,
+    e.type === 'tree' ? [e.start ?? null, Object.entries(e.nodes || {}).map(([k, n]) => [k, (n?.options || []).map(o => [!!o?.ok, o?.to ?? null])])] : null,
+    e.type === 'inquiry' ? e.scores ?? null : null, e.type === 'debate' ? (e.sides || []).map(x => x && [x.best ?? null, (x.counters || []).length]) : null,
+    e.tolerance ?? null]);
   function checkI18n(p, chapters, E, W) {
     const s = p.subject || {}, own = s.language || 'en';
     const locOK = (where, loc) => { if (!LOCALE_RE.test(loc)) { E.push(`${where}: "${loc}" is not a locale code (e.g. el, fr, pt-PT, zh-Hant)`); return false; } if (loc === own) { E.push(`${where}: "${loc}" is the pack's own language`); return false; } return true; };
@@ -260,21 +267,58 @@
     const byId = new Map(chapters.map(c => [c.id, c]));
     for (const [loc, t] of Object.entries(p.translations)) {
       const where = `translations.${loc}`; if (!locOK(where, loc)) continue;
-      if (!t || !Array.isArray(t.chapters)) { E.push(`${where}.chapters must be a list of chapters`); continue; }
       if (!(s.i18n && s.i18n[loc])) W.push(`${where}: add subject.i18n.${loc} (title, description) so the picker shows the translated name`);
-      for (const c of t.chapters) {
-        const src = byId.get(c && c.id); if (!src) { E.push(`${where}: chapter "${c && c.id}" is not a chapter of the pack`); continue; }
-        const ids = (x, k) => (x[k] || []).map(y => y && y.id);
-        if (ids(c, 'sections').join() !== ids(src, 'sections').join()) E.push(`${where}/${c.id}: sections must be the source's (${ids(src, 'sections').join(', ')}), same order`);
-        for (const k of ['exercises', 'flashcards', 'debug']) {
-          const a = new Set(ids(src, k)), b = new Set(ids(c, k)), miss = [...a].filter(x => !b.has(x)), extra = [...b].filter(x => !a.has(x));
-          if (miss.length) E.push(`${where}/${c.id}: ${k} missing: ${miss.slice(0, 8).join(', ')}`);
-          if (extra.length) E.push(`${where}/${c.id}: ${k} not in the source: ${extra.slice(0, 8).join(', ')}`);
-        }
-        const se = new Map((src.exercises || []).map(e => [e.id, e]));
-        for (const e of c.exercises || []) if (se.has(e.id) && shape(e) !== shape(se.get(e.id))) E.push(`${where}/${e.id}: type, section, picture or answer differs from the source (only the words may change)`);
-      }
+      if (t && t.file === true) { if (!Number.isInteger(t.chapters) || t.chapters < 1) E.push(`${where}: a translation in its own file says {"file": true, "chapters": <how many chapters it translates>}`); continue; }
+      if (!t || !Array.isArray(t.chapters)) { E.push(`${where}.chapters must be a list of chapters (or {"file": true, …} for a translation in its own file)`); continue; }
+      checkTrChapters(where, t.chapters, byId, E);
     }
+  }
+  /** The chapters of a translation against the pack's: same sections, exercises, cards, playbooks and answers. */
+  function checkTrChapters(where, list, byId, E) {
+    for (const c of list) {
+      const src = byId.get(c && c.id); if (!src) { E.push(`${where}: chapter "${c && c.id}" is not a chapter of the pack`); continue; }
+      const ids = (x, k) => (x[k] || []).map(y => y && y.id);
+      if (ids(c, 'sections').join() !== ids(src, 'sections').join()) E.push(`${where}/${c.id}: sections must be the source's (${ids(src, 'sections').join(', ')}), same order`);
+      for (const k of ['exercises', 'flashcards', 'debug']) {
+        const a = new Set(ids(src, k)), b = new Set(ids(c, k)), miss = [...a].filter(x => !b.has(x)), extra = [...b].filter(x => !a.has(x));
+        if (miss.length) E.push(`${where}/${c.id}: ${k} missing: ${miss.slice(0, 8).join(', ')}`);
+        if (extra.length) E.push(`${where}/${c.id}: ${k} not in the source: ${extra.slice(0, 8).join(', ')}`);
+      }
+      const se = new Map((src.exercises || []).map(e => [e.id, e]));
+      for (const e of c.exercises || []) if (se.has(e.id) && shape(e) !== shape(se.get(e.id))) E.push(`${where}/${e.id}: type, section, picture or answer differs from the source (only the words may change)`);
+      const code = x => (x.sections || []).flatMap(sc => (sc.blocks || []).filter(b => b && b.t === 'code').map(b => b.code ?? b.text ?? ''));
+      const a = code(src), b = code(c);
+      if (a.length !== b.length || a.some((x, i) => x !== b[i])) E.push(`${where}/${c.id}: code blocks must stay exactly as the source's (translate the comments around them, not the code)`);
+    }
+  }
+  const lang0 = x => String(x || '').split('-')[0].toLowerCase();
+  /** The languages every new pack gets (tools/pack_rules.json "languages"), minus the pack's own: { translations, bridges }. */
+  function requiredLocales(own) {
+    const o = lang0(own || 'en');
+    return { translations: LANGS.translations.filter(l => lang0(l) !== o), bridges: LANGS.bridges.filter(l => lang0(l) !== o) };
+  }
+  /** checkTranslation(t, pack) → { errors, warnings, counts }: one noema-translation file (docs/i18n.md §10) against its pack. */
+  function checkTranslation(t, pack) {
+    const E = [], W = [];
+    if (!t || typeof t !== 'object' || Array.isArray(t)) return { errors: ['not a JSON object'], warnings: W, counts: {} };
+    if (t.format !== 'noema-translation') E.push('format must be "noema-translation"');
+    if (t.v !== 1) E.push('v must be 1');
+    if (!ID_RE.test(String(t.pack || ''))) E.push('pack: the subject id the translation belongs to (pack.subject.id)');
+    if (!LOCALE_RE.test(String(t.locale || ''))) E.push('locale: the language of the translation (e.g. el, ru, pt-PT)');
+    if (!Array.isArray(t.chapters) || !t.chapters.length) E.push('chapters must be a non-empty list of translated chapters');
+    if (pack) {
+      const own = pack.subject?.language || 'en';
+      if (pack.subject?.id && t.pack && pack.subject.id !== t.pack) E.push(`pack: "${t.pack}" — this translation belongs to another subject (this one is "${pack.subject.id}")`);
+      if (t.locale && lang0(t.locale) === lang0(own)) E.push(`locale: "${t.locale}" is the pack's own language`);
+      if (Array.isArray(t.chapters)) {
+        checkTrChapters(`translation ${t.locale}`, t.chapters, new Map((pack.chapters || []).map(c => [c.id, c])), E);
+        const have = new Set(t.chapters.map(c => c && c.id)), miss = (pack.chapters || []).filter(c => !have.has(c.id)).map(c => c.id);
+        if (miss.length) W.push(`chapters not translated yet: ${miss.join(', ')}`);
+      }
+      if (t.version && pack.version && t.version !== pack.version) W.push(`made for pack version ${t.version}; the pack is now ${pack.version} — check the chapters that changed`);
+    }
+    for (const c of Array.isArray(t.chapters) ? t.chapters : []) { let j = ''; try { j = JSON.stringify(c); } catch (e) { } if (/<script|javascript:/i.test(j)) E.push(`translation ${t.locale}/${c && c.id}: no script or javascript: links`); }
+    return { errors: E, warnings: W, counts: { chapters: Array.isArray(t.chapters) ? t.chapters.length : 0 } };
   }
 
   /** balance: the minimum of RULES per chapter. Default: the pack's own subject.authoring.minPerKind (Gemini generator);
@@ -429,5 +473,5 @@
     return { errors: E, warnings: W, counts: { entries: entries.length, senses, stale, sections: Object.keys(secs).length, previews, anchors: anchors.length } };
   }
   /* i18n-ignore-end */
-  root.NoemaPackCheck = { checkPack, checkExercise, checkBalance, checkQuality, checkBridge, RULES, QUALITY, TYPES, BLOCKS, ID_RE };
+  root.NoemaPackCheck = { checkPack, checkExercise, checkBalance, checkQuality, checkBridge, checkTranslation, requiredLocales, RULES, QUALITY, LANGS, TYPES, BLOCKS, ID_RE };
 })(typeof window !== 'undefined' ? window : globalThis);

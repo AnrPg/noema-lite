@@ -130,5 +130,6 @@
   "roadmap.src.partN": "Μέρος {n, number}",
   "roadmap.src.pagesOf": "{title}, σ. {a, number}–{b, number}",
   "roadmap.src.needFiles": "Πρόσθεσε πρώτα υλικό.",
-  "roadmap.src.notJson": "Δεν είναι η απάντηση JSON. Επικόλλησε ολόκληρη την απάντηση του Claude."
+  "roadmap.src.notJson": "Δεν είναι η απάντηση JSON. Επικόλλησε ολόκληρη την απάντηση του Claude.",
+  "roadmap.gen.translating": "Μετάφραση στα {lang}: κεφάλαιο {i, number}/{n, number}"
 }

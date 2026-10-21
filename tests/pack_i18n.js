@@ -70,17 +70,22 @@ const EL = 'Φυσική (δοκιμή)', FR = 'Physique (démo)';
 
   console.log('C. the pack: schema v2, packcheck');
   const pack = JSON.parse(fs.readFileSync(path.join(ROOT, 'library/subjects/demo-physics/pack.json'), 'utf8'));
-  ok(pack.v === 2 && pack.subject.i18n?.el?.title === EL && pack.translations?.fr?.chapters?.[0]?.title === 'Énergie' && pack.translations.fr.chapters[0].src === 's1', 'pack.json: v 2, subject.i18n, translations.fr with the source mapping');
+  const tr = JSON.parse(fs.readFileSync(path.join(ROOT, 'library/subjects/demo-physics/tr.fr.json'), 'utf8'));
+  ok(pack.v === 2 && pack.subject.i18n?.el?.title === EL && pack.translations?.fr?.file === true && pack.translations.fr.chapters === 1 && !pack.translations.fr.chapters?.length, 'pack.json: v 2, subject.i18n, translations.fr only a stub (the chapters live in their own file)');
+  ok(tr.format === 'noema-translation' && tr.pack === 'demo-physics' && tr.locale === 'fr' && tr.chapters?.[0]?.title === 'Énergie' && tr.chapters[0].src === 's1' && fs.existsSync(path.join(ROOT, 'library/subjects/demo-physics/tr.fr.js')), 'tr.fr.json (and tr.fr.js): the French chapters with the source mapping, downloaded only by French learners');
   const reg = fs.readFileSync(path.join(ROOT, 'library/registry.js'), 'utf8');
-  ok(reg.includes('"contentLocales"') && reg.includes(EL), 'the registry carries the metadata translations and the content languages');
-  const pc = await page.evaluate(p => {
-    const a = NoemaPackCheck.checkPack(p);
-    const b = JSON.parse(JSON.stringify(p)); b.translations.fr.chapters[0].exercises[2].answer = 2; b.translations.fr.chapters[0].exercises.pop(); b.subject.i18n.xx_1 = { title: 'x' }; b.subject.i18n.el.colour = 'x';
-    const c = NoemaPackCheck.checkPack(b).errors;
-    return { a: a.errors, c };
-  }, pack).catch(e => ({ err: e.message }));
-  ok(pc.a && !pc.a.length, 'packcheck accepts the fixture pack: ' + JSON.stringify(pc.a || pc.err));
-  ok(pc.c && ['answer differs', 'exercises missing', 'not a locale code', 'unknown field'].every(w => pc.c.some(x => x.includes(w))), 'packcheck refuses a broken translation: ' + JSON.stringify(pc.c));
+  ok(reg.includes('"contentLocales"') && reg.includes(EL) && reg.includes('"trLocales"'), 'the registry carries the metadata translations, the content languages and where each translation file is');
+  const pc = await page.evaluate(([p, t]) => {
+    const a = NoemaPackCheck.checkPack(p), at = NoemaPackCheck.checkTranslation(t, p);
+    const inl = JSON.parse(JSON.stringify(p)); inl.translations.fr = { chapters: t.chapters };
+    const b = JSON.parse(JSON.stringify(inl)); b.translations.fr.chapters[0].exercises[2].answer = 2; b.translations.fr.chapters[0].exercises.pop(); b.subject.i18n.xx_1 = { title: 'x' }; b.subject.i18n.el.colour = 'x';
+    const bt = JSON.parse(JSON.stringify(t)); bt.chapters[0].exercises[2].answer = 2; bt.locale = 'en';
+    return { a: a.errors.concat(at.errors), inl: NoemaPackCheck.checkPack(inl).errors, c: NoemaPackCheck.checkPack(b).errors, ct: NoemaPackCheck.checkTranslation(bt, p).errors, req: NoemaPackCheck.requiredLocales('el') };
+  }, [pack, tr]).catch(e => ({ err: e.message }));
+  ok(pc.a && !pc.a.length && pc.inl && !pc.inl.length, 'packcheck accepts the fixture pack, its translation file, and the same translation inline (older packs): ' + JSON.stringify(pc.a || pc.err));
+  ok(pc.c && ['answer differs', 'exercises missing', 'not a locale code', 'unknown field'].every(w => pc.c.some(x => x.includes(w))), 'packcheck refuses a broken inline translation: ' + JSON.stringify(pc.c));
+  ok(pc.ct && pc.ct.some(x => x.includes('answer differs')) && pc.ct.some(x => /locale/.test(x)), 'checkTranslation refuses a broken translation file (changed answer, wrong locale): ' + JSON.stringify(pc.ct));
+  ok(JSON.stringify(pc.req) === JSON.stringify({ translations: ['en', 'ru'], bridges: ['en', 'ru', 'ar'] }), 'a Greek pack needs translations into en, ru and bridges into en, ru, ar: ' + JSON.stringify(pc.req));
 
   ok(!E.length, 'no page errors: ' + E.join(' | '));
   await browser.close();

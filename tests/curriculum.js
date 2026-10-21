@@ -53,6 +53,8 @@ function vendors() {
         if (/Create the identity/.test(first)) return reply(JSON.stringify({ title: 'Probability basics', emoji: '🎲', description: 'Chance, made precise.', headline: 'Master **probability**', mantra: 'Probability measures belief.', searchExamples: 'event, axiom', math: true, code: false, tutor: { name: 'Bay', avatar: '🦉', domain: 'probability', examples: 'dice', interviewer: 'a statistician', simulation: 'a dice game', terminology: '"event"', examinerRole: 'examiner' } }));
         const m = first.match(/Write chapter (\d+) of (\d+) now: “([^”]+)”/);
         if (m) return reply(JSON.stringify(F.chapter(+m[1], m[3], { broken: +m[1] === 1 && !repair })));
+        const tl = first.match(/^Translate every text the learner reads in this chapter[^]*? into ([a-zA-Z-]+)\.[^]*?Return the whole chapter\.\n\n([^]*?)(?:\n\nReturn exactly one JSON object[^]*)?$/);   // 3b: the chapter in en/el/ru (same JSON, the words translated)
+        if (tl) { const ch = JSON.parse(tl[2]); A.gemTr = (A.gemTr || 0) + 1; return reply(JSON.stringify({ ...ch, title: `[${tl[1]}] ${ch.title}` })); }
         return J(res, 400, { error: { message: 'unscripted gemini call' } });
       }
       // ---- Claude

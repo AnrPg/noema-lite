@@ -130,5 +130,6 @@
   "roadmap.src.partN": "Часть {n, number}",
   "roadmap.src.pagesOf": "{title}, с. {a, number}–{b, number}",
   "roadmap.src.needFiles": "Сначала добавь материалы.",
-  "roadmap.src.notJson": "Это не ответ в формате JSON. Вставь весь ответ Claude."
+  "roadmap.src.notJson": "Это не ответ в формате JSON. Вставь весь ответ Claude.",
+  "roadmap.gen.translating": "Перевод на {lang}: глава {i, number}/{n, number}"
 }

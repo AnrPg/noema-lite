@@ -14,7 +14,7 @@ for _s in (sys.stdout, sys.stderr):   # UTF-8 output on Windows / macOS / Linux 
     try: _s.reconfigure(encoding='utf-8', errors='replace')
     except Exception: pass
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from noema_lib import ROOT, LIB, ACC, rj, wj, wt, now_iso, subject_dirs, load_subject, load_media, content_hash, load_translations, pack_i18n
+from noema_lib import ROOT, LIB, ACC, rj, wj, wt, now_iso, subject_dirs, load_subject, load_media, content_hash, load_translations, pack_i18n, translation_file
 from bridge import build_library as build_bridges
 
 ENGINE = os.path.join(ROOT, 'engine')
@@ -94,7 +94,7 @@ def build_packs():
                   'playbooks': sum(len(c['debug']) for c in chapters), 'flashcards': sum(len(c['flashcards']) for c in chapters)}
         counts['visual'] = sum(1 for c in chapters for e in c['exercises'] if e['type'].startswith('img_')); counts['media'] = len(media)
         pack = {'format': 'noema-pack', 'v': 1, 'subject': meta, 'sources': sources, 'chapters': chapters, 'media': media, 'counts': counts, 'builtAt': now_iso()}
-        tr = pack_i18n(pack, translations)
+        tr = pack_i18n(pack, translations, external=True)   # each translation in its own file: tr.<locale>.js / .json (docs/i18n.md §10)
         pack['version'] = content_hash({'s': meta, 'src': sources, 'c': chapters, 'm': {k: v.get('sha') or v.get('url') for k, v in media.items()}, 'mm': {k: {x: y for x, y in v.items() if x != 'data'} for k, v in media.items()}, **({'t': tr} if tr else {})})
         try:   # unchanged content → keep the previous build time so git sees no change
             prev = rj(os.path.join(sdir, 'pack.json'))
@@ -104,10 +104,19 @@ def build_packs():
         wt(os.path.join(sdir, 'pack.json'), body)
         wt(os.path.join(sdir, 'pack.js'), f'/* GENERATED subject pack: {meta["id"]} — do not edit; edit chapters/*.json and run tools/build.py */\n(window.NOEMA_PACKS = window.NOEMA_PACKS || {{}})[{json.dumps(meta["id"])}] = ' + body.replace('</', '<\\/') + ';\n')
         rel = os.path.relpath(os.path.join(sdir, 'pack.js'), ROOT).replace(os.sep, '/')
+        tr_locs = {}
+        for f in glob.glob(os.path.join(sdir, 'tr.*.js')) + glob.glob(os.path.join(sdir, 'tr.*.json')):   # translations that are gone
+            if f.split('.')[-2] not in translations: os.remove(f)
+        for loc, chs in sorted(translations.items()):
+            tb = json.dumps(translation_file(pack, loc, chs), ensure_ascii=False, separators=(',', ':'))
+            wt(os.path.join(sdir, f'tr.{loc}.json'), tb)
+            wt(os.path.join(sdir, f'tr.{loc}.js'), f'/* GENERATED translation of {meta["id"]} into {loc} — edit translations/{loc}/*.json and run tools/build.py */\n(window.NOEMA_TRANSLATIONS = window.NOEMA_TRANSLATIONS || {{}})[{json.dumps(meta["id"] + "|" + loc)}] = ' + tb.replace('</', '<\\/') + ';\n')
+            tr_locs[loc] = {'path': os.path.relpath(os.path.join(sdir, f'tr.{loc}.js'), ROOT).replace(os.sep, '/'), 'chapters': len(chs)}
         info = {'chapters': [{'num': c.get('num'), 'title': c['title'], 'emoji': c.get('emoji', ''), 'sections': len(c['sections']), 'exercises': len(c['exercises'])} for c in chapters],
                 'sources': [{'title': x.get('title', ''), 'subtitle': x.get('subtitle', ''), 'pages': x.get('pages', ''), 'url': x.get('url', '') if str(x.get('url', '')).startswith('http') else ''} for x in (sources or {}).get('sources', [])]}
         if meta.get('i18n'): info['i18n'] = meta['i18n']                   # the picker shows the title in the learner's language
         if translations: info['contentLocales'] = sorted(translations)      # … and knows which languages the content is in
+        if tr_locs: info['trLocales'] = tr_locs                             # … and where each translation's file is (loaded only when read)
         bridges = build_bridges(sdir, {'subject': meta, 'chapters': chapters}, ROOT)   # 文A language help: bridges/ → bridge.<native>.js (docs/BRIDGE.md)
         if bridges: info['bridgeLocales'] = bridges
         metas.append(dict({k: meta.get(k) for k in ('id', 'title', 'appTitle', 'emoji', 'group', 'description', 'language', 'features', 'owner')}, path=rel, counts=dict(counts, pictures=len(media)), version=pack['version'], **info))
@@ -246,9 +255,9 @@ def build_site(metas):
     for m in metas:
         if m.get('owner'): continue
         dst = os.path.join(out, m['path']); os.makedirs(os.path.dirname(dst), exist_ok=True); shutil.copy(os.path.join(ROOT, m['path']), dst)
-    for m in metas:   # 文A language bridges of the library's subjects (docs/BRIDGE.md)
+    for m in metas:   # 文A language bridges and translations of the library's subjects (docs/BRIDGE.md, docs/i18n.md §10)
         if m.get('owner'): continue
-        for b in (m.get('bridgeLocales') or {}).values():
+        for b in [*(m.get('bridgeLocales') or {}).values(), *(m.get('trLocales') or {}).values(), *({'path': t['path'][:-3] + '.json'} for t in (m.get('trLocales') or {}).values())]:
             dst = os.path.join(out, b['path']); os.makedirs(os.path.dirname(dst), exist_ok=True); shutil.copy(os.path.join(ROOT, b['path']), dst)
     for m in metas:   # the plain JSON too, so Claude (connector: noema_get_pack_url) can extend a library subject
         if not m.get('owner'): shutil.copy(os.path.join(ROOT, os.path.dirname(m['path']), 'pack.json'), os.path.join(out, os.path.dirname(m['path']), 'pack.json'))
@@ -376,6 +385,7 @@ def build_bundle(metas):
     esc = lambda s: s.replace('</script', '<\\/script')
     packs = ''.join(f'<script>{esc(rd(m["path"]))}</script>\n' for m in metas if (not sel or m['id'] in sel))
     packs += ''.join(f'<script>{esc(rd(b["path"]))}</script>\n' for m in metas if (not sel or m['id'] in sel) for b in (m.get('bridgeLocales') or {}).values())   # 文A language bridges
+    packs += ''.join(f'<script>{esc(rd(t["path"]))}</script>\n' for m in metas if (not sel or m['id'] in sel) for t in (m.get('trLocales') or {}).values())   # translations (docs/i18n.md §10)
     reg_metas = [dict(m, path=None) for m in metas if (not sel or m['id'] in sel)]
     local = ''
     if '--with-local-config' in args and os.path.exists(os.path.join(ROOT, 'config.local.js')): local = f'<script>{esc(rd("config.local.js"))}</script>'
