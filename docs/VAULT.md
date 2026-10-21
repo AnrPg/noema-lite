@@ -6,7 +6,7 @@ material. Code: `engine/vault.js` (page `#/vault`, the Vault tab of the side bar
 Test: `tests/vault.js`.
 
 ## 1. Strictly organised, searchable across every branch
-The Folders view has two ways in: **by school** (university › department › course, the default) and **by field** (down the
+The Vault opens on the Folders view (the Files view lists every file; the count of what is shown is a quiet line at the end). The Folders view has two ways in: **by school** (university › department › course, the default) and **by field** (down the
 field graph, §1b); at the end the files are grouped by type, with chips for their languages, years and semesters. Folders
 are views of the one table, never copies: a file with two fields shows under both. Only the type, 1–12 fields and at least
 one language are required; university, department, course (exactly as the school calls it),
