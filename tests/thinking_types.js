@@ -116,6 +116,27 @@ ok(['flaw', 'case', 'predict', 'tree', 'inquiry', 'debate'].every(t => P.TYPES.h
   await p.evaluate(() => { const a = EX['ch01-e901'], b = { ...EX['ch01-e903'], id: 'ch01-e907', lr: a.lr }; EX[b.id] = b; ALL_EX.push(a, b); });
   ok(await p.evaluate(() => siblingOf(EX['ch01-e901'], [EX['ch01-e901']])?.id === 'ch01-e907'), 'after a mistake: a sibling in another type is found for the round');
 
+  console.log('— knowledge map, Mistakes gym by trap, reported exercises');
+  await p.evaluate(() => {
+    COURSE[0].map = { format: 'noema.map/v1', chapter: 'ch01',
+      points: [{ id: 'ch01-k01', text: 'Kinetic energy grows with the square of speed', level: 'foundation', cats: ['formula'] },
+        { id: 'ch01-k02', text: 'Fall time does not depend on mass', level: 'core', cats: ['pitfall', 'confusable'] },
+        { id: 'ch01-k03', text: 'Energy conservation', level: 'foundation', taughtIn: 'P1. Mechanics basics' }],
+      learnables: [{ id: 'ch01-l01', kp: ['ch01-k01'], goal: 'Compute kinetic energy' }, { id: 'ch01-l03', kp: ['ch01-k02'], goal: 'Predict free fall' }] };
+    COURSE[0].exercises.push(EX['ch01-e901'], EX['ch01-e903']); ALL_EX.push(EX['ch01-e903']);
+  });
+  await p.evaluate(() => knowledgeMap('ch01')); await wait(200);
+  ok(await p.locator('.kmapbox .kmaplr').count() === 2, 'knowledge map: one row per learnable');
+  ok(await p.locator('.kmapbox .kmaplv').allTextContents().then(t => t.join('|') === 'Basics|Core|Taught earlier on the Roadmap'), 'knowledge map: grouped basics → core, then what an earlier step taught');
+  ok(await p.locator('.kmapbox .kmaplr:has-text("Predict free fall") .pill:has-text("Easily confused")').count() === 1, 'knowledge map: the categories of a learnable are shown');
+  await p.click('.kmapbox .kmaplr:has-text("Predict free fall") button'); await wait(300);
+  ok(await p.evaluate(() => RUN && RUN.list.length === 1 && RUN.list[0].id === 'ch01-e903'), 'knowledge map: ▶ practises that learnable');
+  await p.evaluate(() => { S.res['ch01-e903'] = { n: 1, ok: 0, last: false, t: Date.now() }; location.hash = '#/mistakes'; }); await wait(400);
+  ok(await p.locator('.gymcats .fchip:has-text("Easily confused")').count() === 1 && await p.locator('.gymcats .fchip:has-text("Traps")').count() === 1, 'Mistakes gym: chips by kind of trap');
+  await p.evaluate(() => reportedView()); await wait(200);
+  ok(await p.locator('.modal .flaglist li').count() === 1, 'reported exercises: listed');
+  await p.evaluate(() => document.querySelectorAll('.modal').forEach(m => m.remove()));
+
   ok(!E.length, 'no page errors' + (E.length ? ': ' + E.join(' | ') : ''));
   await browser.close();
   console.log(fails ? `\n❌ ${fails} failed` : '\nALL PASSED'); process.exit(fails ? 1 : 0);

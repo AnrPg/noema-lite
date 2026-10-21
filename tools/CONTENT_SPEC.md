@@ -309,6 +309,11 @@ the section id and exercise ids that cover it. Use it to self-audit before finis
 ```
   Patched exercise and flashcard ids must not collide: reserve a range per patch file (e.g. `chNN-e7NN`, `chNN-f7NN`); patch cards without an id get the next free one. Databricks: `e6NN` = visual_v1, `e7NN`–`e9NN` = the links patches.
   Typical patch content: a `callout` (kind key/tip, title "Level-up → …") linking to the deeper new chapter, plus genuinely new nuances with an exercise each.
+* **Fixing items in place** (a wrong answer, a reported exercise ⚑, an older pack brought up to Q1–Q8): the same patch
+  file may carry `"reviseExercises": [whole exercises with their EXISTING ids]`, `"reviseFlashcards": [whole cards with
+  their ids]` and `"reviseBlocks": [{"section": "ch02-s05", "index": 3, "block": {…}}]`. Each replaces the item with that
+  id (or the block at that index) after the appends, so the learner keeps the progress and the SRS schedule of the id.
+  An unknown id, section or index is an error. Change the meaning of an exercise only by a new id.
 * Register the new source in `sources.json` (append; order = chronology) and map the new chapter/patch files to it.
 * `python3 tools/build.py` validates the MERGED result; `python3 tools/db_sync.py` records the new version in the backup database.
 
