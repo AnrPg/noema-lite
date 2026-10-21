@@ -1,0 +1,300 @@
+{
+  "@@locale": "en",
+  "bridge.toggle": "Language help",
+  "@bridge.toggle": {
+    "description": "Name of the feature that translates the words of a subject into the learner’s native language (button label, panel title). Short."
+  },
+  "bridge.toggleTip": "Words of this subject in your language",
+  "@bridge.toggleTip": {
+    "description": "Tooltip of the 文A button on a section of a subject that has language help."
+  },
+  "bridge.menu": "Language help…",
+  "@bridge.menu": {
+    "description": "Item of a section’s ⋮ menu: opens the language help settings (on/off, level, language)."
+  },
+  "bridge.panel.sub": "For studying in a language that isn’t your own: tap a word to see it in your language.",
+  "@bridge.panel.sub": {
+    "description": "Explanation under the switch in the language help panel."
+  },
+  "bridge.panel.none": "This subject has no language help in {lang} yet.",
+  "@bridge.panel.none": {
+    "description": "Shown in the panel when the chosen language has no translations for this subject. {lang} = language name (endonym, e.g. Русский).",
+    "placeholders": {
+      "lang": {
+        "type": "String"
+      }
+    }
+  },
+  "bridge.native.label": "Translate into",
+  "@bridge.native.label": {
+    "description": "Label of the select with the learner’s native language (the language the words are translated into)."
+  },
+  "bridge.native.none": "not available",
+  "@bridge.native.none": {
+    "description": "After a language name in the select: this subject has no translations into it. Very short, lowercase."
+  },
+  "bridge.level.title": "How much help",
+  "@bridge.level.title": {
+    "description": "Label of the three help levels (radio group)."
+  },
+  "bridge.level.open": "Plenty",
+  "@bridge.level.open": {
+    "description": "Help level for beginners: small translations shown under most harder words. One word."
+  },
+  "bridge.level.openSub": "Small translations under most harder words",
+  "@bridge.level.openSub": {
+    "description": "Description of the “Plenty” help level."
+  },
+  "bridge.level.balanced": "Balanced",
+  "@bridge.level.balanced": {
+    "description": "Middle help level (the default). One word."
+  },
+  "bridge.level.balancedSub": "Only under the key terms and rare words",
+  "@bridge.level.balancedSub": {
+    "description": "Description of the “Balanced” help level."
+  },
+  "bridge.level.tap": "Tap only",
+  "@bridge.level.tap": {
+    "description": "Help level for good readers: nothing shown, a tap on any word shows its translation. Short."
+  },
+  "bridge.level.tapSub": "Nothing shown: tap any word you don’t know",
+  "@bridge.level.tapSub": {
+    "description": "Description of the “Tap only” help level."
+  },
+  "bridge.ask.title": "Help with the {source} words in {native}?",
+  "@bridge.ask.title": {
+    "description": "First time a subject with language help is opened. {source} = language of the content (e.g. Greek), {native} = the learner’s language (endonym, e.g. Русский).",
+    "placeholders": {
+      "source": {
+        "type": "String"
+      },
+      "native": {
+        "type": "String"
+      }
+    }
+  },
+  "bridge.ask.text": "Tap any word you don’t know to see what it means here, in your language. How well do you read {source}?",
+  "@bridge.ask.text": {
+    "description": "Under the title of the first-time question. {source} = language of the content.",
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
+  "bridge.ask.a2": "Beginner (A1–A2)",
+  "@bridge.ask.a2": {
+    "description": "Button: the learner reads the content language at a beginner level (CEFR A1–A2). Keep the levels in brackets."
+  },
+  "bridge.ask.b1": "Intermediate (B1)",
+  "@bridge.ask.b1": {
+    "description": "Button: intermediate level (CEFR B1). Keep the level in brackets."
+  },
+  "bridge.ask.b2": "Good (B2 or better)",
+  "@bridge.ask.b2": {
+    "description": "Button: good level (CEFR B2, C1, C2). Keep the level in brackets."
+  },
+  "bridge.ask.later": "Not now",
+  "@bridge.ask.later": {
+    "description": "Button: no language help (it can be turned on later from the 文A button)."
+  },
+  "bridge.ask.settings": "You can change this any time with the 文A button.",
+  "@bridge.ask.settings": {
+    "description": "Hint under the level buttons. Keep 文A as it is (the icon of the button)."
+  },
+  "bridge.ask.nativeQ": "What is your native language?",
+  "@bridge.ask.nativeQ": {
+    "description": "Question before the level, when the learner’s native language is not known yet."
+  },
+  "bridge.ask.nativeWhy": "This subject is written in {source}. It can show its words in some other languages.",
+  "@bridge.ask.nativeWhy": {
+    "description": "Under the native-language question. {source} = language of the content.",
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
+  "bridge.ask.nativeOther": "Another language",
+  "@bridge.ask.nativeOther": {
+    "description": "Last option of the native-language select."
+  },
+  "bridge.ask.noneYet": "There is no help in your language for this subject yet.",
+  "@bridge.ask.noneYet": {
+    "description": "After choosing “Another language”."
+  },
+  "bridge.ask.ok": "OK",
+  "@bridge.ask.ok": {
+    "description": "Button that closes the message. Very short."
+  },
+  "bridge.prep.title": "Before you read",
+  "@bridge.prep.title": {
+    "description": "Title of the fold at the top of a section: a short preview in the learner’s language and the section’s key terms with translations."
+  },
+  "bridge.prep.terms": "{n, plural, one {# key word} other {# key words}}",
+  "@bridge.prep.terms": {
+    "description": "After “Before you read”: how many key terms the fold lists.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "bridge.card.close": "Close",
+  "@bridge.card.close": {
+    "description": "Accessible label of the × of the word card."
+  },
+  "bridge.card.listen": "Listen",
+  "@bridge.card.listen": {
+    "description": "Button 🔊 on the word card: hear the word in the content language."
+  },
+  "bridge.card.form": "form of “{lemma}”",
+  "@bridge.card.form": {
+    "description": "On the word card, when the tapped word is an inflected form. {lemma} = the dictionary form (in the content language).",
+    "placeholders": {
+      "lemma": {
+        "type": "String"
+      }
+    }
+  },
+  "bridge.card.draft": "draft translation",
+  "@bridge.card.draft": {
+    "description": "Small note on the word card: the translation was written by AI and not checked yet. Lowercase."
+  },
+  "bridge.card.draftTip": "Written with AI, not yet checked by a person.",
+  "@bridge.card.draftTip": {
+    "description": "Tooltip of “draft translation”."
+  },
+  "bridge.card.stale": "the text changed since this translation was written",
+  "@bridge.card.stale": {
+    "description": "Small note on the word card when the meaning in the subject changed after the translation was made."
+  },
+  "bridge.card.other": "Other meanings",
+  "@bridge.card.other": {
+    "description": "Small heading on the word card above the word's other meanings in this subject (when a word has several)."
+  },
+  "bridge.card.known": "I know it",
+  "@bridge.card.known": {
+    "description": "Button on the word card: the learner knows this word, so no more help is shown under it."
+  },
+  "bridge.card.unknown": "Show help again",
+  "@bridge.card.unknown": {
+    "description": "Button on the word card of a word marked as known: show its small translation again."
+  },
+  "bridge.card.report": "Report a mistake",
+  "@bridge.card.report": {
+    "description": "Button on the word card: the translation is wrong."
+  },
+  "bridge.card.reportPh": "What is wrong? (optional)",
+  "@bridge.card.reportPh": {
+    "description": "Placeholder of the text box for a reported translation."
+  },
+  "bridge.card.reportSend": "Send",
+  "@bridge.card.reportSend": {
+    "description": "Button that saves the report. Short."
+  },
+  "bridge.card.reported": "Thanks! It will be looked at in the next review.",
+  "@bridge.card.reported": {
+    "description": "After reporting a translation."
+  },
+  "bridge.pos.NOUN": "noun",
+  "@bridge.pos.NOUN": {
+    "description": "Part of speech on the word card. Lowercase."
+  },
+  "bridge.pos.PROPN": "name",
+  "@bridge.pos.PROPN": {
+    "description": "Part of speech: a proper name (a product, a place, a person). Lowercase."
+  },
+  "bridge.pos.VERB": "verb",
+  "@bridge.pos.VERB": {
+    "description": "Part of speech. Lowercase."
+  },
+  "bridge.pos.ADJ": "adjective",
+  "@bridge.pos.ADJ": {
+    "description": "Part of speech. Lowercase."
+  },
+  "bridge.pos.ADV": "adverb",
+  "@bridge.pos.ADV": {
+    "description": "Part of speech. Lowercase."
+  },
+  "bridge.pos.NUM": "number",
+  "@bridge.pos.NUM": {
+    "description": "Part of speech: a numeral. Lowercase."
+  },
+  "bridge.pos.X": "term",
+  "@bridge.pos.X": {
+    "description": "Part of speech: an abbreviation or a technical term. Lowercase."
+  },
+  "bridge.pos.SYM": "symbol",
+  "@bridge.pos.SYM": {
+    "description": "Part of speech. Lowercase."
+  },
+  "bridge.pos.INTJ": "interjection",
+  "@bridge.pos.INTJ": {
+    "description": "Part of speech. Lowercase."
+  },
+  "bridge.pos.PHRASE": "phrase",
+  "@bridge.pos.PHRASE": {
+    "description": "Part of speech: several words that mean one thing (e.g. “data skew”). Lowercase."
+  },
+  "bridge.tag.tip": "Language help: {langs}",
+  "@bridge.tag.tip": {
+    "description": "Tooltip of the 文A badge of a subject. {langs} = list of language names (endonyms), e.g. “Русский, Ελληνικά (draft)”.",
+    "placeholders": {
+      "langs": {
+        "type": "String"
+      }
+    }
+  },
+  "bridge.tag.draft": "{lang} (draft)",
+  "@bridge.tag.draft": {
+    "description": "One language in the badge tooltip whose translations are AI drafts. {lang} = language name.",
+    "placeholders": {
+      "lang": {
+        "type": "String"
+      }
+    }
+  },
+  "bridge.tag.partial": "{lang} ({pct} of the words)",
+  "@bridge.tag.partial": {
+    "description": "One language in the badge tooltip that covers only part of the subject. {pct} = a percentage, e.g. 8%.",
+    "placeholders": {
+      "lang": {
+        "type": "String"
+      },
+      "pct": {
+        "type": "String"
+      }
+    }
+  },
+  "bridge.attached": "Language help in {lang} added to “{title}”",
+  "@bridge.attached": {
+    "description": "Toast after importing a language-help file. {lang} = language name, {title} = subject title.",
+    "placeholders": {
+      "lang": {
+        "type": "String"
+      },
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "bridge.attach.invalid": "This is not a valid language help file: {detail}",
+  "@bridge.attach.invalid": {
+    "description": "Error when importing a broken language-help file. {detail} = technical details (English).",
+    "placeholders": {
+      "detail": {
+        "type": "String"
+      }
+    }
+  },
+  "bridge.attach.noPack": "This language help belongs to a subject you don’t have ({id}). Add the subject first.",
+  "@bridge.attach.noPack": {
+    "description": "Error when importing language help for a subject that is not in the account. {id} = the subject id.",
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  }
+}

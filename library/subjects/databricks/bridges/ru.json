@@ -1,0 +1,7205 @@
+{
+ "format": "noema-bridge-locale",
+ "v": 1,
+ "native": "ru",
+ "status": "draft",
+ "t": {
+  "table#1": {
+   "t": "таблица",
+   "src": "bion5jj7r1"
+  },
+  "file#1": {
+   "t": "файл",
+   "src": "pdk7lv8eui"
+  },
+  "storage#1": {
+   "t": "хранилище (хранение данных)",
+   "src": "1nzgtnm1xy"
+  },
+  "data#1": {
+   "t": "данные",
+   "src": "17dzcb5vls"
+  },
+  "compute#1": {
+   "t": "вычислительные ресурсы",
+   "src": "1wmehsd1wt"
+  },
+  "transaction#1": {
+   "t": "транзакция",
+   "src": "17folv99dl"
+  },
+  "metadata#1": {
+   "t": "метаданные",
+   "src": "1z0pqt513n"
+  },
+  "column#1": {
+   "t": "столбец",
+   "src": "dj85zd1h09"
+  },
+  "row#1": {
+   "t": "строка (запись)",
+   "src": "n7vuzl1e56"
+  },
+  "governance#1": {
+   "t": "управление данными (governance)",
+   "src": "bo7oju1k1f"
+  },
+  "layer#1": {
+   "t": "уровень (слой)",
+   "src": "jr1d9ib59z"
+  },
+  "query#1": {
+   "t": "запрос",
+   "src": "1hz55x71q1"
+  },
+  "commit#1": {
+   "t": "фиксация (коммит)",
+   "src": "mkggzkhzed"
+  },
+  "commit#2": {
+   "t": "фиксировать (делать коммит)",
+   "src": "1tjj4xy1e8"
+  },
+  "log#1": {
+   "t": "журнал",
+   "src": "zm97b4cq0t"
+  },
+  "shuffle#1": {
+   "t": "перетасовка данных (shuffle)",
+   "src": "176aox6aiz"
+  },
+  "shuffle#2": {
+   "t": "перетасовывать (делать shuffle)",
+   "src": "1rd7l9w8vy"
+  },
+  "snapshot#1": {
+   "t": "снимок (состояние на момент версии)",
+   "src": "g418gk1bmj"
+  },
+  "platform#1": {
+   "t": "платформа",
+   "src": "1hx8z3tb39"
+  },
+  "read#1": {
+   "t": "читать",
+   "src": "mb21d7n85z"
+  },
+  "read#2": {
+   "t": "чтение",
+   "src": "1i94uhq1ln"
+  },
+  "reader#1": {
+   "t": "читатель (процесс, который читает)",
+   "src": "l3b3102m2y"
+  },
+  "cloud#1": {
+   "t": "облако",
+   "src": "yfdq7911dy"
+  },
+  "current#1": {
+   "t": "текущий",
+   "src": "bjk9re1qjp"
+  },
+  "database#1": {
+   "t": "база данных",
+   "src": "1fkohsw13p"
+  },
+  "engine#1": {
+   "t": "движок",
+   "src": "pkkvop8qqj"
+  },
+  "format#1": {
+   "t": "формат",
+   "src": "w1glu21b0q"
+  },
+  "model#1": {
+   "t": "модель",
+   "src": "1eo0f2kd3m"
+  },
+  "part#1": {
+   "t": "часть",
+   "src": "1bgo1vy1y0"
+  },
+  "physical#1": {
+   "t": "физический",
+   "src": "pb4uad13jt"
+  },
+  "physically#1": {
+   "t": "физически",
+   "src": "14ed9uqq0f"
+  },
+  "plane#1": {
+   "t": "плоскость (уровень архитектуры)",
+   "src": "11jfbomtjx"
+  },
+  "pruning#1": {
+   "t": "отсечение (пропуск ненужных данных)",
+   "src": "uxwi92myic"
+  },
+  "statistics#1": {
+   "t": "статистика",
+   "src": "dny7651koe"
+  },
+  "transactional#1": {
+   "t": "транзакционный",
+   "src": "9fkhzc1u3e"
+  },
+  "version#1": {
+   "t": "версия",
+   "src": "ltsttsghsk"
+  },
+  "cluster#1": {
+   "t": "кластер",
+   "src": "1jt2ippytu"
+  },
+  "columnar#1": {
+   "t": "колоночный",
+   "src": "1gwt6p1uzu"
+  },
+  "join#1": {
+   "t": "соединение (join)",
+   "src": "1yewj4xp9x"
+  },
+  "object#1": {
+   "t": "объект",
+   "src": "15v0jcw1lu"
+  },
+  "state#1": {
+   "t": "состояние",
+   "src": "dz57ef152b"
+  },
+  "add#1": {
+   "t": "добавлять",
+   "src": "19k4hirkg3"
+  },
+  "chapter#1": {
+   "t": "глава",
+   "src": "1iiqvy7rc9"
+  },
+  "come#1": {
+   "t": "приходить",
+   "src": "19fjr6t9q3"
+  },
+  "come back#1": {
+   "t": "возвращаться",
+   "src": "1x2umd5ngw"
+  },
+  "different#1": {
+   "t": "разный",
+   "src": "1opx43mgss"
+  },
+  "environment#1": {
+   "t": "среда",
+   "src": "1hwv4e21ur"
+  },
+  "exam#1": {
+   "t": "экзамен",
+   "src": "16j42i31jm"
+  },
+  "logical#1": {
+   "t": "логический",
+   "src": "1s61nxt1mh"
+  },
+  "logically#1": {
+   "t": "логически",
+   "src": "1vsztrf1vx"
+  },
+  "membership#1": {
+   "t": "принадлежность",
+   "src": "1cjdwg5nyg"
+  },
+  "need#1": {
+   "t": "нуждаться (требоваться)",
+   "src": "1is5jglby0"
+  },
+  "now#1": {
+   "t": "сейчас",
+   "src": "1xxw74pcxq"
+  },
+  "persistent#1": {
+   "t": "постоянный (сохраняется)",
+   "src": "pv1tfq1umb"
+  },
+  "picture#1": {
+   "t": "картина",
+   "src": "1e3tc1bd5q"
+  },
+  "picture#2": {
+   "t": "представлять себе",
+   "src": "nc1t6i2rhe"
+  },
+  "run#1": {
+   "t": "запускать (выполнять)",
+   "src": "6295wt1uk6"
+  },
+  "see#1": {
+   "t": "видеть",
+   "src": "1l07s1q13f"
+  },
+  "semantics#1": {
+   "t": "семантика",
+   "src": "1n624sqnkp"
+  },
+  "slow#1": {
+   "t": "медленный",
+   "src": "p4lph8138q"
+  },
+  "traditional#1": {
+   "t": "традиционный",
+   "src": "eukd3jyyhh"
+  },
+  "valid#1": {
+   "t": "допустимый (корректный)",
+   "src": "jmtirv1vs1"
+  },
+  "invalid#1": {
+   "t": "недопустимый",
+   "src": "1izc1zdagw"
+  },
+  "write#1": {
+   "t": "записывать",
+   "src": "xen3ia1jhn"
+  },
+  "writer#1": {
+   "t": "писатель (процесс, который записывает)",
+   "src": "1isuttx4dm"
+  },
+  "ask#1": {
+   "t": "спрашивать",
+   "src": "1be2wv3nvp"
+  },
+  "byte#1": {
+   "t": "байт",
+   "src": "1112hemraj"
+  },
+  "concurrent#1": {
+   "t": "параллельный (одновременный)",
+   "src": "xf8gk51p85"
+  },
+  "describe#1": {
+   "t": "описывать",
+   "src": "1v7x4v91t9"
+  },
+  "description#1": {
+   "t": "описание",
+   "src": "riqqfcs46k"
+  },
+  "directory#1": {
+   "t": "каталог (папка)",
+   "src": "ern6u91aq7"
+  },
+  "evidence#1": {
+   "t": "доказательство (признак)",
+   "src": "8abhid1vmo"
+  },
+  "give#1": {
+   "t": "давать",
+   "src": "1gu9yto1jj"
+  },
+  "gone#1": {
+   "t": "исчез (больше нет)",
+   "src": "oh83koydqm"
+  },
+  "hold#1": {
+   "t": "содержать (хранить)",
+   "src": "16efv3hr5o"
+  },
+  "keep#1": {
+   "t": "сохранять (держать)",
+   "src": "1e5n0g1154"
+  },
+  "kitchen#1": {
+   "t": "кухня",
+   "src": "48pgcd1ymd"
+  },
+  "lakehouse#1": {
+   "t": "лейкхаус (озеро данных + хранилище)",
+   "src": "12m49i11kw"
+  },
+  "old#1": {
+   "t": "старый",
+   "src": "wafhtcrua3"
+  },
+  "new#1": {
+   "t": "новый",
+   "src": "jwa1ym14w7"
+  },
+  "order#1": {
+   "t": "заказ",
+   "src": "ozywlp1auj"
+  },
+  "order#2": {
+   "t": "порядок",
+   "src": "14jw3pc1fl"
+  },
+  "plain#1": {
+   "t": "простой (обычный)",
+   "src": "10ggwgy11j"
+  },
+  "reduce#1": {
+   "t": "уменьшать",
+   "src": "12f0tvy1e9"
+  },
+  "replacement#1": {
+   "t": "замена",
+   "src": "15hnycyevd"
+  },
+  "schema#1": {
+   "t": "схема",
+   "src": "7g43zo41n6"
+  },
+  "something#1": {
+   "t": "что-то",
+   "src": "j77hro1vmd"
+  },
+  "store#1": {
+   "t": "хранить",
+   "src": "ocn6noxqop"
+  },
+  "survive#1": {
+   "t": "сохраняться (переживать)",
+   "src": "1blb5ht1ez"
+  },
+  "actually#1": {
+   "t": "на самом деле",
+   "src": "1q56i181nz"
+  },
+  "apart#1": {
+   "t": "отдельно",
+   "src": "14deg751d1"
+  },
+  "back#1": {
+   "t": "обратно",
+   "src": "heoyc7it6x"
+  },
+  "belong#1": {
+   "t": "принадлежать",
+   "src": "irjyvi2f9g"
+  },
+  "broadcast#1": {
+   "t": "широковещательная рассылка (broadcast)",
+   "src": "t5vlx07sku"
+  },
+  "cell#1": {
+   "t": "ячейка",
+   "src": "ro2ljj1lw4"
+  },
+  "change#1": {
+   "t": "изменять",
+   "src": "bi832pwsen"
+  },
+  "change#2": {
+   "t": "изменение",
+   "src": "1vrs4it1d2"
+  },
+  "cheap#1": {
+   "t": "дешёвый",
+   "src": "rv1z8xe5n6"
+  },
+  "classic#1": {
+   "t": "классический",
+   "src": "lp9khdmm5z"
+  },
+  "clustering#1": {
+   "t": "кластеризация",
+   "src": "1xb5nkzufa"
+  },
+  "consistency#1": {
+   "t": "согласованность",
+   "src": "1ytcpia13a"
+  },
+  "contain#1": {
+   "t": "содержать",
+   "src": "w181vm1arh"
+  },
+  "control#1": {
+   "t": "управление (контроль)",
+   "src": "xm52utcn3o"
+  },
+  "control plane#1": {
+   "t": "плоскость управления (control plane)",
+   "src": "1js4wsb194"
+  },
+  "compute plane#1": {
+   "t": "вычислительная плоскость (compute plane)",
+   "src": "7hgwr3f768"
+  },
+  "cook#1": {
+   "t": "готовить",
+   "src": "78kb0v1ukv"
+  },
+  "cook#2": {
+   "t": "повар",
+   "src": "15oeokzed6"
+  },
+  "dataset#1": {
+   "t": "набор данных",
+   "src": "1v6dpu31tx"
+  },
+  "debugging#1": {
+   "t": "отладка",
+   "src": "1jajdg9q6g"
+  },
+  "decide#1": {
+   "t": "решать (определять)",
+   "src": "a229fv140b"
+  },
+  "delete#1": {
+   "t": "удалять",
+   "src": "89qf0t93tf"
+  },
+  "deleted#1": {
+   "t": "удалённый",
+   "src": "4euy86efzr"
+  },
+  "disappear#1": {
+   "t": "исчезать",
+   "src": "1lw3kzazot"
+  },
+  "e-shop#1": {
+   "t": "интернет-магазин",
+   "src": "1fv4vcfh85"
+  },
+  "execution#1": {
+   "t": "выполнение",
+   "src": "1atzeg2k08"
+  },
+  "executor#1": {
+   "t": "исполнитель (executor)",
+   "src": "2qsizq17eh"
+  },
+  "exist#1": {
+   "t": "существовать",
+   "src": "8rr3oy12jr"
+  },
+  "existence#1": {
+   "t": "существование",
+   "src": "kbtxqy1qqe"
+  },
+  "folder#1": {
+   "t": "папка",
+   "src": "1l8qd2t1jn"
+  },
+  "form#1": {
+   "t": "форма",
+   "src": "93wqngy8zu"
+  },
+  "form#2": {
+   "t": "формулировать",
+   "src": "15hfmcbbfu"
+  },
+  "hash#1": {
+   "t": "хеш",
+   "src": "1r0yum81e4"
+  },
+  "historically#1": {
+   "t": "исторически",
+   "src": "1o7xwh81tc"
+  },
+  "huge#1": {
+   "t": "огромный",
+   "src": "5qf73w3q8c"
+  },
+  "include#1": {
+   "t": "включать",
+   "src": "1o94n8021u"
+  },
+  "isolation#1": {
+   "t": "изоляция",
+   "src": "1i9jcpl13h"
+  },
+  "know#1": {
+   "t": "знать",
+   "src": "77asj43aee"
+  },
+  "layout#1": {
+   "t": "размещение (раскладка)",
+   "src": "1hy652llgk"
+  },
+  "lifetime#1": {
+   "t": "время жизни",
+   "src": "omru5imuqu"
+  },
+  "mean#1": {
+   "t": "означать",
+   "src": "1gj7zog1pt"
+  },
+  "mechanism#1": {
+   "t": "механизм",
+   "src": "9f52eo1as6"
+  },
+  "modern#1": {
+   "t": "современный",
+   "src": "yvydqc14xm"
+  },
+  "name#1": {
+   "t": "имя (название)",
+   "src": "1i2jbvl1p3"
+  },
+  "network#1": {
+   "t": "сеть",
+   "src": "1qvogem1c5"
+  },
+  "notebook#1": {
+   "t": "ноутбук (интерактивный документ)",
+   "src": "1u16pdqg0a"
+  },
+  "pantry#1": {
+   "t": "кладовая",
+   "src": "pwquxhhcvu"
+  },
+  "partition#1": {
+   "t": "раздел (партиция)",
+   "src": "ti0jbfbqor"
+  },
+  "plan#1": {
+   "t": "план выполнения",
+   "src": "1bi1q8x4so"
+  },
+  "RAM#1": {
+   "t": "оперативная память",
+   "src": "mujxab7fhp"
+  },
+  "raw#1": {
+   "t": "сырой (необработанный)",
+   "src": "4ahowm29m9"
+  },
+  "real#1": {
+   "t": "реальный",
+   "src": "13nhcugkb0"
+  },
+  "server#1": {
+   "t": "сервер",
+   "src": "5drgxb7j2o"
+  },
+  "side#1": {
+   "t": "сторона",
+   "src": "f2ufjq1aof"
+  },
+  "skew#1": {
+   "t": "перекос данных",
+   "src": "1bdwgm5v2k"
+  },
+  "someone#1": {
+   "t": "кто-то",
+   "src": "1iauv1l1do"
+  },
+  "system#1": {
+   "t": "система",
+   "src": "n7vujudgtb"
+  },
+  "take#1": {
+   "t": "брать",
+   "src": "131790u19v"
+  },
+  "time#1": {
+   "t": "время",
+   "src": "14bpszl11r"
+  },
+  "together#1": {
+   "t": "вместе",
+   "src": "105617cqzw"
+  },
+  "update#1": {
+   "t": "обновление",
+   "src": "3e2bcc8rnl"
+  },
+  "update#2": {
+   "t": "обновлять",
+   "src": "181onz0daj"
+  },
+  "use#1": {
+   "t": "использовать",
+   "src": "dx0nqq1ajy"
+  },
+  "warehouse#1": {
+   "t": "хранилище данных (warehouse)",
+   "src": "q18hz8160w"
+  },
+  "web#1": {
+   "t": "веб",
+   "src": "1f1modv1tk"
+  },
+  "whole#1": {
+   "t": "целый (весь)",
+   "src": "1l9lilt1m5"
+  },
+  "work#1": {
+   "t": "работа",
+   "src": "10gfttemsv"
+  },
+  "work#2": {
+   "t": "работать",
+   "src": "1i1se9z44e"
+  },
+  "worker#1": {
+   "t": "рабочий узел (worker)",
+   "src": "usnfhk1b6b"
+  },
+  "able#1": {
+   "t": "способный (может)",
+   "src": "15su2681ve"
+  },
+  "ACID#1": {
+   "t": "ACID (атомарность, согласованность, изоляция, долговечность)",
+   "src": "xfztywapin"
+  },
+  "alone#1": {
+   "t": "сам по себе (один)",
+   "src": "1e34cefx9t"
+  },
+  "analogy#1": {
+   "t": "аналогия",
+   "src": "1llef71o9r"
+  },
+  "analytical#1": {
+   "t": "аналитический",
+   "src": "lg2esy1gbp"
+  },
+  "API#1": {
+   "t": "API (программный интерфейс)",
+   "src": "1nrubqmi26"
+  },
+  "application#1": {
+   "t": "приложение",
+   "src": "4bf80qkh9f"
+  },
+  "architecture#1": {
+   "t": "архитектура",
+   "src": "3oem217fe1"
+  },
+  "atomicity#1": {
+   "t": "атомарность",
+   "src": "grvk5319ch"
+  },
+  "atomic#1": {
+   "t": "атомарный",
+   "src": "1dzqs81ub2"
+  },
+  "backend#1": {
+   "t": "серверная часть (бэкенд)",
+   "src": "boxh8d1vr5"
+  },
+  "bad#1": {
+   "t": "плохой",
+   "src": "csyxl21vyz"
+  },
+  "become#1": {
+   "t": "становиться",
+   "src": "1g7zus31k1"
+  },
+  "beginner#1": {
+   "t": "новичок",
+   "src": "h1ffp37l3m"
+  },
+  "behavior#1": {
+   "t": "поведение",
+   "src": "1wot9yagyq"
+  },
+  "better#1": {
+   "t": "лучший",
+   "src": "1ei2yuxl6v"
+  },
+  "big#1": {
+   "t": "большой",
+   "src": "1bdmhwazhm"
+  },
+  "bring#1": {
+   "t": "приносить",
+   "src": "bktu919nrw"
+  },
+  "build#1": {
+   "t": "строить",
+   "src": "h5eakytyeo"
+  },
+  "building#1": {
+   "t": "здание",
+   "src": "e8m0ph1omh"
+  },
+  "call#1": {
+   "t": "называть",
+   "src": "1l77n5p2ho"
+  },
+  "case#1": {
+   "t": "случай",
+   "src": "1rg5m6116n"
+  },
+  "capacity#1": {
+   "t": "ёмкость (мощность)",
+   "src": "1orn87d7fe"
+  },
+  "cause#1": {
+   "t": "причина",
+   "src": "1hgmftedr7"
+  },
+  "central#1": {
+   "t": "центральный",
+   "src": "mf6ecn11as"
+  },
+  "challenge#1": {
+   "t": "задача (вызов)",
+   "src": "1h0ka5f1v0"
+  },
+  "check#1": {
+   "t": "проверять",
+   "src": "nplkrh1k2a"
+  },
+  "choice#1": {
+   "t": "выбор",
+   "src": "1338wxa4k7"
+  },
+  "choose#1": {
+   "t": "выбирать",
+   "src": "19m400qsuc"
+  },
+  "class#1": {
+   "t": "класс (категория)",
+   "src": "qyqji21d0a"
+  },
+  "code#1": {
+   "t": "код",
+   "src": "105qpnv1ob"
+  },
+  "coherent#1": {
+   "t": "согласованный",
+   "src": "1rgviiqb93"
+  },
+  "collect#1": {
+   "t": "собирать",
+   "src": "179wmzh17e"
+  },
+  "combine#1": {
+   "t": "объединять",
+   "src": "2tahs01jgx"
+  },
+  "compactly#1": {
+   "t": "компактно",
+   "src": "1eufk7611z"
+  },
+  "compare#1": {
+   "t": "сравнивать",
+   "src": "156zssp1b4"
+  },
+  "compatible#1": {
+   "t": "совместимый",
+   "src": "9h1b9xos0e"
+  },
+  "completely#1": {
+   "t": "полностью",
+   "src": "177jjjd148"
+  },
+  "compress#1": {
+   "t": "сжимать",
+   "src": "1q4vd50131"
+  },
+  "compression#1": {
+   "t": "сжатие",
+   "src": "150pzqa1sm"
+  },
+  "computation#1": {
+   "t": "вычисление",
+   "src": "1dlqm6q1ln"
+  },
+  "compute#2": {
+   "t": "вычислять",
+   "src": "f1m8z3xdec"
+  },
+  "concept#1": {
+   "t": "понятие",
+   "src": "1t0ammd3fd"
+  },
+  "configuration#1": {
+   "t": "конфигурация",
+   "src": "yf8hde194t"
+  },
+  "confusing#1": {
+   "t": "запутанный",
+   "src": "19qc7cnbu4"
+  },
+  "connect#1": {
+   "t": "соединять",
+   "src": "1morev81d3"
+  },
+  "coordinate#1": {
+   "t": "координировать",
+   "src": "kxqsr9q4gr"
+  },
+  "coordination#1": {
+   "t": "координация",
+   "src": "imv2d01rk2"
+  },
+  "copy#1": {
+   "t": "копировать",
+   "src": "fzfo4wnkxq"
+  },
+  "core#1": {
+   "t": "ядро (основа)",
+   "src": "129izap3zx"
+  },
+  "core#2": {
+   "t": "основной",
+   "src": "71uwluha7i"
+  },
+  "correct#1": {
+   "t": "правильный",
+   "src": "18xmjmbaqo"
+  },
+  "correspond#1": {
+   "t": "соответствовать",
+   "src": "1ogbgj8e5t"
+  },
+  "cosmetic#1": {
+   "t": "косметический",
+   "src": "egsutd2smh"
+  },
+  "count#1": {
+   "t": "считаться",
+   "src": "nbliqo1hjy"
+  },
+  "course#1": {
+   "t": "курс",
+   "src": "94kq2srtov"
+  },
+  "cover#1": {
+   "t": "охватывать",
+   "src": "1kxceb2kup"
+  },
+  "CPU#1": {
+   "t": "процессор",
+   "src": "1cddxxdnvn"
+  },
+  "crash#1": {
+   "t": "сбой",
+   "src": "g6br6s1q4t"
+  },
+  "create#1": {
+   "t": "создавать",
+   "src": "nkwl1sgmd1"
+  },
+  "customer#1": {
+   "t": "клиент",
+   "src": "hhkxsqfmam"
+  },
+  "cut#1": {
+   "t": "сокращать",
+   "src": "10s7ns2bv4"
+  },
+  "DAG#1": {
+   "t": "DAG (ориентированный ациклический граф)",
+   "src": "gwzdr61p8w"
+  },
+  "database-like#1": {
+   "t": "как в базе данных",
+   "src": "hnx09pw7e5"
+  },
+  "date#1": {
+   "t": "дата",
+   "src": "1eevuqskig"
+  },
+  "day#1": {
+   "t": "день",
+   "src": "1b4hxo094c"
+  },
+  "default#1": {
+   "t": "значение по умолчанию",
+   "src": "1enj5vt3tr"
+  },
+  "definition#1": {
+   "t": "определение",
+   "src": "tlqznx14d3"
+  },
+  "depend#1": {
+   "t": "зависеть",
+   "src": "u40eee1bfp"
+  },
+  "depth#1": {
+   "t": "глубина",
+   "src": "1ja0up6bda"
+  },
+  "design#1": {
+   "t": "дизайн (проект)",
+   "src": "1o5s2hj1a4"
+  },
+  "detail#1": {
+   "t": "деталь",
+   "src": "118840g1my"
+  },
+  "diagnose#1": {
+   "t": "диагностировать",
+   "src": "c546q615sn"
+  },
+  "diagnosis#1": {
+   "t": "диагноз",
+   "src": "184gfgo1sa"
+  },
+  "difference#1": {
+   "t": "разница",
+   "src": "18ck25w10h"
+  },
+  "directly#1": {
+   "t": "напрямую",
+   "src": "1afek9i904"
+  },
+  "disposable#1": {
+   "t": "одноразовый",
+   "src": "a45fho8wue"
+  },
+  "distributed#1": {
+   "t": "распределённый",
+   "src": "1s4uay11pc"
+  },
+  "DML#1": {
+   "t": "DML (команды изменения данных)",
+   "src": "1eod6le1ya"
+  },
+  "driver#1": {
+   "t": "драйвер",
+   "src": "1coari9xwd"
+  },
+  "drop#1": {
+   "t": "удалять (отбрасывать)",
+   "src": "wdq2lj1pf1"
+  },
+  "durability#1": {
+   "t": "долговечность",
+   "src": "ko75z62bgh"
+  },
+  "easy#1": {
+   "t": "лёгкий",
+   "src": "st1jov1219"
+  },
+  "editable#1": {
+   "t": "редактируемый",
+   "src": "1snl37d1fk"
+  },
+  "edit#1": {
+   "t": "редактировать",
+   "src": "reqqgi1h9y"
+  },
+  "encode#1": {
+   "t": "кодировать",
+   "src": "15rh9811sj"
+  },
+  "encoding#1": {
+   "t": "кодирование",
+   "src": "11uenew17v"
+  },
+  "end#1": {
+   "t": "заканчиваться",
+   "src": "1lpbg2quwo"
+  },
+  "enforce#1": {
+   "t": "обеспечивать соблюдение",
+   "src": "144hb781b4"
+  },
+  "engineer#1": {
+   "t": "инженер",
+   "src": "st72hxklyf"
+  },
+  "enormous#1": {
+   "t": "огромный",
+   "src": "4wovpisn7w"
+  },
+  "enough#1": {
+   "t": "достаточно",
+   "src": "12ftbq51pg"
+  },
+  "equivalent#1": {
+   "t": "эквивалентный",
+   "src": "1syqaf51jd"
+  },
+  "erase#1": {
+   "t": "стирать",
+   "src": "14mhpsi1p1"
+  },
+  "essential#1": {
+   "t": "существенный",
+   "src": "gzg0uzhqte"
+  },
+  "estimate#1": {
+   "t": "оценка",
+   "src": "13kvmwlltv"
+  },
+  "exact#1": {
+   "t": "точный",
+   "src": "1sy4sa51ey"
+  },
+  "example#1": {
+   "t": "пример",
+   "src": "1jprhgy193"
+  },
+  "exchange#1": {
+   "t": "обмен (exchange)",
+   "src": "1gvlycn13q"
+  },
+  "execute#1": {
+   "t": "выполнять",
+   "src": "1xga22g1i8"
+  },
+  "exercise#1": {
+   "t": "упражнение",
+   "src": "ixrrb31bvu"
+  },
+  "expect#1": {
+   "t": "ожидать",
+   "src": "116u1it14z"
+  },
+  "explain#1": {
+   "t": "объяснять",
+   "src": "1a7edz8koz"
+  },
+  "extend#1": {
+   "t": "расширять",
+   "src": "1wbsaxux2t"
+  },
+  "external#1": {
+   "t": "внешний",
+   "src": "i7zzv99npg"
+  },
+  "extra#1": {
+   "t": "дополнительный",
+   "src": "1jd98qzt0p"
+  },
+  "extremely#1": {
+   "t": "чрезвычайно",
+   "src": "1by7eb4onk"
+  },
+  "fail#1": {
+   "t": "завершаться ошибкой",
+   "src": "wjgl9f13ft"
+  },
+  "failure#1": {
+   "t": "сбой",
+   "src": "1uiq3zh17y"
+  },
+  "fallback#1": {
+   "t": "запасной вариант",
+   "src": "1ftmsil18i"
+  },
+  "feel#1": {
+   "t": "казаться",
+   "src": "1tjknao1iu"
+  },
+  "file-based#1": {
+   "t": "на основе файлов",
+   "src": "1mhui1x1ra"
+  },
+  "file-level#1": {
+   "t": "на уровне файлов",
+   "src": "qy16utoho2"
+  },
+  "file-oriented#1": {
+   "t": "ориентированный на файлы",
+   "src": "1orfapid1g"
+  },
+  "find#1": {
+   "t": "находить",
+   "src": "1b2pg1a1b5"
+  },
+  "first#1": {
+   "t": "сначала",
+   "src": "3ld0171m3p"
+  },
+  "fix#1": {
+   "t": "исправлять",
+   "src": "gkwwra1twy"
+  },
+  "flexible#1": {
+   "t": "гибкий",
+   "src": "rdywzrrhud"
+  },
+  "food#1": {
+   "t": "еда",
+   "src": "1yt035z1h3"
+  },
+  "footer#1": {
+   "t": "концевик файла (footer)",
+   "src": "kddbfn17gy"
+  },
+  "foundation#1": {
+   "t": "основа",
+   "src": "1dkgvmsx26"
+  },
+  "friendly#1": {
+   "t": "удобный",
+   "src": "36lou211jb"
+  },
+  "front office#1": {
+   "t": "фронт-офис (приём заказов)",
+   "src": "1w587g358j"
+  },
+  "full#1": {
+   "t": "полный",
+   "src": "c68qxj70hy"
+  },
+  "fundamentally#1": {
+   "t": "принципиально",
+   "src": "fvw8c2xb35"
+  },
+  "fuzzy#1": {
+   "t": "расплывчатый",
+   "src": "z4lu0f1fof"
+  },
+  "go#1": {
+   "t": "идти (уходить)",
+   "src": "n4r3gq15id"
+  },
+  "good#1": {
+   "t": "хороший",
+   "src": "g5uattn7lb"
+  },
+  "govern#1": {
+   "t": "управлять (контролировать)",
+   "src": "19s3drm1si"
+  },
+  "group#1": {
+   "t": "группировать",
+   "src": "nw89pm16vw"
+  },
+  "grid#1": {
+   "t": "сетка",
+   "src": "4frxbo1gsl"
+  },
+  "guarantee#1": {
+   "t": "гарантия",
+   "src": "1wzpdy911d"
+  },
+  "guess#1": {
+   "t": "угадывать",
+   "src": "tu5sbl1hya"
+  },
+  "guide#1": {
+   "t": "руководство",
+   "src": "zw78laeikb"
+  },
+  "half#1": {
+   "t": "половина",
+   "src": "46rg251npe"
+  },
+  "half-done#1": {
+   "t": "наполовину сделанный",
+   "src": "544qez1vcj"
+  },
+  "happen#1": {
+   "t": "происходить",
+   "src": "17hthli1h7"
+  },
+  "hierarchy#1": {
+   "t": "иерархия",
+   "src": "po16fa1o8f"
+  },
+  "hire#1": {
+   "t": "нанимать",
+   "src": "w0ybk217ri"
+  },
+  "history#1": {
+   "t": "история",
+   "src": "1470g2nrkq"
+  },
+  "home#1": {
+   "t": "дом",
+   "src": "rzy1r0vi83"
+  },
+  "hood#1": {
+   "t": "«под капотом»: что происходит внутри",
+   "src": "1rgpic01xg"
+  },
+  "horizontal#1": {
+   "t": "горизонтальный",
+   "src": "l36flk1dok"
+  },
+  "hypothesis#1": {
+   "t": "гипотеза",
+   "src": "f92k58aeig"
+  },
+  "idea#1": {
+   "t": "идея",
+   "src": "ik4n7gv9b5"
+  },
+  "identify#1": {
+   "t": "определять (выявлять)",
+   "src": "178mb481dh"
+  },
+  "imagine#1": {
+   "t": "представить",
+   "src": "18pmi0u1yt"
+  },
+  "immutable-ish#1": {
+   "t": "почти неизменяемый",
+   "src": "18qi8dm7e4"
+  },
+  "important#1": {
+   "t": "важный",
+   "src": "6x1o5v1u6h"
+  },
+  "imprecise#1": {
+   "t": "неточный",
+   "src": "l4so2m1rqe"
+  },
+  "increase#1": {
+   "t": "увеличивать",
+   "src": "901yso13mc"
+  },
+  "independent#1": {
+   "t": "независимый",
+   "src": "94ori81pi3"
+  },
+  "individual#1": {
+   "t": "отдельный",
+   "src": "rs5133sfq1"
+  },
+  "inefficient#1": {
+   "t": "неэффективный",
+   "src": "nlqk1jajvt"
+  },
+  "infrastructure#1": {
+   "t": "инфраструктура",
+   "src": "c419eemd33"
+  },
+  "ingestion#1": {
+   "t": "загрузка данных (ingestion)",
+   "src": "icw49xy3lk"
+  },
+  "insight#1": {
+   "t": "понимание (озарение)",
+   "src": "1sxzf4g1od"
+  },
+  "instead#1": {
+   "t": "вместо",
+   "src": "ts2is0e0kf"
+  },
+  "insufficient#1": {
+   "t": "недостаточный",
+   "src": "1hscaex2at"
+  },
+  "integrate#1": {
+   "t": "интегрировать",
+   "src": "1233vqe8dq"
+  },
+  "interleaving#1": {
+   "t": "чередование операций",
+   "src": "1tfbnj41at"
+  },
+  "intuitive#1": {
+   "t": "интуитивный",
+   "src": "8sc252183x"
+  },
+  "invariant#1": {
+   "t": "инвариант",
+   "src": "kuzo1e144a"
+  },
+  "invisible#1": {
+   "t": "невидимый",
+   "src": "xgllec1gtt"
+  },
+  "involve#1": {
+   "t": "включать (подразумевать)",
+   "src": "qn4cqzt7th"
+  },
+  "irrelevant#1": {
+   "t": "нерелевантный (ненужный)",
+   "src": "aca3brq0ug"
+  },
+  "job#1": {
+   "t": "задание",
+   "src": "1o14xykbfg"
+  },
+  "key#1": {
+   "t": "ключ",
+   "src": "mnlsq6owts"
+  },
+  "knowledge#1": {
+   "t": "знание",
+   "src": "tplff1oimj"
+  },
+  "lack#1": {
+   "t": "не иметь (недоставать)",
+   "src": "80ai82howv"
+  },
+  "lake#1": {
+   "t": "озеро данных",
+   "src": "1vx03ye12g"
+  },
+  "data lake#1": {
+   "t": "озеро данных (data lake)",
+   "src": "6n34hg8u02"
+  },
+  "data warehouse#1": {
+   "t": "хранилище данных (data warehouse)",
+   "src": "kcjoe6mnav"
+  },
+  "large#1": {
+   "t": "большой",
+   "src": "649bc6ck4j"
+  },
+  "lean#1": {
+   "t": "склоняться",
+   "src": "10hyorr13y"
+  },
+  "learn#1": {
+   "t": "изучать",
+   "src": "rp8x7j199f"
+  },
+  "letter#1": {
+   "t": "буква",
+   "src": "1oa6nn71kn"
+  },
+  "level#1": {
+   "t": "уровень",
+   "src": "1q6e5jc4de"
+  },
+  "level-up#1": {
+   "t": "следующий уровень",
+   "src": "1t29k6n1n0"
+  },
+  "line#1": {
+   "t": "строка (линия)",
+   "src": "v8ncze1xlo"
+  },
+  "list#1": {
+   "t": "перечислять",
+   "src": "1t5iczyv7w"
+  },
+  "live#1": {
+   "t": "находиться (жить)",
+   "src": "12sz32z1ut"
+  },
+  "local#1": {
+   "t": "локальный",
+   "src": "v6f55y1n9n"
+  },
+  "locate#1": {
+   "t": "находить (определять место)",
+   "src": "162pa1g1f1"
+  },
+  "location#1": {
+   "t": "расположение",
+   "src": "1m4vcgm18n"
+  },
+  "longer#1": {
+   "t": "«больше не»",
+   "src": "ubgqwu652e"
+  },
+  "look#1": {
+   "t": "выглядеть",
+   "src": "14kkwj1fz7"
+  },
+  "loop#1": {
+   "t": "цикл",
+   "src": "qu8iwg88da"
+  },
+  "machine#1": {
+   "t": "машина (компьютер)",
+   "src": "1xe6ey6glk"
+  },
+  "mainly#1": {
+   "t": "в основном",
+   "src": "vp5pz111mg"
+  },
+  "major#1": {
+   "t": "крупный",
+   "src": "1dp0pmmpib"
+  },
+  "manage#1": {
+   "t": "управлять",
+   "src": "ukatfg1jpy"
+  },
+  "management#1": {
+   "t": "управление",
+   "src": "10nolg711y"
+  },
+  "map#1": {
+   "t": "сопоставлять",
+   "src": "8us2un1dmh"
+  },
+  "mastery#1": {
+   "t": "мастерство",
+   "src": "bxph4u1p9m"
+  },
+  "meaning#1": {
+   "t": "значение",
+   "src": "12v2r8c9rc"
+  },
+  "mechanics#1": {
+   "t": "механика",
+   "src": "1woird0ryc"
+  },
+  "meet#1": {
+   "t": "встречать",
+   "src": "1877h5ulfg"
+  },
+  "memorize#1": {
+   "t": "заучивать",
+   "src": "svja971tox"
+  },
+  "memory#1": {
+   "t": "память",
+   "src": "1bidp9d1ce"
+  },
+  "mental#1": {
+   "t": "мысленный",
+   "src": "1sdb1i81s7"
+  },
+  "merge#1": {
+   "t": "сливать (объединять)",
+   "src": "1ynb3v5rxw"
+  },
+  "metric#1": {
+   "t": "метрика",
+   "src": "fcbqh79762"
+  },
+  "missing#1": {
+   "t": "недостающий",
+   "src": "2tl05019iz"
+  },
+  "mix#1": {
+   "t": "смешивать",
+   "src": "i7tzpz19gs"
+  },
+  "modification#1": {
+   "t": "изменение",
+   "src": "ljwy2e1xof"
+  },
+  "moment#1": {
+   "t": "момент",
+   "src": "k6e9s0rm8w"
+  },
+  "move#1": {
+   "t": "перемещать",
+   "src": "3ks64qx9vf"
+  },
+  "mutable#1": {
+   "t": "изменяемый",
+   "src": "1nquxpvdhc"
+  },
+  "naive#1": {
+   "t": "наивный",
+   "src": "1w425a69bu"
+  },
+  "namespace#1": {
+   "t": "пространство имён",
+   "src": "1xoly60k4j"
+  },
+  "necessarily#1": {
+   "t": "обязательно",
+   "src": "121eteg1fj"
+  },
+  "nested#1": {
+   "t": "вложенный",
+   "src": "vjovi14151"
+  },
+  "nobody#1": {
+   "t": "никто",
+   "src": "61pm5u1738"
+  },
+  "non-equi#1": {
+   "t": "неравенственный (не по равенству)",
+   "src": "di83vr1xs9"
+  },
+  "normal#1": {
+   "t": "обычный",
+   "src": "4gctnslxgf"
+  },
+  "note#1": {
+   "t": "заметка",
+   "src": "1wkkl171t1"
+  },
+  "nothing#1": {
+   "t": "ничего",
+   "src": "1f8on9r6nd"
+  },
+  "notice#1": {
+   "t": "заметить",
+   "src": "h3ob052jvz"
+  },
+  "object storage#1": {
+   "t": "объектное хранилище",
+   "src": "41abjpj14v"
+  },
+  "office#1": {
+   "t": "офис",
+   "src": "47loxr1wez"
+  },
+  "one-sentence#1": {
+   "t": "в одном предложении",
+   "src": "1n2t4ij746"
+  },
+  "OOM#1": {
+   "t": "OOM (нехватка памяти)",
+   "src": "18skmfk11d"
+  },
+  "open#1": {
+   "t": "открытый",
+   "src": "trs2kzq0ie"
+  },
+  "operate#1": {
+   "t": "эксплуатировать (управлять)",
+   "src": "1u4rz31xup"
+  },
+  "operation#1": {
+   "t": "операция",
+   "src": "a6ou821c50"
+  },
+  "operational#1": {
+   "t": "эксплуатационный",
+   "src": "15cejaw1ms"
+  },
+  "optimize#1": {
+   "t": "оптимизировать",
+   "src": "4vdhjp1u6h"
+  },
+  "optimization#1": {
+   "t": "оптимизация",
+   "src": "13hxhifqse"
+  },
+  "optimizer#1": {
+   "t": "оптимизатор",
+   "src": "aie3qjzodd"
+  },
+  "orchestration#1": {
+   "t": "оркестрация",
+   "src": "1c2qvrfxwf"
+  },
+  "organization#1": {
+   "t": "организация",
+   "src": "b1i771vdsi"
+  },
+  "organize#1": {
+   "t": "организовывать",
+   "src": "1igr5ehzlt"
+  },
+  "otherwise#1": {
+   "t": "иначе",
+   "src": "1bqosdl1wt"
+  },
+  "owner#1": {
+   "t": "владелец",
+   "src": "1hv5iol1qi"
+  },
+  "ownership#1": {
+   "t": "владение",
+   "src": "1il8asj1t0"
+  },
+  "page#1": {
+   "t": "страница",
+   "src": "p0ws9xddmi"
+  },
+  "pair#1": {
+   "t": "пара",
+   "src": "4865zr16ac"
+  },
+  "partial#1": {
+   "t": "частичный",
+   "src": "17tkz7u1cs"
+  },
+  "path#1": {
+   "t": "путь",
+   "src": "dlu4wpdfe6"
+  },
+  "pattern#1": {
+   "t": "шаблон (характер)",
+   "src": "1rm48q810g"
+  },
+  "anti-pattern#1": {
+   "t": "антипаттерн (плохая практика)",
+   "src": "1p9b8td17c"
+  },
+  "pay#1": {
+   "t": "платить",
+   "src": "4g455k14tm"
+  },
+  "peak#1": {
+   "t": "пик",
+   "src": "1icqxgb1is"
+  },
+  "performance#1": {
+   "t": "производительность",
+   "src": "1l9qmxp1y7"
+  },
+  "permission#1": {
+   "t": "разрешение (право)",
+   "src": "yxza1v29nb"
+  },
+  "persist#1": {
+   "t": "сохраняться",
+   "src": "15bqytz6c4"
+  },
+  "piece#1": {
+   "t": "часть (кусок)",
+   "src": "jnhd57tcw6"
+  },
+  "pipeline#1": {
+   "t": "конвейер (пайплайн)",
+   "src": "z8j3721heg"
+  },
+  "potentially#1": {
+   "t": "потенциально",
+   "src": "13bb9515bd"
+  },
+  "precise#1": {
+   "t": "точный",
+   "src": "1stzvx9d6d"
+  },
+  "predictive#1": {
+   "t": "прогнозный",
+   "src": "he1b9u104y"
+  },
+  "preview#1": {
+   "t": "предварительный обзор",
+   "src": "1131pdrehh"
+  },
+  "process#1": {
+   "t": "обрабатывать",
+   "src": "1np3nozpo3"
+  },
+  "produce#1": {
+   "t": "производить",
+   "src": "1wfpl9upzh"
+  },
+  "professional#1": {
+   "t": "профессиональный",
+   "src": "66zw3u1va4"
+  },
+  "program#1": {
+   "t": "программа",
+   "src": "1jujyvdksn"
+  },
+  "publish#1": {
+   "t": "публиковать",
+   "src": "15mxbbq16s"
+  },
+  "question#1": {
+   "t": "вопрос",
+   "src": "f36kcy1krx"
+  },
+  "querying#1": {
+   "t": "выполнение запросов",
+   "src": "1eszia1tcc"
+  },
+  "reason#1": {
+   "t": "причина (рассуждение)",
+   "src": "bbqtnb875i"
+  },
+  "record#1": {
+   "t": "записывать (фиксировать)",
+   "src": "bw6v7m6xyz"
+  },
+  "reference#1": {
+   "t": "ссылка",
+   "src": "1wgghudvji"
+  },
+  "refine#1": {
+   "t": "уточнять",
+   "src": "1tt8n3511s"
+  },
+  "region#1": {
+   "t": "область",
+   "src": "6ko0nhqeyh"
+  },
+  "relevant#1": {
+   "t": "соответствующий (нужный)",
+   "src": "1w5hv4d1rf"
+  },
+  "remain#1": {
+   "t": "оставаться",
+   "src": "3fciefm7oo"
+  },
+  "remeasure#1": {
+   "t": "измерить снова",
+   "src": "119kkt11hm"
+  },
+  "remove#1": {
+   "t": "удалять",
+   "src": "1ianmelit6"
+  },
+  "replace#1": {
+   "t": "заменять",
+   "src": "f3sa09ep19"
+  },
+  "replay#1": {
+   "t": "воспроизводить (применять заново)",
+   "src": "1dp5lri9ke"
+  },
+  "request#1": {
+   "t": "запрашивать",
+   "src": "jferzp1ak6"
+  },
+  "resource#1": {
+   "t": "ресурс",
+   "src": "mglz341lj2"
+  },
+  "respect#1": {
+   "t": "соблюдать",
+   "src": "1me8f9vkza"
+  },
+  "responsible#1": {
+   "t": "ответственный",
+   "src": "4uz4k1nxyd"
+  },
+  "restart#1": {
+   "t": "начинать заново",
+   "src": "kgk9sxeiad"
+  },
+  "restaurant#1": {
+   "t": "ресторан",
+   "src": "17jdqjcyjw"
+  },
+  "rewrite#1": {
+   "t": "перезапись",
+   "src": "1yj4y2b102"
+  },
+  "rigid#1": {
+   "t": "жёсткий",
+   "src": "w0rmnm6fuf"
+  },
+  "role#1": {
+   "t": "роль",
+   "src": "139nyzy171"
+  },
+  "room#1": {
+   "t": "комната",
+   "src": "1h6qvqk1ge"
+  },
+  "roughly#1": {
+   "t": "примерно",
+   "src": "1aqtilo1wl"
+  },
+  "round#1": {
+   "t": "раунд",
+   "src": "1ucbfhc1rf"
+  },
+  "row-oriented#1": {
+   "t": "строчно-ориентированный",
+   "src": "1osz4qm15w"
+  },
+  "row group#1": {
+   "t": "группа строк (row group)",
+   "src": "1vu23yn1lw"
+  },
+  "column chunk#1": {
+   "t": "фрагмент столбца (column chunk)",
+   "src": "18xubp5qw4"
+  },
+  "rule#1": {
+   "t": "правило",
+   "src": "rrkh0i1i53"
+  },
+  "runtime#1": {
+   "t": "время выполнения",
+   "src": "9rss88159m"
+  },
+  "save#1": {
+   "t": "сохранять",
+   "src": "1hi96js9cs"
+  },
+  "say#1": {
+   "t": "говорить",
+   "src": "5sqxjuv2mw"
+  },
+  "scale#1": {
+   "t": "масштабироваться",
+   "src": "wy8tdfyh75"
+  },
+  "scalable#1": {
+   "t": "масштабируемый",
+   "src": "drob6q180q"
+  },
+  "scan#1": {
+   "t": "сканировать",
+   "src": "19zzlbm51i"
+  },
+  "section#1": {
+   "t": "раздел",
+   "src": "lkwbkpdg5v"
+  },
+  "security#1": {
+   "t": "безопасность",
+   "src": "1fds5vd1r9"
+  },
+  "selection#1": {
+   "t": "выбор",
+   "src": "1diewlrdqw"
+  },
+  "self-check#1": {
+   "t": "самопроверка",
+   "src": "16g8bsi16w"
+  },
+  "send#1": {
+   "t": "отправлять",
+   "src": "mu8qli8cmz"
+  },
+  "sense#1": {
+   "t": "смысл",
+   "src": "1vnp4xq1tt"
+  },
+  "separate#1": {
+   "t": "отдельный",
+   "src": "gjz7lx49vc"
+  },
+  "separation#1": {
+   "t": "разделение",
+   "src": "meau4gx9pc"
+  },
+  "serverless#1": {
+   "t": "бессерверный (serverless)",
+   "src": "sy2w7ab5x5"
+  },
+  "service#1": {
+   "t": "сервис (служба)",
+   "src": "j9ppe2g7q3"
+  },
+  "setting#1": {
+   "t": "настройка",
+   "src": "ctiu92vcym"
+  },
+  "severe#1": {
+   "t": "серьёзный",
+   "src": "ummu1sysjd"
+  },
+  "similar#1": {
+   "t": "похожий",
+   "src": "1jbizt31qg"
+  },
+  "simplified#1": {
+   "t": "упрощённый",
+   "src": "a9i4gw1339"
+  },
+  "simply#1": {
+   "t": "просто",
+   "src": "a04dj11wqc"
+  },
+  "sit#1": {
+   "t": "находиться",
+   "src": "qwyyqz1x77"
+  },
+  "six#1": {
+   "t": "шесть",
+   "src": "16hf4op1t5"
+  },
+  "three#1": {
+   "t": "три",
+   "src": "d3wnui1cwj"
+  },
+  "two#1": {
+   "t": "два",
+   "src": "ihg4sn1tyh"
+  },
+  "size#1": {
+   "t": "размер",
+   "src": "19dvcicw9n"
+  },
+  "skill#1": {
+   "t": "навык",
+   "src": "1fuo0b05ck"
+  },
+  "skip#1": {
+   "t": "пропускать",
+   "src": "wkekrg1cpc"
+  },
+  "data skipping#1": {
+   "t": "пропуск данных (data skipping)",
+   "src": "qesfdyrsfk"
+  },
+  "slice#1": {
+   "t": "срез",
+   "src": "kuuq7med6c"
+  },
+  "small#1": {
+   "t": "маленький",
+   "src": "100ufrwb0b"
+  },
+  "snippet#1": {
+   "t": "фрагмент кода",
+   "src": "q1e5wr13k1"
+  },
+  "sophisticated#1": {
+   "t": "сложный (продвинутый)",
+   "src": "qr7xfme9od"
+  },
+  "sort#1": {
+   "t": "сортировать",
+   "src": "i3v2hii5f6"
+  },
+  "sound#1": {
+   "t": "звучать",
+   "src": "i2yaoz1lzk"
+  },
+  "source#1": {
+   "t": "источник",
+   "src": "2ywwia1k3u"
+  },
+  "specify#1": {
+   "t": "указывать",
+   "src": "1ll7pvg1p4"
+  },
+  "spill#1": {
+   "t": "сброс на диск (spill)",
+   "src": "1kwsowl166"
+  },
+  "split#1": {
+   "t": "разделять",
+   "src": "42f8jxjz6p"
+  },
+  "spot#1": {
+   "t": "«слабое место»",
+   "src": "13bcgk4171"
+  },
+  "stale#1": {
+   "t": "устаревший",
+   "src": "ocifep175u"
+  },
+  "standalone#1": {
+   "t": "автономный",
+   "src": "1pm6tbx15c"
+  },
+  "start#1": {
+   "t": "начинать",
+   "src": "sgd0rx108s"
+  },
+  "stay#1": {
+   "t": "оставаться",
+   "src": "habzef1j4q"
+  },
+  "stop#1": {
+   "t": "останавливаться",
+   "src": "xxgv731g49"
+  },
+  "strategy#1": {
+   "t": "стратегия",
+   "src": "9iifvwpp7h"
+  },
+  "structured#1": {
+   "t": "структурированный",
+   "src": "fphd261hmz"
+  },
+  "supply#1": {
+   "t": "предоставлять",
+   "src": "uwwo7u1fsw"
+  },
+  "suppose#1": {
+   "t": "предположим",
+   "src": "1ik21gn1kf"
+  },
+  "symptom#1": {
+   "t": "симптом",
+   "src": "1jdli7hg5c"
+  },
+  "syntax#1": {
+   "t": "синтаксис",
+   "src": "1dlati11sg"
+  },
+  "table-state#1": {
+   "t": "состояние таблицы",
+   "src": "13609txchz"
+  },
+  "temp#1": {
+   "t": "временный",
+   "src": "806z3ghd8x"
+  },
+  "terminate#1": {
+   "t": "завершать",
+   "src": "13xp4qwyi6"
+  },
+  "test#1": {
+   "t": "проверять",
+   "src": "1e7lneq1h7"
+  },
+  "theorem#1": {
+   "t": "теорема",
+   "src": "1r7igyhwao"
+  },
+  "thing#1": {
+   "t": "вещь",
+   "src": "1dsfqev1ed"
+  },
+  "think#1": {
+   "t": "думать",
+   "src": "1js65vu1rm"
+  },
+  "three-level#1": {
+   "t": "трёхуровневый",
+   "src": "eno8qr1dhk"
+  },
+  "tiny#1": {
+   "t": "крошечный",
+   "src": "eqqnpee0jn"
+  },
+  "tomorrow#1": {
+   "t": "завтра",
+   "src": "3q8rsox6kp"
+  },
+  "topic#1": {
+   "t": "тема",
+   "src": "sxav7v1k71"
+  },
+  "touch#1": {
+   "t": "трогать",
+   "src": "1ssegrs66k"
+  },
+  "track#1": {
+   "t": "отслеживать",
+   "src": "4uw0e81s82"
+  },
+  "transformation#1": {
+   "t": "преобразование",
+   "src": "5kj1sx1d0t"
+  },
+  "trap#1": {
+   "t": "ловушка",
+   "src": "vwx2i5s3vd"
+  },
+  "treat#1": {
+   "t": "рассматривать",
+   "src": "14s7l2e1t4"
+  },
+  "trivial#1": {
+   "t": "тривиальный",
+   "src": "172cks47ox"
+  },
+  "turn#1": {
+   "t": "превращаться",
+   "src": "1p2dlmw16d"
+  },
+  "underneath#1": {
+   "t": "внизу (под этим)",
+   "src": "53d55usnth"
+  },
+  "underpin#1": {
+   "t": "лежать в основе",
+   "src": "2awny7fnwb"
+  },
+  "understand#1": {
+   "t": "понимать",
+   "src": "w4lzji1jux"
+  },
+  "unit#1": {
+   "t": "единица",
+   "src": "rrinzqq0ti"
+  },
+  "untouched#1": {
+   "t": "нетронутый",
+   "src": "ru6fe913po"
+  },
+  "uncommitted#1": {
+   "t": "незафиксированный",
+   "src": "r4rar11jfl"
+  },
+  "usually#1": {
+   "t": "обычно",
+   "src": "sjyfias8kw"
+  },
+  "useful#1": {
+   "t": "полезный",
+   "src": "12rsmw1usf"
+  },
+  "value#1": {
+   "t": "значение",
+   "src": "yxj644f4nm"
+  },
+  "vanish#1": {
+   "t": "исчезать",
+   "src": "bouqyy1ac6"
+  },
+  "violate#1": {
+   "t": "нарушать",
+   "src": "3kaekpc1ip"
+  },
+  "visible#1": {
+   "t": "видимый",
+   "src": "16w6fc0ovm"
+  },
+  "want#1": {
+   "t": "хотеть",
+   "src": "1ny8ksfcnb"
+  },
+  "way#1": {
+   "t": "способ",
+   "src": "9xl20k1yqr"
+  },
+  "weak#1": {
+   "t": "слабый",
+   "src": "1j01g7rmri"
+  },
+  "word#1": {
+   "t": "слово",
+   "src": "15apbw6101"
+  },
+  "workload#1": {
+   "t": "рабочая нагрузка",
+   "src": "1uadx2i280"
+  },
+  "workspace#1": {
+   "t": "рабочая область",
+   "src": "1cwuxtjyps"
+  },
+  "wrong#1": {
+   "t": "неправильный",
+   "src": "1dkpkm1iui"
+  },
+  "zero#1": {
+   "t": "ноль",
+   "src": "84ikp31nd4"
+  },
+  "Monday#1": {
+   "t": "понедельник",
+   "src": "hjv09h1e42"
+  },
+  "Tuesday#1": {
+   "t": "вторник",
+   "src": "n1vebg77dj"
+  },
+  "Wednesday#1": {
+   "t": "среда",
+   "src": "e7lbbfsz7u"
+  },
+  "answer#1": {
+   "t": "ответ",
+   "src": "1eibm301gi"
+  },
+  "answer#2": {
+   "t": "отвечать",
+   "src": "k4iakst3mk"
+  },
+  "action#1": {
+   "t": "действие",
+   "src": "15bxs3rvng"
+  },
+  "afterward#1": {
+   "t": "потом",
+   "src": "eej3fp1wh9"
+  },
+  "aim#1": {
+   "t": "стремиться",
+   "src": "fvu6v5ff0r"
+  },
+  "anything#1": {
+   "t": "что угодно",
+   "src": "fftvnt1amx"
+  },
+  "apply#1": {
+   "t": "применять",
+   "src": "183ztv41l2"
+  },
+  "area#1": {
+   "t": "область",
+   "src": "1y6ljyxbpk"
+  },
+  "artifact#1": {
+   "t": "артефакт",
+   "src": "dh9tcx1wbp"
+  },
+  "asset#1": {
+   "t": "актив (ресурс)",
+   "src": "1iip79m14l"
+  },
+  "associate#1": {
+   "t": "уровень Associate",
+   "src": "6ar7smamf5"
+  },
+  "associated#1": {
+   "t": "связанный",
+   "src": "tqxihc1bei"
+  },
+  "automatically#1": {
+   "t": "автоматически",
+   "src": "1ugqv1a1vo"
+  },
+  "automation#1": {
+   "t": "автоматизация",
+   "src": "7cu4t1iovp"
+  },
+  "bundle#1": {
+   "t": "пакет (bundle)",
+   "src": "15se2yt1yf"
+  },
+  "CAP#1": {
+   "t": "CAP (теорема CAP)",
+   "src": "vgg8cd1t6j"
+  },
+  "data-science#1": {
+   "t": "data science (наука о данных)",
+   "src": "8sii9z1o71"
+  },
+  "database-table#1": {
+   "t": "таблица базы данных",
+   "src": "gtmu69zqb5"
+  },
+  "DataFrame#1": {
+   "t": "DataFrame (таблица данных в коде)",
+   "src": "69jqq310qo"
+  },
+  "decorative#1": {
+   "t": "декоративный",
+   "src": "pkrs8x1qxc"
+  },
+  "Delta Lake#1": {
+   "t": "Delta Lake",
+   "note": "формат таблиц: файлы Parquet плюс журнал транзакций (ACID)",
+   "src": "1qi6cnz3ku"
+  },
+  "Unity Catalog#1": {
+   "t": "Unity Catalog",
+   "note": "централизованное управление: имена (каталог.схема.таблица), владельцы, права",
+   "src": "17ybtjn1is"
+  },
+  "Spark UI#1": {
+   "t": "Spark UI (веб-интерфейс Spark)",
+   "src": "xpew6h1w2h"
+  },
+  "Time Travel#1": {
+   "t": "Time Travel (чтение старой версии таблицы)",
+   "src": "j7e8t31etv"
+  },
+  "Liquid Clustering#1": {
+   "t": "Liquid Clustering (гибкая кластеризация данных)",
+   "src": "fu94p01yc9"
+  },
+  "Adaptive Query Execution#1": {
+   "t": "Адаптивное выполнение запросов (AQE)",
+   "src": "5h44ndy7cy"
+  },
+  "Broadcast Hash Join#1": {
+   "t": "Broadcast Hash Join (BHJ): маленькая таблица копируется на каждый executor",
+   "src": "pxc7wl10hy"
+  },
+  "Sort-Merge Join#1": {
+   "t": "Sort-Merge Join (SMJ): перетасовка, сортировка, слияние",
+   "src": "1ctokdw11y"
+  },
+  "Shuffled Hash Join#1": {
+   "t": "Shuffled Hash Join (SHJ)",
+   "src": "nubdgy1ldk"
+  },
+  "Broadcast Nested Loop Join#1": {
+   "t": "Broadcast Nested Loop Join (BNLJ)",
+   "src": "1hqa3yu15o"
+  },
+  "transaction log#1": {
+   "t": "журнал транзакций",
+   "src": "1a4re1exvh"
+  },
+  "catalog#1": {
+   "t": "каталог",
+   "src": "1nlghcw1uc"
+  },
+  "hash table#1": {
+   "t": "хеш-таблица",
+   "src": "1rg5y7p18l"
+  },
+  "row pair#1": {
+   "t": "пара строк",
+   "src": "spzmac1vcz"
+  },
+  "weak spot#1": {
+   "t": "слабое место",
+   "src": "1yxv9tg18b"
+  },
+  "under the hood#1": {
+   "t": "«под капотом» (что происходит внутри)",
+   "src": "vu6j1ky1zu"
+  },
+  "no longer#1": {
+   "t": "больше не",
+   "src": "te0vzxdhte"
+  },
+  "come and go#1": {
+   "t": "приходят и уходят",
+   "src": "vvngk31x5r"
+  },
+  "later#1": {
+   "t": "позже",
+   "src": "ipfmwq1odr"
+  },
+  "troubleshooting#1": {
+   "t": "устранение неполадок",
+   "src": "17wykfjubo"
+  },
+  "absolutely#1": {
+   "t": "абсолютно",
+   "src": "vxxga22fdj"
+  },
+  "else#1": {
+   "t": "другое (ещё)",
+   "src": "1bob6lz1us"
+  },
+  "English#1": {
+   "t": "английский",
+   "src": "192r4fy1xs"
+  },
+  "throw#1": {
+   "t": "бросать (больше ресурсов)",
+   "src": "22jtvzquvl"
+  },
+  "stream#1": {
+   "t": "поток данных (стриминг)",
+   "src": "ljqdfe1wii"
+  },
+  "task#1": {
+   "t": "задача (task)",
+   "src": "29e1hp18py"
+  },
+  "checkpoint#1": {
+   "t": "контрольная точка (checkpoint)",
+   "src": "5yo1u41wa4"
+  },
+  "type#1": {
+   "t": "тип",
+   "src": "vcmsxz1avv"
+  },
+  "batch#1": {
+   "t": "пакет (batch)",
+   "src": "18c67k0hrz"
+  },
+  "event#1": {
+   "t": "событие",
+   "src": "pagwmk19ns"
+  },
+  "loader#1": {
+   "t": "загрузчик",
+   "src": "v4giy75bkg"
+  },
+  "production#1": {
+   "t": "продакшн (рабочая среда)",
+   "src": "1fam5ntnxi"
+  },
+  "identity#1": {
+   "t": "идентичность (учётная запись)",
+   "src": "1tirlhyrtb"
+  },
+  "mode#1": {
+   "t": "режим",
+   "src": "g97ew6taff"
+  },
+  "support#1": {
+   "t": "поддерживать",
+   "src": "1brl9tty1s"
+  },
+  "access#1": {
+   "t": "доступ",
+   "src": "l51z6tlpl7"
+  },
+  "watermark#1": {
+   "t": "водяной знак (watermark: предел опоздания)",
+   "src": "1r0ys1eduy"
+  },
+  "principal#1": {
+   "t": "субъект (principal: пользователь, группа или сервис)",
+   "src": "p6ubc9112u"
+  },
+  "privilege#1": {
+   "t": "привилегия",
+   "src": "11jm5cp11l"
+  },
+  "duplicate#1": {
+   "t": "дубликат",
+   "src": "13cxfmia7h"
+  },
+  "standard#1": {
+   "t": "стандартный",
+   "src": "trrn5r180a"
+  },
+  "all-purpose#1": {
+   "t": "универсальный (all-purpose)",
+   "src": "iubdgmlpo2"
+  },
+  "sink#1": {
+   "t": "приёмник (sink)",
+   "src": "3dkk1lt1wk"
+  },
+  "grant#1": {
+   "t": "выдавать (права)",
+   "src": "1oyouynwst"
+  },
+  "autoscaling#1": {
+   "t": "автомасштабирование",
+   "src": "ibbdgvd6ov"
+  },
+  "input#1": {
+   "t": "входные данные",
+   "src": "d3ruu8w5o7"
+  },
+  "volume#1": {
+   "t": "том (volume: хранилище файлов)",
+   "src": "aghdcn1hcu"
+  },
+  "stage#1": {
+   "t": "этап (стадия)",
+   "src": "1o2nkw7qb3"
+  },
+  "target#1": {
+   "t": "целевая система (цель)",
+   "src": "1rlinmdhoy"
+  },
+  "pool#1": {
+   "t": "пул (готовых машин)",
+   "src": "8m06611q8n"
+  },
+  "window#1": {
+   "t": "временное окно",
+   "src": "1whnf8dfm2"
+  },
+  "progress#1": {
+   "t": "прогресс (ход обработки)",
+   "src": "14e9klz93g"
+  },
+  "micro-batch#1": {
+   "t": "микропакет (micro-batch)",
+   "src": "1nabot9tgr"
+  },
+  "user#1": {
+   "t": "пользователь",
+   "src": "1c4zbrq10o"
+  },
+  "load#1": {
+   "t": "загружать",
+   "src": "1vkwzkx21u"
+  },
+  "schedule#1": {
+   "t": "расписание",
+   "src": "s29oxhsa2s"
+  },
+  "incremental#1": {
+   "t": "инкрементальный (только новое)",
+   "src": "1k0c8arp45"
+  },
+  "recommend#1": {
+   "t": "рекомендовать",
+   "src": "5eeuac1rgj"
+  },
+  "append#1": {
+   "t": "дописывать (добавлять в конец)",
+   "src": "3bct9h1cin"
+  },
+  "problem#1": {
+   "t": "проблема",
+   "src": "s79m4d15d7"
+  },
+  "filter#1": {
+   "t": "фильтровать",
+   "src": "tpu6891x33"
+  },
+  "arrive#1": {
+   "t": "поступать (приходить)",
+   "src": "1lbomjap0a"
+  },
+  "evolution#1": {
+   "t": "эволюция (схемы)",
+   "src": "1fwuvvt116"
+  },
+  "retention#1": {
+   "t": "срок хранения",
+   "src": "t12h3u13mx"
+  },
+  "dedicated#1": {
+   "t": "выделенный (Dedicated)",
+   "src": "nkavh9c3aq"
+  },
+  "interactive#1": {
+   "t": "интерактивный",
+   "src": "fg3yn21o60"
+  },
+  "trigger#1": {
+   "t": "триггер (условие запуска)",
+   "src": "9h63rs1gqf"
+  },
+  "result#1": {
+   "t": "результат",
+   "src": "1um4c04vea"
+  },
+  "match#1": {
+   "t": "совпадать",
+   "src": "1hpg57tab7"
+  },
+  "share#1": {
+   "t": "делиться (общий)",
+   "src": "n0euea40do"
+  },
+  "overwrite#1": {
+   "t": "перезаписывать",
+   "src": "13p9x3i1so"
+  },
+  "phase#1": {
+   "t": "этап (фаза)",
+   "src": "p7th8gwav0"
+  },
+  "credential#1": {
+   "t": "учётные данные",
+   "src": "1tud8bx7ca"
+  },
+  "idle#1": {
+   "t": "простаивающий",
+   "src": "k00skw1ncv"
+  },
+  "stateful#1": {
+   "t": "с состоянием (stateful)",
+   "src": "16ag9nuphy"
+  },
+  "slot#1": {
+   "t": "слот (для задачи)",
+   "src": "7t4vigdhnc"
+  },
+  "business#1": {
+   "t": "бизнес (прикладной)",
+   "src": "1re38n1gtp"
+  },
+  "late#1": {
+   "t": "опоздавший (поздний)",
+   "src": "12wldlfcho"
+  },
+  "string#1": {
+   "t": "строка (тип)",
+   "src": "t81phcq3hr"
+  },
+  "option#1": {
+   "t": "вариант (опция)",
+   "src": "1ae72jhau2"
+  },
+  "allow#1": {
+   "t": "разрешать",
+   "src": "bk5wxav4qm"
+  },
+  "exactly#1": {
+   "t": "точно",
+   "src": "1armp9t1ao"
+  },
+  "enable#1": {
+   "t": "включать",
+   "src": "1600mci2gy"
+  },
+  "library#1": {
+   "t": "библиотека (кода)",
+   "src": "4wu21pohfg"
+  },
+  "attach#1": {
+   "t": "подключать",
+   "src": "1imcshw3w5"
+  },
+  "mask#1": {
+   "t": "маска (скрытие значений)",
+   "src": "1u0wjb91de"
+  },
+  "account#1": {
+   "t": "учётная запись (аккаунт)",
+   "src": "yomyqy14k0"
+  },
+  "lifecycle#1": {
+   "t": "жизненный цикл",
+   "src": "1oyb4n35zr"
+  },
+  "node#1": {
+   "t": "узел",
+   "src": "ye7e384ys1"
+  },
+  "bound#1": {
+   "t": "граница",
+   "src": "13mqzud1er"
+  },
+  "instance#1": {
+   "t": "инстанс (машина)",
+   "src": "14ulatm1wu"
+  },
+  "policy#1": {
+   "t": "политика (правила)",
+   "src": "10h2gsc726"
+  },
+  "output#1": {
+   "t": "выходные данные",
+   "src": "19ib2zzegn"
+  },
+  "error#1": {
+   "t": "ошибка",
+   "src": "1w5xm7m16h"
+  },
+  "set#1": {
+   "t": "набор",
+   "src": "32z1i519lk"
+  },
+  "deployment#1": {
+   "t": "развёртывание",
+   "src": "e8tmo01vkn"
+  },
+  "function#1": {
+   "t": "функция",
+   "src": "nhbzle1sdy"
+  },
+  "aggregation#1": {
+   "t": "агрегация",
+   "src": "5kysurwgkz"
+  },
+  "idempotent#1": {
+   "t": "идемпотентный (тот же результат при повторе)",
+   "src": "1hzirq1yf6"
+  },
+  "inference#1": {
+   "t": "автоматическое определение (inference)",
+   "src": "4ogd1tjioq"
+  },
+  "number#1": {
+   "t": "число (номер)",
+   "src": "r0n6ic1tf4"
+  },
+  "retry#1": {
+   "t": "повторять попытку",
+   "src": "gs3ihs1e6h"
+  },
+  "field#1": {
+   "t": "поле",
+   "src": "17787rele6"
+  },
+  "offset#1": {
+   "t": "смещение (offset)",
+   "src": "nv4mb513kw"
+  },
+  "explicit#1": {
+   "t": "явный",
+   "src": "4lq8ts5j6p"
+  },
+  "scaling#1": {
+   "t": "масштабирование",
+   "src": "q90k3u1et9"
+  },
+  "upstream#1": {
+   "t": "вышестоящий (на стороне источника)",
+   "src": "sd4yjjl91u"
+  },
+  "disk#1": {
+   "t": "диск",
+   "src": "18genug1ld"
+  },
+  "available#1": {
+   "t": "доступный",
+   "src": "no4y4a1u5o"
+  },
+  "lab#1": {
+   "t": "практикум",
+   "src": "221s52jll4"
+  },
+  "dedup#1": {
+   "t": "дедупликация",
+   "src": "m9sks4vocp"
+  },
+  "configure#1": {
+   "t": "настраивать",
+   "src": "1ufpp7x1v6"
+  },
+  "feature#1": {
+   "t": "возможность (функция)",
+   "src": "f07cnd1gfy"
+  },
+  "single#1": {
+   "t": "единственный",
+   "src": "1fpu7fl86l"
+  },
+  "specific#1": {
+   "t": "конкретный",
+   "src": "m9yz591djn"
+  },
+  "null#1": {
+   "t": "пустое значение (null)",
+   "src": "pvtrd2ndi2"
+  },
+  "command#1": {
+   "t": "команда",
+   "src": "3obx871yy0"
+  },
+  "axis#1": {
+   "t": "ось",
+   "src": "k42roq6rro"
+  },
+  "concurrency#1": {
+   "t": "параллелизм (конкурентность)",
+   "src": "1alav5wdul"
+  },
+  "exactly-once#1": {
+   "t": "ровно один раз (exactly-once)",
+   "src": "qrxv7a5j2f"
+  },
+  "inspect#1": {
+   "t": "изучать (проверять)",
+   "src": "125rc8nkns"
+  },
+  "bug#1": {
+   "t": "ошибка в коде (баг)",
+   "src": "sfh4k6qtgt"
+  },
+  "view#1": {
+   "t": "представление (view)",
+   "src": "12drhvf108"
+  },
+  "pass#1": {
+   "t": "проход",
+   "src": "82lwhatmvs"
+  },
+  "validate#1": {
+   "t": "проверять (валидировать)",
+   "src": "d60ux733j8"
+  },
+  "latency#1": {
+   "t": "задержка (latency)",
+   "src": "n1s4ri9167"
+  },
+  "next#1": {
+   "t": "следующий",
+   "src": "1lym4ffvsk"
+  },
+  "today#1": {
+   "t": "сегодня",
+   "src": "ltqj6sp6dq"
+  },
+  "amount#1": {
+   "t": "сумма",
+   "src": "zhzgzy1h43"
+  },
+  "rescue#1": {
+   "t": "спасать (rescued data)",
+   "src": "14q92fd1cn"
+  },
+  "grow#1": {
+   "t": "расти",
+   "src": "8bnugf13b1"
+  },
+  "land#1": {
+   "t": "попадать (поступать)",
+   "src": "19nskiy198"
+  },
+  "existing#1": {
+   "t": "существующий",
+   "src": "16xkb9am5h"
+  },
+  "last#1": {
+   "t": "последний",
+   "src": "12096lf1c3"
+  },
+  "long#1": {
+   "t": "длинный (long: целое 64 бит)",
+   "src": "ytziq6187t"
+  },
+  "possible#1": {
+   "t": "возможный",
+   "src": "7z4hir1m8v"
+  },
+  "right#1": {
+   "t": "правильный (сразу)",
+   "src": "18819shiyu"
+  },
+  "cost#1": {
+   "t": "стоимость",
+   "src": "q7e3irdzg8"
+  },
+  "dashboard#1": {
+   "t": "дашборд (панель)",
+   "src": "1ec50t6t1c"
+  },
+  "handle#1": {
+   "t": "обрабатывать (справляться)",
+   "src": "1ha22xu179"
+  },
+  "purpose#1": {
+   "t": "цель",
+   "src": "23xyoq1j71"
+  },
+  "really#1": {
+   "t": "действительно",
+   "src": "1c703mc1w9"
+  },
+  "twice#1": {
+   "t": "дважды",
+   "src": "tvcx23g7v1"
+  },
+  "unbounded#1": {
+   "t": "неограниченный",
+   "src": "nntlwj46y1"
+  },
+  "securable#1": {
+   "t": "защищаемый объект (securable)",
+   "src": "ah5hlo90sq"
+  },
+  "complete#1": {
+   "t": "полный (завершённый)",
+   "src": "lsxro31fpb"
+  },
+  "pick#1": {
+   "t": "выбирать",
+   "src": "ig7axm1dn7"
+  },
+  "second#1": {
+   "t": "второй (секунда)",
+   "src": "1ssp1ac130"
+  },
+  "parse#1": {
+   "t": "разбирать (парсить)",
+   "src": "uatqzw1fhm"
+  },
+  "deploy#1": {
+   "t": "развёртывать",
+   "src": "1kz5wep7vh"
+  },
+  "declarative#1": {
+   "t": "декларативный",
+   "src": "1tatg6mojx"
+  },
+  "explicitly#1": {
+   "t": "явно",
+   "src": "yffzn3foy7"
+  },
+  "matrix#1": {
+   "t": "матрица",
+   "src": "2hwgw0129f"
+  },
+  "certification#1": {
+   "t": "сертификация",
+   "src": "oqclag1ebl"
+  },
+  "boundary#1": {
+   "t": "граница",
+   "src": "omaodm1cee"
+  },
+  "tool#1": {
+   "t": "инструмент",
+   "src": "1pqih2y1h4"
+  },
+  "aggregate#1": {
+   "t": "агрегировать",
+   "src": "13i71zg1a6"
+  },
+  "discover#1": {
+   "t": "обнаруживать",
+   "src": "98w74eqdhw"
+  },
+  "point#1": {
+   "t": "пункт (суть)",
+   "src": "grausjt6vm"
+  },
+  "ingest#1": {
+   "t": "загружать данные (ingest)",
+   "src": "udxwxm1pvl"
+  },
+  "fast#1": {
+   "t": "быстрый",
+   "src": "7jtolc1yy4"
+  },
+  "silently#1": {
+   "t": "молча (без предупреждения)",
+   "src": "ocp7v010r5"
+  },
+  "termination#1": {
+   "t": "завершение (отключение)",
+   "src": "j3kvvo188h"
+  },
+  "goal#1": {
+   "t": "цель",
+   "src": "orvfh31oeb"
+  },
+  "minute#1": {
+   "t": "минута",
+   "src": "1jgrb4n1cn"
+  },
+  "basic#1": {
+   "t": "базовый",
+   "src": "1pytohc1g7"
+  },
+  "practice#1": {
+   "t": "практика",
+   "src": "19x90ycerl"
+  },
+  "evolve#1": {
+   "t": "развиваться (эволюционировать)",
+   "src": "qx5r0q1izn"
+  },
+  "config#1": {
+   "t": "конфигурация",
+   "src": "1xdam04q0i"
+  },
+  "remember#1": {
+   "t": "помнить",
+   "src": "zpsvoh1tiq"
+  },
+  "require#1": {
+   "t": "требовать",
+   "src": "eyv9xjls81"
+  },
+  "product#1": {
+   "t": "продукт",
+   "src": "1gkpntv9ik"
+  },
+  "conflict#1": {
+   "t": "конфликт",
+   "src": "3x2jddm8ye"
+  },
+  "define#1": {
+   "t": "определять",
+   "src": "1w0a8gyvwh"
+  },
+  "matter#1": {
+   "t": "иметь значение",
+   "src": "6hkn1414up"
+  },
+  "break#1": {
+   "t": "ломаться",
+   "src": "9zxeq063tv"
+  },
+  "reset#1": {
+   "t": "сбрасывать",
+   "src": "1fptr4u6zt"
+  },
+  "auto#1": {
+   "t": "автоматический",
+   "src": "13q06z5oy2"
+  },
+  "show#1": {
+   "t": "показывать",
+   "src": "1my23gr19s"
+  },
+  "parameter#1": {
+   "t": "параметр",
+   "src": "1o6wti9u3d"
+  },
+  "dependency#1": {
+   "t": "зависимость",
+   "src": "1pkb42t1ck"
+  },
+  "automated#1": {
+   "t": "автоматизированный",
+   "src": "16960qtxmg"
+  },
+  "behaviour#1": {
+   "t": "поведение",
+   "src": "1gdtf5f1oy"
+  },
+  "best#1": {
+   "t": "лучший",
+   "src": "11nyd6k12x"
+  },
+  "chain#1": {
+   "t": "цепочка",
+   "src": "3sjas918i3"
+  },
+  "enforcement#1": {
+   "t": "контроль (схемы)",
+   "src": "1w5at3dzr5"
+  },
+  "incrementally#1": {
+   "t": "инкрементально",
+   "src": "1fendmrsyr"
+  },
+  "previous#1": {
+   "t": "предыдущий",
+   "src": "1utv6a6m5f"
+  },
+  "software#1": {
+   "t": "программное обеспечение",
+   "src": "b642mh18mv"
+  },
+  "prefer#1": {
+   "t": "предпочитать",
+   "src": "1gm2m7n1rs"
+  },
+  "appear#1": {
+   "t": "появляться",
+   "src": "ifm82v1juw"
+  },
+  "clean#1": {
+   "t": "очищать",
+   "src": "oc19mgmyls"
+  },
+  "operator#1": {
+   "t": "оператор",
+   "src": "1ks0vx118r"
+  },
+  "project#1": {
+   "t": "проект",
+   "src": "envc91bhfw"
+  },
+  "quote#1": {
+   "t": "кавычка",
+   "src": "wmmfdr1c18"
+  },
+  "cache#1": {
+   "t": "кэш",
+   "src": "148xipwfom"
+  },
+  "monitor#1": {
+   "t": "отслеживать (мониторить)",
+   "src": "16v8i5iy4h"
+  },
+  "limit#1": {
+   "t": "предел (лимит)",
+   "src": "fuvobxynya"
+  },
+  "contract#1": {
+   "t": "контракт (данных)",
+   "src": "1p65x0buiz"
+  },
+  "custom#1": {
+   "t": "пользовательский (свой)",
+   "src": "d0u90q1i30"
+  },
+  "development#1": {
+   "t": "разработка",
+   "src": "p19ehucv74"
+  },
+  "downstream#1": {
+   "t": "нижестоящий (дальше по потоку)",
+   "src": "1lfil4z4ph"
+  },
+  "forever#1": {
+   "t": "навсегда",
+   "src": "sxpz5l1eav"
+  },
+  "fully#1": {
+   "t": "полностью",
+   "src": "19fs7fpybu"
+  },
+  "groupBy#1": {
+   "t": "groupBy (группировка)",
+   "src": "1ydludk1gw"
+  },
+  "less#1": {
+   "t": "меньше",
+   "src": "1pw2c1po03"
+  },
+  "overhead#1": {
+   "t": "накладные расходы",
+   "src": "r7h0e2181h"
+  },
+  "top#1": {
+   "t": "верх (поверх)",
+   "src": "crygxpb0lh"
+  },
+  "delay#1": {
+   "t": "задержка",
+   "src": "sin8ij1hca"
+  },
+  "rate#1": {
+   "t": "скорость (темп)",
+   "src": "mfmsbf14qb"
+  },
+  "integration#1": {
+   "t": "интеграция",
+   "src": "v271dq11cc"
+  },
+  "condition#1": {
+   "t": "условие",
+   "src": "ynwwik1h1g"
+  },
+  "flow#1": {
+   "t": "поток",
+   "src": "vh17ih15d5"
+  },
+  "cast#1": {
+   "t": "приводить тип (cast)",
+   "src": "15bqwa81vd"
+  },
+  "provision#1": {
+   "t": "выделять ресурсы",
+   "src": "7ododl10m0"
+  },
+  "arrival#1": {
+   "t": "поступление (прибытие)",
+   "src": "1fndernpwy"
+  },
+  "duration#1": {
+   "t": "продолжительность",
+   "src": "hif6hrq0ze"
+  },
+  "wait#1": {
+   "t": "ждать",
+   "src": "xwn8772w4i"
+  },
+  "finish#1": {
+   "t": "завершать",
+   "src": "ketc7az0jh"
+  },
+  "accept#1": {
+   "t": "принимать",
+   "src": "1opr088dcz"
+  },
+  "lose#1": {
+   "t": "терять",
+   "src": "zq6zq110vt"
+  },
+  "backlog#1": {
+   "t": "отставание (накопленная очередь)",
+   "src": "1dou5d8q0t"
+  },
+  "event-time#1": {
+   "t": "время события",
+   "src": "jgecnt1hdn"
+  },
+  "least#1": {
+   "t": "наименьший",
+   "src": "af0ue7fdar"
+  },
+  "legacy#1": {
+   "t": "устаревший",
+   "src": "1ttp0e4kaf"
+  },
+  "lineage#1": {
+   "t": "происхождение данных (lineage)",
+   "src": "1p9gb061n8"
+  },
+  "manual#1": {
+   "t": "ручной",
+   "src": "56n9cn1guk"
+  },
+  "schemaLocation#1": {
+   "t": "schemaLocation (место схемы)",
+   "src": "trtdagzirs"
+  },
+  "simple#1": {
+   "t": "простой",
+   "src": "kxrci91oai"
+  },
+  "startup#1": {
+   "t": "запуск",
+   "src": "buvxa8otud"
+  },
+  "stateless#1": {
+   "t": "без состояния (stateless)",
+   "src": "17y5hjr1m3"
+  },
+  "typical#1": {
+   "t": "типичный",
+   "src": "15afebo12s"
+  },
+  "vectorized#1": {
+   "t": "векторизованный",
+   "src": "a3fz8t51oa"
+  },
+  "binding#1": {
+   "t": "привязка",
+   "src": "1whkacy1tu"
+  },
+  "help#1": {
+   "t": "помогать",
+   "src": "1corgq8kmu"
+  },
+  "UDF#1": {
+   "t": "пользовательская функция (UDF)",
+   "src": "1ob07vg124"
+  },
+  "consider#1": {
+   "t": "рассматривать",
+   "src": "yibqgu1aat"
+  },
+  "ABAC#1": {
+   "t": "доступ на основе атрибутов (ABAC)",
+   "src": "pcsnol1k8q"
+  },
+  "active#1": {
+   "t": "активный",
+   "src": "1tdnhcoudf"
+  },
+  "analytics#1": {
+   "t": "аналитика",
+   "src": "1bvjzfj8vi"
+  },
+  "docs#1": {
+   "t": "документация",
+   "src": "lndpz09c7i"
+  },
+  "far#1": {
+   "t": "намного (далеко)",
+   "src": "1qm573dsnn"
+  },
+  "infer#1": {
+   "t": "определять автоматически",
+   "src": "1hz6c3prc0"
+  },
+  "learning#1": {
+   "t": "обучение",
+   "src": "4h27vq19rn"
+  },
+  "materialized#1": {
+   "t": "материализованный",
+   "src": "1woiqwkg1q"
+  },
+  "parallelism#1": {
+   "t": "параллелизм",
+   "src": "xu2lha1lcf"
+  },
+  "double#1": {
+   "t": "double (дробное число)",
+   "src": "fu1f0i1mu9"
+  },
+  "transform#1": {
+   "t": "преобразовывать",
+   "src": "1nrti3cu2w"
+  },
+  "total#1": {
+   "t": "итог (сумма)",
+   "src": "t9wrr0mj37"
+  },
+  "branch#1": {
+   "t": "ветка",
+   "src": "1y2k6p85xf"
+  },
+  "content#1": {
+   "t": "содержимое",
+   "src": "jplry41j3n"
+  },
+  "effect#1": {
+   "t": "эффект",
+   "src": "kn55ri1dx8"
+  },
+  "return#1": {
+   "t": "возвращать",
+   "src": "19ytoqxsxw"
+  },
+  "workflow#1": {
+   "t": "рабочий процесс",
+   "src": "12wdy5d1wb"
+  },
+  "analyst#1": {
+   "t": "аналитик",
+   "src": "wucxnqnof5"
+  },
+  "capability#1": {
+   "t": "возможность",
+   "src": "drr5b6fg66"
+  },
+  "blindly#1": {
+   "t": "вслепую",
+   "src": "1nw96qh7y5"
+  },
+  "common#1": {
+   "t": "распространённый (общий)",
+   "src": "1lbobjjz2f"
+  },
+  "configurable#1": {
+   "t": "настраиваемый",
+   "src": "qng8541hr6"
+  },
+  "final#1": {
+   "t": "окончательный",
+   "src": "1xb1ced14o"
+  },
+  "fixed#1": {
+   "t": "фиксированный",
+   "src": "1kaazdv1j3"
+  },
+  "general#1": {
+   "t": "общий",
+   "src": "1tn4w5hn2n"
+  },
+  "high#1": {
+   "t": "высокий",
+   "src": "w160z213wh"
+  },
+  "incompatible#1": {
+   "t": "несовместимый",
+   "src": "85jpbyuej7"
+  },
+  "intentional#1": {
+   "t": "намеренный",
+   "src": "1mi4nd1ujv"
+  },
+  "malformed#1": {
+   "t": "некорректный (повреждённый)",
+   "src": "1yvt4j1g4z"
+  },
+  "multi-node#1": {
+   "t": "многоузловой",
+   "src": "1y3sqq3r7j"
+  },
+  "native#1": {
+   "t": "нативный (встроенный)",
+   "src": "kx01yz1lm7"
+  },
+  "partitioning#1": {
+   "t": "секционирование",
+   "src": "1bly7so1te"
+  },
+  "run-as#1": {
+   "t": "учётная запись запуска (run-as)",
+   "src": "dmz4qyb3dp"
+  },
+  "text#1": {
+   "t": "текст",
+   "src": "13bqzpk1vb"
+  },
+  "revoke#1": {
+   "t": "отзывать (права)",
+   "src": "d0o52mopce"
+  },
+  "feed#1": {
+   "t": "поток (feed)",
+   "src": "g5qgaospp9"
+  },
+  "parent#1": {
+   "t": "родительский объект",
+   "src": "1g2wovx1xp"
+  },
+  "predicate#1": {
+   "t": "предикат (условие)",
+   "src": "1ecj6p81be"
+  },
+  "statement#1": {
+   "t": "оператор (инструкция)",
+   "src": "1382bi310q"
+  },
+  "refresh#1": {
+   "t": "обновлять",
+   "src": "1wno6tmvcz"
+  },
+  "deduplicate#1": {
+   "t": "удалять дубликаты",
+   "src": "7dfhwapqbe"
+  },
+  "upsert#1": {
+   "t": "вставка или обновление (upsert)",
+   "src": "11pvmlj1dp"
+  },
+  "continue#1": {
+   "t": "продолжать",
+   "src": "76ryli1500"
+  },
+  "corrupt#1": {
+   "t": "повреждать",
+   "src": "n61gxs1y17"
+  },
+  "block#1": {
+   "t": "блокировать",
+   "src": "yyy2pfxu6o"
+  },
+  "audit#1": {
+   "t": "аудит",
+   "src": "aqnpmy1izy"
+  },
+  "authorization#1": {
+   "t": "авторизация",
+   "src": "7knkq4wcy8"
+  },
+  "continuous#1": {
+   "t": "непрерывный",
+   "src": "1f0s7ym1ep"
+  },
+  "daily#1": {
+   "t": "ежедневный",
+   "src": "10jhoy3yyd"
+  },
+  "dangerous#1": {
+   "t": "опасный",
+   "src": "egfj1dc2si"
+  },
+  "deletion#1": {
+   "t": "удаление",
+   "src": "1g4j4q1xi8"
+  },
+  "dynamic#1": {
+   "t": "динамический",
+   "src": "1f2bt5k40a"
+  },
+  "fine#1": {
+   "t": "в порядке",
+   "src": "feotcw1hnj"
+  },
+  "hardware#1": {
+   "t": "оборудование",
+   "src": "1r7na7m1ct"
+  },
+  "header#1": {
+   "t": "заголовок",
+   "src": "1mzhc36q6w"
+  },
+  "idempotency#1": {
+   "t": "идемпотентность",
+   "src": "nrxz9x19md"
+  },
+  "incoming#1": {
+   "t": "входящий",
+   "src": "l9wvxf19i8"
+  },
+  "logic#1": {
+   "t": "логика",
+   "src": "12x1vz412i"
+  },
+  "ordering#1": {
+   "t": "упорядочение",
+   "src": "1ujcxdzzw5"
+  },
+  "RDD#1": {
+   "t": "RDD (распределённый набор)",
+   "src": "10uu7opqsj"
+  },
+  "stack#1": {
+   "t": "стек",
+   "src": "13r3mrg1hw"
+  },
+  "static#1": {
+   "t": "статический",
+   "src": "kk26tprr8n"
+  },
+  "ACL#1": {
+   "t": "список доступа (ACL)",
+   "src": "1yd0n3r18t"
+  },
+  "bottleneck#1": {
+   "t": "узкое место",
+   "src": "xqj0ve5jk8"
+  },
+  "container#1": {
+   "t": "контейнер",
+   "src": "65jaxq9roi"
+  },
+  "debug#1": {
+   "t": "отлаживать",
+   "src": "ldoxedh7pn"
+  },
+  "internal#1": {
+   "t": "внутренний",
+   "src": "6dfekmvghw"
+  },
+  "mergeSchema#1": {
+   "t": "mergeSchema (слияние схемы)",
+   "src": "1xjne1215r"
+  },
+  "rebuild#1": {
+   "t": "перестраивать",
+   "src": "3qrob91gi9"
+  },
+  "timestamp#1": {
+   "t": "метка времени",
+   "src": "15kb9o01qg"
+  },
+  "avoid#1": {
+   "t": "избегать",
+   "src": "178xnkej50"
+  },
+  "sequence#1": {
+   "t": "последовательность",
+   "src": "m3ips0s520"
+  },
+  "session#1": {
+   "t": "сеанс",
+   "src": "m2k7um1fzk"
+  },
+  "step#1": {
+   "t": "шаг",
+   "src": "ngo27aflyb"
+  },
+  "fit#1": {
+   "t": "подходить (помещаться)",
+   "src": "1gn1w5016j"
+  },
+  "capture#1": {
+   "t": "фиксировать (захватывать)",
+   "src": "mhy4xfvm51"
+  },
+  "follow#1": {
+   "t": "следовать",
+   "src": "15ixegivlz"
+  },
+  "prove#1": {
+   "t": "доказывать",
+   "src": "1wlbnbsgz8"
+  },
+  "scope#1": {
+   "t": "область (охват)",
+   "src": "1pcnz8v1ic"
+  },
+  "assume#1": {
+   "t": "предполагать",
+   "src": "18qjvd91j4"
+  },
+  "re-read#1": {
+   "t": "перечитывать",
+   "src": "1witl4s35o"
+  },
+  "reprocess#1": {
+   "t": "переобрабатывать",
+   "src": "1qdtwzj1y3"
+  },
+  "automatic#1": {
+   "t": "автоматический",
+   "src": "k80v0fhe8m"
+  },
+  "BIGINT#1": {
+   "t": "BIGINT (большое целое)",
+   "src": "1jwvfuvins"
+  },
+  "city#1": {
+   "t": "город",
+   "src": "11re80vnv8"
+  },
+  "correctly#1": {
+   "t": "правильно",
+   "src": "gkykfntrn7"
+  },
+  "correctness#1": {
+   "t": "корректность",
+   "src": "1wfgkq312s"
+  },
+  "discovery#1": {
+   "t": "обнаружение",
+   "src": "1ynu0dcufu"
+  },
+  "inheritance#1": {
+   "t": "наследование (прав)",
+   "src": "1uzj4e5lol"
+  },
+  "INT#1": {
+   "t": "INT (целое)",
+   "src": "168tn92qla"
+  },
+  "parallel#1": {
+   "t": "параллельный",
+   "src": "1g6wz4n14t"
+  },
+  "reusable#1": {
+   "t": "многократно используемый",
+   "src": "1uacqs01ux"
+  },
+  "revenue#1": {
+   "t": "выручка",
+   "src": "1dc757i45k"
+  },
+  "row-level#1": {
+   "t": "на уровне строк",
+   "src": "58g46n14s4"
+  },
+  "sizing#1": {
+   "t": "выбор размера",
+   "src": "3e2fnpxflb"
+  },
+  "stable#1": {
+   "t": "стабильный",
+   "src": "1746r50o2t"
+  },
+  "wave#1": {
+   "t": "волна",
+   "src": "1hqz9br1xa"
+  },
+  "country#1": {
+   "t": "страна",
+   "src": "4wpi9x1e5m"
+  },
+  "property#1": {
+   "t": "свойство",
+   "src": "s8mncwwco2"
+  },
+  "team#1": {
+   "t": "команда",
+   "src": "1gcltj7205"
+  },
+  "car#1": {
+   "t": "машина",
+   "src": "9hlnyj16t5"
+  },
+  "differ#1": {
+   "t": "отличаться",
+   "src": "1ag60821c2"
+  },
+  "re-run#1": {
+   "t": "перезапускать",
+   "src": "1drj3e4wwe"
+  },
+  "script#1": {
+   "t": "скрипт",
+   "src": "1sakfwui39"
+  },
+  "shape#1": {
+   "t": "форма",
+   "src": "baiecm1ks6"
+  },
+  "widen#1": {
+   "t": "расширять (тип)",
+   "src": "1vla4fairi"
+  },
+  "mismatch#1": {
+   "t": "несоответствие",
+   "src": "e2ft4n1ae9"
+  },
+  "mistake#1": {
+   "t": "ошибка",
+   "src": "1vbijr07p6"
+  },
+  "reach#1": {
+   "t": "достигать",
+   "src": "uf83li1ndh"
+  },
+  "try#1": {
+   "t": "пытаться",
+   "src": "13u8h68q0h"
+  },
+  "dominate#1": {
+   "t": "доминировать",
+   "src": "1rlvywmtu7"
+  },
+  "rename#1": {
+   "t": "переименовывать",
+   "src": "1sgkzob11z"
+  },
+  "almost#1": {
+   "t": "почти",
+   "src": "1qjv4gs1yc"
+  },
+  "deduplication#1": {
+   "t": "дедупликация",
+   "src": "1ypuxsd8as"
+  },
+  "display#1": {
+   "t": "отображать",
+   "src": "yiuqok2wie"
+  },
+  "everywhere#1": {
+   "t": "везде",
+   "src": "wq7l2nv9af"
+  },
+  "four#1": {
+   "t": "четыре",
+   "src": "awqgsd1e1r"
+  },
+  "gate#1": {
+   "t": "контрольная точка (шлюз)",
+   "src": "1cxfzomkj2"
+  },
+  "GC#1": {
+   "t": "GC (сборка мусора)",
+   "src": "13ncebb1xo"
+  },
+  "likely#1": {
+   "t": "вероятный",
+   "src": "utiy3c9n4t"
+  },
+  "mini-project#1": {
+   "t": "мини-проект",
+   "src": "mccszw1eoc"
+  },
+  "other#1": {
+   "t": "другой",
+   "src": "k13zwzcahz"
+  },
+  "pressure#1": {
+   "t": "нагрузка (давление)",
+   "src": "4y5gc57x6i"
+  },
+  "qualified#1": {
+   "t": "полностью квалифицированный",
+   "src": "12rylm91iy"
+  },
+  "seq#1": {
+   "t": "seq (порядковый номер)",
+   "src": "149dlrxxxz"
+  },
+  "several#1": {
+   "t": "несколько",
+   "src": "2grxw118p3"
+  },
+  "short#1": {
+   "t": "короткий",
+   "src": "cqkfki1p7x"
+  },
+  "thousand#1": {
+   "t": "тысяча",
+   "src": "12rwnys1kj"
+  },
+  "tutorial#1": {
+   "t": "учебное руководство",
+   "src": "w6g4w3i9kd"
+  },
+  "validation#1": {
+   "t": "проверка (валидация)",
+   "src": "14oydi11o7"
+  },
+  "Pro#1": {
+   "t": "Pro (тип SQL warehouse)",
+   "src": "1tx7zru1w8"
+  },
+  "place#1": {
+   "t": "место (на месте)",
+   "src": "1o7al2lbwy"
+  },
+  "quarantine#1": {
+   "t": "карантин (таблица плохих строк)",
+   "src": "1gaks5jdsf"
+  },
+  "tell#1": {
+   "t": "говорить (показывать)",
+   "src": "zj26wb1f4q"
+  },
+  "vector#1": {
+   "t": "вектор (deletion vector)",
+   "src": "y2norx1xh2"
+  },
+  "lesson#1": {
+   "t": "урок",
+   "src": "1w33kww12h"
+  },
+  "scenario#1": {
+   "t": "сценарий",
+   "src": "1ndaeqs689"
+  },
+  "structure#1": {
+   "t": "структура",
+   "src": "13wcs0c3zh"
+  },
+  "book#1": {
+   "t": "книга",
+   "src": "9z665n1swv"
+  },
+  "email#1": {
+   "t": "e-mail (электронная почта)",
+   "src": "1jyjrir1e3"
+  },
+  "emit#1": {
+   "t": "выдавать (результат)",
+   "src": "1q1vd7h1rk"
+  },
+  "observe#1": {
+   "t": "наблюдать",
+   "src": "jzaus611d9"
+  },
+  "review#1": {
+   "t": "проверка (ревью)",
+   "src": "mi87mjujqh"
+  },
+  "receive#1": {
+   "t": "получать",
+   "src": "fehamnoaan"
+  },
+  "ALTER#1": {
+   "t": "ALTER (изменение определения)",
+   "src": "47amln15s3"
+  },
+  "clear#1": {
+   "t": "ясный",
+   "src": "16ixxf99l0"
+  },
+  "conceptually#1": {
+   "t": "концептуально",
+   "src": "1xq3l621l1"
+  },
+  "deliberately#1": {
+   "t": "намеренно",
+   "src": "1hjn0fc1m8"
+  },
+  "deprecated#1": {
+   "t": "устаревший (deprecated)",
+   "src": "1mo591o8nq"
+  },
+  "DV#1": {
+   "t": "deletion vector (DV)",
+   "src": "1d0pseq99d"
+  },
+  "entire#1": {
+   "t": "весь (целый)",
+   "src": "1azgnjfzk1"
+  },
+  "expensive#1": {
+   "t": "дорогой",
+   "src": "lx1lld1u9q"
+  },
+  "extension#1": {
+   "t": "расширение",
+   "src": "oxd85htj0a"
+  },
+  "infra#1": {
+   "t": "инфраструктура",
+   "src": "qc9y941e0d"
+  },
+  "intermediate#1": {
+   "t": "промежуточный",
+   "src": "11x478cesq"
+  },
+  "latest#1": {
+   "t": "последний (новейший)",
+   "src": "rkpo7r1b1n"
+  },
+  "main#1": {
+   "t": "основной (main)",
+   "src": "1ywyp8xjur"
+  },
+  "practical#1": {
+   "t": "практический",
+   "src": "usxrk1klm1"
+  },
+  "protocol#1": {
+   "t": "протокол",
+   "src": "1odbp4owiz"
+  },
+  "real-time#1": {
+   "t": "в реальном времени",
+   "src": "11tjecp15l"
+  },
+  "recap#1": {
+   "t": "краткий итог",
+   "src": "j8s7spdoc1"
+  },
+  "recovery#1": {
+   "t": "восстановление",
+   "src": "34xq1nyon5"
+  },
+  "root#1": {
+   "t": "корень (первопричина)",
+   "src": "1eoypoisik"
+  },
+  "sale#1": {
+   "t": "продажа",
+   "src": "1nz3llthml"
+  },
+  "stat#1": {
+   "t": "статистика",
+   "src": "t9llge1bjh"
+  },
+  "tracking#1": {
+   "t": "отслеживание",
+   "src": "1xpk8i01yz"
+  },
+  "true#1": {
+   "t": "верный",
+   "src": "fm3v6fxjoc"
+  },
+  "underlying#1": {
+   "t": "лежащий в основе",
+   "src": "1nw6ybndd5"
+  },
+  "walk#1": {
+   "t": "проходить (шаг за шагом)",
+   "src": "17fibmk14l"
+  },
+  "yesterday#1": {
+   "t": "вчера",
+   "src": "1fqsqxwb21"
+  },
+  "admin#1": {
+   "t": "администратор",
+   "src": "4x7ph97y4r"
+  },
+  "backup#1": {
+   "t": "резервная копия",
+   "src": "1jhgzwupxf"
+  },
+  "base#1": {
+   "t": "основываться",
+   "src": "4c2rac1x9y"
+  },
+  "developer#1": {
+   "t": "разработчик",
+   "src": "ct8e3qew25"
+  },
+  "experiment#1": {
+   "t": "экспериментировать",
+   "src": "1o89tzn30t"
+  },
+  "interface#1": {
+   "t": "интерфейс",
+   "src": "13mlylqjhp"
+  },
+  "million#1": {
+   "t": "миллион",
+   "src": "1nq36qooxv"
+  },
+  "minimum#1": {
+   "t": "минимум",
+   "src": "b9gg85iz9o"
+  },
+  "tune#1": {
+   "t": "настраивать (оптимизировать)",
+   "src": "1c7mmpl19e"
+  },
+  "close#1": {
+   "t": "закрывать",
+   "src": "wizbcd12hi"
+  },
+  "decision#1": {
+   "t": "решение",
+   "src": "ucf97c1o4q"
+  },
+  "inherit#1": {
+   "t": "наследовать",
+   "src": "100ri8f18a"
+  },
+  "limitation#1": {
+   "t": "ограничение",
+   "src": "1bkn69y1s3"
+  },
+  "press#1": {
+   "t": "нажимать",
+   "src": "143n8ogdzf"
+  },
+  "reload#1": {
+   "t": "перезагружать",
+   "src": "f2l98j1kkx"
+  },
+  "constraint#1": {
+   "t": "ограничение (constraint)",
+   "src": "tw5ge91hrt"
+  },
+  "expose#1": {
+   "t": "предоставлять (открывать)",
+   "src": "wcygsknws1"
+  },
+  "playbook#1": {
+   "t": "сценарий действий (playbook)",
+   "src": "1r3b7kom6s"
+  },
+  "reject#1": {
+   "t": "отклонять",
+   "src": "13r1yzd1st"
+  },
+  "secret#1": {
+   "t": "секрет",
+   "src": "1o50n3fnka"
+  },
+  "solution#1": {
+   "t": "решение",
+   "src": "296lgu1jl4"
+  },
+  "solve#1": {
+   "t": "решать",
+   "src": "135tdmn1td"
+  },
+  "tag#1": {
+   "t": "тег (метка)",
+   "src": "1li70461bt"
+  },
+  "advance#1": {
+   "t": "продвигаться",
+   "src": "137gisq1u6"
+  },
+  "document#1": {
+   "t": "документировать",
+   "src": "19g7e0w1ss"
+  },
+  "hide#1": {
+   "t": "скрывать",
+   "src": "vptgx1cnc5"
+  },
+  "provide#1": {
+   "t": "предоставлять",
+   "src": "5uemeg1qmg"
+  },
+  "abstraction#1": {
+   "t": "абстракция",
+   "src": "1p5pgfw1k6"
+  },
+  "algorithm#1": {
+   "t": "алгоритм",
+   "src": "d7rt451o7b"
+  },
+  "auto-termination#1": {
+   "t": "автоотключение",
+   "src": "byr8ac3b0f"
+  },
+  "away#1": {
+   "t": "прочь (забирает)",
+   "src": "xjibol4y4i"
+  },
+  "bottom#1": {
+   "t": "низ",
+   "src": "1jvzmaa1bg"
+  },
+  "broad#1": {
+   "t": "широкий",
+   "src": "xqo12imsj4"
+  },
+  "bucket#1": {
+   "t": "бакет (контейнер)",
+   "src": "rp7v1b2fxf"
+  },
+  "business-key#1": {
+   "t": "бизнес-ключ",
+   "src": "19tqj05gsb"
+  },
+  "cloudFiles#1": {
+   "t": "cloudFiles (Auto Loader)",
+   "src": "blopb816lx"
+  },
+  "company#1": {
+   "t": "компания",
+   "src": "pwiet32qfz"
+  },
+  "conceptual#1": {
+   "t": "концептуальный",
+   "src": "1puemh0184"
+  },
+  "continuously#1": {
+   "t": "непрерывно",
+   "src": "dhysfr8a8i"
+  },
+  "coordinator#1": {
+   "t": "координатор",
+   "src": "anip5nkd3w"
+  },
+  "DECIMAL#1": {
+   "t": "DECIMAL (точное десятичное)",
+   "src": "15zg4ce1fo"
+  },
+  "dedupe#1": {
+   "t": "удалять дубликаты",
+   "src": "k79j9119al"
+  },
+  "deep#1": {
+   "t": "глубокий (полная копия)",
+   "src": "1avx43aj3b"
+  },
+  "direct#1": {
+   "t": "прямой",
+   "src": "1hxd36a1ja"
+  },
+  "durable#1": {
+   "t": "долговечный (надёжный)",
+   "src": "1n7k9uw1pt"
+  },
+  "ecommerce#1": {
+   "t": "электронная коммерция",
+   "src": "x6jnzy114w"
+  },
+  "engineering#1": {
+   "t": "инженерия (данных)",
+   "src": "hqhfgx6tey"
+  },
+  "exploration#1": {
+   "t": "исследование",
+   "src": "tatonvc79g"
+  },
+  "explorer#1": {
+   "t": "обозреватель (Explorer)",
+   "src": "vw5flt1vdo"
+  },
+  "extract#1": {
+   "t": "извлекать",
+   "src": "17ym3jx1ex"
+  },
+  "few#1": {
+   "t": "немногие (меньше)",
+   "src": "1vplw7r11y"
+  },
+  "force#1": {
+   "t": "заставлять (вызывать)",
+   "src": "19k4vib1c7"
+  },
+  "frequent#1": {
+   "t": "частый",
+   "src": "1c6pniv1nv"
+  },
+  "growth#1": {
+   "t": "рост",
+   "src": "1otkztbsok"
+  },
+  "heavy#1": {
+   "t": "тяжёлый",
+   "src": "5an7da1o7m"
+  },
+  "immediately#1": {
+   "t": "сразу",
+   "src": "1x9cg5vym5"
+  },
+  "initial#1": {
+   "t": "начальный",
+   "src": "lgljureu7m"
+  },
+  "introduce#1": {
+   "t": "вводить",
+   "src": "1309am1wy1"
+  },
+  "IO#1": {
+   "t": "ввод-вывод (IO)",
+   "src": "15kd8f21ce"
+  },
+  "locally#1": {
+   "t": "локально",
+   "src": "12k409lrlr"
+  },
+  "low#1": {
+   "t": "низкий",
+   "src": "1gzmfzn1ya"
+  },
+  "mapping#1": {
+   "t": "соответствие",
+   "src": "7wtlepbwaf"
+  },
+  "maximum#1": {
+   "t": "максимум",
+   "src": "11upfniq3w"
+  },
+  "multiple#1": {
+   "t": "несколько",
+   "src": "11rrcmtfde"
+  },
+  "nightly#1": {
+   "t": "ночной",
+   "src": "yaaoyj1rfu"
+  },
+  "overwritten#1": {
+   "t": "перезаписанный",
+   "src": "xdyhzc1m1i"
+  },
+  "parser#1": {
+   "t": "парсер",
+   "src": "4ofb9afbmg"
+  },
+  "Patras#1": {
+   "t": "Патры / Волос",
+   "src": "1vday7vvlm"
+  },
+  "power#1": {
+   "t": "обеспечивать",
+   "src": "brqo5514vc"
+  },
+  "primary#1": {
+   "t": "первичный",
+   "src": "1ym0koq1tr"
+  },
+  "readStream#1": {
+   "t": "readStream (чтение потока)",
+   "src": "fyxe0r12cc"
+  },
+  "register#1": {
+   "t": "регистрировать",
+   "src": "15pl9781x8"
+  },
+  "repeat#1": {
+   "t": "повторять",
+   "src": "o5wwr413c2"
+  },
+  "sandbox#1": {
+   "t": "песочница",
+   "src": "1jjmmy2oil"
+  },
+  "selective#1": {
+   "t": "выборочный",
+   "src": "78ajhxllsx"
+  },
+  "selector#1": {
+   "t": "переключатель (селектор)",
+   "src": "hw4fgj1u6w"
+  },
+  "stream-stream#1": {
+   "t": "между двумя потоками",
+   "src": "mk5sajrwsb"
+  },
+  "STRUCT#1": {
+   "t": "STRUCT (составной тип)",
+   "src": "p8dy4513m8"
+  },
+  "typically#1": {
+   "t": "обычно",
+   "src": "y13wct10aq"
+  },
+  "unexpected#1": {
+   "t": "неожиданный",
+   "src": "r9sv453a96"
+  },
+  "unreferenced#1": {
+   "t": "без ссылок (неиспользуемый)",
+   "src": "1mism1y1ah"
+  },
+  "consumer#1": {
+   "t": "потребитель",
+   "src": "pvvfio1n2m"
+  },
+  "drift#1": {
+   "t": "дрейф (схемы)",
+   "src": "1xouwa51h3"
+  },
+  "entry#1": {
+   "t": "запись",
+   "src": "1l9fy6l1xd"
+  },
+  "position#1": {
+   "t": "позиция",
+   "src": "1uqd7qb11i"
+  },
+  "reuse#1": {
+   "t": "повторно использовать",
+   "src": "f7xsif14mh"
+  },
+  "component#1": {
+   "t": "компонент",
+   "src": "1frqpsm1g7"
+  },
+  "dimension#1": {
+   "t": "измерение",
+   "src": "1o06ee5u6q"
+  },
+  "entity#1": {
+   "t": "сущность",
+   "src": "1eri9avjw1"
+  },
+  "interview#1": {
+   "t": "собеседование",
+   "src": "kkxq2jiom5"
+  },
+  "speed#1": {
+   "t": "ускорять",
+   "src": "keddhd12r7"
+  },
+  "widget#1": {
+   "t": "виджет",
+   "src": "f3633b1n98"
+  },
+  "compact#1": {
+   "t": "уплотнять",
+   "src": "1jkayqgzg1"
+  },
+  "leave#1": {
+   "t": "уходить (оставлять)",
+   "src": "aedbp3lc5d"
+  },
+  "participate#1": {
+   "t": "участвовать",
+   "src": "18ifzcocir"
+  },
+  "range#1": {
+   "t": "диапазон",
+   "src": "1vukvjr1ky"
+  },
+  "requirement#1": {
+   "t": "требование",
+   "src": "1cfvnq5u5j"
+  },
+  "slide#1": {
+   "t": "скользить (скользящее окно)",
+   "src": "175joqu1nb"
+  },
+  "preserve#1": {
+   "t": "сохранять",
+   "src": "1yqrw6i17c"
+  },
+  "sample#1": {
+   "t": "образец (выборка)",
+   "src": "zj0x8u4ydl"
+  },
+  "analysis#1": {
+   "t": "анализ",
+   "src": "1phajb9tom"
+  },
+  "benefit#1": {
+   "t": "выигрывать (получать пользу)",
+   "src": "11j690s1gn"
+  },
+  "Beta#1": {
+   "t": "бета (тестовая версия)",
+   "src": "1f7ogd19th"
+  },
+  "box#1": {
+   "t": "коробка",
+   "src": "phaa261f1l"
+  },
+  "catalogue#1": {
+   "t": "каталог",
+   "src": "khc1j98uwa"
+  },
+  "characteristic#1": {
+   "t": "характеристика",
+   "src": "7zvdb91vbg"
+  },
+  "checklist#1": {
+   "t": "контрольный список",
+   "src": "34g2uf1tav"
+  },
+  "concurrently#1": {
+   "t": "одновременно",
+   "src": "q9q9d01bpq"
+  },
+  "consistent#1": {
+   "t": "согласованный",
+   "src": "1myejdetdh"
+  },
+  "CPU-bound#1": {
+   "t": "ограниченный процессором",
+   "src": "1d6co7c1df"
+  },
+  "delivery#1": {
+   "t": "доставка",
+   "src": "tydsuw1j3a"
+  },
+  "ephemeral#1": {
+   "t": "временный (эфемерный)",
+   "src": "1an0y2g11x"
+  },
+  "generally#1": {
+   "t": "как правило",
+   "src": "111etk5123"
+  },
+  "handy#1": {
+   "t": "удобный",
+   "src": "1j7p5wulqf"
+  },
+  "hot#1": {
+   "t": "«горячий» (очень частый)",
+   "src": "jqpoma1qnp"
+  },
+  "identifier#1": {
+   "t": "идентификатор",
+   "src": "qbzpka1vla"
+  },
+  "incorrect#1": {
+   "t": "неверный",
+   "src": "fh1jgl48sb"
+  },
+  "information#1": {
+   "t": "информация",
+   "src": "rmbe3m1j6j"
+  },
+  "init#1": {
+   "t": "инициализации (init)",
+   "src": "1jjnk2acxg"
+  },
+  "insert#1": {
+   "t": "вставлять",
+   "src": "3lgapp1ugx"
+  },
+  "intelligent#1": {
+   "t": "интеллектуальный",
+   "src": "e9nre714gf"
+  },
+  "intend#1": {
+   "t": "намереваться",
+   "src": "1ywv7f390h"
+  },
+  "interval#1": {
+   "t": "интервал",
+   "src": "ltdxjz17cb"
+  },
+  "isolated#1": {
+   "t": "изолированный",
+   "src": "1lar9e81bd"
+  },
+  "lateness#1": {
+   "t": "опоздание",
+   "src": "7bfuwkfi84"
+  },
+  "long-term#1": {
+   "t": "долгосрочный",
+   "src": "1uax857qjx"
+  },
+  "maintenance#1": {
+   "t": "обслуживание",
+   "src": "1ix49eo1e3"
+  },
+  "master#1": {
+   "t": "осваивать",
+   "src": "1giy5e4lty"
+  },
+  "median#1": {
+   "t": "медиана",
+   "src": "1xdi084md7"
+  },
+  "memory-per-core#1": {
+   "t": "память на ядро",
+   "src": "23g5zp199a"
+  },
+  "non-idempotent#1": {
+   "t": "неидемпотентный",
+   "src": "1ns56qu1w9"
+  },
+  "none#1": {
+   "t": "ничего (никакой)",
+   "src": "11cm7z49yo"
+  },
+  "numFiles#1": {
+   "t": "numFiles (число файлов)",
+   "src": "xwltto1q66"
+  },
+  "on-demand#1": {
+   "t": "по требованию",
+   "src": "3brls01ury"
+  },
+  "optimistic#1": {
+   "t": "оптимистичный",
+   "src": "1qy8jp21b9"
+  },
+  "ordinary#1": {
+   "t": "обычный",
+   "src": "3hccmi1ssa"
+  },
+  "quality#1": {
+   "t": "качество",
+   "src": "1ylg90ng9p"
+  },
+  "regional#1": {
+   "t": "региональный",
+   "src": "1idsr4x11v"
+  },
+  "relative#1": {
+   "t": "относительный",
+   "src": "1edighi14v"
+  },
+  "safe#1": {
+   "t": "безопасный",
+   "src": "u6xk9n1f3x"
+  },
+  "safely#1": {
+   "t": "безопасно",
+   "src": "1k1n9yi1ip"
+  },
+  "semantically#1": {
+   "t": "по смыслу",
+   "src": "ga2wc983o8"
+  },
+  "separator#1": {
+   "t": "разделитель",
+   "src": "yufbsp6np6"
+  },
+  "single-node#1": {
+   "t": "одноузловой",
+   "src": "18rj9upx5i"
+  },
+  "stuck#1": {
+   "t": "застрявший",
+   "src": "5eambx181v"
+  },
+  "suddenly#1": {
+   "t": "внезапно",
+   "src": "1n45l3knaz"
+  },
+  "table-level#1": {
+   "t": "на уровне таблицы",
+   "src": "3abq5x11jp"
+  },
+  "throughput#1": {
+   "t": "пропускная способность",
+   "src": "1u865vj93y"
+  },
+  "tolerance#1": {
+   "t": "устойчивость (к сбоям)",
+   "src": "1orxvh3ek8"
+  },
+  "toPandas#1": {
+   "t": "toPandas (копия в драйвер)",
+   "src": "1yqzgbkkig"
+  },
+  "unsupported#1": {
+   "t": "неподдерживаемый",
+   "src": "p4s7wb1uoh"
+  },
+  "re-running#1": {
+   "t": "повторный запуск",
+   "src": "180gl9x1aj"
+  },
+  "XML#1": {
+   "t": "XML (формат)",
+   "src": "r5hskagxxk"
+  },
+  "clock#1": {
+   "t": "часы",
+   "src": "cxpdrt1es2"
+  },
+  "correction#1": {
+   "t": "исправление",
+   "src": "1lie5cx1lw"
+  },
+  "distribution#1": {
+   "t": "распределение",
+   "src": "oatlna1k8k"
+  },
+  "empty#1": {
+   "t": "пустой",
+   "src": "1uhrd9xac4"
+  },
+  "hand#1": {
+   "t": "рука (вручную)",
+   "src": "1t46vb2bjl"
+  },
+  "notification#1": {
+   "t": "уведомление",
+   "src": "1wtcw4gp70"
+  },
+  "recommendation#1": {
+   "t": "рекомендация",
+   "src": "qhnzua17sm"
+  },
+  "spread#1": {
+   "t": "распределять",
+   "src": "k2kta12o16"
+  },
+  "tutor#1": {
+   "t": "наставник",
+   "src": "4pk3221hy5"
+  },
+  "warn#1": {
+   "t": "предупреждать",
+   "src": "1upre29bva"
+  },
+  "win#1": {
+   "t": "побеждать (выигрывать)",
+   "src": "18zem547gq"
+  },
+  "behave#1": {
+   "t": "вести себя",
+   "src": "1sj7y79plz"
+  },
+  "context#1": {
+   "t": "контекст",
+   "src": "1okdfx11c3"
+  },
+  "equal#1": {
+   "t": "быть равным",
+   "src": "l9bowk1rey"
+  },
+  "escape#1": {
+   "t": "экранировать",
+   "src": "1n9t6q31qu"
+  },
+  "expire#1": {
+   "t": "истекать",
+   "src": "1bii9m0169"
+  },
+  "hint#1": {
+   "t": "подсказка",
+   "src": "5qefdy1orl"
+  },
+  "hour#1": {
+   "t": "час",
+   "src": "uhfmg1vbm2"
+  },
+  "image#1": {
+   "t": "образ (ПО)",
+   "src": "vjcrvg2g48"
+  },
+  "install#1": {
+   "t": "устанавливать",
+   "src": "1ypiu1c1uh"
+  },
+  "mark#1": {
+   "t": "отмечать",
+   "src": "ci5q71up0y"
+  },
+  "profile#1": {
+   "t": "профиль",
+   "src": "1yexptcuzp"
+  },
+  "put#1": {
+   "t": "класть (помещать)",
+   "src": "z09m74c2gy"
+  },
+  "report#1": {
+   "t": "отчёт",
+   "src": "ip98lz1rjw"
+  },
+  "straggler#1": {
+   "t": "отстающая задача",
+   "src": "b45caa4f8f"
+  },
+  "upgrade#1": {
+   "t": "обновлять (повышать версию)",
+   "src": "1ujr5uowys"
+  },
+  "raise#1": {
+   "t": "повышать",
+   "src": "8hy65htyis"
+  },
+  "accidental#1": {
+   "t": "случайный",
+   "src": "u2ujt61274"
+  },
+  "ad-hoc#1": {
+   "t": "разовый",
+   "src": "o2rz8zy1vk"
+  },
+  "addNewColumns#1": {
+   "t": "addNewColumns (добавление столбцов)",
+   "src": "pxrdb81rvt"
+  },
+  "always-on#1": {
+   "t": "постоянно работающий",
+   "src": "1m9l6ty187"
+  },
+  "ANALYZE#1": {
+   "t": "ANALYZE (сбор статистики)",
+   "src": "aoyn4o16xx"
+  },
+  "Apache#1": {
+   "t": "Apache",
+   "src": "vt6gri18va"
+  },
+  "arbitrary#1": {
+   "t": "произвольный",
+   "src": "xagf3e18mf"
+  },
+  "authentication#1": {
+   "t": "аутентификация",
+   "src": "1kq8ept1c2"
+  },
+  "average#1": {
+   "t": "среднее",
+   "src": "1noso711u6"
+  },
+  "batch-like#1": {
+   "t": "как пакетный",
+   "src": "1n6w5xx1yc"
+  },
+  "bet#1": {
+   "t": "(слово мнемоники)",
+   "src": "nellpkz6kq"
+  },
+  "blind#1": {
+   "t": "слепой",
+   "src": "1op8lyy15s"
+  },
+  "browser#1": {
+   "t": "браузер",
+   "src": "c8pzf91vkn"
+  },
+  "built-in#1": {
+   "t": "встроенный",
+   "src": "12xylwn8mj"
+  },
+  "cardinality#1": {
+   "t": "кардинальность",
+   "src": "oslickdod8"
+  },
+  "cat#1": {
+   "t": "(слово мнемоники)",
+   "src": "8vx6sh14dd"
+  },
+  "cfg#1": {
+   "t": "конфигурация",
+   "src": "1i4zbw75gy"
+  },
+  "chunk#1": {
+   "t": "часть (порция)",
+   "src": "1gwacpf1vd"
+  },
+  "clarity#1": {
+   "t": "ясность",
+   "src": "11szta1y96"
+  },
+  "cleanup#1": {
+   "t": "очистка",
+   "src": "lc4zn9kmg1"
+  },
+  "CLI#1": {
+   "t": "командная строка (CLI)",
+   "src": "1hzv8be4zr"
+  },
+  "col#1": {
+   "t": "col (ссылка на столбец)",
+   "src": "1igs8gs1dv"
+  },
+  "compatibility#1": {
+   "t": "совместимость",
+   "src": "1v3fjsq14s"
+  },
+  "complex#1": {
+   "t": "сложный",
+   "src": "1xfljgmwxk"
+  },
+  "compute-scoped#1": {
+   "t": "в пределах вычислителя",
+   "src": "1tb8i11i21"
+  },
+  "connection#1": {
+   "t": "подключение",
+   "src": "2gldrp5bfe"
+  },
+  "consistently#1": {
+   "t": "последовательно",
+   "src": "ebr9ny1ek8"
+  },
+  "currently#1": {
+   "t": "в настоящее время",
+   "src": "n5p09t1d0o"
+  },
+  "cushion#1": {
+   "t": "(слово мнемоники)",
+   "src": "xpqr648ot8"
+  },
+  "data-quality#1": {
+   "t": "качества данных",
+   "src": "1hsklslkph"
+  },
+  "DDL#1": {
+   "t": "DDL (определение структур)",
+   "src": "rna2cu19jt"
+  },
+  "deliberate#1": {
+   "t": "намеренный",
+   "src": "nhxuy11wag"
+  },
+  "distinct#1": {
+   "t": "различный (уникальный)",
+   "src": "7acbfk1ud5"
+  },
+  "DL#1": {
+   "t": "глубокое обучение (DL)",
+   "src": "fmv7451f56"
+  },
+  "domain#1": {
+   "t": "область",
+   "src": "4zi6ctzhz8"
+  },
+  "dynamically#1": {
+   "t": "динамически",
+   "src": "1g62kce1ea"
+  },
+  "elsewhere#1": {
+   "t": "в другом месте",
+   "src": "7kdu6e11cs"
+  },
+  "end-to-end#1": {
+   "t": "от начала до конца",
+   "src": "skwtgk1bzj"
+  },
+  "evaluate#1": {
+   "t": "вычислять (оценивать)",
+   "src": "dimk7z15t9"
+  },
+  "evaluation#1": {
+   "t": "вычисление",
+   "src": "6cgmi6f8o0"
+  },
+  "false#1": {
+   "t": "ложный",
+   "src": "1im1caz3f2"
+  },
+  "fault#1": {
+   "t": "сбой",
+   "src": "1nswo62od0"
+  },
+  "federation#1": {
+   "t": "федерация",
+   "src": "kdf2ee1nh5"
+  },
+  "finance#1": {
+   "t": "финансы",
+   "src": "b9evod1p1c"
+  },
+  "fine-grained#1": {
+   "t": "детальный",
+   "src": "8zc58a16x4"
+  },
+  "fluffy#1": {
+   "t": "(слово мнемоники)",
+   "src": "1oxdoersoj"
+  },
+  "foreign#1": {
+   "t": "внешний",
+   "src": "1y6ttthkn0"
+  },
+  "fresh#1": {
+   "t": "свежий",
+   "src": "w7jk306rnl"
+  },
+  "global#1": {
+   "t": "глобальный",
+   "src": "5jfyhmfb0t"
+  },
+  "head#1": {
+   "t": "глава (старший)",
+   "src": "1mjvcq7ex2"
+  },
+  "heap#1": {
+   "t": "куча (heap)",
+   "src": "bz5xz6wizw"
+  },
+  "hierarchical#1": {
+   "t": "иерархический",
+   "src": "gcfd5qps6l"
+  },
+  "horizon#1": {
+   "t": "горизонт",
+   "src": "1o8pbgigci"
+  },
+  "immediate#1": {
+   "t": "немедленный",
+   "src": "1b4c9ec115"
+  },
+  "immutable#1": {
+   "t": "неизменяемый",
+   "src": "ta5mfj1ymn"
+  },
+  "impact#1": {
+   "t": "влияние",
+   "src": "1icz41v1p5"
+  },
+  "incident#1": {
+   "t": "инцидент",
+   "src": "40i4rtc4wp"
+  },
+  "intentionally#1": {
+   "t": "намеренно",
+   "src": "jjq53w1d1t"
+  },
+  "investigation#1": {
+   "t": "расследование",
+   "src": "2mejmavh6y"
+  },
+  "ladder#1": {
+   "t": "лестница",
+   "src": "1p6nsjgfc7"
+  },
+  "late-arriving#1": {
+   "t": "опоздавший",
+   "src": "js69983x5r"
+  },
+  "lazy#1": {
+   "t": "ленивый (вычисление по требованию)",
+   "src": "1tpol551ag"
+  },
+  "little#1": {
+   "t": "мало",
+   "src": "13myf3g1tn"
+  },
+  "long-running#1": {
+   "t": "долго работающий",
+   "src": "c03qct1civ"
+  },
+  "magic#1": {
+   "t": "magic (команды %)",
+   "src": "1bg9aex1jc"
+  },
+  "make#1": {
+   "t": "делать",
+   "src": "qgq26y2iba"
+  },
+  "manually#1": {
+   "t": "вручную",
+   "src": "1gzj67ysco"
+  },
+  "Markdown#1": {
+   "t": "Markdown (разметка)",
+   "src": "15xz2a5pp0"
+  },
+  "maybe#1": {
+   "t": "может быть",
+   "src": "1uj8cpm135"
+  },
+  "mnemonic#1": {
+   "t": "мнемоника",
+   "src": "xf8zxyuex3"
+  },
+  "multiLine#1": {
+   "t": "multiLine (многострочный)",
+   "src": "ajnr8071cs"
+  },
+  "naming#1": {
+   "t": "именование",
+   "src": "26yuv1bc3y"
+  },
+  "night#1": {
+   "t": "ночь",
+   "src": "8ej3kx1xu9"
+  },
+  "I/O-bound#1": {
+   "t": "ограниченный вводом-выводом",
+   "src": "uj1e5k1n8s"
+  },
+  "original#1": {
+   "t": "исходный",
+   "src": "s3hyog1iy8"
+  },
+  "perfect#1": {
+   "t": "идеальный",
+   "src": "mi2w4nindb"
+  },
+  "permission-debugging#1": {
+   "t": "отладка прав",
+   "src": "4uaghl186z"
+  },
+  "PERMISSIVE#1": {
+   "t": "PERMISSIVE (мягкий режим)",
+   "src": "eidqsiul8n"
+  },
+  "personal#1": {
+   "t": "личный",
+   "src": "49bupv8uof"
+  },
+  "platform-managed#1": {
+   "t": "управляемый платформой",
+   "src": "1rrfqt21eu"
+  },
+  "predictable#1": {
+   "t": "предсказуемый",
+   "src": "ffenvw1im7"
+  },
+  "provider#1": {
+   "t": "поставщик",
+   "src": "59ekck1k5e"
+  },
+  "pull#1": {
+   "t": "тянуть (pull request: запрос на слияние)",
+   "src": "w9mkea12y4"
+  },
+  "ready#1": {
+   "t": "готовый",
+   "src": "uioz8t1gmu"
+  },
+  "reality#1": {
+   "t": "реальность",
+   "src": "1nuerllaml"
+  },
+  "recipient#1": {
+   "t": "получатель",
+   "src": "ljfajy16an"
+  },
+  "rich#1": {
+   "t": "богатый",
+   "src": "1gzfiy72q0"
+  },
+  "roadmap#1": {
+   "t": "дорожная карта",
+   "src": "16l0rvy565"
+  },
+  "salary#1": {
+   "t": "зарплата",
+   "src": "1ekp3sn12o"
+  },
+  "silk#1": {
+   "t": "(слово мнемоники)",
+   "src": "1rj028g1s1"
+  },
+  "small-file#1": {
+   "t": "мелких файлов",
+   "src": "1kncqlg6xl"
+  },
+  "SparkContext#1": {
+   "t": "SparkContext",
+   "src": "1s5tzbk1rt"
+  },
+  "special#1": {
+   "t": "особый",
+   "src": "ulm65112ge"
+  },
+  "state-store#1": {
+   "t": "хранилище состояния",
+   "src": "dbzmp71gx9"
+  },
+  "StructType#1": {
+   "t": "StructType (схема из полей)",
+   "src": "1c290id1in"
+  },
+  "teaching#1": {
+   "t": "обучение",
+   "src": "h69mp4t8in"
+  },
+  "third#1": {
+   "t": "третий",
+   "src": "8ohoci1kv9"
+  },
+  "threshold#1": {
+   "t": "порог",
+   "src": "zbloyit8al"
+  },
+  "top-level#1": {
+   "t": "верхнего уровня",
+   "src": "1rmgjop1nj"
+  },
+  "traverse#1": {
+   "t": "проходить через",
+   "src": "4pkn8sg26f"
+  },
+  "tree#1": {
+   "t": "дерево",
+   "src": "wyr5pn1m9u"
+  },
+  "truth#1": {
+   "t": "истина",
+   "src": "1klsr0acsd"
+  },
+  "tumbling#1": {
+   "t": "неперекрывающиеся (tumbling)",
+   "src": "1pg96y61xy"
+  },
+  "unchanged#1": {
+   "t": "неизменный",
+   "src": "1fyrs7r148"
+  },
+  "unique#1": {
+   "t": "уникальный",
+   "src": "15zcrrbv3m"
+  },
+  "unrelated#1": {
+   "t": "несвязанный",
+   "src": "rhf7v71d96"
+  },
+  "update-like#1": {
+   "t": "похожий на обновление",
+   "src": "1amkftq1m7"
+  },
+  "versioned#1": {
+   "t": "версионированный",
+   "src": "1ncpw8doyp"
+  },
+  "visibility#1": {
+   "t": "видимость",
+   "src": "1uag3wgod9"
+  },
+  "watch#1": {
+   "t": "наблюдать",
+   "src": "zoiqia1z4s"
+  },
+  "WH#1": {
+   "t": "SQL warehouse",
+   "src": "lelmor1y66"
+  },
+  "wherever#1": {
+   "t": "везде, где",
+   "src": "1ypgo43e15"
+  },
+  "accelerate#1": {
+   "t": "ускорять",
+   "src": "ulzmiq6uwi"
+  },
+  "alternative#1": {
+   "t": "альтернатива",
+   "src": "11icrie1d9"
+  },
+  "bill#1": {
+   "t": "счёт (оплата)",
+   "src": "1vstpjf1cq"
+  },
+  "coalesce#1": {
+   "t": "объединять разделы (coalesce)",
+   "src": "y67v4b1g6h"
+  },
+  "declare#1": {
+   "t": "объявлять",
+   "src": "qmjlyfdu6i"
+  },
+  "diagram#1": {
+   "t": "диаграмма",
+   "src": "9x3ir81abu"
+  },
+  "implementation#1": {
+   "t": "реализация",
+   "src": "kiopvj1lvf"
+  },
+  "issue#1": {
+   "t": "проблема",
+   "src": "5gyzjoa0mg"
+  },
+  "kind#1": {
+   "t": "вид",
+   "src": "w4oiys1yi2"
+  },
+  "payment#1": {
+   "t": "платёж",
+   "src": "e5r7a9ira2"
+  },
+  "projection#1": {
+   "t": "проекция",
+   "src": "1oysukv10p"
+  },
+  "purge#1": {
+   "t": "окончательно удалять",
+   "src": "1q7hfhp2g0"
+  },
+  "recompute#1": {
+   "t": "пересчитывать",
+   "src": "f42w2jidnc"
+  },
+  "release#1": {
+   "t": "релиз (выпуск)",
+   "src": "1j2qhp31or"
+  },
+  "restrict#1": {
+   "t": "ограничивать",
+   "src": "pzgcipnaf3"
+  },
+  "serve#1": {
+   "t": "обслуживать",
+   "src": "27xa24h4y7"
+  },
+  "setup#1": {
+   "t": "настройка",
+   "src": "1nhhkbq1mz"
+  },
+  "signal#1": {
+   "t": "сигнал",
+   "src": "spax3fw90y"
+  },
+  "sum#1": {
+   "t": "сумма",
+   "src": "a40tj41sa0"
+  },
+  "zone#1": {
+   "t": "зона",
+   "src": "13pso631li"
+  },
+  "affect#1": {
+   "t": "влиять",
+   "src": "12zlvcd1ld"
+  },
+  "alert#1": {
+   "t": "оповещение",
+   "src": "nn1yw51t4x"
+  },
+  "backfill#1": {
+   "t": "дозагрузка истории (backfill)",
+   "src": "19y52jkz1t"
+  },
+  "balance#1": {
+   "t": "балансировать",
+   "src": "stjk0uj2mh"
+  },
+  "button#1": {
+   "t": "кнопка",
+   "src": "cri7exsvfn"
+  },
+  "concern#1": {
+   "t": "забота (аспект)",
+   "src": "z4dfd3jymf"
+  },
+  "disable#1": {
+   "t": "отключать",
+   "src": "1u90ux1195"
+  },
+  "exceed#1": {
+   "t": "превышать",
+   "src": "9vbutd1uzx"
+  },
+  "explode#1": {
+   "t": "резко расти",
+   "src": "19zd6sf1kl"
+  },
+  "human#1": {
+   "t": "человек",
+   "src": "x0i2km1xwv"
+  },
+  "interpret#1": {
+   "t": "интерпретировать",
+   "src": "1pc6ujm13q"
+  },
+  "investigate#1": {
+   "t": "расследовать",
+   "src": "2xha96e9dn"
+  },
+  "lock#1": {
+   "t": "блокировка",
+   "src": "nr3iy61ur6"
+  },
+  "marker#1": {
+   "t": "маркер",
+   "src": "1vxk25gm8e"
+  },
+  "opposite#1": {
+   "t": "противоположность",
+   "src": "1avpnstdmm"
+  },
+  "prerequisite#1": {
+   "t": "предварительное условие",
+   "src": "1y8aphi1lm"
+  },
+  "prevent#1": {
+   "t": "предотвращать",
+   "src": "3ggz6yydjo"
+  },
+  "protect#1": {
+   "t": "защищать",
+   "src": "15n0oizyjb"
+  },
+  "queue#1": {
+   "t": "очередь",
+   "src": "1tjs13m1xe"
+  },
+  "rely#1": {
+   "t": "полагаться",
+   "src": "13emeoruqh"
+  },
+  "resolve#1": {
+   "t": "разрешать (определять)",
+   "src": "chhteuwyz1"
+  },
+  "spell#1": {
+   "t": "писать (по буквам)",
+   "src": "os4top1jtm"
+  },
+  "succeed#1": {
+   "t": "выполняться успешно",
+   "src": "1a5glff43x"
+  },
+  "variable#1": {
+   "t": "переменная",
+   "src": "1bazrlv1uh"
+  },
+  "abstract#1": {
+   "t": "абстрагировать (скрывать детали)",
+   "src": "13wxvgemig"
+  },
+  "access-control#1": {
+   "t": "управление доступом",
+   "src": "p9z2is1uow"
+  },
+  "account-level#1": {
+   "t": "на уровне аккаунта",
+   "src": "1uq21xb1ot"
+  },
+  "authoritative#1": {
+   "t": "эталонный",
+   "src": "1uwifir55f"
+  },
+  "binary#1": {
+   "t": "двоичный",
+   "src": "d54ar81ses"
+  },
+  "black#1": {
+   "t": "чёрный (чёрный ящик)",
+   "src": "1jiqkrl1ho"
+  },
+  "blame#1": {
+   "t": "винить",
+   "src": "1g8inczq9u"
+  },
+  "care#1": {
+   "t": "осторожность",
+   "src": "ei6pvs147r"
+  },
+  "carry#1": {
+   "t": "нести (содержать)",
+   "src": "d3xlx1lscz"
+  },
+  "chef#1": {
+   "t": "шеф-повар",
+   "src": "ys0ogsn736"
+  },
+  "child#1": {
+   "t": "дочерний объект",
+   "src": "szfqc1uwc2"
+  },
+  "click#1": {
+   "t": "нажимать",
+   "src": "ohvzj51fva"
+  },
+  "clustered#1": {
+   "t": "сгруппированный (кластеризованный)",
+   "src": "jszfdq1loq"
+  },
+  "coexist#1": {
+   "t": "сосуществовать",
+   "src": "cba82q1mwm"
+  },
+  "collection#1": {
+   "t": "сборка (сборка мусора)",
+   "src": "1ipheop5bu"
+  },
+  "coming#1": {
+   "t": "предстоящий",
+   "src": "55qovrc7xu"
+  },
+  "compete#1": {
+   "t": "конкурировать",
+   "src": "la3sf5nsuj"
+  },
+  "constrained#1": {
+   "t": "ограниченный",
+   "src": "7vt34him12"
+  },
+  "convenient#1": {
+   "t": "удобный",
+   "src": "1kr9w7cj46"
+  },
+  "corruption#1": {
+   "t": "повреждение данных",
+   "src": "1x1y8p9o54"
+  },
+  "creation#1": {
+   "t": "создание",
+   "src": "17gjgzn4il"
+  },
+  "critical#1": {
+   "t": "важнейший",
+   "src": "b32s3i1nz5"
+  },
+  "defaults#1": {
+   "t": "по умолчанию равен",
+   "src": "5t6e8v12be"
+  },
+  "delimiter#1": {
+   "t": "разделитель",
+   "src": "10wf7ov1eh"
+  },
+  "desk#1": {
+   "t": "стойка (ресепшен)",
+   "src": "p5swsn1vrv"
+  },
+  "differently#1": {
+   "t": "по-разному",
+   "src": "gtjm6s17gg"
+  },
+  "documentation#1": {
+   "t": "документация",
+   "src": "h3du5t1w6c"
+  },
+  "driven#1": {
+   "t": "управляемый (зависящий от)",
+   "src": "13d0lcep3o"
+  },
+  "dropdown#1": {
+   "t": "выпадающий список",
+   "src": "qv3fib1mbg"
+  },
+  "early#1": {
+   "t": "рано",
+   "src": "1tqbipp15g"
+  },
+  "easier#1": {
+   "t": "проще",
+   "src": "3zjf3e4ynp"
+  },
+  "editor#1": {
+   "t": "редактор",
+   "src": "107ox4a4k3"
+  },
+  "efficiency#1": {
+   "t": "эффективность",
+   "src": "wgucr91sjh"
+  },
+  "especially#1": {
+   "t": "особенно",
+   "src": "wpqac611lg"
+  },
+  "fairly#1": {
+   "t": "довольно",
+   "src": "im0w7ir5pb"
+  },
+  "family#1": {
+   "t": "семейство",
+   "src": "mbz1ne1m6h"
+  },
+  "five#1": {
+   "t": "пять",
+   "src": "1qgoh5m1dy"
+  },
+  "formerly#1": {
+   "t": "ранее",
+   "src": "1ijgzdo1b9"
+  },
+  "free#1": {
+   "t": "бесплатный",
+   "src": "11r5qhbd2q"
+  },
+  "garbage#1": {
+   "t": "мусор (сборка мусора)",
+   "src": "13e74y4r1u"
+  },
+  "generic#1": {
+   "t": "универсальный",
+   "src": "vpefoi1p5m"
+  },
+  "giant#1": {
+   "t": "огромный",
+   "src": "1w8sk0019q"
+  },
+  "glob#1": {
+   "t": "шаблон glob (* и ?)",
+   "src": "6x4dx617y3"
+  },
+  "grammar#1": {
+   "t": "синтаксис (грамматика)",
+   "src": "2t5q7z193q"
+  },
+  "healthy#1": {
+   "t": "исправный (здоровый)",
+   "src": "ofsxzn1c54"
+  },
+  "historical#1": {
+   "t": "исторический",
+   "src": "jl1txwqgnp"
+  },
+  "hundred#1": {
+   "t": "сто (сотни)",
+   "src": "hf2xtg1bug"
+  },
+  "id#1": {
+   "t": "идентификатор",
+   "src": "ne267m1uly"
+  },
+  "item#1": {
+   "t": "элемент",
+   "src": "1fgr1di2so"
+  },
+  "late-data#1": {
+   "t": "опоздавших данных",
+   "src": "1k2fwicrhx"
+  },
+  "latency-sensitive#1": {
+   "t": "чувствительный к задержке",
+   "src": "1m9nj1y19w"
+  },
+  "learner#1": {
+   "t": "учащийся",
+   "src": "ii0d411i03"
+  },
+  "loss#1": {
+   "t": "потеря",
+   "src": "1bq98vs12k"
+  },
+  "low-latency#1": {
+   "t": "с низкой задержкой",
+   "src": "4w9hfa1y42"
+  },
+  "magically#1": {
+   "t": "волшебным образом",
+   "src": "bllpr91um9"
+  },
+  "memory-bound#1": {
+   "t": "ограниченный памятью",
+   "src": "1bo4otx181"
+  },
+  "memory-optimized#1": {
+   "t": "оптимизированный по памяти",
+   "src": "1aw3w6m1a8"
+  },
+  "migration#1": {
+   "t": "миграция",
+   "src": "iot6yr1dkx"
+  },
+  "moderate#1": {
+   "t": "умеренный",
+   "src": "17crjf8k1x"
+  },
+  "mutate#1": {
+   "t": "изменять",
+   "src": "1fs9m9415k"
+  },
+  "name-based#1": {
+   "t": "по имени",
+   "src": "orrryjp6gl"
+  },
+  "narrow#1": {
+   "t": "узкий",
+   "src": "1m800s514f"
+  },
+  "newline#1": {
+   "t": "перевод строки",
+   "src": "15b9byt1aw"
+  },
+  "non-serverless#1": {
+   "t": "не бессерверный",
+   "src": "1h0eanip3n"
+  },
+  "non-tabular#1": {
+   "t": "нетабличный",
+   "src": "1fcmpdx4il"
+  },
+  "notebook-scoped#1": {
+   "t": "в пределах ноутбука",
+   "src": "1op3f4g185"
+  },
+  "nuance#1": {
+   "t": "нюанс",
+   "src": "10x30pnhj3"
+  },
+  "official#1": {
+   "t": "официальный",
+   "src": "1tge6c31xp"
+  },
+  "ops#1": {
+   "t": "операции",
+   "src": "r0eej31p4o"
+  },
+  "optional#1": {
+   "t": "необязательный",
+   "src": "oxk0zdr2hr"
+  },
+  "organization-wide#1": {
+   "t": "на уровне всей организации",
+   "src": "ijr0d818cl"
+  },
+  "outer#1": {
+   "t": "внешний (outer join)",
+   "src": "uclfia1wig"
+  },
+  "outward#1": {
+   "t": "наружу",
+   "src": "cu86nh12ny"
+  },
+  "overlap#1": {
+   "t": "перекрытие",
+   "src": "1m3nj8m1fy"
+  },
+  "payroll#1": {
+   "t": "расчёт зарплаты",
+   "src": "1i93eni1j5"
+  },
+  "perfectly#1": {
+   "t": "прекрасно",
+   "src": "viakixo0f0"
+  },
+  "permanently#1": {
+   "t": "постоянно",
+   "src": "1ohkgat1id"
+  },
+  "pipeline-managed#1": {
+   "t": "управляемый конвейером",
+   "src": "1oda9nh1pp"
+  },
+  "poor#1": {
+   "t": "плохой",
+   "src": "3k0v5yam4o"
+  },
+  "positional#1": {
+   "t": "позиционный",
+   "src": "11j9hik2qq"
+  },
+  "possibly#1": {
+   "t": "возможно",
+   "src": "biw9vr1e5w"
+  },
+  "potential#1": {
+   "t": "потенциальный",
+   "src": "mdvhq0rmhm"
+  },
+  "producer#1": {
+   "t": "производитель (источник данных)",
+   "src": "sj4p9senjc"
+  },
+  "programming#1": {
+   "t": "программирование",
+   "src": "2eqzafg3wk"
+  },
+  "queryable#1": {
+   "t": "доступный для запросов",
+   "src": "zbc1ls1wx1"
+  },
+  "random#1": {
+   "t": "случайный",
+   "src": "prdyzb1cba"
+  },
+  "readable#1": {
+   "t": "читаемый",
+   "src": "18t1rdn1qy"
+  },
+  "recipe#1": {
+   "t": "рецепт",
+   "src": "kuz1brq6f8"
+  },
+  "reclaim#1": {
+   "t": "забирать обратно",
+   "src": "1o1y2vpftm"
+  },
+  "recomputation#1": {
+   "t": "пересчёт",
+   "src": "3b1e6hn2aw"
+  },
+  "redistribution#1": {
+   "t": "перераспределение",
+   "src": "22ymyu1ia5"
+  },
+  "regular#1": {
+   "t": "обычный",
+   "src": "kqvubcdd6b"
+  },
+  "reliability#1": {
+   "t": "надёжность",
+   "src": "1ufc1cu1ym"
+  },
+  "reliable#1": {
+   "t": "надёжный",
+   "src": "mqlho31ltp"
+  },
+  "reliably#1": {
+   "t": "надёжно",
+   "src": "10gxq4m1cy"
+  },
+  "repartition#1": {
+   "t": "переразбивать (repartition)",
+   "src": "bdivqsa303"
+  },
+  "reproducible#1": {
+   "t": "воспроизводимый",
+   "src": "yqpgvxfw0m"
+  },
+  "response#1": {
+   "t": "ответ",
+   "src": "b47eae1dtt"
+  },
+  "schema-evolution#1": {
+   "t": "эволюции схемы",
+   "src": "1nb64k21g9"
+  },
+  "sensible#1": {
+   "t": "разумный",
+   "src": "8rqspue2ug"
+  },
+  "separately#1": {
+   "t": "отдельно",
+   "src": "125cfui6cr"
+  },
+  "shelf#1": {
+   "t": "полка",
+   "src": "6h0kfe1xp9"
+  },
+  "silent#1": {
+   "t": "незаметный (тихий)",
+   "src": "1lzkb3t1ak"
+  },
+  "skeleton#1": {
+   "t": "каркас",
+   "src": "134el3y7zn"
+  },
+  "spare#1": {
+   "t": "свободный (резервный)",
+   "src": "9phww81b95"
+  },
+  "stray#1": {
+   "t": "случайный (лишний)",
+   "src": "10g5m5fn33"
+  },
+  "stream-static#1": {
+   "t": "потока со статической таблицей",
+   "src": "186l7rs162"
+  },
+  "strict#1": {
+   "t": "строгий",
+   "src": "1a5112qltb"
+  },
+  "strongest#1": {
+   "t": "самый сильный",
+   "src": "21sp3r1gd3"
+  },
+  "subset#1": {
+   "t": "подмножество",
+   "src": "19leubl2tw"
+  },
+  "successfully#1": {
+   "t": "успешно",
+   "src": "kx2zm0693n"
+  },
+  "suspect#1": {
+   "t": "подозревать",
+   "src": "1bkqebd130"
+  },
+  "switch#1": {
+   "t": "переключатель",
+   "src": "vniztmk1p9"
+  },
+  "tab#1": {
+   "t": "табуляция (вкладка)",
+   "src": "1k6nman4ie"
+  },
+  "teaser#1": {
+   "t": "анонс",
+   "src": "qrz8f01l1p"
+  },
+  "topology#1": {
+   "t": "топология",
+   "src": "xfz9x1vwk3"
+  },
+  "training#1": {
+   "t": "обучение",
+   "src": "12glml014j"
+  },
+  "unclosed#1": {
+   "t": "незакрытый",
+   "src": "1cabe5d694"
+  },
+  "unity#1": {
+   "t": "Unity (Unity Catalog)",
+   "src": "1iiz1pp1w3"
+  },
+  "universal#1": {
+   "t": "универсальный",
+   "src": "pgxvxa63p1"
+  },
+  "unpartitioned#1": {
+   "t": "несекционированный",
+   "src": "vg4eck1bmy"
+  },
+  "useless#1": {
+   "t": "бесполезный",
+   "src": "112mbqa1hb"
+  },
+  "vacuumed#1": {
+   "t": "удалённый VACUUM",
+   "src": "1rsc40r1to"
+  },
+  "vertical#1": {
+   "t": "вертикальный",
+   "src": "1ifzuuvcm7"
+  },
+  "wall#1": {
+   "t": "стена (реальное время)",
+   "src": "adlqb31nfj"
+  },
+  "wrap#1": {
+   "t": "оборачивать (содержать)",
+   "src": "7o6pfa14qy"
+  },
+  "authenticate#1": {
+   "t": "аутентифицироваться",
+   "src": "157y8fiuhc"
+  },
+  "catch#1": {
+   "t": "догонять",
+   "src": "sxkoa0m90h"
+  },
+  "channel#1": {
+   "t": "канал",
+   "src": "wzleft1e34"
+  },
+  "client#1": {
+   "t": "клиент",
+   "src": "1h6juji15n"
+  },
+  "combination#1": {
+   "t": "сочетание",
+   "src": "36p810le1x"
+  },
+  "comma#1": {
+   "t": "запятая",
+   "src": "1q47kz01td"
+  },
+  "compromise#1": {
+   "t": "компрометировать",
+   "src": "13jpdruwye"
+  },
+  "destroy#1": {
+   "t": "уничтожать",
+   "src": "1shplldyoo"
+  },
+  "discard#1": {
+   "t": "отбрасывать",
+   "src": "1ntb09k1ki"
+  },
+  "eat#1": {
+   "t": "съедать",
+   "src": "14hf7ew4mp"
+  },
+  "edge#1": {
+   "t": "граница (крайний случай)",
+   "src": "120mq9y1c0"
+  },
+  "expectation#1": {
+   "t": "ожидание (правило качества)",
+   "src": "1o4ywf3195"
+  },
+  "export#1": {
+   "t": "экспортировать",
+   "src": "luqqtdgqpe"
+  },
+  "fetch#1": {
+   "t": "получать (извлекать)",
+   "src": "1cn2q9c1cn"
+  },
+  "finalize#1": {
+   "t": "завершать (фиксировать)",
+   "src": "twi6kineyk"
+  },
+  "forget#1": {
+   "t": "забывать",
+   "src": "1t0wo0q1iy"
+  },
+  "formula#1": {
+   "t": "формула",
+   "src": "165tbmf198"
+  },
+  "gain#1": {
+   "t": "выигрыш",
+   "src": "u93cdq1mdi"
+  },
+  "judge#1": {
+   "t": "судить",
+   "src": "g2xlgf1pe2"
+  },
+  "knob#1": {
+   "t": "настройка (ручка)",
+   "src": "gb0vokch4r"
+  },
+  "lot#1": {
+   "t": "много",
+   "src": "d7r7lw1wtr"
+  },
+  "maintain#1": {
+   "t": "обслуживать (поддерживать)",
+   "src": "i9mrkdvavp"
+  },
+  "orchestrate#1": {
+   "t": "оркестровать",
+   "src": "esnrna1cbf"
+  },
+  "outcome#1": {
+   "t": "исход",
+   "src": "r07mslgiqa"
+  },
+  "pause#1": {
+   "t": "приостанавливаться",
+   "src": "1jr6l3fbkl"
+  },
+  "perform#1": {
+   "t": "выполнять",
+   "src": "12h7ioc1v1"
+  },
+  "prepare#1": {
+   "t": "готовить",
+   "src": "lpenqataa8"
+  },
+  "recognize#1": {
+   "t": "узнавать",
+   "src": "u4j7ux2jwe"
+  },
+  "reconcile#1": {
+   "t": "сверять",
+   "src": "5elm2u1rei"
+  },
+  "relationship#1": {
+   "t": "связь",
+   "src": "nb2tdgnry6"
+  },
+  "represent#1": {
+   "t": "представлять",
+   "src": "1xp5v978p6"
+  },
+  "restriction#1": {
+   "t": "ограничение",
+   "src": "2zewdtiizg"
+  },
+  "risk#1": {
+   "t": "риск",
+   "src": "drnr6u1a1k"
+  },
+  "slowdown#1": {
+   "t": "замедление",
+   "src": "xwu0z21i70"
+  },
+  "synonym#1": {
+   "t": "синоним",
+   "src": "pvypw91crn"
+  },
+  "technology#1": {
+   "t": "технология",
+   "src": "68biub1aia"
+  },
+  "timeout#1": {
+   "t": "тайм-аут",
+   "src": "z23xjj1vkl"
+  },
+  "upload#1": {
+   "t": "загрузка",
+   "src": "npawbm9xc9"
+  },
+  "variant#1": {
+   "t": "вариант",
+   "src": "3nvxhjli23"
+  },
+  "deliver#1": {
+   "t": "доставлять",
+   "src": "aaswho1qdh"
+  },
+  "promise#1": {
+   "t": "обещание",
+   "src": "16r45pr15o"
+  },
+  "propagate#1": {
+   "t": "распространять",
+   "src": "1i3jpacf7x"
+  },
+  "roll#1": {
+   "t": "откатывать",
+   "src": "fos1xfwgjm"
+  },
+  "serializable#1": {
+   "t": "сериализуемый",
+   "src": "1pbxyei3nc"
+  },
+  "accelerator#1": {
+   "t": "ускоритель",
+   "src": "1gjjni31rt"
+  },
+  "access-mode#1": {
+   "t": "режима доступа",
+   "src": "1u9b0td1ss"
+  },
+  "accident#1": {
+   "t": "случайность",
+   "src": "1nauge513y"
+  },
+  "accidentally#1": {
+   "t": "случайно",
+   "src": "bacis7mk6q"
+  },
+  "ahead#1": {
+   "t": "впереди",
+   "src": "1jjhyopdg2"
+  },
+  "allocation#1": {
+   "t": "выделение",
+   "src": "a8ekp3ubku"
+  },
+  "already-loaded#1": {
+   "t": "уже загруженный",
+   "src": "bpqyovfamg"
+  },
+  "always-running#1": {
+   "t": "постоянно работающий",
+   "src": "1imr262w0n"
+  },
+  "app#1": {
+   "t": "приложение",
+   "src": "ph5uc5qlmz"
+  },
+  "append-oriented#1": {
+   "t": "ориентированный на добавление",
+   "src": "se67ko86hp"
+  },
+  "applicable#1": {
+   "t": "применимый",
+   "src": "1blnr1113a"
+  },
+  "approximately#1": {
+   "t": "приблизительно",
+   "src": "ddc90k1aq5"
+  },
+  "assign#1": {
+   "t": "назначать",
+   "src": "1mtrswv97b"
+  },
+  "assignment#1": {
+   "t": "задание",
+   "src": "1hcvfgq1am"
+  },
+  "atomically#1": {
+   "t": "атомарно",
+   "src": "1mkz59t1iz"
+  },
+  "attribute-based#1": {
+   "t": "на основе атрибутов",
+   "src": "olwqfuj4bn"
+  },
+  "audience#1": {
+   "t": "аудитория",
+   "src": "1n4y7nzxyd"
+  },
+  "autoscaler#1": {
+   "t": "автомасштабировщик",
+   "src": "1u9sq8w1ys"
+  },
+  "best-practice#1": {
+   "t": "лучших практик",
+   "src": "1io9r0s1dw"
+  },
+  "blast#1": {
+   "t": "взрыв (радиус поражения)",
+   "src": "13v315k149"
+  },
+  "borrow#1": {
+   "t": "брать на время",
+   "src": "a0tm8dv3ms"
+  },
+  "brand-new#1": {
+   "t": "совершенно новый",
+   "src": "169l2ep17v"
+  },
+  "broadcasting#1": {
+   "t": "широковещательная рассылка (broadcast)",
+   "src": "w8fp6974fn"
+  },
+  "broader#1": {
+   "t": "более широкий",
+   "src": "8glx1fbkg1"
+  },
+  "busy#1": {
+   "t": "занятый",
+   "src": "1o48p4qpwh"
+  },
+  "candidate#1": {
+   "t": "кандидат",
+   "src": "18ojogrioe"
+  },
+  "carefully#1": {
+   "t": "осторожно",
+   "src": "dbf4ad1fva"
+  },
+  "catalog-compatible#1": {
+   "t": "совместимый с Unity Catalog",
+   "src": "l8nlew11zg"
+  },
+  "catalog-level#1": {
+   "t": "на уровне каталога",
+   "src": "cyynskakwq"
+  },
+  "category#1": {
+   "t": "категория",
+   "src": "1b9mr844ix"
+  },
+  "caveat#1": {
+   "t": "оговорка",
+   "src": "1q3obfvbkr"
+  },
+  "certain#1": {
+   "t": "некоторый (определённый)",
+   "src": "1obm1g6m89"
+  },
+  "clause#1": {
+   "t": "предложение (часть запроса)",
+   "src": "kd4a5x1h4g"
+  },
+  "cleaner#1": {
+   "t": "чище",
+   "src": "xscim3w64w"
+  },
+  "compaction#1": {
+   "t": "уплотнение",
+   "src": "ial7vr14tr"
+  },
+  "compute-optimized#1": {
+   "t": "оптимизированный для вычислений",
+   "src": "qe3xyi1dwq"
+  },
+  "concentrated#1": {
+   "t": "сосредоточенный",
+   "src": "1ln44mj1xz"
+  },
+  "concrete#1": {
+   "t": "конкретный",
+   "src": "m7vnb117jf"
+  },
+  "conditional#1": {
+   "t": "условный",
+   "src": "1f7egse10s"
+  },
+  "confusable#1": {
+   "t": "легко путаемый",
+   "src": "1vam7n31ny"
+  },
+  "confusion#1": {
+   "t": "путаница",
+   "src": "11ottq11ta"
+  },
+  "constantly#1": {
+   "t": "постоянно",
+   "src": "1xhngkv1k4"
+  },
+  "convenience#1": {
+   "t": "удобство",
+   "src": "r0sdjk1191"
+  },
+  "copy-on-write#1": {
+   "t": "копирование при записи",
+   "src": "7oztnt190r"
+  },
+  "corresponding#1": {
+   "t": "соответствующий",
+   "src": "1ywolxjczh"
+  },
+  "cpu-native#1": {
+   "t": "нативный для CPU",
+   "src": "1krbm7q1jm"
+  },
+  "creator#1": {
+   "t": "создатель",
+   "src": "ghg5ah99mj"
+  },
+  "data-engineering#1": {
+   "t": "инженерии данных",
+   "src": "64t6lh17ff"
+  },
+  "databricks-native#1": {
+   "t": "родной для Databricks",
+   "src": "1u32qvq9qn"
+  },
+  "deeper#1": {
+   "t": "глубже",
+   "src": "38chfpkj70"
+  },
+  "delegated#1": {
+   "t": "делегированный",
+   "src": "12k8a661ih"
+  },
+  "derive#1": {
+   "t": "выводить",
+   "src": "16key7i8i1"
+  },
+  "determine#1": {
+   "t": "определять",
+   "src": "x003pl19oy"
+  },
+  "deterministic#1": {
+   "t": "детерминированный",
+   "src": "a696qc21x1"
+  },
+  "direction#1": {
+   "t": "направление",
+   "src": "vyk331bf2e"
+  },
+  "diverge#1": {
+   "t": "расходиться",
+   "src": "r8vhx41iam"
+  },
+  "duplicate-match#1": {
+   "t": "множественного совпадения",
+   "src": "1q7hi3y1s5"
+  },
+  "e-commerce#1": {
+   "t": "электронная коммерция",
+   "src": "1vldn1j12z"
+  },
+  "earlier#1": {
+   "t": "раньше",
+   "src": "2mjiji1x9h"
+  },
+  "easily#1": {
+   "t": "легко",
+   "src": "8ue4ia1jaa"
+  },
+  "effectively#1": {
+   "t": "фактически",
+   "src": "5tlbolr4u4"
+  },
+  "ELT-like#1": {
+   "t": "похожий на ELT",
+   "src": "b0udc81o26"
+  },
+  "enhanced#1": {
+   "t": "улучшенный",
+   "src": "1n5ofi9d0n"
+  },
+  "envelope#1": {
+   "t": "рамки (оболочка)",
+   "src": "i60brz1r6c"
+  },
+  "evict#1": {
+   "t": "вытеснять",
+   "src": "1geb4ymkrt"
+  },
+  "exactly-once-ish#1": {
+   "t": "почти ровно один раз",
+   "src": "1m79tet1oz"
+  },
+  "excellent#1": {
+   "t": "отличный",
+   "src": "gnnswc143r"
+  },
+  "exclude#1": {
+   "t": "исключать",
+   "src": "1594q4919h"
+  },
+  "exploratory#1": {
+   "t": "исследовательский",
+   "src": "185mxl25c7"
+  },
+  "factor#1": {
+   "t": "фактор",
+   "src": "4urdrz1wpe"
+  },
+  "faithfully#1": {
+   "t": "точно (без искажений)",
+   "src": "18olwrd14h"
+  },
+  "fall#1": {
+   "t": "падать (откатываться)",
+   "src": "fby6ug1t1c"
+  },
+  "fan-out#1": {
+   "t": "веерное распределение",
+   "src": "16m744fozq"
+  },
+  "file-open#1": {
+   "t": "открытия файлов",
+   "src": "9ns5w41wtg"
+  },
+  "finalization#1": {
+   "t": "финализация",
+   "src": "14lo850l7s"
+  },
+  "finer-grained#1": {
+   "t": "более детальный",
+   "src": "1goptuh1jn"
+  },
+  "flag#1": {
+   "t": "флаг (тревожный знак)",
+   "src": "k5pomfdaex"
+  },
+  "flat#1": {
+   "t": "плоский",
+   "src": "re1fad5dwu"
+  },
+  "frequently#1": {
+   "t": "часто",
+   "src": "8qz7sgqbja"
+  },
+  "general-purpose#1": {
+   "t": "общего назначения",
+   "src": "1ttbt7e1a7"
+  },
+  "graph#1": {
+   "t": "граф",
+   "src": "12n2f4q1d8"
+  },
+  "guaranteed#1": {
+   "t": "гарантированный",
+   "src": "htoj5317p4"
+  },
+  "habit#1": {
+   "t": "привычка",
+   "src": "kvtvtgx5yb"
+  },
+  "hard#1": {
+   "t": "трудный",
+   "src": "4tyvz6ov17"
+  },
+  "harder#1": {
+   "t": "труднее",
+   "src": "1vbjdci1a3"
+  },
+  "heart#1": {
+   "t": "сердце (наизусть)",
+   "src": "1jfuakgryp"
+  },
+  "heuristic#1": {
+   "t": "эвристика",
+   "src": "1jihcn7118"
+  },
+  "high-concurrency#1": {
+   "t": "с высокой параллельностью",
+   "src": "qc98363p4w"
+  },
+  "hit#1": {
+   "t": "сталкиваться",
+   "src": "yt0jetzbln"
+  },
+  "ideal#1": {
+   "t": "идеальный",
+   "src": "1n3tnfrqnl"
+  },
+  "ideally#1": {
+   "t": "в идеале",
+   "src": "1xmx8zd1ju"
+  },
+  "idempotently#1": {
+   "t": "идемпотентно",
+   "src": "1qr3v5a7bx"
+  },
+  "ignore#1": {
+   "t": "игнорировать",
+   "src": "39cmw61opg"
+  },
+  "implement#1": {
+   "t": "реализовывать",
+   "src": "67vd9obsus"
+  },
+  "infinite#1": {
+   "t": "бесконечный",
+   "src": "77y4esj6n7"
+  },
+  "instantly#1": {
+   "t": "мгновенно",
+   "src": "swwgmzaf82"
+  },
+  "instinctive#1": {
+   "t": "инстинктивный",
+   "src": "2b6yti36cc"
+  },
+  "intact#1": {
+   "t": "невредимый (целый)",
+   "src": "1gn4sp06p8"
+  },
+  "interchangeably#1": {
+   "t": "взаимозаменяемо",
+   "src": "kn4j1x1wai"
+  },
+  "interoperability#1": {
+   "t": "совместимость",
+   "src": "17f3bhm130"
+  },
+  "interpreter#1": {
+   "t": "интерпретатор",
+   "src": "9ey9lz1xxj"
+  },
+  "involved#1": {
+   "t": "задействованный",
+   "src": "ruhlor151y"
+  },
+  "isolate#1": {
+   "t": "изолировать",
+   "src": "185pcbhzu8"
+  },
+  "June#1": {
+   "t": "июнь",
+   "src": "ugcfb8tm75"
+  },
+  "key-value#1": {
+   "t": "ключ-значение",
+   "src": "1wb8rxvjjb"
+  },
+  "language#1": {
+   "t": "язык",
+   "src": "vb81r2ymj8"
+  },
+  "layer-by-layer#1": {
+   "t": "послойный",
+   "src": "6g99h01295"
+  },
+  "life#1": {
+   "t": "жизнь",
+   "src": "weoomt1ug1"
+  },
+  "lifecycle-based#1": {
+   "t": "на основе жизненного цикла",
+   "src": "1pvt9ix1gj"
+  },
+  "liquid-clustered#1": {
+   "t": "с liquid clustering",
+   "src": "3p8ogp1dc1"
+  },
+  "living#1": {
+   "t": "живой",
+   "src": "m2f0f117s0"
+  },
+  "logistics#1": {
+   "t": "логистика",
+   "src": "1nf8rw31kn"
+  },
+  "lookup#1": {
+   "t": "поиск по ключу",
+   "src": "d26xlhfsc9"
+  },
+  "low-level#1": {
+   "t": "низкоуровневый",
+   "src": "3gxsr514pw"
+  },
+  "manager#1": {
+   "t": "менеджер",
+   "src": "2aosd71e6u"
+  },
+  "mandatory#1": {
+   "t": "обязательный",
+   "src": "1cmqq9x1it"
+  },
+  "map-side#1": {
+   "t": "на стороне map",
+   "src": "s6z66mj0sb"
+  },
+  "massive#1": {
+   "t": "огромный",
+   "src": "19ujlspfjj"
+  },
+  "math#1": {
+   "t": "математика (расчёт)",
+   "src": "1dfdhf61nq"
+  },
+  "medallion#1": {
+   "t": "медальон (bronze/silver/gold)",
+   "src": "11j01wt17r"
+  },
+  "medium#1": {
+   "t": "средний",
+   "src": "1umlm4bm6r"
+  },
+  "memory-intensive#1": {
+   "t": "требующий много памяти",
+   "src": "1xyh6scoh3"
+  },
+  "menu#1": {
+   "t": "меню",
+   "src": "1w07klm1tv"
+  },
+  "metastore#1": {
+   "t": "metastore (хранилище метаданных)",
+   "src": "37cklip4mc"
+  },
+  "missing-file#1": {
+   "t": "отсутствующего файла",
+   "src": "zks5ylrqxj"
+  },
+  "money#1": {
+   "t": "деньги",
+   "src": "19hgemz1e5"
+  },
+  "mostly#1": {
+   "t": "в основном",
+   "src": "1lxky25yqe"
+  },
+  "multi#1": {
+   "t": "много-",
+   "src": "1sfxz301kj"
+  },
+  "natural#1": {
+   "t": "естественный",
+   "src": "1on6tnnr8y"
+  },
+  "navigation#1": {
+   "t": "навигация",
+   "src": "1hwieo617n"
+  },
+  "newly#1": {
+   "t": "недавно",
+   "src": "7oemua195c"
+  },
+  "non-Databricks#1": {
+   "t": "не Databricks",
+   "src": "pjl2celffl"
+  },
+  "non-distributed#1": {
+   "t": "нераспределённый",
+   "src": "nijcnprkdk"
+  },
+  "non-human#1": {
+   "t": "нечеловеческий (служебный)",
+   "src": "1pdftzstdg"
+  },
+  "non-Photon#1": {
+   "t": "без Photon",
+   "src": "15wco5t1dy"
+  },
+  "non-transactional#1": {
+   "t": "нетранзакционный",
+   "src": "p059shuhbu"
+  },
+  "nuisance#1": {
+   "t": "помеха",
+   "src": "1i0u0vq13a"
+  },
+  "obsolete#1": {
+   "t": "устаревший",
+   "src": "188707rweq"
+  },
+  "on-time#1": {
+   "t": "своевременный",
+   "src": "19rvq8618i"
+  },
+  "one-liner#1": {
+   "t": "в одну строку",
+   "src": "2an2z9l5g9"
+  },
+  "organizational#1": {
+   "t": "организационный",
+   "src": "1ps617mb5w"
+  },
+  "own#1": {
+   "t": "владеть",
+   "src": "7hfou21ddx"
+  },
+  "packaged#1": {
+   "t": "упакованный",
+   "src": "9zluedgqle"
+  },
+  "package#1": {
+   "t": "упаковывать",
+   "src": "1bpmejs1k9"
+  },
+  "parameterized#1": {
+   "t": "параметризованный",
+   "src": "rrosf97w5s"
+  },
+  "partitioned#1": {
+   "t": "секционированный",
+   "src": "13z59jd6fh"
+  },
+  "per-table#1": {
+   "t": "для каждой таблицы",
+   "src": "1jithjbgs3"
+  },
+  "per-task#1": {
+   "t": "на задачу",
+   "src": "evfb7vjfqc"
+  },
+  "permanent#1": {
+   "t": "постоянный",
+   "src": "12w5o25opf"
+  },
+  "person#1": {
+   "t": "человек",
+   "src": "ud20oiwdd8"
+  },
+  "pessimistic#1": {
+   "t": "пессимистический",
+   "src": "3zlc261anv"
+  },
+  "philosophy#1": {
+   "t": "философия",
+   "src": "l7bjblanf0"
+  },
+  "pin#1": {
+   "t": "закреплять (версию)",
+   "src": "me823m10fv"
+  },
+  "powerful#1": {
+   "t": "мощный",
+   "src": "172qi7c1ka"
+  },
+  "precomputed#1": {
+   "t": "предвычисленный",
+   "src": "19auz3x1qy"
+  },
+  "predict#1": {
+   "t": "предсказывать",
+   "src": "9bsfgpy1dg"
+  },
+  "pricier#1": {
+   "t": "дороже",
+   "src": "nhdvur1h65"
+  },
+  "probably#1": {
+   "t": "вероятно",
+   "src": "1cnpy431yz"
+  },
+  "production-style#1": {
+   "t": "как в продакшене",
+   "src": "8vmubo19t5"
+  },
+  "programmatic#1": {
+   "t": "программный",
+   "src": "6d8ug81qco"
+  },
+  "protection#1": {
+   "t": "защита",
+   "src": "zg71661k89"
+  },
+  "proven#1": {
+   "t": "доказанный",
+   "src": "n3j5jy1fhk"
+  },
+  "radius#1": {
+   "t": "радиус (поражения)",
+   "src": "e1y4mi11s5"
+  },
+  "ratio#1": {
+   "t": "соотношение",
+   "src": "1v2kdk8r5a"
+  },
+  "re-upload#1": {
+   "t": "повторная загрузка",
+   "src": "hzzekp8kab"
+  },
+  "re-write#1": {
+   "t": "переписывать",
+   "src": "1n0vgig1y7"
+  },
+  "realistic#1": {
+   "t": "реалистичный",
+   "src": "16pz1561n9"
+  },
+  "recognise#1": {
+   "t": "узнавать",
+   "src": "38eh0uif5r"
+  },
+  "recover#1": {
+   "t": "восстанавливать",
+   "src": "14aa8a97mx"
+  },
+  "red#1": {
+   "t": "красный",
+   "src": "84e74hjg16"
+  },
+  "redistribute#1": {
+   "t": "перераспределять",
+   "src": "1334b4aod0"
+  },
+  "relate#1": {
+   "t": "соотноситься",
+   "src": "1dnejvxggz"
+  },
+  "removal#1": {
+   "t": "удаление",
+   "src": "1ihqm3l1bl"
+  },
+  "reorganize#1": {
+   "t": "реорганизовывать",
+   "src": "vp7wtqouw7"
+  },
+  "repeatedly#1": {
+   "t": "многократно",
+   "src": "1c4d4911rt"
+  },
+  "reproducibility#1": {
+   "t": "воспроизводимость",
+   "src": "17d9utt1qt"
+  },
+  "reproducibly#1": {
+   "t": "воспроизводимо",
+   "src": "1jaxqu6lfw"
+  },
+  "reservoir#1": {
+   "t": "резерв (запас)",
+   "src": "gujbjbcq5g"
+  },
+  "resolution#1": {
+   "t": "разрешение (сопоставление)",
+   "src": "upyig7debu"
+  },
+  "responsibility#1": {
+   "t": "ответственность",
+   "src": "1yml0ncmti"
+  },
+  "restraint#1": {
+   "t": "сдержанность",
+   "src": "4i9po31szp"
+  },
+  "reverse#1": {
+   "t": "обратный",
+   "src": "iwctymuc75"
+  },
+  "rewritten#1": {
+   "t": "переписанный",
+   "src": "1msf6dskvi"
+  },
+  "row-at-a-time#1": {
+   "t": "построчный",
+   "src": "1eitrlp12r"
+  },
+  "run-job#1": {
+   "t": "задача запуска задания",
+   "src": "tvmoy0g20y"
+  },
+  "safer#1": {
+   "t": "безопаснее",
+   "src": "g6bl4o3v4h"
+  },
+  "salting#1": {
+   "t": "«соление» ключа (salting)",
+   "src": "nxogceafq7"
+  },
+  "schema-evolving#1": {
+   "t": "меняющий схему",
+   "src": "vlvhjhu9lm"
+  },
+  "select#1": {
+   "t": "выбирать",
+   "src": "e3hb0rwm35"
+  },
+  "semantic#1": {
+   "t": "смысловой",
+   "src": "1mh7jzv135"
+  },
+  "sentence#1": {
+   "t": "предложение",
+   "src": "jnmdnbn04p"
+  },
+  "serialized#1": {
+   "t": "упорядоченный",
+   "src": "xq5uh5jvb6"
+  },
+  "serious#1": {
+   "t": "серьёзный",
+   "src": "ld0mt31rp6"
+  },
+  "server-side#1": {
+   "t": "на стороне сервера",
+   "src": "ank2qv8vup"
+  },
+  "shrink#1": {
+   "t": "уменьшаться",
+   "src": "brfmv98vww"
+  },
+  "soon#1": {
+   "t": "скоро",
+   "src": "wyzuw11xmc"
+  },
+  "SQL-centric#1": {
+   "t": "ориентированный на SQL",
+   "src": "114iluvbwh"
+  },
+  "SQL-warehouse#1": {
+   "t": "SQL warehouse",
+   "src": "bh631evqng"
+  },
+  "stability#1": {
+   "t": "стабильность",
+   "src": "ydmo04gu39"
+  },
+  "stage-specific#1": {
+   "t": "для каждого этапа",
+   "src": "xmrzbd1fuo"
+  },
+  "stand#1": {
+   "t": "обозначать",
+   "src": "npztv41ism"
+  },
+  "story#1": {
+   "t": "история",
+   "src": "2qys6f1lk6"
+  },
+  "sub-second#1": {
+   "t": "менее секунды",
+   "src": "6ykko210o5"
+  },
+  "successful#1": {
+   "t": "успешный",
+   "src": "4zrn2gd6x8"
+  },
+  "suggest#1": {
+   "t": "предлагать",
+   "src": "gocezc1n80"
+  },
+  "surprise#1": {
+   "t": "сюрприз",
+   "src": "12yx7ld1qw"
+  },
+  "suspicious#1": {
+   "t": "подозрительный",
+   "src": "1xpq6et1xn"
+  },
+  "sustained#1": {
+   "t": "устойчивый",
+   "src": "4lyl8vfltn"
+  },
+  "swallow#1": {
+   "t": "проглатывать",
+   "src": "c09eumic1l"
+  },
+  "swap#1": {
+   "t": "менять местами",
+   "src": "11i180sa54"
+  },
+  "table-valued#1": {
+   "t": "табличный",
+   "src": "s0gksoop2d"
+  },
+  "tabular#1": {
+   "t": "табличный",
+   "src": "1bf9ij21bm"
+  },
+  "teach#1": {
+   "t": "учить",
+   "src": "q9ftuk4ybj"
+  },
+  "taxi#1": {
+   "t": "такси",
+   "src": "opg11nwhpi"
+  },
+  "technical#1": {
+   "t": "технический",
+   "src": "11t7u3t14z"
+  },
+  "tenant#1": {
+   "t": "арендатор (tenant)",
+   "src": "xmio2y1bsn"
+  },
+  "terminology#1": {
+   "t": "терминология",
+   "src": "cx2axl1oda"
+  },
+  "term#1": {
+   "t": "термин",
+   "src": "1p6xvrgqnt"
+  },
+  "theory#1": {
+   "t": "теория",
+   "src": "ipeuie1nxd"
+  },
+  "timer#1": {
+   "t": "таймер",
+   "src": "notec112c5"
+  },
+  "timezone#1": {
+   "t": "часовой пояс",
+   "src": "aa5dko1lbm"
+  },
+  "timing#1": {
+   "t": "время (момент)",
+   "src": "1w7nuse8hs"
+  },
+  "tombstone#1": {
+   "t": "надгробие (метка удаления)",
+   "src": "j9k3gwfh4q"
+  },
+  "tour#1": {
+   "t": "экскурсия (обзор)",
+   "src": "nsckc8gc2h"
+  },
+  "toy#1": {
+   "t": "игрушка",
+   "src": "t7a7w8641j"
+  },
+  "traceback#1": {
+   "t": "трассировка (traceback)",
+   "src": "35tstq18ra"
+  },
+  "trail#1": {
+   "t": "след (журнал)",
+   "src": "gi2ldm47r4"
+  },
+  "transaction-log#1": {
+   "t": "журнала транзакций",
+   "src": "sdyc90ei96"
+  },
+  "transfer#1": {
+   "t": "передавать",
+   "src": "m6q7i21847"
+  },
+  "trio#1": {
+   "t": "тройка",
+   "src": "novf3cwf8x"
+  },
+  "troubleshoot#1": {
+   "t": "устранять неполадки",
+   "src": "otc7lv1lfr"
+  },
+  "typo#1": {
+   "t": "опечатка",
+   "src": "n322an12pi"
+  },
+  "UC-compatible#1": {
+   "t": "совместимый с UC",
+   "src": "185a7611hn"
+  },
+  "ultra-low-latency#1": {
+   "t": "со сверхнизкой задержкой",
+   "src": "1yunqg0oyw"
+  },
+  "uneven#1": {
+   "t": "неравномерный",
+   "src": "gorquj3gxm"
+  },
+  "unfiltered#1": {
+   "t": "неотфильтрованный",
+   "src": "i9twm018vy"
+  },
+  "unified#1": {
+   "t": "единый",
+   "src": "1h20tss1vw"
+  },
+  "usable#1": {
+   "t": "пригодный",
+   "src": "3utbe41taz"
+  },
+  "vanilla#1": {
+   "t": "стандартный (ванильный)",
+   "src": "m7zzhdamm1"
+  },
+  "verdict#1": {
+   "t": "вердикт",
+   "src": "1lj4kj6kcq"
+  },
+  "verify#1": {
+   "t": "проверять",
+   "src": "ibldya1b05"
+  },
+  "version-controlled#1": {
+   "t": "под контролем версий",
+   "src": "1px4tldkd5"
+  },
+  "wall-clock#1": {
+   "t": "реального времени",
+   "src": "14euzf1bkv"
+  },
+  "warm#1": {
+   "t": "прогретый (готовый)",
+   "src": "1a49t0wvfh"
+  },
+  "whenever#1": {
+   "t": "всякий раз, когда",
+   "src": "nqpw7w1clw"
+  },
+  "wide#1": {
+   "t": "широкий",
+   "src": "1l20jby1b8"
+  },
+  "wider#1": {
+   "t": "шире",
+   "src": "1ugfaw01ae"
+  },
+  "year#1": {
+   "t": "год",
+   "src": "pisb7c1idw"
+  },
+  "Z-order#1": {
+   "t": "Z-order (упорядочение файлов)",
+   "src": "130epqa1eb"
+  },
+  "accumulate#1": {
+   "t": "накапливать",
+   "src": "8t6lc11vc6"
+  },
+  "addition#1": {
+   "t": "добавление",
+   "src": "145m513f6g"
+  },
+  "address#1": {
+   "t": "адрес",
+   "src": "gc556v13n8"
+  },
+  "adjust#1": {
+   "t": "регулировать",
+   "src": "e2f4m61u18"
+  },
+  "approach#1": {
+   "t": "подход",
+   "src": "syhyf1qzjm"
+  },
+  "arg#1": {
+   "t": "аргумент",
+   "src": "1omsg83c7k"
+  },
+  "bridge#1": {
+   "t": "мост",
+   "src": "199xksm1nl"
+  },
+  "buffer#1": {
+   "t": "буферизовать",
+   "src": "1dns3oqw6n"
+  },
+  "calculate#1": {
+   "t": "вычислять",
+   "src": "1d3b7cx18k"
+  },
+  "clone#1": {
+   "t": "клонировать",
+   "src": "ozko9udb1i"
+  },
+  "collide#1": {
+   "t": "сталкиваться",
+   "src": "1lqtvfz1oz"
+  },
+  "consequence#1": {
+   "t": "последствие",
+   "src": "1wi2i91d71"
+  },
+  "damage#1": {
+   "t": "ущерб",
+   "src": "4w6lrye1m6"
+  },
+  "detect#1": {
+   "t": "обнаруживать",
+   "src": "1p3vwyhqnt"
+  },
+  "die#1": {
+   "t": "умирать (падать)",
+   "src": "122d5rr5b7"
+  },
+  "drill#1": {
+   "t": "углубляться",
+   "src": "qox1ic1u43"
+  },
+  "exception#1": {
+   "t": "исключение",
+   "src": "ssczvjefxw"
+  },
+  "expression#1": {
+   "t": "выражение",
+   "src": "1b1ufdpxnk"
+  },
+  "focus#1": {
+   "t": "сосредотачиваться",
+   "src": "75ysn11c9k"
+  },
+  "hurt#1": {
+   "t": "вредить",
+   "src": "16pqp45cj4"
+  },
+  "insist#1": {
+   "t": "настаивать",
+   "src": "1gf6ylb1pe"
+  },
+  "mirror#1": {
+   "t": "зеркало",
+   "src": "feo0vw9vm0"
+  },
+  "occur#1": {
+   "t": "происходить",
+   "src": "1o6fxfkhdh"
+  },
+  "offer#1": {
+   "t": "предлагать",
+   "src": "1a6tbmna2k"
+  },
+  "placeholder#1": {
+   "t": "заполнитель",
+   "src": "15bysqwzx8"
+  },
+  "prefix#1": {
+   "t": "префикс",
+   "src": "1xtdg1ihjf"
+  },
+  "push#1": {
+   "t": "отправлять (push)",
+   "src": "svqdajttxy"
+  },
+  "re-ingest#1": {
+   "t": "повторно загружать",
+   "src": "471ujxosxm"
+  },
+  "repo#1": {
+   "t": "репозиторий",
+   "src": "17igxdi3hg"
+  },
+  "resume#1": {
+   "t": "возобновлять",
+   "src": "psrqk3gz90"
+  },
+  "suffer#1": {
+   "t": "страдать",
+   "src": "1smb5avwbh"
+  },
+  "tier#1": {
+   "t": "уровень",
+   "src": "dcdcn013ma"
+  },
+  "wheel#1": {
+   "t": "пакет wheel Python",
+   "src": "wcghnzc9dw"
+  }
+ },
+ "sections": {
+  "ch01-s01": "Курс опирается на то, что ты уже знаешь о Spark: разделы данных (partitions), перетасовку (shuffle), стратегии соединения (join) и AQE. Здесь видно, как всё это возвращается внутри платформы Databricks и где твоё слабое место: что на самом деле перемещается при shuffle.",
+  "ch01-s02": "Хранилище (например, S3, ADLS, GCS) хранит данные постоянно. Вычислительные ресурсы (driver и executors) обрабатывают их и могут исчезнуть, когда работа закончена. У них независимое время жизни: на этом построен лейкхаус.",
+  "ch01-s03": "Несколько файлов Parquet ещё не таблица. Колоночные файлы не меняются на месте: обновление записывает новый файл с изменёнными строками. Что-то должно отслеживать, какие файлы входят в таблицу: это метаданные транзакций (в Databricks — Delta Lake).",
+  "ch01-s04": "Parquet хранит данные по столбцам: группы строк, фрагменты столбцов, страницы, с кодированием и сжатием. Поэтому запрос читает только нужные столбцы (отсечение столбцов), а позже — только нужные файлы (пропуск файлов по статистике).",
+  "ch01-s05": "Если кто-то читает папку, пока другой пишет, он может увидеть наполовину старые, наполовину новые файлы — состояние, в котором таблица никогда не была. Транзакции ACID (атомарность, согласованность, изоляция, долговечность) это исключают: каждый читатель видит согласованный снимок.",
+  "ch01-s06": "Delta Lake добавляет к файлам Parquet журнал транзакций (_delta_log). Каждая версия — это коммит из действий ADD и REMOVE; если применить их по порядку, получится снимок. Файл может ещё физически существовать, не входя в текущую таблицу.",
+  "ch01-s07": "DELETE выглядит как удаление строки, но на деле находит файл с этой строкой, записывает файл-замену без неё и фиксирует REMOVE для старого и ADD для нового. «Удалено» не значит «физически стёрто».",
+  "ch01-s08": "Озеро данных дешёвое и гибкое, но со слабыми гарантиями; хранилище данных даёт структурированные таблицы и SQL, но оно жёстче. Лейкхаус объединяет их: транзакционные таблицы поверх дешёвого объектного хранилища. Databricks — это не просто Spark с ноутбуками.",
+  "ch01-s09": "Метаданные описывают данные: имя, столбцы, формат, расположение, владельца, права. Unity Catalog организует объекты в трёхуровневом пространстве имён (каталог.схема.таблица) и служит центральным уровнем управления. Это не то же самое, что Delta Lake.",
+  "ch01-s10": "Четыре разные вещи: Spark — движок обработки, Parquet — формат файлов, Delta Lake — формат транзакционных таблиц, Unity Catalog — управление данными. Если завершить кластер, таблица не исчезнет: у них разное время жизни.",
+  "ch01-s11": "Плоскостью управления (control plane) управляет Databricks, она решает, что запустить; в вычислительной плоскости (compute plane) работа реально выполняется. При serverless ресурсы находятся у Databricks, при классических — в облаке клиента. Аналогия: зал приёма заказов и кухня ресторана.",
+  "ch01-s12": "«Spark медленный» — это не диагноз. Сначала найди уровень (хранилище, размещение таблицы, Delta, Spark, данные, ресурсы, запрос, статистика, сеть), собери признаки, сформулируй гипотезу, проверь метрики, исправь и измерь снова. Просто добавлять ресурсы — антипаттерн.",
+  "ch02-s01": "Первый раунд построил модель хранения: кто вычисляет, как хранятся файлы, кто ими управляет. Второй строит модель конвейера (pipeline): сначала задача, потом инструмент, который её решает.",
+  "ch02-s02": "ETL — это извлечение, преобразование и загрузка: данные очищаются до попадания в хранилище. В ELT они сначала загружаются сырыми в лейкхаус и преобразуются там; Databricks обычно работает именно так.",
+  "ch02-s03": "Пакетное задание (batch) читает конечный набор данных и останавливается. У потока (streaming) нет конца, и Spark обрабатывает его небольшими порциями (micro-batches).",
+  "ch02-s04": "Поток и инкрементальная обработка — не одно и то же: первое говорит, когда приходят данные, второе — сколько работы делается заново. Пакетное задание тоже может быть инкрементальным, если читает только новые данные.",
+  "ch02-s05": "Контрольная точка (checkpoint) помнит, докуда дошла обработка, например «до смещения 900». После сбоя поток продолжает с этого места, без дублей и потерь.",
+  "ch02-s06": "Вместо перечитывания всей таблицы захват изменений (CDC) передаёт только изменения: INSERT, UPDATE, DELETE по порядку. Лейкхаус применяет только их, соблюдая правильный порядок.",
+  "ch02-s07": "SCD типа 1 хранит только текущее значение и перезаписывает старое. SCD типа 2 хранит историю с интервалами действия, а AUTO CDC строит оба варианта из потока изменений.",
+  "ch02-s08": "Схема (имена и типы столбцов) — это контракт между тем, кто пишет, и тем, кто читает. Delta проверяет схему при записи и отклоняет несовместимые данные.",
+  "ch02-s09": "Эволюция схемы допускает контролируемые изменения, например новые столбцы, не отменяя её проверку. Если запись падает из-за несовпадения схемы, сначала спроси, было ли изменение намеренным.",
+  "ch02-s10": "Архитектура «медальон» состоит из трёх слоёв: Bronze — сырые данные как пришли, Silver — очищенные и проверенные, Gold — готовые для бизнеса. Она не обязательна, это шаблон проектирования.",
+  "ch02-s11": "Весь пример интернет-магазина, от источника до отчётов. Слои — это не форматы файлов: все они могут быть таблицами Delta, а плохие данные уходят в карантин.",
+  "ch03-s01": "Аутентификация спрашивает «кто ты?», авторизация — «что тебе разрешено?». Как в отеле: на ресепшене проверяют паспорт, а ключ-карта открывает только твой номер.",
+  "ch03-s02": "Principal — это личность, которой выдают права: пользователь (человек), группа или service principal (машинная учётная запись для автоматизации). Права лучше выдавать группам, а не отдельным людям.",
+  "ch03-s03": "Securable — это всё, на что выдаются права: каталог, схема, таблица, volume, функция. GRANT читается как предложение: дать ПРАВО НА объект ДЛЯ principal, и права наследуются вниз.",
+  "ch03-s04": "При PERMISSION_DENIED не проси «дайте мне админа». Пройди путь доступа шаг за шагом (workspace, USE CATALOG, USE SCHEMA, SELECT, фильтры) и проверь, какая учётная запись на самом деле выполняет код.",
+  "ch03-s05": "Минимальные привилегии: выдаёшь только необходимое. Мощные права (ALL PRIVILEGES, MANAGE, владение) увеличивают ущерб от ошибки или взломанной учётной записи.",
+  "ch03-s06": "Не меняй рабочий ноутбук продакшена, чтобы что-то попробовать. Три отдельные среды — DEV, TEST/STAGING и PROD — держат эксперименты подальше от реальных пользователей.",
+  "ch03-s07": "Источником истины для кода становится Git-репозиторий. Ветка (branch), коммит, pull request с ревью и общая ветка main дают историю, проверку и откат.",
+  "ch03-s08": "Непрерывная интеграция (CI) автоматически запускает проверки и тесты при каждом изменении: если что-то падает, слияния нет. Непрерывная поставка или развёртывание (CD) контролируемо отправляет проверенный код в следующую среду.",
+  "ch03-s09": "Инфраструктура как код: задание, расписание, ресурсы и права описываются в файлах в Git, а не настраиваются вручную. В Databricks для этого есть Declarative Automation Bundles (раньше Asset Bundles).",
+  "ch03-s10": "Вся платформа одним взглядом: выполнение (Lakeflow, Spark), управление (Unity Catalog), разработка (Git и среды), развёртывание (bundles, CI/CD) и хранение (Delta). И новые названия 2026 года.",
+  "ch03-s11": "Новые данные есть в источнике, но не в Gold. Проверь каждый слой по порядку: источник, Bronze, контрольная точка, Silver, схема, CDC, Gold.",
+  "ch03-s12": "Дубли — это симптом с семью очень разными причинами: дубль в источнике, файл загружен дважды, сброшенная контрольная точка, повтор задания, неверный ключ CDC и другие. Ищи, где впервые появляется вторая копия.",
+  "ch03-s13": "Код может быть правильным и падать только в продакшене. Сравни среды: КТО запускает (учётная запись), ЧТО может затронуть (права), КАК настроено, ГДЕ работает (compute, runtime).",
+  "ch03-s14": "Одно правило для любой отладки: найди первый слой, где реальность расходится с ожиданием. Симптомы — не причины; дальше следующий раунд.",
+  "ch04-s01": "Workspace, serverless, compute, SQL warehouse, Runtime, Photon, ноутбук и Unity Catalog — не восемь разных продуктов. Это слои одной модели: где работаешь, что выполняет, какое ПО работает, быстрый движок и кто к чему имеет доступ.",
+  "ch04-s02": "На вершине — аккаунт Databricks: пользователи, группы, workspaces, metastores и оплата. В одном аккаунте много workspaces, а workspace — это место, где пользователи работают вместе.",
+  "ch04-s03": "Плоскость управления (control plane) управляет и координирует: веб-интерфейс, API, метаданные, планирование заданий. Вычислительная плоскость (compute plane) выполняет работу: обрабатывает данные через Spark и SQL.",
+  "ch04-s04": "В классическом compute ты сам создаёшь машины (driver и workers) в своём облачном аккаунте: больше контроля и больше ответственности. В serverless ими управляет Databricks, а ты только отправляешь работу.",
+  "ch04-s05": "All-purpose compute — для интерактивной работы в ноутбуках, jobs compute — для автоматических заданий, SQL warehouse — для SQL-запросов и дашбордов. Для автоматических заданий Databricks обычно советует serverless.",
+  "ch04-s06": "Databricks Runtime (DBR) — это проверенный набор ПО на машине: Spark, Python, Delta и библиотеки. Версии LTS поддерживаются дольше, а версия ML добавляет библиотеки машинного обучения.",
+  "ch04-s07": "Photon — векторизованный движок запросов Databricks, ускоряющий SQL и DataFrame. Это не язык и не база данных: то, что он не поддерживает, выполняется обычным Spark.",
+  "ch04-s08": "Ноутбук — документ из ячеек на Python, SQL, Scala, R или Markdown. Сам по себе он ничего не выполняет: нужен подключённый compute; display() показывает таблицу, а show() печатает текст.",
+  "ch04-s09": "Преобразования не выполняются сразу (ленивое вычисление): Spark строит план и запускается, только когда нужен результат. В физическом плане Exchange означает перетасовку (shuffle).",
+  "ch04-s10": "Magic-команды (%sql, %python, %md, %pip) меняют язык ячейки. spark.table() и spark.sql() дают таблицы и запросы как DataFrame, а _sqldf хранит результат последней SQL-ячейки.",
+  "ch04-s11": "Виджеты — поля ввода ноутбука: создаёшь, читаешь через dbutils.widgets.get и используешь значение. В SQL параметры :param подставляются как значения, а IDENTIFIER() — как имя таблицы.",
+  "ch04-s12": "Catalog Explorer показывает объекты Unity Catalog, если у тебя есть права. SHOW и DESCRIBE (TABLE, DETAIL, HISTORY) — первые инструменты отладки; здесь ты создаёшь первую таблицу Delta.",
+  "ch04-s13": "Полное имя состоит из трёх уровней: каталог.схема.таблица. Имя без каталога и схемы разрешается по текущему контексту, и можно прочитать не ту таблицу без всякой ошибки.",
+  "ch04-s14": "Если ячейка зависла, сначала найди слой проблемы: compute, сессия, код, таблица, права, план, выполнение. Четыре случая (A–D) показывают первый шаг для каждого слоя.",
+  "ch04-s15": "Медленный запрос не означает автоматически маленький кластер. Смотри физический план и Spark UI: задачи, shuffle, перекос (skew), сброс на диск (spill) и стратегию join.",
+  "ch04-s16": "Мини-проект, который всё связывает, и «корзины», чтобы различать: API Spark, удобство ноутбука, пространство имён Unity Catalog, serverless, SQL warehouse, Photon, DBR. Итоги главы.",
+  "ch05-s01": "Открываем коробку «таблицы Delta»: файлы Parquet и папка _delta_log с коммитами. Цель — предсказывать, что происходит с файлами и журналом при каждой команде, а не просто повторять «Delta = Parquet + журнал».",
+  "ch05-s02": "Снимок (snapshot) — таблица в одной версии; он получается, если применить действия ADD/REMOVE журнала с начала или с контрольной точки. Благодаря MVCC каждый читатель видит согласованный снимок.",
+  "ch05-s03": "Файлы Parquet не меняются на месте. UPDATE или DELETE переписывает затронутые файлы (копирование при записи): REMOVE для старых, ADD для новых, в одной новой версии.",
+  "ch05-s04": "Чтобы удалить одну строку из файла в 1 ГБ, не нужно переписывать его целиком. Векторы удаления (deletion vectors) отмечают, какие строки логически удалены, а файл переписывается позже.",
+  "ch05-s05": "DESCRIBE HISTORY показывает версии таблицы от новой к старой: какая команда, когда, кем, с какими метриками. Time travel позволяет прочитать старую версию через VERSION AS OF или TIMESTAMP AS OF.",
+  "ch05-s06": "RESTORE снова делает текущим старое состояние в новой версии, не удаляя историю. Но time travel — не резервная копия: после VACUUM старые файлы исчезают.",
+  "ch05-s07": "VACUUM физически удаляет старые файлы, которые не нужны ни одной версии в пределах срока хранения. Он не уплотняет файлы и не ускоряет запросы — это делает OPTIMIZE.",
+  "ch05-s08": "MERGE объединяет обновление и вставку (upsert): строки источника, совпавшие с целевой таблицей, обновляются, новые вставляются. Главное — условие ON.",
+  "ch05-s09": "На практике: если две строки источника совпадают с одной строкой цели, MERGE падает. Сначала убери дубли из источника; то же самое пишется и на Python.",
+  "ch05-s10": "Delta не блокирует всю таблицу. При оптимистичном управлении параллелизмом каждое задание читает, готовит файлы и при коммите проверяет, не записало ли другое задание что-то конфликтующее.",
+  "ch05-s11": "Два уровня изоляции для записи: WriteSerializable (по умолчанию, больше параллелизма) и Serializable (самый строгий). С построчным параллелизмом записи в разные строки одного файла не всегда конфликтуют.",
+  "ch05-s12": "Ошибки параллелизма (ConcurrentAppend, ConcurrentDeleteRead и др.) говорят, какая другая операция изменила прочитанные тобой данные. Их исправляют, сужая условие, разделяя задания или повторяя попытку.",
+  "ch06-s01": "От теории Delta к правильному использованию в продакшене. В Databricks таблицы по умолчанию Delta, и рекомендуются управляемые (managed) таблицы Unity Catalog. Здесь ты создаёшь их на SQL.",
+  "ch06-s02": "Из PySpark пишут через новый API writeTo() или классический saveAsTable(). У writeTo() понятнее смысл create, replace и append, но saveAsTable() есть в большей части кода.",
+  "ch06-s03": "INSERT INTO добавляет строки и никогда не заменяет. INSERT OVERWRITE заменяет целевую область, возможно всю таблицу, а TRUNCATE очищает таблицу, сохраняя схему.",
+  "ch06-s04": "Append добавляет, overwrite может заменить всю таблицу: три года данных пропадут, если записать только вчерашние. Идемпотентное задание даёт один и тот же результат, сколько бы раз ни запускалось.",
+  "ch06-s05": "Чтобы заменить только часть данных, Databricks советует REPLACE WHERE (с явным условием) или REPLACE USING (по ключевым столбцам). Это безопаснее старой динамической перезаписи разделов.",
+  "ch06-s06": "Delta проверяет схему при каждой записи: столбцы должны существовать, а типы совпадать или безопасно приводиться. Так плохой источник не испортит данные незаметно вплоть до дашборда CEO.",
+  "ch06-s07": "Если источник принёс новый столбец, сначала спроси, намеренно ли это. Затем разреши эволюцию только для этой записи (mergeSchema), а не глобально (autoMerge); overwriteSchema и ALTER вносят более радикальные изменения.",
+  "ch06-s08": "Расширение типа (type widening) меняет столбец на совместимый более широкий тип, например INT на BIGINT, не переписывая файлы. Изменения схемы во время чужих записей могут вызвать ошибки параллелизма.",
+  "ch06-s09": "DESCRIBE DETAIL даёт одну строку по всей таблице: формат, расположение, размер (sizeInBytes), число файлов (numFiles), столбцы раскладки и свойства. Вместе с DESCRIBE TABLE и HISTORY это отвечает на большинство вопросов отладки.",
+  "ch06-s10": "Тысячи мелких файлов замедляют чтение: каждый файл стоит открытия и отдельной задачи. OPTIMIZE уплотняет их в несколько крупных; смотри на распределение размеров, а не только на общий объём.",
+  "ch06-s11": "Delta хранит для каждого файла минимум и максимум по столбцам. По этой статистике он пропускает файлы, где не может быть нужных строк, но только если значения сгруппированы.",
+  "ch06-s12": "Liquid clustering во многих случаях заменяет секционирование и ZORDER: ключи кластеризации меняются вместе с запросами, а раскладка применяется постепенно. Рекомендуется для новых таблиц Delta.",
+  "ch06-s13": "С предиктивной оптимизацией (predictive optimization) Databricks сам запускает OPTIMIZE, VACUUM и ANALYZE для управляемых таблиц, когда это нужно. Но автоматизация не заменяет понимания.",
+  "ch06-s14": "Продакшен-проект с Bronze, Silver и staging и MERGE, дающим одинаковый результат при каждом повторе. Пять сценариев отладки с первой командой для каждого и лучшие практики.",
+  "ch07-s01": "Код сам по себе ничего не вычисляет: ему нужны CPU, память, сеть, driver и executors, то есть compute. Множество «типов» compute — это не много продуктов, а сочетания нескольких осей.",
+  "ch07-s02": "Первая ось — назначение: интерактивная работа, задание, конвейер или SQL. Вторая — инфраструктура: кто управляет машинами, ты (classic) или Databricks (serverless).",
+  "ch07-s03": "Матрица «назначение × инфраструктура» показывает все сочетания. All-purpose не значит «не serverless»: это многоразовый классический compute для ноутбуков, а интерактивный serverless называется serverless compute для ноутбуков.",
+  "ch07-s04": "Всё семейное дерево: ноутбуки, задания и конвейеры Lakeflow, каждое в варианте serverless и classic, а SQL warehouses — отдельная ветвь.",
+  "ch07-s05": "Кластер all-purpose живёт независимо от заданий, и им пользуются многие ноутбуки. Jobs compute создаётся для одного запуска задания и исчезает по его завершении: два разных жизненных цикла.",
+  "ch07-s06": "Режим доступа (access mode) — Standard или Dedicated. В Standard многие пользователи делят compute с изоляцией, и он рекомендуется в большинстве случаев; Dedicated принадлежит одному пользователю или группе.",
+  "ch07-s07": "Одна машина или несколько (single-node или multi-node), фиксированный размер или автомасштабирование в твоих пределах, и железо: CPU, GPU, типы машин с большей памятью или большей вычислительной мощностью.",
+  "ch07-s08": "Runtime (DBR) и Photon — выбор ПО, независимый от железа. В classic версию DBR выбираешь ты, а в serverless runtime управляет и обновляет Databricks.",
+  "ch07-s09": "Большая матрица classic: назначение, доступ, узлы, масштабирование, железо, тип worker и driver, runtime, Photon, on-demand или spot. Serverless убирает большинство этих настроек.",
+  "ch07-s10": "Для serverless-заданий и конвейеров выбирают режим производительности: Performance Optimized (быстрый старт, для чувствительных к задержке задач) или Standard (старт медленнее, стоимость ниже).",
+  "ch07-s11": "SQL warehouses — отдельная ветвь для SQL: Serverless, Pro и Classic. У всех есть Photon, Pro добавляет Predictive IO, а Serverless — ещё и умное управление нагрузкой.",
+  "ch07-s12": "Одна схема выбора для любой работы: что я хочу сделать, какой вариант лучший по умолчанию (обычно serverless) и когда нужен classic. Она повторяет матрицу поддержки Databricks.",
+  "ch08-s01": "DBR, Photon, типы driver и worker, pool, автомасштабирование, all-purpose и serverless — не альтернативы одного уровня. Каждая настройка относится к своему слою, а runtime — это программная среда, исполняющая код.",
+  "ch08-s02": "Databricks Runtime — это набор ПО на машине, и каждая версия включает Apache Spark. Тип узла говорит, какая нужна машина, DBR — какое ПО на ней работает; версии LTS поддерживаются дольше.",
+  "ch08-s03": "DBR ML — обычный DBR с готовыми библиотеками машинного и глубокого обучения (PyTorch, XGBoost, MLflow, GPU). Он не «лучше»: для обычного ETL больше подходит обычный DBR.",
+  "ch08-s04": "Photon — векторизованный движок выполнения, а не версия runtime, машина, база или формат файлов. План по-прежнему строит Catalyst, а Photon выполняет поддерживаемые части.",
+  "ch08-s05": "В serverless, SQL warehouses и serverless-конвейерах Photon всегда включён, а в classic настраивается. Photon ускоряет CPU и не связан с GPU, которые нужны для глубокого обучения.",
+  "ch08-s06": "Driver — координатор: хранит состояние ноутбуков и SparkContext, строит план, раздаёт задачи workers и собирает результаты. Крупный driver нужен, когда к нему возвращается много данных.",
+  "ch08-s07": "Workers выполняют распределённую работу, и на каждом работает executor. Четыре workers по 32 ГБ — не одна машина на 128 ГБ: выбираешь машины крупнее (вертикально) или больше машин (горизонтально) в зависимости от работы.",
+  "ch08-s08": "В classic автомасштабирование меняет число workers в заданных тобой пределах, а не их тип. В serverless оно тоже есть, но им управляет Databricks, а не ты.",
+  "ch08-s09": "All-purpose рекомендуется для интерактивной работы, но может выполнять и задания. Databricks это допускает, но не советует для продакшена: ресурсы и жизненный цикл делятся с людьми, которые на нём работают.",
+  "ch08-s10": "Instance pool — запас уже готовых облачных машин, чтобы классический compute стартовал быстрее. Он не связан с пулами потоков, соединений или executors.",
+  "ch08-s11": "Завершение выключает машины, но сохраняет настройки, а удаление стирает и настройки. При завершении теряются память, кэш и состояние Python; автозавершение срабатывает после простоя.",
+  "ch08-s12": "Для запроса в SQL warehouse нужны два «шлюза»: право на сам warehouse (например, CAN USE) и право на данные в Unity Catalog. Одно не заменяет другое.",
+  "ch08-s13": "Доступ к конвейеру — три слоя: ACL конвейера (например, CAN RUN), учётная запись run-as, от имени которой он работает, и права этой записи на данные. Тот, кто нажимает Start, не всегда тот, кто читает.",
+  "ch08-s14": "Всё вместе: матрицы, сравнивающие classic и serverless по каждой оси, что происходит при запуске, и весь стек — от железа до прав.",
+  "ch09-s01": "Цель фазы: глядя на конфигурацию compute, сказать, сколько у тебя машин, что работает на каждой, сколько задач Spark идёт одновременно, где может кончиться память (OOM) и что меняет масштабирование. Строится снизу вверх: машина, driver, executor, ядро, задача.",
+  "ch09-s02": "Все задачи driver: SparkSession, планирование запроса, граф выполнения (DAG), планирование этапов и задач, метрики. И правило: один executor на worker.",
+  "ch09-s03": "Каждое ядро выполняет примерно одну задачу за раз, и каждый раздел этапа становится одной задачей. Если задач больше, чем слотов, они идут «волнами» (waves).",
+  "ch09-s04": "Два кластера с одинаковыми суммарными ядрами и памятью ведут себя по-разному: несколько больших машин или много маленьких. Память на ядро — полезное практическое правило.",
+  "ch09-s05": "Память worker не вся отдаётся под строки данных. Её делят память выполнения (sort, shuffle, join), память хранения (cache) и другое, а когда не хватает, данные сбрасываются на диск (spill).",
+  "ch09-s06": "При shuffle задачи первой стороны пишут файлы на локальный диск каждого worker, а следующие забирают их по сети. Тяжёлый shuffle нагружает CPU, память, сеть и диск одновременно.",
+  "ch09-s07": "Driver исчерпывает память (OOM), когда к нему приходит много данных, например через collect() или toPandas(). Executor — из-за перекошенного раздела, большого join или большого состояния потока: разные причины, разные исправления.",
+  "ch09-s08": "При 8 ядрах на worker и от 2 до 8 workers у тебя от 16 до 64 слотов задач. Но автомасштабирование не создаёт разделы: если их в этапе мало, новые машины простаивают.",
+  "ch09-s09": "В single-node нет workers, и driver делает их работу; multi-node с нулём workers — ловушка. Режим доступа касается возможностей, а не скорости.",
+  "ch09-s10": "Без pool каждый запуск ждёт, пока облако выдаст машины. С pool берутся готовые; spot-машины дешевле, но провайдер может их забрать.",
+  "ch09-s11": "Что остаётся и что теряется после завершения, жизненный цикл заданий, уровни прав на compute и объекты прав serverless. Автозавершение нужно, потому что простаивающий кластер стоит денег.",
+  "ch09-s12": "Photon находится под физическим планом и векторно выполняет то, что поддерживает. Пользовательские функции (UDF) на Python снижают выгоду, потому что эта часть возвращается к обычному Spark.",
+  "ch09-s13": "Classic даёт много настроек, serverless — мало, потому что ими управляет Databricks. Алгоритм выбора говорит, когда хватает serverless, а когда нужно то, что даёт только classic.",
+  "ch09-s14": "Реальный случай: 2 ТБ входных данных с filter, join и groupBy. Через Spark UI определяешь, что мешает: CPU, память, ввод-вывод, shuffle или перекос; больше машин помогает не всегда.",
+  "ch09-s15": "На практике: читаешь конфигурацию Spark, смотришь число разделов, пробуешь repartition() и coalesce() и изучаешь планы. В serverless нет RDD, поэтому рассуждаешь по плану.",
+  "ch09-s16": "Большой тест фазы 1 и список утверждений, которые нужно уметь объяснить без записей: driver, executors, ядра, задачи, разделы, память и масштабирование.",
+  "ch10-s01": "Учащийся попросил продолжить углублённо, с теорией и практическим синтаксисом. Ответ: больше не по одному понятию, а вся платформа как подготовка к работе, реальным проектам и сертификации, начиная с уже пройденного.",
+  "ch10-s02": "Порядок обучения следует зависимостям, а не меню workspace: каждому слою нужен предыдущий. Десять фаз, цель каждой — в одной строке.",
+  "ch10-s03": "Каждый урок идёт по одним и тем же 17 вопросам: какую задачу решаем, как решить её без Databricks, какой инструмент её решает, как он работает, где применяется, как его отлаживать и что спрашивают на экзаменах.",
+  "ch10-s04": "Четыре интерфейса изучаются параллельно: SQL, PySpark, настройки платформы (YAML, UI, CLI) и отладка. Один проект растёт от фазы к фазе.",
+  "ch10-s05": "Обзор фазы 1: понимать compute настолько глубоко, чтобы настраивать, объяснять и исправлять его. Serverless, classic и SQL warehouses, driver, workers и каждое поле формы.",
+  "ch10-s06": "Обзор фазы 2: правильное использование Delta в продакшене. Синтаксис SQL и PySpark для создания, вставки, обновления, MERGE, истории и обслуживания.",
+  "ch10-s07": "Обзор фазы 3: хранение, пространство имён, управление, учётные записи и права как единая система. Metastore, каталог, схема, таблица, volume, а снизу хранилище.",
+  "ch10-s08": "Обзор фазы 4: загрузка файлов и внешних источников правильно, инкрементально и воспроизводимо. Явная схема или вывод схемы, COPY INTO и в конце подробно Auto Loader.",
+  "ch10-s09": "Обзор фазы 5: потоки от модели выполнения до надёжности в продакшене. Базовый синтаксис readStream … writeStream, контрольная точка, триггеры и состояние.",
+  "ch10-s10": "Обзор фазы 6: декларативные конвейеры под текущими названиями, Lakeflow Spark Declarative Pipelines. Изучаешь новую форму и узнаёшь старую (DLT) в старых руководствах.",
+  "ch10-s11": "Обзор фазы 7: надёжная оркестрация в продакшене через UI и декларативные настройки. Задание, шаги, запуски, зависимости, расписания, повторы и уведомления.",
+  "ch10-s12": "Обзор фазы 8: SQL-аналитика и BI без отношения к SQL warehouse как к чёрному ящику. Редактор SQL, сохранённые запросы, история, профиль запроса, дашборды и оповещения.",
+  "ch10-s13": "Обзор фазы 9: производительность и отладка на реальных случаях. Диагностика по данным Spark UI вместо «возьми кластер побольше».",
+  "ch10-s14": "Обзор фазы 10: Databricks как программная платформа в продакшене, за пределами ноутбуков. Databricks CLI, папки Git, файлы workspace, bundles и CI/CD.",
+  "ch10-s15": "Два вида вопросов: сертификационные (выбери правильный инструмент для сценария) и инженерные (прочитай симптомы и числа, выдвини гипотезу, докажи её, предложи исправление).",
+  "ch11-s01": "Любой вопрос управления распадается на четыре, сверху вниз: КТО, КАКОЙ ОБЪЕКТ, КАКОЕ ДЕЙСТВИЕ, ГДЕ ЛЕЖАТ БАЙТЫ. Когда эта схема ясна, почти весь Unity Catalog становится понятным.",
+  "ch11-s02": "Сверху: metastore содержит каталоги, каталоги — схемы, схемы — объекты (таблицы, volumes, функции). Каталог — главная единица изоляции данных, а схема — более тонкий уровень организации.",
+  "ch11-s03": "Каталог — большая логическая граница безопасности, и единственно верной структуры нет: по средам, по подразделениям или смешанно. Databricks советует, чтобы каталоги были осмысленными границами изоляции; здесь ты их создаёшь.",
+  "ch11-s04": "Полный список securables, выдача пользователей на уровне аккаунта и почему владение и запись в продакшене принадлежат группам и service principals, а не людям.",
+  "ch11-s05": "USE CATALOG и USE SCHEMA не дают права на чтение: они лишь позволяют «пройти» через каталог и схему. Чтобы прочитать таблицу, нужны три ключа: USE CATALOG, USE SCHEMA и SELECT.",
+  "ch11-s06": "Право на родительский объект переходит к его дочерним, так что не нужны тысячи прав на отдельные таблицы. SELECT читает, MODIFY пишет, SHOW GRANTS показывает, REVOKE отзывает.",
+  "ch11-s07": "Владелец объекта может гораздо больше, чем SELECT, поэтому владение передают группе, а не человеку. MANAGE даёт управление правами, ALL PRIVILEGES — почти всё, а BROWSE — только метаданные.",
+  "ch11-s08": "«Управляемая» не значит, что данные лежат на серверах Databricks: оба типа могут быть в твоём хранилище. Разница в том, кто управляет расположением и жизненным циклом файлов, например что происходит после DROP.",
+  "ch11-s09": "Управляемая таблица попадает в самое конкретное доступное место хранения: схемы, каталога или metastore. Storage credential говорит, КАК идёт аутентификация в облаке, external location — КАКОЙ путь разрешён.",
+  "ch11-s10": "Volumes — объекты Unity Catalog для файлов, которые не являются таблицами: PDF, изображения, JSON, checkpoints, сырые файлы. Они бывают управляемыми или внешними и имеют путь /Volumes/каталог/схема/volume.",
+  "ch11-s11": "Привязка к workspace (workspace binding) разрешает каталог только из определённых workspaces, даже если у тебя есть права. Кроме того, compute должен быть совместим с Unity Catalog.",
+  "ch11-s12": "Фильтр строк — SQL-функция, скрывающая строки при запросе (например, греческая команда видит только GR). Маска столбца скрывает значения, а ABAC применяет их через политики на основе тегов.",
+  "ch11-s13": "Unity Catalog автоматически записывает происхождение данных (lineage) до уровня столбца, чтобы видеть, что сломается, прежде чем что-то менять. А также Catalog Explorer, federation для внешних баз и Delta Sharing для обмена наружу.",
+  "ch11-s14": "Архитектура продакшена для магазина: группы, service principals и права. Люди читают, конвейеры пишут; затем практические задания.",
+  "ch11-s15": "Алгоритм для PERMISSION_DENIED, слой за слоем: учётная запись, привязка, каталог, схема, объект, фильтры, хранилище, compute. Шесть случаев его применяют, а фраза помогает запомнить порядок.",
+  "ch11-s16": "Легко путаемые пары, например управляемая и внешняя таблица, storage credential и external location. И большой тест фазы 3.",
+  "ch12-s01": "Загрузка (ingestion) — это перенос данных извне внутрь платформы, например в таблицу Delta в Unity Catalog. Эта глава о файлах в облачном хранилище или volume и поднимается по лестнице инструментов.",
+  "ch12-s02": "spark.read — пакетное чтение: читает то, что сейчас лежит по пути. Для CSV задаёшь header, разделитель, кавычки, multiLine и что делать с плохими строками (PERMISSIVE, DROPMALFORMED, FAILFAST).",
+  "ch12-s03": "Без схемы Spark может её угадать, но ему придётся сначала прочитать данные, и он может ошибиться. В продакшене предпочитают явную схему через StructType или DDL.",
+  "ch12-s04": "JSON по умолчанию читается как один объект на строку, а вложенные объекты становятся столбцами struct. У Parquet схема уже есть, а read_files() читает файлы прямо из SQL.",
+  "ch12-s05": "Скрытый столбец _metadata говорит, из какого файла пришла каждая строка, когда он изменился и какого был размера. Его нужно выбрать явно; в Bronze хранят и то, что сказал источник, и как это пришло.",
+  "ch12-s06": "spark.read каждый раз читает всю папку, и старые файлы добавляются повторно как дубли. COPY INTO помнит, какие файлы уже загрузил, и пропускает их: оно идемпотентно.",
+  "ch12-s07": "Опции COPY INTO: PATTERN (шаблон glob, не regex) — какие файлы, FILES — явный список, VALIDATE — проверка без загрузки, преобразования через SELECT и опции схемы.",
+  "ch12-s08": "Для миллионов файлов Databricks советует Auto Loader: он эффективно находит новые файлы, обрабатывает их инкрементально и развивает схему. Базовая форма — readStream с форматом cloudFiles в таблицу Bronze.",
+  "ch12-s09": "Два места хранения состояния, которые постоянно путают: schemaLocation хранит найденную Auto Loader схему и её изменения, checkpointLocation — прогресс потока, то есть какие файлы обработаны.",
+  "ch12-s10": "Если удалить, разделить или перенести контрольную точку, поток теряет память и может загрузить файлы заново как новые. Checkpoint — рабочее состояние, а не мусор для очистки.",
+  "ch12-s11": "Auto Loader находит новые файлы через листинг папки (просто, но дорого при огромном числе) или через уведомления о файлах из облака. Он также угадывает схему, и без inferColumnTypes всё сначала строки.",
+  "ch12-s12": "Когда источник добавляет столбец, Auto Loader может остановить поток и развить схему — в зависимости от режима (addNewColumns, rescue, failOnNewColumns, none). Неподходящие данные идут в столбец _rescued_data или в карантин.",
+  "ch12-s13": "Auto Loader загружает каждый файл ровно один раз, но отслеживает файлы, а не бизнес-сущности. Дубли из источника устраняются через MERGE из Bronze в Silver.",
+  "ch12-s14": "С триггером AvailableNow поток обрабатывает все новые файлы и останавливается, как запланированное пакетное задание. Когда хватает spark.read, когда COPY INTO, а когда нужен Auto Loader.",
+  "ch12-s15": "Новые файлы в зоне приёма, но в Bronze нет новых строк: пройди цепочку от источника до приёмника — файл, путь, формат, обнаружение, checkpoint, разбор, схема, запись. И что происходит, когда файл перезаписан с тем же именем.",
+  "ch12-s16": "Внезапно изменившаяся схема, пропавшие столбцы, повторяющиеся идентификаторы и испорченный CSV: для каждого случая вопросы, которые задаёшь до исправления. Не включай вслепую любую эволюцию схемы.",
+  "ch13-s01": "В пакетной обработке данные известны и конечны. В потоке они приходят постоянно, без известного конца, и Spark видит его как таблицу, которая всё время растёт (unbounded table).",
+  "ch13-s02": "read читает то, что есть сейчас, а readStream считает источник постоянно меняющимся и отслеживает прогресс. Ничего не запускается, пока writeStream … start() или toTable() не стартует запрос.",
+  "ch13-s03": "Spark не запускает новое задание на каждое событие: он собирает их в маленькие порции (micro-batches), каждая — небольшое задание Spark. Триггер processingTime задаёт, как часто начинается следующая.",
+  "ch13-s04": "Виды триггеров: по умолчанию (следующая порция сразу), фиксированный интервал, AvailableNow (всё доступное и остановка), устаревший Once, real-time для сверхнизкой задержки и что действует в serverless.",
+  "ch13-s05": "Запрос без состояния (stateless) решает по каждой записи, не помня предыдущих. Запрос с состоянием (например, подсчёт по клиенту) хранит промежуточные результаты в хранилище состояния (state store).",
+  "ch13-s06": "Время события (event time) — когда что-то произошло, это столбец в данных. Время обработки — когда система это увидела. Они расходятся из-за задержек, а временные окна используют время события.",
+  "ch13-s07": "Водяной знак (watermark) — порог по времени события: «принимаю события, опоздавшие примерно на 10 минут». Он позволяет Spark удалять старое состояние и решать, что делать с опоздавшими данными.",
+  "ch13-s08": "Три режима вывода: Append выдаёт только строки, которые больше не изменятся, Update — изменившиеся в этой порции, Complete — весь результат каждый раз. Append с агрегатами требует watermark.",
+  "ch13-s09": "Контрольная точка содержит offsets (докуда прочитан источник), commits (какие порции завершены) и, если есть, состояние. Checkpoint — это и идентичность запроса: сменишь его — получишь новый запрос.",
+  "ch13-s10": "При записи в таблицу Delta смещения источника, коммиты checkpoint и журнал Delta вместе гарантируют, что повторённая порция не запишется дважды. Это не убирает дубли, пришедшие из самого источника.",
+  "ch13-s11": "Join потока со статической таблицей обогащает события справочными данными. Join двух потоков требует ключа, временного условия и watermarks с обеих сторон, иначе состояние растёт без предела.",
+  "ch13-s12": "Таблица Delta может быть и источником, и приёмником потока. Как источник она передаёт добавления; UPDATE и DELETE требуют Change Data Feed или особых опций, а VACUUM может удалить файлы, ещё нужные потоку.",
+  "ch13-s13": "foreachBatch передаёт каждую порцию как обычный DataFrame, чтобы можно было сделать MERGE или собственную запись. Функция должна быть идемпотентной, потому что порция может повториться.",
+  "ch13-s14": "Маленькие порции дают низкую задержку, но больше накладных расходов и мелких файлов; большие — лучшую пропускную способность при большей задержке. А также отставание (backlog), размер состояния и перекос.",
+  "ch13-s15": "Мониторинг из кода (lastProgress) и в Spark UI: как быстро приходят и как быстро обрабатываются данные, длительность порции, строки состояния. И дерево отладки для продакшена.",
+  "ch13-s16": "Пошаговые лабораторные: синтетический поток, без состояния, с состоянием, временные окна, AvailableNow на Delta. Модель лучших практик и мини-проект фазы 5."
+ },
+ "updated": "2026-10-21"
+}

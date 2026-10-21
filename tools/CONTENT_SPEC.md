@@ -199,3 +199,11 @@ ignore both and show the source), and `"translations": { "<locale>": { "chapters
 **Validation**: `python3 tools/validate.py subject.json --subject [--translations el,fr]` (locale codes, known fields,
 only what the source has) and `python3 tools/validate.py translations/el/ch03.json --source ch03.json` (the same ids,
 structure and answers as the built source chapter); both run inside `build.py` and `make_pack.py`.
+
+## Language help for learners of another language (文A bridges — optional, a sidecar)
+A pack in one language can also get **bridges**: its content words, in the meaning they have in the pack, translated into
+a learner's native language, with each section's key words and a short preview. They live beside the pack
+(`bridges/core.json` + `bridges/<native>.json`), never inside it, and are made with `tools/bridge.py` — the format, the
+rules and the workflow are in docs/BRIDGE.md (in the skill: `references/BRIDGE.md`). Not part of a pack's validation;
+only when the user asks.
+

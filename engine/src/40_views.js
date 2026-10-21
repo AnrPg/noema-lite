@@ -204,8 +204,8 @@ function homeView() {
   const mantra = SUBJ.hero?.mantra || SUBJ.description;
   // the frame: one plain header (a step of which Roadmap · the title · one line · one bar); the classic screens keep the emoji and the step banner
   const top = X ? [st ? h('button', { class: 'ns-kicker subjkicker', title: SL('openMap'), onclick: () => Noema.curriculumMap(Noema.node.id, Noema.node.node) }, SL('stationOf', { title: st.info.c.title || st.info.c.goal }), ' ›') : null,
-      h('h1', { class: 'herohead' }, SUBJ.title, Noema.langTag?.(SUBJ) || ''), mantra ? h('p', { class: 'mantra', html: fmt(mantra) }) : null]
-    : [h('div', { class: 'subjtop' }, h('span', { class: 'subjemo' }, SUBJ.emoji || '📘'), h('div', { class: 'grow' }, h('h1', { class: 'herohead' }, SUBJ.title, Noema.langTag?.(SUBJ) || ''), mantra ? h('p', { class: 'mantra', html: fmt(mantra) }) : null))];
+      h('h1', { class: 'herohead' }, SUBJ.title, Noema.langTag?.(SUBJ) || '', Noema.bridgeTag?.(SUBJ) || ''), mantra ? h('p', { class: 'mantra', html: fmt(mantra) }) : null]
+    : [h('div', { class: 'subjtop' }, h('span', { class: 'subjemo' }, SUBJ.emoji || '📘'), h('div', { class: 'grow' }, h('h1', { class: 'herohead' }, SUBJ.title, Noema.langTag?.(SUBJ) || '', Noema.bridgeTag?.(SUBJ) || ''), mantra ? h('p', { class: 'mantra', html: fmt(mantra) }) : null))];
   const barW = st ? Math.round(Math.min(st.read, st.solved / NoemaCurriculum.PASS) * 100) : Math.round((p.sr + p.ex) * 50);
   const barTip = st ? (st.done ? SL('stationDone') : SL('stationMastery', { ...pr, p: Math.round(NoemaCurriculum.PASS * 100) })) : SL('subjProgress', pr);
   const v = view(
@@ -404,7 +404,7 @@ function sectionMenu(s) {
   const fresh = () => { const slot = $('.freshslot'); if (slot) { slot.dispatchEvent(new Event('noema-fresh')); slot.scrollIntoView({ behavior: 'smooth', block: 'center' }); } else go('#/s/' + s.id); };
   return () => [{ label: SL('askSocratic'), icon: TUTOR.avatar, run: () => askSection(s, 'socratic') }, $('.freshslot') ? { label: SL('askFresh'), sub: SL('askFreshSub'), icon: '✨', run: fresh } : null, { label: SL('searchSubject'), icon: 'search', run: openSearch },
     { label: SL('sources'), sub: SL('sourcesSub'), icon: 'book', run: () => toggleSourcesDeck() }, { label: timerT ? SL('focusStop') : SL('focusSprint'), sub: SL('focusSprintSub'), icon: 'clock', run: () => focusSprint() },
-    '-', { label: SL('allSections'), icon: 'list', href: '#/ch/' + s._ch.id }];
+    window.NoemaBridge?.menuItem() || null, '-', { label: SL('allSections'), icon: 'list', href: '#/ch/' + s._ch.id }];
 }
 function sectionView(sid, bid) {
   const s = SEC[sid]; if (!s) return go(HOME());
@@ -422,10 +422,11 @@ function sectionView(sid, bid) {
   const body = h('div');
   const pl = h('div', { class: 'progressline' }, h('i', { style: { width: '0%' } }));
   const tail = h('div');
+  const headRow = h('div', { class: 'row' }, h('span', { class: 'pill c' }, SHL() ? `${SL('chOf', { n: c.num, of: COURSE.length })} · ${SL('secOf', { n: s._j + 1, of: c.sections.length })}` : tE('engine.sec.nOfM', { n: s._j + 1, of: c.sections.length })), S.read[sid] ? h('span', { class: 'pill', style: { background: 'var(--ok-bg)', color: 'var(--ok)' } }, '✓ ' + SL('read')) : null);
   const v = view(h('div', { class: 'reader' },
     backBtn(`${arrowBack()} ${c.emoji} ` + chTitle(c.num, c.title), '#/ch/' + c.id),
     pl,
-    explainable(h('div', { class: 'sechead' }, h('div', { class: 'row' }, h('span', { class: 'pill c' }, SHL() ? `${SL('chOf', { n: c.num, of: COURSE.length })} · ${SL('secOf', { n: s._j + 1, of: c.sections.length })}` : tE('engine.sec.nOfM', { n: s._j + 1, of: c.sections.length })), S.read[sid] ? h('span', { class: 'pill', style: { background: 'var(--ok-bg)', color: 'var(--ok)' } }, '✓ ' + SL('read')) : null),
+    explainable(h('div', { class: 'sechead' }, headRow,
       h('h1', { style: { marginTop: '10px' } }, s.title), s.hook ? h('p', { class: 'hook', html: fmt(s.hook) }) : null), () => ({ label: s.title, text: `The whole section "${s.title}" — ${s.hook || ''} (give me the big picture of this section)`, sec: s, what: 'section' })),   // i18n-ignore (for the AI)
     body, tail));
   function draw(scroll) {
@@ -446,6 +447,7 @@ function sectionView(sid, bid) {
       tail.append(sectionTail(s, prev, next));
       if (scroll) { const els = $$('.blk', body); const first = els[els.length - chunks[shown - 1].length]; first?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
     }
+    window.NoemaBridge?.section({ sid, body, head: headRow });   // 文A language help: the words of the theory in the learner's language (engine/bridge.js, docs/BRIDGE.md)
   }
   draw();
   if (target) showHit(body.querySelector(`[data-bid="${bids[s.blocks.indexOf(target)]}"]`));

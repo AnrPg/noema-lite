@@ -33,6 +33,7 @@ node "$ROOT/tests/social.js" "$T"         # 👥 people, study buddies, conversa
 node "$ROOT/tests/curriculum_app.js" "$T"
 node "$ROOT/tests/curriculum_share.js" "$T"
 node "$ROOT/tests/shelf.js" "$T"
+node "$ROOT/tests/bridge.js" "$T"         # 文A language help: a pack's words in the learner's own language (docs/BRIDGE.md)
 node "$ROOT/tests/sources.js" "$T"
 python3 "$ROOT/tests/sql_policies.py"   # skips itself when no PostgreSQL is installed
 # foreign languages (docs/LANGUAGES.md §11): content validator, reference checker, runtime, the course, the UI

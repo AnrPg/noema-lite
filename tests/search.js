@@ -105,7 +105,7 @@ const ready = async page => { await wait(600); return until(() => page.evaluate(
   await page.goto(url + '#/search?q=E_k&t=exercise,card'); await page.reload(); await ready(page);
   ok(await until(() => page.$('.ns-srpractise'), 8000), '“Practise these results” shows when the filter keeps only things that can be practised');
   await page.click('.ns-srpractise');
-  ok(await until(() => page.evaluate(() => location.hash === '#/srun' && NoemaSearch.round()?.steps?.length > 0), 15000), 'Practise these results: a round, its first step opens: ' + await page.evaluate(() => JSON.stringify(NoemaSearch.round()?.steps?.map(s => s.kind))));
+  ok(await until(() => page.evaluate(() => /^#\/s?run$/.test(location.hash) && NoemaSearch.round()?.steps?.length > 0), 15000), 'Practise these results: a round, its first step opens: ' + await page.evaluate(() => JSON.stringify(NoemaSearch.round()?.steps?.map(s => s.kind))));
   await page.screenshot({ path: SHOTS + '/sr_e_round.png' });
   ok(await until(() => page.$('.runner .runtop')), 'the exercises of the round open in the runner');
   ok(await page.evaluate(() => /Next|end/i.test(NoemaSearch.after()?.label || '')), 'each step knows the next one (or the end): ' + await page.evaluate(() => NoemaSearch.after()?.label));

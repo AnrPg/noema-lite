@@ -1,0 +1,335 @@
+{
+ "format": "noema-bridge-core",
+ "v": 1,
+ "pack": "dna-ru",
+ "source": "ru",
+ "entries": [
+  {
+   "k": "репликация",
+   "pos": "NOUN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "copying DNA before a cell divides"
+    }
+   ],
+   "key": true,
+   "forms": [
+    "репликации",
+    "репликацию"
+   ]
+  },
+  {
+   "k": "начинаться",
+   "pos": "VERB",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to begin"
+    }
+   ],
+   "forms": [
+    "начинается",
+    "начинаются"
+   ]
+  },
+  {
+   "k": "точка начала репликации",
+   "pos": "NOUN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a place on the DNA where copying starts"
+    }
+   ],
+   "key": true,
+   "forms": [
+    "точках начала репликации",
+    "точки начала репликации"
+   ]
+  },
+  {
+   "k": "хеликаза",
+   "pos": "NOUN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the enzyme that opens the double helix"
+    }
+   ],
+   "key": true,
+   "forms": [
+    "хеликазы"
+   ]
+  },
+  {
+   "k": "раскручивать",
+   "pos": "VERB",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to unwind"
+    }
+   ],
+   "forms": [
+    "раскручивает"
+   ]
+  },
+  {
+   "k": "двойная спираль",
+   "pos": "NOUN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the two twisted strands of DNA"
+    }
+   ],
+   "key": true,
+   "forms": [
+    "двойную спираль",
+    "двойной спирали"
+   ]
+  },
+  {
+   "k": "полимераза",
+   "pos": "NOUN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the enzyme that builds the new strand"
+    }
+   ],
+   "key": true,
+   "forms": [
+    "полимеразы"
+   ]
+  },
+  {
+   "k": "синтезировать",
+   "pos": "VERB",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to build (a molecule) from parts"
+    }
+   ],
+   "forms": [
+    "синтезирует",
+    "синтезируется"
+   ]
+  },
+  {
+   "k": "новый",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "new"
+    }
+   ],
+   "forms": [
+    "новую",
+    "новая",
+    "новые"
+   ]
+  },
+  {
+   "k": "цепь",
+   "pos": "NOUN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "one strand of the DNA molecule"
+    }
+   ],
+   "key": true,
+   "forms": [
+    "цепи"
+   ]
+  },
+  {
+   "k": "каждый",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "each"
+    }
+   ],
+   "forms": [
+    "каждая",
+    "каждое"
+   ]
+  },
+  {
+   "k": "молекула",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a molecule"
+    }
+   ],
+   "forms": [
+    "молекулы"
+   ]
+  },
+  {
+   "k": "сохранять",
+   "pos": "VERB",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to keep"
+    }
+   ],
+   "forms": [
+    "сохраняет"
+   ]
+  },
+  {
+   "k": "старый",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "old (here: the parent strand)"
+    }
+   ],
+   "forms": [
+    "старую",
+    "старая"
+   ]
+  },
+  {
+   "k": "полуконсервативный",
+   "pos": "ADJ",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "each copy keeps one old strand"
+    }
+   ],
+   "key": true,
+   "forms": [
+    "полуконсервативна",
+    "полуконсервативная"
+   ]
+  },
+  {
+   "k": "ведущий",
+   "pos": "ADJ",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "made in one piece (the leading strand)"
+    }
+   ],
+   "forms": [
+    "ведущая"
+   ]
+  },
+  {
+   "k": "синтезироваться",
+   "pos": "VERB",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to be built",
+     "pos": "VERB",
+     "forms": []
+    }
+   ]
+  },
+  {
+   "k": "непрерывно",
+   "pos": "ADV",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "without breaks"
+    }
+   ]
+  },
+  {
+   "k": "отстающий",
+   "pos": "ADJ",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "made in pieces (the lagging strand)"
+    }
+   ],
+   "forms": [
+    "отстающая"
+   ]
+  },
+  {
+   "k": "фрагмент",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a piece, a fragment"
+    }
+   ],
+   "forms": [
+    "фрагментами",
+    "фрагменты"
+   ]
+  },
+  {
+   "k": "одна",
+   "pos": "NUM",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "one"
+    }
+   ],
+   "forms": [
+    "одну",
+    "один"
+   ]
+  }
+ ],
+ "keep": [
+  "ДНК",
+  "Оказаки"
+ ],
+ "sections": {
+  "ch01-s01": {
+   "terms": [
+    "репликация",
+    "точка начала репликации",
+    "хеликаза",
+    "двойная спираль",
+    "полимераза",
+    "цепь",
+    "полуконсервативный"
+   ]
+  }
+ },
+ "anchors": []
+}

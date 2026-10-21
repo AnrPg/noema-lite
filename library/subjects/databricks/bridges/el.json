@@ -1,0 +1,7205 @@
+{
+ "format": "noema-bridge-locale",
+ "v": 1,
+ "native": "el",
+ "status": "draft",
+ "t": {
+  "table#1": {
+   "t": "πίνακας",
+   "src": "bion5jj7r1"
+  },
+  "file#1": {
+   "t": "αρχείο",
+   "src": "pdk7lv8eui"
+  },
+  "storage#1": {
+   "t": "αποθήκευση (αποθηκευτικός χώρος)",
+   "src": "1nzgtnm1xy"
+  },
+  "data#1": {
+   "t": "δεδομένα",
+   "src": "17dzcb5vls"
+  },
+  "compute#1": {
+   "t": "υπολογιστικοί πόροι",
+   "src": "1wmehsd1wt"
+  },
+  "transaction#1": {
+   "t": "συναλλαγή",
+   "src": "17folv99dl"
+  },
+  "metadata#1": {
+   "t": "μεταδεδομένα",
+   "src": "1z0pqt513n"
+  },
+  "column#1": {
+   "t": "στήλη",
+   "src": "dj85zd1h09"
+  },
+  "row#1": {
+   "t": "γραμμή (εγγραφή)",
+   "src": "n7vuzl1e56"
+  },
+  "governance#1": {
+   "t": "διακυβέρνηση δεδομένων",
+   "src": "bo7oju1k1f"
+  },
+  "layer#1": {
+   "t": "επίπεδο",
+   "src": "jr1d9ib59z"
+  },
+  "query#1": {
+   "t": "ερώτημα",
+   "src": "1hz55x71q1"
+  },
+  "commit#1": {
+   "t": "καταχώριση (commit)",
+   "src": "mkggzkhzed"
+  },
+  "commit#2": {
+   "t": "καταχωρίζω (κάνω commit)",
+   "src": "1tjj4xy1e8"
+  },
+  "log#1": {
+   "t": "αρχείο καταγραφής",
+   "src": "zm97b4cq0t"
+  },
+  "shuffle#1": {
+   "t": "ανακατανομή δεδομένων (shuffle)",
+   "src": "176aox6aiz"
+  },
+  "shuffle#2": {
+   "t": "ανακατανέμω (κάνω shuffle)",
+   "src": "1rd7l9w8vy"
+  },
+  "snapshot#1": {
+   "t": "στιγμιότυπο",
+   "src": "g418gk1bmj"
+  },
+  "platform#1": {
+   "t": "πλατφόρμα",
+   "src": "1hx8z3tb39"
+  },
+  "read#1": {
+   "t": "διαβάζω",
+   "src": "mb21d7n85z"
+  },
+  "read#2": {
+   "t": "ανάγνωση",
+   "src": "1i94uhq1ln"
+  },
+  "reader#1": {
+   "t": "αναγνώστης (διεργασία που διαβάζει)",
+   "src": "l3b3102m2y"
+  },
+  "cloud#1": {
+   "t": "νέφος (cloud)",
+   "src": "yfdq7911dy"
+  },
+  "current#1": {
+   "t": "τρέχων",
+   "src": "bjk9re1qjp"
+  },
+  "database#1": {
+   "t": "βάση δεδομένων",
+   "src": "1fkohsw13p"
+  },
+  "engine#1": {
+   "t": "μηχανή (εκτέλεσης)",
+   "src": "pkkvop8qqj"
+  },
+  "format#1": {
+   "t": "μορφή (μορφότυπος)",
+   "src": "w1glu21b0q"
+  },
+  "model#1": {
+   "t": "μοντέλο",
+   "src": "1eo0f2kd3m"
+  },
+  "part#1": {
+   "t": "μέρος",
+   "src": "1bgo1vy1y0"
+  },
+  "physical#1": {
+   "t": "φυσικός",
+   "src": "pb4uad13jt"
+  },
+  "physically#1": {
+   "t": "φυσικά (στα πραγματικά αρχεία)",
+   "src": "14ed9uqq0f"
+  },
+  "plane#1": {
+   "t": "επίπεδο (plane)",
+   "src": "11jfbomtjx"
+  },
+  "pruning#1": {
+   "t": "αποκοπή (παράλειψη περιττών δεδομένων)",
+   "src": "uxwi92myic"
+  },
+  "statistics#1": {
+   "t": "στατιστικά",
+   "src": "dny7651koe"
+  },
+  "transactional#1": {
+   "t": "συναλλακτικός (με συναλλαγές)",
+   "src": "9fkhzc1u3e"
+  },
+  "version#1": {
+   "t": "έκδοση",
+   "src": "ltsttsghsk"
+  },
+  "cluster#1": {
+   "t": "συστάδα υπολογιστών (cluster)",
+   "src": "1jt2ippytu"
+  },
+  "columnar#1": {
+   "t": "στηλοθετημένος (αποθήκευση ανά στήλη)",
+   "src": "1gwt6p1uzu"
+  },
+  "join#1": {
+   "t": "σύζευξη (join)",
+   "src": "1yewj4xp9x"
+  },
+  "object#1": {
+   "t": "αντικείμενο",
+   "src": "15v0jcw1lu"
+  },
+  "state#1": {
+   "t": "κατάσταση",
+   "src": "dz57ef152b"
+  },
+  "add#1": {
+   "t": "προσθέτω",
+   "src": "19k4hirkg3"
+  },
+  "chapter#1": {
+   "t": "κεφάλαιο",
+   "src": "1iiqvy7rc9"
+  },
+  "come#1": {
+   "t": "έρχομαι",
+   "src": "19fjr6t9q3"
+  },
+  "come back#1": {
+   "t": "επιστρέφω",
+   "src": "1x2umd5ngw"
+  },
+  "different#1": {
+   "t": "διαφορετικός",
+   "src": "1opx43mgss"
+  },
+  "environment#1": {
+   "t": "περιβάλλον",
+   "src": "1hwv4e21ur"
+  },
+  "exam#1": {
+   "t": "εξέταση",
+   "src": "16j42i31jm"
+  },
+  "logical#1": {
+   "t": "λογικός",
+   "src": "1s61nxt1mh"
+  },
+  "logically#1": {
+   "t": "λογικά",
+   "src": "1vsztrf1vx"
+  },
+  "membership#1": {
+   "t": "συμμετοχή (το να ανήκει)",
+   "src": "1cjdwg5nyg"
+  },
+  "need#1": {
+   "t": "χρειάζομαι",
+   "src": "1is5jglby0"
+  },
+  "now#1": {
+   "t": "τώρα",
+   "src": "1xxw74pcxq"
+  },
+  "persistent#1": {
+   "t": "μόνιμος (που διατηρείται)",
+   "src": "pv1tfq1umb"
+  },
+  "picture#1": {
+   "t": "εικόνα",
+   "src": "1e3tc1bd5q"
+  },
+  "picture#2": {
+   "t": "φαντάζομαι",
+   "src": "nc1t6i2rhe"
+  },
+  "run#1": {
+   "t": "εκτελώ",
+   "src": "6295wt1uk6"
+  },
+  "see#1": {
+   "t": "βλέπω",
+   "src": "1l07s1q13f"
+  },
+  "semantics#1": {
+   "t": "σημασιολογία (κανόνες συμπεριφοράς)",
+   "src": "1n624sqnkp"
+  },
+  "slow#1": {
+   "t": "αργός",
+   "src": "p4lph8138q"
+  },
+  "traditional#1": {
+   "t": "παραδοσιακός",
+   "src": "eukd3jyyhh"
+  },
+  "valid#1": {
+   "t": "έγκυρος",
+   "src": "jmtirv1vs1"
+  },
+  "invalid#1": {
+   "t": "άκυρος",
+   "src": "1izc1zdagw"
+  },
+  "write#1": {
+   "t": "γράφω",
+   "src": "xen3ia1jhn"
+  },
+  "writer#1": {
+   "t": "εγγραφέας (διεργασία που γράφει)",
+   "src": "1isuttx4dm"
+  },
+  "ask#1": {
+   "t": "ρωτώ",
+   "src": "1be2wv3nvp"
+  },
+  "byte#1": {
+   "t": "byte (ψηφιολέξη)",
+   "src": "1112hemraj"
+  },
+  "concurrent#1": {
+   "t": "ταυτόχρονος",
+   "src": "xf8gk51p85"
+  },
+  "describe#1": {
+   "t": "περιγράφω",
+   "src": "1v7x4v91t9"
+  },
+  "description#1": {
+   "t": "περιγραφή",
+   "src": "riqqfcs46k"
+  },
+  "directory#1": {
+   "t": "κατάλογος (φάκελος)",
+   "src": "ern6u91aq7"
+  },
+  "evidence#1": {
+   "t": "ένδειξη (τεκμήριο)",
+   "src": "8abhid1vmo"
+  },
+  "give#1": {
+   "t": "δίνω",
+   "src": "1gu9yto1jj"
+  },
+  "gone#1": {
+   "t": "χάθηκε (δεν υπάρχει πια)",
+   "src": "oh83koydqm"
+  },
+  "hold#1": {
+   "t": "περιέχω (κρατώ)",
+   "src": "16efv3hr5o"
+  },
+  "keep#1": {
+   "t": "κρατώ",
+   "src": "1e5n0g1154"
+  },
+  "kitchen#1": {
+   "t": "κουζίνα",
+   "src": "48pgcd1ymd"
+  },
+  "lakehouse#1": {
+   "t": "lakehouse (λίμνη και αποθήκη δεδομένων μαζί)",
+   "src": "12m49i11kw"
+  },
+  "old#1": {
+   "t": "παλιός",
+   "src": "wafhtcrua3"
+  },
+  "new#1": {
+   "t": "νέος",
+   "src": "jwa1ym14w7"
+  },
+  "order#1": {
+   "t": "παραγγελία",
+   "src": "ozywlp1auj"
+  },
+  "order#2": {
+   "t": "σειρά",
+   "src": "14jw3pc1fl"
+  },
+  "plain#1": {
+   "t": "απλός",
+   "src": "10ggwgy11j"
+  },
+  "reduce#1": {
+   "t": "μειώνω",
+   "src": "12f0tvy1e9"
+  },
+  "replacement#1": {
+   "t": "αντικατάσταση (νέο στη θέση του παλιού)",
+   "src": "15hnycyevd"
+  },
+  "schema#1": {
+   "t": "σχήμα (schema)",
+   "src": "7g43zo41n6"
+  },
+  "something#1": {
+   "t": "κάτι",
+   "src": "j77hro1vmd"
+  },
+  "store#1": {
+   "t": "αποθηκεύω",
+   "src": "ocn6noxqop"
+  },
+  "survive#1": {
+   "t": "επιβιώνω (παραμένω)",
+   "src": "1blb5ht1ez"
+  },
+  "actually#1": {
+   "t": "στην πραγματικότητα",
+   "src": "1q56i181nz"
+  },
+  "apart#1": {
+   "t": "χωριστά",
+   "src": "14deg751d1"
+  },
+  "back#1": {
+   "t": "πίσω",
+   "src": "heoyc7it6x"
+  },
+  "belong#1": {
+   "t": "ανήκω",
+   "src": "irjyvi2f9g"
+  },
+  "broadcast#1": {
+   "t": "αναμετάδοση (broadcast)",
+   "src": "t5vlx07sku"
+  },
+  "cell#1": {
+   "t": "κελί",
+   "src": "ro2ljj1lw4"
+  },
+  "change#1": {
+   "t": "αλλάζω",
+   "src": "bi832pwsen"
+  },
+  "change#2": {
+   "t": "αλλαγή",
+   "src": "1vrs4it1d2"
+  },
+  "cheap#1": {
+   "t": "φθηνός",
+   "src": "rv1z8xe5n6"
+  },
+  "classic#1": {
+   "t": "κλασικός",
+   "src": "lp9khdmm5z"
+  },
+  "clustering#1": {
+   "t": "ομαδοποίηση",
+   "src": "1xb5nkzufa"
+  },
+  "consistency#1": {
+   "t": "συνέπεια",
+   "src": "1ytcpia13a"
+  },
+  "contain#1": {
+   "t": "περιέχω",
+   "src": "w181vm1arh"
+  },
+  "control#1": {
+   "t": "έλεγχος",
+   "src": "xm52utcn3o"
+  },
+  "control plane#1": {
+   "t": "επίπεδο ελέγχου (control plane)",
+   "src": "1js4wsb194"
+  },
+  "compute plane#1": {
+   "t": "επίπεδο υπολογισμού (compute plane)",
+   "src": "7hgwr3f768"
+  },
+  "cook#1": {
+   "t": "μαγειρεύω",
+   "src": "78kb0v1ukv"
+  },
+  "cook#2": {
+   "t": "μάγειρας",
+   "src": "15oeokzed6"
+  },
+  "dataset#1": {
+   "t": "σύνολο δεδομένων",
+   "src": "1v6dpu31tx"
+  },
+  "debugging#1": {
+   "t": "αποσφαλμάτωση",
+   "src": "1jajdg9q6g"
+  },
+  "decide#1": {
+   "t": "αποφασίζω",
+   "src": "a229fv140b"
+  },
+  "delete#1": {
+   "t": "διαγράφω",
+   "src": "89qf0t93tf"
+  },
+  "deleted#1": {
+   "t": "διαγραμμένος",
+   "src": "4euy86efzr"
+  },
+  "disappear#1": {
+   "t": "εξαφανίζομαι",
+   "src": "1lw3kzazot"
+  },
+  "e-shop#1": {
+   "t": "ηλεκτρονικό κατάστημα",
+   "src": "1fv4vcfh85"
+  },
+  "execution#1": {
+   "t": "εκτέλεση",
+   "src": "1atzeg2k08"
+  },
+  "executor#1": {
+   "t": "εκτελεστής (executor)",
+   "src": "2qsizq17eh"
+  },
+  "exist#1": {
+   "t": "υπάρχω",
+   "src": "8rr3oy12jr"
+  },
+  "existence#1": {
+   "t": "ύπαρξη",
+   "src": "kbtxqy1qqe"
+  },
+  "folder#1": {
+   "t": "φάκελος",
+   "src": "1l8qd2t1jn"
+  },
+  "form#1": {
+   "t": "μορφή",
+   "src": "93wqngy8zu"
+  },
+  "form#2": {
+   "t": "διατυπώνω (σχηματίζω)",
+   "src": "15hfmcbbfu"
+  },
+  "hash#1": {
+   "t": "κατακερματισμός (hash)",
+   "src": "1r0yum81e4"
+  },
+  "historically#1": {
+   "t": "ιστορικά",
+   "src": "1o7xwh81tc"
+  },
+  "huge#1": {
+   "t": "τεράστιος",
+   "src": "5qf73w3q8c"
+  },
+  "include#1": {
+   "t": "περιλαμβάνω",
+   "src": "1o94n8021u"
+  },
+  "isolation#1": {
+   "t": "απομόνωση",
+   "src": "1i9jcpl13h"
+  },
+  "know#1": {
+   "t": "ξέρω",
+   "src": "77asj43aee"
+  },
+  "layout#1": {
+   "t": "διάταξη",
+   "src": "1hy652llgk"
+  },
+  "lifetime#1": {
+   "t": "διάρκεια ζωής",
+   "src": "omru5imuqu"
+  },
+  "mean#1": {
+   "t": "σημαίνω",
+   "src": "1gj7zog1pt"
+  },
+  "mechanism#1": {
+   "t": "μηχανισμός",
+   "src": "9f52eo1as6"
+  },
+  "modern#1": {
+   "t": "σύγχρονος",
+   "src": "yvydqc14xm"
+  },
+  "name#1": {
+   "t": "όνομα",
+   "src": "1i2jbvl1p3"
+  },
+  "network#1": {
+   "t": "δίκτυο",
+   "src": "1qvogem1c5"
+  },
+  "notebook#1": {
+   "t": "σημειωματάριο (notebook)",
+   "src": "1u16pdqg0a"
+  },
+  "pantry#1": {
+   "t": "αποθήκη τροφίμων (κελάρι)",
+   "src": "pwquxhhcvu"
+  },
+  "partition#1": {
+   "t": "διαμέρισμα (partition)",
+   "src": "ti0jbfbqor"
+  },
+  "plan#1": {
+   "t": "πλάνο εκτέλεσης",
+   "src": "1bi1q8x4so"
+  },
+  "RAM#1": {
+   "t": "μνήμη RAM",
+   "src": "mujxab7fhp"
+  },
+  "raw#1": {
+   "t": "ακατέργαστος",
+   "src": "4ahowm29m9"
+  },
+  "real#1": {
+   "t": "πραγματικός",
+   "src": "13nhcugkb0"
+  },
+  "server#1": {
+   "t": "διακομιστής",
+   "src": "5drgxb7j2o"
+  },
+  "side#1": {
+   "t": "πλευρά",
+   "src": "f2ufjq1aof"
+  },
+  "skew#1": {
+   "t": "ασυμμετρία δεδομένων (skew)",
+   "src": "1bdwgm5v2k"
+  },
+  "someone#1": {
+   "t": "κάποιος",
+   "src": "1iauv1l1do"
+  },
+  "system#1": {
+   "t": "σύστημα",
+   "src": "n7vujudgtb"
+  },
+  "take#1": {
+   "t": "παίρνω",
+   "src": "131790u19v"
+  },
+  "time#1": {
+   "t": "χρόνος",
+   "src": "14bpszl11r"
+  },
+  "together#1": {
+   "t": "μαζί",
+   "src": "105617cqzw"
+  },
+  "update#1": {
+   "t": "ενημέρωση",
+   "src": "3e2bcc8rnl"
+  },
+  "update#2": {
+   "t": "ενημερώνω",
+   "src": "181onz0daj"
+  },
+  "use#1": {
+   "t": "χρησιμοποιώ",
+   "src": "dx0nqq1ajy"
+  },
+  "warehouse#1": {
+   "t": "αποθήκη δεδομένων",
+   "src": "q18hz8160w"
+  },
+  "web#1": {
+   "t": "διαδίκτυο (web)",
+   "src": "1f1modv1tk"
+  },
+  "whole#1": {
+   "t": "ολόκληρος",
+   "src": "1l9lilt1m5"
+  },
+  "work#1": {
+   "t": "εργασία",
+   "src": "10gfttemsv"
+  },
+  "work#2": {
+   "t": "λειτουργώ (δουλεύω)",
+   "src": "1i1se9z44e"
+  },
+  "worker#1": {
+   "t": "κόμβος εργασίας (worker)",
+   "src": "usnfhk1b6b"
+  },
+  "able#1": {
+   "t": "ικανός (μπορώ)",
+   "src": "15su2681ve"
+  },
+  "ACID#1": {
+   "t": "ACID (ατομικότητα, συνέπεια, απομόνωση, μονιμότητα)",
+   "src": "xfztywapin"
+  },
+  "alone#1": {
+   "t": "μόνος",
+   "src": "1e34cefx9t"
+  },
+  "analogy#1": {
+   "t": "αναλογία",
+   "src": "1llef71o9r"
+  },
+  "analytical#1": {
+   "t": "αναλυτικός",
+   "src": "lg2esy1gbp"
+  },
+  "API#1": {
+   "t": "API (διεπαφή προγραμματισμού)",
+   "src": "1nrubqmi26"
+  },
+  "application#1": {
+   "t": "εφαρμογή",
+   "src": "4bf80qkh9f"
+  },
+  "architecture#1": {
+   "t": "αρχιτεκτονική",
+   "src": "3oem217fe1"
+  },
+  "atomicity#1": {
+   "t": "ατομικότητα",
+   "src": "grvk5319ch"
+  },
+  "atomic#1": {
+   "t": "ατομικός (όλα ή τίποτα)",
+   "src": "1dzqs81ub2"
+  },
+  "backend#1": {
+   "t": "υποδομή διακομιστή (backend)",
+   "src": "boxh8d1vr5"
+  },
+  "bad#1": {
+   "t": "κακός",
+   "src": "csyxl21vyz"
+  },
+  "become#1": {
+   "t": "γίνομαι",
+   "src": "1g7zus31k1"
+  },
+  "beginner#1": {
+   "t": "αρχάριος",
+   "src": "h1ffp37l3m"
+  },
+  "behavior#1": {
+   "t": "συμπεριφορά",
+   "src": "1wot9yagyq"
+  },
+  "better#1": {
+   "t": "καλύτερος",
+   "src": "1ei2yuxl6v"
+  },
+  "big#1": {
+   "t": "μεγάλος",
+   "src": "1bdmhwazhm"
+  },
+  "bring#1": {
+   "t": "φέρνω",
+   "src": "bktu919nrw"
+  },
+  "build#1": {
+   "t": "χτίζω (κατασκευάζω)",
+   "src": "h5eakytyeo"
+  },
+  "building#1": {
+   "t": "κτίριο",
+   "src": "e8m0ph1omh"
+  },
+  "call#1": {
+   "t": "ονομάζω",
+   "src": "1l77n5p2ho"
+  },
+  "case#1": {
+   "t": "περίπτωση",
+   "src": "1rg5m6116n"
+  },
+  "capacity#1": {
+   "t": "χωρητικότητα",
+   "src": "1orn87d7fe"
+  },
+  "cause#1": {
+   "t": "αιτία",
+   "src": "1hgmftedr7"
+  },
+  "central#1": {
+   "t": "κεντρικός",
+   "src": "mf6ecn11as"
+  },
+  "challenge#1": {
+   "t": "πρόκληση",
+   "src": "1h0ka5f1v0"
+  },
+  "check#1": {
+   "t": "ελέγχω",
+   "src": "nplkrh1k2a"
+  },
+  "choice#1": {
+   "t": "επιλογή",
+   "src": "1338wxa4k7"
+  },
+  "choose#1": {
+   "t": "επιλέγω",
+   "src": "19m400qsuc"
+  },
+  "class#1": {
+   "t": "κατηγορία",
+   "src": "qyqji21d0a"
+  },
+  "code#1": {
+   "t": "κώδικας",
+   "src": "105qpnv1ob"
+  },
+  "coherent#1": {
+   "t": "συνεκτικός",
+   "src": "1rgviiqb93"
+  },
+  "collect#1": {
+   "t": "συλλέγω",
+   "src": "179wmzh17e"
+  },
+  "combine#1": {
+   "t": "συνδυάζω",
+   "src": "2tahs01jgx"
+  },
+  "compactly#1": {
+   "t": "συμπαγώς (σε λίγο χώρο)",
+   "src": "1eufk7611z"
+  },
+  "compare#1": {
+   "t": "συγκρίνω",
+   "src": "156zssp1b4"
+  },
+  "compatible#1": {
+   "t": "συμβατός",
+   "src": "9h1b9xos0e"
+  },
+  "completely#1": {
+   "t": "πλήρως",
+   "src": "177jjjd148"
+  },
+  "compress#1": {
+   "t": "συμπιέζω",
+   "src": "1q4vd50131"
+  },
+  "compression#1": {
+   "t": "συμπίεση",
+   "src": "150pzqa1sm"
+  },
+  "computation#1": {
+   "t": "υπολογισμός",
+   "src": "1dlqm6q1ln"
+  },
+  "compute#2": {
+   "t": "υπολογίζω",
+   "src": "f1m8z3xdec"
+  },
+  "concept#1": {
+   "t": "έννοια",
+   "src": "1t0ammd3fd"
+  },
+  "configuration#1": {
+   "t": "ρύθμιση (διαμόρφωση)",
+   "src": "yf8hde194t"
+  },
+  "confusing#1": {
+   "t": "μπερδεμένος (που μπερδεύει)",
+   "src": "19qc7cnbu4"
+  },
+  "connect#1": {
+   "t": "συνδέω",
+   "src": "1morev81d3"
+  },
+  "coordinate#1": {
+   "t": "συντονίζω",
+   "src": "kxqsr9q4gr"
+  },
+  "coordination#1": {
+   "t": "συντονισμός",
+   "src": "imv2d01rk2"
+  },
+  "copy#1": {
+   "t": "αντιγράφω",
+   "src": "fzfo4wnkxq"
+  },
+  "core#1": {
+   "t": "πυρήνας",
+   "src": "129izap3zx"
+  },
+  "core#2": {
+   "t": "βασικός",
+   "src": "71uwluha7i"
+  },
+  "correct#1": {
+   "t": "σωστός",
+   "src": "18xmjmbaqo"
+  },
+  "correspond#1": {
+   "t": "αντιστοιχώ",
+   "src": "1ogbgj8e5t"
+  },
+  "cosmetic#1": {
+   "t": "επιφανειακός",
+   "src": "egsutd2smh"
+  },
+  "count#1": {
+   "t": "μετράω (λογίζομαι)",
+   "src": "nbliqo1hjy"
+  },
+  "course#1": {
+   "t": "μάθημα (σειρά μαθημάτων)",
+   "src": "94kq2srtov"
+  },
+  "cover#1": {
+   "t": "καλύπτω",
+   "src": "1kxceb2kup"
+  },
+  "CPU#1": {
+   "t": "επεξεργαστής (CPU)",
+   "src": "1cddxxdnvn"
+  },
+  "crash#1": {
+   "t": "κατάρρευση",
+   "src": "g6br6s1q4t"
+  },
+  "create#1": {
+   "t": "δημιουργώ",
+   "src": "nkwl1sgmd1"
+  },
+  "customer#1": {
+   "t": "πελάτης",
+   "src": "hhkxsqfmam"
+  },
+  "cut#1": {
+   "t": "περικόπτω (μειώνω)",
+   "src": "10s7ns2bv4"
+  },
+  "DAG#1": {
+   "t": "DAG (κατευθυνόμενος άκυκλος γράφος)",
+   "src": "gwzdr61p8w"
+  },
+  "database-like#1": {
+   "t": "σαν βάση δεδομένων",
+   "src": "hnx09pw7e5"
+  },
+  "date#1": {
+   "t": "ημερομηνία",
+   "src": "1eevuqskig"
+  },
+  "day#1": {
+   "t": "ημέρα",
+   "src": "1b4hxo094c"
+  },
+  "default#1": {
+   "t": "προεπιλογή",
+   "src": "1enj5vt3tr"
+  },
+  "definition#1": {
+   "t": "ορισμός",
+   "src": "tlqznx14d3"
+  },
+  "depend#1": {
+   "t": "εξαρτώμαι",
+   "src": "u40eee1bfp"
+  },
+  "depth#1": {
+   "t": "βάθος",
+   "src": "1ja0up6bda"
+  },
+  "design#1": {
+   "t": "σχεδιασμός",
+   "src": "1o5s2hj1a4"
+  },
+  "detail#1": {
+   "t": "λεπτομέρεια",
+   "src": "118840g1my"
+  },
+  "diagnose#1": {
+   "t": "διαγιγνώσκω",
+   "src": "c546q615sn"
+  },
+  "diagnosis#1": {
+   "t": "διάγνωση",
+   "src": "184gfgo1sa"
+  },
+  "difference#1": {
+   "t": "διαφορά",
+   "src": "18ck25w10h"
+  },
+  "directly#1": {
+   "t": "απευθείας",
+   "src": "1afek9i904"
+  },
+  "disposable#1": {
+   "t": "αναλώσιμος (μιας χρήσης)",
+   "src": "a45fho8wue"
+  },
+  "distributed#1": {
+   "t": "κατανεμημένος",
+   "src": "1s4uay11pc"
+  },
+  "DML#1": {
+   "t": "DML (εντολές αλλαγής δεδομένων)",
+   "src": "1eod6le1ya"
+  },
+  "driver#1": {
+   "t": "οδηγός (driver)",
+   "src": "1coari9xwd"
+  },
+  "drop#1": {
+   "t": "αφαιρώ (απορρίπτω)",
+   "src": "wdq2lj1pf1"
+  },
+  "durability#1": {
+   "t": "μονιμότητα (ανθεκτικότητα)",
+   "src": "ko75z62bgh"
+  },
+  "easy#1": {
+   "t": "εύκολος",
+   "src": "st1jov1219"
+  },
+  "editable#1": {
+   "t": "επεξεργάσιμος",
+   "src": "1snl37d1fk"
+  },
+  "edit#1": {
+   "t": "επεξεργάζομαι",
+   "src": "reqqgi1h9y"
+  },
+  "encode#1": {
+   "t": "κωδικοποιώ",
+   "src": "15rh9811sj"
+  },
+  "encoding#1": {
+   "t": "κωδικοποίηση",
+   "src": "11uenew17v"
+  },
+  "end#1": {
+   "t": "καταλήγω (τελειώνω)",
+   "src": "1lpbg2quwo"
+  },
+  "enforce#1": {
+   "t": "επιβάλλω",
+   "src": "144hb781b4"
+  },
+  "engineer#1": {
+   "t": "μηχανικός",
+   "src": "st72hxklyf"
+  },
+  "enormous#1": {
+   "t": "τεράστιος",
+   "src": "4wovpisn7w"
+  },
+  "enough#1": {
+   "t": "αρκετά",
+   "src": "12ftbq51pg"
+  },
+  "equivalent#1": {
+   "t": "ισοδύναμος",
+   "src": "1syqaf51jd"
+  },
+  "erase#1": {
+   "t": "σβήνω",
+   "src": "14mhpsi1p1"
+  },
+  "essential#1": {
+   "t": "ουσιώδης",
+   "src": "gzg0uzhqte"
+  },
+  "estimate#1": {
+   "t": "εκτίμηση",
+   "src": "13kvmwlltv"
+  },
+  "exact#1": {
+   "t": "ακριβής",
+   "src": "1sy4sa51ey"
+  },
+  "example#1": {
+   "t": "παράδειγμα",
+   "src": "1jprhgy193"
+  },
+  "exchange#1": {
+   "t": "ανταλλαγή (exchange)",
+   "src": "1gvlycn13q"
+  },
+  "execute#1": {
+   "t": "εκτελώ",
+   "src": "1xga22g1i8"
+  },
+  "exercise#1": {
+   "t": "άσκηση",
+   "src": "ixrrb31bvu"
+  },
+  "expect#1": {
+   "t": "περιμένω (αναμένω)",
+   "src": "116u1it14z"
+  },
+  "explain#1": {
+   "t": "εξηγώ",
+   "src": "1a7edz8koz"
+  },
+  "extend#1": {
+   "t": "επεκτείνω",
+   "src": "1wbsaxux2t"
+  },
+  "external#1": {
+   "t": "εξωτερικός",
+   "src": "i7zzv99npg"
+  },
+  "extra#1": {
+   "t": "επιπλέον",
+   "src": "1jd98qzt0p"
+  },
+  "extremely#1": {
+   "t": "εξαιρετικά",
+   "src": "1by7eb4onk"
+  },
+  "fail#1": {
+   "t": "αποτυγχάνω",
+   "src": "wjgl9f13ft"
+  },
+  "failure#1": {
+   "t": "αποτυχία",
+   "src": "1uiq3zh17y"
+  },
+  "fallback#1": {
+   "t": "εναλλακτική λύση (fallback)",
+   "src": "1ftmsil18i"
+  },
+  "feel#1": {
+   "t": "φαίνεται (μοιάζει)",
+   "src": "1tjknao1iu"
+  },
+  "file-based#1": {
+   "t": "βασισμένος σε αρχεία",
+   "src": "1mhui1x1ra"
+  },
+  "file-level#1": {
+   "t": "σε επίπεδο αρχείων",
+   "src": "qy16utoho2"
+  },
+  "file-oriented#1": {
+   "t": "με βάση τα αρχεία",
+   "src": "1orfapid1g"
+  },
+  "find#1": {
+   "t": "βρίσκω",
+   "src": "1b2pg1a1b5"
+  },
+  "first#1": {
+   "t": "πρώτα",
+   "src": "3ld0171m3p"
+  },
+  "fix#1": {
+   "t": "διορθώνω",
+   "src": "gkwwra1twy"
+  },
+  "flexible#1": {
+   "t": "ευέλικτος",
+   "src": "rdywzrrhud"
+  },
+  "food#1": {
+   "t": "φαγητό",
+   "src": "1yt035z1h3"
+  },
+  "footer#1": {
+   "t": "υποσέλιδο (τέλος αρχείου)",
+   "src": "kddbfn17gy"
+  },
+  "foundation#1": {
+   "t": "θεμέλιο (βάση)",
+   "src": "1dkgvmsx26"
+  },
+  "friendly#1": {
+   "t": "φιλικός",
+   "src": "36lou211jb"
+  },
+  "front office#1": {
+   "t": "γραφείο υποδοχής",
+   "src": "1w587g358j"
+  },
+  "full#1": {
+   "t": "πλήρης",
+   "src": "c68qxj70hy"
+  },
+  "fundamentally#1": {
+   "t": "θεμελιωδώς",
+   "src": "fvw8c2xb35"
+  },
+  "fuzzy#1": {
+   "t": "θολός",
+   "src": "z4lu0f1fof"
+  },
+  "go#1": {
+   "t": "πηγαίνω",
+   "src": "n4r3gq15id"
+  },
+  "good#1": {
+   "t": "καλός",
+   "src": "g5uattn7lb"
+  },
+  "govern#1": {
+   "t": "διέπω (ελέγχω)",
+   "src": "19s3drm1si"
+  },
+  "group#1": {
+   "t": "ομαδοποιώ",
+   "src": "nw89pm16vw"
+  },
+  "grid#1": {
+   "t": "πλέγμα",
+   "src": "4frxbo1gsl"
+  },
+  "guarantee#1": {
+   "t": "εγγύηση",
+   "src": "1wzpdy911d"
+  },
+  "guess#1": {
+   "t": "μαντεύω",
+   "src": "tu5sbl1hya"
+  },
+  "guide#1": {
+   "t": "οδηγός",
+   "src": "zw78laeikb"
+  },
+  "half#1": {
+   "t": "μισό",
+   "src": "46rg251npe"
+  },
+  "half-done#1": {
+   "t": "μισοτελειωμένος",
+   "src": "544qez1vcj"
+  },
+  "happen#1": {
+   "t": "συμβαίνω",
+   "src": "17hthli1h7"
+  },
+  "hierarchy#1": {
+   "t": "ιεραρχία",
+   "src": "po16fa1o8f"
+  },
+  "hire#1": {
+   "t": "προσλαμβάνω",
+   "src": "w0ybk217ri"
+  },
+  "history#1": {
+   "t": "ιστορικό",
+   "src": "1470g2nrkq"
+  },
+  "home#1": {
+   "t": "σπίτι",
+   "src": "rzy1r0vi83"
+  },
+  "hood#1": {
+   "t": "«κάτω από το καπό»: τι γίνεται εσωτερικά",
+   "src": "1rgpic01xg"
+  },
+  "horizontal#1": {
+   "t": "οριζόντιος",
+   "src": "l36flk1dok"
+  },
+  "hypothesis#1": {
+   "t": "υπόθεση",
+   "src": "f92k58aeig"
+  },
+  "idea#1": {
+   "t": "ιδέα",
+   "src": "ik4n7gv9b5"
+  },
+  "identify#1": {
+   "t": "εντοπίζω",
+   "src": "178mb481dh"
+  },
+  "imagine#1": {
+   "t": "φαντάζομαι",
+   "src": "18pmi0u1yt"
+  },
+  "immutable-ish#1": {
+   "t": "σχεδόν αμετάβλητος",
+   "src": "18qi8dm7e4"
+  },
+  "important#1": {
+   "t": "σημαντικός",
+   "src": "6x1o5v1u6h"
+  },
+  "imprecise#1": {
+   "t": "ανακριβής",
+   "src": "l4so2m1rqe"
+  },
+  "increase#1": {
+   "t": "αυξάνω",
+   "src": "901yso13mc"
+  },
+  "independent#1": {
+   "t": "ανεξάρτητος",
+   "src": "94ori81pi3"
+  },
+  "individual#1": {
+   "t": "μεμονωμένος",
+   "src": "rs5133sfq1"
+  },
+  "inefficient#1": {
+   "t": "αναποτελεσματικός",
+   "src": "nlqk1jajvt"
+  },
+  "infrastructure#1": {
+   "t": "υποδομή",
+   "src": "c419eemd33"
+  },
+  "ingestion#1": {
+   "t": "εισαγωγή δεδομένων",
+   "src": "icw49xy3lk"
+  },
+  "insight#1": {
+   "t": "κατανόηση (διορατικότητα)",
+   "src": "1sxzf4g1od"
+  },
+  "instead#1": {
+   "t": "αντί για",
+   "src": "ts2is0e0kf"
+  },
+  "insufficient#1": {
+   "t": "ανεπαρκής",
+   "src": "1hscaex2at"
+  },
+  "integrate#1": {
+   "t": "ενσωματώνω",
+   "src": "1233vqe8dq"
+  },
+  "interleaving#1": {
+   "t": "διαπλοκή (ανάμειξη στον χρόνο)",
+   "src": "1tfbnj41at"
+  },
+  "intuitive#1": {
+   "t": "διαισθητικός",
+   "src": "8sc252183x"
+  },
+  "invariant#1": {
+   "t": "αναλλοίωτος κανόνας",
+   "src": "kuzo1e144a"
+  },
+  "invisible#1": {
+   "t": "αόρατος",
+   "src": "xgllec1gtt"
+  },
+  "involve#1": {
+   "t": "περιλαμβάνω (συνεπάγεται)",
+   "src": "qn4cqzt7th"
+  },
+  "irrelevant#1": {
+   "t": "άσχετος",
+   "src": "aca3brq0ug"
+  },
+  "job#1": {
+   "t": "εργασία (job)",
+   "src": "1o14xykbfg"
+  },
+  "key#1": {
+   "t": "κλειδί",
+   "src": "mnlsq6owts"
+  },
+  "knowledge#1": {
+   "t": "γνώση",
+   "src": "tplff1oimj"
+  },
+  "lack#1": {
+   "t": "στερούμαι (δεν έχω)",
+   "src": "80ai82howv"
+  },
+  "lake#1": {
+   "t": "λίμνη δεδομένων",
+   "src": "1vx03ye12g"
+  },
+  "data lake#1": {
+   "t": "λίμνη δεδομένων (data lake)",
+   "src": "6n34hg8u02"
+  },
+  "data warehouse#1": {
+   "t": "αποθήκη δεδομένων (data warehouse)",
+   "src": "kcjoe6mnav"
+  },
+  "large#1": {
+   "t": "μεγάλος",
+   "src": "649bc6ck4j"
+  },
+  "lean#1": {
+   "t": "κλίνω (τείνω)",
+   "src": "10hyorr13y"
+  },
+  "learn#1": {
+   "t": "μαθαίνω",
+   "src": "rp8x7j199f"
+  },
+  "letter#1": {
+   "t": "γράμμα",
+   "src": "1oa6nn71kn"
+  },
+  "level#1": {
+   "t": "επίπεδο",
+   "src": "1q6e5jc4de"
+  },
+  "level-up#1": {
+   "t": "επόμενο επίπεδο",
+   "src": "1t29k6n1n0"
+  },
+  "line#1": {
+   "t": "γραμμή",
+   "src": "v8ncze1xlo"
+  },
+  "list#1": {
+   "t": "απαριθμώ (καταγράφω)",
+   "src": "1t5iczyv7w"
+  },
+  "live#1": {
+   "t": "βρίσκομαι (ζω)",
+   "src": "12sz32z1ut"
+  },
+  "local#1": {
+   "t": "τοπικός",
+   "src": "v6f55y1n9n"
+  },
+  "locate#1": {
+   "t": "εντοπίζω",
+   "src": "162pa1g1f1"
+  },
+  "location#1": {
+   "t": "τοποθεσία",
+   "src": "1m4vcgm18n"
+  },
+  "longer#1": {
+   "t": "«όχι πια»",
+   "src": "ubgqwu652e"
+  },
+  "look#1": {
+   "t": "φαίνεται",
+   "src": "14kkwj1fz7"
+  },
+  "loop#1": {
+   "t": "βρόχος (κύκλος)",
+   "src": "qu8iwg88da"
+  },
+  "machine#1": {
+   "t": "μηχάνημα (υπολογιστής)",
+   "src": "1xe6ey6glk"
+  },
+  "mainly#1": {
+   "t": "κυρίως",
+   "src": "vp5pz111mg"
+  },
+  "major#1": {
+   "t": "μεγάλος (σημαντικός)",
+   "src": "1dp0pmmpib"
+  },
+  "manage#1": {
+   "t": "διαχειρίζομαι",
+   "src": "ukatfg1jpy"
+  },
+  "management#1": {
+   "t": "διαχείριση",
+   "src": "10nolg711y"
+  },
+  "map#1": {
+   "t": "αντιστοιχίζω",
+   "src": "8us2un1dmh"
+  },
+  "mastery#1": {
+   "t": "επάρκεια (κατάκτηση)",
+   "src": "bxph4u1p9m"
+  },
+  "meaning#1": {
+   "t": "σημασία",
+   "src": "12v2r8c9rc"
+  },
+  "mechanics#1": {
+   "t": "μηχανική (λειτουργία)",
+   "src": "1woird0ryc"
+  },
+  "meet#1": {
+   "t": "συναντώ",
+   "src": "1877h5ulfg"
+  },
+  "memorize#1": {
+   "t": "απομνημονεύω",
+   "src": "svja971tox"
+  },
+  "memory#1": {
+   "t": "μνήμη",
+   "src": "1bidp9d1ce"
+  },
+  "mental#1": {
+   "t": "νοητικός",
+   "src": "1sdb1i81s7"
+  },
+  "merge#1": {
+   "t": "συγχωνεύω",
+   "src": "1ynb3v5rxw"
+  },
+  "metric#1": {
+   "t": "μετρική",
+   "src": "fcbqh79762"
+  },
+  "missing#1": {
+   "t": "που λείπει",
+   "src": "2tl05019iz"
+  },
+  "mix#1": {
+   "t": "αναμειγνύω",
+   "src": "i7tzpz19gs"
+  },
+  "modification#1": {
+   "t": "τροποποίηση",
+   "src": "ljwy2e1xof"
+  },
+  "moment#1": {
+   "t": "στιγμή",
+   "src": "k6e9s0rm8w"
+  },
+  "move#1": {
+   "t": "μετακινώ",
+   "src": "3ks64qx9vf"
+  },
+  "mutable#1": {
+   "t": "μεταβλητός",
+   "src": "1nquxpvdhc"
+  },
+  "naive#1": {
+   "t": "απλοϊκός",
+   "src": "1w425a69bu"
+  },
+  "namespace#1": {
+   "t": "χώρος ονομάτων",
+   "src": "1xoly60k4j"
+  },
+  "necessarily#1": {
+   "t": "απαραίτητα",
+   "src": "121eteg1fj"
+  },
+  "nested#1": {
+   "t": "εμφωλευμένος",
+   "src": "vjovi14151"
+  },
+  "nobody#1": {
+   "t": "κανείς",
+   "src": "61pm5u1738"
+  },
+  "non-equi#1": {
+   "t": "μη ισοτικός",
+   "src": "di83vr1xs9"
+  },
+  "normal#1": {
+   "t": "κανονικός",
+   "src": "4gctnslxgf"
+  },
+  "note#1": {
+   "t": "σημείωση",
+   "src": "1wkkl171t1"
+  },
+  "nothing#1": {
+   "t": "τίποτα",
+   "src": "1f8on9r6nd"
+  },
+  "notice#1": {
+   "t": "προσέχω",
+   "src": "h3ob052jvz"
+  },
+  "object storage#1": {
+   "t": "αποθήκευση αντικειμένων (object storage)",
+   "src": "41abjpj14v"
+  },
+  "office#1": {
+   "t": "γραφείο",
+   "src": "47loxr1wez"
+  },
+  "one-sentence#1": {
+   "t": "σε μία πρόταση",
+   "src": "1n2t4ij746"
+  },
+  "OOM#1": {
+   "t": "OOM (εξάντληση μνήμης)",
+   "src": "18skmfk11d"
+  },
+  "open#1": {
+   "t": "ανοιχτός",
+   "src": "trs2kzq0ie"
+  },
+  "operate#1": {
+   "t": "λειτουργώ (διαχειρίζομαι)",
+   "src": "1u4rz31xup"
+  },
+  "operation#1": {
+   "t": "λειτουργία (ενέργεια)",
+   "src": "a6ou821c50"
+  },
+  "operational#1": {
+   "t": "λειτουργικός (επιχειρησιακός)",
+   "src": "15cejaw1ms"
+  },
+  "optimize#1": {
+   "t": "βελτιστοποιώ",
+   "src": "4vdhjp1u6h"
+  },
+  "optimization#1": {
+   "t": "βελτιστοποίηση",
+   "src": "13hxhifqse"
+  },
+  "optimizer#1": {
+   "t": "βελτιστοποιητής",
+   "src": "aie3qjzodd"
+  },
+  "orchestration#1": {
+   "t": "ενορχήστρωση",
+   "src": "1c2qvrfxwf"
+  },
+  "organization#1": {
+   "t": "οργάνωση",
+   "src": "b1i771vdsi"
+  },
+  "organize#1": {
+   "t": "οργανώνω",
+   "src": "1igr5ehzlt"
+  },
+  "otherwise#1": {
+   "t": "διαφορετικά",
+   "src": "1bqosdl1wt"
+  },
+  "owner#1": {
+   "t": "κάτοχος",
+   "src": "1hv5iol1qi"
+  },
+  "ownership#1": {
+   "t": "ιδιοκτησία",
+   "src": "1il8asj1t0"
+  },
+  "page#1": {
+   "t": "σελίδα",
+   "src": "p0ws9xddmi"
+  },
+  "pair#1": {
+   "t": "ζεύγος",
+   "src": "4865zr16ac"
+  },
+  "partial#1": {
+   "t": "μερικός",
+   "src": "17tkz7u1cs"
+  },
+  "path#1": {
+   "t": "διαδρομή",
+   "src": "dlu4wpdfe6"
+  },
+  "pattern#1": {
+   "t": "μοτίβο",
+   "src": "1rm48q810g"
+  },
+  "anti-pattern#1": {
+   "t": "αντι-πρότυπο (κακή πρακτική)",
+   "src": "1p9b8td17c"
+  },
+  "pay#1": {
+   "t": "πληρώνω",
+   "src": "4g455k14tm"
+  },
+  "peak#1": {
+   "t": "αιχμή",
+   "src": "1icqxgb1is"
+  },
+  "performance#1": {
+   "t": "απόδοση",
+   "src": "1l9qmxp1y7"
+  },
+  "permission#1": {
+   "t": "δικαίωμα (άδεια)",
+   "src": "yxza1v29nb"
+  },
+  "persist#1": {
+   "t": "παραμένω αποθηκευμένος",
+   "src": "15bqytz6c4"
+  },
+  "piece#1": {
+   "t": "κομμάτι",
+   "src": "jnhd57tcw6"
+  },
+  "pipeline#1": {
+   "t": "ροή επεξεργασίας (pipeline)",
+   "src": "z8j3721heg"
+  },
+  "potentially#1": {
+   "t": "ενδεχομένως",
+   "src": "13bb9515bd"
+  },
+  "precise#1": {
+   "t": "ακριβής",
+   "src": "1stzvx9d6d"
+  },
+  "predictive#1": {
+   "t": "προβλεπτικός",
+   "src": "he1b9u104y"
+  },
+  "preview#1": {
+   "t": "πρώτη ματιά",
+   "src": "1131pdrehh"
+  },
+  "process#1": {
+   "t": "επεξεργάζομαι",
+   "src": "1np3nozpo3"
+  },
+  "produce#1": {
+   "t": "παράγω",
+   "src": "1wfpl9upzh"
+  },
+  "professional#1": {
+   "t": "επαγγελματικός",
+   "src": "66zw3u1va4"
+  },
+  "program#1": {
+   "t": "πρόγραμμα",
+   "src": "1jujyvdksn"
+  },
+  "publish#1": {
+   "t": "δημοσιεύω",
+   "src": "15mxbbq16s"
+  },
+  "question#1": {
+   "t": "ερώτηση",
+   "src": "f36kcy1krx"
+  },
+  "querying#1": {
+   "t": "εκτέλεση ερωτημάτων",
+   "src": "1eszia1tcc"
+  },
+  "reason#1": {
+   "t": "λόγος (συλλογισμός)",
+   "src": "bbqtnb875i"
+  },
+  "record#1": {
+   "t": "καταγράφω",
+   "src": "bw6v7m6xyz"
+  },
+  "reference#1": {
+   "t": "αναφορά",
+   "src": "1wgghudvji"
+  },
+  "refine#1": {
+   "t": "βελτιώνω",
+   "src": "1tt8n3511s"
+  },
+  "region#1": {
+   "t": "περιοχή",
+   "src": "6ko0nhqeyh"
+  },
+  "relevant#1": {
+   "t": "σχετικός",
+   "src": "1w5hv4d1rf"
+  },
+  "remain#1": {
+   "t": "παραμένω",
+   "src": "3fciefm7oo"
+  },
+  "remeasure#1": {
+   "t": "ξαναμετρώ",
+   "src": "119kkt11hm"
+  },
+  "remove#1": {
+   "t": "αφαιρώ",
+   "src": "1ianmelit6"
+  },
+  "replace#1": {
+   "t": "αντικαθιστώ",
+   "src": "f3sa09ep19"
+  },
+  "replay#1": {
+   "t": "αναπαράγω (εφαρμόζω ξανά με τη σειρά)",
+   "src": "1dp5lri9ke"
+  },
+  "request#1": {
+   "t": "ζητώ",
+   "src": "jferzp1ak6"
+  },
+  "resource#1": {
+   "t": "πόρος",
+   "src": "mglz341lj2"
+  },
+  "respect#1": {
+   "t": "τηρώ",
+   "src": "1me8f9vkza"
+  },
+  "responsible#1": {
+   "t": "υπεύθυνος",
+   "src": "4uz4k1nxyd"
+  },
+  "restart#1": {
+   "t": "ξεκινώ από την αρχή",
+   "src": "kgk9sxeiad"
+  },
+  "restaurant#1": {
+   "t": "εστιατόριο",
+   "src": "17jdqjcyjw"
+  },
+  "rewrite#1": {
+   "t": "επανεγγραφή",
+   "src": "1yj4y2b102"
+  },
+  "rigid#1": {
+   "t": "άκαμπτος",
+   "src": "w0rmnm6fuf"
+  },
+  "role#1": {
+   "t": "ρόλος",
+   "src": "139nyzy171"
+  },
+  "room#1": {
+   "t": "δωμάτιο",
+   "src": "1h6qvqk1ge"
+  },
+  "roughly#1": {
+   "t": "περίπου",
+   "src": "1aqtilo1wl"
+  },
+  "round#1": {
+   "t": "γύρος",
+   "src": "1ucbfhc1rf"
+  },
+  "row-oriented#1": {
+   "t": "προσανατολισμένος σε γραμμές",
+   "src": "1osz4qm15w"
+  },
+  "row group#1": {
+   "t": "ομάδα γραμμών (row group)",
+   "src": "1vu23yn1lw"
+  },
+  "column chunk#1": {
+   "t": "τμήμα στήλης (column chunk)",
+   "src": "18xubp5qw4"
+  },
+  "rule#1": {
+   "t": "κανόνας",
+   "src": "rrkh0i1i53"
+  },
+  "runtime#1": {
+   "t": "χρόνος εκτέλεσης",
+   "src": "9rss88159m"
+  },
+  "save#1": {
+   "t": "αποθηκεύω",
+   "src": "1hi96js9cs"
+  },
+  "say#1": {
+   "t": "λέω",
+   "src": "5sqxjuv2mw"
+  },
+  "scale#1": {
+   "t": "κλιμακώνομαι",
+   "src": "wy8tdfyh75"
+  },
+  "scalable#1": {
+   "t": "κλιμακώσιμος",
+   "src": "drob6q180q"
+  },
+  "scan#1": {
+   "t": "σαρώνω",
+   "src": "19zzlbm51i"
+  },
+  "section#1": {
+   "t": "ενότητα",
+   "src": "lkwbkpdg5v"
+  },
+  "security#1": {
+   "t": "ασφάλεια",
+   "src": "1fds5vd1r9"
+  },
+  "selection#1": {
+   "t": "επιλογή",
+   "src": "1diewlrdqw"
+  },
+  "self-check#1": {
+   "t": "αυτοέλεγχος",
+   "src": "16g8bsi16w"
+  },
+  "send#1": {
+   "t": "στέλνω",
+   "src": "mu8qli8cmz"
+  },
+  "sense#1": {
+   "t": "νόημα",
+   "src": "1vnp4xq1tt"
+  },
+  "separate#1": {
+   "t": "ξεχωριστός",
+   "src": "gjz7lx49vc"
+  },
+  "separation#1": {
+   "t": "διαχωρισμός",
+   "src": "meau4gx9pc"
+  },
+  "serverless#1": {
+   "t": "χωρίς διαχείριση διακομιστών (serverless)",
+   "src": "sy2w7ab5x5"
+  },
+  "service#1": {
+   "t": "υπηρεσία",
+   "src": "j9ppe2g7q3"
+  },
+  "setting#1": {
+   "t": "ρύθμιση",
+   "src": "ctiu92vcym"
+  },
+  "severe#1": {
+   "t": "σοβαρός",
+   "src": "ummu1sysjd"
+  },
+  "similar#1": {
+   "t": "παρόμοιος",
+   "src": "1jbizt31qg"
+  },
+  "simplified#1": {
+   "t": "απλοποιημένος",
+   "src": "a9i4gw1339"
+  },
+  "simply#1": {
+   "t": "απλώς",
+   "src": "a04dj11wqc"
+  },
+  "sit#1": {
+   "t": "βρίσκομαι",
+   "src": "qwyyqz1x77"
+  },
+  "six#1": {
+   "t": "έξι",
+   "src": "16hf4op1t5"
+  },
+  "three#1": {
+   "t": "τρία",
+   "src": "d3wnui1cwj"
+  },
+  "two#1": {
+   "t": "δύο",
+   "src": "ihg4sn1tyh"
+  },
+  "size#1": {
+   "t": "μέγεθος",
+   "src": "19dvcicw9n"
+  },
+  "skill#1": {
+   "t": "δεξιότητα",
+   "src": "1fuo0b05ck"
+  },
+  "skip#1": {
+   "t": "παραλείπω",
+   "src": "wkekrg1cpc"
+  },
+  "data skipping#1": {
+   "t": "παράλειψη αρχείων (data skipping)",
+   "src": "qesfdyrsfk"
+  },
+  "slice#1": {
+   "t": "τμήμα (φέτα)",
+   "src": "kuuq7med6c"
+  },
+  "small#1": {
+   "t": "μικρός",
+   "src": "100ufrwb0b"
+  },
+  "snippet#1": {
+   "t": "απόσπασμα κώδικα",
+   "src": "q1e5wr13k1"
+  },
+  "sophisticated#1": {
+   "t": "εξελιγμένος",
+   "src": "qr7xfme9od"
+  },
+  "sort#1": {
+   "t": "ταξινομώ",
+   "src": "i3v2hii5f6"
+  },
+  "sound#1": {
+   "t": "ακούγεται",
+   "src": "i2yaoz1lzk"
+  },
+  "source#1": {
+   "t": "πηγή",
+   "src": "2ywwia1k3u"
+  },
+  "specify#1": {
+   "t": "καθορίζω",
+   "src": "1ll7pvg1p4"
+  },
+  "spill#1": {
+   "t": "υπερχείλιση στον δίσκο (spill)",
+   "src": "1kwsowl166"
+  },
+  "split#1": {
+   "t": "χωρίζω",
+   "src": "42f8jxjz6p"
+  },
+  "spot#1": {
+   "t": "«αδύνατο σημείο»",
+   "src": "13bcgk4171"
+  },
+  "stale#1": {
+   "t": "ξεπερασμένος (μη ενημερωμένος)",
+   "src": "ocifep175u"
+  },
+  "standalone#1": {
+   "t": "αυτόνομος",
+   "src": "1pm6tbx15c"
+  },
+  "start#1": {
+   "t": "ξεκινώ",
+   "src": "sgd0rx108s"
+  },
+  "stay#1": {
+   "t": "παραμένω",
+   "src": "habzef1j4q"
+  },
+  "stop#1": {
+   "t": "σταματώ",
+   "src": "xxgv731g49"
+  },
+  "strategy#1": {
+   "t": "στρατηγική",
+   "src": "9iifvwpp7h"
+  },
+  "structured#1": {
+   "t": "δομημένος",
+   "src": "fphd261hmz"
+  },
+  "supply#1": {
+   "t": "παρέχω",
+   "src": "uwwo7u1fsw"
+  },
+  "suppose#1": {
+   "t": "ας υποθέσουμε",
+   "src": "1ik21gn1kf"
+  },
+  "symptom#1": {
+   "t": "σύμπτωμα",
+   "src": "1jdli7hg5c"
+  },
+  "syntax#1": {
+   "t": "σύνταξη",
+   "src": "1dlati11sg"
+  },
+  "table-state#1": {
+   "t": "κατάσταση πίνακα",
+   "src": "13609txchz"
+  },
+  "temp#1": {
+   "t": "προσωρινός",
+   "src": "806z3ghd8x"
+  },
+  "terminate#1": {
+   "t": "τερματίζω",
+   "src": "13xp4qwyi6"
+  },
+  "test#1": {
+   "t": "ελέγχω (εξετάζω)",
+   "src": "1e7lneq1h7"
+  },
+  "theorem#1": {
+   "t": "θεώρημα",
+   "src": "1r7igyhwao"
+  },
+  "thing#1": {
+   "t": "πράγμα",
+   "src": "1dsfqev1ed"
+  },
+  "think#1": {
+   "t": "σκέφτομαι",
+   "src": "1js65vu1rm"
+  },
+  "three-level#1": {
+   "t": "τριών επιπέδων",
+   "src": "eno8qr1dhk"
+  },
+  "tiny#1": {
+   "t": "μικροσκοπικός",
+   "src": "eqqnpee0jn"
+  },
+  "tomorrow#1": {
+   "t": "αύριο",
+   "src": "3q8rsox6kp"
+  },
+  "topic#1": {
+   "t": "θέμα",
+   "src": "sxav7v1k71"
+  },
+  "touch#1": {
+   "t": "αγγίζω",
+   "src": "1ssegrs66k"
+  },
+  "track#1": {
+   "t": "παρακολουθώ",
+   "src": "4uw0e81s82"
+  },
+  "transformation#1": {
+   "t": "μετασχηματισμός",
+   "src": "5kj1sx1d0t"
+  },
+  "trap#1": {
+   "t": "παγίδα",
+   "src": "vwx2i5s3vd"
+  },
+  "treat#1": {
+   "t": "αντιμετωπίζω",
+   "src": "14s7l2e1t4"
+  },
+  "trivial#1": {
+   "t": "τετριμμένος",
+   "src": "172cks47ox"
+  },
+  "turn#1": {
+   "t": "γίνομαι (μετατρέπομαι)",
+   "src": "1p2dlmw16d"
+  },
+  "underneath#1": {
+   "t": "από κάτω",
+   "src": "53d55usnth"
+  },
+  "underpin#1": {
+   "t": "στηρίζω",
+   "src": "2awny7fnwb"
+  },
+  "understand#1": {
+   "t": "καταλαβαίνω",
+   "src": "w4lzji1jux"
+  },
+  "unit#1": {
+   "t": "μονάδα",
+   "src": "rrinzqq0ti"
+  },
+  "untouched#1": {
+   "t": "ανέγγιχτος",
+   "src": "ru6fe913po"
+  },
+  "uncommitted#1": {
+   "t": "μη καταχωρισμένος",
+   "src": "r4rar11jfl"
+  },
+  "usually#1": {
+   "t": "συνήθως",
+   "src": "sjyfias8kw"
+  },
+  "useful#1": {
+   "t": "χρήσιμος",
+   "src": "12rsmw1usf"
+  },
+  "value#1": {
+   "t": "τιμή",
+   "src": "yxj644f4nm"
+  },
+  "vanish#1": {
+   "t": "εξαφανίζομαι",
+   "src": "bouqyy1ac6"
+  },
+  "violate#1": {
+   "t": "παραβιάζω",
+   "src": "3kaekpc1ip"
+  },
+  "visible#1": {
+   "t": "ορατός",
+   "src": "16w6fc0ovm"
+  },
+  "want#1": {
+   "t": "θέλω",
+   "src": "1ny8ksfcnb"
+  },
+  "way#1": {
+   "t": "τρόπος",
+   "src": "9xl20k1yqr"
+  },
+  "weak#1": {
+   "t": "αδύναμος",
+   "src": "1j01g7rmri"
+  },
+  "word#1": {
+   "t": "λέξη",
+   "src": "15apbw6101"
+  },
+  "workload#1": {
+   "t": "φόρτος εργασίας",
+   "src": "1uadx2i280"
+  },
+  "workspace#1": {
+   "t": "χώρος εργασίας (workspace)",
+   "src": "1cwuxtjyps"
+  },
+  "wrong#1": {
+   "t": "λάθος",
+   "src": "1dkpkm1iui"
+  },
+  "zero#1": {
+   "t": "μηδέν",
+   "src": "84ikp31nd4"
+  },
+  "Monday#1": {
+   "t": "Δευτέρα",
+   "src": "hjv09h1e42"
+  },
+  "Tuesday#1": {
+   "t": "Τρίτη",
+   "src": "n1vebg77dj"
+  },
+  "Wednesday#1": {
+   "t": "Τετάρτη",
+   "src": "e7lbbfsz7u"
+  },
+  "answer#1": {
+   "t": "απάντηση",
+   "src": "1eibm301gi"
+  },
+  "answer#2": {
+   "t": "απαντώ",
+   "src": "k4iakst3mk"
+  },
+  "action#1": {
+   "t": "ενέργεια",
+   "src": "15bxs3rvng"
+  },
+  "afterward#1": {
+   "t": "μετά",
+   "src": "eej3fp1wh9"
+  },
+  "aim#1": {
+   "t": "στοχεύω",
+   "src": "fvu6v5ff0r"
+  },
+  "anything#1": {
+   "t": "οτιδήποτε",
+   "src": "fftvnt1amx"
+  },
+  "apply#1": {
+   "t": "εφαρμόζω",
+   "src": "183ztv41l2"
+  },
+  "area#1": {
+   "t": "τομέας",
+   "src": "1y6ljyxbpk"
+  },
+  "artifact#1": {
+   "t": "τεχνούργημα (παραγόμενο αρχείο)",
+   "src": "dh9tcx1wbp"
+  },
+  "asset#1": {
+   "t": "στοιχείο (περιουσιακό)",
+   "src": "1iip79m14l"
+  },
+  "associate#1": {
+   "t": "επίπεδο Associate",
+   "src": "6ar7smamf5"
+  },
+  "associated#1": {
+   "t": "συνδεδεμένος",
+   "src": "tqxihc1bei"
+  },
+  "automatically#1": {
+   "t": "αυτόματα",
+   "src": "1ugqv1a1vo"
+  },
+  "automation#1": {
+   "t": "αυτοματοποίηση",
+   "src": "7cu4t1iovp"
+  },
+  "bundle#1": {
+   "t": "πακέτο (bundle)",
+   "src": "15se2yt1yf"
+  },
+  "CAP#1": {
+   "t": "CAP (θεώρημα CAP)",
+   "src": "vgg8cd1t6j"
+  },
+  "data-science#1": {
+   "t": "επιστήμης δεδομένων",
+   "src": "8sii9z1o71"
+  },
+  "database-table#1": {
+   "t": "πίνακας βάσης δεδομένων",
+   "src": "gtmu69zqb5"
+  },
+  "DataFrame#1": {
+   "t": "DataFrame (πίνακας δεδομένων στον κώδικα)",
+   "src": "69jqq310qo"
+  },
+  "decorative#1": {
+   "t": "διακοσμητικός",
+   "src": "pkrs8x1qxc"
+  },
+  "Delta Lake#1": {
+   "t": "Delta Lake",
+   "note": "μορφή πινάκων: αρχεία Parquet μαζί με αρχείο καταγραφής συναλλαγών (ACID)",
+   "src": "1qi6cnz3ku"
+  },
+  "Unity Catalog#1": {
+   "t": "Unity Catalog",
+   "note": "κεντρική διακυβέρνηση: ονόματα (κατάλογος.σχήμα.πίνακας), ιδιοκτήτες, δικαιώματα",
+   "src": "17ybtjn1is"
+  },
+  "Spark UI#1": {
+   "t": "Spark UI (σελίδα παρακολούθησης του Spark)",
+   "src": "xpew6h1w2h"
+  },
+  "Time Travel#1": {
+   "t": "Time Travel (ανάγνωση παλαιότερης έκδοσης πίνακα)",
+   "src": "j7e8t31etv"
+  },
+  "Liquid Clustering#1": {
+   "t": "Liquid Clustering (δυναμική ομαδοποίηση δεδομένων)",
+   "src": "fu94p01yc9"
+  },
+  "Adaptive Query Execution#1": {
+   "t": "Προσαρμοστική εκτέλεση ερωτημάτων (AQE)",
+   "src": "5h44ndy7cy"
+  },
+  "Broadcast Hash Join#1": {
+   "t": "Broadcast Hash Join (BHJ): ο μικρός πίνακας αντιγράφεται σε κάθε executor",
+   "src": "pxc7wl10hy"
+  },
+  "Sort-Merge Join#1": {
+   "t": "Sort-Merge Join (SMJ): ανακατανομή, ταξινόμηση, συγχώνευση",
+   "src": "1ctokdw11y"
+  },
+  "Shuffled Hash Join#1": {
+   "t": "Shuffled Hash Join (SHJ)",
+   "src": "nubdgy1ldk"
+  },
+  "Broadcast Nested Loop Join#1": {
+   "t": "Broadcast Nested Loop Join (BNLJ)",
+   "src": "1hqa3yu15o"
+  },
+  "transaction log#1": {
+   "t": "αρχείο καταγραφής συναλλαγών",
+   "src": "1a4re1exvh"
+  },
+  "catalog#1": {
+   "t": "κατάλογος",
+   "src": "1nlghcw1uc"
+  },
+  "hash table#1": {
+   "t": "πίνακας κατακερματισμού",
+   "src": "1rg5y7p18l"
+  },
+  "row pair#1": {
+   "t": "ζεύγος γραμμών",
+   "src": "spzmac1vcz"
+  },
+  "weak spot#1": {
+   "t": "αδύνατο σημείο",
+   "src": "1yxv9tg18b"
+  },
+  "under the hood#1": {
+   "t": "στο εσωτερικό (τι γίνεται πραγματικά)",
+   "src": "vu6j1ky1zu"
+  },
+  "no longer#1": {
+   "t": "όχι πια",
+   "src": "te0vzxdhte"
+  },
+  "come and go#1": {
+   "t": "έρχονται και φεύγουν",
+   "src": "vvngk31x5r"
+  },
+  "later#1": {
+   "t": "αργότερα",
+   "src": "ipfmwq1odr"
+  },
+  "troubleshooting#1": {
+   "t": "αντιμετώπιση προβλημάτων",
+   "src": "17wykfjubo"
+  },
+  "absolutely#1": {
+   "t": "απολύτως",
+   "src": "vxxga22fdj"
+  },
+  "else#1": {
+   "t": "άλλο",
+   "src": "1bob6lz1us"
+  },
+  "English#1": {
+   "t": "αγγλικά",
+   "src": "192r4fy1xs"
+  },
+  "throw#1": {
+   "t": "ρίχνω (περισσότερους πόρους)",
+   "src": "22jtvzquvl"
+  },
+  "stream#1": {
+   "t": "ροή δεδομένων (streaming)",
+   "src": "ljqdfe1wii"
+  },
+  "task#1": {
+   "t": "εργασία (task)",
+   "src": "29e1hp18py"
+  },
+  "checkpoint#1": {
+   "t": "σημείο ελέγχου (checkpoint)",
+   "src": "5yo1u41wa4"
+  },
+  "type#1": {
+   "t": "τύπος",
+   "src": "vcmsxz1avv"
+  },
+  "batch#1": {
+   "t": "δέσμη (batch)",
+   "src": "18c67k0hrz"
+  },
+  "event#1": {
+   "t": "συμβάν",
+   "src": "pagwmk19ns"
+  },
+  "loader#1": {
+   "t": "φορτωτής",
+   "src": "v4giy75bkg"
+  },
+  "production#1": {
+   "t": "παραγωγή (το ζωντανό σύστημα)",
+   "src": "1fam5ntnxi"
+  },
+  "identity#1": {
+   "t": "ταυτότητα",
+   "src": "1tirlhyrtb"
+  },
+  "mode#1": {
+   "t": "λειτουργία (mode)",
+   "src": "g97ew6taff"
+  },
+  "support#1": {
+   "t": "υποστηρίζω",
+   "src": "1brl9tty1s"
+  },
+  "access#1": {
+   "t": "πρόσβαση",
+   "src": "l51z6tlpl7"
+  },
+  "watermark#1": {
+   "t": "υδατογράφημα (watermark: όριο καθυστέρησης)",
+   "src": "1r0ys1eduy"
+  },
+  "principal#1": {
+   "t": "φορέας (principal: χρήστης, ομάδα ή υπηρεσία)",
+   "src": "p6ubc9112u"
+  },
+  "privilege#1": {
+   "t": "δικαίωμα (privilege)",
+   "src": "11jm5cp11l"
+  },
+  "duplicate#1": {
+   "t": "διπλότυπο",
+   "src": "13cxfmia7h"
+  },
+  "standard#1": {
+   "t": "τυπικός (Standard)",
+   "src": "trrn5r180a"
+  },
+  "all-purpose#1": {
+   "t": "γενικής χρήσης (all-purpose)",
+   "src": "iubdgmlpo2"
+  },
+  "sink#1": {
+   "t": "προορισμός ροής (sink)",
+   "src": "3dkk1lt1wk"
+  },
+  "grant#1": {
+   "t": "παραχωρώ (δικαίωμα)",
+   "src": "1oyouynwst"
+  },
+  "autoscaling#1": {
+   "t": "αυτόματη κλιμάκωση",
+   "src": "ibbdgvd6ov"
+  },
+  "input#1": {
+   "t": "είσοδος (δεδομένα εισόδου)",
+   "src": "d3ruu8w5o7"
+  },
+  "volume#1": {
+   "t": "τόμος (volume: χώρος αρχείων)",
+   "src": "aghdcn1hcu"
+  },
+  "stage#1": {
+   "t": "στάδιο",
+   "src": "1o2nkw7qb3"
+  },
+  "target#1": {
+   "t": "προορισμός",
+   "src": "1rlinmdhoy"
+  },
+  "pool#1": {
+   "t": "δεξαμενή (pool) μηχανών",
+   "src": "8m06611q8n"
+  },
+  "window#1": {
+   "t": "χρονικό παράθυρο",
+   "src": "1whnf8dfm2"
+  },
+  "progress#1": {
+   "t": "πρόοδος",
+   "src": "14e9klz93g"
+  },
+  "micro-batch#1": {
+   "t": "μικροδέσμη (micro-batch)",
+   "src": "1nabot9tgr"
+  },
+  "user#1": {
+   "t": "χρήστης",
+   "src": "1c4zbrq10o"
+  },
+  "load#1": {
+   "t": "φορτώνω",
+   "src": "1vkwzkx21u"
+  },
+  "schedule#1": {
+   "t": "χρονοδιάγραμμα (προγραμματισμός)",
+   "src": "s29oxhsa2s"
+  },
+  "incremental#1": {
+   "t": "σταδιακός (μόνο τα νέα δεδομένα)",
+   "src": "1k0c8arp45"
+  },
+  "recommend#1": {
+   "t": "προτείνω",
+   "src": "5eeuac1rgj"
+  },
+  "append#1": {
+   "t": "προσαρτώ (προσθέτω στο τέλος)",
+   "src": "3bct9h1cin"
+  },
+  "problem#1": {
+   "t": "πρόβλημα",
+   "src": "s79m4d15d7"
+  },
+  "filter#1": {
+   "t": "φιλτράρω",
+   "src": "tpu6891x33"
+  },
+  "arrive#1": {
+   "t": "φτάνω",
+   "src": "1lbomjap0a"
+  },
+  "evolution#1": {
+   "t": "εξέλιξη (σχήματος)",
+   "src": "1fwuvvt116"
+  },
+  "retention#1": {
+   "t": "διατήρηση (χρόνος διατήρησης)",
+   "src": "t12h3u13mx"
+  },
+  "dedicated#1": {
+   "t": "αποκλειστικός (Dedicated)",
+   "src": "nkavh9c3aq"
+  },
+  "interactive#1": {
+   "t": "διαδραστικός",
+   "src": "fg3yn21o60"
+  },
+  "trigger#1": {
+   "t": "έναυσμα (trigger)",
+   "src": "9h63rs1gqf"
+  },
+  "result#1": {
+   "t": "αποτέλεσμα",
+   "src": "1um4c04vea"
+  },
+  "match#1": {
+   "t": "ταιριάζω",
+   "src": "1hpg57tab7"
+  },
+  "share#1": {
+   "t": "μοιράζομαι",
+   "src": "n0euea40do"
+  },
+  "overwrite#1": {
+   "t": "αντικαθιστώ (overwrite)",
+   "src": "13p9x3i1so"
+  },
+  "phase#1": {
+   "t": "φάση",
+   "src": "p7th8gwav0"
+  },
+  "credential#1": {
+   "t": "διαπιστευτήρια",
+   "src": "1tud8bx7ca"
+  },
+  "idle#1": {
+   "t": "αδρανής",
+   "src": "k00skw1ncv"
+  },
+  "stateful#1": {
+   "t": "με κατάσταση (stateful)",
+   "src": "16ag9nuphy"
+  },
+  "slot#1": {
+   "t": "θέση εκτέλεσης (slot)",
+   "src": "7t4vigdhnc"
+  },
+  "business#1": {
+   "t": "επιχειρησιακός (business)",
+   "src": "1re38n1gtp"
+  },
+  "late#1": {
+   "t": "καθυστερημένος",
+   "src": "12wldlfcho"
+  },
+  "string#1": {
+   "t": "συμβολοσειρά (κείμενο)",
+   "src": "t81phcq3hr"
+  },
+  "option#1": {
+   "t": "επιλογή",
+   "src": "1ae72jhau2"
+  },
+  "allow#1": {
+   "t": "επιτρέπω",
+   "src": "bk5wxav4qm"
+  },
+  "exactly#1": {
+   "t": "ακριβώς",
+   "src": "1armp9t1ao"
+  },
+  "enable#1": {
+   "t": "ενεργοποιώ",
+   "src": "1600mci2gy"
+  },
+  "library#1": {
+   "t": "βιβλιοθήκη (κώδικα)",
+   "src": "4wu21pohfg"
+  },
+  "attach#1": {
+   "t": "συνδέω (επισυνάπτω)",
+   "src": "1imcshw3w5"
+  },
+  "mask#1": {
+   "t": "μάσκα (απόκρυψη τιμών)",
+   "src": "1u0wjb91de"
+  },
+  "account#1": {
+   "t": "λογαριασμός",
+   "src": "yomyqy14k0"
+  },
+  "lifecycle#1": {
+   "t": "κύκλος ζωής",
+   "src": "1oyb4n35zr"
+  },
+  "node#1": {
+   "t": "κόμβος",
+   "src": "ye7e384ys1"
+  },
+  "bound#1": {
+   "t": "όριο",
+   "src": "13mqzud1er"
+  },
+  "instance#1": {
+   "t": "στιγμιότυπο (εικονική μηχανή)",
+   "src": "14ulatm1wu"
+  },
+  "policy#1": {
+   "t": "πολιτική (κανόνες)",
+   "src": "10h2gsc726"
+  },
+  "output#1": {
+   "t": "έξοδος (δεδομένα εξόδου)",
+   "src": "19ib2zzegn"
+  },
+  "error#1": {
+   "t": "σφάλμα",
+   "src": "1w5xm7m16h"
+  },
+  "set#1": {
+   "t": "σύνολο",
+   "src": "32z1i519lk"
+  },
+  "deployment#1": {
+   "t": "ανάπτυξη (deployment)",
+   "src": "e8tmo01vkn"
+  },
+  "function#1": {
+   "t": "συνάρτηση",
+   "src": "nhbzle1sdy"
+  },
+  "aggregation#1": {
+   "t": "συνάθροιση",
+   "src": "5kysurwgkz"
+  },
+  "idempotent#1": {
+   "t": "ταυτοδύναμος (ίδιο αποτέλεσμα αν ξανατρέξει)",
+   "src": "1hzirq1yf6"
+  },
+  "inference#1": {
+   "t": "αυτόματη εξαγωγή (inference)",
+   "src": "4ogd1tjioq"
+  },
+  "number#1": {
+   "t": "αριθμός",
+   "src": "r0n6ic1tf4"
+  },
+  "retry#1": {
+   "t": "επαναλαμβάνω (ξαναδοκιμάζω)",
+   "src": "gs3ihs1e6h"
+  },
+  "field#1": {
+   "t": "πεδίο",
+   "src": "17787rele6"
+  },
+  "offset#1": {
+   "t": "θέση (offset)",
+   "src": "nv4mb513kw"
+  },
+  "explicit#1": {
+   "t": "ρητός",
+   "src": "4lq8ts5j6p"
+  },
+  "scaling#1": {
+   "t": "κλιμάκωση",
+   "src": "q90k3u1et9"
+  },
+  "upstream#1": {
+   "t": "ανάντη (στην πηγή)",
+   "src": "sd4yjjl91u"
+  },
+  "disk#1": {
+   "t": "δίσκος",
+   "src": "18genug1ld"
+  },
+  "available#1": {
+   "t": "διαθέσιμος",
+   "src": "no4y4a1u5o"
+  },
+  "lab#1": {
+   "t": "εργαστήριο",
+   "src": "221s52jll4"
+  },
+  "dedup#1": {
+   "t": "αφαίρεση διπλοτύπων",
+   "src": "m9sks4vocp"
+  },
+  "configure#1": {
+   "t": "ρυθμίζω",
+   "src": "1ufpp7x1v6"
+  },
+  "feature#1": {
+   "t": "δυνατότητα",
+   "src": "f07cnd1gfy"
+  },
+  "single#1": {
+   "t": "μοναδικός (ένας μόνο)",
+   "src": "1fpu7fl86l"
+  },
+  "specific#1": {
+   "t": "συγκεκριμένος",
+   "src": "m9yz591djn"
+  },
+  "null#1": {
+   "t": "κενή τιμή (null)",
+   "src": "pvtrd2ndi2"
+  },
+  "command#1": {
+   "t": "εντολή",
+   "src": "3obx871yy0"
+  },
+  "axis#1": {
+   "t": "άξονας",
+   "src": "k42roq6rro"
+  },
+  "concurrency#1": {
+   "t": "ταυτοχρονισμός",
+   "src": "1alav5wdul"
+  },
+  "exactly-once#1": {
+   "t": "ακριβώς μία φορά (exactly-once)",
+   "src": "qrxv7a5j2f"
+  },
+  "inspect#1": {
+   "t": "εξετάζω",
+   "src": "125rc8nkns"
+  },
+  "bug#1": {
+   "t": "σφάλμα κώδικα (bug)",
+   "src": "sfh4k6qtgt"
+  },
+  "view#1": {
+   "t": "προβολή (view)",
+   "src": "12drhvf108"
+  },
+  "pass#1": {
+   "t": "πέρασμα",
+   "src": "82lwhatmvs"
+  },
+  "validate#1": {
+   "t": "επικυρώνω",
+   "src": "d60ux733j8"
+  },
+  "latency#1": {
+   "t": "καθυστέρηση (latency)",
+   "src": "n1s4ri9167"
+  },
+  "next#1": {
+   "t": "επόμενος",
+   "src": "1lym4ffvsk"
+  },
+  "today#1": {
+   "t": "σήμερα",
+   "src": "ltqj6sp6dq"
+  },
+  "amount#1": {
+   "t": "ποσό",
+   "src": "zhzgzy1h43"
+  },
+  "rescue#1": {
+   "t": "διασώζω (rescued data)",
+   "src": "14q92fd1cn"
+  },
+  "grow#1": {
+   "t": "μεγαλώνω",
+   "src": "8bnugf13b1"
+  },
+  "land#1": {
+   "t": "καταλήγω (φτάνω)",
+   "src": "19nskiy198"
+  },
+  "existing#1": {
+   "t": "υπάρχων",
+   "src": "16xkb9am5h"
+  },
+  "last#1": {
+   "t": "τελευταίος",
+   "src": "12096lf1c3"
+  },
+  "long#1": {
+   "t": "μακρύς (long: ακέραιος 64 bit)",
+   "src": "ytziq6187t"
+  },
+  "possible#1": {
+   "t": "δυνατός (πιθανός)",
+   "src": "7z4hir1m8v"
+  },
+  "right#1": {
+   "t": "σωστός (αμέσως)",
+   "src": "18819shiyu"
+  },
+  "cost#1": {
+   "t": "κόστος",
+   "src": "q7e3irdzg8"
+  },
+  "dashboard#1": {
+   "t": "πίνακας ελέγχου (dashboard)",
+   "src": "1ec50t6t1c"
+  },
+  "handle#1": {
+   "t": "χειρίζομαι",
+   "src": "1ha22xu179"
+  },
+  "purpose#1": {
+   "t": "σκοπός",
+   "src": "23xyoq1j71"
+  },
+  "really#1": {
+   "t": "πραγματικά",
+   "src": "1c703mc1w9"
+  },
+  "twice#1": {
+   "t": "δύο φορές",
+   "src": "tvcx23g7v1"
+  },
+  "unbounded#1": {
+   "t": "χωρίς τέλος (unbounded)",
+   "src": "nntlwj46y1"
+  },
+  "securable#1": {
+   "t": "ασφαλίσιμο αντικείμενο (securable)",
+   "src": "ah5hlo90sq"
+  },
+  "complete#1": {
+   "t": "πλήρης (ολοκληρωμένος)",
+   "src": "lsxro31fpb"
+  },
+  "pick#1": {
+   "t": "επιλέγω",
+   "src": "ig7axm1dn7"
+  },
+  "second#1": {
+   "t": "δεύτερος (δευτερόλεπτο)",
+   "src": "1ssp1ac130"
+  },
+  "parse#1": {
+   "t": "αναλύω (parsing)",
+   "src": "uatqzw1fhm"
+  },
+  "deploy#1": {
+   "t": "αναπτύσσω (deploy)",
+   "src": "1kz5wep7vh"
+  },
+  "declarative#1": {
+   "t": "δηλωτικός",
+   "src": "1tatg6mojx"
+  },
+  "explicitly#1": {
+   "t": "ρητά",
+   "src": "yffzn3foy7"
+  },
+  "matrix#1": {
+   "t": "πίνακας (συνδυασμών)",
+   "src": "2hwgw0129f"
+  },
+  "certification#1": {
+   "t": "πιστοποίηση",
+   "src": "oqclag1ebl"
+  },
+  "boundary#1": {
+   "t": "όριο",
+   "src": "omaodm1cee"
+  },
+  "tool#1": {
+   "t": "εργαλείο",
+   "src": "1pqih2y1h4"
+  },
+  "aggregate#1": {
+   "t": "συναθροίζω",
+   "src": "13i71zg1a6"
+  },
+  "discover#1": {
+   "t": "ανακαλύπτω",
+   "src": "98w74eqdhw"
+  },
+  "point#1": {
+   "t": "σημείο",
+   "src": "grausjt6vm"
+  },
+  "ingest#1": {
+   "t": "εισάγω δεδομένα (ingest)",
+   "src": "udxwxm1pvl"
+  },
+  "fast#1": {
+   "t": "γρήγορος",
+   "src": "7jtolc1yy4"
+  },
+  "silently#1": {
+   "t": "σιωπηλά (χωρίς προειδοποίηση)",
+   "src": "ocp7v010r5"
+  },
+  "termination#1": {
+   "t": "τερματισμός",
+   "src": "j3kvvo188h"
+  },
+  "goal#1": {
+   "t": "στόχος",
+   "src": "orvfh31oeb"
+  },
+  "minute#1": {
+   "t": "λεπτό",
+   "src": "1jgrb4n1cn"
+  },
+  "basic#1": {
+   "t": "βασικός",
+   "src": "1pytohc1g7"
+  },
+  "practice#1": {
+   "t": "πρακτική",
+   "src": "19x90ycerl"
+  },
+  "evolve#1": {
+   "t": "εξελίσσομαι",
+   "src": "qx5r0q1izn"
+  },
+  "config#1": {
+   "t": "ρύθμιση (config)",
+   "src": "1xdam04q0i"
+  },
+  "remember#1": {
+   "t": "θυμάμαι",
+   "src": "zpsvoh1tiq"
+  },
+  "require#1": {
+   "t": "απαιτώ",
+   "src": "eyv9xjls81"
+  },
+  "product#1": {
+   "t": "προϊόν",
+   "src": "1gkpntv9ik"
+  },
+  "conflict#1": {
+   "t": "σύγκρουση",
+   "src": "3x2jddm8ye"
+  },
+  "define#1": {
+   "t": "ορίζω",
+   "src": "1w0a8gyvwh"
+  },
+  "matter#1": {
+   "t": "έχω σημασία",
+   "src": "6hkn1414up"
+  },
+  "break#1": {
+   "t": "χαλάω (σπάω)",
+   "src": "9zxeq063tv"
+  },
+  "reset#1": {
+   "t": "επαναφέρω (μηδενίζω)",
+   "src": "1fptr4u6zt"
+  },
+  "auto#1": {
+   "t": "αυτόματος",
+   "src": "13q06z5oy2"
+  },
+  "show#1": {
+   "t": "δείχνω",
+   "src": "1my23gr19s"
+  },
+  "parameter#1": {
+   "t": "παράμετρος",
+   "src": "1o6wti9u3d"
+  },
+  "dependency#1": {
+   "t": "εξάρτηση",
+   "src": "1pkb42t1ck"
+  },
+  "automated#1": {
+   "t": "αυτοματοποιημένος",
+   "src": "16960qtxmg"
+  },
+  "behaviour#1": {
+   "t": "συμπεριφορά",
+   "src": "1gdtf5f1oy"
+  },
+  "best#1": {
+   "t": "καλύτερος",
+   "src": "11nyd6k12x"
+  },
+  "chain#1": {
+   "t": "αλυσίδα",
+   "src": "3sjas918i3"
+  },
+  "enforcement#1": {
+   "t": "επιβολή (σχήματος)",
+   "src": "1w5at3dzr5"
+  },
+  "incrementally#1": {
+   "t": "σταδιακά",
+   "src": "1fendmrsyr"
+  },
+  "previous#1": {
+   "t": "προηγούμενος",
+   "src": "1utv6a6m5f"
+  },
+  "software#1": {
+   "t": "λογισμικό",
+   "src": "b642mh18mv"
+  },
+  "prefer#1": {
+   "t": "προτιμώ",
+   "src": "1gm2m7n1rs"
+  },
+  "appear#1": {
+   "t": "εμφανίζομαι",
+   "src": "ifm82v1juw"
+  },
+  "clean#1": {
+   "t": "καθαρίζω",
+   "src": "oc19mgmyls"
+  },
+  "operator#1": {
+   "t": "τελεστής",
+   "src": "1ks0vx118r"
+  },
+  "project#1": {
+   "t": "έργο",
+   "src": "envc91bhfw"
+  },
+  "quote#1": {
+   "t": "εισαγωγικό",
+   "src": "wmmfdr1c18"
+  },
+  "cache#1": {
+   "t": "κρυφή μνήμη (cache)",
+   "src": "148xipwfom"
+  },
+  "monitor#1": {
+   "t": "παρακολουθώ",
+   "src": "16v8i5iy4h"
+  },
+  "limit#1": {
+   "t": "όριο",
+   "src": "fuvobxynya"
+  },
+  "contract#1": {
+   "t": "συμβόλαιο (δεδομένων)",
+   "src": "1p65x0buiz"
+  },
+  "custom#1": {
+   "t": "προσαρμοσμένος",
+   "src": "d0u90q1i30"
+  },
+  "development#1": {
+   "t": "ανάπτυξη (development)",
+   "src": "p19ehucv74"
+  },
+  "downstream#1": {
+   "t": "κατάντη (στα επόμενα βήματα)",
+   "src": "1lfil4z4ph"
+  },
+  "forever#1": {
+   "t": "για πάντα",
+   "src": "sxpz5l1eav"
+  },
+  "fully#1": {
+   "t": "πλήρως",
+   "src": "19fs7fpybu"
+  },
+  "groupBy#1": {
+   "t": "groupBy (ομαδοποίηση)",
+   "src": "1ydludk1gw"
+  },
+  "less#1": {
+   "t": "λιγότερος",
+   "src": "1pw2c1po03"
+  },
+  "overhead#1": {
+   "t": "επιβάρυνση",
+   "src": "r7h0e2181h"
+  },
+  "top#1": {
+   "t": "κορυφή (πάνω από)",
+   "src": "crygxpb0lh"
+  },
+  "delay#1": {
+   "t": "καθυστέρηση",
+   "src": "sin8ij1hca"
+  },
+  "rate#1": {
+   "t": "ρυθμός",
+   "src": "mfmsbf14qb"
+  },
+  "integration#1": {
+   "t": "ενοποίηση",
+   "src": "v271dq11cc"
+  },
+  "condition#1": {
+   "t": "συνθήκη",
+   "src": "ynwwik1h1g"
+  },
+  "flow#1": {
+   "t": "ροή",
+   "src": "vh17ih15d5"
+  },
+  "cast#1": {
+   "t": "μετατρέπω τύπο (cast)",
+   "src": "15bqwa81vd"
+  },
+  "provision#1": {
+   "t": "παρέχω πόρους (provisioning)",
+   "src": "7ododl10m0"
+  },
+  "arrival#1": {
+   "t": "άφιξη",
+   "src": "1fndernpwy"
+  },
+  "duration#1": {
+   "t": "διάρκεια",
+   "src": "hif6hrq0ze"
+  },
+  "wait#1": {
+   "t": "περιμένω",
+   "src": "xwn8772w4i"
+  },
+  "finish#1": {
+   "t": "τελειώνω",
+   "src": "ketc7az0jh"
+  },
+  "accept#1": {
+   "t": "δέχομαι",
+   "src": "1opr088dcz"
+  },
+  "lose#1": {
+   "t": "χάνω",
+   "src": "zq6zq110vt"
+  },
+  "backlog#1": {
+   "t": "συσσωρευμένη εκκρεμότητα (backlog)",
+   "src": "1dou5d8q0t"
+  },
+  "event-time#1": {
+   "t": "χρόνος συμβάντος",
+   "src": "jgecnt1hdn"
+  },
+  "least#1": {
+   "t": "ελάχιστος",
+   "src": "af0ue7fdar"
+  },
+  "legacy#1": {
+   "t": "παλαιού τύπου (legacy)",
+   "src": "1ttp0e4kaf"
+  },
+  "lineage#1": {
+   "t": "γενεαλογία δεδομένων (lineage)",
+   "src": "1p9gb061n8"
+  },
+  "manual#1": {
+   "t": "χειροκίνητος",
+   "src": "56n9cn1guk"
+  },
+  "schemaLocation#1": {
+   "t": "schemaLocation (θέση σχήματος)",
+   "src": "trtdagzirs"
+  },
+  "simple#1": {
+   "t": "απλός",
+   "src": "kxrci91oai"
+  },
+  "startup#1": {
+   "t": "εκκίνηση",
+   "src": "buvxa8otud"
+  },
+  "stateless#1": {
+   "t": "χωρίς κατάσταση (stateless)",
+   "src": "17y5hjr1m3"
+  },
+  "typical#1": {
+   "t": "τυπικός",
+   "src": "15afebo12s"
+  },
+  "vectorized#1": {
+   "t": "διανυσματικός",
+   "src": "a3fz8t51oa"
+  },
+  "binding#1": {
+   "t": "δέσμευση (binding)",
+   "src": "1whkacy1tu"
+  },
+  "help#1": {
+   "t": "βοηθώ",
+   "src": "1corgq8kmu"
+  },
+  "UDF#1": {
+   "t": "συνάρτηση χρήστη (UDF)",
+   "src": "1ob07vg124"
+  },
+  "consider#1": {
+   "t": "εξετάζω (σκέφτομαι)",
+   "src": "yibqgu1aat"
+  },
+  "ABAC#1": {
+   "t": "έλεγχος πρόσβασης με χαρακτηριστικά (ABAC)",
+   "src": "pcsnol1k8q"
+  },
+  "active#1": {
+   "t": "ενεργός",
+   "src": "1tdnhcoudf"
+  },
+  "analytics#1": {
+   "t": "ανάλυση δεδομένων",
+   "src": "1bvjzfj8vi"
+  },
+  "docs#1": {
+   "t": "τεκμηρίωση",
+   "src": "lndpz09c7i"
+  },
+  "far#1": {
+   "t": "πολύ (μακριά)",
+   "src": "1qm573dsnn"
+  },
+  "infer#1": {
+   "t": "συμπεραίνω αυτόματα",
+   "src": "1hz6c3prc0"
+  },
+  "learning#1": {
+   "t": "μάθηση",
+   "src": "4h27vq19rn"
+  },
+  "materialized#1": {
+   "t": "υλοποιημένος (materialized)",
+   "src": "1woiqwkg1q"
+  },
+  "parallelism#1": {
+   "t": "παραλληλισμός",
+   "src": "xu2lha1lcf"
+  },
+  "double#1": {
+   "t": "double (δεκαδικός αριθμός)",
+   "src": "fu1f0i1mu9"
+  },
+  "transform#1": {
+   "t": "μετασχηματίζω",
+   "src": "1nrti3cu2w"
+  },
+  "total#1": {
+   "t": "σύνολο",
+   "src": "t9wrr0mj37"
+  },
+  "branch#1": {
+   "t": "κλάδος (branch)",
+   "src": "1y2k6p85xf"
+  },
+  "content#1": {
+   "t": "περιεχόμενο",
+   "src": "jplry41j3n"
+  },
+  "effect#1": {
+   "t": "επίδραση (αποτέλεσμα)",
+   "src": "kn55ri1dx8"
+  },
+  "return#1": {
+   "t": "επιστρέφω",
+   "src": "19ytoqxsxw"
+  },
+  "workflow#1": {
+   "t": "ροή εργασίας",
+   "src": "12wdy5d1wb"
+  },
+  "analyst#1": {
+   "t": "αναλυτής",
+   "src": "wucxnqnof5"
+  },
+  "capability#1": {
+   "t": "δυνατότητα",
+   "src": "drr5b6fg66"
+  },
+  "blindly#1": {
+   "t": "στα τυφλά",
+   "src": "1nw96qh7y5"
+  },
+  "common#1": {
+   "t": "συνηθισμένος (κοινός)",
+   "src": "1lbobjjz2f"
+  },
+  "configurable#1": {
+   "t": "ρυθμιζόμενος",
+   "src": "qng8541hr6"
+  },
+  "final#1": {
+   "t": "τελικός",
+   "src": "1xb1ced14o"
+  },
+  "fixed#1": {
+   "t": "σταθερός",
+   "src": "1kaazdv1j3"
+  },
+  "general#1": {
+   "t": "γενικός",
+   "src": "1tn4w5hn2n"
+  },
+  "high#1": {
+   "t": "υψηλός",
+   "src": "w160z213wh"
+  },
+  "incompatible#1": {
+   "t": "ασύμβατος",
+   "src": "85jpbyuej7"
+  },
+  "intentional#1": {
+   "t": "σκόπιμος",
+   "src": "1mi4nd1ujv"
+  },
+  "malformed#1": {
+   "t": "κακοσχηματισμένος",
+   "src": "1yvt4j1g4z"
+  },
+  "multi-node#1": {
+   "t": "πολλών κόμβων",
+   "src": "1y3sqq3r7j"
+  },
+  "native#1": {
+   "t": "εγγενής",
+   "src": "kx01yz1lm7"
+  },
+  "partitioning#1": {
+   "t": "διαμέριση",
+   "src": "1bly7so1te"
+  },
+  "run-as#1": {
+   "t": "ταυτότητα εκτέλεσης (run-as)",
+   "src": "dmz4qyb3dp"
+  },
+  "text#1": {
+   "t": "κείμενο",
+   "src": "13bqzpk1vb"
+  },
+  "revoke#1": {
+   "t": "ανακαλώ (δικαίωμα)",
+   "src": "d0o52mopce"
+  },
+  "feed#1": {
+   "t": "ροή (feed)",
+   "src": "g5qgaospp9"
+  },
+  "parent#1": {
+   "t": "γονικός (γονέας)",
+   "src": "1g2wovx1xp"
+  },
+  "predicate#1": {
+   "t": "κατηγόρημα (συνθήκη)",
+   "src": "1ecj6p81be"
+  },
+  "statement#1": {
+   "t": "εντολή (statement)",
+   "src": "1382bi310q"
+  },
+  "refresh#1": {
+   "t": "ανανεώνω",
+   "src": "1wno6tmvcz"
+  },
+  "deduplicate#1": {
+   "t": "αφαιρώ τα διπλότυπα",
+   "src": "7dfhwapqbe"
+  },
+  "upsert#1": {
+   "t": "ενημέρωση ή εισαγωγή (upsert)",
+   "src": "11pvmlj1dp"
+  },
+  "continue#1": {
+   "t": "συνεχίζω",
+   "src": "76ryli1500"
+  },
+  "corrupt#1": {
+   "t": "αλλοιώνω (καταστρέφω)",
+   "src": "n61gxs1y17"
+  },
+  "block#1": {
+   "t": "μπλοκάρω",
+   "src": "yyy2pfxu6o"
+  },
+  "audit#1": {
+   "t": "έλεγχος (audit)",
+   "src": "aqnpmy1izy"
+  },
+  "authorization#1": {
+   "t": "εξουσιοδότηση",
+   "src": "7knkq4wcy8"
+  },
+  "continuous#1": {
+   "t": "συνεχής",
+   "src": "1f0s7ym1ep"
+  },
+  "daily#1": {
+   "t": "ημερήσιος",
+   "src": "10jhoy3yyd"
+  },
+  "dangerous#1": {
+   "t": "επικίνδυνος",
+   "src": "egfj1dc2si"
+  },
+  "deletion#1": {
+   "t": "διαγραφή",
+   "src": "1g4j4q1xi8"
+  },
+  "dynamic#1": {
+   "t": "δυναμικός",
+   "src": "1f2bt5k40a"
+  },
+  "fine#1": {
+   "t": "εντάξει",
+   "src": "feotcw1hnj"
+  },
+  "hardware#1": {
+   "t": "υλικό (hardware)",
+   "src": "1r7na7m1ct"
+  },
+  "header#1": {
+   "t": "κεφαλίδα",
+   "src": "1mzhc36q6w"
+  },
+  "idempotency#1": {
+   "t": "ταυτοδυναμία",
+   "src": "nrxz9x19md"
+  },
+  "incoming#1": {
+   "t": "εισερχόμενος",
+   "src": "l9wvxf19i8"
+  },
+  "logic#1": {
+   "t": "λογική",
+   "src": "12x1vz412i"
+  },
+  "ordering#1": {
+   "t": "διάταξη (σειρά)",
+   "src": "1ujcxdzzw5"
+  },
+  "RDD#1": {
+   "t": "RDD (κατανεμημένο σύνολο)",
+   "src": "10uu7opqsj"
+  },
+  "stack#1": {
+   "t": "στοίβα",
+   "src": "13r3mrg1hw"
+  },
+  "static#1": {
+   "t": "στατικός",
+   "src": "kk26tprr8n"
+  },
+  "ACL#1": {
+   "t": "λίστα ελέγχου πρόσβασης (ACL)",
+   "src": "1yd0n3r18t"
+  },
+  "bottleneck#1": {
+   "t": "σημείο συμφόρησης",
+   "src": "xqj0ve5jk8"
+  },
+  "container#1": {
+   "t": "περιέκτης",
+   "src": "65jaxq9roi"
+  },
+  "debug#1": {
+   "t": "αποσφαλματώνω",
+   "src": "ldoxedh7pn"
+  },
+  "internal#1": {
+   "t": "εσωτερικός",
+   "src": "6dfekmvghw"
+  },
+  "mergeSchema#1": {
+   "t": "mergeSchema (συγχώνευση σχήματος)",
+   "src": "1xjne1215r"
+  },
+  "rebuild#1": {
+   "t": "ξαναχτίζω",
+   "src": "3qrob91gi9"
+  },
+  "timestamp#1": {
+   "t": "χρονοσφραγίδα",
+   "src": "15kb9o01qg"
+  },
+  "avoid#1": {
+   "t": "αποφεύγω",
+   "src": "178xnkej50"
+  },
+  "sequence#1": {
+   "t": "ακολουθία (σειρά)",
+   "src": "m3ips0s520"
+  },
+  "session#1": {
+   "t": "συνεδρία",
+   "src": "m2k7um1fzk"
+  },
+  "step#1": {
+   "t": "βήμα",
+   "src": "ngo27aflyb"
+  },
+  "fit#1": {
+   "t": "ταιριάζω (χωράω)",
+   "src": "1gn1w5016j"
+  },
+  "capture#1": {
+   "t": "καταγράφω",
+   "src": "mhy4xfvm51"
+  },
+  "follow#1": {
+   "t": "ακολουθώ",
+   "src": "15ixegivlz"
+  },
+  "prove#1": {
+   "t": "αποδεικνύω",
+   "src": "1wlbnbsgz8"
+  },
+  "scope#1": {
+   "t": "εμβέλεια (έκταση)",
+   "src": "1pcnz8v1ic"
+  },
+  "assume#1": {
+   "t": "υποθέτω",
+   "src": "18qjvd91j4"
+  },
+  "re-read#1": {
+   "t": "ξαναδιαβάζω",
+   "src": "1witl4s35o"
+  },
+  "reprocess#1": {
+   "t": "ξαναεπεξεργάζομαι",
+   "src": "1qdtwzj1y3"
+  },
+  "automatic#1": {
+   "t": "αυτόματος",
+   "src": "k80v0fhe8m"
+  },
+  "BIGINT#1": {
+   "t": "BIGINT (μεγάλος ακέραιος)",
+   "src": "1jwvfuvins"
+  },
+  "city#1": {
+   "t": "πόλη",
+   "src": "11re80vnv8"
+  },
+  "correctly#1": {
+   "t": "σωστά",
+   "src": "gkykfntrn7"
+  },
+  "correctness#1": {
+   "t": "ορθότητα",
+   "src": "1wfgkq312s"
+  },
+  "discovery#1": {
+   "t": "εντοπισμός (ανακάλυψη)",
+   "src": "1ynu0dcufu"
+  },
+  "inheritance#1": {
+   "t": "κληρονομικότητα (δικαιωμάτων)",
+   "src": "1uzj4e5lol"
+  },
+  "INT#1": {
+   "t": "INT (ακέραιος)",
+   "src": "168tn92qla"
+  },
+  "parallel#1": {
+   "t": "παράλληλος",
+   "src": "1g6wz4n14t"
+  },
+  "reusable#1": {
+   "t": "επαναχρησιμοποιήσιμος",
+   "src": "1uacqs01ux"
+  },
+  "revenue#1": {
+   "t": "έσοδα",
+   "src": "1dc757i45k"
+  },
+  "row-level#1": {
+   "t": "σε επίπεδο γραμμής",
+   "src": "58g46n14s4"
+  },
+  "sizing#1": {
+   "t": "διαστασιολόγηση",
+   "src": "3e2fnpxflb"
+  },
+  "stable#1": {
+   "t": "σταθερός",
+   "src": "1746r50o2t"
+  },
+  "wave#1": {
+   "t": "κύμα",
+   "src": "1hqz9br1xa"
+  },
+  "country#1": {
+   "t": "χώρα",
+   "src": "4wpi9x1e5m"
+  },
+  "property#1": {
+   "t": "ιδιότητα",
+   "src": "s8mncwwco2"
+  },
+  "team#1": {
+   "t": "ομάδα",
+   "src": "1gcltj7205"
+  },
+  "car#1": {
+   "t": "αυτοκίνητο",
+   "src": "9hlnyj16t5"
+  },
+  "differ#1": {
+   "t": "διαφέρω",
+   "src": "1ag60821c2"
+  },
+  "re-run#1": {
+   "t": "ξανατρέχω",
+   "src": "1drj3e4wwe"
+  },
+  "script#1": {
+   "t": "σενάριο (script)",
+   "src": "1sakfwui39"
+  },
+  "shape#1": {
+   "t": "σχήμα (μορφή)",
+   "src": "baiecm1ks6"
+  },
+  "widen#1": {
+   "t": "διευρύνω (τύπο)",
+   "src": "1vla4fairi"
+  },
+  "mismatch#1": {
+   "t": "αναντιστοιχία",
+   "src": "e2ft4n1ae9"
+  },
+  "mistake#1": {
+   "t": "λάθος",
+   "src": "1vbijr07p6"
+  },
+  "reach#1": {
+   "t": "φτάνω",
+   "src": "uf83li1ndh"
+  },
+  "try#1": {
+   "t": "προσπαθώ",
+   "src": "13u8h68q0h"
+  },
+  "dominate#1": {
+   "t": "κυριαρχώ",
+   "src": "1rlvywmtu7"
+  },
+  "rename#1": {
+   "t": "μετονομάζω",
+   "src": "1sgkzob11z"
+  },
+  "almost#1": {
+   "t": "σχεδόν",
+   "src": "1qjv4gs1yc"
+  },
+  "deduplication#1": {
+   "t": "αφαίρεση διπλοτύπων",
+   "src": "1ypuxsd8as"
+  },
+  "display#1": {
+   "t": "εμφανίζω",
+   "src": "yiuqok2wie"
+  },
+  "everywhere#1": {
+   "t": "παντού",
+   "src": "wq7l2nv9af"
+  },
+  "four#1": {
+   "t": "τέσσερα",
+   "src": "awqgsd1e1r"
+  },
+  "gate#1": {
+   "t": "πύλη ελέγχου",
+   "src": "1cxfzomkj2"
+  },
+  "GC#1": {
+   "t": "GC (συλλογή απορριμμάτων)",
+   "src": "13ncebb1xo"
+  },
+  "likely#1": {
+   "t": "πιθανός",
+   "src": "utiy3c9n4t"
+  },
+  "mini-project#1": {
+   "t": "μικρό έργο",
+   "src": "mccszw1eoc"
+  },
+  "other#1": {
+   "t": "άλλος",
+   "src": "k13zwzcahz"
+  },
+  "pressure#1": {
+   "t": "πίεση",
+   "src": "4y5gc57x6i"
+  },
+  "qualified#1": {
+   "t": "πλήρως προσδιορισμένος",
+   "src": "12rylm91iy"
+  },
+  "seq#1": {
+   "t": "seq (αριθμός σειράς)",
+   "src": "149dlrxxxz"
+  },
+  "several#1": {
+   "t": "αρκετοί",
+   "src": "2grxw118p3"
+  },
+  "short#1": {
+   "t": "σύντομος",
+   "src": "cqkfki1p7x"
+  },
+  "thousand#1": {
+   "t": "χιλιάδα",
+   "src": "12rwnys1kj"
+  },
+  "tutorial#1": {
+   "t": "οδηγός εκμάθησης",
+   "src": "w6g4w3i9kd"
+  },
+  "validation#1": {
+   "t": "επικύρωση",
+   "src": "14oydi11o7"
+  },
+  "Pro#1": {
+   "t": "Pro (τύπος SQL warehouse)",
+   "src": "1tx7zru1w8"
+  },
+  "place#1": {
+   "t": "θέση (επί τόπου)",
+   "src": "1o7al2lbwy"
+  },
+  "quarantine#1": {
+   "t": "καραντίνα (πίνακας προβληματικών γραμμών)",
+   "src": "1gaks5jdsf"
+  },
+  "tell#1": {
+   "t": "λέω (δείχνω)",
+   "src": "zj26wb1f4q"
+  },
+  "vector#1": {
+   "t": "διάνυσμα (deletion vector)",
+   "src": "y2norx1xh2"
+  },
+  "lesson#1": {
+   "t": "μάθημα",
+   "src": "1w33kww12h"
+  },
+  "scenario#1": {
+   "t": "σενάριο",
+   "src": "1ndaeqs689"
+  },
+  "structure#1": {
+   "t": "δομή",
+   "src": "13wcs0c3zh"
+  },
+  "book#1": {
+   "t": "βιβλίο",
+   "src": "9z665n1swv"
+  },
+  "email#1": {
+   "t": "email (ηλεκτρονική διεύθυνση)",
+   "src": "1jyjrir1e3"
+  },
+  "emit#1": {
+   "t": "εκπέμπω (βγάζω αποτέλεσμα)",
+   "src": "1q1vd7h1rk"
+  },
+  "observe#1": {
+   "t": "παρατηρώ",
+   "src": "jzaus611d9"
+  },
+  "review#1": {
+   "t": "έλεγχος (review)",
+   "src": "mi87mjujqh"
+  },
+  "receive#1": {
+   "t": "λαμβάνω",
+   "src": "fehamnoaan"
+  },
+  "ALTER#1": {
+   "t": "ALTER (αλλαγή ορισμού)",
+   "src": "47amln15s3"
+  },
+  "clear#1": {
+   "t": "σαφής",
+   "src": "16ixxf99l0"
+  },
+  "conceptually#1": {
+   "t": "εννοιολογικά",
+   "src": "1xq3l621l1"
+  },
+  "deliberately#1": {
+   "t": "σκόπιμα",
+   "src": "1hjn0fc1m8"
+  },
+  "deprecated#1": {
+   "t": "παρωχημένος (deprecated)",
+   "src": "1mo591o8nq"
+  },
+  "DV#1": {
+   "t": "deletion vector (DV)",
+   "src": "1d0pseq99d"
+  },
+  "entire#1": {
+   "t": "ολόκληρος",
+   "src": "1azgnjfzk1"
+  },
+  "expensive#1": {
+   "t": "ακριβός",
+   "src": "lx1lld1u9q"
+  },
+  "extension#1": {
+   "t": "επέκταση",
+   "src": "oxd85htj0a"
+  },
+  "infra#1": {
+   "t": "υποδομή",
+   "src": "qc9y941e0d"
+  },
+  "intermediate#1": {
+   "t": "ενδιάμεσος",
+   "src": "11x478cesq"
+  },
+  "latest#1": {
+   "t": "πιο πρόσφατος",
+   "src": "rkpo7r1b1n"
+  },
+  "main#1": {
+   "t": "κύριος (main)",
+   "src": "1ywyp8xjur"
+  },
+  "practical#1": {
+   "t": "πρακτικός",
+   "src": "usxrk1klm1"
+  },
+  "protocol#1": {
+   "t": "πρωτόκολλο",
+   "src": "1odbp4owiz"
+  },
+  "real-time#1": {
+   "t": "πραγματικού χρόνου",
+   "src": "11tjecp15l"
+  },
+  "recap#1": {
+   "t": "ανακεφαλαίωση",
+   "src": "j8s7spdoc1"
+  },
+  "recovery#1": {
+   "t": "ανάκτηση",
+   "src": "34xq1nyon5"
+  },
+  "root#1": {
+   "t": "ρίζα (βασική αιτία)",
+   "src": "1eoypoisik"
+  },
+  "sale#1": {
+   "t": "πώληση",
+   "src": "1nz3llthml"
+  },
+  "stat#1": {
+   "t": "στατιστικά",
+   "src": "t9llge1bjh"
+  },
+  "tracking#1": {
+   "t": "παρακολούθηση",
+   "src": "1xpk8i01yz"
+  },
+  "true#1": {
+   "t": "αληθής",
+   "src": "fm3v6fxjoc"
+  },
+  "underlying#1": {
+   "t": "υποκείμενος",
+   "src": "1nw6ybndd5"
+  },
+  "walk#1": {
+   "t": "διασχίζω (περνώ βήμα βήμα)",
+   "src": "17fibmk14l"
+  },
+  "yesterday#1": {
+   "t": "χθες",
+   "src": "1fqsqxwb21"
+  },
+  "admin#1": {
+   "t": "διαχειριστής",
+   "src": "4x7ph97y4r"
+  },
+  "backup#1": {
+   "t": "αντίγραφο ασφαλείας",
+   "src": "1jhgzwupxf"
+  },
+  "base#1": {
+   "t": "βασίζομαι",
+   "src": "4c2rac1x9y"
+  },
+  "developer#1": {
+   "t": "προγραμματιστής",
+   "src": "ct8e3qew25"
+  },
+  "experiment#1": {
+   "t": "πειραματίζομαι",
+   "src": "1o89tzn30t"
+  },
+  "interface#1": {
+   "t": "διεπαφή",
+   "src": "13mlylqjhp"
+  },
+  "million#1": {
+   "t": "εκατομμύριο",
+   "src": "1nq36qooxv"
+  },
+  "minimum#1": {
+   "t": "ελάχιστο",
+   "src": "b9gg85iz9o"
+  },
+  "tune#1": {
+   "t": "βελτιστοποιώ (ρυθμίζω)",
+   "src": "1c7mmpl19e"
+  },
+  "close#1": {
+   "t": "κλείνω",
+   "src": "wizbcd12hi"
+  },
+  "decision#1": {
+   "t": "απόφαση",
+   "src": "ucf97c1o4q"
+  },
+  "inherit#1": {
+   "t": "κληρονομώ",
+   "src": "100ri8f18a"
+  },
+  "limitation#1": {
+   "t": "περιορισμός",
+   "src": "1bkn69y1s3"
+  },
+  "press#1": {
+   "t": "πατώ",
+   "src": "143n8ogdzf"
+  },
+  "reload#1": {
+   "t": "ξαναφορτώνω",
+   "src": "f2l98j1kkx"
+  },
+  "constraint#1": {
+   "t": "περιορισμός (constraint)",
+   "src": "tw5ge91hrt"
+  },
+  "expose#1": {
+   "t": "εκθέτω (κάνω διαθέσιμο)",
+   "src": "wcygsknws1"
+  },
+  "playbook#1": {
+   "t": "οδηγός αντιμετώπισης (playbook)",
+   "src": "1r3b7kom6s"
+  },
+  "reject#1": {
+   "t": "απορρίπτω",
+   "src": "13r1yzd1st"
+  },
+  "secret#1": {
+   "t": "μυστικό (κωδικός)",
+   "src": "1o50n3fnka"
+  },
+  "solution#1": {
+   "t": "λύση",
+   "src": "296lgu1jl4"
+  },
+  "solve#1": {
+   "t": "λύνω",
+   "src": "135tdmn1td"
+  },
+  "tag#1": {
+   "t": "ετικέτα",
+   "src": "1li70461bt"
+  },
+  "advance#1": {
+   "t": "προχωρώ",
+   "src": "137gisq1u6"
+  },
+  "document#1": {
+   "t": "τεκμηριώνω",
+   "src": "19g7e0w1ss"
+  },
+  "hide#1": {
+   "t": "κρύβω",
+   "src": "vptgx1cnc5"
+  },
+  "provide#1": {
+   "t": "παρέχω",
+   "src": "5uemeg1qmg"
+  },
+  "abstraction#1": {
+   "t": "αφαίρεση (abstraction)",
+   "src": "1p5pgfw1k6"
+  },
+  "algorithm#1": {
+   "t": "αλγόριθμος",
+   "src": "d7rt451o7b"
+  },
+  "auto-termination#1": {
+   "t": "αυτόματος τερματισμός",
+   "src": "byr8ac3b0f"
+  },
+  "away#1": {
+   "t": "μακριά (αφαιρεί)",
+   "src": "xjibol4y4i"
+  },
+  "bottom#1": {
+   "t": "βάση (κάτω μέρος)",
+   "src": "1jvzmaa1bg"
+  },
+  "broad#1": {
+   "t": "ευρύς",
+   "src": "xqo12imsj4"
+  },
+  "bucket#1": {
+   "t": "κάδος (bucket)",
+   "src": "rp7v1b2fxf"
+  },
+  "business-key#1": {
+   "t": "επιχειρησιακό κλειδί",
+   "src": "19tqj05gsb"
+  },
+  "cloudFiles#1": {
+   "t": "cloudFiles (Auto Loader)",
+   "src": "blopb816lx"
+  },
+  "company#1": {
+   "t": "εταιρεία",
+   "src": "pwiet32qfz"
+  },
+  "conceptual#1": {
+   "t": "εννοιολογικός",
+   "src": "1puemh0184"
+  },
+  "continuously#1": {
+   "t": "συνεχώς",
+   "src": "dhysfr8a8i"
+  },
+  "coordinator#1": {
+   "t": "συντονιστής",
+   "src": "anip5nkd3w"
+  },
+  "DECIMAL#1": {
+   "t": "DECIMAL (ακριβής δεκαδικός)",
+   "src": "15zg4ce1fo"
+  },
+  "dedupe#1": {
+   "t": "αφαιρώ διπλότυπα",
+   "src": "k79j9119al"
+  },
+  "deep#1": {
+   "t": "βαθύς (πλήρες αντίγραφο)",
+   "src": "1avx43aj3b"
+  },
+  "direct#1": {
+   "t": "άμεσος",
+   "src": "1hxd36a1ja"
+  },
+  "durable#1": {
+   "t": "ανθεκτικός (μόνιμος)",
+   "src": "1n7k9uw1pt"
+  },
+  "ecommerce#1": {
+   "t": "ηλεκτρονικό εμπόριο",
+   "src": "x6jnzy114w"
+  },
+  "engineering#1": {
+   "t": "μηχανική (data engineering)",
+   "src": "hqhfgx6tey"
+  },
+  "exploration#1": {
+   "t": "εξερεύνηση",
+   "src": "tatonvc79g"
+  },
+  "explorer#1": {
+   "t": "εξερευνητής (Explorer)",
+   "src": "vw5flt1vdo"
+  },
+  "extract#1": {
+   "t": "εξάγω",
+   "src": "17ym3jx1ex"
+  },
+  "few#1": {
+   "t": "λίγοι",
+   "src": "1vplw7r11y"
+  },
+  "force#1": {
+   "t": "αναγκάζω (επιβάλλω)",
+   "src": "19k4vib1c7"
+  },
+  "frequent#1": {
+   "t": "συχνός",
+   "src": "1c6pniv1nv"
+  },
+  "growth#1": {
+   "t": "αύξηση",
+   "src": "1otkztbsok"
+  },
+  "heavy#1": {
+   "t": "βαρύς",
+   "src": "5an7da1o7m"
+  },
+  "immediately#1": {
+   "t": "αμέσως",
+   "src": "1x9cg5vym5"
+  },
+  "initial#1": {
+   "t": "αρχικός",
+   "src": "lgljureu7m"
+  },
+  "introduce#1": {
+   "t": "εισάγω",
+   "src": "1309am1wy1"
+  },
+  "IO#1": {
+   "t": "I/O (είσοδος/έξοδος)",
+   "src": "15kd8f21ce"
+  },
+  "locally#1": {
+   "t": "τοπικά",
+   "src": "12k409lrlr"
+  },
+  "low#1": {
+   "t": "χαμηλός",
+   "src": "1gzmfzn1ya"
+  },
+  "mapping#1": {
+   "t": "αντιστοίχιση",
+   "src": "7wtlepbwaf"
+  },
+  "maximum#1": {
+   "t": "μέγιστο",
+   "src": "11upfniq3w"
+  },
+  "multiple#1": {
+   "t": "πολλαπλός",
+   "src": "11rrcmtfde"
+  },
+  "nightly#1": {
+   "t": "νυχτερινός",
+   "src": "yaaoyj1rfu"
+  },
+  "overwritten#1": {
+   "t": "αντικατεστημένος",
+   "src": "xdyhzc1m1i"
+  },
+  "parser#1": {
+   "t": "αναλυτής (parser)",
+   "src": "4ofb9afbmg"
+  },
+  "Patras#1": {
+   "t": "Πάτρα / Βόλος",
+   "src": "1vday7vvlm"
+  },
+  "power#1": {
+   "t": "τροφοδοτώ (επιτρέπω)",
+   "src": "brqo5514vc"
+  },
+  "primary#1": {
+   "t": "πρωτεύων",
+   "src": "1ym0koq1tr"
+  },
+  "readStream#1": {
+   "t": "readStream (ανάγνωση ροής)",
+   "src": "fyxe0r12cc"
+  },
+  "register#1": {
+   "t": "καταχωρώ",
+   "src": "15pl9781x8"
+  },
+  "repeat#1": {
+   "t": "επαναλαμβάνω",
+   "src": "o5wwr413c2"
+  },
+  "sandbox#1": {
+   "t": "δοκιμαστικό περιβάλλον (sandbox)",
+   "src": "1jjmmy2oil"
+  },
+  "selective#1": {
+   "t": "επιλεκτικός",
+   "src": "78ajhxllsx"
+  },
+  "selector#1": {
+   "t": "επιλογέας",
+   "src": "hw4fgj1u6w"
+  },
+  "stream-stream#1": {
+   "t": "μεταξύ δύο ροών",
+   "src": "mk5sajrwsb"
+  },
+  "STRUCT#1": {
+   "t": "STRUCT (σύνθετος τύπος)",
+   "src": "p8dy4513m8"
+  },
+  "typically#1": {
+   "t": "συνήθως",
+   "src": "y13wct10aq"
+  },
+  "unexpected#1": {
+   "t": "απρόσμενος",
+   "src": "r9sv453a96"
+  },
+  "unreferenced#1": {
+   "t": "χωρίς αναφορά (αχρησιμοποίητος)",
+   "src": "1mism1y1ah"
+  },
+  "consumer#1": {
+   "t": "καταναλωτής",
+   "src": "pvvfio1n2m"
+  },
+  "drift#1": {
+   "t": "μετατόπιση (απόκλιση σχήματος)",
+   "src": "1xouwa51h3"
+  },
+  "entry#1": {
+   "t": "καταχώριση",
+   "src": "1l9fy6l1xd"
+  },
+  "position#1": {
+   "t": "θέση",
+   "src": "1uqd7qb11i"
+  },
+  "reuse#1": {
+   "t": "επαναχρησιμοποιώ",
+   "src": "f7xsif14mh"
+  },
+  "component#1": {
+   "t": "στοιχείο (συνιστώσα)",
+   "src": "1frqpsm1g7"
+  },
+  "dimension#1": {
+   "t": "διάσταση",
+   "src": "1o06ee5u6q"
+  },
+  "entity#1": {
+   "t": "οντότητα",
+   "src": "1eri9avjw1"
+  },
+  "interview#1": {
+   "t": "συνέντευξη",
+   "src": "kkxq2jiom5"
+  },
+  "speed#1": {
+   "t": "επιταχύνω",
+   "src": "keddhd12r7"
+  },
+  "widget#1": {
+   "t": "widget (στοιχείο εισόδου)",
+   "src": "f3633b1n98"
+  },
+  "compact#1": {
+   "t": "συμπυκνώνω",
+   "src": "1jkayqgzg1"
+  },
+  "leave#1": {
+   "t": "φεύγω (αφήνω)",
+   "src": "aedbp3lc5d"
+  },
+  "participate#1": {
+   "t": "συμμετέχω",
+   "src": "18ifzcocir"
+  },
+  "range#1": {
+   "t": "εύρος",
+   "src": "1vukvjr1ky"
+  },
+  "requirement#1": {
+   "t": "απαίτηση",
+   "src": "1cfvnq5u5j"
+  },
+  "slide#1": {
+   "t": "ολισθαίνω (κυλιόμενο παράθυρο)",
+   "src": "175joqu1nb"
+  },
+  "preserve#1": {
+   "t": "διατηρώ",
+   "src": "1yqrw6i17c"
+  },
+  "sample#1": {
+   "t": "δείγμα",
+   "src": "zj0x8u4ydl"
+  },
+  "analysis#1": {
+   "t": "ανάλυση",
+   "src": "1phajb9tom"
+  },
+  "benefit#1": {
+   "t": "ωφελούμαι",
+   "src": "11j690s1gn"
+  },
+  "Beta#1": {
+   "t": "Beta (δοκιμαστική έκδοση)",
+   "src": "1f7ogd19th"
+  },
+  "box#1": {
+   "t": "κουτί",
+   "src": "phaa261f1l"
+  },
+  "catalogue#1": {
+   "t": "κατάλογος",
+   "src": "khc1j98uwa"
+  },
+  "characteristic#1": {
+   "t": "χαρακτηριστικό",
+   "src": "7zvdb91vbg"
+  },
+  "checklist#1": {
+   "t": "λίστα ελέγχου",
+   "src": "34g2uf1tav"
+  },
+  "concurrently#1": {
+   "t": "ταυτόχρονα",
+   "src": "q9q9d01bpq"
+  },
+  "consistent#1": {
+   "t": "συνεπής",
+   "src": "1myejdetdh"
+  },
+  "CPU-bound#1": {
+   "t": "περιορισμένος από τη CPU",
+   "src": "1d6co7c1df"
+  },
+  "delivery#1": {
+   "t": "παράδοση",
+   "src": "tydsuw1j3a"
+  },
+  "ephemeral#1": {
+   "t": "εφήμερος (προσωρινός)",
+   "src": "1an0y2g11x"
+  },
+  "generally#1": {
+   "t": "γενικά",
+   "src": "111etk5123"
+  },
+  "handy#1": {
+   "t": "βολικός",
+   "src": "1j7p5wulqf"
+  },
+  "hot#1": {
+   "t": "«καυτός» (πολύ συχνός)",
+   "src": "jqpoma1qnp"
+  },
+  "identifier#1": {
+   "t": "αναγνωριστικό",
+   "src": "qbzpka1vla"
+  },
+  "incorrect#1": {
+   "t": "λανθασμένος",
+   "src": "fh1jgl48sb"
+  },
+  "information#1": {
+   "t": "πληροφορίες",
+   "src": "rmbe3m1j6j"
+  },
+  "init#1": {
+   "t": "εκκίνησης (init)",
+   "src": "1jjnk2acxg"
+  },
+  "insert#1": {
+   "t": "εισάγω (γραμμές)",
+   "src": "3lgapp1ugx"
+  },
+  "intelligent#1": {
+   "t": "έξυπνος",
+   "src": "e9nre714gf"
+  },
+  "intend#1": {
+   "t": "σκοπεύω",
+   "src": "1ywv7f390h"
+  },
+  "interval#1": {
+   "t": "διάστημα",
+   "src": "ltdxjz17cb"
+  },
+  "isolated#1": {
+   "t": "απομονωμένος",
+   "src": "1lar9e81bd"
+  },
+  "lateness#1": {
+   "t": "καθυστέρηση",
+   "src": "7bfuwkfi84"
+  },
+  "long-term#1": {
+   "t": "μακροπρόθεσμος",
+   "src": "1uax857qjx"
+  },
+  "maintenance#1": {
+   "t": "συντήρηση",
+   "src": "1ix49eo1e3"
+  },
+  "master#1": {
+   "t": "κατακτώ (μαθαίνω καλά)",
+   "src": "1giy5e4lty"
+  },
+  "median#1": {
+   "t": "διάμεσος",
+   "src": "1xdi084md7"
+  },
+  "memory-per-core#1": {
+   "t": "μνήμη ανά πυρήνα",
+   "src": "23g5zp199a"
+  },
+  "non-idempotent#1": {
+   "t": "μη ταυτοδύναμος",
+   "src": "1ns56qu1w9"
+  },
+  "none#1": {
+   "t": "κανένα",
+   "src": "11cm7z49yo"
+  },
+  "numFiles#1": {
+   "t": "numFiles (πλήθος αρχείων)",
+   "src": "xwltto1q66"
+  },
+  "on-demand#1": {
+   "t": "κατ' απαίτηση",
+   "src": "3brls01ury"
+  },
+  "optimistic#1": {
+   "t": "αισιόδοξος (optimistic)",
+   "src": "1qy8jp21b9"
+  },
+  "ordinary#1": {
+   "t": "συνηθισμένος",
+   "src": "3hccmi1ssa"
+  },
+  "quality#1": {
+   "t": "ποιότητα",
+   "src": "1ylg90ng9p"
+  },
+  "regional#1": {
+   "t": "περιφερειακός",
+   "src": "1idsr4x11v"
+  },
+  "relative#1": {
+   "t": "σχετικός",
+   "src": "1edighi14v"
+  },
+  "safe#1": {
+   "t": "ασφαλής",
+   "src": "u6xk9n1f3x"
+  },
+  "safely#1": {
+   "t": "με ασφάλεια",
+   "src": "1k1n9yi1ip"
+  },
+  "semantically#1": {
+   "t": "σημασιολογικά",
+   "src": "ga2wc983o8"
+  },
+  "separator#1": {
+   "t": "διαχωριστικό",
+   "src": "yufbsp6np6"
+  },
+  "single-node#1": {
+   "t": "ενός κόμβου",
+   "src": "18rj9upx5i"
+  },
+  "stuck#1": {
+   "t": "κολλημένος",
+   "src": "5eambx181v"
+  },
+  "suddenly#1": {
+   "t": "ξαφνικά",
+   "src": "1n45l3knaz"
+  },
+  "table-level#1": {
+   "t": "σε επίπεδο πίνακα",
+   "src": "3abq5x11jp"
+  },
+  "throughput#1": {
+   "t": "ρυθμός διεκπεραίωσης",
+   "src": "1u865vj93y"
+  },
+  "tolerance#1": {
+   "t": "ανοχή (σε σφάλματα)",
+   "src": "1orxvh3ek8"
+  },
+  "toPandas#1": {
+   "t": "toPandas (μεταφορά στον driver)",
+   "src": "1yqzgbkkig"
+  },
+  "unsupported#1": {
+   "t": "μη υποστηριζόμενος",
+   "src": "p4s7wb1uoh"
+  },
+  "re-running#1": {
+   "t": "ξανατρέχοντας",
+   "src": "180gl9x1aj"
+  },
+  "XML#1": {
+   "t": "XML (μορφή αρχείου)",
+   "src": "r5hskagxxk"
+  },
+  "clock#1": {
+   "t": "ρολόι",
+   "src": "cxpdrt1es2"
+  },
+  "correction#1": {
+   "t": "διόρθωση",
+   "src": "1lie5cx1lw"
+  },
+  "distribution#1": {
+   "t": "κατανομή",
+   "src": "oatlna1k8k"
+  },
+  "empty#1": {
+   "t": "κενός",
+   "src": "1uhrd9xac4"
+  },
+  "hand#1": {
+   "t": "χέρι (με το χέρι)",
+   "src": "1t46vb2bjl"
+  },
+  "notification#1": {
+   "t": "ειδοποίηση",
+   "src": "1wtcw4gp70"
+  },
+  "recommendation#1": {
+   "t": "σύσταση",
+   "src": "qhnzua17sm"
+  },
+  "spread#1": {
+   "t": "απλώνω (μοιράζω)",
+   "src": "k2kta12o16"
+  },
+  "tutor#1": {
+   "t": "καθηγητής (tutor)",
+   "src": "4pk3221hy5"
+  },
+  "warn#1": {
+   "t": "προειδοποιώ",
+   "src": "1upre29bva"
+  },
+  "win#1": {
+   "t": "κερδίζω (επικρατώ)",
+   "src": "18zem547gq"
+  },
+  "behave#1": {
+   "t": "συμπεριφέρομαι",
+   "src": "1sj7y79plz"
+  },
+  "context#1": {
+   "t": "πλαίσιο",
+   "src": "1okdfx11c3"
+  },
+  "equal#1": {
+   "t": "ισούμαι",
+   "src": "l9bowk1rey"
+  },
+  "escape#1": {
+   "t": "διαφεύγω (escape χαρακτήρα)",
+   "src": "1n9t6q31qu"
+  },
+  "expire#1": {
+   "t": "λήγω",
+   "src": "1bii9m0169"
+  },
+  "hint#1": {
+   "t": "υπόδειξη",
+   "src": "5qefdy1orl"
+  },
+  "hour#1": {
+   "t": "ώρα",
+   "src": "uhfmg1vbm2"
+  },
+  "image#1": {
+   "t": "εικόνα (image λογισμικού)",
+   "src": "vjcrvg2g48"
+  },
+  "install#1": {
+   "t": "εγκαθιστώ",
+   "src": "1ypiu1c1uh"
+  },
+  "mark#1": {
+   "t": "σημειώνω",
+   "src": "ci5q71up0y"
+  },
+  "profile#1": {
+   "t": "προφίλ",
+   "src": "1yexptcuzp"
+  },
+  "put#1": {
+   "t": "βάζω",
+   "src": "z09m74c2gy"
+  },
+  "report#1": {
+   "t": "αναφορά",
+   "src": "ip98lz1rjw"
+  },
+  "straggler#1": {
+   "t": "καθυστερημένη εργασία (straggler)",
+   "src": "b45caa4f8f"
+  },
+  "upgrade#1": {
+   "t": "αναβαθμίζω",
+   "src": "1ujr5uowys"
+  },
+  "raise#1": {
+   "t": "αυξάνω",
+   "src": "8hy65htyis"
+  },
+  "accidental#1": {
+   "t": "τυχαίος (κατά λάθος)",
+   "src": "u2ujt61274"
+  },
+  "ad-hoc#1": {
+   "t": "περιστασιακός (ad hoc)",
+   "src": "o2rz8zy1vk"
+  },
+  "addNewColumns#1": {
+   "t": "addNewColumns (προσθήκη νέων στηλών)",
+   "src": "pxrdb81rvt"
+  },
+  "always-on#1": {
+   "t": "πάντα σε λειτουργία",
+   "src": "1m9l6ty187"
+  },
+  "ANALYZE#1": {
+   "t": "ANALYZE (συλλογή στατιστικών)",
+   "src": "aoyn4o16xx"
+  },
+  "Apache#1": {
+   "t": "Apache",
+   "src": "vt6gri18va"
+  },
+  "arbitrary#1": {
+   "t": "αυθαίρετος",
+   "src": "xagf3e18mf"
+  },
+  "authentication#1": {
+   "t": "ταυτοποίηση",
+   "src": "1kq8ept1c2"
+  },
+  "average#1": {
+   "t": "μέσος όρος",
+   "src": "1noso711u6"
+  },
+  "batch-like#1": {
+   "t": "σαν δέσμη",
+   "src": "1n6w5xx1yc"
+  },
+  "bet#1": {
+   "t": "(λέξη μνημονικού)",
+   "src": "nellpkz6kq"
+  },
+  "blind#1": {
+   "t": "τυφλός",
+   "src": "1op8lyy15s"
+  },
+  "browser#1": {
+   "t": "πρόγραμμα περιήγησης",
+   "src": "c8pzf91vkn"
+  },
+  "built-in#1": {
+   "t": "ενσωματωμένος",
+   "src": "12xylwn8mj"
+  },
+  "cardinality#1": {
+   "t": "πληθικότητα",
+   "src": "oslickdod8"
+  },
+  "cat#1": {
+   "t": "(λέξη μνημονικού)",
+   "src": "8vx6sh14dd"
+  },
+  "cfg#1": {
+   "t": "ρύθμιση",
+   "src": "1i4zbw75gy"
+  },
+  "chunk#1": {
+   "t": "κομμάτι",
+   "src": "1gwacpf1vd"
+  },
+  "clarity#1": {
+   "t": "σαφήνεια",
+   "src": "11szta1y96"
+  },
+  "cleanup#1": {
+   "t": "καθαρισμός",
+   "src": "lc4zn9kmg1"
+  },
+  "CLI#1": {
+   "t": "γραμμή εντολών (CLI)",
+   "src": "1hzv8be4zr"
+  },
+  "col#1": {
+   "t": "col (αναφορά σε στήλη)",
+   "src": "1igs8gs1dv"
+  },
+  "compatibility#1": {
+   "t": "συμβατότητα",
+   "src": "1v3fjsq14s"
+  },
+  "complex#1": {
+   "t": "σύνθετος",
+   "src": "1xfljgmwxk"
+  },
+  "compute-scoped#1": {
+   "t": "σε επίπεδο compute",
+   "src": "1tb8i11i21"
+  },
+  "connection#1": {
+   "t": "σύνδεση",
+   "src": "2gldrp5bfe"
+  },
+  "consistently#1": {
+   "t": "με συνέπεια",
+   "src": "ebr9ny1ek8"
+  },
+  "currently#1": {
+   "t": "προς το παρόν",
+   "src": "n5p09t1d0o"
+  },
+  "cushion#1": {
+   "t": "(λέξη μνημονικού)",
+   "src": "xpqr648ot8"
+  },
+  "data-quality#1": {
+   "t": "ποιότητας δεδομένων",
+   "src": "1hsklslkph"
+  },
+  "DDL#1": {
+   "t": "DDL (ορισμός δομών)",
+   "src": "rna2cu19jt"
+  },
+  "deliberate#1": {
+   "t": "σκόπιμος",
+   "src": "nhxuy11wag"
+  },
+  "distinct#1": {
+   "t": "διακριτός",
+   "src": "7acbfk1ud5"
+  },
+  "DL#1": {
+   "t": "βαθιά μάθηση (DL)",
+   "src": "fmv7451f56"
+  },
+  "domain#1": {
+   "t": "πεδίο",
+   "src": "4zi6ctzhz8"
+  },
+  "dynamically#1": {
+   "t": "δυναμικά",
+   "src": "1g62kce1ea"
+  },
+  "elsewhere#1": {
+   "t": "αλλού",
+   "src": "7kdu6e11cs"
+  },
+  "end-to-end#1": {
+   "t": "από άκρη σε άκρη",
+   "src": "skwtgk1bzj"
+  },
+  "evaluate#1": {
+   "t": "αξιολογώ (υπολογίζω)",
+   "src": "dimk7z15t9"
+  },
+  "evaluation#1": {
+   "t": "αποτίμηση",
+   "src": "6cgmi6f8o0"
+  },
+  "false#1": {
+   "t": "ψευδής",
+   "src": "1im1caz3f2"
+  },
+  "fault#1": {
+   "t": "σφάλμα (βλάβη)",
+   "src": "1nswo62od0"
+  },
+  "federation#1": {
+   "t": "ομοσπονδία (federation)",
+   "src": "kdf2ee1nh5"
+  },
+  "finance#1": {
+   "t": "οικονομικά",
+   "src": "b9evod1p1c"
+  },
+  "fine-grained#1": {
+   "t": "λεπτομερής",
+   "src": "8zc58a16x4"
+  },
+  "fluffy#1": {
+   "t": "(λέξη μνημονικού)",
+   "src": "1oxdoersoj"
+  },
+  "foreign#1": {
+   "t": "εξωτερικός (foreign)",
+   "src": "1y6ttthkn0"
+  },
+  "fresh#1": {
+   "t": "νέος (φρέσκος)",
+   "src": "w7jk306rnl"
+  },
+  "global#1": {
+   "t": "καθολικός",
+   "src": "5jfyhmfb0t"
+  },
+  "head#1": {
+   "t": "κεφάλι (επικεφαλής)",
+   "src": "1mjvcq7ex2"
+  },
+  "heap#1": {
+   "t": "σωρός (heap)",
+   "src": "bz5xz6wizw"
+  },
+  "hierarchical#1": {
+   "t": "ιεραρχικός",
+   "src": "gcfd5qps6l"
+  },
+  "horizon#1": {
+   "t": "ορίζοντας",
+   "src": "1o8pbgigci"
+  },
+  "immediate#1": {
+   "t": "άμεσος",
+   "src": "1b4c9ec115"
+  },
+  "immutable#1": {
+   "t": "αμετάβλητος",
+   "src": "ta5mfj1ymn"
+  },
+  "impact#1": {
+   "t": "αντίκτυπος",
+   "src": "1icz41v1p5"
+  },
+  "incident#1": {
+   "t": "περιστατικό (βλάβη)",
+   "src": "40i4rtc4wp"
+  },
+  "intentionally#1": {
+   "t": "σκόπιμα",
+   "src": "jjq53w1d1t"
+  },
+  "investigation#1": {
+   "t": "διερεύνηση",
+   "src": "2mejmavh6y"
+  },
+  "ladder#1": {
+   "t": "σκάλα",
+   "src": "1p6nsjgfc7"
+  },
+  "late-arriving#1": {
+   "t": "που φτάνει καθυστερημένα",
+   "src": "js69983x5r"
+  },
+  "lazy#1": {
+   "t": "«οκνηρός» (lazy: υπολογισμός όταν χρειαστεί)",
+   "src": "1tpol551ag"
+  },
+  "little#1": {
+   "t": "λίγος",
+   "src": "13myf3g1tn"
+  },
+  "long-running#1": {
+   "t": "μακράς διάρκειας",
+   "src": "c03qct1civ"
+  },
+  "magic#1": {
+   "t": "magic (εντολές %)",
+   "src": "1bg9aex1jc"
+  },
+  "make#1": {
+   "t": "φτιάχνω (κάνω)",
+   "src": "qgq26y2iba"
+  },
+  "manually#1": {
+   "t": "χειροκίνητα",
+   "src": "1gzj67ysco"
+  },
+  "Markdown#1": {
+   "t": "Markdown (μορφή κειμένου)",
+   "src": "15xz2a5pp0"
+  },
+  "maybe#1": {
+   "t": "ίσως",
+   "src": "1uj8cpm135"
+  },
+  "mnemonic#1": {
+   "t": "μνημονικός κανόνας",
+   "src": "xf8zxyuex3"
+  },
+  "multiLine#1": {
+   "t": "multiLine (πολλές γραμμές)",
+   "src": "ajnr8071cs"
+  },
+  "naming#1": {
+   "t": "ονομασία",
+   "src": "26yuv1bc3y"
+  },
+  "night#1": {
+   "t": "νύχτα",
+   "src": "8ej3kx1xu9"
+  },
+  "I/O-bound#1": {
+   "t": "περιορισμένος από I/O",
+   "src": "uj1e5k1n8s"
+  },
+  "original#1": {
+   "t": "αρχικός",
+   "src": "s3hyog1iy8"
+  },
+  "perfect#1": {
+   "t": "τέλειος",
+   "src": "mi2w4nindb"
+  },
+  "permission-debugging#1": {
+   "t": "αποσφαλμάτωση δικαιωμάτων",
+   "src": "4uaghl186z"
+  },
+  "PERMISSIVE#1": {
+   "t": "PERMISSIVE (ανεκτική λειτουργία)",
+   "src": "eidqsiul8n"
+  },
+  "personal#1": {
+   "t": "προσωπικός",
+   "src": "49bupv8uof"
+  },
+  "platform-managed#1": {
+   "t": "διαχειριζόμενος από την πλατφόρμα",
+   "src": "1rrfqt21eu"
+  },
+  "predictable#1": {
+   "t": "προβλέψιμος",
+   "src": "ffenvw1im7"
+  },
+  "provider#1": {
+   "t": "πάροχος",
+   "src": "59ekck1k5e"
+  },
+  "pull#1": {
+   "t": "τραβώ (pull request: αίτημα συγχώνευσης)",
+   "src": "w9mkea12y4"
+  },
+  "ready#1": {
+   "t": "έτοιμος",
+   "src": "uioz8t1gmu"
+  },
+  "reality#1": {
+   "t": "πραγματικότητα",
+   "src": "1nuerllaml"
+  },
+  "recipient#1": {
+   "t": "παραλήπτης",
+   "src": "ljfajy16an"
+  },
+  "rich#1": {
+   "t": "πλούσιος",
+   "src": "1gzfiy72q0"
+  },
+  "roadmap#1": {
+   "t": "οδικός χάρτης",
+   "src": "16l0rvy565"
+  },
+  "salary#1": {
+   "t": "μισθός",
+   "src": "1ekp3sn12o"
+  },
+  "silk#1": {
+   "t": "(λέξη μνημονικού)",
+   "src": "1rj028g1s1"
+  },
+  "small-file#1": {
+   "t": "των μικρών αρχείων",
+   "src": "1kncqlg6xl"
+  },
+  "SparkContext#1": {
+   "t": "SparkContext",
+   "src": "1s5tzbk1rt"
+  },
+  "special#1": {
+   "t": "ειδικός",
+   "src": "ulm65112ge"
+  },
+  "state-store#1": {
+   "t": "χώρος κατάστασης (state store)",
+   "src": "dbzmp71gx9"
+  },
+  "StructType#1": {
+   "t": "StructType (σχήμα με πεδία)",
+   "src": "1c290id1in"
+  },
+  "teaching#1": {
+   "t": "διδασκαλία",
+   "src": "h69mp4t8in"
+  },
+  "third#1": {
+   "t": "τρίτος",
+   "src": "8ohoci1kv9"
+  },
+  "threshold#1": {
+   "t": "κατώφλι",
+   "src": "zbloyit8al"
+  },
+  "top-level#1": {
+   "t": "ανώτατου επιπέδου",
+   "src": "1rmgjop1nj"
+  },
+  "traverse#1": {
+   "t": "διασχίζω",
+   "src": "4pkn8sg26f"
+  },
+  "tree#1": {
+   "t": "δέντρο",
+   "src": "wyr5pn1m9u"
+  },
+  "truth#1": {
+   "t": "αλήθεια",
+   "src": "1klsr0acsd"
+  },
+  "tumbling#1": {
+   "t": "μη επικαλυπτόμενα (tumbling)",
+   "src": "1pg96y61xy"
+  },
+  "unchanged#1": {
+   "t": "αμετάβλητος",
+   "src": "1fyrs7r148"
+  },
+  "unique#1": {
+   "t": "μοναδικός",
+   "src": "15zcrrbv3m"
+  },
+  "unrelated#1": {
+   "t": "άσχετος",
+   "src": "rhf7v71d96"
+  },
+  "update-like#1": {
+   "t": "σαν ενημέρωση",
+   "src": "1amkftq1m7"
+  },
+  "versioned#1": {
+   "t": "με εκδόσεις",
+   "src": "1ncpw8doyp"
+  },
+  "visibility#1": {
+   "t": "ορατότητα",
+   "src": "1uag3wgod9"
+  },
+  "watch#1": {
+   "t": "παρακολουθώ",
+   "src": "zoiqia1z4s"
+  },
+  "WH#1": {
+   "t": "SQL warehouse",
+   "src": "lelmor1y66"
+  },
+  "wherever#1": {
+   "t": "όπου",
+   "src": "1ypgo43e15"
+  },
+  "accelerate#1": {
+   "t": "επιταχύνω",
+   "src": "ulzmiq6uwi"
+  },
+  "alternative#1": {
+   "t": "εναλλακτική",
+   "src": "11icrie1d9"
+  },
+  "bill#1": {
+   "t": "χρέωση",
+   "src": "1vstpjf1cq"
+  },
+  "coalesce#1": {
+   "t": "συγχωνεύω διαμερίσματα (coalesce)",
+   "src": "y67v4b1g6h"
+  },
+  "declare#1": {
+   "t": "δηλώνω",
+   "src": "qmjlyfdu6i"
+  },
+  "diagram#1": {
+   "t": "διάγραμμα",
+   "src": "9x3ir81abu"
+  },
+  "implementation#1": {
+   "t": "υλοποίηση",
+   "src": "kiopvj1lvf"
+  },
+  "issue#1": {
+   "t": "ζήτημα",
+   "src": "5gyzjoa0mg"
+  },
+  "kind#1": {
+   "t": "είδος",
+   "src": "w4oiys1yi2"
+  },
+  "payment#1": {
+   "t": "πληρωμή",
+   "src": "e5r7a9ira2"
+  },
+  "projection#1": {
+   "t": "προβολή (επιλογή στηλών)",
+   "src": "1oysukv10p"
+  },
+  "purge#1": {
+   "t": "εκκαθαρίζω",
+   "src": "1q7hfhp2g0"
+  },
+  "recompute#1": {
+   "t": "ξαναϋπολογίζω",
+   "src": "f42w2jidnc"
+  },
+  "release#1": {
+   "t": "έκδοση",
+   "src": "1j2qhp31or"
+  },
+  "restrict#1": {
+   "t": "περιορίζω",
+   "src": "pzgcipnaf3"
+  },
+  "serve#1": {
+   "t": "εξυπηρετώ",
+   "src": "27xa24h4y7"
+  },
+  "setup#1": {
+   "t": "ρύθμιση (στήσιμο)",
+   "src": "1nhhkbq1mz"
+  },
+  "signal#1": {
+   "t": "σήμα",
+   "src": "spax3fw90y"
+  },
+  "sum#1": {
+   "t": "άθροισμα",
+   "src": "a40tj41sa0"
+  },
+  "zone#1": {
+   "t": "ζώνη",
+   "src": "13pso631li"
+  },
+  "affect#1": {
+   "t": "επηρεάζω",
+   "src": "12zlvcd1ld"
+  },
+  "alert#1": {
+   "t": "ειδοποίηση",
+   "src": "nn1yw51t4x"
+  },
+  "backfill#1": {
+   "t": "συμπλήρωση παλαιών δεδομένων (backfill)",
+   "src": "19y52jkz1t"
+  },
+  "balance#1": {
+   "t": "εξισορροπώ",
+   "src": "stjk0uj2mh"
+  },
+  "button#1": {
+   "t": "κουμπί",
+   "src": "cri7exsvfn"
+  },
+  "concern#1": {
+   "t": "ανησυχία (αρμοδιότητα)",
+   "src": "z4dfd3jymf"
+  },
+  "disable#1": {
+   "t": "απενεργοποιώ",
+   "src": "1u90ux1195"
+  },
+  "exceed#1": {
+   "t": "υπερβαίνω",
+   "src": "9vbutd1uzx"
+  },
+  "explode#1": {
+   "t": "εκτινάσσομαι",
+   "src": "19zd6sf1kl"
+  },
+  "human#1": {
+   "t": "άνθρωπος",
+   "src": "x0i2km1xwv"
+  },
+  "interpret#1": {
+   "t": "ερμηνεύω",
+   "src": "1pc6ujm13q"
+  },
+  "investigate#1": {
+   "t": "διερευνώ",
+   "src": "2xha96e9dn"
+  },
+  "lock#1": {
+   "t": "κλείδωμα",
+   "src": "nr3iy61ur6"
+  },
+  "marker#1": {
+   "t": "δείκτης",
+   "src": "1vxk25gm8e"
+  },
+  "opposite#1": {
+   "t": "αντίθετο",
+   "src": "1avpnstdmm"
+  },
+  "prerequisite#1": {
+   "t": "προαπαιτούμενο",
+   "src": "1y8aphi1lm"
+  },
+  "prevent#1": {
+   "t": "αποτρέπω",
+   "src": "3ggz6yydjo"
+  },
+  "protect#1": {
+   "t": "προστατεύω",
+   "src": "15n0oizyjb"
+  },
+  "queue#1": {
+   "t": "ουρά",
+   "src": "1tjs13m1xe"
+  },
+  "rely#1": {
+   "t": "βασίζομαι",
+   "src": "13emeoruqh"
+  },
+  "resolve#1": {
+   "t": "επιλύω",
+   "src": "chhteuwyz1"
+  },
+  "spell#1": {
+   "t": "γράφω ορθογραφικά",
+   "src": "os4top1jtm"
+  },
+  "succeed#1": {
+   "t": "πετυχαίνω",
+   "src": "1a5glff43x"
+  },
+  "variable#1": {
+   "t": "μεταβλητή",
+   "src": "1bazrlv1uh"
+  },
+  "abstract#1": {
+   "t": "αφαιρώ (κρύβω τις λεπτομέρειες)",
+   "src": "13wxvgemig"
+  },
+  "access-control#1": {
+   "t": "έλεγχος πρόσβασης",
+   "src": "p9z2is1uow"
+  },
+  "account-level#1": {
+   "t": "σε επίπεδο λογαριασμού",
+   "src": "1uq21xb1ot"
+  },
+  "authoritative#1": {
+   "t": "έγκυρος (αξιόπιστη πηγή)",
+   "src": "1uwifir55f"
+  },
+  "binary#1": {
+   "t": "δυαδικός",
+   "src": "d54ar81ses"
+  },
+  "black#1": {
+   "t": "μαύρος (μαύρο κουτί)",
+   "src": "1jiqkrl1ho"
+  },
+  "blame#1": {
+   "t": "κατηγορώ",
+   "src": "1g8inczq9u"
+  },
+  "care#1": {
+   "t": "προσοχή",
+   "src": "ei6pvs147r"
+  },
+  "carry#1": {
+   "t": "μεταφέρω (περιέχω)",
+   "src": "d3xlx1lscz"
+  },
+  "chef#1": {
+   "t": "σεφ",
+   "src": "ys0ogsn736"
+  },
+  "child#1": {
+   "t": "παιδί (θυγατρικό αντικείμενο)",
+   "src": "szfqc1uwc2"
+  },
+  "click#1": {
+   "t": "κάνω κλικ",
+   "src": "ohvzj51fva"
+  },
+  "clustered#1": {
+   "t": "ομαδοποιημένος",
+   "src": "jszfdq1loq"
+  },
+  "coexist#1": {
+   "t": "συνυπάρχω",
+   "src": "cba82q1mwm"
+  },
+  "collection#1": {
+   "t": "συλλογή (συλλογή απορριμμάτων)",
+   "src": "1ipheop5bu"
+  },
+  "coming#1": {
+   "t": "επερχόμενος",
+   "src": "55qovrc7xu"
+  },
+  "compete#1": {
+   "t": "ανταγωνίζομαι",
+   "src": "la3sf5nsuj"
+  },
+  "constrained#1": {
+   "t": "περιορισμένος",
+   "src": "7vt34him12"
+  },
+  "convenient#1": {
+   "t": "βολικός",
+   "src": "1kr9w7cj46"
+  },
+  "corruption#1": {
+   "t": "αλλοίωση (καταστροφή δεδομένων)",
+   "src": "1x1y8p9o54"
+  },
+  "creation#1": {
+   "t": "δημιουργία",
+   "src": "17gjgzn4il"
+  },
+  "critical#1": {
+   "t": "κρίσιμος",
+   "src": "b32s3i1nz5"
+  },
+  "defaults#1": {
+   "t": "έχει προεπιλογή",
+   "src": "5t6e8v12be"
+  },
+  "delimiter#1": {
+   "t": "διαχωριστικό",
+   "src": "10wf7ov1eh"
+  },
+  "desk#1": {
+   "t": "γραφείο (υποδοχή)",
+   "src": "p5swsn1vrv"
+  },
+  "differently#1": {
+   "t": "διαφορετικά",
+   "src": "gtjm6s17gg"
+  },
+  "documentation#1": {
+   "t": "τεκμηρίωση",
+   "src": "h3du5t1w6c"
+  },
+  "driven#1": {
+   "t": "καθοδηγούμενος",
+   "src": "13d0lcep3o"
+  },
+  "dropdown#1": {
+   "t": "αναπτυσσόμενη λίστα",
+   "src": "qv3fib1mbg"
+  },
+  "early#1": {
+   "t": "νωρίς",
+   "src": "1tqbipp15g"
+  },
+  "easier#1": {
+   "t": "ευκολότερος",
+   "src": "3zjf3e4ynp"
+  },
+  "editor#1": {
+   "t": "επεξεργαστής",
+   "src": "107ox4a4k3"
+  },
+  "efficiency#1": {
+   "t": "αποδοτικότητα",
+   "src": "wgucr91sjh"
+  },
+  "especially#1": {
+   "t": "ειδικά",
+   "src": "wpqac611lg"
+  },
+  "fairly#1": {
+   "t": "αρκετά",
+   "src": "im0w7ir5pb"
+  },
+  "family#1": {
+   "t": "οικογένεια",
+   "src": "mbz1ne1m6h"
+  },
+  "five#1": {
+   "t": "πέντε",
+   "src": "1qgoh5m1dy"
+  },
+  "formerly#1": {
+   "t": "παλαιότερα",
+   "src": "1ijgzdo1b9"
+  },
+  "free#1": {
+   "t": "δωρεάν",
+   "src": "11r5qhbd2q"
+  },
+  "garbage#1": {
+   "t": "απορρίμματα (συλλογή απορριμμάτων)",
+   "src": "13e74y4r1u"
+  },
+  "generic#1": {
+   "t": "γενικός",
+   "src": "vpefoi1p5m"
+  },
+  "giant#1": {
+   "t": "γιγάντιος",
+   "src": "1w8sk0019q"
+  },
+  "glob#1": {
+   "t": "μοτίβο glob (* και ?)",
+   "src": "6x4dx617y3"
+  },
+  "grammar#1": {
+   "t": "σύνταξη (γραμματική)",
+   "src": "2t5q7z193q"
+  },
+  "healthy#1": {
+   "t": "υγιής",
+   "src": "ofsxzn1c54"
+  },
+  "historical#1": {
+   "t": "ιστορικός",
+   "src": "jl1txwqgnp"
+  },
+  "hundred#1": {
+   "t": "εκατό (εκατοντάδες)",
+   "src": "hf2xtg1bug"
+  },
+  "id#1": {
+   "t": "αναγνωριστικό",
+   "src": "ne267m1uly"
+  },
+  "item#1": {
+   "t": "στοιχείο",
+   "src": "1fgr1di2so"
+  },
+  "late-data#1": {
+   "t": "των καθυστερημένων δεδομένων",
+   "src": "1k2fwicrhx"
+  },
+  "latency-sensitive#1": {
+   "t": "ευαίσθητος στην καθυστέρηση",
+   "src": "1m9nj1y19w"
+  },
+  "learner#1": {
+   "t": "μαθητής (εκπαιδευόμενος)",
+   "src": "ii0d411i03"
+  },
+  "loss#1": {
+   "t": "απώλεια",
+   "src": "1bq98vs12k"
+  },
+  "low-latency#1": {
+   "t": "χαμηλής καθυστέρησης",
+   "src": "4w9hfa1y42"
+  },
+  "magically#1": {
+   "t": "ως διά μαγείας",
+   "src": "bllpr91um9"
+  },
+  "memory-bound#1": {
+   "t": "περιορισμένος από τη μνήμη",
+   "src": "1bo4otx181"
+  },
+  "memory-optimized#1": {
+   "t": "βελτιστοποιημένος για μνήμη",
+   "src": "1aw3w6m1a8"
+  },
+  "migration#1": {
+   "t": "μετάβαση (μεταφορά)",
+   "src": "iot6yr1dkx"
+  },
+  "moderate#1": {
+   "t": "μέτριος",
+   "src": "17crjf8k1x"
+  },
+  "mutate#1": {
+   "t": "μεταλλάσσω (αλλάζω)",
+   "src": "1fs9m9415k"
+  },
+  "name-based#1": {
+   "t": "βάσει ονόματος",
+   "src": "orrryjp6gl"
+  },
+  "narrow#1": {
+   "t": "στενός",
+   "src": "1m800s514f"
+  },
+  "newline#1": {
+   "t": "αλλαγή γραμμής",
+   "src": "15b9byt1aw"
+  },
+  "non-serverless#1": {
+   "t": "μη serverless",
+   "src": "1h0eanip3n"
+  },
+  "non-tabular#1": {
+   "t": "μη πινακοειδής",
+   "src": "1fcmpdx4il"
+  },
+  "notebook-scoped#1": {
+   "t": "σε επίπεδο notebook",
+   "src": "1op3f4g185"
+  },
+  "nuance#1": {
+   "t": "απόχρωση (λεπτή διαφορά)",
+   "src": "10x30pnhj3"
+  },
+  "official#1": {
+   "t": "επίσημος",
+   "src": "1tge6c31xp"
+  },
+  "ops#1": {
+   "t": "λειτουργίες (πράξεις)",
+   "src": "r0eej31p4o"
+  },
+  "optional#1": {
+   "t": "προαιρετικός",
+   "src": "oxk0zdr2hr"
+  },
+  "organization-wide#1": {
+   "t": "σε όλο τον οργανισμό",
+   "src": "ijr0d818cl"
+  },
+  "outer#1": {
+   "t": "εξωτερικός (outer join)",
+   "src": "uclfia1wig"
+  },
+  "outward#1": {
+   "t": "προς τα έξω",
+   "src": "cu86nh12ny"
+  },
+  "overlap#1": {
+   "t": "επικάλυψη",
+   "src": "1m3nj8m1fy"
+  },
+  "payroll#1": {
+   "t": "μισθοδοσία",
+   "src": "1i93eni1j5"
+  },
+  "perfectly#1": {
+   "t": "άψογα",
+   "src": "viakixo0f0"
+  },
+  "permanently#1": {
+   "t": "μόνιμα",
+   "src": "1ohkgat1id"
+  },
+  "pipeline-managed#1": {
+   "t": "διαχειριζόμενος από τη ροή",
+   "src": "1oda9nh1pp"
+  },
+  "poor#1": {
+   "t": "κακός (φτωχός)",
+   "src": "3k0v5yam4o"
+  },
+  "positional#1": {
+   "t": "βάσει θέσης",
+   "src": "11j9hik2qq"
+  },
+  "possibly#1": {
+   "t": "πιθανώς",
+   "src": "biw9vr1e5w"
+  },
+  "potential#1": {
+   "t": "πιθανός (δυνητικός)",
+   "src": "mdvhq0rmhm"
+  },
+  "producer#1": {
+   "t": "παραγωγός",
+   "src": "sj4p9senjc"
+  },
+  "programming#1": {
+   "t": "προγραμματισμός",
+   "src": "2eqzafg3wk"
+  },
+  "queryable#1": {
+   "t": "διαθέσιμος για ερωτήματα",
+   "src": "zbc1ls1wx1"
+  },
+  "random#1": {
+   "t": "τυχαίος",
+   "src": "prdyzb1cba"
+  },
+  "readable#1": {
+   "t": "αναγνώσιμος",
+   "src": "18t1rdn1qy"
+  },
+  "recipe#1": {
+   "t": "συνταγή",
+   "src": "kuz1brq6f8"
+  },
+  "reclaim#1": {
+   "t": "παίρνω πίσω",
+   "src": "1o1y2vpftm"
+  },
+  "recomputation#1": {
+   "t": "επανυπολογισμός",
+   "src": "3b1e6hn2aw"
+  },
+  "redistribution#1": {
+   "t": "αναδιανομή",
+   "src": "22ymyu1ia5"
+  },
+  "regular#1": {
+   "t": "κανονικός",
+   "src": "kqvubcdd6b"
+  },
+  "reliability#1": {
+   "t": "αξιοπιστία",
+   "src": "1ufc1cu1ym"
+  },
+  "reliable#1": {
+   "t": "αξιόπιστος",
+   "src": "mqlho31ltp"
+  },
+  "reliably#1": {
+   "t": "αξιόπιστα",
+   "src": "10gxq4m1cy"
+  },
+  "repartition#1": {
+   "t": "επαναδιαμερίζω (repartition)",
+   "src": "bdivqsa303"
+  },
+  "reproducible#1": {
+   "t": "αναπαραγώγιμος",
+   "src": "yqpgvxfw0m"
+  },
+  "response#1": {
+   "t": "απόκριση",
+   "src": "b47eae1dtt"
+  },
+  "schema-evolution#1": {
+   "t": "εξέλιξης σχήματος",
+   "src": "1nb64k21g9"
+  },
+  "sensible#1": {
+   "t": "λογικός",
+   "src": "8rqspue2ug"
+  },
+  "separately#1": {
+   "t": "χωριστά",
+   "src": "125cfui6cr"
+  },
+  "shelf#1": {
+   "t": "ράφι",
+   "src": "6h0kfe1xp9"
+  },
+  "silent#1": {
+   "t": "σιωπηλός",
+   "src": "1lzkb3t1ak"
+  },
+  "skeleton#1": {
+   "t": "σκελετός",
+   "src": "134el3y7zn"
+  },
+  "spare#1": {
+   "t": "εφεδρικός (περίσσια)",
+   "src": "9phww81b95"
+  },
+  "stray#1": {
+   "t": "αδέσποτος (εκτός θέσης)",
+   "src": "10g5m5fn33"
+  },
+  "stream-static#1": {
+   "t": "ροής με στατικό πίνακα",
+   "src": "186l7rs162"
+  },
+  "strict#1": {
+   "t": "αυστηρός",
+   "src": "1a5112qltb"
+  },
+  "strongest#1": {
+   "t": "ισχυρότερος",
+   "src": "21sp3r1gd3"
+  },
+  "subset#1": {
+   "t": "υποσύνολο",
+   "src": "19leubl2tw"
+  },
+  "successfully#1": {
+   "t": "επιτυχώς",
+   "src": "kx2zm0693n"
+  },
+  "suspect#1": {
+   "t": "υποψιάζομαι",
+   "src": "1bkqebd130"
+  },
+  "switch#1": {
+   "t": "διακόπτης (επιλογή)",
+   "src": "vniztmk1p9"
+  },
+  "tab#1": {
+   "t": "στηλοθέτης (καρτέλα)",
+   "src": "1k6nman4ie"
+  },
+  "teaser#1": {
+   "t": "πρόγευση",
+   "src": "qrz8f01l1p"
+  },
+  "topology#1": {
+   "t": "τοπολογία",
+   "src": "xfz9x1vwk3"
+  },
+  "training#1": {
+   "t": "εκπαίδευση",
+   "src": "12glml014j"
+  },
+  "unclosed#1": {
+   "t": "ανοιχτός (χωρίς κλείσιμο)",
+   "src": "1cabe5d694"
+  },
+  "unity#1": {
+   "t": "Unity (Unity Catalog)",
+   "src": "1iiz1pp1w3"
+  },
+  "universal#1": {
+   "t": "καθολικός",
+   "src": "pgxvxa63p1"
+  },
+  "unpartitioned#1": {
+   "t": "χωρίς διαμερισμό",
+   "src": "vg4eck1bmy"
+  },
+  "useless#1": {
+   "t": "άχρηστος",
+   "src": "112mbqa1hb"
+  },
+  "vacuumed#1": {
+   "t": "σβησμένος από το VACUUM",
+   "src": "1rsc40r1to"
+  },
+  "vertical#1": {
+   "t": "κάθετος",
+   "src": "1ifzuuvcm7"
+  },
+  "wall#1": {
+   "t": "τοίχος (πραγματικός χρόνος)",
+   "src": "adlqb31nfj"
+  },
+  "wrap#1": {
+   "t": "περικλείω",
+   "src": "7o6pfa14qy"
+  },
+  "authenticate#1": {
+   "t": "ταυτοποιούμαι",
+   "src": "157y8fiuhc"
+  },
+  "catch#1": {
+   "t": "πιάνω (προλαβαίνω)",
+   "src": "sxkoa0m90h"
+  },
+  "channel#1": {
+   "t": "κανάλι",
+   "src": "wzleft1e34"
+  },
+  "client#1": {
+   "t": "πελάτης (client)",
+   "src": "1h6juji15n"
+  },
+  "combination#1": {
+   "t": "συνδυασμός",
+   "src": "36p810le1x"
+  },
+  "comma#1": {
+   "t": "κόμμα",
+   "src": "1q47kz01td"
+  },
+  "compromise#1": {
+   "t": "παραβιάζω",
+   "src": "13jpdruwye"
+  },
+  "destroy#1": {
+   "t": "καταστρέφω",
+   "src": "1shplldyoo"
+  },
+  "discard#1": {
+   "t": "απορρίπτω",
+   "src": "1ntb09k1ki"
+  },
+  "eat#1": {
+   "t": "τρώω (καταναλώνω)",
+   "src": "14hf7ew4mp"
+  },
+  "edge#1": {
+   "t": "όριο (οριακή περίπτωση)",
+   "src": "120mq9y1c0"
+  },
+  "expectation#1": {
+   "t": "προσδοκία (κανόνας ποιότητας)",
+   "src": "1o4ywf3195"
+  },
+  "export#1": {
+   "t": "εξάγω",
+   "src": "luqqtdgqpe"
+  },
+  "fetch#1": {
+   "t": "ανακτώ",
+   "src": "1cn2q9c1cn"
+  },
+  "finalize#1": {
+   "t": "οριστικοποιώ",
+   "src": "twi6kineyk"
+  },
+  "forget#1": {
+   "t": "ξεχνώ",
+   "src": "1t0wo0q1iy"
+  },
+  "formula#1": {
+   "t": "τύπος",
+   "src": "165tbmf198"
+  },
+  "gain#1": {
+   "t": "κέρδος",
+   "src": "u93cdq1mdi"
+  },
+  "judge#1": {
+   "t": "κρίνω",
+   "src": "g2xlgf1pe2"
+  },
+  "knob#1": {
+   "t": "ρύθμιση (κουμπί)",
+   "src": "gb0vokch4r"
+  },
+  "lot#1": {
+   "t": "πολύ (πολλά)",
+   "src": "d7r7lw1wtr"
+  },
+  "maintain#1": {
+   "t": "συντηρώ",
+   "src": "i9mrkdvavp"
+  },
+  "orchestrate#1": {
+   "t": "ενορχηστρώνω",
+   "src": "esnrna1cbf"
+  },
+  "outcome#1": {
+   "t": "αποτέλεσμα",
+   "src": "r07mslgiqa"
+  },
+  "pause#1": {
+   "t": "σταματώ προσωρινά",
+   "src": "1jr6l3fbkl"
+  },
+  "perform#1": {
+   "t": "εκτελώ",
+   "src": "12h7ioc1v1"
+  },
+  "prepare#1": {
+   "t": "προετοιμάζω",
+   "src": "lpenqataa8"
+  },
+  "recognize#1": {
+   "t": "αναγνωρίζω",
+   "src": "u4j7ux2jwe"
+  },
+  "reconcile#1": {
+   "t": "συμφωνώ (εναρμονίζω)",
+   "src": "5elm2u1rei"
+  },
+  "relationship#1": {
+   "t": "σχέση",
+   "src": "nb2tdgnry6"
+  },
+  "represent#1": {
+   "t": "αντιπροσωπεύω",
+   "src": "1xp5v978p6"
+  },
+  "restriction#1": {
+   "t": "περιορισμός",
+   "src": "2zewdtiizg"
+  },
+  "risk#1": {
+   "t": "κίνδυνος",
+   "src": "drnr6u1a1k"
+  },
+  "slowdown#1": {
+   "t": "επιβράδυνση",
+   "src": "xwu0z21i70"
+  },
+  "synonym#1": {
+   "t": "συνώνυμο",
+   "src": "pvypw91crn"
+  },
+  "technology#1": {
+   "t": "τεχνολογία",
+   "src": "68biub1aia"
+  },
+  "timeout#1": {
+   "t": "χρονικό όριο",
+   "src": "z23xjj1vkl"
+  },
+  "upload#1": {
+   "t": "μεταφόρτωση",
+   "src": "npawbm9xc9"
+  },
+  "variant#1": {
+   "t": "παραλλαγή",
+   "src": "3nvxhjli23"
+  },
+  "deliver#1": {
+   "t": "παραδίδω",
+   "src": "aaswho1qdh"
+  },
+  "promise#1": {
+   "t": "υπόσχεση",
+   "src": "16r45pr15o"
+  },
+  "propagate#1": {
+   "t": "διαδίδω",
+   "src": "1i3jpacf7x"
+  },
+  "roll#1": {
+   "t": "επαναφέρω (roll back)",
+   "src": "fos1xfwgjm"
+  },
+  "serializable#1": {
+   "t": "σειριοποιήσιμος",
+   "src": "1pbxyei3nc"
+  },
+  "accelerator#1": {
+   "t": "επιταχυντής",
+   "src": "1gjjni31rt"
+  },
+  "access-mode#1": {
+   "t": "του τρόπου πρόσβασης",
+   "src": "1u9b0td1ss"
+  },
+  "accident#1": {
+   "t": "ατύχημα (λάθος)",
+   "src": "1nauge513y"
+  },
+  "accidentally#1": {
+   "t": "κατά λάθος",
+   "src": "bacis7mk6q"
+  },
+  "ahead#1": {
+   "t": "μπροστά",
+   "src": "1jjhyopdg2"
+  },
+  "allocation#1": {
+   "t": "κατανομή",
+   "src": "a8ekp3ubku"
+  },
+  "already-loaded#1": {
+   "t": "ήδη φορτωμένος",
+   "src": "bpqyovfamg"
+  },
+  "always-running#1": {
+   "t": "πάντα σε λειτουργία",
+   "src": "1imr262w0n"
+  },
+  "app#1": {
+   "t": "εφαρμογή",
+   "src": "ph5uc5qlmz"
+  },
+  "append-oriented#1": {
+   "t": "προσανατολισμένος στην προσθήκη",
+   "src": "se67ko86hp"
+  },
+  "applicable#1": {
+   "t": "εφαρμόσιμος",
+   "src": "1blnr1113a"
+  },
+  "approximately#1": {
+   "t": "περίπου",
+   "src": "ddc90k1aq5"
+  },
+  "assign#1": {
+   "t": "αναθέτω",
+   "src": "1mtrswv97b"
+  },
+  "assignment#1": {
+   "t": "εργασία (άσκηση)",
+   "src": "1hcvfgq1am"
+  },
+  "atomically#1": {
+   "t": "ατομικά (όλα ή τίποτα)",
+   "src": "1mkz59t1iz"
+  },
+  "attribute-based#1": {
+   "t": "βάσει ιδιοτήτων",
+   "src": "olwqfuj4bn"
+  },
+  "audience#1": {
+   "t": "κοινό",
+   "src": "1n4y7nzxyd"
+  },
+  "autoscaler#1": {
+   "t": "μηχανισμός αυτόματης κλιμάκωσης",
+   "src": "1u9sq8w1ys"
+  },
+  "best-practice#1": {
+   "t": "βέλτιστης πρακτικής",
+   "src": "1io9r0s1dw"
+  },
+  "blast#1": {
+   "t": "έκρηξη (εύρος ζημιάς)",
+   "src": "13v315k149"
+  },
+  "borrow#1": {
+   "t": "δανείζομαι",
+   "src": "a0tm8dv3ms"
+  },
+  "brand-new#1": {
+   "t": "ολοκαίνουργιος",
+   "src": "169l2ep17v"
+  },
+  "broadcasting#1": {
+   "t": "αναμετάδοση (broadcast)",
+   "src": "w8fp6974fn"
+  },
+  "broader#1": {
+   "t": "ευρύτερος",
+   "src": "8glx1fbkg1"
+  },
+  "busy#1": {
+   "t": "απασχολημένος",
+   "src": "1o48p4qpwh"
+  },
+  "candidate#1": {
+   "t": "υποψήφιος",
+   "src": "18ojogrioe"
+  },
+  "carefully#1": {
+   "t": "προσεκτικά",
+   "src": "dbf4ad1fva"
+  },
+  "catalog-compatible#1": {
+   "t": "συμβατός με το Unity Catalog",
+   "src": "l8nlew11zg"
+  },
+  "catalog-level#1": {
+   "t": "σε επίπεδο καταλόγου",
+   "src": "cyynskakwq"
+  },
+  "category#1": {
+   "t": "κατηγορία",
+   "src": "1b9mr844ix"
+  },
+  "caveat#1": {
+   "t": "επιφύλαξη",
+   "src": "1q3obfvbkr"
+  },
+  "certain#1": {
+   "t": "ορισμένος",
+   "src": "1obm1g6m89"
+  },
+  "clause#1": {
+   "t": "πρόταση (τμήμα εντολής)",
+   "src": "kd4a5x1h4g"
+  },
+  "cleaner#1": {
+   "t": "καθαρότερος",
+   "src": "xscim3w64w"
+  },
+  "compaction#1": {
+   "t": "συμπύκνωση",
+   "src": "ial7vr14tr"
+  },
+  "compute-optimized#1": {
+   "t": "βελτιστοποιημένος για υπολογισμούς",
+   "src": "qe3xyi1dwq"
+  },
+  "concentrated#1": {
+   "t": "συγκεντρωμένος",
+   "src": "1ln44mj1xz"
+  },
+  "concrete#1": {
+   "t": "συγκεκριμένος",
+   "src": "m7vnb117jf"
+  },
+  "conditional#1": {
+   "t": "υπό όρους",
+   "src": "1f7egse10s"
+  },
+  "confusable#1": {
+   "t": "που μπερδεύονται εύκολα",
+   "src": "1vam7n31ny"
+  },
+  "confusion#1": {
+   "t": "σύγχυση",
+   "src": "11ottq11ta"
+  },
+  "constantly#1": {
+   "t": "συνεχώς",
+   "src": "1xhngkv1k4"
+  },
+  "convenience#1": {
+   "t": "ευκολία",
+   "src": "r0sdjk1191"
+  },
+  "copy-on-write#1": {
+   "t": "αντιγραφή κατά την εγγραφή",
+   "src": "7oztnt190r"
+  },
+  "corresponding#1": {
+   "t": "αντίστοιχος",
+   "src": "1ywolxjczh"
+  },
+  "cpu-native#1": {
+   "t": "εγγενής για CPU",
+   "src": "1krbm7q1jm"
+  },
+  "creator#1": {
+   "t": "δημιουργός",
+   "src": "ghg5ah99mj"
+  },
+  "data-engineering#1": {
+   "t": "μηχανικής δεδομένων",
+   "src": "64t6lh17ff"
+  },
+  "databricks-native#1": {
+   "t": "εγγενής του Databricks",
+   "src": "1u32qvq9qn"
+  },
+  "deeper#1": {
+   "t": "πιο βαθιά",
+   "src": "38chfpkj70"
+  },
+  "delegated#1": {
+   "t": "ανατεθειμένος",
+   "src": "12k8a661ih"
+  },
+  "derive#1": {
+   "t": "παράγω (προκύπτει από)",
+   "src": "16key7i8i1"
+  },
+  "determine#1": {
+   "t": "προσδιορίζω",
+   "src": "x003pl19oy"
+  },
+  "deterministic#1": {
+   "t": "ντετερμινιστικός",
+   "src": "a696qc21x1"
+  },
+  "direction#1": {
+   "t": "κατεύθυνση",
+   "src": "vyk331bf2e"
+  },
+  "diverge#1": {
+   "t": "αποκλίνω",
+   "src": "r8vhx41iam"
+  },
+  "duplicate-match#1": {
+   "t": "πολλαπλής αντιστοίχισης",
+   "src": "1q7hi3y1s5"
+  },
+  "e-commerce#1": {
+   "t": "ηλεκτρονικό εμπόριο",
+   "src": "1vldn1j12z"
+  },
+  "earlier#1": {
+   "t": "νωρίτερα",
+   "src": "2mjiji1x9h"
+  },
+  "easily#1": {
+   "t": "εύκολα",
+   "src": "8ue4ia1jaa"
+  },
+  "effectively#1": {
+   "t": "ουσιαστικά",
+   "src": "5tlbolr4u4"
+  },
+  "ELT-like#1": {
+   "t": "σαν ELT",
+   "src": "b0udc81o26"
+  },
+  "enhanced#1": {
+   "t": "βελτιωμένος",
+   "src": "1n5ofi9d0n"
+  },
+  "envelope#1": {
+   "t": "περίβλημα (πλαίσιο)",
+   "src": "i60brz1r6c"
+  },
+  "evict#1": {
+   "t": "εκτοπίζω (αφαιρώ από τη μνήμη)",
+   "src": "1geb4ymkrt"
+  },
+  "exactly-once-ish#1": {
+   "t": "σχεδόν ακριβώς μία φορά",
+   "src": "1m79tet1oz"
+  },
+  "excellent#1": {
+   "t": "εξαιρετικός",
+   "src": "gnnswc143r"
+  },
+  "exclude#1": {
+   "t": "εξαιρώ",
+   "src": "1594q4919h"
+  },
+  "exploratory#1": {
+   "t": "διερευνητικός",
+   "src": "185mxl25c7"
+  },
+  "factor#1": {
+   "t": "παράγοντας",
+   "src": "4urdrz1wpe"
+  },
+  "faithfully#1": {
+   "t": "πιστά",
+   "src": "18olwrd14h"
+  },
+  "fall#1": {
+   "t": "πέφτω (καταφεύγω σε)",
+   "src": "fby6ug1t1c"
+  },
+  "fan-out#1": {
+   "t": "διασπορά (fan-out)",
+   "src": "16m744fozq"
+  },
+  "file-open#1": {
+   "t": "ανοίγματος αρχείων",
+   "src": "9ns5w41wtg"
+  },
+  "finalization#1": {
+   "t": "οριστικοποίηση",
+   "src": "14lo850l7s"
+  },
+  "finer-grained#1": {
+   "t": "πιο λεπτομερής",
+   "src": "1goptuh1jn"
+  },
+  "flag#1": {
+   "t": "σημαία (προειδοποίηση)",
+   "src": "k5pomfdaex"
+  },
+  "flat#1": {
+   "t": "επίπεδος",
+   "src": "re1fad5dwu"
+  },
+  "frequently#1": {
+   "t": "συχνά",
+   "src": "8qz7sgqbja"
+  },
+  "general-purpose#1": {
+   "t": "γενικής χρήσης",
+   "src": "1ttbt7e1a7"
+  },
+  "graph#1": {
+   "t": "γράφος",
+   "src": "12n2f4q1d8"
+  },
+  "guaranteed#1": {
+   "t": "εγγυημένος",
+   "src": "htoj5317p4"
+  },
+  "habit#1": {
+   "t": "συνήθεια",
+   "src": "kvtvtgx5yb"
+  },
+  "hard#1": {
+   "t": "δύσκολος",
+   "src": "4tyvz6ov17"
+  },
+  "harder#1": {
+   "t": "δυσκολότερος",
+   "src": "1vbjdci1a3"
+  },
+  "heart#1": {
+   "t": "καρδιά (απ' έξω)",
+   "src": "1jfuakgryp"
+  },
+  "heuristic#1": {
+   "t": "ευρετικός κανόνας",
+   "src": "1jihcn7118"
+  },
+  "high-concurrency#1": {
+   "t": "υψηλής ταυτοχρονίας",
+   "src": "qc98363p4w"
+  },
+  "hit#1": {
+   "t": "συναντώ (πέφτω σε)",
+   "src": "yt0jetzbln"
+  },
+  "ideal#1": {
+   "t": "ιδανικός",
+   "src": "1n3tnfrqnl"
+  },
+  "ideally#1": {
+   "t": "ιδανικά",
+   "src": "1xmx8zd1ju"
+  },
+  "idempotently#1": {
+   "t": "αυτοδύναμα (χωρίς διπλή επίδραση)",
+   "src": "1qr3v5a7bx"
+  },
+  "ignore#1": {
+   "t": "αγνοώ",
+   "src": "39cmw61opg"
+  },
+  "implement#1": {
+   "t": "υλοποιώ",
+   "src": "67vd9obsus"
+  },
+  "infinite#1": {
+   "t": "άπειρος",
+   "src": "77y4esj6n7"
+  },
+  "instantly#1": {
+   "t": "αμέσως",
+   "src": "swwgmzaf82"
+  },
+  "instinctive#1": {
+   "t": "ενστικτώδης",
+   "src": "2b6yti36cc"
+  },
+  "intact#1": {
+   "t": "ανέπαφος",
+   "src": "1gn4sp06p8"
+  },
+  "interchangeably#1": {
+   "t": "εναλλακτικά (ως ισοδύναμα)",
+   "src": "kn4j1x1wai"
+  },
+  "interoperability#1": {
+   "t": "διαλειτουργικότητα",
+   "src": "17f3bhm130"
+  },
+  "interpreter#1": {
+   "t": "διερμηνέας",
+   "src": "9ey9lz1xxj"
+  },
+  "involved#1": {
+   "t": "εμπλεκόμενος",
+   "src": "ruhlor151y"
+  },
+  "isolate#1": {
+   "t": "απομονώνω",
+   "src": "185pcbhzu8"
+  },
+  "June#1": {
+   "t": "Ιούνιος",
+   "src": "ugcfb8tm75"
+  },
+  "key-value#1": {
+   "t": "κλειδιού-τιμής",
+   "src": "1wb8rxvjjb"
+  },
+  "language#1": {
+   "t": "γλώσσα",
+   "src": "vb81r2ymj8"
+  },
+  "layer-by-layer#1": {
+   "t": "στρώμα προς στρώμα",
+   "src": "6g99h01295"
+  },
+  "life#1": {
+   "t": "ζωή",
+   "src": "weoomt1ug1"
+  },
+  "lifecycle-based#1": {
+   "t": "βάσει κύκλου ζωής",
+   "src": "1pvt9ix1gj"
+  },
+  "liquid-clustered#1": {
+   "t": "με liquid clustering",
+   "src": "3p8ogp1dc1"
+  },
+  "living#1": {
+   "t": "ζωντανός",
+   "src": "m2f0f117s0"
+  },
+  "logistics#1": {
+   "t": "εφοδιαστική",
+   "src": "1nf8rw31kn"
+  },
+  "lookup#1": {
+   "t": "αναζήτηση",
+   "src": "d26xlhfsc9"
+  },
+  "low-level#1": {
+   "t": "χαμηλού επιπέδου",
+   "src": "3gxsr514pw"
+  },
+  "manager#1": {
+   "t": "διευθυντής",
+   "src": "2aosd71e6u"
+  },
+  "mandatory#1": {
+   "t": "υποχρεωτικός",
+   "src": "1cmqq9x1it"
+  },
+  "map-side#1": {
+   "t": "στην πλευρά map",
+   "src": "s6z66mj0sb"
+  },
+  "massive#1": {
+   "t": "τεράστιος",
+   "src": "19ujlspfjj"
+  },
+  "math#1": {
+   "t": "μαθηματικά (υπολογισμός)",
+   "src": "1dfdhf61nq"
+  },
+  "medallion#1": {
+   "t": "μετάλλιο (bronze/silver/gold)",
+   "src": "11j01wt17r"
+  },
+  "medium#1": {
+   "t": "μεσαίος",
+   "src": "1umlm4bm6r"
+  },
+  "memory-intensive#1": {
+   "t": "απαιτητικός σε μνήμη",
+   "src": "1xyh6scoh3"
+  },
+  "menu#1": {
+   "t": "μενού",
+   "src": "1w07klm1tv"
+  },
+  "metastore#1": {
+   "t": "metastore (αποθήκη μεταδεδομένων)",
+   "src": "37cklip4mc"
+  },
+  "missing-file#1": {
+   "t": "αρχείου που λείπει",
+   "src": "zks5ylrqxj"
+  },
+  "money#1": {
+   "t": "χρήματα",
+   "src": "19hgemz1e5"
+  },
+  "mostly#1": {
+   "t": "κυρίως",
+   "src": "1lxky25yqe"
+  },
+  "multi#1": {
+   "t": "πολλαπλός",
+   "src": "1sfxz301kj"
+  },
+  "natural#1": {
+   "t": "φυσικός",
+   "src": "1on6tnnr8y"
+  },
+  "navigation#1": {
+   "t": "πλοήγηση",
+   "src": "1hwieo617n"
+  },
+  "newly#1": {
+   "t": "πρόσφατα",
+   "src": "7oemua195c"
+  },
+  "non-Databricks#1": {
+   "t": "εκτός Databricks",
+   "src": "pjl2celffl"
+  },
+  "non-distributed#1": {
+   "t": "μη κατανεμημένος",
+   "src": "nijcnprkdk"
+  },
+  "non-human#1": {
+   "t": "μη ανθρώπινος",
+   "src": "1pdftzstdg"
+  },
+  "non-Photon#1": {
+   "t": "χωρίς Photon",
+   "src": "15wco5t1dy"
+  },
+  "non-transactional#1": {
+   "t": "μη συναλλακτικός",
+   "src": "p059shuhbu"
+  },
+  "nuisance#1": {
+   "t": "ενόχληση",
+   "src": "1i0u0vq13a"
+  },
+  "obsolete#1": {
+   "t": "ξεπερασμένος",
+   "src": "188707rweq"
+  },
+  "on-time#1": {
+   "t": "έγκαιρος",
+   "src": "19rvq8618i"
+  },
+  "one-liner#1": {
+   "t": "σε μία γραμμή",
+   "src": "2an2z9l5g9"
+  },
+  "organizational#1": {
+   "t": "οργανωτικός",
+   "src": "1ps617mb5w"
+  },
+  "own#1": {
+   "t": "κατέχω",
+   "src": "7hfou21ddx"
+  },
+  "packaged#1": {
+   "t": "πακεταρισμένος",
+   "src": "9zluedgqle"
+  },
+  "package#1": {
+   "t": "πακετάρω",
+   "src": "1bpmejs1k9"
+  },
+  "parameterized#1": {
+   "t": "παραμετροποιημένος",
+   "src": "rrosf97w5s"
+  },
+  "partitioned#1": {
+   "t": "διαμερισμένος",
+   "src": "13z59jd6fh"
+  },
+  "per-table#1": {
+   "t": "ανά πίνακα",
+   "src": "1jithjbgs3"
+  },
+  "per-task#1": {
+   "t": "ανά εργασία",
+   "src": "evfb7vjfqc"
+  },
+  "permanent#1": {
+   "t": "μόνιμος",
+   "src": "12w5o25opf"
+  },
+  "person#1": {
+   "t": "άτομο",
+   "src": "ud20oiwdd8"
+  },
+  "pessimistic#1": {
+   "t": "απαισιόδοξος (κλείδωμα εκ των προτέρων)",
+   "src": "3zlc261anv"
+  },
+  "philosophy#1": {
+   "t": "φιλοσοφία",
+   "src": "l7bjblanf0"
+  },
+  "pin#1": {
+   "t": "καρφιτσώνω (κλειδώνω έκδοση)",
+   "src": "me823m10fv"
+  },
+  "powerful#1": {
+   "t": "ισχυρός",
+   "src": "172qi7c1ka"
+  },
+  "precomputed#1": {
+   "t": "προϋπολογισμένος",
+   "src": "19auz3x1qy"
+  },
+  "predict#1": {
+   "t": "προβλέπω",
+   "src": "9bsfgpy1dg"
+  },
+  "pricier#1": {
+   "t": "ακριβότερος",
+   "src": "nhdvur1h65"
+  },
+  "probably#1": {
+   "t": "πιθανότατα",
+   "src": "1cnpy431yz"
+  },
+  "production-style#1": {
+   "t": "σαν σε παραγωγή",
+   "src": "8vmubo19t5"
+  },
+  "programmatic#1": {
+   "t": "προγραμματιστικός",
+   "src": "6d8ug81qco"
+  },
+  "protection#1": {
+   "t": "προστασία",
+   "src": "zg71661k89"
+  },
+  "proven#1": {
+   "t": "αποδεδειγμένος",
+   "src": "n3j5jy1fhk"
+  },
+  "radius#1": {
+   "t": "ακτίνα (εύρος ζημιάς)",
+   "src": "e1y4mi11s5"
+  },
+  "ratio#1": {
+   "t": "λόγος (αναλογία)",
+   "src": "1v2kdk8r5a"
+  },
+  "re-upload#1": {
+   "t": "επαναφόρτωση",
+   "src": "hzzekp8kab"
+  },
+  "re-write#1": {
+   "t": "ξαναγράφω",
+   "src": "1n0vgig1y7"
+  },
+  "realistic#1": {
+   "t": "ρεαλιστικός",
+   "src": "16pz1561n9"
+  },
+  "recognise#1": {
+   "t": "αναγνωρίζω",
+   "src": "38eh0uif5r"
+  },
+  "recover#1": {
+   "t": "ανακάμπτω (ανακτώ)",
+   "src": "14aa8a97mx"
+  },
+  "red#1": {
+   "t": "κόκκινος",
+   "src": "84e74hjg16"
+  },
+  "redistribute#1": {
+   "t": "αναδιανέμω",
+   "src": "1334b4aod0"
+  },
+  "relate#1": {
+   "t": "σχετίζομαι",
+   "src": "1dnejvxggz"
+  },
+  "removal#1": {
+   "t": "αφαίρεση",
+   "src": "1ihqm3l1bl"
+  },
+  "reorganize#1": {
+   "t": "αναδιοργανώνω",
+   "src": "vp7wtqouw7"
+  },
+  "repeatedly#1": {
+   "t": "επανειλημμένα",
+   "src": "1c4d4911rt"
+  },
+  "reproducibility#1": {
+   "t": "αναπαραγωγιμότητα",
+   "src": "17d9utt1qt"
+  },
+  "reproducibly#1": {
+   "t": "αναπαραγώγιμα",
+   "src": "1jaxqu6lfw"
+  },
+  "reservoir#1": {
+   "t": "δεξαμενή",
+   "src": "gujbjbcq5g"
+  },
+  "resolution#1": {
+   "t": "επίλυση (αντιστοίχιση)",
+   "src": "upyig7debu"
+  },
+  "responsibility#1": {
+   "t": "ευθύνη",
+   "src": "1yml0ncmti"
+  },
+  "restraint#1": {
+   "t": "συγκράτηση",
+   "src": "4i9po31szp"
+  },
+  "reverse#1": {
+   "t": "αντίστροφος",
+   "src": "iwctymuc75"
+  },
+  "rewritten#1": {
+   "t": "ξαναγραμμένος",
+   "src": "1msf6dskvi"
+  },
+  "row-at-a-time#1": {
+   "t": "γραμμή-γραμμή",
+   "src": "1eitrlp12r"
+  },
+  "run-job#1": {
+   "t": "εργασία που τρέχει άλλη εργασία",
+   "src": "tvmoy0g20y"
+  },
+  "safer#1": {
+   "t": "ασφαλέστερος",
+   "src": "g6bl4o3v4h"
+  },
+  "salting#1": {
+   "t": "«αλάτισμα» κλειδιού (salting)",
+   "src": "nxogceafq7"
+  },
+  "schema-evolving#1": {
+   "t": "που αλλάζει το σχήμα",
+   "src": "vlvhjhu9lm"
+  },
+  "select#1": {
+   "t": "επιλέγω",
+   "src": "e3hb0rwm35"
+  },
+  "semantic#1": {
+   "t": "σημασιολογικός",
+   "src": "1mh7jzv135"
+  },
+  "sentence#1": {
+   "t": "πρόταση",
+   "src": "jnmdnbn04p"
+  },
+  "serialized#1": {
+   "t": "σειριοποιημένος",
+   "src": "xq5uh5jvb6"
+  },
+  "serious#1": {
+   "t": "σοβαρός",
+   "src": "ld0mt31rp6"
+  },
+  "server-side#1": {
+   "t": "στον διακομιστή",
+   "src": "ank2qv8vup"
+  },
+  "shrink#1": {
+   "t": "μικραίνω",
+   "src": "brfmv98vww"
+  },
+  "soon#1": {
+   "t": "σύντομα",
+   "src": "wyzuw11xmc"
+  },
+  "SQL-centric#1": {
+   "t": "με επίκεντρο την SQL",
+   "src": "114iluvbwh"
+  },
+  "SQL-warehouse#1": {
+   "t": "του SQL warehouse",
+   "src": "bh631evqng"
+  },
+  "stability#1": {
+   "t": "σταθερότητα",
+   "src": "ydmo04gu39"
+  },
+  "stage-specific#1": {
+   "t": "ανά στάδιο",
+   "src": "xmrzbd1fuo"
+  },
+  "stand#1": {
+   "t": "στέκομαι (σημαίνω)",
+   "src": "npztv41ism"
+  },
+  "story#1": {
+   "t": "ιστορία",
+   "src": "2qys6f1lk6"
+  },
+  "sub-second#1": {
+   "t": "κάτω του δευτερολέπτου",
+   "src": "6ykko210o5"
+  },
+  "successful#1": {
+   "t": "επιτυχημένος",
+   "src": "4zrn2gd6x8"
+  },
+  "suggest#1": {
+   "t": "προτείνω",
+   "src": "gocezc1n80"
+  },
+  "surprise#1": {
+   "t": "έκπληξη",
+   "src": "12yx7ld1qw"
+  },
+  "suspicious#1": {
+   "t": "ύποπτος",
+   "src": "1xpq6et1xn"
+  },
+  "sustained#1": {
+   "t": "διαρκής",
+   "src": "4lyl8vfltn"
+  },
+  "swallow#1": {
+   "t": "καταπίνω (εξαφανίζω)",
+   "src": "c09eumic1l"
+  },
+  "swap#1": {
+   "t": "ανταλλάσσω",
+   "src": "11i180sa54"
+  },
+  "table-valued#1": {
+   "t": "που επιστρέφει πίνακα",
+   "src": "s0gksoop2d"
+  },
+  "tabular#1": {
+   "t": "πινακοειδής",
+   "src": "1bf9ij21bm"
+  },
+  "teach#1": {
+   "t": "διδάσκω",
+   "src": "q9ftuk4ybj"
+  },
+  "taxi#1": {
+   "t": "ταξί",
+   "src": "opg11nwhpi"
+  },
+  "technical#1": {
+   "t": "τεχνικός",
+   "src": "11t7u3t14z"
+  },
+  "tenant#1": {
+   "t": "μισθωτής (tenant)",
+   "src": "xmio2y1bsn"
+  },
+  "terminology#1": {
+   "t": "ορολογία",
+   "src": "cx2axl1oda"
+  },
+  "term#1": {
+   "t": "όρος",
+   "src": "1p6xvrgqnt"
+  },
+  "theory#1": {
+   "t": "θεωρία",
+   "src": "ipeuie1nxd"
+  },
+  "timer#1": {
+   "t": "χρονόμετρο",
+   "src": "notec112c5"
+  },
+  "timezone#1": {
+   "t": "ζώνη ώρας",
+   "src": "aa5dko1lbm"
+  },
+  "timing#1": {
+   "t": "χρονισμός",
+   "src": "1w7nuse8hs"
+  },
+  "tombstone#1": {
+   "t": "ταφόπλακα (σημάδι διαγραφής)",
+   "src": "j9k3gwfh4q"
+  },
+  "tour#1": {
+   "t": "περιήγηση",
+   "src": "nsckc8gc2h"
+  },
+  "toy#1": {
+   "t": "παιχνίδι",
+   "src": "t7a7w8641j"
+  },
+  "traceback#1": {
+   "t": "ίχνος σφάλματος (traceback)",
+   "src": "35tstq18ra"
+  },
+  "trail#1": {
+   "t": "ίχνος",
+   "src": "gi2ldm47r4"
+  },
+  "transaction-log#1": {
+   "t": "του αρχείου συναλλαγών",
+   "src": "sdyc90ei96"
+  },
+  "transfer#1": {
+   "t": "μεταβιβάζω",
+   "src": "m6q7i21847"
+  },
+  "trio#1": {
+   "t": "τριάδα",
+   "src": "novf3cwf8x"
+  },
+  "troubleshoot#1": {
+   "t": "αντιμετωπίζω προβλήματα",
+   "src": "otc7lv1lfr"
+  },
+  "typo#1": {
+   "t": "τυπογραφικό λάθος",
+   "src": "n322an12pi"
+  },
+  "UC-compatible#1": {
+   "t": "συμβατός με UC",
+   "src": "185a7611hn"
+  },
+  "ultra-low-latency#1": {
+   "t": "εξαιρετικά χαμηλής καθυστέρησης",
+   "src": "1yunqg0oyw"
+  },
+  "uneven#1": {
+   "t": "άνισος",
+   "src": "gorquj3gxm"
+  },
+  "unfiltered#1": {
+   "t": "χωρίς φίλτρο",
+   "src": "i9twm018vy"
+  },
+  "unified#1": {
+   "t": "ενοποιημένος",
+   "src": "1h20tss1vw"
+  },
+  "usable#1": {
+   "t": "χρησιμοποιήσιμος",
+   "src": "3utbe41taz"
+  },
+  "vanilla#1": {
+   "t": "σκέτος (απλός)",
+   "src": "m7zzhdamm1"
+  },
+  "verdict#1": {
+   "t": "ετυμηγορία",
+   "src": "1lj4kj6kcq"
+  },
+  "verify#1": {
+   "t": "επαληθεύω",
+   "src": "ibldya1b05"
+  },
+  "version-controlled#1": {
+   "t": "υπό έλεγχο εκδόσεων",
+   "src": "1px4tldkd5"
+  },
+  "wall-clock#1": {
+   "t": "πραγματικού χρόνου",
+   "src": "14euzf1bkv"
+  },
+  "warm#1": {
+   "t": "ζεστός (έτοιμος)",
+   "src": "1a49t0wvfh"
+  },
+  "whenever#1": {
+   "t": "όποτε",
+   "src": "nqpw7w1clw"
+  },
+  "wide#1": {
+   "t": "πλατύς",
+   "src": "1l20jby1b8"
+  },
+  "wider#1": {
+   "t": "πλατύτερος",
+   "src": "1ugfaw01ae"
+  },
+  "year#1": {
+   "t": "έτος",
+   "src": "pisb7c1idw"
+  },
+  "Z-order#1": {
+   "t": "Z-order (διάταξη αρχείων)",
+   "src": "130epqa1eb"
+  },
+  "accumulate#1": {
+   "t": "συσσωρεύω",
+   "src": "8t6lc11vc6"
+  },
+  "addition#1": {
+   "t": "προσθήκη",
+   "src": "145m513f6g"
+  },
+  "address#1": {
+   "t": "διεύθυνση",
+   "src": "gc556v13n8"
+  },
+  "adjust#1": {
+   "t": "προσαρμόζω",
+   "src": "e2f4m61u18"
+  },
+  "approach#1": {
+   "t": "προσέγγιση",
+   "src": "syhyf1qzjm"
+  },
+  "arg#1": {
+   "t": "όρισμα",
+   "src": "1omsg83c7k"
+  },
+  "bridge#1": {
+   "t": "γέφυρα",
+   "src": "199xksm1nl"
+  },
+  "buffer#1": {
+   "t": "αποθηκεύω προσωρινά",
+   "src": "1dns3oqw6n"
+  },
+  "calculate#1": {
+   "t": "υπολογίζω",
+   "src": "1d3b7cx18k"
+  },
+  "clone#1": {
+   "t": "κλωνοποιώ",
+   "src": "ozko9udb1i"
+  },
+  "collide#1": {
+   "t": "συγκρούομαι",
+   "src": "1lqtvfz1oz"
+  },
+  "consequence#1": {
+   "t": "συνέπεια",
+   "src": "1wi2i91d71"
+  },
+  "damage#1": {
+   "t": "ζημιά",
+   "src": "4w6lrye1m6"
+  },
+  "detect#1": {
+   "t": "ανιχνεύω",
+   "src": "1p3vwyhqnt"
+  },
+  "die#1": {
+   "t": "πεθαίνω (σταματά)",
+   "src": "122d5rr5b7"
+  },
+  "drill#1": {
+   "t": "εμβαθύνω",
+   "src": "qox1ic1u43"
+  },
+  "exception#1": {
+   "t": "εξαίρεση",
+   "src": "ssczvjefxw"
+  },
+  "expression#1": {
+   "t": "έκφραση",
+   "src": "1b1ufdpxnk"
+  },
+  "focus#1": {
+   "t": "εστιάζω",
+   "src": "75ysn11c9k"
+  },
+  "hurt#1": {
+   "t": "βλάπτω",
+   "src": "16pqp45cj4"
+  },
+  "insist#1": {
+   "t": "επιμένω",
+   "src": "1gf6ylb1pe"
+  },
+  "mirror#1": {
+   "t": "καθρέφτης",
+   "src": "feo0vw9vm0"
+  },
+  "occur#1": {
+   "t": "συμβαίνω",
+   "src": "1o6fxfkhdh"
+  },
+  "offer#1": {
+   "t": "προσφέρω",
+   "src": "1a6tbmna2k"
+  },
+  "placeholder#1": {
+   "t": "σύμβολο κράτησης θέσης",
+   "src": "15bysqwzx8"
+  },
+  "prefix#1": {
+   "t": "πρόθεμα",
+   "src": "1xtdg1ihjf"
+  },
+  "push#1": {
+   "t": "στέλνω (push)",
+   "src": "svqdajttxy"
+  },
+  "re-ingest#1": {
+   "t": "ξαναφορτώνω",
+   "src": "471ujxosxm"
+  },
+  "repo#1": {
+   "t": "αποθετήριο",
+   "src": "17igxdi3hg"
+  },
+  "resume#1": {
+   "t": "συνεχίζω",
+   "src": "psrqk3gz90"
+  },
+  "suffer#1": {
+   "t": "υποφέρω",
+   "src": "1smb5avwbh"
+  },
+  "tier#1": {
+   "t": "βαθμίδα",
+   "src": "dcdcn013ma"
+  },
+  "wheel#1": {
+   "t": "πακέτο wheel της Python",
+   "src": "wcghnzc9dw"
+  }
+ },
+ "sections": {
+  "ch01-s01": "Το μάθημα χτίζει πάνω σε όσα ξέρεις ήδη για το Spark: μοιρασμένα δεδομένα (partitions), ανακατανομή (shuffle), στρατηγικές σύζευξης (join) και AQE. Εδώ βλέπεις πώς αυτά ξαναεμφανίζονται μέσα στην πλατφόρμα Databricks και ποιο είναι το αδύνατο σημείο σου: τι μετακινείται πραγματικά σε ένα shuffle.",
+  "ch01-s02": "Η αποθήκευση (π.χ. S3, ADLS, GCS) κρατά τα δεδομένα μόνιμα. Οι υπολογιστικοί πόροι (driver και executors) τα επεξεργάζονται και μπορούν να σβήσουν όταν τελειώσει η δουλειά. Οι δύο έχουν ανεξάρτητη διάρκεια ζωής: αυτή είναι η βάση του lakehouse.",
+  "ch01-s03": "Μερικά αρχεία Parquet δεν είναι ακόμη πίνακας. Τα αρχεία στηλών δεν αλλάζουν επί τόπου: μια ενημέρωση γράφει νέο αρχείο με τις αλλαγμένες γραμμές. Κάτι πρέπει να καταγράφει ποια αρχεία ανήκουν στον πίνακα: αυτό είναι τα μεταδεδομένα συναλλαγών (στο Databricks, το Delta Lake).",
+  "ch01-s04": "Το Parquet αποθηκεύει τα δεδομένα ανά στήλη: ομάδες γραμμών, τμήματα στηλών, σελίδες, με κωδικοποίηση και συμπίεση. Έτσι ένα ερώτημα διαβάζει μόνο τις στήλες που χρειάζεται (αποκοπή στηλών) και, αργότερα, μόνο τα αρχεία που χρειάζεται (παράλειψη αρχείων με στατιστικά).",
+  "ch01-s05": "Αν κάποιος διαβάζει έναν φάκελο ενώ άλλος γράφει, μπορεί να δει μισά παλιά και μισά νέα αρχεία: μια κατάσταση που ο πίνακας δεν είχε ποτέ. Οι συναλλαγές ACID (ατομικότητα, συνέπεια, απομόνωση, μονιμότητα) το αποτρέπουν: κάθε αναγνώστης βλέπει ένα συνεπές στιγμιότυπο.",
+  "ch01-s06": "Το Delta Lake προσθέτει στα αρχεία Parquet ένα αρχείο καταγραφής συναλλαγών (_delta_log). Κάθε έκδοση είναι μια καταχώριση με ενέργειες ADD και REMOVE· αν τις εφαρμόσεις με τη σειρά, παίρνεις το στιγμιότυπο. Ένα αρχείο μπορεί να υπάρχει ακόμη φυσικά χωρίς να ανήκει στον τρέχοντα πίνακα.",
+  "ch01-s07": "Ένα DELETE μοιάζει με διαγραφή γραμμής, αλλά στην πραγματικότητα βρίσκει το αρχείο με τη γραμμή, γράφει αρχείο αντικατάστασης χωρίς αυτήν και καταχωρίζει REMOVE για το παλιό και ADD για το νέο. Το «διαγράφηκε» δεν σημαίνει ότι σβήστηκε φυσικά.",
+  "ch01-s08": "Η λίμνη δεδομένων είναι φθηνή και ευέλικτη αλλά με αδύναμες εγγυήσεις· η αποθήκη δεδομένων έχει δομημένους πίνακες και SQL αλλά είναι πιο άκαμπτη. Το lakehouse τα ενώνει: πίνακες με συναλλαγές πάνω σε φθηνή αποθήκευση αντικειμένων. Το Databricks δεν είναι απλώς Spark με notebooks.",
+  "ch01-s09": "Τα μεταδεδομένα περιγράφουν τα δεδομένα: όνομα, στήλες, μορφή, τοποθεσία, ιδιοκτήτη, δικαιώματα. Το Unity Catalog οργανώνει τα αντικείμενα σε χώρο ονομάτων τριών επιπέδων (κατάλογος.σχήμα.πίνακας) και είναι το κεντρικό επίπεδο διακυβέρνησης. Δεν είναι το ίδιο με το Delta Lake.",
+  "ch01-s10": "Τέσσερα διαφορετικά πράγματα: το Spark είναι η μηχανή επεξεργασίας, το Parquet μια μορφή αρχείων, το Delta Lake η μορφή πινάκων με συναλλαγές και το Unity Catalog η διακυβέρνηση. Αν τερματίσεις τον cluster, ο πίνακας δεν εξαφανίζεται: έχουν διαφορετική διάρκεια ζωής.",
+  "ch01-s11": "Το επίπεδο ελέγχου (control plane) το διαχειρίζεται το Databricks και αποφασίζει τι θα τρέξει· στο επίπεδο υπολογισμού (compute plane) τρέχει πραγματικά η δουλειά. Με serverless, οι πόροι είναι στο Databricks· με τους κλασικούς πόρους, βρίσκονται στο cloud του πελάτη. Αναλογία: γραφείο υποδοχής και κουζίνα ενός εστιατορίου.",
+  "ch01-s12": "Το «το Spark είναι αργό» δεν είναι διάγνωση. Βρες πρώτα το επίπεδο (αποθήκευση, διάταξη πίνακα, Delta, Spark, δεδομένα, πόροι, ερώτημα, στατιστικά, δίκτυο), μάζεψε ενδείξεις, διατύπωσε υπόθεση, έλεγξε μετρικές, διόρθωσε και ξαναμέτρησε. Το να ρίχνεις απλώς περισσότερους πόρους είναι κακή πρακτική.",
+  "ch02-s01": "Ο πρώτος γύρος έχτισε το μοντέλο αποθήκευσης: ποιος υπολογίζει, πώς αποθηκεύονται τα αρχεία, ποιος τα διακυβερνά. Ο δεύτερος χτίζει το μοντέλο της ροής δεδομένων (pipeline): πρώτα το πρόβλημα, μετά το εργαλείο που το λύνει.",
+  "ch02-s02": "ETL σημαίνει εξαγωγή, μετασχηματισμό και φόρτωση: τα δεδομένα καθαρίζονται πριν μπουν στην αποθήκη. Στο ELT φορτώνονται πρώτα ακατέργαστα στο lakehouse και μετασχηματίζονται εκεί, και το Databricks δουλεύει συνήθως έτσι.",
+  "ch02-s03": "Μια εργασία δέσμης (batch) διαβάζει ένα πεπερασμένο σύνολο δεδομένων και σταματά. Μια ροή (streaming) δεν έχει τέλος, και το Spark την επεξεργάζεται σε μικρές δέσμες (micro-batches).",
+  "ch02-s04": "Ροή και σταδιακή (incremental) επεξεργασία δεν είναι το ίδιο: η πρώτη λέει πότε φτάνουν τα δεδομένα, η δεύτερη πόση δουλειά ξαναγίνεται. Μια εργασία δέσμης μπορεί να είναι σταδιακή αν διαβάζει μόνο τα νέα δεδομένα.",
+  "ch02-s05": "Το σημείο ελέγχου (checkpoint) θυμάται ως πού έφτασε η επεξεργασία, π.χ. «ως το offset 900». Μετά από βλάβη η ροή συνεχίζει από εκεί, χωρίς διπλές ή χαμένες εγγραφές.",
+  "ch02-s06": "Αντί να ξαναδιαβάζεις όλο τον πίνακα, η καταγραφή αλλαγών (CDC) στέλνει μόνο τις αλλαγές: INSERT, UPDATE, DELETE με σειρά. Το lakehouse εφαρμόζει μόνο αυτές, με προσοχή στη σωστή σειρά.",
+  "ch02-s07": "Το SCD τύπου 1 κρατά μόνο την τρέχουσα τιμή και γράφει πάνω στην παλιά. Το SCD τύπου 2 κρατά το ιστορικό με διαστήματα ισχύος, και το AUTO CDC κάνει και τα δύο από μια ροή αλλαγών.",
+  "ch02-s08": "Το σχήμα (ονόματα και τύποι στηλών) είναι συμβόλαιο ανάμεσα σε όποιον γράφει και όποιον διαβάζει. Το Delta ελέγχει το σχήμα την ώρα της εγγραφής και απορρίπτει ασύμβατα δεδομένα.",
+  "ch02-s09": "Η εξέλιξη σχήματος επιτρέπει ελεγχόμενες αλλαγές, όπως νέες στήλες, χωρίς να ακυρώνει την επιβολή του. Όταν μια εγγραφή αποτυγχάνει για ασυμφωνία σχήματος, ρωτάς πρώτα αν η αλλαγή ήταν σκόπιμη.",
+  "ch02-s10": "Η αρχιτεκτονική μεταλλίων (medallion) έχει τρία επίπεδα: Bronze με τα ακατέργαστα δεδομένα όπως ήρθαν, Silver καθαρά και ελεγμένα, Gold έτοιμα για την επιχείρηση. Δεν είναι υποχρεωτική, είναι μοτίβο σχεδίασης.",
+  "ch02-s11": "Ολόκληρο το παράδειγμα του ηλεκτρονικού καταστήματος, από την πηγή ως τους πίνακες αναφορών. Τα επίπεδα δεν είναι μορφές αρχείων: όλα μπορεί να είναι πίνακες Delta, και τα κακά δεδομένα πάνε σε καραντίνα.",
+  "ch03-s01": "Η ταυτοποίηση (authentication) ρωτά «ποιος είσαι;», η εξουσιοδότηση (authorization) «τι επιτρέπεται να κάνεις;». Όπως σε ξενοδοχείο: η υποδοχή ελέγχει το διαβατήριο, η κάρτα ανοίγει μόνο το δικό σου δωμάτιο.",
+  "ch03-s02": "Ένας principal είναι ταυτότητα που παίρνει δικαιώματα: χρήστης (άνθρωπος), ομάδα ή service principal (ταυτότητα μηχανής για αυτοματισμούς). Τα δικαιώματα δίνονται καλύτερα σε ομάδες, όχι σε μεμονωμένα άτομα.",
+  "ch03-s03": "Ένα securable είναι ό,τι έχει δικαιώματα: κατάλογος, σχήμα, πίνακας, volume, συνάρτηση. Το GRANT διαβάζεται σαν πρόταση: δώσε ΤΟ δικαίωμα ΣΤΟ αντικείμενο ΣΤΟΝ principal, και τα δικαιώματα κληρονομούνται προς τα κάτω.",
+  "ch03-s04": "Στο PERMISSION_DENIED δεν ζητάς «δώσε μου admin». Ακολουθείς τη διαδρομή βήμα βήμα (workspace, USE CATALOG, USE SCHEMA, SELECT, φίλτρα) και ελέγχεις ποια ταυτότητα τρέχει πραγματικά.",
+  "ch03-s05": "Ελάχιστα δικαιώματα: δίνεις μόνο όσα χρειάζονται. Τα ισχυρά δικαιώματα (ALL PRIVILEGES, MANAGE, ιδιοκτησία) μεγαλώνουν τη ζημιά που κάνει ένα λάθος ή μια παραβιασμένη ταυτότητα.",
+  "ch03-s06": "Δεν αλλάζεις το notebook της παραγωγής για να δοκιμάσεις κάτι. Τρία χωριστά περιβάλλοντα, DEV, TEST/STAGING και PROD, κρατούν τα πειράματα μακριά από τους πραγματικούς χρήστες.",
+  "ch03-s07": "Η πηγή της αλήθειας για τον κώδικα γίνεται το αποθετήριο Git. Κλάδος (branch), commit, pull request με έλεγχο και ο κοινός κλάδος main δίνουν ιστορικό, έλεγχο και επαναφορά.",
+  "ch03-s08": "Η συνεχής ενσωμάτωση (CI) τρέχει αυτόματα ελέγχους και δοκιμές σε κάθε αλλαγή: αν κάτι αποτύχει, δεν γίνεται συγχώνευση. Η συνεχής παράδοση ή ανάπτυξη (CD) στέλνει ελεγμένο κώδικα στο επόμενο περιβάλλον με ελεγχόμενο τρόπο.",
+  "ch03-s09": "Υποδομή ως κώδικας: η εργασία, το πρόγραμμα, οι πόροι και τα δικαιώματα δηλώνονται σε αρχεία μέσα στο Git αντί να στήνονται με το χέρι. Στο Databricks αυτό γίνεται με τα Declarative Automation Bundles (παλιότερα Asset Bundles).",
+  "ch03-s10": "Ολόκληρη η πλατφόρμα με μια ματιά: εκτέλεση (Lakeflow, Spark), διακυβέρνηση (Unity Catalog), ανάπτυξη (Git και περιβάλλοντα), διανομή (bundles, CI/CD) και αποθήκευση (Delta). Και τα νέα ονόματα του 2026.",
+  "ch03-s11": "Τα νέα δεδομένα υπάρχουν στην πηγή αλλά όχι στο Gold. Ελέγχεις κάθε επίπεδο με τη σειρά: πηγή, Bronze, σημείο ελέγχου, Silver, σχήμα, CDC, Gold.",
+  "ch03-s12": "Οι διπλές εγγραφές είναι σύμπτωμα με επτά πολύ διαφορετικές αιτίες: διπλό στην πηγή, αρχείο φορτωμένο δύο φορές, μηδενισμένο σημείο ελέγχου, επανάληψη εργασίας, λάθος κλειδί CDC και άλλες. Ψάχνεις πού εμφανίζεται πρώτη φορά το δεύτερο αντίγραφο.",
+  "ch03-s13": "Ο κώδικας μπορεί να είναι σωστός και να αποτυγχάνει μόνο στην παραγωγή. Συγκρίνεις τα περιβάλλοντα: ΠΟΙΟΣ το τρέχει (ταυτότητα), ΤΙ μπορεί να αγγίξει (δικαιώματα), ΠΩΣ ρυθμίζεται, ΠΟΥ τρέχει (compute, runtime).",
+  "ch03-s14": "Ένας κανόνας για κάθε αποσφαλμάτωση: βρες το πρώτο επίπεδο όπου η πραγματικότητα αποκλίνει από ό,τι περίμενες. Τα συμπτώματα δεν είναι αιτίες, και ακολουθεί ο επόμενος γύρος.",
+  "ch04-s01": "Workspace, serverless, compute, SQL warehouse, Runtime, Photon, notebook και Unity Catalog δεν είναι οκτώ άσχετα προϊόντα. Είναι στρώματα ενός μοντέλου: πού δουλεύεις, τι εκτελεί, ποιο λογισμικό τρέχει, η γρήγορη μηχανή και ποιος αγγίζει τι.",
+  "ch04-s02": "Στην κορυφή είναι ο λογαριασμός Databricks: χρήστες, ομάδες, workspaces, metastores και χρεώσεις. Ένας λογαριασμός έχει πολλά workspaces, και το workspace είναι ο χώρος όπου οι χρήστες δουλεύουν μαζί.",
+  "ch04-s03": "Το επίπεδο ελέγχου (control plane) διαχειρίζεται και συντονίζει: περιβάλλον ιστού, API, μεταδεδομένα, προγραμματισμό εργασιών. Το επίπεδο υπολογισμού (compute plane) κάνει τη δουλειά: επεξεργάζεται τα δεδομένα με Spark και SQL.",
+  "ch04-s04": "Στο κλασικό compute στήνεις εσύ τις μηχανές (driver και workers) στον δικό σου λογαριασμό cloud, με περισσότερο έλεγχο και περισσότερη ευθύνη. Στο serverless τις διαχειρίζεται το Databricks και εσύ στέλνεις μόνο τη δουλειά.",
+  "ch04-s05": "Το all-purpose compute είναι για διαδραστική δουλειά σε notebooks, το jobs compute για αυτόματες εργασίες, το SQL warehouse για ερωτήματα SQL και πίνακες αναφορών. Για αυτόματες εργασίες το Databricks προτείνει συνήθως serverless.",
+  "ch04-s06": "Το Databricks Runtime (DBR) είναι το ελεγμένο σύνολο λογισμικού πάνω στη μηχανή: Spark, Python, Delta και βιβλιοθήκες. Οι εκδόσεις LTS υποστηρίζονται περισσότερο, και η έκδοση ML προσθέτει βιβλιοθήκες μηχανικής μάθησης.",
+  "ch04-s07": "Το Photon είναι η διανυσματική (vectorized) μηχανή ερωτημάτων του Databricks που επιταχύνει SQL και DataFrame. Δεν είναι γλώσσα ούτε βάση δεδομένων: ό,τι δεν υποστηρίζει γυρίζει στο κανονικό Spark.",
+  "ch04-s08": "Ένα notebook είναι έγγραφο με κελιά σε Python, SQL, Scala, R ή Markdown. Μόνο του δεν εκτελεί τίποτα: χρειάζεται συνδεδεμένο compute, και το display() δείχνει πίνακα ενώ το show() τυπώνει κείμενο.",
+  "ch04-s09": "Οι μετασχηματισμοί δεν εκτελούνται αμέσως (lazy evaluation): το Spark φτιάχνει πλάνο και τρέχει μόνο όταν ζητήσεις αποτέλεσμα. Στο φυσικό πλάνο το Exchange δείχνει ανακατανομή (shuffle).",
+  "ch04-s10": "Οι εντολές magic (%sql, %python, %md, %pip) αλλάζουν τη γλώσσα ενός κελιού. Τα spark.table() και spark.sql() φέρνουν πίνακες και ερωτήματα σε DataFrame, και το _sqldf κρατά το αποτέλεσμα του τελευταίου κελιού SQL.",
+  "ch04-s11": "Τα widgets είναι πεδία εισόδου του notebook: δημιουργείς, διαβάζεις με dbutils.widgets.get και χρησιμοποιείς την τιμή. Στην SQL οι παράμετροι :param μπαίνουν ως τιμές και το IDENTIFIER() ως όνομα πίνακα.",
+  "ch04-s12": "Ο Catalog Explorer δείχνει τα αντικείμενα του Unity Catalog αν έχεις δικαιώματα. Τα SHOW και DESCRIBE (TABLE, DETAIL, HISTORY) γίνονται τα πρώτα εργαλεία αποσφαλμάτωσης, και φτιάχνεις τον πρώτο σου πίνακα Delta.",
+  "ch04-s13": "Ένα πλήρες όνομα έχει τρία επίπεδα: κατάλογος.σχήμα.πίνακας. Ένα όνομα χωρίς κατάλογο και σχήμα λύνεται με βάση το τρέχον πλαίσιο, και μπορεί να διαβάσεις λάθος πίνακα χωρίς κανένα σφάλμα.",
+  "ch04-s14": "Όταν ένα κελί κολλάει, πρώτα βρίσκεις σε ποιο στρώμα είναι το πρόβλημα: compute, συνεδρία, κώδικας, πίνακας, δικαίωμα, πλάνο, εκτέλεση. Τέσσερις περιπτώσεις (A–D) δείχνουν την πρώτη κίνηση για κάθε στρώμα.",
+  "ch04-s15": "Ένα αργό ερώτημα δεν σημαίνει αυτόματα μικρό cluster. Κοιτάς το φυσικό πλάνο και το Spark UI: εργασίες, shuffle, ασυμμετρία (skew), διαρροή στον δίσκο (spill) και στρατηγική join.",
+  "ch04-s16": "Ένα μικρό έργο που τα ενώνει όλα, και «κουτιά» για να ξεχωρίζεις: API του Spark, ευκολία του notebook, χώρος ονομάτων του Unity Catalog, serverless, SQL warehouse, Photon, DBR. Ανακεφαλαίωση του κεφαλαίου.",
+  "ch05-s01": "Ανοίγουμε το κουτί «πίνακες Delta»: αρχεία Parquet και ο φάκελος _delta_log με τις καταχωρίσεις. Ο στόχος είναι να προβλέπεις τι παθαίνουν τα αρχεία και το log σε κάθε εντολή, όχι μόνο να λες «Delta = Parquet + log».",
+  "ch05-s02": "Ένα στιγμιότυπο (snapshot) είναι ο πίνακας σε μία έκδοση, και προκύπτει αν εφαρμόσεις τις ενέργειες ADD/REMOVE του log από την αρχή ή από ένα checkpoint. Με το MVCC κάθε αναγνώστης βλέπει ένα συνεπές στιγμιότυπο.",
+  "ch05-s03": "Τα αρχεία Parquet δεν αλλάζουν επί τόπου. Ένα UPDATE ή DELETE ξαναγράφει τα επηρεαζόμενα αρχεία (copy-on-write): REMOVE για τα παλιά, ADD για τα νέα, σε μία νέα έκδοση.",
+  "ch05-s04": "Για να σβήσεις μία γραμμή από αρχείο 1 GB δεν χρειάζεται να το ξαναγράψεις όλο. Τα διανύσματα διαγραφής (deletion vectors) σημειώνουν ποιες γραμμές έχουν σβηστεί λογικά, και το αρχείο ξαναγράφεται αργότερα.",
+  "ch05-s05": "Το DESCRIBE HISTORY δείχνει τις εκδόσεις του πίνακα από τη νεότερη: ποια εντολή, πότε, από ποιον, με ποιες μετρήσεις. Με το time travel διαβάζεις μια παλιά έκδοση με VERSION AS OF ή TIMESTAMP AS OF.",
+  "ch05-s06": "Το RESTORE κάνει ξανά τρέχουσα μια παλιά κατάσταση με νέα έκδοση, χωρίς να σβήνει το ιστορικό. Το time travel όμως δεν είναι αντίγραφο ασφαλείας: μετά το VACUUM τα παλιά αρχεία χάνονται.",
+  "ch05-s07": "Το VACUUM σβήνει φυσικά τα παλιά αρχεία που καμία έκδοση μέσα στο διάστημα διατήρησης δεν χρειάζεται. Δεν συμπυκνώνει αρχεία και δεν επιταχύνει ερωτήματα: αυτό το κάνει το OPTIMIZE.",
+  "ch05-s08": "Το MERGE συνδυάζει ενημέρωση και εισαγωγή (upsert): οι γραμμές της πηγής που ταιριάζουν με τον στόχο ενημερώνονται και οι νέες εισάγονται. Το κλειδί είναι η συνθήκη ON.",
+  "ch05-s09": "Στην πράξη: αν δύο γραμμές της πηγής ταιριάζουν με την ίδια γραμμή του στόχου, το MERGE αποτυγχάνει. Αφαιρείς πρώτα τα διπλά από την πηγή και γράφεις το ίδιο και σε Python.",
+  "ch05-s10": "Το Delta δεν κλειδώνει όλο τον πίνακα. Με αισιόδοξο έλεγχο ταυτοχρονίας κάθε εργασία διαβάζει, ετοιμάζει αρχεία και κατά το commit ελέγχει αν άλλη εργασία έγραψε κάτι που συγκρούεται.",
+  "ch05-s11": "Δύο επίπεδα απομόνωσης για εγγραφές: WriteSerializable (προεπιλογή, περισσότερη ταυτοχρονία) και Serializable (το αυστηρότερο). Με τον ταυτοχρονισμό σε επίπεδο γραμμής, εγγραφές σε διαφορετικές γραμμές του ίδιου αρχείου δεν συγκρούονται πάντα.",
+  "ch05-s12": "Τα σφάλματα ταυτοχρονίας (ConcurrentAppend, ConcurrentDeleteRead κ.ά.) λένε ποια άλλη ενέργεια άλλαξε τα δεδομένα που διάβασες. Τα διορθώνεις στενεύοντας τη συνθήκη, χωρίζοντας τις εργασίες ή ξαναδοκιμάζοντας.",
+  "ch06-s01": "Από τη θεωρία του Delta στη σωστή χρήση στην παραγωγή. Στο Databricks οι πίνακες είναι Delta από προεπιλογή, και προτείνονται διαχειριζόμενοι (managed) πίνακες του Unity Catalog. Εδώ τους φτιάχνεις με SQL.",
+  "ch06-s02": "Από PySpark γράφεις με το νέο API writeTo() ή με το κλασικό saveAsTable(). Το writeTo() έχει πιο καθαρή σημασία για create, replace και append, αλλά το saveAsTable() υπάρχει στον περισσότερο κώδικα.",
+  "ch06-s03": "Το INSERT INTO προσθέτει γραμμές και δεν αντικαθιστά ποτέ. Το INSERT OVERWRITE αντικαθιστά το εύρος του στόχου, ίσως ολόκληρο τον πίνακα, και το TRUNCATE αδειάζει τον πίνακα αλλά κρατά το σχήμα.",
+  "ch06-s04": "Το append προσθέτει, το overwrite μπορεί να αντικαταστήσει όλο τον πίνακα: τρία χρόνια δεδομένων χάνονται αν γράψεις μόνο τα χθεσινά. Μια αυτοδύναμη (idempotent) εργασία δίνει το ίδιο αποτέλεσμα όσες φορές κι αν τρέξει.",
+  "ch06-s05": "Για να αντικαταστήσεις μόνο ένα μέρος, το Databricks προτείνει REPLACE WHERE (με ρητή συνθήκη) ή REPLACE USING (με στήλες-κλειδιά). Είναι ασφαλέστερα από το παλιό δυναμικό overwrite διαμερισμάτων.",
+  "ch06-s06": "Το Delta ελέγχει το σχήμα σε κάθε εγγραφή: οι στήλες πρέπει να υπάρχουν και οι τύποι να ταιριάζουν ή να μετατρέπονται με ασφάλεια. Έτσι ένας κακός παραγωγός δεν αλλοιώνει σιωπηλά τα δεδομένα ως τον πίνακα του CEO.",
+  "ch06-s07": "Όταν η πηγή φέρνει νέα στήλη, ρωτάς πρώτα αν είναι σκόπιμη. Μετά επιτρέπεις εξέλιξη μόνο σε αυτή την εγγραφή (mergeSchema), όχι γενικά (autoMerge), ενώ το overwriteSchema και το ALTER κάνουν πιο ριζικές αλλαγές.",
+  "ch06-s08": "Η διεύρυνση τύπου (type widening) αλλάζει μια στήλη σε συμβατό ευρύτερο τύπο, π.χ. INT σε BIGINT, χωρίς να ξαναγράψει τα αρχεία. Οι αλλαγές σχήματος την ώρα που γράφουν άλλοι μπορεί να προκαλέσουν σφάλματα ταυτοχρονίας.",
+  "ch06-s09": "Το DESCRIBE DETAIL δίνει μία γραμμή για ολόκληρο τον πίνακα: μορφή, θέση, μέγεθος (sizeInBytes), πλήθος αρχείων (numFiles), στήλες διάταξης και ιδιότητες. Μαζί με DESCRIBE TABLE και HISTORY απαντά στα περισσότερα ερωτήματα αποσφαλμάτωσης.",
+  "ch06-s10": "Χιλιάδες μικρά αρχεία κάνουν τις αναγνώσεις αργές, γιατί κάθε αρχείο έχει κόστος ανοίγματος και δική του εργασία. Το OPTIMIZE τα συμπυκνώνει σε λίγα μεγάλα, και κοιτάς την κατανομή μεγεθών, όχι μόνο το σύνολο.",
+  "ch06-s11": "Το Delta κρατά για κάθε αρχείο ελάχιστη και μέγιστη τιμή ανά στήλη. Με αυτά τα στατιστικά παραλείπει αρχεία που δεν μπορεί να έχουν τις γραμμές που ψάχνεις, αλλά μόνο αν οι τιμές είναι ομαδοποιημένες.",
+  "ch06-s12": "Το liquid clustering αντικαθιστά σε πολλές περιπτώσεις τα διαμερίσματα και το ZORDER: τα κλειδιά ομαδοποίησης αλλάζουν όταν αλλάζουν τα ερωτήματα, και η διάταξη εφαρμόζεται σταδιακά. Προτείνεται για νέους πίνακες Delta.",
+  "ch06-s13": "Με τη βελτιστοποίηση πρόβλεψης (predictive optimization) το Databricks τρέχει μόνο του OPTIMIZE, VACUUM και ANALYZE στους διαχειριζόμενους πίνακες όταν χρειάζεται. Ο αυτοματισμός όμως δεν αντικαθιστά την κατανόηση.",
+  "ch06-s14": "Ένα έργο παραγωγής με Bronze, Silver και staging, και MERGE που δίνει το ίδιο αποτέλεσμα σε κάθε επανάληψη. Πέντε ροές αποσφαλμάτωσης με την πρώτη εντολή για καθεμιά, και οι βέλτιστες πρακτικές.",
+  "ch07-s01": "Ο κώδικας μόνος του δεν υπολογίζει τίποτα: χρειάζεται CPU, μνήμη, δίκτυο, driver και executors, δηλαδή compute. Τα πολλά «είδη» compute δεν είναι πολλά προϊόντα αλλά συνδυασμοί λίγων αξόνων.",
+  "ch07-s02": "Ο πρώτος άξονας είναι ο σκοπός: διαδραστική δουλειά, εργασία, ροή δεδομένων ή SQL. Ο δεύτερος είναι η υποδομή: ποιος διαχειρίζεται τις μηχανές, εσύ (classic) ή το Databricks (serverless).",
+  "ch07-s03": "Ο πίνακας σκοπός × υποδομή δείχνει κάθε συνδυασμό. Το all-purpose δεν σημαίνει «όχι serverless»: σημαίνει επαναχρησιμοποιήσιμο κλασικό compute για notebooks, ενώ το διαδραστικό serverless λέγεται serverless compute για notebooks.",
+  "ch07-s04": "Όλο το γενεαλογικό δέντρο: notebooks, εργασίες και ροές Lakeflow, καθένα σε serverless και σε classic εκδοχή, και τα SQL warehouses ως ξεχωριστός κλάδος.",
+  "ch07-s05": "Ένα all-purpose cluster ζει ανεξάρτητα από κάθε εργασία και το μοιράζονται πολλά notebooks. Το jobs compute δημιουργείται για μία εκτέλεση εργασίας και σβήνει όταν αυτή τελειώσει: δύο διαφορετικοί κύκλοι ζωής.",
+  "ch07-s06": "Ο τρόπος πρόσβασης (access mode) είναι Standard ή Dedicated. Στο Standard πολλοί χρήστες μοιράζονται το compute με απομόνωση, και προτείνεται για τα περισσότερα, ενώ το Dedicated ανήκει σε έναν χρήστη ή μία ομάδα.",
+  "ch07-s07": "Μία ή πολλές μηχανές (single-node ή multi-node), σταθερό μέγεθος ή αυτόματη κλιμάκωση μέσα στα όρια που ορίζεις, και υλικό: CPU, GPU, τύποι μηχανών με περισσότερη μνήμη ή περισσότερη υπολογιστική ισχύ.",
+  "ch07-s08": "Το runtime (DBR) και το Photon είναι επιλογές λογισμικού, ανεξάρτητες από το υλικό. Στο classic διαλέγεις εσύ την έκδοση DBR, ενώ στο serverless το Databricks διαχειρίζεται και αναβαθμίζει το runtime.",
+  "ch07-s09": "Ο μεγάλος πίνακας του classic: σκοπός, πρόσβαση, κόμβοι, κλιμάκωση, υλικό, τύπος worker και driver, runtime, Photon, on-demand ή spot. Το serverless αφαιρεί τις περισσότερες από αυτές τις επιλογές.",
+  "ch07-s10": "Στις serverless εργασίες και ροές διαλέγεις τρόπο απόδοσης: Performance Optimized (γρήγορη εκκίνηση, για ευαίσθητες στην καθυστέρηση δουλειές) ή Standard (πιο αργή εκκίνηση, χαμηλότερο κόστος).",
+  "ch07-s11": "Τα SQL warehouses είναι ξεχωριστός κλάδος για SQL: Serverless, Pro και Classic. Όλα έχουν Photon, το Pro προσθέτει Predictive IO και το Serverless και έξυπνη διαχείριση φόρτου.",
+  "ch07-s12": "Ένα διάγραμμα απόφασης για κάθε δουλειά: τι θέλω να κάνω, ποια είναι η καλύτερη προεπιλογή (συνήθως serverless) και πότε χρειάζεται classic. Ακολουθεί τον πίνακα υποστήριξης του Databricks.",
+  "ch08-s01": "DBR, Photon, τύπος driver και worker, pool, αυτόματη κλιμάκωση, all-purpose και serverless δεν είναι εναλλακτικές στο ίδιο επίπεδο. Κάθε ρύθμιση ανήκει σε ένα στρώμα, και το runtime είναι το περιβάλλον λογισμικού που εκτελεί τον κώδικα.",
+  "ch08-s02": "Το Databricks Runtime είναι το σύνολο λογισμικού πάνω στη μηχανή, και κάθε έκδοση περιέχει Apache Spark. Ο τύπος κόμβου λέει τι μηχανή θέλεις, το DBR τι λογισμικό τρέχει πάνω της, και οι εκδόσεις LTS υποστηρίζονται περισσότερο.",
+  "ch08-s03": "Το DBR ML είναι το κανονικό DBR με έτοιμες βιβλιοθήκες μηχανικής και βαθιάς μάθησης (PyTorch, XGBoost, MLflow, GPU). Δεν είναι «καλύτερο»: για συνηθισμένο ETL το κανονικό DBR ταιριάζει περισσότερο.",
+  "ch08-s04": "Το Photon είναι διανυσματική μηχανή εκτέλεσης, όχι έκδοση runtime, μηχανή, βάση ή μορφή αρχείων. Ο Catalyst εξακολουθεί να φτιάχνει το πλάνο, και το Photon εκτελεί τα μέρη που υποστηρίζει.",
+  "ch08-s05": "Σε serverless, SQL warehouses και serverless ροές το Photon είναι πάντα ενεργό, ενώ στο classic ρυθμίζεται. Το Photon επιταχύνει τη CPU και δεν έχει σχέση με τις GPU, που χρησιμεύουν στη βαθιά μάθηση.",
+  "ch08-s06": "Ο driver είναι ο συντονιστής: κρατά την κατάσταση των notebooks και το SparkContext, φτιάχνει το πλάνο, μοιράζει εργασίες στους workers και μαζεύει τα αποτελέσματα. Ένας μεγάλος driver χρειάζεται όταν φέρνεις πολλά δεδομένα πίσω σε αυτόν.",
+  "ch08-s07": "Οι workers κάνουν τη μοιρασμένη δουλειά, και ο καθένας τρέχει έναν executor. Τέσσερις workers των 32 GB δεν είναι μία μηχανή 128 GB: διαλέγεις μεγαλύτερες μηχανές (κάθετα) ή περισσότερες (οριζόντια) ανάλογα με τη δουλειά.",
+  "ch08-s08": "Στο classic η αυτόματη κλιμάκωση αλλάζει το πλήθος των workers μέσα στα όρια που δίνεις, όχι τον τύπο τους. Στο serverless υπάρχει κι εκεί, αλλά τη διαχειρίζεται το Databricks και όχι εσύ.",
+  "ch08-s09": "Το all-purpose προτείνεται για διαδραστική δουλειά, αλλά μπορεί να τρέξει και εργασίες. Το Databricks το επιτρέπει χωρίς να το προτείνει για την παραγωγή, γιατί μοιράζεται πόρους και κύκλο ζωής με τους ανθρώπους που δουλεύουν πάνω του.",
+  "ch08-s10": "Ένα instance pool είναι απόθεμα από έτοιμες μηχανές cloud, ώστε το classic compute να ξεκινά πιο γρήγορα. Δεν έχει σχέση με pools νημάτων, συνδέσεων ή executors.",
+  "ch08-s11": "Ο τερματισμός σβήνει τις μηχανές αλλά κρατά τις ρυθμίσεις, ενώ η διαγραφή σβήνει και τις ρυθμίσεις. Με τον τερματισμό χάνονται η μνήμη, τα cached δεδομένα και η κατάσταση της Python, και ο αυτόματος τερματισμός γίνεται μετά από αδράνεια.",
+  "ch08-s12": "Για ένα ερώτημα σε SQL warehouse χρειάζονται δύο πύλες: δικαίωμα στο ίδιο το warehouse (π.χ. CAN USE) και δικαίωμα στα δεδομένα στο Unity Catalog. Το ένα δεν αντικαθιστά το άλλο.",
+  "ch08-s13": "Η πρόσβαση σε μια ροή έχει τρία στρώματα: το ACL της ροής (π.χ. CAN RUN), την ταυτότητα run-as με την οποία τρέχει και τα δικαιώματα αυτής της ταυτότητας στα δεδομένα. Αυτός που πατά Start δεν είναι πάντα αυτός που διαβάζει.",
+  "ch08-s14": "Όλα μαζί: πίνακες που συγκρίνουν classic και serverless σε κάθε άξονα, τι συμβαίνει κατά την εκκίνηση και ολόκληρη η στοίβα, από το υλικό ως τα δικαιώματα.",
+  "ch09-s01": "Ο στόχος της φάσης: να κοιτάς μια ρύθμιση compute και να λες πόσες μηχανές έχεις, τι τρέχει στην καθεμιά, πόσες εργασίες Spark τρέχουν μαζί, πού μπορεί να γεμίσει η μνήμη (OOM) και τι αλλάζει η κλιμάκωση. Χτίζεται από κάτω προς τα πάνω: μηχανή, driver, executor, πυρήνας, εργασία.",
+  "ch09-s02": "Όλες οι δουλειές του driver: SparkSession, σχεδιασμός ερωτήματος, γράφος εκτέλεσης (DAG), προγραμματισμός σταδίων και εργασιών, μετρήσεις. Και ο κανόνας: ένας executor ανά worker.",
+  "ch09-s03": "Κάθε πυρήνας τρέχει περίπου μία εργασία τη φορά, και κάθε διαμέρισμα ενός σταδίου γίνεται μία εργασία. Αν οι εργασίες είναι περισσότερες από τις θέσεις, τρέχουν σε «κύματα» (waves).",
+  "ch09-s04": "Δύο clusters με τους ίδιους πυρήνες και την ίδια μνήμη συνολικά συμπεριφέρονται διαφορετικά: λίγες μεγάλες μηχανές ή πολλές μικρές. Η μνήμη ανά πυρήνα είναι χρήσιμος πρακτικός κανόνας.",
+  "ch09-s05": "Η μνήμη του worker δεν είναι όλη για γραμμές δεδομένων. Τη μοιράζονται η μνήμη εκτέλεσης (sort, shuffle, joins), η μνήμη αποθήκευσης (cache) και άλλα, και όταν δεν φτάνει τα δεδομένα «χύνονται» στον δίσκο (spill).",
+  "ch09-s06": "Στο shuffle οι εργασίες της πρώτης πλευράς γράφουν αρχεία στον τοπικό δίσκο κάθε worker και οι επόμενες τα τραβούν από το δίκτυο. Ένα βαρύ shuffle πιέζει CPU, μνήμη, δίκτυο και δίσκο μαζί.",
+  "ch09-s07": "Ο driver γεμίζει μνήμη (OOM) όταν φέρνεις σε αυτόν πολλά δεδομένα, π.χ. με collect() ή toPandas(). Ένας executor γεμίζει από ασύμμετρο διαμέρισμα, μεγάλο join ή μεγάλη κατάσταση ροής: διαφορετικές αιτίες, διαφορετική διόρθωση.",
+  "ch09-s08": "Με 8 πυρήνες ανά worker και 2 έως 8 workers έχεις 16 έως 64 θέσεις εργασιών. Η αυτόματη κλιμάκωση όμως δεν φτιάχνει διαμερίσματα: αν το στάδιο έχει λίγα, οι νέες μηχανές μένουν αδρανείς.",
+  "ch09-s09": "Στο single-node δεν υπάρχουν workers και ο driver κάνει και τη δουλειά τους, ενώ ένα multi-node με μηδέν workers είναι παγίδα. Ο τρόπος πρόσβασης αφορά τι επιτρέπεται, όχι την ταχύτητα.",
+  "ch09-s10": "Χωρίς pool κάθε εκκίνηση περιμένει το cloud να δώσει μηχανές. Με pool παίρνει έτοιμες, και οι spot μηχανές είναι φθηνότερες αλλά ο πάροχος μπορεί να τις πάρει πίσω.",
+  "ch09-s11": "Τι μένει και τι χάνεται μετά τον τερματισμό, ο κύκλος ζωής των εργασιών, τα επίπεδα δικαιωμάτων στο compute και τα αντικείμενα δικαιωμάτων του serverless. Ο αυτόματος τερματισμός υπάρχει γιατί ένα αδρανές cluster κοστίζει.",
+  "ch09-s12": "Το Photon κάθεται κάτω από το φυσικό πλάνο και εκτελεί διανυσματικά ό,τι υποστηρίζει. Οι συναρτήσεις χρήστη (UDF) σε Python μειώνουν το όφελος, γιατί εκείνο το κομμάτι γυρίζει σε κανονικό Spark.",
+  "ch09-s13": "Το classic δίνει πολλές ρυθμίσεις και το serverless λίγες, γιατί τις διαχειρίζεται το Databricks. Ένας αλγόριθμος επιλογής λέει πότε το serverless αρκεί και πότε χρειάζεσαι κάτι που μόνο το classic δίνει.",
+  "ch09-s14": "Μια πραγματική περίπτωση: 2 TB εισόδου με filter, join και groupBy. Με το Spark UI βρίσκεις αν το πρόβλημα είναι CPU, μνήμη, I/O, shuffle ή ασυμμετρία, και περισσότερες μηχανές δεν βοηθούν πάντα.",
+  "ch09-s15": "Στην πράξη: διαβάζεις τις ρυθμίσεις του Spark, βλέπεις το πλήθος των διαμερισμάτων, δοκιμάζεις repartition() και coalesce() και κοιτάς τα πλάνα. Στο serverless δεν υπάρχουν RDD, οπότε σκέφτεσαι από το πλάνο.",
+  "ch09-s16": "Το μεγάλο τεστ της φάσης 1 και μια λίστα προτάσεων που πρέπει να μπορείς να εξηγήσεις χωρίς σημειώσεις: driver, executors, πυρήνες, εργασίες, διαμερίσματα, μνήμη και κλιμάκωση.",
+  "ch10-s01": "Ο μαθητής ζήτησε να συνεχίσει σε βάθος, με θεωρία και με πρακτική σύνταξη. Η απάντηση: όχι πια μία έννοια τη φορά, αλλά ολόκληρη η πλατφόρμα σαν προετοιμασία για δουλειά, πραγματικά έργα και πιστοποίηση, ξεκινώντας από όσα έχουν ήδη καλυφθεί.",
+  "ch10-s02": "Η σειρά μάθησης ακολουθεί τις εξαρτήσεις, όχι το μενού του workspace: κάθε στρώμα χρειάζεται το προηγούμενο. Δέκα φάσεις με τον στόχο της καθεμιάς σε μία γραμμή.",
+  "ch10-s03": "Κάθε μάθημα ακολουθεί τις ίδιες 17 ερωτήσεις: ποιο πρόβλημα λύνουμε, πώς θα το λύναμε χωρίς Databricks, ποιο εργαλείο το λύνει, πώς δουλεύει, πού χρησιμοποιείται, πώς το αποσφαλματώνεις και τι ρωτούν οι εξετάσεις.",
+  "ch10-s04": "Τέσσερις διεπαφές μαθαίνονται παράλληλα: SQL, PySpark, ρυθμίσεις της πλατφόρμας (YAML, UI, CLI) και αποσφαλμάτωση. Ένα έργο μεγαλώνει από φάση σε φάση.",
+  "ch10-s05": "Προεπισκόπηση της φάσης 1: τόσο βαθιά κατανόηση του compute ώστε να το ρυθμίζεις, να το εξηγείς και να το διορθώνεις. Serverless, classic και SQL warehouses, driver, workers και κάθε πεδίο της φόρμας.",
+  "ch10-s06": "Προεπισκόπηση της φάσης 2: σωστή χρήση του Delta στην παραγωγή. Η σύνταξη SQL και PySpark για δημιουργία, εισαγωγή, ενημέρωση, MERGE, ιστορικό και συντήρηση.",
+  "ch10-s07": "Προεπισκόπηση της φάσης 3: αποθήκευση, χώρος ονομάτων, διακυβέρνηση, ταυτότητες και δικαιώματα ως ένα σύστημα. Metastore, κατάλογος, σχήμα, πίνακας, volume, και από κάτω η αποθήκευση.",
+  "ch10-s08": "Προεπισκόπηση της φάσης 4: φόρτωση αρχείων και εξωτερικών πηγών σωστά, σταδιακά και αναπαραγώγιμα. Ρητό σχήμα ή εξαγωγή σχήματος, COPY INTO και, στο τέλος, Auto Loader σε βάθος.",
+  "ch10-s09": "Προεπισκόπηση της φάσης 5: ροές από το μοντέλο εκτέλεσης ως την αξιοπιστία στην παραγωγή. Η βασική σύνταξη readStream … writeStream, το σημείο ελέγχου, οι triggers και η κατάσταση.",
+  "ch10-s10": "Προεπισκόπηση της φάσης 6: δηλωτικές ροές με τα τρέχοντα ονόματα, Lakeflow Spark Declarative Pipelines. Μαθαίνεις τη νέα μορφή και αναγνωρίζεις την παλιά (DLT) στα παλιά εγχειρίδια.",
+  "ch10-s11": "Προεπισκόπηση της φάσης 7: αξιόπιστη ενορχήστρωση στην παραγωγή μέσω UI και δηλωτικών ρυθμίσεων. Εργασία, βήματα, εκτελέσεις, εξαρτήσεις, προγράμματα, επαναλήψεις και ειδοποιήσεις.",
+  "ch10-s12": "Προεπισκόπηση της φάσης 8: αναλύσεις SQL και BI χωρίς να βλέπεις το SQL warehouse σαν μαύρο κουτί. Επεξεργαστής SQL, αποθηκευμένα ερωτήματα, ιστορικό, profile ερωτήματος, πίνακες αναφορών και ειδοποιήσεις.",
+  "ch10-s13": "Προεπισκόπηση της φάσης 9: απόδοση και αποσφαλμάτωση με πραγματικές περιπτώσεις. Διάγνωση με στοιχεία από το Spark UI αντί για «βάλε μεγαλύτερο cluster».",
+  "ch10-s14": "Προεπισκόπηση της φάσης 10: το Databricks ως πλατφόρμα λογισμικού στην παραγωγή, πέρα από τα notebooks. Databricks CLI, φάκελοι Git, αρχεία workspace, bundles και CI/CD.",
+  "ch10-s15": "Δύο είδη ερωτήσεων: της πιστοποίησης (διάλεξε το σωστό εργαλείο για ένα σενάριο) και της μηχανικής (διάβασε συμπτώματα και αριθμούς, κάνε υπόθεση, απόδειξέ τη, πρότεινε διόρθωση).",
+  "ch11-s01": "Κάθε ερώτηση διακυβέρνησης σπάει σε τέσσερις, από πάνω προς τα κάτω: ΠΟΙΟΣ, ΠΟΙΟ ΑΝΤΙΚΕΙΜΕΝΟ, ΠΟΙΑ ΕΝΕΡΓΕΙΑ, ΠΟΥ ΕΙΝΑΙ ΤΑ BYTES. Όταν αυτό το διάγραμμα είναι καθαρό, σχεδόν όλο το Unity Catalog βγάζει νόημα.",
+  "ch11-s02": "Από πάνω: ένα metastore κρατά καταλόγους, οι κατάλογοι σχήματα και τα σχήματα αντικείμενα (πίνακες, volumes, συναρτήσεις). Ο κατάλογος είναι η κύρια μονάδα απομόνωσης δεδομένων και το σχήμα ένα πιο λεπτό επίπεδο οργάνωσης.",
+  "ch11-s03": "Ο κατάλογος είναι ένα μεγάλο λογικό όριο ασφάλειας, και δεν υπάρχει μία σωστή δομή: ανά περιβάλλον, ανά τμήμα ή μικτά. Το Databricks προτείνει οι κατάλογοι να είναι πραγματικά όρια απομόνωσης, και εδώ τους δημιουργείς.",
+  "ch11-s04": "Η πλήρης λίστα των securables, η παροχή χρηστών σε επίπεδο λογαριασμού και γιατί η ιδιοκτησία και οι εγγραφές στην παραγωγή ανήκουν σε ομάδες και service principals, όχι σε ανθρώπους.",
+  "ch11-s05": "Τα USE CATALOG και USE SCHEMA δεν δίνουν ανάγνωση: επιτρέπουν μόνο να «περάσεις» από τον κατάλογο και το σχήμα. Για να διαβάσεις έναν πίνακα χρειάζεσαι τρία κλειδιά: USE CATALOG, USE SCHEMA και SELECT.",
+  "ch11-s06": "Ένα δικαίωμα σε γονικό αντικείμενο περνά στα παιδιά του, και έτσι αποφεύγεις χιλιάδες δικαιώματα ανά πίνακα. Το SELECT διαβάζει, το MODIFY γράφει, το SHOW GRANTS δείχνει και το REVOKE αφαιρεί.",
+  "ch11-s07": "Ο ιδιοκτήτης ενός αντικειμένου μπορεί πολύ περισσότερα από το SELECT, γι' αυτό η ιδιοκτησία πάει σε ομάδα και όχι σε άτομο. Το MANAGE δίνει διαχείριση δικαιωμάτων, το ALL PRIVILEGES σχεδόν όλα, και το BROWSE μόνο τα μεταδεδομένα.",
+  "ch11-s08": "«Διαχειριζόμενος» δεν σημαίνει ότι τα δεδομένα είναι στους διακομιστές του Databricks: και οι δύο τύποι μπορεί να είναι στη δική σου αποθήκευση. Η διαφορά είναι ποιος ελέγχει τη θέση και τον κύκλο ζωής των αρχείων, π.χ. τι γίνεται μετά το DROP.",
+  "ch11-s09": "Ένας διαχειριζόμενος πίνακας πάει στη πιο συγκεκριμένη θέση αποθήκευσης που υπάρχει: σχήματος, καταλόγου ή metastore. Το storage credential λέει ΠΩΣ γίνεται η ταυτοποίηση στο cloud, το external location ΠΟΙΑ διαδρομή επιτρέπεται.",
+  "ch11-s10": "Τα volumes είναι αντικείμενα του Unity Catalog για αρχεία που δεν είναι πίνακες: PDF, εικόνες, JSON, checkpoints, ακατέργαστα αρχεία. Είναι διαχειριζόμενα ή εξωτερικά και έχουν διαδρομή /Volumes/κατάλογος/σχήμα/volume.",
+  "ch11-s11": "Η σύνδεση με workspace (workspace binding) επιτρέπει έναν κατάλογο μόνο από ορισμένα workspaces, ακόμη κι αν έχεις τα δικαιώματα. Επιπλέον το compute πρέπει να είναι συμβατό με το Unity Catalog.",
+  "ch11-s12": "Ένα φίλτρο γραμμών είναι συνάρτηση SQL που κρύβει γραμμές την ώρα του ερωτήματος (π.χ. η ελληνική ομάδα βλέπει μόνο GR). Μια μάσκα στήλης κρύβει τιμές, και το ABAC τα εφαρμόζει με πολιτικές βάσει ετικετών.",
+  "ch11-s13": "Το Unity Catalog καταγράφει αυτόματα τη γενεαλογία (lineage) ως το επίπεδο της στήλης, ώστε να βλέπεις τι θα χαλάσει πριν αλλάξεις κάτι. Επίσης ο Catalog Explorer, το federation για εξωτερικές βάσεις και το Delta Sharing για κοινή χρήση προς τα έξω.",
+  "ch11-s14": "Μια αρχιτεκτονική παραγωγής για το κατάστημα: ομάδες, service principals και δικαιώματα. Οι άνθρωποι διαβάζουν, οι ροές γράφουν, και ακολουθούν πρακτικές ασκήσεις.",
+  "ch11-s15": "Ο αλγόριθμος για το PERMISSION_DENIED, στρώμα στρώμα: ταυτότητα, σύνδεση, κατάλογος, σχήμα, αντικείμενο, φίλτρα, αποθήκευση, compute. Έξι περιπτώσεις τον εφαρμόζουν, και μια φράση βοηθά να θυμάσαι τη σειρά.",
+  "ch11-s16": "Ζεύγη που μπερδεύονται εύκολα, π.χ. διαχειριζόμενος και εξωτερικός πίνακας, storage credential και external location. Και το μεγάλο τεστ της φάσης 3.",
+  "ch12-s01": "Φόρτωση (ingestion) σημαίνει να φέρεις δεδομένα από έξω μέσα στην πλατφόρμα, π.χ. σε πίνακα Delta του Unity Catalog. Αυτό το κεφάλαιο ασχολείται με αρχεία στην αποθήκευση cloud ή σε volume και ανεβαίνει μια σκάλα εργαλείων.",
+  "ch12-s02": "Το spark.read είναι ανάγνωση δέσμης: διαβάζει ό,τι υπάρχει τώρα στη διαδρομή. Για CSV ορίζεις header, διαχωριστικό, εισαγωγικά, multiLine και τι γίνεται με τις κακές γραμμές (PERMISSIVE, DROPMALFORMED, FAILFAST).",
+  "ch12-s03": "Χωρίς σχήμα το Spark μπορεί να το μαντέψει, αλλά πρέπει να διαβάσει πρώτα τα δεδομένα και ίσως μαντέψει λάθος. Στην παραγωγή προτιμάς ρητό σχήμα με StructType ή DDL.",
+  "ch12-s04": "Το JSON διαβάζεται από προεπιλογή ως ένα αντικείμενο ανά γραμμή, και τα εμφωλευμένα αντικείμενα γίνονται στήλες struct. Το Parquet έχει ήδη σχήμα, και το read_files() διαβάζει αρχεία κατευθείαν από SQL.",
+  "ch12-s05": "Η κρυφή στήλη _metadata λέει από ποιο αρχείο ήρθε κάθε γραμμή, πότε άλλαξε και πόσο μεγάλο ήταν. Πρέπει να τη ζητήσεις ρητά, και στο Bronze κρατάς και το τι είπε η πηγή και το πώς έφτασε.",
+  "ch12-s06": "Το spark.read διαβάζει κάθε φορά όλο τον φάκελο, οπότε τα παλιά αρχεία προστίθενται ξανά ως διπλά. Το COPY INTO θυμάται ποια αρχεία φόρτωσε και τα παραλείπει: είναι αυτοδύναμο (idempotent).",
+  "ch12-s07": "Οι επιλογές του COPY INTO: PATTERN (μοτίβο glob, όχι regex) για το ποια αρχεία, FILES για ρητή λίστα, VALIDATE για έλεγχο χωρίς φόρτωση, μετασχηματισμοί με SELECT και επιλογές σχήματος.",
+  "ch12-s08": "Για εκατομμύρια αρχεία το Databricks προτείνει Auto Loader: βρίσκει τα νέα αρχεία αποδοτικά, τα επεξεργάζεται σταδιακά και εξελίσσει το σχήμα. Η βασική μορφή είναι readStream με format cloudFiles προς έναν πίνακα Bronze.",
+  "ch12-s09": "Δύο θέσεις κατάστασης που μπερδεύονται συνεχώς: το schemaLocation κρατά το σχήμα που βρήκε το Auto Loader και πώς άλλαξε, το checkpointLocation την πρόοδο της ροής, δηλαδή ποια αρχεία επεξεργάστηκε.",
+  "ch12-s10": "Αν σβήσεις, μοιραστείς ή μετακινήσεις ένα σημείο ελέγχου, η ροή χάνει τη μνήμη της και μπορεί να ξαναφορτώσει αρχεία ως νέα. Το checkpoint είναι κατάσταση λειτουργίας, όχι σκουπίδι προς καθαρισμό.",
+  "ch12-s11": "Το Auto Loader βρίσκει νέα αρχεία με λίστα φακέλου (απλό, ακριβό για τεράστιο πλήθος) ή με ειδοποιήσεις αρχείων από το cloud. Μαντεύει και το σχήμα, και χωρίς inferColumnTypes όλα είναι αρχικά κείμενο.",
+  "ch12-s12": "Όταν η πηγή προσθέτει στήλη, το Auto Loader μπορεί να σταματήσει τη ροή και να εξελίξει το σχήμα, ανάλογα με τη λειτουργία (addNewColumns, rescue, failOnNewColumns, none). Τα δεδομένα που δεν ταιριάζουν πάνε στη στήλη _rescued_data ή σε καραντίνα.",
+  "ch12-s13": "Το Auto Loader φορτώνει κάθε αρχείο ακριβώς μία φορά, αλλά παρακολουθεί αρχεία και όχι επιχειρηματικές οντότητες. Τα διπλά της πηγής τα λύνεις με MERGE από το Bronze στο Silver.",
+  "ch12-s14": "Με τον trigger AvailableNow μια ροή επεξεργάζεται όλα τα νέα αρχεία και σταματά, σαν προγραμματισμένη εργασία δέσμης. Πότε αρκεί το spark.read, πότε το COPY INTO και πότε το Auto Loader.",
+  "ch12-s15": "Νέα αρχεία στη ζώνη προσγείωσης αλλά καμία νέα γραμμή στο Bronze: ακολουθείς την αλυσίδα από την πηγή ως τον προορισμό, αρχείο, διαδρομή, μορφή, εντοπισμός, checkpoint, ανάλυση, σχήμα, εγγραφή. Και τι γίνεται όταν ένα αρχείο αντικατασταθεί με το ίδιο όνομα.",
+  "ch12-s16": "Σχήμα που αλλάζει ξαφνικά, στήλες που λείπουν, διπλά αναγνωριστικά και χαλασμένο CSV: για καθεμιά, οι ερωτήσεις που κάνεις πριν διορθώσεις. Δεν ανοίγεις τυφλά κάθε εξέλιξη σχήματος.",
+  "ch13-s01": "Στη δέσμη τα δεδομένα είναι γνωστά και πεπερασμένα. Στη ροή φτάνουν συνεχώς χωρίς γνωστό τέλος, και το Spark τη βλέπει σαν έναν πίνακα που μεγαλώνει διαρκώς (unbounded table).",
+  "ch13-s02": "Το read διαβάζει ό,τι υπάρχει τώρα, το readStream αντιμετωπίζει την πηγή ως κάτι που αλλάζει και παρακολουθεί την πρόοδο. Τίποτα δεν τρέχει ώσπου το writeStream … start() ή toTable() να ξεκινήσει το ερώτημα.",
+  "ch13-s03": "Το Spark δεν τρέχει νέα εργασία για κάθε γεγονός: τα μαζεύει σε μικρές δέσμες (micro-batches), καθεμιά μια μικρή εργασία Spark. Ο trigger processingTime λέει κάθε πόσο ξεκινά η επόμενη.",
+  "ch13-s04": "Τα είδη trigger: προεπιλογή (η επόμενη δέσμη αμέσως), σταθερό διάστημα, AvailableNow (όλα τα διαθέσιμα και μετά στάση), το παλιό Once, real-time για πολύ χαμηλή καθυστέρηση, και τι ισχύει στο serverless.",
+  "ch13-s05": "Ένα ερώτημα χωρίς κατάσταση (stateless) αποφασίζει για κάθε εγγραφή χωρίς να θυμάται τις προηγούμενες. Ένα ερώτημα με κατάσταση (π.χ. μέτρηση ανά πελάτη) κρατά ενδιάμεσα αποτελέσματα στον χώρο κατάστασης (state store).",
+  "ch13-s06": "Ο χρόνος γεγονότος (event time) είναι πότε έγινε κάτι και είναι στήλη στα δεδομένα. Ο χρόνος επεξεργασίας είναι πότε το είδε το σύστημα. Διαφέρουν λόγω καθυστερήσεων, και τα παράθυρα χρόνου χρησιμοποιούν τον χρόνο γεγονότος.",
+  "ch13-s07": "Το υδατογράφημα (watermark) είναι ένα όριο στον χρόνο γεγονότος: «δέχομαι γεγονότα ως περίπου 10 λεπτά καθυστερημένα». Επιτρέπει στο Spark να σβήνει παλιά κατάσταση και να αποφασίζει τι γίνεται με τα καθυστερημένα δεδομένα.",
+  "ch13-s08": "Τρεις τρόποι εξόδου: Append βγάζει μόνο γραμμές που δεν θα αλλάξουν πια, Update όσες άλλαξαν σε αυτή τη δέσμη, Complete ολόκληρο το αποτέλεσμα κάθε φορά. Το Append με συναθροίσεις χρειάζεται watermark.",
+  "ch13-s09": "Ένα σημείο ελέγχου έχει offsets (ως πού διάβασε η πηγή), commits (ποιες δέσμες ολοκληρώθηκαν) και, όταν υπάρχει, κατάσταση. Το checkpoint είναι και η ταυτότητα του ερωτήματος: αλλάζοντάς το έχεις νέο ερώτημα.",
+  "ch13-s10": "Με προορισμό πίνακα Delta, τα offsets της πηγής, τα commits του checkpoint και το log του Delta μαζί εξασφαλίζουν ότι μια δέσμη που ξανατρέχει δεν γράφεται διπλή. Αυτό δεν αφαιρεί τα διπλά που έρχονται από την ίδια την πηγή.",
+  "ch13-s11": "Ένα join ροής με στατικό πίνακα εμπλουτίζει τα γεγονότα με δεδομένα αναφοράς. Ένα join δύο ροών χρειάζεται κλειδί, χρονική σχέση και watermarks και στις δύο πλευρές, αλλιώς η κατάσταση μεγαλώνει χωρίς όριο.",
+  "ch13-s12": "Ένας πίνακας Delta μπορεί να είναι και πηγή και προορισμός ροής. Ως πηγή στέλνει προσθήκες, και τα UPDATE ή DELETE χρειάζονται Change Data Feed ή ειδικές επιλογές, ενώ το VACUUM μπορεί να σβήσει αρχεία που η ροή χρειάζεται ακόμη.",
+  "ch13-s13": "Το foreachBatch δίνει κάθε μικρή δέσμη ως κανονικό DataFrame, ώστε να κάνεις MERGE ή δική σου εγγραφή. Η συνάρτηση πρέπει να είναι αυτοδύναμη, γιατί μια δέσμη μπορεί να ξανατρέξει.",
+  "ch13-s14": "Μικρές δέσμες δίνουν χαμηλή καθυστέρηση αλλά περισσότερο κόστος και μικρά αρχεία, μεγάλες δίνουν καλύτερη απόδοση με μεγαλύτερη καθυστέρηση. Επίσης συσσώρευση (backlog), μέγεθος κατάστασης και ασυμμετρία.",
+  "ch13-s15": "Παρακολούθηση από τον κώδικα (lastProgress) και από το Spark UI: πόσο γρήγορα φτάνουν και πόσο γρήγορα επεξεργάζονται τα δεδομένα, διάρκεια δέσμης, γραμμές κατάστασης. Και ένα δέντρο αποσφαλμάτωσης για την παραγωγή.",
+  "ch13-s16": "Εργαστήρια βήμα βήμα: συνθετική ροή, χωρίς κατάσταση, με κατάσταση, παράθυρα χρόνου, AvailableNow σε Delta. Ένα μοντέλο βέλτιστων πρακτικών και το μικρό έργο της φάσης 5."
+ },
+ "updated": "2026-10-21"
+}

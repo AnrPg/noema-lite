@@ -498,7 +498,7 @@
         list.append(el('div', { class: 'noema-group' }, el('div', { class: 'noema-grouphead' }, `${g.emoji || ''} ${groupTitle(g, acc)}`),
           el('div', { class: 'noema-chips' }, ...items.map(s => { n++; const pct = Math.round(subjectProgress(acc, s) * 100);
             const chip = el('button', { class: 'noema-chip' + (s.id === KV.subj ? ' on' : ''), style: { animationDelay: n * 35 + 'ms' }, title: s.description || '', onclick: () => onPick(s) },
-              el('span', { class: 'e' }, s.emoji || '📘'), el('span', { class: 't' }, s.title), langTag(s), s.origin !== 'library' ? el('span', { class: 'o', title: s.sharedBy ? tr('loader.chip.sharedBy', { name: s.sharedBy }) : s.publicOwner ? tr('loader.chip.from', { name: s.publicOwner }) : '' }, s.origin === 'private' ? '🔒' : s.sharedBy ? '🤝' : s.publicFrom ? '🌍' : '📥') : null, s.updateAvailable ? el('span', { class: 'o', title: tr('loader.chip.update') }, '✨') : null, pct ? el('span', { class: 'p' }, fmtPct(pct)) : null);
+              el('span', { class: 'e' }, s.emoji || '📘'), el('span', { class: 't' }, s.title), langTag(s), window.NoemaBridge?.tag(s, acc) || null, s.origin !== 'library' ? el('span', { class: 'o', title: s.sharedBy ? tr('loader.chip.sharedBy', { name: s.sharedBy }) : s.publicOwner ? tr('loader.chip.from', { name: s.publicOwner }) : '' }, s.origin === 'private' ? '🔒' : s.sharedBy ? '🤝' : s.publicFrom ? '🌍' : '📥') : null, s.updateAvailable ? el('span', { class: 'o', title: tr('loader.chip.update') }, '✨') : null, pct ? el('span', { class: 'p' }, fmtPct(pct)) : null);
             const edit = el('button', { class: 'noema-editbtn', title: tr('loader.chip.editTip'), 'aria-label': tr('loader.chip.editLabel', { title: s.title }), onclick: e => { e.stopPropagation(); editSubject(acc, s, { onChange }); } }, '✏️');
             const toMap = window.NoemaCurMap?.attachDialog ? el('button', { class: 'noema-mapbtn', title: tr('pick.putOnMap', null, acc), 'aria-label': `${tr('pick.putOnMap', null, acc)} ${s.title}`, onclick: e => { e.stopPropagation(); NoemaCurMap.attachDialog(acc, { subject: s, onDone: onChange }); } }, '🧭') : null;
             return el('span', { class: 'noema-chipwrap' }, chip, edit, s.origin === 'library' ? null : el('button', { class: 'noema-sharebtn', title: tr('loader.edit.share'), 'aria-label': tr('loader.chip.shareLabel', { title: s.title }), onclick: e => { e.stopPropagation(); shareDialog(acc, s); } }, '🔗'), toMap); }))));
@@ -529,7 +529,7 @@
         const onStudy = async id => { const s = (await subjectsFor(acc)).find(x => x.id === id); if (s) pick(s); };
         const q = el('input', { class: 'noema-input noema-search', placeholder: tr('pick.search', null, acc), oninput: () => S.draw() });
         const S = shelfChips(acc, { q, onPick: pick, onChange: async () => { subs = await shelf(acc); S.draw(subs); drawCurs(); sum.textContent = tr('pick.shelf', { n: subs.length }, acc); } });
-        const imp = el('label', { class: 'btn small' }, tr('pick.import', null, acc), el('input', { type: 'file', accept: '.zip,.json,.noemapack', style: { display: 'none' }, onchange: async e => { try { const s = await importPackFile(acc, e.target.files[0]); landed(acc, s); pick(s); } catch (er) { toastL('⚠️ ' + errMsg(er), 4000); } } }));
+        const imp = el('label', { class: 'btn small' }, tr('pick.import', null, acc), el('input', { type: 'file', accept: '.zip,.json,.noemapack', style: { display: 'none' }, onchange: async e => { try { const s = await importPackFile(acc, e.target.files[0]); if (!s) { S.draw(await shelf(acc)); return; } landed(acc, s); pick(s); } catch (er) { toastL('⚠️ ' + errMsg(er), 4000); } } }));
         const reqs = el('div', { class: 'nx-reqs' });
         Notes.on(all => { const pending = all.filter(x => !x.kind); reqs.innerHTML = ''; if (!pending.length) return; reqs.append(el('div', { class: 'nx-lbl' }, tr('pick.shared', { n: pending.length }, acc)), ...pending.map(sh => shareRow(sh, { onAccepted: s => { landed(acc, s); pick(s); } }))); });
         // the way to study: a curriculum — a map of steps, each step a subject (the subjects on no map wait on 📚 the Shelf below)
@@ -846,6 +846,11 @@
       return s;
     }
     let p; try { p = JSON.parse(await file.text()); } catch (e) { throw new Error(tr('loader.import.notPackOrPackage')); }
+    if (p?.format === 'noema-bridge' && window.NoemaBridge) {   // 文A language help for a subject the learner has (docs/BRIDGE.md): attached, the pack is not changed
+      const r = await NoemaBridge.attach(acc, p);
+      toastL('文A ' + tr('bridge.attached', { lang: window.NoemaI18n ? NoemaI18n.fmt.langName(r.native) : r.native, title: r.title }), 4000);   // i18n-ignore (the icon)
+      return null;
+    }
     const s = await importPack(acc, p);
     const want = SF ? SF.packaged(p).filter(x => !SF.index(acc, p.subject.id)[x.id]) : [];
     toastL('📥 ' + tr('loader.import.done', { title: s.title }) + (want.length ? ' · 📎 ' + tr('loader.import.jsonNoFiles', { n: want.length }) : ''), want.length ? 6500 : 2500);
@@ -1600,7 +1605,7 @@
     /* the search (engine/search.js) indexes the language courses too: which ones this account has, and a course's content */
     langCourses: () => langCourses(KV.acc), langData: meta => langData(KV.acc, meta),
     curricula() { if (SHELL() && NoemaShell.mounted) return NoemaShell.go('#/learn'); return window.NoemaCurMap?.library(Noema.account.id); },
-    curriculumMap(cid, focus) { if (SHELL() && NoemaShell.mounted) return NoemaShell.go('#/map/' + encodeURIComponent(cid) + (focus ? '/' + encodeURIComponent(focus) : '')); return window.NoemaCurMap?.map(Noema.account.id, cid, { focus }); }, explore() { return explore(Noema.account.id); }, publicSubjects() { return publicSubjects(Noema.account.id); }, plain: { text: t => plainOn() ? plainText(t) : t, tree: plainTree, watch: plainWatch }, infoCard, packInfo, langTag, localizedSubject,
+    curriculumMap(cid, focus) { if (SHELL() && NoemaShell.mounted) return NoemaShell.go('#/map/' + encodeURIComponent(cid) + (focus ? '/' + encodeURIComponent(focus) : '')); return window.NoemaCurMap?.map(Noema.account.id, cid, { focus }); }, explore() { return explore(Noema.account.id); }, publicSubjects() { return publicSubjects(Noema.account.id); }, plain: { text: t => plainOn() ? plainText(t) : t, tree: plainTree, watch: plainWatch }, infoCard, packInfo, langTag, bridgeTag: s => window.NoemaBridge?.tag(s) || null, localizedSubject,
     removeLocalAccount(id) { const rm = jget(P + 'accounts:removed', []); rm.push(id); jset(P + 'accounts:removed', rm); jset(P + 'accounts', jget(P + 'accounts', []).filter(a => a.id !== id)); },
     wipeAccountData(id) { ls.keys(`${P}${id}:`).forEach(k => ls.del(k)); },
     setCurrent(acc, subj) { jset(P + 'current', { acc, subj }); },

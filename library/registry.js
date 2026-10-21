@@ -2,7 +2,7 @@
 window.NOEMA_REGISTRY = {
  "format": "noema-registry",
  "v": 1,
- "builtAt": "2026-10-13T07:50:35+00:00",
+ "builtAt": "2026-10-21T12:13:50+00:00",
  "groups": [
   {
    "id": "data-cloud",
@@ -187,7 +187,36 @@ window.NOEMA_REGISTRY = {
      "pages": "403–569",
      "url": ""
     }
-   ]
+   ],
+   "bridgeLocales": {
+    "ar": {
+     "path": "library/subjects/databricks/bridge.ar.js",
+     "status": "draft",
+     "coverage": 0.9713,
+     "chapters": 13,
+     "of": 13,
+     "previews": 184,
+     "entries": 1739
+    },
+    "el": {
+     "path": "library/subjects/databricks/bridge.el.js",
+     "status": "draft",
+     "coverage": 0.9713,
+     "chapters": 13,
+     "of": 13,
+     "previews": 184,
+     "entries": 1739
+    },
+    "ru": {
+     "path": "library/subjects/databricks/bridge.ru.js",
+     "status": "draft",
+     "coverage": 0.9713,
+     "chapters": 13,
+     "of": 13,
+     "previews": 184,
+     "entries": 1739
+    }
+   }
   }
  ],
  "accounts": [

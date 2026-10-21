@@ -15,6 +15,7 @@ for _s in (sys.stdout, sys.stderr):   # UTF-8 output on Windows / macOS / Linux 
     except Exception: pass
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from noema_lib import ROOT, LIB, ACC, rj, wj, wt, now_iso, subject_dirs, load_subject, load_media, content_hash, load_translations, pack_i18n
+from bridge import build_library as build_bridges
 
 ENGINE = os.path.join(ROOT, 'engine')
 args = sys.argv[1:]
@@ -97,6 +98,8 @@ def build_packs():
                 'sources': [{'title': x.get('title', ''), 'subtitle': x.get('subtitle', ''), 'pages': x.get('pages', ''), 'url': x.get('url', '') if str(x.get('url', '')).startswith('http') else ''} for x in (sources or {}).get('sources', [])]}
         if meta.get('i18n'): info['i18n'] = meta['i18n']                   # the picker shows the title in the learner's language
         if translations: info['contentLocales'] = sorted(translations)      # … and knows which languages the content is in
+        bridges = build_bridges(sdir, {'subject': meta, 'chapters': chapters}, ROOT)   # 文A language help: bridges/ → bridge.<native>.js (docs/BRIDGE.md)
+        if bridges: info['bridgeLocales'] = bridges
         metas.append(dict({k: meta.get(k) for k in ('id', 'title', 'appTitle', 'emoji', 'group', 'description', 'language', 'features', 'owner')}, path=rel, counts=dict(counts, pictures=len(media)), version=pack['version'], **info))
         print(f'pack: {meta["id"]:<20} {"(private:" + owner + ")" if owner else "":<18} {counts["chapters"]} ch · {counts["sections"]} sec · {counts["exercises"]} ex ({counts["visual"]} visual) · {counts["media"]} img · {len(body)//1024} KB')
     return metas, failed
@@ -226,13 +229,17 @@ def build_site(metas):
             dst = os.path.join(out, f['path']); os.makedirs(os.path.dirname(dst), exist_ok=True); shutil.copy(os.path.join(ROOT, f['path']), dst)
         for f in m.get('media') or []:
             dst = os.path.join(out, f); os.makedirs(os.path.dirname(dst), exist_ok=True); shutil.copy(os.path.join(ROOT, f), dst)
-    for f in ('engine.js', 'engine.css', 'loader.js', 'i18n.js', 'themes.js', 'art.js', 'shell.js', 'react.js', 'convos.js', 'cloud.js', 'claude.js', 'packcheck.js', 'llm.js', 'mt.js', 'curriculum.js', 'curjobs.js', 'curshare.js', 'imglib.js', 'curimport.js', 'sourceplan.js', 'vault.js', 'social.js', 'packgen.js', 'curmap.js', 'search.js', 'catalog.js', 'authoring.js', 'srcfiles.js', 'viewer.js'): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))
+    for f in ('engine.js', 'engine.css', 'loader.js', 'i18n.js', 'themes.js', 'art.js', 'shell.js', 'react.js', 'convos.js', 'cloud.js', 'claude.js', 'packcheck.js', 'llm.js', 'mt.js', 'wordlink.js', 'bridge.js', 'curriculum.js', 'curjobs.js', 'curshare.js', 'imglib.js', 'curimport.js', 'sourceplan.js', 'vault.js', 'social.js', 'packgen.js', 'curmap.js', 'search.js', 'catalog.js', 'authoring.js', 'srcfiles.js', 'viewer.js'): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))
     shutil.copytree(os.path.join(ENGINE, 'vendor'), os.path.join(out, 'engine', 'vendor'))
     shutil.copytree(os.path.join(ENGINE, 'i18n'), os.path.join(out, 'engine', 'i18n'))   # the UI catalogs (docs/i18n.md), loaded per locale
     shutil.copytree(os.path.join(ROOT, 'fonts'), os.path.join(out, 'fonts'), ignore=shutil.ignore_patterns('*.md', '*.json'))   # the characters' self-hosted fonts
     for m in metas:
         if m.get('owner'): continue
         dst = os.path.join(out, m['path']); os.makedirs(os.path.dirname(dst), exist_ok=True); shutil.copy(os.path.join(ROOT, m['path']), dst)
+    for m in metas:   # 文A language bridges of the library's subjects (docs/BRIDGE.md)
+        if m.get('owner'): continue
+        for b in (m.get('bridgeLocales') or {}).values():
+            dst = os.path.join(out, b['path']); os.makedirs(os.path.dirname(dst), exist_ok=True); shutil.copy(os.path.join(ROOT, b['path']), dst)
     for m in metas:   # the plain JSON too, so Claude (connector: noema_get_pack_url) can extend a library subject
         if not m.get('owner'): shutil.copy(os.path.join(ROOT, os.path.dirname(m['path']), 'pack.json'), os.path.join(out, os.path.dirname(m['path']), 'pack.json'))
     wt(os.path.join(out, 'library', 'registry.js'), build_registry(metas, public=True))
@@ -245,7 +252,7 @@ def build_site(metas):
     wt(os.path.join(out, '_headers'), '/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n/engine/*\n  Cache-Control: public, max-age=300\n/engine/vendor/pdfjs/*.mjs\n  Content-Type: text/javascript; charset=utf-8\n/engine/vendor/pdfjs/wasm/*.wasm\n  Content-Type: application/wasm\n/library/*\n  Cache-Control: public, max-age=300\n  Access-Control-Allow-Origin: *\n/fonts/*\n  Cache-Control: public, max-age=604800\n')
     print('site →', os.path.relpath(out, ROOT))
 
-SKILL_TOOLS = ['noema_lib.py', 'validate.py', 'svgkit.py', 'extract_images.py', 'fetch_image.py', 'find_images.py']
+SKILL_TOOLS = ['noema_lib.py', 'bridge.py', 'validate.py', 'svgkit.py', 'extract_images.py', 'fetch_image.py', 'find_images.py']
 LANG_SKILL_TOOLS = ['validate_lang.py', 'lang_refcheck.py', 'langlib.py', 'lang_course.py', 'lang_script.py', 'lang_phenomena.py', 'lang_readback.js', 'lang_facade.py']
 def lang_builder_files():
     """The skill noema-language-builder (docs/LANGUAGES.md §10.2): (source, path inside the skill folder). The playbook, the brief
@@ -284,6 +291,7 @@ def build_skill(out_zip):
         for t in SKILL_TOOLS: z.write(os.path.join(ROOT, 'tools', t), f'noema-pack-builder/scripts/{t}')
         z.write(os.path.join(ROOT, 'tools', 'CONTENT_SPEC.md'), 'noema-pack-builder/references/CONTENT_SPEC.md')
         z.write(os.path.join(ROOT, 'docs', 'VISUAL.md'), 'noema-pack-builder/references/VISUAL.md')
+        if os.path.exists(os.path.join(ROOT, 'docs', 'BRIDGE.md')): z.write(os.path.join(ROOT, 'docs', 'BRIDGE.md'), 'noema-pack-builder/references/BRIDGE.md')
         if os.path.exists(os.path.join(ROOT, 'docs', 'LANGUAGES.md')): z.write(os.path.join(ROOT, 'docs', 'LANGUAGES.md'), 'noema-pack-builder/references/LANGUAGES.md')
         if os.path.exists(os.path.join(ROOT, 'docs', 'LANGUAGE_RULES.md')): z.write(os.path.join(ROOT, 'docs', 'LANGUAGE_RULES.md'), 'noema-pack-builder/references/LANGUAGE_RULES.md')
         # language courses (docs/LANGUAGES.md §10.1): the checks Claude runs in its sandbox, with the shared typology and catalogues they read
@@ -312,10 +320,11 @@ def build_mcp_function(metas, out_dir):
     """dist/functions/mcp.mjs — the Claude connector (cloud/mcp/server.mjs + public config + the content contract)."""
     cfg = public_config()
     if not (cfg['siteUrl'] and cfg['supabaseUrl'] and cfg['supabaseKey']): print('mcp: skipped (config.js needs siteUrl, supabaseUrl, supabaseKey)'); return
-    cfg['library'] = [{k: m.get(k) for k in ('id', 'title', 'counts', 'version')} for m in metas if not m.get('owner')]
+    cfg['library'] = [{**{k: m.get(k) for k in ('id', 'title', 'counts', 'version')}, **({'bridgeLocales': m['bridgeLocales']} if m.get('bridgeLocales') else {})} for m in metas if not m.get('owner')]
     cfg['languages'] = [{k: m.get(k) for k in ('id', 'title', 'languages', 'path', 'profiles')} for m in LANG_METAS]   # language courses (D13 peers, refills)
     rd = lambda p: open(os.path.join(ROOT, p), encoding='utf-8').read()
     docs = {'workflow': rd('skill/noema-pack-builder/SKILL.md'), 'content': rd('tools/CONTENT_SPEC.md'), 'visual': rd('docs/VISUAL.md')}
+    if os.path.exists(os.path.join(ROOT, 'docs', 'BRIDGE.md')): docs['bridge'] = rd('docs/BRIDGE.md')   # 文A language bridges (noema_bridge_guide)
     if os.path.exists(os.path.join(ROOT, 'docs', 'LANGUAGE_RULES.md')): docs['languages'] = rd('docs/LANGUAGE_RULES.md') + ('\n\n---\n\n' + rd('skill/noema-pack-builder/LANGUAGES.md') if os.path.exists(os.path.join(ROOT, 'skill', 'noema-pack-builder', 'LANGUAGES.md')) else '') + ('\n\n---\n\n' + rd('docs/language-packs.md') if os.path.exists(os.path.join(ROOT, 'docs', 'language-packs.md')) else '')   # D19: the contract of the explanation layers   # language courses: the binding rules + how to answer a task
     code = (f'/* GENERATED by tools/build.py from cloud/mcp/server.mjs — do not edit */\nconst CFG = {json.dumps(cfg, ensure_ascii=False)};\nconst DOCS = {json.dumps(docs, ensure_ascii=False)};\n'
             + MCP_PRELUDE + ''.join(rd(f) + '\n' for f in MCP_ENGINE) + rd('cloud/mcp/server.mjs') + '\nexport const config = { path: ["/mcp", "/.well-known/oauth-protected-resource", "/.well-known/oauth-protected-resource/mcp"] };\n')
@@ -350,6 +359,7 @@ def build_bundle(metas):
     rd = lambda p: open(os.path.join(ROOT, p), encoding='utf-8').read()
     esc = lambda s: s.replace('</script', '<\\/script')
     packs = ''.join(f'<script>{esc(rd(m["path"]))}</script>\n' for m in metas if (not sel or m['id'] in sel))
+    packs += ''.join(f'<script>{esc(rd(b["path"]))}</script>\n' for m in metas if (not sel or m['id'] in sel) for b in (m.get('bridgeLocales') or {}).values())   # 文A language bridges
     reg_metas = [dict(m, path=None) for m in metas if (not sel or m['id'] in sel)]
     local = ''
     if '--with-local-config' in args and os.path.exists(os.path.join(ROOT, 'config.local.js')): local = f'<script>{esc(rd("config.local.js"))}</script>'
@@ -381,6 +391,8 @@ def build_bundle(metas):
 <script>{esc(rd("engine/packcheck.js"))}</script>
 <script>{esc(rd("engine/llm.js"))}</script>
 <script>{esc(rd("engine/mt.js"))}</script>
+<script>{esc(rd("engine/wordlink.js"))}</script>
+<script>{esc(rd("engine/bridge.js"))}</script>
 <script>{esc(rd("engine/packgen.js"))}</script>
 <script>{esc(rd("engine/curriculum.js"))}</script>
 <script>{esc(rd("engine/curjobs.js"))}</script>

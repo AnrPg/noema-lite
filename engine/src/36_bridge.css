@@ -1,0 +1,48 @@
+/* 文A language help (engine/bridge.js, docs/BRIDGE.md): quiet — a faint dotted line, small glosses, a small card */
+.nb-root .nw{cursor:pointer;border-radius:3px;text-decoration:underline dotted color-mix(in srgb,var(--ink3) 55%,transparent);text-decoration-thickness:1px;text-underline-offset:3px}
+.nb-root .nw:hover,.nb-root .nw:focus-visible{background:var(--bg2);text-decoration-color:var(--ink2);outline:none}
+.nb-root[data-nb-level="tap"] .nw,.nb-root .nw.nw-known{text-decoration:none}
+.nb-root[data-nb-level="tap"] .nw:hover,.nb-root .nw.nw-known:hover{text-decoration:underline dotted var(--ink3)}
+.nb-root .nw-g{position:relative;display:inline-block;text-indent:0}
+.nb-root .nw-rt{position:absolute;inset-inline-start:0;top:100%;margin-top:-2px;font-size:.6em;font-weight:500;font-style:normal;color:var(--ink3);letter-spacing:0;line-height:1.15;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis;text-decoration:none;pointer-events:none;user-select:none}
+.nb-root.nb-glossed p,.nb-root.nb-glossed li,.nb-root.nb-glossed td,.nb-root.nb-glossed .callout{line-height:2.05}
+.nb-root.nb-glossed .nb-prep p,.nb-root.nb-glossed .nb-prep li{line-height:1.55}
+.nb-btn{cursor:pointer;border:1px solid transparent;font-weight:750;letter-spacing:.02em}
+.nb-btn.on{border-color:var(--line);background:var(--card);color:var(--ink)}
+.nb-i{font-weight:750;opacity:.75;font-size:.92em}
+.nb-tag.nb-weak{border-style:dashed}
+.nb-prep{margin:0 0 18px;padding:10px 14px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--bg2)}
+.nb-prep summary{cursor:pointer;font-weight:700;color:var(--ink2);font-size:14px;list-style-position:inside}
+.nb-prep summary small{font-weight:500;color:var(--ink3)}
+.nb-preview{margin:10px 0 6px;color:var(--ink);font-size:15px;line-height:1.55}
+.nb-terms{margin:8px 0 2px;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px}
+.nb-terms li{color:var(--ink2)}
+.nb-term{font-weight:700;color:var(--ink);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline dotted var(--ink3);text-underline-offset:3px}
+.nb-ask{margin:0 0 18px;padding:12px 14px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--card)}
+.nb-ask p{margin:6px 0}
+.nb-askrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.nb-hint{color:var(--ink3)}
+.nb-natsel{margin-top:6px;max-width:100%}
+.nb-card{position:absolute;z-index:1200;width:min(320px,calc(100vw - 16px));background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:var(--r-sm);box-shadow:var(--shadow);padding:12px 14px;font-size:14px;line-height:1.45}
+.nb-card:focus{outline:none}
+.nb-card.nb-sheet{position:fixed;left:8px;right:8px;bottom:8px;width:auto;max-height:70vh;overflow:auto}
+.nb-cardhead{display:flex;align-items:center;gap:8px}
+.nb-word{font-size:17px}
+.nb-cardhead .nb-x{margin-inline-start:auto;background:none;border:0;font-size:20px;line-height:1;color:var(--ink3);cursor:pointer;padding:2px 6px}
+.nb-say{background:none;border:0;cursor:pointer;font-size:15px;padding:2px 4px;opacity:.75}
+.nb-meta{color:var(--ink3);margin-top:2px;min-height:2px}
+.nb-t{font-size:18px;font-weight:650;margin:6px 0 2px}
+.nb-note{margin:4px 0;color:var(--ink2)}
+.nb-flag{color:var(--ink3);font-style:italic;margin:4px 0}
+.nb-actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.nb-report{margin-top:8px;display:flex;flex-direction:column;gap:6px}
+.nb-report[hidden]{display:none}
+.nb-panel .nb-row{display:flex;align-items:center;gap:8px;margin:8px 0}
+.nb-levels{display:flex;flex-direction:column;gap:6px;margin-top:6px}
+.nb-level{display:flex;gap:8px;align-items:flex-start;cursor:pointer}
+.nb-level span{display:flex;flex-direction:column}
+.nb-level small{color:var(--ink3)}
+.nb-other{margin:6px 0 0}
+.nb-other summary{cursor:pointer;color:var(--ink3)}
+.nb-other ul{margin:4px 0 0;padding-inline-start:18px}
+.nb-other small{color:var(--ink3)}

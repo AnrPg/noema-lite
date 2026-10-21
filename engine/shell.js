@@ -499,7 +499,7 @@ window.NoemaShell = (() => {
     const pct = Math.round(subjectPct(s) * 100);
     const menu = menuButton(subjectMenu(s, refresh), { label: L('moreFor', { title: s.title }) });
     return h('div', { class: 'ns-itemwrap noema-chipwrap' }, h('button', { class: 'ns-item ns-subj', 'data-subject': s.id, style: { animationDelay: i * 25 + 'ms' }, title: s.description || '', onclick: () => open(s.id) }, icoTxt(s.emoji || (s.title || '?').trim()[0].toUpperCase(), (i % 4) + 1, 'emo'),
-      h('span', { class: 't' }, h('b', {}, s.title, N().langTag?.(s) || '', s.updateAvailable ? h('span', { class: 'ns-upd', title: L('updateWaiting') }, ' ', svg('spark')) : ''), h('small', {}, [s.counts?.chapters ? L('nChapters', { n: s.counts.chapters }) : null, s.sharedBy ? L('sharedBy', { who: s.sharedBy }) : s.publicOwner ? L('from', { who: s.publicOwner }) : s.origin === 'private' ? L('privateSubj') : null].filter(Boolean).join(' · '))),
+      h('span', { class: 't' }, h('b', {}, s.title, N().langTag?.(s) || '', N().bridgeTag?.(s) || '', s.updateAvailable ? h('span', { class: 'ns-upd', title: L('updateWaiting') }, ' ', svg('spark')) : ''), h('small', {}, [s.counts?.chapters ? L('nChapters', { n: s.counts.chapters }) : null, s.sharedBy ? L('sharedBy', { who: s.sharedBy }) : s.publicOwner ? L('from', { who: s.publicOwner }) : s.origin === 'private' ? L('privateSubj') : null].filter(Boolean).join(' · '))),
       pct ? pill(pct + '%', 2) : chev()), menu);
   }
   /** A subject's ⋮: study, put it on a Roadmap, edit, share, export the package (with its source files); hide: also hide / show it */
