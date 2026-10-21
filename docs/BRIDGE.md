@@ -87,6 +87,10 @@ Next to the subject (`library/subjects/<id>/bridges/`), or next to a pack's `.js
   sense (*order* sequence: `"arrival order"`, `"in order"`; purchase: `"e-shop"`, `"customer"`). `tools/bridge.py anchor`
   turns them into anchors (`"auto": true`) wherever they pick another sense than the first; anchors a person wrote (no
   `auto`) are kept and win. `tools/bridge.py senses` lists every place of a word with several senses and the sense it gets.
+* `sections[sid].terms` (core): the key words shown in "Before you read". `tools/bridge.py terms` picks them from the
+  text for every section a person has not chosen: the field words (band 2–3, key terms) a section uses most, weighed by
+  how rare they are across the pack, so *table* or *file* give way to what the section is about; written with
+  `"auto": true`, and a person's list (no `auto`) is kept.
 
 ### 2.2 Every language pair (the first four: English, Greek, Russian, Arabic — 12 directions)
 Any pack language can be bridged into any other language; the app, the tool and the checks know nothing of particular
@@ -136,6 +140,7 @@ python3 tools/bridge.py coverage SUBJ --native ru      # per chapter
 python3 tools/bridge.py senses SUBJ --word order        # a word with two senses: every place and the sense it gets there
 # add cues to its senses (core.json), then
 python3 tools/bridge.py anchor SUBJ                     # anchors from the cues (a person's anchors are kept and win)
+python3 tools/bridge.py terms SUBJ [--dry]              # key words of every section from the text (a person's are kept)
 python3 tools/bridge.py build SUBJ --native ru -o ru.bridge.json
 ```
 `SUBJ` is a library subject folder or a pack `.json` (the learner's pack, from `noema_get_pack_url`) with `bridges/`
@@ -151,9 +156,11 @@ a chapter is useful when it is complete.
 ## 5. Phases
 1. **Done (PR #29)** — the core (matching, the card, glosses, levels, fading, the badge, "Before you read"), import, the tool,
    the connector, the skill, the Databricks pilot (chapter 1 → el, ru, ar).
-2. **Phase 2** — every pair of en, el, ru, ar (Arabic clitics, the Greek, Russian and Arabic test packs), anchors made by
-   the tool from cues (`senses`, `anchor`), the rest of the Databricks pilot; then a Greek pack of the learner's (e.g. DNA
-   replication) → en, ru, ar once the learner's pack can be read.
+2. **Done (PR #29)** — every pair of en, el, ru, ar (Arabic clitics, English possessives, the Greek, Russian and Arabic
+   test packs), anchors made by the tool from cues (`senses`, `anchor`), section key words from the text (`terms`), the
+   whole Databricks pilot → el, ru, ar (1,739 words, 97% of the content words, all 13 chapters, a preview for each of
+   the 184 sections). Still to do: a Greek pack of the learner's (e.g. DNA replication) → en, ru, ar once the learner's
+   pack can be read.
 3. Explain this sentence (AI, in the learner's language) and *My words*: the words looked up, reviewed with spaced
    repetition, and drills on the pack's terms in both directions.
 4. Sharing: bridges of shared and public packs (the author, or others with the author's 🔔 permission), reviews by

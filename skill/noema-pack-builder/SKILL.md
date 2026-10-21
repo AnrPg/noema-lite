@@ -226,6 +226,8 @@ pack is not changed. Contract and rules: `references/BRIDGE.md` (or `noema_bridg
 3b. A word with two meanings in the pack: two senses, each with `cues` (words of the sentence that mean it), then
    `python3 scripts/bridge.py senses <pack.json> --word order` (every place and its sense) and
    `python3 scripts/bridge.py anchor <pack.json>` (anchors from the cues; write an anchor by hand where cues cannot tell).
+3c. `python3 scripts/bridge.py terms <pack.json>` → the key words of every section ("Before you read") from the text;
+   replace a list by hand where it misses what the section is about (yours are kept on the next run).
 4. Write `bridges/<native>.json`: one translation per sense (the term the learner's own lectures would use, a plain
    explanation in brackets when needed), a 2–4 sentence preview per section, `"status": "draft"`.
 5. `python3 scripts/bridge.py check <pack.json>` (0 errors) and `coverage`; chapter by chapter, complete each.

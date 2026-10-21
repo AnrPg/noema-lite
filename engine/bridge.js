@@ -184,7 +184,7 @@ window.NoemaBridge = (() => {
     const langs = codes.map(c => partial(av[c]) ? T('bridge.tag.partial', { lang: endonym(c), pct: pct(av[c].coverage) }) : av[c].status === 'reviewed' ? endonym(c) : T('bridge.tag.draft', { lang: endonym(c) }));
     const label = T('bridge.tag.tip', { langs: I()?.fmt?.list ? I().fmt.list(langs) : langs.join(', ') });
     return h('span', { class: 'nb-tag' + (weak ? ' nb-weak' : ''), title: label, 'aria-label': label, 'data-bridge': codes.join(' ') },
-      '文A ' + first.toUpperCase() + (codes.length > 1 ? ' +' + (codes.length - 1) : ''));   // i18n-ignore (the icon and language codes)
+      h('span', { class: 'noema-i18n-skip', translate: 'no' }, '文A ' + first.toUpperCase() + (codes.length > 1 ? ' +' + (codes.length - 1) : '')));   // i18n-ignore (the icon and language codes: data, not words)
   }
 
   /* ---------- the page: one section ---------- */

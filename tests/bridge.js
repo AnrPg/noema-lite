@@ -68,10 +68,14 @@ function unit() {
   const dry = execFileSync('python3', [path.join(ROOT, 'tools/bridge.py'), 'anchor', subj, '--dry'], { encoding: 'utf8' });
   const coreA = JSON.parse(fs.readFileSync(path.join(subj, 'bridges/core.json'), 'utf8')).anchors;
   ok(new RegExp(`${coreA.filter(a => a.auto).length} anchor\\(s\\) would be written`).test(dry) && coreA.some(a => !a.auto), 'tools/bridge.py anchor: the auto anchors in core.json are what the cues give now; the person\'s anchor is kept (' + dry.trim() + ')');
+  const tm = JSON.parse(execFileSync('python3', [path.join(ROOT, 'tools/bridge.py'), 'terms', subj, '--dry'], { encoding: 'utf8' }));
+  const coreS = JSON.parse(fs.readFileSync(path.join(subj, 'bridges/core.json'), 'utf8')).sections;
+  ok(!tm['ch01-s05'] && coreS['ch01-s05'] && !coreS['ch01-s05'].auto && tm['ch11-s05']?.length >= 5 && Object.keys(tm).every(s => JSON.stringify(tm[s]) === JSON.stringify(coreS[s]?.terms)) && !tm['ch05-s07']?.slice(0, 3).includes('table'),
+    `tools/bridge.py terms: the key words of each section come from the text (ch11-s05: ${(tm['ch11-s05'] || []).slice(0, 4).join(', ')} …), rare field words before everyday ones, and a person's list is kept (${Object.keys(tm).length} sections)`);
   const out = path.join(require('os').tmpdir(), 'bridge-ru.json');
   execFileSync('python3', [path.join(ROOT, 'tools/bridge.py'), 'build', subj, '--native', 'ru', '-o', out], { encoding: 'utf8' });
   const built = JSON.parse(fs.readFileSync(out, 'utf8')), rb = C(built, P);
-  ok(built.format === 'noema-bridge' && !rb.errors.length && built.chapters.includes('ch01') && built.coverage > 0.5, `the built file passes the app's check (${built.entries.length} words, ${Math.round(built.coverage * 100)}%, chapters ${built.chapters.join(',')})`);
+  ok(built.format === 'noema-bridge' && !rb.errors.length && built.chapters.length === 13 && built.coverage > 0.95 && Object.values(built.sections).filter(x => x.preview && /[а-я]/i.test(x.preview)).length === 184, `the built file passes the app's check: the whole Databricks pack (${built.entries.length} words, ${Math.round(built.coverage * 100)}%, ${built.chapters.length} chapters, a Russian preview for every section)`);
 }
 
 /* ---------- 2. in the browser ---------- */

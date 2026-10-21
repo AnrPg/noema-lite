@@ -17,6 +17,8 @@ Commands (SUBJ = a subject folder, or a pack .json with its bridges/ folder besi
   python3 tools/bridge.py senses SUBJ [--word order]                       every place of a word with several senses, and the sense it gets there
   python3 tools/bridge.py anchor SUBJ [--dry]                              anchors from the senses' cues (senses[].cues: words of the sentence
                                                                            that mean this sense); a person's anchors are kept and win
+  python3 tools/bridge.py terms SUBJ [--dry]                               key words of each section ("Before you read") from the field words it
+                                                                           uses most; a person's section terms are kept
 The same functions build the library's bridges (tools/build.py) and run in the skill's sandbox.
 """
 import os, sys, json, re, glob, unicodedata
@@ -103,6 +105,7 @@ def block_texts(b):
 # ---------- function words: never part of a bridge (UD: DET, ADP, CCONJ, SCONJ, PRON, AUX, PART) and very common verbs ----------
 STOP = {
  'en': """a an the this that these those such some any each every either neither no all both few many much more most other another own same
+   everything something nothing anything everyone someone anyone nobody everybody somebody others
    i me my mine we us our ours you your yours he him his she her hers it its they them their theirs one ones oneself itself themselves himself herself yourself ourselves myself
    who whom whose which what whatever whichever whoever where when why how there here than then
    and or but nor so yet if because although though while whereas unless until since as whether once
@@ -179,6 +182,7 @@ def sections(pack, chapters=None):
 AR = re.compile('^[\u0600-\u06FF]')
 def readings(f):
     """engine/wordlink.js readings(): a folded word, then without the clitics Arabic writes onto it (و ف · ب ل ك · ال, لل)."""
+    if f.endswith("'s") and len(f) > 3: return [f, f[:-2]]   # an English possessive: "today's" is a form of "today"
     if not AR.match(f): return [f]
     out = [f]
     def add(w):
@@ -354,6 +358,37 @@ def build(pack, bdir, nat):
     if L.get('updated'): b['updated'] = L['updated']
     return b
 
+# ---------- the key words of each section ("Before you read"), picked from the text ----------
+def terms(pack, bdir, n=8, dry=False):
+    """Sections without key words a person chose get the bridge's field words that mark them most:
+    uses in the section × (3 for band 3, 1.5 for band 2, +2 for a key term) × rarity across the pack (log N/df),
+    so "table" or "file", used everywhere, give way to the words the section is about.
+    → {sid: [k]} written as core.sections[sid] = {terms, auto: true}; a person's terms (no auto) are kept."""
+    import math
+    core = core_of(bdir, pack); idx = Index(core.get('entries') or []); secs = core.setdefault('sections', {}); made = {}
+    per = []
+    for _cid, sid, blocks in sections(pack):
+        score = {}
+        for _bid, texts in blocks:
+            for t in texts:
+                for _i, _j, e in idx.find(t):
+                    b = e.get('band') or 1
+                    if b < 2 and not e.get('key'): continue
+                    score[e['k']] = score.get(e['k'], 0) + (3 if b >= 3 else 1.5) + (2 if e.get('key') else 0)
+        per.append((sid, score))
+    df = {}
+    for _sid, sc in per:
+        for k in sc: df[k] = df.get(k, 0) + 1
+    N = len(per) or 1
+    for sid, sc in per:
+        if sid in secs and not secs[sid].get('auto'): continue
+        best = [k for k, _v in sorted(((k, v * math.log(1 + N / df[k])) for k, v in sc.items()), key=lambda kv: (-kv[1], kv[0]))[:n]]
+        if best: made[sid] = best
+    if not dry:
+        for sid, ks in made.items(): secs[sid] = {'terms': ks, 'auto': True}
+        wj(os.path.join(bdir, 'core.json'), core)
+    return made
+
 # ---------- the sense at each place: anchors made from the text (cues), kept apart from the ones a person wrote ----------
 MASK = re.compile(r'`[^`]*`|\$[^$]*\$|\]\([^)]*\)|<[^>]+>')
 MARKUP_CH = set('`$*_[]()<>|#\n')
@@ -452,7 +487,7 @@ def build_library(sdir, pack, root=None):
 def main(argv):
     import argparse
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument('cmd', choices=['todo', 'coverage', 'check', 'stamp', 'build', 'senses', 'anchor'])
+    ap.add_argument('cmd', choices=['todo', 'coverage', 'check', 'stamp', 'build', 'senses', 'anchor', 'terms'])
     ap.add_argument('--dry', action='store_true'); ap.add_argument('--word')
     ap.add_argument('subject'); ap.add_argument('--native'); ap.add_argument('--chapters'); ap.add_argument('--limit', type=int, default=400); ap.add_argument('-o', '--out')
     a = ap.parse_args(argv)
@@ -477,6 +512,9 @@ def main(argv):
     elif a.cmd == 'anchor':
         made, rep = anchor(pack, bdir, dry=a.dry)
         print(f'{len(rep)} place(s) of words with several senses: {sum(1 for r in rep if r["by"] == "cue")} decided by cues, {len(made)} anchor(s) {"would be " if a.dry else ""}written')
+    elif a.cmd == 'terms':
+        made = terms(pack, bdir, dry=a.dry)
+        print(json.dumps(made, ensure_ascii=False, indent=1) if a.dry else f'{len(made)} section(s) got key words from the text (a person\'s are kept)')
     elif a.cmd == 'build':
         if not a.native: ap.error('--native is required')
         b = build(pack, bdir, a.native); out = a.out or os.path.join(bdir, f'{pack["subject"]["id"]}.{a.native}.bridge.json')
