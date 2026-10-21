@@ -1,6 +1,6 @@
 /* ---------- the foundations: lessons that teach words, grammar and sentences together, every language at the same step (§6.7, D9–D11) ---------- */
 const stepLabel = n => n.step == null ? '' : n.stage === 'core' ? 'C' + String(n.step - 18).padStart(2, '0') : 'S' + String(n.step).padStart(2, '0');
-const lessonLangs = nid => activeLangs().filter(c => LX(c).applies[nid]);
+const lessonLangs = nid => scopeLangs().filter(c => LX(c).applies[nid]);
 /** Words of a lesson in one language that are still to be introduced. */
 const toIntroduce = (c, nid, k) => (LX(c).byNode[nid] || []).filter(id => k.state[id] === 'ready');
 
@@ -32,7 +32,7 @@ VIEWS.lesson = (v, r) => {
   const fns = N.lessonFunctions(UI.C, c, nid);
   if (theoryOpen) {
   if (fns.includes('fn.overview')) v.append(typologyCard());
-  v.append(h('h2', { class: 'lx-h2' }, '📖 ' + LT('lang.lesson.grammarIn', { lang: info(c).name })), ...fns.map(f => grammarCard(c, f, { compact: true, onPick: x => { UI.lang = x; UI.prefs.lang = x; save(); render(); } })));
+  v.append(h('h2', { class: 'lx-h2' }, '📖 ' + LT('lang.lesson.grammarIn', { lang: info(c).name })), ...[...fns].sort((x, y) => aspectRank(x) - aspectRank(y)).map(f => grammarCard(c, f, { compact: true, onPick: x => { UI.lang = x; UI.prefs.lang = x; save(); render(); } })));
   }
   // the same step in the other languages: their own extra points (D10)
   const extra = langs.filter(x => x !== c).map(x => [x, N.lessonFunctions(UI.C, x, nid).filter(f => !fns.includes(f))]).filter(([, f]) => f.length);

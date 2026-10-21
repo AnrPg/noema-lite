@@ -28,3 +28,4 @@ lang.pec.area.*
 lang.expl.status.*
 lang.expl.domain.*
 lang.step.*
+lang.aspect.*

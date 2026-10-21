@@ -150,7 +150,7 @@ back `<subject_id>.noema.zip`.
 
 ## Language courses (🌍 Languages)
 Foreign-language courses are not subject packs. **Read `references/LANGUAGE_RULES.md` first — it is binding for every
-task on a language course** (the short form of decisions D1–D25; with the connector: `noema_authoring_guide` part
+task on a language course** (the short form of decisions D1–D29; with the connector: `noema_authoring_guide` part
 "languages"); the full contract is `references/LANGUAGES.md`. Courses are checked with `tools/validate_lang.py`,
 `tools/lang_refcheck.py` and `tools/lang_phenomena.py`. The hard rules, in short:
 0. **Taught through the learner's native language** (D19, `references/language-packs.md` — first): supported natives =
@@ -183,6 +183,9 @@ task on a language course** (the short form of decisions D1–D25; with the conn
 11. **Foundations (S00–S18) use only words taught so far** (D23): every example, sentence, drill and check of a foundation lesson uses only the words of that lesson or an earlier one on the common order (D20's ⌈30 %⌉ share starts at C01). Write the bank sentences of a foundation function with such words only; the validator reports how many are usable per lesson. Words met before their lesson get the new-word marker from the app (nothing to write).
 12. **Transliteration in the foundations** (D24): for every language with a non-Latin script every foundation word carries `translit` (zh: `pinyin` with tone marks) — shown under the word in lessons, examples, exercises and on its word card; the learner can hide it. A foundation word without it is an error.
 13. **Titles name subjects, not languages** (D25): the app shows only the languages loaded, so a lesson title or summary never lists the course's languages.
+14. **Parameters after their grammar** (D26): a `wordFeatures` entry whose grammar a later lesson teaches carries `from` (the function id); a word card in a lesson never shows a term the learner has not met. Write every Hebrew / Arabic example with its vowel marks (the app makes the reading in Latin letters from them) and give every foundation word `translit` / `pinyin`.
+15. **Everything a card teaches is trained and tested** (D27): every section of a word card (meanings, parameters, registers, synonym shades, antonyms, traps / confusables, collocations, idioms, usage notes, etymology, culture, pronunciation, writing) gets exercises in the lesson's practice, and the check asks about each section the lesson's words carry. Registers, traps and synonym shades first. A section with data and no exercise is a defect.
+16. **Main parameters vs “More”** (D28): store every parameter, but mark `prominent: true` only where it varies from word to word and cannot be worked out; constant, rule-made or rare ones are `prominent: false` (folded under “More”). The reading is never a parameter row.
 7. **The course never ends** (D17): foundations → core C01–C48 → open-ended advanced modules, each placed on the common order.
 
 **Tasks of a language course** (the learner's ✨ new course, ✨ more sentences — connector: `noema_lang_courses` →

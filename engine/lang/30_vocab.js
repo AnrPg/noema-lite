@@ -23,8 +23,10 @@ VIEWS.field = (v, r) => {
 };
 
 /* ---------- ⏱️ name them all: free recall of a whole field ---------- */
+/** Scholarly letters as typed in plain Latin (same table as the search: engine/catalog.js fold): šālôm = shalom, ǧamal = jamal. */
+const PLAIN_LATIN = { 's\u030c': 'sh', 'c\u030c': 'ch', 'z\u030c': 'zh', 'k\u0331': 'kh', 'h\u0331': 'kh', 'h\u032e': 'kh', 't\u0331': 'th', 'd\u0331': 'dh', 'g\u0307': 'gh', 'g\u0331': 'gh', 'g\u030c': 'j', 'j\u030c': 'j' };
 function fold(code, s) {
-  let t = N.stripMarks(code, N.nfc(String(s))).toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[\s'’\-·]+/g, '');
+  let t = N.stripMarks(code, N.nfc(String(s))).toLowerCase().normalize('NFKD').replace(/([sczkhtdgj])([\u030c\u0331\u032e\u0307])/g, (m, b, d) => PLAIN_LATIN[b + d] || m).replace(/[̀-ͯ]/g, '').replace(/[\s'’\-·]+/g, '');
   return t.replace(/ß/g, 'ss');
 }
 /** Every way the learner may type a word: any form, without vowel marks, full spelling, transliteration, pinyin with or without tones. */

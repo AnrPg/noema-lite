@@ -21,7 +21,7 @@ const AR = Object.values(C.lang.ar.lex).find(x => x.pos === 'NOUN' && (x.feature
 const arPl = AR && row(P('ar', AR.id), 'plurals');
 ok(AR && arPl.prominent && arPl.values.length === AR.features.plurals.length && arPl.values.every((v, i) => v.forms[0].text === AR.features.plurals[i].form && v.senses.length === AR.features.plurals[i].senses.length && v.senses.every(s => s.def && s.n >= 1)),
   `Arabic ${AR?.lemma}: both plurals (${texts(arPl).filter(t => /[؀-ۿ]/.test(t)).join(' / ')}), each with the meanings it belongs to`);
-ok(AR && P('ar', AR.id)[0].id === 'gender' && row(P('ar', AR.id), 'dual')?.prominent, 'Arabic noun: gender first, the dual visible');
+ok(AR && P('ar', AR.id)[0].id === 'gender' && row(P('ar', AR.id), 'dual') && !row(P('ar', AR.id), 'dual').prominent, 'Arabic noun: gender first, the dual kept but under “More” (D28: a rule)');
 // German nouns: der / die / das + the word, the plural
 const haus = P('de', 'de:Haus');
 ok(texts(row(haus, 'gender'))[0] === 'das Haus' && texts(row(haus, 'plurals')).includes('die Häuser') && haus[0].id === 'gender', 'German noun: “das Haus” first, plural “die Häuser”');
@@ -40,7 +40,7 @@ const sep = Object.values(C.lang.de.lex).find(x => x.pos === 'VERB' && typeof x.
 ok(sep && texts(row(P('de', sep.id), 'separable')).includes(sep.features.separable) && texts(row(P('de', sep.id), 'preterite'))[0].endsWith(' ' + sep.features.separable), `separable ${sep?.lemma}: the particle, and the Präteritum with the particle after it`);
 // Hebrew and Chinese
 const gv = P('he', 'he:gever');
-ok(['root', 'plurals', 'construct'].every(id => row(gv, id)?.prominent) && texts(row(gv, 'construct')).length === 2, 'Hebrew noun: root, plural, the construct forms visible');
+ok(['root', 'plurals'].every(id => row(gv, id)?.prominent) && !row(gv, 'construct').prominent && texts(row(gv, 'construct')).length === 2, 'Hebrew noun: root and plural visible, the construct forms kept under “More” (D28)');
 const zhN = Object.values(C.lang.zh.lex).find(x => x.pos === 'NOUN' && Array.isArray(x.features?.measure) && x.features.measure.length), zm = row(P('zh', zhN.id), 'measure');
 ok(zm.prominent && zm.values[0].forms[0].sub && /[āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ]/.test(zm.values[0].forms[0].sub), `Chinese ${zhN.lemma}: measure word with its pinyin (${zm.values[0].forms[0].text} ${zm.values[0].forms[0].sub})`);
 // every word of the course: no throw, every declared parameter of its part of speech on its card
@@ -64,6 +64,7 @@ ok(!bad.length, `every word of the pilot course gets its parameters (${bad.slice
     await pg.goto(url + '?account=anr&subject=' + SUBJ + hash);
     await pg.waitForFunction(() => window.NoemaLangUI?.UI?.C && document.querySelector('.lx-main .lx-view'), null, { timeout: 60000 });
     await pg.waitForFunction(() => { const U = NoemaLangUI.UI; return U.profiles || Object.values(U.C.lang.de.lex).some(x => x.profile); }, null, { timeout: 20000 }).catch(() => { });
+    if (!pg.__taught) await pg.evaluate(() => { const U = NoemaLangUI.UI; U.L.langs = U.L.langs || {}; for (const c of ['ar', 'de', 'he', 'zh']) { const S = U.L.langs[c] = U.L.langs[c] || {}; S.checks = S.checks || {}; for (const n of U.C.order) if (U.C.nodes[n].kind === 'lesson') S.checks[n] = Object.assign({}, S.checks[n], { best: 100 }); } });   // D26: this test looks at the full card, so every lesson counts as taught
     await pg.evaluate(() => NoemaLangUI.render ? NoemaLangUI.render() : window.dispatchEvent(new HashChangeEvent('hashchange'))); await wait(400);
   };
   const W = (c, id) => `#/w/${c}/${encodeURIComponent(id)}`;

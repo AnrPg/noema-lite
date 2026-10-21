@@ -1868,6 +1868,7 @@ body.ns-on .cm-tmap .cm-nextup{box-shadow:none}
 body.ns-on .ns-hit{outline:2px solid var(--acc);outline-offset:6px;border-radius:8px;transition:outline-color 1.2s}
 @media (prefers-reduced-motion:reduce){.ns-sr{animation:none}}
 .ns-searchview [hidden],.ns-srsheet [hidden]{display:none!important}
+.ns-tip p{margin:0 0 6px;line-height:1.4}.ns-tip p:last-child{margin:0}.ns-tip{cursor:pointer;text-align:start}
 /* 🗄️ the vault (engine/vault.js, docs/VAULT.md) */
 .vt-lead{margin-top:-4px}
 .vt-bar{gap:8px;flex-wrap:nowrap}.vt-bar .vt-q{flex:1;min-width:0}.vt-upbtn{flex:none;display:inline-flex;align-items:center;gap:4px}

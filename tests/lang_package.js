@@ -196,13 +196,13 @@ const readDir = root => N.readCourse(rel => { const p = path.join(root, rel); re
     };
     const useHere = async p => { if (await p.isVisible('.noema-inuse').catch(() => false)) { await p.click('.noema-inuse button:has-text("Use here")').catch(() => { }); await wait(1000); } };
     const open = async p => { await p.goto('about:blank'); await p.goto(`${BASE}/?account=${ACC}#/lang/lang-mini`); /* a real load, not a hash change: the boot pulls */ await wait(800); await useHere(p); return p.waitForSelector('.lx-host .lx-fhome', { timeout: 30000 }).then(() => true).catch(() => false); };
-    const rows = p => p.$$eval('.lx-fhome .ns-item[data-act^="lang-"]', l => l.map(x => x.dataset.act.slice(5)));
+    const rows = p => p.$$eval('.lx-flagchip[data-lang]', l => l.map(x => x.dataset.lang));   // D29: the strip of languages
     const noHScroll = p => p.evaluate(() => document.scrollingElement.scrollWidth <= innerWidth + 1);
 
     // device 1 (desktop): the record arrived with the sync; the course opens with German
     const D1 = await device({ width: 1280, height: 900 });
     ok(await open(D1.p), 'device 1 opens the library course inside the frame');
-    ok((await rows(D1.p)).join() === 'ar,he,zh,de', 'the added language is a row on the course home: ' + (await rows(D1.p)).join(', '));
+    ok((await rows(D1.p)).join() === 'ar,he,zh,de', 'the added language is a chip in the strip: ' + (await rows(D1.p)).join(', '));
     ok(await D1.p.evaluate(() => NoemaLangUI.UI.C.languages.join() === 'ar,he,zh,de' && NoemaLangUI.UI.C.data.course.added.de.name === 'German' && Object.keys(NoemaLangUI.UI.C.lang.de.lex).length === 12 && NoemaLangUI.UI.L.settings.languages.includes('de')), 'the course holds German (12 words) and it is one of the learner\'s active languages');
     ok(await D1.p.evaluate(() => (NOEMA_LANGPACKS['lang-mini'].course.languages || []).join() === 'ar,he,zh'), 'the library course itself is unchanged (the package is laid over it)');
     // the learner had chosen languages before: a reload keeps German active once and does not add it twice

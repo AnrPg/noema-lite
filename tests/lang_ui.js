@@ -134,8 +134,8 @@ async function answer(page, right) {
   ok(await heLemma.getAttribute('dir') === 'rtl' && await heLemma.getAttribute('lang') === 'he' && /גֶּזֶר/.test((await heLemma.innerText()).normalize('NFC')), 'Hebrew word, right to left, vocalized');
   const secs = await page.$$eval('.lx-card .lx-sec summary', s => s.map(x => x.textContent));
   ok(secs.some(s => /Meanings/.test(s)) && secs.some(s => /In sentences/.test(s)) && secs.some(s => /Watch out/.test(s)) && secs.some(s => /Where it comes from/.test(s)), 'the word card shows the profile sections: ' + secs.length);
-  await page.click('button:has-text("Compare")'); await wait(150);
-  ok(await page.locator('.lx-compare tr').count() === 4, 'compare: the concept in all 4 languages side by side');
+  await page.click('.lx-others > summary'); await wait(150);   // D29: “In other languages”, folded under the word (no Compare toggle)
+  ok(await page.locator('.lx-others .lx-compare tr').count() === 4, 'in other languages: the concept in all 4 languages side by side (a folded section, no Compare toggle)');
   await page.click('.lx-railbtn >> nth=2'); await wait(150);   // zh
   ok(/húluóbo/.test(await page.locator('.lx-card .lx-lemma').first().innerText()), 'Chinese: pinyin under the characters');
   // D14 / D15: a concept with two words shows both, each with what separates it; every card shows its facade and its other meanings

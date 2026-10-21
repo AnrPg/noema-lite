@@ -409,7 +409,8 @@
     "phenomenon": "ar.morph.plural.broken",
     "why": "The plural is learned with the noun: its kind (broken, sound masculine -ūna, sound feminine -āt), its pattern and declension, and the meanings it belongs to (بُيُوت houses / أَبْيَات verses). “none” for mass nouns, names and words used only in the singular. Each plural also gives its transliteration (pausal).",
     "prominent": true,
-    "order": 2
+    "order": 2,
+    "from": "fn.plural.noun"
    },
    {
     "id": "dual",
@@ -418,8 +419,9 @@
     "none": true,
     "phenomenon": "ar.morph.number.dual",
     "why": "Mostly regular (-āni), but ة becomes ت (سَنَتَانِ) and some duals are irregular (أَبَوَانِ); “none” for mass nouns, names and plural-only words.",
-    "prominent": true,
-    "order": 3
+    "prominent": false,
+    "order": 3,
+    "from": "fn.plural.noun"
    },
    {
     "id": "human",
@@ -427,7 +429,7 @@
     "type": "bool",
     "phenomenon": "ar.syn.nonhuman_plural",
     "why": "Plurals of people agree in the plural; all other plurals agree as feminine singular (الْكُتُبُ جَدِيدَةٌ).",
-    "prominent": true,
+    "prominent": false,
     "order": 4
    },
    {
@@ -443,8 +445,9 @@
     ],
     "phenomenon": "ar.morph.diptote",
     "why": "Triptotes take tanwīn and -i in the genitive; diptotes (names, أَفْعَل, -ān, many broken plurals) take no tanwīn and -a; defective nouns end in -in (مُحَامٍ); invariable nouns never change (مَقْهًى، كُوسَا).",
-    "prominent": true,
-    "order": 5
+    "prominent": false,
+    "order": 5,
+    "from": "fn.case"
    },
    {
     "id": "construct",
@@ -458,8 +461,9 @@
     },
     "phenomenon": "ar.morph.construct",
     "why": "The form the noun takes as the first word of “X of Y” (بَيْتُ الطَّالِبِ): no article, no tanwīn, ة read -t- (مَدْرَسَةُ madrasatu); irregular for the five nouns (أَبُو، أَخُو), duals lose their nūn (وَالِدَا), defective nouns get their ī back (مُحَامِي). “none” for phrases (only their head noun changes) and for names that are only ever the second word (days, months).",
-    "prominent": true,
-    "order": 6
+    "prominent": false,
+    "order": 6,
+    "from": "fn.possessive"
    },
    {
     "id": "root",
@@ -469,7 +473,8 @@
     "phenomenon": "ar.morph.root",
     "why": "Links the word to its family and to the dictionary; “none” for loanwords and for phrases (their parts have their own roots).",
     "prominent": true,
-    "order": 7
+    "order": 7,
+    "from": "fn.root.pattern"
    },
    {
     "id": "pattern",
@@ -478,8 +483,9 @@
     "none": true,
     "phenomenon": "ar.morph.pattern",
     "why": "The measure in ف ع ل letters (mafʿal = place, mifʿāl = tool, fāʿil = doer …) lets the learner guess new words; “none” for loanwords, phrases and words that fit no measure.",
-    "prominent": true,
-    "order": 8
+    "prominent": false,
+    "order": 8,
+    "from": "fn.root.pattern"
    },
    {
     "id": "unit",
@@ -504,7 +510,7 @@
     },
     "phenomenon": "ar.morph.gender",
     "why": "A person noun has a feminine in -a (مُعَلِّم → مُعَلِّمَة) or a word of another root (رَجُل ↔ اِمْرَأَة, أَب ↔ أُمّ); kinship pairs are learned together. “none” for things and for words that cover both sexes.",
-    "prominent": true,
+    "prominent": false,
     "order": 10
    },
    {
@@ -550,7 +556,7 @@
     "none": true,
     "phenomenon": "ar.morph.adj.colour",
     "why": "Regular -a (كَبِيرَة), but فَعْلَاء for colours (حَمْرَاء) and فَعْلَى for faʿlān (عَطْشَى).",
-    "prominent": true,
+    "prominent": false,
     "order": 1
    },
    {
@@ -570,7 +576,8 @@
     "phenomenon": "ar.morph.plural.multiple",
     "why": "Broken or sound -ūna, for masculine plurals of people (non-human plurals usually take the feminine singular, though broken plurals also go with things: لَيَالٍ طِوَالٌ); some meanings have their own plural (كِبَار big / كُبَرَاء great men). Each plural also gives its transliteration (pausal).",
     "prominent": true,
-    "order": 2
+    "order": 2,
+    "from": "fn.plural.noun"
    },
    {
     "id": "elative",
@@ -580,7 +587,8 @@
     "phenomenon": "ar.morph.adj.elative",
     "why": "أَكْبَرُ from كَبِير; “none” when the comparison is made with أَكْثَرُ / أَشَدُّ + a maṣdar (colours, nisbas, participles).",
     "prominent": true,
-    "order": 3
+    "order": 3,
+    "from": "fn.comparison"
    },
    {
     "id": "declension",
@@ -594,8 +602,9 @@
     ],
     "phenomenon": "ar.morph.diptote",
     "why": "Colours (أَحْمَرُ) and faʿlān (عَطْشَانُ) are diptotes; غَالٍ is defective.",
-    "prominent": true,
-    "order": 4
+    "prominent": false,
+    "order": 4,
+    "from": "fn.case"
    },
    {
     "id": "governs",
@@ -619,7 +628,7 @@
     "none": true,
     "phenomenon": "ar.morph.nisba",
     "why": "A participle of a verb (بَارِد ← بَرَدَ), a nisba in -ī (بُنِّيّ ← بُنّ) or an elative; “none” for a basic adjective.",
-    "prominent": true,
+    "prominent": false,
     "order": 6
    },
    {
@@ -630,7 +639,8 @@
     "phenomenon": "ar.morph.root",
     "why": "Links the adjective to the verb and the noun of the same family; “none” for adjectives made from loanwords.",
     "prominent": true,
-    "order": 7
+    "order": 7,
+    "from": "fn.root.pattern"
    },
    {
     "id": "pattern",
@@ -639,8 +649,9 @@
     "none": true,
     "phenomenon": "ar.morph.pattern",
     "why": "faʿīl, fāʿil, faʿlān, afʿal (colours), nisba -ī …; “none” when no measure applies.",
-    "prominent": true,
-    "order": 8
+    "prominent": false,
+    "order": 8,
+    "from": "fn.root.pattern"
    },
    {
     "id": "sunLetter",
@@ -697,7 +708,8 @@
     "phenomenon": "ar.morph.verb.forms",
     "why": "Form I … X gives the present, participle and maṣdar patterns and a typical meaning.",
     "prominent": true,
-    "order": 1
+    "order": 1,
+    "from": "fn.root.pattern"
    },
    {
     "id": "present",
@@ -707,7 +719,8 @@
     "phenomenon": "ar.morph.verb.stem_vowel",
     "why": "The second principal part: the stem vowel of form I (يَكْتُبُ / يَشْرَبُ / يَجْلِسُ) cannot be predicted. “none” for a verb that has no present.",
     "prominent": true,
-    "order": 2
+    "order": 2,
+    "from": "fn.present"
    },
    {
     "id": "stemVowels",
@@ -725,7 +738,8 @@
     "phenomenon": "ar.morph.verb.stem_vowel",
     "why": "Form I: the vowel of the second radical in the past and in the present (كَتَبَ يَكْتُبُ a–u, جَلَسَ يَجْلِسُ a–i, فَتَحَ يَفْتَحُ a–a, شَرِبَ يَشْرَبُ i–a); for hollow and defective verbs the underlying vowel (نَامَ = i–a). “none” for forms II–X, whose vowels are fixed by the form.",
     "prominent": true,
-    "order": 3
+    "order": 3,
+    "from": "fn.present"
    },
    {
     "id": "masdar",
@@ -735,7 +749,8 @@
     "phenomenon": "ar.morph.masdar",
     "why": "Arabic’s “infinitive” (to eat = أَكْل); unpredictable for form I. “none” for a verb that has none.",
     "prominent": true,
-    "order": 4
+    "order": 4,
+    "from": "fn.root.pattern"
    },
    {
     "id": "participles",
@@ -748,8 +763,9 @@
     },
     "phenomenon": "ar.morph.participles",
     "why": "Very frequent as nouns and adjectives (كَاتِب writer, مَكْتُوب written); the passive participle only for verbs with an object.",
-    "prominent": true,
-    "order": 5
+    "prominent": false,
+    "order": 5,
+    "from": "fn.root.pattern"
    },
    {
     "id": "rootClass",
@@ -765,8 +781,9 @@
     ],
     "phenomenon": "ar.morph.root.weak",
     "why": "Weak radicals (و ي), a doubled radical or hamza change the conjugation: hollow قَالَ، defective مَشَى، assimilated وَصَلَ، doubled أَحَبَّ، hamzated أَكَلَ.",
-    "prominent": true,
-    "order": 6
+    "prominent": false,
+    "order": 6,
+    "from": "fn.root.pattern"
    },
    {
     "id": "governs",
@@ -791,8 +808,9 @@
     "none": true,
     "phenomenon": "ar.morph.verb.imperative",
     "why": "Made from the jussive without the prefix; it may need a helping alif (اُكْتُبْ، اِشْرَبْ), loses weak letters (قُلْ، نَمْ، اِمْشِ، صِلْ) or is irregular (كُلْ from أَكَلَ). “none” for verbs with no imperative.",
-    "prominent": true,
-    "order": 8
+    "prominent": false,
+    "order": 8,
+    "from": "fn.imperative"
    },
    {
     "id": "passive",
@@ -807,8 +825,9 @@
     },
     "phenomenon": "ar.morph.verb.passive",
     "why": "The internal passive changes only the vowels (كَتَبَ → كُتِبَ، يَكْتُبُ → يُكْتَبُ; hollow قَادَ → قِيدَ، يُقَادُ). “none” for verbs without an object, which have no personal passive.",
-    "prominent": true,
-    "order": 9
+    "prominent": false,
+    "order": 9,
+    "from": "fn.past"
    },
    {
     "id": "past1sg",
@@ -817,8 +836,9 @@
     "none": true,
     "phenomenon": "ar.morph.root.weak",
     "why": "The past before a consonant ending shows the stem change of weak and doubled verbs: كَانَ → كُنْتُ, نَامَ → نِمْتُ, مَشَى → مَشَيْتُ, أَحَبَّ → أَحْبَبْتُ; regular for sound verbs (كَتَبْتُ). “none” for a verb with no past.",
-    "prominent": true,
-    "order": 10
+    "prominent": false,
+    "order": 10,
+    "from": "fn.past"
    },
    {
     "id": "root",
@@ -827,7 +847,8 @@
     "phenomenon": "ar.morph.root",
     "why": "The verb is the centre of its word family.",
     "prominent": true,
-    "order": 11
+    "order": 11,
+    "from": "fn.root.pattern"
    },
    {
     "id": "meaningForms",
@@ -867,7 +888,7 @@
     ],
     "phenomenon": "ar.syn.adverbial_accusative",
     "why": "Most adverbs are a noun or adjective in the accusative (غَدًا، كَثِيرًا، الْيَوْمَ) and keep the -an / -a in reading and spelling (the extra alif); others are fixed particles that never change (هُنَا، أَمْسِ، الْآنَ، فَقَطْ) or phrases (بِسُرْعَةٍ، مِنْ فَضْلِكَ).",
-    "prominent": true,
+    "prominent": false,
     "order": 1
    },
    {
@@ -877,7 +898,7 @@
     "none": true,
     "phenomenon": "ar.syn.adverbial_accusative",
     "why": "Most adverbs are accusatives of nouns or adjectives (كَثِيرًا ← كَثِير، صَبَاحًا ← صَبَاح) or a preposition + a word (بِخَيْرٍ); “none” for a basic particle (هُنَا، الْآنَ).",
-    "prominent": true,
+    "prominent": false,
     "order": 2
    },
    {
@@ -925,7 +946,8 @@
     "phenomenon": "ar.morph.suffix_pronouns",
     "why": "Pronouns are attached to the preposition, and its shape may change: عَلَى → عَلَيَّ، عَلَيْهِ; إِلَى → إِلَيَّ; فِي → فِيَّ; مِنْ → مِنِّي; لِـ → لِي، لَهُ; بِـ → بِهِ. “none” for prepositions that take no attached pronoun (حَتَّى، مُنْذُ).",
     "prominent": true,
-    "order": 1
+    "order": 1,
+    "from": "fn.prep.core"
    },
    {
     "id": "kind",
@@ -938,7 +960,7 @@
     ],
     "phenomenon": "ar.morph.case",
     "why": "A true preposition (ḥarf: فِي، مِنْ، إِلَى), a noun in the accusative used as a preposition (ẓarf: قَبْلَ، عِنْدَ، أَمَامَ — it can itself follow مِنْ: مِنْ عِنْدِ), or a preposition + noun (phrase: بِدُونِ، بِجَانِبِ). All take the genitive.",
-    "prominent": true,
+    "prominent": false,
     "order": 2
    },
    {
@@ -948,7 +970,7 @@
     "type": "bool",
     "phenomenon": "ar.morph.prefix_clitics",
     "why": "بِـ and لِـ are written together with the next word; the others stand alone.",
-    "prominent": true,
+    "prominent": false,
     "order": 3
    },
    {
@@ -997,7 +1019,7 @@
     ],
     "phenomenon": "ar.morph.pron.gender2",
     "why": "Gender in the 2nd and 3rd person (أَنْتَ / أَنْتِ، هُمْ / هُنَّ).",
-    "prominent": true,
+    "prominent": false,
     "order": 1
    },
    {
@@ -1010,7 +1032,8 @@
     "phenomenon": "ar.morph.suffix_pronouns",
     "why": "The pronoun as an ending on nouns, verbs and prepositions (كِتَابُكَ، يَرَاهُ، لَهَا).",
     "prominent": true,
-    "order": 2
+    "order": 2,
+    "from": "fn.possessive"
    },
    {
     "id": "translit",
@@ -1093,7 +1116,7 @@
     "none": true,
     "phenomenon": "ar.numbers.ordinals",
     "why": "The ordinal (masculine): ثَالِث from ثَلَاثَة; “first” is suppletive (أَوَّل); “none” for zero.",
-    "prominent": true,
+    "prominent": false,
     "order": 4
    },
    {
@@ -1139,7 +1162,7 @@
     "type": "bool",
     "phenomenon": "ar.morph.prefix_clitics",
     "why": "وَ and فَ are written together with the next word.",
-    "prominent": true,
+    "prominent": false,
     "order": 2
    },
    {
@@ -1198,7 +1221,7 @@
     "type": "bool",
     "phenomenon": "ar.morph.prefix_clitics",
     "why": "أَ is written together with the next word; the other particles stand alone.",
-    "prominent": true,
+    "prominent": false,
     "order": 2
    },
    {

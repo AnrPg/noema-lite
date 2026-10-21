@@ -108,3 +108,8 @@ sq, pt-PT. Postponed by the owner to save effort; Greek comes first and is compl
 how-to. Each locale: ≈200 k characters of drafts → review in Weblate → flag `preview` → `on`.
 **Think first:** Turkish suffixes after placeholders (vowel harmony: rephrase so no suffix follows `{name}`); zh-Hant is
 Taiwan vocabulary, not a conversion of zh-Hans; Arabic: MSA, gender-neutral phrasing, digits from ICU only.
+
+### TD-10 · Language lessons: etymology, folk tradition and culture as sections of each lesson — ⏸ parked by the owner (2026-10-18)
+**What:** the aspect sections of a theory lesson (D29) exist for what the data already says (sounds, word forms, sentences, meaning, vocabulary, use — from the grammar points' `category`) and the library lists writing, listening & speaking and reading. **Etymology, folk tradition and culture** are not sections of the lessons: grammar points carry no such category, so each language needs new content per lesson (and exercises for it, D27) before the lesson can show them.
+**Size:** large — new writing per language and lesson, a data field (e.g. `aspect` on lesson blocks), validator rules, exercise generators and tests; roughly a content project per language.
+**Think first:** decide the data shape (a lesson-level `aspects: {etymology: [...], culture: [...]}` or an `aspect` on each block) and one pilot language; D27 (every section trained and tested) applies; do it through the language agent's rules (docs/LANGUAGE_RULES.md).

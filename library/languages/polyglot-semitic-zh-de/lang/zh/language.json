@@ -19,7 +19,7 @@
    {
     "id": "pinyin",
     "title": "pinyin (dictionary tones)",
-    "prominent": true,
+    "prominent": false,
     "order": 7,
     "phenomenon": "zh.phon.tones",
     "type": "string",
@@ -53,7 +53,7 @@
    {
     "id": "tradPerSense",
     "title": "traditional characters per meaning",
-    "prominent": true,
+    "prominent": false,
     "order": 6,
     "phenomenon": "zh.orth.trad.manytoone",
     "type": "list",
@@ -77,7 +77,7 @@
    {
     "id": "predicative",
     "title": "as a predicate",
-    "prominent": true,
+    "prominent": false,
     "order": 1,
     "phenomenon": "zh.syntax.adjpred",
     "type": "enum",
@@ -90,7 +90,7 @@
    {
     "id": "degree",
     "title": "takes 很 (degree adverbs)",
-    "prominent": true,
+    "prominent": false,
     "order": 2,
     "phenomenon": "zh.syntax.adjpred",
     "type": "enum",
@@ -99,12 +99,13 @@
      "takes 很",
      "no degree adverb"
     ],
-    "why": "Most adjectives take 很, 非常, 太, 有点: a bare adjective predicate sounds like a contrast (这个大，那个小), so a plain statement takes an unstressed 很. 区别词 and words of identity (一样) take none. none: a phrase that already has its degree word (很好, 还好)."
+    "why": "Most adjectives take 很, 非常, 太, 有点: a bare adjective predicate sounds like a contrast (这个大，那个小), so a plain statement takes an unstressed 很. 区别词 and words of identity (一样) take none. none: a phrase that already has its degree word (很好, 还好).",
+    "from": "fn.adjective"
    },
    {
     "id": "redup",
     "title": "reduplication",
-    "prominent": true,
+    "prominent": false,
     "order": 3,
     "phenomenon": "zh.morph.reduplication",
     "type": "string",
@@ -151,7 +152,7 @@
    {
     "id": "pinyin",
     "title": "pinyin (dictionary tones)",
-    "prominent": true,
+    "prominent": false,
     "order": 5,
     "phenomenon": "zh.phon.tones",
     "type": "string",
@@ -185,7 +186,7 @@
    {
     "id": "tradPerSense",
     "title": "traditional characters per meaning",
-    "prominent": true,
+    "prominent": false,
     "order": 4,
     "phenomenon": "zh.orth.trad.manytoone",
     "type": "list",
@@ -209,7 +210,7 @@
    {
     "id": "position",
     "title": "before or after its noun",
-    "prominent": true,
+    "prominent": false,
     "order": 1,
     "phenomenon": "zh.syntax.localizers",
     "type": "enum",
@@ -254,7 +255,7 @@
    {
     "id": "pinyin",
     "title": "pinyin (dictionary tones)",
-    "prominent": true,
+    "prominent": false,
     "order": 5,
     "phenomenon": "zh.phon.tones",
     "type": "string",
@@ -288,7 +289,7 @@
    {
     "id": "tradPerSense",
     "title": "traditional characters per meaning",
-    "prominent": true,
+    "prominent": false,
     "order": 4,
     "phenomenon": "zh.orth.trad.manytoone",
     "type": "list",
@@ -312,7 +313,7 @@
    {
     "id": "position",
     "title": "where the adverb stands",
-    "prominent": true,
+    "prominent": false,
     "order": 1,
     "phenomenon": "zh.syntax.adverbs",
     "type": "strings",
@@ -326,7 +327,7 @@
    {
     "id": "withNeg",
     "title": "with a negation (不 / 没)",
-    "prominent": true,
+    "prominent": false,
     "order": 2,
     "phenomenon": "zh.syntax.negation",
     "type": "string",
@@ -358,7 +359,7 @@
    {
     "id": "pinyin",
     "title": "pinyin (dictionary tones)",
-    "prominent": true,
+    "prominent": false,
     "order": 4,
     "phenomenon": "zh.phon.tones",
     "type": "string",
@@ -392,7 +393,7 @@
    {
     "id": "tradPerSense",
     "title": "traditional characters per meaning",
-    "prominent": true,
+    "prominent": false,
     "order": 3,
     "phenomenon": "zh.orth.trad.manytoone",
     "type": "list",
@@ -457,7 +458,7 @@
    {
     "id": "pinyin",
     "title": "pinyin (dictionary tones)",
-    "prominent": true,
+    "prominent": false,
     "order": 5,
     "phenomenon": "zh.phon.tones",
     "type": "string",
@@ -491,7 +492,7 @@
    {
     "id": "tradPerSense",
     "title": "traditional characters per meaning",
-    "prominent": true,
+    "prominent": false,
     "order": 4,
     "phenomenon": "zh.orth.trad.manytoone",
     "type": "list",
@@ -564,7 +565,7 @@
    {
     "id": "pinyin",
     "title": "pinyin (dictionary tones)",
-    "prominent": true,
+    "prominent": false,
     "order": 4,
     "phenomenon": "zh.phon.tones",
     "type": "string",
@@ -598,7 +599,7 @@
    {
     "id": "tradPerSense",
     "title": "traditional characters per meaning",
-    "prominent": true,
+    "prominent": false,
     "order": 3,
     "phenomenon": "zh.orth.trad.manytoone",
     "type": "list",
@@ -653,7 +654,7 @@
    {
     "id": "pinyin",
     "title": "pinyin (dictionary tones)",
-    "prominent": true,
+    "prominent": false,
     "order": 4,
     "phenomenon": "zh.phon.tones",
     "type": "string",
@@ -687,7 +688,7 @@
    {
     "id": "tradPerSense",
     "title": "traditional characters per meaning",
-    "prominent": true,
+    "prominent": false,
     "order": 3,
     "phenomenon": "zh.orth.trad.manytoone",
     "type": "list",
@@ -750,7 +751,7 @@
    {
     "id": "pinyin",
     "title": "pinyin (dictionary tones)",
-    "prominent": true,
+    "prominent": false,
     "order": 5,
     "phenomenon": "zh.phon.tones",
     "type": "string",
@@ -784,7 +785,7 @@
    {
     "id": "tradPerSense",
     "title": "traditional characters per meaning",
-    "prominent": true,
+    "prominent": false,
     "order": 4,
     "phenomenon": "zh.orth.trad.manytoone",
     "type": "list",
@@ -818,7 +819,7 @@
    {
     "id": "measurePerSense",
     "title": "measure word(s) per meaning",
-    "prominent": true,
+    "prominent": false,
     "order": 2,
     "phenomenon": "zh.syntax.measure",
     "type": "list",
@@ -883,7 +884,7 @@
    {
     "id": "pinyin",
     "title": "pinyin (dictionary tones)",
-    "prominent": true,
+    "prominent": false,
     "order": 6,
     "phenomenon": "zh.phon.tones",
     "type": "string",
@@ -917,7 +918,7 @@
    {
     "id": "tradPerSense",
     "title": "traditional characters per meaning",
-    "prominent": true,
+    "prominent": false,
     "order": 5,
     "phenomenon": "zh.orth.trad.manytoone",
     "type": "list",
@@ -941,7 +942,7 @@
    {
     "id": "withMeasure",
     "title": "with a measure word",
-    "prominent": true,
+    "prominent": false,
     "order": 1,
     "phenomenon": [
      "zh.syntax.measure",
@@ -954,7 +955,7 @@
    {
     "id": "ordinal",
     "title": "ordinal (第 …)",
-    "prominent": true,
+    "prominent": false,
     "order": 2,
     "phenomenon": "zh.num.ordinal",
     "type": "string",
@@ -986,7 +987,7 @@
    {
     "id": "pinyin",
     "title": "pinyin (dictionary tones)",
-    "prominent": true,
+    "prominent": false,
     "order": 4,
     "phenomenon": "zh.phon.tones",
     "type": "string",
@@ -1020,7 +1021,7 @@
    {
     "id": "tradPerSense",
     "title": "traditional characters per meaning",
-    "prominent": true,
+    "prominent": false,
     "order": 3,
     "phenomenon": "zh.orth.trad.manytoone",
     "type": "list",
@@ -1082,7 +1083,7 @@
    {
     "id": "pinyin",
     "title": "pinyin (dictionary tones)",
-    "prominent": true,
+    "prominent": false,
     "order": 4,
     "phenomenon": "zh.phon.tones",
     "type": "string",
@@ -1116,7 +1117,7 @@
    {
     "id": "tradPerSense",
     "title": "traditional characters per meaning",
-    "prominent": true,
+    "prominent": false,
     "order": 3,
     "phenomenon": "zh.orth.trad.manytoone",
     "type": "list",
@@ -1140,7 +1141,7 @@
    {
     "id": "plural",
     "title": "plural form",
-    "prominent": true,
+    "prominent": false,
     "order": 1,
     "phenomenon": "zh.morph.men",
     "type": "string",
@@ -1172,7 +1173,7 @@
    {
     "id": "pinyin",
     "title": "pinyin (dictionary tones)",
-    "prominent": true,
+    "prominent": false,
     "order": 5,
     "phenomenon": "zh.phon.tones",
     "type": "string",
@@ -1206,7 +1207,7 @@
    {
     "id": "tradPerSense",
     "title": "traditional characters per meaning",
-    "prominent": true,
+    "prominent": false,
     "order": 4,
     "phenomenon": "zh.orth.trad.manytoone",
     "type": "list",
@@ -1275,7 +1276,7 @@
    {
     "id": "pinyin",
     "title": "pinyin (dictionary tones)",
-    "prominent": true,
+    "prominent": false,
     "order": 11,
     "phenomenon": "zh.phon.tones",
     "type": "string",
@@ -1309,7 +1310,7 @@
    {
     "id": "tradPerSense",
     "title": "traditional characters per meaning",
-    "prominent": true,
+    "prominent": false,
     "order": 10,
     "phenomenon": "zh.orth.trad.manytoone",
     "type": "list",
@@ -1349,7 +1350,7 @@
    {
     "id": "neg",
     "title": "negated with 不, 没 or both",
-    "prominent": true,
+    "prominent": false,
     "order": 2,
     "phenomenon": "zh.syntax.negation",
     "type": "enum",
@@ -1375,7 +1376,8 @@
      "着",
      "在"
     ],
-    "why": "Which of 了 (done, a change), 过 (ever, once before), 着 (a lasting state: 坐着, 开着) and 在 (in progress: 在吃) the verb takes. State verbs, the copula and auxiliaries take none (*是了, *会着), change-of-state verbs no 在 or 着 (*在醒来 …), with the reason."
+    "why": "Which of 了 (done, a change), 过 (ever, once before), 着 (a lasting state: 坐着, 开着) and 在 (in progress: 在吃) the verb takes. State verbs, the copula and auxiliaries take none (*是了, *会着), change-of-state verbs no 在 or 着 (*在醒来 …), with the reason.",
+    "from": "fn.aspect"
    },
    {
     "id": "verbKind",
@@ -1413,7 +1415,8 @@
      "form": "string",
      "gloss": "string?"
     },
-    "why": "The usual complements after the verb: a result (吃完, 洗干净), a direction (走进, 想起来) and the potential with 得 / 不 inside (吃不下, 睡不着, 来得及). With a separable verb the complement goes between its parts (洗完澡). none: the verb takes none, with the reason."
+    "why": "The usual complements after the verb: a result (吃完, 洗干净), a direction (走进, 想起来) and the potential with 得 / 不 inside (吃不下, 睡不着, 来得及). With a separable verb the complement goes between its parts (洗完澡). none: the verb takes none, with the reason.",
+    "from": "fn.aspect"
    },
    {
     "id": "redup",

@@ -15,6 +15,7 @@ const LAND = items => window.NoemaI18n && NoemaI18n.locale !== 'en' ? NoemaI18n.
 
 /* ---------- today's languages (§9.6): chosen on the home among the active ones, for today only ---------- */
 function todayLangs() {
+  if (UI.scope) return [UI.scope];   // the page is about one language
   const act = activeLangs(), t = UI.prefs.today;
   if (!t || t.day !== today()) return act;
   const l = act.filter(c => (t.langs || []).includes(c));

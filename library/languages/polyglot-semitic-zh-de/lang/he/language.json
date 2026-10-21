@@ -183,12 +183,13 @@
      "senses": "senses",
      "note": "string?"
     },
-    "why": "The plural is not predictable from the gender (חַלּוֹנוֹת m., שָׁנִים f.) and the stem often changes; a meaning may have its own plural (כִּכָּרוֹת squares, כִּכְּרוֹת loaves)."
+    "why": "The plural is not predictable from the gender (חַלּוֹנוֹת m., שָׁנִים f.) and the stem often changes; a meaning may have its own plural (כִּכָּרוֹת squares, כִּכְּרוֹת loaves).",
+    "from": "fn.plural.noun"
    },
    {
     "id": "pluralShape",
     "title": "how the plural is built",
-    "prominent": true,
+    "prominent": false,
     "order": 3,
     "phenomenon": [
      "he.morph.plural",
@@ -206,12 +207,13 @@
      "noun + adjective: both change"
     ],
     "none": true,
-    "why": "What must be learned beyond the ending: regular (the gender's own ending, only the usual shortening of vowels: מָטוֹס → מְטוֹסִים); the ending of the other gender (חַלּוֹן → חַלּוֹנוֹת, שָׁנָה → שָׁנִים); a segolate whose vowels are rebuilt (סֵפֶר → סְפָרִים, יַלְדָּה → יְלָדוֹת); a stem change (בַּיִת → בָּתִּים, עִיר → עָרִים); the plural of another word (אַבָּא → אָבוֹת); a compound whose first word changes (בֵּית סֵפֶר → בָּתֵּי סֵפֶר), whose two words change (בֶּן דּוֹד → בְּנֵי דּוֹדִים), or a noun with its adjective (פִּלְפֵּל חָרִיף → פִּלְפְּלִים חֲרִיפִים). Agreement always follows the gender of the singular. none: no plural."
+    "why": "What must be learned beyond the ending: regular (the gender's own ending, only the usual shortening of vowels: מָטוֹס → מְטוֹסִים); the ending of the other gender (חַלּוֹן → חַלּוֹנוֹת, שָׁנָה → שָׁנִים); a segolate whose vowels are rebuilt (סֵפֶר → סְפָרִים, יַלְדָּה → יְלָדוֹת); a stem change (בַּיִת → בָּתִּים, עִיר → עָרִים); the plural of another word (אַבָּא → אָבוֹת); a compound whose first word changes (בֵּית סֵפֶר → בָּתֵּי סֵפֶר), whose two words change (בֶּן דּוֹד → בְּנֵי דּוֹדִים), or a noun with its adjective (פִּלְפֵּל חָרִיף → פִּלְפְּלִים חֲרִיפִים). Agreement always follows the gender of the singular. none: no plural.",
+    "from": "fn.plural.noun"
    },
    {
     "id": "construct",
     "title": "construct forms (“the … of”)",
-    "prominent": true,
+    "prominent": false,
     "order": 4,
     "phenomenon": "he.morph.construct",
     "type": "list",
@@ -222,12 +224,13 @@
      "senses": "senses?",
      "note": "string?"
     },
-    "why": "Needed for every “X of Y” phrase and every compound; the stem often changes (בַּיִת → בֵּית, ־ָה → ־ַת, ־ִים → ־ֵי). The forms are also paradigm cells."
+    "why": "Needed for every “X of Y” phrase and every compound; the stem often changes (בַּיִת → בֵּית, ־ָה → ־ַת, ־ִים → ־ֵי). The forms are also paradigm cells.",
+    "from": "fn.possessive"
    },
    {
     "id": "possessive",
     "title": "with a possessive ending (“my …”)",
-    "prominent": true,
+    "prominent": false,
     "order": 5,
     "phenomenon": "he.morph.poss-suffix",
     "type": "list",
@@ -237,7 +240,8 @@
      "number": "enum:SG|PL",
      "register": "enum:everyday|formal"
     },
-    "why": "The form with “my” shows the stem the endings attach to, which often differs from the plain word (מִשְׁפָּחָה → מִשְׁפַּחְתִּי, סֵפֶר → סִפְרִי, בַּיִת → בֵּיתִי); SG: one thing (“my book”), PL: several (סְפָרַי “my books”). register: everyday for family words (אָחִי, אִמִּי), formal for the others, which speech says with שֶׁל (הַסֵּפֶר שֶׁלִּי). none: loanwords, mass nouns, names of days and months, compounds, and nouns whose endings belong only to literary style."
+    "why": "The form with “my” shows the stem the endings attach to, which often differs from the plain word (מִשְׁפָּחָה → מִשְׁפַּחְתִּי, סֵפֶר → סִפְרִי, בַּיִת → בֵּיתִי); SG: one thing (“my book”), PL: several (סְפָרַי “my books”). register: everyday for family words (אָחִי, אִמִּי), formal for the others, which speech says with שֶׁל (הַסֵּפֶר שֶׁלִּי). none: loanwords, mass nouns, names of days and months, compounds, and nouns whose endings belong only to literary style.",
+    "from": "fn.possessive"
    },
    {
     "id": "root",
@@ -247,22 +251,24 @@
     "phenomenon": "he.morph.root",
     "type": "string",
     "why": "The root letters, separated by spaces (כ ת ב): the root links the word to its family and to Arabic cognates. Loans, compounds and primary words say none, with the reason.",
-    "none": true
+    "none": true,
+    "from": "fn.root.pattern"
    },
    {
     "id": "pattern",
     "title": "noun pattern (mishkal)",
-    "prominent": true,
+    "prominent": false,
     "order": 7,
     "phenomenon": "he.morph.mishkal",
     "type": "string",
     "none": true,
-    "why": "The pattern, written with the dummy root ק־ט־ל, carries meaning (places מִקְטָל, tools, professions קַטָּל) and predicts the plural and the construct. Loans, compounds and primary or one-syllable nouns say none."
+    "why": "The pattern, written with the dummy root ק־ט־ל, carries meaning (places מִקְטָל, tools, professions קַטָּל) and predicts the plural and the construct. Loans, compounds and primary or one-syllable nouns say none.",
+    "from": "fn.root.pattern"
    },
    {
     "id": "spelling",
     "title": "everyday spelling (no vowel points)",
-    "prominent": true,
+    "prominent": false,
     "order": 8,
     "phenomenon": "he.orth.ktiv-male",
     "type": "string",
@@ -280,7 +286,8 @@
      "form": "string",
      "senses": "senses?"
     },
-    "why": "A few nouns (units of time, paired things) say “two” with the ending ־ַיִם (יוֹמַיִם); all others use שְׁנֵי / שְׁתֵּי + the plural."
+    "why": "A few nouns (units of time, paired things) say “two” with the ending ־ַיִם (יוֹמַיִם); all others use שְׁנֵי / שְׁתֵּי + the plural.",
+    "from": "fn.plural.noun"
    },
    {
     "id": "genderCue",
@@ -341,7 +348,8 @@
     "order": 1,
     "phenomenon": "he.morph.binyan",
     "type": "string",
-    "why": "One of paal, nifal, piel, pual, hifil, hufal, hitpael: it fixes all the forms and often the meaning relative to other verbs of the root."
+    "why": "One of paal, nifal, piel, pual, hifil, hufal, hitpael: it fixes all the forms and often the meaning relative to other verbs of the root.",
+    "from": "fn.root.pattern"
    },
    {
     "id": "root",
@@ -350,12 +358,13 @@
     "order": 2,
     "phenomenon": "he.morph.root",
     "type": "string",
-    "why": "The root letters, separated by spaces (כ ת ב): the root links the word to its family and to Arabic cognates. Loans, compounds and primary words say none, with the reason."
+    "why": "The root letters, separated by spaces (כ ת ב): the root links the word to its family and to Arabic cognates. Loans, compounds and primary words say none, with the reason.",
+    "from": "fn.root.pattern"
    },
    {
     "id": "rootClass",
     "title": "weak-root class (gizra)",
-    "prominent": true,
+    "prominent": false,
     "order": 3,
     "phenomenon": "he.morph.weak-roots",
     "type": "strings",
@@ -375,7 +384,8 @@
      "quadriliteral",
      "irregular"
     ],
-    "why": "Explains the “irregular” forms: שׁוֹתָה, לִשְׁתּוֹת (lamed-he), בָּא (ayin-vav), תִּסַּע (pe-nun), לָלֶכֶת (הָלַךְ, irregular)."
+    "why": "Explains the “irregular” forms: שׁוֹתָה, לִשְׁתּוֹת (lamed-he), בָּא (ayin-vav), תִּסַּע (pe-nun), לָלֶכֶת (הָלַךְ, irregular).",
+    "from": "fn.root.pattern"
    },
    {
     "id": "present",
@@ -385,7 +395,8 @@
     "phenomenon": "he.morph.present",
     "type": "string",
     "none": true,
-    "why": "The masculine singular present (a participle: כּוֹתֵב, מְדַבֵּר, מַתְחִיל) is a principal part: its pattern belongs to the binyan, and weak roots change it (קָם, שׁוֹתֶה). none: הָיָה has no present in use."
+    "why": "The masculine singular present (a participle: כּוֹתֵב, מְדַבֵּר, מַתְחִיל) is a principal part: its pattern belongs to the binyan, and weak roots change it (קָם, שׁוֹתֶה). none: הָיָה has no present in use.",
+    "from": "fn.present"
    },
    {
     "id": "future",
@@ -394,16 +405,18 @@
     "order": 5,
     "phenomenon": "he.morph.future",
     "type": "string",
-    "why": "The 3rd person masculine singular future is a principal part: it shows the stem vowel of pa‘al (יִכְתֹּב / יִלְמַד) and what a weak root does (יֵלֵךְ, יִסַּע)."
+    "why": "The 3rd person masculine singular future is a principal part: it shows the stem vowel of pa‘al (יִכְתֹּב / יִלְמַד) and what a weak root does (יֵלֵךְ, יִסַּע).",
+    "from": "fn.future"
    },
    {
     "id": "infinitive",
     "title": "infinitive (to …)",
-    "prominent": true,
+    "prominent": false,
     "order": 6,
     "phenomenon": "he.morph.infinitive",
     "type": "string",
-    "why": "The infinitive with לְ is the form a second verb takes (אֲנִי רוֹצֶה לֶאֱכֹל) and the dictionary form in speech; weak roots make it irregular (לָלֶכֶת, לָצֵאת, לָקוּם)."
+    "why": "The infinitive with לְ is the form a second verb takes (אֲנִי רוֹצֶה לֶאֱכֹל) and the dictionary form in speech; weak roots make it irregular (לָלֶכֶת, לָצֵאת, לָקוּם).",
+    "from": "fn.modal"
    },
    {
     "id": "governs",
@@ -421,7 +434,7 @@
    {
     "id": "spelling",
     "title": "everyday spelling (no vowel points)",
-    "prominent": true,
+    "prominent": false,
     "order": 8,
     "phenomenon": "he.orth.ktiv-male",
     "type": "string",
@@ -440,7 +453,8 @@
      "form": "string",
      "note": "string?"
     },
-    "why": "To a man, to a woman, to several people (קוּם, קוּמִי, קוּמוּ). The short forms of weak roots are learned (לֵךְ, סַע, צֵא); in everyday speech the future often serves as a request (תָּקוּם!), and a prohibition is always אַל + the future (אַל תֵּלֵךְ). none: no command in use."
+    "why": "To a man, to a woman, to several people (קוּם, קוּמִי, קוּמוּ). The short forms of weak roots are learned (לֵךְ, סַע, צֵא); in everyday speech the future often serves as a request (תָּקוּם!), and a prohibition is always אַל + the future (אַל תֵּלֵךְ). none: no command in use.",
+    "from": "fn.imperative"
    },
    {
     "id": "related",
@@ -499,7 +513,7 @@
    {
     "id": "inflection",
     "title": "feminine and plural",
-    "prominent": true,
+    "prominent": false,
     "order": 1,
     "phenomenon": "he.morph.adjective",
     "type": "list",
@@ -508,7 +522,8 @@
      "cell": "enum:ADJ;SG;FEM|ADJ;PL;MASC|ADJ;PL;FEM",
      "form": "string"
     },
-    "why": "An adjective agrees with its noun in gender and number; the three other forms show the vowel changes and doubled consonants (גָּדוֹל → גְּדוֹלָה, יָרֹק → יְרֻקָּה, יָפֶה → יָפָה) and the endings ־ִית / ־ִיִּים of adjectives in ־ִי (סִינִי → סִינִית). none: invariable words (בְּסֵדֶר)."
+    "why": "An adjective agrees with its noun in gender and number; the three other forms show the vowel changes and doubled consonants (גָּדוֹל → גְּדוֹלָה, יָרֹק → יְרֻקָּה, יָפֶה → יָפָה) and the endings ־ִית / ־ִיִּים of adjectives in ־ִי (סִינִי → סִינִית). none: invariable words (בְּסֵדֶר).",
+    "from": "fn.adjective"
    },
    {
     "id": "root",
@@ -518,17 +533,19 @@
     "phenomenon": "he.morph.root",
     "type": "string",
     "why": "The root letters, separated by spaces (כ ת ב): the root links the word to its family and to Arabic cognates. Loans, compounds and primary words say none, with the reason.",
-    "none": true
+    "none": true,
+    "from": "fn.root.pattern"
    },
    {
     "id": "pattern",
     "title": "adjective pattern",
-    "prominent": true,
+    "prominent": false,
     "order": 3,
     "phenomenon": "he.morph.adj-patterns",
     "type": "string",
     "none": true,
-    "why": "Colours share קָטֹל (אָדֹם, כָּחֹל), passive participles קָטוּל, the pu‘al participle מְקֻטָּל; one-syllable adjectives and suffix forms (־ִי) say none."
+    "why": "Colours share קָטֹל (אָדֹם, כָּחֹל), passive participles קָטוּל, the pu‘al participle מְקֻטָּל; one-syllable adjectives and suffix forms (־ִי) say none.",
+    "from": "fn.root.pattern"
    },
    {
     "id": "governs",
@@ -547,7 +564,7 @@
    {
     "id": "spelling",
     "title": "everyday spelling (no vowel points)",
-    "prominent": true,
+    "prominent": false,
     "order": 5,
     "phenomenon": "he.orth.ktiv-male",
     "type": "string",
@@ -593,7 +610,7 @@
    {
     "id": "spelling",
     "title": "everyday spelling (no vowel points)",
-    "prominent": true,
+    "prominent": false,
     "order": 2,
     "phenomenon": "he.orth.ktiv-male",
     "type": "string",
@@ -653,12 +670,13 @@
      "form": "string",
      "note": "string?"
     },
-    "why": "The form used with masculine nouns and the form used with feminine nouns. Plain counting, prices, the clock and phone numbers use the feminine form (אַחַת, שְׁתַּיִם, שָׁלוֹשׁ …). none: one form for both."
+    "why": "The form used with masculine nouns and the form used with feminine nouns. Plain counting, prices, the clock and phone numbers use the feminine form (אַחַת, שְׁתַּיִם, שָׁלוֹשׁ …). none: one form for both.",
+    "from": "fn.numerals"
    },
    {
     "id": "construct",
     "title": "form before a noun (construct)",
-    "prominent": true,
+    "prominent": false,
     "order": 3,
     "phenomenon": "he.numbers.gender",
     "type": "list",
@@ -668,12 +686,13 @@
      "form": "string",
      "note": "string?"
     },
-    "why": "Two always has a construct form before a noun (שְׁנֵי סְפָרִים, שְׁתֵּי מִטּוֹת); the masculine 3–10 take one before a definite noun (שְׁלוֹשֶׁת הַסְּפָרִים “the three books”); one has one in “one of …” (אַחַד הַתַּלְמִידִים). none: the number stays as it is before a noun."
+    "why": "Two always has a construct form before a noun (שְׁנֵי סְפָרִים, שְׁתֵּי מִטּוֹת); the masculine 3–10 take one before a definite noun (שְׁלוֹשֶׁת הַסְּפָרִים “the three books”); one has one in “one of …” (אַחַד הַתַּלְמִידִים). none: the number stays as it is before a noun.",
+    "from": "fn.numerals"
    },
    {
     "id": "position",
     "title": "position relative to the noun",
-    "prominent": true,
+    "prominent": false,
     "order": 4,
     "phenomenon": "he.syntax.word-order",
     "type": "enum",
@@ -686,7 +705,7 @@
    {
     "id": "spelling",
     "title": "everyday spelling (no vowel points)",
-    "prominent": true,
+    "prominent": false,
     "order": 5,
     "phenomenon": "he.orth.ktiv-male",
     "type": "string",
@@ -730,22 +749,24 @@
     ],
     "type": "string",
     "none": true,
-    "why": "The ending that stands for this pronoun on prepositions and nouns (לִי, אִתִּי, סִפְרִי “my book”), with its form after plural nouns and plural-type prepositions (סְפָרַי, עָלַי). none: not a personal pronoun."
+    "why": "The ending that stands for this pronoun on prepositions and nouns (לִי, אִתִּי, סִפְרִי “my book”), with its form after plural nouns and plural-type prepositions (סְפָרַי, עָלַי). none: not a personal pronoun.",
+    "from": "fn.possessive"
    },
    {
     "id": "object",
     "title": "as a definite direct object",
-    "prominent": true,
+    "prominent": false,
     "order": 3,
     "phenomenon": "he.syntax.object-et",
     "type": "string",
     "none": true,
-    "why": "A personal pronoun as a direct object is אֶת with the ending (אוֹתִי “me”, אוֹתוֹ “him, it”): רָאִיתִי אוֹתוֹ. none: not a personal pronoun (others stand after אֶת as they are: אֶת זֶה, אֶת מִי)."
+    "why": "A personal pronoun as a direct object is אֶת with the ending (אוֹתִי “me”, אוֹתוֹ “him, it”): רָאִיתִי אוֹתוֹ. none: not a personal pronoun (others stand after אֶת as they are: אֶת זֶה, אֶת מִי).",
+    "from": "fn.object"
    },
    {
     "id": "spelling",
     "title": "everyday spelling (no vowel points)",
-    "prominent": true,
+    "prominent": false,
     "order": 4,
     "phenomenon": "he.orth.ktiv-male",
     "type": "string",
@@ -794,7 +815,7 @@
    {
     "id": "position",
     "title": "position relative to the noun",
-    "prominent": true,
+    "prominent": false,
     "order": 2,
     "phenomenon": "he.syntax.word-order",
     "type": "enum",
@@ -807,7 +828,7 @@
    {
     "id": "spelling",
     "title": "everyday spelling (no vowel points)",
-    "prominent": true,
+    "prominent": false,
     "order": 3,
     "phenomenon": "he.orth.ktiv-male",
     "type": "string",
@@ -843,7 +864,7 @@
    {
     "id": "prefix",
     "title": "written onto the next word",
-    "prominent": true,
+    "prominent": false,
     "order": 1,
     "phenomenon": "he.orth.prefix-clitics",
     "type": "bool",
@@ -862,12 +883,13 @@
      "cell": "cell",
      "form": "string"
     },
-    "why": "Prepositions take endings instead of pronouns, often with another stem (עִם → אִתִּי, מִ → מִמֶּנִּי, אֶת → אוֹתִי)."
+    "why": "Prepositions take endings instead of pronouns, often with another stem (עִם → אִתִּי, מִ → מִמֶּנִּי, אֶת → אוֹתִי).",
+    "from": "fn.prep.core"
    },
    {
     "id": "suffixSet",
     "title": "type of personal endings",
-    "prominent": true,
+    "prominent": false,
     "order": 3,
     "phenomenon": "he.morph.prep-suffix",
     "type": "enum",
@@ -878,12 +900,13 @@
      "singular endings, plural-noun endings in the plural",
      "a stem of its own"
     ],
-    "why": "Prepositions take one of the two sets of noun endings: those of a singular noun (לִי, לוֹ; בִּשְׁבִילִי) or those of a plural noun (עָלַי, עָלָיו; אַחֲרַי); בֵּין mixes them (בֵּינִי but בֵּינֵינוּ), and some change their stem (עִם → אִתִּי, מִן → מִמֶּנִּי, אֶת → אוֹתִי). none: no personal endings."
+    "why": "Prepositions take one of the two sets of noun endings: those of a singular noun (לִי, לוֹ; בִּשְׁבִילִי) or those of a plural noun (עָלַי, עָלָיו; אַחֲרַי); בֵּין mixes them (בֵּינִי but בֵּינֵינוּ), and some change their stem (עִם → אִתִּי, מִן → מִמֶּנִּי, אֶת → אוֹתִי). none: no personal endings.",
+    "from": "fn.prep.core"
    },
    {
     "id": "withArticle",
     "title": "with the article",
-    "prominent": true,
+    "prominent": false,
     "order": 4,
     "phenomenon": [
      "he.orth.prefix-clitics",
@@ -896,7 +919,7 @@
    {
     "id": "spelling",
     "title": "everyday spelling (no vowel points)",
-    "prominent": true,
+    "prominent": false,
     "order": 5,
     "phenomenon": "he.orth.ktiv-male",
     "type": "string",
@@ -927,7 +950,7 @@
    {
     "id": "allomorphs",
     "title": "forms by the next sound",
-    "prominent": true,
+    "prominent": false,
     "order": 2,
     "phenomenon": "he.orth.prefix-vowels",
     "type": "string",
@@ -937,7 +960,7 @@
    {
     "id": "spelling",
     "title": "everyday spelling (no vowel points)",
-    "prominent": true,
+    "prominent": false,
     "order": 3,
     "phenomenon": "he.orth.ktiv-male",
     "type": "string",
@@ -958,7 +981,7 @@
    {
     "id": "prefix",
     "title": "written onto the next word",
-    "prominent": true,
+    "prominent": false,
     "order": 1,
     "phenomenon": "he.orth.prefix-clitics",
     "type": "bool",
@@ -978,7 +1001,7 @@
    {
     "id": "spelling",
     "title": "everyday spelling (no vowel points)",
-    "prominent": true,
+    "prominent": false,
     "order": 3,
     "phenomenon": "he.orth.ktiv-male",
     "type": "string",
@@ -1024,7 +1047,7 @@
    {
     "id": "spelling",
     "title": "everyday spelling (no vowel points)",
-    "prominent": true,
+    "prominent": false,
     "order": 3,
     "phenomenon": "he.orth.ktiv-male",
     "type": "string",
@@ -1045,7 +1068,7 @@
    {
     "id": "spelling",
     "title": "everyday spelling (no vowel points)",
-    "prominent": true,
+    "prominent": false,
     "order": 1,
     "phenomenon": "he.orth.ktiv-male",
     "type": "string",
