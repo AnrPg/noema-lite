@@ -14,6 +14,26 @@
   const strs = (a, min = 1) => Array.isArray(a) && a.length >= min && a.every(isStr);
   const intIn = (v, n) => Number.isInteger(v) && v >= 0 && v < n;
 
+  /** The quantity rules every new pack meets, per chapter — the SAME list as tools/pack_rules.json (validate.py / make_pack.py read
+      that file; tests/pack_rules.js checks the two agree). Add a rule there and here. */
+  const RULES = [{id: 'balance.type', what: 'every exercise type', field: 'type', min: 3, always: ['mcq', 'tf', 'odd', 'order', 'match', 'bucket', 'cloze', 'scenario', 'free'], features: {'code': ['spotbug', 'write'], 'math': ['calc'], 'pictures': ['img_hotspot', 'img_sequence', 'img_reveal', 'img_drag', 'img_label', 'img_select', 'img_occlusion']}}, {id: 'balance.difficulty', what: 'every difficulty', field: 'difficulty', min: 3, always: [1, 2, 3], features: {}}, {id: 'balance.tag', what: 'every focus tag', field: 'tags', min: 3, always: ['concept', 'pitfall', 'debug', 'exam', 'interview', 'compare'], features: {'code': ['syntax'], 'math': ['calc']}}];
+  /** checkBalance(chapter, subject, { min }) → [{ rule, chapter, value, have, need, msg }]: every required value of every rule (and
+      every optional one the chapter uses) at least `min` times (default: each rule's own min). subject.features.code / .math make
+      the rules' `features` values required; 'pictures' when the chapter has a picture (docs/VISUAL.md §5: only pictures that teach). The caller decides whether the issues are errors or warnings (checkPack). */
+  function checkBalance(c, subject, { min } = {}) {
+    const ex = c?.exercises || [], out = [];
+    const pics = ex.some(e => String(e.type).startsWith('img_')) || (c?.sections || []).some(s => (s.blocks || []).some(b => b.t === 'figure'));
+    const on = [...Object.entries(subject?.features || {}).filter(([, v]) => v).map(([k]) => k), ...(pics ? ['pictures'] : [])];   // pictures: only a chapter that has one
+    for (const r of RULES) {
+      const n = min ?? r.min, have = new Map();
+      for (const e of ex) for (const v of r.field === 'tags' ? (e.tags || []) : [e[r.field]]) have.set(v, (have.get(v) || 0) + 1);
+      const optional = new Set(Object.values(r.features).flat());
+      const need = new Set([...r.always, ...on.flatMap(f => r.features[f] || []), ...[...have.keys()].filter(v => optional.has(v))]);
+      for (const v of need) if ((have.get(v) || 0) < n) out.push({ rule: r.id, chapter: c.id, value: v, have: have.get(v) || 0, need: n, msg: `${c.id}: [${r.id}] ${v}: ${have.get(v) || 0} exercise(s), need >= ${n} per chapter (${r.what}, tools/pack_rules.json)` });
+    }
+    return out;
+  }
+
   /** The fields one exercise needs so the engine can show and grade it. */
   function checkExercise(e, media) {
     const E = []; const t = e.type; const bad = m => E.push(`${e.id}: ${m}`);
@@ -101,7 +121,9 @@
     }
   }
 
-  function checkPack(p, expectId, { strict = false } = {}) {
+  /** balance: the minimum of RULES per chapter. Default: the pack's own subject.authoring.minPerKind (make_pack.py writes 3);
+      a pack that does not say gets the issues as warnings; 0 = off. A number → errors. */
+  function checkPack(p, expectId, { strict = false, balance } = {}) {
     const E = [], W = [];
     if (!p || p.format !== 'noema-pack') E.push('format must be "noema-pack"');
     const s = p?.subject || {};
@@ -159,8 +181,9 @@
         if (strict) E.push(...checkExercise(e, media));
       }
       if (strict) for (const f of c.flashcards || []) if (!isStr(f.q) || !isStr(f.a)) { E.push(`${c.id}: a flashcard needs "q" and "a"`); break; }
-      if (!(c.exercises || []).some(e => String(e.type).startsWith('img_'))) W.push(`${c.id}: no visual exercises`);
-    }
+          }
+    const per = balance ?? s.authoring?.minPerKind;
+    if (per !== 0) for (const c of chapters) for (const i of checkBalance(c, s, { min: per ?? undefined })) (per ? E : W).push(i.msg);
     checkI18n(p, chapters, E, W);
     for (const mid of Object.keys(media)) if ((used[mid] || 0) < 3) W.push(`picture ${mid} has ${used[mid] || 0} exercises (aim for >= 3)`);
     return { errors: E, warnings: W, counts: { chapters: chapters.length, sections: secN, exercises: ex, visual: vis, media: Object.keys(media).length } };
@@ -241,5 +264,5 @@
     return { errors: E, warnings: W, counts: { entries: entries.length, senses, stale, sections: Object.keys(secs).length, previews, anchors: anchors.length } };
   }
   /* i18n-ignore-end */
-  root.NoemaPackCheck = { checkPack, checkExercise, checkBridge, TYPES, BLOCKS, ID_RE };
+  root.NoemaPackCheck = { checkPack, checkExercise, checkBalance, checkBridge, RULES, TYPES, BLOCKS, ID_RE };
 })(typeof window !== 'undefined' ? window : globalThis);

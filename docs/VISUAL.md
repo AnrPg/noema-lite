@@ -113,12 +113,13 @@ see its label and note; **🙈 Hide labels** covers every part for an instant se
 
 ## 5. Authoring rules (every ingestion) — mandatory
 
-Every time sources are turned into a subject pack (or added to one), the visual layer is built from
-**three kinds of pictures — all of them, not one**:
+**Only pictures with high teaching value** (user rule, 2026-10-21): a picture is used only when it teaches something
+the text alone cannot; **no picture is better than a decorative or weak one**, and pictures are never added to meet a
+count. Every time sources are turned into a subject pack (or added to one), look for such pictures in **three places**:
 
 | kind | what | how | `origin` |
 |---|---|---|---|
-| **Pictures from the sources** | every figure, photo, scan, chart, table-as-image and vector diagram inside the PDFs / files | `tools/extract_images.py scan SOURCE.pdf OUT/` (embedded images + page renders, contact sheet) → `crop` the useful ones at 200 dpi | `source` |
+| **Pictures from the sources** | the figures, photos, scans, charts and vector diagrams inside the PDFs / files **that teach** — not every one: skip logos, decoration, stock photos, duplicates and figures the text already says fully | `tools/extract_images.py scan SOURCE.pdf OUT/` (embedded images + page renders, contact sheet) → `crop` the useful ones at 200 dpi | `source` |
 | **Pictures from the web** | photographs **and** diagrams that add information the sources lack (anatomy plates, micrographs, real apparatus, maps, real software screenshots…) — even when the sources have no pictures at all; any licence, source always recorded (§6) | `tools/find_images.py` / connector `noema_image_search` (Bing + DuckDuckGo Images = the whole web, Wikimedia Commons, Openverse, NASA, iNaturalist, Wellcome, museums) → `tools/fetch_image.py` / `noema_image_fetch` (pages and Wikimedia file pages resolved to the picture) | `web` |
 | **Drawings & graphs we make** | clean redraws of the sources’ diagrams, process flows, timelines; **function graphs** (γραφικές παραστάσεις) whenever the subject has functions, rates, distributions, kinetics… | `tools/svgkit.py` — `Diagram` and `Plot` (curves, points, intervals → regions) | `drawn` / `plot` |
 
@@ -126,7 +127,9 @@ Rules:
 1. **Every picture carries several exercises** — ≥ 3, of ≥ 2 different visual types (e.g. drag the
    names + hotspot a reasoning question + occlusion), plus a `figure` in the section that teaches it.
    Enforced by `"authoring": {"minVisualPerChapter": 3, "minExercisesPerPicture": 3}`.
-2. Every chapter: ≥ 1 `figure` and ≥ 3 visual exercises of ≥ 2 visual types.
+2. A chapter **with** pictures: ≥ 1 `figure`, ≥ 3 visual exercises of ≥ 2 visual types, and every picture exercise
+   type ≥ 3 times (`tools/pack_rules.json`, `"minPerKind": 3`). A chapter with no picture that teaches has none —
+   that is fine and is not an error.
 3. **Information value first.** A picture earns its place only if it teaches something the text
    alone does not (where things are, what they look like, how they connect, how a quantity behaves).
    No decorative stock photos.

@@ -57,9 +57,13 @@ python3 scripts/start_subject.py work <id> "<Title>" --lang en --emoji 📘 [--m
 Record each source in `work/<id>/sources.json` (`sources`, and which chapter comes from which source) and **copy
 every file the user gave into `work/<id>/sources/`** (as it is, or only its parts if you split it — never both).
 
-## 3. Pictures — always all three kinds (VISUAL.md §5–6)
+## 3. Pictures — only those that teach (VISUAL.md §5–6)
+**A picture earns its place only if it teaches something the text alone cannot** (where things are, what they look like,
+how they connect, how a quantity behaves). No picture is better than a decorative or weak one; never add one to meet a
+count. Look in all three places below, keep only the valuable ones:
 1. **From the sources**: `python3 scripts/extract_images.py scan SOURCE.pdf work/_scan` → open
-   `work/_scan/index.html` / the images and keep every informative figure, photo, chart and diagram.
+   `work/_scan/index.html` / the images and keep **only the figures, photos, charts and diagrams with teaching value**
+   (not every one: skip logos, decoration, duplicates and figures the text already says fully).
    Vector diagrams appear only in the page renders: crop them with
    `python3 scripts/extract_images.py crop SOURCE.pdf PAGE X Y W H work/<id>/media/<name>.png` (percent of the page).
    Register them in `media/media.json` with `"origin": "source"`.
@@ -77,8 +81,8 @@ every file the user gave into `work/<id>/sources/`** (as it is, or only its part
      to the file, with author + licence filled in. **Never web-fetch a Commons/Wikipedia file page to get the picture.**
    * If your sandbox cannot reach a site (the script says so), call the connector's `noema_image_fetch` with the url: it
      shows you the picture, gives its size and a ready `"fetch": "app"` media.json entry (no file — the app downloads it).
-   **Open every picture and check it**: correct, relevant, sharp (≥ 800 px), labels agree with the sources. Only if no
-   way works, say so and continue with kinds 1 and 3.
+   **Open every picture and check it**: correct, relevant, sharp (≥ 800 px), labels agree with the sources, and it
+   teaches something. Only if no way works, say so and continue with kinds 1 and 3.
 3. **Drawings and function graphs**: redraw the sources' diagrams and flows, and plot functions
    (rates, kinetics, distributions, any f(x)) with `scripts/svgkit.py` (`Diagram`, `Plot`); it writes
    the SVG **and** its regions, so clickable parts always line up. Save with `d.save(media_dir, id, alt=…)`
@@ -86,7 +90,8 @@ every file the user gave into `work/<id>/sources/`** (as it is, or only its part
 4. For every raster picture add `regions` (the named parts, in pixel coordinates) — draw them over
    the picture with Pillow and look at the result before using them.
 
-**Every picture gets ≥ 3 exercises of ≥ 2 visual types** + a `figure` block in the section that teaches it.
+**Every picture gets ≥ 3 exercises of ≥ 2 visual types** + a `figure` block in the section that teaches it; a chapter
+with pictures has every picture exercise type ≥ 3 times (step 4). A chapter without a picture that teaches has none.
 
 ## 3b. Sources: one entry per file or link, every chapter mapped to ALL its sources
 Give every PDF (also each part of a split PDF), document, web page, video and conversation its own entry in
@@ -100,6 +105,15 @@ timestamps (the app shows them as chips and opens the file at that page), and ke
 short human line built from the same parts joined by " · ".
 
 ## 4. Write the chapters
+> **ADHD-friendly first — it shapes everything you write** (CONTENT_SPEC.md rule 0): 1–3 short sentences per paragraph,
+> one idea per block, a concrete example or analogy for every abstract idea, lists and tables over prose, a `reveal`
+> "think first" before the key point, a `hook` per section, short question stems, no block over ~60 words.
+
+**Every chapter, checked by `make_pack.py` (`pack_rules.json`): every exercise type ≥ 3 times** (`mcq tf odd order
+match bucket cloze scenario free`; `spotbug write` with code; `calc` with math; the 7 picture types when the chapter
+has pictures), **every difficulty 1, 2, 3 ≥ 3 times, every focus tag ≥ 3 times** (`concept pitfall debug exam
+interview compare`; `syntax` with code, `calc` with math). Plan the exercises as a grid before writing them.
+
 `work/<id>/chapters/chNN.json`, one per chapter, exactly as `CONTENT_SPEC.md` says: theory blocks
 (short, concrete, one idea each), comparisons side by side, `ask` blocks and `debug` playbooks for
 everything diagnostic, pitfalls, 20–50 flashcards, ≥ 5 exercises per section (every type several
@@ -240,6 +254,8 @@ pack is not changed. Contract and rules: `references/BRIDGE.md` (or `noema_bridg
 
 ## Quality bar (check before saving)
 - Every source detail is taught **and** tested; nothing invented; obvious source errors corrected and noted.
-- Pictures: three kinds used, each verified, licensed, sharp, ≥ 3 exercises each.
+- ADHD-friendly throughout: short paragraphs, one idea per block, examples, think-first reveals.
+- Every type, difficulty and focus tag ≥ 3 times per chapter (make_pack.py checks it).
+- Pictures: only those that teach, from all three places, each verified, licensed, sharp, ≥ 3 exercises each.
 - Every file the user gave is in the package (or all of its parts), each its own source, cited by the chapters that use it.
 - The pack builds with zero errors; tell the user the counts (chapters, exercises, visual, pictures, source files).

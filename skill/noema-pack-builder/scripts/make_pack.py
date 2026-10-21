@@ -20,8 +20,10 @@ out_dir = a[1] if len(a) > 1 else ('/mnt/user-data/outputs' if os.path.isdir('/m
 meta, sources, chapters, report = load_subject(sdir)
 media, mrep = load_media(sdir)
 translations = load_translations(sdir, chapters)   # optional: translations/<locale>/chNN.json (CONTENT_SPEC.md "Packs in several languages")
-base_ids = ()
-try: base_ids = set(json.load(open(os.path.join(sdir, '.unpacked.json'), encoding='utf-8')).get('sourcesWithFiles') or [])
+base_ids, base_chapters = (), ()
+try:
+    _u = json.load(open(os.path.join(sdir, '.unpacked.json'), encoding='utf-8'))
+    base_ids, base_chapters = set(_u.get('sourcesWithFiles') or []), set(_u.get('chapters') or [])
 except Exception: pass
 sources, files, ferrs, fwarns = package_sources(sdir, sources, chapters, base_ids)
 errs = [r for r in report + mrep if r.startswith('ERROR')] + ferrs
@@ -29,6 +31,10 @@ for w in mrep + fwarns:
     if w.startswith('WARN'): print(w)
 auth = meta.get('authoring') or {}
 per_pic = int(auth.get('minExercisesPerPicture', 3)); min_vis = int(auth.get('minVisualPerChapter', 3))
+# every exercise type, difficulty and focus tag >= minPerKind times per chapter (pack_rules.json); chapters of an older pack
+# being extended (unpack.py) only warn, new chapters must pass
+per_kind = int(auth.get('minPerKind', 3)); feats = ','.join(k for k, v in (meta.get('features') or {}).items() if v)
+balance = lambda cid: (['--balance-warn' if cid in base_chapters else '--balance', str(per_kind), '--features', feats] if per_kind else [])
 used = Counter(e.get('media') for c in chapters for e in c['exercises'] if e['type'].startswith('img_'))
 for m in media:
     if used[m] < per_pic: errs.append(f'ERROR media {m}: used by {used[m]} exercise(s); every picture needs >= {per_pic}')
@@ -36,8 +42,10 @@ with tempfile.TemporaryDirectory() as td:
     mp = os.path.join(td, 'media.json'); json.dump({k: {'w': v['w'], 'h': v['h'], 'regions': v.get('regions')} for k, v in media.items()}, open(mp, 'w', encoding='utf-8'))
     for c in chapters:
         p = os.path.join(td, c['id'] + '.json'); json.dump(c, open(p, 'w', encoding='utf-8'), ensure_ascii=False)
-        r = subprocess.run([sys.executable, os.path.join(HERE, 'validate.py'), p, '--media', mp, '--min-visual', str(min_vis)], capture_output=True, text=True)
+        r = subprocess.run([sys.executable, os.path.join(HERE, 'validate.py'), p, '--media', mp, '--min-visual', str(min_vis), *balance(c['id'])], capture_output=True, text=True)
         print(r.stdout.splitlines()[0] if r.stdout else c['id'])
+        for l in r.stdout.splitlines():
+            if l.startswith('WARN: [balance'): print(f'{c["id"]}: ' + l)
         errs += [f'{c["id"]}: ' + l for l in r.stdout.splitlines() if l.startswith('ERROR')]
     if translations or 'i18n' in meta:   # the other languages: subject.i18n, and every translated chapter against its source
         r = subprocess.run([sys.executable, os.path.join(HERE, 'validate.py'), os.path.join(sdir, 'subject.json'), '--subject', '--translations', ','.join(translations)], capture_output=True, text=True)

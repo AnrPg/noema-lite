@@ -17,7 +17,7 @@ if os.path.exists(os.path.join(d, 'subject.json')): sys.exit(f'{d} already exist
 for sub in ('chapters', 'patches', 'media', 'sources', 'coverage'): os.makedirs(os.path.join(d, sub), exist_ok=True)
 json.dump({'id': sid, 'title': title, 'appTitle': f'{title} Quest', 'emoji': opt('--emoji', '📘'), 'group': opt('--group', 'other'), 'description': '', 'language': opt('--lang', 'en'),
            'features': {'math': '--math' in a, 'code': '--code' in a}, 'hero': {'headline': f'Master **{title}**, one bite at a time.', 'mantra': ''}, 'searchExamples': '',
-           'authoring': {'minVisualPerChapter': 3, 'minExercisesPerPicture': 3},
+           'authoring': {'minVisualPerChapter': 3, 'minExercisesPerPicture': 3, 'minPerKind': 3},
            'tutor': {'name': 'Brick', 'avatar': '🦉', 'domain': title, 'prior': '', 'examples': '', 'interviewer': f'an examiner for {title}', 'simulation': '', 'terminology': '', 'examinerRole': f'{title} examiner'}},
           open(os.path.join(d, 'subject.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 json.dump({'sources': [], 'chapters': {}, 'patches': {}}, open(os.path.join(d, 'sources.json'), 'w', encoding='utf-8'), indent=1)

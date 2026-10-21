@@ -34,7 +34,7 @@ for s in SRC.get('sources', []):
         open(dst, 'wb').write(bundle.read(f)); restored.append(f)
     else: kept.append(s['id'])
 json.dump(SRC, open(os.path.join(d, 'sources.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
-json.dump({'from': os.path.basename(a[0]), 'sourcesWithFiles': kept}, open(os.path.join(d, '.unpacked.json'), 'w', encoding='utf-8'))
+json.dump({'from': os.path.basename(a[0]), 'sourcesWithFiles': kept, 'chapters': [c['id'] for c in p['chapters']]}, open(os.path.join(d, '.unpacked.json'), 'w', encoding='utf-8'))
 for c in p['chapters']:
     c = {k: v for k, v in c.items() if not k.startswith('_')}
     json.dump(c, open(os.path.join(d, 'chapters', c['id'] + '.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)

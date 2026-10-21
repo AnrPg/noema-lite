@@ -56,14 +56,20 @@ The app imports the package with its files (📥, "Create with Claude", or the c
 every packaged file); files can also be attached later in the app (📎 in the source's card).
 
 ## Pedagogy rules (non-negotiable)
+> **0. ADHD-friendly, everywhere — the first rule, it shapes every block, card and exercise.** Paragraphs of 1–3 short
+> sentences; **one idea per block**; a concrete example or analogy for every abstract idea; lists and tables instead of
+> long prose; a `reveal` "think first" prompt before the key point; a `hook` that says why the section matters; short
+> question stems; no walls of text (a block over ~60 words is split). Read every section back as a tired learner would:
+> if the eye cannot find the point in a few seconds, rewrite it.
+
 1. **Coverage**: teach AND test every concept, number, caveat, trap, worked example and test question of the sources. Repeated material is taught once (best version). Every source exercise/test question becomes ≥1 exercise with its solution as the explanation.
 2. **Diagnostic thinking first**: wherever the source describes failures, errors, anomalies, misconceptions, differential diagnoses or "first thing to check", build a `debug` playbook with an ordered `askYourself` list (first-person questions), an `ask` block in the section, ≥1 `scenario` and ≥1 `order` exercise. Long playbooks get a `mnemonic`.
 3. **Pitfalls / exam traps** → callout (pitfall/exam/warn) + chapter `pitfalls` entry + ≥1 exercise tagged pitfall/exam.
 4. **Co-location**: related concepts in the same section; comparisons side by side (`compare`/`table`); each exercise attached to its section; 2–4 `quick` exercises per section.
-5. **ADHD-friendly**: 1–3 sentence paragraphs, concrete examples, analogies, one idea per block, `reveal` "think first" prompts.
+5. **ADHD-friendly**: see rule 0 above — it applies to every rule here.
 6. **Accuracy**: faithful to the sources; correct clear errors (and say so in the coverage notes); no invented facts.
 7. Diagrams redrawn cleanly (≤70 chars wide). Explanations teach (why right + why the tempting wrong answer is wrong). Every exercise type used several times per chapter.
-8. **Visual learning (mandatory, docs/VISUAL.md §5–6)**: (a) extract **every picture of the sources** (`tools/extract_images.py`) — photos, figures, charts, vector diagrams; (b) **augment from the web** with high-quality, information-rich **photographs and diagrams** — any licence for personal study, always with the source recorded (url, credit, licence; `tools/fetch_image.py`), even when the sources have none; (c) redraw diagrams and plot **function graphs** where the subject has them (`tools/svgkit.py` Diagram / Plot). Verify each picture is correct, relevant and sharp. **Every picture gets ≥ 3 exercises of ≥ 2 visual types**; every chapter ≥ 1 `figure` + ≥ 3 visual exercises. Enforced by `"authoring": {"minVisualPerChapter": 3, "minExercisesPerPicture": 3}`.
+8. **Visual learning (docs/VISUAL.md §5–6) — only pictures with high teaching value.** A picture is used only when it teaches something the text alone cannot (where things are, what they look like, how they connect, how a quantity behaves); **no picture is better than a decorative or weak one**, and pictures are never added to meet a count. Look for them in three places: (a) the pictures of the sources (`tools/extract_images.py`), (b) the web — high-quality, information-rich photographs and diagrams, any licence for personal study, always with the source recorded (`tools/fetch_image.py`), (c) redrawn diagrams and **function graphs** where the subject has them (`tools/svgkit.py`). Verify each picture is correct, relevant and sharp. **Every picture gets ≥ 3 exercises of ≥ 2 visual types** and a `figure`; a chapter that has pictures has ≥ 3 visual exercises and every picture exercise type ≥ 3 times (tools/pack_rules.json). A chapter without a picture that teaches has none. Enforced by `"authoring": {"minVisualPerChapter": 3, "minExercisesPerPicture": 3, "minPerKind": 3}`.
 
 ## Inline text format (all text fields)
 `**bold**`, `*italic*`, `` `inline code` ``, and `\n` for a line break. No HTML.
@@ -144,8 +150,16 @@ IDs: `chNN-eNNN`, unique, sequential.
 ```
 
 ## Quantity guide
-Roughly ≥ 5 exercises per section, every section has ≥ 2 quick ones. ≥ 3 visual exercises + ≥ 1 figure per chapter. Every exercise type appears ≥ 2× per chapter
-(`mcq`, `tf` and `cloze` more). ≥ 30% of exercises tagged `pitfall`, `debug` or `exam`.
+Enforced per chapter by `tools/pack_rules.json` (one rule list, read by `validate.py` / `make_pack.py` / `build.py` and by
+`engine/packcheck.js` for the app, the Gemini generator and the connector's `noema_finish_upload`):
+* **every exercise type ≥ 3 times**: `mcq tf odd order match bucket cloze scenario free` always; `spotbug write` when
+  `features.code`; `calc` when `features.math`; the 7 picture types when the chapter has a picture (rule 8);
+* **every difficulty** 1, 2 and 3 **≥ 3 times**;
+* **every focus tag ≥ 3 times**: `concept pitfall debug exam interview compare` always; `syntax` with code, `calc` with math;
+* an optional type or tag the chapter uses anyway needs 3 too. `subject.authoring.minPerKind` (3, written by
+  `start_subject.py`) sets the number; packs made before 2026-10-21 have none and get warnings; chapters of such a pack
+  that is being extended (`unpack.py`) warn, new chapters must pass.
+Also: ≥ 5 exercises per section, ≥ 2 quick ones each; ≥ 30% of exercises tagged `pitfall`, `debug` or `exam`.
 Be exhaustive rather than brief: depth and coverage beat polish.
 
 ## Also produce

@@ -1,0 +1,80 @@
+{
+ "format": "noema.packrules/v1",
+ "about": "The quantity rules every new subject pack meets, per chapter. ONE list, read by tools/validate.py (skill make_pack.py, tools/build.py) and copied into engine/packcheck.js RULES (app, Gemini generator, connector); tests/pack_rules.js checks the two agree. tools/CONTENT_SPEC.md 'Quantity guide'.",
+ "rules": [
+  {
+   "id": "balance.type",
+   "what": "every exercise type",
+   "field": "type",
+   "min": 3,
+   "always": [
+    "mcq",
+    "tf",
+    "odd",
+    "order",
+    "match",
+    "bucket",
+    "cloze",
+    "scenario",
+    "free"
+   ],
+   "features": {
+    "code": [
+     "spotbug",
+     "write"
+    ],
+    "math": [
+     "calc"
+    ],
+    "pictures": [
+     "img_hotspot",
+     "img_sequence",
+     "img_reveal",
+     "img_drag",
+     "img_label",
+     "img_select",
+     "img_occlusion"
+    ]
+   }
+  },
+  {
+   "id": "balance.difficulty",
+   "what": "every difficulty",
+   "field": "difficulty",
+   "min": 3,
+   "always": [
+    1,
+    2,
+    3
+   ],
+   "features": {}
+  },
+  {
+   "id": "balance.tag",
+   "what": "every focus tag",
+   "field": "tags",
+   "min": 3,
+   "always": [
+    "concept",
+    "pitfall",
+    "debug",
+    "exam",
+    "interview",
+    "compare"
+   ],
+   "features": {
+    "code": [
+     "syntax"
+    ],
+    "math": [
+     "calc"
+    ]
+   }
+  }
+ ],
+ "notes": [
+  "A value under 'features' is required when the subject has that feature (subject.features.code / .math) or, for 'pictures', when the chapter has a picture (a figure block or a picture exercise): pictures only where they teach (docs/VISUAL.md §5), never to meet a count. A chapter that uses an optional value anyway needs the minimum too.",
+  "subject.authoring.minPerKind overrides every 'min' (start_subject.py writes 3). 0 turns the rules off: only for packs made before 2026-10-21.",
+  "Chapters of an older pack being extended (skill unpack.py) get warnings, new chapters errors."
+ ]
+}

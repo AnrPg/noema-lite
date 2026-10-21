@@ -39,7 +39,9 @@ async function sb(path, token, { method = 'GET', body, headers = {}, raw = false
 }
 
 /* ---------- pack checks: engine/packcheck.js (shared with the app), prepended by tools/build.py ---------- */
-const checkPack = (p, expectId) => globalThis.NoemaPackCheck.checkPack(p, expectId);
+// tools/pack_rules.json (every exercise type, difficulty and focus tag >= 3 per chapter): the pack's own authoring.minPerKind,
+// and always for a curriculum step (cur-…), so a step made without make_pack.py is held to it too; other old packs only warn
+const checkPack = (p, expectId) => globalThis.NoemaPackCheck.checkPack(p, expectId, { balance: p?.subject?.authoring?.minPerKind ?? (/^cur-/.test(p?.subject?.id || '') ? 3 : undefined) });
 
 async function register(token, uid, p, counts, extra = {}) {
   const meta = { ...p.subject, counts: { ...(p.counts || {}), ...counts }, version: p.version || null, ...(p.translations ? { contentLocales: Object.keys(p.translations) } : {}), via: 'claude', updatedAt: new Date().toISOString(), ...extra };

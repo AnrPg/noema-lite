@@ -5,7 +5,7 @@
      2. subject    — title, emoji, hero, tutor persona…
      3. chapters   — one call per planned chapter, in the app's own JSON format (tools/CONTENT_SPEC.md):
                      theory blocks, debug playbooks, pitfalls, flashcards and many exercise types, plus
-                     1–2 diagrams drawn by the diagram kit below (SVG + clickable regions) with picture exercises
+                     0–2 diagrams (only where they teach) drawn by the diagram kit below (SVG + clickable regions) with picture exercises
    Every chapter is checked by engine/packcheck.js (strict) + quantity rules; problems go back to Gemini
    for repair. Progress is saved after every step (IndexedDB), so generation resumes after a reload. */
 window.NoemaPackGen = (() => {
@@ -91,7 +91,7 @@ window.NoemaPackGen = (() => {
     return SPEC || (SPEC = { content: '', visual: '' });
   }
   const DIAGRAM_KIT = `## Diagrams you draw (the app renders them; DO NOT write SVG)
-Each chapter has "diagrams": 1–2 objects { "id": "lowercase-id", "kind": "flow|cycle|hub|layers|tree|compare", "title": "short", "alt": "what the picture shows", "caption": "one line", "items": [ { "id": "lowercase_id", "label": "2–5 words", "note": "one teaching sentence" , "parent": "item id (tree only)", "group": 0 or 1 (compare only) } ], "groups": ["left heading", "right heading"] (compare only), "links": [["from item id", "to item id", "optional label"]] (hub/layers/compare only) }.
+Each chapter has "diagrams": 0–2 objects — only a diagram with real teaching value (how parts connect, an order, a cycle, a comparison the text alone cannot show); none is better than a decorative one — { "id": "lowercase-id", "kind": "flow|cycle|hub|layers|tree|compare", "title": "short", "alt": "what the picture shows", "caption": "one line", "items": [ { "id": "lowercase_id", "label": "2–5 words", "note": "one teaching sentence" , "parent": "item id (tree only)", "group": 0 or 1 (compare only) } ], "groups": ["left heading", "right heading"] (compare only), "links": [["from item id", "to item id", "optional label"]] (hub/layers/compare only) }.
 - flow = a process left→right (3–8 steps, in order); cycle = a loop (3–7); hub = items[0] in the centre and 3–7 parts around it; layers = stacked levels top→bottom (3–7); tree = hierarchy via "parent" (4–12); compare = two columns (group 0 / group 1, 2–6 each).
 - Every item becomes a clickable region of the picture whose id is the item id and whose label is the item label.
 - Use the diagram in a {"t":"figure","media":"<diagram id>"} block of the section that teaches it, and in ≥ 3 picture exercises of ≥ 2 kinds, e.g.
@@ -111,8 +111,8 @@ Each chapter has "diagrams": 1–2 objects { "id": "lowercase-id", "kind": "flow
     debug: { type: 'array', maxItems: 6, items: { type: 'object', required: ['id', 'title', 'section', 'symptom', 'askYourself', 'steps', 'rootCauses', 'fix'] } },
     pitfalls: { type: 'array', minItems: 1, maxItems: 10, items: { type: 'object', required: ['title', 'text', 'fix'] } },
     flashcards: { type: 'array', minItems: 8, maxItems: 40, items: { type: 'object', required: ['q', 'a', 'section'] } },
-    exercises: { type: 'array', minItems: 12, maxItems: 80, items: { type: 'object', required: ['id', 'type', 'section', 'difficulty', 'tags', 'explain'] } },
-    diagrams: { type: 'array', minItems: 1, maxItems: 3, items: { type: 'object', required: ['id', 'kind', 'title', 'alt', 'items'], properties: { id: { type: 'string', pattern: '^[a-z0-9][a-z0-9-]{1,30}$' }, kind: { type: 'string', enum: ['flow', 'cycle', 'hub', 'layers', 'tree', 'compare'] }, items: { type: 'array', minItems: 3, maxItems: 12, items: { type: 'object', required: ['id', 'label'], properties: { id: { type: 'string', pattern: '^[a-z0-9_-]{1,30}$' }, label: { type: 'string', minLength: 1, maxLength: 60 } } } } } } },
+    exercises: { type: 'array', minItems: 48, maxItems: 140, items: { type: 'object', required: ['id', 'type', 'section', 'difficulty', 'tags', 'explain'] } },
+    diagrams: { type: 'array', minItems: 0, maxItems: 3, items: { type: 'object', required: ['id', 'kind', 'title', 'alt', 'items'], properties: { id: { type: 'string', pattern: '^[a-z0-9][a-z0-9-]{1,30}$' }, kind: { type: 'string', enum: ['flow', 'cycle', 'hub', 'layers', 'tree', 'compare'] }, items: { type: 'array', minItems: 3, maxItems: 12, items: { type: 'object', required: ['id', 'label'], properties: { id: { type: 'string', pattern: '^[a-z0-9_-]{1,30}$' }, label: { type: 'string', minLength: 1, maxLength: 60 } } } } } } },
   } };
 
   /* i18n-ignore-end */
@@ -138,10 +138,11 @@ Each chapter has "diagrams": 1–2 objects { "id": "lowercase-id", "kind": "flow
     if (ex.length < secs.length * 4) E.push(`only ${ex.length} exercises for ${secs.length} sections — at least 4 per section`);
     for (const s of secs) if (ex.filter(e => e.section === s.id).length < 3) E.push(`section ${s.id} needs ≥ 3 exercises`);
     if (types.size < 7) E.push(`use more exercise types (only ${[...types].join(', ')}): mcq, tf, cloze, order, match, bucket, odd, scenario, free, calc/spotbug/write where they fit, and the picture types`);
-    if (vis.length < 3) E.push('≥ 3 picture exercises (img_*) on your diagrams are required');
+    const pics = (ch.diagrams || []).length > 0;   // pictures only where they teach (docs/VISUAL.md §5): a chapter may have none
+    if (pics && vis.length < 3) E.push('≥ 3 picture exercises (img_*) on your diagrams are required');
     const used = {}; vis.forEach(e => used[e.media] = (used[e.media] || 0) + 1);
     for (const d of ch.diagrams || []) if ((used[d.id] || 0) < 2) E.push(`diagram "${d.id}" needs ≥ 2 picture exercises`);
-    if (!secs.some(s => (s.blocks || []).some(b => b.t === 'figure'))) E.push('add a {"t":"figure"} block showing a diagram');
+    if (pics && !secs.some(s => (s.blocks || []).some(b => b.t === 'figure'))) E.push('add a {"t":"figure"} block showing your diagram');
     const tagged = ex.filter(e => (e.tags || []).some(t => ['pitfall', 'debug', 'exam'].includes(t))).length; if (tagged < ex.length * 0.25) E.push('≥ 25 % of the exercises must be tagged pitfall, debug or exam');
     const ids = ex.map(e => e.id); for (const id of ids) if (!new RegExp(`^${ch.id}-e\\d{3}$`).test(id)) { E.push(`exercise id "${id}" must look like ${ch.id}-e001`); break; }
     for (const f of ch.flashcards || []) if (!secs.some(s => s.id === f.section)) { E.push(`flashcard section "${f.section}" does not exist`); break; }
@@ -219,13 +220,13 @@ Each chapter has "diagrams": 1–2 objects { "id": "lowercase-id", "kind": "flow
       onLog('✍️ ' + rt('roadmap.gen.chapter', { i: i + 1, n: plan.length, title: ch.title }));
       const mt = materialFor(ch);
       /* i18n-ignore-start — the prompt and the checks of the AI's chapter */
-      const prompt = `${brief}\n\n` + (mt ? `## The learner's material for this chapter (THE source — teach from it and stay faithful to it; do not add theory it does not contain beyond brief connecting explanations; page markers are in [brackets])\n${mt.text}` : `## Research brief (from Google Search; cite nothing, but stay faithful to it)\n${(run.research || '').slice(0, 24000)}`) + `\n\n## Write chapter ${i + 1} of ${plan.length} now: “${ch.title}”\nTeaching goals: ${(ch.goals || []).join('; ')}\nMust cover: ${(ch.coverage || []).join('; ')}\nEarlier chapters of this node: ${plan.slice(0, i).map(x => x.title).join('; ') || '(none)'} — do not repeat them.\n\nRules: language ${lang}. Chapter id "${id}", num ${i + 1}. 3–8 sections with ids "${id}-s01"…; 4–14 blocks each, varied (p, list, table, compare, flow, callout, reveal, ask, terms, code/diagram when useful, one figure). ≥ 4 exercises per section with ids "${id}-e001"… and ≥ 7 different types, incl. ≥ 3 picture exercises on your diagrams; ≥ 25 % tagged pitfall/debug/exam; every explanation teaches why the right answer is right and why the tempting one is wrong. 8–25 flashcards, ≥ 1 pitfall, debug playbooks where the topic has failure modes. ${S.content ? '' : 'Follow the noema-lite content format.'}`;
+      const prompt = `${brief}\n\n` + (mt ? `## The learner's material for this chapter (THE source — teach from it and stay faithful to it; do not add theory it does not contain beyond brief connecting explanations; page markers are in [brackets])\n${mt.text}` : `## Research brief (from Google Search; cite nothing, but stay faithful to it)\n${(run.research || '').slice(0, 24000)}`) + `\n\n## Write chapter ${i + 1} of ${plan.length} now: “${ch.title}”\nTeaching goals: ${(ch.goals || []).join('; ')}\nMust cover: ${(ch.coverage || []).join('; ')}\nEarlier chapters of this node: ${plan.slice(0, i).map(x => x.title).join('; ') || '(none)'} — do not repeat them.\n\nRules: language ${lang}. Chapter id "${id}", num ${i + 1}. 3–8 sections with ids "${id}-s01"…; 4–14 blocks each, varied (p, list, table, compare, flow, callout, reveal, ask, terms, code/diagram when useful, a figure only for a diagram that teaches). ≥ 4 exercises per section with ids "${id}-e001"…; in the chapter EVERY exercise type ≥ 3 times (mcq, tf, odd, order, match, bucket, cloze, scenario, free; spotbug and write when the subject has code, calc when it has math; when the chapter has diagrams, also all 7 picture types img_hotspot, img_sequence, img_reveal, img_drag, img_label, img_select, img_occlusion on them), every difficulty 1, 2 and 3 ≥ 3 times, every tag concept, pitfall, debug, exam, interview, compare ≥ 3 times (syntax with code, calc with math); ≥ 25 % tagged pitfall/debug/exam; every explanation teaches why the right answer is right and why the tempting one is wrong. 8–25 flashcards, ≥ 1 pitfall, debug playbooks where the topic has failure modes. ${S.content ? '' : 'Follow the noema-lite content format.'}`;
       const { data, usage } = await L().json({ acc, provider: 'gemini', model, signal, maxTokens: 65536, system: `You are an expert teacher and instructional designer writing one chapter of a noema-lite subject pack as JSON. Follow the content contract exactly.\n\n${S.content || ''}\n\n${S.visual ? S.visual.split('## 5.')[0] : ''}\n\n${DIAGRAM_KIT}`, prompt, schema: S_CHAPTER,
         validate: d => {
           if (d.id !== id) return [`"id" must be "${id}"`];
           let m; try { m = materialize(d, prefix); } catch (e) { return [e.message]; }
-          const pack = { format: 'noema-pack', subject: { id: packId, title: 'x' }, chapters: [m.chapter], media: m.media };
-          const r = window.NoemaPackCheck.checkPack(pack, null, { strict: true });
+          const pack = { format: 'noema-pack', subject: { id: packId, title: 'x', features: { math: !!run.meta?.math, code: !!run.meta?.code } }, chapters: [m.chapter], media: m.media };
+          const r = window.NoemaPackCheck.checkPack(pack, null, { strict: true, balance: 3 });   // tools/pack_rules.json
           return [...r.errors, ...quality(d)].slice(0, 30);
         }, onRepair: e => onLog('   ↻ ' + rt('roadmap.fixing', { n: e.length })) });
       /* i18n-ignore-end */
@@ -237,7 +238,7 @@ Each chapter has "diagrams": 1–2 objects { "id": "lowercase-id", "kind": "flow
     // 4. assemble — the subject's texts are pack content (in the curriculum's language or neutral), not the app's words
     /* i18n-ignore-start */
     const M = run.meta;
-    const subject = { id: packId, title: n.title, appTitle: n.title, emoji: M.emoji, group: 'curriculum', description: M.description, language: c.language, features: { math: !!M.math, code: !!M.code },
+    const subject = { id: packId, title: n.title, appTitle: n.title, emoji: M.emoji, group: 'curriculum', description: M.description, language: c.language, features: { math: !!M.math, code: !!M.code }, authoring: { minVisualPerChapter: 3, minExercisesPerPicture: 3, minPerKind: 3 },
       hero: { headline: M.headline, mantra: M.mantra }, searchExamples: M.searchExamples, tutor: { ...M.tutor, prior: `Already mastered: ${c.edges.filter(e => e.to === nodeId).map(e => c.nodes[e.from]?.title).filter(Boolean).join('; ') || 'nothing specific'}.` } };
     const sources = run.material ? { sources: run.material.map(m => ({ id: m.srcId, title: m.name.replace(/\.[a-z0-9]+$/i, ''), fileName: m.name, file: 'sources/' + m.name, pages: m.range ? `${m.range[0]}–${m.range[1]}` : m.pageCount ? `1–${m.pageCount}` : '', added: new Date().toISOString().slice(0, 10), emoji: '📄' })), chapters: Object.fromEntries(run.chapters.map(ch => [ch.id, ch.src])), patches: {} } : { sources: [{ id: 'web', title: 'Web research (Gemini + Google Search)', subtitle: (run.sources || []).map(s => s.title).slice(0, 6).join(' · '), added: new Date().toISOString().slice(0, 10), emoji: '🔎' },
       ...(run.sources || []).map((s, i) => ({ id: 's' + (i + 1), title: s.title, url: s.url, added: new Date().toISOString().slice(0, 10), emoji: '🌐' }))], chapters: Object.fromEntries(run.chapters.map(ch => [ch.id, 'web'])), patches: {} };
