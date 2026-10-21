@@ -1,0 +1,93 @@
+{
+ "about": "Self-contained rewrites of tests/fixtures/quality/bad_exercises.json, written to CONTENT_SPEC Q1–Q8. The quality checker must report none of them. `_rewrites` is a note for people.",
+ "exercises": [
+  {
+   "id": "ch01-e001", "_rewrites": "Round 2 ch01-e001", "type": "mcq", "section": "ch01-s01", "difficulty": 2, "tags": ["concept", "compare"],
+   "lr": "ch01-l01", "think": "discriminate", "mode": "distinguish", "cite": {"src": "r1", "loc": "Q14", "sq": "ch01-q01"},
+   "q": "A query on a Delta table with 200 columns selects 3 of them and filters `WHERE order_date = '2026-01-05'`. Which statement assigns the two savings correctly?",
+   "options": [
+    "Reading only 3 columns is column pruning; skipping files whose date range cannot match is data skipping",
+    "Reading only 3 columns is data skipping; skipping files is column pruning",
+    "Both savings come from column pruning, because the filter is on a column",
+    "Neither: Delta always reads every file and drops rows in memory"
+   ],
+   "answer": 0,
+   "why": [
+    "Right: pruning removes columns, skipping removes whole files or regions.",
+    "Swapped: this is exactly the confusion to avoid.",
+    "A filter on a column does not remove columns; it lets the engine skip files whose statistics exclude the value.",
+    "Delta keeps per-file min/max statistics precisely so that it does not have to read every file."
+   ],
+   "explain": "Column pruning reduces **which columns** are read, so it helps whenever a query needs few of many columns. Data skipping (with partition or clustering pruning) reduces **which files** are opened, using the min/max statistics of each file. The tempting swap mixes up the two axes: columns are the width of the table, files are its length."
+  },
+  {
+   "id": "ch01-e005", "_rewrites": "Round 2 ch01-e005", "type": "mcq", "multi": true, "section": "ch01-s01", "difficulty": 3, "tags": ["concept", "exam"],
+   "lr": "ch01-l02", "think": "analyze", "cite": {"src": "r1", "loc": "Q15", "sq": "ch01-q02"},
+   "q": "A folder holds plain Parquet files, with no table format on top. Which of these does it **not** give you by itself?",
+   "options": [
+    "Atomic commits: a write of ten files is seen completely or not at all",
+    "A history of versions you can query or restore",
+    "Column-wise compression and encoding",
+    "A consistent snapshot for a reader while a writer is adding files",
+    "Min/max statistics per column in each file"
+   ],
+   "answer": [0, 1, 3],
+   "why": [
+    "Missing: a reader can see some of the ten files before the others land.",
+    "Missing: there is no log of versions, only the files that exist now.",
+    "Present: this is what Parquet as a columnar format does.",
+    "Missing: without a transaction log a reader may list a half-written folder.",
+    "Present: Parquet footers carry per-column statistics."
+   ],
+   "explain": "Parquet describes how data sits **inside each file**: columns, encodings, compression, statistics. Everything about the **set of files as a table** — atomic commits, versions, consistent snapshots under concurrent writes — needs a transaction log, which is what Delta Lake adds on top. The tempting picks are compression and statistics, but those live inside the file and Parquet already has them."
+  },
+  {
+   "id": "ch01-e008", "_rewrites": "Round 2 ch01-e008", "type": "tf", "section": "ch01-s02", "difficulty": 2, "tags": ["concept", "syntax"],
+   "lr": "ch01-l03", "think": "apply",
+   "q": "On Databricks, `CREATE TABLE sales (id INT, amount DOUBLE)` with no `USING` clause creates a Delta table.",
+   "answer": true,
+   "explain": "Delta Lake is the default table format on Databricks, so a `CREATE TABLE` without `USING` makes a Delta table. You need `USING PARQUET` (or another format) to get anything else. The trap is to assume that no `USING` means plain files."
+  },
+  {
+   "id": "ch01-e014", "_rewrites": "Round 1 ch01-e014", "type": "mcq", "section": "ch01-s03", "difficulty": 2, "tags": ["syntax", "pitfall"],
+   "lr": "ch01-l04", "think": "apply",
+   "q": "In `abfss://data@company.dfs.core.windows.net/orders/`, which part is the **storage account**?",
+   "options": ["`abfss`", "`data`", "`company`", "`dfs`"],
+   "answer": 2,
+   "why": [
+    "This is the scheme (ABFS over TLS).",
+    "This is the container: it comes before the `@`.",
+    "Right: the storage account is the first label after the `@`.",
+    "This is part of the Data Lake Storage endpoint host."
+   ],
+   "explain": "An ADLS Gen2 URI reads `scheme://container@account.dfs.core.windows.net/path`. The container sits **before** the `@` and the account right **after** it. Swapping the two is the usual mistake, because in most URLs the first name is the bigger thing."
+  },
+  {
+   "id": "ch01-e019", "_rewrites": "Round 1 ch01-e008", "type": "write", "lang": "sql", "section": "ch01-s02", "difficulty": 1, "tags": ["syntax"],
+   "lr": "ch01-l05", "think": "apply",
+   "q": "Table `orders(order_id, customer_id, amount)`. Write a query that returns the total `amount` per customer.",
+   "solution": "SELECT customer_id, SUM(amount) AS total\nFROM orders\nGROUP BY customer_id;",
+   "keywords": ["select", "customer_id", "sum(amount)", "from orders", "group by customer_id"],
+   "explain": "`SUM(amount)` aggregates and `GROUP BY customer_id` makes one row per customer. Every selected column that is not aggregated must appear in `GROUP BY`; leaving it out is the classic error."
+  },
+  {
+   "id": "ch01-e027", "_rewrites": "Round 2 ch01-e027", "type": "mcq", "section": "ch01-s02", "difficulty": 3, "tags": ["concept", "pitfall"],
+   "lr": "ch01-l02", "think": "analyze", "mode": "whatif",
+   "q": "A nightly job rewrites a folder of **plain Parquet** files (no Delta) while an analyst's query is reading it. What can the analyst's query return?",
+   "options": [
+    "A mix of old and new files, or an error for a file that vanished mid-read",
+    "Always the complete old data, because Parquet files are immutable",
+    "Always the complete new data, because the reader waits for the writer",
+    "Nothing: Spark refuses to read a folder that is being written"
+   ],
+   "answer": 0,
+   "why": [
+    "Right: with no transaction log there is no snapshot to read, only whatever files exist at each moment.",
+    "Each file is immutable, but the set of files is not, and that set is what the reader lists.",
+    "There is no lock or commit protocol in plain Parquet for the reader to wait on.",
+    "Spark has no way to know a plain folder is being written."
+   ],
+   "explain": "Without a table format, a 'table' is just the files a listing finds, so a concurrent rewrite can expose a half-old, half-new state or a missing file. Delta's log fixes this by giving every reader one committed version. The tempting answer confuses immutable **files** with an immutable **table**."
+  }
+ ]
+}

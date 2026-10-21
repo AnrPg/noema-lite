@@ -18,6 +18,7 @@ node "$ROOT/tests/socratic.js" "$T"
 node "$ROOT/tests/visual.js" "$T"
 python3 "$ROOT/tests/validate_visual.py"
 node "$ROOT/tests/pack_rules.js"   # every exercise type, difficulty and focus tag >= 3 per chapter (tools/pack_rules.json)
+python3 "$ROOT/tests/quality_fixtures.py"   # the Q1–Q8 good/bad exercise samples (tools/CONTENT_SPEC.md)
 python3 "$ROOT/tests/validate_pack_i18n.py"   # packs in several languages: subject.i18n, translated chapters (docs/i18n.md §10)
 (cd "$T" && python3 tests/package_sources.py)
 node "$ROOT/tests/connector.js" "$T"
