@@ -314,6 +314,8 @@ the section id and exercise ids that cover it. Use it to self-audit before finis
   their ids]` and `"reviseBlocks": [{"section": "ch02-s05", "index": 3, "block": {…}}]`. Each replaces the item with that
   id (or the block at that index) after the appends, so the learner keeps the progress and the SRS schedule of the id.
   An unknown id, section or index is an error. Change the meaning of an exercise only by a new id.
+  The translations (`translations/<locale>/chNN.json`) must follow: revise the same items there too, or the
+  translation check (`checkTranslation`, `validate.py --source`) refuses the mismatch.
 * Register the new source in `sources.json` (append; order = chronology) and map the new chapter/patch files to it.
 * `python3 tools/build.py` validates the MERGED result; `python3 tools/db_sync.py` records the new version in the backup database.
 
