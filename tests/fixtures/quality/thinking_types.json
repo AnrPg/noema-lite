@@ -1,0 +1,72 @@
+{
+ "about": "One valid exercise of each critical-thinking type (CONTENT_SPEC.md \"Types\"): tests/thinking_types.js validates them with engine/packcheck.js and tools/validate.py and plays them in the app.",
+ "exercises": [
+  {
+   "id": "ch01-e901", "type": "flaw", "section": "ch01-s01", "difficulty": 3, "tags": ["pitfall", "calc"],
+   "lr": "ch01-l01", "think": "evaluate", "mode": "contradiction",
+   "q": "A student works out the kinetic energy of a 2 kg cart moving at 3 m/s. Which line is wrong, and why?",
+   "lines": ["Kinetic energy is E = ½ · m · v².", "m = 2 kg and v = 3 m/s.", "E = ½ · 2 · 3 = 3 J.", "So the cart carries 3 J of kinetic energy."],
+   "flaws": [2],
+   "reasons": ["The speed was not squared", "The mass should be in grams", "The ½ belongs only to potential energy", "Joules are the wrong unit for energy"],
+   "reason": 0,
+   "fix": "E = ½ · 2 · 3² = 9 J.",
+   "explain": "The formula squares the speed, so line 3 must use 3² = 9, which gives E = 9 J. The tempting reasons are wrong: SI mass is in kilograms, and the ½ is part of the kinetic-energy formula itself."
+  },
+  {
+   "id": "ch01-e902", "type": "case", "section": "ch01-s01", "difficulty": 2, "tags": ["calc", "concept"],
+   "lr": "ch01-l02", "think": "apply",
+   "q": "A 1 kg ball is dropped from a 5 m high balcony. Take g = 10 m/s² and ignore air resistance.",
+   "parts": [
+    {"q": "Its potential energy at the top, relative to the ground, is…", "type": "calc", "answer": 50, "tolerance": 0.5, "unit": "J", "explain": "E = m·g·h = 1 · 10 · 5 = 50 J."},
+    {"q": "Just before it hits the ground, its kinetic energy is about 50 J.", "type": "tf", "answer": true, "explain": "Without air resistance, all the potential energy turns into kinetic energy."},
+    {"q": "What changes if the ball had a mass of 2 kg?", "type": "mcq", "options": ["Both energies double, and the speed at the ground stays the same", "The speed at the ground doubles", "Nothing changes", "Only the potential energy doubles"], "answer": 0, "why": ["Right: E grows with m, but v = √(2gh) does not depend on m.", "v = √(2gh) has no m in it.", "E = m·g·h doubles with m.", "The kinetic energy at the ground equals the potential energy at the top, so it doubles too."]}
+   ],
+   "explain": "Energy is conserved: m·g·h at the top becomes ½·m·v² at the bottom. The mass appears on both sides, so the speed does not depend on it, but both energies do."
+  },
+  {
+   "id": "ch01-e903", "type": "predict", "section": "ch01-s01", "difficulty": 2, "tags": ["concept", "pitfall"],
+   "lr": "ch01-l03", "think": "analyze", "mode": "whatif",
+   "q": "A heavy ball and a light ball of the same size are dropped together from 2 m in a room with no air. Which one lands first?",
+   "options": ["Both at the same moment", "The heavy ball", "The light ball"],
+   "answer": 0,
+   "why": ["Right: every body falls with the same g.", "Weight is larger, but so is the inertia; the acceleration is the same.", "There is no air to slow the heavy ball down more."],
+   "outcome": "They land together after about 0.63 s, because both fall with the same acceleration g ≈ 9.8 m/s².",
+   "explain": "Gravity's force grows with mass, and so does the mass that has to be accelerated, so a = F/m = g for every body. The everyday intuition that heavy things fall faster comes from air resistance, and this room has none."
+  },
+  {
+   "id": "ch01-e904", "type": "tree", "section": "ch01-s01", "difficulty": 3, "tags": ["debug", "exam"],
+   "lr": "ch01-l04", "think": "analyze",
+   "q": "Your measured efficiency of a small generator is 130 %. Walk through the checks.",
+   "start": "a",
+   "nodes": {
+    "a": {"q": "What do you check first?", "options": [
+      {"text": "That input and output are in the same units", "ok": true, "fb": "Efficiency compares two energies; mixed units are the most common cause.", "to": "b"},
+      {"text": "Buy a new generator", "ok": false, "fb": "Over 100 % is impossible, so the measurement is wrong, not the machine."},
+      {"text": "Accept it: some generators exceed 100 %", "ok": false, "fb": "That would break energy conservation."}]},
+    "b": {"q": "The units match. Next?", "options": [
+      {"text": "Check that input and output cover the same time interval", "ok": true, "fb": "A longer output window inflates the output energy."},
+      {"text": "Round the result down to 100 %", "ok": false, "fb": "That hides the error instead of finding it."}]}
+   },
+   "explain": "An efficiency above 100 % always means a measuring error, because a machine cannot give out more energy than it takes in. Check units first, then the time windows, then the instruments."
+  },
+  {
+   "id": "ch01-e905", "type": "inquiry", "section": "ch01-s01", "difficulty": 3, "tags": ["exam", "concept"],
+   "lr": "ch01-l05", "think": "evaluate",
+   "q": "You suspect your measured fall times are too long because of air resistance. Which single experiment tells you the most?",
+   "options": ["Drop the same ball from several heights and compare with t = √(2h/g)", "Drop it once more from the same height", "Weigh the ball", "Measure the room temperature"],
+   "scores": [3, 1, 0, 0],
+   "why": ["Several heights show whether the gap grows with speed, which is the signature of air resistance.", "Repeating gives precision, not a test of the cause.", "Mass alone does not change the fall time without air.", "Temperature barely changes the drag at these speeds."],
+   "explain": "Air resistance grows with speed, so its effect grows with the height of the drop. Comparing several heights with the no-air formula separates it from random error; a single repeat cannot."
+  },
+  {
+   "id": "ch01-e906", "type": "debate", "section": "ch01-s01", "difficulty": 3, "tags": ["compare", "interview"],
+   "lr": "ch01-l06", "think": "evaluate", "mode": "dialectic",
+   "q": "Claim: solar power should replace coal power stations in a sunny country.",
+   "sides": [
+    {"position": "For: it emits no CO₂ while running and its fuel is free", "counters": ["It produces nothing at night, so storage or a backup is needed", "Solar panels are blue", "The sun will burn out tomorrow"], "best": 0, "why": ["The real weakness: supply does not follow demand.", "Colour is irrelevant.", "False; the sun has billions of years left."]},
+    {"position": "Against: coal is reliable day and night", "counters": ["Its CO₂ emissions drive climate change and its fuel costs keep rising", "Coal is black", "Coal stations are tall"], "best": 0, "why": ["The real weakness: emissions and fuel cost.", "Colour is irrelevant.", "Height is irrelevant."]}
+   ],
+   "explain": "A strong objection hits the core of a position: for solar that is intermittency, for coal it is emissions and fuel cost. Weak objections attack details that do not matter to the claim."
+  }
+ ]
+}

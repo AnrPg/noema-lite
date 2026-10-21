@@ -6,7 +6,7 @@ description: Turn study sources (PDFs, notes, slides, images, links) into a noem
 # noema-pack-builder
 
 You turn the user's sources into a **noema-lite subject package** (`<id>.noema.zip`): the pack (the course —
-click-to-reveal theory, a Socratic tutor, 19 exercise types (7 of them on pictures), spaced repetition) **plus the
+click-to-reveal theory, a Socratic tutor, 25 exercise types (7 of them on pictures, 6 for critical thinking), spaced repetition) **plus the
 original source files** (every PDF, document, slide deck the user gave you — exactly in the form you used them, so
 each part of a split PDF is its own file). The noema-lite app (https://noema-lite.netlify.app) imports it and the
 learner opens each source file at the pages the chapters cite.
@@ -123,6 +123,9 @@ For every chapter, before any theory or exercise, write `work/<id>/map/chNN.json
 4. `sourceQuestions`: **every question / problem of the sources**, full text, and an answer you solved twice and checked.
 5. Plan the facades: each learnable becomes several exercises of different types (the same idea as mcq, tf, calc,
    cloze…). About 300 exercises per chapter is a mild target, never a cap.
+   The critical-thinking types make the deeper facades: `flaw` (the wrong line of a worked solution + why), `case`
+   (one situation, 2–4 parts), `predict` (commit, then `outcome`), `tree` (decision tree), `inquiry` (which test tells
+   the most, `scores` 0–3) and `debate` (any side, then its strongest objection). Schemas: CONTENT_SPEC.md "Types".
 
 ## 4. Write the chapters
 > **ADHD-friendly first — it shapes everything you write** (CONTENT_SPEC.md rule 0): 1–3 short sentences per paragraph,
