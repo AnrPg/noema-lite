@@ -1,0 +1,2349 @@
+{
+ "format": "noema-bridge-locale",
+ "v": 1,
+ "native": "ar",
+ "status": "draft",
+ "t": {
+  "table#1": {
+   "t": "جدول",
+   "src": "bion5jj7r1"
+  },
+  "file#1": {
+   "t": "ملف",
+   "src": "pdk7lv8eui"
+  },
+  "storage#1": {
+   "t": "التخزين",
+   "src": "1nzgtnm1xy"
+  },
+  "data#1": {
+   "t": "البيانات",
+   "src": "17dzcb5vls"
+  },
+  "compute#1": {
+   "t": "موارد الحوسبة",
+   "src": "1wmehsd1wt"
+  },
+  "transaction#1": {
+   "t": "معاملة (مجموعة تغييرات تُنفَّذ كلها أو لا تُنفَّذ)",
+   "src": "17folv99dl"
+  },
+  "metadata#1": {
+   "t": "البيانات الوصفية",
+   "src": "1z0pqt513n"
+  },
+  "column#1": {
+   "t": "عمود",
+   "src": "dj85zd1h09"
+  },
+  "row#1": {
+   "t": "صف (سجل)",
+   "src": "n7vuzl1e56"
+  },
+  "governance#1": {
+   "t": "حوكمة البيانات",
+   "src": "bo7oju1k1f"
+  },
+  "layer#1": {
+   "t": "طبقة",
+   "src": "jr1d9ib59z"
+  },
+  "query#1": {
+   "t": "استعلام",
+   "src": "1hz55x71q1"
+  },
+  "commit#1": {
+   "t": "تثبيت (commit)",
+   "src": "mkggzkhzed"
+  },
+  "commit#2": {
+   "t": "يثبّت (التغييرات)",
+   "src": "1tjj4xy1e8"
+  },
+  "log#1": {
+   "t": "سجل",
+   "src": "zm97b4cq0t"
+  },
+  "shuffle#1": {
+   "t": "إعادة توزيع البيانات (shuffle)",
+   "src": "176aox6aiz"
+  },
+  "shuffle#2": {
+   "t": "يعيد توزيع البيانات",
+   "src": "1rd7l9w8vy"
+  },
+  "snapshot#1": {
+   "t": "لقطة (حالة الجدول عند إصدار معيّن)",
+   "src": "g418gk1bmj"
+  },
+  "platform#1": {
+   "t": "منصّة",
+   "src": "1hx8z3tb39"
+  },
+  "read#1": {
+   "t": "يقرأ",
+   "src": "mb21d7n85z"
+  },
+  "read#2": {
+   "t": "عملية قراءة",
+   "src": "1i94uhq1ln"
+  },
+  "reader#1": {
+   "t": "قارئ (عملية تقرأ البيانات)",
+   "src": "l3b3102m2y"
+  },
+  "cloud#1": {
+   "t": "السحابة",
+   "src": "yfdq7911dy"
+  },
+  "current#1": {
+   "t": "الحالي",
+   "src": "bjk9re1qjp"
+  },
+  "database#1": {
+   "t": "قاعدة بيانات",
+   "src": "1fkohsw13p"
+  },
+  "engine#1": {
+   "t": "محرّك",
+   "src": "pkkvop8qqj"
+  },
+  "format#1": {
+   "t": "صيغة (تنسيق)",
+   "src": "w1glu21b0q"
+  },
+  "model#1": {
+   "t": "نموذج",
+   "src": "1eo0f2kd3m"
+  },
+  "part#1": {
+   "t": "جزء",
+   "src": "1bgo1vy1y0"
+  },
+  "physical#1": {
+   "t": "فعلي (مادي)",
+   "src": "pb4uad13jt"
+  },
+  "physically#1": {
+   "t": "فعليًا",
+   "src": "14ed9uqq0f"
+  },
+  "plane#1": {
+   "t": "مستوى (طبقة في البنية)",
+   "src": "11jfbomtjx"
+  },
+  "pruning#1": {
+   "t": "التقليم (تخطي البيانات غير اللازمة)",
+   "src": "uxwi92myic"
+  },
+  "statistics#1": {
+   "t": "إحصاءات",
+   "src": "dny7651koe"
+  },
+  "transactional#1": {
+   "t": "معاملاتي (يدعم المعاملات)",
+   "src": "9fkhzc1u3e"
+  },
+  "version#1": {
+   "t": "إصدار",
+   "src": "ltsttsghsk"
+  },
+  "cluster#1": {
+   "t": "عنقود حواسيب (cluster)",
+   "src": "1jt2ippytu"
+  },
+  "columnar#1": {
+   "t": "عمودي (تخزين حسب الأعمدة)",
+   "src": "1gwt6p1uzu"
+  },
+  "join#1": {
+   "t": "ربط (join)",
+   "src": "1yewj4xp9x"
+  },
+  "object#1": {
+   "t": "كائن",
+   "src": "15v0jcw1lu"
+  },
+  "state#1": {
+   "t": "حالة",
+   "src": "dz57ef152b"
+  },
+  "add#1": {
+   "t": "يضيف",
+   "src": "19k4hirkg3"
+  },
+  "chapter#1": {
+   "t": "فصل",
+   "src": "1iiqvy7rc9"
+  },
+  "come#1": {
+   "t": "يأتي",
+   "src": "19fjr6t9q3"
+  },
+  "come back#1": {
+   "t": "يعود",
+   "src": "1x2umd5ngw"
+  },
+  "different#1": {
+   "t": "مختلف",
+   "src": "1opx43mgss"
+  },
+  "environment#1": {
+   "t": "بيئة",
+   "src": "1hwv4e21ur"
+  },
+  "exam#1": {
+   "t": "امتحان",
+   "src": "16j42i31jm"
+  },
+  "logical#1": {
+   "t": "منطقي",
+   "src": "1s61nxt1mh"
+  },
+  "logically#1": {
+   "t": "منطقيًا",
+   "src": "1vsztrf1vx"
+  },
+  "membership#1": {
+   "t": "العضوية (الانتماء)",
+   "src": "1cjdwg5nyg"
+  },
+  "need#1": {
+   "t": "يحتاج",
+   "src": "1is5jglby0"
+  },
+  "now#1": {
+   "t": "الآن",
+   "src": "1xxw74pcxq"
+  },
+  "persistent#1": {
+   "t": "دائم (يبقى بعد التوقف)",
+   "src": "pv1tfq1umb"
+  },
+  "picture#1": {
+   "t": "صورة",
+   "src": "1e3tc1bd5q"
+  },
+  "picture#2": {
+   "t": "يتخيّل",
+   "src": "nc1t6i2rhe"
+  },
+  "run#1": {
+   "t": "يشغّل (ينفّذ)",
+   "src": "6295wt1uk6"
+  },
+  "see#1": {
+   "t": "يرى",
+   "src": "1l07s1q13f"
+  },
+  "semantics#1": {
+   "t": "الدلالة (قواعد السلوك)",
+   "src": "1n624sqnkp"
+  },
+  "slow#1": {
+   "t": "بطيء",
+   "src": "p4lph8138q"
+  },
+  "traditional#1": {
+   "t": "تقليدي",
+   "src": "eukd3jyyhh"
+  },
+  "valid#1": {
+   "t": "صالح",
+   "src": "jmtirv1vs1"
+  },
+  "invalid#1": {
+   "t": "غير صالح",
+   "src": "1izc1zdagw"
+  },
+  "write#1": {
+   "t": "يكتب",
+   "src": "xen3ia1jhn"
+  },
+  "writer#1": {
+   "t": "كاتب (عملية تكتب البيانات)",
+   "src": "1isuttx4dm"
+  },
+  "ask#1": {
+   "t": "يسأل",
+   "src": "1be2wv3nvp"
+  },
+  "byte#1": {
+   "t": "بايت",
+   "src": "1112hemraj"
+  },
+  "concurrent#1": {
+   "t": "متزامن",
+   "src": "xf8gk51p85"
+  },
+  "describe#1": {
+   "t": "يصف",
+   "src": "1v7x4v91t9"
+  },
+  "description#1": {
+   "t": "وصف",
+   "src": "riqqfcs46k"
+  },
+  "directory#1": {
+   "t": "مجلد (دليل)",
+   "src": "ern6u91aq7"
+  },
+  "evidence#1": {
+   "t": "دليل",
+   "src": "8abhid1vmo"
+  },
+  "give#1": {
+   "t": "يعطي",
+   "src": "1gu9yto1jj"
+  },
+  "gone#1": {
+   "t": "زال (لم يعد موجودًا)",
+   "src": "oh83koydqm"
+  },
+  "hold#1": {
+   "t": "يحتوي",
+   "src": "16efv3hr5o"
+  },
+  "keep#1": {
+   "t": "يحتفظ",
+   "src": "1e5n0g1154"
+  },
+  "kitchen#1": {
+   "t": "مطبخ",
+   "src": "48pgcd1ymd"
+  },
+  "lakehouse#1": {
+   "t": "بيت البحيرة (lakehouse: بحيرة بيانات مع جداول مستودع)",
+   "src": "12m49i11kw"
+  },
+  "old#1": {
+   "t": "قديم",
+   "src": "wafhtcrua3"
+  },
+  "new#1": {
+   "t": "جديد",
+   "src": "jwa1ym14w7"
+  },
+  "order#1": {
+   "t": "طلب شراء",
+   "src": "ozywlp1auj"
+  },
+  "order#2": {
+   "t": "ترتيب",
+   "src": "14jw3pc1fl"
+  },
+  "plain#1": {
+   "t": "عادي (بسيط)",
+   "src": "10ggwgy11j"
+  },
+  "reduce#1": {
+   "t": "يقلّل",
+   "src": "12f0tvy1e9"
+  },
+  "replacement#1": {
+   "t": "بديل",
+   "src": "15hnycyevd"
+  },
+  "schema#1": {
+   "t": "مخطط (schema)",
+   "src": "7g43zo41n6"
+  },
+  "something#1": {
+   "t": "شيء ما",
+   "src": "j77hro1vmd"
+  },
+  "store#1": {
+   "t": "يخزّن",
+   "src": "ocn6noxqop"
+  },
+  "survive#1": {
+   "t": "يبقى (ينجو)",
+   "src": "1blb5ht1ez"
+  },
+  "actually#1": {
+   "t": "في الواقع",
+   "src": "1q56i181nz"
+  },
+  "apart#1": {
+   "t": "بشكل منفصل",
+   "src": "14deg751d1"
+  },
+  "back#1": {
+   "t": "إلى الخلف (مجددًا)",
+   "src": "heoyc7it6x"
+  },
+  "belong#1": {
+   "t": "ينتمي",
+   "src": "irjyvi2f9g"
+  },
+  "broadcast#1": {
+   "t": "بثّ (broadcast)",
+   "src": "t5vlx07sku"
+  },
+  "cell#1": {
+   "t": "خلية",
+   "src": "ro2ljj1lw4"
+  },
+  "change#1": {
+   "t": "يغيّر",
+   "src": "bi832pwsen"
+  },
+  "change#2": {
+   "t": "تغيير",
+   "src": "1vrs4it1d2"
+  },
+  "cheap#1": {
+   "t": "رخيص",
+   "src": "rv1z8xe5n6"
+  },
+  "classic#1": {
+   "t": "كلاسيكي",
+   "src": "lp9khdmm5z"
+  },
+  "clustering#1": {
+   "t": "التجميع",
+   "src": "1xb5nkzufa"
+  },
+  "consistency#1": {
+   "t": "الاتساق",
+   "src": "1ytcpia13a"
+  },
+  "contain#1": {
+   "t": "يحتوي",
+   "src": "w181vm1arh"
+  },
+  "control#1": {
+   "t": "التحكم",
+   "src": "xm52utcn3o"
+  },
+  "control plane#1": {
+   "t": "مستوى التحكم (control plane)",
+   "src": "1js4wsb194"
+  },
+  "compute plane#1": {
+   "t": "مستوى الحوسبة (compute plane)",
+   "src": "7hgwr3f768"
+  },
+  "cook#1": {
+   "t": "يطبخ",
+   "src": "78kb0v1ukv"
+  },
+  "cook#2": {
+   "t": "طبّاخ",
+   "src": "15oeokzed6"
+  },
+  "dataset#1": {
+   "t": "مجموعة بيانات",
+   "src": "1v6dpu31tx"
+  },
+  "debugging#1": {
+   "t": "تصحيح الأخطاء",
+   "src": "1jajdg9q6g"
+  },
+  "decide#1": {
+   "t": "يقرّر",
+   "src": "a229fv140b"
+  },
+  "delete#1": {
+   "t": "يحذف",
+   "src": "89qf0t93tf"
+  },
+  "deleted#1": {
+   "t": "محذوف",
+   "src": "4euy86efzr"
+  },
+  "disappear#1": {
+   "t": "يختفي",
+   "src": "1lw3kzazot"
+  },
+  "e-shop#1": {
+   "t": "متجر إلكتروني",
+   "src": "1fv4vcfh85"
+  },
+  "execution#1": {
+   "t": "التنفيذ",
+   "src": "1atzeg2k08"
+  },
+  "executor#1": {
+   "t": "منفّذ (executor)",
+   "src": "2qsizq17eh"
+  },
+  "exist#1": {
+   "t": "يوجد",
+   "src": "8rr3oy12jr"
+  },
+  "existence#1": {
+   "t": "الوجود",
+   "src": "kbtxqy1qqe"
+  },
+  "folder#1": {
+   "t": "مجلد",
+   "src": "1l8qd2t1jn"
+  },
+  "form#1": {
+   "t": "شكل",
+   "src": "93wqngy8zu"
+  },
+  "form#2": {
+   "t": "يصوغ",
+   "src": "15hfmcbbfu"
+  },
+  "hash#1": {
+   "t": "تجزئة (hash)",
+   "src": "1r0yum81e4"
+  },
+  "historically#1": {
+   "t": "تاريخيًا",
+   "src": "1o7xwh81tc"
+  },
+  "huge#1": {
+   "t": "ضخم",
+   "src": "5qf73w3q8c"
+  },
+  "include#1": {
+   "t": "يشمل",
+   "src": "1o94n8021u"
+  },
+  "isolation#1": {
+   "t": "العزل",
+   "src": "1i9jcpl13h"
+  },
+  "know#1": {
+   "t": "يعرف",
+   "src": "77asj43aee"
+  },
+  "layout#1": {
+   "t": "تخطيط (ترتيب البيانات)",
+   "src": "1hy652llgk"
+  },
+  "lifetime#1": {
+   "t": "مدة البقاء",
+   "src": "omru5imuqu"
+  },
+  "mean#1": {
+   "t": "يعني",
+   "src": "1gj7zog1pt"
+  },
+  "mechanism#1": {
+   "t": "آلية",
+   "src": "9f52eo1as6"
+  },
+  "modern#1": {
+   "t": "حديث",
+   "src": "yvydqc14xm"
+  },
+  "name#1": {
+   "t": "اسم",
+   "src": "1i2jbvl1p3"
+  },
+  "network#1": {
+   "t": "شبكة",
+   "src": "1qvogem1c5"
+  },
+  "notebook#1": {
+   "t": "دفتر (notebook)",
+   "src": "1u16pdqg0a"
+  },
+  "pantry#1": {
+   "t": "مخزن الطعام",
+   "src": "pwquxhhcvu"
+  },
+  "partition#1": {
+   "t": "قسم (partition)",
+   "src": "ti0jbfbqor"
+  },
+  "plan#1": {
+   "t": "خطة التنفيذ",
+   "src": "1bi1q8x4so"
+  },
+  "RAM#1": {
+   "t": "ذاكرة الوصول العشوائي",
+   "src": "mujxab7fhp"
+  },
+  "raw#1": {
+   "t": "خام",
+   "src": "4ahowm29m9"
+  },
+  "real#1": {
+   "t": "حقيقي",
+   "src": "13nhcugkb0"
+  },
+  "server#1": {
+   "t": "خادم",
+   "src": "5drgxb7j2o"
+  },
+  "side#1": {
+   "t": "جانب",
+   "src": "f2ufjq1aof"
+  },
+  "skew#1": {
+   "t": "انحراف البيانات (توزيع غير متوازن)",
+   "src": "1bdwgm5v2k"
+  },
+  "someone#1": {
+   "t": "شخص ما",
+   "src": "1iauv1l1do"
+  },
+  "system#1": {
+   "t": "نظام",
+   "src": "n7vujudgtb"
+  },
+  "take#1": {
+   "t": "يأخذ",
+   "src": "131790u19v"
+  },
+  "time#1": {
+   "t": "الوقت",
+   "src": "14bpszl11r"
+  },
+  "together#1": {
+   "t": "معًا",
+   "src": "105617cqzw"
+  },
+  "update#1": {
+   "t": "تحديث",
+   "src": "3e2bcc8rnl"
+  },
+  "update#2": {
+   "t": "يحدّث",
+   "src": "181onz0daj"
+  },
+  "use#1": {
+   "t": "يستخدم",
+   "src": "dx0nqq1ajy"
+  },
+  "warehouse#1": {
+   "t": "مستودع بيانات",
+   "src": "q18hz8160w"
+  },
+  "web#1": {
+   "t": "الويب",
+   "src": "1f1modv1tk"
+  },
+  "whole#1": {
+   "t": "كامل",
+   "src": "1l9lilt1m5"
+  },
+  "work#1": {
+   "t": "العمل",
+   "src": "10gfttemsv"
+  },
+  "work#2": {
+   "t": "يعمل",
+   "src": "1i1se9z44e"
+  },
+  "worker#1": {
+   "t": "عقدة عاملة (worker)",
+   "src": "usnfhk1b6b"
+  },
+  "able#1": {
+   "t": "قادر",
+   "src": "15su2681ve"
+  },
+  "ACID#1": {
+   "t": "ACID (الذرية، الاتساق، العزل، الديمومة)",
+   "src": "xfztywapin"
+  },
+  "alone#1": {
+   "t": "وحده",
+   "src": "1e34cefx9t"
+  },
+  "analogy#1": {
+   "t": "تشبيه",
+   "src": "1llef71o9r"
+  },
+  "analytical#1": {
+   "t": "تحليلي",
+   "src": "lg2esy1gbp"
+  },
+  "API#1": {
+   "t": "واجهة برمجة التطبيقات",
+   "src": "1nrubqmi26"
+  },
+  "application#1": {
+   "t": "تطبيق",
+   "src": "4bf80qkh9f"
+  },
+  "architecture#1": {
+   "t": "البنية (المعمارية)",
+   "src": "3oem217fe1"
+  },
+  "atomicity#1": {
+   "t": "الذرية",
+   "src": "grvk5319ch"
+  },
+  "atomic#1": {
+   "t": "ذري (كل شيء أو لا شيء)",
+   "src": "1dzqs81ub2"
+  },
+  "backend#1": {
+   "t": "الواجهة الخلفية",
+   "src": "boxh8d1vr5"
+  },
+  "bad#1": {
+   "t": "سيئ",
+   "src": "csyxl21vyz"
+  },
+  "become#1": {
+   "t": "يصبح",
+   "src": "1g7zus31k1"
+  },
+  "beginner#1": {
+   "t": "مبتدئ",
+   "src": "h1ffp37l3m"
+  },
+  "behavior#1": {
+   "t": "السلوك",
+   "src": "1wot9yagyq"
+  },
+  "better#1": {
+   "t": "أفضل",
+   "src": "1ei2yuxl6v"
+  },
+  "big#1": {
+   "t": "كبير",
+   "src": "1bdmhwazhm"
+  },
+  "bring#1": {
+   "t": "يجلب",
+   "src": "bktu919nrw"
+  },
+  "build#1": {
+   "t": "يبني",
+   "src": "h5eakytyeo"
+  },
+  "building#1": {
+   "t": "مبنى",
+   "src": "e8m0ph1omh"
+  },
+  "call#1": {
+   "t": "يسمّي",
+   "src": "1l77n5p2ho"
+  },
+  "case#1": {
+   "t": "حالة",
+   "src": "1rg5m6116n"
+  },
+  "capacity#1": {
+   "t": "السعة",
+   "src": "1orn87d7fe"
+  },
+  "cause#1": {
+   "t": "السبب",
+   "src": "1hgmftedr7"
+  },
+  "central#1": {
+   "t": "مركزي",
+   "src": "mf6ecn11as"
+  },
+  "challenge#1": {
+   "t": "تحدٍّ",
+   "src": "1h0ka5f1v0"
+  },
+  "check#1": {
+   "t": "يتحقّق",
+   "src": "nplkrh1k2a"
+  },
+  "choice#1": {
+   "t": "اختيار",
+   "src": "1338wxa4k7"
+  },
+  "choose#1": {
+   "t": "يختار",
+   "src": "19m400qsuc"
+  },
+  "class#1": {
+   "t": "فئة",
+   "src": "qyqji21d0a"
+  },
+  "code#1": {
+   "t": "الشيفرة البرمجية",
+   "src": "105qpnv1ob"
+  },
+  "coherent#1": {
+   "t": "متّسق",
+   "src": "1rgviiqb93"
+  },
+  "collect#1": {
+   "t": "يجمع",
+   "src": "179wmzh17e"
+  },
+  "combine#1": {
+   "t": "يجمع (يدمج)",
+   "src": "2tahs01jgx"
+  },
+  "compactly#1": {
+   "t": "بشكل مضغوط",
+   "src": "1eufk7611z"
+  },
+  "compare#1": {
+   "t": "يقارن",
+   "src": "156zssp1b4"
+  },
+  "compatible#1": {
+   "t": "متوافق",
+   "src": "9h1b9xos0e"
+  },
+  "completely#1": {
+   "t": "تمامًا",
+   "src": "177jjjd148"
+  },
+  "compress#1": {
+   "t": "يضغط",
+   "src": "1q4vd50131"
+  },
+  "compression#1": {
+   "t": "الضغط",
+   "src": "150pzqa1sm"
+  },
+  "computation#1": {
+   "t": "الحوسبة",
+   "src": "1dlqm6q1ln"
+  },
+  "compute#2": {
+   "t": "يحسب",
+   "src": "f1m8z3xdec"
+  },
+  "concept#1": {
+   "t": "مفهوم",
+   "src": "1t0ammd3fd"
+  },
+  "configuration#1": {
+   "t": "إعداد",
+   "src": "yf8hde194t"
+  },
+  "confusing#1": {
+   "t": "مربك",
+   "src": "19qc7cnbu4"
+  },
+  "connect#1": {
+   "t": "يربط",
+   "src": "1morev81d3"
+  },
+  "coordinate#1": {
+   "t": "ينسّق",
+   "src": "kxqsr9q4gr"
+  },
+  "coordination#1": {
+   "t": "التنسيق",
+   "src": "imv2d01rk2"
+  },
+  "copy#1": {
+   "t": "ينسخ",
+   "src": "fzfo4wnkxq"
+  },
+  "core#1": {
+   "t": "جوهر",
+   "src": "129izap3zx"
+  },
+  "core#2": {
+   "t": "أساسي",
+   "src": "71uwluha7i"
+  },
+  "correct#1": {
+   "t": "صحيح",
+   "src": "18xmjmbaqo"
+  },
+  "correspond#1": {
+   "t": "يقابل (يطابق)",
+   "src": "1ogbgj8e5t"
+  },
+  "cosmetic#1": {
+   "t": "شكلي",
+   "src": "egsutd2smh"
+  },
+  "count#1": {
+   "t": "يُحتسب",
+   "src": "nbliqo1hjy"
+  },
+  "course#1": {
+   "t": "دورة (مقرّر)",
+   "src": "94kq2srtov"
+  },
+  "cover#1": {
+   "t": "يغطّي",
+   "src": "1kxceb2kup"
+  },
+  "CPU#1": {
+   "t": "المعالج",
+   "src": "1cddxxdnvn"
+  },
+  "crash#1": {
+   "t": "انهيار (عطل مفاجئ)",
+   "src": "g6br6s1q4t"
+  },
+  "create#1": {
+   "t": "ينشئ",
+   "src": "nkwl1sgmd1"
+  },
+  "customer#1": {
+   "t": "عميل",
+   "src": "hhkxsqfmam"
+  },
+  "cut#1": {
+   "t": "يقلّص",
+   "src": "10s7ns2bv4"
+  },
+  "DAG#1": {
+   "t": "DAG (رسم بياني موجّه غير دوري)",
+   "src": "gwzdr61p8w"
+  },
+  "database-like#1": {
+   "t": "يشبه قاعدة البيانات",
+   "src": "hnx09pw7e5"
+  },
+  "date#1": {
+   "t": "تاريخ",
+   "src": "1eevuqskig"
+  },
+  "day#1": {
+   "t": "يوم",
+   "src": "1b4hxo094c"
+  },
+  "default#1": {
+   "t": "الافتراضي",
+   "src": "1enj5vt3tr"
+  },
+  "definition#1": {
+   "t": "تعريف",
+   "src": "tlqznx14d3"
+  },
+  "depend#1": {
+   "t": "يعتمد",
+   "src": "u40eee1bfp"
+  },
+  "depth#1": {
+   "t": "عمق",
+   "src": "1ja0up6bda"
+  },
+  "design#1": {
+   "t": "تصميم",
+   "src": "1o5s2hj1a4"
+  },
+  "detail#1": {
+   "t": "تفصيل",
+   "src": "118840g1my"
+  },
+  "diagnose#1": {
+   "t": "يشخّص",
+   "src": "c546q615sn"
+  },
+  "diagnosis#1": {
+   "t": "تشخيص",
+   "src": "184gfgo1sa"
+  },
+  "difference#1": {
+   "t": "الفرق",
+   "src": "18ck25w10h"
+  },
+  "directly#1": {
+   "t": "مباشرة",
+   "src": "1afek9i904"
+  },
+  "disposable#1": {
+   "t": "يُستغنى عنه",
+   "src": "a45fho8wue"
+  },
+  "distributed#1": {
+   "t": "موزّع",
+   "src": "1s4uay11pc"
+  },
+  "DML#1": {
+   "t": "DML (أوامر تعديل البيانات)",
+   "src": "1eod6le1ya"
+  },
+  "driver#1": {
+   "t": "المشغّل (driver)",
+   "src": "1coari9xwd"
+  },
+  "drop#1": {
+   "t": "يُسقِط",
+   "src": "wdq2lj1pf1"
+  },
+  "durability#1": {
+   "t": "الديمومة",
+   "src": "ko75z62bgh"
+  },
+  "easy#1": {
+   "t": "سهل",
+   "src": "st1jov1219"
+  },
+  "editable#1": {
+   "t": "قابل للتعديل",
+   "src": "1snl37d1fk"
+  },
+  "edit#1": {
+   "t": "يعدّل",
+   "src": "reqqgi1h9y"
+  },
+  "encode#1": {
+   "t": "يرمّز",
+   "src": "15rh9811sj"
+  },
+  "encoding#1": {
+   "t": "ترميز",
+   "src": "11uenew17v"
+  },
+  "end#1": {
+   "t": "ينتهي",
+   "src": "1lpbg2quwo"
+  },
+  "enforce#1": {
+   "t": "يفرض",
+   "src": "144hb781b4"
+  },
+  "engineer#1": {
+   "t": "مهندس",
+   "src": "st72hxklyf"
+  },
+  "enormous#1": {
+   "t": "هائل",
+   "src": "4wovpisn7w"
+  },
+  "enough#1": {
+   "t": "كافٍ",
+   "src": "12ftbq51pg"
+  },
+  "equivalent#1": {
+   "t": "مكافئ",
+   "src": "1syqaf51jd"
+  },
+  "erase#1": {
+   "t": "يمحو",
+   "src": "14mhpsi1p1"
+  },
+  "essential#1": {
+   "t": "أساسي",
+   "src": "gzg0uzhqte"
+  },
+  "estimate#1": {
+   "t": "تقدير",
+   "src": "13kvmwlltv"
+  },
+  "exact#1": {
+   "t": "دقيق",
+   "src": "1sy4sa51ey"
+  },
+  "example#1": {
+   "t": "مثال",
+   "src": "1jprhgy193"
+  },
+  "exchange#1": {
+   "t": "تبادل (exchange)",
+   "src": "1gvlycn13q"
+  },
+  "execute#1": {
+   "t": "ينفّذ",
+   "src": "1xga22g1i8"
+  },
+  "exercise#1": {
+   "t": "تمرين",
+   "src": "ixrrb31bvu"
+  },
+  "expect#1": {
+   "t": "يتوقّع",
+   "src": "116u1it14z"
+  },
+  "explain#1": {
+   "t": "يشرح",
+   "src": "1a7edz8koz"
+  },
+  "extend#1": {
+   "t": "يوسّع",
+   "src": "1wbsaxux2t"
+  },
+  "external#1": {
+   "t": "خارجي",
+   "src": "i7zzv99npg"
+  },
+  "extra#1": {
+   "t": "إضافي",
+   "src": "1jd98qzt0p"
+  },
+  "extremely#1": {
+   "t": "للغاية",
+   "src": "1by7eb4onk"
+  },
+  "fail#1": {
+   "t": "يفشل",
+   "src": "wjgl9f13ft"
+  },
+  "failure#1": {
+   "t": "فشل",
+   "src": "1uiq3zh17y"
+  },
+  "fallback#1": {
+   "t": "الخيار الاحتياطي",
+   "src": "1ftmsil18i"
+  },
+  "feel#1": {
+   "t": "يبدو",
+   "src": "1tjknao1iu"
+  },
+  "file-based#1": {
+   "t": "قائم على الملفات",
+   "src": "1mhui1x1ra"
+  },
+  "file-level#1": {
+   "t": "على مستوى الملفات",
+   "src": "qy16utoho2"
+  },
+  "file-oriented#1": {
+   "t": "موجّه نحو الملفات",
+   "src": "1orfapid1g"
+  },
+  "find#1": {
+   "t": "يجد",
+   "src": "1b2pg1a1b5"
+  },
+  "first#1": {
+   "t": "أولًا",
+   "src": "3ld0171m3p"
+  },
+  "fix#1": {
+   "t": "يصلح",
+   "src": "gkwwra1twy"
+  },
+  "flexible#1": {
+   "t": "مرن",
+   "src": "rdywzrrhud"
+  },
+  "food#1": {
+   "t": "الطعام",
+   "src": "1yt035z1h3"
+  },
+  "footer#1": {
+   "t": "تذييل الملف",
+   "src": "kddbfn17gy"
+  },
+  "foundation#1": {
+   "t": "الأساس",
+   "src": "1dkgvmsx26"
+  },
+  "friendly#1": {
+   "t": "ملائم",
+   "src": "36lou211jb"
+  },
+  "front office#1": {
+   "t": "مكتب الاستقبال",
+   "src": "1w587g358j"
+  },
+  "full#1": {
+   "t": "كامل",
+   "src": "c68qxj70hy"
+  },
+  "fundamentally#1": {
+   "t": "جوهريًا",
+   "src": "fvw8c2xb35"
+  },
+  "fuzzy#1": {
+   "t": "غامض",
+   "src": "z4lu0f1fof"
+  },
+  "go#1": {
+   "t": "يذهب",
+   "src": "n4r3gq15id"
+  },
+  "good#1": {
+   "t": "جيد",
+   "src": "g5uattn7lb"
+  },
+  "govern#1": {
+   "t": "يحكم",
+   "src": "19s3drm1si"
+  },
+  "group#1": {
+   "t": "يجمّع",
+   "src": "nw89pm16vw"
+  },
+  "grid#1": {
+   "t": "شبكة (جدولية)",
+   "src": "4frxbo1gsl"
+  },
+  "guarantee#1": {
+   "t": "ضمان",
+   "src": "1wzpdy911d"
+  },
+  "guess#1": {
+   "t": "يخمّن",
+   "src": "tu5sbl1hya"
+  },
+  "guide#1": {
+   "t": "دليل",
+   "src": "zw78laeikb"
+  },
+  "half#1": {
+   "t": "نصف",
+   "src": "46rg251npe"
+  },
+  "half-done#1": {
+   "t": "نصف منجز",
+   "src": "544qez1vcj"
+  },
+  "happen#1": {
+   "t": "يحدث",
+   "src": "17hthli1h7"
+  },
+  "hierarchy#1": {
+   "t": "التسلسل الهرمي",
+   "src": "po16fa1o8f"
+  },
+  "hire#1": {
+   "t": "يوظّف",
+   "src": "w0ybk217ri"
+  },
+  "history#1": {
+   "t": "السجل التاريخي",
+   "src": "1470g2nrkq"
+  },
+  "home#1": {
+   "t": "المنزل",
+   "src": "rzy1r0vi83"
+  },
+  "hood#1": {
+   "t": "«تحت الغطاء»: ما يحدث داخليًا",
+   "src": "1rgpic01xg"
+  },
+  "horizontal#1": {
+   "t": "أفقي",
+   "src": "l36flk1dok"
+  },
+  "hypothesis#1": {
+   "t": "فرضية",
+   "src": "f92k58aeig"
+  },
+  "idea#1": {
+   "t": "فكرة",
+   "src": "ik4n7gv9b5"
+  },
+  "identify#1": {
+   "t": "يحدّد",
+   "src": "178mb481dh"
+  },
+  "imagine#1": {
+   "t": "تخيّل",
+   "src": "18pmi0u1yt"
+  },
+  "immutable-ish#1": {
+   "t": "شبه ثابت",
+   "src": "18qi8dm7e4"
+  },
+  "important#1": {
+   "t": "مهم",
+   "src": "6x1o5v1u6h"
+  },
+  "imprecise#1": {
+   "t": "غير دقيق",
+   "src": "l4so2m1rqe"
+  },
+  "increase#1": {
+   "t": "يزيد",
+   "src": "901yso13mc"
+  },
+  "independent#1": {
+   "t": "مستقل",
+   "src": "94ori81pi3"
+  },
+  "individual#1": {
+   "t": "فردي",
+   "src": "rs5133sfq1"
+  },
+  "inefficient#1": {
+   "t": "غير فعّال",
+   "src": "nlqk1jajvt"
+  },
+  "infrastructure#1": {
+   "t": "البنية التحتية",
+   "src": "c419eemd33"
+  },
+  "ingestion#1": {
+   "t": "استيعاب البيانات",
+   "src": "icw49xy3lk"
+  },
+  "insight#1": {
+   "t": "رؤية عميقة",
+   "src": "1sxzf4g1od"
+  },
+  "instead#1": {
+   "t": "بدلًا من",
+   "src": "ts2is0e0kf"
+  },
+  "insufficient#1": {
+   "t": "غير كافٍ",
+   "src": "1hscaex2at"
+  },
+  "integrate#1": {
+   "t": "يدمج",
+   "src": "1233vqe8dq"
+  },
+  "interleaving#1": {
+   "t": "تداخل العمليات",
+   "src": "1tfbnj41at"
+  },
+  "intuitive#1": {
+   "t": "بديهي",
+   "src": "8sc252183x"
+  },
+  "invariant#1": {
+   "t": "قاعدة ثابتة",
+   "src": "kuzo1e144a"
+  },
+  "invisible#1": {
+   "t": "غير مرئي",
+   "src": "xgllec1gtt"
+  },
+  "involve#1": {
+   "t": "يتضمّن",
+   "src": "qn4cqzt7th"
+  },
+  "irrelevant#1": {
+   "t": "غير ذي صلة",
+   "src": "aca3brq0ug"
+  },
+  "job#1": {
+   "t": "مهمة",
+   "src": "1o14xykbfg"
+  },
+  "key#1": {
+   "t": "مفتاح",
+   "src": "mnlsq6owts"
+  },
+  "knowledge#1": {
+   "t": "المعرفة",
+   "src": "tplff1oimj"
+  },
+  "lack#1": {
+   "t": "يفتقر",
+   "src": "80ai82howv"
+  },
+  "lake#1": {
+   "t": "بحيرة بيانات",
+   "src": "1vx03ye12g"
+  },
+  "data lake#1": {
+   "t": "بحيرة البيانات",
+   "src": "6n34hg8u02"
+  },
+  "data warehouse#1": {
+   "t": "مستودع البيانات",
+   "src": "kcjoe6mnav"
+  },
+  "large#1": {
+   "t": "كبير",
+   "src": "649bc6ck4j"
+  },
+  "lean#1": {
+   "t": "يميل",
+   "src": "10hyorr13y"
+  },
+  "learn#1": {
+   "t": "يتعلّم",
+   "src": "rp8x7j199f"
+  },
+  "letter#1": {
+   "t": "حرف",
+   "src": "1oa6nn71kn"
+  },
+  "level#1": {
+   "t": "مستوى",
+   "src": "1q6e5jc4de"
+  },
+  "level-up#1": {
+   "t": "ارتقاء مستوى",
+   "src": "1t29k6n1n0"
+  },
+  "line#1": {
+   "t": "سطر",
+   "src": "v8ncze1xlo"
+  },
+  "list#1": {
+   "t": "يسرد",
+   "src": "1t5iczyv7w"
+  },
+  "live#1": {
+   "t": "يوجد (يقيم)",
+   "src": "12sz32z1ut"
+  },
+  "local#1": {
+   "t": "محلي",
+   "src": "v6f55y1n9n"
+  },
+  "locate#1": {
+   "t": "يحدّد موقع",
+   "src": "162pa1g1f1"
+  },
+  "location#1": {
+   "t": "موقع",
+   "src": "1m4vcgm18n"
+  },
+  "longer#1": {
+   "t": "«لم يعد»",
+   "src": "ubgqwu652e"
+  },
+  "look#1": {
+   "t": "يبدو",
+   "src": "14kkwj1fz7"
+  },
+  "loop#1": {
+   "t": "حلقة",
+   "src": "qu8iwg88da"
+  },
+  "machine#1": {
+   "t": "جهاز",
+   "src": "1xe6ey6glk"
+  },
+  "mainly#1": {
+   "t": "أساسًا",
+   "src": "vp5pz111mg"
+  },
+  "major#1": {
+   "t": "رئيسي",
+   "src": "1dp0pmmpib"
+  },
+  "manage#1": {
+   "t": "يدير",
+   "src": "ukatfg1jpy"
+  },
+  "management#1": {
+   "t": "الإدارة",
+   "src": "10nolg711y"
+  },
+  "map#1": {
+   "t": "يطابق",
+   "src": "8us2un1dmh"
+  },
+  "mastery#1": {
+   "t": "الإتقان",
+   "src": "bxph4u1p9m"
+  },
+  "meaning#1": {
+   "t": "معنى",
+   "src": "12v2r8c9rc"
+  },
+  "mechanics#1": {
+   "t": "آلية العمل",
+   "src": "1woird0ryc"
+  },
+  "meet#1": {
+   "t": "يقابل",
+   "src": "1877h5ulfg"
+  },
+  "memorize#1": {
+   "t": "يحفظ",
+   "src": "svja971tox"
+  },
+  "memory#1": {
+   "t": "الذاكرة",
+   "src": "1bidp9d1ce"
+  },
+  "mental#1": {
+   "t": "ذهني",
+   "src": "1sdb1i81s7"
+  },
+  "merge#1": {
+   "t": "يدمج",
+   "src": "1ynb3v5rxw"
+  },
+  "metric#1": {
+   "t": "مقياس",
+   "src": "fcbqh79762"
+  },
+  "missing#1": {
+   "t": "مفقود",
+   "src": "2tl05019iz"
+  },
+  "mix#1": {
+   "t": "يخلط",
+   "src": "i7tzpz19gs"
+  },
+  "modification#1": {
+   "t": "تعديل",
+   "src": "ljwy2e1xof"
+  },
+  "moment#1": {
+   "t": "لحظة",
+   "src": "k6e9s0rm8w"
+  },
+  "move#1": {
+   "t": "ينقل",
+   "src": "3ks64qx9vf"
+  },
+  "mutable#1": {
+   "t": "قابل للتغيير",
+   "src": "1nquxpvdhc"
+  },
+  "naive#1": {
+   "t": "ساذج",
+   "src": "1w425a69bu"
+  },
+  "namespace#1": {
+   "t": "مساحة الأسماء",
+   "src": "1xoly60k4j"
+  },
+  "necessarily#1": {
+   "t": "بالضرورة",
+   "src": "121eteg1fj"
+  },
+  "nested#1": {
+   "t": "متداخل",
+   "src": "vjovi14151"
+  },
+  "nobody#1": {
+   "t": "لا أحد",
+   "src": "61pm5u1738"
+  },
+  "non-equi#1": {
+   "t": "غير تساوي",
+   "src": "di83vr1xs9"
+  },
+  "normal#1": {
+   "t": "عادي",
+   "src": "4gctnslxgf"
+  },
+  "note#1": {
+   "t": "ملاحظة",
+   "src": "1wkkl171t1"
+  },
+  "nothing#1": {
+   "t": "لا شيء",
+   "src": "1f8on9r6nd"
+  },
+  "notice#1": {
+   "t": "يلاحظ",
+   "src": "h3ob052jvz"
+  },
+  "object storage#1": {
+   "t": "تخزين الكائنات",
+   "src": "41abjpj14v"
+  },
+  "office#1": {
+   "t": "مكتب",
+   "src": "47loxr1wez"
+  },
+  "one-sentence#1": {
+   "t": "في جملة واحدة",
+   "src": "1n2t4ij746"
+  },
+  "OOM#1": {
+   "t": "نفاد الذاكرة (OOM)",
+   "src": "18skmfk11d"
+  },
+  "open#1": {
+   "t": "مفتوح",
+   "src": "trs2kzq0ie"
+  },
+  "operate#1": {
+   "t": "يشغّل",
+   "src": "1u4rz31xup"
+  },
+  "operation#1": {
+   "t": "عملية",
+   "src": "a6ou821c50"
+  },
+  "operational#1": {
+   "t": "تشغيلي",
+   "src": "15cejaw1ms"
+  },
+  "optimize#1": {
+   "t": "يحسّن",
+   "src": "4vdhjp1u6h"
+  },
+  "optimization#1": {
+   "t": "التحسين",
+   "src": "13hxhifqse"
+  },
+  "optimizer#1": {
+   "t": "المُحسِّن",
+   "src": "aie3qjzodd"
+  },
+  "orchestration#1": {
+   "t": "تنسيق المهام",
+   "src": "1c2qvrfxwf"
+  },
+  "organization#1": {
+   "t": "التنظيم",
+   "src": "b1i771vdsi"
+  },
+  "organize#1": {
+   "t": "ينظّم",
+   "src": "1igr5ehzlt"
+  },
+  "otherwise#1": {
+   "t": "خلاف ذلك",
+   "src": "1bqosdl1wt"
+  },
+  "owner#1": {
+   "t": "المالك",
+   "src": "1hv5iol1qi"
+  },
+  "ownership#1": {
+   "t": "الملكية",
+   "src": "1il8asj1t0"
+  },
+  "page#1": {
+   "t": "صفحة",
+   "src": "p0ws9xddmi"
+  },
+  "pair#1": {
+   "t": "زوج",
+   "src": "4865zr16ac"
+  },
+  "partial#1": {
+   "t": "جزئي",
+   "src": "17tkz7u1cs"
+  },
+  "path#1": {
+   "t": "مسار",
+   "src": "dlu4wpdfe6"
+  },
+  "pattern#1": {
+   "t": "نمط",
+   "src": "1rm48q810g"
+  },
+  "anti-pattern#1": {
+   "t": "نمط سيئ (ممارسة خاطئة)",
+   "src": "1p9b8td17c"
+  },
+  "pay#1": {
+   "t": "يدفع",
+   "src": "4g455k14tm"
+  },
+  "peak#1": {
+   "t": "الذروة",
+   "src": "1icqxgb1is"
+  },
+  "performance#1": {
+   "t": "الأداء",
+   "src": "1l9qmxp1y7"
+  },
+  "permission#1": {
+   "t": "صلاحية",
+   "src": "yxza1v29nb"
+  },
+  "persist#1": {
+   "t": "يبقى مخزّنًا",
+   "src": "15bqytz6c4"
+  },
+  "piece#1": {
+   "t": "قطعة",
+   "src": "jnhd57tcw6"
+  },
+  "pipeline#1": {
+   "t": "خط معالجة",
+   "src": "z8j3721heg"
+  },
+  "potentially#1": {
+   "t": "محتمل",
+   "src": "13bb9515bd"
+  },
+  "precise#1": {
+   "t": "دقيق",
+   "src": "1stzvx9d6d"
+  },
+  "predictive#1": {
+   "t": "تنبّئي",
+   "src": "he1b9u104y"
+  },
+  "preview#1": {
+   "t": "لمحة أولى",
+   "src": "1131pdrehh"
+  },
+  "process#1": {
+   "t": "يعالج",
+   "src": "1np3nozpo3"
+  },
+  "produce#1": {
+   "t": "ينتج",
+   "src": "1wfpl9upzh"
+  },
+  "professional#1": {
+   "t": "احترافي",
+   "src": "66zw3u1va4"
+  },
+  "program#1": {
+   "t": "برنامج",
+   "src": "1jujyvdksn"
+  },
+  "publish#1": {
+   "t": "ينشر",
+   "src": "15mxbbq16s"
+  },
+  "question#1": {
+   "t": "سؤال",
+   "src": "f36kcy1krx"
+  },
+  "querying#1": {
+   "t": "الاستعلام",
+   "src": "1eszia1tcc"
+  },
+  "reason#1": {
+   "t": "سبب (استدلال)",
+   "src": "bbqtnb875i"
+  },
+  "record#1": {
+   "t": "يسجّل",
+   "src": "bw6v7m6xyz"
+  },
+  "reference#1": {
+   "t": "مرجع",
+   "src": "1wgghudvji"
+  },
+  "refine#1": {
+   "t": "يحسّن (يدقّق)",
+   "src": "1tt8n3511s"
+  },
+  "region#1": {
+   "t": "منطقة",
+   "src": "6ko0nhqeyh"
+  },
+  "relevant#1": {
+   "t": "ذو صلة",
+   "src": "1w5hv4d1rf"
+  },
+  "remain#1": {
+   "t": "يبقى",
+   "src": "3fciefm7oo"
+  },
+  "remeasure#1": {
+   "t": "يعيد القياس",
+   "src": "119kkt11hm"
+  },
+  "remove#1": {
+   "t": "يزيل",
+   "src": "1ianmelit6"
+  },
+  "replace#1": {
+   "t": "يستبدل",
+   "src": "f3sa09ep19"
+  },
+  "replay#1": {
+   "t": "يعيد تطبيق",
+   "src": "1dp5lri9ke"
+  },
+  "request#1": {
+   "t": "يطلب",
+   "src": "jferzp1ak6"
+  },
+  "resource#1": {
+   "t": "مورد",
+   "src": "mglz341lj2"
+  },
+  "respect#1": {
+   "t": "يلتزم",
+   "src": "1me8f9vkza"
+  },
+  "responsible#1": {
+   "t": "مسؤول",
+   "src": "4uz4k1nxyd"
+  },
+  "restart#1": {
+   "t": "يبدأ من جديد",
+   "src": "kgk9sxeiad"
+  },
+  "restaurant#1": {
+   "t": "مطعم",
+   "src": "17jdqjcyjw"
+  },
+  "rewrite#1": {
+   "t": "إعادة الكتابة",
+   "src": "1yj4y2b102"
+  },
+  "rigid#1": {
+   "t": "جامد",
+   "src": "w0rmnm6fuf"
+  },
+  "role#1": {
+   "t": "دور",
+   "src": "139nyzy171"
+  },
+  "room#1": {
+   "t": "غرفة",
+   "src": "1h6qvqk1ge"
+  },
+  "roughly#1": {
+   "t": "تقريبًا",
+   "src": "1aqtilo1wl"
+  },
+  "round#1": {
+   "t": "جولة",
+   "src": "1ucbfhc1rf"
+  },
+  "row-oriented#1": {
+   "t": "موجّه نحو الصفوف",
+   "src": "1osz4qm15w"
+  },
+  "row group#1": {
+   "t": "مجموعة صفوف",
+   "src": "1vu23yn1lw"
+  },
+  "column chunk#1": {
+   "t": "جزء عمود",
+   "src": "18xubp5qw4"
+  },
+  "rule#1": {
+   "t": "قاعدة",
+   "src": "rrkh0i1i53"
+  },
+  "runtime#1": {
+   "t": "وقت التشغيل",
+   "src": "9rss88159m"
+  },
+  "save#1": {
+   "t": "يحفظ",
+   "src": "1hi96js9cs"
+  },
+  "say#1": {
+   "t": "يقول",
+   "src": "5sqxjuv2mw"
+  },
+  "scale#1": {
+   "t": "يتوسّع",
+   "src": "wy8tdfyh75"
+  },
+  "scalable#1": {
+   "t": "قابل للتوسّع",
+   "src": "drob6q180q"
+  },
+  "scan#1": {
+   "t": "يمسح",
+   "src": "19zzlbm51i"
+  },
+  "section#1": {
+   "t": "قسم",
+   "src": "lkwbkpdg5v"
+  },
+  "security#1": {
+   "t": "الأمان",
+   "src": "1fds5vd1r9"
+  },
+  "selection#1": {
+   "t": "الاختيار",
+   "src": "1diewlrdqw"
+  },
+  "self-check#1": {
+   "t": "اختبار ذاتي",
+   "src": "16g8bsi16w"
+  },
+  "send#1": {
+   "t": "يرسل",
+   "src": "mu8qli8cmz"
+  },
+  "sense#1": {
+   "t": "معنى",
+   "src": "1vnp4xq1tt"
+  },
+  "separate#1": {
+   "t": "منفصل",
+   "src": "gjz7lx49vc"
+  },
+  "separation#1": {
+   "t": "الفصل",
+   "src": "meau4gx9pc"
+  },
+  "serverless#1": {
+   "t": "دون خوادم (serverless)",
+   "src": "sy2w7ab5x5"
+  },
+  "service#1": {
+   "t": "خدمة",
+   "src": "j9ppe2g7q3"
+  },
+  "setting#1": {
+   "t": "إعداد",
+   "src": "ctiu92vcym"
+  },
+  "severe#1": {
+   "t": "حاد",
+   "src": "ummu1sysjd"
+  },
+  "similar#1": {
+   "t": "مشابه",
+   "src": "1jbizt31qg"
+  },
+  "simplified#1": {
+   "t": "مبسّط",
+   "src": "a9i4gw1339"
+  },
+  "simply#1": {
+   "t": "ببساطة",
+   "src": "a04dj11wqc"
+  },
+  "sit#1": {
+   "t": "يقع",
+   "src": "qwyyqz1x77"
+  },
+  "six#1": {
+   "t": "ستة",
+   "src": "16hf4op1t5"
+  },
+  "three#1": {
+   "t": "ثلاثة",
+   "src": "d3wnui1cwj"
+  },
+  "two#1": {
+   "t": "اثنان",
+   "src": "ihg4sn1tyh"
+  },
+  "size#1": {
+   "t": "الحجم",
+   "src": "19dvcicw9n"
+  },
+  "skill#1": {
+   "t": "مهارة",
+   "src": "1fuo0b05ck"
+  },
+  "skip#1": {
+   "t": "يتخطّى",
+   "src": "wkekrg1cpc"
+  },
+  "data skipping#1": {
+   "t": "تخطي البيانات",
+   "src": "qesfdyrsfk"
+  },
+  "slice#1": {
+   "t": "شريحة",
+   "src": "kuuq7med6c"
+  },
+  "small#1": {
+   "t": "صغير",
+   "src": "100ufrwb0b"
+  },
+  "snippet#1": {
+   "t": "مقتطف شيفرة",
+   "src": "q1e5wr13k1"
+  },
+  "sophisticated#1": {
+   "t": "متطوّر",
+   "src": "qr7xfme9od"
+  },
+  "sort#1": {
+   "t": "يرتّب",
+   "src": "i3v2hii5f6"
+  },
+  "sound#1": {
+   "t": "يبدو",
+   "src": "i2yaoz1lzk"
+  },
+  "source#1": {
+   "t": "مصدر",
+   "src": "2ywwia1k3u"
+  },
+  "specify#1": {
+   "t": "يحدّد",
+   "src": "1ll7pvg1p4"
+  },
+  "spill#1": {
+   "t": "التسرّب إلى القرص (spill)",
+   "src": "1kwsowl166"
+  },
+  "split#1": {
+   "t": "يقسّم",
+   "src": "42f8jxjz6p"
+  },
+  "spot#1": {
+   "t": "«نقطة ضعف»",
+   "src": "13bcgk4171"
+  },
+  "stale#1": {
+   "t": "قديم (غير محدّث)",
+   "src": "ocifep175u"
+  },
+  "standalone#1": {
+   "t": "مستقل",
+   "src": "1pm6tbx15c"
+  },
+  "start#1": {
+   "t": "يبدأ",
+   "src": "sgd0rx108s"
+  },
+  "stay#1": {
+   "t": "يبقى",
+   "src": "habzef1j4q"
+  },
+  "stop#1": {
+   "t": "يتوقّف",
+   "src": "xxgv731g49"
+  },
+  "strategy#1": {
+   "t": "استراتيجية",
+   "src": "9iifvwpp7h"
+  },
+  "structured#1": {
+   "t": "منظّم",
+   "src": "fphd261hmz"
+  },
+  "supply#1": {
+   "t": "يوفّر",
+   "src": "uwwo7u1fsw"
+  },
+  "suppose#1": {
+   "t": "لنفترض",
+   "src": "1ik21gn1kf"
+  },
+  "symptom#1": {
+   "t": "عَرَض",
+   "src": "1jdli7hg5c"
+  },
+  "syntax#1": {
+   "t": "الصياغة",
+   "src": "1dlati11sg"
+  },
+  "table-state#1": {
+   "t": "حالة الجدول",
+   "src": "13609txchz"
+  },
+  "temp#1": {
+   "t": "مؤقت",
+   "src": "806z3ghd8x"
+  },
+  "terminate#1": {
+   "t": "ينهي",
+   "src": "13xp4qwyi6"
+  },
+  "test#1": {
+   "t": "يختبر",
+   "src": "1e7lneq1h7"
+  },
+  "theorem#1": {
+   "t": "مبرهنة",
+   "src": "1r7igyhwao"
+  },
+  "thing#1": {
+   "t": "شيء",
+   "src": "1dsfqev1ed"
+  },
+  "think#1": {
+   "t": "يفكّر",
+   "src": "1js65vu1rm"
+  },
+  "three-level#1": {
+   "t": "ثلاثي المستويات",
+   "src": "eno8qr1dhk"
+  },
+  "tiny#1": {
+   "t": "صغير جدًا",
+   "src": "eqqnpee0jn"
+  },
+  "tomorrow#1": {
+   "t": "غدًا",
+   "src": "3q8rsox6kp"
+  },
+  "topic#1": {
+   "t": "موضوع",
+   "src": "sxav7v1k71"
+  },
+  "touch#1": {
+   "t": "يلمس",
+   "src": "1ssegrs66k"
+  },
+  "track#1": {
+   "t": "يتتبّع",
+   "src": "4uw0e81s82"
+  },
+  "transformation#1": {
+   "t": "تحويل",
+   "src": "5kj1sx1d0t"
+  },
+  "trap#1": {
+   "t": "فخ",
+   "src": "vwx2i5s3vd"
+  },
+  "treat#1": {
+   "t": "يعامل",
+   "src": "14s7l2e1t4"
+  },
+  "trivial#1": {
+   "t": "بديهي (تافه)",
+   "src": "172cks47ox"
+  },
+  "turn#1": {
+   "t": "يتحوّل",
+   "src": "1p2dlmw16d"
+  },
+  "underneath#1": {
+   "t": "في الأسفل",
+   "src": "53d55usnth"
+  },
+  "underpin#1": {
+   "t": "يدعم",
+   "src": "2awny7fnwb"
+  },
+  "understand#1": {
+   "t": "يفهم",
+   "src": "w4lzji1jux"
+  },
+  "unit#1": {
+   "t": "وحدة",
+   "src": "rrinzqq0ti"
+  },
+  "untouched#1": {
+   "t": "لم يُمَس",
+   "src": "ru6fe913po"
+  },
+  "uncommitted#1": {
+   "t": "غير مثبَّت",
+   "src": "r4rar11jfl"
+  },
+  "usually#1": {
+   "t": "عادةً",
+   "src": "sjyfias8kw"
+  },
+  "useful#1": {
+   "t": "مفيد",
+   "src": "12rsmw1usf"
+  },
+  "value#1": {
+   "t": "قيمة",
+   "src": "yxj644f4nm"
+  },
+  "vanish#1": {
+   "t": "يختفي",
+   "src": "bouqyy1ac6"
+  },
+  "violate#1": {
+   "t": "ينتهك",
+   "src": "3kaekpc1ip"
+  },
+  "visible#1": {
+   "t": "مرئي",
+   "src": "16w6fc0ovm"
+  },
+  "want#1": {
+   "t": "يريد",
+   "src": "1ny8ksfcnb"
+  },
+  "way#1": {
+   "t": "طريقة",
+   "src": "9xl20k1yqr"
+  },
+  "weak#1": {
+   "t": "ضعيف",
+   "src": "1j01g7rmri"
+  },
+  "word#1": {
+   "t": "كلمة",
+   "src": "15apbw6101"
+  },
+  "workload#1": {
+   "t": "عبء العمل",
+   "src": "1uadx2i280"
+  },
+  "workspace#1": {
+   "t": "مساحة العمل",
+   "src": "1cwuxtjyps"
+  },
+  "wrong#1": {
+   "t": "خاطئ",
+   "src": "1dkpkm1iui"
+  },
+  "zero#1": {
+   "t": "صفر",
+   "src": "84ikp31nd4"
+  },
+  "Monday#1": {
+   "t": "الاثنين",
+   "src": "hjv09h1e42"
+  },
+  "Tuesday#1": {
+   "t": "الثلاثاء",
+   "src": "n1vebg77dj"
+  },
+  "Wednesday#1": {
+   "t": "الأربعاء",
+   "src": "e7lbbfsz7u"
+  },
+  "answer#1": {
+   "t": "إجابة",
+   "src": "1eibm301gi"
+  },
+  "answer#2": {
+   "t": "يجيب",
+   "src": "k4iakst3mk"
+  },
+  "action#1": {
+   "t": "إجراء",
+   "src": "15bxs3rvng"
+  },
+  "afterward#1": {
+   "t": "بعد ذلك",
+   "src": "eej3fp1wh9"
+  },
+  "aim#1": {
+   "t": "يهدف",
+   "src": "fvu6v5ff0r"
+  },
+  "anything#1": {
+   "t": "أي شيء",
+   "src": "fftvnt1amx"
+  },
+  "apply#1": {
+   "t": "يطبّق",
+   "src": "183ztv41l2"
+  },
+  "area#1": {
+   "t": "مجال",
+   "src": "1y6ljyxbpk"
+  },
+  "artifact#1": {
+   "t": "مُنتَج (ملف ناتج)",
+   "src": "dh9tcx1wbp"
+  },
+  "asset#1": {
+   "t": "أصل",
+   "src": "1iip79m14l"
+  },
+  "associate#1": {
+   "t": "مستوى Associate",
+   "src": "6ar7smamf5"
+  },
+  "associated#1": {
+   "t": "مرتبط",
+   "src": "tqxihc1bei"
+  },
+  "automatically#1": {
+   "t": "تلقائيًا",
+   "src": "1ugqv1a1vo"
+  },
+  "automation#1": {
+   "t": "الأتمتة",
+   "src": "7cu4t1iovp"
+  },
+  "bundle#1": {
+   "t": "حزمة",
+   "src": "15se2yt1yf"
+  },
+  "CAP#1": {
+   "t": "CAP (مبرهنة CAP)",
+   "src": "vgg8cd1t6j"
+  },
+  "data-science#1": {
+   "t": "علم البيانات",
+   "src": "8sii9z1o71"
+  },
+  "database-table#1": {
+   "t": "جدول قاعدة بيانات",
+   "src": "gtmu69zqb5"
+  },
+  "DataFrame#1": {
+   "t": "DataFrame (جدول بيانات في الشيفرة)",
+   "src": "69jqq310qo"
+  },
+  "decorative#1": {
+   "t": "زخرفي",
+   "src": "pkrs8x1qxc"
+  },
+  "Delta Lake#1": {
+   "t": "Delta Lake",
+   "note": "صيغة جداول: ملفات Parquet مع سجل معاملات (ACID)",
+   "src": "1qi6cnz3ku"
+  },
+  "Unity Catalog#1": {
+   "t": "Unity Catalog",
+   "note": "حوكمة مركزية: الأسماء (كتالوج.مخطط.جدول) والمالكون والصلاحيات",
+   "src": "17ybtjn1is"
+  },
+  "Spark UI#1": {
+   "t": "Spark UI (واجهة مراقبة Spark)",
+   "src": "xpew6h1w2h"
+  },
+  "Time Travel#1": {
+   "t": "Time Travel (قراءة إصدار أقدم من الجدول)",
+   "src": "j7e8t31etv"
+  },
+  "Liquid Clustering#1": {
+   "t": "Liquid Clustering (تجميع مرن للبيانات)",
+   "src": "fu94p01yc9"
+  },
+  "Adaptive Query Execution#1": {
+   "t": "التنفيذ التكيّفي للاستعلامات (AQE)",
+   "src": "5h44ndy7cy"
+  },
+  "Broadcast Hash Join#1": {
+   "t": "Broadcast Hash Join (BHJ): يُنسخ الجدول الصغير إلى كل منفّذ",
+   "src": "pxc7wl10hy"
+  },
+  "Sort-Merge Join#1": {
+   "t": "Sort-Merge Join (SMJ): إعادة توزيع ثم ترتيب ثم دمج",
+   "src": "1ctokdw11y"
+  },
+  "Shuffled Hash Join#1": {
+   "t": "Shuffled Hash Join (SHJ)",
+   "src": "nubdgy1ldk"
+  },
+  "Broadcast Nested Loop Join#1": {
+   "t": "Broadcast Nested Loop Join (BNLJ)",
+   "src": "1hqa3yu15o"
+  },
+  "transaction log#1": {
+   "t": "سجل المعاملات",
+   "src": "1a4re1exvh"
+  },
+  "catalog#1": {
+   "t": "كتالوج",
+   "src": "1nlghcw1uc"
+  },
+  "hash table#1": {
+   "t": "جدول تجزئة",
+   "src": "1rg5y7p18l"
+  },
+  "row pair#1": {
+   "t": "زوج صفوف",
+   "src": "spzmac1vcz"
+  },
+  "weak spot#1": {
+   "t": "نقطة ضعف",
+   "src": "1yxv9tg18b"
+  },
+  "under the hood#1": {
+   "t": "تحت الغطاء (ما يحدث فعليًا)",
+   "src": "vu6j1ky1zu"
+  },
+  "no longer#1": {
+   "t": "لم يعد",
+   "src": "te0vzxdhte"
+  },
+  "come and go#1": {
+   "t": "تأتي وتذهب",
+   "src": "vvngk31x5r"
+  },
+  "later#1": {
+   "t": "لاحقًا",
+   "src": "ipfmwq1odr"
+  },
+  "troubleshooting#1": {
+   "t": "استكشاف الأعطال وإصلاحها",
+   "src": "17wykfjubo"
+  },
+  "absolutely#1": {
+   "t": "إطلاقًا (تمامًا)",
+   "src": "vxxga22fdj"
+  },
+  "else#1": {
+   "t": "آخر",
+   "src": "1bob6lz1us"
+  },
+  "English#1": {
+   "t": "الإنجليزية",
+   "src": "192r4fy1xs"
+  },
+  "throw#1": {
+   "t": "يضخّ (مزيدًا من الموارد)",
+   "src": "22jtvzquvl"
+  }
+ },
+ "sections": {
+  "ch01-s01": "يبني المقرّر على ما تعرفه مسبقًا عن Spark: أقسام البيانات (partitions) وإعادة التوزيع (shuffle) واستراتيجيات الربط (join) وAQE. ترى هنا كيف تعود هذه الأفكار داخل منصّة Databricks، وما نقطة ضعفك: ما الذي ينتقل فعلًا أثناء الـ shuffle.",
+  "ch01-s02": "التخزين (مثل S3 وADLS وGCS) يحفظ البيانات بشكل دائم. أمّا موارد الحوسبة (driver والمنفّذون) فتعالجها ويمكن أن تختفي بعد انتهاء العمل. لكلٍّ منهما مدة بقاء مستقلة، وهذا أساس بنية lakehouse.",
+  "ch01-s03": "بضعة ملفات Parquet ليست جدولًا بعد. لا تتغيّر الملفات العمودية في مكانها: التحديث يكتب ملفًا جديدًا فيه الصفوف المعدّلة. ويجب أن يسجّل شيء ما أيّ الملفات تنتمي إلى الجدول: هذه هي البيانات الوصفية للمعاملات (في Databricks هي Delta Lake).",
+  "ch01-s04": "يخزّن Parquet البيانات حسب الأعمدة: مجموعات صفوف وأجزاء أعمدة وصفحات، مع الترميز والضغط. لذلك يقرأ الاستعلام الأعمدة التي يحتاجها فقط (تقليم الأعمدة)، ثم لاحقًا الملفات التي يحتاجها فقط (تخطي الملفات بالإحصاءات).",
+  "ch01-s05": "إذا قرأ أحدٌ مجلدًا بينما يكتب فيه آخر، فقد يرى نصف الملفات قديمًا ونصفها جديدًا: حالة لم يكن عليها الجدول قط. تمنع معاملات ACID (الذرية والاتساق والعزل والديمومة) ذلك، فيرى كل قارئ لقطة متّسقة.",
+  "ch01-s06": "يضيف Delta Lake إلى ملفات Parquet سجلًّا للمعاملات (_delta_log). كل إصدار هو تثبيت مؤلّف من إجراءات ADD وREMOVE، وبتطبيقها بالترتيب تحصل على اللقطة. قد يبقى ملفٌ موجودًا فعليًا دون أن يكون جزءًا من الجدول الحالي.",
+  "ch01-s07": "يبدو أمر DELETE كحذف صف، لكنه في الواقع يجد الملف الذي فيه الصف، ويكتب ملفًا بديلًا من دونه، ثم يثبّت REMOVE للقديم وADD للجديد. «محذوف» لا يعني أنه مُحي فعليًا.",
+  "ch01-s08": "بحيرة البيانات رخيصة ومرنة لكن ضماناتها ضعيفة، ومستودع البيانات فيه جداول منظّمة وSQL لكنه أكثر جمودًا. يجمع lakehouse بينهما: جداول بمعاملات فوق تخزين كائنات رخيص. وDatabricks ليس مجرّد Spark مع دفاتر.",
+  "ch01-s09": "تصف البيانات الوصفية البيانات: الاسم والأعمدة والصيغة والموقع والمالك والصلاحيات. ينظّم Unity Catalog الكائنات في مساحة أسماء ثلاثية المستويات (كتالوج.مخطط.جدول)، وهو طبقة الحوكمة المركزية. وهو ليس Delta Lake.",
+  "ch01-s10": "أربعة أشياء مختلفة: Spark محرّك المعالجة، وParquet صيغة ملفات، وDelta Lake صيغة جداول بمعاملات، وUnity Catalog للحوكمة. إذا أنهيت العنقود فلن يختفي الجدول، فلكلٍّ منهما مدة بقاء مختلفة.",
+  "ch01-s11": "يديره Databricks مستوى التحكم (control plane) ويقرّر ما سيُشغَّل، أمّا في مستوى الحوسبة (compute plane) فيُنفَّذ العمل فعلًا. مع serverless تكون الموارد لدى Databricks، ومع الحوسبة الكلاسيكية تكون في سحابة العميل. التشبيه: مكتب الاستقبال ومطبخ المطعم.",
+  "ch01-s12": "«Spark بطيء» ليس تشخيصًا. حدّد الطبقة أولًا (التخزين، تخطيط الجدول، Delta، Spark، البيانات، الموارد، الاستعلام، الإحصاءات، الشبكة)، واجمع الأدلة، وصُغ فرضية، وتحقّق من المقاييس، ثم أصلح وأعد القياس. أمّا مجرّد إضافة الموارد فممارسة خاطئة."
+ },
+ "updated": "2026-10-21"
+}

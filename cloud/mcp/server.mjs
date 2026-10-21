@@ -369,6 +369,10 @@ const TOOLS = [
     inputSchema: { type: 'object', properties: { subject_id: { type: 'string' }, curriculum_id: { type: 'string', description: 'optional, with step: attach the saved subject to this step of one of the learner\'s curricula (it then teaches that step; only that step is re-planned). Without it the subject goes to the learner\'s 📚 Shelf.' }, step: { type: 'string', description: 'optional: the step (id or title) of curriculum_id that this subject teaches' } }, required: ['subject_id'] } },
   { name: 'noema_save_pack', description: 'Save a SMALL pack (≤ 1.5 MB of JSON) passed inline as text. For bigger packs (pictures!) use noema_start_upload + noema_finish_upload.',
     inputSchema: { type: 'object', properties: { pack_json: { type: 'string', description: 'The whole noema-pack JSON document as a string' }, curriculum_id: { type: 'string', description: 'optional, with step: attach the saved subject to this step of one of the learner\'s curricula (it then teaches that step; only that step is re-planned). Without it the subject goes to the learner\'s 📚 Shelf.' }, step: { type: 'string', description: 'optional: the step (id or title) of curriculum_id that this subject teaches' } }, required: ['pack_json'] } },
+  { name: 'noema_bridge_guide', description: 'Language help (文A, docs/BRIDGE.md) for students who study a subject in a language that is not their own: a sidecar per pack × native language with the words of the pack in the meaning they have IN it, translated, plus per section the key words and a short preview. Returns the format, the workflow (tools/bridge.py todo → core.json → <native>.json → check → build → noema_save_bridge), the bridges this account already has and the mistakes learners reported in them. Read it before writing a bridge.',
+    inputSchema: { type: 'object', properties: { subject_id: { type: 'string', description: 'Optional: only this pack' } } }, annotations: { readOnlyHint: true } },
+  { name: 'noema_save_bridge', description: 'Save one built language bridge (format "noema-bridge", made by tools/bridge.py build, ≤ 1.5 MB) to the learner\'s account, for one of their own packs or a library pack. It is checked exactly as the app checks it (against the pack: its id, its language, plain text only, no function words); problems come back as a list. On success every device of the learner shows the 文A help for that pack and native language.',
+    inputSchema: { type: 'object', properties: { bridge_json: { type: 'string', description: 'The whole bridge file as JSON text' } }, required: ['bridge_json'] } },
   { name: 'noema_image_search', description: 'Search pictures for a pack on the whole web and in open collections at once: Bing Images and DuckDuckGo Images (any site — what a Google image search shows too), Wikimedia Commons, Openverse, NASA, iNaturalist, Wellcome Collection, Art Institute of Chicago. Returns candidates (image url, page, size, licence, credit). The packs are for the learner\'s personal study: any licence is fine, the source is recorded. Look at the best ones with noema_image_fetch.',
     inputSchema: { type: 'object', properties: { query: { type: 'string', description: 'What the picture shows, usually in English (e.g. "DNA replication fork diagram labeled")' }, n: { type: 'integer', description: 'How many (default 12, max 30)' }, sources: { type: 'array', items: { type: 'string', enum: ['bing', 'duckduckgo', 'commons', 'openverse', 'nasa', 'inaturalist', 'wellcome', 'artic'] }, description: 'Only these (default: bing, commons, openverse, duckduckgo)' } }, required: ['query'] }, annotations: { readOnlyHint: true } },
   { name: 'noema_image_fetch', description: 'Get one picture from the web — an image url, OR a page: Wikimedia / Wikipedia file pages (any language, “#/media/File:…”) and any other page are resolved to their picture. Shows you the picture and returns its file url, size (W×H pixels for regions) and a ready media.json entry ("fetch": "app": the noema-lite app downloads and embeds it). Use it when your sandbox cannot download the picture itself (no network to that site) — or simply to look at a candidate.',
@@ -418,6 +422,16 @@ const PROMPTS = [{
   arguments: [{ name: 'language', description: 'The language to add, e.g. Persian', required: true }, { name: 'course', description: 'The course (name or id; optional when there is only one)', required: false }],
   text: a => `Add ${a.language || 'a new language'} to my noema-lite language course${a.course ? ` “${a.course}”` : ''} — the whole language, in full, and upload it to the app when it is done.\nCall noema_language_package_guide${a.course ? ` with course_id "${a.course}" and` : ' with'} language "${a.language || ''}" and follow its instructions exactly — D19 first (the language is taught through each learner's native language: neutral texts that name no language outside the course, a contrast note for every supported native and type on every grammar page, every note structured; R3: first the exhaustive map of the word's parameters per part of speech, before any word) —, every step in order (as sub-agents if you can), every audit turn, every check, the progress file; then package it and save it with noema_lang_package_start → curl → noema_lang_package_finish. Never invent a form. If this environment cannot run long tasks with code execution, tell me what is needed instead of starting. Do not ask me other questions — choose sensible defaults.`,
 }];
+
+/* ---------- 文A language bridges (docs/BRIDGE.md): <uid>/bridges/<pack>.<native>.json + the index a:bridges, as the app's engine/bridge.js keeps them ---------- */
+const hash36 = s => { let h1 = 0x811c9dc5, h2 = 0; s = String(s); for (let i = 0; i < s.length; i++) { const c = s.charCodeAt(i); h1 = Math.imul(h1 ^ c, 16777619) >>> 0; h2 = (h2 * 31 + c) >>> 0; } return (h1.toString(36) + h2.toString(36)).slice(0, 10); };   // = engine/catalog.js hash36
+const bridgeSummary = b => ({ v: hash36(JSON.stringify(b.entries || []) + JSON.stringify(b.sections || {}) + JSON.stringify(b.anchors || [])), status: b.status, coverage: typeof b.coverage === 'number' ? b.coverage : null,
+  chapters: (b.chapters || []).length || null, of: b.of || null, previews: Object.values(b.sections || {}).filter(x => x?.preview).length, entries: (b.entries || []).length, at: Date.now(), via: 'claude' });   // = engine/bridge.js summary()
+const kvGet = async (token, key, d) => { const r = await sb(`/rest/v1/noema_kv?select=value&key=eq.${encodeURIComponent(key)}`, token).catch(() => []); try { return JSON.parse(r?.[0]?.value ?? 'null') ?? d; } catch (e) { return d; } };
+async function packFor(token, uid, id) {
+  if ((CFG.library || []).some(s => s.id === id)) { const r = await fetch(siteFile(`library/subjects/${id}/pack.json`)).catch(() => null); return r?.ok ? r.json().catch(() => null) : null; }
+  return storageJSON(token, `${uid}/packs/${id}.json`);
+}
 
 async function callTool(name, args, ctx) {
   const { token, user } = ctx; const uid = user.id; const base = `noema-private/${uid}/packs/`;
@@ -495,6 +509,27 @@ async function callTool(name, args, ctx) {
       if ((CFG.library || []).some(s => s.id === p.subject.id)) return fail(`"${p.subject.id}" is a library subject id — use a new id.`);
       await sb(`/storage/v1/object/${base}${p.subject.id}.json`, token, { method: 'POST', body: raw, headers: { 'content-type': 'application/json', 'x-upsert': 'true' } });
       return complete(token, uid, p.subject.id, p, res, fail, text, user, { curriculum_id: args?.curriculum_id, step: args?.step });
+    }
+    case 'noema_bridge_guide': {
+      const ix = await kvGet(token, 'a:bridges', {}), reps = (await kvGet(token, 'a:bridgeReports', [])).filter(r => !sid || r.pack === sid);
+      const mine = Object.entries(ix).filter(([p]) => !sid || p === sid).flatMap(([p, m]) => Object.entries(m || {}).map(([n, x]) => `- ${p} → ${n}: ${x.entries} words, ${x.coverage == null ? '?' : Math.round(x.coverage * 100) + '%'} of the content words, ${x.chapters || 0}/${x.of || '?'} chapters, ${x.status}`));
+      const lib = (CFG.library || []).filter(m => m.bridgeLocales && (!sid || m.id === sid)).map(m => `- ${m.id} (library) → ${Object.entries(m.bridgeLocales).map(([n, x]) => `${n} ${Math.round((x.coverage || 0) * 100)}% ${x.status}`).join(', ')}`);
+      return text(`${DOCS.bridge || 'docs/BRIDGE.md is missing in this build.'}\n\n---\n\nThis account's bridges:\n${mine.join('\n') || '(none yet)'}\n\nLibrary bridges:\n${lib.join('\n') || '(none)'}\n\nMistakes learners reported (${reps.length}):\n${reps.slice(-40).map(r => `- ${r.pack} → ${r.native} · ${r.k}#${r.sense} (“${r.form}” in ${r.sid}): ${r.note || '(no note)'}`).join('\n') || '(none)'}`);
+    }
+    case 'noema_save_bridge': {
+      const raw = String(args?.bridge_json || '');
+      if (raw.length > MAX_INLINE) return fail(`Too big (${Math.round(raw.length / 1024)} KB > 1.5 MB): build it per native language, and keep notes short.`);
+      let b; try { b = JSON.parse(raw); } catch (e) { return fail('bridge_json is not valid JSON: ' + e.message); }
+      const C = globalThis.NoemaPackCheck.checkBridge;
+      const first = C(b); if (first.errors.length) return fail(`${first.errors.length} error(s):\n- ${first.errors.slice(0, 40).join('\n- ')}`);
+      if (!ID_RE.test(String(b.pack))) return fail('pack: not a subject id');
+      const pack = await packFor(token, uid, b.pack); if (!pack) return fail(`No pack "${b.pack}" in this account or the library (noema_list_subjects).`);
+      const res = C(b, pack); if (res.errors.length) return fail(`${res.errors.length} error(s):\n- ${res.errors.slice(0, 40).join('\n- ')}`);
+      const nat = String(b.native).split('-')[0].toLowerCase();
+      await sb(`/storage/v1/object/noema-private/${uid}/bridges/${b.pack}.${nat}.json`, token, { method: 'POST', body: raw, headers: { 'content-type': 'application/json', 'x-upsert': 'true' } });
+      const ix = await kvGet(token, 'a:bridges', {}); ix[b.pack] = { ...(ix[b.pack] || {}), [nat]: bridgeSummary(b) }; await kvPut(token, uid, 'a:bridges', ix);
+      const c = res.counts || {};
+      return text(`✅ Saved: 文A ${b.pack} → ${nat} (${b.status}) — ${(b.entries || []).length} words${typeof b.coverage === 'number' ? `, ${Math.round(b.coverage * 100)}% of the content words` : ''}${c.anchors ? `, ${c.anchors} anchors` : ''}.${res.warnings.length ? `\n${res.warnings.length} warning(s):\n- ${res.warnings.slice(0, 20).join('\n- ')}` : ''}\nThe learner sees it on the pack's sections after the next sync (reload the app).`);
     }
     case 'noema_image_search': {
       const q = String(args?.query || '').trim(); if (!q) return fail('query is empty');

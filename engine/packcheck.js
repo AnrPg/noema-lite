@@ -165,6 +165,81 @@
     for (const mid of Object.keys(media)) if ((used[mid] || 0) < 3) W.push(`picture ${mid} has ${used[mid] || 0} exercises (aim for >= 3)`);
     return { errors: E, warnings: W, counts: { chapters: chapters.length, sections: secN, exercises: ex, visual: vis, media: Object.keys(media).length } };
   }
+
+  /* ---------- language bridges (docs/BRIDGE.md): a sidecar dictionary for one pack and one native language ---------- */
+  const POS = new Set(['NOUN', 'PROPN', 'VERB', 'ADJ', 'ADV', 'NUM', 'X', 'SYM', 'INTJ', 'PHRASE']);
+  const FUNCTION_POS = new Set(['DET', 'ADP', 'CCONJ', 'SCONJ', 'PRON', 'AUX', 'PART']);
+  const LOC_RE = /^[a-z]{2,3}(-[A-Za-z0-9]{2,8})*$/;
+  const MARKUP = /<\s*[a-z!\/]|javascript:|data:text\/html/i;   // translations are plain text: never markup or script
+  const BRIDGE_MAX = 3 * 1024 * 1024;
+  /** checkBridge(b, pack?) → { errors, warnings, counts }. With the pack: the bridge belongs to it and its sections exist. */
+  function checkBridge(b, pack) {
+    const E = [], W = [];
+    if (!b || typeof b !== 'object' || Array.isArray(b)) return { errors: ['not a JSON object'], warnings: W, counts: {} };
+    let size = 0; try { size = JSON.stringify(b).length; } catch (e) { E.push('not serialisable'); }
+    if (size > BRIDGE_MAX) E.push(`too big (${Math.round(size / 1024)} KB, at most ${BRIDGE_MAX / 1024} KB)`);
+    if (b.format !== 'noema-bridge') E.push('format must be "noema-bridge"');
+    if (b.v !== 1) E.push('v must be 1');
+    if (!ID_RE.test(String(b.pack || ''))) E.push('pack: the subject id the bridge belongs to (pack.subject.id)');
+    if (!LOC_RE.test(String(b.source || ''))) E.push('source: the language of the pack\'s content (BCP 47, e.g. "el")');
+    if (!LOC_RE.test(String(b.native || ''))) E.push('native: the learner\'s language the words are translated into (BCP 47, e.g. "ru")');
+    if (b.source && b.native && String(b.source).split('-')[0] === String(b.native).split('-')[0]) E.push('native must differ from source');
+    if (!['draft', 'reviewed'].includes(b.status)) E.push('status must be "draft" or "reviewed"');
+    const plainOk = (v, max, where) => { if (v == null) return; if (typeof v !== 'string') return E.push(`${where}: must be text`); if (v.length > max) E.push(`${where}: longer than ${max} characters`); if (MARKUP.test(v)) E.push(`${where}: plain text only (no HTML or links)`); };
+    const entries = Array.isArray(b.entries) ? b.entries : (E.push('entries must be a list'), []);
+    if (entries.length > 20000) E.push(`entries: ${entries.length} (at most 20000)`);
+    const keys = new Map(); let senses = 0, stale = 0;
+    entries.forEach((e, n) => {
+      const at = `entries[${n}]${e && isStr(e.k) ? ' "' + e.k + '"' : ''}`;
+      if (!e || typeof e !== 'object') return E.push(`${at}: not an object`);
+      if (!isStr(e.k) || e.k.length > 80) return E.push(`${at}: k (the word or phrase as the pack writes it) is required, at most 80 characters`);
+      if (keys.has(e.k)) E.push(`${at}: k appears twice`);
+      if (e.forms != null && (!Array.isArray(e.forms) || e.forms.length > 40 || !e.forms.every(f => isStr(f) && f.length <= 80))) E.push(`${at}: forms must be a list of at most 40 texts`);
+      if (e.pos != null && FUNCTION_POS.has(e.pos)) E.push(`${at}: ${e.pos} — function words (articles, prepositions, conjunctions, pronouns, auxiliaries, particles) are not part of a bridge`);
+      else if (e.pos != null && !POS.has(e.pos)) W.push(`${at}: unknown pos "${e.pos}" (Universal Dependencies: NOUN, PROPN, VERB, ADJ, ADV, NUM, X, SYM, INTJ, or PHRASE)`);
+      if (e.band != null && ![1, 2, 3].includes(e.band)) E.push(`${at}: band must be 1 (everyday), 2 (academic) or 3 (rare or technical)`);
+      const ss = Array.isArray(e.senses) ? e.senses : [];
+      if (!ss.length) E.push(`${at}: at least one sense (the meaning in this pack)`);
+      const ids = new Set();
+      ss.forEach((x, q) => {
+        const w = `${at} sense ${q + 1}`;
+        if (!x || typeof x !== 'object') return E.push(`${w}: not an object`);
+        if (!isStr(String(x.id ?? ''))) E.push(`${w}: id is required`); else if (ids.has(String(x.id))) E.push(`${w}: id "${x.id}" twice`); else ids.add(String(x.id));
+        if (!isStr(x.t)) E.push(`${w}: t (the translation) is required`);
+        plainOk(x.t, 200, w + ' t'); plainOk(x.note, 400, w + ' note'); plainOk(x.gloss, 300, w + ' gloss');
+        if (x.st != null && !['draft', 'reviewed', 'stale'].includes(x.st)) E.push(`${w}: st must be draft, reviewed or stale`);
+        if (x.st === 'stale') stale++; senses++;
+      });
+      keys.set(e.k, ids);
+    });
+    const secIds = pack ? new Set((pack.chapters || []).flatMap(c => (c.sections || []).map(s => s.id))) : null;
+    const secs = b.sections == null ? {} : (typeof b.sections === 'object' && !Array.isArray(b.sections) ? b.sections : (E.push('sections must be an object { sectionId: { terms, preview } }'), {}));
+    let previews = 0;
+    for (const [sid, v] of Object.entries(secs)) {
+      if (secIds && !secIds.has(sid)) W.push(`sections.${sid}: no such section in the pack`);
+      if (!v || typeof v !== 'object') { E.push(`sections.${sid}: not an object`); continue; }
+      if (v.terms != null && (!Array.isArray(v.terms) || v.terms.length > 30)) E.push(`sections.${sid}.terms: a list of at most 30 entry keys`);
+      for (const k of v.terms || []) if (!keys.has(k)) E.push(`sections.${sid}.terms: "${k}" is not an entry`);
+      plainOk(v.preview, 1500, `sections.${sid}.preview`); if (isStr(v.preview)) previews++;
+    }
+    const anchors = b.anchors == null ? [] : (Array.isArray(b.anchors) ? b.anchors : (E.push('anchors must be a list'), []));
+    anchors.forEach((a, n) => {
+      const at = `anchors[${n}]`;
+      if (!a || typeof a !== 'object') return E.push(`${at}: not an object`);
+      if (!/^[a-z0-9][a-z0-9-]*\/[A-Za-z0-9_-]+$/.test(String(a.at || ''))) E.push(`${at}: at must be "<section id>/<block id>" (the search address, docs/SEARCH.md)`);
+      else if (secIds && !secIds.has(a.at.split('/')[0])) W.push(`${at}: section ${a.at.split('/')[0]} is not in the pack`);
+      if (!isStr(a.quote)) E.push(`${at}: quote (the words exactly as the text writes them) is required`);
+      if (!keys.has(a.k)) E.push(`${at}: k "${a.k}" is not an entry`);
+      else if (!keys.get(a.k).has(String(a.sense))) E.push(`${at}: entry "${a.k}" has no sense "${a.sense}"`);
+    });
+    if (pack) {
+      if (pack.subject?.id && b.pack && pack.subject.id !== b.pack) E.push(`pack: "${b.pack}" — this bridge belongs to another subject (this one is "${pack.subject.id}")`);
+      const own = pack.subject?.language || 'en';
+      if (b.source && String(own).split('-')[0] !== String(b.source).split('-')[0]) E.push(`source: "${b.source}" — the pack is written in "${own}"`);
+    }
+    if (!entries.length) W.push('no entries yet');
+    return { errors: E, warnings: W, counts: { entries: entries.length, senses, stale, sections: Object.keys(secs).length, previews, anchors: anchors.length } };
+  }
   /* i18n-ignore-end */
-  root.NoemaPackCheck = { checkPack, checkExercise, TYPES, BLOCKS, ID_RE };
+  root.NoemaPackCheck = { checkPack, checkExercise, checkBridge, TYPES, BLOCKS, ID_RE };
 })(typeof window !== 'undefined' ? window : globalThis);

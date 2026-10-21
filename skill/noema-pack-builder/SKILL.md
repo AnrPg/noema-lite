@@ -211,6 +211,21 @@ one of them sees it, everyone else sees the original with a small language tag. 
 - `make_pack.py` validates both (same ids/structure/answers) and builds the pack with `"v": 2`; `unpack.py` gives the
   translations back in `translations/`. Contract: `references/CONTENT_SPEC.md` → "Packs in several languages".
 
+## Language help — 文A bridges (optional — only when the user asks)
+For a learner who studies the pack in a language that is not their own ("my student is Russian, the pack is Greek"): a
+**bridge** gives the pack's words, in the meaning they have IN the pack, in the learner's language. It is a sidecar; the
+pack is not changed. Contract and rules: `references/BRIDGE.md` (or `noema_bridge_guide`).
+1. Get the pack (`noema_get_pack_url`, or your own `work/<id>/build/<id>.json`) and make `bridges/` beside it.
+2. `python3 scripts/bridge.py todo <pack.json> --chapters ch01` → the content words to cover, most frequent first.
+3. Write `bridges/core.json`: content words only (never articles, prepositions, conjunctions, pronouns, auxiliaries),
+   their forms, part of speech, band (1 everyday · 2 academic · 3 the field's term), senses as used in this pack (a
+   `gloss` each), `keep` for names, `sections` key words, an anchor where one word has two meanings in the pack.
+4. Write `bridges/<native>.json`: one translation per sense (the term the learner's own lectures would use, a plain
+   explanation in brackets when needed), a 2–4 sentence preview per section, `"status": "draft"`.
+5. `python3 scripts/bridge.py check <pack.json>` (0 errors) and `coverage`; chapter by chapter, complete each.
+6. `python3 scripts/bridge.py build <pack.json> --native ru -o ru.bridge.json` → save it with `noema_save_bridge`
+   (or the learner imports the file with 📥). Learners' *Report a mistake* notes come back in `noema_bridge_guide`.
+
 ## Quality bar (check before saving)
 - Every source detail is taught **and** tested; nothing invented; obvious source errors corrected and noted.
 - Pictures: three kinds used, each verified, licensed, sharp, ≥ 3 exercises each.

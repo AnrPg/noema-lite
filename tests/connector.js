@@ -16,7 +16,7 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
   ok(/\/library\/\*\n(  .+\n)*  Access-Control-Allow-Origin: \*\n/.test(fs.readFileSync(path.join(ROOT, 'dist/site/_headers'), 'utf8')), '_headers: the public library allows cross-origin reads');
   // the function exactly as tools/build.py generates it, but pointed at the emulator
   const CFG = { siteUrl: BASE, supabaseUrl: BASE, supabaseKey: 'sb_publishable_test', storageChunkBytes: 4500, library: [{ id: 'databricks', title: 'Databricks', counts: { chapters: 13, exercises: 1715 } }] };
-  const DOCS = { workflow: fs.readFileSync(path.join(ROOT, 'skill/noema-pack-builder/SKILL.md'), 'utf8'), content: fs.readFileSync(path.join(ROOT, 'tools/CONTENT_SPEC.md'), 'utf8'), visual: fs.readFileSync(path.join(ROOT, 'docs/VISUAL.md'), 'utf8') };
+  const DOCS = { workflow: fs.readFileSync(path.join(ROOT, 'skill/noema-pack-builder/SKILL.md'), 'utf8'), content: fs.readFileSync(path.join(ROOT, 'tools/CONTENT_SPEC.md'), 'utf8'), visual: fs.readFileSync(path.join(ROOT, 'docs/VISUAL.md'), 'utf8'), bridge: fs.readFileSync(path.join(ROOT, 'docs/BRIDGE.md'), 'utf8') };
   const fn = path.join(os.tmpdir(), `noema-mcp-${process.pid}.mjs`);
   fs.writeFileSync(fn, `const CFG = ${JSON.stringify(CFG)};\nconst DOCS = ${JSON.stringify(DOCS)};\nglobalThis.window = globalThis;\n` + ['engine/packcheck.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js'].map(f => fs.readFileSync(path.join(ROOT, f), 'utf8') + '\n').join('') + fs.readFileSync(path.join(ROOT, 'cloud/mcp/server.mjs'), 'utf8'));   // as tools/build.py (MCP_ENGINE)   // as tools/build.py assembles it
   const { default: handler } = await import(fn);
@@ -104,6 +104,20 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
   ok(fb.isError && /section nope not found/.test(fb.content[0].text) && !srv.state.kv[uid]['a:packmeta:broken-pack'], 'a broken pack is refused with the list of errors');
   const small = JSON.parse(JSON.stringify(pack)); small.subject.id = 'tiny-inline'; small.subject.title = 'Tiny inline';
   ok(!(await tool('noema_save_pack', { pack_json: JSON.stringify(small) })).isError && srv.state.kv[uid]['a:packmeta:tiny-inline'], 'save_pack stores a small pack inline');
+  // 文A language bridges (docs/BRIDGE.md): checked as the app checks them, stored where the app reads them
+  ok(names.includes('noema_bridge_guide') && names.includes('noema_save_bridge'), 'tools: noema_bridge_guide + noema_save_bridge');
+  const sid0 = small.chapters[0].sections[0].id;
+  const br = { format: 'noema-bridge', v: 1, pack: 'tiny-inline', source: small.subject.language || 'en', native: 'ru', status: 'draft', coverage: 0.3, chapters: [], of: small.chapters.length,
+    entries: [{ k: 'energy', pos: 'NOUN', band: 2, senses: [{ id: '1', t: 'энергия' }] }], sections: { [sid0]: { terms: ['energy'], preview: 'Энергия.' } }, anchors: [] };
+  const bBad = await tool('noema_save_bridge', { bridge_json: JSON.stringify({ ...br, entries: [...br.entries, { k: 'the', pos: 'DET', senses: [{ id: '1', t: 'x' }] }] }) });
+  const bOther = await tool('noema_save_bridge', { bridge_json: JSON.stringify({ ...br, pack: 'no-such-pack' }) });
+  ok(bBad.isError && /DET/.test(bBad.content[0].text) && bOther.isError && /No pack/.test(bOther.content[0].text), 'save_bridge refuses a function word and a pack the account does not have');
+  const bOk = await tool('noema_save_bridge', { bridge_json: JSON.stringify(br) });
+  const bix = JSON.parse(srv.state.kv[uid]['a:bridges']?.value || '{}');
+  ok(!bOk.isError && srv.state.files[`${uid}/bridges/tiny-inline.ru.json`] && bix['tiny-inline']?.ru?.entries === 1 && /^[0-9a-z]+$/.test(bix['tiny-inline'].ru.v), 'save_bridge stores <uid>/bridges/<pack>.<native>.json and the synced index a:bridges');
+  srv.state.kv[uid]['a:bridgeReports'] = { value: JSON.stringify([{ pack: 'tiny-inline', native: 'ru', k: 'energy', sense: '1', form: 'energy', sid: sid0, note: 'better: энергия (физ.)' }]), updated_at: new Date().toISOString() };
+  const bg = (await tool('noema_bridge_guide', { subject_id: 'tiny-inline' })).content[0].text;
+  ok(/tiny-inline → ru: 1 words/.test(bg) && /энергия \(физ\.\)/.test(bg), 'bridge_guide lists the account\'s bridges and the mistakes learners reported');
   const multi = JSON.parse(JSON.stringify(pack)); multi.subject.id = 'tiny-multi'; multi.subject.title = 'Tiny multi'; multi.v = 2;
   multi.translations = multi.translations || { fr: { chapters: JSON.parse(JSON.stringify(pack.chapters)) } };
   const mono = JSON.parse(JSON.stringify(multi)); mono.subject.id = 'tiny-mono'; mono.subject.title = 'Tiny mono'; delete mono.translations;

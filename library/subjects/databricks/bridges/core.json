@@ -1,0 +1,7270 @@
+{
+ "format": "noema-bridge-core",
+ "v": 1,
+ "pack": "databricks",
+ "source": "en",
+ "entries": [
+  {
+   "k": "table",
+   "pos": "NOUN",
+   "forms": [
+    "tables",
+    "table's"
+   ],
+   "band": 2,
+   "key": true,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a database table: named rows and columns"
+    }
+   ]
+  },
+  {
+   "k": "file",
+   "pos": "NOUN",
+   "forms": [
+    "files"
+   ],
+   "band": 2,
+   "key": true,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a file stored on disk or in cloud storage"
+    }
+   ]
+  },
+  {
+   "k": "storage",
+   "pos": "NOUN",
+   "forms": [
+    "storages"
+   ],
+   "band": 2,
+   "key": true,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "where data is kept persistently (disks, cloud object stores)"
+    }
+   ]
+  },
+  {
+   "k": "data",
+   "pos": "NOUN",
+   "band": 1,
+   "key": true,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "information stored and processed by programs"
+    }
+   ]
+  },
+  {
+   "k": "compute",
+   "pos": "NOUN",
+   "forms": [
+    "computes"
+   ],
+   "band": 3,
+   "key": true,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the processing resources (CPUs, memory, clusters) that run the work"
+    },
+    {
+     "id": "2",
+     "gloss": "to calculate",
+     "pos": "VERB",
+     "forms": [
+      "computes"
+     ]
+    }
+   ]
+  },
+  {
+   "k": "transaction",
+   "pos": "NOUN",
+   "forms": [
+    "transactions"
+   ],
+   "band": 3,
+   "key": true,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a group of changes applied all together or not at all"
+    }
+   ]
+  },
+  {
+   "k": "metadata",
+   "pos": "NOUN",
+   "band": 3,
+   "key": true,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "data that describes other data (names, schema, location, statistics)"
+    }
+   ]
+  },
+  {
+   "k": "column",
+   "pos": "NOUN",
+   "forms": [
+    "columns"
+   ],
+   "band": 2,
+   "key": true,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a vertical field of a table holding one kind of value"
+    }
+   ]
+  },
+  {
+   "k": "row",
+   "pos": "NOUN",
+   "forms": [
+    "rows"
+   ],
+   "band": 2,
+   "key": true,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "one record (horizontal line) of a table"
+    }
+   ]
+  },
+  {
+   "k": "governance",
+   "pos": "NOUN",
+   "band": 3,
+   "key": true,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "control of who may access and change data, and how"
+    }
+   ]
+  },
+  {
+   "k": "layer",
+   "pos": "NOUN",
+   "forms": [
+    "layers"
+   ],
+   "band": 2,
+   "key": true,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "one level of a system that builds on the level below"
+    }
+   ]
+  },
+  {
+   "k": "query",
+   "pos": "NOUN",
+   "forms": [
+    "queries"
+   ],
+   "band": 2,
+   "key": true,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a request that reads or changes data (e.g. in SQL)"
+    }
+   ]
+  },
+  {
+   "k": "commit",
+   "pos": "NOUN",
+   "forms": [
+    "commits",
+    "committed"
+   ],
+   "band": 3,
+   "key": true,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the step that makes a transaction's changes final and visible"
+    },
+    {
+     "id": "2",
+     "gloss": "to make a transaction's changes final and visible",
+     "pos": "VERB",
+     "forms": [
+      "committed"
+     ]
+    }
+   ]
+  },
+  {
+   "k": "log",
+   "pos": "NOUN",
+   "forms": [
+    "logs"
+   ],
+   "band": 2,
+   "key": true,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "an ordered record of events or changes"
+    }
+   ]
+  },
+  {
+   "k": "shuffle",
+   "pos": "NOUN",
+   "forms": [
+    "shuffled",
+    "shuffling"
+   ],
+   "band": 3,
+   "key": true,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "moving rows between executors over the network, grouped by key"
+    },
+    {
+     "id": "2",
+     "gloss": "to move rows between executors over the network by key",
+     "pos": "VERB",
+     "forms": [
+      "shuffled",
+      "shuffling"
+     ]
+    }
+   ]
+  },
+  {
+   "k": "snapshot",
+   "pos": "NOUN",
+   "forms": [
+    "snapshots"
+   ],
+   "band": 3,
+   "key": true,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the state of a table at one version"
+    }
+   ]
+  },
+  {
+   "k": "platform",
+   "pos": "NOUN",
+   "forms": [
+    "platforms"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a complete system on which other tools and work run"
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "pos": "VERB",
+   "forms": [
+    "reads",
+    "reading"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to get data from storage"
+    },
+    {
+     "id": "2",
+     "gloss": "an operation that gets data from storage",
+     "pos": "NOUN"
+    }
+   ]
+  },
+  {
+   "k": "reader",
+   "pos": "NOUN",
+   "forms": [
+    "readers"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a process or user that reads data"
+    }
+   ]
+  },
+  {
+   "k": "cloud",
+   "pos": "NOUN",
+   "forms": [
+    "clouds"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "computing services rented over the internet (AWS, Azure, Google Cloud)"
+    }
+   ]
+  },
+  {
+   "k": "current",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "valid now, the latest"
+    }
+   ]
+  },
+  {
+   "k": "database",
+   "pos": "NOUN",
+   "forms": [
+    "databases"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "an organised system for storing and querying data"
+    }
+   ]
+  },
+  {
+   "k": "engine",
+   "pos": "NOUN",
+   "forms": [
+    "engines"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the software that executes queries and computations"
+    }
+   ]
+  },
+  {
+   "k": "format",
+   "pos": "NOUN",
+   "forms": [
+    "formats"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the way data is laid out in a file"
+    }
+   ]
+  },
+  {
+   "k": "model",
+   "pos": "NOUN",
+   "forms": [
+    "models"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a simplified picture of how something works"
+    }
+   ]
+  },
+  {
+   "k": "part",
+   "pos": "NOUN",
+   "forms": [
+    "parts"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a piece of a whole"
+    }
+   ]
+  },
+  {
+   "k": "physical",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "about the real files and bytes, not the logical view"
+    }
+   ]
+  },
+  {
+   "k": "physically",
+   "pos": "ADV",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "in the real files and bytes"
+    }
+   ]
+  },
+  {
+   "k": "plane",
+   "pos": "NOUN",
+   "forms": [
+    "planes"
+   ],
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "in Databricks: a part of the architecture (control plane, compute plane)"
+    }
+   ]
+  },
+  {
+   "k": "pruning",
+   "pos": "NOUN",
+   "forms": [
+    "pruned"
+   ],
+   "band": 3,
+   "key": true,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "skipping data (columns or files) a query does not need"
+    }
+   ]
+  },
+  {
+   "k": "statistics",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "summary numbers about data (counts, min/max, sizes)"
+    }
+   ]
+  },
+  {
+   "k": "transactional",
+   "pos": "ADJ",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "with transactions (all-or-nothing changes)"
+    }
+   ]
+  },
+  {
+   "k": "version",
+   "pos": "NOUN",
+   "forms": [
+    "versions"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "one numbered state of a table after a commit"
+    }
+   ]
+  },
+  {
+   "k": "cluster",
+   "pos": "NOUN",
+   "forms": [
+    "clusters"
+   ],
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a group of machines that run Spark together"
+    }
+   ]
+  },
+  {
+   "k": "columnar",
+   "pos": "ADJ",
+   "band": 3,
+   "key": true,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "storing data column by column"
+    }
+   ]
+  },
+  {
+   "k": "join",
+   "pos": "NOUN",
+   "forms": [
+    "joins"
+   ],
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "combining rows of two tables by a key"
+    }
+   ]
+  },
+  {
+   "k": "object",
+   "pos": "NOUN",
+   "forms": [
+    "objects"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "in cloud storage: a stored file with a key; in a catalog: a named item"
+    }
+   ]
+  },
+  {
+   "k": "state",
+   "pos": "NOUN",
+   "forms": [
+    "states"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the condition of something at a moment"
+    }
+   ]
+  },
+  {
+   "k": "add",
+   "pos": "VERB",
+   "forms": [
+    "adds"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to put something in"
+    }
+   ]
+  },
+  {
+   "k": "chapter",
+   "pos": "NOUN",
+   "forms": [
+    "chapters"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a part of a book or course"
+    }
+   ]
+  },
+  {
+   "k": "come",
+   "pos": "VERB",
+   "forms": [
+    "comes"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to arrive, to appear"
+    }
+   ]
+  },
+  {
+   "k": "come back",
+   "pos": "PHRASE",
+   "forms": [
+    "comes back"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to return"
+    }
+   ]
+  },
+  {
+   "k": "different",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "not the same"
+    }
+   ]
+  },
+  {
+   "k": "environment",
+   "pos": "NOUN",
+   "forms": [
+    "environments"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the systems and settings where something runs"
+    }
+   ]
+  },
+  {
+   "k": "exam",
+   "pos": "NOUN",
+   "forms": [
+    "exams"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a test, here: the certification exam"
+    }
+   ]
+  },
+  {
+   "k": "logical",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "as the table is defined, not as files are stored"
+    }
+   ]
+  },
+  {
+   "k": "logically",
+   "pos": "ADV",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "in the logical view of the table"
+    }
+   ]
+  },
+  {
+   "k": "membership",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "being part of a group or set"
+    }
+   ]
+  },
+  {
+   "k": "need",
+   "pos": "VERB",
+   "forms": [
+    "needs",
+    "needed"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to require"
+    }
+   ]
+  },
+  {
+   "k": "now",
+   "pos": "ADV",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "at this time"
+    }
+   ]
+  },
+  {
+   "k": "persistent",
+   "pos": "ADJ",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "lasting after the program or machine stops"
+    }
+   ]
+  },
+  {
+   "k": "picture",
+   "pos": "NOUN",
+   "forms": [
+    "pictures"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "an image; here: a mental image"
+    },
+    {
+     "id": "2",
+     "gloss": "to imagine",
+     "pos": "VERB"
+    }
+   ]
+  },
+  {
+   "k": "run",
+   "pos": "VERB",
+   "forms": [
+    "runs",
+    "running"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to execute (a program, a query)"
+    }
+   ]
+  },
+  {
+   "k": "see",
+   "pos": "VERB",
+   "forms": [
+    "sees",
+    "seeing"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to notice, to observe"
+    }
+   ]
+  },
+  {
+   "k": "semantics",
+   "pos": "NOUN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the meaning and rules of behaviour"
+    }
+   ]
+  },
+  {
+   "k": "slow",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "taking a long time"
+    }
+   ]
+  },
+  {
+   "k": "traditional",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the older, usual kind"
+    }
+   ]
+  },
+  {
+   "k": "valid",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "correct and allowed by the rules"
+    }
+   ]
+  },
+  {
+   "k": "invalid",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "not correct, not allowed by the rules"
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "pos": "VERB",
+   "forms": [
+    "writes",
+    "written",
+    "wrote"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to save data"
+    }
+   ]
+  },
+  {
+   "k": "writer",
+   "pos": "NOUN",
+   "forms": [
+    "writers"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a process that writes data"
+    }
+   ]
+  },
+  {
+   "k": "ask",
+   "pos": "VERB",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to put a question"
+    }
+   ]
+  },
+  {
+   "k": "byte",
+   "pos": "NOUN",
+   "forms": [
+    "bytes"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the smallest unit of stored data (8 bits)"
+    }
+   ]
+  },
+  {
+   "k": "concurrent",
+   "pos": "ADJ",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "happening at the same time"
+    }
+   ]
+  },
+  {
+   "k": "describe",
+   "pos": "VERB",
+   "forms": [
+    "describes"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to tell what something is like"
+    }
+   ]
+  },
+  {
+   "k": "description",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a text that tells what something is"
+    }
+   ]
+  },
+  {
+   "k": "directory",
+   "pos": "NOUN",
+   "forms": [
+    "directories"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a folder of files"
+    }
+   ]
+  },
+  {
+   "k": "evidence",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "facts that show something is true"
+    }
+   ]
+  },
+  {
+   "k": "give",
+   "pos": "VERB",
+   "forms": [
+    "gives",
+    "gave"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to provide"
+    }
+   ]
+  },
+  {
+   "k": "gone",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "no longer there"
+    }
+   ]
+  },
+  {
+   "k": "hold",
+   "pos": "VERB",
+   "forms": [
+    "holds"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to contain, to keep"
+    }
+   ]
+  },
+  {
+   "k": "keep",
+   "pos": "VERB",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to retain, to continue to have"
+    }
+   ]
+  },
+  {
+   "k": "kitchen",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the room where food is cooked"
+    }
+   ]
+  },
+  {
+   "k": "lakehouse",
+   "pos": "NOUN",
+   "forms": [
+    "lakehouses"
+   ],
+   "band": 3,
+   "key": true,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "an architecture combining a data lake with data-warehouse tables"
+    }
+   ]
+  },
+  {
+   "k": "old",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "from before, not new"
+    }
+   ]
+  },
+  {
+   "k": "new",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "just made, not old"
+    }
+   ]
+  },
+  {
+   "k": "order",
+   "pos": "NOUN",
+   "forms": [
+    "orders"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a customer's purchase in the e-shop example"
+    },
+    {
+     "id": "2",
+     "gloss": "the sequence in which things are done",
+     "pos": "NOUN"
+    }
+   ]
+  },
+  {
+   "k": "plain",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "simple, without extra features"
+    }
+   ]
+  },
+  {
+   "k": "reduce",
+   "pos": "VERB",
+   "forms": [
+    "reduces"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to make smaller"
+    }
+   ]
+  },
+  {
+   "k": "replacement",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a new thing that takes the place of an old one"
+    }
+   ]
+  },
+  {
+   "k": "schema",
+   "pos": "NOUN",
+   "forms": [
+    "schemas"
+   ],
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the structure of a table (columns and types); in Unity Catalog: the 2nd level of the name"
+    }
+   ]
+  },
+  {
+   "k": "something",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a thing not named"
+    }
+   ]
+  },
+  {
+   "k": "store",
+   "pos": "VERB",
+   "forms": [
+    "stores",
+    "stored"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to keep data"
+    }
+   ]
+  },
+  {
+   "k": "survive",
+   "pos": "VERB",
+   "forms": [
+    "survives"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to continue to exist after something ends"
+    }
+   ]
+  },
+  {
+   "k": "actually",
+   "pos": "ADV",
+   "forms": [
+    "actual"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "in fact, really"
+    }
+   ]
+  },
+  {
+   "k": "apart",
+   "pos": "ADV",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "separately"
+    }
+   ]
+  },
+  {
+   "k": "back",
+   "pos": "ADV",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "again, to the earlier place"
+    }
+   ]
+  },
+  {
+   "k": "belong",
+   "pos": "VERB",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to be part of"
+    }
+   ]
+  },
+  {
+   "k": "broadcast",
+   "pos": "NOUN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "sending a copy of a small table to every executor"
+    }
+   ]
+  },
+  {
+   "k": "cell",
+   "pos": "NOUN",
+   "forms": [
+    "cells"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "one value at a row and column, as in a spreadsheet"
+    }
+   ]
+  },
+  {
+   "k": "change",
+   "pos": "VERB",
+   "forms": [
+    "changes",
+    "changed"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to make different"
+    },
+    {
+     "id": "2",
+     "gloss": "the act of making different",
+     "pos": "NOUN"
+    }
+   ]
+  },
+  {
+   "k": "cheap",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "costing little"
+    }
+   ]
+  },
+  {
+   "k": "classic",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "in Databricks: compute in the customer's own cloud account (not serverless)"
+    }
+   ]
+  },
+  {
+   "k": "clustering",
+   "pos": "NOUN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "organising data so similar values are stored near each other"
+    }
+   ]
+  },
+  {
+   "k": "consistency",
+   "pos": "NOUN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "ACID: every transaction keeps the data valid"
+    }
+   ]
+  },
+  {
+   "k": "contain",
+   "pos": "VERB",
+   "forms": [
+    "contains"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to have inside"
+    }
+   ]
+  },
+  {
+   "k": "control",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "direction and management"
+    }
+   ]
+  },
+  {
+   "k": "control plane",
+   "pos": "PHRASE",
+   "band": 3,
+   "key": true,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the part managed by Databricks that decides and coordinates work"
+    }
+   ]
+  },
+  {
+   "k": "compute plane",
+   "pos": "PHRASE",
+   "band": 3,
+   "key": true,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the part where the work really runs on machines"
+    }
+   ]
+  },
+  {
+   "k": "cook",
+   "pos": "VERB",
+   "forms": [
+    "cooks",
+    "cooking"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to prepare food"
+    },
+    {
+     "id": "2",
+     "gloss": "a person who prepares food",
+     "pos": "NOUN"
+    }
+   ]
+  },
+  {
+   "k": "dataset",
+   "pos": "NOUN",
+   "forms": [
+    "datasets"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a collection of data"
+    }
+   ]
+  },
+  {
+   "k": "debugging",
+   "pos": "NOUN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "finding and fixing the cause of a problem"
+    }
+   ]
+  },
+  {
+   "k": "decide",
+   "pos": "VERB",
+   "forms": [
+    "decides"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to choose, to determine"
+    }
+   ]
+  },
+  {
+   "k": "delete",
+   "pos": "VERB",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to remove"
+    }
+   ]
+  },
+  {
+   "k": "deleted",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "removed"
+    }
+   ]
+  },
+  {
+   "k": "disappear",
+   "pos": "VERB",
+   "forms": [
+    "disappeared"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to stop existing or being visible"
+    }
+   ]
+  },
+  {
+   "k": "e-shop",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "an online shop"
+    }
+   ]
+  },
+  {
+   "k": "execution",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "running a program or query"
+    }
+   ]
+  },
+  {
+   "k": "executor",
+   "pos": "NOUN",
+   "forms": [
+    "executors"
+   ],
+   "band": 3,
+   "key": true,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a Spark worker process that runs tasks"
+    }
+   ]
+  },
+  {
+   "k": "exist",
+   "pos": "VERB",
+   "forms": [
+    "exists"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to be there, to be real"
+    }
+   ]
+  },
+  {
+   "k": "existence",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "being there"
+    }
+   ]
+  },
+  {
+   "k": "folder",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a directory of files"
+    }
+   ]
+  },
+  {
+   "k": "form",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a shape, a version"
+    },
+    {
+     "id": "2",
+     "gloss": "to make, to build (e.g. a hypothesis)",
+     "pos": "VERB"
+    }
+   ]
+  },
+  {
+   "k": "hash",
+   "pos": "NOUN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a number computed from a key, used to find or group rows"
+    }
+   ]
+  },
+  {
+   "k": "historically",
+   "pos": "ADV",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "in the past, traditionally"
+    }
+   ]
+  },
+  {
+   "k": "huge",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "very big"
+    }
+   ]
+  },
+  {
+   "k": "include",
+   "pos": "VERB",
+   "forms": [
+    "including",
+    "includes"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to contain as a part"
+    }
+   ]
+  },
+  {
+   "k": "isolation",
+   "pos": "NOUN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "ACID: concurrent transactions do not see each other's half-done work"
+    }
+   ]
+  },
+  {
+   "k": "know",
+   "pos": "VERB",
+   "forms": [
+    "known"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to have knowledge of"
+    }
+   ]
+  },
+  {
+   "k": "layout",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "how data is arranged in files"
+    }
+   ]
+  },
+  {
+   "k": "lifetime",
+   "pos": "NOUN",
+   "forms": [
+    "lifetimes"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "how long something exists"
+    }
+   ]
+  },
+  {
+   "k": "mean",
+   "pos": "VERB",
+   "forms": [
+    "means"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to have as meaning"
+    }
+   ]
+  },
+  {
+   "k": "mechanism",
+   "pos": "NOUN",
+   "forms": [
+    "mechanisms"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the way something works"
+    }
+   ]
+  },
+  {
+   "k": "modern",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "current, recent"
+    }
+   ]
+  },
+  {
+   "k": "name",
+   "pos": "NOUN",
+   "forms": [
+    "names",
+    "named"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "what something is called"
+    }
+   ]
+  },
+  {
+   "k": "network",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "connections between computers"
+    }
+   ]
+  },
+  {
+   "k": "notebook",
+   "pos": "NOUN",
+   "forms": [
+    "notebooks"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "an interactive document with code cells (Databricks notebook)"
+    }
+   ]
+  },
+  {
+   "k": "pantry",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a room where food is stored"
+    }
+   ]
+  },
+  {
+   "k": "partition",
+   "pos": "NOUN",
+   "forms": [
+    "partitions"
+   ],
+   "band": 3,
+   "key": true,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a part of the data processed by one task"
+    }
+   ]
+  },
+  {
+   "k": "plan",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "how the engine will execute a query"
+    }
+   ]
+  },
+  {
+   "k": "RAM",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the computer's working memory"
+    }
+   ]
+  },
+  {
+   "k": "raw",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "not processed yet"
+    }
+   ]
+  },
+  {
+   "k": "real",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "true, not imagined"
+    }
+   ]
+  },
+  {
+   "k": "server",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a computer that provides a service"
+    }
+   ]
+  },
+  {
+   "k": "side",
+   "pos": "NOUN",
+   "forms": [
+    "sides"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "one of two parts (of a join)"
+    }
+   ]
+  },
+  {
+   "k": "skew",
+   "pos": "NOUN",
+   "forms": [
+    "skewed"
+   ],
+   "band": 3,
+   "key": true,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "uneven distribution: a few keys have most rows"
+    }
+   ]
+  },
+  {
+   "k": "someone",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a person not named"
+    }
+   ]
+  },
+  {
+   "k": "system",
+   "pos": "NOUN",
+   "forms": [
+    "systems"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a set of parts that work together"
+    }
+   ]
+  },
+  {
+   "k": "take",
+   "pos": "VERB",
+   "forms": [
+    "takes"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to take; here: to consider as an example"
+    }
+   ]
+  },
+  {
+   "k": "time",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "time"
+    }
+   ]
+  },
+  {
+   "k": "together",
+   "pos": "ADV",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "with each other"
+    }
+   ]
+  },
+  {
+   "k": "update",
+   "pos": "NOUN",
+   "forms": [
+    "updates"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a change of existing rows"
+    },
+    {
+     "id": "2",
+     "gloss": "to change existing data",
+     "pos": "VERB"
+    }
+   ]
+  },
+  {
+   "k": "use",
+   "pos": "VERB",
+   "forms": [
+    "uses",
+    "using"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to use"
+    }
+   ]
+  },
+  {
+   "k": "warehouse",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a data warehouse: a system of structured tables for analysis"
+    }
+   ]
+  },
+  {
+   "k": "web",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the World Wide Web"
+    }
+   ]
+  },
+  {
+   "k": "whole",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "all of it"
+    }
+   ]
+  },
+  {
+   "k": "work",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the job to be done"
+    },
+    {
+     "id": "2",
+     "gloss": "to function",
+     "pos": "VERB"
+    }
+   ]
+  },
+  {
+   "k": "worker",
+   "pos": "NOUN",
+   "forms": [
+    "workers"
+   ],
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a machine of a cluster that runs executors"
+    }
+   ]
+  },
+  {
+   "k": "able",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "can do something"
+    }
+   ]
+  },
+  {
+   "k": "ACID",
+   "pos": "X",
+   "band": 3,
+   "key": true,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "Atomicity, Consistency, Isolation, Durability: the four guarantees of transactions"
+    }
+   ]
+  },
+  {
+   "k": "alone",
+   "pos": "ADV",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "without anything else"
+    }
+   ]
+  },
+  {
+   "k": "analogy",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a comparison that explains something"
+    }
+   ]
+  },
+  {
+   "k": "analytical",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "for analysing data"
+    }
+   ]
+  },
+  {
+   "k": "API",
+   "pos": "X",
+   "forms": [
+    "APIs"
+   ],
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a programming interface"
+    }
+   ]
+  },
+  {
+   "k": "application",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a program"
+    }
+   ]
+  },
+  {
+   "k": "architecture",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the overall design of a system"
+    }
+   ]
+  },
+  {
+   "k": "atomicity",
+   "pos": "NOUN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "ACID: a transaction happens completely or not at all"
+    }
+   ]
+  },
+  {
+   "k": "atomic",
+   "pos": "ADJ",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "all or nothing, not divisible"
+    }
+   ]
+  },
+  {
+   "k": "backend",
+   "pos": "NOUN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the server side of a system"
+    }
+   ]
+  },
+  {
+   "k": "bad",
+   "pos": "ADJ",
+   "forms": [
+    "badly"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "not good"
+    }
+   ]
+  },
+  {
+   "k": "become",
+   "pos": "VERB",
+   "forms": [
+    "becomes"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to start to be"
+    }
+   ]
+  },
+  {
+   "k": "beginner",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "someone who is just starting"
+    }
+   ]
+  },
+  {
+   "k": "behavior",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "how something acts"
+    }
+   ]
+  },
+  {
+   "k": "better",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "more good"
+    }
+   ]
+  },
+  {
+   "k": "big",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "large"
+    }
+   ]
+  },
+  {
+   "k": "bring",
+   "pos": "VERB",
+   "forms": [
+    "brings"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to carry with"
+    }
+   ]
+  },
+  {
+   "k": "build",
+   "pos": "VERB",
+   "forms": [
+    "builds",
+    "building",
+    "built"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to make, to construct"
+    }
+   ]
+  },
+  {
+   "k": "building",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a house or office",
+     "pos": "NOUN"
+    }
+   ]
+  },
+  {
+   "k": "call",
+   "pos": "VERB",
+   "forms": [
+    "called"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to name"
+    }
+   ]
+  },
+  {
+   "k": "case",
+   "pos": "NOUN",
+   "forms": [
+    "cases"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "an example, a situation"
+    }
+   ]
+  },
+  {
+   "k": "capacity",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "how much can be handled"
+    }
+   ]
+  },
+  {
+   "k": "cause",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the reason for something"
+    }
+   ]
+  },
+  {
+   "k": "central",
+   "pos": "ADJ",
+   "forms": [
+    "centralized"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "in the middle, the main one"
+    }
+   ]
+  },
+  {
+   "k": "challenge",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a hard task"
+    }
+   ]
+  },
+  {
+   "k": "check",
+   "pos": "VERB",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to verify"
+    }
+   ]
+  },
+  {
+   "k": "choice",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "what is chosen"
+    }
+   ]
+  },
+  {
+   "k": "choose",
+   "pos": "VERB",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to pick"
+    }
+   ]
+  },
+  {
+   "k": "class",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a group of similar things"
+    }
+   ]
+  },
+  {
+   "k": "code",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "program text"
+    }
+   ]
+  },
+  {
+   "k": "coherent",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "consistent, fitting together"
+    }
+   ]
+  },
+  {
+   "k": "collect",
+   "pos": "VERB",
+   "forms": [
+    "collecting"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to gather"
+    }
+   ]
+  },
+  {
+   "k": "combine",
+   "pos": "VERB",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to put together"
+    }
+   ]
+  },
+  {
+   "k": "compactly",
+   "pos": "ADV",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "in little space"
+    }
+   ]
+  },
+  {
+   "k": "compare",
+   "pos": "VERB",
+   "forms": [
+    "compared"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to look at differences"
+    }
+   ]
+  },
+  {
+   "k": "compatible",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "able to work with"
+    }
+   ]
+  },
+  {
+   "k": "completely",
+   "pos": "ADV",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "fully"
+    }
+   ]
+  },
+  {
+   "k": "compress",
+   "pos": "VERB",
+   "forms": [
+    "compressed"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to make data smaller"
+    }
+   ]
+  },
+  {
+   "k": "compression",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "making data smaller"
+    }
+   ]
+  },
+  {
+   "k": "computation",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "calculation, processing"
+    }
+   ]
+  },
+  {
+   "k": "concept",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "an idea"
+    }
+   ]
+  },
+  {
+   "k": "configuration",
+   "pos": "NOUN",
+   "forms": [
+    "configurations"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "settings"
+    }
+   ]
+  },
+  {
+   "k": "confusing",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "hard to understand"
+    }
+   ]
+  },
+  {
+   "k": "connect",
+   "pos": "VERB",
+   "forms": [
+    "connects"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to join together"
+    }
+   ]
+  },
+  {
+   "k": "coordinate",
+   "pos": "VERB",
+   "forms": [
+    "coordinates"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to organise work together"
+    }
+   ]
+  },
+  {
+   "k": "coordination",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "organising work together"
+    }
+   ]
+  },
+  {
+   "k": "copy",
+   "pos": "VERB",
+   "forms": [
+    "copied"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to duplicate"
+    }
+   ]
+  },
+  {
+   "k": "core",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the central part"
+    },
+    {
+     "id": "2",
+     "gloss": "central, main",
+     "pos": "ADJ"
+    }
+   ]
+  },
+  {
+   "k": "correct",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "right"
+    }
+   ]
+  },
+  {
+   "k": "correspond",
+   "pos": "VERB",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to match"
+    }
+   ]
+  },
+  {
+   "k": "cosmetic",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "only on the surface"
+    }
+   ]
+  },
+  {
+   "k": "count",
+   "pos": "VERB",
+   "forms": [
+    "counts"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to be included, to matter"
+    }
+   ]
+  },
+  {
+   "k": "course",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a series of lessons"
+    }
+   ]
+  },
+  {
+   "k": "cover",
+   "pos": "VERB",
+   "forms": [
+    "covered"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to include, to deal with"
+    }
+   ]
+  },
+  {
+   "k": "CPU",
+   "pos": "X",
+   "forms": [
+    "CPUs"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "processor"
+    }
+   ]
+  },
+  {
+   "k": "crash",
+   "pos": "NOUN",
+   "forms": [
+    "crashes"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a sudden failure"
+    }
+   ]
+  },
+  {
+   "k": "create",
+   "pos": "VERB",
+   "forms": [
+    "creates",
+    "creating"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to make"
+    }
+   ]
+  },
+  {
+   "k": "customer",
+   "pos": "NOUN",
+   "forms": [
+    "customer's"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a client who buys"
+    }
+   ]
+  },
+  {
+   "k": "cut",
+   "pos": "VERB",
+   "forms": [
+    "cuts"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to reduce"
+    }
+   ]
+  },
+  {
+   "k": "DAG",
+   "pos": "X",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "directed acyclic graph: the plan of Spark stages"
+    }
+   ]
+  },
+  {
+   "k": "database-like",
+   "pos": "ADJ",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "behaving like a database"
+    }
+   ]
+  },
+  {
+   "k": "date",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a calendar date"
+    }
+   ]
+  },
+  {
+   "k": "day",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a day"
+    }
+   ]
+  },
+  {
+   "k": "default",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "what is used when nothing else is chosen"
+    }
+   ]
+  },
+  {
+   "k": "definition",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "what a word means exactly"
+    }
+   ]
+  },
+  {
+   "k": "depend",
+   "pos": "VERB",
+   "forms": [
+    "depends"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to be decided by"
+    }
+   ]
+  },
+  {
+   "k": "depth",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "how deep"
+    }
+   ]
+  },
+  {
+   "k": "design",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a plan of how something is made"
+    }
+   ]
+  },
+  {
+   "k": "detail",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a small part or fact"
+    }
+   ]
+  },
+  {
+   "k": "diagnose",
+   "pos": "VERB",
+   "forms": [
+    "diagnosing"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to find the cause of a problem"
+    }
+   ]
+  },
+  {
+   "k": "diagnosis",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "finding the cause of a problem"
+    }
+   ]
+  },
+  {
+   "k": "difference",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "what is not the same"
+    }
+   ]
+  },
+  {
+   "k": "directly",
+   "pos": "ADV",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "straight, without steps between"
+    }
+   ]
+  },
+  {
+   "k": "disposable",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "used and then thrown away"
+    }
+   ]
+  },
+  {
+   "k": "distributed",
+   "pos": "ADJ",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "running on many machines"
+    }
+   ]
+  },
+  {
+   "k": "DML",
+   "pos": "X",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "data manipulation language: INSERT, UPDATE, DELETE, MERGE"
+    }
+   ]
+  },
+  {
+   "k": "driver",
+   "pos": "NOUN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the Spark process that plans the work and directs the executors"
+    }
+   ]
+  },
+  {
+   "k": "drop",
+   "pos": "VERB",
+   "forms": [
+    "dropped"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to remove"
+    }
+   ]
+  },
+  {
+   "k": "durability",
+   "pos": "NOUN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "ACID: a committed change is never lost"
+    }
+   ]
+  },
+  {
+   "k": "easy",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "not hard"
+    }
+   ]
+  },
+  {
+   "k": "editable",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "that can be changed"
+    }
+   ]
+  },
+  {
+   "k": "edit",
+   "pos": "VERB",
+   "forms": [
+    "edited",
+    "editing"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to change"
+    }
+   ]
+  },
+  {
+   "k": "encode",
+   "pos": "VERB",
+   "forms": [
+    "encoded"
+   ],
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to store in a special code form"
+    }
+   ]
+  },
+  {
+   "k": "encoding",
+   "pos": "NOUN",
+   "forms": [
+    "encodings"
+   ],
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a way to store values in a compact code"
+    }
+   ]
+  },
+  {
+   "k": "end",
+   "pos": "VERB",
+   "forms": [
+    "ends"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to finish"
+    }
+   ]
+  },
+  {
+   "k": "enforce",
+   "pos": "VERB",
+   "forms": [
+    "enforced"
+   ],
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to make sure a rule is kept"
+    }
+   ]
+  },
+  {
+   "k": "engineer",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a professional who builds systems"
+    }
+   ]
+  },
+  {
+   "k": "enormous",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "very large"
+    }
+   ]
+  },
+  {
+   "k": "enough",
+   "pos": "ADV",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "as much as needed"
+    }
+   ]
+  },
+  {
+   "k": "equivalent",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "equal in effect"
+    }
+   ]
+  },
+  {
+   "k": "erase",
+   "pos": "VERB",
+   "forms": [
+    "erased"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to remove completely"
+    }
+   ]
+  },
+  {
+   "k": "essential",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "very important"
+    }
+   ]
+  },
+  {
+   "k": "estimate",
+   "pos": "NOUN",
+   "forms": [
+    "estimates"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a calculated guess"
+    }
+   ]
+  },
+  {
+   "k": "exact",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "precise"
+    }
+   ]
+  },
+  {
+   "k": "example",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "an example"
+    }
+   ]
+  },
+  {
+   "k": "exchange",
+   "pos": "NOUN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "in a Spark plan: moving data between executors (a shuffle)"
+    }
+   ]
+  },
+  {
+   "k": "execute",
+   "pos": "VERB",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to run"
+    }
+   ]
+  },
+  {
+   "k": "exercise",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a task for practice"
+    }
+   ]
+  },
+  {
+   "k": "expect",
+   "pos": "VERB",
+   "forms": [
+    "expected"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to think something will happen"
+    }
+   ]
+  },
+  {
+   "k": "explain",
+   "pos": "VERB",
+   "forms": [
+    "explains"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to make clear"
+    }
+   ]
+  },
+  {
+   "k": "extend",
+   "pos": "VERB",
+   "forms": [
+    "extends"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to make larger, to add to"
+    }
+   ]
+  },
+  {
+   "k": "external",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "outside"
+    }
+   ]
+  },
+  {
+   "k": "extra",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "more than usual"
+    }
+   ]
+  },
+  {
+   "k": "extremely",
+   "pos": "ADV",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "very"
+    }
+   ]
+  },
+  {
+   "k": "fail",
+   "pos": "VERB",
+   "forms": [
+    "failed"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to not succeed"
+    }
+   ]
+  },
+  {
+   "k": "failure",
+   "pos": "NOUN",
+   "forms": [
+    "failures"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a case of not working"
+    }
+   ]
+  },
+  {
+   "k": "fallback",
+   "pos": "NOUN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the option used when others are not possible"
+    }
+   ]
+  },
+  {
+   "k": "feel",
+   "pos": "VERB",
+   "forms": [
+    "feels"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to seem"
+    }
+   ]
+  },
+  {
+   "k": "file-based",
+   "pos": "ADJ",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "kept in files"
+    }
+   ]
+  },
+  {
+   "k": "file-level",
+   "pos": "ADJ",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "at the level of whole files"
+    }
+   ]
+  },
+  {
+   "k": "file-oriented",
+   "pos": "ADJ",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "thinking in files"
+    }
+   ]
+  },
+  {
+   "k": "find",
+   "pos": "VERB",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to discover"
+    }
+   ]
+  },
+  {
+   "k": "first",
+   "pos": "ADV",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "before anything else"
+    }
+   ]
+  },
+  {
+   "k": "fix",
+   "pos": "VERB",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to repair"
+    }
+   ]
+  },
+  {
+   "k": "flexible",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "easy to change"
+    }
+   ]
+  },
+  {
+   "k": "food",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "food"
+    }
+   ]
+  },
+  {
+   "k": "footer",
+   "pos": "NOUN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the last part of a file, with its metadata"
+    }
+   ]
+  },
+  {
+   "k": "foundation",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the base"
+    }
+   ]
+  },
+  {
+   "k": "friendly",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "easy to use, suited"
+    }
+   ]
+  },
+  {
+   "k": "front office",
+   "pos": "PHRASE",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the part of a business that deals with customers"
+    }
+   ]
+  },
+  {
+   "k": "full",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "complete"
+    }
+   ]
+  },
+  {
+   "k": "fundamentally",
+   "pos": "ADV",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "at the most basic level"
+    }
+   ]
+  },
+  {
+   "k": "fuzzy",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "not clear"
+    }
+   ]
+  },
+  {
+   "k": "go",
+   "pos": "VERB",
+   "forms": [
+    "went"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to go"
+    }
+   ]
+  },
+  {
+   "k": "good",
+   "pos": "ADJ",
+   "forms": [
+    "well"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "good"
+    }
+   ]
+  },
+  {
+   "k": "govern",
+   "pos": "VERB",
+   "forms": [
+    "governs",
+    "governed"
+   ],
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to control access and rules"
+    }
+   ]
+  },
+  {
+   "k": "group",
+   "pos": "VERB",
+   "forms": [
+    "grouped"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to put together"
+    }
+   ]
+  },
+  {
+   "k": "grid",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a pattern of rows and columns"
+    }
+   ]
+  },
+  {
+   "k": "guarantee",
+   "pos": "NOUN",
+   "forms": [
+    "guarantees"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a promise that something will hold"
+    }
+   ]
+  },
+  {
+   "k": "guess",
+   "pos": "VERB",
+   "forms": [
+    "guessed"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to say without knowing"
+    }
+   ]
+  },
+  {
+   "k": "guide",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a document that explains"
+    }
+   ]
+  },
+  {
+   "k": "half",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "one of two equal parts"
+    }
+   ]
+  },
+  {
+   "k": "half-done",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "only partly finished"
+    }
+   ]
+  },
+  {
+   "k": "happen",
+   "pos": "VERB",
+   "forms": [
+    "happens",
+    "happened"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to take place"
+    }
+   ]
+  },
+  {
+   "k": "hierarchy",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "levels from top to bottom"
+    }
+   ]
+  },
+  {
+   "k": "hire",
+   "pos": "VERB",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to employ"
+    }
+   ]
+  },
+  {
+   "k": "history",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "what happened before"
+    }
+   ]
+  },
+  {
+   "k": "home",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "one's house"
+    }
+   ]
+  },
+  {
+   "k": "hood",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "\"under the hood\": what really happens inside"
+    }
+   ]
+  },
+  {
+   "k": "horizontal",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "going across"
+    }
+   ]
+  },
+  {
+   "k": "hypothesis",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a guess to be tested"
+    }
+   ]
+  },
+  {
+   "k": "idea",
+   "pos": "NOUN",
+   "forms": [
+    "ideas"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a thought"
+    }
+   ]
+  },
+  {
+   "k": "identify",
+   "pos": "VERB",
+   "forms": [
+    "identifying"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to find out which one"
+    }
+   ]
+  },
+  {
+   "k": "imagine",
+   "pos": "VERB",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to picture in the mind"
+    }
+   ]
+  },
+  {
+   "k": "immutable-ish",
+   "pos": "ADJ",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "almost never changed in place"
+    }
+   ]
+  },
+  {
+   "k": "important",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "important"
+    }
+   ]
+  },
+  {
+   "k": "imprecise",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "not exact"
+    }
+   ]
+  },
+  {
+   "k": "increase",
+   "pos": "VERB",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to make bigger"
+    }
+   ]
+  },
+  {
+   "k": "independent",
+   "pos": "ADJ",
+   "forms": [
+    "independently"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "not depending on another"
+    }
+   ]
+  },
+  {
+   "k": "individual",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "single, separate"
+    }
+   ]
+  },
+  {
+   "k": "inefficient",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "wasting time or resources"
+    }
+   ]
+  },
+  {
+   "k": "infrastructure",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the machines, networks and services something runs on"
+    }
+   ]
+  },
+  {
+   "k": "ingestion",
+   "pos": "NOUN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "loading new data into the platform"
+    }
+   ]
+  },
+  {
+   "k": "insight",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a deep understanding"
+    }
+   ]
+  },
+  {
+   "k": "instead",
+   "pos": "ADV",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "in place of"
+    }
+   ]
+  },
+  {
+   "k": "insufficient",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "not enough"
+    }
+   ]
+  },
+  {
+   "k": "integrate",
+   "pos": "VERB",
+   "forms": [
+    "integrates"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to combine into one"
+    }
+   ]
+  },
+  {
+   "k": "interleaving",
+   "pos": "NOUN",
+   "forms": [
+    "interleavings"
+   ],
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "operations mixed in time"
+    }
+   ]
+  },
+  {
+   "k": "intuitive",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "easy to understand without explanation"
+    }
+   ]
+  },
+  {
+   "k": "invariant",
+   "pos": "NOUN",
+   "forms": [
+    "invariants"
+   ],
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a rule that must always stay true"
+    }
+   ]
+  },
+  {
+   "k": "invisible",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "that cannot be seen"
+    }
+   ]
+  },
+  {
+   "k": "involve",
+   "pos": "VERB",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to include as a part"
+    }
+   ]
+  },
+  {
+   "k": "irrelevant",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "not needed here"
+    }
+   ]
+  },
+  {
+   "k": "job",
+   "pos": "NOUN",
+   "forms": [
+    "jobs"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a scheduled piece of work"
+    }
+   ]
+  },
+  {
+   "k": "key",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a column value used to match or group rows"
+    }
+   ]
+  },
+  {
+   "k": "knowledge",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "what one knows"
+    }
+   ]
+  },
+  {
+   "k": "lack",
+   "pos": "VERB",
+   "forms": [
+    "lacked"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to not have"
+    }
+   ]
+  },
+  {
+   "k": "lake",
+   "pos": "NOUN",
+   "forms": [
+    "lakes"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a data lake: a store of raw files"
+    }
+   ]
+  },
+  {
+   "k": "data lake",
+   "pos": "PHRASE",
+   "forms": [
+    "data lakes"
+   ],
+   "band": 3,
+   "key": true,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a cheap store of raw files in many formats"
+    }
+   ]
+  },
+  {
+   "k": "data warehouse",
+   "pos": "PHRASE",
+   "band": 3,
+   "key": true,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a system of structured tables optimised for SQL analysis"
+    }
+   ]
+  },
+  {
+   "k": "large",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "big"
+    }
+   ]
+  },
+  {
+   "k": "lean",
+   "pos": "VERB",
+   "forms": [
+    "leans"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to tend towards"
+    }
+   ]
+  },
+  {
+   "k": "learn",
+   "pos": "VERB",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to study"
+    }
+   ]
+  },
+  {
+   "k": "letter",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a letter of the alphabet"
+    }
+   ]
+  },
+  {
+   "k": "level",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a layer, a step"
+    }
+   ]
+  },
+  {
+   "k": "level-up",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a step to a higher level"
+    }
+   ]
+  },
+  {
+   "k": "line",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a line"
+    }
+   ]
+  },
+  {
+   "k": "list",
+   "pos": "VERB",
+   "forms": [
+    "listing"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to show items one after another"
+    }
+   ]
+  },
+  {
+   "k": "live",
+   "pos": "VERB",
+   "forms": [
+    "lives"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to be located"
+    }
+   ]
+  },
+  {
+   "k": "local",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "on this machine"
+    }
+   ]
+  },
+  {
+   "k": "locate",
+   "pos": "VERB",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to find the place of"
+    }
+   ]
+  },
+  {
+   "k": "location",
+   "pos": "NOUN",
+   "forms": [
+    "locations"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a place"
+    }
+   ]
+  },
+  {
+   "k": "longer",
+   "pos": "ADV",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "\"no longer\": not any more"
+    }
+   ]
+  },
+  {
+   "k": "look",
+   "pos": "VERB",
+   "forms": [
+    "looks"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to seem"
+    }
+   ]
+  },
+  {
+   "k": "loop",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a repeated cycle"
+    }
+   ]
+  },
+  {
+   "k": "machine",
+   "pos": "NOUN",
+   "forms": [
+    "machines"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a computer"
+    }
+   ]
+  },
+  {
+   "k": "mainly",
+   "pos": "ADV",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "mostly"
+    }
+   ]
+  },
+  {
+   "k": "major",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "big, important"
+    }
+   ]
+  },
+  {
+   "k": "manage",
+   "pos": "VERB",
+   "forms": [
+    "managed"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to run and look after"
+    }
+   ]
+  },
+  {
+   "k": "management",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "running and looking after"
+    }
+   ]
+  },
+  {
+   "k": "map",
+   "pos": "VERB",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to match one thing to another"
+    }
+   ]
+  },
+  {
+   "k": "mastery",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "full skill"
+    }
+   ]
+  },
+  {
+   "k": "meaning",
+   "pos": "NOUN",
+   "forms": [
+    "meanings"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "what something means"
+    }
+   ]
+  },
+  {
+   "k": "mechanics",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "how something works in detail"
+    }
+   ]
+  },
+  {
+   "k": "meet",
+   "pos": "VERB",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to come across"
+    }
+   ]
+  },
+  {
+   "k": "memorize",
+   "pos": "VERB",
+   "forms": [
+    "memorizing"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to learn by heart"
+    }
+   ]
+  },
+  {
+   "k": "memory",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the computer's working memory (RAM)"
+    }
+   ]
+  },
+  {
+   "k": "mental",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "in the mind"
+    }
+   ]
+  },
+  {
+   "k": "merge",
+   "pos": "VERB",
+   "forms": [
+    "merged"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to combine into one"
+    }
+   ]
+  },
+  {
+   "k": "metric",
+   "pos": "NOUN",
+   "forms": [
+    "metrics"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a measured number"
+    }
+   ]
+  },
+  {
+   "k": "missing",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "not there"
+    }
+   ]
+  },
+  {
+   "k": "mix",
+   "pos": "VERB",
+   "forms": [
+    "mixed",
+    "mixing"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to combine without order"
+    }
+   ]
+  },
+  {
+   "k": "modification",
+   "pos": "NOUN",
+   "forms": [
+    "modifications"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a change"
+    }
+   ]
+  },
+  {
+   "k": "moment",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a point in time"
+    }
+   ]
+  },
+  {
+   "k": "move",
+   "pos": "VERB",
+   "forms": [
+    "moves",
+    "moving"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to go or carry to another place"
+    }
+   ]
+  },
+  {
+   "k": "mutable",
+   "pos": "ADJ",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "that can be changed in place"
+    }
+   ]
+  },
+  {
+   "k": "naive",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "too simple"
+    }
+   ]
+  },
+  {
+   "k": "namespace",
+   "pos": "NOUN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a system of names in levels (catalog.schema.table)"
+    }
+   ]
+  },
+  {
+   "k": "necessarily",
+   "pos": "ADV",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "always, in every case"
+    }
+   ]
+  },
+  {
+   "k": "nested",
+   "pos": "ADJ",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "one inside another"
+    }
+   ]
+  },
+  {
+   "k": "nobody",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "no person"
+    }
+   ]
+  },
+  {
+   "k": "non-equi",
+   "pos": "ADJ",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a join whose condition is not \"equal\" (e.g. <, BETWEEN)"
+    }
+   ]
+  },
+  {
+   "k": "normal",
+   "pos": "ADJ",
+   "forms": [
+    "normally"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "usual"
+    }
+   ]
+  },
+  {
+   "k": "note",
+   "pos": "NOUN",
+   "forms": [
+    "notes"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "short written text"
+    }
+   ]
+  },
+  {
+   "k": "nothing",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "not anything"
+    }
+   ]
+  },
+  {
+   "k": "notice",
+   "pos": "VERB",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to see, to pay attention to"
+    }
+   ]
+  },
+  {
+   "k": "object storage",
+   "pos": "PHRASE",
+   "forms": [
+    "object-storage"
+   ],
+   "band": 3,
+   "key": true,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "cloud storage of files as objects (S3, ADLS, GCS)"
+    }
+   ]
+  },
+  {
+   "k": "office",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a place of work"
+    }
+   ]
+  },
+  {
+   "k": "one-sentence",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "in one sentence"
+    }
+   ]
+  },
+  {
+   "k": "OOM",
+   "pos": "X",
+   "forms": [
+    "OOMs"
+   ],
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "out of memory: a process ran out of RAM"
+    }
+   ]
+  },
+  {
+   "k": "open",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "open"
+    }
+   ]
+  },
+  {
+   "k": "operate",
+   "pos": "VERB",
+   "forms": [
+    "operates"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to run, to manage"
+    }
+   ]
+  },
+  {
+   "k": "operation",
+   "pos": "NOUN",
+   "forms": [
+    "operations"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "an action on data"
+    }
+   ]
+  },
+  {
+   "k": "operational",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "about running systems day to day"
+    }
+   ]
+  },
+  {
+   "k": "optimize",
+   "pos": "VERB",
+   "forms": [
+    "optimized",
+    "re-optimizes"
+   ],
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to make faster or cheaper"
+    }
+   ]
+  },
+  {
+   "k": "optimization",
+   "pos": "NOUN",
+   "forms": [
+    "optimizations"
+   ],
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "making something faster or cheaper"
+    }
+   ]
+  },
+  {
+   "k": "optimizer",
+   "pos": "NOUN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the part of the engine that chooses the query plan"
+    }
+   ]
+  },
+  {
+   "k": "orchestration",
+   "pos": "NOUN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "scheduling and connecting jobs"
+    }
+   ]
+  },
+  {
+   "k": "organization",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "how things are arranged"
+    }
+   ]
+  },
+  {
+   "k": "organize",
+   "pos": "VERB",
+   "forms": [
+    "organized",
+    "organizes"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to arrange"
+    }
+   ]
+  },
+  {
+   "k": "otherwise",
+   "pos": "ADV",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "in a different way"
+    }
+   ]
+  },
+  {
+   "k": "owner",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "who owns something"
+    }
+   ]
+  },
+  {
+   "k": "ownership",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "who owns something"
+    }
+   ]
+  },
+  {
+   "k": "page",
+   "pos": "NOUN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "in Parquet: the smallest unit inside a column chunk"
+    }
+   ]
+  },
+  {
+   "k": "pair",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "two together"
+    }
+   ]
+  },
+  {
+   "k": "partial",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "not complete"
+    }
+   ]
+  },
+  {
+   "k": "path",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the address of a file"
+    }
+   ]
+  },
+  {
+   "k": "pattern",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a regular way something happens"
+    }
+   ]
+  },
+  {
+   "k": "anti-pattern",
+   "pos": "NOUN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a common but bad way of doing something"
+    }
+   ]
+  },
+  {
+   "k": "pay",
+   "pos": "VERB",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to pay"
+    }
+   ]
+  },
+  {
+   "k": "peak",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the busiest time"
+    }
+   ]
+  },
+  {
+   "k": "performance",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "how fast something works"
+    }
+   ]
+  },
+  {
+   "k": "permission",
+   "pos": "NOUN",
+   "forms": [
+    "permissions"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the right to do something"
+    }
+   ]
+  },
+  {
+   "k": "persist",
+   "pos": "VERB",
+   "forms": [
+    "persists",
+    "persisted"
+   ],
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to remain stored"
+    }
+   ]
+  },
+  {
+   "k": "piece",
+   "pos": "NOUN",
+   "forms": [
+    "pieces"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a part"
+    }
+   ]
+  },
+  {
+   "k": "pipeline",
+   "pos": "NOUN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a chain of data processing steps"
+    }
+   ]
+  },
+  {
+   "k": "potentially",
+   "pos": "ADV",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "possibly"
+    }
+   ]
+  },
+  {
+   "k": "precise",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "exact"
+    }
+   ]
+  },
+  {
+   "k": "predictive",
+   "pos": "ADJ",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "based on predictions"
+    }
+   ]
+  },
+  {
+   "k": "preview",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a first short look"
+    }
+   ]
+  },
+  {
+   "k": "process",
+   "pos": "VERB",
+   "forms": [
+    "processes",
+    "processing"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to work on data"
+    }
+   ]
+  },
+  {
+   "k": "produce",
+   "pos": "VERB",
+   "forms": [
+    "produces"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to make"
+    }
+   ]
+  },
+  {
+   "k": "professional",
+   "pos": "ADJ",
+   "forms": [
+    "professionally"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "of an expert"
+    }
+   ]
+  },
+  {
+   "k": "program",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a computer program"
+    }
+   ]
+  },
+  {
+   "k": "publish",
+   "pos": "VERB",
+   "forms": [
+    "publishing"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to make available"
+    }
+   ]
+  },
+  {
+   "k": "question",
+   "pos": "NOUN",
+   "forms": [
+    "questions"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a question"
+    }
+   ]
+  },
+  {
+   "k": "querying",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "asking queries over data"
+    }
+   ]
+  },
+  {
+   "k": "reason",
+   "pos": "NOUN",
+   "forms": [
+    "reasoning"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "why; thinking step by step"
+    }
+   ]
+  },
+  {
+   "k": "record",
+   "pos": "VERB",
+   "forms": [
+    "recording"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to write down"
+    }
+   ]
+  },
+  {
+   "k": "reference",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a pointer to something"
+    }
+   ]
+  },
+  {
+   "k": "refine",
+   "pos": "VERB",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to make more exact"
+    }
+   ]
+  },
+  {
+   "k": "region",
+   "pos": "NOUN",
+   "forms": [
+    "regions"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a part, an area"
+    }
+   ]
+  },
+  {
+   "k": "relevant",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "needed here"
+    }
+   ]
+  },
+  {
+   "k": "remain",
+   "pos": "VERB",
+   "forms": [
+    "remains"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to stay"
+    }
+   ]
+  },
+  {
+   "k": "remeasure",
+   "pos": "VERB",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to measure again"
+    }
+   ]
+  },
+  {
+   "k": "remove",
+   "pos": "VERB",
+   "forms": [
+    "removed"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to take away"
+    }
+   ]
+  },
+  {
+   "k": "replace",
+   "pos": "VERB",
+   "forms": [
+    "replaces",
+    "replacing"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to put a new one in place of"
+    }
+   ]
+  },
+  {
+   "k": "replay",
+   "pos": "VERB",
+   "forms": [
+    "replaying"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to apply again in order"
+    }
+   ]
+  },
+  {
+   "k": "request",
+   "pos": "VERB",
+   "forms": [
+    "requested"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to ask for"
+    }
+   ]
+  },
+  {
+   "k": "resource",
+   "pos": "NOUN",
+   "forms": [
+    "resources"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "what is available to do work (CPUs, memory, machines)"
+    }
+   ]
+  },
+  {
+   "k": "respect",
+   "pos": "VERB",
+   "forms": [
+    "respects",
+    "respecting"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to keep (a rule)"
+    }
+   ]
+  },
+  {
+   "k": "responsible",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "being the cause"
+    }
+   ]
+  },
+  {
+   "k": "restart",
+   "pos": "VERB",
+   "forms": [
+    "restarting"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to start again"
+    }
+   ]
+  },
+  {
+   "k": "restaurant",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a restaurant"
+    }
+   ]
+  },
+  {
+   "k": "rewrite",
+   "pos": "NOUN",
+   "forms": [
+    "rewriting"
+   ],
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "writing a file again with changes"
+    }
+   ]
+  },
+  {
+   "k": "rigid",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "hard to change"
+    }
+   ]
+  },
+  {
+   "k": "role",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a function, a job"
+    }
+   ]
+  },
+  {
+   "k": "room",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a room"
+    }
+   ]
+  },
+  {
+   "k": "roughly",
+   "pos": "ADV",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "approximately"
+    }
+   ]
+  },
+  {
+   "k": "round",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "one stage of a repeated process"
+    }
+   ]
+  },
+  {
+   "k": "row-oriented",
+   "pos": "ADJ",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "storing whole rows together"
+    }
+   ]
+  },
+  {
+   "k": "row group",
+   "pos": "PHRASE",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "in Parquet: a horizontal slice of rows inside a file"
+    }
+   ]
+  },
+  {
+   "k": "column chunk",
+   "pos": "PHRASE",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "in Parquet: the data of one column within one row group"
+    }
+   ]
+  },
+  {
+   "k": "rule",
+   "pos": "NOUN",
+   "forms": [
+    "rules"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a rule"
+    }
+   ]
+  },
+  {
+   "k": "runtime",
+   "pos": "NOUN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "while the program is running"
+    }
+   ]
+  },
+  {
+   "k": "save",
+   "pos": "VERB",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to store"
+    }
+   ]
+  },
+  {
+   "k": "say",
+   "pos": "VERB",
+   "forms": [
+    "says"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to say"
+    }
+   ]
+  },
+  {
+   "k": "scale",
+   "pos": "VERB",
+   "forms": [
+    "scales"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to grow (or shrink) with the amount of work"
+    }
+   ]
+  },
+  {
+   "k": "scalable",
+   "pos": "ADJ",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "able to grow with more data or users"
+    }
+   ]
+  },
+  {
+   "k": "scan",
+   "pos": "VERB",
+   "forms": [
+    "scanned"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to read through data"
+    }
+   ]
+  },
+  {
+   "k": "section",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a part of a text"
+    }
+   ]
+  },
+  {
+   "k": "security",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "protection against misuse"
+    }
+   ]
+  },
+  {
+   "k": "selection",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "choosing some of many"
+    }
+   ]
+  },
+  {
+   "k": "self-check",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a test you give yourself"
+    }
+   ]
+  },
+  {
+   "k": "send",
+   "pos": "VERB",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to send"
+    }
+   ]
+  },
+  {
+   "k": "sense",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "meaning"
+    }
+   ]
+  },
+  {
+   "k": "separate",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "not together"
+    }
+   ]
+  },
+  {
+   "k": "separation",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "keeping apart"
+    }
+   ]
+  },
+  {
+   "k": "serverless",
+   "pos": "ADJ",
+   "band": 3,
+   "key": true,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "compute that Databricks runs for you; you do not manage machines"
+    }
+   ]
+  },
+  {
+   "k": "service",
+   "pos": "NOUN",
+   "forms": [
+    "services"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a system that provides a function"
+    }
+   ]
+  },
+  {
+   "k": "setting",
+   "pos": "NOUN",
+   "forms": [
+    "settings"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "an option you can change"
+    }
+   ]
+  },
+  {
+   "k": "severe",
+   "pos": "ADJ",
+   "forms": [
+    "severely"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "very bad"
+    }
+   ]
+  },
+  {
+   "k": "similar",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "almost the same"
+    }
+   ]
+  },
+  {
+   "k": "simplified",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "made simpler"
+    }
+   ]
+  },
+  {
+   "k": "simply",
+   "pos": "ADV",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "only, just"
+    }
+   ]
+  },
+  {
+   "k": "sit",
+   "pos": "VERB",
+   "forms": [
+    "sits"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to be located"
+    }
+   ]
+  },
+  {
+   "k": "six",
+   "pos": "NUM",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "6"
+    }
+   ]
+  },
+  {
+   "k": "three",
+   "pos": "NUM",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "3"
+    }
+   ]
+  },
+  {
+   "k": "two",
+   "pos": "NUM",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "2"
+    }
+   ]
+  },
+  {
+   "k": "size",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "how big"
+    }
+   ]
+  },
+  {
+   "k": "skill",
+   "pos": "NOUN",
+   "forms": [
+    "skills"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "ability"
+    }
+   ]
+  },
+  {
+   "k": "skip",
+   "pos": "VERB",
+   "forms": [
+    "skips",
+    "skipping"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to leave out"
+    }
+   ]
+  },
+  {
+   "k": "data skipping",
+   "pos": "PHRASE",
+   "band": 3,
+   "key": true,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "not reading files whose statistics show they cannot match"
+    }
+   ]
+  },
+  {
+   "k": "slice",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a thin part"
+    }
+   ]
+  },
+  {
+   "k": "small",
+   "pos": "ADJ",
+   "forms": [
+    "smallest"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "little"
+    }
+   ]
+  },
+  {
+   "k": "snippet",
+   "pos": "NOUN",
+   "forms": [
+    "snippets"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a short piece of code"
+    }
+   ]
+  },
+  {
+   "k": "sophisticated",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "complex and advanced"
+    }
+   ]
+  },
+  {
+   "k": "sort",
+   "pos": "VERB",
+   "forms": [
+    "sorted"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to put in order"
+    }
+   ]
+  },
+  {
+   "k": "sound",
+   "pos": "VERB",
+   "forms": [
+    "sounds"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to seem when heard"
+    }
+   ]
+  },
+  {
+   "k": "source",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "where something comes from"
+    }
+   ]
+  },
+  {
+   "k": "specify",
+   "pos": "VERB",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to state exactly"
+    }
+   ]
+  },
+  {
+   "k": "spill",
+   "pos": "NOUN",
+   "forms": [
+    "spilling"
+   ],
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "writing data to disk because memory is full"
+    }
+   ]
+  },
+  {
+   "k": "split",
+   "pos": "VERB",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to divide"
+    }
+   ]
+  },
+  {
+   "k": "spot",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "\"weak spot\": a weak point"
+    }
+   ]
+  },
+  {
+   "k": "stale",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "out of date"
+    }
+   ]
+  },
+  {
+   "k": "standalone",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "on its own"
+    }
+   ]
+  },
+  {
+   "k": "start",
+   "pos": "VERB",
+   "forms": [
+    "starts"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to begin"
+    }
+   ]
+  },
+  {
+   "k": "stay",
+   "pos": "VERB",
+   "forms": [
+    "staying"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to remain"
+    }
+   ]
+  },
+  {
+   "k": "stop",
+   "pos": "VERB",
+   "forms": [
+    "stops"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to end"
+    }
+   ]
+  },
+  {
+   "k": "strategy",
+   "pos": "NOUN",
+   "forms": [
+    "strategies"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a planned way to do something"
+    }
+   ]
+  },
+  {
+   "k": "structured",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "organised in a fixed form"
+    }
+   ]
+  },
+  {
+   "k": "supply",
+   "pos": "VERB",
+   "forms": [
+    "supplies"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to provide"
+    }
+   ]
+  },
+  {
+   "k": "suppose",
+   "pos": "VERB",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to imagine as true"
+    }
+   ]
+  },
+  {
+   "k": "symptom",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a sign of a problem"
+    }
+   ]
+  },
+  {
+   "k": "syntax",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the rules of how code is written"
+    }
+   ]
+  },
+  {
+   "k": "table-state",
+   "pos": "NOUN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the state of a table"
+    }
+   ]
+  },
+  {
+   "k": "temp",
+   "pos": "ADJ",
+   "forms": [
+    "temporary"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "for a short time only"
+    }
+   ]
+  },
+  {
+   "k": "terminate",
+   "pos": "VERB",
+   "forms": [
+    "terminated"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to stop, to shut down"
+    }
+   ]
+  },
+  {
+   "k": "test",
+   "pos": "VERB",
+   "forms": [
+    "tests"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to check"
+    }
+   ]
+  },
+  {
+   "k": "theorem",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a proven statement"
+    }
+   ]
+  },
+  {
+   "k": "thing",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "something"
+    }
+   ]
+  },
+  {
+   "k": "think",
+   "pos": "VERB",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to use your mind"
+    }
+   ]
+  },
+  {
+   "k": "three-level",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "with three levels"
+    }
+   ]
+  },
+  {
+   "k": "tiny",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "very small"
+    }
+   ]
+  },
+  {
+   "k": "tomorrow",
+   "pos": "ADV",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the next day"
+    }
+   ]
+  },
+  {
+   "k": "topic",
+   "pos": "NOUN",
+   "forms": [
+    "topics"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a subject"
+    }
+   ]
+  },
+  {
+   "k": "touch",
+   "pos": "VERB",
+   "forms": [
+    "touched"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to change, to handle"
+    }
+   ]
+  },
+  {
+   "k": "track",
+   "pos": "VERB",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to follow and record"
+    }
+   ]
+  },
+  {
+   "k": "transformation",
+   "pos": "NOUN",
+   "forms": [
+    "transformations"
+   ],
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "an operation that turns data into new data"
+    }
+   ]
+  },
+  {
+   "k": "trap",
+   "pos": "NOUN",
+   "forms": [
+    "traps"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a mistake that is easy to make"
+    }
+   ]
+  },
+  {
+   "k": "treat",
+   "pos": "VERB",
+   "forms": [
+    "treating"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to deal with as"
+    }
+   ]
+  },
+  {
+   "k": "trivial",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "very simple"
+    }
+   ]
+  },
+  {
+   "k": "turn",
+   "pos": "VERB",
+   "forms": [
+    "turns"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to become"
+    }
+   ]
+  },
+  {
+   "k": "underneath",
+   "pos": "ADV",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "below"
+    }
+   ]
+  },
+  {
+   "k": "underpin",
+   "pos": "VERB",
+   "forms": [
+    "underpinning"
+   ],
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to support from below"
+    }
+   ]
+  },
+  {
+   "k": "understand",
+   "pos": "VERB",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to understand"
+    }
+   ]
+  },
+  {
+   "k": "unit",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "one piece of measure"
+    }
+   ]
+  },
+  {
+   "k": "untouched",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "not changed"
+    }
+   ]
+  },
+  {
+   "k": "uncommitted",
+   "pos": "ADJ",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "not yet committed"
+    }
+   ]
+  },
+  {
+   "k": "usually",
+   "pos": "ADV",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "most of the time"
+    }
+   ]
+  },
+  {
+   "k": "useful",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "helpful"
+    }
+   ]
+  },
+  {
+   "k": "value",
+   "pos": "NOUN",
+   "forms": [
+    "values"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a piece of data in a cell"
+    }
+   ]
+  },
+  {
+   "k": "vanish",
+   "pos": "VERB",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to disappear"
+    }
+   ]
+  },
+  {
+   "k": "violate",
+   "pos": "VERB",
+   "forms": [
+    "violating"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to break (a rule)"
+    }
+   ]
+  },
+  {
+   "k": "visible",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "that can be seen"
+    }
+   ]
+  },
+  {
+   "k": "want",
+   "pos": "VERB",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to wish"
+    }
+   ]
+  },
+  {
+   "k": "way",
+   "pos": "NOUN",
+   "forms": [
+    "ways"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a method"
+    }
+   ]
+  },
+  {
+   "k": "weak",
+   "pos": "ADJ",
+   "forms": [
+    "weaker"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "not strong"
+    }
+   ]
+  },
+  {
+   "k": "word",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a word"
+    }
+   ]
+  },
+  {
+   "k": "workload",
+   "pos": "NOUN",
+   "forms": [
+    "workloads"
+   ],
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the amount and kind of work a system runs"
+    }
+   ]
+  },
+  {
+   "k": "workspace",
+   "pos": "NOUN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a Databricks workspace: the environment of a team"
+    }
+   ]
+  },
+  {
+   "k": "wrong",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "not right"
+    }
+   ]
+  },
+  {
+   "k": "zero",
+   "pos": "NUM",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "0"
+    }
+   ]
+  },
+  {
+   "k": "Monday",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "day of the week"
+    }
+   ]
+  },
+  {
+   "k": "Tuesday",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "day of the week"
+    }
+   ]
+  },
+  {
+   "k": "Wednesday",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "day of the week"
+    }
+   ]
+  },
+  {
+   "k": "answer",
+   "pos": "NOUN",
+   "forms": [
+    "answers"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a reply"
+    },
+    {
+     "id": "2",
+     "gloss": "to reply",
+     "pos": "VERB"
+    }
+   ]
+  },
+  {
+   "k": "action",
+   "pos": "NOUN",
+   "forms": [
+    "actions"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "in the Delta log: one change (ADD or REMOVE a file)"
+    }
+   ]
+  },
+  {
+   "k": "afterward",
+   "pos": "ADV",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "later"
+    }
+   ]
+  },
+  {
+   "k": "aim",
+   "pos": "VERB",
+   "forms": [
+    "aims"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to have as a goal"
+    }
+   ]
+  },
+  {
+   "k": "anything",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "any thing"
+    }
+   ]
+  },
+  {
+   "k": "apply",
+   "pos": "VERB",
+   "forms": [
+    "applied"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to use on"
+    }
+   ]
+  },
+  {
+   "k": "area",
+   "pos": "NOUN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a field, a topic"
+    }
+   ]
+  },
+  {
+   "k": "artifact",
+   "pos": "NOUN",
+   "forms": [
+    "artifacts"
+   ],
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a file produced by a process"
+    }
+   ]
+  },
+  {
+   "k": "asset",
+   "pos": "NOUN",
+   "forms": [
+    "assets"
+   ],
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "something of value that is managed (tables, models, files)"
+    }
+   ]
+  },
+  {
+   "k": "associate",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the first level of a certification"
+    }
+   ]
+  },
+  {
+   "k": "associated",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "connected with"
+    }
+   ]
+  },
+  {
+   "k": "automatically",
+   "pos": "ADV",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "by itself"
+    }
+   ]
+  },
+  {
+   "k": "automation",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "doing work without people"
+    }
+   ]
+  },
+  {
+   "k": "bundle",
+   "pos": "NOUN",
+   "forms": [
+    "bundles"
+   ],
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a package of project files deployed together"
+    }
+   ]
+  },
+  {
+   "k": "CAP",
+   "pos": "X",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "CAP theorem: consistency, availability, partition tolerance"
+    }
+   ]
+  },
+  {
+   "k": "data-science",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "about data science"
+    }
+   ]
+  },
+  {
+   "k": "database-table",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a table of a database"
+    }
+   ]
+  },
+  {
+   "k": "DataFrame",
+   "pos": "X",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a Spark table-like object in code"
+    }
+   ]
+  },
+  {
+   "k": "decorative",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "only for show"
+    }
+   ]
+  },
+  {
+   "k": "Delta Lake",
+   "pos": "PROPN",
+   "band": 3,
+   "key": true,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the open table format of Databricks: Parquet files plus a transaction log"
+    }
+   ]
+  },
+  {
+   "k": "Unity Catalog",
+   "pos": "PROPN",
+   "band": 3,
+   "key": true,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the Databricks layer for names, ownership and permissions of data and AI assets"
+    }
+   ]
+  },
+  {
+   "k": "Spark UI",
+   "pos": "PROPN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the web page of Spark that shows jobs, stages and tasks"
+    }
+   ]
+  },
+  {
+   "k": "Time Travel",
+   "pos": "PROPN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "reading an older version of a Delta table"
+    }
+   ]
+  },
+  {
+   "k": "Liquid Clustering",
+   "pos": "PROPN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a Delta feature that keeps similar values together in files"
+    }
+   ]
+  },
+  {
+   "k": "Adaptive Query Execution",
+   "pos": "PROPN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "AQE: Spark changes the plan while running, using real statistics"
+    }
+   ]
+  },
+  {
+   "k": "Broadcast Hash Join",
+   "pos": "PROPN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "BHJ: the small table is copied to every executor"
+    }
+   ]
+  },
+  {
+   "k": "Sort-Merge Join",
+   "pos": "PROPN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "SMJ: both sides are shuffled, sorted and merged"
+    }
+   ]
+  },
+  {
+   "k": "Shuffled Hash Join",
+   "pos": "PROPN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "SHJ: both sides are shuffled, then a hash table per partition"
+    }
+   ]
+  },
+  {
+   "k": "Broadcast Nested Loop Join",
+   "pos": "PROPN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "BNLJ: the fallback for non-equi joins"
+    }
+   ]
+  },
+  {
+   "k": "transaction log",
+   "pos": "PHRASE",
+   "forms": [
+    "transaction logs"
+   ],
+   "band": 3,
+   "key": true,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the ordered list of commits that says which files form each table version"
+    }
+   ]
+  },
+  {
+   "k": "catalog",
+   "pos": "NOUN",
+   "forms": [
+    "catalogs"
+   ],
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "in Unity Catalog: the first level of a name (catalog.schema.table)"
+    }
+   ]
+  },
+  {
+   "k": "hash table",
+   "pos": "PHRASE",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a lookup structure built from keys"
+    }
+   ]
+  },
+  {
+   "k": "row pair",
+   "pos": "PHRASE",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "two rows, one from each side"
+    }
+   ]
+  },
+  {
+   "k": "weak spot",
+   "pos": "PHRASE",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a weak point, what still needs work"
+    }
+   ]
+  },
+  {
+   "k": "under the hood",
+   "pos": "PHRASE",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "what really happens inside"
+    }
+   ]
+  },
+  {
+   "k": "no longer",
+   "pos": "PHRASE",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "not any more"
+    }
+   ]
+  },
+  {
+   "k": "come and go",
+   "pos": "PHRASE",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "appear and disappear"
+    }
+   ]
+  },
+  {
+   "k": "later",
+   "pos": "ADV",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "after some time"
+    }
+   ]
+  },
+  {
+   "k": "troubleshooting",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "finding and solving problems in a running system"
+    }
+   ]
+  },
+  {
+   "k": "absolutely",
+   "pos": "ADV",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "completely, in every way"
+    }
+   ]
+  },
+  {
+   "k": "else",
+   "pos": "ADV",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "other, different"
+    }
+   ]
+  },
+  {
+   "k": "English",
+   "pos": "PROPN",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the English language"
+    }
+   ]
+  },
+  {
+   "k": "throw",
+   "pos": "VERB",
+   "forms": [
+    "throwing"
+   ],
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "\"throw more compute at\": spend more resources on a problem"
+    }
+   ]
+  }
+ ],
+ "keep": [
+  "Databricks",
+  "Databricks-managed",
+  "Databricks-style",
+  "Spark",
+  "PySpark",
+  "Parquet",
+  "Photon",
+  "Lakeflow",
+  "Delta",
+  "Amazon",
+  "Azure",
+  "Google",
+  "S3",
+  "ADLS",
+  "GCS",
+  "AWS",
+  "Excel",
+  "Maria",
+  "John",
+  "Anna",
+  "GR",
+  "US",
+  "DE",
+  "TB",
+  "GB",
+  "UI",
+  "BI",
+  "ML",
+  "AI",
+  "SQL",
+  "CI",
+  "CD",
+  "DevOps",
+  "UC",
+  "AQE",
+  "BHJ",
+  "SMJ",
+  "SHJ",
+  "BNLJ",
+  "Catalyst",
+  "Metastore",
+  "ReadSchema",
+  "saveAsTable",
+  "df",
+  "Hive",
+  "Q1",
+  "ADD",
+  "REMOVE",
+  "DELETE",
+  "UPDATE",
+  "MERGE",
+  "INSERT"
+ ],
+ "sections": {
+  "ch01-s01": {
+   "terms": [
+    "shuffle",
+    "partition",
+    "executor",
+    "join",
+    "statistics",
+    "Adaptive Query Execution",
+    "Spark UI",
+    "Broadcast Hash Join",
+    "Sort-Merge Join"
+   ]
+  },
+  "ch01-s02": {
+   "terms": [
+    "storage",
+    "compute",
+    "persistent",
+    "lifetime",
+    "object storage",
+    "lakehouse",
+    "executor",
+    "cluster"
+   ]
+  },
+  "ch01-s03": {
+   "terms": [
+    "file",
+    "table",
+    "columnar",
+    "metadata",
+    "transaction",
+    "update",
+    "row",
+    "version"
+   ]
+  },
+  "ch01-s04": {
+   "terms": [
+    "columnar",
+    "column",
+    "row group",
+    "column chunk",
+    "page",
+    "compression",
+    "encoding",
+    "pruning",
+    "data skipping",
+    "statistics"
+   ]
+  },
+  "ch01-s05": {
+   "terms": [
+    "ACID",
+    "transaction",
+    "atomicity",
+    "consistency",
+    "isolation",
+    "durability",
+    "snapshot",
+    "commit",
+    "concurrent",
+    "reader",
+    "writer"
+   ]
+  },
+  "ch01-s06": {
+   "terms": [
+    "Delta Lake",
+    "transaction log",
+    "commit",
+    "action",
+    "snapshot",
+    "version",
+    "membership",
+    "Time Travel"
+   ]
+  },
+  "ch01-s07": {
+   "terms": [
+    "DML",
+    "rewrite",
+    "commit",
+    "snapshot",
+    "replacement",
+    "physically",
+    "logical"
+   ]
+  },
+  "ch01-s08": {
+   "terms": [
+    "data lake",
+    "data warehouse",
+    "lakehouse",
+    "governance",
+    "orchestration",
+    "schema",
+    "raw"
+   ]
+  },
+  "ch01-s09": {
+   "terms": [
+    "metadata",
+    "Unity Catalog",
+    "catalog",
+    "schema",
+    "namespace",
+    "governance",
+    "permission",
+    "ownership"
+   ]
+  },
+  "ch01-s10": {
+   "terms": [
+    "engine",
+    "format",
+    "Delta Lake",
+    "Unity Catalog",
+    "persistent",
+    "lifetime",
+    "distributed",
+    "semantics"
+   ]
+  },
+  "ch01-s11": {
+   "terms": [
+    "control plane",
+    "compute plane",
+    "serverless",
+    "classic",
+    "workload",
+    "infrastructure",
+    "backend"
+   ]
+  },
+  "ch01-s12": {
+   "terms": [
+    "debugging",
+    "layer",
+    "hypothesis",
+    "evidence",
+    "symptom",
+    "skew",
+    "shuffle",
+    "spill",
+    "anti-pattern",
+    "metric"
+   ]
+  }
+ },
+ "anchors": [
+  {
+   "at": "ch01-s06/b53dvd85x03",
+   "quote": "order",
+   "prefix": "Replay them in ",
+   "k": "order",
+   "sense": "2"
+  }
+ ]
+}
