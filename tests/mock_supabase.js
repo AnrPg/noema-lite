@@ -50,10 +50,10 @@ function start({ port = 54321, staticDir = null, configOverride = null, maxObjec
         const used = so.used(uid);
         if (r.room && !(so.joined(r.room, uid) && so.state.rooms[r.room]?.kind === 'group')) return json(res, 400, { code: 'P0001', message: 'not a member of this group' });
         if (r.uploader && r.uploader !== uid) return rls(res);
-        if (!VKINDS.includes(r.kind) || !VPATH.test(r.path || '') || !(r.size > 0 && r.size <= 20971520) || !r.title || !r.university || !r.department || !r.course || !r.year || !(r.semester >= 1 && r.semester <= 12) || !/^[a-z][a-z_]{1,40}$/.test(r.subject || '') || !r.language) return json(res, 400, { code: '23514', message: 'new row violates check constraint' });
+        if (!VKINDS.includes(r.kind) || !VPATH.test(r.path || '') || !(r.size > 0 && r.size <= 20971520) || !r.title || (r.semester != null && !(r.semester >= 1 && r.semester <= 12)) || !/^[a-z][a-z_]{1,40}$/.test(r.subject || '') || !r.language) return json(res, 400, { code: '23514', message: 'new row violates check constraint' });
         if (used + r.size > 52428800) return json(res, 400, { code: 'P0001', message: `vault quota: ${used} of 52428800 bytes used` });
         if (vfiles.some(f => f.path === r.path || f.id === r.id)) return dupe(res);
-        vfiles.push({ id: r.id || crypto.randomUUID(), ...r, uploader: uid, university: tidy(r.university), department: tidy(r.department), course: tidy(r.course), professor: tidy(r.professor) || null,
+        vfiles.push({ id: r.id || crypto.randomUUID(), ...r, uploader: uid, university: tidy(r.university) || null, department: tidy(r.department) || null, course: tidy(r.course) || null, professor: tidy(r.professor) || null,
           room: r.room || null, uploader_name: r.show_name ? (profiles[uid]?.display_name || users[uid]?.meta?.name || null) : null, status: 'pending', rating_sum: 0, rating_n: 0, downloads: 0, used: 0, reports: 0, created_at: now() }); }
         return json(res, 201); }
       if (M === 'PATCH') { const keep = ['id', 'room', 'uploader', 'status', 'path', 'size', 'mime', 'file_name', 'rating_sum', 'rating_n', 'downloads', 'used', 'reports', 'created_at'];
@@ -199,7 +199,10 @@ function start({ port = 54321, staticDir = null, configOverride = null, maxObjec
       if (p === '/rest/v1/noema_kv') {
         kv[uid] = kv[uid] || {};
         const kq = u.searchParams.get('key') || '', likeRe = /^like\./.test(kq) ? new RegExp('^' + kq.slice(5).replace(/[.+?^${}()|[\]\\]/g, '\\$&').replace(/\*/g, '.*') + '$') : null;   // PostgREST like.<pattern> (* = %)
-        if (req.method === 'GET') return json(res, 200, Object.entries(kv[uid]).filter(([key]) => likeRe ? likeRe.test(key) : !q('key') || key === decodeURIComponent(q('key'))).sort(([a], [b]) => a < b ? -1 : 1).map(([key, v]) => ({ key, value: v.value, updated_at: v.updated_at })));
+        // PostgREST in.("k1","k2") (quoted, \" and \\ escaped)
+        const inSet = /^in\./.test(kq) ? new Set([...kq.slice(3).matchAll(/"((?:[^"\\]|\\.)*)"/g)].map(m => m[1].replace(/\\(.)/g, '$1'))) : null;
+        const sel = (u.searchParams.get('select') || '*').split(','); if (sel.includes('*')) sel.push('value');
+        if (req.method === 'GET') return json(res, 200, Object.entries(kv[uid]).filter(([key]) => likeRe ? likeRe.test(key) : inSet ? inSet.has(key) : !q('key') || key === decodeURIComponent(q('key'))).sort(([a], [b]) => a < b ? -1 : 1).map(([key, v]) => sel.includes('value') ? { key, value: v.value, updated_at: v.updated_at } : { key, updated_at: v.updated_at }));
         if (req.method === 'POST') {   // upsert (merge-duplicates) or insert-if-absent (ignore-duplicates); return=representation → the rows written
           const pref = req.headers.prefer || '', keep = /ignore-duplicates/.test(pref), out = [];
           for (const r of data) { if (r.user_id !== uid) return json(res, 403, { message: 'new row violates row-level security policy' }); if (keep && kv[uid][r.key]) continue; kv[uid][r.key] = { value: r.value, updated_at: r.updated_at }; out.push({ user_id: uid, key: r.key, value: r.value, updated_at: r.updated_at }); }

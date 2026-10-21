@@ -1189,6 +1189,7 @@ body.ns-on .sharebar{top:56px;padding:9px 16px;background:var(--t4);color:var(--
 .ns-tab svg{width:22px;height:22px}
 .ns-tab .lb{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-inline:2px}
 .ns-tab.on{color:var(--t1i)} .ns-tab.on .i2{background:var(--acc-soft)}
+.ns-tab .i2{max-width:100%} .ns-tab .bellbadge{top:8px;inset-inline-end:calc(50% - 26px);background:var(--t3i)} .ns-tab .bellbadge:empty{display:none}
 .ns-railme,.ns-brand{display:none}
 
 /* ---------- the page ---------- */

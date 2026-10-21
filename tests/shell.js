@@ -44,7 +44,7 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
   const set0 = await page.evaluate(() => JSON.parse(localStorage.getItem(`noema1:${Noema.account.id}:a:settings`) || '{}'));
   ok(set0.character === 'robot' && set0.world === 'know' && set0.onboarded > 0, 'the choices are saved in the account settings: ' + JSON.stringify({ c: set0.character, w: set0.world }));
   ok(!(await page.$('.ns-onb')), 'the questions are gone; they do not come back');
-  ok(JSON.stringify(await page.$$eval('.ns-tab', l => l.map(x => x.dataset.tab))) === '["today","learn","discover","progress"]', 'tabs: Today · Knowledge · Discover · Progress (no Languages for “knowledge”)');
+  ok(JSON.stringify(await page.$$eval('.ns-tab', l => l.map(x => x.dataset.tab))) === '["today","learn","discover","vault","progress"]', 'tabs: Today · Knowledge · Discover · Vault · Progress (no Languages for “knowledge”)');
   ok(await page.$('.ns-hello') && await page.$('.ns-duo'), 'Today: hello, review and mistakes gym');
   ok(await page.$eval('#ns-fab', b => !b.hidden && b.classList.contains('full') && b.textContent.includes('Cobalt')), 'the tutor is there from the start: the whole character, with its name');
   await page.goto(url + '#/me/profile'); await until(() => page.$('.ns-accbody'), 12000);
@@ -337,7 +337,7 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
 
   console.log('G. Greek, wide screens');
   await page.evaluate(() => { NoemaThemes.putSettings({ lang: 'el' }); }); await page.goto(url + '#/learn'); await page.reload(); await wait(1500);
-  ok((await texts(page, '.ns-tab .lb')).join(',') === 'Σήμερα,Γνώσεις,Ανακάλυψη,Πρόοδος', 'Greek tabs: ' + (await texts(page, '.ns-tab .lb')).join(','));
+  ok((await texts(page, '.ns-tab .lb')).join(',') === 'Σήμερα,Γνώσεις,Ανακάλυψη,Θησαυροφυλάκιο,Πρόοδος', 'Greek tabs: ' + (await texts(page, '.ns-tab .lb')).join(','));
   ok((await texts(page, '.ns-view h1'))[0] === 'Γνώσεις' && (await page.$eval('.ns-newrm', b => b.textContent)).includes('Οδικός χάρτης'), 'Roadmap = Οδικός χάρτης: ' + (await page.$eval('.ns-newrm', b => b.textContent)));
   ok(await page.evaluate(() => [NoemaThemes.tutor('owl').n, NoemaThemes.tutor('candy').n, NoemaThemes.tutor('hedge').n, NoemaShell.L('askTutor')].join('|')) === 'Γλαυκούλα|Χάνσελ και Γκρέτελ|Αγκαθούλης|Ρώτα τον Κόβαλτ', 'the tutor’s Greek names, in the right form');
   await page.evaluate(() => NoemaThemes.putSettings({ lang: undefined }));

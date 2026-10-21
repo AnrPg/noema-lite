@@ -102,10 +102,10 @@ window.NoemaShell = (() => {
     F.bellBadge = h('span', { class: 'bellbadge' });
     F.find = h('button', { class: 'ns-iconbtn ns-find', id: 'ns-find', title: L('sr_search'), 'aria-label': L('sr_search'), 'aria-keyshortcuts': '/', onclick: () => window.NoemaSearch?.quick(here()) }, svg('search'));   // 🔎 everything, everywhere (engine/search.js)
     F.peopleBadge = h('span', { class: 'bellbadge' });
-    F.people = h('button', { class: 'ns-iconbtn bell ns-peoplebtn', id: 'ns-people', title: L('people'), 'aria-label': L('people'), hidden: true, onclick: () => go('#/people') }, svg('chat'), F.peopleBadge);   // 👥 conversations, buddies, groups (engine/social.js)
+    F.people = null;   // 👥 conversations, buddies, groups (engine/social.js): a tab of the side bar, with what waits there (drawTabs)
     F.bell = h('button', { class: 'ns-iconbtn bell', id: 'bellbtn', title: L('notifications'), 'aria-label': L('notifications'), onclick: openNotes }, svg('bell'), F.bellBadge);
     F.topMe = h('button', { class: 'ns-me acchip', id: 'ns-topme', title: L('me'), 'aria-label': L('meLong'), onclick: () => go('#/me') }, h('span', { class: 'ns-meemo' }), h('i', { class: 'syncdot', id: 'syncdot' }));
-    F.top = h('header', { class: 'ns-top', id: 'ns-top' }, F.back, F.crumbs, F.acts, F.find, F.people, F.bell, F.topMe);
+    F.top = h('header', { class: 'ns-top', id: 'ns-top' }, F.back, F.crumbs, F.acts, F.find, F.bell, F.topMe);
     F.share = h('div', { class: 'sharebar', role: 'status' });
     F.tabs = h('nav', { class: 'ns-tabs', 'aria-label': L('mainNav') });
     F.railMe = h('button', { class: 'ns-railme', 'data-pop': '1', 'aria-haspopup': 'menu', 'aria-expanded': 'false', onclick: e => { e.stopPropagation(); meMenu(F.railMe, true); } }, h('span', { class: 'ns-me' }, h('span', { class: 'ns-meemo' })), h('span', { class: 'ns-mename' }, L('me')));
@@ -148,11 +148,18 @@ window.NoemaShell = (() => {
     const w = TH()?.world() || 'know', t = [['today', '#/', svg('sun'), L('today')]];
     if (w !== 'lang') t.push(['learn', '#/learn', svg('path'), L('knowledge')]);
     if (w !== 'know') t.push(['lang', '#/lang', h('span', { class: 'ns-tx' }, '文A'), L('languages')]);   // i18n-ignore (文A: the Languages icon)
-    t.push(['discover', '#/discover', svg('compass'), L('discover')], ['progress', '#/progress', svg('star'), L('progress')]);
+    t.push(['discover', '#/discover', svg('compass'), L('discover')]);
+    // the vault and people are places of their own, not corners of Discover (people: cloud accounts only)
+    t.push(['vault', '#/vault', svg('vault'), L('vault')]);
+    if (social()) t.push(['people', '#/people', svg('chat'), L('people')]);
+    t.push(['progress', '#/progress', svg('star'), L('progress')]);
     return t;
   }
   function drawTabs() {
-    F.tabs.replaceChildren(...tabsList().map(([k, href, i, l]) => h('button', { class: 'ns-tab', 'data-tab': k, onclick: () => go(href) }, h('span', { class: 'i2' }, i), h('span', { class: 'lb' }, l))));
+    const TIP = { vault: L('vaultSub'), people: L('peopleSub') };
+    F.tabs.replaceChildren(...tabsList().map(([k, href, i, l]) => h('button', { class: 'ns-tab' + (k === 'people' ? ' bell ns-peoplebtn' : ''), id: k === 'people' ? 'ns-people' : null, title: TIP[k] || null, 'data-tab': k, onclick: () => go(href) },
+      h('span', { class: 'i2' }, i), h('span', { class: 'lb' }, l), k === 'people' ? F.peopleBadge : null)));
+    F.people = F.tabs.querySelector('#ns-people');
     F.tabs.style.setProperty('--n', F.tabs.children.length);
   }
   /** The top bar and tab of the page now showing. crumbs: [[label, href?], …] · back: href · menu: [{label, sub?, icon?, run, danger?}]
@@ -263,11 +270,12 @@ window.NoemaShell = (() => {
       h('button', { class: 'btn small', onclick: async () => { await N().notes.reject(sh).catch(er => toast(er.message)); } }, L('reject')), laterBtn);
   }
   /* ---------- 👥 people: the top bar's button and what waits there (cloud accounts) ---------- */
+  function social() { return !!window.NoemaSocial && N()?.account?.kind === 'cloud' && !!window.NoemaCloud?.session?.(); }
   function wireSocial() {
-    const S = window.NoemaSocial; if (!S || N()?.account?.kind !== 'cloud' || !window.NoemaCloud?.session?.()) return;
-    F.people.hidden = false; S.start();
-    S.onChange(() => { const n = S.waiting(); F.peopleBadge.textContent = n || ''; F.peopleBadge.style.display = n ? '' : 'none'; F.people.classList.toggle('has', !!n);
-      F.people.setAttribute('aria-label', n ? L('peopleN', { n }) : L('people')); });
+    const S = window.NoemaSocial; if (!social()) return;
+    drawTabs(); S.start();
+    S.onChange(() => { const n = S.waiting(); F.peopleBadge.textContent = n || ''; F.peopleBadge.style.display = n ? '' : 'none'; F.people?.classList.toggle('has', !!n);
+      F.people?.setAttribute('aria-label', n ? L('peopleN', { n }) : L('people')); });
   }
   /* ---------- the sync dot on "Me" (cloud accounts) ---------- */
   function wireSync() {
@@ -352,14 +360,14 @@ window.NoemaShell = (() => {
 
   /* ---------- 🗄️ the vault (#/vault?…): engine/vault.js draws it ---------- */
   PAGES.vault = () => {
-    if (!window.NoemaVault) { page({ tab: 'discover', crumbs: [[L('vault')]] }, h('p', { class: 'ns-muted' }, '…')); return; }
+    if (!window.NoemaVault) { page({ tab: 'vault', crumbs: [[L('vault')]] }, h('p', { class: 'ns-muted' }, '…')); return; }
     NoemaVault.page({ page, h, L, go, open, sheet, modal, menuButton, popMenu, faceEl, pill, svg, ico, chev });
   };
 
   /* ---------- 👥 people (#/people, #/chat/<room>, #/group/<room>, #/join/<code>): engine/social.js draws them ---------- */
   const socialCtx = () => ({ page, h, L, go, open, sheet, modal, chrome, menuButton, popMenu, faceEl, pill, svg, ico, icoTxt, chev, fitRow });
   for (const k of ['people', 'chat', 'group', 'join']) PAGES[k] = args => {
-    if (!window.NoemaSocial) { page({ tab: null, crumbs: [[L('people')]] }, h('p', { class: 'ns-muted' }, '…')); return; }
+    if (!window.NoemaSocial) { page({ tab: 'people', crumbs: [[L('people')]] }, h('p', { class: 'ns-muted' }, '…')); return; }
     NoemaSocial.page(k, args || [], socialCtx());
   };
 
@@ -590,8 +598,6 @@ window.NoemaShell = (() => {
     page({ tab: 'discover', crumbs: [[L('discover')]], corner: true },
       h('h1', {}, L('discover')),
       h('div', { class: 'ns-list' },
-        item('vault', 1, L('vault'), L('vaultSub'), () => go('#/vault'), 'ns-vault'),
-        item('chat', 2, L('people'), L('peopleSub'), () => go('#/people'), 'ns-people'),
         item('search', 4, L('exploreShared'), w === 'lang' ? L('exploreLangSub') : L('exploreSub'), () => go('#/explore/subjects'), 'ns-explore'),
         w !== 'lang' ? item('people', 2, L('exploreRoadmaps'), L('exploreRoadmapsSub'), () => go('#/explore'), 'ns-explorerm') : null,
         w !== 'lang' && CM()?.fromSources ? item('upload', 3, L('fromSources'), L('fromSourcesSub'), () => CM().fromSources(acc(), { onStudy }), 'ns-fromsrc') : null,

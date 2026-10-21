@@ -799,8 +799,9 @@ create policy "noema chat delete" on storage.objects for delete to authenticated
 
 -- 13) 🗄️ THE VAULT (docs/VAULT.md): files students share — notes, slides, past exams (with or without solutions),
 --     exercise sets, lab work, summaries, books, recordings. Strictly organised: every file carries its university,
---     department, course, year, semester, type, subject (a key of the app's shared list) and language — required — so
---     the folders (university › department › course › year › type) and every filter work across all of them.
+--     department, course, year and semester when known (they differ from place to place: all optional), and always its type,
+--     subject (a key of the app's shared list) and languages (one or more: el,ru), so the folders (university › department ›
+--     course › year › type; what is not given: a folder of its own) and every filter work across all of them.
 --     ANONYMOUS: the uploader is kept here for deleting and take-downs, but nobody else can read it: the table shows
 --     each person only their own rows; everybody reads the view noema_vault, which has no uploader column (only the
 --     name of those who chose to show it, taken from their profile). Free plan: files ≤ 20 MB, ≤ 50 MB per person.
@@ -814,15 +815,15 @@ create table if not exists public.noema_vault_files (
   status        text not null default 'pending' check (status in ('pending', 'ok', 'hidden')),
   title         text not null check (char_length(title) between 1 and 160),
   description   text check (char_length(description) <= 1000),
-  university    text not null check (char_length(university) between 2 and 120),
-  department    text not null check (char_length(department) between 2 and 120),
-  course        text not null check (char_length(course) between 2 and 160),
+  university    text check (char_length(university) between 2 and 120),
+  department    text check (char_length(department) between 2 and 120),
+  course        text check (char_length(course) between 2 and 160),
   professor     text check (char_length(professor) <= 120),
-  year          int  not null check (year between 1950 and 2100),
-  semester      int  not null check (semester between 1 and 12),
+  year          int  check (year between 1950 and 2100),
+  semester      int  check (semester between 1 and 12),   -- none: any semester
   kind          text not null check (kind in ('notes', 'slides', 'exam', 'exam_solved', 'exercises', 'lab', 'summary', 'book', 'recording', 'other')),
   subject       text not null check (subject ~ '^[a-z][a-z_]{1,40}$'),
-  language      text not null check (language ~ '^[a-z]{2,3}(-[A-Za-z]{2,4})?$'),
+  language      text not null check (language ~ '^[a-z]{2,3}(-[A-Za-z]{2,4})?(,[a-z]{2,3}(-[A-Za-z]{2,4})?){0,7}$'),   -- one or more: el,ru
   has_exercises boolean not null default false,
   has_solutions boolean not null default false,
   handwritten   boolean not null default false,
@@ -840,6 +841,11 @@ create table if not exists public.noema_vault_files (
   created_at    timestamptz not null default now()
 );
 alter table public.noema_vault_files add column if not exists room uuid references public.noema_rooms(id) on delete cascade;   -- (made before 2026-10-21 without it)
+-- (made before the evening of 2026-10-21: university, department, course, year and semester required, one language)
+alter table public.noema_vault_files alter column university drop not null, alter column department drop not null, alter column course drop not null,
+  alter column year drop not null, alter column semester drop not null;
+alter table public.noema_vault_files drop constraint if exists noema_vault_files_language_check;
+alter table public.noema_vault_files add constraint noema_vault_files_language_check check (language ~ '^[a-z]{2,3}(-[A-Za-z]{2,4})?(,[a-z]{2,3}(-[A-Za-z]{2,4})?){0,7}$');
 create index if not exists noema_vault_files_where on public.noema_vault_files (university, department, course, year, kind);
 create index if not exists noema_vault_files_up    on public.noema_vault_files (uploader);
 create table if not exists public.noema_vault_ratings (
@@ -883,8 +889,8 @@ declare used_bytes bigint; nm text;
 begin
   if current_setting('noema.vault', true) = 'server' then return new; end if;
   if tg_op = 'INSERT' then new.uploader := auth.uid(); end if;
-  new.university := regexp_replace(btrim(new.university), '\s+', ' ', 'g'); new.department := regexp_replace(btrim(new.department), '\s+', ' ', 'g');
-  new.course := regexp_replace(btrim(new.course), '\s+', ' ', 'g'); new.professor := nullif(regexp_replace(btrim(coalesce(new.professor, '')), '\s+', ' ', 'g'), '');
+  new.university := nullif(regexp_replace(btrim(new.university), '\s+', ' ', 'g'), ''); new.department := nullif(regexp_replace(btrim(new.department), '\s+', ' ', 'g'), '');
+  new.course := nullif(regexp_replace(btrim(new.course), '\s+', ' ', 'g'), ''); new.professor := nullif(regexp_replace(btrim(coalesce(new.professor, '')), '\s+', ' ', 'g'), '');
   select display_name into nm from public.noema_profiles where user_id = new.uploader;
   new.uploader_name := case when new.show_name then coalesce(nullif(btrim(nm), ''), new.uploader_name) else null end;
   if tg_op = 'INSERT' then

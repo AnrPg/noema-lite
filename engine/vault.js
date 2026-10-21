@@ -97,16 +97,30 @@ window.NoemaVault = (() => {
   const parse = () => { const q = new URLSearchParams((location.hash.split('?')[1] || '')); const P = {}; for (const k of KEYS) if (q.get(k)) P[k] = q.get(k); return P; };
   const hashOf = P => { const q = new URLSearchParams(); for (const k of KEYS) if (P[k]) q.set(k, P[k]); const s = q.toString(); return '#/vault' + (s ? '?' + s : ''); };
   const listOf = s => String(s || '').split(',').filter(Boolean);
-  const LEVELS = ['university', 'department', 'course', 'year', 'kind'];
+  const LEVELS = ['subject', 'language', 'university', 'kind'];   // the folders: a view of the one table, never copies (a file of two languages: in both)
   const same = (a, b) => fold(a) === fold(b);
+  /* a file's languages: a list (el,ru) · university, department, course, year, semester: optional (null: not given; no semester: any) */
+  const NONE = '-';   // the folder of the files without that detail (in the address: f=-›…)
+  const subj = s => T('subject.' + s);
+  const uni = v => v == null || v === '' || v === NONE ? T('unspecified') : String(v);
+  const langsOf = f => listOf(f.language);
+  const semName = n => +n ? T('semN', { n: +n }) : T('semAny');
+  const given = v => v != null && v !== '';
+  /** What the search words look in: the title and every field (a year, a type, a subject, a language, in the menus' words). */
+  // the menus' words in every language this page holds (the menus' own, English, any other already loaded): "notes" and "Σημειώσεις" both find the type
+  const every = k => { const out = new Set([T(k)]); for (const c of Object.values(window.NOEMA_I18N || {})) { const w = c?.m?.['vault.' + k] ?? c?.d?.['vault.' + k]; if (typeof w === 'string' && !/[{}]/.test(w)) out.add(w); } return [...out]; };
+  const langWords = c => { const out = new Set([langName(c)]); for (const tag of Object.keys(window.NOEMA_I18N || {})) try { out.add(new Intl.DisplayNames([tag], { type: 'language' }).of(c)); } catch (e) { } return [...out]; };
+  const hayOf = f => [f.title, f.description, f.university, f.department, f.course, f.professor, f.file_name, ...every('kind.' + f.kind), ...every('subject.' + f.subject), f.uploader_name,
+    f.year ? String(f.year) : '', f.semester ? semName(f.semester) : '', ...langsOf(f).flatMap(langWords), ...(f.has_exercises ? every('c.exercises') : []), ...(f.has_solutions ? every('c.solutions') : []),
+    ...(f.handwritten ? every('c.handwritten') : [])].filter(Boolean).join(' · ');
   /** The files that pass every filter (and the words of the search). */
   function filter(all, P) {
     const k = listOf(P.k), ft = listOf(P.ft);
     return all.filter(f => (!P.u || same(f.university, P.u)) && (!P.d || same(f.department, P.d)) && (!P.c || same(f.course, P.c)) && (!P.p || same(f.professor || '', P.p))
-      && (!P.y || String(f.year) === P.y) && (!P.sem || String(f.semester) === P.sem) && (!k.length || k.includes(f.kind)) && (!P.sub || f.subject === P.sub)
-      && (!P.x || f.has_exercises) && (!P.sol || f.has_solutions) && (!P.hw || (P.hw === 'hand' ? f.handwritten : !f.handwritten)) && (!P.lg || f.language === P.lg)
+      && (!P.y || String(f.year) === P.y) && (!P.sem || String(f.semester) === P.sem || !f.semester) && (!k.length || k.includes(f.kind)) && (!P.sub || f.subject === P.sub)
+      && (!P.x || f.has_exercises) && (!P.sol || f.has_solutions) && (!P.hw || (P.hw === 'hand' ? f.handwritten : !f.handwritten)) && (!P.lg || langsOf(f).includes(P.lg))
       && (!ft.length || ft.includes(groupOf(f))) && (!P.r || (f.rating_n && f.rating_sum / f.rating_n >= +P.r)) && (!P.used || f.used > 0) && (!P.mine || f.mine) && (!P.g || f.room === P.g)
-      && (!P.q || matches([f.title, f.description, f.university, f.department, f.course, f.professor, f.file_name, T('kind.' + f.kind), T('subject.' + f.subject), f.uploader_name].filter(Boolean).join(' · '), P.q)));
+      && (!P.q || matches(hayOf(f), P.q)));
   }
   const SORTS = { new: (a, b) => String(b.created_at).localeCompare(String(a.created_at)), rating: (a, b) => stars(b) - stars(a) || b.rating_n - a.rating_n, downloads: (a, b) => b.downloads - a.downloads, year: (a, b) => b.year - a.year };
   const stars = f => f.rating_n ? f.rating_sum / f.rating_n : 0;
@@ -121,7 +135,8 @@ window.NoemaVault = (() => {
   const mb = n => (window.NoemaI18n ? NoemaI18n.fmt.number(Math.max(0.1, n / 1048576), { maximumFractionDigits: 1 }) : (n / 1048576).toFixed(1)) + ' MB';   // i18n-ignore (unit)
   const langName = c => { try { return window.NoemaI18n?.fmt?.langName ? NoemaI18n.fmt.langName(c) : new Intl.DisplayNames([document.documentElement.lang || 'en'], { type: 'language' }).of(c); } catch (e) { return c; } };
   const LANGS = () => Object.keys(window.NoemaCurriculum?.LANG || { en: 1, el: 1, de: 1, fr: 1, es: 1, it: 1, ru: 1 });
-  const where = f => [f.course, f.university, T('yearSem', { year: f.year, sem: f.semester })].join(' · ');
+  const when = f => f.year && f.semester ? T('yearSem', { year: f.year, sem: f.semester }) : f.year ? String(f.year) : f.semester ? semName(f.semester) : '';
+  const where = f => [f.course, f.university, when(f)].filter(Boolean).join(' · ') || T('unspecified');
   const GICON = { doc: 'doc', slides: 'grid', sheet: 'rows', book: 'book', image: 'eye', audio: 'mic', video: 'play', text: 'doc' };
   let cache = null, mineR = {}, mineRep = {}, groups = [];   // groups: my study groups [{ id, name }] (engine/social.js)
   const groupName = id => groups.find(g => g.id === id)?.name || T('aGroup');
@@ -137,7 +152,7 @@ window.NoemaVault = (() => {
   function page(ctx) {
     const { h, page: pg, go, sheet, svg, ico, chev, pill } = ctx;
     let P = parse();
-    const v = pg({ tab: 'discover', crumbs: [[ctx.L('discover'), '#/discover'], [T('title')]], back: '#/discover', cls: 'vt-view',
+    const v = pg({ tab: 'vault', crumbs: [[T('title')]], cls: 'vt-view',
       menu: () => [{ label: T('myUploads'), sub: T('myUploadsSub'), icon: 'upload', run: () => setP({ mine: P.mine ? '' : '1' }) }, { label: T('howItWorks'), icon: 'info', run: () => about(ctx) }] });
     v.append(h('h1', {}, T('title')), h('p', { class: 'ns-muted vt-lead' }, T('lead')));
     if (!CL()?.session?.()) {
@@ -166,21 +181,21 @@ window.NoemaVault = (() => {
     function drawFilters() {
       // each list offers the values that exist under the choices made above it (university › department › course)
       const inU = all.filter(f => !P.u || same(f.university, P.u)), inD = inU.filter(f => !P.d || same(f.department, P.d)), inC = inD.filter(f => !P.c || same(f.course, P.c));
-      const opt = (rows, k) => values(rows, k).map(x => [String(x.v), `${x.v} (${num(x.n)})`]);
+      const opt = (rows, k) => values(rows, k).map(x => [String(x.v), `${k === 'university' ? uni(x.v) : x.v} (${num(x.n)})`]);
       filt.replaceChildren(
         group(T('g.where'), sel(T('f.university'), 'u', opt(all, 'university')), sel(T('f.department'), 'd', opt(inU, 'department')), sel(T('f.course'), 'c', opt(inD, 'course')), sel(T('f.professor'), 'p', opt(inC, 'professor'))),
-        group(T('g.when'), sel(T('f.year'), 'y', values(all, 'year').sort((a, b) => b.v - a.v).map(x => [String(x.v), String(x.v)])), sel(T('f.semester'), 'sem', Array.from({ length: 12 }, (_, i) => [String(i + 1), T('semN', { n: i + 1 })]))),
+        group(T('g.when'), sel(T('f.year'), 'y', values(all, 'year').sort((a, b) => b.v - a.v).map(x => [String(x.v), String(x.v)])), sel(T('f.semester'), 'sem', Array.from({ length: 12 }, (_, i) => [String(i + 1), semName(i + 1)]))),
         group(T('g.type'), h('div', { class: 'ns-srchips' }, ...KINDS.map(k => chip('k', k, T('kind.' + k), true)))),
-        group(T('g.subject'), sel(T('f.subject'), 'sub', SUBJECTS.map(s => [s, T('subject.' + s)]).sort((a, b) => a[1].localeCompare(b[1])), { bare: true })),
+        group(T('g.subject'), sel(T('f.subject'), 'sub', SUBJECTS.map(s => [s, subj(s)]).sort((a, b) => a[1].localeCompare(b[1])), { bare: true })),
         group(T('g.contents'), h('div', { class: 'ns-srchips' }, chip('x', '1', T('c.exercises')), chip('sol', '1', T('c.solutions')), chip('hw', 'hand', T('c.handwritten')), chip('hw', 'typed', T('c.typed')))),
-        group(T('g.format'), sel(T('f.language'), 'lg', values(all, 'language').map(x => [x.v, langName(x.v)])), h('div', { class: 'ns-srchips' }, ...GROUPS.map(g => chip('ft', g, T('ft.' + g), true)))),
+        group(T('g.format'), sel(T('f.language'), 'lg', values(all.flatMap(f => langsOf(f).map(language => ({ language }))), 'language').map(x => [x.v, langName(x.v)])), h('div', { class: 'ns-srchips' }, ...GROUPS.map(g => chip('ft', g, T('ft.' + g), true)))),
         group(T('g.quality'), sel(T('f.rating'), 'r', [['3', T('r.3')], ['4', T('r.4')]])),
         group(T('g.use'), h('div', { class: 'ns-srchips' }, chip('used', '1', T('c.used')))),
         groups.length ? group(T('g.group'), sel(T('f.group'), 'g', groups.map(g => [g.id, g.name]), { bare: true })) : null);
       const n = KEYS.filter(k => !['q', 'v', 'f', 'sort', 'id'].includes(k) && P[k]).length;
       filtBtn.replaceChildren(svg('filter'), ' ', n ? T('filtersN', { n }) : T('filters'));
       // the filters in use, each one removable
-      const label = k => ({ u: P.u, d: P.d, c: P.c, p: P.p, y: P.y, sem: T('semN', { n: +P.sem }), k: listOf(P.k).map(x => T('kind.' + x)).join(', '), sub: T('subject.' + P.sub), x: T('c.exercises'), sol: T('c.solutions'),
+      const label = k => ({ u: uni(P.u), d: P.d, c: P.c, p: P.p, y: P.y, sem: semName(P.sem), k: listOf(P.k).map(x => T('kind.' + x)).join(', '), sub: subj(P.sub), x: T('c.exercises'), sol: T('c.solutions'),
         hw: T(P.hw === 'hand' ? 'c.handwritten' : 'c.typed'), lg: langName(P.lg), ft: listOf(P.ft).map(x => T('ft.' + x)).join(', '), r: T('r.' + P.r), used: T('c.used'), mine: T('myUploads'), g: groupName(P.g) })[k];
       const on = KEYS.filter(k => !['q', 'v', 'f', 'sort', 'id'].includes(k) && P[k]);
       chips.replaceChildren(...on.map(k => h('button', { class: 'ns-srchip on vt-chip', 'data-f': k, 'aria-label': T('removeFilter', { what: label(k) }), onclick: () => setP({ [k]: '' }) }, label(k), ' ✕')),
@@ -197,24 +212,27 @@ window.NoemaVault = (() => {
       return sorted.length ? h('div', { class: 'ns-list vt-list' }, ...sorted.slice(0, 300).map(card)) : empty();
     }
     const empty = () => h('div', { class: 'ns-panel ns-empty vt-empty' }, ctx.faceEl(undefined, 'breathe'), h('p', {}, all.length ? T('none') : T('emptyVault')), h('button', { class: 'btn small primary', onclick: () => upload(ctx, () => refresh(true)) }, T('upload')));
-    /* 📁 the folders: university › department › course › year › type, the filters applied */
+    /* 📁 the folders: field › language › school › type, the filters applied; a file without that detail: Misc */
+    const valsOf = (f, lev) => lev === 'language' ? langsOf(f) : given(f[lev]) ? [f[lev]] : [];
+    const folderName = (lev, v) => v === NONE ? T('misc') : lev === 'kind' ? T('kind.' + v) : lev === 'subject' ? subj(v) : lev === 'language' ? langName(v) : String(v);
     function folders(list) {
       const path = (P.f || '').split('›').filter(Boolean), depth = path.length;
-      const here = list.filter(f => path.every((p, i) => String(f[LEVELS[i]]) === p || (LEVELS[i] !== 'year' && LEVELS[i] !== 'kind' && same(f[LEVELS[i]], p))));
-      const crumbs = h('nav', { class: 'vt-path', 'aria-label': T('folders') }, h('button', { class: 'linkish', onclick: () => setP({ f: '' }) }, T('allUniversities')),
-        ...path.flatMap((p, i) => [h('span', { 'aria-hidden': 'true' }, ' › '), h('button', { class: 'linkish', onclick: () => setP({ f: path.slice(0, i + 1).join('›') }) }, LEVELS[i] === 'kind' ? T('kind.' + p) : p)]));
+      const here = list.filter(f => path.every((p, i) => { const vs = valsOf(f, LEVELS[i]); return vs.length ? vs.some(v => String(v) === p || (LEVELS[i] === 'university' && same(v, p))) : p === NONE; }));
+      const crumbs = h('nav', { class: 'vt-path', 'aria-label': T('folders') }, h('button', { class: 'linkish', onclick: () => setP({ f: '' }) }, T('allFields')),
+        ...path.flatMap((p, i) => [h('span', { 'aria-hidden': 'true' }, ' › '), h('button', { class: 'linkish', onclick: () => setP({ f: path.slice(0, i + 1).join('›') }) }, folderName(LEVELS[i], p))]));
       if (depth >= LEVELS.length) return h('div', {}, crumbs, files(here));
-      const lev = LEVELS[depth], kids = values(here, lev);
-      if (lev === 'year') kids.sort((a, b) => b.v - a.v);
+      const lev = LEVELS[depth], kids = values(here.flatMap(f => valsOf(f, lev).map(v => ({ [lev]: v }))), lev), none = here.filter(f => !valsOf(f, lev).length).length;
+      kids.sort((a, b) => b.n - a.n || folderName(lev, a.v).localeCompare(folderName(lev, b.v)));
+      if (none) kids.push({ v: NONE, n: none });
       return h('div', {}, crumbs, kids.length ? h('div', { class: 'ns-list vt-folders' }, ...kids.map(x => h('button', { class: 'ns-item vt-folder', 'data-v': String(x.v), onclick: () => setP({ f: [...path, String(x.v)].join('›') }) },
-        h('span', { class: 'ns-ico' }, svg('vault')), h('span', { class: 't' }, h('b', {}, lev === 'kind' ? T('kind.' + x.v) : String(x.v)), h('small', {}, T('nFiles', { n: x.n }))), chev()))) : empty());
+        h('span', { class: 'ns-ico' }, svg('vault')), h('span', { class: 't' }, h('b', {}, folderName(lev, x.v)), h('small', {}, T('nFiles', { n: x.n }))), chev()))) : empty());
     }
     function draw() {
       viewSeg.replaceChildren(...[['', T('files')], ['folders', T('folders')]].map(([k, l]) => h('button', { class: (P.v || '') === k ? 'on' : '', role: 'radio', 'aria-checked': String((P.v || '') === k), 'data-v': k || 'files', onclick: () => setP({ v: k, f: '' }) }, l)));
       sortSel.value = P.sort || 'new';
       drawFilters();
       const list = filter(all, P);
-      out.replaceChildren(P.g ? h('p', { class: 'ns-panel tiny vt-groupnote' }, T('groupNote', { name: groupName(P.g) })) : null, h('p', { class: 'tiny ns-muted vt-count' }, T('results', { n: list.length })), P.v === 'folders' ? folders(list) : files(list));
+      out.replaceChildren(P.g ? h('p', { class: 'ns-panel tiny vt-groupnote' }, T('groupNote', { name: groupName(P.g) })) : '', h('p', { class: 'tiny ns-muted vt-count' }, T('results', { n: list.length })), P.v === 'folders' ? folders(list) : files(list));
       if (P.id) { const f = all.find(x => x.id === P.id); setP({ id: '' }); if (f) details(ctx, f, () => refresh(true)); else toast(T('fileGone'), 4000); }   // a vault file sent in a conversation
     }
     refresh(false);
@@ -224,8 +242,8 @@ window.NoemaVault = (() => {
   function details(ctx, f, onChange) {
     const { h, sheet, svg } = ctx;
     sheet(f.title, (body, close) => {
-      const facts = [[T('f.university'), f.university], [T('f.department'), f.department], [T('f.course'), f.course], [T('f.professor'), f.professor], [T('f.when'), T('yearSem', { year: f.year, sem: f.semester })],
-        [T('f.type'), T('kind.' + f.kind)], [T('f.subject'), T('subject.' + f.subject)], [T('f.language'), langName(f.language)],
+      const facts = [[T('f.university'), f.university], [T('f.department'), f.department], [T('f.course'), f.course], [T('f.professor'), f.professor], [T('f.when'), when(f)],
+        [T('f.type'), T('kind.' + f.kind)], [T('f.subject'), subj(f.subject)], [T('f.language'), langsOf(f).map(langName).join(', ')],
         [T('f.contents'), [f.has_exercises && T('c.exercises'), f.has_solutions && T('c.solutions'), T(f.handwritten ? 'c.handwritten' : 'c.typed')].filter(Boolean).join(' · ')],
         [T('f.file'), `${f.file_name} · ${mb(f.size)}${f.pages ? ' · ' + T('pagesN', { n: f.pages }) : ''}`], [T('f.sharedBy'), f.uploader_name || T('anonymous')], [T('f.group'), f.room ? groupName(f.room) : null]].filter(([, x]) => x);
       const prev = h('div', { class: 'vt-preview' });
@@ -283,15 +301,29 @@ window.NoemaVault = (() => {
   function fields(h, all, init = {}) {
     const list = (id, field) => h('datalist', { id }, ...values(all, field).slice(0, 200).map(x => h('option', { value: String(x.v) })));
     const txt = (key, label, { req = true, max = 120, dl = '' } = {}) => { const i = h('input', { class: 'noema-input', 'data-k': key, maxlength: max, required: req || null, list: dl || null, value: init[key] || '' }); return [h('label', { class: 'vt-fld' }, h('span', { class: 'ns-label' }, label + (req ? ' *' : '')), i), i]; };
-    const pickOf = (key, label, opts, val) => { const s = h('select', { class: 'noema-input', 'data-k': key, required: true }, h('option', { value: '' }, T('choose')), ...opts.map(([v, l]) => h('option', { value: v }, l))); s.value = val ?? ''; return [h('label', { class: 'vt-fld' }, h('span', { class: 'ns-label' }, label + ' *'), s), s]; };
+    const pickOf = (key, label, opts, val, { req = true, none = T('choose') } = {}) => { const s = h('select', { class: 'noema-input', 'data-k': key, required: req || null }, h('option', { value: '' }, none), ...opts.map(([v, l]) => h('option', { value: v }, l))); s.value = val ?? ''; return [h('label', { class: 'vt-fld' }, h('span', { class: 'ns-label' }, label + (req ? ' *' : '')), s), s]; };
     const year = new Date().getFullYear();
-    const [uL, u] = txt('university', T('f.university'), { dl: 'vt-dl-u' }), [dL, d] = txt('department', T('f.department'), { dl: 'vt-dl-d' }), [cL, c] = txt('course', T('f.course'), { max: 160, dl: 'vt-dl-c' }), [pL, p] = txt('professor', T('f.professor'), { req: false, dl: 'vt-dl-p' });
-    const [yL, y] = pickOf('year', T('f.year'), Array.from({ length: year - 1979 }, (_, i) => [String(year - i), String(year - i)]), init.year ? String(init.year) : '');
-    const [sL, s] = pickOf('semester', T('f.semester'), Array.from({ length: 12 }, (_, i) => [String(i + 1), T('semN', { n: i + 1 })]), init.semester ? String(init.semester) : '');
+    // where and when: optional (they differ from place to place); what and in which language: always
+    const [uL, u] = txt('university', T('f.university'), { req: false, dl: 'vt-dl-u' }), [dL, d] = txt('department', T('f.department'), { req: false, dl: 'vt-dl-d' }), [cL, c] = txt('course', T('f.course'), { req: false, max: 160, dl: 'vt-dl-c' }), [pL, p] = txt('professor', T('f.professor'), { req: false, dl: 'vt-dl-p' });
+    cL.firstChild.append(' ', h('small', { class: 'tiny ns-muted vt-hint' }, T('courseHint')));   // its own name, not the field
+    const [yL, y] = pickOf('year', T('f.year'), Array.from({ length: year - 1979 }, (_, i) => [String(year - i), String(year - i)]), init.year ? String(init.year) : '', { req: false, none: T('unspecified') });
+    const [sL, s] = pickOf('semester', T('f.semester'), Array.from({ length: 12 }, (_, i) => [String(i + 1), semName(i + 1)]), init.semester ? String(init.semester) : '', { req: false, none: T('semAny') });
     const [kL, k] = pickOf('kind', T('f.type'), KINDS.map(x => [x, T('kind.' + x)]), init.kind || '');
     const [bL, b] = pickOf('subject', T('f.subject'), SUBJECTS.map(x => [x, T('subject.' + x)]).sort((a, z) => a[1].localeCompare(z[1])), init.subject || '');
+    bL.append(h('small', { class: 'tiny ns-muted vt-hint' }, T('fieldHelp'))); bL.title = T('fieldHelp');
+    // a past exam without its year is of little use: say so (still not required)
+    const yHint = h('small', { class: 'tiny ns-muted vt-yhint', hidden: true }, T('yearForExams'));
+    const hintY = () => { yHint.hidden = !(/^exam/.test(k.value) && !y.value); }; k.addEventListener('change', hintY); y.addEventListener('change', hintY); yL.append(yHint);
     const uiLang = (window.NoemaI18n?.locale || 'en').slice(0, 2);
-    const [lL, l] = pickOf('language', T('f.language'), LANGS().map(x => [x, langName(x)]), init.language || (LANGS().includes(uiLang) ? uiLang : 'en'));
+    // the languages: one or more (a dictionary, a bilingual course) — chips, and a list to add one more
+    let langs = init.language ? listOf(init.language) : [LANGS().includes(uiLang) ? uiLang : 'en'];
+    const chipsL = h('div', { class: 'row vt-langs' }), l = h('select', { class: 'noema-input', 'data-k': 'language', 'aria-label': T('addLanguage') });
+    const drawLangs = () => {
+      chipsL.replaceChildren(...langs.map(x => h('button', { type: 'button', class: 'chip on', title: T('removeLanguage'), onclick: () => { langs = langs.filter(y => y !== x); drawLangs(); } }, langName(x) + ' ×')));
+      l.replaceChildren(h('option', { value: '' }, langs.length ? T('addLanguage') : T('choose')), ...LANGS().filter(x => !langs.includes(x)).map(x => h('option', { value: x }, langName(x))));
+    };
+    l.addEventListener('change', () => { if (l.value && langs.length < 8) langs.push(l.value); drawLangs(); }); drawLangs();
+    const lL = h('label', { class: 'vt-fld' }, h('span', { class: 'ns-label' }, T('f.languages') + ' *'), chipsL, l);
     const box = (key, label) => { const i = h('input', { type: 'checkbox', 'data-k': key, checked: init[key] || null }); return [h('label', { class: 'vt-check' }, i, ' ', label), i]; };
     const [exL, ex] = box('has_exercises', T('c.exercises')), [soL, so] = box('has_solutions', T('c.solutions')), [hwL, hw] = box('handwritten', T('c.handwritten'));
     const [shL, sh] = box('show_name', T('showName'));
@@ -305,9 +337,12 @@ window.NoemaVault = (() => {
       h('fieldset', { class: 'vt-fs' }, h('legend', {}, T('g.contents')), h('div', { class: 'row' }, exL, soL, hwL), desc),
       h('div', { class: 'vt-anon' }, shL, h('small', { class: 'tiny ns-muted' }, T('anonTip'))));
     const read = () => {
-      const miss = [[u, 'f.university'], [d, 'f.department'], [c, 'f.course'], [y, 'f.year'], [s, 'f.semester'], [k, 'f.type'], [b, 'f.subject'], [l, 'f.language']].filter(([i]) => !i.value.trim() || (i.tagName === 'INPUT' && i.value.trim().length < 2));
+      const miss = [[k, 'f.type'], [b, 'f.subject']].filter(([i]) => !i.value.trim());
+      const short = [[u, 'f.university'], [d, 'f.department'], [c, 'f.course']].filter(([i]) => i.value.trim().length === 1);   // a name, if given, has 2 letters at least
+      if (short.length) return { error: T('tooShort', { what: short.map(([, key]) => T(key)).join(', ') }) };
+      if (!langs.length) miss.push([l, 'f.languages']);
       if (miss.length) return { error: T('missing', { what: miss.map(([, key]) => T(key)).join(', ') }) };
-      return { meta: { university: u.value.trim(), department: d.value.trim(), course: c.value.trim(), professor: p.value.trim() || null, year: +y.value, semester: +s.value, kind: k.value, subject: b.value, language: l.value,
+      return { meta: { university: u.value.trim() || null, department: d.value.trim() || null, course: c.value.trim() || null, professor: p.value.trim() || null, year: +y.value || null, semester: +s.value || null, kind: k.value, subject: b.value, language: langs.join(','),
         has_exercises: ex.checked, has_solutions: so.checked, handwritten: hw.checked, show_name: sh.checked, description: desc.value.trim() || null } };
     };
     return { el, read };

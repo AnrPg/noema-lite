@@ -128,10 +128,6 @@
   "@vault.emptyVault": {
     "description": "Empty vault."
   },
-  "vault.allUniversities": "All universities",
-  "@vault.allUniversities": {
-    "description": "Root of the folder path."
-  },
   "vault.myUploads": "My uploads",
   "@vault.myUploads": {
     "description": "Menu item and filter: only the files I uploaded."
@@ -190,7 +186,7 @@
   "@vault.g.type": {
     "description": "Filter group: the kind of material."
   },
-  "vault.g.subject": "Subject",
+  "vault.g.subject": "Field",
   "@vault.g.subject": {
     "description": "Filter group: the field of study."
   },
@@ -242,7 +238,7 @@
   "@vault.f.type": {
     "description": "Field label: the kind of material."
   },
-  "vault.f.subject": "Subject",
+  "vault.f.subject": "Field",
   "@vault.f.subject": {
     "description": "Field / filter label: the field of study, from a shared list."
   },
@@ -955,5 +951,55 @@
         "example": "Genetics 2025"
       }
     }
+  },
+  "vault.semAny": "Any semester",
+  "@vault.semAny": {
+    "description": "A semester choice: the file fits any semester."
+  },
+  "vault.f.languages": "Languages",
+  "@vault.f.languages": {
+    "description": "Label of the field with the file's languages (one or more)."
+  },
+  "vault.addLanguage": "Add a language…",
+  "@vault.addLanguage": {
+    "description": "First option of the list that adds one more language to a file."
+  },
+  "vault.removeLanguage": "Remove this language",
+  "@vault.removeLanguage": {
+    "description": "Tooltip of a chosen language's chip."
+  },
+  "vault.unspecified": "Not specified",
+  "@vault.unspecified": {
+    "description": "Shown where a file gives no university, department, course or year (a folder of its own, a value in the lists)."
+  },
+  "vault.tooShort": "Too short (2 letters at least): {what}",
+  "@vault.tooShort": {
+    "description": "Upload form: an optional name was given but is only one letter long. {what}: the fields' names.",
+    "placeholders": {
+      "what": {
+        "type": "String",
+        "example": "University"
+      }
+    }
+  },
+  "vault.yearForExams": "For a past exam, the year helps others a lot.",
+  "@vault.yearForExams": {
+    "description": "Hint under the optional year when the type is an exam and no year is chosen."
+  },
+  "vault.courseHint": "(exactly as your school calls it)",
+  "@vault.courseHint": {
+    "description": "Small hint next to the Course label in the upload form."
+  },
+  "vault.fieldHelp": "The broad field, the same everywhere: it brings together files of similar courses from other schools and in other languages.",
+  "@vault.fieldHelp": {
+    "description": "Explains the Field (subject) under its list in the upload form, and as its tooltip."
+  },
+  "vault.allFields": "All fields",
+  "@vault.allFields": {
+    "description": "Folders view: the first crumb (field › language › school › type)."
+  },
+  "vault.misc": "Misc",
+  "@vault.misc": {
+    "description": "Folders view: the folder of the files that do not give this detail (no school, …)."
   }
 }

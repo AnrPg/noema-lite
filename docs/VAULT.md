@@ -2,13 +2,15 @@
 
 Decided with the user on 2026-10-20 (thread "Sources workflow, vault, social, study buddies"). Students share lecture notes,
 slides, past exams (with or without solutions), exercise sets, lab work, summaries, books, recordings and any other study
-material. Code: `engine/vault.js` (page `#/vault`, Discover › Vault), `cloud/supabase.sql` §13, words `i18n/vault/`.
+material. Code: `engine/vault.js` (page `#/vault`, the Vault tab of the side bar), `cloud/supabase.sql` §13, words `i18n/vault/`.
 Test: `tests/vault.js`.
 
 ## 1. Strictly organised, searchable across every branch
-Every file has a fixed place, **university › department › course › year › type**: the Folders view browses it. The upload asks
-for all of it, plus semester, subject and language. The subject comes from the shared list `SUBJECTS`, a key whose name is
-translated. Every field is a column, so every filter works across all the folders at once. For example, *biology* + *lecture
+Every file has a place, **university › department › course › year › type**: the Folders view browses it. Only the type, the
+field (`subject`) and at least one language are required; university, department, course (exactly as the school calls it),
+year and semester are optional, since they differ from place to place. A file without one sits in a *Not specified* folder at
+that level, and a file without a semester shows under every semester. A file may have several languages (`language` =
+`el,ru`). The field comes from the shared list `SUBJECTS`, a key whose name is translated (a growing graph of fields is planned). Every field is a column, so every filter works across all the folders at once. For example, *biology* + *lecture
 notes* + *semester 3* finds the notes of any university and any year.
 
 Names typed in another way (case, accents, spaces) snap to the one already in the vault, and the database tidies the spaces.
@@ -26,7 +28,8 @@ That way one place stays one folder.
 | Use | already used in a noema course ("Make a course from it") |
 
 The filters live in the address (`#/vault?sub=biology&k=notes&sem=3`). The search matches title, description, place,
-professor, file name, type and subject. It works in any script, with or without accents, and finds Greek and Cyrillic in
+professor, file name and every field in the menus' words: type, field, year, semester, languages, exercises/solutions,
+handwritten — in the menus' language, English and any other catalog the page has loaded. It works in any script, with or without accents, and finds Greek and Cyrillic in
 plain and scholarly Latin letters (`viologia` and `biologia` both find `Βιολογία`). The list is read once (≤ 5000 rows,
 enough for the Free plan) and filtered on the device. Past that, move the filters into the query.
 
@@ -64,7 +67,7 @@ the uploader, the size check on finish, frozen counters, the quota, ratings, one
 storage reads and writes, refused formats.
 
 ## 6. Study groups and conversations (docs/SOCIAL.md)
-A file may belong to a study group (`room`): only its members see, count and download it, and Discover › Vault shows it
+A file may belong to a study group (`room`): only its members see, count and download it, and the Vault shows it
 under the filter *Study group* (`#/vault?g=<group>`), the group's own folder. Uploading from there sets *Who sees it* to the
 group. A file's sheet has **Send to…**: a conversation, a group or a buddy, with a line. The 50 MB per person count the vault
 and the files sent in conversations together (`noema_used_bytes`).

@@ -2,7 +2,7 @@
 
 Decided with the user on 2026-10-20 (thread "Sources workflow, vault, social, study buddies"): find people, become study
 buddies, talk one to one with files, subjects and Roadmaps, and keep study groups. Code: `engine/social.js` (pages `#/people`,
-`#/chat/<room>`, `#/group/<room>`, `#/join/<code>`; the top bar's 💬 and Discover › People), `cloud/supabase.sql` §12, words
+`#/chat/<room>`, `#/group/<room>`, `#/join/<code>`; the People tab of the side bar), `cloud/supabase.sql` §12, words
 `i18n/social/`. Tests: `tests/social.js` (three people in the browser, against `tests/mock_social.js`) and `tests/sql_policies.py`.
 
 ## 1. The choices

@@ -62,7 +62,7 @@ c = canvas.Canvas(sys.argv[1]); c.drawString(72, 720, 'Genetics summary'); c.sho
   try {
     console.log('— finding someone, and the buddies rule');
     nikos = await person('Νίκος Παπαδάκης', 'nikos@example.com');
-    ok(await nikos.locator('#ns-people').isVisible(), 'a cloud account has the People button in the top bar');
+    ok(await nikos.locator('#ns-people').isVisible(), 'a cloud account has the People tab in the side bar');
     await nikos.click('#ns-people'); await wait(800);
     ok(/#\/people/.test(nikos.url()) && await until(() => nikos.locator('.so-first').count()), 'People opens; the first time it says others can now find you, and how to change it');
     ok(S.people[uidOf('nikos@example.com')]?.display_name === 'Νίκος Παπαδάκης' && S.people[uidOf('nikos@example.com')].dm_from === 'buddies', 'his row: his name, findable, messages from buddies only (the default)');

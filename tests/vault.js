@@ -1,9 +1,9 @@
 /* 🗄️ The vault (engine/vault.js, docs/VAULT.md) against the Supabase emulator (rules of cloud/supabase.sql §13).
    Without a browser: the search in any script (Greek in plain and scholarly Latin letters, accents or not), the format checks
    by the first bytes (a program renamed .pdf is refused), the filters across universities and years.
-   In the browser: Discover › Vault, an upload of several files with the required fields (a program, an SVG and a fake PDF
+   In the browser: the Vault tab, an upload of several files with the required fields (a program, an SVG and a fake PDF
    refused; the rules box; the quota), anonymous by default; another person's file with their name shown; the filters
-   (biology notes of any university, 3rd semester), the folders (university › department › course › year › type), the search
+   (biology notes of any university, 3rd semester), the folders (field › language › school › type, Misc for what is not given), the search
    in Latin letters, a file's page (preview, download counted once, rating, report — hidden after three), "Make a course
    from it" opening 📚 From your sources with the file, editing and deleting one's own file, the phone width, Greek menus.
    Usage: node tests/vault.js <prepared-repo-dir> */
@@ -42,6 +42,11 @@ async function unit() {
   const got = P => V.filter(rows, P).map(r => r.title).join(' | ');
   ok(got({ sub: 'biology', k: 'notes', sem: '3' }) === 'Genetics notes | Σημειώσεις Γενετικής', 'biology notes of any university and any year, 3rd semester: both universities');
   ok(got({ u: 'university of crete', y: '2023' }) === 'Genetics notes | Exam 2023' && got({ sol: '1' }) === 'Σημειώσεις Γενετικής' && got({ q: 'genetiki' }) === 'Σημειώσεις Γενετικής', 'a university in any case, a year, “has solutions”, a Greek course in Latin letters');
+  const more = [...rows, { university: null, department: null, course: null, year: 2026, semester: null, kind: 'other', subject: 'physics', language: 'el,ru', title: 'Glossary el–ru', file_name: 'gl.pdf' }];
+  const got2 = P => V.filter(more, P).map(r => r.title).join(' | ');
+  ok(got2({ sem: '1' }) === 'Mechanics | Glossary el–ru' && got2({ lg: 'ru' }) === 'Glossary el–ru' && got2({ lg: 'el' }) === 'Σημειώσεις Γενετικής | Glossary el–ru', 'a file of any semester shows under every semester; a file in Greek and Russian under either language');
+  ok(got2({ q: 'glossary 2026' }) === 'Glossary el–ru' && got2({ q: '2026' }) === 'Glossary el–ru' && got2({ q: 'notes 2021' }) === 'Σημειώσεις Γενετικής', 'the search looks in every field too: a year, a type; a file without a university, course or semester is still found');
+  ok(got({ q: 'lecture notes 2023' }) === 'Genetics notes', 'the type’s menu word (English, always on the page) finds the type');
   ok(V.hashOf({ q: 'dna', sem: '3', k: 'notes,exam' }) === '#/vault?q=dna&sem=3&k=notes%2Cexam', 'the filters live in the address');
 }
 
@@ -84,11 +89,11 @@ c.save()`, f, text, String(pages)]); return f; };
       && (await (await rest(T2, '/rest/v1/rpc/noema_vault_finish', { method: 'POST', body: JSON.stringify({ fid: gid }) })).json()) === 'ok', 'Nikos shares Greek genetics notes (row → file → finish)');
     ok((await rest(T2, '/storage/v1/object/noema-vault/files/0b9a3c55-1d2e-4f00-8a11-000000000000.pdf', { method: 'POST', body: 'x' })).status === 403, 'nobody can put a file in the vault without its row');
 
-    console.log('— Discover › Vault, and an upload');
+    console.log('— the Vault tab, and an upload');
     await signUp(p, 'Iro', 'iro@example.com');
-    await p.click('.ns-tab[data-tab="discover"]'); await wait(300);
-    ok(await p.locator('.ns-vault').count() === 1, 'Discover has the Vault, first: ' + (await p.locator('.ns-vault').innerText()).replace(/\s+/g, ' '));
-    await p.click('.ns-vault'); await wait(600);
+    ok(await p.locator('.ns-tab[data-tab="vault"]').count() === 1 && await p.locator('.ns-tab[data-tab="people"]').count() === 1 && !(await p.locator('.ns-top #ns-people').count()), 'the Vault and People are tabs of the side bar, not in Discover or the top bar');
+    await p.click('.ns-tab[data-tab="vault"]'); await wait(600);
+    ok(await p.locator('.ns-tab[data-tab="vault"].on').count() === 1, 'the Vault tab is lit on its page');
     ok(/#\/vault/.test(p.url()) && await p.locator('.vt-view h1').innerText() === 'Vault' && await until(() => p.locator('.vt-file').count().then(n => n === 1)), 'the Vault page: one file so far');
     await p.click('.vt-upbtn'); await wait(300);
     await p.setInputFiles('.vt-upload .vt-pick', [F1, F2, EXE, SVG, FAKE]); await wait(600);
@@ -96,10 +101,13 @@ c.save()`, f, text, String(pages)]); return f; };
     ok(lis.length === 5 && lis.filter(x => /does not take this kind/.test(x)).length === 2 && lis.some(x => /answers\.pdf/.test(x) && /not what its name says/.test(x)), 'five files: the program and the SVG refused by format, the fake PDF by its first bytes');
     ok(await p.locator('.vt-files li:not(.bad) .vt-title').count() === 2 && await p.inputValue('.vt-files li:not(.bad) .vt-title >> nth=0') === 'Genetics lecture 1', 'the two PDFs get titles from their names, editable');
     await p.click('.vt-go'); await wait(200);
-    ok(/Still needed: University, Department, Course, Academic year, Semester, Type, Subject/.test(await p.locator('.vt-err').innerText()), 'the required fields are named: ' + await p.locator('.vt-err').innerText());
+    ok(/Still needed: Type, Field/.test(await p.locator('.vt-err').innerText()), 'only the type and the subject are required (place and time are optional): ' + await p.locator('.vt-err').innerText());
     const fld = k => `.vt-upload [data-k="${k}"]`;
     await p.fill(fld('university'), 'University  of Crete'); await p.fill(fld('department'), 'Biology'); await p.fill(fld('course'), 'Genetics'); await p.fill(fld('professor'), 'M. Papadaki');
-    await p.selectOption(fld('year'), '2023'); await p.selectOption(fld('semester'), '3'); await p.selectOption(fld('kind'), 'notes'); await p.selectOption(fld('subject'), 'biology');
+    await p.selectOption(fld('year'), '2023'); await p.selectOption(fld('semester'), '3'); await p.selectOption(fld('kind'), 'notes');
+await p.selectOption(fld('subject'), 'biology');
+        await p.selectOption(fld('language'), 'ru');   // a second language
+    ok((await p.locator('.vt-upload .vt-langs .chip').allInnerTexts()).length === 2, 'two languages chosen');
     await p.check(fld('has_exercises'));
     ok(!(await p.isChecked(fld('show_name'))), 'anonymous by default: “Show my name” is off');
     await p.click('.vt-go'); await wait(200);
@@ -108,7 +116,7 @@ c.save()`, f, text, String(pages)]); return f; };
     await p.check('.vt-rules'); await p.click('.vt-go');
     ok(await until(() => p.locator('.vt-file').count().then(n => n === 3), 20000), 'uploaded: three files in the vault');
     const rows = srv.state.vfiles.filter(f => f.title.startsWith('Genetics lecture'));
-    ok(rows.length === 2 && rows.every(f => f.status === 'ok' && f.university === 'University of Crete' && !f.uploader_name && f.pages >= 2 && srv.state.vobj[f.path]?.data.length === f.size), 'stored: finished, the university tidied, no name, pages counted, the file whole');
+    ok(rows.length === 2 && rows.every(f => f.status === 'ok' && f.subject === 'biology' && f.language === 'en,ru' && f.university === 'University of Crete' && !f.uploader_name && f.pages >= 2 && srv.state.vobj[f.path]?.data.length === f.size), 'stored: finished, two languages, the university tidied, no name, pages counted, the file whole');
     const seen = await (await rest(T2, '/rest/v1/noema_vault?select=*')).json();
     const iros = seen.filter(f => f.title.startsWith('Genetics lecture'));
     ok(iros.length === 2 && iros.every(f => !('uploader' in f) && f.uploader_name == null && f.mine === false) && seen.find(f => f.id === gid).uploader_name === 'Nikos', 'what others read has no uploader: Iro stays anonymous, Nikos shows his name');
@@ -130,9 +138,12 @@ c.save()`, f, text, String(pages)]); return f; };
     await p.fill('.vt-q', ''); await wait(400);
     await p.click('.vt-viewseg [data-v="folders"]'); await wait(200);
     const top = await p.locator('.vt-folder').allInnerTexts();
-    ok(top.length === 2 && top.some(t => /University of Crete\s+2 files/.test(t)) && top.some(t => /Πανεπιστήμιο Αθηνών\s+1 file/.test(t)), 'folders: the universities with their counts');
-    for (const v of ['University of Crete', 'Biology', 'Genetics', '2023', 'notes']) { await p.click(`.vt-folder[data-v="${v}"]`); await wait(150); }
-    ok(await p.locator('.vt-file').count() === 2 && /All universities › University of Crete › Biology › Genetics › 2023 › Lecture notes/.test((await p.locator('.vt-path').innerText()).replace(/\s+/g, ' ')), 'university › department › course › year › type, then the files');
+    ok(top.length === 1 && /Biology\s+3 files/.test(top[0]), 'folders: the fields with their counts: ' + top.join(' | '));
+    await p.click('.vt-folder[data-v="biology"]'); await wait(150);
+    const langs = await p.locator('.vt-folder').allInnerTexts();
+    ok(langs.some(t => /English\s+2 files/.test(t)) && langs.some(t => /Russian\s+2 files/.test(t)) && langs.some(t => /Greek\s+1 file/.test(t)), 'a file of two languages is in both language folders (the same file, not a copy): ' + langs.join(' | '));
+    for (const v of ['ru', 'University of Crete', 'notes']) { await p.click(`.vt-folder[data-v="${v}"]`); await wait(150); }
+    ok(await p.locator('.vt-file').count() === 2 && /All fields › Biology › Russian › University of Crete › Lecture notes/.test((await p.locator('.vt-path').innerText()).replace(/\s+/g, ' ')), 'field › language › school › type, then the files');
     await p.screenshot({ path: SHOTS + '/vt2_folders.png', fullPage: true });
     await p.click('.vt-path button.linkish >> nth=0'); await p.click('.vt-viewseg [data-v="files"]'); await wait(200);
 
