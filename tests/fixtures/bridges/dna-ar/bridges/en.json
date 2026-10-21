@@ -1,0 +1,95 @@
+{
+ "format": "noema-bridge-locale",
+ "v": 1,
+ "native": "en",
+ "status": "draft",
+ "t": {
+  "يبدأ#1": {
+   "t": "begins",
+   "src": "14qlf5fi8h"
+  },
+  "تضاعف#1": {
+   "t": "replication",
+   "src": "n5vvww18xy"
+  },
+  "الحمض النووي#1": {
+   "t": "DNA",
+   "src": "1syy2eos5o"
+  },
+  "موقع البدء#1": {
+   "t": "origin of replication",
+   "src": "1wvnax0712"
+  },
+  "يفك#1": {
+   "t": "unwinds",
+   "src": "17k5j0buih"
+  },
+  "هيليكاز#1": {
+   "t": "helicase",
+   "src": "tbtho31adz"
+  },
+  "لولب مزدوج#1": {
+   "t": "double helix",
+   "src": "791oudgb8u"
+  },
+  "يبني#1": {
+   "t": "builds",
+   "src": "161hczyqr4"
+  },
+  "بوليميراز#1": {
+   "t": "polymerase",
+   "src": "9dmqv01t9b"
+  },
+  "سلسلة#1": {
+   "t": "strand",
+   "src": "1nxjmt514i"
+  },
+  "جديد#1": {
+   "t": "new",
+   "src": "16ouytpm8d"
+  },
+  "يحتفظ#1": {
+   "t": "keeps",
+   "src": "1ma400p9uc"
+  },
+  "جزيء#1": {
+   "t": "molecule",
+   "src": "3j5irjduvv"
+  },
+  "قديم#1": {
+   "t": "old (parent)",
+   "src": "76ea5wdxoa"
+  },
+  "واحد#1": {
+   "t": "one",
+   "src": "1i85euo1mu"
+  },
+  "شبه محافظ#1": {
+   "t": "semi-conservative",
+   "src": "ajoy9j1he8"
+  },
+  "رائد#1": {
+   "t": "leading",
+   "src": "zulg9y1ibl"
+  },
+  "باستمرار#1": {
+   "t": "continuously",
+   "src": "ij6t3h1wzx"
+  },
+  "متأخر#1": {
+   "t": "lagging",
+   "src": "i3bpj81u73"
+  },
+  "شكل#1": {
+   "t": "form",
+   "src": "o8l0er1jmx"
+  },
+  "قطعة#1": {
+   "t": "fragment",
+   "src": "1bqtdlw1o6"
+  }
+ },
+ "sections": {
+  "ch01-s01": "DNA copies itself from origins of replication: helicase unwinds the double helix and polymerase builds the new strands, one continuously, the other in Okazaki fragments."
+ }
+}

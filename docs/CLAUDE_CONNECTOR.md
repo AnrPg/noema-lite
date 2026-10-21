@@ -87,6 +87,11 @@ and not needed, because the connector's `noema_get_toolkit` hands Claude the sam
   index so every device shows 👁), `noema_save_pack` (small packs inline; same file check),
   `noema_start_source_upload` (one extra file). Prompt `create_subject` (claude.ai: **+ → noema-lite → Create a noema-lite subject**).
 * Without the connector: Claude hands over the package `<id>.noema.zip` → 📥 Import subject pack (pack + source files).
+* **文A language help** (docs/BRIDGE.md): `noema_bridge_guide` (the format and workflow, the account's bridges, the mistakes
+  learners reported) and `noema_save_bridge` (one built `noema-bridge` file, ≤ 1.5 MB, checked with the app's own
+  `checkBridge` against the pack and stored at `<uid>/bridges/<pack>.<native>.json` + the synced index `a:bridges`). Prompt
+  `language_help` (**+ → noema-lite → Language help for a noema-lite subject**). Any pack language into any other.
+  Without the connector: the learner imports the built file with 📥.
 
 ## C. Curricula with the Claude plan (connector)
 

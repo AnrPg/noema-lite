@@ -1055,12 +1055,30 @@
    "senses": [
     {
      "id": "1",
-     "gloss": "a customer's purchase in the e-shop example"
+     "gloss": "a customer's purchase in the e-shop example",
+     "cues": [
+      "e-shop",
+      "customer",
+      "order_id",
+      "order table"
+     ]
     },
     {
      "id": "2",
      "gloss": "the sequence in which things are done",
-     "pos": "NOUN"
+     "pos": "NOUN",
+     "cues": [
+      "in order",
+      "arrival order",
+      "source order",
+      "order of",
+      "the order the",
+      "order matters",
+      "same order",
+      "any order",
+      "sort order",
+      "ordering"
+     ]
     }
    ]
   },
@@ -7265,6 +7283,102 @@
    "prefix": "Replay them in ",
    "k": "order",
    "sense": "2"
+  },
+  {
+   "at": "ch02-s06/b1basddk171",
+   "quote": "order",
+   "k": "order",
+   "sense": "2",
+   "auto": true,
+   "prefix": "= UPDATE, D = DELETE, seq = "
+  },
+  {
+   "at": "ch02-s06/b14jsvvclaf",
+   "quote": "order",
+   "k": "order",
+   "sense": "2",
+   "auto": true,
+   "prefix": "arrival "
+  },
+  {
+   "at": "ch02-s06/b14jsvvclaf",
+   "quote": "order",
+   "k": "order",
+   "sense": "2",
+   "auto": true,
+   "prefix": "arrival order ≠ the "
+  },
+  {
+   "at": "ch02-s06/b1a2ozo7102",
+   "quote": "order",
+   "k": "order",
+   "sense": "2",
+   "auto": true,
+   "prefix": "Arrival "
+  },
+  {
+   "at": "ch02-s06/b1a2ozo7102",
+   "quote": "order",
+   "k": "order",
+   "sense": "2",
+   "auto": true,
+   "prefix": "Arrival order is not source "
+  },
+  {
+   "at": "ch02-s06/bp0dd6wjz3s",
+   "quote": "order",
+   "k": "order",
+   "sense": "2",
+   "auto": true,
+   "prefix": ", or by arrival "
+  },
+  {
+   "at": "ch03-s01/b1i1z3eb1zi",
+   "quote": "Order",
+   "k": "order",
+   "sense": "2",
+   "auto": true,
+   "suffix": " matters"
+  },
+  {
+   "at": "ch03-s11/b17wq50tr18",
+   "quote": "order",
+   "k": "order",
+   "sense": "2",
+   "auto": true,
+   "prefix": "and check each layer in "
+  },
+  {
+   "at": "ch06-s14/b1a1t44e11a",
+   "quote": "order",
+   "k": "order",
+   "sense": "2",
+   "auto": true,
+   "prefix": " and do, in "
+  },
+  {
+   "at": "ch07-s09/b1lynmg1yw7",
+   "quote": "Order",
+   "k": "order",
+   "sense": "2",
+   "auto": true,
+   "suffix": " of decisions: first decide "
+  },
+  {
+   "at": "ch09-s13/b1kinngzuxd",
+   "quote": "Order",
+   "k": "order",
+   "sense": "2",
+   "auto": true,
+   "suffix": " of the questions matters"
+  },
+  {
+   "at": "ch13-s16/bxkb8hy1ips",
+   "quote": "order",
+   "k": "order",
+   "sense": "2",
+   "auto": true,
+   "prefix": ": controlled events, arrival "
   }
  ]
 }

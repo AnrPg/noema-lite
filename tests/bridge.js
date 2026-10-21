@@ -5,7 +5,8 @@
    In the browser (the Databricks pilot, English → el / ru / ar): the 文A badge, the first-time card (native language, then
    A2 / B1 / B2), "Before you read", the dotted words and the glosses per level, never inside code, diagrams or exercises,
    the word card (translation, other meanings, draft), the anchor's sense, "I know it", help off, the phone's bottom sheet in
-   Arabic (right to left), and a bridge imported for another pack (a wrong one refused).
+   Arabic (right to left), a bridge imported for another pack (a wrong one refused), and every other pair of en el ru ar:
+   packs in Greek, Russian and Arabic (tests/fixtures/bridges), each into the other three languages.
    Usage: node tests/bridge.js <prepared-repo-dir> */
 const { chromium } = require(process.env.PW || 'playwright');
 const path = require('path'), fs = require('fs'), vm = require('vm'), { execFileSync } = require('child_process');
@@ -48,6 +49,25 @@ function unit() {
   const P = JSON.parse(fs.readFileSync(path.join(subj, 'pack.json'), 'utf8'));
   const sec = P.chapters[0].sections.find(s => s.id === sid);
   ok(JSON.stringify(ctx.NoemaCatalog.blockIds(sec.blocks)) === JSON.stringify(pyIds), `the tool's block ids are the app's (${sid}, ${pyIds.length} blocks)`);
+  // every pair of the four first languages (en el ru ar): the fixtures in el, ru and ar, each into the other three
+  ok(W.find('والسلسلة بسلسلة للسلسلة السلاسل', W.index([{ k: 'سلسلة', forms: ['سلاسل'] }])).length === 4, 'Arabic: a word is found under its clitics (و, ب, لل, the article ال)');
+  for (const src of ['el', 'ru', 'ar']) {
+    const dir = path.join(ROOT, 'tests/fixtures/bridges/dna-' + src), FP = JSON.parse(fs.readFileSync(path.join(dir, 'pack.json'), 'utf8'));
+    const cov = execFileSync('python3', [path.join(ROOT, 'tools/bridge.py'), 'coverage', path.join(dir, 'pack.json')], { encoding: 'utf8' });
+    ok(/all: (\d+)\/\1 = 100/.test(cov) && /0 error\(s\)/.test(execFileSync('python3', [path.join(ROOT, 'tools/bridge.py'), 'check', path.join(dir, 'pack.json')], { encoding: 'utf8' })), `${src}: the fixture is clean and covers every content word (${cov.trim().split('\n')[0].trim()})`);
+    for (const nat of ['en', 'el', 'ru', 'ar'].filter(x => x !== src)) {
+      const o = path.join(require('os').tmpdir(), `bridge-${src}-${nat}.json`);
+      execFileSync('python3', [path.join(ROOT, 'tools/bridge.py'), 'build', path.join(dir, 'pack.json'), '--native', nat, '-o', o], { encoding: 'utf8' });
+      const bb = JSON.parse(fs.readFileSync(o, 'utf8')), rr = C(bb, FP);
+      ok(!rr.errors.length && bb.source === src && bb.native === nat && bb.coverage === 1, `${src} → ${nat}: built and accepted (${bb.entries.length} words)` + (rr.errors.length ? ': ' + rr.errors.join('; ') : ''));
+    }
+  }
+  const sen = JSON.parse(execFileSync('python3', [path.join(ROOT, 'tools/bridge.py'), 'senses', subj, '--word', 'order'], { encoding: 'utf8' }));
+  const at = (bid, by, sense) => sen.some(r => r.at.endsWith(bid) && r.by === by && r.sense === sense);
+  ok(at('b53dvd85x03', 'anchor', '2') && at('b1a2ozo7102', 'cue', '2') && at('b1muoauy7x9', 'cue', '1') && sen.every(r => r.sense === '1' || r.sense === '2'), `tools/bridge.py senses: every “order” of the pack with its sense — a person's anchor, a cue (“arrival order” → sequence, “e-shop order” → purchase), else the first (${sen.length} places)`);
+  const dry = execFileSync('python3', [path.join(ROOT, 'tools/bridge.py'), 'anchor', subj, '--dry'], { encoding: 'utf8' });
+  const coreA = JSON.parse(fs.readFileSync(path.join(subj, 'bridges/core.json'), 'utf8')).anchors;
+  ok(new RegExp(`${coreA.filter(a => a.auto).length} anchor\\(s\\) would be written`).test(dry) && coreA.some(a => !a.auto), 'tools/bridge.py anchor: the auto anchors in core.json are what the cues give now; the person\'s anchor is kept (' + dry.trim() + ')');
   const out = path.join(require('os').tmpdir(), 'bridge-ru.json');
   execFileSync('python3', [path.join(ROOT, 'tools/bridge.py'), 'build', subj, '--native', 'ru', '-o', out], { encoding: 'utf8' });
   const built = JSON.parse(fs.readFileSync(out, 'utf8')), rb = C(built, P);
@@ -120,6 +140,9 @@ const count = (page, sel) => page.$$eval(sel, x => x.length);
     await page.click('.nb-root .nw[data-k="order"][data-s="2"]'); await wait(200);
     ok(/порядок|последовательн/i.test(await page.$eval('.nb-card .nb-t', e => e.textContent)) && /заказ/.test(await page.$eval('.nb-card .nb-other', e => e.textContent)), 'its card shows that sense, the other meaning folded under it');
     await page.keyboard.press('Escape');
+    await section(page, 'ch02-s06');
+    const o6 = await page.$$eval('.nb-root .nw[data-k="order"]', x => x.map(e => e.dataset.s + ':' + e.closest('[data-bid]')?.dataset.bid));
+    ok(o6.length >= 5 && o6.every(x => x.startsWith('2:')), `the tool's anchors (tools/bridge.py anchor, from the cues “arrival order”, “source order” …) give every “order” of ch02-s06 the sense sequence (${o6.length})`);
     await page.click('.nb-btn'); await wait(200); await page.uncheck('.nb-panel .nb-on'); await wait(600);
     ok(await count(page, '.nb-root .nw') === 0 && await count(page, '.nb-prep') === 0, 'help off: plain text again');
     ok(!page._errors.length, 'no page errors' + (page._errors.length ? ': ' + page._errors.join(' · ') : ''));
@@ -150,6 +173,29 @@ const count = (page, sel) => page.$$eval(sel, x => x.length);
     await page.click('.noema-chip:has-text("Demo Physics")'); await wait(1200); await section(page, 'ch01-s01');
     const dp = await page.$$eval('.nb-root .nw', x => x.map(e => e.dataset.k + (e.querySelector('.nw-rt') ? '=' + e.querySelector('.nw-rt').textContent : '')));
     ok(dp.includes('kinetic energy=κινητική ενέργεια'), `its words are linked after a reload, the phrase before the word (${dp.slice(0, 4).join(', ')})`);
+    ok(!page._errors.length, 'no page errors' + (page._errors.length ? ': ' + page._errors.join(' · ') : ''));
+
+    console.log('— every other pair: packs in Greek, Russian and Arabic, each into the other three languages');
+    await page.context().close();
+    page = await open(b, { sid: null, settings: { bridge: { on: true, level: 'open', asked: 1 } } });
+    const SCRIPT = { en: /[a-z]/i, el: /[α-ω]/i, ru: /[а-я]/i, ar: /[\u0600-\u06FF]/ };
+    for (const src of ['el', 'ru', 'ar']) {
+      const FP = JSON.parse(fs.readFileSync(path.join(ROOT, `tests/fixtures/bridges/dna-${src}/pack.json`), 'utf8'));
+      const natives = ['en', 'el', 'ru', 'ar'].filter(x => x !== src);
+      const bs = natives.map(n => JSON.parse(fs.readFileSync(path.join(require('os').tmpdir(), `bridge-${src}-${n}.json`), 'utf8')));
+      const r = await page.evaluate(async ({ FP, bs }) => { await Noema.importPack('anr', FP); for (const x of bs) await NoemaBridge.attach('anr', x); return Object.keys(NoemaBridge.available('anr', FP.subject.id)).sort().join(','); }, { FP, bs });
+      ok(r === natives.slice().sort().join(','), `${src}: the pack is imported with its three bridges (${r})`);
+      await page.goto('about:blank'); await page.goto(URL); await wait(900);
+      await page.click(`.noema-chip:has-text("${FP.subject.title}")`); await wait(1000);
+      for (const nat of [...natives, src]) {
+        await page.evaluate(n => { NoemaBridge.setNative('anr', n); location.hash = '#/'; }, nat); await wait(500);
+        await section(page, 'ch01-s01');
+        const got = await page.evaluate(() => ({ n: document.querySelectorAll('.nb-root .nw').length, g: [...document.querySelectorAll('.nb-root .nw-rt')].map(e => e.textContent), dir: getComputedStyle(document.querySelector('.theory, .section, main') || document.body).direction, prep: document.querySelector('.nb-prep .nb-preview')?.textContent || '' }));
+        if (nat === src) { ok(got.n === 0, `${src} → ${src}: a learner of the pack's own language gets no help`); continue; }
+        ok(got.n >= 15 && got.g.length >= 5 && got.g.filter(t => SCRIPT[nat].test(t)).length >= got.g.length * 0.8 && SCRIPT[nat].test(got.prep), `${src} → ${nat}: ${got.n} words linked, glosses in ${nat} (${got.g.slice(0, 3).join(', ')}), the preview too`);
+      }
+    }
+    await page.screenshot({ path: path.join(SHOTS, 'bridge_ar_source.png') });
     ok(!page._errors.length, 'no page errors' + (page._errors.length ? ': ' + page._errors.join(' · ') : ''));
   } finally { await b.close(); }
   console.log(fails ? `\n❌ ${fails} check(s) failed` : '\n✅ language help: all checks passed');

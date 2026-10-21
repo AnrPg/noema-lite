@@ -219,12 +219,19 @@ pack is not changed. Contract and rules: `references/BRIDGE.md` (or `noema_bridg
 2. `python3 scripts/bridge.py todo <pack.json> --chapters ch01` → the content words to cover, most frequent first.
 3. Write `bridges/core.json`: content words only (never articles, prepositions, conjunctions, pronouns, auxiliaries),
    their forms, part of speech, band (1 everyday · 2 academic · 3 the field's term), senses as used in this pack (a
-   `gloss` each), `keep` for names, `sections` key words, an anchor where one word has two meanings in the pack.
+   `gloss` each), `keep` for names, `sections` key words. Per source language (BRIDGE.md §2.2): Greek and Russian — the
+   lemma plus every inflected form the pack uses; Arabic — the word without clitics or article (`سلسلة`, never
+   `السلسلة`; و ف ب ل ك ال are recognised by themselves), broken plurals as forms. Any pair works (en, el, ru, ar into
+   each other are tested).
+3b. A word with two meanings in the pack: two senses, each with `cues` (words of the sentence that mean it), then
+   `python3 scripts/bridge.py senses <pack.json> --word order` (every place and its sense) and
+   `python3 scripts/bridge.py anchor <pack.json>` (anchors from the cues; write an anchor by hand where cues cannot tell).
 4. Write `bridges/<native>.json`: one translation per sense (the term the learner's own lectures would use, a plain
    explanation in brackets when needed), a 2–4 sentence preview per section, `"status": "draft"`.
 5. `python3 scripts/bridge.py check <pack.json>` (0 errors) and `coverage`; chapter by chapter, complete each.
 6. `python3 scripts/bridge.py build <pack.json> --native ru -o ru.bridge.json` → save it with `noema_save_bridge`
    (or the learner imports the file with 📥). Learners' *Report a mistake* notes come back in `noema_bridge_guide`.
+   The connector's prompt `language_help` runs these steps.
 
 ## Quality bar (check before saving)
 - Every source detail is taught **and** tested; nothing invented; obvious source errors corrected and noted.

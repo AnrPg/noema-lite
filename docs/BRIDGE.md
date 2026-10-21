@@ -7,8 +7,9 @@ the pack and without a dictionary of the whole language.
 
 Code: `engine/wordlink.js` (finding words in a page), `engine/bridge.js` (everything the learner sees),
 `engine/src/36_bridge.css`, `NoemaPackCheck.checkBridge` in `engine/packcheck.js` (shared with the connector), the tool
-`tools/bridge.py`, words `i18n/bridge/`. Tests: `tests/bridge_core.js`, `tests/bridge.js`. Pilot: Databricks (English) →
-Greek, Russian, Arabic, chapter 1 complete.
+`tools/bridge.py`, words `i18n/bridge/` (en; drafts el, ru, fr, ar-EG). Test: `tests/bridge.js`. Pilot: Databricks (English) →
+Greek, Russian, Arabic, chapter 1 complete; test packs in Greek, Russian and Arabic (`tests/fixtures/bridges/`), each with
+bridges into the other three, so **all 12 directions among English, Greek, Russian and Arabic** are tested end to end.
 
 ## 1. What the learner gets
 * **The 文A badge** on the subject (picker, Shelf, subject home): `文A RU +2`, the learner's native language first; the
@@ -82,7 +83,27 @@ Next to the subject (`library/subjects/<id>/bridges/`), or next to a pack's `.js
 * Plain text only (no markup), translation ≤ 200 characters, note ≤ 400, preview ≤ 1500, ≤ 30 key words a section.
 * Block ids (`at: "<section>/<block id>"`) are the app's own (`NoemaCatalog.blockIds`, the same in `tools/bridge.py`).
 
-### 2.2 The built file (what the app reads)
+* `cues` (core only, optional) on a sense: words of the source language whose presence in the same sentence means this
+  sense (*order* sequence: `"arrival order"`, `"in order"`; purchase: `"e-shop"`, `"customer"`). `tools/bridge.py anchor`
+  turns them into anchors (`"auto": true`) wherever they pick another sense than the first; anchors a person wrote (no
+  `auto`) are kept and win. `tools/bridge.py senses` lists every place of a word with several senses and the sense it gets.
+
+### 2.2 Every language pair (the first four: English, Greek, Russian, Arabic — 12 directions)
+Any pack language can be bridged into any other language; the app, the tool and the checks know nothing of particular
+pairs. What differs is how the words of the *source* language are written down:
+
+| source | entries | matching |
+|---|---|---|
+| English | the lemma (`snapshot`), `forms` with the plurals and verb forms the pack uses (`snapshots`, `fails`, `failed`) | case and accents ignored |
+| Greek | the lemma (nominative singular, 1st person present: `αλυσίδα`, `συνθέτω`), `forms` with the cases and persons the pack uses (`αλυσίδας`, `συνθέτει`, `συντίθεται`) | accents, capitals and final ς ignored (`ΑΛΥΣΙΔΑ` = `αλυσίδα`) |
+| Russian | the lemma (`цепь`, `синтезировать`), `forms` with the cases and persons used (`цепи`, `синтезирует`, `синтезируется`) | case ignored, ё = е (`ещё` = `еще`) |
+| Arabic | the word **without** clitics or article (`سلسلة`, not `السلسلة`), `forms` with broken plurals and other stems (`سلاسل`); phrases as written (`لولب مزدوج`, form `اللولب المزدوج`) | vowel marks, tatweel, ى/ي ignored; the clitics و ف · ب ل ك · ال (لل) in front of a word are recognised by themselves (`والسلسلة`, `بسلسلة`) |
+
+Function words are never entries in any of them (`tools/bridge.py` knows them for en, el, ru, ar, fr, de, es, it, pt,
+tr). Translations into Arabic are shown right to left inside any page (`dir=auto`); a page in Arabic is right to left and
+its glosses sit under the words in the same way. A learner whose native language is the pack's own gets no help.
+
+### 2.3 The built file (what the app reads)
 `tools/bridge.py build` merges the core and one native into `{ "format": "noema-bridge", "v": 1, pack, source, native,
 status, coverage, chapters, of, entries[{k, pos, forms, band, key, senses[{id, t, gloss, note, st}]}],
 sections{sid: {terms, preview}}, anchors }`. `coverage` = share of the pack's content words an entry or `keep` covers;
@@ -112,6 +133,9 @@ python3 tools/bridge.py todo SUBJ --chapters ch01      # content words no entry 
 # write bridges/<native>.json (a translation per sense, natural for a student; a preview per section)
 python3 tools/bridge.py check SUBJ                     # 0 errors: function words, unknown sections, orphan anchors, missing / stale translations
 python3 tools/bridge.py coverage SUBJ --native ru      # per chapter
+python3 tools/bridge.py senses SUBJ --word order        # a word with two senses: every place and the sense it gets there
+# add cues to its senses (core.json), then
+python3 tools/bridge.py anchor SUBJ                     # anchors from the cues (a person's anchors are kept and win)
 python3 tools/bridge.py build SUBJ --native ru -o ru.bridge.json
 ```
 `SUBJ` is a library subject folder or a pack `.json` (the learner's pack, from `noema_get_pack_url`) with `bridges/`
@@ -125,10 +149,11 @@ the section is about in 2–4 sentences; it never replaces the section. Work cha
 a chapter is useful when it is complete.
 
 ## 5. Phases
-1. **This PR** — the core (matching, the card, glosses, levels, fading, the badge, "Before you read"), import, the tool,
+1. **Done (PR #29)** — the core (matching, the card, glosses, levels, fading, the badge, "Before you read"), import, the tool,
    the connector, the skill, the Databricks pilot (chapter 1 → el, ru, ar).
-2. Anchors made by the tool from the text (a word whose senses differ by context), the rest of the Databricks pilot, a
-   Greek pack (e.g. DNA replication) → ru, ar once the learner's pack can be read.
+2. **Phase 2** — every pair of en, el, ru, ar (Arabic clitics, the Greek, Russian and Arabic test packs), anchors made by
+   the tool from cues (`senses`, `anchor`), the rest of the Databricks pilot; then a Greek pack of the learner's (e.g. DNA
+   replication) → en, ru, ar once the learner's pack can be read.
 3. Explain this sentence (AI, in the learner's language) and *My words*: the words looked up, reviewed with spaced
    repetition, and drills on the pack's terms in both directions.
 4. Sharing: bridges of shared and public packs (the author, or others with the author's 🔔 permission), reviews by

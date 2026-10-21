@@ -1,0 +1,95 @@
+{
+ "format": "noema-bridge-locale",
+ "v": 1,
+ "native": "en",
+ "status": "draft",
+ "t": {
+  "репликация#1": {
+   "t": "replication",
+   "src": "19ui7r94fa"
+  },
+  "начинаться#1": {
+   "t": "begins",
+   "src": "1s9u9e01c3"
+  },
+  "точка начала репликации#1": {
+   "t": "origin of replication",
+   "src": "rxhchu9t4r"
+  },
+  "хеликаза#1": {
+   "t": "helicase",
+   "src": "1dfd3h2s15"
+  },
+  "раскручивать#1": {
+   "t": "unwinds",
+   "src": "hwce9e2imn"
+  },
+  "двойная спираль#1": {
+   "t": "double helix",
+   "src": "17543yjqlz"
+  },
+  "полимераза#1": {
+   "t": "polymerase",
+   "src": "loaul51ywu"
+  },
+  "синтезировать#1": {
+   "t": "synthesises",
+   "src": "1kynr5unpy"
+  },
+  "новый#1": {
+   "t": "new",
+   "src": "tfncfu1411"
+  },
+  "цепь#1": {
+   "t": "strand",
+   "src": "1fj0tr4q70"
+  },
+  "каждый#1": {
+   "t": "each",
+   "src": "40cvpy132c"
+  },
+  "молекула#1": {
+   "t": "molecule",
+   "src": "spefdc1dqm"
+  },
+  "сохранять#1": {
+   "t": "keeps",
+   "src": "rk10g91iqc"
+  },
+  "старый#1": {
+   "t": "old (parent)",
+   "src": "1kwi4515x5"
+  },
+  "полуконсервативный#1": {
+   "t": "semi-conservative",
+   "src": "i2fv47pk3y"
+  },
+  "ведущий#1": {
+   "t": "leading",
+   "src": "1nqwcjtjia"
+  },
+  "синтезироваться#1": {
+   "t": "is synthesised",
+   "src": "f7bnsx1lo8"
+  },
+  "непрерывно#1": {
+   "t": "continuously",
+   "src": "bxosdxqlpz"
+  },
+  "отстающий#1": {
+   "t": "lagging",
+   "src": "qf7osi5kj5"
+  },
+  "фрагмент#1": {
+   "t": "fragment",
+   "src": "bxr4q01eqf"
+  },
+  "одна#1": {
+   "t": "one",
+   "src": "1r4q82ayb0"
+  }
+ },
+ "sections": {
+  "ch01-s01": "DNA copies itself from origins of replication: helicase unwinds the double helix and polymerase builds the new strands, one continuously, the other in Okazaki fragments."
+ }
+}

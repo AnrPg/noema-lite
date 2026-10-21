@@ -106,6 +106,8 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
   ok(!(await tool('noema_save_pack', { pack_json: JSON.stringify(small) })).isError && srv.state.kv[uid]['a:packmeta:tiny-inline'], 'save_pack stores a small pack inline');
   // 文A language bridges (docs/BRIDGE.md): checked as the app checks them, stored where the app reads them
   ok(names.includes('noema_bridge_guide') && names.includes('noema_save_bridge'), 'tools: noema_bridge_guide + noema_save_bridge');
+  const lp = (await call({ jsonrpc: '2.0', id: 5, method: 'prompts/get', params: { name: 'language_help', arguments: { subject: 'tiny-inline', native: 'ar' } } }, T)).json?.result;
+  ok(/noema_bridge_guide/.test(JSON.stringify(lp || {})) && /into ar/.test(JSON.stringify(lp || {})), 'prompt language_help: the steps for one subject and native language');
   const sid0 = small.chapters[0].sections[0].id;
   const br = { format: 'noema-bridge', v: 1, pack: 'tiny-inline', source: small.subject.language || 'en', native: 'ru', status: 'draft', coverage: 0.3, chapters: [], of: small.chapters.length,
     entries: [{ k: 'energy', pos: 'NOUN', band: 2, senses: [{ id: '1', t: 'энергия' }] }], sections: { [sid0]: { terms: ['energy'], preview: 'Энергия.' } }, anchors: [] };

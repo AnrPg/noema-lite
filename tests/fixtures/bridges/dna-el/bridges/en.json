@@ -1,0 +1,87 @@
+{
+ "format": "noema-bridge-locale",
+ "v": 1,
+ "native": "en",
+ "status": "draft",
+ "t": {
+  "αντιγραφή#1": {
+   "t": "replication",
+   "src": "zqpp0z2teu"
+  },
+  "ξεκινώ#1": {
+   "t": "begins",
+   "src": "f04wve8zqa"
+  },
+  "θέση έναρξης#1": {
+   "t": "origin of replication",
+   "src": "1ovz2kbjcv"
+  },
+  "ελικάση#1": {
+   "t": "helicase",
+   "src": "11onf651ga"
+  },
+  "ξετυλίγω#1": {
+   "t": "unwinds",
+   "src": "1xo7rmb1ui"
+  },
+  "διπλή έλικα#1": {
+   "t": "double helix",
+   "src": "mmnvvxavsh"
+  },
+  "πολυμεράση#1": {
+   "t": "polymerase",
+   "src": "6m5b827ev8"
+  },
+  "συνθέτω#1": {
+   "t": "synthesises",
+   "src": "18jx8cv1hw"
+  },
+  "νέος#1": {
+   "t": "new",
+   "src": "1q3xvsoqtv"
+  },
+  "αλυσίδα#1": {
+   "t": "strand",
+   "src": "1l43idi1ge"
+  },
+  "μόριο#1": {
+   "t": "molecule",
+   "src": "1yasuq5iqf"
+  },
+  "κρατώ#1": {
+   "t": "keeps",
+   "src": "13gtu4vqnd"
+  },
+  "παλιός#1": {
+   "t": "old (parent)",
+   "src": "1337upn1bs"
+  },
+  "ημισυντηρητικός#1": {
+   "t": "semi-conservative",
+   "src": "1ibya051c1"
+  },
+  "συνεχής#1": {
+   "t": "leading (continuous)",
+   "src": "rf4vs8qpvn"
+  },
+  "κατεύθυνση#1": {
+   "t": "direction",
+   "src": "fh6tw41qnk"
+  },
+  "ασυνεχής#1": {
+   "t": "lagging (discontinuous)",
+   "src": "1qh6bs9p5w"
+  },
+  "τμήμα#1": {
+   "t": "fragment",
+   "src": "zfqwxq1j53"
+  },
+  "είδος#1": {
+   "t": "kind",
+   "src": "1dhiv011bk"
+  }
+ },
+ "sections": {
+  "ch01-s01": "DNA copies itself from origins of replication: helicase unwinds the double helix and polymerase builds the new strands, one continuously, the other in Okazaki fragments."
+ }
+}

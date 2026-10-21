@@ -14,6 +14,9 @@ Commands (SUBJ = a subject folder, or a pack .json with its bridges/ folder besi
   python3 tools/bridge.py check SUBJ                                       core + every native: errors, stale or missing translations, orphan anchors
   python3 tools/bridge.py stamp SUBJ --native el                           record the current meaning (src) of every translation (after a review)
   python3 tools/bridge.py build SUBJ --native el [-o out.json]             one noema-bridge file (to import with 📥 or save through the connector)
+  python3 tools/bridge.py senses SUBJ [--word order]                       every place of a word with several senses, and the sense it gets there
+  python3 tools/bridge.py anchor SUBJ [--dry]                              anchors from the senses' cues (senses[].cues: words of the sentence
+                                                                           that mean this sense); a person's anchors are kept and win
 The same functions build the library's bridges (tools/build.py) and run in the skill's sandbox.
 """
 import os, sys, json, re, glob, unicodedata
@@ -109,7 +112,7 @@ STOP = {
    not n't 's 're 've 'll 'd also just only even still very too quite rather already again ever never always often sometimes
    get gets got make makes made let lets yes ok e.g i.e etc don't doesn't didn't can't cannot won't isn't aren't wasn't weren't hasn't haven't hadn't
    it's that's what's there's here's let's i'm i've you'll you're you've we're we'll they're they'll he's she's who's""",
- 'el': """ο η το οι τα του της των τον την στο στη στην στον στα στους στις στου στης ένας μια μία ένα ενός μιας έναν
+ 'el': """ο η το οι τα του της των τον την τη στο στη στην στον στα στους στις στου στης ένας μια μία ένα ενός μιας έναν
    και ή αλλά ούτε μήτε όμως ενώ αν εάν όταν όπως αφού επειδή γιατί ώστε που πού πως πώς ότι μήπως μην μη δεν όχι ναι
    σε σ' από με για προς χωρίς κατά μετά πριν παρά αντί ως έως μέχρι μέσα έξω πάνω κάτω δίπλα μεταξύ ανάμεσα
    εγώ εσύ αυτός αυτή αυτό αυτοί αυτές αυτά εμείς εσείς μου σου του της μας σας τους με σε τον την το τα τις
@@ -132,6 +135,9 @@ STOP = {
    e o ma né che chi cui dove quando come se perché anche io tu lui lei noi voi loro mi ti si ci vi è sono era essere ha hanno avere non più molto già""",
  'pt': """o a os as um uma uns umas de do da dos das em no na nos nas por pelo pela para com sem sobre entre e ou mas nem que quem qual onde quando como se porque
    eu tu ele ela nós vós eles elas me te se nos lhe lhes seu sua seus suas é são era ser estar está estão há ter tem não muito também já""",
+ 'ar': """في من إلى الى على عن مع منذ عند لدى حتى بين بعد قبل خلال حول دون غير ضد نحو عبر ل ب ك و ف أو ثم لكن بل لا لم لن ما ماذا متى أين كيف لماذا هل قد سوف إن أن إنه أنه إذا إذ لو كي لأن كما مثل
+   هذا هذه هذان هاتان هؤلاء ذلك تلك أولئك الذي التي الذين اللذان اللتان اللاتي هنا هناك هو هي هم هن هما أنا نحن أنت أنتم أنتن إياه كل بعض أي أيضا فقط جدا
+   كان كانت كانوا يكون تكون يكونون ليس ليست أصبح صار له لها لهم به بها بهم فيه فيها فيهم منه منها عليه عليها عنه عنها إليه إليها""",
  'tr': """ve veya ya da de ki bu şu o bir her hiç çok daha en ile için gibi kadar göre sonra önce ama fakat ancak eğer çünkü ben sen biz siz onlar değil var yok mı mi mu mü""",
 }
 STOPSET = {k: {fold(w) for w in v.split()} for k, v in STOP.items()}
@@ -139,7 +145,8 @@ STOPSET = {k: {fold(w) for w in v.split()} for k, v in STOP.items()}
 def content_token(tok, lang):
     t = fold(tok)
     if len(t) < 2 or any(c.isdigit() for c in t): return False
-    return t not in STOPSET.get(lang.split('-')[0], set())
+    stop = STOPSET.get(lang.split('-')[0], set())
+    return not any(r in stop for r in readings(t))   # Arabic: "وهذا" is و + هذا
 
 # ---------- loading ----------
 def rj(p, d=None):
@@ -169,6 +176,21 @@ def sections(pack, chapters=None):
             out.append((c['id'], s['id'], [(ids[i], block_texts(b)) for i, b in enumerate(s.get('blocks') or [])]))
     return out
 
+AR = re.compile('^[\u0600-\u06FF]')
+def readings(f):
+    """engine/wordlink.js readings(): a folded word, then without the clitics Arabic writes onto it (و ف · ب ل ك · ال, لل)."""
+    if not AR.match(f): return [f]
+    out = [f]
+    def add(w):
+        if len(w) >= 2 and w not in out: out.append(w)
+    for a in [f] + ([f[1:]] if f[:1] in ('و', 'ف') else []):
+        add(a)
+        for b in [a] + ([a[1:]] if a[:1] in ('ب', 'ل', 'ك') else []):
+            add(b)
+            if b.startswith('ال'): add(b[2:])
+            if b.startswith('لل'): add(b[2:])
+    return out
+
 class Index:
     def __init__(self, entries):
         self.first = {}
@@ -181,10 +203,12 @@ class Index:
         toks = tokenize(text); out = []; n = 0
         while n < len(toks):
             hit = None
-            for cand, e in self.first.get(fold(toks[n][0]), []):
-                if n + len(cand) > len(toks): continue
-                if all(fold(toks[n + q][0]) == cand[q] and (q == 0 or re.fullmatch(r'[ \t ]+', text[toks[n + q - 1][2]:toks[n + q][1]])) for q in range(len(cand))):
-                    hit = (cand, e); break
+            for r in readings(fold(toks[n][0])):   # the word as written first, then without its clitics (Arabic)
+                for cand, e in self.first.get(r, []):
+                    if n + len(cand) > len(toks): continue
+                    if cand[0] == r and all(fold(toks[n + q][0]) == cand[q] and re.fullmatch(r'[ \t ]+', text[toks[n + q - 1][2]:toks[n + q][1]]) for q in range(1, len(cand))):
+                        hit = (cand, e); break
+                if hit: break
             if hit:
                 out.append((toks[n][1], toks[n + len(hit[0]) - 1][2], hit[1])); n += len(hit[0])
             else: n += 1
@@ -304,6 +328,8 @@ def build(pack, bdir, nat):
             if not x or not x.get('t'): continue
             sense = {'id': str(s.get('id')), 't': x['t']}
             if s.get('gloss'): sense['gloss'] = s['gloss']
+            for f in ('pos', 'forms'):   # a sense with its own part of speech or forms ("order" the noun, "orders" …)
+                if s.get(f): sense[f] = s[f]
             if x.get('note'): sense['note'] = x['note']
             sense['st'] = 'stale' if x.get('src') and x['src'] != src_of(e, s) else x.get('st') or st
             ss.append(sense)
@@ -327,6 +353,80 @@ def build(pack, bdir, nat):
          'coverage': round(allc[0] / allc[1], 4) if allc[1] else 0, 'chapters': full, 'of': len(pack['chapters']), 'entries': entries, 'sections': secs, 'anchors': anchors}
     if L.get('updated'): b['updated'] = L['updated']
     return b
+
+# ---------- the sense at each place: anchors made from the text (cues), kept apart from the ones a person wrote ----------
+MASK = re.compile(r'`[^`]*`|\$[^$]*\$|\]\([^)]*\)|<[^>]+>')
+MARKUP_CH = set('`$*_[]()<>|#\n')
+def block_raw(b):
+    """The raw strings of one block, in the order block_texts() gives their words."""
+    t = b.get('t'); g = lambda *k: [b.get(x) or '' for x in k]
+    if t == 'p': return g('text')
+    if t == 'list': return list(b.get('items') or [])
+    if t in ('code', 'diagram', 'figure'): return g('caption')
+    if t == 'table': return g('caption') + list(b.get('head') or []) + [c for r in b.get('rows') or [] for c in r or []]
+    if t == 'callout': return g('title', 'text')
+    if t == 'compare': return [x for i in b.get('items') or [] for x in [i.get('title') or ''] + list(i.get('points') or [])]
+    if t == 'flow': return list(b.get('items') or []) + g('caption')
+    if t == 'reveal': return g('label', 'text')
+    if t == 'ask': return g('title') + list(b.get('questions') or [])
+    if t == 'terms': return [x or '' for i in b.get('items') or [] for x in (i.get('term'), i.get('def'))]
+    return []
+
+def occurrences(pack, entries, keep=(), only=None):
+    """Every place a word with two or more senses appears: [{at, k, form, i, raw, window}] (i = index in the raw string)."""
+    multi = {e['k'] for e in entries if len(e.get('senses') or []) > 1 and (not only or e['k'] in only)}
+    if not multi: return []
+    idx = Index(list(entries) + [{'k': k} for k in keep]); out = []
+    for c in pack['chapters']:
+        for sec in c.get('sections') or []:
+            ids = block_ids(sec.get('blocks'))
+            for n, b in enumerate(sec.get('blocks') or []):
+                for raw in block_raw(b):
+                    raw = str(raw or ''); masked = MASK.sub(lambda m: ' ' * len(m.group(0)), raw)
+                    for i, j, e in idx.find(masked):
+                        if e.get('k') not in multi: continue
+                        a = max(masked.rfind(x, 0, i) for x in '.!?;:\n'); z = min([y for y in (masked.find(x, j) for x in '.!?;:\n') if y >= 0] or [len(masked)])
+                        out.append({'at': f"{sec['id']}/{ids[n]}", 'k': e['k'], 'form': raw[i:j], 'i': i, 'raw': raw, 'window': masked[a + 1:z]})
+    return out
+
+def cue_sense(e, window):
+    """The sense whose cues the sentence holds most (ties and none → None: the default applies)."""
+    words = ' ' + ' '.join(r for t, _, _ in tokenize(window) for r in readings(fold(t))[:1]) + ' '
+    best, score, tie = None, 0, False
+    for s in e.get('senses') or []:
+        n = sum(1 for c in s.get('cues') or [] if ' ' + ' '.join(fold(t) for t, _, _ in tokenize(c)) + ' ' in words)
+        if n > score: best, score, tie = s, n, False
+        elif n and n == score: tie = True
+    return None if tie else best
+
+def _side(raw, i, j, before):
+    """A prefix (before the word) or suffix that the page shows exactly: plain words only, ≤ 30 characters, whole words."""
+    if before:
+        seg = raw[:i]; cut = max([seg.rfind(ch) for ch in MARKUP_CH] + [-1]); seg = seg[cut + 1:]
+        if len(seg) > 30: seg = seg[-30:]; seg = seg[seg.find(' ') + 1:] if ' ' in seg else ''
+    else:
+        seg = raw[j:]; cut = min([x for x in (seg.find(ch) for ch in MARKUP_CH) if x >= 0] or [len(seg)]); seg = seg[:cut]
+        if len(seg) > 30: seg = seg[:30]; seg = seg[:seg.rfind(' ')] if ' ' in seg else ''
+    return re.sub(r'\s+', ' ', seg)
+
+def anchor(pack, bdir, dry=False):
+    """Anchors from the cues of the senses (core.json senses[].cues): one per place where the cues pick another sense
+    than the first. Anchors a person wrote (no "auto") are kept and win; the auto ones are made again each run."""
+    core = core_of(bdir, pack); entries = core.get('entries') or []; byk = {e['k']: e for e in entries}
+    manual = [a for a in core.get('anchors') or [] if not a.get('auto')]
+    made = []; report = []
+    for o in occurrences(pack, entries, core.get('keep') or []):
+        e = byk[o['k']]; s = cue_sense(e, o['window']); first = (e.get('senses') or [{}])[0]
+        pin = next((m for m in manual if m['at'] == o['at'] and m.get('quote') == o['form'] and m.get('k') == o['k']), None)
+        report.append({'at': o['at'], 'k': o['k'], 'form': o['form'], 'sense': str(pin['sense']) if pin else str((s or first).get('id')), 'by': 'anchor' if pin else 'cue' if s else 'default', 'context': o['window'].strip()[:160]})
+        if pin or not s or str(s.get('id')) == str(first.get('id')): continue
+        a = {'at': o['at'], 'quote': o['form'], 'k': o['k'], 'sense': str(s['id']), 'auto': True}
+        pre = _side(o['raw'], o['i'], o['i'] + len(o['form']), True); suf = '' if pre.strip() else _side(o['raw'], o['i'], o['i'] + len(o['form']), False)
+        if pre.strip(): a['prefix'] = pre
+        elif suf.strip(): a['suffix'] = suf
+        made.append(a)
+    if not dry: core['anchors'] = manual + made; wj(os.path.join(bdir, 'core.json'), core)
+    return made, report
 
 def build_library(sdir, pack, root=None):
     """tools/build.py: every bridges/<native>.json of a library subject → bridge.<native>.js + the registry's bridgeLocales."""
@@ -352,7 +452,8 @@ def build_library(sdir, pack, root=None):
 def main(argv):
     import argparse
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument('cmd', choices=['todo', 'coverage', 'check', 'stamp', 'build'])
+    ap.add_argument('cmd', choices=['todo', 'coverage', 'check', 'stamp', 'build', 'senses', 'anchor'])
+    ap.add_argument('--dry', action='store_true'); ap.add_argument('--word')
     ap.add_argument('subject'); ap.add_argument('--native'); ap.add_argument('--chapters'); ap.add_argument('--limit', type=int, default=400); ap.add_argument('-o', '--out')
     a = ap.parse_args(argv)
     pack, bdir = load(a.subject); core = core_of(bdir, pack); chs = set(a.chapters.split(',')) if a.chapters else None
@@ -370,6 +471,12 @@ def main(argv):
     elif a.cmd == 'stamp':
         if not a.native: ap.error('--native is required')
         print(f'{stamp(pack, bdir, a.native)} translation(s) stamped')
+    elif a.cmd == 'senses':
+        _m, rep = anchor(pack, bdir, dry=True)
+        print(json.dumps([r for r in rep if not a.word or r['k'] == a.word], ensure_ascii=False, indent=1))
+    elif a.cmd == 'anchor':
+        made, rep = anchor(pack, bdir, dry=a.dry)
+        print(f'{len(rep)} place(s) of words with several senses: {sum(1 for r in rep if r["by"] == "cue")} decided by cues, {len(made)} anchor(s) {"would be " if a.dry else ""}written')
     elif a.cmd == 'build':
         if not a.native: ap.error('--native is required')
         b = build(pack, bdir, a.native); out = a.out or os.path.join(bdir, f'{pack["subject"]["id"]}.{a.native}.bridge.json')

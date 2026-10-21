@@ -2,7 +2,8 @@
    noema-lite — word linking: the one place that finds a dictionary's words in a page's text (docs/BRIDGE.md §4).
    A dictionary is a list of entries { k, forms: [...], case? } (forms may be several words: "data skew"); the text is
    cut into words (letters, marks and digits; ' and - inside a word belong to it), every word is compared folded
-   (engine/catalog.js fold(): accents, case, final sigma … do not matter), the longest entry that starts at a word wins.
+   (engine/catalog.js fold(): accents, case, final sigma … do not matter; Arabic clitics too: readings()), the longest
+   entry that starts at a word wins.
      · tokenize(text) → [{ t, i, j }] · index(entries) → idx · find(text, idx) → [{ i, j, entry, form }]
      · decorate(root, idx, { pick }) wraps the matches of every text node in root (never inside code, maths, buttons,
        links, inputs, ASCII diagrams or an exercise) in <span class="nw"> — with a gloss <span class="nw nw-g">word<span class="nw-rt">…</span></span>
@@ -22,6 +23,23 @@
   const SKIP = 'code, pre, kbd, samp, .pre, .katex, .katex-display, svg, math, button, a, input, textarea, select, option, label, '
     + '.diagram, .nw, .nw-rt, [data-nowl], .quickzone, .excard, .ex, .opts, .opt, .fb, .sectools, .secnav, .continue';
   /* i18n-ignore-end */
+
+  /** A word with the clitics Arabic writes onto it (و ف, then ب ل ك, then the article ال; لل = ل + ال) → the word, then
+      each shorter reading: "والجدول" → والجدول, الجدول, جدول. Other scripts: the word alone. Entries are written without them. */
+  const AR = /^[\u0600-\u06FF]/;
+  function readings(f) {
+    if (!AR.test(f)) return [f];
+    const out = [f], add = w => { if (w.length >= 2 && !out.includes(w)) out.push(w); };
+    for (const a of [f, ...(/^[وف]/.test(f) ? [f.slice(1)] : [])]) {
+      add(a);
+      for (const b of [a, ...(/^[بلك]/.test(a) ? [a.slice(1)] : [])]) {
+        add(b);
+        if (b.startsWith('ال')) add(b.slice(2));
+        if (b.startsWith('لل')) add(b.slice(2));
+      }
+    }
+    return out;
+  }
 
   function tokenize(text) {
     const s = String(text ?? ''), out = []; let m; WORD.lastIndex = 0;
@@ -48,16 +66,19 @@
     const s = String(text ?? ''), toks = tokenize(s), out = [];
     if (!idx || !idx.size) return out;
     for (let n = 0; n < toks.length; n++) {
-      const cands = idx.first.get(fold(toks[n].t)); if (!cands) continue;
       let hit = null;
-      for (const c of cands) {
-        if (n + c.toks.length > toks.length) continue;
-        let ok = true;
-        for (let q = 0; q < c.toks.length && ok; q++) {
-          const tk = toks[n + q];
-          ok = (c.entry.case ? tk.t === c.toks[q] : fold(tk.t) === c.toks[q]) && (q === 0 || GAP.test(s.slice(toks[n + q - 1].j, tk.i)));
+      for (const r of readings(fold(toks[n].t))) {   // the word as written first, then without its clitics (Arabic)
+        const cands = idx.first.get(r); if (!cands) continue;
+        for (const c of cands) {
+          if (n + c.toks.length > toks.length) continue;
+          let ok = true;
+          for (let q = 0; q < c.toks.length && ok; q++) {
+            const tk = toks[n + q];
+            ok = q === 0 ? (c.entry.case ? tk.t === c.toks[0] : r === c.toks[0]) : (c.entry.case ? tk.t === c.toks[q] : fold(tk.t) === c.toks[q]) && GAP.test(s.slice(toks[n + q - 1].j, tk.i));
+          }
+          if (ok) { hit = c; break; }
         }
-        if (ok) { hit = c; break; }
+        if (hit) break;
       }
       if (!hit) continue;
       const last = toks[n + hit.toks.length - 1];
@@ -114,6 +135,6 @@
     rootEl.normalize();
   }
 
-  root.NoemaWordlink = { SKIP, fold, tokenize, index, find, decorate, undecorate };
+  root.NoemaWordlink = { SKIP, fold, readings, tokenize, index, find, decorate, undecorate };
   if (typeof module !== 'undefined' && module.exports) module.exports = root.NoemaWordlink;
 })(typeof window !== 'undefined' ? window : globalThis);
