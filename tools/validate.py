@@ -31,7 +31,8 @@ BLOCKS = {"p":["text"],"list":["items"],"code":["code"],"diagram":["text"],"tabl
 KINDS = {"key","pitfall","tip","exam","warn","analogy","debug","interview"}
 TAGS = {"concept","syntax","pitfall","debug","exam","interview","calc","compare"}
 VTYPES = {"img_hotspot","img_sequence","img_reveal","img_drag","img_label","img_select","img_occlusion"}
-TYPES = {"mcq","tf","odd","order","match","bucket","cloze","spotbug","calc","scenario","free","write"} | VTYPES
+TTYPES = {"flaw","case","predict","tree","inquiry","debate"}   # critical-thinking types (CONTENT_SPEC.md)
+TYPES = {"mcq","tf","odd","order","match","bucket","cloze","spotbug","calc","scenario","free","write"} | TTYPES | VTYPES
 ARGS = sys.argv[1:]
 MEDIA = json.load(open(ARGS[ARGS.index("--media")+1], encoding="utf-8")) if "--media" in ARGS else None
 MIN_VISUAL = int(ARGS[ARGS.index("--min-visual")+1]) if "--min-visual" in ARGS else 0
@@ -174,6 +175,57 @@ def check_subject(path, translated):
     for m in warns: print("WARN:", m)
     print("OK" if not errors else f"{len(errors)} ERRORS")
     sys.exit(1 if errors else 0)
+
+def check_thinking(eid, e):
+    """flaw · case · predict · tree · inquiry · debate (CONTENT_SPEC.md, "Types"); engine/packcheck.js checks the same."""
+    t = e["type"]; isint = lambda v, n: isinstance(v, int) and not isinstance(v, bool) and 0 <= v < n
+    strs = lambda a, m=1: isinstance(a, list) and len(a) >= m and all(s(x) for x in a)
+    if t == "flaw":
+        L = e.get("lines", [])
+        if not strs(L, 3) or not e.get("flaws") or not all(isint(x, len(L)) for x in e["flaws"]): E(f"{eid}: flaw needs lines (>=3) and flaws (line indexes)")
+        if not strs(e.get("reasons"), 2) or not isint(e.get("reason"), len(e.get("reasons") or [])): E(f"{eid}: flaw needs reasons (>=2) and reason (index)")
+    elif t == "case":
+        P = e.get("parts")
+        if not isinstance(P, list) or not 2 <= len(P) <= 4: E(f"{eid}: case needs 2-4 parts"); return
+        for i, p in enumerate(P):
+            pid = f"{eid} part {i+1}"
+            if not isinstance(p, dict) or p.get("type") not in ("mcq", "tf", "calc"): E(f"{pid}: type must be mcq, tf or calc"); continue
+            if not s(p.get("q")): E(f"{pid}: missing q")
+            if p["type"] == "mcq":
+                a = p.get("answer"); aa = a if isinstance(a, list) else [a]
+                if not strs(p.get("options"), 2) or not all(isint(x, len(p["options"])) for x in aa): E(f"{pid}: needs options and answer index")
+            if p["type"] == "tf" and not isinstance(p.get("answer"), bool): E(f"{pid}: tf answer must be bool")
+            if p["type"] == "calc" and not isinstance(p.get("answer"), (int, float)): E(f"{pid}: calc answer must be number")
+    elif t == "predict":
+        if not s(e.get("outcome")): E(f"{eid}: predict needs outcome (what actually happens)")
+        if isinstance(e.get("options"), list):
+            if not strs(e["options"], 2) or not isint(e.get("answer"), len(e["options"])): E(f"{eid}: predict needs options and answer index")
+        elif not isinstance(e.get("answer"), (int, float)) or isinstance(e.get("answer"), bool): E(f"{eid}: predict needs options+answer or a numeric answer")
+    elif t == "tree":
+        N = e.get("nodes")
+        if not isinstance(N, dict) or not N: E(f"{eid}: tree needs nodes"); return
+        if e.get("start") not in N: E(f"{eid}: tree start must name a node")
+        for k, n in N.items():
+            op = n.get("options", []) if isinstance(n, dict) else []
+            if not s(n.get("q") if isinstance(n, dict) else None) or len(op) < 2 or sum(1 for o in op if o.get("ok") is True) != 1: E(f"{eid} node {k}: q and options with exactly one ok")
+            if not all(s(o.get("text")) and (o.get("ok") or s(o.get("fb"))) for o in op): E(f"{eid} node {k}: every option needs text, every wrong one fb")
+            for o in op:
+                if o.get("to") is not None and o["to"] not in N: E(f"{eid} node {k}: to {o['to']!r} names no node")
+        seen, at = set(), e.get("start")
+        while at in N and at not in seen: seen.add(at); at = next((o.get("to") for o in N[at].get("options", []) if o.get("ok")), None)
+        if at is not None: E(f"{eid}: the right path of the tree loops or leads nowhere")
+    elif t == "inquiry":
+        o, sc = e.get("options", []), e.get("scores", [])
+        if not strs(o, 3) or not isinstance(sc, list) or len(sc) != len(o) or not all(isint(x, 4) for x in sc): E(f"{eid}: inquiry needs options (>=3) and scores 0-3, one per option")
+        elif sc.count(max(sc)) != 1: E(f"{eid}: exactly one option has the highest score")
+        if not isinstance(e.get("why"), list) or len(e["why"]) != len(o): E(f"{eid}: inquiry needs why, one per option")
+    elif t == "debate":
+        S = e.get("sides")
+        if not isinstance(S, list) or not 2 <= len(S) <= 3: E(f"{eid}: debate needs 2-3 sides"); return
+        for i, sd in enumerate(S):
+            c = sd.get("counters") if isinstance(sd, dict) else None
+            if not s(sd.get("position") if isinstance(sd, dict) else None) or not strs(c, 2) or not isint(sd.get("best"), len(c or [])): E(f"{eid} side {i+1}: position, counters (>=2) and best (index)")
+            elif "why" in sd and (not isinstance(sd["why"], list) or len(sd["why"]) != len(c)): E(f"{eid} side {i+1}: why needs one text per counter")
 
 def shape(e):
     """What a translation must keep of an exercise: everything that decides the answer (only the words may change)."""
@@ -320,6 +372,7 @@ def main(path):
                 if not all(s(o.get("text")) and s(o.get("fb")) for o in op): E(f"{eid} step {j}: every option needs text+fb")
         if t=="free":
             if not s(e.get("model")) or not e.get("rubric"): E(f"{eid}: free needs model+rubric")
+        if t in TTYPES: check_thinking(eid, e)
         if t=="write":
             if not s(e.get("solution")) or not e.get("keywords"): E(f"{eid}: write needs solution+keywords")
             else:
@@ -367,5 +420,6 @@ def main(path):
     print("OK" if not errors else f"{len(errors)} ERRORS")
     sys.exit(1 if errors else 0)
 
-if "--subject" in ARGS: check_subject(ARGS[0], [x for x in (ARGS[ARGS.index("--translations")+1] if "--translations" in ARGS else "").split(",") if x])
-else: main(ARGS[0])
+if __name__ == "__main__":
+    if "--subject" in ARGS: check_subject(ARGS[0], [x for x in (ARGS[ARGS.index("--translations")+1] if "--translations" in ARGS else "").split(",") if x])
+    else: main(ARGS[0])

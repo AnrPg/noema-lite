@@ -256,9 +256,11 @@ function addXP(n, el) {
   if (before < S.settings.goal && Noema.stats.todayXP() >= S.settings.goal) { if (RX) RX.big('goal'); else confetti(160); toast('🎯 ' + tE('engine.core.goalSmashed')); }
   else if (LV && RX && LV(Noema.stats.get().xp || 0).lv > lv0) RX.big('level');
 }
-function record(ex, ok, firstTry = true) {
+function record(ex, ok, firstTry = true, conf = null) {
   const r = S.res[ex.id] || { n: 0, ok: 0 };
-  r.n++; if (ok) r.ok++; r.last = ok; r.t = Date.now(); S.res[ex.id] = r; save();
+  r.n++; if (ok) r.ok++; r.last = ok; r.t = Date.now();
+  if (conf) r.conf = conf; else delete r.conf;   // how sure the learner was this time: sure | think | guess
+  S.res[ex.id] = r; save();
 }
 const solved = id => S.res[id]?.ok > 0;
 
@@ -1220,12 +1222,17 @@ function exerciseCard(ex, { onDone, compact = false, noXP = false, showSection =
   const actions = h('div', { class: 'actions' });
   const checkBtn = h('button', { class: 'btn primary', onclick: () => doCheck() }, tE('engine.ex.check'));
   const nudge = h('span', { class: 'tiny' });
-  if (!w.selfDone && !w.auto && !['tf'].includes(ex.type) && !(ex.type === 'mcq' && !ex.multi && !Array.isArray(ex.answer)) && ex.type !== 'odd') actions.append(checkBtn, nudge);
+  const oneTap = ['tf', 'odd', 'inquiry', 'debate'].includes(ex.type) || (['mcq', 'predict'].includes(ex.type) && Array.isArray(ex.options) && !ex.multi && !Array.isArray(ex.answer));
+  if (!w.selfDone && !w.auto && !oneTap) actions.append(checkBtn, nudge);
+  const conf = ex._ai ? null : confidenceRow(() => locked);   // "How sure?" before answering (optional): a confident mistake goes first in the Mistakes gym
+  if (conf) card.insertBefore(conf.el, w.el);
   const ask = () => askAIAbout(ex, null, givenOf(w));
+  const flag = ex._ai ? null : reportBtn(ex);
   if (SHL()) {   // the frame: a quiet "Ask <character>" in the card's top corner
     card.classList.add('has-ask');
     const b = askBuddyBtn(ask); b.style.marginLeft = showSection && SEC[ex.section] ? '8px' : 'auto'; head.append(b);
-  } else actions.append(h('span', { class: 'grow' }), h('button', { class: 'btn ghost small', onclick: ask }, `${TUTOR.avatar} ` + tE('engine.ex.askTutor', { tutor: TUTOR.name })));
+    if (flag) head.append(flag);
+  } else actions.append(h('span', { class: 'grow' }), flag, h('button', { class: 'btn ghost small', onclick: ask }, `${TUTOR.avatar} ` + tE('engine.ex.askTutor', { tutor: TUTOR.name })));
   card.append(actions);
   function doCheck() {
     if (locked || w.selfDone || !w.check) return;
@@ -1239,10 +1246,14 @@ function exerciseCard(ex, { onDone, compact = false, noXP = false, showSection =
     if (!selfReported) w.reveal?.();
     checkBtn.remove(); nudge.remove();
     if (ok) { beep('ok'); card.classList.add('pop'); } else { beep('bad'); card.classList.remove('shake'); void card.offsetWidth; card.classList.add('shake'); }
-    if (!ex._ai) record(ex, ok);
+    const sure = conf?.value() || null; conf?.lock();
+    if (!ex._ai) record(ex, ok, true, sure);
     const xp = ok ? 4 + ex.difficulty * 4 + (w.bonus?.() || 0) : 1;
     if (!noXP) addXP(xp, card);
     const exp = h('div', { class: 'explain ' + (ok ? 'ok' : 'bad') }, h('div', { class: 'hd' }, ok ? pickOne([['✅', 'nailed'], ['✅', 'correct'], ['🎉', 'yes'], ['✅', 'spotOn'], ['🔥', 'exactly']].map(([i, k]) => i + ' ' + tE('engine.ex.ok.' + k))) : pickOne([['💡', 'notQuite'], ['🧠', 'learning'], ['💡', 'close']].map(([i, k]) => i + ' ' + tE('engine.ex.bad.' + k)))), h('div', { html: fmt(ex.explain || '') }));
+    if (sure === 'sure' && !ok) exp.append(h('div', { class: 'tiny confnote' }, '⚠️ ' + tE('engine.ex.confWrong')));
+    else if (sure === 'guess' && ok) exp.append(h('div', { class: 'tiny confnote' }, '🎲 ' + tE('engine.ex.confLucky')));
+    const cite = citeChip(ex); if (cite) exp.append(cite);
     if (!ok) exp.append(h('div', { class: 'row', style: { marginTop: '10px' } },
       h('button', { class: 'btn small ai', onclick: () => askAIAbout(ex, 'socratic', givenOf(w)) }, `${TUTOR.avatar} ` + tE('engine.ex.helpSocratic')),
       h('button', { class: 'btn small', onclick: () => askAIAbout(ex, 'explain', givenOf(w)) }, '💡 ' + tE('engine.ex.explainDiff'))));
@@ -1256,6 +1267,40 @@ function exerciseCard(ex, { onDone, compact = false, noXP = false, showSection =
   return card;
 }
 const pickOne = a => a[Math.random() * a.length | 0];
+/** "How sure?" — three quiet chips above the answer; optional, kept with the answer (S.res[id].conf). */
+function confidenceRow(isLocked) {
+  let v = null; const chips = [['sure', '●●●'], ['think', '●●○'], ['guess', '●○○']].map(([k, dots]) => {
+    const b = h('button', { class: 'confchip', type: 'button', 'aria-pressed': 'false', title: tE('engine.ex.conf_' + k), onclick: () => { if (isLocked()) return; v = v === k ? null : k; chips.forEach(c => c.setAttribute('aria-pressed', String(c._k === v))); } },
+      h('span', { 'aria-hidden': 'true' }, dots), h('span', { class: 'lbl' }, tE('engine.ex.conf_' + k)));
+    b._k = k; return b;
+  });
+  const el = h('div', { class: 'confrow', role: 'group', 'aria-label': tE('engine.ex.conf') }, h('span', { class: 'tiny' }, tE('engine.ex.conf')), ...chips);
+  return { el, value: () => v, lock: () => el.classList.add('locked') };
+}
+/** ⚑ Report a problem with this exercise: kept in the subject's state (S.flags[id]) for the next revision of the pack. */
+function reportBtn(ex) {
+  const done = () => !!S.flags?.[ex.id];
+  const b = h('button', { class: 'exflag' + (done() ? ' on' : ''), type: 'button', title: done() ? tE('engine.ex.reported') : tE('engine.ex.report'), 'aria-label': tE('engine.ex.report'), onclick: e => {
+    e.stopPropagation();
+    modal((box, close) => {
+      const reasons = ['wrong', 'unclear', 'source', 'trivial', 'typo', 'other'];
+      let why = S.flags?.[ex.id]?.why || null;
+      const opts = reasons.map(r => { const o = h('button', { class: 'opt' + (r === why ? ' sel' : ''), type: 'button', onclick: () => { why = r; opts.forEach(x => x.classList.toggle('sel', x === o)); } }, h('span', {}, tE('engine.ex.report_' + r))); return o; });
+      const note = h('textarea', { class: 'answer', rows: 3, placeholder: tE('engine.ex.reportNote') }); note.value = S.flags?.[ex.id]?.note || '';
+      box.append(h('h3', {}, '⚑ ' + tE('engine.ex.reportTitle')), h('div', { class: 'opts' }, ...opts), note,
+        h('div', { class: 'row', style: { marginTop: '14px', justifyContent: 'flex-end' } }, h('button', { class: 'btn', onclick: close }, tE('engine.core.cancel')),
+          h('button', { class: 'btn primary', onclick: () => { if (!why) { opts[0].parentElement.classList.add('shake'); return; } S.flags = S.flags || {}; S.flags[ex.id] = { why, note: note.value.trim().slice(0, 2000), t: Date.now() }; save(); b.classList.add('on'); b.title = tE('engine.ex.reported'); close(); toast('⚑ ' + tE('engine.ex.reportSaved')); } }, tE('engine.ex.reportSend'))));
+    });
+  } }, '⚑');
+  return b;
+}
+/** Where the exercise comes from (cite: lineage metadata, never in the text): a small chip after the answer; opens the source at that page. */
+function citeChip(ex) {
+  const c = ex.cite, s = c && SRC_BY_ID[c.src]; if (!s) return null;
+  const page = +(String(c.loc || '').match(/^\s*(?:p\.?|pp\.?|page|σ\.|стр\.?)\s*(\d+)/i) || [])[1] || null;
+  const label = (s.short || s.title) + (c.loc ? ' · ' + c.loc : '');
+  return h('div', { class: 'srcrefs excite' }, h('button', { class: 'srcref', type: 'button', title: tE('engine.ex.citeOpen'), onclick: () => openSource(c.src, { page }) }, h('span', { class: 'e' }, s.emoji || '📘'), h('span', {}, label)));
+}
 /* i18n-ignore-start */   // the exercise as context for the AI's prompts, and the learner's first messages to the AI (prompts: English)
 function exerciseAsText(ex) {
   let t = `Exercise (${ex.type}): ${ex.q || ''}\n`;
@@ -1270,6 +1315,7 @@ function exerciseAsText(ex) {
   if (ex.lines) t += 'Code lines:\n' + ex.lines.join('\n') + '\nBug lines (0-based): ' + ex.bugs + '\nFix: ' + ex.fix + '\n';
   if (ex.type === 'calc') t += 'Answer: ' + ex.answer + ' ' + (ex.unit || '') + '\n';
   if (ex.steps) t += 'Steps: ' + ex.steps.map(s => s.prompt + ' [correct: ' + s.options.find(o => o.ok).text + ']').join(' | ') + '\n';
+  t += typeAsText(ex);
   if (ex.model) t += 'Model answer: ' + ex.model + '\n';
   if (ex.solution) t += 'Solution:\n' + ex.solution + '\n';
   t += 'Explanation: ' + (ex.explain || '');
@@ -1291,6 +1337,151 @@ function askAIAbout(ex, mode, given = '') {
   if (m === 'explain') openTutor(ctx, 'explain', tE('engine.aimsg.exExplain', mine), { intent: INTENT.exExplain(given) });
   else if (m === 'socratic') openTutor(ctx, 'socratic', tE('engine.aimsg.exSocratic', mine), { intent: INTENT.exSocratic(given) });
   else openTutor(ctx, 'hint', tE('engine.aimsg.exHint'), { intent: INTENT.exHint(given) });
+}
+/* i18n-ignore-end */
+
+/* ---- 31_types.js ---- */
+/* ===================== Exercise types for critical thinking (CONTENT_SPEC.md, Q5 / paradigms) =====================
+   flaw · case · predict · tree · inquiry · debate — same contract as the renderers in 30_exercises.js:
+   { el, check(): true|false|null, reveal(), given(), selfDone? } */
+Object.assign(TYPE_ICON, { flaw: '🔎', case: '📂', predict: '🔮', tree: '🌳', inquiry: '❓', debate: '🗣' });
+
+/** Find the flaw: tap the wrong line(s) of a worked solution, argument or code, then pick why it is wrong. */
+R.flaw = (ex, api) => {
+  const sel = new Set(), bad = new Set(ex.flaws || []);
+  const code = ex.asCode || !!ex.lang;
+  const lines = ex.lines.map((l, i) => h('button', { onclick: () => { if (api.locked()) return; sel.has(i) ? sel.delete(i) : sel.add(i); lines[i].classList.toggle('sel'); } },
+    h('span', { class: 'ln' }, nf(i + 1)), code ? h('span', { html: highlight(l, ex.lang || guessLang(ex.lines.join('\n'))) }) : h('span', { class: 'prose' }, F(l))));
+  let why = null;
+  const whyBtns = ex.reasons.map((r, i) => h('button', { class: 'opt', onclick: () => { if (api.locked()) return; why = i; whyBtns.forEach((b, k) => b.classList.toggle('sel', k === i)); } },
+    h('span', { class: 'k' }, String.fromCharCode(65 + i)), h('span', {}, F(r))));
+  return {
+    el: h('div', {}, h('div', { class: 'tiny', style: { marginBottom: '8px' } }, tE('engine.ex.flawHint', { n: bad.size })),
+      h('div', { class: 'codelines' + (code ? '' : ' prose') }, ...lines),
+      h('div', { class: 'lbl', style: { margin: '12px 0 6px' } }, tE('engine.ex.flawWhy')), h('div', { class: 'opts' }, ...whyBtns)),
+    check() { if (!sel.size || why === null) return null; return sel.size === bad.size && [...sel].every(i => bad.has(i)) && why === ex.reason; },
+    given: () => [...sel].sort((a, b) => a - b).map(i => 'line ' + (i + 1)).join(', ') + (why === null ? '' : ' — because: ' + ex.reasons[why]),   // i18n-ignore (for the AI)
+    reveal() {
+      lines.forEach((b, i) => { if (bad.has(i)) b.classList.add('right'); else if (sel.has(i)) b.classList.add('wrong'); });
+      whyBtns.forEach((b, i) => { if (i === ex.reason) b.classList.add('right'); else if (i === why) b.classList.add('wrong'); });
+      if (ex.fix) whyBtns[0].parentElement.after(h('div', { class: 'fb ok' }, h('b', {}, '🔧 ' + tE('engine.ex.fix') + ' '), code && /\n|;|\(|=/.test(ex.fix) ? codeBlock(ex.fix, ex.lang || guessLang(ex.fix)) : h('span', { html: fmt(ex.fix) })));
+    },
+  };
+};
+
+/** A case: one situation, 2–4 questions about it (mcq, tf or calc), each graded on its own. */
+R.case = (ex, api) => {
+  const quiet = { locked: api.locked, check: () => { }, done: () => { } };   // the parts answer into the card's one Check
+  const parts = ex.parts.map((p, i) => {
+    const w = (R[p.type] || R.mcq)({ ...p, id: ex.id + '/' + i }, quiet);
+    const box = h('div', { class: 'casepart' }, h('div', { class: 'sp' }, h('span', { class: 'pill c' }, tE('engine.ex.casePart', { n: i + 1, of: ex.parts.length })), ' ', h('span', { html: fmt(p.q) })), w.el);
+    return { p, w, box };
+  });
+  return {
+    el: h('div', { class: 'case' }, ...parts.map(x => x.box)),
+    check() { const r = parts.map(x => x.w.check()); return r.some(v => v === null) ? null : r.every(Boolean); },
+    score: () => parts.filter(x => x.w.check()).length / parts.length,
+    given: () => parts.map((x, i) => `(${i + 1}) ` + givenOf(x.w)).join('  '),
+    reveal() { parts.forEach(x => { const ok = x.w.check(); x.w.reveal?.(); x.box.classList.add(ok ? 'ok' : 'bad'); if (x.p.explain) x.box.append(h('div', { class: 'fb ' + (ok ? 'ok' : 'info'), html: fmt(x.p.explain) })); }); },
+  };
+};
+
+/** Predict: commit to what will happen (an option or a number), then see what actually happens. */
+R.predict = (ex, api) => {
+  const numeric = !Array.isArray(ex.options);
+  const w = numeric ? R.calc(ex, api) : R.mcq(ex, api);
+  return {
+    ...w,
+    el: h('div', {}, h('div', { class: 'tiny', style: { marginBottom: '8px' } }, '🔮 ' + tE('engine.ex.predictHint')), w.el),
+    reveal() { w.reveal(); w.el.after(h('div', { class: 'fb info' }, h('b', {}, '▶ ' + tE('engine.ex.outcome') + ' '), /\n/.test(ex.outcome) && ex.lang ? codeBlock(ex.outcome, ex.lang) : h('span', { html: fmt(ex.outcome) }))); },
+  };
+};
+
+/** Decision tree: walk from the root; a wrong branch shows where it leads and the learner chooses again. */
+R.tree = (ex, api) => {
+  const box = h('div', { class: 'tree' }), path = h('ol', { class: 'treepath' }), pathLbl = h('div', { class: 'tiny', hidden: true }, tE('engine.ex.treePath'));
+  let mistakes = 0, steps = 0;
+  const seen = new Set();
+  function node(id) {
+    const n = ex.nodes[id]; if (!n || seen.has(id)) return api.done(mistakes === 0, mistakes);   // a malformed tree ends instead of looping
+    seen.add(id); steps++;
+    const div = h('div', { class: 'scstep' }, h('div', { class: 'sp' }, h('span', { class: 'pill c' }, '🌳 ' + nf(steps)), ' ', F(n.q)));
+    const opts = h('div', { class: 'opts' }), fbBox = h('div');
+    let done = false;
+    n.options.forEach((o, i) => {
+      const b = h('button', { class: 'opt', onclick: () => {
+        if (done || b.classList.contains('wrong')) return;
+        fbBox.innerHTML = '';
+        if (o.ok) {
+          done = true; b.classList.add('right'); beep('ok');
+          path.append(h('li', {}, F(o.text))); pathLbl.hidden = false;
+          if (o.fb) fbBox.append(h('div', { class: 'fb ok', html: '✅ ' + fmt(o.fb) }));
+          if (o.to) node(o.to); else api.done(mistakes === 0, mistakes);
+        } else { mistakes++; b.classList.add('wrong', 'shake'); beep('bad'); fbBox.append(h('div', { class: 'fb bad', html: '↪ ' + fmt(o.fb) })); }
+      } }, h('span', { class: 'k' }, String.fromCharCode(65 + i)), F(o.text));
+      opts.append(b);
+    });
+    div.append(opts, fbBox); box.append(div);
+    div.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+  node(ex.start || Object.keys(ex.nodes)[0]);
+  return { el: h('div', {}, pathLbl, path, box), selfDone: true, given: () => [...path.children].map(li => li.textContent).join(' → ') };
+};
+
+/** Inquiry: which question, test or experiment tells you the most? Each option has a value 0–3 shown afterwards. */
+R.inquiry = (ex, api) => {
+  const best = Math.max(...ex.scores);
+  let pick = null;
+  const btns = shuffle(ex.options.map((o, i) => i)).map((oi, k) => {
+    const b = h('button', { class: 'opt', onclick: () => { if (api.locked()) return; pick = oi; api.check(); } }, h('span', { class: 'k' }, String.fromCharCode(65 + k)), h('span', {}, F(ex.options[oi])));
+    b._oi = oi; return b;
+  });
+  return {
+    el: h('div', {}, h('div', { class: 'tiny', style: { marginBottom: '8px' } }, tE('engine.ex.inquiryHint')), h('div', { class: 'opts' }, ...btns)),
+    keys: k => btns[k]?.click(),
+    check: () => pick === null ? null : ex.scores[pick] === best,
+    given: () => pick === null ? '' : ex.options[pick],
+    reveal() {
+      btns.forEach(b => {
+        const oi = b._oi, sc = ex.scores[oi];
+        b.classList.add(sc === best ? 'right' : oi === pick ? 'wrong' : 'dim');
+        b.children[1].append(h('span', { class: 'why' }, h('span', { class: 'value', title: tE('engine.ex.inquiryValue', { n: sc }), 'aria-label': tE('engine.ex.inquiryValue', { n: sc }) }, '●'.repeat(sc) + '○'.repeat(3 - sc)), ' ', h('span', { html: fmt(ex.why?.[oi] || '') })));
+      });
+    },
+  };
+};
+
+/** Debate: take any side (no side is graded), then pick the strongest objection to it. */
+R.debate = (ex, api) => {
+  const box = h('div', { class: 'debate' });
+  let side = null, pick = null, cBtns = [];
+  const sideBtns = ex.sides.map((s, i) => h('button', { class: 'opt', onclick: () => {
+    if (api.locked() || side !== null) return;
+    side = i; sideBtns.forEach((b, k) => { b.classList.toggle('sel', k === i); if (k !== i) b.classList.add('dim'); });
+    const sd = ex.sides[i];
+    cBtns = shuffle(sd.counters.map((c, j) => j)).map((ci, k) => { const b = h('button', { class: 'opt', onclick: () => { if (api.locked()) return; pick = ci; api.check(); } }, h('span', { class: 'k' }, String.fromCharCode(65 + k)), h('span', {}, F(sd.counters[ci]))); b._ci = ci; return b; });
+    box.append(h('div', { class: 'lbl', style: { margin: '12px 0 6px' } }, tE('engine.ex.debateCounter')), h('div', { class: 'opts' }, ...cBtns));
+  } }, h('span', { class: 'k' }, String.fromCharCode(65 + i)), h('span', {}, F(s.position))));
+  box.append(h('div', { class: 'lbl', style: { marginBottom: '6px' } }, tE('engine.ex.debatePick')), h('div', { class: 'opts' }, ...sideBtns));
+  return {
+    el: box, keys: k => (side === null ? sideBtns : cBtns)[k]?.click(),
+    check: () => pick === null ? null : pick === ex.sides[side].best,
+    given: () => side === null ? '' : 'side: ' + ex.sides[side].position + (pick === null ? '' : ' — objection: ' + ex.sides[side].counters[pick]),   // i18n-ignore (for the AI)
+    reveal() { const sd = ex.sides[side]; cBtns.forEach(b => { const ci = b._ci; if (ci === sd.best) b.classList.add('right'); else if (ci === pick) b.classList.add('wrong'); if (sd.why?.[ci]) b.children[1].append(h('span', { class: 'why', html: fmt(sd.why[ci]) })); }); },
+  };
+};
+
+/* i18n-ignore-start */   // the new types as context for the AI (English, like exerciseAsText)
+function typeAsText(ex) {
+  switch (ex.type) {
+    case 'flaw': return 'Lines:\n' + ex.lines.map((l, i) => `${i + 1}. ${l}`).join('\n') + '\nFlawed lines: ' + ex.flaws.map(i => i + 1).join(', ') + '\nReason options: ' + ex.reasons.join(' | ') + '\nCorrect reason: ' + ex.reasons[ex.reason] + (ex.fix ? '\nFix: ' + ex.fix : '') + '\n';
+    case 'case': return ex.parts.map((p, i) => `Part ${i + 1} (${p.type}): ${p.q}` + (p.options ? ' Options: ' + p.options.join(' | ') + ' Correct: ' + [].concat(p.answer).map(a => p.options[a]).join(' + ') : ' Answer: ' + p.answer + (p.unit ? ' ' + p.unit : ''))).join('\n') + '\n';
+    case 'predict': return (ex.options ? 'Options: ' + ex.options.join(' | ') + '\nCorrect: ' + ex.options[ex.answer] : 'Answer: ' + ex.answer + ' ' + (ex.unit || '')) + '\nWhat happens: ' + ex.outcome + '\n';
+    case 'tree': return 'Decision tree: ' + Object.entries(ex.nodes).map(([id, n]) => `[${id}] ${n.q} → right: ${(n.options.find(o => o.ok) || {}).text}`).join(' | ') + '\n';
+    case 'inquiry': return 'Options with their value (0-3): ' + ex.options.map((o, i) => `${o} = ${ex.scores[i]}`).join(' | ') + '\n';
+    case 'debate': return ex.sides.map(s => `Position: ${s.position}; strongest objection: ${s.counters[s.best]}`).join('\n') + '\n';
+  }
+  return '';
 }
 /* i18n-ignore-end */
 
@@ -2328,10 +2519,25 @@ function practiceSetup(body, c) {
   upd();
 }
 function runOrder(list) {
-  // unsolved & previously-wrong first, then the rest; shuffled inside groups
-  const g1 = [], g2 = [], g3 = [];
-  list.forEach(e => { const r = S.res[e.id]; if (!r) g1.push(e); else if (r.last === false) g2.push(e); else g3.push(e); });
-  return [...shuffle(g2), ...shuffle(g1), ...shuffle(g3)];
+  // previously wrong first (confident mistakes first of all; right-but-guessed with them), then unsolved, then the rest; shuffled inside groups
+  const g0 = [], g1 = [], g2 = [], g3 = [];
+  list.forEach(e => { const r = S.res[e.id]; if (!r) g1.push(e); else if (r.last === false && r.conf === 'sure') g0.push(e); else if (r.last === false || r.conf === 'guess') g2.push(e); else g3.push(e); });
+  return spreadFacades([...shuffle(g0), ...shuffle(g2), ...shuffle(g1), ...shuffle(g3)]);
+}
+/** Facades of one learnable (same `lr`, CONTENT_SPEC.md) never come one after the other: each is pushed back past the next exercise of another learnable. */
+function spreadFacades(list) {
+  const out = [], wait = [];
+  for (const e of list) {
+    const i = wait.findIndex(w => !w.lr || w.lr !== out[out.length - 1]?.lr); if (i >= 0) out.push(...wait.splice(i, 1));
+    if (e.lr && e.lr === out[out.length - 1]?.lr) wait.push(e); else out.push(e);
+  }
+  return out.concat(wait);
+}
+/** After a wrong answer: one sibling of the same learnable in another exercise type, not yet in this round (SRS "siblings"). */
+function siblingOf(ex, list) {
+  if (!ex.lr) return null;
+  const inRound = new Set(list.map(e => e.id));
+  return shuffle(ALL_EX.filter(e => e.lr === ex.lr && e._ch === ex._ch && e.type !== ex.type && !inRound.has(e.id)))[0] || null;
 }
 function startRun(list, opt = {}) {
   RUN = { list: (opt.keepOrder ? list : runOrder(list)).slice(0, opt.count || 10), i: 0, ok: 0, xp0: S.xp, wrong: [], title: opt.title || tE('engine.run.practice'), back: opt.back || HOME(), lives: opt.lives || 0, boss: opt.boss || null, after: opt.after || null };   // after: { label, run } — what comes next (a round made from search results)
@@ -2347,13 +2553,13 @@ function runView() {
   setAccent(document.body, ex._ch);
   setTutorContext({ kind: 'section', id: ex.section });
   const nextBtn = h('button', { class: 'btn primary', 'data-next': '1', style: { display: 'none' }, onclick: () => { R0.i++; runView(); } }, R0.i + 1 < R0.list.length ? tE('engine.run.next') : tE('engine.run.finish'));
-  const card = exerciseCard(ex, { showSection: true, onDone: (ok) => { if (ok) R0.ok++; else { R0.wrong.push(ex); if (R0.lives) { R0.lives--; $('.hearts') && ($('.hearts').textContent = '❤️'.repeat(R0.lives) + '🤍'.repeat(3 - R0.lives)); } } if (R0.lives === 0 && R0.boss) nextBtn.textContent = tE('engine.run.seeResult'); nextBtn.style.display = ''; nextBtn.classList.add('pop'); setTimeout(() => nextBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 300); } });
+  const card = exerciseCard(ex, { showSection: true, onDone: (ok) => { if (ok) R0.ok++; else { R0.wrong.push(ex); if (!R0.boss) { const sib = siblingOf(ex, R0.list); if (sib) { R0.list.splice(Math.min(R0.i + 3, R0.list.length), 0, sib); R0.sib = R0.sib || new Set(); R0.sib.add(sib.id); } } if (R0.lives) { R0.lives--; $('.hearts') && ($('.hearts').textContent = '❤️'.repeat(R0.lives) + '🤍'.repeat(3 - R0.lives)); } } if (R0.lives === 0 && R0.boss) nextBtn.textContent = tE('engine.run.seeResult'); nextBtn.style.display = ''; nextBtn.classList.add('pop'); setTimeout(() => nextBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 300); } });
   view(h('div', { class: 'runner' },
     h('div', { class: 'runtop' }, h('button', { class: 'iconbtn', title: tE('engine.run.quit'), onclick: () => go(R0.back) }, '✕'),
       h('div', { class: 'bar' }, h('i', { style: { width: (R0.i / R0.list.length * 100) + '%' } })),
       R0.boss ? h('span', { class: 'hearts' }, '❤️'.repeat(R0.lives) + '🤍'.repeat(3 - R0.lives)) : null,
       h('b', { class: 'tiny' }, `${nf(R0.i + 1)}/${nf(R0.list.length)}`)),
-    h('div', { class: 'tiny', style: { marginBottom: '8px', fontWeight: 700 } }, R0.title),
+    h('div', { class: 'tiny', style: { marginBottom: '8px', fontWeight: 700 } }, R0.title, R0.sib?.has(ex.id) ? h('span', { class: 'pill sibpill' }, '↻ ' + tE('engine.run.sibling')) : null),
     card, h('div', { class: 'row', style: { justifyContent: 'flex-end' } }, nextBtn)));
 }
 function runSummary() {

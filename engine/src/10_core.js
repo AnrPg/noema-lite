@@ -214,9 +214,11 @@ function addXP(n, el) {
   if (before < S.settings.goal && Noema.stats.todayXP() >= S.settings.goal) { if (RX) RX.big('goal'); else confetti(160); toast('🎯 ' + tE('engine.core.goalSmashed')); }
   else if (LV && RX && LV(Noema.stats.get().xp || 0).lv > lv0) RX.big('level');
 }
-function record(ex, ok, firstTry = true) {
+function record(ex, ok, firstTry = true, conf = null) {
   const r = S.res[ex.id] || { n: 0, ok: 0 };
-  r.n++; if (ok) r.ok++; r.last = ok; r.t = Date.now(); S.res[ex.id] = r; save();
+  r.n++; if (ok) r.ok++; r.last = ok; r.t = Date.now();
+  if (conf) r.conf = conf; else delete r.conf;   // how sure the learner was this time: sure | think | guess
+  S.res[ex.id] = r; save();
 }
 const solved = id => S.res[id]?.ok > 0;
 

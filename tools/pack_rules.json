@@ -83,7 +83,10 @@
    "types": [
     "bucket",
     "calc",
+    "case",
     "cloze",
+    "debate",
+    "flaw",
     "free",
     "img_drag",
     "img_hotspot",
@@ -92,13 +95,16 @@
     "img_reveal",
     "img_select",
     "img_sequence",
+    "inquiry",
     "match",
     "mcq",
     "odd",
     "order",
+    "predict",
     "scenario",
     "spotbug",
     "tf",
+    "tree",
     "write"
    ],
    "think": [

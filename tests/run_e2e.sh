@@ -16,6 +16,7 @@ node "$ROOT/tests/search.js" "$T"     # search, stable addresses, collections, t
 node "$ROOT/tests/e2e.js" "$T"
 node "$ROOT/tests/socratic.js" "$T"
 node "$ROOT/tests/visual.js" "$T"
+node "$ROOT/tests/thinking_types.js" "$T"   # flaw, case, predict, tree, inquiry, debate; how sure, ⚑, source chip, facades
 python3 "$ROOT/tests/validate_visual.py"
 node "$ROOT/tests/pack_rules.js"   # the quality rules, Python and JS alike (tools/pack_rules.json, docs/PIPELINES.md §4)
 python3 "$ROOT/tests/pipelines.py"   # the content flows, step by step (tools/pipelines/, docs/PIPELINES.md)
