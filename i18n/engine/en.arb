@@ -4477,5 +4477,129 @@
   "engine.run.sibling": "Same idea, another angle",
   "@engine.run.sibling": {
     "description": "Small tag in a practice round on an exercise added after a wrong answer: the same point asked another way."
+  },
+  "engine.kmap.title": "Knowledge map",
+  "@engine.kmap.title": {
+    "description": "Title of the overlay that shows every chapter's knowledge map (points to learn, grouped), and its menu entry. Short."
+  },
+  "engine.kmap.menuSub": "Everything this subject teaches, and how far you are",
+  "@engine.kmap.menuSub": {
+    "description": "Second line of the menu entry “Knowledge map”."
+  },
+  "engine.kmap.chip": "{n, plural, one {# thing to learn} other {# things to learn}}",
+  "@engine.kmap.chip": {
+    "description": "Small button under a chapter's title that opens its knowledge map. n = number of learnable points."
+  },
+  "engine.kmap.intro": "Every point each chapter teaches, from the basics to the advanced. ▶ practises one point in all its versions.",
+  "@engine.kmap.intro": {
+    "description": "Intro line of the knowledge-map overlay."
+  },
+  "engine.kmap.chSummary": "{points, plural, one {# point} other {# points}} · {done} of {learnables} mastered",
+  "@engine.kmap.chSummary": {
+    "description": "Line beside a chapter in the knowledge map. points, learnables, done = numbers."
+  },
+  "engine.kmap.level_foundation": "Basics",
+  "@engine.kmap.level_foundation": {
+    "description": "Group heading in the knowledge map: the foundation points."
+  },
+  "engine.kmap.level_core": "Core",
+  "@engine.kmap.level_core": {
+    "description": "Group heading in the knowledge map: the main points."
+  },
+  "engine.kmap.level_advanced": "Advanced",
+  "@engine.kmap.level_advanced": {
+    "description": "Group heading in the knowledge map: the advanced points."
+  },
+  "engine.kmap.earlier": "Taught earlier on the Roadmap",
+  "@engine.kmap.earlier": {
+    "description": "Heading of points this chapter relies on that an earlier step already taught."
+  },
+  "engine.kmap.practise": "Practise this point in all its versions",
+  "@engine.kmap.practise": {
+    "description": "Tooltip of the ▶ button beside a learnable point."
+  },
+  "engine.kmap.close": "Close",
+  "@engine.kmap.close": {
+    "description": "Button that closes an overlay."
+  },
+  "engine.gym.byTrap": "By kind of trap",
+  "@engine.gym.byTrap": {
+    "description": "Mistakes gym: heading of the chips that train mistakes of one category (confusables, edge cases…)."
+  },
+  "engine.cat.pitfall": "Traps",
+  "@engine.cat.pitfall": {
+    "description": "Category of knowledge points: common traps. Short."
+  },
+  "engine.cat.confusable": "Easily confused",
+  "@engine.cat.confusable": {
+    "description": "Category: things easily confused with each other. Short."
+  },
+  "engine.cat.falsefriend": "False friends",
+  "@engine.cat.falsefriend": {
+    "description": "Category: words that look alike but mean different things. Short."
+  },
+  "engine.cat.detail": "Easily missed details",
+  "@engine.cat.detail": {
+    "description": "Category. Short."
+  },
+  "engine.cat.sequence": "Sequences",
+  "@engine.cat.sequence": {
+    "description": "Category: steps in order. Short."
+  },
+  "engine.cat.multipart": "Multi-part concepts",
+  "@engine.cat.multipart": {
+    "description": "Category. Short."
+  },
+  "engine.cat.nomenclature": "Names and terms",
+  "@engine.cat.nomenclature": {
+    "description": "Category: nomenclature. Short."
+  },
+  "engine.cat.acronym": "Acronyms",
+  "@engine.cat.acronym": {
+    "description": "Category. Short."
+  },
+  "engine.cat.formula": "Formulas",
+  "@engine.cat.formula": {
+    "description": "Category. Short."
+  },
+  "engine.cat.edge": "Edge cases",
+  "@engine.cat.edge": {
+    "description": "Category. Short."
+  },
+  "engine.cat.recent": "Recent findings",
+  "@engine.cat.recent": {
+    "description": "Category: recent positions or findings. Short."
+  },
+  "engine.cat.hard-understand": "Hard to understand",
+  "@engine.cat.hard-understand": {
+    "description": "Category. Short."
+  },
+  "engine.cat.hard-remember": "Hard to remember",
+  "@engine.cat.hard-remember": {
+    "description": "Category. Short."
+  },
+  "engine.flags.menu": "Reported exercises ({n, number})",
+  "@engine.flags.menu": {
+    "description": "Subject menu entry: the exercises the learner reported with ⚑."
+  },
+  "engine.flags.title": "{n, plural, one {# reported exercise} other {# reported exercises}}",
+  "@engine.flags.title": {
+    "description": "Title of the list of reported exercises."
+  },
+  "engine.flags.intro": "Copy them for Claude: it fixes them in place, and your progress stays.",
+  "@engine.flags.intro": {
+    "description": "Intro line of the reported-exercises list."
+  },
+  "engine.flags.copy": "Copy for Claude",
+  "@engine.flags.copy": {
+    "description": "Button: copies the reported exercises as a request for Claude."
+  },
+  "engine.flags.copied": "Copied. Paste it in a chat with Claude.",
+  "@engine.flags.copied": {
+    "description": "Toast after copying the reported exercises."
+  },
+  "engine.flags.clear": "Remove the report",
+  "@engine.flags.clear": {
+    "description": "Button beside one reported exercise."
   }
 }

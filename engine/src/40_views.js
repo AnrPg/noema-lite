@@ -166,6 +166,8 @@ function subjectMenu() {
     { label: SL('searchSubject'), icon: 'search', run: openSearch },
     newSources().length ? { label: t('view.whatsNew'), icon: 'spark', href: '#/new' } : null,
     { label: SL('sources'), sub: SL('sourcesSub'), icon: 'book', run: () => toggleSourcesDeck() },
+    hasKmap() ? { label: tE('engine.kmap.title'), sub: tE('engine.kmap.menuSub'), icon: 'map', run: () => knowledgeMap() } : null,
+    Object.keys(S.flags || {}).length ? { label: tE('engine.flags.menu', { n: Object.keys(S.flags).length }), icon: 'help', run: () => reportedView() } : null,
     { label: timerT ? SL('focusStop') : SL('focusSprint'), sub: SL('focusSprintSub'), icon: 'clock', run: () => focusSprint() },
     '-',
     Noema.node ? { label: SL('openMap'), icon: 'map', run: () => Noema.curriculumMap(Noema.node.id, Noema.node.node) } : null,
@@ -270,6 +272,7 @@ function choiceList(items) {
 function chapterMenu(c) {
   return () => [{ label: SL('chSocratic'), sub: SL('chSocraticSub'), icon: TUTOR.avatar, run: () => openTutor({ kind: 'chapter', id: c.id, origin: { via: 'chapterSocratic', ch: c.id } }, 'socratic', null, { intent: INTENT.chSocratic }) },
     { label: SL('searchSubject'), icon: 'search', run: openSearch }, { label: SL('sources'), sub: SL('sourcesSub'), icon: 'book', run: () => toggleSourcesDeck() },
+    c.map?.learnables?.length ? { label: tE('engine.kmap.title'), sub: tE('engine.kmap.menuSub'), icon: 'map', run: () => knowledgeMap(c.id) } : null,
     { label: timerT ? SL('focusStop') : SL('focusSprint'), sub: SL('focusSprintSub'), icon: 'clock', run: () => focusSprint() }, '-',
     { label: SL('allChapters'), icon: 'list', href: HOME() }];
 }
@@ -296,7 +299,8 @@ function chapterView(id, tab, focus) {
   const v = view(
     backBtn(t('ch.all'), HOME()),
     h('div', { class: 'chhead' }, h('div', { class: 'emo' }, c.emoji),
-      h('div', { class: 'grow' }, h('div', { class: 'num' }, SL('chOf', { n: c.num, of: COURSE.length })), h('h1', {}, c.title), c.subtitle ? h('p', { class: 'muted', style: { margin: '6px 0 0' } }, c.subtitle) : null, sourceChips(FULL_COURSE.find(x => x.id === c.id) || c)),
+      h('div', { class: 'grow' }, h('div', { class: 'num' }, SL('chOf', { n: c.num, of: COURSE.length })), h('h1', {}, c.title), c.subtitle ? h('p', { class: 'muted', style: { margin: '6px 0 0' } }, c.subtitle) : null, sourceChips(FULL_COURSE.find(x => x.id === c.id) || c),
+        c.map?.learnables?.length ? h('button', { class: 'kmapbtn', type: 'button', onclick: () => knowledgeMap(c.id) }, 'ⓘ ' + tE('engine.kmap.chip', { n: c.map.learnables.length })) : null),
       h('div', { class: 'chring' }, ring((p.sr + p.ex) / 2, 76, 9), h('div', { class: 'chringc' }, pctText(Math.round((p.sr + p.ex) * 50))))),
     explainable(h('div', { class: 'mantrabox' }, h('span', {}, '🧭'), F(c.mantra)), () => ({ label: c.mantra, text: `The mental model of chapter ${c.num} "${c.title}": ${c.mantra}`, ch: c, what: 'mental model' })),   // i18n-ignore (for the AI)
     h('div', { class: 'tabs', role: 'tablist' }, ...tabs.map(([k, l, n]) => h('button', { class: on === k ? 'on' : '', role: 'tab', 'aria-selected': String(on === k), onclick: () => go(`#/ch/${id}/${k}`) }, l, h('span', { class: 'n' }, nf(n))))),
@@ -610,6 +614,7 @@ function mistakesView() {
   view(backBtn(t('nav.home'), HOME()), h('h1', {}, t('view.mistakes')),
     h('p', { class: 'muted' }, tE('engine.gym.intro')),
     list.length ? h('div', {}, h('div', { class: 'row', style: { margin: '8px 0 18px' } }, h('button', { class: 'btn primary', onclick: () => startRun(list, { title: t('view.mistakes'), count: 15, back: '#/mistakes' }) }, '▶ ' + tE('engine.gym.train', { n: Math.min(15, list.length), of: list.length }))),
+      mistakesByCat(list),
       h('div', { style: { display: 'grid', gap: '8px' } }, ...COURSE.map(c => { const n = list.filter(e => e._ch === c).length; return n ? h('button', { class: 'node', onclick: () => startRun(list.filter(e => e._ch === c), { title: '🔁 ' + tE('engine.run.chMistakes', { num: c.num }), count: n, back: '#/mistakes' }) }, h('div', { class: 'dot' }, c.emoji), h('div', { class: 'grow' }, h('b', {}, c.title)), h('span', { class: 'pill' }, nf(n))) : null; })))
       : h('div', { class: 'empty' }, h('div', { class: 'e' }, '✨'), h('p', {}, tE('engine.gym.empty'))));
 }

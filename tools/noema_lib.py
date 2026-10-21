@@ -62,9 +62,30 @@ def load_subject(sdir):
             c['flashcards'].extend(p.get('appendFlashcards', []))
             c['pitfalls'].extend(p.get('appendPitfalls', []))
             c['debug'].extend(p.get('appendDebug', []))
+            for err in revise(c, p, psrc): report.append(f'ERROR {pf}: {err}')
             report.append(f'{os.path.basename(pf)} -> {p["chapter"]}/{p.get("section")}')
     for c in chs.values(): fill_card_ids(c)
     return meta, SRC, [chs[k] for k in sorted(chs)], report
+
+def revise(c, p, psrc=None):
+    """Rewrite items IN PLACE, keeping their ids (so the learner's progress and SRS stay): reviseExercises /
+    reviseFlashcards = whole items with an existing id; reviseBlocks = [{section, index, block}] (CONTENT_SPEC.md
+    "Additive updates"). Returns the problems (unknown ids / sections / indexes)."""
+    errs = []
+    for key, k in (('reviseExercises', 'exercises'), ('reviseFlashcards', 'flashcards')):
+        pos = {it.get('id'): i for i, it in enumerate(c.get(k, []))}
+        for it in p.get(key, []):
+            i = pos.get(it.get('id'))
+            if i is None: errs.append(f'{key}: no {k[:-1]} {it.get("id")!r} in {c["id"]} to revise'); continue
+            new, src = dict(it), c[k][i].get('src') or psrc
+            if src: new.setdefault('src', src)   # the revised item keeps the source it came from
+            c[k][i] = new
+    for r in p.get('reviseBlocks', []):
+        sec = next((x for x in c['sections'] if x['id'] == r.get('section')), None)
+        if not sec or not isinstance(r.get('index'), int) or not 0 <= r['index'] < len(sec['blocks']) or not isinstance(r.get('block'), dict):
+            errs.append(f'reviseBlocks: no block {r.get("index")!r} in section {r.get("section")!r}'); continue
+        sec['blocks'][r['index']] = r['block']
+    return errs
 
 def fill_card_ids(c):
     """Give every flashcard of a merged chapter a stable id (chNN-fNNN). Cards without one get the id of their position
