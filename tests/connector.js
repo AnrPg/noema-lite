@@ -221,6 +221,12 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
   const saved8 = JSON.parse(Buffer.from(srv.state.files[`${uid}/packs/tr-physics.json`].data).toString());
   ok(!t8.isError && saved8.subject.i18n?.ru?.title === 'Переведённая физика' && saved8.translations.ru?.file && saved8.translations.fr?.file && JSON.parse(srv.state.kv[uid]['a:packmeta:tr-physics'].value).i18n?.ru?.title === 'Переведённая физика' && JSON.parse(Buffer.from(srv.state.files[`${uid}/packs/tr-physics.tr.ru.json`].data).toString()).subject?.title === 'Переведённая физика',
     'noema_save_translation subject_json: the subject\'s name in ru goes into the translation file, the pack (subject.i18n.ru) and the synced card');
+  // a CDN that hands back the copy it cached: the ru name above must survive saving the el one after it
+  srv.state.cdn = {}; srv.state.cdn[`${uid}/packs/tr-physics.json`] = { data: Buffer.from(JSON.stringify({ ...saved8, subject: { ...saved8.subject, i18n: {} } })), type: 'application/json' };
+  const t8b = await tool('noema_save_translation', { subject_id: 'tr-physics', locale: 'fr', subject_json: JSON.stringify({ title: 'Physique traduite' }) }); delete srv.state.cdn;
+  const saved8b = JSON.parse(Buffer.from(srv.state.files[`${uid}/packs/tr-physics.json`].data).toString());
+  ok(!t8b.isError && saved8b.subject.i18n?.fr?.title === 'Physique traduite' && saved8b.subject.i18n?.ru?.title === 'Переведённая физика' && saved8b.translations.ru?.file,
+    'a save that a CDN would answer with an old copy reads past it: the other language\'s name stays (' + JSON.stringify(Object.keys(saved8b.subject.i18n || {})) + ')');
   const t9 = await tool('noema_save_translation', { subject_id: 'tr-physics', locale: 'ru', subject_json: JSON.stringify({ colour: 'x' }) });
   ok(t9.isError && /unknown field/.test(t9.content[0].text), 'an unknown field of the subject\'s name is refused');
   // 文A a bridge from a translation (docs/BRIDGE.md §2.4): ru → el of an en pack, only once the ru translation is saved
