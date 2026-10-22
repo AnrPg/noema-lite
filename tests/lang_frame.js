@@ -30,11 +30,11 @@ const noHScroll = page => page.evaluate(() => document.scrollingElement.scrollWi
   await ctx.route(/fonts\.(googleapis|gstatic)\.com/, r => r.fulfill({ status: 200, body: '' }));
   const page = await ctx.newPage(); const E = []; errs(page, E);
   await page.goto(url);
-  await page.evaluate(() => { localStorage.clear(); localStorage.setItem('noema-test:newUI', '1'); localStorage.setItem('noema1:anr:a:settings', JSON.stringify({ onboarded: Date.now(), world: 'both', character: 'owl' })); });
+  await page.evaluate(() => { localStorage.clear(); localStorage.setItem('noema-test:newUI', '1'); localStorage.setItem('noema1:anr:a:settings', JSON.stringify({ onboarded: Date.now(), world: 'both', character: 'owl', studyLangs: ['ar', 'he', 'zh', 'de'] })); });   // D21: all four languages chosen (tests/lang_select.js asks the question)
   await page.goto(url + '?account=anr'); await until(() => page.$('.ns-hello'));
 
   console.log('A. the Languages tab');
-  ok(JSON.stringify(await page.$$eval('.ns-tab', l => l.map(x => x.dataset.tab))) === '["today","learn","lang","discover","progress"]', 'Knowledge and Languages: the 文A tab is there');
+  ok(JSON.stringify(await page.$$eval('.ns-tab', l => l.map(x => x.dataset.tab))) === '["today","learn","lang","discover","vault","progress"]', 'Knowledge and Languages: the 文A tab is there');
   await page.click('.ns-tab[data-tab="lang"]'); await until(() => page.$('.ns-langitem'));
   ok(await hash(page) === '#/lang' && await page.$eval('.ns-tab[data-tab="lang"]', b => b.classList.contains('on')), 'address #/lang, the tab is on');
   const item = await page.$eval(`.ns-langitem[data-course="${COURSE}"]`, b => b.innerText).catch(() => '');
@@ -54,7 +54,7 @@ const noHScroll = page => page.evaluate(() => document.scrollingElement.scrollWi
   ok(cr[0] === 'Languages' && /Arabic/.test(cr[1]) && cr.length === 2, 'crumbs: Languages › the course: ' + cr.join(' › '));
   ok(await page.$eval('.ns-tabs', t => getComputedStyle(t).display !== 'none') && await page.$eval('.ns-tab[data-tab="lang"]', b => b.classList.contains('on')), 'the frame’s tabs stay, Languages is on');
   ok(!(await page.$('body > header.lx-top')) && !(await page.$('body > main.lx-main')) && await page.$('#ns-main .lx-host .lx-main'), 'no full-page takeover: the course lives in the frame’s <main>');
-  ok(await page.locator('.lx-fhome .ns-item[data-act^="lang-"]').count() === 4, 'the course home: a row per language (the frame’s list)');
+  ok(await page.locator('.lx-subbar:not([hidden]) .lx-flagchip[data-lang]').count() === 4 && await page.locator('.lx-fhome .ns-item[data-act^="lang-"]').count() === 0, 'the course home: the strip of your languages, a chip per language, no list of them (D29)');
   ok(await page.$('.lx-host .lx-fgo.ns-go') && /S00/.test(await page.$eval('.lx-fgo', b => b.textContent)), 'the course home: ONE big card — the next lesson');
   const colours = await page.evaluate(() => {
     const css = getComputedStyle(document.documentElement), probe = document.createElement('i'); document.body.append(probe);
@@ -92,7 +92,9 @@ const noHScroll = page => page.evaluate(() => document.scrollingElement.scrollWi
   ok(await hash(page) === BASE + '/claude' && await page.$('.lx-host .lj-h1'), '⋮ › Through Claude: the task queue (P8)');
   ok(!(await page.$('.lx-host .lx-back')), 'the views’ own “← …” buttons give way to the frame’s ← and crumbs');
   await page.click('#ns-top .ns-back'); await wait(500);
-  ok(await hash(page) === BASE, '← from the Claude page: the course home, in the frame');
+  ok(await hash(page) === BASE + '/settings', '← from the Claude page: back to the screen you came from (the settings): ' + await hash(page));
+  await page.click('#ns-top .ns-back'); await wait(500);
+  ok(await hash(page) === BASE, '… and ← again: the course home, in the frame: ' + await hash(page));
 
   console.log('D. deep links, back / forward, the tutor, a session');
   await page.goto(url + `${BASE}/c/${pagesOf.concept}`); await page.reload();
@@ -173,7 +175,7 @@ const noHScroll = page => page.evaluate(() => document.scrollingElement.scrollWi
   ok((await crumbs(page)).includes('Frame course'), 'crumbs: Languages › Frame course');
   await page.click('.ns-tab[data-tab="lang"]'); await until(() => page.$$eval('.ns-langitem', l => l.length === 2));
   ok(/Your own course/.test(await page.$eval('.ns-langitem:has-text("Frame course")', b => b.innerText).catch(() => '')), 'the tab lists both courses, the new one as your own');
-  await page.click(`.ns-langitem[data-course="${COURSE}"]`); ok(await inCourse(page) && await page.locator('.lx-fhome .ns-item[data-act^="lang-"]').count() === 4, 'back to the library course: another course opens in the same page');
+  await page.click(`.ns-langitem[data-course="${COURSE}"]`); ok(await inCourse(page) && await until(async () => await page.locator('.lx-subbar:not([hidden]) .lx-flagchip[data-lang]').count() === 4), 'back to the library course: another course opens in the same page');
   const tabs = await page.evaluate(() => JSON.parse(localStorage.getItem('noema1:anr:a:settings')).world);
   ok(tabs === 'both', 'what I learn is unchanged (both)');
 
@@ -182,23 +184,24 @@ const noHScroll = page => page.evaluate(() => document.scrollingElement.scrollWi
   const pictos = () => page.$$eval('.lx-host :is(h1,h2,h3,summary,button.btn)', l => l.filter(x => x.offsetParent && !x.closest('.lx-moved, .lx-stage, [lang]:not([lang|="en"])')).map(x => x.textContent.trim()).filter(t => /\p{Extended_Pictographic}/u.test(t.replace(/[←-⇿■-◿✓✕]/g, ''))));
   await page.goto(url + BASE); await inCourse(page); await wait(300);
   ok(await prim() === 0 && await page.locator('.lx-fhome .ns-go').count() === 1, 'the home: the big card is its one primary action');
-  ok(!(await page.$('.lx-host .lx-subbar:not([hidden])')) && !(await page.$('.lx-fhome > .lx-prodlanes, .lx-fhome > .lx-glane')), 'the home: no rows of lane buttons, no grammar-lane block, no second languages switch');
+  ok(await page.locator('.lx-subbar').count() === 1 && !(await page.$('.lx-rail')) && !(await page.$('.lx-fhome > .lx-prodlanes, .lx-fhome > .lx-glane')), 'the home: no rows of lane buttons, no grammar-lane block, the strip is the one languages switch');
   let pic = await pictos(); ok(!pic.length, 'the home: titles and buttons without pictographs' + (pic.length ? ': ' + pic.slice(0, 3).join(' | ') : ''));
-  await page.click('.lx-fhome .ns-item[data-act="lang-de"]'); await page.waitForSelector('.ns-sheet');
-  const lanes = await page.$$eval('.ns-sheet .ns-item b', l => l.map(x => x.textContent.trim()));
-  ok(['Grammar', 'Writing', 'Reading', 'Peculiarities'].every(w => lanes.some(x => x.startsWith(w))) && lanes.some(x => /Listening/.test(x)) && lanes.some(x => /Tutor/.test(x)), 'German’s row opens a sheet with its lanes: ' + lanes.join(' · '));
-  await page.click('.ns-sheet .ns-item:has-text("Writing")'); await wait(700);
-  ok(await hash(page) === BASE + '/write/de' && !(await page.$('.ns-sheet')), 'a lane from the sheet opens in the frame (the sheet closes)');
+  await page.click('.lx-subbar .lx-flagchip[data-lang="de"]'); await page.waitForSelector('.lx-lhhead[data-lang="de"]', { timeout: 20000 }).catch(() => { });
+  const tiles = await page.$$eval('.lx-lhtile', l => l.map(x => x.dataset.aspect || x.dataset.view));
+  ok(await hash(page) === '#/lang/de' && ['grammar', 'writing', 'reading', 'listening', 'peculiar'].every(t => tiles.includes(t)), 'German’s chip opens its own home with its study areas (D29): ' + tiles.join(' · '));
+  await page.click('.lx-lhtile[data-aspect="writing"]'); await wait(700);
+  ok(await hash(page) === '#/lang/de/aspects/de/writing', 'a study area opens in the frame: ' + await hash(page));
+  await page.goto(url + BASE + '/write/de'); await inCourse(page); await wait(500);
   ok(await page.$('.lx-host .lx-lanegrid .lx-lanecard') && await page.$eval('.lx-host .lx-lanegrid', g => getComputedStyle(g).flexDirection === 'column'), 'the Writing lane: its sets as the frame’s list');
   pic = await pictos(); ok(!pic.length, 'the Writing lane: plain titles and buttons' + (pic.length ? ': ' + pic.slice(0, 3).join(' | ') : ''));
   await page.goto(url + BASE); await inCourse(page);
-  await page.click('.lx-fhome .ns-item[data-act="across"]'); await page.waitForSelector('.ns-sheet');
+  await pick(page, 'Across your languages'); await page.waitForSelector('.ns-sheet');
   const across = await page.$$eval('.ns-sheet .ns-item b', l => l.map(x => x.textContent.trim()));
-  ok(across.includes('Compare') && across.length >= 5, 'Across your languages (a sheet): ' + across.join(' · '));
+  ok(across.includes('Compare') && across.length >= 5, '⋮ › Across your languages (a sheet): ' + across.join(' · '));
   await page.click('.ns-sheet .ns-item:has-text("Compare")'); await wait(700); ok(await hash(page) === BASE + '/cmp', '… Compare opens the compare lane');
   await page.goto(url + BASE); await inCourse(page);
-  await page.click('.lx-fhome .ns-item[data-act="drills"]'); await page.waitForSelector('.ns-sheet');
-  ok((await page.$$eval('.ns-sheet .ns-item b', l => l.map(x => x.textContent))).some(x => /Principal parts/.test(x)), 'Drills (a sheet): principal parts and the field sorts');
+  await pick(page, 'Drills'); await page.waitForSelector('.ns-sheet');
+  ok((await page.$$eval('.ns-sheet .ns-item b', l => l.map(x => x.textContent))).some(x => /Principal parts/.test(x)), '⋮ › Drills (a sheet): principal parts and the field sorts');
   await page.keyboard.press('Escape'); await wait(200);
   const hm = await menuItems(page);
   ok(hm[0].startsWith('Today’s languages') && hm.some(x => x.startsWith('What the signs mean')) && hm.some(x => x.startsWith('Course settings')), 'the home’s ⋮: ' + hm.join(' · '));
@@ -210,9 +213,9 @@ const noHScroll = page => page.evaluate(() => document.scrollingElement.scrollWi
   await page.goto(url + `${BASE}/lesson/${lesson}`); await inCourse(page); await wait(300);
   ok(await prim() === 1, 'a lesson: one primary action');
   const lm = await menuItems(page);
-  ok(lm.some(x => /Lesson check/.test(x)) && lm.some(x => /Quiz this node/.test(x)), 'a lesson’s ⋮: the lesson check and the tutor’s questions: ' + lm.join(' · '));
-  await pick(page, 'Lesson check'); await wait(900);
-  ok(await page.$('.lx-host .lx-session, .lx-host .lx-stage, .lx-host .lx-note'), '⋮ › Lesson check runs in the frame');
+  ok(lm.some(x => /Quiz this node/.test(x)), 'a lesson’s ⋮: the tutor’s questions: ' + lm.join(' · '));
+  await page.click('.lx-host .btn.primary:visible'); await wait(900);
+  ok(await page.$('.lx-host .lx-session, .lx-host .lx-stage, .lx-host .lx-note'), 'the lesson’s one Continue (its ladder, D22) runs in the frame');
   await page.goto(url + `${BASE}/lesson/fd.01`); await inCourse(page); await wait(300);
   ok(await page.locator('.lx-host details.lx-ffold').count() >= 2 && await page.locator('.lx-host details.lx-ffold[open]').count() === 1, 'a lesson’s grammar points: the first open, the others one tap away');
   await page.goto(url + `${BASE}/script/ar`); await inCourse(page); await wait(400);
@@ -253,7 +256,7 @@ const noHScroll = page => page.evaluate(() => document.scrollingElement.scrollWi
     for (let i = 0; i < 3 && await page.evaluate(() => document.documentElement.dataset.m) !== ch; i++) {   // (a subject engine loaded earlier may write its copy of the settings back once)
       await page.evaluate(ch => { NoemaThemes.putSettings({ character: ch, characterAt: Date.now() - 20 * 864e5 }); NoemaThemes.apply(ch); }, ch); await page.reload(); await inCourse(page); await wait(400);
     }
-    looks[ch] = await page.evaluate(() => ({ m: document.documentElement.dataset.m, font: getComputedStyle(document.querySelector('.lx-fhead h1')).fontFamily.split(',')[0], border: getComputedStyle(document.querySelector('.lx-nodes')).borderTopStyle, step: getComputedStyle(document.querySelector('.lx-node .lx-step')).borderTopLeftRadius, icon: getComputedStyle(document.querySelector('.lx-fhome .ns-item[data-act^="lang-"] .ns-ico')).borderTopLeftRadius }));
+    looks[ch] = await page.evaluate(() => ({ m: document.documentElement.dataset.m, font: getComputedStyle(document.querySelector('.lx-fhead h1')).fontFamily.split(',')[0], border: getComputedStyle(document.querySelector('.lx-nodes')).borderTopStyle, step: getComputedStyle(document.querySelector('.lx-node .lx-step')).borderTopLeftRadius, chip: getComputedStyle(document.querySelector('.lx-subbar .lx-flagchip')).borderTopLeftRadius }));
     await page.screenshot({ path: `${SHOTS}/lf_h_${ch}_${w}.png` });
   }
   ok(looks.bear.m === 'bear' && looks.bear.border === 'dashed' && looks.owl.border === 'solid', 'the bear’s dashed lines reach the course, the owl’s do not: ' + JSON.stringify(looks));
