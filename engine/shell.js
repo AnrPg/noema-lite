@@ -348,7 +348,7 @@ window.NoemaShell = (() => {
     const crumbs = c ? [[shortTitle(c), '#/map/' + encodeURIComponent(c.id) + '/' + encodeURIComponent(node.node)]] : [[L('shelf'), '#/shelf']];
     return { tab: isLang(s) ? 'lang' : 'learn', ...extra, crumbs: [...crumbs, [s.title || '…', extra.sub ? '#/subject' : null], ...(extra.crumbs || [])], back: extra.back ?? (c ? '#/map/' + encodeURIComponent(c.id) + '/' + encodeURIComponent(node.node) : '#/shelf') };
   }
-  const shortTitle = c => { const t = c.title || c.goal || ''; return t.length > 28 ? t.split(/[:—–(-]/)[0].trim().slice(0, 28) || t.slice(0, 28) : t; };
+  const shortTitle = c => { const t = CU()?.shownTitle(c) || c.title || c.goal || ''; return t.length > 28 ? t.split(/[:—–(-]/)[0].trim().slice(0, 28) || t.slice(0, 28) : t; };
 
   /** Where the learner is now, for the search's "here": the open subject, a Roadmap, a language course (or nothing). */
   function here() {
@@ -441,7 +441,7 @@ window.NoemaShell = (() => {
     const all = CU()?.list(acc()) || [], hid = hiddenToday(), curs = all.filter(c => !hid.includes('map:' + c.id));
     if (all.length && !curs.length) return null;   // every Roadmap's suggestion closed for today: nothing
     if (curs.length) { const c = curs[0], nx = CU().nextUp?.(acc(), c)?.[0];
-      return goCard('map:' + c.id, redraw || (() => go('#/')), { class: 'ns-go', onclick: () => go('#/map/' + encodeURIComponent(c.id) + (nx ? '/' + encodeURIComponent(nx) : '')) }, h('span', { class: 'rm' }, svg('map'), ' ', c.title || c.goal), h('h2', {}, nx ? c.nodes[nx]?.title : L('openMap')), h('span', { class: 'meta' }, pill(L('nextStep'), 2)), h('span', { class: 'arrow', 'aria-hidden': 'true' }, '→')); }
+      return goCard('map:' + c.id, redraw || (() => go('#/')), { class: 'ns-go', onclick: () => go('#/map/' + encodeURIComponent(c.id) + (nx ? '/' + encodeURIComponent(nx) : '')) }, h('span', { class: 'rm' }, svg('map'), ' ', CU().shownTitle(c)), h('h2', {}, nx ? CU().shownNode(c, nx)?.title : L('openMap')), h('span', { class: 'meta' }, pill(L('nextStep'), 2)), h('span', { class: 'arrow', 'aria-hidden': 'true' }, '→')); }
     return h('div', { class: 'ns-panel ns-empty' }, faceEl(undefined, 'breathe'), h('h2', {}, L('welcomeTitle')), h('p', { class: 'ns-muted' }, L('welcomeText')),
       h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => CM()?.create(acc(), { onStudy }) }, L('newRoadmap')), h('button', { class: 'btn', onclick: () => go('#/discover') }, L('discover')), h('button', { class: 'btn ghost', onclick: () => go('#/shelf') }, L('shelf'))));
   }
@@ -492,7 +492,7 @@ window.NoemaShell = (() => {
       ready ? { label: L('rmSettings'), sub: L('rmSettingsSub'), icon: 'gear', run: () => { CM()?.mapOpts && (CM().mapOpts.next = { settings: true }); go('#/map/' + encodeURIComponent(c.id)); } } : null,
       { label: L('exportJson'), icon: 'download', run: () => { const b = new Blob([JSON.stringify(CU().get(acc(), c.id), null, 1)], { type: 'application/json' }); const a = h('a', { href: URL.createObjectURL(b), download: `curriculum-${c.id}.json` }); document.body.append(a); a.click(); a.remove(); } }], { label: L('moreFor', { title: c.title || c.goal }) });
     return h('div', { class: 'ns-rmwrap cm-cardwrap' }, h('button', { class: 'ns-rmcard cm-card', style: { animationDelay: i * 40 + 'ms' }, onclick: openIt },
-      h('div', { class: 'row nowrap' }, sh ? ico('people', (i % 4) + 1) : c.emoji ? icoTxt(c.emoji, (i % 4) + 1, 'emo') : ico('map', (i % 4) + 1), h('div', { class: 'grow' }, h('b', { class: 'ttl' }, c.title || c.goal), h('small', { class: 'ns-muted' }, sh ? (sh.role === 'member' ? L('sharedBy', { who: sh.ownerName || '…' }) + ' · ' : L('youShare') + ' · ') : '', sub)), chev()),
+      h('div', { class: 'row nowrap' }, sh ? ico('people', (i % 4) + 1) : c.emoji ? icoTxt(c.emoji, (i % 4) + 1, 'emo') : ico('map', (i % 4) + 1), h('div', { class: 'grow' }, h('b', { class: 'ttl' }, CU().shownTitle(c)), h('small', { class: 'ns-muted' }, sh ? (sh.role === 'member' ? L('sharedBy', { who: sh.ownerName || '…' }) + ' · ' : L('youShare') + ' · ') : '', sub)), chev()),
       s ? bar(s.mastered / Math.max(1, s.total)) : null), menu);
   }
 
@@ -779,8 +779,8 @@ window.NoemaShell = (() => {
         const ids = [...new Set([...(CU().order?.(c) || []), ...Object.keys(c.nodes || {})])].filter(id => c.nodes[id]?.pack?.id && byId.has(c.nodes[id].pack.id));
         if (!ids.length) continue;
         ids.forEach(id => placed.add(c.nodes[id].pack.id));
-        groups.push(fold('c:' + c.id, [ico('map', 1), h('span', { class: 'ns-domt' }, c.title || c.goal), pill(L('subjStations', { n: ids.length }), 1)],
-          h('div', { class: 'ns-sstations' }, ...ids.map(id => subjBlock(byId.get(c.nodes[id].pack.id), 'c:' + c.id + '/' + id, c.nodes[id].title, c.nodes[id].chapters)))));
+        groups.push(fold('c:' + c.id, [ico('map', 1), h('span', { class: 'ns-domt' }, CU().shownTitle(c)), pill(L('subjStations', { n: ids.length }), 1)],
+          h('div', { class: 'ns-sstations' }, ...ids.map(id => subjBlock(byId.get(c.nodes[id].pack.id), 'c:' + c.id + '/' + id, CU().shownNode(c, id).title, CU().shownNode(c, id).chapters)))));
       }
       const rest = subs.filter(s => !placed.has(s.id)), langs = rest.filter(isLang), shelf = rest.filter(s => !isLang(s));
       if (shelf.length) groups.push(fold('shelf', [ico('shelf', 3), h('span', { class: 'ns-domt' }, L('shelf')), pill(String(shelf.length), 3)], h('div', { class: 'ns-sstations' }, ...shelf.map(s => subjBlock(s, 's:' + s.id)))));
@@ -1037,7 +1037,7 @@ window.NoemaShell = (() => {
   /** Where a subject sits: { group: Roadmap (or "no Roadmap"), step: its step (or the subject itself) } */
   function placeOf(sid, title) {
     const st = window.NoemaCurriculum?.stepsOf ? NoemaCurriculum.stepsOf(acc(), sid) : [];
-    if (st.length) { const { c, nid } = st[0]; return { g: 'c:' + c.id, gt: c.title || c.goal || L('roadmap'), s: c.id + '/' + nid, st: c.nodes[nid]?.title || title }; }
+    if (st.length) { const { c, nid } = st[0]; return { g: 'c:' + c.id, gt: CU().shownTitle(c) || L('roadmap'), s: c.id + '/' + nid, st: CU().shownNode(c, nid)?.title || title }; }
     return { g: 'other', gt: L('otherSubjects'), s: 's:' + sid, st: title || sid };
   }
   function convos(openId) {   // openId: open that conversation at once (a search result)

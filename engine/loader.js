@@ -305,7 +305,8 @@
       if (list.some(s => s.id === m.id)) return;
       // The synced metadata (written by the connector when Claude saves a new version, or by another device) wins over
       // the copy cached on this device: a different version there means the cached copy is out of date → getPack downloads it.
-      const newer = !!(extra.version && extra.version !== (p.version || null));
+      // A translation saved since (noema_save_translation keeps the version and names the language in the metadata) counts too.
+      const newer = !!(extra.version && extra.version !== (p.version || null)) || (extra.contentLocales || []).some(l => !p.translations?.[l]);
       list.push(newer
         ? { ...m, ...extra, origin: 'imported', counts: extra.counts || p.counts || countPack(p), version: extra.version, updateAvailable: true }
         : { ...extra, ...m, origin: 'imported', counts: p.counts || countPack(p), version: p.version, sharedBy: extra.sharedBy, publicFrom: extra.publicFrom, publicOwner: extra.publicOwner, contentLocales: Object.keys(p.translations || {}),
@@ -379,7 +380,9 @@
     let cached = null;
     if (meta.origin === 'imported') {
       cached = await IDB.get('packs', acc + '|' + meta.id);
-      const stale = !!(cached && meta.version && cached.version !== meta.version && window.NoemaCloud && NoemaCloud.session());
+      // a newer version, or a translation saved since this copy was kept (noema_save_translation rewrites the pack under the same version and names the language in its card)
+      const lacksTr = !!(cached && (meta.contentLocales || []).some(l => !cached.translations?.[l]));
+      const stale = !!(cached && ((meta.version && cached.version !== meta.version) || lacksTr) && window.NoemaCloud && NoemaCloud.session());
       if (cached && !stale) { if (needsPictures(cached)) embedWebPictures(acc, cached, { wait: 0 }); return cached; }     // a newer version exists in the cloud (e.g. Claude updated it) → download below
       if (stale) toastL('⬇️ ' + tr('loader.pack.gettingNew', { title: meta.title || meta.id }), 4000);
     }
@@ -604,7 +607,7 @@
           if (!list.length) { curs.append(el('div', { class: 'tiny pick-nocur' }, tr('pick.noCurricula', null, acc), ' ', CM() ? el('button', { class: 'btn small', onclick: () => CM().create(acc, { onStudy }) }, tr('pick.newCurriculum', null, acc)) : null, ' ', CM() ? el('button', { class: 'btn small ghost', onclick: () => CM().importMap(acc, { onStudy }) }, tr('pick.importMap', null, acc)) : null)); return; }
           curs.append(...list.slice(0, 6).map(c => { const sm = c.status === 'ready' ? CU.summary(acc, c) : null;
             return el('button', { class: 'pick-cur', onclick: () => c.status === 'ready' || c.status === 'attach' ? CM()?.map(acc, c.id, { onStudy }) : CM()?.progress(acc, c, { onStudy }) },
-              el('b', {}, (c.shared && !c.shared.ended ? '👥 ' : '🧭 ') + (c.title || c.goal)), el('span', { class: 'tiny' }, sm ? tr('loader.pick.curSummary', { mastered: sm.mastered, total: sm.total, open: sm.open }) : '⏳')); }),
+              el('b', {}, (c.shared && !c.shared.ended ? '👥 ' : '🧭 ') + (CU.shownTitle?.(c) || c.title || c.goal)), el('span', { class: 'tiny' }, sm ? tr('loader.pick.curSummary', { mastered: sm.mastered, total: sm.total, open: sm.open }) : '⏳')); }),
             list.length > 6 ? el('button', { class: 'pick-cur', onclick: () => CM()?.library(acc, { onStudy }) }, el('b', {}, `+${list.length - 6}`), el('span', { class: 'tiny' }, tr('pick.curricula', null, acc))) : null);
         };
         // 📚 the Shelf: folded away once the learner has a map (it remembers, per device, whether it was left open)

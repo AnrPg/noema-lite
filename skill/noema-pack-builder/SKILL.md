@@ -272,6 +272,12 @@ are still missing.
   its own file, `build/<id>.tr.<locale>.json` (and `translations/<locale>.json` in the package). `noema_finish_upload`
   asks for each one with ready `curl` commands; `noema_save_translation` adds one later. `unpack.py` gives the
   translations back in `translations/`. Contract: `references/CONTENT_SPEC.md` → "Packs in several languages".
+- **A step of a Roadmap**: the Roadmap is translated with its packs, into the same languages. With the pack's
+  translations, translate the step's own words on the map — its title, summary, learning goals (one per goal, same order)
+  and chapter titles (by chapter ref) — and save them with `noema_save_roadmap_translation` (curriculum_id, locale,
+  `{ "nodes": { "<step id>": { "title", "summary", "learningGoals": [...], "chapters": { "<ref>": "…" } } } }`). A new
+  Roadmap (`noema_create_roadmap`) gets its title, goal and every step's title and summary translated right away.
+  `noema_finish_upload` / `noema_save_translation` print the exact texts still untranslated.
 
 ## Language help — 文A bridges: every pack into English, Greek, Russian and Arabic (flow step `bridges`)
 Every new pack gets a bridge into each of en, el, ru, ar that is not its own language, **everyday words included** (≥ 90 %

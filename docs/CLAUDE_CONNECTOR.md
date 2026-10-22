@@ -89,7 +89,10 @@ and not needed, because the connector's `noema_get_toolkit` hands Claude the sam
   2026-10-22 without `subject.authoring.rules` ≥ 2), `noema_save_pack` (small packs inline; same file check),
   `noema_start_source_upload` (one extra file), `noema_save_translation` (one full translation of a pack, `noema-translation`,
   beside it: inline or through an upload URL; every new pack gets en, el, ru — docs/PIPELINES.md §4b; `noema_finish_upload`
-  also asks for the translation files a pack names, with ready `curl` commands, and lists the languages still to do). Prompt `create_subject` (claude.ai: **+ → noema-lite → Create a noema-lite subject**).
+  also asks for the translation files a pack names, with ready `curl` commands, and lists the languages still to do),
+  `noema_save_roadmap_translation` (a Roadmap's own words — title, goal, per step title, summary, learning goals, chapter
+  titles — in one language, into the same languages as its packs: the whole map after `noema_create_roadmap`, each step with
+  its pack's translations; merged, applied by the app through the curriculum inbox; docs/CURRICULUM.md §10). Prompt `create_subject` (claude.ai: **+ → noema-lite → Create a noema-lite subject**).
 * Without the connector: Claude hands over the package `<id>.noema.zip` → 📥 Import subject pack (pack + source files).
 * **文A language help** (docs/BRIDGE.md): `noema_bridge_guide` (the format and workflow, the account's bridges, the mistakes
   learners reported) and `noema_save_bridge` (one built `noema-bridge` file, ≤ 1.5 MB — uploaded with the `curl` command it returns for

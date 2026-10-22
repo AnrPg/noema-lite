@@ -374,6 +374,8 @@ ignore both and show the source). **Each translation is its own file** (`noema-t
 language they read: `make_pack.py` writes `build/<id>.tr.<locale>.json` and puts it in the package as
 `translations/<locale>.json`; the pack itself only names it, `"translations": { "<locale>": { "file": true, "chapters": n } }`.
 The connector's `noema_finish_upload` asks for each file (ready `curl` commands), `noema_save_translation` adds one later.
+**A pack that teaches a step of a Roadmap**: the Roadmap's own words are translated with it, into the same languages — the
+step's title, summary, learning goals and chapter titles (`noema_save_roadmap_translation`, docs/CURRICULUM.md §10).
 Older packs with `"translations": { "<locale>": { "chapters": [ … ] } }` inline keep working.
 **Validation**: `python3 tools/validate.py subject.json --subject [--translations el,fr]` (locale codes, known fields,
 only what the source has) and `python3 tools/validate.py translations/el/ch03.json --source ch03.json` (the same ids,
