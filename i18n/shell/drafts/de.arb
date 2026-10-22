@@ -451,5 +451,6 @@
   "sh.vaultSub": "Mitschriften, Altklausuren und Lösungen von Studierenden",
   "sh.people": "Lernpartner",
   "sh.peopleSub": "Mit Kommilitonen chatten, Lernpartner, Lerngruppen",
-  "sh.peopleN": "Lernpartner: {n, plural, one {# neu} other {# neu}}"
+  "sh.peopleN": "Lernpartner: {n, plural, one {# neu} other {# neu}}",
+  "sh.hideToday": "Für heute ausblenden"
 }
