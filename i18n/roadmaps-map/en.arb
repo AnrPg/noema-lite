@@ -3702,13 +3702,9 @@
   "@roadmap.map.src.title": {
     "description": "Title of the “From your sources” wizard and its button: give all your study material at once; the app proposes one subject or a Roadmap. Short."
   },
-  "roadmap.map.src.lead": "Give all your material at once: the app proposes one subject or a Roadmap, and you decide.",
+  "roadmap.map.src.lead": "Drop all your material: the app picks the best shape for it.",
   "@roadmap.map.src.lead": {
     "description": "Lead line under the wizard title; also the button tooltip."
-  },
-  "roadmap.map.src.material": "Your material",
-  "@roadmap.map.src.material": {
-    "description": "Step 1 heading of the wizard: the files to use."
   },
   "roadmap.map.src.materialTip": "PDFs, slides, documents, notes, pictures, recordings, a folder or a .zip. The files are read on this device; only their outlines and first lines go to the AI that makes the proposal.",
   "@roadmap.map.src.materialTip": {
@@ -3782,10 +3778,6 @@
   "@roadmap.map.src.notesPh": {
     "description": "Placeholder of the notes field."
   },
-  "roadmap.map.src.who": "Who reads it",
-  "@roadmap.map.src.who": {
-    "description": "Step 2 heading: who reads the material and makes the proposal."
-  },
   "roadmap.map.src.whoTip": "With a Claude or Gemini key the proposal comes at once. With your Claude app you copy one message and paste its answer back. Without AI the app estimates from the sizes and outlines.",
   "@roadmap.map.src.whoTip": {
     "description": "ⓘ of step 2."
@@ -3848,34 +3840,6 @@
   "@roadmap.map.src.orEstimate": {
     "description": "Button: skip Claude and let the app estimate."
   },
-  "roadmap.map.src.proposal": "The proposal",
-  "@roadmap.map.src.proposal": {
-    "description": "Step heading: the proposed shape, with its reasons."
-  },
-  "roadmap.map.src.proposalTip": "Both shapes are ready: pick the other one if you prefer. A subject on the Shelf is a full course, just like a step of a Roadmap.",
-  "@roadmap.map.src.proposalTip": {
-    "description": "ⓘ of the proposal."
-  },
-  "roadmap.map.src.shape.course": "One subject",
-  "@roadmap.map.src.shape.course": {
-    "description": "Choice card: the material as one subject (chapters)."
-  },
-  "roadmap.map.src.shape.roadmap": "A Roadmap",
-  "@roadmap.map.src.shape.roadmap": {
-    "description": "Choice card: the material as a Roadmap (steps)."
-  },
-  "roadmap.map.src.shapeSub.course": "Chapters in one course, on the Shelf",
-  "@roadmap.map.src.shapeSub.course": {
-    "description": "Line on the “One subject” card."
-  },
-  "roadmap.map.src.shapeSub.roadmap": "Steps that open one after another, each a whole subject",
-  "@roadmap.map.src.shapeSub.roadmap": {
-    "description": "Line on the “A Roadmap” card."
-  },
-  "roadmap.map.src.recommended": "Recommended",
-  "@roadmap.map.src.recommended": {
-    "description": "Badge on the proposed shape."
-  },
   "roadmap.map.src.nChapters": "{n, plural, one {# chapter} other {# chapters}}",
   "@roadmap.map.src.nChapters": {
     "description": "Size on the “One subject” card.",
@@ -3920,9 +3884,31 @@
       }
     }
   },
-  "roadmap.map.src.build": "Build it",
-  "@roadmap.map.src.build": {
-    "description": "Last step heading: make the chosen shape."
+  "roadmap.map.src.made.course": "One subject · {n, plural, one {# chapter} other {# chapters}}",
+  "@roadmap.map.src.made.course": {
+    "description": "One line after the app read the material: it became one subject (a course on the Shelf) with n chapters.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "roadmap.map.src.made.roadmap": "A Roadmap · {n, plural, one {# step} other {# steps}}",
+  "@roadmap.map.src.made.roadmap": {
+    "description": "One line after the app read the material: it became a Roadmap with n steps.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "roadmap.map.src.switch.course": "Make it one subject instead",
+  "@roadmap.map.src.switch.course": {
+    "description": "Quiet link under that line: switch the shape to one subject."
+  },
+  "roadmap.map.src.switch.roadmap": "Make it a Roadmap instead",
+  "@roadmap.map.src.switch.roadmap": {
+    "description": "Quiet link under that line: switch the shape to a Roadmap."
   },
   "roadmap.map.src.buildRoadmapTip": "Every file is stored once and linked to its steps with their pages. Each step’s chapters are planned from those pages, and you review every step before it is prepared.",
   "@roadmap.map.src.buildRoadmapTip": {
