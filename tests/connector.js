@@ -135,6 +135,15 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
   const bOk = await tool('noema_save_bridge', { bridge_json: JSON.stringify(br) });
   const bix = JSON.parse(srv.state.kv[uid]['a:bridges']?.value || '{}');
   ok(!bOk.isError && srv.state.files[`${uid}/bridges/tiny-inline.ru.json`] && bix['tiny-inline']?.ru?.entries === 1 && /^[0-9a-z]+$/.test(bix['tiny-inline'].ru.v), 'save_bridge stores <uid>/bridges/<pack>.<native>.json and the synced index a:bridges');
+  // a bridge too big to paste: subject_id + native → an upload command; the uploaded file goes live only once checked
+  const bu1 = await tool('noema_save_bridge', { subject_id: 'tiny-inline', native: 'el' }); const buUrl = (bu1.content[0].text.match(/curl [^\n]* "([^"]+)"/) || [])[1];
+  ok(!bu1.isError && !!buUrl && !srv.state.files[`${uid}/bridges/tiny-inline.el.json`], 'save_bridge with subject_id + native returns an upload command');
+  await fetch(buUrl, { method: 'PUT', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ ...br, native: 'ru' }) });
+  const buWrong = await tool('noema_save_bridge', { subject_id: 'tiny-inline', native: 'el' });
+  await fetch(buUrl, { method: 'PUT', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ ...br, native: 'el', status: 'reviewed' }) });
+  const bu2 = await tool('noema_save_bridge', { subject_id: 'tiny-inline', native: 'el' });
+  const bix2 = JSON.parse(srv.state.kv[uid]['a:bridges']?.value || '{}');
+  ok(buWrong.isError && /not tiny-inline → el/.test(buWrong.content[0].text) && !bu2.isError && /\(reviewed\)/.test(bu2.content[0].text) && srv.state.files[`${uid}/bridges/tiny-inline.el.json`] && !srv.state.files[`${uid}/bridges/incoming/tiny-inline.el.json`] && bix2['tiny-inline']?.el?.status === 'reviewed' && bix2['tiny-inline']?.ru?.entries === 1, 'save_bridge from an upload: refuses the wrong file, saves the right one, clears the upload, keeps the other natives in a:bridges');
   srv.state.kv[uid]['a:bridgeReports'] = { value: JSON.stringify([{ pack: 'tiny-inline', native: 'ru', k: 'energy', sense: '1', form: 'energy', sid: sid0, note: 'better: энергия (физ.)' }]), updated_at: new Date().toISOString() };
   const bg = (await tool('noema_bridge_guide', { subject_id: 'tiny-inline' })).content[0].text;
   ok(/tiny-inline → ru: 1 words/.test(bg) && /энергия \(физ\.\)/.test(bg), 'bridge_guide lists the account\'s bridges and the mistakes learners reported');
