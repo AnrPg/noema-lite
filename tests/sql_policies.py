@@ -49,9 +49,9 @@ alter default privileges in schema public grant all on tables to anon, authentic
     psql(seed); psql(seed)
     ok(True, 'cloud/supabase.sql runs, and runs again (idempotent); so does the seed of the vault fields')
     tables = psql("select tablename from pg_tables where schemaname='public' and tablename like 'noema_%' and rowsecurity order by 1")
-    ok(tables == ['noema_admins', 'noema_blocks', 'noema_buddies', 'noema_chat_files', 'noema_conversations', 'noema_curricula_shared', 'noema_curriculum_members', 'noema_curriculum_steps', 'noema_kv',
+    ok(tables == ['noema_admins', 'noema_blocks', 'noema_buddies', 'noema_chat_files', 'noema_conversations', 'noema_curricula_shared', 'noema_curriculum_members', 'noema_curriculum_steps', 'noema_error_reports', 'noema_kv',
                   'noema_message_reports', 'noema_messages', 'noema_people', 'noema_profiles', 'noema_public_packs', 'noema_public_profiles', 'noema_room_members', 'noema_room_roadmaps',
-                  'noema_rooms', 'noema_shares', 'noema_snapshots', 'noema_vault_fields', 'noema_vault_files', 'noema_vault_hits', 'noema_vault_ratings', 'noema_vault_reports'], 'the 25 noema_ tables, all with row-level security: ' + ', '.join(tables))
+                  'noema_rooms', 'noema_shares', 'noema_snapshots', 'noema_vault_fields', 'noema_vault_files', 'noema_vault_hits', 'noema_vault_ratings', 'noema_vault_reports'], 'the 26 noema_ tables, all with row-level security: ' + ', '.join(tables))
     A, B, C = (str(uuid.uuid4()) for _ in range(3)); EA, EB, EC = 'anna@example.com', 'bob@example.com', 'carl@example.com'
     psql(f"insert into auth.users values ('{A}','{EA}'),('{B}','{EB}'),('{C}','{EC}')")
     # own data
@@ -231,6 +231,19 @@ alter default privileges in schema public grant all on tables to anon, authentic
     ok(q('e', f"select status, merged_into from noema_vault_fields where id = '{u}'") == [] and 'Quantum biology' in q('e', f"select array_to_string(aliases, '|') from noema_vault_fields where id = '{nid}'")[0], '…and its names become the other’s aliases (search still finds it)')
     ok(psql("select count(*) from noema_vault_fields", role='anon', expect_error=True) or psql("select count(*) from noema_vault_fields", role='anon') == ['0'], 'signed-out visitors read no fields')
     ok(psql("select count(*) from noema_people", role='anon') == ['0'] and psql("select count(*) from noema_messages", role='anon') == ['0'], 'signed-out visitors see no one and nothing')
+    # ⚑ problem reports (§15): the reporter sends and sees their own; the admins see, answer and delete all of them
+    shot = 'data:image/jpeg;base64,' + 'QUJD' * 10
+    rid = q('d', f"insert into noema_error_reports (kind, note, route, subject, item, locator, shot, app_version, status, admin_note) values ('content', 'the answer should be B', '#/s/ch01-s01', 'demo-physics', 'ex:ch01-e001', '{{\"v\":1,\"item\":{{\"exercise\":\"ch01-e001\"}}}}', '{shot}', '1.0.0', 'fixed', 'sneaky') returning id")[0]
+    ok(q('d', f"select status, admin_note is null, reporter_email, subject from noema_error_reports where id = '{rid}'") == ['new|t|' + PE['d'] + '|demo-physics'], 'a report: sent as new (status and answer are not the reporter’s), with the reporter’s e-mail filled in by the server')
+    ok(q('e', "select count(*) from noema_error_reports") == ['0'] and q('a', f"select count(*) from noema_error_reports where id = '{rid}'") == ['1'], 'other people never see a report; the admins see every one')
+    ok(q('d', f"update noema_error_reports set status = 'fixed' where id = '{rid}' returning 1") == [] and q('d', f"delete from noema_error_reports where id = '{rid}' returning 1") == [] and q('e', f"update noema_error_reports set status = 'fixed' where id = '{rid}' returning 1") == [], 'the reporter cannot change or delete a report once sent; others not even see it')
+    q('a', f"update noema_error_reports set status = 'fixed', admin_note = 'fixed the answer', fixed_in = 'abc123', note = 'changed' where id = '{rid}'")
+    ok(q('d', f"select status, admin_note, fixed_in, note from noema_error_reports where id = '{rid}'") == ['fixed|fixed the answer|abc123|the answer should be B'], 'an admin answers it (status, note, fix); what the reporter wrote stays as it was')
+    ok(q('d', "insert into noema_error_reports (kind, shot) values ('other', 'data:text/html;base64,PHNjcmlwdD4=')", expect_error=True) and q('d', "insert into noema_error_reports (kind) values ('nonsense')", expect_error=True), 'a screenshot is only a data:image URL; the kind one of the list')
+    ok(q('d', "insert into noema_error_reports (reporter, kind) values ('" + P['e'] + "', 'other') returning reporter = auth.uid()", expect_error=True) or q('d', "insert into noema_error_reports (reporter, kind) values ('" + P['e'] + "', 'other') returning reporter = auth.uid()") == ['t'], 'nobody reports in someone else’s name')
+    ok(psql("select count(*) from noema_error_reports", role='anon', expect_error=True) or psql("select count(*) from noema_error_reports", role='anon') == ['0'], 'signed-out visitors read no reports')
+    q('a', f"delete from noema_error_reports where id = '{rid}'")
+    ok(q('d', f"select count(*) from noema_error_reports where id = '{rid}'") == ['0'], 'an admin deletes a report')
 finally:
     subprocess.run(as_pg + [f'{BIN}/pg_ctl', '-D', data, 'stop', '-m', 'immediate'], capture_output=True)
     shutil.rmtree(data, ignore_errors=True)

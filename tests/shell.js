@@ -146,7 +146,7 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
 
   console.log('E. Me');
   { const items = await menuItems(page, '#ns-topme');
-    ok(JSON.stringify(items) === JSON.stringify(['Me', 'Settings', 'Help', 'My subjects', 'Switch account', 'Log out']), 'Me ▾: Me · Settings · Help · My subjects — Switch account · Log out: ' + items.join(' · '));
+    ok(JSON.stringify(items) === JSON.stringify(['Me', 'Settings', 'Help', 'My subjects', 'Report a problem', 'Switch account', 'Log out']), 'Me ▾: Me · Settings · Help · My subjects · Report a problem (phones) — Switch account · Log out: ' + items.join(' · '));
     await page.click('#ns-topme'); await wait(250);
     ok(await page.$$eval('.ns-pop.ns-mepop > hr', l => l.length) === 1 && await page.$eval('.ns-pop.ns-mepop', p => { const r = p.getBoundingClientRect(); return r.right <= innerWidth && r.top > 0; }), 'a line before Switch account / Log out; the menu stays on the screen');
     await page.click('#ns-topme'); await wait(200);
@@ -179,6 +179,18 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
   await page.click('.ns-preview .btn:not(.primary)'); await wait(300);
   ok(!(await page.$('.ns-preview')) && await page.evaluate(() => document.documentElement.dataset.m) === 'robot', 'end of the try: back to yours');
   ok(await page.$$eval('.ns-gcard [data-choose]', l => l.length) >= 28 && /as often as you like/.test(await page.locator('.ns-view').innerText()), 'the first 15 days: change as often as you like (a “Choose” on every other character)');
+  // a new character sticks everywhere: an open subject's own copy of the settings never writes the old one back (save, reload),
+  // and a character chosen on another device or tab dresses this page at once (2026-10-22: the strawberry kept coming back)
+  { await page.evaluate(() => document.querySelector('.ns-gcard[data-char="owl"] [data-choose]').click()); await wait(400);
+    const engine = await page.evaluate(() => typeof flushSave === 'function'); await page.evaluate(() => { try { flushSave(); } catch (e) { } });
+    await page.reload(); await wait(1200);
+    const kept = await page.evaluate(() => ({ stored: JSON.parse(localStorage.getItem(`noema1:${Noema.account.id}:a:settings`)).character, html: document.documentElement.dataset.m, cur: NoemaThemes.current(), fab: document.querySelector('#ns-fab .nm').textContent }));
+    ok(engine && kept.stored === 'owl' && kept.html === 'owl' && kept.cur === 'owl' && kept.fab === 'Hootie', 'a chosen character survives the open subject’s saves and a reload: ' + JSON.stringify(kept));
+    await page.evaluate(() => { const k = `noema1:${Noema.account.id}:a:settings`, s = JSON.parse(localStorage.getItem(k)); s.character = 'robot'; Noema.kv.set(k, JSON.stringify(s)); dispatchEvent(new CustomEvent('noema:remote', { detail: { acc: Noema.account.id, keys: [k] } })); });
+    await wait(500);
+    const remote = await page.evaluate(() => ({ html: document.documentElement.dataset.m, fab: document.querySelector('#ns-fab .nm').textContent }));
+    ok(remote.html === 'robot' && remote.fab === 'Cobalt', 'a character chosen on another device dresses this page at once: ' + JSON.stringify(remote));
+    await page.goto(url + '#/character'); await wait(500); }
   // during a try every surface shows the character on trial: one way to ask, NoemaThemes.current()
   if (!(await page.$eval('.ns-chgrp[data-group="animals"]', d => d.open))) { await page.click('.ns-chgrp[data-group="animals"] summary'); await wait(200); }
   await page.click('[data-try="owl"]'); await wait(400);

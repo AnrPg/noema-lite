@@ -200,6 +200,12 @@ const S = (() => {
   return st;
 })();
 if (!S.settings.apiKey) S.settings.apiKey = DEFAULT_KEY;
+/* a:settings has other writers too (the character, the menus' language, the native language, a course…): S.settings is this page's
+   copy of it. What the page last read or wrote, key by key: a save writes only the keys changed HERE, so it can never put an
+   older copy back over a choice made elsewhere (e.g. a new character chosen in the frame while this subject was open). */
+let settingsSeen = {};
+const seeSettings = () => { settingsSeen = {}; for (const k of Object.keys(S.settings)) settingsSeen[k] = JSON.stringify(S.settings[k]); };
+seeSettings();
 /* flashcards have ids now (chNN-fNNN); their progress used to be keyed by position (chNN#k), which shifted when a card
    was inserted. Move positional progress to the card's id (idempotent: a moved key is gone; if both exist the id wins). */
 const CARD_KEYS_MOVED = (() => {
@@ -218,8 +224,11 @@ function flushSave() {
   const { settings, ...rest } = S; const { srcOn, apiKey, mt: _mt, ...glob } = settings;   // a:settings.mt is engine/mt.js's own (written there): never written back from this copy
   Noema.kv.set(STATE_KEY, JSON.stringify({ ...rest, srcOn }));
   Noema.geminiKey.set(ACCOUNT.id, apiKey);   // this device only; the default key is not stored
-  let cur = {}; try { cur = JSON.parse(Noema.kv.get(SETTINGS_KEY) || '{}'); } catch (e) { }
-  delete cur.apiKey; Noema.kv.set(SETTINGS_KEY, JSON.stringify(Object.assign(cur, glob)));
+  let cur = {}; try { cur = JSON.parse(Noema.kv.get(SETTINGS_KEY) || '{}') || {}; } catch (e) { }
+  delete cur.apiKey;
+  for (const k of Object.keys(glob)) if (!(k in cur) || JSON.stringify(glob[k]) !== settingsSeen[k]) cur[k] = glob[k];
+  Noema.kv.set(SETTINGS_KEY, JSON.stringify(cur));
+  Object.assign(S.settings, cur); seeSettings();   // the page's copy follows what the others saved
 }
 function save() { clearTimeout(saveT); saveT = setTimeout(flushSave, 150); }
 /* another device's progress or settings arrived (engine/cloud.js): fold them into what this page holds, so the next save
@@ -237,7 +246,7 @@ addEventListener('noema:remote', e => {
     Object.assign(S, { read: {}, res: {}, pb: {}, fc: {}, boss: {} }, merged); delete S.srcOn;
     if (st.srcOn !== undefined) S.settings.srcOn = st.srcOn;
   }
-  if (keys.includes(SETTINGS_KEY)) { try { const g = JSON.parse(Noema.kv.get(SETTINGS_KEY) || '{}'); delete g.apiKey; Object.assign(S.settings, g); } catch (x) { } }
+  if (keys.includes(SETTINGS_KEY)) { try { const g = JSON.parse(Noema.kv.get(SETTINGS_KEY) || '{}'); delete g.apiKey; Object.assign(S.settings, g); seeSettings(); } catch (x) { } }
   if (keys.includes(STATE_KEY) || keys.includes(SETTINGS_KEY)) { if (Noema.kv.get(STATE_KEY) != null) flushSave(); try { renderTopStats(); route(); } catch (x) { } }
 });
 if (CARD_KEYS_MOVED) save();
@@ -931,7 +940,7 @@ R.mcq = (ex, api) => {
   const sel = new Set();
   const wrap = h('div', { class: 'opts' });
   const btns = order.map((oi, k) => {
-    const b = h('button', { class: 'opt', onclick: () => { if (api.locked()) return; if (!multi) { sel.clear(); btns.forEach(x => x.classList.remove('sel')); } sel.has(oi) ? sel.delete(oi) : sel.add(oi); b.classList.toggle('sel', sel.has(oi)); if (!multi) api.check(); } },
+    const b = h('button', { class: 'opt', 'data-nf': 'options.' + oi, onclick: () => { if (api.locked()) return; if (!multi) { sel.clear(); btns.forEach(x => x.classList.remove('sel')); } sel.has(oi) ? sel.delete(oi) : sel.add(oi); b.classList.toggle('sel', sel.has(oi)); if (!multi) api.check(); } },
       h('span', { class: 'k' }, String.fromCharCode(65 + k)), h('span', {}, F(ex.options[oi])));
     b._oi = oi; return b;
   });
@@ -941,7 +950,7 @@ R.mcq = (ex, api) => {
     el, keys: k => { const b = btns[k]; b && b.click(); },
     check() { if (!sel.size) return null; return sel.size === ans.size && [...sel].every(x => ans.has(x)); },
     given: () => [...sel].map(oi => String.fromCharCode(65 + oi) + '. ' + ex.options[oi]).join(' + '),
-    reveal() { btns.forEach(b => { const oi = b._oi; if (ans.has(oi)) b.classList.add('right'); else if (sel.has(oi)) b.classList.add('wrong'); if (ex.why?.[oi]) b.children[1].append(h('span', { class: 'why', html: fmt(ex.why[oi]) })); }); },
+    reveal() { btns.forEach(b => { const oi = b._oi; if (ans.has(oi)) b.classList.add('right'); else if (sel.has(oi)) b.classList.add('wrong'); if (ex.why?.[oi]) b.children[1].append(h('span', { class: 'why', 'data-nf': 'why.' + oi, html: fmt(ex.why[oi]) })); }); },
   };
 };
 R.odd = (ex, api) => { const r = R.mcq(ex, api); r.el.querySelector('.opts').classList.add('grid4'); return r; };
@@ -1199,7 +1208,7 @@ function askBuddyBtn(onclick) {
 }
 function exerciseCard(ex, { onDone, compact = false, noXP = false, showSection = false } = {}) {
   const ch = ex._ch;
-  const card = h('div', { class: 'ex' });
+  const card = h('div', { class: 'ex', 'data-ex': ex.id, 'data-ch': ch?.id || null });   // data-ex, data-nf: where a ⚑ report points (85_locate.js)
   setAccent(card, ch);
   let locked = false, firstTry = true, result = null;
   const api = {
@@ -1214,9 +1223,9 @@ function exerciseCard(ex, { onDone, compact = false, noXP = false, showSection =
     newPill(ex),
     ex._ai ? h('span', { class: 'pill', style: { background: 'var(--violet-bg)', color: 'var(--violet)' } }, '✨ ' + tE('engine.ex.aiMade')) : null,
     showSection && SEC[ex.section] ? h('span', { class: 'tiny', style: { marginLeft: 'auto' } }, chTitle(ch.num, SEC[ex.section].title)) : null);
-  const q = h('div', { class: 'q', html: fmt(ex.q || '') });
+  const q = h('div', { class: 'q', 'data-nf': 'q', html: fmt(ex.q || '') });
   card.append(head, q);
-  if (ex.code) card.append(h('div', { style: { margin: '0 0 12px' } }, codeBlock(ex.code, ex.lang || guessLang(ex.code))));
+  if (ex.code) card.append(h('div', { 'data-nf': 'code', style: { margin: '0 0 12px' } }, codeBlock(ex.code, ex.lang || guessLang(ex.code))));
   const w = (R[ex.type] || R.mcq)(ex, api);
   card.append(w.el);
   const actions = h('div', { class: 'actions' });
@@ -1250,7 +1259,7 @@ function exerciseCard(ex, { onDone, compact = false, noXP = false, showSection =
     if (!ex._ai) record(ex, ok, true, sure);
     const xp = ok ? 4 + ex.difficulty * 4 + (w.bonus?.() || 0) : 1;
     if (!noXP) addXP(xp, card);
-    const exp = h('div', { class: 'explain ' + (ok ? 'ok' : 'bad') }, h('div', { class: 'hd' }, ok ? pickOne([['✅', 'nailed'], ['✅', 'correct'], ['🎉', 'yes'], ['✅', 'spotOn'], ['🔥', 'exactly']].map(([i, k]) => i + ' ' + tE('engine.ex.ok.' + k))) : pickOne([['💡', 'notQuite'], ['🧠', 'learning'], ['💡', 'close']].map(([i, k]) => i + ' ' + tE('engine.ex.bad.' + k)))), h('div', { html: fmt(ex.explain || '') }));
+    const exp = h('div', { class: 'explain ' + (ok ? 'ok' : 'bad') }, h('div', { class: 'hd' }, ok ? pickOne([['✅', 'nailed'], ['✅', 'correct'], ['🎉', 'yes'], ['✅', 'spotOn'], ['🔥', 'exactly']].map(([i, k]) => i + ' ' + tE('engine.ex.ok.' + k))) : pickOne([['💡', 'notQuite'], ['🧠', 'learning'], ['💡', 'close']].map(([i, k]) => i + ' ' + tE('engine.ex.bad.' + k)))), h('div', { 'data-nf': 'explain', html: fmt(ex.explain || '') }));
     if (sure === 'sure' && !ok) exp.append(h('div', { class: 'tiny confnote' }, '⚠️ ' + tE('engine.ex.confWrong')));
     else if (sure === 'guess' && ok) exp.append(h('div', { class: 'tiny confnote' }, '🎲 ' + tE('engine.ex.confLucky')));
     const cite = citeChip(ex); if (cite) exp.append(cite);
@@ -2356,24 +2365,24 @@ const CALLOUT_IC = { key: '🔑', pitfall: '⚠️', tip: '💡', exam: '🎓', 
 function renderBlock(b, i) {
   const wrap = h('div', { class: 'blk b-' + b.t, style: { animationDelay: (i % 6) * 60 + 'ms' } });
   switch (b.t) {
-    case 'p': wrap.append(h('p', { html: fmt(b.text) })); break;
-    case 'list': wrap.append(h(b.ordered ? 'ol' : 'ul', {}, ...b.items.map(x => h('li', { html: fmt(x) })))); break;
-    case 'code': wrap.append(codeBlock(b.code, b.lang)); if (b.caption) wrap.append(h('div', { class: 'caption', html: fmt(b.caption) })); break;
+    case 'p': wrap.append(h('p', { 'data-nf': 'text', html: fmt(b.text) })); break;
+    case 'list': wrap.append(h(b.ordered ? 'ol' : 'ul', {}, ...b.items.map((x, k) => h('li', { 'data-nf': 'items.' + k, html: fmt(x) })))); break;
+    case 'code': wrap.append(codeBlock(b.code, b.lang)); if (b.caption) wrap.append(h('div', { class: 'caption', 'data-nf': 'caption', html: fmt(b.caption) })); break;
     case 'figure': wrap.append(figureBlock(b)); break;
-    case 'diagram': wrap.append(h('div', { class: 'diagram' }, b.text)); if (b.caption) wrap.append(h('div', { class: 'caption', html: fmt(b.caption) })); break;
-    case 'table': wrap.append(h('div', { class: 'tablewrap' }, h('table', {}, h('thead', {}, h('tr', {}, ...b.head.map(x => h('th', { html: fmt(x) })))), h('tbody', {}, ...b.rows.map(r => h('tr', {}, ...r.map(x => h('td', { html: fmt(x) })))))))); if (b.caption) wrap.append(h('div', { class: 'caption', html: fmt(b.caption) })); break;
-    case 'callout': wrap.append(h('div', { class: 'callout ' + b.kind }, h('span', { class: 'ci' }, CALLOUT_IC[b.kind] || '💡'), b.title ? h('b', { class: 't', html: fmt(b.title) }) : null, h('div', { html: fmt(b.text) }))); break;
-    case 'compare': wrap.append(h('div', { class: 'compare' }, ...b.items.map(it => h('div', {}, h('h4', { html: fmt(it.title) }), h('ul', {}, ...it.points.map(p => h('li', { html: fmt(p) }))))))); break;
-    case 'flow': { const f = h('div', { class: 'flow' }); b.items.forEach((x, k) => { if (k) f.append(h('span', { class: 'ar' }, '→')); f.append(h('span', { class: 'st', style: { animationDelay: k * 70 + 'ms' }, html: fmt(x) })); }); wrap.append(f); if (b.caption) wrap.append(h('div', { class: 'caption', html: fmt(b.caption) })); break; }
-    case 'reveal': { const r = h('div', { class: 'reveal' }, h('button', { onclick: () => { r.classList.toggle('open'); if (r.classList.contains('open') && !r._xp) { r._xp = 1; addXP(1, r); } } }, h('span', {}, '🤔'), h('span', { class: 'q', html: fmt(b.label) }), h('span', { class: 'chev' }, '▸')), h('div', { class: 'ans', html: fmt(b.text) })); wrap.append(r); break; }
+    case 'diagram': wrap.append(h('div', { class: 'diagram', 'data-nf': 'text' }, b.text)); if (b.caption) wrap.append(h('div', { class: 'caption', 'data-nf': 'caption', html: fmt(b.caption) })); break;
+    case 'table': wrap.append(h('div', { class: 'tablewrap' }, h('table', {}, h('thead', {}, h('tr', {}, ...b.head.map((x, k) => h('th', { 'data-nf': 'head.' + k, html: fmt(x) })))), h('tbody', {}, ...b.rows.map((r, j) => h('tr', {}, ...r.map((x, k) => h('td', { 'data-nf': `rows.${j}.${k}`, html: fmt(x) })))))))); if (b.caption) wrap.append(h('div', { class: 'caption', 'data-nf': 'caption', html: fmt(b.caption) })); break;
+    case 'callout': wrap.append(h('div', { class: 'callout ' + b.kind }, h('span', { class: 'ci' }, CALLOUT_IC[b.kind] || '💡'), b.title ? h('b', { class: 't', 'data-nf': 'title', html: fmt(b.title) }) : null, h('div', { 'data-nf': 'text', html: fmt(b.text) }))); break;
+    case 'compare': wrap.append(h('div', { class: 'compare' }, ...b.items.map((it, k) => h('div', { 'data-nf': 'items.' + k }, h('h4', { 'data-nf': `items.${k}.title`, html: fmt(it.title) }), h('ul', {}, ...it.points.map((p, j) => h('li', { 'data-nf': `items.${k}.points.${j}`, html: fmt(p) }))))))); break;
+    case 'flow': { const f = h('div', { class: 'flow' }); b.items.forEach((x, k) => { if (k) f.append(h('span', { class: 'ar' }, '→')); f.append(h('span', { class: 'st', 'data-nf': 'items.' + k, style: { animationDelay: k * 70 + 'ms' }, html: fmt(x) })); }); wrap.append(f); if (b.caption) wrap.append(h('div', { class: 'caption', 'data-nf': 'caption', html: fmt(b.caption) })); break; }
+    case 'reveal': { const r = h('div', { class: 'reveal' }, h('button', { onclick: () => { r.classList.toggle('open'); if (r.classList.contains('open') && !r._xp) { r._xp = 1; addXP(1, r); } } }, h('span', {}, '🤔'), h('span', { class: 'q', 'data-nf': 'label', html: fmt(b.label) }), h('span', { class: 'chev' }, '▸')), h('div', { class: 'ans', 'data-nf': 'text', html: fmt(b.text) })); wrap.append(r); break; }
     case 'ask': {
       const box = h('div', { class: 'ask' });
-      const ol = h('ol', {}, ...b.questions.map(q => { const li = h('li', { onclick: () => li.classList.add('shown') }, h('span', { html: fmt(q) })); return li; }));
+      const ol = h('ol', {}, ...b.questions.map((q, k) => { const li = h('li', { 'data-nf': 'questions.' + k, onclick: () => li.classList.add('shown') }, h('span', { html: fmt(q) })); return li; }));
       const tog = h('button', { class: 'btn small', style: { marginLeft: 'auto' }, onclick: () => { box.classList.toggle('recall'); $$('li', ol).forEach(l => l.classList.remove('shown')); tog.textContent = box.classList.contains('recall') ? '👁️ ' + tE('engine.blk.showAll') : '🙈 ' + tE('engine.blk.recallMode'); } }, '🙈 ' + tE('engine.blk.recallMode'));
       box.append(h('div', { class: 'hd' }, '🧠', h('span', { html: fmt(b.title || tE('engine.blk.askYourself')) }), tog), ol);
       wrap.append(box); break;
     }
-    case 'terms': wrap.append(h('div', { class: 'terms' }, ...b.items.map(t => h('div', { class: 'term' }, h('b', { html: fmt(t.term) }), h('div', { class: 'tiny', style: { color: 'var(--ink2)', fontSize: '14px' }, html: fmt(t.def) }))))); break;
+    case 'terms': wrap.append(h('div', { class: 'terms' }, ...b.items.map((t, k) => h('div', { class: 'term' }, h('b', { 'data-nf': `items.${k}.term`, html: fmt(t.term) }), h('div', { class: 'tiny', 'data-nf': `items.${k}.def`, style: { color: 'var(--ink2)', fontSize: '14px' }, html: fmt(t.def) }))))); break;
   }
   return wrap;
 }
@@ -2713,9 +2722,9 @@ function flashDeck(body, cards, { all = false, onDone = null } = {}) {
     stage.innerHTML = '';
     if (i >= queue.length) { stage.append(h('div', { class: 'empty' }, h('div', { class: 'e' }, '🌟'), h('p', {}, tE('engine.cards.done')))); if (queue.length) confetti(80); if (onDone) stage.append(onDone()); return; }
     const c = queue[i];
-    const fl = h('div', { class: 'flash' }, h('div', { class: 'inner', onclick: () => fl.classList.toggle('flipped') },
-      h('div', { class: 'face' }, h('small', {}, `${c._ch.emoji} ` + chTitle(c._ch.num, `${nf(i + 1)}/${nf(queue.length)}`)), h('div', { html: fmt(c.q) }), h('div', { class: 'tiny', style: { position: 'absolute', bottom: '14px' } }, tE('engine.cards.flip'))),
-      h('div', { class: 'face back' }, h('small', {}, tE('engine.cards.answer')), h('div', { html: fmt(c.a) }))));
+    const fl = h('div', { class: 'flash', 'data-card': c.key }, h('div', { class: 'inner', onclick: () => fl.classList.toggle('flipped') },
+      h('div', { class: 'face' }, h('small', {}, `${c._ch.emoji} ` + chTitle(c._ch.num, `${nf(i + 1)}/${nf(queue.length)}`)), h('div', { 'data-nf': 'q', html: fmt(c.q) }), h('div', { class: 'tiny', style: { position: 'absolute', bottom: '14px' } }, tE('engine.cards.flip'))),
+      h('div', { class: 'face back' }, h('small', {}, tE('engine.cards.answer')), h('div', { 'data-nf': 'a', html: fmt(c.a) }))));
     setAccent(fl, c._ch);
     if (SHL()) { fl.classList.add('has-ask'); fl.append(askBuddyBtn(() => askAboutCard(c, fl.classList.contains('flipped')))); }
     const rate = q => { rateCardKey(c.key, q); addXP(q === 0 ? 1 : 2, fl); if (q === 0) queue.push(c); i++; show(); };
@@ -2858,7 +2867,7 @@ function boot() {
   renderTopStats();
   if (!X) addEventListener('hashchange', route);
   matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', () => route());   // i18n-ignore
-  if (X) { X.attachEngine({ route, openTutor: () => openTutor(), focus: () => focusSprint(), history: () => X.convos(), resumeConvo, convoChanged,
+  if (X) { X.attachEngine({ route, locate: locateItem, openTutor: () => openTutor(), focus: () => focusSprint(), history: () => X.convos(), resumeConvo, convoChanged,
     accView: (tab, body, close, opts) => ACC_VIEWS[tab](body, close, opts || {}), retheme: () => { renderTutorHead?.(); } });
     setTimeout(resumeConvo, 300); }
   else route();
@@ -3612,7 +3621,7 @@ const storedLabel = x => x.k && window.NoemaI18n?.has(x.k) ? tE(x.k, x.p || {}) 
 const SNAP_LABEL = { 'Manual snapshot': 'engine.cl.snapManual', 'Daily auto-snapshot': 'engine.cl.snapDaily' };   // i18n-ignore (stored names)
 const snapLabel = l => Object.prototype.hasOwnProperty.call(SNAP_LABEL, l) ? tE(SNAP_LABEL[l]) : l;
 function accountSettings() { try { return JSON.parse(Noema.kv.get(Noema.kv.accountKey('settings')) || '{}'); } catch (e) { return {}; } }
-function putAccountSettings(patch) { flushSave(); const s = Object.assign(accountSettings(), patch); Noema.kv.set(Noema.kv.accountKey('settings'), JSON.stringify(s)); Object.assign(S.settings, patch); }
+function putAccountSettings(patch) { flushSave(); const s = Object.assign(accountSettings(), patch); Noema.kv.set(Noema.kv.accountKey('settings'), JSON.stringify(s)); Object.assign(S.settings, patch); seeSettings(); }
 
 const ME_PAGE = { profile: 'profile', settings: 'ai', subjects: 'subjects', backup: 'data', cloud: 'data', help: 'help' };
 function openAccountMenu(tab = 'profile') {
@@ -4003,6 +4012,80 @@ function watchMath() {
   }).observe(document.body, { childList: true, subtree: true });
   typesetMath(document.body);
 }
+
+/* ---- 85_locate.js ---- */
+/* ===================== ⚑ where a problem is: the place of a report, in the pack's own terms (engine/report.js) ===================== */
+/* The report button knows the address and the element pointed at (its data-* chain: data-ex, data-bid, data-card, data-pid,
+   data-nf …); the engine knows what they are. locateItem() turns them into the chapter, section, block, exercise, card,
+   drill or trap of the pack — with its type, its text as shown, and its text in the pack's own language when a
+   translation is shown — so whoever fixes it (a person or Claude) finds exactly one place to change. */
+/* i18n-ignore-start */   // every word here is for the report (read by the person or the AI who fixes it), not for the learner
+function locateItem(p = {}) {
+  const clip = (s, n = 400) => { s = typeof s === 'string' ? s : s == null ? '' : JSON.stringify(s); return s.length > n ? s.slice(0, n) + '…' : s; };
+  const at = (o, path) => String(path || '').split('.').filter(Boolean).reduce((x, k) => (x == null ? undefined : x[/^\d+$/.test(k) ? +k : k]), o);
+  const out = {}, own = Noema.pack?.chapters || [], shownLoc = SUBJ.sourceLanguage ? SUBJ.language : null;
+  const ownCh = id => own.find(c => c.id === id);
+  const ownOf = (list, id) => { for (const c of own) { const x = (c[list] || []).find(y => y.id === id); if (x) return x; } return null; };
+  const chap = c => c && (out.chapter = { id: c.id, num: c.num, title: clip(c.title, 160), index: c._i });
+  const field = (obj, ownObj) => {   // the field pointed at inside the item (data-nf): its path, its text as shown and in the pack's own language
+    if (!p.field || !obj) return;
+    out.field = { path: p.field, shown: clip(at(obj, p.field)) };
+    if (shownLoc && ownObj) out.field.own = clip(at(ownObj, p.field));
+  };
+  const ex = p.exercise && (EX[p.exercise] || null);
+  if (p.exercise) {
+    if (ex) {
+      chap(ex._ch);
+      out.exercise = { id: ex.id, type: ex.type, section: ex.section || null, difficulty: ex.difficulty, lr: ex.lr || null, tags: ex.tags || [], q: clip(ex.q, 300), cite: ex.cite || null, src: ex.src || null, facade: ex.facade || null };
+      const o = shownLoc ? ownOf('exercises', ex.id) : null;
+      if (shownLoc) out.exercise.qOwn = clip(o?.q, 300);
+      field(ex, o);
+    } else out.exercise = { id: p.exercise, notInPack: true, note: 'not an exercise of the pack (made by the AI on the spot, or a drill\'s ordering task)' };
+  }
+  if (p.card) {
+    let card = null, cc = null;
+    for (const c of FULL_COURSE) c.flashcards.forEach((f, i) => { if (!card && (f._key || c.id + '#' + i) === p.card) { card = f; cc = c; out.cardIndex = i; } });
+    if (card) {
+      chap(cc);
+      out.card = { key: p.card, index: out.cardIndex, section: card.section || null, q: clip(card.q, 300), a: clip(card.a, 300) };
+      const o = shownLoc ? (ownCh(cc.id)?.flashcards || [])[out.cardIndex] : null;
+      if (o) Object.assign(out.card, { qOwn: clip(o.q, 300), aOwn: clip(o.a, 300) });
+      field(card, o);
+    } else out.card = { key: p.card, notFound: true };
+    delete out.cardIndex;
+  }
+  if (p.drill) {
+    const d = PB[p.drill];
+    if (d) { chap(d._ch); out.drill = { id: d.id, title: clip(d.title, 200), section: d.section || null }; field(d, shownLoc ? ownOf('debug', d.id) : null); }
+    else out.drill = { id: p.drill, notFound: true };
+  }
+  const sid = p.section || ex?.section || null, s = sid && SEC[sid];
+  if (s) {
+    if (!out.chapter) chap(s._ch);
+    out.section = { id: s.id, title: clip(s.title, 200), index: s._j };
+    if (p.block) {
+      const bids = s._bids || (window.NoemaCatalog ? NoemaCatalog.blockIds(s.blocks) : s.blocks.map((b, i) => 'b' + i)), i = bids.indexOf(p.block), b = s.blocks[i];
+      if (b) {
+        out.block = { id: p.block, index: i, t: b.t, text: clip(window.NoemaCatalog ? NoemaCatalog.blockText(b) : b.text, 400) };
+        const os = shownLoc ? (ownCh(s._ch.id)?.sections || []).find(x => x.id === s.id) : null, ob = os?.blocks?.[i];
+        if (ob) out.block.textOwn = clip(window.NoemaCatalog ? NoemaCatalog.blockText(ob) : ob.text, 400);
+        if (!ex) field(b, ob);
+      } else out.block = { id: p.block, notFound: true };
+    }
+  } else if (sid) out.section = { id: sid, notFound: true };
+  if (p.trap || p.chapter) {
+    const c = CH[p.chapter] || (out.chapter && CH[out.chapter.id]) || null;
+    if (c && !out.chapter) chap(c);
+    if (p.trap && c) {
+      const i = c.pitfalls.findIndex(x => window.NoemaCatalog && NoemaCatalog.trapId(x) === p.trap), x = c.pitfalls[i];
+      if (x) { out.trap = { id: p.trap, index: i, title: clip(x.title, 200), text: clip(x.text, 300) }; const o = shownLoc ? (ownCh(c.id)?.pitfalls || [])[i] : null; if (o) out.trap.titleOwn = clip(o.title, 200); }
+    }
+  }
+  if (!out.chapter && p.chapter) out.chapter = { id: p.chapter, notFound: !CH[p.chapter] };
+  out.content = { packLanguage: SUBJ.sourceLanguage || SUBJ.language || 'en', shown: SUBJ.language || 'en', translation: shownLoc };
+  return out;
+}
+/* i18n-ignore-end */
 
 /* ---- 90_boot.js ---- */
 /* ===================== Boot (runs after every module is loaded; the loader has set Noema.subject / COURSE) ===================== */

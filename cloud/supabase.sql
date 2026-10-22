@@ -1160,5 +1160,63 @@ revoke execute on function public.noema_vault_fields_save(jsonb) from anon;
 revoke execute on function public.noema_vault_field_propose(text, text, text[]) from anon;
 revoke execute on function public.noema_vault_field_suggest(text, text) from anon;
 
--- 14) Check: should list the 25 noema_ tables with rls_enabled = true
+-- 15) ⚑ PROBLEM REPORTS (docs/REPORTS.md): the ⚑ button at the foot of the side bar (Me ▾ › Report a problem on phones)
+--     sends a screenshot and the exact place — route, subject, pack version, chapter, section, block, exercise, field,
+--     the UI and content languages, the element pointed at, the app's build — so a fix can be made, by a person or by
+--     Claude (connector: noema_reports, noema_report, noema_report_update). The reporter sees their own reports; the
+--     app's admins (noema_admins, §13b) see and answer all of them on #/admin/reports. The screenshot is a data:image URL
+--     in the row (≤ 3 MB of text; a JPEG of the screen is ~150–400 KB); at most 40 reports a person a day.
+create table if not exists public.noema_error_reports (
+  id             uuid primary key default gen_random_uuid(),
+  reporter       uuid not null default auth.uid() references auth.users(id) on delete cascade,
+  reporter_name  text,
+  reporter_email text,
+  kind           text not null default 'other' check (kind in ('content', 'translation', 'display', 'broken', 'idea', 'other')),
+  note           text check (char_length(note) <= 4000),
+  route          text check (char_length(route) <= 600),
+  subject        text check (char_length(subject) <= 120),
+  item           text check (char_length(item) <= 300),         -- the most specific id: ex:<id> · card:<key> · blk:<section>/<block> · sec:<id> · drill:<id> · ui:<i18n key> …
+  locator        jsonb not null default '{}'::jsonb,
+  shot           text check (shot is null or (shot ~ '^data:image/(jpeg|png|webp);base64,[A-Za-z0-9+/=]+$' and char_length(shot) <= 3000000)),
+  app_version    text check (char_length(app_version) <= 80),
+  status         text not null default 'new' check (status in ('new', 'seen', 'fixing', 'fixed', 'wontfix', 'duplicate')),
+  admin_note     text check (char_length(admin_note) <= 4000),
+  fixed_in       text check (char_length(fixed_in) <= 300),       -- a commit, a pull request, a pack version
+  created_at     timestamptz not null default now(),
+  updated_at     timestamptz not null default now()
+);
+alter table public.noema_error_reports drop constraint if exists noema_error_reports_locator_size;
+alter table public.noema_error_reports add constraint noema_error_reports_locator_size check (jsonb_typeof(locator) = 'object' and pg_column_size(locator) <= 200000);
+create index if not exists noema_error_reports_new on public.noema_error_reports (status, created_at desc);
+create index if not exists noema_error_reports_by on public.noema_error_reports (reporter, created_at desc);
+alter table public.noema_error_reports enable row level security;
+-- what the reporter writes is theirs; who they are, the status and the answer are the server's and the admins'
+create or replace function public.noema_error_report_guard() returns trigger language plpgsql security definer set search_path = public as $$
+begin
+  if tg_op = 'INSERT' then
+    new.reporter := auth.uid(); new.status := 'new'; new.admin_note := null; new.fixed_in := null; new.created_at := now(); new.updated_at := now();
+    new.reporter_name := public.noema_vault_name(new.reporter);
+    new.reporter_email := (select email from auth.users where id = new.reporter);
+    if (select count(*) from public.noema_error_reports where reporter = new.reporter and created_at > now() - interval '1 day') >= 40 then
+      raise exception 'report limit: 40 a day' using errcode = 'P0001'; end if;
+  else
+    if not public.noema_is_admin() then raise exception 'admins only' using errcode = 'P0001'; end if;
+    new.id := old.id; new.reporter := old.reporter; new.reporter_name := old.reporter_name; new.reporter_email := old.reporter_email; new.kind := old.kind;
+    new.note := old.note; new.route := old.route; new.subject := old.subject; new.item := old.item; new.locator := old.locator; new.shot := old.shot;
+    new.app_version := old.app_version; new.created_at := old.created_at; new.updated_at := now();
+  end if;
+  return new;
+end $$;
+drop trigger if exists noema_error_report_guard on public.noema_error_reports;
+create trigger noema_error_report_guard before insert or update on public.noema_error_reports for each row execute function public.noema_error_report_guard();
+drop policy if exists "error reports: send"           on public.noema_error_reports;
+drop policy if exists "error reports: mine or admins" on public.noema_error_reports;
+drop policy if exists "error reports: admins answer"  on public.noema_error_reports;
+drop policy if exists "error reports: admins delete"  on public.noema_error_reports;
+create policy "error reports: send"           on public.noema_error_reports for insert to authenticated with check (reporter = (select auth.uid()));
+create policy "error reports: mine or admins" on public.noema_error_reports for select to authenticated using (reporter = (select auth.uid()) or public.noema_is_admin());
+create policy "error reports: admins answer"  on public.noema_error_reports for update to authenticated using (public.noema_is_admin()) with check (public.noema_is_admin());
+create policy "error reports: admins delete"  on public.noema_error_reports for delete to authenticated using (public.noema_is_admin());
+
+-- 14) Check: should list the 26 noema_ tables with rls_enabled = true
 select tablename, rowsecurity as rls_enabled from pg_tables where schemaname = 'public' and tablename like 'noema_%' order by 1;

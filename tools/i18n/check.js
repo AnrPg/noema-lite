@@ -86,7 +86,7 @@ function run() {
   // keys built at run time ('sh.dom_' + id …) are listed per component in i18n/<component>/dynamic_keys.txt (one key or prefix* per line)
   const dyn = Object.keys(cats).flatMap(c => { try { return fs.readFileSync(path.join(ROOT, 'i18n', c, 'dynamic_keys.txt'), 'utf8').split('\n').map(s => s.replace(/#.*/, '').trim()).filter(Boolean); } catch (e) { return []; } });
   for (const k of Object.keys(enAll)) {
-    const short = k.replace(/^(sh|vault|social)\./, '');
+    const short = k.replace(/^(sh|vault|social|report)\./, '');
     if (dyn.some(p => p.endsWith('*') ? k.startsWith(p.slice(0, -1)) : p === k)) continue;
     if (!src.includes(`'${k}'`) && !src.includes(`"${k}"`) && !src.includes(`'${short}'`) && !src.includes(`"${short}"`)) W('unused?', k);
   }

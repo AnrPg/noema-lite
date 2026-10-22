@@ -164,6 +164,13 @@ window.NoemaThemes = (() => {
   const game = (acc) => locked() && DATA[cfg().character].tone === 'strict' ? (settingsOf(acc).game === 'off' ? 'off' : 'calm') : (settingsOf(acc).game || (DATA[current(acc)].tone === 'strict' ? 'calm' : 'playful'));   // playful · calm · off
 
   if (typeof window !== 'undefined' && preview()) watchPreview();   // a try that goes on after a reload still ends on time
+  /* a character chosen on another device (the sync brings a:settings) or in another tab: this page wears it at once, everywhere
+     (apply() tells every listener, so the frame, the tutor and the open screen redraw) */
+  const isSettings = k => !k || /:a:settings$/.test(k);
+  if (typeof window !== 'undefined') {
+    addEventListener('noema:remote', e => { if ((e.detail?.keys || []).some(isSettings)) apply(); });
+    addEventListener('storage', e => { if (isSettings(e.key)) apply(); });
+  }
   return { DATA, ORDER, GROUPS, EMOJI, css, ensureCSS, apply, current, owned, preview, startPreview, endPreview, choose, canChange, nextChangeAt, freeUntil, locked, onChange,
     tutor, text, uiLang, world, game, settings: settingsOf, putSettings, tone: (m = current()) => DATA[m].tone, PREVIEW_MS, CHANGE_DAYS, FREE_DAYS };
 })();

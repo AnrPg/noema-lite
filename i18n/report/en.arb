@@ -1,0 +1,348 @@
+{
+  "@@locale": "en",
+  "report.button": "Report a problem",
+  "@report.button": {
+    "description": "The ⚑ button at the foot of the side bar (and in Me ▾ on phones): report something wrong on the screen. Short."
+  },
+  "report.buttonTip": "Report a problem on this screen: a screenshot and exactly where you are go to the app’s team",
+  "@report.buttonTip": {
+    "description": "Tooltip of the ⚑ button in the side bar."
+  },
+  "report.menuSub": "A screenshot and where you are, for the team",
+  "@report.menuSub": {
+    "description": "Second line of “Report a problem” in the Me ▾ menu. Short."
+  },
+  "report.adminTitle": "Problem reports",
+  "@report.adminTitle": {
+    "description": "Title of the admins’ page that lists what people reported (and its Me ▾ menu item)."
+  },
+  "report.adminSub": "What people reported, to review and fix",
+  "@report.adminSub": {
+    "description": "Second line of “Problem reports” in the Me ▾ menu (admins only)."
+  },
+  "report.title": "Report a problem",
+  "@report.title": {
+    "description": "Title of the report dialog."
+  },
+  "report.lead": "A screenshot of this screen and exactly where you are go with your report, so the problem can be found and fixed.",
+  "@report.lead": {
+    "description": "Lead line at the top of the report dialog."
+  },
+  "report.shot": "Include the screenshot",
+  "@report.shot": {
+    "description": "Checkbox under the screenshot preview in the report dialog."
+  },
+  "report.shotAlt": "Screenshot of the screen",
+  "@report.shotAlt": {
+    "description": "Alt text of the screenshot preview."
+  },
+  "report.noShot": "No screenshot could be taken; the report still says exactly where you are.",
+  "@report.noShot": {
+    "description": "Shown in the report dialog when the screenshot failed."
+  },
+  "report.kind": "What kind of problem?",
+  "@report.kind": {
+    "description": "Label above the kind chips of the report dialog."
+  },
+  "report.kind_content": "Wrong content",
+  "@report.kind_content": {
+    "description": "Report kind chip: a mistake in the theory, an exercise, an answer, a card. Short."
+  },
+  "report.kind_translation": "Wrong word or translation",
+  "@report.kind_translation": {
+    "description": "Report kind chip: a wrong word, a bad translation. Short."
+  },
+  "report.kind_display": "Looks broken",
+  "@report.kind_display": {
+    "description": "Report kind chip: something displays wrongly (layout, overlap, cut off). Short."
+  },
+  "report.kind_broken": "Does not work",
+  "@report.kind_broken": {
+    "description": "Report kind chip: a button or feature does not work. Short."
+  },
+  "report.kind_idea": "An idea",
+  "@report.kind_idea": {
+    "description": "Report kind chip: a suggestion. Short."
+  },
+  "report.kind_other": "Other",
+  "@report.kind_other": {
+    "description": "Report kind chip: anything else. One word."
+  },
+  "report.pickKind": "Choose what kind of problem it is.",
+  "@report.pickKind": {
+    "description": "Error under the report dialog when no kind was chosen."
+  },
+  "report.note": "What is wrong, and what should it be?",
+  "@report.note": {
+    "description": "Label of the text box of the report dialog."
+  },
+  "report.notePh": "E.g. “The answer should be B: the source says …”",
+  "@report.notePh": {
+    "description": "Placeholder of the report text box: an example. Keep the quotes of your language."
+  },
+  "report.point": "Point at it",
+  "@report.point": {
+    "description": "Button of the report dialog: then the learner taps the wrong thing on the screen. Short."
+  },
+  "report.repoint": "Point again",
+  "@report.repoint": {
+    "description": "The same button after something was pointed at. Short."
+  },
+  "report.pointHint": "Tap or click the thing that is wrong. Esc to cancel.",
+  "@report.pointHint": {
+    "description": "Banner at the top of the screen while pointing at the wrong thing."
+  },
+  "report.pointed": "Pointed at: {what}",
+  "@report.pointed": {
+    "description": "Line in the report dialog after pointing. {what} = the start of the text of the element pointed at.",
+    "placeholders": {
+      "what": {}
+    }
+  },
+  "report.details": "What is sent",
+  "@report.details": {
+    "description": "Fold-out of the report dialog that shows the technical details sent with it."
+  },
+  "report.privacy": "Sent with your account’s name and e-mail, so we can tell you when it is fixed.",
+  "@report.privacy": {
+    "description": "Note above the Send button of the report dialog."
+  },
+  "report.signIn": "Reports are sent through a cloud account. Sign in, or download the report and send it to us.",
+  "@report.signIn": {
+    "description": "Shown in the report dialog for a local profile (no cloud account)."
+  },
+  "report.download": "Download the report",
+  "@report.download": {
+    "description": "Button of the report dialog for a local profile: saves the report as a file."
+  },
+  "report.cancel": "Cancel",
+  "@report.cancel": {
+    "description": "Closes the report dialog. One word."
+  },
+  "report.send": "Send",
+  "@report.send": {
+    "description": "Sends the report. One word."
+  },
+  "report.sending": "Sending…",
+  "@report.sending": {
+    "description": "The Send button while the report is being sent."
+  },
+  "report.sent": "Thank you: your report was sent.",
+  "@report.sent": {
+    "description": "Toast after a report was sent."
+  },
+  "report.queued": "No connection: the report is kept and sent when you are online.",
+  "@report.queued": {
+    "description": "Toast when a report could not be sent because the device is offline."
+  },
+  "report.failed": "The report could not be sent: {error}",
+  "@report.failed": {
+    "description": "Error in the report dialog. {error} = the reason.",
+    "placeholders": {
+      "error": {}
+    }
+  },
+  "report.notAdmin": "Only the app’s admins see the reports.",
+  "@report.notAdmin": {
+    "description": "On the reports page for an account that is not an admin."
+  },
+  "report.empty": "Nothing reported here.",
+  "@report.empty": {
+    "description": "Reports page when the list is empty."
+  },
+  "report.count": "{n, plural, one {# report} other {# reports}}",
+  "@report.count": {
+    "description": "Count of reports in the list.",
+    "placeholders": {
+      "n": {}
+    }
+  },
+  "report.f_open": "Open",
+  "@report.f_open": {
+    "description": "Filter of the reports list: not yet fixed or closed. One word."
+  },
+  "report.f_new": "New",
+  "@report.f_new": {
+    "description": "Filter of the reports list: not yet seen. One word."
+  },
+  "report.f_fixed": "Fixed",
+  "@report.f_fixed": {
+    "description": "Filter of the reports list. One word."
+  },
+  "report.f_all": "All",
+  "@report.f_all": {
+    "description": "Filter of the reports list. One word."
+  },
+  "report.st_new": "New",
+  "@report.st_new": {
+    "description": "Status of a report: not yet seen. One word."
+  },
+  "report.st_seen": "Seen",
+  "@report.st_seen": {
+    "description": "Status of a report: an admin opened it. One word."
+  },
+  "report.st_fixing": "Being fixed",
+  "@report.st_fixing": {
+    "description": "Status of a report. Short."
+  },
+  "report.st_fixed": "Fixed",
+  "@report.st_fixed": {
+    "description": "Status of a report. One word."
+  },
+  "report.st_wontfix": "Won’t fix",
+  "@report.st_wontfix": {
+    "description": "Status of a report: it will not be changed. Short."
+  },
+  "report.st_duplicate": "Duplicate",
+  "@report.st_duplicate": {
+    "description": "Status of a report: the same as another one. One word."
+  },
+  "report.from": "{name} · {when}",
+  "@report.from": {
+    "description": "Who sent a report and when. {name} = name or e-mail, {when} = e.g. “3 hours ago”.",
+    "placeholders": {
+      "name": {},
+      "when": {}
+    }
+  },
+  "report.noNote": "(no words)",
+  "@report.noNote": {
+    "description": "A report sent without any text."
+  },
+  "report.noShotSent": "No screenshot was sent with this report.",
+  "@report.noShotSent": {
+    "description": "Report page when there is no screenshot."
+  },
+  "report.copyBrief": "Copy the brief for Claude",
+  "@report.copyBrief": {
+    "description": "Button on a report: copies a text with everything needed to find and fix it."
+  },
+  "report.copied": "Copied: paste it to Claude together with the repository.",
+  "@report.copied": {
+    "description": "Toast after copying the brief."
+  },
+  "report.json": "Download JSON",
+  "@report.json": {
+    "description": "Button on a report: download its data. Short."
+  },
+  "report.where": "Where",
+  "@report.where": {
+    "description": "Heading of the table of where the problem is. One word."
+  },
+  "report.all": "Everything that was sent",
+  "@report.all": {
+    "description": "Fold-out with all the data of a report."
+  },
+  "report.w_item": "Item",
+  "@report.w_item": {
+    "description": "Row of the “Where” table: the most specific id (exercise, card, block…). One word."
+  },
+  "report.w_route": "Address",
+  "@report.w_route": {
+    "description": "Row of the “Where” table: the address in the app (#/…). One word."
+  },
+  "report.openHere": "Open this place",
+  "@report.openHere": {
+    "description": "Link next to the address: opens the app there."
+  },
+  "report.w_subject": "Subject",
+  "@report.w_subject": {
+    "description": "Row of the “Where” table. One word."
+  },
+  "report.w_content": "Content language",
+  "@report.w_content": {
+    "description": "Row of the “Where” table: the language the content was shown in. Short."
+  },
+  "report.w_chapter": "Chapter",
+  "@report.w_chapter": {
+    "description": "Row of the “Where” table. One word."
+  },
+  "report.w_section": "Section",
+  "@report.w_section": {
+    "description": "Row of the “Where” table. One word."
+  },
+  "report.w_block": "Block",
+  "@report.w_block": {
+    "description": "Row of the “Where” table: a paragraph, list, table… of the theory. One word."
+  },
+  "report.w_exercise": "Exercise",
+  "@report.w_exercise": {
+    "description": "Row of the “Where” table. One word."
+  },
+  "report.w_card": "Flashcard",
+  "@report.w_card": {
+    "description": "Row of the “Where” table. One word."
+  },
+  "report.w_drill": "Debug drill",
+  "@report.w_drill": {
+    "description": "Row of the “Where” table. Short."
+  },
+  "report.w_trap": "Trap",
+  "@report.w_trap": {
+    "description": "Row of the “Where” table: a pitfall of a chapter. One word."
+  },
+  "report.w_field": "Field",
+  "@report.w_field": {
+    "description": "Row of the “Where” table: which part of the item (question, option, explanation). One word."
+  },
+  "report.w_lang": "Language course",
+  "@report.w_lang": {
+    "description": "Row of the “Where” table. Short."
+  },
+  "report.w_target": "Pointed at",
+  "@report.w_target": {
+    "description": "Row of the “Where” table: the thing on the screen the learner pointed at. Short."
+  },
+  "report.w_ui": "Interface text",
+  "@report.w_ui": {
+    "description": "Row of the “Where” table: the keys of the interface’s words. Short."
+  },
+  "report.w_answer": "Their answer",
+  "@report.w_answer": {
+    "description": "Row of the “Where” table: what the learner had answered. Short."
+  },
+  "report.w_app": "App and device",
+  "@report.w_app": {
+    "description": "Row of the “Where” table: version, language, screen size, browser. Short."
+  },
+  "report.w_errors": "Errors",
+  "@report.w_errors": {
+    "description": "Row of the “Where” table: recent errors of the app. One word."
+  },
+  "report.answer": "Your answer",
+  "@report.answer": {
+    "description": "Heading of the admin’s part of a report (status, note)."
+  },
+  "report.status": "Status",
+  "@report.status": {
+    "description": "Label of the status menu of a report. One word."
+  },
+  "report.answerLabel": "Note",
+  "@report.answerLabel": {
+    "description": "Label of the admin’s note on a report. One word."
+  },
+  "report.answerPh": "What was done, or why not",
+  "@report.answerPh": {
+    "description": "Placeholder of the admin’s note on a report."
+  },
+  "report.fixedIn": "Fixed in (commit, pull request, pack version)",
+  "@report.fixedIn": {
+    "description": "Label of the field that says where a report was fixed."
+  },
+  "report.save": "Save",
+  "@report.save": {
+    "description": "Saves the report’s status and note. One word."
+  },
+  "report.saved": "Saved",
+  "@report.saved": {
+    "description": "Toast after saving a report. One word."
+  },
+  "report.delete": "Delete",
+  "@report.delete": {
+    "description": "Deletes a report. One word."
+  },
+  "report.deleteQ": "Delete this report for good?",
+  "@report.deleteQ": {
+    "description": "Confirmation before deleting a report."
+  }
+}

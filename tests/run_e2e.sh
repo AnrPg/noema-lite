@@ -11,12 +11,14 @@ sed -i.bak 's/"id": "demo-physics"/"id": "secret-notes"/; s/"title": "Demo Physi
 echo "if (typeof localStorage !== 'undefined' && localStorage.getItem('noema-test:newUI') !== '1') Object.assign(window.NOEMA_CONFIG, { askSubjectOnStart: true, onboarding: false, shell: false });" >> "$T/config.js"
 (cd "$T" && python3 tools/build.py site bundle >/dev/null)
 node "$ROOT/tests/shell.js" "$T"
+node "$ROOT/tests/subject_switch.js" "$T"   # opening another subject reopens that one, even over a slow network
 node "$ROOT/tests/search_catalog.js"   # the search catalogue (docs/SEARCH.md)
 node "$ROOT/tests/search.js" "$T"     # search, stable addresses, collections, the practice round
 node "$ROOT/tests/e2e.js" "$T"
 node "$ROOT/tests/socratic.js" "$T"
 node "$ROOT/tests/visual.js" "$T"
 node "$ROOT/tests/thinking_types.js" "$T"   # flaw, case, predict, tree, inquiry, debate; how sure, ⚑, source chip, facades
+node "$ROOT/tests/reports.js" "$T"         # ⚑ problem reports: the button, the locator, the admins' page, the connector tools (docs/REPORTS.md)
 python3 "$ROOT/tests/validate_visual.py"
 node "$ROOT/tests/pack_rules.js"   # the quality rules, Python and JS alike (tools/pack_rules.json, docs/PIPELINES.md §4)
 python3 "$ROOT/tests/pipelines.py"   # the content flows, step by step (tools/pipelines/, docs/PIPELINES.md)
