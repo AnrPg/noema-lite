@@ -22,7 +22,7 @@ const storedLabel = x => x.k && window.NoemaI18n?.has(x.k) ? tE(x.k, x.p || {}) 
 const SNAP_LABEL = { 'Manual snapshot': 'engine.cl.snapManual', 'Daily auto-snapshot': 'engine.cl.snapDaily' };   // i18n-ignore (stored names)
 const snapLabel = l => Object.prototype.hasOwnProperty.call(SNAP_LABEL, l) ? tE(SNAP_LABEL[l]) : l;
 function accountSettings() { try { return JSON.parse(Noema.kv.get(Noema.kv.accountKey('settings')) || '{}'); } catch (e) { return {}; } }
-function putAccountSettings(patch) { flushSave(); const s = Object.assign(accountSettings(), patch); Noema.kv.set(Noema.kv.accountKey('settings'), JSON.stringify(s)); Object.assign(S.settings, patch); }
+function putAccountSettings(patch) { flushSave(); const s = Object.assign(accountSettings(), patch); Noema.kv.set(Noema.kv.accountKey('settings'), JSON.stringify(s)); Object.assign(S.settings, patch); seeSettings(); }
 
 const ME_PAGE = { profile: 'profile', settings: 'ai', subjects: 'subjects', backup: 'data', cloud: 'data', help: 'help' };
 function openAccountMenu(tab = 'profile') {
