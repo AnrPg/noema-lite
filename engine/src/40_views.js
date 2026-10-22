@@ -359,24 +359,24 @@ const CALLOUT_IC = { key: '🔑', pitfall: '⚠️', tip: '💡', exam: '🎓', 
 function renderBlock(b, i) {
   const wrap = h('div', { class: 'blk b-' + b.t, style: { animationDelay: (i % 6) * 60 + 'ms' } });
   switch (b.t) {
-    case 'p': wrap.append(h('p', { html: fmt(b.text) })); break;
-    case 'list': wrap.append(h(b.ordered ? 'ol' : 'ul', {}, ...b.items.map(x => h('li', { html: fmt(x) })))); break;
-    case 'code': wrap.append(codeBlock(b.code, b.lang)); if (b.caption) wrap.append(h('div', { class: 'caption', html: fmt(b.caption) })); break;
+    case 'p': wrap.append(h('p', { 'data-nf': 'text', html: fmt(b.text) })); break;
+    case 'list': wrap.append(h(b.ordered ? 'ol' : 'ul', {}, ...b.items.map((x, k) => h('li', { 'data-nf': 'items.' + k, html: fmt(x) })))); break;
+    case 'code': wrap.append(codeBlock(b.code, b.lang)); if (b.caption) wrap.append(h('div', { class: 'caption', 'data-nf': 'caption', html: fmt(b.caption) })); break;
     case 'figure': wrap.append(figureBlock(b)); break;
-    case 'diagram': wrap.append(h('div', { class: 'diagram' }, b.text)); if (b.caption) wrap.append(h('div', { class: 'caption', html: fmt(b.caption) })); break;
-    case 'table': wrap.append(h('div', { class: 'tablewrap' }, h('table', {}, h('thead', {}, h('tr', {}, ...b.head.map(x => h('th', { html: fmt(x) })))), h('tbody', {}, ...b.rows.map(r => h('tr', {}, ...r.map(x => h('td', { html: fmt(x) })))))))); if (b.caption) wrap.append(h('div', { class: 'caption', html: fmt(b.caption) })); break;
-    case 'callout': wrap.append(h('div', { class: 'callout ' + b.kind }, h('span', { class: 'ci' }, CALLOUT_IC[b.kind] || '💡'), b.title ? h('b', { class: 't', html: fmt(b.title) }) : null, h('div', { html: fmt(b.text) }))); break;
-    case 'compare': wrap.append(h('div', { class: 'compare' }, ...b.items.map(it => h('div', {}, h('h4', { html: fmt(it.title) }), h('ul', {}, ...it.points.map(p => h('li', { html: fmt(p) }))))))); break;
-    case 'flow': { const f = h('div', { class: 'flow' }); b.items.forEach((x, k) => { if (k) f.append(h('span', { class: 'ar' }, '→')); f.append(h('span', { class: 'st', style: { animationDelay: k * 70 + 'ms' }, html: fmt(x) })); }); wrap.append(f); if (b.caption) wrap.append(h('div', { class: 'caption', html: fmt(b.caption) })); break; }
-    case 'reveal': { const r = h('div', { class: 'reveal' }, h('button', { onclick: () => { r.classList.toggle('open'); if (r.classList.contains('open') && !r._xp) { r._xp = 1; addXP(1, r); } } }, h('span', {}, '🤔'), h('span', { class: 'q', html: fmt(b.label) }), h('span', { class: 'chev' }, '▸')), h('div', { class: 'ans', html: fmt(b.text) })); wrap.append(r); break; }
+    case 'diagram': wrap.append(h('div', { class: 'diagram', 'data-nf': 'text' }, b.text)); if (b.caption) wrap.append(h('div', { class: 'caption', 'data-nf': 'caption', html: fmt(b.caption) })); break;
+    case 'table': wrap.append(h('div', { class: 'tablewrap' }, h('table', {}, h('thead', {}, h('tr', {}, ...b.head.map((x, k) => h('th', { 'data-nf': 'head.' + k, html: fmt(x) })))), h('tbody', {}, ...b.rows.map((r, j) => h('tr', {}, ...r.map((x, k) => h('td', { 'data-nf': `rows.${j}.${k}`, html: fmt(x) })))))))); if (b.caption) wrap.append(h('div', { class: 'caption', 'data-nf': 'caption', html: fmt(b.caption) })); break;
+    case 'callout': wrap.append(h('div', { class: 'callout ' + b.kind }, h('span', { class: 'ci' }, CALLOUT_IC[b.kind] || '💡'), b.title ? h('b', { class: 't', 'data-nf': 'title', html: fmt(b.title) }) : null, h('div', { 'data-nf': 'text', html: fmt(b.text) }))); break;
+    case 'compare': wrap.append(h('div', { class: 'compare' }, ...b.items.map((it, k) => h('div', { 'data-nf': 'items.' + k }, h('h4', { 'data-nf': `items.${k}.title`, html: fmt(it.title) }), h('ul', {}, ...it.points.map((p, j) => h('li', { 'data-nf': `items.${k}.points.${j}`, html: fmt(p) }))))))); break;
+    case 'flow': { const f = h('div', { class: 'flow' }); b.items.forEach((x, k) => { if (k) f.append(h('span', { class: 'ar' }, '→')); f.append(h('span', { class: 'st', 'data-nf': 'items.' + k, style: { animationDelay: k * 70 + 'ms' }, html: fmt(x) })); }); wrap.append(f); if (b.caption) wrap.append(h('div', { class: 'caption', 'data-nf': 'caption', html: fmt(b.caption) })); break; }
+    case 'reveal': { const r = h('div', { class: 'reveal' }, h('button', { onclick: () => { r.classList.toggle('open'); if (r.classList.contains('open') && !r._xp) { r._xp = 1; addXP(1, r); } } }, h('span', {}, '🤔'), h('span', { class: 'q', 'data-nf': 'label', html: fmt(b.label) }), h('span', { class: 'chev' }, '▸')), h('div', { class: 'ans', 'data-nf': 'text', html: fmt(b.text) })); wrap.append(r); break; }
     case 'ask': {
       const box = h('div', { class: 'ask' });
-      const ol = h('ol', {}, ...b.questions.map(q => { const li = h('li', { onclick: () => li.classList.add('shown') }, h('span', { html: fmt(q) })); return li; }));
+      const ol = h('ol', {}, ...b.questions.map((q, k) => { const li = h('li', { 'data-nf': 'questions.' + k, onclick: () => li.classList.add('shown') }, h('span', { html: fmt(q) })); return li; }));
       const tog = h('button', { class: 'btn small', style: { marginLeft: 'auto' }, onclick: () => { box.classList.toggle('recall'); $$('li', ol).forEach(l => l.classList.remove('shown')); tog.textContent = box.classList.contains('recall') ? '👁️ ' + tE('engine.blk.showAll') : '🙈 ' + tE('engine.blk.recallMode'); } }, '🙈 ' + tE('engine.blk.recallMode'));
       box.append(h('div', { class: 'hd' }, '🧠', h('span', { html: fmt(b.title || tE('engine.blk.askYourself')) }), tog), ol);
       wrap.append(box); break;
     }
-    case 'terms': wrap.append(h('div', { class: 'terms' }, ...b.items.map(t => h('div', { class: 'term' }, h('b', { html: fmt(t.term) }), h('div', { class: 'tiny', style: { color: 'var(--ink2)', fontSize: '14px' }, html: fmt(t.def) }))))); break;
+    case 'terms': wrap.append(h('div', { class: 'terms' }, ...b.items.map((t, k) => h('div', { class: 'term' }, h('b', { 'data-nf': `items.${k}.term`, html: fmt(t.term) }), h('div', { class: 'tiny', 'data-nf': `items.${k}.def`, style: { color: 'var(--ink2)', fontSize: '14px' }, html: fmt(t.def) }))))); break;
   }
   return wrap;
 }
@@ -716,9 +716,9 @@ function flashDeck(body, cards, { all = false, onDone = null } = {}) {
     stage.innerHTML = '';
     if (i >= queue.length) { stage.append(h('div', { class: 'empty' }, h('div', { class: 'e' }, '🌟'), h('p', {}, tE('engine.cards.done')))); if (queue.length) confetti(80); if (onDone) stage.append(onDone()); return; }
     const c = queue[i];
-    const fl = h('div', { class: 'flash' }, h('div', { class: 'inner', onclick: () => fl.classList.toggle('flipped') },
-      h('div', { class: 'face' }, h('small', {}, `${c._ch.emoji} ` + chTitle(c._ch.num, `${nf(i + 1)}/${nf(queue.length)}`)), h('div', { html: fmt(c.q) }), h('div', { class: 'tiny', style: { position: 'absolute', bottom: '14px' } }, tE('engine.cards.flip'))),
-      h('div', { class: 'face back' }, h('small', {}, tE('engine.cards.answer')), h('div', { html: fmt(c.a) }))));
+    const fl = h('div', { class: 'flash', 'data-card': c.key }, h('div', { class: 'inner', onclick: () => fl.classList.toggle('flipped') },
+      h('div', { class: 'face' }, h('small', {}, `${c._ch.emoji} ` + chTitle(c._ch.num, `${nf(i + 1)}/${nf(queue.length)}`)), h('div', { 'data-nf': 'q', html: fmt(c.q) }), h('div', { class: 'tiny', style: { position: 'absolute', bottom: '14px' } }, tE('engine.cards.flip'))),
+      h('div', { class: 'face back' }, h('small', {}, tE('engine.cards.answer')), h('div', { 'data-nf': 'a', html: fmt(c.a) }))));
     setAccent(fl, c._ch);
     if (SHL()) { fl.classList.add('has-ask'); fl.append(askBuddyBtn(() => askAboutCard(c, fl.classList.contains('flipped')))); }
     const rate = q => { rateCardKey(c.key, q); addXP(q === 0 ? 1 : 2, fl); if (q === 0) queue.push(c); i++; show(); };
@@ -861,7 +861,7 @@ function boot() {
   renderTopStats();
   if (!X) addEventListener('hashchange', route);
   matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', () => route());   // i18n-ignore
-  if (X) { X.attachEngine({ route, openTutor: () => openTutor(), focus: () => focusSprint(), history: () => X.convos(), resumeConvo, convoChanged,
+  if (X) { X.attachEngine({ route, locate: locateItem, openTutor: () => openTutor(), focus: () => focusSprint(), history: () => X.convos(), resumeConvo, convoChanged,
     accView: (tab, body, close, opts) => ACC_VIEWS[tab](body, close, opts || {}), retheme: () => { renderTutorHead?.(); } });
     setTimeout(resumeConvo, 300); }
   else route();

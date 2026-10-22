@@ -236,6 +236,7 @@ def build_site(metas):
     # the website never has a config.local.js → drop its <script> tag (avoids a 404 + MIME error in the console)
     html = open(os.path.join(ROOT, 'index.html'), encoding='utf-8').read()
     html = '\n'.join(l for l in html.split('\n') if 'config.local.js' not in l)
+    html = html.replace('<script src="config.js"></script>', '<script src="config.js"></script>\n' + build_stamp(), 1)   # ⚑ reports say which build they come from
     wt(os.path.join(out, 'index.html'), html)
     os.makedirs(os.path.join(out, 'engine'))
     for f in ('langcore.js', 'langui.js', 'langui.css'):
@@ -248,7 +249,7 @@ def build_site(metas):
             dst = os.path.join(out, f['path']); os.makedirs(os.path.dirname(dst), exist_ok=True); shutil.copy(os.path.join(ROOT, f['path']), dst)
         for f in m.get('media') or []:
             dst = os.path.join(out, f); os.makedirs(os.path.dirname(dst), exist_ok=True); shutil.copy(os.path.join(ROOT, f), dst)
-    for f in ('engine.js', 'engine.css', 'loader.js', 'i18n.js', 'themes.js', 'art.js', 'shell.js', 'react.js', 'convos.js', 'cloud.js', 'claude.js', 'packcheck.js', 'llm.js', 'mt.js', 'wordlink.js', 'bridge.js', 'curriculum.js', 'curjobs.js', 'curshare.js', 'imglib.js', 'curimport.js', 'sourceplan.js', 'vault.js', 'social.js', 'packgen.js', 'curmap.js', 'search.js', 'catalog.js', 'authoring.js', 'srcfiles.js', 'viewer.js'): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))
+    for f in ('engine.js', 'engine.css', 'loader.js', 'i18n.js', 'themes.js', 'art.js', 'shell.js', 'react.js', 'convos.js', 'cloud.js', 'claude.js', 'packcheck.js', 'llm.js', 'mt.js', 'wordlink.js', 'bridge.js', 'curriculum.js', 'curjobs.js', 'curshare.js', 'imglib.js', 'curimport.js', 'sourceplan.js', 'vault.js', 'social.js', 'packgen.js', 'curmap.js', 'search.js', 'catalog.js', 'report.js', 'authoring.js', 'srcfiles.js', 'viewer.js'): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))
     shutil.copytree(os.path.join(ENGINE, 'vendor'), os.path.join(out, 'engine', 'vendor'))
     shutil.copytree(os.path.join(ENGINE, 'i18n'), os.path.join(out, 'engine', 'i18n'))   # the UI catalogs (docs/i18n.md), loaded per locale
     shutil.copytree(os.path.join(ROOT, 'fonts'), os.path.join(out, 'fonts'), ignore=shutil.ignore_patterns('*.md', '*.json'))   # the characters' self-hosted fonts
@@ -334,8 +335,17 @@ def public_config():
     return {'siteUrl': g('siteUrl'), 'supabaseUrl': g('supabaseUrl'), 'supabaseKey': g('supabaseKey')}
 
 # the app's own code the connector runs (pack checks; curriculum tasks, checks and how answers change a curriculum)
-MCP_ENGINE = ['engine/packcheck.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js', 'engine/langcore.js', 'engine/curimport.js', 'engine/sourceplan.js']
+MCP_ENGINE = ['engine/report.js', 'engine/packcheck.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js', 'engine/langcore.js', 'engine/curimport.js', 'engine/sourceplan.js']
 MCP_PRELUDE = 'globalThis.window = globalThis;\n'
+
+def build_stamp():
+    """<script>window.NOEMA_BUILD = {commit, builtAt}</script>: which build a ⚑ problem report comes from (docs/REPORTS.md).
+    The commit is Netlify's COMMIT_REF, else the checkout's HEAD; none when neither is known."""
+    commit = os.environ.get('COMMIT_REF') or ''
+    if not commit:
+        try: commit = subprocess.run(['git', 'rev-parse', 'HEAD'], cwd=ROOT, capture_output=True, text=True, timeout=10).stdout.strip()
+        except Exception: commit = ''
+    return '<script>window.NOEMA_BUILD = ' + json.dumps({'commit': commit[:40] or None, 'builtAt': now_iso()}) + ';</script>'
 
 def build_mcp_function(metas, out_dir):
     """dist/functions/mcp.mjs — the Claude connector (cloud/mcp/server.mjs + public config + the content contract)."""
@@ -401,6 +411,7 @@ def build_bundle(metas):
 <body><div id="noema-splash"><div class="logo"></div></div>
 <script>{esc(rd("config.js"))}</script>{local}
 <script>window.NOEMA_BUNDLE = true;</script>
+{build_stamp()}
 <script>{esc(build_registry(reg_metas))}</script>
 {packs}<script>{esc(rd("engine/vendor/marked.umd.js"))}</script>
 <script>{esc(rd("engine/vendor/purify.min.js"))}</script>
@@ -430,6 +441,8 @@ def build_bundle(metas):
 <script>{esc(rd("engine/curmap.js"))}</script>
 <script>{esc(rd("engine/catalog.js"))}</script>
 <script>{esc(rd("engine/search.js"))}</script>
+<script>{esc(rd("engine/vendor/modern-screenshot.umd.js"))}</script>
+<script>{esc(rd("engine/report.js"))}</script>
 <script>{esc(rd("engine/shell.js"))}</script>
 <script>{esc(rd("engine/react.js"))}</script>
 <script>{esc(rd("engine/authoring.js"))}</script>

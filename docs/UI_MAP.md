@@ -115,6 +115,7 @@ mastered station and the last 5 seconds of a timed round can bring a big reactio
 | — | Settings › What I learn: Knowledge / Languages / Both (shows or hides the Languages tab) |
 | — | **Me ▾ › Me** (`#/profile`): the page others see — picture, a few words, then only the parts you switch on (progress · achievements · languages I study · topics I study · what I share). Private until you publish it (cloud accounts); Copy the link gives `#/u/<id>`. Others reach it from that link and from the person button next to each row of Discover › What others share / Roadmaps others share. docs/PROFILE.md |
 | — | **Log out** (Me ▾, and next to Switch profile in Settings): a cloud account sends what waits and signs out; the list of profiles opens, even with only one profile |
+| — | Me › Report a problem (on wide screens the button at the foot of the rail); admins: Me › Problem reports (`#/admin/reports`). See docs/REPORTS.md |
 
 ## 8. Before a subject: accounts, picker, Shelf, Explore, sharing, Claude (PA, SP, SH, SC, ES, SS, EX, CG, CS)
 | Old | New home |
