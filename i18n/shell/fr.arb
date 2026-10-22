@@ -447,5 +447,6 @@
   "sh.vaultSub": "Notes, annales et corrigés partagés par les étudiants",
   "sh.people": "Partenaires",
   "sh.peopleSub": "Discute avec tes camarades, partenaires et groupes d’étude",
-  "sh.peopleN": "Partenaires : {n, plural, one {# nouveau} many {# nouveaux} other {# nouveaux}}"
+  "sh.peopleN": "Partenaires : {n, plural, one {# nouveau} many {# nouveaux} other {# nouveaux}}",
+  "sh.hideToday": "Masquer pour aujourd’hui"
 }

@@ -345,6 +345,26 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
   const rail = await page.$eval('.ns-tabs', t => { const r = t.getBoundingClientRect(); return [r.left, r.width, r.height]; });
   ok(rail[0] === 0 && rail[1] === 100 && rail[2] > 800 && await page.$eval('.ns-railme', x => getComputedStyle(x).display !== 'none') && await page.$eval('#ns-topme', x => getComputedStyle(x).display === 'none'), 'wide screens: the rail on the left, “Me” at its foot');
   await page.screenshot({ path: SHOTS + '/sh_g1_wide.png' });
+  // short windows: the tabs share the height above “Me” (8 tabs: the most a learner of both worlds with buddies gets)
+  await page.evaluate(() => { const t = document.querySelector('.ns-tabs'); while (t.children.length < 8) t.append(t.lastElementChild.cloneNode(true)); });
+  for (const hgt of [860, 620, 480, 400]) {
+    await page.setViewportSize({ width: 1280, height: hgt }); await wait(150);
+    const fit = await page.evaluate(() => { const tabs = [...document.querySelectorAll('.ns-tab')], last = tabs[tabs.length - 1].querySelector('.i2').getBoundingClientRect(), me = document.querySelector('.ns-railme').getBoundingClientRect(), brand = document.querySelector('.ns-brand').getBoundingClientRect(), first = tabs[0].querySelector('.i2').getBoundingClientRect();
+      return { gap: Math.round(me.top - Math.max(...tabs.map(x => x.getBoundingClientRect().bottom))), top: Math.round(first.top - brand.bottom), icons: tabs.every(x => x.querySelector('.i2').getBoundingClientRect().height > 18), lastIcon: last.bottom <= me.top }; });
+    ok(fit.gap >= 0 && fit.top >= 0 && fit.icons && fit.lastIcon, `rail at ${hgt}px high: 8 tabs between the logo and “Me”, none under it ` + JSON.stringify(fit));
+    await page.screenshot({ path: SHOTS + `/sh_g2_rail_${hgt}.png` });
+  }
+  await page.setViewportSize({ width: 1280, height: 860 }); await page.reload(); await wait(1200);
+  // Today: × on the big “continue” hides it for today; the next subject you started takes its place, or nothing
+  const goTitle = () => page.$eval('.ns-go h2', x => x.textContent).catch(() => null);
+  const g0 = await goTitle(), n0 = await page.evaluate(() => JSON.parse(localStorage.getItem(`noema1:${Noema.account.id}:meta:recent`) || '[]').length);
+  ok(g0 && await page.$eval('.ns-goclose', b => b.getAttribute('aria-label') === NoemaShell.L('hideToday') && !/hideToday/.test(b.getAttribute('aria-label'))), 'Today: the continue card has a quiet × (“Hide for today”, in the menus’ language)');
+  await page.click('.ns-goclose'); await wait(400);
+  const g1 = await goTitle();
+  ok(n0 > 1 ? g1 && g1 !== g0 : !g1, `× shows the next subject you started instead, or nothing (${g0} → ${g1})`);
+  await page.reload(); await wait(1200);
+  ok(await goTitle() === g1, 'it stays hidden for the rest of the day, after a reload too');
+  await page.evaluate(() => localStorage.removeItem(`noema1:${Noema.account.id}:meta:todayHide`));
   ok(await page.evaluate(() => document.querySelector('.ns-railme .ns-mename').textContent === Noema.account.name && !!Noema.account.name), 'under the avatar: the account’s name, not “Me”');
   await page.click('.ns-railme'); await wait(250);
   ok(await page.$eval('.ns-pop.ns-mepop', p => { const r = p.getBoundingClientRect(); return r.bottom <= innerHeight && r.left >= 0 && r.top >= 0; }), 'wide screens: “Me” at the rail’s foot opens the same menu, upwards');

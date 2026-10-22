@@ -63,7 +63,12 @@ window.NoemaShell = (() => {
     if (!acc() || !r?.subj) return;
     const list = recent().filter(x => x.subj !== r.subj);
     list.unshift({ ...r, at: Date.now() }); jset(recentKey(), list.slice(0, 12));
+    if (hiddenToday().includes(r.subj)) jset(hideKey(), { d: today(), ids: hiddenToday().filter(x => x !== r.subj) });   // studied again: suggest it again
   }
+  /** Today's suggestions the learner closed with ×: hidden for the rest of the day (subject ids, 'map:<roadmap id>'). Device-local. */
+  const hideKey = () => `noema1:${acc()}:meta:todayHide`;
+  const hiddenToday = () => { const v = jget(hideKey(), null); return v?.d === today() && Array.isArray(v.ids) ? v.ids : []; };
+  const hideToday = id => jset(hideKey(), { d: today(), ids: [...new Set([...hiddenToday(), id])] });
   const dueCount = st => { const d = today(); let fc = 0, pb = 0; for (const r of Object.values(st?.fc || {})) if (r?.due && r.due <= d) fc++; for (const r of Object.values(st?.pb || {})) if (r?.due && r.due <= d) pb++; return { fc, pb }; };
   const wrongCount = st => Object.values(st?.res || {}).filter(r => r && r.last === false).length;
   let subjCache = null;
@@ -157,7 +162,7 @@ window.NoemaShell = (() => {
   }
   function drawTabs() {
     const TIP = { vault: L('vaultSub'), people: L('peopleSub') };
-    F.tabs.replaceChildren(...tabsList().map(([k, href, i, l]) => h('button', { class: 'ns-tab' + (k === 'people' ? ' bell ns-peoplebtn' : ''), id: k === 'people' ? 'ns-people' : null, title: TIP[k] || null, 'data-tab': k, onclick: () => go(href) },
+    F.tabs.replaceChildren(...tabsList().map(([k, href, i, l]) => h('button', { class: 'ns-tab' + (k === 'people' ? ' bell ns-peoplebtn' : ''), id: k === 'people' ? 'ns-people' : null, title: TIP[k] || l, 'data-tab': k, onclick: () => go(href) },
       h('span', { class: 'i2' }, i), h('span', { class: 'lb' }, l), k === 'people' ? F.peopleBadge : null)));
     F.people = F.tabs.querySelector('#ns-people');
     F.tabs.style.setProperty('--n', F.tabs.children.length);
@@ -391,12 +396,14 @@ window.NoemaShell = (() => {
     const w = TH()?.world() || 'know', fits = s => w === 'both' || (w === 'lang') === isLang(s);
     let rec = recent().filter(r => byId[r.subj] && fits(byId[r.subj]));
     if (!rec.length && subjectId() && fits(N().subject)) rec = [{ subj: subjectId(), title: N().subject.title, emoji: N().subject.emoji }];
+    const hid = hiddenToday(), anyRec = rec.length > 0;
+    rec = rec.filter(r => !hid.includes(r.subj));
     box.replaceChildren();
-    // the one big "continue"
+    // the one big "continue" (× hides it for today; the next one you started takes its place, or nothing)
     const r0 = rec[0];
     if (r0) {
       const s = byId[r0.subj] || {}, rm = r0.cid && CU()?.get(acc(), r0.cid);
-      box.append(h('button', { class: 'ns-go', onclick: () => open(r0.subj, r0.sid ? '#/s/' + r0.sid : '#/subject') },
+      box.append(goCard(r0.subj, () => drawToday(box), { class: 'ns-go', onclick: () => open(r0.subj, r0.sid ? '#/s/' + r0.sid : '#/subject') },
         h('span', { class: 'rm' }, s.emoji ? s.emoji + ' ' : svg(rm ? 'map' : 'book'), ' ', rm ? rm.title || rm.goal : s.title || r0.title),
         h('h2', {}, r0.secTitle || s.title || r0.title),
         h('span', { class: 'meta' }, r0.chNum ? pill(L('chOf', { n: r0.chNum, of: r0.chOf }), 2) : null, r0.secNum ? pill(L('secOf', { n: r0.secNum, of: r0.secOf }), 4) : !r0.sid ? pill(L('start'), 1) : null),
@@ -406,7 +413,7 @@ window.NoemaShell = (() => {
     // the language courses' own "continue" (docs/NEW_FRAME_AND_LANGUAGES.md); with nothing else to continue, the course you were in leads (lead: it draws only that, and says so)
     const langToday = w !== 'know' && WORLDS.lang?.today, n0 = box.children.length;
     const led = !r0 && langToday ? WORLDS.lang.today(box, { h, L, open, go, lead: true }) : false, langLed = led === true || (led === undefined && box.children.length > n0);
-    if (!r0 && !langLed && !(w === 'lang' && langToday)) box.append(firstSteps());
+    if (!r0 && !langLed && !(w === 'lang' && langToday)) { const f = anyRec ? null : firstSteps(() => drawToday(box)); if (f) box.append(f); }
     if (langToday && !langLed) WORLDS.lang.today(box, { h, L, open, go });
     // continue elsewhere
     const more = rec.slice(1, 4);
@@ -423,10 +430,16 @@ window.NoemaShell = (() => {
     const sn = N().stats?.streakNow() || 0;
     box.append(h('button', { class: 'ns-cheer', onclick: () => go('#/progress') }, h('span', { class: 'lines' }, h('b', {}, sn ? L('streakDays', { n: sn }) : L('streakStart')), h('span', {}, sn && sn % 7 === 6 ? L('streakTomorrowWeek') : L('streakKeep'))), h('span', { class: 'more' }, L('progress') + ' ›')));
   }
-  function firstSteps() {
-    const curs = CU()?.list(acc()) || [];
+  /** A big suggestion card with a quiet × in its corner: closing it hides `id` for today and redraws (redraw). */
+  function goCard(id, redraw, attrs, ...kids) {
+    const x = h('button', { class: 'ns-goclose', title: L('hideToday'), 'aria-label': L('hideToday'), onclick: () => { hideToday(id); redraw(); } }, svg('close'));
+    return h('div', { class: 'ns-gowrap' }, h('button', attrs, ...kids), x);
+  }
+  function firstSteps(redraw) {
+    const all = CU()?.list(acc()) || [], hid = hiddenToday(), curs = all.filter(c => !hid.includes('map:' + c.id));
+    if (all.length && !curs.length) return null;   // every Roadmap's suggestion closed for today: nothing
     if (curs.length) { const c = curs[0], nx = CU().nextUp?.(acc(), c)?.[0];
-      return h('button', { class: 'ns-go', onclick: () => go('#/map/' + encodeURIComponent(c.id) + (nx ? '/' + encodeURIComponent(nx) : '')) }, h('span', { class: 'rm' }, svg('map'), ' ', c.title || c.goal), h('h2', {}, nx ? c.nodes[nx]?.title : L('openMap')), h('span', { class: 'meta' }, pill(L('nextStep'), 2)), h('span', { class: 'arrow', 'aria-hidden': 'true' }, '→')); }
+      return goCard('map:' + c.id, redraw || (() => go('#/')), { class: 'ns-go', onclick: () => go('#/map/' + encodeURIComponent(c.id) + (nx ? '/' + encodeURIComponent(nx) : '')) }, h('span', { class: 'rm' }, svg('map'), ' ', c.title || c.goal), h('h2', {}, nx ? c.nodes[nx]?.title : L('openMap')), h('span', { class: 'meta' }, pill(L('nextStep'), 2)), h('span', { class: 'arrow', 'aria-hidden': 'true' }, '→')); }
     return h('div', { class: 'ns-panel ns-empty' }, faceEl(undefined, 'breathe'), h('h2', {}, L('welcomeTitle')), h('p', { class: 'ns-muted' }, L('welcomeText')),
       h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => CM()?.create(acc(), { onStudy }) }, L('newRoadmap')), h('button', { class: 'btn', onclick: () => go('#/discover') }, L('discover')), h('button', { class: 'btn ghost', onclick: () => go('#/shelf') }, L('shelf'))));
   }
