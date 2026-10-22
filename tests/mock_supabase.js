@@ -105,6 +105,30 @@ function start({ port = 54321, staticDir = null, configOverride = null, maxObjec
     if (p === '/storage/v1/object/noema-vault' && M === 'DELETE') { for (const k of data.prefixes || []) if (vfiles.some(f => f.path === k && f.uploader === uid)) delete vobj[k]; return json(res, 200, []); }
     return json(res, 404, { message: 'not found ' + p });
   }
+  /* ---------- ⚑ problem reports (cloud/supabase.sql §15): the reporter sends and sees their own; the admins (noema_admins,
+     here: the e-mails in admins) see, answer and delete every one. The guard of the server: who, the status and the answer. ---------- */
+  const ereps = [], admins = new Set();
+  const isAdm = uid => !!uid && admins.has(emailOf(uid));
+  function reports(req, res, p, u, uid, data) {
+    const M = req.method, sp = [...u.searchParams.entries()];
+    if (p === '/rest/v1/noema_admins' && M === 'GET') return json(res, 200, isAdm(uid) ? [{ user_id: uid }] : []);
+    if (p !== '/rest/v1/noema_error_reports') return;
+    if (!uid) return json(res, 401, { message: 'JWT required' });
+    const st = /^in\.\((.*)\)$/.exec(u.searchParams.get('status') || '');
+    const vis = filt(ereps.filter(r => r.reporter === uid || isAdm(uid)), sp.filter(([k]) => k !== 'status' || !st)).filter(r => !st || st[1].split(',').includes(r.status));
+    const cols = (u.searchParams.get('select') || '*').split(','), pick = r => cols.includes('*') ? r : Object.fromEntries(cols.map(c => [c, r[c]]));
+    if (M === 'GET') return json(res, 200, vis.slice().sort((a, b) => a.created_at < b.created_at ? 1 : -1).slice(0, +(u.searchParams.get('limit') || 1000)).map(pick));
+    if (M === 'POST') {
+      for (const r of data) {
+        if ((r.reporter && r.reporter !== uid) || (r.shot && !/^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+/=]+$/.test(r.shot)) || !['content', 'translation', 'display', 'broken', 'idea', 'other'].includes(r.kind)) return rls(res);
+        if (ereps.filter(x => x.reporter === uid && Date.now() - Date.parse(x.created_at) < 864e5).length >= 40) return json(res, 400, { code: 'P0001', message: 'report limit: 40 a day' });
+        ereps.push({ ...r, id: r.id || crypto.randomUUID(), reporter: uid, reporter_email: emailOf(uid), reporter_name: users[uid].meta?.name || null, status: 'new', admin_note: null, fixed_in: null, created_at: now(), updated_at: now() });
+      }
+      return json(res, 201);
+    }
+    if (M === 'PATCH') { if (!isAdm(uid)) return repr(req, res, 200, []); for (const r of vis) Object.assign(r, Object.fromEntries(Object.entries(data).filter(([k]) => ['status', 'admin_note', 'fixed_in'].includes(k))), { updated_at: now() }); return repr(req, res, 200, vis); }
+    if (M === 'DELETE') { if (isAdm(uid)) for (const r of vis) ereps.splice(ereps.indexOf(r), 1); return json(res, 204); }
+  }
   function sharedCurricula(req, res, p, u, uid, data, buf) {
     const sp = [...u.searchParams.entries()], M = req.method, em = emailOf(uid);
     if (p === '/rest/v1/noema_curricula_shared') {
@@ -181,6 +205,7 @@ function start({ port = 54321, staticDir = null, configOverride = null, maxObjec
       // ---- 👥 shared curricula (rules as in cloud/supabase.sql §10; anonymous reads of public ones)
       sharedCurricula(req, res, p, u, uid, data, buf); if (res.headersSent) return;
       vault(req, res, p, u, uid, data, buf); if (res.headersSent) return;
+      reports(req, res, p, u, uid, data); if (res.headersSent) return;
       so.handle(req, res, p, u, uid, data, buf); if (res.headersSent) return;
       // ---- anonymous reads: public packs + public bucket
       if (p === '/rest/v1/noema_public_packs' && req.method === 'GET') { const o = q('owner'); return json(res, 200, pubPacks.filter(r => !o || r.owner === o).slice().sort((a, b) => a.updated_at < b.updated_at ? 1 : -1)); }
@@ -301,7 +326,7 @@ function start({ port = 54321, staticDir = null, configOverride = null, maxObjec
       json(res, 404, { message: 'not found ' + p });
     });
   });
-  server.log = []; server.state = { users, kv, snaps, files, profiles, convs: {}, authz: {}, consents: [], callbacks: [], pubFiles, shrFiles, pubPacks, shares, pages, curs, mems, steps, curFiles, stepWrites: 0, vfiles, vrat, vrep, vobj, vfields, social: so.state };
+  server.log = []; server.state = { users, kv, snaps, files, profiles, convs: {}, authz: {}, consents: [], callbacks: [], pubFiles, shrFiles, pubPacks, shares, pages, curs, mems, steps, curFiles, stepWrites: 0, vfiles, vrat, vrep, vobj, vfields, social: so.state, ereps, admins };
   return new Promise(r => server.listen(port, () => r(server)));
 }
 module.exports = { start };

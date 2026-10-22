@@ -1,0 +1,3 @@
+report.kind_*
+report.f_*
+report.st_*

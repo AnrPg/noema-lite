@@ -452,6 +452,12 @@ const TOOLS = [
     inputSchema: { type: 'object', properties: { query: { type: 'string' }, ids: { type: 'array', items: { type: 'string' }, description: 'Or: these ids (also shows their children)' } } }, annotations: { readOnlyHint: true } },
   { name: 'noema_vault_fields_save', description: 'Change the vault\'s field graph (admins only); everybody sees accepted fields at once. items: [{"id"?, "names"? {locale: name} (ADDED to its names), "aliases"? [other names, abbreviations], "parents"? [ids] (replace) | "add_parents"? [ids], "status"? "accepted"|"rejected", "merge_into"? id (its files and children move there, its names become aliases), "note"?}] — no id: a new accepted field (enrich the graph: missing sub-fields, extra parents). Rules: a short, natural, usual name in EVERY UI locale (' + VAULT_LOCALES.join(' ') + '), as a university of that language names the field (capital first letter where the script has one); every sensible parent (a field may sit in many places) but never a parent below the field; a duplicate of an existing field is merged, not accepted; a proposal that is not a field of study (a course code, a person, junk) is merged into the closest field or rejected.',
     inputSchema: { type: 'object', properties: { items_json: { type: 'string', description: 'The items, a JSON array (≤ 200)' } }, required: ['items_json'] } },
+  { name: 'noema_reports', description: 'The problem reports people sent from the noema-lite app (the ⚑ button: a screenshot + the exact place). For the app\'s admins (noema_admins) only. Lists them newest first: id, kind (content, translation, display, broken, idea, other), status, the item id that locates the problem uniquely (ex:<exercise id> · card:<key> · blk:<section>/<block> · trap:<chapter>/<id> · drill:<id> · sec:<id> · ui:<i18n key> · lang:<course>/…), subject, address, the learner\'s words. Then read one with noema_report.',
+    inputSchema: { type: 'object', properties: { status: { type: 'string', enum: ['open', 'new', 'seen', 'fixing', 'fixed', 'wontfix', 'duplicate', 'all'], description: 'default open (= new, seen, fixing)' }, subject: { type: 'string', description: 'only reports about this subject id' }, limit: { type: 'integer', description: 'default 30, max 200' } } }, annotations: { readOnlyHint: true } },
+  { name: 'noema_report', description: 'One problem report (admins only), ready to fix: the brief — what the learner wrote, the unique place (subject + pack version, chapter, section, block, exercise or card and the field inside it, its text as shown and in the pack\'s own language when a translation was shown, the interface text\'s i18n key, the language course node, the element pointed at with its data-* chain, the learner\'s answer, recent console errors, the app build), the repository files where it is written (AnrPg/noema-lite) and how to fix it — plus the full locator JSON and the screenshot as an image. Fix it in the repository, then mark it with noema_report_update.',
+    inputSchema: { type: 'object', properties: { id: { type: 'string', description: 'the report id (from noema_reports)' }, screenshot: { type: 'boolean', description: 'include the screenshot (default true)' } }, required: ['id'] }, annotations: { readOnlyHint: true } },
+  { name: 'noema_report_update', description: 'Answer a problem report (admins only): its status (seen, fixing, fixed, wontfix, duplicate), a note for the team, and where it was fixed (a commit, a pull request, a pack version). What the reporter sent never changes.',
+    inputSchema: { type: 'object', properties: { id: { type: 'string' }, status: { type: 'string', enum: ['new', 'seen', 'fixing', 'fixed', 'wontfix', 'duplicate'] }, note: { type: 'string', description: 'the admin note (≤ 4000 characters)' }, fixed_in: { type: 'string', description: 'commit sha, pull request URL or pack version (≤ 300)' } }, required: ['id'] } },
   { name: 'noema_curriculum_submit', description: 'Submit your answer to a map / chapter-plan task from noema_curriculum_task. It is checked exactly as noema-lite checks its own agents; problems come back as a list — fix all of them and submit again. Accepted answers reach the learner\'s app by themselves.',
     inputSchema: { type: 'object', properties: { curriculum_id: { type: 'string' }, task_id: { type: 'string', description: 'the task id given with the task (e.g. "dag", "plan:a,b,c")' }, result_json: { type: 'string', description: 'ONE JSON object matching the task\'s JSON Schema' } }, required: ['curriculum_id', 'task_id', 'result_json'] } },
 ];
@@ -812,6 +818,35 @@ async function callTool(name, args, ctx) {
       const r = await sb('/rest/v1/rpc/noema_vault_fields_save', token, { method: 'POST', body: { items } }).catch(e => ({ error: e.message }));
       if (r?.error) return fail(r.error.replace(/^Supabase \d+: /, '') + '\nNothing was saved (all or nothing): fix it and send all items again.');
       return text(`✅ Saved ${r.saved.length} field(s): ${r.saved.join(', ')}. Everybody sees accepted fields at once. Call noema_vault_fields_queue for what still waits.`);
+    }
+    case 'noema_reports': case 'noema_report': case 'noema_report_update': {
+      const R = globalThis.NoemaReport, UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+      const admin = await sb('/rest/v1/noema_admins?select=user_id&limit=1', token).then(r => Array.isArray(r) && r.length > 0).catch(() => false);
+      if (!admin) return fail('Only the app\'s admins (table noema_admins, cloud/supabase.sql §13b) read the problem reports; this account is not one.');
+      if (name === 'noema_reports') {
+        const st = String(args?.status || 'open'), lim = Math.max(1, Math.min(200, +args?.limit || 30)), subj = String(args?.subject || '').trim();
+        const f = st === 'all' ? '' : '&status=in.(' + (st === 'open' ? R.OPEN : [st]).join(',') + ')';
+        const rows = await sb(`/rest/v1/noema_error_reports?select=id,kind,status,item,subject,route,note,reporter_name,app_version,created_at${f}${subj && ID_RE.test(subj) ? '&subject=eq.' + encodeURIComponent(subj) : ''}&order=created_at.desc&limit=${lim}`, token);
+        if (!rows.length) return text(`No ${st} problem reports.`);
+        return text(`${rows.length} ${st} problem report(s), newest first. Read one with noema_report (id).\n\n` + rows.map(r => `- ${r.id} · ${r.created_at?.slice(0, 16)} · ${r.status} · ${r.kind} · ${r.item || '?'} · ${r.subject || '-'} · ${r.route || ''}${r.note ? '\n  “' + String(r.note).replace(/\s+/g, ' ').slice(0, 240) + '”' : ''}`).join('\n'));
+      }
+      const id = String(args?.id || '').trim(); if (!UUID.test(id)) return fail('id: a report id from noema_reports');
+      if (name === 'noema_report') {
+        const r = (await sb(`/rest/v1/noema_error_reports?select=*&id=eq.${id}`, token))[0]; if (!r) return fail('No report with that id.');
+        if (r.status === 'new') await sb(`/rest/v1/noema_error_reports?id=eq.${id}`, token, { method: 'PATCH', body: { status: 'seen' }, headers: { Prefer: 'return=minimal' } }).catch(() => { });
+        const out = [{ type: 'text', text: R.brief(r) + '\n\n## The locator (everything the app sent)\n\n```json\n' + JSON.stringify(r.locator || {}, null, 1).slice(0, 60000) + '\n```' }];
+        const m = /^data:(image\/(?:jpeg|png|webp));base64,(.+)$/.exec(r.shot || '');
+        if (m && args?.screenshot !== false) out.push({ type: 'text', text: 'The screenshot the learner sent (the window as it was; a red frame marks what they pointed at):' }, { type: 'image', data: m[2], mimeType: m[1] });
+        return { content: out };
+      }
+      const patch = {};
+      if (args?.status != null) { if (!R.STATUSES.includes(String(args.status))) return fail('status: one of ' + R.STATUSES.join(', ')); patch.status = String(args.status); }
+      if (args?.note != null) patch.admin_note = String(args.note).slice(0, 4000) || null;
+      if (args?.fixed_in != null) patch.fixed_in = String(args.fixed_in).slice(0, 300) || null;
+      if (!Object.keys(patch).length) return fail('Nothing to change: give status, note or fixed_in.');
+      const done = await sb(`/rest/v1/noema_error_reports?id=eq.${id}`, token, { method: 'PATCH', body: patch, headers: { Prefer: 'return=representation' } });
+      if (!done?.length) return fail('No report with that id.');
+      return text(`✅ Report ${id}: ${done[0].status}${done[0].fixed_in ? ' · fixed in ' + done[0].fixed_in : ''}.`);
     }
     case 'noema_curriculum_submit': {
       const pk = await pickCurriculum(token, String(args?.curriculum_id || '').trim()); if (pk.error) return fail(pk.error);
