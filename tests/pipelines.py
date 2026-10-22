@@ -16,7 +16,7 @@ def ok(c, m):
     n += 1; print("✓ " + m)
 
 S = pipeline.steps(); F = pipeline.flows()
-ok(set(F) == {"1", "1b", "2", "3", "4", "5", "6", "7", "8", "L1", "L2"}, "the 9 knowledge flows and the 2 language flows (Γ1, Γ2)")
+ok(set(F) == {"1", "1b", "2", "3", "4", "5", "6", "7", "8", "9", "L1", "L2"}, "the 10 knowledge flows and the 2 language flows (Γ1, Γ2)")
 for f in F.values():
     ok(all(s in S for s in f["steps"]) and f["steps"][0] == "classify", f"flow {f['id']}: known steps, classify first")
     bad = [(s, need) for i, s in enumerate(f["steps"]) for need in S[s].get("needs", []) if need in f["steps"] and f["steps"].index(need) > i]
@@ -33,7 +33,7 @@ ok(all(s in F["L2"]["steps"] for s in ("L.phenomena", "L.params", "L.order", "L.
 
 D = lambda *a: pipeline.detect(list(a))[0]
 ok(D("--sources", "3", "--topics", "5") == "1" and D("--goal") == "1b" and D("--step") == "2" and D("--queue") == "3" and D("--sources", "2") == "4"
-   and D("--extend", "--sources", "1") == "5" and D("--bridge") == "6" and D("--translate") == "7" and D("--import") == "8"
+   and D("--extend", "--sources", "1") == "5" and D("--bridge") == "6" and D("--translate") == "7" and D("--import") == "8" and D("--grow", "--sources", "3", "--topics", "2") == "9"
    and D("--lang-task") == "L1" and D("--new-language") == "L2" and D() is None, "detect: each set of facts → its flow")
 
 # ---- flow 4 end to end, with the scripts as the skill ships them (tools/build.py SKILL_TOOLS + pipelines/) ----

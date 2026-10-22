@@ -236,6 +236,27 @@ c.save()`, path.join(TF, 'dna-replication.pdf')]);
     await p.evaluate(() => NoemaCloud.pull(Noema.account.id));
     ok(await until(() => p.evaluate(id => { const c = NoemaCurriculum.get(Noema.account.id, id); return c && c.provider === 'claudeapp' && c.fromSources?.via === 'connector' && Object.keys(c.nodes).length === 2; }, cid2), 10000), 'the app has it after a sync: a Roadmap the Claude app works on, made from sources');
     ok(await until(async () => { await p.evaluate(() => NoemaCloud.pull(Noema.account.id)); return p.evaluate(id => { const c = NoemaCurriculum.get(Noema.account.id, id); return c && Object.values(c.nodes).some(n => n.title === 'Membranes' && n.pack?.status === 'ready' && n.chapters?.length === 4); }, cid2); }, 25000, 1000), 'in the app: both steps planned, “Membranes” ⚡ ready');
+
+    console.log('— a new part: the Roadmap grows with new material (noema_roadmap_map, noema_extend_roadmap)');
+    const mp = await tool('noema_roadmap_map', { curriculum_id: cid2 });
+    ok(!mp.err && /@membranes — “Membranes” · foundation · prepared · a starting step/.test(mp.text) && /@cell_signalling — “Cell signalling” .* after @membranes/.test(mp.text) && /chapters: /.test(mp.text), 'the map: every step in study order with its permanent @id, its state, its links and chapters');
+    const W2 = { part: 'Week 2 — Cell death', summary: 'How cells die.', files: [{ path: 'week2/apoptosis.pdf', pages: 30 }],
+      steps: [{ ref: 'a', title: 'Apoptosis', role: 'aspect', prerequisites: ['@cell_signalling'], files: ['week2/apoptosis.pdf pp. 1–20'] }, { ref: 'b', title: 'Necrosis and autophagy', role: 'related', prerequisites: ['a'], files: ['week2/apoptosis.pdf pp. 21–30'] }] };
+    const badP = await tool('noema_extend_roadmap', { curriculum_id: cid2, plan_json: JSON.stringify({ ...W2, steps: [{ ...W2.steps[0], prerequisites: ['@cell_signaling'], before: ['@membranes'] }, { ...W2.steps[1], title: 'Membranes' }] }) });
+    ok(badP.err && /"@cell_signaling" is not a step of this Roadmap — did you mean @cell_signalling/.test(badP.text) && /on the map already \(@membranes\)/.test(badP.text) && /“Membranes” is prepared already/.test(badP.text), 'a wrong part goes back: an unknown @id (with the near one), a step the map has, a new prerequisite for a prepared step');
+    const loose = await tool('noema_extend_roadmap', { curriculum_id: cid2, plan_json: JSON.stringify({ ...W2, steps: [{ ...W2.steps[0], prerequisites: [] }, W2.steps[1]] }) });
+    ok(loose.err && /not connected to the map/.test(loose.text), 'a part joined to nothing is refused (unless independent)');
+    const grown = await tool('noema_extend_roadmap', { curriculum_id: cid2, plan_json: JSON.stringify(W2) });
+    ok(!grown.err && /2 new step\(s\) — @apoptosis \(“Apoptosis”\), @necrosis_and_autophagy/.test(grown.text) && /joined to the map by @cell_signalling → @apoptosis/.test(grown.text) && /noema_curriculum_task/.test(grown.text), 'a good part is added: ' + grown.text.split('\n')[0].slice(0, 160));
+    const mp2 = await tool('noema_roadmap_map', { curriculum_id: cid2 });
+    ok(/4 steps/.test(mp2.text) && /@apoptosis — “Apoptosis” · aspect · queued to prepare · part 2 · after @cell_signalling/.test(mp2.text) && /2\. “Week 2 — Cell death”/.test(mp2.text), 'the connector sees it at once (the inbox): part 2, its steps queued, joined to the map');
+    const pt = await tool('noema_curriculum_task', { curriculum_id: cid2 });
+    const pids = (pt.text.match(/task plan:([^\s]+)/) || [])[1]?.split(',') || [];
+    ok(pids.join() === 'apoptosis,necrosis_and_autophagy' && /in the Claude chat where the part “Week 2 — Cell death” was added/.test(pt.text) && /“Apoptosis”: week2\/apoptosis\.pdf pp\. 1–20/.test(pt.text), 'the next task plans the new steps, from the files of the chat where the part was added');
+    const sub2 = await tool('noema_curriculum_submit', { curriculum_id: cid2, task_id: 'plan:' + pids.join(','), result_json: JSON.stringify(F.plans(pids)) });
+    ok(!sub2.err && /Accepted/.test(sub2.text), 'their chapter plans are accepted');
+    ok(await until(async () => { await p.evaluate(() => NoemaCloud.pull(Noema.account.id).then(() => NoemaCurJobs.App.poll(Noema.account.id))); return p.evaluate(id => { const c = NoemaCurriculum.get(Noema.account.id, id); return c && Object.keys(c.nodes).length === 4 && c.parts?.length === 2 && c.edges.some(e => e.from === 'cell_signalling' && e.to === 'apoptosis') && c.nodes.apoptosis.addedIn === c.parts[1].id && c.nodes.apoptosis.pack?.status === 'app' && c.nodes.apoptosis.chapters?.length > 0 && c.nodes.membranes.pack?.status === 'ready'; }, cid2); }, 25000, 1000), 'in the app after a sync: the new part on the same map, planned and queued; “Membranes” still ready');
+    ok(await p.evaluate(id => { const c = NoemaCurriculum.get(Noema.account.id, id); return /noema_extend_roadmap/.test(NoemaCurJobs.growMessage(c)) && /facts\.grow/.test(NoemaCurJobs.growMessage(c)); }, cid2), 'the map’s ⋮ → Add a part with Claude: the message names the flow and the tools');
     ok(!E.length, 'no page errors ' + E.join(' | '));
   } catch (e) { ok(false, 'crashed: ' + e.stack); await p.screenshot({ path: SHOTS + '/src_fail.png', fullPage: true }).catch(() => { }); }
   await browser.close(); api.close(); srv.close?.();

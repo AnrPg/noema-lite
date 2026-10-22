@@ -2257,6 +2257,18 @@
       }
     }
   },
+  "sh.addPart": "Add a part with Claude",
+  "@sh.addPart": {
+    "description": "Roadmap ⋮ menu item: copy a message for a Claude chat that adds a new part (new steps from new material, e.g. this week's lectures) to this Roadmap, joined to the steps already on it."
+  },
+  "sh.addPartSub": "New material? Copy a message for a Claude chat",
+  "@sh.addPartSub": {
+    "description": "Subtitle of “Add a part with Claude”: for new study material; it copies a message to paste into a chat with Claude."
+  },
+  "sh.addPartCopied": "Copied: paste it into a Claude chat and attach your new material",
+  "@sh.addPartCopied": {
+    "description": "Toast after “Add a part with Claude”: the message is copied; paste it into a Claude chat together with the new files."
+  },
   "sh.copiedForClaude": "Copied: paste it into a Claude chat",
   "@sh.copiedForClaude": {
     "description": "Toast after copying the message for Claude: paste it into a chat with Claude."
@@ -3577,6 +3589,6 @@
   },
   "sh.hideToday": "Hide for today",
   "@sh.hideToday": {
-    "description": "Tooltip and screen-reader label of the small \u00d7 on Today's big 'continue' card: hides that suggestion until tomorrow (the next subject you started takes its place)."
+    "description": "Tooltip and screen-reader label of the small × on Today's big 'continue' card: hides that suggestion until tomorrow (the next subject you started takes its place)."
   }
 }

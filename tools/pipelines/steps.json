@@ -59,6 +59,27 @@
    "doc": "docs/CURRICULUM.md, references/PIPELINES.md §4",
    "gate": "strict"
   },
+  "read_map": {
+   "title": "Read the Roadmap as it stands",
+   "what": "noema_roadmap_map: every step with its permanent \"@id\", its state, its chapters and its parts. Note what the map already teaches (never add it again; in the new steps' knowledge maps it goes to taughtIn) and which steps the new material builds on or prepares.",
+   "check": {
+    "mcp": "noema_roadmap_map"
+   },
+   "doc": "docs/FROM_SOURCES.md §6",
+   "gate": "strict"
+  },
+  "grow": {
+   "title": "Add the new part",
+   "what": "Read every new file, then noema_extend_roadmap with only the NEW steps: refs n1, n2… inside the part, \"@<step id>\" for each connection to the map (prerequisites = what a new step builds on, before = a step not prepared yet that must come after it), every new file used, pages inside their file. Fix every problem it lists and send the whole part again.",
+   "needs": [
+    "read_map"
+   ],
+   "check": {
+    "mcp": "noema_extend_roadmap"
+   },
+   "doc": "docs/FROM_SOURCES.md §6",
+   "gate": "strict"
+  },
   "plan": {
    "title": "Chapter plan",
    "what": "The plan of each step's chapters with its requiredCoverage (noema_curriculum_task \"plan\").",

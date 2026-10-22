@@ -46,6 +46,7 @@ python3 scripts/pipeline.py status work/demo                # every step: todo /
 | 5 | Add to an existing subject | new material (`unpack.py`, `patches/`) | classify → map → pictures → write → blind_solve → review → translate → bridges → checks → upload |
 | 6 | Language help 文A | a bridge for a pack | classify → bridges |
 | 7 | Translate a pack | a pack into another language | classify → translate → checks → upload |
+| 9 | Grow a Roadmap: a new part | new material for a Roadmap that exists (`--grow`; the app's ⋮ → *Add a part with Claude*) | classify → read_map → grow → plan → start_subject → map → pictures → write → blind_solve → review → translate → bridges → checks → upload → next |
 | 8 | Import a map or a subject | a Roadmap file or a pack the learner made | classify → import |
 | L1 | Γ1 · A task of a language course | `noema_lang_task` | classify → L.brief → L.task → L.order → L.words → L.grammar → L.notes → L.sentences → L.exercises → L.green |
 | L2 | Γ2 · A new language in a course | "add Persian to my course" | classify → L.brief → L.phenomena → L.params → L.order → L.words → L.grounding → L.grammar → L.notes → L.sentences → L.exercises → L.package → L.facades → L.green |
@@ -59,6 +60,7 @@ python3 scripts/pipeline.py status work/demo                # every step: todo /
 | Step | Check |
 | --- | --- |
 | shape, dag, audit, expand, plan | the connector accepts it (`noema_create_roadmap`, `noema_curriculum_submit`) |
+| read_map, grow | `noema_roadmap_map` was read; `noema_extend_roadmap` accepts the new part (every `"@id"` on the map, every new file used, no cycle, joined to the map — docs/FROM_SOURCES.md §6) |
 | start_subject | `subject.json` with `authoring.rules` ≥ 2 and the `map/`, `review/` folders |
 | map | every `map/chNN.json` passes the map rules (`map.*`, known values in `fits` / `unfit`) |
 | pictures | judgement: every picture kept teaches what the text cannot (docs/VISUAL.md §5) |

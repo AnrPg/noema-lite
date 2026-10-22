@@ -19,7 +19,7 @@ Scripts live in `scripts/` next to this file (Python 3, standard library + Pillo
 
 **Work through a flow, step by step (`references/PIPELINES.md`).** First find the flow, then let each step's check say it
 is done before the next one — never skip a step:
-`python3 scripts/pipeline.py detect --sources N --topics N` (or `--step`, `--extend`, `--bridge`, `--translate`…) →
+`python3 scripts/pipeline.py detect --sources N --topics N` (or `--step`, `--grow`, `--extend`, `--bridge`, `--translate`…) →
 after `start_subject.py`: `python3 scripts/pipeline.py start <flow> work/<id>` → repeat `pipeline.py next work/<id>` /
 `pipeline.py check work/<id> <step>` (connector calls and judgements: `pipeline.py done work/<id> <step> --note "…"`).
 A change to a file re-opens its step and every step after it. Without the skill, `noema_pipeline` gives the same flows.
@@ -184,10 +184,29 @@ that every file the user gave you (or each of its parts) is there.
 - **Without it** (or if the upload fails): give the user the **`<id>.noema.zip` package** and tell them:
   *noema-lite → subject picker → 📥 Import subject pack* (choose the .zip — the source files come with it).
 
+## 0c. Grow a Roadmap in parts (new material for a Roadmap that exists)
+Courses are not known ahead: the learner brings the next lectures week by week. New material for a Roadmap that exists
+(the same course or subject area, or the learner says *add this to my Roadmap* — the app's ⋮ → *Add a part with Claude*
+message) **grows that Roadmap by a new part — never a second Roadmap** (flow 9: `pipeline.py detect --grow`).
+1. `noema_roadmap_map(curriculum_id)`: every step in study order with its **`@id` — its permanent connection point** —
+   its state, its chapters and the parts so far. Note what the map already teaches.
+2. Read every new file (pages, outline), as in §0b.
+3. `noema_extend_roadmap(curriculum_id, plan_json)` with only the NEW steps: `{ "part": "Week 5 — Thermodynamics",
+   "summary": "…", "steps": [{ "ref": "n1", "title": "…", "role": "…", "prerequisites": ["@heat_and_work"],
+   "files": ["week5/lecture9.pdf pp. 1–30"] }, { "ref": "n2", …, "prerequisites": ["n1"], "before": ["@exam_revision"] }],
+   "files": [{ "path": "week5/lecture9.pdf", "pages": 30 }] }`. The one canonical way to name a connection: **`"@<step id>"`**
+   — in `prerequisites` for what a new step builds on, in `before` for a step on the map (not prepared yet) that must come
+   after it; plain refs (`n1`) name the part's own steps. A topic the map already has is linked, never added again; every
+   part is joined to the map (`independent: true` only when it truly builds on nothing there). Fix every listed problem and
+   send the whole part again. Nothing already prepared changes; the new steps are queued for you in study order.
+4. Go on as in *Curricula* below: `noema_curriculum_task` hands you the chapter plans of the new steps, then each step. In
+   each new step's knowledge map, points the map already teaches go to `taughtIn` (exhaustive, never re-taught).
+5. Translate the new steps' titles and summaries with `noema_save_roadmap_translation` (the tool's answer lists them).
+
 ## Curricula: steps, maps and chapter plans (noema-lite connector)
 A noema-lite **curriculum** is a map of steps; every step becomes a subject pack. When the learner asks you to work on one
 (“prepare the next step of my curriculum…”, or the prompt *Work on my noema-lite curriculum*):
-1. A new Roadmap from the learner's own material: `noema_create_roadmap` (§0b). `noema_curricula` shows what waits; `noema_curriculum_task(curriculum_id)` returns the next task as complete instructions.
+1. A new Roadmap from the learner's own material: `noema_create_roadmap` (§0b); new material for one that exists: a new part (§0c). `noema_curricula` shows what waits; `noema_curriculum_task(curriculum_id)` returns the next task as complete instructions.
 2. **Map / chapter-plan tasks** (agents of the curriculum): think it through, then `noema_curriculum_submit(curriculum_id,
    task_id, result_json)` with ONE JSON object matching the task's schema. It is checked like the app's own agents — fix
    every listed problem and submit again. Then ask for the next task. A chapter-plan task for steps with the learner's

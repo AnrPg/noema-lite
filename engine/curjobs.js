@@ -173,6 +173,7 @@
       if (e.kind === 'step') { const n = cc.nodes[e.nid]; if (n && !n.pack?.assigned) n.pack = { ...(n.pack || {}), id: e.packId, status: 'ready' }; continue; }
       if (e.kind === 'assign') { const n = cc.nodes[e.nid]; if (n && !C().Edit?.cannotAssign?.(cc, n)) attachTo(cc, n, e); continue; }
       if (e.kind === 'i18n') { if (!C().checkI18n(cc, e.locale, e.data).length) C().setI18n(cc, e.locale, e.data); continue; }   // 🌐 a Roadmap translation (noema_save_roadmap_translation)
+      if (e.kind === 'extend') { if (!extendProblems(cc, e).length) extend(cc, e); continue; }   // 🌱 a new part of the Roadmap (noema_extend_roadmap)
       const t = byId(cc, e.task); if (t && !check(cc, t, e.data).length) apply(cc, t, e.data);
     }
     return cc;
@@ -185,6 +186,38 @@
     n.assignedAt = at; if (c.shared && !c.shared.ended && !n.groupPlan) n.groupPlan = C().planOf(n);
     if (n.chapters?.length || c.stage === 'done') { n.replan = true; n.replanAt = C().stampAfter(n.plannedAt, n.replanAt); n.planFrom = 'pack'; } delete n.reviewed;
     if (c.stage === 'done') c.stage = 'plan';
+  }
+  /** 🌱 A new part of the Roadmap (noema_extend_roadmap → NoemaSourcePlan.extendFromClaude, docs/FROM_SOURCES.md §6): can it
+      still be added to this copy? → [] when it can, ['applied'] when it is here already, else the problems (e.g. this copy
+      does not have yet a step it links to: the entry waits). */
+  /* i18n-ignore-start — problems for the console and the connector, not for the learner */
+  function extendProblems(c, e) {
+    if ((c.parts || []).some(p => p.id === e.part?.id)) return ['applied'];
+    const p = [], nodes = e.nodes || {}, ids = new Set([...Object.keys(c.nodes || {}), ...Object.keys(nodes)]);
+    if (!e.part?.id || !Object.keys(nodes).length) p.push('an empty part');
+    for (const id of Object.keys(nodes)) if (c.nodes[id]) p.push(`step id "${id}" is taken`);
+    for (const x of e.edges || []) {
+      if (!ids.has(x.from) || !ids.has(x.to)) p.push(`a link to a step this copy does not have (${x.from} → ${x.to})`);
+      else if (!nodes[x.to] && (c.nodes[x.to].pack?.assigned || ['ready', 'generating'].includes(c.nodes[x.to].pack?.status))) p.push(`“${c.nodes[x.to].title}” is prepared already: it gets no new prerequisite`);
+    }
+    if (!p.length && !C().topo([...ids], [...(c.edges || []), ...(e.edges || [])])) p.push('the links form a cycle');
+    return p;
+  }
+  /* i18n-ignore-end */
+  /** Add the part (mutates c; check extendProblems first): its steps (planned next, and queued for the Claude app in study
+      order when it was asked to prepare them), its links, and the part itself in c.parts — the first part being the map as it was. */
+  function extend(c, e) {
+    const at = e.part.at || new Date().toISOString();
+    if (!c.parts?.length) c.parts = [{ id: 'p1', title: c.title || c.goal, at: c.fromSources?.at || c.created || at, steps: Object.keys(c.nodes) }];
+    for (const [id, n] of Object.entries(e.nodes)) c.nodes[id] = { chapters: [], learningGoals: [], ...clone(n), id, part: C().PART[n.role] || 'core', addedIn: e.part.id };
+    for (const x of e.edges || []) if (!c.edges.some(y => y.from === x.from && y.to === x.to)) c.edges.push({ from: x.from, to: x.to, why: x.why || '' });
+    c.parts.push({ id: e.part.id, title: e.part.title, ...(e.part.summary ? { summary: e.part.summary } : {}), at, steps: Object.keys(e.nodes) });
+    c.paths = { minimal: c.paths?.minimal || [], deep: C().order(c) };
+    if (e.prepare) { const t0 = Date.parse(at) || Date.now(); C().order(c).filter(id => e.nodes[id]).forEach((id, i) => { c.nodes[id].pack = { id: C().packId(c, id), status: 'app', queuedAt: new Date(t0 + i).toISOString(), error: null, auto: false }; c.nodes[id].reviewed = at; }); }
+    if (c.stage === 'done' && Object.keys(e.nodes).some(id => needsPlan(c.nodes[id]))) c.stage = 'plan';
+    if (isApp(c) && !GRAPH.includes(c.stage)) { c.status = 'ready'; c.error = null; c.errorInfo = null; }
+    (c.log = c.log || []).push({ t: Date.now(), m: '🌱 ' + rt('roadmap.jobs.partAdded', { title: e.part.title, n: Object.keys(e.nodes).length }), via: 'claude-app' });
+    return true;
   }
   const inboxKey = (cid, seq) => `${IN}${cid}:${seq || Date.now().toString(36).padStart(9, '0') + '-' + Math.random().toString(36).slice(2, 6)}`;
 
@@ -202,7 +235,9 @@
   /** Steps made by the learner's Claude from files in its own chat (noema_create_roadmap): those files, per step. */
   function chatText(c, ids) {
     const rows = ids.map(id => c.nodes[id]).filter(n => n?.chatFiles?.length);
-    return rows.length ? `\n\n## The learner's files — in the Claude chat where this Roadmap was made\nThe learner gave these files to Claude when the Roadmap was made from them; they are THE sources of these steps: read every page that belongs to a step and anchor its chapters to them. If this chat does not have them, ask the learner to attach them.\n${rows.map(n => `- “${n.title}”: ${n.chatFiles.join('; ')}`).join('\n')}` : '';
+    const where = n => { const p = n.addedIn && (c.parts || []).find(x => x.id === n.addedIn); return p ? `the Claude chat where the part “${p.title}” was added` : 'the Claude chat where this Roadmap was made'; };
+    const chats = [...new Set(rows.map(where))];
+    return rows.length ? `\n\n## The learner's files — in ${chats.length === 1 ? chats[0] : 'the Claude chats named below'}\nThe learner gave these files to Claude when ${chats.length === 1 && !/part/.test(chats[0]) ? 'the Roadmap was made from them' : 'these steps were made from them'}; they are THE sources of these steps: read every page that belongs to a step and anchor its chapters to them. If this chat does not have them, ask the learner to attach them.\n${rows.map(n => `- “${n.title}”${chats.length > 1 ? ` (${where(n).replace(/^the Claude chat /, 'in the chat ')})` : ''}: ${n.chatFiles.join('; ')}`).join('\n')}` : '';
   }
   /** A step to prepare as text. fileLines: how to get each file into the sandbox (signed links, or “attached to this chat”). */
   function stepText(c, t, { mode = 'connector', fileLines = [] } = {}) {
@@ -225,6 +260,10 @@
     if (w.graph || w.toPlan.length) parts.push('plan the chapters of its steps');
     if (w.steps.length) parts.push(`prepare ${Math.min(count, w.steps.length) > 1 ? `the next ${Math.min(count, w.steps.length)} queued steps, one after the other` : 'the next queued step'}`);
     return `Use the noema-lite connector to work on my noema-lite curriculum “${c.title || c.goal}” (id ${c.id}): ${parts.join(', then ') || 'see what is left to do'}.\nCall noema_curriculum_task with curriculum_id "${c.id}" and follow what it returns; after each accepted answer or saved step call it again — ${count > 1 ? `stop after ${count} prepared steps or` : 'stop after one prepared step or'} when it says there is nothing left. Do not ask me questions — choose sensible defaults.${talkIn(c)}`;
+  }
+  /** 🌱 The message for a Claude chat that adds a new part to this Roadmap from new material (the map's ⋮ → Add a part with Claude). */
+  function growMessage(c) {
+    return `Use the noema-lite connector to add a new part to my noema-lite Roadmap “${c.title || c.goal}” (id ${c.id}) from the material I attach to this chat (or describe here).\nCall noema_pipeline with action detect and facts.grow = true, and follow its steps: read the map with noema_roadmap_map, read every file, then add the new steps with noema_extend_roadmap — each joined to the steps already on the map by their "@id" — and plan and prepare the new steps with noema_curriculum_task. Do not add again what the map already teaches. Do not ask me questions — choose sensible defaults.${talkIn(c)}`;
   }
   /** The language the learner reads Claude's messages in (engine/llm.js replyLang), when it is not English: the curriculum keeps its own. */
   const talkIn = c => { const r = L()?.replyLang?.(); return !r || /^en\b/.test(r.code) ? '' : ` Write your messages to me in ${r.name}${r.address ? ` (${r.address})` : ''}; the curriculum itself stays in ${LANGN(c)}.`; };
@@ -261,7 +300,7 @@
     return true;
   };
   /** The kinds of inbox entry this build knows, besides a task's answer ({ task }). Anything else (written by a newer connector) stays for a newer app. */
-  const KINDS = ['step', 'assign', 'i18n'];
+  const KINDS = ['step', 'assign', 'i18n', 'extend'];
   /** Fetch the answers waiting in the cloud, check and apply them, delete them. → how many were applied */
   App.poll = async (acc = App.acc) => {
     const CL = root.NoemaCloud; if (!acc || App.busy || !CL?.session?.() || !CL.kvRows) return 0;
@@ -289,6 +328,11 @@
             const errs = C().checkI18n(c, e.locale, e.data);
             if (!errs.length) { C().setI18n(c, e.locale, e.data); C().save(acc, c); n++; }
             else { console.warn('[curjobs] translation refused', errs); if (age < 7 * 864e5) continue; }   // 🛡 e.g. a step this copy does not have yet: try again later, never lose it at once
+          }
+          else if (e.kind === 'extend') {   // 🌱 Claude added a new part to the Roadmap, joined to steps already on it
+            const errs = extendProblems(c, e);
+            if (!errs.length) { extend(c, e); C().save(acc, c); n++; toast('🌱 ' + rt('roadmap.jobs.partAdded', { title: e.part.title, n: Object.keys(e.nodes).length }), 5000); }
+            else if (errs[0] !== 'applied') { console.warn('[curjobs] part refused', errs); if (age < 7 * 864e5) continue; }   // 🛡 e.g. this copy has not got a step it links to yet: try again later
           }
           else {
             const t = byId(c, e.task);   // null: applied already (an earlier check) — or out of date
@@ -364,5 +408,5 @@
     return { title: c.nodes[nid].title };
   };
 
-  root.NoemaCurJobs = { work, settle, attachTo, savedSince, claimKey, CLAIM, LEASE, next, byId, planGen, check, apply, merged, spec, stepSpec, planBatch, downloadsOf, taskText, taskLabel, stepText, message, inboxKey, needsPlan, prepared, isApp, BATCH, BATCH_FILES, IN, App };
+  root.NoemaCurJobs = { work, settle, extend, extendProblems, growMessage, attachTo, savedSince, claimKey, CLAIM, LEASE, next, byId, planGen, check, apply, merged, spec, stepSpec, planBatch, downloadsOf, taskText, taskLabel, stepText, message, inboxKey, needsPlan, prepared, isApp, BATCH, BATCH_FILES, IN, App };
 })(typeof window !== 'undefined' ? window : globalThis);

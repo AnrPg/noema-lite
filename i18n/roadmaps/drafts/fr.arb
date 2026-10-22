@@ -58,6 +58,7 @@
   "roadmap.jobs.stepReady": "« {title} » — préparée par ton application Claude — est prête à être étudiée",
   "roadmap.jobs.newVersion": "Une version plus récente de noema-lite est disponible — elle s’ouvrira la prochaine fois que vous reviendrez sur cet onglet",
   "roadmap.jobs.attached": "« {subject} » enseigne désormais « {step} »{replan, select, yes { — cette étape est replanifiée} other {}}",
+  "roadmap.jobs.partAdded": "Nouvelle partie « {title} » : {n, plural, one {# étape ajoutée} many {# étapes ajoutées} other {# étapes ajoutées}} à la carte",
   "roadmap.jobs.notHere": "Ce parcours n’est pas sur cet appareil.",
   "roadmap.jobs.taskDone": "Cette tâche est déjà faite (ou le parcours a changé) — copie à nouveau la tâche actuelle.",
   "roadmap.jobs.notJson": "Ce n’est pas une réponse JSON — colle exactement ce que Claude a répondu (l’objet JSON).",
