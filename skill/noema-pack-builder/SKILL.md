@@ -296,8 +296,9 @@ pack is not changed. Contract and rules: `references/BRIDGE.md` (or `noema_bridg
 4. Write `bridges/<native>.json`: one translation per sense (the term the learner's own lectures would use, a plain
    explanation in brackets when needed), a 2–4 sentence preview per section, `"status": "draft"`.
 5. `python3 scripts/bridge.py check <pack.json>` (0 errors) and `coverage`; chapter by chapter, complete each.
-6. `python3 scripts/bridge.py build <pack.json> --native ru -o ru.bridge.json` → save it with `noema_save_bridge`
-   (or the learner imports the file with 📥). Learners' *Report a mistake* notes come back in `noema_bridge_guide`.
+6. `python3 scripts/bridge.py build <pack.json> --native ru -o ru.bridge.json` → save it with `noema_save_bridge`:
+   call it with `subject_id` + `native` only, run the `curl` upload it returns on `ru.bridge.json`, then call it again
+   (never paste a bridge into the call: they are 50–150 KB). Or the learner imports the file with 📥. Learners' *Report a mistake* notes come back in `noema_bridge_guide`.
    The connector's prompt `language_help` runs these steps.
 
 ## Quality bar (check before saving)

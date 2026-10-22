@@ -147,7 +147,9 @@ python3 tools/bridge.py build SUBJ --native ru -o ru.bridge.json
 ```
 `SUBJ` is a library subject folder or a pack `.json` (the learner's pack, from `noema_get_pack_url`) with `bridges/`
 beside it. Then **📥 Import** the built file in the app, or save it with the connector: `noema_bridge_guide` (this text,
-the account's bridges and the learners' reports) and `noema_save_bridge` (checked exactly as the app checks it).
+the account's bridges and the learners' reports) and `noema_save_bridge` (checked exactly as the app checks it). Send the file with its upload command, not inline:
+`noema_save_bridge(subject_id, native)` → `curl` the file to the URL it returns → the same call again; the upload
+goes live only once it passes the check. Publishing a draft is the same save with `"status": "reviewed"`.
 
 Writing rules: translate the meaning the word has **in this pack** (the gloss), for a student of the field — the term
 the student's own lectures would use, then a plain explanation in brackets when the term alone may not be known
