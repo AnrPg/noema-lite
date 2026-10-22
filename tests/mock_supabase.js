@@ -303,7 +303,13 @@ function start({ port = 54321, staticDir = null, configOverride = null, maxObjec
       if ((m = p.match(/^\/storage\/v1\/object\/authenticated\/noema-shared\/(.+)$/))) { const k = decodeURIComponent(m[1]); const sh = shares.find(x => x.id === k.split('.')[0]); if (!sh || !(sh.from_user === uid || sh.to_email === myEmail) || !shrFiles[k]) return json(res, 404, { message: 'Object not found' }); res.writeHead(200, Object.assign({ 'Content-Type': shrFiles[k].type || 'application/octet-stream' }, cors)); return res.end(shrFiles[k].data); }
       if ((m = p.match(/^\/storage\/v1\/object\/upload\/sign\/noema-private\/(.+)$/)) && req.method === 'POST') { const k = decodeURIComponent(m[1]); if (k.split('/')[0] !== uid) return json(res, 403, { message: 'rls' }); const t = crypto.randomUUID(); signed[t] = 'up:' + k; return json(res, 200, { url: `/object/upload/sign/noema-private/${k}?token=${t}`, token: t }); }
       if ((m = p.match(/^\/storage\/v1\/object\/sign\/noema-private\/(.+)$/)) && req.method === 'POST') { const k = decodeURIComponent(m[1]); if (k.split('/')[0] !== uid || !files[k]) return json(res, 400, { message: 'Object not found' }); const t = crypto.randomUUID(); signed[t] = 'dl:' + k; return json(res, 200, { signedURL: `/object/sign/noema-private/${k}?token=${t}` }); }
-      if ((m = p.match(/^\/storage\/v1\/object\/authenticated\/noema-private\/(.+)$/))) { const k = decodeURIComponent(m[1]); if (k.split('/')[0] !== uid || !files[k]) return json(res, 404, { message: 'Object not found' }); res.writeHead(200, Object.assign({ 'Content-Type': files[k].type || 'application/octet-stream' }, cors)); return res.end(files[k].data); }
+      if ((m = p.match(/^\/storage\/v1\/object\/authenticated\/noema-private\/(.+)$/))) {
+        const k = decodeURIComponent(m[1]); if (k.split('/')[0] !== uid || !files[k]) return json(res, 404, { message: 'Object not found' });
+        // state.cdn = {}: a CDN in front of the storage that keeps the first copy it served, unless the read asks past it
+        const cdn = server.state.cdn, fr = u.searchParams.has('fresh') || /no-cache/.test(req.headers['cache-control'] || '');
+        const f = cdn && !fr ? (cdn[k] = cdn[k] || files[k]) : files[k];
+        res.writeHead(200, Object.assign({ 'Content-Type': f.type || 'application/octet-stream' }, cors)); return res.end(f.data);
+      }
       if ((m = p.match(/^\/storage\/v1\/object\/noema-private\/(.+)$/))) { const k = decodeURIComponent(m[1]); if (k.split('/')[0] !== uid) return json(res, 403, { message: 'new row violates row-level security policy' }); files[k] = { data: buf, type: req.headers['content-type'] }; return json(res, 200, { Key: 'noema-private/' + k }); }
       // ---- /api/img: the picture fetcher Netlify function (cloud/img/proxy.mjs), run in-process; local hosts allowed in tests
       if (p === '/api/img' || p === '/api/file' || p === '/api/imgsearch') {

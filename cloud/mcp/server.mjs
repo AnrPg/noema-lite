@@ -353,7 +353,10 @@ async function langPeers() {
   return out;
 }
 const langPath = (uid, id, ext = 'json') => `${uid}/langs/${id}.${ext}`;
-async function storageJSON(token, path) { try { const r = await sb(`/storage/v1/object/authenticated/noema-private/${path}`, token, { raw: true }); return JSON.parse(await r.text()); } catch (e) { return null; } }
+/** Reads of the learner's own files that must see the latest write (a pack read-modify-written while other saves run):
+    the storage CDN may hand back the copy it cached before (uploads default to max-age 3600), so ask past it. */
+const FRESH = { 'cache-control': 'no-cache' }, fresh = path => `${path}${path.includes('?') ? '&' : '?'}fresh=${Date.now()}`;
+async function storageJSON(token, path) { try { const r = await sb(fresh(`/storage/v1/object/authenticated/noema-private/${path}`), token, { raw: true, headers: FRESH }); return JSON.parse(await r.text()); } catch (e) { return null; } }
 /** The course content as the app last saved it (+ for a library course: the learner's patch laid over it). */
 async function langContent(token, uid, rec) {
   if (rec.origin === 'library') {
@@ -625,7 +628,7 @@ async function callTool(name, args, ctx) {
     case 'noema_finish_upload': {
       if (!ID_RE.test(sid)) return fail('bad subject_id');
       let p;
-      try { const r = await sb(`/storage/v1/object/authenticated/${base}${sid}.json`, token, { raw: true }); p = JSON.parse(await r.text()); }
+      try { const r = await sb(fresh(`/storage/v1/object/authenticated/${base}${sid}.json`), token, { raw: true, headers: FRESH }); p = JSON.parse(await r.text()); }
       catch (e) { return fail(`No uploaded file found for "${sid}" (${e.message.slice(0, 120)}). Run the curl command from noema_start_upload first.`); }
       const res = checkPack(p, sid);
       if (res.errors.length) return fail(`The pack has ${res.errors.length} error(s) — fix them, rebuild with make_pack.py and upload again:\n- ${res.errors.slice(0, 40).join('\n- ')}`);
@@ -638,7 +641,7 @@ async function callTool(name, args, ctx) {
       const res = checkPack(p);
       if (res.errors.length) return fail(`${res.errors.length} error(s):\n- ${res.errors.slice(0, 40).join('\n- ')}`);
       if ((CFG.library || []).some(s => s.id === p.subject.id)) return fail(`"${p.subject.id}" is a library subject id — use a new id.`);
-      await sb(`/storage/v1/object/${base}${p.subject.id}.json`, token, { method: 'POST', body: raw, headers: { 'content-type': 'application/json', 'x-upsert': 'true' } });
+      await sb(`/storage/v1/object/${base}${p.subject.id}.json`, token, { method: 'POST', body: raw, headers: { 'content-type': 'application/json', 'x-upsert': 'true', 'cache-control': 'no-cache' } });
       return complete(token, uid, p.subject.id, p, res, fail, text, user, { curriculum_id: args?.curriculum_id, step: args?.step });
     }
     case 'noema_pipeline': {
@@ -681,19 +684,24 @@ async function callTool(name, args, ctx) {
       }
       const r = PC().checkTranslation(f, p);
       if (r.errors.length) return fail(`${r.errors.length} error(s):\n- ${r.errors.slice(0, 40).join('\n- ')}`);
-      if (raw) await sb(`/storage/v1/object/noema-private/${trPath(uid, sid, loc)}`, token, { method: 'POST', body: raw, headers: { 'content-type': 'application/json', 'x-upsert': 'true' } });
+      if (raw) await sb(`/storage/v1/object/noema-private/${trPath(uid, sid, loc)}`, token, { method: 'POST', body: raw, headers: { 'content-type': 'application/json', 'x-upsert': 'true', 'cache-control': 'no-cache' } });
       // The pack lists its translations and holds the subject's name in each (subject.i18n, from the file's "subject").
       // Storage has no compare-and-swap: saves running at the same time (several agents, several locales) could each write
       // the pack they read and drop the other's entry — so re-read right before writing, check after, and write again while ours is missing.
-      const withOurs = cur => ({ ...cur, v: 2, translations: { ...(cur.translations || {}), [loc]: { file: true, chapters: f.chapters.length } },
-        subject: f.subject ? { ...cur.subject, i18n: { ...(cur.subject?.i18n || {}), [loc]: { ...(cur.subject?.i18n?.[loc] || {}), ...f.subject } } } : cur.subject });
-      const ours = got => got?.translations?.[loc]?.chapters === f.chapters.length && (!f.subject?.title || got.subject?.i18n?.[loc]?.title === f.subject.title);
-      let q = withOurs(p);
+      // Every read is fresh (past the CDN), and every language entry and name any read showed is kept: a write never drops one.
+      const seenT = {}, seenS = {}, see = cur => { Object.assign(seenT, cur?.translations || {}); for (const [l, v] of Object.entries(cur?.subject?.i18n || {})) seenS[l] = { ...(seenS[l] || {}), ...v }; return cur; };
+      const withOurs = cur => ({ ...cur, v: 2, translations: { ...seenT, ...(cur.translations || {}), [loc]: { file: true, chapters: f.chapters.length } },
+        subject: { ...cur.subject, i18n: { ...seenS, ...(cur.subject?.i18n || {}), ...(f.subject ? { [loc]: { ...(cur.subject?.i18n?.[loc] || {}), ...f.subject } } : {}) } } });
+      const ours = got => got?.translations?.[loc]?.chapters === f.chapters.length && (!f.subject?.title || got.subject?.i18n?.[loc]?.title === f.subject.title) &&
+        Object.keys(seenT).every(l => got.translations?.[l]) && Object.keys(seenS).every(l => got.subject?.i18n?.[l]);
+      see(p); let q = withOurs(p);
       for (let i = 0; i < 4; i++) {
-        q = withOurs(i ? (await storageJSON(token, `${uid}/packs/${sid}.json`)) || p : p);
-        await sb(`/storage/v1/object/${base}${sid}.json`, token, { method: 'POST', body: JSON.stringify(q), headers: { 'content-type': 'application/json', 'x-upsert': 'true' } });
+        q = withOurs(see(await storageJSON(token, `${uid}/packs/${sid}.json`)) || p);
+        if (!Object.keys(q.subject.i18n).length) delete q.subject.i18n;
+        await sb(`/storage/v1/object/${base}${sid}.json`, token, { method: 'POST', body: JSON.stringify(q), headers: { 'content-type': 'application/json', 'x-upsert': 'true', 'cache-control': 'no-cache' } });
         await new Promise(r => setTimeout(r, 200 + Math.random() * 400));
         const got = await storageJSON(token, `${uid}/packs/${sid}.json`); if (ours(got)) { q = got; break; }
+        see(got);
       }
       await kvUpdate(token, uid, 'a:packmeta:' + sid, pm => pm && { ...pm, contentLocales: Object.keys(q.translations || {}), ...(q.subject?.i18n ? { i18n: q.subject.i18n } : {}), updatedAt: new Date().toISOString() });
       const st = await stepOfPack(token, sid).catch(() => null), rm = st ? roadmapTodoText(await curState(token, st.c, uid), { only: st.nid }) : '';   // 🌐 its step on the Roadmap is translated with it
@@ -721,7 +729,7 @@ async function callTool(name, args, ctx) {
       const up = !raw && ID_RE.test(sid) && /^[a-z]{2,3}$/.test(want) ? brUpPath(uid, sid, brKey(wsrc, want, wsrc ? await ownOf() : wsrc)) : '';
       if (!raw && !up) return fail('Give subject_id + native (e.g. "ru") — and source when the bridge is made from a translation (e.g. "el") — to get an upload command for the built bridge file, or bridge_json for a small one.');
       if (up) {
-        const r = await sb(`/storage/v1/object/authenticated/noema-private/${up}`, token, { raw: true }).catch(() => null);
+        const r = await sb(fresh(`/storage/v1/object/authenticated/noema-private/${up}`), token, { raw: true, headers: FRESH }).catch(() => null);
         raw = r ? await r.text() : '';
         if (!raw) return text(`Upload the bridge — run in your sandbox (URL valid 2 h):\n\ncurl -sS -X PUT -H "Content-Type: application/json" -H "x-upsert: true" -H "apikey: ${CFG.supabaseKey}" --data-binary @${want}.bridge.json "${await signUrl(token, up)}"\n\n(${want}.bridge.json = the file tools/bridge.py build wrote${wsrc ? ` from the ${wsrc} translation (--from ${wsrc})` : ''}.) Then call noema_save_bridge with subject_id "${sid}", native "${want}"${wsrc ? ` and source "${wsrc}"` : ''} again.`);
       }
