@@ -11,6 +11,7 @@ sed -i.bak 's/"id": "demo-physics"/"id": "secret-notes"/; s/"title": "Demo Physi
 echo "if (typeof localStorage !== 'undefined' && localStorage.getItem('noema-test:newUI') !== '1') Object.assign(window.NOEMA_CONFIG, { askSubjectOnStart: true, onboarding: false, shell: false });" >> "$T/config.js"
 (cd "$T" && python3 tools/build.py site bundle >/dev/null)
 node "$ROOT/tests/shell.js" "$T"
+node "$ROOT/tests/subject_switch.js" "$T"   # opening another subject reopens that one, even over a slow network
 node "$ROOT/tests/search_catalog.js"   # the search catalogue (docs/SEARCH.md)
 node "$ROOT/tests/search.js" "$T"     # search, stable addresses, collections, the practice round
 node "$ROOT/tests/e2e.js" "$T"
