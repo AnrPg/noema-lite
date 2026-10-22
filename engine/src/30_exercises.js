@@ -17,7 +17,7 @@ R.mcq = (ex, api) => {
   const sel = new Set();
   const wrap = h('div', { class: 'opts' });
   const btns = order.map((oi, k) => {
-    const b = h('button', { class: 'opt', onclick: () => { if (api.locked()) return; if (!multi) { sel.clear(); btns.forEach(x => x.classList.remove('sel')); } sel.has(oi) ? sel.delete(oi) : sel.add(oi); b.classList.toggle('sel', sel.has(oi)); if (!multi) api.check(); } },
+    const b = h('button', { class: 'opt', 'data-nf': 'options.' + oi, onclick: () => { if (api.locked()) return; if (!multi) { sel.clear(); btns.forEach(x => x.classList.remove('sel')); } sel.has(oi) ? sel.delete(oi) : sel.add(oi); b.classList.toggle('sel', sel.has(oi)); if (!multi) api.check(); } },
       h('span', { class: 'k' }, String.fromCharCode(65 + k)), h('span', {}, F(ex.options[oi])));
     b._oi = oi; return b;
   });
@@ -27,7 +27,7 @@ R.mcq = (ex, api) => {
     el, keys: k => { const b = btns[k]; b && b.click(); },
     check() { if (!sel.size) return null; return sel.size === ans.size && [...sel].every(x => ans.has(x)); },
     given: () => [...sel].map(oi => String.fromCharCode(65 + oi) + '. ' + ex.options[oi]).join(' + '),
-    reveal() { btns.forEach(b => { const oi = b._oi; if (ans.has(oi)) b.classList.add('right'); else if (sel.has(oi)) b.classList.add('wrong'); if (ex.why?.[oi]) b.children[1].append(h('span', { class: 'why', html: fmt(ex.why[oi]) })); }); },
+    reveal() { btns.forEach(b => { const oi = b._oi; if (ans.has(oi)) b.classList.add('right'); else if (sel.has(oi)) b.classList.add('wrong'); if (ex.why?.[oi]) b.children[1].append(h('span', { class: 'why', 'data-nf': 'why.' + oi, html: fmt(ex.why[oi]) })); }); },
   };
 };
 R.odd = (ex, api) => { const r = R.mcq(ex, api); r.el.querySelector('.opts').classList.add('grid4'); return r; };
@@ -285,7 +285,7 @@ function askBuddyBtn(onclick) {
 }
 function exerciseCard(ex, { onDone, compact = false, noXP = false, showSection = false } = {}) {
   const ch = ex._ch;
-  const card = h('div', { class: 'ex' });
+  const card = h('div', { class: 'ex', 'data-ex': ex.id, 'data-ch': ch?.id || null });   // data-ex, data-nf: where a ⚑ report points (85_locate.js)
   setAccent(card, ch);
   let locked = false, firstTry = true, result = null;
   const api = {
@@ -300,9 +300,9 @@ function exerciseCard(ex, { onDone, compact = false, noXP = false, showSection =
     newPill(ex),
     ex._ai ? h('span', { class: 'pill', style: { background: 'var(--violet-bg)', color: 'var(--violet)' } }, '✨ ' + tE('engine.ex.aiMade')) : null,
     showSection && SEC[ex.section] ? h('span', { class: 'tiny', style: { marginLeft: 'auto' } }, chTitle(ch.num, SEC[ex.section].title)) : null);
-  const q = h('div', { class: 'q', html: fmt(ex.q || '') });
+  const q = h('div', { class: 'q', 'data-nf': 'q', html: fmt(ex.q || '') });
   card.append(head, q);
-  if (ex.code) card.append(h('div', { style: { margin: '0 0 12px' } }, codeBlock(ex.code, ex.lang || guessLang(ex.code))));
+  if (ex.code) card.append(h('div', { 'data-nf': 'code', style: { margin: '0 0 12px' } }, codeBlock(ex.code, ex.lang || guessLang(ex.code))));
   const w = (R[ex.type] || R.mcq)(ex, api);
   card.append(w.el);
   const actions = h('div', { class: 'actions' });
@@ -336,7 +336,7 @@ function exerciseCard(ex, { onDone, compact = false, noXP = false, showSection =
     if (!ex._ai) record(ex, ok, true, sure);
     const xp = ok ? 4 + ex.difficulty * 4 + (w.bonus?.() || 0) : 1;
     if (!noXP) addXP(xp, card);
-    const exp = h('div', { class: 'explain ' + (ok ? 'ok' : 'bad') }, h('div', { class: 'hd' }, ok ? pickOne([['✅', 'nailed'], ['✅', 'correct'], ['🎉', 'yes'], ['✅', 'spotOn'], ['🔥', 'exactly']].map(([i, k]) => i + ' ' + tE('engine.ex.ok.' + k))) : pickOne([['💡', 'notQuite'], ['🧠', 'learning'], ['💡', 'close']].map(([i, k]) => i + ' ' + tE('engine.ex.bad.' + k)))), h('div', { html: fmt(ex.explain || '') }));
+    const exp = h('div', { class: 'explain ' + (ok ? 'ok' : 'bad') }, h('div', { class: 'hd' }, ok ? pickOne([['✅', 'nailed'], ['✅', 'correct'], ['🎉', 'yes'], ['✅', 'spotOn'], ['🔥', 'exactly']].map(([i, k]) => i + ' ' + tE('engine.ex.ok.' + k))) : pickOne([['💡', 'notQuite'], ['🧠', 'learning'], ['💡', 'close']].map(([i, k]) => i + ' ' + tE('engine.ex.bad.' + k)))), h('div', { 'data-nf': 'explain', html: fmt(ex.explain || '') }));
     if (sure === 'sure' && !ok) exp.append(h('div', { class: 'tiny confnote' }, '⚠️ ' + tE('engine.ex.confWrong')));
     else if (sure === 'guess' && ok) exp.append(h('div', { class: 'tiny confnote' }, '🎲 ' + tE('engine.ex.confLucky')));
     const cite = citeChip(ex); if (cite) exp.append(cite);

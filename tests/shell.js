@@ -146,7 +146,7 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
 
   console.log('E. Me');
   { const items = await menuItems(page, '#ns-topme');
-    ok(JSON.stringify(items) === JSON.stringify(['Me', 'Settings', 'Help', 'My subjects', 'Switch account', 'Log out']), 'Me ▾: Me · Settings · Help · My subjects — Switch account · Log out: ' + items.join(' · '));
+    ok(JSON.stringify(items) === JSON.stringify(['Me', 'Settings', 'Help', 'My subjects', 'Report a problem', 'Switch account', 'Log out']), 'Me ▾: Me · Settings · Help · My subjects · Report a problem (phones) — Switch account · Log out: ' + items.join(' · '));
     await page.click('#ns-topme'); await wait(250);
     ok(await page.$$eval('.ns-pop.ns-mepop > hr', l => l.length) === 1 && await page.$eval('.ns-pop.ns-mepop', p => { const r = p.getBoundingClientRect(); return r.right <= innerWidth && r.top > 0; }), 'a line before Switch account / Log out; the menu stays on the screen');
     await page.click('#ns-topme'); await wait(200);

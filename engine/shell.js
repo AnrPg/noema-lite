@@ -109,6 +109,8 @@ window.NoemaShell = (() => {
     F.share = h('div', { class: 'sharebar', role: 'status' });
     F.tabs = h('nav', { class: 'ns-tabs', 'aria-label': L('mainNav') });
     F.railMe = h('button', { class: 'ns-railme', 'data-pop': '1', 'aria-haspopup': 'menu', 'aria-expanded': 'false', onclick: e => { e.stopPropagation(); meMenu(F.railMe, true); } }, h('span', { class: 'ns-me' }, h('span', { class: 'ns-meemo' })), h('span', { class: 'ns-mename' }, L('me')));
+    // ⚑ report a problem (engine/report.js, docs/REPORTS.md): at the foot of the side bar, above Me; on phones in Me ▾
+    F.railReport = h('button', { class: 'ns-railreport nr-skip', id: 'ns-report', title: RL('buttonTip'), 'aria-label': RL('button'), onclick: e => { e.stopPropagation(); window.NoemaReport?.open(); } }, svg('report'), h('i', { class: 'ns-dot', 'aria-hidden': 'true' }));
     // "Me" (top right on phones) opens the same menu: Me · Settings · Help · My subjects — Switch account · Log out
     Object.assign(F.topMe.dataset, { pop: '1' }); F.topMe.setAttribute('aria-haspopup', 'menu'); F.topMe.setAttribute('aria-expanded', 'false');
     F.top.addEventListener('click', e => { if (e.target.closest('#ns-topme')) { e.stopPropagation(); meMenu(F.topMe); } }, true);
@@ -117,10 +119,10 @@ window.NoemaShell = (() => {
     F.fab = h('button', { class: 'ns-fab full', id: 'ns-fab', onclick: () => chromeNow.tutor ? chromeNow.tutor() : ENGINE ? ENGINE.openTutor?.() : Promise.resolve(N().ensureEngine?.()).then(ok => ok ? ENGINE?.openTutor?.() : toast(L('needSubject'), 4000)) }, h('span', { class: 'ns-fabface breathe' }), h('span', { class: 'nm' }));
     F.fx = h('div', { class: 'ns-fx', id: 'ns-fx' });
     F.layer = h('div', { class: 'ns-layer', id: 'ns-layer' });
-    document.body.prepend(F.land, F.pv, F.brand, F.top, F.share, F.tabs, F.railMe);
+    document.body.prepend(F.land, F.pv, F.brand, F.top, F.share, F.tabs, F.railMe, F.railReport);
     if (!F.main.isConnected) document.body.append(F.main);
     document.body.append(F.fab, F.fx, F.layer);
-    drawMe(); drawTabs(); paintCharacter(); wireNotes(); wireSocial(); wireSync(); wireScroll();
+    drawMe(); drawTabs(); paintCharacter(); wireNotes(); wireSocial(); wireSync(); wireScroll(); wireReports();
     TH()?.onChange((m, why) => { if (why === 'tick') { drawPreview(); return; } paintCharacter(m); if (ENGINE?.retheme) ENGINE.retheme(); if (!F.layer.querySelector('.ns-onb')) route(); });
     noteTrail();
     addEventListener('hashchange', () => { noteTrail(); route(); restoreScroll(); });
@@ -664,6 +666,20 @@ window.NoemaShell = (() => {
   const weekKey = () => { const d = new Date(); d.setHours(0, 0, 0, 0); d.setDate(d.getDate() - ((d.getDay() + 6) % 7)); return d.toISOString().slice(0, 10); };
   function rememberMedals(n) { const k = `noema1:${acc()}:meta:medals`, was = jget(k, null); jset(k, n); if (was != null && n > was) window.NoemaReact?.big('medal'); }
 
+  /* ---------- ⚑ problem reports (engine/report.js): the words, and whether this account reviews them (an admin) ---------- */
+  const RL = (k, v) => window.NoemaI18n ? NoemaI18n.t('report.' + k, v, uiPref()) : k;
+  const reports = { admin: false, fresh: 0 };
+  function wireReports() {
+    const R = window.NoemaReport; if (!R?.isAdmin) return;
+    const check = () => R.isAdmin().then(ok => { reports.admin = ok; return ok ? R.newCount() : 0; }).then(n => { reports.fresh = n || 0; F.railReport.classList.toggle('has-dot', reports.fresh > 0); }).catch(() => { });
+    check(); addEventListener('hashchange', () => { if (/^#\/admin/.test(location.hash) || reports.admin) check(); });
+  }
+  /* ---------- 🛠️ admin pages (#/admin/reports[/<id>]): engine/report.js draws them ---------- */
+  PAGES.admin = ([what, ...rest]) => {
+    if (what !== 'reports' || !window.NoemaReport) { location.replace('#/'); return; }
+    NoemaReport.page(rest, { page, h, L, go, pill, svg, chev, sheet, modal, menuButton });
+  };
+
   /* ---------- Me ▾: a menu — Me (the page others see) · Settings · Help · My subjects — Switch account · Log out ---------- */
   function meMenu(anchor, rail = false) {
     const had = document.querySelector('.ns-pop.ns-mepop'); closePops(); if (had) return;
@@ -672,6 +688,8 @@ window.NoemaShell = (() => {
       { label: L('settings'), sub: L('settingsSub'), icon: 'gear', href: '#/me' },
       { label: L('help'), sub: L('helpSub'), icon: 'help', href: '#/help' },
       { label: L('mySubjects'), sub: L('subjectsSub'), icon: 'book', href: '#/subjects' },
+      window.NoemaReport ? { label: RL('button'), sub: RL('menuSub'), icon: 'report', cls: 'ns-reportitem', run: () => NoemaReport.open() } : null,
+      reports.admin ? { label: RL('adminTitle'), sub: RL('adminSub'), icon: 'list', href: '#/admin/reports', badge: reports.fresh ? String(reports.fresh) : null, tone: 5 } : null,
       '-',
       { label: L('switchAccount'), icon: 'people', run: () => N().openAccountPicker?.() },
       { label: L('logOut'), icon: 'logout', run: logOut }], { down: !rail });
