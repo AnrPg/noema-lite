@@ -186,8 +186,8 @@
    "gate": "strict"
   },
   "translate": {
-   "title": "Translations (en, el, ru)",
-   "what": "A full translation of every chapter into each of English, Greek and Russian other than the pack's language (translations/<locale>/chNN.json: same ids, sections, answers and code; only the words change). make_pack.py writes each as its own file (build/<id>.tr.<locale>.json) and noema_finish_upload asks for them.",
+   "title": "Translations (en, el, ru), the subject's name included",
+   "what": "A full translation of every chapter into each of English, Greek and Russian other than the pack's language (translations/<locale>/chNN.json: same ids, sections, answers and code; only the words change — terms in brackets are translated too), AND the subject's name in each (subject.json \"i18n\": {\"<locale>\": {title, appTitle, description, searchExamples, hero, tutor}} — the card, the title and the tagline the learner sees). In a Roadmap, the step's own words go with it: its title, summary, learning goals, domains and every chapter's title, teaching goals and coverage (noema_save_roadmap_translation). make_pack.py writes each translation as its own file (build/<id>.tr.<locale>.json, with the subject's name) and noema_finish_upload asks for them.",
    "produces": [
     "translations/{locale}/{ch}.json"
    ],
@@ -201,13 +201,15 @@
    ]
   },
   "bridges": {
-   "title": "Language help 文A (en, el, ru, ar)",
-   "what": "A 文A bridge into each of en, el, ru, ar other than the pack's language, everyday words included (learners may be A2/B1): bridge.py todo / build / check — it covers >= 90 % of the content words and >= 80 % of the everyday ones. Save each with noema_save_bridge after the upload.",
+   "title": "Language help 文A — every pair (en, el, ru → en, el, ru, ar)",
+   "what": "A 文A bridge for every pair of the language the learner READS → their native language: from the pack's own language into each of en, el, ru, ar other than it (bridges/<native>.json), AND from each translation into each of en, el, ru, ar other than that translation's language (bridges/from-<locale>/core.json + <native>.json: made from the TRANSLATION's words, so after it — bridge.py todo/build --from <locale>). An English pack: en→el, en→ru, en→ar, el→en, el→ru, el→ar, ru→en, ru→el, ru→ar. Everyday words included (learners may be A2/B1): each covers >= 90 % of the content words and >= 80 % of the everyday ones (bridge.py require checks every pair). Save each with noema_save_bridge after the upload (source = the translation's locale for a translation's bridge).",
    "needs": [
-    "review"
+    "review",
+    "translate"
    ],
    "produces": [
-    "bridges/*.json"
+    "bridges/*.json",
+    "bridges/from-*/*.json"
    ],
    "check": {
     "local": "bridges"

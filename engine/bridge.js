@@ -5,17 +5,19 @@
    plus per section its key terms and a short preview in that language. The pack itself never changes.
      · where bridges come from: the library (tools/build.py → library/subjects/<id>/bridge.<native>.js, listed in the
        registry as bridgeLocales) or the learner's account (a file imported with 📥, or saved by Claude through the
-       connector: noema-private/<uid>/bridges/<pack>.<native>.json + the synced index a:bridges) — attached any time
+       connector: noema-private/<uid>/bridges/<pack>.<pair>.json + the synced index a:bridges) — attached any time
        after the pack was made or published
-     · direction: from the content's language (subject.language) to the learner's native language (a:settings.native,
-       shared with the language courses, D19), else the UI language
+     · direction: from the language the learner READS — the pack's own (subject.language) or the translation shown
+       (docs/i18n.md §10) — to the learner's native language (a:settings.native, shared with the language courses, D19),
+       else the UI language. One bridge = one pair; its key: "<native>" from the pack's own language (as always),
+       "<source>.<native>" from a translation (pairKey; docs/BRIDGE.md §2.4)
      · three levels: open (glosses under most harder words) · balanced (key terms and rare words) · tap (nothing
        shown; every word opens its card). Help fades: a word glossed in many sections without a look-up loses its
        gloss; “I know it” removes it for good (a:bridgeWords:<source>, per source language, synced)
      · each section: a “Before you read” fold (preview + key terms), the words of the theory linked by the central
        word-linking core (engine/wordlink.js); never in exercises, code or maths
    API: NoemaBridge.section({ sid, body, head }) · tag(subject) · attach(acc, bridge) · available(acc, packId) ·
-        load(acc, packId, native) · settings(acc) · menuItem() · panel(acc)
+        load(acc, packId, native, source, own) · settings(acc) · menuItem() · panel(acc) · pairKey(source, native, own)
    ===================================================================================== */
 window.NoemaBridge = (() => {
   'use strict';
@@ -83,7 +85,17 @@ window.NoemaBridge = (() => {
   }
 
   /* ---------- where the bridges are ---------- */
-  const mem = new Map();   // `${acc}|${pack}|${native}` → bridge
+  /** The key of one pair: "<native>" from the pack's own language, "<source>.<native>" from one of its translations. */
+  const pairKey = (src, nat, own) => !src || base(src) === base(own || src) ? base(nat) : `${base(src)}.${base(nat)}`;
+  const pairOf = (key, own) => { const [a, b] = String(key).split('.'); return b ? { src: base(a), nat: base(b) } : { src: base(own || 'en'), nat: base(a) }; };
+  /** The language the subject is written in, and the one the learner reads now (a translation, or the same). */
+  /** The language a subject is written in, and the one the learner reads: the open subject (Noema.subject with the pack)
+      shows a translation when it has sourceLanguage; a card in a list (no pack) will show its contentLang. */
+  const langsOf = (subj, pack) => {
+    const own = base(pack?.subject?.language || subj?.sourceLanguage || subj?.language || 'en');
+    return { own, src: base(pack ? (subj?.sourceLanguage ? subj.language : own) : (subj?.contentLang || own)) };
+  };
+  const mem = new Map();   // `${acc}|${pack}|${pair key}` → bridge
   const DB = {
     db: null,
     open() {
@@ -104,24 +116,29 @@ window.NoemaBridge = (() => {
   const regEntry = id => (window.NOEMA_REGISTRY?.subjects || []).find(s => s.id === id) || null;
   const summary = b => ({ v: hash36(JSON.stringify(b.entries || []) + JSON.stringify(b.sections || {}) + JSON.stringify(b.anchors || [])), status: b.status, coverage: typeof b.coverage === 'number' ? b.coverage : null, everyday: typeof b.everyday === 'number' ? b.everyday : null,
     chapters: (b.chapters || []).length || null, of: b.of || null, previews: Object.values(b.sections || {}).filter(s => s?.preview).length, entries: (b.entries || []).length, at: Date.now() });
-  /** Every native language with a bridge for this pack → { code: { status, coverage, chapters, of, previews, own } } (the account's own wins). */
-  function available(acc, packId, subj) {
+  /** Every native language with a bridge for this pack FROM the language src (default: the pack's own, own) →
+      { code: { status, coverage, chapters, of, previews, own, key } } (the account's own wins). */
+  function available(acc, packId, subj, src, own) {
     const out = {}, reg = subj?.bridgeLocales || regEntry(packId)?.bridgeLocales || {};
-    for (const [c, m] of Object.entries(reg)) out[base(c)] = { ...m, own: false };
-    for (const [c, m] of Object.entries(index(acc)[packId] || {})) out[base(c)] = { ...m, own: true };
+    own = own || subj?.sourceLanguage || subj?.language || regEntry(packId)?.language || src || null;
+    // no language given: the bridges from the pack's own language (keys without a source), whatever that language is
+    const add = (key, m, mine) => { if (!src) { if (!String(key).includes('.')) out[base(key)] = { ...m, own: mine, key: base(key) }; return; }
+      const p = pairOf(key, own); if (p.src === base(src) && p.nat !== base(src)) out[p.nat] = { ...m, own: mine, key: pairKey(p.src, p.nat, own) }; };
+    for (const [c, m] of Object.entries(reg)) add(c, m, false);
+    for (const [c, m] of Object.entries(index(acc)[packId] || {})) add(c, m, true);
     return out;
   }
   const loadScript = src => new Promise((res, rej) => { const s = document.createElement('script'); s.src = src; s.onload = res; s.onerror = () => rej(new Error(src)); document.head.append(s); });
-  /** The bridge of one pack for one native language, or null. */
-  async function load(acc, packId, nat) {
-    acc = accNow(acc); nat = base(nat); const key = `${acc}|${packId}|${nat}`;
+  /** The bridge of one pack for one pair (from src — default the pack's own language — into nat), or null. */
+  async function load(acc, packId, nat, src, own) {
+    acc = accNow(acc); const pk = pairKey(src, nat, own); nat = pk; const key = `${acc}|${packId}|${pk}`;
     if (mem.has(key)) return mem.get(key);
-    const ix = index(acc)[packId]?.[nat];
+    const ix = index(acc)[packId]?.[pk];
     let b = null;
     if (ix) {
       b = await DB.get(key).catch(() => null);
       if ((!b || summary(b).v !== ix.v) && window.NoemaCloud?.session?.()) {
-        const r = await NoemaCloud.downloadObject(`bridges/${packId}.${nat}.json`).catch(() => null);
+        const r = await NoemaCloud.downloadObject(`bridges/${packId}.${pk}.json`).catch(() => null);
         const fresh = r ? await r.json().catch(() => null) : null;
         if (fresh?.format === 'noema-bridge') { b = fresh; DB.put(key, b).catch(() => { }); }
       }
@@ -158,18 +175,18 @@ window.NoemaBridge = (() => {
     const r = C ? C(b, pack) : { errors: [] };
     if (r.errors.length) throw Object.assign(new Error(T('bridge.attach.invalid', { detail: r.errors.slice(0, 3).join(' · ') })), { code: 'bridge.invalid' });
     if (!meta) throw Object.assign(new Error(T('bridge.attach.noPack', { id: b.pack })), { code: 'bridge.no_pack' });
-    const nat = base(b.native), key = `${acc}|${b.pack}|${nat}`;
+    const own = pack?.subject?.language || meta.language || 'en', nat = base(b.native), pk = pairKey(b.source, nat, own), key = `${acc}|${b.pack}|${pk}`;
     await DB.put(key, b).catch(() => { });
-    if (window.NoemaCloud?.session?.() && acc === 'u_' + NoemaCloud.session().user.id) await NoemaCloud.uploadObject(`bridges/${b.pack}.${nat}.json`, new Blob([JSON.stringify(b)], { type: 'application/json' }), 'application/json').catch(e => console.warn('[bridge] upload', e));   // i18n-ignore (a log)
-    const all = index(acc); all[b.pack] = { ...(all[b.pack] || {}), [nat]: summary(b) }; put(aKey(acc, 'bridges'), all);
+    if (window.NoemaCloud?.session?.() && acc === 'u_' + NoemaCloud.session().user.id) await NoemaCloud.uploadObject(`bridges/${b.pack}.${pk}.json`, new Blob([JSON.stringify(b)], { type: 'application/json' }), 'application/json').catch(e => console.warn('[bridge] upload', e));   // i18n-ignore (a log)
+    const all = index(acc); all[b.pack] = { ...(all[b.pack] || {}), [pk]: { ...summary(b), source: base(b.source || own) } }; put(aKey(acc, 'bridges'), all);
     mem.delete(key);
-    return { pack: b.pack, native: nat, title: meta.title || b.pack };
+    return { pack: b.pack, native: nat, source: base(b.source || own), title: meta.title || b.pack };
   }
-  async function detach(acc, packId, nat) {
-    acc = accNow(acc); nat = base(nat);
-    await DB.del(`${acc}|${packId}|${nat}`).catch(() => { });
-    const all = index(acc); if (all[packId]) { delete all[packId][nat]; if (!Object.keys(all[packId]).length) delete all[packId]; put(aKey(acc, 'bridges'), all); }
-    mem.delete(`${acc}|${packId}|${nat}`);
+  async function detach(acc, packId, nat, src, own) {
+    acc = accNow(acc); const pk = pairKey(src, nat, own);
+    await DB.del(`${acc}|${packId}|${pk}`).catch(() => { });
+    const all = index(acc); if (all[packId]) { delete all[packId][pk]; if (!Object.keys(all[packId]).length) delete all[packId]; put(aKey(acc, 'bridges'), all); }
+    mem.delete(`${acc}|${packId}|${pk}`);
   }
 
   /* ---------- the badge: 文A RU +2 (the learner's language first; endonyms in the tooltip) ---------- */
@@ -177,7 +194,7 @@ window.NoemaBridge = (() => {
   function tag(s, acc) {
     if (!s || s.kind === 'language' || String(s.id || '').startsWith('lang:')) return null;
     acc = accNow(acc);
-    const av = available(acc, s.id, s), codes = Object.keys(av); if (!codes.length) return null;
+    const L = langsOf(s), av = available(acc, s.id, s, L.src, L.own), codes = Object.keys(av); if (!codes.length) return null;   // the help for the language the learner will read
     const mine = nativeOrUi(acc);
     codes.sort((a, b) => (b === mine) - (a === mine) || a.localeCompare(b));
     const first = codes[0], weak = codes.every(c => av[c].status !== 'reviewed' || partial(av[c]));
@@ -227,14 +244,14 @@ window.NoemaBridge = (() => {
   /** Called by the engine after it drew a section's blocks (engine/src/40_views.js sectionView). */
   async function section({ sid, body, head }) {
     const acc = accNow(), subj = N().subject, pack = N().pack; if (!body || !subj || !pack?.subject?.id || !WL()) return;
-    const src = base(subj.language || pack.subject.language || 'en'), packId = pack.subject.id;
-    const av = available(acc, packId, N().subjectMeta || regEntry(packId));
+    const { own, src } = langsOf(subj, pack), packId = pack.subject.id;   // src: the language shown — the pack's own or its translation
+    const av = available(acc, packId, N().subjectMeta || regEntry(packId), src, own);
     if (head && !head.querySelector('.nb-btn') && Object.keys(av).length) head.append(button(acc));
     const st = settings(acc), nat = nativeOrUi(acc);
     if (!Object.keys(av).length || (native(acc) && nat === src)) return clear(body);   // no help, or the content is in the learner's own language
     if (!st.asked) { if (!body.querySelector('.nb-ask')) body.prepend(askCard(acc, av, src)); return; }
     if (!st.on || !av[nat] || nat === src) return clear(body);
-    const b = await load(acc, packId, nat);
+    const b = await load(acc, packId, nat, src, own);
     if (!b || base(b.source) !== src || !body.isConnected) return clear(body);
     cur.b = b; cur.sid = sid; cur.body = body; cur.src = src;
     body.classList.add('nb-root'); body.dataset.nbLevel = st.level;
@@ -302,14 +319,15 @@ window.NoemaBridge = (() => {
   }
   function menuItem() {
     const acc = accNow(), pack = N().pack; if (!pack?.subject?.id) return null;
-    if (!Object.keys(available(acc, pack.subject.id, N().subjectMeta)).length) return null;
+    const L = langsOf(N().subject, pack);
+    if (!Object.keys(available(acc, pack.subject.id, N().subjectMeta, L.src, L.own)).length) return null;
     return { label: T('bridge.menu'), icon: '文A', run: () => openPanel(acc, document.querySelector('.nb-btn')) };   // i18n-ignore (the icon)
   }
   /** On/off, level and language — also used in Settings. */
   function panel(acc, { onChange } = {}) {
     acc = accNow(acc);
     const st = settings(acc), box = h('div', { class: 'nb-panel' });
-    const pack = N().pack, av = pack?.subject?.id ? available(acc, pack.subject.id, N().subjectMeta) : {};
+    const pack = N().pack, L = langsOf(N().subject, pack), av = pack?.subject?.id ? available(acc, pack.subject.id, N().subjectMeta, L.src, L.own) : {};
     const sw = h('input', { type: 'checkbox', class: 'nb-on' }); sw.checked = !!(st.on && st.asked);
     sw.addEventListener('change', () => { setSettings(acc, { on: sw.checked, asked: settings(acc).asked || Date.now() }); onChange?.(); });
     const lv = h('div', { class: 'nb-levels', role: 'radiogroup', 'aria-label': T('bridge.level.title') }, ...LEVELS.map(l => {
@@ -392,5 +410,5 @@ window.NoemaBridge = (() => {
   /** The engine asks for help on a section before it knows whether a bridge exists (the ask card waits for the first one). */
   function sectionHook(o) { pending = o; return section(o).catch(e => console.warn('[bridge]', e)); }   // i18n-ignore (a log)
 
-  return { section: sectionHook, tag, attach, detach, available, load, settings, setSettings, native, setNative, words, menuItem, panel, report, FADE, LEVELS, _mem: mem };
+  return { section: sectionHook, tag, attach, detach, available, load, pairKey, settings, setSettings, native, setNative, words, menuItem, panel, report, FADE, LEVELS, _mem: mem };
 })();

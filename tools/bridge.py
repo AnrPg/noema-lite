@@ -7,14 +7,21 @@ Source files of a bridge (next to the subject, or next to a pack.json):
                           senses: [{id, gloss}]}], "keep": [names left as they are], "sections": {sid: {terms}}, "anchors": [...]}
   bridges/<native>.json  {"format": "noema-bridge-locale", "v": 1, "native", "status": draft|reviewed,
                           "t": {"<k>#<sense id>": {t, note?, st?, src?}}, "sections": {sid: "preview in the native language"}}
+  bridges/from-<locale>/core.json + <native>.json   the same, for a learner who reads the pack's TRANSLATION into <locale>
+                          (docs/BRIDGE.md §2.4): its words are the translation's words, "source" is <locale>. Every new pack
+                          gets every pair — from its own language and from each translation (pack_rules.json "bridgesFrom"),
+                          made AFTER the translation: e.g. an English pack → en→el/ru/ar, el→en/ru/ar, ru→en/el/ar.
 
-Commands (SUBJ = a subject folder, or a pack .json with its bridges/ folder beside it):
+Commands (SUBJ = a subject folder, or a pack .json with its bridges/ folder beside it). --from <locale> (every command):
+the bridge of the pack's translation into <locale> — translations/<locale>/chNN.json of a subject folder, or the
+noema-translation file beside a pack .json (<id>.tr.<locale>.json, or --translation FILE); its files in bridges/from-<locale>/.
   python3 tools/bridge.py todo SUBJ [--chapters ch01,ch02] [--limit 400]   content words no entry covers yet (most frequent first)
   python3 tools/bridge.py coverage SUBJ [--native el]                      share of the content words covered, per chapter
   python3 tools/bridge.py check SUBJ                                       core + every native: errors, stale or missing translations, orphan anchors
-  python3 tools/bridge.py require SUBJ                                     check + a bridge into every language a new pack needs (pack_rules.json
-                                                                           "languages": en, el, ru, ar minus its own), each covering >= 90 % of the
-                                                                           content words and >= 80 % of the everyday ones
+  python3 tools/bridge.py require SUBJ                                     check + EVERY pair a new pack needs (pack_rules.json "languages": from its
+                                                                           own language and from each translation into en, el, ru, ar minus the
+                                                                           language read), each covering >= 90 % of the content words and >= 80 %
+                                                                           of the everyday ones (with --from: that translation's pairs only)
   python3 tools/bridge.py stamp SUBJ --native el                           record the current meaning (src) of every translation (after a review)
   python3 tools/bridge.py build SUBJ --native el [-o out.json]             one noema-bridge file (to import with 📥 or save through the connector)
   python3 tools/bridge.py senses SUBJ [--word order]                       every place of a word with several senses, and the sense it gets there
@@ -164,13 +171,37 @@ def wj(p, o):
     os.makedirs(os.path.dirname(os.path.abspath(p)), exist_ok=True)
     with open(p, 'w', encoding='utf-8') as f: json.dump(o, f, ensure_ascii=False, indent=1); f.write('\n')
 
-def load(subj):
-    """→ (pack-like {subject, chapters}, bridge dir). subj: a subject folder or a pack .json."""
+def translated(chapters, tchs):
+    """engine/loader.js translatedChapters: each chapter in the translation's words (same ids); a chapter the translation
+    lacks — or whose sections differ — stays as it is."""
+    tr = {c.get('id'): c for c in tchs or []}; out = []
+    for c in chapters:
+        t = tr.get(c['id'])
+        out.append(t if t and [s.get('id') for s in t.get('sections') or []] == [s.get('id') for s in c.get('sections') or []] else c)
+    return out
+
+def load(subj, src=None, translation=None):
+    """→ (pack-like {subject, chapters}, bridge dir). subj: a subject folder or a pack .json.
+    src: the bridge of the pack's translation into src (docs/BRIDGE.md §2.4) — the translation's chapters, subject.language
+    = src (sourceLanguage = the pack's own), files in bridges/from-<src>/. translation: its noema-translation file."""
     if os.path.isfile(subj):
-        p = rj(subj); return {'subject': p['subject'], 'chapters': p['chapters']}, os.path.join(os.path.dirname(os.path.abspath(subj)), 'bridges')
-    from noema_lib import load_subject
-    meta, _src, chapters, _rep = load_subject(subj)
-    return {'subject': meta, 'chapters': chapters}, os.path.join(subj, 'bridges')
+        p = rj(subj); pack, root = {'subject': p['subject'], 'chapters': p['chapters']}, os.path.dirname(os.path.abspath(subj))
+        tchs = None
+        if src:
+            sid = p['subject']['id']
+            for f in [translation] if translation else [os.path.join(root, f'{sid}.tr.{src}.json'), os.path.join(root, 'build', f'{sid}.tr.{src}.json'), os.path.join(root, 'translations', f'{src}.json')]:
+                t = rj(f) if f else None
+                if t: tchs = t.get('chapters'); break
+            if tchs is None: tchs = ((p.get('translations') or {}).get(src) or {}).get('chapters') if isinstance(((p.get('translations') or {}).get(src) or {}).get('chapters'), list) else None
+    else:
+        from noema_lib import load_subject, load_translations
+        meta, _src, chapters, _rep = load_subject(subj)
+        pack, root = {'subject': meta, 'chapters': chapters}, subj
+        tchs = (rj(translation) or {}).get('chapters') if translation else (load_translations(subj, chapters).get(src) if src else None)
+    if not src or src.split('-')[0].lower() == (pack['subject'].get('language') or 'en').split('-')[0].lower(): return pack, os.path.join(root, 'bridges')
+    if not tchs: raise SystemExit(f'no {src} translation of {pack["subject"]["id"]}: a bridge from a translation is made after it (translations/{src}/chNN.json, or its noema-translation file — --translation FILE)')
+    own = pack['subject'].get('language') or 'en'
+    return {'subject': {**pack['subject'], 'language': src, 'sourceLanguage': own}, 'chapters': translated(pack['chapters'], tchs)}, os.path.join(root, 'bridges', 'from-' + src.split('-')[0].lower())
 
 def sections(pack, chapters=None):
     """[(chapter id, section id, [(block id, [texts])])]"""
@@ -227,7 +258,16 @@ def core_of(bdir, pack):
     return c
 
 def natives(bdir):
-    return sorted(os.path.basename(f)[:-5] for f in glob.glob(os.path.join(bdir, '*.json')) if os.path.basename(f) not in ('core.json', 'anchors.json'))
+    return sorted(os.path.basename(f)[:-5] for f in glob.glob(os.path.join(bdir, '*.json')) if os.path.basename(f) not in ('core.json', 'anchors.json') and not os.path.basename(f).endswith('.bridge.json'))
+
+def from_dirs(bdir):
+    """The translations that have bridges of their own: bridges/from-<locale>/ → [locale]."""
+    return sorted(os.path.basename(d)[5:] for d in glob.glob(os.path.join(bdir, 'from-*')) if os.path.isdir(d))
+
+def pair_key(src, nat, own):
+    """= engine/bridge.js pairKey: "<native>" from the pack's own language, "<source>.<native>" from a translation."""
+    b = lambda x: (x or '').split('-')[0].lower()
+    return b(nat) if not src or b(src) == b(own) else f'{b(src)}.{b(nat)}'
 
 def src_of(e, s):
     return hash36(e['k'] + '|' + (s.get('gloss') or e.get('pos') or ''))
@@ -268,11 +308,25 @@ def require(pack, bdir):
     E, W = check(pack, bdir)
     if E and E[0] == 'no bridges/core.json': return E, W
     want, mins = required(pack); have = set(natives(bdir))
+    rel = os.path.relpath(bdir, os.path.dirname(bdir.rstrip(os.sep))) if os.path.basename(bdir).startswith('from-') else ''
     for nat in want:
-        if nat not in have: E.append(f'no bridge into {nat} yet (bridges/{nat}.json): every new pack gets 文A help in {", ".join(want)}'); continue
+        if nat not in have: E.append(f'no bridge into {nat} yet (bridges/{rel + "/" if rel else ""}{nat}.json): every new pack gets 文A help in {", ".join(want)}'); continue
         b = build(pack, bdir, nat); ev = b.get('everyday', 0)
         if b['coverage'] < mins.get('all', 0): E.append(f'{nat}: covers {b["coverage"]:.0%} of the content words, at least {mins["all"]:.0%} (bridge.py todo lists the rest)')
         if ev < mins.get('everyday', 0): E.append(f'{nat}: covers {ev:.0%} of the everyday words, at least {mins["everyday"]:.0%} — learners at A2/B1 need them too (bridge.py todo)')
+    return E, W
+
+def require_all(subj, translation=None):
+    """require() for every pair a new pack needs: from its own language, then from each translation (pack_rules.json
+    "bridgesFrom") — each translation's bridges come from its own words, so it must exist first. → (errors, warnings)"""
+    from noema_lib import bridge_pairs
+    pack, bdir = load(subj); own = (pack['subject'].get('language') or 'en').split('-')[0].lower()
+    E, W = require(pack, bdir)
+    for src in sorted({s for s, _n in bridge_pairs(own)} - {own}):
+        try: tp, tdir = load(subj, src, None)
+        except SystemExit as e: E.append(f'from {src}: {e}'); continue
+        if not os.path.exists(os.path.join(tdir, 'core.json')): E.append(f'from {src}: no bridges/from-{src}/core.json yet — a learner reading the {src} translation gets 文A help too (bridge.py todo SUBJ --from {src})'); continue
+        e2, w2 = require(tp, tdir); E += [f'from {src}: {x}' for x in e2]; W += [f'from {src}: {x}' for x in w2]
     return E, W
 
 def todo(pack, entries, keep=(), chapters=None, limit=400):
@@ -490,25 +544,37 @@ def anchor(pack, bdir, dry=False):
     return made, report
 
 def build_library(sdir, pack, root=None):
-    """tools/build.py: every bridges/<native>.json of a library subject → bridge.<native>.js + the registry's bridgeLocales."""
+    """tools/build.py: every bridges/<native>.json of a library subject → bridge.<native>.js, and every
+    bridges/from-<locale>/<native>.json (a translation's) → bridge.<locale>.<native>.js + the registry's bridgeLocales
+    (keyed like engine/bridge.js pairKey)."""
     bdir = os.path.join(sdir, 'bridges'); out = {}
     for f in glob.glob(os.path.join(sdir, 'bridge.*.js')): os.remove(f)
-    if not os.path.exists(os.path.join(bdir, 'core.json')): return out
-    E, W = check(pack, bdir)
-    if E: raise SystemExit('bridge errors in ' + bdir + ':\n- ' + '\n- '.join(E))
-    for nat in natives(bdir):
-        b = build(pack, bdir, nat)
-        if not b['entries']: continue
-        name = f'bridge.{nat}.js'
-        body = json.dumps(b, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
-        with open(os.path.join(sdir, name), 'w', encoding='utf-8') as fh:
-            fh.write(f'/* GENERATED 文A language bridge ({b["source"]} → {nat}) of {b["pack"]} — do not edit; edit bridges/ and run tools/build.py */\n'
-                     f'(window.NOEMA_BRIDGES = window.NOEMA_BRIDGES || {{}})[{json.dumps(b["pack"] + "|" + nat)}] = {body};\n')
-        out[nat] = {'path': os.path.relpath(os.path.join(sdir, name), root or os.path.dirname(os.path.dirname(os.path.abspath(__file__)))).replace(os.sep, '/'),
-                    'status': b['status'], 'coverage': b['coverage'], 'chapters': len(b['chapters']), 'of': b['of'], 'previews': sum(1 for s in b['sections'].values() if s.get('preview')), 'entries': len(b['entries'])}
-        print(f'  bridge {b["pack"]} · {b["source"]} → {nat} ({b["status"]}): {len(b["entries"])} words, {b["coverage"]:.0%} of the content words, {len(b["chapters"])}/{b["of"]} chapters')
-    for w in W: print('  WARN bridge: ' + w)
+    jobs = []
+    if os.path.exists(os.path.join(bdir, 'core.json')): jobs.append((pack, bdir))
+    for src in from_dirs(bdir):
+        if os.path.exists(os.path.join(bdir, 'from-' + src, 'core.json')): jobs.append(load(sdir, src))
+    own = pack['subject'].get('language') or 'en'
+    for p, d in jobs:
+        E, W = check(p, d)
+        if E: raise SystemExit('bridge errors in ' + d + ':\n- ' + '\n- '.join(E))
+        for w in W: print('  WARN bridge: ' + w)
+        for nat in natives(d):
+            build_one(sdir, p, d, nat, pair_key(p['subject'].get('language'), nat, own), out, root)
     return out
+
+def build_one(sdir, pack, bdir, nat, key, out, root=None):
+    """One library bridge file bridge.<key>.js (NOEMA_BRIDGES["<pack>|<key>"]) and its registry entry out[key]."""
+    b = build(pack, bdir, nat)
+    if not b['entries']: return
+    name = f'bridge.{key}.js'
+    body = json.dumps(b, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
+    with open(os.path.join(sdir, name), 'w', encoding='utf-8') as fh:
+        fh.write(f'/* GENERATED 文A language bridge ({b["source"]} → {nat}) of {b["pack"]} — do not edit; edit bridges/ and run tools/build.py */\n'
+                 f'(window.NOEMA_BRIDGES = window.NOEMA_BRIDGES || {{}})[{json.dumps(b["pack"] + "|" + key)}] = {body};\n')
+    out[key] = {'path': os.path.relpath(os.path.join(sdir, name), root or os.path.dirname(os.path.dirname(os.path.abspath(__file__)))).replace(os.sep, '/'),
+                'status': b['status'], 'coverage': b['coverage'], 'chapters': len(b['chapters']), 'of': b['of'], 'previews': sum(1 for s in b['sections'].values() if s.get('preview')), 'entries': len(b['entries']),
+                **({'source': b['source']} if key != nat.split('-')[0].lower() else {})}
+    print(f'  bridge {b["pack"]} · {b["source"]} → {nat} ({b["status"]}): {len(b["entries"])} words, {b["coverage"]:.0%} of the content words, {len(b["chapters"])}/{b["of"]} chapters')
 
 def main(argv):
     import argparse
@@ -516,8 +582,15 @@ def main(argv):
     ap.add_argument('cmd', choices=['todo', 'coverage', 'check', 'require', 'stamp', 'build', 'senses', 'anchor', 'terms'])
     ap.add_argument('--dry', action='store_true'); ap.add_argument('--word')
     ap.add_argument('subject'); ap.add_argument('--native'); ap.add_argument('--chapters'); ap.add_argument('--limit', type=int, default=400); ap.add_argument('-o', '--out')
+    ap.add_argument('--from', dest='src', help="the bridge of the pack's translation into this language (made after it): its words, bridges/from-<locale>/")
+    ap.add_argument('--translation', help='with --from and a pack .json: its noema-translation file (default: <id>.tr.<locale>.json beside it)')
     a = ap.parse_args(argv)
-    pack, bdir = load(a.subject); core = core_of(bdir, pack); chs = set(a.chapters.split(',')) if a.chapters else None
+    if a.cmd == 'require' and not a.src:   # every pair: the pack's own language, then each translation
+        E, W = require_all(a.subject)
+        for w in W: print('WARN', w)
+        for e in E: print('ERROR', e)
+        print(f'{len(E)} error(s), {len(W)} warning(s)'); return 1 if E else 0
+    pack, bdir = load(a.subject, a.src, a.translation); core = core_of(bdir, pack); chs = set(a.chapters.split(',')) if a.chapters else None
     if a.cmd == 'todo':
         print(json.dumps(todo(pack, core['entries'], core.get('keep') or [], chs, a.limit), ensure_ascii=False, indent=1))
     elif a.cmd == 'coverage':
@@ -543,7 +616,7 @@ def main(argv):
         print(json.dumps(made, ensure_ascii=False, indent=1) if a.dry else f'{len(made)} section(s) got key words from the text (a person\'s are kept)')
     elif a.cmd == 'build':
         if not a.native: ap.error('--native is required')
-        b = build(pack, bdir, a.native); out = a.out or os.path.join(bdir, f'{pack["subject"]["id"]}.{a.native}.bridge.json')
+        b = build(pack, bdir, a.native); out = a.out or os.path.join(bdir, f'{pack["subject"]["id"]}.{pair_key(pack["subject"].get("language"), a.native, pack["subject"].get("sourceLanguage") or pack["subject"].get("language"))}.bridge.json')
         wj(out, b); print(f'{out}: {len(b["entries"])} words, {b["coverage"]:.0%} covered ({b["everyday"]:.0%} of the everyday words), chapters {", ".join(b["chapters"]) or "-"}')
     return 0
 

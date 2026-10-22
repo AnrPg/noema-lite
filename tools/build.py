@@ -236,8 +236,11 @@ def build_site(metas):
     # the website never has a config.local.js → drop its <script> tag (avoids a 404 + MIME error in the console)
     html = open(os.path.join(ROOT, 'index.html'), encoding='utf-8').read()
     html = '\n'.join(l for l in html.split('\n') if 'config.local.js' not in l)
-    html = html.replace('<script src="config.js"></script>', '<script src="config.js"></script>\n' + build_stamp(), 1)   # ⚑ reports say which build they come from
+    stamp = build_stamp()
+    html = html.replace('<script src="config.js"></script>', '<script src="config.js"></script>\n' + stamp, 1)   # ⚑ reports say which build they come from
     wt(os.path.join(out, 'index.html'), html)
+    # 🛡 the same stamp alone: an open tab of an older build sees it is old (engine/curjobs.js App.stale) and reloads
+    wt(os.path.join(out, 'build.json'), stamp.split(' = ', 1)[1].rsplit(';</script>', 1)[0])
     os.makedirs(os.path.join(out, 'engine'))
     for f in ('langcore.js', 'langui.js', 'langui.css'):
         if os.path.exists(os.path.join(ENGINE, f)): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))
@@ -269,7 +272,7 @@ def build_site(metas):
     build_lang_skill(os.path.join(out, 'downloads', 'noema-language-builder.zip'))
     build_mcp_function(metas, os.path.join(ROOT, 'dist', 'functions'))
     build_img_function(os.path.join(ROOT, 'dist', 'functions'))
-    wt(os.path.join(out, '_headers'), '/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n/engine/*\n  Cache-Control: public, max-age=300\n/engine/vendor/pdfjs/*.mjs\n  Content-Type: text/javascript; charset=utf-8\n/engine/vendor/pdfjs/wasm/*.wasm\n  Content-Type: application/wasm\n/library/*\n  Cache-Control: public, max-age=300\n  Access-Control-Allow-Origin: *\n/fonts/*\n  Cache-Control: public, max-age=604800\n')
+    wt(os.path.join(out, '_headers'), '/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n/engine/*\n  Cache-Control: public, max-age=300\n/engine/vendor/pdfjs/*.mjs\n  Content-Type: text/javascript; charset=utf-8\n/engine/vendor/pdfjs/wasm/*.wasm\n  Content-Type: application/wasm\n/library/*\n  Cache-Control: public, max-age=300\n  Access-Control-Allow-Origin: *\n/build.json\n  Cache-Control: no-store\n/fonts/*\n  Cache-Control: public, max-age=604800\n')
     print('site →', os.path.relpath(out, ROOT))
 
 SKILL_TOOLS = ['noema_lib.py', 'bridge.py', 'validate.py', 'pack_rules.json', 'pack_quality.py', 'pipeline.py', 'svgkit.py', 'extract_images.py', 'fetch_image.py', 'find_images.py']

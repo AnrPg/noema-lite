@@ -47,6 +47,8 @@ try:
     subprocess.run([sys.executable, os.path.join(sk, "start_subject.py"), work, "demo-coulomb", "Coulomb", "--lang", "en"], check=True, capture_output=True)
     d = os.path.join(work, "demo-coulomb")
     sj = json.load(open(os.path.join(d, "subject.json"), encoding="utf-8"))
+    sj["description"] = "Forces between charges."; sj["i18n"] = {"el": {"title": "Νόμος του Coulomb", "appTitle": "Coulomb Quest", "description": "Δυνάμεις μεταξύ φορτίων."}, "ru": {"title": "Закон Кулона", "appTitle": "Coulomb Quest", "description": "Силы между зарядами."}}   # the subject's name in each translation
+    json.dump(sj, open(os.path.join(d, "subject.json"), "w", encoding="utf-8"), ensure_ascii=False)
     ok(sj["authoring"]["rules"] == 2 and sj["authoring"]["by"] == "claude" and os.path.isdir(os.path.join(d, "map")) and os.path.isdir(os.path.join(d, "review")), "start_subject.py: authoring.rules 2, by claude, map/ and review/")
     ok(P("start", "4", d).returncode == 0 and P("status", d).returncode == 1, "start 4 → run.json; status fails while strict steps are open")
     ok(P("check", d, "map").returncode == 1, "map: refused before start_subject is checked (needs)")
@@ -91,7 +93,9 @@ try:
     r = P("check", d, "translate"); ok(r.returncode == 1 and "el: missing ch01" in r.stdout and "ru: missing ch01" in r.stdout and "en:" not in r.stdout, "translate: an English pack needs el and ru (never its own language)")
     for loc in ("el", "ru"):
         os.makedirs(os.path.join(d, "translations", loc), exist_ok=True); json.dump(ch, open(os.path.join(d, "translations", loc, "ch01.json"), "w"))
-    ok(P("check", d, "translate").returncode == 0, "translate: every chapter in el and ru")
+    r = P("check", d, "translate"); ok(r.returncode == 0, "translate: every chapter and the subject's name in el and ru" + ("" if r.returncode == 0 else "\n" + r.stdout))
+    d2 = os.path.join(work, "noname"); shutil.copytree(d, d2); sj2 = dict(sj); sj2.pop("i18n", None); json.dump(sj2, open(os.path.join(d2, "subject.json"), "w", encoding="utf-8"))
+    okk, L = pipeline.local_check("translations", d2, {}); ok(not okk and any("el: the subject's name is not translated" in x for x in L), "translate: the chapters alone are not enough — the subject's name too")
     r = P("check", d, "bridges"); ok(r.returncode == 1 and "no bridges/core.json" in r.stdout, "bridges: none yet → fails")
     sys.path.insert(0, sk); import bridge as BR
     pk0 = {"subject": sj, "chapters": [ch]}
@@ -104,13 +108,23 @@ try:
     json.dump(loc("ar", 0.5), open(os.path.join(d, "bridges", "ar.json"), "w"))
     r = P("check", d, "bridges"); ok(r.returncode == 1 and "ar: covers" in r.stdout and "everyday words" in r.stdout, "bridges: a bridge with half the words is below the minimum (all and everyday words)")
     json.dump(loc("ar"), open(os.path.join(d, "bridges", "ar.json"), "w"))
-    r = P("check", d, "bridges"); ok(r.returncode == 0, "bridges: el, ru, ar, each covering the content and the everyday words" + ("" if r.returncode == 0 else "\n" + r.stdout))
+    r = P("check", d, "bridges"); ok(r.returncode == 1 and "from el: no bridges/from-el/core.json" in r.stdout and "from ru:" in r.stdout and "no bridge into" not in r.stdout.replace("from el", "").split("from")[0], "bridges: en → el, ru, ar are not enough — a learner reading the el or ru translation gets help too")
+    for src in ("el", "ru"):   # the translation's own words (here the same text, ch copied), its own pairs
+        tp, tdir = BR.load(d, src); twords = BR.todo(tp, [], (), None, 5000)
+        os.makedirs(tdir, exist_ok=True); json.dump({**core, "source": src, "entries": [{"k": w["word"], "band": 1, "senses": [{"id": "1", "gloss": "g"}]} for w in twords]}, open(os.path.join(tdir, "core.json"), "w"))
+        for nat in [x for x in ("en", "el", "ru", "ar") if x != src]: json.dump({**loc(nat), "t": {f"{w['word']}#1": {"t": "x"} for w in twords}}, open(os.path.join(tdir, nat + ".json"), "w"))
+    json.dump({**loc("en"), "native": "en"}, open(os.path.join(d, "bridges", "from-ru", "en.json"), "w"))
+    r = P("check", d, "bridges"); ok(r.returncode == 1 and "from ru: en: covers" in r.stdout, "bridges: a translation's bridge is measured on the translation's words")
+    json.dump({**loc("en"), "t": {f"{w['word']}#1": {"t": "x"} for w in BR.todo(BR.load(d, "ru")[0], [], (), None, 5000)}}, open(os.path.join(d, "bridges", "from-ru", "en.json"), "w"))
+    r = P("check", d, "bridges"); ok(r.returncode == 0, "bridges: all nine pairs (en→el/ru/ar, el→en/ru/ar, ru→en/el/ar), each covering the content and the everyday words" + ("" if r.returncode == 0 else "\n" + r.stdout))
+    b_el = BR.build(*BR.load(d, "el"), "ru"); ok(b_el["source"] == "el" and b_el["native"] == "ru" and BR.pair_key("el", "ru", "en") == "el.ru" and BR.pair_key("en", "ru", "en") == "ru", "bridge.py --from el builds el → ru (pair key el.ru; from the own language just the native)")
     r = P("check", d, "checks"); ok(r.returncode == 0 and "✓" in r.stdout, "checks: make_pack.py builds the pack with every quality rule" + ("" if r.returncode == 0 else "\n" + r.stdout))
     pk = json.load(open(os.path.join(d, "build", "demo-coulomb.json"), encoding="utf-8"))
     ok(pk["chapters"][0]["map"]["format"] == "noema.map/v1" and pk["chapters"][0]["review"]["blind"]["solved"] == 40, "the pack carries chapter.map (Info window) and chapter.review")
     t_el = json.load(open(os.path.join(d, "build", "demo-coulomb.tr.el.json"), encoding="utf-8"))
     ok(pk["translations"] == {"el": {"file": True, "chapters": 1}, "ru": {"file": True, "chapters": 1}} and t_el["format"] == "noema-translation" and t_el["version"] == pk["version"] and t_el["chapters"][0]["id"] == "ch01",
        "make_pack.py: each translation in its own file (build/<id>.tr.<locale>.json), the pack only names them")
+    ok(t_el.get("subject", {}).get("title") == "Νόμος του Coulomb" and pk["subject"]["i18n"]["ru"]["title"] == "Закон Кулона", "the translation file carries the subject's name in its language (subject.i18n.<locale>)")
     ex = json.load(open(os.path.join(d, "chapters", "ch01.json"))); ex["exercises"][4]["q"] = "As in Q14 of the source, what happens?"; json.dump(ex, open(os.path.join(d, "chapters", "ch01.json"), "w"))
     st = P("status", d).stdout
     ok("write          stale" in st and "checks         stale" in st and "map            done" in st, "a change to the chapter makes write and every later step stale, not the map")

@@ -272,11 +272,12 @@
     await IDB.put('packs', trKey(acc, f.pack, f.locale), f);
     if (isCloudAcc(acc)) await NoemaCloud.uploadObject(`packs/${f.pack}.tr.${f.locale}.json`, new Blob([JSON.stringify(f)], { type: 'application/json' }), 'application/json').catch(e => console.warn(e));
     if (meta.origin === 'imported') {   // the subject now names it, on every device
-      const p = { ...pack, translations: { ...(pack.translations || {}), [f.locale]: { file: true, chapters: f.chapters.length } } };
+      const p = { ...pack, translations: { ...(pack.translations || {}), [f.locale]: { file: true, chapters: f.chapters.length } },
+        ...(f.subject && typeof f.subject === 'object' ? { subject: { ...pack.subject, i18n: { ...(pack.subject.i18n || {}), [f.locale]: { ...(pack.subject.i18n?.[f.locale] || {}), ...f.subject } } } } : {}) };   // its name in that language too
       for (const [loc, t] of Object.entries(p.translations)) if (Array.isArray(t?.chapters)) p.translations[loc] = { file: true, chapters: t.chapters.length };
       await IDB.put('packs', acc + '|' + p.subject.id, p);
       const pm = KV.accountKey('packmeta:' + p.subject.id, acc), cur = jget(pm, null) || {};
-      KV.set(pm, JSON.stringify({ ...cur, contentLocales: Object.keys(p.translations) }));
+      KV.set(pm, JSON.stringify({ ...cur, contentLocales: Object.keys(p.translations), ...(p.subject.i18n ? { i18n: p.subject.i18n } : {}) }));
       if (isCloudAcc(acc)) await NoemaCloud.uploadPack(p).catch(e => console.warn(e));
       if (window.NOEMA_PACKS) delete window.NOEMA_PACKS[p.subject.id];
     }

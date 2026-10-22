@@ -365,11 +365,15 @@
    "ru",
    "ar"
   ],
+  "bridgesFrom": [
+   "own",
+   "translations"
+  ],
   "bridgeCoverage": {
    "everyday": 0.8,
    "all": 0.9
   },
   "since": "2026-10-22T00:00:00Z",
-  "what": "Every pack with subject.authoring.rules >= 2 ends its flow with a full translation into each of 'translations' and a 文A bridge into each of 'bridges', always minus the pack's own language (user rule 2026-10-21). A translation is its own file (noema-translation, <id>.tr.<locale>.json; docs/i18n.md §10) with the pack's ids, structure and answers. A bridge covers >= bridgeCoverage.all of the content words of the theory and >= bridgeCoverage.everyday of the everyday ones (band 1, and every word no entry covers yet). Checked at the end of the flow (tools/pipeline.py steps translate and bridges; noema_finish_upload lists what is missing), never on the first upload."
+  "what": "Every pack with subject.authoring.rules >= 2 ends its flow with a full translation into each of 'translations' (minus its own language) and a 文A bridge for every pair (content language → native language): the content language is the pack's own language AND each of its translations ('bridgesFrom'), the native language each of 'bridges' that is not that content language (user rules 2026-10-21 and 2026-10-22: an en pack translated into el and ru gets en→el, en→ru, en→ar, el→en, el→ru, el→ar, ru→en, ru→el, ru→ar). A translation's bridges are made after the translation, from its text. A translation is its own file (noema-translation, <id>.tr.<locale>.json; docs/i18n.md §10) with the pack's ids, structure and answers, plus the subject's name in that language (subject.i18n.<locale>: title, description, hero, ...). A bridge covers >= bridgeCoverage.all of the content words of the theory and >= bridgeCoverage.everyday of the everyday ones (band 1, and every word no entry covers yet). Checked at the end of the flow (tools/pipeline.py steps translate and bridges; noema_finish_upload lists what is missing), never on the first upload."
  }
 }

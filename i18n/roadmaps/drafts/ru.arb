@@ -56,6 +56,7 @@
   "roadmap.jobs.planned": "спланировано: {list}",
   "roadmap.jobs.log": "Приложение Claude — {kind, select, dag {Агент 1} audit {Агент 1b} expand {Агент 2} other {Агент 3}}: {line}",
   "roadmap.jobs.stepReady": "«{title}» — подготовлен твоим приложением Claude — готов к изучению",
+  "roadmap.jobs.newVersion": "Вышла новая версия noema-lite — она откроется, когда вы в следующий раз вернётесь на эту вкладку",
   "roadmap.jobs.attached": "Предмет «{subject}» теперь ведёт этап «{step}»{replan, select, yes { — этот этап перепланируется} other {}}",
   "roadmap.jobs.notHere": "Этой дорожной карты нет на этом устройстве.",
   "roadmap.jobs.taskDone": "Это задание уже выполнено (или дорожная карта изменилась) — скопируй текущее задание заново.",

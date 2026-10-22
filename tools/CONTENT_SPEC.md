@@ -342,8 +342,11 @@ the learner sees them when the pack has their **interface language** (or its lan
 language never changes content by itself: without a translation for it the learner sees the pack's own texts, with a
 small language tag (e.g. `EN`) beside the name.
 **Every new pack (`subject.authoring.rules` ≥ 2) gets full translations into English, Greek and Russian — the ones that are
-not its own language** — and 文A bridges into English, Greek, Russian and Arabic (below; `tools/pack_rules.json`
-"languages", docs/PIPELINES.md §4b). The flow's steps `translate` and `bridges` check them before `make_pack.py`. Other
+not its own language** — the WHOLE pack: every chapter (terms in brackets translated too) AND the subject's name (1.
+Metadata: title, app title, description, hero… — required for each translation locale) — and then 文A bridges for **every
+pair** of the language read → the learner's native language: from the pack's language and from each translation into
+English, Greek, Russian and Arabic other than the language read, made after the translations (docs/BRIDGE.md §2.4;
+`tools/pack_rules.json` "languages", docs/PIPELINES.md §4b). The flow's steps `translate` and `bridges` check them before `make_pack.py`. Other
 languages only when the user asks. Locale codes: the app's UI locales `el ru fr de it es-ES pt-PT sq tr ar-EG hi ja
 zh-Hans zh-Hant en`, or a bare language (`es`, `pt`, `ar`) that covers its regional ones.
 
@@ -364,18 +367,22 @@ Progress, spaced repetition and sources are keyed by the ids, so they are shared
 a translation is shown in the pack's language. Labels drawn on a picture come from `media/media.json` (one language): a
 translated `img_drag` / `img_label` / `img_select` exercise may carry its own `regions` with translated labels.
 When a later patch adds items to a translated chapter, add them to every `translations/<locale>/chNN.json` too (the
-validator refuses a translation with missing ids). Add `subject.i18n.<locale>` too, so the picker shows the translated name.
+validator refuses a translation with missing ids). Add `subject.i18n.<locale>` too — required for every translation of a new
+pack: without it the card, the title and the tagline stay in the pack's language (`make_pack.py`, the `translate` step and
+`noema_save_translation` say so).
 
 Code blocks stay exactly as the source's (translate the words around them, not the code); formulas and numbers too.
 
 **Built pack** (`tools/build.py`, `make_pack.py`): `"v": 2` when the pack has `subject.i18n` or translations (older apps
 ignore both and show the source). **Each translation is its own file** (`noema-translation`: `{"format":
-"noema-translation", "v": 1, "pack", "locale", "source", "version", "chapters": [ … ]}`), so a learner downloads only the
+"noema-translation", "v": 1, "pack", "locale", "source", "version", "subject": { the subject.i18n.<locale> fields }, "chapters": [ … ]}`),
+so a learner downloads only the
 language they read: `make_pack.py` writes `build/<id>.tr.<locale>.json` and puts it in the package as
 `translations/<locale>.json`; the pack itself only names it, `"translations": { "<locale>": { "file": true, "chapters": n } }`.
 The connector's `noema_finish_upload` asks for each file (ready `curl` commands), `noema_save_translation` adds one later.
 **A pack that teaches a step of a Roadmap**: the Roadmap's own words are translated with it, into the same languages — the
-step's title, summary, learning goals and chapter titles (`noema_save_roadmap_translation`, docs/CURRICULUM.md §10).
+step's title, summary, learning goals, domains and every chapter's title, teaching goals and coverage — everything the
+step's panel shows (`noema_save_roadmap_translation`, docs/CURRICULUM.md §10).
 Older packs with `"translations": { "<locale>": { "chapters": [ … ] } }` inline keep working.
 **Validation**: `python3 tools/validate.py subject.json --subject [--translations el,fr]` (locale codes, known fields,
 only what the source has) and `python3 tools/validate.py translations/el/ch03.json --source ch03.json` (the same ids,

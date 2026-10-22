@@ -2,10 +2,11 @@
  "format": "noema.pipeline/v1",
  "id": "7",
  "title": "Translate a pack",
- "when": "A pack into another language.",
+ "when": "A pack into another language — then the 文A bridges from that translation (bridges are made after the translations).",
  "steps": [
   "classify",
   "translate",
+  "bridges",
   "checks",
   "upload"
  ]
