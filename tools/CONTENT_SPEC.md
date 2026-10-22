@@ -93,6 +93,17 @@ completed with what it silently assumes) and `cite.sq` = its id in the map. Each
 - `"answerFrom": "claude"`: the source gives no solution. Solve it twice, independently, and compare; recompute numbers
   with a script; run code / SQL where you can. `"check"` says how it was double-checked.
 
+**Never drop a source exercise to meet a quota.** The coverage and mix rules below (recall ≤ 25 %, apply or higher ≥ 40 %,
+difficulty 20 / 25 / 55 %, every fitting type, focus and paradigm) are reached **on top of** the source exercises, never
+by leaving one out. When the source exercises tip the mix (too much recall, too easy, too few types), use two tricks:
+1. **Add your own exercises on top** of the source ones until every quota holds.
+2. **Lightly adjust some source exercises**: reframe one as another type, focus or difficulty (an mcq asked as a `calc`
+   or `cloze`, a recall question asked as an apply or `case` exercise, an easy one asked one step further).
+
+Guards on the second trick: an adjustment is **small**. The exercise keeps its substance (the same situation, data,
+code and idea) and its answer, changes only a little (the framing, the type, one step more), and keeps its `cite.sq`.
+Never drop a source exercise; every `sourceQuestions` entry still has ≥ 1 exercise that is recognisably that exercise.
+
 **Q2b · Three kinds of table in every chapter's theory** (`theory.tables`). A `table` block names its `kind`:
 - `"compare"` · a **comparative matrix**: the concepts that get confused, side by side against the same criteria
   (≥ 3 columns: the criterion + ≥ 2 concepts; ≥ 2 rows).
@@ -141,6 +152,9 @@ This is wanted: write the learnables first, then the facades. Roughly 300 exerci
 - `think`: recall ≤ 25 %, apply or higher ≥ 40 %;
 - difficulty ≈ 20 / 25 / 55 %;
 - most (ideally all) learning paradigms that fit (`fits.modes`) in ≥ 2 exercises each (`mode`, below).
+
+These quotas never cost a source exercise (Q2): reach them by adding exercises on top or by lightly adjusting source
+exercises (same substance and answer, small change, `cite.sq` kept).
 
 ### Learning paradigms (`mode`) — with the existing exercise types
 | `mode` | what the learner does | typical types |
@@ -192,7 +206,8 @@ after answering, never in the text; `sq` names the source question the exercise 
 ### Mix per chapter (checked)
 recall ≤ 25 %; apply or higher (apply, discriminate, analyze, evaluate, create) ≥ 40 %; analyze / evaluate / create ≥ 3;
 difficulty 20 / 25 / 55 % (±5); every learnable and every categorised point ≥ 2 exercises of ≥ 2 types; every fitting
-type and focus ≥ 3, every fitting mode ≥ 2. Exercise counts are only a mild note, never an error.
+type and focus ≥ 3, every fitting mode ≥ 2. Exercise counts are only a mild note, never an error. Every source exercise
+stays in (Q2): the mix is reached by adding exercises or lightly adjusting source exercises, never by dropping one.
 
 ### The review — `review/chNN.json` (written after the blind solve)
 ```json
@@ -300,6 +315,8 @@ Checked per chapter by `tools/pack_rules.json` (one rule list, read by `validate
   `calc` without `features.math` and the picture types without a picture are unfit by themselves);
 * **every type and focus tag that fits ≥ 3 times**, every paradigm that fits ≥ 2 times;
 * **difficulty 1 / 2 / 3 ≈ 20 / 25 / 55 %** (± 5), **recall ≤ 25 %**, apply or higher ≥ 40 %, ≥ 3 critical-thinking items;
+* **no source exercise is dropped to meet these**: add exercises on top, or lightly adjust source exercises into the
+  missing type, focus or difficulty, keeping their substance, answer and `cite.sq` (Q2);
 * **every learnable** ≥ 2 exercises in ≥ 2 types; every map point not taught earlier sits in a learnable (exhaustive).
 * **Sizes are a mild suggestion, never an error or a warning**: about 2 facades per learnable in the core set and a
   reserve without a cap; 40–70 learnables per node give ~80–140 core and 160–280 exercises in all; above ~180 in the

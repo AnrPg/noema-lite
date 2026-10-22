@@ -90,6 +90,8 @@ The chapter's **knowledge map** `map/chNN.json` comes first (format in `tools/CO
   types in a chapter without a picture are unfit by themselves.
 - `sourceQuestions`: every exercise, question and problem of the material, in full, with its answer: `answerFrom`
   `source` (taken as correct, no second check, explained more deeply) or `claude` (solved twice; `check` says how).
+  None is ever dropped to meet the mix and coverage checks below: add exercises on top, or lightly adjust source
+  exercises into the missing type, focus or difficulty (same substance and answer, small change, `cite.sq` kept).
 
 | Check | Rule |
 | --- | --- |
