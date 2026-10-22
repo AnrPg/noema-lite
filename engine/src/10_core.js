@@ -158,6 +158,12 @@ const S = (() => {
   return st;
 })();
 if (!S.settings.apiKey) S.settings.apiKey = DEFAULT_KEY;
+/* a:settings has other writers too (the character, the menus' language, the native language, a course…): S.settings is this page's
+   copy of it. What the page last read or wrote, key by key: a save writes only the keys changed HERE, so it can never put an
+   older copy back over a choice made elsewhere (e.g. a new character chosen in the frame while this subject was open). */
+let settingsSeen = {};
+const seeSettings = () => { settingsSeen = {}; for (const k of Object.keys(S.settings)) settingsSeen[k] = JSON.stringify(S.settings[k]); };
+seeSettings();
 /* flashcards have ids now (chNN-fNNN); their progress used to be keyed by position (chNN#k), which shifted when a card
    was inserted. Move positional progress to the card's id (idempotent: a moved key is gone; if both exist the id wins). */
 const CARD_KEYS_MOVED = (() => {
@@ -176,8 +182,11 @@ function flushSave() {
   const { settings, ...rest } = S; const { srcOn, apiKey, mt: _mt, ...glob } = settings;   // a:settings.mt is engine/mt.js's own (written there): never written back from this copy
   Noema.kv.set(STATE_KEY, JSON.stringify({ ...rest, srcOn }));
   Noema.geminiKey.set(ACCOUNT.id, apiKey);   // this device only; the default key is not stored
-  let cur = {}; try { cur = JSON.parse(Noema.kv.get(SETTINGS_KEY) || '{}'); } catch (e) { }
-  delete cur.apiKey; Noema.kv.set(SETTINGS_KEY, JSON.stringify(Object.assign(cur, glob)));
+  let cur = {}; try { cur = JSON.parse(Noema.kv.get(SETTINGS_KEY) || '{}') || {}; } catch (e) { }
+  delete cur.apiKey;
+  for (const k of Object.keys(glob)) if (!(k in cur) || JSON.stringify(glob[k]) !== settingsSeen[k]) cur[k] = glob[k];
+  Noema.kv.set(SETTINGS_KEY, JSON.stringify(cur));
+  Object.assign(S.settings, cur); seeSettings();   // the page's copy follows what the others saved
 }
 function save() { clearTimeout(saveT); saveT = setTimeout(flushSave, 150); }
 /* another device's progress or settings arrived (engine/cloud.js): fold them into what this page holds, so the next save
@@ -195,7 +204,7 @@ addEventListener('noema:remote', e => {
     Object.assign(S, { read: {}, res: {}, pb: {}, fc: {}, boss: {} }, merged); delete S.srcOn;
     if (st.srcOn !== undefined) S.settings.srcOn = st.srcOn;
   }
-  if (keys.includes(SETTINGS_KEY)) { try { const g = JSON.parse(Noema.kv.get(SETTINGS_KEY) || '{}'); delete g.apiKey; Object.assign(S.settings, g); } catch (x) { } }
+  if (keys.includes(SETTINGS_KEY)) { try { const g = JSON.parse(Noema.kv.get(SETTINGS_KEY) || '{}'); delete g.apiKey; Object.assign(S.settings, g); seeSettings(); } catch (x) { } }
   if (keys.includes(STATE_KEY) || keys.includes(SETTINGS_KEY)) { if (Noema.kv.get(STATE_KEY) != null) flushSave(); try { renderTopStats(); route(); } catch (x) { } }
 });
 if (CARD_KEYS_MOVED) save();
