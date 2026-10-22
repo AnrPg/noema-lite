@@ -237,6 +237,10 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
   ok(/databricks/.test(ls) && /physics-by-claude/.test(ls) && /tiny-inline/.test(ls), 'list_subjects shows library + private packs');
   const gu = (await tool('noema_get_pack_url', { subject_id: 'physics-by-claude' })).content[0].text.match(/https?:\/\/\S+token=\S+/)[0];
   ok((await (await fetch(gu)).json()).subject.id === 'physics-by-claude', 'get_pack_url gives a working download link (for additive updates)');
+  const gt = (await tool('noema_get_pack_url', { subject_id: 'tr-physics', locale: 'ru' })).content[0].text, gtu = (gt.match(/https?:\/\/\S+token=\S+/) || [])[0];
+  const gtf = gtu ? await (await fetch(gtu)).json() : null;
+  ok(gtf?.format === 'noema-translation' && gtf.locale === 'ru' && /--from ru/.test(gt), 'get_pack_url with locale: the translation file (what its bridges are made from)');
+  ok((await tool('noema_get_pack_url', { subject_id: 'tr-physics', locale: 'de' })).isError, 'get_pack_url with a locale the pack has no translation into: refused');
   ok(/library\/subjects\/databricks\/pack\.json/.test((await tool('noema_get_pack_url', { subject_id: 'databricks' })).content[0].text), 'library packs are offered from the website');
 
   console.log('— the app side');

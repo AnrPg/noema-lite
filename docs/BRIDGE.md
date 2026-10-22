@@ -139,7 +139,7 @@ A translation's bridge is made from **the translation's words** (its own entries
 | account | `bridges/<pack>.<native>.json` | `bridges/<pack>.<loc>.<native>.json` |
 | index `a:bridges[pack]` | `<native>: summary` | `<loc>.<native>: { …summary, source: "<loc>" }` |
 | library | `bridge.<native>.js`, `NOEMA_BRIDGES["<pack>\|<native>"]` | `bridge.<loc>.<native>.js`, `NOEMA_BRIDGES["<pack>\|<loc>.<native>"]`, `bridgeLocales["<loc>.<native>"]` |
-| connector | `noema_save_bridge(subject_id, native)` | `noema_save_bridge(subject_id, native, source: "<loc>")` |
+| connector | `noema_get_pack_url(subject_id)`, `noema_save_bridge(subject_id, native)` | `noema_get_pack_url(subject_id, locale: "<loc>")` (the translation file, beside the pack), `noema_save_bridge(subject_id, native, source: "<loc>")` |
 
 In the app the section shown decides: `Noema.subject.language` is the translation's locale when one is shown
 (`sourceLanguage` = the pack's own), and `available()` / `load()` pick the pair from that language — the 文A badge of a

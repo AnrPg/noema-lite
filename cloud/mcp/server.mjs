@@ -450,8 +450,8 @@ const TOOLS = [
   { name: 'noema_get_toolkit', description: 'Use this when the noema-pack-builder skill is NOT installed: returns the download URL of the same toolkit (scripts: start_subject, pdf_text, extract_images, fetch_image, svgkit, make_pack, unpack + references) and the commands to unpack it in your sandbox. With it you work exactly as the skill describes.',
     inputSchema: { type: 'object', properties: {} }, annotations: { readOnlyHint: true } },
   { name: 'noema_list_subjects', description: 'Subjects available to this account: the shared library and the user’s own private packs (id, title, size, version).', inputSchema: { type: 'object', properties: {} }, annotations: { readOnlyHint: true } },
-  { name: 'noema_get_pack_url', description: 'A temporary download URL for an existing pack (the user’s private pack, or a library pack) — use it to make ADDITIVE updates (never renumber ids: progress is keyed by them).',
-    inputSchema: { type: 'object', properties: { subject_id: { type: 'string' } }, required: ['subject_id'] }, annotations: { readOnlyHint: true } },
+  { name: 'noema_get_pack_url', description: 'A temporary download URL for an existing pack (the user’s private pack, or a library pack) — use it to make ADDITIVE updates (never renumber ids: progress is keyed by them). With locale: the pack\'s translation into that language (its noema-translation file) — what the 文A bridges from that translation are made from.',
+    inputSchema: { type: 'object', properties: { subject_id: { type: 'string' }, locale: { type: 'string', description: 'Optional: a translation of the pack (e.g. el, ru) instead of the pack itself' } }, required: ['subject_id'] }, annotations: { readOnlyHint: true } },
   { name: 'noema_start_upload', description: 'Step 1 of saving a pack built in your sandbox: returns a signed URL (valid 2 h) and the exact curl command to PUT the pack (work/<id>/build/<id>.json, written by make_pack.py) to it. Then call noema_finish_upload — it also asks for the source files packaged with the pack.',
     inputSchema: { type: 'object', properties: { subject_id: { type: 'string', description: 'pack.subject.id' } }, required: ['subject_id'] } },
   { name: 'noema_start_source_upload', description: 'Upload ONE original source file (PDF, slides, document… or one part of a split PDF) so the learner can open it inside noema-lite (👁 preview, at the cited page). Normally not needed: noema_finish_upload gives the commands for every source file the pack contains. Use it to add or replace a single file; returns a signed URL + curl command.',
@@ -591,11 +591,14 @@ async function callTool(name, args, ctx) {
     }
     case 'noema_get_pack_url': {
       if (!ID_RE.test(sid)) return fail('subject_id: lowercase letters, digits, hyphens');
+      const loc = String(args?.locale || '').trim();   // a translation of the pack (its noema-translation file): what a translation's 文A bridges are made from
+      if (loc && !/^[a-z]{2,3}(-[A-Z][a-z]{3})?(-(?:[A-Z]{2}|\d{3}))?$/.test(loc)) return fail('locale: a language code such as el, ru');
       const lib = (CFG.library || []).find(s => s.id === sid);
-      if (lib) return text(`Library pack (public): ${CFG.siteUrl.replace(/\/$/, '')}/library/subjects/${sid}/pack.json`);
-      const r = await sb(`/storage/v1/object/sign/${base}${sid}.json`, token, { method: 'POST', body: { expiresIn: 3600 } }).catch(e => ({ error: e.message }));
-      if (!r?.signedURL) return fail(`No private pack "${sid}" (${r?.error || 'not found'}).`);
-      return text(`Download (valid 1 h): ${CFG.supabaseUrl.replace(/\/$/, '')}/storage/v1${r.signedURL}\ncurl -sSL -o ${sid}.json "<that URL>"`);
+      if (lib) return text(`Library pack (public): ${CFG.siteUrl.replace(/\/$/, '')}/library/subjects/${sid}/${loc ? `tr.${loc}.json` : 'pack.json'}`);
+      const file = loc ? `${sid}.tr.${loc}.json` : `${sid}.json`;
+      const r = await sb(`/storage/v1/object/sign/${base}${file}`, token, { method: 'POST', body: { expiresIn: 3600 } }).catch(e => ({ error: e.message }));
+      if (!r?.signedURL) return fail(loc ? `No ${loc} translation of "${sid}" (${r?.error || 'not found'}) — save it first (noema_save_translation).` : `No private pack "${sid}" (${r?.error || 'not found'}).`);
+      return text(`Download (valid 1 h): ${CFG.supabaseUrl.replace(/\/$/, '')}/storage/v1${r.signedURL}\ncurl -sSL -o ${file} "<that URL>"${loc ? `\n(Beside the pack's ${sid}.json, tools/bridge.py … ${sid}.json --from ${loc} reads it.)` : ''}`);
     }
     case 'noema_start_upload': {
       if (!ID_RE.test(sid)) return fail('subject_id: lowercase letters, digits, hyphens (it must equal pack.subject.id)');
