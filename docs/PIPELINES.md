@@ -65,8 +65,8 @@ python3 scripts/pipeline.py status work/demo                # every step: todo /
 | write | `validate.py` on the chapters |
 | blind_solve | `review/chNN.json` `blind`: every exercise solved without the key, every mismatch fixed |
 | review | `review/chNN.json` `rubric` on ≥ 15 learnables (or all) |
-| translate | every chapter has its translation into each of en, el, ru that is not the pack's language (§4b) |
-| bridges | `bridge.py require`: a bridge into each of en, el, ru, ar that is not the pack's language, with enough coverage (§4b) |
+| translate | every chapter has its translation into each of en, el, ru that is not the pack's language, and the subject's name in it (`subject.json` "i18n", §4b) |
+| bridges | `bridge.py require`: every pair — from the pack's language and from each translation into each of en, el, ru, ar other than the language read — with enough coverage (§4b) |
 | checks | `make_pack.py` builds the pack with every quality rule (§4) and checks every translation against its chapter |
 | upload | `noema_finish_upload` / `noema_save_pack` accepts it (the same checks again, then the source files and the translations), then `noema_save_bridge` per bridge |
 | L.* | the language tools: `validate_lang.py`, `lang_phenomena.py`, `lang_refcheck.py --offline`, `lang_facade.py lint / parity`, `lang_strict_report.js`, `lang_course.py package`, `tests/lang_rules.py` |
@@ -113,24 +113,31 @@ core, think about splitting the node.
 `tools/pack_rules.json` → `languages` (copied into `engine/packcheck.js` as `LANGS`). Every pack with
 `subject.authoring.rules` ≥ 2 ends its flow with:
 
-| Pack language | Full translations | 文A bridges |
+| Pack language | Full translations | 文A bridges (every pair: language read → native) |
 | --- | --- | --- |
-| en | el, ru | el, ru, ar |
-| el | en, ru | en, ru, ar |
-| ru | en, el | en, el, ar |
-| ar | en, el, ru | en, el, ru |
-| any other | en, el, ru | en, el, ru, ar |
+| en | el, ru | en→el, en→ru, en→ar · el→en, el→ru, el→ar · ru→en, ru→el, ru→ar |
+| el | en, ru | el→en, el→ru, el→ar · en→el, en→ru, en→ar · ru→en, ru→el, ru→ar |
+| ru | en, el | ru→en, ru→el, ru→ar · en→el, en→ru, en→ar · el→en, el→ru, el→ar |
+| ar | en, el, ru | ar→en, ar→el, ar→ru · and from each translation into the other three |
+| any other | en, el, ru | into en, el, ru, ar · and from each translation into the other three |
 
-- **A translation** is the whole chapter with only the words changed: same ids, sections, blocks, exercises, cards,
-  playbooks, answers and code (`checkTranslation` in `engine/packcheck.js`, `validate.py --source`). Each is its own file
+The order matters: **translations first, then the bridges** — a translation's bridges are made from its words
+(`bridge.py … --from <locale>`, docs/BRIDGE.md §2.4), and the check refuses a bridge from a translation that is not saved.
+
+- **A translation** is the whole pack in that language — every chapter with only the words changed (terms in brackets
+  too): same ids, sections, blocks, exercises, cards, playbooks, answers and code — **and the subject's name**: its title,
+  app title, description, search examples, hero and tutor (`subject.i18n.<locale>`; the translation file carries it as
+  `"subject"`, so the pack's card, title and tagline are in that language) (`checkTranslation` in `engine/packcheck.js`, `validate.py --source`). Each is its own file
   (`noema-translation`, `<id>.tr.<locale>.json`; docs/i18n.md §10), so a learner downloads only their language. The
   connector stores it beside the pack (`packs/<id>.tr.<locale>.json`), the library as `tr.<locale>.js`; shared and
   public copies carry their translations inline.
-- **A bridge** covers ≥ 90 % of the content words of the theory and ≥ 80 % of the everyday ones (band 1, and every word
-  no entry covers yet), because learners may be at A2/B1 (`bridge.py require`; docs/BRIDGE.md).
-- **A Roadmap's own words** (its title and goal; each step's title, summary, learning goals and chapter titles) are translated
-  into the same languages as its packs (`c.i18n`, docs/CURRICULUM.md §10): the whole map right after it is made, then each
-  step's learning goals and chapter titles together with that step's pack translations — `noema_save_roadmap_translation`;
+- **A bridge** is one pair (docs/BRIDGE.md §2.4) and covers ≥ 90 % of the content words of the text it is read with and
+  ≥ 80 % of the everyday ones (band 1, and every word no entry covers yet), because learners may be at A2/B1
+  (`bridge.py require` checks every pair; `noema_save_bridge` takes `source` for a translation's bridge).
+- **A Roadmap's own words** (its title and goal; each step's title, summary, learning goals, domains and every chapter's
+  title, teaching goals and coverage — everything the step's panel shows) are translated into the same languages as its
+  packs (`c.i18n`, docs/CURRICULUM.md §10): the whole map right after it is made, then each step's goals, domains and
+  chapters together with that step's pack translations — `noema_save_roadmap_translation`;
   `noema_create_roadmap`, `noema_finish_upload` and `noema_save_translation` list exactly what is still untranslated.
 - Checked at the end of the flow, never on the first upload: `noema_finish_upload` lists what is still missing.
 - The Gemini generator translates every chapter into the same languages (`engine/packgen.js`, step 3b).

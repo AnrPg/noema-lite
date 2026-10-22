@@ -344,21 +344,27 @@ c.save()`, path.join(TF, 'membranes.pdf')]);
 
   /* ---------- F. 🌐 the Roadmap translated with its packs (docs/CURRICULUM.md §10) ---------- */
   console.log('— F. 🌐 the Roadmap in the learner’s language (noema_save_roadmap_translation)');
-  const rc = await p.evaluate(id => { const c = NoemaCurriculum.get(Noema.account.id, id); const nid = Object.keys(c.nodes).find(k => c.nodes[k].chapters?.length) || Object.keys(c.nodes)[0]; const n = c.nodes[nid]; return { nid, title: c.title, goals: (n.learningGoals || []).length, refs: (n.chapters || []).map(ch => ch.ref), other: Object.keys(c.nodes).find(k => k !== nid) }; }, cid3);
-  const elT = { title: 'Μεμβράνες (ελληνικά)', nodes: { [rc.nid]: { title: 'Το πρώτο βήμα', learningGoals: Array.from({ length: rc.goals }, (_, i) => 'Στόχος ' + (i + 1)), chapters: Object.fromEntries(rc.refs.map((r, i) => [r, 'Κεφάλαιο ' + (i + 1)])) } } };
+  const rc = await p.evaluate(id => { const c = NoemaCurriculum.get(Noema.account.id, id); const nid = Object.keys(c.nodes).find(k => c.nodes[k].chapters?.length) || Object.keys(c.nodes)[0]; const n = c.nodes[nid]; return { nid, title: c.title, goals: (n.learningGoals || []).length, refs: (n.chapters || []).map(ch => ch.ref), chg: (n.chapters || []).map(ch => (ch.goals || []).length), chc: (n.chapters || []).map(ch => (ch.coverage || []).length), other: Object.keys(c.nodes).find(k => k !== nid) }; }, cid3);
+  const elT = { title: 'Μεμβράνες (ελληνικά)', nodes: { [rc.nid]: { title: 'Το πρώτο βήμα', learningGoals: Array.from({ length: rc.goals }, (_, i) => 'Στόχος ' + (i + 1)), chapters: Object.fromEntries(rc.refs.map((r, i) => [r, { title: 'Κεφάλαιο ' + (i + 1), goals: Array.from({ length: rc.chg[i] }, (_, q) => 'Διδακτικός στόχος ' + (q + 1)), coverage: Array.from({ length: rc.chc[i] }, (_, q) => 'Κάλυψη ' + (q + 1)) }])) } } };
   const bad = await tool('noema_save_roadmap_translation', { curriculum_id: cid3, locale: 'el', translation_json: JSON.stringify({ nodes: { nope: { title: 'x' } } }) });
   ok(bad.error && /no such step/.test(bad.text), 'a translation of an unknown step is refused');
   const good = await tool('noema_save_roadmap_translation', { curriculum_id: cid3, locale: 'el', translation_json: JSON.stringify(elT) });
   ok(!good.error && /Saved/.test(good.text) && /Still untranslated: el — \d+ step/.test(good.text) && /ru — the title/.test(good.text), 'saved; the connector says what is still untranslated (' + good.text.split('\n')[1] + ')');
-  ok(inbox(uid).length >= 1, 'it waits in the inbox for the app');
+  ok(inbox(uid).length >= 1, 'an inbox entry too (an app tab applies it again harmlessly)');
+  ok(JSON.parse(kvOf(uid)['a:curriculum:' + cid3].value).i18n?.el?.title === 'Μεμβράνες (ελληνικά)', '🛡 written straight into the Roadmap (a conditional write): every device shows it at its next sync, whatever tab is open');
+  const odd = 'a:curin:' + cid3 + ':zzzzzzzzz-odd1'; srv.state.kv[uid][odd] = { value: JSON.stringify({ v: 1, kind: 'from-the-future', data: {} }), updated_at: new Date().toISOString() };
   await p.evaluate(() => NoemaCurJobs.App.poll()); await wait(300);
   ok(await p.evaluate(id => NoemaCurriculum.get(Noema.account.id, id).i18n?.el?.nodes && NoemaCurriculum.get(Noema.account.id, id).title !== 'Μεμβράνες (ελληνικά)', cid3), 'the app merges it; the record keeps its own words');
+  ok(!!kvOf(uid)[odd], '🛡 an inbox entry of a kind this build does not know is left for a newer app, never deleted unread'); delete srv.state.kv[uid][odd];
   await p.evaluate(async id => { await NoemaI18n.use('el'); document.querySelectorAll('.noema-overlay').forEach(o => o.remove()); NoemaCurMap.map(Noema.account.id, id, {}); }, cid3); await wait(700);
   ok(await p.locator('.cm-top .cm-title b', { hasText: 'Μεμβράνες (ελληνικά)' }).count() === 1, 'Greek UI: the Roadmap’s title in Greek');
   ok(await p.locator(`.cm-node[data-id="${rc.nid}"] .cm-t`, { hasText: 'Το πρώτο βήμα' }).count() === 1, 'Greek UI: the step’s title on the map in Greek');
   await p.click(`.cm-node[data-id="${rc.nid}"]`); await wait(300);
   const pnl = await p.locator('.cm-panel').innerText();
   ok(/Το πρώτο βήμα/.test(pnl) && (!rc.goals || /Στόχος 1/.test(pnl)) && (!rc.refs.length || /Κεφάλαιο 1/.test(pnl)), 'Greek UI: the step panel — title, learning goals, chapters');
+  if (rc.refs.length && (rc.chg[0] || rc.chc[0])) { await p.click('.cm-panel .cm-chapters li >> nth=0'); await wait(200);
+    const chd = await p.locator('.cm-panel .cm-chd').first().innerText().catch(() => '');
+    ok((!rc.chg[0] || /Διδακτικός στόχος 1/.test(chd)) && (!rc.chc[0] || /Κάλυψη 1/.test(chd)), 'Greek UI: a tapped chapter shows its teaching goals and coverage in Greek too: ' + chd.slice(0, 80)); }
   await p.evaluate(async () => { await NoemaI18n.use('en'); document.querySelectorAll('.noema-overlay').forEach(o => o.remove()); }); await wait(300);
 
   /* ---------- E. ❓ Set up Claude → C, phone ---------- */

@@ -431,6 +431,10 @@
     }
   },
   "roadmap.jobs.stepReady": "“{title}” — prepared by your Claude app — is ready to study",
+  "roadmap.jobs.newVersion": "A newer noema-lite is out — it opens the next time you come back to this tab",
+  "@roadmap.jobs.newVersion": {
+    "description": "Toast: this tab runs an older build than the website; it reloads itself the next time the learner comes back to it (what Claude saved meanwhile waits for it)."
+  },
   "@roadmap.jobs.stepReady": {
     "description": "Toast: a step the learner’s Claude app prepared has arrived. title = the step’s title.",
     "placeholders": {

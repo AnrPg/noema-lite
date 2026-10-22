@@ -138,8 +138,10 @@ fs.rmSync(qd, { recursive: true, force: true });
 // the languages every new pack gets (pack_rules.json "languages", docs/PIPELINES.md §4b) and the translation files
 ok(JSON.stringify(file.languages) === JSON.stringify(P.LANGS), 'engine/packcheck.js LANGS is exactly tools/pack_rules.json "languages"');
 const RL = P.requiredLocales;
-ok(JSON.stringify(RL('en')) === JSON.stringify({ translations: ['el', 'ru'], bridges: ['el', 'ru', 'ar'] }) && JSON.stringify(RL('el-GR').translations) === '["en","ru"]' && JSON.stringify(RL('ar').translations) === '["en","el","ru"]' && RL('de').bridges.length === 4,
+ok(JSON.stringify({ translations: RL('en').translations, bridges: RL('en').bridges }) === JSON.stringify({ translations: ['el', 'ru'], bridges: ['el', 'ru', 'ar'] }) && JSON.stringify(RL('el-GR').translations) === '["en","ru"]' && JSON.stringify(RL('ar').translations) === '["en","el","ru"]' && RL('de').bridges.length === 4,
   'requiredLocales: en, el, ru translations and en, el, ru, ar bridges, minus the pack\'s own language');
+ok(RL('en').bridgePairs.map(x => x.source + '>' + x.native).join() === 'en>el,en>ru,en>ar,el>en,el>ru,el>ar,ru>en,ru>el,ru>ar' && RL('el').bridgePairs.length === 9,
+  'bridge pairs: from the pack\'s own language and from each translation, into every bridge language but the one read (pack_rules.json "bridgesFrom")');
 {
   const src = { id: 'ch01', sections: [{ id: 'ch01-s01', blocks: [{ t: 'p', text: 'Hello' }, { t: 'code', lang: 'python', code: 'print(1)' }] }], exercises: [{ id: 'ch01-e001', type: 'mcq', section: 'ch01-s01', options: ['a', 'b'], answer: 0 }], flashcards: [], debug: [] };
   const pk = { subject: { id: 'tiny', language: 'en' }, version: 'v1', chapters: [src, { id: 'ch02', sections: [], exercises: [] }] };

@@ -116,11 +116,42 @@ sections{sid: {terms, preview}}, anchors }`. `coverage` = share of the pack's co
 `library/subjects/<id>/bridge.<native>.js` and records `bridgeLocales` in the registry (path, status, coverage,
 chapters, previews, entries) — that is where the badge comes from, without loading any bridge.
 
+### 2.4 Pairs: the language the learner READS → their native language (translations too)
+A bridge is one **pair**: from the language the learner reads to their native language. The language read is the pack's
+own **or one of its translations** (docs/i18n.md §10): a learner who opened the Greek translation of an English pack reads
+Greek, so the help they need is **el → ru**, not en → ru. Every new pack gets every pair (`tools/pack_rules.json`
+"languages" `"bridgesFrom": ["own", "translations"]`) — for an English pack translated into Greek and Russian:
+
+| reads | bridges |
+|---|---|
+| en (the pack) | en→el · en→ru · en→ar |
+| el (its translation) | el→en · el→ru · el→ar |
+| ru (its translation) | ru→en · ru→el · ru→ar |
+
+A translation's bridge is made from **the translation's words** (its own entries, forms, senses and anchors), so it is made
+**after** the translation is saved — the check refuses a `source` the pack has no translation into.
+
+| | from the pack's own language | from a translation into `<loc>` |
+|---|---|---|
+| source files | `bridges/core.json`, `bridges/<native>.json` | `bridges/from-<loc>/core.json` (`"source": "<loc>"`), `bridges/from-<loc>/<native>.json` |
+| tool | `bridge.py … SUBJ` | `bridge.py … SUBJ --from <loc>` (the translation's chapters: `translations/<loc>/` of a subject folder, or `<id>.tr.<loc>.json` beside a pack `.json`, or `--translation FILE`) |
+| pair key | `<native>` (as before) | `<loc>.<native>` (`engine/bridge.js` `pairKey`, the connector's `brKey`) |
+| account | `bridges/<pack>.<native>.json` | `bridges/<pack>.<loc>.<native>.json` |
+| index `a:bridges[pack]` | `<native>: summary` | `<loc>.<native>: { …summary, source: "<loc>" }` |
+| library | `bridge.<native>.js`, `NOEMA_BRIDGES["<pack>\|<native>"]` | `bridge.<loc>.<native>.js`, `NOEMA_BRIDGES["<pack>\|<loc>.<native>"]`, `bridgeLocales["<loc>.<native>"]` |
+| connector | `noema_save_bridge(subject_id, native)` | `noema_save_bridge(subject_id, native, source: "<loc>")` |
+
+In the app the section shown decides: `Noema.subject.language` is the translation's locale when one is shown
+(`sourceLanguage` = the pack's own), and `available()` / `load()` pick the pair from that language — the 文A badge of a
+card in a list uses the language the card will open in (`contentLang`). A learner reading a translation never gets the
+pack-language bridge (its words are not on the page). `bridge.py require SUBJ` checks every pair; `--from <loc>` one
+translation's.
+
 ## 3. Where bridges live
 | bridge | stored | how it gets there |
 |---|---|---|
 | library pack | `library/subjects/<id>/bridges/` → `bridge.<native>.js` | a PR; `tools/build.py` |
-| the learner's own | the device (IndexedDB `noema-bridges`) + the account (`noema-private/<uid>/bridges/<pack>.<native>.json`), index `a:bridges` (synced) | 📥 Import a `noema-bridge` file, or Claude with `noema_save_bridge` |
+| the learner's own | the device (IndexedDB `noema-bridges`) + the account (`noema-private/<uid>/bridges/<pack>.<pair>.json`, §2.4), index `a:bridges` (synced) | 📥 Import a `noema-bridge` file, or Claude with `noema_save_bridge` |
 
 The account's own bridge wins over the library's for the same language. Per learner (synced like the rest of `a:`):
 `a:settings.bridge` {on, level, cefr, asked}, `a:settings.native`, `a:bridgeWords:<source language>` {word: {known,
@@ -144,11 +175,16 @@ python3 tools/bridge.py senses SUBJ --word order        # a word with two senses
 python3 tools/bridge.py anchor SUBJ                     # anchors from the cues (a person's anchors are kept and win)
 python3 tools/bridge.py terms SUBJ [--dry]              # key words of every section from the text (a person's are kept)
 python3 tools/bridge.py build SUBJ --native ru -o ru.bridge.json
+# then the same from each translation (after it is saved), in bridges/from-<locale>/ (§2.4):
+python3 tools/bridge.py todo SUBJ --from el             # the Greek translation's words
+python3 tools/bridge.py build SUBJ --from el --native ru -o ru.bridge.json
+python3 tools/bridge.py require SUBJ                    # every pair: en→el/ru/ar, el→en/ru/ar, ru→en/el/ar
 ```
 `SUBJ` is a library subject folder or a pack `.json` (the learner's pack, from `noema_get_pack_url`) with `bridges/`
 beside it. Then **📥 Import** the built file in the app, or save it with the connector: `noema_bridge_guide` (this text,
 the account's bridges and the learners' reports) and `noema_save_bridge` (checked exactly as the app checks it). Send the file with its upload command, not inline:
-`noema_save_bridge(subject_id, native)` → `curl` the file to the URL it returns → the same call again; the upload
+`noema_save_bridge(subject_id, native[, source])` → `curl` the file to the URL it returns → the same call again (`source`: the
+translation's locale for a translation's bridge); the upload
 goes live only once it passes the check. Publishing a draft is the same save with `"status": "reviewed"`.
 
 Writing rules: translate the meaning the word has **in this pack** (the gloss), for a student of the field — the term
@@ -157,8 +193,9 @@ the student's own lectures would use, then a plain explanation in brackets when 
 the section is about in 2–4 sentences; it never replaces the section. Work chapter by chapter, most important first:
 a chapter is useful when it is complete.
 
-**Every new pack needs them** (docs/PIPELINES.md §4b, `tools/pack_rules.json` "languages"): a bridge into each of
-English, Greek, Russian and Arabic that is not the pack's language, covering ≥ 90 % of the content words and ≥ 80 % of the
+**Every new pack needs them** (docs/PIPELINES.md §4b, `tools/pack_rules.json` "languages"): every pair of §2.4 — from the
+pack's language and from each of its translations into each of English, Greek, Russian and Arabic other than the language
+read, each made after its translation — covering ≥ 90 % of the content words and ≥ 80 % of the
 everyday ones — learners may be at A2/B1, so the everyday words of the explanations count, not only the field's terms.
 `bridge.py require` is the flow's `bridges` step; `noema_save_bridge` says when a saved bridge is below the minimum.
 

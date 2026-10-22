@@ -214,7 +214,7 @@
       `\n## The plan (follow it exactly: one pack chapter per planned chapter, same order and titles; do not re-teach what the learner already mastered)\n${t.brief}`,
       `\n## How to build and save it\n1. Use the noema-pack-builder skill if you have it; otherwise ${mode === 'connector' ? 'call noema_get_toolkit and noema_authoring_guide' : 'follow the noema-lite authoring guide you were given'}. Start with: python3 scripts/start_subject.py work ${t.packId} "${t.stepTitle.replace(/"/g, "'")}" --lang ${c.language}, then python3 scripts/pipeline.py start 2 work/${t.packId} and, after each step, pipeline.py next / pipeline.py check work/${t.packId} <step> (without the skill: noema_pipeline gives the same steps)\n2. Pictures only where they have real teaching value (from the files, from the web, drawn diagrams / function graphs) — none is better than a decorative one; each picture gets ≥ 3 exercises, and a chapter with pictures has every picture exercise type ≥ 3 times. In every chapter: every exercise type and focus tag that fits the chapter (declared in its map) ≥ 3 times; counts are a guide, never a target (tools/pack_rules.json). Quality rules Q1–Q8 (CONTENT_SPEC.md): before each chapter write its exhaustive knowledge map (map/chNN.json: every point not taught earlier on the map, learnables, the types and paradigms that fit, every question the files ask); every exercise is self-contained (never \"Q2\", \"page 5\" or \"the source\" — write the item out, origin only in \"cite\"); every exercise of the sources is in, written out in full (a source's own solution is taken as correct, answerFrom \"source\", but explained more deeply in your own words; one the source does not solve is solved twice and checked, answerFrom \"claude\"); the theory of every chapter has all three kinds of table (table blocks with kind \"compare\" = a comparative matrix, \"summary\" = categorises or sums up the concepts, \"breakdown\" = related concepts across columns of different parameters); difficulty ≈ 20/25/55 %, recall ≤ 25 %; then solve every exercise blind and write review/chNN.json. Then translate every chapter into ${(globalThis.NoemaPackCheck?.requiredLocales(c.language || 'en').translations || ['en', 'el', 'ru']).join(', ')} (translations/<locale>/chNN.json, same ids and answers) and make 文A bridges into ${(globalThis.NoemaPackCheck?.requiredLocales(c.language || 'en').bridges || ['en', 'el', 'ru', 'ar']).join(', ')}, everyday words included (bridge.py require). Validate with make_pack.py.\n` +
         (mode === 'connector'
-          ? `3. Save it with noema_start_upload → curl → noema_finish_upload, subject_id "${t.packId}" (it asks for the source files you packaged; the learner's own files are recognised and not uploaded twice). The step then appears ready on the learner's map by itself.\n4. With the pack's translations (English, Greek, Russian minus its own language), translate this step on the Roadmap into the same languages: its title, summary, learning goals and chapter titles, with noema_save_roadmap_translation (noema_finish_upload and noema_save_translation list the exact texts still untranslated).\n5. Then call noema_curriculum_task for the next step, if the learner asked for more than one.`
+          ? `3. Save it with noema_start_upload → curl → noema_finish_upload, subject_id "${t.packId}" (it asks for the source files you packaged; the learner's own files are recognised and not uploaded twice). The step then appears ready on the learner's map by itself.\n4. With the pack's translations (English, Greek, Russian minus its own language — every chapter and the subject's name, subject.i18n), translate this step on the Roadmap into the same languages: everything its panel shows — title, summary, learning goals, domains, and every chapter's title, teaching goals and coverage — with noema_save_roadmap_translation; then the 文A bridges for every pair, from the pack's language and from each translation (bridge.py --from <locale>, noema_save_bridge with source) (noema_finish_upload and noema_save_translation list the exact texts still untranslated).\n5. Then call noema_curriculum_task for the next step, if the learner asked for more than one.`
           : `3. Give the learner the package ${t.packId}.noema.zip to download. In noema-lite they open this step on the map and press “📥 Import its package”.`),
       `Do not ask questions unless something essential is missing — choose sensible defaults.`].join('\n');
   }
@@ -245,19 +245,38 @@
     await C().Gen.finish(c, e.nid, pack, { stored: true, via: 'claude-app' });
     toast('🧭 ' + rt('roadmap.jobs.stepReady', { title: n.title }), 4000); return true;
   }
+  /** 🛡 Is this tab older than the website (build.json, written by tools/build.py site)? An old tab may not know what the
+      connector writes now, and deleting what it does not understand loses it — so it leaves the inbox alone and reloads
+      the next time it comes back to the front. Not on a bundle / file:// copy (no build.json): never stale. */
+  App.stale = async () => {
+    const mine = root.NOEMA_BUILD?.commit; if (!mine || root.NOEMA_BUNDLE || !/^https?:/.test(root.location?.protocol || '')) return false;
+    if (App.staleSeen) return true;
+    if (App.buildAt && Date.now() - App.buildAt < 60000) return false; App.buildAt = Date.now();
+    try {
+      const r = await fetch('build.json', { cache: 'no-store' }); if (!r.ok) return false;
+      const live = (await r.json())?.commit; if (!live || live === mine) return false;
+    } catch (x) { return false; }
+    App.staleSeen = true; toast?.('🔄 ' + rt('roadmap.jobs.newVersion'), 8000);
+    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') root.location.reload(); });
+    return true;
+  };
+  /** The kinds of inbox entry this build knows, besides a task's answer ({ task }). Anything else (written by a newer connector) stays for a newer app. */
+  const KINDS = ['step', 'assign', 'i18n'];
   /** Fetch the answers waiting in the cloud, check and apply them, delete them. → how many were applied */
   App.poll = async (acc = App.acc) => {
     const CL = root.NoemaCloud; if (!acc || App.busy || !CL?.session?.() || !CL.kvRows) return 0;
     App.busy = true; let n = 0;
     try {
       const rows = (await CL.kvRows(IN)).sort((a, b) => a.key.localeCompare(b.key)); App.last = Date.now(); App.error = null;
+      if (rows.length && await App.stale()) return 0;   // 🛡 an old tab: the inbox waits for the new build
       if (rows.length && CL.pull) { try { await CL.pull(acc); } catch (x) { App.error = errW(x); return 0; } }   // apply the answers to the newest copy of each curriculum, not to an older one on this device; no sync → they wait in the inbox for the next poll
       const done = []; let steps = 0;
       for (const r of rows) {
         const cid = r.key.slice(IN.length).split(':')[0];
         let e; try { e = JSON.parse(r.value); } catch (x) { done.push(r.key); continue; }
-        const c = C().get(acc, cid);
-        if (!c) { if (Date.now() - (Date.parse(r.updated_at) || 0) > 7 * 864e5) done.push(r.key); continue; }   // not on this device (yet)
+        const c = C().get(acc, cid), age = Date.now() - (Date.parse(r.updated_at) || 0);
+        if (!c) { if (age > 7 * 864e5) done.push(r.key); continue; }   // not on this device (yet)
+        if (!e?.task && !KINDS.includes(e?.kind)) { if (age > 30 * 864e5) done.push(r.key); continue; }   // 🛡 a kind this build does not know: never deleted unread (a task's answer names its task)
         try {
           if (e.kind === 'step') { if (await finishStep(acc, c, e)) { n++; steps++; } }
           else if (e.kind === 'assign') {   // 📦 Claude saved a subject for a step the learner named: it teaches that step from now on
@@ -268,7 +287,8 @@
           }
           else if (e.kind === 'i18n') {   // 🌐 Claude translated the Roadmap's own words (titles, learning goals, chapters) with its steps' packs
             const errs = C().checkI18n(c, e.locale, e.data);
-            if (!errs.length) { C().setI18n(c, e.locale, e.data); C().save(acc, c); n++; } else console.warn('[curjobs] translation refused', errs);
+            if (!errs.length) { C().setI18n(c, e.locale, e.data); C().save(acc, c); n++; }
+            else { console.warn('[curjobs] translation refused', errs); if (age < 7 * 864e5) continue; }   // 🛡 e.g. a step this copy does not have yet: try again later, never lose it at once
           }
           else {
             const t = byId(c, e.task);   // null: applied already (an earlier check) — or out of date

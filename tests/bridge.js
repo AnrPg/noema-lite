@@ -40,6 +40,20 @@ function unit() {
   bad(b => { b.anchors.push({ at: 'ch01-s01/bxyz', quote: 'snapshot', k: 'nothing', sense: '1' }); }, /anchor|nothing/i, 'an anchor to a word with no entry is refused');
   bad(b => { b.pack = 'other'; }, /pack/i, 'a bridge of another pack is refused');
   bad(b => { b.native = 'en'; }, /native/i, 'a bridge into the pack\'s own language is refused');
+  // a bridge from a translation (docs/BRIDGE.md §2.4): the learner reads the el translation of an en pack → ru
+  { const tp = { ...pack, translations: { el: { file: true, chapters: 1 } } }, x = { ...JSON.parse(JSON.stringify(good)), source: 'el', native: 'ru' };
+    ok(!C(x, tp).errors.length, 'a bridge from a translation the pack has (el → ru of an en pack) passes');
+    ok(C(x, pack).errors.some(e => /translation saved first/.test(e)), 'a bridge from a translation the pack does not have yet is refused (bridges come after the translations)');
+    ok(!C({ ...x, native: 'en' }, tp).errors.length, 'el → en: a translation\'s bridge into the pack\'s own language is fine'); }
+  // the app: one bridge per pair, keyed "<native>" from the pack's language and "<source>.<native>" from a translation
+  { const store = {}, bx = { console, Intl, localStorage: { getItem: k => store[k] ?? null, setItem: (k, v) => { store[k] = String(v); } } }; bx.window = bx; vm.createContext(bx);
+    vm.runInContext(fs.readFileSync(path.join(ROOT, 'engine/bridge.js'), 'utf8'), bx);
+    const B = bx.NoemaBridge; store['noema1:u1:a:bridges'] = JSON.stringify({ p1: { ru: { v: 'a', status: 'draft' }, ar: { v: 'b', status: 'draft' }, 'el.ru': { v: 'c', status: 'draft', source: 'el' }, 'el.en': { v: 'd', status: 'reviewed', source: 'el' } } });
+    const subj = { id: 'p1', language: 'en' };
+    ok(B.pairKey('en', 'ru', 'en') === 'ru' && B.pairKey('el', 'ru', 'en') === 'el.ru' && B.pairKey(null, 'ar', 'en') === 'ar', 'pairKey: "<native>" from the own language, "<source>.<native>" from a translation');
+    const own = B.available('u1', 'p1', subj, 'en', 'en'), tr = B.available('u1', 'p1', subj, 'el', 'en');
+    ok(Object.keys(own).sort().join() === 'ar,ru' && Object.keys(tr).sort().join() === 'en,ru' && tr.ru.key === 'el.ru' && own.ru.key === 'ru', 'available: the English content offers en→ru, en→ar; its Greek translation offers el→ru, el→en (never the pairs of the other language)');
+    ok(!Object.keys(B.available('u1', 'p1', subj, 'ru', 'en')).length, 'the Russian translation without bridges of its own: no help offered from the English ones'); }
   // the tool: the pilot is clean, and its block ids are the app's
   const subj = path.join(ROOT, 'library/subjects/databricks');
   const chk = execFileSync('python3', [path.join(ROOT, 'tools/bridge.py'), 'check', subj], { encoding: 'utf8' });

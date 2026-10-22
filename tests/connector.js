@@ -183,7 +183,7 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
   const f3 = await tool('noema_finish_upload', { subject_id: 'packaged-physics' });
   const ix = JSON.parse(srv.state.kv[uid]?.['a:srcfiles:packaged-physics']?.value || '{}');
   ok(!f3.isError && /📎 2 source file\(s\)/.test(f3.content[0].text) && srv.state.kv[uid]['a:packmeta:packaged-physics'], 'with every file uploaded the subject is saved: ' + f3.content[0].text.split('\n').pop());
-  ok(/🌐 Still to do before this subject's flow ends[^\n]*full translations into el, ru[^\n]*文A bridges into el, ru, ar/.test(f3.content[0].text), 'a new pack (rules 2) is told which translations and bridges it still needs');
+  ok(/🌐 Still to do before this subject's flow ends[^\n]*full translations into el, ru[^\n]*文A bridges en→el, en→ru, en→ar, el→en, el→ru, el→ar, ru→en, ru→el, ru→ar/.test(f3.content[0].text), 'a new pack (rules 2) is told which translations and which bridge pairs it still needs (from its own language and from each translation)');
   ok(ix['ecb-1']?.size === F['ecb-1'].length && !ix['ecb-1'].chunks && ix['ecb-2']?.name === 'Βιβλίο μέρος 2.pdf' && ix['ecb-2'].type === 'application/pdf' && ix['ecb-2'].chunks === 2 && ix['ecb-2'].cloud && !ix.web, 'the synced index lists each file (original name, type, size, parts) → 👁 on every device');
   ok(Buffer.compare(Buffer.concat([0, 1].map(i => Buffer.from(srv.state.files[`${uid}/sources/packaged-physics/ecb-2/file.pdf.p00${i}`].data))), F['ecb-2']) === 0 && Buffer.compare(Buffer.from(srv.state.files[`${uid}/sources/packaged-physics/ecb-1/file.pdf`].data), F['ecb-1']) === 0, 'the storage holds exactly the packaged files (same paths as the app uses)');
   const inl = JSON.parse(JSON.stringify(pk)); inl.subject.id = 'inline-with-files'; inl.subject.title = 'Inline with files';
@@ -216,6 +216,22 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
   ok(t6.isError && /missing/.test(t6.content[0].text) && !JSON.parse(Buffer.from(srv.state.files[`${uid}/packs/tr-physics.json`].data).toString()).translations.el, 'an uploaded translation with an exercise missing is refused and the pack does not name it: ' + t6.content[0].text.split('\n')[1]);
   const t7 = await tool('noema_save_translation', { subject_id: 'tr-physics', locale: 'en', translation_json: JSON.stringify({ ...ru, locale: 'en' }) });
   ok(t7.isError, 'a translation into the pack’s own language is refused: ' + t7.content[0].text.split('\n').slice(0, 2).join(' '));
+  // 🌐 the subject's name in the translation's language (subject.i18n), added to a translation already saved
+  const t8 = await tool('noema_save_translation', { subject_id: 'tr-physics', locale: 'ru', subject_json: JSON.stringify({ title: 'Переведённая физика' }) });
+  const saved8 = JSON.parse(Buffer.from(srv.state.files[`${uid}/packs/tr-physics.json`].data).toString());
+  ok(!t8.isError && saved8.subject.i18n?.ru?.title === 'Переведённая физика' && saved8.translations.ru?.file && saved8.translations.fr?.file && JSON.parse(srv.state.kv[uid]['a:packmeta:tr-physics'].value).i18n?.ru?.title === 'Переведённая физика' && JSON.parse(Buffer.from(srv.state.files[`${uid}/packs/tr-physics.tr.ru.json`].data).toString()).subject?.title === 'Переведённая физика',
+    'noema_save_translation subject_json: the subject\'s name in ru goes into the translation file, the pack (subject.i18n.ru) and the synced card');
+  const t9 = await tool('noema_save_translation', { subject_id: 'tr-physics', locale: 'ru', subject_json: JSON.stringify({ colour: 'x' }) });
+  ok(t9.isError && /unknown field/.test(t9.content[0].text), 'an unknown field of the subject\'s name is refused');
+  // 文A a bridge from a translation (docs/BRIDGE.md §2.4): ru → el of an en pack, only once the ru translation is saved
+  const trb = { ...br, pack: 'tr-physics', source: 'ru', native: 'el', sections: {}, entries: [{ k: 'энергия', pos: 'NOUN', band: 2, senses: [{ id: '1', t: 'ενέργεια' }] }] };
+  const tb1 = await tool('noema_save_bridge', { bridge_json: JSON.stringify(trb) });
+  const bixT = JSON.parse(srv.state.kv[uid]['a:bridges']?.value || '{}')['tr-physics'] || {};
+  ok(!tb1.isError && srv.state.files[`${uid}/bridges/tr-physics.ru.el.json`] && bixT['ru.el']?.source === 'ru' && !bixT.el, 'a bridge from the ru translation is stored as the pair ru.el (file and index), apart from the en → el one: ' + tb1.content[0].text.split('\n')[0]);
+  const tb2 = await tool('noema_save_bridge', { bridge_json: JSON.stringify({ ...trb, source: 'de' }) });
+  ok(tb2.isError && /translation saved first/.test(tb2.content[0].text), 'a bridge from a language the pack has no translation into is refused (bridges come after the translations)');
+  const tb3 = await tool('noema_save_bridge', { subject_id: 'tr-physics', native: 'el', source: 'ru' });
+  ok(!tb3.isError && /source "ru"/.test(tb3.content[0].text), 'the upload command for a translation\'s bridge names its source: ' + tb3.content[0].text.split('\n').slice(-1)[0].slice(0, 120));
 
   const ls = (await tool('noema_list_subjects', {})).content[0].text;
   ok(/databricks/.test(ls) && /physics-by-claude/.test(ls) && /tiny-inline/.test(ls), 'list_subjects shows library + private packs');

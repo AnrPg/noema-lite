@@ -98,7 +98,12 @@ for sid, p, rel in files: print(f'   📎 {sid}: {rel} ({mb(os.path.getsize(p))}
 print(f'  pack alone (for the connector upload): {jout}')
 for loc in trfiles: print(f'  translation {loc}: ' + os.path.join(sdir, 'build', f"{meta['id']}.tr.{loc}.json"))
 if int((meta.get('authoring') or {}).get('rules', 0)) >= 2:   # the languages every new pack gets (pack_rules.json "languages"; pipeline steps translate + bridges)
-    want_t, want_b = required_locales(meta.get('language'))
-    have_b = {os.path.splitext(os.path.basename(x))[0] for x in __import__('glob').glob(os.path.join(sdir, 'bridges', '*.json'))} - {'core'}
-    miss_t, miss_b = [l for l in want_t if l not in translations], [l for l in want_b if l not in have_b]
-    if miss_t or miss_b: print('  still to do before the flow ends: ' + '; '.join(x for x in (miss_t and 'translations ' + ', '.join(miss_t) + ' (translations/<locale>/chNN.json)', miss_b and '文A bridges ' + ', '.join(miss_b) + ' (bridges/<native>.json, tools/bridge.py)') if x))
+    from noema_lib import bridge_pairs
+    want_t, _want_b = required_locales(meta.get('language')); own = (meta.get('language') or 'en').split('-')[0].lower()
+    bdir = lambda src: os.path.join(sdir, 'bridges', *([] if src == own else ['from-' + src]))   # a translation's bridges: bridges/from-<locale>/
+    miss_t = [l for l in want_t if l not in translations]
+    miss_n = [l for l in want_t if not (((meta.get('i18n') or {}).get(l) or {}).get('title'))]   # the subject's name in each translation (subject.json "i18n")
+    miss_b = [f'{a}→{b}' for a, b in bridge_pairs(own, want_t) if not os.path.exists(os.path.join(bdir(a), b + '.json'))]
+    todo = [miss_t and 'translations ' + ', '.join(miss_t) + ' (translations/<locale>/chNN.json)', miss_n and "the subject's name in " + ', '.join(miss_n) + ' (subject.json "i18n": {"<locale>": {title, description, hero, …}})',
+            miss_b and '文A bridges ' + ', '.join(miss_b) + ' (bridges/<native>.json from the pack\'s language, bridges/from-<locale>/<native>.json from a translation — after it; tools/bridge.py --from)']
+    if any(todo): print('  still to do before the flow ends: ' + '; '.join(x for x in todo if x))

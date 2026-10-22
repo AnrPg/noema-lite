@@ -131,10 +131,16 @@ def pack_i18n(pack, translations, external=False):
     if translations or (pack.get('subject') or {}).get('i18n'): pack['v'] = 2
     return translations or None
 
+SUBJECT_I18N = ('title', 'appTitle', 'description', 'searchExamples', 'hero', 'tutor')
 def translation_file(pack, loc, chapters):
-    """One noema-translation file: the chapters of one language, with the pack's ids (docs/i18n.md §10)."""
-    return {'format': 'noema-translation', 'v': 1, 'pack': pack['subject']['id'], 'locale': loc, 'source': pack['subject'].get('language') or 'en',
-            'version': pack.get('version'), 'chapters': chapters}
+    """One noema-translation file: the chapters of one language, with the pack's ids (docs/i18n.md §10), and the subject's
+    name in it ("subject" = subject.i18n.<loc>: title, description, hero, …) — saved with it, the pack's card, title and
+    tagline are in that language too."""
+    t = {'format': 'noema-translation', 'v': 1, 'pack': pack['subject']['id'], 'locale': loc, 'source': pack['subject'].get('language') or 'en',
+         'version': pack.get('version'), 'chapters': chapters}
+    sub = {k: v for k, v in (((pack['subject'].get('i18n') or {}).get(loc)) or {}).items() if k in SUBJECT_I18N and v}
+    if sub: t['subject'] = sub
+    return t
 
 def languages():
     """tools/pack_rules.json "languages": the translations and 文A bridges every new pack gets."""
@@ -148,6 +154,14 @@ def required_locales(own):
     L = languages(); o = (own or 'en').split('-')[0].lower()
     keep = lambda xs: [x for x in xs if x.split('-')[0].lower() != o]
     return keep(L.get('translations') or []), keep(L.get('bridges') or [])
+
+def bridge_pairs(own, translations=None):
+    """Every 文A bridge a new pack gets: (the language the learner reads, their native language) — from the pack's own
+    language and, when pack_rules.json "bridgesFrom" says so, from each of its translations (made after the translation)."""
+    L = languages(); o = (own or 'en').split('-')[0].lower()
+    tr = [x.split('-')[0].lower() for x in (translations if translations is not None else required_locales(own)[0])]
+    src = [o] + (tr if 'translations' in (L.get('bridgesFrom') or []) else [])
+    return [(s, n.split('-')[0].lower()) for s in src for n in (L.get('bridges') or []) if n.split('-')[0].lower() != s]
 
 def content_hash(obj):
     return hashlib.sha256(json.dumps(obj, sort_keys=True, ensure_ascii=False).encode('utf-8')).hexdigest()[:16]

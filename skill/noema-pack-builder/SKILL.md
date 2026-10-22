@@ -260,9 +260,12 @@ A pack is written in one language (`subject.language`). **Every new pack also ge
 and Russian — each of them that is not its own language** (the learner's rule; `pack_rules.json` "languages",
 `references/PIPELINES.md` §4b). A learner whose app speaks one of them sees it, everyone else sees the original with a
 small language tag. Other languages only when the user asks. `pipeline.py check work/<id> translate` says which chapters
-are still missing.
-- **Name and description**: in `subject.json` add `"i18n": { "el": { "title": "…", "description": "…" } }` (also
-  `appTitle`, `searchExamples`, `hero`, `tutor` — only fields the subject has). Locale codes: `el ru fr de it es-ES pt-PT sq
+— and which names — are still missing. **Translate everything the learner sees of the pack**: the chapters (terms in
+brackets too), its name and tagline, and in a Roadmap everything its step's panel shows.
+- **Name and description (required for each translation)**: in `subject.json` add `"i18n": { "el": { "title": "…",
+  "appTitle": "…", "description": "…", "hero": {…} } }` (also `searchExamples`, `tutor` — only fields the subject has).
+  `make_pack.py` puts it in each translation file (`"subject"`), so `noema_save_translation` gives the pack's card, title
+  and tagline in that language. Without it the card stays in the original language. Locale codes: `el ru fr de it es-ES pt-PT sq
   tr ar-EG hi ja zh-Hans zh-Hant en` or a bare language (`es`, `pt`).
 - **Chapters**: `translations/<locale>/chNN.json` = the whole chapter (as built: base + patches) translated, with the
   SAME ids, sections, blocks, exercises, cards, playbooks, pitfalls and answers — only the words change. Translate
@@ -273,16 +276,23 @@ are still missing.
   asks for each one with ready `curl` commands; `noema_save_translation` adds one later. `unpack.py` gives the
   translations back in `translations/`. Contract: `references/CONTENT_SPEC.md` → "Packs in several languages".
 - **A step of a Roadmap**: the Roadmap is translated with its packs, into the same languages. With the pack's
-  translations, translate the step's own words on the map — its title, summary, learning goals (one per goal, same order)
-  and chapter titles (by chapter ref) — and save them with `noema_save_roadmap_translation` (curriculum_id, locale,
-  `{ "nodes": { "<step id>": { "title", "summary", "learningGoals": [...], "chapters": { "<ref>": "…" } } } }`). A new
+  translations, translate the step's own words on the map — everything its panel shows: title, summary, learning goals
+  (one per goal, same order), domains, and every chapter's title, teaching goals and coverage (by chapter ref) — and save
+  them with `noema_save_roadmap_translation` (curriculum_id, locale, `{ "nodes": { "<step id>": { "title", "summary",
+  "learningGoals": [...], "domains": [...], "chapters": { "<ref>": { "title", "goals": [...], "coverage": [...] } } } } }`). A new
   Roadmap (`noema_create_roadmap`) gets its title, goal and every step's title and summary translated right away.
   `noema_finish_upload` / `noema_save_translation` print the exact texts still untranslated.
 
-## Language help — 文A bridges: every pack into English, Greek, Russian and Arabic (flow step `bridges`)
-Every new pack gets a bridge into each of en, el, ru, ar that is not its own language, **everyday words included** (≥ 90 %
-of the content words and ≥ 80 % of the everyday ones; `python3 scripts/bridge.py require <pack>` checks it). Other
-languages when the user asks.
+## Language help — 文A bridges: every pair of en, el, ru → en, el, ru, ar (flow step `bridges`, after `translate`)
+A bridge is one pair: the language the learner READS → their native language. The learner may read the pack's own
+language or one of its translations, so every new pack gets **every pair**: from its own language into each of en, el, ru,
+ar other than it, AND from each translation into each of en, el, ru, ar other than that translation's language (an English
+pack: en→el, en→ru, en→ar, el→en, el→ru, el→ar, ru→en, ru→el, ru→ar), **everyday words included** (≥ 90 % of the content
+words and ≥ 80 % of the everyday ones; `python3 scripts/bridge.py require <pack>` checks every pair). A translation's
+bridges are made from **the translation's words**, so after it: the same steps with `--from <locale>` (files in
+`bridges/from-<locale>/`; the translation is `translations/<locale>/` or `build/<id>.tr.<locale>.json` beside the pack, or
+`--translation FILE`), saved with `noema_save_bridge(subject_id, native, source: "<locale>")`. Other languages when the
+user asks.
 For a learner who studies the pack in a language that is not their own ("my student is Russian, the pack is Greek"): a
 **bridge** gives the pack's words, in the meaning they have IN the pack, in the learner's language. It is a sidecar; the
 pack is not changed. Contract and rules: `references/BRIDGE.md` (or `noema_bridge_guide`).
@@ -305,6 +315,8 @@ pack is not changed. Contract and rules: `references/BRIDGE.md` (or `noema_bridg
 6. `python3 scripts/bridge.py build <pack.json> --native ru -o ru.bridge.json` → save it with `noema_save_bridge`:
    call it with `subject_id` + `native` only, run the `curl` upload it returns on `ru.bridge.json`, then call it again
    (never paste a bridge into the call: they are 50–150 KB). Or the learner imports the file with 📥. Learners' *Report a mistake* notes come back in `noema_bridge_guide`.
+7. Then each translation: steps 2–6 with `--from el` (`bridge.py todo <pack.json> --from el` …, `build … --from el --native
+   ru -o ru.bridge.json`, `noema_save_bridge` with `source` "el"). `bridge.py require <pack>` passes once every pair is in.
    The connector's prompt `language_help` runs these steps.
 
 ## Quality bar (check before saving)

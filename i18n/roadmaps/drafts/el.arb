@@ -56,6 +56,7 @@
   "roadmap.jobs.planned": "σχεδιάστηκαν: {list}",
   "roadmap.jobs.log": "Εφαρμογή Claude — {kind, select, dag {Πράκτορας 1} audit {Πράκτορας 1β} expand {Πράκτορας 2} other {Πράκτορας 3}}: {line}",
   "roadmap.jobs.stepReady": "Το «{title}» — το ετοίμασε η εφαρμογή Claude σου — είναι έτοιμο για μελέτη",
+  "roadmap.jobs.newVersion": "Κυκλοφόρησε νεότερο noema-lite — ανοίγει την επόμενη φορά που θα επιστρέψεις σε αυτή την καρτέλα",
   "roadmap.jobs.attached": "Το «{subject}» διδάσκει πλέον τον σταθμό «{step}»{replan, select, yes { — ο σταθμός ξανασχεδιάζεται} other {}}",
   "roadmap.jobs.notHere": "Αυτός ο Οδικός χάρτης δεν είναι σε αυτή τη συσκευή.",
   "roadmap.jobs.taskDone": "Αυτή η εργασία έχει ήδη γίνει (ή ο Οδικός χάρτης άλλαξε) — αντίγραψε ξανά την τρέχουσα εργασία.",

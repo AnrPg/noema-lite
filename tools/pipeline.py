@@ -129,8 +129,11 @@ def local_check(kind, d, run):
             miss = [c for c in chs if not os.path.exists(os.path.join(d, "translations", loc, c + ".json"))]
             ok = ok and not miss
             L.append(f"{loc}: " + (f"missing {', '.join(miss)} (translations/{loc}/chNN.json)" if miss else f"all {len(chs)} chapters"))
+            name = ((s.get("i18n") or {}).get(loc) or {})   # the subject's name in it: its card, title and tagline (subject.json "i18n")
+            lack = [k for k in ("title", "appTitle", "description") if s.get(k) and not name.get(k)]
+            if lack: ok = False; L.append(f"{loc}: the subject's name is not translated — {', '.join(lack)} (subject.json \"i18n\": {{\"{loc}\": {{\"title\", \"description\", \"hero\", …}}}})")
         return ok, L + ["each is checked against its chapter by make_pack.py (step checks)"]
-    if kind == "bridges":   # a bridge into en, el, ru, ar minus the pack's language, with enough of the content and everyday words
+    if kind == "bridges":   # every pair (own language and each translation → en, el, ru, ar minus the language read), with enough of the content and everyday words
         r = subprocess.run([sys.executable, find("bridge.py"), "require", d], capture_output=True, text=True)
         return r.returncode == 0, (r.stdout + r.stderr).strip().splitlines()[-20:]
     return False, [f"unknown local check {kind}"]

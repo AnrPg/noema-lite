@@ -52,6 +52,20 @@ ok(n.title === 'Αρχιτεκτονική NTP' && n.learningGoals[0] === 'New g
 c.nodes.a.learningGoals = ['g1', 'g2', 'g3'];
 ok(C.shownNode(c, 'a').learningGoals.length === 3, 'goals of another length show the own words');
 
+console.log('everything the step panel shows');
+const pc = rec(); pc.nodes.a.domains = ['chemistry']; pc.nodes.a.chapters = [{ ref: 'c1', title: 'Bases', goals: ['Name the bases', 'Draw one'], coverage: ['purines'] }, { ref: 'c2', title: 'Phosphates', goals: [], coverage: [] }];
+ok(C.checkI18n(pc, 'el', { nodes: { a: { domains: ['χημεία'], chapters: { c1: { title: 'Βάσεις', goals: ['Ονόμασε τις βάσεις', 'Σχεδίασε μία'], coverage: ['πουρίνες'] }, c2: 'Φωσφορικά' } } } }).length === 0, 'a chapter with its goals and coverage, a domain list, a title-only chapter pass');
+const pe = C.checkI18n(pc, 'el', { nodes: { a: { domains: [], chapters: { c1: { title: 'x', goals: ['one'], foo: 1 } } } } });
+ok(pe.some(e => /domains: 1 strings/.test(e)) && pe.some(e => /c1\.goals: 2 strings/.test(e)) && pe.some(e => /c1\.foo: unknown field/.test(e)), 'wrong domain / goal counts and unknown chapter fields are refused');
+ok(C.i18nTodo(pc, 'el').chapters.join() === 'a' && C.i18nTodo(pc, 'el').domains.join() === 'a', 'untranslated chapter goals and domains are listed');
+C.setI18n(pc, 'el', { nodes: { a: { chapters: { c1: 'Βάσεις', c2: 'Φωσφορικά' } } } });
+ok(C.i18nTodo(pc, 'el').chapters.join() === 'a', 'titles alone: the chapter goals are still to do');
+C.setI18n(pc, 'el', { nodes: { a: { domains: ['χημεία'], chapters: { c1: { goals: ['Ονόμασε τις βάσεις', 'Σχεδίασε μία'], coverage: ['πουρίνες'] } } } } });
+const pn = C.shownNode(pc, 'a');
+ok(pn.chapters[0].title === 'Βάσεις' && pn.chapters[0].goals[1] === 'Σχεδίασε μία' && pn.chapters[0].coverage[0] === 'πουρίνες' && pn.domains[0] === 'χημεία', 'merged: the chapter keeps its translated title and shows its goals, coverage and the domains');
+ok(!C.i18nTodo(pc, 'el').chapters.length && !C.i18nTodo(pc, 'el').domains.length, 'nothing left for the panel');
+ok(pc.nodes.a.chapters[0].goals[0] === 'Name the bases', 'the record keeps its own words');
+
 console.log('two copies');
 const old = JSON.parse(JSON.stringify(rec())), newer = JSON.parse(JSON.stringify(c));
 ok(C.mergePlans(old, newer) && old.i18n?.el?.nodes?.b?.title === 'Μεταφορά φωσφορυλίου', 'an older copy takes the later translation');

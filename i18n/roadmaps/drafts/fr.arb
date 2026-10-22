@@ -56,6 +56,7 @@
   "roadmap.jobs.planned": "planifiées : {list}",
   "roadmap.jobs.log": "Application Claude — {kind, select, dag {Agent 1} audit {Agent 1b} expand {Agent 2} other {Agent 3}} : {line}",
   "roadmap.jobs.stepReady": "« {title} » — préparée par ton application Claude — est prête à être étudiée",
+  "roadmap.jobs.newVersion": "Une version plus récente de noema-lite est disponible — elle s’ouvrira la prochaine fois que vous reviendrez sur cet onglet",
   "roadmap.jobs.attached": "« {subject} » enseigne désormais « {step} »{replan, select, yes { — cette étape est replanifiée} other {}}",
   "roadmap.jobs.notHere": "Ce parcours n’est pas sur cet appareil.",
   "roadmap.jobs.taskDone": "Cette tâche est déjà faite (ou le parcours a changé) — copie à nouveau la tâche actuelle.",

@@ -317,19 +317,30 @@ A Roadmap is written in one language (`c.language`), like a pack. Its own words 
 into the same languages** (English, Greek and Russian minus its own — docs/PIPELINES.md §4b):
 ```json
 "i18n": { "el": { "title": "…", "goal": "…", "at": "<stamp>",
-                  "nodes": { "<step id>": { "title": "…", "summary": "…", "learningGoals": ["…"], "chapters": { "<chapter ref>": "…" } } } } }
+                  "nodes": { "<step id>": { "title": "…", "summary": "…", "learningGoals": ["…"], "domains": ["…"],
+                                            "chapters": { "<chapter ref>": { "title": "…", "goals": ["…"], "coverage": ["…"] } } } } } }
 ```
+A chapter may also be its title alone (`"<ref>": "…"`, as before); `goals` and `coverage` are one string per teaching goal /
+coverage item of the planned chapter, in order. **Everything the step's panel shows is translated** — its title, summary,
+"after this step you can" goals, domains, chapter titles, and what a tapped chapter shows (its teaching goals and coverage):
+`i18nTodo` counts a chapter as done only with all three.
 * **When.** Right after `noema_create_roadmap`: its title, goal and every step's title and summary (the reply lists them).
-  When a step's pack is translated: that step's learning goals and chapter titles (`noema_finish_upload` and
+  When a step's pack is translated: that step's learning goals, domains and chapters (`noema_finish_upload` and
   `noema_save_translation` list what is still untranslated, as the JSON to send). The step's task (`stepText`) says so.
 * **How it arrives.** `noema_save_roadmap_translation` checks the object (`checkI18n`: known step ids and chapter refs, one
-  string per learning goal) and writes an inbox entry `{ kind: 'i18n', locale, data }` (§7); the app merges it into the
-  record (`setI18n`, only the fields given) and syncs it. Between two copies the later translation of a locale wins
+  string per learning goal, domain, teaching goal and coverage item) and writes it **straight into the Roadmap** (`kvUpdate`:
+  a PATCH conditioned on the row's `updated_at`, retried on a clash — so every device shows it at its next sync, whatever
+  tab is open), and also an inbox entry `{ kind: 'i18n', locale, data }` (§7) that the app merges again harmlessly
+  (`setI18n`, only the fields given). Between two copies the later translation of a locale wins
   (`mergePlans`, by `i18n.<locale>.at`).
 * **What the learner sees.** `trLocale(c)` picks the locale along the UI locale's chain (never English for someone else),
   like a pack's translations (docs/i18n.md §10). The map, the list, the treasure map, the step panel, *Next up*, the
   frame's Roadmap cards and crumbs draw `shownTitle(c)` / `shownNode(c, id)` — copies for drawing; the stored record keeps
   its own words. A field that no longer fits (another number of learning goals, an unknown chapter ref) shows the own words.
+* **🛡 Nothing in the inbox is lost.** The app deletes an inbox entry only once it applied it: a kind it does not know (a
+  newer connector) stays (30 days), a translation it refuses (e.g. a step this copy does not have yet) stays a week; and a
+  tab older than the website (`build.json`, written by `tools/build.py site`; `App.stale`) leaves the inbox alone and
+  reloads the next time it comes to the front.
 * **Edits.** Renaming a step or changing its summary, goals or chapters (✏️ `Edit.update`) and a new chapter plan
   (`applyPlans`) drop that step's translations of those fields (`dropI18n`); they are made again with the next translation.
 
