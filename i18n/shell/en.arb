@@ -3574,5 +3574,9 @@
         "example": "3"
       }
     }
+  },
+  "sh.hideToday": "Hide for today",
+  "@sh.hideToday": {
+    "description": "Tooltip and screen-reader label of the small \u00d7 on Today's big 'continue' card: hides that suggestion until tomorrow (the next subject you started takes its place)."
   }
 }
