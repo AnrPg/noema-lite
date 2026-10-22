@@ -123,7 +123,8 @@ For every chapter, before any theory or exercise, write `work/<id>/map/chNN.json
 4. `sourceQuestions`: **every exercise / question / problem / worked example of the sources, none left out**, full
    text. `answerFrom: "source"` when the source solves it: take its result as correct (no second check) but rewrite the
    explanation in your own words, more detailed, insightful and explanatory. `answerFrom: "claude"` when it does not:
-   solve it twice, independently, compare, and say how in `check`.
+   solve it twice, independently, compare, and say how in `check`. **Never leave a source exercise out to meet a quota**
+   (see "Quotas without dropping source exercises" below).
 5. Plan the facades: each learnable becomes several exercises of different types (the same idea as mcq, tf, calc,
    cloze…). About 300 exercises per chapter is a mild target, never a cap.
    The critical-thinking types make the deeper facades: `flaw` (the wrong line of a worked solution + why), `case`
@@ -140,6 +141,17 @@ exercise type and focus tag that fits the chapter ≥ 3 times** (its map's `fits
 `unfit`; `spotbug write` need code, `calc` math, the picture types a picture), every paradigm that fits ≥ 2 times,
 **difficulty ≈ 20 / 25 / 55 %, recall ≤ 25 %, apply or higher ≥ 40 %**, every learnable ≥ 2 exercises in ≥ 2 types.
 Sizes are only a guide, never a target. Plan the exercises as a grid (learnables × types) before writing them.
+
+**Quotas without dropping source exercises.** Every source exercise stays in, so when they tip the mix (too much recall,
+too easy, too few types, focus tags or paradigms), meet the quotas with two tricks:
+1. **Add your own exercises on top** of the source ones, in the types, focus, difficulty and kinds of thinking that are
+   short, until every quota holds.
+2. **Lightly adjust some source exercises**: ask one as another type, focus or difficulty (an mcq asked as `calc` or
+   `cloze`, a recall question asked as an apply or `case` exercise, an easy one taken one step further).
+
+Guards: never drop a source exercise; an adjusted one keeps its substance (the same situation, data, code and idea) and
+its answer, changes only a little (framing, type, one step more), and keeps its `cite.sq`; every `sourceQuestions` entry
+keeps ≥ 1 exercise that is recognisably that exercise. Prefer adding over adjusting when a change would be more than small.
 
 `work/<id>/chapters/chNN.json`, one per chapter, exactly as `CONTENT_SPEC.md` says: theory blocks
 (short, concrete, one idea each), comparisons side by side, **all three kinds of table** (`kind`:
