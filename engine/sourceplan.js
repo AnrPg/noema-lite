@@ -219,6 +219,75 @@ ${describe(inv).slice(0, 60000)}
     for (const n of Object.values(parsed.nodes)) if (n.fileRefs?.length) chat[n.id] = n.fileRefs.map(r => r.range ? `${r.path} pp. ${r.range[0]}–${r.range[1]}` : r.path);
     return { parsed, chat, plan };
   }
+  /** 🌱 Grow a Roadmap in parts (noema_extend_roadmap, docs/FROM_SOURCES.md §6): a NEW PART of an existing Roadmap — new steps
+      from new material — joined to the steps already on the map. The one way to name a connection point: "@<step id>" (the
+      ids noema_roadmap_map lists; they never change). In a new step, "prerequisites" holds refs of the part's own steps or
+      "@id" of steps already on the map; "before": ["@id"] makes a new step a prerequisite of a step on the map that is not
+      prepared yet. d = { part, summary, steps: [{ ref, title, summary, role, prerequisites, before, files }], files }
+      → { entry } — the inbox entry { kind: 'extend', part, nodes, edges, prepare } that NoemaCurJobs.extend applies — or { errors }. */
+  const REF_AT = /^@(.+)$/, normT = s => String(s || '').toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
+  function extendFromClaude(c, d, { independent = false, prepare = true, now = Date.now() } = {}) {
+    const e = [], steps = Array.isArray(d?.steps) ? d.steps : [], have = c?.nodes || {};
+    const part = String(d?.part || d?.title || '').trim();
+    if (!part) e.push('part: name this new part (e.g. "Week 5 — Thermodynamics" or "Lectures 9–11")');
+    if (!steps.length) e.push('steps: at least one new step');
+    if (Object.keys(have).length + steps.length > MAX_STEPS) e.push(`steps: a Roadmap holds at most ${MAX_STEPS} steps (it has ${Object.keys(have).length})`);
+    const refs = new Set();
+    steps.forEach((s, i) => {
+      if (!s?.ref || !s?.title) { e.push(`step ${i + 1}: ref and title are required`); return; }
+      s.ref = String(s.ref); if (REF_AT.test(s.ref)) e.push(`step ${i + 1}: a new step's ref must not start with "@" ("@" names a step already on the map)`);
+      if (refs.has(s.ref)) e.push(`step ${s.ref}: refs must be unique`); refs.add(s.ref);
+      if (!ROLES.includes(s.role)) s.role = 'aspect';
+      s.prerequisites = [].concat(s.prerequisites || []).map(String); s.before = [].concat(s.before || []).map(String);
+    });
+    if (e.length) return { errors: e };
+    const byTitle = new Map(Object.values(have).map(n => [normT(n.title), n.id]));
+    const flat = x => normT(x).replace(/ /g, ''), pre = (a, b) => { let i = 0; while (i < a.length && a[i] === b[i]) i++; return i; };
+    const like = x => { const k = flat(x); return Object.values(have).filter(n => [flat(n.id), flat(n.title)].some(v => v && (v.includes(k) || k.includes(v) || pre(v, k) >= Math.min(5, k.length)))).slice(0, 3).map(n => `@${n.id} (“${n.title}”)`).join(', '); };
+    const onMap = (s, x, how) => {
+      const m = REF_AT.exec(x); if (!m) return null;
+      if (!have[m[1]]) { const l = like(m[1]); e.push(`step ${s.ref}: ${how} "${x}" is not a step of this Roadmap${l ? ` — did you mean ${l}?` : ''} (noema_roadmap_map lists every step id)`); return null; }
+      return m[1];
+    };
+    const ext = [];   // links between the new part and the map: { from, to } with a new step's ref on one side
+    for (const s of steps) {
+      const dup = byTitle.get(normT(s.title)); if (dup) e.push(`step ${s.ref} “${s.title}”: this step is on the map already (@${dup}) — link to it ("@${dup}" in prerequisites) instead of adding it again`);
+      for (const p of s.prerequisites) {
+        if (!REF_AT.test(p)) { if (!refs.has(p)) e.push(`step ${s.ref}: unknown prerequisite "${p}" — a ref of a step of this part, or "@<step id>" of a step on the map`); continue; }
+        const id = onMap(s, p, 'prerequisite'); if (id) ext.push({ from: id, to: s.ref });
+      }
+      for (const b of s.before) {
+        if (!REF_AT.test(b)) { e.push(`step ${s.ref}: before "${b}" must be "@<step id>" of a step on the map (inside the part, use prerequisites)`); continue; }
+        const id = onMap(s, b, 'before'); if (!id) continue;
+        const n = have[id];
+        if (n.pack?.assigned || ['ready', 'generating'].includes(n.pack?.status)) { e.push(`step ${s.ref}: before "@${id}" — “${n.title}” is prepared already (the learner may be studying it), so it cannot get a new prerequisite; link the other way ("@${id}" in prerequisites) or leave it out`); continue; }
+        ext.push({ from: s.ref, to: id });
+      }
+    }
+    if (!ext.length && !independent && Object.keys(have).length) e.push('the new part is not connected to the map: give at least one new step a prerequisite "@<step id>" (what it builds on) or a "before" (a step on the map it prepares). If this part really is independent of everything on the map, call again with independent = true.');
+    if (e.length) return { errors: e };
+    // the part's own files and graph: checked like noema_create_roadmap (every listed file used, pages inside their file, no cycle)
+    const inv = (Array.isArray(d.files) ? d.files : []).filter(f => f?.path).map(f => ({ path: String(f.path), name: String(f.path).split('/').pop(), pages: +f.pages || 0, paged: +f.pages > 0 }));
+    const plan = { title: part, summary: d.summary || '', roadmap: { steps: steps.map(s => ({ ref: s.ref, title: s.title, summary: s.summary || '', role: s.role, prerequisites: s.prerequisites.filter(p => !REF_AT.test(p)), files: inv.length ? s.files || [] : [] })) } };
+    const errs = check(plan, inv, { only: 'roadmap' }); if (errs.length) return { errors: errs };
+    if (!inv.length) plan.roadmap.steps.forEach((s, i) => { s.files = steps[i].files || []; });
+    let parsed; try { parsed = I().parse(mapText(plan)); } catch (x) { return { errors: [String(x.message || x)] }; }
+    // ids: from the titles, never one that is on the map already (a step id is its connection point for good)
+    const rename = {}, taken = new Set(Object.keys(have));
+    for (const id of Object.keys(parsed.nodes)) { let nid = id, k = 2; while (taken.has(nid)) nid = id + '_' + k++; taken.add(nid); rename[id] = nid; }
+    const idOf = {}; for (const n of Object.values(parsed.nodes)) idOf[n.key] = rename[n.id];
+    const at = new Date(now).toISOString(), pid = 'p' + now.toString(36);
+    const nodes = {};
+    for (const n of Object.values(parsed.nodes)) {
+      const { fileRefs, key, parent, num, ...rest } = n, id = rename[n.id];
+      nodes[id] = { ...rest, id, chapters: [], learningGoals: [], addedIn: pid, ...(fileRefs?.length ? { chatFiles: fileRefs.map(r => r.range ? `${r.path} pp. ${r.range[0]}–${r.range[1]}` : r.path) } : {}) };
+    }
+    const edges = parsed.edges.map(x => ({ from: rename[x.from], to: rename[x.to], why: x.why || '' }));
+    for (const x of ext) edges.push({ from: idOf[x.from] || x.from, to: idOf[x.to] || x.to, why: '' });
+    const all = [...(c.edges || []), ...edges];
+    if (!C().topo([...Object.keys(have), ...Object.keys(nodes)], all)) { const cyc = (C().topo.cycle || []).map(x => have[x]?.title || nodes[x]?.title).filter(Boolean); return { errors: [`these links form a cycle with the map${cyc.length ? ': ' + cyc.join(' → ') : ''} — a step cannot come before itself`] }; }
+    return { entry: { v: 1, kind: 'extend', part: { id: pid, title: part.slice(0, 120), summary: String(d.summary || '').slice(0, 400), at }, nodes, edges, prepare: !!prepare }, ids: idOf };
+  }
   /* i18n-ignore-end */
   /* i18n-ignore-start — the brief of the subject (for Claude) */
   /** The subject alternative as the brief Claude builds it from: the confirmed chapter plan, each chapter with its pages. */
@@ -230,5 +299,5 @@ ${describe(inv).slice(0, 60000)}
   const courseMessage = (plan, inv, { language = '', goal = '' } = {}) => `Please make a noema-lite subject for me with the noema-lite connector, from the files I attach (${inv.map(it => it.name).join(', ')}).\nTitle: ${plan.title}\n${language ? `Language: ${language}\n` : ''}${goal ? `My goal: ${goal}\n` : ''}\n${courseBrief(plan)}`;
   /* i18n-ignore-end */
 
-  return { inventory, estimate, propose, task, fromAnswer, fromClaude, check, roadmapImport, mapText, courseBrief, courseMessage, units, S_PLAN, COURSE_MAX };
+  return { inventory, estimate, propose, task, fromAnswer, fromClaude, extendFromClaude, check, roadmapImport, mapText, courseBrief, courseMessage, units, S_PLAN, COURSE_MAX };
 })();

@@ -1,0 +1,23 @@
+{
+ "format": "noema.pipeline/v1",
+ "id": "9",
+ "title": "Grow a Roadmap: a new part from new material",
+ "when": "The learner brings new material (e.g. this week's lectures) for a Roadmap that exists: it grows by a part joined to the steps already on the map.",
+ "steps": [
+  "classify",
+  "read_map",
+  "grow",
+  "plan",
+  "start_subject",
+  "map",
+  "pictures",
+  "write",
+  "blind_solve",
+  "review",
+  "translate",
+  "bridges",
+  "checks",
+  "upload",
+  "next"
+ ]
+}

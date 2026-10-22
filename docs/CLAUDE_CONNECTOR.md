@@ -114,7 +114,8 @@ steps — with the learner's Claude plan instead of API credit (docs/CURRICULUM.
 waits), `noema_curriculum_task` (the next task as complete instructions: agent prompt + JSON Schema, or a step's brief +
 subject id + signed links to the learner's files), `noema_curriculum_submit` (checked with the app's own validators;
 problems come back to fix), and `noema_create_roadmap` (a new Roadmap from the material the learner gave Claude —
-docs/FROM_SOURCES.md §5). Prompt `curriculum_work`. A step is saved with the usual upload; `noema_finish_upload`
+docs/FROM_SOURCES.md §5), `noema_roadmap_map` + `noema_extend_roadmap` (a new part of a Roadmap that exists, from new
+material, joined to its steps by `"@<step id>"` — docs/FROM_SOURCES.md §6). Prompt `curriculum_work`. A step is saved with the usual upload; `noema_finish_upload`
 recognises a curriculum step by its subject id, registers it with its curriculum and node, links packaged files that are
 the learner's own (same SHA-256) instead of asking for them again, and tells the app through the inbox.
 **Shared curricula** (docs/CURRICULUM.md §8): a step handed out is also reserved among the curriculum's participants (steps

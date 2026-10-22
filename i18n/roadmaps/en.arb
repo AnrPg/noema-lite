@@ -462,6 +462,20 @@
       }
     }
   },
+  "roadmap.jobs.partAdded": "New part “{title}”: {n, plural, one {# step} other {# steps}} added to the map",
+  "@roadmap.jobs.partAdded": {
+    "description": "Toast and Roadmap log line: the learner's Claude added a new part (new steps from new material, joined to the steps already there) to this Roadmap.",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Week 5 — Thermodynamics"
+      },
+      "n": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
   "roadmap.jobs.notHere": "This Roadmap is not on this device.",
   "@roadmap.jobs.notHere": {
     "description": "Error when the learner pastes Claude’s answer for a Roadmap that is not on this device."

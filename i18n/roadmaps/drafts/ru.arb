@@ -58,6 +58,7 @@
   "roadmap.jobs.stepReady": "«{title}» — подготовлен твоим приложением Claude — готов к изучению",
   "roadmap.jobs.newVersion": "Вышла новая версия noema-lite — она откроется, когда вы в следующий раз вернётесь на эту вкладку",
   "roadmap.jobs.attached": "Предмет «{subject}» теперь ведёт этап «{step}»{replan, select, yes { — этот этап перепланируется} other {}}",
+  "roadmap.jobs.partAdded": "Новая часть «{title}»: {n, plural, one {# этап добавлен} few {# этапа добавлены} many {# этапов добавлено} other {# этапа добавлено}} на карту",
   "roadmap.jobs.notHere": "Этой дорожной карты нет на этом устройстве.",
   "roadmap.jobs.taskDone": "Это задание уже выполнено (или дорожная карта изменилась) — скопируй текущее задание заново.",
   "roadmap.jobs.notJson": "Это не ответ в формате JSON — вставь ровно то, что ответил Claude (объект JSON).",

@@ -59,9 +59,37 @@ keeps `chatFiles` (`"file pp. a–b"`), and the chapter-plan and step tasks of `
 ("in the Claude chat where this Roadmap was made"). `sourceplan.js` and `curimport.js` are bundled into the connector
 (`tools/build.py` → `MCP_ENGINE`).
 
+## 6. Grow a Roadmap in parts — new material for a Roadmap that exists
+A course is rarely known ahead: the learner brings the next lectures week by week, and the Roadmap grows with them. New
+material for a Roadmap that exists is a **new part** of it, never a second Roadmap (pipeline flow 9, skill §0c):
+
+1. **`noema_roadmap_map(curriculum_id)`** — the map as it will be (record + inbox): every step in study order with its
+   **`@id`**, state (prepared, queued, planned, needs a plan), prerequisites, chapters, and the parts so far.
+2. **`noema_extend_roadmap(curriculum_id, plan_json, independent?, prepare?)`** with only the new steps:
+   `{ part, summary, steps: [{ ref, title, summary, role, prerequisites, before, files }], files: [{ path, pages }] }`.
+   **The one canonical connection point is a step's id, written `"@<id>"`.** Step ids are made once from the title and
+   never change (renaming a step keeps its id), so a part added months later still finds the step it builds on.
+   * `prerequisites`: refs of the part's own steps (`n1`) or `"@id"` of steps on the map — what a new step builds on.
+   * `before: ["@id"]` — a step on the map that must come after the new one; only a step that is not prepared yet
+     (the learner may be studying a prepared one, and a new prerequisite would lock it).
+   * A new step whose title is already on the map is refused (link to it instead); every part is joined to the map unless
+     `independent: true`; the whole graph must stay acyclic; the part's files are checked as in §5.
+3. `NoemaSourcePlan.extendFromClaude` turns it into an inbox entry `{ kind: 'extend', part, nodes, edges, prepare }`
+   (`a:curin:<cid>:<seq>` — the connector never writes the record). New ids avoid every id on the map; each new step keeps
+   `addedIn` (its part) and `chatFiles` (its files in that chat: the plan and step tasks say “in the Claude chat where the
+   part … was added”). `NoemaCurJobs.extend` applies it — in the app (`App.poll`, then 🌱 a toast) and in the connector's
+   view (`merged`): the steps, the links, `c.parts` (the first part is the map as it was), the study order, and, unless
+   `prepare: false`, the new steps queued in study order. A finished Roadmap goes back to `stage: 'plan'`; nothing already
+   planned or prepared changes. An entry is applied once (`c.parts` holds its id); one this copy cannot apply yet (a step it
+   links to has not synced) waits up to a week.
+4. In the app, the map's ⋮ → **Add a part with Claude** copies the message for a Claude chat (`NoemaCurJobs.growMessage`);
+   the learner pastes it with the new files. Nothing else on the map changes: the new steps simply appear on it.
+
 ## Tests
 `tests/from_sources.js`: the estimate, the checks, a pasted answer, the import and the brief without a browser; then in the
 browser (Supabase emulator, scripted Claude) the wizard from 🧭 Roadmaps, a wrong AI answer sent back, both shapes, a Roadmap
 made from it (only the chapter planner runs; files and pages on their steps), one subject through Create with Claude (on the
 Shelf; the plan is the brief), the Claude app by copy and paste, and the connector's `noema_create_roadmap` (a wrong Roadmap
-sent back, a good one stored, its chapter-plan task naming the chat's files, the app picking it up on sync).
+sent back, a good one stored, its chapter-plan task naming the chat's files, the app picking it up on sync), then a new part
+(`noema_roadmap_map`, a part with an unknown `@id` / a duplicate step / no join sent back, a good one in the inbox and in the
+connector's view, its plan task naming the part's chat, the app adding it on sync).

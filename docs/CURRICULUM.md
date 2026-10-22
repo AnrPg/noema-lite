@@ -195,7 +195,9 @@ usage limits may spread a big one over days).
   The app (`NoemaCurJobs.App`) reads the inbox when it comes back to the front and every 20 s while something waits,
   checks each answer again, applies it, pushes the curriculum to the cloud and only then deletes the rows (so the connector
   always sees one or the other). A finished step: the app downloads the pack (pictures embedded), marks the step ⚡ and
-  syncs the file index the connector wrote. Inbox rows are never mirrored into the device's KV.
+  syncs the file index the connector wrote. Inbox rows are never mirrored into the device's KV. A **new part** of the
+  Roadmap (`noema_extend_roadmap`, `{ kind: 'extend' }`) arrives the same way: its steps, links and `c.parts` entry
+  (docs/FROM_SOURCES.md §6).
 * **Each queued step is prepared once.** `noema_curriculum_task` hands a step out only after *claiming* it for that run —
   an atomic KV row `a:curclaim:<cid>:<nid>` (insert-if-absent; an expired one is taken over by a conditional update), so
   overlapping scheduled runs and two runs asking at the same moment always get different steps. The claim ends when the

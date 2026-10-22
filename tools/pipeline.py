@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Which content flow am I in, which step comes next, and did it pass? (docs/PIPELINES.md)
   python3 pipeline.py flows                                   every flow (tools/pipelines/<id>.json) and when it applies
-  python3 pipeline.py detect [--sources N] [--topics N] [--goal] [--step] [--queue] [--extend] [--bridge] [--translate]
+  python3 pipeline.py detect [--sources N] [--topics N] [--goal] [--step] [--queue] [--grow] [--extend] [--bridge] [--translate]
                              [--import] [--lang-task] [--new-language]          → the flow for what the learner gave and asked
   python3 pipeline.py start FLOW DIR [--course C] [--lang L] [--locale X]       write DIR/run.json (DIR = the subject folder,
                                                                               or the course folder of a language flow)
@@ -41,13 +41,14 @@ def detect(a):
     if "--import" in a: return "8", "the learner brings a Roadmap file or a pack"
     if "--bridge" in a: return "6", "language help for an existing pack"
     if "--translate" in a: return "7", "a translation of an existing pack"
+    if "--grow" in a: return "9", "new material for a Roadmap that exists: a new part, joined to its steps"
     if "--extend" in a: return "5", "new material for a subject that exists"
     if "--step" in a: return "2", "a Roadmap step handed over by noema_curriculum_task"
     if "--queue" in a: return "3", "a Roadmap whose steps need chapter plans"
     if "--goal" in a and not n("--sources"): return "1b", "a goal and no sources"
     if n("--topics") > 1: return "1", "several topics building on each other: a Roadmap"
     if n("--sources") or "--goal" in a: return "4", "material that fits one subject"
-    return None, "say what the learner gave: --sources N --topics N, --goal, --step, --extend, --bridge, --translate, --import, --lang-task, --new-language"
+    return None, "say what the learner gave: --sources N --topics N, --goal, --step, --grow, --extend, --bridge, --translate, --import, --lang-task, --new-language"
 
 def now(): return datetime.datetime.now(datetime.timezone.utc).replace(microsecond=0).isoformat()
 
