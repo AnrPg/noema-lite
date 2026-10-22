@@ -1450,6 +1450,7 @@ window.NoemaCurMap = (() => {
     overlay((box, close) => {
       box.classList.add('cg-box', 'cm-src');
       let files = [], inv = null, plan = null, shape = null, ctl = null;
+      const pop = (...t) => { const d = tip(...t); d.classList.add('pop'); d.addEventListener('mouseenter', () => { d.open = true; }); d.addEventListener('mouseleave', () => { d.open = false; }); return d; };   // ⓘ: a small bubble on hover or tap
       /* 1 · the material */
       const flist = el('ul', { class: 'cg-files cm-srcfiles' });
       const addFiles = async list => {
@@ -1478,7 +1479,7 @@ window.NoemaCurMap = (() => {
       const notes = el('textarea', { class: 'noema-input', rows: 2, placeholder: CM('roadmap.map.src.notesPh') });
       /* 2 · who reads it */
       const a = LLM().available(acc);
-      const reader = el('select', { class: 'noema-input cm-srcreader' }, a.claude || a.gemini ? el('option', { value: 'auto' }, CM('roadmap.map.src.readKey')) : null,
+      const reader = el('select', { class: 'cm-srcreader', title: CM('roadmap.map.src.whoTip'), 'aria-label': CM('roadmap.map.src.reader') }, a.claude || a.gemini ? el('option', { value: 'auto' }, CM('roadmap.map.src.readKey')) : null,
         el('option', { value: 'app' }, CM('roadmap.map.src.readApp')), el('option', { value: 'estimate' }, CM('roadmap.map.src.readEstimate')));
       reader.value = a.claude || a.gemini ? 'auto' : 'app';
       const status = el('div', { class: 'tiny cg-status', 'aria-live': 'polite' }), err = el('div', { class: 'tiny cg-kstat bad' });
@@ -1501,7 +1502,7 @@ window.NoemaCurMap = (() => {
         if (!inv) return;
         if (!plan && reader.value === 'app') {
           const ans = el('textarea', { class: 'noema-input cm-paste', rows: 4, placeholder: CM('roadmap.map.src.pastePh') }), out = el('div', { class: 'tiny' });
-          result.append(el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, CM('roadmap.map.src.appTitle')), tip(CM('roadmap.map.src.appTip'))),
+          result.append(el('div', { class: 'cm-srcstep' }, el('div', { class: 'cg-steptitle' }, el('b', {}, CM('roadmap.map.src.appTitle')), pop(CM('roadmap.map.src.appTip'))),
             el('div', { class: 'row' }, el('a', { class: 'btn small', href: 'https://claude.ai/new', target: '_blank', rel: 'noopener' }, CM('roadmap.map.app.openClaude')),
               el('button', { class: 'btn small primary cm-srccopytask', onclick: e => copy(P.task(inv, opts()), e.currentTarget) }, CM('roadmap.map.src.copyTask'))),
             ans, el('div', { class: 'row' }, el('button', { class: 'btn small primary cm-srcuse', onclick: () => {
@@ -1513,15 +1514,13 @@ window.NoemaCurMap = (() => {
           return;
         }
         if (!plan) return;
-        const n = { course: plan.course.chapters.length, roadmap: plan.roadmap.steps.length };
-        const card = k => el('button', { class: 'cg-choice cm-srcshape' + (shape === k ? ' on' : ''), 'data-shape': k, 'aria-pressed': String(shape === k), onclick: () => { shape = k; drawResult(); } },
-          el('b', {}, CM('roadmap.map.src.shape.' + k), plan.recommend === k ? el('span', { class: 'cg-badge' }, CM('roadmap.map.src.recommended')) : null),
-          el('span', { class: 'tiny' }, CM(k === 'course' ? 'roadmap.map.src.nChapters' : 'roadmap.map.src.nSteps', { n: n[k] })), el('span', { class: 'tiny' }, CM('roadmap.map.src.shapeSub.' + k)));
+        const n = { course: plan.course.chapters.length, roadmap: plan.roadmap.steps.length }, other = shape === 'course' ? 'roadmap' : 'course';
         const items = shape === 'course' ? plan.course.chapters : plan.roadmap.steps;
         const preview = el('ol', { class: 'cm-preview cm-srcplan' }, ...items.map(x => el('li', {}, el('b', {}, x.title), x.summary ? el('span', { class: 'tiny' }, ' — ' + x.summary) : null, el('div', { class: 'tiny cm-srcrefs' }, x.files.join(' · ')))));
-        result.append(el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, CM('roadmap.map.src.proposal')), tip(CM('roadmap.map.src.proposalTip'))),
-          el('ul', { class: 'tiny cm-srcwhy' }, ...plan.reasons.map(r => el('li', {}, r))),
-          el('div', { class: 'cg-choices cm-srcshapes' }, card('course'), card('roadmap')), el('label', { class: 'cg-field' }, CM('roadmap.map.src.name'), title),
+        result.append(el('div', { class: 'cm-srcstep' },
+          el('div', { class: 'cm-srcchosen', 'data-shape': shape }, el('b', {}, CM('roadmap.map.src.made.' + shape, { n: n[shape] })), pop(el('ul', { class: 'cm-srcwhy' }, ...plan.reasons.map(r => el('li', {}, r))))),
+          el('button', { class: 'btn small ghost cm-srcswitch', 'data-shape': other, onclick: () => { shape = other; drawResult(); } }, CM('roadmap.map.src.switch.' + other)),
+          el('label', { class: 'cg-field' }, CM('roadmap.map.src.name'), title),
           el('details', { class: 'cg-faq' }, el('summary', {}, CM(shape === 'course' ? 'roadmap.map.src.seeChapters' : 'roadmap.map.src.seeSteps', { n: items.length })), preview)),
           shape === 'course' ? buildCourse() : buildRoadmap());
       };
@@ -1540,7 +1539,7 @@ window.NoemaCurMap = (() => {
             close(); if (c.status === 'ready') { G().kick(); map(acc, c.id, { onStudy }); } else progress(acc, c, { onStudy, start: true });
           } catch (e) { berr.textContent = '⚠️ ' + errMsg(e); go.disabled = false; }
         } }, CM('roadmap.map.src.makeRoadmap'));
-        return el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, CM('roadmap.map.src.build')), tip(CM('roadmap.map.src.buildRoadmapTip'))), PP.box, go, busy, berr);
+        return el('div', { class: 'cm-srcstep' }, PP.box, el('div', { class: 'row' }, go, pop(CM('roadmap.map.src.buildRoadmapTip'))), busy, berr);
       };
       /** One subject: ✨ Create with Claude, here with a key (the plan is the brief), or the learner's Claude app (a message to paste). */
       const buildCourse = () => {
@@ -1550,18 +1549,16 @@ window.NoemaCurMap = (() => {
           el('div', { class: 'row' }, el('a', { class: 'btn small', href: 'https://claude.ai/new', target: '_blank', rel: 'noopener' }, CM('roadmap.map.app.openClaude')),
             el('button', { class: key ? 'btn small cm-srccopymsg' : 'btn small primary cm-srccopymsg', onclick: e => copy(P.courseMessage(p, inv, { language: C().LANG[lang.value] || lang.value, goal: goal.value }), e.currentTarget) }, CM('roadmap.map.app.copyMsg')),
             el('button', { class: 'btn small ghost', onclick: () => setupClaude(acc) }, CM('roadmap.map.app.firstTime'))));
-        return el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, CM('roadmap.map.src.build')), tip(CM('roadmap.map.src.buildCourseTip'))),
-          key ? here : el('p', { class: 'tiny' }, CM('roadmap.map.src.noKeyCourse')), key ? el('details', { class: 'cg-faq' }, el('summary', {}, CM('roadmap.map.src.orApp')), app) : app);
+        return el('div', { class: 'cm-srcstep' }, el('div', { class: 'row' }, key ? here : el('span', { class: 'tiny' }, CM('roadmap.map.src.noKeyCourse')), pop(CM('roadmap.map.src.buildCourseTip'))), key ? el('details', { class: 'cg-faq' }, el('summary', {}, CM('roadmap.map.src.orApp')), app) : app);
       };
       reader.addEventListener('change', () => { plan = null; drawResult(); });
       box.append(head(CM('roadmap.map.src.title'), CM('roadmap.map.src.lead')),
-        el('ol', { class: 'cg-steps' },
-          el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, CM('roadmap.map.src.material')), tip(CM('roadmap.map.src.materialTip'))),
-            drop, el('div', { class: 'row' }, pickDir, dirBtn, count), flist,
-            el('details', { class: 'cg-faq' }, el('summary', {}, CM('roadmap.map.new.more')), el('label', { class: 'cg-field' }, CM('roadmap.map.src.lang'), lang), el('label', { class: 'cg-field' }, CM('roadmap.map.src.goal'), goal), el('label', { class: 'cg-field' }, CM('roadmap.map.src.notes'), notes))),
-          el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, CM('roadmap.map.src.who')), tip(CM('roadmap.map.src.whoTip'))),
-            el('label', { class: 'cg-field' }, CM('roadmap.map.src.reader'), reader), el('div', { class: 'row' }, readBtn), status, err),
-          result),
+        el('div', { class: 'cm-srccard' },
+          drop, el('div', { class: 'row' }, pickDir, dirBtn, count, pop(CM('roadmap.map.src.materialTip'))), flist,
+          el('div', { class: 'row cm-srcact' }, readBtn, reader,
+            el('details', { class: 'cm-srcmore' }, el('summary', { title: CM('roadmap.map.new.more'), 'aria-label': CM('roadmap.map.new.more') }, '⋮'),
+              el('div', { class: 'cm-srcmorebody' }, el('label', { class: 'cg-field' }, CM('roadmap.map.src.lang'), lang), el('label', { class: 'cg-field' }, CM('roadmap.map.src.goal'), goal), el('label', { class: 'cg-field' }, CM('roadmap.map.src.notes'), notes)))),
+          status, err, result),
         el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: () => { ctl?.abort(); close(); } }, CM('roadmap.map.close'))));
     });
   }
