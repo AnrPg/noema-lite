@@ -128,6 +128,10 @@ core, think about splitting the node.
   public copies carry their translations inline.
 - **A bridge** covers ≥ 90 % of the content words of the theory and ≥ 80 % of the everyday ones (band 1, and every word
   no entry covers yet), because learners may be at A2/B1 (`bridge.py require`; docs/BRIDGE.md).
+- **A Roadmap's own words** (its title and goal; each step's title, summary, learning goals and chapter titles) are translated
+  into the same languages as its packs (`c.i18n`, docs/CURRICULUM.md §10): the whole map right after it is made, then each
+  step's learning goals and chapter titles together with that step's pack translations — `noema_save_roadmap_translation`;
+  `noema_create_roadmap`, `noema_finish_upload` and `noema_save_translation` list exactly what is still untranslated.
 - Checked at the end of the flow, never on the first upload: `noema_finish_upload` lists what is still missing.
 - The Gemini generator translates every chapter into the same languages (`engine/packgen.js`, step 3b).
 

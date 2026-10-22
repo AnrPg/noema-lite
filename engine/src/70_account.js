@@ -46,7 +46,7 @@ function openAccountMenu(tab = 'profile') {
 function subjectLabel(sid, list = []) {
   const m = list.find(s => s.id === sid); if (m?.title) return m.title;
   if (sid === SUBJ.id) return SUBJ.title;
-  const st = window.NoemaCurriculum?.stepsOf?.(ACCOUNT.id, sid)?.[0]; if (st?.c.nodes[st.nid]?.title) return st.c.nodes[st.nid].title;
+  const st = window.NoemaCurriculum?.stepsOf?.(ACCOUNT.id, sid)?.[0]; if (st?.c.nodes[st.nid]?.title) return window.NoemaCurriculum.shownNode(st.c, st.nid).title;
   const w = String(sid).replace(/^cur-[a-z0-9]+-/, '').replace(/-[a-z0-9]{4}$/, '').replace(/[-_]+/g, ' ').trim();
   return w ? w[0].toUpperCase() + w.slice(1) : sid;
 }

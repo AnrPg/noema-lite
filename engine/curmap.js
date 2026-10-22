@@ -52,7 +52,7 @@ window.NoemaCurMap = (() => {
             const s = c.status === 'ready' ? C().summary(acc, c) : null;
             const sh = c.shared && !c.shared.ended ? c.shared : null;
             const card = el('button', { class: 'cm-card', onclick: () => { close(); c.status === 'ready' || c.status === 'attach' ? map(acc, c.id, { onStudy }) : progress(acc, c, { onStudy }); } },
-              el('div', { class: 'cm-cardtop' }, el('span', { class: 'cm-emo' }, sh ? '👥' : '🧭'), el('b', {}, c.title || c.goal)),
+              el('div', { class: 'cm-cardtop' }, el('span', { class: 'cm-emo' }, sh ? '👥' : '🧭'), el('b', {}, C().shownTitle(c))),
               sh ? el('div', { class: 'tiny cm-sharedby' }, '👥 ' + (sh.role === 'member' ? CM('roadmap.map.lib.sharedBy', { who: sh.ownerName || CM('roadmap.map.lib.itsOwner') }) : CM('roadmap.map.lib.youShare', { pub: sh.public ? 'yes' : 'no' }))) : null,
               s ? el('div', { class: 'cm-bar' }, el('i', { style: { width: fmtPct(s.pct) } })) : null,
               el('div', { class: 'tiny' }, s ? CM('roadmap.map.lib.cardStats', { m: s.mastered, total: s.total, open: s.open, ready: s.ready }) + (sh ? ' · ' + CM('roadmap.map.lib.sharedN', { n: Object.values(c.remote || {}).filter(x => x.status === 'ready').length }) : '') + (window.NoemaCurJobs && !J().work(c).done ? ' · 💬 ' + CM('roadmap.map.lib.waitingClaude') : '') : c.status === 'attach' ? '📦 ' + CM('roadmap.map.lib.attachTap') : c.status === 'waiting' ? '💬 ' + CM('roadmap.map.lib.waitingClaudeTap') : c.status === 'building' ? '⏳ ' + CM('roadmap.map.lib.building') : c.status === 'paused' ? '⏸️ ' + CM('roadmap.map.lib.pausedTap') : '⚠️ ' + CM('roadmap.map.lib.stoppedTap')));
@@ -1111,7 +1111,7 @@ window.NoemaCurMap = (() => {
         page ? null : member ? null : el('button', { class: 'btn small cm-sharetool', title: CM('roadmap.map.lib.shareTip'), onclick: () => shareCurriculum(acc, cid, { onDone: () => drawMap() }) }, '👥'),
         page ? null : el('button', { class: 'btn small', title: CM('roadmap.map.map.settingsTip'), onclick: () => settings() }, '⚙️'));
       const seg = page ? el('div', { class: 'ns-seg small cm-viewseg', role: 'radiogroup', 'aria-label': SL('mapOrList', 'Map or list') }, ...[[false, SL('viewMap', 'Map')], [true, SL('viewList', 'List')]].map(([v, l]) => el('button', { class: 'cm-vbtn', 'data-list': String(v), role: 'radio', onclick: () => setList(v) }, l))) : null;   // i18n-ignore (SL: the English fallback of an sh.* key of i18n/shell)
-      box.append(el('div', { class: 'cm-top' }, page ? null : el('button', { class: 'btn small ghost', onclick: () => { close(); toLibrary(); } }, cmBack() + ' ' + CM('roadmap.map.lib.title')), el('div', { class: 'cm-title' }, el('b', {}, (page ? '' : '🧭 ') + (c.title || c.goal)), sum), seg, tools, page ? null : el('button', { class: 'btn small', 'aria-label': CM('roadmap.map.close'), onclick: close }, '✕')),
+      box.append(el('div', { class: 'cm-top' }, page ? null : el('button', { class: 'btn small ghost', onclick: () => { close(); toLibrary(); } }, cmBack() + ' ' + CM('roadmap.map.lib.title')), el('div', { class: 'cm-title' }, el('b', {}, (page ? '' : '🧭 ') + C().shownTitle(c)), sum), seg, tools, page ? null : el('button', { class: 'btn small', 'aria-label': CM('roadmap.map.close'), onclick: close }, '✕')),
         holdBar, appBar, shareBar, el('div', { class: 'cm-body' }, scroller, panel),
         page ? null : legend());
 
@@ -1131,7 +1131,7 @@ window.NoemaCurMap = (() => {
         if (vert) L.cols.forEach((col, x) => { const off = (rows - col.length) * (nw + gx) / 2; col.forEach((id, y) => P[id] = { x: gx / 2 + off + y * (nw + gx), y: top + (nL - 1 - x) * (nh + gy) }); });   // layer 0 at the bottom
         else L.cols.forEach((col, x) => { const off = (rows - col.length) * (nh + gy) / 2; col.forEach((id, y) => P[id] = { x: gx / 2 + x * (nw + gx), y: top + off + y * (nh + gy) }); });
         // the three parts
-        const goalT = c.title || c.goal;
+        const goalT = C().shownTitle(c);
         for (const [k, label] of [['prereq', '1 · ' + CM('roadmap.map.map.bandPre')], ['core', '2 · ' + goalT], ['apps', '3 · ' + CM('roadmap.map.map.bandApps')]]) { const [a, b] = L.parts[k]; if (b < a) continue;
           inner.append(el('div', { class: 'cm-band cm-' + k, style: vert ? { left: '6px', width: (W - 12) + 'px', top: (top + (nL - 1 - b) * (nh + gy) - gy / 2 + 6) + 'px', height: ((b - a + 1) * (nh + gy) - 12) + 'px' } : { left: (a * (nw + gx) + 8) + 'px', width: ((b - a + 1) * (nw + gx) - 16) + 'px', height: (H - 8) + 'px' } }, el('span', {}, label))); }
         if (vert) inner.append(el('div', { class: 'cm-chest', 'aria-hidden': 'true', style: { left: (W / 2 - 22) + 'px', top: '18px' }, html: '<svg viewBox="0 0 44 34" width="44" height="34"><rect x="3" y="12" width="38" height="20" rx="4" fill="var(--t2, #ffe8a3)" stroke="var(--t2i, #b07d10)" stroke-width="2"/><path d="M3 18h38M22 12v20" stroke="var(--t2i, #b07d10)" stroke-width="2"/><path d="M5 12q17-14 34 0" fill="var(--t2, #ffe8a3)" stroke="var(--t2i, #b07d10)" stroke-width="2"/></svg>' }));
@@ -1145,8 +1145,8 @@ window.NoemaCurMap = (() => {
         inner.append(svg);
         // the learner's character waits at the next station
         const nx = vert ? C().nextUp(acc, c)[0] : null, ART = window.NoemaArt, TH = window.NoemaThemes;
-        for (const [id, n] of Object.entries(c.nodes)) {
-          const s2 = st[id], pk = n.pack?.status, key = c.id + '/' + id;
+        for (const id of Object.keys(c.nodes)) {
+          const n = C().shownNode(c, id), s2 = st[id], pk = n.pack?.status, key = c.id + '/' + id;   // 🌐 its words in the learner's language when the Roadmap has them
           const state = s2.mastered ? 'mastered' : s2.open ? 'open' : 'locked';
           const badge = s2.mastered ? '✅' : s2.locked ? '🔒' : openIc();
           const rx = c.shared && !c.shared.ended ? c.remote?.[id] : null;   // 👥 what the others did with this step
@@ -1192,12 +1192,12 @@ window.NoemaCurMap = (() => {
           <g transform="translate(${tx} ${ty})"><path d="M-11 -11 L11 11 M11 -11 L-11 11" stroke="var(--t3i)" stroke-width="5" stroke-linecap="round"/><g transform="translate(16 -34)"><rect x="0" y="6" width="40" height="26" rx="4" fill="var(--t2)" stroke="var(--t2i)" stroke-width="1.5"/><path d="M0 14 q20 -18 40 0" fill="var(--t2)" stroke="var(--t2i)" stroke-width="1.5"/><rect x="16" y="14" width="8" height="9" rx="1.5" fill="var(--t2i)"/></g></g>
           ${flags}</svg>`);
         /* i18n-ignore-end */
-        const goal = (c.title || c.goal || '').trim(), gw = Math.min(W - 130, 300);
+        const goal = C().shownTitle(c).trim(), gw = Math.min(W - 130, 300);
         inner.append(el('div', { class: 'cm-tlabel', style: { left: f1(Math.max(20, Math.min(W - 20 - gw, tx - gw / 2))) + 'px', bottom: (H - ty + 40) + 'px', width: gw + 'px' } }, SL('rmTreasure', 'The treasure: ' + goal, { goal })));   // i18n-ignore (SL: the English fallback of an sh.* key of i18n/shell)
         // the stations
         const nx = C().nextUp(acc, c)[0];
-        for (const [id, n] of Object.entries(c.nodes)) {
-          if (X[id] == null) continue;
+        for (const id of Object.keys(c.nodes)) {
+          if (X[id] == null) continue; const n = C().shownNode(c, id);
           const s2 = st[id], state = s2.mastered ? 'mastered' : s2.open ? 'open' : 'locked', pct = Math.round((s2.score || 0) * 100), mk = s2.mastered ? [] : marks(id, n, s2);
           const inside = s2.mastered ? ART?.svg('check') || '✓' : s2.open ? (pct ? esc(pctTxt(pct / 100)) : OPEN_SVG) : ART?.svg('lock') || '🔒';
           let hero = null;
@@ -1231,7 +1231,7 @@ window.NoemaCurMap = (() => {
         const L = C().layout(c); canvas.innerHTML = ''; canvas.style.width = ''; canvas.style.height = '';
         const list = el('ol', { class: 'cm-list' });
         L.cols.forEach((col, x) => col.forEach(id => {
-          const n = c.nodes[id], s2 = st[id], state = s2.mastered ? 'mastered' : s2.open ? 'open' : 'locked', pk = n.pack?.status;
+          const n = C().shownNode(c, id), s2 = st[id], state = s2.mastered ? 'mastered' : s2.open ? 'open' : 'locked', pk = n.pack?.status;
           list.append(el('li', {}, el('button', { class: `cm-node cm-listnode cm-${state}` + (sel === id ? ' sel' : ''), 'data-id': id, onclick: () => { sel = id; drawMap(); showPanel(id); } },
             el('span', { class: 'cm-ic' }, ICON[n.role] || '•'), el('span', { class: 'cm-t' }, mtStep(el('b', {}, n.title)), el('small', {}, (ROLE[n.role] || '') + (pk === 'ready' ? ' · ⚡ ' + CM('roadmap.map.st.prepared') : pk === 'generating' ? ' · ⏳ ' + CM('roadmap.map.st.preparing') : n.pack?.assigned ? ' · 📦 ' + CM('roadmap.map.st.yourSubject') : ''))),
             el('span', { class: 'cm-badges' }, s2.mastered ? '✅' : s2.locked ? '🔒' : openIc()), s2.score && !s2.mastered ? el('i', { class: 'cm-prog', style: { width: fmtPct(s2.score) } }) : null)));
@@ -1239,8 +1239,8 @@ window.NoemaCurMap = (() => {
         canvas.append(list);
       }
       function showPanel(id) {
-        c = C().get(acc, cid) || c; const n = c.nodes[id]; if (!n) return; const st = C().statuses(acc, c)[id]; const pk = n.pack || {}; const key = c.id + '/' + id;
-        const T = x => c.nodes[x]?.title || x;
+        c = C().get(acc, cid) || c; const n = C().shownNode(c, id); if (!n) return; const st = C().statuses(acc, c)[id]; const pk = n.pack || {}; const key = c.id + '/' + id;   // n: for drawing only (🌐 translated words)
+        const T = x => C().shownNode(c, x)?.title || x;
         const live = G().live[key];
         panel.innerHTML = ''; panel.classList.add('on');
         const act = el('div', { class: 'cm-actions' });
@@ -1342,7 +1342,7 @@ window.NoemaCurMap = (() => {
         scroller.scrollTo({ left: Math.max(0, x - r.width / 2 + bw * zoom / 2), top: Math.max(0, y - r.height / 2 + bh * zoom / 2), behavior: 'smooth' });
       }
       function showNext() {
-        const ids = C().nextUp(acc, c); const T = x => c.nodes[x].title;
+        const ids = C().nextUp(acc, c); const T = x => C().shownNode(c, x).title;
         overlay((b2, close2) => b2.append(head('▶ ' + CM('roadmap.map.map.nextUp'), CM('roadmap.map.next.lead')), ids.length ? el('ol', { class: 'cm-next' }, ...ids.slice(0, 30).map(id => el('li', {}, el('a', { href: '#', onclick: e => { e.preventDefault(); close2(); sel = id; drawMap(); showPanel(id); scrollToNode(id); } }, T(id)), ' ', el('span', { class: 'tiny' }, c.nodes[id].pack?.status === 'ready' ? '⚡ ' + CM('roadmap.map.st.prepared') : c.nodes[id].pack?.status === 'generating' ? '⏳ ' + CM('roadmap.map.st.preparing') : !c.nodes[id].reviewed && !c.autoApprove ? '📝 ' + CM('roadmap.map.next.needsReview') : '✔ ' + CM('roadmap.map.next.reviewed'))))) : el('p', {}, '🎉 ' + CM('roadmap.map.next.allDone')), el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: close2 }, CM('roadmap.map.close')))));
       }
       function settings() {
@@ -1405,7 +1405,7 @@ window.NoemaCurMap = (() => {
         });
       }
       async function test(id) {
-        const n = c.nodes[id];
+        const n = C().shownNode(c, id);
         overlay((b2, close2) => {
           // first what the test is (nothing is prepared, no AI is asked, until the learner goes on)
           b2.append(head('🎓 ' + n.title, CM('roadmap.map.pnl.knowIt')),

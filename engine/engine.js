@@ -2280,7 +2280,7 @@ function nextAfterChapter(c) {
   const CU = window.NoemaCurriculum, acc = ACCOUNT?.id, at = CU?.stepsOf && acc ? CU.stepsOf(acc, SUBJ.id)[0] : null; if (!at) return null;
   const all = CU.statuses(acc, at.c), ord = CU.order(at.c).filter(x => at.c.nodes[x]);
   const to = ord.find(x => (all[x]?.parents || []).includes(at.nid)) || CU.nextUp(acc, at.c).find(x => x !== at.nid);
-  return to ? h('button', { class: 'btn nextch', title: at.c.nodes[to].title, onclick: () => go('#/map/' + encodeURIComponent(at.c.id) + '/' + encodeURIComponent(to)) }, SL('nextStepBtn', { title: at.c.nodes[to].title }) + ' ' + arrowOn()) : null;
+  return to ? h('button', { class: 'btn nextch', title: CU.shownNode(at.c, to).title, onclick: () => go('#/map/' + encodeURIComponent(at.c.id) + '/' + encodeURIComponent(to)) }, SL('nextStepBtn', { title: CU.shownNode(at.c, to).title }) + ' ' + arrowOn()) : null;
 }
 function chapterView(id, tab, focus) {
   const c = CH[id]; if (!c) return go(HOME());
@@ -3636,7 +3636,7 @@ function openAccountMenu(tab = 'profile') {
 function subjectLabel(sid, list = []) {
   const m = list.find(s => s.id === sid); if (m?.title) return m.title;
   if (sid === SUBJ.id) return SUBJ.title;
-  const st = window.NoemaCurriculum?.stepsOf?.(ACCOUNT.id, sid)?.[0]; if (st?.c.nodes[st.nid]?.title) return st.c.nodes[st.nid].title;
+  const st = window.NoemaCurriculum?.stepsOf?.(ACCOUNT.id, sid)?.[0]; if (st?.c.nodes[st.nid]?.title) return window.NoemaCurriculum.shownNode(st.c, st.nid).title;
   const w = String(sid).replace(/^cur-[a-z0-9]+-/, '').replace(/-[a-z0-9]{4}$/, '').replace(/[-_]+/g, ' ').trim();
   return w ? w[0].toUpperCase() + w.slice(1) : sid;
 }

@@ -172,6 +172,7 @@
       let e; try { e = typeof r.value === 'string' ? JSON.parse(r.value) : r.value; } catch (x) { continue; }
       if (e.kind === 'step') { const n = cc.nodes[e.nid]; if (n && !n.pack?.assigned) n.pack = { ...(n.pack || {}), id: e.packId, status: 'ready' }; continue; }
       if (e.kind === 'assign') { const n = cc.nodes[e.nid]; if (n && !C().Edit?.cannotAssign?.(cc, n)) attachTo(cc, n, e); continue; }
+      if (e.kind === 'i18n') { if (!C().checkI18n(cc, e.locale, e.data).length) C().setI18n(cc, e.locale, e.data); continue; }   // 🌐 a Roadmap translation (noema_save_roadmap_translation)
       const t = byId(cc, e.task); if (t && !check(cc, t, e.data).length) apply(cc, t, e.data);
     }
     return cc;
@@ -213,7 +214,7 @@
       `\n## The plan (follow it exactly: one pack chapter per planned chapter, same order and titles; do not re-teach what the learner already mastered)\n${t.brief}`,
       `\n## How to build and save it\n1. Use the noema-pack-builder skill if you have it; otherwise ${mode === 'connector' ? 'call noema_get_toolkit and noema_authoring_guide' : 'follow the noema-lite authoring guide you were given'}. Start with: python3 scripts/start_subject.py work ${t.packId} "${t.stepTitle.replace(/"/g, "'")}" --lang ${c.language}, then python3 scripts/pipeline.py start 2 work/${t.packId} and, after each step, pipeline.py next / pipeline.py check work/${t.packId} <step> (without the skill: noema_pipeline gives the same steps)\n2. Pictures only where they have real teaching value (from the files, from the web, drawn diagrams / function graphs) — none is better than a decorative one; each picture gets ≥ 3 exercises, and a chapter with pictures has every picture exercise type ≥ 3 times. In every chapter: every exercise type and focus tag that fits the chapter (declared in its map) ≥ 3 times; counts are a guide, never a target (tools/pack_rules.json). Quality rules Q1–Q8 (CONTENT_SPEC.md): before each chapter write its exhaustive knowledge map (map/chNN.json: every point not taught earlier on the map, learnables, the types and paradigms that fit, every question the files ask); every exercise is self-contained (never \"Q2\", \"page 5\" or \"the source\" — write the item out, origin only in \"cite\"); every exercise of the sources is in, written out in full (a source's own solution is taken as correct, answerFrom \"source\", but explained more deeply in your own words; one the source does not solve is solved twice and checked, answerFrom \"claude\"); the theory of every chapter has all three kinds of table (table blocks with kind \"compare\" = a comparative matrix, \"summary\" = categorises or sums up the concepts, \"breakdown\" = related concepts across columns of different parameters); difficulty ≈ 20/25/55 %, recall ≤ 25 %; then solve every exercise blind and write review/chNN.json. Then translate every chapter into ${(globalThis.NoemaPackCheck?.requiredLocales(c.language || 'en').translations || ['en', 'el', 'ru']).join(', ')} (translations/<locale>/chNN.json, same ids and answers) and make 文A bridges into ${(globalThis.NoemaPackCheck?.requiredLocales(c.language || 'en').bridges || ['en', 'el', 'ru', 'ar']).join(', ')}, everyday words included (bridge.py require). Validate with make_pack.py.\n` +
         (mode === 'connector'
-          ? `3. Save it with noema_start_upload → curl → noema_finish_upload, subject_id "${t.packId}" (it asks for the source files you packaged; the learner's own files are recognised and not uploaded twice). The step then appears ready on the learner's map by itself.\n4. Then call noema_curriculum_task for the next step, if the learner asked for more than one.`
+          ? `3. Save it with noema_start_upload → curl → noema_finish_upload, subject_id "${t.packId}" (it asks for the source files you packaged; the learner's own files are recognised and not uploaded twice). The step then appears ready on the learner's map by itself.\n4. With the pack's translations (English, Greek, Russian minus its own language), translate this step on the Roadmap into the same languages: its title, summary, learning goals and chapter titles, with noema_save_roadmap_translation (noema_finish_upload and noema_save_translation list the exact texts still untranslated).\n5. Then call noema_curriculum_task for the next step, if the learner asked for more than one.`
           : `3. Give the learner the package ${t.packId}.noema.zip to download. In noema-lite they open this step on the map and press “📥 Import its package”.`),
       `Do not ask questions unless something essential is missing — choose sensible defaults.`].join('\n');
   }
@@ -264,6 +265,10 @@
             if (res.code === 'notInLibrary' && Date.now() - (Date.parse(r.updated_at) || 0) < 864e5) continue;   // its card has not synced yet: next time
             if (res.ok) { n++; toast('📦 ' + rt('roadmap.jobs.attached', { subject: e.title || e.packId, step: C().get(acc, cid)?.nodes[e.nid]?.title || e.nid, replan: res.replan ? 'yes' : 'no' }), 5000); }
             else toast('📦 ' + res.error, 5000);
+          }
+          else if (e.kind === 'i18n') {   // 🌐 Claude translated the Roadmap's own words (titles, learning goals, chapters) with its steps' packs
+            const errs = C().checkI18n(c, e.locale, e.data);
+            if (!errs.length) { C().setI18n(c, e.locale, e.data); C().save(acc, c); n++; } else console.warn('[curjobs] translation refused', errs);
           }
           else {
             const t = byId(c, e.task);   // null: applied already (an earlier check) — or out of date

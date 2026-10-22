@@ -312,6 +312,27 @@ Shelf*). Nothing was moved or deleted to make it: subjects that were not on a ma
 arrived (imported, from Explore, shared with you, made by Claude without a step) lands on the Shelf, with a hint to put it
 on a map.
 
+## 10. 🌐 A Roadmap in several languages (`c.i18n`)
+A Roadmap is written in one language (`c.language`), like a pack. Its own words are translated **together with its packs,
+into the same languages** (English, Greek and Russian minus its own — docs/PIPELINES.md §4b):
+```json
+"i18n": { "el": { "title": "…", "goal": "…", "at": "<stamp>",
+                  "nodes": { "<step id>": { "title": "…", "summary": "…", "learningGoals": ["…"], "chapters": { "<chapter ref>": "…" } } } } }
+```
+* **When.** Right after `noema_create_roadmap`: its title, goal and every step's title and summary (the reply lists them).
+  When a step's pack is translated: that step's learning goals and chapter titles (`noema_finish_upload` and
+  `noema_save_translation` list what is still untranslated, as the JSON to send). The step's task (`stepText`) says so.
+* **How it arrives.** `noema_save_roadmap_translation` checks the object (`checkI18n`: known step ids and chapter refs, one
+  string per learning goal) and writes an inbox entry `{ kind: 'i18n', locale, data }` (§7); the app merges it into the
+  record (`setI18n`, only the fields given) and syncs it. Between two copies the later translation of a locale wins
+  (`mergePlans`, by `i18n.<locale>.at`).
+* **What the learner sees.** `trLocale(c)` picks the locale along the UI locale's chain (never English for someone else),
+  like a pack's translations (docs/i18n.md §10). The map, the list, the treasure map, the step panel, *Next up*, the
+  frame's Roadmap cards and crumbs draw `shownTitle(c)` / `shownNode(c, id)` — copies for drawing; the stored record keeps
+  its own words. A field that no longer fits (another number of learning goals, an unknown chapter ref) shows the own words.
+* **Edits.** Renaming a step or changing its summary, goals or chapters (✏️ `Edit.update`) and a new chapter plan
+  (`applyPlans`) drop that step's translations of those fields (`dropI18n`); they are made again with the next translation.
+
 ## 6. Tests
 `tests/curriculum.js` (scripted Claude + Gemini APIs, Supabase emulator): the four agents incl. a
 repaired graph, 25-node map in three parts, locked/open, chapter details, background preparation of the
