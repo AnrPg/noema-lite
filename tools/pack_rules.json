@@ -290,6 +290,32 @@
     "what": "the theory has all three kinds of table (a table block's kind: compare, summary, breakdown), each big enough to be one; a chapter with nothing to put in one gives the reason in map.unfit['table.<kind>']"
    },
    {
+    "id": "example.restated",
+    "level": "warn",
+    "skip": ["explain", "why", "fb", "outcome", "model", "rubric", "fix", "solution", "note"],
+    "what": "an exercise does not test the specifics of a lesson's example (unless the example is an interesting case in itself) and never points at it ('the example above', 'in the lesson's example'): it writes the example out in full and then asks a question that needs thinking about it (Q5b)",
+    "patterns": [
+     "\\b(?:the|this|that|our) (?:worked )?example (?:above|earlier|before|we (?:saw|met|studied|read)|(?:from|in) (?:the|this) (?:lesson|theory|section|chapter))\\b",
+     "\\b(?:in|from) the (?:lesson|theory|section|chapter)(?:'s|’s)? example\\b",
+     "\\bas (?:in|shown in) the example\\b",
+     "\\b(?:recall|remember) the example\\b",
+     "(?:στο|το|του|από το) παράδειγμα (?:του μαθήματος|της θεωρίας|της ενότητας|του κεφαλαίου|παραπάνω|που είδαμε)",
+     "όπως στο παράδειγμα",
+     "(?:в|из) пример(?:е|а) (?:выше|урока|из урока|из теории)"
+    ]
+   },
+   {
+    "id": "figure.explained",
+    "level": "warn",
+    "minChars": 120,
+    "what": "every figure and diagram of the theory is explained in detail right after it (a p, list or callout block, >= 120 characters): what it shows (its parts, axes, symbols, arrows, colours), how to read it and what it teaches; a caption alone is not enough (Q7b)"
+   },
+   {
+    "id": "sequence.arrows",
+    "level": "warn",
+    "what": "img_sequence (tap the parts in order) rarely teaches on a graph diagram (flowchart, pipeline, DAG, cycle): its arrows already show the order. Keep one only when tracing teaches something the picture does not already show, and say why in map.sequenceWhy['<media id>'] (Q5c)"
+   },
+   {
     "id": "cite.present",
     "level": "error",
     "what": "every exercise keeps where it comes from in cite {src, loc} (metadata, never in the text)"

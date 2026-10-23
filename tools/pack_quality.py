@@ -165,6 +165,23 @@ def check_quality(ch, features=(), types=None):
         if isinstance(unfit.get("table." + k), str) and unfit["table." + k].strip(): continue
         ok = [b for b in tabs if b.get("kind") == k and len(b.get("head") or []) >= need["cols"] and len(b.get("rows") or []) >= need["rows"]]
         if not ok: add("theory.tables", f"no {k} table (a table block with kind '{k}', >= {need['cols']} columns and >= {need['rows']} rows): {need['what']}")
+    # example.restated / figure.explained / sequence.arrows (warnings)
+    c = C["example.restated"]; xp = [re.compile(p, re.I) for p in c["patterns"]]; xskip = SKIP | set(c["skip"])
+    for e in exs:
+        hit = next((h for t in _strings(e, xskip) for p in xp for h in [p.search(t)] if h), None)
+        if hit: add("example.restated", f"{e.get('id')}: “{hit.group(0)}” points at a lesson's example; write the example out in the exercise and ask a question that needs thinking about it")
+    c = C["figure.explained"]
+    for s in ch.get("sections") or []:
+        bs = [b for b in s.get("blocks") or [] if isinstance(b, dict)]
+        for i, b in enumerate(bs):
+            if b.get("t") not in ("figure", "diagram"): continue
+            nx = bs[i + 1] if i + 1 < len(bs) else {}
+            if nx.get("t") not in ("p", "list", "callout") or len(" ".join(_strings({k: v for k, v in nx.items() if k in ("title", "text", "items")}))) < c["minChars"]:
+                add("figure.explained", f"{s.get('id')}: the {b.get('t')}{' ' + _q(b.get('media')) if b.get('media') else ''} is not explained right after it (what it shows, how to read it, what it teaches)")
+    sw = m.get("sequenceWhy") if isinstance(m.get("sequenceWhy"), dict) else {}
+    for e in exs:
+        if e.get("type") == "img_sequence" and not (isinstance(sw.get(e.get("media")), str) and sw[e.get("media")].strip()):
+            add("sequence.arrows", f"{e.get('id')}: img_sequence on {_q(e.get('media'))}: if its arrows already show the order, use another type; else say why in map.sequenceWhy")
     # review.done
     r = ch.get("review"); c = C["review.done"]
     if not isinstance(r, dict): add("review.done", "no second-pass review (review/" + cid + ".json)")

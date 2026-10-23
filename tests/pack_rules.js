@@ -119,6 +119,17 @@ ok(rules('a categorised point with one type', c => { c.exercises[3].type = c.exe
 ok(rules('no review', c => { delete c.review; }).join() === 'review.done', 'review.done: the second-pass review is required');
 ok(rules('an open mismatch', c => { c.review.blind.mismatches[0].fixed = false; }).join() === 'review.done', 'review.done: every blind-solve mismatch fixed');
 ok(rules('hard exercises first', c => { c.exercises.reverse(); }).join() === 'mix.order', 'mix.order: easier first inside a section (a warning)');
+const warnOnly = (name, f, rule) => { const is = same(name, mut(f)); return is.length > 0 && is.every(i => i[1] === rule && i[0] === 'warn'); };
+ok(warnOnly('a pointer to the lesson’s example', c => { c.exercises[4].q = 'In the example above, how many rows does the join return?'; }, 'example.restated'), 'example.restated: “the example above” in a question is a warning');
+ok(warnOnly('a pointer to the lesson’s example (Greek)', c => { c.exercises[4].q = 'Στο παράδειγμα της θεωρίας, πόσες γραμμές επιστρέφει;'; }, 'example.restated'), 'example.restated: Greek “στο παράδειγμα της θεωρίας”');
+ok(rules('an example written out in the exercise', c => { c.exercises[4].q = 'Two charges 2 m apart feel 8 N. What do they feel 4 m apart, and why?'; }).length === 0, 'example.restated: an example written out in full is fine');
+const FIG = { t: 'diagram', text: 'A --> B --> C' }, LONG = 'The arrows show the order of the stages: A reads the files, B cleans them and C writes the table. Read it left to right; it teaches that cleaning always comes before writing.';
+ok(warnOnly('a diagram with no explanation', c => { c.sections[0].blocks.splice(1, 0, FIG); }, 'figure.explained'), 'figure.explained: a diagram followed by a table, not by its explanation, is a warning');
+ok(rules('a diagram explained right after it', c => { c.sections[0].blocks.splice(1, 0, FIG, { t: 'p', text: LONG }); }).length === 0, 'figure.explained: a diagram explained in detail right after it is fine');
+ok(rules('a diagram with a one-line note', c => { c.sections[0].blocks.splice(1, 0, FIG, { t: 'p', text: 'A pipeline.' }); }).join() === 'figure.explained', 'figure.explained: a one-line note is not an explanation');
+const SEQ = { id: 'ch01-e041', type: 'img_sequence', media: 'flow', answer: ['a', 'b'] };
+ok(rules('an img_sequence with no reason', c => { c.exercises.push({ ...c.exercises[39], ...SEQ }); c.map.fits.types = [...T9, 'img_sequence']; }).includes('sequence.arrows'), 'sequence.arrows: an img_sequence without map.sequenceWhy is warned');
+ok(!rules('an img_sequence with its reason', c => { c.exercises.push({ ...c.exercises[39], ...SEQ }); c.map.sequenceWhy = { flow: 'a photo: nothing on it shows the order' }; }).includes('sequence.arrows'), 'sequence.arrows: map.sequenceWhy names why tracing teaches here');
 // strictness in checkPack
 const qpack = (auth, extra = {}) => ({ format: 'noema-pack', subject: { id: 'demo-q', title: 'Q', authoring: auth }, chapters: [mut(c => { delete c.review; })], media: {}, ...extra });
 ok(P.checkPack(qpack({ rules: 2, by: 'claude' })).errors.some(e => e.includes('[review.done]')), 'checkPack: authoring.rules 2 + by claude → errors');

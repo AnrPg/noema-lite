@@ -97,7 +97,7 @@ count. Look in all three places below, keep only the valuable ones:
 4. For every raster picture add `regions` (the named parts, in pixel coordinates) — draw them over
    the picture with Pillow and look at the result before using them.
 
-**Every picture gets ≥ 3 exercises of ≥ 2 visual types** + a `figure` block in the section that teaches it; a chapter
+**Every picture gets ≥ 3 exercises of ≥ 2 visual types** + a `figure` block, explained in detail right after it (Q7b), in the section that teaches it; a chapter
 with pictures has every picture exercise type that fits it ≥ 3 times (step 4). A chapter without a picture that teaches has none.
 
 ## 3b. Sources: one entry per file or link, every chapter mapped to ALL its sources
@@ -165,6 +165,24 @@ Keep a coverage checklist (`coverage/chNN.md`) and close every gap.
 write the question or example out in full, lineage goes in `cite`; every exercise has `lr`, `think`, and where it fits a
 `mode`; difficulty ≈ 20 / 25 / 55 %, recall ≤ 25 %, apply or higher ≥ 40 %, every fitting paradigm in ≥ 2 exercises;
 every learnable and every categorised point ≥ 2 exercises of ≥ 2 types; `explain` ≥ 2 sentences and `why` on every mcq option.
+
+**Exercises test the idea, not the lesson's example** (CONTENT_SPEC Q5b). Never ask about the specifics of a theory
+example (its numbers, rows, outcome) as something to learn by heart, and never point at it ("the example above", "in the
+lesson's example"). Every exercise is also shown on its own later (reviews, drills, the Mistakes gym), so when it uses an
+example it **writes the example out in full** (data, code, table) and then asks a question that needs thinking about it.
+Only an example that is an interesting case in itself (a famous incident, a classic counterexample) may be tested as
+such. ✗ the bad case in Q5b: "Athens total_sales = ?" after a `groupBy("city")` cell, with neither code nor table in the
+exercise, a trivial look-up that cannot be answered alone. ✓ the rows and the code in `q`, then "which city comes first,
+and why can it change between runs?" (a tie at 200).
+
+**Explain every picture** (Q7b): right after each `figure` and `diagram`, a `p` / `list` / `callout` says in detail what
+it shows (parts, axes, symbols, arrows, colours), how to read it and what it teaches. A caption is never enough.
+
+**`img_sequence` seldom on graph diagrams** (Q5c): a flowchart, pipeline, DAG or cycle already shows the order with its
+arrows, so tapping its parts in order copies them. Use it where the order is not drawn (a photo, a map); on an arrow
+diagram only rarely, when tracing teaches something (arrows hidden, a path to choose), with the reason in
+`map.sequenceWhy[<media id>]`; otherwise ask about the diagram (what breaks without a step, which step a symptom points
+to) and give `img_sequence` a reason in `unfit`.
 
 ## 4b. Solve blind, then review (mandatory — `review/chNN.json`)
 1. Answer every exercise of the chapter **without looking at its key**; list each disagreement in `blind.mismatches`
@@ -354,7 +372,9 @@ pack is not changed. Contract and rules: `references/BRIDGE.md` (or `noema_bridg
 - Every source detail is taught **and** tested; nothing invented; obvious source errors corrected and noted.
 - ADHD-friendly throughout: short paragraphs, one idea per block, examples, think-first reveals.
 - Every type and focus tag that fits ≥ 3 times per chapter, the difficulty and `think` mix, every learnable in ≥ 2 types (make_pack.py checks it).
-- Pictures: only those that teach, from all three places, each verified, licensed, sharp, ≥ 3 exercises each.
+- Pictures: only those that teach, from all three places, each verified, licensed, sharp, ≥ 3 exercises each, each
+  explained in detail right after it (Q7b); `img_sequence` rarely on a diagram whose arrows show the order (Q5c).
+- No exercise tests or points at a lesson's example; an example it needs is written out in it (Q5b).
 - Q1–Q8: no exercise or theory points at a source; every source question is an exercise, solved twice; the map is
   exhaustive; difficulty, `think` and paradigm mix as above; blind solve and review done (`review/chNN.json`).
 - Every file the user gave is in the package (or all of its parts), each its own source, cited by the chapters that use it.
