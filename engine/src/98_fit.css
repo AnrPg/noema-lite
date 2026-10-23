@@ -1,0 +1,26 @@
+/* noema-lite: every screen fits its width, down to 320px phones — nothing scrolls sideways (docs/UI_MAP.md "Small screens").
+   Strips of chips and tabs wrap, code and diagrams wrap their lines, tables wrap their cells, long formulas break at their operators.
+   Only the Roadmap map and the PDF viewer pan, as pictures do. */
+.katex-display>.katex{white-space:normal;max-width:100%}
+.katex-display .base{margin-block:2px}
+main,.ns-view,.view,.modal .box,.ns-modal,.ns-sheet,.drawer{overflow-wrap:anywhere}
+body.ns-on select,body.ns-on input,body.ns-on textarea{max-width:100%}
+body.ns-on img,body.ns-on video{max-width:100%}
+/* six tabs no longer fit their names: only the open tab says its name (the others keep it as their tip and for screen readers) */
+@media (max-width:400px){
+  .ns-tabs:has(.ns-tab:nth-child(6)) .ns-tab:not(.on) .lb{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .ns-tab .i2{width:44px}
+}
+@media (max-width:340px){.ns-tab:not(.on) .lb{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)} .ns-tab .lb{font-size:.68rem}}
+/* the tutor: the face only, smaller, so it covers less of the page */
+@media (max-width:420px){
+  .ns-fab.full .ns-fabface{width:54px;height:50px}
+  .ns-fab.full .nm{display:none}
+  .ns-fab{inset-inline-end:8px;bottom:calc(66px + 8px + env(safe-area-inset-bottom,0px))}
+  .ns-say{inset-inline-end:8px;bottom:calc(66px + 70px + env(safe-area-inset-bottom,0px));max-width:calc(100vw - 32px)}
+  body.ns-on main#ns-main{padding-inline:12px}
+}
+/* a flexible column gives way instead of pushing its neighbours off the screen */
+.grow{min-width:0}
+.field{grid-template-columns:minmax(0,1fr)}
+@media (max-width:420px){.chhead{gap:10px} body.ns-on .chhead .emo{display:none}}

@@ -162,3 +162,9 @@ Unchanged, plus: Esc closes a ⋮ menu or a sheet; ↑ / ↓ move inside a ⋮ m
 
 ## Wording and icons
 The interface says **Roadmap** (el Οδικός χάρτης, ru дорожная карта, fr parcours) wherever it meant a curriculum or its map; "Map" stays only for the picture of a Roadmap (the Map / List switch). The new frame shows line icons, not emoji: dialogs of the older screens, the Roadmap page and the toasts drop their pictographs when shown inside it (`Noema.plain`). Subjects and chapters keep the icon their pack gives them. Progress counts one item per completed chapter (every section read), drawn so that no two overlap.
+
+## Small screens
+Every screen fits its width down to 320px phones, and nothing scrolls sideways (engine/src/98_fit.css): strips of chips and tabs wrap
+onto a second line, code, diagrams and tables wrap inside the width, long formulas break at their operators. Below 400px with six
+tabs only the open tab shows its name (the others keep it as their tip); below 420px the tutor is its face only. The Roadmap map and
+the PDF viewer are the only things that pan, as pictures do.

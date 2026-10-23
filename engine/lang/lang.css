@@ -47,7 +47,7 @@ body.lx main.lx-main{max-width:1000px}
 .lx-warn li,.lx-warn{color:#b4530c}
 .lx-syngroup{margin:6px 0}
 .lx-absent{margin:14px 0;padding:14px;border-radius:14px;border:1.5px dashed var(--line);background:var(--bg2)}
-.lx-compare{overflow-x:auto;margin:12px 0}.lx-compare table{border-collapse:collapse;width:100%}.lx-compare th,.lx-compare td{padding:8px;border-bottom:1px solid var(--line);text-align:start;vertical-align:top}
+.lx-compare{margin:12px 0}.lx-compare :is(th,td){overflow-wrap:anywhere}.lx-compare table{border-collapse:collapse;width:100%}.lx-compare th,.lx-compare td{padding:8px;border-bottom:1px solid var(--line);text-align:start;vertical-align:top}
 .lx-seg{display:inline-flex;border:1px solid var(--line);border-radius:12px;overflow:hidden}.lx-seg button{padding:6px 10px;font-size:14px}.lx-seg button.on{background:var(--violet-bg);font-weight:700}
 .lx-session .lx-stage{max-width:640px;margin:18px auto}
 .lx-progress{flex:1;height:8px;border-radius:99px;background:var(--bg2);overflow:hidden}.lx-progress i{display:block;height:100%;width:0;background:var(--ok);transition:width .3s}
