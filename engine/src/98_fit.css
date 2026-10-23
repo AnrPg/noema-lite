@@ -9,9 +9,10 @@ body.ns-on img,body.ns-on video{max-width:100%}
 /* six tabs no longer fit their names: only the open tab says its name (the others keep it as their tip and for screen readers) */
 @media (max-width:400px){
   .ns-tabs:has(.ns-tab:nth-child(6)) .ns-tab:not(.on) .lb{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .ns-tabs:has(.ns-tab:nth-child(6)) .ns-tab.on .lb{overflow:visible;max-width:none;text-overflow:clip}   /* the open tab's name may use its neighbours' empty space */
   .ns-tab .i2{width:44px}
 }
-@media (max-width:340px){.ns-tab:not(.on) .lb{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)} .ns-tab .lb{font-size:.68rem}}
+@media (max-width:340px){.ns-tab:not(.on) .lb{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)} .ns-tab .lb{font-size:.68rem} .ns-tab.on .lb{overflow:visible;max-width:none;text-overflow:clip}}
 /* the tutor: the face only, smaller, so it covers less of the page */
 @media (max-width:420px){
   .ns-fab.full .ns-fabface{width:54px;height:50px}
