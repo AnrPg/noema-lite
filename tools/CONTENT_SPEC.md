@@ -68,8 +68,8 @@ every packaged file); files can also be attached later in the app (📎 in the s
 4. **Co-location**: related concepts in the same section; comparisons side by side (`compare`/`table`); each exercise attached to its section; 2–4 `quick` exercises per section.
 5. **ADHD-friendly**: see rule 0 above — it applies to every rule here.
 6. **Accuracy**: faithful to the sources; correct clear errors (and say so in the coverage notes); no invented facts.
-7. Diagrams redrawn cleanly (≤70 chars wide). Explanations teach (why right + why the tempting wrong answer is wrong). Every exercise type used several times per chapter.
-8. **Visual learning (docs/VISUAL.md §5–6) — only pictures with high teaching value.** A picture is used only when it teaches something the text alone cannot (where things are, what they look like, how they connect, how a quantity behaves); **no picture is better than a decorative or weak one**, and pictures are never added to meet a count. Look for them in three places: (a) the pictures of the sources (`tools/extract_images.py`), (b) the web — high-quality, information-rich photographs and diagrams, any licence for personal study, always with the source recorded (`tools/fetch_image.py`), (c) redrawn diagrams and **function graphs** where the subject has them (`tools/svgkit.py`). Verify each picture is correct, relevant and sharp. **Every picture gets ≥ 3 exercises of ≥ 2 visual types** and a `figure`; a chapter that has pictures has ≥ 3 visual exercises and every picture exercise type ≥ 3 times (tools/pack_rules.json). A chapter without a picture that teaches has none. Enforced by `"authoring": {"minVisualPerChapter": 3, "minExercisesPerPicture": 3, "minPerKind": 3}`.
+7. Diagrams redrawn cleanly (≤70 chars wide). Every diagram is explained in detail right after it (Q7b). Explanations teach (why right + why the tempting wrong answer is wrong). Every exercise type used several times per chapter.
+8. **Visual learning (docs/VISUAL.md §5–6) — only pictures with high teaching value.** A picture is used only when it teaches something the text alone cannot (where things are, what they look like, how they connect, how a quantity behaves); **no picture is better than a decorative or weak one**, and pictures are never added to meet a count. Look for them in three places: (a) the pictures of the sources (`tools/extract_images.py`), (b) the web — high-quality, information-rich photographs and diagrams, any licence for personal study, always with the source recorded (`tools/fetch_image.py`), (c) redrawn diagrams and **function graphs** where the subject has them (`tools/svgkit.py`). Verify each picture is correct, relevant and sharp. **Explain every picture in detail** right after it: what it shows, how to read it and what it teaches (Q7b). **Every picture gets ≥ 3 exercises of ≥ 2 visual types** and a `figure`; a chapter that has pictures has ≥ 3 visual exercises and every picture exercise type ≥ 3 times (tools/pack_rules.json). A chapter without a picture that teaches has none. Enforced by `"authoring": {"minVisualPerChapter": 3, "minExercisesPerPicture": 3, "minPerKind": 3}`.
 
 ## Quality rules Q1–Q8 (binding for every chapter Claude or Gemini writes)
 The learner never reads the sources. The app is the only place they learn from, so every lesson and exercise must stand
@@ -127,6 +127,41 @@ the answer is in the prompt; the right option stands out (longest, the only one 
 pick the distractors (distractors must be real misconceptions); a `tf` that copies a theory sentence; a one-word answer
 that needs no thinking. Keep a few easy ones, make most of them make the learner think.
 
+**Q5b · Exercises test the idea, not the lesson's example.** The exercises of a pack never aim to teach the specifics of
+an example of the theory (its numbers, names, rows, outcome) as something to learn by heart, and never ask "what happened
+in the example?" or point at it ("the example above", "in the lesson's example", "στο παράδειγμα της θεωρίας"): no
+trivial questions, no questions that only refer to the lesson's examples. Examples in exercises are welcome, but the
+exercise **writes the example out in full** (the situation, data or code, in `q` / `code`) and then asks a question
+that needs thinking about it (why it behaves so, what changes if one value changes, which line is wrong, what to do
+next), so the learner never gets the message to memorise an example. The exception is an example that is **an
+interesting case in itself** (a famous incident, a classic counterexample, a landmark case, a well-known bug): it may
+be tested as such, still written out.
+- ✗ "In the lesson's example, how many rows did the join return?" → ✓ the two small tables in `q`, then "This join
+  returns 6 rows, not 3. Which key causes it, and how would you fix the join?"
+- A bad case to avoid (a real one, Databricks ch03). The theory shows a `groupBy("city").agg(sum, count)` cell and its
+  output table (Athens 200.0 / 3, Patras 200.0 / 1, Volos 80.0 / 1). Two `calc` exercises follow: "Athens
+  total_sales = ?" and "How many rows (cities) does city_sales contain?", with neither the code nor the table in them.
+  Three faults: (1) an exercise is also shown on its own, later (reviews, drills, the Mistakes gym), where nobody
+  remembers that table, so it cannot be answered; (2) the first asks for a number that only reading the table gives, and
+  the data behind it (the input rows) is shown nowhere, so it teaches nothing about `groupBy`; (3) both are trivial
+  look-ups, not thinking. ✓ Instead, the exercise carries its own data and code and asks about the idea:
+  * "`orders` has 5 rows: Athens 50, Athens 70, Athens 80, Patras 200, Volos 80. You run
+    `orders.groupBy("city").agg(F.sum("amount").alias("total_sales"), F.count("*").alias("orders")).orderBy(F.desc("total_sales"))`.
+    Which city comes first, and why can the answer change from run to run?" (Athens and Patras tie at 200, so ordering
+    by that one column leaves their order open: a real trap the lesson's table hides.)
+  * `predict`: "Same data, but one Athens amount is null. What do total_sales and orders show for Athens?" (150 and 3:
+    `sum` skips nulls, `count("*")` counts rows; the tempting 2 is `count("amount")`.)
+
+**Q5c · Order on a picture only where the picture does not show the order.** `img_sequence` (tap the parts in the right
+order) seldom has real value on a **graph diagram** (flowchart, pipeline, DAG, state or cycle diagram): its arrows
+already show the order, so tapping along them is copying, not thinking. Use it mainly where the order is **not drawn**
+(the path of blood through a heart photo, the stations on a map, the steps on a photo of apparatus). On an arrow diagram
+use it only rarely, when tracing really teaches something (the arrows or labels are hidden, the learner must choose a
+path among branches, or predict the path a given input takes), and say why in the map's `sequenceWhy` (by media id).
+For an arrow diagram prefer the exercises that make the learner think about it: what breaks if a step is removed, which
+step a symptom points to, where a new step goes. A chapter whose pictures are all arrow diagrams usually gives
+`img_sequence` a reason in `unfit`. (The same holds for an `order` exercise that only copies a `flow` shown just above it.)
+
 **Q6 · The hard categories, exhaustively — on top of the basics.** Every learnable the map tags with a category (below)
 gets ≥ 2 exercises of different types and its own treatment in the theory (`compare` side by side for confusables, `flow`
 for sequences, `terms` for acronyms and nomenclature, a callout for traps and edge cases, a `mnemonic` for what is hard to
@@ -135,6 +170,11 @@ remember).
 **Q7 · Theory of high value.** Each section: hook → the basic idea → the mechanism (why) → a self-contained example →
 contrast with what it is confused with → edge cases → a `reveal` "think first". Every acronym is expanded at first use and
 listed in a `terms` block. Never "the source says".
+
+**Q7b · Every picture explained.** Every `figure`, `diagram`, chart and function graph in the theory is followed, right
+after it, by text (a `p`, `list` or `callout`) that explains **in detail** what it shows (its parts, axes, symbols,
+arrows, colours and labels), how to read it, and **what it teaches**: the point the learner should take away and why it
+matters. A caption alone is never enough; the learner should understand the picture without guessing.
 
 **Q8 · Explanations that teach, answers that were checked.** `explain` says why the right answer is right **and** why the
 tempting wrong one is wrong (≥ 2 sentences); every `mcq` has `why` for every option. After writing, **solve blind**: answer
@@ -188,6 +228,7 @@ some learnable's `kp`.
             "focus": ["concept", "syntax", "pitfall", "debug", "compare"],
             "modes": ["contradiction", "reverse", "whatif", "causal", "distinguish", "translate"] },
   "unfit": { "dialectic": "pure syntax, nothing to argue" },
+  "sequenceWhy": { "heart-frontal": "a photo: nothing on it shows the path of the blood" },
   "sourceQuestions": [ { "id": "ch03-q01", "text": "full text…", "answer": "the solution…", "answerFrom": "source|claude",
                        "check": "how it was double-checked (answerFrom claude)", "cite": {"src": "r1", "loc": "Q14"} } ] }
 ```
@@ -195,6 +236,8 @@ some learnable's `kp`.
 - `cats` ⊂ pitfall · confusable · falsefriend · detail · sequence · multipart · nomenclature · acronym · formula · edge ·
   recent · hard-understand · hard-remember; `with` names the other point(s) of a confusable / false-friend pair.
 - Every exercise type, focus tag and mode is either in `fits` or has a reason in `unfit`.
+- `sequenceWhy` (Q5c): for every picture with an `img_sequence`, why tracing the order on it teaches something the
+  picture does not already show (rarely true for a diagram with arrows).
 - Steps: (1) list every point of the pages; (2) one pass per category; (3) list the source questions; (4) group the points
   into learnables, foundation → advanced; (5) decide what fits; (6) plan the facades of every learnable.
 
@@ -262,7 +305,7 @@ Math (subjects with `features.math`): `$…$` inline, `$$…$$` display (KaTeX).
 - `{"t":"reveal","label":"Think first: …?","text":"answer revealed on click"}`
 - `{"t":"ask","title":"Ask yourself when … ","questions":["Am I …?","Did …?"]}`
 - `{"t":"terms","items":[{"term":"Principal","def":"..."}]}`
-- `{"t":"figure","media":"heart-frontal","caption":"optional"}` — an explorable picture (docs/VISUAL.md §4)
+- `{"t":"figure","media":"heart-frontal","caption":"optional"}` — an explorable picture (docs/VISUAL.md §4); every `figure` and `diagram` is explained in detail right after it (Q7b)
 
 ## Exercise — common fields
 ```json
@@ -295,7 +338,7 @@ IDs: `chNN-eNNN`, unique, sequential.
 | `tree` | `start:"a"`, `nodes:{id:{q, options:[{text, ok, fb, to?}]}}` | **decision tree**: one `ok` per node; `to` names the next node (none = the end); every wrong option's `fb` says where that branch leads. The right path must end without a loop. |
 | `inquiry` | `options:[str]` (3–5 questions, tests or experiments), `scores:[0–3 per option]` with exactly one highest, `why:[str per option]` | **best question**: which one tells you the most? Values are shown afterwards. |
 | `debate` | `q` = the claim; `sides:[{position, counters:[str] (2–4), best:int, why:[str per counter]}]` (2–3) | **debate**: the learner takes ANY side (not graded), then picks the strongest objection to it. Pairs well with `mode: "dialectic"`. |
-| `img_hotspot` `img_sequence` `img_reveal` `img_drag` `img_label` `img_select` `img_occlusion` | `media` + regions/targets/answer… | **visual exercises — full schema in docs/VISUAL.md** |
+| `img_hotspot` `img_sequence` `img_reveal` `img_drag` `img_label` `img_select` `img_occlusion` | `media` + regions/targets/answer… | **visual exercises — full schema in docs/VISUAL.md**; `img_sequence` rarely on a diagram whose arrows already show the order (Q5c) |
 
 ## Debug playbook
 ```json
@@ -318,6 +361,9 @@ Checked per chapter by `tools/pack_rules.json` (one rule list, read by `validate
 * **no source exercise is dropped to meet these**: add exercises on top, or lightly adjust source exercises into the
   missing type, focus or difficulty, keeping their substance, answer and `cite.sq` (Q2);
 * **every learnable** ≥ 2 exercises in ≥ 2 types; every map point not taught earlier sits in a learnable (exhaustive).
+* **warnings only** (soft): an exercise that points at a lesson's example instead of writing it out (`example.restated`,
+  Q5b); a `figure` or `diagram` not explained in detail right after it (`figure.explained`, Q7b); an `img_sequence`
+  without its reason in `map.sequenceWhy` (`sequence.arrows`, Q5c).
 * **Sizes are a mild suggestion, never an error or a warning**: about 2 facades per learnable in the core set and a
   reserve without a cap; 40–70 learnables per node give ~80–140 core and 160–280 exercises in all; above ~180 in the
   core, think about splitting the node.

@@ -107,6 +107,9 @@ The chapter's **knowledge map** `map/chNN.json` comes first (format in `tools/CO
 | explain.depth, mcq.why | explanations ≥ 2 sentences; a why for every option |
 | trivial.answer, trivial.longest (warning) | the answer is not in the question, nor by far the longest option |
 | review.done | the blind re-solve and the rubric are done |
+| example.restated (warning) | no exercise points at a lesson's example ("the example above"); it writes the example out and asks a question that needs thinking (CONTENT_SPEC Q5b) |
+| figure.explained (warning) | every `figure` / `diagram` is explained in detail right after it: what it shows, how to read it, what it teaches (Q7b) |
+| sequence.arrows (warning) | an `img_sequence` names why tracing teaches on that picture in `map.sequenceWhy`; on a diagram whose arrows show the order it rarely does (Q5c) |
 
 **Sizes are a mild suggestion only — never an error or a warning.** About 2 facades per learnable make the core set,
 plus a reserve without a cap. 40–70 learnables per node give ~80–140 core exercises and 160–280 in all; above ~180 in the

@@ -193,6 +193,39 @@
    "explain": "Scheme `abfss`, container `data`, then `@`, storage account `company`, then the `dfs.core.windows.net` host. The container comes **before** the `@`.",
    "_from": "Databricks Prerequisite Round 1 ch01-e014",
    "_why": "source-pointer: \"the URI of the source\""
+  },
+  {
+   "id": "ch03-e041",
+   "type": "calc",
+   "section": "ch03-s05",
+   "difficulty": 1,
+   "tags": [
+    "calc"
+   ],
+   "quick": true,
+   "q": "Athens total_sales = ?",
+   "answer": 200,
+   "tolerance": 0,
+   "explain": "Athens has total_sales 200.0 in the output.",
+   "_from": "Databricks Part 1 ch03 (live site, 2026-10-23)",
+   "_why": "lesson-example: asks about the city_sales example of the theory without showing its code or output table; shown alone in a drill or the Mistakes gym it cannot be answered, and it is a trivial look-up (CONTENT_SPEC Q5b, the bad case)"
+  },
+  {
+   "id": "ch03-e042",
+   "type": "calc",
+   "section": "ch03-s05",
+   "difficulty": 1,
+   "tags": [
+    "calc"
+   ],
+   "quick": true,
+   "q": "How many rows (cities) does city_sales contain?",
+   "answer": 3,
+   "tolerance": 0,
+   "unit": "rows",
+   "explain": "One row per city: Athens, Patras, Volos.",
+   "_from": "Databricks Part 1 ch03 (live site, 2026-10-23)",
+   "_why": "lesson-example: asks about the city_sales example of the theory without showing its code or output table; shown alone in a drill or the Mistakes gym it cannot be answered, and it is a trivial look-up (CONTENT_SPEC Q5b, the bad case)"
   }
  ]
 }

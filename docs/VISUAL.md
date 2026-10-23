@@ -81,7 +81,7 @@ All the common exercise fields apply (`id`, `type`, `section`, `difficulty`, `ta
 | type | label in the app | what the learner does | extra fields |
 |---|---|---|---|
 | `img_hotspot` | 📍 Find it on the image | taps the place(s) on the picture | `answer: [regionId,…]` (≥1; more = tap all of them), `any: true` (one tap in any answer region is enough, e.g. “tap a vertebra”), `maskLabels: bool` (cover all regions so their labels can't be read), `why: {regionId: "why this tempting place is wrong"}` |
-| `img_sequence` | 🧭 Trace the path | taps parts in the right order (flow of blood, data, a reaction pathway…) | `answer: [regionId,…]` in order (2–9) |
+| `img_sequence` | 🧭 Trace the path | taps parts in the right order (flow of blood, a route on a map, steps on a photo…) — **rarely on a diagram whose arrows already show the order** (rule 6) | `answer: [regionId,…]` in order (2–9); the map's `sequenceWhy[<media id>]` says why tracing teaches here |
 | `img_reveal` | 🧩 Reveal & answer | uncovers tiles one by one and answers as early as possible (fewer tiles = more XP) | `options: [str]`, `answer: int` or `[int]` + `"multi": true`, either `grid: [cols, rows]` (auto tiles) or tile `regions`, `start: [regionId]` (tiles open at the start) |
 | `img_drag` | 🏷️ Drag the labels | drags label chips onto the covered parts (or taps chip → taps place) | `distractors: [str]` (extra wrong labels), `mask: bool` (default true: cover the targets) |
 | `img_label` | ✏️ Label the image | types the name of each covered part | `fuzzy: bool` (default true: tolerate a small typo, the correct spelling is shown), `mask` |
@@ -141,10 +141,20 @@ Rules:
    authoritative references, and that it is about *this* topic at *this* level. Reject anything
    doubtful. Region coordinates are checked by drawing them over the picture before publishing.
 6. Pick the exercise type by the skill: **where is it** → hotspot · **what is it** → drag / select /
-   label (easy → hard) · **in what order** → sequence · **infer from partial evidence** → reveal ·
-   **long-term recall of many parts** → occlusion. Hotspots should need reasoning (“where is the data
+   label (easy → hard) · **in what order** → sequence (only where the picture does not already draw the order, below) ·
+   **infer from partial evidence** → reveal · **long-term recall of many parts** → occlusion.
+   **Ordering on graph diagrams seldom has value** (user rule, 2026-10-23): a flowchart, pipeline, DAG, state or cycle
+   diagram already shows the order with its arrows, so tapping its parts in order copies the arrows. Use `img_sequence`
+   on such a diagram only rarely, when tracing really teaches something (arrows or labels hidden, a path to choose among
+   branches, the path a given input takes) and give the reason in the map's `sequenceWhy`; otherwise ask about the
+   diagram (what breaks if a step goes, which step a symptom points to, where a new step belongs). The checker warns
+   on an `img_sequence` without `sequenceWhy` (`sequence.arrows`, CONTENT_SPEC Q5c). Hotspots should need reasoning (“where is the data
    read from?”), not label-reading; use `maskLabels` when labels would give the answer away.
-7. Accessibility: meaningful `alt`, readable label sizes (≥ 14 image units at 800 wide), colour is
+7. **Explain every picture in detail** (user rule, 2026-10-23; CONTENT_SPEC Q7b): right after each `figure` (and each
+   `diagram` block), a `p`, `list` or `callout` says what the picture shows (its parts, axes, symbols, arrows, colours
+   and labels), how to read it, and what it teaches, the point to take away and why it matters. A caption is never
+   enough. The checker warns when a figure is not followed by its explanation (`figure.explained`).
+8. Accessibility: meaningful `alt`, readable label sizes (≥ 14 image units at 800 wide), colour is
    never the only cue.
 
 ## 6. Where web pictures may come from (licences)
