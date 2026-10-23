@@ -36,7 +36,7 @@ body.lx main.lx-main{max-width:1000px}
 .lx-cardtop{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
 .lx-lemma{font-size:34px;font-weight:700}
 .lx-chips{display:flex;gap:5px;flex-wrap:wrap;margin-top:4px}
-.lx-badge{font-size:12px;padding:2px 8px;border-radius:999px;background:var(--bg2);border:1px solid var(--line);white-space:nowrap}
+.lx-badge{font-size:12px;padding:2px 8px;border-radius:999px;background:var(--bg2);border:1px solid var(--line);max-width:100%;overflow-wrap:anywhere}
 .lx-badge.reg{background:var(--violet-bg)}.lx-badge.ctx{background:var(--info-bg)}.lx-badge.new{background:var(--warn-bg)}
 .lx-parts{display:grid;grid-template-columns:max-content 1fr;gap:2px 14px;margin:12px 0;font-size:15px}.lx-parts dt{color:var(--ink2)}.lx-parts dd{margin:0}
 .lx-feeling{margin:6px 0;color:var(--ink2)}

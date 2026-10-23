@@ -2228,9 +2228,9 @@ body.ns-on .drawer:dir(rtl){box-shadow:20px 0 50px -24px rgba(0,0,0,.35)}
    Only the Roadmap map and the PDF viewer pan, as pictures do. */
 .katex-display>.katex{white-space:normal;max-width:100%}
 .katex-display .base{margin-block:2px}
+html{overflow-x:clip}
 main,.ns-view,.view,.modal .box,.ns-modal,.ns-sheet,.drawer{overflow-wrap:anywhere}
-body.ns-on select,body.ns-on input,body.ns-on textarea{max-width:100%}
-body.ns-on img,body.ns-on video{max-width:100%}
+select,input,textarea,img,video,canvas,iframe{max-width:100%}
 /* six tabs no longer fit their names: only the open tab says its name (the others keep it as their tip and for screen readers) */
 @media (max-width:400px){
   .ns-tabs:has(.ns-tab:nth-child(6)) .ns-tab:not(.on) .lb{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
@@ -2250,3 +2250,20 @@ body.ns-on img,body.ns-on video{max-width:100%}
 .grow{min-width:0}
 .field{grid-template-columns:minmax(0,1fr)}
 @media (max-width:420px){.chhead{gap:10px} body.ns-on .chhead .emo{display:none}}
+/* the file viewer: a spreadsheet's cells wrap like the other tables */
+.vw-table{width:100%}.vw-table :is(td,th){overflow-wrap:anywhere}
+/* windows, overlays and drawers: never wider than the screen, their insides give way */
+.noema-overlay,.modal{grid-template-columns:minmax(0,1fr);justify-items:center}
+.noema-ovbox,.modal .box,.ns-modal,.ns-sheet,.drawer,.ns-pop,.nx-hover{max-width:100%}
+.drawer>*,.drawer .dh .top>*,.ns-sheet>*,.ns-shbody>*,.ns-mdbody>*{min-width:0}
+.drawer .dh{grid-template-columns:minmax(0,1fr)}
+.srcdeck .deckinner{max-width:100%}
+/* the Roadmap import's preview on a phone: the steps wrap in their order */
+.cm-mini-flow{display:flex;flex-wrap:wrap;gap:6px;padding:4px}.cm-mini-flow .cm-mnode{position:static;width:auto!important;max-width:100%;height:auto!important;min-height:40px}
+/* the vault's bar of filters: wraps on a phone, the filters button keeps its word on one line */
+@media (max-width:520px){.vt-row{flex-wrap:wrap}}
+.vt-filtbtn,.vt-upbtn{flex:none;white-space:nowrap}
+.srcmain{grid-template-columns:minmax(0,1fr)}.srcmain b{overflow-wrap:anywhere}
+@media (max-width:420px){.srcrow{gap:8px;padding:10px}.srcrow .srcemo{display:none}}
+.subrow>*{min-width:0}.subrow{overflow-wrap:anywhere}
+.cg-tip,.cg-tipbody{max-width:100%}

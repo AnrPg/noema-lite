@@ -732,10 +732,11 @@ window.NoemaCurMap = (() => {
         const Lt = C().layout({ nodes: parsed.nodes, edges: parsed.edges }); const NW = 158, NH = 44, GX = 30, GY = 10;
         const rows = Math.max(1, ...Lt.cols.map(c => c.length)); const Wd = Lt.cols.length * (NW + GX) + 8, Hd = rows * (NH + GY) + 8;
         const P = {}; Lt.cols.forEach((col, x) => { const off = (rows - col.length) * (NH + GY) / 2; col.forEach((id, y) => { P[id] = { x: 4 + x * (NW + GX), y: 4 + off + y * (NH + GY) }; }); });
-        const inner = el('div', { class: 'cm-mini', style: { width: Wd + 'px', height: Hd + 'px' } });
+        const narrow = (graph.clientWidth || innerWidth - 64) < Wd;   // a phone: the steps wrap in their order instead of a picture wider than the screen
+        const inner = el('div', { class: 'cm-mini' + (narrow ? ' cm-mini-flow' : ''), style: narrow ? {} : { width: Wd + 'px', height: Hd + 'px' } });
         const NS = 'http://www.w3.org/2000/svg', svg = document.createElementNS(NS, 'svg'); svg.setAttribute('width', Wd); svg.setAttribute('height', Hd); svg.setAttribute('class', 'cm-edges');
         for (const e of parsed.edges) { const a = P[e.from], b = P[e.to]; if (!a || !b) continue; const p = document.createElementNS(NS, 'path'); const x1 = a.x + NW, y1 = a.y + NH / 2, x2 = b.x, y2 = b.y + NH / 2, mx = (x1 + x2) / 2; p.setAttribute('d', `M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2}`); if (sel && (e.from === sel || e.to === sel)) p.setAttribute('class', 'hl'); svg.append(p); }
-        inner.append(svg);
+        if (!narrow) inner.append(svg);
         for (const id of parsed.order) {
           const n = parsed.nodes[id], k = nFiles(id), ins = parsed.edges.filter(e => e.to === id).length, outs = parsed.edges.filter(e => e.from === id).length;
           const b = el('button', { class: 'cm-mnode cm-r-' + n.role + (sel === id ? ' sel' : '') + (k ? ' has' : ''), 'data-id': id, style: { left: P[id].x + 'px', top: P[id].y + 'px', width: NW + 'px', height: NH + 'px' }, title: `${n.title}${ins > 1 ? ' · ' + CM('roadmap.map.imp.join', { n: ins }) : ''}${outs > 1 ? ' · ' + CM('roadmap.map.imp.branch', { n: outs }) : ''}\n${k ? '📎 ' + CM('roadmap.map.imp.nFiles', { n: k }) : CM('roadmap.map.imp.noFiles')}\n` + CM('roadmap.map.imp.dropHere'),
