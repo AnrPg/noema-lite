@@ -134,7 +134,7 @@ h3{font-size:18px;font-weight:750}
 .back{display:inline-flex;align-items:center;gap:6px;font-weight:700;color:var(--ink2);margin-bottom:14px;font-size:14px}
 .back:hover{color:var(--ink)}
 .mantrabox{border-radius:var(--r);padding:16px 18px;background:var(--c-bg);color:var(--ink);font-weight:600;margin:6px 0 18px;display:flex;gap:12px;align-items:flex-start}
-.tabs{display:flex;gap:6px;background:var(--bg2);padding:5px;border-radius:16px;margin-bottom:22px;overflow-x:auto;scrollbar-width:none}
+.tabs{display:flex;gap:6px;background:var(--bg2);padding:5px;border-radius:16px;margin-bottom:22px;flex-wrap:wrap}
 .tabs button{padding:9px 16px;border-radius:12px;font-weight:700;color:var(--ink2);white-space:nowrap;transition:background .2s,color .2s}
 .tabs button.on{background:var(--card);color:var(--ink);box-shadow:0 2px 8px -3px rgba(0,0,0,.18)}
 .tabs button .n{font-size:11px;background:var(--c-bg);color:var(--c);padding:1px 7px;border-radius:9px;margin-inline-start:5px}
@@ -161,17 +161,17 @@ details.obj ul{margin:10px 0 0;padding-inline-start:22px}
 .blk.b-p{font-size:16.5px}
 .blk ul,.blk ol{margin:0;padding-inline-start:22px}
 .blk li{margin:4px 0}
-.pre{position:relative;background:var(--code-bg);color:var(--code-ink);border-radius:14px;padding:16px 16px 14px;font-family:var(--mono);font-size:13.5px;line-height:1.55;overflow-x:auto;white-space:pre}
+.pre{position:relative;background:var(--code-bg);color:var(--code-ink);border-radius:14px;padding:16px 16px 14px;font-family:var(--mono);font-size:13.5px;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere}
 .pre .lang{position:absolute;top:8px;inset-inline-end:10px;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:#8d93a8;font-family:var(--font);font-weight:700}
 .pre .copy{position:absolute;bottom:8px;inset-inline-end:8px;font-size:12px;color:#aab0c4;padding:3px 8px;border-radius:7px;background:rgba(255,255,255,.07);opacity:0;transition:opacity .2s}
 .pre:hover .copy{opacity:1}
 .caption{font-size:13px;color:var(--ink3);margin-top:6px;text-align:center}
 .tk-k{color:#ff9ac1;font-weight:600}.tk-s{color:#b7f0a0}.tk-c{color:#7f879c;font-style:italic}.tk-n{color:#ffd28a}.tk-f{color:#8fd3ff}
-.diagram{background:var(--bg2);color:var(--ink);border:1px dashed color-mix(in srgb,var(--c) 45%,var(--line));border-radius:14px;padding:16px;font-family:var(--mono);font-size:13px;line-height:1.45;overflow-x:auto;white-space:pre}
-.tablewrap{overflow-x:auto;border-radius:14px;border:1px solid var(--line);background:var(--card)}
+.diagram{background:var(--bg2);color:var(--ink);border:1px dashed color-mix(in srgb,var(--c) 45%,var(--line));border-radius:14px;padding:16px;font-family:var(--mono);font-size:min(13px,2.5vw);line-height:1.45;white-space:pre-wrap;overflow-wrap:anywhere}
+.tablewrap{overflow:hidden;border-radius:14px;border:1px solid var(--line);background:var(--card)}
 table{border-collapse:collapse;width:100%;font-size:14.5px}
-th{background:var(--c-bg);color:var(--ink);text-align:start;font-weight:750;padding:10px 12px;white-space:nowrap}
-td{padding:9px 12px;border-top:1px solid var(--line);vertical-align:top}
+th{background:var(--c-bg);color:var(--ink);text-align:start;font-weight:750;padding:10px 12px;overflow-wrap:anywhere}
+td{padding:9px 12px;border-top:1px solid var(--line);vertical-align:top;overflow-wrap:anywhere}
 tr:hover td{background:color-mix(in srgb,var(--c-bg) 40%,transparent)}
 .callout{border-radius:16px;padding-block:14px;padding-inline:52px 16px;position:relative;background:var(--info-bg)}
 .callout .ci{position:absolute;inset-inline-start:14px;top:12px;font-size:22px}
@@ -267,7 +267,7 @@ tr:hover td{background:color-mix(in srgb,var(--c-bg) 40%,transparent)}
 .bucket h4{font-size:14px;margin-bottom:8px;text-align:center}
 .bucket .pool{flex-direction:column}
 .cloze{font-size:16px;line-height:2.1}
-.cloze.code{font-family:var(--mono);font-size:14px;white-space:pre-wrap;background:var(--code-bg);color:var(--code-ink);padding:16px;border-radius:14px;line-height:2.1;overflow-x:auto}
+.cloze.code{font-family:var(--mono);font-size:14px;white-space:pre-wrap;background:var(--code-bg);color:var(--code-ink);padding:16px;border-radius:14px;line-height:2.1;overflow-wrap:anywhere}
 .blank{display:inline-block;min-width:80px;padding:1px 10px;border-radius:9px;border:1.5px dashed var(--c);background:var(--c-bg);color:var(--ink);font-family:var(--mono);font-size:14px;line-height:1.6;vertical-align:baseline;text-align:center;transition:all .15s;cursor:pointer}
 .cloze.code .blank{color:var(--ink)}
 .blank.sel{box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 35%,transparent)}
@@ -277,8 +277,8 @@ input.blank{outline:none;cursor:text}
 .blank.wrong{border-color:var(--bad);background:var(--bad-bg);border-style:solid}
 .blank .corr{font-size:12px;color:var(--ok);margin-inline-start:6px;font-weight:700}
 .bank{margin-top:14px}
-.codelines{background:var(--code-bg);color:var(--code-ink);border-radius:14px;padding:8px 0;font-family:var(--mono);font-size:13.5px;overflow-x:auto}
-.codelines button{display:flex;width:100%;text-align:start;padding-block:3px;padding-inline:0 14px;white-space:pre;transition:background .15s;font-family:var(--mono);color:var(--code-ink)}
+.codelines{background:var(--code-bg);color:var(--code-ink);border-radius:14px;padding:8px 0;font-family:var(--mono);font-size:13.5px}
+.codelines button{display:flex;width:100%;text-align:start;padding-block:3px;padding-inline:0 14px;white-space:pre-wrap;overflow-wrap:anywhere;transition:background .15s;font-family:var(--mono);color:var(--code-ink)}
 .codelines button .ln{width:42px;flex:none;text-align:end;padding-inline-end:12px;color:#6c7389;user-select:none}
 .codelines button:hover{background:rgba(255,255,255,.06)}
 .codelines button.sel{background:rgba(255,176,32,.22)}
@@ -392,7 +392,7 @@ select.sel{padding:10px 12px;border-radius:12px;border:1.5px solid var(--line);b
 .drawer .dh .top{display:flex;align-items:center;gap:10px}
 .avatar{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#7c5cff,#4d7cfe);color:#fff;font-size:19px;flex:none}
 .ctxchip{font-size:12.5px;padding:4px 10px;border-radius:999px;background:var(--bg2);color:var(--ink2);display:inline-flex;gap:6px;align-items:center;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.modechips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.modechips{display:flex;flex-wrap:wrap;gap:6px}
 .modechips button{padding:6px 11px;border-radius:999px;font-size:13px;font-weight:700;border:1.5px solid var(--line);white-space:nowrap}
 .modechips button.on{background:var(--violet);border-color:var(--violet);color:#fff}
 .msgs{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px}
@@ -585,7 +585,7 @@ select.sel{padding:10px 12px;border-radius:12px;border:1.5px solid var(--line);b
 .dangerzone{margin-top:24px;padding:14px 16px;border-radius:16px;border:1.5px dashed var(--bad);background:var(--bad-bg)}
 .herohead strong{font-weight:800;background:linear-gradient(90deg,#ff6b6b,#ffb020 30%,#2ec4b6 55%,#4d7cfe 75%,#a35cff);-webkit-background-clip:text;background-clip:text;color:transparent}
 .katex{font-size:1.06em}
-.katex-display{overflow-x:auto;overflow-y:hidden;padding:4px 0}
+.katex-display{padding:4px 0}
 @media (max-width:720px){.subjchip .st{max-width:110px}.noema-ovbox{padding:18px;border-radius:22px}.noema-accgrid{grid-template-columns:1fr 1fr}}
 @media (max-width:720px){.topbar .hide-m{display:none}.topbar{overflow:hidden}.subjchip{padding:6px 10px;font-size:13px}}
 @media (max-width:440px){.topbar .hide-s{display:none}.subjchip .st{max-width:84px}.iconbtn.tutor{padding:0 10px}}
@@ -850,7 +850,7 @@ kbd{font:600 12px var(--mono,monospace);padding:1px 6px;border-radius:6px;border
 .cm-linkchip{display:inline-flex;align-items:center;gap:4px;padding-block:3px;padding-inline:10px 4px;border-radius:99px;background:var(--violet-bg);font-size:13.5px}
 .cm-linkchip button{border:0;background:transparent;cursor:pointer;font-size:12px;padding:2px 6px;border-radius:99px;color:inherit}.cm-linkchip button:hover{background:var(--card)}
 .cm-chedit{display:grid;gap:8px;padding-inline-start:24px;margin:6px 0}.cm-chrow::marker{font-weight:800;color:var(--violet)}
-.cm-maptext{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;line-height:1.35;white-space:pre;overflow:auto;min-height:180px}
+.cm-maptext{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;line-height:1.35;white-space:pre-wrap;overflow-y:auto;min-height:180px}
 .cm-detect{margin:6px 0;font-weight:700;color:var(--green,#16a34a)}
 .cm-preview{max-height:260px;overflow:auto;margin:6px 0;padding-inline-start:28px;border:1px solid var(--line);border-radius:12px;padding-top:6px;padding-bottom:6px}.cm-preview li{margin:2px 0;overflow-wrap:anywhere}
 .cm-filetable{width:100%;border-collapse:collapse;margin-top:8px}.cm-filetable td{padding:6px 4px;border-bottom:1px solid var(--line);vertical-align:middle;overflow-wrap:anywhere}.cm-filetable td:nth-child(2){width:46%}.cm-filetable select{width:100%}
@@ -900,12 +900,12 @@ kbd{font:600 12px var(--mono,monospace);padding:1px 6px;border-radius:6px;border
 .cm-rules{width:100%;border-collapse:collapse;font-size:13px}.cm-rules td{padding:4px 6px;vertical-align:top;border-top:1px solid rgba(127,127,127,.18)}
 .cm-rules td:first-child{width:45%}.cm-rules code{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px}
 .cm-reads{margin-top:4px}.cm-reads pre{background:transparent;border:1px dashed rgba(127,127,127,.35)}
-.cm-try{margin-top:4px}.cm-tree{font-size:12px;white-space:pre;overflow-x:auto;margin:6px 0 0;padding:8px 10px;border-radius:10px;background:var(--bg2,rgba(127,127,127,.08))}
+.cm-try{margin-top:4px}.cm-tree{font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere;margin:6px 0 0;padding:8px 10px;border-radius:10px;background:var(--bg2,rgba(127,127,127,.08))}
 .cm-guide .cg-tipbody,.cg-tipbody:has(.cm-guide){max-width:none}
 @media (max-width:560px){.cm-rules,.cm-rules tbody,.cm-rules tr,.cm-rules td{display:block;width:auto}.cm-rules td:first-child{width:auto;border-top:1px solid rgba(127,127,127,.18)}.cm-rules td+td{border-top:0;padding-top:0}}
 .cg-steptitle .cg-tip[open]{min-width:0;max-width:100%}.cg-steptitle .cg-tip[open]>.cg-tipbody{min-width:0;overflow:hidden}
 .cm-guide{min-width:0}.cm-guide>*{min-width:0;max-width:100%}.cm-tree{max-width:100%}
-.cm-guide pre{white-space:pre;overflow-x:auto;overflow-wrap:normal;max-width:100%}
+.cm-guide pre{white-space:pre-wrap;overflow-wrap:anywhere;max-width:100%}
 .cm-guide code,.cm-guide pre,.cm-maptext{font-variant-ligatures:none;font-feature-settings:"liga" 0,"calt" 0}
 
 /* 💬 the Claude app (the learner's Claude plan) does curriculum work — engine/curjobs.js */
@@ -1347,7 +1347,7 @@ button.ns-item:hover{background:color-mix(in srgb,var(--acc-soft) 50%,var(--pape
 .ns-bar i{display:block;height:100%;border-radius:4px;background:var(--acc);animation:ns-barin 1s ease-out both}
 @keyframes ns-barin{from{width:0}}
 .ns-hint{cursor:pointer;margin-inline-start:4px;display:inline-grid;place-items:center;width:19px;height:19px;border-radius:50%;border:1.5px solid var(--ink3);color:var(--ink2);font-size:.68rem;font-weight:700;vertical-align:middle;font-family:var(--font);font-style:normal}
-.ns-seg{display:flex;gap:4px;padding:4px;border-radius:calc(var(--br) + 4px);background:var(--line);overflow-x:auto;scrollbar-width:none}
+.ns-seg{display:flex;gap:4px;padding:4px;border-radius:calc(var(--br) + 4px);background:var(--line);flex-wrap:wrap}
 [data-m="axo"] .ns-seg,[data-m="alien"] .ns-seg,[data-m="berry"] .ns-seg,[data-m="candy"] .ns-seg{border-radius:999px}
 .ns-seg button{flex:1;min-height:40px;padding:0 14px;border-radius:var(--br);font-weight:700;font-size:.95rem;color:var(--ink2);white-space:nowrap}
 .ns-seg button.on{background:var(--paper);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.08)}
@@ -1921,7 +1921,7 @@ body.ns-on .cm-tmap .cm-nextup{box-shadow:none}
 .ns-cvmsg.me{align-self:flex-end;background:color-mix(in srgb,var(--line) 55%,var(--paper))}
 .ns-cvmsg small{display:block;color:var(--ink3);font-size:.75rem;font-weight:700;margin-bottom:2px}
 .ns-cvmsg .ns-md>:first-child{margin-top:0}.ns-cvmsg .ns-md>:last-child{margin-bottom:0}
-.ns-cvmsg pre{overflow:auto;max-width:100%}
+.ns-cvmsg pre{white-space:pre-wrap;overflow-wrap:anywhere;max-width:100%}
 .ns-cvsearch{width:100%}
 @media (max-width:759px){.ns-modal.ns-mdwin{height:calc(100% - 24px)}.ns-cvstep{margin:0 6px 8px}.ns-cvrow{margin:0 6px 6px;padding-inline-start:10px}.ns-cvmain b{font-size:.95rem}.ns-cvacts .ns-emobtn{width:28px;height:28px;font-size:14px}}
 
@@ -1940,7 +1940,7 @@ body.ns-on .cm-tmap .cm-nextup{box-shadow:none}
 .ns-srfold .ns-chev{margin-inline-start:auto;transition:transform .2s;color:var(--ink3)}
 .ns-srgrp.open .ns-srfold .ns-chev{transform:rotate(90deg)}
 .ns-srprog{display:grid;gap:4px}
-.ns-srchips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0;padding-bottom:2px}
+.ns-srchips{display:flex;flex-wrap:wrap;gap:6px;flex:1;min-width:0;padding-bottom:2px}
 .ns-srchip{flex:none;display:inline-flex;align-items:center;gap:6px;min-height:32px;padding:0 12px;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink2);font-size:.86rem;font-weight:700;white-space:nowrap}
 .ns-srchip .n{font-weight:400;color:var(--ink3);font-size:.8rem}
 .ns-srchip.on{background:var(--acc-soft);border-color:transparent;color:var(--t1i)}
@@ -2221,3 +2221,49 @@ body.ns-on .drawer:dir(rtl){box-shadow:20px 0 50px -24px rgba(0,0,0,.35)}
 .ns-crumbs b,.ns-go:not(.lx-fgo) :is(h2,.rm),.cm-title b,.cm-ptitle h3,.cm-listnode .cm-t>b,.cm-pre>.cm-names,.ns-cvgrp>summary .grow,
 .ns-cvstep>summary .grow{unicode-bidi:plaintext}
 .scstep .fb:not(:has(b)){unicode-bidi:plaintext}   /* a scenario step's feedback (✅/❌ + the pack's text) */
+
+/* ---- 98_fit.css ---- */
+/* noema-lite: every screen fits its width, down to 320px phones — nothing scrolls sideways (docs/UI_MAP.md "Small screens").
+   Strips of chips and tabs wrap, code and diagrams wrap their lines, tables wrap their cells, long formulas break at their operators.
+   Only the Roadmap map and the PDF viewer pan, as pictures do. */
+.katex-display>.katex{white-space:normal;max-width:100%}
+.katex-display .base{margin-block:2px}
+html{overflow-x:clip}
+main,.ns-view,.view,.modal .box,.ns-modal,.ns-sheet,.drawer{overflow-wrap:anywhere}
+select,input,textarea,img,video,canvas,iframe{max-width:100%}
+/* six tabs no longer fit their names: only the open tab says its name (the others keep it as their tip and for screen readers) */
+@media (max-width:400px){
+  .ns-tabs:has(.ns-tab:nth-child(6)) .ns-tab:not(.on) .lb{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .ns-tabs:has(.ns-tab:nth-child(6)) .ns-tab.on .lb{overflow:visible;max-width:none;text-overflow:clip}   /* the open tab's name may use its neighbours' empty space */
+  .ns-tab .i2{width:44px}
+}
+@media (max-width:340px){.ns-tab:not(.on) .lb{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)} .ns-tab .lb{font-size:.68rem} .ns-tab.on .lb{overflow:visible;max-width:none;text-overflow:clip}}
+/* the tutor: the face only, smaller, so it covers less of the page */
+@media (max-width:420px){
+  .ns-fab.full .ns-fabface{width:54px;height:50px}
+  .ns-fab.full .nm{display:none}
+  .ns-fab{inset-inline-end:8px;bottom:calc(66px + 8px + env(safe-area-inset-bottom,0px))}
+  .ns-say{inset-inline-end:8px;bottom:calc(66px + 70px + env(safe-area-inset-bottom,0px));max-width:calc(100vw - 32px)}
+  body.ns-on main#ns-main{padding-inline:12px}
+}
+/* a flexible column gives way instead of pushing its neighbours off the screen */
+.grow{min-width:0}
+.field{grid-template-columns:minmax(0,1fr)}
+@media (max-width:420px){.chhead{gap:10px} body.ns-on .chhead .emo{display:none}}
+/* the file viewer: a spreadsheet's cells wrap like the other tables */
+.vw-table{width:100%}.vw-table :is(td,th){overflow-wrap:anywhere}
+/* windows, overlays and drawers: never wider than the screen, their insides give way */
+.noema-overlay,.modal{grid-template-columns:minmax(0,1fr);justify-items:center}
+.noema-ovbox,.modal .box,.ns-modal,.ns-sheet,.drawer,.ns-pop,.nx-hover{max-width:100%}
+.drawer>*,.drawer .dh .top>*,.ns-sheet>*,.ns-shbody>*,.ns-mdbody>*{min-width:0}
+.drawer .dh{grid-template-columns:minmax(0,1fr)}
+.srcdeck .deckinner{max-width:100%}
+/* the Roadmap import's preview on a phone: the steps wrap in their order */
+.cm-mini-flow{display:flex;flex-wrap:wrap;gap:6px;padding:4px}.cm-mini-flow .cm-mnode{position:static;width:auto!important;max-width:100%;height:auto!important;min-height:40px}
+/* the vault's bar of filters: wraps on a phone, the filters button keeps its word on one line */
+@media (max-width:520px){.vt-row{flex-wrap:wrap}}
+.vt-filtbtn,.vt-upbtn{flex:none;white-space:nowrap}
+.srcmain{grid-template-columns:minmax(0,1fr)}.srcmain b{overflow-wrap:anywhere}
+@media (max-width:420px){.srcrow{gap:8px;padding:10px}.srcrow .srcemo{display:none}}
+.subrow>*{min-width:0}.subrow{overflow-wrap:anywhere}
+.cg-tip,.cg-tipbody{max-width:100%}
