@@ -31,7 +31,7 @@ for k in ("map", "write", "pictures", "blind_solve", "review", "checks", "upload
     ok(all(k in F[f]["steps"] for f in ("1", "2", "4")), f"the flows that build a pack all have the step {k}")
 ok([k for k, v in S.items() if v.get("deferrable")] == ["upload"] and not [k for k, v in S.items() if "upload" in v.get("needs", [])]
    and all(f["steps"].index("upload") > f["steps"].index(x) for f in F.values() if "upload" in f["steps"] for x in ("translate", "bridges", "checks") if x in f["steps"]),
-   "the upload is the last step and never a prerequisite: only it may wait (deferrable), nothing needs it, translations / bridges / checks come before it")
+   "the upload is never a prerequisite: only it may wait (deferrable) and nothing needs it")
 ok(all(s in F["L2"]["steps"] for s in ("L.phenomena", "L.params", "L.order", "L.words", "L.grounding", "L.notes", "L.sentences", "L.package")), "Γ2: the steps of docs/LANGUAGE_RULES.md checklist §C (phenomena, R3, D13, D14/D15, grounding, D19, D22–D24, package)")
 
 D = lambda *a: pipeline.detect(list(a))[0]

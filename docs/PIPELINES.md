@@ -33,23 +33,20 @@ python3 scripts/pipeline.py pending work                    # every subject whos
 - A step is refused while a step it `needs` is not done.
 - When a file a done step produced changes, that step **and every step after it** becomes `stale` and is checked again
   (a change to a chapter after the review re-opens write → blind_solve → review → checks; the map stays done).
-- **The upload is the last step and never a prerequisite** (§1b).
+- **A blocked upload never stops the flow** (§1b).
 - `status` exits 1 while a strict step is open (a deferred upload too). `review` gates are a judgement recorded with `done --note`; `planned`
   steps are listed and not required.
 
-## 1b. The upload comes last and never stops the flow
+## 1b. Fallback: when the upload fails, the flow goes on
 
-Every flow that makes a pack ends with `checks → upload`, and nothing needs the upload: the translations, the 文A bridges
-and `make_pack.py` are all made in the sandbox, so they never wait for the network. The upload then sends everything
-together — the pack, its source files, its translation files (`noema_finish_upload` asks for them) and each bridge
-(`noema_save_bridge`).
-
-When the network blocks it (the sandbox cannot reach the storage: `curl` refused, 403, a timeout), Claude does **not**
-stop: `pipeline.py defer <dir> upload --note "why"` records it as waiting (`deferred`, ⏸), `next` moves on, and in a
+Normally the pack is uploaded as soon as it is built (`noema_finish_upload`, then its translations and bridges). In the
+edge case where the network blocks the upload (the sandbox cannot reach the storage: `curl` refused, 403, a timeout),
+Claude does **not** stop — the upload is never a prerequisite, and translations and bridges never need the pack uploaded
+first: `pipeline.py defer <dir> upload --note "why"` records it as waiting (`deferred`, ⏸), `next` moves on, and in a
 Roadmap Claude goes on to the next step (`noema_curriculum_task`). At the end of the run, `pipeline.py pending work`
-lists every subject still waiting, with the files ready to send, and they are retried together; each that goes up is
-recorded with `pipeline.py done <dir> upload --note "…"`. If the network still blocks them, the learner gets each
-`<id>.noema.zip` (📥 Import subject pack: the pack, its translations and source files) and the bridge files, with a
+lists every subject still waiting, with the files ready to send (pack, translation files, bridge files: one per pair),
+and they are retried together; each that goes up is recorded with `pipeline.py done <dir> upload --note "…"`. If the
+network still blocks them, the learner gets each `<id>.noema.zip` (📥 Import subject pack) and the bridge files, with a
 note of what is waiting. Only a step marked `deferrable` in `steps.json` may wait — today only `upload`.
 
 ## 2. Flows
@@ -88,7 +85,7 @@ note of what is waiting. Only a step marked `deferrable` in `steps.json` may wai
 | translate | every chapter has its translation into each of en, el, ru that is not the pack's language, and the subject's name in it (`subject.json` "i18n", §4b) |
 | bridges | `bridge.py require`: every pair — from the pack's language and from each translation into each of en, el, ru, ar other than the language read — with enough coverage (§4b) |
 | checks | `make_pack.py` builds the pack with every quality rule (§4) and checks every translation against its chapter |
-| upload | last, everything together: `noema_finish_upload` / `noema_save_pack` accepts it (the same checks again, then the source files and the translations), then `noema_save_bridge` per bridge; blocked by the network → `defer`, retried at the end (§1b) |
+| upload | `noema_finish_upload` / `noema_save_pack` accepts it (the same checks again, then the source files and the translations), then `noema_save_bridge` per bridge; blocked by the network → `defer`, retried at the end (§1b) |
 | L.* | the language tools: `validate_lang.py`, `lang_phenomena.py`, `lang_refcheck.py --offline`, `lang_facade.py lint / parity`, `lang_strict_report.js`, `lang_course.py package`, `tests/lang_rules.py` |
 
 ## 4. The quality rules (per chapter)
