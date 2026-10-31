@@ -1,6 +1,6 @@
 {
  "format": "noema.steps/v1",
- "about": "Every step a pipeline can name (docs/PIPELINES.md §3). check: local = pipeline.py checks it itself; run = a command that must exit 0; mcp = a connector call the run records with pipeline.py done; manual = a judgement the run records with pipeline.py done --note. gate: strict (must pass), review (record it), planned (shown, not yet enforced). per: chapter = once per chapter.",
+ "about": "Every step a pipeline can name (docs/PIPELINES.md §3). check: local = pipeline.py checks it itself; run = a command that must exit 0; mcp = a connector call the run records with pipeline.py done; manual = a judgement the run records with pipeline.py done --note. gate: strict (must pass), review (record it), planned (shown, not yet enforced). per: chapter = once per chapter. deferrable: the step may wait (pipeline.py defer) while the flow goes on — only the upload, which is never a prerequisite.",
  "steps": {
   "classify": {
    "title": "Which flow is this?",
@@ -196,7 +196,7 @@
   },
   "upload": {
    "title": "Save to the learner's account",
-   "what": "noema_start_upload → curl → noema_finish_upload (it checks the pack again, then asks for the source files and the translations), then noema_save_bridge for each bridge.",
+   "what": "noema_start_upload → curl → noema_finish_upload (it checks the pack again, then asks for the source files and the translations), then noema_save_bridge for each bridge. Never a prerequisite: if the network blocks it (curl refused, 403, timeout, no connection), do not stop: pipeline.py defer <dir> upload --note \"why\" and go on with the rest of the flow (in a Roadmap, the next step too); at the end of the run retry every waiting upload together — pack, source files, translations, bridges (pipeline.py pending work). If they still fail, give the learner each <id>.noema.zip (📥 Import subject pack) and the built bridge files, and say what is waiting.",
    "needs": [
     "checks"
    ],
@@ -204,11 +204,12 @@
     "mcp": "noema_finish_upload"
    },
    "doc": "SKILL.md",
-   "gate": "strict"
+   "gate": "strict",
+   "deferrable": true
   },
   "translate": {
    "title": "Translations (en, el, ru), the subject's name included",
-   "what": "A full translation of every chapter into each of English, Greek and Russian other than the pack's language (translations/<locale>/chNN.json: same ids, sections, answers and code; only the words change — terms in brackets are translated too), AND the subject's name in each (subject.json \"i18n\": {\"<locale>\": {title, appTitle, description, searchExamples, hero, tutor}} — the card, the title and the tagline the learner sees). In a Roadmap, the step's own words go with it: its title, summary, learning goals, domains and every chapter's title, teaching goals and coverage (noema_save_roadmap_translation). make_pack.py writes each translation as its own file (build/<id>.tr.<locale>.json, with the subject's name) and noema_finish_upload asks for them.",
+   "what": "A full translation of every chapter into each of English, Greek and Russian other than the pack's language (translations/<locale>/chNN.json: same ids, sections, answers and code; only the words change — terms in brackets are translated too), AND the subject's name in each (subject.json \"i18n\": {\"<locale>\": {title, appTitle, description, searchExamples, hero, tutor}} — the card, the title and the tagline the learner sees). In a Roadmap, the step's own words go with it: its title, summary, learning goals, domains and every chapter's title, teaching goals and coverage (noema_save_roadmap_translation). make_pack.py writes each translation as its own file (build/<id>.tr.<locale>.json, with the subject's name) and noema_finish_upload asks for them; a translation never needs the pack uploaded first.",
    "produces": [
     "translations/{locale}/{ch}.json"
    ],
@@ -223,7 +224,7 @@
   },
   "bridges": {
    "title": "Language help 文A — every pair (en, el, ru → en, el, ru, ar)",
-   "what": "A 文A bridge for every pair of the language the learner READS → their native language: from the pack's own language into each of en, el, ru, ar other than it (bridges/<native>.json), AND from each translation into each of en, el, ru, ar other than that translation's language (bridges/from-<locale>/core.json + <native>.json: made from the TRANSLATION's words, so after it — bridge.py todo/build --from <locale>). An English pack: en→el, en→ru, en→ar, el→en, el→ru, el→ar, ru→en, ru→el, ru→ar. Everyday words included (learners may be A2/B1): each covers >= 90 % of the content words and >= 80 % of the everyday ones (bridge.py require checks every pair). Save each with noema_save_bridge after the upload (source = the translation's locale for a translation's bridge).",
+   "what": "A 文A bridge for every pair of the language the learner READS → their native language: from the pack's own language into each of en, el, ru, ar other than it (bridges/<native>.json), AND from each translation into each of en, el, ru, ar other than that translation's language (bridges/from-<locale>/core.json + <native>.json: made from the TRANSLATION's words, so after it — bridge.py todo/build --from <locale>). An English pack: en→el, en→ru, en→ar, el→en, el→ru, el→ar, ru→en, ru→el, ru→ar. Everyday words included (learners may be A2/B1): each covers >= 90 % of the content words and >= 80 % of the everyday ones (bridge.py require checks every pair). Save each with noema_save_bridge after the upload (source = the translation's locale for a translation's bridge); while the upload waits, the built files (bridge.py build: one file per pair) go up with it at the end.",
    "needs": [
     "review",
     "translate"
@@ -240,7 +241,7 @@
   },
   "next": {
    "title": "The next step",
-   "what": "noema_curriculum_task again: the next queued step, or tell the learner what is ready.",
+   "what": "noema_curriculum_task again: the next queued step, or tell the learner what is ready. A waiting (deferred) upload never holds it back: build the next step, then retry every waiting upload together at the end of the run (pipeline.py pending work).",
    "check": {
     "mcp": "noema_curriculum_task"
    },

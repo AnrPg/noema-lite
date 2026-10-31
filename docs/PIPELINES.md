@@ -25,14 +25,29 @@ python3 scripts/pipeline.py next work/demo                  # the next step: wha
 python3 scripts/pipeline.py check work/demo map             # runs the check; on success records it with the hashes of
                                                             # what it produced
 python3 scripts/pipeline.py done work/demo upload --note "noema_finish_upload ok"   # a connector call or a judgement
-python3 scripts/pipeline.py status work/demo                # every step: todo / done / stale / failed / planned
+python3 scripts/pipeline.py status work/demo                # every step: todo / done / stale / failed / planned / deferred
+python3 scripts/pipeline.py defer work/demo upload --note "curl: 403 from the storage"   # the network blocks the upload: it waits
+python3 scripts/pipeline.py pending work                    # every subject whose upload waits, with its files: retry them together
 ```
 
 - A step is refused while a step it `needs` is not done.
 - When a file a done step produced changes, that step **and every step after it** becomes `stale` and is checked again
   (a change to a chapter after the review re-opens write → blind_solve → review → checks; the map stays done).
-- `status` exits 1 while a strict step is open. `review` gates are a judgement recorded with `done --note`; `planned`
+- **A blocked upload never stops the flow** (§1b).
+- `status` exits 1 while a strict step is open (a deferred upload too). `review` gates are a judgement recorded with `done --note`; `planned`
   steps are listed and not required.
+
+## 1b. Fallback: when the upload fails, the flow goes on
+
+Normally the pack is uploaded as soon as it is built (`noema_finish_upload`, then its translations and bridges). In the
+edge case where the network blocks the upload (the sandbox cannot reach the storage: `curl` refused, 403, a timeout),
+Claude does **not** stop — the upload is never a prerequisite, and translations and bridges never need the pack uploaded
+first: `pipeline.py defer <dir> upload --note "why"` records it as waiting (`deferred`, ⏸), `next` moves on, and in a
+Roadmap Claude goes on to the next step (`noema_curriculum_task`). At the end of the run, `pipeline.py pending work`
+lists every subject still waiting, with the files ready to send (pack, translation files, bridge files: one per pair),
+and they are retried together; each that goes up is recorded with `pipeline.py done <dir> upload --note "…"`. If the
+network still blocks them, the learner gets each `<id>.noema.zip` (📥 Import subject pack) and the bridge files, with a
+note of what is waiting. Only a step marked `deferrable` in `steps.json` may wait — today only `upload`.
 
 ## 2. Flows
 
@@ -45,7 +60,7 @@ python3 scripts/pipeline.py status work/demo                # every step: todo /
 | 4 | Sources → one subject | the material fits one subject | classify → start_subject → map → pictures → write → blind_solve → review → translate → bridges → checks → upload |
 | 5 | Add to an existing subject | new material (`unpack.py`, `patches/`) | classify → map → pictures → write → blind_solve → review → translate → bridges → checks → upload |
 | 6 | Language help 文A | a bridge for a pack | classify → bridges |
-| 7 | Translate a pack | a pack into another language | classify → translate → checks → upload |
+| 7 | Translate a pack | a pack into another language | classify → translate → bridges → checks → upload |
 | 9 | Grow a Roadmap: a new part | new material for a Roadmap that exists (`--grow`; the app's ⋮ → *Add a part with Claude*) | classify → read_map → grow → plan → start_subject → map → pictures → write → blind_solve → review → translate → bridges → checks → upload → next |
 | 8 | Import a map or a subject | a Roadmap file or a pack the learner made | classify → import |
 | L1 | Γ1 · A task of a language course | `noema_lang_task` | classify → L.brief → L.task → L.order → L.words → L.grammar → L.notes → L.sentences → L.exercises → L.green |
@@ -70,7 +85,7 @@ python3 scripts/pipeline.py status work/demo                # every step: todo /
 | translate | every chapter has its translation into each of en, el, ru that is not the pack's language, and the subject's name in it (`subject.json` "i18n", §4b) |
 | bridges | `bridge.py require`: every pair — from the pack's language and from each translation into each of en, el, ru, ar other than the language read — with enough coverage (§4b) |
 | checks | `make_pack.py` builds the pack with every quality rule (§4) and checks every translation against its chapter |
-| upload | `noema_finish_upload` / `noema_save_pack` accepts it (the same checks again, then the source files and the translations), then `noema_save_bridge` per bridge |
+| upload | `noema_finish_upload` / `noema_save_pack` accepts it (the same checks again, then the source files and the translations), then `noema_save_bridge` per bridge; blocked by the network → `defer`, retried at the end (§1b) |
 | L.* | the language tools: `validate_lang.py`, `lang_phenomena.py`, `lang_refcheck.py --offline`, `lang_facade.py lint / parity`, `lang_strict_report.js`, `lang_course.py package`, `tests/lang_rules.py` |
 
 ## 4. The quality rules (per chapter)
@@ -153,6 +168,6 @@ The order matters: **translations first, then the bridges** — a translation's 
 
 - `tests/pack_rules.js`: the Python and JS checkers give the same messages on the same chapters; strictness; the
   connector's refusal.
-- `tests/pipelines.py`: every flow and step is consistent, every command exists, `detect`, and flow 4 end to end in a
-  temporary folder with the scripts as the skill ships them.
+- `tests/pipelines.py`: every flow and step is consistent, every command exists, `detect`, flow 4 end to end in a
+  temporary folder with the scripts as the skill ships them, and a blocked upload (`defer`, `next`, `pending`).
 - `tests/connector.js`: `noema_pipeline`, and the refusal of a new pack without the rules.

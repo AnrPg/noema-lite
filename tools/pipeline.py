@@ -11,7 +11,12 @@
                                                               what it produced (a later change makes it, and every step
                                                               after it, stale)
   python3 pipeline.py done DIR STEP [--note "…"]              record a connector call (mcp) or a judgement (manual)
-Exit code 1 when a check fails or a strict step is missing. The steps are tools/pipelines/steps.json."""
+  python3 pipeline.py defer DIR upload --note "why"           the upload failed (network): record it as waiting and go on
+                                                              with the rest of the flow — it is retried at the end
+  python3 pipeline.py pending ROOT                            every subject under ROOT (e.g. work) whose upload still waits,
+                                                              with what to upload: retry them all together at the end
+The upload is the last step and never a prerequisite: translations, bridges and the checks are all made locally first.
+Exit code 1 when a check fails or a strict step is missing (a deferred upload counts as missing until it is done). The steps are tools/pipelines/steps.json."""
 import glob, hashlib, json, os, subprocess, sys, tempfile, datetime
 for _s in (sys.stdout, sys.stderr):
     try: _s.reconfigure(encoding="utf-8", errors="replace")
@@ -170,9 +175,30 @@ def states(d, run):
         if st.get("gate") == "planned" and r.get("status") != "done": out[sid] = "planned"; continue
         s = r.get("status", "todo")
         if s == "done" and r.get("hashes") is not None and hashes(produced(d, st, run)) != r["hashes"]: s = "stale"
-        if s == "done" and stale: s = "stale"
+        if s in ("done", "deferred") and stale: s = "stale"
         if s == "stale": stale = True
         out[sid] = s
+    return out
+
+def pending(root):
+    """Every run under root (root itself, root/*, root/*/*) whose upload step is not done yet, with what is ready to upload."""
+    out = []
+    dirs = [root] + sorted(glob.glob(os.path.join(root, "*"))) + sorted(glob.glob(os.path.join(root, "*", "*")))
+    for d in dirs:
+        run = rj(os.path.join(d, "run.json"))
+        if not run or run.get("flow") not in flows(): continue
+        fl = flows()[run["flow"]]["steps"]
+        if "upload" not in fl: continue
+        st = states(d, run)
+        if st.get("upload") == "done": continue
+        sid = subject_id(d) or os.path.basename(d)
+        files = [os.path.relpath(f, d) for f in sorted(glob.glob(os.path.join(d, "build", f"{sid}.json")) + glob.glob(os.path.join(d, "build", f"{sid}.tr.*.json")))]
+        nb = len(glob.glob(os.path.join(d, "bridges", "*.json")) + glob.glob(os.path.join(d, "bridges", "from-*", "*.json")))
+        why = (run["steps"].get("upload") or {}).get("note", "")
+        ready = st.get("checks") == "done" if "checks" in fl else True
+        out.append(f"{'⏸' if st.get('upload') == 'deferred' else '○'} {sid}  ({os.path.relpath(d, root) if d != root else '.'})"
+                   + (f" — {why}" if why else "") + (f"\n    ready: {', '.join(files)}" if files else "") + (f"; bridge files in bridges/: {nb}" if nb else "")
+                   + ("" if ready else f"\n    not ready yet: the checks step is not done (python3 pipeline.py next {d})"))
     return out
 
 def main(a):
@@ -194,21 +220,42 @@ def main(a):
         run = {"format": "noema.run/v1", "flow": fid, "started": now(), "vars": {k: opt("--" + k) for k in ("course", "lang", "locale") if opt("--" + k)},
                "steps": {"classify": {"status": "done", "at": now(), "note": "pipeline.py start " + fid}}}
         save_run(d, run); print(f"run.json → {d}\nflow {fid}: {' → '.join(flows()[fid]['steps'])}"); return 0
+    if cmd == "pending":
+        rows = pending(d)
+        for r in rows: print(r)
+        print(f"{len(rows)} upload(s) waiting — retry them together now (noema_start_upload → curl → noema_finish_upload, then each bridge); "
+              "if the network still blocks them, give the learner each <id>.noema.zip and the bridge files" if rows else "no upload waiting")
+        return 1 if rows else 0
     run = load_run(d); S = steps()
     if cmd == "status":
         st = states(d, run); bad = False
         for sid, s in st.items():
-            mark = {"done": "✓", "stale": "↻", "failed": "✗", "planned": "·"}.get(s, "○")
-            print(f"{mark} {sid:<14} {s:<8} {S[sid]['title']}"); bad = bad or (s != "done" and S[sid].get("gate") == "strict")
+            mark = {"done": "✓", "stale": "↻", "failed": "✗", "planned": "·", "deferred": "⏸"}.get(s, "○")
+            note = f"  ({(run['steps'].get(sid) or {}).get('note', '')})" if s == "deferred" else ""
+            print(f"{mark} {sid:<14} {s:<8} {S[sid]['title']}{note}"); bad = bad or (s != "done" and S[sid].get("gate") == "strict")
         return 1 if bad else 0
     if cmd == "next":
         st = states(d, run)
         for sid, s in st.items():
-            if s in ("done", "planned"): continue
+            if s in ("done", "planned", "deferred"): continue
             x = S[sid]; ck = x.get("check") or {}
             print(f"next: {sid} — {x['title']} ({s})\n{x['what']}\ndoc: {x.get('doc', '')}\ncheck: python3 pipeline.py " + ("check" if ("local" in ck or "run" in ck) else "done") + f" {a[1]} {sid}")
             return 0
+        waiting = [sid for sid, s in st.items() if s == "deferred"]
+        if waiting: print(f"every other step is done; waiting: {', '.join(waiting)} — retry at the end of the run, all together (python3 pipeline.py pending <root>)"); return 0
         print("every step is done"); return 0
+    if cmd == "defer":
+        if len(a) < 3 or a[2] not in S: print("which step? " + ", ".join(x for x in flows()[run["flow"]]["steps"] if S[x].get("deferrable"))); return 1
+        sid = a[2]
+        if not S[sid].get("deferrable"): print(f"{sid} cannot wait: only the upload can (it is the last step, never a prerequisite)"); return 1
+        if sid not in flows()[run["flow"]]["steps"]: print(f"{sid} is not a step of flow {run['flow']}"); return 1
+        st = states(d, run); before = flows()[run["flow"]]["steps"][:flows()[run["flow"]]["steps"].index(sid)]
+        miss = [n for n in S[sid].get("needs", []) if n in before and st.get(n) not in ("done", "planned")]
+        if miss: print(f"first: {', '.join(miss)} (everything is made locally before the upload)"); return 1
+        note = a[a.index("--note") + 1] if "--note" in a else ""
+        if not note.strip(): print("--note: why it waits (e.g. \"curl: 403 from the storage — network blocked\")"); return 1
+        run["steps"][sid] = {"status": "deferred", "at": now(), "note": note}; save_run(d, run)
+        print(f"⏸ {sid} waits: go on with the rest of the flow; at the end retry every waiting upload together (python3 pipeline.py pending <root>)"); return 0
     if cmd in ("check", "done"):
         if len(a) < 3 or a[2] not in S: print("which step? " + ", ".join(flows()[run["flow"]]["steps"])); return 1
         sid = a[2]

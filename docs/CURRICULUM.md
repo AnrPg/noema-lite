@@ -201,7 +201,9 @@ usage limits may spread a big one over days).
 * **Each queued step is prepared once.** `noema_curriculum_task` hands a step out only after *claiming* it for that run —
   an atomic KV row `a:curclaim:<cid>:<nid>` (insert-if-absent; an expired one is taken over by a conditional update), so
   overlapping scheduled runs and two runs asking at the same moment always get different steps. The claim ends when the
-  step is saved (`noema_finish_upload`) or after 4 h (a run that died). A queued step whose subject (`a:packmeta:<packId>`)
+  step is saved (`noema_finish_upload`) or after 4 h (a run that died). A step whose upload the network blocked keeps
+  its claim while the run goes on to the next step; its upload is retried with the others at the end of the run
+  (docs/PIPELINES.md §1b). A queued step whose subject (`a:packmeta:<packId>`)
   was saved *after* it was queued counts as prepared — even when an older copy of the curriculum from another device put
   it back in the queue; the app then heals it back to ⚡ itself. `peek = true` says what is next without claiming it;
   `step` + `force = true` takes over a claimed step. Queueing an already-queued step changes nothing (it keeps its place).

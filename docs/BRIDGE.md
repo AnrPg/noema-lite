@@ -174,10 +174,10 @@ python3 tools/bridge.py senses SUBJ --word order        # a word with two senses
 # add cues to its senses (core.json), then
 python3 tools/bridge.py anchor SUBJ                     # anchors from the cues (a person's anchors are kept and win)
 python3 tools/bridge.py terms SUBJ [--dry]              # key words of every section from the text (a person's are kept)
-python3 tools/bridge.py build SUBJ --native ru -o ru.bridge.json
+python3 tools/bridge.py build SUBJ --native ru                # → bridges/<id>.ru.bridge.json (one file per pair)
 # then the same from each translation (after it is saved), in bridges/from-<locale>/ (§2.4):
 python3 tools/bridge.py todo SUBJ --from el             # the Greek translation's words
-python3 tools/bridge.py build SUBJ --from el --native ru -o ru.bridge.json
+python3 tools/bridge.py build SUBJ --from el --native ru      # → bridges/from-el/<id>.el.ru.bridge.json
 python3 tools/bridge.py require SUBJ                    # every pair: en→el/ru/ar, el→en/ru/ar, ru→en/el/ar
 ```
 `SUBJ` is a library subject folder or a pack `.json` (the learner's pack, from `noema_get_pack_url`) with `bridges/`
