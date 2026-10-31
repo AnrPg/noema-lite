@@ -201,7 +201,10 @@ Fix every error and run again (also look at the WARN lines: a citation outside a
 `firstPage` or page). Never deliver a pack that fails. The package lists every source file it contains — check
 that every file the user gave you (or each of its parts) is there.
 
-## 6. Save it to the user's noema-lite account
+## 6. Save it to the user's noema-lite account — last, everything together
+**The upload is the last step of the flow and never a prerequisite.** Everything else — the translations, the 文A
+bridges, `make_pack.py` with every check — is made here in the sandbox first, and nothing waits for the network. Then
+the pack, its source files, its translations and its bridges go up together.
 (Running inside the noema-lite app through the API? Then just copy the package `<id>.noema.zip` to `$OUTPUT_DIR` — the app imports it with its source files.)
 - **With the noema-lite connector** (tools `noema_*` are available):
   1. `noema_start_upload(subject_id)` → run the returned `curl` command on `work/<id>/build/<id>.json`;
@@ -209,10 +212,18 @@ that every file the user gave you (or each of its parts) is there.
      run the commands it returns (a `curl` per file — each part of a split PDF; a file over 45 MB comes as a `split`
      command plus one `curl` per part: no size limit), then call
      `noema_finish_upload` again. The subject is saved only when every packaged file is in the account (right size).
+  3. Then each bridge with `noema_save_bridge` (see *Language help* below).
   Small packs (≤ 1.5 MB) can use `noema_save_pack` instead of step 1 (step 2's file uploads still apply).
   The subject appears in the user's noema-lite picker (cloud account) with its files — tell them.
-- **Without it** (or if the upload fails): give the user the **`<id>.noema.zip` package** and tell them:
-  *noema-lite → subject picker → 📥 Import subject pack* (choose the .zip — the source files come with it).
+- **If the network blocks the upload** (the `curl` is refused, 403, a timeout, no connection): **do not stop.**
+  `python3 scripts/pipeline.py defer work/<id> upload --note "curl: 403 from the storage"` and go on with the rest of the
+  flow — in a Roadmap, the next step too. At the end of the run, retry every waiting upload together:
+  `python3 scripts/pipeline.py pending work` lists them (pack, translation files, bridge files), then
+  `noema_start_upload` → `curl` → `noema_finish_upload` and `noema_save_bridge` for each one, and
+  `pipeline.py done work/<id> upload --note "…"`.
+- **Without the connector** (or if the retry at the end still fails): give the user the **`<id>.noema.zip` package**
+  (the pack, its translations and source files) and the built bridge files, say which subjects are waiting, and tell
+  them: *noema-lite → subject picker → 📥 Import subject pack* (choose the .zip — the source files come with it).
 
 ## 0c. Grow a Roadmap in parts (new material for a Roadmap that exists)
 Courses are not known ahead: the learner brings the next lectures week by week. New material for a Roadmap that exists
@@ -245,9 +256,11 @@ A noema-lite **curriculum** is a map of steps; every step becomes a subject pack
 3. **Step tasks**: build ONE pack exactly as this skill describes, with the given `subject_id` (start_subject.py with that id),
    one chapter per planned chapter (same order and titles), from the learner's files when the task gives download links
    (`curl` them into `work/<id>/sources/`; when only some pages belong to the step, split those pages out) — otherwise
-   researched from authoritative sources. Save it with `noema_start_upload` → `noema_finish_upload` (the learner's own
-   files are recognised by their SHA-256 and not uploaded again). The step then appears ready on the learner's map.
-4. One step per chat unless the learner asked for more; after each saved step, `noema_curriculum_task` again if so.
+   researched from authoritative sources. Translate it and make its bridges, then — last — save it with `noema_start_upload`
+   → `noema_finish_upload` (the learner's own files are recognised by their SHA-256 and not uploaded again). The step
+   then appears ready on the learner's map. If the network blocks the upload, `pipeline.py defer` it and go on (§6).
+4. One step per chat unless the learner asked for more; after each saved step — or a step whose upload waits —
+   `noema_curriculum_task` again if so, and retry every waiting upload together at the end (`pipeline.py pending work`).
 Without the connector the learner gives you a step bundle (`TASK.md` + `files/` + this toolkit): follow TASK.md and hand
 back `<subject_id>.noema.zip`.
 
@@ -361,7 +374,8 @@ pack is not changed. Contract and rules: `references/BRIDGE.md` (or `noema_bridg
 4. Write `bridges/<native>.json`: one translation per sense (the term the learner's own lectures would use, a plain
    explanation in brackets when needed), a 2–4 sentence preview per section, `"status": "draft"`.
 5. `python3 scripts/bridge.py check <pack.json>` (0 errors) and `coverage`; chapter by chapter, complete each.
-6. `python3 scripts/bridge.py build <pack.json> --native ru -o ru.bridge.json` → save it with `noema_save_bridge`:
+6. `python3 scripts/bridge.py build <pack.json> --native ru -o ru.bridge.json` → in the upload step at the end (§6;
+   a bridge for a pack already in the account can go up right away) save it with `noema_save_bridge`:
    call it with `subject_id` + `native` only, run the `curl` upload it returns on `ru.bridge.json`, then call it again
    (never paste a bridge into the call: they are 50–150 KB). Or the learner imports the file with 📥. Learners' *Report a mistake* notes come back in `noema_bridge_guide`.
 7. Then each translation: steps 2–6 with `--from el` (`bridge.py todo <pack.json> --from el` …, `build … --from el --native

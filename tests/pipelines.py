@@ -29,6 +29,9 @@ for sid, st in S.items():
         ok(os.path.exists(exe), f"step {sid}: its command exists ({os.path.relpath(exe, ROOT)})")
 for k in ("map", "write", "pictures", "blind_solve", "review", "checks", "upload", "bridges"):
     ok(all(k in F[f]["steps"] for f in ("1", "2", "4")), f"the flows that build a pack all have the step {k}")
+ok([k for k, v in S.items() if v.get("deferrable")] == ["upload"] and not [k for k, v in S.items() if "upload" in v.get("needs", [])]
+   and all(f["steps"].index("upload") > f["steps"].index(x) for f in F.values() if "upload" in f["steps"] for x in ("translate", "bridges", "checks") if x in f["steps"]),
+   "the upload is the last step and never a prerequisite: only it may wait (deferrable), nothing needs it, translations / bridges / checks come before it")
 ok(all(s in F["L2"]["steps"] for s in ("L.phenomena", "L.params", "L.order", "L.words", "L.grounding", "L.notes", "L.sentences", "L.package")), "Γ2: the steps of docs/LANGUAGE_RULES.md checklist §C (phenomena, R3, D13, D14/D15, grounding, D19, D22–D24, package)")
 
 D = lambda *a: pipeline.detect(list(a))[0]
@@ -118,6 +121,7 @@ try:
     json.dump({**loc("en"), "t": {f"{w['word']}#1": {"t": "x"} for w in BR.todo(BR.load(d, "ru")[0], [], (), None, 5000)}}, open(os.path.join(d, "bridges", "from-ru", "en.json"), "w"))
     r = P("check", d, "bridges"); ok(r.returncode == 0, "bridges: all nine pairs (en→el/ru/ar, el→en/ru/ar, ru→en/el/ar), each covering the content and the everyday words" + ("" if r.returncode == 0 else "\n" + r.stdout))
     b_el = BR.build(*BR.load(d, "el"), "ru"); ok(b_el["source"] == "el" and b_el["native"] == "ru" and BR.pair_key("el", "ru", "en") == "el.ru" and BR.pair_key("en", "ru", "en") == "ru", "bridge.py --from el builds el → ru (pair key el.ru; from the own language just the native)")
+    ok(P("defer", d, "upload", "--note", "403").stdout.startswith("first: checks"), "defer: the upload waits only once everything before it is made")
     r = P("check", d, "checks"); ok(r.returncode == 0 and "✓" in r.stdout, "checks: make_pack.py builds the pack with every quality rule" + ("" if r.returncode == 0 else "\n" + r.stdout))
     pk = json.load(open(os.path.join(d, "build", "demo-coulomb.json"), encoding="utf-8"))
     ok(pk["chapters"][0]["map"]["format"] == "noema.map/v1" and pk["chapters"][0]["review"]["blind"]["solved"] == 40, "the pack carries chapter.map (Info window) and chapter.review")
@@ -125,6 +129,15 @@ try:
     ok(pk["translations"] == {"el": {"file": True, "chapters": 1}, "ru": {"file": True, "chapters": 1}} and t_el["format"] == "noema-translation" and t_el["version"] == pk["version"] and t_el["chapters"][0]["id"] == "ch01",
        "make_pack.py: each translation in its own file (build/<id>.tr.<locale>.json), the pack only names them")
     ok(t_el.get("subject", {}).get("title") == "Νόμος του Coulomb" and pk["subject"]["i18n"]["ru"]["title"] == "Закон Кулона", "the translation file carries the subject's name in its language (subject.i18n.<locale>)")
+    # the network blocks the upload: it waits, the flow goes on, every waiting upload is listed for the retry at the end
+    ok(P("defer", d, "map", "--note", "x").returncode == 1 and P("defer", d, "upload").returncode == 1, "defer: only the upload, and only with a note saying why")
+    r = P("defer", d, "upload", "--note", "curl: 403 from the storage"); ok(r.returncode == 0 and "go on" in r.stdout, "defer: a blocked upload waits and the flow goes on")
+    st = P("status", d); ok("upload         deferred" in st.stdout and "403" in st.stdout and st.returncode == 1, "status: the upload is shown as waiting (⏸, with why) and still counts as open")
+    ok(P("next", d).stdout.startswith("every other step is done; waiting: upload"), "next: a waiting upload does not hold the flow back")
+    shutil.rmtree(d2)   # the copy without a name (a run of its own) is not needed any more
+    r = P("pending", work); ok(r.returncode == 1 and "demo-coulomb" in r.stdout and "build/demo-coulomb.json" in r.stdout and "build/demo-coulomb.tr.el.json" in r.stdout and "bridge files" in r.stdout and "1 upload(s) waiting" in r.stdout,
+       "pending: every subject whose upload waits, with the pack, its translation files and its bridges, ready for one retry at the end")
+    ok(P("done", d, "upload", "--note", "noema_finish_upload ok on retry").returncode == 0 and P("pending", work).returncode == 0 and P("status", d).returncode == 0, "the retry succeeds: done, nothing waiting, every step done")
     ex = json.load(open(os.path.join(d, "chapters", "ch01.json"))); ex["exercises"][4]["q"] = "As in Q14 of the source, what happens?"; json.dump(ex, open(os.path.join(d, "chapters", "ch01.json"), "w"))
     st = P("status", d).stdout
     ok("write          stale" in st and "checks         stale" in st and "map            done" in st, "a change to the chapter makes write and every later step stale, not the map")
