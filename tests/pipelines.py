@@ -134,6 +134,7 @@ try:
     r = P("defer", d, "upload", "--note", "curl: 403 from the storage"); ok(r.returncode == 0 and "go on" in r.stdout, "defer: a blocked upload waits and the flow goes on")
     st = P("status", d); ok("upload         deferred" in st.stdout and "403" in st.stdout and st.returncode == 1, "status: the upload is shown as waiting (⏸, with why) and still counts as open")
     ok(P("next", d).stdout.startswith("every other step is done; waiting: upload"), "next: a waiting upload does not hold the flow back")
+    r = P("pending", work); ok(f"pipeline.py next {d2}" in r.stdout, "pending: a subject not built yet names its next step with a path that works from anywhere")
     shutil.rmtree(d2)   # the copy without a name (a run of its own) is not needed any more
     r = P("pending", work); ok(r.returncode == 1 and "demo-coulomb" in r.stdout and "build/demo-coulomb.json" in r.stdout and "build/demo-coulomb.tr.el.json" in r.stdout and "bridge files" in r.stdout and "1 upload(s) waiting" in r.stdout,
        "pending: every subject whose upload waits, with the pack, its translation files and its bridges, ready for one retry at the end")

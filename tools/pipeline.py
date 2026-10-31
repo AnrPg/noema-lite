@@ -198,7 +198,7 @@ def pending(root):
         ready = st.get("checks") == "done" if "checks" in fl else True
         out.append(f"{'⏸' if st.get('upload') == 'deferred' else '○'} {sid}  ({os.path.relpath(d, root) if d != root else '.'})"
                    + (f" — {why}" if why else "") + (f"\n    ready: {', '.join(files)}" if files else "") + (f"; bridge files in bridges/: {nb}" if nb else "")
-                   + ("" if ready else "\n    not ready yet: the checks step is not done (python3 pipeline.py next " + (os.path.relpath(d, root) if d != root else ".") + ")"))
+                   + ("" if ready else f"\n    not ready yet: the checks step is not done (python3 pipeline.py next {d})"))
     return out
 
 def main(a):

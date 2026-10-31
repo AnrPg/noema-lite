@@ -752,7 +752,8 @@ async function callTool(name, args, ctx) {
       if (up) {
         const r = await sb(fresh(`/storage/v1/object/authenticated/noema-private/${up}`), token, { raw: true, headers: FRESH }).catch(() => null);
         raw = r ? await r.text() : '';
-        if (!raw) return text(`Upload the bridge — run in your sandbox (URL valid 2 h):\n\ncurl -sS -X PUT -H "Content-Type: application/json" -H "x-upsert: true" -H "apikey: ${CFG.supabaseKey}" --data-binary @${want}.bridge.json "${await signUrl(token, up)}"\n\n(${want}.bridge.json = the file tools/bridge.py build wrote${wsrc ? ` from the ${wsrc} translation (--from ${wsrc})` : ''}.) Then call noema_save_bridge with subject_id "${sid}", native "${want}"${wsrc ? ` and source "${wsrc}"` : ''} again.`);
+        const bkey = up.slice(up.lastIndexOf('/') + 1 + sid.length + 1, -'.json'.length), bfile = `work/${sid}/bridges/${bkey.includes('.') ? `from-${bkey.split('.')[0]}/` : ''}${sid}.${bkey}.bridge.json`;   // where tools/bridge.py build writes it by default (one file per pair)
+        if (!raw) return text(`Upload the bridge — run in your sandbox (URL valid 2 h):\n\ncurl -sS -X PUT -H "Content-Type: application/json" -H "x-upsert: true" -H "apikey: ${CFG.supabaseKey}" --data-binary @${bfile} "${await signUrl(token, up)}"\n\n(${bfile} = the file tools/bridge.py build wrote by default${wsrc ? ` from the ${wsrc} translation (--from ${wsrc})` : ''}.) Then call noema_save_bridge with subject_id "${sid}", native "${want}"${wsrc ? ` and source "${wsrc}"` : ''} again.`);
       }
       if (raw.length > MAX_INLINE) return fail(`Too big (${Math.round(raw.length / 1024)} KB > 1.5 MB): build it per native language, and keep notes short.`);
       let b; try { b = JSON.parse(raw); } catch (e) { return fail((up ? 'The uploaded file' : 'bridge_json') + ' is not valid JSON: ' + e.message); }
