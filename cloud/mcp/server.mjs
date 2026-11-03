@@ -218,11 +218,14 @@ async function curState(token, c, uid = null) {
 async function claimStep(token, uid, cid, nid, { force = false, c = null, user = null } = {}) {
   const key = CJ().claimKey(cid, nid), now = new Date().toISOString();
   const value = JSON.stringify({ v: 1, nid, at: now, run: Math.random().toString(36).slice(2, 10) });
-  const ins = await sb('/rest/v1/noema_kv?on_conflict=user_id,key', token, { method: 'POST', body: [{ user_id: uid, key, value, updated_at: now }], headers: { Prefer: 'resolution=ignore-duplicates,return=representation' } });
-  let mine = Array.isArray(ins) && ins.length > 0;
-  if (!mine) {
-    const stale = new Date(Date.now() - CJ().LEASE).toISOString();
-    const upd = await sb(`/rest/v1/noema_kv?key=eq.${encodeURIComponent(key)}` + (force ? '' : `&updated_at=lt.${encodeURIComponent(stale)}`), token, { method: 'PATCH', body: { value, updated_at: now }, headers: { Prefer: 'return=representation' } });
+  let mine = false;
+  for (let i = 0; i < 3 && !mine; i++) {   // insert if absent; else take it over only when it has run out (4 h; 72 h while its upload waits — CJ().leaseOf)
+    const ins = await sb('/rest/v1/noema_kv?on_conflict=user_id,key', token, { method: 'POST', body: [{ user_id: uid, key, value, updated_at: now }], headers: { Prefer: 'resolution=ignore-duplicates,return=representation' } });
+    if (Array.isArray(ins) && ins.length) { mine = true; break; }
+    const row = (await sb(`/rest/v1/noema_kv?select=value,updated_at&key=eq.${encodeURIComponent(key)}`, token))?.[0];
+    if (!row) continue;   // released between the two requests: insert again (never a PATCH without the timestamp it read)
+    if (!force && !CJ().claimExpired(row)) break;
+    const upd = await sb(`/rest/v1/noema_kv?key=eq.${encodeURIComponent(key)}&updated_at=eq.${encodeURIComponent(row.updated_at)}`, token, { method: 'PATCH', body: { value, updated_at: now }, headers: { Prefer: 'return=representation' } });   // compare-and-swap on what was read
     mine = Array.isArray(upd) && upd.length > 0;
   }
   // 👥 a shared curriculum: the step is also reserved among its participants (somebody else may have it — then not this one)
@@ -231,6 +234,30 @@ async function claimStep(token, uid, cid, nid, { force = false, c = null, user =
     if (!r.ok) { await releaseStep(token, cid, nid).catch(() => { }); return false; }
   }
   return mine;
+}
+/** The pack of a Roadmap step is built and its upload starts (noema_start_upload): the step's claim becomes WAITING (it lasts
+    72 h, renewed by every new start), so if the network blocks the upload and the run goes on to other steps — the upload
+    is retried with the others at the end (docs/PIPELINES.md §1b) — no run builds this step again meanwhile. The claim
+    still ends when the step is saved. 👥 A shared curriculum's reservation is renewed for as long. */
+async function holdStep(token, uid, sid, user = null) {
+  const step = await findStep(token, sid).catch(() => null) || await findInboxStep(token, sid).catch(() => null); if (!step) return null;
+  const now = new Date().toISOString();
+  await kvPut(token, uid, CJ().claimKey(step.c.id, step.nid), { v: 1, nid: step.nid, at: now, waiting: true, packId: sid });
+  if (sharedOn(step.c)) {   // → step.shared false: the other members' reservation could not be renewed (said in the reply)
+    const r = await CS().core.claim(apiOf(token), { cid: step.c.id, nid: step.nid, me: uid, name: nameOf(user), packId: sid, lease: CJ().WAIT }).catch(() => ({ ok: false }));
+    step.shared = !!r?.ok; step.sharedBy = r?.row?.author && r.row.author !== uid ? r.row.author_name || '' : null;
+  }
+  return step;
+}
+/** A step the map does not have yet but its inbox does (a new part, noema_extend_roadmap, before the app merged it). */
+async function findInboxStep(token, sid) {
+  const m = /^cur-([a-z0-9]{1,6})-/.exec(sid); if (!m) return null;
+  for (const r of await kvRows(token, 'a:curriculum:c' + m[1])) {
+    let c; try { c = JSON.parse(r.value); } catch (e) { continue; }
+    const mc = CJ().merged(c, await kvRows(token, `${CJ().IN}${c.id}:`));
+    const nid = Object.keys(mc.nodes || {}).find(id => CUR().packId(mc, id) === sid); if (nid) return { c: mc, nid };
+  }
+  return null;
 }
 const releaseStep = (token, cid, nid) => sb(`/rest/v1/noema_kv?key=eq.${encodeURIComponent(CJ().claimKey(cid, nid))}`, token, { method: 'DELETE' });
 /** 📦 Attach a saved subject to a step of one of the learner's curricula (docs/CURRICULUM.md §9): the app applies it from the
@@ -468,7 +495,7 @@ const TOOLS = [
   { name: 'noema_list_subjects', description: 'Subjects available to this account: the shared library and the user’s own private packs (id, title, size, version).', inputSchema: { type: 'object', properties: {} }, annotations: { readOnlyHint: true } },
   { name: 'noema_get_pack_url', description: 'A temporary download URL for an existing pack (the user’s private pack, or a library pack) — use it to make ADDITIVE updates (never renumber ids: progress is keyed by them). With locale: the pack\'s translation into that language (its noema-translation file) — what the 文A bridges from that translation are made from.',
     inputSchema: { type: 'object', properties: { subject_id: { type: 'string' }, locale: { type: 'string', description: 'Optional: a translation of the pack (e.g. el, ru) instead of the pack itself' } }, required: ['subject_id'] }, annotations: { readOnlyHint: true } },
-  { name: 'noema_start_upload', description: 'Step 1 of saving a pack built in your sandbox: returns a signed URL (valid 2 h) and the exact curl command to PUT the pack (work/<id>/build/<id>.json, written by make_pack.py) to it. Then call noema_finish_upload — it also asks for the source files packaged with the pack. The upload is never a prerequisite: if the network blocks the curl, do not stop — pipeline.py defer work/<id> upload, go on with the flow (the next Roadmap step too), and retry every waiting upload together at the end (pipeline.py pending work); if it still fails, give the learner the <id>.noema.zip.',
+  { name: 'noema_start_upload', description: 'Step 1 of saving a pack built in your sandbox: returns a signed URL (valid 2 h) and the exact curl command to PUT the pack (work/<id>/build/<id>.json, written by make_pack.py) to it. Then call noema_finish_upload — it also asks for the source files packaged with the pack. The upload is never a prerequisite: if the network blocks the curl, do not stop — pipeline.py defer work/<id> upload, go on with the flow (the next Roadmap step too), and retry every waiting upload together at the end (pipeline.py pending work); if it still fails, give the learner the <id>.noema.zip. For a Roadmap step this call also keeps the step reserved for the run while its upload waits (72 h, renewed by every call), so no other run builds it again.',
     inputSchema: { type: 'object', properties: { subject_id: { type: 'string', description: 'pack.subject.id' } }, required: ['subject_id'] } },
   { name: 'noema_start_source_upload', description: 'Upload ONE original source file (PDF, slides, document… or one part of a split PDF) so the learner can open it inside noema-lite (👁 preview, at the cited page). Normally not needed: noema_finish_upload gives the commands for every source file the pack contains. Use it to add or replace a single file; returns a signed URL + curl command.',
     inputSchema: { type: 'object', properties: { subject_id: { type: 'string' }, source_id: { type: 'string', description: 'the id in sources.json' }, filename: { type: 'string', description: 'original file name, e.g. ecb-ch5.pdf' } }, required: ['subject_id', 'source_id', 'filename'] } },
@@ -507,7 +534,7 @@ const TOOLS = [
       plan_json: { type: 'string', description: 'ONE JSON object: { "part": "name of this part, e.g. Week 5 — Thermodynamics", "summary": "…", "steps": [{ "ref": "n1", "title": "…", "summary": "what it covers", "role": "foundation|intro|aspect|subtopic|related|synthesis|application", "prerequisites": ["n0", "@existing_step_id"], "before": ["@existing_step_id"], "files": ["path/of/file.pdf pp. 3–20", …] }], "files": [{ "path": "path/of/file.pdf", "pages": 40 }] } — refs (n1, n2…) name the new steps inside this part; "@id" names a step already on the map. "files" lists EVERY new file the learner gave you (pages for PDFs); every file must be used by a step.' },
       independent: { type: 'boolean', description: 'true only when the new part really builds on nothing on the map and nothing there needs it (then no "@id" link is required)' },
       prepare: { type: 'boolean', description: 'default true: the new steps are queued for you in study order (chapter plans first, then each step as a subject). false: only the map — the learner chooses in the app which steps to prepare.' } } } },
-  { name: 'noema_curriculum_task', description: 'The next piece of work on a curriculum, as complete instructions: an agent task of the map (answer with noema_curriculum_submit), a batch of chapter plans (same), or a step to prepare as a subject pack (build it with the noema-pack-builder workflow and save it with noema_start_upload/noema_finish_upload under the given subject_id). A step handed to you is claimed for you: other runs skip it until you save it (or for 4 hours), so each queued step is prepared once — prepare the step you got. When the learner only asks what is next, pass peek = true. Call it again after each accepted answer or saved step — or after a step whose upload the network blocked (it waits; retry every waiting upload together at the end).',
+  { name: 'noema_curriculum_task', description: 'The next piece of work on a curriculum, as complete instructions: an agent task of the map (answer with noema_curriculum_submit), a batch of chapter plans (same), or a step to prepare as a subject pack (build it with the noema-pack-builder workflow and save it with noema_start_upload/noema_finish_upload under the given subject_id). A step handed to you is claimed for you: other runs skip it until you save it (or for 4 hours; 72 hours once noema_start_upload was called for its pack, so a step whose upload waits is not built twice), so each queued step is prepared once — prepare the step you got. When the learner only asks what is next, pass peek = true. Call it again after each accepted answer or saved step — or after a step whose upload the network blocked (it waits; retry every waiting upload together at the end).',
     inputSchema: { type: 'object', properties: { curriculum_id: { type: 'string', description: 'from noema_curricula (may be omitted when only one curriculum has work)' }, want: { type: 'string', enum: ['any', 'map', 'plan', 'step'], description: 'only this kind of work (default any: map first, then plans, then queued steps)' }, step: { type: 'string', description: 'prepare this step (id or title) even if it is not queued' }, peek: { type: 'boolean', description: 'true = only SAY what is next (the learner asked what is next, you will not do it now): the step is not claimed, so another run can still take it' }, force: { type: 'boolean', description: 'with step: take over a step that another run claimed but stopped preparing without saving' } } } },
   { name: 'noema_lang_courses', description: 'The learner\'s language courses made through Claude (🌍 Languages → ✨ New language course) and the refill queues of library courses, with the tasks waiting in each: the core of a course, a node in a language (words + paradigms + sentences), a grammar realization, a comparison, more sentences with the words the learner knows.',
     inputSchema: { type: 'object', properties: {} }, annotations: { readOnlyHint: true } },
@@ -629,7 +656,11 @@ async function callTool(name, args, ctx) {
       if ((CFG.library || []).some(s => s.id === sid)) return fail(`"${sid}" is a library subject id — use a new id (e.g. "${sid}-mine").`);
       const r = await sb(`/storage/v1/object/upload/sign/${base}${sid}.json`, token, { method: 'POST', headers: { 'x-upsert': 'true' } });
       const u = `${CFG.supabaseUrl.replace(/\/$/, '')}/storage/v1${r.url}`;
-      return text(`Upload URL (valid 2 h):\n${u}\n\nRun in your sandbox:\ncurl -sS -X PUT -H "Content-Type: application/json" -H "x-upsert: true" -H "apikey: ${CFG.supabaseKey}" --data-binary @work/${sid}/build/${sid}.json "${u}"\n\nThen call noema_finish_upload with subject_id "${sid}" (it gives you the upload commands for the pack's source files). If the sandbox cannot reach the internet, give the user the package ${sid}.noema.zip instead (they import it with 📥 Import subject pack — the source files come with it).`);
+      const held = await holdStep(token, uid, sid, user).catch(() => null);   // a Roadmap step: reserved while its upload waits
+      const heldLine = !held ? '' : held.shared === false
+        ? `🧭 Step “${held.c.nodes[held.nid]?.title || held.nid}” stays reserved in the learner's own account while its upload waits (72 h), but its reservation among the shared Roadmap's members could NOT be renewed${held.sharedBy ? ` (${held.sharedBy} has it)` : ''}: call noema_start_upload again before 4 h pass, or upload it now, or another member may prepare it too.\n\n`
+        : `🧭 Step “${held.c.nodes[held.nid]?.title || held.nid}” stays reserved for this run while its upload waits (72 h, renewed each time you call this tool; it ends once noema_finish_upload saves it), so no other run builds it again.\n\n`;
+      return text(heldLine + `Upload URL (valid 2 h):\n${u}\n\nRun in your sandbox:\ncurl -sS -X PUT -H "Content-Type: application/json" -H "x-upsert: true" -H "apikey: ${CFG.supabaseKey}" --data-binary @work/${sid}/build/${sid}.json "${u}"\n\nThen call noema_finish_upload with subject_id "${sid}" (it gives you the upload commands for the pack's source files). If the sandbox cannot reach the internet, give the user the package ${sid}.noema.zip instead (they import it with 📥 Import subject pack — the source files come with it).`);
     }
     case 'noema_start_source_upload': {
       const src = String(args?.source_id || '').trim(), fname = String(args?.filename || '').trim().split(/[\\/]/).pop();

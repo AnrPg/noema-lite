@@ -255,7 +255,8 @@ def main(a):
         note = a[a.index("--note") + 1] if "--note" in a else ""
         if not note.strip(): print("--note: why it waits (e.g. \"curl: 403 from the storage — network blocked\")"); return 1
         run["steps"][sid] = {"status": "deferred", "at": now(), "note": note}; save_run(d, run)
-        print(f"⏸ {sid} waits: go on with the rest of the flow; at the end retry every waiting upload together (python3 pipeline.py pending <root>)"); return 0
+        print(f"⏸ {sid} waits: go on with the rest of the flow; at the end retry every waiting upload together (python3 pipeline.py pending <root>)"
+              "\n  a Roadmap step stays reserved meanwhile (72 h): the noema_start_upload call before the blocked curl marked it waiting; each retry renews it"); return 0
     if cmd in ("check", "done"):
         if len(a) < 3 or a[2] not in S: print("which step? " + ", ".join(flows()[run["flow"]]["steps"])); return 1
         sid = a[2]

@@ -216,7 +216,8 @@ everything waiting goes up together at the end (below).
   The subject appears in the user's noema-lite picker (cloud account) with its files — tell them.
 - **Fallback — if the network blocks the upload** (the `curl` is refused, 403, a timeout, no connection): **do not stop.**
   `python3 scripts/pipeline.py defer work/<id> upload --note "curl: 403 from the storage"` and go on with the rest of the
-  flow — translations and bridges never need the pack uploaded first; in a Roadmap, the next step too. At the end of the run, retry every waiting upload together:
+  flow — translations and bridges never need the pack uploaded first; in a Roadmap, the next step too (the step whose upload
+  waits stays reserved for 72 h: the `noema_start_upload` call already marked it, and each retry renews it). At the end of the run, retry every waiting upload together:
   `python3 scripts/pipeline.py pending work` lists them (pack, translation files, bridge files), then
   `noema_start_upload` → `curl` → `noema_finish_upload` and `noema_save_bridge` for each one, and
   `pipeline.py done work/<id> upload --note "…"`.
