@@ -199,6 +199,14 @@ c.save()`, path.join(TF, 'membranes.pdf')]);
     ok(stepOf((await task({ step: qn.q[0], force: true })).text) === qn.q[0], '…unless force = true (a run that stopped without saving)');
     kvOf(uid)['a:curclaim:' + cid + ':' + qn.q[0]].updated_at = new Date(Date.now() - 5 * 3600e3).toISOString();
     ok(stepOf((await task()).text) === qn.q[0], 'a claim older than 4 h (its run died) expires: the step is handed out again');
+    // its pack is built and the upload starts, but the network blocks the curl: the run goes on — the step stays reserved (72 h)
+    const sid0 = await p.evaluate(([id, n]) => NoemaCurriculum.packId(NoemaCurriculum.get(Noema.account.id, id), n), [cid, qn.q[0]]);
+    ok(/stays reserved/.test((await tool('noema_start_upload', { subject_id: sid0 })).text) && JSON.parse(kvOf(uid)['a:curclaim:' + cid + ':' + qn.q[0]].value).waiting === true, 'noema_start_upload marks the step\'s claim as waiting (its upload may be blocked and retried at the end)');
+    kvOf(uid)['a:curclaim:' + cid + ':' + qn.q[0]].updated_at = new Date(Date.now() - 5 * 3600e3).toISOString();
+    r = await task({ step: qn.q[0] });
+    ok(r.error && /being prepared by another run/.test(r.text), 'a step whose upload waits is NOT handed out again after 4 h (no other run builds it twice)');
+    kvOf(uid)['a:curclaim:' + cid + ':' + qn.q[0]].updated_at = new Date(Date.now() - 73 * 3600e3).toISOString();
+    ok(stepOf((await task({ step: qn.q[0] })).text) === qn.q[0] && !JSON.parse(kvOf(uid)['a:curclaim:' + cid + ':' + qn.q[0]].value).waiting, '…only after 72 h (a run that died with its upload waiting); the new claim is an ordinary one');
     if (qn.q.length >= 5) {
       const [ra, rb] = await Promise.all([task(), task()]); const a = stepOf(ra.text), b = stepOf(rb.text);
       ok(a && b && a !== b && ![qn.q[0], qn.q[1]].includes(a) && ![qn.q[0], qn.q[1]].includes(b), `two runs asking at the same moment get different steps (${a} · ${b})`);

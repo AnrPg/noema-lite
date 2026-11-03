@@ -27,9 +27,15 @@
   const BATCH = 5, BATCH_FILES = 2, GRAPH = ['dag', 'audit', 'expand'], IN = 'a:curin:';
   /* A step handed to a run of the learner's Claude is CLAIMED (KV a:curclaim:<cid>:<nid>, a lease): other runs — e.g. the
      hourly scheduled ones, while this one is still building — skip it, so every queued step is prepared once. The claim
-     ends when the step is saved, or after LEASE (a run that died without saving). */
-  const CLAIM = 'a:curclaim:', LEASE = 4 * 3600e3;
+     ends when the step is saved, or after LEASE (a run that died without saving). A step whose pack is built and only its
+     upload waits (the network blocked it; it is retried with the others at the end of the run, docs/PIPELINES.md §1b) is
+     WAITING: noema_start_upload marks its claim { waiting: true } and it lasts WAIT, so a long run never builds it twice. */
+  const CLAIM = 'a:curclaim:', LEASE = 4 * 3600e3, WAIT = 72 * 3600e3;
   const claimKey = (cid, nid) => `${CLAIM}${cid}:${nid}`;
+  /** How long a claim row (KV { value, updated_at }) lasts: WAIT once its upload waits, else LEASE. */
+  const leaseOf = (r, lease = LEASE, wait = WAIT) => { let v = r?.value; try { if (typeof v === 'string') v = JSON.parse(v); } catch (e) { v = null; } return v?.waiting ? Math.max(wait, lease) : lease; };
+  /** Has this claim row run out? */
+  const claimExpired = (r, now = Date.now(), lease = LEASE, wait = WAIT) => now - ms(r?.updated_at) >= leaseOf(r, lease, wait);
   const isApp = c => c?.provider === 'claudeapp';
   const prepared = n => ['ready', 'generating'].includes(n?.pack?.status);
   const needsPlan = n => (!prepared(n) || !!n.pack?.assigned) && (!n.chapters?.length || !!n.replan);   // 📦 a step taught by an attached subject is planned (from it), never prepared
@@ -51,12 +57,12 @@
   /** The queue as it really is (the connector works on this): a queued step whose subject was saved after it was queued is
       prepared — even when an older copy of the curriculum (another device) put it back in the queue; a queued step with a
       live claim is being prepared by another run.  claims: KV rows a:curclaim:<cid>:*  · packs: KV rows a:packmeta:* */
-  function settle(c, { claims = [], packs = [], remote = null, me = null, now = Date.now(), lease = LEASE } = {}) {
+  function settle(c, { claims = [], packs = [], remote = null, me = null, now = Date.now(), lease = LEASE, wait = WAIT } = {}) {
     const cc = clone(c), live = {}, saved = {};
     // 👥 a shared curriculum: what the other participants prepared / are preparing (rows of noema_curriculum_steps)
     const rem = remote && cc.shared && !cc.shared.ended && root.NoemaCurShare ? root.NoemaCurShare.core.remoteOf(remote, me, now) : null;
     if (rem) cc.remote = rem;
-    for (const r of claims) { if (!r.key.startsWith(CLAIM + c.id + ':')) continue; const t = ms(r.updated_at); if (now - t < lease) live[r.key.slice(CLAIM.length + c.id.length + 1)] = t; }
+    for (const r of claims) { if (!r.key.startsWith(CLAIM + c.id + ':')) continue; const t = ms(r.updated_at); if (!claimExpired(r, now, lease, wait)) live[r.key.slice(CLAIM.length + c.id.length + 1)] = t; }
     for (const r of packs) { let m; try { m = typeof r.value === 'string' ? JSON.parse(r.value) : r.value; } catch (x) { continue; } if (m?.curriculum === c.id && m.node) saved[m.node] = m; }
     for (const [nid, n] of Object.entries(cc.nodes || {})) {
       if (n.pack?.status !== 'app') continue;
@@ -408,5 +414,5 @@
     return { title: c.nodes[nid].title };
   };
 
-  root.NoemaCurJobs = { work, settle, extend, extendProblems, growMessage, attachTo, savedSince, claimKey, CLAIM, LEASE, next, byId, planGen, check, apply, merged, spec, stepSpec, planBatch, downloadsOf, taskText, taskLabel, stepText, message, inboxKey, needsPlan, prepared, isApp, BATCH, BATCH_FILES, IN, App };
+  root.NoemaCurJobs = { work, settle, extend, extendProblems, growMessage, attachTo, savedSince, claimKey, CLAIM, LEASE, WAIT, leaseOf, claimExpired, next, byId, planGen, check, apply, merged, spec, stepSpec, planBatch, downloadsOf, taskText, taskLabel, stepText, message, inboxKey, needsPlan, prepared, isApp, BATCH, BATCH_FILES, IN, App };
 })(typeof window !== 'undefined' ? window : globalThis);

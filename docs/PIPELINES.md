@@ -43,7 +43,9 @@ Normally the pack is uploaded as soon as it is built (`noema_finish_upload`, the
 edge case where the network blocks the upload (the sandbox cannot reach the storage: `curl` refused, 403, a timeout),
 Claude does **not** stop — the upload is never a prerequisite, and translations and bridges never need the pack uploaded
 first: `pipeline.py defer <dir> upload --note "why"` records it as waiting (`deferred`, ⏸), `next` moves on, and in a
-Roadmap Claude goes on to the next step (`noema_curriculum_task`). At the end of the run, `pipeline.py pending work`
+Roadmap Claude goes on to the next step (`noema_curriculum_task`). The waiting step stays reserved for this run: the
+`noema_start_upload` call made before the blocked `curl` marks its claim *waiting* (72 h instead of 4 h, renewed by every
+new `noema_start_upload`), so no other run builds it again while this one goes on (docs/CURRICULUM.md). At the end of the run, `pipeline.py pending work`
 lists every subject still waiting, with the files ready to send (pack, translation files, bridge files: one per pair),
 and they are retried together; each that goes up is recorded with `pipeline.py done <dir> upload --note "…"`. If the
 network still blocks them, the learner gets each `<id>.noema.zip` (📥 Import subject pack) and the bridge files, with a

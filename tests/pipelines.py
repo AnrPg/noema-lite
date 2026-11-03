@@ -4,7 +4,7 @@
 1. Every flow names only steps of steps.json, every step's needs come earlier in each flow that has them, every command a
    check runs exists. 2. detect picks the right flow. 3. A whole subject goes through flow 4 in a temporary folder:
    start_subject → map → write → blind re-solve → review → make_pack, each step checked; a change makes the steps after it stale."""
-import json, os, shutil, subprocess, sys, tempfile
+import glob, json, os, shutil, subprocess, sys, tempfile
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TOOLS = os.path.join(ROOT, "tools"); SCRIPTS = os.path.join(ROOT, "skill", "noema-pack-builder", "scripts")
 sys.path.insert(0, TOOLS)
@@ -129,9 +129,17 @@ try:
     ok(pk["translations"] == {"el": {"file": True, "chapters": 1}, "ru": {"file": True, "chapters": 1}} and t_el["format"] == "noema-translation" and t_el["version"] == pk["version"] and t_el["chapters"][0]["id"] == "ch01",
        "make_pack.py: each translation in its own file (build/<id>.tr.<locale>.json), the pack only names them")
     ok(t_el.get("subject", {}).get("title") == "Νόμος του Coulomb" and pk["subject"]["i18n"]["ru"]["title"] == "Закон Кулона", "the translation file carries the subject's name in its language (subject.i18n.<locale>)")
+    # one bridge file per pair: built one after another (their uploads may all wait for the end), none overwrites another
+    outs = []; d3 = os.path.join(tempfile.mkdtemp(prefix="pairs-"), "demo-coulomb"); shutil.copytree(d, d3)
+    for extra in ([], ["--from", "el"], ["--from", "ru"]):
+        r = subprocess.run([sys.executable, os.path.join(sk, "bridge.py"), "build", d3, "--native", "ar"] + extra, capture_output=True, text=True); outs.append(r)
+    made = sorted(os.path.relpath(f, d3) for f in glob.glob(os.path.join(d3, "bridges", "**", "*.bridge.json"), recursive=True))
+    ok(all(x.returncode == 0 for x in outs) and made == ["bridges/demo-coulomb.ar.bridge.json", "bridges/from-el/demo-coulomb.el.ar.bridge.json", "bridges/from-ru/demo-coulomb.ru.ar.bridge.json"],
+       "bridge.py build: each pair goes to its own file by default (en→ar, el→ar, ru→ar side by side, none overwritten)" + ("" if made else "\n" + "\n".join(x.stdout + x.stderr for x in outs)))
     # the network blocks the upload: it waits, the flow goes on, every waiting upload is listed for the retry at the end
     ok(P("defer", d, "map", "--note", "x").returncode == 1 and P("defer", d, "upload").returncode == 1, "defer: only the upload, and only with a note saying why")
     r = P("defer", d, "upload", "--note", "curl: 403 from the storage"); ok(r.returncode == 0 and "go on" in r.stdout, "defer: a blocked upload waits and the flow goes on")
+    ok("stays reserved" in r.stdout and "72 h" in r.stdout, "defer: says the Roadmap step stays reserved while its upload waits (no other run builds it again)")
     st = P("status", d); ok("upload         deferred" in st.stdout and "403" in st.stdout and st.returncode == 1, "status: the upload is shown as waiting (⏸, with why) and still counts as open")
     ok(P("next", d).stdout.startswith("every other step is done; waiting: upload"), "next: a waiting upload does not hold the flow back")
     r = P("pending", work); ok(f"pipeline.py next {d2}" in r.stdout, "pending: a subject not built yet names its next step with a path that works from anywhere")
