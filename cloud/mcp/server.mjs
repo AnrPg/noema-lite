@@ -218,14 +218,15 @@ async function curState(token, c, uid = null) {
 async function claimStep(token, uid, cid, nid, { force = false, c = null, user = null } = {}) {
   const key = CJ().claimKey(cid, nid), now = new Date().toISOString();
   const value = JSON.stringify({ v: 1, nid, at: now, run: Math.random().toString(36).slice(2, 10) });
-  const ins = await sb('/rest/v1/noema_kv?on_conflict=user_id,key', token, { method: 'POST', body: [{ user_id: uid, key, value, updated_at: now }], headers: { Prefer: 'resolution=ignore-duplicates,return=representation' } });
-  let mine = Array.isArray(ins) && ins.length > 0;
-  if (!mine) {   // taken over only when it has run out (4 h; 72 h while its upload waits — CJ().leaseOf), compared-and-swapped on what was read
-    const row = force ? null : (await sb(`/rest/v1/noema_kv?select=value,updated_at&key=eq.${encodeURIComponent(key)}`, token))?.[0];
-    if (force || !row || CJ().claimExpired(row)) {
-      const upd = await sb(`/rest/v1/noema_kv?key=eq.${encodeURIComponent(key)}` + (row ? `&updated_at=eq.${encodeURIComponent(row.updated_at)}` : ''), token, { method: 'PATCH', body: { value, updated_at: now }, headers: { Prefer: 'return=representation' } });
-      mine = Array.isArray(upd) && upd.length > 0;
-    }
+  let mine = false;
+  for (let i = 0; i < 3 && !mine; i++) {   // insert if absent; else take it over only when it has run out (4 h; 72 h while its upload waits — CJ().leaseOf)
+    const ins = await sb('/rest/v1/noema_kv?on_conflict=user_id,key', token, { method: 'POST', body: [{ user_id: uid, key, value, updated_at: now }], headers: { Prefer: 'resolution=ignore-duplicates,return=representation' } });
+    if (Array.isArray(ins) && ins.length) { mine = true; break; }
+    const row = (await sb(`/rest/v1/noema_kv?select=value,updated_at&key=eq.${encodeURIComponent(key)}`, token))?.[0];
+    if (!row) continue;   // released between the two requests: insert again (never a PATCH without the timestamp it read)
+    if (!force && !CJ().claimExpired(row)) break;
+    const upd = await sb(`/rest/v1/noema_kv?key=eq.${encodeURIComponent(key)}&updated_at=eq.${encodeURIComponent(row.updated_at)}`, token, { method: 'PATCH', body: { value, updated_at: now }, headers: { Prefer: 'return=representation' } });   // compare-and-swap on what was read
+    mine = Array.isArray(upd) && upd.length > 0;
   }
   // 👥 a shared curriculum: the step is also reserved among its participants (somebody else may have it — then not this one)
   if (mine && sharedOn(c)) {
@@ -239,11 +240,24 @@ async function claimStep(token, uid, cid, nid, { force = false, c = null, user =
     is retried with the others at the end (docs/PIPELINES.md §1b) — no run builds this step again meanwhile. The claim
     still ends when the step is saved. 👥 A shared curriculum's reservation is renewed for as long. */
 async function holdStep(token, uid, sid, user = null) {
-  const step = await findStep(token, sid).catch(() => null); if (!step) return null;
+  const step = await findStep(token, sid).catch(() => null) || await findInboxStep(token, sid).catch(() => null); if (!step) return null;
   const now = new Date().toISOString();
   await kvPut(token, uid, CJ().claimKey(step.c.id, step.nid), { v: 1, nid: step.nid, at: now, waiting: true, packId: sid });
-  if (sharedOn(step.c)) await CS().core.claim(apiOf(token), { cid: step.c.id, nid: step.nid, me: uid, name: nameOf(user), packId: sid, lease: CJ().WAIT }).catch(() => null);
+  if (sharedOn(step.c)) {   // → step.shared false: the other members' reservation could not be renewed (said in the reply)
+    const r = await CS().core.claim(apiOf(token), { cid: step.c.id, nid: step.nid, me: uid, name: nameOf(user), packId: sid, lease: CJ().WAIT }).catch(() => ({ ok: false }));
+    step.shared = !!r?.ok; step.sharedBy = r?.row?.author && r.row.author !== uid ? r.row.author_name || '' : null;
+  }
   return step;
+}
+/** A step the map does not have yet but its inbox does (a new part, noema_extend_roadmap, before the app merged it). */
+async function findInboxStep(token, sid) {
+  const m = /^cur-([a-z0-9]{1,6})-/.exec(sid); if (!m) return null;
+  for (const r of await kvRows(token, 'a:curriculum:c' + m[1])) {
+    let c; try { c = JSON.parse(r.value); } catch (e) { continue; }
+    const mc = CJ().merged(c, await kvRows(token, `${CJ().IN}${c.id}:`));
+    const nid = Object.keys(mc.nodes || {}).find(id => CUR().packId(mc, id) === sid); if (nid) return { c: mc, nid };
+  }
+  return null;
 }
 const releaseStep = (token, cid, nid) => sb(`/rest/v1/noema_kv?key=eq.${encodeURIComponent(CJ().claimKey(cid, nid))}`, token, { method: 'DELETE' });
 /** 📦 Attach a saved subject to a step of one of the learner's curricula (docs/CURRICULUM.md §9): the app applies it from the
@@ -643,7 +657,10 @@ async function callTool(name, args, ctx) {
       const r = await sb(`/storage/v1/object/upload/sign/${base}${sid}.json`, token, { method: 'POST', headers: { 'x-upsert': 'true' } });
       const u = `${CFG.supabaseUrl.replace(/\/$/, '')}/storage/v1${r.url}`;
       const held = await holdStep(token, uid, sid, user).catch(() => null);   // a Roadmap step: reserved while its upload waits
-      return text((held ? `🧭 Step “${held.c.nodes[held.nid]?.title || held.nid}” stays reserved for this run while its upload waits (72 h, renewed each time you call this tool; it ends once noema_finish_upload saves it), so no other run builds it again.\n\n` : '') + `Upload URL (valid 2 h):\n${u}\n\nRun in your sandbox:\ncurl -sS -X PUT -H "Content-Type: application/json" -H "x-upsert: true" -H "apikey: ${CFG.supabaseKey}" --data-binary @work/${sid}/build/${sid}.json "${u}"\n\nThen call noema_finish_upload with subject_id "${sid}" (it gives you the upload commands for the pack's source files). If the sandbox cannot reach the internet, give the user the package ${sid}.noema.zip instead (they import it with 📥 Import subject pack — the source files come with it).`);
+      const heldLine = !held ? '' : held.shared === false
+        ? `🧭 Step “${held.c.nodes[held.nid]?.title || held.nid}” stays reserved in the learner's own account while its upload waits (72 h), but its reservation among the shared Roadmap's members could NOT be renewed${held.sharedBy ? ` (${held.sharedBy} has it)` : ''}: call noema_start_upload again before 4 h pass, or upload it now, or another member may prepare it too.\n\n`
+        : `🧭 Step “${held.c.nodes[held.nid]?.title || held.nid}” stays reserved for this run while its upload waits (72 h, renewed each time you call this tool; it ends once noema_finish_upload saves it), so no other run builds it again.\n\n`;
+      return text(heldLine + `Upload URL (valid 2 h):\n${u}\n\nRun in your sandbox:\ncurl -sS -X PUT -H "Content-Type: application/json" -H "x-upsert: true" -H "apikey: ${CFG.supabaseKey}" --data-binary @work/${sid}/build/${sid}.json "${u}"\n\nThen call noema_finish_upload with subject_id "${sid}" (it gives you the upload commands for the pack's source files). If the sandbox cannot reach the internet, give the user the package ${sid}.noema.zip instead (they import it with 📥 Import subject pack — the source files come with it).`);
     }
     case 'noema_start_source_upload': {
       const src = String(args?.source_id || '').trim(), fname = String(args?.filename || '').trim().split(/[\\/]/).pop();
