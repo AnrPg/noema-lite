@@ -1,0 +1,50 @@
+{
+ "format": "noema.sim-spec/v1",
+ "engine": "rf@1",
+ "title": "title",
+ "intro": "intro",
+ "consts": { "dist": 2000, "marginMin": 10, "airMax": 0.5 },
+ "params": [
+  { "id": "sf", "kind": "slider", "label": "sf", "min": 7, "max": 12, "step": 1, "default": 7 },
+  { "id": "ant", "kind": "choice", "label": "antenna", "default": -2,
+    "options": [ { "value": -2, "label": "antChip" }, { "value": 2.15, "label": "antDipole" }, { "value": 5, "label": "antCollinear" } ] }
+ ],
+ "model": {
+  "link": {
+   "format": "noema.rf/v1", "f": "868M", "d": 2000, "fadeMargin": 10,
+   "tx": { "power": 14, "gain": -2, "cable": 0.5 },
+   "rx": { "gain": 5, "cable": 1, "nf": 6 },
+   "path": { "model": "log-distance", "n": 3.3, "sigma": 0 },
+   "radio": { "mod": "lora", "sf": 7, "cr": 1, "payload": 20 },
+   "sweep": { "from": 100, "to": 10000, "points": 200, "scale": "log" }
+  },
+  "bindings": [
+   { "field": "d", "expr": "dist" },
+   { "field": "radio.sf", "expr": "sf" },
+   { "field": "tx.gain", "expr": "ant" }
+  ]
+ },
+ "outputs": [
+  { "id": "margin", "kind": "scalar" },
+  { "id": "prx", "kind": "scalar" },
+  { "id": "sens", "kind": "scalar", "of": "sensitivity" },
+  { "id": "air", "kind": "scalar", "of": "airtime" },
+  { "id": "range", "kind": "scalar" },
+  { "id": "dd", "kind": "series", "of": "d" },
+  { "id": "mm", "kind": "series", "of": "margin" }
+ ],
+ "readouts": [
+  { "label": "prxLabel", "expr": "prx", "unit": "dBm", "format": "fixed", "digits": 1 },
+  { "label": "sensLabel", "expr": "sens", "unit": "dBm", "format": "fixed", "digits": 1 },
+  { "label": "marginLabel", "expr": "margin", "unit": "dB", "format": "fixed", "digits": 1 },
+  { "label": "airLabel", "expr": "air * 1000", "unit": "ms", "digits": 4 },
+  { "label": "rangeLabel", "expr": "range / 1000", "unit": "km", "format": "fixed", "digits": 2 }
+ ],
+ "plots": [
+  { "kind": "series", "title": "plotTitle",
+    "x": { "series": "dd", "label": "distance", "unit": "m", "scale": "log" },
+    "y": { "label": "margin", "unit": "dB" },
+    "series": [ { "y": "mm", "label": "marginLine" } ],
+    "marks": [ { "axis": "x", "expr": "dist", "label": "distMark" }, { "axis": "y", "expr": "marginMin", "label": "minMark" } ] }
+ ]
+}

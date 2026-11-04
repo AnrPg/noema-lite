@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Interactive activities travel inside the pack (html-app@1 alias-lab and sim-spec@1 rc-lowpass) (docs/INTERACTIVE.md, docs/adr/001 D2): a subject folder with activities/ →
+"""Interactive activities travel inside the pack (html-app@1 alias-lab, sim-spec@1 rc-lowpass, the circuit and P6 engine references) (docs/INTERACTIVE.md, docs/adr/001 D2): a subject folder with activities/ →
 make_pack.py → pack.activities (bundle inline, sha256, strings per locale) + pack.requires → unpack.py gives the folder back →
 make_pack.py again gives the same pack.version. And what make_pack.py refuses (missing strings, a network link, an unknown
 activity, a runtime of a later version). Uses the skill zip (dist/noema-pack-builder.zip; built here when missing).
@@ -32,7 +32,13 @@ for f in os.listdir(RC):
     if f.startswith('strings.') or f == 'spec.json': shutil.copy(os.path.join(RC, f), rd_)
 CIRC = {'rc-transient': 'A 5 V square wave and the voltage of the capacitor of an RC circuit: it rises to 63 % of the step after one time constant RC = 1 ms.',
         'led-bench': 'A 5 V supply, a switch SW1, a 330 Ω resistor R1 and a red LED D1 in series, with the test points TP1, TP2, TP3 and GND.'}
-for cid in CIRC:   # circuit-mna@1: a netlist in the spec; led-bench is a fault-finding bench
+CIRC.update({   # the P6 engines (docs/INTERACTIVE_ENGINES.md): thermal@1, pid@1, rf@1, twin@1
+    'heatsink': 'The junction and heatsink temperatures of a 20 W MOSFET warming up after switch-on with a 3.5 K/W heatsink: the junction levels off at 124 °C, under the 125 °C limit.',
+    'pid-tune': 'Step responses of a lightly damped plant: P control alone overshoots by half and stops at 0.5; PID with Kp 2, Ki 3, Kd 0.4 reaches 1 without overshoot in about 1.5 s.',
+    'lora-link': 'The margin of a LoRa link against distance on a log scale: SF7 with a chip antenna falls below 10 dB well before 2 km; SF9 with a 5 dBi antenna keeps 11.9 dB at 2 km.',
+    'sensor-node': 'The charge of a 600 mAh cell over 30 days: waking every 60 s it falls steeply, waking every 15 minutes it hardly moves.'})
+P6 = ['heatsink', 'pid-tune', 'lora-link', 'sensor-node']
+for cid in CIRC:   # circuit-mna@1: a netlist in the spec; led-bench is a fault-finding bench (and the P6 references)
     cs, cd = os.path.join(ROOT, 'tools', 'activities_examples', cid), os.path.join(sd, 'activities', cid); os.makedirs(cd)
     for f in os.listdir(cs):
         if f.startswith('strings.') or f == 'spec.json': shutil.copy(os.path.join(cs, f), cd)
@@ -79,8 +85,36 @@ SIM4 = {'id': 'ch01-e903', 'type': 'sim', 'section': 'ch01-s01', 'difficulty': 3
         'hints': ['Measure from the supply towards the LED: each voltage to GND clears or blames the part before it.', 'With no current, the voltage on both sides of a healthy part is the same: compare the two legs of the LED.'],
         'reveal': 'The LED is soldered the wrong way round: TP3 is at 5 V and so is the cathode leg, while the anode leg reads 0 V.',
         'explain': 'With no current through the series circuit, every healthy part passes the full 5 V on: the voltage is lost only across the open or blocking part. A reversed LED blocks like an open one, but its legs are swapped, so the 5 V appears on the cathode leg.'}
+SIM5 = {'id': 'ch01-e904', 'type': 'sim', 'section': 'ch01-s01', 'difficulty': 2, 'tags': ['calc'], 'think': 'apply', 'activity': 'heatsink',
+        'q': 'A MOSFET dissipates 20 W at 40 °C ambient; junction to case is 0.5 K/W and the thermal pad 0.2 K/W. Choose the heatsink (its resistance to air, Rsa) so that the junction stays at or below 125 °C, without a heatsink bigger than needed (Rsa at least 3 K/W).',
+        'task': {'seed': 'auto', 'params': {}},
+        'grade': {'mode': 'checks', 'checks': [{'expr': 'tjSS <= TjMax', 'label': 'checkTj', 'weight': 2}, {'expr': 'Rsa >= RsaMin', 'label': 'checkCheap'}]},
+        'hints': ['In the steady state the thermal resistances add up like resistors in series: Tj = Tamb + P · (Rjc + Rcs + Rsa).', 'The junction may rise 85 K above the air, so the whole path may have at most 85 K / 20 W = 4.25 K/W.'],
+        'reveal': 'Rsa = 3.5 K/W: Tj = 40 + 20 · (0.5 + 0.2 + 3.5) = 124 °C. Anything from 3 to 3.55 K/W passes both checks.',
+        'explain': 'Heat flows through the junction-to-case, the pad and the heatsink-to-air resistances one after the other, so their sum times the power is the temperature rise above the air. The heat capacities only set how fast the steady state is reached (here a few minutes), not where it ends.'}
+SIM6 = {'id': 'ch01-e905', 'type': 'sim', 'section': 'ch01-s01', 'difficulty': 3, 'tags': ['concept'], 'think': 'apply', 'activity': 'pid-tune',
+        'q': 'A lightly damped plant with a short dead time must follow a step of its setpoint. Tune Kp, Ki and Kd so that the overshoot is below 10 %, the output settles within 2 % in less than 2 s and no steady-state error is left.',
+        'task': {'seed': 'auto', 'params': {}},
+        'grade': {'mode': 'checks', 'checks': [{'expr': 'os < osMax', 'label': 'checkOs'}, {'expr': 'ts < tsMax', 'label': 'checkTs'}, {'expr': 'abs(ess) < essMax', 'label': 'checkEss'}]},
+        'hints': ['Proportional control alone always leaves an error; the integral term removes it.', 'The derivative term damps the ringing: raise Kd until the overshoot falls, then add integral gain slowly.'],
+        'reveal': 'For example Kp = 2, Ki = 3, Kd = 0.4: no overshoot and settled in about 1.5 s.',
+        'explain': 'Kp sets how hard the controller pushes against the error, Ki keeps pushing until the error is gone (but too much of it causes overshoot), and Kd reacts to how fast the output moves, which damps the oscillation of a lightly damped plant.'}
+SIM7 = {'id': 'ch01-e906', 'type': 'sim', 'section': 'ch01-s01', 'difficulty': 2, 'tags': ['calc'], 'think': 'apply', 'activity': 'lora-link',
+        'q': 'A LoRa sensor 2 km from its gateway sends 20-byte packets at 868 MHz with 14 dBm through suburban clutter. Pick the spreading factor and the sensor antenna so that the link keeps at least 10 dB of margin while one packet is on air for at most 0.5 s.',
+        'task': {'seed': 'auto', 'params': {}},
+        'grade': {'mode': 'checks', 'checks': [{'expr': 'margin >= marginMin', 'label': 'checkMargin', 'weight': 2}, {'expr': 'air <= airMax', 'label': 'checkAir'}]},
+        'hints': ['Each step up in SF buys about 2.5 dB of sensitivity but doubles the time on air.', 'Antenna gain adds to the margin without costing airtime.'],
+        'reveal': 'SF9 with the 5 dBi antenna gives 11.9 dB of margin with 185 ms on air; SF10 with the dipole (11.5 dB, 371 ms) works too.',
+        'explain': 'The margin is the received power minus the receiver sensitivity. A higher spreading factor lowers the sensitivity (the receiver can decode below the noise) at the price of a slower, longer packet, so the cheapest decibels come from the antenna.'}
+SIM8 = {'id': 'ch01-e907', 'type': 'sim', 'section': 'ch01-s01', 'difficulty': 2, 'tags': ['calc'], 'think': 'apply', 'activity': 'sensor-node',
+        'q': 'A LoRa temperature sensor on a 600 mAh cell wakes up, measures, sends a packet and waits for its acknowledgement, then sleeps. Choose the wake period so that the battery lasts at least a year and the server still gets at least 24 readings a day.',
+        'task': {'seed': 'auto', 'params': {}},
+        'grade': {'mode': 'checks', 'checks': [{'expr': 'life / 86400 >= daysMin', 'label': 'checkLife', 'weight': 2}, {'expr': 'perDay >= perDayMin', 'label': 'checkRate'}]},
+        'hints': ['Most of the charge goes into the wake-ups (sending, waiting for the acknowledgement), so fewer wake-ups means a longer life.', '24 readings a day means a period of at most 3600 s.'],
+        'reveal': 'Any period from about 390 s to 3600 s: every 15 minutes the cell lasts about 600 days with 96 readings a day.',
+        'explain': 'The average current is the charge of one wake-up divided by the period, plus the sleep current and the self-discharge; the life is the capacity divided by it. Lengthening the period helps until the sleep current and the self-discharge dominate.'}
 def put(ch):
-    c = rj(ch); c['sections'][0]['blocks'] += [dict(BLOCK), dict(BLOCK2), dict(BLOCK3), dict(BLOCK4)]; c['exercises'] += [json.loads(json.dumps(x)) for x in (SIM, SIM2, SIM3, SIM4)]; wj(ch, c)
+    c = rj(ch); c['sections'][0]['blocks'] += [dict(BLOCK), dict(BLOCK2), dict(BLOCK3), dict(BLOCK4)] + [{'t': 'interactive', 'activity': a} for a in P6]; c['exercises'] += [json.loads(json.dumps(x)) for x in (SIM, SIM2, SIM3, SIM4, SIM5, SIM6, SIM7, SIM8)]; wj(ch, c)
 put(os.path.join(sd, 'chapters', 'ch01.json')); put(os.path.join(sd, 'translations', 'fr', 'ch01.json'))
 mk = lambda src, out: run(os.path.join(S, 'make_pack.py'), src, os.path.join(T, out))
 pk = lambda out: zipfile.ZipFile(os.path.join(T, out, 'demo-physics.noema.zip'))
@@ -94,18 +128,19 @@ check(p['activities']['format'] == 'noema.activities/v1' and a.get('html') == ht
 import hashlib
 check(a.get('sha256') == hashlib.sha256(html.encode()).hexdigest() and a.get('bytes') == len(html.encode()), 'sha256 and bytes name the bundle')
 check(sorted(a.get('strings') or {}) == ['el', 'en', 'fr', 'ru'] and a['strings']['el']['signal'] == 'Σήμα', 'the strings of every locale are in the pack')
-check(sorted(p.get('requires') or []) == ['activities/v1', 'engine:circuit-mna@1', 'runtime:html-app@1', 'runtime:sim-spec@1'], 'pack.requires names the core, both runtimes and the circuit engine', str(p.get('requires')))
-check(p['counts'].get('activities') == 4 and 'alias-lab-still' in p['media'] and 'rc-lowpass-still' in p['media'], 'counts.activities; the fallback pictures are pack pictures (and need no exercises)')
+check(sorted(p.get('requires') or []) == ['activities/v1', 'engine:circuit-mna@1', 'engine:pid@1', 'engine:rf@1', 'engine:thermal@1', 'engine:twin@1', 'runtime:html-app@1', 'runtime:sim-spec@1'], 'pack.requires names the core, both runtimes, the circuit engine and the four P6 engines', str(p.get('requires')))
+check(p['counts'].get('activities') == 8 and 'alias-lab-still' in p['media'] and 'rc-lowpass-still' in p['media'], 'counts.activities; the fallback pictures are pack pictures (and need no exercises)')
 check(b.get('spec') == rj(os.path.join(RC, 'spec.json')) and 'html' not in b and sorted(b.get('strings') or {}) == ['el', 'en', 'fr', 'ru'], 'sim-spec@1: the spec is inline in the pack (data, no bundle), with its strings')
 lb = next((x for x in p['activities']['items'] if x.get('id') == 'led-bench'), {})
 check(lb.get('spec') == rj(os.path.join(ROOT, 'tools', 'activities_examples', 'led-bench', 'spec.json')) and lb['spec']['bench']['diagnosis']['options'][6]['fault'] == 'ledReversed', 'circuit-mna@1: the bench spec is inline, its faults and diagnosis with it')
+check(all(next((x for x in p['activities']['items'] if x.get('id') == a), {}).get('spec') == rj(os.path.join(ROOT, 'tools', 'activities_examples', a, 'spec.json')) for a in P6), 'thermal@1, pid@1, rf@1, twin@1: the specs of heatsink, pid-tune, lora-link and sensor-node are inline')
 if os.environ.get('NOEMA_ACT_PACK'):   # run_e2e.sh: tests/activities_app.js imports this pack into the app
     shutil.copy(os.path.join(sd, 'build', 'demo-physics.json'), os.environ['NOEMA_ACT_PACK'])
 
 # the round trip
 w2 = os.path.join(T, 'w2'); r = run(os.path.join(S, 'unpack.py'), os.path.join(T, 'o1', 'demo-physics.noema.zip'), w2)
 u = os.path.join(w2, 'demo-physics')
-check(r.returncode == 0 and '4 activities' in r.stdout, 'unpack.py gives the activities back', r.stdout + r.stderr)
+check(r.returncode == 0 and '8 activities' in r.stdout, 'unpack.py gives the activities back', r.stdout + r.stderr)
 check(open(os.path.join(u, 'activities', 'alias-lab', 'app.html'), encoding='utf-8', newline='').read() == html, 'app.html comes back byte for byte')
 check(rj(os.path.join(u, 'activities', 'alias-lab', 'strings.ru.json')) == rj(os.path.join(EX, 'strings.ru.json')), 'the string tables come back')
 check(rj(os.path.join(u, 'activities', 'rc-lowpass', 'spec.json')) == rj(os.path.join(RC, 'spec.json')), 'spec.json comes back')
@@ -160,6 +195,12 @@ refused('a binding to a part not in the netlist', lambda w: bench_of(w, lambda s
 refused('a probe point not in the netlist', lambda w: bench_of(w, lambda s_: s_['bench']['points'][0].update(at='TP9')), 'points[0].at must be a node')
 refused('a diagnosis label missing from a string table', lambda w: os.remove(os.path.join(w, 'activities', 'led-bench', 'strings.ru.json')) or wj(os.path.join(w, 'activities', 'led-bench', 'strings.ru.json'), {k: v for k, v in rj(os.path.join(ROOT, 'tools', 'activities_examples', 'led-bench', 'strings.ru.json')).items() if k != 'dxTrace'}), 'dxTrace')
 refused('a bench name in a readout', lambda w: bench_of(w, lambda s_: s_.setdefault('readouts', []).append({'label': 'checkDx', 'expr': 'diagnosis'})), "'diagnosis'")
+def p6spec(w, a, f):
+    q = os.path.join(w, 'activities', a, 'spec.json'); s_ = rj(q); f(s_); wj(q, s_)
+refused('a thermal binding with an unknown name', lambda w: p6spec(w, 'heatsink', lambda s_: s_['model']['bindings'][0].update(expr='Rsa * k')), "unknown variable 'k'")
+refused('a pid plant the engine does not know', lambda w: p6spec(w, 'pid-tune', lambda s_: s_['model']['plant'].update(type='quantum')), 'spec.model.plant.type: one of fopdt')
+refused('an rf binding to no field of the link', lambda w: p6spec(w, 'lora-link', lambda s_: s_['model']['bindings'][1].update(field='radio.colour')), 'not a numeric field of the link')
+refused('a twin device that senses longer than it sleeps', lambda w: p6spec(w, 'sensor-node', lambda s_: s_['model']['device']['schedule'].update(sense=100)), 'must be shorter than the period')
 def noacts(w):
     shutil.rmtree(os.path.join(w, 'activities'))
 refused('a block without activities/', noacts, "activity 'alias-lab' is not in pack.activities")

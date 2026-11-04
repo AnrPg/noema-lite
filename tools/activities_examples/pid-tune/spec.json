@@ -1,0 +1,49 @@
+{
+ "format": "noema.sim-spec/v1",
+ "engine": "pid@1",
+ "title": "title",
+ "intro": "intro",
+ "consts": { "osMax": 10, "tsMax": 2, "essMax": 0.02 },
+ "params": [
+  { "id": "Kp", "kind": "slider", "label": "kp", "min": 0, "max": 10, "step": 0.05, "default": 1 },
+  { "id": "Ki", "kind": "slider", "label": "ki", "min": 0, "max": 20, "step": 0.1, "default": 0 },
+  { "id": "Kd", "kind": "slider", "label": "kd", "min": 0, "max": 2, "step": 0.01, "default": 0 }
+ ],
+ "model": {
+  "plant": { "type": "second", "K": 1, "wn": 4, "zeta": 0.4, "theta": 0.05 },
+  "controller": { "Kp": 1, "Ki": 0, "Kd": 0, "uMin": -20, "uMax": 20 },
+  "setpoint": { "step": { "from": 0, "to": 1, "at": 0.5 } },
+  "metrics": { "band": 0.02 },
+  "bindings": [
+   { "element": "controller", "prop": "Kp", "expr": "Kp" },
+   { "element": "controller", "prop": "Ki", "expr": "Ki" },
+   { "element": "controller", "prop": "Kd", "expr": "Kd" }
+  ],
+  "transient": { "tEnd": 6, "dt": 0.001 }
+ },
+ "outputs": [
+  { "id": "t", "kind": "series", "time": true },
+  { "id": "r", "kind": "series", "signal": "r" },
+  { "id": "y", "kind": "series", "signal": "y" },
+  { "id": "u", "kind": "series", "signal": "u" },
+  { "id": "os", "kind": "scalar", "metric": "overshoot" },
+  { "id": "ts", "kind": "scalar", "metric": "settling" },
+  { "id": "ess", "kind": "scalar", "metric": "ess" }
+ ],
+ "readouts": [
+  { "label": "osLabel", "expr": "os", "unit": "%", "format": "fixed", "digits": 1 },
+  { "label": "tsLabel", "expr": "ts", "unit": "s", "format": "fixed", "digits": 2 },
+  { "label": "essLabel", "expr": "ess", "format": "fixed", "digits": 3 }
+ ],
+ "plots": [
+  { "kind": "series", "title": "stepTitle",
+    "x": { "series": "t", "label": "time", "unit": "s" },
+    "y": { "min": -0.2, "max": 1.8, "label": "output" },
+    "series": [ { "y": "r", "label": "rLine" }, { "y": "y", "label": "yLine" } ],
+    "marks": [ { "axis": "y", "expr": "1 + osMax / 100", "label": "osMark" }, { "axis": "x", "expr": "0.5 + tsMax", "label": "tsMark" } ] },
+  { "kind": "series", "title": "uTitle",
+    "x": { "series": "t", "label": "time", "unit": "s" },
+    "y": { "label": "effort" },
+    "series": [ { "y": "u", "label": "uLine" } ] }
+ ]
+}

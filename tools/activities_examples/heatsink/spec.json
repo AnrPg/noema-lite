@@ -1,0 +1,53 @@
+{
+ "format": "noema.sim-spec/v1",
+ "engine": "thermal@1",
+ "title": "title",
+ "intro": "intro",
+ "consts": { "P": 20, "Tamb": 40, "TjMax": 125, "RsaMin": 3 },
+ "params": [
+  { "id": "Rsa", "kind": "slider", "label": "rsa", "min": 0.5, "max": 8, "step": 0.1, "default": 6, "unit": "K/W" }
+ ],
+ "derived": [
+  { "id": "Rtot", "expr": "0.5 + 0.2 + Rsa" }
+ ],
+ "model": {
+  "network": {
+   "format": "noema.thermal/v1",
+   "ambient": 40,
+   "nodes": [ { "id": "J", "C": 0.5 }, { "id": "Cs", "C": 2 }, { "id": "HS", "C": 60 } ],
+   "links": [
+    { "id": "Rjc", "a": "J", "b": "Cs", "R": 0.5 },
+    { "id": "Rcs", "a": "Cs", "b": "HS", "R": 0.2 },
+    { "id": "Rsa", "a": "HS", "R": 6 }
+   ],
+   "sources": [ { "id": "Pd", "node": "J", "P": 20 } ]
+  },
+  "bindings": [
+   { "element": "Rsa", "expr": "Rsa" },
+   { "element": "Pd", "expr": "P" },
+   { "element": "ambient", "expr": "Tamb" }
+  ],
+  "transient": { "tEnd": "max(600, 300 * Rsa)", "dt": 1 }
+ },
+ "outputs": [
+  { "id": "t", "kind": "series", "time": true },
+  { "id": "tj", "kind": "series", "node": "J" },
+  { "id": "ths", "kind": "series", "node": "HS" },
+  { "id": "tjSS", "kind": "scalar", "node": "J" },
+  { "id": "thsSS", "kind": "scalar", "node": "HS" },
+  { "id": "tau1", "kind": "scalar", "tau": 1 }
+ ],
+ "readouts": [
+  { "label": "tjLabel", "expr": "tjSS", "unit": "°C", "format": "fixed", "digits": 1 },
+  { "label": "hsLabel", "expr": "thsSS", "unit": "°C", "format": "fixed", "digits": 1 },
+  { "label": "rtotLabel", "expr": "Rtot", "unit": "K/W", "format": "fixed", "digits": 1 },
+  { "label": "tauLabel", "expr": "tau1", "unit": "s", "digits": 3 }
+ ],
+ "plots": [
+  { "kind": "series", "title": "plotTitle",
+    "x": { "series": "t", "label": "time", "unit": "s" },
+    "y": { "min": 30, "label": "temp", "unit": "°C" },
+    "series": [ { "y": "tj", "label": "tjLine" }, { "y": "ths", "label": "hsLine" } ],
+    "marks": [ { "axis": "y", "expr": "TjMax", "label": "maxMark" } ] }
+ ]
+}

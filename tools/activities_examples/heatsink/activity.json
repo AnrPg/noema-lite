@@ -1,0 +1,17 @@
+{
+ "id": "heatsink",
+ "runtime": "sim-spec@1",
+ "entry": "activities/heatsink/spec.json",
+ "stateVersion": 1,
+ "capabilities": [
+  "state",
+  "events"
+ ],
+ "fallback": {
+  "media": "heatsink-still",
+  "text": "A MOSFET dissipates 20 W at an ambient of 40 °C. Heat flows from the junction through the case (0.5 K/W) and the thermal pad (0.2 K/W) into the heatsink, then into the air through the heatsink's own resistance Rsa. In the steady state Tj = 40 °C + 20 W × (0.7 K/W + Rsa), so Tj stays at or below 125 °C when Rsa ≤ 3.55 K/W. The picture shows Rsa = 3.5 K/W: the junction warms to 124 °C over a few minutes while the heatsink, with most of the heat capacity, sets the pace."
+ },
+ "origin": "own",
+ "credit": "noema-lite reference activity",
+ "license": "own"
+}

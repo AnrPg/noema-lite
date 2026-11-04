@@ -1,0 +1,131 @@
+{
+ "cases": [
+  {
+   "name": "Kp 2, Ki 3, Kd 0.4: no overshoot, settled in 1.5 s (passes)",
+   "exercise": "ch01-e905",
+   "steps": [
+    {
+     "set": "Kp",
+     "value": 2
+    },
+    {
+     "set": "Ki",
+     "value": 3
+    },
+    {
+     "set": "Kd",
+     "value": 0.4
+    }
+   ],
+   "expect": {
+    "passed": true,
+    "values": {
+     "os": [
+      0,
+      1
+     ],
+     "ts": [
+      1.3,
+      1.7
+     ]
+    }
+   }
+  },
+  {
+   "name": "Kp 3, Ki 5, Kd 0.6 works too",
+   "exercise": "ch01-e905",
+   "steps": [
+    {
+     "set": "Kp",
+     "value": 3
+    },
+    {
+     "set": "Ki",
+     "value": 5
+    },
+    {
+     "set": "Kd",
+     "value": 0.6
+    }
+   ],
+   "expect": {
+    "passed": true
+   }
+  },
+  {
+   "name": "P alone leaves half the step as error",
+   "exercise": "ch01-e905",
+   "steps": [
+    {
+     "set": "Kp",
+     "value": 1.05
+    }
+   ],
+   "expect": {
+    "passed": false,
+    "values": {
+     "ess": [
+      0.4,
+      0.6
+     ]
+    }
+   }
+  },
+  {
+   "name": "too much integral and derivative overshoot (Kp 3, Ki 6, Kd 0.9: 12 %)",
+   "exercise": "ch01-e905",
+   "steps": [
+    {
+     "set": "Kp",
+     "value": 3
+    },
+    {
+     "set": "Ki",
+     "value": 6
+    },
+    {
+     "set": "Kd",
+     "value": 0.9
+    }
+   ],
+   "expect": {
+    "passed": false,
+    "values": {
+     "os": [
+      10.5,
+      13
+     ]
+    }
+   }
+  },
+  {
+   "name": "PI without derivative rings (Kp 1, Ki 4)",
+   "exercise": "ch01-e905",
+   "steps": [
+    {
+     "set": "Ki",
+     "value": 4
+    }
+   ],
+   "expect": {
+    "passed": false
+   }
+  },
+  {
+   "name": "explorer: the gains are saved",
+   "steps": [
+    {
+     "set": "Kd",
+     "value": 0.2
+    }
+   ],
+   "expect": {
+    "state": [
+     "Kp",
+     "Ki",
+     "Kd"
+    ]
+   }
+  }
+ ]
+}

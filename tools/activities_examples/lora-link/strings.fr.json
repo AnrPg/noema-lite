@@ -1,0 +1,22 @@
+{
+ "title": "Établir une liaison LoRa",
+ "intro": "Un capteur à 2 km de sa passerelle envoie des paquets LoRa de 20 octets à 868 MHz avec 14 dBm ; la passerelle a une antenne de 5 dBi. Des bâtiments et des arbres se trouvent sur le trajet (exposant d’affaiblissement 3,3). Choisissez le facteur d’étalement et l’antenne du capteur pour que la liaison garde au moins 10 dB de marge contre les évanouissements, tandis qu’un paquet reste au plus 0,5 s sur les ondes.",
+ "sf": "Facteur d’étalement SF",
+ "antenna": "Antenne du capteur",
+ "antChip": "antenne puce (−2 dBi)",
+ "antDipole": "dipôle (2,15 dBi)",
+ "antCollinear": "colinéaire (5 dBi)",
+ "prxLabel": "Puissance reçue",
+ "sensLabel": "Sensibilité du récepteur",
+ "marginLabel": "Marge de liaison",
+ "airLabel": "Temps d’émission par paquet",
+ "rangeLabel": "Portée avec 10 dB de marge",
+ "plotTitle": "Marge de liaison selon la distance",
+ "distance": "Distance",
+ "margin": "Marge",
+ "marginLine": "marge",
+ "distMark": "2 km",
+ "minMark": "10 dB",
+ "checkMargin": "La liaison garde au moins 10 dB de marge à 2 km.",
+ "checkAir": "Un paquet reste au plus 0,5 s sur les ondes."
+}

@@ -1,0 +1,17 @@
+{
+ "title": "Un MOSFET sur un dissipateur",
+ "intro": "Un MOSFET dissipe 20 W dans une ambiance à 40 °C. Sa chaleur passe de la jonction au boîtier (0,5 K/W), puis par le pad thermique (0,2 K/W) dans le dissipateur, et du dissipateur dans l’air. Choisissez le dissipateur par sa résistance thermique vers l’air, Rsa : plus Rsa est petite, plus le dissipateur est grand et cher.",
+ "rsa": "Dissipateur vers l’air, Rsa",
+ "tjLabel": "Température de jonction (régime permanent)",
+ "hsLabel": "Température du dissipateur (régime permanent)",
+ "rtotLabel": "De la jonction à l’air, au total",
+ "tauLabel": "Constante de temps la plus lente",
+ "plotTitle": "L’échauffement après la mise sous tension",
+ "time": "Temps",
+ "temp": "Température",
+ "tjLine": "jonction",
+ "hsLine": "dissipateur",
+ "maxMark": "limite de 125 °C",
+ "checkTj": "La jonction reste à 125 °C au plus.",
+ "checkCheap": "Le dissipateur n’est pas plus grand que nécessaire (Rsa d’au moins 3 K/W)."
+}

@@ -1,0 +1,22 @@
+{
+ "title": "Closing a LoRa link",
+ "intro": "A sensor 2 km from its gateway sends 20-byte LoRa packets at 868 MHz with 14 dBm; the gateway has a 5 dBi antenna. Buildings and trees are in the way (path-loss exponent 3.3). Pick the spreading factor and the sensor's antenna so that the link keeps at least 10 dB of margin for fading, while one packet stays on air for at most 0.5 s.",
+ "sf": "Spreading factor SF",
+ "antenna": "Sensor antenna",
+ "antChip": "chip antenna (−2 dBi)",
+ "antDipole": "dipole (2.15 dBi)",
+ "antCollinear": "collinear (5 dBi)",
+ "prxLabel": "Received power",
+ "sensLabel": "Receiver sensitivity",
+ "marginLabel": "Link margin",
+ "airLabel": "Time on air per packet",
+ "rangeLabel": "Range with a 10 dB fade margin",
+ "plotTitle": "Link margin against distance",
+ "distance": "Distance",
+ "margin": "Margin",
+ "marginLine": "margin",
+ "distMark": "2 km",
+ "minMark": "10 dB",
+ "checkMargin": "The link keeps at least 10 dB of margin at 2 km.",
+ "checkAir": "One packet is on air for at most 0.5 s."
+}

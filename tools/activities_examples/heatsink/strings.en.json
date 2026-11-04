@@ -1,0 +1,17 @@
+{
+ "title": "A MOSFET on a heatsink",
+ "intro": "A MOSFET dissipates 20 W at an ambient of 40 °C. Its heat flows from the junction through the case (0.5 K/W) and the thermal pad (0.2 K/W) into the heatsink, and from the heatsink into the air. Choose the heatsink by its thermal resistance to air, Rsa: the smaller Rsa, the bigger and dearer the heatsink.",
+ "rsa": "Heatsink to air, Rsa",
+ "tjLabel": "Junction temperature (steady state)",
+ "hsLabel": "Heatsink temperature (steady state)",
+ "rtotLabel": "Junction to air, in total",
+ "tauLabel": "Slowest time constant",
+ "plotTitle": "Warming up after switch-on",
+ "time": "Time",
+ "temp": "Temperature",
+ "tjLine": "junction",
+ "hsLine": "heatsink",
+ "maxMark": "125 °C limit",
+ "checkTj": "The junction stays at or below 125 °C.",
+ "checkCheap": "The heatsink is no bigger than it needs to be (Rsa of at least 3 K/W)."
+}
