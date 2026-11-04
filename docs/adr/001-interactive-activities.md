@@ -313,3 +313,26 @@ mode, audits. The content work (the electronics Roadmap) starts only after the h
 * **Found on the way:** the harness's host page replaced `{name}` placeholders with a regex written inside a template literal, which
   lost its backslashes (no host string with a placeholder was ever filled); with four activities in one section the two live slots
   are taken by the first ones in view, so the app test presses Start on a parked block (as a learner would).
+
+## 10. As built — P6 (the authoring UI, 2026-11-04)
+
+* **A route, not a page of its own.** The preview must be the real `sim-spec@1` runtime, which lives in `engine.js` and starts only
+  with a subject open, so the author is the engine route `#/author` (`authorView` in `engine/src/40_views.js`; `author` is one of
+  the shell's `ENGINE_ROUTES`, so the frame draws it with `shellChrome({ sub: true, crumbs: [[Activity author]] })`). It works
+  with any subject open and never changes that subject: the activity leaves the device only as the downloaded folder.
+* **One quiet way in**: subject ⋮ › *Create an activity* (line icon `wrench`, a one-line explanation under it), next to Edit —
+  where docs/UI_MAP.md keeps the tools that change content. No button on the subject page, nothing in Me.
+* **Loaded on first use.** `schemaform.js`, `activity_author_schemas.js`, `activity_author.js` and `activity_author.css` (≈ 110 KB)
+  are fetched from `NOEMA_ENGINE_BASE` the first time the route opens (the pattern of the language UI); the site copies them, the
+  one-file bundle has them inline. Leaving the route destroys the page (its keys, its preview session).
+* **The schemas** are copied into `engine/activity_author_schemas.js` by `tools/build.py` (a `file://` page cannot fetch them);
+  `python3 tools/build.py --author-schemas` prints the copy, and `tests/activity_author.js` checks that the committed one is current.
+* **The words are engine strings.** The 287 `engine.author.*` keys (UI, field labels `f.<schema title>` / `p.<netlist property>`,
+  help lines `h.*`, schema messages `v.<keyword>`) live in `i18n/engine/en.arb` with descriptions and are drafted in all 14 other UI
+  locales (`i18n/engine/drafts/`); the page reads them through `NoemaI18n` like every engine text (the side table it was written
+  with is gone; a key the catalog lacks gives `null`, so a label falls back to the field's own name). Keys built at run time are
+  covered by `engine.author.*` in `i18n/engine/dynamic_keys.txt`.
+* **Tests.** `tests/activity_author.js` (Node: schemas against the validators, the form generator, files / zip, the words in every
+  locale) and `--browser <prepared repo>` from `tests/run_e2e.sh`: `#/author` in the built site, the classic router and the frame
+  (subject ⋮ › Create an activity, the crumbs, 320 px), rc-lowpass built from scratch, the preview, undo / redo, the .zip through
+  `activity_lint.py`, dark mode.

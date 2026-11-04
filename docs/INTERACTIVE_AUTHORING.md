@@ -61,6 +61,30 @@ own rules, a step-by-step animation. A graded html-app reports its own result (`
 7. **Check** (docs/INTERACTIVE.md §11): `activity_lint.py`, `activity_test.py` (with solutions and wrong attempts),
    `activity_preview.py`, then `make_pack.py`.
 
+## The authoring page (`#/author`): a sim-spec@1 activity with a form
+
+For a sim-spec@1 activity there is also a page in the app: open any subject, then **⋮ › Create an activity** (a line icon, next
+to Edit; the route is `#/author`, the crumbs end with “Activity author”). It is a form generated from the same JSON Schemas the
+validators enforce (`tools/schemas/noema.sim-spec.v1.schema.json`, `noema.activities.v1.schema.json`; ADR 001 D12), with the
+activity running beside it in the app's own `sim-spec@1` runtime — the preview is exactly what a learner will see.
+
+* **Kind**: a simulation with formulas (`formula@1`) or a circuit simulation (`circuit-mna@1`, with its netlist, bindings and an
+  optional fault-finding bench). Switching keeps the fields both have.
+* **Tabs**: *Activity* (the registry entry: id, fallback picture and text, licence), *Simulation* (controls, constants, computed
+  values, readouts, plots; the model and bench of a circuit), *Words* (every key × every language; add a language). Under every key
+  field its text in each language; every formula is checked as you type, with the names that place may use.
+* **Problems** are the validators' own messages (`checkSimSpec`, `checkActivities`, the words of `activity_lint.py`), at their
+  field, as a count on each tab and in a list with *Show*. While there are problems the preview keeps the last good version.
+* **Files**: *Download .zip* gives `activities/activities.json`, `activities/<id>/spec.json` and `activities/<id>/strings.<loc>.json`
+  — the folder `make_pack.py` takes (add the fallback picture to `media/`); *Import* reads the same back (.zip or JSON files).
+  Nothing leaves the device, and the activity is not added to the subject that is open. Undo / redo: buttons, Ctrl/Cmd+Z,
+  Ctrl/Cmd+Shift+Z.
+* Then go on with step 3 above (the theory block, the sim exercise and its `checks`) and run the checks of step 7 on the folder.
+
+The page's words are ordinary engine strings (`engine.author.*` in `i18n/engine/en.arb`, drafted in every UI locale); a field's
+label is `engine.author.f.<schema title>` (`p.<property>` for the netlist), so a new schema field needs its label key there.
+How it is built: `docs/activities-dev/authoring_ui.md`.
+
 ## activity_test.py cases — `activities/<id>/tests.json`
 
 ```json

@@ -48,7 +48,8 @@ test suites run that way. `tests/shell.js` checks the new homes.
 | H4 🔎 jump to a concept | ⋮ › Search this subject (subject, chapter, section) |
 | H5 ⚡ Lightning, H6 🔧 Debug drills, H7 🃏 Flashcards, H8 🔁 Mistakes gym, H9 🎲 Mixed, H10 🦉 tutor tile | **Practice ▾** next to Continue (with the "due" counts); Today › Review / Mistakes gym across subjects |
 | H11 chapter cards | Chapters as **cards** (default) or as a **list**: the Cards / List switch, remembered |
-| — (was in ⚙️ › Subjects or the picker) | Subject ⋮: Put it on a map / Another station, Edit, Share or make public, Export the package, Choose a subject, Reset my progress |
+| — (was in ⚙️ › Subjects or the picker) | Subject ⋮: Put it on a map / Another station, Edit, **Create an activity**, Share or make public, Export the package, Choose a subject, Reset my progress |
+| — (new 2026-11-04) | **Subject ⋮ › Create an activity** (line icon, its one-line explanation under it): the activity author `#/author` (crumbs Shelf › subject › Activity author) — a sim-spec@1 activity built with a form, the real runtime as its preview, downloaded as the folder `make_pack.py` takes; the open subject is not changed. The only way in (authoring lives with Edit). docs/INTERACTIVE_AUTHORING.md |
 
 ## 3. A chapter (`#/ch/<id>`): Theory · Practice · Traps
 | Old | New home |

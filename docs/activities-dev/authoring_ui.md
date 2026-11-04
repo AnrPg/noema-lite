@@ -12,9 +12,9 @@ a form, sees the activity run beside it and downloads the folder that `make_pack
 | `engine/schemaform.js` | `NoemaSchemaForm`: registry + `$ref`, `validate`, `skeleton`, branches, `walk` (no DOM, runs in Node) and `form()` |
 | `engine/activity_author.js` | `NoemaActivityAuthor`: the page (`mount`, `view`), types, `check`, files, zip / unzip, import, the preview adapter |
 | `engine/activity_author.css` | its styles (the app's tokens; light, dark; 320 px up) |
-| `engine/activity_author_i18n.js` | its words in en, el, ru, fr (`engine.author.*`) with descriptions for translators |
-| `engine/activity_author_schemas.js` | GENERATED copy of the three schemas (a `file://` page cannot fetch): `node tests/activity_author.js --write-schemas` |
-| `tests/activity_author.js` | Node checks; `--browser` the page in the real app (Chromium, Firefox, WebKit) |
+| `engine/activity_author_schemas.js` | GENERATED copy of the three schemas (a `file://` page cannot fetch): `tools/build.py` writes it |
+| `i18n/engine/en.arb` (+ `drafts/<locale>.arb`) | its words, `engine.author.*`, with descriptions for translators, drafted in every UI locale |
+| `tests/activity_author.js` | Node checks; `--browser <prepared repo>` the route in the built site (Chromium, Firefox, WebKit; run by `tests/run_e2e.sh`) |
 
 ## The schemas and the validators
 
@@ -26,7 +26,7 @@ tables). `tests/activity_author.js` runs the parity cases of `tests/activities.j
 never refuses what the validators accept, and refuses every structural case.
 
 `x-noema` annotates a field for the UI: `expr` (a formula), `key` (a key of the string tables), `name`, `element` (a netlist part),
-`series` (an engine series), `longtext`. A schema `title` is a **key** of the label table: `engine.author.f.<title>`; a field
+`series` (an engine series), `longtext`. A schema `title` is a **key** of the app's catalog: `engine.author.f.<title>`; a field
 without a title (the netlist) is labelled `engine.author.p.<property>`; an option of a select `engine.author.f.<title>.<value>`
 (`f.opt.<value>` without a title); help lines `engine.author.h.<title>`; schema messages `engine.author.v.<keyword>`.
 
@@ -60,19 +60,18 @@ validator messages land at their field (`setErrors([{path, msg}])`, with `aria-i
 
 The preview must be the *real* runtime, and `sim-spec@1` is part of `engine.js`, which only starts inside the app (the loader
 sets the subject first). A separate `author.html` would need a second copy of the runtime or a stubbed loader. So the page is
-a route, `#/author`, mounted by the integrator; it works with any subject open (the activity is not added to it).
+a route, `#/author`; it works with any subject open (the activity is not added to it).
 
-## Integration (for the integrator)
+## Integration (done, P6 — docs/adr/001 §10)
 
-1. `index.html` (and the site / bundle builders in `tools/build.py`): after `engine/packcheck.js` load
-   `engine/schemaform.js`, `engine/activity_author_i18n.js`, `engine/activity_author_schemas.js`, `engine/activity_author.js`
-   (or lazily on first use of the route), and `engine/activity_author.css`.
-2. The router (`engine/src/40_views.js` `route()`, and the shell's): `#/author` →
-   `shellChrome({ sub: true, crumbs: [[tE('engine.author.title')]] }); NoemaActivityAuthor.view($('main'));`
-   A way in: an item in Me → (authoring) or the subject menu, label `engine.author.title`, a line icon.
-3. `tools/build.py`: write `engine/activity_author_schemas.js` from `tools/schemas/` (or keep the test's `--write-schemas`).
-4. Words: move every key of `engine/activity_author_i18n.js` into `i18n/engine/en.arb` as `engine.author.<key>` (descriptions:
-   `desc`, and "Label of a form field of the activity author" for `f.*` / `p.*`, "Help line under a field" for `h.*`,
-   "Problem shown under a field" for `v.*`); el, ru, fr into `i18n/engine/drafts/<loc>.arb`; drafts for the other UI locales.
-   The table stays as the fallback. `tools/i18n/audit.js` finds no hard-coded text in the new files.
-5. Run `node tests/activity_author.js --browser` with the other browser tests.
+1. **Loading**: `authorView` (`engine/src/40_views.js`) loads `schemaform.js`, `activity_author_schemas.js`, `activity_author.js` and
+   `activity_author.css` from `NOEMA_ENGINE_BASE` on the first visit; `tools/build.py` copies them into the site and inlines them in
+   the bundle (scripts after `packcheck.js`, the CSS in the bundle's style).
+2. **Router**: `#/author` in the classic `route()` and in the shell (`ENGINE_ROUTES`), drawn with
+   `shellChrome({ sub: true, crumbs: [[tE('engine.author.title')]] })`; leaving the route destroys the page (`NoemaActivityAuthor.current`).
+   The way in: subject ⋮ › Create an activity (`engine.author.create`, line icon `wrench`, `engine.author.createSub` under it).
+3. **Schemas**: `tools/build.py` writes `engine/activity_author_schemas.js` (`--author-schemas` prints it; the test compares).
+4. **Words**: `engine.author.*` in `i18n/engine/en.arb` (descriptions) and `i18n/engine/drafts/<locale>.arb` for all 14 other UI
+   locales; `engine.author.*` in `i18n/engine/dynamic_keys.txt`. A new schema field needs `engine.author.f.<title>` there, in
+   every locale; `node tools/i18n/check.js` and `tests/activity_author.js` say what is missing.
+5. **Tests**: `node tests/activity_author.js` (Node), `--browser "$T"` in `tests/run_e2e.sh`.
