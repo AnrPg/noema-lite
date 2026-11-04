@@ -12,7 +12,7 @@ library/subjects/<subject-id>/          (shared library)   or   accounts/<profil
 ├── chapters/chNN.json   one file per chapter (schema below)
 ├── patches/*.json    ADDITIVE updates from later sources (never edit a published chapter; append)
 ├── media/            pictures (svg/png/jpg/webp) + media.json registry — docs/VISUAL.md
-├── activities/       interactive activities (optional): activities.json + <id>/app.html (html-app@1) or <id>/spec.json (sim-spec@1; a circuit with engine circuit-mna@1, docs/INTERACTIVE_CIRCUIT.md) + <id>/strings.<locale>.json — docs/INTERACTIVE.md
+├── activities/       interactive activities (optional): activities.json + <id>/app.html (html-app@1) or <id>/spec.json (sim-spec@1; a circuit with engine circuit-mna@1, docs/INTERACTIVE_CIRCUIT.md) or <id>/module.wasm (+ spec.json; wasm-module@1, engine wasm@1, docs/INTERACTIVE_WASM.md) or no file (external-embed@1: an allow-listed outside page, theory blocks only, docs/INTERACTIVE_EMBED.md) + <id>/strings.<locale>.json — docs/INTERACTIVE.md
 ├── coverage/*.md     coverage checklists (every heading/command/test question → section + exercise ids)
 ├── authoring/        scripts used to generate the content (provenance)
 ├── translations/<locale>/chNN.json   the chapters in en, el, ru (those that are not the pack's language; below, "Packs in several languages")
@@ -55,6 +55,13 @@ unsplit original). `make_pack.py` (skill) packages them into `<id>.noema.zip` (`
 file's first page — a part that starts at page 403 of the book has `"firstPage": 403`, so "σ. 410" opens page 8 of the part.
 The app imports the package with its files (📥, "Create with Claude", or the connector's `noema_finish_upload`, which asks for
 every packaged file); files can also be attached later in the app (📎 in the source's card).
+
+**H5P packages as sources.** A `.h5p` file (a ready-made quiz) is a source like any other: record it in `sources.json` with its
+file, then `python3 h5p_import.py FILE.h5p --out <subject> --chapter chNN --src <source id>` turns its questions into the
+pack's own types (mcq, tf, cloze, bucket, match, order, spotbug, img_drag, img_reveal, flashcards), with the package's title,
+author and licence in each `cite`. The import is a draft: **every exercise it writes is an exercise of the sources and every
+rule below (Q1–Q8) applies to it** — self-contained, explained, testing the idea, mapped, with theory around it
+(docs/INTERACTIVE_AUTHORING.md "Importing H5P quizzes").
 
 ## Pedagogy rules (non-negotiable)
 > **0. ADHD-friendly, everywhere — the first rule, it shapes every block, card and exercise.** Paragraphs of 1–3 short
@@ -340,7 +347,7 @@ IDs: `chNN-eNNN`, unique, sequential.
 | `tree` | `start:"a"`, `nodes:{id:{q, options:[{text, ok, fb, to?}]}}` | **decision tree**: one `ok` per node; `to` names the next node (none = the end); every wrong option's `fb` says where that branch leads. The right path must end without a loop. |
 | `inquiry` | `options:[str]` (3–5 questions, tests or experiments), `scores:[0–3 per option]` with exactly one highest, `why:[str per option]` | **best question**: which one tells you the most? Values are shown afterwards. |
 | `debate` | `q` = the claim; `sides:[{position, counters:[str] (2–4), best:int, why:[str per counter]}]` (2–3) | **debate**: the learner takes ANY side (not graded), then picks the strongest objection to it. Pairs well with `mode: "dialectic"`. |
-| `sim` | `activity` (an id of pack.activities), `task: {seed: "auto"\|int, params: {…}}`, `grade: {"mode": "reported"}` (html-app@1) or `{"mode": "checks", "checks": [{"expr", "label"?, "weight"?}], "pass"?}` (sim-spec@1: rules in the expression language the app evaluates on the activity's values, docs/INTERACTIVE.md §12.5; on a fault-finding bench also `diagnosis`, `measurements`, `correct`, and `task.params.fault` picks the hidden fault — an id or a list the seed draws from, docs/INTERACTIVE_CIRCUIT.md §2), optional `hints:[str]` (≤ 6), `reveal` | **interactive task** (docs/INTERACTIVE.md §4): the learner reaches the goal stated in `q` inside the activity; the activity reports the result. Opt-in: only when the chapter map's `fits.types` names `sim` (then ≥ 1). Hints lead to the idea, never the answer (each one: score × 0.85, floor 0.5). |
+| `sim` | `activity` (an id of pack.activities), `task: {seed: "auto"\|int, params: {…}}`, `grade: {"mode": "reported"}` (html-app@1) or `{"mode": "checks", "checks": [{"expr", "label"?, "weight"?}], "pass"?}` (sim-spec@1 and wasm-module@1: rules in the expression language the app evaluates on the activity's values, docs/INTERACTIVE.md §12.5; never on an external-embed@1 page (explore only); on a fault-finding bench also `diagnosis`, `measurements`, `correct`, and `task.params.fault` picks the hidden fault — an id or a list the seed draws from, docs/INTERACTIVE_CIRCUIT.md §2), optional `hints:[str]` (≤ 6), `reveal` | **interactive task** (docs/INTERACTIVE.md §4): the learner reaches the goal stated in `q` inside the activity; the activity reports the result. Opt-in: only when the chapter map's `fits.types` names `sim` (then ≥ 1). Hints lead to the idea, never the answer (each one: score × 0.85, floor 0.5). |
 | `img_hotspot` `img_sequence` `img_reveal` `img_drag` `img_label` `img_select` `img_occlusion` | `media` + regions/targets/answer… | **visual exercises — full schema in docs/VISUAL.md**; `img_sequence` rarely on a diagram whose arrows already show the order (Q5c) |
 
 ## Debug playbook

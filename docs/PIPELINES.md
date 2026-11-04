@@ -72,6 +72,12 @@ note of what is waiting. Only a step marked `deferrable` in `steps.json` may wai
 `--queue` (3), `--extend` (5), `--bridge` (6), `--translate` (7), `--import` (8), `--lang-task` (L1), `--new-language`
 (L2). The language flows only run the language tools as they are; their rules are `docs/LANGUAGE_RULES.md`.
 
+**H5P packages among the sources** (`.h5p` quizzes from H5P.org, Moodle, Lumi) change no flow: they are sources like a PDF
+(one `sources.json` entry each, the file packaged). In the `write` step `python3 scripts/h5p_import.py FILE.h5p --out
+<subject> --chapter chNN --src <source id>` turns their questions into the pack's own exercise types; what it writes counts as
+exercises of the sources (`sourceQuestions`, Q3) and passes every check of §4 like the rest (`docs/INTERACTIVE_AUTHORING.md`
+"Importing H5P quizzes").
+
 ## 3. Steps and their checks
 
 | Step | Check |

@@ -4,7 +4,8 @@ An **activity** is a small interactive program inside a pack: an explorer in the
 or a graded **sim** exercise (reach a goal in the activity; the activity reports whether it was reached, or the app checks it).
 The decisions and the spikes behind this page are in `docs/adr/001-interactive-activities.md`. How to write one well:
 `docs/INTERACTIVE_AUTHORING.md`. The formulas of `sim-spec@1`: `docs/INTERACTIVE_SIMEXPR.md`. The circuit engine and the
-fault-finding bench: `docs/INTERACTIVE_CIRCUIT.md`.
+fault-finding bench: `docs/INTERACTIVE_CIRCUIT.md`. WebAssembly modules: `docs/INTERACTIVE_WASM.md`. Outside pages (PhET,
+GeoGebra, Desmos): `docs/INTERACTIVE_EMBED.md`. The learning record export: `docs/INTERACTIVE_XAPI.md`.
 
 Activities are optional. A chapter without them is complete; a chapter with them still needs every rule of
 `tools/CONTENT_SPEC.md` (Q1–Q8). An activity never replaces the theory: the text explains the idea, the activity lets the
@@ -18,8 +19,16 @@ learner try it.
 | `sim-spec@1` (tier B) | a JSON spec (controls, formulas, readouts, plots) run by the app's own trusted engines — no code in the pack (§12) | **available** — engines `formula@1` (formulas) and `circuit-mna@1` (circuits, transients and fault-finding benches: §12.6–12.7) |
 | `py-module@1` (tier C) | Python (Pyodide + numpy, scipy; allow-listed extras through micropip) in a worker | later (P4); offline after the first use, never in the one-file bundle |
 | `h5p@1` | an ordinary `.h5p` package (quiz, drag and drop, interactive video, branching…) played by the app's own H5P player in the same sandbox | later (P4b) |
+| `wasm-module@1` | a precompiled WebAssembly module (C, Rust, AssemblyScript) run in a worker with no network and no imports but a tiny host ABI; shown through a `sim-spec@1` spec with the engine `wasm@1` (`docs/INTERACTIVE_WASM.md`) | **available** (P6) — engine `wasm@1` |
+| `external-embed@1` | an allow-listed page of an outside provider (PhET, GeoGebra, Desmos) in a double sandboxed frame, after a consent card; **explore only**, needs the network (`docs/INTERACTIVE_EMBED.md`) | **opt-in** (P6): off unless `NOEMA_CONFIG.activities['external-embed@1']` is `true`; Falstad, CircuitJS and Wokwi stay refused (pending) |
 
 `make_pack.py` refuses a runtime that this version of the app does not run yet.
+
+**Licence limits of the outside providers** (`external-embed@1`; details and sources in `docs/INTERACTIVE_EMBED.md` §1):
+PhET simulations are CC BY 4.0 — the newer ones CC BY-NC, so check each sim; GeoGebra is free for **non-commercial** use only;
+the Desmos Terms of Service **limit commercial use**. Every embed carries its credit and licence at the point of use, and the
+validators warn (`license-nc`) on every non-commercial licence: a pack used commercially needs the provider's permission.
+H5P content imported with `h5p_import.py` keeps each package's own licence in `cite` (`docs/INTERACTIVE_AUTHORING.md`).
 
 ## 2. Files in the subject folder
 
@@ -29,6 +38,7 @@ activities/
 └── <activity-id>/
     ├── app.html                    the bundle (html-app@1): everything inline, at most 512 KB (aim for <= 256 KB)
     ├── spec.json                   or the spec (sim-spec@1): data only, at most 64 KB (§12)
+    ├── module.wasm                 or a WebAssembly module (wasm-module@1, at most 2 MiB; + spec.json): docs/INTERACTIVE_WASM.md
     ├── strings.en.json             the activity's words, one table per language: {"key": "text with {vars}"}
     ├── strings.el.json
     └── strings.ru.json             (every language the pack is read in: its own + each translation)
@@ -38,7 +48,8 @@ media/<still>.svg|png               the fallback picture (a normal pack picture 
 `make_pack.py` puts each bundle **inline** in the pack (like the pictures), with its `sha256` and `bytes` (a spec as `spec`), and
 the string tables under `strings`; it writes `pack.requires` (+ `engine:<id>` for an engine other than the built-in `formula@1`)
 and `counts.activities`. `unpack.py` gives the folder back. `python3 activity_new.py <subject-dir> <id>` starts one from the
-reference activity alias-lab; `--runtime sim-spec@1` from rc-lowpass (an RC low-pass filter).
+reference activity alias-lab; `--runtime sim-spec@1` from rc-lowpass (an RC low-pass filter); `--from wasm-oscillator`
+(`--runtime wasm-module@1`) from a damped oscillator computed by a WebAssembly module.
 
 ## 3. The registry — `activities/activities.json`
 
@@ -166,7 +177,8 @@ from 320 px wide with no horizontal scroll (docs/UI_MAP.md "Small screens"), tou
 
 ## 10. Offline
 
-`html-app@1` and `sim-spec@1` work offline (everything is inline; the engines are part of the app). `py-module@1` (later) needs the Pyodide files (and numpy, scipy) from the network the first
+`html-app@1`, `sim-spec@1` and `wasm-module@1` work offline (everything is inline; the engines are part of the app). `external-embed@1`
+needs the network every time: offline, or when the page does not load in 20 s, the block shows its fallback with Restart (= try again). `py-module@1` (later) needs the Pyodide files (and numpy, scipy) from the network the first
 time; after that they are kept on the device (Settings can prepare them ahead), as are packages installed through micropip. It is
 never available in the one-file bundle: its fallback shows there.
 
@@ -273,7 +285,7 @@ check a `label` that names the condition, never the answer. Only runtimes that e
 ### 12.6 Engines — `ACT.registerEngine`
 
 `formula@1` (built in) has no model: the derived values are the model. Other engines (the circuit engine `circuit-mna@1`,
-`docs/INTERACTIVE_CIRCUIT.md`) are trusted app code, registered with
+`docs/INTERACTIVE_CIRCUIT.md`; `wasm@1`, which runs a pack's `wasm-module@1` item in a worker, `docs/INTERACTIVE_WASM.md` §2) are trusted app code, registered with
 
 ```js
 ACT.registerEngine({ id: 'name@1',
