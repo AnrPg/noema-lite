@@ -3,7 +3,8 @@
 An **activity** is a small interactive program inside a pack: an explorer in the theory (move a slider, watch what changes)
 or a graded **sim** exercise (reach a goal in the activity; the activity reports whether it was reached, or the app checks it).
 The decisions and the spikes behind this page are in `docs/adr/001-interactive-activities.md`. How to write one well:
-`docs/INTERACTIVE_AUTHORING.md`. The formulas of `sim-spec@1`: `docs/INTERACTIVE_SIMEXPR.md`.
+`docs/INTERACTIVE_AUTHORING.md`. The formulas of `sim-spec@1`: `docs/INTERACTIVE_SIMEXPR.md`. The circuit engine and the
+fault-finding bench: `docs/INTERACTIVE_CIRCUIT.md`.
 
 Activities are optional. A chapter without them is complete; a chapter with them still needs every rule of
 `tools/CONTENT_SPEC.md` (Q1–Q8). An activity never replaces the theory: the text explains the idea, the activity lets the
@@ -14,7 +15,7 @@ learner try it.
 | runtime | what it is | status |
 |---|---|---|
 | `html-app@1` (tier A) | one self-contained HTML file (inline scripts and styles, pictures as `data:` URIs) in a sandboxed frame | **available** |
-| `sim-spec@1` (tier B) | a JSON spec (controls, formulas, readouts, plots) run by the app's own trusted engines — no code in the pack (§12) | **available** (formula@1; the circuit engine arrives with P3) |
+| `sim-spec@1` (tier B) | a JSON spec (controls, formulas, readouts, plots) run by the app's own trusted engines — no code in the pack (§12) | **available** — engines `formula@1` (formulas) and `circuit-mna@1` (circuits, transients and fault-finding benches: §12.6–12.7) |
 | `py-module@1` (tier C) | Python (Pyodide + numpy, scipy; allow-listed extras through micropip) in a worker | later (P4); offline after the first use, never in the one-file bundle |
 | `h5p@1` | an ordinary `.h5p` package (quiz, drag and drop, interactive video, branching…) played by the app's own H5P player in the same sandbox | later (P4b) |
 
@@ -172,9 +173,11 @@ never available in the one-file bundle: its fallback shows there.
 ## 11. Before you deliver — checklist
 
 1. `python3 activity_lint.py <subject-dir>` — no errors (and no warnings you cannot explain); for a sim-spec it checks every
-   expression against the names the spec declares, every label key in every table, the limits.
+   expression against the names the spec declares, every label key in every table, the limits; for a circuit the netlist,
+   the bindings, the faults, points and instruments of a bench.
 2. `python3 activity_test.py <subject-dir>` — it loads, says hello, shows its words in every language, reports right and wrong
-   results for the solutions and wrong attempts you listed, and no console errors.
+   results for the solutions and wrong attempts you listed, and no console errors (a bench: `measure` / `diagnose` steps, the
+   readings in the log, the right and the tempting wrong diagnosis; docs/INTERACTIVE_AUTHORING.md).
 3. `python3 activity_preview.py <subject-dir> <id>` — look at the screenshots (light, dark, 360 px, fallback).
 4. The block is explained after it; the sim exercise's `q` is complete; hints lead to the idea, not the answer.
 5. `make_pack.py` — the pack builds.
@@ -269,13 +272,16 @@ check a `label` that names the condition, never the answer. Only runtimes that e
 
 ### 12.6 Engines — `ACT.registerEngine`
 
-`formula@1` (built in) has no model: the derived values are the model. Other engines (the circuit engine `circuit-mna@1` in P3)
-are trusted app code, registered with
+`formula@1` (built in) has no model: the derived values are the model. Other engines (the circuit engine `circuit-mna@1`,
+`docs/INTERACTIVE_CIRCUIT.md`) are trusted app code, registered with
 
 ```js
 ACT.registerEngine({ id: 'name@1',
   check(spec) { return [/* problems with spec.model */]; },             // optional, after the common checks
-  create(spec, { seed, task }) { return { run(inputs) { return { t: [...], v: [...], vEnd: 0.03 }; } }; },
+  prepare(spec, compile) { return inputs => ({ ...inputs, $k: 1 }); },   // optional: turns the inputs into what the engine needs (main thread)
+  create(spec, { seed, task, faults }) { return { run(inputs) { return { t: [...], v: [...], vEnd: 0.03 }; },
+                                                   measure(inputs, probe) { return { kind: 'V', value: 1.5 }; } }; },   // measure: a bench only
+  bench: true,                                                          // optional: the engine runs fault-finding benches (§12.7)
   workerSource: 'self.noemaEngine = { create(spec, opts) { … } };' });  // optional: then every run is in a Worker
 ```
 
@@ -283,5 +289,36 @@ A spec for such an engine names it (`"engine": "name@1"`), configures it in `mod
 it computes: `"outputs": [{"id": "t", "kind": "series"}, {"id": "vEnd", "kind": "scalar"}]`. `run(inputs)` gets the consts, params
 and derived values; scalar outputs join the names of readouts, marks and checks, series feed `series` plots. Formulas run inline
 (each evaluation is bounded); an engine whose runs can take longer than ~50 ms gives `workerSource`, and a run that takes more
-than 5 s stops the activity (Restart). The validators know the same list of engines as the app (`ENGINES` in
-`tools/activities.py` and `engine/packcheck.js`); `make_pack.py` adds `engine:<id>` to `pack.requires`.
+than 5 s stops the activity (Restart). Runs are queued: only the latest inputs are computed (a slider dragged fast skips the
+ones in between), measurements are answered in order, and the checks grader never reads the results of older inputs. `prepare`
+lets an engine evaluate the spec's own expressions (with the app's NoemaExpr, `compile`) before the inputs go to the worker. The
+validators know the same list of engines as the app (`ENGINES` in `tools/activities.py` and `engine/packcheck.js`); `make_pack.py`
+adds `engine:<id>` to `pack.requires`. `circuit-mna@1` validates `model` (the netlist with the engine's own `check()`, bindings to
+real parts and properties, the transient's step budget), the outputs (nodes and parts of the netlist) and the bench.
+
+### 12.7 Fault-finding benches — `spec.bench`
+
+An engine with `bench: true` (`circuit-mna@1`) can run a **bench**: a virtual device with one hidden fault. The app renders the
+instruments (multimeter V / I / R, oscilloscope, logic analyser) with their leads on the declared probe points, a Measure button
+(an optional budget), the **measurement log** (each reading also an event `measure`), the instrument's face (the meter's number,
+the scope trace, the logic trace) and the diagnosis — a list of options in the string tables (event `diagnose`). The full format
+is `docs/INTERACTIVE_CIRCUIT.md` §2; in short:
+
+```json
+"bench": { "faults": [{"id": "rOpen", "apply": [{"element": "R1", "kind": "open"}]}, …],
+           "points": [{"id": "TP3", "at": "TP3", "label": "tp3"}, {"id": "LA", "at": "@D1.0", "label": "ledA"}, …],
+           "instruments": [{"kind": "V"}, {"kind": "I", "parts": [{"element": "R1", "label": "iR1"}]}, {"kind": "scope", "tEnd": 0.02}],
+           "budget": 8,
+           "diagnosis": {"options": [{"label": "dxSupply"}, {"label": "dxROpen", "fault": "rOpen"}, …]} }
+```
+
+- The fault is picked by `task.params.fault` (an id, or a list the seed draws from) or drawn from all faults by the seed. It is
+  **never in the page** before the diagnosis is checked: not in a label, the log, the saved state or the values; the verdict comes
+  only after Check (an exercise) or "Check my diagnosis" (an explorer, which can also take "another device").
+- A sim exercise grades a bench with the checks grader on three extra names, `diagnosis` (the option's index, −1 before one),
+  `measurements` and `correct`; they cannot be used in readouts or marks, or declared by the spec. Check does nothing before a
+  diagnosis is chosen. Example: `[{"expr": "correct", "label": "checkDx", "weight": 3}, {"expr": "measurements <= 6", "label": "checkEff"}]`, `pass` 0.75.
+- Hints work as for every sim exercise (§4). An explorer's bench is its state (device, log, diagnosis); an exercise starts fresh.
+- The validators check that every fault applies to the netlist (`checkFaults`), every point and part is in it, every instrument
+  is known and complete, every fault is named by exactly one option, every label is in every string table, and `task.params.fault`
+  names faults of the bench.

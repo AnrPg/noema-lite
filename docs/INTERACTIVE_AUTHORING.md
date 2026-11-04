@@ -2,7 +2,9 @@
 
 The contract is `docs/INTERACTIVE.md`; this page is how to make one that teaches. The reference activities are
 `tools/activities_examples/alias-lab/` (html-app@1, sampling and aliasing) and `tools/activities_examples/rc-lowpass/`
-(sim-spec@1, an RC low-pass filter): each an explorer in the theory and a graded sim exercise.
+(sim-spec@1, an RC low-pass filter): each an explorer in the theory and a graded sim exercise. For circuits (`circuit-mna@1`,
+`docs/INTERACTIVE_CIRCUIT.md`): `rc-transient` (a capacitor charging from a square wave, R and C on sliders, a scope trace) and
+`led-bench` (a fault-finding bench: an LED that stays dark).
 
 ## When an activity earns its place
 
@@ -35,7 +37,8 @@ own rules, a step-by-step animation. A graded html-app reports its own result (`
    strings, tests.json, the registry entry, a fallback picture); change the params, the formulas (`derived`), the readouts and the
    plots, and give every label a key in every string table. A good spec: few controls (2–4), the quantity the learner should
    watch as a readout, one plot that shows the relation, marks on the values that matter (the cutoff, the target).
-   Without `--runtime`, `activity_new.py` copies alias-lab (app.html, strings in en/el/ru, the registry entry, a fallback
+   `--from rc-transient` starts from a circuit (a netlist, sliders bound to its parts, a scope plot); `--from led-bench` from a
+   fault-finding bench (below). Without `--runtime`, `activity_new.py` copies alias-lab (app.html, strings in en/el/ru, the registry entry, a fallback
    picture) under the new id. Change it; keep its structure:
    - every word in `strings.<locale>.json`, shown with `noema.t(key)`;
    - wait for `noema.ready`, then read `noema.task`, `noema.state`, `noema.exercise`;
@@ -82,6 +85,50 @@ the saved values:
 ] }
 ```
 
+For a **bench**, `task` picks the hidden fault (`{"fault": "rOpen"}`, over the exercise's own `task.params`), `{"measure":
+{"instrument": "V", "a": "TP3", "b": "GND"}}` (or `{"instrument": "I", "part": 0}`) takes a measurement, `{"diagnose": 2}` picks
+an option (from 0); `readings` checks the numbers in the log (`[[i, lo, hi]]`, the i-th measurement from 0), `log` how many there
+are, `values` the bench's `diagnosis`, `measurements`, `correct`:
+
+```json
+{ "name": "open resistor: 0 V at TP3", "exercise": "ch01-e903", "task": { "fault": "rOpen" },
+  "steps": [{ "measure": { "instrument": "V", "a": "TP3", "b": "GND" } }, { "diagnose": 2 }],
+  "expect": { "passed": true, "log": 1, "readings": [[0, -0.05, 0.05]] } }
+```
+
+## A good fault-finding bench
+
+A bench teaches **reasoning from measurements**: each reading should rule something out. Write it like a good practical:
+
+1. **One board, one symptom.** A small, real circuit the chapter explains (a supply, a switch, a resistor, an LED; a transistor
+   stage; an RC timer), and a symptom in the intro ("the LED stays dark"). Six to twelve parts; more is noise, not difficulty.
+2. **Faults that look alike from the outside but read differently inside.** Pick 3–6 faults with the same symptom, each with a
+   measurement that tells it apart: an open resistor (0 V after it), a resistor far too high (the right voltages, a tenth of the
+   current), a broken track (both legs of the next part at 0 V), a part in backwards (the voltage on the wrong leg). Check with
+   the engine that the readings really differ (`activity_test.py` cases with `readings`) — and say in a case which faults a given
+   reading cannot tell apart (an ohmmeter on an open and on a reversed LED both read OL one way).
+3. **Probe points where a technician would put the leads**: labelled test points (`{"name": "TP3", "probe": "a"}` in the netlist)
+   and the legs of the suspicious parts (`@D1.0`). Name them for what they are ("TP3 (resistor–LED junction)", "LED anode leg"),
+   never for what is wrong there.
+4. **Instruments that fit the question.** A voltmeter is the workhorse; an ammeter on one or two parts; an ohmmeter when "the
+   part is open" must be confirmed (it reads unpowered and in circuit); a scope or logic analyser only when the signal changes in
+   time (a PWM, a clock, an RC timer).
+5. **Tempting wrong options.** Every fault has its option; add one or two that the symptom suggests but the readings exclude ("the
+   supply is dead" when TP1 reads 5 V; "the switch does not make contact"). The option labels describe the fault, never the
+   reading that proves it.
+6. **A budget that rewards thinking**, not luck: about twice the measurements an expert needs (an expert needs 3–4 here, the
+   budget is 8), and a check on efficiency that is generous (`measurements <= 6`) and weighs less than the diagnosis
+   (`weight: 3` on `correct`, `pass: 0.75`): a right diagnosis found the long way still passes.
+7. **Noise** (`model.noise: {"rel": 0.005}`) makes the readings look like a real meter's (1.76 V, not 1.7600000 V); it is
+   seeded, so tests and a learner's device stay reproducible. Keep it small: it must never blur the difference between faults.
+8. **The exercise**: `task.params.fault` fixes the fault (one id: everyone gets the same case, as in a worked example) or lists
+   some (the seed draws one per attempt); the `q` gives the circuit and the symptom in words (Q1); `hints` give the method
+   ("measure from the supply towards the LED: each voltage to GND clears or blames the part before it"), never the fault;
+   `reveal` names the fault and the reading that proves it; `explain` says why the tempting option is wrong.
+9. **The explorer**: the same bench as a theory block lets the learner practise; "Check my diagnosis" reveals the fault,
+   "Another device" draws a new one. Explain it after the block: what to measure first, how to read a 0 V and a 5 V.
+10. **The fallback text** is the diagnosis method in words (where to measure, what each reading means), with the still schematic.
+
 ## Pitfalls
 
 - A busy loop (`while (!done) {}`) or a long synchronous computation: stopped after 1.5 s. Split the work with
@@ -94,3 +141,6 @@ the saved values:
 - Too small on a phone: test at 360 px; controls >= 36 px; no horizontal scroll.
 - sim-spec: a formula that uses a value defined below it (`derived` are computed in order), a label key missing in one
   language, a check whose label gives the answer away ("R is 1.6 kΩ"): `activity_lint.py` catches the first two; the third is yours.
+- A bench: a probe point or option label that gives the fault away ("TP4 (broken track)"); two faults no instrument can tell
+  apart (then they are one option, or the bench needs another point); a fault without an option (the validators refuse it); a
+  budget so tight that a careful learner runs out.

@@ -1,0 +1,7 @@
+{ "cases": [
+ { "name": "τ = 1 ms (R 1 kΩ, C 1 µF): 63 % at 1 ms", "exercise": "ch01-e902", "steps": [{ "set": "R", "value": 1000 }], "expect": { "passed": true, "values": { "vAt": [3.05, 3.27] } } },
+ { "name": "another R·C of 1 ms works too (R 2 kΩ, C 500 nF)", "exercise": "ch01-e902", "steps": [{ "set": "C", "value": 5e-7 }, { "set": "R", "value": 2000 }], "expect": { "passed": true } },
+ { "name": "the start values are too slow (τ = 4.7 ms: 19 %)", "exercise": "ch01-e902", "steps": [{ "set": "R", "value": 4700 }, { "set": "R", "value": 4710 }], "expect": { "passed": false, "values": { "vAt": [0.85, 1.0] } } },
+ { "name": "too fast is wrong as well (τ = 0.47 ms: 88 %)", "exercise": "ch01-e902", "steps": [{ "set": "R", "value": 470 }], "expect": { "passed": false } },
+ { "name": "explorer: the values are saved", "steps": [{ "set": "R", "value": 2200 }], "expect": { "state": ["R", "C"], "values": { "tau": [0.0021, 0.0023] } } }
+] }

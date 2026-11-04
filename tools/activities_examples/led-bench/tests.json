@@ -1,0 +1,19 @@
+{ "cases": [
+ { "name": "open resistor: 0 V at TP3, diagnosed right", "exercise": "ch01-e903", "task": { "fault": "rOpen" },
+   "steps": [{ "measure": { "instrument": "V", "a": "TP2", "b": "GND" } }, { "measure": { "instrument": "V", "a": "TP3", "b": "GND" } }, { "diagnose": 2 }],
+   "expect": { "passed": true, "log": 2, "readings": [[0, 4.9, 5.1], [1, -0.05, 0.05]], "values": { "measurements": 2, "diagnosis": 2 } } },
+ { "name": "broken track: TP3 at 5 V but both LED legs at 0 V", "exercise": "ch01-e903", "task": { "fault": "openTrace" },
+   "steps": [{ "measure": { "instrument": "V", "a": "TP3", "b": "GND" } }, { "measure": { "instrument": "V", "a": "LA", "b": "GND" } }, { "measure": { "instrument": "V", "a": "LK", "b": "GND" } }, { "diagnose": 4 }],
+   "expect": { "passed": true, "readings": [[0, 4.9, 5.1], [1, -0.05, 0.05], [2, -0.05, 0.05]] } },
+ { "name": "a reversed LED taken for an open one is wrong", "exercise": "ch01-e903", "task": { "fault": "ledReversed" },
+   "steps": [{ "measure": { "instrument": "V", "a": "TP3", "b": "GND" } }, { "measure": { "instrument": "V", "a": "LK", "b": "GND" } }, { "diagnose": 5 }],
+   "expect": { "passed": false, "readings": [[1, 4.9, 5.1]], "values": { "correct": false } } },
+ { "name": "resistor ten times too high: about 1 mA through it", "exercise": "ch01-e903", "task": { "fault": "rDrift" },
+   "steps": [{ "measure": { "instrument": "I", "part": 0 } }, { "measure": { "instrument": "R", "a": "TP2", "b": "TP3" } }, { "diagnose": 3 }],
+   "expect": { "passed": true, "readings": [[0, 0.0009, 0.0011], [1, 3200, 3400]] } },
+ { "name": "the budget: the 9th measurement is refused", "exercise": "ch01-e903", "task": { "fault": "ledOpen" },
+   "steps": [{ "measure": { "instrument": "V", "a": "TP1" } }, { "measure": { "instrument": "V", "a": "TP1" } }, { "measure": { "instrument": "V", "a": "TP1" } }, { "measure": { "instrument": "V", "a": "TP1" } },
+     { "measure": { "instrument": "V", "a": "TP1" } }, { "measure": { "instrument": "V", "a": "TP1" } }, { "measure": { "instrument": "V", "a": "TP1" } }, { "measure": { "instrument": "V", "a": "TP1" } }, { "measure": { "instrument": "V", "a": "TP1" } }, { "diagnose": 5 }],
+   "expect": { "log": 8, "values": { "measurements": 8, "correct": true } } },
+ { "name": "explorer: a measurement is kept with the values", "steps": [{ "measure": { "instrument": "V", "a": "TP1", "b": "GND" } }], "expect": { "state": ["closed"], "log": 1, "readings": [[0, 4.9, 5.1]] } }
+] }
