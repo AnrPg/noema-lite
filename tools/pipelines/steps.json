@@ -134,7 +134,7 @@
   },
   "activities": {
    "title": "Interactive activities (optional)",
-   "what": "Only where trying teaches what reading and pictures cannot (a relation to explore, a process over time, a setting to find, a fault to probe): an html-app@1 mini-app in activities/<id>/ (activity_new.py starts one from the reference), used as an interactive theory block (explained right after it) and/or a graded sim exercise (add \"sim\" to the map's fits.types). Every word in strings.<locale>.json for each language of the pack, a fallback picture + text. Most chapters need none.",
+   "what": "Only where trying teaches what reading and pictures cannot (a relation to explore, a process over time, a setting to find, a fault to probe): a declarative simulation (sim-spec@1: activities/<id>/spec.json, activity_new.py --runtime sim-spec@1) or, only for what a spec cannot say, an html-app@1 mini-app (activity_new.py), used as an interactive theory block (explained right after it) and/or a graded sim exercise (checks on a sim-spec, reported on a mini-app; add \"sim\" to the map's fits.types). Every word in strings.<locale>.json for each language of the pack, a fallback picture + text. Most chapters need none.",
    "needs": ["map"],
    "check": {"local": "activities"},
    "doc": "references/INTERACTIVE.md, references/INTERACTIVE_AUTHORING.md",

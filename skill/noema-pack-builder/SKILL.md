@@ -14,7 +14,7 @@ learner opens each source file at the pages the chapters cite.
 **The contract is in `references/`. Read both files before writing any content:**
 - `references/CONTENT_SPEC.md` — subject, chapters, sections, blocks, exercises, playbooks, quantities, pedagogy.
 - `references/VISUAL.md` — pictures, regions, the 7 picture-exercise types, figures, picture sourcing & licences.
-- `references/INTERACTIVE.md` — interactive activities (optional): mini-apps in the theory and graded `sim` exercises; `references/INTERACTIVE_AUTHORING.md` is how to make one that teaches.
+- `references/INTERACTIVE.md` — interactive activities (optional): mini-apps and declarative simulations (sim-spec@1, §12) in the theory and graded `sim` exercises; `references/INTERACTIVE_AUTHORING.md` is how to make one that teaches (and which runtime to pick); `references/INTERACTIVE_SIMEXPR.md` the expression language of a spec's formulas and checks.
 
 Scripts live in `scripts/` next to this file (Python 3, standard library + Pillow; for PDFs any of poppler, PyMuPDF, or pypdf + pypdfium2).
 
@@ -105,14 +105,17 @@ with pictures has every picture exercise type that fits it ≥ 3 times (step 4).
 Optional, and most chapters need none. Make one when the learner learns by **trying**: a relation to explore (move one quantity,
 watch another), a process over time, a setting to find, a fault to probe. Never for a fact or a static diagram.
 ```bash
-python3 scripts/activity_new.py work/<id> <activity-id>    # from the reference activity (alias-lab): app.html, strings.en/el/ru.json, tests.json, a fallback picture
+python3 scripts/activity_new.py work/<id> <activity-id> --runtime sim-spec@1   # a declarative simulation (rc-lowpass): spec.json, strings, tests.json, a fallback picture — prefer this
+python3 scripts/activity_new.py work/<id> <activity-id>    # a mini-app (alias-lab, html-app@1): app.html, strings.en/el/ru.json, tests.json — only what a spec cannot say
 python3 scripts/activity_lint.py work/<id>                 # the same rules as make_pack.py
 python3 scripts/activity_test.py work/<id>                 # in a real browser with the app's runtime: every language, tests.json cases (right AND tempting wrong)
 python3 scripts/activity_preview.py work/<id> <activity-id>  # light, dark, 360 px, fallback screenshots: look at each one
 ```
 Use it as a theory block `{"t": "interactive", "activity": "<id>"}` (explained in detail right after it) and/or a `sim` exercise
-(`task.params`, `grade: {"mode": "reported"}`, hints that lead to the idea, never the answer; add `"sim"` to the map's `fits.types`).
-Every word through `noema.t(key)` from the string tables, one per language of the pack; a fallback picture + text that teaches the same.
+(`task.params`; `grade: {"mode": "checks", "checks": [{"expr": "err <= tol", "label": "checkFc"}]}` on a sim-spec — the app checks
+the values itself — or `{"mode": "reported"}` on a mini-app; hints that lead to the idea, never the answer; add `"sim"` to the map's
+`fits.types`). Every word from the string tables (a spec names keys; a mini-app calls `noema.t(key)`), one table per language of
+the pack; a fallback picture + text that teaches the same.
 
 ## 3b. Sources: one entry per file or link, every chapter mapped to ALL its sources
 Give every PDF (also each part of a split PDF), document, web page, video and conversation its own entry in

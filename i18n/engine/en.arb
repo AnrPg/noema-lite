@@ -4665,5 +4665,25 @@
   "engine.act.hint": "{left, plural, =0 {No hints left} one {Hint (# left)} other {Hint (# left)}}",
   "@engine.act.hint": {
     "description": "Button under a simulation exercise that shows the next hint; {left} = hints still available."
+  },
+  "engine.act.sim.reset": "Reset the values",
+  "@engine.act.sim.reset": {
+    "description": "Button under a simulation (sliders, readouts and plots) that puts every control back to its starting value."
+  },
+  "engine.act.sim.computing": "Computing…",
+  "@engine.act.sim.computing": {
+    "description": "Short note while a simulation computes new results after a control changed."
+  },
+  "engine.act.sim.results": "Results",
+  "@engine.act.sim.results": {
+    "description": "Accessible name of the list of computed values (readouts) of a simulation."
+  },
+  "engine.act.sim.plot": "Plot of {y} against {x}",
+  "@engine.act.sim.plot": {
+    "description": "Accessible description of a plot in a simulation; {y} is the vertical axis (name and unit), {x} the horizontal one."
+  },
+  "engine.act.sim.checks": "{met} of {total, plural, one {# condition} other {# conditions}} met",
+  "@engine.act.sim.checks": {
+    "description": "Shown after checking a simulation exercise; {met} conditions of the goal are met out of {total}. The list of the conditions follows."
   }
 }

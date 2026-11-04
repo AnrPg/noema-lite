@@ -8,7 +8,7 @@ import os, sys, json, glob
 for _s in (sys.stdout, sys.stderr):
     try: _s.reconfigure(encoding='utf-8', errors='replace')
     except Exception: pass
-HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
+HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE); sys.path.append(os.path.join(HERE, '..', '..', '..', 'tools'))   # (the skill zip has activities.py beside it; the repository in tools/)
 import activities as A
 a = sys.argv[1:]
 if not a: print(__doc__); sys.exit(1)

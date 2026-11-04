@@ -1,0 +1,35 @@
+{
+ "format": "noema.sim-spec/v1",
+ "engine": "formula@1",
+ "title": "title",
+ "intro": "intro",
+ "consts": { "target": 1000, "tol": 0.05 },
+ "params": [
+  { "id": "R", "kind": "slider", "label": "resistance", "min": 100, "max": 10000, "step": 10, "default": 4700, "unit": "Ω", "format": "si" },
+  { "id": "C", "kind": "slider", "label": "capacitance", "min": 1e-9, "max": 1e-5, "scale": "log", "default": 1e-7, "unit": "F", "format": "si" }
+ ],
+ "derived": [
+  { "id": "tau", "expr": "R * C" },
+  { "id": "fc", "expr": "1 / (2 * pi * tau)" },
+  { "id": "err", "expr": "abs(fc - target) / target" }
+ ],
+ "readouts": [
+  { "label": "fcLabel", "expr": "fc", "unit": "Hz", "format": "si", "digits": 3 },
+  { "label": "tauLabel", "expr": "tau", "unit": "s", "format": "si", "digits": 3 },
+  { "label": "errLabel", "expr": "100 * err", "unit": "%", "format": "fixed", "digits": 1 }
+ ],
+ "plots": [
+  { "kind": "function", "title": "bodeTitle",
+    "x": { "var": "f", "min": 10, "max": 1000000, "scale": "log", "label": "frequency", "unit": "Hz" },
+    "y": { "min": -60, "max": 5, "label": "gain", "unit": "dB" },
+    "points": 240,
+    "series": [{ "expr": "-10 * log10(1 + (f / fc)^2)", "label": "gainLine" }],
+    "marks": [{ "axis": "x", "expr": "fc", "label": "fcMark" }, { "axis": "x", "expr": "target", "label": "targetMark" }, { "axis": "y", "expr": "-3", "label": "minus3" }] },
+  { "kind": "function", "title": "stepTitle",
+    "x": { "var": "t", "min": 0, "max": "5 * tau", "label": "time", "unit": "s", "format": "si" },
+    "y": { "min": 0, "max": 1.05, "label": "voltage", "unit": "V" },
+    "points": 120,
+    "series": [{ "expr": "1 - exp(-t / tau)" }],
+    "marks": [{ "axis": "x", "expr": "tau", "label": "tauMark" }, { "axis": "y", "expr": "1 - exp(-1)" }] }
+ ]
+}

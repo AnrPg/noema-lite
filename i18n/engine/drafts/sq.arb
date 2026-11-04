@@ -15,5 +15,10 @@
   "engine.act.newerState": "Puna jote e ruajtur këtu vjen nga një version më i ri i aktivitetit; ruhet, dhe aktiviteti fillon nga e para.",
   "engine.act.newerProtocol": "Ky aktivitet ka nevojë për një version më të ri të aplikacionit.",
   "engine.act.newerType": "Ky ushtrim ka nevojë për një version më të ri të aplikacionit. Rifresko faqen për ta marrë.",
-  "engine.act.hint": "{left, plural, =0 {Nuk ka më ndihmë} one {Ndihmë (mbetet #)} other {Ndihmë (mbeten #)}}"
+  "engine.act.hint": "{left, plural, =0 {Nuk ka më ndihmë} one {Ndihmë (mbetet #)} other {Ndihmë (mbeten #)}}",
+  "engine.act.sim.reset": "Rikthe vlerat",
+  "engine.act.sim.computing": "Po llogaritet…",
+  "engine.act.sim.results": "Rezultatet",
+  "engine.act.sim.plot": "Grafiku i {y} në varësi të {x}",
+  "engine.act.sim.checks": "Kushte të plotësuara: {met} nga {total}"
 }

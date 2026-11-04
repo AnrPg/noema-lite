@@ -1502,8 +1502,12 @@ function typeAsText(ex) {
    A pack may carry activities (pack.activities, format noema.activities/v1): mini-apps, minigames and simulations. They appear as a
    theory block { t: 'interactive', activity } (an explorer, not graded) or as an exercise { type: 'sim', activity, task, grade, hints }.
    This file is the trusted core (ports & adapters): it knows only the RuntimeAdapter port, never a runtime by name.
-     registerRuntime({ id, version, mount(slot, ctx) → port })      a runtime (html-app@1 in 34_activity_html.js; more in P2–P4)
-     registerGrader({ id, grade(session, ex) → { ok, score } | null })
+     registerRuntime({ id, version, mount(slot, ctx) → port, autoHeight? })   a runtime (html-app@1 in 34_activity_html.js, sim-spec@1 in
+                                                                       35_activity_sim.js; more in P3–P4). autoHeight: it renders in the
+                                                                       app's own DOM and takes the height it needs (no frame)
+     registerEngine({ id, check?(spec) → problems, create(spec, {seed, task}) → { run(inputs) → outputs }, workerSource? })
+                                                                       an engine of sim-spec@1 (formula@1 built in; the circuit engine in P3)
+     registerGrader({ id, grade(session, ex) → { ok, score } | null })   reported (the activity's own result), checks (rules the app evaluates)
    The anti-corruption layer is ACTP (below): the only code that reads what an activity sends. Everything an activity says is
    untrusted: checked by shape and size, rate-limited, never run, never put in the page as HTML. */
 
@@ -1553,10 +1557,10 @@ const ACT = (() => {
   /* i18n-ignore-start */
   const reg = Noema.pack?.activities;
   const ITEMS = {}; for (const a of (reg && Array.isArray(reg.items) ? reg.items : [])) if (a && typeof a.id === 'string') ITEMS[a.id] = a;
-  const RUNTIMES = {}, GRADERS = {};
+  const RUNTIMES = {}, GRADERS = {}, ENGINES = {};
   const flags = () => Object.assign({ 'html-app@1': true }, window.NOEMA_CONFIG?.activities || {});
   /** the capabilities of this app (pack.requires): the core + every runtime that is registered and switched on */
-  const caps = () => new Set(['activities/v1', ...Object.keys(RUNTIMES).filter(id => flags()[id] !== false).map(id => 'runtime:' + id)]);
+  const caps = () => new Set(['activities/v1', ...Object.keys(RUNTIMES).filter(id => flags()[id] !== false).map(id => 'runtime:' + id), ...Object.keys(ENGINES).map(id => 'engine:' + id)]);
   const canRun = a => !!(a && RUNTIMES[a.runtime] && flags()[a.runtime] !== false);
   const LIVE = [];   // the activities running now (at most liveMax())
   const liveMax = () => innerWidth < 720 ? 1 : 2;
@@ -1579,6 +1583,11 @@ const ACT = (() => {
   }
   function registerRuntime(def) { if (def && def.id && typeof def.mount === 'function') RUNTIMES[def.id] = def; }
   function registerGrader(def) { if (def && def.id && typeof def.grade === 'function') GRADERS[def.id] = def; }
+  /** an engine of sim-spec@1: { id: 'name@N', check?(spec) → [problems], create(spec, {seed, task}) → { run(inputs) → outputs }, workerSource? }
+      (workerSource: the engine's code as text, defining self.noemaEngine = { create }; it then runs in a Worker — docs/INTERACTIVE.md §12.6) */
+  function registerEngine(def) { if (def && typeof def.id === 'string' && /^[a-z][a-z0-9-]*@\d+$/.test(def.id) && typeof def.create === 'function') ENGINES[def.id] = def; }
+  const engine = id => Object.prototype.hasOwnProperty.call(ENGINES, id) ? ENGINES[id] : null;
+  const engines = () => Object.keys(ENGINES);
 
   /* ---------- persistence: S.act (explorer state per activity and place) and S.att (the last attempt of each sim exercise) ---------- */
   const STATE_MAX = ACTP.LIM.state, KEEP_EVENTS = 200;
@@ -1587,12 +1596,31 @@ const ACT = (() => {
   function saveAttempt(sess) {
     if (!sess.ex) return;
     S.att = S.att || {};
-    S.att[sess.ex.id] = { id: sess.attemptId, seed: sess.seed, t: Date.now(), hints: sess.hintsUsed, result: sess.result, events: sess.events.slice(-KEEP_EVENTS) };
+    // the last attempt wins: a session that is torn down later (its card left the page) never overwrites an attempt begun after it
+    const had = S.att[sess.ex.id]; if (had && had.id !== sess.attemptId && (had.t0 || 0) > sess.t0) return;
+    S.att[sess.ex.id] = { id: sess.attemptId, seed: sess.seed, t0: sess.t0, t: Date.now(), hints: sess.hintsUsed, result: sess.result, events: sess.events.slice(-KEEP_EVENTS) };
     save();
   }
 
   /* ---------- graders (Strategy): reported — the activity reports its result; checks — host-side rules (P2, the expression language) ---------- */
   registerGrader({ id: 'reported', grade: sess => sess.result ? { ok: !!sess.result.passed, score: sess.result.score } : null });
+  /** checks: { mode: 'checks', checks: [{ expr, label?, weight? }], pass? } — the app evaluates each expression on the activity's current
+      values (params, derived, the engine's outputs; runtimes that expose them: sim-spec@1). score = the weighted share of checks met,
+      × 0.85 per hint used (never below × 0.5); passed = share >= pass (default 1). Nothing done yet (no event) → null: Check waits. */
+  const truthy = v => typeof v === 'boolean' ? v : (typeof v === 'number' && v !== 0 && v === v);
+  registerGrader({ id: 'checks', grade(sess, ex) {
+    const vals = sess.values?.(); if (!vals || !sess.events.length || !window.NoemaExpr) return null;
+    const cs = Array.isArray(ex?.grade?.checks) ? ex.grade.checks : [];
+    let tot = 0, got = 0; const per = [];
+    for (const c of cs) {
+      const w = typeof c?.weight === 'number' && c.weight > 0 ? c.weight : 1; let met = false;
+      try { met = truthy(NoemaExpr.evaluate(String(c.expr), vals)); } catch (e) { met = false; }
+      tot += w; if (met) got += w; per.push({ label: c?.label || null, ok: met });
+    }
+    const share = tot ? got / tot : 0, pass = typeof ex.grade.pass === 'number' ? ex.grade.pass : 1, factor = Math.max(0.5, Math.pow(0.85, sess.hintsUsed || 0));
+    sess.result = { score: Math.round(share * factor * 1e4) / 1e4, passed: share >= pass - 1e-9, detail: per.map(x => (x.ok ? '+' : '-') + (x.label || '')).join(' ').slice(0, 500), checks: per, t: Date.now() };
+    return { ok: sess.result.passed, score: sess.result.score, checks: per };
+  } });
 
   /** Mount an activity into `el`. ctx: { ex?, task?, place, height?, aspect?, caption?, start? (mount now, not when seen) }.
       → the session (destroy, restart, grade) — always returns, even when the activity cannot run (it then shows its fallback). */
@@ -1608,7 +1636,7 @@ const ACT = (() => {
     root.append(skip, box, bar, note, live, skipTarget);
     if (ctx.caption) root.append(h('div', { class: 'caption', html: fmt(ctx.caption) }));
     el.append(root);
-    const sess = { act: a, ex: ctx.ex || null, root, attemptId: uid(), seed: null, events: [], result: null, hintsUsed: 0, state: null, port: null, strikes: 0, alive: false, misses: 0, evWin: [], destroyed: false, onResult: null };
+    const sess = { act: a, ex: ctx.ex || null, root, attemptId: uid(), t0: Date.now(), seed: null, events: [], result: null, hintsUsed: 0, state: null, port: null, strikes: 0, alive: false, misses: 0, evWin: [], destroyed: false, onResult: null };
     sess.key = ctx.ex ? null : 'blk:' + (ctx.place || '') + ':' + actId;
     const seedOf = () => { const s = ctx.task?.seed; return Number.isInteger(s) ? s >>> 0 : rnd32(); };
 
@@ -1629,7 +1657,7 @@ const ACT = (() => {
     function stop(reason, offerRestart = true) {
       teardown();
       fallback(reason);
-      if (offerRestart) setBar(btn('↻ ' + tE('engine.act.restart'), () => start()));
+      setBar(offerRestart ? btn('↻ ' + tE('engine.act.restart'), () => start()) : null);
     }
     function teardown() {
       sess.alive = false; clearInterval(pingT); clearTimeout(timer); clearTimeout(saveT);
@@ -1652,7 +1680,7 @@ const ACT = (() => {
       switch (m.type) {
         case 'ready': sess.alive = true; note.textContent = ''; return;
         case 'pong': sess.misses = 0; return;
-        case 'resize': { if (ctx.height && ctx.height !== 'auto') return; const hpx = Math.max(160, Math.min(Math.round(p.h), Math.round(innerHeight * 1.5), 2000)); box.style.height = hpx + 'px'; return; }
+        case 'resize': { if ((ctx.height && ctx.height !== 'auto') || RUNTIMES[a.runtime]?.autoHeight) return; const hpx = Math.max(160, Math.min(Math.round(p.h), Math.round(innerHeight * 1.5), 2000)); box.style.height = hpx + 'px'; return; }
         case 'state': {
           if (!sess.key) { sess.state = { version: p.version, data: p.data }; return; }
           sess.state = { version: p.version, data: p.data };
@@ -1678,7 +1706,8 @@ const ACT = (() => {
       box.classList.remove('act-fallback'); box.classList.add('act-running'); note.textContent = tE('engine.act.loading');
       setBar(btn('↻ ' + tE('engine.act.restart'), () => { sess.attemptId = uid(); sess.events = []; sess.result = null; start(); }, 'btn ghost small'),
         document.fullscreenEnabled ? btn('⛶ ' + tE('engine.act.fullscreen'), () => { if (document.fullscreenElement) document.exitFullscreen(); else root.requestFullscreen?.().catch(() => { }); }, 'btn ghost small') : null);
-      if (ctx.height && ctx.height !== 'auto') box.style.height = Math.max(120, Math.min(+ctx.height || 360, 2000)) + 'px';
+      if (RUNTIMES[a.runtime].autoHeight) { box.style.height = ''; box.style.aspectRatio = ''; }   // rendered by the app itself: as tall as it needs
+      else if (ctx.height && ctx.height !== 'auto') box.style.height = Math.max(120, Math.min(+ctx.height || 360, 2000)) + 'px';
       else if (ctx.aspect && /^\d+:\d+$/.test(ctx.aspect)) { const [w, hh] = ctx.aspect.split(':').map(Number); box.style.aspectRatio = w + ' / ' + hh; }
       else box.style.height = (a.height && +a.height) ? Math.min(+a.height, 2000) + 'px' : '360px';
       if (sess.seed == null || !ctx.ex) sess.seed = seedOf();
@@ -1697,7 +1726,8 @@ const ACT = (() => {
       try {
         sess.port = RUNTIMES[a.runtime].mount(box, { act: a, init, title: tE('engine.act.frameTitle', { id: a.id }),
           onMessage: raw => { const r = ACTP.check(raw); if (r.ok) onMessage(r.msg); else if (r.version) stop(tE('engine.act.newerProtocol'), false); else if (!r.ignore) strike(r.why); },
-          onFail: why => stop(why === 'navigated' ? tE('engine.act.misbehaved') : tE('engine.act.failed')) });
+          onFail: why => why === 'unsupported' ? stop(tE('engine.act.notHere'), false) : why === 'spec' ? stop(tE('engine.act.failed'), false)
+            : why === 'runaway' ? stop(tE('engine.act.stopped')) : stop(why === 'navigated' ? tE('engine.act.misbehaved') : tE('engine.act.failed')) });
       } catch (e) { console.warn('[noema] activity mount failed', e); return stop(tE('engine.act.failed')); }
       if (notice) note.textContent = notice;
       LIVE.push(sess);
@@ -1717,6 +1747,7 @@ const ACT = (() => {
     sess.grade = () => { const g = GRADERS[sess.ex?.grade?.mode || 'reported']; return g ? g.grade(sess, sess.ex) : null; };
     sess.saveAttempt = () => saveAttempt(sess);
     sess.send = (type, payload) => sess.port?.send(type, payload);
+    sess.values = () => (sess.port && typeof sess.port.values === 'function' ? sess.port.values() : null);   // what the checks grader reads
     // lazy: an explorer starts when it comes into view (and only while there is room); offscreen it is paused
     if (ctx.start || !('IntersectionObserver' in window)) start();
     else {
@@ -1746,7 +1777,7 @@ const ACT = (() => {
     if (hidden.length) { c.exercises = keep; c._hidden = (c._hidden || 0) + hidden.length; }
     return hidden;
   }
-  return { ITEMS, mount, sweep, registerRuntime, registerGrader, caps, canRun, keepRunnable, strings, theme, LIVE };
+  return { ITEMS, mount, sweep, registerRuntime, runtime: id => RUNTIMES[id] || null, registerGrader, registerEngine, engine, engines, caps, canRun, keepRunnable, strings, theme, LIVE };
 })();
 
 /* the exercises already indexed (10_core.js) that this app cannot run leave the indexes; the pack is unchanged */
@@ -1758,7 +1789,7 @@ function dropUnrunnable() {
     comes back to the front (engine/curjobs.js App.stale); meanwhile every activity shows its fallback. */
 function checkRequires() {
   const req = Array.isArray(Noema.pack?.requires) ? Noema.pack.requires.filter(x => typeof x === 'string') : [];
-  const have = ACT.caps(), lack = req.filter(x => !have.has(x) && !x.startsWith('engine:'));
+  const have = ACT.caps(), lack = req.filter(x => !have.has(x));
   if (lack.length) { console.warn('[noema] this pack needs', lack.join(', ')); window.NoemaCurJobs?.App?.stale?.(); }
   return lack;
 }
@@ -1786,10 +1817,17 @@ R.sim = (ex, api) => {
   function showHint() { if (used >= hints.length || api.locked()) return null; const t = hints[used++]; sess.hintsUsed = used; hintBox.append(h('div', { class: 'fb', html: fmt(t) })); label(); return t; }
   sess.nextHint = showHint;
   label();
-  const el = h('div', {}, holder, hintBtn ? h('div', { class: 'row', style: { marginTop: '8px' } }, hintBtn) : null, hintBox);
+  const checksBox = h('div', { class: 'act-checks' });
+  const el = h('div', {}, holder, hintBtn ? h('div', { class: 'row', style: { marginTop: '8px' } }, hintBtn) : null, hintBox, checksBox);
+  /** the checks grader's verdict per check (its label from the activity's strings), so the learner sees which condition failed */
+  function showChecks(per) {
+    const T = ACT.strings(ACT.ITEMS[ex.activity]).table || {}, met = per.filter(x => x.ok).length;
+    checksBox.replaceChildren(h('div', { class: 'act-checks-sum' }, tE('engine.act.sim.checks', { met, total: per.length })),
+      h('ul', {}, per.filter(x => x.label && T[x.label]).map(x => h('li', { class: x.ok ? 'ok' : 'bad' }, (x.ok ? '✓ ' : '✗ ') + T[x.label]))));   // i18n-ignore (marks)
+  }
   return {
     el,
-    check() { const g = sess.grade?.(); if (!g) return null; sess.saveAttempt?.(); return g.ok; },
+    check() { const g = sess.grade?.(); if (!g) return null; if (Array.isArray(g.checks)) showChecks(g.checks); sess.saveAttempt?.(); return g.ok; },
     reveal() { if (hintBtn) hintBtn.disabled = true; if (sess.result?.passed && ex.reveal) el.append(h('div', { class: 'explain' }, h('div', { html: fmt(ex.reveal) }))); },
     bonus: () => -Math.round((4 + (ex.difficulty || 1) * 4) * (1 - Math.max(0.5, Math.pow(0.85, used)))),   // each hint used: score × 0.85, never below × 0.5 (docs/adr/001 D8)
     given: () => sess.result ? `(the activity reported: ${sess.result.passed ? 'passed' : 'not passed'}, score ${sess.result.score}${sess.result.detail ? ', ' + sess.result.detail : ''})` : '',   // i18n-ignore (AI context)
@@ -2065,6 +2103,1477 @@ APP.postMessage({t:'hello',nonce:N},'*');
   });
   /* i18n-ignore-end */
 })();
+
+/* ---- 35_activity_sim.js ---- */
+/* ===================== interactive activities — runtime sim-spec@1 (Tier B: a declarative simulation, docs/INTERACTIVE.md §12) =====================
+   The pack carries only DATA (item.spec): controls, formulas in the expression language (NoemaExpr, 35_simexpr.js), readouts and
+   plots. No code of the pack runs, so there is no frame: the app's own trusted code renders the controls and the plots with its own
+   DOM and styles (theme tokens, dark mode, keyboard, labels, 320 px) — docs/adr/001 "as built". The spec is checked with the same
+   rules as the validators (NoemaPackCheck.checkSimSpec) before anything is shown; a spec that fails shows the activity's fallback.
+   Engines (ACT.registerEngine): formula@1 is built in (the derived values are the model). Another engine computes outputs from the
+   inputs (scalars and time series): { id, check?(spec) → problems, create(spec, {seed, task}) → { run(inputs) → outputs },
+   workerSource? }. An engine with workerSource runs in a Worker (runs that can take longer than ~50 ms: P3's circuit engine);
+   one without runs inline. Every evaluation is NoemaExpr's: no loops, ≤ 2000 nodes per expression, ≤ 2000 points per plot.
+   The protocol with the core is the one of every runtime (ACTP messages): ready, pong, state, event; pause/resume/destroy. */
+(() => {
+  /* i18n-ignore-start */   // code; the words come from the pack's string tables and from tE() below
+  const SVGNS = 'http://www.w3.org/2000/svg';
+  const MAX_POINTS = 2000, RUN_TIMEOUT = 5000;
+  const COLORS = ['var(--c)', 'var(--bad)', 'var(--ok)', 'var(--warn)', 'var(--info)', 'var(--ink2)'];
+  const DASH = ['', '7 4', '2 3', '9 3 2 3', '4 4', '1 2'];   // a second cue besides the colour
+  const isNum = v => typeof v === 'number' && isFinite(v);
+  const truthy = v => typeof v === 'boolean' ? v : (v !== 0 && v === v);
+  const svg = (tag, attrs) => { const e = document.createElementNS(SVGNS, tag); for (const [k, v] of Object.entries(attrs || {})) if (v != null) e.setAttribute(k, v); return e; };
+  let seq = 0;
+
+  /* ---------- numbers for people: SI prefixes, the learner's decimal mark ---------- */
+  const SI = [[1e12, 'T'], [1e9, 'G'], [1e6, 'M'], [1e3, 'k'], [1, ''], [1e-3, 'm'], [1e-6, 'µ'], [1e-9, 'n'], [1e-12, 'p']];
+  function fmtNum(v, o, locale) {
+    if (typeof v === 'boolean') return v ? '✓' : '✗';
+    if (!isNum(v)) return '—';
+    const f = (n, opt) => { try { return new Intl.NumberFormat(locale, opt).format(n); } catch (e) { return String(n); } };
+    const unit = o && o.unit ? o.unit : '', fm = (o && o.format) || 'auto', dg = o && o.digits;
+    if (fm === 'fixed') return f(v, { minimumFractionDigits: dg ?? 2, maximumFractionDigits: dg ?? 2 }) + (unit ? ' ' + unit : '');
+    if (fm === 'si') {
+      const a = Math.abs(v); const [m, p] = a === 0 ? [1, ''] : (SI.find(([m]) => a >= m * 0.9995) || SI[SI.length - 1]);
+      return (f(v / m, { maximumSignificantDigits: dg ?? 3 }) + ' ' + p + unit).trim();
+    }
+    const a = Math.abs(v);
+    if (a !== 0 && (a >= 1e7 || a < 1e-4)) return f(v, { notation: 'scientific', maximumSignificantDigits: dg ?? 3 }) + (unit ? ' ' + unit : '');
+    return f(v, { maximumSignificantDigits: dg ?? 4 }) + (unit ? ' ' + unit : '');
+  }
+
+  /* ---------- engines ---------- */
+  ACT.registerEngine({ id: 'formula@1', check: () => [], create: () => ({ run: () => ({}) }) });   // the derived values are the model
+
+  /** An engine instance behind one async interface: inline, or in a Worker when the engine has workerSource. */
+  function engineRunner(E, spec, opts, onFail) {
+    let worker = null, url = null, inst = null, busy = null, next = null, timer = null, dead = false;
+    if (E.workerSource && typeof Worker === 'function') {
+      try {
+        const bridge = "self.onmessage=function(e){var m=e.data;try{if(m.t==='create'){self.__i=self.noemaEngine.create(m.spec,m.opts);return;}var i=self.__i,r=(i.run||i.step).call(i,m.inputs);postMessage({t:'out',id:m.id,out:r});}catch(x){postMessage({t:'err',id:m.id,msg:String(x&&x.message||x)});}};";
+        url = URL.createObjectURL(new Blob([E.workerSource + '\n;' + bridge], { type: 'text/javascript' }));
+        worker = new Worker(url);
+        worker.postMessage({ t: 'create', spec, opts });
+      } catch (e) { console.warn('[noema] sim-spec: no worker here, the engine runs inline', e); worker = null; }
+    }
+    if (!worker) inst = E.create(spec, opts);
+    function finish() { clearTimeout(timer); busy = null; if (next) { const n = next; next = null; run(n.inputs, n.done); } }
+    function run(inputs, done) {
+      if (dead) return;
+      if (!worker) {
+        const t0 = performance.now(); let out = null;
+        try { out = (inst.run || inst.step).call(inst, inputs); } catch (e) { console.warn('[noema] sim-spec engine', E.id, e); }
+        const ms = performance.now() - t0; if (ms > 50) console.warn(`[noema] sim-spec: engine ${E.id} took ${Math.round(ms)} ms inline; give it a workerSource`);
+        return done(out);
+      }
+      if (busy) { next = { inputs, done }; return; }   // the latest inputs win
+      busy = { id: ++seq, done };
+      timer = setTimeout(() => { if (!busy) return; dead = true; close(); onFail('runaway'); }, RUN_TIMEOUT);
+      worker.onmessage = e => { const m = e.data; if (!busy || !m || m.id !== busy.id) return; const d = busy.done; finish(); d(m.t === 'out' ? m.out : null); if (m.t === 'err') console.warn('[noema] sim-spec engine', E.id, m.msg); };
+      worker.onerror = e => { e.preventDefault?.(); console.warn('[noema] sim-spec engine worker', E.id, e.message); const d = busy?.done; finish(); d?.(null); };
+      worker.postMessage({ t: 'run', id: busy.id, inputs });
+    }
+    function close() { dead = true; clearTimeout(timer); try { worker?.terminate(); } catch (e) { } if (url) URL.revokeObjectURL(url); worker = null; }
+    return { run, close, inWorker: () => !!worker };
+  }
+
+  /* ---------- plots: SVG drawn by the app, coloured by the theme's tokens ---------- */
+  function niceTicks(lo, hi, n) {
+    const span = hi - lo; if (!(span > 0)) return [lo];
+    const raw = span / Math.max(1, n), mag = Math.pow(10, Math.floor(Math.log10(raw))), r = raw / mag;
+    const step = (r < 1.5 ? 1 : r < 3 ? 2 : r < 7 ? 5 : 10) * mag, out = [];
+    for (let v = Math.ceil(lo / step - 1e-9) * step; v <= hi + step * 1e-9; v += step) out.push(Math.abs(v) < step * 1e-9 ? 0 : v);
+    return out;
+  }
+  function logTicks(lo, hi, maxN) {
+    const a = Math.floor(Math.log10(lo) + 1e-9), b = Math.ceil(Math.log10(hi) - 1e-9), out = [];
+    const every = Math.max(1, Math.ceil((b - a + 1) / Math.max(2, maxN)));
+    for (let k = a; k <= b; k += every) { const v = Math.pow(10, k); if (v >= lo * 0.999 && v <= hi * 1.001) out.push(v); }
+    return out.length ? out : [lo, hi];
+  }
+  /** draw one plot into fig: data = { xs:[…], lines:[{ys, label}], marks:[{axis, v, label}] } */
+  function drawPlot(fig, p, data, ctx) {
+    const W = Math.max(220, Math.floor(fig.clientWidth || 320)), H = Math.round(Math.max(170, Math.min(300, W * 0.55)));
+    const xa = p.x || {}, ya = p.y || {}, xlog = xa.scale === 'log', ylog = ya.scale === 'log';
+    const ml = W < 360 ? 44 : 54, mr = 12, mt = 10, mb = 40;
+    let [x0, x1] = data.xr;
+    let ys = []; for (const l of data.lines) for (const v of l.ys) if (isNum(v) && (!ylog || v > 0)) ys.push(v);
+    let y0 = isNum(data.yr[0]) ? data.yr[0] : null, y1 = isNum(data.yr[1]) ? data.yr[1] : null;
+    if (y0 == null || y1 == null) {
+      let lo = Infinity, hi = -Infinity; for (const v of ys) { if (v < lo) lo = v; if (v > hi) hi = v; }
+      if (!isFinite(lo)) { lo = ylog ? 1 : 0; hi = ylog ? 10 : 1; }
+      if (lo === hi) { if (ylog) { lo /= 2; hi *= 2; } else { lo -= 1; hi += 1; } }
+      const pad = ylog ? 1 : (hi - lo) * 0.06;
+      if (y0 == null) y0 = ylog ? lo / 1.2 : lo - pad;
+      if (y1 == null) y1 = ylog ? hi * 1.2 : hi + pad;
+    }
+    if (!(x1 > x0)) x1 = x0 + 1; if (!(y1 > y0)) y1 = y0 + 1;
+    const tx = xlog ? v => Math.log10(v) : v => v, ty = ylog ? v => Math.log10(v) : v => v;
+    const X = v => ml + (tx(v) - tx(x0)) / (tx(x1) - tx(x0)) * (W - ml - mr), Y = v => mt + (1 - (ty(v) - ty(y0)) / (ty(y1) - ty(y0))) * (H - mt - mb);
+    const s = svg('svg', { viewBox: `0 0 ${W} ${H}`, width: W, height: H, role: 'img', 'aria-label': ctx.aria, focusable: 'false' });
+    const cid = 'simclip' + (++seq);
+    const defs = svg('defs'); const cp = svg('clipPath', { id: cid }); cp.append(svg('rect', { x: ml, y: mt, width: W - ml - mr, height: H - mt - mb })); defs.append(cp); s.append(defs);
+    s.append(svg('rect', { x: ml, y: mt, width: W - ml - mr, height: H - mt - mb, fill: 'none', style: 'stroke:var(--line)' }));
+    // tick labels: SI prefixes carry the unit (1 kHz, 200 µs); a plain number does not (the axis label has it)
+    const tick = (a, lg) => { const fm = a.format || (lg ? 'si' : 'auto'); return v => fmtNum(v, { format: fm, digits: a.digits || 3, unit: fm === 'si' ? a.unit : '' }, ctx.locale); };
+    const nt = Math.max(2, Math.floor((W - ml - mr) / 70)), fx = tick(xa, xlog), fy = tick(ya, ylog);
+    const txt = (x, y, t, anchor, cls) => { const e = svg('text', { x, y, 'text-anchor': anchor, class: cls || 'sim-tick' }); e.textContent = t; return e; };
+    for (const v of xlog ? logTicks(x0, x1, nt) : niceTicks(x0, x1, nt)) { const px = X(v); s.append(svg('line', { x1: px, x2: px, y1: mt, y2: H - mb, class: 'sim-grid' }), txt(px, H - mb + 14, fx(v), 'middle')); }
+    for (const v of ylog ? logTicks(y0, y1, 5) : niceTicks(y0, y1, 5)) { const py = Y(v); s.append(svg('line', { x1: ml, x2: W - mr, y1: py, y2: py, class: 'sim-grid' }), txt(ml - 5, py + 4, fy(v), 'end')); }
+    if (ctx.xLabel) s.append(txt(ml + (W - ml - mr) / 2, H - 6, ctx.xLabel, 'middle', 'sim-axl'));
+    if (ctx.yLabel) { const e = txt(0, 0, ctx.yLabel, 'middle', 'sim-axl'); e.setAttribute('transform', `translate(11 ${mt + (H - mt - mb) / 2}) rotate(-90)`); s.append(e); }
+    const g = svg('g', { 'clip-path': `url(#${cid})` });
+    const clampY = v => Math.max(-1e4, Math.min(1e4, v));
+    data.lines.forEach((l, j) => {
+      let d = '', pen = false;
+      for (let i = 0; i < data.xs.length; i++) {
+        const x = data.xs[i], y = l.ys[i];
+        if (!isNum(x) || !isNum(y) || (xlog && x <= 0) || (ylog && y <= 0)) { pen = false; continue; }
+        d += (pen ? 'L' : 'M') + X(x).toFixed(1) + ' ' + clampY(Y(y)).toFixed(1); pen = true;
+      }
+      g.append(svg('path', { d: d || 'M0 0', fill: 'none', 'stroke-width': 2, 'stroke-linejoin': 'round', 'stroke-dasharray': DASH[j % DASH.length] || null, style: `stroke:${COLORS[j % COLORS.length]}`, class: 'sim-line' }));
+    });
+    for (const m of data.marks) {
+      if (!isNum(m.v)) continue;
+      if (m.axis === 'x') { if ((xlog && m.v <= 0) || m.v < x0 || m.v > x1) continue; const px = X(m.v); g.append(svg('line', { x1: px, x2: px, y1: mt, y2: H - mb, class: 'sim-mark' })); if (m.label) g.append(txt(px + 4, mt + 12, m.label, 'start', 'sim-markl')); }
+      else { if ((ylog && m.v <= 0) || m.v < y0 || m.v > y1) continue; const py = Y(m.v); g.append(svg('line', { x1: ml, x2: W - mr, y1: py, y2: py, class: 'sim-mark' })); if (m.label) g.append(txt(W - mr - 4, py - 4, m.label, 'end', 'sim-markl')); }
+    }
+    s.append(g);
+    return s;
+  }
+
+  ACT.registerRuntime({
+    id: 'sim-spec@1', version: 1, autoHeight: true,
+    /** → port { send(type, payload), close(), values() } */
+    mount(box, { act, init, onMessage, onFail }) {
+      const later = f => Promise.resolve().then(f);   // never call back before the core holds the port
+      const out = (type, payload) => { if (!closed) onMessage(ACTP.out(type, payload)); };
+      let closed = false;
+      const port = { send() { }, close() { closed = true; }, values: () => null };
+      const spec = act.spec, tables = act.strings && typeof act.strings === 'object' ? act.strings : null;
+      const engId = spec && typeof spec === 'object' && 'engine' in spec ? spec.engine : 'formula@1';
+      const E = typeof engId === 'string' ? ACT.engine(engId) : null;
+      if (!E) { console.warn('[noema] sim-spec', act.id, 'unknown engine', engId); later(() => onFail('unsupported')); return port; }
+      const probs = window.NoemaPackCheck?.checkSimSpec ? NoemaPackCheck.checkSimSpec(spec, tables, ACT.engines()) : ['the spec checker is not loaded'];
+      if (!probs.length && E.check) try { probs.push(...(E.check(spec) || [])); } catch (e) { probs.push(String(e.message || e)); }
+      if (probs.length) { console.warn('[noema] sim-spec', act.id, probs.slice(0, 5).join(' | ')); later(() => onFail('spec')); return port; }
+
+      const T = init.strings || {}, locale = init.locale || 'en';
+      const tt = k => (k && Object.prototype.hasOwnProperty.call(T, k)) ? T[k] : '';
+      const C = NoemaExpr.compile;
+      const consts = Object.assign({}, spec.consts || {});
+      for (const [k, v] of Object.entries(init.task || {})) if (Object.prototype.hasOwnProperty.call(consts, k) && isNum(v)) consts[k] = v;
+      const params = spec.params, derived = (spec.derived || []).map(d => ({ id: d.id, f: C(d.expr) }));
+      const readouts = (spec.readouts || []).map(r => ({ ...r, f: C(r.expr) }));
+      const lim = v => typeof v === 'string' ? C(v) : (() => v);
+      const plots = (spec.plots || []).map(p => ({ p, xmin: p.x.min != null ? lim(p.x.min) : null, xmax: p.x.max != null ? lim(p.x.max) : null, ymin: p.y?.min != null ? lim(p.y.min) : null, ymax: p.y?.max != null ? lim(p.y.max) : null,
+        lines: p.series.map(s => ({ ...s, f: p.kind === 'function' ? C(s.expr) : null })), marks: (p.marks || []).map(m => ({ ...m, f: C(m.expr) })) }));
+      const ev = (f, env) => { try { return f(env); } catch (e) { return NaN; } };
+
+      /* the values: saved state, else the defaults */
+      const def = p => p.kind === 'toggle' ? !!p.default : p.kind === 'choice' ? (p.default ?? p.options[0].value) : p.default;
+      const fits = (p, v) => p.kind === 'toggle' ? typeof v === 'boolean' : p.kind === 'choice' ? p.options.some(o => o.value === v) : (isNum(v) && v >= p.min && v <= p.max);
+      const vals = {}; const saved = init.state?.data?.values;
+      for (const p of params) vals[p.id] = saved && fits(p, saved[p.id]) ? saved[p.id] : def(p);
+
+      /* ---------- the view ---------- */
+      const uid = 'sim' + (++seq) + '-';
+      const root = h('div', { class: 'sim', lang: locale });
+      if (spec.title) root.append(h('h4', { class: 'sim-title' }, tt(spec.title)));
+      if (spec.intro) root.append(h('p', { class: 'sim-intro' }, tt(spec.intro)));
+      const ctl = h('div', { class: 'sim-ctl' }), ctlEls = {};
+      const snap = (p, v) => {
+        if (p.kind === 'number' || p.kind === 'slider') {
+          if (p.step) v = p.min + Math.round((v - p.min) / p.step) * p.step;
+          else if (p.scale === 'log') { const k = Math.pow(10, Math.floor(Math.log10(Math.abs(v))) - 2); v = Math.round(v / k) * k; }
+          v = Math.min(p.max, Math.max(p.min, +v.toPrecision(12)));
+        }
+        return v;
+      };
+      const pos = p => p.scale === 'log' ? Math.round(1000 * Math.log(vals[p.id] / p.min) / Math.log(p.max / p.min)) : vals[p.id];
+      const fromPos = (p, x) => p.scale === 'log' ? p.min * Math.pow(p.max / p.min, x / 1000) : x;
+      const showVal = p => fmtNum(vals[p.id], { unit: p.unit, format: p.format || (p.scale === 'log' ? 'si' : 'auto'), digits: p.digits }, locale);
+      for (const p of params) {
+        const id = uid + p.id, lab = tt(p.label);
+        if (p.kind === 'slider' || p.kind === 'number') {
+          const o = h('output', { for: id }), num = h('input', { class: 'sim-num', type: 'number', 'data-param': p.id, inputmode: 'decimal', min: p.min, max: p.max, step: p.step || 'any', 'aria-label': lab + (p.unit ? ' (' + p.unit + ')' : ''), value: vals[p.id] });
+          const rng = p.kind === 'slider' ? h('input', { id, type: 'range', min: p.scale === 'log' ? 0 : p.min, max: p.scale === 'log' ? 1000 : p.max, step: p.scale === 'log' ? 1 : (p.step || 'any'), value: pos(p) }) : null;
+          if (!rng) num.id = id;
+          const set = (v, commit) => { if (!isNum(v)) return; vals[p.id] = snap(p, v); paint(p); changed(p, commit); };
+          rng?.addEventListener('input', () => set(fromPos(p, +rng.value), false));
+          rng?.addEventListener('change', () => set(fromPos(p, +rng.value), true));
+          num.addEventListener('input', () => { const v = parseFloat(num.value); if (isNum(v) && v >= p.min && v <= p.max) set(v, false); });
+          num.addEventListener('change', () => { const v = parseFloat(num.value); if (isNum(v)) set(Math.min(p.max, Math.max(p.min, v)), true); else paint(p); });
+          ctlEls[p.id] = { o, num, rng };
+          ctl.append(h('div', { class: 'sim-p' }, h('label', { for: id, class: 'sim-lab' }, h('span', {}, lab), o), h('div', { class: 'sim-row' }, rng, num)));
+        } else if (p.kind === 'toggle') {
+          const cb = h('input', { id, type: 'checkbox', role: 'switch', 'data-param': p.id });
+          cb.addEventListener('change', () => { vals[p.id] = cb.checked; changed(p, true); });
+          ctlEls[p.id] = { cb };
+          ctl.append(h('div', { class: 'sim-p sim-tog' }, cb, h('label', { for: id }, lab)));
+        } else {
+          const sel = h('select', { id, class: 'sim-sel', 'data-param': p.id }, p.options.map(o => h('option', { value: String(o.value) }, tt(o.label))));
+          sel.addEventListener('change', () => { vals[p.id] = p.options[sel.selectedIndex].value; changed(p, true); });
+          ctlEls[p.id] = { sel };
+          ctl.append(h('div', { class: 'sim-p' }, h('label', { for: id, class: 'sim-lab' }, lab), sel));
+        }
+      }
+      function paint(p) {
+        const c = ctlEls[p.id];
+        if (c.o) { c.o.textContent = showVal(p); if (document.activeElement !== c.num) c.num.value = String(vals[p.id]); if (c.rng) { c.rng.value = String(pos(p)); c.rng.setAttribute('aria-valuetext', showVal(p)); } }
+        if (c.cb) c.cb.checked = !!vals[p.id];
+        if (c.sel) c.sel.selectedIndex = Math.max(0, p.options.findIndex(o => o.value === vals[p.id]));
+      }
+      root.append(ctl);
+      const ro = readouts.length ? h('dl', { class: 'sim-ro', 'aria-label': tE('engine.act.sim.results'), 'aria-live': 'polite' }) : null;
+      const roEls = readouts.map(r => { const dd = h('dd', {}); ro.append(h('div', {}, h('dt', {}, tt(r.label)), dd)); return dd; });
+      if (ro) root.append(ro);
+      const figs = plots.map(P => {
+        const p = P.p, fig = h('figure', { class: 'sim-plot' });
+        const axisLab = a => a && a.label ? tt(a.label) + (a.unit ? ' (' + a.unit + ')' : '') : (a && a.unit ? a.unit : '');
+        P.xLabel = axisLab(p.x); P.yLabel = axisLab(p.y);
+        P.aria = (p.title ? tt(p.title) + '. ' : '') + tE('engine.act.sim.plot', { y: P.yLabel || '—', x: P.xLabel || '—' });
+        if (p.title) fig.append(h('figcaption', {}, tt(p.title)));
+        P.holder = h('div', { class: 'sim-svg' }); fig.append(P.holder);
+        const named = P.lines.filter(l => l.label);
+        if (named.length) fig.append(h('div', { class: 'sim-leg', 'aria-hidden': 'true' }, P.lines.map((l, j) => l.label ? h('span', {}, h('i', { class: 'sim-sw', style: { borderTopColor: COLORS[j % COLORS.length], borderTopStyle: DASH[j % DASH.length] ? 'dashed' : 'solid' } }), tt(l.label)) : null)));
+        root.append(fig);
+        return fig;
+      });
+      const busyNote = h('div', { class: 'sim-busy', 'aria-hidden': 'true' });
+      const reset = h('button', { class: 'btn ghost small', type: 'button', onclick: () => { for (const p of params) { vals[p.id] = def(p); paint(p); } out('event', { name: 'reset' }); recompute(); saveSoon(); } }, '↺ ' + tE('engine.act.sim.reset'));
+      root.append(h('div', { class: 'sim-foot' }, busyNote, reset));
+      box.append(root);
+
+      /* ---------- computing ---------- */
+      let env = {}, outputs = {}, paused = false, dirty = false, saveT = null, raf = 0, rev = 0, doneRev = 0;
+      const runner = E.id === 'formula@1' ? null : engineRunner(E, spec, { seed: init.seed >>> 0, task: { ...consts } }, why => onFail(why));
+      const declared = spec.outputs || [];
+      function cleanOutputs(o) {
+        const r = {};
+        for (const d of declared) {
+          const v = o && typeof o === 'object' ? o[d.id] : undefined;
+          if (d.kind === 'scalar') r[d.id] = isNum(v) || typeof v === 'boolean' ? v : NaN;
+          else { let a = Array.isArray(v) || ArrayBuffer.isView(v) ? Array.from(v, x => +x) : []; if (a.length > MAX_POINTS) { const k = a.length / MAX_POINTS; a = Array.from({ length: MAX_POINTS }, (_, i) => a[Math.floor(i * k)]); } r[d.id] = a; }
+        }
+        return r;
+      }
+      function base() {
+        const e = Object.assign({}, consts);
+        for (const p of params) e[p.id] = vals[p.id];
+        for (const d of derived) e[d.id] = ev(d.f, e);
+        return e;
+      }
+      function recompute() {
+        if (closed) return;
+        if (paused) { dirty = true; return; }
+        const e = base(), my = ++rev;   // values() is null until the latest inputs are computed (Check never grades older results)
+        if (!runner) { env = e; doneRev = my; render(); return; }
+        busyNote.textContent = tE('engine.act.sim.computing');
+        runner.run(e, o => { if (closed) return; outputs = cleanOutputs(o); for (const d of declared) if (d.kind === 'scalar') e[d.id] = outputs[d.id]; env = e; if (my === rev) { doneRev = my; busyNote.textContent = ''; } render(); });
+      }
+      function render() {
+        readouts.forEach((r, i) => { roEls[i].textContent = fmtNum(ev(r.f, env), r, locale); });
+        plots.forEach((P, i) => {
+          const p = P.p, data = { lines: [], marks: P.marks.map(m => ({ axis: m.axis, v: ev(m.f, env), label: m.label ? tt(m.label) : '' })), yr: [P.ymin ? ev(P.ymin, env) : null, P.ymax ? ev(P.ymax, env) : null] };
+          if (p.kind === 'function') {
+            const a = ev(P.xmin, env), b = ev(P.xmax, env), n = Math.min(MAX_POINTS, p.points || 200), lg = p.x.scale === 'log' && a > 0 && b > 0;
+            data.xr = [a, b]; data.xs = Array.from({ length: n }, (_, k) => lg ? a * Math.pow(b / a, k / (n - 1)) : a + (b - a) * k / (n - 1));
+            const e2 = Object.assign({}, env);
+            data.lines = P.lines.map(l => ({ ys: data.xs.map(x => { e2[p.x.var] = x; const v = ev(l.f, e2); return typeof v === 'boolean' ? +v : v; }) }));
+          } else {
+            data.xs = outputs[p.x.series] || [];
+            let lo = Infinity, hi = -Infinity; for (const v of data.xs) if (isNum(v)) { if (v < lo) lo = v; if (v > hi) hi = v; }
+            data.xr = [P.xmin ? ev(P.xmin, env) : (isFinite(lo) ? lo : 0), P.xmax ? ev(P.xmax, env) : (isFinite(hi) ? hi : 1)];
+            data.lines = P.lines.map(l => ({ ys: outputs[l.y] || [] }));
+          }
+          P.last = data;
+          P.holder.replaceChildren(drawPlot(figs[i], p, data, { locale, aria: P.aria, xLabel: P.xLabel, yLabel: P.yLabel }));
+        });
+      }
+      function saveSoon() { clearTimeout(saveT); saveT = setTimeout(() => out('state', { version: init.stateVersion || 1, data: { values: { ...vals } } }), 250); }
+      function changed(p, commit) {
+        recompute(); saveSoon();
+        if (commit) out('event', { name: 'param', data: { id: p.id, v: vals[p.id] } });
+      }
+      const ro2 = typeof ResizeObserver === 'function' ? new ResizeObserver(() => { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => { if (!closed && !paused) plots.forEach((P, i) => P.last && P.holder.replaceChildren(drawPlot(figs[i], P.p, P.last, { locale, aria: P.aria, xLabel: P.xLabel, yLabel: P.yLabel }))); }); }) : null;
+      ro2?.observe(root);
+      for (const p of params) paint(p);
+      recompute();
+
+      port.send = (type, payload, extra) => {
+        if (closed) return;
+        if (type === 'ping') return later(() => out('pong'));
+        if (type === 'pause') { paused = true; return; }
+        if (type === 'resume') { paused = false; if (dirty) { dirty = false; recompute(); } return; }
+        if (type === 'destroy') return port.close();
+      };
+      port.close = () => { if (closed) return; closed = true; clearTimeout(saveT); cancelAnimationFrame(raf); ro2?.disconnect(); runner?.close(); root.remove(); };
+      port.values = () => closed || doneRev !== rev ? null : { ...env };
+      later(() => out('ready', { protocols: [1] }));
+      return port;
+    },
+  });
+  /* i18n-ignore-end */
+})();
+
+/* ---- 35_simexpr.js ---- */
+/* ===================== interactive activities — the expression language of sim-spec@1 (docs/adr/001 D5, docs/INTERACTIVE_SIMEXPR.md) =====================
+   A tiny, safe language for the formulas of declarative simulations: numbers, booleans, variables, + - * / % ^, comparisons,
+   && || !, c ? a : b and a fixed list of math functions. No eval, no new Function, no property access, no strings, no loops:
+   a hand-written lexer and recursive-descent (precedence-climbing) parser build a JSON-able tree, a validator checks it, and
+   compile() turns it into a tree of closures. Each evaluation visits each node at most once (≤ 2000 nodes).
+   Twin: tools/simexpr.py — the same grammar, tree, error codes and messages, and the same doubles bit for bit
+   (tests/simexpr.js runs a shared corpus and a seeded fuzz through both). For that the transcendental functions are not the
+   platform's Math (each browser and libm differ in the last bit) but ports of fdlibm, written with + - * / and bit access only;
+   sqrt, floor, ceil, trunc, abs and % are exact in IEEE 754 and so the same everywhere.
+
+   The function ports are adapted from fdlibm (http://www.netlib.org/fdlibm) via V8's src/base/ieee754.cc:
+   ====================================================
+   Copyright (C) 1993 by Sun Microsystems, Inc. All rights reserved.
+   Developed at SunSoft, a Sun Microsystems, Inc. business.
+   Permission to use, copy, modify, and distribute this
+   software is freely granted, provided that this notice
+   is preserved.
+   ==================================================== */
+(function (root) {
+  /* i18n-ignore-start */   // code and developer-facing diagnostics, not UI text
+  'use strict';
+  const LIMITS = Object.freeze({ src: 2000, nodes: 2000, depth: 64, args: 16 });
+
+  // ---------------------------------------------------------------- doubles, word by word
+  const F64 = new Float64Array(1), U32 = new Uint32Array(F64.buffer), I32 = new Int32Array(F64.buffer);
+  F64[0] = 1; const HI = U32[1] === 0x3FF00000 ? 1 : 0, LO = 1 - HI;
+  const hiw = x => { F64[0] = x; return I32[HI]; };                       // high word, signed (C int32_t)
+  const low = x => { F64[0] = x; return U32[LO]; };                       // low word, unsigned
+  const words = (h, l) => { I32[HI] = h | 0; U32[LO] = l >>> 0; return F64[0]; };
+  const setLow = (x, l) => { F64[0] = x; U32[LO] = l >>> 0; return F64[0]; };
+  const setHigh = (x, h) => { F64[0] = x; I32[HI] = h | 0; return F64[0]; };
+  const fabs = Math.abs, sqrt = Math.sqrt, trunc = Math.trunc;
+  const TWO1023 = words(0x7FE00000, 0), TWOM969 = words(0x03600000, 0);   // 2^1023, 2^-969
+
+  function scalbn(x, n) {   // x * 2^n, rounded once (musl)
+    let y = x;
+    if (n > 1023) { y *= TWO1023; n -= 1023; if (n > 1023) { y *= TWO1023; n -= 1023; if (n > 1023) n = 1023; } }
+    else if (n < -1022) { y *= TWOM969; n += 969; if (n < -1022) { y *= TWOM969; n += 969; if (n < -1022) n = -1022; } }
+    return y * words((0x3FF + n) << 20, 0);
+  }
+
+  // ---------------------------------------------------------------- argument reduction for sin / cos / tan
+  const TWO_OVER_PI = [
+    0xA2F983, 0x6E4E44, 0x1529FC, 0x2757D1, 0xF534DD, 0xC0DB62, 0x95993C, 0x439041, 0xFE5163, 0xABDEBB, 0xC561B7, 0x246E3A,
+    0x424DD2, 0xE00649, 0x2EEA09, 0xD1921C, 0xFE1DEB, 0x1CB129, 0xA73EE8, 0x8235F5, 0x2EBB44, 0x84E99C, 0x7026B4, 0x5F7E41,
+    0x3991D6, 0x398353, 0x39F49C, 0x845F8B, 0xBDF928, 0x3B1FF8, 0x97FFDE, 0x05980F, 0xEF2F11, 0x8B5A0A, 0x6D1F6D, 0x367ECF,
+    0x27CB09, 0xB74F46, 0x3F669E, 0x5FEA2D, 0x7527BA, 0xC7EBE5, 0xF17B3D, 0x0739F7, 0x8A5292, 0xEA6BFB, 0x5FB11F, 0x8D5D08,
+    0x560330, 0x46FC7B, 0x6BABF0, 0xCFBC20, 0x9AF436, 0x1DA9E3, 0x91615E, 0xE61B08, 0x659985, 0x5F14A0, 0x68408D, 0xFFD880,
+    0x4D7327, 0x310606, 0x1556CA, 0x73A8C9, 0x60E27B, 0xC08C6B];
+  const NPIO2_HW = [
+    0x3FF921FB, 0x400921FB, 0x4012D97C, 0x401921FB, 0x401F6A7A, 0x4022D97C, 0x4025FDBB, 0x402921FB, 0x402C463A, 0x402F6A7A,
+    0x4031475C, 0x4032D97C, 0x40346B9C, 0x4035FDBB, 0x40378FDB, 0x403921FB, 0x403AB41B, 0x403C463A, 0x403DD85A, 0x403F6A7A,
+    0x40407E4C, 0x4041475C, 0x4042106C, 0x4042D97C, 0x4043A28C, 0x40446B9C, 0x404534AC, 0x4045FDBB, 0x4046C6CB, 0x40478FDB,
+    0x404858EB, 0x404921FB];
+  const PIO2 = [1.57079625129699707031e+00, 7.54978941586159635335e-08, 5.39030252995776476554e-15, 3.28200341580791294123e-22,
+    1.27065575308067607349e-29, 1.22933308981111328932e-36, 2.73370053816464559624e-44, 2.16741683877804819444e-51];
+  const Y = [0, 0];   // the reduced argument y0 + y1
+
+  function kernelRemPio2(x, e0, nx) {   // prec 2 (jk = 4), as V8
+    const two24 = 1.67772160000000000000e+07, twon24 = 5.96046447753906250000e-08, jk = 4, jp = 4;
+    const iq = new Array(20).fill(0), f = new Array(20).fill(0), fq = new Array(20).fill(0), q = new Array(20).fill(0);
+    const jx = nx - 1;
+    let jv = trunc((e0 - 3) / 24); if (jv < 0) jv = 0;
+    let q0 = e0 - 24 * (jv + 1);
+    let i, j, k, z, fw, n, ih, carry;
+    j = jv - jx; const m = jx + jk;
+    for (i = 0; i <= m; i++, j++) f[i] = j < 0 ? 0 : TWO_OVER_PI[j];
+    for (i = 0; i <= jk; i++) { for (j = 0, fw = 0; j <= jx; j++) fw += x[j] * f[jx + i - j]; q[i] = fw; }
+    let jz = jk;
+    for (;;) {   // recompute:
+      for (i = 0, j = jz, z = q[jz]; j > 0; i++, j--) { fw = trunc(twon24 * z); iq[i] = trunc(z - two24 * fw); z = q[j - 1] + fw; }
+      z = scalbn(z, q0);
+      z -= 8.0 * Math.floor(z * 0.125);
+      n = trunc(z);
+      z -= n;
+      ih = 0;
+      if (q0 > 0) { i = iq[jz - 1] >> (24 - q0); n += i; iq[jz - 1] -= i << (24 - q0); ih = iq[jz - 1] >> (23 - q0); }
+      else if (q0 === 0) ih = iq[jz - 1] >> 23;
+      else if (z >= 0.5) ih = 2;
+      if (ih > 0) {
+        n += 1; carry = 0;
+        for (i = 0; i < jz; i++) {
+          j = iq[i];
+          if (carry === 0) { if (j !== 0) { carry = 1; iq[i] = 0x1000000 - j; } } else iq[i] = 0xFFFFFF - j;
+        }
+        if (q0 > 0) { if (q0 === 1) iq[jz - 1] &= 0x7FFFFF; else if (q0 === 2) iq[jz - 1] &= 0x3FFFFF; }
+        if (ih === 2) { z = 1.0 - z; if (carry !== 0) z -= scalbn(1.0, q0); }
+      }
+      if (z === 0) {
+        j = 0;
+        for (i = jz - 1; i >= jk; i--) j |= iq[i];
+        if (j === 0) {
+          for (k = 1; jk >= k && iq[jk - k] === 0; k++) { /* k = number of terms needed */ }
+          for (i = jz + 1; i <= jz + k; i++) { f[jx + i] = TWO_OVER_PI[jv + i]; for (j = 0, fw = 0; j <= jx; j++) fw += x[j] * f[jx + i - j]; q[i] = fw; }
+          jz += k;
+          continue;
+        }
+      }
+      break;
+    }
+    if (z === 0) { jz -= 1; q0 -= 24; while (iq[jz] === 0) { jz--; q0 -= 24; } }
+    else {
+      z = scalbn(z, -q0);
+      if (z >= two24) { fw = trunc(twon24 * z); iq[jz] = trunc(z - two24 * fw); jz += 1; q0 += 24; iq[jz] = fw; }
+      else iq[jz] = trunc(z);
+    }
+    fw = scalbn(1.0, q0);
+    for (i = jz; i >= 0; i--) { q[i] = fw * iq[i]; fw *= twon24; }
+    for (i = jz; i >= 0; i--) { for (fw = 0, k = 0; k <= jp && k <= jz - i; k++) fw += PIO2[k] * q[i + k]; fq[jz - i] = fw; }
+    fw = 0;
+    for (i = jz; i >= 0; i--) fw += fq[i];
+    Y[0] = ih === 0 ? fw : -fw;
+    fw = fq[0] - fw;
+    for (i = 1; i <= jz; i++) fw += fq[i];
+    Y[1] = ih === 0 ? fw : -fw;
+    return n & 7;
+  }
+
+  function remPio2(x) {   // → n, with x - n*pi/2 = Y[0] + Y[1]
+    const invpio2 = 6.36619772367581382433e-01, pio2_1 = 1.57079632673412561417e+00, pio2_1t = 6.07710050650619224932e-11,
+      pio2_2 = 6.07710050630396597660e-11, pio2_2t = 2.02226624879595063154e-21, pio2_3 = 2.02226624871116645580e-21,
+      pio2_3t = 8.47842766036889956997e-32;
+    const hx = hiw(x), ix = hx & 0x7FFFFFFF;
+    let z, w, t, r, fn, n, i, j;
+    if (ix <= 0x3FE921FB) { Y[0] = x; Y[1] = 0; return 0; }
+    if (ix < 0x4002D97C) {
+      if (hx > 0) {
+        z = x - pio2_1;
+        if (ix !== 0x3FF921FB) { Y[0] = z - pio2_1t; Y[1] = (z - Y[0]) - pio2_1t; }
+        else { z -= pio2_2; Y[0] = z - pio2_2t; Y[1] = (z - Y[0]) - pio2_2t; }
+        return 1;
+      }
+      z = x + pio2_1;
+      if (ix !== 0x3FF921FB) { Y[0] = z + pio2_1t; Y[1] = (z - Y[0]) + pio2_1t; }
+      else { z += pio2_2; Y[0] = z + pio2_2t; Y[1] = (z - Y[0]) + pio2_2t; }
+      return -1;
+    }
+    if (ix <= 0x413921FB) {
+      t = fabs(x);
+      n = trunc(t * invpio2 + 0.5);
+      fn = n;
+      r = t - fn * pio2_1;
+      w = fn * pio2_1t;
+      if (n < 32 && ix !== NPIO2_HW[n - 1]) Y[0] = r - w;
+      else {
+        j = ix >> 20;
+        Y[0] = r - w;
+        i = j - ((hiw(Y[0]) >> 20) & 0x7FF);
+        if (i > 16) {
+          t = r; w = fn * pio2_2; r = t - w; w = fn * pio2_2t - ((t - r) - w); Y[0] = r - w;
+          i = j - ((hiw(Y[0]) >> 20) & 0x7FF);
+          if (i > 49) { t = r; w = fn * pio2_3; r = t - w; w = fn * pio2_3t - ((t - r) - w); Y[0] = r - w; }
+        }
+      }
+      Y[1] = (r - Y[0]) - w;
+      if (hx < 0) { Y[0] = -Y[0]; Y[1] = -Y[1]; return -n; }
+      return n;
+    }
+    if (ix >= 0x7FF00000) { Y[0] = Y[1] = x - x; return 0; }
+    z = words(0, low(x));
+    const e0 = (ix >> 20) - 1046;
+    z = setHigh(z, ix - (e0 << 20));
+    const tx = [0, 0, 0];
+    for (i = 0; i < 2; i++) { tx[i] = trunc(z); z = (z - tx[i]) * 1.67772160000000000000e+07; }
+    tx[2] = z;
+    let nx = 3;
+    while (tx[nx - 1] === 0) nx--;
+    n = kernelRemPio2(tx, e0, nx);
+    if (hx < 0) { Y[0] = -Y[0]; Y[1] = -Y[1]; return -n; }
+    return n;
+  }
+
+  function kCos(x, y) {
+    const C1 = 4.16666666666666019037e-02, C2 = -1.38888888888741095749e-03, C3 = 2.48015872894767294178e-05,
+      C4 = -2.75573143513906633035e-07, C5 = 2.08757232129817482790e-09, C6 = -1.13596475577881948265e-11;
+    const ix = hiw(x) & 0x7FFFFFFF;
+    if (ix < 0x3E400000) return 1.0;   // |x| < 2^-27
+    const z = x * x;
+    const r = z * (C1 + z * (C2 + z * (C3 + z * (C4 + z * (C5 + z * C6)))));
+    if (ix < 0x3FD33333) return 1.0 - (0.5 * z - (z * r - x * y));
+    const qx = ix > 0x3FE90000 ? 0.28125 : words(ix - 0x00200000, 0);
+    const iz = 0.5 * z - qx, a = 1.0 - qx;
+    return a - (iz - (z * r - x * y));
+  }
+
+  function kSin(x, y, iy) {
+    const S1 = -1.66666666666666324348e-01, S2 = 8.33333333332248946124e-03, S3 = -1.98412698298579493134e-04,
+      S4 = 2.75573137070700676789e-06, S5 = -2.50507602534068634195e-08, S6 = 1.58969099521155010221e-10;
+    const ix = hiw(x) & 0x7FFFFFFF;
+    if (ix < 0x3E400000) return x;   // |x| < 2^-27
+    const z = x * x, v = z * x, r = S2 + z * (S3 + z * (S4 + z * (S5 + z * S6)));
+    if (iy === 0) return x + v * (S1 + z * r);
+    return x - ((z * (0.5 * y - v * r) - y) - v * S1);
+  }
+
+  const TT = [3.33333333333334091986e-01, 1.33333333333201242699e-01, 5.39682539762260521377e-02, 2.18694882948595424599e-02,
+    8.86323982359930005737e-03, 3.59207910759131235356e-03, 1.45620945432529025516e-03, 5.88041240820264096874e-04,
+    2.46463134818469906812e-04, 7.81794442939557092300e-05, 7.14072491382608190305e-05, -1.85586374855275456654e-05,
+    2.59073051863633712884e-05];
+  function kTan(x, y, iy) {
+    const pio4 = 7.85398163397448278999e-01, pio4lo = 3.06161699786838301793e-17;
+    const hx = hiw(x), ix = hx & 0x7FFFFFFF;
+    let z, r, v, w, s, a, t;
+    if (ix < 0x3E300000) {   // |x| < 2^-28
+      if (((ix | low(x)) | (iy + 1)) === 0) return 1.0 / fabs(x);
+      if (iy === 1) return x;
+      z = w = x + y; z = setLow(z, 0); v = y - (z - x);
+      t = a = -1.0 / w; t = setLow(t, 0); s = 1.0 + t * z;
+      return t + a * (s + t * v);
+    }
+    if (ix >= 0x3FE59428) {   // |x| >= 0.6744
+      if (hx < 0) { x = -x; y = -y; }
+      z = pio4 - x; w = pio4lo - y; x = z + w; y = 0.0;
+    }
+    z = x * x; w = z * z;
+    r = TT[1] + w * (TT[3] + w * (TT[5] + w * (TT[7] + w * (TT[9] + w * TT[11]))));
+    v = z * (TT[2] + w * (TT[4] + w * (TT[6] + w * (TT[8] + w * (TT[10] + w * TT[12])))));
+    s = z * x;
+    r = y + z * (s * (r + v) + y);
+    r += TT[0] * s;
+    w = x + r;
+    if (ix >= 0x3FE59428) { v = iy; return (1 - ((hx >> 30) & 2)) * (v - 2.0 * (x - (w * w / (w + v) - r))); }
+    if (iy === 1) return w;
+    z = setLow(w, 0); v = r - (z - x);
+    t = a = -1.0 / w; t = setLow(t, 0); s = 1.0 + t * z;
+    return t + a * (s + t * v);
+  }
+
+  function sin(x) {
+    const ix = hiw(x) & 0x7FFFFFFF;
+    if (ix <= 0x3FE921FB) return kSin(x, 0, 0);
+    if (ix >= 0x7FF00000) return x - x;
+    const n = remPio2(x);
+    switch (n & 3) { case 0: return kSin(Y[0], Y[1], 1); case 1: return kCos(Y[0], Y[1]); case 2: return -kSin(Y[0], Y[1], 1); default: return -kCos(Y[0], Y[1]); }
+  }
+  function cos(x) {
+    const ix = hiw(x) & 0x7FFFFFFF;
+    if (ix <= 0x3FE921FB) return kCos(x, 0);
+    if (ix >= 0x7FF00000) return x - x;
+    const n = remPio2(x);
+    switch (n & 3) { case 0: return kCos(Y[0], Y[1]); case 1: return -kSin(Y[0], Y[1], 1); case 2: return -kCos(Y[0], Y[1]); default: return kSin(Y[0], Y[1], 1); }
+  }
+  function tan(x) {
+    const ix = hiw(x) & 0x7FFFFFFF;
+    if (ix <= 0x3FE921FB) return kTan(x, 0, 1);
+    if (ix >= 0x7FF00000) return x - x;
+    const n = remPio2(x);
+    return kTan(Y[0], Y[1], 1 - ((n & 1) << 1));
+  }
+
+  // ---------------------------------------------------------------- inverse trigonometric
+  const pS0 = 1.66666666666666657415e-01, pS1 = -3.25565818622400915405e-01, pS2 = 2.01212532134862925881e-01,
+    pS3 = -4.00555345006794114027e-02, pS4 = 7.91534994289814532176e-04, pS5 = 3.47933107596021167570e-05,
+    qS1 = -2.40339491173441421878e+00, qS2 = 2.02094576023350569471e+00, qS3 = -6.88283971605453293030e-01,
+    qS4 = 7.70381505559019352791e-02;
+  const PIO2_HI = 1.57079632679489655800e+00, PIO2_LO = 6.12323399573676603587e-17, PIO4_HI = 7.85398163397448278999e-01,
+    PI_D = 3.14159265358979311600e+00;
+
+  function asin(x) {
+    let t = 0, w, p, q, c, r, s;
+    const hx = hiw(x), ix = hx & 0x7FFFFFFF;
+    if (ix >= 0x3FF00000) {
+      if (((ix - 0x3FF00000) | low(x)) === 0) return x * PIO2_HI + x * PIO2_LO;
+      return NaN;
+    } else if (ix < 0x3FE00000) {
+      if (ix < 0x3E400000) { if (1.0e300 + x > 1.0) return x; }
+      else t = x * x;
+      p = t * (pS0 + t * (pS1 + t * (pS2 + t * (pS3 + t * (pS4 + t * pS5)))));
+      q = 1.0 + t * (qS1 + t * (qS2 + t * (qS3 + t * qS4)));
+      w = p / q;
+      return x + x * w;
+    }
+    w = 1.0 - fabs(x);
+    t = w * 0.5;
+    p = t * (pS0 + t * (pS1 + t * (pS2 + t * (pS3 + t * (pS4 + t * pS5)))));
+    q = 1.0 + t * (qS1 + t * (qS2 + t * (qS3 + t * qS4)));
+    s = sqrt(t);
+    if (ix >= 0x3FEF3333) { w = p / q; t = PIO2_HI - (2.0 * (s + s * w) - PIO2_LO); }
+    else {
+      w = setLow(s, 0);
+      c = (t - w * w) / (s + w);
+      r = p / q;
+      p = 2.0 * s * r - (PIO2_LO - 2.0 * c);
+      q = PIO4_HI - 2.0 * w;
+      t = PIO4_HI - (p - q);
+    }
+    return hx > 0 ? t : -t;
+  }
+
+  function acos(x) {
+    let z, p, q, r, w, s, c, df;
+    const hx = hiw(x), ix = hx & 0x7FFFFFFF;
+    if (ix >= 0x3FF00000) {
+      if (((ix - 0x3FF00000) | low(x)) === 0) return hx > 0 ? 0.0 : PI_D + 2.0 * PIO2_LO;
+      return NaN;
+    }
+    if (ix < 0x3FE00000) {
+      if (ix <= 0x3C600000) return PIO2_HI + PIO2_LO;
+      z = x * x;
+      p = z * (pS0 + z * (pS1 + z * (pS2 + z * (pS3 + z * (pS4 + z * pS5)))));
+      q = 1.0 + z * (qS1 + z * (qS2 + z * (qS3 + z * qS4)));
+      r = p / q;
+      return PIO2_HI - (x - (PIO2_LO - x * r));
+    } else if (hx < 0) {
+      z = (1.0 + x) * 0.5;
+      p = z * (pS0 + z * (pS1 + z * (pS2 + z * (pS3 + z * (pS4 + z * pS5)))));
+      q = 1.0 + z * (qS1 + z * (qS2 + z * (qS3 + z * qS4)));
+      s = sqrt(z);
+      r = p / q;
+      w = r * s - PIO2_LO;
+      return PI_D - 2.0 * (s + w);
+    }
+    z = (1.0 - x) * 0.5;
+    s = sqrt(z);
+    df = setLow(s, 0);
+    c = (z - df * df) / (s + df);
+    p = z * (pS0 + z * (pS1 + z * (pS2 + z * (pS3 + z * (pS4 + z * pS5)))));
+    q = 1.0 + z * (qS1 + z * (qS2 + z * (qS3 + z * qS4)));
+    r = p / q;
+    w = r * s + c;
+    return 2.0 * (df + w);
+  }
+
+  const ATANHI = [4.63647609000806093515e-01, 7.85398163397448278999e-01, 9.82793723247329054082e-01, 1.57079632679489655800e+00];
+  const ATANLO = [2.26987774529616870924e-17, 3.06161699786838301793e-17, 1.39033110312309984516e-17, 6.12323399573676603587e-17];
+  const AT = [3.33333333333329318027e-01, -1.99999999998764832476e-01, 1.42857142725034663711e-01, -1.11111104054623557880e-01,
+    9.09088713343650656196e-02, -7.69187620504482999495e-02, 6.66107313738753120669e-02, -5.83357013379057348645e-02,
+    4.97687799461593236017e-02, -3.65315727442169155270e-02, 1.62858201153657823623e-02];
+  function atan(x) {
+    let w, s1, s2, z, id;
+    const hx = hiw(x), ix = hx & 0x7FFFFFFF;
+    if (ix >= 0x44100000) {   // |x| >= 2^66
+      if (x !== x) return x + x;
+      return hx > 0 ? ATANHI[3] + ATANLO[3] : -ATANHI[3] - ATANLO[3];
+    }
+    if (ix < 0x3FDC0000) {   // |x| < 0.4375
+      if (ix < 0x3E400000) { if (1.0e300 + x > 1.0) return x; }
+      id = -1;
+    } else {
+      x = fabs(x);
+      if (ix < 0x3FF30000) {
+        if (ix < 0x3FE60000) { id = 0; x = (2.0 * x - 1.0) / (2.0 + x); }
+        else { id = 1; x = (x - 1.0) / (x + 1.0); }
+      } else if (ix < 0x40038000) { id = 2; x = (x - 1.5) / (1.0 + 1.5 * x); }
+      else { id = 3; x = -1.0 / x; }
+    }
+    z = x * x;
+    w = z * z;
+    s1 = z * (AT[0] + w * (AT[2] + w * (AT[4] + w * (AT[6] + w * (AT[8] + w * AT[10])))));
+    s2 = w * (AT[1] + w * (AT[3] + w * (AT[5] + w * (AT[7] + w * AT[9]))));
+    if (id < 0) return x - x * (s1 + s2);
+    z = ATANHI[id] - ((x * (s1 + s2) - ATANLO[id]) - x);
+    return hx < 0 ? -z : z;
+  }
+
+  function atan2(y, x) {
+    const tiny = 1.0e-300, pi_o_4 = 7.8539816339744827900E-01, pi_o_2 = 1.5707963267948965580E+00,
+      pi = 3.1415926535897931160E+00, pi_lo = 1.2246467991473531772E-16;
+    if (x !== x || y !== y) return x + y;
+    const hx = hiw(x), lx = low(x), ix = hx & 0x7FFFFFFF, hy = hiw(y), ly = low(y), iy = hy & 0x7FFFFFFF;
+    if (x === 1.0) return atan(y);
+    let m = ((hy >> 31) & 1) | ((hx >> 30) & 2);
+    if ((iy | ly) === 0) {   // y = ±0
+      switch (m) { case 0: case 1: return y; case 2: return pi + tiny; default: return -pi - tiny; }
+    }
+    if ((ix | lx) === 0) return hy < 0 ? -pi_o_2 - tiny : pi_o_2 + tiny;   // x = ±0
+    if (ix === 0x7FF00000) {
+      if (iy === 0x7FF00000) {
+        switch (m) { case 0: return pi_o_4 + tiny; case 1: return -pi_o_4 - tiny; case 2: return 3.0 * pi_o_4 + tiny; default: return -3.0 * pi_o_4 - tiny; }
+      }
+      switch (m) { case 0: return 0.0; case 1: return -0.0; case 2: return pi + tiny; default: return -pi - tiny; }
+    }
+    if (iy === 0x7FF00000) return hy < 0 ? -pi_o_2 - tiny : pi_o_2 + tiny;
+    const k = (iy - ix) >> 20;
+    let z;
+    if (k > 60) { z = pi_o_2 + 0.5 * pi_lo; m &= 1; }
+    else if (hx < 0 && k < -60) z = 0.0;
+    else z = atan(fabs(y / x));
+    switch (m) { case 0: return z; case 1: return -z; case 2: return pi - (z - pi_lo); default: return (z - pi_lo) - pi; }
+  }
+
+  // ---------------------------------------------------------------- exponential and logarithms
+  const P1 = 1.66666666666666019037e-01, P2 = -2.77777777770155933842e-03, P3 = 6.61375632143793436117e-05,
+    P4 = -1.65339022054652515390e-06, P5 = 4.13813679705723846039e-08;
+  const LN2_HI = 6.93147180369123816490e-01, LN2_LO = 1.90821492927058770002e-10, INVLN2 = 1.44269504088896338700e+00;
+  const TWO54 = 1.80143985094819840000e+16;
+  const Lg1 = 6.666666666666735130e-01, Lg2 = 3.999999999940941908e-01, Lg3 = 2.857142874366239149e-01,
+    Lg4 = 2.222219843214978396e-01, Lg5 = 1.818357216161805012e-01, Lg6 = 1.531383769920937332e-01, Lg7 = 1.479819860511658591e-01;
+
+  function exp(x) {
+    const o_threshold = 7.09782712893383973096e+02, u_threshold = -7.45133219101941108420e+02, E = 2.718281828459045,
+      huge = 1.0e+300, twom1000 = 9.33263618503218878990e-302, two1023 = 8.988465674311579539e307;
+    let hi = 0.0, lo = 0.0, k = 0, t, y, c;
+    let hx = hiw(x);
+    const xsb = (hx >>> 31) & 1;
+    hx &= 0x7FFFFFFF;
+    if (hx >= 0x40862E42) {
+      if (hx >= 0x7FF00000) { if (((hx & 0xFFFFF) | low(x)) !== 0) return x + x; return xsb === 0 ? x : 0.0; }
+      if (x > o_threshold) return huge * huge;
+      if (x < u_threshold) return twom1000 * twom1000;
+    }
+    if (hx > 0x3FD62E42) {
+      if (hx < 0x3FF0A2B2) {
+        if (x === 1.0) return E;
+        hi = x - (xsb ? -LN2_HI : LN2_HI); lo = xsb ? -LN2_LO : LN2_LO; k = 1 - xsb - xsb;
+      } else {
+        k = trunc(INVLN2 * x + (xsb ? -0.5 : 0.5));
+        t = k; hi = x - t * LN2_HI; lo = t * LN2_LO;
+      }
+      x = hi - lo;
+    } else if (hx < 0x3E300000) { if (huge + x > 1.0) return 1.0 + x; }
+    else k = 0;
+    t = x * x;
+    const twopk = k >= -1021 ? words(0x3FF00000 + (k << 20), 0) : words(0x3FF00000 + ((k + 1000) << 20), 0);
+    c = x - t * (P1 + t * (P2 + t * (P3 + t * (P4 + t * P5))));
+    if (k === 0) return 1.0 - ((x * c) / (c - 2.0) - x);
+    y = 1.0 - ((lo - (x * c) / (2.0 - c)) - hi);
+    if (k >= -1021) { if (k === 1024) return y * 2.0 * two1023; return y * twopk; }
+    return y * twopk * twom1000;
+  }
+
+  function expm1(x) {
+    const o_threshold = 7.09782712893383973096e+02, huge = 1.0e+300, tiny = 1.0e-300,
+      Q1 = -3.33333333333331316428e-02, Q2 = 1.58730158725481460165e-03, Q3 = -7.93650757867487942473e-05,
+      Q4 = 4.00821782732936239552e-06, Q5 = -2.01099218183624371326e-07;
+    let hi, lo, c = 0, k, t, e, y;
+    let hx = hiw(x);
+    const xsb = hx & 0x80000000;
+    hx &= 0x7FFFFFFF;
+    if (hx >= 0x4043687A) {   // |x| >= 56 ln2
+      if (hx >= 0x40862E42) {
+        if (hx >= 0x7FF00000) { if (((hx & 0xFFFFF) | low(x)) !== 0) return x + x; return xsb === 0 ? x : -1.0; }
+        if (x > o_threshold) return huge * huge;
+      }
+      if (xsb !== 0) { if (x + tiny < 0.0) return tiny - 1.0; }
+    }
+    if (hx > 0x3FD62E42) {
+      if (hx < 0x3FF0A2B2) {
+        if (xsb === 0) { hi = x - LN2_HI; lo = LN2_LO; k = 1; } else { hi = x + LN2_HI; lo = -LN2_LO; k = -1; }
+      } else {
+        k = trunc(INVLN2 * x + (xsb === 0 ? 0.5 : -0.5));
+        t = k; hi = x - t * LN2_HI; lo = t * LN2_LO;
+      }
+      x = hi - lo;
+      c = (hi - x) - lo;
+    } else if (hx < 0x3C900000) { t = huge + x; return x - (t - (huge + x)); }
+    else k = 0;
+    const hfx = 0.5 * x, hxs = x * hfx;
+    const r1 = 1.0 + hxs * (Q1 + hxs * (Q2 + hxs * (Q3 + hxs * (Q4 + hxs * Q5))));
+    t = 3.0 - r1 * hfx;
+    e = hxs * ((r1 - t) / (6.0 - x * t));
+    if (k === 0) return x - (x * e - hxs);
+    const twopk = words(0x3FF00000 + (k << 20), 0);
+    e = (x * (e - c) - c);
+    e -= hxs;
+    if (k === -1) return 0.5 * (x - e) - 0.5;
+    if (k === 1) { if (x < -0.25) return -2.0 * (e - (x + 0.5)); return 1.0 + 2.0 * (x - e); }
+    if (k <= -2 || k > 56) {
+      y = 1.0 - (e - x);
+      y = k === 1024 ? y * 2.0 * 8.98846567431158e+307 : y * twopk;
+      return y - 1.0;
+    }
+    if (k < 20) { t = words(0x3FF00000 - (0x200000 >> k), 0); y = t - (e - x); y = y * twopk; }
+    else { t = words((0x3FF - k) << 20, 0); y = x - (e + t); y += 1.0; y = y * twopk; }
+    return y;
+  }
+
+  function log(x) {
+    let hx = hiw(x), k = 0;
+    const lx = low(x);
+    if (hx < 0x00100000) {
+      if (((hx & 0x7FFFFFFF) | lx) === 0) return -Infinity;
+      if (hx < 0) return NaN;
+      k -= 54; x *= TWO54; hx = hiw(x);
+    }
+    if (hx >= 0x7FF00000) return x + x;
+    k += (hx >> 20) - 1023;
+    hx &= 0x000FFFFF;
+    let i = (hx + 0x95F64) & 0x100000;
+    x = setHigh(x, hx | (i ^ 0x3FF00000));
+    k += i >> 20;
+    const f = x - 1.0;
+    let dk, R;
+    if ((0x000FFFFF & (2 + hx)) < 3) {
+      if (f === 0) { if (k === 0) return 0; dk = k; return dk * LN2_HI + dk * LN2_LO; }
+      R = f * f * (0.5 - 0.33333333333333333 * f);
+      if (k === 0) return f - R;
+      dk = k; return dk * LN2_HI - ((R - dk * LN2_LO) - f);
+    }
+    const s = f / (2.0 + f);
+    dk = k;
+    const z = s * s;
+    i = hx - 0x6147A;
+    const w = z * z;
+    const j = 0x6B851 - hx;
+    const t1 = w * (Lg2 + w * (Lg4 + w * Lg6)), t2 = z * (Lg1 + w * (Lg3 + w * (Lg5 + w * Lg7)));
+    i |= j;
+    R = t2 + t1;
+    if (i > 0) {
+      const hfsq = 0.5 * f * f;
+      if (k === 0) return f - (hfsq - s * (hfsq + R));
+      return dk * LN2_HI - ((hfsq - (s * (hfsq + R) + dk * LN2_LO)) - f);
+    }
+    if (k === 0) return f - s * (f - R);
+    return dk * LN2_HI - ((s * (f - R) - dk * LN2_LO) - f);
+  }
+
+  function kLog1p(f) {
+    const s = f / (2.0 + f), z = s * s, w = z * z;
+    const t1 = w * (Lg2 + w * (Lg4 + w * Lg6)), t2 = z * (Lg1 + w * (Lg3 + w * (Lg5 + w * Lg7)));
+    const R = t2 + t1, hfsq = 0.5 * f * f;
+    return s * (hfsq + R);
+  }
+
+  function log2(x) {
+    const ivln2hi = 1.44269504072144627571e+00, ivln2lo = 1.67517131648865118353e-10;
+    let hx = hiw(x), k = 0;
+    const lx = low(x);
+    if (hx < 0x00100000) {
+      if (((hx & 0x7FFFFFFF) | lx) === 0) return -Infinity;
+      if (hx < 0) return NaN;
+      k -= 54; x *= TWO54; hx = hiw(x);
+    }
+    if (hx >= 0x7FF00000) return x + x;
+    if (hx === 0x3FF00000 && lx === 0) return 0.0;
+    k += (hx >> 20) - 1023;
+    hx &= 0x000FFFFF;
+    const i = (hx + 0x95F64) & 0x100000;
+    x = setHigh(x, hx | (i ^ 0x3FF00000));
+    k += i >> 20;
+    const y = k, f = x - 1.0, hfsq = 0.5 * f * f, r = kLog1p(f);
+    const hi = setLow(f - hfsq, 0);
+    const lo = (f - hi) - hfsq + r;
+    let val_hi = hi * ivln2hi, val_lo = (lo + hi) * ivln2lo + lo * ivln2hi;
+    const w = y + val_hi;
+    val_lo += (y - w) + val_hi;
+    val_hi = w;
+    return val_lo + val_hi;
+  }
+
+  function log10(x) {
+    const ivln10 = 4.34294481903251816668e-01, log10_2hi = 3.01029995663611771306e-01, log10_2lo = 3.69423907715893078616e-13;
+    let hx = hiw(x), lx = low(x), k = 0;
+    if (hx < 0x00100000) {
+      if (((hx & 0x7FFFFFFF) | lx) === 0) return -Infinity;
+      if (hx < 0) return NaN;
+      k -= 54; x *= TWO54; hx = hiw(x); lx = low(x);
+    }
+    if (hx >= 0x7FF00000) return x + x;
+    if (hx === 0x3FF00000 && lx === 0) return 0.0;
+    k += (hx >> 20) - 1023;
+    const i = k < 0 ? 1 : 0;
+    hx = (hx & 0x000FFFFF) | ((0x3FF - i) << 20);
+    const y = k + i;
+    x = words(hx, lx);
+    const z = y * log10_2lo + ivln10 * log(x);
+    return z + y * log10_2hi;
+  }
+
+  function cbrt(x) {
+    const B1 = 715094163, B2 = 696219795, P0 = 1.87595182427177009643, PP1 = -1.88497979543377169875,
+      PP2 = 1.621429720105354466140, PP3 = -0.758397934778766047437, PP4 = 0.145996192886612446982;
+    let hx = hiw(x) >>> 0;
+    const lw = low(x), sign = hx & 0x80000000;
+    hx = (hx ^ sign) >>> 0;
+    if (hx >= 0x7FF00000) return x + x;
+    let t = 0.0, r, s, w;
+    if (hx < 0x00100000) {
+      if ((hx | lw) === 0) return x;
+      t = words(0x43500000, 0);
+      t *= x;
+      const high = hiw(t) >>> 0;
+      t = words(sign | (Math.floor((high & 0x7FFFFFFF) / 3) + B2), 0);
+    } else t = words(sign | (Math.floor(hx / 3) + B1), 0);
+    r = (t * t) * (t / x);
+    t = t * ((P0 + r * (PP1 + r * PP2)) + ((r * r) * r) * (PP3 + r * PP4));
+    // round t away from zero to 23 bits: bits = (bits + 0x80000000) & 0xFFFFFFFFC0000000
+    let th = hiw(t) >>> 0, tl = low(t) + 0x80000000;
+    if (tl >= 0x100000000) { tl -= 0x100000000; th = (th + 1) >>> 0; }
+    t = words(th, (tl & 0xC0000000) >>> 0);
+    s = t * t;
+    r = x / s;
+    w = t + t;
+    r = (r - t) / (w + r);
+    t = t + t * r;
+    return t;
+  }
+
+  // ---------------------------------------------------------------- power
+  function pow(x, y) {
+    const bp = [1.0, 1.5], dp_h = [0.0, 5.84962487220764160156e-01], dp_l = [0.0, 1.35003920212974897128e-08],
+      two53 = 9007199254740992.0, huge = 1.0e300, tiny = 1.0e-300,
+      L1 = 5.99999999999994648725e-01, L2 = 4.28571428578550184252e-01, L3 = 3.33333329818377432918e-01,
+      L4 = 2.72728123808534006489e-01, L5 = 2.30660745775561754067e-01, L6 = 2.06975017800338417784e-01,
+      lg2 = 6.93147180559945286227e-01, lg2_h = 6.93147182464599609375e-01, lg2_l = -1.90465429995776804525e-09,
+      ovt = 8.0085662595372944372e-0017, cp = 9.61796693925975554329e-01, cp_h = 9.61796700954437255859e-01,
+      cp_l = -7.02846165095275826516e-09, ivln2 = 1.44269504088896338700e+00, ivln2_h = 1.44269502162933349609e+00,
+      ivln2_l = 1.92596299112661746887e-08;
+    let z, ax, z_h, z_l, p_h, p_l, y1, t1, t2, r, s, t, u, v, w, i, j, k, n;
+    const hx = hiw(x), lx = low(x), hy = hiw(y), ly = low(y);
+    let ix = hx & 0x7FFFFFFF;
+    const iy = hy & 0x7FFFFFFF;
+    if ((iy | ly) === 0) return 1.0;
+    if (x !== x || y !== y) return x + y;
+    let yisint = 0;
+    if (hx < 0) {
+      if (iy >= 0x43400000) yisint = 2;
+      else if (iy >= 0x3FF00000) {
+        k = (iy >> 20) - 0x3FF;
+        if (k > 20) { j = ly >>> (52 - k); if ((j << (52 - k)) === (ly | 0)) yisint = 2 - (j & 1); }
+        else if (ly === 0) { j = iy >> (20 - k); if ((j << (20 - k)) === iy) yisint = 2 - (j & 1); }
+      }
+    }
+    if (ly === 0) {
+      if (iy === 0x7FF00000) {   // y = ±inf
+        if (((ix - 0x3FF00000) | lx) === 0) return y - y;
+        if (ix >= 0x3FF00000) return hy >= 0 ? y : 0.0;
+        return hy < 0 ? -y : 0.0;
+      }
+      if (iy === 0x3FF00000) return hy < 0 ? 1.0 / x : x;
+      if (hy === 0x40000000) return x * x;
+      if (hy === 0x3FE00000 && hx >= 0) return sqrt(x);
+    }
+    ax = fabs(x);
+    if (lx === 0 && (ix === 0x7FF00000 || ix === 0 || ix === 0x3FF00000)) {
+      z = ax;
+      if (hy < 0) z = 1.0 / z;
+      if (hx < 0) {
+        if (((ix - 0x3FF00000) | yisint) === 0) z = NaN;
+        else if (yisint === 1) z = -z;
+      }
+      return z;
+    }
+    n = (hx >> 31) + 1;
+    if ((n | yisint) === 0) return NaN;
+    s = 1.0;
+    if ((n | (yisint - 1)) === 0) s = -1.0;
+    if (iy > 0x41E00000) {   // |y| > 2^31
+      if (iy > 0x43F00000) {
+        if (ix <= 0x3FEFFFFF) return hy < 0 ? huge * huge : tiny * tiny;
+        if (ix >= 0x3FF00000) return hy > 0 ? huge * huge : tiny * tiny;
+      }
+      if (ix < 0x3FEFFFFF) return hy < 0 ? s * huge * huge : s * tiny * tiny;
+      if (ix > 0x3FF00000) return hy > 0 ? s * huge * huge : s * tiny * tiny;
+      t = ax - 1.0;
+      w = (t * t) * (0.5 - t * (0.3333333333333333333333 - t * 0.25));
+      u = ivln2_h * t;
+      v = t * ivln2_l - w * ivln2;
+      t1 = setLow(u + v, 0);
+      t2 = v - (t1 - u);
+    } else {
+      let ss, s2, s_h, s_l, t_h, t_l;
+      n = 0;
+      if (ix < 0x00100000) { ax *= two53; n -= 53; ix = hiw(ax); }
+      n += (ix >> 20) - 0x3FF;
+      j = ix & 0x000FFFFF;
+      ix = j | 0x3FF00000;
+      if (j <= 0x3988E) k = 0;
+      else if (j < 0xBB67A) k = 1;
+      else { k = 0; n += 1; ix -= 0x00100000; }
+      ax = setHigh(ax, ix);
+      u = ax - bp[k];
+      v = 1.0 / (ax + bp[k]);
+      ss = u * v;
+      s_h = setLow(ss, 0);
+      t_h = words(((ix >> 1) | 0x20000000) + 0x00080000 + (k << 18), 0);
+      t_l = ax - (t_h - bp[k]);
+      s_l = v * ((u - s_h * t_h) - s_h * t_l);
+      s2 = ss * ss;
+      r = s2 * s2 * (L1 + s2 * (L2 + s2 * (L3 + s2 * (L4 + s2 * (L5 + s2 * L6)))));
+      r += s_l * (s_h + ss);
+      s2 = s_h * s_h;
+      t_h = setLow(3.0 + s2 + r, 0);
+      t_l = r - ((t_h - 3.0) - s2);
+      u = s_h * t_h;
+      v = s_l * t_h + t_l * ss;
+      p_h = setLow(u + v, 0);
+      p_l = v - (p_h - u);
+      z_h = cp_h * p_h;
+      z_l = cp_l * p_h + p_l * cp + dp_l[k];
+      t = n;
+      t1 = setLow(((z_h + z_l) + dp_h[k]) + t, 0);
+      t2 = z_l - (((t1 - t) - dp_h[k]) - z_h);
+    }
+    y1 = setLow(y, 0);
+    p_l = (y - y1) * t1 + y * t2;
+    p_h = y1 * t1;
+    z = p_l + p_h;
+    j = hiw(z); i = low(z);
+    if (j >= 0x40900000) {
+      if (((j - 0x40900000) | i) !== 0) return s * huge * huge;
+      if (p_l + ovt > z - p_h) return s * huge * huge;
+    } else if ((j & 0x7FFFFFFF) >= 0x4090CC00) {
+      if (((j - 0xC090CC00) | i) !== 0) return s * tiny * tiny;
+      if (p_l <= z - p_h) return s * tiny * tiny;
+    }
+    i = j & 0x7FFFFFFF;
+    k = (i >> 20) - 0x3FF;
+    n = 0;
+    if (i > 0x3FE00000) {
+      n = j + (0x00100000 >> (k + 1));
+      k = ((n & 0x7FFFFFFF) >> 20) - 0x3FF;
+      t = words(n & ~(0x000FFFFF >> k), 0);
+      n = ((n & 0x000FFFFF) | 0x00100000) >> (20 - k);
+      if (j < 0) n = -n;
+      p_h -= t;
+    }
+    t = setLow(p_l + p_h, 0);
+    u = t * lg2_h;
+    v = (p_l - (t - p_h)) * lg2 + t * lg2_l;
+    z = u + v;
+    w = v - (z - u);
+    t = z * z;
+    t1 = z - t * (P1 + t * (P2 + t * (P3 + t * (P4 + t * P5))));
+    r = (z * t1) / ((t1 - 2.0) - (w + z * w));
+    z = 1.0 - (r - z);
+    j = hiw(z);
+    j += n << 20;
+    if ((j >> 20) <= 0) z = scalbn(z, n);
+    else z = setHigh(z, hiw(z) + (n << 20));
+    return s * z;
+  }
+
+  // ---------------------------------------------------------------- hyperbolic
+  function sinh(x) {
+    const KSINH_OVERFLOW = 710.4758600739439, TWO_M28 = 3.725290298461914e-9, LOG_MAXD = 709.7822265625, shuge = 1.0e307;
+    const h = x < 0 ? -0.5 : 0.5, ax = fabs(x);
+    if (ax < 22) {
+      if (ax < TWO_M28) return x;
+      const t = expm1(ax);
+      if (ax < 1) return h * (2 * t - t * t / (t + 1));
+      return h * (t + t / (t + 1));
+    }
+    if (ax < LOG_MAXD) return h * exp(ax);
+    if (ax <= KSINH_OVERFLOW) { const w = exp(0.5 * ax), t = h * w; return t * w; }
+    return x * shuge;
+  }
+  function cosh(x) {
+    const KCOSH_OVERFLOW = 710.4758600739439, huge = 1.0e+300;
+    const ix = hiw(x) & 0x7FFFFFFF;
+    if (ix < 0x3FD62E43) { const t = expm1(fabs(x)), w = 1.0 + t; if (ix < 0x3C800000) return w; return 1.0 + (t * t) / (w + w); }
+    if (ix < 0x40360000) { const t = exp(fabs(x)); return 0.5 * t + 0.5 / t; }
+    if (ix < 0x40862E42) return 0.5 * exp(fabs(x));
+    if (fabs(x) <= KCOSH_OVERFLOW) { const w = exp(0.5 * fabs(x)), t = 0.5 * w; return t * w; }
+    if (ix >= 0x7FF00000) return x * x;
+    return huge * huge;
+  }
+  function tanh(x) {
+    const tiny = 1.0e-300, huge = 1.0e300;
+    const jx = hiw(x), ix = jx & 0x7FFFFFFF;
+    let t, z;
+    if (ix >= 0x7FF00000) return jx >= 0 ? 1.0 / x + 1.0 : 1.0 / x - 1.0;
+    if (ix < 0x40360000) {
+      if (ix < 0x3E300000) { if (huge + x > 1.0) return x; }
+      if (ix >= 0x3FF00000) { t = expm1(2.0 * fabs(x)); z = 1.0 - 2.0 / (t + 2.0); }
+      else { t = expm1(-2.0 * fabs(x)); z = -t / (t + 2.0); }
+    } else z = 1.0 - tiny;
+    return jx >= 0 ? z : -z;
+  }
+
+  // ---------------------------------------------------------------- the exact ones and the small helpers
+  const isNegZero = v => v === 0 && 1 / v < 0;
+  function round(x) {   // half away from zero; keeps the sign of a zero result (round(-0.3) = -0)
+    if (!isFinite(x) || x === 0) return x;
+    const t = trunc(x), d = x - t;   // x - t is exact
+    if (d >= 0.5) return t + 1;
+    if (d <= -0.5) return t - 1;
+    return t;
+  }
+  const sign = x => (x !== x || x === 0) ? x : (x > 0 ? 1 : -1);
+  function min(...a) { let r = a[0]; for (let i = 1; i < a.length; i++) { const v = a[i]; if (v !== v || r !== r) r = NaN; else if (v < r || (v === 0 && r === 0 && isNegZero(v))) r = v; } return r; }
+  function max(...a) { let r = a[0]; for (let i = 1; i < a.length; i++) { const v = a[i]; if (v !== v || r !== r) r = NaN; else if (v > r || (v === 0 && r === 0 && isNegZero(r))) r = v; } return r; }
+  function hypot(...a) {
+    let inf = false, nan = false, m = 0;
+    for (const v of a) { const x = fabs(v); if (x === Infinity) inf = true; else if (x !== x) nan = true; else if (x > m) m = x; }
+    if (inf) return Infinity;
+    if (nan) return NaN;
+    if (m === 0) return 0;
+    let s = 0;
+    for (const v of a) { const r = fabs(v) / m; s += r * r; }
+    return m * sqrt(s);
+  }
+  const PI = 3.141592653589793, E_ = 2.718281828459045;
+
+  const fnDef = (fn, mn, mx) => Object.freeze({ fn, min: mn, max: mx === undefined ? mn : mx });
+  const FUNCS = Object.freeze(Object.assign(Object.create(null), {
+    sin: fnDef(sin, 1), cos: fnDef(cos, 1), tan: fnDef(tan, 1), asin: fnDef(asin, 1), acos: fnDef(acos, 1), atan: fnDef(atan, 1),
+    atan2: fnDef(atan2, 2), sinh: fnDef(sinh, 1), cosh: fnDef(cosh, 1), tanh: fnDef(tanh, 1), exp: fnDef(exp, 1), log: fnDef(log, 1),
+    log10: fnDef(log10, 1), log2: fnDef(log2, 1), sqrt: fnDef(x => sqrt(x), 1), cbrt: fnDef(cbrt, 1), abs: fnDef(x => fabs(x), 1),
+    sign: fnDef(sign, 1), min: fnDef(min, 1, 16), max: fnDef(max, 1, 16), floor: fnDef(x => Math.floor(x), 1),
+    ceil: fnDef(x => Math.ceil(x), 1), round: fnDef(round, 1), trunc: fnDef(x => trunc(x), 1), pow: fnDef(pow, 2),
+    hypot: fnDef(hypot, 1, 16), clamp: fnDef((x, lo, hi) => min(max(x, lo), hi), 3), lerp: fnDef((a, b, t) => a + (b - a) * t, 3),
+    step: fnDef((edge, x) => (x < edge ? 0 : 1), 2),
+  }));
+  const CONSTS = Object.freeze({ pi: PI, e: E_ });
+  const hasOwn = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
+
+  // ---------------------------------------------------------------- errors
+  function fail(code, pos, msg) { const e = new Error(msg); e.code = code; e.pos = pos; return e; }
+  const DEPTH_MSG = 'the expression is nested more than ' + LIMITS.depth + ' levels deep';
+  const NODES_MSG = 'the expression has more than ' + LIMITS.nodes + ' parts';
+  const FORBIDDEN = new Set(['constructor', 'prototype', 'this', 'new', 'function', 'return', 'var', 'let', 'const', 'class',
+    'typeof', 'void', 'delete', 'in', 'instanceof', 'null', 'undefined', 'NaN', 'Infinity', 'eval', 'arguments', 'globalThis',
+    'window', 'self', 'import', 'export', 'with', 'yield', 'await', 'if', 'else', 'for', 'while', 'do', 'super', 'None', 'True',
+    'False', 'and', 'or', 'not', 'is', 'lambda']);
+  const isForbidden = name => name.startsWith('__') || FORBIDDEN.has(name);
+  const IDENT = /^[A-Za-z_][A-Za-z0-9_]*$/;
+  const validName = n => typeof n === 'string' && IDENT.test(n) && !isForbidden(n) && n !== 'true' && n !== 'false';
+  const arityMsg = (name, mn, mx, got) => mn === mx
+    ? name + '() takes ' + mn + ' argument' + (mn === 1 ? '' : 's') + ', not ' + got
+    : name + '() takes ' + mn + ' to ' + mx + ' arguments, not ' + got;
+
+  // ---------------------------------------------------------------- lexer
+  const isDigit = c => c !== undefined && c >= '0' && c <= '9';
+  const isIdStart = c => c !== undefined && ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c === '_');
+  const isIdChar = c => isIdStart(c) || isDigit(c);
+  const ONE = new Set(['+', '-', '*', '/', '%', '^', '(', ')', ',', '?', ':', '<', '>', '!']);
+  const TWO = new Set(['<=', '>=', '==', '!=', '&&', '||']);
+  function charMsg(src, i) {
+    const c = src[i];
+    if (c === '=') return "'=' (assignment) is not allowed; use == to compare";
+    if (c === '.') return "'.' (property access) is not allowed";
+    if (c === '[' || c === ']') return "'" + c + "' (indexing) is not allowed";
+    if (c === '"' || c === "'" || c === '`') return 'strings are not allowed';
+    if (c === '&') return "use && for 'and'";
+    if (c === '|') return "use || for 'or'";
+    const cp = src.codePointAt(i);
+    if (cp > 0x20 && cp < 0x7F) return "unexpected character '" + c + "'";
+    return 'unexpected character U+' + cp.toString(16).toUpperCase().padStart(4, '0');
+  }
+  function lex(src) {
+    const out = [], n = src.length;
+    let i = 0;
+    while (i < n) {
+      const c = src[i];
+      if (c === ' ' || c === '\t' || c === '\n' || c === '\r') { i++; continue; }
+      if (isDigit(c) || (c === '.' && isDigit(src[i + 1]))) {
+        let j = i;
+        while (isDigit(src[j])) j++;
+        if (src[j] === '.') { j++; while (isDigit(src[j])) j++; }
+        if (src[j] === 'e' || src[j] === 'E') { let k = j + 1; if (src[k] === '+' || src[k] === '-') k++; if (isDigit(src[k])) { while (isDigit(src[k])) k++; j = k; } }
+        if (isIdChar(src[j]) || src[j] === '.') throw fail('E_NUMBER', i, 'malformed number');
+        const text = src.slice(i, j), v = Number(text);
+        if (!isFinite(v)) throw fail('E_NUMBER', i, 'the number ' + text + ' is too large');
+        out.push({ k: 'num', v, text, pos: i }); i = j; continue;
+      }
+      if (isIdStart(c)) {
+        let j = i + 1;
+        while (isIdChar(src[j])) j++;
+        const name = src.slice(i, j);
+        if (isForbidden(name)) throw fail('E_FORBIDDEN', i, "the name '" + name + "' is not allowed");
+        if (name === 'true' || name === 'false') out.push({ k: 'bool', v: name === 'true', text: name, pos: i });
+        else out.push({ k: 'id', v: name, text: name, pos: i });
+        i = j; continue;
+      }
+      const two = src.slice(i, i + 2);
+      if (TWO.has(two)) { out.push({ k: 'op', v: two, text: two, pos: i }); i += 2; continue; }
+      if (ONE.has(c)) { out.push({ k: 'op', v: c, text: c, pos: i }); i++; continue; }
+      throw fail('E_CHAR', i, charMsg(src, i));
+    }
+    out.push({ k: 'end', v: '', text: '', pos: n });
+    return out;
+  }
+
+  // ---------------------------------------------------------------- parser (syntax and the size limits)
+  function parseSyntax(src) {
+    if (typeof src !== 'string') throw fail('E_SOURCE', 0, 'the expression must be a string');
+    if (src.length > LIMITS.src) throw fail('E_TOO_LONG', LIMITS.src, 'the expression is longer than ' + LIMITS.src + ' characters');
+    const toks = lex(src);
+    if (toks.length === 1) throw fail('E_EMPTY', 0, 'the expression is empty');
+    let p = 0, level = 0, count = 0;
+    const depth = new Map();
+    const isOp = v => toks[p].k === 'op' && toks[p].v === v;
+    const mk = (node, kids) => {
+      let d = 0;
+      for (const kid of kids) { const kd = depth.get(kid); if (kd > d) d = kd; }
+      d += 1;
+      if (d > LIMITS.depth) throw fail('E_DEPTH', node.pos, DEPTH_MSG);
+      if (++count > LIMITS.nodes) throw fail('E_TOO_BIG', node.pos, NODES_MSG);
+      depth.set(node, d);
+      return node;
+    };
+    const enter = pos => { if (++level > LIMITS.depth) throw fail('E_DEPTH', pos, DEPTH_MSG); };
+    const unexpected = t => t.k === 'end' ? fail('E_SYNTAX', t.pos, 'unexpected end of the expression') : fail('E_SYNTAX', t.pos, "unexpected '" + t.text + "'");
+    function ternary() {
+      enter(toks[p].pos);
+      let node = binary(2);
+      if (isOp('?')) {
+        const pos = toks[p++].pos;
+        const a = ternary();
+        if (!isOp(':')) throw fail('E_SYNTAX', toks[p].pos, "expected ':'");
+        p++;
+        const b = ternary();
+        node = mk({ t: 'cond', c: node, a, b, pos }, [node, a, b]);
+      }
+      level--;
+      return node;
+    }
+    // precedence climbing over || (2) && (3) == != (4) < <= > >= (5) + - (6) * / % (7): left-assoc, comparisons not chained
+    const binPrec = t => (t.k === 'op' && t.v !== '^' && hasOwn(PREC, t.v) ? PREC[t.v] : 0);
+    function binary(minPrec) {
+      let left = unary();
+      for (;;) {
+        const t = toks[p], prec = binPrec(t);
+        if (prec === 0 || prec < minPrec) return left;
+        p++;
+        const right = binary(prec + 1);
+        left = mk({ t: 'bin', op: t.v, a: left, b: right, pos: t.pos }, [left, right]);
+        if ((prec === 4 || prec === 5) && binPrec(toks[p]) === prec) throw fail('E_SYNTAX', toks[p].pos, 'comparisons cannot be chained (use && between them)');
+      }
+    }
+    function unary() {
+      const t = toks[p];
+      if (t.k === 'op' && (t.v === '-' || t.v === '+' || t.v === '!')) {
+        p++; enter(t.pos);
+        const a = unary();
+        level--;
+        return mk({ t: 'un', op: t.v, a, pos: t.pos }, [a]);
+      }
+      return power();
+    }
+    function power() {   // primary ('^' unary)?  — right-assoc, tighter than a unary minus on its left: -2^2 = -(2^2)
+      const base = primary();
+      if (!isOp('^')) return base;
+      const t = toks[p++];
+      enter(t.pos);
+      const ex = unary();
+      level--;
+      return mk({ t: 'bin', op: '^', a: base, b: ex, pos: t.pos }, [base, ex]);
+    }
+    function primary() {
+      const t = toks[p];
+      if (t.k === 'num') { p++; return mk({ t: 'num', v: t.v, pos: t.pos }, []); }
+      if (t.k === 'bool') { p++; return mk({ t: 'bool', v: t.v, pos: t.pos }, []); }
+      if (t.k === 'id') {
+        p++;
+        if (isOp('(')) {
+          p++;
+          const args = [];
+          if (!isOp(')')) {
+            for (;;) {
+              args.push(ternary());
+              if (isOp(',')) { p++; continue; }
+              if (isOp(')')) break;
+              throw fail('E_SYNTAX', toks[p].pos, "expected ',' or ')'");
+            }
+          }
+          p++;
+          return mk({ t: 'call', fn: t.v, args, pos: t.pos }, args);
+        }
+        if (hasOwn(CONSTS, t.v)) return mk({ t: 'const', name: t.v, pos: t.pos }, []);
+        return mk({ t: 'var', name: t.v, pos: t.pos }, []);
+      }
+      if (isOp('(')) {
+        p++;
+        const node = ternary();
+        if (!isOp(')')) throw fail('E_SYNTAX', toks[p].pos, "expected ')'");
+        p++;
+        return node;
+      }
+      throw unexpected(t);
+    }
+    const ast = ternary();
+    if (toks[p].k !== 'end') throw unexpected(toks[p]);
+    return ast;
+  }
+
+  // ---------------------------------------------------------------- a tree from outside (JSON): checked node by node
+  const UN_OPS = new Set(['-', '+', '!']);
+  const PREC = { '||': 2, '&&': 3, '==': 4, '!=': 4, '<': 5, '<=': 5, '>': 5, '>=': 5, '+': 6, '-': 6, '*': 7, '/': 7, '%': 7, '^': 9 };
+  const BIN_OPS = new Set(Object.keys(PREC));
+  const posOf = n => (n && typeof n === 'object' && Number.isInteger(n.pos) && n.pos >= 0) ? n.pos : -1;
+  function validateAst(rootNode) {
+    let count = 0;
+    const bad = (node, why) => fail('E_AST', posOf(node), 'malformed expression tree: ' + why);
+    function walk(node, d) {
+      if (d > LIMITS.depth) throw fail('E_DEPTH', posOf(node), DEPTH_MSG);
+      if (++count > LIMITS.nodes) throw fail('E_TOO_BIG', posOf(node), NODES_MSG);
+      if (node === null || typeof node !== 'object' || Array.isArray(node)) throw bad(node, 'a node is not an object');
+      if (node.pos !== undefined && posOf(node) < 0) throw bad(node, "'pos' must be a whole number >= 0");
+      switch (node.t) {
+        case 'num':
+          if (typeof node.v !== 'number' || !isFinite(node.v) || node.v < 0 || isNegZero(node.v)) throw bad(node, 'a number must be finite and not negative');
+          return;
+        case 'bool': if (typeof node.v !== 'boolean') throw bad(node, "'v' of a bool must be true or false"); return;
+        case 'const': if (node.name !== 'pi' && node.name !== 'e') throw bad(node, 'the constants are pi and e'); return;
+        case 'var': if (!validName(node.name) || hasOwn(CONSTS, node.name)) throw bad(node, 'a variable needs a valid name'); return;
+        case 'un': if (!UN_OPS.has(node.op)) throw bad(node, 'unknown unary operator'); walk(node.a, d + 1); return;
+        case 'bin': if (!BIN_OPS.has(node.op)) throw bad(node, 'unknown binary operator'); walk(node.a, d + 1); walk(node.b, d + 1); return;
+        case 'cond': walk(node.c, d + 1); walk(node.a, d + 1); walk(node.b, d + 1); return;
+        case 'call':
+          if (!validName(node.fn)) throw bad(node, 'a function needs a valid name');
+          if (!Array.isArray(node.args)) throw bad(node, "'args' must be a list");
+          for (const a of node.args) walk(a, d + 1);
+          return;
+        default: throw bad(node, 'unknown node type');
+      }
+    }
+    walk(rootNode, 1);
+    return rootNode;
+  }
+
+  // ---------------------------------------------------------------- meaning: functions, arity, variables
+  function extraNames(list) {
+    const s = new Set();
+    for (const name of list || []) {
+      if (!validName(name)) throw fail('E_FORBIDDEN', -1, "the name '" + String(name) + "' is not allowed for a function");
+      s.add(name);
+    }
+    return s;
+  }
+  function semantic(ast, vars, extra) {   // → [{code, pos, msg}] sorted by pos
+    const errs = [];
+    (function walk(n) {
+      switch (n.t) {
+        case 'var': if (vars && !vars.has(n.name)) errs.push({ code: 'E_UNKNOWN_VAR', pos: posOf(n), msg: "unknown variable '" + n.name + "'" }); return;
+        case 'un': walk(n.a); return;
+        case 'bin': walk(n.a); walk(n.b); return;
+        case 'cond': walk(n.c); walk(n.a); walk(n.b); return;
+        case 'call': {
+          const def = FUNCS[n.fn];
+          const mn = def ? def.min : 0, mx = def ? def.max : LIMITS.args;
+          if (!def && !extra.has(n.fn)) errs.push({ code: 'E_UNKNOWN_FN', pos: posOf(n), msg: "unknown function '" + n.fn + "'" });
+          else if (n.args.length < mn || n.args.length > mx) errs.push({ code: 'E_ARITY', pos: posOf(n), msg: arityMsg(n.fn, mn, mx, n.args.length) });
+          for (const a of n.args) walk(a);
+          return;
+        }
+        default: return;
+      }
+    })(ast);
+    return errs.sort((a, b) => a.pos - b.pos);
+  }
+  const throwFirst = errs => { if (errs.length) throw fail(errs[0].code, errs[0].pos, errs[0].msg); };
+
+  /** parse(src, {fns?: [extra function names]}) → the tree; throws Error {code, pos} */
+  function parse(src, opts) {
+    const ast = parseSyntax(src);
+    throwFirst(semantic(ast, null, extraNames(opts && opts.fns)));
+    return ast;
+  }
+  /** check(src, {vars?: [names], fns?: [extra names], finite?}) → [] or [{code, pos, msg}] (finite is documentation only) */
+  function check(src, opts) {
+    opts = opts || {};
+    let ast;
+    try { ast = parseSyntax(src); } catch (e) { if (e && e.code) return [{ code: e.code, pos: e.pos, msg: e.message }]; throw e; }
+    const vars = Array.isArray(opts.vars) ? new Set(opts.vars.filter(v => typeof v === 'string')) : null;
+    let extra;
+    try { extra = extraNames(opts.fns); } catch (e) { return [{ code: e.code, pos: e.pos, msg: e.message }]; }
+    return semantic(ast, vars, extra);
+  }
+
+  // ---------------------------------------------------------------- evaluation: a tree of closures
+  const num = v => (typeof v === 'boolean' ? (v ? 1 : 0) : v);
+  const truthy = v => (typeof v === 'boolean' ? v : (v !== 0 && v === v));
+  function build(node, ext) {
+    const pos = posOf(node);
+    switch (node.t) {
+      case 'num': case 'bool': { const v = node.v; return () => v; }
+      case 'const': { const v = CONSTS[node.name]; return () => v; }
+      case 'var': {
+        const name = node.name;
+        return env => {
+          if (!hasOwn(env, name)) throw fail('E_UNKNOWN_VAR', pos, "unknown variable '" + name + "'");
+          const v = env[name];
+          if (typeof v === 'number' || typeof v === 'boolean') return v;
+          throw fail('E_VALUE', pos, "the variable '" + name + "' is not a number or a boolean");
+        };
+      }
+      case 'un': {
+        const a = build(node.a, ext);
+        if (node.op === '-') return env => -num(a(env));
+        if (node.op === '+') return env => num(a(env));
+        return env => !truthy(a(env));
+      }
+      case 'cond': { const c = build(node.c, ext), a = build(node.a, ext), b = build(node.b, ext); return env => (truthy(c(env)) ? a(env) : b(env)); }
+      case 'bin': {
+        const a = build(node.a, ext), b = build(node.b, ext);
+        switch (node.op) {
+          case '&&': return env => (truthy(a(env)) ? truthy(b(env)) : false);
+          case '||': return env => (truthy(a(env)) ? true : truthy(b(env)));
+          case '+': return env => num(a(env)) + num(b(env));
+          case '-': return env => num(a(env)) - num(b(env));
+          case '*': return env => num(a(env)) * num(b(env));
+          case '/': return env => num(a(env)) / num(b(env));
+          case '%': return env => num(a(env)) % num(b(env));
+          case '^': return env => { const x = num(a(env)); return pow(x, num(b(env))); };
+          case '<': return env => num(a(env)) < num(b(env));
+          case '<=': return env => num(a(env)) <= num(b(env));
+          case '>': return env => num(a(env)) > num(b(env));
+          case '>=': return env => num(a(env)) >= num(b(env));
+          case '==': return env => num(a(env)) === num(b(env));
+          default: return env => num(a(env)) !== num(b(env));   // '!='
+        }
+      }
+      case 'call': {
+        const args = node.args.map(x => build(x, ext)), name = node.fn;
+        const def = FUNCS[name];
+        if (def) {
+          const f = def.fn;
+          if (args.length === 1) { const a0 = args[0]; return env => f(num(a0(env))); }
+          if (args.length === 2) { const a0 = args[0], a1 = args[1]; return env => { const x = num(a0(env)); return f(x, num(a1(env))); }; }
+          return env => f(...args.map(g => num(g(env))));
+        }
+        const f = ext[name];
+        return env => {
+          const r = f(...args.map(g => num(g(env))));
+          if (typeof r === 'number' || typeof r === 'boolean') return r;
+          throw fail('E_VALUE', pos, "the function '" + name + "' did not return a number or a boolean");
+        };
+      }
+    }
+    throw fail('E_AST', pos, 'malformed expression tree: unknown node type');
+  }
+  /** compile(src | tree, {fns?: {name: function}}) → (env) => number | boolean */
+  function compile(input, opts) {
+    const given = (opts && opts.fns) || {};
+    const ext = Object.create(null);
+    for (const k of Object.keys(given)) if (typeof given[k] === 'function') ext[k] = given[k];
+    const extra = extraNames(Object.keys(ext));
+    const ast = typeof input === 'string' ? parseSyntax(input) : validateAst(input);
+    throwFirst(semantic(ast, null, extra));
+    const run = build(ast, ext);
+    return function evaluateCompiled(env) {
+      if (env === undefined || env === null) env = {};
+      if (typeof env !== 'object') throw fail('E_ENV', 0, 'the variables must be given as an object');
+      return run(env);
+    };
+  }
+  const evaluate = (input, env, opts) => compile(input, opts)(env);
+
+  // ---------------------------------------------------------------- printer: the canonical source of a tree
+  const precOf = n => (n.t === 'cond' ? 1 : n.t === 'bin' ? PREC[n.op] : n.t === 'un' ? 8 : 10);
+  function pr(n) {
+    switch (n.t) {
+      case 'num': return String(n.v);
+      case 'bool': return n.v ? 'true' : 'false';
+      case 'const': case 'var': return n.name;
+      case 'call': return n.fn + '(' + n.args.map(pr).join(', ') + ')';
+      case 'un': return n.op + wrap(n.a, 8);
+      case 'cond': return wrap(n.c, 2) + ' ? ' + pr(n.a) + ' : ' + pr(n.b);
+      default: {
+        const p = PREC[n.op];
+        if (n.op === '^') return wrap(n.a, 10) + '^' + wrap(n.b, 8);
+        if (p === 4 || p === 5) return wrap(n.a, p + 1) + ' ' + n.op + ' ' + wrap(n.b, p + 1);
+        return wrap(n.a, p) + ' ' + n.op + ' ' + wrap(n.b, p + 1);
+      }
+    }
+  }
+  const wrap = (n, minPrec) => (precOf(n) >= minPrec ? pr(n) : '(' + pr(n) + ')');
+  /** print(tree) → source that parses back to the same tree (only the brackets it needs) */
+  const print = ast => pr(validateAst(ast));
+
+  root.NoemaExpr = Object.freeze({ parse, check, compile, evaluate, print, FUNCS, CONSTS, LIMITS });
+  /* i18n-ignore-end */
+})(typeof window !== 'undefined' ? window : globalThis);
 
 /* ---- 35_visual.js ---- */
 /* ===================== Visual exercises & figures — canonical schema: docs/VISUAL.md (noema.visual/v1) ===================== */

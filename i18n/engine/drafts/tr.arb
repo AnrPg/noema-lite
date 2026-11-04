@@ -15,5 +15,10 @@
   "engine.act.newerState": "Buradaki kayıtlı çalışman etkinliğin daha yeni bir sürümünden geliyor; korunuyor ve etkinlik baştan başlıyor.",
   "engine.act.newerProtocol": "Bu etkinlik uygulamanın daha yeni bir sürümünü gerektiriyor.",
   "engine.act.newerType": "Bu alıştırma uygulamanın daha yeni bir sürümünü gerektiriyor. Almak için sayfayı yenile.",
-  "engine.act.hint": "{left, plural, =0 {İpucu kalmadı} one {İpucu (# kaldı)} other {İpucu (# kaldı)}}"
+  "engine.act.hint": "{left, plural, =0 {İpucu kalmadı} one {İpucu (# kaldı)} other {İpucu (# kaldı)}}",
+  "engine.act.sim.reset": "Değerleri sıfırla",
+  "engine.act.sim.computing": "Hesaplanıyor…",
+  "engine.act.sim.results": "Sonuçlar",
+  "engine.act.sim.plot": "{x} eksenine göre {y} grafiği",
+  "engine.act.sim.checks": "Sağlanan koşullar: {met}/{total}"
 }
