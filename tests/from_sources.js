@@ -65,6 +65,36 @@ function unit() {
   const brief = P.courseBrief(plan);
   ok(/confirmed this chapter plan for the subject “Molecular biology”/.test(brief) && /2\. Expression\n {3}From the material: notes\/2 Transcription\.pdf pp\. 1–30; notes\/10 Translation\.pdf/.test(brief), 'the subject: the chapter plan with each chapter’s pages is Claude’s brief');
   ok(/attach \(1 Replication\.pdf, 2 Transcription\.pdf, 10 Translation\.pdf\)/.test(P.courseMessage(plan, small)), 'the Claude app message names the files to attach');
+  // 🔗 links between steps already on the map (noema_link_roadmap_steps): prepared steps may get a new prerequisite
+  vm.runInContext(fs.readFileSync(path.join(ROOT, 'engine/curjobs.js'), 'utf8'), ctx);
+  const J = ctx.window.NoemaCurJobs;
+  const mk = () => ({ id: 'cx', title: 'Patterns', stage: 'done', paths: { minimal: [], deep: ['queues', 'principles', 'resilience', 'vendors'] },
+    nodes: { queues: { id: 'queues', title: 'Messaging fundamentals' }, principles: { id: 'principles', title: 'Architecture principles' },
+      resilience: { id: 'resilience', title: 'Resilience patterns', chapters: [{ ref: 'c1', title: 'Queues and backpressure' }], pack: { id: 'cur-cx-resilience', status: 'ready' } },
+      vendors: { id: 'vendors', title: 'Third-party vendors', pack: { id: 'cur-cx-vendors', status: 'ready' } } },
+    edges: [{ from: 'queues', to: 'principles', why: '' }, { from: 'principles', to: 'resilience', why: '' }, { from: 'resilience', to: 'vendors', why: '' }] });
+  const cx = mk();
+  const lk = P.linkFromClaude(cx, { links: [{ from: '@queues', to: '@resilience', why: 'queue semantics' }, { from: '@principles', to: '@resilience' }] }, { now: 1e12 });
+  ok(lk.entry?.kind === 'link' && lk.entry.links.length === 1 && lk.entry.links[0].to === 'resilience' && lk.entry.links[0].why === 'queue semantics' && lk.already.length === 1 && lk.already[0].from === 'principles',
+    'a link TO a prepared step is accepted; one already there is reported, not refused');
+  const bl = P.linkFromClaude(cx, { links: [{ from: '@queue', to: '@vendors' }, { from: '@vendors', to: 'vendors' }, { from: '@vendors', to: '@queues' }], remove: [{ from: '@queues', to: '@vendors' }] });
+  ok(bl.errors?.length === 3 && /"@queue" is not a step of this Roadmap — did you mean @queues/.test(bl.errors.join('|')) && /its own prerequisite/.test(bl.errors.join('|')) && /no link @queues → @vendors/.test(bl.errors.join('|')),
+    'all problems at once: an unknown @id (with did you mean), from = to, a removed link that is not there: ' + (bl.errors || []).length);
+  const cy = P.linkFromClaude(cx, { links: [{ from: '@vendors', to: '@queues' }] });
+  ok(/form a cycle/.test(cy.errors?.[0] || '') && /@vendors/.test(cy.errors?.[0] || ''), 'a link that would make a cycle is refused');
+  ok(P.linkFromClaude(cx, { links: [{ from: '@principles', to: '@resilience' }] }).entry === null, 'only links that are there already: nothing to change');
+  ok(/at least one link/.test(P.linkFromClaude(cx, {}).errors?.[0] || ''), 'an empty request is refused');
+  const rm = P.linkFromClaude(cx, { links: [{ from: '@queues', to: '@vendors' }], remove: [{ from: '@resilience', to: '@vendors' }] });
+  ok(rm.entry?.remove.length === 1 && rm.entry.links.length === 1, 'a wrong link can be removed while another is added');
+  const before = JSON.stringify(cx.nodes);
+  ok(!J.linkProblems(cx, lk.entry).length, 'the app can apply it');
+  J.link(cx, lk.entry);
+  ok(cx.edges.some(e => e.from === 'queues' && e.to === 'resilience' && e.why === 'queue semantics') && JSON.stringify(cx.nodes) === before && cx.paths.deep.join() === 'queues,principles,resilience,vendors' && /🔗/.test(cx.log.at(-1).m),
+    'applied: the edge with its why, the order recomputed, no step touched (pack, chapters, no re-plan): ' + cx.log.at(-1).m);
+  ok(J.linkProblems(cx, lk.entry)[0] === 'applied', 'an entry applied once is "applied" the next time');
+  const mx = J.merged(mk(), [{ key: J.inboxKey('cx', 'a1'), value: JSON.stringify(lk.entry) }, { key: J.inboxKey('cx', 'a2'), value: JSON.stringify(rm.entry) }]);
+  ok(mx.edges.some(e => e.from === 'queues' && e.to === 'resilience') && mx.edges.some(e => e.from === 'queues' && e.to === 'vendors') && !mx.edges.some(e => e.from === 'resilience' && e.to === 'vendors'), 'merged(): the connector sees the links still in the inbox');
+  ok(J.linkProblems({ ...mk(), nodes: { queues: {} } }, lk.entry).some(x => /does not have/.test(x)), 'a copy without one of the steps yet: the entry waits');
   return { good };
 }
 
@@ -256,6 +286,31 @@ c.save()`, path.join(TF, 'dna-replication.pdf')]);
     const sub2 = await tool('noema_curriculum_submit', { curriculum_id: cid2, task_id: 'plan:' + pids.join(','), result_json: JSON.stringify(F.plans(pids)) });
     ok(!sub2.err && /Accepted/.test(sub2.text), 'their chapter plans are accepted');
     ok(await until(async () => { await p.evaluate(() => NoemaCloud.pull(Noema.account.id).then(() => NoemaCurJobs.App.poll(Noema.account.id))); return p.evaluate(id => { const c = NoemaCurriculum.get(Noema.account.id, id); return c && Object.keys(c.nodes).length === 4 && c.parts?.length === 2 && c.edges.some(e => e.from === 'cell_signalling' && e.to === 'apoptosis') && c.nodes.apoptosis.addedIn === c.parts[1].id && c.nodes.apoptosis.pack?.status === 'app' && c.nodes.apoptosis.chapters?.length > 0 && c.nodes.membranes.pack?.status === 'ready'; }, cid2); }, 25000, 1000), 'in the app after a sync: the new part on the same map, planned and queued; “Membranes” still ready');
+    console.log('— links between steps already on the map (noema_link_roadmap_steps)');
+    const L0 = await tool('noema_link_roadmap_steps', { curriculum_id: cid2, links_json: JSON.stringify({ links: [{ from: '@membrane', to: '@apoptosis' }, { from: '@necrosis_and_autophagy', to: '@membranes' }, { from: '@apoptosis', to: '@apoptosis' }], remove: [{ from: '@membranes', to: '@apoptosis' }] }) });
+    ok(L0.err && /did you mean @membranes/.test(L0.text) && /its own prerequisite/.test(L0.text) && /no link @membranes → @apoptosis/.test(L0.text) && /3 problem/.test(L0.text), 'wrong links go back, every problem at once (unknown @id with did you mean, from = to, a removed link that is not there)');
+    const Lc = await tool('noema_link_roadmap_steps', { curriculum_id: cid2, links_json: JSON.stringify({ links: [{ from: '@necrosis_and_autophagy', to: '@membranes' }] }) });
+    ok(Lc.err && /form a cycle/.test(Lc.text), 'a link that would make a cycle is refused');
+    const Ld = await tool('noema_link_roadmap_steps', { curriculum_id: cid2, links_json: JSON.stringify({ links: [{ from: '@membranes', to: '@cell_signalling' }] }) });
+    ok(!Ld.err && /Nothing to change/.test(Ld.text) && /Already on the map/.test(Ld.text), 'a link that is there already: reported, nothing written');
+    const L1 = await tool('noema_link_roadmap_steps', { curriculum_id: cid2, links_json: JSON.stringify({ links: [{ from: '@membranes', to: '@apoptosis', why: 'membrane blebbing' }, { from: '@membranes', to: '@cell_signalling' }] }) });
+    ok(!L1.err && /links added: @membranes \(“Membranes”\) → @apoptosis/.test(L1.text) && /now has 4 links/.test(L1.text) && /no prepared subject changed/.test(L1.text) && /Already on the map/.test(L1.text), 'a good link is added: ' + L1.text.split('\n')[0].slice(0, 160));
+    const mp3 = await tool('noema_roadmap_map', { curriculum_id: cid2 });
+    ok(/@apoptosis — “Apoptosis” .* after @cell_signalling, @membranes/.test(mp3.text) && /4 links/.test(mp3.text), 'noema_roadmap_map shows it before the app synced (the inbox)');
+    const L2 = await tool('noema_link_roadmap_steps', { curriculum_id: cid2, links_json: JSON.stringify({ remove: [{ from: '@membranes', to: '@apoptosis' }] }) });
+    ok(!L2.err && /links removed: @membranes/.test(L2.text) && /now has 3 links/.test(L2.text), 'a wrong link is removed');
+    const L3 = await tool('noema_link_roadmap_steps', { curriculum_id: cid2, links_json: JSON.stringify({ links: [{ from: '@membranes', to: '@necrosis_and_autophagy', why: 'membrane rupture' }] }) });
+    ok(!L3.err && /now has 4 links/.test(L3.text), 'and another one added');
+    const pk0 = await p.evaluate(id => JSON.stringify(NoemaCurriculum.get(Noema.account.id, id).nodes.membranes), cid2);
+    ok(await until(async () => { await p.evaluate(() => NoemaCloud.pull(Noema.account.id).then(() => NoemaCurJobs.App.poll(Noema.account.id))); return p.evaluate(id => { const c = NoemaCurriculum.get(Noema.account.id, id); return c && c.edges.some(e => e.from === 'membranes' && e.to === 'necrosis_and_autophagy' && e.why === 'membrane rupture') && !c.edges.some(e => e.from === 'membranes' && e.to === 'apoptosis') && c.edges.length === 4 && (c.log || []).some(l => /🔗/.test(l.m)); }, cid2); }, 25000, 1000),
+      'the app applies the inbox on sync: the link added, the removed one gone, 🔗 in the log');
+    ok(await p.evaluate(([id, was]) => { const n = NoemaCurriculum.get(Noema.account.id, id).nodes.membranes; return JSON.stringify(n) === was && n.pack?.status === 'ready' && !n.replan; }, [cid2, pk0]), 'the prepared step keeps its subject and plan (nothing re-planned)');
+    ok(await until(async () => (await fetch(BASE + '/rest/v1/noema_kv?select=key&key=like.a:curin:' + cid2 + ':*', { headers: { apikey: 'k', authorization: 'Bearer ' + T } }).then(r => r.json())).length === 0, 10000, 500), 'and deletes it from the inbox');
+    const uid = (await (await fetch(BASE + '/auth/v1/user', { headers: { apikey: 'k', authorization: 'Bearer ' + T } })).json()).id;
+    const shc = await p.evaluate(id => ({ ...JSON.parse(JSON.stringify(NoemaCurriculum.get(Noema.account.id, id))), id: 'cshared1', shared: { role: 'member', ownerName: 'Nora' } }), cid2);
+    await fetch(BASE + '/rest/v1/noema_kv?on_conflict=user_id,key', { method: 'POST', headers: { apikey: 'k', authorization: 'Bearer ' + T, 'content-type': 'application/json', Prefer: 'resolution=merge-duplicates,return=minimal' }, body: JSON.stringify([{ user_id: uid, key: 'a:curriculum:cshared1', value: JSON.stringify(shc), updated_at: new Date().toISOString() }]) });
+    const Ls = await tool('noema_link_roadmap_steps', { curriculum_id: 'cshared1', links_json: JSON.stringify({ links: [{ from: '@membranes', to: '@apoptosis' }] }) });
+    ok(Ls.err && /shared with the learner by Nora/.test(Ls.text) && /Only the owner/.test(Ls.text), 'a member of a shared Roadmap is refused: ' + Ls.text.slice(0, 120));
     ok(await p.evaluate(id => { const c = NoemaCurriculum.get(Noema.account.id, id); return /noema_extend_roadmap/.test(NoemaCurJobs.growMessage(c)) && /facts\.grow/.test(NoemaCurJobs.growMessage(c)); }, cid2), 'the map’s ⋮ → Add a part with Claude: the message names the flow and the tools');
     ok(!E.length, 'no page errors ' + E.join(' | '));
   } catch (e) { ok(false, 'crashed: ' + e.stack); await p.screenshot({ path: SHOTS + '/src_fail.png', fullPage: true }).catch(() => { }); }
