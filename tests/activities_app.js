@@ -489,9 +489,9 @@ async function python(name) {
     ok(VH.some(u => /numpy/.test(u)) && !VH.some(u => /scipy|openblas/.test(u)), 'numpy only: no scipy file was fetched (' + VH.length + ' /vendor requests)');
 
     console.log('— py-module@1: the sim exercise (checks on Python\'s outputs)');
-    const card = async () => { await p.evaluate(() => { const m = document.querySelector('main'); m.innerHTML = ''; const c = exerciseCard(EX['ch01-e904']); c.id = 'T'; m.append(c); scrollTo(0, 0); }); return filled(p, '#T', 60000); };
+    const card = async () => { await p.evaluate(() => { const m = document.querySelector('main'); m.innerHTML = ''; const c = exerciseCard(EX['ch01-e904']); c.id = 'T'; m.append(c); scrollTo(0, 0); }); await startIfParked(p, '#T'); return filled(p, '#T', 60000); };
     const check = async () => { await p.click('#T button:has-text("Check")'); await wait(400); };
-    ok(await card(), 'the sim exercise ch01-e904 shows the Python activity');
+    ok(await card(), 'the sim exercise ch01-e904 shows the Python activity ' + await p.evaluate(() => { const c = document.getElementById('T'); return JSON.stringify({ note: c?.querySelector('.act-note')?.textContent, line: c?.querySelector('.act-pyline')?.textContent, ro: [...(c?.querySelectorAll('.sim-ro dd') || [])].map(d => d.textContent), bar: c?.querySelector('.act-bar')?.textContent, live: ACT.LIVE.length }); }));
     await setN(p, '#T', 16); await until(async () => /5[.,]9/.test((await ro(p, '#T'))[1] || ''), 20000); await check();
     const bad = await p.evaluate(() => { const c = document.getElementById('T'); return { bad: !!c.querySelector('.explain.bad'), list: [...c.querySelectorAll('.act-checks li')].map(l => l.className + ':' + l.textContent), att: S.att?.['ch01-e904']?.result }; });
     ok(bad.bad && bad.list.length === 2 && /^ok:/.test(bad.list[0]) && /^bad:/.test(bad.list[1]) && bad.att?.passed === false, `N = 16 removes the tone but loses 6 dB at 300 Hz: graded wrong ${JSON.stringify(bad.list)}`);
@@ -542,10 +542,12 @@ async function python(name) {
     console.log('— py-module@1: where Python cannot run (the one-file bundle, file://)');
     const fbOf = q => q.evaluate(s => { const r = document.querySelector(s); return r ? { sim: !!r.querySelector('.sim'), fb: !!r.querySelector('.act-fallback img'), note: r.querySelector('.act-note')?.textContent || '', text: r.querySelector('.act-fbtext')?.textContent || '' } : null; }, SEL);
     if (fs.existsSync(BUNDLE)) {
-      const c4 = await browser.newContext(); await c4.addInitScript(flagOn); const VH0 = VH.length;
+      const c4 = await browser.newContext(); await c4.addInitScript(flagOn); const V4 = [];   // this context's own /vendor requests (the server's list may still get late ones of the pages closed before)
+      c4.on('request', r => { if (new URL(r.url()).pathname.startsWith('/vendor/')) V4.push(new URL(r.url()).pathname); });
       const b = await page(c4, URL0 + '/bundle.html'); await openBlock(b); await wait(800);
       const f = await fbOf(b);
-      ok(await b.evaluate(() => !!window.NOEMA_BUNDLE && !NoemaPy.available()) && f && !f.sim && f.fb && /works only on the website/.test(f.note) && VH.length === VH0, `the one-file bundle (even over http): the fallback, "works only on the website", no /vendor request ${JSON.stringify(f)}`);
+      const bu = await b.evaluate(() => ({ bundle: !!window.NOEMA_BUNDLE, py: NoemaPy.available() }));
+      ok(bu.bundle && !bu.py && f && !f.sim && f.fb && /works only on the website/.test(f.note) && !V4.length, `the one-file bundle (even over http): the fallback, "works only on the website", no /vendor request ${JSON.stringify({ ...bu, vendor: V4.slice(0, 4), ...f, text: undefined })}`);
       await c4.close();
     } else console.log('  (no dist/noema-lite.html: python3 tools/build.py bundle)');
     const c5 = await browser.newContext(); await c5.addInitScript(flagOn);
