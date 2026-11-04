@@ -106,6 +106,8 @@ each translation). Numbers through `noema.fmt.number(n)`. Visible text in the HT
   only by hash** — exactly the inline scripts of the bundle, after the loop guard was added. So inline handlers
   (`onclick=`), `javascript:` URLs, `eval`/`new Function` and scripts made at run time do not run. Devices (camera,
   microphone, location…) are off.
+- Two frames: the app's frame holds a wrapper without scripts whose policy blocks every navigation (`frame-src 'none'`), and the
+  mini-app runs inside it, so a mini-app cannot leave for the network by navigating itself (`location = …`, a link, a refresh).
 - The loop guard: every `while`, `do`, `for` and `for … of` gets a time check; one turn of the event loop that runs longer
   than 1.5 s stops the activity (the app offers Restart). Animate with `requestAnimationFrame`, never a busy loop.
 - A watchdog pings every 2 s; three missed answers stop the activity. A frame that never says hello stops after 15 s.

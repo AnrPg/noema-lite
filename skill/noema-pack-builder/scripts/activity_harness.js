@@ -72,7 +72,7 @@ window.run = function (act, init) {
     await p.evaluate(([act, init]) => window.run(act, init), [a, init]);
     const t0 = Date.now(); while (Date.now() - t0 < 8000) { const L = await p.evaluate(() => window.LOG); if (L.some(m => m.type === 'ready' || m.type === 'fail')) break; await p.waitForTimeout(100); }
     await p.waitForTimeout(o.settle ?? 400);
-    const frame = p.frames().find(f => f !== p.mainFrame());
+    const frame = p.frames().find(f => f.parentFrame() && f.parentFrame() !== p.mainFrame());
     return { frame, log: await p.evaluate(() => window.LOG) };
   };
   const visible = f => f.evaluate(() => document.body.innerText);
@@ -87,7 +87,7 @@ window.run = function (act, init) {
       for (const [name, width, theme] of [['light', 800, 'light'], ['dark', 800, 'dark'], ['phone-360', 360, 'light']]) {
         const { p, ctx, errs } = await open(width, theme); await start(p, a, { locale: loc, theme, settle: 800 });
         await p.screenshot({ path: path.join(out, name + '.png'), fullPage: true });
-        const over = await (p.frames().find(f => f !== p.mainFrame()))?.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1).catch(() => null);
+        const over = await (p.frames().find(f => f.parentFrame() && f.parentFrame() !== p.mainFrame()))?.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1).catch(() => null);
         say(!errs.length, `${name}: ${path.join(out, name + '.png')}${errs.length ? '  errors: ' + errs.slice(0, 2).join(' | ') : ''}`);
         if (over) say(false, `${name}: the activity scrolls sideways (it must fit ${width} px)`);
         await ctx.close();

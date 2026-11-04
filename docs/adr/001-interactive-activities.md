@@ -59,7 +59,13 @@ The hostile probe tried every attack of the brief's §9 table. A local server co
 | forged `postMessage` to the parent / wrong nonce | ignored; only the port works | same | same |
 | **Server hits during the whole probe** | **0** | **0** | **0** |
 
-So the sandbox + CSP recipe of the brief holds in all three engines.
+So the sandbox + CSP recipe of the brief holds in all three engines **for everything the probe tried — but not for self-navigation**
+(review of this PR, reproduced on the P1 runtime): a sandboxed frame may always navigate itself (`location.replace(url)`,
+`location.href =`, a clicked link, a `<meta http-equiv=refresh>`, a `data:` page), the request leaves, and the new page has no policy.
+4 of 5 tricks reached the server in Chromium, Firefox and WebKit (`window.open` was already blocked). **Fix (P1):** the app's frame holds
+only a wrapper document without scripts whose CSP says `frame-src 'none'`, and the mini-app runs in the wrapper's own sandboxed frame:
+the embedder's `frame-src` blocks every navigation of the inner frame. With it, 0 requests in all three engines
+(`tests/activities_app.js`, "self-navigation"); the mini-app's srcdoc inherits the wrapper's policy, so both list the same script hashes.
 
 **But: an endless loop** (`while(true){}`) in the activity:
 
@@ -114,7 +120,10 @@ and P4 proves offline use with a real test before it claims it. On a `file://` c
 3. When an app opens a pack whose `requires` names something it lacks, it runs the existing stale-tab check (`build.json`); if a newer
    build exists it reloads, otherwise it shows each activity's fallback.
 4. Already deployed engines (open tabs that have not reloaded, old one-file bundles) can still break on a `sim` exercise. The window is
-   short (a website tab reloads on its next focus once `build.json` changes), so **no degraded twins** are generated. Accepted risk.
+   **not** bounded by the stale-tab check alone: before P1 that check runs only while a signed-in tab polls a non-empty curriculum
+   inbox (review of this PR). So the rollout is compatibility-first: P1 (the "newer" card, `requires`, `checkRequires()` on every pack
+   open) is deployed before any pack with activities exists, and the content work starts only after the handback (days later). A pre-P1
+   tab that is never reloaded can still break on one `sim` exercise view (no data is lost); **no degraded twins** are generated. Accepted.
 
 **D2 · Where activities live (open decision 2).** Registry `pack.activities` (format `noema.activities/v1`, the brief's §5.1, ids
 `[a-z0-9-]+`, never reused) with `sha256` + `bytes` per entry. In the subject folder: `activities/activities.json` +
@@ -123,7 +132,9 @@ a warning above 256 KB), with its `sha256` checked by the app before it mounts i
 mixed 64 KB rule was dropped because one path is simpler to test and the packs go through `noema_start_upload` (no 1.5 MB limit).
 
 **D3 · Tier A runaway code (new, from spike c).** The host rewrites every loop of a Tier A app's inline scripts at mount time, adding a
-time guard (`for`/`while`/`do`/`for … of`). **As built:** a small tokenizer (`engine/src/33_activity_guard.js`, no vendored parser)
+time guard (`for`/`while`/`do`/`for … of`). Code the rewrite never saw cannot run: the CSP allows scripts **only by the hashes of the
+rewritten scripts** (no `'unsafe-inline'`, no `'unsafe-eval'`), so inline handlers, `javascript:` URLs, scripts added at run time,
+`eval` and `new Function` are refused by the browser (the spike's `'unsafe-inline'` policy is not the one P1 ships). **As built:** a small tokenizer (`engine/src/33_activity_guard.js`, no vendored parser)
 that skips strings, template literals, comments and regular expressions and adds `G()&&(…)` to each loop condition; the scripts are
 then allowed by their hashes in the frame's CSP, so only the guarded scripts can run. After 1.5 s of uninterrupted running, the guard throws and the bootstrap reports `error {code:"runaway"}`; the host then shows
 *This activity stopped responding · Restart*. The lint also refuses obvious traps (`while(true)` without a `break`, huge array sizes,

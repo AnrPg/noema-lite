@@ -3,7 +3,7 @@
 make_pack.py → pack.activities (bundle inline, sha256, strings per locale) + pack.requires → unpack.py gives the folder back →
 make_pack.py again gives the same pack.version. And what make_pack.py refuses (missing strings, a network link, an unknown
 activity, a runtime of a later version). Uses the skill zip (dist/noema-pack-builder.zip; built here when missing).
-With $NOEMA_ACT_SUBJECT set it also writes the subject folder there (as "Demo Activities", for tests/activities_app.js)."""
+With $NOEMA_ACT_PACK set it also writes the built pack there (tests/activities_app.js imports it)."""
 import os, sys, json, shutil, subprocess, tempfile, zipfile
 ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 for _s in (sys.stdout, sys.stderr):
@@ -41,9 +41,6 @@ SIM = {'id': 'ch01-e900', 'type': 'sim', 'section': 'ch01-s01', 'difficulty': 2,
 def put(ch):
     c = rj(ch); c['sections'][0]['blocks'].append(dict(BLOCK)); c['exercises'].append(dict(SIM)); wj(ch, c)
 put(os.path.join(sd, 'chapters', 'ch01.json')); put(os.path.join(sd, 'translations', 'fr', 'ch01.json'))
-if os.environ.get('NOEMA_ACT_SUBJECT'):   # run_e2e.sh: the same subject as a library subject "Demo Activities" (tests/activities_app.js opens it)
-    dst = os.environ['NOEMA_ACT_SUBJECT']; shutil.rmtree(dst, ignore_errors=True); shutil.copytree(sd, dst)
-    sj = rj(os.path.join(dst, 'subject.json')); sj.update(id='demo-activities', title='Demo Activities'); wj(os.path.join(dst, 'subject.json'), sj)
 mk = lambda src, out: run(os.path.join(S, 'make_pack.py'), src, os.path.join(T, out))
 pk = lambda out: zipfile.ZipFile(os.path.join(T, out, 'demo-physics.noema.zip'))
 
@@ -57,6 +54,8 @@ check(a.get('sha256') == hashlib.sha256(html.encode()).hexdigest() and a.get('by
 check(sorted(a.get('strings') or {}) == ['el', 'en', 'fr', 'ru'] and a['strings']['el']['signal'] == 'Σήμα', 'the strings of every locale are in the pack')
 check(p.get('requires') == ['activities/v1', 'runtime:html-app@1'], 'pack.requires names the core and the runtime', str(p.get('requires')))
 check(p['counts'].get('activities') == 1 and 'alias-lab-still' in p['media'], 'counts.activities; the fallback picture is a pack picture (and needs no exercises)')
+if os.environ.get('NOEMA_ACT_PACK'):   # run_e2e.sh: tests/activities_app.js imports this pack into the app
+    shutil.copy(os.path.join(sd, 'build', 'demo-physics.json'), os.environ['NOEMA_ACT_PACK'])
 
 # the round trip
 w2 = os.path.join(T, 'w2'); r = run(os.path.join(S, 'unpack.py'), os.path.join(T, 'o1', 'demo-physics.noema.zip'), w2)

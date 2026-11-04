@@ -2,7 +2,7 @@ const pw = require('playwright'); const wait = ms => new Promise(r => setTimeout
 const U='http://127.0.0.1:8811';
 (async () => {
   for (const name of process.argv.slice(2)) {
-    const b = await pw[name].launch(); const ctx = await b.newContext(); const p = await ctx.newPage();
+    const b = await pw[name].launch(name === 'chromium' ? { channel: 'chromium' } : {});   // the full Chromium browser, as ADR §2 states const ctx = await b.newContext(); const p = await ctx.newPage();
     let popups=0; ctx.on('page',()=>popups++);
     await fetch(U+'/reset');
     await p.goto(U+'/host.html?mode=probe'); 

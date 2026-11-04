@@ -3,8 +3,12 @@
    requests), loaded as srcdoc with a Content-Security-Policy first in <head>: no network at all, no forms, no frames, no workers,
    and scripts only by hash — exactly the inline scripts of the bundle, after the loop guard was added to them (33_activity_guard.js),
    so no script the app did not check can ever run (no inline handlers, no javascript: URLs, no scripts made at run time).
-   Handshake (docs/INTERACTIVE.md §8): the frame's bootstrap posts hello {nonce} to the parent; the host accepts it only from that
-   frame's window and with that nonce, and hands over one MessagePort; every later message goes over the port. Spikes: docs/adr/001 §2. */
+   Two frames: the app's frame holds only a WRAPPER document (no scripts) whose policy says frame-src 'none', and the mini-app runs in
+   the wrapper's own sandboxed frame. A frame can always navigate itself (location.replace, a link, a meta refresh) and the new page
+   would have no policy at all; the wrapper's frame-src blocks every such navigation, so the mini-app stays offline (docs/adr/001 §2,
+   tests/activities_app.js "self-navigation"). The mini-app's srcdoc inherits the wrapper's policy too, so both list the same hashes.
+   Handshake (docs/INTERACTIVE.md §8): the mini-app's bootstrap posts hello {nonce} to the app (parent.parent); the host accepts it only
+   from that inner frame's window and with that nonce, and hands over one MessagePort; every later message goes over the port. */
 (() => {
   /* i18n-ignore-start */   // code
   const CSP = hashes => ["default-src 'none'", 'script-src ' + hashes.map(x => `'sha256-${x}'`).join(' '), "style-src 'unsafe-inline'", 'img-src data: blob:', 'font-src data:', 'media-src data: blob:',
@@ -18,7 +22,8 @@
   function bootstrap(nonce) {
     return `(function(){'use strict';var N=${JSON.stringify(nonce)},P='noema.activity',port=null,q=[],ready=null,H={},init=null,seq=0,waits={},stT=null;
 function send(type,payload,extra){var m={p:P,v:1,type:type,payload:payload||{}};if(extra)for(var k in extra)m[k]=extra[k];if(port)port.postMessage(m);else q.push(m);}
-function on(e){if(e.source!==parent||!e.data||e.data.t!=='welcome'||e.data.nonce!==N||!e.ports||!e.ports[0]||port)return;port=e.ports[0];removeEventListener('message',on,true);port.onmessage=msg;port.start();while(q.length)port.postMessage(q.shift());}
+var APP=parent.parent;
+function on(e){if(e.source!==APP||!e.data||e.data.t!=='welcome'||e.data.nonce!==N||!e.ports||!e.ports[0]||port)return;port=e.ports[0];removeEventListener('message',on,true);port.onmessage=msg;port.start();while(q.length)port.postMessage(q.shift());}
 addEventListener('message',on,true);
 function applyTheme(t){if(!t)return;var r=document.documentElement;try{for(var k in t.tokens)r.style.setProperty('--noema-'+k,String(t.tokens[k]));r.style.colorScheme=t.scheme==='dark'?'dark':'light';r.dataset.noemaScheme=t.scheme;r.dataset.noemaMotion=t.reducedMotion?'reduce':'full';if(t.dir)r.dir=t.dir;}catch(x){}}
 function fire(type,p){(H[type]||[]).slice().forEach(function(f){try{f(p);}catch(x){console.error(x);}});}
@@ -55,7 +60,7 @@ Object.freeze(api.fmt);Object.freeze(api);
 Object.defineProperty(window,'noema',{value:api,writable:false,configurable:false});
 addEventListener('DOMContentLoaded',function(){measure();try{new ResizeObserver(measure).observe(document.documentElement);}catch(x){setInterval(measure,500);}});
 addEventListener('error',function(e){try{send('error',{code:'script',message:String(e.message||'').slice(0,300)});}catch(x){}});
-parent.postMessage({t:'hello',nonce:N},'*');
+APP.postMessage({t:'hello',nonce:N},'*');
 })();`;
   }
 
@@ -86,7 +91,14 @@ parent.postMessage({t:'hello',nonce:N},'*');
     if (!doc.querySelector('meta[name="viewport"]')) first.push(add('meta', { name: 'viewport', content: 'width=device-width, initial-scale=1' }));
     first.push(add('style', {}, ':root{color-scheme:light dark}html,body{margin:0;background:var(--noema-card,var(--noema-bg,#fff));color:var(--noema-ink,#222);font-family:var(--noema-font,system-ui,sans-serif)}'));
     head.prepend(...first);
-    return '<!doctype html>' + doc.documentElement.outerHTML;
+    const inner = '<!doctype html>' + doc.documentElement.outerHTML;
+    // the wrapper: no scripts of its own; its policy (inherited by the mini-app's srcdoc) blocks every navigation of the inner frame
+    const w = document.implementation.createHTMLDocument('');
+    const wm = w.createElement('meta'); wm.setAttribute('http-equiv', 'Content-Security-Policy'); wm.setAttribute('content', CSP(hashes));
+    const ws = w.createElement('style'); ws.textContent = 'html,body{margin:0;height:100%;overflow:hidden;background:transparent}iframe{display:block;border:0;width:100%;height:100%}';
+    const wf = w.createElement('iframe'); wf.setAttribute('sandbox', 'allow-scripts'); wf.setAttribute('allow', ALLOW); wf.setAttribute('referrerpolicy', 'no-referrer'); wf.setAttribute('srcdoc', inner);
+    w.head.replaceChildren(wm, ws); w.body.replaceChildren(wf);
+    return '<!doctype html>' + w.documentElement.outerHTML;
   }
 
   ACT.registerRuntime({
@@ -107,12 +119,13 @@ parent.postMessage({t:'hello',nonce:N},'*');
         close() { closed = true; removeEventListener('message', hello); try { ch?.port1.close(); } catch (e) { } frame.remove(); },
       };
       function hello(e) {
-        if (closed || ch || e.source !== frame.contentWindow) return;
+        const app = (() => { try { return frame.contentWindow?.frames[0] || null; } catch (x) { return null; } })();   // the mini-app's window, inside the wrapper
+        if (closed || ch || !app || e.source !== app) return;
         const d = e.data; if (!d || d.t !== 'hello' || d.nonce !== nonce) return;
         removeEventListener('message', hello);
         ch = new MessageChannel();
         ch.port1.onmessage = m => { if (!closed) onMessage(m.data); };
-        frame.contentWindow.postMessage({ t: 'welcome', nonce }, '*', [ch.port2]);
+        app.postMessage({ t: 'welcome', nonce }, '*', [ch.port2]);
         ch.port1.postMessage(ACTP.out('init', init));
         while (pending.length) ch.port1.postMessage(pending.shift());
       }
