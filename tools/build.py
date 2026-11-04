@@ -352,7 +352,9 @@ def build_skill(out_zip):
         for f in sorted(glob.glob(os.path.join(ROOT, 'tools', 'activities_examples', '**', '*'), recursive=True)):
             if os.path.isfile(f): z.write(f, 'noema-pack-builder/scripts/activities_examples/' + os.path.relpath(f, os.path.join(ROOT, 'tools', 'activities_examples')).replace(os.sep, '/'))
         for f in ('32_activities.js', '33_activity_guard.js', '34_activity_html.js', '35_activity_sim.js', '35_simexpr.js', '36_engine_circuit.js', '36_engine_circuit_sim.js', '38_activity_h5p.js', '32_activities.css'): z.write(os.path.join(ENGINE, 'src', f), f'noema-pack-builder/scripts/activity_host/{f}')
-        z.write(os.path.join(ENGINE, 'vendor', 'h5p', '3.8.2', 'player.js'), 'noema-pack-builder/scripts/activity_host/h5p/player.js')   # h5p@1: the app's own H5P player for the harness
+        h5pv = os.path.join(ENGINE, 'vendor', 'h5p', '3.8.2')   # h5p@1: the app's own H5P player for the harness, with its licences and readable source (GPL-3.0)
+        for f in ['player.js', 'LICENSE', 'LICENSE-NOTICE.txt'] + sorted(os.path.relpath(g, h5pv).replace(os.sep, '/') for g in glob.glob(os.path.join(h5pv, 'source', '**', '*'), recursive=True) if os.path.isfile(g)):
+            z.write(os.path.join(h5pv, f), 'noema-pack-builder/scripts/activity_host/h5p/' + f)
         z.write(os.path.join(ENGINE, 'packcheck.js'), 'noema-pack-builder/scripts/activity_host/packcheck.js')   # sim-spec@1: the spec check the runtime runs
         for f in ('INTERACTIVE.md', 'INTERACTIVE_AUTHORING.md', 'INTERACTIVE_SIMEXPR.md', 'INTERACTIVE_CIRCUIT.md', 'INTERACTIVE_H5P.md'):
             if os.path.exists(os.path.join(ROOT, 'docs', f)): z.write(os.path.join(ROOT, 'docs', f), f'noema-pack-builder/references/{f}')
