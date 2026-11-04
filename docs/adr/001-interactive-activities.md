@@ -1,6 +1,7 @@
 # ADR 001 · Interactive activities in packs (mini-apps, minigames, simulations)
 
-* **Status:** proposed (P0). Waiting for the owner's go-ahead on the four plan changes in §2 before P1 starts.
+* **Status:** accepted (2026-11-04). The owner approved the four plan changes in §2; P1 (core + `html-app@1`) is implemented. Where this
+  record and the owner's decisions doc differ, the doc wins (items 6 and 7 are applied below: D7, D8).
 * **Date:** 2026-11-04 · **Requested by:** ANR · **Brief:** the "Handoff: Interactive Activities for noema-lite" message (thread "Add interactive activities to packs").
 * **Scope of this ADR:** the design for all phases P1–P5 and the results of the four P0 spikes. No feature code ships with it; the spike
   scripts are kept in `tests/spikes/activities/` so anyone can run them again.
@@ -117,13 +118,14 @@ and P4 proves offline use with a real test before it claims it. On a `file://` c
 
 **D2 · Where activities live (open decision 2).** Registry `pack.activities` (format `noema.activities/v1`, the brief's §5.1, ids
 `[a-z0-9-]+`, never reused) with `sha256` + `bytes` per entry. In the subject folder: `activities/activities.json` +
-`activities/<id>/…`. Inline in `pack.json` up to **64 KB** per bundle; bigger Tier A / Tier C bundles become separate content-addressed
-parts uploaded exactly like source files (the `noema_finish_upload` missing-file list and signed `curl` commands, sha256 + size checked).
-`noema_save_pack` refuses a pack with non-inline bundles and names the two-step upload.
+`activities/<id>/…`. **Revised with the owner (P1): every bundle is inline in `pack.json`, like the pictures** (Tier A at most 512 KB,
+a warning above 256 KB), with its `sha256` checked by the app before it mounts it and by the connector. No second upload path; the
+mixed 64 KB rule was dropped because one path is simpler to test and the packs go through `noema_start_upload` (no 1.5 MB limit).
 
 **D3 · Tier A runaway code (new, from spike c).** The host rewrites every loop of a Tier A app's inline scripts at mount time, adding a
-time guard (`for`/`while`/`do`, with a vendored, pinned JavaScript parser, about 100 KB; the same transform in `activity_lint.py` so authors
-see it). After 1.5 s of uninterrupted running, the guard throws and the bootstrap reports `error {code:"runaway"}`; the host then shows
+time guard (`for`/`while`/`do`/`for … of`). **As built:** a small tokenizer (`engine/src/33_activity_guard.js`, no vendored parser)
+that skips strings, template literals, comments and regular expressions and adds `G()&&(…)` to each loop condition; the scripts are
+then allowed by their hashes in the frame's CSP, so only the guarded scripts can run. After 1.5 s of uninterrupted running, the guard throws and the bootstrap reports `error {code:"runaway"}`; the host then shows
 *This activity stopped responding · Restart*. The lint also refuses obvious traps (`while(true)` without a `break`, huge array sizes,
 `setInterval` at 0 ms). What the guard cannot catch (one huge regular expression, a giant allocation) is left to the browser's own
 "page is not responding" prompt. Chromium additionally keeps the app alive on its own. Graded activities should prefer Tier B, where no
@@ -142,15 +144,36 @@ and the app agree.
 quota (recall ≤ 25 %, difficulty 20/25/55, paradigms) is unchanged. An `interactive` block is explained right after it (same check as
 figures, Q7b: `figure.explained` gets an `interactive.explained` twin).
 
-**D7 · Python allow-list (open decision 6).** numpy only, Pyodide 0.27.7 pinned, files self-hosted under
-`engine/vendor/pyodide/0.27.7/` with their sha256 checked by the build (`checkIntegrity` for wheels), never `micropip`.
+**D7 · Python packages (open decision 6, the owner's choice).** numpy + scipy + micropip, Pyodide 0.27.7 pinned, files self-hosted under
+`engine/vendor/pyodide/0.27.7/` with their sha256 checked by the build (`checkIntegrity` for wheels). scipy and every extra load lazily,
+only when an activity asks for them. `micropip` may install only from our own pinned, hash-checked package index and only allow-listed
+packages, never from open PyPI; an activity that needs a downloaded package declares `requiresNetwork`, and the app tells the learner.
+The security suite tests the pinned index and the allow-list (P4). **Offline (the owner, 2026-11-04):** activities without Python always work offline. The Pyodide
+files, numpy and scipy are cached on the device after the first use by a small service worker (pinned files, sha256-checked), and Settings
+offers "Prepare Python for offline" to download them ahead (never automatically on mobile data); packages installed through micropip are
+cached the same way, so an activity opened before works offline and only a first use needs the network (`requiresNetwork` is shown only
+then). `navigator.storage.persist()` is asked for; if the browser evicts the cache, the fallback shows until the device is online.
 
-**D8 · Hints and live activities (open decisions 7, 8).** Each hint used multiplies the score by 0.85; a hint never contains the answer
+**D8 · Hints and live activities (open decisions 7, 8).** Each hint used multiplies the score by 0.85, with a floor of 0.5 (the owner's decisions doc, item 7); a hint never contains the answer
 (the solvability harness searches every shipped string for it). At most 1 live activity on phones (< 720 px, the engine's existing
 breakpoint), 2 on wider screens; the rest show their fallback with a "Start" button.
 
 **D9 · Offline (new, from spike d).** See plan change 4. Documented in `INTERACTIVE.md`: "Tier A and B work wherever the pack works;
 Tier C needs the website the first time and is unavailable in the one-file bundle".
+
+**D11 · H5P items (the owner, 2026-11-04 17:33; phase P4b, before the handback).** A fourth runtime `h5p@1`: an ordinary `.h5p`
+package (h5p.json + content/ + the content-type libraries) played by a pinned, self-hosted, sha256-checked H5P standalone player inside the
+same sandboxed frame and CSP as `html-app@1` (never loaded from h5p.org). H5P's xAPI `answered`/`completed` statements with a score become
+`result {score, passed}`; its saved user state maps to `state`. Validators allow-list the content types and refuse outside links and
+scripts outside the libraries; every item keeps a fallback; its own texts need a version per pack language. Because an item with its
+libraries often exceeds 512 KB, `.h5p` files travel beside the pack like the source files (the `noema_finish_upload` list), sha256-checked.
+P4b starts with a spike: the player in the opaque sandbox, offline, in Chromium, Firefox and WebKit.
+
+**D12 · The brief's §14 extension points are built (the owner, 2026-11-04 17:35; phase P6, after P1–P4b are done and verified).**
+`wasm-module@1` (precompiled WASM in a worker) and `external-embed@1` (allow-listed third-party frames with licence/credit metadata, opt-in,
+network needed) through `registerRuntime`; thermal, RF propagation, PID control-loop and digital-twin engines through `registerEngine`;
+xAPI/cmi5 statements exported from the event log and an import of simple H5P content types into the existing exercise types; an
+authoring UI generated from the same JSON Schemas as the validators.
 
 **D10 · The authoring contract.** `docs/INTERACTIVE.md` (served by `noema_authoring_guide` as the new `part: "interactive"` and included in
 `all`), a short section in `tools/CONTENT_SPEC.md` (the `interactive` block, the `sim` type, the Quality rules), `docs/INTERACTIVE_AUTHORING.md`

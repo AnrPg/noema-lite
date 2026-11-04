@@ -1,0 +1,6 @@
+{ "cases": [
+ { "name": "the right rate (10 Hz)", "exercise": "ch01-e900", "steps": [{ "set": "#fs", "value": "10" }], "expect": { "passed": true, "text": { "#out": "3 Hz" } } },
+ { "name": "too slow (5 Hz → a 2 Hz alias)", "exercise": "ch01-e900", "steps": [{ "set": "#fs", "value": "5" }], "expect": { "passed": false } },
+ { "name": "fast enough is not the goal (24 Hz: no alias)", "exercise": "ch01-e900", "steps": [{ "set": "#fs", "value": "24" }], "expect": { "passed": false } },
+ { "name": "explorer: the state is saved", "steps": [{ "set": "#fs", "value": "12" }], "expect": { "state": ["f", "fs"], "text": { "#out": "5 Hz" } } }
+] }

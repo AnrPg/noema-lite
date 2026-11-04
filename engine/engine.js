@@ -1516,7 +1516,7 @@ const ACTP = (() => {
   const str = (v, max) => typeof v === 'string' && v.length <= max;
   const NAME = /^[a-z][a-z0-9_.:-]{0,63}$/, CODE = /^[a-z0-9_.-]{1,40}$/;
   const size = v => { try { return JSON.stringify(v).length; } catch (e) { return Infinity; } };
-  /** the payload rules per message type an activity may send (the same as tools/schemas/noema.activity-protocol.v1.schema.json) */
+  /** the payload rules per message type an activity may send (docs/INTERACTIVE.md §8) */
   const IN = {
     ready: p => (p.protocols == null || (Array.isArray(p.protocols) && p.protocols.length <= 8 && p.protocols.every(isInt))) && (p.wants == null || (Array.isArray(p.wants) && p.wants.length <= 16 && p.wants.every(w => str(w, 40)))),
     resize: p => typeof p.h === 'number' && isFinite(p.h) && p.h >= 0 && p.h <= 20000,
@@ -1791,7 +1791,7 @@ R.sim = (ex, api) => {
     el,
     check() { const g = sess.grade?.(); if (!g) return null; sess.saveAttempt?.(); return g.ok; },
     reveal() { if (hintBtn) hintBtn.disabled = true; if (sess.result?.passed && ex.reveal) el.append(h('div', { class: 'explain' }, h('div', { html: fmt(ex.reveal) }))); },
-    bonus: () => -Math.round((4 + (ex.difficulty || 1) * 4) * (1 - Math.pow(0.85, used))),   // each hint used: score × 0.85 (docs/adr/001 D8)
+    bonus: () => -Math.round((4 + (ex.difficulty || 1) * 4) * (1 - Math.max(0.5, Math.pow(0.85, used)))),   // each hint used: score × 0.85, never below × 0.5 (docs/adr/001 D8)
     given: () => sess.result ? `(the activity reported: ${sess.result.passed ? 'passed' : 'not passed'}, score ${sess.result.score}${sess.result.detail ? ', ' + sess.result.detail : ''})` : '',   // i18n-ignore (AI context)
   };
 };

@@ -6,7 +6,7 @@ description: Turn study sources (PDFs, notes, slides, images, links) into a noem
 # noema-pack-builder
 
 You turn the user's sources into a **noema-lite subject package** (`<id>.noema.zip`): the pack (the course —
-click-to-reveal theory, a Socratic tutor, 25 exercise types (7 of them on pictures, 6 for critical thinking), spaced repetition) **plus the
+click-to-reveal theory, a Socratic tutor, 26 exercise types (7 of them on pictures, 6 for critical thinking, 1 inside an interactive activity), spaced repetition) **plus the
 original source files** (every PDF, document, slide deck the user gave you — exactly in the form you used them, so
 each part of a split PDF is its own file). The noema-lite app (https://noema-lite.netlify.app) imports it and the
 learner opens each source file at the pages the chapters cite.
@@ -14,6 +14,7 @@ learner opens each source file at the pages the chapters cite.
 **The contract is in `references/`. Read both files before writing any content:**
 - `references/CONTENT_SPEC.md` — subject, chapters, sections, blocks, exercises, playbooks, quantities, pedagogy.
 - `references/VISUAL.md` — pictures, regions, the 7 picture-exercise types, figures, picture sourcing & licences.
+- `references/INTERACTIVE.md` — interactive activities (optional): mini-apps in the theory and graded `sim` exercises; `references/INTERACTIVE_AUTHORING.md` is how to make one that teaches.
 
 Scripts live in `scripts/` next to this file (Python 3, standard library + Pillow; for PDFs any of poppler, PyMuPDF, or pypdf + pypdfium2).
 
@@ -99,6 +100,19 @@ count. Look in all three places below, keep only the valuable ones:
 
 **Every picture gets ≥ 3 exercises of ≥ 2 visual types** + a `figure` block, explained in detail right after it (Q7b), in the section that teaches it; a chapter
 with pictures has every picture exercise type that fits it ≥ 3 times (step 4). A chapter without a picture that teaches has none.
+
+## 3a. Interactive activities — only where trying teaches (flow step `activities`; INTERACTIVE.md)
+Optional, and most chapters need none. Make one when the learner learns by **trying**: a relation to explore (move one quantity,
+watch another), a process over time, a setting to find, a fault to probe. Never for a fact or a static diagram.
+```bash
+python3 scripts/activity_new.py work/<id> <activity-id>    # from the reference activity (alias-lab): app.html, strings.en/el/ru.json, tests.json, a fallback picture
+python3 scripts/activity_lint.py work/<id>                 # the same rules as make_pack.py
+python3 scripts/activity_test.py work/<id>                 # in a real browser with the app's runtime: every language, tests.json cases (right AND tempting wrong)
+python3 scripts/activity_preview.py work/<id> <activity-id>  # light, dark, 360 px, fallback screenshots: look at each one
+```
+Use it as a theory block `{"t": "interactive", "activity": "<id>"}` (explained in detail right after it) and/or a `sim` exercise
+(`task.params`, `grade: {"mode": "reported"}`, hints that lead to the idea, never the answer; add `"sim"` to the map's `fits.types`).
+Every word through `noema.t(key)` from the string tables, one per language of the pack; a fallback picture + text that teaches the same.
 
 ## 3b. Sources: one entry per file or link, every chapter mapped to ALL its sources
 Give every PDF (also each part of a split PDF), document, web page, video and conversation its own entry in

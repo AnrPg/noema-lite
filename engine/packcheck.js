@@ -370,7 +370,7 @@
   /* ---------- interactive activities (docs/INTERACTIVE.md): the SAME rules as tools/activities.py (tests/activities.js) ---------- */
   const ACT = {
     FORMAT: 'noema.activities/v1', ID_RE: /^[a-z0-9][a-z0-9-]{1,60}$/, KEY_RE: /^[a-z][a-zA-Z0-9_.-]{0,63}$/,
-    RUNTIMES: new Set(['html-app@1']), LATER: { 'sim-spec@1': 'P2', 'py-module@1': 'P4' },
+    RUNTIMES: new Set(['html-app@1']), LATER: { 'sim-spec@1': 'P2', 'py-module@1': 'P4', 'h5p@1': 'P4b' },
     CAPS: new Set(['state', 'events', 'resize', 'result', 'hints', 'announce']), GRADE_MODES: new Set(['reported']),
     HTML_MAX: 512 * 1024, HTML_WARN: 256 * 1024, FALLBACK_MIN: 40, HINTS_MAX: 6,
     BANNED: [
@@ -443,7 +443,8 @@
     return E;
   }
   /** checkActivities(pack, locales?) → { errors, warnings }: pack.activities, the blocks and sim exercises that use them, pack.requires.
-      (The sha256 of a bundle is checked by tools/activities.py and by the app when it mounts it.) */
+      The sha256 of a bundle is checked here when Node's crypto is at hand (the connector), else by the app when it mounts it. */
+  const nodeSha = (() => { try { const c = globalThis.process?.getBuiltinModule?.('crypto'); return c ? s => c.createHash('sha256').update(s, 'utf8').digest('hex') : null; } catch (e) { return null; } })();
   function checkActivities(p, translations) {
     const E = [], W = [], reg = p?.activities, media = p?.media || {}, own = p?.subject?.language || 'en';
     const locs = [...new Set([own, ...(translations || Object.keys(p?.translations || {}))])].sort();
@@ -468,6 +469,7 @@
           if (typeof a.html !== 'string') E.push(`${w}: the bundle (html) is missing`);
           else {
             const l = lintHtml(a.html); E.push(...l.errors.map(m => `${w}: ${m}`)); W.push(...l.warnings.map(m => `${w}: ${m}`));
+            if (a.sha256 != null && (!/^[0-9a-f]{64}$/.test(String(a.sha256)) || (nodeSha && nodeSha(a.html) !== a.sha256))) E.push(`${w}: sha256 does not match the bundle`);
             if (a.bytes != null && a.bytes !== utf8(a.html)) E.push(`${w}: bytes does not match the bundle`);
           }
         }
