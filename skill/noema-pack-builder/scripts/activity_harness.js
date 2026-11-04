@@ -5,7 +5,10 @@
      node activity_harness.js preview SUBJECT_DIR ID [OUT_DIR]  → screenshots: light, dark, 360 px wide, the fallback
    sim-spec@1 activities run in the app's own sim runtime (35_activity_sim.js, with the spec check of packcheck.js); in their
    tests.json a step {"set": "<param id>", "value": v} sets a control, "values": {name: number | [lo, hi]} checks a computed value,
-   "passed" the exercise's checks grader, "state" the saved values.
+   "passed" the exercise's checks grader, "state" the saved values. A bench (circuit-mna@1, docs/INTERACTIVE.md §12.7): a step
+   {"measure": {"instrument": "V", "a": "TP3", "b": "GND"}} (or {"instrument": "I", "part": 0}) takes a measurement, {"diagnose": 6}
+   picks the 7th diagnosis; "readings": [[i, lo, hi]] checks the number of the i-th measurement, "log": n how many there are;
+   a case's "task" (e.g. {"fault": "rOpen"}) overrides the exercise's task.params.
    Called by activity_test.py and activity_preview.py. Needs Playwright with Chromium (npm i playwright; npx playwright install chromium). */
 const fs = require('fs'), path = require('path'), os = require('os');
 let pw; try { pw = require(process.env.PW || 'playwright'); } catch (e) {
@@ -45,18 +48,25 @@ const THEMES = {
 const has = f => fs.existsSync(path.join(srcDir, f));
 const pcPath = [path.join(srcDir, 'packcheck.js'), path.join(srcDir, '..', 'packcheck.js')].find(f => fs.existsSync(f));
 const SIMOK = has('35_activity_sim.js') && has('35_simexpr.js') && !!pcPath;
+const CIRCUIT = has('36_engine_circuit.js') && has('36_engine_circuit_sim.js');   // the circuit engine circuit-mna@1 (P3)
 // the host words of sim-spec@1 (the app shows them in the learner's language; here English is enough)
-const HOSTWORDS = { 'engine.act.sim.reset': 'Reset the values', 'engine.act.sim.computing': 'Computing…', 'engine.act.sim.results': 'Results', 'engine.act.sim.plot': 'Plot of {y} against {x}' };
+const HOSTWORDS = { 'engine.act.sim.reset': 'Reset the values', 'engine.act.sim.computing': 'Computing…', 'engine.act.sim.results': 'Results', 'engine.act.sim.plot': 'Plot of {y} against {x}',
+  'engine.act.bench.instrument': 'Instrument', 'engine.act.bench.inst.V': 'Multimeter: voltage', 'engine.act.bench.inst.I': 'Multimeter: current', 'engine.act.bench.inst.R': 'Multimeter: resistance',
+  'engine.act.bench.inst.scope': 'Oscilloscope', 'engine.act.bench.inst.logic': 'Logic analyser', 'engine.act.bench.red': 'Red lead (+)', 'engine.act.bench.black': 'Black lead (−)', 'engine.act.bench.probe': 'Probe on',
+  'engine.act.bench.part': 'Current through', 'engine.act.bench.measure': 'Measure', 'engine.act.bench.left': '{left} measurements left', 'engine.act.bench.log': 'Measurements', 'engine.act.bench.logEmpty': 'No measurements yet.',
+  'engine.act.bench.scopeStats': '{pp} peak to peak, mean {mean}, frequency {freq}', 'engine.act.bench.logicStats': 'frequency {freq}, duty cycle {duty}', 'engine.act.bench.time': 'Time', 'engine.act.bench.voltage': 'Voltage',
+  'engine.act.bench.level': 'Logic level (0 or 1)', 'engine.act.bench.diagnosis': 'Your diagnosis', 'engine.act.bench.choose': 'Choose the fault…', 'engine.act.bench.commit': 'Check my diagnosis',
+  'engine.act.bench.right': 'Right: {fault}', 'engine.act.bench.wrong': 'Not this one. The fault was: {fault}', 'engine.act.bench.another': 'Another device', 'engine.act.bench.failed': 'this measurement could not be made' };
 const HOST = `<!doctype html><meta charset="utf-8"><style>#box iframe{display:block;width:100%;height:100%;border:0}
 ${has('32_activities.css') ? rd('32_activities.css') : ''}
 body{margin:0;font-family:var(--font,system-ui);background:var(--bg);color:var(--ink)}.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:4px 10px;font:inherit}</style><body><div id="box" class="act-box" style="position:relative;box-sizing:border-box;width:100%;height:360px"></div><script>
 var RT = {}, EN = {}; var ACT = { registerRuntime: function (d) { RT[d.id] = d; }, registerEngine: function (d) { EN[d.id] = d; }, engine: function (id) { return EN[id] || null; }, engines: function () { return Object.keys(EN); } };
 var WORDS = ${JSON.stringify(HOSTWORDS)};
-function tE(k, v) { return String(WORDS[k] || k).replace(/\{(\w+)\}/g, function (_, n) { return v && v[n] != null ? v[n] : ''; }); }
+function tE(k, v) { return String(WORDS[k] || k).replace(/\\{(\\w+)\\}/g, function (_, n) { return v && v[n] != null ? v[n] : ''; }); }
 function h(tag, attrs, ...kids) { const el = document.createElement(tag); for (const [k, v] of Object.entries(attrs || {})) { if (v == null || v === false) continue; if (k === 'class') el.className = v; else if (k === 'style' && typeof v === 'object') Object.assign(el.style, v); else if (k.startsWith('on')) el.addEventListener(k.slice(2), v); else el.setAttribute(k, v === true ? '' : v); } for (const kid of kids.flat()) if (kid != null && kid !== false) el.append(kid.nodeType ? kid : document.createTextNode(String(kid))); return el; }
 ${ACTP}
 window.ACTP = ACTP;
-</script><script>${rd('33_activity_guard.js')}</script><script>${rd('34_activity_html.js')}</script>${SIMOK ? `<script>${rd('35_simexpr.js')}</script><script>${fs.readFileSync(pcPath, 'utf8')}</script><script>${rd('35_activity_sim.js')}</script>` : ''}<script>
+</script><script>${rd('33_activity_guard.js')}</script><script>${rd('34_activity_html.js')}</script>${SIMOK ? `<script>${rd('35_simexpr.js')}</script><script>${fs.readFileSync(pcPath, 'utf8')}</script><script>${rd('35_activity_sim.js')}</script>${CIRCUIT ? `<script>${rd('36_engine_circuit.js')}</script><script>${rd('36_engine_circuit_sim.js')}</script>` : ''}` : ''}<script>
 window.setTheme = function (t) { var r = document.documentElement; for (var k in t.tokens) r.style.setProperty('--' + k, t.tokens[k]); r.style.colorScheme = t.scheme; };
 window.LOG = []; window.H = null;
 window.run = function (act, init) {
@@ -144,11 +154,17 @@ window.run = function (act, init) {
       const ex = c.exercise ? exercises[c.exercise] : null;
       if (c.exercise && !ex) { say(false, `case "${c.name}": exercise ${c.exercise} is not in chapters/`); continue; }
       const { p, ctx, errs } = await open();
-      const { frame } = await start(p, a, { locale: c.locale || (a.strings.en ? 'en' : locs[0]), exerciseId: c.exercise || null, task: ex?.task?.params || c.task || {}, seed: Number.isInteger(ex?.task?.seed) ? ex.task.seed : 12345 });
+      const { frame } = await start(p, a, { locale: c.locale || (a.strings.en ? 'en' : locs[0]), exerciseId: c.exercise || null, task: { ...(ex?.task?.params || {}), ...(c.task || {}) }, seed: Number.isInteger(ex?.task?.seed) ? ex.task.seed : 12345 });
       try {
         for (const s of c.steps || []) {
           if (s.set && SIM) await p.evaluate(([id, v]) => { const e = document.querySelector(`#box [data-param="${id}"]`); if (!e) throw new Error('no param ' + id); if (e.type === 'checkbox') e.checked = !!v; else e.value = String(v); e.dispatchEvent(new Event('input', { bubbles: true })); e.dispatchEvent(new Event('change', { bubbles: true })); }, [s.set, s.value]);
           else if (s.set) await frame.evaluate(([sel, v]) => { const e = document.querySelector(sel); if (!e) throw new Error('no ' + sel); e.value = String(v); e.dispatchEvent(new Event('input', { bubbles: true })); e.dispatchEvent(new Event('change', { bubbles: true })); }, [s.set, s.value]);
+          else if (s.measure && SIM) {   // a bench: choose the instrument and where it goes, then Measure; wait for the reading
+            const n0 = await p.evaluate(() => document.querySelectorAll('#box .sim-log li').length);
+            const off = await p.evaluate(m => { const set = (k, v) => { if (v == null) return; const e = document.querySelector(`#box [data-bench="${k}"]`); if (!e) throw new Error('no bench control ' + k); e.value = String(v); if (e.value !== String(v)) throw new Error(`no ${k} ${v} on this bench`); e.dispatchEvent(new Event('change', { bubbles: true })); };
+              set('instrument', m.instrument); set('a', m.a); set('b', m.b); set('part', m.part); const btn = document.querySelector('#box [data-bench="measure"]'); if (btn.disabled) return true; btn.click(); return false; }, s.measure);
+            const t0 = Date.now(); while (!off && Date.now() - t0 < 8000) { const done = await p.evaluate(n => { const l = document.querySelectorAll('#box .sim-log li'); return l.length > n && !/…$/.test(l[l.length - 1].textContent); }, n0); if (done) break; await p.waitForTimeout(50); }
+          } else if (s.diagnose != null && SIM) await p.evaluate(v => { const e = document.querySelector('#box [data-bench="diagnosis"]'); if (!e) throw new Error('this activity has no bench'); e.value = String(v); e.dispatchEvent(new Event('change', { bubbles: true })); }, s.diagnose);
           else if (s.click) await frame.click(s.click);
           if (s.wait) await p.waitForTimeout(s.wait);
         }
@@ -165,6 +181,12 @@ window.run = function (act, init) {
         const stData = st ? (SIM ? st.payload.data && st.payload.data.values : st.payload.data) : null;
         for (const [sel, part] of Object.entries(c.expect?.text || {})) { const t = await frame.evaluate(s => document.querySelector(s)?.textContent || '', sel); if (!t.includes(part)) why.push(`${sel}: "${t.slice(0, 60)}" has no "${part}"`); }
         for (const k of c.expect?.state || []) if (!stData || !(k in stData)) why.push(`state has no ${k}`);
+        if (SIM && (c.expect?.readings || c.expect?.log != null)) {   // a bench: the numbers in the measurement log
+          const L = await p.evaluate(() => [...document.querySelectorAll('#box .sim-log li b')].map(b => b.textContent));
+          const val = t => { const m = String(t).replace(/\u2212/g, '-').match(/(-?[\d.,]+)\s*([pnµmkMG]?)/); if (!m) return NaN; return parseFloat(m[1].replace(',', '.')) * ({ p: 1e-12, n: 1e-9, 'µ': 1e-6, m: 1e-3, k: 1e3, M: 1e6, G: 1e9 }[m[2]] || 1); };
+          if (c.expect.log != null && L.length !== c.expect.log) why.push(`the log has ${L.length} measurements, expected ${c.expect.log}`);
+          for (const [i, lo, hi] of c.expect.readings || []) { const v = L[i] === 'OL' ? Infinity : val(L[i]); if (!(v >= lo && v <= hi)) why.push(`measurement ${i + 1} reads ${L[i]}, expected ${lo}…${hi}`); }
+        }
         if (errs.length) why.push('errors: ' + errs.slice(0, 2).join(' | '));
         say(!why.length, `case "${c.name}"${why.length ? ' — ' + why.join('; ') : ''}`);
       } catch (e) { say(false, `case "${c.name}": ${e.message.split('\n')[0]}`); }

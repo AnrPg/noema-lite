@@ -374,8 +374,15 @@
     CAPS: new Set(['state', 'events', 'resize', 'result', 'hints', 'announce']), GRADE_MODES: new Set(['reported', 'checks']),
     CHECKS_RUNTIMES: new Set(['sim-spec@1']),   // runtimes whose values the app can see (the checks grader needs them)
     // sim-spec@1 (docs/INTERACTIVE.md §12): the SAME rules as tools/activities.py check_spec
-    SPEC_FORMAT: 'noema.sim-spec/v1', DEFAULT_ENGINE: 'formula@1', ENGINES: new Set(['formula@1']),   // P3 adds circuit-mna@1, in both twins
-    SPEC_KEYS: new Set(['format', 'engine', 'model', 'title', 'intro', 'consts', 'params', 'derived', 'outputs', 'readouts', 'plots']),
+    SPEC_FORMAT: 'noema.sim-spec/v1', DEFAULT_ENGINE: 'formula@1', ENGINES: new Set(['formula@1', 'circuit-mna@1']),   // the same list in tools/activities.py
+    SPEC_KEYS: new Set(['format', 'engine', 'model', 'title', 'intro', 'consts', 'params', 'derived', 'outputs', 'readouts', 'plots', 'bench']),
+    // circuit-mna@1 (docs/INTERACTIVE_CIRCUIT.md): the model, the outputs it can compute, the fault-finding bench (docs/INTERACTIVE.md §12.7)
+    CIRCUIT: 'circuit-mna@1', BENCH_ENGINES: new Set(['circuit-mna@1']), BENCH_NAMES: ['diagnosis', 'measurements', 'correct'],
+    MODEL_KEYS: ['netlist', 'bindings', 'transient', 'noise'], OUT_KEYS: ['id', 'kind', 'node', 'branch', 'time', 'probe', 'at', 'stat'], STATS: ['final', 'min', 'max', 'mean', 'pp', 'rms'],
+    WAVES: { pulse: ['v1', 'v2', 'delay', 'rise', 'fall', 'width', 'period'], sine: ['offset', 'amp', 'freq', 'phase', 'delay'], pwm: ['v', 'freq', 'duty', 'low', 'delay'] },
+    BENCH_KEYS: ['faults', 'points', 'instruments', 'diagnosis', 'budget'], INSTRUMENTS: ['V', 'I', 'R', 'scope', 'logic'],
+    INST_KEYS: ['kind', 'points', 'parts', 'tEnd', 'dt', 'tStart', 'threshold'], BENCH_ID_RE: /^[A-Za-z][A-Za-z0-9_-]{0,31}$/,
+    BENCH_LIM: { faults: 16, apply: 4, points: 24, instruments: 5, parts: 24, options: 12, budget: 100, bindings: 24, steps: 200000 },
     SPEC_LIM: { params: 24, consts: 24, derived: 48, outputs: 24, readouts: 24, plots: 6, series: 6, marks: 8, points: 2000, options: 12, checks: 16, bytes: 64 * 1024, unit: 16, digits: 8 },
     NAME_RE: /^[A-Za-z_][A-Za-z0-9_]{0,31}$/, PARAM_KINDS: ['slider', 'number', 'toggle', 'choice'], NUM_FORMATS: ['auto', 'si', 'fixed'],
     HTML_MAX: 512 * 1024, HTML_WARN: 256 * 1024, FALLBACK_MIN: 40, HINTS_MAX: 6,
@@ -440,7 +447,188 @@
     const out = isObj(spec.consts) ? Object.keys(spec.consts) : [];
     for (const k of ['params', 'derived']) for (const x of list(spec[k])) if (isObj(x) && typeof x.id === 'string') out.push(x.id);
     for (const x of list(spec.outputs)) if (isObj(x) && typeof x.id === 'string' && x.kind === 'scalar') out.push(x.id);
+    if (isObj(spec.bench)) out.push(...ACT.BENCH_NAMES);   // a bench's values: for the checks of a sim exercise only (never shown)
     return out;
+  }
+  /* ---------- circuit-mna@1: the model, the outputs, the bench — the SAME rules as tools/activities.py check_circuit / check_bench ---------- */
+  const CK = () => root.NoemaCircuit || null;   // engine/src/36_engine_circuit.js, loaded beside this file (its check and checkFaults)
+  const isGnd = s => s === 'gnd' || s === '0';
+  /** → {nl, els: Map id → element, nodes: Set of node and test-point names} of a spec's netlist without errors, or null */
+  function circuitOf(spec) {
+    const nl = isObj(spec?.model) ? spec.model.netlist : null;
+    if (!CK() || !isObj(nl) || CK().check(nl).some(p => p.level === 'error')) return null;
+    return { nl, els: new Map(nl.elements.map(e => [e.id, e])), nodes: new Set(nl.nodes.map(x => typeof x === 'string' ? x : x.name)) };
+  }
+  /** a measuring point: a node, a test-point label, gnd, or a pin "@R1.0" */
+  function endpointOk(c, x) {
+    if (typeof x !== 'string') return false;
+    if (x[0] === '@') { const m = /^@(.*)\.(\d+)$/.exec(x), e = m ? c.els.get(m[1]) : null; return !!e && +m[2] < e.n.length; }
+    return c.nodes.has(x) || isGnd(x);
+  }
+  function probeOk(c, p) {
+    if (!isObj(p)) return false;
+    if (p.kind === 'V' || p.kind === 'R') return endpointOk(c, p.a) && (p.b === undefined || endpointOk(c, p.b));
+    if (p.kind === 'I') { const e = typeof p.element === 'string' ? c.els.get(p.element) : null; return !!e && (p.pin === undefined || (Number.isInteger(p.pin) && p.pin >= 0 && p.pin < e.n.length)); }
+    return false;
+  }
+  /** a number (> 0 when pos) or an expression of names → the number, or null (an expression, or a problem pushed to E) */
+  function numOrExpr(v, names, where, E, pos) {
+    if (typeof v === 'string') { const m = exprProblem(v, names, where); if (m) E.push(m); return null; }
+    if (!(isNum(v) && (!pos || v > 0))) { E.push(`${where} must be a number${pos ? ' > 0' : ''} or an expression`); return null; }
+    return v;
+  }
+  const stepsOver = (tEnd, dt) => isNum(tEnd) && isNum(dt) && Math.ceil(tEnd / dt - 1e-9) > ACT.BENCH_LIM.steps;
+  const unknownKeys = (o, allowed, w, E) => { for (const k of Object.keys(o).filter(k => !allowed.includes(k)).sort()) E.push(`${w}: unknown field ${qv(k)}`); };
+  function checkCircuit(spec, names, E) {
+    const m = spec.model, L = ACT.BENCH_LIM;
+    if (!isObj(m)) { E.push(`spec.model: ${ACT.CIRCUIT} needs a model {netlist, bindings?, transient?, noise?}`); return; }
+    unknownKeys(m, ACT.MODEL_KEYS, 'spec.model', E);
+    if (!CK()) { E.push('spec.model: the circuit checker (NoemaCircuit, engine/src/36_engine_circuit.js) is not loaded here'); return; }
+    if (!isObj(m.netlist)) { E.push('spec.model.netlist must be a netlist {format: "noema.circuit/v1", nodes, elements}'); return; }
+    const probs = CK().check(m.netlist).filter(p => p.level === 'error');
+    for (const p of probs) E.push(`spec.model.netlist${p.path ? '.' + p.path : ''}: ${p.msg}`);
+    if (probs.length) return;
+    const c = circuitOf(spec), bs = m.bindings;
+    if (bs != null && !(Array.isArray(bs) && bs.length <= L.bindings)) E.push(`spec.model.bindings must be a list of at most ${L.bindings} {element, prop?, expr}`);
+    list(bs).slice(0, L.bindings).forEach((b, i) => {
+      const w = `spec.model.bindings[${i}]`;
+      if (!isObj(b)) { E.push(`${w} must be an object {element, prop?, expr}`); return; }
+      unknownKeys(b, ['element', 'prop', 'expr'], w, E);
+      const e = typeof b.element === 'string' ? c.els.get(b.element) : null;
+      if (!e) E.push(`${w}.element is not a part of the netlist`);
+      else {
+        const prop = b.prop === undefined ? 'value' : b.prop, wave = isObj(e.value) ? Object.keys(e.value)[0] : null;
+        const okp = typeof prop === 'string' && (['R', 'C', 'L'].includes(e.type) ? prop === 'value'
+          : e.type === 'SW' ? prop === 'on'
+            : ['V', 'I'].includes(e.type) ? (prop === 'value' ? (wave === null || wave === 'dc') : (Object.prototype.hasOwnProperty.call(ACT.WAVES, wave) && ACT.WAVES[wave].some(f => wave + '.' + f === prop))) : false);
+        if (!okp) E.push(`${w}.prop cannot be set on this part (value of R, C, L and a DC source; on of a switch; pulse.v2, sine.freq, pwm.duty … of a source with that waveform)`);
+      }
+      const mm = exprProblem(b.expr, names, w + '.expr'); if (mm) E.push(mm);
+    });
+    const tr = m.transient;
+    if (tr != null) {
+      if (!isObj(tr)) E.push('spec.model.transient must be an object {tEnd, dt?}');
+      else {
+        unknownKeys(tr, ['tEnd', 'dt'], 'spec.model.transient', E);
+        let te = null; if (tr.tEnd === undefined) E.push('spec.model.transient.tEnd is required'); else te = numOrExpr(tr.tEnd, names, 'spec.model.transient.tEnd', E, true);
+        const dt = tr.dt === undefined ? null : numOrExpr(tr.dt, names, 'spec.model.transient.dt', E, true);
+        if (stepsOver(te, dt)) E.push(`spec.model.transient: tEnd / dt is more than ${L.steps} steps`);
+      }
+    }
+    const nz = m.noise;
+    if (nz != null && !(isObj(nz) && Object.keys(nz).every(k => k === 'rel' || k === 'abs') && ['rel', 'abs'].every(k => nz[k] === undefined || (isNum(nz[k]) && nz[k] >= 0 && nz[k] <= 1)))) E.push("spec.model.noise is {rel?, abs?}: numbers from 0 to 1 (the meter's relative and absolute error)");
+    list(spec.outputs).forEach((o, i) => {
+      const w = `spec.outputs[${i}]`;
+      if (!(isObj(o) && (o.kind === 'scalar' || o.kind === 'series'))) return;   // (reported with the outputs)
+      unknownKeys(o, ACT.OUT_KEYS, w, E);
+      const src = ['node', 'branch', 'time', 'probe'].filter(k => k in o);
+      if (src.length !== 1) { E.push(`${w} must name what it reads: one of node, branch, time, probe`); return; }
+      const s = src[0];
+      if (s === 'time' && !(o.time === true && o.kind === 'series')) E.push(`${w}.time is true on a series output (the time axis of the transient)`);
+      if (s === 'node' && !(typeof o.node === 'string' && (c.nodes.has(o.node) || isGnd(o.node)))) E.push(`${w}.node is not a node of the netlist`);
+      if (s === 'branch' && !(typeof o.branch === 'string' && c.els.has(o.branch))) E.push(`${w}.branch is not a part of the netlist`);
+      if (s === 'probe' && !(o.kind === 'scalar' && probeOk(c, o.probe))) E.push(`${w}.probe must be a reading {kind: V | I | R, a, b? | element, pin?} on a scalar output`);
+      const at = 'at' in o, st = 'stat' in o;
+      if ((at || st) && !(o.kind === 'scalar' && (s === 'node' || s === 'branch'))) E.push(`${w}: at and stat belong to a scalar output of a node or a branch`);
+      if (at && st) E.push(`${w}: at or stat, not both`);
+      if (at) numOrExpr(o.at, names, w + '.at', E, false);
+      if (st && !ACT.STATS.includes(o.stat)) E.push(`${w}.stat is one of ${ACT.STATS.join(', ')}`);
+      if ((o.kind === 'series' || at || st) && !isObj(m.transient)) E.push(`${w} needs model.transient {tEnd, dt?}`);
+    });
+  }
+  function checkBench(spec, names, seen, E, key) {
+    const b = spec.bench, L = ACT.BENCH_LIM, c = circuitOf(spec);
+    if (!isObj(b)) { E.push('spec.bench must be an object {faults, points, instruments, diagnosis, budget?}'); return; }
+    unknownKeys(b, ACT.BENCH_KEYS, 'spec.bench', E);
+    for (const n of ACT.BENCH_NAMES) if (seen.has(n)) E.push(`spec: the name ${n} belongs to the bench (its values: ${ACT.BENCH_NAMES.join(', ')})`);
+    const ids = (arr, w, what) => {
+      const out = [];
+      list(arr).forEach((x, i) => {
+        if (!isObj(x)) return;
+        if (!(typeof x.id === 'string' && ACT.BENCH_ID_RE.test(x.id))) E.push(`${w}[${i}].id must be a name (a letter, then letters, digits, _ or -; at most 32)`);
+        else if (out.includes(x.id)) E.push(`${w}[${i}].id: the ${what} ${x.id} is listed twice`);
+        else out.push(x.id);
+      });
+      return out;
+    };
+    const fs = b.faults;
+    if (!(Array.isArray(fs) && fs.length >= 1 && fs.length <= L.faults)) E.push(`spec.bench.faults must be a list of 1–${L.faults} faults {id, apply}`);
+    const fids = ids(fs, 'spec.bench.faults', 'fault');
+    list(fs).forEach((f, i) => {
+      const w = `spec.bench.faults[${i}]`;
+      if (!isObj(f)) { E.push(`${w} must be an object {id, apply}`); return; }
+      unknownKeys(f, ['id', 'apply'], w, E);
+      if (!(Array.isArray(f.apply) && f.apply.length <= L.apply)) { E.push(`${w}.apply must be a list of at most ${L.apply} changes to the circuit ([] = a healthy device)`); return; }
+      if (c) for (const p of CK().checkFaults(c.nl, f.apply)) E.push(`${w}.${p.path.replace(/^faults/, 'apply')}: ${p.msg}`);
+    });
+    const ps = b.points;
+    if (!(Array.isArray(ps) && ps.length >= 1 && ps.length <= L.points)) E.push(`spec.bench.points must be a list of 1–${L.points} probe points {id, at, label}`);
+    const pids = ids(ps, 'spec.bench.points', 'point');
+    list(ps).forEach((p, i) => {
+      const w = `spec.bench.points[${i}]`;
+      if (!isObj(p)) { E.push(`${w} must be an object {id, at, label}`); return; }
+      unknownKeys(p, ['id', 'at', 'label'], w, E);
+      if (c && !endpointOk(c, p.at)) E.push(`${w}.at must be a node, a test point, gnd or a pin such as @R1.0 of the netlist`);
+      key(p.label, w + '.label', true);
+    });
+    const is = b.instruments, kinds = [];
+    if (!(Array.isArray(is) && is.length >= 1 && is.length <= L.instruments)) E.push(`spec.bench.instruments must be a list of 1–${L.instruments} instruments {kind, …}`);
+    list(is).forEach((x, i) => {
+      const w = `spec.bench.instruments[${i}]`;
+      if (!(isObj(x) && ACT.INSTRUMENTS.includes(x.kind))) { E.push(`${w}.kind is one of ${ACT.INSTRUMENTS.join(', ')}`); return; }
+      if (kinds.includes(x.kind)) E.push(`${w}: the instrument ${x.kind} is listed twice`);
+      kinds.push(x.kind);
+      unknownKeys(x, ACT.INST_KEYS, w, E);
+      const scope = x.kind === 'scope' || x.kind === 'logic';
+      if (x.kind === 'I') {
+        if ('points' in x) E.push(`${w}: the ammeter reads parts (parts), not points`);
+        const pa = x.parts;
+        if (!(Array.isArray(pa) && pa.length >= 1 && pa.length <= L.parts)) E.push(`${w}.parts must be a list of 1–${L.parts} parts {element, label, pin?}`);
+        else pa.forEach((q, j) => {
+          const wq = `${w}.parts[${j}]`;
+          if (!isObj(q)) { E.push(`${wq} must be an object {element, label, pin?}`); return; }
+          unknownKeys(q, ['element', 'label', 'pin'], wq, E);
+          if (c && !probeOk(c, { kind: 'I', element: q.element, pin: q.pin })) E.push(`${wq}: element must be a part of the netlist (and pin one of its pins)`);
+          key(q.label, wq + '.label', true);
+        });
+      } else {
+        if ('parts' in x) E.push(`${w}: only the ammeter (I) reads parts`);
+        const pts = x.points;
+        if (pts !== undefined && !(Array.isArray(pts) && pts.length >= 1 && pts.every(q => typeof q === 'string' && pids.includes(q)))) E.push(`${w}.points must be ids of spec.bench.points`);
+        if ((x.kind === 'V' || x.kind === 'R') && (Array.isArray(pts) ? pts.length : pids.length) < 2) E.push(`${w}: a meter needs two points to put its leads on`);
+      }
+      for (const k of ['tEnd', 'dt', 'tStart', 'threshold']) if (k in x && !(scope && (k !== 'threshold' || x.kind === 'logic'))) E.push(`${w}.${k} belongs to ${k === 'threshold' ? 'the logic analyser' : 'the oscilloscope and the logic analyser'}`);
+      if (scope) {
+        let te = null; if (x.tEnd === undefined) E.push(`${w}.tEnd is required (how long the trace is, in s)`); else te = numOrExpr(x.tEnd, names, w + '.tEnd', E, true);
+        const dt = x.dt === undefined ? null : numOrExpr(x.dt, names, w + '.dt', E, true);
+        if ('tStart' in x) numOrExpr(x.tStart, names, w + '.tStart', E, false);
+        if ('threshold' in x && x.kind === 'logic') numOrExpr(x.threshold, names, w + '.threshold', E, false);
+        if (stepsOver(te, dt)) E.push(`${w}: tEnd / dt is more than ${L.steps} steps`);
+      }
+    });
+    const d = b.diagnosis;
+    if (!isObj(d)) E.push('spec.bench.diagnosis must be an object {options: [{label, fault?}]}');
+    else {
+      unknownKeys(d, ['label', 'options'], 'spec.bench.diagnosis', E);
+      key(d.label, 'spec.bench.diagnosis.label');
+      const os = d.options, named = [];
+      if (!(Array.isArray(os) && os.length >= 2 && os.length <= L.options)) E.push(`spec.bench.diagnosis.options must be a list of 2–${L.options} options {label, fault?}`);
+      else {
+        os.forEach((o, i) => {
+          const w = `spec.bench.diagnosis.options[${i}]`;
+          if (!isObj(o)) { E.push(`${w} must be an object {label, fault?}`); return; }
+          unknownKeys(o, ['label', 'fault'], w, E);
+          key(o.label, w + '.label', true);
+          if (o.fault !== undefined) {
+            if (!(typeof o.fault === 'string' && fids.includes(o.fault))) E.push(`${w}.fault must be the id of one of spec.bench.faults`);
+            else if (named.includes(o.fault)) E.push(`${w}.fault: two options name the fault ${o.fault}`);
+            else named.push(o.fault);
+          }
+        });
+        for (const f of fids) if (!named.includes(f)) E.push(`spec.bench.diagnosis: no option names the fault ${f} (the learner could not diagnose it)`);
+      }
+    }
+    if (b.budget !== undefined && !(Number.isInteger(b.budget) && b.budget >= 1 && b.budget <= L.budget)) E.push(`spec.bench.budget is a whole number 1–${L.budget} (the measurements allowed)`);
   }
   /** checkSimSpec(spec, tables?, engines?) → errors of a sim-spec@1 spec. tables: {locale: {key: text}}; engines: the known engine ids
       (default ACT.ENGINES; the app passes the engines it has registered). The same rules as tools/activities.py check_spec. */
@@ -509,6 +697,7 @@
       expr(d.expr, [...names], w + '.expr');
       if (name(d.id, w + '.id')) names.push(d.id);
     });
+    const inNames = [...names];   // what an engine's inputs may use: consts, params, derived
     const os = spec.outputs, series = [];
     if (os != null) {
       if (eng === ACT.DEFAULT_ENGINE) E.push('spec.outputs come from an engine; formula@1 has none (use derived)');
@@ -572,6 +761,11 @@
         key(m.label, wm + '.label'); expr(m.expr, names, wm + '.expr');
       });
     });
+    if (eng === ACT.CIRCUIT) checkCircuit(spec, inNames, E);
+    if (spec.bench != null) {
+      if (!ACT.BENCH_ENGINES.has(eng)) E.push(`spec.bench needs an engine that can take measurements (${[...ACT.BENCH_ENGINES].sort().join(', ')})`);
+      else checkBench(spec, inNames, seen, E, key);
+    }
     if (tables && Object.keys(tables).length) for (const k of [...keys].sort()) {
       const miss = Object.keys(tables).filter(l => isObj(tables[l]) && !Object.prototype.hasOwnProperty.call(tables[l], k)).sort();
       if (miss.length) E.push(`spec: the string ${k} is missing in strings.${miss.join(', strings.')}`);
@@ -631,8 +825,11 @@
         if (t.params != null && (typeof t.params !== 'object' || Array.isArray(t.params))) E.push('task.params must be an object');
         else if (spec && t.params) {
           const consts = isObj(spec.consts) ? spec.consts : {};
+          const fids = isObj(spec.bench) ? list(spec.bench.faults).filter(isObj).map(f => f.id) : null;
           for (const [k, v] of Object.entries(t.params)) {
-            if (!Object.prototype.hasOwnProperty.call(consts, k)) E.push(`task.params.${k}: not a constant of the spec (a sim-spec@1 task sets only the spec's consts)`);
+            if (k === 'fault' && fids) {   // a bench: the fault of this task (one id), or the ones the seed draws from (a list)
+              if (!(typeof v === 'string' ? fids.includes(v) : Array.isArray(v) && v.length >= 1 && v.every(x => typeof x === 'string' && fids.includes(x)))) E.push('task.params.fault must be the id of a fault of the bench, or a list of them (the seed draws one)');
+            } else if (!Object.prototype.hasOwnProperty.call(consts, k)) E.push(`task.params.${k}: not a constant of the spec (a sim-spec@1 task sets only the spec's consts)`);
             else if (!isNum(v)) E.push(`task.params.${k} must be a number`);
           }
         }

@@ -4685,5 +4685,109 @@
   "engine.act.sim.checks": "{met} of {total, plural, one {# condition} other {# conditions}} met",
   "@engine.act.sim.checks": {
     "description": "Shown after checking a simulation exercise; {met} conditions of the goal are met out of {total}. The list of the conditions follows."
+  },
+  "engine.act.bench.instrument": "Instrument",
+  "@engine.act.bench.instrument": {
+    "description": "Label of the list that picks the measuring instrument on a fault-finding bench (a virtual circuit with a hidden fault)."
+  },
+  "engine.act.bench.inst.V": "Multimeter: voltage",
+  "@engine.act.bench.inst.V": {
+    "description": "Instrument on a fault-finding bench: a multimeter set to measure voltage (volts) between two points."
+  },
+  "engine.act.bench.inst.I": "Multimeter: current",
+  "@engine.act.bench.inst.I": {
+    "description": "Instrument on a fault-finding bench: a multimeter set to measure the current through a part (amperes)."
+  },
+  "engine.act.bench.inst.R": "Multimeter: resistance",
+  "@engine.act.bench.inst.R": {
+    "description": "Instrument on a fault-finding bench: a multimeter set to measure resistance (ohms) between two points, with the circuit unpowered."
+  },
+  "engine.act.bench.inst.scope": "Oscilloscope",
+  "@engine.act.bench.inst.scope": {
+    "description": "Instrument on a fault-finding bench: an oscilloscope that shows the voltage at a point over time."
+  },
+  "engine.act.bench.inst.logic": "Logic analyser",
+  "@engine.act.bench.inst.logic": {
+    "description": "Instrument on a fault-finding bench: a logic analyser that shows a digital signal (high/low) over time."
+  },
+  "engine.act.bench.red": "Red lead (+)",
+  "@engine.act.bench.red": {
+    "description": "The positive (red) test lead of a multimeter: the point it touches."
+  },
+  "engine.act.bench.black": "Black lead (−)",
+  "@engine.act.bench.black": {
+    "description": "The negative (black, common) test lead of a multimeter: the point it touches."
+  },
+  "engine.act.bench.probe": "Probe on",
+  "@engine.act.bench.probe": {
+    "description": "The point of the circuit an oscilloscope or logic analyser probe touches."
+  },
+  "engine.act.bench.part": "Current through",
+  "@engine.act.bench.part": {
+    "description": "Label of the list that picks the part whose current the multimeter measures."
+  },
+  "engine.act.bench.measure": "Measure",
+  "@engine.act.bench.measure": {
+    "description": "Button: take one measurement with the chosen instrument at the chosen points."
+  },
+  "engine.act.bench.left": "{left, plural, =0 {No measurements left} one {# measurement left} other {# measurements left}}",
+  "@engine.act.bench.left": {
+    "description": "How many measurements the learner may still take on this bench; {left} = the number."
+  },
+  "engine.act.bench.log": "Measurements",
+  "@engine.act.bench.log": {
+    "description": "Heading of the list of the measurements taken so far on a fault-finding bench."
+  },
+  "engine.act.bench.logEmpty": "No measurements yet. Choose an instrument and where to put it, then press Measure.",
+  "@engine.act.bench.logEmpty": {
+    "description": "Shown while the measurement list is empty."
+  },
+  "engine.act.bench.scopeStats": "{pp} peak to peak, mean {mean}, frequency {freq}",
+  "@engine.act.bench.scopeStats": {
+    "description": "Summary of an oscilloscope trace; {pp}, {mean} are voltages with units, {freq} a frequency with unit (or —)."
+  },
+  "engine.act.bench.logicStats": "frequency {freq}, duty cycle {duty}",
+  "@engine.act.bench.logicStats": {
+    "description": "Summary of a logic analyser trace; {freq} a frequency with unit (or —), {duty} a percentage."
+  },
+  "engine.act.bench.time": "Time",
+  "@engine.act.bench.time": {
+    "description": "Horizontal axis of an oscilloscope or logic analyser trace."
+  },
+  "engine.act.bench.voltage": "Voltage",
+  "@engine.act.bench.voltage": {
+    "description": "Vertical axis of an oscilloscope trace."
+  },
+  "engine.act.bench.level": "Logic level (0 or 1)",
+  "@engine.act.bench.level": {
+    "description": "Vertical axis of a logic analyser trace: low = 0, high = 1."
+  },
+  "engine.act.bench.diagnosis": "Your diagnosis",
+  "@engine.act.bench.diagnosis": {
+    "description": "Label of the list where the learner picks which fault they think the circuit has."
+  },
+  "engine.act.bench.choose": "Choose the fault…",
+  "@engine.act.bench.choose": {
+    "description": "First, empty entry of the diagnosis list."
+  },
+  "engine.act.bench.commit": "Check my diagnosis",
+  "@engine.act.bench.commit": {
+    "description": "Button: commit the chosen diagnosis and learn whether it was the hidden fault."
+  },
+  "engine.act.bench.right": "Right: {fault}",
+  "@engine.act.bench.right": {
+    "description": "Shown after the diagnosis when it names the hidden fault; {fault} = the fault, in the activity's words."
+  },
+  "engine.act.bench.wrong": "Not this one. The fault was: {fault}",
+  "@engine.act.bench.wrong": {
+    "description": "Shown after a wrong diagnosis; {fault} = the real fault, in the activity's words."
+  },
+  "engine.act.bench.another": "Another device",
+  "@engine.act.bench.another": {
+    "description": "Button: start again with a new device that may have a different hidden fault."
+  },
+  "engine.act.bench.failed": "this measurement could not be made",
+  "@engine.act.bench.failed": {
+    "description": "Shown in place of a reading when the simulation could not compute it."
   }
 }
