@@ -340,7 +340,7 @@ mode, audits. The content work (the electronics Roadmap) starts only after the h
 * **The learner's side.** One quiet line above the controls: the first-use size from the manifest (`NoemaPy.need`), the
   requiresNetwork note, loading progress, a "Download … and start" button on Save-Data or cellular. Failures map to the core's
   fallback with a reason (`failText`: offline → "not on this device yet, and there is no connection" + Restart; timeout → slow +
-  Restart). Settings: a 🐍 section in the backup view (`accView('backup')`, so the classic Backup tab and the shell's Me › Data and
+  Restart). Settings: a section in the backup view (its header has a line icon, `accSection({ line: 'download' }, …)`, no emoji) (`accView('backup')`, so the classic Backup tab and the shell's Me › Data and
   sync), one line with a pill, the size on the device and the Prepare button with a progress bar; the per-part detail and whether
   `persist()` was granted are in its ⓘ. All words in the 15 UI catalogs.
 * **Deploy.** `build_site` copies `engine/pyodide-sw.js` and writes the Python headers into the real `_headers`

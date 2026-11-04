@@ -5814,7 +5814,7 @@ def _noema_step(js):
     const bar = h('progress', { class: 'act-pybar', max: '1', value: '0', hidden: true });
     const btn = h('button', { class: 'btn small', type: 'button', 'data-py': 'prepare', hidden: true, onclick: () => prepare(false) });
     const body = h('div', { class: 'act-pyset' }, h('div', { class: 'row' }, line, info), h('div', { class: 'row' }, btn, bar));
-    const sec = accSection('🐍', tE('engine.py.title'), { status: { ok: false, text: '…' }, info: tE('engine.py.info'), body });   // i18n-ignore (a placeholder)
+    const sec = accSection({ line: 'download' }, tE('engine.py.title'), { status: { ok: false, text: '…' }, info: tE('engine.py.info'), body });   // i18n-ignore (a placeholder)
     const pill = sec.querySelector('summary .pill');
     let all = null;
     const setPill = (ok, text) => { pill.className = 'pill ' + (ok ? 'c' : 'warnpill'); pill.textContent = text; };
@@ -7837,8 +7837,10 @@ function threadTracker(key, histLen) {
 const ACC_TABS = ['profile', 'settings', 'subjects', 'backup', 'cloud', 'help'];   // labels: t('acc.<tab>')   // i18n-ignore
 /** Collapsible section (closed by default) with an optional status pill and ⓘ tooltip. */
 function accSection(icon, title, { status = null, info = null, open = false, body }) {
+  // icon: an emoji (the older sections) or { line: '<engine/art.js key>' }, a line icon of the new frame (no emoji on new headers)
+  const head = icon && typeof icon === 'object' ? [h('span', { class: 'ns-svg accico', html: window.NoemaArt ? NoemaArt.svg(icon.line, 'i') : '' }), ' ', title] : [`${icon} ${title}`];
   const d = h('details', { class: 'accsec', open: open || null },
-    h('summary', {}, h('span', { class: 'chev' }, '▸'), h('span', { class: 'grow' }, `${icon} ${title}`), info ? tip(info) : null, status ? h('span', { class: 'pill ' + (status.ok ? 'c' : 'warnpill') }, status.text) : null),
+    h('summary', {}, h('span', { class: 'chev' }, '▸'), h('span', { class: 'grow' }, ...head), info ? tip(info) : null, status ? h('span', { class: 'pill ' + (status.ok ? 'c' : 'warnpill') }, status.text) : null),
     h('div', { class: 'accsecbody' }, body));
   return d;
 }
@@ -8070,7 +8072,7 @@ const ACC_VIEWS = {
                 h('button', { class: 'btn ghost', onclick: c2 }, tE('engine.core.cancel')))));
           } })), guideBtn('restore', '♻️ ' + tE('engine.bk.howRestore'))] }),
       accSection('🕘', tE('engine.bk.secPoints'), { status: { ok: true, text: nf(pts0.length) }, info: tE('engine.bk.pointsInfo'), body: rpBox }),
-      window.pyOfflineSection?.() || '');   // 🐍 Prepare Python for offline (37_activity_py_ui.js): only where Python activities can run
+      window.pyOfflineSection?.() || '');   // Prepare Python for offline (37_activity_py_ui.js): only where Python activities can run
     drawFs(); drawRP();
   },
 

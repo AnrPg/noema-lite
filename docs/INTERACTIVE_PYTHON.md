@@ -20,7 +20,7 @@ allow-listed extras), as decided in `docs/adr/001-interactive-activities.md` D7/
   the internet."
 * Later starts take 2–4 s with numpy, 8–10 s with scipy (Python itself starts, then `import scipy.signal` alone takes 3–5 s).
 * **Offline after the first use**: the files stay in the browser (a service worker's cache, `navigator.storage.persist()` is asked).
-  **Settings › Data and sync** (shell) / **Account › Backup** (classic) has one line "🐍 Python for activities" with its state
+  **Settings › Data and sync** (shell) / **Account › Backup** (classic) has one line "Python for activities" (with the line icon of a download, as the frame's other Settings rows: no emoji) with its state
   (Ready offline / Partly here / Not on this device), the size on the device, a **Prepare Python for offline (…)** button with a
   progress bar, and in its ⓘ the parts (Python, numpy, scipy, each extra) and whether the browser promised to keep them.
 * **Offline without the files**: the activity's fallback (picture + text) with "Python is not on this device yet, and there is no
