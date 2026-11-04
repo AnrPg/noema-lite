@@ -67,11 +67,15 @@ if acts:
         aid = str(x.get('id') or '')
         if not re.fullmatch(r'[a-z0-9][a-z0-9-]{1,60}', aid): print(f'⚠️ activity {aid!r}: not a valid id, skipped'); continue
         ad = os.path.join(d, 'activities', aid); os.makedirs(ad, exist_ok=True)
-        e = {k: v for k, v in x.items() if k not in ('html', 'sha256', 'bytes', 'strings', 'spec')}
+        e = {k: v for k, v in x.items() if k not in ('html', 'sha256', 'bytes', 'strings', 'spec', 'wasm')}   # (external-embed@1: no file, no entry — its url, provider, credit stay in the registry)
         if isinstance(x.get('html'), str):
             e['entry'] = f'activities/{aid}/app.html'; open(os.path.join(ad, 'app.html'), 'w', encoding='utf-8', newline='').write(x['html'])
-        if 'spec' in x:   # sim-spec@1: the spec is data (activities/<id>/spec.json)
+        if 'spec' in x:   # sim-spec@1: the spec is data (activities/<id>/spec.json); wasm-module@1: its own spec, beside module.wasm
             e['entry'] = f'activities/{aid}/spec.json'; json.dump(x['spec'], open(os.path.join(ad, 'spec.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+        if isinstance(x.get('wasm'), str):   # wasm-module@1: the module back as bytes (activities/<id>/module.wasm; make_pack.py writes base64 + sha256 + bytes again)
+            try: raw = base64.b64decode(x['wasm'], validate=True)
+            except Exception: print(f'⚠️ activity {aid}: the module is not valid base64, skipped'); continue
+            e['entry'] = f'activities/{aid}/module.wasm'; open(os.path.join(ad, 'module.wasm'), 'wb').write(raw)
         for loc, tab in (x.get('strings') or {}).items():
             if re.fullmatch(r'[A-Za-z]{2,3}(-[A-Za-z0-9]{2,4}){0,2}', str(loc)): json.dump(tab, open(os.path.join(ad, f'strings.{loc}.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
         reg.append(e)

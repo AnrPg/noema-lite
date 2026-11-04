@@ -227,7 +227,12 @@ const ACT = (() => {
         sess.port = RUNTIMES[a.runtime].mount(box, { act: a, init, title: tE('engine.act.frameTitle', { id: a.id }),
           onMessage: raw => { const r = ACTP.check(raw); if (r.ok) onMessage(r.msg); else if (r.version) stop(tE('engine.act.newerProtocol'), false); else if (!r.ignore) strike(r.why); },
           onFail: why => why === 'unsupported' ? stop(tE('engine.act.notHere'), false) : why === 'spec' ? stop(tE('engine.act.failed'), false)
-            : why === 'runaway' ? stop(tE('engine.act.stopped')) : stop(why === 'navigated' ? tE('engine.act.misbehaved') : tE('engine.act.failed')) });
+            : why === 'runaway' ? stop(tE('engine.act.stopped'))
+            // external-embed@1 (docs/INTERACTIVE_EMBED.md): refused or mounted as an exercise → the fallback for good; offline or not loaded → Restart retries
+            : why === 'embed-refused' || why === 'embed-graded' ? stop(tE('engine.act.embed.refused'), false)
+            : why === 'embed-offline' ? stop(tE('engine.act.embed.offline'))
+            : why === 'embed-timeout' ? stop(tE('engine.act.embed.timeout', { provider: (window.NoemaEmbed?.PROVIDERS || []).find(p => p.id === a.provider)?.name || String(a.provider || '') }))
+            : stop(why === 'navigated' ? tE('engine.act.misbehaved') : tE('engine.act.failed')) });
       } catch (e) { console.warn('[noema] activity mount failed', e); return stop(tE('engine.act.failed')); }
       if (notice) note.textContent = notice;
       LIVE.push(sess);
