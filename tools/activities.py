@@ -91,7 +91,7 @@ def load_activities(sdir):
         if a.get("runtime") == "html-app@1":
             f = os.path.join(sdir, entry) if _s(entry) else None
             if not f or not os.path.exists(f): probs.append(f"ERROR activity {aid}: entry {entry!r} not found"); a["html"] = ""
-            else: a["html"] = open(f, encoding="utf-8").read()
+            else: a["html"] = open(f, encoding="utf-8", newline="").read()
             a["sha256"] = sha256(a["html"]); a["bytes"] = len(a["html"].encode("utf-8"))
         tables = {}
         pat = ((a.get("strings") or {}).get("file") if isinstance(a.get("strings"), dict) else None) or f"activities/{aid}/strings.{{locale}}.json"
@@ -103,6 +103,18 @@ def load_activities(sdir):
         a["strings"] = tables
         items.append(a)
     return {"format": reg.get("format"), "items": items}, probs
+
+def requires(reg):
+    """pack.requires for a registry: the core + each runtime it uses (the app reloads to a newer build, or falls back, when it lacks one)"""
+    return ["activities/v1"] + sorted({"runtime:" + a["runtime"] for a in (reg or {}).get("items") or [] if isinstance(a, dict) and isinstance(a.get("runtime"), str)}) if reg and reg.get("items") else []
+
+def fallback_media(reg):
+    """the pictures the activities show when they cannot run (they need no exercises of their own)"""
+    return {(a.get("fallback") or {}).get("media") for a in (reg or {}).get("items") or [] if isinstance(a, dict) and isinstance(a.get("fallback"), dict)} - {None}
+
+def hash_part(reg):
+    """what of the activities goes into pack.version: each bundle's sha256, its strings and its settings"""
+    return {a.get("id"): {k: v for k, v in a.items() if k != "html"} for a in (reg or {}).get("items") or [] if isinstance(a, dict)}
 
 def check_activities(pack, translations=None):
     """→ (errors, warnings) of pack.activities, the blocks and sim exercises that use them, and pack.requires.

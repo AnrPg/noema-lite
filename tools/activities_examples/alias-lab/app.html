@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>alias-lab</title>
+<style>
+  body { padding: 12px; font-size: 15px; line-height: 1.4; }
+  .row { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; margin: 6px 0; }
+  label { display: flex; gap: 8px; align-items: center; flex: 1 1 220px; min-width: 0; }
+  input[type=range] { flex: 1; min-width: 0; accent-color: var(--noema-c, #4a6fa5); }
+  output { font-variant-numeric: tabular-nums; min-width: 4.5em; }
+  canvas { display: block; width: 100%; height: 180px; border: 1px solid var(--noema-line, #ddd); border-radius: 8px; background: var(--noema-bg2, transparent); }
+  .read { color: var(--noema-ink2, #555); }
+  .ok { color: var(--noema-ok, #2a7); font-weight: 600; }
+  .key { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 13px; color: var(--noema-ink3, #777); margin-top: 4px; }
+  .sw { display: inline-block; width: 14px; height: 3px; vertical-align: middle; margin-right: 4px; }
+</style>
+</head>
+<body>
+<p id="goal" class="read"></p>
+<div class="row">
+  <label><span id="lf"></span><input id="f" type="range" min="1" max="20" step="1"><output id="of"></output></label>
+  <label><span id="ls"></span><input id="fs" type="range" min="2" max="40" step="1"><output id="os"></output></label>
+</div>
+<canvas id="cv" role="img"></canvas>
+<div class="key"><span><i class="sw" id="k1"></i><span id="kt1"></span></span><span><i class="sw" id="k2"></i><span id="kt2"></span></span><span><i class="sw" id="k3"></i><span id="kt3"></span></span></div>
+<p id="out" class="read" aria-live="polite"></p>
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var t = function (k, v) { return noema.t(k, v); };
+  var css = function (name, dflt) { var v = getComputedStyle(document.documentElement).getPropertyValue('--noema-' + name).trim(); return v || dflt; };
+  var task = {}, graded = false, touched = false, s = { f: 7, fs: 24 };
+  function alias(f, fs) { var n = Math.round(f / fs); return Math.abs(f - n * fs); }
+  function draw() {
+    var cv = $('cv'), dpr = window.devicePixelRatio || 1, w = cv.clientWidth, h = cv.clientHeight;
+    cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
+    var g = cv.getContext('2d'); g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, w, h);
+    var T = 1, mid = h / 2, amp = h * 0.38, X = function (x) { return x / T * w; }, Y = function (y) { return mid - y * amp; };
+    var cSig = css('ink3', '#999'), cSam = css('c', '#4a6fa5'), cAl = css('bad', '#c44');
+    g.strokeStyle = css('line', '#ddd'); g.lineWidth = 1; g.beginPath(); g.moveTo(0, mid); g.lineTo(w, mid); g.stroke();
+    g.strokeStyle = cSig; g.lineWidth = 1.5; g.beginPath();
+    for (var i = 0; i <= w; i++) { var x = i / w * T, y = Math.sin(2 * Math.PI * s.f * x); if (i) g.lineTo(i, Y(y)); else g.moveTo(i, Y(y)); }
+    g.stroke();
+    var d = s.f - Math.round(s.f / s.fs) * s.fs;   // signed: the samples of sin(2πf·t) are exactly those of sin(2πd·t)
+    g.strokeStyle = cAl; g.lineWidth = 2; g.setLineDash([6, 4]); g.beginPath();
+    for (var j = 0; j <= w; j++) { var x2 = j / w * T, y2 = Math.sin(2 * Math.PI * d * x2); if (j) g.lineTo(j, Y(y2)); else g.moveTo(j, Y(y2)); }
+    g.stroke(); g.setLineDash([]);
+    g.fillStyle = cSam;
+    for (var k = 0; k <= s.fs; k++) { var xs = k / s.fs; g.beginPath(); g.arc(X(xs), Y(Math.sin(2 * Math.PI * s.f * xs)), 3.5, 0, 2 * Math.PI); g.fill(); }
+    $('k1').style.background = cSig; $('k2').style.background = cSam; $('k3').style.background = cAl;
+  }
+  function render() {
+    var fa = alias(s.f, s.fs), ny = s.fs / 2;
+    $('of').textContent = t('hz', { n: noema.fmt.number(s.f) });
+    $('os').textContent = t('hz', { n: noema.fmt.number(s.fs) });
+    var line = t('apparent', { n: noema.fmt.number(fa) }) + ' ' + (s.f > ny ? t('aliased', { ny: noema.fmt.number(ny) }) : t('faithful', { ny: noema.fmt.number(ny) }));
+    $('out').textContent = line;
+    $('cv').setAttribute('aria-label', line);
+    draw();
+    if (graded && touched) {   // report only once the learner has tried something
+      var ok = fa === task.target && s.f > s.fs / 2;
+      noema.result({ score: ok ? 1 : 0, passed: ok, detail: 'f=' + s.f + ' fs=' + s.fs + ' apparent=' + fa });
+      $('out').className = ok ? 'ok' : 'read';
+    }
+  }
+  noema.ready.then(function () {
+    task = noema.task || {}; graded = !!noema.exercise && typeof task.target === 'number';
+    if (noema.state && typeof noema.state.fs === 'number') s = { f: noema.state.f, fs: noema.state.fs };
+    if (graded) { s.f = task.f || 7; $('f').disabled = true; }
+    $('lf').textContent = t('signal'); $('ls').textContent = t('sampling');
+    $('kt1').textContent = t('keySignal'); $('kt2').textContent = t('keySamples'); $('kt3').textContent = t('keyApparent');
+    $('goal').textContent = graded ? t('goal', { f: noema.fmt.number(s.f), target: noema.fmt.number(task.target) }) : t('explore');
+    $('f').value = s.f; $('fs').value = s.fs;
+    $('f').setAttribute('aria-label', t('signal')); $('fs').setAttribute('aria-label', t('sampling'));
+    $('f').addEventListener('input', function (e) { s.f = +e.target.value; noema.saveState(s); render(); });
+    $('fs').addEventListener('input', function (e) { touched = true; s.fs = +e.target.value; noema.saveState(s); noema.event('fs', s.fs); render(); });
+    $('fs').addEventListener('change', function () { noema.announce($('out').textContent); });
+    noema.on('theme', draw);
+    window.addEventListener('resize', draw);
+    render();
+  });
+})();
+</script>
+</body>
+</html>

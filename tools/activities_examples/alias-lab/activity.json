@@ -1,0 +1,14 @@
+{
+ "id": "alias-lab",
+ "runtime": "html-app@1",
+ "entry": "activities/alias-lab/app.html",
+ "stateVersion": 1,
+ "capabilities": ["state", "events", "resize", "result", "announce"],
+ "fallback": {
+  "media": "alias-lab-still",
+  "text": "A 7 Hz sine wave sampled 10 times a second: the samples fall exactly on a 3 Hz wave, so after sampling the signal cannot be told apart from a 3 Hz one. Any signal above half the sampling rate shows up as such a lower alias."
+ },
+ "origin": "own",
+ "credit": "noema-lite reference activity",
+ "license": "own"
+}

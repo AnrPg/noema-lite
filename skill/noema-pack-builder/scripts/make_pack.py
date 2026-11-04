@@ -13,12 +13,14 @@ for _s in (sys.stdout, sys.stderr):   # UTF-8 output on Windows / macOS / Linux 
 from collections import Counter
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 from noema_lib import load_subject, load_media, content_hash, package_sources, write_bundle, load_translations, pack_i18n, translation_file, required_locales
+import activities as ACTS   # interactive activities (docs/INTERACTIVE.md): activities/activities.json + activities/<id>/
 a = sys.argv[1:]
 if not a: print(__doc__); sys.exit(1)
 sdir = os.path.abspath(a[0])
 out_dir = a[1] if len(a) > 1 else ('/mnt/user-data/outputs' if os.path.isdir('/mnt/user-data/outputs') else '.')
 meta, sources, chapters, report = load_subject(sdir)
 media, mrep = load_media(sdir)
+acts, arep = ACTS.load_activities(sdir)   # None when the subject has no activities/ folder
 translations = load_translations(sdir, chapters)   # optional: translations/<locale>/chNN.json (CONTENT_SPEC.md "Packs in several languages")
 base_ids, base_chapters = (), ()
 try:
@@ -26,7 +28,12 @@ try:
     base_ids, base_chapters = set(_u.get('sourcesWithFiles') or []), set(_u.get('chapters') or [])
 except Exception: pass
 sources, files, ferrs, fwarns = package_sources(sdir, sources, chapters, base_ids)
-errs = [r for r in report + mrep if r.startswith('ERROR')] + ferrs
+errs = [r for r in report + mrep + arep if r.startswith('ERROR')] + ferrs
+requires = ACTS.requires(acts)
+# activities: the registry, the blocks and sim exercises that use it (a block naming an activity that is not there too), and the strings in every language the pack is read in
+ae, aw = ACTS.check_activities({'activities': acts, 'media': media, 'subject': meta, 'chapters': chapters, 'requires': requires}, list(translations))
+errs += ['activities: ' + x for x in ae]
+for w in aw: print('WARN activities: ' + w)
 for w in mrep + fwarns:
     if w.startswith('WARN'): print(w)
 auth = meta.get('authoring') or {}
@@ -50,13 +57,15 @@ else:
     per_kind = int(auth.get('minPerKind', 0))
     balance = lambda cid: (['--balance-warn' if cid in base_chapters else '--balance', str(per_kind), '--features', feats] if per_kind else [])
 used = Counter(e.get('media') for c in chapters for e in c['exercises'] if e['type'].startswith('img_'))
-for m in media:
-    if used[m] < per_pic: errs.append(f'ERROR media {m}: used by {used[m]} exercise(s); every picture needs >= {per_pic}')
+for m in media:   # (an activity's still picture, its fallback, needs no exercises)
+    if used[m] < per_pic and m not in ACTS.fallback_media(acts): errs.append(f'ERROR media {m}: used by {used[m]} exercise(s); every picture needs >= {per_pic}')
 with tempfile.TemporaryDirectory() as td:
     mp = os.path.join(td, 'media.json'); json.dump({k: {'w': v['w'], 'h': v['h'], 'regions': v.get('regions')} for k, v in media.items()}, open(mp, 'w', encoding='utf-8'))
+    ap = os.path.join(td, 'activities.json'); json.dump({a['id']: {k: v for k, v in a.items() if k != 'html'} for a in (acts or {}).get('items', []) if isinstance(a, dict) and 'id' in a}, open(ap, 'w', encoding='utf-8'), ensure_ascii=False)
+    ax = ['--activities', ap] if acts else []
     for c in chapters:
         p = os.path.join(td, c['id'] + '.json'); json.dump(c, open(p, 'w', encoding='utf-8'), ensure_ascii=False)
-        r = subprocess.run([sys.executable, os.path.join(HERE, 'validate.py'), p, '--media', mp, '--min-visual', str(min_vis), *balance(c['id'])], capture_output=True, text=True)
+        r = subprocess.run([sys.executable, os.path.join(HERE, 'validate.py'), p, '--media', mp, '--min-visual', str(min_vis), *ax, *balance(c['id'])], capture_output=True, text=True)
         print(r.stdout.splitlines()[0] if r.stdout else c['id'])
         for l in r.stdout.splitlines():
             if l.startswith('WARN: ['): print(f'{c["id"]}: ' + l)
@@ -70,19 +79,20 @@ with tempfile.TemporaryDirectory() as td:
         for c in chs:
             if not any(x['id'] == c.get('id') for x in chapters): errs.append(f'ERROR translations/{loc}/{c.get("id")}: not a chapter of the subject'); continue
             p = os.path.join(td, f'{loc}.{c["id"]}.json'); json.dump(c, open(p, 'w', encoding='utf-8'), ensure_ascii=False)
-            r = subprocess.run([sys.executable, os.path.join(HERE, 'validate.py'), p, '--media', mp, '--min-visual', str(min_vis), '--source', os.path.join(td, c['id'] + '.json')], capture_output=True, text=True)
+            r = subprocess.run([sys.executable, os.path.join(HERE, 'validate.py'), p, '--media', mp, '--min-visual', str(min_vis), *ax, '--source', os.path.join(td, c['id'] + '.json')], capture_output=True, text=True)
             print(f'translations/{loc}: ' + (r.stdout.splitlines()[0] if r.stdout else c['id']))
             errs += [f'translations/{loc}/{c["id"]}: ' + l for l in r.stdout.splitlines() if l.startswith('ERROR')]
 if errs:
     print('\n'.join(errs)); print(f'\n✗ {len(errs)} error(s) — pack NOT written.'); sys.exit(1)
 counts = {'chapters': len(chapters), 'sections': sum(len(c['sections']) for c in chapters), 'exercises': sum(len(c['exercises']) for c in chapters),
           'playbooks': sum(len(c.get('debug', [])) for c in chapters), 'flashcards': sum(len(c.get('flashcards', [])) for c in chapters),
-          'visual': sum(1 for c in chapters for e in c['exercises'] if e['type'].startswith('img_')), 'media': len(media)}
+          'visual': sum(1 for c in chapters for e in c['exercises'] if e['type'].startswith('img_')), 'media': len(media), **({'activities': len(acts['items'])} if acts else {})}
 meta = dict(meta); meta['owner'] = None
 pack = {'format': 'noema-pack', 'v': 1, 'subject': meta, 'sources': sources, 'chapters': chapters, 'media': media, 'counts': counts,
         'builtAt': datetime.datetime.now(datetime.timezone.utc).replace(microsecond=0).isoformat(), 'builtWith': 'noema-pack-builder skill'}
+if acts and acts['items']: pack['activities'] = {'format': ACTS.FORMAT, 'items': acts['items']}; pack['requires'] = requires   # inline, like the pictures (docs/adr/001 D2)
 tr = pack_i18n(pack, translations, external=True)   # pack schema v2; each translation in its own file (docs/i18n.md §10)
-pack['version'] = content_hash({'s': meta, 'src': sources, 'c': chapters, 'm': {k: v.get('sha') or v.get('url') for k, v in media.items()}, **({'t': tr} if tr else {})})
+pack['version'] = content_hash({'s': meta, 'src': sources, 'c': chapters, 'm': {k: v.get('sha') or v.get('url') for k, v in media.items()}, **({'t': tr} if tr else {}), **({'a': ACTS.hash_part(acts)} if acts and acts['items'] else {})})
 counts['sourceFiles'] = len(files)
 jout = os.path.join(sdir, 'build', meta['id'] + '.json'); os.makedirs(os.path.dirname(jout), exist_ok=True)
 with open(jout, 'w', encoding='utf-8') as f: json.dump(pack, f, ensure_ascii=False, separators=(',', ':'))

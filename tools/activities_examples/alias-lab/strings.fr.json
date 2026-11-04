@@ -1,0 +1,6 @@
+{"signal": "Signal", "sampling": "Fréquence d’échantillonnage", "hz": "{n} Hz",
+ "apparent": "Les échantillons ressemblent à une onde de {n} Hz.", "aliased": "Le signal dépasse la moitié de la fréquence d’échantillonnage ({ny} Hz) : il apparaît comme un alias plus lent.",
+ "faithful": "Le signal est sous la moitié de la fréquence d’échantillonnage ({ny} Hz) : les échantillons gardent sa vraie fréquence.",
+ "keySignal": "vrai signal", "keySamples": "échantillons", "keyApparent": "ce que montrent les échantillons",
+ "explore": "Déplacez les curseurs et regardez où tombent les échantillons.",
+ "goal": "Le signal fait {f} Hz. Choisissez une fréquence d’échantillonnage où il apparaît comme une onde de {target} Hz."}

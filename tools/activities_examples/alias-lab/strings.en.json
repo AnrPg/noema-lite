@@ -1,0 +1,6 @@
+{"signal": "Signal", "sampling": "Sampling rate", "hz": "{n} Hz",
+ "apparent": "The samples look like a {n} Hz wave.", "aliased": "The signal is above half the sampling rate ({ny} Hz), so it shows up as a lower alias.",
+ "faithful": "The signal is below half the sampling rate ({ny} Hz), so the samples keep its true frequency.",
+ "keySignal": "true signal", "keySamples": "samples", "keyApparent": "what the samples show",
+ "explore": "Move the sliders and watch where the samples land.",
+ "goal": "The signal is {f} Hz. Pick a sampling rate at which it shows up as a {target} Hz wave."}
