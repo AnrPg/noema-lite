@@ -20,7 +20,7 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
     pipelineSteps: JSON.parse(fs.readFileSync(path.join(ROOT, 'tools/pipelines/steps.json'), 'utf8')).steps,
     pipelineFlows: Object.fromEntries(fs.readdirSync(path.join(ROOT, 'tools/pipelines')).map(f => JSON.parse(fs.readFileSync(path.join(ROOT, 'tools/pipelines', f), 'utf8'))).filter(f => f.format === 'noema.pipeline/v1').map(f => [f.id, f])) };
   const fn = path.join(os.tmpdir(), `noema-mcp-${process.pid}.mjs`);
-  fs.writeFileSync(fn, `const CFG = ${JSON.stringify(CFG)};\nconst DOCS = ${JSON.stringify(DOCS)};\nglobalThis.window = globalThis;\n` + ['engine/report.js', 'engine/src/35_simexpr.js', 'engine/src/36_engine_circuit.js', 'engine/packcheck.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js'].map(f => fs.readFileSync(path.join(ROOT, f), 'utf8') + '\n').join('') + fs.readFileSync(path.join(ROOT, 'cloud/mcp/server.mjs'), 'utf8'));   // as tools/build.py (MCP_ENGINE)   // as tools/build.py assembles it
+  fs.writeFileSync(fn, `const CFG = ${JSON.stringify(CFG)};\nconst DOCS = ${JSON.stringify(DOCS)};\nglobalThis.window = globalThis;\n` + ['engine/report.js', 'engine/src/38_activity_h5p.js', 'engine/src/35_simexpr.js', 'engine/src/36_engine_circuit.js', 'engine/packcheck.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js'].map(f => fs.readFileSync(path.join(ROOT, f), 'utf8') + '\n').join('') + fs.readFileSync(path.join(ROOT, 'cloud/mcp/server.mjs'), 'utf8'));   // as tools/build.py (MCP_ENGINE)   // as tools/build.py assembles it
   const { default: handler } = await import(fn);
   const call = async (body, token, method = 'POST', url = BASE + '/mcp') => {
     const r = await handler(new Request(url, { method, headers: Object.assign({ 'content-type': 'application/json' }, token ? { authorization: 'Bearer ' + token } : {}), body: method === 'POST' ? JSON.stringify(body) : undefined }));
@@ -189,6 +189,27 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
   const inl = JSON.parse(JSON.stringify(pk)); inl.subject.id = 'inline-with-files'; inl.subject.title = 'Inline with files';
   const si = await tool('noema_save_pack', { pack_json: JSON.stringify(inl) });
   ok(si.isError && cmds(si.content[0].text).length === 2 && !srv.state.kv[uid]['a:packmeta:inline-with-files'], 'save_pack applies the same file check');
+
+  console.log('— h5p@1: the .h5p file of an H5P activity travels beside the pack (docs/INTERACTIVE_H5P.md)');
+  { const PQ = path.join(ROOT, 'tools', 'activities_examples', 'planets-quiz'), H5 = fs.readFileSync(path.join(PQ, 'item.h5p'));
+    const hp = JSON.parse(JSON.stringify(pack)); hp.subject.id = 'h5p-physics'; hp.subject.title = 'H5P physics'; delete hp.translations;
+    const item = { ...JSON.parse(fs.readFileSync(path.join(PQ, 'activity.json'), 'utf8')), sha256: crypto.createHash('sha256').update(H5).digest('hex'), bytes: H5.length };
+    hp.media = { ...(hp.media || {}), 'planets-quiz-still': { w: 600, h: 220, data: 'data:image/svg+xml;base64,' + fs.readFileSync(path.join(PQ, 'fallback.svg')).toString('base64') } };
+    hp.activities = { format: 'noema.activities/v1', items: [item] }; hp.requires = ['activities/v1', 'runtime:h5p@1'];
+    hp.chapters[0].sections[0].blocks.push({ t: 'interactive', activity: 'planets-quiz' }, { t: 'p', text: 'The quiz above asks for the largest planet of the Solar System: Jupiter, eleven times as wide as the Earth.' });
+    const s4 = await tool('noema_start_upload', { subject_id: 'h5p-physics' });
+    await fetch(s4.content[0].text.match(/https?:\/\/\S+token=\S+/)[0], { method: 'PUT', headers: { 'content-type': 'application/json' }, body: JSON.stringify(hp) });
+    const g1 = await tool('noema_finish_upload', { subject_id: 'h5p-physics' }), t1 = g1.content[0].text;
+    const cu = (t1.match(/# activity planets-quiz — [^\n]*\ncurl [^\n]*--data-binary @"([^"]+)" "([^"]+)"/) || []);
+    ok(g1.isError && cu[1] === 'work/h5p-physics/activities/planets-quiz/item.h5p' && /Content-Type: application\/zip/.test(t1) && !srv.state.kv[uid]['a:packmeta:h5p-physics'], 'finish_upload asks for the .h5p file beside the pack (not saved yet) ' + (g1.isError ? '' : t1.slice(0, 200)));
+    const bad = Buffer.from(H5); bad[bad.length - 30] ^= 0xff;   // the same size, another file
+    await fetch(cu[2], { method: 'PUT', headers: { 'x-upsert': 'true', apikey: 'k', 'content-type': 'application/zip' }, body: bad });
+    const g2 = await tool('noema_finish_upload', { subject_id: 'h5p-physics' });
+    ok(g2.isError && /sha256 does not match the \.h5p file|not a \.h5p \(zip\) file/.test(g2.content[0].text), 'a changed .h5p file (same size) is refused: its sha256 and the package rules are checked');
+    await fetch(cu[2], { method: 'PUT', headers: { 'x-upsert': 'true', apikey: 'k', 'content-type': 'application/zip' }, body: H5 });
+    const g3 = await tool('noema_finish_upload', { subject_id: 'h5p-physics' });
+    ok(!g3.isError && srv.state.kv[uid]['a:packmeta:h5p-physics'] && Buffer.compare(Buffer.from(srv.state.files[`${uid}/packs/h5p-physics/activities/planets-quiz/item.h5p`].data), H5) === 0,
+      'with the .h5p file uploaded the subject is saved; the storage holds it at packs/<subject>/activities/<id>/item.h5p (the path the app reads) ' + (g3.isError ? g3.content[0].text.slice(0, 300) : '')); }
 
   console.log('— translations in their own files (make_pack.py → <id>.tr.<locale>.json; docs/i18n.md §10)');
   const TRF = JSON.parse(fs.readFileSync(path.join(ROOT, 'library/subjects/demo-physics/tr.fr.json'), 'utf8'));

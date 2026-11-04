@@ -9,6 +9,10 @@
    {"measure": {"instrument": "V", "a": "TP3", "b": "GND"}} (or {"instrument": "I", "part": 0}) takes a measurement, {"diagnose": 6}
    picks the 7th diagnosis; "readings": [[i, lo, hi]] checks the number of the i-th measurement, "log": n how many there are;
    a case's "task" (e.g. {"fault": "rOpen"}) overrides the exercise's task.params.
+   h5p@1 items (an ordinary .h5p file, docs/INTERACTIVE_H5P.md) play in the app's own H5P runtime (38_activity_h5p.js + the vendored
+   player): in every language of the pack (the subject's own and each content.<locale>.json); a step {"click": selector} or
+   {"set": selector, "value": v} acts inside the item, "passed" is the score H5P reports (xAPI answered), "state" the saved
+   state ({"h5p": …}), a case's "locale" plays it in that language.
    Called by activity_test.py and activity_preview.py. Needs Playwright with Chromium (npm i playwright; npx playwright install chromium). */
 const fs = require('fs'), path = require('path'), os = require('os');
 let pw; try { pw = require(process.env.PW || 'playwright'); } catch (e) {
@@ -35,6 +39,11 @@ const items = (rj(regPath).items || []).filter(a => !onlyId || a.id === onlyId).
   const entry = a.entry ? path.join(SDIR, a.entry) : null;
   const text = entry && fs.existsSync(entry) ? fs.readFileSync(entry, 'utf8') : '';
   if (a.runtime === 'sim-spec@1') { let spec = null; try { spec = JSON.parse(text); } catch (e) { spec = null; } return { ...a, spec, strings, _dir: dir }; }
+  if (a.runtime === 'h5p@1') {   // the package as the app gets it (inline here; the app reads it from beside the pack), its words per language
+    const buf = entry && fs.existsSync(entry) ? fs.readFileSync(entry) : null, by = { ...(a.h5pByLocale || {}) };
+    for (const f of fs.existsSync(dir) ? fs.readdirSync(dir) : []) { const m = f.match(/^(content|l10n)\.(.+)\.json$/); if (m) by[m[2]] = { ...(by[m[2]] || {}), [m[1]]: rj(path.join(dir, f)) }; }
+    return { ...a, h5p: buf ? buf.toString('base64') : null, sha256: buf ? require('crypto').createHash('sha256').update(buf).digest('hex') : null, h5pByLocale: by, strings, _dir: dir, _missing: !buf };
+  }
   return { ...a, html: text, strings, sha256: null, _dir: dir };
 });
 if (!items.length) { console.log('✗ no activity ' + (onlyId || '') + ' in activities.json'); process.exit(1); }
@@ -49,6 +58,10 @@ const has = f => fs.existsSync(path.join(srcDir, f));
 const pcPath = [path.join(srcDir, 'packcheck.js'), path.join(srcDir, '..', 'packcheck.js')].find(f => fs.existsSync(f));
 const SIMOK = has('35_activity_sim.js') && has('35_simexpr.js') && !!pcPath;
 const CIRCUIT = has('36_engine_circuit.js') && has('36_engine_circuit_sim.js');   // the circuit engine circuit-mna@1 (P3)
+// h5p@1: the runtime and the app's own H5P player (skill zip: activity_host/h5p/player.js; repository: engine/vendor/h5p/<version>/player.js)
+const playerPath = [path.join(srcDir, 'h5p', 'player.js'), path.join(srcDir, '..', 'vendor', 'h5p', '3.8.2', 'player.js')].find(f => fs.existsSync(f));
+const H5POK = has('38_activity_h5p.js') && !!playerPath;
+const OWN = (() => { try { return rj(path.join(SDIR, 'subject.json')).language || 'en'; } catch (e) { return 'en'; } })();
 // the host words of sim-spec@1 (the app shows them in the learner's language; here English is enough)
 const HOSTWORDS = { 'engine.act.sim.reset': 'Reset the values', 'engine.act.sim.computing': 'Computing…', 'engine.act.sim.results': 'Results', 'engine.act.sim.plot': 'Plot of {y} against {x}',
   'engine.act.bench.instrument': 'Instrument', 'engine.act.bench.inst.V': 'Multimeter: voltage', 'engine.act.bench.inst.I': 'Multimeter: current', 'engine.act.bench.inst.R': 'Multimeter: resistance',
@@ -66,7 +79,7 @@ function tE(k, v) { return String(WORDS[k] || k).replace(/\\{(\\w+)\\}/g, functi
 function h(tag, attrs, ...kids) { const el = document.createElement(tag); for (const [k, v] of Object.entries(attrs || {})) { if (v == null || v === false) continue; if (k === 'class') el.className = v; else if (k === 'style' && typeof v === 'object') Object.assign(el.style, v); else if (k.startsWith('on')) el.addEventListener(k.slice(2), v); else el.setAttribute(k, v === true ? '' : v); } for (const kid of kids.flat()) if (kid != null && kid !== false) el.append(kid.nodeType ? kid : document.createTextNode(String(kid))); return el; }
 ${ACTP}
 window.ACTP = ACTP;
-</script><script>${rd('33_activity_guard.js')}</script><script>${rd('34_activity_html.js')}</script>${SIMOK ? `<script>${rd('35_simexpr.js')}</script><script>${fs.readFileSync(pcPath, 'utf8')}</script><script>${rd('35_activity_sim.js')}</script>${CIRCUIT ? `<script>${rd('36_engine_circuit.js')}</script><script>${rd('36_engine_circuit_sim.js')}</script>` : ''}` : ''}<script>
+</script><script>${rd('33_activity_guard.js')}</script><script>${rd('34_activity_html.js')}</script>${SIMOK ? `<script>${rd('35_simexpr.js')}</script><script>${fs.readFileSync(pcPath, 'utf8')}</script><script>${rd('35_activity_sim.js')}</script>${CIRCUIT ? `<script>${rd('36_engine_circuit.js')}</script><script>${rd('36_engine_circuit_sim.js')}</script>` : ''}` : ''}${H5POK ? `<script>${fs.readFileSync(playerPath, 'utf8').replace(/<\/script/gi, '<\\/script')}</script><script>${rd('38_activity_h5p.js')}</script>` : ''}<script>
 window.setTheme = function (t) { var r = document.documentElement; for (var k in t.tokens) r.style.setProperty('--' + k, t.tokens[k]); r.style.colorScheme = t.scheme; };
 window.LOG = []; window.H = null;
 window.run = function (act, init) {
@@ -85,7 +98,7 @@ window.run = function (act, init) {
 (async () => {
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'noema-act-')), hostFile = path.join(tmp, 'host.html');
   fs.writeFileSync(hostFile, HOST);
-  const browser = await pw.chromium.launch();
+  const browser = await pw.chromium.launch({ args: ['--disable-features=IsolateSandboxedIframes'] });   // (Playwright reaches the item's frame nested in the wrapper)
   let fails = 0, passes = 0;
   const say = (c, m) => { console.log((c ? '✓ ' : '✗ ') + m); if (c) passes++; else fails++; return c; };
   const open = async (width = 800, theme = 'light') => {
@@ -108,12 +121,14 @@ window.run = function (act, init) {
   for (const a of items) {
     console.log(`\n— ${a.id} (${a.runtime})`);
     const SIM = a.runtime === 'sim-spec@1';
-    if (!(a.runtime === 'html-app@1' || (SIM && SIMOK))) { say(false, `runtime ${a.runtime}: this toolkit runs html-app@1${SIMOK ? ' and sim-spec@1' : ''} only for now`); continue; }
+    const H5 = a.runtime === 'h5p@1';
+    if (!(a.runtime === 'html-app@1' || (SIM && SIMOK) || (H5 && H5POK))) { say(false, `runtime ${a.runtime}: this toolkit runs html-app@1${SIMOK ? ', sim-spec@1' : ''}${H5POK ? ', h5p@1' : ''} only for now`); continue; }
+    if (H5 && a._missing) { say(false, `${a.entry || 'item.h5p'}: not found`); continue; }
     if (SIM && !a.spec) { say(false, `${a.entry || 'spec.json'}: not found or not JSON`); continue; }
-    const locs = Object.keys(a.strings);
+    const locs = H5 ? [...new Set([OWN, ...Object.keys(a.h5pByLocale || {})])] : Object.keys(a.strings);
     if (mode === 'preview') {
       const out = path.resolve(outArg || path.join(SDIR, 'build', 'preview', a.id)); fs.mkdirSync(out, { recursive: true });
-      const loc = a.strings.en ? 'en' : locs[0];
+      const loc = H5 ? OWN : a.strings.en ? 'en' : locs[0];
       for (const [name, width, theme] of [['light', 800, 'light'], ['dark', 800, 'dark'], ['phone-360', 360, 'light']]) {
         const { p, ctx, errs } = await open(width, theme); await start(p, a, { locale: loc, theme, settle: 800 });
         await p.screenshot({ path: path.join(out, name + '.png'), fullPage: true });
@@ -154,7 +169,7 @@ window.run = function (act, init) {
       const ex = c.exercise ? exercises[c.exercise] : null;
       if (c.exercise && !ex) { say(false, `case "${c.name}": exercise ${c.exercise} is not in chapters/`); continue; }
       const { p, ctx, errs } = await open();
-      const { frame } = await start(p, a, { locale: c.locale || (a.strings.en ? 'en' : locs[0]), exerciseId: c.exercise || null, task: { ...(ex?.task?.params || {}), ...(c.task || {}) }, seed: Number.isInteger(ex?.task?.seed) ? ex.task.seed : 12345 });
+      const { frame } = await start(p, a, { locale: c.locale || (H5 ? OWN : a.strings.en ? 'en' : locs[0]), exerciseId: c.exercise || null, task: { ...(ex?.task?.params || {}), ...(c.task || {}) }, seed: Number.isInteger(ex?.task?.seed) ? ex.task.seed : 12345 });
       try {
         for (const s of c.steps || []) {
           if (s.set && SIM) await p.evaluate(([id, v]) => { const e = document.querySelector(`#box [data-param="${id}"]`); if (!e) throw new Error('no param ' + id); if (e.type === 'checkbox') e.checked = !!v; else e.value = String(v); e.dispatchEvent(new Event('input', { bubbles: true })); e.dispatchEvent(new Event('change', { bubbles: true })); }, [s.set, s.value]);

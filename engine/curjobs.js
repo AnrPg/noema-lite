@@ -439,7 +439,7 @@
   /** 📥 The package Claude made for a step (.noema.zip or .json) → the step's subject. */
   App.importPackage = async (acc, cid, nid, file) => {
     const SF = root.NoemaSrcFiles; let pack, files = null;
-    if (SF && await SF.isZip(file)) { const b = await SF.readBundle(file); pack = b.pack; files = {}; for (const s of SF.packaged(pack)) { const blob = await b.file(s.file); if (blob) files[s.file] = blob; } }
+    if (SF && await SF.isZip(file)) { const b = await SF.readBundle(file); pack = b.pack; files = await SF.bundleFiles(b, pack); }   // its source files and its H5P activities' files
     else { try { pack = JSON.parse(await file.text()); } catch (e) { throw new Error(rt('roadmap.jobs.notPackage')); } }
     if (pack?.format !== 'noema-pack' && pack?.format !== 'noema-pack/v1' && !Array.isArray(pack?.chapters)) throw new Error(rt('roadmap.jobs.notPack'));
     const res = root.NoemaPackCheck?.checkPack(pack); if (res?.errors?.length) throw new Error(rt('roadmap.jobs.packErrors', { n: res.errors.length, list: res.errors.slice(0, 3).join('; ') }));   // the errors themselves: English diagnostics (engine/packcheck.js)
