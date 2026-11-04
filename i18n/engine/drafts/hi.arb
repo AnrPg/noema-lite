@@ -46,5 +46,20 @@
   "engine.act.bench.right": "सही: {fault}",
   "engine.act.bench.wrong": "यह नहीं। खराबी यह थी: {fault}",
   "engine.act.bench.another": "दूसरा उपकरण",
-  "engine.act.bench.failed": "यह माप नहीं हो सका"
+  "engine.act.bench.failed": "यह माप नहीं हो सका",
+  "engine.act.embed.ask": "यह गतिविधि {provider} खोलती है। इसके लिए इंटरनेट चाहिए, और {provider} कुकीज़ सहेज सकता है।",
+  "engine.act.embed.open": "{provider} खोलें",
+  "engine.act.embed.terms": "{provider} की शर्तें",
+  "engine.act.embed.frameTitle": "{title} — {provider}",
+  "engine.act.embed.opened": "{provider} खुल गया है।",
+  "engine.act.embed.offline": "इस गतिविधि के लिए इंटरनेट चाहिए। आप ऑफ़लाइन हैं।",
+  "engine.act.embed.refused": "यह बाहरी गतिविधि अनुमति वाली साइटों की सूची में नहीं है।",
+  "engine.act.embed.timeout": "{provider} लोड नहीं हुआ।",
+  "engine.act.embed.settings": "बिना पूछे खुलने वाली बाहरी गतिविधियाँ: {names}",
+  "engine.act.embed.forget": "फिर से पूछें",
+  "engine.act.embed.settingsTip": "कोई बाहरी गतिविधि (PhET, GeoGebra या Desmos का पेज) खुलने से पहले एक बार पूछती है: इसके लिए इंटरनेट चाहिए, और साइट कुकीज़ सहेज सकती है। “फिर से पूछें” आपकी हाँ भूल जाता है।",
+  "engine.act.embed.forgotten": "बाहरी गतिविधियाँ खुलने से पहले फिर से पूछेंगी।",
+  "engine.xapi.export": "सीखने का रिकॉर्ड निर्यात करें (xAPI)",
+  "engine.xapi.exportSub": "आपके प्रयास और उत्तर, लर्निंग रिकॉर्ड स्टोर (LRS) के लिए एक फ़ाइल में",
+  "engine.xapi.none": "अभी निर्यात करने को कुछ नहीं है: इस विषय में आपके कोई प्रयास या उत्तर नहीं हैं।"
 }

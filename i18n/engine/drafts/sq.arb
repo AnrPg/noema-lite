@@ -46,5 +46,20 @@
   "engine.act.bench.right": "Saktë: {fault}",
   "engine.act.bench.wrong": "Jo ky. Defekti ishte: {fault}",
   "engine.act.bench.another": "Një pajisje tjetër",
-  "engine.act.bench.failed": "kjo matje nuk u bë dot"
+  "engine.act.bench.failed": "kjo matje nuk u bë dot",
+  "engine.act.embed.ask": "Ky aktivitet hap {provider}. Ka nevojë për internet dhe {provider} mund të ruajë cookies.",
+  "engine.act.embed.open": "Hap {provider}",
+  "engine.act.embed.terms": "Kushtet e {provider}",
+  "engine.act.embed.frameTitle": "{title} — {provider}",
+  "engine.act.embed.opened": "{provider} u hap.",
+  "engine.act.embed.offline": "Ky aktivitet ka nevojë për internet. Jeni jashtë linje.",
+  "engine.act.embed.refused": "Ky aktivitet i jashtëm nuk është në listën e faqeve të lejuara.",
+  "engine.act.embed.timeout": "{provider} nuk u ngarkua.",
+  "engine.act.embed.settings": "Aktivitete të jashtme që hapen pa pyetur: {names}",
+  "engine.act.embed.forget": "Pyet përsëri",
+  "engine.act.embed.settingsTip": "Një aktivitet i jashtëm (një faqe e PhET, GeoGebra ose Desmos) pyet një herë para se të hapet: ka nevojë për internet dhe faqja mund të ruajë cookies. “Pyet përsëri” e harron pëlqimin tuaj.",
+  "engine.act.embed.forgotten": "Aktivitetet e jashtme do të pyesin përsëri para se të hapen.",
+  "engine.xapi.export": "Eksporto regjistrin e të nxënit (xAPI)",
+  "engine.xapi.exportSub": "Përpjekjet dhe përgjigjet tuaja në një skedar për një depo regjistrimesh të të nxënit (LRS)",
+  "engine.xapi.none": "Ende s’ka asgjë për të eksportuar: nuk keni përpjekje apo përgjigje në këtë lëndë."
 }

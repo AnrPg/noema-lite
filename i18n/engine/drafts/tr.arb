@@ -46,5 +46,20 @@
   "engine.act.bench.right": "Doğru: {fault}",
   "engine.act.bench.wrong": "Bu değil. Arıza şuydu: {fault}",
   "engine.act.bench.another": "Başka bir cihaz",
-  "engine.act.bench.failed": "bu ölçüm yapılamadı"
+  "engine.act.bench.failed": "bu ölçüm yapılamadı",
+  "engine.act.embed.ask": "Bu etkinlik {provider} sayfasını açar. İnternet bağlantısı gerekir ve {provider} çerez kaydedebilir.",
+  "engine.act.embed.open": "{provider} sayfasını aç",
+  "engine.act.embed.terms": "{provider} kullanım koşulları",
+  "engine.act.embed.frameTitle": "{title} — {provider}",
+  "engine.act.embed.opened": "{provider} açıldı.",
+  "engine.act.embed.offline": "Bu etkinlik için internet bağlantısı gerekir. Çevrimdışısınız.",
+  "engine.act.embed.refused": "Bu dış etkinlik izin verilen siteler listesinde yok.",
+  "engine.act.embed.timeout": "{provider} yüklenmedi.",
+  "engine.act.embed.settings": "Sormadan açılan dış etkinlikler: {names}",
+  "engine.act.embed.forget": "Yeniden sor",
+  "engine.act.embed.settingsTip": "Bir dış etkinlik (PhET, GeoGebra veya Desmos sayfası) açılmadan önce bir kez sorar: internet bağlantısı gerekir ve site çerez kaydedebilir. “Yeniden sor”, verdiğiniz izni unutur.",
+  "engine.act.embed.forgotten": "Dış etkinlikler açılmadan önce yeniden soracak.",
+  "engine.xapi.export": "Öğrenme kaydını dışa aktar (xAPI)",
+  "engine.xapi.exportSub": "Denemeleriniz ve cevaplarınız, bir öğrenme kayıt deposu (LRS) için dosya olarak",
+  "engine.xapi.none": "Henüz dışa aktarılacak bir şey yok: bu derste denemeniz ya da cevabınız yok."
 }

@@ -46,5 +46,20 @@
   "engine.act.bench.right": "正确：{fault}",
   "engine.act.bench.wrong": "不是这个。故障是：{fault}",
   "engine.act.bench.another": "换一台设备",
-  "engine.act.bench.failed": "无法完成这次测量"
+  "engine.act.bench.failed": "无法完成这次测量",
+  "engine.act.embed.ask": "此活动会打开 {provider}。它需要联网，{provider} 可能会保存 Cookie。",
+  "engine.act.embed.open": "打开 {provider}",
+  "engine.act.embed.terms": "{provider} 的使用条款",
+  "engine.act.embed.frameTitle": "{title} — {provider}",
+  "engine.act.embed.opened": "{provider} 已打开。",
+  "engine.act.embed.offline": "此活动需要联网。你目前处于离线状态。",
+  "engine.act.embed.refused": "此外部活动不在允许的网站列表中。",
+  "engine.act.embed.timeout": "{provider} 未能加载。",
+  "engine.act.embed.settings": "无需询问即可打开的外部活动：{names}",
+  "engine.act.embed.forget": "重新询问",
+  "engine.act.embed.settingsTip": "外部活动（PhET、GeoGebra 或 Desmos 的页面）在打开前会询问一次：它需要联网，网站可能会保存 Cookie。“重新询问”会忘记你之前的同意。",
+  "engine.act.embed.forgotten": "外部活动在打开前会重新询问。",
+  "engine.xapi.export": "导出学习记录（xAPI）",
+  "engine.xapi.exportSub": "你的尝试和答案，保存为可导入学习记录库（LRS）的文件",
+  "engine.xapi.none": "暂时没有可导出的内容：你在这门课中还没有任何尝试或答案。"
 }

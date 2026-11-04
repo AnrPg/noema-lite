@@ -46,5 +46,20 @@
   "engine.act.bench.right": "正解：{fault}",
   "engine.act.bench.wrong": "違います。故障はこれでした：{fault}",
   "engine.act.bench.another": "別の装置",
-  "engine.act.bench.failed": "この測定はできませんでした"
+  "engine.act.bench.failed": "この測定はできませんでした",
+  "engine.act.embed.ask": "このアクティビティは {provider} を開きます。インターネット接続が必要で、{provider} が Cookie を保存することがあります。",
+  "engine.act.embed.open": "{provider} を開く",
+  "engine.act.embed.terms": "{provider} の利用規約",
+  "engine.act.embed.frameTitle": "{title} — {provider}",
+  "engine.act.embed.opened": "{provider} を開きました。",
+  "engine.act.embed.offline": "このアクティビティにはインターネット接続が必要です。現在オフラインです。",
+  "engine.act.embed.refused": "この外部アクティビティは、許可されたサイトの一覧にありません。",
+  "engine.act.embed.timeout": "{provider} を読み込めませんでした。",
+  "engine.act.embed.settings": "確認なしで開く外部アクティビティ：{names}",
+  "engine.act.embed.forget": "もう一度確認する",
+  "engine.act.embed.settingsTip": "外部アクティビティ（PhET、GeoGebra、Desmos のページ）は、開く前に一度だけ確認します。インターネット接続が必要で、サイトが Cookie を保存することがあります。「もう一度確認する」を押すと、許可した内容を忘れます。",
+  "engine.act.embed.forgotten": "外部アクティビティは、開く前にもう一度確認するようになりました。",
+  "engine.xapi.export": "学習記録をエクスポート（xAPI）",
+  "engine.xapi.exportSub": "試行と解答を、学習記録ストア（LRS）用のファイルとして保存",
+  "engine.xapi.none": "まだエクスポートするものがありません。この科目にはまだ試行も解答もありません。"
 }

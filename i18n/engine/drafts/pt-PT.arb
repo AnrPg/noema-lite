@@ -46,5 +46,20 @@
   "engine.act.bench.right": "Certo: {fault}",
   "engine.act.bench.wrong": "Não é essa. A avaria era: {fault}",
   "engine.act.bench.another": "Outro aparelho",
-  "engine.act.bench.failed": "não foi possível fazer esta medição"
+  "engine.act.bench.failed": "não foi possível fazer esta medição",
+  "engine.act.embed.ask": "Esta atividade abre o {provider}. Precisa de ligação à internet, e o {provider} pode guardar cookies.",
+  "engine.act.embed.open": "Abrir o {provider}",
+  "engine.act.embed.terms": "Termos do {provider}",
+  "engine.act.embed.frameTitle": "{title} — {provider}",
+  "engine.act.embed.opened": "O {provider} está aberto.",
+  "engine.act.embed.offline": "Esta atividade precisa de ligação à internet. Estás sem ligação.",
+  "engine.act.embed.refused": "Esta atividade externa não está na lista de sites permitidos.",
+  "engine.act.embed.timeout": "O {provider} não carregou.",
+  "engine.act.embed.settings": "Atividades externas que abrem sem perguntar: {names}",
+  "engine.act.embed.forget": "Perguntar de novo",
+  "engine.act.embed.settingsTip": "Uma atividade externa (uma página do PhET, do GeoGebra ou do Desmos) pergunta uma vez antes de abrir: precisa de ligação à internet, e o site pode guardar cookies. «Perguntar de novo» esquece o teu sim.",
+  "engine.act.embed.forgotten": "As atividades externas voltarão a perguntar antes de abrir.",
+  "engine.xapi.export": "Exportar o registo de aprendizagem (xAPI)",
+  "engine.xapi.exportSub": "As tuas tentativas e respostas num ficheiro para um repositório de registos de aprendizagem (LRS)",
+  "engine.xapi.none": "Ainda não há nada para exportar: não tens tentativas nem respostas nesta disciplina."
 }

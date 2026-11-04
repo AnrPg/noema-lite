@@ -318,6 +318,15 @@ ok(JSON.stringify(P.needRequires(sbase().activities.items)) === JSON.stringify([
   const miss = keys.filter(k => !en[k]).concat(...dr.map(f => { const d = JSON.parse(fs.readFileSync(path.join(ROOT, 'i18n', 'engine', 'drafts', f), 'utf8')); return keys.filter(k => !d[k]).map(k => f + ':' + k); }));
   ok(keys.length >= 5 && !miss.length, `the sim runtime's ${keys.length} host strings are in en.arb and in all ${dr.length} drafts ${miss.slice(0, 3).join(' ')}`);
 }
+{ // P6: the words of the outside-page card, the core's embed notes, the Settings line and the xAPI export exist in every UI language
+  const keys = new Set();
+  for (const f of ['45_activity_embed.js', '32_activities.js', '70_account.js', '40_views.js']) for (const m of fs.readFileSync(path.join(ROOT, 'engine', 'src', f), 'utf8').matchAll(/\b(?:T|tE)\('((?:engine\.act\.embed|engine\.xapi)\.[a-zA-Z]+)'/g)) keys.add(m[1]);
+  const en = JSON.parse(fs.readFileSync(path.join(ROOT, 'i18n', 'engine', 'en.arb'), 'utf8')), dr = fs.readdirSync(path.join(ROOT, 'i18n', 'engine', 'drafts'));
+  const miss = [...keys].filter(k => !en[k] || !en['@' + k]?.description).concat(...dr.map(f => { const d = JSON.parse(fs.readFileSync(path.join(ROOT, 'i18n', 'engine', 'drafts', f), 'utf8')); return [...keys].filter(k => !d[k]).map(k => f + ':' + k); }));
+  ok(keys.size >= 14 && !miss.length, `the ${keys.size} P6 host strings (outside-page card, notes, Settings "Ask again", xAPI export) are in en.arb with descriptions and in all ${dr.length} drafts ${miss.slice(0, 3).join(' ')}`);
+  const wsrc = fs.readFileSync(path.join(ROOT, 'engine', 'src', '44_activity_wasm.js'), 'utf8');
+  ok(!/\btE\(/.test(wsrc) && !/innerHTML|insertAdjacentHTML|document\.write|\beval\s*\(|new\s+Function/.test(wsrc.replace(/\/\*[\s\S]*?\*\//g, '')), 'wasm-module@1 adds no words of its own (failures are the core\'s codes) and never puts HTML or code from the pack in the page');
+}
 { // the sim runtime renders without a frame and never runs pack code: no eval / Function / HTML from the pack
   const src = fs.readFileSync(path.join(ROOT, 'engine', 'src', '35_activity_sim.js'), 'utf8');
   ok(!/\beval\s*\(|new\s+Function|innerHTML|insertAdjacentHTML|document\.write/.test(src) && /NoemaPackCheck\.checkSimSpec\(spec, tables, ACT\.engines\(\)\)/.test(src) && /NoemaExpr\.compile/.test(src), 'sim-spec@1: no eval, no new Function, no HTML from the pack; the spec is checked before it is shown; formulas only through NoemaExpr');

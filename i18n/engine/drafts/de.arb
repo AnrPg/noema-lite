@@ -46,5 +46,20 @@
   "engine.act.bench.right": "Richtig: {fault}",
   "engine.act.bench.wrong": "Das war es nicht. Der Fehler war: {fault}",
   "engine.act.bench.another": "Anderes Gerät",
-  "engine.act.bench.failed": "diese Messung war nicht möglich"
+  "engine.act.bench.failed": "diese Messung war nicht möglich",
+  "engine.act.embed.ask": "Diese Aktivität öffnet {provider}. Sie braucht eine Internetverbindung, und {provider} kann Cookies setzen.",
+  "engine.act.embed.open": "{provider} öffnen",
+  "engine.act.embed.terms": "Nutzungsbedingungen von {provider}",
+  "engine.act.embed.frameTitle": "{title} — {provider}",
+  "engine.act.embed.opened": "{provider} ist geöffnet.",
+  "engine.act.embed.offline": "Diese Aktivität braucht eine Internetverbindung. Sie sind offline.",
+  "engine.act.embed.refused": "Diese externe Aktivität steht nicht auf der Liste der erlaubten Seiten.",
+  "engine.act.embed.timeout": "{provider} wurde nicht geladen.",
+  "engine.act.embed.settings": "Externe Aktivitäten, die ohne Nachfrage öffnen: {names}",
+  "engine.act.embed.forget": "Wieder fragen",
+  "engine.act.embed.settingsTip": "Eine externe Aktivität (eine Seite von PhET, GeoGebra oder Desmos) fragt einmal, bevor sie öffnet: Sie braucht eine Internetverbindung, und die Seite kann Cookies setzen. „Wieder fragen“ vergisst Ihr Ja.",
+  "engine.act.embed.forgotten": "Externe Aktivitäten fragen wieder, bevor sie öffnen.",
+  "engine.xapi.export": "Lernnachweis exportieren (xAPI)",
+  "engine.xapi.exportSub": "Ihre Versuche und Antworten als Datei für einen Learning Record Store",
+  "engine.xapi.none": "Noch nichts zu exportieren: In diesem Fach haben Sie noch keine Versuche oder Antworten."
 }

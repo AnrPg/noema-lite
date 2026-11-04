@@ -7,6 +7,17 @@ function accSection(icon, title, { status = null, info = null, open = false, bod
     h('div', { class: 'accsecbody' }, body));
   return d;
 }
+/** Settings › Data: the outside activities (external-embed@1, docs/INTERACTIVE_EMBED.md) the learner let open without asking — one quiet
+    line with ⓘ and "Ask again" (NoemaEmbed.consent: S.settings.embedOk, an account setting); nothing at all while there is no yes to forget. */
+function embedConsentRow() {
+  const E = window.NoemaEmbed, ids = E?.consent?.list?.() || [];
+  if (!ids.length) return null;
+  const names = ids.map(id => (E.PROVIDERS || []).find(p => p.id === id)?.name || id);
+  const row = h('div', { class: 'subrow embedconsent', 'data-embed-consent': '' },
+    h('span', { class: 'grow tiny' }, tE('engine.act.embed.settings', { names: window.NoemaI18n?.fmt?.list ? NoemaI18n.fmt.list(names) : names.join(', ') }), ' ', tip(tE('engine.act.embed.settingsTip'))),
+    h('button', { class: 'btn small ghost', type: 'button', onclick: () => { for (const id of E.consent.list()) E.consent.forget(id); row.remove(); toast(tE('engine.act.embed.forgotten')); } }, tE('engine.act.embed.forget')));
+  return row;
+}
 const fmtBytes = n => n > 1e6 ? tE('engine.common.sizeMB', { size: window.NoemaI18n?.fmt ? NoemaI18n.fmt.number(n / 1e6, { minimumFractionDigits: 1, maximumFractionDigits: 1 }) : (n / 1e6).toFixed(1) }) : n > 1e3 ? tE('engine.common.sizeKB', { size: nf(Math.round(n / 1e3)) }) : tE('engine.common.sizeB', { size: nf(n) });
 /** A moment / a day / a time of day in the UI language (the same fields the browser's toLocale…String() shows). */
 const WHEN_DAY = { year: 'numeric', month: 'numeric', day: 'numeric' }, WHEN_TIME = { hour: 'numeric', minute: '2-digit', second: '2-digit' };
@@ -234,7 +245,8 @@ const ACC_VIEWS = {
                 h('button', { class: 'btn', onclick: async () => { c2(); const base = tE('engine.bk.restoredName', { name: obj.account.name || tE('engine.bk.restoredDefault') }); const id = (base.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'restored') + '-' + Date.now().toString(36).slice(-4); Noema.saveLocalAccount({ id, name: base, emoji: obj.account.emoji || '♻️', created: Date.now() }); await Noema.backup.apply(obj, id, 'replace'); Noema.switchTo(id, null); } }, '➕ ' + tE('engine.bk.asNew')),   // i18n-ignore
                 h('button', { class: 'btn ghost', onclick: c2 }, tE('engine.core.cancel')))));
           } })), guideBtn('restore', '♻️ ' + tE('engine.bk.howRestore'))] }),
-      accSection('🕘', tE('engine.bk.secPoints'), { status: { ok: true, text: nf(pts0.length) }, info: tE('engine.bk.pointsInfo'), body: rpBox }));
+      accSection('🕘', tE('engine.bk.secPoints'), { status: { ok: true, text: nf(pts0.length) }, info: tE('engine.bk.pointsInfo'), body: rpBox }),
+      embedConsentRow());
     drawFs(); drawRP();
   },
 

@@ -4789,5 +4789,65 @@
   "engine.act.bench.failed": "this measurement could not be made",
   "@engine.act.bench.failed": {
     "description": "Shown in place of a reading when the simulation could not compute it."
+  },
+  "engine.act.embed.ask": "This activity opens {provider}. It needs the network, and {provider} may set cookies.",
+  "@engine.act.embed.ask": {
+    "description": "The card before an outside activity (a page of another site, e.g. a PhET simulation) loads; {provider} = the site's name (PhET, GeoGebra, Desmos). Nothing loads before the learner presses Open."
+  },
+  "engine.act.embed.open": "Open {provider}",
+  "@engine.act.embed.open": {
+    "description": "Button on that card: loads the outside page; {provider} = the site's name."
+  },
+  "engine.act.embed.terms": "{provider}’s terms",
+  "@engine.act.embed.terms": {
+    "description": "Link to the outside site's terms of use, on the card and under the page; {provider} = the site's name."
+  },
+  "engine.act.embed.frameTitle": "{title} — {provider}",
+  "@engine.act.embed.frameTitle": {
+    "description": "Title of the frame that shows the outside page (read by screen readers); {title} = what the activity is, {provider} = the site's name."
+  },
+  "engine.act.embed.opened": "{provider} is open.",
+  "@engine.act.embed.opened": {
+    "description": "Announced to screen readers when the outside page has loaded; {provider} = the site's name."
+  },
+  "engine.act.embed.offline": "This activity needs the network. You are offline.",
+  "@engine.act.embed.offline": {
+    "description": "Shown with the activity's still picture when an outside page cannot open because the device is offline."
+  },
+  "engine.act.embed.refused": "This outside activity is not on the list of allowed sites.",
+  "@engine.act.embed.refused": {
+    "description": "Shown with the activity's still picture when the subject asks for an outside page the app does not allow."
+  },
+  "engine.act.embed.timeout": "{provider} did not load.",
+  "@engine.act.embed.timeout": {
+    "description": "Shown with the activity's still picture when the outside page did not load in time (a Restart button tries again); {provider} = the site's name."
+  },
+  "engine.act.embed.settings": "Outside activities that open without asking: {names}",
+  "@engine.act.embed.settings": {
+    "description": "One quiet line in Settings › Data; {names} = the sites the learner allowed, as a list (e.g. \"PhET, GeoGebra\")."
+  },
+  "engine.act.embed.forget": "Ask again",
+  "@engine.act.embed.forget": {
+    "description": "Small button on that line: forgets the learner's yes, so each outside site asks before it opens again."
+  },
+  "engine.act.embed.settingsTip": "An outside activity (a PhET, GeoGebra or Desmos page) asks once before it opens: it needs the network, and the site may set cookies. “Ask again” forgets your yes.",
+  "@engine.act.embed.settingsTip": {
+    "description": "The ⓘ tooltip of that Settings line."
+  },
+  "engine.act.embed.forgotten": "Outside activities will ask again before they open.",
+  "@engine.act.embed.forgotten": {
+    "description": "Short message after the learner pressed Ask again."
+  },
+  "engine.xapi.export": "Export learning record (xAPI)",
+  "@engine.xapi.export": {
+    "description": "Item of the subject's ⋮ menu: downloads the learner's activity attempts and answers in this subject as an xAPI file (a standard format that learning record stores read). Keep \"xAPI\" as it is."
+  },
+  "engine.xapi.exportSub": "Your attempts and answers as a file for a learning record store",
+  "@engine.xapi.exportSub": {
+    "description": "Second line of that menu item."
+  },
+  "engine.xapi.none": "Nothing to export yet: you have no attempts or answers in this subject.",
+  "@engine.xapi.none": {
+    "description": "Message when the learner asks for the xAPI file but has not answered anything in the subject yet."
   }
 }

@@ -874,5 +874,20 @@
   "engine.act.bench.right": "Σωστά: {fault}",
   "engine.act.bench.wrong": "Όχι αυτή. Η βλάβη ήταν: {fault}",
   "engine.act.bench.another": "Άλλη συσκευή",
-  "engine.act.bench.failed": "η μέτρηση αυτή δεν έγινε"
+  "engine.act.bench.failed": "η μέτρηση αυτή δεν έγινε",
+  "engine.act.embed.ask": "Αυτή η δραστηριότητα ανοίγει το {provider}. Χρειάζεται σύνδεση στο διαδίκτυο και το {provider} μπορεί να αποθηκεύσει cookies.",
+  "engine.act.embed.open": "Άνοιγμα του {provider}",
+  "engine.act.embed.terms": "Όροι χρήσης του {provider}",
+  "engine.act.embed.frameTitle": "{title} — {provider}",
+  "engine.act.embed.opened": "Το {provider} άνοιξε.",
+  "engine.act.embed.offline": "Αυτή η δραστηριότητα χρειάζεται σύνδεση στο διαδίκτυο. Είσαι εκτός σύνδεσης.",
+  "engine.act.embed.refused": "Αυτή η εξωτερική δραστηριότητα δεν είναι στη λίστα με τους επιτρεπόμενους ιστότοπους.",
+  "engine.act.embed.timeout": "Το {provider} δεν φόρτωσε.",
+  "engine.act.embed.settings": "Εξωτερικές δραστηριότητες που ανοίγουν χωρίς ερώτηση: {names}",
+  "engine.act.embed.forget": "Να ρωτάει ξανά",
+  "engine.act.embed.settingsTip": "Μια εξωτερική δραστηριότητα (μια σελίδα του PhET, του GeoGebra ή του Desmos) ρωτάει μία φορά πριν ανοίξει: χρειάζεται σύνδεση στο διαδίκτυο και ο ιστότοπος μπορεί να αποθηκεύσει cookies. Το «Να ρωτάει ξανά» ξεχνά το «ναι» σου.",
+  "engine.act.embed.forgotten": "Οι εξωτερικές δραστηριότητες θα ρωτούν ξανά πριν ανοίξουν.",
+  "engine.xapi.export": "Εξαγωγή αρχείου μάθησης (xAPI)",
+  "engine.xapi.exportSub": "Οι προσπάθειες και οι απαντήσεις σου σε ένα αρχείο για σύστημα καταγραφής μάθησης",
+  "engine.xapi.none": "Δεν υπάρχει ακόμη κάτι για εξαγωγή: δεν έχεις προσπάθειες ή απαντήσεις σε αυτό το μάθημα."
 }

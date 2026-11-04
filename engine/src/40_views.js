@@ -175,9 +175,26 @@ function subjectMenu() {
     { label: SL('editSubject'), sub: SL('editSubjectSub'), icon: 'edit', run: async () => Noema.editSubject(await subjectMeta(), { onChange: () => location.reload() }) },
     own(Noema.subjectMeta || {}) ? { label: SL('shareSubject'), sub: SL('shareSubjectSub'), icon: 'share', run: async () => Noema.share(await subjectMeta()) } : null,   // library subjects are everybody's already
     { label: SL('exportPackage'), sub: SL('exportPackageSub'), icon: 'download', run: () => Noema.exportPackage(ACCOUNT.id, Noema.pack).catch(e => toast('⚠️ ' + errText(e), 4000)) },
+    window.NoemaXAPI ? { label: tE('engine.xapi.export'), sub: tE('engine.xapi.exportSub'), icon: 'download', run: exportXAPI } : null,
     { label: SL('pickSubject'), icon: 'book', run: () => Noema.openSubjectPicker() },
     '-',
     { label: SL('resetProgress', { title: SUBJ.title }), icon: 'close', danger: true, run: resetProgress }];
+}
+/** ⋮ › Export learning record (xAPI): this subject's activity attempts (S.att) and answers (S.res) as an xAPI 1.0.3 file, made by
+    NoemaXAPI (engine/src/43_xapi.js, docs/INTERACTIVE_XAPI.md) — nothing is sent anywhere. The actor is the account id, never an e-mail. */
+function exportXAPI() {
+  const att = S.att || {}, res = S.res || {};
+  if (!Object.keys(att).length && !Object.keys(res).length) { toast(tE('engine.xapi.none'), 3500); return; }
+  const site = String(Noema.config?.siteUrl || 'https://noema-lite.netlify.app').replace(/\/+$/, '') + '/';   // i18n-ignore (a web address)
+  let file;
+  try {
+    file = NoemaXAPI.exportFile({ att, res, pack: { id: SUBJ.id, title: SUBJ.title, language: SUBJ.language }, chapters: Noema.pack?.chapters || COURSE },
+      { actor: { account: { homePage: site, name: String(ACCOUNT.id) } }, activityBase: site + 'xapi/' + encodeURIComponent(SUBJ.id) + '/', registrationSeed: [String(ACCOUNT.id), SUBJ.id], now: Date.now() });
+  } catch (e) { toast('⚠️ ' + errText(e), 4000); return; }
+  const name = SUBJ.id + '.xapi.json';   // i18n-ignore (a file name)
+  const a = h('a', { href: URL.createObjectURL(new Blob([JSON.stringify(file, null, 1)], { type: 'application/json' })), download: name });
+  document.body.append(a); a.click(); a.remove();
+  toast('⬇️ ' + name, 3000);   // i18n-ignore (a file name)
 }
 function resetProgress(after) {
   confirmBox(tE('engine.home.resetConfirm', { title: SUBJ.title }), async () => { await Noema.backup.restorePoint(ACCOUNT.id, tE('engine.home.resetPoint', { title: SUBJ.title }), { k: 'engine.home.resetPoint', p: { title: SUBJ.title } }); const st = S.settings; for (const k of Object.keys(S)) delete S[k]; Object.assign(S, { xp: 0, read: {}, res: {}, pb: {}, fc: {}, boss: {}, last: null, resetAt: Date.now(), settings: st }); flushSave(); if (typeof after === 'function') after(); route(); renderTopStats(); });
