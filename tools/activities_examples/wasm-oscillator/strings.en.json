@@ -1,0 +1,6 @@
+{"title": "A damped mass on a spring",
+ "intro": "A 1 kg mass on a spring is pulled aside and let go. A small WebAssembly module computes the motion step by step for 2.5 s. Change the spring, the damping and the start, and watch how fast the swings die out.",
+ "spring": "Spring constant k", "damping": "Damping c", "start": "Start displacement x₀",
+ "zetaLabel": "Damping ratio ζ = c / (2√k)", "leftLabel": "Energy left after 2.5 s",
+ "plotTitle": "Displacement against time", "time": "Time", "displacement": "Displacement", "xLine": "x(t)", "restMark": "rest",
+ "checkLeft": "At most 5 % of the starting energy is left after 2.5 s.", "checkK": "The spring constant is still 4 N/m."}

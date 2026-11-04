@@ -1,0 +1,6 @@
+{"title": "Une masse amortie au bout d’un ressort",
+ "intro": "Une masse de 1 kg accrochée à un ressort est écartée puis lâchée. Un petit module WebAssembly calcule le mouvement pas à pas pendant 2,5 s. Changez le ressort, l’amortissement et l’écart de départ, et regardez à quelle vitesse les oscillations s’éteignent.",
+ "spring": "Raideur du ressort k", "damping": "Amortissement c", "start": "Écart de départ x₀",
+ "zetaLabel": "Taux d’amortissement ζ = c / (2√k)", "leftLabel": "Énergie restante après 2,5 s",
+ "plotTitle": "Écart en fonction du temps", "time": "Temps", "displacement": "Écart", "xLine": "x(t)", "restMark": "repos",
+ "checkLeft": "Après 2,5 s, il reste au plus 5 % de l’énergie de départ.", "checkK": "La raideur du ressort vaut toujours 4 N/m."}
