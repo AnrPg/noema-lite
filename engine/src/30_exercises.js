@@ -30,6 +30,8 @@ R.mcq = (ex, api) => {
     reveal() { btns.forEach(b => { const oi = b._oi; if (ans.has(oi)) b.classList.add('right'); else if (sel.has(oi)) b.classList.add('wrong'); if (ex.why?.[oi]) b.children[1].append(h('span', { class: 'why', 'data-nf': 'why.' + oi, html: fmt(ex.why[oi]) })); }); },
   };
 };
+/** An exercise of a type this app does not know (a newer pack): a quiet card, never a crash (docs/adr/001 D1). */
+R.newer = (ex, api) => ({ el: h('div', { class: 'fb' }, '🔄 ' + tE('engine.act.newerType')), selfDone: true });
 R.odd = (ex, api) => { const r = R.mcq(ex, api); r.el.querySelector('.opts').classList.add('grid4'); return r; };
 
 R.tf = (ex, api) => {
@@ -303,7 +305,7 @@ function exerciseCard(ex, { onDone, compact = false, noXP = false, showSection =
   const q = h('div', { class: 'q', 'data-nf': 'q', html: fmt(ex.q || '') });
   card.append(head, q);
   if (ex.code) card.append(h('div', { 'data-nf': 'code', style: { margin: '0 0 12px' } }, codeBlock(ex.code, ex.lang || guessLang(ex.code))));
-  const w = (R[ex.type] || R.mcq)(ex, api);
+  const w = (R[ex.type] || R.newer)(ex, api);
   card.append(w.el);
   const actions = h('div', { class: 'actions' });
   const checkBtn = h('button', { class: 'btn primary', onclick: () => doCheck() }, tE('engine.ex.check'));

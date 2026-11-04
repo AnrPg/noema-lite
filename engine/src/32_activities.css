@@ -1,0 +1,17 @@
+/* ===================== interactive activities (32_activities.js, 34_activity_html.js) ===================== */
+.act { position: relative; margin: 4px 0; }
+.act-box { position: relative; border: 1px solid var(--line); border-radius: var(--r-sm, 10px); background: var(--card); overflow: hidden; max-width: 100%; }
+.act-box.act-running { min-height: 160px; }
+.act-box.act-fallback { padding: 12px; }
+.act-fbtext { margin: 8px 0 0; color: var(--ink2); }
+.act-frame { display: block; width: 100%; height: 100%; min-height: 160px; border: 0; background: var(--card); }
+.act-bar { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.act-bar .btn { min-height: 36px; }
+.act-note { font-size: 13px; color: var(--ink3); min-height: 0; margin-top: 4px; }
+.act-note:empty { display: none; }
+.act-skip { position: absolute; left: -9999px; top: 0; }
+.act-skip:focus { position: static; display: inline-block; margin-bottom: 4px; }
+.act-sr, .act-after { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.act:fullscreen { background: var(--bg); padding: 12px; display: flex; flex-direction: column; }
+.act:fullscreen .act-box { flex: 1; height: auto !important; }
+.act-hints .fb { margin-top: 6px; }

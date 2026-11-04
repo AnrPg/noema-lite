@@ -7,8 +7,8 @@
    technical detail after a translated sentence (“The pack has 3 error(s): …”, engine/curjobs.js, engine/packgen.js). */
 (function (root) {
   /* i18n-ignore-start */
-  const TYPES = new Set(['mcq', 'tf', 'odd', 'order', 'match', 'bucket', 'cloze', 'spotbug', 'calc', 'scenario', 'free', 'write', 'flaw', 'case', 'predict', 'tree', 'inquiry', 'debate', 'img_hotspot', 'img_sequence', 'img_reveal', 'img_drag', 'img_label', 'img_select', 'img_occlusion']);
-  const BLOCKS = new Set(['p', 'list', 'code', 'diagram', 'table', 'callout', 'compare', 'flow', 'reveal', 'ask', 'terms', 'figure']);
+  const TYPES = new Set(['mcq', 'tf', 'odd', 'order', 'match', 'bucket', 'cloze', 'spotbug', 'calc', 'scenario', 'free', 'write', 'flaw', 'case', 'predict', 'tree', 'inquiry', 'debate', 'sim', 'img_hotspot', 'img_sequence', 'img_reveal', 'img_drag', 'img_label', 'img_select', 'img_occlusion']);
+  const BLOCKS = new Set(['p', 'list', 'code', 'diagram', 'table', 'callout', 'compare', 'flow', 'reveal', 'ask', 'terms', 'figure', 'interactive']);
   const ID_RE = /^[a-z0-9][a-z0-9-]{1,60}$/;
   const isStr = v => typeof v === 'string' && v.trim().length > 0;
   const strs = (a, min = 1) => Array.isArray(a) && a.length >= min && a.every(isStr);
@@ -36,7 +36,7 @@
 
   /** The quality rules of packs with subject.authoring.rules >= 2 — the SAME object as tools/pack_rules.json "quality" and the SAME
       checks as tools/pack_quality.py (tests/pack_rules.js compares both on the same chapters). docs/PIPELINES.md §4. */
-  const QUALITY = {"version": 2, "vocab": {"types": ["bucket", "calc", "case", "cloze", "debate", "flaw", "free", "img_drag", "img_hotspot", "img_label", "img_occlusion", "img_reveal", "img_select", "img_sequence", "inquiry", "match", "mcq", "odd", "order", "predict", "scenario", "spotbug", "tf", "tree", "write"], "think": ["recall", "explain", "apply", "discriminate", "analyze", "evaluate", "create"], "applyPlus": ["apply", "discriminate", "analyze", "evaluate", "create"], "critical": ["analyze", "evaluate", "create"], "modes": ["contradiction", "reverse", "whatif", "perturb", "causal", "distinguish", "translate", "ambiguity", "feynman", "combine", "dialectic"], "cats": ["pitfall", "confusable", "falsefriend", "detail", "sequence", "multipart", "nomenclature", "acronym", "formula", "edge", "recent", "hard-understand", "hard-remember"], "levels": ["foundation", "core", "advanced"], "tags": ["concept", "syntax", "pitfall", "debug", "exam", "interview", "calc", "compare"]}, "autoUnfit": {"code": ["spotbug", "write", "syntax"], "math": ["calc"], "pictures": ["img_hotspot", "img_sequence", "img_reveal", "img_drag", "img_label", "img_select", "img_occlusion"]}, "checks": [{"id": "map.present", "level": "error", "what": "the chapter has its knowledge map (map/chNN.json → chapter.map)"}, {"id": "map.refs", "level": "error", "what": "points and learnables are well formed: unique ids, known levels and categories, every kp / with id exists"}, {"id": "map.exhaustive", "level": "error", "what": "every knowledge point is in a learnable, or names the earlier DAG node that taught it (taughtIn)"}, {"id": "fit.declared", "level": "error", "what": "every exercise type, focus tag and paradigm is in fits, or has a reason in unfit"}, {"id": "fit.types", "level": "error", "min": 3, "what": "every type in fits.types"}, {"id": "fit.focus", "level": "error", "min": 3, "what": "every focus tag in fits.focus"}, {"id": "mode.coverage", "level": "error", "min": 2, "what": "every paradigm in fits.modes"}, {"id": "mix.difficulty", "level": "error", "target": {"1": 20, "2": 25, "3": 55}, "tol": 5, "what": "difficulty 1/2/3 = 20/25/55 % of the chapter"}, {"id": "mix.think", "level": "error", "recallMax": 25, "applyPlusMin": 40, "criticalMin": 3, "what": "recall <= 25 %, apply or higher >= 40 %, critical thinking (analyze/evaluate/create) >= 3 exercises"}, {"id": "mix.order", "level": "warn", "maxInversions": 25, "what": "inside a section, easier exercises come first"}, {"id": "lr.link", "level": "error", "what": "every exercise names its learnable (lr), its kind of thinking (think) and, if any, a known paradigm (mode)"}, {"id": "lr.facades", "level": "error", "min": 2, "types": 2, "what": "every learnable has >= 2 versions in >= 2 exercise types"}, {"id": "cats.facades", "level": "error", "min": 2, "types": 2, "what": "every knowledge point with a category has >= 2 exercises in >= 2 types"}, {"id": "source.questions", "level": "error", "what": "every exercise / question / problem of the sources (map.sourceQuestions) is in the chapter, written out in full, with its answer: answerFrom 'source' (the source's own solution: its result is taken as correct, no second check, but the exercise's explanation is rewritten more detailed, insightful and explanatory than the source's) or 'claude' (solved here, then double-checked: check says how), and an exercise that cites it (cite.sq)"}, {"id": "theory.tables", "level": "error", "kinds": {"compare": {"cols": 3, "rows": 2, "what": "a comparative matrix: concepts side by side against the same criteria"}, "summary": {"cols": 2, "rows": 3, "what": "a table that categorises or sums up the chapter's concepts"}, "breakdown": {"cols": 4, "rows": 2, "what": "related concepts brought together and broken down across columns of different parameters"}}, "what": "the theory has all three kinds of table (a table block's kind: compare, summary, breakdown), each big enough to be one; a chapter with nothing to put in one gives the reason in map.unfit['table.<kind>']"}, {"id": "example.restated", "level": "warn", "skip": ["explain", "why", "fb", "outcome", "model", "rubric", "fix", "solution", "note"], "what": "an exercise does not test the specifics of a lesson's example (unless the example is an interesting case in itself) and never points at it ('the example above', 'in the lesson's example'): it writes the example out in full and then asks a question that needs thinking about it (Q5b)", "patterns": ["\\b(?:the|this|that|our) (?:worked )?example (?:above|earlier|before|we (?:saw|met|studied|read)|(?:from|in) (?:the|this) (?:lesson|theory|section|chapter))\\b", "\\b(?:in|from) the (?:lesson|theory|section|chapter)(?:'s|’s)? example\\b", "\\bas (?:in|shown in) the example\\b", "\\b(?:recall|remember) the example\\b", "(?:στο|το|του|από το) παράδειγμα (?:του μαθήματος|της θεωρίας|της ενότητας|του κεφαλαίου|παραπάνω|που είδαμε)", "όπως στο παράδειγμα", "(?:в|из) пример(?:е|а) (?:выше|урока|из урока|из теории)"]}, {"id": "figure.explained", "level": "warn", "minChars": 120, "what": "every figure and diagram of the theory is explained in detail right after it (a p, list or callout block, >= 120 characters): what it shows (its parts, axes, symbols, arrows, colours), how to read it and what it teaches; a caption alone is not enough (Q7b)"}, {"id": "sequence.arrows", "level": "warn", "what": "img_sequence (tap the parts in order) rarely teaches on a graph diagram (flowchart, pipeline, DAG, cycle): its arrows already show the order. Keep one only when tracing teaches something the picture does not already show, and say why in map.sequenceWhy['<media id>'] (Q5c)"}, {"id": "cite.present", "level": "error", "what": "every exercise keeps where it comes from in cite {src, loc} (metadata, never in the text)"}, {"id": "self.contained", "level": "error", "what": "no exercise, card or theory text points at the source's structure (question numbers, pages, paragraphs, 'the source says')", "patterns": ["\\bQ\\d{1,3}\\b", "\\bRound \\d+\\b", "\\bp\\.\\s?\\d+", "\\bpages? \\d+", "\\bparagraphs? \\d+", "\\b(?:in|from|according to|see) the (?:source|document|slides?|pdf|handout|reading|text above)\\b", "\\bthe (?:source|document|slides?|pdf|handout) (?:says|states|mentions|shows|lists|gives)\\b", "\\bin the order (?:the source|it is) (?:gives|mentions|lists)", "σελ(?:ίδα|\\.)\\s?\\d+", "(?:η|την|στην|της) πηγή", "σύμφωνα με το κείμενο", "παράγραφο \\d+"]}, {"id": "explain.depth", "level": "error", "minChars": 80, "minSentences": 2, "what": "the explanation says why the answer is right and why the tempting wrong one is wrong (>= 2 sentences, >= 80 characters)"}, {"id": "mcq.why", "level": "error", "what": "every mcq / odd option has its why"}, {"id": "trivial.answer", "level": "error", "minWords": 2, "what": "the right option is not written in the question"}, {"id": "trivial.longest", "level": "warn", "ratio": 1.6, "what": "the right option is not by far the longest"}, {"id": "review.done", "level": "error", "rubricMin": 15, "what": "the second-pass review (review/chNN.json → chapter.review): rubric on >= 15 learnables (or all), every exercise solved blind, every mismatch fixed"}], "notes": ["Strictness: subject.authoring.rules >= 2 turns these checks on (start_subject.py writes 2). Errors when subject.authoring.by is 'claude' or 'gemini', warnings when it is 'learner' or 'import'. Packs without authoring.rules are not checked (made before 2026-10-21; TD-11).", "The connector (noema_finish_upload, noema_save_pack) refuses a pack built since 'since' (pack.builtAt, or no builtAt at all) that has no subject.authoring.rules >= 2, so a pack cannot skip the checks by leaving the field out. Older packs keep working unchanged.", "autoUnfit: a value that cannot fit the chapter needs no reason in unfit — the code types without subject.features.code, calc without .math, picture types when the chapter has no picture (pictures only where they teach, docs/VISUAL.md §5).", "Counts are never checked: about 2 versions per learnable is the core set; there is no upper limit (docs/PIPELINES.md §4, a mild suggestion only)."], "since": "2026-10-22T00:00:00Z"};
+  const QUALITY = {"version": 2, "vocab": {"types": ["bucket", "calc", "case", "cloze", "debate", "flaw", "free", "img_drag", "img_hotspot", "img_label", "img_occlusion", "img_reveal", "img_select", "img_sequence", "inquiry", "match", "mcq", "odd", "order", "predict", "scenario", "sim", "spotbug", "tf", "tree", "write"], "think": ["recall", "explain", "apply", "discriminate", "analyze", "evaluate", "create"], "applyPlus": ["apply", "discriminate", "analyze", "evaluate", "create"], "critical": ["analyze", "evaluate", "create"], "modes": ["contradiction", "reverse", "whatif", "perturb", "causal", "distinguish", "translate", "ambiguity", "feynman", "combine", "dialectic"], "cats": ["pitfall", "confusable", "falsefriend", "detail", "sequence", "multipart", "nomenclature", "acronym", "formula", "edge", "recent", "hard-understand", "hard-remember"], "levels": ["foundation", "core", "advanced"], "tags": ["concept", "syntax", "pitfall", "debug", "exam", "interview", "calc", "compare"]}, "optIn": {"types": ["sim"]}, "autoUnfit": {"code": ["spotbug", "write", "syntax"], "math": ["calc"], "pictures": ["img_hotspot", "img_sequence", "img_reveal", "img_drag", "img_label", "img_select", "img_occlusion"]}, "checks": [{"id": "map.present", "level": "error", "what": "the chapter has its knowledge map (map/chNN.json → chapter.map)"}, {"id": "map.refs", "level": "error", "what": "points and learnables are well formed: unique ids, known levels and categories, every kp / with id exists"}, {"id": "map.exhaustive", "level": "error", "what": "every knowledge point is in a learnable, or names the earlier DAG node that taught it (taughtIn)"}, {"id": "fit.declared", "level": "error", "what": "every exercise type, focus tag and paradigm is in fits, or has a reason in unfit"}, {"id": "fit.types", "level": "error", "min": 3, "minPerKind": {"sim": 1}, "what": "every type in fits.types (sim, an interactive activity, is opt-in: listed in fits.types only where an activity teaches, then >= 1)"}, {"id": "fit.focus", "level": "error", "min": 3, "what": "every focus tag in fits.focus"}, {"id": "mode.coverage", "level": "error", "min": 2, "what": "every paradigm in fits.modes"}, {"id": "mix.difficulty", "level": "error", "target": {"1": 20, "2": 25, "3": 55}, "tol": 5, "what": "difficulty 1/2/3 = 20/25/55 % of the chapter"}, {"id": "mix.think", "level": "error", "recallMax": 25, "applyPlusMin": 40, "criticalMin": 3, "what": "recall <= 25 %, apply or higher >= 40 %, critical thinking (analyze/evaluate/create) >= 3 exercises"}, {"id": "mix.order", "level": "warn", "maxInversions": 25, "what": "inside a section, easier exercises come first"}, {"id": "lr.link", "level": "error", "what": "every exercise names its learnable (lr), its kind of thinking (think) and, if any, a known paradigm (mode)"}, {"id": "lr.facades", "level": "error", "min": 2, "types": 2, "what": "every learnable has >= 2 versions in >= 2 exercise types"}, {"id": "cats.facades", "level": "error", "min": 2, "types": 2, "what": "every knowledge point with a category has >= 2 exercises in >= 2 types"}, {"id": "source.questions", "level": "error", "what": "every exercise / question / problem of the sources (map.sourceQuestions) is in the chapter, written out in full, with its answer: answerFrom 'source' (the source's own solution: its result is taken as correct, no second check, but the exercise's explanation is rewritten more detailed, insightful and explanatory than the source's) or 'claude' (solved here, then double-checked: check says how), and an exercise that cites it (cite.sq)"}, {"id": "theory.tables", "level": "error", "kinds": {"compare": {"cols": 3, "rows": 2, "what": "a comparative matrix: concepts side by side against the same criteria"}, "summary": {"cols": 2, "rows": 3, "what": "a table that categorises or sums up the chapter's concepts"}, "breakdown": {"cols": 4, "rows": 2, "what": "related concepts brought together and broken down across columns of different parameters"}}, "what": "the theory has all three kinds of table (a table block's kind: compare, summary, breakdown), each big enough to be one; a chapter with nothing to put in one gives the reason in map.unfit['table.<kind>']"}, {"id": "example.restated", "level": "warn", "skip": ["explain", "why", "fb", "outcome", "model", "rubric", "fix", "solution", "note"], "what": "an exercise does not test the specifics of a lesson's example (unless the example is an interesting case in itself) and never points at it ('the example above', 'in the lesson's example'): it writes the example out in full and then asks a question that needs thinking about it (Q5b)", "patterns": ["\\b(?:the|this|that|our) (?:worked )?example (?:above|earlier|before|we (?:saw|met|studied|read)|(?:from|in) (?:the|this) (?:lesson|theory|section|chapter))\\b", "\\b(?:in|from) the (?:lesson|theory|section|chapter)(?:'s|’s)? example\\b", "\\bas (?:in|shown in) the example\\b", "\\b(?:recall|remember) the example\\b", "(?:στο|το|του|από το) παράδειγμα (?:του μαθήματος|της θεωρίας|της ενότητας|του κεφαλαίου|παραπάνω|που είδαμε)", "όπως στο παράδειγμα", "(?:в|из) пример(?:е|а) (?:выше|урока|из урока|из теории)"]}, {"id": "figure.explained", "level": "warn", "minChars": 120, "what": "every figure, diagram and interactive activity of the theory is explained in detail right after it (a p, list or callout block, >= 120 characters): what it shows (its parts, axes, symbols, arrows, colours; for an activity: its controls and what to try), how to read it and what it teaches; a caption alone is not enough (Q7b)"}, {"id": "sequence.arrows", "level": "warn", "what": "img_sequence (tap the parts in order) rarely teaches on a graph diagram (flowchart, pipeline, DAG, cycle): its arrows already show the order. Keep one only when tracing teaches something the picture does not already show, and say why in map.sequenceWhy['<media id>'] (Q5c)"}, {"id": "cite.present", "level": "error", "what": "every exercise keeps where it comes from in cite {src, loc} (metadata, never in the text)"}, {"id": "self.contained", "level": "error", "what": "no exercise, card or theory text points at the source's structure (question numbers, pages, paragraphs, 'the source says')", "patterns": ["\\bQ\\d{1,3}\\b", "\\bRound \\d+\\b", "\\bp\\.\\s?\\d+", "\\bpages? \\d+", "\\bparagraphs? \\d+", "\\b(?:in|from|according to|see) the (?:source|document|slides?|pdf|handout|reading|text above)\\b", "\\bthe (?:source|document|slides?|pdf|handout) (?:says|states|mentions|shows|lists|gives)\\b", "\\bin the order (?:the source|it is) (?:gives|mentions|lists)", "σελ(?:ίδα|\\.)\\s?\\d+", "(?:η|την|στην|της) πηγή", "σύμφωνα με το κείμενο", "παράγραφο \\d+"]}, {"id": "explain.depth", "level": "error", "minChars": 80, "minSentences": 2, "what": "the explanation says why the answer is right and why the tempting wrong one is wrong (>= 2 sentences, >= 80 characters)"}, {"id": "mcq.why", "level": "error", "what": "every mcq / odd option has its why"}, {"id": "trivial.answer", "level": "error", "minWords": 2, "what": "the right option is not written in the question"}, {"id": "trivial.longest", "level": "warn", "ratio": 1.6, "what": "the right option is not by far the longest"}, {"id": "review.done", "level": "error", "rubricMin": 15, "what": "the second-pass review (review/chNN.json → chapter.review): rubric on >= 15 learnables (or all), every exercise solved blind, every mismatch fixed"}], "notes": ["Strictness: subject.authoring.rules >= 2 turns these checks on (start_subject.py writes 2). Errors when subject.authoring.by is 'claude' or 'gemini', warnings when it is 'learner' or 'import'. Packs without authoring.rules are not checked (made before 2026-10-21; TD-11).", "The connector (noema_finish_upload, noema_save_pack) refuses a pack built since 'since' (pack.builtAt, or no builtAt at all) that has no subject.authoring.rules >= 2, so a pack cannot skip the checks by leaving the field out. Older packs keep working unchanged.", "autoUnfit: a value that cannot fit the chapter needs no reason in unfit — the code types without subject.features.code, calc without .math, picture types when the chapter has no picture (pictures only where they teach, docs/VISUAL.md §5).", "optIn: a value a chapter uses only where it teaches (sim, an interactive activity: docs/INTERACTIVE.md) needs no reason in unfit when it is left out; once listed in fits it counts like any other value, with its own minimum (fit.types minPerKind).", "Counts are never checked: about 2 versions per learnable is the core set; there is no upper limit (docs/PIPELINES.md §4, a mild suggestion only)."], "since": "2026-10-22T00:00:00Z"};
   const LANGS = {"version": 1, "translations": ["en", "el", "ru"], "bridges": ["en", "el", "ru", "ar"], "bridgesFrom": ["own", "translations"], "bridgeCoverage": {"everyday": 0.8, "all": 0.9}, "since": "2026-10-22T00:00:00Z", "what": "Every pack with subject.authoring.rules >= 2 ends its flow with a full translation into each of 'translations' (minus its own language) and a 文A bridge for every pair (content language → native language): the content language is the pack's own language AND each of its translations ('bridgesFrom'), the native language each of 'bridges' that is not that content language (user rules 2026-10-21 and 2026-10-22: an en pack translated into el and ru gets en→el, en→ru, en→ar, el→en, el→ru, el→ar, ru→en, ru→el, ru→ar). A translation's bridges are made after the translation, from its text. A translation is its own file (noema-translation, <id>.tr.<locale>.json; docs/i18n.md §10) with the pack's ids, structure and answers, plus the subject's name in that language (subject.i18n.<locale>: title, description, hero, ...). A bridge covers >= bridgeCoverage.all of the content words of the theory and >= bridgeCoverage.everyday of the everyday ones (band 1, and every word no entry covers yet). Checked at the end of the flow (tools/pipeline.py steps translate and bridges; noema_finish_upload lists what is missing), never on the first upload."};
   const qv = v => v == null ? 'none' : `"${v}"`, pct = x => String(Math.floor(x + 0.5));
   const qnorm = t => String(t || '').toLowerCase().replace(/[^\p{L}\p{N}_\s]/gu, ' ').replace(/\s+/g, ' ').trim();
@@ -81,6 +81,7 @@
     const pics = exs.some(e => String(e.type || '').startsWith('img_')) || (ch?.sections || []).some(s => (s.blocks || []).some(b => b.t === 'figure'));
     const auto = new Set();
     for (const [f, vals] of Object.entries(QUALITY.autoUnfit)) if (!(f === 'pictures' ? pics : features.includes(f))) vals.forEach(v => auto.add(v));
+    for (const v of QUALITY.optIn?.types || []) if (!(fits.types || []).includes(v)) auto.add(v);   // opt-in: no reason needed when left out
     const used = k => new Set(exs.flatMap(e => k === 'tags' ? (e.tags || []) : [e[k]]).filter(v => v != null));
     for (const [key, universe, field] of [['types', V.types, 'type'], ['focus', V.tags, 'tags'], ['modes', V.modes, 'mode']]) {
       const fv = fits[key] || [];
@@ -89,8 +90,7 @@
       for (const v of [...used(field)].filter(v => !fv.includes(v)).sort()) if (universe.includes(v)) add('fit.declared', `${v} is used but not in fits.${key}`);
     }
     for (const [key, field, rule] of [['types', 'type', 'fit.types'], ['focus', 'tags', 'fit.focus'], ['modes', 'mode', 'mode.coverage']]) {
-      const n = C[rule].min;
-      for (const v of fits[key] || []) { const have = exs.filter(e => field === 'tags' ? (e.tags || []).includes(v) : e[field] === v).length; if (have < n) add(rule, `${v}: ${have} exercise(s), need >= ${n}`); }
+      for (const v of fits[key] || []) { const n = C[rule].minPerKind?.[v] ?? C[rule].min; const have = exs.filter(e => field === 'tags' ? (e.tags || []).includes(v) : e[field] === v).length; if (have < n) add(rule, `${v}: ${have} exercise(s), need >= ${n}`); }
     }
     const N = exs.length;
     if (N) {
@@ -170,9 +170,9 @@
     for (const s of ch?.sections || []) {
       const bs = (s.blocks || []).filter(b => b && typeof b === 'object' && !Array.isArray(b));
       bs.forEach((b, i) => {
-        if (!['figure', 'diagram'].includes(b.t)) return;
+        if (!['figure', 'diagram', 'interactive'].includes(b.t)) return;
         const nx = bs[i + 1] || {}, txt = [...qstrings(Object.fromEntries(Object.entries(nx).filter(([k]) => ['title', 'text', 'items'].includes(k))), new Set())].join(' ');
-        if (!['p', 'list', 'callout'].includes(nx.t) || txt.length < c.minChars) add('figure.explained', `${s.id}: the ${b.t}${b.media ? ' ' + qv(b.media) : ''} is not explained right after it (what it shows, how to read it, what it teaches)`);
+        if (!['p', 'list', 'callout'].includes(nx.t) || txt.length < c.minChars) add('figure.explained', `${s.id}: the ${b.t}${b.media ? ' ' + qv(b.media) : b.activity ? ' ' + qv(b.activity) : ''} is not explained right after it (what it shows, how to read it, what it teaches)`);
       });
     }
     const sw = m.sequenceWhy && typeof m.sequenceWhy === 'object' && !Array.isArray(m.sequenceWhy) ? m.sequenceWhy : {};
@@ -241,6 +241,7 @@
         else if (e.scores.filter(v => v === Math.max(...e.scores)).length !== 1) bad('exactly one option has the highest score');
         if (!Array.isArray(e.why) || e.why.length !== (e.options || []).length) bad('"why": one text per option');
         break;
+      case 'sim': break;   // its own fields need the pack's activities: checkActivities
       case 'debate': if (!Array.isArray(e.sides) || e.sides.length < 2 || e.sides.length > 3 || !e.sides.every(sd => isStr(sd?.position) && strs(sd.counters, 2) && intIn(sd.best, sd.counters.length) && (!sd.why || (Array.isArray(sd.why) && sd.why.length === sd.counters.length)))) bad('"sides": 2–3 of {position, counters (≥ 2), best (index), why (one per counter)}'); break;
       default:
         if (String(t).startsWith('img_')) {
@@ -272,6 +273,7 @@
     e.type === 'case' ? (e.parts || []).map(p => p && [p.type, p.answer ?? null, (p.options || []).length, p.tolerance ?? null]) : null,
     e.type === 'tree' ? [e.start ?? null, Object.entries(e.nodes || {}).map(([k, n]) => [k, (n?.options || []).map(o => [!!o?.ok, o?.to ?? null])])] : null,
     e.type === 'inquiry' ? e.scores ?? null : null, e.type === 'debate' ? (e.sides || []).map(x => x && [x.best ?? null, (x.counters || []).length]) : null,
+    e.type === 'sim' ? [e.activity ?? null, JSON.stringify(e.task ?? null), JSON.stringify(e.grade ?? null), (e.hints || []).length] : null,
     e.tolerance ?? null]);
   function checkI18n(p, chapters, E, W) {
     const s = p.subject || {}, own = s.language || 'en';
@@ -364,6 +366,141 @@
       a pack that does not say gets the issues as warnings; 0 = off. A number → errors.
       quality (QUALITY, packs with subject.authoring.rules >= 2): errors when subject.authoring.by is claude or gemini, else warnings.
       requireQuality (the connector): a pack built since QUALITY.since (or with no builtAt) must have authoring.rules >= 2. */
+
+  /* ---------- interactive activities (docs/INTERACTIVE.md): the SAME rules as tools/activities.py (tests/activities.js) ---------- */
+  const ACT = {
+    FORMAT: 'noema.activities/v1', ID_RE: /^[a-z0-9][a-z0-9-]{1,60}$/, KEY_RE: /^[a-z][a-zA-Z0-9_.-]{0,63}$/,
+    RUNTIMES: new Set(['html-app@1']), LATER: { 'sim-spec@1': 'P2', 'py-module@1': 'P4' },
+    CAPS: new Set(['state', 'events', 'resize', 'result', 'hints', 'announce']), GRADE_MODES: new Set(['reported']),
+    HTML_MAX: 512 * 1024, HTML_WARN: 256 * 1024, FALLBACK_MIN: 40, HINTS_MAX: 6,
+    BANNED: [
+      [/<script[^>]*\bsrc\s*=/i, 'an external script (<script src>): put every script inline'],
+      [/(?:\b(?:src|href|action|poster|data)\s*=\s*["']?\s*(?:https?:)?\/\/)/i, 'a link to the network (src/href to http(s):// or //): put everything inline (data: URIs)'],
+      [/url\(\s*["']?\s*(?:https?:)?\/\//i, 'a CSS url() to the network: use data: URIs'],
+      [/@import\b/i, 'a CSS @import: put every style inline'],
+      [/<[a-z][^>]*\son[a-z]+\s*=/i, 'an inline event handler (onclick=…): use addEventListener in a script'],
+      [/javascript:/i, 'a javascript: URL'],
+      [/\bfetch\s*\(|\bXMLHttpRequest\b|\bWebSocket\b|\bEventSource\b|\bsendBeacon\b/i, 'a network call (fetch, XHR, WebSocket, EventSource, sendBeacon): an activity has no network'],
+      [/\bimportScripts\b|\bnew\s+(?:Shared)?Worker\b/i, 'a worker: an html-app has none (numerical work goes to a later runtime)'],
+      [/\beval\s*\(|\bnew\s+Function\b|\bsetTimeout\s*\(\s*['"`]|\bsetInterval\s*\(\s*['"`]/i, 'code made from text (eval, new Function, setTimeout("…"))'],
+      [/\blocalStorage\b|\bsessionStorage\b|\bindexedDB\b|\bdocument\.cookie\b/i, 'browser storage: save with noema.saveState(…)'],
+      [/\bwindow\.open\b|\bwindow\.top\b|\btop\.location\b|\bparent\.|\bopener\b/i, 'a popup or the page around the frame: an activity stays in its frame'],
+      [/\bpostMessage\s*\(/i, 'raw postMessage: talk to the app through window.noema'],
+      [/allow-same-origin/i, 'allow-same-origin: never'],
+      [/<meta[^>]+http-equiv/i, 'a <meta http-equiv>: the app sets the policy'],
+      [/<base\b/i, 'a <base> element'],
+      [/<(?:iframe|frame|object|embed|form)\b/i, 'a frame, object, embed or form: not available in an activity'],
+    ],
+    WARN: [
+      [/while\s*\(\s*(?:true|1|!0)\s*\)/i, 'while (true): every loop is stopped after 1.5 s without a pause; use requestAnimationFrame or setTimeout for a loop that never ends'],
+      [/setInterval\s*\([^,]+,\s*0\s*\)/i, 'setInterval(…, 0): use requestAnimationFrame'],
+      [/new\s+Array\s*\(\s*\d{7,}/i, 'a huge array'],
+    ],
+  };
+  const utf8 = t => typeof TextEncoder !== 'undefined' ? new TextEncoder().encode(t).length : unescape(encodeURIComponent(t)).length;
+  function visibleText(html) {
+    let body = html.includes('<body') ? html.split('<body').slice(1).join('<body') : html;
+    body = body.replace(/<(script|style)[^>]*>[\s\S]*?<\/\1\s*>/gi, ' ').replace(/<[^>]+>/g, ' ').replace(/&[a-z#0-9]+;/gi, ' ');
+    return body.match(/[\p{L}]{2,}/gu) || [];
+  }
+  function lintHtml(html) {
+    const E = [], W = [];
+    if (typeof html !== 'string' || !html.trim()) return { errors: ['the bundle is empty'], warnings: W };
+    const n = utf8(html);
+    if (n > ACT.HTML_MAX) E.push(`the bundle is ${Math.floor(n / 1024)} KB (at most ${ACT.HTML_MAX / 1024} KB)`);
+    else if (n > ACT.HTML_WARN) W.push(`the bundle is ${Math.floor(n / 1024)} KB (aim for <= ${ACT.HTML_WARN / 1024} KB)`);
+    for (const [re, why] of ACT.BANNED) { const m = html.match(re); if (m) E.push(`${why} — found “${m[0].slice(0, 40)}”`); }
+    for (const [re, why] of ACT.WARN) if (re.test(html)) W.push(why);
+    const words = visibleText(html);
+    if (words.length >= 3) W.push(`visible text in the HTML (“${words.slice(0, 6).join(' ')}…”): put every word in the string tables and show it with noema.t(key)`);
+    return { errors: E, warnings: W };
+  }
+  function checkBlockAct(b, items) {
+    const E = [];
+    if (!Object.prototype.hasOwnProperty.call(items, b.activity)) E.push(`interactive: activity ${qv(b.activity)} is not in pack.activities`);
+    const hg = b.height; if (hg != null && hg !== 'auto' && !(Number.isInteger(hg) && hg >= 120 && hg <= 2000)) E.push('interactive: height is "auto" or 120–2000 (px)');
+    if (b.aspect != null && !(typeof b.aspect === 'string' && /^\d{1,2}:\d{1,2}$/.test(b.aspect))) E.push('interactive: aspect is like "16:9"');
+    if (b.caption != null && typeof b.caption !== 'string') E.push('interactive: caption must be a text');
+    return E;
+  }
+  function checkSim(e, items) {
+    const E = [];
+    if (!Object.prototype.hasOwnProperty.call(items, e.activity)) E.push(`activity ${qv(e.activity)} is not in pack.activities`);
+    const g = e.grade;
+    if (!g || typeof g !== 'object' || !(ACT.GRADE_MODES.has(g.mode) || g.mode === 'checks')) E.push('grade must be {"mode": "reported"} (the activity reports its result)');
+    else if (g.mode === 'checks') E.push('grade.mode "checks" arrives with sim-spec@1 (the expression language, P2); use "reported"');
+    else if (g.pass != null && !(typeof g.pass === 'number' && g.pass > 0 && g.pass <= 1)) E.push('grade.pass must be a number in (0, 1]');
+    const t = e.task;
+    if (t != null) {
+      if (typeof t !== 'object' || Array.isArray(t)) E.push('task must be an object {seed, params}');
+      else {
+        const sd = t.seed ?? 'auto'; if (!(sd === 'auto' || (Number.isInteger(sd) && sd >= 0))) E.push('task.seed is "auto" (a new one each attempt) or a whole number');
+        if (t.params != null && (typeof t.params !== 'object' || Array.isArray(t.params))) E.push('task.params must be an object');
+      }
+    }
+    if (e.hints != null && !(Array.isArray(e.hints) && e.hints.length <= ACT.HINTS_MAX && e.hints.every(isStr))) E.push(`hints must be a list of at most ${ACT.HINTS_MAX} texts`);
+    if (e.reveal != null && !isStr(e.reveal)) E.push('reveal must be a text');
+    return E;
+  }
+  /** checkActivities(pack, locales?) → { errors, warnings }: pack.activities, the blocks and sim exercises that use them, pack.requires.
+      (The sha256 of a bundle is checked by tools/activities.py and by the app when it mounts it.) */
+  function checkActivities(p, translations) {
+    const E = [], W = [], reg = p?.activities, media = p?.media || {}, own = p?.subject?.language || 'en';
+    const locs = [...new Set([own, ...(translations || Object.keys(p?.translations || {}))])].sort();
+    const items = {};
+    if (reg != null) {
+      if (typeof reg !== 'object' || Array.isArray(reg) || reg.format !== ACT.FORMAT) E.push(`activities: format must be "${ACT.FORMAT}"`);
+      for (const a of (reg && Array.isArray(reg.items) ? reg.items : [])) {
+        const aid = a && typeof a === 'object' ? a.id : null;
+        if (typeof aid !== 'string' || !ACT.ID_RE.test(aid)) { E.push(`activity ${qv(aid)}: id must be lower-case letters, digits and - (2–61)`); continue; }
+        if (Object.prototype.hasOwnProperty.call(items, aid)) { E.push(`activity ${aid}: duplicate id`); continue; }
+        items[aid] = a; const w = `activity ${aid}`, rt = a.runtime;
+        if (Object.prototype.hasOwnProperty.call(ACT.LATER, rt)) E.push(`${w}: runtime ${rt} arrives in a later version of the app (${ACT.LATER[rt]}); use html-app@1 for now`);
+        else if (!ACT.RUNTIMES.has(rt)) E.push(`${w}: unknown runtime ${qv(rt)} (one of ${[...ACT.RUNTIMES].sort().join(', ')})`);
+        if (!(Number.isInteger(a.stateVersion) && a.stateVersion >= 1)) E.push(`${w}: stateVersion must be a whole number >= 1`);
+        const caps = a.capabilities ?? [];
+        if (!Array.isArray(caps) || caps.some(c => !ACT.CAPS.has(c))) E.push(`${w}: capabilities must be some of ${[...ACT.CAPS].sort().join(', ')}`);
+        const fb = a.fallback && typeof a.fallback === 'object' ? a.fallback : {};
+        if (!(isStr(fb.text) && fb.text.trim().length >= ACT.FALLBACK_MIN)) E.push(`${w}: fallback.text (>= ${ACT.FALLBACK_MIN} characters: what the activity shows and teaches) is required`);
+        if (!isStr(fb.media)) E.push(`${w}: fallback.media (a still picture in media/) is required`);
+        else if (!media[fb.media]) E.push(`${w}: fallback.media ${qv(fb.media)} is not a picture of the pack`);
+        if (rt === 'html-app@1') {
+          if (typeof a.html !== 'string') E.push(`${w}: the bundle (html) is missing`);
+          else {
+            const l = lintHtml(a.html); E.push(...l.errors.map(m => `${w}: ${m}`)); W.push(...l.warnings.map(m => `${w}: ${m}`));
+            if (a.bytes != null && a.bytes !== utf8(a.html)) E.push(`${w}: bytes does not match the bundle`);
+          }
+        }
+        const st = a.strings;
+        if (!st || typeof st !== 'object' || Array.isArray(st) || !Object.keys(st).length) E.push(`${w}: strings {locale: {key: text}} are required (an activity shows no words of its own)`);
+        else {
+          let keys = null;
+          for (const [loc, tab] of Object.entries(st)) {
+            if (!LOCALE_RE.test(loc)) { E.push(`${w}: strings: ${qv(loc)} is not a locale`); continue; }
+            if (!tab || typeof tab !== 'object' || Array.isArray(tab) || !Object.entries(tab).every(([k, v]) => ACT.KEY_RE.test(k) && isStr(v))) { E.push(`${w}: strings.${loc} must map keys (a-z, digits, . _ -) to non-empty texts`); continue; }
+            const ks = new Set(Object.keys(tab));
+            if (!keys) keys = [loc, ks];
+            else { const d = [...keys[1]].filter(k => !ks.has(k)).concat([...ks].filter(k => !keys[1].has(k))).sort().slice(0, 5); if (d.length) E.push(`${w}: strings.${loc} and strings.${keys[0]} have different keys (${d.join(', ')})`); }
+          }
+          for (const loc of locs) if (!st[loc]) E.push(`${w}: strings for ${loc} are missing (the pack is read in ${locs.join(', ')})`);
+        }
+        for (const k of ['origin', 'credit', 'license']) if (k in a && typeof a[k] !== 'string') E.push(`${w}: ${k} must be a text`);
+      }
+    }
+    const used = new Set();
+    for (const c of p?.chapters || []) {
+      for (const sec of c.sections || []) (sec.blocks || []).forEach((b, i) => { if (b?.t !== 'interactive') return; used.add(b.activity); E.push(...checkBlockAct(b, items).map(m => `${sec.id} block ${i}: ${m}`)); });
+      for (const e of c.exercises || []) { if (e?.type !== 'sim') continue; used.add(e.activity); E.push(...checkSim(e, items).map(m => `${e.id}: ${m}`)); }
+    }
+    for (const aid of Object.keys(items)) if (!used.has(aid)) W.push(`activity ${aid}: not used by any interactive block or sim exercise`);
+    if (Object.keys(items).length) {
+      const req = Array.isArray(p.requires) ? p.requires : [];
+      const need = ['activities/v1', ...[...new Set(Object.values(items).map(a => a.runtime).filter(r => typeof r === 'string'))].sort().map(r => 'runtime:' + r)];
+      const miss = need.filter(x => !req.includes(x)); if (miss.length) E.push(`pack.requires must list ${miss.join(', ')} (make_pack.py writes it)`);
+    }
+    return { errors: E, warnings: W };
+  }
+
   function checkPack(p, expectId, { strict = false, balance, requireQuality = false } = {}) {
     const E = [], W = [];
     if (!p || p.format !== 'noema-pack') E.push('format must be "noema-pack"');
@@ -433,6 +570,7 @@
       if (per !== 0) for (const c of chapters) for (const i of checkBalance(c, s, { min: per ?? undefined })) (per ? E : W).push(i.msg);
     }
     checkI18n(p, chapters, E, W);
+    { const A = checkActivities(p); E.push(...A.errors); W.push(...A.warnings); }
     for (const mid of Object.keys(media)) if ((used[mid] || 0) < 3) W.push(`picture ${mid} has ${used[mid] || 0} exercises (aim for >= 3)`);
     return { errors: E, warnings: W, counts: { chapters: chapters.length, sections: secN, exercises: ex, visual: vis, media: Object.keys(media).length } };
   }
@@ -513,5 +651,5 @@
     return { errors: E, warnings: W, counts: { entries: entries.length, senses, stale, sections: Object.keys(secs).length, previews, anchors: anchors.length } };
   }
   /* i18n-ignore-end */
-  root.NoemaPackCheck = { checkPack, checkExercise, checkBalance, checkQuality, checkBridge, checkTranslation, requiredLocales, RULES, QUALITY, LANGS, TYPES, BLOCKS, ID_RE };
+  root.NoemaPackCheck = { checkPack, checkActivities, lintHtml, ACTIVITY_RULES: ACT, checkExercise, checkBalance, checkQuality, checkBridge, checkTranslation, requiredLocales, RULES, QUALITY, LANGS, TYPES, BLOCKS, ID_RE };
 })(typeof window !== 'undefined' ? window : globalThis);

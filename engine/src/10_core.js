@@ -315,6 +315,7 @@ function blockText(b) {
     case 'ask': return (b.title || 'Ask yourself') + ':\n' + b.questions.map((q, i) => `${i + 1}. ${q}`).join('\n');
     case 'terms': return b.items.map(i => `${i.term}: ${i.def}`).join('\n');
     case 'figure': return figureAsText(b);
+    case 'interactive': return interactiveAsText(b);
   }
   return '';
 }

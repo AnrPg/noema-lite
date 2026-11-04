@@ -1,0 +1,19 @@
+{
+  "@@locale": "de",
+  "engine.act.skip": "Aktivität überspringen",
+  "engine.act.start": "Starten",
+  "engine.act.restart": "Neu starten",
+  "engine.act.fullscreen": "Vollbild",
+  "engine.act.loading": "Die Aktivität wird geladen …",
+  "engine.act.frameTitle": "Interaktive Aktivität {id}",
+  "engine.act.missing": "Diese Aktivität fehlt im Fach.",
+  "engine.act.notHere": "Diese Aktivität läuft in dieser Version der App nicht. Das zeigt sie.",
+  "engine.act.failed": "Die Aktivität konnte nicht starten. Das zeigt sie.",
+  "engine.act.stopped": "Diese Aktivität reagiert nicht mehr.",
+  "engine.act.misbehaved": "Diese Aktivität wurde gestoppt, weil sie etwas Unerlaubtes getan hat.",
+  "engine.act.error": "Die Aktivität hat ein Problem gemeldet ({code}).",
+  "engine.act.newerState": "Deine gespeicherte Arbeit hier stammt aus einer neueren Version der Aktivität; sie bleibt erhalten, und die Aktivität beginnt neu.",
+  "engine.act.newerProtocol": "Diese Aktivität braucht eine neuere Version der App.",
+  "engine.act.newerType": "Diese Übung braucht eine neuere Version der App. Lade die Seite neu, um sie zu bekommen.",
+  "engine.act.hint": "{left, plural, =0 {Keine Hinweise mehr} one {Hinweis (noch #)} other {Hinweis (noch #)}}"
+}

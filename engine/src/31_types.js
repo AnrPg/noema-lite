@@ -30,7 +30,7 @@ R.flaw = (ex, api) => {
 R.case = (ex, api) => {
   const quiet = { locked: api.locked, check: () => { }, done: () => { } };   // the parts answer into the card's one Check
   const parts = ex.parts.map((p, i) => {
-    const w = (R[p.type] || R.mcq)({ ...p, id: ex.id + '/' + i }, quiet);
+    const w = (R[p.type] || R.newer)({ ...p, id: ex.id + '/' + i }, quiet);
     const box = h('div', { class: 'casepart' }, h('div', { class: 'sp' }, h('span', { class: 'pill c' }, tE('engine.ex.casePart', { n: i + 1, of: ex.parts.length })), ' ', h('span', { html: fmt(p.q) })), w.el);
     return { p, w, box };
   });

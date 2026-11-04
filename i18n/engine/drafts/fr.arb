@@ -827,5 +827,21 @@
   "engine.flags.intro": "Copie-les pour Claude : il les corrige sur place, et ta progression reste.",
   "engine.flags.copy": "Copier pour Claude",
   "engine.flags.copied": "Copié. Colle-le dans une conversation avec Claude.",
-  "engine.flags.clear": "Retirer le signalement"
+  "engine.flags.clear": "Retirer le signalement",
+  "engine.act.skip": "Passer l’activité",
+  "engine.act.start": "Démarrer",
+  "engine.act.restart": "Recommencer",
+  "engine.act.fullscreen": "Plein écran",
+  "engine.act.loading": "Chargement de l’activité…",
+  "engine.act.frameTitle": "Activité interactive {id}",
+  "engine.act.missing": "Cette activité manque dans la matière.",
+  "engine.act.notHere": "Cette activité ne peut pas tourner dans cette version de l’application. Voici ce qu’elle montre.",
+  "engine.act.failed": "L’activité n’a pas pu démarrer. Voici ce qu’elle montre.",
+  "engine.act.stopped": "Cette activité ne répond plus.",
+  "engine.act.misbehaved": "Cette activité a été arrêtée : elle a fait quelque chose d’interdit.",
+  "engine.act.error": "L’activité a signalé un problème ({code}).",
+  "engine.act.newerState": "Ton travail enregistré ici vient d’une version plus récente de l’activité ; il est conservé, et l’activité repart de zéro.",
+  "engine.act.newerProtocol": "Cette activité demande une version plus récente de l’application.",
+  "engine.act.newerType": "Cet exercice demande une version plus récente de l’application. Recharge la page pour l’avoir.",
+  "engine.act.hint": "{left, plural, =0 {Plus d’indice} one {Indice (encore #)} many {Indice (encore #)} other {Indice (encore #)}}"
 }

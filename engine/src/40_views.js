@@ -356,13 +356,14 @@ function chapterPractice(c) {
 
 /* ---------- section reader ---------- */
 const CALLOUT_IC = { key: '🔑', pitfall: '⚠️', tip: '💡', exam: '🎓', warn: '🚧', analogy: '🧩', debug: '🔧', interview: '🎤' };
-function renderBlock(b, i) {
+function renderBlock(b, i, sid) {
   const wrap = h('div', { class: 'blk b-' + b.t, style: { animationDelay: (i % 6) * 60 + 'ms' } });
   switch (b.t) {
     case 'p': wrap.append(h('p', { 'data-nf': 'text', html: fmt(b.text) })); break;
     case 'list': wrap.append(h(b.ordered ? 'ol' : 'ul', {}, ...b.items.map((x, k) => h('li', { 'data-nf': 'items.' + k, html: fmt(x) })))); break;
     case 'code': wrap.append(codeBlock(b.code, b.lang)); if (b.caption) wrap.append(h('div', { class: 'caption', 'data-nf': 'caption', html: fmt(b.caption) })); break;
     case 'figure': wrap.append(figureBlock(b)); break;
+    case 'interactive': wrap.append(interactiveBlock({ ...b, _sec: sid })); break;
     case 'diagram': wrap.append(h('div', { class: 'diagram', 'data-nf': 'text' }, b.text)); if (b.caption) wrap.append(h('div', { class: 'caption', 'data-nf': 'caption', html: fmt(b.caption) })); break;
     case 'table': wrap.append(h('div', { class: 'tablewrap' }, h('table', {}, h('thead', {}, h('tr', {}, ...b.head.map((x, k) => h('th', { 'data-nf': 'head.' + k, html: fmt(x) })))), h('tbody', {}, ...b.rows.map((r, j) => h('tr', {}, ...r.map((x, k) => h('td', { 'data-nf': `rows.${j}.${k}`, html: fmt(x) })))))))); if (b.caption) wrap.append(h('div', { class: 'caption', 'data-nf': 'caption', html: fmt(b.caption) })); break;
     case 'callout': wrap.append(h('div', { class: 'callout ' + b.kind }, h('span', { class: 'ci' }, CALLOUT_IC[b.kind] || '💡'), b.title ? h('b', { class: 't', 'data-nf': 'title', html: fmt(b.title) }) : null, h('div', { 'data-nf': 'text', html: fmt(b.text) }))); break;
@@ -382,7 +383,7 @@ function renderBlock(b, i) {
 }
 /** 💡 on a block and on its cards / items (compare columns, terms, list items, table rows). */
 /* i18n-ignore-start */   // the kind of a part, and its text: words of the AI's prompt (explainItem)
-const BLOCK_WHAT = { p: 'paragraph', list: 'list', code: 'code example', figure: 'figure', diagram: 'diagram', table: 'table', callout: 'note', compare: 'comparison', flow: 'process', reveal: 'question', ask: 'set of questions', terms: 'set of terms' };
+const BLOCK_WHAT = { p: 'paragraph', list: 'list', code: 'code example', figure: 'figure', interactive: 'interactive activity', diagram: 'diagram', table: 'table', callout: 'note', compare: 'comparison', flow: 'process', reveal: 'question', ask: 'set of questions', terms: 'set of terms' };
 function explainParts(el, b, s) {
   explainable(el, () => ({ label: b.title || b.label || b.caption || (b.t === 'figure' ? (MEDIA[b.media]?.alt || tE('engine.aimsg.thisFigure')) : blockText(b)), text: blockText(b), sec: s, what: BLOCK_WHAT[b.t] || 'part of the lesson', bid: el.dataset.bid }));
   if (b.t === 'compare') $$('.compare > div', el).forEach((d, k) => { const it = b.items[k]; if (it) explainable(d, () => ({ label: it.title, text: it.title + ':\n' + it.points.map(p => '- ' + p).join('\n') + '\n\n(Compared with: ' + b.items.filter(x => x !== it).map(x => x.title).join(', ') + ')', sec: s, what: 'card', bid: el.dataset.bid })); });
@@ -435,7 +436,7 @@ function sectionView(sid, bid) {
     body, tail));
   function draw(scroll) {
     body.innerHTML = '';
-    chunks.slice(0, shown).forEach((ch, ci) => ch.forEach((b, i) => { const el = renderBlock(b, ci === shown - 1 ? i : 0); el.dataset.bid = bids[s.blocks.indexOf(b)]; markNewBlock(el, b, c); explainParts(el, b, s); body.append(el); }));
+    chunks.slice(0, shown).forEach((ch, ci) => ch.forEach((b, i) => { const el = renderBlock(b, ci === shown - 1 ? i : 0, s.id); el.dataset.bid = bids[s.blocks.indexOf(b)]; markNewBlock(el, b, c); explainParts(el, b, s); body.append(el); }));
     pl.firstChild.style.width = (shown / chunks.length * 100) + '%';
     tail.innerHTML = '';
     if (shown < chunks.length) {

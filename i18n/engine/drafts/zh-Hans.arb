@@ -1,0 +1,19 @@
+{
+  "@@locale": "zh-Hans",
+  "engine.act.skip": "跳过此活动",
+  "engine.act.start": "开始",
+  "engine.act.restart": "重新开始",
+  "engine.act.fullscreen": "全屏",
+  "engine.act.loading": "正在加载活动…",
+  "engine.act.frameTitle": "互动活动 {id}",
+  "engine.act.missing": "这门课程中缺少此活动。",
+  "engine.act.notHere": "此活动无法在此版本的应用中运行。以下是它展示的内容。",
+  "engine.act.failed": "活动无法启动。以下是它展示的内容。",
+  "engine.act.stopped": "此活动已停止响应。",
+  "engine.act.misbehaved": "此活动做了不允许的事，已被停止。",
+  "engine.act.error": "活动报告了一个问题（{code}）。",
+  "engine.act.newerState": "你在这里保存的进度来自此活动的更新版本；进度已保留，活动将重新开始。",
+  "engine.act.newerProtocol": "此活动需要更新版本的应用。",
+  "engine.act.newerType": "此练习需要更新版本的应用。请刷新页面以获取。",
+  "engine.act.hint": "{left, plural, =0 {没有提示了} other {提示（还剩 # 个）}}"
+}

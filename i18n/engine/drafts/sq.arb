@@ -1,0 +1,19 @@
+{
+  "@@locale": "sq",
+  "engine.act.skip": "Kapërce aktivitetin",
+  "engine.act.start": "Fillo",
+  "engine.act.restart": "Rifillo",
+  "engine.act.fullscreen": "Ekran i plotë",
+  "engine.act.loading": "Aktiviteti po ngarkohet…",
+  "engine.act.frameTitle": "Aktivitet ndërveprues {id}",
+  "engine.act.missing": "Ky aktivitet mungon në lëndë.",
+  "engine.act.notHere": "Ky aktivitet nuk mund të punojë në këtë version të aplikacionit. Ja çfarë tregon.",
+  "engine.act.failed": "Aktiviteti nuk mundi të fillojë. Ja çfarë tregon.",
+  "engine.act.stopped": "Ky aktivitet nuk përgjigjet më.",
+  "engine.act.misbehaved": "Ky aktivitet u ndalua sepse bëri diçka që nuk lejohet.",
+  "engine.act.error": "Aktiviteti njoftoi një problem ({code}).",
+  "engine.act.newerState": "Puna jote e ruajtur këtu vjen nga një version më i ri i aktivitetit; ruhet, dhe aktiviteti fillon nga e para.",
+  "engine.act.newerProtocol": "Ky aktivitet ka nevojë për një version më të ri të aplikacionit.",
+  "engine.act.newerType": "Ky ushtrim ka nevojë për një version më të ri të aplikacionit. Rifresko faqen për ta marrë.",
+  "engine.act.hint": "{left, plural, =0 {Nuk ka më ndihmë} one {Ndihmë (mbetet #)} other {Ndihmë (mbeten #)}}"
+}
