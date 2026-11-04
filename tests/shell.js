@@ -318,6 +318,11 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
     ok(inner >= 1 && chs > 0, 'Roadmap › station › the chapters of its subject: ' + inner + ' station(s), ' + chs + ' chapters'); }
   ok(has(await menuItems(page, `.ns-sgrp[data-k="c:${cid}/f"] .ns-menubtn`), ['Study', 'Put it on a Roadmap', 'Edit', 'Export the package', 'Hide from the subject list']), 'a subject’s ⋮: study, Roadmap, edit, export the package, hide');
   ok(!(await page.locator('.ns-view button', { hasText: 'Export “' }).count()), 'no loose “Export …” button any more');
+  // the learning record and the course package (docs/INTERACTIVE_XAPI.md): the same two quiet items as in the subject's own ⋮
+  ok(has(await menuItems(page, `.ns-sgrp[data-k="c:${cid}/f"] .ns-menubtn`), ['Export learning record (xAPI)', 'Course package for an LMS (cmi5)']), 'a subject’s ⋮ also exports the learning record (xAPI) and the cmi5 course package');
+  { const [dl] = await Promise.all([page.waitForEvent('download', { timeout: 10000 }), pick(page, `.ns-sgrp[data-k="c:${cid}/f"] .ns-menubtn`, 'Course package for an LMS (cmi5)')]);
+    const zip = require('fs').readFileSync(await dl.path());
+    ok(dl.suggestedFilename() === (await page.evaluate(() => SUBJ.id)) + '.cmi5.zip' && zip.readUInt32LE(0) === 0x04034b50 && zip.includes('cmi5.xml'), `the cmi5 package is a .zip with cmi5.xml: ${dl.suggestedFilename()}`); }
   await pick(page, `.ns-sgrp[data-k="c:${cid}/f"] .ns-menubtn`, 'Hide from the subject list'); await wait(400);
   ok(await page.evaluate(() => JSON.parse(localStorage.getItem(`noema1:${Noema.account.id}:a:settings`)).hiddenSubjects.includes(SUBJ.id)) && await page.$(`.ns-sgrp[data-k="c:${cid}/f"][open] .ns-hid`), 'hide: marked, and the open groups stay open');
   await pick(page, `.ns-sgrp[data-k="c:${cid}/f"] .ns-menubtn`, 'Show in the subject list'); await wait(400);

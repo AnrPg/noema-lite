@@ -12,13 +12,19 @@ Code: `engine/src/43_xapi.js` → `window.NoemaXAPI` (and `module.exports` for n
 ## In the app
 
 * The item sits beside "Export package" in the subject menu, quiet (one line + a sub-line); with nothing recorded yet it says
-  so (a toast) instead of writing an empty file.
+  so (a toast) instead of writing an empty file. Next to it, **Course package for an LMS (cmi5)** downloads `<subject>.cmi5.zip`
+  (`cmi5.xml` only, zipped with the app's zip writer, JSZip, as the package export): the course and one AU per chapter, with the
+  same activity base as the record, each AU launching `<site>?subject=<id>#/ch/<chId>`.
+* The shell's **My subjects** ⋮ has the same two items for every subject: the record is made from the subject's saved state
+  (`S.att`, `S.res` in `noema1:<account>:s:<subject>:state`) and its pack, so it needs no open subject; the shell loads
+  `engine/src/43_xapi.js` on its own (it declares `var NoemaXAPI`: `engine.js` has it inside again). Both menus call
+  `NoemaXAPI.subjectRecord` / `subjectCmi5` / `zip`, so the files are the same.
 * **The actor is the account, never an e-mail:** `{account: {homePage: <site>/, name: <account id>}}`. `mbox`,
   `mbox_sha1sum` and `openid` are never written, a `name` with `@` is dropped, an actor without an account throws.
 * `activityBase` = `<site>/xapi/<subject id>/`; the registration is a UUID v5 of the account and the subject, so a re-export
   gives the same ids (idempotent at an LRS).
-* Profile `xapi`. The cmi5 course structure (`cmi5Package`) exists as a function but the app offers no cmi5 zip yet
-  (a launch from an LMS is not implemented, see Limits).
+* Profile `xapi`. The cmi5 package describes the course; a launch *from* an LMS (fetch URL, auth token) is not implemented
+  (see Limits), so an LMS can list and open the chapters but receives no statements by itself.
 
 ## API
 | call | gives |
@@ -26,6 +32,8 @@ Code: `engine/src/43_xapi.js` → `window.NoemaXAPI` (and `module.exports` for n
 | `statements(input, opts)` | `[statement]`, xAPI 1.0.3 |
 | `exportFile(input, opts)` | `{format: 'noema.xapi-export/v1', xapiVersion, profile, pack: {id, activityBase}, registration, statements}` — schema `tools/schemas/noema.xapi-export.v1.schema.json` |
 | `cmi5Package(course, opts)` | `{files: {'cmi5.xml': xml}, aus: [{id, chapter, exercise?}]}` |
+| `subjectRecord({att, res, pack, chapters, accountId, site, now})` | `{name: '<id>.xapi.json', file}` (the app's export), or `null` when nothing is recorded |
+| `subjectCmi5({pack, chapters, site})` / `zip(files)` | `{name: '<id>.cmi5.zip', files}` · a zip Blob of `files` (browser: JSZip through `NoemaViewer`) |
 | `validate(stmt)` / `validateAll(list)` | `[problem]` — the xAPI subset + the cmi5 rules (also across statements) |
 | `duration(ms)`, `uuid5(name, ns?)` | ISO 8601 duration to 0.01 s; RFC 4122 UUID v5 (SHA-1) |
 

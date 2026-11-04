@@ -4856,7 +4856,7 @@
   },
   "engine.xapi.export": "Export learning record (xAPI)",
   "@engine.xapi.export": {
-    "description": "Item of the subject's ⋮ menu: downloads the learner's activity attempts and answers in this subject as an xAPI file (a standard format that learning record stores read). Keep \"xAPI\" as it is."
+    "description": "Item of a subject's ⋮ menu (in the subject and in My subjects): downloads the learner's activity attempts and answers in this subject as an xAPI file (a standard format that learning record stores read). Keep \"xAPI\" as it is."
   },
   "engine.xapi.exportSub": "Your attempts and answers as a file for a learning record store",
   "@engine.xapi.exportSub": {
@@ -4865,6 +4865,14 @@
   "engine.xapi.none": "Nothing to export yet: you have no attempts or answers in this subject.",
   "@engine.xapi.none": {
     "description": "Message when the learner asks for the xAPI file but has not answered anything in the subject yet."
+  },
+  "engine.xapi.cmi5": "Course package for an LMS (cmi5)",
+  "@engine.xapi.cmi5": {
+    "description": "Item of a subject’s ⋮ menu (in the subject and in My subjects), next to the xAPI export: downloads the subject’s chapters as a cmi5 course package (a .zip with cmi5.xml) that a learning management system (LMS) can import. Keep “cmi5” and “LMS” as they are."
+  },
+  "engine.xapi.cmi5Sub": "This subject’s chapters as a .zip that a learning platform (LMS) can import",
+  "@engine.xapi.cmi5Sub": {
+    "description": "Second line of that menu item."
   },
   "engine.author.title": "Activity author",
   "@engine.author.title": {

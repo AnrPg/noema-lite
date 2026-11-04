@@ -66,6 +66,8 @@
   "engine.xapi.export": "Eksporto regjistrin e të nxënit (xAPI)",
   "engine.xapi.exportSub": "Përpjekjet dhe përgjigjet tuaja në një skedar për një depo regjistrimesh të të nxënit (LRS)",
   "engine.xapi.none": "Ende s’ka asgjë për të eksportuar: nuk keni përpjekje apo përgjigje në këtë lëndë.",
+  "engine.xapi.cmi5": "Paketa e kursit për një LMS (cmi5)",
+  "engine.xapi.cmi5Sub": "Kapitujt e kësaj lënde në një .zip që një platformë mësimi (LMS) mund ta importojë",
   "engine.author.title": "Krijimi i aktiviteteve",
   "engine.author.intro": "Ndërto një aktivitet ndërveprues me një formular. Parapamja e ekzekuton saktësisht si aplikacioni.",
   "engine.author.type": "Lloji i aktivitetit",

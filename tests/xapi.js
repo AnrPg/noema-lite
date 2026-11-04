@@ -173,5 +173,17 @@ print(sum(1 for d in docs for e in v.iter_errors(d)))`, path.join(ROOT, 'tools',
   else ok(out === '0', 'Python jsonschema (draft 2020-12) accepts the schema and both exports (' + out + ' errors)');
 } catch (e) { ok(false, 'Python jsonschema check ran: ' + e.message); }
 
+// one subject as the app's menus export it (the subject's ⋮ and the shell's "My subjects" ⋮)
+{ const pack = { id: 'demo', title: 'Demo', language: 'en' }, chapters = [{ id: 'ch01', title: 'One' }, { id: 'ch02', title: 'Two' }];
+  ok(X.subjectRecord({ att: {}, res: {}, pack, accountId: 'u1' }) === null && X.subjectRecord({ pack, accountId: 'u1' }) === null, 'subjectRecord: nothing recorded → null (the app says so instead of writing an empty file)');
+  const r = X.subjectRecord({ res: { 'ch01-e1': { n: 2, ok: 1, last: true, t: 1000 } }, pack, chapters, accountId: 'u1', site: 'https://x.org/', now: 5000 });
+  const same = X.exportFile({ att: {}, res: { 'ch01-e1': { n: 2, ok: 1, last: true, t: 1000 } }, pack, chapters },
+    { actor: { account: { homePage: 'https://x.org/', name: 'u1' } }, activityBase: 'https://x.org/xapi/demo/', registrationSeed: ['u1', 'demo'], now: 5000 });
+  ok(r.name === 'demo.xapi.json' && JSON.stringify(r.file) === JSON.stringify(same) && !X.validateAll(r.file.statements).length, 'subjectRecord: <id>.xapi.json, the actor = the account id at the site, the same file as exportFile');
+  const c = X.subjectCmi5({ pack, chapters, site: 'https://x.org' }), xml = c.files['cmi5.xml'];
+  ok(c.name === 'demo.cmi5.zip' && Object.keys(c.files).join() === 'cmi5.xml' && xml.includes('<course id="https://x.org/xapi/demo/">') && xml.includes('<au id="https://x.org/xapi/demo/au/ch02"')
+    && xml.includes('https://x.org/?subject=demo#/ch/ch01'), 'subjectCmi5: cmi5.xml with the record\'s activity base, one AU per chapter, launched on the site');
+}
+
 console.log(`\n${n - fails}/${n} passed`);
 process.exit(fails ? 1 : 0);

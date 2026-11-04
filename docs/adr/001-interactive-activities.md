@@ -341,13 +341,13 @@ mode, audits. The content work (the electronics Roadmap) starts only after the h
   one-file bundle and the MCP connector (`tools/build.py`, `tests/connector.js`); the skill zip ships the Python twins next to
   `activities.py`, and the activity harness loads the engines and `43_engines_p6.js` after the circuit engine.
 * **Reference activities** `heatsink` (thermal), `pid-tune`, `lora-link` and `sensor-node` (twin), each with en/el/ru/fr strings, a
-  fallback picture and text and six `tests.json` cases; `tests/activities_pack.py` builds them into a pack (8 activities) and back.
+  fallback picture and text and six `tests.json` cases; `tests/activities_pack.py` builds them into a pack (9 activities with
+  wasm-oscillator) and back; `activity_new.py --from heatsink | pid-tune | lora-link | sensor-node` starts from them.
   Found on the way: a short wake period over a long simulated month exceeds the twin's event budget (NaN), so `sensor-node`'s
   slider starts at 30 s; `digits` must be 1–8, so a readout of whole days is `round(life / 86400)` with `digits: 4`.
-* **Browser tests written, not run.** `tests/activities_app.js` has a new section (`p6engines`): the engine capabilities, each of
-  the four blocks against the engine on the page, eight graded tries and the twin bench on a modified `sensor-node` (five
-  instruments, the readings, the hidden lead rows, the current scope, the verdict). It passes `node --check`; it was not run in a
-  browser in this phase.
+* **Browser tests.** `tests/activities_app.js` has a section (`p6engines`): the engine capabilities, each of the four blocks
+  against the engine on the page, eight graded tries and the twin bench on a modified `sensor-node` (five instruments, the
+  readings, the hidden lead rows, the current scope, the verdict); it passes in Chromium, Firefox and WebKit (batch P6).
 
 ## 11. As built — P6 runtimes (`wasm-module@1`, `external-embed@1`, xAPI, H5P import; 2026-11-04)
 
@@ -378,16 +378,25 @@ mode, audits. The content work (the electronics Roadmap) starts only after the h
   `45_activity_embed.js` declares `var NoemaEmbed`, because the app loads it both on its own (for packcheck) and inside `engine.js`.
 * **xAPI export** (`43_xapi.js`, `docs/INTERACTIVE_XAPI.md`): the subject's ⋮ menu has "Export learning record (xAPI)"; it
   writes `<subject>.xapi.json` (`noema.xapi-export/v1`, xAPI 1.0.3 statements from `S.att` and `S.res`). The actor is
-  `{account: {homePage: <site>, name: <account id>}}` — never an e-mail. **No cmi5 zip in the app yet** (`cmi5Package` exists;
-  an LMS launch is not implemented), and no LRS posting. The shell's own "My subjects" ⋮ does not offer it (the export reads the
-  open subject's attempts).
+  `{account: {homePage: <site>, name: <account id>}}` — never an e-mail. Next to it **Course package for an LMS (cmi5)**
+  downloads `<subject>.cmi5.zip` (cmi5.xml, zipped with JSZip like the package export); an LMS launch is not implemented, and
+  there is no LRS posting. The shell's "My subjects" ⋮ has both items too (from the subject's saved state and pack:
+  `NoemaXAPI.subjectRecord` / `subjectCmi5`, so both menus write the same files; `43_xapi.js` declares `var` and is loaded by the
+  shell as well).
 * **H5P import** (`tools/h5p_import.py`, in the toolkit): `.h5p` quizzes become the pack's own exercise types; the playbook
   (`INTERACTIVE_AUTHORING.md` "Importing H5P quizzes"), `SKILL.md`, `CONTENT_SPEC.md`, `docs/PIPELINES.md` and the connector's
   instructions say that an import is a draft of exercises of the sources to which every rule Q1–Q8 still applies.
 * **Docs** `docs/INTERACTIVE_WASM.md`, `INTERACTIVE_EMBED.md`, `INTERACTIVE_XAPI.md` (folded from `docs/activities-dev/`) are in the
   skill's references and in the connector guide's part `interactive`.
-* **Left for later:** a cmi5 package download; not counting a consent card (no frame yet) against the two live activities;
-  a site CSP; engine-specific host words (`engine.act.wasm.*`) for an emulator UI built on `NoemaWasm.load`.
+* **A card holds no live slot.** A runtime may declare `waits(act)`: while it shows only a card (external-embed@1 before consent)
+  the core neither parks another activity for it nor counts it toward the two (one on a phone) live activities; the runtime calls
+  `ctx.onLive()` when it opens its frame, and only then does the core make room.
+* **Batch P6 (2026-11-04).** Engines, runtimes and the author merged; every browser check ran in Chromium, Firefox and WebKit.
+  Found: `wasm@1` looked for module-only items on `window.ACT`, which the app (engine.js declares `const ACT`) does not have — a
+  spec naming a module-only item was refused in the app (now the global binding); the wasm-oscillator exercise collided with
+  heatsink's id in the test pack (now `ch01-e908`).
+* **Left for later:** a site CSP; engine-specific host words (`engine.act.wasm.*`) for an emulator UI built on `NoemaWasm.load`;
+  a cmi5 launch from an LMS.
 
 ## 12. As built — P6 (the authoring UI, 2026-11-04)
 

@@ -269,7 +269,7 @@ def build_site(metas):
             dst = os.path.join(out, f); os.makedirs(os.path.dirname(dst), exist_ok=True); shutil.copy(os.path.join(ROOT, f), dst)
     for f in ('engine.js', 'engine.css', 'loader.js', 'i18n.js', 'themes.js', 'art.js', 'shell.js', 'react.js', 'convos.js', 'cloud.js', 'claude.js', 'packcheck.js', 'llm.js', 'mt.js', 'wordlink.js', 'bridge.js', 'curriculum.js', 'curjobs.js', 'curshare.js', 'imglib.js', 'curimport.js', 'sourceplan.js', 'vault.js', 'social.js', 'packgen.js', 'curmap.js', 'search.js', 'catalog.js', 'report.js', 'authoring.js', 'srcfiles.js', 'viewer.js', 'schemaform.js', 'activity_author_schemas.js', 'activity_author.js', 'activity_author.css'): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))   # (the activity author's four load on #/author)
     os.makedirs(os.path.join(out, 'engine', 'src'), exist_ok=True); [shutil.copy(os.path.join(ENGINE, 'src', f), os.path.join(out, 'engine', 'src', f)) for f in ('35_simexpr.js', '36_engine_circuit.js', *P6_ENGINES)]   # NoemaExpr, NoemaCircuit and the P6 engines beside packcheck.js: the shell checks sim-spec@1 packs before any subject (and engine.js) is open
-    for f in ('44_activity_wasm.js', '45_activity_embed.js'): shutil.copy(os.path.join(ENGINE, 'src', f), os.path.join(out, 'engine', 'src', f))   # NoemaWasm and NoemaEmbed beside packcheck.js (wasm-module@1, external-embed@1)
+    for f in ('43_xapi.js', '44_activity_wasm.js', '45_activity_embed.js'): shutil.copy(os.path.join(ENGINE, 'src', f), os.path.join(out, 'engine', 'src', f))   # NoemaXAPI for the shell's ⋮; NoemaWasm and NoemaEmbed beside packcheck.js (wasm-module@1, external-embed@1)
     shutil.copytree(os.path.join(ENGINE, 'vendor'), os.path.join(out, 'engine', 'vendor'))
     shutil.copytree(os.path.join(ENGINE, 'i18n'), os.path.join(out, 'engine', 'i18n'))   # the UI catalogs (docs/i18n.md), loaded per locale
     shutil.copytree(os.path.join(ROOT, 'fonts'), os.path.join(out, 'fonts'), ignore=shutil.ignore_patterns('*.md', '*.json'))   # the characters' self-hosted fonts
@@ -461,6 +461,7 @@ def build_bundle(metas):
 <script>{esc(rd("engine/src/35_simexpr.js"))}</script>
 <script>{esc(rd("engine/src/36_engine_circuit.js"))}</script>
 {p6_scripts}<script>{esc(rd("engine/packcheck.js"))}</script>
+<script>{esc(rd("engine/src/43_xapi.js"))}</script>
 <script>{esc(rd("engine/src/44_activity_wasm.js"))}</script>
 <script>{esc(rd("engine/src/45_activity_embed.js"))}</script>
 <script>{esc(rd("engine/schemaform.js"))}</script>

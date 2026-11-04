@@ -1700,9 +1700,14 @@ const ACT = (() => {
           note.textContent = tE('engine.act.error', { code: p.code }); console.warn('[noema] activity error', actId, p.code, p.message || ''); return;
       }
     }
+    // a runtime that first shows a card and no frame (external-embed@1 before consent) does not count toward the live activities
+    // until it says so (ctx.onLive): a card holds no slot and parks nothing (docs/INTERACTIVE_EMBED.md)
+    const waits = () => { try { return !!RUNTIMES[a.runtime].waits?.(a); } catch (e) { return false; } };
+    function goLive() { if (sess.destroyed || !sess.port || LIVE.includes(sess)) return; makeRoom(); LIVE.push(sess); }
     function start() {
       if (sess.destroyed) return;
-      teardown(); makeRoom();
+      const waiting = waits();
+      teardown(); if (!waiting) makeRoom();
       box.classList.remove('act-fallback'); box.classList.add('act-running'); note.textContent = tE('engine.act.loading');
       setBar(btn('↻ ' + tE('engine.act.restart'), () => { sess.attemptId = uid(); sess.events = []; sess.result = null; start(); }, 'btn ghost small'),
         document.fullscreenEnabled ? btn('⛶ ' + tE('engine.act.fullscreen'), () => { if (document.fullscreenElement) document.exitFullscreen(); else root.requestFullscreen?.().catch(() => { }); }, 'btn ghost small') : null);
@@ -1725,6 +1730,7 @@ const ACT = (() => {
       sess.misses = 0;
       try {
         sess.port = RUNTIMES[a.runtime].mount(box, { act: a, init, title: tE('engine.act.frameTitle', { id: a.id }),
+          onLive: () => Promise.resolve().then(goLive),
           onMessage: raw => { const r = ACTP.check(raw); if (r.ok) onMessage(r.msg); else if (r.version) stop(tE('engine.act.newerProtocol'), false); else if (!r.ignore) strike(r.why); },
           onFail: why => why === 'unsupported' ? stop(tE('engine.act.notHere'), false) : why === 'spec' ? stop(tE('engine.act.failed'), false)
             : why === 'runaway' ? stop(tE('engine.act.stopped'))
@@ -1735,7 +1741,7 @@ const ACT = (() => {
             : stop(why === 'navigated' ? tE('engine.act.misbehaved') : tE('engine.act.failed')) });
       } catch (e) { console.warn('[noema] activity mount failed', e); return stop(tE('engine.act.failed')); }
       if (notice) note.textContent = notice;
-      LIVE.push(sess);
+      if (!waiting) LIVE.push(sess);
       // watchdog: ping every 2 s; three missed answers → stopped, with Restart (the loop guard trips sooner, 34_activity_html.js)
       pingT = setInterval(() => {
         if (!root.isConnected) return destroy();
@@ -1759,7 +1765,7 @@ const ACT = (() => {
       fallback(''); setBar(btn('▶ ' + tE('engine.act.start'), () => start(), 'btn primary small'));
       io = new IntersectionObserver(es => {
         for (const e of es) {
-          if (e.isIntersecting && !sess.port && !sess.parked && LIVE.length < liveMax()) start();
+          if (e.isIntersecting && !sess.port && !sess.parked && (LIVE.length < liveMax() || waits())) start();
           else if (sess.port && sess.alive) sess.port.send(e.isIntersecting ? 'resume' : 'pause');
         }
       }, { threshold: 0.15 });
@@ -6382,6 +6388,7 @@ function subjectMenu() {
     own(Noema.subjectMeta || {}) ? { label: SL('shareSubject'), sub: SL('shareSubjectSub'), icon: 'share', run: async () => Noema.share(await subjectMeta()) } : null,   // library subjects are everybody's already
     { label: SL('exportPackage'), sub: SL('exportPackageSub'), icon: 'download', run: () => Noema.exportPackage(ACCOUNT.id, Noema.pack).catch(e => toast('⚠️ ' + errText(e), 4000)) },
     window.NoemaXAPI ? { label: tE('engine.xapi.export'), sub: tE('engine.xapi.exportSub'), icon: 'download', run: exportXAPI } : null,
+    window.NoemaXAPI ? { label: tE('engine.xapi.cmi5'), sub: tE('engine.xapi.cmi5Sub'), icon: 'download', run: exportCmi5 } : null,
     { label: SL('pickSubject'), icon: 'book', run: () => Noema.openSubjectPicker() },
     '-',
     { label: SL('resetProgress', { title: SUBJ.title }), icon: 'close', danger: true, run: resetProgress }];
@@ -6389,17 +6396,23 @@ function subjectMenu() {
 /** ⋮ › Export learning record (xAPI): this subject's activity attempts (S.att) and answers (S.res) as an xAPI 1.0.3 file, made by
     NoemaXAPI (engine/src/43_xapi.js, docs/INTERACTIVE_XAPI.md) — nothing is sent anywhere. The actor is the account id, never an e-mail. */
 function exportXAPI() {
-  const att = S.att || {}, res = S.res || {};
-  if (!Object.keys(att).length && !Object.keys(res).length) { toast(tE('engine.xapi.none'), 3500); return; }
-  const site = String(Noema.config?.siteUrl || 'https://noema-lite.netlify.app').replace(/\/+$/, '') + '/';   // i18n-ignore (a web address)
-  let file;
+  let r;
+  try { r = NoemaXAPI.subjectRecord({ att: S.att, res: S.res, pack: SUBJ, chapters: Noema.pack?.chapters || COURSE, accountId: ACCOUNT.id, site: Noema.config?.siteUrl, now: Date.now() }); }
+  catch (e) { toast('⚠️ ' + errText(e), 4000); return; }
+  if (!r) { toast(tE('engine.xapi.none'), 3500); return; }
+  saveBlob(r.name, new Blob([JSON.stringify(r.file, null, 1)], { type: 'application/json' }));
+}
+/** ⋮ › Course package for an LMS (cmi5): the subject's chapters as a cmi5 course structure in a .zip (NoemaXAPI.subjectCmi5; JSZip, the
+    app's zip writer); its AUs open the chapters on the site, with the same ids as the xAPI record. */
+async function exportCmi5() {
   try {
-    file = NoemaXAPI.exportFile({ att, res, pack: { id: SUBJ.id, title: SUBJ.title, language: SUBJ.language }, chapters: Noema.pack?.chapters || COURSE },
-      { actor: { account: { homePage: site, name: String(ACCOUNT.id) } }, activityBase: site + 'xapi/' + encodeURIComponent(SUBJ.id) + '/', registrationSeed: [String(ACCOUNT.id), SUBJ.id], now: Date.now() });
-  } catch (e) { toast('⚠️ ' + errText(e), 4000); return; }
-  const name = SUBJ.id + '.xapi.json';   // i18n-ignore (a file name)
-  const a = h('a', { href: URL.createObjectURL(new Blob([JSON.stringify(file, null, 1)], { type: 'application/json' })), download: name });
-  document.body.append(a); a.click(); a.remove();
+    const r = NoemaXAPI.subjectCmi5({ pack: SUBJ, chapters: Noema.pack?.chapters || COURSE, site: Noema.config?.siteUrl });
+    saveBlob(r.name, await NoemaXAPI.zip(r.files));
+  } catch (e) { toast('⚠️ ' + errText(e), 4000); }
+}
+function saveBlob(name, blob) {
+  const u = URL.createObjectURL(blob), a = h('a', { href: u, download: name });
+  document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(u), 10000);
   toast('⬇️ ' + name, 3000);   // i18n-ignore (a file name)
 }
 function resetProgress(after) {
@@ -8117,12 +8130,15 @@ function reportedView() {
      NoemaXAPI.exportFile(input, opts) → { format: 'noema.xapi-export/v1', … statements }   (tools/schemas/noema.xapi-export.v1.schema.json)
      NoemaXAPI.cmi5Package(course, opts) → { files: { 'cmi5.xml': xml }, aus: [{id, chapter, exercise?}] }
      NoemaXAPI.validate(stmt) → [problem]   ·   NoemaXAPI.validateAll(list) → [problem] (also the cmi5 rules across statements)
+     NoemaXAPI.subjectRecord({ att, res, pack, chapters, accountId, site, now }) → { name: '<id>.xapi.json', file } | null (nothing recorded)
+     NoemaXAPI.subjectCmi5({ pack, chapters, site }) → { name: '<id>.cmi5.zip', files: { 'cmi5.xml': xml } }   (what the app's two menus download:
+       the subject's ⋮ in the engine and the shell's "My subjects" ⋮; the same ids and AUs either way)
    opts: { actor: { name?, account: { homePage, name } } (never an email: mbox / mbox_sha1sum / openid are never written),
            activityBase: 'https://noema-lite.netlify.app/xapi/<packId>/', registration?: UUID | registrationSeed?: any,
            locale?: 'en', profile?: 'xapi' | 'cmi5', granularity?: 'chapter' | 'activity' (cmi5: the AU of a statement) }
    Every id is a UUID v5 of the content (re-export gives the same statements: idempotent at the LRS). */
 /* i18n-ignore-start */   // IRIs, verbs and protocol words, not text for learners
-const NoemaXAPI = (() => {
+var NoemaXAPI = (() => {   // var: the shell loads this file on its own (the "My subjects" ⋮) and engine.js has it inside again
   const VERSION = '1.0.3';
   const ADL = 'http://adlnet.gov/expapi/verbs/';
   const VERBS = {
@@ -8484,7 +8500,35 @@ const NoemaXAPI = (() => {
     return { files: { 'cmi5.xml': xml }, aus };
   }
 
-  return { VERSION, VERBS, CMI5_CAT, MOVEON_CAT, CMI5_SESSION, EXT_BASE, statements, exportFile, cmi5Package, validate, validateAll, duration, uuid5, sha1: b => hex(sha1(b)) };
+  /** files {path: text} → a zip Blob, with the app's zip writer (JSZip, loaded on demand by NoemaViewer like the package export) */
+  async function zip(files) {
+    const W = typeof window !== 'undefined' ? window : globalThis;
+    if (!W.JSZip && W.NoemaViewer && W.NoemaViewer.jszip) await W.NoemaViewer.jszip();
+    if (!W.JSZip) throw Object.assign(new Error('The package writer is not available.'), { code: 'files.no_writer', params: {} });
+    const z = new W.JSZip(); for (const [p, t] of Object.entries(files || {})) z.file(p, t);
+    return z.generateAsync({ type: 'blob', mimeType: 'application/zip' });
+  }
+  /* ---------- one subject, as the app exports it (the subject's ⋮ and the shell's "My subjects" ⋮) ---------- */
+  const siteOf = s => String(s || 'https://noema-lite.netlify.app').replace(/\/+$/, '') + '/';
+  const baseOf = (site, id) => site + 'xapi/' + encodeURIComponent(id) + '/';
+  /** the learner's record of one subject: S.att (activity attempts) and S.res (answers); the actor is the account id, never an e-mail */
+  function subjectRecord({ att, res, pack, chapters, accountId, site, now } = {}) {
+    att = att || {}; res = res || {};
+    if (!Object.keys(att).length && !Object.keys(res).length) return null;
+    const S = siteOf(site), p = pack || {};
+    const file = exportFile({ att, res, pack: { id: p.id, title: p.title, language: p.language }, chapters: chapters || [] },
+      { actor: { account: { homePage: S, name: String(accountId) } }, activityBase: baseOf(S, p.id), registrationSeed: [String(accountId), p.id], now });
+    return { name: p.id + '.xapi.json', file };
+  }
+  /** the subject as a cmi5 course for an LMS: cmi5.xml (one AU per chapter; the AUs open the chapters on the site), zipped by the caller */
+  function subjectCmi5({ pack, chapters, site } = {}) {
+    const S = siteOf(site), p = pack || {};
+    const course = { id: p.id, subject: { id: p.id, title: p.title, description: p.description, language: p.language }, chapters: chapters || [] };
+    return { name: p.id + '.cmi5.zip', files: cmi5Package(course, { activityBase: baseOf(S, p.id), launchBase: S, locale: p.language }).files };
+  }
+
+  return { VERSION, VERBS, CMI5_CAT, MOVEON_CAT, CMI5_SESSION, EXT_BASE, statements, exportFile, cmi5Package, validate, validateAll, duration, uuid5, sha1: b => hex(sha1(b)),
+    subjectRecord, subjectCmi5, zip };
 })();
 if (typeof window !== 'undefined') window.NoemaXAPI = NoemaXAPI;
 if (typeof module !== 'undefined' && module.exports) module.exports = NoemaXAPI;
@@ -9085,8 +9129,10 @@ var NoemaEmbed = (() => {   // var: loaded twice in the app (beside packcheck.js
     if (!(window.NOEMA_CONFIG && window.NOEMA_CONFIG.activities && window.NOEMA_CONFIG.activities[RUNTIME] === true)) return;   // opt-in per deployment
     ACT.registerRuntime({
       id: RUNTIME, version: 1,
+      /** before consent the block is only the card (no frame): the core does not count it toward the live activities until onLive */
+      waits(act) { const p = provider(act && act.provider, PROVIDERS); return !!p && !consent.has(p.id); },
       /** → port { send(type), close() }; the page itself does not speak the activity protocol: this trusted host answers for it */
-      mount(box, { act, init, title, onMessage, onFail }) {
+      mount(box, { act, init, title, onMessage, onFail, onLive }) {
         const later = f => Promise.resolve().then(f);   // never call back before the core holds the port
         let closed = false, timer = null;
         const out = (type, payload) => { if (!closed) onMessage(ACTP.out(type, payload)); };
@@ -9126,7 +9172,7 @@ var NoemaEmbed = (() => {   // var: loaded twice in the app (beside packcheck.js
         if (typeof words.why === 'string' && words.why.trim()) card.append(el('p', 'act-embed-why', words.why));
         card.append(creditLine(act, p));
         const go = el('button', 'btn primary small act-embed-open', T('engine.act.embed.open', { provider: p.name })); go.type = 'button';
-        go.addEventListener('click', () => { if (closed) return; consent.set(p.id); open(); });
+        go.addEventListener('click', () => { if (closed) return; consent.set(p.id); open(); if (!closed && typeof onLive === 'function') onLive(); });
         card.append(go);
         root.append(card);
         return port;

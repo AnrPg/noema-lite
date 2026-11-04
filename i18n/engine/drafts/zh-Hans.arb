@@ -66,6 +66,8 @@
   "engine.xapi.export": "导出学习记录（xAPI）",
   "engine.xapi.exportSub": "你的尝试和答案，保存为可导入学习记录库（LRS）的文件",
   "engine.xapi.none": "暂时没有可导出的内容：你在这门课中还没有任何尝试或答案。",
+  "engine.xapi.cmi5": "LMS 课程包（cmi5）",
+  "engine.xapi.cmi5Sub": "将本科目的各章打包为 .zip，可导入学习管理系统（LMS）",
   "engine.author.title": "活动制作",
   "engine.author.intro": "用表单制作一个互动活动。预览会完全按照应用的方式运行它。",
   "engine.author.type": "活动类型",

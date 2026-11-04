@@ -66,6 +66,8 @@
   "engine.xapi.export": "Lernnachweis exportieren (xAPI)",
   "engine.xapi.exportSub": "Ihre Versuche und Antworten als Datei für einen Learning Record Store",
   "engine.xapi.none": "Noch nichts zu exportieren: In diesem Fach haben Sie noch keine Versuche oder Antworten.",
+  "engine.xapi.cmi5": "Kurspaket für ein LMS (cmi5)",
+  "engine.xapi.cmi5Sub": "Die Kapitel dieses Fachs als .zip, die eine Lernplattform (LMS) importieren kann",
   "engine.author.title": "Aktivitäten erstellen",
   "engine.author.intro": "Baue eine interaktive Aktivität mit einem Formular. Die Vorschau führt sie genau so aus wie die App.",
   "engine.author.type": "Art der Aktivität",

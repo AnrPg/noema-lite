@@ -66,6 +66,8 @@
   "engine.xapi.export": "Exportar o registo de aprendizagem (xAPI)",
   "engine.xapi.exportSub": "As tuas tentativas e respostas num ficheiro para um repositório de registos de aprendizagem (LRS)",
   "engine.xapi.none": "Ainda não há nada para exportar: não tens tentativas nem respostas nesta disciplina.",
+  "engine.xapi.cmi5": "Pacote do curso para um LMS (cmi5)",
+  "engine.xapi.cmi5Sub": "Os capítulos desta disciplina num .zip que uma plataforma de aprendizagem (LMS) pode importar",
   "engine.author.title": "Criação de atividades",
   "engine.author.intro": "Constrói uma atividade interativa com um formulário. A pré-visualização executa-a exatamente como a aplicação.",
   "engine.author.type": "Tipo de atividade",

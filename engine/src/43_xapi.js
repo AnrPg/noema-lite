@@ -4,12 +4,15 @@
      NoemaXAPI.exportFile(input, opts) → { format: 'noema.xapi-export/v1', … statements }   (tools/schemas/noema.xapi-export.v1.schema.json)
      NoemaXAPI.cmi5Package(course, opts) → { files: { 'cmi5.xml': xml }, aus: [{id, chapter, exercise?}] }
      NoemaXAPI.validate(stmt) → [problem]   ·   NoemaXAPI.validateAll(list) → [problem] (also the cmi5 rules across statements)
+     NoemaXAPI.subjectRecord({ att, res, pack, chapters, accountId, site, now }) → { name: '<id>.xapi.json', file } | null (nothing recorded)
+     NoemaXAPI.subjectCmi5({ pack, chapters, site }) → { name: '<id>.cmi5.zip', files: { 'cmi5.xml': xml } }   (what the app's two menus download:
+       the subject's ⋮ in the engine and the shell's "My subjects" ⋮; the same ids and AUs either way)
    opts: { actor: { name?, account: { homePage, name } } (never an email: mbox / mbox_sha1sum / openid are never written),
            activityBase: 'https://noema-lite.netlify.app/xapi/<packId>/', registration?: UUID | registrationSeed?: any,
            locale?: 'en', profile?: 'xapi' | 'cmi5', granularity?: 'chapter' | 'activity' (cmi5: the AU of a statement) }
    Every id is a UUID v5 of the content (re-export gives the same statements: idempotent at the LRS). */
 /* i18n-ignore-start */   // IRIs, verbs and protocol words, not text for learners
-const NoemaXAPI = (() => {
+var NoemaXAPI = (() => {   // var: the shell loads this file on its own (the "My subjects" ⋮) and engine.js has it inside again
   const VERSION = '1.0.3';
   const ADL = 'http://adlnet.gov/expapi/verbs/';
   const VERBS = {
@@ -371,7 +374,35 @@ const NoemaXAPI = (() => {
     return { files: { 'cmi5.xml': xml }, aus };
   }
 
-  return { VERSION, VERBS, CMI5_CAT, MOVEON_CAT, CMI5_SESSION, EXT_BASE, statements, exportFile, cmi5Package, validate, validateAll, duration, uuid5, sha1: b => hex(sha1(b)) };
+  /** files {path: text} → a zip Blob, with the app's zip writer (JSZip, loaded on demand by NoemaViewer like the package export) */
+  async function zip(files) {
+    const W = typeof window !== 'undefined' ? window : globalThis;
+    if (!W.JSZip && W.NoemaViewer && W.NoemaViewer.jszip) await W.NoemaViewer.jszip();
+    if (!W.JSZip) throw Object.assign(new Error('The package writer is not available.'), { code: 'files.no_writer', params: {} });
+    const z = new W.JSZip(); for (const [p, t] of Object.entries(files || {})) z.file(p, t);
+    return z.generateAsync({ type: 'blob', mimeType: 'application/zip' });
+  }
+  /* ---------- one subject, as the app exports it (the subject's ⋮ and the shell's "My subjects" ⋮) ---------- */
+  const siteOf = s => String(s || 'https://noema-lite.netlify.app').replace(/\/+$/, '') + '/';
+  const baseOf = (site, id) => site + 'xapi/' + encodeURIComponent(id) + '/';
+  /** the learner's record of one subject: S.att (activity attempts) and S.res (answers); the actor is the account id, never an e-mail */
+  function subjectRecord({ att, res, pack, chapters, accountId, site, now } = {}) {
+    att = att || {}; res = res || {};
+    if (!Object.keys(att).length && !Object.keys(res).length) return null;
+    const S = siteOf(site), p = pack || {};
+    const file = exportFile({ att, res, pack: { id: p.id, title: p.title, language: p.language }, chapters: chapters || [] },
+      { actor: { account: { homePage: S, name: String(accountId) } }, activityBase: baseOf(S, p.id), registrationSeed: [String(accountId), p.id], now });
+    return { name: p.id + '.xapi.json', file };
+  }
+  /** the subject as a cmi5 course for an LMS: cmi5.xml (one AU per chapter; the AUs open the chapters on the site), zipped by the caller */
+  function subjectCmi5({ pack, chapters, site } = {}) {
+    const S = siteOf(site), p = pack || {};
+    const course = { id: p.id, subject: { id: p.id, title: p.title, description: p.description, language: p.language }, chapters: chapters || [] };
+    return { name: p.id + '.cmi5.zip', files: cmi5Package(course, { activityBase: baseOf(S, p.id), launchBase: S, locale: p.language }).files };
+  }
+
+  return { VERSION, VERBS, CMI5_CAT, MOVEON_CAT, CMI5_SESSION, EXT_BASE, statements, exportFile, cmi5Package, validate, validateAll, duration, uuid5, sha1: b => hex(sha1(b)),
+    subjectRecord, subjectCmi5, zip };
 })();
 if (typeof window !== 'undefined') window.NoemaXAPI = NoemaXAPI;
 if (typeof module !== 'undefined' && module.exports) module.exports = NoemaXAPI;

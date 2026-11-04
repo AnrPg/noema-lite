@@ -66,6 +66,8 @@
   "engine.xapi.export": "学習記録をエクスポート（xAPI）",
   "engine.xapi.exportSub": "試行と解答を、学習記録ストア（LRS）用のファイルとして保存",
   "engine.xapi.none": "まだエクスポートするものがありません。この科目にはまだ試行も解答もありません。",
+  "engine.xapi.cmi5": "LMS 用コースパッケージ（cmi5）",
+  "engine.xapi.cmi5Sub": "この科目の章を、学習管理システム（LMS）に取り込める .zip にまとめます",
   "engine.author.title": "アクティビティ作成",
   "engine.author.intro": "フォームでインタラクティブなアクティビティを作ります。プレビューはアプリとまったく同じように動かします。",
   "engine.author.type": "アクティビティの種類",

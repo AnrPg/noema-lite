@@ -185,6 +185,16 @@ async function xapiApp(p, ctx, E) {
   ok(file.statements.every(s => s.actor?.account?.name === acc && !s.actor.mbox && !s.actor.mbox_sha1sum) && !/mbox|@[a-z0-9-]+\.[a-z]/i.test(JSON.stringify(file.statements.map(s => s.actor))), 'the actor is the account id, never an e-mail');
   ok(file.statements.some(s => /passed|failed/.test(s.verb.id) && /ch01-e908/.test(s.object.id)) && file.statements.some(s => /answered/.test(s.verb.id) || /attempted/.test(s.verb.id)), 'the wasm exercise\'s result and the other attempts are in it');
   ok(await p.evaluate(f => NoemaXAPI.validateAll(f.statements).length === 0, file), 'the statements are valid xAPI 1.0.3 (NoemaXAPI.validateAll)');
+  console.log('— cmi5: the course package');
+  const c5 = await p.evaluate(() => { const it = subjectMenu()().find(x => x && x.label === tE('engine.xapi.cmi5')); return it ? { sub: it.sub, icon: it.icon } : null; });
+  ok(c5 && c5.sub && c5.icon === 'download', 'next to it, the quiet item "Course package for an LMS (cmi5)" ' + JSON.stringify(c5));
+  const [dz] = await Promise.all([p.waitForEvent('download', { timeout: 10000 }), p.evaluate(() => subjectMenu()().find(x => x && x.label === tE('engine.xapi.cmi5')).run())]);
+  const zbytes = require('fs').readFileSync(await dz.path());
+  const xml = await p.evaluate(async b64 => { const z = await JSZip.loadAsync(Uint8Array.from(atob(b64), c => c.charCodeAt(0))); return { names: Object.keys(z.files), xml: await z.file('cmi5.xml')?.async('string') }; }, zbytes.toString('base64'));
+  const base = file.pack.activityBase;
+  ok(dz.suggestedFilename() === 'demo-activities.cmi5.zip' && xml.names.join() === 'cmi5.xml' && /<courseStructure xmlns="https:\/\/w3id\.org\/xapi\/profiles\/cmi5\/v1\/CourseStructure\.xsd">/.test(xml.xml || '')
+    && (xml.xml || '').includes(`<course id="${base}">`) && (xml.xml || '').includes(`<au id="${base}au/ch01"`) && /\?subject=demo-activities#\/ch\/ch01/.test(xml.xml || ''),
+    `a .zip with cmi5.xml: the course and one AU per chapter, with the same ids as the xAPI record (${dz.suggestedFilename()}, ${xml.names})`);
   ok(E.length === E0, 'no page errors ' + JSON.stringify(E.slice(E0, E0 + 3)));
 }
 
@@ -229,6 +239,21 @@ async function embedApp(p, ctx, E) {
   ok(await until(() => p.evaluate(() => !!document.querySelector('main .act-embed-card'))), 'the card asks again');
   await p.evaluate(async () => { const m = document.querySelector('main'); m.innerHTML = ''; const b = document.createElement('div'); m.append(b); await ACC_VIEWS.backup(b, () => { }); });
   ok(await p.evaluate(() => !document.querySelector('[data-embed-consent]')), 'with nothing to forget, Settings shows no line at all (quiet)');
+
+  console.log('— external-embed@1: a card holds no live slot');
+  // two simulations hold both live slots (1280 px: at most 2); the card (no frame yet) parks neither; Open makes it live, and then one is parked
+  await p.evaluate(a => { ACT.ITEMS[a.id] = a; const m = document.querySelector('main'); m.innerHTML = '';
+    for (const id of ['s1', 's2', 'e1']) { const d = document.createElement('div'); d.id = 'live-' + id; m.append(d); }
+    window.__live = { s1: ACT.mount(document.getElementById('live-s1'), 'rc-lowpass', { place: 'live-1', start: true }), s2: ACT.mount(document.getElementById('live-s2'), 'rc-lowpass', { place: 'live-2', start: true }) }; }, ITEM);
+  ok(await until(() => p.evaluate(() => document.querySelectorAll('main .sim').length === 2 && ACT.LIVE.length === 2)), 'two simulations run: both live slots are taken');
+  await p.evaluate(() => { window.__live.e1 = ACT.mount(document.getElementById('live-e1'), 'ohm-phet', { start: true }); });
+  ok(await until(() => p.evaluate(() => !!document.querySelector('#live-e1 .act-embed-card'))), 'the outside activity shows its card');
+  ok(await p.evaluate(() => ACT.LIVE.length === 2 && !ACT.LIVE.includes(__live.e1) && document.querySelectorAll('main .sim').length === 2 && !document.querySelector('#live-s1 .act-bar .btn.primary, #live-s2 .act-bar .btn.primary')),
+    'the card does not count toward the live activities: both simulations keep running (none parked)');
+  await p.click('#live-e1 .act-embed-open');
+  ok(await until(() => p.evaluate(() => !!document.querySelector('#live-e1 iframe.act-embed-frame') && ACT.LIVE.includes(__live.e1) && ACT.LIVE.length === 2 && document.querySelectorAll('main .sim').length === 1)),
+    'Open: the frame is live now, and the older simulation is parked to make room ' + JSON.stringify(await p.evaluate(() => ({ live: ACT.LIVE.length, sims: document.querySelectorAll('main .sim').length }))));
+  await p.evaluate(() => { for (const s of Object.values(__live)) s.destroy(); document.querySelector('main').innerHTML = ''; NoemaEmbed.consent.forget('phet'); });
 
   console.log('— external-embed@1: offline, and never graded');
   await ctx.setOffline(true); await mountBlk(); await startIfParked(p, 'main .act');
@@ -590,8 +615,8 @@ async function p6engines(p, ctx, E) {
   const blog = () => p.evaluate(() => [...document.querySelectorAll('main .sim-log li')].map(l => l.textContent));
   const meas = async (i, a, n) => { await p.selectOption('main [data-bench="instrument"]', i); if (a) await p.selectOption('main [data-bench="a"]', a); await p.click('main [data-bench="measure"]'); await until(async () => { const l = await blog(); return l.length === n && !/…$/.test(l[n - 1]); }, 15000); };
   await meas('V', 'VBAT', 1); await meas('I', null, 2); await meas('scope', 'ISENSE', 3); await meas('log', null, 4); await meas('rssi', null, 5);
-  const L = await blog();
-  ok(L.length === 5 && /\b[34][.,]\d+\s*V\b/.test(L[0]) && /µA|mA/.test(L[1]) && /peak to peak/.test(L[2]) && /mA/.test(L[2]) && /resets: \d+, lost messages: \d+, overrun wake-ups: \d+/.test(L[3]) && /-?−?\d+[.,]\d\s*dBm/.test(L[4]), `the readings: ${L.join(' | ')}`);
+  const L = await blog();   // (the hidden fault is drawn at random: an aged cell can read a round “3 V”)
+  ok(L.length === 5 && /\b[34]([.,]\d+)?\s*V\b/.test(L[0]) && /µA|mA/.test(L[1]) && /peak to peak/.test(L[2]) && /mA/.test(L[2]) && /resets: \d+, lost messages: \d+, overrun wake-ups: \d+/.test(L[3]) && /-?−?\d+[.,]\d\s*dBm/.test(L[4]), `the readings: ${L.join(' | ')}`);
   const hide = await p.evaluate(() => { const r = q => document.querySelector(`main [data-bench="${q}"]`).closest('.sim-p'); return { a: r('a').hidden, b: r('b').hidden, part: r('part').hidden }; });
   ok(hide.a && hide.b && hide.part, 'the RSSI reading and the event log need no lead: no point is offered');
   await p.selectOption('main [data-bench="instrument"]', 'scope'); await p.selectOption('main [data-bench="a"]', 'ISENSE'); await p.click('main [data-bench="measure"]');

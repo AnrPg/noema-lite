@@ -66,6 +66,8 @@
   "engine.xapi.export": "Öğrenme kaydını dışa aktar (xAPI)",
   "engine.xapi.exportSub": "Denemeleriniz ve cevaplarınız, bir öğrenme kayıt deposu (LRS) için dosya olarak",
   "engine.xapi.none": "Henüz dışa aktarılacak bir şey yok: bu derste denemeniz ya da cevabınız yok.",
+  "engine.xapi.cmi5": "LMS için kurs paketi (cmi5)",
+  "engine.xapi.cmi5Sub": "Bu dersin bölümleri, bir öğrenme platformunun (LMS) içe aktarabileceği bir .zip dosyasında",
   "engine.author.title": "Etkinlik oluşturma",
   "engine.author.intro": "Bir formla etkileşimli bir etkinlik oluştur. Önizleme onu tam uygulamanın çalıştıracağı gibi çalıştırır.",
   "engine.author.type": "Etkinlik türü",

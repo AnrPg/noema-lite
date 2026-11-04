@@ -177,6 +177,7 @@ function subjectMenu() {
     own(Noema.subjectMeta || {}) ? { label: SL('shareSubject'), sub: SL('shareSubjectSub'), icon: 'share', run: async () => Noema.share(await subjectMeta()) } : null,   // library subjects are everybody's already
     { label: SL('exportPackage'), sub: SL('exportPackageSub'), icon: 'download', run: () => Noema.exportPackage(ACCOUNT.id, Noema.pack).catch(e => toast('⚠️ ' + errText(e), 4000)) },
     window.NoemaXAPI ? { label: tE('engine.xapi.export'), sub: tE('engine.xapi.exportSub'), icon: 'download', run: exportXAPI } : null,
+    window.NoemaXAPI ? { label: tE('engine.xapi.cmi5'), sub: tE('engine.xapi.cmi5Sub'), icon: 'download', run: exportCmi5 } : null,
     { label: SL('pickSubject'), icon: 'book', run: () => Noema.openSubjectPicker() },
     '-',
     { label: SL('resetProgress', { title: SUBJ.title }), icon: 'close', danger: true, run: resetProgress }];
@@ -184,17 +185,23 @@ function subjectMenu() {
 /** ⋮ › Export learning record (xAPI): this subject's activity attempts (S.att) and answers (S.res) as an xAPI 1.0.3 file, made by
     NoemaXAPI (engine/src/43_xapi.js, docs/INTERACTIVE_XAPI.md) — nothing is sent anywhere. The actor is the account id, never an e-mail. */
 function exportXAPI() {
-  const att = S.att || {}, res = S.res || {};
-  if (!Object.keys(att).length && !Object.keys(res).length) { toast(tE('engine.xapi.none'), 3500); return; }
-  const site = String(Noema.config?.siteUrl || 'https://noema-lite.netlify.app').replace(/\/+$/, '') + '/';   // i18n-ignore (a web address)
-  let file;
+  let r;
+  try { r = NoemaXAPI.subjectRecord({ att: S.att, res: S.res, pack: SUBJ, chapters: Noema.pack?.chapters || COURSE, accountId: ACCOUNT.id, site: Noema.config?.siteUrl, now: Date.now() }); }
+  catch (e) { toast('⚠️ ' + errText(e), 4000); return; }
+  if (!r) { toast(tE('engine.xapi.none'), 3500); return; }
+  saveBlob(r.name, new Blob([JSON.stringify(r.file, null, 1)], { type: 'application/json' }));
+}
+/** ⋮ › Course package for an LMS (cmi5): the subject's chapters as a cmi5 course structure in a .zip (NoemaXAPI.subjectCmi5; JSZip, the
+    app's zip writer); its AUs open the chapters on the site, with the same ids as the xAPI record. */
+async function exportCmi5() {
   try {
-    file = NoemaXAPI.exportFile({ att, res, pack: { id: SUBJ.id, title: SUBJ.title, language: SUBJ.language }, chapters: Noema.pack?.chapters || COURSE },
-      { actor: { account: { homePage: site, name: String(ACCOUNT.id) } }, activityBase: site + 'xapi/' + encodeURIComponent(SUBJ.id) + '/', registrationSeed: [String(ACCOUNT.id), SUBJ.id], now: Date.now() });
-  } catch (e) { toast('⚠️ ' + errText(e), 4000); return; }
-  const name = SUBJ.id + '.xapi.json';   // i18n-ignore (a file name)
-  const a = h('a', { href: URL.createObjectURL(new Blob([JSON.stringify(file, null, 1)], { type: 'application/json' })), download: name });
-  document.body.append(a); a.click(); a.remove();
+    const r = NoemaXAPI.subjectCmi5({ pack: SUBJ, chapters: Noema.pack?.chapters || COURSE, site: Noema.config?.siteUrl });
+    saveBlob(r.name, await NoemaXAPI.zip(r.files));
+  } catch (e) { toast('⚠️ ' + errText(e), 4000); }
+}
+function saveBlob(name, blob) {
+  const u = URL.createObjectURL(blob), a = h('a', { href: u, download: name });
+  document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(u), 10000);
   toast('⬇️ ' + name, 3000);   // i18n-ignore (a file name)
 }
 function resetProgress(after) {
