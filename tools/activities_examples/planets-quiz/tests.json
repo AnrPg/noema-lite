@@ -1,0 +1,60 @@
+{
+ "cases": [
+  {
+   "name": "the right answer (Jupiter)",
+   "exercise": "ch01-e910",
+   "steps": [
+    {
+     "click": ".h5p-answer:nth-child(1)"
+    },
+    {
+     "click": ".h5p-question-check-answer"
+    }
+   ],
+   "expect": {
+    "passed": true
+   }
+  },
+  {
+   "name": "a wrong answer (Mars)",
+   "exercise": "ch01-e910",
+   "steps": [
+    {
+     "click": ".h5p-answer:nth-child(2)"
+    },
+    {
+     "click": ".h5p-question-check-answer"
+    }
+   ],
+   "expect": {
+    "passed": false
+   }
+  },
+  {
+   "name": "explorer: the choice is saved",
+   "steps": [
+    {
+     "click": ".h5p-answer:nth-child(1)"
+    },
+    {
+     "wait": 600
+    }
+   ],
+   "expect": {
+    "state": [
+     "h5p"
+    ]
+   }
+  },
+  {
+   "name": "in Greek",
+   "locale": "el",
+   "steps": [],
+   "expect": {
+    "text": {
+     ".h5p-question-content": "Ηλιακό Σύστημα"
+    }
+   }
+  }
+ ]
+}

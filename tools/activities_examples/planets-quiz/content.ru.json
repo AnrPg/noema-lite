@@ -1,0 +1,89 @@
+{
+ "answers": [
+  {
+   "correct": true,
+   "text": "<div>Юпитер</div>\n",
+   "tipsAndFeedback": {
+    "tip": "",
+    "chosenFeedback": "",
+    "notChosenFeedback": ""
+   }
+  },
+  {
+   "correct": false,
+   "text": "<div>Марс</div>\n",
+   "tipsAndFeedback": {
+    "tip": "",
+    "chosenFeedback": "",
+    "notChosenFeedback": ""
+   }
+  },
+  {
+   "correct": false,
+   "text": "<div>Венера</div>\n",
+   "tipsAndFeedback": {
+    "tip": "",
+    "chosenFeedback": "",
+    "notChosenFeedback": ""
+   }
+  }
+ ],
+ "UI": {
+  "showSolutionButton": "Показать решение",
+  "tryAgainButton": "Ещё раз",
+  "checkAnswerButton": "Проверить",
+  "tipsLabel": "Показать подсказку",
+  "scoreBarLabel": "Набрано баллов: :num из :total",
+  "tipAvailable": "Есть подсказка",
+  "feedbackAvailable": "Есть отзыв",
+  "readFeedback": "Прочитать отзыв",
+  "wrongAnswer": "Неверный ответ",
+  "correctAnswer": "Верный ответ",
+  "shouldCheck": "Это нужно было отметить",
+  "shouldNotCheck": "Это не нужно было отмечать",
+  "noInput": "Сначала ответьте, потом смотрите решение",
+  "submitAnswerButton": "Отправить",
+  "a11yCheck": "Проверить ответы. Они будут отмечены как верные, неверные или пропущенные.",
+  "a11yShowSolution": "Показать решение. Задание будет отмечено правильным решением.",
+  "a11yRetry": "Начать задание заново. Все ответы будут сброшены."
+ },
+ "question": "<p>Какая планета самая большая в Солнечной системе?</p>\n",
+ "behaviour": {
+  "enableRetry": true,
+  "enableSolutionsButton": true,
+  "singlePoint": true,
+  "randomAnswers": false,
+  "showSolutionsRequiresInput": true,
+  "type": "auto",
+  "confirmCheckDialog": false,
+  "confirmRetryDialog": false,
+  "autoCheck": false,
+  "passPercentage": 100,
+  "showScorePoints": true,
+  "enableCheckButton": true
+ },
+ "confirmCheck": {
+  "header": "Завершить?",
+  "body": "Вы точно хотите завершить?",
+  "cancelLabel": "Отмена",
+  "confirmLabel": "Завершить"
+ },
+ "confirmRetry": {
+  "header": "Начать заново?",
+  "body": "Вы точно хотите начать заново?",
+  "cancelLabel": "Отмена",
+  "confirmLabel": "Да"
+ },
+ "overallFeedback": [
+  {
+   "from": 0,
+   "to": 99,
+   "feedback": "Пока нет."
+  },
+  {
+   "from": 100,
+   "to": 100,
+   "feedback": "Верно!"
+  }
+ ]
+}
