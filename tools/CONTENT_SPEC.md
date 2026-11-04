@@ -12,7 +12,7 @@ library/subjects/<subject-id>/          (shared library)   or   accounts/<profil
 ├── chapters/chNN.json   one file per chapter (schema below)
 ├── patches/*.json    ADDITIVE updates from later sources (never edit a published chapter; append)
 ├── media/            pictures (svg/png/jpg/webp) + media.json registry — docs/VISUAL.md
-├── activities/       interactive activities (optional): activities.json + <id>/app.html (html-app@1) or <id>/spec.json (sim-spec@1; a circuit with engine circuit-mna@1, docs/INTERACTIVE_CIRCUIT.md) + <id>/strings.<locale>.json — docs/INTERACTIVE.md
+├── activities/       interactive activities (optional): activities.json + <id>/app.html (html-app@1) or <id>/spec.json (sim-spec@1; a circuit with engine circuit-mna@1, docs/INTERACTIVE_CIRCUIT.md; heat, control loops, radio links and IoT nodes with thermal@1, pid@1, rf@1, twin@1, docs/INTERACTIVE_ENGINES.md) + <id>/strings.<locale>.json — docs/INTERACTIVE.md
 ├── coverage/*.md     coverage checklists (every heading/command/test question → section + exercise ids)
 ├── authoring/        scripts used to generate the content (provenance)
 ├── translations/<locale>/chNN.json   the chapters in en, el, ru (those that are not the pack's language; below, "Packs in several languages")

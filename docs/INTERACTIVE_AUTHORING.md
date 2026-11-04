@@ -4,7 +4,9 @@ The contract is `docs/INTERACTIVE.md`; this page is how to make one that teaches
 `tools/activities_examples/alias-lab/` (html-app@1, sampling and aliasing) and `tools/activities_examples/rc-lowpass/`
 (sim-spec@1, an RC low-pass filter): each an explorer in the theory and a graded sim exercise. For circuits (`circuit-mna@1`,
 `docs/INTERACTIVE_CIRCUIT.md`): `rc-transient` (a capacitor charging from a square wave, R and C on sliders, a scope trace) and
-`led-bench` (a fault-finding bench: an LED that stays dark).
+`led-bench` (a fault-finding bench: an LED that stays dark). For heat, control loops, radio links and IoT nodes
+(`docs/INTERACTIVE_ENGINES.md`): `heatsink` (`thermal@1`), `pid-tune` (`pid@1`), `lora-link` (`rf@1`) and `sensor-node`
+(`twin@1`).
 
 ## When an activity earns its place
 
@@ -96,6 +98,28 @@ are, `values` the bench's `diagnosis`, `measurements`, `correct`:
   "expect": { "passed": true, "log": 1, "readings": [[0, -0.05, 0.05]] } }
 ```
 
+## Which engine for which learning goal
+
+Pick the engine by what the learner should come to understand, not by the topic's name. The engine only has to compute the
+quantities the idea is about; everything else (a picture of the device, the story) belongs in the text.
+
+| the learner should… | engine | a typical activity |
+|---|---|---|
+| see how quantities depend on each other through formulas you can write down (a law, a closed-form answer, a trade-off curve) | `formula@1` (no `model`) | a lens equation, a sampling rate against aliasing, the cost of a design against one parameter |
+| read and design circuits: voltages, currents, an RC or RL transient, a filter's response, a switching stage | `circuit-mna@1` | an RC charging from a square wave; a divider loaded by a sensor |
+| reason from measurements to a fault on a board | `circuit-mna@1` with a `bench` | an LED that stays dark: open resistor, reversed LED or a broken track? |
+| understand heat flow: thermal resistance chains, the steady temperature, time constants, a duty-cycled load, a thermostat's hysteresis | `thermal@1` | size a heatsink so the junction stays under its limit; a heater with a thermostat |
+| tune or compare controllers: what P, I and D each do, overshoot against speed, steady-state error, windup, dead time, noise | `pid@1` | tune a PID to a step-response spec; switch anti-windup on and off on a saturated actuator |
+| plan a radio link: the link budget, path loss against distance, spreading factor against airtime and range, the Fresnel zone | `rf@1` | pick SF and antenna for a margin at a distance within an airtime limit |
+| design a battery-powered node's duty cycle: average current, battery life, what each wake costs, delivery over a marginal link | `twin@1` | choose the wake period for a year of battery and enough readings a day |
+| find a fault in a deployed device from its battery, current, radio and event log | `twin@1` with a `bench` | a node whose battery dies in weeks: an antenna off, an aged cell, a wrong wake period? |
+
+Rules of thumb. If the answer is one formula, use `formula@1`: an engine adds nothing but a run. If the idea is a process over
+time (a transient, a loop settling, a battery draining), use the engine that integrates it and show the series. When two engines
+could do it (a heater as a `thermal@1` network or a `pid@1` `thermal` plant), choose the one whose controls are what the learner
+should change: the network's resistances and capacities, or the controller's gains. Keep one engine per activity; a system that
+spans two (a node whose radio link is the question) uses the engine of the question (`rf@1`) and states the rest as constants.
+
 ## A good fault-finding bench
 
 A bench teaches **reasoning from measurements**: each reading should rule something out. Write it like a good practical:
@@ -128,6 +152,12 @@ A bench teaches **reasoning from measurements**: each reading should rule someth
 9. **The explorer**: the same bench as a theory block lets the learner practise; "Check my diagnosis" reveals the fault,
    "Another device" draws a new one. Explain it after the block: what to measure first, how to read a 0 V and a 5 V.
 10. **The fallback text** is the diagnosis method in words (where to measure, what each reading means), with the still schematic.
+
+A `twin@1` bench follows the same rules with a device instead of a board (`docs/INTERACTIVE_ENGINES.md` §5.3): its points are the
+battery (`vbat`, `vload`), the supply current (`i`) and `gnd`; its instruments the voltmeter, the average current, a scope on
+the current, the event log and the RSSI. Give each fault one instrument that shows it (the RSSI for a detached antenna, the
+average current for a wrong wake period, the voltage under load for an aged cell, the log for a brown-out level set too high).
+A faulty sensor (`sensor-stuck`, `sensor-drift`) has no instrument on the bench: keep it out of a bench's faults.
 
 ## Pitfalls
 

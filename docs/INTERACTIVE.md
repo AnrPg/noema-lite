@@ -4,7 +4,7 @@ An **activity** is a small interactive program inside a pack: an explorer in the
 or a graded **sim** exercise (reach a goal in the activity; the activity reports whether it was reached, or the app checks it).
 The decisions and the spikes behind this page are in `docs/adr/001-interactive-activities.md`. How to write one well:
 `docs/INTERACTIVE_AUTHORING.md`. The formulas of `sim-spec@1`: `docs/INTERACTIVE_SIMEXPR.md`. The circuit engine and the
-fault-finding bench: `docs/INTERACTIVE_CIRCUIT.md`.
+fault-finding bench: `docs/INTERACTIVE_CIRCUIT.md`. The heat, control-loop, radio and IoT-twin engines: `docs/INTERACTIVE_ENGINES.md`.
 
 Activities are optional. A chapter without them is complete; a chapter with them still needs every rule of
 `tools/CONTENT_SPEC.md` (Q1–Q8). An activity never replaces the theory: the text explains the idea, the activity lets the
@@ -15,7 +15,7 @@ learner try it.
 | runtime | what it is | status |
 |---|---|---|
 | `html-app@1` (tier A) | one self-contained HTML file (inline scripts and styles, pictures as `data:` URIs) in a sandboxed frame | **available** |
-| `sim-spec@1` (tier B) | a JSON spec (controls, formulas, readouts, plots) run by the app's own trusted engines — no code in the pack (§12) | **available** — engines `formula@1` (formulas) and `circuit-mna@1` (circuits, transients and fault-finding benches: §12.6–12.7) |
+| `sim-spec@1` (tier B) | a JSON spec (controls, formulas, readouts, plots) run by the app's own trusted engines — no code in the pack (§12) | **available** — engines `formula@1` (formulas), `circuit-mna@1` (circuits, transients and fault-finding benches: §12.6–12.7), `thermal@1` (lumped thermal networks), `pid@1` (control loops), `rf@1` (radio links) and `twin@1` (the digital twin of a battery-powered IoT node, with benches) — `docs/INTERACTIVE_ENGINES.md` |
 | `py-module@1` (tier C) | Python (Pyodide + numpy, scipy; allow-listed extras through micropip) in a worker | later (P4); offline after the first use, never in the one-file bundle |
 | `h5p@1` | an ordinary `.h5p` package (quiz, drag and drop, interactive video, branching…) played by the app's own H5P player in the same sandbox | later (P4b) |
 
@@ -273,7 +273,8 @@ check a `label` that names the condition, never the answer. Only runtimes that e
 ### 12.6 Engines — `ACT.registerEngine`
 
 `formula@1` (built in) has no model: the derived values are the model. Other engines (the circuit engine `circuit-mna@1`,
-`docs/INTERACTIVE_CIRCUIT.md`) are trusted app code, registered with
+`docs/INTERACTIVE_CIRCUIT.md`; `thermal@1`, `pid@1`, `rf@1` and `twin@1`, `docs/INTERACTIVE_ENGINES.md`) are trusted app code,
+registered with
 
 ```js
 ACT.registerEngine({ id: 'name@1',
@@ -295,14 +296,19 @@ lets an engine evaluate the spec's own expressions (with the app's NoemaExpr, `c
 validators know the same list of engines as the app (`ENGINES` in `tools/activities.py` and `engine/packcheck.js`); `make_pack.py`
 adds `engine:<id>` to `pack.requires`. `circuit-mna@1` validates `model` (the netlist with the engine's own `check()`, bindings to
 real parts and properties, the transient's step budget), the outputs (nodes and parts of the netlist) and the bench.
+`thermal@1`, `pid@1`, `rf@1` and `twin@1` validate `model` and the outputs with their own `checkSpec` (JS, loaded beside
+`packcheck.js`) and `check_spec` (Python, `tools/{thermal,pid,rf,twin}.py`), with the same messages; the validators then check
+every expression of the model (each binding's `expr`; for `thermal@1` and `pid@1` also the transient's `tEnd` / `dt` and every
+output's `at`) as formulas over the spec's names (`docs/INTERACTIVE_ENGINES.md` §1).
 
 ### 12.7 Fault-finding benches — `spec.bench`
 
-An engine with `bench: true` (`circuit-mna@1`) can run a **bench**: a virtual device with one hidden fault. The app renders the
+An engine with `bench: true` (`circuit-mna@1`, `twin@1`) can run a **bench**: a virtual device with one hidden fault. The app renders the
 instruments (multimeter V / I / R, oscilloscope, logic analyser) with their leads on the declared probe points, a Measure button
 (an optional budget), the **measurement log** (each reading also an event `measure`), the instrument's face (the meter's number,
 the scope trace, the logic trace) and the diagnosis — a list of options in the string tables (event `diagnose`). The full format
-is `docs/INTERACTIVE_CIRCUIT.md` §2; in short:
+is `docs/INTERACTIVE_CIRCUIT.md` §2 (the twin's points, its `log` and `rssi` instruments and its faults:
+`docs/INTERACTIVE_ENGINES.md` §5.3); in short:
 
 ```json
 "bench": { "faults": [{"id": "rOpen", "apply": [{"element": "R1", "kind": "open"}]}, …],

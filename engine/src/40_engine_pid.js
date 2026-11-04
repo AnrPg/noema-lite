@@ -1,4 +1,4 @@
-/* ===================== interactive activities — the control-loop engine pid@1 (docs/activities-dev/pid.md, docs/adr/001 D12) =====================
+/* ===================== interactive activities — the control-loop engine pid@1 (docs/INTERACTIVE_ENGINES.md §3, docs/adr/001 D12) =====================
    Control loops for tier B (sim-spec@1): a plant (first order + dead time, second order, integrator, DC motor speed / position,
    thermal, tank level), a PID controller (P, I, D with a derivative filter, setpoint weighting b / c, anti-windup by clamping or
    back-calculation, output limits, a sample time), setpoints (step, ramp, sine, steps), load and output disturbances, seeded
@@ -47,7 +47,7 @@
   const MODEL_KEYS = ['plant', 'controller', 'mode', 'setpoint', 'load', 'disturbance', 'noise', 'metrics', 'transient', 'bindings'];
   const BIND_EL = ['plant', 'controller', 'setpoint', 'load', 'disturbance', 'noise'];
 
-  /** Ziegler–Nichols tuning tables (constants; docs/activities-dev/pid.md). Parallel gains: Ki = Kp/Ti, Kd = Kp·Td. */
+  /** Ziegler–Nichols tuning tables (constants; docs/INTERACTIVE_ENGINES.md §3). Parallel gains: Ki = Kp/Ti, Kd = Kp·Td. */
   const ZN = Object.freeze({
     ultimate: Object.freeze({ P: Object.freeze({ Kp: 0.5 }), PI: Object.freeze({ Kp: 0.45, Ti: 1 / 1.2 }), PID: Object.freeze({ Kp: 0.6, Ti: 0.5, Td: 0.125 }) }),   // × Ku, × Tu
     reaction: Object.freeze({ P: Object.freeze({ Kp: 1 }), PI: Object.freeze({ Kp: 0.9, Ti: 1 / 0.3 }), PID: Object.freeze({ Kp: 1.2, Ti: 2, Td: 0.5 }) }),         // Kp × T/(K·L), Ti and Td × L

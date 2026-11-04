@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://noema-lite.netlify.app/schemas/noema.pid.v1.schema.json",
   "title": "noema-lite control loop (the model of pid@1)",
-  "description": "The model of a sim-spec@1 spec whose engine is pid@1 (engine/src/40_engine_pid.js; docs/activities-dev/pid.md). The engine's own check() (twin: tools/pid.py) also tests what a schema cannot: uMin < uMax, Ts ≥ dt, the step budget (200000), bindings to fields that exist, steps ascending; and it warns on a step longer than half the plant's fastest time constant ('stiff'), anti-windup without limits and a controller without gain.",
+  "description": "The model of a sim-spec@1 spec whose engine is pid@1 (engine/src/40_engine_pid.js; docs/INTERACTIVE_ENGINES.md §3). The engine's own check() (twin: tools/pid.py) also tests what a schema cannot: uMin < uMax, Ts ≥ dt, the step budget (200000), bindings to fields that exist, steps ascending; and it warns on a step longer than half the plant's fastest time constant ('stiff'), anti-windup without limits and a controller without gain.",
   "type": "object",
   "required": [
     "plant",

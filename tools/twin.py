@@ -1,4 +1,4 @@
-"""The device checks of the IoT twin engine twin@1 in Python (docs/activities-dev/twin.md): the twin of check(), checkFaults() and
+"""The device checks of the IoT twin engine twin@1 in Python (docs/INTERACTIVE_ENGINES.md §5): the twin of check(), checkFaults() and
 checkSpec() in engine/src/42_engine_twin.js — the same codes, paths and messages (tests/twin.js runs both on the same specs).
 It does not simulate.
 

@@ -1,11 +1,11 @@
-/* ===================== interactive activities — the radio engine rf@1 (docs/activities-dev/rf.md, docs/adr/001 D12, P6) =====================
+/* ===================== interactive activities — the radio engine rf@1 (docs/INTERACTIVE_ENGINES.md §4, docs/adr/001 D12, P6) =====================
    Radio link budgets and propagation for IoT benches of tier B (sim-spec@1): free-space path loss (Friis), two-ray ground,
    log-distance with seeded log-normal shadowing, Okumura–Hata (urban / large city / suburban / open, inside its range of
    validity), ITU-R P.1238 indoor (floors) plus wall losses, Fresnel zone and knife-edge diffraction (ITU-R P.526), antenna gains,
    cable losses, EIRP, the noise floor (kTB + NF), receiver sensitivity, link margin, the maximum range (bisection), RSSI against
    distance, bit and packet error rates against SNR (BPSK, QPSK, FSK, BLE, Wi-Fi rough, LoRa SF7–12), LoRa airtime (Semtech) and
    duty cycle, BLE and Wi-Fi airtime (rough). Pure JS, no DOM, no text for the learner: codes and numbers only.
-   The link (noema.rf/v1) is described in docs/activities-dev/rf.md and tools/schemas/noema.rf.v1.schema.json. Python twin of
+   The link (noema.rf/v1) is described in docs/INTERACTIVE_ENGINES.md §4 and tools/schemas/noema.rf.v1.schema.json. Python twin of
    check() / checkSpec(): tools/rf.py. Registering it is one line: ACT.registerEngine(NoemaRF.engine). Tests: node tests/rf.js. */
 (function noemaRfModule(root) {
   /* i18n-ignore-start */   // code, not text: only codes and numbers leave this engine
@@ -66,7 +66,7 @@
     const n = N !== undefined ? N : b.N[e], Lf = floors > 0 ? (lf !== undefined ? lf : b.Lf[e](floors)) : 0;
     return 20 * log10(f / 1e6) + n * log10(d) + Lf - 28;
   }
-  /** walls (rough losses at 2.4 GHz, dB per wall; docs/activities-dev/rf.md) */
+  /** walls (rough losses at 2.4 GHz, dB per wall; docs/INTERACTIVE_ENGINES.md §4) */
   const WALLS = { drywall: 3, wood: 4, glass: 2, brick: 8, concrete: 12, metal: 26 };
   /** the n-th Fresnel zone radius at d1 from one end and d2 from the other */
   const fresnelRadius = (d1, d2, f, n) => Math.sqrt((n || 1) * (C0 / f) * d1 * d2 / (d1 + d2));

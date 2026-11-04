@@ -1,4 +1,4 @@
-/* The IoT device twin twin@1 (engine/src/42_engine_twin.js, docs/activities-dev/twin.md):
+/* The IoT device twin twin@1 (engine/src/42_engine_twin.js, docs/INTERACTIVE_ENGINES.md §5):
    1. battery life of a simple duty cycle = capacity / average current (analytic), self-discharge, the voltage curve;
    2. the radio: rf@1's formulas (the duplicated ones agree), losses, acks and retries;
    3. every fault changes the outputs the expected way (sensor stuck / drift, battery ageing, antenna detached, wake period,

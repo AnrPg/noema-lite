@@ -313,3 +313,37 @@ mode, audits. The content work (the electronics Roadmap) starts only after the h
 * **Found on the way:** the harness's host page replaced `{name}` placeholders with a regex written inside a template literal, which
   lost its backslashes (no host string with a placeholder was ever filled); with four activities in one section the two live slots
   are taken by the first ones in view, so the app test presses Start on a parked block (as a learner would).
+
+## 10. As built — P6 engines (`thermal@1`, `pid@1`, `rf@1`, `twin@1`, 2026-11-04)
+
+* **Registration like `circuit-mna@1`.** The four engines (`engine/src/39_engine_thermal.js` … `42_engine_twin.js`, each with its
+  Python twin `tools/{thermal,pid,rf,twin}.py`) are registered by `engine/src/43_engines_p6.js`, one `ACT.registerEngine(…engine)`
+  each: `{id, check, prepare, create, workerSource}`, and `bench: true` for `twin@1`. Every run is in a Worker built from the
+  engine's own source; `prepare` evaluates the expressions on the main thread. Formats and APIs: `docs/INTERACTIVE_ENGINES.md`
+  (folded from the four development notes, now removed).
+* **Validators.** `ENGINES` in `engine/packcheck.js` and `tools/activities.py` lists the four; `BENCH_ENGINES` is
+  `{circuit-mna@1, twin@1}`. Each validator calls the engine's own spec check (`checkSpec` / `check_spec`) and reports its errors as
+  `spec.<path>: <msg>`. The engines take any non-empty text as an expression, so the validators check every expression of the
+  model as formulas over the spec's names: each binding's `expr`, and for the timed engines (`thermal@1`, `pid@1`) the
+  transient's `tEnd` / `dt` and every output's `at`. `tests/activities.js` compares JS and Python on 54 P6 specs (15 thermal, 11
+  pid, 10 rf, 18 twin, with benches), checks that both validators list the same engines, that the worker's source gives the
+  page's numbers, and that `pack.requires` gets `engine:<id>`.
+* **The twin bench is a minimal extension of P3's.** Points are `vbat`, `vload`, `i` and `gnd`; `V` reads `vbat` / `vload`
+  against `gnd`; `I` is the average supply current on one part `{"element": "battery"}`; the scope shows the supply current (the
+  engine's result now carries `unit: 'A'`, and the face labels its axis "Current (A)"); two new device-level instruments, `log`
+  (resets, lost messages, overrun wake-ups) and `rssi` (dBm), take only `kind` and hide the lead rows. The faults go through
+  `NoemaTwin.checkFaults` / `twin.check_faults`. Four new UI strings (`engine.act.bench.inst.log`, `…inst.rssi`,
+  `engine.act.bench.current`, `engine.act.bench.logStats`) are in every UI language. Not covered: the twin's sensor faults
+  (`sensor-stuck`, `sensor-drift`) change only the readings the server receives, and no bench instrument shows those; a bench
+  should not list them (INTERACTIVE_AUTHORING.md).
+* **Loaded wherever NoemaCircuit is.** The four engine files sit beside `packcheck.js` in the shell (`index.html`), the site, the
+  one-file bundle and the MCP connector (`tools/build.py`, `tests/connector.js`); the skill zip ships the Python twins next to
+  `activities.py`, and the activity harness loads the engines and `43_engines_p6.js` after the circuit engine.
+* **Reference activities** `heatsink` (thermal), `pid-tune`, `lora-link` and `sensor-node` (twin), each with en/el/ru/fr strings, a
+  fallback picture and text and six `tests.json` cases; `tests/activities_pack.py` builds them into a pack (8 activities) and back.
+  Found on the way: a short wake period over a long simulated month exceeds the twin's event budget (NaN), so `sensor-node`'s
+  slider starts at 30 s; `digits` must be 1–8, so a readout of whole days is `round(life / 86400)` with `digits: 4`.
+* **Browser tests written, not run.** `tests/activities_app.js` has a new section (`p6engines`): the engine capabilities, each of
+  the four blocks against the engine on the page, eight graded tries and the twin bench on a modified `sensor-node` (five
+  instruments, the readings, the hidden lead rows, the current scope, the verdict). It passes `node --check`; it was not run in a
+  browser in this phase.

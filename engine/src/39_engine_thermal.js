@@ -1,4 +1,4 @@
-/* ===================== interactive activities — the thermal engine thermal@1 (docs/activities-dev/thermal.md, docs/adr/001 D12) =====================
+/* ===================== interactive activities — the thermal engine thermal@1 (docs/INTERACTIVE_ENGINES.md §2, docs/adr/001 D12) =====================
    Lumped thermal networks for tier B (sim-spec@1): nodes with a heat capacity, thermal resistances / conductances, convection h·A,
    radiation ε·σ·A·(T⁴ − T∞⁴), heat sources (constant, step, PWM, sine), fixed-temperature boundaries, the ambient, and on/off
    thermostats with hysteresis. Steady state (Newton when radiation is present), transients (trapezoidal, backward Euler on the

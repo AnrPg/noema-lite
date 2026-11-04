@@ -1,4 +1,4 @@
-"""The checks of the control-loop engine pid@1 in Python (docs/activities-dev/pid.md): the twin of check() and checkSpec() in
+"""The checks of the control-loop engine pid@1 in Python (docs/INTERACTIVE_ENGINES.md §3): the twin of check() and checkSpec() in
 engine/src/40_engine_pid.js — the same codes, paths and messages (tests/pid.js runs both on the same models and specs).
 The validators use it to check a sim-spec@1 spec whose engine is pid@1; it does not simulate. Stdlib only.
 

@@ -1,4 +1,4 @@
-"""The checks of the thermal engine thermal@1 in Python (docs/activities-dev/thermal.md): the twin of check() and checkSpec() in
+"""The checks of the thermal engine thermal@1 in Python (docs/INTERACTIVE_ENGINES.md §2): the twin of check() and checkSpec() in
 engine/src/39_engine_thermal.js — the same codes, paths and messages (tests/thermal.js runs both on the same networks and specs).
 The validators use it to check a sim-spec@1 spec whose engine is thermal@1; it does not simulate. Stdlib only.
 

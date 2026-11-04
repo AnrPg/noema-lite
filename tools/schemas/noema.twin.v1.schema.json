@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://noema-lite.netlify.app/schemas/noema.twin.v1.schema.json",
   "title": "noema-lite IoT device twin (noema.twin/v1)",
-  "description": "The device run by the twin engine twin@1 (engine/src/42_engine_twin.js). Units: capacity mAh, currents mA, times s, voltages V, rInt ohm (the whole pack), selfDischarge a fraction of the capacity per month, radio f Hz, d m, power dBm. Human-readable spec: docs/activities-dev/twin.md. The engine's check() (twin: tools/twin.py) also tests: duplicate sensor ids, a custom battery curve (soc 0 to 1, rising), sense shorter than the period, LoRa bandwidths and the event budget (code 'budget'). Faults (create's opts.faults, a bench fault's apply) are $defs.fault, checked by checkFaults.",
+  "description": "The device run by the twin engine twin@1 (engine/src/42_engine_twin.js). Units: capacity mAh, currents mA, times s, voltages V, rInt ohm (the whole pack), selfDischarge a fraction of the capacity per month, radio f Hz, d m, power dBm. Human-readable spec: docs/INTERACTIVE_ENGINES.md §5. The engine's check() (twin: tools/twin.py) also tests: duplicate sensor ids, a custom battery curve (soc 0 to 1, rising), sense shorter than the period, LoRa bandwidths and the event budget (code 'budget'). Faults (create's opts.faults, a bench fault's apply) are $defs.fault, checked by checkFaults.",
   "type": "object",
   "required": [
     "battery",

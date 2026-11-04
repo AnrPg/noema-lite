@@ -1,4 +1,4 @@
-/* The radio engine rf@1 (engine/src/41_engine_rf.js, docs/activities-dev/rf.md) against known values:
+/* The radio engine rf@1 (engine/src/41_engine_rf.js, docs/INTERACTIVE_ENGINES.md §4) against known values:
    1. path loss: Friis (2.4 GHz, 100 m = 80.05 dB), two-ray crossover, log-distance, Okumura–Hata (hand-worked example),
       ITU-R P.1238 indoor, walls; Fresnel radius and knife-edge;
    2. the receiver: kTB + NF, LoRa sensitivity, link margin, the maximum range (bisection against the closed form);
