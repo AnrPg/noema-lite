@@ -1,6 +1,6 @@
 {
   "format": "noema.h5p-allow/v1",
-  "about": "The H5P libraries an h5p@1 activity may use (machine name → the major.minor versions allowed). Checked by tools/h5p_check.py and NoemaH5P.check (engine/src/38_activity_h5p.js keeps a copy: tests/activities_h5p.js checks they agree). The sandbox, not this list, is the security boundary (every library runs like a Tier A mini-app); the list says which content types are known to play offline and to report a score. 'tested': played and scored in Chromium, Firefox and WebKit by tests/activities_h5p.js or the spike (docs/activities-dev/h5p.md); the others are accepted with a warning until they are.",
+  "about": "The H5P libraries an h5p@1 activity may use (machine name → the major.minor versions allowed). Checked by tools/h5p_check.py and NoemaH5P.check (engine/src/38_activity_h5p.js keeps a copy: tests/activities_h5p.js checks they agree). The sandbox, not this list, is the security boundary (every library runs like a Tier A mini-app); the list says which content types are known to play offline and to report a score. 'tested': played and scored in Chromium, Firefox and WebKit by tests/activities_h5p.js or the spike (docs/INTERACTIVE_H5P.md); the others are accepted with a warning until they are.",
   "content": {
     "H5P.MultiChoice": {
       "versions": [

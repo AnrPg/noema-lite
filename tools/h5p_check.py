@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Checks an H5P package (.h5p) for the h5p@1 runtime (docs/activities-dev/h5p.md, docs/adr/001 D11). Pure stdlib.
+"""Checks an H5P package (.h5p) for the h5p@1 runtime (docs/INTERACTIVE_H5P.md, docs/adr/001 D11). Pure stdlib.
 
     python3 tools/h5p_check.py ITEM.h5p [MORE.h5p …] [--json]
 

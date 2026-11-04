@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Builds the H5P test packages of tests/activities_h5p.js (docs/activities-dev/h5p.md, "Samples").
+"""Builds the H5P test packages of tests/activities_h5p.js (docs/INTERACTIVE_H5P.md §7).
 
     python3 tests/fixtures/h5p/build_fixtures.py      (network: h5p.org and cdn.jsdelivr.net; the results are committed)
 

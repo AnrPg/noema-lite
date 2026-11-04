@@ -4,7 +4,7 @@ An **activity** is a small interactive program inside a pack: an explorer in the
 or a graded **sim** exercise (reach a goal in the activity; the activity reports whether it was reached, or the app checks it).
 The decisions and the spikes behind this page are in `docs/adr/001-interactive-activities.md`. How to write one well:
 `docs/INTERACTIVE_AUTHORING.md`. The formulas of `sim-spec@1`: `docs/INTERACTIVE_SIMEXPR.md`. The circuit engine and the
-fault-finding bench: `docs/INTERACTIVE_CIRCUIT.md`.
+fault-finding bench: `docs/INTERACTIVE_CIRCUIT.md`. H5P packages (`h5p@1`): `docs/INTERACTIVE_H5P.md`.
 
 Activities are optional. A chapter without them is complete; a chapter with them still needs every rule of
 `tools/CONTENT_SPEC.md` (Q1–Q8). An activity never replaces the theory: the text explains the idea, the activity lets the
@@ -17,7 +17,7 @@ learner try it.
 | `html-app@1` (tier A) | one self-contained HTML file (inline scripts and styles, pictures as `data:` URIs) in a sandboxed frame | **available** |
 | `sim-spec@1` (tier B) | a JSON spec (controls, formulas, readouts, plots) run by the app's own trusted engines — no code in the pack (§12) | **available** — engines `formula@1` (formulas) and `circuit-mna@1` (circuits, transients and fault-finding benches: §12.6–12.7) |
 | `py-module@1` (tier C) | Python (Pyodide + numpy, scipy; allow-listed extras through micropip) in a worker | later (P4); offline after the first use, never in the one-file bundle |
-| `h5p@1` | an ordinary `.h5p` package (quiz, drag and drop, interactive video, branching…) played by the app's own H5P player in the same sandbox | later (P4b) |
+| `h5p@1` (tier B) | an ordinary `.h5p` package (quiz, drag and drop, fill in the blanks, mark the words, dialog cards…) played by the app's own H5P player in the same sandbox, no network (docs/INTERACTIVE_H5P.md) | **available** — on by default; the file travels beside the pack |
 
 `make_pack.py` refuses a runtime that this version of the app does not run yet.
 
@@ -31,14 +31,20 @@ activities/
     ├── spec.json                   or the spec (sim-spec@1): data only, at most 64 KB (§12)
     ├── strings.en.json             the activity's words, one table per language: {"key": "text with {vars}"}
     ├── strings.el.json
-    └── strings.ru.json             (every language the pack is read in: its own + each translation)
+    ├── strings.ru.json            (every language the pack is read in: its own + each translation)
+    ├── item.h5p                    or the .h5p package (h5p@1), unchanged, at most 100 MB; its words are in its content.json:
+    ├── content.el.json             one per translation of the pack (the same content.json in that language), no strings.*.json
+    └── activity.json               (h5p@1) id, title, height, fallback, licence
 media/<still>.svg|png               the fallback picture (a normal pack picture in media/media.json)
 ```
 
 `make_pack.py` puts each bundle **inline** in the pack (like the pictures), with its `sha256` and `bytes` (a spec as `spec`), and
 the string tables under `strings`; it writes `pack.requires` (+ `engine:<id>` for an engine other than the built-in `formula@1`)
-and `counts.activities`. `unpack.py` gives the folder back. `python3 activity_new.py <subject-dir> <id>` starts one from the
-reference activity alias-lab; `--runtime sim-spec@1` from rc-lowpass (an RC low-pass filter).
+and `counts.activities`. An `h5p@1` package is **not** inline: `item.h5p` travels **beside** the pack (the `.noema.zip` entry
+`activities/<id>/item.h5p`; the account asks for it in `noema_finish_upload`), with its `sha256` and `bytes` in the registry and
+each `content.<locale>.json` inline under `h5pByLocale` (docs/INTERACTIVE_H5P.md §1–§2). `unpack.py` gives the folder back. `python3 activity_new.py <subject-dir> <id>` starts one from the
+reference activity alias-lab; `--runtime sim-spec@1` from rc-lowpass (an RC low-pass filter); `--runtime h5p@1` from planets-quiz,
+or `--runtime h5p@1 --from FILE.h5p` from your own package.
 
 ## 3. The registry — `activities/activities.json`
 
@@ -46,7 +52,8 @@ reference activity alias-lab; `--runtime sim-spec@1` from rc-lowpass (an RC low-
 { "format": "noema.activities/v1",
   "items": [{
     "id": "alias-lab",                       // a-z, 0-9 and -, 2–61 characters, unique in the pack
-    "runtime": "html-app@1",                 // or "sim-spec@1" with "entry": "activities/<id>/spec.json"
+    "runtime": "html-app@1",                 // or "sim-spec@1" with "entry": "activities/<id>/spec.json", or "h5p@1" with
+                                             //   "entry": "activities/<id>/item.h5p" (+ "h5pByLocale"; no "strings" needed)
     "entry": "activities/alias-lab/app.html",
     "stateVersion": 1,                       // raise it when the shape of the saved state changes (§6)
     "capabilities": ["state", "events", "resize", "result", "announce"],   // + "hints"
@@ -166,7 +173,9 @@ from 320 px wide with no horizontal scroll (docs/UI_MAP.md "Small screens"), tou
 
 ## 10. Offline
 
-`html-app@1` and `sim-spec@1` work offline (everything is inline; the engines are part of the app). `py-module@1` (later) needs the Pyodide files (and numpy, scipy) from the network the first
+`html-app@1` and `sim-spec@1` work offline (everything is inline; the engines are part of the app). `h5p@1` works offline too:
+the H5P player is part of the app, and the `.h5p` file is kept on the device with the pack (checked by its sha256); in the one-file
+bundle an item up to 2 MB is inline and a bigger one shows its fallback. `py-module@1` (later) needs the Pyodide files (and numpy, scipy) from the network the first
 time; after that they are kept on the device (Settings can prepare them ahead), as are packages installed through micropip. It is
 never available in the one-file bundle: its fallback shows there.
 
@@ -174,7 +183,8 @@ never available in the one-file bundle: its fallback shows there.
 
 1. `python3 activity_lint.py <subject-dir>` — no errors (and no warnings you cannot explain); for a sim-spec it checks every
    expression against the names the spec declares, every label key in every table, the limits; for a circuit the netlist,
-   the bindings, the faults, points and instruments of a bench.
+   the bindings, the faults, points and instruments of a bench; for an h5p@1 item the package rules of `h5p_check.py` (allowed
+   content types and libraries, no outside link, no file type H5P refuses) on the package and on each translation.
 2. `python3 activity_test.py <subject-dir>` — it loads, says hello, shows its words in every language, reports right and wrong
    results for the solutions and wrong attempts you listed, and no console errors (a bench: `measure` / `diagnose` steps, the
    readings in the log, the right and the tempting wrong diagnosis; docs/INTERACTIVE_AUTHORING.md).

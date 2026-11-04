@@ -179,7 +179,9 @@ same sandboxed frame and CSP as `html-app@1` (never loaded from h5p.org). H5P's 
 `result {score, passed}`; its saved user state maps to `state`. Validators allow-list the content types and refuse outside links and
 scripts outside the libraries; every item keeps a fallback; its own texts need a version per pack language. Because an item with its
 libraries often exceeds 512 KB, `.h5p` files travel beside the pack like the source files (the `noema_finish_upload` list), sha256-checked.
-P4b starts with a spike: the player in the opaque sandbox, offline, in Chromium, Firefox and WebKit.
+P4b starts with a spike: the player in the opaque sandbox, offline, in Chromium, Firefox and WebKit. **Status: implemented** (§10
+"As built — P4b"; docs/INTERACTIVE_H5P.md). Licence (the owner, 2026-11-04): ship it, with the H5P core's readable GPL-3.0 source
+beside the player and its notice; on by default.
 
 **D12 · The brief's §14 extension points are built (the owner, 2026-11-04 17:35; phase P6, after P1–P4b are done and verified).**
 `wasm-module@1` (precompiled WASM in a worker) and `external-embed@1` (allow-listed third-party frames with licence/credit metadata, opt-in,
@@ -313,3 +315,39 @@ mode, audits. The content work (the electronics Roadmap) starts only after the h
 * **Found on the way:** the harness's host page replaced `{name}` placeholders with a regex written inside a template literal, which
   lost its backslashes (no host string with a placeholder was ever filled); with four activities in one section the two live slots
   are taken by the first ones in view, so the app test presses Start on a parked block (as a learner would).
+
+## 10. As built — P4b (`h5p@1`, 2026-11-04)
+
+* **The runtime** is the spike's (`engine/src/38_activity_h5p.js`, `window.NoemaH5P`: unzip, check, load, mount; the vendored player
+  `engine/vendor/h5p/3.8.2/`), unchanged in its security model: the item frame is opaque, offline, scripts by hash, inside the
+  navigation-blocking wrapper; xAPI → `result` / `event` / `state` (docs/INTERACTIVE_H5P.md §3). It registers itself whenever it is
+  in the engine (on by default; `NOEMA_CONFIG.activities['h5p@1'] = false` turns it off).
+* **One rule set, two languages.** `tools/activities.py` and `engine/packcheck.js` accept `h5p@1` with the same messages
+  (`tests/activities.js` compares them): `entry` = `activities/<id>/item.h5p`, `sha256` + `bytes` (≤ 100 MB) + `fallback` required,
+  no `html`, `strings` optional, `h5pByLocale` keys checked against the pack's languages and one required per translation. The
+  package rules run on the file through `tools/h5p_check.py` (`check_h5p_packages`) and `NoemaH5P.check` (`checkActivityPackages`,
+  async: the connector and the app load `38_activity_h5p.js` beside packcheck.js; in Node it loads with `window = globalThis`), against
+  one allow-list (`tools/h5p_allow.json`, the engine's copy checked equal). Parity is checked on 16 packages (the fixtures and hostile
+  variants, a wrong sha256 / size, a missing file, translations).
+* **The file travels beside the pack**, never inline in the registry: the `.noema.zip` entry `activities/<id>/item.h5p` (stored, byte
+  for byte; `make_pack.py`, the app's Export and the job bundles), the account path `<uid>/packs/<subject>/<entry>` (the connector's
+  `noema_finish_upload` lists the missing files with curl commands and checks size, sha256 and the package rules before it accepts
+  the pack; the app's upload puts it at the same path), IndexedDB `noema-files` on the device (key `act|<account>|<subject>|<sha256>`),
+  and beside `pack.js` on the website (`build.py site`). When a pack opens, `NoemaSrcFiles.wireActivities` gives each item a
+  non-enumerable loader `act.h5p` (never stored, synced or exported) and reads the file early (device → account → URL), verified by
+  sha256. The host page reads it; the frame never fetches. Import, job results and deleting a subject handle the files too.
+* **Languages** are the item's own `content.json` translated (`activities/<id>/content.<locale>.json`, inline in `h5pByLocale`;
+  optional `l10n.<locale>.json`); another whole package per language stays possible (`{h5p, sha256}`).
+* **The one-file bundle** inlines the player and every h5p@1 file up to `NOEMA_H5P_INLINE_MAX` (2 MB) as base64 (a non-enumerable
+  `h5p`); a bigger one gets `null` and shows its fallback.
+* **Toolkit:** `activity_new.py --runtime h5p@1 [--from FILE.h5p]` (reference activity `planets-quiz`, from the CC0 fixture, in
+  English, Greek and Russian), `activity_lint.py` runs the package rules, `activity_test.py` / `activity_preview.py` play the item
+  through the harness in every language (the player and runtime ship in the skill zip with `h5p_check.py` and `h5p_allow.json`).
+* **Licence:** the H5P core (h5p/h5p-php-library, Joubel / H5P Group) is GPL-3.0. `frame.bundle.js`, the tested build, is kept as
+  the code that runs; its readable source (the unminified core files and jQuery of h5p-standalone v3.8.2, `src/frame.ts` and
+  `webpack.common.js`) is vendored beside it in `engine/vendor/h5p/3.8.2/source/` with the GPL-3.0 text, each file pinned by sha256 in
+  `tools/fetch_h5p.py`; `LICENSE-NOTICE.txt` says who, what, where the source is and that the core runs only in its own sandboxed
+  frame. jQuery and h5p-standalone keep their MIT notices; the content-type libraries come inside each package with their own.
+* **Not done:** a pack shared by link does not carry its `.h5p` files (the receiver sees the fallbacks); the `fetch`/XHR shim for
+  library assets asked for by URL (SingleChoiceSet's sounds); QuestionSet, InteractiveVideo, BranchingScenario and
+  CoursePresentation are allowed but not yet tested.

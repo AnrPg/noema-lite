@@ -1,4 +1,4 @@
-/* The h5p@1 runtime (engine/src/38_activity_h5p.js, docs/activities-dev/h5p.md, docs/adr/001 D11), in real browsers, with a stub host
+/* The h5p@1 runtime (engine/src/38_activity_h5p.js, docs/INTERACTIVE_H5P.md, docs/adr/001 D11), in real browsers, with a stub host
    like skill/noema-pack-builder/scripts/activity_harness.js (ACT.registerRuntime stubbed, ACTP taken from 32_activities.js):
      1. the rules: tools/h5p_allow.json = NoemaH5P.ALLOW; tools/h5p_check.py and NoemaH5P.check give the same errors on the same
         packages (the fixtures and hostile variants: outside links, YouTube, a library off the list or refused, a .php file, a script in
