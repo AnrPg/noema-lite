@@ -467,7 +467,7 @@ ok(/'engine\/src\/35_simexpr\.js', 'engine\/src\/36_engine_circuit\.js', 'engine
   ok(/ACT\.simView\(box/.test(ui) && /check: \{ python: true \}/.test(ui) && !/innerHTML|eval\s*\(|new\s+Function/.test(ui), 'py-module@1 renders through the sim-spec view (its spec checked with python: true), no HTML from the pack');
   ok(/setAttribute\('sandbox', 'allow-scripts'\)/.test(rt) && /connect-src 'none'/.test(rt) && /!window\.NOEMA_BUNDLE/.test(rt), 'the Python runner: sandbox exactly allow-scripts, no network; not available in the one-file bundle');
   const core = fs.readFileSync(path.join(ROOT, 'engine', 'src', '32_activities.js'), 'utf8');
-  ok(/'py-module@1': false/.test(core), "py-module@1 is off by default (staged rollout, ADR 001 §4): NOEMA_CONFIG.activities['py-module@1'] = true switches it on");
+  ok(/'py-module@1': true/.test(core) && /!window\.NOEMA_BUNDLE && window\.isSecureContext && \/\^https\?:\$\//.test(rt), "py-module@1 is on by default (ADR 001 §10: tested in Chromium, Firefox and WebKit); NOEMA_CONFIG.activities['py-module@1'] = false switches it off; it still refuses itself in the one-file bundle and on file://");
   const d = fs.mkdtempSync(path.join(require('os').tmpdir(), 'noema-actnew-'));
   const r = cp.spawnSync('python3', [path.join(ROOT, 'skill', 'noema-pack-builder', 'scripts', 'activity_new.py'), d, 'my-py', '--from', 'py-filter'], { encoding: 'utf8' });
   const reg = fs.existsSync(path.join(d, 'activities', 'activities.json')) ? JSON.parse(fs.readFileSync(path.join(d, 'activities', 'activities.json'), 'utf8')) : null;

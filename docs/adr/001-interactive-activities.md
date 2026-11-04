@@ -210,7 +210,7 @@ step with its check in `tools/pipelines/`), and the toolkit scripts `activity_ne
   * **Anti-corruption layer:** `engine/src/33_activity_protocol.js` is the only code that reads messages from an activity: JSON shape per
     `type` (a small schema checker generated from the JSON Schema files, since the engine has no build step for Ajv), size / rate limits,
     strikes, never `innerHTML`.
-  * **Feature flags:** `NOEMA_CONFIG.activities = { 'html-app@1': true, 'sim-spec@1': true, 'py-module@1': false }` for staged rollout.
+  * **Feature flags:** `NOEMA_CONFIG.activities = { 'html-app@1': true, 'sim-spec@1': true, 'py-module@1': false }` for staged rollout (as built: every runtime on by default, py-module@1 since batch 1, §10).
 * **Runtimes:** `engine/activities/html_app.js` (Tier A), `engine/activities/sim_spec.js` + `engine/activities/sim_worker.js` and engines in
   `engine/activities/engines/` (Tier B; `registerEngine()`), `engine/activities/py_runner.js` (Tier C).
 * **Schemas (schema-first, JSON Schema 2020-12)** in `tools/schemas/`: `noema.activities.v1.schema.json`, `noema.activity-protocol.v1.schema.json`,
@@ -332,9 +332,10 @@ mode, audits. The content work (the electronics Roadmap) starts only after the h
   same messages — tests/activities.js compares them on 33 items): a top-level `def step(` is required, no network, `js`/`pyodide_js`,
   `micropip` or `input()`, every imported package declared, ≤ 256 KB; `while True` and `time.sleep` warn. `make_pack.py` puts main.py
   inline and adds `runtime:py-module@1` to `pack.requires`; `unpack.py` writes main.py and spec.json back byte for byte.
-* **The flag (ADR §4 "Feature flags").** `NOEMA_CONFIG.activities['py-module@1']` stays **false by default**, as §4 planned for a
-  staged rollout: the runtime is complete and tested, but switching it on is the owner's call once the deploy carries the Python files.
-  With the flag off the item shows its fallback ("cannot run in this version") and the Settings line is hidden; with it on,
+* **The flag (ADR §4 "Feature flags").** `NOEMA_CONFIG.activities['py-module@1']` was false at first for the staged rollout; it is
+  **true by default** since batch 1 (P2–P4b together), once tests/activities_py.js, tests/activities_app.js and the harness passed in
+  Chromium, Firefox and WebKit and the deploy carries the Python files (the owner asked for Python with offline support).
+  `false` in config.js switches it off: the item shows its fallback ("cannot run in this version") and the Settings line is hidden; on,
   `ACT.enabled()` also needs `NoemaPy.available()` (an http(s) secure origin with Cache Storage, a Worker, WebAssembly, not
   `window.NOEMA_BUNDLE`), otherwise the fallback says Python works only on the website.
 * **The learner's side.** One quiet line above the controls: the first-use size from the manifest (`NoemaPy.need`), the

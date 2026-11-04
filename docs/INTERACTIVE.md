@@ -16,7 +16,7 @@ learner try it.
 |---|---|---|
 | `html-app@1` (tier A) | one self-contained HTML file (inline scripts and styles, pictures as `data:` URIs) in a sandboxed frame | **available** |
 | `sim-spec@1` (tier B) | a JSON spec (controls, formulas, readouts, plots) run by the app's own trusted engines — no code in the pack (§12) | **available** — engines `formula@1` (formulas) and `circuit-mna@1` (circuits, transients and fault-finding benches: §12.6–12.7) |
-| `py-module@1` (tier C) | Python (`main.py`, Pyodide + numpy, scipy; allow-listed extras through micropip) in a sandboxed worker; the app draws a sim-spec@1 spec with Python's outputs (`docs/INTERACTIVE_PYTHON.md`) | **available** on the website, behind the flag `NOEMA_CONFIG.activities['py-module@1']` (off by default); 17 MB (numpy) / 37 MB (scipy) once, offline after the first use, never in the one-file bundle or on `file://` |
+| `py-module@1` (tier C) | Python (`main.py`, Pyodide + numpy, scipy; allow-listed extras through micropip) in a sandboxed worker; the app draws a sim-spec@1 spec with Python's outputs (`docs/INTERACTIVE_PYTHON.md`) | **available** on the website, on by default (`NOEMA_CONFIG.activities['py-module@1'] = false` turns it off); 17 MB (numpy) / 37 MB (scipy) once, offline after the first use, never in the one-file bundle or on `file://` |
 | `h5p@1` (tier B) | an ordinary `.h5p` package (quiz, drag and drop, fill in the blanks, mark the words, dialog cards…) played by the app's own H5P player in the same sandbox, no network (docs/INTERACTIVE_H5P.md) | **available** — on by default; the file travels beside the pack |
 
 `make_pack.py` refuses a runtime that this version of the app does not run yet.

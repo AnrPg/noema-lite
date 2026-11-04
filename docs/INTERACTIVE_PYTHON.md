@@ -27,9 +27,9 @@ allow-listed extras), as decided in `docs/adr/001-interactive-activities.md` D7/
   connection. Connect once, or prepare Python ahead in Settings." and a Restart button.
 * **Never in the one-file bundle and never on `file://`**: the fallback with "This activity runs Python, which works only on the
   website, not in a downloaded copy of the app." (no request is made). Write the fallback text as carefully as for any activity.
-* The runtime is behind a **feature flag**, off by default (ADR §4 "staged rollout"): `NOEMA_CONFIG.activities['py-module@1'] = true`
-  in `config.js` switches it on. Off, a py-module@1 activity shows its fallback ("cannot run in this version") and the Settings line
-  is not shown.
+* The runtime is **on by default** (ADR §10; it passed its tests in Chromium, Firefox and WebKit). `NOEMA_CONFIG.activities['py-module@1'] = false`
+  in `config.js` switches it off: a py-module@1 activity then shows its fallback ("cannot run in this version") and the Settings line
+  is not shown. On a deploy without the Python files (a failed fetch) the activity shows its fallback with Restart.
 
 ## 2. Files in the subject folder
 

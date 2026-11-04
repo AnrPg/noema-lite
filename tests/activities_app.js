@@ -55,7 +55,7 @@ async function run(name) {
   } else ok(false, 'h5p@1: no .noema.zip beside the pack (tests/activities_pack.py with NOEMA_ACT_PACK) or no activities/planets-quiz/item.h5p in it');
   await p.goto('file://' + ROOT + '/index.html?subject=demo-activities'); await wait(1500);
   ok(await p.evaluate(() => SUBJ.id === 'demo-activities' && !!ACT.ITEMS['alias-lab']), 'the pack opens with its activity');
-  ok(await p.evaluate(() => JSON.stringify(checkRequires()) === '["runtime:py-module@1"]'), 'pack.requires: this app has everything the pack needs but Python (file://, and the runtime is off by default)');
+  ok(await p.evaluate(() => JSON.stringify(checkRequires()) === '["runtime:py-module@1"]'), 'pack.requires: this app has everything the pack needs but Python (Python never runs on file://)');
 
   console.log('— the theory block');
   await p.evaluate(() => { location.hash = '#/s/ch01-s01'; }); await wait(600);
@@ -412,7 +412,7 @@ async function circuit(p, ctx, E) {
   ok(E.length === E0, 'no page errors ' + JSON.stringify(E.slice(E0, E0 + 3)));
 }
 /* py-module@1 (docs/INTERACTIVE_PYTHON.md): the reference py-filter over http, from the built site (dist/site) with the pinned Python
-   files (tools/fetch_pyodide.py) and the site's own _headers. The runtime is switched on for the test (the flag is off by default).
+   files (tools/fetch_pyodide.py) and the site's own _headers. The runtime is on by default; the test also forces the flag on, whatever config.js says.
    Checks: the first-use note (sizes from the manifest), the Python sim renders in the sim-spec view, a slider changes Python's outputs,
    the checks grader grades Python's outputs right and wrong, Settings › "Prepare Python for offline" → ready offline (classic and shell),
    offline after prepare (/vendor aborted) it still runs, the Greek words, the one-file bundle and file:// show the fallback. */

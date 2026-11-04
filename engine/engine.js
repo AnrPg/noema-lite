@@ -1561,8 +1561,9 @@ const ACT = (() => {
   const reg = Noema.pack?.activities;
   const ITEMS = {}; for (const a of (reg && Array.isArray(reg.items) ? reg.items : [])) if (a && typeof a.id === 'string') ITEMS[a.id] = a;
   const RUNTIMES = {}, GRADERS = {}, ENGINES = {};
-  // py-module@1 is off until the owner switches it on (staged rollout, docs/adr/001 §4 "Feature flags"): NOEMA_CONFIG.activities['py-module@1'] = true
-  const flags = () => Object.assign({ 'html-app@1': true, 'py-module@1': false }, window.NOEMA_CONFIG?.activities || {});
+  // every runtime is on unless config.js switches it off (docs/adr/001 §4 "Feature flags"): NOEMA_CONFIG.activities['py-module@1'] = false;
+  // py-module@1 still needs NoemaPy.available() (the website: never file:// or the one-file bundle)
+  const flags = () => Object.assign({ 'html-app@1': true, 'py-module@1': true }, window.NOEMA_CONFIG?.activities || {});
   /** a runtime that is registered, switched on and can run here (available(): py-module@1 only on the website, never file:// or the one-file bundle) */
   const enabled = id => !!(Object.prototype.hasOwnProperty.call(RUNTIMES, id) && flags()[id] !== false && (typeof RUNTIMES[id].available !== 'function' || RUNTIMES[id].available()));
   /** the capabilities of this app (pack.requires): the core + every runtime that is registered and switched on */
