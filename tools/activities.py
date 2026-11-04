@@ -4,13 +4,15 @@ The SAME rules as engine/packcheck.js checkActivities (tests/activities.js runs 
   load_activities(subject_dir) → (registry | None, problems)   activities/activities.json + every bundle and string table
   check_activities(pack) → (errors, warnings)                   the registry, its references from blocks / sim exercises, pack.requires
   lint_html(html) → (errors, warnings)                         what a mini-app (html-app@1) may not contain
+  lint_python(src, packages) → (errors, warnings)              what the Python of a py-module@1 activity may not do (docs/INTERACTIVE_PYTHON.md)
 
 In the subject folder:
   activities/activities.json            {"format": "noema.activities/v1", "items": [{id, runtime, entry, stateVersion, fallback, …}]}
   activities/<id>/app.html              the bundle of an html-app@1 activity (entry)
   activities/<id>/spec.json             the spec of a sim-spec@1 activity (entry): data the app's own engines run, no code
+  activities/<id>/main.py               the Python of a py-module@1 activity (entry), with its spec.json beside it (no engine: step() computes)
   activities/<id>/strings.<locale>.json the activity's words, one file per language, the same keys in each
-In the pack (make_pack.py): pack.activities = {"format", "items": [{…, "html": <the bundle>, "sha256", "bytes" | "spec": {…}, "strings": {locale: {key: text}}}]}
+In the pack (make_pack.py): pack.activities = {"format", "items": [{…, "html": <the bundle>, "sha256", "bytes" | "spec": {…} | "python": <main.py>, "sha256", "bytes", "spec", "strings": {locale: {key: text}}}]}
 and pack.requires = ["activities/v1", "runtime:<id>", "engine:<id>" (an engine other than formula@1), …]. Everything is inline, like the
 pictures (ADR D2).
   check_spec(spec, tables) → errors                           a sim-spec@1 spec (docs/INTERACTIVE.md §12): shape, limits, names,
@@ -24,11 +26,30 @@ FORMAT = "noema.activities/v1"
 ID_RE = re.compile(r"^[a-z0-9][a-z0-9-]{1,60}$")
 KEY_RE = re.compile(r"^[a-z][a-zA-Z0-9_.-]{0,63}$")
 LOCALE_RE = re.compile(r"^[a-z]{2,3}(-[A-Z][a-z]{3})?(-(?:[A-Z]{2}|\d{3}))?$")
-RUNTIMES = {"html-app@1", "sim-spec@1"}                     # runtimes this version runs
-LATER = {"py-module@1": "P4", "h5p@1": "P4b"}               # known, arriving in a later version (docs/adr/001 §7)
+RUNTIMES = {"html-app@1", "sim-spec@1", "py-module@1"}      # runtimes this version runs
+LATER = {"h5p@1": "P4b"}                                    # known, arriving in a later version (docs/adr/001 §7)
 CAPS = {"state", "events", "resize", "result", "hints", "announce"}
 GRADE_MODES = {"reported", "checks"}
-CHECKS_RUNTIMES = {"sim-spec@1"}                            # runtimes whose values the app can see (the checks grader needs them)
+CHECKS_RUNTIMES = {"sim-spec@1", "py-module@1"}             # runtimes whose values the app can see (the checks grader needs them)
+SPEC_RUNTIMES = {"sim-spec@1", "py-module@1"}               # runtimes the app draws from a spec (py-module@1: its outputs come from Python's step())
+# py-module@1 (docs/INTERACTIVE_PYTHON.md): Python with numpy, scipy and the allow-listed extras — the same lists in engine/packcheck.js;
+# PY_EXTRAS = the names of tools/pywheels_allow.json (tests/activities.js checks that they agree)
+PY = "py-module@1"
+PY_BASE = ["numpy", "scipy"]
+PY_EXTRAS = ["quantiphy"]
+PY_MAX = 256 * 1024
+PY_STEP = (100, 10000)
+PY_PACKAGES_MAX = 12
+PY_BANNED = [
+    (r"^\s*(?:import\s+js\b|from\s+js\s+import\b|import\s+pyodide_js\b|from\s+pyodide_js\b)", "the browser (js, pyodide_js): Python has no page and no network here; return values from step()"),
+    (r"\bpyodide\.http\b|\bpyfetch\b|\bopen_url\b|^\s*(?:import|from)\s+(?:urllib|requests|http\.client|socket|ssl)\b", "a network call: a Python activity has no network"),
+    (r"^\s*(?:import|from)\s+micropip\b", 'micropip: list the package in "packages" instead (only the allow-listed ones)'),
+    (r"(?:^|[^A-Za-z0-9_.])input\s*\(", "input(): there is no console; the learner uses the controls of the spec"),
+]
+PY_WARN = [
+    (r"^\s*while\s+True\s*:", "while True: each step() has a budget (stepMs, 3 s by default) and is stopped after it"),
+    (r"\btime\.sleep\s*\(", "time.sleep(): a step blocks the learner while it sleeps; return at once"),
+]
 # sim-spec@1 (docs/INTERACTIVE.md §12): the SAME rules as engine/packcheck.js checkSimSpec
 SPEC_FORMAT = "noema.sim-spec/v1"
 DEFAULT_ENGINE = "formula@1"
@@ -106,6 +127,23 @@ def lint_html(html):
     if len(words) >= 3: W.append(f"visible text in the HTML (“{' '.join(words[:6])}…”): put every word in the string tables and show it with noema.t(key)")
     return E, W
 
+def lint_python(src, packages=None):
+    """→ (errors, warnings) of a py-module@1 activity's Python file (the same list as engine/packcheck.js lintPython)"""
+    E, W = [], []
+    if not isinstance(src, str) or not src.strip(): return ["the Python file is empty"], W
+    n = len(src.encode("utf-8"))
+    if n > PY_MAX: E.append(f"the Python file is {n // 1024} KB (at most {PY_MAX // 1024} KB)")
+    if not re.search(r"^def\s+step\s*\(", src, re.M): E.append("the Python file defines no step(inputs, state) at the top level")
+    for pat, why in PY_BANNED:
+        m = re.search(pat, src, re.M)
+        if m: E.append(f"{why} — found “{m.group(0).strip()[:40]}”")
+    for pat, why in PY_WARN:
+        if re.search(pat, src, re.M): W.append(why)
+    decl = set(packages if isinstance(packages, list) else [])
+    for name in PY_BASE + PY_EXTRAS:
+        if name not in decl and re.search(r"^\s*(?:import|from)\s+" + name + r"\b", src, re.M): E.append(f'the Python file imports {name}: list it in "packages"')
+    return E, W
+
 def sha256(text): return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 def load_activities(sdir):
@@ -124,6 +162,17 @@ def load_activities(sdir):
             if not f or not os.path.exists(f): probs.append(f"ERROR activity {aid}: entry {entry!r} not found"); a["html"] = ""
             else: a["html"] = open(f, encoding="utf-8", newline="").read()
             a["sha256"] = sha256(a["html"]); a["bytes"] = len(a["html"].encode("utf-8"))
+        elif a.get("runtime") == PY:   # Python (activities/<id>/main.py) + the spec the app draws (activities/<id>/spec.json)
+            if not _s(entry): entry = a["entry"] = f"activities/{aid}/main.py"
+            f = os.path.join(sdir, entry)
+            if not os.path.exists(f): probs.append(f"ERROR activity {aid}: entry {entry!r} not found"); a["python"] = ""
+            else: a["python"] = open(f, encoding="utf-8", newline="").read()
+            a["sha256"] = sha256(a["python"]); a["bytes"] = len(a["python"].encode("utf-8"))
+            f = os.path.join(sdir, "activities", aid, "spec.json")
+            if not os.path.exists(f): probs.append(f"ERROR activity {aid}: activities/{aid}/spec.json not found")
+            else:
+                try: a["spec"] = json.load(open(f, encoding="utf-8"))
+                except Exception as e: probs.append(f"ERROR activity {aid}: activities/{aid}/spec.json: {e}")
         elif a.get("runtime") == "sim-spec@1":
             if not _s(entry): entry = a["entry"] = f"activities/{aid}/spec.json"
             f = os.path.join(sdir, entry)
@@ -166,7 +215,7 @@ def fallback_media(reg):
 
 def hash_part(reg):
     """what of the activities goes into pack.version: each bundle's sha256, its strings and its settings"""
-    return {a.get("id"): {k: v for k, v in a.items() if k != "html"} for a in (reg or {}).get("items") or [] if isinstance(a, dict)}
+    return {a.get("id"): {k: v for k, v in a.items() if k not in ("html", "python")} for a in (reg or {}).get("items") or [] if isinstance(a, dict)}
 
 def check_activities(pack, translations=None):
     """→ (errors, warnings) of pack.activities, the blocks and sim exercises that use them, and pack.requires.
@@ -184,7 +233,7 @@ def check_activities(pack, translations=None):
             if aid in items: E.append(f"activity {aid}: duplicate id"); continue
             items[aid] = a; w = f"activity {aid}"
             rt = a.get("runtime")
-            if rt in LATER: E.append(f"{w}: runtime {rt} arrives in a later version of the app ({LATER[rt]}); use html-app@1 or sim-spec@1 for now")
+            if rt in LATER: E.append(f"{w}: runtime {rt} arrives in a later version of the app ({LATER[rt]}); use html-app@1, sim-spec@1 or py-module@1 for now")
             elif rt not in RUNTIMES: E.append(f"{w}: unknown runtime {rt!r} (one of {', '.join(sorted(RUNTIMES))})")
             if not (isinstance(a.get("stateVersion"), int) and a["stateVersion"] >= 1): E.append(f"{w}: stateVersion must be a whole number >= 1")
             caps = a.get("capabilities") or []
@@ -203,6 +252,26 @@ def check_activities(pack, translations=None):
             elif rt == "sim-spec@1":
                 if "spec" not in a: E.append(f"{w}: the spec (activities/{aid}/spec.json) is missing")
                 else: E += [f"{w}: {m}" for m in check_spec(a["spec"], a.get("strings") if isinstance(a.get("strings"), dict) else None)]
+            elif rt == PY:
+                pk = [] if a.get("packages") is None else a.get("packages"); allowed = PY_BASE + PY_EXTRAS
+                if not (isinstance(pk, list) and len(pk) <= PY_PACKAGES_MAX and all(isinstance(x, str) for x in pk)): E.append(f"{w}: packages must be a list of names ({', '.join(allowed)})")
+                else:
+                    for x in pk:
+                        if x not in allowed: E.append(f"{w}: package {x!r} is not available (numpy, scipy and the allow-listed extras: {', '.join(PY_EXTRAS)})")
+                    if len(set(pk)) != len(pk): E.append(f"{w}: packages lists a name twice")
+                    ex = [x for x in pk if x in PY_EXTRAS]
+                    if ex and a.get("requiresNetwork") is not True: E.append(f'{w}: an extra package ({", ".join(ex)}) is downloaded the first time: set "requiresNetwork": true')
+                if a.get("requiresNetwork") is not None and not isinstance(a.get("requiresNetwork"), bool): E.append(f"{w}: requiresNetwork must be true or false")
+                sm = a.get("stepMs")
+                if sm is not None and not (isinstance(sm, int) and not isinstance(sm, bool) and PY_STEP[0] <= sm <= PY_STEP[1]): E.append(f"{w}: stepMs is a whole number {PY_STEP[0]}–{PY_STEP[1]} (the budget of one step(), in ms)")
+                src = a.get("python")
+                if not isinstance(src, str): E.append(f"{w}: the Python file (activities/{aid}/main.py) is missing")
+                else:
+                    le, lw = lint_python(src, pk if isinstance(pk, list) else []); E += [f"{w}: {m}" for m in le]; W += [f"{w}: {m}" for m in lw]
+                    if a.get("sha256") is not None and a.get("sha256") != sha256(src): E.append(f"{w}: sha256 does not match the Python file")
+                    if a.get("bytes") is not None and a.get("bytes") != len(src.encode("utf-8")): E.append(f"{w}: bytes does not match the Python file")
+                if "spec" not in a: E.append(f"{w}: the spec (activities/{aid}/spec.json: the controls, readouts and plots the app draws) is missing")
+                else: E += [f"{w}: {m}" for m in check_spec(a["spec"], a.get("strings") if isinstance(a.get("strings"), dict) else None, python=True)]
             st = a.get("strings")
             if not isinstance(st, dict) or not st: E.append(f"{w}: strings {{locale: {{key: text}}}} are required (an activity shows no words of its own)")
             else:
@@ -251,14 +320,14 @@ def check_sim(e, items):
     a = items.get(e.get("activity")) if isinstance(e.get("activity"), str) else None
     a = a if isinstance(a, dict) else None
     rt = a.get("runtime") if a else None
-    spec = a.get("spec") if a and rt == "sim-spec@1" and isinstance(a.get("spec"), dict) else None
+    spec = a.get("spec") if a and rt in SPEC_RUNTIMES and isinstance(a.get("spec"), dict) else None
     g = e.get("grade")
     if not isinstance(g, dict) or g.get("mode") not in GRADE_MODES: E.append('grade must be {"mode": "reported"} (the activity reports its result) or {"mode": "checks", "checks": [{"expr": …}]} (sim-spec@1)')
     else:
         if g.get("pass") is not None and not (_num(g["pass"]) and 0 < g["pass"] <= 1): E.append("grade.pass must be a number in (0, 1]")
         if g["mode"] == "reported" and rt == "sim-spec@1": E.append('a sim-spec@1 activity reports nothing itself: grade it with {"mode": "checks", "checks": […]}')
         if g["mode"] == "checks":
-            if rt is not None and not (isinstance(rt, str) and rt in CHECKS_RUNTIMES): E.append(f'grade.mode "checks" needs an activity whose values the app can see (sim-spec@1); {rt} reports its own result: use "reported"')
+            if rt is not None and not (isinstance(rt, str) and rt in CHECKS_RUNTIMES): E.append(f'grade.mode "checks" needs an activity whose values the app can see (sim-spec@1, py-module@1); {rt} reports its own result: use "reported"')
             cs = g.get("checks")
             if not (isinstance(cs, list) and 1 <= len(cs) <= SPEC_LIM["checks"]): E.append(f"grade.checks must be a list of 1–{SPEC_LIM['checks']} checks {{expr, label?, weight?}}")
             else:
@@ -289,7 +358,8 @@ def check_sim(e, items):
                     if k == "fault" and fids is not None:   # a bench: the fault of this task (one id), or the ones the seed draws from (a list)
                         if not ((v in fids) if isinstance(v, str) else (isinstance(v, list) and len(v) >= 1 and all(isinstance(x, str) and x in fids for x in v))):
                             E.append("task.params.fault must be the id of a fault of the bench, or a list of them (the seed draws one)")
-                    elif k not in consts: E.append(f"task.params.{k}: not a constant of the spec (a sim-spec@1 task sets only the spec's consts)")
+                    elif k not in consts:
+                        if rt != PY: E.append(f"task.params.{k}: not a constant of the spec (a sim-spec@1 task sets only the spec's consts)")   # py-module@1: Python's init(task, seed) reads the others
                     elif not _num(v): E.append(f"task.params.{k} must be a number")
     h = e.get("hints")
     if h is not None and not (isinstance(h, list) and len(h) <= HINTS_MAX and all(_s(x) for x in h)): E.append(f"hints must be a list of at most {HINTS_MAX} texts")
@@ -315,15 +385,19 @@ def spec_names(spec):
     if isinstance(spec.get("bench"), dict): out += BENCH_NAMES   # a bench's values: for the checks of a sim exercise only (never shown)
     return out
 
-def check_spec(spec, tables=None, engines=None):
-    """→ errors of a sim-spec@1 spec. tables: {locale: {key: text}} (every label key must be in each); engines: the known engine ids."""
+def check_spec(spec, tables=None, engines=None, python=False):
+    """→ errors of a sim-spec@1 spec. tables: {locale: {key: text}} (every label key must be in each); engines: the known engine ids.
+    python: the spec of a py-module@1 activity (its outputs come from Python's step(): no engine, no model, no bench, at least one output)."""
     E = []
     if not isinstance(spec, dict): return ["spec: a JSON object is required (activities/<id>/spec.json)"]
     if len(json.dumps(spec, ensure_ascii=False, separators=(",", ":")).encode("utf-8")) > SPEC_LIM["bytes"]: E.append(f"spec: at most {SPEC_LIM['bytes'] // 1024} KB")
     if spec.get("format") != SPEC_FORMAT: E.append(f'spec: format must be "{SPEC_FORMAT}"')
     for k in sorted(set(spec) - SPEC_KEYS): E.append(f"spec: unknown field {k!r}")
-    eng = spec.get("engine", DEFAULT_ENGINE); known = ENGINES if engines is None else set(engines)
-    if not isinstance(eng, str) or eng not in known: E.append(f"spec: unknown engine {eng!r} (this version knows {', '.join(sorted(known))})")
+    eng = PY if python else spec.get("engine", DEFAULT_ENGINE); known = ENGINES if engines is None else set(engines)
+    if python:
+        if "engine" in spec: E.append("spec.engine: the outputs of a py-module@1 activity come from its Python step(); leave engine out")
+        if "model" in spec: E.append("spec.model: a py-module@1 activity has no engine model (its Python code is the model)")
+    elif not isinstance(eng, str) or eng not in known: E.append(f"spec: unknown engine {eng!r} (this version knows {', '.join(sorted(known))})")
     if eng == DEFAULT_ENGINE and "model" in spec: E.append("spec: model configures another engine; formula@1 has none")
     if spec.get("model") is not None and not isinstance(spec["model"], dict): E.append("spec: model must be an object")
     keys = set(); seen = set()
@@ -387,6 +461,7 @@ def check_spec(spec, tables=None, engines=None):
         if name(d.get("id"), w + ".id"): names.append(d["id"])
     in_names = list(names)   # what an engine's inputs may use: consts, params, derived
     os_ = spec.get("outputs"); series = []
+    if python and not (isinstance(os_, list) and os_): E.append("spec.outputs: list what step() returns, at least one {id, kind: scalar | series}")
     if os_ is not None:
         if eng == DEFAULT_ENGINE: E.append("spec.outputs come from an engine; formula@1 has none (use derived)")
         elif not (isinstance(os_, list) and len(os_) <= SPEC_LIM["outputs"]): E.append(f"spec.outputs must be a list of at most {SPEC_LIM['outputs']} {{id, kind}}")

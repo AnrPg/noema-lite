@@ -1,0 +1,14 @@
+{
+ "format": "noema.pywheels-allow/v1",
+ "about": "The only extra Python packages a py-module@1 activity may install (micropip, our own pinned index; never open PyPI). Each entry: a pure-Python wheel, its sha256 and size, no dependencies of its own (list each dependency as its own entry). Add one by review only; tools/fetch_pyodide.py downloads and checks them into <site>/vendor/pywheels/.",
+ "wheels": {
+  "quantiphy": {
+   "file": "quantiphy-2.23-py3-none-any.whl",
+   "url": "https://files.pythonhosted.org/packages/2c/7c/87ef9a2a7f0b8498cb72ba2a74612ce44996b647b218516c520c23acd66f/quantiphy-2.23-py3-none-any.whl",
+   "sha256": "e6924e1ae0942b96bbb5f41fb73578247fdcb1a22792e1505764b88e39864156",
+   "bytes": 43630,
+   "license": "MIT",
+   "why": "physical quantities with SI prefixes and units (4.7 kΩ, 1.59 kHz) for electronics activities"
+  }
+ }
+}

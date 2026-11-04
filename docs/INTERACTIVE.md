@@ -16,7 +16,7 @@ learner try it.
 |---|---|---|
 | `html-app@1` (tier A) | one self-contained HTML file (inline scripts and styles, pictures as `data:` URIs) in a sandboxed frame | **available** |
 | `sim-spec@1` (tier B) | a JSON spec (controls, formulas, readouts, plots) run by the app's own trusted engines — no code in the pack (§12) | **available** — engines `formula@1` (formulas) and `circuit-mna@1` (circuits, transients and fault-finding benches: §12.6–12.7) |
-| `py-module@1` (tier C) | Python (Pyodide + numpy, scipy; allow-listed extras through micropip) in a worker | later (P4); offline after the first use, never in the one-file bundle |
+| `py-module@1` (tier C) | Python (`main.py`, Pyodide + numpy, scipy; allow-listed extras through micropip) in a sandboxed worker; the app draws a sim-spec@1 spec with Python's outputs (`docs/INTERACTIVE_PYTHON.md`) | **available** on the website, behind the flag `NOEMA_CONFIG.activities['py-module@1']` (off by default); 17 MB (numpy) / 37 MB (scipy) once, offline after the first use, never in the one-file bundle or on `file://` |
 | `h5p@1` | an ordinary `.h5p` package (quiz, drag and drop, interactive video, branching…) played by the app's own H5P player in the same sandbox | later (P4b) |
 
 `make_pack.py` refuses a runtime that this version of the app does not run yet.
@@ -29,6 +29,7 @@ activities/
 └── <activity-id>/
     ├── app.html                    the bundle (html-app@1): everything inline, at most 512 KB (aim for <= 256 KB)
     ├── spec.json                   or the spec (sim-spec@1): data only, at most 64 KB (§12)
+    ├── main.py                     or the Python (py-module@1, at most 256 KB) + its spec.json (docs/INTERACTIVE_PYTHON.md)
     ├── strings.en.json             the activity's words, one table per language: {"key": "text with {vars}"}
     ├── strings.el.json
     └── strings.ru.json             (every language the pack is read in: its own + each translation)
@@ -38,7 +39,9 @@ media/<still>.svg|png               the fallback picture (a normal pack picture 
 `make_pack.py` puts each bundle **inline** in the pack (like the pictures), with its `sha256` and `bytes` (a spec as `spec`), and
 the string tables under `strings`; it writes `pack.requires` (+ `engine:<id>` for an engine other than the built-in `formula@1`)
 and `counts.activities`. `unpack.py` gives the folder back. `python3 activity_new.py <subject-dir> <id>` starts one from the
-reference activity alias-lab; `--runtime sim-spec@1` from rc-lowpass (an RC low-pass filter).
+reference activity alias-lab; `--runtime sim-spec@1` from rc-lowpass (an RC low-pass filter); `--from py-filter` from the Python
+reference (py-module@1: `main.py` inline as `python` with its `sha256` and `bytes`, its spec as `spec`, `runtime:py-module@1` in
+`pack.requires`).
 
 ## 3. The registry — `activities/activities.json`
 
@@ -84,6 +87,7 @@ reference activity alias-lab; `--runtime sim-spec@1` from rc-lowpass (an RC low-
 - `grade.mode`: `"reported"` (html-app@1) — the activity calls `noema.result({score, passed})`; **Check** grades with the last
   result (nothing reported yet → Check does nothing). `"checks"` (sim-spec@1) — the app evaluates the rules itself (§12.5);
   it is refused for an html-app, whose values the app cannot see, and `"reported"` is refused for a sim-spec, which reports nothing.
+  A py-module@1 activity takes either: `checks` on Python's outputs, or `reported` with `noema.result(score, passed)` from Python.
 - `hints` (at most 6): shown one by one under the activity; each one costs: the score × 0.85 per hint, never below × 0.5. A hint leads to the next good question, never to the answer.
 - `reveal`: shown after a right answer, `explain` as for every exercise.
 - Quality rules: `sim` is **opt-in** — it counts for a chapter only when `fits.types` of its map names it, and then at least
@@ -166,9 +170,14 @@ from 320 px wide with no horizontal scroll (docs/UI_MAP.md "Small screens"), tou
 
 ## 10. Offline
 
-`html-app@1` and `sim-spec@1` work offline (everything is inline; the engines are part of the app). `py-module@1` (later) needs the Pyodide files (and numpy, scipy) from the network the first
-time; after that they are kept on the device (Settings can prepare them ahead), as are packages installed through micropip. It is
-never available in the one-file bundle: its fallback shows there.
+`html-app@1` and `sim-spec@1` work offline (everything is inline; the engines are part of the app). `py-module@1` needs the
+Pyodide files (about 17 MB with numpy, 37 MB with scipy) from the website the first time; a service worker
+(`engine/pyodide-sw.js`) then keeps them on the device (`navigator.storage.persist()` is asked), as are the allow-listed extras.
+Settings › Data and sync (classic: Account › Backup) has "Prepare Python for offline" with progress, the size and what is cached.
+Offline without the files, and always in the one-file bundle and on `file://`, the activity shows its fallback with the reason.
+Deployment: `python3 tools/fetch_pyodide.py --site dist/site` after `python3 tools/build.py site` (Netlify does it, and a failed
+download never breaks the deploy); `build_site` writes the headers (`Service-Worker-Allowed`, immutable caching, `application/wasm`)
+into `_headers` — `docs/INTERACTIVE_PYTHON.md` §7.
 
 ## 11. Before you deliver — checklist
 

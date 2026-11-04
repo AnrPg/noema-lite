@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Interactive activities travel inside the pack (html-app@1 alias-lab and sim-spec@1 rc-lowpass) (docs/INTERACTIVE.md, docs/adr/001 D2): a subject folder with activities/ →
+"""Interactive activities travel inside the pack (html-app@1 alias-lab, sim-spec@1 rc-lowpass, the circuits, py-module@1 py-filter with its main.py) (docs/INTERACTIVE.md, docs/adr/001 D2): a subject folder with activities/ →
 make_pack.py → pack.activities (bundle inline, sha256, strings per locale) + pack.requires → unpack.py gives the folder back →
 make_pack.py again gives the same pack.version. And what make_pack.py refuses (missing strings, a network link, an unknown
 activity, a runtime of a later version). Uses the skill zip (dist/noema-pack-builder.zip; built here when missing).
@@ -36,8 +36,12 @@ for cid in CIRC:   # circuit-mna@1: a netlist in the spec; led-bench is a fault-
     cs, cd = os.path.join(ROOT, 'tools', 'activities_examples', cid), os.path.join(sd, 'activities', cid); os.makedirs(cd)
     for f in os.listdir(cs):
         if f.startswith('strings.') or f == 'spec.json': shutil.copy(os.path.join(cs, f), cd)
+PF = os.path.join(ROOT, 'tools', 'activities_examples', 'py-filter')   # py-module@1: Python (main.py) + the spec the app draws
+pd_ = os.path.join(sd, 'activities', 'py-filter'); os.makedirs(pd_)
+for f in os.listdir(PF):
+    if f.startswith('strings.') or f in ('spec.json', 'main.py'): shutil.copy(os.path.join(PF, f), pd_)
 wj(os.path.join(sd, 'activities', 'activities.json'), {'format': 'noema.activities/v1', 'items': [rj(os.path.join(EX, 'activity.json')), rj(os.path.join(RC, 'activity.json'))]
-   + [rj(os.path.join(ROOT, 'tools', 'activities_examples', cid, 'activity.json')) for cid in CIRC]})
+   + [rj(os.path.join(ROOT, 'tools', 'activities_examples', cid, 'activity.json')) for cid in CIRC] + [rj(os.path.join(PF, 'activity.json'))]})
 shutil.copy(os.path.join(EX, 'fallback.svg'), os.path.join(sd, 'media', 'alias-lab-still.svg'))
 shutil.copy(os.path.join(RC, 'fallback.svg'), os.path.join(sd, 'media', 'rc-lowpass-still.svg'))
 mm = rj(os.path.join(sd, 'media', 'media.json'))
@@ -45,6 +49,9 @@ mm['items'].append({'id': 'alias-lab-still', 'file': 'alias-lab-still.svg', 'ori
                     'alt': 'A 7 Hz sine (grey) sampled at 10 Hz (blue dots); the dots lie on a 3 Hz sine (red, dashed).'})
 mm['items'].append({'id': 'rc-lowpass-still', 'file': 'rc-lowpass-still.svg', 'origin': 'plot', 'license': 'own', 'credit': 'noema-lite',
                     'alt': 'The gain of an RC low-pass filter against frequency on a log scale: flat at 0 dB, −3 dB at about 1 kHz, then falling.'})
+shutil.copy(os.path.join(PF, 'fallback.svg'), os.path.join(sd, 'media', 'py-filter-still.svg'))
+mm['items'].append({'id': 'py-filter-still', 'file': 'py-filter-still.svg', 'origin': 'plot', 'license': 'own', 'credit': 'noema-lite',
+                    'alt': 'The gain of an 8-sample moving-average filter at 8 kHz against frequency on a log scale: near 0 dB at low frequencies, a deep notch at 1 kHz.'})
 for cid, alt in CIRC.items():
     shutil.copy(os.path.join(ROOT, 'tools', 'activities_examples', cid, 'fallback.svg'), os.path.join(sd, 'media', cid + '-still.svg'))
     mm['items'].append({'id': cid + '-still', 'file': cid + '-still.svg', 'origin': 'plot', 'license': 'own', 'credit': 'noema-lite', 'alt': alt})
@@ -79,8 +86,16 @@ SIM4 = {'id': 'ch01-e903', 'type': 'sim', 'section': 'ch01-s01', 'difficulty': 3
         'hints': ['Measure from the supply towards the LED: each voltage to GND clears or blames the part before it.', 'With no current, the voltage on both sides of a healthy part is the same: compare the two legs of the LED.'],
         'reveal': 'The LED is soldered the wrong way round: TP3 is at 5 V and so is the cathode leg, while the anode leg reads 0 V.',
         'explain': 'With no current through the series circuit, every healthy part passes the full 5 V on: the voltage is lost only across the open or blocking part. A reversed LED blocks like an open one, but its legs are swapped, so the 5 V appears on the cathode leg.'}
+BLOCK5 = {'t': 'interactive', 'activity': 'py-filter', 'caption': 'Two digital low-pass filters computed in Python: change the window and the cutoff.'}
+SIM5 = {'id': 'ch01-e904', 'type': 'sim', 'section': 'ch01-s01', 'difficulty': 2, 'tags': ['calc'], 'think': 'apply', 'activity': 'py-filter',
+        'q': 'A signal is sampled at 8 kHz. Choose a moving-average filter that removes a 1 kHz tone (at least 20 dB down) while 300 Hz loses less than 3 dB.',
+        'task': {'seed': 'auto', 'params': {}},
+        'grade': {'mode': 'checks', 'checks': [{'expr': 'att1k <= -20', 'label': 'checkTone', 'weight': 2}, {'expr': 'pass300 >= -3', 'label': 'checkPass'}]},
+        'hints': ['A moving average of N samples has zeros at every multiple of fs/N.', 'Put the first zero on the tone: fs/N = 1 kHz.'],
+        'reveal': 'N = 8: fs/N = 8000/8 = 1 kHz, so the tone falls on the first zero, and 300 Hz loses only about 1.3 dB.',
+        'explain': 'The mean of N samples cancels any sine whose period fits N samples a whole number of times: its zeros are at k·fs/N. A longer window removes the tone too (N = 16 also has a zero at 1 kHz) but its gain falls sooner, so 300 Hz loses about 6 dB.'}
 def put(ch):
-    c = rj(ch); c['sections'][0]['blocks'] += [dict(BLOCK), dict(BLOCK2), dict(BLOCK3), dict(BLOCK4)]; c['exercises'] += [json.loads(json.dumps(x)) for x in (SIM, SIM2, SIM3, SIM4)]; wj(ch, c)
+    c = rj(ch); c['sections'][0]['blocks'] += [dict(BLOCK), dict(BLOCK2), dict(BLOCK3), dict(BLOCK4), dict(BLOCK5)]; c['exercises'] += [json.loads(json.dumps(x)) for x in (SIM, SIM2, SIM3, SIM4, SIM5)]; wj(ch, c)
 put(os.path.join(sd, 'chapters', 'ch01.json')); put(os.path.join(sd, 'translations', 'fr', 'ch01.json'))
 mk = lambda src, out: run(os.path.join(S, 'make_pack.py'), src, os.path.join(T, out))
 pk = lambda out: zipfile.ZipFile(os.path.join(T, out, 'demo-physics.noema.zip'))
@@ -89,13 +104,17 @@ r = mk(sd, 'o1'); check(r.returncode == 0, 'make_pack.py builds a pack with an a
 p = json.loads(pk('o1').read('pack.json'))
 a = (p.get('activities') or {}).get('items', [{}])[0]
 b = next((x for x in p['activities']['items'] if x.get('id') == 'rc-lowpass'), {})
+import hashlib
 html = open(os.path.join(EX, 'app.html'), encoding='utf-8').read()
 check(p['activities']['format'] == 'noema.activities/v1' and a.get('html') == html, 'the bundle is inline in the pack, as written')
-import hashlib
 check(a.get('sha256') == hashlib.sha256(html.encode()).hexdigest() and a.get('bytes') == len(html.encode()), 'sha256 and bytes name the bundle')
 check(sorted(a.get('strings') or {}) == ['el', 'en', 'fr', 'ru'] and a['strings']['el']['signal'] == 'Σήμα', 'the strings of every locale are in the pack')
-check(sorted(p.get('requires') or []) == ['activities/v1', 'engine:circuit-mna@1', 'runtime:html-app@1', 'runtime:sim-spec@1'], 'pack.requires names the core, both runtimes and the circuit engine', str(p.get('requires')))
-check(p['counts'].get('activities') == 4 and 'alias-lab-still' in p['media'] and 'rc-lowpass-still' in p['media'], 'counts.activities; the fallback pictures are pack pictures (and need no exercises)')
+check(sorted(p.get('requires') or []) == ['activities/v1', 'engine:circuit-mna@1', 'runtime:html-app@1', 'runtime:py-module@1', 'runtime:sim-spec@1'], 'pack.requires names the core, the three runtimes and the circuit engine', str(p.get('requires')))
+pyf = next((x for x in p['activities']['items'] if x.get('id') == 'py-filter'), {})
+pysrc = open(os.path.join(PF, 'main.py'), encoding='utf-8', newline='').read()
+check(pyf.get('python') == pysrc and pyf.get('sha256') == hashlib.sha256(pysrc.encode()).hexdigest() and pyf.get('bytes') == len(pysrc.encode()) and pyf.get('spec') == rj(os.path.join(PF, 'spec.json')) and pyf.get('packages') == ['numpy'] and sorted(pyf.get('strings') or {}) == ['el', 'en', 'fr', 'ru'],
+      'py-module@1: main.py is inline in the pack (python, with sha256 and bytes), its spec and packages beside it', str({k: v for k, v in pyf.items() if k != 'python'})[:400])
+check(p['counts'].get('activities') == 5 and 'alias-lab-still' in p['media'] and 'rc-lowpass-still' in p['media'], 'counts.activities; the fallback pictures are pack pictures (and need no exercises)')
 check(b.get('spec') == rj(os.path.join(RC, 'spec.json')) and 'html' not in b and sorted(b.get('strings') or {}) == ['el', 'en', 'fr', 'ru'], 'sim-spec@1: the spec is inline in the pack (data, no bundle), with its strings')
 lb = next((x for x in p['activities']['items'] if x.get('id') == 'led-bench'), {})
 check(lb.get('spec') == rj(os.path.join(ROOT, 'tools', 'activities_examples', 'led-bench', 'spec.json')) and lb['spec']['bench']['diagnosis']['options'][6]['fault'] == 'ledReversed', 'circuit-mna@1: the bench spec is inline, its faults and diagnosis with it')
@@ -105,7 +124,7 @@ if os.environ.get('NOEMA_ACT_PACK'):   # run_e2e.sh: tests/activities_app.js imp
 # the round trip
 w2 = os.path.join(T, 'w2'); r = run(os.path.join(S, 'unpack.py'), os.path.join(T, 'o1', 'demo-physics.noema.zip'), w2)
 u = os.path.join(w2, 'demo-physics')
-check(r.returncode == 0 and '4 activities' in r.stdout, 'unpack.py gives the activities back', r.stdout + r.stderr)
+check(r.returncode == 0 and '5 activities' in r.stdout, 'unpack.py gives the activities back', r.stdout + r.stderr)
 check(open(os.path.join(u, 'activities', 'alias-lab', 'app.html'), encoding='utf-8', newline='').read() == html, 'app.html comes back byte for byte')
 check(rj(os.path.join(u, 'activities', 'alias-lab', 'strings.ru.json')) == rj(os.path.join(EX, 'strings.ru.json')), 'the string tables come back')
 check(rj(os.path.join(u, 'activities', 'rc-lowpass', 'spec.json')) == rj(os.path.join(RC, 'spec.json')), 'spec.json comes back')
@@ -113,6 +132,9 @@ reg = rj(os.path.join(u, 'activities', 'activities.json'))
 check(reg['items'][0].get('entry') == 'activities/alias-lab/app.html' and 'html' not in reg['items'][0], 'activities.json names the entry file (no bundle inside)')
 check(reg['items'][1].get('entry') == 'activities/rc-lowpass/spec.json' and 'spec' not in reg['items'][1], 'activities.json names spec.json (no spec inside)')
 check(rj(os.path.join(u, 'activities', 'led-bench', 'spec.json')) == rj(os.path.join(ROOT, 'tools', 'activities_examples', 'led-bench', 'spec.json')) and rj(os.path.join(u, 'activities', 'rc-transient', 'strings.el.json')) == rj(os.path.join(ROOT, 'tools', 'activities_examples', 'rc-transient', 'strings.el.json')), 'the circuit specs and their strings come back')
+check(open(os.path.join(u, 'activities', 'py-filter', 'main.py'), encoding='utf-8', newline='').read() == pysrc and rj(os.path.join(u, 'activities', 'py-filter', 'spec.json')) == rj(os.path.join(PF, 'spec.json')), 'main.py comes back byte for byte, with its spec.json')
+pr = next(x for x in reg['items'] if x['id'] == 'py-filter')
+check(pr.get('entry') == 'activities/py-filter/main.py' and 'python' not in pr and 'spec' not in pr and pr.get('packages') == ['numpy'], 'activities.json names main.py as the entry (no source, no spec inside), the packages stay', str(pr))
 r = mk(u, 'o2'); check(r.returncode == 0, 'the unpacked folder builds again', r.stdout + r.stderr)
 p2 = json.loads(pk('o2').read('pack.json'))
 check(p2['activities'] == p['activities'] and p2['version'] == p['version'], 'same activities, same pack.version after the round trip')
@@ -123,6 +145,8 @@ r = mk(u, 'o2b'); check(r.returncode == 0 and json.loads(pk('o2b').read('pack.js
 open(os.path.join(u, 'activities', 'alias-lab', 'app.html'), 'a', encoding='utf-8').write('\n<!-- v2 -->\n')
 r = mk(u, 'o3'); p3 = json.loads(pk('o3').read('pack.json'))
 check(r.returncode == 0 and p3['version'] != p['version'], 'a changed bundle changes pack.version')
+open(os.path.join(u, 'activities', 'py-filter', 'main.py'), 'a', encoding='utf-8').write('\n# v2\n')
+r = mk(u, 'o3b'); check(r.returncode == 0 and json.loads(pk('o3b').read('pack.json'))['version'] != p3['version'], 'a changed main.py changes pack.version', r.stdout + r.stderr)
 
 # what is refused
 def refused(name, change, want):
@@ -135,8 +159,16 @@ def unknown(w):
     c = rj(os.path.join(w, 'chapters', 'ch01.json')); c['sections'][0]['blocks'][-1]['activity'] = 'nope'; wj(os.path.join(w, 'chapters', 'ch01.json'), c)
 refused('unknown activity', unknown, "activity 'nope' is not in pack.activities")
 def later(w):
-    r_ = rj(os.path.join(w, 'activities', 'activities.json')); r_['items'][0]['runtime'] = 'py-module@1'; wj(os.path.join(w, 'activities', 'activities.json'), r_)
+    r_ = rj(os.path.join(w, 'activities', 'activities.json')); r_['items'][0]['runtime'] = 'h5p@1'; wj(os.path.join(w, 'activities', 'activities.json'), r_)
 refused('later runtime', later, 'arrives in a later version')
+def py_of(w, f):
+    q = os.path.join(w, 'activities', 'activities.json'); r_ = rj(q); f(next(x for x in r_['items'] if x['id'] == 'py-filter')); wj(q, r_)
+refused('a Python package not on the allow-list', lambda w: py_of(w, lambda x: x.update(packages=['numpy', 'pandas'])), "package 'pandas' is not available")
+refused('an extra package without requiresNetwork', lambda w: py_of(w, lambda x: x.update(packages=['numpy', 'quantiphy'])), 'set "requiresNetwork": true')
+refused('Python that imports what it does not declare', lambda w: open(os.path.join(w, 'activities', 'py-filter', 'main.py'), 'a', encoding='utf-8').write('\nimport scipy.signal\n'), 'imports scipy: list it in "packages"')
+refused('Python that reaches for the network', lambda w: open(os.path.join(w, 'activities', 'py-filter', 'main.py'), 'a', encoding='utf-8').write('\nfrom pyodide.http import pyfetch\n'), 'a Python activity has no network')
+refused('a Python activity without main.py', lambda w: os.remove(os.path.join(w, 'activities', 'py-filter', 'main.py')), "entry 'activities/py-filter/main.py' not found")
+refused('a Python spec that names an engine', lambda w: wj(os.path.join(w, 'activities', 'py-filter', 'spec.json'), {**rj(os.path.join(PF, 'spec.json')), 'engine': 'formula@1'}), 'leave engine out')
 def nofb(w):
     r_ = rj(os.path.join(w, 'activities', 'activities.json')); r_['items'][0]['fallback'] = {'media': 'alias-lab-still', 'text': 'short'}; wj(os.path.join(w, 'activities', 'activities.json'), r_)
 refused('no fallback text', nofb, 'fallback.text')

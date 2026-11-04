@@ -148,20 +148,22 @@
     return s;
   }
 
-  ACT.registerRuntime({
-    id: 'sim-spec@1', version: 1, autoHeight: true,
-    /** → port { send(type, payload), close(), values() } */
-    mount(box, { act, init, onMessage, onFail }) {
+  /** The spec view: controls, readouts, plots (and a bench) drawn by the app from a spec. → port { send(type, payload), close(), values(), reveal(), saveSoon() }
+      host (optional, py-module@1 in 37_activity_py_ui.js): another runtime that computes the outputs itself —
+        { engine: { id }, check: { python: true } (the options of checkSimSpec), runner(spec, opts, onFail) → { run(inputs, done), measure?, close },
+          stateExtra() → fields saved beside the values, decorate(root) → adds its own lines to the view }
+      Without host the outputs come from the spec's engine (ACT.registerEngine). */
+  function simView(box, { act, init, onMessage, onFail }, host) {
       const later = f => Promise.resolve().then(f);   // never call back before the core holds the port
       const out = (type, payload) => { if (!closed) onMessage(ACTP.out(type, payload)); };
       let closed = false;
       const port = { send() { }, close() { closed = true; }, values: () => null };
       const spec = act.spec, tables = act.strings && typeof act.strings === 'object' ? act.strings : null;
-      const engId = spec && typeof spec === 'object' && 'engine' in spec ? spec.engine : 'formula@1';
-      const E = typeof engId === 'string' ? ACT.engine(engId) : null;
+      const engId = host ? host.engine.id : spec && typeof spec === 'object' && 'engine' in spec ? spec.engine : 'formula@1';
+      const E = host ? host.engine : typeof engId === 'string' ? ACT.engine(engId) : null;
       if (!E) { console.warn('[noema] sim-spec', act.id, 'unknown engine', engId); later(() => onFail('unsupported')); return port; }
-      if (spec.bench && !E.bench) { console.warn('[noema] sim-spec', act.id, 'engine', engId, 'takes no measurements'); later(() => onFail('unsupported')); return port; }
-      const probs = window.NoemaPackCheck?.checkSimSpec ? NoemaPackCheck.checkSimSpec(spec, tables, ACT.engines()) : ['the spec checker is not loaded'];
+      if (spec && spec.bench && !E.bench) { console.warn('[noema] sim-spec', act.id, 'engine', engId, 'takes no measurements'); later(() => onFail('unsupported')); return port; }
+      const probs = window.NoemaPackCheck?.checkSimSpec ? NoemaPackCheck.checkSimSpec(spec, tables, host ? null : ACT.engines(), host ? host.check : undefined) : ['the spec checker is not loaded'];
       if (!probs.length && E.check) try { probs.push(...(E.check(spec) || [])); } catch (e) { probs.push(String(e.message || e)); }
       if (probs.length) { console.warn('[noema] sim-spec', act.id, probs.slice(0, 5).join(' | ')); later(() => onFail('spec')); return port; }
 
@@ -252,12 +254,13 @@
       const B = spec.bench ? makeBench() : null;   // a fault-finding bench (§12.7): instruments, the measurement log, the diagnosis
       if (B) root.append(B.el);
       root.append(h('div', { class: 'sim-foot' }, busyNote, reset));
+      host?.decorate?.(root);
       box.append(root);
 
       /* ---------- computing ---------- */
       let env = {}, outputs = {}, paused = false, dirty = false, saveT = null, raf = 0, rev = 0, doneRev = 0;
       const prep = typeof E.prepare === 'function' ? E.prepare(spec, C) : (x => x);   // the engine's expressions → numbers, on this thread
-      const newRunner = () => E.id === 'formula@1' ? null : engineRunner(E, spec, { seed: init.seed >>> 0, task: { ...consts }, faults: B ? B.applied() : undefined }, why => onFail(why));
+      const newRunner = () => E.id === 'formula@1' ? null : (host ? host.runner : engineRunner)(E, spec, { seed: init.seed >>> 0, task: { ...consts }, faults: B ? B.applied() : undefined }, why => onFail(why));
       let runner = newRunner();
       const declared = spec.outputs || [];
 
@@ -465,7 +468,7 @@
           P.holder.replaceChildren(drawPlot(figs[i], p, data, { locale, aria: P.aria, xLabel: P.xLabel, yLabel: P.yLabel }));
         });
       }
-      function saveSoon() { clearTimeout(saveT); saveT = setTimeout(() => { const bs = B?.state(); out('state', { version: init.stateVersion || 1, data: { values: { ...vals }, ...(bs ? { bench: bs } : {}) } }); }, 250); }
+      function saveSoon() { clearTimeout(saveT); saveT = setTimeout(() => { const bs = B?.state(); out('state', { version: init.stateVersion || 1, data: { values: { ...vals }, ...(bs ? { bench: bs } : {}), ...(host?.stateExtra?.() || {}) } }); }, 250); }
       function changed(p, commit) {
         recompute(); saveSoon();
         if (commit) out('event', { name: 'param', data: { id: p.id, v: vals[p.id] } });
@@ -486,9 +489,11 @@
       // what the checks grader reads: the values once the latest inputs are computed (and a bench's own, once a diagnosis is chosen: before that Check waits)
       port.values = () => closed || doneRev !== rev ? null : B ? (B.ready() ? { ...env, ...B.values() } : null) : { ...env };
       port.reveal = () => { if (!closed) B?.reveal(); };   // after Check: the bench says what the fault was
+      port.saveSoon = saveSoon;
       later(() => out('ready', { protocols: [1] }));
       return port;
-    },
-  });
+  }
+  ACT.registerRuntime({ id: 'sim-spec@1', version: 1, autoHeight: true, mount: (box, ctx) => simView(box, ctx) });
+  ACT.simView = simView;   // the same view for runtimes that compute the outputs themselves (py-module@1)
   /* i18n-ignore-end */
 })();

@@ -370,9 +370,22 @@
   /* ---------- interactive activities (docs/INTERACTIVE.md): the SAME rules as tools/activities.py (tests/activities.js) ---------- */
   const ACT = {
     FORMAT: 'noema.activities/v1', ID_RE: /^[a-z0-9][a-z0-9-]{1,60}$/, KEY_RE: /^[a-z][a-zA-Z0-9_.-]{0,63}$/,
-    RUNTIMES: new Set(['html-app@1', 'sim-spec@1']), LATER: { 'py-module@1': 'P4', 'h5p@1': 'P4b' },
+    RUNTIMES: new Set(['html-app@1', 'sim-spec@1', 'py-module@1']), LATER: { 'h5p@1': 'P4b' },
     CAPS: new Set(['state', 'events', 'resize', 'result', 'hints', 'announce']), GRADE_MODES: new Set(['reported', 'checks']),
-    CHECKS_RUNTIMES: new Set(['sim-spec@1']),   // runtimes whose values the app can see (the checks grader needs them)
+    CHECKS_RUNTIMES: new Set(['sim-spec@1', 'py-module@1']),   // runtimes whose values the app can see (the checks grader needs them)
+    SPEC_RUNTIMES: new Set(['sim-spec@1', 'py-module@1']),     // runtimes the app draws from a spec (py-module@1: its outputs come from Python's step())
+    // py-module@1 (docs/INTERACTIVE_PYTHON.md): Python with numpy, scipy and the allow-listed extras (tools/pywheels_allow.json) — the same lists in tools/activities.py
+    PY: 'py-module@1', PY_BASE: ['numpy', 'scipy'], PY_EXTRAS: ['quantiphy'], PY_MAX: 256 * 1024, PY_STEP: [100, 10000], PY_PACKAGES_MAX: 12,
+    PY_BANNED: [
+      [/^\s*(?:import\s+js\b|from\s+js\s+import\b|import\s+pyodide_js\b|from\s+pyodide_js\b)/m, 'the browser (js, pyodide_js): Python has no page and no network here; return values from step()'],
+      [/\bpyodide\.http\b|\bpyfetch\b|\bopen_url\b|^\s*(?:import|from)\s+(?:urllib|requests|http\.client|socket|ssl)\b/m, 'a network call: a Python activity has no network'],
+      [/^\s*(?:import|from)\s+micropip\b/m, 'micropip: list the package in "packages" instead (only the allow-listed ones)'],
+      [/(?:^|[^A-Za-z0-9_.])input\s*\(/m, 'input(): there is no console; the learner uses the controls of the spec'],
+    ],
+    PY_WARN: [
+      [/^\s*while\s+True\s*:/m, 'while True: each step() has a budget (stepMs, 3 s by default) and is stopped after it'],
+      [/\btime\.sleep\s*\(/, 'time.sleep(): a step blocks the learner while it sleeps; return at once'],
+    ],
     // sim-spec@1 (docs/INTERACTIVE.md §12): the SAME rules as tools/activities.py check_spec
     SPEC_FORMAT: 'noema.sim-spec/v1', DEFAULT_ENGINE: 'formula@1', ENGINES: new Set(['formula@1', 'circuit-mna@1']),   // the same list in tools/activities.py
     SPEC_KEYS: new Set(['format', 'engine', 'model', 'title', 'intro', 'consts', 'params', 'derived', 'outputs', 'readouts', 'plots', 'bench']),
@@ -426,6 +439,19 @@
     for (const [re, why] of ACT.WARN) if (re.test(html)) W.push(why);
     const words = visibleText(html);
     if (words.length >= 3) W.push(`visible text in the HTML (“${words.slice(0, 6).join(' ')}…”): put every word in the string tables and show it with noema.t(key)`);
+    return { errors: E, warnings: W };
+  }
+  /** lintPython(source, packages) → { errors, warnings }: what a py-module@1 activity may not contain (the same list as tools/activities.py lint_python) */
+  function lintPython(src, packages) {
+    const E = [], W = [];
+    if (typeof src !== 'string' || !src.trim()) return { errors: ['the Python file is empty'], warnings: W };
+    const n = utf8(src);
+    if (n > ACT.PY_MAX) E.push(`the Python file is ${Math.floor(n / 1024)} KB (at most ${ACT.PY_MAX / 1024} KB)`);
+    if (!/^def\s+step\s*\(/m.test(src)) E.push('the Python file defines no step(inputs, state) at the top level');
+    for (const [re, why] of ACT.PY_BANNED) { const m = src.match(re); if (m) E.push(`${why} — found “${m[0].trim().slice(0, 40)}”`); }
+    for (const [re, why] of ACT.PY_WARN) if (re.test(src)) W.push(why);
+    const decl = new Set(Array.isArray(packages) ? packages : []);
+    for (const name of [...ACT.PY_BASE, ...ACT.PY_EXTRAS]) if (!decl.has(name) && new RegExp('^\\s*(?:import|from)\\s+' + name + '\\b', 'm').test(src)) E.push(`the Python file imports ${name}: list it in "packages"`);
     return { errors: E, warnings: W };
   }
   /* ---------- sim-spec@1 (docs/INTERACTIVE.md §12): every expression through NoemaExpr (engine/src/35_simexpr.js, loaded beside this file) ---------- */
@@ -630,16 +656,21 @@
     }
     if (b.budget !== undefined && !(Number.isInteger(b.budget) && b.budget >= 1 && b.budget <= L.budget)) E.push(`spec.bench.budget is a whole number 1–${L.budget} (the measurements allowed)`);
   }
-  /** checkSimSpec(spec, tables?, engines?) → errors of a sim-spec@1 spec. tables: {locale: {key: text}}; engines: the known engine ids
-      (default ACT.ENGINES; the app passes the engines it has registered). The same rules as tools/activities.py check_spec. */
-  function checkSimSpec(spec, tables, engines) {
+  /** checkSimSpec(spec, tables?, engines?, opts?) → errors of a sim-spec@1 spec. tables: {locale: {key: text}}; engines: the known engine ids
+      (default ACT.ENGINES; the app passes the engines it has registered). opts.python: the spec of a py-module@1 activity (its outputs
+      come from Python's step(): no engine, no model, no bench, at least one output). The same rules as tools/activities.py check_spec. */
+  function checkSimSpec(spec, tables, engines, opts) {
+    const py = !!(opts && opts.python);
     const E = [], L = ACT.SPEC_LIM;
     if (!isObj(spec)) return ['spec: a JSON object is required (activities/<id>/spec.json)'];
     if (utf8(JSON.stringify(spec)) > L.bytes) E.push(`spec: at most ${L.bytes / 1024} KB`);
     if (spec.format !== ACT.SPEC_FORMAT) E.push(`spec: format must be "${ACT.SPEC_FORMAT}"`);
     for (const k of Object.keys(spec).filter(k => !ACT.SPEC_KEYS.has(k)).sort()) E.push(`spec: unknown field ${qv(k)}`);
-    const eng = 'engine' in spec ? spec.engine : ACT.DEFAULT_ENGINE, known = engines ? new Set(engines) : ACT.ENGINES;
-    if (typeof eng !== 'string' || !known.has(eng)) E.push(`spec: unknown engine ${qv(eng)} (this version knows ${[...known].sort().join(', ')})`);
+    const eng = py ? ACT.PY : 'engine' in spec ? spec.engine : ACT.DEFAULT_ENGINE, known = engines ? new Set(engines) : ACT.ENGINES;
+    if (py) {
+      if ('engine' in spec) E.push('spec.engine: the outputs of a py-module@1 activity come from its Python step(); leave engine out');
+      if ('model' in spec) E.push('spec.model: a py-module@1 activity has no engine model (its Python code is the model)');
+    } else if (typeof eng !== 'string' || !known.has(eng)) E.push(`spec: unknown engine ${qv(eng)} (this version knows ${[...known].sort().join(', ')})`);
     if (eng === ACT.DEFAULT_ENGINE && 'model' in spec) E.push('spec: model configures another engine; formula@1 has none');
     if (spec.model != null && !isObj(spec.model)) E.push('spec: model must be an object');
     const keys = new Set(), seen = new Set();
@@ -699,6 +730,7 @@
     });
     const inNames = [...names];   // what an engine's inputs may use: consts, params, derived
     const os = spec.outputs, series = [];
+    if (py && !(Array.isArray(os) && os.length)) E.push('spec.outputs: list what step() returns, at least one {id, kind: scalar | series}');
     if (os != null) {
       if (eng === ACT.DEFAULT_ENGINE) E.push('spec.outputs come from an engine; formula@1 has none (use derived)');
       else if (!(Array.isArray(os) && os.length <= L.outputs)) E.push(`spec.outputs must be a list of at most ${L.outputs} {id, kind}`);
@@ -792,14 +824,14 @@
     const has = Object.prototype.hasOwnProperty.call(items, e.activity);
     if (!has) E.push(`activity ${qv(e.activity)} is not in pack.activities`);
     const a = has && isObj(items[e.activity]) ? items[e.activity] : null, rt = a ? a.runtime : null;
-    const spec = a && rt === 'sim-spec@1' && isObj(a.spec) ? a.spec : null;
+    const spec = a && ACT.SPEC_RUNTIMES.has(rt) && isObj(a.spec) ? a.spec : null;
     const g = e.grade;
     if (!isObj(g) || !ACT.GRADE_MODES.has(g.mode)) E.push('grade must be {"mode": "reported"} (the activity reports its result) or {"mode": "checks", "checks": [{"expr": …}]} (sim-spec@1)');
     else {
       if (g.pass != null && !(isNum(g.pass) && g.pass > 0 && g.pass <= 1)) E.push('grade.pass must be a number in (0, 1]');
       if (g.mode === 'reported' && rt === 'sim-spec@1') E.push('a sim-spec@1 activity reports nothing itself: grade it with {"mode": "checks", "checks": […]}');
       if (g.mode === 'checks') {
-        if (rt != null && !ACT.CHECKS_RUNTIMES.has(rt)) E.push(`grade.mode "checks" needs an activity whose values the app can see (sim-spec@1); ${rt} reports its own result: use "reported"`);
+        if (rt != null && !ACT.CHECKS_RUNTIMES.has(rt)) E.push(`grade.mode "checks" needs an activity whose values the app can see (sim-spec@1, py-module@1); ${rt} reports its own result: use "reported"`);
         const cs = g.checks;
         if (!(Array.isArray(cs) && cs.length >= 1 && cs.length <= ACT.SPEC_LIM.checks)) E.push(`grade.checks must be a list of 1–${ACT.SPEC_LIM.checks} checks {expr, label?, weight?}`);
         else {
@@ -829,7 +861,7 @@
           for (const [k, v] of Object.entries(t.params)) {
             if (k === 'fault' && fids) {   // a bench: the fault of this task (one id), or the ones the seed draws from (a list)
               if (!(typeof v === 'string' ? fids.includes(v) : Array.isArray(v) && v.length >= 1 && v.every(x => typeof x === 'string' && fids.includes(x)))) E.push('task.params.fault must be the id of a fault of the bench, or a list of them (the seed draws one)');
-            } else if (!Object.prototype.hasOwnProperty.call(consts, k)) E.push(`task.params.${k}: not a constant of the spec (a sim-spec@1 task sets only the spec's consts)`);
+            } else if (!Object.prototype.hasOwnProperty.call(consts, k)) { if (rt !== ACT.PY) E.push(`task.params.${k}: not a constant of the spec (a sim-spec@1 task sets only the spec's consts)`); }   // py-module@1: Python's init(task, seed) reads the others
             else if (!isNum(v)) E.push(`task.params.${k} must be a number`);
           }
         }
@@ -853,7 +885,7 @@
         if (typeof aid !== 'string' || !ACT.ID_RE.test(aid)) { E.push(`activity ${qv(aid)}: id must be lower-case letters, digits and - (2–61)`); continue; }
         if (Object.prototype.hasOwnProperty.call(items, aid)) { E.push(`activity ${aid}: duplicate id`); continue; }
         items[aid] = a; const w = `activity ${aid}`, rt = a.runtime;
-        if (Object.prototype.hasOwnProperty.call(ACT.LATER, rt)) E.push(`${w}: runtime ${rt} arrives in a later version of the app (${ACT.LATER[rt]}); use html-app@1 or sim-spec@1 for now`);
+        if (Object.prototype.hasOwnProperty.call(ACT.LATER, rt)) E.push(`${w}: runtime ${rt} arrives in a later version of the app (${ACT.LATER[rt]}); use html-app@1, sim-spec@1 or py-module@1 for now`);
         else if (!ACT.RUNTIMES.has(rt)) E.push(`${w}: unknown runtime ${qv(rt)} (one of ${[...ACT.RUNTIMES].sort().join(', ')})`);
         if (!(Number.isInteger(a.stateVersion) && a.stateVersion >= 1)) E.push(`${w}: stateVersion must be a whole number >= 1`);
         const caps = a.capabilities ?? [];
@@ -872,6 +904,24 @@
         } else if (rt === 'sim-spec@1') {
           if (!('spec' in a)) E.push(`${w}: the spec (activities/${aid}/spec.json) is missing`);
           else E.push(...checkSimSpec(a.spec, isObj(a.strings) ? a.strings : null).map(m => `${w}: ${m}`));
+        } else if (rt === ACT.PY) {
+          const pk = a.packages == null ? [] : a.packages, allowed = [...ACT.PY_BASE, ...ACT.PY_EXTRAS];
+          if (!(Array.isArray(pk) && pk.length <= ACT.PY_PACKAGES_MAX && pk.every(x => typeof x === 'string'))) E.push(`${w}: packages must be a list of names (${allowed.join(', ')})`);
+          else {
+            for (const x of pk) if (!allowed.includes(x)) E.push(`${w}: package ${qv(x)} is not available (numpy, scipy and the allow-listed extras: ${ACT.PY_EXTRAS.join(', ')})`);
+            if (new Set(pk).size !== pk.length) E.push(`${w}: packages lists a name twice`);
+            if (pk.some(x => ACT.PY_EXTRAS.includes(x)) && a.requiresNetwork !== true) E.push(`${w}: an extra package (${pk.filter(x => ACT.PY_EXTRAS.includes(x)).join(', ')}) is downloaded the first time: set "requiresNetwork": true`);
+          }
+          if (a.requiresNetwork != null && typeof a.requiresNetwork !== 'boolean') E.push(`${w}: requiresNetwork must be true or false`);
+          if (a.stepMs != null && !(Number.isInteger(a.stepMs) && a.stepMs >= ACT.PY_STEP[0] && a.stepMs <= ACT.PY_STEP[1])) E.push(`${w}: stepMs is a whole number ${ACT.PY_STEP[0]}–${ACT.PY_STEP[1]} (the budget of one step(), in ms)`);
+          if (typeof a.python !== 'string') E.push(`${w}: the Python file (activities/${aid}/main.py) is missing`);
+          else {
+            const l = lintPython(a.python, Array.isArray(pk) ? pk : []); E.push(...l.errors.map(m => `${w}: ${m}`)); W.push(...l.warnings.map(m => `${w}: ${m}`));
+            if (a.sha256 != null && (!/^[0-9a-f]{64}$/.test(String(a.sha256)) || (nodeSha && nodeSha(a.python) !== a.sha256))) E.push(`${w}: sha256 does not match the Python file`);
+            if (a.bytes != null && a.bytes !== utf8(a.python)) E.push(`${w}: bytes does not match the Python file`);
+          }
+          if (!('spec' in a)) E.push(`${w}: the spec (activities/${aid}/spec.json: the controls, readouts and plots the app draws) is missing`);
+          else E.push(...checkSimSpec(a.spec, isObj(a.strings) ? a.strings : null, null, { python: true }).map(m => `${w}: ${m}`));
         }
         const st = a.strings;
         if (!st || typeof st !== 'object' || Array.isArray(st) || !Object.keys(st).length) E.push(`${w}: strings {locale: {key: text}} are required (an activity shows no words of its own)`);
@@ -1053,5 +1103,5 @@
     return { errors: E, warnings: W, counts: { entries: entries.length, senses, stale, sections: Object.keys(secs).length, previews, anchors: anchors.length } };
   }
   /* i18n-ignore-end */
-  root.NoemaPackCheck = { checkPack, checkActivities, checkSimSpec, specNames, needRequires, lintHtml, ACTIVITY_RULES: ACT, checkExercise, checkBalance, checkQuality, checkBridge, checkTranslation, requiredLocales, RULES, QUALITY, LANGS, TYPES, BLOCKS, ID_RE };
+  root.NoemaPackCheck = { checkPack, checkActivities, checkSimSpec, specNames, needRequires, lintHtml, lintPython, ACTIVITY_RULES: ACT, checkExercise, checkBalance, checkQuality, checkBridge, checkTranslation, requiredLocales, RULES, QUALITY, LANGS, TYPES, BLOCKS, ID_RE };
 })(typeof window !== 'undefined' ? window : globalThis);
