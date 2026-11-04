@@ -1,0 +1,10 @@
+H5P player for noema-lite's h5p@1 runtime — vendored by tools/fetch_h5p.py from https://registry.npmjs.org/h5p-standalone/-/h5p-standalone-3.8.2.tgz
+(sha256 de7844ac07d5baddf5664c03738f25755914854b472f9b093251300ea1fec391).
+
+Licences:
+* h5p-standalone 3.8.2 (Tunapanda): MIT, see LICENSE.
+* frame.bundle.js bundles jQuery (MIT) and the H5P core JavaScript from h5p/h5p-php-library, whose repository is licensed
+  GPL-3.0 ("The H5P PHP library is GPL licensed due to GPL code being used for purifying HTML provided by authors").
+  The core runs only inside the activity's own sandboxed frame and talks to the app by postMessage. Whether that is enough
+  separation is a licence decision for the owner (docs/activities-dev/h5p.md, "Licences").
+* h5p.css and the two icon fonts come from the same H5P core.
