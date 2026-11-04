@@ -1,4 +1,4 @@
-/* The expression language of sim-spec@1 without a browser (docs/activities-dev/simexpr.md, docs/adr/001 D5):
+/* The expression language of sim-spec@1 without a browser (docs/INTERACTIVE_SIMEXPR.md, docs/adr/001 D5):
    1. the shared corpus (tests/fixtures/simexpr/corpus.json): every case in JS, against its expected value / error / check / print;
    2. the same corpus, a seeded fuzz of random trees (printed to source and evaluated) and a fuzz of every function, all run
       by the Python twin (tools/simexpr.py, one python3 process for everything): the trees, errors, printed sources and the

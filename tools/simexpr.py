@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """The expression language of sim-spec@1 — the Python twin of engine/src/35_simexpr.js (docs/adr/001 D5,
-docs/activities-dev/simexpr.md). Standard library only.
+docs/INTERACTIVE_SIMEXPR.md). Standard library only.
 
 Same grammar, same JSON-able tree (dicts), same error codes and messages, and the same IEEE doubles bit for bit as the
 JS twin (tests/simexpr.js runs a shared corpus and a seeded fuzz through both). For that the transcendental functions

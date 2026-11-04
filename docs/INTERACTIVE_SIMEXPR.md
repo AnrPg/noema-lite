@@ -1,6 +1,8 @@
-# The expression language of `sim-spec@1` (draft for docs/INTERACTIVE.md; decision D5 of docs/adr/001)
+# The expression language of `sim-spec@1` (appendix of docs/INTERACTIVE.md; decision D5 of docs/adr/001)
 
 Formulas in a declarative simulation (`v0 * t - 0.5 * g * t^2`, `abs(err) < tol && t > 1`) are written in this small language.
+In a spec (docs/INTERACTIVE.md §12) an expression may name the spec's `consts`, its `params`, the `derived` values defined before it
+and the engine's scalar `outputs`; a function plot adds its `x.var`. The validators check every expression against exactly those names.
 Two twins agree exactly: `engine/src/35_simexpr.js` (`window.NoemaExpr`, the app and the replay worker) and
 `tools/simexpr.py` (the validator, the replay harness). They agree on the grammar, the tree, the error codes and messages,
 and on every double, bit for bit. No `eval`, no `new Function`, no third-party evaluator: a hand-written lexer and

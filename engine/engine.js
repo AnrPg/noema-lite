@@ -2419,7 +2419,7 @@ APP.postMessage({t:'hello',nonce:N},'*');
 })();
 
 /* ---- 35_simexpr.js ---- */
-/* ===================== interactive activities — the expression language of sim-spec@1 (docs/adr/001 D5, docs/activities-dev/simexpr.md) =====================
+/* ===================== interactive activities — the expression language of sim-spec@1 (docs/adr/001 D5, docs/INTERACTIVE_SIMEXPR.md) =====================
    A tiny, safe language for the formulas of declarative simulations: numbers, booleans, variables, + - * / % ^, comparisons,
    && || !, c ? a : b and a fixed list of math functions. No eval, no new Function, no property access, no strings, no loops:
    a hand-written lexer and recursive-descent (precedence-climbing) parser build a JSON-able tree, a validator checks it, and
