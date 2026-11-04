@@ -22,7 +22,16 @@ ENGINE = os.path.join(ROOT, 'engine')
 args = sys.argv[1:]
 VALIDATE = '--no-validate' not in args
 
+AUTHOR_SCHEMAS = ['noema.sim-spec.v1.schema.json', 'noema.circuit.v1.schema.json', 'noema.activities.v1.schema.json']
+def author_schemas_js():
+    # the activity author's copy of the JSON Schemas (a file:// page cannot fetch them): engine/activity_author_schemas.js
+    sch = {f: rj(os.path.join(ROOT, 'tools', 'schemas', f)) for f in AUTHOR_SCHEMAS}
+    return ('/* noema-lite — the JSON Schemas of the activity author (engine/activity_author.js). GENERATED from tools/schemas/ by\n'
+            '   tools/build.py (tests/activity_author.js checks that it is up to date). Do not edit. Schema data, not words a learner reads: */\n/* i18n-ignore-start */\n'
+            '(function (root) { root.NoemaActivitySchemas = ' + json.dumps(sch, ensure_ascii=False, separators=(',', ':')) + '; })(typeof window !== \'undefined\' ? window : globalThis);\n/* i18n-ignore-end */\n')
+
 def build_engine():
+    wt(os.path.join(ENGINE, 'activity_author_schemas.js'), author_schemas_js())
     # the UI catalogs: i18n/<component>/<locale>.arb → engine/i18n/<locale>.js (docs/i18n.md)
     subprocess.run(['node', os.path.join(ROOT, 'tools', 'i18n', 'build.js')], check=True)
     js = ''.join(f'\n/* ---- {os.path.basename(f)} ---- */\n' + open(f, encoding='utf-8').read() for f in sorted(glob.glob(os.path.join(ENGINE, 'src', '*.js'))))
@@ -258,7 +267,7 @@ def build_site(metas):
             dst = os.path.join(out, f['path']); os.makedirs(os.path.dirname(dst), exist_ok=True); shutil.copy(os.path.join(ROOT, f['path']), dst)
         for f in m.get('media') or []:
             dst = os.path.join(out, f); os.makedirs(os.path.dirname(dst), exist_ok=True); shutil.copy(os.path.join(ROOT, f), dst)
-    for f in ('engine.js', 'engine.css', 'loader.js', 'i18n.js', 'themes.js', 'art.js', 'shell.js', 'react.js', 'convos.js', 'cloud.js', 'claude.js', 'packcheck.js', 'llm.js', 'mt.js', 'wordlink.js', 'bridge.js', 'curriculum.js', 'curjobs.js', 'curshare.js', 'imglib.js', 'curimport.js', 'sourceplan.js', 'vault.js', 'social.js', 'packgen.js', 'curmap.js', 'search.js', 'catalog.js', 'report.js', 'authoring.js', 'srcfiles.js', 'viewer.js'): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))
+    for f in ('engine.js', 'engine.css', 'loader.js', 'i18n.js', 'themes.js', 'art.js', 'shell.js', 'react.js', 'convos.js', 'cloud.js', 'claude.js', 'packcheck.js', 'llm.js', 'mt.js', 'wordlink.js', 'bridge.js', 'curriculum.js', 'curjobs.js', 'curshare.js', 'imglib.js', 'curimport.js', 'sourceplan.js', 'vault.js', 'social.js', 'packgen.js', 'curmap.js', 'search.js', 'catalog.js', 'report.js', 'authoring.js', 'srcfiles.js', 'viewer.js', 'schemaform.js', 'activity_author_schemas.js', 'activity_author.js', 'activity_author.css'): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))   # (the activity author's four load on #/author)
     os.makedirs(os.path.join(out, 'engine', 'src'), exist_ok=True); [shutil.copy(os.path.join(ENGINE, 'src', f), os.path.join(out, 'engine', 'src', f)) for f in ('35_simexpr.js', '36_engine_circuit.js')]   # NoemaExpr and NoemaCircuit beside packcheck.js: the shell checks sim-spec@1 packs before any subject (and engine.js) is open
     shutil.copytree(os.path.join(ENGINE, 'vendor'), os.path.join(out, 'engine', 'vendor'))
     shutil.copytree(os.path.join(ENGINE, 'i18n'), os.path.join(out, 'engine', 'i18n'))   # the UI catalogs (docs/i18n.md), loaded per locale
@@ -417,7 +426,7 @@ def build_bundle(metas):
     reg_metas = [dict(m, path=None) for m in metas if (not sel or m['id'] in sel)]
     local = ''
     if '--with-local-config' in args and os.path.exists(os.path.join(ROOT, 'config.local.js')): local = f'<script>{esc(rd("config.local.js"))}</script>'
-    css = rd('engine/engine.css')
+    css = rd('engine/engine.css') + '\n' + rd('engine/activity_author.css')
     # every UI catalog inline (the single file works offline in any locale; pseudo-locales only for tests)
     i18n_cats = ''.join(f'<script>{esc(rd("engine/i18n/" + f))}</script>\n' for f in sorted(os.listdir(os.path.join(ENGINE, 'i18n'))) if f.endswith('.js') and f[:-3] not in ('en-XA', 'ar-XB'))
     html = f'''<!doctype html>
@@ -446,6 +455,9 @@ def build_bundle(metas):
 <script>{esc(rd("engine/src/35_simexpr.js"))}</script>
 <script>{esc(rd("engine/src/36_engine_circuit.js"))}</script>
 <script>{esc(rd("engine/packcheck.js"))}</script>
+<script>{esc(rd("engine/schemaform.js"))}</script>
+<script>{esc(rd("engine/activity_author_schemas.js"))}</script>
+<script>{esc(rd("engine/activity_author.js"))}</script>
 <script>{esc(rd("engine/llm.js"))}</script>
 <script>{esc(rd("engine/mt.js"))}</script>
 <script>{esc(rd("engine/wordlink.js"))}</script>
@@ -473,6 +485,7 @@ def build_bundle(metas):
     print(f'bundle → dist/noema-lite.html ({len(html)/1e6:.1f} MB, {len(reg_metas)} subjects{", with local config" if local else ""})')
 
 if __name__ == '__main__':
+    if '--author-schemas' in args: sys.stdout.write(author_schemas_js()); sys.exit(0)   # (tests/activity_author.js: is the copy current?)
     build_engine()
     metas, failed = build_packs()
     LANG_METAS, lfailed = build_lang_courses(); failed += lfailed

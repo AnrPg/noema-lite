@@ -1017,6 +1017,26 @@ kbd{font:600 12px var(--mono,monospace);padding:1px 6px;border-radius:6px;border
 .sim-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px; }
 .sim-foot .btn { min-height: 36px; }
 .sim-busy { font-size: 12px; color: var(--ink3); margin-right: auto; }
+.sim-bench [hidden] { display: none !important; }
+.sim-bench { display: grid; gap: 10px; min-width: 0; border-top: 1px solid var(--line); padding-top: 12px; }
+.sim-binst { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 12px 18px; min-width: 0; }
+.sim-bctl { display: grid; gap: 8px; min-width: 0; align-content: start; }
+.sim-bsel .sim-sel { width: 100%; }
+.sim-brow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.sim-brow .btn { min-height: 36px; }
+.sim-left { font-size: 12px; color: var(--ink3); }
+.sim-face { min-width: 0; min-height: 60px; }
+.sim-meter { display: grid; gap: 2px; background: var(--bg2); border: 1px solid var(--line); border-radius: var(--r-sm, 8px); padding: 10px 12px; }
+.sim-meter-i { font-size: 12px; color: var(--ink3); }
+.sim-meter-v { font-family: var(--mono); font-size: 26px; color: var(--ink); overflow-wrap: anywhere; }
+.sim-bh { margin: 0; font-size: 13px; font-weight: 600; color: var(--ink2); }
+.sim-log { margin: 0; padding-left: 1.6em; display: grid; gap: 2px; font-size: 13px; max-height: 220px; overflow-y: auto; overflow-wrap: anywhere; }
+.sim-log b { font-family: var(--mono); font-weight: 600; }
+.sim-log-i { color: var(--ink3); }
+.sim-log-empty { margin: 0; font-size: 13px; color: var(--ink3); }
+.sim-dx { display: grid; gap: 8px; min-width: 0; }
+.sim-dx-out { margin: 0; font-weight: 600; }
+.sim-dx-out.ok { color: var(--ok); } .sim-dx-out.bad { color: var(--bad); }
 .act-checks:empty { display: none; }
 .act-checks { margin-top: 8px; font-size: 14px; }
 .act-checks ul { list-style: none; margin: 4px 0 0; padding: 0; }
