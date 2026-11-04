@@ -60,6 +60,7 @@ ok(!ACTP.check(null).ok && !ACTP.check('hello').ok, 'not an object → refused')
 
 // 3. the same rules in JS and Python
 require(path.join(ROOT, 'engine', 'src', '35_simexpr.js'));   // the expression checker packcheck uses for sim-spec@1
+require(path.join(ROOT, 'engine', 'src', '36_engine_circuit.js'));   // the netlist and fault checker packcheck uses for circuit-mna@1
 require(path.join(ROOT, 'engine', 'packcheck.js'));
 const P = globalThis.NoemaPackCheck;
 const html = fs.readFileSync(path.join(ROOT, 'tools', 'activities_examples', 'alias-lab', 'app.html'), 'utf8');
@@ -146,8 +147,60 @@ const scases = {
   'task param not a const': p => { sx(p).task.params.R = 1; },
   'task param not a number': p => { sx(p).task.params.target = 'big'; },
 };
-const packs = [...Object.entries(cases).map(([k, f]) => { const p = base(); f(p); return [k, p]; }), ...Object.entries(scases).map(([k, f]) => { const p = sbase(); f(p); return [k, p]; })];
-const GOOD = new Set(['good', 'spec good', 'spec: a good choice and toggle']);
+// circuit-mna@1: the fault bench led-bench as the second activity, with a sim exercise graded on the diagnosis
+const LB = path.join(ROOT, 'tools', 'activities_examples', 'led-bench');
+const lbItem = { ...JSON.parse(fs.readFileSync(path.join(LB, 'activity.json'), 'utf8')), spec: JSON.parse(fs.readFileSync(path.join(LB, 'spec.json'), 'utf8')),
+  strings: Object.fromEntries(['en', 'el', 'ru'].map(l => [l, JSON.parse(fs.readFileSync(path.join(LB, `strings.${l}.json`), 'utf8'))])) };
+delete lbItem.entry;
+const BX = { id: 'ch01-e3', type: 'sim', activity: 'led-bench', task: { seed: 7, params: { fault: 'ledReversed' } }, hints: ['h'],
+  grade: { mode: 'checks', checks: [{ expr: 'correct', label: 'checkDx', weight: 3 }, { expr: 'measurements <= 6', label: 'checkEff' }], pass: 0.75 } };
+const cbase = () => { const p = base(); p.media['led-bench-still'] = { w: 600, h: 260 }; p.requires.push('runtime:sim-spec@1', 'engine:circuit-mna@1'); p.activities.items.push(JSON.parse(JSON.stringify(lbItem)));
+  p.chapters[0].sections[0].blocks.push({ t: 'interactive', activity: 'led-bench' }); p.chapters[0].exercises.push(JSON.parse(JSON.stringify(BX))); return p; };
+const bn = p => sp(p).bench, md = p => sp(p).model;
+const RT = path.join(ROOT, 'tools', 'activities_examples', 'rc-transient');
+const ccases = {
+  'circuit good': p => p,
+  'circuit: rc-transient (no bench)': p => { p.activities.items[1].spec = JSON.parse(fs.readFileSync(path.join(RT, 'spec.json'), 'utf8')); p.activities.items[1].strings = Object.fromEntries(['en', 'el', 'ru'].map(l => [l, JSON.parse(fs.readFileSync(path.join(RT, `strings.${l}.json`), 'utf8'))])); Object.assign(sx(p), { task: { seed: 'auto', params: {} }, grade: { mode: 'checks', checks: [{ expr: 'abs(vAt / Vs - frac) <= tol', label: 'checkPct' }] } }); },
+  'circuit: no engine:… in requires': p => { p.requires = p.requires.filter(x => x !== 'engine:circuit-mna@1'); },
+  'circuit: no model': p => { delete sp(p).model; },
+  'circuit: a bad netlist': p => { md(p).netlist.elements[2].value = -5; },
+  'circuit: an unknown model field': p => { md(p).spice = '.tran'; },
+  'circuit: a binding to no part': p => { md(p).bindings[0].element = 'SW9'; },
+  'circuit: a binding to no prop': p => { md(p).bindings[0].prop = 'colour'; },
+  'circuit: a binding with a bad expression': p => { md(p).bindings[0].expr = 'closed && nope'; },
+  'circuit: a bad transient': p => { md(p).transient = { tEnd: 1, dt: 1e-9 }; },
+  'circuit: bad noise': p => { md(p).noise = { rel: 2 }; },
+  'circuit: an output on no node': p => { sp(p).outputs = [{ id: 'v', kind: 'scalar', node: 'zz' }]; },
+  'circuit: a bad stat': p => { sp(p).outputs = [{ id: 'v', kind: 'scalar', node: 'a', stat: 'median' }]; },
+  'circuit: a good scalar output in a readout': p => { sp(p).outputs = [{ id: 'va', kind: 'scalar', node: 'a' }]; sp(p).readouts = [{ label: 'tp3', expr: 'va', unit: 'V' }]; },
+  'circuit: a bench name in a readout': p => { sp(p).readouts = [{ label: 'tp3', expr: 'diagnosis' }]; },
+  'circuit: a bench on formula@1': p => { sp(p).engine = 'formula@1'; delete sp(p).model; p.requires = p.requires.filter(x => x !== 'engine:circuit-mna@1'); },
+  'circuit: a bench without faults': p => { bn(p).faults = []; },
+  'circuit: a fault id twice': p => { bn(p).faults[1].id = 'ledReversed'; },
+  'circuit: a fault on no part': p => { bn(p).faults[0].apply[0].element = 'D9'; },
+  'circuit: an unknown fault kind': p => { bn(p).faults[0].apply[0].kind = 'melt'; },
+  'circuit: open-trace on a side that does not touch': p => { bn(p).faults[4].apply[0].side = ['V1']; },
+  'circuit: a point on no node': p => { bn(p).points[0].at = 'TP9'; },
+  'circuit: a point on no pin': p => { bn(p).points[3].at = '@D1.7'; },
+  'circuit: a point label missing': p => { bn(p).points[0].label = 'nope'; },
+  'circuit: an unknown instrument': p => { bn(p).instruments.push({ kind: 'spectrum' }); },
+  'circuit: an ammeter on no part': p => { bn(p).instruments[1].parts[0].element = 'R7'; },
+  'circuit: a scope and a logic analyser': p => { bn(p).instruments.push({ kind: 'scope', tEnd: 0.001, dt: 1e-5 }, { kind: 'logic', tEnd: 0.001, threshold: 2.5 }); },
+  'circuit: a bad budget': p => { bn(p).budget = 0; },
+  'circuit: a diagnosis that names no fault': p => { bn(p).diagnosis.options[2].fault = 'rMelt'; },
+  'circuit: a fault no diagnosis names': p => { bn(p).diagnosis.options.pop(); },
+  'circuit: a diagnosis label missing in one table': p => { delete p.activities.items[1].strings.ru.dxTrace; },
+  'circuit: a diagnosis label missing everywhere': p => { bn(p).diagnosis.options[0].label = 'dxNope'; },
+  'circuit: one option': p => { bn(p).diagnosis.options = bn(p).diagnosis.options.slice(0, 1); },
+  'circuit: an unknown bench field': p => { bn(p).answer = 'ledReversed'; },
+  'circuit: task.fault not a fault': p => { sx(p).task.params.fault = 'ledShort'; },
+  'circuit: task.fault a list': p => { sx(p).task.params.fault = ['ledOpen', 'rOpen']; },
+  'circuit: task.fault a bad list': p => { sx(p).task.params.fault = ['ledOpen', 3]; },
+  'circuit: a check on the diagnosis index': p => { sx(p).grade.checks[0].expr = 'diagnosis == 6'; },
+  'circuit: a check on an unknown name': p => { sx(p).grade.checks[1].expr = 'measures <= 6'; },
+};
+const packs = [...Object.entries(cases).map(([k, f]) => { const p = base(); f(p); return [k, p]; }), ...Object.entries(scases).map(([k, f]) => { const p = sbase(); f(p); return [k, p]; }), ...Object.entries(ccases).map(([k, f]) => { const p = cbase(); f(p); return [k, p]; })];
+const GOOD = new Set(['good', 'spec good', 'spec: a good choice and toggle', 'circuit good', 'circuit: rc-transient (no bench)', 'circuit: a good scalar output in a readout', 'circuit: a scope and a logic analyser', 'circuit: task.fault a list', 'circuit: a check on the diagnosis index']);
 const tmp = path.join(require('os').tmpdir(), 'noema-act-parity.json'); fs.writeFileSync(tmp, JSON.stringify(packs));
 const py = JSON.parse(cp.execFileSync('python3', ['-c', `import sys, json; sys.path.insert(0, ${JSON.stringify(path.join(ROOT, 'tools'))}); import activities as A
 out = {}
@@ -162,16 +215,35 @@ for (const [k, p] of packs) {
 ok(P.TYPES.has('sim') && P.BLOCKS.has('interactive'), 'packcheck knows the sim type and the interactive block');
 { // the same messages, not only the same counts, for the spec rules
   const py2 = JSON.parse(cp.execFileSync('python3', ['-c', `import sys, json; sys.path.insert(0, ${JSON.stringify(path.join(ROOT, 'tools'))}); import activities as A
-print(json.dumps([A.check_spec(p['activities']['items'][1].get('spec'), p['activities']['items'][1].get('strings')) for k, p in json.load(open(sys.argv[1], encoding='utf-8')) if k.startswith('spec')], ensure_ascii=False))`, tmp], { encoding: 'utf8' }));
-  const js2 = packs.filter(([k]) => k.startsWith('spec')).map(([, p]) => P.checkSimSpec(p.activities.items[1].spec, p.activities.items[1].strings));
+print(json.dumps([A.check_spec(p['activities']['items'][1].get('spec'), p['activities']['items'][1].get('strings')) for k, p in json.load(open(sys.argv[1], encoding='utf-8')) if k.startswith('spec') or k.startswith('circuit')], ensure_ascii=False))`, tmp], { encoding: 'utf8' }));
+  const js2 = packs.filter(([k]) => k.startsWith('spec') || k.startsWith('circuit')).map(([, p]) => P.checkSimSpec(p.activities.items[1].spec, p.activities.items[1].strings));
   const norm = l => l.map(m => m.replace(/'/g, '"'));   // (Python's repr quotes with ', the JS twin with ")
   const diff = js2.map((e, i) => JSON.stringify(norm(e)) === JSON.stringify(norm(py2[i])) ? null : [e, py2[i]]).filter(Boolean);
   ok(!diff.length, 'checkSimSpec (JS) and check_spec (Python) give the same messages ' + (diff.length ? JSON.stringify(diff[0]).slice(0, 600) : ''));
 }
+{ // the circuit checker: NoemaCircuit.check / checkFaults (JS) and tools/circuit.py check / check_faults give the same findings
+  const C = globalThis.NoemaCircuit;
+  const cases=[
+   null, 5, {nodes:'a'}, {format:'x',nodes:[],elements:[]},
+   {nodes:['a',{name:'TP',probe:'a'},{name:'T2',probe:'zz'},'a','b c',{name:'gnd',probe:'a'}],elements:[{id:'R1',type:'R',n:['a','gnd'],value:'4.7k',x:1},{id:'R1',type:'R',n:['TP','q'],value:-1},{id:'1x',type:'Q',n:[]},{id:'C1',type:'C',n:['a','gnd'],value:'1u',ic:'x'},{id:'V1',type:'V',n:['a','gnd'],value:{pulse:{v1:0,v2:5,width:1,period:0.5,zz:1}}},{id:'V2',type:'V',n:['a','gnd'],value:{sine:{amp:1}}},{id:'V3',type:'V',n:['a','gnd'],value:{dc:'x'}},{id:'V4',type:'V',n:['a','gnd'],value:{dc:1,pwm:{}}},{id:'V5',type:'V',n:['a','gnd'],value:{pwm:{v:5,freq:1e3,duty:2}}},{id:'D1',type:'D',n:['a','gnd'],preset:'nope',value:1,on:true},{id:'S1',type:'SW',n:['a','gnd'],on:'yes',params:{Ron:0,Zz:1}},{id:'U1',type:'OPAMP',n:['a','gnd','a'],params:{rails:[5,1]}},{id:'R9',type:'R',n:['a',5],value:null},{id:'Q1',type:['NPN'],n:['a','a','gnd']}]},
+   {nodes:['a','b','c','d'],elements:[{id:'V1',type:'V',n:['a','gnd'],value:5},{id:'V2',type:'V',n:['a','gnd'],value:5},{id:'R1',type:'R',n:['b','b'],value:1},{id:'C1',type:'C',n:['c','gnd'],value:1e-6},{id:'U1',type:'OPAMP',n:['a','b','a']}]},
+   {nodes:['a','b'],elements:[{id:'R1',type:'R',n:['a','b'],value:1}]},
+   {nodes:Array.from({length:61},(_, i)=>'n'+i),elements:[]},
+  ];
+  const nl={nodes:['vin','a'],elements:[{id:'V1',type:'V',n:['vin','gnd'],value:5},{id:'R1',type:'R',n:['vin','a'],value:220},{id:'D1',type:'D',n:['a','gnd'],preset:'led-red'},{id:'Q1',type:'NPN',n:['a','vin','gnd']}]};
+  const fl=[[{element:'D1',kind:'reverse'},{element:'R9',kind:'open'},{element:'R1',kind:'melt'},{node:'zz',kind:'open-trace'},{element:'R1',kind:'drift',factor:0},{element:'D1',kind:'drift',param:'gain'},{element:'R1',kind:'open',pin:2},{node:'a',kind:'open-trace',side:['V1','R1.1','R1.0',5]},{element:'R1',kind:'open',colour:'red'},{element:'Q1',kind:'reverse'},{element:'Q1',kind:'short',pins:[0,0]},{node:'vin',kind:'open-trace'},{node:'gnd',kind:'open-trace',side:[]},5,{element:'Q1',kind:'drift',param:'betaF',factor:'2k'}], 'x'];
+  const ctmp = path.join(require('os').tmpdir(), 'noema-circuit-parity.json'); fs.writeFileSync(ctmp, JSON.stringify({ cases, nl, fl }));
+  const cpy = JSON.parse(cp.execFileSync('python3', ['-c', `import sys, json; sys.path.insert(0, ${JSON.stringify(path.join(ROOT, 'tools'))}); import circuit as C; d = json.load(open(sys.argv[1], encoding='utf-8'))
+print(json.dumps({'c': [C.check(c) for c in d['cases']], 'f': [C.check_faults(d['nl'], f) for f in d['fl']]}, ensure_ascii=False))`, ctmp], { encoding: 'utf8' }));
+  const cjs = { c: cases.map(c => C.check(c)), f: fl.map(f => C.checkFaults(nl, f)) };
+  const cdiff = ['c', 'f'].flatMap(k => cjs[k].map((r, i) => JSON.stringify(r) === JSON.stringify(cpy[k][i]) ? null : [k, i, r, cpy[k][i]]).filter(Boolean));
+  ok(!cdiff.length && cjs.f.flat().length >= 8, `netlist and fault checks: JS and Python agree on ${cases.length} netlists and ${fl.length} fault lists ${cdiff.length ? JSON.stringify(cdiff[0]).slice(0, 500) : ''}`);
+}
 ok(!('sim-spec@1' in P.ACTIVITY_RULES.LATER) && P.ACTIVITY_RULES.RUNTIMES.has('sim-spec@1') && 'py-module@1' in P.ACTIVITY_RULES.LATER && 'h5p@1' in P.ACTIVITY_RULES.LATER, 'sim-spec@1 is a runtime now; py-module@1 and h5p@1 stay for later');
 ok(JSON.stringify(P.needRequires(sbase().activities.items)) === JSON.stringify(['activities/v1', 'runtime:html-app@1', 'runtime:sim-spec@1']) && P.needRequires([{ runtime: 'sim-spec@1', spec: { engine: 'circuit-mna@1' } }]).includes('engine:circuit-mna@1'), 'pack.requires: the runtimes, and every engine but the built-in formula@1');
 { // the runtime's own words go through tE() and exist in every UI language (the drafts)
-  const src = fs.readFileSync(path.join(ROOT, 'engine', 'src', '35_activity_sim.js'), 'utf8'), keys = [...new Set([...src.matchAll(/tE\('(engine\.act\.sim\.[a-z]+)'/g)].map(m => m[1]))];
+  const src = fs.readFileSync(path.join(ROOT, 'engine', 'src', '35_activity_sim.js'), 'utf8'), keys = [...new Set([...src.matchAll(/tE\('(engine\.act\.(?:sim|bench)\.[a-zA-Z]+(?:\.[a-zA-Z]+)*)'/g)].map(m => m[1]))];
+  for (const k of ['V', 'I', 'R', 'scope', 'logic']) keys.push('engine.act.bench.inst.' + k);   // (built: 'engine.act.bench.inst.' + kind)
   const src32 = fs.readFileSync(path.join(ROOT, 'engine', 'src', '32_activities.js'), 'utf8'); for (const m of src32.matchAll(/tE\('(engine\.act\.sim\.[a-z]+)'/g)) if (!keys.includes(m[1])) keys.push(m[1]);
   const en = JSON.parse(fs.readFileSync(path.join(ROOT, 'i18n', 'engine', 'en.arb'), 'utf8')), dr = fs.readdirSync(path.join(ROOT, 'i18n', 'engine', 'drafts'));
   const miss = keys.filter(k => !en[k]).concat(...dr.map(f => { const d = JSON.parse(fs.readFileSync(path.join(ROOT, 'i18n', 'engine', 'drafts', f), 'utf8')); return keys.filter(k => !d[k]).map(k => f + ':' + k); }));
@@ -197,14 +269,26 @@ const srv = fs.readFileSync(path.join(ROOT, 'cloud', 'mcp', 'server.mjs'), 'utf8
 ok(/enum: \['workflow', 'content', 'visual', 'interactive'/.test(srv) && /interactive: DOCS\.interactive/.test(srv) && /docs\['interactive'\] = rd\('docs\/INTERACTIVE\.md'\)/.test(bld), 'noema_authoring_guide serves part "interactive" (and in "all")');
 for (const f of ['activity_new.py', 'activity_lint.py', 'activity_test.py', 'activity_preview.py', 'activity_harness.js']) ok(fs.existsSync(path.join(ROOT, 'skill', 'noema-pack-builder', 'scripts', f)), 'the skill has ' + f);
 ok(/'activities\.py'/.test(bld) && /'simexpr\.py'/.test(bld) && /activity_host/.test(bld) && /'35_activity_sim\.js', '35_simexpr\.js'/.test(bld) && /activities_examples/.test(bld), 'the skill zip carries activities.py, simexpr.py, the runtimes for the harness (html-app, sim-spec) and the reference activities');
-ok(/'engine\/src\/35_simexpr\.js', 'engine\/packcheck\.js'/.test(bld) && /INTERACTIVE_SIMEXPR\.md/.test(bld), 'the connector runs NoemaExpr beside packcheck (sim-spec checks) and serves the expression language in the guide');
-{ const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8'), a = html.indexOf('engine/src/35_simexpr.js'), b = html.indexOf('engine/packcheck.js');
-  ok(a > 0 && a < b && /35_simexpr\.js'\), os\.path\.join\(out, 'engine', 'src'/.test(bld) && /rd\("engine\/src\/35_simexpr\.js"\)\)\}<\/script>\n<script>\{esc\(rd\("engine\/packcheck\.js"/.test(bld),
-    'the shell, the site and the one-file bundle load NoemaExpr before packcheck.js (a sim-spec pack imported before any subject is open is checked, not refused)'); }
+ok(/'circuit\.py'/.test(bld) && /'36_engine_circuit\.js', '36_engine_circuit_sim\.js'/.test(bld) && /'INTERACTIVE_SIMEXPR\.md', 'INTERACTIVE_CIRCUIT\.md'\) if/.test(bld), 'the skill zip carries circuit.py and the circuit engine for the harness; the guide part "interactive" includes the circuit engine');
+ok(/'engine\/src\/35_simexpr\.js', 'engine\/src\/36_engine_circuit\.js', 'engine\/packcheck\.js'/.test(bld) && /INTERACTIVE_SIMEXPR\.md/.test(bld), 'the connector runs NoemaExpr beside packcheck (sim-spec checks) and serves the expression language in the guide');
+{ const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8'), a = html.indexOf('engine/src/35_simexpr.js'), b = html.indexOf('engine/packcheck.js'), c = html.indexOf('engine/src/36_engine_circuit.js');
+  ok(a > 0 && a < b && c > 0 && c < b && /\('35_simexpr\.js', '36_engine_circuit\.js'\)\]   # NoemaExpr and NoemaCircuit beside packcheck/.test(bld) && /rd\("engine\/src\/35_simexpr\.js"\)\)\}<\/script>\n<script>\{esc\(rd\("engine\/src\/36_engine_circuit\.js"\)\)\}<\/script>\n<script>\{esc\(rd\("engine\/packcheck\.js"/.test(bld),
+    'the shell, the site and the one-file bundle load NoemaExpr and NoemaCircuit before packcheck.js (a sim-spec pack imported before any subject is open is checked, not refused)'); }
 { // activity_new.py --runtime sim-spec@1 starts from rc-lowpass
   const d = fs.mkdtempSync(path.join(require('os').tmpdir(), 'noema-actnew-'));
   const r = cp.spawnSync('python3', [path.join(ROOT, 'skill', 'noema-pack-builder', 'scripts', 'activity_new.py'), d, 'my-filter', '--runtime', 'sim-spec@1'], { encoding: 'utf8' });
   const reg = fs.existsSync(path.join(d, 'activities', 'activities.json')) ? JSON.parse(fs.readFileSync(path.join(d, 'activities', 'activities.json'), 'utf8')) : null;
   ok(r.status === 0 && reg?.items?.[0]?.runtime === 'sim-spec@1' && reg.items[0].entry === 'activities/my-filter/spec.json' && fs.existsSync(path.join(d, 'activities', 'my-filter', 'spec.json')) && fs.existsSync(path.join(d, 'activities', 'my-filter', 'strings.fr.json')), 'activity_new.py --runtime sim-spec@1 copies rc-lowpass (spec.json, strings, the registry entry)');
+}
+{ // activity_new.py --from led-bench / rc-transient starts from a circuit reference
+  const d = fs.mkdtempSync(path.join(require('os').tmpdir(), 'noema-actnew-'));
+  const sc = path.join(ROOT, 'skill', 'noema-pack-builder', 'scripts', 'activity_new.py');
+  const r1 = cp.spawnSync('python3', [sc, d, 'my-bench', '--from', 'led-bench'], { encoding: 'utf8' }), r2 = cp.spawnSync('python3', [sc, d, 'my-rc', '--from', 'rc-transient'], { encoding: 'utf8' });
+  const r3 = cp.spawnSync('python3', [sc, d, 'my-x', '--from', 'led-bench', '--runtime', 'html-app@1'], { encoding: 'utf8' });
+  const reg = fs.existsSync(path.join(d, 'activities', 'activities.json')) ? JSON.parse(fs.readFileSync(path.join(d, 'activities', 'activities.json'), 'utf8')) : null;
+  const sp1 = fs.existsSync(path.join(d, 'activities', 'my-bench', 'spec.json')) ? JSON.parse(fs.readFileSync(path.join(d, 'activities', 'my-bench', 'spec.json'), 'utf8')) : {};
+  const t1 = fs.existsSync(path.join(d, 'activities', 'my-bench', 'tests.json')) ? JSON.parse(fs.readFileSync(path.join(d, 'activities', 'my-bench', 'tests.json'), 'utf8')) : {};
+  ok(r1.status === 0 && r2.status === 0 && r3.status !== 0 && reg?.items?.length === 2 && reg.items.every(x => x.runtime === 'sim-spec@1') && sp1.engine === 'circuit-mna@1' && sp1.bench && t1.cases?.[0]?.steps?.[0]?.measure && fs.existsSync(path.join(d, 'activities', 'my-rc', 'strings.ru.json')),
+    'activity_new.py --from led-bench / rc-transient copies a circuit reference (a bench with its measure/diagnose tests); a runtime that does not fit is refused');
 }
 console.log(fails ? `\n${fails} of ${n} failed` : `\nactivities: ${n} checks passed`); process.exit(fails ? 1 : 0);

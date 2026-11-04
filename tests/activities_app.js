@@ -12,6 +12,8 @@ const PACK = JSON.parse(require('fs').readFileSync(process.argv[3], 'utf8')); PA
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; return c; };
 const wait = ms => new Promise(r => setTimeout(r, ms));
 const until = async (fn, ms = 10000) => { const t = Date.now(); while (Date.now() - t < ms) { try { if (await fn()) return true; } catch (e) { } await wait(150); } return false; };
+// a block that came into view while two others hold the live slots waits with its Start button (at most 2 run at once): press it
+const startIfParked = async (p, sel) => { if (await until(() => p.evaluate(s => !!document.querySelector(s + ' .sim'), sel), 1500)) return; const b = p.locator(sel + ' .act-bar button'); if (await b.count()) await b.first().click(); };
 const actFrame = (p, sel) => p.frames().find(f => f.parentFrame() && f.parentFrame().parentFrame() === p.mainFrame() && sel(f));   // the mini-app: inside the wrapper frame
 
 const http = require('http'); const hits = []; let BEACON = '';
@@ -114,6 +116,7 @@ async function run(name) {
   }
   E.length = E0; ok(hits.length === 0, `no request leaves the activity (location, link, meta refresh, popup, data: page): ${JSON.stringify(hits)}`);   // (the hostile frames' own errors don't count)
   await simSpec(p, ctx, E);
+  await circuit(p, ctx, E);
   await browser.close();
 }
 
@@ -126,7 +129,7 @@ async function simSpec(p, ctx, E) {
   const openSec = async () => {
     await p.evaluate(() => { location.hash = '#/'; }); await wait(300); await p.evaluate(() => { location.hash = '#/s/ch01-s01'; }); await wait(600);
     const sa = await p.$('button:has-text("show all")'); if (sa) { await sa.click(); await wait(200); }
-    await p.locator(SEL).first().scrollIntoViewIfNeeded();
+    await p.locator(SEL).first().scrollIntoViewIfNeeded(); await startIfParked(p, SEL);
     return until(() => p.evaluate(s => !!document.querySelector(s + ' .sim .sim-ro dd')?.textContent, SEL));
   };
   const ro = () => p.evaluate(s => [...document.querySelectorAll(s + ' .sim-ro dd')].map(d => d.textContent), SEL);
@@ -252,6 +255,131 @@ async function simSpec(p, ctx, E) {
   await mountItem('decay-bad', ENG + " a.spec.model.kind = 'other';"); await wait(400);
   st = await fbState();
   ok(!st.sim && st.fb && /could not start/.test(st.note), "the engine's own check refuses the spec: the fallback");
+  ok(E.length === E0, 'no page errors ' + JSON.stringify(E.slice(E0, E0 + 3)));
+}
+/* circuit-mna@1 (docs/INTERACTIVE_CIRCUIT.md, docs/INTERACTIVE.md §12.6–12.7): rc-transient (sliders bound to the parts, a scope trace)
+   and the fault bench led-bench — measurements that are the engine's numbers, the log, the diagnosis graded right and wrong, the
+   hidden fault nowhere in the page before the diagnosis, the explorer's bench after a reload, scope and logic faces, 360 px, dark. */
+async function circuit(p, ctx, E) {
+  const E0 = E.length;
+  const val = t => { const m = String(t).replace(/−/g, '-').match(/(-?[\d.,]+)\s*([pnµmkMG]?)/); if (!m) return NaN; return parseFloat(m[1].replace(',', '.')) * ({ p: 1e-12, n: 1e-9, 'µ': 1e-6, m: 1e-3, k: 1e3, M: 1e6, G: 1e9 }[m[2]] || 1); };
+  const openSec = async sel => {
+    await p.evaluate(() => { location.hash = '#/'; }); await wait(300); await p.evaluate(() => { location.hash = '#/s/ch01-s01'; }); await wait(600);
+    const sa = await p.$('button:has-text("show all")'); if (sa) { await sa.click(); await wait(200); }
+    await p.locator(sel).first().scrollIntoViewIfNeeded(); await startIfParked(p, sel);
+    return until(() => p.evaluate(s => !!document.querySelector(s + ' .sim'), sel));
+  };
+  console.log('— circuit-mna@1: rc-transient (a netlist, sliders bound to R1 and C1, the scope trace)');
+  const RT = 'main .act-blk .act[data-activity="rc-transient"]';
+  ok(await openSec(RT) && await until(() => p.evaluate(s => /0[.,]9\d\s*V/.test(document.querySelector(s + ' .sim-ro')?.textContent || ''), RT), 15000), 'the circuit simulation renders (no frame) and computes: 0.96 V at 1 ms with τ = 4.7 ms');
+  const trace = () => p.evaluate(s => [...document.querySelectorAll(s + ' .sim-plot path.sim-line')].map(x => x.getAttribute('d') || ''), RT);
+  const t0 = await trace();
+  ok(t0.length === 2 && t0.every(d => d.split('L').length > 100) && !(await p.evaluate(s => !!document.querySelector(s + ' iframe'), RT)), `the scope plot shows the input and the capacitor (${t0.map(d => d.split('L').length).join(' + ')} points)`);
+  await p.locator(RT + ' input.sim-num[data-param="R"]').fill('1000'); await p.locator(RT + ' input.sim-num[data-param="R"]').press('Tab');
+  ok(await until(() => p.evaluate(s => /3[.,]1\d\s*V/.test(document.querySelector(s + ' .sim-ro')?.textContent || ''), RT)), 'R = 1 kΩ: the engine (in its worker) gives 3.16 V at 1 ms (63 %)');
+  const t1 = await trace();
+  ok(t1[1] !== t0[1] && t1[0] === t0[0], 'the slider changes the capacitor trace on the scope, not the input');
+  ok(await p.evaluate(() => ACT.caps().has('engine:circuit-mna@1') && checkRequires().length === 0), 'the app has engine:circuit-mna@1 (pack.requires is met)');
+
+  console.log('— circuit-mna@1: the fault bench (an exercise)');
+  const card = async id => { await p.evaluate(id => { const m = document.querySelector('main'); m.innerHTML = ''; const c = exerciseCard(EX[id]); c.id = 'T'; m.append(c); scrollTo(0, 0); }, id); await until(() => p.evaluate(() => !!document.querySelector('#T .sim-bench'))); };
+  const measure = async (m) => {
+    const n0 = await p.evaluate(() => document.querySelectorAll('#T .sim-log li').length);
+    await p.selectOption('#T [data-bench="instrument"]', m.i);
+    if (m.a) await p.selectOption('#T [data-bench="a"]', m.a);
+    if (m.b) await p.selectOption('#T [data-bench="b"]', m.b);
+    if (m.part != null) await p.selectOption('#T [data-bench="part"]', String(m.part));
+    await p.click('#T [data-bench="measure"]');
+    await until(() => p.evaluate(n => { const l = document.querySelectorAll('#T .sim-log li'); return l.length > n && !/…$/.test(l[l.length - 1].textContent); }, n0));
+  };
+  const logs = () => p.evaluate(() => [...document.querySelectorAll('#T .sim-log li b')].map(b => b.textContent));
+  const check = async () => { await p.click('#T button:has-text("Check")'); await wait(400); };
+  const secret = () => p.evaluate(() => { const h = document.body.innerHTML + document.body.innerText; return { id: /ledReversed|ledOpen|rOpen|rDrift|openTrace/.test(h.replace(/data-activity="[^"]*"/g, '')), verdict: !!document.querySelector('#T .sim-dx-out')?.textContent, reveal: /the wrong way round: TP3/.test(h) }; });
+  await card('ch01-e903');
+  const shape = await p.evaluate(() => { const r = document.querySelector('#T .sim'); return { frame: !!r.querySelector('iframe'), inst: [...r.querySelectorAll('[data-bench="instrument"] option')].map(o => o.textContent), opts: r.querySelectorAll('[data-bench="diagnosis"] option').length, left: r.querySelector('.sim-left')?.textContent, commit: !!r.querySelector('[data-bench="commit"]'),
+    unlabelled: [...r.querySelectorAll('input, select')].filter(i => !(i.getAttribute('aria-label') || (i.id && r.querySelector(`label[for="${i.id}"]`)))).length }; });
+  ok(!shape.frame && shape.inst.join('|') === 'Multimeter: voltage|Multimeter: current|Multimeter: resistance' && shape.opts === 8 && /8 measurements left/.test(shape.left) && !shape.commit && shape.unlabelled === 0, `the bench: three instruments, 7 diagnoses, the budget; every control labelled; in an exercise the card's Check grades it ${JSON.stringify(shape)}`);
+  let sc = await secret();
+  ok(!sc.id && !sc.verdict && !sc.reveal, 'the hidden fault is nowhere in the page before the diagnosis (no id, no verdict, no reveal)');
+  await measure({ i: 'V', a: 'TP3', b: 'GND' }); await measure({ i: 'V', a: 'LK', b: 'GND' }); await measure({ i: 'V', a: 'LA', b: 'GND' }); await measure({ i: 'I', part: 0 });
+  let L = await logs();
+  // the same readings from NoemaCircuit itself: the netlist, the fault ledReversed, the seeded noise of the exercise (seed 7), the same order
+  const want = await p.evaluate(() => { const sp = ACT.ITEMS['led-bench'].spec, s = NoemaCircuit.create(sp.model.netlist, { faults: sp.bench.faults.find(f => f.id === 'ledReversed').apply, seed: 7, noise: { rel: sp.model.noise.rel, abs: 0, seed: 7 } });
+    return [{ kind: 'V', a: 'TP3', b: 'gnd' }, { kind: 'V', a: '@D1.1', b: 'gnd' }, { kind: 'V', a: '@D1.0', b: 'gnd' }, { kind: 'I', element: 'R1' }].map(q => s.measure(q).value); });
+  const close = L.length === 4 && L.every((t, i) => Math.abs(val(t) - want[i]) <= 0.005 * Math.abs(want[i]) + 1e-3);
+  ok(close && val(L[0]) > 4.9 && val(L[1]) > 4.9 && Math.abs(val(L[2])) < 0.05, `the multimeter shows the engine's numbers: ${L.join(' · ')} (NoemaCircuit: ${want.map(v => +v.toPrecision(3)).join(' · ')})`);
+  ok(await p.evaluate(() => /4 measurements left/.test(document.querySelector('#T .sim-left').textContent) && !!document.querySelector('#T .sim-face .sim-meter-v')?.textContent && /LED anode leg/.test(document.querySelector('#T .sim-log').textContent)), 'the meter face shows the last reading; the log names the instrument and the test points; the budget counts down');
+  await check();
+  ok(await p.evaluate(() => !document.getElementById('T')._locked()), 'Check before a diagnosis does not grade');
+  sc = await secret(); ok(!sc.id && !sc.verdict && !sc.reveal, 'still hidden after measuring and an early Check');
+  await p.selectOption('#T [data-bench="diagnosis"]', '5'); await check();   // "the LED is open": tempting (the LED does not light) but the cathode leg is at 5 V
+  const bad = await p.evaluate(() => { const c = document.getElementById('T'); return { locked: c._locked(), bad: !!c.querySelector('.explain.bad'), dx: c.querySelector('.sim-dx-out')?.className + ': ' + c.querySelector('.sim-dx-out')?.textContent, list: [...c.querySelectorAll('.act-checks li')].map(l => l.className), att: S.att?.['ch01-e903'], dis: c.querySelector('[data-bench="measure"]').disabled }; });
+  ok(bad.locked && bad.bad && /bad: Not this one\. The fault was: The LED is soldered the wrong way round/.test(bad.dx) && bad.list.join() === 'bad,ok' && bad.dis, `a wrong diagnosis is graded wrong; only now the bench says what the fault was (${bad.dx}); the bench is locked`);
+  ok(bad.att?.result?.passed === false && bad.att.events.filter(e => e.name === 'measure').length === 4 && bad.att.events.some(e => e.name === 'diagnose' && e.data.option === 5), `the attempt keeps the measurements and the diagnosis as events (${bad.att?.events?.length})`);
+  await card('ch01-e903');
+  await measure({ i: 'V', a: 'TP3', b: 'GND' }); await measure({ i: 'V', a: 'LK', b: 'GND' });
+  await p.selectOption('#T [data-bench="diagnosis"]', '6'); await check();
+  const good = await p.evaluate(() => { const c = document.getElementById('T'); return { ok: !!c.querySelector('.explain.ok'), dx: c.querySelector('.sim-dx-out')?.className + ': ' + c.querySelector('.sim-dx-out')?.textContent, score: S.att?.['ch01-e903']?.result?.score }; });
+  ok(good.ok && /ok: Right: The LED is soldered the wrong way round/.test(good.dx) && good.score === 1, `the right diagnosis with 2 measurements is graded right (score ${good.score}): ${good.dx}`);
+
+  console.log('— circuit-mna@1: the bench as a theory block (explorer)');
+  const LB = 'main .act-blk .act[data-activity="led-bench"]';
+  ok(await openSec(LB), 'the bench block renders');
+  const blog = () => p.evaluate(s => [...document.querySelectorAll(s + ' .sim-log li')].map(l => l.textContent), LB);
+  await p.selectOption(LB + ' [data-bench="instrument"]', 'V'); await p.selectOption(LB + ' [data-bench="a"]', 'TP3'); await p.click(LB + ' [data-bench="measure"]');
+  await until(async () => { const l = await blog(); return l.length === 1 && !/…$/.test(l[0]); });
+  await p.selectOption(LB + ' [data-bench="instrument"]', 'R'); await p.selectOption(LB + ' [data-bench="a"]', 'TP2'); await p.selectOption(LB + ' [data-bench="b"]', 'TP3'); await p.click(LB + ' [data-bench="measure"]');
+  await until(async () => { const l = await blog(); return l.length === 2 && !/…$/.test(l[1]); });
+  const before = await blog();
+  ok(before.length === 2 && /Ω|OL/.test(before[1]), `two measurements in the log: ${before.join(' | ')}`);
+  ok(await until(() => p.evaluate(() => (S.act?.['blk:ch01-s01:led-bench']?.data?.bench?.log || []).length === 2)), 'the bench is saved (its device, the log)');
+  const savedJ = await p.evaluate(() => JSON.stringify(S.act['blk:ch01-s01:led-bench'].data.bench));
+  ok(!/ledReversed|ledOpen|rOpen|rDrift|openTrace|"fault"/.test(savedJ), 'the saved state does not name the fault either');
+  await p.reload(); await wait(1200);
+  ok(await openSec(LB) && JSON.stringify(await blog()) === JSON.stringify(before), 'after a reload the same device comes back with its log');
+  await p.selectOption(LB + ' [data-bench="diagnosis"]', '0'); await p.click(LB + ' [data-bench="commit"]'); await wait(200);
+  const ex = await p.evaluate(s => ({ out: document.querySelector(s + ' .sim-dx-out')?.className, txt: document.querySelector(s + ' .sim-dx-out')?.textContent, dis: document.querySelector(s + ' [data-bench="measure"]').disabled }), LB);
+  ok(/sim-dx-out (ok|bad)/.test(ex.out) && ex.txt.length > 5 && ex.dis, `"Check my diagnosis" in the explorer: the verdict (${ex.txt}) and the bench locks`);
+  await p.click(LB + ' [data-bench="another"]'); await wait(200);
+  ok(await p.evaluate(s => document.querySelectorAll(s + ' .sim-log li').length === 0 && !document.querySelector(s + ' .sim-dx-out').textContent && !document.querySelector(s + ' [data-bench="measure"]').disabled, LB), '"Another device": a fresh device, an empty log');
+
+  console.log('— circuit-mna@1: small screens and dark mode');
+  for (const w of [360, 320]) {
+    await p.setViewportSize({ width: w, height: 800 }); await wait(400);
+    await p.locator(LB).first().scrollIntoViewIfNeeded(); await wait(200);
+    const fit = await p.evaluate(s => { const r = document.querySelector(s), box = r.querySelector('.act-box'), rr = box.getBoundingClientRect();
+      return { page: document.documentElement.scrollWidth <= innerWidth + 1, box: box.scrollWidth <= box.clientWidth + 1, inside: [...r.querySelectorAll('select, button')].every(e => e.getBoundingClientRect().right <= rr.right + 1),
+        touch: [...r.querySelectorAll('.sim-bench select, .sim-bench button')].filter(e => e.getClientRects().length).every(e => e.getBoundingClientRect().height >= 35) }; }, LB);   // (the rows of the other instruments are hidden)
+    ok(fit.page && fit.box && fit.inside && fit.touch, `${w} px: the bench fits without sideways scrolling, touch targets >= 36 px ${JSON.stringify(fit)}`);
+  }
+  await p.setViewportSize({ width: 1280, height: 900 }); await wait(300);
+  await p.emulateMedia({ colorScheme: 'dark' }); await openSec(LB); await wait(300);
+  await p.click(LB + ' [data-bench="measure"]'); await wait(600);
+  const lum = c => { const m = (c.match(/[\d.]+/g) || [255, 255, 255]).map(Number); return (0.2126 * m[0] + 0.7152 * m[1] + 0.0722 * m[2]) / 255; };
+  const dk = await p.evaluate(s => { const r = document.querySelector(s), g = e => e ? getComputedStyle(e) : null; return { bg: g(r.querySelector('.act-box')).backgroundColor, sel: g(r.querySelector('.sim-bench select')).backgroundColor, ink: g(r.querySelector('.sim-log li b'))?.color || '', meter: g(r.querySelector('.sim-meter-v'))?.color || '' }; }, LB);
+  ok(lum(dk.bg) < 0.35 && lum(dk.sel) < 0.35 && lum(dk.ink) > 0.6 && lum(dk.meter) > 0.5, `dark mode: the bench uses the theme (background ${dk.bg}, controls ${dk.sel}, log ${dk.ink}, meter ${dk.meter})`);
+  await p.emulateMedia({ colorScheme: 'light' }); await wait(200);
+
+  console.log('— circuit-mna@1: the oscilloscope and the logic analyser (a modified item)');
+  await p.evaluate(() => {
+    const a = JSON.parse(JSON.stringify(ACT.ITEMS['rc-transient'])); a.id = 'rc-scope';
+    a.spec.bench = { faults: [{ id: 'cOpen', apply: [{ element: 'C1', kind: 'open' }] }, { id: 'rDrift', apply: [{ element: 'R1', kind: 'drift', factor: 3 }] }],
+      points: [{ id: 'IN', at: 'in', label: 'inLine' }, { id: 'OUT', at: 'out', label: 'outLine' }, { id: 'G', at: 'gnd', label: 'voltage' }],
+      instruments: [{ kind: 'scope', tEnd: 0.02, dt: 1e-5 }, { kind: 'logic', tEnd: 0.02, threshold: 2.5 }, { kind: 'V' }],
+      diagnosis: { options: [{ label: 'inLine', fault: 'cOpen' }, { label: 'outLine', fault: 'rDrift' }] } };
+    ACT.ITEMS['rc-scope'] = a;
+    const m = document.querySelector('main'); m.innerHTML = ''; m.append(interactiveBlock({ t: 'interactive', activity: 'rc-scope' })); scrollTo(0, 0);
+  });
+  await startIfParked(p, 'main .act');
+  ok(await until(() => p.evaluate(() => !!document.querySelector('main .sim-bench'))), 'a bench on rc-transient with a scope and a logic analyser mounts ' + await p.evaluate(() => document.querySelector('main .act-note')?.textContent || ''));
+  await p.selectOption('main [data-bench="instrument"]', 'scope'); await p.selectOption('main [data-bench="a"]', 'IN'); await p.click('main [data-bench="measure"]');
+  ok(await until(() => p.evaluate(() => { const l = document.querySelectorAll('main .sim-log li'); return l.length === 1 && !/…$/.test(l[0].textContent) && !!document.querySelector('main .sim-face .sim-svg path.sim-line'); })), 'the scope face: a trace plot');
+  const s1 = await p.evaluate(() => ({ log: document.querySelector('main .sim-log li').textContent, pts: (document.querySelector('main .sim-face path.sim-line').getAttribute('d') || '').split('L').length, cap: document.querySelector('main .sim-face figcaption')?.textContent }));
+  ok(/\b5(?:[.,]0+)?\s*V peak to peak/.test(s1.log) && /100\s*Hz/.test(s1.log) && s1.pts > 100, `the scope reading: peak to peak, mean, frequency of the 100 Hz square wave (${s1.log}; ${s1.pts} points)`);
+  await p.selectOption('main [data-bench="instrument"]', 'logic'); await p.selectOption('main [data-bench="a"]', 'IN'); await p.click('main [data-bench="measure"]');
+  ok(await until(() => p.evaluate(() => { const l = document.querySelectorAll('main .sim-log li'); return l.length === 2 && /duty cycle/.test(l[1].textContent) && !!document.querySelector('main .sim-face path.sim-line'); })), 'the logic analyser face: a logic trace');
+  const s2 = await p.evaluate(() => document.querySelectorAll('main .sim-log li')[1].textContent);
+  ok(/100\s*Hz/.test(s2) && /50\s*%/.test(s2), `the logic reading: frequency and duty cycle (${s2})`);
   ok(E.length === E0, 'no page errors ' + JSON.stringify(E.slice(E0, E0 + 3)));
 }
 (async () => {

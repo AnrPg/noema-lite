@@ -1,4 +1,4 @@
-/* The circuit engine circuit-mna@1 (engine/src/36_engine_circuit.js, docs/activities-dev/circuit.md) against analytic results:
+/* The circuit engine circuit-mna@1 (engine/src/36_engine_circuit.js, docs/INTERACTIVE_CIRCUIT.md) against analytic results:
    1. DC: divider, diode and LED with a resistor, BJT switch (Ebers–Moll saturation voltage), MOSFET switch, op-amp inverting gain;
    2. transients: RC charge, RL, series RLC (frequency and decay), RC low-pass at fc (sine steady state), PWM average through RC;
    3. instruments: ohmmeter, scope stats, logic analyser edges on a PWM node;
