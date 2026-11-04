@@ -280,3 +280,36 @@ mode, audits. The content work (the electronics Roadmap) starts only after the h
   `srcdoc` frame nested in another one in the full Chromium on a `file://` page (sandboxed frames get their own process); the app
   test runs the full Chromium with `--disable-features=IsolateSandboxedIframes` (the loop guard, not the process model, is what
   stops runaway code, as in Firefox and WebKit).
+
+## 9. As built — P3 (`circuit-mna@1` and the fault-finding bench, 2026-11-04)
+
+* **The engine in sim-spec.** `engine/src/36_engine_circuit.js` (NoemaCircuit: MNA, Newton, trapezoidal transients, faults,
+  instruments, seeded noise) is registered by `engine/src/36_engine_circuit_sim.js` as `circuit-mna@1` with `{bench: true, check,
+  prepare, create, workerSource}`. `workerSource` is the engine's own source (`NoemaCircuit.source()`, the module's
+  `Function.toString`) plus the adapter's: one copy of the code, the same in the page and in the worker. `prepare` evaluates the
+  spec's expressions (bindings, transient times, `at`) with the app's NoemaExpr on the main thread, so the worker gets numbers only
+  and needs no expression language. The model is `{netlist, bindings, transient, noise}`; outputs are node/branch series, DC or
+  transient scalars (`at`, `stat`) and probe readings (docs/INTERACTIVE_CIRCUIT.md §1).
+* **A bench is a minimal extension of the spec** (`spec.bench`: faults, points, instruments, budget, diagnosis) rendered by the
+  sim-spec runtime itself (`makeBench` in 35_activity_sim.js), for engines that declare `bench: true`; the engine adds
+  `measure(inputs, probe)` next to `run`. The runner queues runs and measurements: the latest run wins, measurements are first in,
+  first out, and every result still passes the P2 gate (`values()` is null while the latest inputs are not computed). The bench's
+  values `diagnosis`, `measurements`, `correct` join the checks' names only (not readouts or marks, never declarable), and
+  `values()` stays null until a diagnosis is chosen, so Check waits.
+* **The hidden fault.** It is picked in the runtime's closure (`task.params.fault`: an id or a list, else all faults; drawn by the
+  seed) and reaches the engine only as the change to the circuit (`opts.faults`). No label, log entry, event, saved state or value
+  names it before the diagnosis; `R.sim.reveal()` (Check) and "Check my diagnosis" call `port.reveal()`, the only place that words
+  it. The comparison (`correct`) is made in the runtime. The spec in the pack lists the faults — a learner with the developer tools
+  can read them, as they can read any exercise's answer; nothing a learner reads in the UI reveals it (tests/activities_app.js
+  checks the page's HTML and text before the diagnosis, and the saved state).
+* **New fault kind `reverse`** (a part soldered the other way round: two pins swap), needed by the LED bench; `checkFaults` lists
+  what `create` would throw, and `tools/circuit.py` is its Python twin (and of `check` and `num`), so `tools/activities.py` and
+  `engine/packcheck.js` check a circuit spec with the same messages (`tests/activities.js` compares them on 39 circuit specs and on
+  netlist and fault corpora). `NoemaCircuit` is now loaded beside packcheck.js wherever NoemaExpr is (the shell, the site, the
+  one-file bundle, the connector), so a circuit pack is checked before any subject is open.
+* **Reference activities** `rc-transient` (RC charging from a pulse source, the "63 % at 1 ms" exercise) and `led-bench` (5 V, a
+  switch, 330 Ω, a red LED; faults LED reversed / open, resistor open / ×10, an open track); `activity_new.py --from` starts from
+  either; the harness has `measure` / `diagnose` steps and `readings` / `log` expectations.
+* **Found on the way:** the harness's host page replaced `{name}` placeholders with a regex written inside a template literal, which
+  lost its backslashes (no host string with a placeholder was ever filled); with four activities in one section the two live slots
+  are taken by the first ones in view, so the app test presses Start on a parked block (as a learner would).
