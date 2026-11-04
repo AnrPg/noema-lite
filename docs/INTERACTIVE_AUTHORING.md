@@ -5,7 +5,8 @@ The contract is `docs/INTERACTIVE.md`; this page is how to make one that teaches
 (sim-spec@1, an RC low-pass filter): each an explorer in the theory and a graded sim exercise. For circuits (`circuit-mna@1`,
 `docs/INTERACTIVE_CIRCUIT.md`): `rc-transient` (a capacitor charging from a square wave, R and C on sliders, a scope trace) and
 `led-bench` (a fault-finding bench: an LED that stays dark). For Python (`py-module@1`, `docs/INTERACTIVE_PYTHON.md`): `py-filter`
-(two digital low-pass filters computed with numpy).
+(two digital low-pass filters computed with numpy). For an H5P package (`h5p@1`, `docs/INTERACTIVE_H5P.md`):
+`planets-quiz` (an H5P multiple choice, in English, Greek and Russian).
 
 ## When an activity earns its place
 
@@ -51,6 +52,46 @@ It has a price, so weigh it:
 Keep **every step fast** (aim for < 50 ms; the budget is 3 s, then the learner sees Restart): compute what does not change at the top
 of `main.py`, vectorise with numpy, a few hundred points per curve. Use scipy only when numpy really cannot do the job (it costs
 20 MB and 3–5 s per start). If a formula can say it, use sim-spec@1.
+
+## When to use H5P (`h5p@1`)
+
+Use an **H5P package** when the activity already exists as one, or is best made in an H5P editor (h5p.org, Lumi, Moodle,
+WordPress…): a drag and drop onto a picture, fill in the blanks, mark the words, drag the words into a text, dialog cards, a set of
+single-choice questions, a summary to build. The `.h5p` file goes into the pack unchanged; the app plays it with its own H5P player
+in the activity sandbox, offline, and records the score H5P reports. It needs no code and no string tables of yours. Do not use it
+for what the exercise types already do (a plain multiple choice or a cloze is better as an exercise: it joins the Mistakes gym,
+drills and reviews); use it when the package's own interaction is the point, or when a teacher's existing H5P item should come
+along with the course.
+
+**Which content types.** Tested (played and scored in Chromium, Firefox and WebKit): `H5P.MultiChoice`, `H5P.TrueFalse`,
+`H5P.DragQuestion` (drag and drop), `H5P.Blanks` (fill in the blanks), `H5P.DragText`, `H5P.MarkTheWords`, `H5P.SingleChoiceSet`,
+`H5P.Summary`, `H5P.Dialogcards`. Allowed with a warning (not yet tested): `H5P.QuestionSet`, `H5P.InteractiveVideo` (the video
+must be inside the package: a YouTube or other outside link is refused), `H5P.BranchingScenario`, `H5P.CoursePresentation`.
+Refused: anything that loads from the network (`H5P.MathDisplay`, `H5P.IFrameEmbed`, `H5P.Twitter`, `H5P.GoogleMap`, …), any outside
+link in the content, files H5P itself would refuse (`.php`, `.html`, `.exe`). `python3 h5p_check.py item.h5p` says exactly what is
+wrong with a package. Content-type libraries come inside the package with their own licences (normally MIT); give the content's own
+licence in `activity.json`.
+
+**Steps.** `python3 activity_new.py <subject-dir> <id> --runtime h5p@1 --from item.h5p` copies your package to
+`activities/<id>/item.h5p`, checks it, and writes `activity.json`, a fallback picture to replace, and `tests.json`. (Without
+`--from` it copies planets-quiz.) Then:
+
+1. **Translations through `h5pByLocale`.** H5P keeps every word of an item in its `content.json` — the question, the answers, the
+   feedback and the button labels (`UI` / `l10n` fields). Unzip `content/content.json` from the package, translate every text
+   value (keep the keys, the structure, the HTML tags and the media paths unchanged), and save it as
+   `activities/<id>/content.<locale>.json`: one for each language the pack is read in other than the package's own. The
+   validators refuse a missing one and one for a language the pack does not have. `l10n.<locale>.json` (optional) translates
+   H5P's own core strings ("Close", confirm dialogs). Only when a language needs other pictures or a recording, give a whole other
+   package instead (`h5pByLocale.<locale> = {h5p, sha256}` in `activity.json`).
+2. **The theory block** `{"t": "interactive", "activity": "<id>"}` or **the sim exercise** with `"grade": "reported"`: the score H5P reports
+   when the learner presses its Check button is the answer (passed when H5P says so, or at a score of at least half). The `q`
+   still states the task fully (Q1), and is explained after the block as for every activity.
+3. **The fallback**, as for every activity: a still picture and a text that teaches the same idea.
+4. **Check**: `activity_lint.py` runs the package rules on the file and each translation; `activity_test.py` plays the item in
+   every language (`tests.json`: `{"click": ".h5p-answer:nth-child(1)"}`, then `{"click": ".h5p-question-check-answer"}`,
+   `expect.passed`; `"locale": "el"` with `expect.text` to see a translation); `activity_preview.py` shows it.
+5. **Delivery**: `make_pack.py` keeps `item.h5p` **beside** the pack (in the `.noema.zip`); through the connector,
+   `noema_finish_upload` asks for it with one curl command per file and checks it before it accepts the pack.
 
 ## Steps
 
@@ -168,6 +209,9 @@ A bench teaches **reasoning from measurements**: each reading should rule someth
 - Too small on a phone: test at 360 px; controls >= 36 px; no horizontal scroll.
 - sim-spec: a formula that uses a value defined below it (`derived` are computed in order), a label key missing in one
   language, a check whose label gives the answer away ("R is 1.6 kΩ"): `activity_lint.py` catches the first two; the third is yours.
+- H5P: a package that needs the network (a YouTube video, MathDisplay, an embedded page) is refused; a translation that changed
+  a key or a media path breaks the item in that language (test it with a `"locale"` case); sounds that a library asks for by URL
+  (SingleChoiceSet's sound effects) stay silent.
 - A bench: a probe point or option label that gives the fault away ("TP4 (broken track)"); two faults no instrument can tell
   apart (then they are one option, or the bench needs another point); a fault without an option (the validators refuse it); a
   budget so tight that a careful learner runs out.

@@ -370,7 +370,8 @@
   /* ---------- interactive activities (docs/INTERACTIVE.md): the SAME rules as tools/activities.py (tests/activities.js) ---------- */
   const ACT = {
     FORMAT: 'noema.activities/v1', ID_RE: /^[a-z0-9][a-z0-9-]{1,60}$/, KEY_RE: /^[a-z][a-zA-Z0-9_.-]{0,63}$/,
-    RUNTIMES: new Set(['html-app@1', 'sim-spec@1', 'py-module@1']), LATER: { 'h5p@1': 'P4b' },
+    RUNTIMES: new Set(['html-app@1', 'sim-spec@1', 'py-module@1', 'h5p@1']), LATER: {},
+    H5P: 'h5p@1', SHA_RE: /^[0-9a-f]{64}$/, H5P_MAX: 100 * 1024 * 1024,   // h5p@1: the .h5p file travels beside the pack (docs/INTERACTIVE_H5P.md)
     CAPS: new Set(['state', 'events', 'resize', 'result', 'hints', 'announce']), GRADE_MODES: new Set(['reported', 'checks']),
     CHECKS_RUNTIMES: new Set(['sim-spec@1', 'py-module@1']),   // runtimes whose values the app can see (the checks grader needs them)
     SPEC_RUNTIMES: new Set(['sim-spec@1', 'py-module@1']),     // runtimes the app draws from a spec (py-module@1: its outputs come from Python's step())
@@ -874,6 +875,64 @@
   /** checkActivities(pack, locales?) → { errors, warnings }: pack.activities, the blocks and sim exercises that use them, pack.requires.
       The sha256 of a bundle is checked here when Node's crypto is at hand (the connector), else by the app when it mounts it. */
   const nodeSha = (() => { try { const c = globalThis.process?.getBuiltinModule?.('crypto'); return c ? s => c.createHash('sha256').update(s, 'utf8').digest('hex') : null; } catch (e) { return null; } })();
+  /** the registry fields of an h5p@1 item (the package itself: checkActivityPackages) — the SAME rules as tools/activities.py check_h5p_item */
+  function checkH5PItem(a, aid, locs, own) {
+    const E = [], entry = a.entry;
+    if (entry != null && !(typeof entry === 'string' && entry.startsWith('activities/') && entry.endsWith('.h5p') && !entry.split('/').includes('..'))) E.push(`entry must be the .h5p file beside the pack (activities/${aid}/item.h5p)`);
+    if (!(typeof a.sha256 === 'string' && ACT.SHA_RE.test(a.sha256))) E.push('sha256 (of the .h5p file) is required');
+    if (!(Number.isInteger(a.bytes) && a.bytes > 0 && a.bytes <= ACT.H5P_MAX)) E.push(`bytes (the size of the .h5p file, at most ${ACT.H5P_MAX / 1048576} MB) is required`);
+    if ('html' in a) E.push('an h5p@1 item has no html (its .h5p file travels beside the pack)');
+    if (a.h5p != null && typeof a.h5p !== 'string') E.push('h5p (inline) must be the .h5p file in base64');
+    const by = a.h5pByLocale;
+    if (by != null) {
+      if (!isObj(by)) E.push('h5pByLocale must be {locale: {content} | {h5p, sha256}}');
+      else for (const [loc, v] of Object.entries(by)) {
+        if (!locs.includes(loc)) { E.push(`h5pByLocale.${loc}: the pack is not read in ${loc} (${locs.join(', ')})`); continue; }
+        if (!isObj(v) || !(isObj(v.content) || (typeof v.h5p === 'string' && typeof v.sha256 === 'string' && ACT.SHA_RE.test(v.sha256)))) E.push(`h5pByLocale.${loc} must be {content} (its content.json) or {h5p, sha256} (another package in base64)`);
+        else if (v.l10n != null && !isObj(v.l10n)) E.push(`h5pByLocale.${loc}.l10n must be an object (H5P's own strings)`);
+      }
+    }
+    for (const loc of locs) if (loc !== own && !(isObj(by) && Object.prototype.hasOwnProperty.call(by, loc))) E.push(`h5pByLocale.${loc} is missing: the item's words in ${loc} (activities/${aid}/content.${loc}.json)`);
+    return E;
+  }
+  /** checkActivityPackages(pack, bytesOf?) → Promise<{ errors, warnings }>: the .h5p files of the pack's h5p@1 items — sha256 and bytes
+      as the registry says, the package rules (NoemaH5P.check, engine/src/38_activity_h5p.js, loaded beside this file), each h5pByLocale
+      translation with the same rules. bytesOf(item) → bytes (Uint8Array) | null, or a promise of them; an inline "h5p" (base64) is used
+      first. The SAME messages as tools/activities.py check_h5p_packages (tests/activities.js). The connector runs it on the files
+      uploaded beside a pack; the app runs NoemaH5P's checks itself when an item mounts. */
+  async function checkActivityPackages(p, bytesOf) {
+    const E = [], W = [], H = root.NoemaH5P;
+    const items = (p?.activities?.items || []).filter(a => isObj(a) && a.runtime === ACT.H5P && typeof a.id === 'string');
+    if (!items.length) return { errors: E, warnings: W };
+    if (!H || !root.crypto?.subtle) return { errors: E, warnings: ['h5p@1: the package checker (NoemaH5P, engine/src/38_activity_h5p.js) is not loaded here'] };
+    const b64 = s => { try { const t = atob(String(s).replace(/^data:[^,]*;base64,/, '').replace(/\s+/g, '')), u = new Uint8Array(t.length); for (let i = 0; i < t.length; i++) u[i] = t.charCodeAt(i); return u; } catch (e) { return new Uint8Array(0); } };
+    const hex = async u => Array.from(new Uint8Array(await root.crypto.subtle.digest('SHA-256', u)), x => x.toString(16).padStart(2, '0')).join('');
+    const unzip = async u => { try { return await H.unzip(u); } catch (e) { return null; } };
+    for (const a of items) {
+      const w = `activity ${a.id}`;
+      let b = typeof a.h5p === 'string' ? b64(a.h5p) : (bytesOf ? await bytesOf(a) : null);
+      if (b == null) { E.push(`${w}: the .h5p file ${a.entry || ''} is missing`); continue; }
+      if (!(b instanceof Uint8Array)) b = new Uint8Array(b);
+      if (a.sha256 !== await hex(b)) E.push(`${w}: sha256 does not match the .h5p file`);
+      if (a.bytes !== b.length) E.push(`${w}: bytes does not match the .h5p file`);
+      const files = await unzip(b);
+      if (!files) { E.push(`${w}: not a .h5p (zip) file`); continue; }
+      const r = H.check(files); E.push(...r.errors.map(m => `${w}: ${m}`)); W.push(...r.warnings.map(m => `${w}: ${m}`));
+      const by = isObj(a.h5pByLocale) ? a.h5pByLocale : {};
+      for (const loc of Object.keys(by).sort()) {
+        const v = by[loc]; if (!isObj(v)) continue;
+        let f2;
+        if (typeof v.h5p === 'string') {
+          const b2 = b64(v.h5p); f2 = await unzip(b2);
+          if (!f2) { E.push(`${w}: h5pByLocale.${loc}: not a .h5p (zip) file`); continue; }
+          if (v.sha256 !== await hex(b2)) E.push(`${w}: h5pByLocale.${loc}: sha256 does not match the .h5p file`);
+        } else if (isObj(v.content)) f2 = { ...files, 'content/content.json': new TextEncoder().encode(JSON.stringify(v.content)) };
+        else continue;
+        E.push(...H.check(f2).errors.map(m => `${w}: h5pByLocale.${loc}: ${m}`));
+      }
+    }
+    return { errors: E, warnings: W };
+  }
   function checkActivities(p, translations) {
     const E = [], W = [], reg = p?.activities, media = p?.media || {}, own = p?.subject?.language || 'en';
     const locs = [...new Set([own, ...(translations || Object.keys(p?.translations || {}))])].sort();
@@ -885,7 +944,7 @@
         if (typeof aid !== 'string' || !ACT.ID_RE.test(aid)) { E.push(`activity ${qv(aid)}: id must be lower-case letters, digits and - (2–61)`); continue; }
         if (Object.prototype.hasOwnProperty.call(items, aid)) { E.push(`activity ${aid}: duplicate id`); continue; }
         items[aid] = a; const w = `activity ${aid}`, rt = a.runtime;
-        if (Object.prototype.hasOwnProperty.call(ACT.LATER, rt)) E.push(`${w}: runtime ${rt} arrives in a later version of the app (${ACT.LATER[rt]}); use html-app@1, sim-spec@1 or py-module@1 for now`);
+        if (Object.prototype.hasOwnProperty.call(ACT.LATER, rt)) E.push(`${w}: runtime ${rt} arrives in a later version of the app (${ACT.LATER[rt]}); use html-app@1, sim-spec@1, py-module@1 or h5p@1 for now`);
         else if (!ACT.RUNTIMES.has(rt)) E.push(`${w}: unknown runtime ${qv(rt)} (one of ${[...ACT.RUNTIMES].sort().join(', ')})`);
         if (!(Number.isInteger(a.stateVersion) && a.stateVersion >= 1)) E.push(`${w}: stateVersion must be a whole number >= 1`);
         const caps = a.capabilities ?? [];
@@ -922,9 +981,10 @@
           }
           if (!('spec' in a)) E.push(`${w}: the spec (activities/${aid}/spec.json: the controls, readouts and plots the app draws) is missing`);
           else E.push(...checkSimSpec(a.spec, isObj(a.strings) ? a.strings : null, null, { python: true }).map(m => `${w}: ${m}`));
-        }
+        } else if (rt === ACT.H5P) E.push(...checkH5PItem(a, aid, locs, own).map(m => `${w}: ${m}`));
         const st = a.strings;
-        if (!st || typeof st !== 'object' || Array.isArray(st) || !Object.keys(st).length) E.push(`${w}: strings {locale: {key: text}} are required (an activity shows no words of its own)`);
+        if (rt === ACT.H5P && (st == null || (isObj(st) && !Object.keys(st).length))) { /* an H5P item keeps its words in content.json (h5pByLocale for the other languages) */ }
+        else if (!st || typeof st !== 'object' || Array.isArray(st) || !Object.keys(st).length) E.push(`${w}: strings {locale: {key: text}} are required (an activity shows no words of its own)`);
         else {
           let keys = null;
           for (const [loc, tab] of Object.entries(st)) {
@@ -1103,5 +1163,5 @@
     return { errors: E, warnings: W, counts: { entries: entries.length, senses, stale, sections: Object.keys(secs).length, previews, anchors: anchors.length } };
   }
   /* i18n-ignore-end */
-  root.NoemaPackCheck = { checkPack, checkActivities, checkSimSpec, specNames, needRequires, lintHtml, lintPython, ACTIVITY_RULES: ACT, checkExercise, checkBalance, checkQuality, checkBridge, checkTranslation, requiredLocales, RULES, QUALITY, LANGS, TYPES, BLOCKS, ID_RE };
+  root.NoemaPackCheck = { checkPack, checkActivities, checkActivityPackages, checkSimSpec, specNames, needRequires, lintHtml, lintPython, ACTIVITY_RULES: ACT, checkExercise, checkBalance, checkQuality, checkBridge, checkTranslation, requiredLocales, RULES, QUALITY, LANGS, TYPES, BLOCKS, ID_RE };
 })(typeof window !== 'undefined' ? window : globalThis);

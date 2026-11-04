@@ -918,6 +918,7 @@ window.NoemaCurriculum.Gen = (() => {
       // the step's subject points at the curriculum's copy of each file (no second copy); Claude's packaged files too when they are the same file
       const bySha = new Map(mat.filter(f => f.fileId && f.sha256).map(f => [f.sha256, f]));
       if (files && SF) await SF.attachPackaged(acc, pack, path => files[path] || null, { refFor: s => { const f = bySha.get(s.sha256); return f ? { subj: C.curStore(c.id), src: f.fileId } : null; } }).catch(e => console.warn('[source files]', e));
+      if (files && SF?.attachActivityFiles) await SF.attachActivityFiles(acc, pack, path => files[path] || null).catch(e => console.warn('[activity files]', e));   // h5p@1: the .h5p files beside the pack
       if (SF && !packaged.length) for (const f of mat) if (f.fileId && pack.sources.sources.some(s => s.id === f.srcId)) SF.link(acc, pid, f.srcId, { subj: C.curStore(c.id), src: f.fileId }, { name: f.name, type: f.type, size: f.size });
       if (packaged.length && mat.length) {   // Claude packaged the files (maybe split them): drop the older per-step copies that no source uses any more
         const ids = new Set(pack.sources.sources.map(s => s.id));

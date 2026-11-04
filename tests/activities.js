@@ -247,8 +247,37 @@ const pcases = {
   'py: a check on a series': p => { sx(p).grade.checks[0].expr = 'gain <= -20'; },
   'py: a task const not a number': p => { pi(p).spec.consts = { fs: 8000 }; sx(p).task.params = { fs: 'fast' }; },
 };
-const packs = [...Object.entries(cases).map(([k, f]) => { const p = base(); f(p); return [k, p]; }), ...Object.entries(scases).map(([k, f]) => { const p = sbase(); f(p); return [k, p]; }), ...Object.entries(ccases).map(([k, f]) => { const p = cbase(); f(p); return [k, p]; }), ...Object.entries(pcases).map(([k, f]) => { const p = pbase(); f(p); return [k, p]; })];
-const GOOD = new Set(['good', 'spec good', 'spec: a good choice and toggle', 'circuit good', 'circuit: rc-transient (no bench)', 'circuit: a good scalar output in a readout', 'circuit: a scope and a logic analyser', 'circuit: task.fault a list', 'circuit: a check on the diagnosis index',
+// h5p@1: the reference planets-quiz (an ordinary .h5p package beside the pack; its words in el and ru as content.<locale>.json)
+const PQ = path.join(ROOT, 'tools', 'activities_examples', 'planets-quiz'), PQB = fs.readFileSync(path.join(PQ, 'item.h5p'));
+const pqItem = { ...JSON.parse(fs.readFileSync(path.join(PQ, 'activity.json'), 'utf8')), sha256: crypto.createHash('sha256').update(PQB).digest('hex'), bytes: PQB.length };
+const pqContent = l => JSON.parse(fs.readFileSync(path.join(PQ, `content.${l}.json`), 'utf8'));
+const hbase = () => { const p = base(); p.media['planets-quiz-still'] = { w: 600, h: 220 }; p.requires.push('runtime:h5p@1'); p.activities.items.push(JSON.parse(JSON.stringify(pqItem)));
+  p.chapters[0].sections[0].blocks.push({ t: 'interactive', activity: 'planets-quiz' });
+  p.chapters[0].exercises.push({ id: 'ch01-e3', type: 'sim', activity: 'planets-quiz', grade: { mode: 'reported' }, reveal: 'Jupiter.' }); return p; };
+const hx = p => p.activities.items[1];
+const hcases = {
+  'h5p good': p => p,
+  'h5p good in el and ru': p => { p.translations = { el: {}, ru: {} }; hx(p).h5pByLocale = { el: { content: pqContent('el') }, ru: { content: pqContent('ru'), l10n: { close: 'Закрыть' } } }; },
+  'h5p: strings are checked when given': p => { hx(p).strings = { en: { a: 'x' }, el: { b: 'y' } }; },
+  'h5p: no sha256': p => { delete hx(p).sha256; },
+  'h5p: a bad sha256': p => { hx(p).sha256 = 'abc'; },
+  'h5p: no bytes': p => { delete hx(p).bytes; },
+  'h5p: entry not an .h5p': p => { hx(p).entry = 'activities/planets-quiz/app.html'; },
+  'h5p: entry that leaves the folder': p => { hx(p).entry = 'activities/../x.h5p'; },
+  'h5p: an html bundle too': p => { hx(p).html = '<p>x</p>'; },
+  'h5p: inline h5p not base64 text': p => { hx(p).h5p = { data: 1 }; },
+  'h5p: a translation missing': p => { p.translations = { el: {}, ru: {} }; hx(p).h5pByLocale = { el: { content: pqContent('el') } }; },
+  'h5p: a language the pack is not read in': p => { hx(p).h5pByLocale = { de: { content: {} } }; },
+  'h5p: a bad h5pByLocale entry': p => { p.translations = { el: {} }; hx(p).h5pByLocale = { el: { text: 'x' } }; },
+  'h5p: a bad l10n': p => { p.translations = { el: {} }; hx(p).h5pByLocale = { el: { content: {}, l10n: 'x' } }; },
+  'h5p: another package without sha256': p => { p.translations = { el: {} }; hx(p).h5pByLocale = { el: { h5p: 'UEsDBA==' } }; },
+  'h5p: h5pByLocale not an object': p => { hx(p).h5pByLocale = ['el']; },
+  'h5p: no requires': p => { p.requires = ['activities/v1', 'runtime:html-app@1']; },
+  'h5p: checks grading': p => { p.chapters[0].exercises[1].grade = { mode: 'checks', checks: [{ expr: 'score > 0' }] }; },
+};
+const packs = [...Object.entries(cases).map(([k, f]) => { const p = base(); f(p); return [k, p]; }), ...Object.entries(scases).map(([k, f]) => { const p = sbase(); f(p); return [k, p]; }), ...Object.entries(ccases).map(([k, f]) => { const p = cbase(); f(p); return [k, p]; }), ...Object.entries(pcases).map(([k, f]) => { const p = pbase(); f(p); return [k, p]; }),
+  ...Object.entries(hcases).map(([k, f]) => { const p = hbase(); f(p); return [k, p]; })];
+const GOOD = new Set(['h5p good', 'h5p good in el and ru', 'good', 'spec good', 'spec: a good choice and toggle', 'circuit good', 'circuit: rc-transient (no bench)', 'circuit: a good scalar output in a readout', 'circuit: a scope and a logic analyser', 'circuit: task.fault a list', 'circuit: a check on the diagnosis index',
   'py good', 'py: graded "reported" (noema.result)', 'py: a task param for Python only', 'py: scipy declared and imported', 'py: an allow-listed extra with requiresNetwork', 'py: while True (a warning)']);
 const tmp = path.join(require('os').tmpdir(), 'noema-act-parity.json'); fs.writeFileSync(tmp, JSON.stringify(packs));
 const py = JSON.parse(cp.execFileSync('python3', ['-c', `import sys, json; sys.path.insert(0, ${JSON.stringify(path.join(ROOT, 'tools'))}); import activities as A
@@ -289,21 +318,89 @@ print(json.dumps({'c': [C.check(c) for c in d['cases']], 'f': [C.check_faults(d[
   const cdiff = ['c', 'f'].flatMap(k => cjs[k].map((r, i) => JSON.stringify(r) === JSON.stringify(cpy[k][i]) ? null : [k, i, r, cpy[k][i]]).filter(Boolean));
   ok(!cdiff.length && cjs.f.flat().length >= 8, `netlist and fault checks: JS and Python agree on ${cases.length} netlists and ${fl.length} fault lists ${cdiff.length ? JSON.stringify(cdiff[0]).slice(0, 500) : ''}`);
 }
-ok(!('py-module@1' in P.ACTIVITY_RULES.LATER) && P.ACTIVITY_RULES.RUNTIMES.has('py-module@1') && P.ACTIVITY_RULES.RUNTIMES.has('sim-spec@1') && 'h5p@1' in P.ACTIVITY_RULES.LATER, 'sim-spec@1 and py-module@1 are runtimes now; h5p@1 stays for later');
+ok(!('py-module@1' in P.ACTIVITY_RULES.LATER) && !('h5p@1' in P.ACTIVITY_RULES.LATER) && !('sim-spec@1' in P.ACTIVITY_RULES.LATER) && ['sim-spec@1', 'py-module@1', 'h5p@1'].every(r => P.ACTIVITY_RULES.RUNTIMES.has(r)), 'sim-spec@1, py-module@1 and h5p@1 are runtimes now');
 { // py-module@1: the packages JS and Python allow are the allow-list's (tools/pywheels_allow.json) + numpy, scipy; the spec rules with python: true agree word for word
   const allow = Object.keys(JSON.parse(fs.readFileSync(path.join(ROOT, 'tools', 'pywheels_allow.json'), 'utf8')).wheels).sort();
   const pyl = JSON.parse(cp.execFileSync('python3', ['-c', `import sys, json; sys.path.insert(0, ${JSON.stringify(path.join(ROOT, 'tools'))}); import activities as A; print(json.dumps([A.PY_BASE, A.PY_EXTRAS, A.PY_MAX, list(A.PY_STEP)]))`], { encoding: 'utf8' }));
   const R = P.ACTIVITY_RULES;
   ok(JSON.stringify([...R.PY_EXTRAS].sort()) === JSON.stringify(allow) && JSON.stringify(pyl) === JSON.stringify([R.PY_BASE, R.PY_EXTRAS, R.PY_MAX, R.PY_STEP]) && JSON.stringify(R.PY_BASE) === '["numpy","scipy"]', `the Python packages: numpy, scipy + the allow-list (${allow.join(', ')}), the same in JS and Python`);
   const specs = packs.filter(([k]) => k in pcases).map(([, p]) => p.activities.items[1]);
-  fs.writeFileSync(tmp, JSON.stringify(specs));
+  const stmp = path.join(require('os').tmpdir(), 'noema-py-parity.json'); fs.writeFileSync(stmp, JSON.stringify(specs));
   const py3 = JSON.parse(cp.execFileSync('python3', ['-c', `import sys, json; sys.path.insert(0, ${JSON.stringify(path.join(ROOT, 'tools'))}); import activities as A
-print(json.dumps([[A.check_spec(a.get('spec'), a.get('strings'), python=True), list(A.lint_python(a.get('python'), a.get('packages') if isinstance(a.get('packages'), list) else []))] for a in json.load(open(sys.argv[1], encoding='utf-8'))], ensure_ascii=False))`, tmp], { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 }));
+print(json.dumps([[A.check_spec(a.get('spec'), a.get('strings'), python=True), list(A.lint_python(a.get('python'), a.get('packages') if isinstance(a.get('packages'), list) else []))] for a in json.load(open(sys.argv[1], encoding='utf-8'))], ensure_ascii=False))`, stmp], { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 }));
   const js3 = specs.map(a => { const l = P.lintPython(a.python, Array.isArray(a.packages) ? a.packages : []); return [P.checkSimSpec(a.spec, a.strings, null, { python: true }), [l.errors, l.warnings]]; });
   const norm = l => JSON.stringify(l).replace(/'/g, '"');
   const d3 = js3.map((x, i) => norm(x) === norm(py3[i]) ? null : [x, py3[i]]).filter(Boolean);
   ok(!d3.length, `py-module@1: the spec check (python: true) and the Python lint give the same messages in JS and Python on ${specs.length} items ${d3.length ? JSON.stringify(d3[0]).slice(0, 600) : ''}`);
   ok(P.needRequires([pfItem]).join() === 'activities/v1,runtime:py-module@1', 'pack.requires of a Python activity: activities/v1, runtime:py-module@1 (no engine)');
+}
+{ // the same messages for the h5p@1 registry rules (not only the same counts)
+  const hk = packs.filter(([k]) => k.startsWith('h5p')).map(([k]) => k);
+  const pyh = JSON.parse(cp.execFileSync('python3', ['-c', `import sys, json; sys.path.insert(0, ${JSON.stringify(path.join(ROOT, 'tools'))}); import activities as A
+print(json.dumps({k: A.check_activities(p, list((p.get('translations') or {}).keys()))[0] for k, p in json.load(open(sys.argv[1], encoding='utf-8')) if k.startswith('h5p')}, ensure_ascii=False))`, tmp], { encoding: 'utf8' }));
+  const hd = hk.filter(k => JSON.stringify(P.checkActivities(packs.find(x => x[0] === k)[1], Object.keys(packs.find(x => x[0] === k)[1].translations || {})).errors.map(m => m.replace(/'/g, '"'))) !== JSON.stringify(pyh[k].map(m => m.replace(/'/g, '"'))));
+  ok(hk.length >= 15 && !hd.length, `h5p@1: checkActivities (JS) and check_activities (Python) give the same messages on ${hk.length} packs ${hd.slice(0, 2).join(', ')}`);
+}
+{ // h5p@1: the packages themselves — NoemaPackCheck.checkActivityPackages (through NoemaH5P, the app's own checker) and check_h5p_packages
+  // (through tools/h5p_check.py) give the same errors and warnings on the reference, the fixtures and broken or hostile variants
+  globalThis.window = globalThis; require(path.join(ROOT, 'engine', 'src', '38_activity_h5p.js'));
+  const H = globalThis.NoemaH5P, allow = JSON.parse(fs.readFileSync(path.join(ROOT, 'tools', 'h5p_allow.json'), 'utf8'));
+  ok(JSON.stringify(Object.fromEntries(Object.entries(allow.content).map(([k, v]) => [k, v.versions]))) === JSON.stringify(H.ALLOW.content) && JSON.stringify(allow.libraries) === JSON.stringify(H.ALLOW.libraries)
+    && JSON.stringify(allow.refuse) === JSON.stringify(H.ALLOW.refuse) && JSON.stringify(allow.files.extensions) === JSON.stringify(H.ALLOW.extensions) && JSON.stringify(Object.keys(allow.content).filter(k => !allow.content[k].tested)) === JSON.stringify(H.ALLOW.untested),
+    'one allow-list: tools/h5p_allow.json = NoemaH5P.ALLOW (the app, the connector and packcheck use it)');
+  const hdir = fs.mkdtempSync(path.join(require('os').tmpdir(), 'noema-h5p-parity-'));
+  cp.execFileSync('python3', ['-c', `import sys, zipfile, json, os
+src, out = sys.argv[1], sys.argv[2]
+z = zipfile.ZipFile(src); ent = [(i.filename, z.read(i)) for i in z.infolist() if not i.is_dir()]
+def w(name, f):
+    es = f([list(e) for e in ent]); zz = zipfile.ZipFile(os.path.join(out, name + '.h5p'), 'w', zipfile.ZIP_DEFLATED)
+    for n, b in es: zz.writestr(n, b)
+    zz.close()
+def setf(es, n, b):
+    for e in es:
+        if e[0] == n: e[1] = b; return es
+    es.append([n, b]); return es
+def hj(es, f):
+    h = json.loads(dict(es)['h5p.json']); f(h); return setf(es, 'h5p.json', json.dumps(h).encode())
+def cj(es, f):
+    c = json.loads(dict(es)['content/content.json']); f(c); return setf(es, 'content/content.json', json.dumps(c).encode())
+w('php', lambda es: setf(es, 'content/shell.php', b'<?php ?>'))
+w('script-in-content', lambda es: setf(es, 'content/run.js', b'alert(1)'))
+w('refused', lambda es: hj(es, lambda h: h['preloadedDependencies'].append({'machineName': 'H5P.MathDisplay', 'majorVersion': '1', 'minorVersion': '0'})))
+w('outside-link', lambda es: cj(es, lambda c: c.update(question='<img src="https://x.example/p.png">')))
+w('attribution', lambda es: cj(es, lambda c: c.update(metadata={'source': 'https://example.org/x'})))
+w('no-h5p-json', lambda es: [e for e in es if e[0] != 'h5p.json'])
+w('missing-library', lambda es: [e for e in es if not e[0].startswith('H5P.JoubelUI-1.3/')])
+open(os.path.join(out, 'not-a-zip.h5p'), 'wb').write(b'not a zip at all')`, path.join(PQ, 'item.h5p'), hdir]);
+  const fixtures = ['mc', 'drag', 'tf'].map(k => [k, path.join(ROOT, 'tests', 'fixtures', 'h5p', k + '.h5p')]);
+  const variants = fs.readdirSync(hdir).filter(f => f.endsWith('.h5p')).sort().map(f => [f.slice(0, -4), path.join(hdir, f)]);
+  const hpk = [];
+  for (const [k, f] of [...fixtures, ...variants]) {   // each as the file beside the pack (entry), and the reference also inline and with translations
+    const b = fs.readFileSync(f), p = hbase(); Object.assign(hx(p), { entry: f, sha256: crypto.createHash('sha256').update(b).digest('hex'), bytes: b.length }); hpk.push(['file ' + k, p]);
+  }
+  { const p = hbase(); hx(p).h5p = PQB.toString('base64'); hpk.push(['inline', p]); }
+  { const p = hbase(); hx(p).sha256 = '0'.repeat(64); hx(p).bytes = 5; hpk.push(['sha and bytes differ', p]); }
+  { const p = hbase(); hx(p).entry = path.join(hdir, 'gone.h5p'); hpk.push(['missing file', p]); }
+  { const p = hbase(); hx(p).h5pByLocale = { el: { content: pqContent('el') }, ru: { content: { ...pqContent('ru'), question: '<a href="//evil.example/">x</a>' } } }; hpk.push(['a translation with an outside link', p]); }
+  { const p = hbase(); hx(p).h5pByLocale = { el: { h5p: fs.readFileSync(path.join(ROOT, 'tests', 'fixtures', 'h5p', 'tf.h5p')).toString('base64'), sha256: '1'.repeat(64) }, ru: { h5p: 'bm90IGEgemlw', sha256: '2'.repeat(64) } }; hpk.push(['another package per language', p]); }
+  const ptmp = path.join(hdir, 'packs.json'); fs.writeFileSync(ptmp, JSON.stringify(hpk));
+  const pyp = JSON.parse(cp.execFileSync('python3', ['-c', `import sys, json, os; sys.path.insert(0, ${JSON.stringify(path.join(ROOT, 'tools'))}); import activities as A
+rd = lambda a: open(a['entry'], 'rb').read() if os.path.exists(a['entry']) else None
+print(json.dumps({k: A.check_h5p_packages(p, rd) for k, p in json.load(open(sys.argv[1], encoding='utf-8'))}, ensure_ascii=False))`, ptmp], { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 }));
+  globalThis.__h5pParity = (async () => {
+    const rd = a => fs.existsSync(a.entry) ? new Uint8Array(fs.readFileSync(a.entry)) : null;
+    const want = { 'file mc': 0, 'file drag': 0, 'file tf': 0, inline: 0, 'file attribution': 0 };
+    const diff = [];
+    for (const [k, p] of hpk) {
+      const r = await P.checkActivityPackages(p, rd), y = pyp[k];
+      const same = JSON.stringify(r.errors) === JSON.stringify(y[0]) && JSON.stringify(r.warnings) === JSON.stringify(y[1]);
+      const good = k in want ? !r.errors.length : r.errors.length > 0;
+      if (!same || !good) diff.push(`${k}: JS ${JSON.stringify(r)} Python ${JSON.stringify(y)}`.slice(0, 600));
+    }
+    ok(!diff.length, `h5p@1 packages: checkActivityPackages (JS, NoemaH5P.check) and check_h5p_packages (Python, h5p_check.py) agree on ${hpk.length} packs (${Object.keys(want).length} good, the rest refused) ${diff[0] || ''}`);
+    const pw = (await P.checkActivityPackages(hpk.find(x => x[0] === 'file attribution')[1], rd)).warnings;
+    ok(pw.some(m => /attribution/.test(m)), 'an attribution link is a warning only (shown as text)');
+  })();
 }
 ok(JSON.stringify(P.needRequires(sbase().activities.items)) === JSON.stringify(['activities/v1', 'runtime:html-app@1', 'runtime:sim-spec@1']) && P.needRequires([{ runtime: 'sim-spec@1', spec: { engine: 'circuit-mna@1' } }]).includes('engine:circuit-mna@1'), 'pack.requires: the runtimes, and every engine but the built-in formula@1');
 { // the runtime's own words go through tE() and exist in every UI language (the drafts)
@@ -330,12 +427,20 @@ for (const f of files) {
 const okFiles = ['engine/viewer.js'];   // (the source viewer frames an outside web page from its own URL: its own origin, never pack content)
 ok(bad.filter(b => !okFiles.some(f => b.startsWith(f))).length === 0, 'no code gives a frame allow-same-origin ' + JSON.stringify(bad.filter(b => !okFiles.some(f => b.startsWith(f))).slice(0, 3)));
 ok(/setAttribute\('sandbox', 'allow-scripts'\)/.test(fs.readFileSync(path.join(ROOT, 'engine', 'src', '34_activity_html.js'), 'utf8')), 'html-app@1 sets sandbox to exactly allow-scripts');
-// 5. the content author learns it: the connector's guide has the part "interactive" (docs/INTERACTIVE.md + the playbook), the skill ships the toolkit
+// h5p@1 in the toolkit, the connector, the site and the bundle (docs/INTERACTIVE_H5P.md)
 const srv = fs.readFileSync(path.join(ROOT, 'cloud', 'mcp', 'server.mjs'), 'utf8'), bld = fs.readFileSync(path.join(ROOT, 'tools', 'build.py'), 'utf8');
+ok(/'h5p_check\.py', 'h5p_allow\.json'/.test(bld) && /'38_activity_h5p\.js', '32_activities\.css'/.test(bld) && /'player\.js', 'LICENSE', 'LICENSE-NOTICE\.txt'\] \+ sorted/.test(bld) && /activity_host\/h5p\/' \+ f/.test(bld) && /'INTERACTIVE_H5P\.md'\) if/.test(bld) && /'engine\/src\/38_activity_h5p\.js'/.test(bld),
+  'h5p@1: the skill zip carries h5p_check.py, h5p_allow.json, the runtime and the player for the harness (with its licences and readable source); the connector runs NoemaH5P; the guide part "interactive" includes INTERACTIVE_H5P.md');
+ok(/bundle_h5p\(metas, sel\)/.test(bld) && /engine\/vendor\/h5p\/3\.8\.2\/player\.js/.test(bld) && /h5p_entries\(m\)/.test(bld), 'h5p@1: the one-file bundle carries the player and small .h5p files inline; the site copies the library\'s .h5p files');
+{ const sf = fs.readFileSync(path.join(ROOT, 'engine', 'srcfiles.js'), 'utf8'), ld = fs.readFileSync(path.join(ROOT, 'engine', 'loader.js'), 'utf8');
+  ok(/wireActivities\(acc\.id, meta, pack\)/.test(ld) && /attachActivityFiles\(acc, b\.pack, b\.file\)/.test(ld) && /enumerable: false/.test(sf) && /packs\/\$\{subj\}\/\$\{a\.entry\}/.test(sf) && /actPath = \(uid, sid, a\) => `\$\{uid\}\/packs\/\$\{sid\}\/\$\{a\.entry\}/.test(srv),
+    'h5p@1: the app keeps the .h5p file beside the pack (this device, packs/<subject>/<entry> in the account — the same path as the connector) and gives each item a loader that is never stored'); }
+// 5. the content author learns it: the connector's guide has the part "interactive" (docs/INTERACTIVE.md + the playbook), the skill ships the toolkit
+
 ok(/enum: \['workflow', 'content', 'visual', 'interactive'/.test(srv) && /interactive: DOCS\.interactive/.test(srv) && /docs\['interactive'\] = rd\('docs\/INTERACTIVE\.md'\)/.test(bld), 'noema_authoring_guide serves part "interactive" (and in "all")');
 for (const f of ['activity_new.py', 'activity_lint.py', 'activity_test.py', 'activity_preview.py', 'activity_harness.js']) ok(fs.existsSync(path.join(ROOT, 'skill', 'noema-pack-builder', 'scripts', f)), 'the skill has ' + f);
 ok(/'activities\.py'/.test(bld) && /'simexpr\.py'/.test(bld) && /activity_host/.test(bld) && /'35_activity_sim\.js', '35_simexpr\.js'/.test(bld) && /activities_examples/.test(bld), 'the skill zip carries activities.py, simexpr.py, the runtimes for the harness (html-app, sim-spec) and the reference activities');
-ok(/'circuit\.py'/.test(bld) && /'36_engine_circuit\.js', '36_engine_circuit_sim\.js'/.test(bld) && /'INTERACTIVE_SIMEXPR\.md', 'INTERACTIVE_CIRCUIT\.md'(, 'INTERACTIVE_[A-Z]+\.md')*\) if/.test(bld), 'the skill zip carries circuit.py and the circuit engine for the harness; the guide part "interactive" includes the circuit engine');
+ok(/'circuit\.py'/.test(bld) && /'36_engine_circuit\.js', '36_engine_circuit_sim\.js'/.test(bld) && /'INTERACTIVE_SIMEXPR\.md', 'INTERACTIVE_CIRCUIT\.md'(, 'INTERACTIVE_[A-Z0-9]+\.md')*\) if/.test(bld), 'the skill zip carries circuit.py and the circuit engine for the harness; the guide part "interactive" includes the circuit engine');
 ok(/'engine\/src\/35_simexpr\.js', 'engine\/src\/36_engine_circuit\.js', 'engine\/packcheck\.js'/.test(bld) && /INTERACTIVE_SIMEXPR\.md/.test(bld), 'the connector runs NoemaExpr beside packcheck (sim-spec checks) and serves the expression language in the guide');
 { const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8'), a = html.indexOf('engine/src/35_simexpr.js'), b = html.indexOf('engine/packcheck.js'), c = html.indexOf('engine/src/36_engine_circuit.js');
   ok(a > 0 && a < b && c > 0 && c < b && /\('35_simexpr\.js', '36_engine_circuit\.js'\)\]   # NoemaExpr and NoemaCircuit beside packcheck/.test(bld) && /rd\("engine\/src\/35_simexpr\.js"\)\)\}<\/script>\n<script>\{esc\(rd\("engine\/src\/36_engine_circuit\.js"\)\)\}<\/script>\n<script>\{esc\(rd\("engine\/packcheck\.js"/.test(bld),
@@ -369,4 +474,4 @@ ok(/'engine\/src\/35_simexpr\.js', 'engine\/src\/36_engine_circuit\.js', 'engine
   ok(r.status === 0 && reg?.items?.[0]?.runtime === 'py-module@1' && reg.items[0].entry === 'activities/my-py/main.py' && fs.existsSync(path.join(d, 'activities', 'my-py', 'main.py')) && fs.existsSync(path.join(d, 'activities', 'my-py', 'spec.json')), 'activity_new.py --from py-filter copies the Python reference (main.py, spec.json, strings, the registry entry) ' + (r.stdout + r.stderr).slice(-200));
   ok(/'INTERACTIVE_PYTHON\.md'/.test(bld) && /'37_activity_py\.js', '37_activity_py_ui\.js'/.test(bld) && /pyodide-sw\.js/.test(bld) && /Service-Worker-Allowed: \/vendor\//.test(bld), 'the build: the guide part "interactive" and the skill carry INTERACTIVE_PYTHON.md and the Python runtime; the site copies the service worker and sends its headers');
 }
-console.log(fails ? `\n${fails} of ${n} failed` : `\nactivities: ${n} checks passed`); process.exit(fails ? 1 : 0);
+(globalThis.__h5pParity || Promise.resolve()).catch(e => ok(false, 'h5p@1 package parity: ' + e.message)).then(() => { console.log(fails ? `\n${fails} of ${n} failed` : `\nactivities: ${n} checks passed`); process.exit(fails ? 1 : 0); });

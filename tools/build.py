@@ -9,7 +9,7 @@
                                          # + dist/noema-lite.html  (one self-contained file, e.g. for phone/offline)
   python3 tools/build.py --no-validate   # skip validation (faster)
 """
-import os, sys, glob, json, subprocess, tempfile, shutil, re, zipfile
+import os, sys, glob, json, subprocess, tempfile, shutil, re, zipfile, base64
 for _s in (sys.stdout, sys.stderr):   # UTF-8 output on Windows / macOS / Linux alike
     try: _s.reconfigure(encoding='utf-8', errors='replace')
     except Exception: pass
@@ -99,6 +99,9 @@ def build_packs():
         if acts and acts['items']: pack['activities'] = {'format': ACTS.FORMAT, 'items': acts['items']}; pack['requires'] = ACTS.requires(acts); counts['activities'] = len(acts['items'])
         ae, aw = ACTS.check_activities(pack, list(translations))
         for w in aw: print(f'  WARN {meta["id"]}: activities: {w}')
+        he, hw = ACTS.check_h5p_packages(pack, lambda a: open(os.path.join(sdir, *a['entry'].split('/')), 'rb').read() if os.path.isfile(os.path.join(sdir, *str(a.get('entry') or '').split('/'))) else None)   # h5p@1: the .h5p files beside the pack
+        for w in hw: print(f'  WARN {meta["id"]}: activities: {w}')
+        ae += he
         if ae: print('\n'.join(f'ERROR {meta["id"]}: activities: {x}' for x in ae)); failed.append(meta['id']); continue
         tr = pack_i18n(pack, translations, external=True)   # each translation in its own file: tr.<locale>.js / .json (docs/i18n.md §10)
         pack['version'] = content_hash({'s': meta, 'src': sources, 'c': chapters, 'm': {k: v.get('sha') or v.get('url') for k, v in media.items()}, 'mm': {k: {x: y for x, y in v.items() if x != 'data'} for k, v in media.items()}, **({'t': tr} if tr else {}), **({'a': ACTS.hash_part(acts)} if acts and acts['items'] else {})})
@@ -234,6 +237,27 @@ def build_lang_facades(root, course, data):
         print(f'  explanation facade {course["id"]} · {loc} ({status}): {len(texts)} texts')
     return out
 
+def h5p_entries(m):
+    """the .h5p files (entry, relative to the subject folder) of a library subject's h5p@1 activities (docs/INTERACTIVE_H5P.md)"""
+    try: items = (rj(os.path.join(ROOT, os.path.dirname(m['path']), 'pack.json')).get('activities') or {}).get('items') or []
+    except Exception: return []
+    return [a['entry'] for a in items if isinstance(a, dict) and a.get('runtime') == ACTS.H5P and isinstance(a.get('entry'), str) and '..' not in a['entry'].split('/')
+            and os.path.isfile(os.path.join(ROOT, os.path.dirname(m['path']), *a['entry'].split('/')))]
+
+H5P_INLINE_MAX = int(os.environ.get('NOEMA_H5P_INLINE_MAX', str(2 * 1024 * 1024)))   # the one-file bundle: a .h5p file up to this size goes inline (base64), a bigger one shows its fallback there
+
+def bundle_h5p(metas, sel):
+    """the one-file bundle: each library activity's .h5p file inline as base64 when it is small enough, else h5p: null (its fallback shows)"""
+    out = ''
+    for m in metas:
+        if m.get('owner') or (sel and m['id'] not in sel): continue
+        for rel in h5p_entries(m):
+            b = open(os.path.join(ROOT, os.path.dirname(m['path']), *rel.split('/')), 'rb').read()
+            val = json.dumps(base64.b64encode(b).decode('ascii')) if len(b) <= H5P_INLINE_MAX else 'null'
+            out += f'<script>(function(p){{var a=p&&p.activities&&(p.activities.items||[]).find(function(x){{return x.entry==={json.dumps(rel)};}});if(a)Object.defineProperty(a,"h5p",{{value:{val},enumerable:false,configurable:true,writable:true}});}})((window.NOEMA_PACKS||{{}})[{json.dumps(m["id"])}]);</script>\n'
+            print(f'  bundle: {m["id"]}/{rel} ' + (f'inline ({len(b) // 1024} KB)' if val != 'null' else f'too big for the one file ({len(b) // 1024} KB > {H5P_INLINE_MAX // 1024} KB): its fallback shows'))
+    return out
+
 def build_site(metas):
     out = os.path.join(ROOT, 'dist', 'site')
     if os.path.exists(out): shutil.rmtree(out)
@@ -273,6 +297,10 @@ def build_site(metas):
             dst = os.path.join(out, b['path']); os.makedirs(os.path.dirname(dst), exist_ok=True); shutil.copy(os.path.join(ROOT, b['path']), dst)
     for m in metas:   # the plain JSON too, so Claude (connector: noema_get_pack_url) can extend a library subject
         if not m.get('owner'): shutil.copy(os.path.join(ROOT, os.path.dirname(m['path']), 'pack.json'), os.path.join(out, os.path.dirname(m['path']), 'pack.json'))
+    for m in metas:   # h5p@1: each activity's .h5p file beside the library pack (the app fetches it by URL and checks its sha256)
+        if m.get('owner'): continue
+        for rel in h5p_entries(m):
+            dst = os.path.join(out, os.path.dirname(m['path']), *rel.split('/')); os.makedirs(os.path.dirname(dst), exist_ok=True); shutil.copy(os.path.join(ROOT, os.path.dirname(m['path']), *rel.split('/')), dst)
     wt(os.path.join(out, 'library', 'registry.js'), build_registry(metas, public=True))
     # OAuth consent page for the Claude connector (Supabase → <site>/oauth/consent?authorization_id=…) → the app
     wt(os.path.join(out, 'oauth', 'consent', 'index.html'), '<!doctype html><meta charset="utf-8"><title>noema-lite</title><script>location.replace("/" + location.search + "#/connect-claude")</script>')
@@ -292,7 +320,7 @@ PY_HEADERS = ('/engine/pyodide-sw.js\n  Service-Worker-Allowed: /vendor/\n  Cach
               f'/vendor/pyodide/{PY_VERSION}/*.wasm\n  Content-Type: application/wasm\n'
               '/vendor/pywheels/*\n  Cache-Control: public, max-age=31536000, immutable\n  Access-Control-Allow-Origin: *\n  Cross-Origin-Resource-Policy: cross-origin\n')
 
-SKILL_TOOLS = ['noema_lib.py', 'activities.py', 'simexpr.py', 'circuit.py', 'bridge.py', 'validate.py', 'pack_rules.json', 'pack_quality.py', 'pipeline.py', 'svgkit.py', 'extract_images.py', 'fetch_image.py', 'find_images.py']
+SKILL_TOOLS = ['noema_lib.py', 'activities.py', 'simexpr.py', 'circuit.py', 'h5p_check.py', 'h5p_allow.json', 'bridge.py', 'validate.py', 'pack_rules.json', 'pack_quality.py', 'pipeline.py', 'svgkit.py', 'extract_images.py', 'fetch_image.py', 'find_images.py']
 LANG_SKILL_TOOLS = ['validate_lang.py', 'lang_refcheck.py', 'langlib.py', 'lang_course.py', 'lang_script.py', 'lang_phenomena.py', 'lang_readback.js', 'lang_facade.py']
 def lang_builder_files():
     """The skill noema-language-builder (docs/LANGUAGES.md §10.2): (source, path inside the skill folder). The playbook, the brief
@@ -333,9 +361,12 @@ def build_skill(out_zip):
         # interactive activities (docs/INTERACTIVE.md): the reference activity, the app's runtime for the harness, the contract
         for f in sorted(glob.glob(os.path.join(ROOT, 'tools', 'activities_examples', '**', '*'), recursive=True)):
             if os.path.isfile(f): z.write(f, 'noema-pack-builder/scripts/activities_examples/' + os.path.relpath(f, os.path.join(ROOT, 'tools', 'activities_examples')).replace(os.sep, '/'))
-        for f in ('32_activities.js', '33_activity_guard.js', '34_activity_html.js', '35_activity_sim.js', '35_simexpr.js', '36_engine_circuit.js', '36_engine_circuit_sim.js', '37_activity_py.js', '37_activity_py_ui.js', '32_activities.css'): z.write(os.path.join(ENGINE, 'src', f), f'noema-pack-builder/scripts/activity_host/{f}')
+        for f in ('32_activities.js', '33_activity_guard.js', '34_activity_html.js', '35_activity_sim.js', '35_simexpr.js', '36_engine_circuit.js', '36_engine_circuit_sim.js', '37_activity_py.js', '37_activity_py_ui.js', '38_activity_h5p.js', '32_activities.css'): z.write(os.path.join(ENGINE, 'src', f), f'noema-pack-builder/scripts/activity_host/{f}')
+        h5pv = os.path.join(ENGINE, 'vendor', 'h5p', '3.8.2')   # h5p@1: the app's own H5P player for the harness, with its licences and readable source (GPL-3.0)
+        for f in ['player.js', 'LICENSE', 'LICENSE-NOTICE.txt'] + sorted(os.path.relpath(g, h5pv).replace(os.sep, '/') for g in glob.glob(os.path.join(h5pv, 'source', '**', '*'), recursive=True) if os.path.isfile(g)):
+            z.write(os.path.join(h5pv, f), 'noema-pack-builder/scripts/activity_host/h5p/' + f)
         z.write(os.path.join(ENGINE, 'packcheck.js'), 'noema-pack-builder/scripts/activity_host/packcheck.js')   # sim-spec@1: the spec check the runtime runs
-        for f in ('INTERACTIVE.md', 'INTERACTIVE_AUTHORING.md', 'INTERACTIVE_SIMEXPR.md', 'INTERACTIVE_CIRCUIT.md', 'INTERACTIVE_PYTHON.md'):
+        for f in ('INTERACTIVE.md', 'INTERACTIVE_AUTHORING.md', 'INTERACTIVE_SIMEXPR.md', 'INTERACTIVE_CIRCUIT.md', 'INTERACTIVE_PYTHON.md', 'INTERACTIVE_H5P.md'):
             if os.path.exists(os.path.join(ROOT, 'docs', f)): z.write(os.path.join(ROOT, 'docs', f), f'noema-pack-builder/references/{f}')
         if os.path.exists(os.path.join(ROOT, 'docs', 'PIPELINES.md')): z.write(os.path.join(ROOT, 'docs', 'PIPELINES.md'), 'noema-pack-builder/references/PIPELINES.md')
         z.write(os.path.join(ROOT, 'tools', 'CONTENT_SPEC.md'), 'noema-pack-builder/references/CONTENT_SPEC.md')
@@ -362,7 +393,7 @@ def public_config():
     return {'siteUrl': g('siteUrl'), 'supabaseUrl': g('supabaseUrl'), 'supabaseKey': g('supabaseKey')}
 
 # the app's own code the connector runs (pack checks; curriculum tasks, checks and how answers change a curriculum)
-MCP_ENGINE = ['engine/report.js', 'engine/src/35_simexpr.js', 'engine/src/36_engine_circuit.js', 'engine/packcheck.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js', 'engine/langcore.js', 'engine/curimport.js', 'engine/sourceplan.js']
+MCP_ENGINE = ['engine/report.js', 'engine/src/38_activity_h5p.js', 'engine/src/35_simexpr.js', 'engine/src/36_engine_circuit.js', 'engine/packcheck.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js', 'engine/langcore.js', 'engine/curimport.js', 'engine/sourceplan.js']
 MCP_PRELUDE = 'globalThis.window = globalThis;\n'
 
 def build_stamp():
@@ -382,7 +413,7 @@ def build_mcp_function(metas, out_dir):
     cfg['languages'] = [{k: m.get(k) for k in ('id', 'title', 'languages', 'path', 'profiles')} for m in LANG_METAS]   # language courses (D13 peers, refills)
     rd = lambda p: open(os.path.join(ROOT, p), encoding='utf-8').read()
     docs = {'workflow': rd('skill/noema-pack-builder/SKILL.md'), 'content': rd('tools/CONTENT_SPEC.md'), 'visual': rd('docs/VISUAL.md')}
-    if os.path.exists(os.path.join(ROOT, 'docs', 'INTERACTIVE.md')): docs['interactive'] = rd('docs/INTERACTIVE.md') + ''.join('\n\n---\n\n' + rd('docs/' + f) for f in ('INTERACTIVE_AUTHORING.md', 'INTERACTIVE_SIMEXPR.md', 'INTERACTIVE_CIRCUIT.md', 'INTERACTIVE_PYTHON.md') if os.path.exists(os.path.join(ROOT, 'docs', f)))   # interactive activities: the contract + the playbook + the expression language
+    if os.path.exists(os.path.join(ROOT, 'docs', 'INTERACTIVE.md')): docs['interactive'] = rd('docs/INTERACTIVE.md') + ''.join('\n\n---\n\n' + rd('docs/' + f) for f in ('INTERACTIVE_AUTHORING.md', 'INTERACTIVE_SIMEXPR.md', 'INTERACTIVE_CIRCUIT.md', 'INTERACTIVE_PYTHON.md', 'INTERACTIVE_H5P.md') if os.path.exists(os.path.join(ROOT, 'docs', f)))   # interactive activities: the contract + the playbook + the expression language
     if os.path.exists(os.path.join(ROOT, 'docs', 'BRIDGE.md')): docs['bridge'] = rd('docs/BRIDGE.md')   # 文A language bridges (noema_bridge_guide)
     # the content flows (noema_pipeline, docs/PIPELINES.md): the doc, the step library and every flow
     if os.path.exists(os.path.join(ROOT, 'docs', 'PIPELINES.md')): docs['pipelines'] = rd('docs/PIPELINES.md')
@@ -424,6 +455,7 @@ def build_bundle(metas):
     packs = ''.join(f'<script>{esc(rd(m["path"]))}</script>\n' for m in metas if (not sel or m['id'] in sel))
     packs += ''.join(f'<script>{esc(rd(b["path"]))}</script>\n' for m in metas if (not sel or m['id'] in sel) for b in (m.get('bridgeLocales') or {}).values())   # 文A language bridges
     packs += ''.join(f'<script>{esc(rd(t["path"]))}</script>\n' for m in metas if (not sel or m['id'] in sel) for t in (m.get('trLocales') or {}).values())   # translations (docs/i18n.md §10)
+    packs += bundle_h5p(metas, sel)   # h5p@1: small .h5p files inline, bigger ones show their fallback
     reg_metas = [dict(m, path=None) for m in metas if (not sel or m['id'] in sel)]
     local = ''
     if '--with-local-config' in args and os.path.exists(os.path.join(ROOT, 'config.local.js')): local = f'<script>{esc(rd("config.local.js"))}</script>'
@@ -476,6 +508,7 @@ def build_bundle(metas):
 <script>{esc(rd("engine/shell.js"))}</script>
 <script>{esc(rd("engine/react.js"))}</script>
 <script>{esc(rd("engine/authoring.js"))}</script>
+<script>{esc(rd("engine/vendor/h5p/3.8.2/player.js"))}</script>
 <script type="text/plain" id="noema-engine-src">{esc(rd("engine/engine.js"))}</script>
 <script>{esc(rd("engine/loader.js"))}</script>
 </body></html>'''

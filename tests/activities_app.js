@@ -5,6 +5,10 @@
    exercise grades with what the activity reports (right and wrong), with hints; a missing activity and a runtime that is
    switched off show the fallback (picture + text); an endless loop is stopped and Restart works; no page errors.
    py-module@1 (PY=0 skips it): over http, see python() below.
+   h5p@1 (docs/INTERACTIVE_H5P.md): planets-quiz's .h5p file is taken from the .noema.zip and kept on the device beside the pack; the
+   block plays it in the pack's own language, the state comes back after a reload, the sim exercise is graded right and wrong
+   from H5P's score, no request leaves the frame, French and Greek through h5pByLocale, the runtime off / a refused translation → the fallback;
+   the one-file bundle (act-bundle-inline.html / act-bundle-big.html, built by run_e2e.sh) plays it inline or shows the fallback.
    Usage: node tests/activities_app.js <prepared-repo-dir> <pack.json from tests/activities_pack.py (NOEMA_ACT_PACK)>   (BROWSERS=chromium,firefox,webkit) */
 const pw = require(process.env.PW || 'playwright');
 const path = require('path');
@@ -18,6 +22,20 @@ const startIfParked = async (p, sel) => { if (await until(() => p.evaluate(s => 
 const actFrame = (p, sel) => p.frames().find(f => f.parentFrame() && f.parentFrame().parentFrame() === p.mainFrame() && sel(f));   // the mini-app: inside the wrapper frame
 
 const http = require('http'); const hits = []; let BEACON = '';
+// h5p@1: the stored entry of the .noema.zip (the .h5p travels beside the pack), read here without a zip library
+const zipEntry = (buf, name) => {
+  let e = buf.length - 22; while (e >= 0 && buf.readUInt32LE(e) !== 0x06054b50) e--; if (e < 0) return null;
+  for (let i = 0, n = buf.readUInt16LE(e + 10), o = buf.readUInt32LE(e + 16); i < n; i++) {
+    const method = buf.readUInt16LE(o + 10), size = buf.readUInt32LE(o + 20), nl = buf.readUInt16LE(o + 28), xl = buf.readUInt16LE(o + 30), cl = buf.readUInt16LE(o + 32), lo = buf.readUInt32LE(o + 42);
+    if (buf.toString('utf8', o + 46, o + 46 + nl) === name) { const at = lo + 30 + buf.readUInt16LE(lo + 26) + buf.readUInt16LE(lo + 28), d = buf.subarray(at, at + size); return method === 0 ? d : require('zlib').inflateRawSync(d); }
+    o += 46 + nl + xl + cl;
+  }
+  return null;
+};
+const fs = require('fs');
+const PQ_ZIP = fs.existsSync(process.argv[3] + '.noema.zip') ? fs.readFileSync(process.argv[3] + '.noema.zip') : null;
+const PQ_FILE = PQ_ZIP && zipEntry(PQ_ZIP, 'activities/planets-quiz/item.h5p');
+const PQ_EL = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'tools', 'activities_examples', 'planets-quiz', 'content.el.json'), 'utf8'));
 async function run(name) {
   // Chromium: the full browser (docs/adr/001 §2), not the headless shell. Its sandboxed srcdoc frames get their own process, and
   // Playwright then cannot attach to the mini-app frame nested in the wrapper (on a file:// page); IsolateSandboxedIframes off keeps
@@ -27,6 +45,14 @@ async function run(name) {
   const E = []; p.on('pageerror', e => { if (!/^noema: this activity ran too long/.test(e.message)) E.push(e.message); });   // (the loop guard's own stop, thrown inside the frame on purpose)
   await p.goto('file://' + ROOT + '/index.html'); await p.evaluate(() => localStorage.clear()); await p.reload(); await wait(700);
   await p.evaluate(async pk => { await Noema.importPack(Noema.account.id, pk); }, PACK);
+  if (PQ_FILE) {   // h5p@1: as Import does with a .noema.zip, the .h5p file is kept on this device beside the pack (checked by size and sha256)
+    const at = await p.evaluate(async ([pk, b64]) => { const u = Uint8Array.from(atob(b64), c => c.charCodeAt(0)), acc = Noema.account.id;
+      const bad = u.slice(); bad[bad.length - 30] ^= 1;   // the same size, one bit off
+      const a = pk.activities.items.find(x => x.id === 'planets-quiz');
+      return { bad: await NoemaSrcFiles.putActivityFile(acc, pk.subject.id, a, new Blob([bad]), { upload: false }),
+        res: await NoemaSrcFiles.attachActivityFiles(acc, pk, async entry => entry === 'activities/planets-quiz/item.h5p' ? new Blob([u]) : null) }; }, [PACK, PQ_FILE.toString('base64')]);
+    ok(at.bad === false && at.res.attached.includes('planets-quiz') && !at.res.missing.length, `h5p@1: the .h5p from the .noema.zip is kept on the device (a changed copy of the same size is refused) ${JSON.stringify(at)}`);
+  } else ok(false, 'h5p@1: no .noema.zip beside the pack (tests/activities_pack.py with NOEMA_ACT_PACK) or no activities/planets-quiz/item.h5p in it');
   await p.goto('file://' + ROOT + '/index.html?subject=demo-activities'); await wait(1500);
   ok(await p.evaluate(() => SUBJ.id === 'demo-activities' && !!ACT.ITEMS['alias-lab']), 'the pack opens with its activity');
   ok(await p.evaluate(() => JSON.stringify(checkRequires()) === '["runtime:py-module@1"]'), 'pack.requires: this app has everything the pack needs but Python (file://, and the runtime is off by default)');
@@ -118,6 +144,8 @@ async function run(name) {
   E.length = E0; ok(hits.length === 0, `no request leaves the activity (location, link, meta refresh, popup, data: page): ${JSON.stringify(hits)}`);   // (the hostile frames' own errors don't count)
   await simSpec(p, ctx, E);
   await circuit(p, ctx, E);
+  await h5p(p, ctx, E);
+  await h5pBundle(browser, E);
   await browser.close();
 }
 
@@ -519,6 +547,108 @@ async function python(name) {
     await c5.close();
     ok(!E.length, 'no page errors ' + JSON.stringify(E.slice(0, 3)));
   } finally { await browser.close(); srv.close(); }
+}
+
+/* h5p@1 (docs/INTERACTIVE_H5P.md): planets-quiz, an ordinary .h5p package (H5P.MultiChoice) whose file travels beside the pack. */
+const h5pFrame = async (p, ms = 20000) => {   // the item's frame (inside the wrapper) once H5P has drawn the question
+  let g = null;
+  await until(async () => { for (const f of p.frames()) { if (!(f.parentFrame() && f.parentFrame().parentFrame() === p.mainFrame())) continue;
+    if (await f.evaluate(() => document.querySelectorAll('.h5p-answer').length === 3).catch(() => false)) { g = f; return true; } } return false; }, ms);
+  return g;
+};
+const h5pAnswer = async (g, text) => { await g.evaluate(t => [...document.querySelectorAll('.h5p-answer')].find(li => li.textContent.trim() === t).click(), text); await wait(150); await g.click('.h5p-question-check-answer'); await wait(400); };
+const h5pStart = async (p, sel) => {   // a parked block (the live slots are taken): press its Start, as a learner would
+  if (await until(() => p.evaluate(s => !!document.querySelector(s + ' iframe.act-frame'), sel), 1500)) return;
+  const b = p.locator(sel + ' .act-bar button.primary'); if (await b.count()) await b.first().click();
+};
+async function h5p(p, ctx, E) {
+  const E0 = E.length; hits.length = 0;
+  const SEL = 'main .act-blk .act[data-activity="planets-quiz"]';
+  const openSec = async () => {
+    await p.evaluate(() => { location.hash = '#/'; }); await wait(300); await p.evaluate(() => { location.hash = '#/s/ch01-s01'; }); await wait(600);
+    const sa = await p.$('button:has-text("show all")'); if (sa) { await sa.click(); await wait(200); }
+    await p.locator(SEL).first().scrollIntoViewIfNeeded(); await h5pStart(p, SEL);
+    return h5pFrame(p);
+  };
+  console.log('— h5p@1: planets-quiz (an H5P package beside the pack)');
+  const it = await p.evaluate(() => { const a = ACT.ITEMS['planets-quiz']; return a && { fn: typeof a.h5p, keys: Object.keys(a).includes('h5p'), json: JSON.stringify(a).includes('"h5p"'), caps: ACT.caps().has('runtime:h5p@1'), req: (Noema.pack.requires || []).includes('runtime:h5p@1'), by: Object.keys(a.h5pByLocale || {}), lang: SUBJ.language }; });
+  ok(it && it.fn === 'function' && !it.keys && !it.json && it.caps && it.req, `the item has its loader (never stored: not enumerable, not in JSON); the app runs runtime:h5p@1, which pack.requires names ${JSON.stringify(it)}`);
+  let g = await openSec();
+  ok(!!g, 'the H5P block plays: the question and its three answers ' + await p.evaluate(s => document.querySelector(s + ' .act-note')?.textContent || '', SEL));
+  if (!g) return;
+  const attrs = await p.$eval(SEL + ' iframe.act-frame', f => { const P = new DOMParser(), w = P.parseFromString(f.srcdoc, 'text/html'), i = w.querySelector('iframe'), inn = i ? P.parseFromString(i.getAttribute('srcdoc'), 'text/html') : null;
+    return { sandbox: f.getAttribute('sandbox'), inner: i?.getAttribute('sandbox'), wScripts: w.querySelectorAll('script').length, csp: inn?.head.querySelector('meta[http-equiv="Content-Security-Policy"]')?.getAttribute('content') || '' }; });
+  ok(attrs.sandbox === 'allow-scripts' && attrs.inner === 'allow-scripts' && attrs.wScripts === 0 && /script-src 'sha256-/.test(attrs.csp) && /connect-src 'none'/.test(attrs.csp) && !/unsafe-(inline|eval)/.test(attrs.csp),
+    'the same sandbox as a mini-app: allow-scripts only, a wrapper with no scripts, scripts by hash, no network, no unsafe-*');
+  ok(/Which planet is the largest/.test(await g.evaluate(() => document.querySelector('.h5p-question-content')?.textContent || '')), "its words in the pack's own language (the package's own content.json)");
+  await h5pAnswer(g, 'Jupiter');
+  ok(await until(() => p.evaluate(() => !!S.act?.['blk:ch01-s01:planets-quiz']?.data?.h5p)), 'the state H5P reports is saved (S.act … data.h5p)');
+  await p.reload(); await wait(1500);
+  g = await openSec();
+  ok(g && await until(() => g.evaluate(() => { const li = [...document.querySelectorAll('.h5p-answer')].find(x => x.textContent.trim() === 'Jupiter'); return !!li && li.getAttribute('aria-checked') === 'true'; })), 'after a reload the saved state comes back: Jupiter is still chosen');
+
+  console.log('— h5p@1: the sim exercise (grade "reported": the score H5P reports)');
+  const card = async () => { await p.evaluate(() => { const m = document.querySelector('main'); m.innerHTML = ''; const c = exerciseCard(EX['ch01-e910']); c.id = 'T'; m.append(c); scrollTo(0, 0); }); await wait(300); await h5pStart(p, '#T'); return h5pFrame(p); };
+  g = await card();
+  ok(!!g, 'the exercise mounts the H5P item');
+  await p.click('#T button:has-text("Check")'); await wait(200);
+  ok(await p.evaluate(() => !document.getElementById('T')._locked()), 'Check before H5P reports a score does not grade');
+  await h5pAnswer(g, 'Mars');
+  await p.click('#T button:has-text("Check")'); await wait(300);
+  ok(await p.evaluate(() => { const c = document.getElementById('T'); return c._locked() && !!c.querySelector('.explain.bad') && S.att?.['ch01-e910']?.result?.passed === false; }), 'a wrong answer (Mars) is graded wrong, and the attempt saved');
+  g = await card(); await h5pAnswer(g, 'Jupiter');
+  await p.click('#T button:has-text("Check")'); await wait(300);
+  ok(await p.evaluate(() => { const c = document.getElementById('T'), r = S.att?.['ch01-e910']?.result; return c._locked() && !!c.querySelector('.explain.ok') && r?.passed === true && r.score === 1 && /11 times/.test(c.textContent); }), 'the right answer (Jupiter) is graded right (score 1), and the reveal is shown');
+
+  console.log('— h5p@1: translations through h5pByLocale (French from the pack, Greek), fallbacks');
+  for (const [loc, want] of [['fr', /Quelle est la plus grande planète/], ['el', /Ηλιακό Σύστημα/]]) {
+    await p.evaluate(([loc, el]) => { const a = ACT.ITEMS['planets-quiz'], b = { ...a, id: 'pq-' + loc, h5pByLocale: { ...a.h5pByLocale, ...(loc === 'el' ? { el: { content: el } } : {}) } };
+      Object.defineProperty(b, 'h5p', { value: a.h5p, enumerable: false, configurable: true, writable: true }); ACT.ITEMS['pq-' + loc] = b;
+      window.__lang = SUBJ.language; SUBJ.language = loc;   // the pack read in that language
+      const m = document.querySelector('main'); m.innerHTML = ''; m.append(interactiveBlock({ t: 'interactive', activity: 'pq-' + loc })); scrollTo(0, 0); }, [loc, PQ_EL]);
+    await h5pStart(p, 'main'); g = await h5pFrame(p);
+    const gr = g && await g.evaluate(() => ({ text: document.querySelector('.h5p-question-content')?.textContent || '', lang: document.documentElement.lang }));
+    await p.evaluate(() => { SUBJ.language = window.__lang; });
+    ok(gr && want.test(gr.text) && gr.lang === loc, `read in ${loc}: the item's content.json in that language (h5pByLocale.${loc}${loc === 'fr' ? ', put in by make_pack.py' : ''}) ${JSON.stringify(gr)}`);
+  }
+  const off = await p.evaluate(() => { window.NOEMA_CONFIG.activities = { 'h5p@1': false }; const m = document.querySelector('main'); m.innerHTML = ''; m.append(interactiveBlock({ t: 'interactive', activity: 'planets-quiz' })); const r = { img: !!m.querySelector('.act-fallback img'), text: m.querySelector('.act-fbtext')?.textContent || '', frame: !!m.querySelector('iframe') }; delete window.NOEMA_CONFIG.activities; return r; });
+  ok(off.img && /Jupiter/.test(off.text) && !off.frame, 'h5p@1 switched off: the fallback picture and text instead');
+  await p.evaluate(B => { const a = ACT.ITEMS['planets-quiz'], c = JSON.parse(JSON.stringify(a.h5pByLocale.fr.content)); c.question = '<p><img src="' + B + '?h5p-img"> ?</p>';
+    const b = { ...a, id: 'pq-link', h5pByLocale: { fr: { content: c } } }; Object.defineProperty(b, 'h5p', { value: a.h5p, enumerable: false, configurable: true, writable: true }); ACT.ITEMS['pq-link'] = b;
+    window.__lang = SUBJ.language; SUBJ.language = 'fr';
+    const m = document.querySelector('main'); m.innerHTML = ''; m.append(interactiveBlock({ t: 'interactive', activity: 'pq-link' })); scrollTo(0, 0); }, BEACON);
+  await h5pStart(p, 'main');
+  ok(await until(() => p.evaluate(() => !document.querySelector('main iframe') && !!document.querySelector('main .act-fallback img')), 12000), 'a translation with an outside link is refused before any frame: the fallback');
+  await p.evaluate(() => { SUBJ.language = window.__lang; });
+  const bad = await p.evaluate(() => { const a = ACT.ITEMS['planets-quiz'], b = { ...a, id: 'pq-bad', sha256: 'f'.repeat(64) }; Object.defineProperty(b, 'h5p', { value: a.h5p, enumerable: false, configurable: true, writable: true }); ACT.ITEMS['pq-bad'] = b;
+    const m = document.querySelector('main'); m.innerHTML = ''; m.append(interactiveBlock({ t: 'interactive', activity: 'pq-bad' })); scrollTo(0, 0); return true; });
+  await h5pStart(p, 'main');
+  ok(bad && await until(() => p.evaluate(() => !document.querySelector('main iframe') && !!document.querySelector('main .act-fallback img')), 12000), 'a package that is not the one the pack names (sha256) never plays: the fallback');
+  await wait(1000);
+  ok(hits.length === 0, `no request leaves the H5P frame: ${JSON.stringify(hits)}`);
+  ok(E.length === E0, 'no page errors ' + JSON.stringify(E.slice(E0, E0 + 3)));
+}
+/* h5p@1 in the one-file bundle (tools/build.py bundle_h5p): the .h5p inline up to NOEMA_H5P_INLINE_MAX; over it, the fallback. */
+async function h5pBundle(browser, E) {
+  for (const [file, inline] of [['act-bundle-inline.html', true], ['act-bundle-big.html', false]]) {
+    const f = path.join(ROOT, file);
+    if (!fs.existsSync(f)) { ok(false, `${file}: not built (tests/run_e2e.sh builds it)`); continue; }
+    console.log(`— h5p@1 in the one-file bundle (${inline ? 'the .h5p inline' : 'the .h5p too big for the one file'})`);
+    const c = await browser.newContext({ viewport: { width: 1280, height: 900 } }), p = await c.newPage(); p.setDefaultTimeout(10000);
+    const PE = []; p.on('pageerror', e => PE.push(e.message)); hits.length = 0;
+    await p.goto('file://' + f + '?subject=demo-physics'); await wait(1500);
+    ok(await until(() => p.evaluate(() => typeof SUBJ !== 'undefined' && SUBJ.id === 'demo-physics' && !!ACT.ITEMS['planets-quiz'])), `${file}: the subject opens with its H5P item`);
+    const kind = await p.evaluate(() => { const a = ACT.ITEMS['planets-quiz']; return { has: 'h5p' in a, type: a.h5p === null ? 'null' : typeof a.h5p, own: !Object.keys(a).includes('h5p') }; });
+    ok(kind.has && kind.own && kind.type === (inline ? 'string' : 'null'), `${file}: the item's .h5p is ${inline ? 'inline (base64)' : 'left out (null)'} and not enumerable ${JSON.stringify(kind)}`);
+    await p.evaluate(() => { location.hash = '#/s/ch01-s01'; }); await wait(800);
+    const sa = await p.$('button:has-text("show all")'); if (sa) { await sa.click(); await wait(200); }
+    const SEL = 'main .act-blk .act[data-activity="planets-quiz"]';
+    await p.locator(SEL).first().scrollIntoViewIfNeeded(); await h5pStart(p, SEL);
+    if (inline) ok(!!(await h5pFrame(p)), `${file}: the H5P item plays from the one file`);
+    else ok(await until(() => p.evaluate(s => { const r = document.querySelector(s); return !!r && !r.querySelector('iframe') && !!r.querySelector('.act-fallback img') && /Jupiter/.test(r.querySelector('.act-fbtext')?.textContent || ''); }, SEL), 15000), `${file}: too big for the one file — its fallback picture and text`);
+    ok(hits.length === 0 && !PE.length, `${file}: no request, no page errors ${JSON.stringify(hits)} ${JSON.stringify(PE.slice(0, 3))}`);
+    await c.close();
+  }
 }
 (async () => {
   const srv = http.createServer((q, r) => { hits.push(q.url); r.end('gone'); }); await new Promise(r => srv.listen(0, '127.0.0.1', r)); BEACON = `http://127.0.0.1:${srv.address().port}/beacon`;

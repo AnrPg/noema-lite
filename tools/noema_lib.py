@@ -361,13 +361,16 @@ def package_sources(sdir, sources, chapters, base_ids=()):
 
 def write_bundle(path, pack, files, extra=None):
     """The package the app imports: a zip with pack.json + sources/<file> for every packaged source file
-    (+ extra: {"translations/<locale>.json": object} — the translations in their own files)."""
+    (+ extra: {"translations/<locale>.json": object} — the translations in their own files; {"activities/<id>/item.h5p": bytes} — the
+    .h5p file of an h5p@1 activity, which travels beside the pack, stored as it is)."""
     import zipfile
     os.makedirs(os.path.dirname(os.path.abspath(path)) or '.', exist_ok=True)
     tmp = path + '.tmp'
     with zipfile.ZipFile(tmp, 'w', zipfile.ZIP_DEFLATED) as z:
         z.writestr('pack.json', json.dumps(pack, ensure_ascii=False, separators=(',', ':')))
-        for name, obj in (extra or {}).items(): z.writestr(name, json.dumps(obj, ensure_ascii=False, separators=(',', ':')))
+        for name, obj in (extra or {}).items():
+            if isinstance(obj, (bytes, bytearray)): z.writestr(zipfile.ZipInfo(name, (1980, 1, 1, 0, 0, 0)), bytes(obj), compress_type=zipfile.ZIP_STORED)
+            else: z.writestr(name, json.dumps(obj, ensure_ascii=False, separators=(',', ':')))
         for sid, p, rel in files:
             # PDFs / pictures / media are already compressed: store them (fast, no size gain lost)
             comp = zipfile.ZIP_STORED if os.path.splitext(rel)[1].lower() in ('.pdf', '.png', '.jpg', '.jpeg', '.webp', '.zip', '.mp4', '.mp3', '.m4a', '.docx', '.pptx', '.xlsx', '.epub', '.heic') else zipfile.ZIP_DEFLATED
