@@ -272,7 +272,7 @@ async function appPart(browser, ref) {
   await p.evaluate(I => { Object.assign(ACT.ITEMS, I); }, ITEMS);
   const mountBlk = id => p.evaluate(id => { const m = document.querySelector('main'); m.innerHTML = ''; m.append(interactiveBlock({ t: 'interactive', activity: id })); scrollTo(0, 0); }, id);
   await mountBlk('osc-sim');
-  ok(await until(() => p.evaluate(() => !!document.querySelector('main .sim') && /Energy at the end/.test(document.querySelector('main').textContent))), 'the oscillator renders in the app (controls, readout)');
+  ok(await until(() => p.evaluate(() => !!document.querySelector('main .sim') && /Energy at the end/.test(document.querySelector('main').textContent))), 'the oscillator renders in the app (controls, readout) ' + JSON.stringify(await p.evaluate(() => document.querySelector('main').innerText.slice(0, 160))));
   const want = ref.E.toFixed(6);
   ok(await until(() => p.evaluate(w => document.querySelector('main').textContent.replace(/−/g, '-').includes(w), want)), `the readout shows E = ${want}`);
   await mountBlk('osc-spin');

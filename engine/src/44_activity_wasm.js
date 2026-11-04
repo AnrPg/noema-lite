@@ -196,8 +196,10 @@
     return { problems: E, report: rep, bytes: E.length ? null : b };
   }
   const REG = {};   // items the page registered (NoemaWasm.register), besides ACT.ITEMS of the open pack
-  const itemOf = id => typeof id !== 'string' ? null : (root.ACT?.ITEMS && own(root.ACT.ITEMS, id) ? root.ACT.ITEMS[id] : own(REG, id) ? REG[id] : null);
-  const allItems = () => Object.assign({}, REG, root.ACT?.ITEMS || {});
+  // the open pack's items: engine.js declares ACT with const (a global binding, not a property of window), the harness with var
+  const packItems = () => { const A = typeof ACT !== 'undefined' ? ACT : root.ACT; return A && isObj(A.ITEMS) ? A.ITEMS : null; };
+  const itemOf = id => { if (typeof id !== 'string') return null; const I = packItems(); return I && own(I, id) ? I[id] : own(REG, id) ? REG[id] : null; };
+  const allItems = () => Object.assign({}, REG, packItems() || {});
   /** → problems of spec.model for wasm@1; items: {id: item} (default: the open pack's) */
   function checkModel(spec, items) {
     const E = [], I = items || allItems();
