@@ -1727,7 +1727,12 @@ const ACT = (() => {
         sess.port = RUNTIMES[a.runtime].mount(box, { act: a, init, title: tE('engine.act.frameTitle', { id: a.id }),
           onMessage: raw => { const r = ACTP.check(raw); if (r.ok) onMessage(r.msg); else if (r.version) stop(tE('engine.act.newerProtocol'), false); else if (!r.ignore) strike(r.why); },
           onFail: why => why === 'unsupported' ? stop(tE('engine.act.notHere'), false) : why === 'spec' ? stop(tE('engine.act.failed'), false)
-            : why === 'runaway' ? stop(tE('engine.act.stopped')) : stop(why === 'navigated' ? tE('engine.act.misbehaved') : tE('engine.act.failed')) });
+            : why === 'runaway' ? stop(tE('engine.act.stopped'))
+            // external-embed@1 (docs/INTERACTIVE_EMBED.md): refused or mounted as an exercise → the fallback for good; offline or not loaded → Restart retries
+            : why === 'embed-refused' || why === 'embed-graded' ? stop(tE('engine.act.embed.refused'), false)
+            : why === 'embed-offline' ? stop(tE('engine.act.embed.offline'))
+            : why === 'embed-timeout' ? stop(tE('engine.act.embed.timeout', { provider: (window.NoemaEmbed?.PROVIDERS || []).find(p => p.id === a.provider)?.name || String(a.provider || '') }))
+            : stop(why === 'navigated' ? tE('engine.act.misbehaved') : tE('engine.act.failed')) });
       } catch (e) { console.warn('[noema] activity mount failed', e); return stop(tE('engine.act.failed')); }
       if (notice) note.textContent = notice;
       LIVE.push(sess);
@@ -1828,7 +1833,7 @@ R.sim = (ex, api) => {
   return {
     el,
     check() { const g = sess.grade?.(); if (!g) return null; if (Array.isArray(g.checks)) showChecks(g.checks); sess.saveAttempt?.(); return g.ok; },
-    reveal() { if (hintBtn) hintBtn.disabled = true; if (sess.result?.passed && ex.reveal) el.append(h('div', { class: 'explain' }, h('div', { html: fmt(ex.reveal) }))); },
+    reveal() { if (hintBtn) hintBtn.disabled = true; try { sess.port?.reveal?.(); } catch (e) { } if (sess.result?.passed && ex.reveal) el.append(h('div', { class: 'explain' }, h('div', { html: fmt(ex.reveal) }))); },
     bonus: () => -Math.round((4 + (ex.difficulty || 1) * 4) * (1 - Math.max(0.5, Math.pow(0.85, used)))),   // each hint used: score × 0.85, never below × 0.5 (docs/adr/001 D8)
     given: () => sess.result ? `(the activity reported: ${sess.result.passed ? 'passed' : 'not passed'}, score ${sess.result.score}${sess.result.detail ? ', ' + sess.result.detail : ''})` : '',   // i18n-ignore (AI context)
   };
@@ -2146,37 +2151,49 @@ APP.postMessage({t:'hello',nonce:N},'*');
   /* ---------- engines ---------- */
   ACT.registerEngine({ id: 'formula@1', check: () => [], create: () => ({ run: () => ({}) }) });   // the derived values are the model
 
-  /** An engine instance behind one async interface: inline, or in a Worker when the engine has workerSource. */
+  /** An engine instance behind one async interface: inline, or in a Worker when the engine has workerSource.
+      run(inputs, done): the outputs (a newer run waiting replaces an older one: the latest inputs win);
+      measure(inputs, probe, done): one reading of a bench's instrument (queued, never dropped). One job at a time, each ≤ 5 s. */
   function engineRunner(E, spec, opts, onFail) {
-    let worker = null, url = null, inst = null, busy = null, next = null, timer = null, dead = false;
+    let worker = null, url = null, inst = null, busy = null, timer = null, dead = false;
+    const queue = [];
     if (E.workerSource && typeof Worker === 'function') {
       try {
-        const bridge = "self.onmessage=function(e){var m=e.data;try{if(m.t==='create'){self.__i=self.noemaEngine.create(m.spec,m.opts);return;}var i=self.__i,r=(i.run||i.step).call(i,m.inputs);postMessage({t:'out',id:m.id,out:r});}catch(x){postMessage({t:'err',id:m.id,msg:String(x&&x.message||x)});}};";
+        const bridge = "self.onmessage=function(e){var m=e.data;try{if(m.t==='create'){self.__i=self.noemaEngine.create(m.spec,m.opts);return;}var i=self.__i,r=m.t==='measure'?i.measure(m.inputs,m.probe):(i.run||i.step).call(i,m.inputs);postMessage({t:'out',id:m.id,out:r});}catch(x){postMessage({t:'err',id:m.id,msg:String(x&&x.message||x)});}};";
         url = URL.createObjectURL(new Blob([E.workerSource + '\n;' + bridge], { type: 'text/javascript' }));
         worker = new Worker(url);
+        worker.onmessage = e => { const m = e.data; if (!busy || !m || m.id !== busy.id) return; const d = busy.done; finish(); if (m.t === 'err') console.warn('[noema] sim-spec engine', E.id, m.msg); d(m.t === 'out' ? m.out : null); };
+        worker.onerror = e => { e.preventDefault?.(); console.warn('[noema] sim-spec engine worker', E.id, e.message); const d = busy?.done; finish(); d?.(null); };
         worker.postMessage({ t: 'create', spec, opts });
       } catch (e) { console.warn('[noema] sim-spec: no worker here, the engine runs inline', e); worker = null; }
     }
     if (!worker) inst = E.create(spec, opts);
-    function finish() { clearTimeout(timer); busy = null; if (next) { const n = next; next = null; run(n.inputs, n.done); } }
-    function run(inputs, done) {
-      if (dead) return;
+    function finish() { clearTimeout(timer); busy = null; pump(); }
+    function pump() {
+      if (dead || busy || !queue.length) return;
+      const job = queue.shift();
       if (!worker) {
         const t0 = performance.now(); let out = null;
-        try { out = (inst.run || inst.step).call(inst, inputs); } catch (e) { console.warn('[noema] sim-spec engine', E.id, e); }
+        try { out = job.t === 'measure' ? inst.measure(job.inputs, job.probe) : (inst.run || inst.step).call(inst, job.inputs); } catch (e) { console.warn('[noema] sim-spec engine', E.id, e); }
         const ms = performance.now() - t0; if (ms > 50) console.warn(`[noema] sim-spec: engine ${E.id} took ${Math.round(ms)} ms inline; give it a workerSource`);
-        return done(out);
+        job.done(out); return pump();
       }
-      if (busy) { next = { inputs, done }; return; }   // the latest inputs win
-      busy = { id: ++seq, done };
+      busy = { id: ++seq, done: job.done };
       timer = setTimeout(() => { if (!busy) return; dead = true; close(); onFail('runaway'); }, RUN_TIMEOUT);
-      worker.onmessage = e => { const m = e.data; if (!busy || !m || m.id !== busy.id) return; const d = busy.done; finish(); d(m.t === 'out' ? m.out : null); if (m.t === 'err') console.warn('[noema] sim-spec engine', E.id, m.msg); };
-      worker.onerror = e => { e.preventDefault?.(); console.warn('[noema] sim-spec engine worker', E.id, e.message); const d = busy?.done; finish(); d?.(null); };
-      worker.postMessage({ t: 'run', id: busy.id, inputs });
+      worker.postMessage({ t: job.t, id: busy.id, inputs: job.inputs, probe: job.probe });
     }
-    function close() { dead = true; clearTimeout(timer); try { worker?.terminate(); } catch (e) { } if (url) URL.revokeObjectURL(url); worker = null; }
-    return { run, close, inWorker: () => !!worker };
+    function run(inputs, done) {
+      if (dead) return;
+      const i = queue.findIndex(j => j.t === 'run');   // the latest inputs win
+      if (i >= 0) queue[i] = { t: 'run', inputs, done }; else queue.push({ t: 'run', inputs, done });
+      pump();
+    }
+    function measure(inputs, probe, done) { if (dead) return; queue.push({ t: 'measure', inputs, probe, done }); pump(); }
+    function close() { dead = true; clearTimeout(timer); queue.length = 0; try { worker?.terminate(); } catch (e) { } if (url) URL.revokeObjectURL(url); worker = null; }
+    return { run, measure, close, inWorker: () => !!worker };
   }
+  /** a seeded pick: the same seed draws the same item (mulberry32) */
+  function seededIndex(seed, n) { let a = (seed ^ 0x9E3779B9) >>> 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return Math.floor(((t ^ t >>> 14) >>> 0) / 4294967296 * n); }
 
   /* ---------- plots: SVG drawn by the app, coloured by the theme's tokens ---------- */
   function niceTicks(lo, hi, n) {
@@ -2255,6 +2272,7 @@ APP.postMessage({t:'hello',nonce:N},'*');
       const engId = spec && typeof spec === 'object' && 'engine' in spec ? spec.engine : 'formula@1';
       const E = typeof engId === 'string' ? ACT.engine(engId) : null;
       if (!E) { console.warn('[noema] sim-spec', act.id, 'unknown engine', engId); later(() => onFail('unsupported')); return port; }
+      if (spec.bench && !E.bench) { console.warn('[noema] sim-spec', act.id, 'engine', engId, 'takes no measurements'); later(() => onFail('unsupported')); return port; }
       const probs = window.NoemaPackCheck?.checkSimSpec ? NoemaPackCheck.checkSimSpec(spec, tables, ACT.engines()) : ['the spec checker is not loaded'];
       if (!probs.length && E.check) try { probs.push(...(E.check(spec) || [])); } catch (e) { probs.push(String(e.message || e)); }
       if (probs.length) { console.warn('[noema] sim-spec', act.id, probs.slice(0, 5).join(' | ')); later(() => onFail('spec')); return port; }
@@ -2343,13 +2361,180 @@ APP.postMessage({t:'hello',nonce:N},'*');
       });
       const busyNote = h('div', { class: 'sim-busy', 'aria-hidden': 'true' });
       const reset = h('button', { class: 'btn ghost small', type: 'button', onclick: () => { for (const p of params) { vals[p.id] = def(p); paint(p); } out('event', { name: 'reset' }); recompute(); saveSoon(); } }, '↺ ' + tE('engine.act.sim.reset'));
+      const B = spec.bench ? makeBench() : null;   // a fault-finding bench (§12.7): instruments, the measurement log, the diagnosis
+      if (B) root.append(B.el);
       root.append(h('div', { class: 'sim-foot' }, busyNote, reset));
       box.append(root);
 
       /* ---------- computing ---------- */
       let env = {}, outputs = {}, paused = false, dirty = false, saveT = null, raf = 0, rev = 0, doneRev = 0;
-      const runner = E.id === 'formula@1' ? null : engineRunner(E, spec, { seed: init.seed >>> 0, task: { ...consts } }, why => onFail(why));
+      const prep = typeof E.prepare === 'function' ? E.prepare(spec, C) : (x => x);   // the engine's expressions → numbers, on this thread
+      const newRunner = () => E.id === 'formula@1' ? null : engineRunner(E, spec, { seed: init.seed >>> 0, task: { ...consts }, faults: B ? B.applied() : undefined }, why => onFail(why));
+      let runner = newRunner();
       const declared = spec.outputs || [];
+
+      /* ---------- the bench: the hidden fault lives only in this closure and in the engine (never in the page, the state or a label) ---------- */
+      function makeBench() {
+        const bn = spec.bench, exMode = !!init.exerciseId, opts = bn.diagnosis.options, budget = bn.budget || 0;
+        const savedB = !exMode && init.state?.data?.bench && typeof init.state.data.bench === 'object' ? init.state.data.bench : null;
+        let seed = isNum(savedB?.seed) ? savedB.seed >>> 0 : init.seed >>> 0, fault = 0, dx = null, done = false, count = 0, face = null;
+        const log = [];
+        function pick() {
+          const ids = bn.faults.map(f => f.id), tf = init.task?.fault;
+          const pool = typeof tf === 'string' && ids.includes(tf) ? [tf] : Array.isArray(tf) && tf.some(x => ids.includes(x)) ? tf.filter(x => ids.includes(x)) : ids;
+          fault = ids.indexOf(pool[seededIndex(seed, pool.length)]);
+        }
+        pick();
+        const pt = id => bn.points.find(p => p.id === id);
+        const instName = k => tE('engine.act.bench.inst.' + k);
+        const sel = (cls, label, items) => {   // a labelled select: items [{value, text}]
+          const id = uid + 'b-' + cls, s = h('select', { id, class: 'sim-sel', 'data-bench': cls }, items.map(o => h('option', { value: o.value }, o.text)));
+          return { s, row: h('div', { class: 'sim-p sim-bsel' }, h('label', { for: id, class: 'sim-lab' }, label), s) };
+        };
+        const inst = sel('instrument', tE('engine.act.bench.instrument'), bn.instruments.map(x => ({ value: x.kind, text: instName(x.kind) })));
+        const lab = new Map();   // the label element of each lead select (its words change with the instrument)
+        const ptItems = ids => ids.map(id => ({ value: id, text: tt(pt(id).label) }));
+        const A = sel('a', tE('engine.act.bench.red'), []), Bk = sel('b', tE('engine.act.bench.black'), []);
+        lab.set(A.s, A.row.querySelector('label'));
+        const part = sel('part', tE('engine.act.bench.part'), []);
+        const btn = h('button', { class: 'btn primary small', type: 'button', 'data-bench': 'measure', onclick: () => measure() }, tE('engine.act.bench.measure'));
+        const left = h('span', { class: 'sim-left', 'aria-live': 'polite' });
+        const faceEl = h('div', { class: 'sim-face', 'aria-live': 'polite' });
+        const logEl = h('ol', { class: 'sim-log' }), logEmpty = h('p', { class: 'sim-log-empty' }, tE('engine.act.bench.logEmpty'));
+        const dxSel = sel('diagnosis', bn.diagnosis.label ? tt(bn.diagnosis.label) : tE('engine.act.bench.diagnosis'), [{ value: '', text: tE('engine.act.bench.choose') }, ...opts.map((o, i) => ({ value: String(i), text: tt(o.label) }))]);
+        const dxBtn = exMode ? null : h('button', { class: 'btn small', type: 'button', 'data-bench': 'commit', onclick: () => { if (dx != null && !done) { reveal(); saveSoon(); } } }, tE('engine.act.bench.commit'));
+        const dxOut = h('p', { class: 'sim-dx-out', 'aria-live': 'polite' });
+        const another = exMode ? null : h('button', { class: 'btn ghost small', type: 'button', 'data-bench': 'another', onclick: () => newDevice() }, '↻ ' + tE('engine.act.bench.another'));
+        const cur = () => bn.instruments.find(x => x.kind === inst.s.value) || bn.instruments[0];
+        function setInstrument() {
+          const x = cur(), two = x.kind === 'V' || x.kind === 'R', ids = x.points || bn.points.map(p => p.id);
+          const keep = (s, items, fallback) => { const v = s.value; s.replaceChildren(...items.map(o => h('option', { value: o.value }, o.text))); s.value = items.some(o => o.value === v) ? v : fallback; };
+          if (x.kind === 'I') keep(part.s, (x.parts || []).map((q, i) => ({ value: String(i), text: tt(q.label) })), '0');
+          else {
+            const g = ids.find(id => /^(gnd|0)$/.test(String(pt(id).at))) || ids[ids.length - 1];
+            keep(A.s, ptItems(ids), ids.find(id => id !== g) || ids[0]);
+            if (two) keep(Bk.s, ptItems(ids), g);
+          }
+          lab.get(A.s).textContent = two ? tE('engine.act.bench.red') : tE('engine.act.bench.probe');
+          A.row.hidden = x.kind === 'I'; Bk.row.hidden = !two; part.row.hidden = x.kind !== 'I';
+        }
+        inst.s.addEventListener('change', setInstrument);
+        dxSel.s.addEventListener('change', () => {
+          if (done) return;
+          dx = dxSel.s.value === '' ? null : +dxSel.s.value;
+          if (dx != null) out('event', { name: 'diagnose', data: { option: dx } });
+          saveSoon();
+        });
+        const tval = (v, d) => { const g = typeof v === 'string' ? C(v) : null; return g ? ev(g, base()) : (v === undefined ? d : v); };
+        function probeOf(x) {
+          if (x.kind === 'I') { const q = x.parts[+part.s.value] || x.parts[0]; return { probe: { kind: 'I', element: q.element, ...(q.pin !== undefined ? { pin: q.pin } : {}) }, ev: { i: 'I', part: +part.s.value } }; }
+          const a = pt(A.s.value), b = Bk.s.value ? pt(Bk.s.value) : null;
+          if (x.kind === 'V' || x.kind === 'R') return { probe: { kind: x.kind, a: a.at, b: b ? b.at : 'gnd' }, ev: { i: x.kind, a: a.id, b: b?.id } };
+          const tw = { tEnd: tval(x.tEnd), ...(x.dt !== undefined ? { dt: tval(x.dt) } : {}), ...(x.tStart !== undefined ? { tStart: tval(x.tStart) } : {}) };
+          if (x.kind === 'scope') return { probe: { kind: 'scope', node: a.at, ref: 'gnd', ...tw }, ev: { i: 'scope', a: a.id } };
+          return { probe: { kind: 'logic', nodes: [a.at], ...(x.threshold !== undefined ? { threshold: tval(x.threshold) } : {}), ...tw }, ev: { i: 'logic', a: a.id }, node: a.at };
+        }
+        function paintLeft() {
+          left.textContent = budget ? tE('engine.act.bench.left', { left: Math.max(0, budget - count) }) : '';
+          btn.disabled = done || (budget && count >= budget);
+          for (const s of [inst.s, A.s, Bk.s, part.s, dxSel.s]) s.disabled = done;
+          if (dxBtn) dxBtn.disabled = done;
+        }
+        const fm = (v, unit) => fmtNum(v, { format: 'si', unit, digits: 3 }, locale);
+        function reading(r) {   // the reading in words and numbers (never the fault)
+          if (!r || r.error) return tE('engine.act.bench.failed');
+          if (r.kind === 'V') return fm(r.value, 'V');
+          if (r.kind === 'I') return fm(r.value, 'A');
+          if (r.kind === 'R') return r.value === 'OL' ? 'OL' : fm(r.value, 'Ω');   // i18n-ignore (the meter's own display)
+          if (r.kind === 'scope') return tE('engine.act.bench.scopeStats', { pp: fm(r.stats.pp, 'V'), mean: fm(r.stats.mean, 'V'), freq: r.stats.freq > 0 ? fm(r.stats.freq, 'Hz') : '—' });
+          const st = Object.values(r.traces || {})[0]?.stats || {};
+          return tE('engine.act.bench.logicStats', { freq: st.freq > 0 ? fm(st.freq, 'Hz') : '—', duty: fmtNum(100 * (st.duty || 0), { format: 'fixed', digits: 0, unit: '%' }, locale) });
+        }
+        /** a reading as it is kept in the saved state: the numbers the log shows, not the traces */
+        function slim(r) {
+          if (!r || typeof r !== 'object') return r;
+          if (r.kind === 'scope') return { kind: 'scope', stats: r.stats };
+          if (r.kind === 'logic') return { kind: 'logic', traces: Object.fromEntries(Object.entries(r.traces || {}).map(([k, v]) => [k, { stats: v.stats }])) };
+          return r;
+        }
+        function where(e) {
+          if (e.i === 'I') return tt(bn.instruments.find(x => x.kind === 'I')?.parts?.[e.part]?.label);
+          const a = pt(e.a), b = e.b ? pt(e.b) : null;
+          return a ? tt(a.label) + (b ? ' → ' + tt(b.label) : '') : '';
+        }
+        function paintLog() {
+          logEl.replaceChildren(...log.map(e => h('li', {}, h('span', { class: 'sim-log-i' }, instName(e.i)), ' ' + where(e) + ': ', h('b', {}, e.r === undefined ? '…' : reading(e.r)))));
+          logEmpty.hidden = log.length > 0;
+        }
+        function showFace(e) {
+          const r = e.r; faceEl.replaceChildren();
+          if (!r || r.error || r.kind === 'V' || r.kind === 'I' || r.kind === 'R') { faceEl.append(h('div', { class: 'sim-meter' }, h('span', { class: 'sim-meter-i' }, instName(e.i)), h('output', { class: 'sim-meter-v' }, reading(r)))); return; }
+          const fig = h('figure', { class: 'sim-plot sim-scope' }); faceEl.append(fig);
+          const xl = tE('engine.act.bench.time') + ' (s)';
+          let p, data, yl;
+          if (r.kind === 'scope') {
+            yl = tE('engine.act.bench.voltage') + ' (V)';
+            p = { x: { label: 'x', unit: 's', format: 'si' }, y: { label: 'y', unit: 'V' } };
+            data = { xs: r.t, lines: [{ ys: r.v }], marks: [], xr: [r.t[0], r.t[r.t.length - 1]], yr: [null, null] };
+          } else {   // a logic trace: steps from the level at the start and the edges
+            const tr = Object.values(r.traces)[0] || { level0: 0, edges: [] }, xs = [r.t0], ys = [tr.level0];
+            for (const ed of tr.edges) { xs.push(ed.t, ed.t); ys.push(ys[ys.length - 1], ed.to); }
+            xs.push(r.t1); ys.push(ys[ys.length - 1]);
+            yl = tE('engine.act.bench.level');
+            p = { x: { label: 'x', unit: 's', format: 'si' }, y: { label: 'y', digits: 1 } };
+            data = { xs, lines: [{ ys }], marks: [], xr: [r.t0, r.t1], yr: [-0.15, 1.15] };
+          }
+          const aria = instName(e.i) + ', ' + where(e) + ': ' + reading(r);
+          const holder = h('div', { class: 'sim-svg' }); fig.append(h('figcaption', {}, aria), holder);
+          const draw = () => { if (holder.isConnected) holder.replaceChildren(drawPlot(holder, p, data, { locale, aria, xLabel: xl, yLabel: yl })); };
+          requestAnimationFrame(draw); face = draw;
+        }
+        function measure() {
+          if (done || (budget && count >= budget) || !runner) return;
+          const x = cur(), m = probeOf(x), e = { ...m.ev };
+          count++; log.push(e); paintLog(); paintLeft();
+          out('event', { name: 'measure', data: { ...m.ev } });
+          runner.measure(prep(base()), m.probe, r => {
+            if (closed) return;
+            e.r = r && typeof r === 'object' ? (r.kind === 'scope' || r.kind === 'logic' ? r : { kind: r.kind, value: r.value, error: r.error }) : { error: 'none' };
+            paintLog(); showFace(e); saveSoon();
+          });
+        }
+        /** after the diagnosis: lock the bench and say what the fault was (the only time the page learns it) */
+        function reveal() {
+          if (done) return; done = true;
+          const right = dx != null && opts[dx]?.fault === bn.faults[fault].id, truth = opts.find(o => o.fault === bn.faults[fault].id);
+          dxOut.className = 'sim-dx-out ' + (right ? 'ok' : 'bad');
+          dxOut.textContent = right ? tE('engine.act.bench.right', { fault: tt(opts[dx].label) }) : tE('engine.act.bench.wrong', { fault: truth ? tt(truth.label) : '—' });
+          paintLeft();
+        }
+        function newDevice() {
+          seed = crypto.getRandomValues(new Uint32Array(1))[0] >>> 0; pick();
+          log.length = 0; count = 0; dx = null; done = false; dxSel.s.value = ''; dxOut.textContent = ''; dxOut.className = 'sim-dx-out'; faceEl.replaceChildren();
+          runner?.close(); runner = newRunner(); out('event', { name: 'reset' });
+          paintLog(); paintLeft(); recompute(); saveSoon();
+        }
+        if (savedB) {   // an explorer's bench comes back: the same device (seed), its log, the diagnosis
+          for (const e of Array.isArray(savedB.log) ? savedB.log.slice(0, 200) : []) if (e && typeof e === 'object' && typeof e.i === 'string') log.push(e);
+          count = log.length;
+          if (Number.isInteger(savedB.dx) && savedB.dx >= 0 && savedB.dx < opts.length) { dx = savedB.dx; dxSel.s.value = String(dx); }
+        }
+        setInstrument(); paintLog(); paintLeft();
+        if (savedB && savedB.done && dx != null) reveal();
+        const ctl = h('div', { class: 'sim-bctl' }, inst.row, A.row, Bk.row, part.row, h('div', { class: 'sim-brow' }, btn, left));
+        const el = h('section', { class: 'sim-bench' },
+          h('div', { class: 'sim-binst' }, ctl, faceEl),
+          h('h5', { class: 'sim-bh' }, tE('engine.act.bench.log')), logEmpty, logEl,
+          h('div', { class: 'sim-dx' }, dxSel.row, h('div', { class: 'sim-brow' }, dxBtn, another), dxOut));
+        return {
+          el, reveal, redraw: () => face?.(),
+          applied: () => JSON.parse(JSON.stringify(bn.faults[fault].apply || [])),
+          /** the bench's values for the checks grader: never shown (the validators keep them out of readouts and marks) */
+          values: () => ({ diagnosis: dx == null ? -1 : dx, measurements: count, correct: dx != null && opts[dx]?.fault === bn.faults[fault].id }),
+          ready: () => dx != null,
+          state: () => exMode ? undefined : { seed, log: log.map(e => ({ ...e, r: slim(e.r) })), dx, done },
+        };
+      }
       function cleanOutputs(o) {
         const r = {};
         for (const d of declared) {
@@ -2371,7 +2556,7 @@ APP.postMessage({t:'hello',nonce:N},'*');
         const e = base(), my = ++rev;   // values() is null until the latest inputs are computed (Check never grades older results)
         if (!runner) { env = e; doneRev = my; render(); return; }
         busyNote.textContent = tE('engine.act.sim.computing');
-        runner.run(e, o => { if (closed) return; outputs = cleanOutputs(o); for (const d of declared) if (d.kind === 'scalar') e[d.id] = outputs[d.id]; env = e; if (my === rev) { doneRev = my; busyNote.textContent = ''; } render(); });
+        runner.run(prep(e), o => { if (closed) return; outputs = cleanOutputs(o); for (const d of declared) if (d.kind === 'scalar') e[d.id] = outputs[d.id]; env = e; if (my === rev) { doneRev = my; busyNote.textContent = ''; } render(); });
       }
       function render() {
         readouts.forEach((r, i) => { roEls[i].textContent = fmtNum(ev(r.f, env), r, locale); });
@@ -2392,12 +2577,12 @@ APP.postMessage({t:'hello',nonce:N},'*');
           P.holder.replaceChildren(drawPlot(figs[i], p, data, { locale, aria: P.aria, xLabel: P.xLabel, yLabel: P.yLabel }));
         });
       }
-      function saveSoon() { clearTimeout(saveT); saveT = setTimeout(() => out('state', { version: init.stateVersion || 1, data: { values: { ...vals } } }), 250); }
+      function saveSoon() { clearTimeout(saveT); saveT = setTimeout(() => { const bs = B?.state(); out('state', { version: init.stateVersion || 1, data: { values: { ...vals }, ...(bs ? { bench: bs } : {}) } }); }, 250); }
       function changed(p, commit) {
         recompute(); saveSoon();
         if (commit) out('event', { name: 'param', data: { id: p.id, v: vals[p.id] } });
       }
-      const ro2 = typeof ResizeObserver === 'function' ? new ResizeObserver(() => { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => { if (!closed && !paused) plots.forEach((P, i) => P.last && P.holder.replaceChildren(drawPlot(figs[i], P.p, P.last, { locale, aria: P.aria, xLabel: P.xLabel, yLabel: P.yLabel }))); }); }) : null;
+      const ro2 = typeof ResizeObserver === 'function' ? new ResizeObserver(() => { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => { if (!closed && !paused) { plots.forEach((P, i) => P.last && P.holder.replaceChildren(drawPlot(figs[i], P.p, P.last, { locale, aria: P.aria, xLabel: P.xLabel, yLabel: P.yLabel }))); B?.redraw(); } }); }) : null;
       ro2?.observe(root);
       for (const p of params) paint(p);
       recompute();
@@ -2410,7 +2595,9 @@ APP.postMessage({t:'hello',nonce:N},'*');
         if (type === 'destroy') return port.close();
       };
       port.close = () => { if (closed) return; closed = true; clearTimeout(saveT); cancelAnimationFrame(raf); ro2?.disconnect(); runner?.close(); root.remove(); };
-      port.values = () => closed || doneRev !== rev ? null : { ...env };
+      // what the checks grader reads: the values once the latest inputs are computed (and a bench's own, once a diagnosis is chosen: before that Check waits)
+      port.values = () => closed || doneRev !== rev ? null : B ? (B.ready() ? { ...env, ...B.values() } : null) : { ...env };
+      port.reveal = () => { if (!closed) B?.reveal(); };   // after Check: the bench says what the fault was
       later(() => out('ready', { protocols: [1] }));
       return port;
     },
@@ -4084,6 +4271,912 @@ function visualAsText(ex) {
 function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions(b, m).filter(r => r.label && !/-area$/.test(r.id)); return `[FIGURE] ${m.alt || b.media}${(b.caption || m.caption) ? ' — ' + (b.caption || m.caption) : ''}${regs.length ? '\nParts: ' + regs.map(r => r.label + (r.note ? ': ' + r.note : '')).join('; ') : ''}`; }
 /* i18n-ignore-end */
 
+/* ---- 36_engine_circuit.js ---- */
+/* ===================== interactive activities — the circuit engine circuit-mna@1 (docs/INTERACTIVE_CIRCUIT.md, docs/adr/001 P3) =====================
+   A small, deterministic circuit simulator for the electronics benches of tier B (sim-spec@1): RC/RLC transients, filters, PWM and
+   fault-finding benches (a virtual device with a hidden fault; the learner measures, then diagnoses). Pure JS, no DOM, no text for the
+   learner: it gives codes and numbers only, the activity host words them.
+   How: Modified Nodal Analysis (node voltages + the currents of voltage-defined branches), a dense LU with partial pivoting (circuits
+   are small: at most 60 nodes), Newton–Raphson with junction limiting, gmin stepping and source stepping for the nonlinear parts,
+   trapezoidal integration with a backward-Euler step at the start and on every step that holds a source discontinuity.
+   The netlist (noema.circuit/v1) is described in docs/INTERACTIVE_CIRCUIT.md and tools/schemas/noema.circuit.v1.schema.json.
+   Also used by tests/circuit.js (node). */
+(function noemaCircuitModule(root) {
+  /* i18n-ignore-start */   // code, not text: only codes and numbers leave this engine
+  'use strict';
+  const ID = 'circuit-mna@1', FORMAT = 'noema.circuit/v1';
+  const MAX_NODES = 60, MAX_ELEMENTS = 200, MAX_STEPS = 200000;
+  const VT = 0.025852;                 // kT/q at 300 K
+  const GMIN = 1e-12;                  // from every node to ground and across every junction
+  const RSHORT = 1e-3;                 // a short fault
+  const OHM_I = 1e-3, OHM_OL = 20e6;   // the ohmmeter's test current and its over-range
+  const EX80 = Math.exp(80);
+  const isGnd = s => s === 'gnd' || s === '0';
+  const isObj = v => v !== null && typeof v === 'object' && !Array.isArray(v);
+  const NODE_RE = /^[A-Za-z0-9_][A-Za-z0-9_+\-]{0,31}$/, ID_RE = /^[A-Za-z][A-Za-z0-9_\-]{0,31}$/;
+  function fail(code, extra) { const e = new Error('circuit: ' + code); e.code = code; if (extra) Object.assign(e, extra); return e; }
+
+  /** a number, or a string with an SI prefix ("4.7k", "100n", "2meg") → number; anything else → NaN */
+  const SI = { f: 1e-15, p: 1e-12, n: 1e-9, u: 1e-6, 'µ': 1e-6, m: 1e-3, k: 1e3, K: 1e3, M: 1e6, meg: 1e6, G: 1e9 };
+  function num(v) {
+    if (typeof v === 'number') return Number.isFinite(v) ? v : NaN;
+    if (typeof v !== 'string') return NaN;
+    const m = /^\s*([-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?)\s*(meg|[fpnuµmkKMG])?\s*$/.exec(v);
+    return m ? parseFloat(m[1]) * (m[2] ? SI[m[2]] : 1) : NaN;
+  }
+
+  // ---- element types, parameters, presets ----
+  const TYPES = { R: [2], C: [2], L: [2], V: [2], I: [2], D: [2], SW: [2], NPN: [3], PNP: [3], NMOS: [3], PMOS: [3], OPAMP: [3, 5] };
+  const PARAMS = {
+    R: {}, C: {}, L: {}, V: {}, I: {},
+    D: { Is: 'pos', n: 'pos' }, SW: { Ron: 'pos', Roff: 'pos' },
+    NPN: { Is: 'pos', betaF: 'pos', betaR: 'pos' }, PNP: { Is: 'pos', betaF: 'pos', betaR: 'pos' },
+    NMOS: { Vth: 'fin', k: 'pos', lambda: 'nonneg' }, PMOS: { Vth: 'fin', k: 'pos', lambda: 'nonneg' },
+    OPAMP: { gain: 'pos', rails: 'rails', headroom: 'nonneg' },
+  };
+  const DEFAULTS = {
+    D: { Is: 1e-14, n: 1 }, SW: { Ron: 0.01, Roff: 1e9 },
+    NPN: { Is: 1e-14, betaF: 100, betaR: 1 }, PNP: { Is: 1e-14, betaF: 100, betaR: 1 },
+    NMOS: { Vth: 1.5, k: 0.1, lambda: 0 }, PMOS: { Vth: 1.5, k: 0.1, lambda: 0 },
+    OPAMP: { gain: 1e5, rails: [-15, 15], headroom: 0 },
+  };
+  const led = vf => ({ Is: 0.02 / Math.expm1(vf / (2 * VT)), n: 2 });   // Vf at 20 mA
+  const PRESETS = {
+    D: { '1n4148': { Is: 2.52e-9, n: 1.752 }, '1n4001': { Is: 14.11e-9, n: 1.984 }, 'led-red': led(1.8), 'led-orange': led(2.0),
+      'led-yellow': led(2.05), 'led-green': led(2.1), 'led-blue': led(3.0), 'led-white': led(3.0) },
+    NPN: { '2n3904': { Is: 6.734e-15, betaF: 200, betaR: 0.74 }, '2n2222': { Is: 14.34e-15, betaF: 200, betaR: 6.1 }, bc547: { Is: 7e-15, betaF: 300, betaR: 1 } },
+    PNP: { '2n3906': { Is: 1.41e-15, betaF: 180, betaR: 4 }, bc557: { Is: 7e-15, betaF: 250, betaR: 1 } },
+    NMOS: { '2n7000': { Vth: 2.1, k: 0.2, lambda: 0.01 }, bs170: { Vth: 1.8, k: 0.25, lambda: 0.01 }, irlz44n: { Vth: 1.6, k: 30, lambda: 0.002 } },
+    PMOS: { bs250: { Vth: 2.4, k: 0.12, lambda: 0.01 }, irf9540: { Vth: 3.0, k: 8, lambda: 0.003 } },
+  };
+  const SHORT_PINS = { NPN: [0, 2], PNP: [0, 2], NMOS: [0, 2], PMOS: [0, 2], OPAMP: [0, 1] };
+  const DRIFT_PARAM = { R: 'value', C: 'value', L: 'value', V: 'value', I: 'value', D: 'Is', SW: 'Ron', NPN: 'betaF', PNP: 'betaF', NMOS: 'k', PMOS: 'k', OPAMP: 'gain' };
+  const NONLINEAR = new Set(['D', 'NPN', 'PNP', 'NMOS', 'PMOS', 'OPAMP']);
+
+  // ---- waveforms of the V and I sources ----
+  const WAVE_FIELDS = {
+    pulse: { v1: 'fin!', v2: 'fin!', delay: 'nonneg', rise: 'nonneg', fall: 'nonneg', width: 'pos', period: 'pos' },
+    sine: { offset: 'fin', amp: 'fin!', freq: 'pos!', phase: 'fin', delay: 'nonneg' },
+    pwm: { v: 'fin!', freq: 'pos!', duty: 'unit!', low: 'fin', delay: 'nonneg' },
+  };
+  /** canonical form: {kind:'dc', dc} | {kind:'pulse', v1, v2, …} | … (numbers parsed, defaults filled) */
+  function canonWave(spec) {
+    if (!isObj(spec)) return { kind: 'dc', dc: num(spec) };
+    if (spec.dc !== undefined) return { kind: 'dc', dc: num(spec.dc) };
+    for (const kind of ['pulse', 'sine', 'pwm']) if (spec[kind] !== undefined) {
+      const q = spec[kind] || {}, w = { kind };
+      for (const f of Object.keys(WAVE_FIELDS[kind])) w[f] = q[f] === undefined ? undefined : num(q[f]);
+      if (kind === 'pulse') {
+        w.delay = w.delay || 0; w.rise = w.rise || 0; w.fall = w.fall || 0; w.period = w.period || 0;
+        if (w.width === undefined) w.width = w.period > 0 ? (w.period - w.rise - w.fall) / 2 : Infinity;
+      }
+      if (kind === 'sine') { w.offset = w.offset || 0; w.phase = w.phase || 0; w.delay = w.delay || 0; }
+      if (kind === 'pwm') { w.low = w.low || 0; w.delay = w.delay || 0; }
+      return w;
+    }
+    return { kind: 'dc', dc: NaN };
+  }
+  function scaleWave(w, f) {
+    const s = Object.assign({}, w);
+    for (const k of ['dc', 'v1', 'v2', 'offset', 'amp', 'v', 'low']) if (typeof s[k] === 'number') s[k] *= f;
+    return s;
+  }
+  /** → {at(t), avg, at0m (the value at t = 0⁻), next(t): the first breakpoint after t (Infinity if none)} */
+  function wave(w) {
+    if (w.kind === 'dc') return { at: () => w.dc, avg: w.dc, at0m: w.dc, next: () => Infinity };
+    if (w.kind === 'sine') {
+      const ph = w.phase * Math.PI / 180, om = 2 * Math.PI * w.freq;
+      const at = t => w.offset + w.amp * Math.sin(t < w.delay ? ph : om * (t - w.delay) + ph);
+      return { at, avg: w.offset, at0m: at(0), next: t => (t < w.delay ? w.delay : Infinity) };
+    }
+    if (w.kind === 'pwm') {
+      const T = 1 / w.freq, tol = 1e-9;
+      const at = t => {
+        if (t < w.delay - tol * T) return w.low;
+        const ph = (t - w.delay) * w.freq; let fr = ph - Math.floor(ph + tol); if (fr < 0) fr = 0;
+        return fr < w.duty - tol ? w.v : w.low;
+      };
+      const next = t => {
+        if (w.duty <= 0 || w.duty >= 1) return t < w.delay ? w.delay : Infinity;
+        if (t < w.delay) return w.delay;
+        const k = Math.floor((t - w.delay) * w.freq);
+        for (let c = k; c <= k + 1; c++) for (const o of [0, w.duty]) { const bp = w.delay + (c + o) * T; if (bp > t) return bp; }
+        return w.delay + (k + 2) * T;
+      };
+      return { at, avg: w.low + (w.v - w.low) * w.duty, at0m: w.duty >= 1 && w.delay <= 0 ? w.v : w.low, next };
+    }
+    // pulse (SPICE semantics)
+    const { v1, v2, delay, rise, fall, width, period: per } = w;
+    const scale = per > 0 ? per : (rise + fall + (Number.isFinite(width) ? width : 0) + delay) || 1e-6, tol = 1e-9 * scale;
+    const at = t => {
+      if (t < delay - tol) return v1;
+      let tt = t - delay; if (tt < 0) tt = 0;
+      if (per > 0) { tt -= per * Math.floor(tt / per + 1e-9); if (tt < 0) tt = 0; }
+      if (tt < rise) return v1 + (v2 - v1) * tt / rise;
+      tt -= rise; if (tt < width - tol) return v2;
+      tt -= width; if (tt < fall) return v2 + (v1 - v2) * tt / fall;
+      return v1;
+    };
+    const offs = [0, rise, rise + width, rise + width + fall].filter(Number.isFinite);
+    const next = t => {
+      if (t < delay) return delay;
+      const k = per > 0 ? Math.floor((t - delay) / per) : 0;
+      for (let c = k; c <= k + 1; c++) { const base = delay + c * per; for (const o of offs) { const bp = base + o; if (bp > t) return bp; } if (!(per > 0)) break; }
+      return Infinity;
+    };
+    const avg = per > 0 ? (v1 * (per - rise - width - fall) + v2 * width + 0.5 * (v1 + v2) * (rise + fall)) / per : (Number.isFinite(width) ? v1 : v2);
+    return { at, avg, at0m: v1, next };
+  }
+
+  // ---- check(netlist) ----
+  function checkNumber(kind, v) {
+    const x = num(v);
+    switch (kind) {
+      case 'pos': return x > 0;
+      case 'nonneg': return x >= 0;
+      case 'unit': return x >= 0 && x <= 1;
+      case 'bool': return typeof v === 'boolean';
+      case 'rails': return Array.isArray(v) && v.length === 2 && num(v[0]) < num(v[1]);
+      default: return Number.isFinite(x);
+    }
+  }
+  function checkWave(v, path, E) {
+    if (!isObj(v)) { if (!Number.isFinite(num(v))) E('value', path, 'needs a number or a waveform'); return; }
+    const keys = Object.keys(v);
+    if (keys.length !== 1 || !['dc', 'pulse', 'sine', 'pwm'].includes(keys[0])) { E('value', path, 'one of dc, pulse, sine, pwm'); return; }
+    const kind = keys[0];
+    if (kind === 'dc') { if (!Number.isFinite(num(v.dc))) E('value', path + '.dc', 'needs a number'); return; }
+    const q = v[kind], F = WAVE_FIELDS[kind];
+    if (!isObj(q)) { E('value', path + '.' + kind, 'needs an object'); return; }
+    for (const k of Object.keys(q)) if (!Object.prototype.hasOwnProperty.call(F, k)) E('value', `${path}.${kind}.${k}`, 'unknown field');
+    for (const [k, spec] of Object.entries(F)) {
+      const must = spec.endsWith('!'), kd = must ? spec.slice(0, -1) : spec;
+      if (q[k] === undefined) { if (must) E('value', `${path}.${kind}.${k}`, 'missing'); continue; }
+      if (!checkNumber(kd, q[k])) E('value', `${path}.${kind}.${k}`, 'out of range');
+    }
+    if (kind === 'pulse' && q.period !== undefined) {
+      const w = canonWave(v);
+      if (w.rise + w.width + w.fall > w.period * (1 + 1e-12)) E('value', path + '.pulse', 'rise + width + fall > period');
+    }
+  }
+  const EL_KEYS = new Set(['id', 'type', 'n', 'value', 'ic', 'params', 'preset', 'on', 'label', 'note']);
+  function check(nl) {
+    const P = [];
+    const E = (code, path, msg) => { P.push({ code, path, msg, level: 'error' }); };
+    const W = (code, path, msg) => { P.push({ code, path, msg, level: 'warning' }); };
+    if (!isObj(nl)) { E('format', '', 'netlist is not an object'); return P; }
+    if (nl.format !== undefined && nl.format !== FORMAT) E('format', 'format', 'not ' + FORMAT);
+    if (!Array.isArray(nl.nodes)) E('format', 'nodes', 'not an array');
+    if (!Array.isArray(nl.elements)) E('format', 'elements', 'not an array');
+    if (P.length) return P;
+    for (const k of Object.keys(nl)) if (!['format', 'nodes', 'elements', 'meta'].includes(k)) W('unknown-field', k, 'ignored');
+    const names = new Set(), labels = new Map(), nodeAt = new Map();
+    nl.nodes.forEach((x, i) => {
+      const nm = typeof x === 'string' ? x : isObj(x) ? x.name : undefined;
+      if (typeof nm !== 'string' || !NODE_RE.test(nm)) { E('node-name', `nodes[${i}]`, 'bad node name'); return; }
+      if (names.has(nm) || labels.has(nm)) { E('dup-node', `nodes[${i}]`, 'duplicate node ' + nm); return; }
+      if (isObj(x) && x.probe !== undefined) {
+        if (isGnd(nm)) { E('node-name', `nodes[${i}]`, 'ground cannot be a label'); return; }
+        labels.set(nm, { to: x.probe, i });
+      } else { names.add(nm); nodeAt.set(nm, i); }
+    });
+    for (const [, { to, i }] of labels) if (typeof to !== 'string' || !(names.has(to) || isGnd(to))) E('unknown-node', `nodes[${i}].probe`, 'label of an unknown node');
+    if ([...names].filter(s => !isGnd(s)).length > MAX_NODES) E('size', 'nodes', 'more than ' + MAX_NODES + ' nodes');
+    if (nl.elements.length > MAX_ELEMENTS) E('size', 'elements', 'more than ' + MAX_ELEMENTS + ' elements');
+    const ids = new Set();
+    nl.elements.forEach((el, i) => {
+      const at = `elements[${i}]`;
+      if (!isObj(el)) { E('format', at, 'element is not an object'); return; }
+      for (const k of Object.keys(el)) if (!EL_KEYS.has(k)) W('unknown-field', `${at}.${k}`, 'ignored');
+      if (typeof el.id !== 'string' || !ID_RE.test(el.id)) E('id', at + '.id', 'bad id');
+      else if (ids.has(el.id)) E('dup-id', at + '.id', 'duplicate id ' + el.id); else ids.add(el.id);
+      const t = el.type;
+      if (typeof t !== 'string' || !Object.prototype.hasOwnProperty.call(TYPES, t)) { E('type', at + '.type', 'unknown type'); return; }
+      if (!Array.isArray(el.n) || !TYPES[t].includes(el.n.length)) { E('pins', at + '.n', 'wrong number of terminals'); return; }
+      el.n.forEach((m, k) => {
+        if (labels.has(m)) E('probe-only', `${at}.n[${k}]`, 'a probe-only label cannot be a terminal');
+        else if (typeof m !== 'string' || !(names.has(m) || isGnd(m))) E('unknown-node', `${at}.n[${k}]`, 'unknown node ' + m);
+      });
+      if (t === 'R' || t === 'C' || t === 'L') {
+        if (el.value === undefined) E('value', at + '.value', 'missing value');
+        else if (!(num(el.value) > 0)) E('value', at + '.value', 'needs a positive number');
+        if (el.ic !== undefined && (t === 'R' || !Number.isFinite(num(el.ic)))) E('value', at + '.ic', 'needs a number');
+      } else if (t === 'V' || t === 'I') {
+        if (el.value === undefined) E('value', at + '.value', 'missing value'); else checkWave(el.value, at + '.value', E);
+      } else if (el.value !== undefined) E('value', at + '.value', 'this type takes params, not a value');
+      if (el.ic !== undefined && t !== 'C' && t !== 'L') E('value', at + '.ic', 'only C and L have ic');
+      if (el.on !== undefined && (t !== 'SW' || typeof el.on !== 'boolean')) E('value', at + '.on', 'only SW has on (true/false)');
+      if (el.preset !== undefined && !(PRESETS[t] && typeof el.preset === 'string' && Object.prototype.hasOwnProperty.call(PRESETS[t], el.preset))) E('preset', at + '.preset', 'unknown preset');
+      if (el.params !== undefined) {
+        if (!isObj(el.params)) E('param', at + '.params', 'not an object');
+        else for (const [k, v] of Object.entries(el.params)) {
+          const kd = Object.prototype.hasOwnProperty.call(PARAMS[t], k) ? PARAMS[t][k] : null;
+          if (!kd) E('param', `${at}.params.${k}`, 'unknown parameter');
+          else if (!checkNumber(kd, v)) E('param', `${at}.params.${k}`, 'out of range');
+        }
+      }
+    });
+    if (P.some(p => p.level === 'error')) return P;
+    // the graph: ground, loops of voltage-defined branches, nodes without a DC path to ground
+    const els = nl.elements, G0 = 'gnd', key = s => (isGnd(s) ? G0 : s);
+    if (els.length && !els.some(el => el.n.some(isGnd))) E('no-ground', 'elements', 'no element touches ground');
+    const uf = () => { const p = new Map(); const f = s => { s = key(s); while (p.has(s) && p.get(s) !== s) s = p.get(s); return s; }; return { f, u: (a, b) => { const x = f(a), y = f(b); if (x === y) return false; p.set(x, y); return true; } }; };
+    const VL = uf(), DCP = uf();
+    els.forEach((el, i) => {
+      const n = el.n;
+      if ((el.type === 'V' || el.type === 'L') && !VL.u(n[0], n[1])) E('vloop', `elements[${i}]`, 'loop of voltage sources / inductors');
+      if (el.type === 'OPAMP' && !VL.u(n[2], G0)) E('vloop', `elements[${i}]`, 'op-amp output on a voltage-defined node');
+      if (n.length === 2 && el.type !== 'V' && el.type !== 'L' && key(n[0]) === key(n[1])) W('self-loop', `elements[${i}]`, 'both terminals on one node');
+      if (['R', 'L', 'V', 'D', 'SW'].includes(el.type)) DCP.u(n[0], n[1]);
+      else if (el.type === 'NPN' || el.type === 'PNP') { DCP.u(n[0], n[1]); DCP.u(n[1], n[2]); }
+      else if (el.type === 'NMOS' || el.type === 'PMOS') DCP.u(n[0], n[2]);
+      else if (el.type === 'OPAMP') DCP.u(n[2], G0);
+    });
+    const used = new Set(); els.forEach(el => el.n.forEach(m => used.add(key(m))));
+    for (const nm of names) {
+      if (isGnd(nm)) continue;
+      if (!used.has(nm)) W('unused', `nodes[${nodeAt.get(nm)}]`, 'no element uses ' + nm);
+      else if (DCP.f(nm) !== DCP.f(G0)) W('floating', `nodes[${nodeAt.get(nm)}]`, 'no DC path to ground from ' + nm);
+    }
+    return P;
+  }
+
+  /** checkFaults(netlist, faults) → problems of a list of faults on a netlist that passes check() (the same codes and paths as check;
+      the validators run it on a bench's faults before the app ever compiles them). Twin: tools/circuit.py check_faults. */
+  const FAULT_KINDS = ['open', 'short', 'drift', 'open-trace', 'reverse'];
+  const FAULT_KEYS = new Set(['kind', 'element', 'pin', 'pins', 'factor', 'param', 'node', 'side']);
+  function checkFaults(nl, faults) {
+    const P = [], E = (path, msg) => { P.push({ code: 'fault', path, msg, level: 'error' }); };
+    if (!Array.isArray(faults)) { E('', 'faults must be a list'); return P; }
+    const els = isObj(nl) && Array.isArray(nl.elements) ? nl.elements.filter(isObj) : [];
+    const byId = new Map(els.map(e => [e.id, e]));
+    const declared = new Set((isObj(nl) && Array.isArray(nl.nodes) ? nl.nodes : []).filter(x => typeof x === 'string' || (isObj(x) && x.probe === undefined)).map(x => typeof x === 'string' ? x : x.name));
+    const same = (m, node) => m === node || (isGnd(m) && isGnd(node));
+    const pinsOk = (pins, n) => Array.isArray(pins) && pins.length === 2 && pins.every(k => Number.isInteger(k) && k >= 0 && k < n) && pins[0] !== pins[1];
+    faults.forEach((f, i) => {
+      const at = `faults[${i}]`;
+      if (!isObj(f)) { E(at, 'a fault is an object {element | node, kind}'); return; }
+      for (const k of Object.keys(f)) if (!FAULT_KEYS.has(k)) E(`${at}.${k}`, 'unknown field');
+      if (!FAULT_KINDS.includes(f.kind)) { E(at + '.kind', 'one of ' + FAULT_KINDS.join(', ')); return; }
+      if (f.kind === 'open-trace') {
+        if (typeof f.node !== 'string' || !(declared.has(f.node) || isGnd(f.node))) { E(at + '.node', 'not a node of the netlist'); return; }
+        const touching = els.filter(e => Array.isArray(e.n) && e.n.some(m => same(m, f.node)));
+        if (f.side === undefined) { if (touching.length < 2) E(at + '.node', 'fewer than two parts touch this node'); return; }
+        if (!Array.isArray(f.side) || !f.side.length) { E(at + '.side', 'a list of parts (R1) or pins (R1.0) on the node'); return; }
+        f.side.forEach((x, j) => {
+          const [eid, pin] = parsePinRef(x), e = typeof x === 'string' ? byId.get(eid) : undefined;
+          if (!e) E(`${at}.side[${j}]`, 'not a part of the netlist');
+          else if (pin === undefined ? !e.n.some(m => same(m, f.node)) : !(pin < e.n.length && same(e.n[pin], f.node))) E(`${at}.side[${j}]`, 'does not touch the node');
+        });
+        return;
+      }
+      const e = typeof f.element === 'string' ? byId.get(f.element) : undefined;
+      if (!e) { E(at + '.element', 'not a part of the netlist'); return; }
+      const n = e.n.length;
+      if (f.kind === 'open') { if (f.pin !== undefined && !(Number.isInteger(f.pin) && f.pin >= 0 && f.pin < n)) E(at + '.pin', 'not a pin of the part'); }
+      else if (f.kind === 'short' || f.kind === 'reverse') {
+        if (f.pins !== undefined ? !pinsOk(f.pins, n) : (f.kind === 'reverse' && n !== 2)) E(at + '.pins', 'two different pins of the part');
+      } else {   // drift
+        if (f.factor !== undefined && !(num(f.factor) > 0)) E(at + '.factor', 'needs a number > 0');
+        if (f.param !== undefined) {
+          const t = e.type, okp = typeof f.param === 'string' && (['R', 'C', 'L', 'V', 'I'].includes(t) ? f.param === 'value' : Object.prototype.hasOwnProperty.call(PARAMS[t], f.param));
+          if (!okp) E(at + '.param', 'not a parameter of the part');
+        }
+      }
+    });
+    return P;
+  }
+
+  // ---- compile: faults applied, nodes indexed, element models built ----
+  const parsePinRef = s => { const m = /^(.*)\.(\d+)$/.exec(String(s)); return m ? [m[1], +m[2]] : [String(s), undefined]; };
+  function normalize(el) {
+    const t = el.type, d = { id: el.id, type: t, n: el.n.slice(), p: {} };
+    if (t === 'R' || t === 'C' || t === 'L') { d.p.value = num(el.value); if (el.ic !== undefined) d.p.ic = num(el.ic); }
+    else if (t === 'V' || t === 'I') d.p.value = canonWave(el.value);
+    else {
+      Object.assign(d.p, DEFAULTS[t], el.preset ? PRESETS[t][el.preset] : null);
+      for (const [k, v] of Object.entries(el.params || {})) d.p[k] = k === 'rails' ? [num(v[0]), num(v[1])] : num(v);
+    }
+    if (t === 'SW') d.on = el.on !== false;
+    return d;
+  }
+  function compile(nl, faults) {
+    const declared = [], labelOf = new Map();
+    for (const x of nl.nodes) {
+      const nm = typeof x === 'string' ? x : x.name;
+      if (isObj(x) && x.probe !== undefined) labelOf.set(nm, x.probe); else declared.push(nm);
+    }
+    const els = nl.elements.map(normalize), byId = new Map(els.map(e => [e.id, e])), extra = [];
+    const same = (m, node) => m === node || (isGnd(m) && isGnd(node));
+    const known = s => typeof s === 'string' && (isGnd(s) || declared.includes(s));
+    (faults || []).forEach((f, fi) => {   // a part soldered the wrong way round: its legs sit on each other's pads (so before the board)
+      if (!isObj(f) || f.kind !== 'reverse') return;
+      const e = byId.get(f.element);
+      if (!e) throw fail('fault', { index: fi });
+      const pins = f.pins === undefined ? (e.n.length === 2 ? [0, 1] : null) : f.pins;
+      if (!Array.isArray(pins) || pins.length !== 2 || !pins.every(k => Number.isInteger(k) && k >= 0 && k < e.n.length) || pins[0] === pins[1]) throw fail('fault', { index: fi });
+      const x = e.n[pins[0]]; e.n[pins[0]] = e.n[pins[1]]; e.n[pins[1]] = x;
+    });
+    (faults || []).forEach((f, fi) => {
+      if (!isObj(f) || f.kind !== 'open-trace') return;
+      if (!known(f.node)) throw fail('fault', { index: fi });
+      const far = '#trace:' + fi;
+      let side = f.side;
+      if (side === undefined) {
+        const touching = els.filter(e => e.n.some(m => same(m, f.node)));
+        if (touching.length < 2) throw fail('fault', { index: fi });
+        side = [touching[touching.length - 1].id];
+      }
+      if (!Array.isArray(side) || !side.length) throw fail('fault', { index: fi });
+      for (const s of side) {
+        const [eid, pin] = parsePinRef(s), e = byId.get(eid);
+        if (!e) throw fail('fault', { index: fi });
+        if (pin === undefined) { if (!e.n.some(m => same(m, f.node))) throw fail('fault', { index: fi }); e.n = e.n.map(m => (same(m, f.node) ? far : m)); }
+        else { if (!(pin < e.n.length) || !same(e.n[pin], f.node)) throw fail('fault', { index: fi }); e.n[pin] = far; }
+      }
+    });
+    for (const e of els) e.board = e.n.slice();   // where the legs are soldered: pin references "@R1.0" measure here
+    (faults || []).forEach((f, fi) => {
+      if (!isObj(f)) throw fail('fault', { index: fi });
+      if (f.kind === 'open-trace' || f.kind === 'reverse') return;
+      const e = byId.get(f.element);
+      if (!e) throw fail('fault', { index: fi });
+      if (f.kind === 'open') {
+        const pins = f.pin !== undefined ? [f.pin] : e.n.map((_, k) => k);
+        for (const k of pins) { if (!(Number.isInteger(k) && k >= 0 && k < e.n.length)) throw fail('fault', { index: fi }); e.n[k] = '#open:' + fi + '.' + k; }
+      } else if (f.kind === 'short') {
+        const pins = f.pins || SHORT_PINS[e.type] || [0, 1];
+        if (!Array.isArray(pins) || pins.length !== 2 || !pins.every(k => Number.isInteger(k) && k >= 0 && k < e.n.length) || pins[0] === pins[1]) throw fail('fault', { index: fi });
+        if (e.n.length === 2) { e.type = 'R'; e.p = { value: RSHORT }; }
+        else extra.push({ id: '#short:' + fi, type: 'R', n: [e.n[pins[0]], e.n[pins[1]]], board: [], p: { value: RSHORT } });
+      } else if (f.kind === 'drift') {
+        const factor = f.factor === undefined ? 2 : num(f.factor), param = f.param || DRIFT_PARAM[e.type];
+        if (!(factor > 0)) throw fail('fault', { index: fi });
+        if (param === 'value' && (e.type === 'V' || e.type === 'I')) e.p.value = scaleWave(e.p.value, factor);
+        else if (typeof e.p[param] === 'number') e.p[param] *= factor;
+        else if (param === 'rails' && Array.isArray(e.p.rails)) e.p.rails = e.p.rails.map(v => v * factor);
+        else throw fail('fault', { index: fi });
+      } else throw fail('fault', { index: fi });
+    });
+    const all = els.concat(extra);
+    // node indices: declared names first (ground = −1), then the private nodes the faults made
+    const index = new Map(); let N = 0;
+    const idx = nm => { if (isGnd(nm)) return -1; if (!index.has(nm)) index.set(nm, N++); return index.get(nm); };
+    declared.forEach(idx);
+    for (const e of all) e.n.forEach(idx);
+    let nb = 0;
+    for (const e of all) {
+      e.pins = e.n.map(idx); e.boardPins = e.board.map(idx); e.k = -1;
+      const p = e.p, t = e.type;
+      e.a = e.pins[0]; e.c = e.pins[1]; e.d = e.pins.length > 2 ? e.pins[2] : -1;
+      if (t === 'R') e.g = 1 / p.value;
+      else if (t === 'SW') e.g = 1 / (e.on ? p.Ron : p.Roff);
+      else if (t === 'C') { e.C = p.value; e.ic = p.ic === undefined ? null : p.ic; if (e.ic !== null) e.k = nb++; }
+      else if (t === 'L') { e.L = p.value; e.ic = p.ic === undefined ? null : p.ic; e.k = nb++; }
+      else if (t === 'V') { e.w = wave(p.value); e.k = nb++; }
+      else if (t === 'I') e.w = wave(p.value);
+      else if (t === 'D') { e.Is = p.Is; e.nvt = p.n * VT; e.vcrit = e.nvt * Math.log(e.nvt / (Math.SQRT2 * e.Is)); e.s = { v: 0 }; }
+      else if (t === 'NPN' || t === 'PNP') { e.pol = t === 'NPN' ? 1 : -1; e.Is = p.Is; e.bf = p.betaF; e.br = p.betaR; e.vcrit = VT * Math.log(VT / (Math.SQRT2 * e.Is)); e.s = { vbe: 0, vbc: 0 }; }
+      else if (t === 'NMOS' || t === 'PMOS') { e.pol = t === 'NMOS' ? 1 : -1; e.vth = Math.abs(p.Vth); e.kp = p.k; e.lam = p.lambda; }
+      else if (t === 'OPAMP') { e.A = p.gain; e.lo = p.rails[0]; e.hi = p.rails[1]; e.head = p.headroom; e.rp = e.pins.length === 5 ? e.pins[3] : null; e.rn = e.pins.length === 5 ? e.pins[4] : null; e.k = nb++; }
+    }
+    for (const e of all) if (e.k >= 0) e.k += N;
+    const outNames = declared.slice(); if (!outNames.some(isGnd)) outNames.push('gnd');
+    for (const l of labelOf.keys()) outNames.push(l);
+    const resolveName = nm => (isGnd(nm) ? -1 : labelOf.has(nm) ? idx(labelOf.get(nm)) : index.get(nm));
+    return { N, S: N + nb, els: all, real: all.filter(e => e.id[0] !== '#'), byId, index, outNames, resolveName,
+      linear: !all.some(e => NONLINEAR.has(e.type)), sources: all.filter(e => e.w) };
+  }
+
+  // ---- dense LU with partial pivoting ----
+  function factor(M, n, perm) {
+    for (let k = 0; k < n; k++) {
+      let p = k, mx = Math.abs(M[k * n + k]);
+      for (let i = k + 1; i < n; i++) { const a = Math.abs(M[i * n + k]); if (a > mx) { mx = a; p = i; } }
+      if (!(mx > 1e-20)) return false;
+      perm[k] = p;
+      if (p !== k) for (let j = 0; j < n; j++) { const t = M[k * n + j]; M[k * n + j] = M[p * n + j]; M[p * n + j] = t; }
+      const piv = M[k * n + k];
+      for (let i = k + 1; i < n; i++) {
+        const f = M[i * n + k] / piv; M[i * n + k] = f;
+        if (f !== 0) for (let j = k + 1; j < n; j++) M[i * n + j] -= f * M[k * n + j];
+      }
+    }
+    return true;
+  }
+  function subst(M, n, perm, b, x) {
+    x.set(b);
+    for (let k = 0; k < n; k++) { const p = perm[k]; if (p !== k) { const t = x[k]; x[k] = x[p]; x[p] = t; } }
+    for (let i = 1; i < n; i++) { let s = x[i]; for (let j = 0; j < i; j++) s -= M[i * n + j] * x[j]; x[i] = s; }
+    for (let i = n - 1; i >= 0; i--) { let s = x[i]; for (let j = i + 1; j < n; j++) s -= M[i * n + j] * x[j]; x[i] = s / M[i * n + i]; }
+  }
+
+  // ---- device equations ----
+  const ex = a => (a < 80 ? Math.exp(a) : EX80 * (1 + a - 80));
+  const dex = a => (a < 80 ? Math.exp(a) : EX80);
+  function pnjlim(vnew, vold, vt, vcrit) {   // SPICE junction limiting
+    if (vnew > vcrit && Math.abs(vnew - vold) > 2 * vt) {
+      if (vold > 0) { const arg = 1 + (vnew - vold) / vt; return arg > 0 ? vold + vt * Math.log(arg) : vcrit; }
+      return vt * Math.log(vnew / vt);
+    }
+    return vnew;
+  }
+  function bjt(e, vbe, vbc, q) {
+    const ef = ex(vbe / VT), er = ex(vbc / VT), df = dex(vbe / VT) / VT, dr = dex(vbc / VT) / VT;
+    q.ibe = e.Is / e.bf * (ef - 1); q.gbe = e.Is / e.bf * df;
+    q.ibc = e.Is / e.br * (er - 1); q.gbc = e.Is / e.br * dr;
+    q.ict = e.Is * (ef - er); q.gmf = e.Is * df; q.gmr = e.Is * dr;
+    return q;
+  }
+  function mos(e, vgs, vds, q) {
+    const vov = vgs - e.vth, k = e.kp, lam = e.lam;
+    if (vov <= 0) { q.id = 0; q.gm = 0; q.gds = 0; }
+    else if (vds < vov) { const l = 1 + lam * vds, base = vov * vds - vds * vds / 2; q.id = k * base * l; q.gm = k * vds * l; q.gds = k * (vov - vds) * l + k * base * lam; }
+    else { const l = 1 + lam * vds; q.id = k / 2 * vov * vov * l; q.gm = k * vov * l; q.gds = k / 2 * vov * vov * lam; }
+    return q;
+  }
+
+  // ---- seeded noise ----
+  function mulberry32(a) {
+    return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+  }
+  function hash32(s, seed) { let h = (2166136261 ^ (seed >>> 0)) >>> 0; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+
+  // ---- the simulator ----
+  function makeSim(ck, noise) {
+    const { N, S } = ck;
+    const A = new Float64Array(S * S), B = new Float64Array(S), X = new Float64Array(S), Xn = new Float64Array(S), LU = new Float64Array(S * S), perm = new Int32Array(S);
+    let luKey = null, limited = false;
+    const q = {};
+    const vx = (x, i) => (i < 0 ? 0 : x[i]);
+    function G(a, c, g) { if (a >= 0) { A[a * S + a] += g; if (c >= 0) { A[a * S + c] -= g; A[c * S + a] -= g; } } if (c >= 0) A[c * S + c] += g; }
+    function J(a, c, i) { if (a >= 0) B[a] -= i; if (c >= 0) B[c] += i; }   // a constant current a → c through the element
+    function VC(a, c, p, r, g) {   // a current g·(v_p − v_r) from a to c
+      if (a >= 0) { if (p >= 0) A[a * S + p] += g; if (r >= 0) A[a * S + r] -= g; }
+      if (c >= 0) { if (p >= 0) A[c * S + p] -= g; if (r >= 0) A[c * S + r] += g; }
+    }
+    function BR(a, c, k) { if (a >= 0) A[a * S + k] += 1; if (c >= 0) A[c * S + k] -= 1; }   // the branch current k leaves a, enters c
+    function ROWV(k, a, c) { if (a >= 0) A[k * S + a] += 1; if (c >= 0) A[k * S + c] -= 1; }
+    const srcVal = (e, ctx) => (ctx.mode === 'ohm' ? 0 : ctx.src * (ctx.avg ? e.w.avg : ctx.t0m ? e.w.at0m : e.w.at(ctx.t)));
+
+    function stamp(ctx, x) {
+      A.fill(0); B.fill(0); limited = false;
+      const gs = GMIN + ctx.gsh, tran = ctx.mode === 'tran', ohm = ctx.mode === 'ohm', op0 = ctx.mode === 'op0';
+      for (let i = 0; i < N; i++) A[i * S + i] += gs;
+      for (const e of ck.els) {
+        const a = e.a, c = e.c, k = e.k;
+        switch (e.type) {
+          case 'R': case 'SW': G(a, c, e.g); break;
+          case 'C':
+            if (k >= 0) { if (op0) { BR(a, c, k); ROWV(k, a, c); B[k] = e.ic; } else A[k * S + k] = 1; }
+            if (tran) { const geq = (ctx.be ? 1 : 2) * e.C / ctx.h, ieq = geq * e.vp + (ctx.be ? 0 : e.ip); G(a, c, geq); J(a, c, -ieq); }
+            break;
+          case 'L':
+            BR(a, c, k);
+            if (op0 && e.ic !== null) { A[k * S + k] = 1; B[k] = e.ic; break; }
+            ROWV(k, a, c);
+            if (tran) { const req = (ctx.be ? 1 : 2) * e.L / ctx.h; A[k * S + k] -= req; B[k] = -req * e.ip - (ctx.be ? 0 : e.vp); }
+            break;
+          case 'V': BR(a, c, k); ROWV(k, a, c); B[k] = srcVal(e, ctx); break;
+          case 'I': J(a, c, -srcVal(e, ctx)); break;   // drives the current into n[0]
+          case 'D': {
+            const v = vx(x, a) - vx(x, c), vl = pnjlim(v, e.s.v, e.nvt, e.vcrit);
+            if (vl !== v) limited = true; e.s.v = vl;
+            const g0 = e.Is * dex(vl / e.nvt) / e.nvt;
+            G(a, c, g0 + GMIN); J(a, c, e.Is * (ex(vl / e.nvt) - 1) - g0 * vl);
+            break;
+          }
+          case 'NPN': case 'PNP': {
+            const p = e.pol, C_ = a, B_ = c, E_ = e.d, vb = vx(x, B_);
+            const r1 = p * (vb - vx(x, E_)), r2 = p * (vb - vx(x, C_));
+            const vbe = pnjlim(r1, e.s.vbe, VT, e.vcrit), vbc = pnjlim(r2, e.s.vbc, VT, e.vcrit);
+            if (vbe !== r1 || vbc !== r2) limited = true; e.s.vbe = vbe; e.s.vbc = vbc;
+            bjt(e, vbe, vbc, q);
+            G(B_, E_, q.gbe + GMIN); J(B_, E_, p * (q.ibe - q.gbe * vbe));
+            G(B_, C_, q.gbc + GMIN); J(B_, C_, p * (q.ibc - q.gbc * vbc));
+            VC(C_, E_, B_, E_, q.gmf); VC(C_, E_, B_, C_, -q.gmr); J(C_, E_, p * (q.ict - q.gmf * vbe + q.gmr * vbc));
+            break;
+          }
+          case 'NMOS': case 'PMOS': {
+            const p = e.pol, D_ = a, G_ = c, S_ = e.d, vd = vx(x, D_), vs = vx(x, S_);
+            const sw = p * (vd - vs) < 0, dd = sw ? S_ : D_, ss = sw ? D_ : S_, vss = sw ? vd : vs;
+            const vgs = p * (vx(x, G_) - vss), vds = p * ((sw ? vs : vd) - vss);
+            mos(e, vgs, vds, q);
+            VC(dd, ss, G_, ss, q.gm); G(dd, ss, q.gds + GMIN); J(dd, ss, p * (q.id - q.gm * vgs - q.gds * vds));
+            break;
+          }
+          case 'OPAMP': {
+            const out = e.d; BR(out, -1, k);
+            if (ohm) { A[k * S + k] = 1; break; }
+            const vp = vx(x, a), vn = vx(x, c), rails = e.rp !== null;
+            const hi = rails ? vx(x, e.rp) : e.hi, lo = rails ? vx(x, e.rn) : e.lo;
+            let hh = (hi - lo) / 2 - e.head, dh = 1; if (hh < 1e-3) { hh = 1e-3; dh = 0; }
+            // linear (exact gain A) up to a knee m below the rail, then an exponential approach: smooth, C¹, bounded
+            const vd = vp - vn, y = e.A * vd, m = Math.min(0.05, hh / 2), knee = hh - m, ay = Math.abs(y);
+            let f = (hi + lo) / 2, fd = e.A, fh = 0;
+            if (ay <= knee) f += y;
+            else { const sg = y < 0 ? -1 : 1, ez = Math.exp(-(ay - knee) / m); f += sg * (hh - m * ez); fd = e.A * ez; fh = dh * sg * (1 - ez); }
+            if (out >= 0) A[k * S + out] += 1;
+            if (a >= 0) A[k * S + a] -= fd; if (c >= 0) A[k * S + c] += fd;
+            let rhs = f - fd * vd;
+            if (rails) {
+              const dhi = 0.5 + 0.5 * fh, dlo = 0.5 - 0.5 * fh;
+              if (e.rp >= 0) A[k * S + e.rp] -= dhi; if (e.rn >= 0) A[k * S + e.rn] -= dlo;
+              rhs -= dhi * hi + dlo * lo;
+            }
+            B[k] = rhs;
+            break;
+          }
+        }
+      }
+      if (ohm) { const { a, b } = ctx.test; if (a >= 0) B[a] += OHM_I; if (b >= 0) B[b] -= OHM_I; }
+    }
+
+    function newton(ctx, x0, maxIt) {
+      X.set(x0);
+      const key = ck.linear ? `${ctx.mode}|${ctx.be}|${ctx.h}|${ctx.gsh}` : null;
+      for (let it = 0; it < maxIt; it++) {
+        stamp(ctx, X);
+        if (!(key && key === luKey)) {
+          LU.set(A); luKey = null;
+          if (!factor(LU, S, perm)) { if (ck.linear) throw fail('singular'); return false; }
+          luKey = key;
+        }
+        subst(LU, S, perm, B, Xn);
+        let conv = true;
+        for (let i = 0; i < S; i++) {
+          const v = Xn[i];
+          if (!Number.isFinite(v)) return false;
+          if (conv && Math.abs(v - X[i]) > (i < N ? 1e-6 : 1e-9) + 1e-6 * Math.abs(v)) conv = false;
+        }
+        X.set(Xn);
+        if (ck.linear || (conv && !limited)) return true;
+      }
+      return false;
+    }
+    /** an operating point; Newton, then gmin stepping, then source stepping */
+    function op(ctx) {
+      const zero = new Float64Array(S);
+      ctx.gsh = 0; ctx.src = 1;
+      if (newton(ctx, zero, 150)) return Float64Array.from(X);
+      let xg = zero, ok = true;
+      for (let i = 2; i <= 12 && ok; i++) { ctx.gsh = Math.pow(10, -i); if (newton(ctx, xg, 150)) xg = Float64Array.from(X); else ok = false; }
+      ctx.gsh = 0;
+      if (ok && newton(ctx, xg, 150)) return Float64Array.from(X);
+      xg = zero; ok = true;
+      for (let s = 1; s <= 10 && ok; s++) { ctx.src = s / 10; if (newton(ctx, xg, 150)) xg = Float64Array.from(X); else ok = false; }
+      ctx.src = 1;
+      if (ok) return xg;
+      throw fail('no-convergence', { mode: ctx.mode });
+    }
+
+    /** the pin currents of an element at the solution x (current into each pin) */
+    function pinCurrents(e, x, ctx) {
+      const a = e.a, c = e.c, va = vx(x, a), vc = vx(x, c);
+      switch (e.type) {
+        case 'R': case 'SW': { const i = (va - vc) * e.g; return [i, -i]; }
+        case 'C': { const i = ctx.mode === 'tran' ? e.ip : 0; return [i, -i]; }
+        case 'L': case 'V': return [x[e.k], -x[e.k]];
+        case 'I': { const j = srcVal(e, ctx); return [-j, j]; }
+        case 'D': { const v = va - vc, i = e.Is * (ex(v / e.nvt) - 1) + GMIN * v; return [i, -i]; }
+        case 'NPN': case 'PNP': {
+          const p = e.pol, vb = vc, vcol = va, ve = vx(x, e.d);
+          bjt(e, p * (vb - ve), p * (vb - vcol), q);
+          const ic = p * (q.ict - q.ibc), ib = p * (q.ibe + q.ibc);
+          return [ic, ib, -(ic + ib)];
+        }
+        case 'NMOS': case 'PMOS': {
+          const p = e.pol, vd = va, vs = vx(x, e.d), sw = p * (vd - vs) < 0, vss = sw ? vd : vs;
+          mos(e, p * (vc - vss), p * ((sw ? vs : vd) - vss), q);
+          const id = (sw ? -1 : 1) * p * q.id + GMIN * (vd - vs);
+          return [id, 0, -id];
+        }
+        case 'OPAMP': return e.pins.map((_, i) => (i === 2 ? x[e.k] : 0));
+      }
+      return e.pins.map(() => 0);
+    }
+    const mainCurrent = (e, pins) => (e.type === 'OPAMP' ? pins[2] : pins[0]);
+
+    // ---- results ----
+    const dcCache = {};
+    function dcX(mode) {
+      if (!dcCache[mode]) {
+        const ctx = { mode: 'op', avg: mode !== 't0', t0m: mode === 't0', t: 0, gsh: 0, src: 1 };
+        dcCache[mode] = { x: op(ctx), ctx };
+      }
+      return dcCache[mode];
+    }
+    function dc(opts) {
+      const mode = opts && opts.mode === 't0' ? 't0' : 'avg';
+      const { x, ctx } = dcX(mode), nodes = {}, branches = {}, pins = {};
+      for (const nm of ck.outNames) nodes[nm] = vx(x, ck.resolveName(nm));
+      for (const e of ck.real) { const pc = pinCurrents(e, x, ctx); pins[e.id] = pc; branches[e.id] = mainCurrent(e, pc); }
+      return { nodes, branches, pins };
+    }
+
+    let tranCache = null;
+    function runTransient(o) {
+      o = o || {};
+      const dt = num(o.dt), tEnd = num(o.tEnd), maxSteps = o.maxSteps === undefined ? MAX_STEPS : num(o.maxSteps);
+      if (!(dt > 0) || !(tEnd > 0)) throw fail('bad-args');
+      const steps = Math.ceil(tEnd / dt - 1e-9);
+      if (!(maxSteps > 0) || maxSteps > MAX_STEPS || steps > maxSteps) throw fail('budget', { steps, limit: Math.min(maxSteps, MAX_STEPS) || MAX_STEPS });
+      const key = `${dt}|${tEnd}|${!!o.uic}`;
+      if (tranCache && tranCache.key === key) return tranCache;
+      const caps = ck.els.filter(e => e.type === 'C'), inds = ck.els.filter(e => e.type === 'L');
+      let x;
+      if (o.uic) {
+        x = new Float64Array(S);
+        for (const e of caps) { e.vp = e.ic === null ? 0 : e.ic; e.ip = 0; }
+        for (const e of inds) { e.ip = e.ic === null ? 0 : e.ic; e.vp = 0; }
+      } else {
+        x = op({ mode: 'op0', t0m: true, t: 0, gsh: 0, src: 1 });
+        for (const e of caps) { e.vp = vx(x, e.a) - vx(x, e.c); e.ip = 0; }
+        for (const e of inds) { e.ip = x[e.k]; e.vp = vx(x, e.a) - vx(x, e.c); }
+      }
+      const V = []; for (let i = 0; i < N; i++) { V.push(new Float64Array(steps + 1)); V[i][0] = x[i]; }
+      const I = ck.real.map(e => { const arr = new Float64Array(steps + 1); arr[0] = mainCurrent(e, pinCurrents(e, x, { mode: 'op', t0m: true, t: 0, src: 1 })); return arr; });
+      const tol = 1e-6 * dt;
+      const nextBp = t => { let m = Infinity; for (const e of ck.sources) { const b = e.w.next(t); if (b < m) m = b; } return m; };
+      let bp = nextBp(-tol);   // a breakpoint at t = 0 makes the first step backward Euler anyway
+      const ctx = { mode: 'tran', t: 0, h: dt, be: true, gsh: 0, src: 1, avg: false, t0m: false };
+      let xs = x;
+      for (let s = 0; s < steps; s++) {
+        const t1 = (s + 1) * dt;
+        ctx.t = t1; ctx.be = s === 0 || bp <= t1 + tol;
+        if (bp <= t1 + tol) bp = nextBp(t1 + tol);
+        ctx.gsh = 0;
+        if (!newton(ctx, xs, 60)) {
+          let ok = true, xg = xs;
+          for (let i = 3; i <= 12 && ok; i++) { ctx.gsh = Math.pow(10, -i); if (newton(ctx, xg, 100)) xg = Float64Array.from(X); else ok = false; }
+          ctx.gsh = 0;
+          if (!ok || !newton(ctx, xg, 100)) throw fail('no-convergence', { t: t1 });
+        }
+        xs = Float64Array.from(X);
+        for (const e of caps) {
+          const v = vx(xs, e.a) - vx(xs, e.c), geq = (ctx.be ? 1 : 2) * e.C / dt;
+          e.ip = geq * (v - e.vp) - (ctx.be ? 0 : e.ip); e.vp = v;
+        }
+        for (const e of inds) { e.ip = xs[e.k]; e.vp = vx(xs, e.a) - vx(xs, e.c); }
+        for (let i = 0; i < N; i++) V[i][s + 1] = xs[i];
+        ck.real.forEach((e, j) => { I[j][s + 1] = mainCurrent(e, pinCurrents(e, xs, ctx)); });
+      }
+      const T = new Float64Array(steps + 1); for (let s = 0; s <= steps; s++) T[s] = s * dt;
+      tranCache = { key, T, V, I, steps };
+      return tranCache;
+    }
+    function transient(o) {
+      const r = runTransient(o), zero = Array.from(new Float64Array(r.steps + 1)), nodes = {}, branches = {};
+      for (const nm of ck.outNames) { const i = ck.resolveName(nm); nodes[nm] = i < 0 ? zero.slice() : Array.from(r.V[i]); }
+      ck.real.forEach((e, j) => { branches[e.id] = Array.from(r.I[j]); });
+      return { t: Array.from(r.T), nodes, branches };
+    }
+
+    // ---- instruments ----
+    function where(ref) {
+      if (typeof ref !== 'string') throw fail('unknown-node', { ref });
+      if (ref[0] === '@') {
+        const [eid, pin] = parsePinRef(ref.slice(1)), e = ck.byId.get(eid);
+        if (!e || pin === undefined || !(pin < e.boardPins.length)) throw fail('unknown-node', { ref });
+        return e.boardPins[pin];
+      }
+      const i = ck.resolveName(ref);
+      if (i === undefined) throw fail('unknown-node', { ref });
+      return i;
+    }
+    const rngFor = probe => (noise ? mulberry32(hash32(JSON.stringify(probe), noise.seed)) : null);
+    const jit = (v, r) => (r ? v * (1 + noise.rel * (2 * r() - 1)) + noise.abs * (2 * r() - 1) : v);
+    function window_(probe) {
+      const tEnd = num(probe.tEnd), dt = probe.dt === undefined ? tEnd / 1000 : num(probe.dt), tStart = probe.tStart === undefined ? 0 : num(probe.tStart);
+      const r = runTransient({ dt, tEnd, maxSteps: probe.maxSteps, uic: probe.uic });
+      let s0 = 0; while (s0 < r.steps && r.T[s0] < tStart - 1e-9 * dt) s0++;
+      return { r, s0 };
+    }
+    const trace = (r, i) => (i < 0 ? new Float64Array(r.steps + 1) : r.V[i]);
+    function stats(t, v) {
+      let mn = Infinity, mx = -Infinity, sum = 0, sq = 0;
+      for (const y of v) { if (y < mn) mn = y; if (y > mx) mx = y; sum += y; sq += y * y; }
+      const n = v.length, mean = sum / n, pp = mx - mn, mid = (mx + mn) / 2, hyst = 0.1 * pp;
+      const ups = []; let high = v[0] > mid;
+      for (let i = 1; i < n; i++) {
+        if (!high && v[i] > mid + hyst / 2) { high = true; let j = i; while (j > 0 && v[j - 1] > mid) j--; const y0 = v[j - 1 < 0 ? 0 : j - 1], y1 = v[j]; ups.push(j > 0 && y1 !== y0 ? t[j - 1] + (mid - y0) / (y1 - y0) * (t[j] - t[j - 1]) : t[j]); }
+        else if (high && v[i] < mid - hyst / 2) high = false;
+      }
+      const freq = pp > 0 && ups.length >= 2 ? (ups.length - 1) / (ups[ups.length - 1] - ups[0]) : 0;
+      return { min: mn, max: mx, mean, pp, rms: Math.sqrt(sq / n), freq };
+    }
+    function measure(probe) {
+      if (!isObj(probe)) throw fail('probe');
+      const r = rngFor(probe);
+      switch (probe.kind) {
+        case 'V': {
+          const ia = where(probe.a), ib = where(probe.b === undefined ? 'gnd' : probe.b), { x } = dcX('avg');
+          return { kind: 'V', value: jit(vx(x, ia) - vx(x, ib), r), unit: 'V' };
+        }
+        case 'I': {
+          const e = ck.byId.get(probe.element); if (!e) throw fail('unknown-element', { ref: probe.element });
+          const { x, ctx } = dcX('avg'), pc = pinCurrents(e, x, ctx);
+          if (probe.pin !== undefined && !(probe.pin >= 0 && probe.pin < pc.length)) throw fail('probe');
+          return { kind: 'I', value: jit(probe.pin === undefined ? mainCurrent(e, pc) : pc[probe.pin], r), unit: 'A' };
+        }
+        case 'R': {
+          const ia = where(probe.a), ib = where(probe.b === undefined ? 'gnd' : probe.b);
+          let R = 0;
+          if (ia !== ib) { const x = op({ mode: 'ohm', test: { a: ia, b: ib }, avg: true, t: 0, gsh: 0, src: 1 }); R = (vx(x, ia) - vx(x, ib)) / OHM_I; }
+          return { kind: 'R', value: Math.abs(R) > OHM_OL ? 'OL' : jit(R, r), unit: 'ohm' };
+        }
+        case 'scope': {
+          const { r: tr, s0 } = window_(probe), ia = where(probe.node), ib = where(probe.ref === undefined ? 'gnd' : probe.ref);
+          const va = trace(tr, ia), vb = trace(tr, ib), t = [], v = [];
+          for (let s = s0; s <= tr.steps; s++) { t.push(tr.T[s]); v.push(jit(va[s] - vb[s], r)); }
+          return { kind: 'scope', t, v, unit: 'V', stats: stats(t, v) };
+        }
+        case 'logic': {
+          if (!Array.isArray(probe.nodes) || !probe.nodes.length) throw fail('probe');
+          const th = probe.threshold === undefined ? 1.5 : num(probe.threshold), { r: tr, s0 } = window_(probe);
+          const t = Array.from(tr.T.subarray(s0)), traces = {}, edges = {}, st = {};
+          for (const nm of probe.nodes) {
+            const v = trace(tr, where(nm)), bits = [], ed = [];
+            for (let s = s0; s <= tr.steps; s++) {
+              const b = v[s] > th ? 1 : 0; bits.push(b);
+              if (s > s0 && b !== bits[bits.length - 2]) {
+                const y0 = v[s - 1], y1 = v[s], tt = y1 !== y0 ? tr.T[s - 1] + (th - y0) / (y1 - y0) * (tr.T[s] - tr.T[s - 1]) : tr.T[s];
+                ed.push({ t: tt, to: b });
+              }
+            }
+            traces[nm] = bits; edges[nm] = ed;
+            const ups = ed.filter(z => z.to === 1);
+            let freq = 0, duty = bits.reduce((p, b) => p + b, 0) / bits.length;
+            if (ups.length >= 2) {
+              const t0 = ups[0].t, t1 = ups[ups.length - 1].t; freq = (ups.length - 1) / (t1 - t0);
+              let hi = 0, lvl = 1, tp = t0;
+              for (const z of ed) { if (z.t <= t0) continue; if (z.t > t1) break; if (lvl) hi += z.t - tp; lvl = z.to; tp = z.t; }
+              duty = hi / (t1 - t0);
+            }
+            st[nm] = { freq, duty, edges: ed.length };
+          }
+          return { kind: 'logic', t, traces, edges, stats: st, threshold: th };
+        }
+      }
+      throw fail('probe');
+    }
+    return { dc, transient, measure };
+  }
+
+  function create(netlist, opts) {
+    opts = opts || {};
+    const problems = check(netlist);
+    if (problems.some(p => p.level === 'error')) throw fail('invalid', { problems });
+    if (opts.faults !== undefined && !Array.isArray(opts.faults)) throw fail('fault', { index: -1 });
+    const faults = JSON.parse(JSON.stringify(opts.faults || []));
+    let noise = null;
+    if (opts.noise) {
+      const rel = num(opts.noise.rel === undefined ? 0 : opts.noise.rel), abs = num(opts.noise.abs === undefined ? 0 : opts.noise.abs);
+      if (!(rel >= 0) || !(abs >= 0)) throw fail('bad-args');
+      noise = { rel, abs, seed: (opts.noise.seed !== undefined ? num(opts.noise.seed) : opts.seed !== undefined ? num(opts.seed) : 1) >>> 0 };
+    }
+    let nl = JSON.parse(JSON.stringify(netlist)), inner = makeSim(compile(nl, faults), noise);
+    return Object.freeze({
+      id: ID,
+      dc: o => inner.dc(o),
+      transient: o => inner.transient(o),
+      measure: p => inner.measure(p),
+      /** the learner flips a switch or turns a knob: {on} for SW, {value} for R, C, L, V, I */
+      set(id, patch) {
+        const el = nl.elements.find(e => e.id === id);
+        if (!el || !isObj(patch)) throw fail('unknown-element', { ref: id });
+        const next = JSON.parse(JSON.stringify(nl)), ne = next.elements.find(e => e.id === id);
+        if (patch.on !== undefined) ne.on = patch.on;
+        if (patch.value !== undefined) ne.value = patch.value;
+        const pr = check(next);
+        if (pr.some(p => p.level === 'error')) throw fail('invalid', { problems: pr });
+        nl = next; inner = makeSim(compile(nl, faults), noise);
+      },
+    });
+  }
+
+  /** the engine's own source, to run it in a Worker (the sim-spec@1 runtime's workerSource: engine/src/36_engine_circuit_sim.js) */
+  const source = () => '(' + noemaCircuitModule.toString() + ')(self);';
+  root.NoemaCircuit = Object.freeze({ id: ID, format: FORMAT, limits: Object.freeze({ nodes: MAX_NODES, elements: MAX_ELEMENTS, steps: MAX_STEPS }), FAULT_KINDS: Object.freeze(FAULT_KINDS.slice()), check, checkFaults, create, num, source });
+  /* i18n-ignore-end */
+})(typeof window !== 'undefined' ? window : globalThis);
+
+/* ---- 36_engine_circuit_sim.js ---- */
+/* ===================== interactive activities — circuit-mna@1 as an engine of sim-spec@1 (docs/INTERACTIVE_CIRCUIT.md, docs/INTERACTIVE.md §12.6–12.7) =====================
+   Registers NoemaCircuit (36_engine_circuit.js) with ACT.registerEngine. A spec names it ("engine": "circuit-mna@1") and gives
+     model: { netlist (noema.circuit/v1), bindings: [{element, prop?, expr}], transient?: {tEnd, dt?}, noise?: {rel, abs} }
+     outputs: [{id, kind: 'scalar', node | branch, at? | stat?} | {id, kind: 'scalar', probe: {kind: V | I | R, …}}
+               | {id, kind: 'series', time: true | node | branch}]
+   and, for a fault-finding bench, `bench` (35_activity_sim.js renders it; this engine answers its measurements).
+   The engine runs in a Worker (workerSource: the engine's own source + the adapter below); the expressions (bindings, transient
+   times, `at`) are the app's NoemaExpr on the main thread (prepare), so the worker gets numbers only. The hidden fault of a bench
+   reaches the engine as opts.faults (the change to the circuit), never the page. */
+(() => {
+  /* i18n-ignore-start */   // code: numbers in, numbers out
+  if (typeof ACT === 'undefined' || !window.NoemaCircuit) return;
+  /** the adapter: create(spec, {seed, faults}) → { run(inputs) → outputs, measure(inputs, probe) → reading } — runs in the worker
+      (as text, with the engine's source before it) and inline when a browser refuses the worker */
+  function circuitSimEngine(root) {
+    const C = root.NoemaCircuit, STATS = ['final', 'min', 'max', 'mean', 'pp', 'rms'], MAXP = 2000;
+    const clone = o => JSON.parse(JSON.stringify(o));
+    const thin = (a, n) => { if (a.length <= n) return Array.from(a); const k = (a.length - 1) / (n - 1), r = []; for (let i = 0; i < n; i++) r.push(a[Math.round(i * k)]); return r; };
+    function at(t, v, x) {   // linear interpolation of a sampled series at time x
+      if (!(x >= t[0])) return v[0]; if (x >= t[t.length - 1]) return v[v.length - 1];
+      let lo = 0, hi = t.length - 1; while (hi - lo > 1) { const m = (lo + hi) >> 1; if (t[m] <= x) lo = m; else hi = m; }
+      return v[lo] + (v[hi] - v[lo]) * (x - t[lo]) / (t[hi] - t[lo] || 1);
+    }
+    function stat(v, s) {
+      if (s === 'final') return v[v.length - 1];
+      let mn = Infinity, mx = -Infinity, sum = 0, sq = 0; for (const y of v) { if (y < mn) mn = y; if (y > mx) mx = y; sum += y; sq += y * y; }
+      return s === 'min' ? mn : s === 'max' ? mx : s === 'mean' ? sum / v.length : s === 'pp' ? mx - mn : Math.sqrt(sq / v.length);
+    }
+    function setProp(el, prop, v) {
+      if (prop === 'on') el.on = typeof v === 'boolean' ? v : v !== 0 && v === v;
+      else if (prop === 'value') el.value = v;
+      else { const [w, f] = prop.split('.'); if (el.value && typeof el.value === 'object' && el.value[w]) el.value[w][f] = v; }
+    }
+    root.noemaEngine = { create(spec, opts) {
+      const model = spec.model || {}, outs = spec.outputs || [], seed = (opts && opts.seed) >>> 0, faults = (opts && opts.faults) || [];
+      let key = null, sim = null;
+      function simFor(inp) {
+        const k = JSON.stringify(inp.$bind || []);
+        if (k !== key) {
+          const nl = clone(model.netlist), byId = new Map(nl.elements.map(e => [e.id, e]));
+          for (const [id, prop, v] of inp.$bind || []) { const el = byId.get(id); if (el) setProp(el, prop, v); }
+          sim = C.create(nl, { faults, seed, noise: model.noise ? { rel: model.noise.rel || 0, abs: model.noise.abs || 0, seed } : undefined }); key = k;
+        }
+        return sim;
+      }
+      return {
+        run(inp) {
+          const s = simFor(inp), r = {}, tr = inp.$tran;
+          let dc = null, tran = null;
+          const DC = () => dc || (dc = s.dc());
+          const TR = () => tran || (tran = s.transient({ tEnd: tr.tEnd, dt: tr.dt > 0 ? tr.dt : tr.tEnd / 1000 }));
+          for (const o of outs) {
+            try {
+              if (o.kind === 'series') { const T = TR(); r[o.id] = thin(o.time ? T.t : o.node !== undefined ? T.nodes[o.node] || [] : T.branches[o.branch] || [], MAXP); continue; }
+              if (o.probe) { const m = s.measure(o.probe); r[o.id] = typeof m.value === 'number' ? m.value : Infinity; continue; }   // (an ohmmeter over its range: ∞)
+              const tw = o.at !== undefined || o.stat !== undefined;
+              if (!tw) { const d = DC(); r[o.id] = o.node !== undefined ? d.nodes[o.node] : d.branches[o.branch]; continue; }
+              const T = TR(), v = o.node !== undefined ? T.nodes[o.node] : T.branches[o.branch];
+              r[o.id] = !v ? NaN : o.stat !== undefined ? (STATS.includes(o.stat) ? stat(v, o.stat) : NaN) : at(T.t, v, inp.$at ? inp.$at[o.id] : NaN);
+            } catch (e) { r[o.id] = o.kind === 'series' ? [] : NaN; }
+          }
+          return r;
+        },
+        /** one reading of an instrument (docs/INTERACTIVE_CIRCUIT.md: V, I, R, scope, logic); traces thinned to 2000 points */
+        measure(inp, probe) {
+          try {
+            const m = simFor(inp).measure(probe);
+            if (m.kind === 'scope') return { kind: 'scope', t: thin(m.t, MAXP), v: thin(m.v, MAXP), stats: m.stats };
+            if (m.kind === 'logic') { const out = {}; for (const nm of Object.keys(m.traces)) out[nm] = { level0: m.traces[nm][0], edges: m.edges[nm].slice(0, MAXP), stats: m.stats[nm] }; return { kind: 'logic', t0: m.t[0], t1: m.t[m.t.length - 1], traces: out }; }
+            return { kind: m.kind, value: m.value };
+          } catch (e) { return { kind: probe && probe.kind, error: String(e && e.code || 'error') }; }
+        },
+      };
+    } };
+  }
+  const local = { NoemaCircuit: window.NoemaCircuit }; circuitSimEngine(local);
+  ACT.registerEngine({
+    id: 'circuit-mna@1', bench: true,
+    /** after the common checks (NoemaPackCheck.checkSimSpec checks the model, the outputs and the bench): the engine's own netlist check */
+    check: spec => NoemaCircuit.check(spec?.model?.netlist).filter(p => p.level === 'error').map(p => `netlist ${p.path}: ${p.msg}`),
+    /** on the main thread: the expressions become numbers (bindings, transient times, `at`), so the worker needs no evaluator */
+    prepare(spec, compile) {
+      const m = spec.model || {}, f = v => typeof v === 'string' ? compile(v) : () => v;
+      const binds = (m.bindings || []).map(b => [b.element, b.prop || 'value', compile(b.expr)]);
+      const tEnd = m.transient ? f(m.transient.tEnd) : null, dt = m.transient && m.transient.dt !== undefined ? f(m.transient.dt) : null;
+      const ats = (spec.outputs || []).filter(o => o.at !== undefined).map(o => [o.id, f(o.at)]);
+      const ev = (g, env) => { try { const v = g(env); return typeof v === 'boolean' ? v : +v; } catch (e) { return NaN; } };
+      return env => ({ ...env, $bind: binds.map(([id, prop, g]) => [id, prop, ev(g, env)]), $tran: tEnd ? { tEnd: ev(tEnd, env), dt: dt ? ev(dt, env) : 0 } : null, $at: Object.fromEntries(ats.map(([id, g]) => [id, ev(g, env)])) });
+    },
+    create: (spec, opts) => local.noemaEngine.create(spec, opts),
+    workerSource: NoemaCircuit.source() + '\n;(' + circuitSimEngine.toString() + ')(self);',
+  });
+  /* i18n-ignore-end */
+})();
+
 /* ---- 40_views.js ---- */
 /* ===================== Views ===================== */
 const main = () => $('main');
@@ -4262,9 +5355,26 @@ function subjectMenu() {
     { label: SL('editSubject'), sub: SL('editSubjectSub'), icon: 'edit', run: async () => Noema.editSubject(await subjectMeta(), { onChange: () => location.reload() }) },
     own(Noema.subjectMeta || {}) ? { label: SL('shareSubject'), sub: SL('shareSubjectSub'), icon: 'share', run: async () => Noema.share(await subjectMeta()) } : null,   // library subjects are everybody's already
     { label: SL('exportPackage'), sub: SL('exportPackageSub'), icon: 'download', run: () => Noema.exportPackage(ACCOUNT.id, Noema.pack).catch(e => toast('⚠️ ' + errText(e), 4000)) },
+    window.NoemaXAPI ? { label: tE('engine.xapi.export'), sub: tE('engine.xapi.exportSub'), icon: 'download', run: exportXAPI } : null,
     { label: SL('pickSubject'), icon: 'book', run: () => Noema.openSubjectPicker() },
     '-',
     { label: SL('resetProgress', { title: SUBJ.title }), icon: 'close', danger: true, run: resetProgress }];
+}
+/** ⋮ › Export learning record (xAPI): this subject's activity attempts (S.att) and answers (S.res) as an xAPI 1.0.3 file, made by
+    NoemaXAPI (engine/src/43_xapi.js, docs/INTERACTIVE_XAPI.md) — nothing is sent anywhere. The actor is the account id, never an e-mail. */
+function exportXAPI() {
+  const att = S.att || {}, res = S.res || {};
+  if (!Object.keys(att).length && !Object.keys(res).length) { toast(tE('engine.xapi.none'), 3500); return; }
+  const site = String(Noema.config?.siteUrl || 'https://noema-lite.netlify.app').replace(/\/+$/, '') + '/';   // i18n-ignore (a web address)
+  let file;
+  try {
+    file = NoemaXAPI.exportFile({ att, res, pack: { id: SUBJ.id, title: SUBJ.title, language: SUBJ.language }, chapters: Noema.pack?.chapters || COURSE },
+      { actor: { account: { homePage: site, name: String(ACCOUNT.id) } }, activityBase: site + 'xapi/' + encodeURIComponent(SUBJ.id) + '/', registrationSeed: [String(ACCOUNT.id), SUBJ.id], now: Date.now() });
+  } catch (e) { toast('⚠️ ' + errText(e), 4000); return; }
+  const name = SUBJ.id + '.xapi.json';   // i18n-ignore (a file name)
+  const a = h('a', { href: URL.createObjectURL(new Blob([JSON.stringify(file, null, 1)], { type: 'application/json' })), download: name });
+  document.body.append(a); a.click(); a.remove();
+  toast('⬇️ ' + name, 3000);   // i18n-ignore (a file name)
 }
 function resetProgress(after) {
   confirmBox(tE('engine.home.resetConfirm', { title: SUBJ.title }), async () => { await Noema.backup.restorePoint(ACCOUNT.id, tE('engine.home.resetPoint', { title: SUBJ.title }), { k: 'engine.home.resetPoint', p: { title: SUBJ.title } }); const st = S.settings; for (const k of Object.keys(S)) delete S[k]; Object.assign(S, { xp: 0, read: {}, res: {}, pb: {}, fc: {}, boss: {}, last: null, resetAt: Date.now(), settings: st }); flushSave(); if (typeof after === 'function') after(); route(); renderTopStats(); });
@@ -5032,6 +6142,1034 @@ function reportedView() {
   });
 }
 
+/* ---- 43_xapi.js ---- */
+/* ===================== xAPI 1.0.3 / cmi5 export of the learner's activity attempts (docs/activities-dev/xapi.md, docs/adr/001 D12) =====================
+   Pure functions: no network, no LRS. The app (later) offers the result as a JSON file to download.
+     NoemaXAPI.statements(input, opts) → [statement]      input: { att: S.att, res?: S.res, pack?: {id, title}, chapters?: [chapter] }
+     NoemaXAPI.exportFile(input, opts) → { format: 'noema.xapi-export/v1', … statements }   (tools/schemas/noema.xapi-export.v1.schema.json)
+     NoemaXAPI.cmi5Package(course, opts) → { files: { 'cmi5.xml': xml }, aus: [{id, chapter, exercise?}] }
+     NoemaXAPI.validate(stmt) → [problem]   ·   NoemaXAPI.validateAll(list) → [problem] (also the cmi5 rules across statements)
+   opts: { actor: { name?, account: { homePage, name } } (never an email: mbox / mbox_sha1sum / openid are never written),
+           activityBase: 'https://noema-lite.netlify.app/xapi/<packId>/', registration?: UUID | registrationSeed?: any,
+           locale?: 'en', profile?: 'xapi' | 'cmi5', granularity?: 'chapter' | 'activity' (cmi5: the AU of a statement) }
+   Every id is a UUID v5 of the content (re-export gives the same statements: idempotent at the LRS). */
+/* i18n-ignore-start */   // IRIs, verbs and protocol words, not text for learners
+const NoemaXAPI = (() => {
+  const VERSION = '1.0.3';
+  const ADL = 'http://adlnet.gov/expapi/verbs/';
+  const VERBS = {
+    attempted: ADL + 'attempted', interacted: 'http://adlnet.gov/expapi/verbs/interacted', answered: ADL + 'answered',
+    passed: ADL + 'passed', failed: ADL + 'failed', completed: ADL + 'completed', initialized: ADL + 'initialized', terminated: ADL + 'terminated',
+  };
+  const CMI5_CAT = 'https://w3id.org/xapi/cmi5/context/categories/cmi5';
+  const MOVEON_CAT = 'https://w3id.org/xapi/cmi5/context/categories/moveon';
+  const CMI5_SESSION = 'https://w3id.org/xapi/cmi5/context/extensions/sessionid';
+  const CMI5_DEFINED = new Set(['launched', 'initialized', 'completed', 'passed', 'failed', 'abandoned', 'waived', 'terminated', 'satisfied']);
+  const ACT_TYPE = { course: 'https://w3id.org/xapi/cmi5/activitytype/course', block: 'https://w3id.org/xapi/cmi5/activitytype/block',
+    sim: 'http://adlnet.gov/expapi/activities/simulation', interaction: 'http://adlnet.gov/expapi/activities/cmi.interaction',
+    chapter: 'http://adlnet.gov/expapi/activities/module', lesson: 'http://adlnet.gov/expapi/activities/lesson' };
+  const INTERACTION = { mcq: 'choice', odd: 'choice', predict: 'choice', inquiry: 'choice', tf: 'true-false', cloze: 'fill-in', match: 'matching',
+    order: 'sequencing', bucket: 'matching', calc: 'numeric', free: 'long-fill-in', write: 'long-fill-in', spotbug: 'choice', img_hotspot: 'choice',
+    img_sequence: 'sequencing', img_drag: 'matching', img_label: 'fill-in', img_select: 'matching' };
+  const EXT_BASE = 'https://noema-lite.netlify.app/xapi/ext/';
+  const NS = '6f1d4a52-7c1e-5b0a-9e43-2a8d1c7b3f60';   // the noema-lite namespace of every UUID v5 here
+  const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+  const IRI_RE = /^[a-z][a-z0-9+.-]*:\/\/[^\s<>"{}|\\^`]+$/i;
+  const LANG_RE = /^[a-zA-Z]{2,8}(-[a-zA-Z0-9]{1,8})*$/;
+  const DUR_RE = /^P(?!$)(\d+Y)?(\d+M)?(\d+W)?(\d+D)?(T(?=\d)(\d+H)?(\d+M)?(\d+(\.\d+)?S)?)?$/;
+  const TS_RE = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?(Z|[+-]\d{2}:\d{2})$/;
+
+  /* ---------- SHA-1 and UUID v5 (RFC 4122 §4.3), synchronous and dependency-free ---------- */
+  function utf8(s) {
+    if (typeof TextEncoder !== 'undefined') return new TextEncoder().encode(s);
+    const out = []; const e = unescape(encodeURIComponent(s)); for (let i = 0; i < e.length; i++) out.push(e.charCodeAt(i)); return Uint8Array.from(out);
+  }
+  function sha1(bytes) {
+    const ml = bytes.length, nb = ((ml + 9 + 63) >> 6) << 6, m = new Uint8Array(nb);
+    m.set(bytes); m[ml] = 0x80;
+    const bits = ml * 8, dv = new DataView(m.buffer);
+    dv.setUint32(nb - 4, bits >>> 0); dv.setUint32(nb - 8, Math.floor(bits / 4294967296));
+    let h0 = 0x67452301, h1 = 0xefcdab89, h2 = 0x98badcfe, h3 = 0x10325476, h4 = 0xc3d2e1f0;
+    const w = new Uint32Array(80), rol = (x, n) => (x << n) | (x >>> (32 - n));
+    for (let o = 0; o < nb; o += 64) {
+      for (let i = 0; i < 16; i++) w[i] = dv.getUint32(o + i * 4);
+      for (let i = 16; i < 80; i++) w[i] = rol(w[i - 3] ^ w[i - 8] ^ w[i - 14] ^ w[i - 16], 1);
+      let a = h0, b = h1, c = h2, d = h3, e = h4;
+      for (let i = 0; i < 80; i++) {
+        const f = i < 20 ? ((b & c) | (~b & d)) + 0x5a827999 : i < 40 ? (b ^ c ^ d) + 0x6ed9eba1 : i < 60 ? ((b & c) | (b & d) | (c & d)) + 0x8f1bbcdc : (b ^ c ^ d) + 0xca62c1d6;
+        const t = (rol(a, 5) + f + e + w[i]) >>> 0; e = d; d = c; c = rol(b, 30) >>> 0; b = a; a = t;
+      }
+      h0 = (h0 + a) >>> 0; h1 = (h1 + b) >>> 0; h2 = (h2 + c) >>> 0; h3 = (h3 + d) >>> 0; h4 = (h4 + e) >>> 0;
+    }
+    const out = new Uint8Array(20), ov = new DataView(out.buffer);
+    [h0, h1, h2, h3, h4].forEach((x, i) => ov.setUint32(i * 4, x));
+    return out;
+  }
+  const hex = b => Array.from(b, x => x.toString(16).padStart(2, '0')).join('');
+  function uuid5(name, ns = NS) {
+    const nsb = Uint8Array.from(ns.replace(/-/g, '').match(/../g).map(x => parseInt(x, 16)));
+    const nb = utf8(String(name)), all = new Uint8Array(16 + nb.length); all.set(nsb); all.set(nb, 16);
+    const h = sha1(all).slice(0, 16); h[6] = (h[6] & 0x0f) | 0x50; h[8] = (h[8] & 0x3f) | 0x80;
+    const x = hex(h); return `${x.slice(0, 8)}-${x.slice(8, 12)}-${x.slice(12, 16)}-${x.slice(16, 20)}-${x.slice(20)}`;
+  }
+
+  /* ---------- small helpers ---------- */
+  /** a stable JSON (sorted keys): the name of a UUID v5 must not depend on the order of the keys */
+  function stable(v) {
+    if (v === undefined) return 'null';
+    if (v === null || typeof v !== 'object') return JSON.stringify(v);
+    if (Array.isArray(v)) return '[' + v.map(stable).join(',') + ']';
+    return '{' + Object.keys(v).sort().filter(k => v[k] !== undefined).map(k => JSON.stringify(k) + ':' + stable(v[k])).join(',') + '}';
+  }
+  const num = v => typeof v === 'number' && isFinite(v);
+  const iso = t => (num(t) && t > 0 && t < 8.64e15) ? new Date(t).toISOString() : null;
+  /** ISO 8601 duration of `ms` milliseconds, to 0.01 s (cmi5 §9.5.4.1): PT1H2M3.45S */
+  function duration(ms) {
+    if (!num(ms) || ms < 0) ms = 0;
+    const cs = Math.round(ms / 10), h = Math.floor(cs / 360000), m = Math.floor((cs % 360000) / 6000), s = (cs % 6000) / 100;
+    let out = 'PT'; if (h) out += h + 'H'; if (m) out += m + 'M';
+    if (s || (!h && !m)) out += (Number.isInteger(s) ? s : s.toFixed(2).replace(/0$/, '')) + 'S';
+    return out;
+  }
+  /** plain text of an exercise prompt for an activity name: the inline format's marks removed, at most 120 characters */
+  function plain(s) {
+    let t = String(s || '').replace(/\$\$?([^$]*)\$\$?/g, '$1').replace(/\[\[([^\]|]*)[^\]]*\]\]/g, '___').replace(/[*`]/g, '').replace(/\s+/g, ' ').trim();
+    return t.length > 120 ? t.slice(0, 119) + '…' : t;
+  }
+  const lang = l => (typeof l === 'string' && LANG_RE.test(l)) ? l : 'en';
+  const langMap = (l, s) => ({ [l]: String(s) });
+  const enc = s => encodeURIComponent(String(s));
+
+  function setup(input, opts) {
+    opts = opts || {};
+    const a = opts.actor || {}, acc = a.account || {};
+    if (!acc || typeof acc.homePage !== 'string' || !IRI_RE.test(acc.homePage) || typeof acc.name !== 'string' || !acc.name)
+      throw new Error('NoemaXAPI: opts.actor.account {homePage (IRI), name} is required (an account, never an email)');
+    const actor = { objectType: 'Agent', account: { homePage: acc.homePage, name: acc.name } };
+    if (typeof a.name === 'string' && a.name && !/@/.test(a.name)) actor.name = a.name;   // a display name; an address is never written
+    const pack = (input && input.pack) || {};
+    let base = opts.activityBase || ('https://noema-lite.netlify.app/xapi/' + enc(pack.id || 'pack') + '/');
+    if (!base.endsWith('/')) base += '/';
+    if (!IRI_RE.test(base)) throw new Error('NoemaXAPI: opts.activityBase must be an absolute IRI');
+    const registration = (typeof opts.registration === 'string' && UUID_RE.test(opts.registration)) ? opts.registration.toLowerCase()
+      : uuid5('registration|' + stable(opts.registrationSeed !== undefined ? opts.registrationSeed : [acc.homePage, acc.name, base]));
+    const ext = opts.extBase || EXT_BASE;
+    const X = k => ext + k;
+    // what the exercises are: id → { ex, chapter }
+    const EXS = {}, CHS = {};
+    for (const c of (input && Array.isArray(input.chapters) ? input.chapters : [])) {
+      if (!c || typeof c.id !== 'string') continue;
+      CHS[c.id] = c;
+      for (const e of Array.isArray(c.exercises) ? c.exercises : []) if (e && typeof e.id === 'string') EXS[e.id] = { ex: e, chapter: c.id };
+    }
+    const chapterOf = id => (EXS[id] && EXS[id].chapter) || ((/^(ch\d+)-/.exec(id) || [])[1]) || null;
+    return { opts, actor, base, registration, X, EXS, CHS, chapterOf, locale: lang(opts.locale || pack.language), pack,
+      profile: opts.profile === 'cmi5' ? 'cmi5' : 'xapi', granularity: opts.granularity === 'activity' ? 'activity' : 'chapter' };
+  }
+
+  const verb = v => ({ id: VERBS[v], display: { 'en-US': v } });
+  function exerciseObject(C, exId, fallbackType) {
+    const info = C.EXS[exId], ex = info ? info.ex : null, type = (ex && ex.type) || fallbackType || null;
+    const def = { type: type === 'sim' ? ACT_TYPE.sim : ACT_TYPE.interaction, name: langMap(C.locale, (ex && plain(ex.q)) || exId) };
+    if (type && type !== 'sim') def.interactionType = INTERACTION[type] || 'other';
+    if (type) def.extensions = { [C.X('exercise-type')]: type };
+    return { objectType: 'Activity', id: C.base + 'exercise/' + enc(exId), definition: def };
+  }
+  const chapterRef = (C, ch) => ({ objectType: 'Activity', id: C.base + 'chapter/' + enc(ch), definition: { type: ACT_TYPE.chapter, name: langMap(C.locale, (C.CHS[ch] && C.CHS[ch].title) || ch) } });
+  const courseRef = C => ({ objectType: 'Activity', id: C.base, definition: { type: ACT_TYPE.course, name: langMap(C.locale, C.pack.title || C.pack.id || 'noema-lite pack') } });
+  const auId = (C, ch, exId) => C.base + 'au/' + enc(C.granularity === 'activity' && exId ? exId : (ch || 'pack'));
+  const auObject = (C, ch, exId) => ({ objectType: 'Activity', id: auId(C, ch, exId), definition: { type: ACT_TYPE.lesson, name: langMap(C.locale, C.granularity === 'activity' && exId ? ((C.EXS[exId] && plain(C.EXS[exId].ex.q)) || exId) : ((C.CHS[ch] && C.CHS[ch].title) || ch || 'pack')) } });
+
+  /** the attempts of S.att: { exId: { id, seed, t, t0?, hints, result: {score, passed, detail, t}, events: [{t, name, data}] } } (or a list with `exercise`) */
+  function attemptsOf(input) {
+    const src = input && (input.att || input.attempts), out = [];
+    if (Array.isArray(src)) { for (const a of src) if (a && typeof a.exercise === 'string') out.push([a.exercise, a]); }
+    else if (src && typeof src === 'object') for (const k of Object.keys(src)) if (src[k] && typeof src[k] === 'object') out.push([k, src[k]]);
+    const t0 = a => { const ev = Array.isArray(a.events) ? a.events.filter(e => e && num(e.t)) : []; return num(a.t0) ? a.t0 : ev.length ? Math.min(...ev.map(e => e.t)) : num(a.result && a.result.t) ? a.result.t : num(a.t) ? a.t : 0; };
+    return out.map(([k, a]) => ({ exId: k, a, t0: t0(a) })).sort((x, y) => (x.t0 - y.t0) || (x.exId < y.exId ? -1 : x.exId > y.exId ? 1 : 0));
+  }
+
+  /** what a result says beyond its score: the detail text and, for the checks grader, every check met or not ({label, ok}) */
+  function resultExt(C, r, ext) {
+    if (typeof r.detail === 'string' && r.detail) ext[C.X('detail')] = r.detail;
+    if (Array.isArray(r.checks)) ext[C.X('checks')] = r.checks.filter(c => c && typeof c === 'object').map(c => ({ label: typeof c.label === 'string' ? c.label : null, ok: !!c.ok }));
+    return ext;
+  }
+  function statements(input, opts) {
+    const C = setup(input, opts), out = [];
+    const cmi5 = C.profile === 'cmi5';
+    const auState = {};   // cmi5: per AU, what it said already (passed / completed once per registration; failed never after passed)
+    function push(v, object, { t, result, ctxExt, parents, category, session, key }) {
+      const ctx = { registration: C.registration, contextActivities: {}, language: C.locale };
+      if (parents && parents.length) ctx.contextActivities.parent = parents;
+      ctx.contextActivities.grouping = [courseRef(C)];
+      if (category && category.length) ctx.contextActivities.category = category.map(id => ({ objectType: 'Activity', id }));
+      const ex = Object.assign({}, ctxExt || {}); if (session) ex[CMI5_SESSION] = session;
+      if (Object.keys(ex).length) ctx.extensions = ex;
+      const st = { id: uuid5('statement|' + C.registration + '|' + v + '|' + object.id + '|' + key), actor: C.actor, verb: verb(v), object, context: ctx };
+      if (result) st.result = result;
+      const ts = iso(t); if (ts) st.timestamp = ts;
+      st.version = VERSION;
+      out.push(st); return st;
+    }
+
+    for (const { exId, a, t0 } of attemptsOf(input)) {
+      const ch = C.chapterOf(exId), obj = exerciseObject(C, exId, 'sim');
+      const att = typeof a.id === 'string' && a.id ? a.id : uuid5('attempt|' + exId + '|' + stable([a.seed, t0]));
+      const events = (Array.isArray(a.events) ? a.events : []).filter(e => e && typeof e.name === 'string');
+      const r = a.result && typeof a.result === 'object' && num(a.result.score) ? a.result : null;
+      const end = r && num(r.t) ? r.t : events.length && num(events[events.length - 1].t) ? events[events.length - 1].t : num(a.t) ? a.t : t0;
+      const hints = Number.isInteger(a.hints) && a.hints >= 0 ? a.hints : 0;
+      const base = { [C.X('attempt-id')]: att }; if (a.seed != null) base[C.X('seed')] = a.seed;
+      const parents = ch ? [chapterRef(C, ch)] : [];
+      const key = k => att + '|' + k;
+      if (!cmi5) {
+        push('attempted', obj, { t: t0, parents, ctxExt: Object.assign({}, base, { [C.X('hints-used')]: hints }), key: key('start') });
+        events.forEach((e, i) => push('interacted', obj, { t: e.t, parents, key: key('ev' + i),
+          ctxExt: Object.assign({}, base, { [C.X('event-name')]: e.name, [C.X('event-index')]: i }, e.data !== undefined ? { [C.X('event-data')]: e.data } : {}) }));
+        if (r) {
+          const score = Math.max(0, Math.min(1, r.score));
+          const res = { score: { scaled: score, raw: score, min: 0, max: 1 }, success: !!r.passed, completion: true, duration: duration(end - t0), extensions: { [C.X('hints-used')]: hints } };
+          resultExt(C, r, res.extensions);
+          push(r.passed ? 'passed' : 'failed', obj, { t: r.t || end, parents, ctxExt: base, result: res, key: key('result') });
+        }
+        continue;
+      }
+      // cmi5: a session per attempt; the defined statements are about the AU, the interactions about the exercise inside it
+      const au = auObject(C, ch, exId), session = uuid5('session|' + C.registration + '|' + att), st = auState[au.id] = auState[au.id] || {};
+      const auParents = C.granularity === 'activity' && ch ? [chapterRef(C, ch)] : [];
+      push('initialized', au, { t: t0, parents: auParents, category: [CMI5_CAT], session, ctxExt: base, key: key('init') });
+      events.forEach((e, i) => push('interacted', obj, { t: e.t, parents: [au], session, key: key('ev' + i),
+        ctxExt: Object.assign({}, base, { [C.X('event-name')]: e.name, [C.X('event-index')]: i }, e.data !== undefined ? { [C.X('event-data')]: e.data } : {}) }));
+      if (r) {
+        const score = Math.max(0, Math.min(1, r.score)), dur = duration(end - t0);
+        const ext = resultExt(C, r, { [C.X('hints-used')]: hints });
+        // the exercise's own outcome, as a cmi5 "allowed" statement (no cmi5 category)
+        push('answered', obj, { t: r.t || end, parents: [au], session, ctxExt: base, key: key('answer'),
+          result: { score: { scaled: score, raw: score, min: 0, max: 1 }, success: !!r.passed, completion: true, duration: dur, extensions: ext } });
+        if (r.passed && !st.passed) {
+          st.passed = true;
+          push('passed', au, { t: r.t || end, parents: auParents, category: [CMI5_CAT, MOVEON_CAT], session, ctxExt: base, key: key('passed'),
+            result: { score: { scaled: score, raw: score, min: 0, max: 1 }, success: true, duration: dur } });
+        } else if (!r.passed && !st.passed && !st.failed) {
+          st.failed = true;
+          push('failed', au, { t: r.t || end, parents: auParents, category: [CMI5_CAT, MOVEON_CAT], session, ctxExt: base, key: key('failed'),
+            result: { score: { scaled: score, raw: score, min: 0, max: 1 }, success: false, duration: dur } });
+        }
+        if (!st.completed) {
+          st.completed = true;
+          push('completed', au, { t: r.t || end, parents: auParents, category: [CMI5_CAT, MOVEON_CAT], session, ctxExt: base, key: key('completed'), result: { completion: true, duration: dur } });
+        }
+      }
+      push('terminated', au, { t: end, parents: auParents, category: [CMI5_CAT], session, ctxExt: base, key: key('end'), result: { duration: duration(end - t0) } });
+    }
+
+    // the ordinary exercises: S.res { exId: { n, ok, last, t, conf } } → one "answered" each (the latest answer)
+    const res = input && (input.res || input.answers);
+    if (res && typeof res === 'object' && !Array.isArray(res)) {
+      for (const exId of Object.keys(res).sort()) {
+        const r = res[exId]; if (!r || typeof r !== 'object' || typeof r.last !== 'boolean') continue;
+        const ch = C.chapterOf(exId), obj = exerciseObject(C, exId, null);
+        const ext = { [C.X('answers-count')]: Number.isInteger(r.n) ? r.n : 1, [C.X('correct-count')]: Number.isInteger(r.ok) ? r.ok : (r.last ? 1 : 0) };
+        if (typeof r.conf === 'string') ext[C.X('confidence')] = r.conf;
+        const result = { success: r.last, completion: true, extensions: ext };
+        const k = 'res|' + exId + '|' + stable([r.n, r.ok, r.last, r.t]);
+        if (cmi5) push('answered', obj, { t: r.t, parents: [auObject(C, ch, exId)], session: uuid5('session|' + C.registration + '|answers|' + (C.granularity === 'activity' ? exId : ch)), result, key: k });
+        else push('answered', obj, { t: r.t, parents: ch ? [chapterRef(C, ch)] : [], result, key: k });
+      }
+    }
+    return out;
+  }
+
+  /** the file the app offers to download (tools/schemas/noema.xapi-export.v1.schema.json) */
+  function exportFile(input, opts) {
+    const C = setup(input, opts), list = statements(input, opts);
+    const f = { format: 'noema.xapi-export/v1', xapiVersion: VERSION, profile: C.profile, pack: { id: String(C.pack.id || ''), activityBase: C.base }, registration: C.registration, statements: list };
+    if (opts && num(opts.now)) f.generated = iso(opts.now);
+    return f;
+  }
+
+  /* ---------- validation: the subset of xAPI 1.0.3 and cmi5 this file writes ---------- */
+  function validate(st) {
+    const P = [], bad = m => P.push(m);
+    if (!st || typeof st !== 'object') return ['not an object'];
+    if (!UUID_RE.test(st.id || '')) bad('id is not a UUID');
+    const a = st.actor;
+    if (!a || typeof a !== 'object') bad('no actor');
+    else {
+      for (const k of ['mbox', 'mbox_sha1sum', 'openid']) if (k in a) bad('actor has ' + k + ' (never an email or another personal identifier: use an account)');
+      if (a.objectType && a.objectType !== 'Agent') bad('actor.objectType must be Agent');
+      if (!a.account || !IRI_RE.test(a.account.homePage || '') || typeof a.account.name !== 'string' || !a.account.name) bad('actor.account needs homePage (IRI) and name');
+      if (a.name != null && (typeof a.name !== 'string' || /@/.test(a.name))) bad('actor.name must be a display name, not an address');
+      if (a.account && Object.keys(a.account).some(k => k !== 'homePage' && k !== 'name')) bad('actor.account: only homePage and name');
+    }
+    const v = st.verb;
+    if (!v || !IRI_RE.test(v.id || '')) bad('verb.id is not an IRI');
+    else if (!v.display || typeof v.display !== 'object' || !Object.keys(v.display).length) bad('verb.display is missing');
+    const o = st.object;
+    if (!o || !IRI_RE.test(o.id || '')) bad('object.id is not an IRI');
+    else if (o.objectType && o.objectType !== 'Activity') bad('object.objectType must be Activity');
+    else if (o.definition) {
+      const d = o.definition;
+      if (d.type != null && !IRI_RE.test(d.type)) bad('object.definition.type is not an IRI');
+      if (d.name && Object.keys(d.name).some(l => !LANG_RE.test(l))) bad('object.definition.name: a key is not a language tag');
+      if (d.interactionType && d.type !== ACT_TYPE.interaction) bad('interactionType needs the cmi.interaction type');
+      for (const k of Object.keys(d.extensions || {})) if (!IRI_RE.test(k)) bad('definition extension key is not an IRI: ' + k);
+    }
+    const r = st.result;
+    if (r != null) {
+      if (typeof r !== 'object') bad('result is not an object');
+      else {
+        const s = r.score;
+        if (s != null) {
+          if (s.scaled != null && !(num(s.scaled) && s.scaled >= -1 && s.scaled <= 1)) bad('result.score.scaled must be in [-1, 1]');
+          if (s.min != null && s.max != null && !(s.min < s.max)) bad('result.score: min must be < max');
+          if (s.raw != null && ((s.min != null && s.raw < s.min) || (s.max != null && s.raw > s.max))) bad('result.score.raw outside [min, max]');
+        }
+        if (r.success != null && typeof r.success !== 'boolean') bad('result.success must be a boolean');
+        if (r.completion != null && typeof r.completion !== 'boolean') bad('result.completion must be a boolean');
+        if (r.duration != null && !DUR_RE.test(r.duration)) bad('result.duration is not an ISO 8601 duration');
+        for (const k of Object.keys(r.extensions || {})) if (!IRI_RE.test(k)) bad('result extension key is not an IRI: ' + k);
+      }
+    }
+    const c = st.context;
+    if (c != null) {
+      if (c.registration != null && !UUID_RE.test(c.registration)) bad('context.registration is not a UUID');
+      if (c.language != null && !LANG_RE.test(c.language)) bad('context.language is not a language tag');
+      for (const k of Object.keys(c.extensions || {})) if (!IRI_RE.test(k)) bad('context extension key is not an IRI: ' + k);
+      for (const [k, list] of Object.entries(c.contextActivities || {})) {
+        if (!['parent', 'grouping', 'category', 'other'].includes(k)) bad('contextActivities.' + k + ' is not allowed');
+        else if (!Array.isArray(list) || !list.every(x => x && IRI_RE.test(x.id || ''))) bad('contextActivities.' + k + ' must be a list of activities');
+      }
+    }
+    if (st.timestamp != null && !TS_RE.test(st.timestamp)) bad('timestamp is not ISO 8601 with a zone');
+    if (st.version != null && !/^1\.0(\.\d+)?$/.test(st.version)) bad('version must be 1.0.x');
+    // cmi5 (cmi5 spec §9): a defined statement carries the cmi5 category, a registration and the session id; the rest do not carry the category
+    const name = v && typeof v.id === 'string' ? v.id.slice(v.id.lastIndexOf('/') + 1) : '';
+    const cats = ((c && c.contextActivities && c.contextActivities.category) || []).map(x => x && x.id);
+    const isCmi5 = cats.includes(CMI5_CAT), sess = c && c.extensions && c.extensions[CMI5_SESSION] != null;
+    if (isCmi5) {
+      if (!(v && v.id.startsWith(ADL) && CMI5_DEFINED.has(name))) bad('the cmi5 category on a verb cmi5 does not define (' + name + ')');
+      if (!c.registration) bad('cmi5: a registration is required');
+      if (!sess) bad('cmi5: the sessionid extension is required');
+      if (name === 'passed' && !(r && r.success === true)) bad('cmi5 passed: result.success must be true');
+      if (name === 'failed' && !(r && r.success === false)) bad('cmi5 failed: result.success must be false');
+      if (name === 'completed' && !(r && r.completion === true)) bad('cmi5 completed: result.completion must be true');
+      if (['passed', 'failed', 'completed', 'terminated'].includes(name) && !(r && r.duration)) bad('cmi5 ' + name + ': result.duration is required');
+      if ((name === 'passed' || name === 'failed') && r && r.completion != null) bad('cmi5 ' + name + ': no result.completion');
+      if (cats.includes(MOVEON_CAT) && !['passed', 'failed', 'completed'].includes(name)) bad('cmi5: the moveOn category only on passed, failed, completed');
+      if (['passed', 'failed', 'completed'].includes(name) && !cats.includes(MOVEON_CAT)) bad('cmi5 ' + name + ': the moveOn category is required');
+    } else if (cats.includes(MOVEON_CAT)) bad('the moveOn category without the cmi5 category');
+    return P;
+  }
+  /** every statement, plus the rules across them: unique ids; cmi5 per AU and registration: passed / completed at most once, no failed after passed */
+  function validateAll(list) {
+    const P = []; if (!Array.isArray(list)) return ['not a list'];
+    const ids = new Set(), seen = {};
+    list.forEach((st, i) => {
+      for (const p of validate(st)) P.push('#' + i + ': ' + p);
+      if (st && st.id) { if (ids.has(st.id)) P.push('#' + i + ': duplicate id ' + st.id); ids.add(st.id); }
+      const cats = ((st && st.context && st.context.contextActivities && st.context.contextActivities.category) || []).map(x => x && x.id);
+      if (!cats.includes(CMI5_CAT)) return;
+      const name = st.verb.id.slice(st.verb.id.lastIndexOf('/') + 1), k = st.context.registration + ' ' + st.object.id, s = seen[k] = seen[k] || {};
+      if ((name === 'passed' || name === 'completed') && s[name]) P.push('#' + i + ': cmi5: a second ' + name + ' for ' + st.object.id);
+      if (name === 'failed' && s.passed) P.push('#' + i + ': cmi5: failed after passed for ' + st.object.id);
+      s[name] = true;
+    });
+    return P;
+  }
+
+  /* ---------- cmi5.xml (cmi5 spec §13, the course structure) ---------- */
+  const xesc = s => String(s == null ? '' : s).replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g, '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+  const ls = (tag, l, s, pad) => `${pad}<${tag}>\n${pad}  <langstring lang="${xesc(l)}">${xesc(s)}</langstring>\n${pad}</${tag}>\n`;
+  /** course: a pack ({ id, subject: {title, description, language}, chapters: [{id, title, subtitle, exercises}] } or a built pack.json);
+      opts: { activityBase, launchBase ('https://noema-lite.netlify.app/'), granularity ('chapter': one AU per chapter; 'activity': one block per chapter,
+      an AU per sim exercise, one AU for the rest of the chapter), moveOn ('CompletedOrPassed'), masteryScore (0–1), locale } */
+  function cmi5Package(course, opts) {
+    opts = opts || {};
+    const subj = (course && course.subject) || {}, id = String((course && course.id) || subj.id || 'pack');
+    const l = lang(opts.locale || subj.language), title = subj.title || (course && course.title) || id, desc = subj.description || title;
+    let base = opts.activityBase || ('https://noema-lite.netlify.app/xapi/' + enc(id) + '/'); if (!base.endsWith('/')) base += '/';
+    const launch = opts.launchBase || 'https://noema-lite.netlify.app/';
+    const MOVEON = ['Passed', 'Completed', 'CompletedAndPassed', 'CompletedOrPassed', 'NotApplicable'];
+    const moveOn = MOVEON.includes(opts.moveOn) ? opts.moveOn : 'CompletedOrPassed';
+    const mastery = num(opts.masteryScore) && opts.masteryScore >= 0 && opts.masteryScore <= 1 ? ` masteryScore="${opts.masteryScore}"` : '';
+    const url = ch => xesc(launch + (launch.includes('?') ? '&' : '?') + 'subject=' + enc(id) + '#/ch/' + enc(ch));
+    const chapters = (course && Array.isArray(course.chapters) ? course.chapters : []).filter(c => c && typeof c.id === 'string');
+    const aus = [];
+    const au = (auid, t, d, ch, pad, ex) => {
+      aus.push({ id: auid, chapter: ch, ...(ex ? { exercise: ex } : {}) });
+      return `${pad}<au id="${xesc(auid)}" moveOn="${moveOn}"${mastery} launchMethod="AnyWindow">\n` + ls('title', l, t, pad + '  ') + ls('description', l, d, pad + '  ') + `${pad}  <url>${url(ch)}</url>\n${pad}</au>\n`;
+    };
+    let body = '';
+    for (const c of chapters) {
+      const ct = c.title || c.id, cd = c.subtitle || c.mantra || ct;
+      if (opts.granularity !== 'activity') { body += au(base + 'au/' + enc(c.id), ct, cd, c.id, '  '); continue; }
+      const sims = (c.exercises || []).filter(e => e && e.type === 'sim' && typeof e.id === 'string'), rest = (c.exercises || []).length - sims.length;
+      let inner = '';
+      for (const e of sims) inner += au(base + 'au/' + enc(e.id), plain(e.q) || e.id, plain(e.q) || e.id, c.id, '    ', e.id);
+      if (rest > 0 || !sims.length) inner += au(base + 'au/' + enc(c.id), ct, cd, c.id, '    ');
+      body += `  <block id="${xesc(base + 'block/' + enc(c.id))}">\n` + ls('title', l, ct, '    ') + ls('description', l, cd, '    ') + inner + '  </block>\n';
+    }
+    const xml = '<?xml version="1.0" encoding="utf-8"?>\n<courseStructure xmlns="https://w3id.org/xapi/profiles/cmi5/v1/CourseStructure.xsd">\n'
+      + `  <course id="${xesc(base)}">\n` + ls('title', l, title, '    ') + ls('description', l, desc, '    ') + '  </course>\n' + body + '</courseStructure>\n';
+    return { files: { 'cmi5.xml': xml }, aus };
+  }
+
+  return { VERSION, VERBS, CMI5_CAT, MOVEON_CAT, CMI5_SESSION, EXT_BASE, statements, exportFile, cmi5Package, validate, validateAll, duration, uuid5, sha1: b => hex(sha1(b)) };
+})();
+if (typeof window !== 'undefined') window.NoemaXAPI = NoemaXAPI;
+if (typeof module !== 'undefined' && module.exports) module.exports = NoemaXAPI;
+/* i18n-ignore-end */
+
+/* ---- 44_activity_wasm.js ---- */
+/* ===================== interactive activities — runtime wasm-module@1 and the sim-spec engine wasm@1 (docs/activities-dev/wasm.md) =====================
+   A pack may carry a precompiled WebAssembly module (a C / Rust / AssemblyScript simulation core) as an activities item:
+     { id, runtime: 'wasm-module@1', wasm: <base64, at most 2 MiB>, sha256: <hex of the bytes>, bytes?, abi?: { version: 1, step?, init?,
+       maxPages?, budgetMs?, scratch?, initEachStep? }, spec?: <a sim-spec@1 spec whose model is this module>, fallback, strings }
+   The pack ships ONLY the .wasm, never JS. The module may import nothing but the host ABI (module "noema" or "env"):
+     memory (one memory "memory", capped at abi.maxPages) · noema_log(ptr, len) (UTF-8, capped) · noema_now() → f64 ms ·
+     noema_random() → f64 in [0, 1), seeded by the activity's seed. Anything else (WASI, JS glue, a table or global) → refused before
+     instantiation (inspect(): our own reader of the binary, the twin of tools/wasm_check.py; WebAssembly.Module.imports again in the worker).
+   It runs in a dedicated blob: Worker whose network globals are removed before anything else (fetch, XHR, WebSocket, EventSource,
+   WebTransport, importScripts, Worker, BroadcastChannel, IndexedDB, caches); the page reads and sha256-checks the bytes and hands them
+   over — the worker never asks for anything. Every call has a time budget: over it, the worker is terminated (code 'runaway', restartable).
+   Two ways in:
+     · the engine wasm@1 of sim-spec@1 (ACT.registerEngine): spec.engine 'wasm@1', spec.model { module: <item id>, inputs: [expr…],
+       outputs: [{id, n?}…], step?, init? }: step(ptr_in, n_in, ptr_out, n_out) over f64 arrays, mapped to the spec's named outputs, so
+       the sim-spec renderer, its plots and the checks grader work unchanged (the sim runtime's 5 s per run is the budget there);
+     · the runtime wasm-module@1 (ACT.registerRuntime): an item with its own `spec` is shown by the sim-spec renderer with this engine;
+       and window.NoemaWasm.load(item) → a handle { call(fn, inputs, nOut), raw(fn, …ints), restart(), close() } for host code.
+   No user-visible text here: failures are codes (spec, unsupported, runaway, abi, import, memory, step, worker). */
+(() => {
+  /* i18n-ignore-start */   // code, limits and protocol names — no UI text
+  const root = typeof window !== 'undefined' ? window : globalThis;
+  const MAX_BYTES = 2 * 1024 * 1024, PAGES_DEFAULT = 256, PAGES_CAP = 1024;
+  const ABI_MODULES = ['noema', 'env'];
+  const ABI_FUNCS = { noema_log: '(i32,i32)->()', noema_now: '()->(f64)', noema_random: '()->(f64)' };
+  const STEP_SIGS = ['(i32,i32,i32,i32)->()', '(i32,i32,i32,i32)->(i32)'], INIT_SIG = '(i32)->()', ALLOC_SIG = '(i32)->(i32)';
+  const KINDS = ['func', 'table', 'memory', 'global', 'tag'];
+  const VT = { 0x7f: 'i32', 0x7e: 'i64', 0x7d: 'f32', 0x7c: 'f64', 0x7b: 'v128', 0x70: 'funcref', 0x6f: 'externref' };
+  const NAME_RE = /^[A-Za-z_][A-Za-z0-9_]{0,63}$/;
+  const ABI_KEYS = ['version', 'step', 'init', 'maxPages', 'budgetMs', 'scratch', 'initEachStep'], MODEL_KEYS = ['module', 'step', 'init', 'inputs', 'outputs'];
+  const LIM = { inputs: 64, outputs: 24, points: 2000, budgetMin: 50, budgetMax: 5000, budgetDefault: 1000, logLine: 200, logLines: 100 };
+  const NO_ABI = '(module "noema": noema_log, noema_now, noema_random, memory)';
+  const isInt = v => Number.isInteger(v);
+  const isObj = v => v != null && typeof v === 'object' && !Array.isArray(v);
+  const own = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
+
+  /* ---------- sha256 (synchronous: the spec check runs before the first frame) ---------- */
+  const SHA = (() => {
+    const primes = []; for (let n = 2; primes.length < 64; n++) if (primes.every(p => n % p)) primes.push(n);
+    const frac = x => Math.floor((x - Math.floor(x)) * 4294967296) >>> 0;
+    return { K: Uint32Array.from(primes, p => frac(Math.cbrt(p))), H: Uint32Array.from(primes.slice(0, 8), p => frac(Math.sqrt(p))) };
+  })();
+  function sha256(bytes) {
+    const l = bytes.length, nb = ((l + 9 + 63) >> 6) << 6, m = new Uint8Array(nb); m.set(bytes); m[l] = 0x80;
+    const dv = new DataView(m.buffer); dv.setUint32(nb - 4, (l * 8) >>> 0); dv.setUint32(nb - 8, Math.floor(l / 536870912));
+    const H = Uint32Array.from(SHA.H), W = new Uint32Array(64), K = SHA.K;
+    for (let o = 0; o < nb; o += 64) {
+      for (let i = 0; i < 16; i++) W[i] = dv.getUint32(o + i * 4);
+      for (let i = 16; i < 64; i++) {
+        const a = W[i - 15], b = W[i - 2];
+        const s0 = ((a >>> 7) | (a << 25)) ^ ((a >>> 18) | (a << 14)) ^ (a >>> 3), s1 = ((b >>> 17) | (b << 15)) ^ ((b >>> 19) | (b << 13)) ^ (b >>> 10);
+        W[i] = (W[i - 16] + s0 + W[i - 7] + s1) >>> 0;
+      }
+      let [a, b, c, d, e, f, g, h] = H;
+      for (let i = 0; i < 64; i++) {
+        const S1 = ((e >>> 6) | (e << 26)) ^ ((e >>> 11) | (e << 21)) ^ ((e >>> 25) | (e << 7)), ch = (e & f) ^ (~e & g);
+        const t1 = (h + S1 + ch + K[i] + W[i]) >>> 0;
+        const S0 = ((a >>> 2) | (a << 30)) ^ ((a >>> 13) | (a << 19)) ^ ((a >>> 22) | (a << 10)), mj = (a & b) ^ (a & c) ^ (b & c);
+        const t2 = (S0 + mj) >>> 0;
+        h = g; g = f; f = e; e = (d + t1) >>> 0; d = c; c = b; b = a; a = (t1 + t2) >>> 0;
+      }
+      H[0] += a; H[1] += b; H[2] += c; H[3] += d; H[4] += e; H[5] += f; H[6] += g; H[7] += h;
+    }
+    return Array.from(H, x => x.toString(16).padStart(8, '0')).join('');
+  }
+  function fromB64(s) { const bin = atob(s), out = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i); return out; }
+
+  /* ---------- the binary reader (the twin of tools/wasm_check.py parse / inspect: the same rules, the same messages) ---------- */
+  function parse(b) {
+    const bad = w => Object.assign(new Error(w), { bad: w });
+    if (b.length < 8 || b[0] !== 0 || b[1] !== 0x61 || b[2] !== 0x73 || b[3] !== 0x6d || b[4] !== 1 || b[5] || b[6] || b[7]) throw bad('magic');
+    const td = new TextDecoder('utf-8', { fatal: true });
+    const R = (i, end) => ({ i, end,
+      byte() { if (this.i >= this.end) throw bad('truncated'); return b[this.i++]; },
+      u32() { let r = 0, s = 0; for (;;) { const x = this.byte(); r += (x & 0x7f) * Math.pow(2, s); s += 7; if (!(x & 0x80)) return r; if (s > 35) throw bad('leb'); } },
+      name() { const n = this.u32(); if (this.i + n > this.end) throw bad('truncated'); let v; try { v = td.decode(b.subarray(this.i, this.i + n)); } catch (e) { throw bad('utf8'); } this.i += n; return v; },
+      limits() { const f = this.byte(), mn = this.u32(), mx = f & 1 ? this.u32() : null; return [f, mn, mx]; } });
+    const r = R(8, b.length), types = [], imports = [], mems = [], exports = []; let funcs = [], start = false;
+    while (r.i < r.end) {
+      const sid = r.byte(), size = r.u32(), end = r.i + size;
+      if (end > r.end) throw bad('section ' + sid);
+      const s = R(r.i, end);
+      if (sid === 1) for (let n = s.u32(); n--;) { if (s.byte() !== 0x60) throw bad('section 1'); const ps = []; for (let k = s.u32(); k--;) ps.push(VT[s.byte()] || '?'); const rs = []; for (let k = s.u32(); k--;) rs.push(VT[s.byte()] || '?'); types.push([ps, rs]); }
+      else if (sid === 2) for (let n = s.u32(); n--;) {
+        const mod = s.name(), nm = s.name(), k = s.byte();
+        if (k === 0) imports.push({ module: mod, name: nm, kind: 'func', type: s.u32() });
+        else if (k === 1) { s.byte(); s.limits(); imports.push({ module: mod, name: nm, kind: 'table', type: null }); }
+        else if (k === 2) imports.push({ module: mod, name: nm, kind: 'memory', type: null, limits: s.limits() });
+        else if (k === 3) { s.byte(); s.byte(); imports.push({ module: mod, name: nm, kind: 'global', type: null }); }
+        else if (k === 4) { s.byte(); s.u32(); imports.push({ module: mod, name: nm, kind: 'tag', type: null }); }
+        else throw bad('section 2');
+      }
+      else if (sid === 3) { funcs = []; for (let n = s.u32(); n--;) funcs.push(s.u32()); }
+      else if (sid === 5) for (let n = s.u32(); n--;) mems.push(s.limits());
+      else if (sid === 7) for (let n = s.u32(); n--;) { const nm = s.name(), k = s.byte(), ix = s.u32(); if (k > 4) throw bad('section 7'); exports.push({ name: nm, kind: KINDS[k], index: ix }); }
+      else if (sid === 8) start = true;
+      else if (sid > 13) throw bad('section ' + sid);
+      r.i = end;
+    }
+    return { types, imports, funcs, memories: mems, exports, start };
+  }
+  const sig = t => '(' + t[0].join(',') + ')->(' + t[1].join(',') + ')';
+  /** → { ok, errors, bytes, sha256, imports, exports, memory, start } (the same object as tools/wasm_check.py inspect) */
+  function inspect(bytes, maxPages = PAGES_DEFAULT, step = 'step', init = 'init') {
+    const b = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes), E = [];
+    const rep = { ok: false, errors: E, bytes: b.length, sha256: sha256(b), imports: [], exports: [], memory: null, start: false };
+    const lim = isInt(maxPages) ? Math.max(1, Math.min(maxPages, PAGES_CAP)) : PAGES_DEFAULT;
+    if (b.length > MAX_BYTES) { E.push(`size: the module is ${b.length} bytes (at most ${MAX_BYTES})`); return rep; }
+    let m; try { m = parse(b); } catch (e) { if (!e.bad) throw e; E.push(e.bad === 'magic' ? 'format: not a WebAssembly module (magic or version)' : `format: the module is malformed (${e.bad})`); return rep; }
+    const T = m.types, tsig = i => i >= 0 && i < T.length ? sig(T[i]) : '?';
+    const fsigs = [...m.imports.filter(i => i.kind === 'func').map(i => tsig(i.type)), ...m.funcs.map(tsig)];
+    let mem = null;
+    for (const im of m.imports) {
+      rep.imports.push({ module: im.module, name: im.name, kind: im.kind, type: im.kind === 'func' ? tsig(im.type) : null });
+      const where = `${im.module}.${im.name}`;
+      if (!ABI_MODULES.includes(im.module)) { E.push(`import: ${where} (${im.kind}) is not in the host ABI ${NO_ABI}`); continue; }
+      if (im.kind === 'func' && own(ABI_FUNCS, im.name)) { const got = tsig(im.type); if (got !== ABI_FUNCS[im.name]) E.push(`import: ${where} must be ${ABI_FUNCS[im.name]}, it is ${got}`); }
+      else if (im.kind === 'memory' && im.name === 'memory') { const [f, mn, mx] = im.limits; if (mem) E.push('memory: at most one memory'); mem = { min: mn, max: mx, imported: true, exported: false, flags: f }; }
+      else E.push(`import: ${where} (${im.kind}) is not in the host ABI ${NO_ABI}`);
+    }
+    for (const [f, mn, mx] of m.memories) { if (mem) { E.push('memory: at most one memory'); continue; } mem = { min: mn, max: mx, imported: false, exported: false, flags: f }; }
+    const ex = {};
+    for (const e of m.exports) {
+      const t = e.kind === 'func' ? (e.index < fsigs.length ? fsigs[e.index] : '?') : null;
+      const x = { name: e.name, kind: e.kind, type: t }; rep.exports.push(x); ex[e.name] = x;
+      if (e.kind === 'memory' && mem) mem.exported = mem.exported || e.name === 'memory';
+    }
+    rep.start = m.start;
+    if (!mem) E.push('memory: the module has no memory (define one with a maximum and export it as "memory", or import noema.memory)');
+    else {
+      if (mem.flags & ~1) E.push('memory: a shared or 64-bit memory is not allowed');
+      if (mem.min > lim) E.push(`memory: the initial size is ${mem.min} pages (at most ${lim})`);
+      if (mem.max == null && !mem.imported) E.push(`memory: the memory has no maximum (declare one of at most ${lim} pages)`);
+      else if (mem.max != null && mem.max > lim) E.push(`memory: the declared maximum is ${mem.max} pages (at most ${lim})`);
+      if (!mem.imported && !mem.exported) E.push('export: the memory must be exported as "memory"');
+      rep.memory = { min: mem.min, max: mem.max, imported: mem.imported, exported: mem.exported };
+    }
+    const st = own(ex, step) ? ex[step] : null;
+    if (!st || st.kind !== 'func') E.push(`export: no function "${step}"`);
+    else if (!STEP_SIGS.includes(st.type)) E.push(`export: ${step} must be (i32,i32,i32,i32)->() or ->(i32), it is ${st.type}`);
+    const it = own(ex, init) ? ex[init] : null;
+    if (it && (it.kind !== 'func' || it.type !== INIT_SIG)) E.push(`export: ${init} must be a function ${INIT_SIG}`);
+    const al = own(ex, 'alloc') ? ex.alloc : null;
+    if (al && (al.kind !== 'func' || al.type !== ALLOC_SIG)) E.push(`export: alloc must be a function ${ALLOC_SIG}`);
+    rep.ok = !E.length;
+    return rep;
+  }
+
+  /* ---------- the item and the model (the twins of check_abi / decode / check_item / check_model) ---------- */
+  function checkAbi(abi) {
+    const E = [];
+    if (abi == null) return E;
+    if (!isObj(abi)) return ['abi: must be an object'];
+    for (const k of Object.keys(abi)) if (!ABI_KEYS.includes(k)) E.push(`abi: unknown key ${k}`);
+    if ('version' in abi && abi.version !== 1) E.push('abi.version: must be 1');
+    for (const k of ['step', 'init']) if (k in abi && !(typeof abi[k] === 'string' && NAME_RE.test(abi[k]))) E.push(`abi.${k}: must be the name of an exported function`);
+    if ('maxPages' in abi && !(isInt(abi.maxPages) && abi.maxPages >= 1 && abi.maxPages <= PAGES_CAP)) E.push(`abi.maxPages: a whole number from 1 to ${PAGES_CAP}`);
+    if ('budgetMs' in abi && !(isInt(abi.budgetMs) && abi.budgetMs >= LIM.budgetMin && abi.budgetMs <= LIM.budgetMax)) E.push(`abi.budgetMs: a whole number from ${LIM.budgetMin} to ${LIM.budgetMax}`);
+    if ('scratch' in abi && !(isInt(abi.scratch) && abi.scratch >= 0 && abi.scratch % 8 === 0)) E.push('abi.scratch: a byte offset, a multiple of 8');
+    if ('initEachStep' in abi && typeof abi.initEachStep !== 'boolean') E.push('abi.initEachStep: true or false');
+    return E;
+  }
+  const DECODED = new Map();   // sha256 → bytes (a module is decoded and hashed once per page)
+  function decode(item) {
+    const w = isObj(item) ? item.wasm : null;
+    if (typeof w !== 'string' || !w) return [null, ['wasm: the module (base64) is required']];
+    if (w.length > Math.floor(MAX_BYTES * 4 / 3) + 4) return [null, [`size: the module is more than ${MAX_BYTES} bytes`]];
+    if (typeof item.sha256 === 'string' && DECODED.has(item.sha256 + ':' + w.length)) { const b = DECODED.get(item.sha256 + ':' + w.length); return [b, 'bytes' in item && item.bytes !== b.length ? [`bytes: ${item.bytes}, but the module has ${b.length}`] : []]; }
+    let b; try { if (!/^[A-Za-z0-9+/]*={0,2}$/.test(w) || w.length % 4) throw 0; b = fromB64(w); } catch (e) { return [null, ['wasm: not valid base64']]; }
+    const sh = item.sha256;
+    if (!(typeof sh === 'string' && /^[0-9a-f]{64}$/.test(sh))) return [b, ['sha256: the sha256 of the module (64 hex digits) is required']];
+    if (sha256(b) !== sh) return [b, ['sha256: does not match the module']];
+    if ('bytes' in item && item.bytes !== b.length) return [b, [`bytes: ${item.bytes}, but the module has ${b.length}`]];
+    if (DECODED.size > 16) DECODED.clear();
+    DECODED.set(sh + ':' + w.length, b);
+    return [b, []];
+  }
+  const abiOf = item => {
+    const a = isObj(item?.abi) ? item.abi : {};
+    return { step: typeof a.step === 'string' ? a.step : 'step', init: typeof a.init === 'string' ? a.init : 'init',
+      maxPages: isInt(a.maxPages) && a.maxPages >= 1 && a.maxPages <= PAGES_CAP ? a.maxPages : PAGES_DEFAULT,
+      budgetMs: isInt(a.budgetMs) && a.budgetMs >= LIM.budgetMin && a.budgetMs <= LIM.budgetMax ? a.budgetMs : LIM.budgetDefault,
+      scratch: isInt(a.scratch) && a.scratch >= 0 && a.scratch % 8 === 0 ? a.scratch : null, initEachStep: a.initEachStep !== false };
+  };
+  /** → { problems, report, bytes } of an activities item of runtime wasm-module@1 */
+  function checkItem(item) {
+    if (!isObj(item)) return { problems: ['the item must be an object'], report: null, bytes: null };
+    const E = [];
+    if (item.runtime !== 'wasm-module@1') E.push('runtime: must be wasm-module@1');
+    E.push(...checkAbi(item.abi));
+    const [b, P] = decode(item); E.push(...P);
+    if (!b || P.length) return { problems: E, report: null, bytes: null };
+    const abi = isObj(item.abi) ? item.abi : {}, A = abiOf(item);
+    const rep = inspect(b, A.maxPages, A.step, A.init); E.push(...rep.errors);
+    if (!rep.errors.length && !rep.exports.some(e => e.name === 'alloc' && e.kind === 'func') && !('scratch' in abi))
+      E.push('abi.scratch: the module exports no alloc(bytes); give the byte offset of its input/output area');
+    return { problems: E, report: rep, bytes: E.length ? null : b };
+  }
+  const REG = {};   // items the page registered (NoemaWasm.register), besides ACT.ITEMS of the open pack
+  const itemOf = id => typeof id !== 'string' ? null : (root.ACT?.ITEMS && own(root.ACT.ITEMS, id) ? root.ACT.ITEMS[id] : own(REG, id) ? REG[id] : null);
+  const allItems = () => Object.assign({}, REG, root.ACT?.ITEMS || {});
+  /** → problems of spec.model for wasm@1; items: {id: item} (default: the open pack's) */
+  function checkModel(spec, items) {
+    const E = [], I = items || allItems();
+    const m = isObj(spec) ? spec.model : null;
+    if (!isObj(m)) return ['spec.model: wasm@1 needs a model {module, inputs, outputs, step?, init?}'];
+    for (const k of Object.keys(m)) if (!MODEL_KEYS.includes(k)) E.push(`spec.model: unknown key ${k}`);
+    const it = typeof m.module === 'string' && own(I, m.module) ? I[m.module] : null;
+    if (!isObj(it) || it.runtime !== 'wasm-module@1') E.push(`spec.model.module: no wasm-module@1 item ${JSON.stringify(m.module === undefined ? null : m.module)} in the pack`);
+    for (const k of ['step', 'init']) if (k in m && !(typeof m[k] === 'string' && NAME_RE.test(m[k]))) E.push(`spec.model.${k}: must be the name of an exported function`);
+    const ins = m.inputs;
+    if (!(Array.isArray(ins) && ins.length >= 1 && ins.length <= LIM.inputs)) E.push(`spec.model.inputs: a list of 1 to ${LIM.inputs} expressions`);
+    else {
+      const names = isObj(spec.consts) ? Object.keys(spec.consts) : [];
+      for (const k of ['params', 'derived']) for (const x of Array.isArray(spec[k]) ? spec[k] : []) if (isObj(x) && typeof x.id === 'string') names.push(x.id);
+      ins.forEach((src, i) => {
+        const w = `spec.model.inputs[${i}]`;
+        if (typeof src !== 'string' || !src.trim()) { E.push(`${w}: an expression (a text such as “2*x + 1”) is required`); return; }
+        if (root.NoemaExpr) { const p = root.NoemaExpr.check(src, { vars: names }); if (p.length) E.push(`${w}: ${p[0].msg} in “${src.slice(0, 60)}”`); }
+      });
+    }
+    const outs = m.outputs, decl = new Map();
+    for (const o of Array.isArray(spec.outputs) ? spec.outputs : []) if (isObj(o)) decl.set(o.id, o.kind);
+    if (!(Array.isArray(outs) && outs.length >= 1 && outs.length <= LIM.outputs)) E.push(`spec.model.outputs: a list of 1 to ${LIM.outputs} {id, n?}`);
+    else {
+      const seen = new Set();
+      outs.forEach((o, i) => {
+        const w = `spec.model.outputs[${i}]`;
+        if (!(isObj(o) && typeof o.id === 'string')) { E.push(`${w}: must be {id, n?}`); return; }
+        for (const k of Object.keys(o)) if (k !== 'id' && k !== 'n') E.push(`${w}: unknown key ${k}`);
+        if (seen.has(o.id)) E.push(`${w}: ${o.id} twice`);
+        seen.add(o.id);
+        const kind = decl.has(o.id) ? decl.get(o.id) : undefined;
+        if (kind == null) { E.push(`${w}: ${o.id} is not in spec.outputs`); return; }
+        const n = 'n' in o ? o.n : 1;
+        if (kind === 'scalar' && n !== 1) E.push(`${w}: a scalar takes one value (no n)`);
+        if (kind === 'series' && !(isInt(n) && n >= 1 && n <= LIM.points)) E.push(`${w}.n: a series needs n, from 1 to ${LIM.points}`);
+      });
+      for (const oid of decl.keys()) if (!seen.has(oid)) E.push(`spec.outputs: ${oid} has no place in spec.model.outputs`);
+    }
+    if (isObj(it) && !E.length) {
+      const abi = isObj(it.abi) ? it.abi : {}, { problems: P, report: rep } = checkItem(it);
+      if (P.length) E.push(`spec.model.module: the module ${m.module} is refused (${P[0]})`);
+      else if (rep) {
+        const fx = {}; for (const e of rep.exports) if (e.kind === 'func') fx[e.name] = e;
+        const st = m.step || abi.step || 'step';
+        if (!own(fx, st) || !STEP_SIGS.includes(fx[st].type)) E.push(`spec.model.step: ${st} is not a step function of the module`);
+        const ini = m.init;
+        if (ini && (!own(fx, ini) || fx[ini].type !== INIT_SIG)) E.push(`spec.model.init: ${ini} is not an init function of the module`);
+      }
+    }
+    return E;
+  }
+
+  /* ---------- the worker: no network, the host ABI, the engine adapter (one source, also run in node by the tests) ---------- */
+  /** removes every way to the network from a worker's global scope (and its prototypes) before any other code runs there */
+  function neutralise(g) {
+    const K = ['fetch', 'XMLHttpRequest', 'WebSocket', 'WebSocketStream', 'EventSource', 'WebTransport', 'importScripts', 'Worker', 'SharedWorker',
+      'BroadcastChannel', 'indexedDB', 'caches', 'Request', 'navigator', 'RTCPeerConnection'];
+    for (const k of K) for (let o = g; o && o !== Object.prototype; o = Object.getPrototypeOf(o)) {
+      if (!Object.prototype.hasOwnProperty.call(o, k)) continue;
+      try { Object.defineProperty(o, k, { value: undefined, writable: false, configurable: false, enumerable: false }); } catch (e) { try { delete o[k]; } catch (e2) { } }
+    }
+  }
+  /** defines g.noemaWasmCore (instantiate + call) and g.noemaEngine (the wasm@1 adapter of sim-spec@1) */
+  function wasmWorker(g) {
+    const ABI = { noema_log: 1, noema_now: 1, noema_random: 1 }, LOG_LINE = 200, LOG_LINES = 100;
+    function rng(seed) { let a = seed >>> 0; return () => { a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+    const fail = (code, msg) => Object.assign(new Error(msg || code), { code });
+    /** bytes (or a WebAssembly.Module) + abi → an instance { call(fn, Float64Array, nOut) → Float64Array, raw(fn, args), reseed(), log } */
+    function instantiate(src, abi, seed) {
+      const mod = src instanceof WebAssembly.Module ? src : new WebAssembly.Module(src);
+      for (const im of WebAssembly.Module.imports(mod)) {   // the second line of the import check (the first: inspect on the page)
+        const okm = im.module === 'noema' || im.module === 'env';
+        if (!okm || !((im.kind === 'function' && ABI[im.name]) || (im.kind === 'memory' && im.name === 'memory'))) throw fail('import', im.module + '.' + im.name);
+      }
+      const log = [], t0 = (g.performance || Date).now(); let rand = rng(seed), mem = null, dropped = 0;
+      const env = {
+        noema_log(p, n) {
+          if (log.length >= LOG_LINES) { dropped++; return; }
+          try { const len = Math.max(0, Math.min(n >>> 0, LOG_LINE)), u = new Uint8Array(mem.buffer, p >>> 0, len); log.push(new TextDecoder().decode(u.slice())); } catch (e) { log.push('?'); }
+        },
+        noema_now: () => Math.round(((g.performance || Date).now() - t0) * 10) / 10,
+        noema_random: () => rand(),
+      };
+      const imp = { noema: env, env };
+      const memImp = WebAssembly.Module.imports(mod).find(i => i.kind === 'memory');
+      if (memImp) { const m0 = Math.max(1, abi.memMin || 1); mem = new WebAssembly.Memory({ initial: m0, maximum: Math.max(m0, Math.min(abi.memMax == null ? abi.maxPages : abi.memMax, abi.maxPages)) }); imp[memImp.module] = Object.assign({}, env, { memory: mem }); }
+      const inst = new WebAssembly.Instance(mod, imp), X = inst.exports;
+      if (!mem) { mem = X.memory; if (!(mem instanceof WebAssembly.Memory)) throw fail('memory', 'no exported memory'); }
+      if (typeof X[abi.step] !== 'function') throw fail('abi', 'no step ' + abi.step);
+      let area = null;
+      function io(nIn, nOut) {
+        const need = 8 * (nIn + nOut);
+        if (!area || area.need < need) {
+          let base = abi.scratch;
+          if (typeof X.alloc === 'function') base = X.alloc(need) >>> 0;
+          if (!(base >= 0)) throw fail('abi', 'no input/output area');
+          area = { need, pin: base, pout: base + 8 * nIn };
+        }
+        if (area.pout - area.pin !== 8 * nIn) area = Object.assign({}, area, { pout: area.pin + 8 * nIn });
+        if (area.pin + need > mem.buffer.byteLength) throw fail('abi', 'the input/output area is outside the memory');
+        return area;
+      }
+      function call(fn, input, nOut) {
+        const f = X[fn]; if (typeof f !== 'function') throw fail('abi', 'no function ' + fn);
+        const a = io(input.length, nOut); let dv = new DataView(mem.buffer);
+        for (let i = 0; i < input.length; i++) dv.setFloat64(a.pin + 8 * i, +input[i], true);
+        const r = f(a.pin, input.length, a.pout, nOut);
+        if (typeof r === 'number' && r !== 0) throw fail('step', 'status ' + r);
+        dv = new DataView(mem.buffer);   // (the memory may have grown)
+        if (a.pout + 8 * nOut > mem.buffer.byteLength) throw fail('abi', 'outputs outside the memory');
+        const out = new Float64Array(nOut); for (let i = 0; i < nOut; i++) out[i] = dv.getFloat64(a.pout + 8 * i, true);
+        return out;
+      }
+      const self_ = {
+        call, log, exports: Object.keys(X),
+        init() { if (typeof X[abi.init] === 'function') X[abi.init](seed | 0); },
+        reseed() { rand = rng(seed); },
+        raw(fn, args) { const f = X[fn]; if (typeof f !== 'function') throw fail('abi', 'no function ' + fn); const r = f(...(args || []).map(v => v | 0)); return typeof r === 'number' ? r : null; },
+        pages: () => mem.buffer.byteLength / 65536,
+        takeLog() { const l = log.splice(0); if (dropped) { l.push('… ' + dropped + ' more'); dropped = 0; } return l; },
+      };
+      self_.init();
+      return self_;
+    }
+    g.noemaWasmCore = { instantiate };
+    /** wasm@1 in sim-spec@1: create(spec, {seed}) → { run(inputs) } — inputs come from prepare: { $in: [numbers], $mod: {key, bytes, abi, layout} } */
+    g.noemaEngine = { create(spec, opts) {
+      const seed = (opts && opts.seed) >>> 0; let inst = null, key = null;
+      return { run(inp) {
+        const M = inp && inp.$mod; if (!M) throw fail('abi', 'no module');
+        if (!inst || key !== M.key) { inst = instantiate(M.bytes, M.abi, seed); key = M.key; }
+        else if (M.abi.initEachStep) { inst.reseed(); inst.init(); }
+        const out = inst.call(M.abi.step, inp.$in, M.nOut), r = {};
+        for (const L of M.layout) r[L.id] = L.series ? Array.from(out.subarray(L.off, L.off + L.n)) : out[L.off];
+        const lg = inst.takeLog(); if (lg.length && g.console) g.console.log('[noema] wasm', lg.slice(0, 10).join(' | '));
+        return r;
+      } };
+    } };
+  }
+  /** the direct protocol of NoemaWasm.load (appended after the core in its own worker; the sim runtime appends its own bridge instead) */
+  function directTail(g) {
+    let inst = null;
+    g.onmessage = e => {
+      const m = e.data || {};
+      try {
+        if (m.t === 'w:load') { inst = g.noemaWasmCore.instantiate(m.bytes, m.abi, m.seed >>> 0); g.postMessage({ t: 'w:ready', id: m.id, exports: inst.exports, log: inst.takeLog(), pages: inst.pages() }); return; }
+        if (!inst) throw Object.assign(new Error('not loaded'), { code: 'abi' });
+        const t0 = (g.performance || Date).now();
+        if (m.t === 'w:call') { if (m.reinit) { inst.reseed(); inst.init(); } const out = inst.call(m.fn, m.input, m.nOut); g.postMessage({ t: 'w:out', id: m.id, out, log: inst.takeLog(), ms: (g.performance || Date).now() - t0, pages: inst.pages() }, [out.buffer]); return; }
+        if (m.t === 'w:raw') { const v = inst.raw(m.fn, m.args); g.postMessage({ t: 'w:out', id: m.id, value: v, log: inst.takeLog(), pages: inst.pages() }); return; }
+      } catch (x) { g.postMessage({ t: 'w:err', id: m.id, code: (x && x.code) || (x instanceof WebAssembly.RuntimeError ? 'trap' : x instanceof WebAssembly.LinkError ? 'import' : 'error'), msg: String((x && x.message) || x).slice(0, 300) }); }
+    };
+  }
+  const workerSource = () => '"use strict";(' + neutralise.toString() + ')(self);\n(' + wasmWorker.toString() + ')(self);\n';
+
+  /* ---------- the host side: NoemaWasm.load(item) → a handle in its own worker, each call within the budget ---------- */
+  function load(item, o = {}) {
+    const { problems, report, bytes } = checkItem(item);
+    if (problems.length) return Promise.reject(Object.assign(new Error(problems[0]), { code: /^import/.test(problems[0]) ? 'import' : /^memory/.test(problems[0]) ? 'memory' : 'spec', problems }));
+    if (typeof Worker !== 'function' || typeof Blob !== 'function') return Promise.reject(Object.assign(new Error('no worker here'), { code: 'worker' }));
+    const A = abiOf(item), budget = isInt(o.budgetMs) ? Math.max(LIM.budgetMin, Math.min(o.budgetMs, LIM.budgetMax)) : A.budgetMs;
+    const abi = { step: A.step, init: A.init, maxPages: A.maxPages, scratch: A.scratch, memMin: report.memory ? report.memory.min : 1, memMax: report.memory ? report.memory.max : null };
+    const seed = (isInt(o.seed) ? o.seed : 1) >>> 0;
+    const url = URL.createObjectURL(new Blob([workerSource() + '(' + directTail.toString() + ')(self);'], { type: 'text/javascript' }));
+    let w = null, seq = 0, state = 'stopped';
+    const pending = new Map();
+    const killAll = code => { for (const [, p] of pending) { clearTimeout(p.timer); p.reject(Object.assign(new Error(code), { code })); } pending.clear(); };
+    function stop(code) { try { w?.terminate(); } catch (e) { } w = null; state = 'stopped'; killAll(code); }
+    function send(msg, transfer) {
+      if (!w) return Promise.reject(Object.assign(new Error('stopped'), { code: 'stopped' }));
+      const id = ++seq;
+      return new Promise((resolve, reject) => {
+        const timer = setTimeout(() => { if (!pending.has(id)) return; pending.delete(id); stop('runaway'); reject(Object.assign(new Error('runaway'), { code: 'runaway' })); h.onRunaway?.(); }, msg.t === 'w:load' ? Math.max(1000, budget) : budget);
+        pending.set(id, { resolve, reject, timer });
+        w.postMessage({ ...msg, id }, transfer || []);
+      });
+    }
+    function start() {
+      stop('restart');
+      w = new Worker(url); state = 'loading';
+      w.onmessage = e => {
+        const m = e.data || {}, key = m.id, p = pending.get(key);
+        if (!p) return; pending.delete(key); clearTimeout(p.timer);
+        if (m.t === 'w:err') p.reject(Object.assign(new Error(m.msg), { code: m.code })); else p.resolve(m);
+      };
+      w.onerror = e => { e.preventDefault?.(); stop('error'); };
+      return send({ t: 'w:load', bytes: bytes.slice(), abi, seed }).then(m => { state = 'ready'; h.exports = m.exports; return h; });
+    }
+    const h = {
+      budgetMs: budget, exports: [], report,
+      state: () => state,
+      /** fn(ptr_in, n_in, ptr_out, n_out) over f64: → { out: Float64Array, log, ms, pages } */
+      call(fn, inputs, nOut, opt = {}) { const input = Float64Array.from(inputs || [], v => +v); return send({ t: 'w:call', fn: fn || A.step, input, nOut: Math.max(0, Math.min(nOut | 0, LIM.outputs * LIM.points)), reinit: opt.reinit ?? A.initEachStep }); },
+      /** an exported function with i32 arguments (the tests' grow, a module's own setters) → { value, log, pages } */
+      raw: (fn, ...args) => send({ t: 'w:raw', fn, args }),
+      restart: () => start(),
+      close() { stop('closed'); URL.revokeObjectURL(url); },
+      onRunaway: null,
+    };
+    return start();
+  }
+
+  /* ---------- the engine wasm@1 of sim-spec@1, the runtime wasm-module@1 ---------- */
+  function layoutOf(spec) {
+    const m = spec.model, kinds = new Map((spec.outputs || []).map(o => [o.id, o.kind])); let off = 0;
+    const layout = m.outputs.map(o => { const n = 'n' in o ? o.n : 1, L = { id: o.id, off, n, series: kinds.get(o.id) === 'series' }; off += n; return L; });
+    return { layout, nOut: off };
+  }
+  const api = { MAX_BYTES, PAGES_DEFAULT, PAGES_CAP, ABI_FUNCS, LIM, sha256, inspect, checkAbi, checkItem, checkModel, decode, abiOf, layoutOf, load, workerSource,
+    register(item) { if (isObj(item) && typeof item.id === 'string') REG[item.id] = item; }, _neutralise: neutralise, _wasmWorker: wasmWorker, _directTail: directTail };
+  root.NoemaWasm = api;
+  if (typeof module === 'object' && module && module.exports) module.exports = api;
+
+  const ACTREF = typeof ACT !== 'undefined' ? ACT : root.ACT;
+  if (!ACTREF || typeof ACTREF.registerEngine !== 'function') return;
+  ACTREF.registerEngine({
+    id: 'wasm@1',
+    /** after the common checks: the model, the item, its sha256, its imports and memory — refused here means the fallback, never instantiation */
+    check: spec => checkModel(spec),
+    /** on the main thread: the inputs' expressions become numbers; the checked bytes travel with each run (the worker keeps one instance per module) */
+    prepare(spec, compile) {
+      const m = spec.model, it = itemOf(m.module), A = abiOf(it), { problems, bytes, report } = checkItem(it);
+      if (problems.length || !bytes) throw Object.assign(new Error('wasm module refused'), { code: 'spec' });
+      const ins = m.inputs.map(s => compile(s)), { layout, nOut } = layoutOf(spec);
+      const M = { key: report.sha256, bytes, nOut, layout, abi: { step: m.step || A.step, init: m.init || A.init, maxPages: A.maxPages, scratch: A.scratch, initEachStep: A.initEachStep, memMin: report.memory ? report.memory.min : 1, memMax: report.memory ? report.memory.max : null } };
+      const ev = (f, env) => { try { return +f(env); } catch (e) { return NaN; } };
+      return env => ({ $in: ins.map(f => ev(f, env)), $mod: M });
+    },
+    /** the sim runtime calls create here only when it cannot start a worker: a module never runs on the page's own thread */
+    create() { throw Object.assign(new Error('wasm@1 runs only in a worker'), { code: 'worker' }); },
+    workerSource: workerSource(),
+  });
+  if (typeof ACTREF.registerRuntime === 'function') ACTREF.registerRuntime({
+    id: 'wasm-module@1', version: 1, autoHeight: true,
+    /** an item with its own spec: the sim-spec renderer with this module as the engine; without one there is nothing to show */
+    mount(box, ctx) {
+      const a = ctx.act, sim = ACTREF.runtime?.('sim-spec@1');
+      api.register(a);
+      if (!sim || !isObj(a.spec)) { Promise.resolve().then(() => ctx.onFail(sim ? 'spec' : 'unsupported')); return { send() { }, close() { }, values: () => null }; }
+      const spec = Object.assign({}, a.spec, { engine: 'wasm@1', model: Object.assign({}, a.spec.model, { module: a.id }) });
+      return sim.mount(box, Object.assign({}, ctx, { act: Object.assign({}, a, { spec }) }));
+    },
+  });
+  /* i18n-ignore-end */
+})();
+
+/* ---- 45_activity_embed.js ---- */
+/* ===================== interactive activities — runtime external-embed@1 (a third-party interactive page, opt-in) =====================
+   docs/activities-dev/embed.md, docs/adr/001 D12. An activity that is a page of an allow-listed provider (PhET, GeoGebra, Desmos…)
+   shown in a frame. It is an EXPLORER only (a theory block): no provider offers a documented cross-origin result channel, so it is
+   never a graded sim (checkPack refuses one; the runtime refuses an exercise).
+     • Nothing loads by itself: the learner first sees a quiet card (what opens, that it needs the network and may set cookies, the
+       credit, the licence, a link to the provider's terms) and an Open button. Open is remembered per provider (S.settings.embedOk,
+       an account setting); the card is skipped next time, the credit line stays under the frame (attribution at the point of use).
+     • The URL must match the allow-list exactly (PROVIDERS = tools/embed_allow.json): https, the origin one of the provider's, path,
+       query and hash fully matching its patterns, no user info, no tricks (check / match below; tools/embed_check.py the same rules).
+     • Two frames, as in html-app@1: the app's frame holds a WRAPPER without scripts (CSP script-src 'none') whose policy says
+       frame-src <the provider's origins>, and the provider's page runs in the wrapper's frame. So the page can navigate only within
+       its provider; every other navigation is blocked by the wrapper's policy. Both frames: sandbox with the provider's tokens only
+       (allow-scripts + allow-same-origin — the PROVIDER's own origin, which it needs for its storage; never allow-top-navigation,
+       never allow-popups-to-escape-sandbox, no forms or popups unless the allow-list names them), referrerpolicy no-referrer,
+       devices off (allow: … 'none'), credentialless where the browser has it, loading lazy.
+     • Offline (navigator.onLine false) or a page that never loads → onFail with a code; the core shows the activity's fallback.
+   No words here: the visible texts are tE() keys (engine.act.embed.*) and the pack's own strings (title, why).
+   Off unless the deployment switches it on: NOEMA_CONFIG.activities['external-embed@1'] === true (the site CSP must list the
+   providers in frame-src first). Loads in Node too (module.exports: the checks, for tests/activities_embed.js). */
+var NoemaEmbed = (() => {   // var: loaded twice in the app (beside packcheck.js in the shell, then in engine.js)
+  /* i18n-ignore-start */   // code: codes, patterns, attribute values
+  const PROVIDERS = /*@providers*/[
+    {"id": "phet", "name": "PhET", "status": "allowed", "origins": ["https://phet.colorado.edu"], "path": "/sims/html/[a-z0-9-]+/(latest|[0-9]+\\.[0-9]+\\.[0-9]+)/[a-z0-9-]+_(all|[a-z]{2}(_[A-Z]{2})?)\\.html", "query": "(locale=[A-Za-z_]{2,6})?", "hash": null, "sandbox": ["allow-scripts", "allow-same-origin"], "licenses": ["CC-BY-4.0", "CC-BY-NC-4.0"], "creditMust": "PhET Interactive Simulations, University of Colorado Boulder", "credit": "PhET Interactive Simulations, University of Colorado Boulder · {title} · {license} · https://phet.colorado.edu", "terms": "https://phet.colorado.edu/en/licensing/html", "supportsResult": false, "notes": "HTML sims published before 2026-03-29: CC BY 4.0 (commercial use allowed; the credit, the licence and https://phet.colorado.edu as close to the point of use as possible; translating the credit is allowed). PhET's 2025 impact report announces a shift to CC BY-NC for newer sims, and its FAQ says commercial use needs a licence: read the sim's publication date in its About dialog and pick the licence. Every HTML sim page offers an Embed code. No result channel: PhET-iO (the instrumented API) is licensed separately. Language: ?locale=."},
+    {"id": "geogebra", "name": "GeoGebra", "status": "allowed", "origins": ["https://www.geogebra.org"], "path": "/material/iframe/id/[A-Za-z0-9]{4,16}(/[a-z]{1,8}/[A-Za-z0-9]{1,16})*", "query": null, "hash": null, "sandbox": ["allow-scripts", "allow-same-origin"], "licenses": ["GeoGebra-NC", "CC-BY-NC-SA-3.0", "CC-BY-NC-SA-4.0"], "creditMust": "GeoGebra", "credit": "{author} · {title} · GeoGebra (geogebra.org) · {license}", "terms": "https://www.geogebra.org/license", "supportsResult": false, "notes": "GeoGebra licence: the apps and the materials are free for non-commercial use with attribution (materials CC BY-NC-SA); commercial use (e.g. inside a non-academic e-book or a paid product) needs a licence from GeoGebra. Share > Embed gives the material/iframe URL. Explore only: the ggbApplet API needs deployggb.js running in OUR page (a third-party script in the app's origin: refused) or same-origin access to the frame; the iframe embed has no documented postMessage channel."},
+    {"id": "desmos", "name": "Desmos", "status": "allowed", "origins": ["https://www.desmos.com"], "path": "/(calculator|geometry|3d)/[a-z0-9]{6,24}", "query": "embed", "hash": null, "sandbox": ["allow-scripts", "allow-same-origin"], "licenses": ["Desmos-ToS"], "creditMust": "Desmos", "credit": "{title} · Desmos (desmos.com) · {license}", "terms": "https://www.desmos.com/terms", "supportsResult": false, "notes": "A saved graph's Share > Embed gives https://www.desmos.com/calculator/<id>?embed (no API key; Desmos staff on the API forum: the iframe route needs no API). The JS API (calculator.js) needs an API key and runs in OUR page: refused. The Terms of Service restrict commercial use. Explore only."},
+    {"id": "falstad", "name": "Falstad Circuit Simulator", "status": "pending", "origins": ["https://www.falstad.com", "https://falstad.com"], "path": "/circuit/circuitjs\\.html", "query": "(ctz|cct)=[A-Za-z0-9._~%+$!*'(),;:@/=-]{1,1900}", "hash": null, "sandbox": ["allow-scripts", "allow-same-origin"], "licenses": ["GPL-2.0-or-later"], "creditMust": "Paul Falstad", "credit": "Circuit simulator by Paul Falstad (falstad.com/circuit) · {license}", "terms": "https://www.falstad.com/licensing.html", "supportsResult": false, "notes": "Code: CircuitJS1, GPLv2. Site terms: use in a classroom unmodified; non-commercial modification or redistribution with credit and a link; 'for any other uses, contact me'. Framing the hosted page on another site is not addressed: PENDING until Paul Falstad confirms, or self-host the GPL build later (same origin: then its CircuitJS1 JS API could give a result channel). Cross-origin, that API is out of reach."},
+    {"id": "circuitjs", "name": "CircuitJS1 (Lush Projects)", "status": "pending", "origins": ["https://lushprojects.com"], "path": "/circuitjs/circuitjs(\\.html)?", "query": "(ctz|cct)=[A-Za-z0-9._~%+$!*'(),;:@/=-]{1,1900}", "hash": null, "sandbox": ["allow-scripts", "allow-same-origin"], "licenses": ["GPL-2.0-or-later"], "creditMust": "CircuitJS1", "credit": "CircuitJS1 by Paul Falstad and Iain Sharp (lushprojects.com/circuitjs) · {license}", "terms": "https://github.com/sharpie7/circuitjs1", "supportsResult": false, "notes": "Iain Sharp's hosted CircuitJS1 (GPLv2; the README says to embed the full-page version in an iframe, written for self-hosted copies). No terms for framing the hosted service: PENDING. Same API situation as falstad."},
+    {"id": "wokwi", "name": "Wokwi", "status": "pending", "origins": ["https://wokwi.com"], "path": "/projects/[0-9]{6,24}", "query": "(embed=1)?", "hash": null, "sandbox": ["allow-scripts", "allow-same-origin"], "licenses": ["Wokwi-ToS"], "creditMust": "Wokwi", "credit": "{title} · simulated on Wokwi (wokwi.com) · {license}", "terms": "https://docs.wokwi.com", "supportsResult": false, "notes": "Arduino / ESP32 / Pi Pico simulator, free to use. No public documentation of iframe embedding or of its terms was found (2026-11): only an 'early prototype, subject to change' partner embed (/_alpha/wembed/) in wokwi-embed-bridge-example. PENDING until Wokwi documents or confirms embedding. A project compiles the learner's code on Wokwi's servers."},
+  ]/*@end*/;
+  const RUNTIME = 'external-embed@1', MAX_URL = 2048, FALLBACK_MIN = 40, LOAD_TIMEOUT = 20000;
+  /** the sandbox tokens a provider may be given; everything else (allow-top-navigation*, allow-popups-to-escape-sandbox, allow-modals,
+      allow-downloads, allow-storage-access-by-user-activation, allow-presentation, allow-orientation-lock) is refused */
+  const SANDBOX_OK = new Set(['allow-scripts', 'allow-same-origin', 'allow-forms', 'allow-pointer-lock', 'allow-popups']);
+  const DEVICES = ['accelerometer', 'autoplay', 'camera', 'display-capture', 'encrypted-media', 'geolocation', 'gyroscope', 'magnetometer', 'microphone', 'midi', 'payment', 'publickey-credentials-get', 'screen-wake-lock', 'serial', 'usb', 'hid', 'bluetooth', 'web-share', 'xr-spatial-tracking'].map(f => f + " 'none'").join('; ');
+  const SAFE = /^[A-Za-z0-9\-._~%!$&'()*+,;=:@\/?#]+$/;
+  const URL_RE = /^https:\/\/([a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)+)(:[0-9]{1,5})?(\/[^?#]*)?(\?[^#]*)?(#.*)?$/;
+  const BAD_PATH = /\/\/|\/\.\.?(\/|$)|%2e|%2f|%5c|%00/i;
+  const isStr = v => typeof v === 'string' && v.trim().length > 0;
+  const full = (re, s) => { try { return new RegExp('^(?:' + re + ')$').test(s); } catch (e) { return false; } };
+  const provider = (id, list) => (Array.isArray(list) ? list : []).find(p => p && p.id === id) || null;
+
+  /** a URL string → { origin, path, query, hash } (query / hash without ? / #, null when absent) | { code } */
+  function parse(u) {
+    if (typeof u !== 'string' || !u) return { code: 'url-missing' };
+    if (u.length > MAX_URL) return { code: 'url-long' };
+    if (!u.startsWith('https://')) return { code: 'url-scheme' };   // http:, javascript:, data:, //host, HTTPS:… all refused
+    if (!SAFE.test(u)) return { code: 'url-chars' };                 // spaces, controls, backslashes, quotes, <>, non-ASCII
+    if (u.slice(8).split(/[/?#]/)[0].includes('@')) return { code: 'url-userinfo' };
+    const m = URL_RE.exec(u); if (!m) return { code: 'url-host' };
+    const path = m[3] || '/';
+    if (BAD_PATH.test(path)) return { code: 'url-path' };
+    return { origin: 'https://' + m[1] + (m[2] || ''), path, query: m[4] == null ? null : m[4].slice(1), hash: m[5] == null ? null : m[5].slice(1) };
+  }
+  /** does the URL match this provider exactly? → { ok: true, provider, origin } | { code } */
+  function match(url, p) {
+    const u = parse(url); if (u.code) return u;
+    if (!p || !Array.isArray(p.origins) || !p.origins.includes(u.origin)) return { code: 'url-origin' };
+    if (!full(p.path, u.path)) return { code: 'url-path' };
+    if (u.query != null && (p.query == null || !full(p.query, u.query))) return { code: 'url-query' };
+    if (u.query == null && p.query != null && !full(p.query, '')) return { code: 'url-query' };
+    if (u.hash != null && (p.hash == null || !full(p.hash, u.hash))) return { code: 'url-hash' };
+    return { ok: true, provider: p, origin: u.origin };
+  }
+  /** one registry item → { errors: ['code: what'], warnings } — the same rules as tools/embed_check.py check_item */
+  function check(a, opts) {
+    const list = (opts && opts.providers) || PROVIDERS, E = [], W = [];
+    const e = (code, what) => E.push(code + ': ' + what);
+    if (!a || typeof a !== 'object' || Array.isArray(a)) return { errors: ['item: not an object'], warnings: W };
+    if (a.runtime !== RUNTIME) e('runtime', 'runtime must be ' + RUNTIME);
+    const p = typeof a.provider === 'string' ? provider(a.provider, list) : null;
+    if (!p) e('provider-unknown', 'provider must be one of the allow-list (tools/embed_allow.json)');
+    else {
+      if (p.status !== 'allowed') e('provider-pending', 'provider ' + p.id + ' is not allowed yet (its embedding terms are not confirmed)');
+      if (!Array.isArray(p.sandbox) || p.sandbox.some(t => !SANDBOX_OK.has(t)) || !p.sandbox.includes('allow-scripts')) e('provider-sandbox', 'the provider asks for sandbox tokens outside ' + [...SANDBOX_OK].join(' '));
+      const m = match(a.url, p); if (!m.ok) e(m.code, 'url does not match provider ' + p.id + ' exactly');
+      if (!isStr(a.credit)) e('credit-missing', 'credit is required');
+      else if (isStr(p.creditMust) && !a.credit.includes(p.creditMust)) e('credit-provider', 'credit must name "' + p.creditMust + '"');
+      if (!isStr(a.license)) e('license-missing', 'license is required');
+      else if (!Array.isArray(p.licenses) || !p.licenses.includes(a.license)) e('license-provider', 'license must be one of ' + (p.licenses || []).join(', '));
+    }
+    if (p == null && typeof a.url === 'string') { const u = parse(a.url); if (u.code) e(u.code, 'url'); }
+    const fb = a.fallback && typeof a.fallback === 'object' ? a.fallback : {};
+    if (!(isStr(fb.text) && fb.text.trim().length >= FALLBACK_MIN) || !isStr(fb.media)) e('fallback-missing', 'fallback {media, text >= ' + FALLBACK_MIN + ' characters} is required (offline, refused, not chosen)');
+    if (a.capabilities != null && !(Array.isArray(a.capabilities) && a.capabilities.length === 0)) e('capabilities', 'an embed has no capabilities (it does not speak the activity protocol)');
+    if ('html' in a || 'spec' in a || 'entry' in a) e('not-embed', 'an embed carries no bundle, spec or entry');
+    const st = a.strings;
+    if (!st || typeof st !== 'object' || Array.isArray(st) || !Object.keys(st).length || Object.values(st).some(t => !t || typeof t !== 'object' || Array.isArray(t) || !isStr(t.title))) e('strings-title', 'strings.<locale>.title (what opens, in each language) is required');
+    if (a.height != null && !(typeof a.height === 'number' && a.height >= 120 && a.height <= 2000)) e('height', 'height must be 120–2000');
+    if (p && p.status === 'allowed' && /NC/.test(String(a.license || ''))) W.push('license-nc: ' + a.license + ' is non-commercial: fine for a free study app, not for a paid one');
+    return { errors: E, warnings: W };
+  }
+  /** a pack → { errors, warnings } for its embed items, and the sim exercises that would grade one (none can) */
+  function checkPack(pack, opts) {
+    const list = (opts && opts.providers) || PROVIDERS, E = [], W = [], items = {};
+    for (const a of (pack && pack.activities && Array.isArray(pack.activities.items) ? pack.activities.items : [])) {
+      if (!a || a.runtime !== RUNTIME) continue;
+      items[a.id] = a; const r = check(a, { providers: list });
+      E.push(...r.errors.map(m => 'activity ' + a.id + ': ' + m)); W.push(...r.warnings.map(m => 'activity ' + a.id + ': ' + m));
+    }
+    for (const c of (pack && Array.isArray(pack.chapters) ? pack.chapters : []))
+      for (const ex of (Array.isArray(c.exercises) ? c.exercises : []))
+        if (ex && ex.type === 'sim' && Object.prototype.hasOwnProperty.call(items, ex.activity)) {
+          const p = provider(items[ex.activity].provider, list);
+          if (!(p && p.supportsResult === true)) E.push(ex.id + ': sim-embed: activity ' + ex.activity + ' is an outside page (explore only): use it in a theory block');
+        }
+    return { errors: E, warnings: W };
+  }
+
+  /* ---------- the learner's choice, per provider (an account setting: S.settings.embedOk = { <provider>: time }) ---------- */
+  const consent = {
+    has(id) { try { return !!(typeof S !== 'undefined' && S.settings && S.settings.embedOk && Object.prototype.hasOwnProperty.call(S.settings.embedOk, id) && S.settings.embedOk[id]); } catch (e) { return false; } },
+    set(id) { try { if (typeof S === 'undefined' || !S.settings) return; S.settings.embedOk = Object.assign({}, S.settings.embedOk || {}, { [id]: Date.now() }); if (typeof save === 'function') save(); } catch (e) { } },
+    forget(id) { try { if (typeof S === 'undefined' || !S.settings || !S.settings.embedOk) return; const o = Object.assign({}, S.settings.embedOk); delete o[id]; S.settings.embedOk = o; if (typeof save === 'function') save(); } catch (e) { } },
+    list() { try { return typeof S !== 'undefined' && S.settings && S.settings.embedOk ? Object.keys(S.settings.embedOk) : []; } catch (e) { return []; } },
+  };
+
+  /* ---------- the runtime ---------- */
+  const T = (k, v) => (typeof tE === 'function' ? tE(k, v) : k);
+  const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = String(text); return e; };
+  function creditLine(a, p) {
+    const line = el('p', 'act-embed-credit');
+    line.append(el('span', '', a.credit), document.createTextNode(' · '), el('span', '', a.license), document.createTextNode(' · '));
+    const terms = el('a', '', T('engine.act.embed.terms', { provider: p.name }));
+    terms.href = p.terms; terms.target = '_blank'; terms.rel = 'noopener noreferrer'; terms.referrerPolicy = 'no-referrer';
+    line.append(terms);
+    return line;
+  }
+  /** the wrapper document: no scripts; its policy lets its one frame show only the provider's origins */
+  function wrapperDoc(url, p, tokens, title) {
+    const csp = ["default-src 'none'", "script-src 'none'", "style-src 'unsafe-inline'", 'frame-src ' + p.origins.join(' '), "form-action 'none'", "base-uri 'none'", "object-src 'none'"].join('; ');
+    const w = document.implementation.createHTMLDocument('');
+    const m = w.createElement('meta'); m.setAttribute('http-equiv', 'Content-Security-Policy'); m.setAttribute('content', csp);
+    const s = w.createElement('style'); s.textContent = 'html,body{margin:0;height:100%;overflow:hidden;background:transparent}iframe{display:block;border:0;width:100%;height:100%}';
+    const f = w.createElement('iframe');
+    f.setAttribute('sandbox', tokens); f.setAttribute('allow', DEVICES); f.setAttribute('referrerpolicy', 'no-referrer');
+    f.setAttribute('credentialless', ''); f.setAttribute('title', title); f.setAttribute('src', url);
+    w.head.replaceChildren(m, s); w.body.replaceChildren(f);
+    return '<!doctype html>' + w.documentElement.outerHTML;
+  }
+  function register() {
+    if (typeof ACT !== 'object' || !ACT || typeof ACT.registerRuntime !== 'function' || typeof document === 'undefined') return;
+    if (!(window.NOEMA_CONFIG && window.NOEMA_CONFIG.activities && window.NOEMA_CONFIG.activities[RUNTIME] === true)) return;   // opt-in per deployment
+    ACT.registerRuntime({
+      id: RUNTIME, version: 1,
+      /** → port { send(type), close() }; the page itself does not speak the activity protocol: this trusted host answers for it */
+      mount(box, { act, init, title, onMessage, onFail }) {
+        const later = f => Promise.resolve().then(f);   // never call back before the core holds the port
+        let closed = false, timer = null;
+        const out = (type, payload) => { if (!closed) onMessage(ACTP.out(type, payload)); };
+        const fail = code => later(() => { if (!closed) onFail(code); });
+        const root = el('div', 'act-embed');
+        const port = { send(type) { if (type === 'ping') later(() => out('pong')); }, close() { closed = true; clearTimeout(timer); root.remove(); } };
+        const r = check(act);
+        const p = provider(act && act.provider, PROVIDERS);
+        if (r.errors.length || !p) { console.warn('[noema] external-embed', act && act.id, r.errors.join(' | ')); fail('embed-refused'); return port; }
+        let href = ''; try { href = new URL(act.url).href; } catch (e) { }
+        if (href !== act.url) { console.warn('[noema] external-embed', act.id, 'url is not in its normal form'); fail('embed-refused'); return port; }
+        if (init && init.exerciseId) { fail('embed-graded'); return port; }   // explore only (docs/activities-dev/embed.md §4)
+        if (typeof navigator !== 'undefined' && navigator.onLine === false) { fail('embed-offline'); return port; }
+        const tokens = p.sandbox.filter(t => SANDBOX_OK.has(t)).join(' ');
+        const words = (init && init.strings) || {};
+        const name = words.title || act.id;
+        box.append(root);
+        later(() => out('ready', { protocols: [1] }));
+        function open() {
+          if (closed) return;
+          if (typeof navigator !== 'undefined' && navigator.onLine === false) return fail('embed-offline');
+          root.replaceChildren();
+          const f = el('iframe', 'act-frame act-embed-frame');
+          f.setAttribute('sandbox', tokens); f.setAttribute('allow', DEVICES); f.setAttribute('referrerpolicy', 'no-referrer');
+          f.setAttribute('credentialless', ''); f.setAttribute('loading', 'lazy'); f.setAttribute('title', T('engine.act.embed.frameTitle', { title: name, provider: p.name }));
+          f.setAttribute('data-provider', p.id);
+          f.addEventListener('load', () => { clearTimeout(timer); out('a11y:announce', { text: String(T('engine.act.embed.opened', { provider: p.name })).slice(0, 300) }); }, { once: true });
+          timer = setTimeout(() => fail('embed-timeout'), LOAD_TIMEOUT);
+          f.srcdoc = wrapperDoc(act.url, p, tokens, name);
+          root.append(f, creditLine(act, p));
+          out('event', { name: 'embed:open', data: { provider: p.id } });
+        }
+        if (consent.has(p.id)) { open(); return port; }
+        // the quiet card: nothing of the provider is requested before Open
+        const card = el('div', 'act-embed-card'); card.setAttribute('role', 'group'); card.setAttribute('aria-label', name);
+        card.append(el('p', 'act-embed-title', name), el('p', 'act-embed-ask', T('engine.act.embed.ask', { provider: p.name })));
+        if (typeof words.why === 'string' && words.why.trim()) card.append(el('p', 'act-embed-why', words.why));
+        card.append(creditLine(act, p));
+        const go = el('button', 'btn primary small act-embed-open', T('engine.act.embed.open', { provider: p.name })); go.type = 'button';
+        go.addEventListener('click', () => { if (closed) return; consent.set(p.id); open(); });
+        card.append(go);
+        root.append(card);
+        return port;
+      },
+    });
+  }
+  register();
+  /* i18n-ignore-end */
+  return { RUNTIME, PROVIDERS, SANDBOX_OK, parse, match, check, checkPack, consent };
+})();
+if (typeof module === 'object' && module && module.exports) module.exports = NoemaEmbed;
+else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
+
 /* ---- 50_sources.js ---- */
 /* ===================== Sources: registry, filtering, "what's new" ===================== */
 /* Data model: every chapter has `src`; any item (section, block, exercise, playbook, flashcard, pitfall)
@@ -5689,6 +7827,17 @@ function accSection(icon, title, { status = null, info = null, open = false, bod
     h('div', { class: 'accsecbody' }, body));
   return d;
 }
+/** Settings › Data: the outside activities (external-embed@1, docs/INTERACTIVE_EMBED.md) the learner let open without asking — one quiet
+    line with ⓘ and "Ask again" (NoemaEmbed.consent: S.settings.embedOk, an account setting); nothing at all while there is no yes to forget. */
+function embedConsentRow() {
+  const E = window.NoemaEmbed, ids = E?.consent?.list?.() || [];
+  if (!ids.length) return null;
+  const names = ids.map(id => (E.PROVIDERS || []).find(p => p.id === id)?.name || id);
+  const row = h('div', { class: 'subrow embedconsent', 'data-embed-consent': '' },
+    h('span', { class: 'grow tiny' }, tE('engine.act.embed.settings', { names: window.NoemaI18n?.fmt?.list ? NoemaI18n.fmt.list(names) : names.join(', ') }), ' ', tip(tE('engine.act.embed.settingsTip'))),
+    h('button', { class: 'btn small ghost', type: 'button', onclick: () => { for (const id of E.consent.list()) E.consent.forget(id); row.remove(); toast(tE('engine.act.embed.forgotten')); } }, tE('engine.act.embed.forget')));
+  return row;
+}
 const fmtBytes = n => n > 1e6 ? tE('engine.common.sizeMB', { size: window.NoemaI18n?.fmt ? NoemaI18n.fmt.number(n / 1e6, { minimumFractionDigits: 1, maximumFractionDigits: 1 }) : (n / 1e6).toFixed(1) }) : n > 1e3 ? tE('engine.common.sizeKB', { size: nf(Math.round(n / 1e3)) }) : tE('engine.common.sizeB', { size: nf(n) });
 /** A moment / a day / a time of day in the UI language (the same fields the browser's toLocale…String() shows). */
 const WHEN_DAY = { year: 'numeric', month: 'numeric', day: 'numeric' }, WHEN_TIME = { hour: 'numeric', minute: '2-digit', second: '2-digit' };
@@ -5916,7 +8065,8 @@ const ACC_VIEWS = {
                 h('button', { class: 'btn', onclick: async () => { c2(); const base = tE('engine.bk.restoredName', { name: obj.account.name || tE('engine.bk.restoredDefault') }); const id = (base.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'restored') + '-' + Date.now().toString(36).slice(-4); Noema.saveLocalAccount({ id, name: base, emoji: obj.account.emoji || '♻️', created: Date.now() }); await Noema.backup.apply(obj, id, 'replace'); Noema.switchTo(id, null); } }, '➕ ' + tE('engine.bk.asNew')),   // i18n-ignore
                 h('button', { class: 'btn ghost', onclick: c2 }, tE('engine.core.cancel')))));
           } })), guideBtn('restore', '♻️ ' + tE('engine.bk.howRestore'))] }),
-      accSection('🕘', tE('engine.bk.secPoints'), { status: { ok: true, text: nf(pts0.length) }, info: tE('engine.bk.pointsInfo'), body: rpBox }));
+      accSection('🕘', tE('engine.bk.secPoints'), { status: { ok: true, text: nf(pts0.length) }, info: tE('engine.bk.pointsInfo'), body: rpBox }),
+      embedConsentRow());
     drawFs(); drawRP();
   },
 
