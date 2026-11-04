@@ -185,7 +185,9 @@ addEventListener('message', function (e) { LOG.push({ type: 'stray', data: e.dat
       browser = await pw[name].launch(name === 'chromium' ? { channel: 'chromium' } : {});
       const ctx = await browser.newContext({ ignoreHTTPSErrors: true, viewport: { width: 900, height: 900 } });
       const p = await ctx.newPage(); p.setDefaultTimeout(10000);
-      const errs = []; p.on('pageerror', e => errs.push(e.message));
+      // (WebKit reports the sandbox's refusals of the hostile page's own navigation tries as page errors: the refusal is what is tested,
+      //  so those are not errors of the app; every other error counts)
+      const errs = []; p.on('pageerror', e => { if (!/t=hostile'\. The frame attempting navigation .*is sandboxed/.test(e.message)) errs.push(e.message); });
       const reqs = []; p.on('request', r => reqs.push(r.url()));
       let popups = 0; ctx.on('page', () => popups++);
       await p.goto(HOSTURL); await p.evaluate(() => localStorage.clear()); await p.reload();
@@ -233,9 +235,9 @@ addEventListener('message', function (e) { LOG.push({ type: 'stray', data: e.dat
       console.log('— refused URLs → fallback, nothing requested');
       for (const [k, o] of Object.entries({ 'http': { url: URL1.replace('https:', 'http:') }, 'another path': { url: PROV + '/evil.html' }, 'javascript:': { url: 'javascript:alert(1)' }, 'data:': { url: 'data:text/html,<b>x</b>' },
         'extra query': { url: URL1 + '?x=1' }, 'user info': { url: URL1.replace('https://', 'https://u@') }, 'pending provider': { provider: 'fakepending', credit: 'P' }, 'no credit': { credit: '' }, 'unknown provider': { provider: 'nope' } })) {
-        provHits.length = 0;
-        await run(act(o), init());
-        ok(await failed('embed-refused') && await p.evaluate(() => !document.querySelector('#box iframe') && !document.querySelector('#box .act-embed-card') && /FALLBACK/.test(document.getElementById('fb').textContent)) && provHits.length === 0, `${k}: refused → the fallback, no frame, no request`);
+        await run(act(o), init()); await wait(300);   // (a request of the frame mounted before may still arrive while it is torn down)
+        provHits.length = 0; await run(act(o), init());
+        ok(await failed('embed-refused') && await p.evaluate(() => !document.querySelector('#box iframe') && !document.querySelector('#box .act-embed-card') && /FALLBACK/.test(document.getElementById('fb').textContent)) && provHits.length === 0, `${k}: refused → the fallback, no frame, no request ${JSON.stringify(provHits.map(x => x.url))}`);
       }
       await run(act(), init({ exerciseId: 'ch01-e900' }));
       ok(await failed('embed-graded'), 'as a sim exercise: refused (explore only)');
