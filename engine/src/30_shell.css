@@ -63,7 +63,7 @@
 .dangerzone{margin-top:24px;padding:14px 16px;border-radius:16px;border:1.5px dashed var(--bad);background:var(--bad-bg)}
 .herohead strong{font-weight:800;background:linear-gradient(90deg,#ff6b6b,#ffb020 30%,#2ec4b6 55%,#4d7cfe 75%,#a35cff);-webkit-background-clip:text;background-clip:text;color:transparent}
 .katex{font-size:1.06em}
-.katex-display{overflow-x:auto;overflow-y:hidden;padding:4px 0}
+.katex-display{padding:4px 0}
 @media (max-width:720px){.subjchip .st{max-width:110px}.noema-ovbox{padding:18px;border-radius:22px}.noema-accgrid{grid-template-columns:1fr 1fr}}
 @media (max-width:720px){.topbar .hide-m{display:none}.topbar{overflow:hidden}.subjchip{padding:6px 10px;font-size:13px}}
 @media (max-width:440px){.topbar .hide-s{display:none}.subjchip .st{max-width:84px}.iconbtn.tutor{padding:0 10px}}
@@ -328,7 +328,7 @@ kbd{font:600 12px var(--mono,monospace);padding:1px 6px;border-radius:6px;border
 .cm-linkchip{display:inline-flex;align-items:center;gap:4px;padding-block:3px;padding-inline:10px 4px;border-radius:99px;background:var(--violet-bg);font-size:13.5px}
 .cm-linkchip button{border:0;background:transparent;cursor:pointer;font-size:12px;padding:2px 6px;border-radius:99px;color:inherit}.cm-linkchip button:hover{background:var(--card)}
 .cm-chedit{display:grid;gap:8px;padding-inline-start:24px;margin:6px 0}.cm-chrow::marker{font-weight:800;color:var(--violet)}
-.cm-maptext{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;line-height:1.35;white-space:pre;overflow:auto;min-height:180px}
+.cm-maptext{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;line-height:1.35;white-space:pre-wrap;overflow-y:auto;min-height:180px}
 .cm-detect{margin:6px 0;font-weight:700;color:var(--green,#16a34a)}
 .cm-preview{max-height:260px;overflow:auto;margin:6px 0;padding-inline-start:28px;border:1px solid var(--line);border-radius:12px;padding-top:6px;padding-bottom:6px}.cm-preview li{margin:2px 0;overflow-wrap:anywhere}
 .cm-filetable{width:100%;border-collapse:collapse;margin-top:8px}.cm-filetable td{padding:6px 4px;border-bottom:1px solid var(--line);vertical-align:middle;overflow-wrap:anywhere}.cm-filetable td:nth-child(2){width:46%}.cm-filetable select{width:100%}
@@ -378,12 +378,12 @@ kbd{font:600 12px var(--mono,monospace);padding:1px 6px;border-radius:6px;border
 .cm-rules{width:100%;border-collapse:collapse;font-size:13px}.cm-rules td{padding:4px 6px;vertical-align:top;border-top:1px solid rgba(127,127,127,.18)}
 .cm-rules td:first-child{width:45%}.cm-rules code{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px}
 .cm-reads{margin-top:4px}.cm-reads pre{background:transparent;border:1px dashed rgba(127,127,127,.35)}
-.cm-try{margin-top:4px}.cm-tree{font-size:12px;white-space:pre;overflow-x:auto;margin:6px 0 0;padding:8px 10px;border-radius:10px;background:var(--bg2,rgba(127,127,127,.08))}
+.cm-try{margin-top:4px}.cm-tree{font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere;margin:6px 0 0;padding:8px 10px;border-radius:10px;background:var(--bg2,rgba(127,127,127,.08))}
 .cm-guide .cg-tipbody,.cg-tipbody:has(.cm-guide){max-width:none}
 @media (max-width:560px){.cm-rules,.cm-rules tbody,.cm-rules tr,.cm-rules td{display:block;width:auto}.cm-rules td:first-child{width:auto;border-top:1px solid rgba(127,127,127,.18)}.cm-rules td+td{border-top:0;padding-top:0}}
 .cg-steptitle .cg-tip[open]{min-width:0;max-width:100%}.cg-steptitle .cg-tip[open]>.cg-tipbody{min-width:0;overflow:hidden}
 .cm-guide{min-width:0}.cm-guide>*{min-width:0;max-width:100%}.cm-tree{max-width:100%}
-.cm-guide pre{white-space:pre;overflow-x:auto;overflow-wrap:normal;max-width:100%}
+.cm-guide pre{white-space:pre-wrap;overflow-wrap:anywhere;max-width:100%}
 .cm-guide code,.cm-guide pre,.cm-maptext{font-variant-ligatures:none;font-feature-settings:"liga" 0,"calt" 0}
 
 /* 💬 the Claude app (the learner's Claude plan) does curriculum work — engine/curjobs.js */

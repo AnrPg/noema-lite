@@ -222,9 +222,15 @@ window.NoemaShell = (() => {
     requestAnimationFrame(() => {
       const a = anchor.getBoundingClientRect(), r = pop.getBoundingClientRect();
       if (r.right > innerWidth - 8) pop.style.right = '0'; if (r.left < 8) { pop.style.left = '0'; pop.style.right = 'auto'; }
+      const q = pop.getBoundingClientRect(), vw = Math.min(innerWidth, screen.width || innerWidth);   // a phone's screen, even when something already made the page wider
+      if (q.right > vw - 8 || q.left < 8) {   // still past an edge (a narrow phone): pin it to the screen, under (or over) its button
+        const wd = Math.min(q.width, vw - 16), x = Math.max(8, Math.min(a.right - wd, vw - wd - 8));
+        Object.assign(pop.style, { insetInlineStart: 'auto', insetInlineEnd: 'auto' }); Object.assign(pop.style, { position: 'fixed', left: x + 'px', right: 'auto', width: wd + 'px', minWidth: '0' });
+        if (down) pop.style.top = (a.bottom + 6) + 'px'; else { pop.style.top = 'auto'; pop.style.bottom = (innerHeight - a.top + 6) + 'px'; }
+      }
       if (!down) return;
       const below = innerHeight - a.bottom - 14, above = a.top - 70;   // up only when it does not fit below and there is more room above
-      if (r.height > below && above > below) { pop.classList.add('up'); pop.style.maxHeight = above + 'px'; } else pop.style.maxHeight = Math.max(below, 220) + 'px';
+      if (r.height > below && above > below) { pop.classList.add('up'); pop.style.maxHeight = above + 'px'; if (pop.style.position === 'fixed') Object.assign(pop.style, { top: 'auto', bottom: (innerHeight - a.top + 6) + 'px' }); } else pop.style.maxHeight = Math.max(below, 220) + 'px';
     });
     pop.querySelector('button:not([disabled])')?.focus({ preventScroll: true });
     pop.addEventListener('keydown', e => { const bs = [...pop.querySelectorAll('button:not([disabled])')], i = bs.indexOf(document.activeElement); if (e.key === 'ArrowDown') { e.preventDefault(); bs[(i + 1) % bs.length]?.focus(); } if (e.key === 'ArrowUp') { e.preventDefault(); bs[(i - 1 + bs.length) % bs.length]?.focus(); } });
