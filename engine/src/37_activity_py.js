@@ -53,7 +53,7 @@
   }
 
   /* ---------- the files: pinned manifest, service worker, cache ---------- */
-  const available = () => { try { return !!(window.isSecureContext && /^https?:$/.test(location.protocol) && 'caches' in window && window.crypto?.subtle && typeof Worker === 'function' && typeof WebAssembly === 'object'); } catch (e) { return false; } };
+  const available = () => { try { return !!(!window.NOEMA_BUNDLE && window.isSecureContext && /^https?:$/.test(location.protocol) && 'caches' in window && window.crypto?.subtle && typeof Worker === 'function' && typeof WebAssembly === 'object'); } catch (e) { return false; } };
   let swP = null, loaderEl = null, loaderP = null, loaderNo = 0, manP = null, via = null;   // via: how the last file was read ('sw' | 'page')
   /** the registration of engine/pyodide-sw.js with an active worker, or null (unsupported, refused, NOEMA_CONFIG.py.sw === false) */
   function sw() {
@@ -172,6 +172,16 @@
     const one = async () => { while (i < files.length) { const f = files[i++]; try { await getFile(f.path, f.sha256); bytes += f.bytes; } catch (e) { failed.push({ file: f.path, code: e.code || 'fetch' }); } done++; emit({ file: f.path, done, total: files.length, bytes, totalBytes: files.reduce((s, x) => s + x.bytes, 0) }); } };
     await Promise.all([one(), one(), one()]);
     return { ok: !failed.length, files: files.length - failed.length, bytes, persisted, failed };
+  }
+  /** what an activity's packages need and how much of it is already on the device (the first-use note):
+      → { files, bytes, missing, missingBytes, extras: [names], extrasMissing: [names] }; throws when there is no manifest (offline, never used) */
+  async function need(packages) {
+    const man = await manifest(), { files, extras } = plan(man, Array.isArray(packages) ? packages : []);
+    const c = await cache(), have = new Set(c ? (await c.keys()).map(r => new URL(r.url).pathname) : []);
+    const miss = files.filter(f => !have.has(new URL(f.path, location.origin).pathname));
+    const sum = l => l.reduce((n, f) => n + (f.bytes || 0), 0);
+    return { files: files.length, bytes: sum(files), missing: miss.length, missingBytes: sum(miss), extras: extras.map(x => x.name),
+      extrasMissing: extras.filter(x => miss.some(f => f.vpath === 'pywheels/' + man.wheels[x.name].file)).map(x => x.name) };
   }
   /** what is on the device: { supported, sw: 'active'|'none', via: how the last file was read ('sw'|'page'|null), persisted, version, cachedBytes, groups: { core, numpy, scipy, micropip, <extra>: { files, cached, bytes, ready } } } */
   async function status() {
@@ -506,7 +516,7 @@ def _noema_step(js):
     return port;
   }
 
-  const NoemaPy = { available, prepareOffline, status, config, protocol: { check: pyCheck }, _plan: plan, _manifest: manifest };
+  const NoemaPy = { available, prepareOffline, status, need, config, protocol: { check: pyCheck }, mountRunner: mount, _plan: plan, _manifest: manifest };
   if (typeof window !== 'undefined') window.NoemaPy = NoemaPy;
   if (typeof ACT !== 'undefined' && available()) ACT.registerRuntime({ id: 'py-module@1', version: 1, startTimeoutMs: DEFAULTS.startMs, mount });
   /* i18n-ignore-end */

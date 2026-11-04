@@ -75,3 +75,10 @@
 .act-checks li.ok { color: var(--ok); }
 .act-checks li.bad { color: var(--bad); }
 @media (prefers-reduced-motion: reduce) { .sim * { transition: none !important; animation: none !important; } }
+/* py-module@1 (37_activity_py_ui.js): one quiet line above the controls (first use, loading, network); the runner frame shows nothing */
+.act-pyline { font-size: .85em; color: var(--ink2); margin: 0 0 8px; }
+.act-pyline[hidden] { display: none; }
+.act-pyline .btn { margin-left: 6px; }
+.act-pyrun { position: relative; height: 0; overflow: hidden; }
+.act-pyset .row { gap: 8px; flex-wrap: wrap; align-items: center; }
+.act-pybar { flex: 1 1 140px; max-width: 260px; height: 8px; }

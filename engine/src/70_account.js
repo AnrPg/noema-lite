@@ -234,7 +234,8 @@ const ACC_VIEWS = {
                 h('button', { class: 'btn', onclick: async () => { c2(); const base = tE('engine.bk.restoredName', { name: obj.account.name || tE('engine.bk.restoredDefault') }); const id = (base.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'restored') + '-' + Date.now().toString(36).slice(-4); Noema.saveLocalAccount({ id, name: base, emoji: obj.account.emoji || '♻️', created: Date.now() }); await Noema.backup.apply(obj, id, 'replace'); Noema.switchTo(id, null); } }, '➕ ' + tE('engine.bk.asNew')),   // i18n-ignore
                 h('button', { class: 'btn ghost', onclick: c2 }, tE('engine.core.cancel')))));
           } })), guideBtn('restore', '♻️ ' + tE('engine.bk.howRestore'))] }),
-      accSection('🕘', tE('engine.bk.secPoints'), { status: { ok: true, text: nf(pts0.length) }, info: tE('engine.bk.pointsInfo'), body: rpBox }));
+      accSection('🕘', tE('engine.bk.secPoints'), { status: { ok: true, text: nf(pts0.length) }, info: tE('engine.bk.pointsInfo'), body: rpBox }),
+      window.pyOfflineSection?.() || '');   // 🐍 Prepare Python for offline (37_activity_py_ui.js): only where Python activities can run
     drawFs(); drawRP();
   },
 

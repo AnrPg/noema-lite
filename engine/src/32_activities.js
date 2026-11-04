@@ -31,6 +31,9 @@ const ACTP = (() => {
     'a11y:announce': p => str(p.text, LIM.text) && p.text.trim().length > 0,
     error: p => CODE.test(p.code || '') && (p.message == null || str(p.message, LIM.detail)),
     pong: p => true, ack: p => true, nack: p => true,
+    // py-module@1 (37_activity_py.js): the runner's own messages, checked in full by NoemaPy.protocol before they get here; the core only notes them
+    'py:out': p => (p.outputs == null || isObj(p.outputs)) && (p.error == null || (isObj(p.error) && CODE.test(p.error.code || ''))),
+    'py:status': p => typeof p.phase === 'string' && p.phase.length <= 20,
   };
   /** → { ok: true, msg } | { ok: false, why, ignore? } — ignore: an unknown type (counted, not a strike) */
   function check(data) {
@@ -58,10 +61,13 @@ const ACT = (() => {
   const reg = Noema.pack?.activities;
   const ITEMS = {}; for (const a of (reg && Array.isArray(reg.items) ? reg.items : [])) if (a && typeof a.id === 'string') ITEMS[a.id] = a;
   const RUNTIMES = {}, GRADERS = {}, ENGINES = {};
-  const flags = () => Object.assign({ 'html-app@1': true }, window.NOEMA_CONFIG?.activities || {});
+  // py-module@1 is off until the owner switches it on (staged rollout, docs/adr/001 §4 "Feature flags"): NOEMA_CONFIG.activities['py-module@1'] = true
+  const flags = () => Object.assign({ 'html-app@1': true, 'py-module@1': false }, window.NOEMA_CONFIG?.activities || {});
+  /** a runtime that is registered, switched on and can run here (available(): py-module@1 only on the website, never file:// or the one-file bundle) */
+  const enabled = id => !!(Object.prototype.hasOwnProperty.call(RUNTIMES, id) && flags()[id] !== false && (typeof RUNTIMES[id].available !== 'function' || RUNTIMES[id].available()));
   /** the capabilities of this app (pack.requires): the core + every runtime that is registered and switched on */
-  const caps = () => new Set(['activities/v1', ...Object.keys(RUNTIMES).filter(id => flags()[id] !== false).map(id => 'runtime:' + id), ...Object.keys(ENGINES).map(id => 'engine:' + id)]);
-  const canRun = a => !!(a && RUNTIMES[a.runtime] && flags()[a.runtime] !== false);
+  const caps = () => new Set(['activities/v1', ...Object.keys(RUNTIMES).filter(enabled).map(id => 'runtime:' + id), ...Object.keys(ENGINES).map(id => 'engine:' + id)]);
+  const canRun = a => !!(a && enabled(a.runtime));
   const LIVE = [];   // the activities running now (at most liveMax())
   const liveMax = () => innerWidth < 720 ? 1 : 2;
   const rnd32 = () => (crypto.getRandomValues(new Uint32Array(1))[0]) >>> 0;
@@ -81,6 +87,8 @@ const ACT = (() => {
     const bg = cs.backgroundColor || '', m = bg.match(/\d+(\.\d+)?/g), lum = m ? (0.2126 * m[0] + 0.7152 * m[1] + 0.0722 * m[2]) / 255 : 1;
     return { tokens: tk, scheme: lum < 0.5 ? 'dark' : 'light', reducedMotion: matchMedia('(prefers-reduced-motion: reduce)').matches, textScale: parseFloat(cs.fontSize) / 16 || 1, dir: document.documentElement.dir || 'ltr' };
   }
+  /** a runtime: { id, version, mount(slot, ctx) → port, autoHeight?, available?() → false where it cannot run (its fallback shows, with unavailable?() as the note),
+      failText?(code) → { text, restart } | null (its own words for a failure code; else the core's) } */
   function registerRuntime(def) { if (def && def.id && typeof def.mount === 'function') RUNTIMES[def.id] = def; }
   function registerGrader(def) { if (def && def.id && typeof def.grade === 'function') GRADERS[def.id] = def; }
   /** an engine of sim-spec@1: { id: 'name@N', check?(spec) → [problems], create(spec, {seed, task}) → { run(inputs) → outputs }, workerSource? }
@@ -151,7 +159,7 @@ const ACT = (() => {
     const btn = (label, onclick, cls = 'btn small') => h('button', { class: cls, type: 'button', onclick }, label);
 
     if (!a) { fallback(tE('engine.act.missing')); return Object.assign(sess, { destroy() { }, grade: () => null }); }
-    if (!canRun(a)) { fallback(tE('engine.act.notHere')); return Object.assign(sess, { destroy() { }, grade: () => null }); }
+    if (!canRun(a)) { const R0 = RUNTIMES[a.runtime], why = R0 && flags()[a.runtime] !== false && typeof R0.unavailable === 'function' ? R0.unavailable() : null; fallback(why || tE('engine.act.notHere')); return Object.assign(sess, { destroy() { }, grade: () => null }); }
 
     let timer = null, pingT = null, io = null, saveT = null;
     function stop(reason, offerRestart = true) {
@@ -195,6 +203,7 @@ const ACT = (() => {
         case 'result': sess.result = { score: p.score, passed: p.passed, detail: p.detail || null, t: Date.now() }; sess.onResult?.(sess.result); return;
         case 'hint:request': { const r = sess.nextHint?.(); sess.port?.send('hint', { text: r || null }, { re: m.id }); return; }
         case 'a11y:announce': live.textContent = ''; setTimeout(() => { live.textContent = p.text; }, 30); return;
+        case 'py:out': case 'py:status': return;   // the Python runtime's own traffic (37_activity_py_ui.js reads it)
         case 'error':
           if (p.code === 'runaway') return stop(tE('engine.act.stopped'));
           note.textContent = tE('engine.act.error', { code: p.code }); console.warn('[noema] activity error', actId, p.code, p.message || ''); return;
@@ -226,8 +235,8 @@ const ACT = (() => {
       try {
         sess.port = RUNTIMES[a.runtime].mount(box, { act: a, init, title: tE('engine.act.frameTitle', { id: a.id }),
           onMessage: raw => { const r = ACTP.check(raw); if (r.ok) onMessage(r.msg); else if (r.version) stop(tE('engine.act.newerProtocol'), false); else if (!r.ignore) strike(r.why); },
-          onFail: why => why === 'unsupported' ? stop(tE('engine.act.notHere'), false) : why === 'spec' ? stop(tE('engine.act.failed'), false)
-            : why === 'runaway' ? stop(tE('engine.act.stopped')) : stop(why === 'navigated' ? tE('engine.act.misbehaved') : tE('engine.act.failed')) });
+          onFail: why => { const own = RUNTIMES[a.runtime].failText?.(why); return own ? stop(own.text, !!own.restart) : why === 'unsupported' ? stop(tE('engine.act.notHere'), false) : why === 'spec' ? stop(tE('engine.act.failed'), false)
+            : why === 'runaway' ? stop(tE('engine.act.stopped')) : stop(why === 'navigated' ? tE('engine.act.misbehaved') : tE('engine.act.failed')); } });
       } catch (e) { console.warn('[noema] activity mount failed', e); return stop(tE('engine.act.failed')); }
       if (notice) note.textContent = notice;
       LIVE.push(sess);
@@ -277,7 +286,7 @@ const ACT = (() => {
     if (hidden.length) { c.exercises = keep; c._hidden = (c._hidden || 0) + hidden.length; }
     return hidden;
   }
-  return { ITEMS, mount, sweep, registerRuntime, runtime: id => RUNTIMES[id] || null, registerGrader, registerEngine, engine, engines, caps, canRun, keepRunnable, strings, theme, LIVE };
+  return { ITEMS, mount, sweep, registerRuntime, runtime: id => RUNTIMES[id] || null, enabled, registerGrader, registerEngine, engine, engines, caps, canRun, keepRunnable, strings, theme, LIVE };
 })();
 
 /* the exercises already indexed (10_core.js) that this app cannot run leave the indexes; the pack is unchanged */

@@ -1531,6 +1531,9 @@ const ACTP = (() => {
     'a11y:announce': p => str(p.text, LIM.text) && p.text.trim().length > 0,
     error: p => CODE.test(p.code || '') && (p.message == null || str(p.message, LIM.detail)),
     pong: p => true, ack: p => true, nack: p => true,
+    // py-module@1 (37_activity_py.js): the runner's own messages, checked in full by NoemaPy.protocol before they get here; the core only notes them
+    'py:out': p => (p.outputs == null || isObj(p.outputs)) && (p.error == null || (isObj(p.error) && CODE.test(p.error.code || ''))),
+    'py:status': p => typeof p.phase === 'string' && p.phase.length <= 20,
   };
   /** → { ok: true, msg } | { ok: false, why, ignore? } — ignore: an unknown type (counted, not a strike) */
   function check(data) {
@@ -1558,10 +1561,13 @@ const ACT = (() => {
   const reg = Noema.pack?.activities;
   const ITEMS = {}; for (const a of (reg && Array.isArray(reg.items) ? reg.items : [])) if (a && typeof a.id === 'string') ITEMS[a.id] = a;
   const RUNTIMES = {}, GRADERS = {}, ENGINES = {};
-  const flags = () => Object.assign({ 'html-app@1': true }, window.NOEMA_CONFIG?.activities || {});
+  // py-module@1 is off until the owner switches it on (staged rollout, docs/adr/001 §4 "Feature flags"): NOEMA_CONFIG.activities['py-module@1'] = true
+  const flags = () => Object.assign({ 'html-app@1': true, 'py-module@1': false }, window.NOEMA_CONFIG?.activities || {});
+  /** a runtime that is registered, switched on and can run here (available(): py-module@1 only on the website, never file:// or the one-file bundle) */
+  const enabled = id => !!(Object.prototype.hasOwnProperty.call(RUNTIMES, id) && flags()[id] !== false && (typeof RUNTIMES[id].available !== 'function' || RUNTIMES[id].available()));
   /** the capabilities of this app (pack.requires): the core + every runtime that is registered and switched on */
-  const caps = () => new Set(['activities/v1', ...Object.keys(RUNTIMES).filter(id => flags()[id] !== false).map(id => 'runtime:' + id), ...Object.keys(ENGINES).map(id => 'engine:' + id)]);
-  const canRun = a => !!(a && RUNTIMES[a.runtime] && flags()[a.runtime] !== false);
+  const caps = () => new Set(['activities/v1', ...Object.keys(RUNTIMES).filter(enabled).map(id => 'runtime:' + id), ...Object.keys(ENGINES).map(id => 'engine:' + id)]);
+  const canRun = a => !!(a && enabled(a.runtime));
   const LIVE = [];   // the activities running now (at most liveMax())
   const liveMax = () => innerWidth < 720 ? 1 : 2;
   const rnd32 = () => (crypto.getRandomValues(new Uint32Array(1))[0]) >>> 0;
@@ -1581,6 +1587,8 @@ const ACT = (() => {
     const bg = cs.backgroundColor || '', m = bg.match(/\d+(\.\d+)?/g), lum = m ? (0.2126 * m[0] + 0.7152 * m[1] + 0.0722 * m[2]) / 255 : 1;
     return { tokens: tk, scheme: lum < 0.5 ? 'dark' : 'light', reducedMotion: matchMedia('(prefers-reduced-motion: reduce)').matches, textScale: parseFloat(cs.fontSize) / 16 || 1, dir: document.documentElement.dir || 'ltr' };
   }
+  /** a runtime: { id, version, mount(slot, ctx) → port, autoHeight?, available?() → false where it cannot run (its fallback shows, with unavailable?() as the note),
+      failText?(code) → { text, restart } | null (its own words for a failure code; else the core's) } */
   function registerRuntime(def) { if (def && def.id && typeof def.mount === 'function') RUNTIMES[def.id] = def; }
   function registerGrader(def) { if (def && def.id && typeof def.grade === 'function') GRADERS[def.id] = def; }
   /** an engine of sim-spec@1: { id: 'name@N', check?(spec) → [problems], create(spec, {seed, task}) → { run(inputs) → outputs }, workerSource? }
@@ -1651,7 +1659,7 @@ const ACT = (() => {
     const btn = (label, onclick, cls = 'btn small') => h('button', { class: cls, type: 'button', onclick }, label);
 
     if (!a) { fallback(tE('engine.act.missing')); return Object.assign(sess, { destroy() { }, grade: () => null }); }
-    if (!canRun(a)) { fallback(tE('engine.act.notHere')); return Object.assign(sess, { destroy() { }, grade: () => null }); }
+    if (!canRun(a)) { const R0 = RUNTIMES[a.runtime], why = R0 && flags()[a.runtime] !== false && typeof R0.unavailable === 'function' ? R0.unavailable() : null; fallback(why || tE('engine.act.notHere')); return Object.assign(sess, { destroy() { }, grade: () => null }); }
 
     let timer = null, pingT = null, io = null, saveT = null;
     function stop(reason, offerRestart = true) {
@@ -1695,6 +1703,7 @@ const ACT = (() => {
         case 'result': sess.result = { score: p.score, passed: p.passed, detail: p.detail || null, t: Date.now() }; sess.onResult?.(sess.result); return;
         case 'hint:request': { const r = sess.nextHint?.(); sess.port?.send('hint', { text: r || null }, { re: m.id }); return; }
         case 'a11y:announce': live.textContent = ''; setTimeout(() => { live.textContent = p.text; }, 30); return;
+        case 'py:out': case 'py:status': return;   // the Python runtime's own traffic (37_activity_py_ui.js reads it)
         case 'error':
           if (p.code === 'runaway') return stop(tE('engine.act.stopped'));
           note.textContent = tE('engine.act.error', { code: p.code }); console.warn('[noema] activity error', actId, p.code, p.message || ''); return;
@@ -1726,8 +1735,8 @@ const ACT = (() => {
       try {
         sess.port = RUNTIMES[a.runtime].mount(box, { act: a, init, title: tE('engine.act.frameTitle', { id: a.id }),
           onMessage: raw => { const r = ACTP.check(raw); if (r.ok) onMessage(r.msg); else if (r.version) stop(tE('engine.act.newerProtocol'), false); else if (!r.ignore) strike(r.why); },
-          onFail: why => why === 'unsupported' ? stop(tE('engine.act.notHere'), false) : why === 'spec' ? stop(tE('engine.act.failed'), false)
-            : why === 'runaway' ? stop(tE('engine.act.stopped')) : stop(why === 'navigated' ? tE('engine.act.misbehaved') : tE('engine.act.failed')) });
+          onFail: why => { const own = RUNTIMES[a.runtime].failText?.(why); return own ? stop(own.text, !!own.restart) : why === 'unsupported' ? stop(tE('engine.act.notHere'), false) : why === 'spec' ? stop(tE('engine.act.failed'), false)
+            : why === 'runaway' ? stop(tE('engine.act.stopped')) : stop(why === 'navigated' ? tE('engine.act.misbehaved') : tE('engine.act.failed')); } });
       } catch (e) { console.warn('[noema] activity mount failed', e); return stop(tE('engine.act.failed')); }
       if (notice) note.textContent = notice;
       LIVE.push(sess);
@@ -1777,7 +1786,7 @@ const ACT = (() => {
     if (hidden.length) { c.exercises = keep; c._hidden = (c._hidden || 0) + hidden.length; }
     return hidden;
   }
-  return { ITEMS, mount, sweep, registerRuntime, runtime: id => RUNTIMES[id] || null, registerGrader, registerEngine, engine, engines, caps, canRun, keepRunnable, strings, theme, LIVE };
+  return { ITEMS, mount, sweep, registerRuntime, runtime: id => RUNTIMES[id] || null, enabled, registerGrader, registerEngine, engine, engines, caps, canRun, keepRunnable, strings, theme, LIVE };
 })();
 
 /* the exercises already indexed (10_core.js) that this app cannot run leave the indexes; the pack is unchanged */
@@ -1828,7 +1837,7 @@ R.sim = (ex, api) => {
   return {
     el,
     check() { const g = sess.grade?.(); if (!g) return null; if (Array.isArray(g.checks)) showChecks(g.checks); sess.saveAttempt?.(); return g.ok; },
-    reveal() { if (hintBtn) hintBtn.disabled = true; if (sess.result?.passed && ex.reveal) el.append(h('div', { class: 'explain' }, h('div', { html: fmt(ex.reveal) }))); },
+    reveal() { if (hintBtn) hintBtn.disabled = true; try { sess.port?.reveal?.(); } catch (e) { } if (sess.result?.passed && ex.reveal) el.append(h('div', { class: 'explain' }, h('div', { html: fmt(ex.reveal) }))); },
     bonus: () => -Math.round((4 + (ex.difficulty || 1) * 4) * (1 - Math.max(0.5, Math.pow(0.85, used)))),   // each hint used: score × 0.85, never below × 0.5 (docs/adr/001 D8)
     given: () => sess.result ? `(the activity reported: ${sess.result.passed ? 'passed' : 'not passed'}, score ${sess.result.score}${sess.result.detail ? ', ' + sess.result.detail : ''})` : '',   // i18n-ignore (AI context)
   };
@@ -2146,37 +2155,49 @@ APP.postMessage({t:'hello',nonce:N},'*');
   /* ---------- engines ---------- */
   ACT.registerEngine({ id: 'formula@1', check: () => [], create: () => ({ run: () => ({}) }) });   // the derived values are the model
 
-  /** An engine instance behind one async interface: inline, or in a Worker when the engine has workerSource. */
+  /** An engine instance behind one async interface: inline, or in a Worker when the engine has workerSource.
+      run(inputs, done): the outputs (a newer run waiting replaces an older one: the latest inputs win);
+      measure(inputs, probe, done): one reading of a bench's instrument (queued, never dropped). One job at a time, each ≤ 5 s. */
   function engineRunner(E, spec, opts, onFail) {
-    let worker = null, url = null, inst = null, busy = null, next = null, timer = null, dead = false;
+    let worker = null, url = null, inst = null, busy = null, timer = null, dead = false;
+    const queue = [];
     if (E.workerSource && typeof Worker === 'function') {
       try {
-        const bridge = "self.onmessage=function(e){var m=e.data;try{if(m.t==='create'){self.__i=self.noemaEngine.create(m.spec,m.opts);return;}var i=self.__i,r=(i.run||i.step).call(i,m.inputs);postMessage({t:'out',id:m.id,out:r});}catch(x){postMessage({t:'err',id:m.id,msg:String(x&&x.message||x)});}};";
+        const bridge = "self.onmessage=function(e){var m=e.data;try{if(m.t==='create'){self.__i=self.noemaEngine.create(m.spec,m.opts);return;}var i=self.__i,r=m.t==='measure'?i.measure(m.inputs,m.probe):(i.run||i.step).call(i,m.inputs);postMessage({t:'out',id:m.id,out:r});}catch(x){postMessage({t:'err',id:m.id,msg:String(x&&x.message||x)});}};";
         url = URL.createObjectURL(new Blob([E.workerSource + '\n;' + bridge], { type: 'text/javascript' }));
         worker = new Worker(url);
+        worker.onmessage = e => { const m = e.data; if (!busy || !m || m.id !== busy.id) return; const d = busy.done; finish(); if (m.t === 'err') console.warn('[noema] sim-spec engine', E.id, m.msg); d(m.t === 'out' ? m.out : null); };
+        worker.onerror = e => { e.preventDefault?.(); console.warn('[noema] sim-spec engine worker', E.id, e.message); const d = busy?.done; finish(); d?.(null); };
         worker.postMessage({ t: 'create', spec, opts });
       } catch (e) { console.warn('[noema] sim-spec: no worker here, the engine runs inline', e); worker = null; }
     }
     if (!worker) inst = E.create(spec, opts);
-    function finish() { clearTimeout(timer); busy = null; if (next) { const n = next; next = null; run(n.inputs, n.done); } }
-    function run(inputs, done) {
-      if (dead) return;
+    function finish() { clearTimeout(timer); busy = null; pump(); }
+    function pump() {
+      if (dead || busy || !queue.length) return;
+      const job = queue.shift();
       if (!worker) {
         const t0 = performance.now(); let out = null;
-        try { out = (inst.run || inst.step).call(inst, inputs); } catch (e) { console.warn('[noema] sim-spec engine', E.id, e); }
+        try { out = job.t === 'measure' ? inst.measure(job.inputs, job.probe) : (inst.run || inst.step).call(inst, job.inputs); } catch (e) { console.warn('[noema] sim-spec engine', E.id, e); }
         const ms = performance.now() - t0; if (ms > 50) console.warn(`[noema] sim-spec: engine ${E.id} took ${Math.round(ms)} ms inline; give it a workerSource`);
-        return done(out);
+        job.done(out); return pump();
       }
-      if (busy) { next = { inputs, done }; return; }   // the latest inputs win
-      busy = { id: ++seq, done };
+      busy = { id: ++seq, done: job.done };
       timer = setTimeout(() => { if (!busy) return; dead = true; close(); onFail('runaway'); }, RUN_TIMEOUT);
-      worker.onmessage = e => { const m = e.data; if (!busy || !m || m.id !== busy.id) return; const d = busy.done; finish(); d(m.t === 'out' ? m.out : null); if (m.t === 'err') console.warn('[noema] sim-spec engine', E.id, m.msg); };
-      worker.onerror = e => { e.preventDefault?.(); console.warn('[noema] sim-spec engine worker', E.id, e.message); const d = busy?.done; finish(); d?.(null); };
-      worker.postMessage({ t: 'run', id: busy.id, inputs });
+      worker.postMessage({ t: job.t, id: busy.id, inputs: job.inputs, probe: job.probe });
     }
-    function close() { dead = true; clearTimeout(timer); try { worker?.terminate(); } catch (e) { } if (url) URL.revokeObjectURL(url); worker = null; }
-    return { run, close, inWorker: () => !!worker };
+    function run(inputs, done) {
+      if (dead) return;
+      const i = queue.findIndex(j => j.t === 'run');   // the latest inputs win
+      if (i >= 0) queue[i] = { t: 'run', inputs, done }; else queue.push({ t: 'run', inputs, done });
+      pump();
+    }
+    function measure(inputs, probe, done) { if (dead) return; queue.push({ t: 'measure', inputs, probe, done }); pump(); }
+    function close() { dead = true; clearTimeout(timer); queue.length = 0; try { worker?.terminate(); } catch (e) { } if (url) URL.revokeObjectURL(url); worker = null; }
+    return { run, measure, close, inWorker: () => !!worker };
   }
+  /** a seeded pick: the same seed draws the same item (mulberry32) */
+  function seededIndex(seed, n) { let a = (seed ^ 0x9E3779B9) >>> 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return Math.floor(((t ^ t >>> 14) >>> 0) / 4294967296 * n); }
 
   /* ---------- plots: SVG drawn by the app, coloured by the theme's tokens ---------- */
   function niceTicks(lo, hi, n) {
@@ -2243,19 +2264,22 @@ APP.postMessage({t:'hello',nonce:N},'*');
     return s;
   }
 
-  ACT.registerRuntime({
-    id: 'sim-spec@1', version: 1, autoHeight: true,
-    /** → port { send(type, payload), close(), values() } */
-    mount(box, { act, init, onMessage, onFail }) {
+  /** The spec view: controls, readouts, plots (and a bench) drawn by the app from a spec. → port { send(type, payload), close(), values(), reveal(), saveSoon() }
+      host (optional, py-module@1 in 37_activity_py_ui.js): another runtime that computes the outputs itself —
+        { engine: { id }, check: { python: true } (the options of checkSimSpec), runner(spec, opts, onFail) → { run(inputs, done), measure?, close },
+          stateExtra() → fields saved beside the values, decorate(root) → adds its own lines to the view }
+      Without host the outputs come from the spec's engine (ACT.registerEngine). */
+  function simView(box, { act, init, onMessage, onFail }, host) {
       const later = f => Promise.resolve().then(f);   // never call back before the core holds the port
       const out = (type, payload) => { if (!closed) onMessage(ACTP.out(type, payload)); };
       let closed = false;
       const port = { send() { }, close() { closed = true; }, values: () => null };
       const spec = act.spec, tables = act.strings && typeof act.strings === 'object' ? act.strings : null;
-      const engId = spec && typeof spec === 'object' && 'engine' in spec ? spec.engine : 'formula@1';
-      const E = typeof engId === 'string' ? ACT.engine(engId) : null;
+      const engId = host ? host.engine.id : spec && typeof spec === 'object' && 'engine' in spec ? spec.engine : 'formula@1';
+      const E = host ? host.engine : typeof engId === 'string' ? ACT.engine(engId) : null;
       if (!E) { console.warn('[noema] sim-spec', act.id, 'unknown engine', engId); later(() => onFail('unsupported')); return port; }
-      const probs = window.NoemaPackCheck?.checkSimSpec ? NoemaPackCheck.checkSimSpec(spec, tables, ACT.engines()) : ['the spec checker is not loaded'];
+      if (spec && spec.bench && !E.bench) { console.warn('[noema] sim-spec', act.id, 'engine', engId, 'takes no measurements'); later(() => onFail('unsupported')); return port; }
+      const probs = window.NoemaPackCheck?.checkSimSpec ? NoemaPackCheck.checkSimSpec(spec, tables, host ? null : ACT.engines(), host ? host.check : undefined) : ['the spec checker is not loaded'];
       if (!probs.length && E.check) try { probs.push(...(E.check(spec) || [])); } catch (e) { probs.push(String(e.message || e)); }
       if (probs.length) { console.warn('[noema] sim-spec', act.id, probs.slice(0, 5).join(' | ')); later(() => onFail('spec')); return port; }
 
@@ -2343,13 +2367,181 @@ APP.postMessage({t:'hello',nonce:N},'*');
       });
       const busyNote = h('div', { class: 'sim-busy', 'aria-hidden': 'true' });
       const reset = h('button', { class: 'btn ghost small', type: 'button', onclick: () => { for (const p of params) { vals[p.id] = def(p); paint(p); } out('event', { name: 'reset' }); recompute(); saveSoon(); } }, '↺ ' + tE('engine.act.sim.reset'));
+      const B = spec.bench ? makeBench() : null;   // a fault-finding bench (§12.7): instruments, the measurement log, the diagnosis
+      if (B) root.append(B.el);
       root.append(h('div', { class: 'sim-foot' }, busyNote, reset));
+      host?.decorate?.(root);
       box.append(root);
 
       /* ---------- computing ---------- */
       let env = {}, outputs = {}, paused = false, dirty = false, saveT = null, raf = 0, rev = 0, doneRev = 0;
-      const runner = E.id === 'formula@1' ? null : engineRunner(E, spec, { seed: init.seed >>> 0, task: { ...consts } }, why => onFail(why));
+      const prep = typeof E.prepare === 'function' ? E.prepare(spec, C) : (x => x);   // the engine's expressions → numbers, on this thread
+      const newRunner = () => E.id === 'formula@1' ? null : (host ? host.runner : engineRunner)(E, spec, { seed: init.seed >>> 0, task: { ...consts }, faults: B ? B.applied() : undefined }, why => onFail(why));
+      let runner = newRunner();
       const declared = spec.outputs || [];
+
+      /* ---------- the bench: the hidden fault lives only in this closure and in the engine (never in the page, the state or a label) ---------- */
+      function makeBench() {
+        const bn = spec.bench, exMode = !!init.exerciseId, opts = bn.diagnosis.options, budget = bn.budget || 0;
+        const savedB = !exMode && init.state?.data?.bench && typeof init.state.data.bench === 'object' ? init.state.data.bench : null;
+        let seed = isNum(savedB?.seed) ? savedB.seed >>> 0 : init.seed >>> 0, fault = 0, dx = null, done = false, count = 0, face = null;
+        const log = [];
+        function pick() {
+          const ids = bn.faults.map(f => f.id), tf = init.task?.fault;
+          const pool = typeof tf === 'string' && ids.includes(tf) ? [tf] : Array.isArray(tf) && tf.some(x => ids.includes(x)) ? tf.filter(x => ids.includes(x)) : ids;
+          fault = ids.indexOf(pool[seededIndex(seed, pool.length)]);
+        }
+        pick();
+        const pt = id => bn.points.find(p => p.id === id);
+        const instName = k => tE('engine.act.bench.inst.' + k);
+        const sel = (cls, label, items) => {   // a labelled select: items [{value, text}]
+          const id = uid + 'b-' + cls, s = h('select', { id, class: 'sim-sel', 'data-bench': cls }, items.map(o => h('option', { value: o.value }, o.text)));
+          return { s, row: h('div', { class: 'sim-p sim-bsel' }, h('label', { for: id, class: 'sim-lab' }, label), s) };
+        };
+        const inst = sel('instrument', tE('engine.act.bench.instrument'), bn.instruments.map(x => ({ value: x.kind, text: instName(x.kind) })));
+        const lab = new Map();   // the label element of each lead select (its words change with the instrument)
+        const ptItems = ids => ids.map(id => ({ value: id, text: tt(pt(id).label) }));
+        const A = sel('a', tE('engine.act.bench.red'), []), Bk = sel('b', tE('engine.act.bench.black'), []);
+        lab.set(A.s, A.row.querySelector('label'));
+        const part = sel('part', tE('engine.act.bench.part'), []);
+        const btn = h('button', { class: 'btn primary small', type: 'button', 'data-bench': 'measure', onclick: () => measure() }, tE('engine.act.bench.measure'));
+        const left = h('span', { class: 'sim-left', 'aria-live': 'polite' });
+        const faceEl = h('div', { class: 'sim-face', 'aria-live': 'polite' });
+        const logEl = h('ol', { class: 'sim-log' }), logEmpty = h('p', { class: 'sim-log-empty' }, tE('engine.act.bench.logEmpty'));
+        const dxSel = sel('diagnosis', bn.diagnosis.label ? tt(bn.diagnosis.label) : tE('engine.act.bench.diagnosis'), [{ value: '', text: tE('engine.act.bench.choose') }, ...opts.map((o, i) => ({ value: String(i), text: tt(o.label) }))]);
+        const dxBtn = exMode ? null : h('button', { class: 'btn small', type: 'button', 'data-bench': 'commit', onclick: () => { if (dx != null && !done) { reveal(); saveSoon(); } } }, tE('engine.act.bench.commit'));
+        const dxOut = h('p', { class: 'sim-dx-out', 'aria-live': 'polite' });
+        const another = exMode ? null : h('button', { class: 'btn ghost small', type: 'button', 'data-bench': 'another', onclick: () => newDevice() }, '↻ ' + tE('engine.act.bench.another'));
+        const cur = () => bn.instruments.find(x => x.kind === inst.s.value) || bn.instruments[0];
+        function setInstrument() {
+          const x = cur(), two = x.kind === 'V' || x.kind === 'R', ids = x.points || bn.points.map(p => p.id);
+          const keep = (s, items, fallback) => { const v = s.value; s.replaceChildren(...items.map(o => h('option', { value: o.value }, o.text))); s.value = items.some(o => o.value === v) ? v : fallback; };
+          if (x.kind === 'I') keep(part.s, (x.parts || []).map((q, i) => ({ value: String(i), text: tt(q.label) })), '0');
+          else {
+            const g = ids.find(id => /^(gnd|0)$/.test(String(pt(id).at))) || ids[ids.length - 1];
+            keep(A.s, ptItems(ids), ids.find(id => id !== g) || ids[0]);
+            if (two) keep(Bk.s, ptItems(ids), g);
+          }
+          lab.get(A.s).textContent = two ? tE('engine.act.bench.red') : tE('engine.act.bench.probe');
+          A.row.hidden = x.kind === 'I'; Bk.row.hidden = !two; part.row.hidden = x.kind !== 'I';
+        }
+        inst.s.addEventListener('change', setInstrument);
+        dxSel.s.addEventListener('change', () => {
+          if (done) return;
+          dx = dxSel.s.value === '' ? null : +dxSel.s.value;
+          if (dx != null) out('event', { name: 'diagnose', data: { option: dx } });
+          saveSoon();
+        });
+        const tval = (v, d) => { const g = typeof v === 'string' ? C(v) : null; return g ? ev(g, base()) : (v === undefined ? d : v); };
+        function probeOf(x) {
+          if (x.kind === 'I') { const q = x.parts[+part.s.value] || x.parts[0]; return { probe: { kind: 'I', element: q.element, ...(q.pin !== undefined ? { pin: q.pin } : {}) }, ev: { i: 'I', part: +part.s.value } }; }
+          const a = pt(A.s.value), b = Bk.s.value ? pt(Bk.s.value) : null;
+          if (x.kind === 'V' || x.kind === 'R') return { probe: { kind: x.kind, a: a.at, b: b ? b.at : 'gnd' }, ev: { i: x.kind, a: a.id, b: b?.id } };
+          const tw = { tEnd: tval(x.tEnd), ...(x.dt !== undefined ? { dt: tval(x.dt) } : {}), ...(x.tStart !== undefined ? { tStart: tval(x.tStart) } : {}) };
+          if (x.kind === 'scope') return { probe: { kind: 'scope', node: a.at, ref: 'gnd', ...tw }, ev: { i: 'scope', a: a.id } };
+          return { probe: { kind: 'logic', nodes: [a.at], ...(x.threshold !== undefined ? { threshold: tval(x.threshold) } : {}), ...tw }, ev: { i: 'logic', a: a.id }, node: a.at };
+        }
+        function paintLeft() {
+          left.textContent = budget ? tE('engine.act.bench.left', { left: Math.max(0, budget - count) }) : '';
+          btn.disabled = done || (budget && count >= budget);
+          for (const s of [inst.s, A.s, Bk.s, part.s, dxSel.s]) s.disabled = done;
+          if (dxBtn) dxBtn.disabled = done;
+        }
+        const fm = (v, unit) => fmtNum(v, { format: 'si', unit, digits: 3 }, locale);
+        function reading(r) {   // the reading in words and numbers (never the fault)
+          if (!r || r.error) return tE('engine.act.bench.failed');
+          if (r.kind === 'V') return fm(r.value, 'V');
+          if (r.kind === 'I') return fm(r.value, 'A');
+          if (r.kind === 'R') return r.value === 'OL' ? 'OL' : fm(r.value, 'Ω');   // i18n-ignore (the meter's own display)
+          if (r.kind === 'scope') return tE('engine.act.bench.scopeStats', { pp: fm(r.stats.pp, 'V'), mean: fm(r.stats.mean, 'V'), freq: r.stats.freq > 0 ? fm(r.stats.freq, 'Hz') : '—' });
+          const st = Object.values(r.traces || {})[0]?.stats || {};
+          return tE('engine.act.bench.logicStats', { freq: st.freq > 0 ? fm(st.freq, 'Hz') : '—', duty: fmtNum(100 * (st.duty || 0), { format: 'fixed', digits: 0, unit: '%' }, locale) });
+        }
+        /** a reading as it is kept in the saved state: the numbers the log shows, not the traces */
+        function slim(r) {
+          if (!r || typeof r !== 'object') return r;
+          if (r.kind === 'scope') return { kind: 'scope', stats: r.stats };
+          if (r.kind === 'logic') return { kind: 'logic', traces: Object.fromEntries(Object.entries(r.traces || {}).map(([k, v]) => [k, { stats: v.stats }])) };
+          return r;
+        }
+        function where(e) {
+          if (e.i === 'I') return tt(bn.instruments.find(x => x.kind === 'I')?.parts?.[e.part]?.label);
+          const a = pt(e.a), b = e.b ? pt(e.b) : null;
+          return a ? tt(a.label) + (b ? ' → ' + tt(b.label) : '') : '';
+        }
+        function paintLog() {
+          logEl.replaceChildren(...log.map(e => h('li', {}, h('span', { class: 'sim-log-i' }, instName(e.i)), ' ' + where(e) + ': ', h('b', {}, e.r === undefined ? '…' : reading(e.r)))));
+          logEmpty.hidden = log.length > 0;
+        }
+        function showFace(e) {
+          const r = e.r; faceEl.replaceChildren();
+          if (!r || r.error || r.kind === 'V' || r.kind === 'I' || r.kind === 'R') { faceEl.append(h('div', { class: 'sim-meter' }, h('span', { class: 'sim-meter-i' }, instName(e.i)), h('output', { class: 'sim-meter-v' }, reading(r)))); return; }
+          const fig = h('figure', { class: 'sim-plot sim-scope' }); faceEl.append(fig);
+          const xl = tE('engine.act.bench.time') + ' (s)';
+          let p, data, yl;
+          if (r.kind === 'scope') {
+            yl = tE('engine.act.bench.voltage') + ' (V)';
+            p = { x: { label: 'x', unit: 's', format: 'si' }, y: { label: 'y', unit: 'V' } };
+            data = { xs: r.t, lines: [{ ys: r.v }], marks: [], xr: [r.t[0], r.t[r.t.length - 1]], yr: [null, null] };
+          } else {   // a logic trace: steps from the level at the start and the edges
+            const tr = Object.values(r.traces)[0] || { level0: 0, edges: [] }, xs = [r.t0], ys = [tr.level0];
+            for (const ed of tr.edges) { xs.push(ed.t, ed.t); ys.push(ys[ys.length - 1], ed.to); }
+            xs.push(r.t1); ys.push(ys[ys.length - 1]);
+            yl = tE('engine.act.bench.level');
+            p = { x: { label: 'x', unit: 's', format: 'si' }, y: { label: 'y', digits: 1 } };
+            data = { xs, lines: [{ ys }], marks: [], xr: [r.t0, r.t1], yr: [-0.15, 1.15] };
+          }
+          const aria = instName(e.i) + ', ' + where(e) + ': ' + reading(r);
+          const holder = h('div', { class: 'sim-svg' }); fig.append(h('figcaption', {}, aria), holder);
+          const draw = () => { if (holder.isConnected) holder.replaceChildren(drawPlot(holder, p, data, { locale, aria, xLabel: xl, yLabel: yl })); };
+          requestAnimationFrame(draw); face = draw;
+        }
+        function measure() {
+          if (done || (budget && count >= budget) || !runner) return;
+          const x = cur(), m = probeOf(x), e = { ...m.ev };
+          count++; log.push(e); paintLog(); paintLeft();
+          out('event', { name: 'measure', data: { ...m.ev } });
+          runner.measure(prep(base()), m.probe, r => {
+            if (closed) return;
+            e.r = r && typeof r === 'object' ? (r.kind === 'scope' || r.kind === 'logic' ? r : { kind: r.kind, value: r.value, error: r.error }) : { error: 'none' };
+            paintLog(); showFace(e); saveSoon();
+          });
+        }
+        /** after the diagnosis: lock the bench and say what the fault was (the only time the page learns it) */
+        function reveal() {
+          if (done) return; done = true;
+          const right = dx != null && opts[dx]?.fault === bn.faults[fault].id, truth = opts.find(o => o.fault === bn.faults[fault].id);
+          dxOut.className = 'sim-dx-out ' + (right ? 'ok' : 'bad');
+          dxOut.textContent = right ? tE('engine.act.bench.right', { fault: tt(opts[dx].label) }) : tE('engine.act.bench.wrong', { fault: truth ? tt(truth.label) : '—' });
+          paintLeft();
+        }
+        function newDevice() {
+          seed = crypto.getRandomValues(new Uint32Array(1))[0] >>> 0; pick();
+          log.length = 0; count = 0; dx = null; done = false; dxSel.s.value = ''; dxOut.textContent = ''; dxOut.className = 'sim-dx-out'; faceEl.replaceChildren();
+          runner?.close(); runner = newRunner(); out('event', { name: 'reset' });
+          paintLog(); paintLeft(); recompute(); saveSoon();
+        }
+        if (savedB) {   // an explorer's bench comes back: the same device (seed), its log, the diagnosis
+          for (const e of Array.isArray(savedB.log) ? savedB.log.slice(0, 200) : []) if (e && typeof e === 'object' && typeof e.i === 'string') log.push(e);
+          count = log.length;
+          if (Number.isInteger(savedB.dx) && savedB.dx >= 0 && savedB.dx < opts.length) { dx = savedB.dx; dxSel.s.value = String(dx); }
+        }
+        setInstrument(); paintLog(); paintLeft();
+        if (savedB && savedB.done && dx != null) reveal();
+        const ctl = h('div', { class: 'sim-bctl' }, inst.row, A.row, Bk.row, part.row, h('div', { class: 'sim-brow' }, btn, left));
+        const el = h('section', { class: 'sim-bench' },
+          h('div', { class: 'sim-binst' }, ctl, faceEl),
+          h('h5', { class: 'sim-bh' }, tE('engine.act.bench.log')), logEmpty, logEl,
+          h('div', { class: 'sim-dx' }, dxSel.row, h('div', { class: 'sim-brow' }, dxBtn, another), dxOut));
+        return {
+          el, reveal, redraw: () => face?.(),
+          applied: () => JSON.parse(JSON.stringify(bn.faults[fault].apply || [])),
+          /** the bench's values for the checks grader: never shown (the validators keep them out of readouts and marks) */
+          values: () => ({ diagnosis: dx == null ? -1 : dx, measurements: count, correct: dx != null && opts[dx]?.fault === bn.faults[fault].id }),
+          ready: () => dx != null,
+          state: () => exMode ? undefined : { seed, log: log.map(e => ({ ...e, r: slim(e.r) })), dx, done },
+        };
+      }
       function cleanOutputs(o) {
         const r = {};
         for (const d of declared) {
@@ -2371,7 +2563,7 @@ APP.postMessage({t:'hello',nonce:N},'*');
         const e = base(), my = ++rev;   // values() is null until the latest inputs are computed (Check never grades older results)
         if (!runner) { env = e; doneRev = my; render(); return; }
         busyNote.textContent = tE('engine.act.sim.computing');
-        runner.run(e, o => { if (closed) return; outputs = cleanOutputs(o); for (const d of declared) if (d.kind === 'scalar') e[d.id] = outputs[d.id]; env = e; if (my === rev) { doneRev = my; busyNote.textContent = ''; } render(); });
+        runner.run(prep(e), o => { if (closed) return; outputs = cleanOutputs(o); for (const d of declared) if (d.kind === 'scalar') e[d.id] = outputs[d.id]; env = e; if (my === rev) { doneRev = my; busyNote.textContent = ''; } render(); });
       }
       function render() {
         readouts.forEach((r, i) => { roEls[i].textContent = fmtNum(ev(r.f, env), r, locale); });
@@ -2392,12 +2584,12 @@ APP.postMessage({t:'hello',nonce:N},'*');
           P.holder.replaceChildren(drawPlot(figs[i], p, data, { locale, aria: P.aria, xLabel: P.xLabel, yLabel: P.yLabel }));
         });
       }
-      function saveSoon() { clearTimeout(saveT); saveT = setTimeout(() => out('state', { version: init.stateVersion || 1, data: { values: { ...vals } } }), 250); }
+      function saveSoon() { clearTimeout(saveT); saveT = setTimeout(() => { const bs = B?.state(); out('state', { version: init.stateVersion || 1, data: { values: { ...vals }, ...(bs ? { bench: bs } : {}), ...(host?.stateExtra?.() || {}) } }); }, 250); }
       function changed(p, commit) {
         recompute(); saveSoon();
         if (commit) out('event', { name: 'param', data: { id: p.id, v: vals[p.id] } });
       }
-      const ro2 = typeof ResizeObserver === 'function' ? new ResizeObserver(() => { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => { if (!closed && !paused) plots.forEach((P, i) => P.last && P.holder.replaceChildren(drawPlot(figs[i], P.p, P.last, { locale, aria: P.aria, xLabel: P.xLabel, yLabel: P.yLabel }))); }); }) : null;
+      const ro2 = typeof ResizeObserver === 'function' ? new ResizeObserver(() => { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => { if (!closed && !paused) { plots.forEach((P, i) => P.last && P.holder.replaceChildren(drawPlot(figs[i], P.p, P.last, { locale, aria: P.aria, xLabel: P.xLabel, yLabel: P.yLabel }))); B?.redraw(); } }); }) : null;
       ro2?.observe(root);
       for (const p of params) paint(p);
       recompute();
@@ -2410,11 +2602,15 @@ APP.postMessage({t:'hello',nonce:N},'*');
         if (type === 'destroy') return port.close();
       };
       port.close = () => { if (closed) return; closed = true; clearTimeout(saveT); cancelAnimationFrame(raf); ro2?.disconnect(); runner?.close(); root.remove(); };
-      port.values = () => closed || doneRev !== rev ? null : { ...env };
+      // what the checks grader reads: the values once the latest inputs are computed (and a bench's own, once a diagnosis is chosen: before that Check waits)
+      port.values = () => closed || doneRev !== rev ? null : B ? (B.ready() ? { ...env, ...B.values() } : null) : { ...env };
+      port.reveal = () => { if (!closed) B?.reveal(); };   // after Check: the bench says what the fault was
+      port.saveSoon = saveSoon;
       later(() => out('ready', { protocols: [1] }));
       return port;
-    },
-  });
+  }
+  ACT.registerRuntime({ id: 'sim-spec@1', version: 1, autoHeight: true, mount: (box, ctx) => simView(box, ctx) });
+  ACT.simView = simView;   // the same view for runtimes that compute the outputs themselves (py-module@1)
   /* i18n-ignore-end */
 })();
 
@@ -4083,6 +4279,1575 @@ function visualAsText(ex) {
 }
 function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions(b, m).filter(r => r.label && !/-area$/.test(r.id)); return `[FIGURE] ${m.alt || b.media}${(b.caption || m.caption) ? ' — ' + (b.caption || m.caption) : ''}${regs.length ? '\nParts: ' + regs.map(r => r.label + (r.note ? ': ' + r.note : '')).join('; ') : ''}`; }
 /* i18n-ignore-end */
+
+/* ---- 36_engine_circuit.js ---- */
+/* ===================== interactive activities — the circuit engine circuit-mna@1 (docs/INTERACTIVE_CIRCUIT.md, docs/adr/001 P3) =====================
+   A small, deterministic circuit simulator for the electronics benches of tier B (sim-spec@1): RC/RLC transients, filters, PWM and
+   fault-finding benches (a virtual device with a hidden fault; the learner measures, then diagnoses). Pure JS, no DOM, no text for the
+   learner: it gives codes and numbers only, the activity host words them.
+   How: Modified Nodal Analysis (node voltages + the currents of voltage-defined branches), a dense LU with partial pivoting (circuits
+   are small: at most 60 nodes), Newton–Raphson with junction limiting, gmin stepping and source stepping for the nonlinear parts,
+   trapezoidal integration with a backward-Euler step at the start and on every step that holds a source discontinuity.
+   The netlist (noema.circuit/v1) is described in docs/INTERACTIVE_CIRCUIT.md and tools/schemas/noema.circuit.v1.schema.json.
+   Also used by tests/circuit.js (node). */
+(function noemaCircuitModule(root) {
+  /* i18n-ignore-start */   // code, not text: only codes and numbers leave this engine
+  'use strict';
+  const ID = 'circuit-mna@1', FORMAT = 'noema.circuit/v1';
+  const MAX_NODES = 60, MAX_ELEMENTS = 200, MAX_STEPS = 200000;
+  const VT = 0.025852;                 // kT/q at 300 K
+  const GMIN = 1e-12;                  // from every node to ground and across every junction
+  const RSHORT = 1e-3;                 // a short fault
+  const OHM_I = 1e-3, OHM_OL = 20e6;   // the ohmmeter's test current and its over-range
+  const EX80 = Math.exp(80);
+  const isGnd = s => s === 'gnd' || s === '0';
+  const isObj = v => v !== null && typeof v === 'object' && !Array.isArray(v);
+  const NODE_RE = /^[A-Za-z0-9_][A-Za-z0-9_+\-]{0,31}$/, ID_RE = /^[A-Za-z][A-Za-z0-9_\-]{0,31}$/;
+  function fail(code, extra) { const e = new Error('circuit: ' + code); e.code = code; if (extra) Object.assign(e, extra); return e; }
+
+  /** a number, or a string with an SI prefix ("4.7k", "100n", "2meg") → number; anything else → NaN */
+  const SI = { f: 1e-15, p: 1e-12, n: 1e-9, u: 1e-6, 'µ': 1e-6, m: 1e-3, k: 1e3, K: 1e3, M: 1e6, meg: 1e6, G: 1e9 };
+  function num(v) {
+    if (typeof v === 'number') return Number.isFinite(v) ? v : NaN;
+    if (typeof v !== 'string') return NaN;
+    const m = /^\s*([-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?)\s*(meg|[fpnuµmkKMG])?\s*$/.exec(v);
+    return m ? parseFloat(m[1]) * (m[2] ? SI[m[2]] : 1) : NaN;
+  }
+
+  // ---- element types, parameters, presets ----
+  const TYPES = { R: [2], C: [2], L: [2], V: [2], I: [2], D: [2], SW: [2], NPN: [3], PNP: [3], NMOS: [3], PMOS: [3], OPAMP: [3, 5] };
+  const PARAMS = {
+    R: {}, C: {}, L: {}, V: {}, I: {},
+    D: { Is: 'pos', n: 'pos' }, SW: { Ron: 'pos', Roff: 'pos' },
+    NPN: { Is: 'pos', betaF: 'pos', betaR: 'pos' }, PNP: { Is: 'pos', betaF: 'pos', betaR: 'pos' },
+    NMOS: { Vth: 'fin', k: 'pos', lambda: 'nonneg' }, PMOS: { Vth: 'fin', k: 'pos', lambda: 'nonneg' },
+    OPAMP: { gain: 'pos', rails: 'rails', headroom: 'nonneg' },
+  };
+  const DEFAULTS = {
+    D: { Is: 1e-14, n: 1 }, SW: { Ron: 0.01, Roff: 1e9 },
+    NPN: { Is: 1e-14, betaF: 100, betaR: 1 }, PNP: { Is: 1e-14, betaF: 100, betaR: 1 },
+    NMOS: { Vth: 1.5, k: 0.1, lambda: 0 }, PMOS: { Vth: 1.5, k: 0.1, lambda: 0 },
+    OPAMP: { gain: 1e5, rails: [-15, 15], headroom: 0 },
+  };
+  const led = vf => ({ Is: 0.02 / Math.expm1(vf / (2 * VT)), n: 2 });   // Vf at 20 mA
+  const PRESETS = {
+    D: { '1n4148': { Is: 2.52e-9, n: 1.752 }, '1n4001': { Is: 14.11e-9, n: 1.984 }, 'led-red': led(1.8), 'led-orange': led(2.0),
+      'led-yellow': led(2.05), 'led-green': led(2.1), 'led-blue': led(3.0), 'led-white': led(3.0) },
+    NPN: { '2n3904': { Is: 6.734e-15, betaF: 200, betaR: 0.74 }, '2n2222': { Is: 14.34e-15, betaF: 200, betaR: 6.1 }, bc547: { Is: 7e-15, betaF: 300, betaR: 1 } },
+    PNP: { '2n3906': { Is: 1.41e-15, betaF: 180, betaR: 4 }, bc557: { Is: 7e-15, betaF: 250, betaR: 1 } },
+    NMOS: { '2n7000': { Vth: 2.1, k: 0.2, lambda: 0.01 }, bs170: { Vth: 1.8, k: 0.25, lambda: 0.01 }, irlz44n: { Vth: 1.6, k: 30, lambda: 0.002 } },
+    PMOS: { bs250: { Vth: 2.4, k: 0.12, lambda: 0.01 }, irf9540: { Vth: 3.0, k: 8, lambda: 0.003 } },
+  };
+  const SHORT_PINS = { NPN: [0, 2], PNP: [0, 2], NMOS: [0, 2], PMOS: [0, 2], OPAMP: [0, 1] };
+  const DRIFT_PARAM = { R: 'value', C: 'value', L: 'value', V: 'value', I: 'value', D: 'Is', SW: 'Ron', NPN: 'betaF', PNP: 'betaF', NMOS: 'k', PMOS: 'k', OPAMP: 'gain' };
+  const NONLINEAR = new Set(['D', 'NPN', 'PNP', 'NMOS', 'PMOS', 'OPAMP']);
+
+  // ---- waveforms of the V and I sources ----
+  const WAVE_FIELDS = {
+    pulse: { v1: 'fin!', v2: 'fin!', delay: 'nonneg', rise: 'nonneg', fall: 'nonneg', width: 'pos', period: 'pos' },
+    sine: { offset: 'fin', amp: 'fin!', freq: 'pos!', phase: 'fin', delay: 'nonneg' },
+    pwm: { v: 'fin!', freq: 'pos!', duty: 'unit!', low: 'fin', delay: 'nonneg' },
+  };
+  /** canonical form: {kind:'dc', dc} | {kind:'pulse', v1, v2, …} | … (numbers parsed, defaults filled) */
+  function canonWave(spec) {
+    if (!isObj(spec)) return { kind: 'dc', dc: num(spec) };
+    if (spec.dc !== undefined) return { kind: 'dc', dc: num(spec.dc) };
+    for (const kind of ['pulse', 'sine', 'pwm']) if (spec[kind] !== undefined) {
+      const q = spec[kind] || {}, w = { kind };
+      for (const f of Object.keys(WAVE_FIELDS[kind])) w[f] = q[f] === undefined ? undefined : num(q[f]);
+      if (kind === 'pulse') {
+        w.delay = w.delay || 0; w.rise = w.rise || 0; w.fall = w.fall || 0; w.period = w.period || 0;
+        if (w.width === undefined) w.width = w.period > 0 ? (w.period - w.rise - w.fall) / 2 : Infinity;
+      }
+      if (kind === 'sine') { w.offset = w.offset || 0; w.phase = w.phase || 0; w.delay = w.delay || 0; }
+      if (kind === 'pwm') { w.low = w.low || 0; w.delay = w.delay || 0; }
+      return w;
+    }
+    return { kind: 'dc', dc: NaN };
+  }
+  function scaleWave(w, f) {
+    const s = Object.assign({}, w);
+    for (const k of ['dc', 'v1', 'v2', 'offset', 'amp', 'v', 'low']) if (typeof s[k] === 'number') s[k] *= f;
+    return s;
+  }
+  /** → {at(t), avg, at0m (the value at t = 0⁻), next(t): the first breakpoint after t (Infinity if none)} */
+  function wave(w) {
+    if (w.kind === 'dc') return { at: () => w.dc, avg: w.dc, at0m: w.dc, next: () => Infinity };
+    if (w.kind === 'sine') {
+      const ph = w.phase * Math.PI / 180, om = 2 * Math.PI * w.freq;
+      const at = t => w.offset + w.amp * Math.sin(t < w.delay ? ph : om * (t - w.delay) + ph);
+      return { at, avg: w.offset, at0m: at(0), next: t => (t < w.delay ? w.delay : Infinity) };
+    }
+    if (w.kind === 'pwm') {
+      const T = 1 / w.freq, tol = 1e-9;
+      const at = t => {
+        if (t < w.delay - tol * T) return w.low;
+        const ph = (t - w.delay) * w.freq; let fr = ph - Math.floor(ph + tol); if (fr < 0) fr = 0;
+        return fr < w.duty - tol ? w.v : w.low;
+      };
+      const next = t => {
+        if (w.duty <= 0 || w.duty >= 1) return t < w.delay ? w.delay : Infinity;
+        if (t < w.delay) return w.delay;
+        const k = Math.floor((t - w.delay) * w.freq);
+        for (let c = k; c <= k + 1; c++) for (const o of [0, w.duty]) { const bp = w.delay + (c + o) * T; if (bp > t) return bp; }
+        return w.delay + (k + 2) * T;
+      };
+      return { at, avg: w.low + (w.v - w.low) * w.duty, at0m: w.duty >= 1 && w.delay <= 0 ? w.v : w.low, next };
+    }
+    // pulse (SPICE semantics)
+    const { v1, v2, delay, rise, fall, width, period: per } = w;
+    const scale = per > 0 ? per : (rise + fall + (Number.isFinite(width) ? width : 0) + delay) || 1e-6, tol = 1e-9 * scale;
+    const at = t => {
+      if (t < delay - tol) return v1;
+      let tt = t - delay; if (tt < 0) tt = 0;
+      if (per > 0) { tt -= per * Math.floor(tt / per + 1e-9); if (tt < 0) tt = 0; }
+      if (tt < rise) return v1 + (v2 - v1) * tt / rise;
+      tt -= rise; if (tt < width - tol) return v2;
+      tt -= width; if (tt < fall) return v2 + (v1 - v2) * tt / fall;
+      return v1;
+    };
+    const offs = [0, rise, rise + width, rise + width + fall].filter(Number.isFinite);
+    const next = t => {
+      if (t < delay) return delay;
+      const k = per > 0 ? Math.floor((t - delay) / per) : 0;
+      for (let c = k; c <= k + 1; c++) { const base = delay + c * per; for (const o of offs) { const bp = base + o; if (bp > t) return bp; } if (!(per > 0)) break; }
+      return Infinity;
+    };
+    const avg = per > 0 ? (v1 * (per - rise - width - fall) + v2 * width + 0.5 * (v1 + v2) * (rise + fall)) / per : (Number.isFinite(width) ? v1 : v2);
+    return { at, avg, at0m: v1, next };
+  }
+
+  // ---- check(netlist) ----
+  function checkNumber(kind, v) {
+    const x = num(v);
+    switch (kind) {
+      case 'pos': return x > 0;
+      case 'nonneg': return x >= 0;
+      case 'unit': return x >= 0 && x <= 1;
+      case 'bool': return typeof v === 'boolean';
+      case 'rails': return Array.isArray(v) && v.length === 2 && num(v[0]) < num(v[1]);
+      default: return Number.isFinite(x);
+    }
+  }
+  function checkWave(v, path, E) {
+    if (!isObj(v)) { if (!Number.isFinite(num(v))) E('value', path, 'needs a number or a waveform'); return; }
+    const keys = Object.keys(v);
+    if (keys.length !== 1 || !['dc', 'pulse', 'sine', 'pwm'].includes(keys[0])) { E('value', path, 'one of dc, pulse, sine, pwm'); return; }
+    const kind = keys[0];
+    if (kind === 'dc') { if (!Number.isFinite(num(v.dc))) E('value', path + '.dc', 'needs a number'); return; }
+    const q = v[kind], F = WAVE_FIELDS[kind];
+    if (!isObj(q)) { E('value', path + '.' + kind, 'needs an object'); return; }
+    for (const k of Object.keys(q)) if (!Object.prototype.hasOwnProperty.call(F, k)) E('value', `${path}.${kind}.${k}`, 'unknown field');
+    for (const [k, spec] of Object.entries(F)) {
+      const must = spec.endsWith('!'), kd = must ? spec.slice(0, -1) : spec;
+      if (q[k] === undefined) { if (must) E('value', `${path}.${kind}.${k}`, 'missing'); continue; }
+      if (!checkNumber(kd, q[k])) E('value', `${path}.${kind}.${k}`, 'out of range');
+    }
+    if (kind === 'pulse' && q.period !== undefined) {
+      const w = canonWave(v);
+      if (w.rise + w.width + w.fall > w.period * (1 + 1e-12)) E('value', path + '.pulse', 'rise + width + fall > period');
+    }
+  }
+  const EL_KEYS = new Set(['id', 'type', 'n', 'value', 'ic', 'params', 'preset', 'on', 'label', 'note']);
+  function check(nl) {
+    const P = [];
+    const E = (code, path, msg) => { P.push({ code, path, msg, level: 'error' }); };
+    const W = (code, path, msg) => { P.push({ code, path, msg, level: 'warning' }); };
+    if (!isObj(nl)) { E('format', '', 'netlist is not an object'); return P; }
+    if (nl.format !== undefined && nl.format !== FORMAT) E('format', 'format', 'not ' + FORMAT);
+    if (!Array.isArray(nl.nodes)) E('format', 'nodes', 'not an array');
+    if (!Array.isArray(nl.elements)) E('format', 'elements', 'not an array');
+    if (P.length) return P;
+    for (const k of Object.keys(nl)) if (!['format', 'nodes', 'elements', 'meta'].includes(k)) W('unknown-field', k, 'ignored');
+    const names = new Set(), labels = new Map(), nodeAt = new Map();
+    nl.nodes.forEach((x, i) => {
+      const nm = typeof x === 'string' ? x : isObj(x) ? x.name : undefined;
+      if (typeof nm !== 'string' || !NODE_RE.test(nm)) { E('node-name', `nodes[${i}]`, 'bad node name'); return; }
+      if (names.has(nm) || labels.has(nm)) { E('dup-node', `nodes[${i}]`, 'duplicate node ' + nm); return; }
+      if (isObj(x) && x.probe !== undefined) {
+        if (isGnd(nm)) { E('node-name', `nodes[${i}]`, 'ground cannot be a label'); return; }
+        labels.set(nm, { to: x.probe, i });
+      } else { names.add(nm); nodeAt.set(nm, i); }
+    });
+    for (const [, { to, i }] of labels) if (typeof to !== 'string' || !(names.has(to) || isGnd(to))) E('unknown-node', `nodes[${i}].probe`, 'label of an unknown node');
+    if ([...names].filter(s => !isGnd(s)).length > MAX_NODES) E('size', 'nodes', 'more than ' + MAX_NODES + ' nodes');
+    if (nl.elements.length > MAX_ELEMENTS) E('size', 'elements', 'more than ' + MAX_ELEMENTS + ' elements');
+    const ids = new Set();
+    nl.elements.forEach((el, i) => {
+      const at = `elements[${i}]`;
+      if (!isObj(el)) { E('format', at, 'element is not an object'); return; }
+      for (const k of Object.keys(el)) if (!EL_KEYS.has(k)) W('unknown-field', `${at}.${k}`, 'ignored');
+      if (typeof el.id !== 'string' || !ID_RE.test(el.id)) E('id', at + '.id', 'bad id');
+      else if (ids.has(el.id)) E('dup-id', at + '.id', 'duplicate id ' + el.id); else ids.add(el.id);
+      const t = el.type;
+      if (typeof t !== 'string' || !Object.prototype.hasOwnProperty.call(TYPES, t)) { E('type', at + '.type', 'unknown type'); return; }
+      if (!Array.isArray(el.n) || !TYPES[t].includes(el.n.length)) { E('pins', at + '.n', 'wrong number of terminals'); return; }
+      el.n.forEach((m, k) => {
+        if (labels.has(m)) E('probe-only', `${at}.n[${k}]`, 'a probe-only label cannot be a terminal');
+        else if (typeof m !== 'string' || !(names.has(m) || isGnd(m))) E('unknown-node', `${at}.n[${k}]`, 'unknown node ' + m);
+      });
+      if (t === 'R' || t === 'C' || t === 'L') {
+        if (el.value === undefined) E('value', at + '.value', 'missing value');
+        else if (!(num(el.value) > 0)) E('value', at + '.value', 'needs a positive number');
+        if (el.ic !== undefined && (t === 'R' || !Number.isFinite(num(el.ic)))) E('value', at + '.ic', 'needs a number');
+      } else if (t === 'V' || t === 'I') {
+        if (el.value === undefined) E('value', at + '.value', 'missing value'); else checkWave(el.value, at + '.value', E);
+      } else if (el.value !== undefined) E('value', at + '.value', 'this type takes params, not a value');
+      if (el.ic !== undefined && t !== 'C' && t !== 'L') E('value', at + '.ic', 'only C and L have ic');
+      if (el.on !== undefined && (t !== 'SW' || typeof el.on !== 'boolean')) E('value', at + '.on', 'only SW has on (true/false)');
+      if (el.preset !== undefined && !(PRESETS[t] && typeof el.preset === 'string' && Object.prototype.hasOwnProperty.call(PRESETS[t], el.preset))) E('preset', at + '.preset', 'unknown preset');
+      if (el.params !== undefined) {
+        if (!isObj(el.params)) E('param', at + '.params', 'not an object');
+        else for (const [k, v] of Object.entries(el.params)) {
+          const kd = Object.prototype.hasOwnProperty.call(PARAMS[t], k) ? PARAMS[t][k] : null;
+          if (!kd) E('param', `${at}.params.${k}`, 'unknown parameter');
+          else if (!checkNumber(kd, v)) E('param', `${at}.params.${k}`, 'out of range');
+        }
+      }
+    });
+    if (P.some(p => p.level === 'error')) return P;
+    // the graph: ground, loops of voltage-defined branches, nodes without a DC path to ground
+    const els = nl.elements, G0 = 'gnd', key = s => (isGnd(s) ? G0 : s);
+    if (els.length && !els.some(el => el.n.some(isGnd))) E('no-ground', 'elements', 'no element touches ground');
+    const uf = () => { const p = new Map(); const f = s => { s = key(s); while (p.has(s) && p.get(s) !== s) s = p.get(s); return s; }; return { f, u: (a, b) => { const x = f(a), y = f(b); if (x === y) return false; p.set(x, y); return true; } }; };
+    const VL = uf(), DCP = uf();
+    els.forEach((el, i) => {
+      const n = el.n;
+      if ((el.type === 'V' || el.type === 'L') && !VL.u(n[0], n[1])) E('vloop', `elements[${i}]`, 'loop of voltage sources / inductors');
+      if (el.type === 'OPAMP' && !VL.u(n[2], G0)) E('vloop', `elements[${i}]`, 'op-amp output on a voltage-defined node');
+      if (n.length === 2 && el.type !== 'V' && el.type !== 'L' && key(n[0]) === key(n[1])) W('self-loop', `elements[${i}]`, 'both terminals on one node');
+      if (['R', 'L', 'V', 'D', 'SW'].includes(el.type)) DCP.u(n[0], n[1]);
+      else if (el.type === 'NPN' || el.type === 'PNP') { DCP.u(n[0], n[1]); DCP.u(n[1], n[2]); }
+      else if (el.type === 'NMOS' || el.type === 'PMOS') DCP.u(n[0], n[2]);
+      else if (el.type === 'OPAMP') DCP.u(n[2], G0);
+    });
+    const used = new Set(); els.forEach(el => el.n.forEach(m => used.add(key(m))));
+    for (const nm of names) {
+      if (isGnd(nm)) continue;
+      if (!used.has(nm)) W('unused', `nodes[${nodeAt.get(nm)}]`, 'no element uses ' + nm);
+      else if (DCP.f(nm) !== DCP.f(G0)) W('floating', `nodes[${nodeAt.get(nm)}]`, 'no DC path to ground from ' + nm);
+    }
+    return P;
+  }
+
+  /** checkFaults(netlist, faults) → problems of a list of faults on a netlist that passes check() (the same codes and paths as check;
+      the validators run it on a bench's faults before the app ever compiles them). Twin: tools/circuit.py check_faults. */
+  const FAULT_KINDS = ['open', 'short', 'drift', 'open-trace', 'reverse'];
+  const FAULT_KEYS = new Set(['kind', 'element', 'pin', 'pins', 'factor', 'param', 'node', 'side']);
+  function checkFaults(nl, faults) {
+    const P = [], E = (path, msg) => { P.push({ code: 'fault', path, msg, level: 'error' }); };
+    if (!Array.isArray(faults)) { E('', 'faults must be a list'); return P; }
+    const els = isObj(nl) && Array.isArray(nl.elements) ? nl.elements.filter(isObj) : [];
+    const byId = new Map(els.map(e => [e.id, e]));
+    const declared = new Set((isObj(nl) && Array.isArray(nl.nodes) ? nl.nodes : []).filter(x => typeof x === 'string' || (isObj(x) && x.probe === undefined)).map(x => typeof x === 'string' ? x : x.name));
+    const same = (m, node) => m === node || (isGnd(m) && isGnd(node));
+    const pinsOk = (pins, n) => Array.isArray(pins) && pins.length === 2 && pins.every(k => Number.isInteger(k) && k >= 0 && k < n) && pins[0] !== pins[1];
+    faults.forEach((f, i) => {
+      const at = `faults[${i}]`;
+      if (!isObj(f)) { E(at, 'a fault is an object {element | node, kind}'); return; }
+      for (const k of Object.keys(f)) if (!FAULT_KEYS.has(k)) E(`${at}.${k}`, 'unknown field');
+      if (!FAULT_KINDS.includes(f.kind)) { E(at + '.kind', 'one of ' + FAULT_KINDS.join(', ')); return; }
+      if (f.kind === 'open-trace') {
+        if (typeof f.node !== 'string' || !(declared.has(f.node) || isGnd(f.node))) { E(at + '.node', 'not a node of the netlist'); return; }
+        const touching = els.filter(e => Array.isArray(e.n) && e.n.some(m => same(m, f.node)));
+        if (f.side === undefined) { if (touching.length < 2) E(at + '.node', 'fewer than two parts touch this node'); return; }
+        if (!Array.isArray(f.side) || !f.side.length) { E(at + '.side', 'a list of parts (R1) or pins (R1.0) on the node'); return; }
+        f.side.forEach((x, j) => {
+          const [eid, pin] = parsePinRef(x), e = typeof x === 'string' ? byId.get(eid) : undefined;
+          if (!e) E(`${at}.side[${j}]`, 'not a part of the netlist');
+          else if (pin === undefined ? !e.n.some(m => same(m, f.node)) : !(pin < e.n.length && same(e.n[pin], f.node))) E(`${at}.side[${j}]`, 'does not touch the node');
+        });
+        return;
+      }
+      const e = typeof f.element === 'string' ? byId.get(f.element) : undefined;
+      if (!e) { E(at + '.element', 'not a part of the netlist'); return; }
+      const n = e.n.length;
+      if (f.kind === 'open') { if (f.pin !== undefined && !(Number.isInteger(f.pin) && f.pin >= 0 && f.pin < n)) E(at + '.pin', 'not a pin of the part'); }
+      else if (f.kind === 'short' || f.kind === 'reverse') {
+        if (f.pins !== undefined ? !pinsOk(f.pins, n) : (f.kind === 'reverse' && n !== 2)) E(at + '.pins', 'two different pins of the part');
+      } else {   // drift
+        if (f.factor !== undefined && !(num(f.factor) > 0)) E(at + '.factor', 'needs a number > 0');
+        if (f.param !== undefined) {
+          const t = e.type, okp = typeof f.param === 'string' && (['R', 'C', 'L', 'V', 'I'].includes(t) ? f.param === 'value' : Object.prototype.hasOwnProperty.call(PARAMS[t], f.param));
+          if (!okp) E(at + '.param', 'not a parameter of the part');
+        }
+      }
+    });
+    return P;
+  }
+
+  // ---- compile: faults applied, nodes indexed, element models built ----
+  const parsePinRef = s => { const m = /^(.*)\.(\d+)$/.exec(String(s)); return m ? [m[1], +m[2]] : [String(s), undefined]; };
+  function normalize(el) {
+    const t = el.type, d = { id: el.id, type: t, n: el.n.slice(), p: {} };
+    if (t === 'R' || t === 'C' || t === 'L') { d.p.value = num(el.value); if (el.ic !== undefined) d.p.ic = num(el.ic); }
+    else if (t === 'V' || t === 'I') d.p.value = canonWave(el.value);
+    else {
+      Object.assign(d.p, DEFAULTS[t], el.preset ? PRESETS[t][el.preset] : null);
+      for (const [k, v] of Object.entries(el.params || {})) d.p[k] = k === 'rails' ? [num(v[0]), num(v[1])] : num(v);
+    }
+    if (t === 'SW') d.on = el.on !== false;
+    return d;
+  }
+  function compile(nl, faults) {
+    const declared = [], labelOf = new Map();
+    for (const x of nl.nodes) {
+      const nm = typeof x === 'string' ? x : x.name;
+      if (isObj(x) && x.probe !== undefined) labelOf.set(nm, x.probe); else declared.push(nm);
+    }
+    const els = nl.elements.map(normalize), byId = new Map(els.map(e => [e.id, e])), extra = [];
+    const same = (m, node) => m === node || (isGnd(m) && isGnd(node));
+    const known = s => typeof s === 'string' && (isGnd(s) || declared.includes(s));
+    (faults || []).forEach((f, fi) => {   // a part soldered the wrong way round: its legs sit on each other's pads (so before the board)
+      if (!isObj(f) || f.kind !== 'reverse') return;
+      const e = byId.get(f.element);
+      if (!e) throw fail('fault', { index: fi });
+      const pins = f.pins === undefined ? (e.n.length === 2 ? [0, 1] : null) : f.pins;
+      if (!Array.isArray(pins) || pins.length !== 2 || !pins.every(k => Number.isInteger(k) && k >= 0 && k < e.n.length) || pins[0] === pins[1]) throw fail('fault', { index: fi });
+      const x = e.n[pins[0]]; e.n[pins[0]] = e.n[pins[1]]; e.n[pins[1]] = x;
+    });
+    (faults || []).forEach((f, fi) => {
+      if (!isObj(f) || f.kind !== 'open-trace') return;
+      if (!known(f.node)) throw fail('fault', { index: fi });
+      const far = '#trace:' + fi;
+      let side = f.side;
+      if (side === undefined) {
+        const touching = els.filter(e => e.n.some(m => same(m, f.node)));
+        if (touching.length < 2) throw fail('fault', { index: fi });
+        side = [touching[touching.length - 1].id];
+      }
+      if (!Array.isArray(side) || !side.length) throw fail('fault', { index: fi });
+      for (const s of side) {
+        const [eid, pin] = parsePinRef(s), e = byId.get(eid);
+        if (!e) throw fail('fault', { index: fi });
+        if (pin === undefined) { if (!e.n.some(m => same(m, f.node))) throw fail('fault', { index: fi }); e.n = e.n.map(m => (same(m, f.node) ? far : m)); }
+        else { if (!(pin < e.n.length) || !same(e.n[pin], f.node)) throw fail('fault', { index: fi }); e.n[pin] = far; }
+      }
+    });
+    for (const e of els) e.board = e.n.slice();   // where the legs are soldered: pin references "@R1.0" measure here
+    (faults || []).forEach((f, fi) => {
+      if (!isObj(f)) throw fail('fault', { index: fi });
+      if (f.kind === 'open-trace' || f.kind === 'reverse') return;
+      const e = byId.get(f.element);
+      if (!e) throw fail('fault', { index: fi });
+      if (f.kind === 'open') {
+        const pins = f.pin !== undefined ? [f.pin] : e.n.map((_, k) => k);
+        for (const k of pins) { if (!(Number.isInteger(k) && k >= 0 && k < e.n.length)) throw fail('fault', { index: fi }); e.n[k] = '#open:' + fi + '.' + k; }
+      } else if (f.kind === 'short') {
+        const pins = f.pins || SHORT_PINS[e.type] || [0, 1];
+        if (!Array.isArray(pins) || pins.length !== 2 || !pins.every(k => Number.isInteger(k) && k >= 0 && k < e.n.length) || pins[0] === pins[1]) throw fail('fault', { index: fi });
+        if (e.n.length === 2) { e.type = 'R'; e.p = { value: RSHORT }; }
+        else extra.push({ id: '#short:' + fi, type: 'R', n: [e.n[pins[0]], e.n[pins[1]]], board: [], p: { value: RSHORT } });
+      } else if (f.kind === 'drift') {
+        const factor = f.factor === undefined ? 2 : num(f.factor), param = f.param || DRIFT_PARAM[e.type];
+        if (!(factor > 0)) throw fail('fault', { index: fi });
+        if (param === 'value' && (e.type === 'V' || e.type === 'I')) e.p.value = scaleWave(e.p.value, factor);
+        else if (typeof e.p[param] === 'number') e.p[param] *= factor;
+        else if (param === 'rails' && Array.isArray(e.p.rails)) e.p.rails = e.p.rails.map(v => v * factor);
+        else throw fail('fault', { index: fi });
+      } else throw fail('fault', { index: fi });
+    });
+    const all = els.concat(extra);
+    // node indices: declared names first (ground = −1), then the private nodes the faults made
+    const index = new Map(); let N = 0;
+    const idx = nm => { if (isGnd(nm)) return -1; if (!index.has(nm)) index.set(nm, N++); return index.get(nm); };
+    declared.forEach(idx);
+    for (const e of all) e.n.forEach(idx);
+    let nb = 0;
+    for (const e of all) {
+      e.pins = e.n.map(idx); e.boardPins = e.board.map(idx); e.k = -1;
+      const p = e.p, t = e.type;
+      e.a = e.pins[0]; e.c = e.pins[1]; e.d = e.pins.length > 2 ? e.pins[2] : -1;
+      if (t === 'R') e.g = 1 / p.value;
+      else if (t === 'SW') e.g = 1 / (e.on ? p.Ron : p.Roff);
+      else if (t === 'C') { e.C = p.value; e.ic = p.ic === undefined ? null : p.ic; if (e.ic !== null) e.k = nb++; }
+      else if (t === 'L') { e.L = p.value; e.ic = p.ic === undefined ? null : p.ic; e.k = nb++; }
+      else if (t === 'V') { e.w = wave(p.value); e.k = nb++; }
+      else if (t === 'I') e.w = wave(p.value);
+      else if (t === 'D') { e.Is = p.Is; e.nvt = p.n * VT; e.vcrit = e.nvt * Math.log(e.nvt / (Math.SQRT2 * e.Is)); e.s = { v: 0 }; }
+      else if (t === 'NPN' || t === 'PNP') { e.pol = t === 'NPN' ? 1 : -1; e.Is = p.Is; e.bf = p.betaF; e.br = p.betaR; e.vcrit = VT * Math.log(VT / (Math.SQRT2 * e.Is)); e.s = { vbe: 0, vbc: 0 }; }
+      else if (t === 'NMOS' || t === 'PMOS') { e.pol = t === 'NMOS' ? 1 : -1; e.vth = Math.abs(p.Vth); e.kp = p.k; e.lam = p.lambda; }
+      else if (t === 'OPAMP') { e.A = p.gain; e.lo = p.rails[0]; e.hi = p.rails[1]; e.head = p.headroom; e.rp = e.pins.length === 5 ? e.pins[3] : null; e.rn = e.pins.length === 5 ? e.pins[4] : null; e.k = nb++; }
+    }
+    for (const e of all) if (e.k >= 0) e.k += N;
+    const outNames = declared.slice(); if (!outNames.some(isGnd)) outNames.push('gnd');
+    for (const l of labelOf.keys()) outNames.push(l);
+    const resolveName = nm => (isGnd(nm) ? -1 : labelOf.has(nm) ? idx(labelOf.get(nm)) : index.get(nm));
+    return { N, S: N + nb, els: all, real: all.filter(e => e.id[0] !== '#'), byId, index, outNames, resolveName,
+      linear: !all.some(e => NONLINEAR.has(e.type)), sources: all.filter(e => e.w) };
+  }
+
+  // ---- dense LU with partial pivoting ----
+  function factor(M, n, perm) {
+    for (let k = 0; k < n; k++) {
+      let p = k, mx = Math.abs(M[k * n + k]);
+      for (let i = k + 1; i < n; i++) { const a = Math.abs(M[i * n + k]); if (a > mx) { mx = a; p = i; } }
+      if (!(mx > 1e-20)) return false;
+      perm[k] = p;
+      if (p !== k) for (let j = 0; j < n; j++) { const t = M[k * n + j]; M[k * n + j] = M[p * n + j]; M[p * n + j] = t; }
+      const piv = M[k * n + k];
+      for (let i = k + 1; i < n; i++) {
+        const f = M[i * n + k] / piv; M[i * n + k] = f;
+        if (f !== 0) for (let j = k + 1; j < n; j++) M[i * n + j] -= f * M[k * n + j];
+      }
+    }
+    return true;
+  }
+  function subst(M, n, perm, b, x) {
+    x.set(b);
+    for (let k = 0; k < n; k++) { const p = perm[k]; if (p !== k) { const t = x[k]; x[k] = x[p]; x[p] = t; } }
+    for (let i = 1; i < n; i++) { let s = x[i]; for (let j = 0; j < i; j++) s -= M[i * n + j] * x[j]; x[i] = s; }
+    for (let i = n - 1; i >= 0; i--) { let s = x[i]; for (let j = i + 1; j < n; j++) s -= M[i * n + j] * x[j]; x[i] = s / M[i * n + i]; }
+  }
+
+  // ---- device equations ----
+  const ex = a => (a < 80 ? Math.exp(a) : EX80 * (1 + a - 80));
+  const dex = a => (a < 80 ? Math.exp(a) : EX80);
+  function pnjlim(vnew, vold, vt, vcrit) {   // SPICE junction limiting
+    if (vnew > vcrit && Math.abs(vnew - vold) > 2 * vt) {
+      if (vold > 0) { const arg = 1 + (vnew - vold) / vt; return arg > 0 ? vold + vt * Math.log(arg) : vcrit; }
+      return vt * Math.log(vnew / vt);
+    }
+    return vnew;
+  }
+  function bjt(e, vbe, vbc, q) {
+    const ef = ex(vbe / VT), er = ex(vbc / VT), df = dex(vbe / VT) / VT, dr = dex(vbc / VT) / VT;
+    q.ibe = e.Is / e.bf * (ef - 1); q.gbe = e.Is / e.bf * df;
+    q.ibc = e.Is / e.br * (er - 1); q.gbc = e.Is / e.br * dr;
+    q.ict = e.Is * (ef - er); q.gmf = e.Is * df; q.gmr = e.Is * dr;
+    return q;
+  }
+  function mos(e, vgs, vds, q) {
+    const vov = vgs - e.vth, k = e.kp, lam = e.lam;
+    if (vov <= 0) { q.id = 0; q.gm = 0; q.gds = 0; }
+    else if (vds < vov) { const l = 1 + lam * vds, base = vov * vds - vds * vds / 2; q.id = k * base * l; q.gm = k * vds * l; q.gds = k * (vov - vds) * l + k * base * lam; }
+    else { const l = 1 + lam * vds; q.id = k / 2 * vov * vov * l; q.gm = k * vov * l; q.gds = k / 2 * vov * vov * lam; }
+    return q;
+  }
+
+  // ---- seeded noise ----
+  function mulberry32(a) {
+    return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+  }
+  function hash32(s, seed) { let h = (2166136261 ^ (seed >>> 0)) >>> 0; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+
+  // ---- the simulator ----
+  function makeSim(ck, noise) {
+    const { N, S } = ck;
+    const A = new Float64Array(S * S), B = new Float64Array(S), X = new Float64Array(S), Xn = new Float64Array(S), LU = new Float64Array(S * S), perm = new Int32Array(S);
+    let luKey = null, limited = false;
+    const q = {};
+    const vx = (x, i) => (i < 0 ? 0 : x[i]);
+    function G(a, c, g) { if (a >= 0) { A[a * S + a] += g; if (c >= 0) { A[a * S + c] -= g; A[c * S + a] -= g; } } if (c >= 0) A[c * S + c] += g; }
+    function J(a, c, i) { if (a >= 0) B[a] -= i; if (c >= 0) B[c] += i; }   // a constant current a → c through the element
+    function VC(a, c, p, r, g) {   // a current g·(v_p − v_r) from a to c
+      if (a >= 0) { if (p >= 0) A[a * S + p] += g; if (r >= 0) A[a * S + r] -= g; }
+      if (c >= 0) { if (p >= 0) A[c * S + p] -= g; if (r >= 0) A[c * S + r] += g; }
+    }
+    function BR(a, c, k) { if (a >= 0) A[a * S + k] += 1; if (c >= 0) A[c * S + k] -= 1; }   // the branch current k leaves a, enters c
+    function ROWV(k, a, c) { if (a >= 0) A[k * S + a] += 1; if (c >= 0) A[k * S + c] -= 1; }
+    const srcVal = (e, ctx) => (ctx.mode === 'ohm' ? 0 : ctx.src * (ctx.avg ? e.w.avg : ctx.t0m ? e.w.at0m : e.w.at(ctx.t)));
+
+    function stamp(ctx, x) {
+      A.fill(0); B.fill(0); limited = false;
+      const gs = GMIN + ctx.gsh, tran = ctx.mode === 'tran', ohm = ctx.mode === 'ohm', op0 = ctx.mode === 'op0';
+      for (let i = 0; i < N; i++) A[i * S + i] += gs;
+      for (const e of ck.els) {
+        const a = e.a, c = e.c, k = e.k;
+        switch (e.type) {
+          case 'R': case 'SW': G(a, c, e.g); break;
+          case 'C':
+            if (k >= 0) { if (op0) { BR(a, c, k); ROWV(k, a, c); B[k] = e.ic; } else A[k * S + k] = 1; }
+            if (tran) { const geq = (ctx.be ? 1 : 2) * e.C / ctx.h, ieq = geq * e.vp + (ctx.be ? 0 : e.ip); G(a, c, geq); J(a, c, -ieq); }
+            break;
+          case 'L':
+            BR(a, c, k);
+            if (op0 && e.ic !== null) { A[k * S + k] = 1; B[k] = e.ic; break; }
+            ROWV(k, a, c);
+            if (tran) { const req = (ctx.be ? 1 : 2) * e.L / ctx.h; A[k * S + k] -= req; B[k] = -req * e.ip - (ctx.be ? 0 : e.vp); }
+            break;
+          case 'V': BR(a, c, k); ROWV(k, a, c); B[k] = srcVal(e, ctx); break;
+          case 'I': J(a, c, -srcVal(e, ctx)); break;   // drives the current into n[0]
+          case 'D': {
+            const v = vx(x, a) - vx(x, c), vl = pnjlim(v, e.s.v, e.nvt, e.vcrit);
+            if (vl !== v) limited = true; e.s.v = vl;
+            const g0 = e.Is * dex(vl / e.nvt) / e.nvt;
+            G(a, c, g0 + GMIN); J(a, c, e.Is * (ex(vl / e.nvt) - 1) - g0 * vl);
+            break;
+          }
+          case 'NPN': case 'PNP': {
+            const p = e.pol, C_ = a, B_ = c, E_ = e.d, vb = vx(x, B_);
+            const r1 = p * (vb - vx(x, E_)), r2 = p * (vb - vx(x, C_));
+            const vbe = pnjlim(r1, e.s.vbe, VT, e.vcrit), vbc = pnjlim(r2, e.s.vbc, VT, e.vcrit);
+            if (vbe !== r1 || vbc !== r2) limited = true; e.s.vbe = vbe; e.s.vbc = vbc;
+            bjt(e, vbe, vbc, q);
+            G(B_, E_, q.gbe + GMIN); J(B_, E_, p * (q.ibe - q.gbe * vbe));
+            G(B_, C_, q.gbc + GMIN); J(B_, C_, p * (q.ibc - q.gbc * vbc));
+            VC(C_, E_, B_, E_, q.gmf); VC(C_, E_, B_, C_, -q.gmr); J(C_, E_, p * (q.ict - q.gmf * vbe + q.gmr * vbc));
+            break;
+          }
+          case 'NMOS': case 'PMOS': {
+            const p = e.pol, D_ = a, G_ = c, S_ = e.d, vd = vx(x, D_), vs = vx(x, S_);
+            const sw = p * (vd - vs) < 0, dd = sw ? S_ : D_, ss = sw ? D_ : S_, vss = sw ? vd : vs;
+            const vgs = p * (vx(x, G_) - vss), vds = p * ((sw ? vs : vd) - vss);
+            mos(e, vgs, vds, q);
+            VC(dd, ss, G_, ss, q.gm); G(dd, ss, q.gds + GMIN); J(dd, ss, p * (q.id - q.gm * vgs - q.gds * vds));
+            break;
+          }
+          case 'OPAMP': {
+            const out = e.d; BR(out, -1, k);
+            if (ohm) { A[k * S + k] = 1; break; }
+            const vp = vx(x, a), vn = vx(x, c), rails = e.rp !== null;
+            const hi = rails ? vx(x, e.rp) : e.hi, lo = rails ? vx(x, e.rn) : e.lo;
+            let hh = (hi - lo) / 2 - e.head, dh = 1; if (hh < 1e-3) { hh = 1e-3; dh = 0; }
+            // linear (exact gain A) up to a knee m below the rail, then an exponential approach: smooth, C¹, bounded
+            const vd = vp - vn, y = e.A * vd, m = Math.min(0.05, hh / 2), knee = hh - m, ay = Math.abs(y);
+            let f = (hi + lo) / 2, fd = e.A, fh = 0;
+            if (ay <= knee) f += y;
+            else { const sg = y < 0 ? -1 : 1, ez = Math.exp(-(ay - knee) / m); f += sg * (hh - m * ez); fd = e.A * ez; fh = dh * sg * (1 - ez); }
+            if (out >= 0) A[k * S + out] += 1;
+            if (a >= 0) A[k * S + a] -= fd; if (c >= 0) A[k * S + c] += fd;
+            let rhs = f - fd * vd;
+            if (rails) {
+              const dhi = 0.5 + 0.5 * fh, dlo = 0.5 - 0.5 * fh;
+              if (e.rp >= 0) A[k * S + e.rp] -= dhi; if (e.rn >= 0) A[k * S + e.rn] -= dlo;
+              rhs -= dhi * hi + dlo * lo;
+            }
+            B[k] = rhs;
+            break;
+          }
+        }
+      }
+      if (ohm) { const { a, b } = ctx.test; if (a >= 0) B[a] += OHM_I; if (b >= 0) B[b] -= OHM_I; }
+    }
+
+    function newton(ctx, x0, maxIt) {
+      X.set(x0);
+      const key = ck.linear ? `${ctx.mode}|${ctx.be}|${ctx.h}|${ctx.gsh}` : null;
+      for (let it = 0; it < maxIt; it++) {
+        stamp(ctx, X);
+        if (!(key && key === luKey)) {
+          LU.set(A); luKey = null;
+          if (!factor(LU, S, perm)) { if (ck.linear) throw fail('singular'); return false; }
+          luKey = key;
+        }
+        subst(LU, S, perm, B, Xn);
+        let conv = true;
+        for (let i = 0; i < S; i++) {
+          const v = Xn[i];
+          if (!Number.isFinite(v)) return false;
+          if (conv && Math.abs(v - X[i]) > (i < N ? 1e-6 : 1e-9) + 1e-6 * Math.abs(v)) conv = false;
+        }
+        X.set(Xn);
+        if (ck.linear || (conv && !limited)) return true;
+      }
+      return false;
+    }
+    /** an operating point; Newton, then gmin stepping, then source stepping */
+    function op(ctx) {
+      const zero = new Float64Array(S);
+      ctx.gsh = 0; ctx.src = 1;
+      if (newton(ctx, zero, 150)) return Float64Array.from(X);
+      let xg = zero, ok = true;
+      for (let i = 2; i <= 12 && ok; i++) { ctx.gsh = Math.pow(10, -i); if (newton(ctx, xg, 150)) xg = Float64Array.from(X); else ok = false; }
+      ctx.gsh = 0;
+      if (ok && newton(ctx, xg, 150)) return Float64Array.from(X);
+      xg = zero; ok = true;
+      for (let s = 1; s <= 10 && ok; s++) { ctx.src = s / 10; if (newton(ctx, xg, 150)) xg = Float64Array.from(X); else ok = false; }
+      ctx.src = 1;
+      if (ok) return xg;
+      throw fail('no-convergence', { mode: ctx.mode });
+    }
+
+    /** the pin currents of an element at the solution x (current into each pin) */
+    function pinCurrents(e, x, ctx) {
+      const a = e.a, c = e.c, va = vx(x, a), vc = vx(x, c);
+      switch (e.type) {
+        case 'R': case 'SW': { const i = (va - vc) * e.g; return [i, -i]; }
+        case 'C': { const i = ctx.mode === 'tran' ? e.ip : 0; return [i, -i]; }
+        case 'L': case 'V': return [x[e.k], -x[e.k]];
+        case 'I': { const j = srcVal(e, ctx); return [-j, j]; }
+        case 'D': { const v = va - vc, i = e.Is * (ex(v / e.nvt) - 1) + GMIN * v; return [i, -i]; }
+        case 'NPN': case 'PNP': {
+          const p = e.pol, vb = vc, vcol = va, ve = vx(x, e.d);
+          bjt(e, p * (vb - ve), p * (vb - vcol), q);
+          const ic = p * (q.ict - q.ibc), ib = p * (q.ibe + q.ibc);
+          return [ic, ib, -(ic + ib)];
+        }
+        case 'NMOS': case 'PMOS': {
+          const p = e.pol, vd = va, vs = vx(x, e.d), sw = p * (vd - vs) < 0, vss = sw ? vd : vs;
+          mos(e, p * (vc - vss), p * ((sw ? vs : vd) - vss), q);
+          const id = (sw ? -1 : 1) * p * q.id + GMIN * (vd - vs);
+          return [id, 0, -id];
+        }
+        case 'OPAMP': return e.pins.map((_, i) => (i === 2 ? x[e.k] : 0));
+      }
+      return e.pins.map(() => 0);
+    }
+    const mainCurrent = (e, pins) => (e.type === 'OPAMP' ? pins[2] : pins[0]);
+
+    // ---- results ----
+    const dcCache = {};
+    function dcX(mode) {
+      if (!dcCache[mode]) {
+        const ctx = { mode: 'op', avg: mode !== 't0', t0m: mode === 't0', t: 0, gsh: 0, src: 1 };
+        dcCache[mode] = { x: op(ctx), ctx };
+      }
+      return dcCache[mode];
+    }
+    function dc(opts) {
+      const mode = opts && opts.mode === 't0' ? 't0' : 'avg';
+      const { x, ctx } = dcX(mode), nodes = {}, branches = {}, pins = {};
+      for (const nm of ck.outNames) nodes[nm] = vx(x, ck.resolveName(nm));
+      for (const e of ck.real) { const pc = pinCurrents(e, x, ctx); pins[e.id] = pc; branches[e.id] = mainCurrent(e, pc); }
+      return { nodes, branches, pins };
+    }
+
+    let tranCache = null;
+    function runTransient(o) {
+      o = o || {};
+      const dt = num(o.dt), tEnd = num(o.tEnd), maxSteps = o.maxSteps === undefined ? MAX_STEPS : num(o.maxSteps);
+      if (!(dt > 0) || !(tEnd > 0)) throw fail('bad-args');
+      const steps = Math.ceil(tEnd / dt - 1e-9);
+      if (!(maxSteps > 0) || maxSteps > MAX_STEPS || steps > maxSteps) throw fail('budget', { steps, limit: Math.min(maxSteps, MAX_STEPS) || MAX_STEPS });
+      const key = `${dt}|${tEnd}|${!!o.uic}`;
+      if (tranCache && tranCache.key === key) return tranCache;
+      const caps = ck.els.filter(e => e.type === 'C'), inds = ck.els.filter(e => e.type === 'L');
+      let x;
+      if (o.uic) {
+        x = new Float64Array(S);
+        for (const e of caps) { e.vp = e.ic === null ? 0 : e.ic; e.ip = 0; }
+        for (const e of inds) { e.ip = e.ic === null ? 0 : e.ic; e.vp = 0; }
+      } else {
+        x = op({ mode: 'op0', t0m: true, t: 0, gsh: 0, src: 1 });
+        for (const e of caps) { e.vp = vx(x, e.a) - vx(x, e.c); e.ip = 0; }
+        for (const e of inds) { e.ip = x[e.k]; e.vp = vx(x, e.a) - vx(x, e.c); }
+      }
+      const V = []; for (let i = 0; i < N; i++) { V.push(new Float64Array(steps + 1)); V[i][0] = x[i]; }
+      const I = ck.real.map(e => { const arr = new Float64Array(steps + 1); arr[0] = mainCurrent(e, pinCurrents(e, x, { mode: 'op', t0m: true, t: 0, src: 1 })); return arr; });
+      const tol = 1e-6 * dt;
+      const nextBp = t => { let m = Infinity; for (const e of ck.sources) { const b = e.w.next(t); if (b < m) m = b; } return m; };
+      let bp = nextBp(-tol);   // a breakpoint at t = 0 makes the first step backward Euler anyway
+      const ctx = { mode: 'tran', t: 0, h: dt, be: true, gsh: 0, src: 1, avg: false, t0m: false };
+      let xs = x;
+      for (let s = 0; s < steps; s++) {
+        const t1 = (s + 1) * dt;
+        ctx.t = t1; ctx.be = s === 0 || bp <= t1 + tol;
+        if (bp <= t1 + tol) bp = nextBp(t1 + tol);
+        ctx.gsh = 0;
+        if (!newton(ctx, xs, 60)) {
+          let ok = true, xg = xs;
+          for (let i = 3; i <= 12 && ok; i++) { ctx.gsh = Math.pow(10, -i); if (newton(ctx, xg, 100)) xg = Float64Array.from(X); else ok = false; }
+          ctx.gsh = 0;
+          if (!ok || !newton(ctx, xg, 100)) throw fail('no-convergence', { t: t1 });
+        }
+        xs = Float64Array.from(X);
+        for (const e of caps) {
+          const v = vx(xs, e.a) - vx(xs, e.c), geq = (ctx.be ? 1 : 2) * e.C / dt;
+          e.ip = geq * (v - e.vp) - (ctx.be ? 0 : e.ip); e.vp = v;
+        }
+        for (const e of inds) { e.ip = xs[e.k]; e.vp = vx(xs, e.a) - vx(xs, e.c); }
+        for (let i = 0; i < N; i++) V[i][s + 1] = xs[i];
+        ck.real.forEach((e, j) => { I[j][s + 1] = mainCurrent(e, pinCurrents(e, xs, ctx)); });
+      }
+      const T = new Float64Array(steps + 1); for (let s = 0; s <= steps; s++) T[s] = s * dt;
+      tranCache = { key, T, V, I, steps };
+      return tranCache;
+    }
+    function transient(o) {
+      const r = runTransient(o), zero = Array.from(new Float64Array(r.steps + 1)), nodes = {}, branches = {};
+      for (const nm of ck.outNames) { const i = ck.resolveName(nm); nodes[nm] = i < 0 ? zero.slice() : Array.from(r.V[i]); }
+      ck.real.forEach((e, j) => { branches[e.id] = Array.from(r.I[j]); });
+      return { t: Array.from(r.T), nodes, branches };
+    }
+
+    // ---- instruments ----
+    function where(ref) {
+      if (typeof ref !== 'string') throw fail('unknown-node', { ref });
+      if (ref[0] === '@') {
+        const [eid, pin] = parsePinRef(ref.slice(1)), e = ck.byId.get(eid);
+        if (!e || pin === undefined || !(pin < e.boardPins.length)) throw fail('unknown-node', { ref });
+        return e.boardPins[pin];
+      }
+      const i = ck.resolveName(ref);
+      if (i === undefined) throw fail('unknown-node', { ref });
+      return i;
+    }
+    const rngFor = probe => (noise ? mulberry32(hash32(JSON.stringify(probe), noise.seed)) : null);
+    const jit = (v, r) => (r ? v * (1 + noise.rel * (2 * r() - 1)) + noise.abs * (2 * r() - 1) : v);
+    function window_(probe) {
+      const tEnd = num(probe.tEnd), dt = probe.dt === undefined ? tEnd / 1000 : num(probe.dt), tStart = probe.tStart === undefined ? 0 : num(probe.tStart);
+      const r = runTransient({ dt, tEnd, maxSteps: probe.maxSteps, uic: probe.uic });
+      let s0 = 0; while (s0 < r.steps && r.T[s0] < tStart - 1e-9 * dt) s0++;
+      return { r, s0 };
+    }
+    const trace = (r, i) => (i < 0 ? new Float64Array(r.steps + 1) : r.V[i]);
+    function stats(t, v) {
+      let mn = Infinity, mx = -Infinity, sum = 0, sq = 0;
+      for (const y of v) { if (y < mn) mn = y; if (y > mx) mx = y; sum += y; sq += y * y; }
+      const n = v.length, mean = sum / n, pp = mx - mn, mid = (mx + mn) / 2, hyst = 0.1 * pp;
+      const ups = []; let high = v[0] > mid;
+      for (let i = 1; i < n; i++) {
+        if (!high && v[i] > mid + hyst / 2) { high = true; let j = i; while (j > 0 && v[j - 1] > mid) j--; const y0 = v[j - 1 < 0 ? 0 : j - 1], y1 = v[j]; ups.push(j > 0 && y1 !== y0 ? t[j - 1] + (mid - y0) / (y1 - y0) * (t[j] - t[j - 1]) : t[j]); }
+        else if (high && v[i] < mid - hyst / 2) high = false;
+      }
+      const freq = pp > 0 && ups.length >= 2 ? (ups.length - 1) / (ups[ups.length - 1] - ups[0]) : 0;
+      return { min: mn, max: mx, mean, pp, rms: Math.sqrt(sq / n), freq };
+    }
+    function measure(probe) {
+      if (!isObj(probe)) throw fail('probe');
+      const r = rngFor(probe);
+      switch (probe.kind) {
+        case 'V': {
+          const ia = where(probe.a), ib = where(probe.b === undefined ? 'gnd' : probe.b), { x } = dcX('avg');
+          return { kind: 'V', value: jit(vx(x, ia) - vx(x, ib), r), unit: 'V' };
+        }
+        case 'I': {
+          const e = ck.byId.get(probe.element); if (!e) throw fail('unknown-element', { ref: probe.element });
+          const { x, ctx } = dcX('avg'), pc = pinCurrents(e, x, ctx);
+          if (probe.pin !== undefined && !(probe.pin >= 0 && probe.pin < pc.length)) throw fail('probe');
+          return { kind: 'I', value: jit(probe.pin === undefined ? mainCurrent(e, pc) : pc[probe.pin], r), unit: 'A' };
+        }
+        case 'R': {
+          const ia = where(probe.a), ib = where(probe.b === undefined ? 'gnd' : probe.b);
+          let R = 0;
+          if (ia !== ib) { const x = op({ mode: 'ohm', test: { a: ia, b: ib }, avg: true, t: 0, gsh: 0, src: 1 }); R = (vx(x, ia) - vx(x, ib)) / OHM_I; }
+          return { kind: 'R', value: Math.abs(R) > OHM_OL ? 'OL' : jit(R, r), unit: 'ohm' };
+        }
+        case 'scope': {
+          const { r: tr, s0 } = window_(probe), ia = where(probe.node), ib = where(probe.ref === undefined ? 'gnd' : probe.ref);
+          const va = trace(tr, ia), vb = trace(tr, ib), t = [], v = [];
+          for (let s = s0; s <= tr.steps; s++) { t.push(tr.T[s]); v.push(jit(va[s] - vb[s], r)); }
+          return { kind: 'scope', t, v, unit: 'V', stats: stats(t, v) };
+        }
+        case 'logic': {
+          if (!Array.isArray(probe.nodes) || !probe.nodes.length) throw fail('probe');
+          const th = probe.threshold === undefined ? 1.5 : num(probe.threshold), { r: tr, s0 } = window_(probe);
+          const t = Array.from(tr.T.subarray(s0)), traces = {}, edges = {}, st = {};
+          for (const nm of probe.nodes) {
+            const v = trace(tr, where(nm)), bits = [], ed = [];
+            for (let s = s0; s <= tr.steps; s++) {
+              const b = v[s] > th ? 1 : 0; bits.push(b);
+              if (s > s0 && b !== bits[bits.length - 2]) {
+                const y0 = v[s - 1], y1 = v[s], tt = y1 !== y0 ? tr.T[s - 1] + (th - y0) / (y1 - y0) * (tr.T[s] - tr.T[s - 1]) : tr.T[s];
+                ed.push({ t: tt, to: b });
+              }
+            }
+            traces[nm] = bits; edges[nm] = ed;
+            const ups = ed.filter(z => z.to === 1);
+            let freq = 0, duty = bits.reduce((p, b) => p + b, 0) / bits.length;
+            if (ups.length >= 2) {
+              const t0 = ups[0].t, t1 = ups[ups.length - 1].t; freq = (ups.length - 1) / (t1 - t0);
+              let hi = 0, lvl = 1, tp = t0;
+              for (const z of ed) { if (z.t <= t0) continue; if (z.t > t1) break; if (lvl) hi += z.t - tp; lvl = z.to; tp = z.t; }
+              duty = hi / (t1 - t0);
+            }
+            st[nm] = { freq, duty, edges: ed.length };
+          }
+          return { kind: 'logic', t, traces, edges, stats: st, threshold: th };
+        }
+      }
+      throw fail('probe');
+    }
+    return { dc, transient, measure };
+  }
+
+  function create(netlist, opts) {
+    opts = opts || {};
+    const problems = check(netlist);
+    if (problems.some(p => p.level === 'error')) throw fail('invalid', { problems });
+    if (opts.faults !== undefined && !Array.isArray(opts.faults)) throw fail('fault', { index: -1 });
+    const faults = JSON.parse(JSON.stringify(opts.faults || []));
+    let noise = null;
+    if (opts.noise) {
+      const rel = num(opts.noise.rel === undefined ? 0 : opts.noise.rel), abs = num(opts.noise.abs === undefined ? 0 : opts.noise.abs);
+      if (!(rel >= 0) || !(abs >= 0)) throw fail('bad-args');
+      noise = { rel, abs, seed: (opts.noise.seed !== undefined ? num(opts.noise.seed) : opts.seed !== undefined ? num(opts.seed) : 1) >>> 0 };
+    }
+    let nl = JSON.parse(JSON.stringify(netlist)), inner = makeSim(compile(nl, faults), noise);
+    return Object.freeze({
+      id: ID,
+      dc: o => inner.dc(o),
+      transient: o => inner.transient(o),
+      measure: p => inner.measure(p),
+      /** the learner flips a switch or turns a knob: {on} for SW, {value} for R, C, L, V, I */
+      set(id, patch) {
+        const el = nl.elements.find(e => e.id === id);
+        if (!el || !isObj(patch)) throw fail('unknown-element', { ref: id });
+        const next = JSON.parse(JSON.stringify(nl)), ne = next.elements.find(e => e.id === id);
+        if (patch.on !== undefined) ne.on = patch.on;
+        if (patch.value !== undefined) ne.value = patch.value;
+        const pr = check(next);
+        if (pr.some(p => p.level === 'error')) throw fail('invalid', { problems: pr });
+        nl = next; inner = makeSim(compile(nl, faults), noise);
+      },
+    });
+  }
+
+  /** the engine's own source, to run it in a Worker (the sim-spec@1 runtime's workerSource: engine/src/36_engine_circuit_sim.js) */
+  const source = () => '(' + noemaCircuitModule.toString() + ')(self);';
+  root.NoemaCircuit = Object.freeze({ id: ID, format: FORMAT, limits: Object.freeze({ nodes: MAX_NODES, elements: MAX_ELEMENTS, steps: MAX_STEPS }), FAULT_KINDS: Object.freeze(FAULT_KINDS.slice()), check, checkFaults, create, num, source });
+  /* i18n-ignore-end */
+})(typeof window !== 'undefined' ? window : globalThis);
+
+/* ---- 36_engine_circuit_sim.js ---- */
+/* ===================== interactive activities — circuit-mna@1 as an engine of sim-spec@1 (docs/INTERACTIVE_CIRCUIT.md, docs/INTERACTIVE.md §12.6–12.7) =====================
+   Registers NoemaCircuit (36_engine_circuit.js) with ACT.registerEngine. A spec names it ("engine": "circuit-mna@1") and gives
+     model: { netlist (noema.circuit/v1), bindings: [{element, prop?, expr}], transient?: {tEnd, dt?}, noise?: {rel, abs} }
+     outputs: [{id, kind: 'scalar', node | branch, at? | stat?} | {id, kind: 'scalar', probe: {kind: V | I | R, …}}
+               | {id, kind: 'series', time: true | node | branch}]
+   and, for a fault-finding bench, `bench` (35_activity_sim.js renders it; this engine answers its measurements).
+   The engine runs in a Worker (workerSource: the engine's own source + the adapter below); the expressions (bindings, transient
+   times, `at`) are the app's NoemaExpr on the main thread (prepare), so the worker gets numbers only. The hidden fault of a bench
+   reaches the engine as opts.faults (the change to the circuit), never the page. */
+(() => {
+  /* i18n-ignore-start */   // code: numbers in, numbers out
+  if (typeof ACT === 'undefined' || !window.NoemaCircuit) return;
+  /** the adapter: create(spec, {seed, faults}) → { run(inputs) → outputs, measure(inputs, probe) → reading } — runs in the worker
+      (as text, with the engine's source before it) and inline when a browser refuses the worker */
+  function circuitSimEngine(root) {
+    const C = root.NoemaCircuit, STATS = ['final', 'min', 'max', 'mean', 'pp', 'rms'], MAXP = 2000;
+    const clone = o => JSON.parse(JSON.stringify(o));
+    const thin = (a, n) => { if (a.length <= n) return Array.from(a); const k = (a.length - 1) / (n - 1), r = []; for (let i = 0; i < n; i++) r.push(a[Math.round(i * k)]); return r; };
+    function at(t, v, x) {   // linear interpolation of a sampled series at time x
+      if (!(x >= t[0])) return v[0]; if (x >= t[t.length - 1]) return v[v.length - 1];
+      let lo = 0, hi = t.length - 1; while (hi - lo > 1) { const m = (lo + hi) >> 1; if (t[m] <= x) lo = m; else hi = m; }
+      return v[lo] + (v[hi] - v[lo]) * (x - t[lo]) / (t[hi] - t[lo] || 1);
+    }
+    function stat(v, s) {
+      if (s === 'final') return v[v.length - 1];
+      let mn = Infinity, mx = -Infinity, sum = 0, sq = 0; for (const y of v) { if (y < mn) mn = y; if (y > mx) mx = y; sum += y; sq += y * y; }
+      return s === 'min' ? mn : s === 'max' ? mx : s === 'mean' ? sum / v.length : s === 'pp' ? mx - mn : Math.sqrt(sq / v.length);
+    }
+    function setProp(el, prop, v) {
+      if (prop === 'on') el.on = typeof v === 'boolean' ? v : v !== 0 && v === v;
+      else if (prop === 'value') el.value = v;
+      else { const [w, f] = prop.split('.'); if (el.value && typeof el.value === 'object' && el.value[w]) el.value[w][f] = v; }
+    }
+    root.noemaEngine = { create(spec, opts) {
+      const model = spec.model || {}, outs = spec.outputs || [], seed = (opts && opts.seed) >>> 0, faults = (opts && opts.faults) || [];
+      let key = null, sim = null;
+      function simFor(inp) {
+        const k = JSON.stringify(inp.$bind || []);
+        if (k !== key) {
+          const nl = clone(model.netlist), byId = new Map(nl.elements.map(e => [e.id, e]));
+          for (const [id, prop, v] of inp.$bind || []) { const el = byId.get(id); if (el) setProp(el, prop, v); }
+          sim = C.create(nl, { faults, seed, noise: model.noise ? { rel: model.noise.rel || 0, abs: model.noise.abs || 0, seed } : undefined }); key = k;
+        }
+        return sim;
+      }
+      return {
+        run(inp) {
+          const s = simFor(inp), r = {}, tr = inp.$tran;
+          let dc = null, tran = null;
+          const DC = () => dc || (dc = s.dc());
+          const TR = () => tran || (tran = s.transient({ tEnd: tr.tEnd, dt: tr.dt > 0 ? tr.dt : tr.tEnd / 1000 }));
+          for (const o of outs) {
+            try {
+              if (o.kind === 'series') { const T = TR(); r[o.id] = thin(o.time ? T.t : o.node !== undefined ? T.nodes[o.node] || [] : T.branches[o.branch] || [], MAXP); continue; }
+              if (o.probe) { const m = s.measure(o.probe); r[o.id] = typeof m.value === 'number' ? m.value : Infinity; continue; }   // (an ohmmeter over its range: ∞)
+              const tw = o.at !== undefined || o.stat !== undefined;
+              if (!tw) { const d = DC(); r[o.id] = o.node !== undefined ? d.nodes[o.node] : d.branches[o.branch]; continue; }
+              const T = TR(), v = o.node !== undefined ? T.nodes[o.node] : T.branches[o.branch];
+              r[o.id] = !v ? NaN : o.stat !== undefined ? (STATS.includes(o.stat) ? stat(v, o.stat) : NaN) : at(T.t, v, inp.$at ? inp.$at[o.id] : NaN);
+            } catch (e) { r[o.id] = o.kind === 'series' ? [] : NaN; }
+          }
+          return r;
+        },
+        /** one reading of an instrument (docs/INTERACTIVE_CIRCUIT.md: V, I, R, scope, logic); traces thinned to 2000 points */
+        measure(inp, probe) {
+          try {
+            const m = simFor(inp).measure(probe);
+            if (m.kind === 'scope') return { kind: 'scope', t: thin(m.t, MAXP), v: thin(m.v, MAXP), stats: m.stats };
+            if (m.kind === 'logic') { const out = {}; for (const nm of Object.keys(m.traces)) out[nm] = { level0: m.traces[nm][0], edges: m.edges[nm].slice(0, MAXP), stats: m.stats[nm] }; return { kind: 'logic', t0: m.t[0], t1: m.t[m.t.length - 1], traces: out }; }
+            return { kind: m.kind, value: m.value };
+          } catch (e) { return { kind: probe && probe.kind, error: String(e && e.code || 'error') }; }
+        },
+      };
+    } };
+  }
+  const local = { NoemaCircuit: window.NoemaCircuit }; circuitSimEngine(local);
+  ACT.registerEngine({
+    id: 'circuit-mna@1', bench: true,
+    /** after the common checks (NoemaPackCheck.checkSimSpec checks the model, the outputs and the bench): the engine's own netlist check */
+    check: spec => NoemaCircuit.check(spec?.model?.netlist).filter(p => p.level === 'error').map(p => `netlist ${p.path}: ${p.msg}`),
+    /** on the main thread: the expressions become numbers (bindings, transient times, `at`), so the worker needs no evaluator */
+    prepare(spec, compile) {
+      const m = spec.model || {}, f = v => typeof v === 'string' ? compile(v) : () => v;
+      const binds = (m.bindings || []).map(b => [b.element, b.prop || 'value', compile(b.expr)]);
+      const tEnd = m.transient ? f(m.transient.tEnd) : null, dt = m.transient && m.transient.dt !== undefined ? f(m.transient.dt) : null;
+      const ats = (spec.outputs || []).filter(o => o.at !== undefined).map(o => [o.id, f(o.at)]);
+      const ev = (g, env) => { try { const v = g(env); return typeof v === 'boolean' ? v : +v; } catch (e) { return NaN; } };
+      return env => ({ ...env, $bind: binds.map(([id, prop, g]) => [id, prop, ev(g, env)]), $tran: tEnd ? { tEnd: ev(tEnd, env), dt: dt ? ev(dt, env) : 0 } : null, $at: Object.fromEntries(ats.map(([id, g]) => [id, ev(g, env)])) });
+    },
+    create: (spec, opts) => local.noemaEngine.create(spec, opts),
+    workerSource: NoemaCircuit.source() + '\n;(' + circuitSimEngine.toString() + ')(self);',
+  });
+  /* i18n-ignore-end */
+})();
+
+/* ---- 37_activity_py.js ---- */
+/* ===================== interactive activities — runtime py-module@1 (Tier C: Python with numpy/scipy, docs/activities-dev/pyodide.md) =====================
+   The activity is Python source (act.python) with a function step(inputs, state) → outputs (a dict) and an optional init(task, seed).
+   Its UI is not Python: the app draws the controls and plots from a declarative spec and calls step with py:step {inputs} → py:out {outputs}.
+   Where it runs: <iframe sandbox="allow-scripts"> (opaque origin "null") holding only OUR runner script (allowed by its hash), which
+   starts a blob: Worker with Pyodide 0.27.7. The runner has NO network at all (connect-src 'none'): the app reads the pinned files
+   (sha256-checked against /vendor/pyodide/manifest.json, cached on the device by engine/pyodide-sw.js) and hands their bytes over the
+   MessagePort; inside the worker, fetch() and importScripts() are replaced by a lookup in those bytes, so Pyodide, numpy, scipy and the
+   allow-listed extra wheels (micropip, our own index only) load without a request — and nothing else can be loaded: the lookup is
+   emptied once Python has started, and the policy blocks every real request (fetch, XHR, WebSocket, importScripts, import()).
+   A step that runs longer than its budget (3 s) ends the worker: error {code:'runaway'}; py:restart (or a new mount) starts it again.
+   Handshake as html-app@1 (34_activity_html.js): the runner posts hello {nonce} to the app, which hands over one MessagePort.
+   Not available on file:// copies and in the one-file bundle (no service worker, no cache, no files): the core shows the fallback.
+   Page API: window.NoemaPy = { available(), prepareOffline({include, onProgress, force}), status(), protocol, config() }. */
+(() => {
+  /* i18n-ignore-start */   // code, protocol names and Python source — no UI text
+  const DEFAULTS = { base: '/vendor/pyodide/0.27.7/', manifest: '/vendor/pyodide/manifest.json', sw: '/engine/pyodide-sw.js', swScope: '/vendor/pyodide/',
+    loader: '/vendor/pyodide/__loader.html', stepMs: 3000, initMs: 20000, startMs: 120000, maxPython: 256 * 1024 };
+  const config = () => Object.assign({}, DEFAULTS, (typeof window !== 'undefined' && window.NOEMA_CONFIG && window.NOEMA_CONFIG.py) || {});
+  const CACHE = 'noema-py-v1';
+  const BASE_PKGS = ['numpy', 'scipy'];
+  const VB = 'https://py.noema.invalid/';   // the virtual address of the files inside the worker (never requested: .invalid)
+  const isObj = v => v != null && typeof v === 'object' && !Array.isArray(v);
+  const jsize = v => { try { return JSON.stringify(v).length; } catch (e) { return Infinity; } };
+  const err = (code, message) => Object.assign(new Error(message || code), { code });
+  const hex = async buf => Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', buf)), b => b.toString(16).padStart(2, '0')).join('');
+  const b64 = async text => btoa(String.fromCharCode(...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text)))));
+  const TYPES = { js: 'text/javascript', wasm: 'application/wasm', json: 'application/json', zip: 'application/zip', whl: 'application/zip' };
+  const typeOf = p => TYPES[(p.split('.').pop() || '').toLowerCase()] || 'application/octet-stream';
+
+  /* ---------- the small protocol of this runtime (on top of noema.activity/v1, same envelope) ----------
+     app → runner  py:boot {python, packages, extras, stepMs, files}   (once, after init; files: { vpath: ArrayBuffer })
+                   py:step {inputs} + id          → py:out {outputs} | {error:{code, message}} + re = that id
+                   py:restart {}                  → a new worker with the same files and the last saved state
+     runner → app  py:status {phase: loading|starting|ready|stopped|failed, code?, message?, ms?}
+                   py:out {outputs?, error?, ms?, init?}   (init: true — what init(task, seed) returned) */
+  const PHASES = ['loading', 'starting', 'ready', 'stopped', 'failed'];
+  const CODE = /^[a-z0-9_.-]{1,40}$/;
+  const PY_IN = {
+    'py:out': p => (p.outputs == null || isObj(p.outputs)) && (p.error == null || (isObj(p.error) && CODE.test(p.error.code || '') && (p.error.message == null || (typeof p.error.message === 'string' && p.error.message.length <= 2000)))) && (p.ms == null || (typeof p.ms === 'number' && isFinite(p.ms))),
+    'py:status': p => PHASES.includes(p.phase) && (p.code == null || CODE.test(p.code)) && (p.message == null || (typeof p.message === 'string' && p.message.length <= 2000)),
+  };
+  const PY_OUT = { 'py:step': p => isObj(p.inputs), 'py:restart': p => true, 'py:boot': p => typeof p.python === 'string' };
+  /** → { ok, msg } | { ok: false, why } — the py:* messages (both directions), like ACTP.check; limits: one message ≤ 64 KB (as ACTP) */
+  function pyCheck(data, dir = 'in') {
+    if (!isObj(data) || data.p !== 'noema.activity' || data.v !== 1 || typeof data.type !== 'string') return { ok: false, why: 'not this protocol' };
+    const rules = dir === 'in' ? PY_IN : PY_OUT, rule = Object.prototype.hasOwnProperty.call(rules, data.type) ? rules[data.type] : null;
+    if (!rule) return { ok: false, why: 'unknown type ' + data.type, ignore: true };
+    const payload = data.payload == null ? {} : data.payload;
+    if (!isObj(payload)) return { ok: false, why: 'payload is not an object' };
+    if (data.type !== 'py:boot' && jsize(data) > 64 * 1024) return { ok: false, why: 'message too big' };
+    if (!rule(payload)) return { ok: false, why: 'bad ' + data.type };
+    return { ok: true, msg: { type: data.type, id: data.id, re: data.re, payload } };
+  }
+
+  /* ---------- the files: pinned manifest, service worker, cache ---------- */
+  const available = () => { try { return !!(!window.NOEMA_BUNDLE && window.isSecureContext && /^https?:$/.test(location.protocol) && 'caches' in window && window.crypto?.subtle && typeof Worker === 'function' && typeof WebAssembly === 'object'); } catch (e) { return false; } };
+  let swP = null, loaderEl = null, loaderP = null, loaderNo = 0, manP = null, via = null;   // via: how the last file was read ('sw' | 'page')
+  /** the registration of engine/pyodide-sw.js with an active worker, or null (unsupported, refused, NOEMA_CONFIG.py.sw === false) */
+  function sw() {
+    if (swP) return swP;
+    return swP = (async () => {
+      const c = config();
+      if (c.sw === false || !navigator.serviceWorker) return null;
+      try {
+        const reg = await navigator.serviceWorker.register(c.sw + '?manifest=' + encodeURIComponent(c.manifest), { scope: c.swScope });
+        if (!reg.active) {
+          const w = reg.installing || reg.waiting;
+          if (w) await new Promise(res => { const t = setTimeout(res, 10000); w.addEventListener('statechange', () => { if (w.state === 'activated' || w.state === 'redundant') { clearTimeout(t); res(); } }); });
+        }
+        return reg.active ? reg : null;
+      } catch (e) { console.warn('[noema] python: no service worker —', e && e.message); return null; }
+    })();
+  }
+  /** a hidden same-origin page in the worker's scope (served by the worker itself, no scripts can run in it): its fetch() goes
+      through the service worker. null → the page reads the cache itself (the same cache, the same checks). */
+  function loader() {
+    if (loaderEl && loaderEl.isConnected) return Promise.resolve(loaderEl);
+    if (loaderP) return loaderP;
+    if (Date.now() - loaderNo < 60000) return Promise.resolve(null);   // it just failed: the page's cache for a while
+    return loaderP = (async () => {
+      const reg = await sw(); if (!reg) return null;
+      const f = document.createElement('iframe');
+      f.src = config().loader; f.title = 'noema python files'; f.setAttribute('aria-hidden', 'true'); f.tabIndex = -1; f.style.display = 'none';
+      await new Promise(res => { f.addEventListener('load', res, { once: true }); setTimeout(res, 5000); (document.body || document.documentElement).append(f); });
+      let ok = false;
+      try { ok = !!f.contentWindow.navigator.serviceWorker.controller && typeof f.contentWindow.fetch === 'function' && f.contentDocument.title === 'noema python files'; } catch (e) { }
+      if (!ok) { f.remove(); loaderNo = Date.now(); return null; }
+      return (loaderEl = f);
+    })().finally(() => { loaderP = null; });
+  }
+  async function cache() { try { return await caches.open(CACHE); } catch (e) { return null; } }
+  /** the bytes of one pinned file, checked: the service worker (cache first) or, without it, the page's own cache */
+  async function getFile(path, sha256) {
+    const url = new URL(path, location.origin).href, f = await loader();
+    let buf;
+    if (f) {
+      let r; try { r = await f.contentWindow.fetch(url); } catch (e) { throw err('offline', path); }
+      if (!r.ok) throw err(r.headers.get('x-noema-error') === 'integrity' ? 'integrity' : r.status === 504 ? 'offline' : 'fetch', path + ' ' + r.status);
+      buf = await r.arrayBuffer(); via = 'sw';
+    } else {
+      via = 'page';
+      const c = await cache(), hit = c && await c.match(url);
+      if (hit) buf = await hit.arrayBuffer();
+      else {
+        let r; try { r = await fetch(url, { cache: 'no-cache', credentials: 'omit' }); } catch (e) { throw err('offline', path); }
+        if (!r.ok) throw err('fetch', path + ' ' + r.status);
+        buf = await r.arrayBuffer();
+        if (await hex(buf) !== sha256) throw err('integrity', path);
+        try { await c?.put(url, new Response(buf.slice(0), { headers: { 'content-type': typeOf(path) } })); } catch (e) { }
+        return buf;
+      }
+    }
+    if (await hex(buf) !== sha256) { try { (await cache())?.delete(url); } catch (e) { } throw err('integrity', path); }
+    return buf;
+  }
+  /** the runtime manifest written by tools/fetch_pyodide.py (network first; the cached copy offline) */
+  function manifest() {
+    if (manP) return manP;
+    manP = (async () => {
+      const url = new URL(config().manifest, location.origin).href, f = await loader();
+      let m = null;
+      if (f) { const r = await f.contentWindow.fetch(url).catch(() => null); if (r && r.ok) m = await r.json(); }
+      else {
+        const c = await cache();
+        try { const r = await fetch(url, { cache: 'no-cache', credentials: 'omit' }); if (r.ok) { m = await r.clone().json(); try { await c?.put(url, r); } catch (e) { } } } catch (e) { }
+        if (!m && c) { const hit = await c.match(url); if (hit) m = await hit.json(); }
+      }
+      if (!m || m.format !== 'noema.pyodide-manifest/v1' || !Array.isArray(m.core) || !isObj(m.files)) throw err('offline', 'no manifest');
+      return m;
+    })();
+    manP.catch(() => { manP = null; });
+    return manP;
+  }
+  /** what an activity's packages need: [{ vpath, path, sha256, bytes }] (core first) and the extra wheels; throws 'packages' */
+  function plan(man, packages) {
+    const out = new Map(), extras = [];
+    const add = (vpath, path, pin) => { if (!pin || !/^[0-9a-f]{64}$/.test(pin.sha256 || '')) throw err('packages', 'not pinned: ' + path); out.set(vpath, { vpath, path, sha256: pin.sha256, bytes: pin.bytes || 0 }); };
+    const pkg = name => { const files = man.packages && man.packages[name]; if (!Array.isArray(files)) throw err('packages', name + ' is not on this site'); for (const f of files) add('pyodide/' + f, man.base + f, man.files[f]); };
+    for (const f of man.core) add('pyodide/' + f, man.base + f, man.files[f]);
+    for (const p of packages) {
+      if (BASE_PKGS.includes(p)) pkg(p);
+      else if (man.wheels && Object.prototype.hasOwnProperty.call(man.wheels, p)) extras.push({ name: p, file: man.wheels[p].file });
+      else throw err('packages', p + ' is not on the allow-list');
+    }
+    if (extras.length) { pkg('micropip'); for (const x of extras) { const w = man.wheels[x.name]; if (!/^[A-Za-z0-9_.-]+-py3-none-any\.whl$/.test(w.file || '')) throw err('packages', 'bad wheel ' + x.name); add('pywheels/' + w.file, man.wheelsBase + w.file, w); } }
+    return { files: [...out.values()], extras };
+  }
+  async function loadAll(list, onProgress) {
+    const files = {}, total = list.length, totalBytes = list.reduce((s, f) => s + f.bytes, 0);
+    let done = 0, bytes = 0, i = 0;
+    const one = async () => { while (i < list.length) { const f = list[i++]; files[f.vpath] = await getFile(f.path, f.sha256); done++; bytes += f.bytes; onProgress && onProgress({ file: f.path, done, total, bytes, totalBytes }); } };
+    await Promise.all([one(), one(), one()]);
+    return files;
+  }
+  async function persist() {
+    try { if (!navigator.storage?.persist) return null; if (await navigator.storage.persisted()) return true; return await Promise.race([navigator.storage.persist(), new Promise(r => setTimeout(() => r(null), 3000))]); } catch (e) { return null; }
+  }
+  /** Settings → "Prepare Python for offline": download and keep the core + the named packages (numpy, scipy, allow-listed extras).
+      Never automatic; on a metered / save-data connection only with force. → { ok, files, bytes, persisted, failed: [{file, code}] } */
+  async function prepareOffline(opts = {}) {
+    const include = Array.isArray(opts.include) ? opts.include : ['numpy', 'scipy'];
+    if (!available()) return { ok: false, code: 'unavailable', files: 0, bytes: 0, persisted: null, failed: [] };
+    if (navigator.connection?.saveData && !opts.force) return { ok: false, code: 'save-data', files: 0, bytes: 0, persisted: null, failed: [] };
+    const persisted = await persist();
+    const man = await manifest();
+    const { files } = plan(man, include);
+    const failed = [];
+    let done = 0, bytes = 0;
+    const emit = d => { try { opts.onProgress?.(d); } catch (e) { } try { dispatchEvent(new CustomEvent('noema-py-progress', { detail: d })); } catch (e) { } };
+    emit({ file: null, done: 0, total: files.length, bytes: 0, totalBytes: files.reduce((s, f) => s + f.bytes, 0) });
+    let i = 0;
+    const one = async () => { while (i < files.length) { const f = files[i++]; try { await getFile(f.path, f.sha256); bytes += f.bytes; } catch (e) { failed.push({ file: f.path, code: e.code || 'fetch' }); } done++; emit({ file: f.path, done, total: files.length, bytes, totalBytes: files.reduce((s, x) => s + x.bytes, 0) }); } };
+    await Promise.all([one(), one(), one()]);
+    return { ok: !failed.length, files: files.length - failed.length, bytes, persisted, failed };
+  }
+  /** what an activity's packages need and how much of it is already on the device (the first-use note):
+      → { files, bytes, missing, missingBytes, extras: [names], extrasMissing: [names] }; throws when there is no manifest (offline, never used) */
+  async function need(packages) {
+    const man = await manifest(), { files, extras } = plan(man, Array.isArray(packages) ? packages : []);
+    const c = await cache(), have = new Set(c ? (await c.keys()).map(r => new URL(r.url).pathname) : []);
+    const miss = files.filter(f => !have.has(new URL(f.path, location.origin).pathname));
+    const sum = l => l.reduce((n, f) => n + (f.bytes || 0), 0);
+    return { files: files.length, bytes: sum(files), missing: miss.length, missingBytes: sum(miss), extras: extras.map(x => x.name),
+      extrasMissing: extras.filter(x => miss.some(f => f.vpath === 'pywheels/' + man.wheels[x.name].file)).map(x => x.name) };
+  }
+  /** what is on the device: { supported, sw: 'active'|'none', via: how the last file was read ('sw'|'page'|null), persisted, version, cachedBytes, groups: { core, numpy, scipy, micropip, <extra>: { files, cached, bytes, ready } } } */
+  async function status() {
+    const out = { supported: available(), sw: 'none', via, persisted: null, version: null, cachedBytes: 0, groups: {} };
+    if (!out.supported) return out;
+    try { out.persisted = navigator.storage?.persisted ? await navigator.storage.persisted() : null; } catch (e) { }
+    try { const reg = await navigator.serviceWorker?.getRegistration(config().swScope); out.sw = reg && reg.active ? 'active' : 'none'; } catch (e) { }
+    let man; try { man = await manifest(); } catch (e) { return out; }
+    out.version = man.version;
+    const c = await cache(), have = new Set(c ? (await c.keys()).map(r => new URL(r.url).pathname) : []);
+    const group = (name, list) => { const g = { files: list.length, cached: 0, bytes: 0 }; for (const [p, pin] of list) { g.bytes += pin.bytes || 0; if (have.has(p)) { g.cached++; out.cachedBytes += pin.bytes || 0; } } g.ready = g.cached === g.files; out.groups[name] = g; };
+    group('core', man.core.map(f => [man.base + f, man.files[f]]));
+    for (const [n, files] of Object.entries(man.packages || {})) group(n, files.map(f => [man.base + f, man.files[f]]));
+    for (const [n, w] of Object.entries(man.wheels || {})) group(n, [[man.wheelsBase + w.file, w]]);
+    return out;
+  }
+
+  /* ---------- the worker (runs Pyodide; its source is this function's text) ---------- */
+  function workerMain() {
+    'use strict';
+    var VB = 'https://py.noema.invalid/', FILES = {}, py = null, stepFn = null, realImport = self.importScripts.bind(self);
+    var TY = { js: 'text/javascript', wasm: 'application/wasm', json: 'application/json', zip: 'application/zip', whl: 'application/zip' };
+    function post(m) { self.postMessage(m); }
+    function urlOf(x) { return String(x && typeof x === 'object' && 'url' in x ? x.url : x); }
+    function get(u) { return Object.prototype.hasOwnProperty.call(FILES, u) ? FILES[u] : null; }
+    // every load of Pyodide goes through these two; after the start FILES is empty, so nothing can be loaded any more
+    self.fetch = function (input, opts) {
+      var u = urlOf(input), b = get(u);
+      if (!b) return Promise.reject(new TypeError('noema: ' + u.slice(0, 200) + ' cannot be loaded here'));
+      var integ = opts && opts.integrity, res = function () { return new Response(b, { status: 200, headers: { 'content-type': TY[(u.split('.').pop() || '').toLowerCase()] || 'application/octet-stream' } }); };
+      if (!integ || !self.crypto || !crypto.subtle) return Promise.resolve(res());
+      return crypto.subtle.digest('SHA-256', b).then(function (d) {
+        var s = btoa(String.fromCharCode.apply(null, new Uint8Array(d)));
+        if (String(integ).split(/\s+/).indexOf('sha256-' + s) < 0) throw new TypeError('noema: integrity ' + u);
+        return res();
+      });
+    };
+    self.importScripts = function () {
+      var urls = [];
+      for (var i = 0; i < arguments.length; i++) { var b = get(urlOf(arguments[i])); if (!b) throw new TypeError('noema: script cannot be loaded here'); urls.push(URL.createObjectURL(new Blob([b], { type: 'text/javascript' }))); }
+      return realImport.apply(self, urls);
+    };
+    function msgOf(e) { var s = String(e && e.message || e); var lines = s.trim().split('\n'); return lines.slice(-6).join('\n').slice(-1500); }
+    async function boot(m) {
+      var t0 = performance.now(), t1, t2;
+      try {
+        for (var k in m.files) FILES[VB + k] = m.files[k];
+        post({ k: 'status', phase: 'starting' });
+        self.importScripts(VB + 'pyodide/pyodide.js');
+        py = await self.loadPyodide({ indexURL: VB + 'pyodide/', lockFileURL: VB + 'pyodide/pyodide-lock.json', stdLibURL: VB + 'pyodide/python_stdlib.zip', packages: [], fullStdLib: false,
+          stdout: function (s) { post({ k: 'log', text: String(s).slice(0, 500) }); }, stderr: function (s) { post({ k: 'log', text: String(s).slice(0, 500), err: true }); } });
+        t1 = performance.now();
+        var pk = m.packages.filter(function (p) { return p === 'numpy' || p === 'scipy'; });
+        if (m.extras.length) pk.push('micropip');
+        if (pk.length) await py.loadPackage(pk, { checkIntegrity: true, messageCallback: function () { }, errorCallback: function (s) { post({ k: 'log', text: String(s).slice(0, 500), err: true }); } });
+        if (m.extras.length) {
+          py.globals.set('_noema_wheels', py.toPy(m.extras.map(function (x) { return VB + 'pywheels/' + x.file; })));
+          await py.runPythonAsync('import micropip\nawait micropip.install(list(_noema_wheels), deps=False)\ntry:\n    micropip.set_index_urls(["' + VB + 'pywheels/simple/{package_name}/"])\nexcept Exception:\n    pass\ndel _noema_wheels');
+        }
+        t2 = performance.now();
+        FILES = {};   // from here on nothing can be loaded: not our files, not any other
+        py.registerJsModule('_noema_bridge', { send: function (type, json) { post({ k: 'send', type: String(type), payload: JSON.parse(String(json)) }); } });
+        py.runPython(m.api, { filename: 'noema.py' });
+        py.globals.get('_noema_setup')(JSON.stringify(m.init));
+        stepFn = py.globals.get('_noema_step');
+        post({ k: 'user' });   // the author's code starts: the runner's budget runs from here
+        var r = py.globals.get('_noema_run')(m.python);
+        post({ k: 'ready', ms: { start: Math.round(t1 - t0), packages: Math.round(t2 - t1), user: Math.round(performance.now() - t2) }, outputs: r == null ? null : String(r) });
+      } catch (e) { FILES = {}; post({ k: 'fatal', code: py ? 'python' : 'py-start', message: msgOf(e) }); }
+    }
+    self.onmessage = function (e) {
+      var m = e.data || {};
+      if (m.k === 'boot') return boot(m);
+      if (m.k === 'step') {
+        var t = performance.now();
+        try { var s = stepFn(String(m.inputs)); post({ k: 'out', id: m.id, outputs: String(s), ms: Math.round(performance.now() - t) }); }
+        catch (x) { post({ k: 'out', id: m.id, error: { code: 'python', message: msgOf(x) }, ms: Math.round(performance.now() - t) }); }
+        return;
+      }
+      if (m.k === 'locale' && py) { try { py.globals.get('_noema_locale')(JSON.stringify({ locale: m.locale, strings: m.strings })); } catch (x) { } }
+    };
+  }
+
+  /* ---------- the Python side: module noema + the step/init calls (docs/activities-dev/pyodide.md "Python API") ---------- */
+  const NOEMA_PY = String.raw`
+import sys, json, math, re, types, random as _random
+import _noema_bridge
+_I = {}
+_ACT = {'g': None}
+noema = types.ModuleType('noema')
+noema.__doc__ = 'The noema-lite activity API (py-module@1): state, task, seed, locale, t(), save_state(), event(), result(), announce(), error(), random.'
+sys.modules['noema'] = noema
+
+def _clean(o, d=0):
+    if d > 40: raise ValueError('too deeply nested')
+    if o is None or isinstance(o, (bool, str)): return o
+    if isinstance(o, int): return o
+    if isinstance(o, float): return o if math.isfinite(o) else None
+    if isinstance(o, complex): return {'re': _clean(o.real), 'im': _clean(o.imag)}
+    if isinstance(o, dict): return {str(k): _clean(v, d + 1) for k, v in o.items()}
+    if isinstance(o, (list, tuple)): return [_clean(v, d + 1) for v in o]
+    tl = getattr(o, 'tolist', None)          # numpy arrays and numpy scalars
+    if callable(tl): return _clean(tl(), d + 1)
+    raise TypeError('cannot send a value of type ' + type(o).__name__)
+
+def _send(kind, payload):
+    _noema_bridge.send(kind, json.dumps(payload, allow_nan=False))
+
+def _fill(s, v):
+    return re.sub(r'\{(\w+)\}', lambda m: str(v[m.group(1)]) if v and v.get(m.group(1)) is not None else m.group(0), s)
+
+def t(key, vars=None):
+    tb = _I.get('strings') or {}
+    return _fill(str(tb.get(key, key)) if isinstance(tb, dict) else str(key), vars)
+
+def save_state(data=None):
+    if data is not None: noema.state = data
+    _send('state', {'version': int(_I.get('stateVersion') or 1), 'data': _clean(noema.state)})
+
+def event(name, data=None):
+    p = {'name': str(name)}
+    if data is not None: p['data'] = _clean(data)
+    _send('event', p)
+
+def result(score, passed, detail=None):
+    s = float(score)
+    if not math.isfinite(s): raise ValueError('score must be a number')
+    p = {'score': max(0.0, min(1.0, s)), 'passed': bool(passed)}
+    if detail is not None: p['detail'] = str(detail)[:500]
+    _send('result', p)
+
+def announce(text):
+    text = str(text).strip()[:300]
+    if text: _send('a11y:announce', {'text': text})
+
+def error(code, message=None):
+    p = {'code': re.sub(r'[^a-z0-9_.-]', '-', str(code).lower())[:40] or 'error'}
+    if message is not None: p['message'] = str(message)[:500]
+    _send('error', p)
+
+for _f in (t, save_state, event, result, announce, error): setattr(noema, _f.__name__, _f)
+
+def _noema_setup(js):
+    i = json.loads(js); _I.clear(); _I.update(i)
+    noema.task = i.get('task') or {}
+    noema.seed = int(i.get('seed') or 0)
+    noema.locale = i.get('locale') or 'en'
+    noema.exercise = i.get('exerciseId')
+    st = i.get('state')
+    noema.state = st if st is not None else {}
+    noema.state_from = i.get('stateFrom')
+    noema.random = _random.Random(noema.seed)
+
+def _noema_locale(js):
+    i = json.loads(js); _I['strings'] = i.get('strings') or _I.get('strings'); noema.locale = i.get('locale') or noema.locale
+
+def _noema_run(src):
+    g = {'__name__': 'activity', '__builtins__': __builtins__}
+    exec(compile(src, 'activity.py', 'exec'), g)
+    _ACT['g'] = g
+    if callable(g.get('init')):
+        r = g['init'](noema.task, noema.seed)
+        if isinstance(r, dict): return json.dumps(_clean(r), allow_nan=False)
+    return None
+
+def _noema_step(js):
+    g = _ACT['g'] or {}
+    f = g.get('step')
+    if not callable(f): raise RuntimeError('the activity defines no step(inputs, state)')
+    out = f(json.loads(js), noema.state)
+    if out is None: out = {}
+    if not isinstance(out, dict): raise TypeError('step() must return a dict, not ' + type(out).__name__)
+    return json.dumps(_clean(out), allow_nan=False)
+`;
+
+  /* ---------- the runner (the sandboxed frame's only script; its source is this function's text) ---------- */
+  function runnerMain(N, WSRC, API) {
+    'use strict';
+    var P = 'noema.activity', port = null, init = null, boot = null, worker = null, pyReady = false, busy = null, queued = null, timer = null, budget = 3000, initBudget = 20000, saved = null, stopped = false;
+    var SENDS = { state: 1, event: 1, result: 1, 'a11y:announce': 1, error: 1 };
+    function out(type, payload, extra) { var m = { p: P, v: 1, type: type, payload: payload || {} }; if (extra) for (var k in extra) m[k] = extra[k]; if (port) port.postMessage(m); }
+    function on(e) { if (e.source !== parent || !e.data || e.data.t !== 'welcome' || e.data.nonce !== N || !e.ports || !e.ports[0] || port) return; port = e.ports[0]; removeEventListener('message', on, true); port.onmessage = msg; port.start(); }
+    addEventListener('message', on, true);
+    function disarm() { clearTimeout(timer); timer = null; }
+    function arm(ms) { disarm(); timer = setTimeout(runaway, ms); }
+    function kill() { disarm(); if (worker) { try { worker.terminate(); } catch (x) { } } worker = null; pyReady = false; }
+    function reply(id, payload) { if (id != null) out('py:out', payload, { re: id }); }
+    function runaway() {
+      kill(); stopped = true;
+      out('error', { code: 'runaway', message: 'the Python code ran longer than ' + (budget / 1000) + ' s and was stopped' });
+      reply(busy, { error: { code: 'runaway', message: 'stopped after ' + budget + ' ms' } }); busy = null;
+      if (queued) { reply(queued.id, { error: { code: 'runaway', message: 'stopped' } }); queued = null; }
+      out('py:status', { phase: 'stopped', code: 'runaway' });
+    }
+    function dispatch() {
+      if (!pyReady || busy != null || !queued) return;
+      var q = queued; queued = null; busy = q.id == null ? '' : q.id;
+      worker.postMessage({ k: 'step', id: q.id, inputs: JSON.stringify(q.inputs) });
+      arm(budget);
+    }
+    function start() {
+      if (!init || !boot || worker) return;
+      stopped = false; pyReady = false;
+      try { worker = new Worker(URL.createObjectURL(new Blob([WSRC], { type: 'text/javascript' }))); }
+      catch (x) { out('py:status', { phase: 'failed', code: 'worker', message: String(x && x.message || x).slice(0, 300) }); return; }
+      worker.onmessage = fromWorker;
+      worker.onerror = function (e) { if (e && e.preventDefault) e.preventDefault(); out('py:status', { phase: 'failed', code: 'py-start', message: String(e && e.message || 'worker error').slice(0, 300) }); kill(); };
+      worker.postMessage({ k: 'boot', files: boot.files, python: boot.python, packages: boot.packages, extras: boot.extras, api: API,
+        init: { task: init.task || {}, seed: init.seed >>> 0, locale: init.locale, strings: init.strings || {}, exerciseId: init.exerciseId || null, stateVersion: init.stateVersion || 1,
+          state: saved ? saved.data : null, stateFrom: saved ? saved.from || null : null } });
+    }
+    function fromWorker(e) {
+      var m = e.data || {};
+      if (m.k === 'status') return out('py:status', { phase: m.phase });
+      if (m.k === 'user') return arm(initBudget);   // the top-level code (imports: scipy.signal alone takes seconds) and init(task, seed)
+      if (m.k === 'ready') {
+        disarm(); pyReady = true; out('py:status', { phase: 'ready', ms: (m.ms.start || 0) + (m.ms.packages || 0) + (m.ms.user || 0), timing: m.ms });
+        if (m.outputs) { try { var o = JSON.parse(m.outputs); if (m.outputs.length <= 60000) out('py:out', { outputs: o, init: true }); } catch (x) { } }
+        return dispatch();
+      }
+      if (m.k === 'send') {
+        if (!SENDS[m.type]) return;
+        if (m.type === 'state') saved = { data: m.payload && m.payload.data };
+        return out(m.type, m.payload);
+      }
+      if (m.k === 'out') {
+        disarm(); var id = busy; busy = null;
+        var p = { ms: m.ms };
+        if (m.error) p.error = { code: String(m.error.code || 'python').slice(0, 40), message: String(m.error.message || '').slice(0, 1500) };
+        else if (String(m.outputs).length > 60000) p.error = { code: 'too-big', message: 'step() returned ' + String(m.outputs).length + ' bytes (at most 60000)' };
+        else { try { p.outputs = JSON.parse(m.outputs); } catch (x) { p.error = { code: 'python', message: 'bad outputs' }; } }
+        reply(id === '' ? null : id, p);
+        return dispatch();
+      }
+      if (m.k === 'fatal') { kill(); return out('py:status', { phase: 'failed', code: m.code === 'python' ? 'python' : 'py-start', message: String(m.message || '').slice(0, 1500) }); }
+      if (m.k === 'log') { try { (m.err ? console.warn : console.log)('[python]', m.text); } catch (x) { } }
+    }
+    function msg(e) {
+      var m = e.data; if (!m || m.p !== P) return; var p = m.payload || {};
+      switch (m.type) {
+        case 'ping': return out('pong');
+        case 'init': init = p; saved = p.state ? { data: p.state.data, from: p.state.migrateFrom || null } : null; out('ready', { protocols: [1], wants: ['py:step'] }); out('py:status', { phase: 'loading' }); return start();
+        case 'py:boot': boot = p; budget = Math.max(100, Math.min(+p.stepMs || 3000, 30000)); initBudget = Math.max(budget, Math.min(+p.initMs || 20000, 60000)); return start();
+        case 'py:step': if (stopped || !p || typeof p.inputs !== 'object') { reply(m.id, { error: { code: stopped ? 'stopped' : 'bad-inputs' } }); return; }
+          if (queued) reply(queued.id, { error: { code: 'superseded' } });
+          queued = { id: m.id == null ? null : m.id, inputs: p.inputs }; return dispatch();
+        case 'py:restart': kill(); busy = null; if (queued) { reply(queued.id, { error: { code: 'superseded' } }); queued = null; } return start();
+        case 'locale': if (init) { init.locale = p.locale; init.strings = p.strings || init.strings; } if (worker) worker.postMessage({ k: 'locale', locale: p.locale, strings: p.strings || (init && init.strings) }); return;
+        case 'destroy': return kill();
+      }
+    }
+    parent.postMessage({ t: 'hello', nonce: N }, '*');
+  }
+
+  const CSP = hash => ["default-src 'none'", `script-src 'sha256-${hash}' blob: 'wasm-unsafe-eval'`, 'worker-src blob:', 'child-src blob:', "connect-src 'none'", "frame-src 'none'",
+    "img-src 'none'", "style-src 'none'", "font-src 'none'", "media-src 'none'", "object-src 'none'", "form-action 'none'", "base-uri 'none'", "manifest-src 'none'"].join('; ');
+  const ALLOW = ['accelerometer', 'autoplay', 'camera', 'display-capture', 'encrypted-media', 'fullscreen', 'geolocation', 'gyroscope', 'magnetometer', 'microphone', 'midi', 'payment', 'picture-in-picture', 'publickey-credentials-get', 'screen-wake-lock', 'usb', 'web-share', 'xr-spatial-tracking'].map(f => f + " 'none'").join('; ');
+  async function runnerDoc(nonce) {
+    const js = `(${runnerMain.toString()})(${JSON.stringify(nonce)}, ${JSON.stringify('(' + workerMain.toString() + ')();')}, ${JSON.stringify(NOEMA_PY)});`.replace(/<\/(script)/gi, '<\\/$1');
+    const csp = CSP(await b64(js)).replace(/"/g, '&quot;');   // the hash of exactly the text the frame runs
+    return `<!doctype html><html><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="${csp}"><script>${js}</script></head><body></body></html>`;
+  }
+
+  function mount(box, { act, init, title, onMessage, onFail, onPy }) {
+    const c = config();
+    const nonce = Array.from(crypto.getRandomValues(new Uint8Array(16)), b => b.toString(16).padStart(2, '0')).join('');
+    const frame = document.createElement('iframe');
+    frame.setAttribute('sandbox', 'allow-scripts');   // exactly this token: never allow-same-origin
+    frame.setAttribute('allow', ALLOW);
+    frame.setAttribute('referrerpolicy', 'no-referrer');
+    frame.setAttribute('title', title || 'python');
+    frame.setAttribute('aria-hidden', 'true');   // the runner shows nothing: the app draws the activity's controls
+    frame.className = 'act-frame act-pyrunner';
+    frame.style.cssText = 'position:absolute;width:1px;height:1px;border:0;opacity:0;pointer-events:none';
+    let ch = null, closed = false, failed = false, loads = 0, seq = 0, pyReady = false;
+    const pending = [], waits = {}, L = {};
+    const emit = m => { for (const f of (L[m.type] || []).slice()) { try { f(m.payload, m); } catch (e) { console.error(e); } } for (const f of (L['*'] || []).slice()) { try { f(m.payload, m); } catch (e) { console.error(e); } } };
+    const fail = why => { if (closed || failed) return; failed = true; clearTimeout(startT); for (const id in waits) { waits[id]({ error: { code: why } }); delete waits[id]; } onFail(why); };
+    const startT = setTimeout(() => { if (!pyReady) fail('timeout'); }, c.startMs);
+    const port = {
+      send(type, payload, extra) { const m = ACTP.out(type, payload, extra); if (closed) return; if (ch) ch.port1.postMessage(m); else pending.push(m); },
+      close() { closed = true; clearTimeout(startT); removeEventListener('message', hello); try { ch?.port1.close(); } catch (e) { } frame.remove(); for (const id in waits) { waits[id]({ error: { code: 'closed' } }); delete waits[id]; } },
+      /** → Promise<{ outputs } | { error: { code, message } }> */
+      step(inputs) { return new Promise(res => { if (closed || failed) return res({ error: { code: 'closed' } }); const id = 'py' + (++seq); waits[id] = res; port.send('py:step', { inputs: inputs || {} }, { id }); }); },
+      restart() { pyReady = false; port.send('py:restart', {}); },
+      on(type, f) { (L[type] = L[type] || []).push(f); return () => { L[type] = (L[type] || []).filter(x => x !== f); }; },
+      get ready() { return pyReady; },
+    };
+    function fromRunner(raw) {
+      if (closed) return;
+      if (raw && typeof raw.type === 'string' && raw.type.startsWith('py:')) {
+        const r = pyCheck(raw, 'in'); if (!r.ok) { console.warn('[noema] python runner:', r.why); return; }
+        const m = r.msg;
+        if (m.type === 'py:status') { if (m.payload.phase === 'ready') { pyReady = true; clearTimeout(startT); } if (m.payload.phase === 'stopped') pyReady = false; if (m.payload.phase === 'failed') { console.warn('[noema] python:', m.payload.code, m.payload.message || ''); fail(m.payload.code || 'python'); } }
+        if (m.type === 'py:out' && m.re && waits[m.re]) { const w = waits[m.re]; delete waits[m.re]; w(m.payload); }
+        emit(m);
+        try { onPy?.(m); } catch (e) { console.error(e); }
+      }
+      onMessage(raw);   // the core checks everything with ACTP (py:* are not its types: ignored there, never a strike)
+    }
+    function hello(e) {
+      if (closed || ch || e.source !== frame.contentWindow) return;
+      const d = e.data; if (!d || d.t !== 'hello' || d.nonce !== nonce) return;
+      removeEventListener('message', hello);
+      ch = new MessageChannel();
+      ch.port1.onmessage = m => fromRunner(m.data);
+      frame.contentWindow.postMessage({ t: 'welcome', nonce }, '*', [ch.port2]);
+      ch.port1.postMessage(ACTP.out('init', init));
+      while (pending.length) ch.port1.postMessage(pending.shift());
+    }
+    addEventListener('message', hello);
+    frame.addEventListener('load', () => { if (++loads > 1 && !closed) fail('navigated'); });
+    (async () => {
+      const python = act && act.python;
+      if (typeof python !== 'string' || !python.trim()) throw err('empty');
+      if (new TextEncoder().encode(python).length > c.maxPython) throw err('size');
+      if (act.sha256) { const h = await hex(new TextEncoder().encode(python)); if (h !== String(act.sha256).toLowerCase()) throw err('integrity', 'python source'); }
+      const packages = act.packages == null ? [] : act.packages;
+      if (!Array.isArray(packages) || packages.length > 12 || !packages.every(p => typeof p === 'string' && /^[a-z0-9_.-]{1,60}$/.test(p))) throw err('packages', 'bad packages');
+      if (!available()) throw err('unavailable');
+      frame.srcdoc = await runnerDoc(nonce);
+      if (closed) return;
+      box.append(frame);
+      const man = await manifest();
+      const { files, extras } = plan(man, packages);
+      if (extras.length && act.requiresNetwork !== true) throw err('packages', 'an activity with extra packages must declare requiresNetwork');
+      emit({ type: 'py:status', payload: { phase: 'loading', done: 0, total: files.length } });
+      const bytes = await loadAll(files, d => emit({ type: 'py:status', payload: { phase: 'loading', done: d.done, total: d.total, bytes: d.bytes, totalBytes: d.totalBytes } }));
+      if (closed) return;
+      port.send('py:boot', { python, packages: [...new Set(packages)], extras, stepMs: Math.max(100, Math.min(+act.stepMs || c.stepMs, 10000)), initMs: c.initMs, files: bytes });
+    })().catch(e => { console.warn('[noema] py-module', act && act.id, e.code || '', e.message || ''); fail(e.code || 'build'); });
+    return port;
+  }
+
+  const NoemaPy = { available, prepareOffline, status, need, config, protocol: { check: pyCheck }, mountRunner: mount, _plan: plan, _manifest: manifest };
+  if (typeof window !== 'undefined') window.NoemaPy = NoemaPy;
+  if (typeof ACT !== 'undefined' && available()) ACT.registerRuntime({ id: 'py-module@1', version: 1, startTimeoutMs: DEFAULTS.startMs, mount });
+  /* i18n-ignore-end */
+})();
+
+/* ---- 37_activity_py_ui.js ---- */
+/* ===================== py-module@1 in the app: the spec view computed by Python, the learner's notes, Settings (docs/INTERACTIVE_PYTHON.md) =====================
+   The runner (37_activity_py.js, NoemaPy.mountRunner) computes; the app renders. A py-module@1 item carries Python (act.python, a function
+   step(inputs, state) → outputs) and a spec in the sim-spec@1 format (params, derived, outputs, readouts, plots — no engine, no bench):
+   the sim-spec view of 35_activity_sim.js (ACT.simView) draws the controls, readouts and plots and asks Python for the outputs of the
+   latest inputs (one step at a time, the latest inputs win; the view's rev gate keeps the checks grader on the latest results).
+   So the checks grader works on Python's scalar outputs exactly as on an engine's, and noema.result() still reports ('reported').
+   The learner sees one quiet line above the controls: the first-use download (sizes from the manifest), the network an extra package
+   needs (requiresNetwork), the loading progress; offline without the files → the fallback with what to do. Settings › Data and sync:
+   "Prepare Python for offline" (37 MB with scipy), with progress and what is on the device (pyOfflineSection). */
+(() => {
+  if (typeof ACT === 'undefined' || !window.NoemaPy) return;
+  const PY = window.NoemaPy, RUNNER = PY.mountRunner;
+  /* i18n-ignore-start */
+  const ID = 'py-module@1';
+  const roundMB = n => tE('engine.common.sizeMB', { size: nf(Math.max(1, Math.round(n / 1e6))) });   // "about 17 MB"
+  const metered = () => { const c = navigator.connection; return !!(c && (c.saveData || c.type === 'cellular')); };
+  /* i18n-ignore-end */
+
+  function mount(box, ctx) {
+    const { act, init, onMessage, onFail } = ctx;
+    let closed = false, R = null, view = null, firstUse = false, latest = null, busy = false;
+    const sv = init.state && init.state.data && typeof init.state.data === 'object' ? init.state.data : null;
+    let pyState = sv && 'py' in sv ? sv.py : undefined;   // what Python saved with noema.save_state (kept beside the controls' values)
+    const pyInit = { ...init, state: pyState === undefined ? null : { version: init.state.version, data: pyState, ...(init.state.migrateFrom ? { migrateFrom: init.state.migrateFrom } : {}) } };
+    const line = h('div', { class: 'act-pyline', role: 'status', 'aria-live': 'polite' });
+    const holder = h('div', { class: 'act-pyrun' });   // the hidden runner frame
+    /** the view's engine: Python's step() for the latest inputs, one at a time */
+    const runner = { run(inputs, done) { latest = { inputs, done }; pump(); }, measure() { }, close() { latest = null; } };
+    function pump() {
+      if (closed || !R || busy || !latest) return;
+      const job = latest; latest = null; busy = true;
+      R.step(job.inputs).then(r => {
+        busy = false; if (closed) return;
+        if (r && r.outputs) { if (line.dataset.k === 'err') say('', ''); job.done(r.outputs); }
+        else {
+          const code = (r && r.error && r.error.code) || 'python';
+          if (!['superseded', 'closed', 'stopped', 'runaway'].includes(code)) { console.warn('[noema] python step', act.id, code, r?.error?.message || ''); say(tE('engine.act.py.stepError', { code }), 'err'); job.done(null); }
+        }
+        pump();
+      });
+    }
+    function say(text, k) { line.textContent = text; line.dataset.k = k || ''; line.hidden = !text; }
+    function fromPy(raw) {
+      if (closed) return;
+      const t = raw && raw.type;
+      if (t === 'ready' || t === 'pong' || (typeof t === 'string' && t.startsWith('py:'))) return;   // the view speaks for the activity; py:* are read below
+      if (t === 'state') { pyState = raw.payload ? raw.payload.data : null; view?.saveSoon?.(); return; }
+      onMessage(raw);   // event, result, a11y:announce, error (runaway → the core stops it, with Restart): the core checks each with ACTP
+    }
+    function progress(p) {
+      if (closed || !p) return;
+      if (p.phase === 'loading' && firstUse && p.totalBytes) say(tE('engine.act.py.loading', { done: fmtBytes(p.bytes || 0), total: fmtBytes(p.totalBytes) }), 'load');
+      else if (p.phase === 'starting' || (p.phase === 'loading' && !firstUse)) say(tE('engine.act.py.starting'), 'start');
+      else if (p.phase === 'ready') say('', '');
+    }
+    function go() {
+      if (closed || R) return;
+      R = RUNNER(holder, { act, init: pyInit, title: ctx.title, onMessage: fromPy, onFail: why => { if (!closed) onFail(why); } });
+      R.on('py:status', progress);
+      pump();
+    }
+    async function boot() {
+      let n = null; try { n = await PY.need(act.packages || []); } catch (e) { n = null; }   // no manifest: the runner says offline
+      if (closed) return;
+      if (n && n.missing) {
+        firstUse = true;
+        const size = roundMB(n.missingBytes), net = act.requiresNetwork === true && n.extrasMissing.length;
+        say(tE('engine.act.py.firstUse', { size }) + (net ? ' ' + tE('engine.act.py.network', { packages: n.extrasMissing.join(', ') }) : ''), 'first');
+        if (metered()) { line.append(' ', h('button', { class: 'btn small', type: 'button', onclick: e => { e.target.remove(); go(); } }, tE('engine.act.py.download', { size }))); return; }   // never by itself on mobile data
+      }
+      go();
+    }
+    view = ACT.simView(box, { act, init, onMessage: m => { if (!closed) onMessage(m); }, onFail }, {
+      engine: { id: ID }, check: { python: true },
+      runner: () => runner,
+      stateExtra: () => pyState === undefined ? {} : { py: pyState },
+      decorate: root => { say('', ''); root.prepend(line); root.append(holder); Promise.resolve().then(boot); },   // only once the spec has passed its check
+    });
+    function close() { if (closed) return; closed = true; latest = null; try { R?.close(); } catch (e) { } view.close(); }
+    return {
+      send(type, payload, extra) { if (type === 'locale') R?.send('locale', payload); view.send(type, payload, extra); if (type === 'destroy') close(); },
+      close, values: () => (closed ? null : view.values()), reveal: () => view.reveal?.(),
+    };
+  }
+  ACT.registerRuntime({
+    id: ID, version: 1, autoHeight: true, startTimeoutMs: 120000, mount,
+    available: () => PY.available(),
+    unavailable: () => tE('engine.act.py.noHere'),
+    failText: code => code === 'offline' || code === 'fetch' ? { text: tE('engine.act.py.offline'), restart: true }
+      : code === 'unavailable' ? { text: tE('engine.act.py.noHere'), restart: false }
+        : code === 'timeout' ? { text: tE('engine.act.py.slow'), restart: true } : null,
+  });
+
+  /** Settings › Data and sync: "Prepare Python for offline" — the core, numpy, scipy and the allow-listed extras, with progress and what is
+      on the device (one line; the details per part in its ⓘ). Only where Python activities can run (the website, the runtime switched on). */
+  window.pyOfflineSection = function pyOfflineSection() {
+    if (!ACT.enabled(ID)) return null;
+    const line = h('span', { class: 'tiny' }, tE('engine.py.checking'));
+    const info = h('span', {});
+    const bar = h('progress', { class: 'act-pybar', max: '1', value: '0', hidden: true });
+    const btn = h('button', { class: 'btn small', type: 'button', 'data-py': 'prepare', hidden: true, onclick: () => prepare(false) });
+    const body = h('div', { class: 'act-pyset' }, h('div', { class: 'row' }, line, info), h('div', { class: 'row' }, btn, bar));
+    const sec = accSection('🐍', tE('engine.py.title'), { status: { ok: false, text: '…' }, info: tE('engine.py.info'), body });   // i18n-ignore (a placeholder)
+    const pill = sec.querySelector('summary .pill');
+    let all = null;
+    const setPill = (ok, text) => { pill.className = 'pill ' + (ok ? 'c' : 'warnpill'); pill.textContent = text; };
+    async function draw() {
+      let n = null, st = null;
+      try { const man = await PY._manifest(); all = ['numpy', 'scipy', ...Object.keys(man.wheels || {})]; n = await PY.need(all); st = await PY.status(); } catch (e) { n = null; }
+      if (!sec.isConnected && n === null) return;
+      if (!n) { setPill(false, tE('engine.py.notReady')); line.textContent = tE('engine.py.noFiles'); btn.hidden = true; info.replaceChildren(); return; }
+      const ready = n.missing === 0;
+      setPill(ready, ready ? tE('engine.py.ready') : n.missing < n.files ? tE('engine.py.partly') : tE('engine.py.notReady'));
+      line.textContent = ready ? tE('engine.py.have', { size: fmtBytes(n.bytes) }) : tE('engine.py.part', { have: fmtBytes(n.bytes - n.missingBytes), total: fmtBytes(n.bytes) });
+      const G = st && st.groups ? st.groups : {};
+      const parts = Object.entries(G).map(([k, g]) => `${k === 'core' ? 'Python' : k} ${fmtBytes(g.bytes)} ${g.ready ? '✓' : '—'}`).join(' · ');   // i18n-ignore (names and marks)
+      info.replaceChildren(tip(parts + '\n' + (st && st.persisted ? tE('engine.py.kept') : tE('engine.py.mayEvict'))));
+      btn.textContent = tE('engine.py.prepare', { size: fmtBytes(n.missingBytes) }); btn.hidden = ready; btn.disabled = false;
+    }
+    async function prepare(force) {
+      btn.disabled = true; bar.hidden = false; bar.value = 0;
+      const onProgress = d => { if (d.totalBytes) { bar.value = d.bytes / d.totalBytes; line.textContent = tE('engine.py.progress', { done: fmtBytes(d.bytes), total: fmtBytes(d.totalBytes) }); } };
+      let r; try { r = await PY.prepareOffline({ include: all || ['numpy', 'scipy'], onProgress, force }); } catch (e) { r = { ok: false, failed: [{}], code: e.code }; }
+      bar.hidden = true;
+      if (r.code === 'save-data') {
+        line.textContent = tE('engine.py.saveData'); btn.disabled = false;
+        btn.replaceWith(h('button', { class: 'btn small', type: 'button', 'data-py': 'anyway', onclick: e => { e.target.replaceWith(btn); prepare(true); } }, tE('engine.py.anyway')));
+        return;
+      }
+      await draw();
+      if (!r.ok) line.textContent = tE('engine.py.failed', { n: (r.failed || []).length || 1 });
+    }
+    draw();
+    return sec;
+  };
+})();
 
 /* ---- 40_views.js ---- */
 /* ===================== Views ===================== */
@@ -5916,7 +7681,8 @@ const ACC_VIEWS = {
                 h('button', { class: 'btn', onclick: async () => { c2(); const base = tE('engine.bk.restoredName', { name: obj.account.name || tE('engine.bk.restoredDefault') }); const id = (base.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'restored') + '-' + Date.now().toString(36).slice(-4); Noema.saveLocalAccount({ id, name: base, emoji: obj.account.emoji || '♻️', created: Date.now() }); await Noema.backup.apply(obj, id, 'replace'); Noema.switchTo(id, null); } }, '➕ ' + tE('engine.bk.asNew')),   // i18n-ignore
                 h('button', { class: 'btn ghost', onclick: c2 }, tE('engine.core.cancel')))));
           } })), guideBtn('restore', '♻️ ' + tE('engine.bk.howRestore'))] }),
-      accSection('🕘', tE('engine.bk.secPoints'), { status: { ok: true, text: nf(pts0.length) }, info: tE('engine.bk.pointsInfo'), body: rpBox }));
+      accSection('🕘', tE('engine.bk.secPoints'), { status: { ok: true, text: nf(pts0.length) }, info: tE('engine.bk.pointsInfo'), body: rpBox }),
+      window.pyOfflineSection?.() || '');   // 🐍 Prepare Python for offline (37_activity_py_ui.js): only where Python activities can run
     drawFs(); drawRP();
   },
 
