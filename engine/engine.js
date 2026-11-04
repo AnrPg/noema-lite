@@ -5173,7 +5173,7 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
 })();
 
 /* ---- 38_activity_h5p.js ---- */
-/* ===================== interactive activities — runtime h5p@1 (an ordinary .h5p package; docs/activities-dev/h5p.md, docs/adr/001 D11) =====================
+/* ===================== interactive activities — runtime h5p@1 (an ordinary .h5p package; docs/INTERACTIVE_H5P.md, docs/adr/001 D11) =====================
    An H5P item (quiz, drag and drop, fill in the blanks …) is played by the app's own pinned H5P player (h5p-standalone 3.8.2's core,
    engine/vendor/h5p/3.8.2/player.js, never loaded from h5p.org) in exactly the frames of html-app@1: the app's frame holds a wrapper
    without scripts whose policy says frame-src 'none' (no self-navigation), the item runs in the wrapper's own frame with

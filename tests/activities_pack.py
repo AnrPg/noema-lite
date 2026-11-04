@@ -123,6 +123,9 @@ check('🧩 activities/planets-quiz/item.h5p' in r.stdout and not os.path.exists
 if os.environ.get('NOEMA_ACT_PACK'):   # run_e2e.sh: tests/activities_app.js imports this pack into the app (and the .noema.zip, which carries the .h5p)
     shutil.copy(os.path.join(sd, 'build', 'demo-physics.json'), os.environ['NOEMA_ACT_PACK'])
     shutil.copy(os.path.join(T, 'o1', 'demo-physics.noema.zip'), os.environ['NOEMA_ACT_PACK'] + '.noema.zip')
+    sub = os.environ['NOEMA_ACT_PACK'] + '.subject'   # the subject folder itself (run_e2e.sh builds a one-file bundle from it: h5p@1 inline / too big)
+    if os.path.exists(sub): shutil.rmtree(sub)
+    shutil.copytree(sd, sub, ignore=shutil.ignore_patterns('build'))
 
 # the round trip
 w2 = os.path.join(T, 'w2'); r = run(os.path.join(S, 'unpack.py'), os.path.join(T, 'o1', 'demo-physics.noema.zip'), w2)
