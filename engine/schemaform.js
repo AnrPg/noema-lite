@@ -9,7 +9,7 @@
    The core (registry, validate, skeleton, branches) has no DOM and runs in Node (tests/activity_author.js). The form (form()) keeps
    the document as plain JSON — the source of truth — and changes it only at the paths the user edits, so a document read back is
    the document given (unknown fields included): a lossless round trip.
-   Labels: the schema's `title` is a KEY; opts.label(title, prop) gives the words (engine/activity_author_i18n.js). */
+   Labels: the schema's `title` is a KEY; opts.label(title, prop) gives the words (engine.author.* in the app's catalogs). */
 (function (root) {
   'use strict';
   /* i18n-ignore-start */   // code words (schema keywords, classes, paths); every visible word comes from opts.label / opts.text

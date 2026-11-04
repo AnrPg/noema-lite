@@ -4789,5 +4789,1153 @@
   "engine.act.bench.failed": "this measurement could not be made",
   "@engine.act.bench.failed": {
     "description": "Shown in place of a reading when the simulation could not compute it."
+  },
+  "engine.author.title": "Activity author",
+  "@engine.author.title": {
+    "description": "Activity author page (a form that builds an interactive activity). Heading of the page where authors build an interactive activity from a form."
+  },
+  "engine.author.intro": "Build an interactive activity with a form. The preview runs it exactly as the app will.",
+  "@engine.author.intro": {
+    "description": "Activity author page (a form that builds an interactive activity). One line under the heading of the activity author page."
+  },
+  "engine.author.type": "Kind of activity",
+  "@engine.author.type": {
+    "description": "Activity author page (a form that builds an interactive activity). Label of the select that picks which kind of activity is being built."
+  },
+  "engine.author.type.formula": "Simulation with formulas",
+  "@engine.author.type.formula": {
+    "description": "Activity author: an option of the select “Kind of activity” (which kind of activity is being built)."
+  },
+  "engine.author.type.circuit": "Circuit simulation",
+  "@engine.author.type.circuit": {
+    "description": "Activity author: an option of the select “Kind of activity” (which kind of activity is being built)."
+  },
+  "engine.author.new": "New",
+  "@engine.author.new": {
+    "description": "Activity author page (a form that builds an interactive activity). Button: start a new, empty activity."
+  },
+  "engine.author.newConfirm": "Start a new activity? The current one is replaced (Undo brings it back).",
+  "@engine.author.newConfirm": {
+    "description": "Activity author page (a form that builds an interactive activity). Question before the current activity is replaced by a new one."
+  },
+  "engine.author.undo": "Undo",
+  "@engine.author.undo": {
+    "description": "Activity author page (a form that builds an interactive activity). Button: undo the last change."
+  },
+  "engine.author.redo": "Redo",
+  "@engine.author.redo": {
+    "description": "Activity author page (a form that builds an interactive activity). Button: redo the change that was undone."
+  },
+  "engine.author.import": "Import",
+  "@engine.author.import": {
+    "description": "Activity author page (a form that builds an interactive activity). Button: read activity files (a .zip or JSON files) from the device."
+  },
+  "engine.author.importDone": "{n, plural, one {# file read} other {# files read}}",
+  "@engine.author.importDone": {
+    "description": "Activity author page (a form that builds an interactive activity). {n} = number of files read."
+  },
+  "engine.author.importBad": "{file} could not be read ({why})",
+  "@engine.author.importBad": {
+    "description": "Activity author page (a form that builds an interactive activity). {file} = file name; {why} = the reason (technical)."
+  },
+  "engine.author.exportZip": "Download .zip",
+  "@engine.author.exportZip": {
+    "description": "Activity author page (a form that builds an interactive activity). Button: download the activity folder as a .zip file."
+  },
+  "engine.author.exportFiles": "Single files",
+  "@engine.author.exportFiles": {
+    "description": "Activity author page (a form that builds an interactive activity). Button that opens the list of single files to download."
+  },
+  "engine.author.exportFile": "Download {file}",
+  "@engine.author.exportFile": {
+    "description": "Activity author page (a form that builds an interactive activity). {file} = path of the file in the subject folder."
+  },
+  "engine.author.preview": "Preview",
+  "@engine.author.preview": {
+    "description": "Activity author page (a form that builds an interactive activity). Heading of the live preview of the activity."
+  },
+  "engine.author.previewLang": "Language",
+  "@engine.author.previewLang": {
+    "description": "Activity author page (a form that builds an interactive activity). Label of the select of the language the preview is shown in."
+  },
+  "engine.author.previewOff": "The preview needs the app: open this page from noema-lite.",
+  "@engine.author.previewOff": {
+    "description": "Activity author page (a form that builds an interactive activity). Shown instead of the preview when the page is opened outside the app."
+  },
+  "engine.author.previewStale": "Fix the problems to update the preview. It shows the last version without problems.",
+  "@engine.author.previewStale": {
+    "description": "Activity author page (a form that builds an interactive activity). Note over the preview while the form has problems."
+  },
+  "engine.author.problems": "{n, plural, one {# problem} other {# problems}}",
+  "@engine.author.problems": {
+    "description": "Activity author page (a form that builds an interactive activity). Heading of the list of problems; {n} = how many."
+  },
+  "engine.author.problemsNone": "No problems",
+  "@engine.author.problemsNone": {
+    "description": "Activity author page (a form that builds an interactive activity). Shown when the activity has no problems."
+  },
+  "engine.author.tab.item": "Activity",
+  "@engine.author.tab.item": {
+    "description": "Activity author page (a form that builds an interactive activity). Tab: the activity’s entry in the registry (id, fallback, licence)."
+  },
+  "engine.author.tab.spec": "Simulation",
+  "@engine.author.tab.spec": {
+    "description": "Activity author page (a form that builds an interactive activity). Tab: the simulation itself (controls, formulas, plots)."
+  },
+  "engine.author.tab.strings": "Words",
+  "@engine.author.tab.strings": {
+    "description": "Activity author page (a form that builds an interactive activity). Tab: the words of the activity in each language."
+  },
+  "engine.author.stringsIntro": "Every label of the activity is a key; give each key its text in every language the pack is read in.",
+  "@engine.author.stringsIntro": {
+    "description": "Activity author page (a form that builds an interactive activity). Explanation above the table of the activity’s words."
+  },
+  "engine.author.addLocale": "Add a language",
+  "@engine.author.addLocale": {
+    "description": "Activity author page (a form that builds an interactive activity). Button: add a language to the word tables."
+  },
+  "engine.author.localeCode": "Language code (for example fr)",
+  "@engine.author.localeCode": {
+    "description": "Activity author page (a form that builds an interactive activity). Label of the box for a language code."
+  },
+  "engine.author.localeBad": "Not a language code",
+  "@engine.author.localeBad": {
+    "description": "Activity author page (a form that builds an interactive activity). Error: the text is not a language code."
+  },
+  "engine.author.missingText": "missing",
+  "@engine.author.missingText": {
+    "description": "Activity author page (a form that builds an interactive activity). Placeholder of an empty cell of the word table."
+  },
+  "engine.author.unused": "not used",
+  "@engine.author.unused": {
+    "description": "Activity author page (a form that builds an interactive activity). Tag of a word that the activity does not use."
+  },
+  "engine.author.removeKey": "Remove {key}",
+  "@engine.author.removeKey": {
+    "description": "Activity author page (a form that builds an interactive activity). {key} = the key to remove."
+  },
+  "engine.author.removeLocale": "Remove the language {loc}",
+  "@engine.author.removeLocale": {
+    "description": "Activity author page (a form that builds an interactive activity). {loc} = language code."
+  },
+  "engine.author.names": "Names: {names}",
+  "@engine.author.names": {
+    "description": "Activity author page (a form that builds an interactive activity). {names} = the names a formula may use, comma separated."
+  },
+  "engine.author.namesNone": "No names declared yet",
+  "@engine.author.namesNone": {
+    "description": "Activity author page (a form that builds an interactive activity). Under a formula field when no names are declared yet."
+  },
+  "engine.author.textIn": "Text in {loc}",
+  "@engine.author.textIn": {
+    "description": "Activity author page (a form that builds an interactive activity). {loc} = language code; accessible name of a text box."
+  },
+  "engine.author.keyTexts": "Texts",
+  "@engine.author.keyTexts": {
+    "description": "Activity author page (a form that builds an interactive activity). Small heading over the texts of one key in each language."
+  },
+  "engine.author.close": "Close",
+  "@engine.author.close": {
+    "description": "Activity author page (a form that builds an interactive activity). Button: close."
+  },
+  "engine.author.goTo": "Show",
+  "@engine.author.goTo": {
+    "description": "Activity author page (a form that builds an interactive activity). Button next to a problem: jump to its field."
+  },
+  "engine.author.add": "Add",
+  "@engine.author.add": {
+    "description": "Activity author page (a form that builds an interactive activity). Button: add an item to a list."
+  },
+  "engine.author.addTo": "Add to {what}",
+  "@engine.author.addTo": {
+    "description": "Activity author page (a form that builds an interactive activity). {what} = name of the list; accessible name of the add button."
+  },
+  "engine.author.addField": "Add a field…",
+  "@engine.author.addField": {
+    "description": "Activity author page (a form that builds an interactive activity). First option of a select that adds an optional field."
+  },
+  "engine.author.addEntry": "Add a constant",
+  "@engine.author.addEntry": {
+    "description": "Activity author page (a form that builds an interactive activity). Button: add a named number."
+  },
+  "engine.author.entryName": "Name",
+  "@engine.author.entryName": {
+    "description": "Activity author page (a form that builds an interactive activity). Accessible name of the box with an entry’s name."
+  },
+  "engine.author.remove": "Remove {what}",
+  "@engine.author.remove": {
+    "description": "Activity author page (a form that builds an interactive activity). {what} = name of the field to remove."
+  },
+  "engine.author.removeItem": "Remove item {n}",
+  "@engine.author.removeItem": {
+    "description": "Activity author page (a form that builds an interactive activity). {n} = position of the item."
+  },
+  "engine.author.up": "Move item {n} up",
+  "@engine.author.up": {
+    "description": "Activity author page (a form that builds an interactive activity). {n} = position of the item."
+  },
+  "engine.author.down": "Move item {n} down",
+  "@engine.author.down": {
+    "description": "Activity author page (a form that builds an interactive activity). {n} = position of the item."
+  },
+  "engine.author.count": "{n} of {max}",
+  "@engine.author.count": {
+    "description": "Activity author page (a form that builds an interactive activity). {n} items of at most {max}."
+  },
+  "engine.author.notNumber": "Not a number",
+  "@engine.author.notNumber": {
+    "description": "Activity author page (a form that builds an interactive activity). Error under a number box."
+  },
+  "engine.author.notWhole": "Not a whole number",
+  "@engine.author.notWhole": {
+    "description": "Activity author page (a form that builds an interactive activity). Error under a whole-number box."
+  },
+  "engine.author.notJson": "Not valid data",
+  "@engine.author.notJson": {
+    "description": "Activity author page (a form that builds an interactive activity). Error under a box of raw data."
+  },
+  "engine.author.altOf": "Kind of value: {what}",
+  "@engine.author.altOf": {
+    "description": "Activity author page (a form that builds an interactive activity). {what} = field name; select between a number and a formula."
+  },
+  "engine.author.type.number": "Number",
+  "@engine.author.type.number": {
+    "description": "Activity author: the name of a kind of value (in the select between a number and a formula, and in the problem “Wrong kind of value ({type})”). Short."
+  },
+  "engine.author.type.integer": "Whole number",
+  "@engine.author.type.integer": {
+    "description": "Activity author: the name of a kind of value (in the select between a number and a formula, and in the problem “Wrong kind of value ({type})”). Short."
+  },
+  "engine.author.type.string": "Text",
+  "@engine.author.type.string": {
+    "description": "Activity author: the name of a kind of value (in the select between a number and a formula, and in the problem “Wrong kind of value ({type})”). Short."
+  },
+  "engine.author.type.object": "Group",
+  "@engine.author.type.object": {
+    "description": "Activity author: the name of a kind of value (in the select between a number and a formula, and in the problem “Wrong kind of value ({type})”). Short."
+  },
+  "engine.author.type.array": "List",
+  "@engine.author.type.array": {
+    "description": "Activity author: the name of a kind of value (in the select between a number and a formula, and in the problem “Wrong kind of value ({type})”). Short."
+  },
+  "engine.author.type.boolean": "Yes or no",
+  "@engine.author.type.boolean": {
+    "description": "Activity author: the name of a kind of value (in the select between a number and a formula, and in the problem “Wrong kind of value ({type})”). Short."
+  },
+  "engine.author.type.any": "Value",
+  "@engine.author.type.any": {
+    "description": "Activity author: the name of a kind of value (in the select between a number and a formula, and in the problem “Wrong kind of value ({type})”). Short."
+  },
+  "engine.author.v.required": "Required",
+  "@engine.author.v.required": {
+    "description": "Problem shown under a field of the activity author: the value breaks the rule “required” of the form."
+  },
+  "engine.author.v.type": "Wrong kind of value ({type})",
+  "@engine.author.v.type": {
+    "description": "Problem shown under a field of the activity author: the value breaks the rule “type” of the form; {type} = the kind of value expected."
+  },
+  "engine.author.v.const": "Must be {value}",
+  "@engine.author.v.const": {
+    "description": "Problem shown under a field of the activity author: the value breaks the rule “const” of the form; {value} = the only allowed value."
+  },
+  "engine.author.v.enum": "Must be one of {values}",
+  "@engine.author.v.enum": {
+    "description": "Problem shown under a field of the activity author: the value breaks the rule “enum” of the form; {values} = the allowed values, comma separated."
+  },
+  "engine.author.v.minimum": "At least {limit}",
+  "@engine.author.v.minimum": {
+    "description": "Problem shown under a field of the activity author: the value breaks the rule “minimum” of the form; {limit} = a number."
+  },
+  "engine.author.v.maximum": "At most {limit}",
+  "@engine.author.v.maximum": {
+    "description": "Problem shown under a field of the activity author: the value breaks the rule “maximum” of the form; {limit} = a number."
+  },
+  "engine.author.v.exclusiveMinimum": "More than {limit}",
+  "@engine.author.v.exclusiveMinimum": {
+    "description": "Problem shown under a field of the activity author: the value breaks the rule “exclusiveMinimum” of the form; {limit} = a number."
+  },
+  "engine.author.v.exclusiveMaximum": "Less than {limit}",
+  "@engine.author.v.exclusiveMaximum": {
+    "description": "Problem shown under a field of the activity author: the value breaks the rule “exclusiveMaximum” of the form; {limit} = a number."
+  },
+  "engine.author.v.minLength": "At least {limit} characters",
+  "@engine.author.v.minLength": {
+    "description": "Problem shown under a field of the activity author: the value breaks the rule “minLength” of the form; {limit} = a number."
+  },
+  "engine.author.v.maxLength": "At most {limit} characters",
+  "@engine.author.v.maxLength": {
+    "description": "Problem shown under a field of the activity author: the value breaks the rule “maxLength” of the form; {limit} = a number."
+  },
+  "engine.author.v.pattern": "Not in the right form",
+  "@engine.author.v.pattern": {
+    "description": "Problem shown under a field of the activity author: the value breaks the rule “pattern” of the form."
+  },
+  "engine.author.v.minItems": "At least {limit} items",
+  "@engine.author.v.minItems": {
+    "description": "Problem shown under a field of the activity author: the value breaks the rule “minItems” of the form; {limit} = a number."
+  },
+  "engine.author.v.maxItems": "At most {limit} items",
+  "@engine.author.v.maxItems": {
+    "description": "Problem shown under a field of the activity author: the value breaks the rule “maxItems” of the form; {limit} = a number."
+  },
+  "engine.author.v.maxProperties": "At most {limit} entries",
+  "@engine.author.v.maxProperties": {
+    "description": "Problem shown under a field of the activity author: the value breaks the rule “maxProperties” of the form; {limit} = a number."
+  },
+  "engine.author.v.uniqueItems": "Each item only once",
+  "@engine.author.v.uniqueItems": {
+    "description": "Problem shown under a field of the activity author: the value breaks the rule “uniqueItems” of the form."
+  },
+  "engine.author.v.additionalProperties": "Unknown field",
+  "@engine.author.v.additionalProperties": {
+    "description": "Problem shown under a field of the activity author: the value breaks the rule “additionalProperties” of the form."
+  },
+  "engine.author.v.unevaluatedProperties": "Unknown field",
+  "@engine.author.v.unevaluatedProperties": {
+    "description": "Problem shown under a field of the activity author: the value breaks the rule “unevaluatedProperties” of the form."
+  },
+  "engine.author.v.propertyNames": "Not a usable name",
+  "@engine.author.v.propertyNames": {
+    "description": "Problem shown under a field of the activity author: the value breaks the rule “propertyNames” of the form."
+  },
+  "engine.author.v.oneOf": "Does not fit any of the allowed forms",
+  "@engine.author.v.oneOf": {
+    "description": "Problem shown under a field of the activity author: the value breaks the rule “oneOf” of the form."
+  },
+  "engine.author.v.anyOf": "Does not fit any of the allowed forms",
+  "@engine.author.v.anyOf": {
+    "description": "Problem shown under a field of the activity author: the value breaks the rule “anyOf” of the form."
+  },
+  "engine.author.v.not": "Not allowed here",
+  "@engine.author.v.not": {
+    "description": "Problem shown under a field of the activity author: the value breaks the rule “not” of the form."
+  },
+  "engine.author.v.false": "Not allowed here",
+  "@engine.author.v.false": {
+    "description": "Problem shown under a field of the activity author: the value breaks the rule “false” of the form."
+  },
+  "engine.author.f.spec": "Simulation",
+  "@engine.author.f.spec": {
+    "description": "Label of a form field of the activity author (the field “spec” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.engine": "Engine",
+  "@engine.author.f.engine": {
+    "description": "Label of a form field of the activity author (the field “engine” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.engine.formula@1": "Formulas (formula@1)",
+  "@engine.author.f.engine.formula@1": {
+    "description": "Label of a form field of the activity author: the option “formula@1” of the select “Engine”. Short."
+  },
+  "engine.author.f.engine.circuit-mna@1": "Circuit (circuit-mna@1)",
+  "@engine.author.f.engine.circuit-mna@1": {
+    "description": "Label of a form field of the activity author: the option “circuit-mna@1” of the select “Engine”. Short."
+  },
+  "engine.author.f.title": "Title",
+  "@engine.author.f.title": {
+    "description": "Label of a form field of the activity author (the field “title” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.intro": "Introduction",
+  "@engine.author.f.intro": {
+    "description": "Label of a form field of the activity author (the field “intro” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.consts": "Constants",
+  "@engine.author.f.consts": {
+    "description": "Label of a form field of the activity author (the field “consts” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.const": "Value",
+  "@engine.author.f.const": {
+    "description": "Label of a form field of the activity author (the field “const” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.params": "Controls",
+  "@engine.author.f.params": {
+    "description": "Label of a form field of the activity author (the field “params” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.id": "Name",
+  "@engine.author.f.id": {
+    "description": "Label of a form field of the activity author (the field “id” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.label": "Label",
+  "@engine.author.f.label": {
+    "description": "Label of a form field of the activity author (the field “label” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.kind": "Kind",
+  "@engine.author.f.kind": {
+    "description": "Label of a form field of the activity author (the field “kind” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.kind.slider": "Slider",
+  "@engine.author.f.kind.slider": {
+    "description": "Label of a form field of the activity author: the option “slider” of the select “Kind”. Short."
+  },
+  "engine.author.f.kind.number": "Number box",
+  "@engine.author.f.kind.number": {
+    "description": "Label of a form field of the activity author: the option “number” of the select “Kind”. Short."
+  },
+  "engine.author.f.kind.toggle": "Switch",
+  "@engine.author.f.kind.toggle": {
+    "description": "Label of a form field of the activity author: the option “toggle” of the select “Kind”. Short."
+  },
+  "engine.author.f.kind.choice": "Choice",
+  "@engine.author.f.kind.choice": {
+    "description": "Label of a form field of the activity author: the option “choice” of the select “Kind”. Short."
+  },
+  "engine.author.f.min": "Minimum",
+  "@engine.author.f.min": {
+    "description": "Label of a form field of the activity author (the field “min” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.max": "Maximum",
+  "@engine.author.f.max": {
+    "description": "Label of a form field of the activity author (the field “max” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.step": "Step",
+  "@engine.author.f.step": {
+    "description": "Label of a form field of the activity author (the field “step” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.default": "Start value",
+  "@engine.author.f.default": {
+    "description": "Label of a form field of the activity author (the field “default” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.scale": "Scale",
+  "@engine.author.f.scale": {
+    "description": "Label of a form field of the activity author (the field “scale” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.scale.lin": "Linear",
+  "@engine.author.f.scale.lin": {
+    "description": "Label of a form field of the activity author: the option “lin” of the select “Scale”. Short."
+  },
+  "engine.author.f.scale.log": "Logarithmic",
+  "@engine.author.f.scale.log": {
+    "description": "Label of a form field of the activity author: the option “log” of the select “Scale”. Short."
+  },
+  "engine.author.f.unit": "Unit",
+  "@engine.author.f.unit": {
+    "description": "Label of a form field of the activity author (the field “unit” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.numFormat": "Number format",
+  "@engine.author.f.numFormat": {
+    "description": "Label of a form field of the activity author (the field “numFormat” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.numFormat.auto": "Automatic",
+  "@engine.author.f.numFormat.auto": {
+    "description": "Label of a form field of the activity author: the option “auto” of the select “Number format”. Short."
+  },
+  "engine.author.f.numFormat.si": "SI prefixes (k, m, µ…)",
+  "@engine.author.f.numFormat.si": {
+    "description": "Label of a form field of the activity author: the option “si” of the select “Number format”. Short."
+  },
+  "engine.author.f.numFormat.fixed": "Fixed decimals",
+  "@engine.author.f.numFormat.fixed": {
+    "description": "Label of a form field of the activity author: the option “fixed” of the select “Number format”. Short."
+  },
+  "engine.author.f.digits": "Digits",
+  "@engine.author.f.digits": {
+    "description": "Label of a form field of the activity author (the field “digits” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.options": "Options",
+  "@engine.author.f.options": {
+    "description": "Label of a form field of the activity author (the field “options” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.value": "Value",
+  "@engine.author.f.value": {
+    "description": "Label of a form field of the activity author (the field “value” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.derived": "Computed values",
+  "@engine.author.f.derived": {
+    "description": "Label of a form field of the activity author (the field “derived” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.expr": "Formula",
+  "@engine.author.f.expr": {
+    "description": "Label of a form field of the activity author (the field “expr” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.model": "Circuit model",
+  "@engine.author.f.model": {
+    "description": "Label of a form field of the activity author (the field “model” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.outputs": "Engine outputs",
+  "@engine.author.f.outputs": {
+    "description": "Label of a form field of the activity author (the field “outputs” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.readouts": "Readouts",
+  "@engine.author.f.readouts": {
+    "description": "Label of a form field of the activity author (the field “readouts” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.plots": "Plots",
+  "@engine.author.f.plots": {
+    "description": "Label of a form field of the activity author (the field “plots” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.bench": "Fault-finding bench",
+  "@engine.author.f.bench": {
+    "description": "Label of a form field of the activity author (the field “bench” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.num": "Number",
+  "@engine.author.f.num": {
+    "description": "Label of a form field of the activity author (the field “num” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.exprAlt": "Formula",
+  "@engine.author.f.exprAlt": {
+    "description": "Label of a form field of the activity author (the field “exprAlt” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.plotKind": "Kind of plot",
+  "@engine.author.f.plotKind": {
+    "description": "Label of a form field of the activity author (the field “plotKind” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.plotKind.function": "Function of x",
+  "@engine.author.f.plotKind.function": {
+    "description": "Label of a form field of the activity author: the option “function” of the select “Kind of plot”. Short."
+  },
+  "engine.author.f.plotKind.series": "Time series of the engine",
+  "@engine.author.f.plotKind.series": {
+    "description": "Label of a form field of the activity author: the option “series” of the select “Kind of plot”. Short."
+  },
+  "engine.author.f.xAxis": "x axis",
+  "@engine.author.f.xAxis": {
+    "description": "Label of a form field of the activity author (the field “xAxis” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.yAxis": "y axis",
+  "@engine.author.f.yAxis": {
+    "description": "Label of a form field of the activity author (the field “yAxis” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.xVar": "Name of x",
+  "@engine.author.f.xVar": {
+    "description": "Label of a form field of the activity author (the field “xVar” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.xSeries": "Series on x",
+  "@engine.author.f.xSeries": {
+    "description": "Label of a form field of the activity author (the field “xSeries” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.ySeries": "Series",
+  "@engine.author.f.ySeries": {
+    "description": "Label of a form field of the activity author (the field “ySeries” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.points": "Points",
+  "@engine.author.f.points": {
+    "description": "Label of a form field of the activity author (the field “points” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.lines": "Lines",
+  "@engine.author.f.lines": {
+    "description": "Label of a form field of the activity author (the field “lines” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.marks": "Guide lines",
+  "@engine.author.f.marks": {
+    "description": "Label of a form field of the activity author (the field “marks” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.axis": "Axis",
+  "@engine.author.f.axis": {
+    "description": "Label of a form field of the activity author (the field “axis” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.axis.x": "x",
+  "@engine.author.f.axis.x": {
+    "description": "Label of a form field of the activity author: the option “x” of the select “Axis”. Short."
+  },
+  "engine.author.f.axis.y": "y",
+  "@engine.author.f.axis.y": {
+    "description": "Label of a form field of the activity author: the option “y” of the select “Axis”. Short."
+  },
+  "engine.author.f.netlist": "Netlist",
+  "@engine.author.f.netlist": {
+    "description": "Label of a form field of the activity author (the field “netlist” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.bindings": "Bindings to controls",
+  "@engine.author.f.bindings": {
+    "description": "Label of a form field of the activity author (the field “bindings” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.element": "Part",
+  "@engine.author.f.element": {
+    "description": "Label of a form field of the activity author (the field “element” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.prop": "Property",
+  "@engine.author.f.prop": {
+    "description": "Label of a form field of the activity author (the field “prop” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.transient": "Transient",
+  "@engine.author.f.transient": {
+    "description": "Label of a form field of the activity author (the field “transient” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.tEnd": "End time",
+  "@engine.author.f.tEnd": {
+    "description": "Label of a form field of the activity author (the field “tEnd” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.dt": "Time step",
+  "@engine.author.f.dt": {
+    "description": "Label of a form field of the activity author (the field “dt” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.noise": "Meter noise",
+  "@engine.author.f.noise": {
+    "description": "Label of a form field of the activity author (the field “noise” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.rel": "Relative error",
+  "@engine.author.f.rel": {
+    "description": "Label of a form field of the activity author (the field “rel” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.abs": "Absolute error",
+  "@engine.author.f.abs": {
+    "description": "Label of a form field of the activity author (the field “abs” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.outKind": "Kind of output",
+  "@engine.author.f.outKind": {
+    "description": "Label of a form field of the activity author (the field “outKind” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.outKind.scalar": "One number",
+  "@engine.author.f.outKind.scalar": {
+    "description": "Label of a form field of the activity author: the option “scalar” of the select “Kind of output”. Short."
+  },
+  "engine.author.f.outKind.series": "Time series",
+  "@engine.author.f.outKind.series": {
+    "description": "Label of a form field of the activity author: the option “series” of the select “Kind of output”. Short."
+  },
+  "engine.author.f.node": "Node",
+  "@engine.author.f.node": {
+    "description": "Label of a form field of the activity author (the field “node” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.branch": "Current through",
+  "@engine.author.f.branch": {
+    "description": "Label of a form field of the activity author (the field “branch” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.time": "Time axis",
+  "@engine.author.f.time": {
+    "description": "Label of a form field of the activity author (the field “time” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.probe": "Reading",
+  "@engine.author.f.probe": {
+    "description": "Label of a form field of the activity author (the field “probe” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.probeKind": "Meter",
+  "@engine.author.f.probeKind": {
+    "description": "Label of a form field of the activity author (the field “probeKind” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.a": "Red lead",
+  "@engine.author.f.a": {
+    "description": "Label of a form field of the activity author (the field “a” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.b": "Black lead",
+  "@engine.author.f.b": {
+    "description": "Label of a form field of the activity author (the field “b” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.pin": "Pin",
+  "@engine.author.f.pin": {
+    "description": "Label of a form field of the activity author (the field “pin” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.at": "At time",
+  "@engine.author.f.at": {
+    "description": "Label of a form field of the activity author (the field “at” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.stat": "Statistic",
+  "@engine.author.f.stat": {
+    "description": "Label of a form field of the activity author (the field “stat” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.stat.final": "Final value",
+  "@engine.author.f.stat.final": {
+    "description": "Label of a form field of the activity author: the option “final” of the select “Statistic”. Short."
+  },
+  "engine.author.f.stat.min": "Minimum",
+  "@engine.author.f.stat.min": {
+    "description": "Label of a form field of the activity author: the option “min” of the select “Statistic”. Short."
+  },
+  "engine.author.f.stat.max": "Maximum",
+  "@engine.author.f.stat.max": {
+    "description": "Label of a form field of the activity author: the option “max” of the select “Statistic”. Short."
+  },
+  "engine.author.f.stat.mean": "Mean",
+  "@engine.author.f.stat.mean": {
+    "description": "Label of a form field of the activity author: the option “mean” of the select “Statistic”. Short."
+  },
+  "engine.author.f.stat.pp": "Peak to peak",
+  "@engine.author.f.stat.pp": {
+    "description": "Label of a form field of the activity author: the option “pp” of the select “Statistic”. Short."
+  },
+  "engine.author.f.stat.rms": "RMS",
+  "@engine.author.f.stat.rms": {
+    "description": "Label of a form field of the activity author: the option “rms” of the select “Statistic”. Short."
+  },
+  "engine.author.f.faults": "Faults",
+  "@engine.author.f.faults": {
+    "description": "Label of a form field of the activity author (the field “faults” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.apply": "What breaks",
+  "@engine.author.f.apply": {
+    "description": "Label of a form field of the activity author (the field “apply” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.faultKind": "Kind of fault",
+  "@engine.author.f.faultKind": {
+    "description": "Label of a form field of the activity author (the field “faultKind” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.faultKind.open": "Open",
+  "@engine.author.f.faultKind.open": {
+    "description": "Label of a form field of the activity author: the option “open” of the select “Kind of fault”. Short."
+  },
+  "engine.author.f.faultKind.short": "Short",
+  "@engine.author.f.faultKind.short": {
+    "description": "Label of a form field of the activity author: the option “short” of the select “Kind of fault”. Short."
+  },
+  "engine.author.f.faultKind.drift": "Value drifted",
+  "@engine.author.f.faultKind.drift": {
+    "description": "Label of a form field of the activity author: the option “drift” of the select “Kind of fault”. Short."
+  },
+  "engine.author.f.faultKind.open-trace": "Broken trace",
+  "@engine.author.f.faultKind.open-trace": {
+    "description": "Label of a form field of the activity author: the option “open-trace” of the select “Kind of fault”. Short."
+  },
+  "engine.author.f.faultKind.reverse": "Fitted backwards",
+  "@engine.author.f.faultKind.reverse": {
+    "description": "Label of a form field of the activity author: the option “reverse” of the select “Kind of fault”. Short."
+  },
+  "engine.author.f.pins": "Pins",
+  "@engine.author.f.pins": {
+    "description": "Label of a form field of the activity author (the field “pins” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.factor": "Factor",
+  "@engine.author.f.factor": {
+    "description": "Label of a form field of the activity author (the field “factor” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.param": "Parameter",
+  "@engine.author.f.param": {
+    "description": "Label of a form field of the activity author (the field “param” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.side": "Parts on the far side",
+  "@engine.author.f.side": {
+    "description": "Label of a form field of the activity author (the field “side” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.points.bench": "Test points",
+  "@engine.author.f.points.bench": {
+    "description": "Label of a form field of the activity author: the option “bench” of the select “Points”. Short."
+  },
+  "engine.author.f.at.point": "Where",
+  "@engine.author.f.at.point": {
+    "description": "Label of a form field of the activity author: the option “point” of the select “At time”. Short."
+  },
+  "engine.author.f.instruments": "Instruments",
+  "@engine.author.f.instruments": {
+    "description": "Label of a form field of the activity author (the field “instruments” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.instKind": "Instrument",
+  "@engine.author.f.instKind": {
+    "description": "Label of a form field of the activity author (the field “instKind” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.instKind.V": "Voltmeter",
+  "@engine.author.f.instKind.V": {
+    "description": "Label of a form field of the activity author: the option “V” of the select “Instrument”. Short."
+  },
+  "engine.author.f.instKind.I": "Ammeter",
+  "@engine.author.f.instKind.I": {
+    "description": "Label of a form field of the activity author: the option “I” of the select “Instrument”. Short."
+  },
+  "engine.author.f.instKind.R": "Ohmmeter",
+  "@engine.author.f.instKind.R": {
+    "description": "Label of a form field of the activity author: the option “R” of the select “Instrument”. Short."
+  },
+  "engine.author.f.instKind.scope": "Oscilloscope",
+  "@engine.author.f.instKind.scope": {
+    "description": "Label of a form field of the activity author: the option “scope” of the select “Instrument”. Short."
+  },
+  "engine.author.f.instKind.logic": "Logic analyser",
+  "@engine.author.f.instKind.logic": {
+    "description": "Label of a form field of the activity author: the option “logic” of the select “Instrument”. Short."
+  },
+  "engine.author.f.instPoints": "Points it can use",
+  "@engine.author.f.instPoints": {
+    "description": "Label of a form field of the activity author (the field “instPoints” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.parts": "Parts it can read",
+  "@engine.author.f.parts": {
+    "description": "Label of a form field of the activity author (the field “parts” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.tStart": "Start time",
+  "@engine.author.f.tStart": {
+    "description": "Label of a form field of the activity author (the field “tStart” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.threshold": "Threshold",
+  "@engine.author.f.threshold": {
+    "description": "Label of a form field of the activity author (the field “threshold” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.budget": "Measurements allowed",
+  "@engine.author.f.budget": {
+    "description": "Label of a form field of the activity author (the field “budget” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.diagnosis": "Diagnosis",
+  "@engine.author.f.diagnosis": {
+    "description": "Label of a form field of the activity author (the field “diagnosis” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.dxOptions": "Answers to choose from",
+  "@engine.author.f.dxOptions": {
+    "description": "Label of a form field of the activity author (the field “dxOptions” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.fault": "Fault",
+  "@engine.author.f.fault": {
+    "description": "Label of a form field of the activity author (the field “fault” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.items": "Activities",
+  "@engine.author.f.items": {
+    "description": "Label of a form field of the activity author (the field “items” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.p.id": "Name",
+  "@engine.author.p.id": {
+    "description": "Label of a form field of the activity author: the field “id” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.f.probeKind.V": "Voltage",
+  "@engine.author.f.probeKind.V": {
+    "description": "Label of a form field of the activity author: the option “V” of the select “Meter”. Short."
+  },
+  "engine.author.f.probeKind.I": "Current",
+  "@engine.author.f.probeKind.I": {
+    "description": "Label of a form field of the activity author: the option “I” of the select “Meter”. Short."
+  },
+  "engine.author.f.probeKind.R": "Resistance",
+  "@engine.author.f.probeKind.R": {
+    "description": "Label of a form field of the activity author: the option “R” of the select “Meter”. Short."
+  },
+  "engine.author.f.item": "Activity",
+  "@engine.author.f.item": {
+    "description": "Label of a form field of the activity author (the field “item” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.actId": "Activity id",
+  "@engine.author.f.actId": {
+    "description": "Label of a form field of the activity author (the field “actId” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.runtime": "Runtime",
+  "@engine.author.f.runtime": {
+    "description": "Label of a form field of the activity author (the field “runtime” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.entry": "File",
+  "@engine.author.f.entry": {
+    "description": "Label of a form field of the activity author (the field “entry” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.stateVersion": "State version",
+  "@engine.author.f.stateVersion": {
+    "description": "Label of a form field of the activity author (the field “stateVersion” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.capabilities": "Capabilities",
+  "@engine.author.f.capabilities": {
+    "description": "Label of a form field of the activity author (the field “capabilities” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.height": "Height (px)",
+  "@engine.author.f.height": {
+    "description": "Label of a form field of the activity author (the field “height” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.fallback": "Fallback",
+  "@engine.author.f.fallback": {
+    "description": "Label of a form field of the activity author (the field “fallback” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.fallbackMedia": "Still picture (media id)",
+  "@engine.author.f.fallbackMedia": {
+    "description": "Label of a form field of the activity author (the field “fallbackMedia” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.fallbackText": "Fallback text",
+  "@engine.author.f.fallbackText": {
+    "description": "Label of a form field of the activity author (the field “fallbackText” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.origin": "Origin",
+  "@engine.author.f.origin": {
+    "description": "Label of a form field of the activity author (the field “origin” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.credit": "Credit",
+  "@engine.author.f.credit": {
+    "description": "Label of a form field of the activity author (the field “credit” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.license": "Licence",
+  "@engine.author.f.license": {
+    "description": "Label of a form field of the activity author (the field “license” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.opt.state": "Saves its state",
+  "@engine.author.f.opt.state": {
+    "description": "Label of a form field of the activity author: the option “state” of a list of choices (what an activity can do, or a kind of circuit part). Short."
+  },
+  "engine.author.f.opt.events": "Logs events",
+  "@engine.author.f.opt.events": {
+    "description": "Label of a form field of the activity author: the option “events” of a list of choices (what an activity can do, or a kind of circuit part). Short."
+  },
+  "engine.author.f.opt.resize": "Sets its height",
+  "@engine.author.f.opt.resize": {
+    "description": "Label of a form field of the activity author: the option “resize” of a list of choices (what an activity can do, or a kind of circuit part). Short."
+  },
+  "engine.author.f.opt.result": "Reports a result",
+  "@engine.author.f.opt.result": {
+    "description": "Label of a form field of the activity author: the option “result” of a list of choices (what an activity can do, or a kind of circuit part). Short."
+  },
+  "engine.author.f.opt.hints": "Asks for hints",
+  "@engine.author.f.opt.hints": {
+    "description": "Label of a form field of the activity author: the option “hints” of a list of choices (what an activity can do, or a kind of circuit part). Short."
+  },
+  "engine.author.f.opt.announce": "Announces changes",
+  "@engine.author.f.opt.announce": {
+    "description": "Label of a form field of the activity author: the option “announce” of a list of choices (what an activity can do, or a kind of circuit part). Short."
+  },
+  "engine.author.f.opt.R": "Resistor (R)",
+  "@engine.author.f.opt.R": {
+    "description": "Label of a form field of the activity author: the option “R” of a list of choices (what an activity can do, or a kind of circuit part). Short."
+  },
+  "engine.author.f.opt.C": "Capacitor (C)",
+  "@engine.author.f.opt.C": {
+    "description": "Label of a form field of the activity author: the option “C” of a list of choices (what an activity can do, or a kind of circuit part). Short."
+  },
+  "engine.author.f.opt.L": "Inductor (L)",
+  "@engine.author.f.opt.L": {
+    "description": "Label of a form field of the activity author: the option “L” of a list of choices (what an activity can do, or a kind of circuit part). Short."
+  },
+  "engine.author.f.opt.V": "Voltage source (V)",
+  "@engine.author.f.opt.V": {
+    "description": "Label of a form field of the activity author: the option “V” of a list of choices (what an activity can do, or a kind of circuit part). Short."
+  },
+  "engine.author.f.opt.I": "Current source (I)",
+  "@engine.author.f.opt.I": {
+    "description": "Label of a form field of the activity author: the option “I” of a list of choices (what an activity can do, or a kind of circuit part). Short."
+  },
+  "engine.author.f.opt.D": "Diode (D)",
+  "@engine.author.f.opt.D": {
+    "description": "Label of a form field of the activity author: the option “D” of a list of choices (what an activity can do, or a kind of circuit part). Short."
+  },
+  "engine.author.f.opt.SW": "Switch (SW)",
+  "@engine.author.f.opt.SW": {
+    "description": "Label of a form field of the activity author: the option “SW” of a list of choices (what an activity can do, or a kind of circuit part). Short."
+  },
+  "engine.author.f.opt.NPN": "NPN transistor",
+  "@engine.author.f.opt.NPN": {
+    "description": "Label of a form field of the activity author: the option “NPN” of a list of choices (what an activity can do, or a kind of circuit part). Short."
+  },
+  "engine.author.f.opt.PNP": "PNP transistor",
+  "@engine.author.f.opt.PNP": {
+    "description": "Label of a form field of the activity author: the option “PNP” of a list of choices (what an activity can do, or a kind of circuit part). Short."
+  },
+  "engine.author.f.opt.NMOS": "N-channel MOSFET",
+  "@engine.author.f.opt.NMOS": {
+    "description": "Label of a form field of the activity author: the option “NMOS” of a list of choices (what an activity can do, or a kind of circuit part). Short."
+  },
+  "engine.author.f.opt.PMOS": "P-channel MOSFET",
+  "@engine.author.f.opt.PMOS": {
+    "description": "Label of a form field of the activity author: the option “PMOS” of a list of choices (what an activity can do, or a kind of circuit part). Short."
+  },
+  "engine.author.f.opt.OPAMP": "Op-amp",
+  "@engine.author.f.opt.OPAMP": {
+    "description": "Label of a form field of the activity author: the option “OPAMP” of a list of choices (what an activity can do, or a kind of circuit part). Short."
+  },
+  "engine.author.p.format": "Format",
+  "@engine.author.p.format": {
+    "description": "Label of a form field of the activity author: the field “format” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.meta": "Notes",
+  "@engine.author.p.meta": {
+    "description": "Label of a form field of the activity author: the field “meta” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.nodes": "Nodes",
+  "@engine.author.p.nodes": {
+    "description": "Label of a form field of the activity author: the field “nodes” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.elements": "Parts",
+  "@engine.author.p.elements": {
+    "description": "Label of a form field of the activity author: the field “elements” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.name": "Name",
+  "@engine.author.p.name": {
+    "description": "Label of a form field of the activity author: the field “name” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.probe": "Test point of",
+  "@engine.author.p.probe": {
+    "description": "Label of a form field of the activity author: the field “probe” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.type": "Kind of part",
+  "@engine.author.p.type": {
+    "description": "Label of a form field of the activity author: the field “type” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.n": "Connected to",
+  "@engine.author.p.n": {
+    "description": "Label of a form field of the activity author: the field “n” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.value": "Value",
+  "@engine.author.p.value": {
+    "description": "Label of a form field of the activity author: the field “value” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.ic": "Initial value",
+  "@engine.author.p.ic": {
+    "description": "Label of a form field of the activity author: the field “ic” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.preset": "Model",
+  "@engine.author.p.preset": {
+    "description": "Label of a form field of the activity author: the field “preset” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.params": "Model parameters",
+  "@engine.author.p.params": {
+    "description": "Label of a form field of the activity author: the field “params” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.label": "Note",
+  "@engine.author.p.label": {
+    "description": "Label of a form field of the activity author: the field “label” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.note": "Note",
+  "@engine.author.p.note": {
+    "description": "Label of a form field of the activity author: the field “note” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.on": "Closed",
+  "@engine.author.p.on": {
+    "description": "Label of a form field of the activity author: the field “on” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.dc": "DC",
+  "@engine.author.p.dc": {
+    "description": "Label of a form field of the activity author: the field “dc” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.pulse": "Pulse",
+  "@engine.author.p.pulse": {
+    "description": "Label of a form field of the activity author: the field “pulse” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.sine": "Sine",
+  "@engine.author.p.sine": {
+    "description": "Label of a form field of the activity author: the field “sine” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.pwm": "PWM",
+  "@engine.author.p.pwm": {
+    "description": "Label of a form field of the activity author: the field “pwm” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.v1": "Low level",
+  "@engine.author.p.v1": {
+    "description": "Label of a form field of the activity author: the field “v1” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.v2": "High level",
+  "@engine.author.p.v2": {
+    "description": "Label of a form field of the activity author: the field “v2” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.delay": "Delay",
+  "@engine.author.p.delay": {
+    "description": "Label of a form field of the activity author: the field “delay” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.rise": "Rise time",
+  "@engine.author.p.rise": {
+    "description": "Label of a form field of the activity author: the field “rise” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.fall": "Fall time",
+  "@engine.author.p.fall": {
+    "description": "Label of a form field of the activity author: the field “fall” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.width": "Width",
+  "@engine.author.p.width": {
+    "description": "Label of a form field of the activity author: the field “width” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.period": "Period",
+  "@engine.author.p.period": {
+    "description": "Label of a form field of the activity author: the field “period” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.offset": "Offset",
+  "@engine.author.p.offset": {
+    "description": "Label of a form field of the activity author: the field “offset” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.amp": "Amplitude",
+  "@engine.author.p.amp": {
+    "description": "Label of a form field of the activity author: the field “amp” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.freq": "Frequency",
+  "@engine.author.p.freq": {
+    "description": "Label of a form field of the activity author: the field “freq” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.phase": "Phase (°)",
+  "@engine.author.p.phase": {
+    "description": "Label of a form field of the activity author: the field “phase” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.v": "High level",
+  "@engine.author.p.v": {
+    "description": "Label of a form field of the activity author: the field “v” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.low": "Low level",
+  "@engine.author.p.low": {
+    "description": "Label of a form field of the activity author: the field “low” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.duty": "Duty cycle",
+  "@engine.author.p.duty": {
+    "description": "Label of a form field of the activity author: the field “duty” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.Ron": "On resistance",
+  "@engine.author.p.Ron": {
+    "description": "Label of a form field of the activity author: the field “Ron” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.Roff": "Off resistance",
+  "@engine.author.p.Roff": {
+    "description": "Label of a form field of the activity author: the field “Roff” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.Is": "Saturation current",
+  "@engine.author.p.Is": {
+    "description": "Label of a form field of the activity author: the field “Is” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.betaF": "Forward gain",
+  "@engine.author.p.betaF": {
+    "description": "Label of a form field of the activity author: the field “betaF” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.betaR": "Reverse gain",
+  "@engine.author.p.betaR": {
+    "description": "Label of a form field of the activity author: the field “betaR” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.Vth": "Threshold voltage",
+  "@engine.author.p.Vth": {
+    "description": "Label of a form field of the activity author: the field “Vth” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.k": "Transconductance",
+  "@engine.author.p.k": {
+    "description": "Label of a form field of the activity author: the field “k” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.lambda": "Channel-length modulation",
+  "@engine.author.p.lambda": {
+    "description": "Label of a form field of the activity author: the field “lambda” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.gain": "Gain",
+  "@engine.author.p.gain": {
+    "description": "Label of a form field of the activity author: the field “gain” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.rails": "Supply rails",
+  "@engine.author.p.rails": {
+    "description": "Label of a form field of the activity author: the field “rails” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.headroom": "Headroom",
+  "@engine.author.p.headroom": {
+    "description": "Label of a form field of the activity author: the field “headroom” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.h.params": "What the learner moves. Each control has a name that formulas use and a label key.",
+  "@engine.author.h.params": {
+    "description": "Help line under a field of the activity author (the field “Controls”)."
+  },
+  "engine.author.h.consts": "Named numbers. A sim exercise can set them for its task.",
+  "@engine.author.h.consts": {
+    "description": "Help line under a field of the activity author (the field “Constants”)."
+  },
+  "engine.author.h.derived": "Computed in order: each formula may use the constants, the controls and the values above it.",
+  "@engine.author.h.derived": {
+    "description": "Help line under a field of the activity author (the field “Computed values”)."
+  },
+  "engine.author.h.readouts": "Values shown under the controls.",
+  "@engine.author.h.readouts": {
+    "description": "Help line under a field of the activity author (the field “Readouts”)."
+  },
+  "engine.author.h.plots": "Up to 6 plots, drawn by the app.",
+  "@engine.author.h.plots": {
+    "description": "Help line under a field of the activity author (the field “Plots”)."
+  },
+  "engine.author.h.label": "A key of the word tables. Its text in each language is right below.",
+  "@engine.author.h.label": {
+    "description": "Help line under a field of the activity author (the field “Label”)."
+  },
+  "engine.author.h.xVar": "A new name for x, used by the formulas of the lines.",
+  "@engine.author.h.xVar": {
+    "description": "Help line under a field of the activity author (the field “Name of x”)."
+  },
+  "engine.author.h.fallbackText": "What the learner reads when the activity cannot run: what it shows and teaches (at least 40 characters).",
+  "@engine.author.h.fallbackText": {
+    "description": "Help line under a field of the activity author (the field “Fallback text”)."
+  },
+  "engine.author.h.actId": "Lower-case letters, digits and -; never reused in the pack.",
+  "@engine.author.h.actId": {
+    "description": "Help line under a field of the activity author (the field “Activity id”)."
+  },
+  "engine.author.h.bench": "A virtual device with one hidden fault, instruments and a diagnosis.",
+  "@engine.author.h.bench": {
+    "description": "Help line under a field of the activity author (the field “Fault-finding bench”)."
+  },
+  "engine.author.create": "Create an activity",
+  "@engine.author.create": {
+    "description": "Item of a subject’s ⋮ menu (with a line icon) that opens the activity author page. Short."
+  },
+  "engine.author.createSub": "A simulation built with a form, with a live preview, to download for a pack",
+  "@engine.author.createSub": {
+    "description": "Small line under “Create an activity” in the subject’s ⋮ menu: what the page does."
+  },
+  "engine.author.loading": "Loading the activity author…",
+  "@engine.author.loading": {
+    "description": "Shown while the activity author page loads for the first time."
+  },
+  "engine.author.loadFailed": "The activity author could not be loaded. Check the connection and try again.",
+  "@engine.author.loadFailed": {
+    "description": "Shown when the scripts of the activity author page could not be loaded (offline, for example)."
   }
 }

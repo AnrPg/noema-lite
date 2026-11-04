@@ -12,11 +12,10 @@
    files, zip / unzip, fromFiles) has no DOM and runs in Node (tests/activity_author.js). */
 (function (root) {
   'use strict';
-  /* i18n-ignore-start */   // code words; every visible word goes through T() (engine/activity_author_i18n.js → the app's catalogs)
+  /* i18n-ignore-start */   // code words; every visible word goes through T() (the app's catalogs: engine.author.* in i18n/engine/)
   const SIM_ID = 'https://noema-lite.netlify.app/schemas/noema.sim-spec.v1.schema.json';
   const REG_ID = 'https://noema-lite.netlify.app/schemas/noema.activities.v1.schema.json';
   const SF = () => root.NoemaSchemaForm || (typeof require === 'function' ? require('./schemaform.js') : null);
-  const STR = () => root.NoemaAuthorStrings || (typeof require === 'function' ? require('./activity_author_i18n.js') : null);
   const PC = () => root.NoemaPackCheck || null;
   const isObj = v => v != null && typeof v === 'object' && !Array.isArray(v);
   const clone = v => JSON.parse(JSON.stringify(v));
@@ -25,24 +24,11 @@
 
   /* ---------- words ---------- */
   const uiLoc = () => (root.NoemaI18n && root.NoemaI18n.locale) || 'en';
-  function icu(msg, vars, tag) {
-    if (root.IntlMessageFormat) try { const r = new root.IntlMessageFormat(msg, tag).format(vars || {}); return Array.isArray(r) ? r.join('') : r; } catch (e) { }
-    // a small fallback: {x} and one {n, plural, one {…} other {…}}
-    const pm = /\{(\w+), plural, ((?:[^{}]*\{[^{}]*\})+)\s*\}/.exec(msg);
-    if (pm) {
-      const n = +((vars || {})[pm[1]]), opts = {}; for (const m of pm[2].matchAll(/(=?\w+)\s*\{([^{}]*)\}/g)) opts[m[1]] = m[2];
-      let cat = 'other'; try { cat = new Intl.PluralRules(tag).select(n); } catch (e) { }
-      msg = msg.replace(pm[0], (opts['=' + n] ?? opts[cat] ?? opts.other ?? '').replace(/#/g, String(n)));
-    }
-    return msg.replace(/\{(\w+)\}/g, (m, k) => vars && vars[k] != null ? String(vars[k]) : m);
-  }
-  /** a word of the author: the app's catalogs first (engine.author.<key>), else this module's table (UI language, then English) */
+  /** a word of the author: the app's catalogs (i18n/engine/<locale>.arb, keys engine.author.<key>) through NoemaI18n, as every
+      engine text; null when the key is not there (a label then falls back to the field's own name) */
   function T(k, vars) {
-    const S = STR(), full = (S ? S.PREFIX : 'engine.author.') + k, I = root.NoemaI18n;
-    if (I && I.has && I.has(full)) return I.t(full, vars);
-    const loc = uiLoc();
-    for (const tag of [loc, loc.split('-')[0], 'en']) if (S && S[tag] && S[tag][k] != null) return icu(S[tag][k], vars, tag);
-    return null;
+    const full = 'engine.author.' + k, I = root.NoemaI18n;
+    return I && I.has && I.has(full) ? I.t(full, vars) : null;
   }
   const TT = (k, vars) => { const r = T(k, vars); return r == null ? k : r; };
   const label = (title, prop, fallback) => (title && T('f.' + title)) || (prop && T('p.' + prop)) || fallback || prop || title || '';
@@ -495,9 +481,11 @@
     };
   }
   /** the route #/author in the app: the page in <main>, with the app's own runtime for the preview */
-  function view(main, opts) { main.innerHTML = ''; return mount(main, Object.assign({ preview: actPreview() }, opts || {})); }
+  /** the route #/author (engine/src/40_views.js authorView): the page in <main>, with the app's runtime as its preview; the page
+      open now is API.current (the browser test drives it) */
+  function view(main, opts) { if (API.current) try { API.current.destroy(); } catch (e) { } main.innerHTML = ''; return (API.current = mount(main, Object.assign({ preview: actPreview() }, opts || {}))); }
 
-  const API = { mount, view, registerType, TYPES, check, usedKeys, namesAt, files, fromFiles, zip, unzip, crc32, registry, actPreview, T, SIM_ID, REG_ID };
+  const API = { current: null, mount, view, registerType, TYPES, check, usedKeys, namesAt, files, fromFiles, zip, unzip, crc32, registry, actPreview, T, SIM_ID, REG_ID };
   root.NoemaActivityAuthor = API;
   if (typeof module !== 'undefined' && module.exports) module.exports = API;
 })(typeof window !== 'undefined' ? window : globalThis);
