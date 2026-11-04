@@ -46,5 +46,9 @@
   "engine.act.bench.right": "正確：{fault}",
   "engine.act.bench.wrong": "不是這個。故障是：{fault}",
   "engine.act.bench.another": "換一台裝置",
-  "engine.act.bench.failed": "無法完成這次量測"
+  "engine.act.bench.failed": "無法完成這次量測",
+  "engine.act.bench.inst.log": "事件記錄",
+  "engine.act.bench.inst.rssi": "無線：訊號強度（RSSI）",
+  "engine.act.bench.current": "電流",
+  "engine.act.bench.logStats": "重新啟動：{resets} 次，遺失訊息：{lost} 則，逾時喚醒：{overruns} 次"
 }

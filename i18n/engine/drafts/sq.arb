@@ -46,5 +46,9 @@
   "engine.act.bench.right": "Saktë: {fault}",
   "engine.act.bench.wrong": "Jo ky. Defekti ishte: {fault}",
   "engine.act.bench.another": "Një pajisje tjetër",
-  "engine.act.bench.failed": "kjo matje nuk u bë dot"
+  "engine.act.bench.failed": "kjo matje nuk u bë dot",
+  "engine.act.bench.inst.log": "Regjistri i ngjarjeve",
+  "engine.act.bench.inst.rssi": "Radio: fuqia e sinjalit (RSSI)",
+  "engine.act.bench.current": "Rryma",
+  "engine.act.bench.logStats": "rinisje: {resets}, mesazhe të humbura: {lost}, zgjime që zgjatën tepër: {overruns}"
 }

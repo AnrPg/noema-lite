@@ -46,5 +46,9 @@
   "engine.act.bench.right": "Giusto: {fault}",
   "engine.act.bench.wrong": "Non è questo. Il guasto era: {fault}",
   "engine.act.bench.another": "Un altro dispositivo",
-  "engine.act.bench.failed": "non è stato possibile fare questa misura"
+  "engine.act.bench.failed": "non è stato possibile fare questa misura",
+  "engine.act.bench.inst.log": "Registro eventi",
+  "engine.act.bench.inst.rssi": "Radio: potenza del segnale (RSSI)",
+  "engine.act.bench.current": "Corrente",
+  "engine.act.bench.logStats": "riavvii: {resets}, messaggi persi: {lost}, risvegli andati oltre il tempo: {overruns}"
 }

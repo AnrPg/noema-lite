@@ -46,5 +46,9 @@
   "engine.act.bench.right": "Richtig: {fault}",
   "engine.act.bench.wrong": "Das war es nicht. Der Fehler war: {fault}",
   "engine.act.bench.another": "Anderes Gerät",
-  "engine.act.bench.failed": "diese Messung war nicht möglich"
+  "engine.act.bench.failed": "diese Messung war nicht möglich",
+  "engine.act.bench.inst.log": "Ereignisprotokoll",
+  "engine.act.bench.inst.rssi": "Funk: Signalstärke (RSSI)",
+  "engine.act.bench.current": "Strom",
+  "engine.act.bench.logStats": "Neustarts: {resets}, verlorene Nachrichten: {lost}, überzogene Wachphasen: {overruns}"
 }

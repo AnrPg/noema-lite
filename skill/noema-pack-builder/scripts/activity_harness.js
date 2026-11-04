@@ -5,7 +5,7 @@
      node activity_harness.js preview SUBJECT_DIR ID [OUT_DIR]  → screenshots: light, dark, 360 px wide, the fallback
    sim-spec@1 activities run in the app's own sim runtime (35_activity_sim.js, with the spec check of packcheck.js); in their
    tests.json a step {"set": "<param id>", "value": v} sets a control, "values": {name: number | [lo, hi]} checks a computed value,
-   "passed" the exercise's checks grader, "state" the saved values. A bench (circuit-mna@1, docs/INTERACTIVE.md §12.7): a step
+   "passed" the exercise's checks grader, "state" the saved values. A bench (circuit-mna@1 or twin@1, docs/INTERACTIVE.md §12.7): a step
    {"measure": {"instrument": "V", "a": "TP3", "b": "GND"}} (or {"instrument": "I", "part": 0}) takes a measurement, {"diagnose": 6}
    picks the 7th diagnosis; "readings": [[i, lo, hi]] checks the number of the i-th measurement, "log": n how many there are;
    a case's "task" (e.g. {"fault": "rOpen"}) overrides the exercise's task.params.
@@ -49,6 +49,7 @@ const has = f => fs.existsSync(path.join(srcDir, f));
 const pcPath = [path.join(srcDir, 'packcheck.js'), path.join(srcDir, '..', 'packcheck.js')].find(f => fs.existsSync(f));
 const SIMOK = has('35_activity_sim.js') && has('35_simexpr.js') && !!pcPath;
 const CIRCUIT = has('36_engine_circuit.js') && has('36_engine_circuit_sim.js');   // the circuit engine circuit-mna@1 (P3)
+const P6 = ['39_engine_thermal.js', '40_engine_pid.js', '41_engine_rf.js', '42_engine_twin.js', '43_engines_p6.js'].filter(has);   // thermal@1, pid@1, rf@1, twin@1 (P6)
 // the host words of sim-spec@1 (the app shows them in the learner's language; here English is enough)
 const HOSTWORDS = { 'engine.act.sim.reset': 'Reset the values', 'engine.act.sim.computing': 'Computing…', 'engine.act.sim.results': 'Results', 'engine.act.sim.plot': 'Plot of {y} against {x}',
   'engine.act.bench.instrument': 'Instrument', 'engine.act.bench.inst.V': 'Multimeter: voltage', 'engine.act.bench.inst.I': 'Multimeter: current', 'engine.act.bench.inst.R': 'Multimeter: resistance',
@@ -56,7 +57,9 @@ const HOSTWORDS = { 'engine.act.sim.reset': 'Reset the values', 'engine.act.sim.
   'engine.act.bench.part': 'Current through', 'engine.act.bench.measure': 'Measure', 'engine.act.bench.left': '{left} measurements left', 'engine.act.bench.log': 'Measurements', 'engine.act.bench.logEmpty': 'No measurements yet.',
   'engine.act.bench.scopeStats': '{pp} peak to peak, mean {mean}, frequency {freq}', 'engine.act.bench.logicStats': 'frequency {freq}, duty cycle {duty}', 'engine.act.bench.time': 'Time', 'engine.act.bench.voltage': 'Voltage',
   'engine.act.bench.level': 'Logic level (0 or 1)', 'engine.act.bench.diagnosis': 'Your diagnosis', 'engine.act.bench.choose': 'Choose the fault…', 'engine.act.bench.commit': 'Check my diagnosis',
-  'engine.act.bench.right': 'Right: {fault}', 'engine.act.bench.wrong': 'Not this one. The fault was: {fault}', 'engine.act.bench.another': 'Another device', 'engine.act.bench.failed': 'this measurement could not be made' };
+  'engine.act.bench.right': 'Right: {fault}', 'engine.act.bench.wrong': 'Not this one. The fault was: {fault}', 'engine.act.bench.another': 'Another device', 'engine.act.bench.failed': 'this measurement could not be made',
+  'engine.act.bench.inst.log': 'Event log', 'engine.act.bench.inst.rssi': 'Radio: signal strength (RSSI)', 'engine.act.bench.current': 'Current',
+  'engine.act.bench.logStats': 'resets: {resets}, lost messages: {lost}, overrun wake-ups: {overruns}' };
 const HOST = `<!doctype html><meta charset="utf-8"><style>#box iframe{display:block;width:100%;height:100%;border:0}
 ${has('32_activities.css') ? rd('32_activities.css') : ''}
 body{margin:0;font-family:var(--font,system-ui);background:var(--bg);color:var(--ink)}.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:4px 10px;font:inherit}</style><body><div id="box" class="act-box" style="position:relative;box-sizing:border-box;width:100%;height:360px"></div><script>
@@ -66,7 +69,7 @@ function tE(k, v) { return String(WORDS[k] || k).replace(/\\{(\\w+)\\}/g, functi
 function h(tag, attrs, ...kids) { const el = document.createElement(tag); for (const [k, v] of Object.entries(attrs || {})) { if (v == null || v === false) continue; if (k === 'class') el.className = v; else if (k === 'style' && typeof v === 'object') Object.assign(el.style, v); else if (k.startsWith('on')) el.addEventListener(k.slice(2), v); else el.setAttribute(k, v === true ? '' : v); } for (const kid of kids.flat()) if (kid != null && kid !== false) el.append(kid.nodeType ? kid : document.createTextNode(String(kid))); return el; }
 ${ACTP}
 window.ACTP = ACTP;
-</script><script>${rd('33_activity_guard.js')}</script><script>${rd('34_activity_html.js')}</script>${SIMOK ? `<script>${rd('35_simexpr.js')}</script><script>${fs.readFileSync(pcPath, 'utf8')}</script><script>${rd('35_activity_sim.js')}</script>${CIRCUIT ? `<script>${rd('36_engine_circuit.js')}</script><script>${rd('36_engine_circuit_sim.js')}</script>` : ''}` : ''}<script>
+</script><script>${rd('33_activity_guard.js')}</script><script>${rd('34_activity_html.js')}</script>${SIMOK ? `<script>${rd('35_simexpr.js')}</script><script>${fs.readFileSync(pcPath, 'utf8')}</script><script>${rd('35_activity_sim.js')}</script>${CIRCUIT ? `<script>${rd('36_engine_circuit.js')}</script><script>${rd('36_engine_circuit_sim.js')}</script>` : ''}${P6.map(f => `<script>${rd(f)}</script>`).join('')}` : ''}<script>
 window.setTheme = function (t) { var r = document.documentElement; for (var k in t.tokens) r.style.setProperty('--' + k, t.tokens[k]); r.style.colorScheme = t.scheme; };
 window.LOG = []; window.H = null;
 window.run = function (act, init) {

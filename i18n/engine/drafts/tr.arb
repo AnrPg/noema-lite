@@ -46,5 +46,9 @@
   "engine.act.bench.right": "Doğru: {fault}",
   "engine.act.bench.wrong": "Bu değil. Arıza şuydu: {fault}",
   "engine.act.bench.another": "Başka bir cihaz",
-  "engine.act.bench.failed": "bu ölçüm yapılamadı"
+  "engine.act.bench.failed": "bu ölçüm yapılamadı",
+  "engine.act.bench.inst.log": "Olay günlüğü",
+  "engine.act.bench.inst.rssi": "Radyo: sinyal gücü (RSSI)",
+  "engine.act.bench.current": "Akım",
+  "engine.act.bench.logStats": "yeniden başlatma: {resets}, kayıp mesaj: {lost}, süresini aşan uyanma: {overruns}"
 }

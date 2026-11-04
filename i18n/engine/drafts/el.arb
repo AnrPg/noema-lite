@@ -874,5 +874,9 @@
   "engine.act.bench.right": "Σωστά: {fault}",
   "engine.act.bench.wrong": "Όχι αυτή. Η βλάβη ήταν: {fault}",
   "engine.act.bench.another": "Άλλη συσκευή",
-  "engine.act.bench.failed": "η μέτρηση αυτή δεν έγινε"
+  "engine.act.bench.failed": "η μέτρηση αυτή δεν έγινε",
+  "engine.act.bench.inst.log": "Αρχείο συμβάντων",
+  "engine.act.bench.inst.rssi": "Ασύρματο: ισχύς σήματος (RSSI)",
+  "engine.act.bench.current": "Ρεύμα",
+  "engine.act.bench.logStats": "επανεκκινήσεις: {resets}, χαμένα μηνύματα: {lost}, αφυπνίσεις που ξεπέρασαν τον χρόνο τους: {overruns}"
 }

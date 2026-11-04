@@ -874,5 +874,9 @@
   "engine.act.bench.right": "Верно: {fault}",
   "engine.act.bench.wrong": "Не то. Неисправность была такая: {fault}",
   "engine.act.bench.another": "Другое устройство",
-  "engine.act.bench.failed": "это измерение выполнить не удалось"
+  "engine.act.bench.failed": "это измерение выполнить не удалось",
+  "engine.act.bench.inst.log": "Журнал событий",
+  "engine.act.bench.inst.rssi": "Радио: уровень сигнала (RSSI)",
+  "engine.act.bench.current": "Ток",
+  "engine.act.bench.logStats": "перезапусков: {resets}, потерянных сообщений: {lost}, затянувшихся пробуждений: {overruns}"
 }

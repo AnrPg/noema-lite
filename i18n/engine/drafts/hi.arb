@@ -46,5 +46,9 @@
   "engine.act.bench.right": "सही: {fault}",
   "engine.act.bench.wrong": "यह नहीं। खराबी यह थी: {fault}",
   "engine.act.bench.another": "दूसरा उपकरण",
-  "engine.act.bench.failed": "यह माप नहीं हो सका"
+  "engine.act.bench.failed": "यह माप नहीं हो सका",
+  "engine.act.bench.inst.log": "इवेंट लॉग",
+  "engine.act.bench.inst.rssi": "रेडियो: सिग्नल की ताकत (RSSI)",
+  "engine.act.bench.current": "धारा",
+  "engine.act.bench.logStats": "रीसेट: {resets}, खोए संदेश: {lost}, समय से लंबे चले जागरण: {overruns}"
 }

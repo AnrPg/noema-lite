@@ -117,6 +117,7 @@ async function run(name) {
   E.length = E0; ok(hits.length === 0, `no request leaves the activity (location, link, meta refresh, popup, data: page): ${JSON.stringify(hits)}`);   // (the hostile frames' own errors don't count)
   await simSpec(p, ctx, E);
   await circuit(p, ctx, E);
+  await p6engines(p, ctx, E);
   await browser.close();
 }
 
@@ -380,6 +381,110 @@ async function circuit(p, ctx, E) {
   ok(await until(() => p.evaluate(() => { const l = document.querySelectorAll('main .sim-log li'); return l.length === 2 && /duty cycle/.test(l[1].textContent) && !!document.querySelector('main .sim-face path.sim-line'); })), 'the logic analyser face: a logic trace');
   const s2 = await p.evaluate(() => document.querySelectorAll('main .sim-log li')[1].textContent);
   ok(/100\s*Hz/.test(s2) && /50\s*%/.test(s2), `the logic reading: frequency and duty cycle (${s2})`);
+  ok(E.length === E0, 'no page errors ' + JSON.stringify(E.slice(E0, E0 + 3)));
+}
+/* the P6 engines (docs/INTERACTIVE_ENGINES.md): thermal@1 heatsink, pid@1 pid-tune, rf@1 lora-link, twin@1 sensor-node — each renders in the
+   app's own sim runtime (no frame), computes in its Worker the numbers the engine on the page gives, is graded by its exercise's checks
+   (right and wrong); and twin@1's fault-finding bench (a modified sensor-node): voltmeter, ammeter, current scope, event log, RSSI,
+   the diagnosis, the hidden fault nowhere in the page before it. */
+async function p6engines(p, ctx, E) {
+  const E0 = E.length;
+  const val = t => { const m = String(t).replace(/−/g, '-').replace(/ | /g, ' ').match(/(-?[\d.,]+)\s*([pnµmkMG]?)/); if (!m) return NaN; return parseFloat(m[1].replace(/,(?=\d{3}\b)/g, '').replace(',', '.')) * ({ p: 1e-12, n: 1e-9, 'µ': 1e-6, m: 1e-3, k: 1e3, M: 1e6, G: 1e9 }[m[2]] || 1); };
+  const openSec = async sel => {
+    await p.evaluate(() => { location.hash = '#/'; }); await wait(300); await p.evaluate(() => { location.hash = '#/s/ch01-s01'; }); await wait(600);
+    const sa = await p.$('button:has-text("show all")'); if (sa) { await sa.click(); await wait(200); }
+    await p.locator(sel).first().scrollIntoViewIfNeeded(); await startIfParked(p, sel);
+    return until(() => p.evaluate(s => !!document.querySelector(s + ' .sim'), sel));
+  };
+  const ro = (sel, i) => p.evaluate(([s, k]) => document.querySelectorAll(s + ' .sim-ro dd')[k]?.textContent || '', [sel, i]);
+  const setNum = async (sel, id, v) => { await p.locator(sel + ` input.sim-num[data-param="${id}"]`).fill(String(v)); await p.locator(sel + ` input.sim-num[data-param="${id}"]`).press('Tab'); };
+  // what the engine itself gives on the page for these values (the same spec, the app's NoemaExpr): the reference for the worker's numbers
+  const direct = (aid, vals) => p.evaluate(([a, v]) => { const sp = ACT.ITEMS[a].spec, E = ACT.engine(sp.engine), env = { ...(sp.consts || {}) };
+    for (const q of sp.params) env[q.id] = q.id in v ? v[q.id] : q.default; for (const d of sp.derived || []) env[d.id] = NoemaExpr.compile(d.expr)(env);
+    return E.create(sp, { seed: 1 }).run(E.prepare(sp, NoemaExpr.compile)(env)); }, [aid, vals]);
+  ok(await p.evaluate(() => ['thermal@1', 'pid@1', 'rf@1', 'twin@1'].every(e => ACT.caps().has('engine:' + e) && typeof ACT.engine(e)?.workerSource === 'string') && ACT.engine('twin@1').bench === true && checkRequires().length === 0),
+    'the app has engine:thermal@1, engine:pid@1, engine:rf@1 and engine:twin@1 (each with a workerSource; twin@1 runs benches); pack.requires is met');
+
+  console.log('— thermal@1: heatsink');
+  const HS = 'main .act-blk .act[data-activity="heatsink"]';
+  ok(await openSec(HS) && await until(() => p.evaluate(s => /174[.,]0\s*°C/.test(document.querySelector(s + ' .sim-ro')?.textContent || ''), HS), 15000), 'heatsink renders (no frame) and computes: Tj = 174.0 °C with Rsa = 6 K/W');
+  ok(!(await p.evaluate(s => !!document.querySelector(s + ' iframe'), HS)) && (await p.evaluate(s => [...document.querySelectorAll(s + ' .sim-plot path.sim-line')].map(x => (x.getAttribute('d') || '').split('L').length), HS)).every(n => n > 100), 'the warm-up curves of the junction and the heatsink are plotted');
+  await setNum(HS, 'Rsa', 3.5);
+  const hs = await direct('heatsink', { Rsa: 3.5 });
+  ok(await until(async () => Math.abs(val(await ro(HS, 0)) - hs.tjSS) < 0.06), `Rsa = 3.5 K/W: the worker's Tj (${await ro(HS, 0)}) is the engine's ${hs.tjSS.toFixed(2)} °C; the slowest time constant ${await ro(HS, 3)}`);
+
+  console.log('— pid@1: pid-tune');
+  const PT = 'main .act-blk .act[data-activity="pid-tune"]';
+  ok(await openSec(PT) && await until(async () => /\d/.test(await ro(PT, 0)), 15000), 'pid-tune renders and computes the step response');
+  for (const [k, v] of [['Kp', 2], ['Ki', 3], ['Kd', 0.4]]) await setNum(PT, k, v);
+  const pt = await direct('pid-tune', { Kp: 2, Ki: 3, Kd: 0.4 });
+  ok(await until(async () => Math.abs(val(await ro(PT, 1)) - pt.ts) < 0.006), `Kp 2, Ki 3, Kd 0.4: settling ${await ro(PT, 1)} and overshoot ${await ro(PT, 0)} as the engine gives (${pt.ts.toFixed(3)} s, ${pt.os.toFixed(2)} %)`);
+  ok((await p.evaluate(s => document.querySelectorAll(s + ' .sim-plot').length, PT)) === 2, 'two plots: the step response with its marks, and the control signal');
+
+  console.log('— rf@1: lora-link');
+  const LL = 'main .act-blk .act[data-activity="lora-link"]';
+  ok(await openSec(LL) && await until(async () => /dB/.test(await ro(LL, 2)), 15000), 'lora-link renders and computes the link budget');
+  await p.selectOption(LL + ' select[data-param="ant"]', '5'); await setNum(LL, 'sf', 9);
+  const ll = await direct('lora-link', { sf: 9, ant: 5 });
+  ok(await until(async () => Math.abs(val(await ro(LL, 2)) - ll.margin) < 0.06), `SF9 with the 5 dBi antenna: margin ${await ro(LL, 2)} (engine ${ll.margin.toFixed(2)} dB), ${await ro(LL, 3)} on air`);
+
+  console.log('— twin@1: sensor-node');
+  const SN = 'main .act-blk .act[data-activity="sensor-node"]';
+  ok(await openSec(SN) && await until(async () => /\d/.test(await ro(SN, 2)), 15000), 'sensor-node renders and simulates 30 days of the device');
+  await setNum(SN, 'period', 900);
+  const sn = await direct('sensor-node', { period: 900 });
+  ok(await until(async () => Math.abs(val(await ro(SN, 2)) - Math.round(sn.life / 86400)) < 1.5), `a wake every 15 minutes: ${await ro(SN, 2)} days of battery (engine ${(sn.life / 86400).toFixed(1)}), ${await ro(SN, 0)} readings a day`);
+
+  console.log('— the P6 exercises: graded by their checks');
+  const card = async id => { await p.evaluate(id => { const m = document.querySelector('main'); m.innerHTML = ''; const c = exerciseCard(EX[id]); c.id = 'T'; m.append(c); scrollTo(0, 0); }, id); await until(() => p.evaluate(() => !!document.querySelector('#T .sim .sim-ro dd')?.textContent)); };
+  const grade = async () => { await p.click('#T button:has-text("Check")'); await until(() => p.evaluate(() => document.getElementById('T')._locked())); return p.evaluate(() => { const c = document.getElementById('T'); return { ok: !!c.querySelector('.explain.ok'), bad: !!c.querySelector('.explain.bad'), list: [...c.querySelectorAll('.act-checks li')].map(l => l.className).join() }; }); };
+  const tries = [
+    ['ch01-e904', [['Rsa', 3.5]], true], ['ch01-e904', [['Rsa', 1]], false],
+    ['ch01-e905', [['Kp', 2], ['Ki', 3], ['Kd', 0.4]], true], ['ch01-e905', [['Kp', 1.05]], false],
+    ['ch01-e906', [['ant', '5'], ['sf', 9]], true], ['ch01-e906', [['sf', 12]], false],
+    ['ch01-e907', [['period', 900]], true], ['ch01-e907', [['period', 7200]], false],
+  ];
+  for (const [id, sets, want] of tries) {
+    await card(id);
+    for (const [k, v] of sets) { if (typeof v === 'string') await p.selectOption(`#T select[data-param="${k}"]`, v); else await setNum('#T', k, v); }
+    await wait(300);
+    const g = await grade();
+    ok(want ? g.ok && !g.bad : g.bad && !g.ok, `${id} ${sets.map(([k, v]) => k + ' ' + v).join(', ')}: graded ${want ? 'right' : 'wrong'} (${g.list})`);
+  }
+
+  console.log('— twin@1: the fault-finding bench (a modified sensor-node)');
+  await p.evaluate(() => {
+    const a = JSON.parse(JSON.stringify(ACT.ITEMS['sensor-node'])); a.id = 'node-bench';
+    a.spec.bench = { faults: [{ id: 'antenna', apply: [{ kind: 'antenna-detached' }] }, { id: 'ageing', apply: [{ kind: 'battery-ageing' }] }, { id: 'wake', apply: [{ kind: 'wake-period', factor: 0.1 }] }],
+      points: [{ id: 'VBAT', at: 'vbat', label: 'period' }, { id: 'VLOAD', at: 'vload', label: 'soc' }, { id: 'GND', at: 'gnd', label: 'time' }, { id: 'ISENSE', at: 'i', label: 'iAvgLabel' }],
+      instruments: [{ kind: 'V', points: ['VBAT', 'VLOAD', 'GND'] }, { kind: 'I', parts: [{ element: 'battery', label: 'iAvgLabel' }] }, { kind: 'scope', points: ['ISENSE'], tEnd: 1300 }, { kind: 'log' }, { kind: 'rssi' }],
+      budget: 6, diagnosis: { options: [{ label: 'checkLife', fault: 'antenna' }, { label: 'checkRate', fault: 'ageing' }, { label: 'perDayLabel', fault: 'wake' }, { label: 'ratioLabel' }] } };
+    ACT.ITEMS['node-bench'] = a;
+    const m = document.querySelector('main'); m.innerHTML = ''; m.append(interactiveBlock({ t: 'interactive', activity: 'node-bench' })); scrollTo(0, 0);
+  });
+  await startIfParked(p, 'main .act');
+  ok(await until(() => p.evaluate(() => !!document.querySelector('main .sim-bench'))), 'a bench on twin@1 mounts ' + await p.evaluate(() => document.querySelector('main .act-note')?.textContent || ''));
+  const inst = await p.evaluate(() => [...document.querySelectorAll('main [data-bench="instrument"] option')].map(o => o.textContent));
+  ok(inst.join('|') === 'Multimeter: voltage|Multimeter: current|Oscilloscope|Event log|Radio: signal strength (RSSI)', `five instruments in the learner's words: ${inst.join(' · ')}`);
+  const secret = () => p.evaluate(() => { const h = document.body.innerHTML.replace(/data-activity="[^"]*"/g, '') + document.body.innerText; return /antenna-detached|battery-ageing|wake-period|"antenna"|"ageing"/.test(h) || !!document.querySelector('main .sim-dx-out')?.textContent; });
+  ok(!(await secret()), 'the hidden fault is nowhere in the page before the diagnosis');
+  const blog = () => p.evaluate(() => [...document.querySelectorAll('main .sim-log li')].map(l => l.textContent));
+  const meas = async (i, a, n) => { await p.selectOption('main [data-bench="instrument"]', i); if (a) await p.selectOption('main [data-bench="a"]', a); await p.click('main [data-bench="measure"]'); await until(async () => { const l = await blog(); return l.length === n && !/…$/.test(l[n - 1]); }, 15000); };
+  await meas('V', 'VBAT', 1); await meas('I', null, 2); await meas('scope', 'ISENSE', 3); await meas('log', null, 4); await meas('rssi', null, 5);
+  const L = await blog();
+  ok(L.length === 5 && /\b[34][.,]\d+\s*V\b/.test(L[0]) && /µA|mA/.test(L[1]) && /peak to peak/.test(L[2]) && /mA/.test(L[2]) && /resets: \d+, lost messages: \d+, overrun wake-ups: \d+/.test(L[3]) && /-?−?\d+[.,]\d\s*dBm/.test(L[4]), `the readings: ${L.join(' | ')}`);
+  const hide = await p.evaluate(() => { const r = q => document.querySelector(`main [data-bench="${q}"]`).closest('.sim-p'); return { a: r('a').hidden, b: r('b').hidden, part: r('part').hidden }; });
+  ok(hide.a && hide.b && hide.part, 'the RSSI reading and the event log need no lead: no point is offered');
+  await p.selectOption('main [data-bench="instrument"]', 'scope'); await p.selectOption('main [data-bench="a"]', 'ISENSE'); await p.click('main [data-bench="measure"]');
+  ok(await until(() => p.evaluate(() => !!document.querySelector('main .sim-face path.sim-line') && /Current \(A\)/.test(document.querySelector('main .sim-face svg')?.textContent || ''))), 'the scope face plots the supply current (axis "Current (A)")');
+  ok(/5 measurements left|1 measurement left|No measurements left/.test(await p.evaluate(() => document.querySelector('main .sim-left')?.textContent || '')) && !(await secret()), 'the budget counts down; still hidden');
+  await p.selectOption('main [data-bench="diagnosis"]', '0'); await p.click('main [data-bench="commit"]'); await wait(200);
+  const v = await p.evaluate(() => ({ cls: document.querySelector('main .sim-dx-out')?.className || '', txt: document.querySelector('main .sim-dx-out')?.textContent || '', dis: document.querySelector('main [data-bench="measure"]').disabled }));
+  ok(/sim-dx-out (ok|bad)/.test(v.cls) && v.txt.length > 5 && v.dis, `"Check my diagnosis": the verdict (${v.txt}) and the bench locks`);
+  // the readings are the engine's: the same device and fault, measured by NoemaTwin on the page
+  const want = await p.evaluate(() => { const sp = ACT.ITEMS['node-bench'].spec, E = ACT.engine('twin@1'), env = { ...(sp.consts || {}), period: 60, perDay: 1440 };
+    return ['antenna', 'ageing', 'wake'].map(id => E.create(sp, { seed: 1, faults: sp.bench.faults.find(f => f.id === id).apply }).measure(E.prepare(sp, NoemaExpr.compile)(env), { kind: 'I' }).value); });
+  ok(want.some(w => Math.abs(val(L[1]) - w) <= 0.01 * w), `the ammeter shows the engine's average current for the drawn device (${L[1]}; NoemaTwin: ${want.map(w => (w * 1e6).toFixed(1) + ' µA').join(', ')})`);
   ok(E.length === E0, 'no page errors ' + JSON.stringify(E.slice(E0, E0 + 3)));
 }
 (async () => {

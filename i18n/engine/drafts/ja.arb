@@ -46,5 +46,9 @@
   "engine.act.bench.right": "正解：{fault}",
   "engine.act.bench.wrong": "違います。故障はこれでした：{fault}",
   "engine.act.bench.another": "別の装置",
-  "engine.act.bench.failed": "この測定はできませんでした"
+  "engine.act.bench.failed": "この測定はできませんでした",
+  "engine.act.bench.inst.log": "イベントログ",
+  "engine.act.bench.inst.rssi": "無線: 受信信号強度（RSSI）",
+  "engine.act.bench.current": "電流",
+  "engine.act.bench.logStats": "リセット: {resets} 回、届かなかったメッセージ: {lost} 件、時間を超えた起動: {overruns} 回"
 }

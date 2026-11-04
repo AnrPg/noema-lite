@@ -874,5 +874,9 @@
   "engine.act.bench.right": "Exact : {fault}",
   "engine.act.bench.wrong": "Ce n’est pas cela. La panne était : {fault}",
   "engine.act.bench.another": "Un autre appareil",
-  "engine.act.bench.failed": "cette mesure n’a pas pu être faite"
+  "engine.act.bench.failed": "cette mesure n’a pas pu être faite",
+  "engine.act.bench.inst.log": "Journal des événements",
+  "engine.act.bench.inst.rssi": "Radio : puissance du signal reçu (RSSI)",
+  "engine.act.bench.current": "Courant",
+  "engine.act.bench.logStats": "redémarrages : {resets}, messages perdus : {lost}, réveils qui ont débordé : {overruns}"
 }

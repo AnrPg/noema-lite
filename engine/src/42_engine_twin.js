@@ -1,4 +1,4 @@
-/* ===================== interactive activities — the IoT device twin twin@1 (docs/activities-dev/twin.md, docs/adr/001 D12, P6) =====================
+/* ===================== interactive activities — the IoT device twin twin@1 (docs/INTERACTIVE_ENGINES.md §5, docs/adr/001 D12, P6) =====================
    A small "digital twin" of a battery-powered microcontroller node for tier B (sim-spec@1): a discrete-event simulator of a
    duty-cycled firmware (wake every T, sense, transmit every k-th wake, wait for an ack, retry), a battery (capacity, open-circuit
    voltage curve, internal resistance, self-discharge), power states (sleep / active / sense / radio TX / RX, currents in mA),
@@ -6,7 +6,7 @@
    and airtime — the minimal formulas of rf@1, duplicated so the worker needs one file), brown-out resets below a voltage, and
    hidden FAULTS (as the circuit bench): sensor stuck / drifting, an aged battery, a detached antenna, a misconfigured wake period,
    a brown-out level set too high. Deterministic for a seed; bounded (sim.maxEvents → code 'budget'). Codes and numbers only.
-   The device (noema.twin/v1): docs/activities-dev/twin.md, tools/schemas/noema.twin.v1.schema.json. Python twin of check(),
+   The device (noema.twin/v1): docs/INTERACTIVE_ENGINES.md §5, tools/schemas/noema.twin.v1.schema.json. Python twin of check(),
    checkFaults(), checkSpec(): tools/twin.py. Registering it is one line: ACT.registerEngine(NoemaTwin.engine). Tests: node tests/twin.js. */
 (function noemaTwinModule(root) {
   /* i18n-ignore-start */   // code, not text: only codes and numbers leave this engine
@@ -396,7 +396,7 @@
         r.series.traceT.forEach((x, i) => { if (x >= t0 && x <= t1) { tt.push(x); vv.push(r.series.traceI[i] / 1000); } });
         let mn = Infinity, mx = -Infinity, area = 0;
         for (let i = 0; i < vv.length; i++) { mn = Math.min(mn, vv[i]); mx = Math.max(mx, vv[i]); if (i % 2) area += vv[i] * (tt[i] - tt[i - 1]); }
-        return { kind: 'scope', t: thin(tt, MAX_POINTS), v: thin(vv, MAX_POINTS), stats: { pp: mx - mn, mean: tt.length ? area / (t1 - t0) : NaN, min: mn, max: mx, freq: r.scalars.wakes > 1 ? 1 / compile(JSON.parse(JSON.stringify(devc)), faults).S.period : NaN } };
+        return { kind: 'scope', unit: 'A', t: thin(tt, MAX_POINTS), v: thin(vv, MAX_POINTS), stats: { pp: mx - mn, mean: tt.length ? area / (t1 - t0) : NaN, min: mn, max: mx, freq: r.scalars.wakes > 1 ? 1 / compile(JSON.parse(JSON.stringify(devc)), faults).S.period : NaN } };
       }
       if (probe.kind === 'log') { const r = run(); return { kind: 'log', events: r.log.slice(), count: r.logCount }; }
       if (probe.kind === 'rssi') { const r = run(); return { kind: 'rssi', value: r.scalars.rssiMean, n: r.scalars.delivered }; }

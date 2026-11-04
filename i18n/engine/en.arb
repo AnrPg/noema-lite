@@ -4789,5 +4789,21 @@
   "engine.act.bench.failed": "this measurement could not be made",
   "@engine.act.bench.failed": {
     "description": "Shown in place of a reading when the simulation could not compute it."
+  },
+  "engine.act.bench.inst.log": "Event log",
+  "@engine.act.bench.inst.log": {
+    "description": "Instrument on the bench of an IoT device (a digital twin): the device's own log of resets, lost messages and wake-ups that ran too long."
+  },
+  "engine.act.bench.inst.rssi": "Radio: signal strength (RSSI)",
+  "@engine.act.bench.inst.rssi": {
+    "description": "Instrument on the bench of an IoT device: the mean strength of its radio signal at the receiver (RSSI, in dBm)."
+  },
+  "engine.act.bench.current": "Current",
+  "@engine.act.bench.current": {
+    "description": "Vertical axis of an oscilloscope trace that shows the current a device draws from its battery."
+  },
+  "engine.act.bench.logStats": "resets: {resets}, lost messages: {lost}, overrun wake-ups: {overruns}",
+  "@engine.act.bench.logStats": {
+    "description": "Summary of a device's event log; {resets}, {lost}, {overruns} are counts (resets after a brown-out, messages not delivered, wake-ups that ran into the next one)."
   }
 }
