@@ -1,4 +1,4 @@
-/* ===================== interactive activities — runtime py-module@1 (Tier C: Python with numpy/scipy, docs/activities-dev/pyodide.md) =====================
+/* ===================== interactive activities — runtime py-module@1 (Tier C: Python with numpy/scipy, docs/INTERACTIVE_PYTHON.md) =====================
    The activity is Python source (act.python) with a function step(inputs, state) → outputs (a dict) and an optional init(task, seed).
    Its UI is not Python: the app draws the controls and plots from a declarative spec and calls step with py:step {inputs} → py:out {outputs}.
    Where it runs: <iframe sandbox="allow-scripts"> (opaque origin "null") holding only OUR runner script (allowed by its hash), which
@@ -265,7 +265,7 @@
     };
   }
 
-  /* ---------- the Python side: module noema + the step/init calls (docs/activities-dev/pyodide.md "Python API") ---------- */
+  /* ---------- the Python side: module noema + the step/init calls (docs/INTERACTIVE_PYTHON.md §3) ---------- */
   const NOEMA_PY = String.raw`
 import sys, json, math, re, types, random as _random
 import _noema_bridge

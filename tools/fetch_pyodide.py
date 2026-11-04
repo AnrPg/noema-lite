@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fetch the pinned Python runtime of py-module@1 (docs/activities-dev/pyodide.md) into the website.
+"""Fetch the pinned Python runtime of py-module@1 (docs/INTERACTIVE_PYTHON.md) into the website.
 
     python3 tools/fetch_pyodide.py [--site dist/site] [--cache DIR] [--include numpy,scipy,micropip] [--allow tools/pywheels_allow.json]
     python3 tools/fetch_pyodide.py --pin        # maintainers only: download once and write the hashes into tools/pyodide_manifest.json

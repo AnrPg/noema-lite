@@ -1,4 +1,4 @@
-/* noema-lite · the service worker of the Python runtime py-module@1 (docs/activities-dev/pyodide.md, docs/adr/001 D7).
+/* noema-lite · the service worker of the Python runtime py-module@1 (docs/INTERACTIVE_PYTHON.md, docs/adr/001 D7).
    Registered by engine/src/37_activity_py.js with the scope /vendor/pyodide/ only (the script needs the response header
    Service-Worker-Allowed: /vendor/ because it lives in /engine/). It controls nothing of the app: only the hidden, script-less
    loader page /vendor/pyodide/__loader.html, whose fetch() the app uses to read the pinned files. So:

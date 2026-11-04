@@ -1,7 +1,7 @@
 # ADR 001 · Interactive activities in packs (mini-apps, minigames, simulations)
 
 * **Status:** accepted (2026-11-04). The owner approved the four plan changes in §2; P1 (core + `html-app@1`) and P2 (`sim-spec@1`, the
-  expression language, the `checks` grader, `registerEngine`) are implemented (§8 "As built"). Where this record and the owner's
+  expression language, the `checks` grader, `registerEngine`) are implemented (§8 "As built"), P3 (`circuit-mna@1`, §9) and P4 (`py-module@1`, behind its flag, §10). Where this record and the owner's
   decisions doc differ, the doc wins (items 6 and 7 are applied below: D7, D8).
 * **Date:** 2026-11-04 · **Requested by:** ANR · **Brief:** the "Handoff: Interactive Activities for noema-lite" message (thread "Add interactive activities to packs").
 * **Scope of this ADR:** the design for all phases P1–P5 and the results of the four P0 spikes. No feature code ships with it; the spike
@@ -313,3 +313,40 @@ mode, audits. The content work (the electronics Roadmap) starts only after the h
 * **Found on the way:** the harness's host page replaced `{name}` placeholders with a regex written inside a template literal, which
   lost its backslashes (no host string with a placeholder was ever filled); with four activities in one section the two live slots
   are taken by the first ones in view, so the app test presses Start on a parked block (as a learner would).
+
+## 10. As built — P4 (`py-module@1`, Python, 2026-11-04)
+
+* **The binding: a spec drawn by the app, numbers from Python.** A py-module@1 item carries `python` (its `main.py`, inline with
+  `sha256` and `bytes`), `packages` (⊆ numpy, scipy and the allow-listed extras of `tools/pywheels_allow.json`), `requiresNetwork`
+  (required `true` with an extra), `stepMs` (100–10 000) and a `spec` in the sim-spec@1 format without `engine`, `model` or `bench` and
+  with at least one `output`. The app mounts the sim-spec view of 35_activity_sim.js (`ACT.simView`, the P2 runtime turned into a
+  function with an optional host: its engine id, its spec check, its runner, extra state, a decoration) with a runner that calls
+  Python's `step(inputs, state)` one at a time, the latest inputs winning. So the learner gets the app's own controls, readouts and
+  plots (theme, 360 px, keyboard, screen reader) and **the checks grader works on Python's outputs unchanged** (the P2 rev gate keeps
+  Check on the latest results); `reported` through `noema.result` also works. One hidden runner frame per mounted activity (the D8
+  live limit applies). A pack-authored Python UI (an html-app talking to Python) was not built: no case needed it, and it would bring
+  back everything sim-spec@1 makes automatic.
+* **The validators** (`engine/packcheck.js` `lintPython`, `checkSimSpec(..., {python: true})`; `tools/activities.py` the twin, the
+  same messages — tests/activities.js compares them on 33 items): a top-level `def step(` is required, no network, `js`/`pyodide_js`,
+  `micropip` or `input()`, every imported package declared, ≤ 256 KB; `while True` and `time.sleep` warn. `make_pack.py` puts main.py
+  inline and adds `runtime:py-module@1` to `pack.requires`; `unpack.py` writes main.py and spec.json back byte for byte.
+* **The flag (ADR §4 "Feature flags").** `NOEMA_CONFIG.activities['py-module@1']` stays **false by default**, as §4 planned for a
+  staged rollout: the runtime is complete and tested, but switching it on is the owner's call once the deploy carries the Python files.
+  With the flag off the item shows its fallback ("cannot run in this version") and the Settings line is hidden; with it on,
+  `ACT.enabled()` also needs `NoemaPy.available()` (an http(s) secure origin with Cache Storage, a Worker, WebAssembly, not
+  `window.NOEMA_BUNDLE`), otherwise the fallback says Python works only on the website.
+* **The learner's side.** One quiet line above the controls: the first-use size from the manifest (`NoemaPy.need`), the
+  requiresNetwork note, loading progress, a "Download … and start" button on Save-Data or cellular. Failures map to the core's
+  fallback with a reason (`failText`: offline → "not on this device yet, and there is no connection" + Restart; timeout → slow +
+  Restart). Settings: a 🐍 section in the backup view (`accView('backup')`, so the classic Backup tab and the shell's Me › Data and
+  sync), one line with a pill, the size on the device and the Prepare button with a progress bar; the per-part detail and whether
+  `persist()` was granted are in its ⓘ. All words in the 15 UI catalogs.
+* **Deploy.** `build_site` copies `engine/pyodide-sw.js` and writes the Python headers into the real `_headers`
+  (`Service-Worker-Allowed: /vendor/`, immutable versioned files, a no-cache manifest, `application/wasm`); `netlify.toml` runs
+  `tools/fetch_pyodide.py` after the site build with the downloads in Netlify's build cache, and a failed fetch only prints a warning
+  (the deploy goes out; Python activities show their fallback there). `docs/activities-dev/pyodide.md` and its headers file are folded
+  into `docs/INTERACTIVE_PYTHON.md`, which the connector's 'interactive' guide and the skill's references now include.
+* **Reference activity** `py-filter` (numpy: a moving average of N samples or a first-order filter at 8 kHz; the exercise asks for a
+  filter that removes a 1 kHz tone while 300 Hz loses < 3 dB: N = 8 passes, N = 16 removes the tone but loses 6 dB). The harness runs
+  py-module@1 over a local http server when `NOEMA_PYODIDE_SITE` (or `dist/site`) has the files, and skips them otherwise (exit 2 when
+  nothing else was checked).

@@ -4,7 +4,8 @@ The contract is `docs/INTERACTIVE.md`; this page is how to make one that teaches
 `tools/activities_examples/alias-lab/` (html-app@1, sampling and aliasing) and `tools/activities_examples/rc-lowpass/`
 (sim-spec@1, an RC low-pass filter): each an explorer in the theory and a graded sim exercise. For circuits (`circuit-mna@1`,
 `docs/INTERACTIVE_CIRCUIT.md`): `rc-transient` (a capacitor charging from a square wave, R and C on sliders, a scope trace) and
-`led-bench` (a fault-finding bench: an LED that stays dark).
+`led-bench` (a fault-finding bench: an LED that stays dark). For Python (`py-module@1`, `docs/INTERACTIVE_PYTHON.md`): `py-filter`
+(two digital low-pass filters computed with numpy).
 
 ## When an activity earns its place
 
@@ -29,6 +30,27 @@ own rules, a step-by-step animation. A graded html-app reports its own result (`
 | grading of a sim exercise | `checks`: rules the app evaluates on the values | `reported`: the activity calls `noema.result` |
 | the checks before delivery | every expression and key checked by `activity_lint.py` | lint for banned code + the browser test |
 | limits | 24 controls, 6 plots, 2000 points; formulas only | 512 KB; anything the sandbox allows |
+
+## When Python (py-module@1)?
+
+Only when the numbers need **real numerical work** that the expression language cannot do in a few lines: a frequency response from
+filter coefficients, an FFT of a signal, a linear system or eigenvalues, an ODE that needs a proper solver, an optimiser, a statistical
+test, a random experiment repeated thousands of times. The learner still sees the app's own controls, readouts and plots (a sim-spec
+`spec.json`); `main.py` only computes them in `step(inputs, state)`, and a sim exercise is graded by `checks` on Python's outputs
+exactly like a sim-spec.
+
+It has a price, so weigh it:
+
+* **17 MB the first time** (Python + numpy), **37 MB with scipy**; a few seconds to start every time (8–10 s with scipy). A
+  learner on a phone with mobile data is asked first. After that it works offline.
+* **Only on the website**: never in the one-file app or a copy opened from disk — the fallback picture and text show there, so they
+  must teach the same idea.
+* Extra packages beyond numpy and scipy come only from the reviewed allow-list (`tools/pywheels_allow.json`) and need
+  `"requiresNetwork": true`.
+
+Keep **every step fast** (aim for < 50 ms; the budget is 3 s, then the learner sees Restart): compute what does not change at the top
+of `main.py`, vectorise with numpy, a few hundred points per curve. Use scipy only when numpy really cannot do the job (it costs
+20 MB and 3–5 s per start). If a formula can say it, use sim-spec@1.
 
 ## Steps
 
@@ -84,6 +106,11 @@ the saved values:
   { "name": "the right fc with another C", "exercise": "ch01-e901", "steps": [{ "set": "C", "value": 1e-6 }, { "set": "R", "value": 160 }], "expect": { "passed": false } }
 ] }
 ```
+
+For a **py-module@1** activity the cases are the same as for a sim-spec (`set` names a param, `values` are Python's scalar
+outputs): `{"name": "N = 8 removes the tone", "exercise": "ch01-e904", "steps": [{"set": "N", "value": 8}], "expect": {"passed": true,
+"values": {"att1k": [-130, -60]}}}`. They run when the Python files are there (`NOEMA_PYODIDE_SITE=<site with vendor/pyodide/>`);
+otherwise `activity_test.py` skips them.
 
 For a **bench**, `task` picks the hidden fault (`{"fault": "rOpen"}`, over the exercise's own `task.params`), `{"measure":
 {"instrument": "V", "a": "TP3", "b": "GND"}}` (or `{"instrument": "I", "part": 0}`) takes a measurement, `{"diagnose": 2}` picks

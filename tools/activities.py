@@ -4,13 +4,15 @@ The SAME rules as engine/packcheck.js checkActivities (tests/activities.js runs 
   load_activities(subject_dir) → (registry | None, problems)   activities/activities.json + every bundle and string table
   check_activities(pack) → (errors, warnings)                   the registry, its references from blocks / sim exercises, pack.requires
   lint_html(html) → (errors, warnings)                         what a mini-app (html-app@1) may not contain
+  lint_python(src, packages) → (errors, warnings)              what the Python of a py-module@1 activity may not do (docs/INTERACTIVE_PYTHON.md)
 
 In the subject folder:
   activities/activities.json            {"format": "noema.activities/v1", "items": [{id, runtime, entry, stateVersion, fallback, …}]}
   activities/<id>/app.html              the bundle of an html-app@1 activity (entry)
   activities/<id>/spec.json             the spec of a sim-spec@1 activity (entry): data the app's own engines run, no code
+  activities/<id>/main.py               the Python of a py-module@1 activity (entry), with its spec.json beside it (no engine: step() computes)
   activities/<id>/strings.<locale>.json the activity's words, one file per language, the same keys in each
-In the pack (make_pack.py): pack.activities = {"format", "items": [{…, "html": <the bundle>, "sha256", "bytes" | "spec": {…}, "strings": {locale: {key: text}}}]}
+In the pack (make_pack.py): pack.activities = {"format", "items": [{…, "html": <the bundle>, "sha256", "bytes" | "spec": {…} | "python": <main.py>, "sha256", "bytes", "spec", "strings": {locale: {key: text}}}]}
 and pack.requires = ["activities/v1", "runtime:<id>", "engine:<id>" (an engine other than formula@1), …]. Everything is inline, like the
 pictures (ADR D2).
   check_spec(spec, tables) → errors                           a sim-spec@1 spec (docs/INTERACTIVE.md §12): shape, limits, names,
