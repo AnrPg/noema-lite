@@ -1,0 +1,7 @@
+{ "cases": [
+ { "name": "N = 8: the 1 kHz tone falls on a zero of the filter, 300 Hz passes", "exercise": "ch01-e904", "steps": [{ "set": "N", "value": 8 }], "expect": { "passed": true, "values": { "att1k": [-130, -60], "pass300": [-1.5, -1.1] } } },
+ { "name": "N = 4 (the start value): the tone is only 3.7 dB down", "exercise": "ch01-e904", "steps": [{ "set": "N", "value": 5 }, { "set": "N", "value": 4 }], "expect": { "passed": false, "values": { "att1k": [-3.8, -3.6] } } },
+ { "name": "N = 16 removes the tone but also the 300 Hz band", "exercise": "ch01-e904", "steps": [{ "set": "N", "value": 16 }], "expect": { "passed": false, "values": { "pass300": [-6.5, -5.5] } } },
+ { "name": "a first-order filter slow enough for the tone loses the 300 Hz band", "exercise": "ch01-e904", "steps": [{ "set": "kind", "value": 1 }, { "set": "fc", "value": 80 }], "expect": { "passed": false } },
+ { "name": "explorer: the values are saved", "steps": [{ "set": "N", "value": 12 }], "expect": { "state": ["kind", "N", "fc"], "values": { "f3": [250, 350] } } }
+] }

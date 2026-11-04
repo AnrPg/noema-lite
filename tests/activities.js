@@ -3,7 +3,7 @@
       the same, an endless loop throws; strings, templates, regexes and comments are left alone;
    2. the protocol checks (ACTP in engine/src/32_activities.js): sizes, types, payloads, a newer version;
    3. the rules in JS (engine/packcheck.js checkActivities) and Python (tools/activities.py) give the same errors on the same packs,
-      html-app@1 and sim-spec@1 (the spec: shape, limits, names, every expression through NoemaExpr / simexpr, engines, string keys;
+      html-app@1, sim-spec@1 and py-module@1 (the Python file's lint, packages and the allow-list, requiresNetwork, stepMs, its spec) (the spec: shape, limits, names, every expression through NoemaExpr / simexpr, engines, string keys;
       the checks grader of a sim exercise);
    4. no code path ever gives a frame allow-same-origin.
    Usage: node tests/activities.js */
@@ -57,6 +57,7 @@ ok(!ACTP.check(M('state', { version: 1, data: 'x'.repeat(300 * 1024) })).ok, 'a 
 ok(!ACTP.check(M('event', { name: 'x', data: 'y'.repeat(70 * 1024) })).ok, 'a message over 64 KB is refused');
 ok(!ACTP.check(M('resize', { h: 'tall' })).ok && ACTP.check(M('resize', { h: 300 })).ok, 'resize needs a number');
 ok(!ACTP.check(null).ok && !ACTP.check('hello').ok, 'not an object → refused');
+ok(ACTP.check(M('py:out', { outputs: { a: 1 } }, { re: 'py1' })).ok && ACTP.check(M('py:status', { phase: 'ready' })).ok && !ACTP.check(M('py:out', { error: { code: 'BAD CODE' } })).ignore, 'py:out and py:status are known (no strike for the Python runtime\'s own traffic; a bad one is still refused)');
 
 // 3. the same rules in JS and Python
 require(path.join(ROOT, 'engine', 'src', '35_simexpr.js'));   // the expression checker packcheck uses for sim-spec@1
@@ -74,7 +75,8 @@ const cases = {
   good: p => p,
   'no format': p => { p.activities.format = 'x'; },
   'bad id': p => { p.activities.items[0].id = 'Alias Lab'; },
-  'later runtime': p => { p.activities.items[0].runtime = 'py-module@1'; },
+  'later runtime': p => { p.activities.items[0].runtime = 'h5p@1'; },
+  'py-module without its Python and spec': p => { p.activities.items[0].runtime = 'py-module@1'; p.requires.push('runtime:py-module@1'); },
   'sim-spec without its spec': p => { p.activities.items[0].runtime = 'sim-spec@1'; },
   'unknown runtime': p => { p.activities.items[0].runtime = 'flash@9'; },
   'no fallback': p => { delete p.activities.items[0].fallback; },
@@ -199,17 +201,65 @@ const ccases = {
   'circuit: a check on the diagnosis index': p => { sx(p).grade.checks[0].expr = 'diagnosis == 6'; },
   'circuit: a check on an unknown name': p => { sx(p).grade.checks[1].expr = 'measures <= 6'; },
 };
-const packs = [...Object.entries(cases).map(([k, f]) => { const p = base(); f(p); return [k, p]; }), ...Object.entries(scases).map(([k, f]) => { const p = sbase(); f(p); return [k, p]; }), ...Object.entries(ccases).map(([k, f]) => { const p = cbase(); f(p); return [k, p]; })];
-const GOOD = new Set(['good', 'spec good', 'spec: a good choice and toggle', 'circuit good', 'circuit: rc-transient (no bench)', 'circuit: a good scalar output in a readout', 'circuit: a scope and a logic analyser', 'circuit: task.fault a list', 'circuit: a check on the diagnosis index']);
+// py-module@1: the reference py-filter (main.py + its spec) as the second activity, with a sim exercise graded by checks on Python's outputs
+const PF = path.join(ROOT, 'tools', 'activities_examples', 'py-filter');
+const pySrc = fs.readFileSync(path.join(PF, 'main.py'), 'utf8');
+const pfItem = { ...JSON.parse(fs.readFileSync(path.join(PF, 'activity.json'), 'utf8')), python: pySrc, sha256: crypto.createHash('sha256').update(pySrc).digest('hex'), bytes: Buffer.byteLength(pySrc),
+  spec: JSON.parse(fs.readFileSync(path.join(PF, 'spec.json'), 'utf8')), strings: Object.fromEntries(['en', 'el', 'ru'].map(l => [l, JSON.parse(fs.readFileSync(path.join(PF, `strings.${l}.json`), 'utf8'))])) };
+delete pfItem.entry;
+const PX = { id: 'ch01-e4', type: 'sim', activity: 'py-filter', task: { seed: 'auto', params: {} }, hints: ['h'],
+  grade: { mode: 'checks', checks: [{ expr: 'att1k <= -20', label: 'checkTone', weight: 2 }, { expr: 'pass300 >= -3', label: 'checkPass' }] } };
+const pbase = () => { const p = base(); p.media['py-filter-still'] = { w: 600, h: 260 }; p.requires.push('runtime:py-module@1'); p.activities.items.push(JSON.parse(JSON.stringify(pfItem)));
+  p.chapters[0].sections[0].blocks.push({ t: 'interactive', activity: 'py-filter' }); p.chapters[0].exercises.push(JSON.parse(JSON.stringify(PX))); return p; };
+const pi = p => p.activities.items[1], pyEdit = (p, f) => { pi(p).python = f(pi(p).python); pi(p).sha256 = null; pi(p).bytes = null; };
+const pcases = {
+  'py good': p => p,
+  'py: graded "reported" (noema.result)': p => { sx(p).grade = { mode: 'reported' }; },
+  'py: a task param for Python only': p => { sx(p).task.params = { level: 2, f0: 'x' }; },
+  'py: scipy declared and imported': p => { pi(p).packages = ['numpy', 'scipy']; pyEdit(p, s => 'from scipy import signal\n' + s); },
+  'py: an allow-listed extra with requiresNetwork': p => { pi(p).packages = ['numpy', 'quantiphy']; pi(p).requiresNetwork = true; pi(p).stepMs = 500; },
+  'py: no runtime in requires': p => { p.requires = p.requires.filter(x => x !== 'runtime:py-module@1'); },
+  'py: no Python file': p => { delete pi(p).python; },
+  'py: no spec': p => { delete pi(p).spec; },
+  'py: no step()': p => { pyEdit(p, s => s.replace('def step(', 'def stepp(')); },
+  'py: imports scipy without declaring it': p => { pyEdit(p, s => 'import scipy.signal\n' + s); },
+  'py: a package not on the list': p => { pi(p).packages = ['numpy', 'pandas']; },
+  'py: a package twice': p => { pi(p).packages = ['numpy', 'numpy']; },
+  'py: packages not a list': p => { pi(p).packages = 'numpy'; },
+  'py: an extra without requiresNetwork': p => { pi(p).packages = ['numpy', 'quantiphy']; },
+  'py: requiresNetwork not a boolean': p => { pi(p).requiresNetwork = 'yes'; },
+  'py: stepMs too long': p => { pi(p).stepMs = 60000; },
+  'py: stepMs not whole': p => { pi(p).stepMs = 250.5; },
+  'py: import js': p => { pyEdit(p, s => 'import js\n' + s); },
+  'py: the network': p => { pyEdit(p, s => s + '\nfrom pyodide.http import pyfetch\n'); },
+  'py: urllib': p => { pyEdit(p, s => s + '\nimport urllib.request\n'); },
+  'py: micropip': p => { pyEdit(p, s => s + '\nimport micropip\n'); },
+  'py: input()': p => { pyEdit(p, s => s + '\nx = input()\n'); },
+  'py: while True (a warning)': p => { pyEdit(p, s => s + '\ndef spin():\n    while True:\n        break\n'); },
+  'py: over 256 KB': p => { pyEdit(p, s => s + '\n# ' + 'x'.repeat(270 * 1024) + '\n'); },
+  'py: sha mismatch': p => { pi(p).sha256 = 'f'.repeat(64); },
+  'py: bytes mismatch': p => { pi(p).bytes = 3; },
+  'py: spec names an engine': p => { pi(p).spec.engine = 'formula@1'; },
+  'py: spec has a model': p => { pi(p).spec.model = {}; },
+  'py: spec has no outputs': p => { delete pi(p).spec.outputs; pi(p).spec.readouts = []; pi(p).spec.plots = []; },
+  'py: spec with a bench': p => { pi(p).spec.bench = { faults: [] }; },
+  'py: a check on an unknown output': p => { sx(p).grade.checks[0].expr = 'att2k <= -20'; },
+  'py: a check on a series': p => { sx(p).grade.checks[0].expr = 'gain <= -20'; },
+  'py: a task const not a number': p => { pi(p).spec.consts = { fs: 8000 }; sx(p).task.params = { fs: 'fast' }; },
+};
+const packs = [...Object.entries(cases).map(([k, f]) => { const p = base(); f(p); return [k, p]; }), ...Object.entries(scases).map(([k, f]) => { const p = sbase(); f(p); return [k, p]; }), ...Object.entries(ccases).map(([k, f]) => { const p = cbase(); f(p); return [k, p]; }), ...Object.entries(pcases).map(([k, f]) => { const p = pbase(); f(p); return [k, p]; })];
+const GOOD = new Set(['good', 'spec good', 'spec: a good choice and toggle', 'circuit good', 'circuit: rc-transient (no bench)', 'circuit: a good scalar output in a readout', 'circuit: a scope and a logic analyser', 'circuit: task.fault a list', 'circuit: a check on the diagnosis index',
+  'py good', 'py: graded "reported" (noema.result)', 'py: a task param for Python only', 'py: scipy declared and imported', 'py: an allow-listed extra with requiresNetwork', 'py: while True (a warning)']);
 const tmp = path.join(require('os').tmpdir(), 'noema-act-parity.json'); fs.writeFileSync(tmp, JSON.stringify(packs));
 const py = JSON.parse(cp.execFileSync('python3', ['-c', `import sys, json; sys.path.insert(0, ${JSON.stringify(path.join(ROOT, 'tools'))}); import activities as A
 out = {}
 for k, p in json.load(open(sys.argv[1], encoding='utf-8')):
-    e, w = A.check_activities(p, list((p.get('translations') or {}).keys())); out[k] = [len(e), len(w)]
-print(json.dumps(out))`, tmp], { encoding: 'utf8' }));
+    e, w = A.check_activities(p, list((p.get('translations') or {}).keys())); out[k] = [len(e), len(w), e if k.startswith('py') else None]
+print(json.dumps(out, ensure_ascii=False))`, tmp], { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 }));
 for (const [k, p] of packs) {
   const js = P.checkActivities(p, Object.keys(p.translations || {}));
-  const same = js.errors.length === py[k][0];
+  const norm = l => l.map(m => m.replace(/'/g, '"'));   // (Python's repr quotes with ', the JS twin with ")
+  const same = js.errors.length === py[k][0] && js.warnings.length === py[k][1] && (py[k][2] == null || JSON.stringify(norm(js.errors)) === JSON.stringify(norm(py[k][2])));
   ok(same && (GOOD.has(k) ? js.errors.length === 0 : js.errors.length > 0), `${k}: JS ${js.errors.length} error(s), Python ${py[k][0]}${GOOD.has(k) ? ' (a good pack passes)' : ' — ' + (js.errors[0] || '').slice(0, 110)}${same ? '' : '  JS: ' + js.errors.join(' | ')}`);
 }
 ok(P.TYPES.has('sim') && P.BLOCKS.has('interactive'), 'packcheck knows the sim type and the interactive block');
@@ -239,19 +289,35 @@ print(json.dumps({'c': [C.check(c) for c in d['cases']], 'f': [C.check_faults(d[
   const cdiff = ['c', 'f'].flatMap(k => cjs[k].map((r, i) => JSON.stringify(r) === JSON.stringify(cpy[k][i]) ? null : [k, i, r, cpy[k][i]]).filter(Boolean));
   ok(!cdiff.length && cjs.f.flat().length >= 8, `netlist and fault checks: JS and Python agree on ${cases.length} netlists and ${fl.length} fault lists ${cdiff.length ? JSON.stringify(cdiff[0]).slice(0, 500) : ''}`);
 }
-ok(!('sim-spec@1' in P.ACTIVITY_RULES.LATER) && P.ACTIVITY_RULES.RUNTIMES.has('sim-spec@1') && 'py-module@1' in P.ACTIVITY_RULES.LATER && 'h5p@1' in P.ACTIVITY_RULES.LATER, 'sim-spec@1 is a runtime now; py-module@1 and h5p@1 stay for later');
+ok(!('py-module@1' in P.ACTIVITY_RULES.LATER) && P.ACTIVITY_RULES.RUNTIMES.has('py-module@1') && P.ACTIVITY_RULES.RUNTIMES.has('sim-spec@1') && 'h5p@1' in P.ACTIVITY_RULES.LATER, 'sim-spec@1 and py-module@1 are runtimes now; h5p@1 stays for later');
+{ // py-module@1: the packages JS and Python allow are the allow-list's (tools/pywheels_allow.json) + numpy, scipy; the spec rules with python: true agree word for word
+  const allow = Object.keys(JSON.parse(fs.readFileSync(path.join(ROOT, 'tools', 'pywheels_allow.json'), 'utf8')).wheels).sort();
+  const pyl = JSON.parse(cp.execFileSync('python3', ['-c', `import sys, json; sys.path.insert(0, ${JSON.stringify(path.join(ROOT, 'tools'))}); import activities as A; print(json.dumps([A.PY_BASE, A.PY_EXTRAS, A.PY_MAX, list(A.PY_STEP)]))`], { encoding: 'utf8' }));
+  const R = P.ACTIVITY_RULES;
+  ok(JSON.stringify([...R.PY_EXTRAS].sort()) === JSON.stringify(allow) && JSON.stringify(pyl) === JSON.stringify([R.PY_BASE, R.PY_EXTRAS, R.PY_MAX, R.PY_STEP]) && JSON.stringify(R.PY_BASE) === '["numpy","scipy"]', `the Python packages: numpy, scipy + the allow-list (${allow.join(', ')}), the same in JS and Python`);
+  const specs = packs.filter(([k]) => k in pcases).map(([, p]) => p.activities.items[1]);
+  fs.writeFileSync(tmp, JSON.stringify(specs));
+  const py3 = JSON.parse(cp.execFileSync('python3', ['-c', `import sys, json; sys.path.insert(0, ${JSON.stringify(path.join(ROOT, 'tools'))}); import activities as A
+print(json.dumps([[A.check_spec(a.get('spec'), a.get('strings'), python=True), list(A.lint_python(a.get('python'), a.get('packages') if isinstance(a.get('packages'), list) else []))] for a in json.load(open(sys.argv[1], encoding='utf-8'))], ensure_ascii=False))`, tmp], { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 }));
+  const js3 = specs.map(a => { const l = P.lintPython(a.python, Array.isArray(a.packages) ? a.packages : []); return [P.checkSimSpec(a.spec, a.strings, null, { python: true }), [l.errors, l.warnings]]; });
+  const norm = l => JSON.stringify(l).replace(/'/g, '"');
+  const d3 = js3.map((x, i) => norm(x) === norm(py3[i]) ? null : [x, py3[i]]).filter(Boolean);
+  ok(!d3.length, `py-module@1: the spec check (python: true) and the Python lint give the same messages in JS and Python on ${specs.length} items ${d3.length ? JSON.stringify(d3[0]).slice(0, 600) : ''}`);
+  ok(P.needRequires([pfItem]).join() === 'activities/v1,runtime:py-module@1', 'pack.requires of a Python activity: activities/v1, runtime:py-module@1 (no engine)');
+}
 ok(JSON.stringify(P.needRequires(sbase().activities.items)) === JSON.stringify(['activities/v1', 'runtime:html-app@1', 'runtime:sim-spec@1']) && P.needRequires([{ runtime: 'sim-spec@1', spec: { engine: 'circuit-mna@1' } }]).includes('engine:circuit-mna@1'), 'pack.requires: the runtimes, and every engine but the built-in formula@1');
 { // the runtime's own words go through tE() and exist in every UI language (the drafts)
   const src = fs.readFileSync(path.join(ROOT, 'engine', 'src', '35_activity_sim.js'), 'utf8'), keys = [...new Set([...src.matchAll(/tE\('(engine\.act\.(?:sim|bench)\.[a-zA-Z]+(?:\.[a-zA-Z]+)*)'/g)].map(m => m[1]))];
   for (const k of ['V', 'I', 'R', 'scope', 'logic']) keys.push('engine.act.bench.inst.' + k);   // (built: 'engine.act.bench.inst.' + kind)
   const src32 = fs.readFileSync(path.join(ROOT, 'engine', 'src', '32_activities.js'), 'utf8'); for (const m of src32.matchAll(/tE\('(engine\.act\.sim\.[a-z]+)'/g)) if (!keys.includes(m[1])) keys.push(m[1]);
+  const srcPy = fs.readFileSync(path.join(ROOT, 'engine', 'src', '37_activity_py_ui.js'), 'utf8'); for (const m of srcPy.matchAll(/tE\('(engine\.(?:act\.py|py)\.[a-zA-Z]+)'/g)) if (!keys.includes(m[1])) keys.push(m[1]);   // py-module@1: the notes and Settings
   const en = JSON.parse(fs.readFileSync(path.join(ROOT, 'i18n', 'engine', 'en.arb'), 'utf8')), dr = fs.readdirSync(path.join(ROOT, 'i18n', 'engine', 'drafts'));
   const miss = keys.filter(k => !en[k]).concat(...dr.map(f => { const d = JSON.parse(fs.readFileSync(path.join(ROOT, 'i18n', 'engine', 'drafts', f), 'utf8')); return keys.filter(k => !d[k]).map(k => f + ':' + k); }));
   ok(keys.length >= 5 && !miss.length, `the sim runtime's ${keys.length} host strings are in en.arb and in all ${dr.length} drafts ${miss.slice(0, 3).join(' ')}`);
 }
 { // the sim runtime renders without a frame and never runs pack code: no eval / Function / HTML from the pack
   const src = fs.readFileSync(path.join(ROOT, 'engine', 'src', '35_activity_sim.js'), 'utf8');
-  ok(!/\beval\s*\(|new\s+Function|innerHTML|insertAdjacentHTML|document\.write/.test(src) && /NoemaPackCheck\.checkSimSpec\(spec, tables, ACT\.engines\(\)\)/.test(src) && /NoemaExpr\.compile/.test(src), 'sim-spec@1: no eval, no new Function, no HTML from the pack; the spec is checked before it is shown; formulas only through NoemaExpr');
+  ok(!/\beval\s*\(|new\s+Function|innerHTML|insertAdjacentHTML|document\.write/.test(src) && /NoemaPackCheck\.checkSimSpec\(spec, tables, host \? null : ACT\.engines\(\), host \? host\.check : undefined\)/.test(src) && /NoemaExpr\.compile/.test(src), 'sim-spec@1: no eval, no new Function, no HTML from the pack; the spec is checked before it is shown; formulas only through NoemaExpr');
 }
 
 // 4. never allow-same-origin
@@ -269,7 +335,7 @@ const srv = fs.readFileSync(path.join(ROOT, 'cloud', 'mcp', 'server.mjs'), 'utf8
 ok(/enum: \['workflow', 'content', 'visual', 'interactive'/.test(srv) && /interactive: DOCS\.interactive/.test(srv) && /docs\['interactive'\] = rd\('docs\/INTERACTIVE\.md'\)/.test(bld), 'noema_authoring_guide serves part "interactive" (and in "all")');
 for (const f of ['activity_new.py', 'activity_lint.py', 'activity_test.py', 'activity_preview.py', 'activity_harness.js']) ok(fs.existsSync(path.join(ROOT, 'skill', 'noema-pack-builder', 'scripts', f)), 'the skill has ' + f);
 ok(/'activities\.py'/.test(bld) && /'simexpr\.py'/.test(bld) && /activity_host/.test(bld) && /'35_activity_sim\.js', '35_simexpr\.js'/.test(bld) && /activities_examples/.test(bld), 'the skill zip carries activities.py, simexpr.py, the runtimes for the harness (html-app, sim-spec) and the reference activities');
-ok(/'circuit\.py'/.test(bld) && /'36_engine_circuit\.js', '36_engine_circuit_sim\.js'/.test(bld) && /'INTERACTIVE_SIMEXPR\.md', 'INTERACTIVE_CIRCUIT\.md'\) if/.test(bld), 'the skill zip carries circuit.py and the circuit engine for the harness; the guide part "interactive" includes the circuit engine');
+ok(/'circuit\.py'/.test(bld) && /'36_engine_circuit\.js', '36_engine_circuit_sim\.js'/.test(bld) && /'INTERACTIVE_SIMEXPR\.md', 'INTERACTIVE_CIRCUIT\.md'(, 'INTERACTIVE_[A-Z]+\.md')*\) if/.test(bld), 'the skill zip carries circuit.py and the circuit engine for the harness; the guide part "interactive" includes the circuit engine');
 ok(/'engine\/src\/35_simexpr\.js', 'engine\/src\/36_engine_circuit\.js', 'engine\/packcheck\.js'/.test(bld) && /INTERACTIVE_SIMEXPR\.md/.test(bld), 'the connector runs NoemaExpr beside packcheck (sim-spec checks) and serves the expression language in the guide');
 { const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8'), a = html.indexOf('engine/src/35_simexpr.js'), b = html.indexOf('engine/packcheck.js'), c = html.indexOf('engine/src/36_engine_circuit.js');
   ok(a > 0 && a < b && c > 0 && c < b && /\('35_simexpr\.js', '36_engine_circuit\.js'\)\]   # NoemaExpr and NoemaCircuit beside packcheck/.test(bld) && /rd\("engine\/src\/35_simexpr\.js"\)\)\}<\/script>\n<script>\{esc\(rd\("engine\/src\/36_engine_circuit\.js"\)\)\}<\/script>\n<script>\{esc\(rd\("engine\/packcheck\.js"/.test(bld),
@@ -290,5 +356,17 @@ ok(/'engine\/src\/35_simexpr\.js', 'engine\/src\/36_engine_circuit\.js', 'engine
   const t1 = fs.existsSync(path.join(d, 'activities', 'my-bench', 'tests.json')) ? JSON.parse(fs.readFileSync(path.join(d, 'activities', 'my-bench', 'tests.json'), 'utf8')) : {};
   ok(r1.status === 0 && r2.status === 0 && r3.status !== 0 && reg?.items?.length === 2 && reg.items.every(x => x.runtime === 'sim-spec@1') && sp1.engine === 'circuit-mna@1' && sp1.bench && t1.cases?.[0]?.steps?.[0]?.measure && fs.existsSync(path.join(d, 'activities', 'my-rc', 'strings.ru.json')),
     'activity_new.py --from led-bench / rc-transient copies a circuit reference (a bench with its measure/diagnose tests); a runtime that does not fit is refused');
+}
+{ // py-module@1 in the app: the runtime is drawn by the sim-spec view (no pack HTML), the runner stays sandboxed, Python never in the bundle
+  const ui = fs.readFileSync(path.join(ROOT, 'engine', 'src', '37_activity_py_ui.js'), 'utf8'), rt = fs.readFileSync(path.join(ROOT, 'engine', 'src', '37_activity_py.js'), 'utf8');
+  ok(/ACT\.simView\(box/.test(ui) && /check: \{ python: true \}/.test(ui) && !/innerHTML|eval\s*\(|new\s+Function/.test(ui), 'py-module@1 renders through the sim-spec view (its spec checked with python: true), no HTML from the pack');
+  ok(/setAttribute\('sandbox', 'allow-scripts'\)/.test(rt) && /connect-src 'none'/.test(rt) && /!window\.NOEMA_BUNDLE/.test(rt), 'the Python runner: sandbox exactly allow-scripts, no network; not available in the one-file bundle');
+  const core = fs.readFileSync(path.join(ROOT, 'engine', 'src', '32_activities.js'), 'utf8');
+  ok(/'py-module@1': false/.test(core), "py-module@1 is off by default (staged rollout, ADR 001 §4): NOEMA_CONFIG.activities['py-module@1'] = true switches it on");
+  const d = fs.mkdtempSync(path.join(require('os').tmpdir(), 'noema-actnew-'));
+  const r = cp.spawnSync('python3', [path.join(ROOT, 'skill', 'noema-pack-builder', 'scripts', 'activity_new.py'), d, 'my-py', '--from', 'py-filter'], { encoding: 'utf8' });
+  const reg = fs.existsSync(path.join(d, 'activities', 'activities.json')) ? JSON.parse(fs.readFileSync(path.join(d, 'activities', 'activities.json'), 'utf8')) : null;
+  ok(r.status === 0 && reg?.items?.[0]?.runtime === 'py-module@1' && reg.items[0].entry === 'activities/my-py/main.py' && fs.existsSync(path.join(d, 'activities', 'my-py', 'main.py')) && fs.existsSync(path.join(d, 'activities', 'my-py', 'spec.json')), 'activity_new.py --from py-filter copies the Python reference (main.py, spec.json, strings, the registry entry) ' + (r.stdout + r.stderr).slice(-200));
+  ok(/'INTERACTIVE_PYTHON\.md'/.test(bld) && /'37_activity_py\.js', '37_activity_py_ui\.js'/.test(bld) && /pyodide-sw\.js/.test(bld) && /Service-Worker-Allowed: \/vendor\//.test(bld), 'the build: the guide part "interactive" and the skill carry INTERACTIVE_PYTHON.md and the Python runtime; the site copies the service worker and sends its headers');
 }
 console.log(fails ? `\n${fails} of ${n} failed` : `\nactivities: ${n} checks passed`); process.exit(fails ? 1 : 0);
