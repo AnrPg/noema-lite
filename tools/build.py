@@ -259,6 +259,7 @@ def build_site(metas):
         for f in m.get('media') or []:
             dst = os.path.join(out, f); os.makedirs(os.path.dirname(dst), exist_ok=True); shutil.copy(os.path.join(ROOT, f), dst)
     for f in ('engine.js', 'engine.css', 'loader.js', 'i18n.js', 'themes.js', 'art.js', 'shell.js', 'react.js', 'convos.js', 'cloud.js', 'claude.js', 'packcheck.js', 'llm.js', 'mt.js', 'wordlink.js', 'bridge.js', 'curriculum.js', 'curjobs.js', 'curshare.js', 'imglib.js', 'curimport.js', 'sourceplan.js', 'vault.js', 'social.js', 'packgen.js', 'curmap.js', 'search.js', 'catalog.js', 'report.js', 'authoring.js', 'srcfiles.js', 'viewer.js'): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))
+    os.makedirs(os.path.join(out, 'engine', 'src'), exist_ok=True); shutil.copy(os.path.join(ENGINE, 'src', '35_simexpr.js'), os.path.join(out, 'engine', 'src', '35_simexpr.js'))   # NoemaExpr beside packcheck.js: the shell checks sim-spec@1 packs before any subject (and engine.js) is open
     shutil.copytree(os.path.join(ENGINE, 'vendor'), os.path.join(out, 'engine', 'vendor'))
     shutil.copytree(os.path.join(ENGINE, 'i18n'), os.path.join(out, 'engine', 'i18n'))   # the UI catalogs (docs/i18n.md), loaded per locale
     shutil.copytree(os.path.join(ROOT, 'fonts'), os.path.join(out, 'fonts'), ignore=shutil.ignore_patterns('*.md', '*.json'))   # the characters' self-hosted fonts
@@ -442,6 +443,7 @@ def build_bundle(metas):
 <script>{esc(rd("engine/claude.js"))}</script>
 <script>{esc(rd("engine/srcfiles.js"))}</script>
 <script>{esc(rd("engine/viewer.js"))}</script>
+<script>{esc(rd("engine/src/35_simexpr.js"))}</script>
 <script>{esc(rd("engine/packcheck.js"))}</script>
 <script>{esc(rd("engine/llm.js"))}</script>
 <script>{esc(rd("engine/mt.js"))}</script>

@@ -433,7 +433,7 @@
     const p = NX().check(src, names ? { vars: names } : {});
     return p.length ? `${where}: ${p[0].msg} in “${src.slice(0, 60)}”` : null;
   }
-  const badName = n => !(typeof n === 'string' && ACT.NAME_RE.test(n)) || n === 'pi' || n === 'e' || !NX() || NX().check(n).length > 0;
+  const badName = n => !(typeof n === 'string' && ACT.NAME_RE.test(n)) || n === 'pi' || n === 'e' || n === 'true' || n === 'false' || !NX() || NX().check(n).length > 0;
   /** the scalar names an expression of the spec may use: consts, params, derived, the engine's scalar outputs */
   function specNames(spec) {
     if (!isObj(spec)) return [];

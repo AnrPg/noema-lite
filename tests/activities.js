@@ -114,6 +114,8 @@ const scases = {
   'spec: log scale from 0': p => { sp(p).params[1].min = 0; },
   'spec: a reserved name': p => { sp(p).params[0].id = 'constructor'; },
   'spec: pi as a name': p => { sp(p).consts.pi = 3; },
+  'spec: false as a name': p => { sp(p).params[0].id = 'false'; },
+  'spec: true as the x var': p => { sp(p).plots[0].x.var = 'true'; },
   'spec: a name used twice': p => { sp(p).derived.push({ id: 'fc', expr: '1' }); },
   'spec: unknown variable': p => { sp(p).derived[0].expr = 'R * L'; },
   'spec: not the language': p => { sp(p).readouts[0].expr = 'Math.sqrt(R)'; },
@@ -196,6 +198,9 @@ ok(/enum: \['workflow', 'content', 'visual', 'interactive'/.test(srv) && /intera
 for (const f of ['activity_new.py', 'activity_lint.py', 'activity_test.py', 'activity_preview.py', 'activity_harness.js']) ok(fs.existsSync(path.join(ROOT, 'skill', 'noema-pack-builder', 'scripts', f)), 'the skill has ' + f);
 ok(/'activities\.py'/.test(bld) && /'simexpr\.py'/.test(bld) && /activity_host/.test(bld) && /'35_activity_sim\.js', '35_simexpr\.js'/.test(bld) && /activities_examples/.test(bld), 'the skill zip carries activities.py, simexpr.py, the runtimes for the harness (html-app, sim-spec) and the reference activities');
 ok(/'engine\/src\/35_simexpr\.js', 'engine\/packcheck\.js'/.test(bld) && /INTERACTIVE_SIMEXPR\.md/.test(bld), 'the connector runs NoemaExpr beside packcheck (sim-spec checks) and serves the expression language in the guide');
+{ const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8'), a = html.indexOf('engine/src/35_simexpr.js'), b = html.indexOf('engine/packcheck.js');
+  ok(a > 0 && a < b && /35_simexpr\.js'\), os\.path\.join\(out, 'engine', 'src'/.test(bld) && /rd\("engine\/src\/35_simexpr\.js"\)\)\}<\/script>\n<script>\{esc\(rd\("engine\/packcheck\.js"/.test(bld),
+    'the shell, the site and the one-file bundle load NoemaExpr before packcheck.js (a sim-spec pack imported before any subject is open is checked, not refused)'); }
 { // activity_new.py --runtime sim-spec@1 starts from rc-lowpass
   const d = fs.mkdtempSync(path.join(require('os').tmpdir(), 'noema-actnew-'));
   const r = cp.spawnSync('python3', [path.join(ROOT, 'skill', 'noema-pack-builder', 'scripts', 'activity_new.py'), d, 'my-filter', '--runtime', 'sim-spec@1'], { encoding: 'utf8' });

@@ -1777,7 +1777,7 @@ const ACT = (() => {
     if (hidden.length) { c.exercises = keep; c._hidden = (c._hidden || 0) + hidden.length; }
     return hidden;
   }
-  return { ITEMS, mount, sweep, registerRuntime, registerGrader, registerEngine, engine, engines, caps, canRun, keepRunnable, strings, theme, LIVE };
+  return { ITEMS, mount, sweep, registerRuntime, runtime: id => RUNTIMES[id] || null, registerGrader, registerEngine, engine, engines, caps, canRun, keepRunnable, strings, theme, LIVE };
 })();
 
 /* the exercises already indexed (10_core.js) that this app cannot run leave the indexes; the pack is unchanged */
@@ -2347,7 +2347,7 @@ APP.postMessage({t:'hello',nonce:N},'*');
       box.append(root);
 
       /* ---------- computing ---------- */
-      let env = {}, outputs = {}, paused = false, dirty = false, saveT = null, raf = 0;
+      let env = {}, outputs = {}, paused = false, dirty = false, saveT = null, raf = 0, rev = 0, doneRev = 0;
       const runner = E.id === 'formula@1' ? null : engineRunner(E, spec, { seed: init.seed >>> 0, task: { ...consts } }, why => onFail(why));
       const declared = spec.outputs || [];
       function cleanOutputs(o) {
@@ -2368,10 +2368,10 @@ APP.postMessage({t:'hello',nonce:N},'*');
       function recompute() {
         if (closed) return;
         if (paused) { dirty = true; return; }
-        const e = base();
-        if (!runner) { env = e; render(); return; }
+        const e = base(), my = ++rev;   // values() is null until the latest inputs are computed (Check never grades older results)
+        if (!runner) { env = e; doneRev = my; render(); return; }
         busyNote.textContent = tE('engine.act.sim.computing');
-        runner.run(e, o => { if (closed) return; busyNote.textContent = ''; outputs = cleanOutputs(o); for (const d of declared) if (d.kind === 'scalar') e[d.id] = outputs[d.id]; env = e; render(); });
+        runner.run(e, o => { if (closed) return; outputs = cleanOutputs(o); for (const d of declared) if (d.kind === 'scalar') e[d.id] = outputs[d.id]; env = e; if (my === rev) { doneRev = my; busyNote.textContent = ''; } render(); });
       }
       function render() {
         readouts.forEach((r, i) => { roEls[i].textContent = fmtNum(ev(r.f, env), r, locale); });
@@ -2410,7 +2410,7 @@ APP.postMessage({t:'hello',nonce:N},'*');
         if (type === 'destroy') return port.close();
       };
       port.close = () => { if (closed) return; closed = true; clearTimeout(saveT); cancelAnimationFrame(raf); ro2?.disconnect(); runner?.close(); root.remove(); };
-      port.values = () => closed ? null : { ...env };
+      port.values = () => closed || doneRev !== rev ? null : { ...env };
       later(() => out('ready', { protocols: [1] }));
       return port;
     },
