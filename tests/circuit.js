@@ -213,6 +213,18 @@ const pwmRc = { nodes: ['p', 'out'], elements: [{ id: 'V1', type: 'V', n: ['p', 
   const qs = C.create(bjtSwitch(0), { faults: [{ element: 'Q1', kind: 'short' }] }).dc();
   ok(qs.nodes.c < 0.01, 'collector–emitter short: the load is always on');
   ok(throwsCode(() => C.create(divider(), { faults: [{ element: 'R9', kind: 'open' }] }), 'fault') && throwsCode(() => C.create(divider(), { faults: [{ element: 'R1', kind: 'melt' }] }), 'fault'), 'an unknown element or fault kind → code "fault"');
+  // reverse: a part soldered the wrong way round (P3, the fault-finding benches)
+  const rev = C.create(ledNl, { faults: [{ element: 'D1', kind: 'reverse' }] }), rd = rev.dc();
+  ok(Math.abs(rd.branches.D1) < 1e-9 && Math.abs(rd.nodes.a - 5) < 1e-3, `reverse: the LED reversed is dark and its anode pad sits at the supply (${rd.nodes.a.toFixed(4)} V)`);
+  ok(Math.abs(rev.measure({ kind: 'V', a: '@D1.0', b: '@D1.1' }).value + 5) < 1e-3, 'reverse: pin references follow the legs (anode leg on the cathode pad: −5 V anode to cathode)');
+  ok(throwsCode(() => C.create(bjtSwitch(5), { faults: [{ element: 'Q1', kind: 'reverse' }] }), 'fault') && Math.abs(C.create(bjtSwitch(5), { faults: [{ element: 'Q1', kind: 'reverse', pins: [0, 2] }] }).dc().branches.Q1) > 0, 'reverse: a 3-terminal part needs its two pins (c and e swapped: a BJT in reverse active mode)');
+  // checkFaults: the validators' static check of a bench's faults
+  const cf = f => C.checkFaults(ledNl, f).map(p => p.path + ' ' + p.msg);
+  ok(cf([{ element: 'D1', kind: 'reverse' }, { element: 'R1', kind: 'open' }, { element: 'R1', kind: 'drift', factor: 10 }, { node: 'a', kind: 'open-trace' }, { element: 'R1', kind: 'short' }]).length === 0, 'checkFaults: good faults pass');
+  const bad = cf([{ element: 'R9', kind: 'open' }, { element: 'R1', kind: 'melt' }, { node: 'zz', kind: 'open-trace' }, { element: 'R1', kind: 'drift', factor: 0 }, { element: 'D1', kind: 'drift', param: 'gain' }, { element: 'R1', kind: 'open', pin: 2 }, { node: 'a', kind: 'open-trace', side: ['V1'] }, { element: 'R1', kind: 'open', colour: 'red' }]);
+  ok(bad.length === 8 && /faults\[0\]\.element/.test(bad[0]) && /faults\[6\]\.side\[0\] does not touch/.test(bad[6]), 'checkFaults: unknown part, kind, node, factor, param, pin, side and field are each reported ' + JSON.stringify(bad));
+  ok(typeof C.source() === 'string' && /^\(function noemaCircuitModule\(root\)/.test(C.source()) && C.FAULT_KINDS.includes('reverse'), 'source(): the engine as text, to run it in a worker');
+  { const g = {}; (new Function('self', C.source()))(g); ok(Math.abs(g.NoemaCircuit.create(divider()).dc().nodes.out - 7.5) < 1e-6, 'the engine built from its own source computes the same'); }
   const s = JSON.stringify(base.dc()); ok(!/fault|open|short/.test(JSON.stringify(trace.dc())) && s.length > 0, 'the results never name the fault');
 }
 {

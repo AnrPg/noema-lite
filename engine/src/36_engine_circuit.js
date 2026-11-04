@@ -7,7 +7,7 @@
    trapezoidal integration with a backward-Euler step at the start and on every step that holds a source discontinuity.
    The netlist (noema.circuit/v1) is described in docs/activities-dev/circuit.md and tools/schemas/noema.circuit.v1.schema.json.
    Also used by tests/circuit.js (node). */
-(function (root) {
+(function noemaCircuitModule(root) {
   /* i18n-ignore-start */   // code, not text: only codes and numbers leave this engine
   'use strict';
   const ID = 'circuit-mna@1', FORMAT = 'noema.circuit/v1';
@@ -197,7 +197,7 @@
       if (typeof el.id !== 'string' || !ID_RE.test(el.id)) E('id', at + '.id', 'bad id');
       else if (ids.has(el.id)) E('dup-id', at + '.id', 'duplicate id ' + el.id); else ids.add(el.id);
       const t = el.type;
-      if (!Object.prototype.hasOwnProperty.call(TYPES, t)) { E('type', at + '.type', 'unknown type'); return; }
+      if (typeof t !== 'string' || !Object.prototype.hasOwnProperty.call(TYPES, t)) { E('type', at + '.type', 'unknown type'); return; }
       if (!Array.isArray(el.n) || !TYPES[t].includes(el.n.length)) { E('pins', at + '.n', 'wrong number of terminals'); return; }
       el.n.forEach((m, k) => {
         if (labels.has(m)) E('probe-only', `${at}.n[${k}]`, 'a probe-only label cannot be a terminal');
@@ -212,7 +212,7 @@
       } else if (el.value !== undefined) E('value', at + '.value', 'this type takes params, not a value');
       if (el.ic !== undefined && t !== 'C' && t !== 'L') E('value', at + '.ic', 'only C and L have ic');
       if (el.on !== undefined && (t !== 'SW' || typeof el.on !== 'boolean')) E('value', at + '.on', 'only SW has on (true/false)');
-      if (el.preset !== undefined && !(PRESETS[t] && Object.prototype.hasOwnProperty.call(PRESETS[t], el.preset))) E('preset', at + '.preset', 'unknown preset');
+      if (el.preset !== undefined && !(PRESETS[t] && typeof el.preset === 'string' && Object.prototype.hasOwnProperty.call(PRESETS[t], el.preset))) E('preset', at + '.preset', 'unknown preset');
       if (el.params !== undefined) {
         if (!isObj(el.params)) E('param', at + '.params', 'not an object');
         else for (const [k, v] of Object.entries(el.params)) {
@@ -247,6 +247,52 @@
     return P;
   }
 
+  /** checkFaults(netlist, faults) → problems of a list of faults on a netlist that passes check() (the same codes and paths as check;
+      the validators run it on a bench's faults before the app ever compiles them). Twin: tools/circuit.py check_faults. */
+  const FAULT_KINDS = ['open', 'short', 'drift', 'open-trace', 'reverse'];
+  const FAULT_KEYS = new Set(['kind', 'element', 'pin', 'pins', 'factor', 'param', 'node', 'side']);
+  function checkFaults(nl, faults) {
+    const P = [], E = (path, msg) => { P.push({ code: 'fault', path, msg, level: 'error' }); };
+    if (!Array.isArray(faults)) { E('', 'faults must be a list'); return P; }
+    const els = isObj(nl) && Array.isArray(nl.elements) ? nl.elements.filter(isObj) : [];
+    const byId = new Map(els.map(e => [e.id, e]));
+    const declared = new Set((isObj(nl) && Array.isArray(nl.nodes) ? nl.nodes : []).filter(x => typeof x === 'string' || (isObj(x) && x.probe === undefined)).map(x => typeof x === 'string' ? x : x.name));
+    const same = (m, node) => m === node || (isGnd(m) && isGnd(node));
+    const pinsOk = (pins, n) => Array.isArray(pins) && pins.length === 2 && pins.every(k => Number.isInteger(k) && k >= 0 && k < n) && pins[0] !== pins[1];
+    faults.forEach((f, i) => {
+      const at = `faults[${i}]`;
+      if (!isObj(f)) { E(at, 'a fault is an object {element | node, kind}'); return; }
+      for (const k of Object.keys(f)) if (!FAULT_KEYS.has(k)) E(`${at}.${k}`, 'unknown field');
+      if (!FAULT_KINDS.includes(f.kind)) { E(at + '.kind', 'one of ' + FAULT_KINDS.join(', ')); return; }
+      if (f.kind === 'open-trace') {
+        if (typeof f.node !== 'string' || !(declared.has(f.node) || isGnd(f.node))) { E(at + '.node', 'not a node of the netlist'); return; }
+        const touching = els.filter(e => Array.isArray(e.n) && e.n.some(m => same(m, f.node)));
+        if (f.side === undefined) { if (touching.length < 2) E(at + '.node', 'fewer than two parts touch this node'); return; }
+        if (!Array.isArray(f.side) || !f.side.length) { E(at + '.side', 'a list of parts (R1) or pins (R1.0) on the node'); return; }
+        f.side.forEach((x, j) => {
+          const [eid, pin] = parsePinRef(x), e = typeof x === 'string' ? byId.get(eid) : undefined;
+          if (!e) E(`${at}.side[${j}]`, 'not a part of the netlist');
+          else if (pin === undefined ? !e.n.some(m => same(m, f.node)) : !(pin < e.n.length && same(e.n[pin], f.node))) E(`${at}.side[${j}]`, 'does not touch the node');
+        });
+        return;
+      }
+      const e = typeof f.element === 'string' ? byId.get(f.element) : undefined;
+      if (!e) { E(at + '.element', 'not a part of the netlist'); return; }
+      const n = e.n.length;
+      if (f.kind === 'open') { if (f.pin !== undefined && !(Number.isInteger(f.pin) && f.pin >= 0 && f.pin < n)) E(at + '.pin', 'not a pin of the part'); }
+      else if (f.kind === 'short' || f.kind === 'reverse') {
+        if (f.pins !== undefined ? !pinsOk(f.pins, n) : (f.kind === 'reverse' && n !== 2)) E(at + '.pins', 'two different pins of the part');
+      } else {   // drift
+        if (f.factor !== undefined && !(num(f.factor) > 0)) E(at + '.factor', 'needs a number > 0');
+        if (f.param !== undefined) {
+          const t = e.type, okp = typeof f.param === 'string' && (['R', 'C', 'L', 'V', 'I'].includes(t) ? f.param === 'value' : Object.prototype.hasOwnProperty.call(PARAMS[t], f.param));
+          if (!okp) E(at + '.param', 'not a parameter of the part');
+        }
+      }
+    });
+    return P;
+  }
+
   // ---- compile: faults applied, nodes indexed, element models built ----
   const parsePinRef = s => { const m = /^(.*)\.(\d+)$/.exec(String(s)); return m ? [m[1], +m[2]] : [String(s), undefined]; };
   function normalize(el) {
@@ -269,6 +315,14 @@
     const els = nl.elements.map(normalize), byId = new Map(els.map(e => [e.id, e])), extra = [];
     const same = (m, node) => m === node || (isGnd(m) && isGnd(node));
     const known = s => typeof s === 'string' && (isGnd(s) || declared.includes(s));
+    (faults || []).forEach((f, fi) => {   // a part soldered the wrong way round: its legs sit on each other's pads (so before the board)
+      if (!isObj(f) || f.kind !== 'reverse') return;
+      const e = byId.get(f.element);
+      if (!e) throw fail('fault', { index: fi });
+      const pins = f.pins === undefined ? (e.n.length === 2 ? [0, 1] : null) : f.pins;
+      if (!Array.isArray(pins) || pins.length !== 2 || !pins.every(k => Number.isInteger(k) && k >= 0 && k < e.n.length) || pins[0] === pins[1]) throw fail('fault', { index: fi });
+      const x = e.n[pins[0]]; e.n[pins[0]] = e.n[pins[1]]; e.n[pins[1]] = x;
+    });
     (faults || []).forEach((f, fi) => {
       if (!isObj(f) || f.kind !== 'open-trace') return;
       if (!known(f.node)) throw fail('fault', { index: fi });
@@ -290,7 +344,7 @@
     for (const e of els) e.board = e.n.slice();   // where the legs are soldered: pin references "@R1.0" measure here
     (faults || []).forEach((f, fi) => {
       if (!isObj(f)) throw fail('fault', { index: fi });
-      if (f.kind === 'open-trace') return;
+      if (f.kind === 'open-trace' || f.kind === 'reverse') return;
       const e = byId.get(f.element);
       if (!e) throw fail('fault', { index: fi });
       if (f.kind === 'open') {
@@ -747,6 +801,8 @@
     });
   }
 
-  root.NoemaCircuit = Object.freeze({ id: ID, format: FORMAT, limits: Object.freeze({ nodes: MAX_NODES, elements: MAX_ELEMENTS, steps: MAX_STEPS }), check, create });
+  /** the engine's own source, to run it in a Worker (the sim-spec@1 runtime's workerSource: engine/src/36_engine_circuit_sim.js) */
+  const source = () => '(' + noemaCircuitModule.toString() + ')(self);';
+  root.NoemaCircuit = Object.freeze({ id: ID, format: FORMAT, limits: Object.freeze({ nodes: MAX_NODES, elements: MAX_ELEMENTS, steps: MAX_STEPS }), FAULT_KINDS: Object.freeze(FAULT_KINDS.slice()), check, checkFaults, create, num, source });
   /* i18n-ignore-end */
 })(typeof window !== 'undefined' ? window : globalThis);
