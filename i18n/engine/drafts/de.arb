@@ -15,5 +15,10 @@
   "engine.act.newerState": "Deine gespeicherte Arbeit hier stammt aus einer neueren Version der Aktivität; sie bleibt erhalten, und die Aktivität beginnt neu.",
   "engine.act.newerProtocol": "Diese Aktivität braucht eine neuere Version der App.",
   "engine.act.newerType": "Diese Übung braucht eine neuere Version der App. Lade die Seite neu, um sie zu bekommen.",
-  "engine.act.hint": "{left, plural, =0 {Keine Hinweise mehr} one {Hinweis (noch #)} other {Hinweis (noch #)}}"
+  "engine.act.hint": "{left, plural, =0 {Keine Hinweise mehr} one {Hinweis (noch #)} other {Hinweis (noch #)}}",
+  "engine.act.sim.reset": "Werte zurücksetzen",
+  "engine.act.sim.computing": "Wird berechnet …",
+  "engine.act.sim.results": "Ergebnisse",
+  "engine.act.sim.plot": "Diagramm: {y} in Abhängigkeit von {x}",
+  "engine.act.sim.checks": "{met} von {total, plural, one {# Bedingung} other {# Bedingungen}} erfüllt"
 }

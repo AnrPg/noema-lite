@@ -15,5 +15,10 @@
   "engine.act.newerState": "Il lavoro salvato qui viene da una versione più recente dell’attività: resta conservato, e l’attività riparte da capo.",
   "engine.act.newerProtocol": "Questa attività richiede una versione più recente dell’app.",
   "engine.act.newerType": "Questo esercizio richiede una versione più recente dell’app. Ricarica la pagina per averla.",
-  "engine.act.hint": "{left, plural, =0 {Nessun suggerimento rimasto} one {Suggerimento (ne resta #)} many {Suggerimento (ne restano #)} other {Suggerimento (ne restano #)}}"
+  "engine.act.hint": "{left, plural, =0 {Nessun suggerimento rimasto} one {Suggerimento (ne resta #)} many {Suggerimento (ne restano #)} other {Suggerimento (ne restano #)}}",
+  "engine.act.sim.reset": "Ripristina i valori",
+  "engine.act.sim.computing": "Calcolo in corso…",
+  "engine.act.sim.results": "Risultati",
+  "engine.act.sim.plot": "Grafico di {y} in funzione di {x}",
+  "engine.act.sim.checks": "Condizioni soddisfatte: {met} su {total}"
 }

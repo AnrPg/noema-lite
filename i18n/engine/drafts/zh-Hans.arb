@@ -15,5 +15,10 @@
   "engine.act.newerState": "你在这里保存的进度来自此活动的更新版本；进度已保留，活动将重新开始。",
   "engine.act.newerProtocol": "此活动需要更新版本的应用。",
   "engine.act.newerType": "此练习需要更新版本的应用。请刷新页面以获取。",
-  "engine.act.hint": "{left, plural, =0 {没有提示了} other {提示（还剩 # 个）}}"
+  "engine.act.hint": "{left, plural, =0 {没有提示了} other {提示（还剩 # 个）}}",
+  "engine.act.sim.reset": "恢复初始值",
+  "engine.act.sim.computing": "正在计算…",
+  "engine.act.sim.results": "结果",
+  "engine.act.sim.plot": "{y} 随 {x} 变化的图",
+  "engine.act.sim.checks": "满足的条件：{met} / {total}"
 }

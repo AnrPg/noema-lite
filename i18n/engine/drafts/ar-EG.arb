@@ -15,5 +15,10 @@
   "engine.act.newerState": "عملك المحفوظ هنا من إصدار أحدث من هذا النشاط؛ احتُفظ به، ويبدأ النشاط من جديد.",
   "engine.act.newerProtocol": "يحتاج هذا النشاط إلى إصدار أحدث من التطبيق.",
   "engine.act.newerType": "يحتاج هذا التمرين إلى إصدار أحدث من التطبيق. أعِد تحميل الصفحة للحصول عليه.",
-  "engine.act.hint": "{left, plural, =0 {لا تلميحات متبقية} one {تلميح (يتبقى #)} two {تلميح (يتبقى #)} few {تلميح (يتبقى #)} many {تلميح (يتبقى #)} other {تلميح (يتبقى #)}}"
+  "engine.act.hint": "{left, plural, =0 {لا تلميحات متبقية} one {تلميح (يتبقى #)} two {تلميح (يتبقى #)} few {تلميح (يتبقى #)} many {تلميح (يتبقى #)} other {تلميح (يتبقى #)}}",
+  "engine.act.sim.reset": "إرجاع القيم الأصلية",
+  "engine.act.sim.computing": "جارٍ الحساب…",
+  "engine.act.sim.results": "النتائج",
+  "engine.act.sim.plot": "رسم بياني لـ {y} مقابل {x}",
+  "engine.act.sim.checks": "الشروط المتحققة: {met} من {total}"
 }

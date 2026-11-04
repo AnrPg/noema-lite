@@ -15,5 +15,10 @@
   "engine.act.newerState": "O teu trabalho guardado aqui vem de uma versão mais recente da atividade; fica guardado, e a atividade começa de novo.",
   "engine.act.newerProtocol": "Esta atividade precisa de uma versão mais recente da aplicação.",
   "engine.act.newerType": "Este exercício precisa de uma versão mais recente da aplicação. Recarrega a página para a obteres.",
-  "engine.act.hint": "{left, plural, =0 {Já não há pistas} one {Pista (falta #)} many {Pista (faltam #)} other {Pista (faltam #)}}"
+  "engine.act.hint": "{left, plural, =0 {Já não há pistas} one {Pista (falta #)} many {Pista (faltam #)} other {Pista (faltam #)}}",
+  "engine.act.sim.reset": "Repor os valores",
+  "engine.act.sim.computing": "A calcular…",
+  "engine.act.sim.results": "Resultados",
+  "engine.act.sim.plot": "Gráfico de {y} em função de {x}",
+  "engine.act.sim.checks": "Condições cumpridas: {met} de {total}"
 }

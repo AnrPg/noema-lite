@@ -15,5 +15,10 @@
   "engine.act.newerState": "यहाँ आपका सहेजा काम इस गतिविधि के नए संस्करण का है; वह रखा गया है, और गतिविधि नए सिरे से शुरू होती है।",
   "engine.act.newerProtocol": "इस गतिविधि को ऐप का नया संस्करण चाहिए।",
   "engine.act.newerType": "इस अभ्यास को ऐप का नया संस्करण चाहिए। उसे पाने के लिए पेज फिर से लोड करें।",
-  "engine.act.hint": "{left, plural, =0 {कोई संकेत नहीं बचा} one {संकेत (# बचा)} other {संकेत (# बचे)}}"
+  "engine.act.hint": "{left, plural, =0 {कोई संकेत नहीं बचा} one {संकेत (# बचा)} other {संकेत (# बचे)}}",
+  "engine.act.sim.reset": "मान पहले जैसे करें",
+  "engine.act.sim.computing": "गणना हो रही है…",
+  "engine.act.sim.results": "परिणाम",
+  "engine.act.sim.plot": "{x} के सापेक्ष {y} का ग्राफ़",
+  "engine.act.sim.checks": "पूरी हुई शर्तें: {total} में से {met}"
 }
