@@ -3,6 +3,9 @@
      node activity_harness.js test    SUBJECT_DIR [ID]          → every activity in every language: it says hello, shows no
                                                                    errors, and each case of activities/<id>/tests.json holds
      node activity_harness.js preview SUBJECT_DIR ID [OUT_DIR]  → screenshots: light, dark, 360 px wide, the fallback
+   sim-spec@1 activities run in the app's own sim runtime (35_activity_sim.js, with the spec check of packcheck.js); in their
+   tests.json a step {"set": "<param id>", "value": v} sets a control, "values": {name: number | [lo, hi]} checks a computed value,
+   "passed" the exercise's checks grader, "state" the saved values.
    Called by activity_test.py and activity_preview.py. Needs Playwright with Chromium (npm i playwright; npx playwright install chromium). */
 const fs = require('fs'), path = require('path'), os = require('os');
 let pw; try { pw = require(process.env.PW || 'playwright'); } catch (e) {
@@ -27,7 +30,9 @@ const items = (rj(regPath).items || []).filter(a => !onlyId || a.id === onlyId).
   const dir = path.join(SDIR, 'activities', a.id), strings = {};
   for (const f of fs.existsSync(dir) ? fs.readdirSync(dir) : []) { const m = f.match(/^strings\.(.+)\.json$/); if (m) strings[m[1]] = rj(path.join(dir, f)); }
   const entry = a.entry ? path.join(SDIR, a.entry) : null;
-  return { ...a, html: entry && fs.existsSync(entry) ? fs.readFileSync(entry, 'utf8') : '', strings, sha256: null, _dir: dir };
+  const text = entry && fs.existsSync(entry) ? fs.readFileSync(entry, 'utf8') : '';
+  if (a.runtime === 'sim-spec@1') { let spec = null; try { spec = JSON.parse(text); } catch (e) { spec = null; } return { ...a, spec, strings, _dir: dir }; }
+  return { ...a, html: text, strings, sha256: null, _dir: dir };
 });
 if (!items.length) { console.log('✗ no activity ' + (onlyId || '') + ' in activities.json'); process.exit(1); }
 const exercises = {};
@@ -37,16 +42,29 @@ const THEMES = {
   light: { tokens: { bg: '#fafaf7', bg2: '#f2f1ec', card: '#ffffff', ink: '#222', ink2: '#555', ink3: '#888', line: '#e3e1da', ok: '#2f8f5b', bad: '#c0483f', warn: '#b7791f', info: '#3b6ea8', c: '#4a6fa5', font: 'system-ui, sans-serif', mono: 'ui-monospace, monospace', r: '12px' }, scheme: 'light', reducedMotion: false, textScale: 1, dir: 'ltr' },
   dark: { tokens: { bg: '#16181c', bg2: '#1e2126', card: '#22262c', ink: '#e8e6e1', ink2: '#b9b6ae', ink3: '#8b8880', line: '#353a42', ok: '#5cc08a', bad: '#e2766d', warn: '#e0a84f', info: '#7fa8d8', c: '#8fb0e0', font: 'system-ui, sans-serif', mono: 'ui-monospace, monospace', r: '12px' }, scheme: 'dark', reducedMotion: false, textScale: 1, dir: 'ltr' },
 };
-const HOST = `<!doctype html><meta charset="utf-8"><style>#box iframe{display:block;width:100%;height:100%;border:0}</style><body style="margin:0;font-family:system-ui"><div id="box" style="position:relative;width:100%;height:360px"></div><script>
-var RT = null; var ACT = { registerRuntime: function (d) { RT = d; } };
+const has = f => fs.existsSync(path.join(srcDir, f));
+const pcPath = [path.join(srcDir, 'packcheck.js'), path.join(srcDir, '..', 'packcheck.js')].find(f => fs.existsSync(f));
+const SIMOK = has('35_activity_sim.js') && has('35_simexpr.js') && !!pcPath;
+// the host words of sim-spec@1 (the app shows them in the learner's language; here English is enough)
+const HOSTWORDS = { 'engine.act.sim.reset': 'Reset the values', 'engine.act.sim.computing': 'Computing…', 'engine.act.sim.results': 'Results', 'engine.act.sim.plot': 'Plot of {y} against {x}' };
+const HOST = `<!doctype html><meta charset="utf-8"><style>#box iframe{display:block;width:100%;height:100%;border:0}
+${has('32_activities.css') ? rd('32_activities.css') : ''}
+body{margin:0;font-family:var(--font,system-ui);background:var(--bg);color:var(--ink)}.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:4px 10px;font:inherit}</style><body><div id="box" class="act-box" style="position:relative;box-sizing:border-box;width:100%;height:360px"></div><script>
+var RT = {}, EN = {}; var ACT = { registerRuntime: function (d) { RT[d.id] = d; }, registerEngine: function (d) { EN[d.id] = d; }, engine: function (id) { return EN[id] || null; }, engines: function () { return Object.keys(EN); } };
+var WORDS = ${JSON.stringify(HOSTWORDS)};
+function tE(k, v) { return String(WORDS[k] || k).replace(/\{(\w+)\}/g, function (_, n) { return v && v[n] != null ? v[n] : ''; }); }
+function h(tag, attrs, ...kids) { const el = document.createElement(tag); for (const [k, v] of Object.entries(attrs || {})) { if (v == null || v === false) continue; if (k === 'class') el.className = v; else if (k === 'style' && typeof v === 'object') Object.assign(el.style, v); else if (k.startsWith('on')) el.addEventListener(k.slice(2), v); else el.setAttribute(k, v === true ? '' : v); } for (const kid of kids.flat()) if (kid != null && kid !== false) el.append(kid.nodeType ? kid : document.createTextNode(String(kid))); return el; }
 ${ACTP}
 window.ACTP = ACTP;
-</script><script>${rd('33_activity_guard.js')}</script><script>${rd('34_activity_html.js')}</script><script>
+</script><script>${rd('33_activity_guard.js')}</script><script>${rd('34_activity_html.js')}</script>${SIMOK ? `<script>${rd('35_simexpr.js')}</script><script>${fs.readFileSync(pcPath, 'utf8')}</script><script>${rd('35_activity_sim.js')}</script>` : ''}<script>
+window.setTheme = function (t) { var r = document.documentElement; for (var k in t.tokens) r.style.setProperty('--' + k, t.tokens[k]); r.style.colorScheme = t.scheme; };
 window.LOG = []; window.H = null;
 window.run = function (act, init) {
   var box = document.getElementById('box'); box.innerHTML = ''; window.LOG = [];
   if (window.H) try { window.H.close(); } catch (e) {}
-  window.H = RT.mount(box, { act: act, init: init, title: 'activity ' + act.id,
+  var rt = RT[act.runtime]; if (!rt) { LOG.push({ type: 'fail', why: 'runtime ' + act.runtime + ' is not in this toolkit' }); return; }
+  box.style.height = rt.autoHeight ? '' : '360px';
+  window.H = rt.mount(box, { act: act, init: init, title: 'activity ' + act.id,
     onMessage: function (raw) { var r = ACTP.check(raw); if (!r.ok) { LOG.push({ type: 'bad', why: r.why }); return; } LOG.push(r.msg);
       if (r.msg.type === 'resize') box.style.height = Math.max(160, Math.min(r.msg.payload.h, 2000)) + 'px';
       if (r.msg.type === 'hint:request') H.send('hint', { text: 'a hint' }, { re: r.msg.id }); },
@@ -69,17 +87,19 @@ window.run = function (act, init) {
   const start = async (p, a, o = {}) => {
     const init = { activityId: a.id, exerciseId: o.exerciseId || null, attemptId: 'test', seed: o.seed ?? 12345, task: o.task || {}, locale: o.locale, strings: a.strings[o.locale] || {},
       theme: THEMES[o.theme || 'light'], state: o.state || null, stateVersion: a.stateVersion || 1, capabilities: a.capabilities || [], limits: { msgBytes: 65536, stateBytes: 262144, eventsPerSec: 50 } };
-    await p.evaluate(([act, init]) => window.run(act, init), [a, init]);
+    await p.evaluate(([act, init, th]) => { window.setTheme(th); window.run(act, init); }, [a, init, THEMES[o.theme || 'light']]);
     const t0 = Date.now(); while (Date.now() - t0 < 8000) { const L = await p.evaluate(() => window.LOG); if (L.some(m => m.type === 'ready' || m.type === 'fail')) break; await p.waitForTimeout(100); }
     await p.waitForTimeout(o.settle ?? 400);
-    const frame = p.frames().find(f => f.parentFrame() && f.parentFrame() !== p.mainFrame());
+    const frame = a.runtime === 'sim-spec@1' ? p.mainFrame() : p.frames().find(f => f.parentFrame() && f.parentFrame() !== p.mainFrame());
     return { frame, log: await p.evaluate(() => window.LOG) };
   };
   const visible = f => f.evaluate(() => document.body.innerText);
 
   for (const a of items) {
     console.log(`\n— ${a.id} (${a.runtime})`);
-    if (a.runtime !== 'html-app@1') { say(false, `runtime ${a.runtime}: this toolkit runs html-app@1 only for now`); continue; }
+    const SIM = a.runtime === 'sim-spec@1';
+    if (!(a.runtime === 'html-app@1' || (SIM && SIMOK))) { say(false, `runtime ${a.runtime}: this toolkit runs html-app@1${SIMOK ? ' and sim-spec@1' : ''} only for now`); continue; }
+    if (SIM && !a.spec) { say(false, `${a.entry || 'spec.json'}: not found or not JSON`); continue; }
     const locs = Object.keys(a.strings);
     if (mode === 'preview') {
       const out = path.resolve(outArg || path.join(SDIR, 'build', 'preview', a.id)); fs.mkdirSync(out, { recursive: true });
@@ -87,7 +107,7 @@ window.run = function (act, init) {
       for (const [name, width, theme] of [['light', 800, 'light'], ['dark', 800, 'dark'], ['phone-360', 360, 'light']]) {
         const { p, ctx, errs } = await open(width, theme); await start(p, a, { locale: loc, theme, settle: 800 });
         await p.screenshot({ path: path.join(out, name + '.png'), fullPage: true });
-        const over = await (p.frames().find(f => f.parentFrame() && f.parentFrame() !== p.mainFrame()))?.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1).catch(() => null);
+        const over = await (SIM ? p.mainFrame() : p.frames().find(f => f.parentFrame() && f.parentFrame() !== p.mainFrame()))?.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1).catch(() => null);
         say(!errs.length, `${name}: ${path.join(out, name + '.png')}${errs.length ? '  errors: ' + errs.slice(0, 2).join(' | ') : ''}`);
         if (over) say(false, `${name}: the activity scrolls sideways (it must fit ${width} px)`);
         await ctx.close();
@@ -112,8 +132,8 @@ window.run = function (act, init) {
       say(!bad.length && !errs.length, `${loc}: no errors${bad.length || errs.length ? ': ' + [...bad.map(b => b.why || b.payload?.code + ' ' + (b.payload?.message || '')), ...errs].slice(0, 3).join(' | ') : ''}`);
       await ctx.close();
     }
-    // sandbox invariants
-    { const { p, ctx } = await open(); await start(p, a, { locale: locs[0] });
+    // sandbox invariants (html-app@1: a frame; sim-spec@1 has none — no code of the pack runs)
+    if (!SIM) { const { p, ctx } = await open(); await start(p, a, { locale: locs[0] });
       const fr = await p.$eval('#box iframe', f => ({ sandbox: f.getAttribute('sandbox'), csp: /http-equiv="Content-Security-Policy"/.test(f.srcdoc) }));
       say(fr.sandbox === 'allow-scripts' && fr.csp, 'sandbox allow-scripts and the CSP in place'); await ctx.close(); }
     // the cases
@@ -127,16 +147,24 @@ window.run = function (act, init) {
       const { frame } = await start(p, a, { locale: c.locale || (a.strings.en ? 'en' : locs[0]), exerciseId: c.exercise || null, task: ex?.task?.params || c.task || {}, seed: Number.isInteger(ex?.task?.seed) ? ex.task.seed : 12345 });
       try {
         for (const s of c.steps || []) {
-          if (s.set) await frame.evaluate(([sel, v]) => { const e = document.querySelector(sel); if (!e) throw new Error('no ' + sel); e.value = String(v); e.dispatchEvent(new Event('input', { bubbles: true })); e.dispatchEvent(new Event('change', { bubbles: true })); }, [s.set, s.value]);
+          if (s.set && SIM) await p.evaluate(([id, v]) => { const e = document.querySelector(`#box [data-param="${id}"]`); if (!e) throw new Error('no param ' + id); if (e.type === 'checkbox') e.checked = !!v; else e.value = String(v); e.dispatchEvent(new Event('input', { bubbles: true })); e.dispatchEvent(new Event('change', { bubbles: true })); }, [s.set, s.value]);
+          else if (s.set) await frame.evaluate(([sel, v]) => { const e = document.querySelector(sel); if (!e) throw new Error('no ' + sel); e.value = String(v); e.dispatchEvent(new Event('input', { bubbles: true })); e.dispatchEvent(new Event('change', { bubbles: true })); }, [s.set, s.value]);
           else if (s.click) await frame.click(s.click);
           if (s.wait) await p.waitForTimeout(s.wait);
         }
         await p.waitForTimeout(500);
-        const log = await p.evaluate(() => window.LOG), res = [...log].reverse().find(m => m.type === 'result'), st = [...log].reverse().find(m => m.type === 'state');
+        const log = await p.evaluate(() => window.LOG), st = [...log].reverse().find(m => m.type === 'state');
+        let res = [...log].reverse().find(m => m.type === 'result');
+        const vals = SIM ? await p.evaluate(() => window.H && window.H.values ? window.H.values() : null) : null;
+        if (SIM && ex && ex.grade && ex.grade.mode === 'checks') {   // the app's checks grader, on the values the runtime exposes
+          res = await p.evaluate(([g, v]) => { let tot = 0, got = 0; for (const c of g.checks || []) { const w = c.weight > 0 ? c.weight : 1; let ok = false; try { const r = NoemaExpr.evaluate(c.expr, v); ok = typeof r === 'boolean' ? r : (r !== 0 && r === r); } catch (e) { } tot += w; if (ok) got += w; } const share = tot ? got / tot : 0; return { payload: { passed: share >= (g.pass ?? 1) - 1e-9, score: share } }; }, [ex.grade, vals || {}]);
+        }
         const why = [];
         if ('passed' in (c.expect || {}) && (res ? res.payload.passed : null) !== c.expect.passed) why.push(`passed: expected ${c.expect.passed}, got ${res ? res.payload.passed : 'no result'}`);
+        for (const [k, want] of Object.entries(c.expect?.values || {})) { const v = vals ? vals[k] : undefined, okv = Array.isArray(want) ? (v >= want[0] && v <= want[1]) : v === want; if (!okv) why.push(`${k} = ${v}, expected ${JSON.stringify(want)}`); }
+        const stData = st ? (SIM ? st.payload.data && st.payload.data.values : st.payload.data) : null;
         for (const [sel, part] of Object.entries(c.expect?.text || {})) { const t = await frame.evaluate(s => document.querySelector(s)?.textContent || '', sel); if (!t.includes(part)) why.push(`${sel}: "${t.slice(0, 60)}" has no "${part}"`); }
-        for (const k of c.expect?.state || []) if (!st || !(k in (st.payload.data || {}))) why.push(`state has no ${k}`);
+        for (const k of c.expect?.state || []) if (!stData || !(k in stData)) why.push(`state has no ${k}`);
         if (errs.length) why.push('errors: ' + errs.slice(0, 2).join(' | '));
         say(!why.length, `case "${c.name}"${why.length ? ' — ' + why.join('; ') : ''}`);
       } catch (e) { say(false, `case "${c.name}": ${e.message.split('\n')[0]}`); }

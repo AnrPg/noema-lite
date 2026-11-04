@@ -281,7 +281,7 @@ def build_site(metas):
     wt(os.path.join(out, '_headers'), '/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n/engine/*\n  Cache-Control: public, max-age=300\n/engine/vendor/pdfjs/*.mjs\n  Content-Type: text/javascript; charset=utf-8\n/engine/vendor/pdfjs/wasm/*.wasm\n  Content-Type: application/wasm\n/library/*\n  Cache-Control: public, max-age=300\n  Access-Control-Allow-Origin: *\n/build.json\n  Cache-Control: no-store\n/fonts/*\n  Cache-Control: public, max-age=604800\n')
     print('site →', os.path.relpath(out, ROOT))
 
-SKILL_TOOLS = ['noema_lib.py', 'activities.py', 'bridge.py', 'validate.py', 'pack_rules.json', 'pack_quality.py', 'pipeline.py', 'svgkit.py', 'extract_images.py', 'fetch_image.py', 'find_images.py']
+SKILL_TOOLS = ['noema_lib.py', 'activities.py', 'simexpr.py', 'bridge.py', 'validate.py', 'pack_rules.json', 'pack_quality.py', 'pipeline.py', 'svgkit.py', 'extract_images.py', 'fetch_image.py', 'find_images.py']
 LANG_SKILL_TOOLS = ['validate_lang.py', 'lang_refcheck.py', 'langlib.py', 'lang_course.py', 'lang_script.py', 'lang_phenomena.py', 'lang_readback.js', 'lang_facade.py']
 def lang_builder_files():
     """The skill noema-language-builder (docs/LANGUAGES.md §10.2): (source, path inside the skill folder). The playbook, the brief
@@ -322,8 +322,9 @@ def build_skill(out_zip):
         # interactive activities (docs/INTERACTIVE.md): the reference activity, the app's runtime for the harness, the contract
         for f in sorted(glob.glob(os.path.join(ROOT, 'tools', 'activities_examples', '**', '*'), recursive=True)):
             if os.path.isfile(f): z.write(f, 'noema-pack-builder/scripts/activities_examples/' + os.path.relpath(f, os.path.join(ROOT, 'tools', 'activities_examples')).replace(os.sep, '/'))
-        for f in ('32_activities.js', '33_activity_guard.js', '34_activity_html.js'): z.write(os.path.join(ENGINE, 'src', f), f'noema-pack-builder/scripts/activity_host/{f}')
-        for f in ('INTERACTIVE.md', 'INTERACTIVE_AUTHORING.md'):
+        for f in ('32_activities.js', '33_activity_guard.js', '34_activity_html.js', '35_activity_sim.js', '35_simexpr.js', '32_activities.css'): z.write(os.path.join(ENGINE, 'src', f), f'noema-pack-builder/scripts/activity_host/{f}')
+        z.write(os.path.join(ENGINE, 'packcheck.js'), 'noema-pack-builder/scripts/activity_host/packcheck.js')   # sim-spec@1: the spec check the runtime runs
+        for f in ('INTERACTIVE.md', 'INTERACTIVE_AUTHORING.md', 'INTERACTIVE_SIMEXPR.md'):
             if os.path.exists(os.path.join(ROOT, 'docs', f)): z.write(os.path.join(ROOT, 'docs', f), f'noema-pack-builder/references/{f}')
         if os.path.exists(os.path.join(ROOT, 'docs', 'PIPELINES.md')): z.write(os.path.join(ROOT, 'docs', 'PIPELINES.md'), 'noema-pack-builder/references/PIPELINES.md')
         z.write(os.path.join(ROOT, 'tools', 'CONTENT_SPEC.md'), 'noema-pack-builder/references/CONTENT_SPEC.md')
@@ -350,7 +351,7 @@ def public_config():
     return {'siteUrl': g('siteUrl'), 'supabaseUrl': g('supabaseUrl'), 'supabaseKey': g('supabaseKey')}
 
 # the app's own code the connector runs (pack checks; curriculum tasks, checks and how answers change a curriculum)
-MCP_ENGINE = ['engine/report.js', 'engine/packcheck.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js', 'engine/langcore.js', 'engine/curimport.js', 'engine/sourceplan.js']
+MCP_ENGINE = ['engine/report.js', 'engine/src/35_simexpr.js', 'engine/packcheck.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js', 'engine/langcore.js', 'engine/curimport.js', 'engine/sourceplan.js']
 MCP_PRELUDE = 'globalThis.window = globalThis;\n'
 
 def build_stamp():
@@ -370,7 +371,7 @@ def build_mcp_function(metas, out_dir):
     cfg['languages'] = [{k: m.get(k) for k in ('id', 'title', 'languages', 'path', 'profiles')} for m in LANG_METAS]   # language courses (D13 peers, refills)
     rd = lambda p: open(os.path.join(ROOT, p), encoding='utf-8').read()
     docs = {'workflow': rd('skill/noema-pack-builder/SKILL.md'), 'content': rd('tools/CONTENT_SPEC.md'), 'visual': rd('docs/VISUAL.md')}
-    if os.path.exists(os.path.join(ROOT, 'docs', 'INTERACTIVE.md')): docs['interactive'] = rd('docs/INTERACTIVE.md') + ('\n\n---\n\n' + rd('docs/INTERACTIVE_AUTHORING.md') if os.path.exists(os.path.join(ROOT, 'docs', 'INTERACTIVE_AUTHORING.md')) else '')   # interactive activities: the contract + the playbook
+    if os.path.exists(os.path.join(ROOT, 'docs', 'INTERACTIVE.md')): docs['interactive'] = rd('docs/INTERACTIVE.md') + ''.join('\n\n---\n\n' + rd('docs/' + f) for f in ('INTERACTIVE_AUTHORING.md', 'INTERACTIVE_SIMEXPR.md') if os.path.exists(os.path.join(ROOT, 'docs', f)))   # interactive activities: the contract + the playbook + the expression language
     if os.path.exists(os.path.join(ROOT, 'docs', 'BRIDGE.md')): docs['bridge'] = rd('docs/BRIDGE.md')   # 文A language bridges (noema_bridge_guide)
     # the content flows (noema_pipeline, docs/PIPELINES.md): the doc, the step library and every flow
     if os.path.exists(os.path.join(ROOT, 'docs', 'PIPELINES.md')): docs['pipelines'] = rd('docs/PIPELINES.md')

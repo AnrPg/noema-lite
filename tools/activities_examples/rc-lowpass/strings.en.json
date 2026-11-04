@@ -1,0 +1,8 @@
+{"title": "RC low-pass filter",
+ "intro": "Change R and C and watch the cutoff frequency move along the gain curve, and the step response get faster or slower.",
+ "resistance": "Resistance R", "capacitance": "Capacitance C",
+ "fcLabel": "Cutoff frequency fc = 1/(2πRC)", "tauLabel": "Time constant τ = RC", "errLabel": "Distance from the target frequency",
+ "bodeTitle": "Gain of the filter against frequency (Bode plot)", "frequency": "Frequency", "gain": "Gain", "gainLine": "gain of the filter",
+ "fcMark": "fc", "targetMark": "target", "minus3": "−3 dB",
+ "stepTitle": "Output after the input jumps from 0 to 1 V", "time": "Time", "voltage": "Output", "tauMark": "τ",
+ "checkFc": "The cutoff frequency is close enough to the target.", "checkC": "C is still 100 nF."}

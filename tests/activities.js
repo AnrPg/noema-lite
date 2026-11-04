@@ -2,7 +2,9 @@
    1. the loop guard (engine/src/33_activity_guard.js): every loop gets the guard, nothing else changes, the program still runs
       the same, an endless loop throws; strings, templates, regexes and comments are left alone;
    2. the protocol checks (ACTP in engine/src/32_activities.js): sizes, types, payloads, a newer version;
-   3. the rules in JS (engine/packcheck.js checkActivities) and Python (tools/activities.py) give the same errors on the same packs;
+   3. the rules in JS (engine/packcheck.js checkActivities) and Python (tools/activities.py) give the same errors on the same packs,
+      html-app@1 and sim-spec@1 (the spec: shape, limits, names, every expression through NoemaExpr / simexpr, engines, string keys;
+      the checks grader of a sim exercise);
    4. no code path ever gives a frame allow-same-origin.
    Usage: node tests/activities.js */
 const path = require('path'), fs = require('fs'), cp = require('child_process'), vm = require('vm');
@@ -57,6 +59,7 @@ ok(!ACTP.check(M('resize', { h: 'tall' })).ok && ACTP.check(M('resize', { h: 300
 ok(!ACTP.check(null).ok && !ACTP.check('hello').ok, 'not an object → refused');
 
 // 3. the same rules in JS and Python
+require(path.join(ROOT, 'engine', 'src', '35_simexpr.js'));   // the expression checker packcheck uses for sim-spec@1
 require(path.join(ROOT, 'engine', 'packcheck.js'));
 const P = globalThis.NoemaPackCheck;
 const html = fs.readFileSync(path.join(ROOT, 'tools', 'activities_examples', 'alias-lab', 'app.html'), 'utf8');
@@ -70,7 +73,8 @@ const cases = {
   good: p => p,
   'no format': p => { p.activities.format = 'x'; },
   'bad id': p => { p.activities.items[0].id = 'Alias Lab'; },
-  'later runtime': p => { p.activities.items[0].runtime = 'sim-spec@1'; },
+  'later runtime': p => { p.activities.items[0].runtime = 'py-module@1'; },
+  'sim-spec without its spec': p => { p.activities.items[0].runtime = 'sim-spec@1'; },
   'unknown runtime': p => { p.activities.items[0].runtime = 'flash@9'; },
   'no fallback': p => { delete p.activities.items[0].fallback; },
   'fallback picture missing': p => { p.activities.items[0].fallback.media = 'nope'; },
@@ -86,7 +90,62 @@ const cases = {
   'bad height': p => { p.chapters[0].sections[0].blocks[0].height = 50; },
   'too many hints': p => { p.chapters[0].exercises[0].hints = Array(7).fill('h'); },
 };
-const packs = Object.entries(cases).map(([k, f]) => { const p = base(); f(p); return [k, p]; });
+// sim-spec@1: the reference rc-lowpass as a second activity, with its block and a sim exercise graded by checks
+const RC = path.join(ROOT, 'tools', 'activities_examples', 'rc-lowpass');
+const rcItem = { ...JSON.parse(fs.readFileSync(path.join(RC, 'activity.json'), 'utf8')), spec: JSON.parse(fs.readFileSync(path.join(RC, 'spec.json'), 'utf8')),
+  strings: Object.fromEntries(['en', 'el', 'ru'].map(l => [l, JSON.parse(fs.readFileSync(path.join(RC, `strings.${l}.json`), 'utf8'))])) };
+delete rcItem.entry;
+const SIMX = { id: 'ch01-e2', type: 'sim', activity: 'rc-lowpass', task: { seed: 'auto', params: { target: 1000 } }, hints: ['h'],
+  grade: { mode: 'checks', checks: [{ expr: 'err <= tol', label: 'checkFc', weight: 3 }, { expr: 'abs(C / 1e-7 - 1) < 0.001', label: 'checkC' }], pass: 1 } };
+const sbase = () => { const p = base(); p.media['rc-lowpass-still'] = { w: 600, h: 260 }; p.requires.push('runtime:sim-spec@1'); p.activities.items.push(JSON.parse(JSON.stringify(rcItem)));
+  p.chapters[0].sections[0].blocks.push({ t: 'interactive', activity: 'rc-lowpass' }); p.chapters[0].exercises.push(JSON.parse(JSON.stringify(SIMX))); return p; };
+const sp = p => p.activities.items[1].spec, sx = p => p.chapters[0].exercises[1];
+const scases = {
+  'spec good': p => p,
+  'spec: no format': p => { sp(p).format = 'x'; },
+  'spec: unknown field': p => { sp(p).code = 'alert(1)'; },
+  'spec: unknown engine': p => { sp(p).engine = 'warp@9'; },
+  'spec: model for formula@1': p => { sp(p).model = { a: 1 }; },
+  'spec: outputs for formula@1': p => { sp(p).outputs = [{ id: 'v', kind: 'series' }]; },
+  'spec: no params': p => { sp(p).params = []; },
+  'spec: 25 params': p => { sp(p).params = Array.from({ length: 25 }, (_, i) => ({ id: 'p' + i, kind: 'toggle', label: 'resistance' })); },
+  'spec: min > max': p => { Object.assign(sp(p).params[0], { min: 5, max: 1 }); },
+  'spec: default out of range': p => { sp(p).params[0].default = 1e9; },
+  'spec: log scale from 0': p => { sp(p).params[1].min = 0; },
+  'spec: a reserved name': p => { sp(p).params[0].id = 'constructor'; },
+  'spec: pi as a name': p => { sp(p).consts.pi = 3; },
+  'spec: a name used twice': p => { sp(p).derived.push({ id: 'fc', expr: '1' }); },
+  'spec: unknown variable': p => { sp(p).derived[0].expr = 'R * L'; },
+  'spec: not the language': p => { sp(p).readouts[0].expr = 'Math.sqrt(R)'; },
+  'spec: property access': p => { sp(p).readouts[0].expr = 'R.constructor'; },
+  'spec: a later derived value used early': p => { sp(p).derived[0].expr = 'fc * 2'; },
+  'spec: bad choice': p => { sp(p).params.push({ id: 'm', kind: 'choice', label: 'gain', options: [{ value: 1, label: 'gain' }, { value: 1, label: 'time' }], default: 3 }); },
+  'spec: a good choice and toggle': p => { sp(p).params.push({ id: 'm', kind: 'choice', label: 'gain', options: [{ value: 1, label: 'gain' }, { value: 2, label: 'time' }], default: 2 }, { id: 'sh', kind: 'toggle', label: 'time', default: true }); },
+  'spec: label not in the tables': p => { sp(p).params[0].label = 'nope'; },
+  'spec: label missing in one table': p => { delete p.activities.items[1].strings.el.time; },
+  'spec: 7 plots': p => { sp(p).plots = Array(7).fill(sp(p).plots[0]); },
+  'spec: 2001 points': p => { sp(p).plots[0].points = 2001; },
+  'spec: x var clashes': p => { sp(p).plots[0].x.var = 'R'; },
+  'spec: series plot without an engine series': p => { sp(p).plots[0] = { kind: 'series', x: { series: 't' }, series: [{ y: 'v' }] }; },
+  'spec: bad axis limit expression': p => { sp(p).plots[1].x.max = '5 * taux'; },
+  'spec: y min above max': p => { Object.assign(sp(p).plots[0].y, { min: 5, max: -60 }); },
+  'spec: bad mark': p => { sp(p).plots[0].marks.push({ axis: 'z', expr: 'fc' }); },
+  'spec: unit too long': p => { sp(p).params[0].unit = 'x'.repeat(17); },
+  'spec: not an object': p => { p.activities.items[1].spec = [1]; },
+  'spec: over 64 KB': p => { sp(p).derived.push(...Array.from({ length: 40 }, (_, i) => ({ id: 'd' + i, expr: Array(900).fill('R').join(' + ') }))); },
+  'spec: engine:… in requires': p => { sp(p).engine = 'warp@9'; p.requires.push('engine:warp@9'); },
+  'checks: none': p => { sx(p).grade.checks = []; },
+  'checks: unknown name': p => { sx(p).grade.checks[0].expr = 'fcut < 1'; },
+  'checks: bad weight': p => { sx(p).grade.checks[0].weight = 0; },
+  'checks: bad pass': p => { sx(p).grade.pass = 1.5; },
+  'checks: label missing': p => { sx(p).grade.checks[0].label = 'nope'; },
+  'checks: on an html-app': p => { p.chapters[0].exercises[0].grade = { mode: 'checks', checks: [{ expr: 'fs == 10' }] }; },
+  'reported on a sim-spec': p => { sx(p).grade = { mode: 'reported' }; },
+  'task param not a const': p => { sx(p).task.params.R = 1; },
+  'task param not a number': p => { sx(p).task.params.target = 'big'; },
+};
+const packs = [...Object.entries(cases).map(([k, f]) => { const p = base(); f(p); return [k, p]; }), ...Object.entries(scases).map(([k, f]) => { const p = sbase(); f(p); return [k, p]; })];
+const GOOD = new Set(['good', 'spec good', 'spec: a good choice and toggle']);
 const tmp = path.join(require('os').tmpdir(), 'noema-act-parity.json'); fs.writeFileSync(tmp, JSON.stringify(packs));
 const py = JSON.parse(cp.execFileSync('python3', ['-c', `import sys, json; sys.path.insert(0, ${JSON.stringify(path.join(ROOT, 'tools'))}); import activities as A
 out = {}
@@ -96,9 +155,30 @@ print(json.dumps(out))`, tmp], { encoding: 'utf8' }));
 for (const [k, p] of packs) {
   const js = P.checkActivities(p, Object.keys(p.translations || {}));
   const same = js.errors.length === py[k][0];
-  ok(same && (k === 'good' ? js.errors.length === 0 : js.errors.length > 0), `${k}: JS ${js.errors.length} error(s), Python ${py[k][0]}${k === 'good' ? ' (a good pack passes)' : ''}${same ? '' : '  JS: ' + js.errors.join(' | ')}`);
+  ok(same && (GOOD.has(k) ? js.errors.length === 0 : js.errors.length > 0), `${k}: JS ${js.errors.length} error(s), Python ${py[k][0]}${GOOD.has(k) ? ' (a good pack passes)' : ' — ' + (js.errors[0] || '').slice(0, 110)}${same ? '' : '  JS: ' + js.errors.join(' | ')}`);
 }
 ok(P.TYPES.has('sim') && P.BLOCKS.has('interactive'), 'packcheck knows the sim type and the interactive block');
+{ // the same messages, not only the same counts, for the spec rules
+  const py2 = JSON.parse(cp.execFileSync('python3', ['-c', `import sys, json; sys.path.insert(0, ${JSON.stringify(path.join(ROOT, 'tools'))}); import activities as A
+print(json.dumps([A.check_spec(p['activities']['items'][1].get('spec'), p['activities']['items'][1].get('strings')) for k, p in json.load(open(sys.argv[1], encoding='utf-8')) if k.startswith('spec')], ensure_ascii=False))`, tmp], { encoding: 'utf8' }));
+  const js2 = packs.filter(([k]) => k.startsWith('spec')).map(([, p]) => P.checkSimSpec(p.activities.items[1].spec, p.activities.items[1].strings));
+  const norm = l => l.map(m => m.replace(/'/g, '"'));   // (Python's repr quotes with ', the JS twin with ")
+  const diff = js2.map((e, i) => JSON.stringify(norm(e)) === JSON.stringify(norm(py2[i])) ? null : [e, py2[i]]).filter(Boolean);
+  ok(!diff.length, 'checkSimSpec (JS) and check_spec (Python) give the same messages ' + (diff.length ? JSON.stringify(diff[0]).slice(0, 600) : ''));
+}
+ok(!('sim-spec@1' in P.ACTIVITY_RULES.LATER) && P.ACTIVITY_RULES.RUNTIMES.has('sim-spec@1') && 'py-module@1' in P.ACTIVITY_RULES.LATER && 'h5p@1' in P.ACTIVITY_RULES.LATER, 'sim-spec@1 is a runtime now; py-module@1 and h5p@1 stay for later');
+ok(JSON.stringify(P.needRequires(sbase().activities.items)) === JSON.stringify(['activities/v1', 'runtime:html-app@1', 'runtime:sim-spec@1']) && P.needRequires([{ runtime: 'sim-spec@1', spec: { engine: 'circuit-mna@1' } }]).includes('engine:circuit-mna@1'), 'pack.requires: the runtimes, and every engine but the built-in formula@1');
+{ // the runtime's own words go through tE() and exist in every UI language (the drafts)
+  const src = fs.readFileSync(path.join(ROOT, 'engine', 'src', '35_activity_sim.js'), 'utf8'), keys = [...new Set([...src.matchAll(/tE\('(engine\.act\.sim\.[a-z]+)'/g)].map(m => m[1]))];
+  const src32 = fs.readFileSync(path.join(ROOT, 'engine', 'src', '32_activities.js'), 'utf8'); for (const m of src32.matchAll(/tE\('(engine\.act\.sim\.[a-z]+)'/g)) if (!keys.includes(m[1])) keys.push(m[1]);
+  const en = JSON.parse(fs.readFileSync(path.join(ROOT, 'i18n', 'engine', 'en.arb'), 'utf8')), dr = fs.readdirSync(path.join(ROOT, 'i18n', 'engine', 'drafts'));
+  const miss = keys.filter(k => !en[k]).concat(...dr.map(f => { const d = JSON.parse(fs.readFileSync(path.join(ROOT, 'i18n', 'engine', 'drafts', f), 'utf8')); return keys.filter(k => !d[k]).map(k => f + ':' + k); }));
+  ok(keys.length >= 5 && !miss.length, `the sim runtime's ${keys.length} host strings are in en.arb and in all ${dr.length} drafts ${miss.slice(0, 3).join(' ')}`);
+}
+{ // the sim runtime renders without a frame and never runs pack code: no eval / Function / HTML from the pack
+  const src = fs.readFileSync(path.join(ROOT, 'engine', 'src', '35_activity_sim.js'), 'utf8');
+  ok(!/\beval\s*\(|new\s+Function|innerHTML|insertAdjacentHTML|document\.write/.test(src) && /NoemaPackCheck\.checkSimSpec\(spec, tables, ACT\.engines\(\)\)/.test(src) && /NoemaExpr\.compile/.test(src), 'sim-spec@1: no eval, no new Function, no HTML from the pack; the spec is checked before it is shown; formulas only through NoemaExpr');
+}
 
 // 4. never allow-same-origin
 const files = cp.execSync('git ls-files engine cloud tools skill', { cwd: ROOT, encoding: 'utf8' }).split('\n').filter(f => /\.(js|mjs|py|html)$/.test(f) && !f.startsWith('engine/i18n/') && !f.includes('vendor/'));
@@ -114,5 +194,12 @@ ok(/setAttribute\('sandbox', 'allow-scripts'\)/.test(fs.readFileSync(path.join(R
 const srv = fs.readFileSync(path.join(ROOT, 'cloud', 'mcp', 'server.mjs'), 'utf8'), bld = fs.readFileSync(path.join(ROOT, 'tools', 'build.py'), 'utf8');
 ok(/enum: \['workflow', 'content', 'visual', 'interactive'/.test(srv) && /interactive: DOCS\.interactive/.test(srv) && /docs\['interactive'\] = rd\('docs\/INTERACTIVE\.md'\)/.test(bld), 'noema_authoring_guide serves part "interactive" (and in "all")');
 for (const f of ['activity_new.py', 'activity_lint.py', 'activity_test.py', 'activity_preview.py', 'activity_harness.js']) ok(fs.existsSync(path.join(ROOT, 'skill', 'noema-pack-builder', 'scripts', f)), 'the skill has ' + f);
-ok(/'activities\.py'/.test(bld) && /activity_host/.test(bld) && /activities_examples/.test(bld), 'the skill zip carries activities.py, the runtime for the harness and the reference activity');
+ok(/'activities\.py'/.test(bld) && /'simexpr\.py'/.test(bld) && /activity_host/.test(bld) && /'35_activity_sim\.js', '35_simexpr\.js'/.test(bld) && /activities_examples/.test(bld), 'the skill zip carries activities.py, simexpr.py, the runtimes for the harness (html-app, sim-spec) and the reference activities');
+ok(/'engine\/src\/35_simexpr\.js', 'engine\/packcheck\.js'/.test(bld) && /INTERACTIVE_SIMEXPR\.md/.test(bld), 'the connector runs NoemaExpr beside packcheck (sim-spec checks) and serves the expression language in the guide');
+{ // activity_new.py --runtime sim-spec@1 starts from rc-lowpass
+  const d = fs.mkdtempSync(path.join(require('os').tmpdir(), 'noema-actnew-'));
+  const r = cp.spawnSync('python3', [path.join(ROOT, 'skill', 'noema-pack-builder', 'scripts', 'activity_new.py'), d, 'my-filter', '--runtime', 'sim-spec@1'], { encoding: 'utf8' });
+  const reg = fs.existsSync(path.join(d, 'activities', 'activities.json')) ? JSON.parse(fs.readFileSync(path.join(d, 'activities', 'activities.json'), 'utf8')) : null;
+  ok(r.status === 0 && reg?.items?.[0]?.runtime === 'sim-spec@1' && reg.items[0].entry === 'activities/my-filter/spec.json' && fs.existsSync(path.join(d, 'activities', 'my-filter', 'spec.json')) && fs.existsSync(path.join(d, 'activities', 'my-filter', 'strings.fr.json')), 'activity_new.py --runtime sim-spec@1 copies rc-lowpass (spec.json, strings, the registry entry)');
+}
 console.log(fails ? `\n${fails} of ${n} failed` : `\nactivities: ${n} checks passed`); process.exit(fails ? 1 : 0);

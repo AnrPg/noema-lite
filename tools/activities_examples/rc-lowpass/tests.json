@@ -1,0 +1,6 @@
+{ "cases": [
+ { "name": "the right R (1.6 kΩ → fc ≈ 995 Hz)", "exercise": "ch01-e901", "steps": [{ "set": "R", "value": 1600 }], "expect": { "passed": true, "values": { "fc": [950, 1050] } } },
+ { "name": "the start value is too far (4.7 kΩ → 339 Hz)", "exercise": "ch01-e901", "steps": [{ "set": "R", "value": 4700 }, { "set": "R", "value": 4710 }], "expect": { "passed": false } },
+ { "name": "the right fc with another C does not count (C must stay 100 nF)", "exercise": "ch01-e901", "steps": [{ "set": "C", "value": 1e-6 }, { "set": "R", "value": 160 }], "expect": { "passed": false, "values": { "fc": [950, 1050] } } },
+ { "name": "explorer: the values are saved", "steps": [{ "set": "R", "value": 3300 }], "expect": { "state": ["R", "C"], "values": { "fc": [480, 485] } } }
+] }
