@@ -46,7 +46,8 @@ so that it stands without either.
    plots, and give every label a key in every string table. A good spec: few controls (2–4), the quantity the learner should
    watch as a readout, one plot that shows the relation, marks on the values that matter (the cutoff, the target).
    `--from rc-transient` starts from a circuit (a netlist, sliders bound to its parts, a scope plot); `--from led-bench` from a
-   fault-finding bench (below). Without `--runtime`, `activity_new.py` copies alias-lab (app.html, strings in en/el/ru, the registry entry, a fallback
+   fault-finding bench (below); `--from heatsink`, `pid-tune`, `lora-link` or `sensor-node` from the heat, control-loop, radio and
+   IoT-twin engines (`docs/INTERACTIVE_ENGINES.md`; tests.json then starts from two of the reference's own cases). Without `--runtime`, `activity_new.py` copies alias-lab (app.html, strings in en/el/ru, the registry entry, a fallback
    picture) under the new id. Change it; keep its structure:
    - every word in `strings.<locale>.json`, shown with `noema.t(key)`;
    - wait for `noema.ready`, then read `noema.task`, `noema.state`, `noema.exercise`;

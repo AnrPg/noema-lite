@@ -492,4 +492,18 @@ ok(/'engine\/src\/35_simexpr\.js', 'engine\/src\/36_engine_circuit\.js', (?:\*\(
   ok(r1.status === 0 && r2.status === 0 && r3.status !== 0 && reg?.items?.length === 2 && reg.items.every(x => x.runtime === 'sim-spec@1') && sp1.engine === 'circuit-mna@1' && sp1.bench && t1.cases?.[0]?.steps?.[0]?.measure && fs.existsSync(path.join(d, 'activities', 'my-rc', 'strings.ru.json')),
     'activity_new.py --from led-bench / rc-transient copies a circuit reference (a bench with its measure/diagnose tests); a runtime that does not fit is refused');
 }
+{ // activity_new.py --from offers every reference activity: the P6 engines' and wasm-oscillator
+  const d = fs.mkdtempSync(path.join(require('os').tmpdir(), 'noema-actnew-'));
+  const sc = path.join(ROOT, 'skill', 'noema-pack-builder', 'scripts', 'activity_new.py');
+  const want = { heatsink: 'thermal@1', 'pid-tune': 'pid@1', 'lora-link': 'rf@1', 'sensor-node': 'twin@1', 'wasm-oscillator': 'wasm@1' };
+  const rs = Object.keys(want).map(r => cp.spawnSync('python3', [sc, d, 'my-' + r, '--from', r], { encoding: 'utf8' }));
+  const rj = f => fs.existsSync(f) ? JSON.parse(fs.readFileSync(f, 'utf8')) : {};
+  const reg = rj(path.join(d, 'activities', 'activities.json'));
+  const good = Object.entries(want).every(([r, eng]) => { const a = path.join(d, 'activities', 'my-' + r), sp = rj(path.join(a, 'spec.json')), t = rj(path.join(a, 'tests.json')).cases || [];
+    return ('engine' in sp ? sp.engine : 'wasm@1') === eng && fs.existsSync(path.join(a, 'strings.el.json')) && fs.existsSync(path.join(d, 'media', `my-${r}-still.svg`))
+      && t.length === 2 && t[0].expect?.passed === true && t[1].expect?.passed === false && t.every(c => c.exercise === 'chNN-eNNN' && /^TODO /.test(c.name)); });
+  const usage = cp.spawnSync('python3', [sc], { encoding: 'utf8' }).stdout;
+  ok(rs.every(r => r.status === 0) && reg.items?.length === 5 && good && Object.keys(want).every(r => usage.includes(r)),
+    'activity_new.py --from heatsink / pid-tune / lora-link / sensor-node / wasm-oscillator copies each reference (its engine, strings, fallback, two TODO cases from its own tests); the usage names them');
+}
 console.log(fails ? `\n${fails} of ${n} failed` : `\nactivities: ${n} checks passed`); process.exit(fails ? 1 : 0);

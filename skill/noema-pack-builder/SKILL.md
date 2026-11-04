@@ -112,6 +112,7 @@ watch another), a process over time, a setting to find, a fault to probe. Never 
 python3 scripts/activity_new.py work/<id> <activity-id> --runtime sim-spec@1   # a declarative simulation (rc-lowpass): spec.json, strings, tests.json, a fallback picture — prefer this
 python3 scripts/activity_new.py work/<id> <activity-id> --from rc-transient     # a circuit (circuit-mna@1): a netlist, R and C on sliders, a scope trace
 python3 scripts/activity_new.py work/<id> <activity-id> --from led-bench        # a fault-finding bench: a hidden fault, multimeter/scope/logic, a diagnosis graded by checks
+python3 scripts/activity_new.py work/<id> <activity-id> --from heatsink        # or pid-tune, lora-link, sensor-node: heat (thermal@1), a control loop (pid@1), a radio link (rf@1), an IoT node twin (twin@1)
 python3 scripts/activity_new.py work/<id> <activity-id> --from wasm-oscillator # rarely: a spec whose model is a WebAssembly module (wasm-module@1); check it with scripts/wasm_check.py
 python3 scripts/activity_new.py work/<id> <activity-id>    # a mini-app (alias-lab, html-app@1): app.html, strings.en/el/ru.json, tests.json — only what a spec cannot say
 python3 scripts/activity_lint.py work/<id>                 # the same rules as make_pack.py

@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 """Start a new activity from a reference one (docs/INTERACTIVE_AUTHORING.md):
-  python3 activity_new.py SUBJECT_DIR NEW_ID [--runtime html-app@1 | sim-spec@1 | wasm-module@1] [--from alias-lab | rc-lowpass | rc-transient | led-bench | wasm-oscillator]
+  python3 activity_new.py SUBJECT_DIR NEW_ID [--runtime html-app@1 | sim-spec@1 | wasm-module@1] [--from alias-lab | rc-lowpass | rc-transient | led-bench | heatsink | pid-tune | lora-link | sensor-node | wasm-oscillator]
 html-app@1 (default) copies alias-lab (sampling and aliasing, a mini-app): activities/<NEW_ID>/app.html, strings.<locale>.json, tests.json.
 sim-spec@1 copies rc-lowpass (an RC low-pass filter, a declarative simulation): activities/<NEW_ID>/spec.json, strings.<locale>.json, tests.json.
 --from picks the reference: rc-transient (circuit-mna@1: a netlist, sliders bound to its parts, a scope trace) or led-bench
-(circuit-mna@1: a fault-finding bench with hidden faults, instruments, test points and a diagnosis; docs/INTERACTIVE_CIRCUIT.md).
+(circuit-mna@1: a fault-finding bench with hidden faults, instruments, test points and a diagnosis; docs/INTERACTIVE_CIRCUIT.md),
+heatsink (thermal@1: a lumped thermal network, heat flow and temperatures), pid-tune (pid@1: a control loop to tune), lora-link
+(rf@1: a radio link budget) or sensor-node (twin@1: the digital twin of a battery-powered IoT node) — docs/INTERACTIVE_ENGINES.md;
+their tests.json starts from two of the reference's own cases.
 wasm-module@1 copies wasm-oscillator (a precompiled WebAssembly core with its own spec; docs/INTERACTIVE_WASM.md): module.wasm, spec.json,
 the strings and tests.json — replace module.wasm with YOUR module (check it with wasm_check.py) and keep abi in the registry entry.
 Both: its entry in activities/activities.json (made if missing); media/<NEW_ID>-still.svg + its media.json entry (the fallback
@@ -19,7 +22,9 @@ if '--runtime' in a:
     i = a.index('--runtime'); runtime = a[i + 1] if i + 1 < len(a) else ''; del a[i:i + 2]
 if len(a) < 2: print(__doc__); sys.exit(1)
 REF = {'html-app@1': 'alias-lab', 'sim-spec@1': 'rc-lowpass', 'wasm-module@1': 'wasm-oscillator'}
-FROM = {'alias-lab': 'html-app@1', 'rc-lowpass': 'sim-spec@1', 'rc-transient': 'sim-spec@1', 'led-bench': 'sim-spec@1', 'wasm-oscillator': 'wasm-module@1'}
+FROM = {'alias-lab': 'html-app@1', 'rc-lowpass': 'sim-spec@1', 'rc-transient': 'sim-spec@1', 'led-bench': 'sim-spec@1', 'heatsink': 'sim-spec@1',
+        'pid-tune': 'sim-spec@1', 'lora-link': 'sim-spec@1', 'sensor-node': 'sim-spec@1', 'wasm-oscillator': 'wasm-module@1'}
+P6_REFS = ('heatsink', 'pid-tune', 'lora-link', 'sensor-node')   # the P6 engines thermal@1, pid@1, rf@1, twin@1 (docs/INTERACTIVE_ENGINES.md)
 ref = None
 if '--from' in a:
     i = a.index('--from'); ref = a[i + 1] if i + 1 < len(a) else ''; del a[i:i + 2]
@@ -63,6 +68,10 @@ elif ref == 'led-bench':   # a bench: "task" picks the hidden fault, "measure" t
 elif ref == 'wasm-oscillator':   # its own spec: "set" names a param, "values" the module's outputs and the derived values
     cases = [{'name': 'TODO the right solution', 'exercise': 'chNN-eNNN', 'steps': [{'set': 'c', 'value': 1.6}], 'expect': {'passed': True, 'values': {'E': [0.04, 0.05]}}},
              {'name': 'TODO a tempting wrong one', 'exercise': 'chNN-eNNN', 'steps': [{'set': 'c', 'value': 1}], 'expect': {'passed': False}}]
+elif ref in P6_REFS:   # the reference's first passing and first failing graded case, to be made your own
+    own = json.load(open(os.path.join(src, 'tests.json'), encoding='utf-8')).get('cases', [])
+    pick = [next((c for c in own if c.get('exercise') and c.get('expect', {}).get('passed') is want), None) for want in (True, False)]
+    cases = [{**c, 'name': 'TODO ' + c['name'], 'exercise': 'chNN-eNNN'} for c in pick if c]
 elif ref == 'rc-transient':
     cases = [{'name': 'TODO the right solution', 'exercise': 'chNN-eNNN', 'steps': [{'set': 'R', 'value': 1000}], 'expect': {'passed': True, 'values': {'vAt': [3.05, 3.27]}}},
              {'name': 'TODO a tempting wrong one', 'exercise': 'chNN-eNNN', 'steps': [{'set': 'R', 'value': 470}], 'expect': {'passed': False}}]

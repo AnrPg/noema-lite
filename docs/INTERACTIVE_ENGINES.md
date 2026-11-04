@@ -337,3 +337,5 @@ a year at a 10-minute period runs in ~100 ms. Not modelled: temperature, Peukert
 Each has its strings in en, el, ru and fr, a fallback picture and text, and `tests.json` (the right answers and tempting wrong
 ones). `tests/activities_pack.py` builds them into a pack and back; `tests/activities_app.js` runs them in the app (and the twin
 bench on a modified `sensor-node`).
+Start your own from one of them: `python3 activity_new.py <subject-dir> <id> --from heatsink` (or `pid-tune`, `lora-link`,
+`sensor-node`): the spec, the strings, a fallback picture and two of the reference's cases as a TODO `tests.json`.
