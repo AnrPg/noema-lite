@@ -1,0 +1,7 @@
+{"title": "Charging and discharging a capacitor",
+ "intro": "A 5 V square wave charges the capacitor through R for 5 ms, then lets it discharge for 5 ms. Change R and C and watch how fast the capacitor voltage follows.",
+ "resistance": "Resistance R", "capacitance": "Capacitance C",
+ "tauLabel": "Time constant τ = RC", "vAtLabel": "Capacitor voltage at 1 ms", "pctLabel": "Share of the 5 V step reached at 1 ms",
+ "scopeTitle": "Oscilloscope: input and capacitor voltage", "time": "Time", "voltage": "Voltage",
+ "inLine": "input (square wave)", "outLine": "capacitor", "targetMark": "1 ms", "pctMark": "63 %",
+ "checkPct": "At 1 ms the capacitor is within 3 points of 63 % of the step."}

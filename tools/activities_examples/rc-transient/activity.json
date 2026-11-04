@@ -1,0 +1,14 @@
+{
+ "id": "rc-transient",
+ "runtime": "sim-spec@1",
+ "entry": "activities/rc-transient/spec.json",
+ "stateVersion": 1,
+ "capabilities": ["state", "events"],
+ "fallback": {
+  "media": "rc-transient-still",
+  "text": "A 5 V square wave (5 ms high, 5 ms low) drives an RC circuit with R = 1 kΩ and C = 1 µF. The capacitor voltage does not jump: it rises along 1 − e^(−t/RC), reaching 63 % of the step after one time constant τ = RC = 1 ms and about 99 % after 5τ; when the input drops it falls back the same way. A larger R or C makes τ longer and the curve slower."
+ },
+ "origin": "own",
+ "credit": "noema-lite reference activity",
+ "license": "own"
+}

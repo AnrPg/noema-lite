@@ -1,0 +1,57 @@
+{
+ "format": "noema.sim-spec/v1",
+ "engine": "circuit-mna@1",
+ "title": "title",
+ "intro": "intro",
+ "params": [
+  { "id": "closed", "kind": "toggle", "label": "switch", "default": true }
+ ],
+ "model": {
+  "netlist": {
+   "format": "noema.circuit/v1",
+   "nodes": ["vcc", "s", "a", { "name": "TP1", "probe": "vcc" }, { "name": "TP2", "probe": "s" }, { "name": "TP3", "probe": "a" }],
+   "elements": [
+    { "id": "V1", "type": "V", "n": ["vcc", "gnd"], "value": 5 },
+    { "id": "SW1", "type": "SW", "n": ["vcc", "s"], "on": true },
+    { "id": "R1", "type": "R", "n": ["s", "a"], "value": 330 },
+    { "id": "D1", "type": "D", "n": ["a", "gnd"], "preset": "led-red" }
+   ]
+  },
+  "bindings": [{ "element": "SW1", "prop": "on", "expr": "closed" }],
+  "noise": { "rel": 0.005 }
+ },
+ "bench": {
+  "faults": [
+   { "id": "ledReversed", "apply": [{ "element": "D1", "kind": "reverse" }] },
+   { "id": "ledOpen", "apply": [{ "element": "D1", "kind": "open" }] },
+   { "id": "rOpen", "apply": [{ "element": "R1", "kind": "open" }] },
+   { "id": "rDrift", "apply": [{ "element": "R1", "kind": "drift", "factor": 10 }] },
+   { "id": "openTrace", "apply": [{ "node": "a", "kind": "open-trace", "side": ["D1"] }] }
+  ],
+  "points": [
+   { "id": "TP1", "at": "TP1", "label": "tp1" },
+   { "id": "TP2", "at": "TP2", "label": "tp2" },
+   { "id": "TP3", "at": "TP3", "label": "tp3" },
+   { "id": "LA", "at": "@D1.0", "label": "ledA" },
+   { "id": "LK", "at": "@D1.1", "label": "ledK" },
+   { "id": "GND", "at": "gnd", "label": "gnd" }
+  ],
+  "instruments": [
+   { "kind": "V" },
+   { "kind": "I", "parts": [{ "element": "R1", "label": "iR1" }, { "element": "D1", "label": "iD1" }] },
+   { "kind": "R" }
+  ],
+  "budget": 8,
+  "diagnosis": {
+   "options": [
+    { "label": "dxSupply" },
+    { "label": "dxSwitch" },
+    { "label": "dxROpen", "fault": "rOpen" },
+    { "label": "dxRDrift", "fault": "rDrift" },
+    { "label": "dxTrace", "fault": "openTrace" },
+    { "label": "dxLedOpen", "fault": "ledOpen" },
+    { "label": "dxLedReversed", "fault": "ledReversed" }
+   ]
+  }
+ }
+}
