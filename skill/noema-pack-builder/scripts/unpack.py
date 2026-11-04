@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Turn an existing pack back into a subject folder, for ADDITIVE updates.
-  python3 unpack.py PACK.noema.zip|PACK.json WORKDIR   → WORKDIR/<id>/ (subject.json, sources.json, chapters/, media/, sources/, translations/)
+  python3 unpack.py PACK.noema.zip|PACK.json WORKDIR   → WORKDIR/<id>/ (subject.json, sources.json, chapters/, media/, activities/, sources/, translations/)
 A .noema.zip package also gives back the original source files (sources/). From a plain .json the files are not there:
 the learner already has them, so make_pack.py keeps those sources as they are.
 Existing chapters become the base files: never renumber or delete their ids — add new chapters (next chNN)
@@ -60,4 +60,18 @@ for mid, m in (p.get('media') or {}).items():
     fn = mid + EXT.get(mt.group(1), '.bin'); open(os.path.join(d, 'media', fn), 'wb').write(raw)
     items.append({k: v for k, v in m.items() if k not in ('data', 'mime', 'sha', 'w', 'h') or (k in ('w', 'h') and not fn.endswith('.svg'))} | {'id': mid, 'file': fn})
 json.dump({'format': 'noema.media/v1', 'items': items}, open(os.path.join(d, 'media', 'media.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
-print(f'unpacked {sid}: {len(p["chapters"])} chapters, {len(items)} pictures, {len(restored)} source file(s) → {d}' + (f'  ({len(kept)} source file(s) stay in the learner\'s account: {", ".join(kept)})' if kept else ''))
+acts = (p.get('activities') or {}).get('items') or []   # interactive activities (docs/INTERACTIVE.md): back to activities/activities.json + activities/<id>/
+if acts:
+    reg = []
+    for x in acts:
+        aid = str(x.get('id') or '')
+        if not re.fullmatch(r'[a-z0-9][a-z0-9-]{1,60}', aid): print(f'⚠️ activity {aid!r}: not a valid id, skipped'); continue
+        ad = os.path.join(d, 'activities', aid); os.makedirs(ad, exist_ok=True)
+        e = {k: v for k, v in x.items() if k not in ('html', 'sha256', 'bytes', 'strings')}
+        if isinstance(x.get('html'), str):
+            e['entry'] = f'activities/{aid}/app.html'; open(os.path.join(ad, 'app.html'), 'w', encoding='utf-8', newline='').write(x['html'])
+        for loc, tab in (x.get('strings') or {}).items():
+            if re.fullmatch(r'[A-Za-z]{2,3}(-[A-Za-z0-9]{2,4}){0,2}', str(loc)): json.dump(tab, open(os.path.join(ad, f'strings.{loc}.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+        reg.append(e)
+    json.dump({'format': (p.get('activities') or {}).get('format') or 'noema.activities/v1', 'items': reg}, open(os.path.join(d, 'activities', 'activities.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+print(f'unpacked {sid}: {len(p["chapters"])} chapters, {len(items)} pictures, {len(acts)} activities, {len(restored)} source file(s) → {d}' + (f'  ({len(kept)} source file(s) stay in the learner\'s account: {", ".join(kept)})' if kept else ''))

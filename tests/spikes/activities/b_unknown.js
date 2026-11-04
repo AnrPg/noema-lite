@@ -1,0 +1,20 @@
+const { chromium } = require('playwright');
+const ROOT = process.argv[2]; const wait = ms => new Promise(r => setTimeout(r, ms));
+(async () => {
+  const b = await chromium.launch(); const p = await b.newPage(); const E = [];
+  p.on('pageerror', e => E.push('pageerror: ' + e.message));
+  await p.goto('file://' + ROOT + '/index.html'); await p.evaluate(() => localStorage.clear()); await p.reload(); await wait(700);
+  await p.click('.noema-chip:has-text("Demo Physics")'); await wait(1300);
+  const step = async (name, hash) => { const n = E.length; await p.evaluate(h => location.hash = h, hash); await wait(900);
+    const txt = await p.evaluate(() => document.querySelector('main')?.innerText.slice(0, 160).replace(/\s+/g, ' '));
+    console.log(name.padEnd(22), E.length > n ? 'ERRORS: ' + E.slice(n).join(' | ') : 'ok', '::', txt); };
+  await step('section (block)', '#/s/ch01-s01');
+  console.log('  interactive block element:', await p.evaluate(() => { const x = document.querySelector('.b-interactive'); return x ? 'present, html=' + JSON.stringify(x.innerHTML) : 'absent'; }));
+  await step('one sim exercise', '#/ex/ch01-e950');
+  await step('chapter practice', '#/practice/ch01');
+  await step('mixed practice', '#/practice/all');
+  await step('lightning', '#/lightning/ch01');
+  await step('mistakes', '#/mistakes');
+  await step('home', '#/');
+  await b.close();
+})();

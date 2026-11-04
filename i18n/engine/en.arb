@@ -4601,5 +4601,69 @@
   "engine.flags.clear": "Remove the report",
   "@engine.flags.clear": {
     "description": "Button beside one reported exercise."
+  },
+  "engine.act.skip": "Skip the activity",
+  "@engine.act.skip": {
+    "description": "Link before an interactive activity (mini-app or simulation) that moves the keyboard focus past it."
+  },
+  "engine.act.start": "Start",
+  "@engine.act.start": {
+    "description": "Button that starts an interactive activity (a mini-app or a simulation) in the lesson."
+  },
+  "engine.act.restart": "Restart",
+  "@engine.act.restart": {
+    "description": "Button that starts an interactive activity again from the beginning."
+  },
+  "engine.act.fullscreen": "Full screen",
+  "@engine.act.fullscreen": {
+    "description": "Button that shows an interactive activity on the whole screen."
+  },
+  "engine.act.loading": "Loading the activity…",
+  "@engine.act.loading": {
+    "description": "Shown while an interactive activity starts."
+  },
+  "engine.act.frameTitle": "Interactive activity {id}",
+  "@engine.act.frameTitle": {
+    "description": "Accessible title of the frame an interactive activity runs in; {id} is the activity's id."
+  },
+  "engine.act.missing": "This activity is missing from the subject.",
+  "@engine.act.missing": {
+    "description": "Shown instead of an interactive activity that the subject pack does not contain."
+  },
+  "engine.act.notHere": "This activity cannot run in this version of the app. Here is what it shows.",
+  "@engine.act.notHere": {
+    "description": "Shown above the still picture and text that replace an activity this app cannot run."
+  },
+  "engine.act.failed": "The activity could not start. Here is what it shows.",
+  "@engine.act.failed": {
+    "description": "Shown when an interactive activity fails to start; its still picture and text follow."
+  },
+  "engine.act.stopped": "This activity stopped responding.",
+  "@engine.act.stopped": {
+    "description": "Shown when an interactive activity hangs or runs too long; a Restart button follows."
+  },
+  "engine.act.misbehaved": "This activity was stopped because it did something it may not do.",
+  "@engine.act.misbehaved": {
+    "description": "Shown when the app stops an interactive activity for breaking the rules (too many messages, leaving its frame)."
+  },
+  "engine.act.error": "The activity reported a problem ({code}).",
+  "@engine.act.error": {
+    "description": "Shown under an interactive activity that reported an error; {code} is a short technical code."
+  },
+  "engine.act.newerState": "Your saved work here comes from a newer version of this activity; it is kept, and the activity starts fresh.",
+  "@engine.act.newerState": {
+    "description": "Shown when saved progress of an activity is newer than the activity in this app."
+  },
+  "engine.act.newerProtocol": "This activity needs a newer version of the app.",
+  "@engine.act.newerProtocol": {
+    "description": "Shown when an interactive activity speaks a newer protocol than this app."
+  },
+  "engine.act.newerType": "This exercise needs a newer version of the app. Reload the page to get it.",
+  "@engine.act.newerType": {
+    "description": "Shown instead of an exercise whose type this app does not know."
+  },
+  "engine.act.hint": "{left, plural, =0 {No hints left} one {Hint (# left)} other {Hint (# left)}}",
+  "@engine.act.hint": {
+    "description": "Button under a simulation exercise that shows the next hint; {left} = hints still available."
   }
 }

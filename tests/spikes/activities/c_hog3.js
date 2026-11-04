@@ -1,0 +1,10 @@
+const pw = require('playwright'); const wait = ms => new Promise(r => setTimeout(r, ms));
+const [name, mode] = process.argv.slice(2); const T=(pr,ms,l)=>Promise.race([pr,wait(ms).then(()=>l)]);
+(async()=>{ const opt = name==='chromium' ? { channel:'chromium', args:[] } : name==='firefox' ? { firefoxUserPrefs:{'fission.autostart':true} } : {};
+ const b=await pw[name].launch(opt); const p=await b.newPage();
+ const url = mode==='x' ? 'http://127.0.0.1:8811/xhost.html?src='+encodeURIComponent('http://localhost:8811/hogframe.html') : 'http://127.0.0.1:8811/host.html?mode=hog';
+ await p.goto(url); await wait(1500);
+ const a=await T(p.evaluate(()=>TICKS),3000,'NO ANSWER'); await wait(1500);
+ const c=await T(p.evaluate(()=>TICKS),3000,'NO ANSWER');
+ console.log(name, mode==='x'?'cross-site src':'srcdoc', a,'->',c, typeof c==='number'&&c>a+10?'HOST STAYS RESPONSIVE':'HOST FROZEN');
+ setTimeout(()=>process.exit(0),1500); b.close().catch(()=>{}); })();

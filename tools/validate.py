@@ -20,6 +20,8 @@ for _s in (sys.stdout, sys.stderr):   # UTF-8 output on Windows / macOS / Linux 
     try: _s.reconfigure(encoding='utf-8', errors='replace')
     except Exception: pass
 from collections import Counter
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import activities as A   # interactive activities: the registry, interactive blocks, sim exercises (docs/INTERACTIVE.md)
 
 errors, warns = [], []
 def E(m): errors.append(m)
@@ -27,14 +29,16 @@ def W(m): warns.append(m)
 
 BLOCKS = {"p":["text"],"list":["items"],"code":["code"],"diagram":["text"],"table":["head","rows"],
           "callout":["kind","text"],"compare":["items"],"flow":["items"],"reveal":["label","text"],
-          "ask":["questions"],"terms":["items"],"figure":["media"]}
+          "ask":["questions"],"terms":["items"],"figure":["media"],"interactive":["activity"]}
 KINDS = {"key","pitfall","tip","exam","warn","analogy","debug","interview"}
 TAGS = {"concept","syntax","pitfall","debug","exam","interview","calc","compare"}
 VTYPES = {"img_hotspot","img_sequence","img_reveal","img_drag","img_label","img_select","img_occlusion"}
 TTYPES = {"flaw","case","predict","tree","inquiry","debate"}   # critical-thinking types (CONTENT_SPEC.md)
-TYPES = {"mcq","tf","odd","order","match","bucket","cloze","spotbug","calc","scenario","free","write"} | TTYPES | VTYPES
+TYPES = {"mcq","tf","odd","order","match","bucket","cloze","spotbug","calc","scenario","free","write","sim"} | TTYPES | VTYPES
 ARGS = sys.argv[1:]
 MEDIA = json.load(open(ARGS[ARGS.index("--media")+1], encoding="utf-8")) if "--media" in ARGS else None
+# {id: activity} of the pack's interactive activities (make_pack.py passes it) → checks interactive blocks and sim exercises (tools/activities.py)
+ACTIVITIES = json.load(open(ARGS[ARGS.index("--activities")+1], encoding="utf-8")) if "--activities" in ARGS else None
 MIN_VISUAL = int(ARGS[ARGS.index("--min-visual")+1]) if "--min-visual" in ARGS else 0
 QUALITY = ARGS[ARGS.index("--quality")+1] if "--quality" in ARGS else None
 BALANCE = int(ARGS[ARGS.index("--balance")+1]) if "--balance" in ARGS else 0
@@ -241,6 +245,7 @@ def shape(e):
     if t == "predict": out["outcome?"] = "outcome" in e
     if t == "tree": out["nodes"] = {k: [[bool(o.get("ok")), o.get("to")] for o in (n.get("options") or []) if isinstance(o, dict)] for k, n in (e.get("nodes") or {}).items() if isinstance(n, dict)}
     if t == "inquiry": out["scores"] = e.get("scores")
+    if t == "sim": out.update(activity=e.get("activity"), task=e.get("task"), grade=e.get("grade"), **{"#hints": len(e.get("hints") or [])})
     if t == "debate": out["sides"] = [[s.get("best"), len(s.get("counters") or [])] for s in e.get("sides") or [] if isinstance(s, dict)]
     # own "regions" may be added to carry translated labels (the picture's are in one language); check_visual checks them
     return out
@@ -309,6 +314,8 @@ def main(path):
             if t=="figure":
                 if MEDIA is not None and b.get("media") not in MEDIA: E(f"{sid} block {i}: figure media '{b.get('media')}' not in media/media.json")
                 elif "regions" in b: check_regions(f"{sid} block {i}", b["regions"], *(((MEDIA or {}).get(b.get("media")) or {}).get(k) for k in ("w", "h")))
+            if t=="interactive" and ACTIVITIES is not None:
+                for m in A.check_block(b, ACTIVITIES): E(f"{sid} block {i}: {m}")
             if t=="terms":
                 for it in b["items"]:
                     if not (s(it.get("term")) and s(it.get("def"))): E(f"{sid} block {i}: term needs term+def")
@@ -335,6 +342,9 @@ def main(path):
         for x in tg: tagc[x]+=1
         if not s(e.get("q")) and t!="scenario": E(f"{eid}: missing q")
         if t!="scenario" and not s(e.get("explain")): E(f"{eid}: missing explain")
+        if t=="sim":
+            if ACTIVITIES is not None:
+                for m in A.check_sim(e, ACTIVITIES): E(f"{eid}: {m}")
         if t in ("mcq","odd"):
             o=e.get("options",[]); a=e.get("answer")
             if len(o)<2: E(f"{eid}: needs options")

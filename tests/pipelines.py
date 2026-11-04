@@ -27,7 +27,7 @@ for sid, st in S.items():
     if "run" in ck:
         exe = ck["run"][1].replace("{lt}", TOOLS).replace("{root}", ROOT)
         ok(os.path.exists(exe), f"step {sid}: its command exists ({os.path.relpath(exe, ROOT)})")
-for k in ("map", "write", "pictures", "blind_solve", "review", "checks", "upload", "bridges"):
+for k in ("map", "write", "pictures", "activities", "blind_solve", "review", "checks", "upload", "bridges"):
     ok(all(k in F[f]["steps"] for f in ("1", "2", "4")), f"the flows that build a pack all have the step {k}")
 ok([k for k, v in S.items() if v.get("deferrable")] == ["upload"] and not [k for k, v in S.items() if "upload" in v.get("needs", [])]
    and all(f["steps"].index("upload") > f["steps"].index(x) for f in F.values() if "upload" in f["steps"] for x in ("translate", "bridges", "checks") if x in f["steps"]),
@@ -92,6 +92,7 @@ try:
     rv["rubric"] = [{"lr": f"ch01-l{i + 1:02d}", "ok": True} for i in range(15)]; json.dump(rv, open(os.path.join(d, "review", "ch01.json"), "w"))
     ok(P("check", d, "review").returncode == 0, "review: rubric on 15 learnables")
     ok(P("done", d, "pictures", "--note", "no picture teaches here; none kept").returncode == 0, "pictures: a judgement, recorded with a note")
+    r = P("check", d, "activities"); ok(r.returncode == 0 and "optional" in r.stdout, "activities: none is fine (they are optional; with activities/ the lint and the browser test run)" + ("" if r.returncode == 0 else "\n" + r.stdout))
     # the languages every new pack gets (pack_rules.json "languages"): an English pack → translations el, ru; bridges el, ru, ar
     r = P("check", d, "translate"); ok(r.returncode == 1 and "el: missing ch01" in r.stdout and "ru: missing ch01" in r.stdout and "en:" not in r.stdout, "translate: an English pack needs el and ru (never its own language)")
     for loc in ("el", "ru"):

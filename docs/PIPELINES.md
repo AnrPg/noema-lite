@@ -55,15 +55,15 @@ note of what is waiting. Only a step marked `deferrable` in `steps.json` may wai
 
 | Id | Flow | When | Steps |
 | --- | --- | --- | --- |
-| 1 | Sources → Roadmap → every step | a pile of material, several topics building on each other | classify → shape → dag → audit → expand → plan → start_subject → map → pictures → write → blind_solve → review → translate → bridges → checks → upload → next |
+| 1 | Sources → Roadmap → every step | a pile of material, several topics building on each other | classify → shape → dag → audit → expand → plan → start_subject → map → pictures → activities → write → blind_solve → review → translate → bridges → checks → upload → next |
 | 1b | Goal → Roadmap | a goal and no sources | classify → shape → dag → audit → expand → plan → next |
-| 2 | A Roadmap step → its subject | `noema_curriculum_task` hands over one step | classify → start_subject → map → pictures → write → blind_solve → review → translate → bridges → checks → upload → next |
+| 2 | A Roadmap step → its subject | `noema_curriculum_task` hands over one step | classify → start_subject → map → pictures → activities → write → blind_solve → review → translate → bridges → checks → upload → next |
 | 3 | Plan the chapters, fill the queue | the Roadmap exists | classify → plan → next |
-| 4 | Sources → one subject | the material fits one subject | classify → start_subject → map → pictures → write → blind_solve → review → translate → bridges → checks → upload |
-| 5 | Add to an existing subject | new material (`unpack.py`, `patches/`) | classify → map → pictures → write → blind_solve → review → translate → bridges → checks → upload |
+| 4 | Sources → one subject | the material fits one subject | classify → start_subject → map → pictures → activities → write → blind_solve → review → translate → bridges → checks → upload |
+| 5 | Add to an existing subject | new material (`unpack.py`, `patches/`) | classify → map → pictures → activities → write → blind_solve → review → translate → bridges → checks → upload |
 | 6 | Language help 文A | a bridge for a pack | classify → bridges |
 | 7 | Translate a pack | a pack into another language | classify → translate → bridges → checks → upload |
-| 9 | Grow a Roadmap: a new part | new material for a Roadmap that exists (`--grow`; the app's ⋮ → *Add a part with Claude*) | classify → read_map → grow → plan → start_subject → map → pictures → write → blind_solve → review → translate → bridges → checks → upload → next |
+| 9 | Grow a Roadmap: a new part | new material for a Roadmap that exists (`--grow`; the app's ⋮ → *Add a part with Claude*) | classify → read_map → grow → plan → start_subject → map → pictures → activities → write → blind_solve → review → translate → bridges → checks → upload → next |
 | 8 | Import a map or a subject | a Roadmap file or a pack the learner made | classify → import |
 | L1 | Γ1 · A task of a language course | `noema_lang_task` | classify → L.brief → L.task → L.order → L.words → L.grammar → L.notes → L.sentences → L.exercises → L.green |
 | L2 | Γ2 · A new language in a course | "add Persian to my course" | classify → L.brief → L.phenomena → L.params → L.order → L.words → L.grounding → L.grammar → L.notes → L.sentences → L.exercises → L.package → L.facades → L.green |

@@ -72,6 +72,7 @@ def check_quality(ch, features=(), types=None):
     auto = set()
     for f, vals in Q["autoUnfit"].items():
         if not (pics if f == "pictures" else f in features): auto |= set(vals)
+    auto |= {v for v in (Q.get("optIn") or {}).get("types") or [] if v not in (fits.get("types") or [])}   # opt-in: no reason needed when left out
     used = lambda k: {v for e in exs for v in ((e.get("tags") or []) if k == "tags" else [e.get(k)]) if v is not None}
     for key, universe, field in (("types", sorted(types) if types else V["types"], "type"), ("focus", V["tags"], "tags"), ("modes", V["modes"], "mode")):
         fv = fits.get(key) or []
@@ -83,8 +84,8 @@ def check_quality(ch, features=(), types=None):
         for v in sorted(used(field) - set(fv) - {None}):
             if v in universe: add("fit.declared", f"{v} is used but not in fits.{key}")
     for key, field, rule in (("types", "type", "fit.types"), ("focus", "tags", "fit.focus"), ("modes", "mode", "mode.coverage")):
-        n = C[rule]["min"]
         for v in fits.get(key) or []:
+            n = (C[rule].get("minPerKind") or {}).get(v, C[rule]["min"])
             have = sum(1 for e in exs if (v in (e.get("tags") or []) if field == "tags" else e.get(field) == v))
             if have < n: add(rule, f"{v}: {have} exercise(s), need >= {n}")
     # mix.difficulty
@@ -174,10 +175,10 @@ def check_quality(ch, features=(), types=None):
     for s in ch.get("sections") or []:
         bs = [b for b in s.get("blocks") or [] if isinstance(b, dict)]
         for i, b in enumerate(bs):
-            if b.get("t") not in ("figure", "diagram"): continue
+            if b.get("t") not in ("figure", "diagram", "interactive"): continue
             nx = bs[i + 1] if i + 1 < len(bs) else {}
             if nx.get("t") not in ("p", "list", "callout") or len(" ".join(_strings({k: v for k, v in nx.items() if k in ("title", "text", "items")}))) < c["minChars"]:
-                add("figure.explained", f"{s.get('id')}: the {b.get('t')}{' ' + _q(b.get('media')) if b.get('media') else ''} is not explained right after it (what it shows, how to read it, what it teaches)")
+                add("figure.explained", f"{s.get('id')}: the {b.get('t')}{' ' + _q(b.get('media')) if b.get('media') else ' ' + _q(b.get('activity')) if b.get('activity') else ''} is not explained right after it (what it shows, how to read it, what it teaches)")
     sw = m.get("sequenceWhy") if isinstance(m.get("sequenceWhy"), dict) else {}
     for e in exs:
         if e.get("type") == "img_sequence" and not (isinstance(sw.get(e.get("media")), str) and sw[e.get("media")].strip()):

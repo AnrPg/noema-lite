@@ -12,6 +12,7 @@ library/subjects/<subject-id>/          (shared library)   or   accounts/<profil
 ├── chapters/chNN.json   one file per chapter (schema below)
 ├── patches/*.json    ADDITIVE updates from later sources (never edit a published chapter; append)
 ├── media/            pictures (svg/png/jpg/webp) + media.json registry — docs/VISUAL.md
+├── activities/       interactive activities (optional): activities.json + <id>/app.html + <id>/strings.<locale>.json — docs/INTERACTIVE.md
 ├── coverage/*.md     coverage checklists (every heading/command/test question → section + exercise ids)
 ├── authoring/        scripts used to generate the content (provenance)
 ├── translations/<locale>/chNN.json   the chapters in en, el, ru (those that are not the pack's language; below, "Packs in several languages")
@@ -306,6 +307,7 @@ Math (subjects with `features.math`): `$…$` inline, `$$…$$` display (KaTeX).
 - `{"t":"ask","title":"Ask yourself when … ","questions":["Am I …?","Did …?"]}`
 - `{"t":"terms","items":[{"term":"Principal","def":"..."}]}`
 - `{"t":"figure","media":"heart-frontal","caption":"optional"}` — an explorable picture (docs/VISUAL.md §4); every `figure` and `diagram` is explained in detail right after it (Q7b)
+- `{"t":"interactive","activity":"alias-lab","caption":"optional","height":"auto"}` — an interactive activity (an explorer, not graded; docs/INTERACTIVE.md §4), explained in detail right after it like a figure (Q7b)
 
 ## Exercise — common fields
 ```json
@@ -338,6 +340,7 @@ IDs: `chNN-eNNN`, unique, sequential.
 | `tree` | `start:"a"`, `nodes:{id:{q, options:[{text, ok, fb, to?}]}}` | **decision tree**: one `ok` per node; `to` names the next node (none = the end); every wrong option's `fb` says where that branch leads. The right path must end without a loop. |
 | `inquiry` | `options:[str]` (3–5 questions, tests or experiments), `scores:[0–3 per option]` with exactly one highest, `why:[str per option]` | **best question**: which one tells you the most? Values are shown afterwards. |
 | `debate` | `q` = the claim; `sides:[{position, counters:[str] (2–4), best:int, why:[str per counter]}]` (2–3) | **debate**: the learner takes ANY side (not graded), then picks the strongest objection to it. Pairs well with `mode: "dialectic"`. |
+| `sim` | `activity` (an id of pack.activities), `task: {seed: "auto"\|int, params: {…}}`, `grade: {"mode": "reported"}`, optional `hints:[str]` (≤ 6), `reveal` | **interactive task** (docs/INTERACTIVE.md §4): the learner reaches the goal stated in `q` inside the activity; the activity reports the result. Opt-in: only when the chapter map's `fits.types` names `sim` (then ≥ 1). Hints lead to the idea, never the answer (each one: score × 0.85, floor 0.5). |
 | `img_hotspot` `img_sequence` `img_reveal` `img_drag` `img_label` `img_select` `img_occlusion` | `media` + regions/targets/answer… | **visual exercises — full schema in docs/VISUAL.md**; `img_sequence` rarely on a diagram whose arrows already show the order (Q5c) |
 
 ## Debug playbook

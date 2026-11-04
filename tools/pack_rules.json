@@ -102,6 +102,7 @@
     "order",
     "predict",
     "scenario",
+    "sim",
     "spotbug",
     "tf",
     "tree",
@@ -172,6 +173,11 @@
     "compare"
    ]
   },
+  "optIn": {
+   "types": [
+    "sim"
+   ]
+  },
   "autoUnfit": {
    "code": [
     "spotbug",
@@ -216,7 +222,10 @@
     "id": "fit.types",
     "level": "error",
     "min": 3,
-    "what": "every type in fits.types"
+    "minPerKind": {
+     "sim": 1
+    },
+    "what": "every type in fits.types (sim, an interactive activity, is opt-in: listed in fits.types only where an activity teaches, then >= 1)"
    },
    {
     "id": "fit.focus",
@@ -308,7 +317,7 @@
     "id": "figure.explained",
     "level": "warn",
     "minChars": 120,
-    "what": "every figure and diagram of the theory is explained in detail right after it (a p, list or callout block, >= 120 characters): what it shows (its parts, axes, symbols, arrows, colours), how to read it and what it teaches; a caption alone is not enough (Q7b)"
+    "what": "every figure, diagram and interactive activity of the theory is explained in detail right after it (a p, list or callout block, >= 120 characters): what it shows (its parts, axes, symbols, arrows, colours; for an activity: its controls and what to try), how to read it and what it teaches; a caption alone is not enough (Q7b)"
    },
    {
     "id": "sequence.arrows",
@@ -374,6 +383,7 @@
    "Strictness: subject.authoring.rules >= 2 turns these checks on (start_subject.py writes 2). Errors when subject.authoring.by is 'claude' or 'gemini', warnings when it is 'learner' or 'import'. Packs without authoring.rules are not checked (made before 2026-10-21; TD-11).",
    "The connector (noema_finish_upload, noema_save_pack) refuses a pack built since 'since' (pack.builtAt, or no builtAt at all) that has no subject.authoring.rules >= 2, so a pack cannot skip the checks by leaving the field out. Older packs keep working unchanged.",
    "autoUnfit: a value that cannot fit the chapter needs no reason in unfit — the code types without subject.features.code, calc without .math, picture types when the chapter has no picture (pictures only where they teach, docs/VISUAL.md §5).",
+   "optIn: a value a chapter uses only where it teaches (sim, an interactive activity: docs/INTERACTIVE.md) needs no reason in unfit when it is left out; once listed in fits it counts like any other value, with its own minimum (fit.types minPerKind).",
    "Counts are never checked: about 2 versions per learnable is the core set; there is no upper limit (docs/PIPELINES.md §4, a mild suggestion only)."
   ],
   "since": "2026-10-22T00:00:00Z"

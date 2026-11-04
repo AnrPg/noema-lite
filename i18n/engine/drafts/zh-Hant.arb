@@ -1,0 +1,19 @@
+{
+  "@@locale": "zh-Hant",
+  "engine.act.skip": "略過此活動",
+  "engine.act.start": "開始",
+  "engine.act.restart": "重新開始",
+  "engine.act.fullscreen": "全螢幕",
+  "engine.act.loading": "正在載入活動…",
+  "engine.act.frameTitle": "互動活動 {id}",
+  "engine.act.missing": "這門課程中缺少此活動。",
+  "engine.act.notHere": "此活動無法在此版本的應用程式中執行。以下是它呈現的內容。",
+  "engine.act.failed": "活動無法啟動。以下是它呈現的內容。",
+  "engine.act.stopped": "此活動已停止回應。",
+  "engine.act.misbehaved": "此活動做了不允許的事，已被停止。",
+  "engine.act.error": "活動回報了一個問題（{code}）。",
+  "engine.act.newerState": "你在這裡儲存的進度來自此活動的較新版本；進度已保留，活動將重新開始。",
+  "engine.act.newerProtocol": "此活動需要較新版本的應用程式。",
+  "engine.act.newerType": "此練習需要較新版本的應用程式。請重新整理頁面以取得。",
+  "engine.act.hint": "{left, plural, =0 {沒有提示了} other {提示（還剩 # 個）}}"
+}

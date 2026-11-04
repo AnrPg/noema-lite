@@ -1,0 +1,55 @@
+<!doctype html><meta charset="utf-8"><title>host</title><body>
+<script>
+localStorage.setItem('secret','S3CRET'); document.cookie='sess=COOKIE1; path=/';
+window.RESULTS=null; window.TICKS=0; setInterval(()=>TICKS++,50);
+const nonce = crypto.getRandomValues(new Uint32Array(2)).join('-');
+const CSP = "default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; font-src data:; media-src data: blob:; connect-src 'none'; frame-src 'none'; form-action 'none'; base-uri 'none'";
+const mode = new URLSearchParams(location.search).get('mode') || 'probe';
+const boot = `<meta http-equiv="Content-Security-Policy" content="${CSP}"><script>(function(){var N=${JSON.stringify(nonce)};var port=null;
+function onmsg(e){ if(e.source!==parent||!e.data||e.data.t!=='welcome'||e.data.nonce!==N||!e.ports[0])return; port=e.ports[0]; removeEventListener('message',onmsg); window.__port=port; port.start(); dispatchEvent(new Event('noema-ready')); }
+addEventListener('message',onmsg); parent.postMessage({t:'hello',nonce:N},'*');})();<\/script>`;
+const probe = `<script>addEventListener('noema-ready', async function(){ var R={}; var P=window.__port;
+ function t(n,f){ try{ var v=f(); R[n]= 'ALLOWED:'+String(v).slice(0,40);}catch(e){R[n]='blocked('+e.name+')';} }
+ R.origin = self.origin;
+ t('parent.document', ()=>parent.document.title);
+ t('top.localStorage', ()=>top.localStorage.getItem('secret'));
+ t('localStorage', ()=>localStorage.getItem('secret'));
+ t('sessionStorage', ()=>sessionStorage.length);
+ t('document.cookie', ()=>document.cookie);
+ t('indexedDB.open', ()=>{ var r=indexedDB.open('x'); return r?'request':'none'; });
+ t('frameElement', ()=>frameElement===null?'null(ok)':frameElement.getAttribute('sandbox'));
+ t('frameElement.sandbox remove', ()=>{ if(!frameElement) throw new Error('no frameElement'); frameElement.removeAttribute('sandbox'); return 'removed'; });
+ async function pr(n,f){ try{ var v=await Promise.race([f(), new Promise((_,j)=>setTimeout(()=>j(new Error('timeout')),1500))]); R[n]='ALLOWED:'+String(v).slice(0,40);}catch(e){R[n]='blocked('+(e.name||'')+':'+String(e.message||e).slice(0,30)+')';} }
+ await pr('fetch same-host', ()=>fetch('${location.origin}/beacon?fetch').then(r=>r.status));
+ await pr('fetch relative', ()=>fetch('/beacon?rel').then(r=>r.status));
+ await pr('xhr', ()=>new Promise((ok,no)=>{var x=new XMLHttpRequest();x.open('GET','${location.origin}/beacon?xhr');x.onload=()=>ok(x.status);x.onerror=()=>no(new Error('err'));x.send();}));
+ await pr('websocket', ()=>new Promise((ok,no)=>{var w=new WebSocket('ws://${location.host}/beacon?ws');w.onopen=()=>ok('open');w.onerror=()=>no(new Error('err'));}));
+ t('sendBeacon', ()=>navigator.sendBeacon('${location.origin}/beacon?sb','x'));
+ await pr('img beacon', ()=>new Promise((ok,no)=>{var i=new Image();i.onload=()=>ok('loaded');i.onerror=()=>no(new Error('err'));i.src='${location.origin}/beacon?img';}));
+ t('css beacon', ()=>{var s=document.createElement('style');s.textContent='body{background:url(${location.origin}/beacon?css)}';document.head.appendChild(s);return 'inserted';});
+ t('link prefetch', ()=>{var l=document.createElement('link');l.rel='prefetch';l.href='${location.origin}/beacon?prefetch';document.head.appendChild(l);return 'inserted';});
+ t('window.open', ()=>{var w=window.open('${location.origin}/beacon?open'); return w?'window':'null';});
+ t('form.submit', ()=>{var f=document.createElement('form');f.action='${location.origin}/beacon?form';f.method='GET';document.body.appendChild(f);f.submit();return 'submitted';});
+ t('top.location', ()=>{top.location='${location.origin}/beacon?topnav';return 'set';});
+ await pr('Worker blob', ()=>new Promise((ok,no)=>{var u=URL.createObjectURL(new Blob(['postMessage(1)']));var w=new Worker(u);w.onmessage=()=>ok('ran');w.onerror=()=>no(new Error('err'));}));
+ await pr('WebAssembly.compile', ()=>WebAssembly.compile(new Uint8Array([0,97,115,109,1,0,0,0])).then(()=>'compiled'));
+ t('eval', ()=>eval('1+1'));
+ t('alert', ()=>{alert('x');return 'shown';});
+ P.postMessage({t:'results',R:R});
+});<\/script>`;
+const hog = `<script>addEventListener('noema-ready',function(){window.__port.postMessage({t:'hogging'}); var x=0; while(true){x++;} });<\/script>`;
+const forge = `<script>addEventListener('noema-ready',function(){ var R={}; /* try to talk to host outside the port */ parent.postMessage({t:'results',R:{forged:true}},'*'); parent.postMessage({t:'hello',nonce:'guess'},'*'); window.__port.postMessage({t:'results',R:{viaPort:'ok'}}); });<\/script>`;
+const content = {probe, hog, forge}[mode];
+const f = document.createElement('iframe');
+f.setAttribute('sandbox','allow-scripts'); f.setAttribute('allow',"camera 'none'; microphone 'none'; geolocation 'none'"); f.setAttribute('referrerpolicy','no-referrer');
+f.srcdoc = '<!doctype html><html><head>'+boot+'</head><body>'+content+'</body></html>';
+let claimed=false; window.STRAY=[];
+addEventListener('message', e => {
+  if (e.source !== f.contentWindow || !e.data || e.data.t !== 'hello' || e.data.nonce !== nonce || claimed) { STRAY.push(e.data); return; }
+  claimed = true; const ch = new MessageChannel();
+  ch.port1.onmessage = m => { if (m.data.t==='results') RESULTS = m.data.R; if (m.data.t==='hogging') window.HOGGING = TICKS; };
+  f.contentWindow.postMessage({t:'welcome',nonce}, '*', [ch.port2]);
+});
+document.body.append(f);
+window.killFrame = () => { f.remove(); return TICKS; };
+</script>

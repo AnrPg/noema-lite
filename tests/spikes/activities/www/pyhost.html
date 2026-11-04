@@ -1,0 +1,39 @@
+<!doctype html><body><script>
+window.LOG=[]; localStorage.setItem('secret','S3CRET');
+const BASE = location.origin + '/pyodide/';
+const CSP = `default-src 'none'; script-src 'unsafe-inline' 'wasm-unsafe-eval' ${BASE}; worker-src blob:; connect-src ${BASE}; img-src data:; style-src 'unsafe-inline'`;
+const workerSrc = `
+self.onmessage = async (e) => {
+  const t0 = performance.now();
+  try {
+    importScripts(${JSON.stringify(BASE)} + 'pyodide.js');
+    const py = await loadPyodide({ indexURL: ${JSON.stringify(BASE)}, packages: [] });
+    const t1 = performance.now();
+    await py.loadPackage('numpy', { checkIntegrity: true });
+    const t2 = performance.now();
+    const out = py.runPython(\`
+import numpy as np, json
+w = np.logspace(0, 6, 5); H = 1/(1+1j*w/1000.0)
+res = {"mag_db": [round(float(x),3) for x in 20*np.log10(np.abs(H))]}
+# escape attempts via the js bridge (worker global of an opaque origin)
+import js
+probe = {}
+try: probe["origin"] = str(js.self.origin)
+except Exception as ex: probe["origin"] = "err " + type(ex).__name__
+try: probe["indexedDB"] = str(js.indexedDB.open("x"))
+except Exception as ex: probe["indexedDB"] = "blocked " + type(ex).__name__
+res["probe"] = probe
+json.dumps(res)\`);
+    let f = 'n/a'; try { const r = await fetch(location.origin === 'null' ? ${JSON.stringify(location.origin)} + '/beacon?pyfetch' : '/beacon?pyfetch'); f = 'ALLOWED ' + r.status; } catch (er) { f = 'blocked ' + er.name; }
+    let f2 = 'n/a'; try { const r = await fetch(${JSON.stringify(BASE)} + 'pyodide-lock.json'); f2 = 'allowed ' + r.status; } catch (er) { f2 = 'blocked ' + er.name; }
+    postMessage({ ok: true, init_ms: Math.round(t1 - t0), numpy_ms: Math.round(t2 - t1), out: JSON.parse(out), fetchOther: f, fetchAsset: f2 });
+  } catch (err) { postMessage({ ok: false, err: String(err).slice(0, 300) }); }
+};`;
+const runner = `<!doctype html><meta http-equiv="Content-Security-Policy" content="${CSP}"><script>
+var w; try { w = new Worker(URL.createObjectURL(new Blob([${JSON.stringify(workerSrc)}], {type:'text/javascript'}))); } catch (e) { parent.postMessage({ ok:false, err:'worker: '+e }, '*'); }
+if (w) { w.onmessage = function (e) { parent.postMessage(e.data, '*'); }; w.onerror = function (e) { parent.postMessage({ ok:false, err:'worker error: '+(e.message||'') }, '*'); }; w.postMessage('go'); }
+<\/script>`;
+const f = document.createElement('iframe'); f.setAttribute('sandbox', 'allow-scripts'); f.srcdoc = runner;
+addEventListener('message', e => { if (e.source === f.contentWindow) window.RESULT = e.data; });
+document.body.append(f);
+</script>

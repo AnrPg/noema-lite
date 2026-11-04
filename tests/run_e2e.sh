@@ -9,7 +9,11 @@ mkdir -p "$T/accounts/anr/packs"; cp -r "$T/tests/fixtures/demo-physics" "$T/acc
 sed -i.bak 's/"id": "demo-physics"/"id": "secret-notes"/; s/"title": "Demo Physics"/"title": "Secret Notes"/' "$T/accounts/anr/packs/secret-notes/subject.json" && rm -f "$T/accounts/anr/packs/secret-notes/subject.json.bak"
 # the older suites test the classic screens (shell: false: the subject picker at start, no first-time questions); tests/shell.js sets noema-test:newUI for the new frame
 echo "if (typeof localStorage !== 'undefined' && localStorage.getItem('noema-test:newUI') !== '1') Object.assign(window.NOEMA_CONFIG, { askSubjectOnStart: true, onboarding: false, shell: false });" >> "$T/config.js"
+# interactive activities: a pack with the reference activity, built and unpacked with the skill (tests/activities_app.js imports it)
+(cd "$T" && NOEMA_REBUILD_SKILL=1 NOEMA_ACT_PACK="$T/act-pack.json" python3 tests/activities_pack.py)
 (cd "$T" && python3 tools/build.py site bundle >/dev/null)
+node "$ROOT/tests/activities.js"        # the loop guard, the protocol checks, JS = Python rules, never allow-same-origin
+node "$ROOT/tests/activities_app.js" "$T" "$T/act-pack.json"   # activities in the app: sandbox, handshake, state, grading, fallbacks, endless loop (BROWSERS=chromium,firefox,webkit)
 node "$ROOT/tests/shell.js" "$T"
 node "$ROOT/tests/subject_switch.js" "$T"   # opening another subject reopens that one, even over a slow network
 node "$ROOT/tests/search_catalog.js"   # the search catalogue (docs/SEARCH.md)

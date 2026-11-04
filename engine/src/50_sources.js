@@ -130,6 +130,7 @@ function applySourceFilter() {
       flashcards: c0.flashcards.filter(f => vis(srcOfItem(f, c0)) && (!f.section || ids.has(f.section))), pitfalls: c0.pitfalls.filter(p => vis(srcOfItem(p, c0))) };
     c._newWhole = isNewSrc(c0.src);
     c._new = c._newWhole || secs.some(s => s._new);
+    ACT.keepRunnable(c);
     c._i = COURSE.length; COURSE.push(c); CH[c.id] = c;
     c.sections.forEach((s, j) => { s._ch = c; s._j = j; SEC[s.id] = s; });
     c.exercises.forEach(e => { e._ch = c; EX[e.id] = e; ALL_EX.push(e); });

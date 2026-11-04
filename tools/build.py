@@ -16,6 +16,7 @@ for _s in (sys.stdout, sys.stderr):   # UTF-8 output on Windows / macOS / Linux 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from noema_lib import ROOT, LIB, ACC, rj, wj, wt, now_iso, subject_dirs, load_subject, load_media, content_hash, load_translations, pack_i18n, translation_file
 from bridge import build_library as build_bridges
+import activities as ACTS   # interactive activities (docs/INTERACTIVE.md)
 
 ENGINE = os.path.join(ROOT, 'engine')
 args = sys.argv[1:]
@@ -67,14 +68,15 @@ def build_packs():
     for sdir, owner in subject_dirs():
         meta, sources, chapters, report = load_subject(sdir)
         media, mrep = load_media(sdir)
+        acts, arep = ACTS.load_activities(sdir); mrep += arep
         for m in mrep:
             if m.startswith('WARN'): print('  ' + m)
         per_pic = int((meta.get('authoring') or {}).get('minExercisesPerPicture', 0))
         if per_pic:   # docs/VISUAL.md §5: every picture carries several exercises
             from collections import Counter
             used = Counter(e.get('media') for c in chapters for e in c['exercises'] if e['type'].startswith('img_'))
-            for m in media:
-                if used[m] < per_pic: mrep.append(f'ERROR media {m}: used by {used[m]} exercise(s); every picture needs >= {per_pic} (authoring.minExercisesPerPicture)')
+            for m in media:   # (an activity's still picture, its fallback, needs no exercises)
+                if used[m] < per_pic and m not in ACTS.fallback_media(acts): mrep.append(f'ERROR media {m}: used by {used[m]} exercise(s); every picture needs >= {per_pic} (authoring.minExercisesPerPicture)')
         errs = [r for r in report + mrep if r.startswith('ERROR')]
         if errs: print('\n'.join(errs)); failed.append(meta['id']); continue
         translations = load_translations(sdir, chapters)   # translations/<locale>/chNN.json (CONTENT_SPEC.md "Packs in several languages")
@@ -94,8 +96,12 @@ def build_packs():
                   'playbooks': sum(len(c['debug']) for c in chapters), 'flashcards': sum(len(c['flashcards']) for c in chapters)}
         counts['visual'] = sum(1 for c in chapters for e in c['exercises'] if e['type'].startswith('img_')); counts['media'] = len(media)
         pack = {'format': 'noema-pack', 'v': 1, 'subject': meta, 'sources': sources, 'chapters': chapters, 'media': media, 'counts': counts, 'builtAt': now_iso()}
+        if acts and acts['items']: pack['activities'] = {'format': ACTS.FORMAT, 'items': acts['items']}; pack['requires'] = ACTS.requires(acts); counts['activities'] = len(acts['items'])
+        ae, aw = ACTS.check_activities(pack, list(translations))
+        for w in aw: print(f'  WARN {meta["id"]}: activities: {w}')
+        if ae: print('\n'.join(f'ERROR {meta["id"]}: activities: {x}' for x in ae)); failed.append(meta['id']); continue
         tr = pack_i18n(pack, translations, external=True)   # each translation in its own file: tr.<locale>.js / .json (docs/i18n.md §10)
-        pack['version'] = content_hash({'s': meta, 'src': sources, 'c': chapters, 'm': {k: v.get('sha') or v.get('url') for k, v in media.items()}, 'mm': {k: {x: y for x, y in v.items() if x != 'data'} for k, v in media.items()}, **({'t': tr} if tr else {})})
+        pack['version'] = content_hash({'s': meta, 'src': sources, 'c': chapters, 'm': {k: v.get('sha') or v.get('url') for k, v in media.items()}, 'mm': {k: {x: y for x, y in v.items() if x != 'data'} for k, v in media.items()}, **({'t': tr} if tr else {}), **({'a': ACTS.hash_part(acts)} if acts and acts['items'] else {})})
         try:   # unchanged content → keep the previous build time so git sees no change
             prev = rj(os.path.join(sdir, 'pack.json'))
             if prev.get('version') == pack['version']: pack['builtAt'] = prev.get('builtAt', pack['builtAt'])
@@ -275,7 +281,7 @@ def build_site(metas):
     wt(os.path.join(out, '_headers'), '/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n/engine/*\n  Cache-Control: public, max-age=300\n/engine/vendor/pdfjs/*.mjs\n  Content-Type: text/javascript; charset=utf-8\n/engine/vendor/pdfjs/wasm/*.wasm\n  Content-Type: application/wasm\n/library/*\n  Cache-Control: public, max-age=300\n  Access-Control-Allow-Origin: *\n/build.json\n  Cache-Control: no-store\n/fonts/*\n  Cache-Control: public, max-age=604800\n')
     print('site →', os.path.relpath(out, ROOT))
 
-SKILL_TOOLS = ['noema_lib.py', 'bridge.py', 'validate.py', 'pack_rules.json', 'pack_quality.py', 'pipeline.py', 'svgkit.py', 'extract_images.py', 'fetch_image.py', 'find_images.py']
+SKILL_TOOLS = ['noema_lib.py', 'activities.py', 'bridge.py', 'validate.py', 'pack_rules.json', 'pack_quality.py', 'pipeline.py', 'svgkit.py', 'extract_images.py', 'fetch_image.py', 'find_images.py']
 LANG_SKILL_TOOLS = ['validate_lang.py', 'lang_refcheck.py', 'langlib.py', 'lang_course.py', 'lang_script.py', 'lang_phenomena.py', 'lang_readback.js', 'lang_facade.py']
 def lang_builder_files():
     """The skill noema-language-builder (docs/LANGUAGES.md §10.2): (source, path inside the skill folder). The playbook, the brief
@@ -313,6 +319,12 @@ def build_skill(out_zip):
             if os.path.isfile(f) and '__pycache__' not in f: z.write(f, os.path.join('noema-pack-builder', os.path.relpath(f, src)))
         for t in SKILL_TOOLS: z.write(os.path.join(ROOT, 'tools', t), f'noema-pack-builder/scripts/{t}')
         for f in sorted(glob.glob(os.path.join(ROOT, 'tools', 'pipelines', '*.json'))): z.write(f, f'noema-pack-builder/scripts/pipelines/{os.path.basename(f)}')   # docs/PIPELINES.md
+        # interactive activities (docs/INTERACTIVE.md): the reference activity, the app's runtime for the harness, the contract
+        for f in sorted(glob.glob(os.path.join(ROOT, 'tools', 'activities_examples', '**', '*'), recursive=True)):
+            if os.path.isfile(f): z.write(f, 'noema-pack-builder/scripts/activities_examples/' + os.path.relpath(f, os.path.join(ROOT, 'tools', 'activities_examples')).replace(os.sep, '/'))
+        for f in ('32_activities.js', '33_activity_guard.js', '34_activity_html.js'): z.write(os.path.join(ENGINE, 'src', f), f'noema-pack-builder/scripts/activity_host/{f}')
+        for f in ('INTERACTIVE.md', 'INTERACTIVE_AUTHORING.md'):
+            if os.path.exists(os.path.join(ROOT, 'docs', f)): z.write(os.path.join(ROOT, 'docs', f), f'noema-pack-builder/references/{f}')
         if os.path.exists(os.path.join(ROOT, 'docs', 'PIPELINES.md')): z.write(os.path.join(ROOT, 'docs', 'PIPELINES.md'), 'noema-pack-builder/references/PIPELINES.md')
         z.write(os.path.join(ROOT, 'tools', 'CONTENT_SPEC.md'), 'noema-pack-builder/references/CONTENT_SPEC.md')
         z.write(os.path.join(ROOT, 'docs', 'VISUAL.md'), 'noema-pack-builder/references/VISUAL.md')
@@ -358,6 +370,7 @@ def build_mcp_function(metas, out_dir):
     cfg['languages'] = [{k: m.get(k) for k in ('id', 'title', 'languages', 'path', 'profiles')} for m in LANG_METAS]   # language courses (D13 peers, refills)
     rd = lambda p: open(os.path.join(ROOT, p), encoding='utf-8').read()
     docs = {'workflow': rd('skill/noema-pack-builder/SKILL.md'), 'content': rd('tools/CONTENT_SPEC.md'), 'visual': rd('docs/VISUAL.md')}
+    if os.path.exists(os.path.join(ROOT, 'docs', 'INTERACTIVE.md')): docs['interactive'] = rd('docs/INTERACTIVE.md') + ('\n\n---\n\n' + rd('docs/INTERACTIVE_AUTHORING.md') if os.path.exists(os.path.join(ROOT, 'docs', 'INTERACTIVE_AUTHORING.md')) else '')   # interactive activities: the contract + the playbook
     if os.path.exists(os.path.join(ROOT, 'docs', 'BRIDGE.md')): docs['bridge'] = rd('docs/BRIDGE.md')   # 文A language bridges (noema_bridge_guide)
     # the content flows (noema_pipeline, docs/PIPELINES.md): the doc, the step library and every flow
     if os.path.exists(os.path.join(ROOT, 'docs', 'PIPELINES.md')): docs['pipelines'] = rd('docs/PIPELINES.md')

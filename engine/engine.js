@@ -357,6 +357,7 @@ function blockText(b) {
     case 'ask': return (b.title || 'Ask yourself') + ':\n' + b.questions.map((q, i) => `${i + 1}. ${q}`).join('\n');
     case 'terms': return b.items.map(i => `${i.term}: ${i.def}`).join('\n');
     case 'figure': return figureAsText(b);
+    case 'interactive': return interactiveAsText(b);
   }
   return '';
 }
@@ -953,6 +954,8 @@ R.mcq = (ex, api) => {
     reveal() { btns.forEach(b => { const oi = b._oi; if (ans.has(oi)) b.classList.add('right'); else if (sel.has(oi)) b.classList.add('wrong'); if (ex.why?.[oi]) b.children[1].append(h('span', { class: 'why', 'data-nf': 'why.' + oi, html: fmt(ex.why[oi]) })); }); },
   };
 };
+/** An exercise of a type this app does not know (a newer pack): a quiet card, never a crash (docs/adr/001 D1). */
+R.newer = (ex, api) => ({ el: h('div', { class: 'fb' }, '🔄 ' + tE('engine.act.newerType')), selfDone: true });
 R.odd = (ex, api) => { const r = R.mcq(ex, api); r.el.querySelector('.opts').classList.add('grid4'); return r; };
 
 R.tf = (ex, api) => {
@@ -1226,7 +1229,7 @@ function exerciseCard(ex, { onDone, compact = false, noXP = false, showSection =
   const q = h('div', { class: 'q', 'data-nf': 'q', html: fmt(ex.q || '') });
   card.append(head, q);
   if (ex.code) card.append(h('div', { 'data-nf': 'code', style: { margin: '0 0 12px' } }, codeBlock(ex.code, ex.lang || guessLang(ex.code))));
-  const w = (R[ex.type] || R.mcq)(ex, api);
+  const w = (R[ex.type] || R.newer)(ex, api);
   card.append(w.el);
   const actions = h('div', { class: 'actions' });
   const checkBtn = h('button', { class: 'btn primary', onclick: () => doCheck() }, tE('engine.ex.check'));
@@ -1382,7 +1385,7 @@ R.flaw = (ex, api) => {
 R.case = (ex, api) => {
   const quiet = { locked: api.locked, check: () => { }, done: () => { } };   // the parts answer into the card's one Check
   const parts = ex.parts.map((p, i) => {
-    const w = (R[p.type] || R.mcq)({ ...p, id: ex.id + '/' + i }, quiet);
+    const w = (R[p.type] || R.newer)({ ...p, id: ex.id + '/' + i }, quiet);
     const box = h('div', { class: 'casepart' }, h('div', { class: 'sp' }, h('span', { class: 'pill c' }, tE('engine.ex.casePart', { n: i + 1, of: ex.parts.length })), ' ', h('span', { html: fmt(p.q) })), w.el);
     return { p, w, box };
   });
@@ -1493,6 +1496,575 @@ function typeAsText(ex) {
   return '';
 }
 /* i18n-ignore-end */
+
+/* ---- 32_activities.js ---- */
+/* ===================== interactive activities — the host core (docs/INTERACTIVE.md, docs/adr/001-interactive-activities.md) =====================
+   A pack may carry activities (pack.activities, format noema.activities/v1): mini-apps, minigames and simulations. They appear as a
+   theory block { t: 'interactive', activity } (an explorer, not graded) or as an exercise { type: 'sim', activity, task, grade, hints }.
+   This file is the trusted core (ports & adapters): it knows only the RuntimeAdapter port, never a runtime by name.
+     registerRuntime({ id, version, mount(slot, ctx) → port })      a runtime (html-app@1 in 34_activity_html.js; more in P2–P4)
+     registerGrader({ id, grade(session, ex) → { ok, score } | null })
+   The anti-corruption layer is ACTP (below): the only code that reads what an activity sends. Everything an activity says is
+   untrusted: checked by shape and size, rate-limited, never run, never put in the page as HTML. */
+
+const ACTP = (() => {
+  /* i18n-ignore-start */   // protocol names and limits, not text
+  const P = 'noema.activity', V = 1;
+  const LIM = { msg: 64 * 1024, state: 256 * 1024, eventData: 4096, eventsPerSec: 50, eventsPerAttempt: 2000, strikes: 5, text: 300, detail: 500 };
+  const isObj = v => v != null && typeof v === 'object' && !Array.isArray(v);
+  const isInt = v => Number.isInteger(v);
+  const str = (v, max) => typeof v === 'string' && v.length <= max;
+  const NAME = /^[a-z][a-z0-9_.:-]{0,63}$/, CODE = /^[a-z0-9_.-]{1,40}$/;
+  const size = v => { try { return JSON.stringify(v).length; } catch (e) { return Infinity; } };
+  /** the payload rules per message type an activity may send (docs/INTERACTIVE.md §8) */
+  const IN = {
+    ready: p => (p.protocols == null || (Array.isArray(p.protocols) && p.protocols.length <= 8 && p.protocols.every(isInt))) && (p.wants == null || (Array.isArray(p.wants) && p.wants.length <= 16 && p.wants.every(w => str(w, 40)))),
+    resize: p => typeof p.h === 'number' && isFinite(p.h) && p.h >= 0 && p.h <= 20000,
+    state: p => isInt(p.version) && p.version >= 1 && p.version <= 1e6 && 'data' in p && size(p.data) <= LIM.state,
+    event: p => NAME.test(p.name || '') && (p.data === undefined || size(p.data) <= LIM.eventData),
+    result: p => typeof p.score === 'number' && p.score >= 0 && p.score <= 1 && typeof p.passed === 'boolean' && (p.detail == null || str(p.detail, LIM.detail)),
+    'hint:request': p => true,
+    'a11y:announce': p => str(p.text, LIM.text) && p.text.trim().length > 0,
+    error: p => CODE.test(p.code || '') && (p.message == null || str(p.message, LIM.detail)),
+    pong: p => true, ack: p => true, nack: p => true,
+  };
+  /** → { ok: true, msg } | { ok: false, why, ignore? } — ignore: an unknown type (counted, not a strike) */
+  function check(data) {
+    if (!isObj(data)) return { ok: false, why: 'not an object' };
+    if (data.p !== P) return { ok: false, why: 'not this protocol' };
+    if (data.v !== V) return { ok: false, why: 'protocol version ' + data.v, version: true };
+    if (size(data) > LIM.msg + (data.type === 'state' ? LIM.state : 0)) return { ok: false, why: 'message too big' };
+    if (!str(data.type, 40)) return { ok: false, why: 'no type' };
+    if (data.id != null && !str(data.id, 64)) return { ok: false, why: 'bad id' };
+    if (data.re != null && !str(data.re, 64)) return { ok: false, why: 'bad re' };
+    const payload = data.payload == null ? {} : data.payload;
+    if (!isObj(payload)) return { ok: false, why: 'payload is not an object' };
+    const rule = Object.prototype.hasOwnProperty.call(IN, data.type) ? IN[data.type] : null;
+    if (!rule) return { ok: false, why: 'unknown type ' + data.type, ignore: true };
+    if (!rule(payload)) return { ok: false, why: 'bad ' + data.type };
+    return { ok: true, msg: { type: data.type, id: data.id, re: data.re, payload } };
+  }
+  const out = (type, payload, extra) => ({ p: P, v: V, type, payload: payload || {}, ...(extra || {}) });
+  /* i18n-ignore-end */
+  return { P, V, LIM, check, out, size };
+})();
+
+const ACT = (() => {
+  /* i18n-ignore-start */
+  const reg = Noema.pack?.activities;
+  const ITEMS = {}; for (const a of (reg && Array.isArray(reg.items) ? reg.items : [])) if (a && typeof a.id === 'string') ITEMS[a.id] = a;
+  const RUNTIMES = {}, GRADERS = {};
+  const flags = () => Object.assign({ 'html-app@1': true }, window.NOEMA_CONFIG?.activities || {});
+  /** the capabilities of this app (pack.requires): the core + every runtime that is registered and switched on */
+  const caps = () => new Set(['activities/v1', ...Object.keys(RUNTIMES).filter(id => flags()[id] !== false).map(id => 'runtime:' + id)]);
+  const canRun = a => !!(a && RUNTIMES[a.runtime] && flags()[a.runtime] !== false);
+  const LIVE = [];   // the activities running now (at most liveMax())
+  const liveMax = () => innerWidth < 720 ? 1 : 2;
+  const rnd32 = () => (crypto.getRandomValues(new Uint32Array(1))[0]) >>> 0;
+  const uid = () => Array.from(crypto.getRandomValues(new Uint8Array(12)), b => b.toString(16).padStart(2, '0')).join('');
+  /* i18n-ignore-end */
+
+  /** The strings of an activity in the language the pack is shown in (then the pack's own, then English, then any). */
+  function strings(a) {
+    const all = a?.strings && typeof a.strings === 'object' ? a.strings : {};
+    for (const l of [SUBJ.language, SUBJ.sourceLanguage, 'en', Object.keys(all)[0]]) if (l && all[l]) return { locale: l, table: all[l] };
+    return { locale: SUBJ.language || 'en', table: {} };
+  }
+  /** The app's design tokens, sent in init / theme (CSS custom properties of the page right now). */
+  function theme() {
+    const cs = getComputedStyle(document.documentElement), tk = {};
+    for (const k of ['bg', 'bg2', 'card', 'ink', 'ink2', 'ink3', 'line', 'ok', 'ok-bg', 'bad', 'bad-bg', 'warn', 'warn-bg', 'info', 'info-bg', 'c', 'c-bg', 'font', 'mono', 'r', 'r-sm']) { const v = cs.getPropertyValue('--' + k).trim(); if (v && v.length < 200) tk[k] = v; }
+    const bg = cs.backgroundColor || '', m = bg.match(/\d+(\.\d+)?/g), lum = m ? (0.2126 * m[0] + 0.7152 * m[1] + 0.0722 * m[2]) / 255 : 1;
+    return { tokens: tk, scheme: lum < 0.5 ? 'dark' : 'light', reducedMotion: matchMedia('(prefers-reduced-motion: reduce)').matches, textScale: parseFloat(cs.fontSize) / 16 || 1, dir: document.documentElement.dir || 'ltr' };
+  }
+  function registerRuntime(def) { if (def && def.id && typeof def.mount === 'function') RUNTIMES[def.id] = def; }
+  function registerGrader(def) { if (def && def.id && typeof def.grade === 'function') GRADERS[def.id] = def; }
+
+  /* ---------- persistence: S.act (explorer state per activity and place) and S.att (the last attempt of each sim exercise) ---------- */
+  const STATE_MAX = ACTP.LIM.state, KEEP_EVENTS = 200;
+  function loadState(key) { const s = S.act?.[key]; return s && typeof s === 'object' ? s : null; }
+  function saveState(key, version, data) { S.act = S.act || {}; S.act[key] = { v: version, data, t: Date.now() }; save(); }
+  function saveAttempt(sess) {
+    if (!sess.ex) return;
+    S.att = S.att || {};
+    S.att[sess.ex.id] = { id: sess.attemptId, seed: sess.seed, t: Date.now(), hints: sess.hintsUsed, result: sess.result, events: sess.events.slice(-KEEP_EVENTS) };
+    save();
+  }
+
+  /* ---------- graders (Strategy): reported — the activity reports its result; checks — host-side rules (P2, the expression language) ---------- */
+  registerGrader({ id: 'reported', grade: sess => sess.result ? { ok: !!sess.result.passed, score: sess.result.score } : null });
+
+  /** Mount an activity into `el`. ctx: { ex?, task?, place, height?, aspect?, caption?, start? (mount now, not when seen) }.
+      → the session (destroy, restart, grade) — always returns, even when the activity cannot run (it then shows its fallback). */
+  function mount(el, actId, ctx = {}) {
+    const a = ITEMS[actId];
+    const root = h('div', { class: 'act' + (ctx.ex ? ' act-ex' : ''), 'data-activity': actId });
+    const skipTarget = h('span', { class: 'act-after', tabindex: '-1' });
+    const skip = h('a', { class: 'act-skip', href: '#', onclick: e => { e.preventDefault(); skipTarget.focus(); } }, tE('engine.act.skip'));
+    const box = h('div', { class: 'act-box' });
+    const bar = h('div', { class: 'act-bar' });
+    const note = h('div', { class: 'act-note', role: 'status', 'aria-live': 'polite' });
+    const live = h('div', { class: 'act-sr', 'aria-live': 'polite' });
+    root.append(skip, box, bar, note, live, skipTarget);
+    if (ctx.caption) root.append(h('div', { class: 'caption', html: fmt(ctx.caption) }));
+    el.append(root);
+    const sess = { act: a, ex: ctx.ex || null, root, attemptId: uid(), seed: null, events: [], result: null, hintsUsed: 0, state: null, port: null, strikes: 0, alive: false, misses: 0, evWin: [], destroyed: false, onResult: null };
+    sess.key = ctx.ex ? null : 'blk:' + (ctx.place || '') + ':' + actId;
+    const seedOf = () => { const s = ctx.task?.seed; return Number.isInteger(s) ? s >>> 0 : rnd32(); };
+
+    const fallback = (why) => {
+      box.innerHTML = ''; box.classList.add('act-fallback'); box.style.height = '';
+      const f = a?.fallback || {};
+      if (f.media && typeof MEDIA !== 'undefined' && MEDIA[f.media]) box.append(figureBlock({ t: 'figure', media: f.media, explore: false }));
+      if (f.text) box.append(h('p', { class: 'act-fbtext', html: fmt(f.text) }));
+      if (why) note.textContent = why;
+    };
+    const setBar = (...btns) => { bar.innerHTML = ''; bar.append(...btns.filter(Boolean)); };
+    const btn = (label, onclick, cls = 'btn small') => h('button', { class: cls, type: 'button', onclick }, label);
+
+    if (!a) { fallback(tE('engine.act.missing')); return Object.assign(sess, { destroy() { }, grade: () => null }); }
+    if (!canRun(a)) { fallback(tE('engine.act.notHere')); return Object.assign(sess, { destroy() { }, grade: () => null }); }
+
+    let timer = null, pingT = null, io = null, saveT = null;
+    function stop(reason, offerRestart = true) {
+      teardown();
+      fallback(reason);
+      if (offerRestart) setBar(btn('↻ ' + tE('engine.act.restart'), () => start()));
+    }
+    function teardown() {
+      sess.alive = false; clearInterval(pingT); clearTimeout(timer); clearTimeout(saveT);
+      try { sess.port?.send('destroy'); } catch (e) { }
+      try { sess.port?.close(); } catch (e) { }
+      sess.port = null;
+      const i = LIVE.indexOf(sess); if (i >= 0) LIVE.splice(i, 1);
+      box.innerHTML = ''; box.classList.remove('act-running');
+    }
+    function strike(why) {
+      sess.strikes++; console.warn('[noema] activity', actId, why);
+      if (sess.strikes >= ACTP.LIM.strikes) stop(tE('engine.act.misbehaved'));
+    }
+    function makeRoom() {
+      while (LIVE.length >= liveMax()) { const old = LIVE.find(s => s !== sess && !s.ex) || LIVE.find(s => s !== sess); if (!old) break; old.park(); }
+    }
+    /** a message from the activity, already checked by ACTP */
+    function onMessage(m) {
+      const p = m.payload;
+      switch (m.type) {
+        case 'ready': sess.alive = true; note.textContent = ''; return;
+        case 'pong': sess.misses = 0; return;
+        case 'resize': { if (ctx.height && ctx.height !== 'auto') return; const hpx = Math.max(160, Math.min(Math.round(p.h), Math.round(innerHeight * 1.5), 2000)); box.style.height = hpx + 'px'; return; }
+        case 'state': {
+          if (!sess.key) { sess.state = { version: p.version, data: p.data }; return; }
+          sess.state = { version: p.version, data: p.data };
+          clearTimeout(saveT); saveT = setTimeout(() => saveState(sess.key, p.version, p.data), 400); return;
+        }
+        case 'event': {
+          const now = Date.now(); sess.evWin = sess.evWin.filter(t => now - t < 1000); sess.evWin.push(now);
+          if (sess.evWin.length > ACTP.LIM.eventsPerSec) return strike('too many events');
+          if (sess.events.length >= ACTP.LIM.eventsPerAttempt) return;
+          sess.events.push({ t: now, name: p.name, data: p.data }); return;
+        }
+        case 'result': sess.result = { score: p.score, passed: p.passed, detail: p.detail || null, t: Date.now() }; sess.onResult?.(sess.result); return;
+        case 'hint:request': { const r = sess.nextHint?.(); sess.port?.send('hint', { text: r || null }, { re: m.id }); return; }
+        case 'a11y:announce': live.textContent = ''; setTimeout(() => { live.textContent = p.text; }, 30); return;
+        case 'error':
+          if (p.code === 'runaway') return stop(tE('engine.act.stopped'));
+          note.textContent = tE('engine.act.error', { code: p.code }); console.warn('[noema] activity error', actId, p.code, p.message || ''); return;
+      }
+    }
+    function start() {
+      if (sess.destroyed) return;
+      teardown(); makeRoom();
+      box.classList.remove('act-fallback'); box.classList.add('act-running'); note.textContent = tE('engine.act.loading');
+      setBar(btn('↻ ' + tE('engine.act.restart'), () => { sess.attemptId = uid(); sess.events = []; sess.result = null; start(); }, 'btn ghost small'),
+        document.fullscreenEnabled ? btn('⛶ ' + tE('engine.act.fullscreen'), () => { if (document.fullscreenElement) document.exitFullscreen(); else root.requestFullscreen?.().catch(() => { }); }, 'btn ghost small') : null);
+      if (ctx.height && ctx.height !== 'auto') box.style.height = Math.max(120, Math.min(+ctx.height || 360, 2000)) + 'px';
+      else if (ctx.aspect && /^\d+:\d+$/.test(ctx.aspect)) { const [w, hh] = ctx.aspect.split(':').map(Number); box.style.aspectRatio = w + ' / ' + hh; }
+      else box.style.height = (a.height && +a.height) ? Math.min(+a.height, 2000) + 'px' : '360px';
+      if (sess.seed == null || !ctx.ex) sess.seed = seedOf();
+      const st = strings(a), saved = sess.key ? loadState(sess.key) : null;
+      let state = null, notice = null;
+      if (saved) {
+        const want = a.stateVersion || 1;
+        if (saved.v === want) state = { version: saved.v, data: saved.data };
+        else if (saved.v < want) state = { version: saved.v, data: saved.data, migrateFrom: saved.v };
+        else notice = tE('engine.act.newerState');   // kept untouched for the newer app; this one starts clean
+      }
+      const init = { activityId: a.id, exerciseId: sess.ex?.id || null, attemptId: sess.attemptId, seed: sess.seed, task: ctx.task?.params || {},
+        locale: st.locale, strings: st.table, theme: theme(), state, stateVersion: a.stateVersion || 1, capabilities: (a.capabilities || []).filter(c => ['state', 'events', 'resize', 'result', 'hints', 'announce'].includes(c)),
+        limits: { msgBytes: ACTP.LIM.msg, stateBytes: ACTP.LIM.state, eventsPerSec: ACTP.LIM.eventsPerSec } };
+      sess.misses = 0;
+      try {
+        sess.port = RUNTIMES[a.runtime].mount(box, { act: a, init, title: tE('engine.act.frameTitle', { id: a.id }),
+          onMessage: raw => { const r = ACTP.check(raw); if (r.ok) onMessage(r.msg); else if (r.version) stop(tE('engine.act.newerProtocol'), false); else if (!r.ignore) strike(r.why); },
+          onFail: why => stop(why === 'navigated' ? tE('engine.act.misbehaved') : tE('engine.act.failed')) });
+      } catch (e) { console.warn('[noema] activity mount failed', e); return stop(tE('engine.act.failed')); }
+      if (notice) note.textContent = notice;
+      LIVE.push(sess);
+      // watchdog: ping every 2 s; three missed answers → stopped, with Restart (the loop guard trips sooner, 34_activity_html.js)
+      pingT = setInterval(() => {
+        if (!root.isConnected) return destroy();
+        if (!sess.port) return;
+        if (sess.misses >= 3) return stop(tE('engine.act.stopped'));
+        sess.misses++; sess.port.send('ping');
+      }, 2000);
+      // a frame that never says hello: its start timed out
+      timer = setTimeout(() => { if (!sess.alive) stop(tE('engine.act.failed')); }, 15000);
+    }
+    sess.park = () => { if (!sess.port) return; teardown(); fallback(''); setBar(btn('▶ ' + tE('engine.act.start'), () => start(), 'btn primary small')); };
+    function destroy() { if (sess.destroyed) return; if (sess.ex && (sess.events.length || sess.result)) saveAttempt(sess); teardown(); sess.destroyed = true; io?.disconnect(); }
+    sess.destroy = destroy; sess.restart = () => start();
+    sess.grade = () => { const g = GRADERS[sess.ex?.grade?.mode || 'reported']; return g ? g.grade(sess, sess.ex) : null; };
+    sess.saveAttempt = () => saveAttempt(sess);
+    sess.send = (type, payload) => sess.port?.send(type, payload);
+    // lazy: an explorer starts when it comes into view (and only while there is room); offscreen it is paused
+    if (ctx.start || !('IntersectionObserver' in window)) start();
+    else {
+      fallback(''); setBar(btn('▶ ' + tE('engine.act.start'), () => start(), 'btn primary small'));
+      io = new IntersectionObserver(es => {
+        for (const e of es) {
+          if (e.isIntersecting && !sess.port && !sess.parked && LIVE.length < liveMax()) start();
+          else if (sess.port && sess.alive) sess.port.send(e.isIntersecting ? 'resume' : 'pause');
+        }
+      }, { threshold: 0.15 });
+      io.observe(root);
+    }
+    return sess;
+  }
+  /** Leaving a page: every activity whose element left the page is destroyed. */
+  function sweep() { for (const s of [...LIVE]) if (!s.root.isConnected) s.destroy(); }
+  addEventListener('hashchange', () => setTimeout(sweep, 0));
+  matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', () => setTimeout(() => LIVE.forEach(s => s.send('theme', theme())), 50));
+
+  /* ---------- content the app cannot show: never a crash (docs/adr/001 D1) ---------- */
+  const knownType = t => !!(window.NoemaPackCheck?.TYPES?.has(t));
+  /** A chapter's exercises without the ones this app cannot run (an unknown type from a newer app, a sim whose runtime is off here):
+      they stay in the pack and come back once the app can show them. */
+  function keepRunnable(c) {
+    const keep = [], hidden = [];
+    for (const e of c.exercises || []) ((knownType(e.type) && (e.type !== 'sim' || canRun(ITEMS[e.activity]))) ? keep : hidden).push(e);
+    if (hidden.length) { c.exercises = keep; c._hidden = (c._hidden || 0) + hidden.length; }
+    return hidden;
+  }
+  return { ITEMS, mount, sweep, registerRuntime, registerGrader, caps, canRun, keepRunnable, strings, theme, LIVE };
+})();
+
+/* the exercises already indexed (10_core.js) that this app cannot run leave the indexes; the pack is unchanged */
+function dropUnrunnable() {
+  for (const c of COURSE) for (const e of ACT.keepRunnable(c)) { delete EX[e.id]; const i = ALL_EX.indexOf(e); if (i >= 0) ALL_EX.splice(i, 1); }
+}
+
+/** A pack that needs what this app lacks (pack.requires): a newer build of the website may have it — the open tab reloads when it
+    comes back to the front (engine/curjobs.js App.stale); meanwhile every activity shows its fallback. */
+function checkRequires() {
+  const req = Array.isArray(Noema.pack?.requires) ? Noema.pack.requires.filter(x => typeof x === 'string') : [];
+  const have = ACT.caps(), lack = req.filter(x => !have.has(x) && !x.startsWith('engine:'));
+  if (lack.length) { console.warn('[noema] this pack needs', lack.join(', ')); window.NoemaCurJobs?.App?.stale?.(); }
+  return lack;
+}
+
+/* ---------- the theory block and the exercise type ---------- */
+/** { t: 'interactive', activity, caption?, height?, aspect? } — an explorer in the theory (not graded). */
+function interactiveBlock(b) {
+  const wrap = h('div', { class: 'act-blk' });
+  const sid = (typeof b._sec === 'string' && b._sec) || '';
+  ACT.mount(wrap, b.activity, { place: sid, height: b.height, aspect: b.aspect, caption: b.caption });
+  return wrap;
+}
+/** The text of an interactive block for the AI and for search: its fallback text (what it shows and teaches). */
+function interactiveAsText(b) { const a = ACT.ITEMS[b.activity]; return `[Interactive activity ${b.activity}] ${a?.fallback?.text || ''}${b.caption ? '\nCaption: ' + b.caption : ''}`; }   // i18n-ignore (AI context)
+
+/** exercise type sim: the activity + a hint ladder; Check grades with the exercise's grader (reported: the activity's own result). */
+R.sim = (ex, api) => {
+  const holder = h('div', { class: 'act-exwrap' });
+  const sess = ACT.mount(holder, ex.activity, { ex, task: ex.task, start: true });
+  const hints = Array.isArray(ex.hints) ? ex.hints.filter(x => typeof x === 'string') : [];
+  let used = 0;
+  const hintBox = h('div', { class: 'act-hints' });
+  const hintBtn = hints.length ? h('button', { class: 'btn ghost small', type: 'button', onclick: () => showHint() }) : null;
+  const label = () => { if (hintBtn) { hintBtn.textContent = '💡 ' + tE('engine.act.hint', { left: hints.length - used }); hintBtn.disabled = used >= hints.length || api.locked(); } };
+  function showHint() { if (used >= hints.length || api.locked()) return null; const t = hints[used++]; sess.hintsUsed = used; hintBox.append(h('div', { class: 'fb', html: fmt(t) })); label(); return t; }
+  sess.nextHint = showHint;
+  label();
+  const el = h('div', {}, holder, hintBtn ? h('div', { class: 'row', style: { marginTop: '8px' } }, hintBtn) : null, hintBox);
+  return {
+    el,
+    check() { const g = sess.grade?.(); if (!g) return null; sess.saveAttempt?.(); return g.ok; },
+    reveal() { if (hintBtn) hintBtn.disabled = true; if (sess.result?.passed && ex.reveal) el.append(h('div', { class: 'explain' }, h('div', { html: fmt(ex.reveal) }))); },
+    bonus: () => -Math.round((4 + (ex.difficulty || 1) * 4) * (1 - Math.max(0.5, Math.pow(0.85, used)))),   // each hint used: score × 0.85, never below × 0.5 (docs/adr/001 D8)
+    given: () => sess.result ? `(the activity reported: ${sess.result.passed ? 'passed' : 'not passed'}, score ${sess.result.score}${sess.result.detail ? ', ' + sess.result.detail : ''})` : '',   // i18n-ignore (AI context)
+  };
+};
+
+/* ---- 33_activity_guard.js ---- */
+/* ===================== interactive activities — the loop guard (docs/INTERACTIVE.md §7, docs/adr/001 D3) =====================
+   A mini-app (runtime html-app@1) runs in a sandboxed frame. In Firefox and WebKit that frame shares the app's thread, so an
+   endless loop in it would freeze the whole app (spike c). Before a mini-app is mounted, every loop of its inline scripts gets a
+   time guard: `while (c)` → `while (G() && (c))`, `for (a; b; c)` → `for (a; G() && (b); c)`, `for (x of y)` → `for (x of G.it(y))`,
+   `do … while (c)` the same. G() throws (and keeps throwing) once one turn of the event loop has run for longer than the budget, and
+   the frame's bootstrap tells the host, which stops the activity and offers Restart. Only a tokenizer, no parser: strings, template
+   literals, comments and regular expressions are skipped; the result is the same program with a few calls added.
+   Also used by tests/activities.js (node) and the authoring lint (it reports what it would guard). */
+(function (root) {
+  /* i18n-ignore-start */   // code, not text
+  const KW_BEFORE_REGEX = new Set(['return', 'typeof', 'instanceof', 'in', 'of', 'new', 'delete', 'void', 'throw', 'case', 'do', 'else', 'yield', 'await']);
+  /** → tokens [{t: 'id'|'num'|'str'|'tpl'|'re'|'p'|'c', v, s, e}] (c = comment / whitespace are dropped, positions kept) */
+  function tokens(src) {
+    const out = []; let i = 0; const n = src.length;
+    const tplStack = [];   // brace depth at which a template's ${ … } ends
+    let depth = 0;
+    const prevSig = () => out[out.length - 1];
+    const regexAllowed = () => {
+      const p = prevSig(); if (!p) return true;
+      if (p.t === 'num' || p.t === 'str' || p.t === 'tpl' || p.t === 're') return false;
+      if (p.t === 'id') return KW_BEFORE_REGEX.has(p.v);
+      return !(p.v === ')' || p.v === ']' || p.v === '}');
+    };
+    const readTpl = (start) => {   // from just after ` or after a closing } of ${ … }; returns end index (after ` or after ${)
+      let j = start;
+      while (j < n) {
+        const ch = src[j];
+        if (ch === '\\') { j += 2; continue; }
+        if (ch === '`') return { end: j + 1, open: false };
+        if (ch === '$' && src[j + 1] === '{') return { end: j + 2, open: true };
+        j++;
+      }
+      return { end: n, open: false };
+    };
+    while (i < n) {
+      const ch = src[i];
+      if (ch === ' ' || ch === '\t' || ch === '\n' || ch === '\r' || ch === ' ' || ch === ' ' || ch === '﻿' || ch === ' ') { i++; continue; }
+      if (ch === '/' && src[i + 1] === '/') { const j = src.indexOf('\n', i); i = j < 0 ? n : j; continue; }
+      if (ch === '/' && src[i + 1] === '*') { const j = src.indexOf('*/', i + 2); i = j < 0 ? n : j + 2; continue; }
+      if (ch === '<' && src.startsWith('<!--', i)) { const j = src.indexOf('\n', i); i = j < 0 ? n : j; continue; }   // HTML-like comment in a script
+      if (ch === '"' || ch === "'") {
+        let j = i + 1; while (j < n && src[j] !== ch && src[j] !== '\n') j += src[j] === '\\' ? 2 : 1;
+        out.push({ t: 'str', s: i, e: Math.min(j + 1, n) }); i = Math.min(j + 1, n); continue;
+      }
+      if (ch === '`') {
+        const r = readTpl(i + 1); out.push({ t: 'tpl', s: i, e: r.end });
+        if (r.open) { tplStack.push(depth); depth++; }
+        i = r.end; continue;
+      }
+      if (ch === '}' && tplStack.length && tplStack[tplStack.length - 1] === depth - 1) {   // the end of a ${ … } inside a template
+        tplStack.pop(); depth--;
+        const r = readTpl(i + 1); out.push({ t: 'tpl', s: i, e: r.end });
+        if (r.open) { tplStack.push(depth); depth++; }
+        i = r.end; continue;
+      }
+      if (ch === '/' && regexAllowed()) {
+        let j = i + 1, cls = false;
+        while (j < n && src[j] !== '\n') { const c = src[j]; if (c === '\\') { j += 2; continue; } if (cls) { if (c === ']') cls = false; } else if (c === '[') cls = true; else if (c === '/') break; j++; }
+        j++; while (j < n && /[a-z]/i.test(src[j])) j++;
+        out.push({ t: 're', s: i, e: j }); i = j; continue;
+      }
+      if (/[A-Za-z_$\u0080-￿]/.test(ch)) { let j = i + 1; while (j < n && /[\w$\u0080-￿]/.test(src[j])) j++; out.push({ t: 'id', v: src.slice(i, j), s: i, e: j }); i = j; continue; }
+      if (/[0-9]/.test(ch) || (ch === '.' && /[0-9]/.test(src[i + 1] || ''))) { let j = i + 1; while (j < n && /[\w.]/.test(src[j])) j++; out.push({ t: 'num', s: i, e: j }); i = j; continue; }
+      if (ch === '{' || ch === '(' || ch === '[') depth++;
+      if (ch === '}' || ch === ')' || ch === ']') depth--;
+      if (ch === '.' && src[i + 1] === '.' && src[i + 2] === '.') { out.push({ t: 'p', v: '...', s: i, e: i + 3 }); i += 3; continue; }
+      if (ch === '?' && src[i + 1] === '.' && !/[0-9]/.test(src[i + 2] || '')) { out.push({ t: 'p', v: '?.', s: i, e: i + 2 }); i += 2; continue; }
+      out.push({ t: 'p', v: ch, s: i, e: i + 1 }); i++;
+    }
+    return out;
+  }
+  /** index of the token closing the bracket opened at tokens[k] (or -1) */
+  function closing(tk, k) {
+    let d = 0;
+    for (let j = k; j < tk.length; j++) {
+      const v = tk[j].t === 'p' ? tk[j].v : null;
+      if (v === '(' || v === '[' || v === '{') d++;
+      else if (v === ')' || v === ']' || v === '}') { d--; if (d === 0) return j; }
+    }
+    return -1;
+  }
+  /** transform(src, G) → { code, loops }: the same program with the guard G on every loop. */
+  function transform(src, G) {
+    const tk = tokens(src), ins = [];   // [position, text]
+    let loops = 0;
+    const isProp = k => k > 0 && tk[k - 1].t === 'p' && (tk[k - 1].v === '.' || tk[k - 1].v === '?.');
+    for (let k = 0; k < tk.length; k++) {
+      const t = tk[k]; if (t.t !== 'id' || isProp(k)) continue;
+      if (t.v === 'while') {
+        const o = k + 1; if (!tk[o] || tk[o].v !== '(') continue;
+        const c = closing(tk, o); if (c < 0) continue;
+        ins.push([tk[o].e, G + '()&&(']); ins.push([tk[c].s, ')']); loops++;
+      } else if (t.v === 'for') {
+        let o = k + 1; const isAwait = !!(tk[o] && tk[o].t === 'id' && tk[o].v === 'await'); if (isAwait) o++;
+        if (!tk[o] || tk[o].v !== '(') continue;
+        const c = closing(tk, o); if (c < 0) continue;
+        const semis = []; let ofAt = -1, d = 0;
+        for (let j = o + 1; j < c; j++) {
+          const v = tk[j].t === 'p' ? tk[j].v : null;
+          if (v === '(' || v === '[' || v === '{') d++; else if (v === ')' || v === ']' || v === '}') d--;
+          else if (d === 0 && v === ';') semis.push(j);
+          else if (d === 0 && tk[j].t === 'id' && tk[j].v === 'of' && ofAt < 0 && semis.length === 0) ofAt = j;
+        }
+        if (semis.length === 2) {
+          const a = semis[0], b = semis[1];
+          if (b === a + 1) ins.push([tk[a].e, G + '()']);
+          else { ins.push([tk[a].e, G + '()&&(']); ins.push([tk[b].s, ')']); }
+          loops++;
+        } else if (ofAt >= 0 && !isAwait) { ins.push([tk[ofAt].e, ' ' + G + '.it(']); ins.push([tk[c].s, ')']); loops++; }
+      }
+    }
+    ins.sort((x, y) => y[0] - x[0]);
+    let code = src; for (const [p, s] of ins) code = code.slice(0, p) + s + code.slice(p);
+    return { code, loops };
+  }
+  /** The guard itself, as the source of a script for the frame (installed non-writable on window under the random name G). */
+  function runtime(G, budgetMs, onTrip) {
+    return `(function(){var t0=0,c=0,tripped=false,B=${Number(budgetMs) || 1500},ch=new MessageChannel();ch.port1.onmessage=function(){t0=0;c=0;};
+function trip(){tripped=true;try{(${onTrip})();}catch(e){}throw new Error('noema: this activity ran too long without a pause and was stopped');}
+function g(){if(tripped)trip();if((++c&255)===0){var n=performance.now();if(!t0){t0=n;ch.port2.postMessage(0);}else if(n-t0>B)trip();}return true;}
+g.it=function(x){if(x==null)return x;var it=x[Symbol.iterator]?x[Symbol.iterator]():x;var o={};o[Symbol.iterator]=function(){return{next:function(){g();return it.next();},return:function(v){return it.return?it.return(v):{done:true,value:v};}};};return o;};
+Object.freeze(g.it);Object.freeze(g);Object.defineProperty(window,${JSON.stringify(G)},{value:g,writable:false,configurable:false,enumerable:false});})();`;
+  }
+  root.NoemaLoopGuard = Object.freeze({ tokens, transform, runtime });
+  /* i18n-ignore-end */
+})(typeof window !== 'undefined' ? window : globalThis);
+
+/* ---- 34_activity_html.js ---- */
+/* ===================== interactive activities — runtime html-app@1 (Tier A: one self-contained HTML file) =====================
+   The mini-app runs in <iframe sandbox="allow-scripts"> (opaque origin "null": no app storage, cookies, DOM or same-origin
+   requests), loaded as srcdoc with a Content-Security-Policy first in <head>: no network at all, no forms, no frames, no workers,
+   and scripts only by hash — exactly the inline scripts of the bundle, after the loop guard was added to them (33_activity_guard.js),
+   so no script the app did not check can ever run (no inline handlers, no javascript: URLs, no scripts made at run time).
+   Two frames: the app's frame holds only a WRAPPER document (no scripts) whose policy says frame-src 'none', and the mini-app runs in
+   the wrapper's own sandboxed frame. A frame can always navigate itself (location.replace, a link, a meta refresh) and the new page
+   would have no policy at all; the wrapper's frame-src blocks every such navigation, so the mini-app stays offline (docs/adr/001 §2,
+   tests/activities_app.js "self-navigation"). The mini-app's srcdoc inherits the wrapper's policy too, so both list the same hashes.
+   Handshake (docs/INTERACTIVE.md §8): the mini-app's bootstrap posts hello {nonce} to the app (parent.parent); the host accepts it only
+   from that inner frame's window and with that nonce, and hands over one MessagePort; every later message goes over the port. */
+(() => {
+  /* i18n-ignore-start */   // code
+  const CSP = hashes => ["default-src 'none'", 'script-src ' + hashes.map(x => `'sha256-${x}'`).join(' '), "style-src 'unsafe-inline'", 'img-src data: blob:', 'font-src data:', 'media-src data: blob:',
+    "connect-src 'none'", "frame-src 'none'", "child-src 'none'", "worker-src 'none'", "object-src 'none'", "form-action 'none'", "base-uri 'none'", "manifest-src 'none'"].join('; ');
+  const ALLOW = ['accelerometer', 'autoplay', 'camera', 'display-capture', 'encrypted-media', 'fullscreen', 'geolocation', 'gyroscope', 'magnetometer', 'microphone', 'midi', 'payment', 'picture-in-picture', 'publickey-credentials-get', 'screen-wake-lock', 'usb', 'web-share', 'xr-spatial-tracking'].map(f => f + " 'none'").join('; ');
+  const MAX_BYTES = 512 * 1024;
+  const sha256 = async text => btoa(String.fromCharCode(...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text)))));
+  const rndName = () => '__noemaGuard' + Array.from(crypto.getRandomValues(new Uint8Array(8)), b => b.toString(16).padStart(2, '0')).join('');
+
+  /** The bootstrap: the first script of the frame. It claims the port, then offers window.noema (frozen) to the mini-app. */
+  function bootstrap(nonce) {
+    return `(function(){'use strict';var N=${JSON.stringify(nonce)},P='noema.activity',port=null,q=[],ready=null,H={},init=null,seq=0,waits={},stT=null;
+function send(type,payload,extra){var m={p:P,v:1,type:type,payload:payload||{}};if(extra)for(var k in extra)m[k]=extra[k];if(port)port.postMessage(m);else q.push(m);}
+var APP=parent.parent;
+function on(e){if(e.source!==APP||!e.data||e.data.t!=='welcome'||e.data.nonce!==N||!e.ports||!e.ports[0]||port)return;port=e.ports[0];removeEventListener('message',on,true);port.onmessage=msg;port.start();while(q.length)port.postMessage(q.shift());}
+addEventListener('message',on,true);
+function applyTheme(t){if(!t)return;var r=document.documentElement;try{for(var k in t.tokens)r.style.setProperty('--noema-'+k,String(t.tokens[k]));r.style.colorScheme=t.scheme==='dark'?'dark':'light';r.dataset.noemaScheme=t.scheme;r.dataset.noemaMotion=t.reducedMotion?'reduce':'full';if(t.dir)r.dir=t.dir;}catch(x){}}
+function fire(type,p){(H[type]||[]).slice().forEach(function(f){try{f(p);}catch(x){console.error(x);}});}
+function msg(e){var m=e.data;if(!m||m.p!==P)return;var p=m.payload||{};
+ if(m.type==='ping'){send('pong');return;}
+ if(m.type==='init'){init=p;applyTheme(p.theme);if(p.locale)document.documentElement.lang=p.locale;rng=mulberry(p.seed>>>0);if(ready)ready(p);send('ready',{protocols:[1]});return;}
+ if(m.type==='theme'){if(init)init.theme=p;applyTheme(p);fire('theme',p);return;}
+ if(m.type==='locale'){if(init){init.locale=p.locale;init.strings=p.strings||init.strings;}fire('locale',p);return;}
+ if(m.re&&waits[m.re]){var w=waits[m.re];delete waits[m.re];w(p);return;}
+ fire(m.type,p);}
+function mulberry(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+var rng=mulberry(1);
+var started=new Promise(function(r){ready=r;});
+function req(type,payload){var id='r'+(++seq);return new Promise(function(res){waits[id]=res;send(type,payload,{id:id});setTimeout(function(){if(waits[id]){delete waits[id];res(null);}},5000);});}
+function fill(s,vars){return String(s).replace(/\\{(\\w+)\\}/g,function(_,k){return vars&&vars[k]!=null?String(vars[k]):'{'+k+'}';});}
+var lastH=0;function measure(){var h=Math.ceil(Math.max(document.documentElement.scrollHeight,document.body?document.body.scrollHeight:0));if(Math.abs(h-lastH)>2){lastH=h;send('resize',{h:h});}}
+var api={
+ ready:started,
+ get locale(){return init?init.locale:'en';}, get seed(){return init?init.seed:0;}, get state(){return init&&init.state?init.state.data:null;},
+ get stateFrom(){return init&&init.state?init.state.migrateFrom||null:null;}, get task(){return init?init.task:{};}, get theme(){return init?init.theme:null;}, get exercise(){return init?init.exerciseId:null;},
+ t:function(key,vars){var s=init&&init.strings&&Object.prototype.hasOwnProperty.call(init.strings,key)?init.strings[key]:key;return fill(s,vars);},
+ fmt:{number:function(n,o){try{return new Intl.NumberFormat(api.locale,o).format(n);}catch(x){return String(n);}}},
+ random:function(){return rng();},
+ on:function(type,f){(H[type]=H[type]||[]).push(f);},
+ saveState:function(data){clearTimeout(stT);stT=setTimeout(function(){send('state',{version:init?init.stateVersion||1:1,data:data});},300);},
+ event:function(name,data){send('event',data===undefined?{name:name}:{name:name,data:data});},
+ result:function(r){send('result',{score:+r.score,passed:!!r.passed,detail:r.detail==null?undefined:String(r.detail).slice(0,500)});},
+ hint:function(){return req('hint:request',{}).then(function(p){return p&&p.text||null;});},
+ announce:function(text){send('a11y:announce',{text:String(text).slice(0,300)});},
+ error:function(code,message){send('error',{code:String(code).slice(0,40),message:message==null?undefined:String(message).slice(0,500)});},
+ resize:function(){measure();}
+};
+Object.freeze(api.fmt);Object.freeze(api);
+Object.defineProperty(window,'noema',{value:api,writable:false,configurable:false});
+addEventListener('DOMContentLoaded',function(){measure();try{new ResizeObserver(measure).observe(document.documentElement);}catch(x){setInterval(measure,500);}});
+addEventListener('error',function(e){try{send('error',{code:'script',message:String(e.message||'').slice(0,300)});}catch(x){}});
+APP.postMessage({t:'hello',nonce:N},'*');
+})();`;
+  }
+
+  /** The author's file → the document for srcdoc (async: script hashes). Throws an Error with a code on what cannot run. */
+  async function buildDoc(html, nonce, want) {
+    if (typeof html !== 'string' || !html.trim()) throw Object.assign(new Error('empty'), { code: 'empty' });
+    if (new TextEncoder().encode(html).length > MAX_BYTES) throw Object.assign(new Error('too big'), { code: 'size' });
+    if (!crypto?.subtle) throw Object.assign(new Error('no crypto.subtle'), { code: 'crypto' });
+    if (want) {   // the bundle is content-addressed: it must be the one the pack names
+      const hex = Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(html))), b => b.toString(16).padStart(2, '0')).join('');
+      if (hex !== String(want).toLowerCase()) throw Object.assign(new Error('sha256 mismatch'), { code: 'integrity' });
+    }
+    const doc = new DOMParser().parseFromString(html, 'text/html');   // inert: nothing in it runs here
+    const G = rndName();
+    for (const n of doc.querySelectorAll('base, meta[http-equiv], script[src], link[rel]:not([rel~="stylesheet"]), link[href]:not([href^="data:"])')) n.remove();
+    const hashes = [];
+    for (const s of doc.querySelectorAll('script')) {
+      const type = (s.getAttribute('type') || '').trim().toLowerCase();
+      if (type && !['text/javascript', 'module', 'application/javascript'].includes(type)) continue;   // data blocks (application/json…) do not run
+      s.textContent = NoemaLoopGuard.transform(s.textContent, G).code;
+      hashes.push(await sha256(s.textContent));
+    }
+    const boot = bootstrap(nonce), guard = NoemaLoopGuard.runtime(G, 1500, "function(){try{window.noema&&window.noema.error('runaway','the activity ran too long')}catch(e){}}");
+    hashes.unshift(await sha256(boot), await sha256(guard));
+    const head = doc.head;
+    const add = (tag, attrs, text) => { const e = doc.createElement(tag); for (const [k, v] of Object.entries(attrs || {})) e.setAttribute(k, v); if (text != null) e.textContent = text; return e; };
+    const first = [add('meta', { charset: 'utf-8' }), add('meta', { 'http-equiv': 'Content-Security-Policy', content: CSP(hashes) }), add('script', {}, boot), add('script', {}, guard)];
+    if (!doc.querySelector('meta[name="viewport"]')) first.push(add('meta', { name: 'viewport', content: 'width=device-width, initial-scale=1' }));
+    first.push(add('style', {}, ':root{color-scheme:light dark}html,body{margin:0;background:var(--noema-card,var(--noema-bg,#fff));color:var(--noema-ink,#222);font-family:var(--noema-font,system-ui,sans-serif)}'));
+    head.prepend(...first);
+    const inner = '<!doctype html>' + doc.documentElement.outerHTML;
+    // the wrapper: no scripts of its own; its policy (inherited by the mini-app's srcdoc) blocks every navigation of the inner frame
+    const w = document.implementation.createHTMLDocument('');
+    const wm = w.createElement('meta'); wm.setAttribute('http-equiv', 'Content-Security-Policy'); wm.setAttribute('content', CSP(hashes));
+    const ws = w.createElement('style'); ws.textContent = 'html,body{margin:0;height:100%;overflow:hidden;background:transparent}iframe{display:block;border:0;width:100%;height:100%}';
+    const wf = w.createElement('iframe'); wf.setAttribute('sandbox', 'allow-scripts'); wf.setAttribute('allow', ALLOW); wf.setAttribute('referrerpolicy', 'no-referrer'); wf.setAttribute('srcdoc', inner);
+    w.head.replaceChildren(wm, ws); w.body.replaceChildren(wf);
+    return '<!doctype html>' + w.documentElement.outerHTML;
+  }
+
+  ACT.registerRuntime({
+    id: 'html-app@1', version: 1,
+    /** → port { send(type, payload, extra), close() } */
+    mount(box, { act, init, title, onMessage, onFail }) {
+      const nonce = Array.from(crypto.getRandomValues(new Uint8Array(16)), b => b.toString(16).padStart(2, '0')).join('');
+      const frame = document.createElement('iframe');
+      frame.setAttribute('sandbox', 'allow-scripts');   // exactly this token: never allow-same-origin (tests/activities.js checks every code path)
+      frame.setAttribute('allow', ALLOW);
+      frame.setAttribute('referrerpolicy', 'no-referrer');
+      frame.setAttribute('title', title);
+      frame.className = 'act-frame';
+      let ch = null, closed = false, loads = 0;
+      const pending = [];
+      const port = {
+        send(type, payload, extra) { const m = ACTP.out(type, payload, extra); if (ch) ch.port1.postMessage(m); else pending.push(m); },
+        close() { closed = true; removeEventListener('message', hello); try { ch?.port1.close(); } catch (e) { } frame.remove(); },
+      };
+      function hello(e) {
+        const app = (() => { try { return frame.contentWindow?.frames[0] || null; } catch (x) { return null; } })();   // the mini-app's window, inside the wrapper
+        if (closed || ch || !app || e.source !== app) return;
+        const d = e.data; if (!d || d.t !== 'hello' || d.nonce !== nonce) return;
+        removeEventListener('message', hello);
+        ch = new MessageChannel();
+        ch.port1.onmessage = m => { if (!closed) onMessage(m.data); };
+        app.postMessage({ t: 'welcome', nonce }, '*', [ch.port2]);
+        ch.port1.postMessage(ACTP.out('init', init));
+        while (pending.length) ch.port1.postMessage(pending.shift());
+      }
+      addEventListener('message', hello);
+      frame.addEventListener('load', () => { if (++loads > 1 && !closed) onFail('navigated'); });   // a frame that navigates away is stopped at once
+      buildDoc(String(act.html || ''), nonce, act.sha256).then(doc => { if (closed) return; frame.srcdoc = doc; box.append(frame); })
+        .catch(e => { console.warn('[noema] html-app', act.id, e.code || e.message); if (!closed) onFail(e.code || 'build'); });
+      return port;
+    },
+  });
+  /* i18n-ignore-end */
+})();
 
 /* ---- 35_visual.js ---- */
 /* ===================== Visual exercises & figures — canonical schema: docs/VISUAL.md (noema.visual/v1) ===================== */
@@ -2362,13 +2934,14 @@ function chapterPractice(c) {
 
 /* ---------- section reader ---------- */
 const CALLOUT_IC = { key: '🔑', pitfall: '⚠️', tip: '💡', exam: '🎓', warn: '🚧', analogy: '🧩', debug: '🔧', interview: '🎤' };
-function renderBlock(b, i) {
+function renderBlock(b, i, sid) {
   const wrap = h('div', { class: 'blk b-' + b.t, style: { animationDelay: (i % 6) * 60 + 'ms' } });
   switch (b.t) {
     case 'p': wrap.append(h('p', { 'data-nf': 'text', html: fmt(b.text) })); break;
     case 'list': wrap.append(h(b.ordered ? 'ol' : 'ul', {}, ...b.items.map((x, k) => h('li', { 'data-nf': 'items.' + k, html: fmt(x) })))); break;
     case 'code': wrap.append(codeBlock(b.code, b.lang)); if (b.caption) wrap.append(h('div', { class: 'caption', 'data-nf': 'caption', html: fmt(b.caption) })); break;
     case 'figure': wrap.append(figureBlock(b)); break;
+    case 'interactive': wrap.append(interactiveBlock({ ...b, _sec: sid })); break;
     case 'diagram': wrap.append(h('div', { class: 'diagram', 'data-nf': 'text' }, b.text)); if (b.caption) wrap.append(h('div', { class: 'caption', 'data-nf': 'caption', html: fmt(b.caption) })); break;
     case 'table': wrap.append(h('div', { class: 'tablewrap' }, h('table', {}, h('thead', {}, h('tr', {}, ...b.head.map((x, k) => h('th', { 'data-nf': 'head.' + k, html: fmt(x) })))), h('tbody', {}, ...b.rows.map((r, j) => h('tr', {}, ...r.map((x, k) => h('td', { 'data-nf': `rows.${j}.${k}`, html: fmt(x) })))))))); if (b.caption) wrap.append(h('div', { class: 'caption', 'data-nf': 'caption', html: fmt(b.caption) })); break;
     case 'callout': wrap.append(h('div', { class: 'callout ' + b.kind }, h('span', { class: 'ci' }, CALLOUT_IC[b.kind] || '💡'), b.title ? h('b', { class: 't', 'data-nf': 'title', html: fmt(b.title) }) : null, h('div', { 'data-nf': 'text', html: fmt(b.text) }))); break;
@@ -2388,7 +2961,7 @@ function renderBlock(b, i) {
 }
 /** 💡 on a block and on its cards / items (compare columns, terms, list items, table rows). */
 /* i18n-ignore-start */   // the kind of a part, and its text: words of the AI's prompt (explainItem)
-const BLOCK_WHAT = { p: 'paragraph', list: 'list', code: 'code example', figure: 'figure', diagram: 'diagram', table: 'table', callout: 'note', compare: 'comparison', flow: 'process', reveal: 'question', ask: 'set of questions', terms: 'set of terms' };
+const BLOCK_WHAT = { p: 'paragraph', list: 'list', code: 'code example', figure: 'figure', interactive: 'interactive activity', diagram: 'diagram', table: 'table', callout: 'note', compare: 'comparison', flow: 'process', reveal: 'question', ask: 'set of questions', terms: 'set of terms' };
 function explainParts(el, b, s) {
   explainable(el, () => ({ label: b.title || b.label || b.caption || (b.t === 'figure' ? (MEDIA[b.media]?.alt || tE('engine.aimsg.thisFigure')) : blockText(b)), text: blockText(b), sec: s, what: BLOCK_WHAT[b.t] || 'part of the lesson', bid: el.dataset.bid }));
   if (b.t === 'compare') $$('.compare > div', el).forEach((d, k) => { const it = b.items[k]; if (it) explainable(d, () => ({ label: it.title, text: it.title + ':\n' + it.points.map(p => '- ' + p).join('\n') + '\n\n(Compared with: ' + b.items.filter(x => x !== it).map(x => x.title).join(', ') + ')', sec: s, what: 'card', bid: el.dataset.bid })); });
@@ -2441,7 +3014,7 @@ function sectionView(sid, bid) {
     body, tail));
   function draw(scroll) {
     body.innerHTML = '';
-    chunks.slice(0, shown).forEach((ch, ci) => ch.forEach((b, i) => { const el = renderBlock(b, ci === shown - 1 ? i : 0); el.dataset.bid = bids[s.blocks.indexOf(b)]; markNewBlock(el, b, c); explainParts(el, b, s); body.append(el); }));
+    chunks.slice(0, shown).forEach((ch, ci) => ch.forEach((b, i) => { const el = renderBlock(b, ci === shown - 1 ? i : 0, s.id); el.dataset.bid = bids[s.blocks.indexOf(b)]; markNewBlock(el, b, c); explainParts(el, b, s); body.append(el); }));
     pl.firstChild.style.width = (shown / chunks.length * 100) + '%';
     tail.innerHTML = '';
     if (shown < chunks.length) {
@@ -3083,6 +3656,7 @@ function applySourceFilter() {
       flashcards: c0.flashcards.filter(f => vis(srcOfItem(f, c0)) && (!f.section || ids.has(f.section))), pitfalls: c0.pitfalls.filter(p => vis(srcOfItem(p, c0))) };
     c._newWhole = isNewSrc(c0.src);
     c._new = c._newWhole || secs.some(s => s._new);
+    ACT.keepRunnable(c);
     c._i = COURSE.length; COURSE.push(c); CH[c.id] = c;
     c.sections.forEach((s, j) => { s._ch = c; s._j = j; SEC[s.id] = s; });
     c.exercises.forEach(e => { e._ch = c; EX[e.id] = e; ALL_EX.push(e); });
@@ -4089,6 +4663,8 @@ function locateItem(p = {}) {
 
 /* ---- 90_boot.js ---- */
 /* ===================== Boot (runs after every module is loaded; the loader has set Noema.subject / COURSE) ===================== */
+dropUnrunnable();   // exercises this app cannot run (a newer type, an activity whose runtime is off) leave the indexes (32_activities.js)
+checkRequires();
 applySourceFilter();
 boot();
 wireSyncDot();

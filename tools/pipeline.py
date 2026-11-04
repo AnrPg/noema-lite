@@ -142,6 +142,14 @@ def local_check(kind, d, run):
     if kind == "bridges":   # every pair (own language and each translation → en, el, ru, ar minus the language read), with enough of the content and everyday words
         r = subprocess.run([sys.executable, find("bridge.py"), "require", d], capture_output=True, text=True)
         return r.returncode == 0, (r.stdout + r.stderr).strip().splitlines()[-20:]
+    if kind == "activities":   # interactive activities (docs/INTERACTIVE.md): none is fine; else the lint, then the browser test where Node + Playwright are here
+        if not os.path.exists(os.path.join(d, "activities", "activities.json")): return True, ["no activities (they are optional)"]
+        r = subprocess.run([sys.executable, find("activity_lint.py"), d], capture_output=True, text=True)
+        L = (r.stdout + r.stderr).strip().splitlines()[-20:]
+        if r.returncode != 0: return False, L
+        t = subprocess.run([sys.executable, find("activity_test.py"), d], capture_output=True, text=True)
+        if t.returncode == 2: return True, L + ["(activity_test.py could not run here: " + ((t.stdout + t.stderr).strip().splitlines() or ["?"])[-1] + " — run it where it can)"]
+        return t.returncode == 0, L + (t.stdout + t.stderr).strip().splitlines()[-25:]
     return False, [f"unknown local check {kind}"]
 
 def run_check(d, sid, run):

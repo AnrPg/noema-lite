@@ -1,0 +1,19 @@
+{
+  "@@locale": "ar-EG",
+  "engine.act.skip": "تخطَّ النشاط",
+  "engine.act.start": "ابدأ",
+  "engine.act.restart": "أعِد من البداية",
+  "engine.act.fullscreen": "ملء الشاشة",
+  "engine.act.loading": "جارٍ تحميل النشاط…",
+  "engine.act.frameTitle": "نشاط تفاعلي {id}",
+  "engine.act.missing": "هذا النشاط غير موجود في المادة.",
+  "engine.act.notHere": "لا يعمل هذا النشاط في هذا الإصدار من التطبيق. إليك ما يعرضه.",
+  "engine.act.failed": "تعذّر بدء النشاط. إليك ما يعرضه.",
+  "engine.act.stopped": "توقّف هذا النشاط عن الاستجابة.",
+  "engine.act.misbehaved": "أُوقِف هذا النشاط لأنه فعل شيئًا غير مسموح به.",
+  "engine.act.error": "أبلغ النشاط عن مشكلة ({code}).",
+  "engine.act.newerState": "عملك المحفوظ هنا من إصدار أحدث من هذا النشاط؛ احتُفظ به، ويبدأ النشاط من جديد.",
+  "engine.act.newerProtocol": "يحتاج هذا النشاط إلى إصدار أحدث من التطبيق.",
+  "engine.act.newerType": "يحتاج هذا التمرين إلى إصدار أحدث من التطبيق. أعِد تحميل الصفحة للحصول عليه.",
+  "engine.act.hint": "{left, plural, =0 {لا تلميحات متبقية} one {تلميح (يتبقى #)} two {تلميح (يتبقى #)} few {تلميح (يتبقى #)} many {تلميح (يتبقى #)} other {تلميح (يتبقى #)}}"
+}
