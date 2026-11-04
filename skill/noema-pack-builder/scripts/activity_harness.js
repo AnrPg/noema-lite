@@ -31,6 +31,8 @@ const SDIR = path.resolve(sdirArg);
 const srcDir = [path.join(HERE, 'activity_host'), path.join(HERE, '..', '..', '..', 'engine', 'src')].find(d => fs.existsSync(path.join(d, '34_activity_html.js')));
 if (!srcDir) { console.log('✗ the activity runtime (activity_host/34_activity_html.js) is missing from the toolkit'); process.exit(2); }
 const rd = f => fs.readFileSync(path.join(srcDir, f), 'utf8');
+const inl = s => s.replace(/<\/script/gi, '<\\/script').replace(/<!--/g, '<\\x21--');   // a source inlined in the host page: "</script" must not end the <script>, nor "<!--" … "<script" make the parser skip its end (tools/build.py esc)
+const rs = f => inl(rd(f));
 const s32 = rd('32_activities.js'), ACTP = s32.slice(s32.indexOf('const ACTP = '), s32.indexOf('const ACT = ('));
 
 /* the subject's activities, read like make_pack.py does */
@@ -95,7 +97,7 @@ function tE(k, v) { return String(WORDS[k] || k).replace(/\\{(\\w+)\\}/g, functi
 function h(tag, attrs, ...kids) { const el = document.createElement(tag); for (const [k, v] of Object.entries(attrs || {})) { if (v == null || v === false) continue; if (k === 'class') el.className = v; else if (k === 'style' && typeof v === 'object') Object.assign(el.style, v); else if (k.startsWith('on')) el.addEventListener(k.slice(2), v); else el.setAttribute(k, v === true ? '' : v); } for (const kid of kids.flat()) if (kid != null && kid !== false) el.append(kid.nodeType ? kid : document.createTextNode(String(kid))); return el; }
 ${ACTP}
 window.ACTP = ACTP;
-</script><script>${rd('33_activity_guard.js')}</script><script>${rd('34_activity_html.js')}</script>${SIMOK ? `<script>${rd('35_simexpr.js')}</script><script>${fs.readFileSync(pcPath, 'utf8')}</script><script>${rd('35_activity_sim.js')}</script>${CIRCUIT ? `<script>${rd('36_engine_circuit.js')}</script><script>${rd('36_engine_circuit_sim.js')}</script>` : ''}${PYOK ? `<script>${rd('37_activity_py.js')}</script><script>${rd('37_activity_py_ui.js')}</script>` : ''}` : ''}${H5POK ? `<script>${fs.readFileSync(playerPath, 'utf8').replace(/<\/script/gi, '<\\/script')}</script><script>${rd('38_activity_h5p.js')}</script>` : ''}<script>
+</script><script>${rs('33_activity_guard.js')}</script><script>${rs('34_activity_html.js')}</script>${SIMOK ? `<script>${rs('35_simexpr.js')}</script><script>${inl(fs.readFileSync(pcPath, 'utf8'))}</script><script>${rs('35_activity_sim.js')}</script>${CIRCUIT ? `<script>${rs('36_engine_circuit.js')}</script><script>${rs('36_engine_circuit_sim.js')}</script>` : ''}${PYOK ? `<script>${rs('37_activity_py.js')}</script><script>${rs('37_activity_py_ui.js')}</script>` : ''}` : ''}${H5POK ? `<script>${inl(fs.readFileSync(playerPath, 'utf8'))}</script><script>${rs('38_activity_h5p.js')}</script>` : ''}<script>
 window.setTheme = function (t) { var r = document.documentElement; for (var k in t.tokens) r.style.setProperty('--' + k, t.tokens[k]); r.style.colorScheme = t.scheme; };
 window.LOG = []; window.H = null;
 window.run = function (act, init) {

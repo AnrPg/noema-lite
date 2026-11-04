@@ -52,7 +52,7 @@
    "steps": [],
    "expect": {
     "text": {
-     ".h5p-question-content": "Ηλιακό Σύστημα"
+     ".h5p-question-introduction": "Ηλιακό Σύστημα"
     }
    }
   }
