@@ -1,0 +1,5 @@
+<!doctype html><body><script>window.TICKS=0; setInterval(()=>TICKS++,50);
+const f=document.createElement('iframe'); f.setAttribute('sandbox','allow-scripts'); f.src=new URLSearchParams(location.search).get('src'); document.body.append(f);
+addEventListener('message',e=>{ if(e.source===f.contentWindow) window.GOT=TICKS; });
+window.killFrame=()=>{f.remove();return 1;};
+</script>
