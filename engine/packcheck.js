@@ -374,10 +374,15 @@
     CAPS: new Set(['state', 'events', 'resize', 'result', 'hints', 'announce']), GRADE_MODES: new Set(['reported', 'checks']),
     CHECKS_RUNTIMES: new Set(['sim-spec@1']),   // runtimes whose values the app can see (the checks grader needs them)
     // sim-spec@1 (docs/INTERACTIVE.md §12): the SAME rules as tools/activities.py check_spec
-    SPEC_FORMAT: 'noema.sim-spec/v1', DEFAULT_ENGINE: 'formula@1', ENGINES: new Set(['formula@1', 'circuit-mna@1']),   // the same list in tools/activities.py
+    SPEC_FORMAT: 'noema.sim-spec/v1', DEFAULT_ENGINE: 'formula@1', ENGINES: new Set(['formula@1', 'circuit-mna@1', 'thermal@1', 'pid@1', 'rf@1', 'twin@1']),   // the same list in tools/activities.py
     SPEC_KEYS: new Set(['format', 'engine', 'model', 'title', 'intro', 'consts', 'params', 'derived', 'outputs', 'readouts', 'plots', 'bench']),
     // circuit-mna@1 (docs/INTERACTIVE_CIRCUIT.md): the model, the outputs it can compute, the fault-finding bench (docs/INTERACTIVE.md §12.7)
-    CIRCUIT: 'circuit-mna@1', BENCH_ENGINES: new Set(['circuit-mna@1']), BENCH_NAMES: ['diagnosis', 'measurements', 'correct'],
+    CIRCUIT: 'circuit-mna@1', BENCH_ENGINES: new Set(['circuit-mna@1', 'twin@1']), BENCH_NAMES: ['diagnosis', 'measurements', 'correct'],
+    // the P6 engines (docs/INTERACTIVE_ENGINES.md): each checks its model with its own checkSpec (loaded beside this file; the Python twins in tools/)
+    P6: { 'thermal@1': ['NoemaThermal', '39_engine_thermal.js'], 'pid@1': ['NoemaPID', '40_engine_pid.js'], 'rf@1': ['NoemaRF', '41_engine_rf.js'], 'twin@1': ['NoemaTwin', '42_engine_twin.js'] },
+    P6_TIMED: ['thermal@1', 'pid@1'],   // engines whose model.transient times and outputs' at may be expressions
+    // twin@1's bench: the probe points of the device and its instruments (the event log and the radio's RSSI besides V, I, scope)
+    TWIN: 'twin@1', TWIN_POINTS: ['vbat', 'vload', 'i', 'gnd'], TWIN_INSTRUMENTS: ['V', 'I', 'scope', 'log', 'rssi'],
     MODEL_KEYS: ['netlist', 'bindings', 'transient', 'noise'], OUT_KEYS: ['id', 'kind', 'node', 'branch', 'time', 'probe', 'at', 'stat'], STATS: ['final', 'min', 'max', 'mean', 'pp', 'rms'],
     WAVES: { pulse: ['v1', 'v2', 'delay', 'rise', 'fall', 'width', 'period'], sine: ['offset', 'amp', 'freq', 'phase', 'delay'], pwm: ['v', 'freq', 'duty', 'low', 'delay'] },
     BENCH_KEYS: ['faults', 'points', 'instruments', 'diagnosis', 'budget'], INSTRUMENTS: ['V', 'I', 'R', 'scope', 'logic'],
@@ -536,8 +541,31 @@
       if ((o.kind === 'series' || at || st) && !isObj(m.transient)) E.push(`${w} needs model.transient {tEnd, dt?}`);
     });
   }
-  function checkBench(spec, names, seen, E, key) {
-    const b = spec.bench, L = ACT.BENCH_LIM, c = circuitOf(spec);
+  /* ---------- the P6 engines thermal@1, pid@1, rf@1, twin@1 (docs/INTERACTIVE_ENGINES.md): the engine's own checkSpec, then every expression of
+     its model through NoemaExpr — the SAME rules as tools/activities.py check_engine (the engines' Python twins: tools/thermal.py, pid.py, rf.py, twin.py) ---------- */
+  /** [source, where] of each expression of a P6 model: the bindings; for thermal@1 and pid@1 also the transient's times and the outputs' at */
+  function engineExprs(spec, eng) {
+    const m = isObj(spec.model) ? spec.model : {}, out = [], timed = ACT.P6_TIMED.includes(eng);
+    const add = (v, w) => { if (typeof v === 'string' && v.trim()) out.push([v, w]); };   // (an empty one is the engine's own message)
+    list(m.bindings).forEach((b, i) => { if (isObj(b)) add(b.expr, `spec.model.bindings[${i}].expr`); });
+    if (timed && isObj(m.transient)) for (const k of ['tEnd', 'dt']) add(m.transient[k], `spec.model.transient.${k}`);
+    if (timed) list(spec.outputs).forEach((o, i) => { if (isObj(o)) add(o.at, `spec.outputs[${i}].at`); });
+    return out;
+  }
+  function checkEngine(spec, eng, names, E) {
+    const [g, f] = ACT.P6[eng], M = root[g] || null;
+    if (!M) { E.push(`spec.model: the ${eng} checker (${g}, engine/src/${f}) is not loaded here`); return; }
+    for (const p of M.checkSpec(spec)) if (p.level === 'error') E.push(`spec${p.path ? '.' + p.path : ''}: ${p.msg}`);
+    for (const [src, w] of engineExprs(spec, eng)) { const m = exprProblem(src, names, w); if (m) E.push(m); }
+  }
+  /** twin@1: the device of a spec without errors, or null */
+  function twinOf(spec) {
+    const d = isObj(spec?.model) ? spec.model.device : null, T = root.NoemaTwin;
+    return T && isObj(d) && !T.check(d).some(p => p.level === 'error') ? d : null;
+  }
+  function checkBench(spec, names, seen, E, key, eng) {
+    const b = spec.bench, L = ACT.BENCH_LIM, tw = eng === ACT.TWIN, c = tw ? null : circuitOf(spec), dev = tw ? twinOf(spec) : null;
+    const KINDS = tw ? ACT.TWIN_INSTRUMENTS : ACT.INSTRUMENTS;
     if (!isObj(b)) { E.push('spec.bench must be an object {faults, points, instruments, diagnosis, budget?}'); return; }
     unknownKeys(b, ACT.BENCH_KEYS, 'spec.bench', E);
     for (const n of ACT.BENCH_NAMES) if (seen.has(n)) E.push(`spec: the name ${n} belongs to the bench (its values: ${ACT.BENCH_NAMES.join(', ')})`);
@@ -558,27 +586,34 @@
       const w = `spec.bench.faults[${i}]`;
       if (!isObj(f)) { E.push(`${w} must be an object {id, apply}`); return; }
       unknownKeys(f, ['id', 'apply'], w, E);
-      if (!(Array.isArray(f.apply) && f.apply.length <= L.apply)) { E.push(`${w}.apply must be a list of at most ${L.apply} changes to the circuit ([] = a healthy device)`); return; }
+      if (!(Array.isArray(f.apply) && f.apply.length <= L.apply)) { E.push(`${w}.apply must be a list of at most ${L.apply} changes to the ${tw ? 'device' : 'circuit'} ([] = a healthy device)`); return; }
       if (c) for (const p of CK().checkFaults(c.nl, f.apply)) E.push(`${w}.${p.path.replace(/^faults/, 'apply')}: ${p.msg}`);
+      if (dev) for (const p of root.NoemaTwin.checkFaults(dev, f.apply)) E.push(`${w}.${p.path.replace(/^faults/, 'apply')}: ${p.msg}`);
     });
     const ps = b.points;
     if (!(Array.isArray(ps) && ps.length >= 1 && ps.length <= L.points)) E.push(`spec.bench.points must be a list of 1–${L.points} probe points {id, at, label}`);
-    const pids = ids(ps, 'spec.bench.points', 'point');
+    const pids = ids(ps, 'spec.bench.points', 'point'), atOf = new Map();
     list(ps).forEach((p, i) => {
       const w = `spec.bench.points[${i}]`;
       if (!isObj(p)) { E.push(`${w} must be an object {id, at, label}`); return; }
       unknownKeys(p, ['id', 'at', 'label'], w, E);
+      if (typeof p.id === 'string' && !atOf.has(p.id)) atOf.set(p.id, p.at);
       if (c && !endpointOk(c, p.at)) E.push(`${w}.at must be a node, a test point, gnd or a pin such as @R1.0 of the netlist`);
+      if (tw && !ACT.TWIN_POINTS.includes(p.at)) E.push(`${w}.at is one of ${ACT.TWIN_POINTS.join(', ')} (the battery, the battery under load, the supply current, the ground)`);
       key(p.label, w + '.label', true);
     });
     const is = b.instruments, kinds = [];
     if (!(Array.isArray(is) && is.length >= 1 && is.length <= L.instruments)) E.push(`spec.bench.instruments must be a list of 1–${L.instruments} instruments {kind, …}`);
     list(is).forEach((x, i) => {
       const w = `spec.bench.instruments[${i}]`;
-      if (!(isObj(x) && ACT.INSTRUMENTS.includes(x.kind))) { E.push(`${w}.kind is one of ${ACT.INSTRUMENTS.join(', ')}`); return; }
+      if (!(isObj(x) && KINDS.includes(x.kind))) { E.push(`${w}.kind is one of ${KINDS.join(', ')}`); return; }
       if (kinds.includes(x.kind)) E.push(`${w}: the instrument ${x.kind} is listed twice`);
       kinds.push(x.kind);
       unknownKeys(x, ACT.INST_KEYS, w, E);
+      if (x.kind === 'log' || x.kind === 'rssi') {   // twin@1: the event log and the radio's RSSI read the device, not a point
+        if (Object.keys(x).some(k => k !== 'kind' && ACT.INST_KEYS.includes(k))) E.push(`${w}: the ${x.kind === 'log' ? 'event log' : 'RSSI reading'} has only a kind`);
+        return;
+      }
       const scope = x.kind === 'scope' || x.kind === 'logic';
       if (x.kind === 'I') {
         if ('points' in x) E.push(`${w}: the ammeter reads parts (parts), not points`);
@@ -589,6 +624,7 @@
           if (!isObj(q)) { E.push(`${wq} must be an object {element, label, pin?}`); return; }
           unknownKeys(q, ['element', 'label', 'pin'], wq, E);
           if (c && !probeOk(c, { kind: 'I', element: q.element, pin: q.pin })) E.push(`${wq}: element must be a part of the netlist (and pin one of its pins)`);
+          if (tw && !(q.element === 'battery' && q.pin === undefined)) E.push(`${wq}: element must be battery (the twin's ammeter reads the supply current), without pin`);
           key(q.label, wq + '.label', true);
         });
       } else {
@@ -596,6 +632,11 @@
         const pts = x.points;
         if (pts !== undefined && !(Array.isArray(pts) && pts.length >= 1 && pts.every(q => typeof q === 'string' && pids.includes(q)))) E.push(`${w}.points must be ids of spec.bench.points`);
         if ((x.kind === 'V' || x.kind === 'R') && (Array.isArray(pts) ? pts.length : pids.length) < 2) E.push(`${w}: a meter needs two points to put its leads on`);
+        if (tw) {
+          const on = (Array.isArray(pts) ? pts : pids).filter(q => typeof q === 'string' && pids.includes(q)).map(q => atOf.get(q));
+          if (x.kind === 'V' && on.some(a => a === 'i')) E.push(`${w}: the twin's voltmeter reads vbat or vload against gnd (list its points: not the current i)`);
+          if (x.kind === 'scope' && on.some(a => a !== 'i')) E.push(`${w}: the twin's oscilloscope shows the supply current (list its points: only points at i)`);
+        }
       }
       for (const k of ['tEnd', 'dt', 'tStart', 'threshold']) if (k in x && !(scope && (k !== 'threshold' || x.kind === 'logic'))) E.push(`${w}.${k} belongs to ${k === 'threshold' ? 'the logic analyser' : 'the oscilloscope and the logic analyser'}`);
       if (scope) {
@@ -762,9 +803,10 @@
       });
     });
     if (eng === ACT.CIRCUIT) checkCircuit(spec, inNames, E);
+    else if (typeof eng === 'string' && Object.prototype.hasOwnProperty.call(ACT.P6, eng)) checkEngine(spec, eng, inNames, E);
     if (spec.bench != null) {
       if (!ACT.BENCH_ENGINES.has(eng)) E.push(`spec.bench needs an engine that can take measurements (${[...ACT.BENCH_ENGINES].sort().join(', ')})`);
-      else checkBench(spec, inNames, seen, E, key);
+      else checkBench(spec, inNames, seen, E, key, eng);
     }
     if (tables && Object.keys(tables).length) for (const k of [...keys].sort()) {
       const miss = Object.keys(tables).filter(l => isObj(tables[l]) && !Object.prototype.hasOwnProperty.call(tables[l], k)).sort();
