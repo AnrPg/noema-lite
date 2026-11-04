@@ -221,6 +221,8 @@ async function browser() {
     const p = await ctx.newPage(); p.setDefaultTimeout(10000);
     const E = []; p.on('pageerror', e => E.push(e.message));
     // the built site with a subject open (the classic router: run_e2e.sh switches the frame off), then the route #/author
+    // (the site ships no profile of this device: one local profile, so the app opens it without asking "Who is studying?")
+    await p.goto(SITE_URL); await p.evaluate(() => { localStorage.clear(); localStorage.setItem('noema1:accounts', JSON.stringify([{ id: 'author', name: 'Author', emoji: '🙂', pin: null, created: Date.now(), learner: '' }])); });
     await p.goto(SITE_URL + '?subject=demo-physics'); await wait(1500);
     ok(await until(() => p.evaluate(() => typeof ACT !== 'undefined' && ACT.engines().includes('formula@1'))), 'the built site is up with a subject and its sim-spec@1 runtime');
     ok(await p.evaluate(() => typeof NoemaActivityAuthor === 'undefined'), 'the author’s scripts are not loaded before the route is opened');
@@ -279,7 +281,7 @@ async function browser() {
     await p.click('[data-tab=spec]'); panel = 'spec';
     await fill(field(['derived', 1, 'expr']), '1 / (2 * pi * tauu)'); await wait(400);
     ok(await p.locator(`#aa-panel-spec [data-field='["derived",1,"expr"]'] .sf-err`).count() >= 1 && await p.locator(field(['derived', 1, 'expr'])).getAttribute('aria-invalid') === 'true', 'a bad formula shows its error at its field (and the field is aria-invalid)');
-    ok(await p.locator('.aa-pnote').innerText().then(t => t.length > 0), 'the preview says it waits for the fix');
+    ok(await until(() => p.locator('.aa-pnote').innerText().then(t => t.length > 0)), 'the preview says it waits for the fix');   // (the checks run 200 ms after a change, the preview 400 ms after them)
     await fill(field(['derived', 1, 'expr']), '1 / (2 * pi * tau)'); await wait(700);
 
     // the preview follows a changed start value
