@@ -14,6 +14,7 @@ echo "if (typeof localStorage !== 'undefined' && localStorage.getItem('noema-tes
 (cd "$T" && python3 tools/build.py site bundle >/dev/null)
 node "$ROOT/tests/simexpr.js"          # the expression language of sim-spec@1: JS and Python agree bit for bit (docs/INTERACTIVE_SIMEXPR.md)
 node "$ROOT/tests/circuit.js"           # the circuit engine circuit-mna@1: MNA, transients, faults, instruments (docs/INTERACTIVE_CIRCUIT.md)
+for e in thermal pid rf twin; do node "$ROOT/tests/$e.js"; done   # the P6 engines thermal@1, pid@1, rf@1, twin@1: JS = Python, the worker (docs/INTERACTIVE_ENGINES.md)
 node "$ROOT/tests/activities.js"        # the loop guard, the protocol checks, JS = Python rules (html-app, sim-spec, checks), never allow-same-origin
 node "$ROOT/tests/activities_app.js" "$T" "$T/act-pack.json"   # activities in the app: sandbox, handshake, state, grading, fallbacks, endless loop; sim-spec@1, the checks grader, circuit-mna@1 and the fault bench; wasm-module@1, the xAPI export, external-embed@1 (card, Settings "Ask again") (BROWSERS=chromium,firefox,webkit)
 node "$ROOT/tests/activity_author.js" --browser "$T"   # the activity author (P6): #/author in the built site, classic router and the frame (subject ⋮ › Create an activity), the form, preview, .zip, 320 px
