@@ -76,7 +76,9 @@ Check them with `python3 embed_check.py <subject-dir>/activities/activities.json
 1. **The card first, never an auto-load.** When the block starts (in view, or Start) the runtime shows a quiet card: the pack's
    title, *"This activity opens {provider}. It needs the network, and {provider} may set cookies."*, the `why` line, the credit ·
    licence · a link to the provider's terms (new tab, `noopener noreferrer`), and **Open {provider}**. Nothing of the provider
-   is requested before Open.
+   is requested before Open. **A card holds no live slot:** the app runs at most two activities at once (one on a phone), but a
+   card has no frame, so it neither counts toward them nor parks another one; only Open makes it live (the runtime's `waits(act)`
+   and `ctx.onLive()`, `engine/src/32_activities.js`), and then the oldest explorer is parked to make room.
 2. **Remembered per provider.** Open stores `S.settings.embedOk[<provider>] = time` (an account setting, synced); next time the
    frame opens without the card. **Me › Data and sync** shows one quiet line, *"Outside activities that open without asking:
    PhET, …"* with an ⓘ and **Ask again** (`NoemaEmbed.consent.list()` / `forget(id)`); the line is absent when nothing was opened.

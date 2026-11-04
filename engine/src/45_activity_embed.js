@@ -142,8 +142,10 @@ var NoemaEmbed = (() => {   // var: loaded twice in the app (beside packcheck.js
     if (!(window.NOEMA_CONFIG && window.NOEMA_CONFIG.activities && window.NOEMA_CONFIG.activities[RUNTIME] === true)) return;   // opt-in per deployment
     ACT.registerRuntime({
       id: RUNTIME, version: 1,
+      /** before consent the block is only the card (no frame): the core does not count it toward the live activities until onLive */
+      waits(act) { const p = provider(act && act.provider, PROVIDERS); return !!p && !consent.has(p.id); },
       /** → port { send(type), close() }; the page itself does not speak the activity protocol: this trusted host answers for it */
-      mount(box, { act, init, title, onMessage, onFail }) {
+      mount(box, { act, init, title, onMessage, onFail, onLive }) {
         const later = f => Promise.resolve().then(f);   // never call back before the core holds the port
         let closed = false, timer = null;
         const out = (type, payload) => { if (!closed) onMessage(ACTP.out(type, payload)); };
@@ -183,7 +185,7 @@ var NoemaEmbed = (() => {   // var: loaded twice in the app (beside packcheck.js
         if (typeof words.why === 'string' && words.why.trim()) card.append(el('p', 'act-embed-why', words.why));
         card.append(creditLine(act, p));
         const go = el('button', 'btn primary small act-embed-open', T('engine.act.embed.open', { provider: p.name })); go.type = 'button';
-        go.addEventListener('click', () => { if (closed) return; consent.set(p.id); open(); });
+        go.addEventListener('click', () => { if (closed) return; consent.set(p.id); open(); if (!closed && typeof onLive === 'function') onLive(); });
         card.append(go);
         root.append(card);
         return port;
