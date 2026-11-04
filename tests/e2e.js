@@ -203,7 +203,10 @@ async function mockGemini(ctx) {
   // folder auto-backup layout (OPFS stands in for a user-chosen folder)
   const fsLayout = await pA.evaluate(async () => {
     const root = await navigator.storage.getDirectory(); const d = await root.getDirectoryHandle('chosen', { create: true });
-    await Noema.idb.put('handles', 'dir|' + ACCOUNT.id, d); await Noema.autoBackup.run(ACCOUNT.id, true);
+    // the folder handle is handed to the backup directly: Chromium (headless or not, sandboxed) crashes the browser when an
+    // OPFS directory handle is written to IndexedDB, so storing the handle is the browser's part and not tested here
+    const AB = Noema.autoBackup, was = AB.handle; AB.handle = async () => d;
+    try { await AB.run(ACCOUNT.id, true); } finally { AB.handle = was; }
     const names = async (dir) => { const out = []; for await (const [n, hnd] of dir.entries()) out.push(hnd.kind === 'directory' ? { [n]: await names(hnd) } : n); return out; };
     return JSON.stringify(await names(d));
   });
