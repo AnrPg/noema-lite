@@ -61,7 +61,7 @@ for m in media:   # (an activity's still picture, its fallback, needs no exercis
     if used[m] < per_pic and m not in ACTS.fallback_media(acts): errs.append(f'ERROR media {m}: used by {used[m]} exercise(s); every picture needs >= {per_pic}')
 with tempfile.TemporaryDirectory() as td:
     mp = os.path.join(td, 'media.json'); json.dump({k: {'w': v['w'], 'h': v['h'], 'regions': v.get('regions')} for k, v in media.items()}, open(mp, 'w', encoding='utf-8'))
-    ap = os.path.join(td, 'activities.json'); json.dump({a['id']: {k: v for k, v in a.items() if k != 'html'} for a in (acts or {}).get('items', []) if isinstance(a, dict) and 'id' in a}, open(ap, 'w', encoding='utf-8'), ensure_ascii=False)
+    ap = os.path.join(td, 'activities.json'); json.dump({a['id']: {k: v for k, v in a.items() if k not in ('html', 'python')} for a in (acts or {}).get('items', []) if isinstance(a, dict) and 'id' in a}, open(ap, 'w', encoding='utf-8'), ensure_ascii=False)
     ax = ['--activities', ap] if acts else []
     for c in chapters:
         p = os.path.join(td, c['id'] + '.json'); json.dump(c, open(p, 'w', encoding='utf-8'), ensure_ascii=False)
