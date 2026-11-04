@@ -1,11 +1,11 @@
-/* ===================== interactive activities — the circuit engine circuit-mna@1 (docs/activities-dev/circuit.md, docs/adr/001 P3) =====================
+/* ===================== interactive activities — the circuit engine circuit-mna@1 (docs/INTERACTIVE_CIRCUIT.md, docs/adr/001 P3) =====================
    A small, deterministic circuit simulator for the electronics benches of tier B (sim-spec@1): RC/RLC transients, filters, PWM and
    fault-finding benches (a virtual device with a hidden fault; the learner measures, then diagnoses). Pure JS, no DOM, no text for the
    learner: it gives codes and numbers only, the activity host words them.
    How: Modified Nodal Analysis (node voltages + the currents of voltage-defined branches), a dense LU with partial pivoting (circuits
    are small: at most 60 nodes), Newton–Raphson with junction limiting, gmin stepping and source stepping for the nonlinear parts,
    trapezoidal integration with a backward-Euler step at the start and on every step that holds a source discontinuity.
-   The netlist (noema.circuit/v1) is described in docs/activities-dev/circuit.md and tools/schemas/noema.circuit.v1.schema.json.
+   The netlist (noema.circuit/v1) is described in docs/INTERACTIVE_CIRCUIT.md and tools/schemas/noema.circuit.v1.schema.json.
    Also used by tests/circuit.js (node). */
 (function noemaCircuitModule(root) {
   /* i18n-ignore-start */   // code, not text: only codes and numbers leave this engine

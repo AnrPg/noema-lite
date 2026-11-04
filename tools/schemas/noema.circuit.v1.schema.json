@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://noema-lite.netlify.app/schemas/noema.circuit.v1.schema.json",
   "title": "noema-lite circuit netlist (noema.circuit/v1)",
-  "description": "The netlist run by the circuit engine circuit-mna@1 (engine/src/36_engine_circuit.js). Human-readable spec: docs/activities-dev/circuit.md. The engine's own check() also tests what a schema cannot: unknown nodes, duplicate ids, voltage-source loops ('vloop'), nodes without a DC path to ground ('floating', a warning) and the limits (60 nodes, 200 elements).",
+  "description": "The netlist run by the circuit engine circuit-mna@1 (engine/src/36_engine_circuit.js). Human-readable spec: docs/INTERACTIVE_CIRCUIT.md. The engine's own check() also tests what a schema cannot: unknown nodes, duplicate ids, voltage-source loops ('vloop'), nodes without a DC path to ground ('floating', a warning) and the limits (60 nodes, 200 elements).",
   "type": "object",
   "required": ["nodes", "elements"],
   "properties": {
