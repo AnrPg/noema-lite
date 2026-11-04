@@ -155,6 +155,8 @@ check(base64.b64decode(wo.get('wasm') or '') == wbytes and wo.get('sha256') == h
       and wo.get('spec') == rj(os.path.join(WO, 'spec.json')) and sorted(wo.get('strings') or {}) == ['el', 'en', 'fr', 'ru'], 'wasm-module@1: the module is inline (base64, sha256, bytes), with its abi, its own spec and its strings')
 if os.environ.get('NOEMA_ACT_PACK'):   # run_e2e.sh: tests/activities_app.js imports this pack into the app
     shutil.copy(os.path.join(sd, 'build', 'demo-physics.json'), os.environ['NOEMA_ACT_PACK'])
+if os.environ.get('NOEMA_ACT_SUBJECT'):   # the subject folder with every reference activity and its sim exercise (for activity_test.py / activity_preview.py)
+    shutil.rmtree(os.environ['NOEMA_ACT_SUBJECT'], ignore_errors=True); shutil.copytree(sd, os.environ['NOEMA_ACT_SUBJECT'])
 
 # the round trip
 w2 = os.path.join(T, 'w2'); r = run(os.path.join(S, 'unpack.py'), os.path.join(T, 'o1', 'demo-physics.noema.zip'), w2)
