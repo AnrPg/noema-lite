@@ -4,6 +4,7 @@
    the handshake happens and the activity shows its words in the pack's language; state is saved and comes back; the sim
    exercise grades with what the activity reports (right and wrong), with hints; a missing activity and a runtime that is
    switched off show the fallback (picture + text); an endless loop is stopped and Restart works; no page errors.
+   py-module@1 (PY=0 skips it): over http, see python() below.
    Usage: node tests/activities_app.js <prepared-repo-dir> <pack.json from tests/activities_pack.py (NOEMA_ACT_PACK)>   (BROWSERS=chromium,firefox,webkit) */
 const pw = require(process.env.PW || 'playwright');
 const path = require('path');
@@ -28,7 +29,7 @@ async function run(name) {
   await p.evaluate(async pk => { await Noema.importPack(Noema.account.id, pk); }, PACK);
   await p.goto('file://' + ROOT + '/index.html?subject=demo-activities'); await wait(1500);
   ok(await p.evaluate(() => SUBJ.id === 'demo-activities' && !!ACT.ITEMS['alias-lab']), 'the pack opens with its activity');
-  ok(await p.evaluate(() => checkRequires().length === 0), 'pack.requires: this app has everything the pack needs');
+  ok(await p.evaluate(() => JSON.stringify(checkRequires()) === '["runtime:py-module@1"]'), 'pack.requires: this app has everything the pack needs but Python (file://, and the runtime is off by default)');
 
   console.log('— the theory block');
   await p.evaluate(() => { location.hash = '#/s/ch01-s01'; }); await wait(600);
@@ -279,7 +280,7 @@ async function circuit(p, ctx, E) {
   ok(await until(() => p.evaluate(s => /3[.,]1\d\s*V/.test(document.querySelector(s + ' .sim-ro')?.textContent || ''), RT)), 'R = 1 kΩ: the engine (in its worker) gives 3.16 V at 1 ms (63 %)');
   const t1 = await trace();
   ok(t1[1] !== t0[1] && t1[0] === t0[0], 'the slider changes the capacitor trace on the scope, not the input');
-  ok(await p.evaluate(() => ACT.caps().has('engine:circuit-mna@1') && checkRequires().length === 0), 'the app has engine:circuit-mna@1 (pack.requires is met)');
+  ok(await p.evaluate(() => ACT.caps().has('engine:circuit-mna@1') && !checkRequires().includes('engine:circuit-mna@1')), 'the app has engine:circuit-mna@1 (that part of pack.requires is met)');
 
   console.log('— circuit-mna@1: the fault bench (an exercise)');
   const card = async id => { await p.evaluate(id => { const m = document.querySelector('main'); m.innerHTML = ''; const c = exerciseCard(EX[id]); c.id = 'T'; m.append(c); scrollTo(0, 0); }, id); await until(() => p.evaluate(() => !!document.querySelector('#T .sim-bench'))); };
@@ -382,8 +383,146 @@ async function circuit(p, ctx, E) {
   ok(/100\s*Hz/.test(s2) && /50\s*%/.test(s2), `the logic reading: frequency and duty cycle (${s2})`);
   ok(E.length === E0, 'no page errors ' + JSON.stringify(E.slice(E0, E0 + 3)));
 }
+/* py-module@1 (docs/INTERACTIVE_PYTHON.md): the reference py-filter over http, from the built site (dist/site) with the pinned Python
+   files (tools/fetch_pyodide.py) and the site's own _headers. The runtime is switched on for the test (the flag is off by default).
+   Checks: the first-use note (sizes from the manifest), the Python sim renders in the sim-spec view, a slider changes Python's outputs,
+   the checks grader grades Python's outputs right and wrong, Settings › "Prepare Python for offline" → ready offline (classic and shell),
+   offline after prepare (/vendor aborted) it still runs, the Greek words, the one-file bundle and file:// show the fallback. */
+async function python(name) {
+  const fs = require('fs'), cp = require('child_process');
+  const SITE = path.join(ROOT, 'dist', 'site'), BUNDLE = path.join(ROOT, 'dist', 'noema-lite.html');
+  console.log('— py-module@1');
+  if (!fs.existsSync(path.join(SITE, 'index.html'))) { console.log('  SKIP: no dist/site (python3 tools/build.py site)'); return; }
+  if (!fs.existsSync(path.join(SITE, 'vendor', 'pyodide', 'manifest.json'))) {
+    try { cp.execFileSync('python3', [path.join(ROOT, 'tools', 'fetch_pyodide.py'), '--site', SITE], { stdio: 'inherit' }); }
+    catch (e) { console.log('  SKIP: tools/fetch_pyodide.py could not fetch Pyodide (network?)'); return; }
+  }
+  // the site's own _headers (Netlify: every rule whose path matches adds its headers)
+  const rules = []; let cur = null;
+  for (const l of fs.readFileSync(path.join(SITE, '_headers'), 'utf8').split('\n')) {
+    if (/^\S/.test(l)) { cur = { re: new RegExp('^' + l.trim().replace(/[.+?^${}()|[\]\\]/g, '\\$&').replace(/\*/g, '.*') + '$'), h: {} }; rules.push(cur); }
+    else if (cur && /^\s+[\w-]+:/.test(l)) { const i = l.indexOf(':'); cur.h[l.slice(0, i).trim().toLowerCase()] = l.slice(i + 1).trim(); }
+  }
+  const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.mjs': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png', '.wasm': 'application/wasm', '.zip': 'application/zip', '.whl': 'application/zip', '.woff2': 'font/woff2' };
+  let BLOCK = false; const VH = [];
+  const srv = http.createServer((q, r) => {
+    let u = decodeURIComponent(new URL(q.url, 'http://x').pathname); if (u.endsWith('/')) u += 'index.html';
+    if (u.startsWith('/vendor/')) { VH.push(u); if (BLOCK) { r.writeHead(503); return r.end(); } }
+    if (u === '/bundle.html') { r.writeHead(200, { 'content-type': TYPES['.html'] }); return r.end(fs.readFileSync(BUNDLE)); }
+    const f = path.join(SITE, u);
+    if (u.includes('..') || !fs.existsSync(f) || !fs.statSync(f).isFile()) { r.writeHead(404); return r.end(); }
+    const hd = { 'content-type': TYPES[path.extname(f)] || 'application/octet-stream' };
+    for (const x of rules) if (x.re.test(u)) Object.assign(hd, x.h);
+    r.writeHead(200, hd); r.end(fs.readFileSync(f));
+  });
+  await new Promise(r => srv.listen(0, '127.0.0.1', r)); const URL0 = `http://127.0.0.1:${srv.address().port}`;
+  const man = JSON.parse(fs.readFileSync(path.join(SITE, 'vendor', 'pyodide', 'manifest.json'), 'utf8'));
+  const browser = await pw[name].launch(name === 'chromium' && process.env.PW_CHANNEL !== '' ? { channel: process.env.PW_CHANNEL || 'chromium' } : {});
+  // the runtime switched on (NOEMA_CONFIG.activities['py-module@1'] = true), whatever config.js says — the same for the site, the bundle and file://
+  const flagOn = () => { let c; Object.defineProperty(window, 'NOEMA_CONFIG', { configurable: true, get: () => c, set: v => { c = v; if (v && typeof v === 'object') v.activities = Object.assign({}, v.activities, { 'py-module@1': true }); } }); };
+  const E = [];
+  const page = async (ctx, url, newUI) => {
+    const p = await ctx.newPage(); p.setDefaultTimeout(15000); p.on('pageerror', e => E.push(e.message));
+    await p.goto(url); await p.evaluate(n => { localStorage.clear(); if (n) localStorage.setItem('noema-test:newUI', '1'); }, !!newUI); await p.reload(); await wait(800);
+    await p.evaluate(async pk => { await Noema.importPack(Noema.account.id, pk); }, PACK);
+    await p.goto(url + (url.includes('?') ? '&' : '?') + 'subject=demo-activities'); await wait(1500);
+    return p;
+  };
+  const SEL = 'main .act-blk .act[data-activity="py-filter"]';
+  const openBlock = async p => {
+    await p.evaluate(() => { location.hash = '#/'; }); await wait(300); await p.evaluate(() => { location.hash = '#/s/ch01-s01'; }); await wait(600);
+    const sa = await p.$('button:has-text("show all")'); if (sa) { await sa.click(); await wait(200); }
+    await p.locator(SEL).first().scrollIntoViewIfNeeded(); await startIfParked(p, SEL);
+  };
+  const ro = (p, s = SEL) => p.evaluate(s => [...document.querySelectorAll(s + ' .sim-ro dd')].map(d => d.textContent), s);
+  const filled = (p, s = SEL, ms = 120000) => until(() => p.evaluate(s => { const d = document.querySelectorAll(s + ' .sim-ro dd'); return d.length === 3 && [...d].every(x => /\d/.test(x.textContent)); }, s), ms);
+  const setN = (p, s, v) => p.evaluate(([s, v]) => { const e = document.querySelector(`${s} input[type=range][data-param="N"]`) || document.querySelector(`${s} [data-param="N"]`); e.value = String(v); e.dispatchEvent(new Event('input', { bubbles: true })); e.dispatchEvent(new Event('change', { bubbles: true })); }, [s, v]);
+
+  try {
+    const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } }); await ctx.addInitScript(flagOn);
+    let p = await page(ctx, URL0 + '/index.html');
+    ok(await p.evaluate(() => !!ACT.ITEMS['py-filter'] && NoemaPy.available() && ACT.caps().has('runtime:py-module@1') && checkRequires().length === 0), 'on the website (http, the runtime on): the app has runtime:py-module@1, pack.requires is met');
+    await openBlock(p);
+    const first = await until(() => p.evaluate(s => /downloads about \d+\s*MB once/.test(document.querySelector(s + ' .act-pyline')?.textContent || ''), SEL), 15000);
+    const note = await p.evaluate(s => document.querySelector(s + ' .act-pyline')?.textContent || '', SEL);
+    ok(first, `the first-use note says what it downloads, once (${note}; the manifest lists ${Object.keys(man.files || {}).length} files)`);
+    ok(await filled(p), 'the Python sim renders: the readouts come from step() (' + (await ro(p)).join(' · ') + ')');
+    const shape = await p.evaluate(s => { const r = document.querySelector(s); return { title: r.querySelector('.sim-title')?.textContent, plots: r.querySelectorAll('.sim-plot svg').length, frames: [...r.querySelectorAll('iframe')].map(f => ({ sb: f.getAttribute('sandbox'), vis: f.offsetHeight > 0 })), line: r.querySelector('.act-pyline')?.hidden }; }, SEL);
+    ok(shape.title === 'Two digital low-pass filters' && shape.plots === 2 && shape.frames.length === 1 && shape.frames[0].sb === 'allow-scripts' && !shape.frames[0].vis && shape.line, `the app's own controls and 2 plots; Python in one hidden sandboxed frame; the note gone once ready ${JSON.stringify(shape)}`);
+    const r4 = await ro(p);
+    await setN(p, SEL, 8); await until(async () => (await ro(p))[0] !== r4[0], 20000);
+    const r8 = await ro(p);
+    ok(/−?-?3[.,]7\s*dB/.test(r4[0]) && /−?-?1\d\d[.,]\d\s*dB|−?-?[5-9]\d[.,]\d\s*dB/.test(r8[0]) && /1[.,]3\s*dB/.test(r8[1]), `a slider changes Python's outputs: N = 4 → ${r4[0]}, N = 8 → ${r8[0]} (300 Hz: ${r8[1]})`);
+    ok(VH.some(u => /numpy/.test(u)) && !VH.some(u => /scipy|openblas/.test(u)), 'numpy only: no scipy file was fetched (' + VH.length + ' /vendor requests)');
+
+    console.log('— py-module@1: the sim exercise (checks on Python\'s outputs)');
+    const card = async () => { await p.evaluate(() => { const m = document.querySelector('main'); m.innerHTML = ''; const c = exerciseCard(EX['ch01-e904']); c.id = 'T'; m.append(c); scrollTo(0, 0); }); return filled(p, '#T', 60000); };
+    const check = async () => { await p.click('#T button:has-text("Check")'); await wait(400); };
+    ok(await card(), 'the sim exercise ch01-e904 shows the Python activity');
+    await setN(p, '#T', 16); await until(async () => /5[.,]9/.test((await ro(p, '#T'))[1] || ''), 20000); await check();
+    const bad = await p.evaluate(() => { const c = document.getElementById('T'); return { bad: !!c.querySelector('.explain.bad'), list: [...c.querySelectorAll('.act-checks li')].map(l => l.className + ':' + l.textContent), att: S.att?.['ch01-e904']?.result }; });
+    ok(bad.bad && bad.list.length === 2 && /^ok:/.test(bad.list[0]) && /^bad:/.test(bad.list[1]) && bad.att?.passed === false, `N = 16 removes the tone but loses 6 dB at 300 Hz: graded wrong ${JSON.stringify(bad.list)}`);
+    await card(); await setN(p, '#T', 8); await until(async () => /1[.,]3/.test((await ro(p, '#T'))[1] || ''), 20000); await check();
+    const good = await p.evaluate(() => ({ ok: !!document.querySelector('#T .explain.ok'), att: S.att?.['ch01-e904']?.result }));
+    ok(good.ok && good.att?.passed === true && good.att.score === 1, `N = 8: graded right (score ${good.att?.score})`);
+
+    console.log('— py-module@1: Settings › Prepare Python for offline (classic)');
+    await p.evaluate(() => openAccountMenu('backup'));
+    ok(await until(() => p.evaluate(() => [...document.querySelectorAll('.accbody details summary')].some(x => /Python for activities/.test(x.textContent))), 8000), 'the classic Backup tab has the Python section');
+    const pyDet = p.locator('.accbody details', { has: p.locator('summary', { hasText: 'Python for activities' }) });
+    await pyDet.locator('summary').click();
+    const st0 = await pyDet.evaluate(d => ({ pill: d.querySelector('summary .pill')?.textContent, line: d.querySelector('.act-pyset .tiny')?.textContent, btn: d.querySelector('[data-py="prepare"]')?.hidden === false ? d.querySelector('[data-py="prepare"]').textContent : null }));
+    ok(/Partly here/.test(st0.pill) && /of .* on this device/.test(st0.line) && /Prepare Python for offline \(\d/.test(st0.btn || ''), `before: partly here (numpy ran), the button says how much is left ${JSON.stringify(st0)}`);
+    await pyDet.locator('[data-py="prepare"]').click();
+    ok(await until(() => pyDet.evaluate(d => /Ready offline/.test(d.querySelector('summary .pill')?.textContent || '')), 180000), 'Prepare → the pill says "Ready offline"');
+    const st1 = await pyDet.evaluate(d => ({ line: d.querySelector('.act-pyset .tiny')?.textContent, btn: d.querySelector('[data-py="prepare"]')?.hidden, tip: d.textContent }));
+    ok(/numpy and scipy/.test(st1.line) && st1.btn === true, `after: what is on the device (${st1.line}); no button`);
+    ok(VH.some(u => /scipy/.test(u)), 'Prepare fetched scipy too');
+    const status = await p.evaluate(() => NoemaPy.status());
+    ok(status && status.groups && Object.values(status.groups).every(g => g.ready), 'NoemaPy.status(): every group is cached ' + JSON.stringify(Object.fromEntries(Object.entries(status?.groups || {}).map(([k, g]) => [k, g.ready]))));
+    await p.evaluate(() => document.querySelectorAll('.modal').forEach(m => m.remove()));
+
+    console.log('— py-module@1: offline after Prepare');
+    BLOCK = true; await ctx.route('**/vendor/**', rt => rt.abort());
+    const p2 = await ctx.newPage(); p2.on('pageerror', e => E.push(e.message));
+    await p2.goto(URL0 + '/index.html?subject=demo-activities'); await wait(1500); await openBlock(p2);
+    ok(await filled(p2, SEL, 60000), 'a new page with /vendor blocked (server 503 + route abort) still runs the Python activity (' + (await ro(p2)).join(' · ') + ')');
+    ok(!(await p2.evaluate(s => document.querySelector(s + ' .act-fallback'), SEL)), 'no fallback');
+    await p2.close(); await ctx.unroute('**/vendor/**'); BLOCK = false;
+
+    console.log('— py-module@1: the shell (Me › Data and sync) and Greek');
+    await p.close();
+    const ctx3 = await browser.newContext({ viewport: { width: 1280, height: 900 } }); await ctx3.addInitScript(flagOn);
+    p = await page(ctx3, URL0 + '/index.html', true);
+    await p.evaluate(() => { S.settings.lang = 'el'; save(); }); await p.reload(); await wait(1200);
+    await p.evaluate(() => { location.hash = '#/me/data'; }); await wait(800); await p.evaluate(() => document.querySelectorAll('details').forEach(d => d.open = true)); await wait(300);
+    const el = await until(() => p.evaluate(() => [...document.querySelectorAll('details summary')].some(x => /Python για τις δραστηριότητες/.test(x.textContent))), 8000);
+    const elTxt = await p.evaluate(() => { const d = [...document.querySelectorAll('details')].find(x => /Python για τις δραστηριότητες/.test(x.querySelector('summary')?.textContent || '')); return d ? d.textContent : ''; });
+    ok(el && /Όχι σε αυτή τη συσκευή|Εν μέρει εδώ/.test(elTxt) && /Ετοίμασε την Python/.test(elTxt), 'the shell\'s Data and sync page has the section, in Greek: ' + elTxt.slice(0, 160));
+    await p.evaluate(() => { location.hash = '#/s/ch01-s01'; }); await wait(600); await p.locator(SEL).first().scrollIntoViewIfNeeded(); await startIfParked(p, SEL);
+    ok(await until(() => p.evaluate(s => /κατεβάζει περίπου \d+\s*MB μία φορά/.test(document.querySelector(s + ' .act-pyline')?.textContent || ''), SEL), 15000), 'the first-use note in Greek');
+    await ctx3.close(); await ctx.close();
+
+    console.log('— py-module@1: where Python cannot run (the one-file bundle, file://)');
+    const fbOf = q => q.evaluate(s => { const r = document.querySelector(s); return r ? { sim: !!r.querySelector('.sim'), fb: !!r.querySelector('.act-fallback img'), note: r.querySelector('.act-note')?.textContent || '', text: r.querySelector('.act-fbtext')?.textContent || '' } : null; }, SEL);
+    if (fs.existsSync(BUNDLE)) {
+      const c4 = await browser.newContext(); await c4.addInitScript(flagOn); const VH0 = VH.length;
+      const b = await page(c4, URL0 + '/bundle.html'); await openBlock(b); await wait(800);
+      const f = await fbOf(b);
+      ok(await b.evaluate(() => !!window.NOEMA_BUNDLE && !NoemaPy.available()) && f && !f.sim && f.fb && /works only on the website/.test(f.note) && VH.length === VH0, `the one-file bundle (even over http): the fallback, "works only on the website", no /vendor request ${JSON.stringify(f)}`);
+      await c4.close();
+    } else console.log('  (no dist/noema-lite.html: python3 tools/build.py bundle)');
+    const c5 = await browser.newContext(); await c5.addInitScript(flagOn);
+    const fp = await page(c5, 'file://' + ROOT + '/index.html'); await openBlock(fp); await wait(800);
+    const f5 = await fbOf(fp);
+    ok(f5 && !f5.sim && f5.fb && /works only on the website/.test(f5.note) && /moving-average|8 kHz|1 kHz/i.test(f5.text + ' ' + (await fp.evaluate(s => document.querySelector(s + ' img')?.alt || '', SEL))), `file://: the fallback picture and text, "works only on the website" ${JSON.stringify(f5)}`);
+    await c5.close();
+    ok(!E.length, 'no page errors ' + JSON.stringify(E.slice(0, 3)));
+  } finally { await browser.close(); srv.close(); }
+}
 (async () => {
   const srv = http.createServer((q, r) => { hits.push(q.url); r.end('gone'); }); await new Promise(r => srv.listen(0, '127.0.0.1', r)); BEACON = `http://127.0.0.1:${srv.address().port}/beacon`;
-  for (const b of (process.env.BROWSERS || 'chromium').split(',')) { console.log(`\n[${b}]`); try { await run(b); } catch (e) { ok(false, b + ': ' + e.message.split('\n')[0]); } }
+  for (const b of (process.env.BROWSERS || 'chromium').split(',')) { console.log(`\n[${b}]`); try { await run(b); } catch (e) { ok(false, b + ': ' + e.message.split('\n')[0]); }
+    if (process.env.PY !== '0') try { await python(b); } catch (e) { ok(false, b + ' py-module@1: ' + e.message.split('\n')[0]); } }
   srv.close(); console.log(fails ? `\n${fails} failed` : '\nactivities_app: all passed'); process.exit(fails ? 1 : 0);
 })();
