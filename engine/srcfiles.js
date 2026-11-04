@@ -139,7 +139,8 @@ window.NoemaSrcFiles = (() => {
   /** Keep the .h5p file of an item (checked against its bytes and sha256 first) → true when kept. */
   async function putActivityFile(acc, subj, a, blob, { upload = true } = {}) {
     if (!blob || (a.bytes && blob.size !== a.bytes) || (await sha256(blob).catch(() => null)) !== a.sha256) return false;
-    await DB.put(actKey(acc, subj, a.sha256), { blob, id: a.id, size: blob.size, added: new Date().toISOString() });
+    // the bytes, not the Blob: WebKit refuses a Blob in IndexedDB in some places (a file:// page: the transaction fails with no error)
+    await DB.put(actKey(acc, subj, a.sha256), { bytes: await blob.arrayBuffer(), id: a.id, size: blob.size, added: new Date().toISOString() });
     if (upload && cloudOn(acc)) await NoemaCloud.uploadObject(actCloudPath(subj, a), blob, 'application/zip').catch(e => console.warn('[activity files] cloud upload failed — kept on this device', e));   // i18n-ignore (a log)
     return true;
   }
@@ -156,7 +157,8 @@ window.NoemaSrcFiles = (() => {
   /** The .h5p file of an item as bytes, from wherever it is: this device, the account (then kept here), the library's folder. null: none. */
   async function activityFile(acc, subj, a, { base = null } = {}) {
     const hit = await DB.get(actKey(acc, subj, a.sha256)).catch(() => null);
-    if (hit?.blob) return new Uint8Array(await hit.blob.arrayBuffer());
+    if (hit?.bytes) return new Uint8Array(hit.bytes);
+    if (hit?.blob) return new Uint8Array(await hit.blob.arrayBuffer());   // (kept as a Blob by an earlier version)
     let blob = null;
     if (cloudOn(acc)) blob = await NoemaCloud.downloadObject(actCloudPath(subj, a)).then(r => r.ok === false ? null : r.blob()).catch(() => null);
     if (!blob && base) blob = await fetch(base + a.entry, { credentials: 'same-origin' }).then(r => r.ok ? r.blob() : null).catch(() => null);
