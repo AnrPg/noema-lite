@@ -180,6 +180,7 @@
       if (e.kind === 'assign') { const n = cc.nodes[e.nid]; if (n && !C().Edit?.cannotAssign?.(cc, n)) attachTo(cc, n, e); continue; }
       if (e.kind === 'i18n') { if (!C().checkI18n(cc, e.locale, e.data).length) C().setI18n(cc, e.locale, e.data); continue; }   // 🌐 a Roadmap translation (noema_save_roadmap_translation)
       if (e.kind === 'extend') { if (!extendProblems(cc, e).length) extend(cc, e); continue; }   // 🌱 a new part of the Roadmap (noema_extend_roadmap)
+      if (e.kind === 'link') { if (!linkProblems(cc, e).length) link(cc, e); continue; }   // 🔗 links between steps on the map (noema_link_roadmap_steps)
       const t = byId(cc, e.task); if (t && !check(cc, t, e.data).length) apply(cc, t, e.data);
     }
     return cc;
@@ -224,6 +225,34 @@
     if (isApp(c) && !GRAPH.includes(c.stage)) { c.status = 'ready'; c.error = null; c.errorInfo = null; }
     (c.log = c.log || []).push({ t: Date.now(), m: '🌱 ' + rt('roadmap.jobs.partAdded', { title: e.part.title, n: Object.keys(e.nodes).length }), via: 'claude-app' });
     return true;
+  }
+  /** 🔗 Links between steps already on the map (noema_link_roadmap_steps → NoemaSourcePlan.linkFromClaude): can they still be
+      applied to this copy? → [] when they can, ['applied'] when this copy has them already, else the problems (e.g. a step this
+      copy does not have yet: the entry waits). Prepared steps may get a new prerequisite: only the map changes. */
+  /* i18n-ignore-start — problems for the console and the connector, not for the learner */
+  function linkProblems(c, e) {
+    const add = e.links || [], rem = e.remove || [], has = (x, list) => list.some(y => y.from === x.from && y.to === x.to), p = [];
+    if (!add.length && !rem.length) return ['nothing to change'];
+    if (e.id && (c.linksApplied || []).includes(e.id)) return ['applied'];   // its receipt: never replayed (a later entry may have undone it)
+    const own = id => !!c.nodes && Object.hasOwn(c.nodes, id);
+    for (const x of [...add, ...rem]) if (!own(x.from) || !own(x.to)) p.push(`a link to a step this copy does not have (${x.from} → ${x.to})`);
+    if (p.length) return p;
+    if (add.every(x => has(x, c.edges || [])) && !rem.some(x => has(x, c.edges || []))) return ['applied'];
+    const after = [...(c.edges || []).filter(x => !has(x, rem)), ...add.filter(x => !has(x, c.edges || []))];
+    if (!C().topo(Object.keys(c.nodes), after)) p.push('the links form a cycle');
+    return p;
+  }
+  /* i18n-ignore-end */
+  /** Apply the links (mutates c; check linkProblems first): edges added (with their why) and removed, the study order
+      recomputed. Nothing else changes — no step is re-planned and no subject or progress is touched. */
+  function link(c, e) {
+    const has = (x, list) => list.some(y => y.from === x.from && y.to === x.to);
+    const rem = (e.remove || []).filter(x => has(x, c.edges || [])), add = (e.links || []).filter(x => !has(x, c.edges || []) && Object.hasOwn(c.nodes, x.from) && Object.hasOwn(c.nodes, x.to));
+    c.edges = [...(c.edges || []).filter(x => !has(x, rem)), ...add.map(x => ({ from: x.from, to: x.to, why: x.why || '' }))];
+    c.paths = { minimal: c.paths?.minimal || [], deep: C().order(c) };
+    if (e.id) c.linksApplied = [...(c.linksApplied || []), e.id].slice(-200);
+    (c.log = c.log || []).push({ t: Date.now(), m: '🔗 ' + rt('roadmap.jobs.linksAdded', { added: add.length, removed: rem.length }), via: 'claude-app' });
+    return { added: add.length, removed: rem.length };
   }
   const inboxKey = (cid, seq) => `${IN}${cid}:${seq || Date.now().toString(36).padStart(9, '0') + '-' + Math.random().toString(36).slice(2, 6)}`;
 
@@ -306,7 +335,7 @@
     return true;
   };
   /** The kinds of inbox entry this build knows, besides a task's answer ({ task }). Anything else (written by a newer connector) stays for a newer app. */
-  const KINDS = ['step', 'assign', 'i18n', 'extend'];
+  const KINDS = ['step', 'assign', 'i18n', 'extend', 'link'];
   /** Fetch the answers waiting in the cloud, check and apply them, delete them. → how many were applied */
   App.poll = async (acc = App.acc) => {
     const CL = root.NoemaCloud; if (!acc || App.busy || !CL?.session?.() || !CL.kvRows) return 0;
@@ -339,6 +368,11 @@
             const errs = extendProblems(c, e);
             if (!errs.length) { extend(c, e); C().save(acc, c); n++; toast('🌱 ' + rt('roadmap.jobs.partAdded', { title: e.part.title, n: Object.keys(e.nodes).length }), 5000); }
             else if (errs[0] !== 'applied') { console.warn('[curjobs] part refused', errs); if (age < 7 * 864e5) continue; }   // 🛡 e.g. this copy has not got a step it links to yet: try again later
+          }
+          else if (e.kind === 'link') {   // 🔗 Claude linked steps already on the map (a prepared step keeps its subject and progress)
+            const errs = linkProblems(c, e);
+            if (!errs.length) { const r = link(c, e); C().save(acc, c); n++; toast('🔗 ' + rt('roadmap.jobs.linksAdded', r), 5000); }
+            else if (errs[0] !== 'applied') { console.warn('[curjobs] links refused', errs); if (age < 7 * 864e5) continue; }   // 🛡 e.g. this copy has not got a step yet: try again later
           }
           else {
             const t = byId(c, e.task);   // null: applied already (an earlier check) — or out of date
@@ -414,5 +448,5 @@
     return { title: c.nodes[nid].title };
   };
 
-  root.NoemaCurJobs = { work, settle, extend, extendProblems, growMessage, attachTo, savedSince, claimKey, CLAIM, LEASE, WAIT, leaseOf, claimExpired, next, byId, planGen, check, apply, merged, spec, stepSpec, planBatch, downloadsOf, taskText, taskLabel, stepText, message, inboxKey, needsPlan, prepared, isApp, BATCH, BATCH_FILES, IN, App };
+  root.NoemaCurJobs = { work, settle, extend, extendProblems, link, linkProblems, growMessage, attachTo, savedSince, claimKey, CLAIM, LEASE, WAIT, leaseOf, claimExpired, next, byId, planGen, check, apply, merged, spec, stepSpec, planBatch, downloadsOf, taskText, taskLabel, stepText, message, inboxKey, needsPlan, prepared, isApp, BATCH, BATCH_FILES, IN, App };
 })(typeof window !== 'undefined' ? window : globalThis);
