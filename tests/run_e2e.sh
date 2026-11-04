@@ -16,6 +16,7 @@ node "$ROOT/tests/simexpr.js"          # the expression language of sim-spec@1: 
 node "$ROOT/tests/circuit.js"           # the circuit engine circuit-mna@1: MNA, transients, faults, instruments (docs/INTERACTIVE_CIRCUIT.md)
 node "$ROOT/tests/activities.js"        # the loop guard, the protocol checks, JS = Python rules (html-app, sim-spec, checks), never allow-same-origin
 node "$ROOT/tests/activities_app.js" "$T" "$T/act-pack.json"   # activities in the app: sandbox, handshake, state, grading, fallbacks, endless loop; sim-spec@1, the checks grader, circuit-mna@1 and the fault bench; wasm-module@1, the xAPI export, external-embed@1 (card, Settings "Ask again") (BROWSERS=chromium,firefox,webkit)
+node "$ROOT/tests/activity_author.js" --browser "$T"   # the activity author (P6): #/author in the built site, classic router and the frame (subject ⋮ › Create an activity), the form, preview, .zip, 320 px
 node "$ROOT/tests/activities_wasm.js" --app "$T"   # wasm-module@1 + engine wasm@1: parity with wasm_check.py, the ABI, no network in the worker, runaway, in the app (docs/INTERACTIVE_WASM.md)
 node "$ROOT/tests/activities_embed.js" --browser   # external-embed@1: the allow-list, JS = Python URL and item rules, the consent card, a hostile page (a local fake provider; docs/INTERACTIVE_EMBED.md)
 node "$ROOT/tests/xapi.js"            # the xAPI 1.0.3 / cmi5 export (docs/INTERACTIVE_XAPI.md)

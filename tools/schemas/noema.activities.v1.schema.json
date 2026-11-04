@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noema-lite.netlify.app/schemas/noema.activities.v1.schema.json",
+  "title": "registry",
+  "description": "The registry of a subject's activities, activities/activities.json (docs/INTERACTIVE.md §3). The shape that tools/activities.py check_activities and engine/packcheck.js checkActivities enforce for the folder form (make_pack.py adds spec / html, strings, sha256 and bytes inline). Cross-file rules stay with the validators: unique ids, fallback.media is a picture of the pack, a runtime this app runs, the string tables. Titles are keys of the authoring UI's labels (engine.author.f.<title> in i18n/engine/en.arb).",
+  "type": "object",
+  "required": ["format", "items"],
+  "properties": {
+    "format": { "const": "noema.activities/v1" },
+    "items": { "title": "items", "type": "array", "items": { "$ref": "#/$defs/item" } }
+  },
+  "$defs": {
+    "item": {
+      "title": "item",
+      "type": "object",
+      "required": ["id", "runtime", "entry", "stateVersion", "fallback"],
+      "properties": {
+        "id": { "title": "actId", "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{1,60}$" },
+        "runtime": { "title": "runtime", "enum": ["html-app@1", "sim-spec@1"] },
+        "entry": { "title": "entry", "type": "string", "pattern": "^activities/[a-z0-9][a-z0-9-]{1,60}/[A-Za-z0-9_.-]+$" },
+        "stateVersion": { "title": "stateVersion", "type": "integer", "minimum": 1, "default": 1 },
+        "capabilities": { "title": "capabilities", "type": "array", "uniqueItems": true, "items": { "enum": ["state", "events", "resize", "result", "hints", "announce"] } },
+        "height": { "title": "height", "type": "integer", "minimum": 120, "maximum": 2000 },
+        "fallback": { "title": "fallback", "type": "object", "required": ["media", "text"], "properties": {
+          "media": { "title": "fallbackMedia", "type": "string", "minLength": 1 },
+          "text": { "title": "fallbackText", "type": "string", "minLength": 40, "x-noema": "longtext" } } },
+        "origin": { "title": "origin", "type": "string" },
+        "credit": { "title": "credit", "type": "string" },
+        "license": { "title": "license", "type": "string" }
+      }
+    }
+  }
+}
