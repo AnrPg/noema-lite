@@ -451,7 +451,10 @@ def build_bundle(metas):
     sel = None
     if '--subjects' in args: sel = set(args[args.index('--subjects') + 1].split(','))
     rd = lambda p: open(os.path.join(ROOT, p), encoding='utf-8').read()
-    esc = lambda s: s.replace('</script', '<\\/script')
+    # a source inlined in a <script>: '</script' would end it, and '<!--' followed later by '<script' (the Python runner's srcdoc,
+    # 37_activity_py.js) puts the HTML parser in the 'double escaped' state, where '</script>' no longer ends the element (the
+    # engine then swallowed the loader and the bundle stayed blank). Both are written as JS escapes that mean the same text.
+    esc = lambda s: s.replace('</script', '<\\/script').replace('<!--', '<\\x21--')
     packs = ''.join(f'<script>{esc(rd(m["path"]))}</script>\n' for m in metas if (not sel or m['id'] in sel))
     packs += ''.join(f'<script>{esc(rd(b["path"]))}</script>\n' for m in metas if (not sel or m['id'] in sel) for b in (m.get('bridgeLocales') or {}).values())   # 文A language bridges
     packs += ''.join(f'<script>{esc(rd(t["path"]))}</script>\n' for m in metas if (not sel or m['id'] in sel) for t in (m.get('trLocales') or {}).values())   # translations (docs/i18n.md §10)
