@@ -1727,7 +1727,12 @@ const ACT = (() => {
         sess.port = RUNTIMES[a.runtime].mount(box, { act: a, init, title: tE('engine.act.frameTitle', { id: a.id }),
           onMessage: raw => { const r = ACTP.check(raw); if (r.ok) onMessage(r.msg); else if (r.version) stop(tE('engine.act.newerProtocol'), false); else if (!r.ignore) strike(r.why); },
           onFail: why => why === 'unsupported' ? stop(tE('engine.act.notHere'), false) : why === 'spec' ? stop(tE('engine.act.failed'), false)
-            : why === 'runaway' ? stop(tE('engine.act.stopped')) : stop(why === 'navigated' ? tE('engine.act.misbehaved') : tE('engine.act.failed')) });
+            : why === 'runaway' ? stop(tE('engine.act.stopped'))
+            // external-embed@1 (docs/INTERACTIVE_EMBED.md): refused or mounted as an exercise → the fallback for good; offline or not loaded → Restart retries
+            : why === 'embed-refused' || why === 'embed-graded' ? stop(tE('engine.act.embed.refused'), false)
+            : why === 'embed-offline' ? stop(tE('engine.act.embed.offline'))
+            : why === 'embed-timeout' ? stop(tE('engine.act.embed.timeout', { provider: (window.NoemaEmbed?.PROVIDERS || []).find(p => p.id === a.provider)?.name || String(a.provider || '') }))
+            : stop(why === 'navigated' ? tE('engine.act.misbehaved') : tE('engine.act.failed')) });
       } catch (e) { console.warn('[noema] activity mount failed', e); return stop(tE('engine.act.failed')); }
       if (notice) note.textContent = notice;
       LIVE.push(sess);
@@ -6375,9 +6380,26 @@ function subjectMenu() {
     { label: SL('editSubject'), sub: SL('editSubjectSub'), icon: 'edit', run: async () => Noema.editSubject(await subjectMeta(), { onChange: () => location.reload() }) },
     own(Noema.subjectMeta || {}) ? { label: SL('shareSubject'), sub: SL('shareSubjectSub'), icon: 'share', run: async () => Noema.share(await subjectMeta()) } : null,   // library subjects are everybody's already
     { label: SL('exportPackage'), sub: SL('exportPackageSub'), icon: 'download', run: () => Noema.exportPackage(ACCOUNT.id, Noema.pack).catch(e => toast('⚠️ ' + errText(e), 4000)) },
+    window.NoemaXAPI ? { label: tE('engine.xapi.export'), sub: tE('engine.xapi.exportSub'), icon: 'download', run: exportXAPI } : null,
     { label: SL('pickSubject'), icon: 'book', run: () => Noema.openSubjectPicker() },
     '-',
     { label: SL('resetProgress', { title: SUBJ.title }), icon: 'close', danger: true, run: resetProgress }];
+}
+/** ⋮ › Export learning record (xAPI): this subject's activity attempts (S.att) and answers (S.res) as an xAPI 1.0.3 file, made by
+    NoemaXAPI (engine/src/43_xapi.js, docs/INTERACTIVE_XAPI.md) — nothing is sent anywhere. The actor is the account id, never an e-mail. */
+function exportXAPI() {
+  const att = S.att || {}, res = S.res || {};
+  if (!Object.keys(att).length && !Object.keys(res).length) { toast(tE('engine.xapi.none'), 3500); return; }
+  const site = String(Noema.config?.siteUrl || 'https://noema-lite.netlify.app').replace(/\/+$/, '') + '/';   // i18n-ignore (a web address)
+  let file;
+  try {
+    file = NoemaXAPI.exportFile({ att, res, pack: { id: SUBJ.id, title: SUBJ.title, language: SUBJ.language }, chapters: Noema.pack?.chapters || COURSE },
+      { actor: { account: { homePage: site, name: String(ACCOUNT.id) } }, activityBase: site + 'xapi/' + encodeURIComponent(SUBJ.id) + '/', registrationSeed: [String(ACCOUNT.id), SUBJ.id], now: Date.now() });
+  } catch (e) { toast('⚠️ ' + errText(e), 4000); return; }
+  const name = SUBJ.id + '.xapi.json';   // i18n-ignore (a file name)
+  const a = h('a', { href: URL.createObjectURL(new Blob([JSON.stringify(file, null, 1)], { type: 'application/json' })), download: name });
+  document.body.append(a); a.click(); a.remove();
+  toast('⬇️ ' + name, 3000);   // i18n-ignore (a file name)
 }
 function resetProgress(after) {
   confirmBox(tE('engine.home.resetConfirm', { title: SUBJ.title }), async () => { await Noema.backup.restorePoint(ACCOUNT.id, tE('engine.home.resetPoint', { title: SUBJ.title }), { k: 'engine.home.resetPoint', p: { title: SUBJ.title } }); const st = S.settings; for (const k of Object.keys(S)) delete S[k]; Object.assign(S, { xp: 0, read: {}, res: {}, pb: {}, fc: {}, boss: {}, last: null, resetAt: Date.now(), settings: st }); flushSave(); if (typeof after === 'function') after(); route(); renderTopStats(); });
@@ -8063,6 +8085,1034 @@ function reportedView() {
   /* i18n-ignore-end */
 })();
 
+/* ---- 43_xapi.js ---- */
+/* ===================== xAPI 1.0.3 / cmi5 export of the learner's activity attempts (docs/activities-dev/xapi.md, docs/adr/001 D12) =====================
+   Pure functions: no network, no LRS. The app (later) offers the result as a JSON file to download.
+     NoemaXAPI.statements(input, opts) → [statement]      input: { att: S.att, res?: S.res, pack?: {id, title}, chapters?: [chapter] }
+     NoemaXAPI.exportFile(input, opts) → { format: 'noema.xapi-export/v1', … statements }   (tools/schemas/noema.xapi-export.v1.schema.json)
+     NoemaXAPI.cmi5Package(course, opts) → { files: { 'cmi5.xml': xml }, aus: [{id, chapter, exercise?}] }
+     NoemaXAPI.validate(stmt) → [problem]   ·   NoemaXAPI.validateAll(list) → [problem] (also the cmi5 rules across statements)
+   opts: { actor: { name?, account: { homePage, name } } (never an email: mbox / mbox_sha1sum / openid are never written),
+           activityBase: 'https://noema-lite.netlify.app/xapi/<packId>/', registration?: UUID | registrationSeed?: any,
+           locale?: 'en', profile?: 'xapi' | 'cmi5', granularity?: 'chapter' | 'activity' (cmi5: the AU of a statement) }
+   Every id is a UUID v5 of the content (re-export gives the same statements: idempotent at the LRS). */
+/* i18n-ignore-start */   // IRIs, verbs and protocol words, not text for learners
+const NoemaXAPI = (() => {
+  const VERSION = '1.0.3';
+  const ADL = 'http://adlnet.gov/expapi/verbs/';
+  const VERBS = {
+    attempted: ADL + 'attempted', interacted: 'http://adlnet.gov/expapi/verbs/interacted', answered: ADL + 'answered',
+    passed: ADL + 'passed', failed: ADL + 'failed', completed: ADL + 'completed', initialized: ADL + 'initialized', terminated: ADL + 'terminated',
+  };
+  const CMI5_CAT = 'https://w3id.org/xapi/cmi5/context/categories/cmi5';
+  const MOVEON_CAT = 'https://w3id.org/xapi/cmi5/context/categories/moveon';
+  const CMI5_SESSION = 'https://w3id.org/xapi/cmi5/context/extensions/sessionid';
+  const CMI5_DEFINED = new Set(['launched', 'initialized', 'completed', 'passed', 'failed', 'abandoned', 'waived', 'terminated', 'satisfied']);
+  const ACT_TYPE = { course: 'https://w3id.org/xapi/cmi5/activitytype/course', block: 'https://w3id.org/xapi/cmi5/activitytype/block',
+    sim: 'http://adlnet.gov/expapi/activities/simulation', interaction: 'http://adlnet.gov/expapi/activities/cmi.interaction',
+    chapter: 'http://adlnet.gov/expapi/activities/module', lesson: 'http://adlnet.gov/expapi/activities/lesson' };
+  const INTERACTION = { mcq: 'choice', odd: 'choice', predict: 'choice', inquiry: 'choice', tf: 'true-false', cloze: 'fill-in', match: 'matching',
+    order: 'sequencing', bucket: 'matching', calc: 'numeric', free: 'long-fill-in', write: 'long-fill-in', spotbug: 'choice', img_hotspot: 'choice',
+    img_sequence: 'sequencing', img_drag: 'matching', img_label: 'fill-in', img_select: 'matching' };
+  const EXT_BASE = 'https://noema-lite.netlify.app/xapi/ext/';
+  const NS = '6f1d4a52-7c1e-5b0a-9e43-2a8d1c7b3f60';   // the noema-lite namespace of every UUID v5 here
+  const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+  const IRI_RE = /^[a-z][a-z0-9+.-]*:\/\/[^\s<>"{}|\\^`]+$/i;
+  const LANG_RE = /^[a-zA-Z]{2,8}(-[a-zA-Z0-9]{1,8})*$/;
+  const DUR_RE = /^P(?!$)(\d+Y)?(\d+M)?(\d+W)?(\d+D)?(T(?=\d)(\d+H)?(\d+M)?(\d+(\.\d+)?S)?)?$/;
+  const TS_RE = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?(Z|[+-]\d{2}:\d{2})$/;
+
+  /* ---------- SHA-1 and UUID v5 (RFC 4122 §4.3), synchronous and dependency-free ---------- */
+  function utf8(s) {
+    if (typeof TextEncoder !== 'undefined') return new TextEncoder().encode(s);
+    const out = []; const e = unescape(encodeURIComponent(s)); for (let i = 0; i < e.length; i++) out.push(e.charCodeAt(i)); return Uint8Array.from(out);
+  }
+  function sha1(bytes) {
+    const ml = bytes.length, nb = ((ml + 9 + 63) >> 6) << 6, m = new Uint8Array(nb);
+    m.set(bytes); m[ml] = 0x80;
+    const bits = ml * 8, dv = new DataView(m.buffer);
+    dv.setUint32(nb - 4, bits >>> 0); dv.setUint32(nb - 8, Math.floor(bits / 4294967296));
+    let h0 = 0x67452301, h1 = 0xefcdab89, h2 = 0x98badcfe, h3 = 0x10325476, h4 = 0xc3d2e1f0;
+    const w = new Uint32Array(80), rol = (x, n) => (x << n) | (x >>> (32 - n));
+    for (let o = 0; o < nb; o += 64) {
+      for (let i = 0; i < 16; i++) w[i] = dv.getUint32(o + i * 4);
+      for (let i = 16; i < 80; i++) w[i] = rol(w[i - 3] ^ w[i - 8] ^ w[i - 14] ^ w[i - 16], 1);
+      let a = h0, b = h1, c = h2, d = h3, e = h4;
+      for (let i = 0; i < 80; i++) {
+        const f = i < 20 ? ((b & c) | (~b & d)) + 0x5a827999 : i < 40 ? (b ^ c ^ d) + 0x6ed9eba1 : i < 60 ? ((b & c) | (b & d) | (c & d)) + 0x8f1bbcdc : (b ^ c ^ d) + 0xca62c1d6;
+        const t = (rol(a, 5) + f + e + w[i]) >>> 0; e = d; d = c; c = rol(b, 30) >>> 0; b = a; a = t;
+      }
+      h0 = (h0 + a) >>> 0; h1 = (h1 + b) >>> 0; h2 = (h2 + c) >>> 0; h3 = (h3 + d) >>> 0; h4 = (h4 + e) >>> 0;
+    }
+    const out = new Uint8Array(20), ov = new DataView(out.buffer);
+    [h0, h1, h2, h3, h4].forEach((x, i) => ov.setUint32(i * 4, x));
+    return out;
+  }
+  const hex = b => Array.from(b, x => x.toString(16).padStart(2, '0')).join('');
+  function uuid5(name, ns = NS) {
+    const nsb = Uint8Array.from(ns.replace(/-/g, '').match(/../g).map(x => parseInt(x, 16)));
+    const nb = utf8(String(name)), all = new Uint8Array(16 + nb.length); all.set(nsb); all.set(nb, 16);
+    const h = sha1(all).slice(0, 16); h[6] = (h[6] & 0x0f) | 0x50; h[8] = (h[8] & 0x3f) | 0x80;
+    const x = hex(h); return `${x.slice(0, 8)}-${x.slice(8, 12)}-${x.slice(12, 16)}-${x.slice(16, 20)}-${x.slice(20)}`;
+  }
+
+  /* ---------- small helpers ---------- */
+  /** a stable JSON (sorted keys): the name of a UUID v5 must not depend on the order of the keys */
+  function stable(v) {
+    if (v === undefined) return 'null';
+    if (v === null || typeof v !== 'object') return JSON.stringify(v);
+    if (Array.isArray(v)) return '[' + v.map(stable).join(',') + ']';
+    return '{' + Object.keys(v).sort().filter(k => v[k] !== undefined).map(k => JSON.stringify(k) + ':' + stable(v[k])).join(',') + '}';
+  }
+  const num = v => typeof v === 'number' && isFinite(v);
+  const iso = t => (num(t) && t > 0 && t < 8.64e15) ? new Date(t).toISOString() : null;
+  /** ISO 8601 duration of `ms` milliseconds, to 0.01 s (cmi5 §9.5.4.1): PT1H2M3.45S */
+  function duration(ms) {
+    if (!num(ms) || ms < 0) ms = 0;
+    const cs = Math.round(ms / 10), h = Math.floor(cs / 360000), m = Math.floor((cs % 360000) / 6000), s = (cs % 6000) / 100;
+    let out = 'PT'; if (h) out += h + 'H'; if (m) out += m + 'M';
+    if (s || (!h && !m)) out += (Number.isInteger(s) ? s : s.toFixed(2).replace(/0$/, '')) + 'S';
+    return out;
+  }
+  /** plain text of an exercise prompt for an activity name: the inline format's marks removed, at most 120 characters */
+  function plain(s) {
+    let t = String(s || '').replace(/\$\$?([^$]*)\$\$?/g, '$1').replace(/\[\[([^\]|]*)[^\]]*\]\]/g, '___').replace(/[*`]/g, '').replace(/\s+/g, ' ').trim();
+    return t.length > 120 ? t.slice(0, 119) + '…' : t;
+  }
+  const lang = l => (typeof l === 'string' && LANG_RE.test(l)) ? l : 'en';
+  const langMap = (l, s) => ({ [l]: String(s) });
+  const enc = s => encodeURIComponent(String(s));
+
+  function setup(input, opts) {
+    opts = opts || {};
+    const a = opts.actor || {}, acc = a.account || {};
+    if (!acc || typeof acc.homePage !== 'string' || !IRI_RE.test(acc.homePage) || typeof acc.name !== 'string' || !acc.name)
+      throw new Error('NoemaXAPI: opts.actor.account {homePage (IRI), name} is required (an account, never an email)');
+    const actor = { objectType: 'Agent', account: { homePage: acc.homePage, name: acc.name } };
+    if (typeof a.name === 'string' && a.name && !/@/.test(a.name)) actor.name = a.name;   // a display name; an address is never written
+    const pack = (input && input.pack) || {};
+    let base = opts.activityBase || ('https://noema-lite.netlify.app/xapi/' + enc(pack.id || 'pack') + '/');
+    if (!base.endsWith('/')) base += '/';
+    if (!IRI_RE.test(base)) throw new Error('NoemaXAPI: opts.activityBase must be an absolute IRI');
+    const registration = (typeof opts.registration === 'string' && UUID_RE.test(opts.registration)) ? opts.registration.toLowerCase()
+      : uuid5('registration|' + stable(opts.registrationSeed !== undefined ? opts.registrationSeed : [acc.homePage, acc.name, base]));
+    const ext = opts.extBase || EXT_BASE;
+    const X = k => ext + k;
+    // what the exercises are: id → { ex, chapter }
+    const EXS = {}, CHS = {};
+    for (const c of (input && Array.isArray(input.chapters) ? input.chapters : [])) {
+      if (!c || typeof c.id !== 'string') continue;
+      CHS[c.id] = c;
+      for (const e of Array.isArray(c.exercises) ? c.exercises : []) if (e && typeof e.id === 'string') EXS[e.id] = { ex: e, chapter: c.id };
+    }
+    const chapterOf = id => (EXS[id] && EXS[id].chapter) || ((/^(ch\d+)-/.exec(id) || [])[1]) || null;
+    return { opts, actor, base, registration, X, EXS, CHS, chapterOf, locale: lang(opts.locale || pack.language), pack,
+      profile: opts.profile === 'cmi5' ? 'cmi5' : 'xapi', granularity: opts.granularity === 'activity' ? 'activity' : 'chapter' };
+  }
+
+  const verb = v => ({ id: VERBS[v], display: { 'en-US': v } });
+  function exerciseObject(C, exId, fallbackType) {
+    const info = C.EXS[exId], ex = info ? info.ex : null, type = (ex && ex.type) || fallbackType || null;
+    const def = { type: type === 'sim' ? ACT_TYPE.sim : ACT_TYPE.interaction, name: langMap(C.locale, (ex && plain(ex.q)) || exId) };
+    if (type && type !== 'sim') def.interactionType = INTERACTION[type] || 'other';
+    if (type) def.extensions = { [C.X('exercise-type')]: type };
+    return { objectType: 'Activity', id: C.base + 'exercise/' + enc(exId), definition: def };
+  }
+  const chapterRef = (C, ch) => ({ objectType: 'Activity', id: C.base + 'chapter/' + enc(ch), definition: { type: ACT_TYPE.chapter, name: langMap(C.locale, (C.CHS[ch] && C.CHS[ch].title) || ch) } });
+  const courseRef = C => ({ objectType: 'Activity', id: C.base, definition: { type: ACT_TYPE.course, name: langMap(C.locale, C.pack.title || C.pack.id || 'noema-lite pack') } });
+  const auId = (C, ch, exId) => C.base + 'au/' + enc(C.granularity === 'activity' && exId ? exId : (ch || 'pack'));
+  const auObject = (C, ch, exId) => ({ objectType: 'Activity', id: auId(C, ch, exId), definition: { type: ACT_TYPE.lesson, name: langMap(C.locale, C.granularity === 'activity' && exId ? ((C.EXS[exId] && plain(C.EXS[exId].ex.q)) || exId) : ((C.CHS[ch] && C.CHS[ch].title) || ch || 'pack')) } });
+
+  /** the attempts of S.att: { exId: { id, seed, t, t0?, hints, result: {score, passed, detail, t}, events: [{t, name, data}] } } (or a list with `exercise`) */
+  function attemptsOf(input) {
+    const src = input && (input.att || input.attempts), out = [];
+    if (Array.isArray(src)) { for (const a of src) if (a && typeof a.exercise === 'string') out.push([a.exercise, a]); }
+    else if (src && typeof src === 'object') for (const k of Object.keys(src)) if (src[k] && typeof src[k] === 'object') out.push([k, src[k]]);
+    const t0 = a => { const ev = Array.isArray(a.events) ? a.events.filter(e => e && num(e.t)) : []; return num(a.t0) ? a.t0 : ev.length ? Math.min(...ev.map(e => e.t)) : num(a.result && a.result.t) ? a.result.t : num(a.t) ? a.t : 0; };
+    return out.map(([k, a]) => ({ exId: k, a, t0: t0(a) })).sort((x, y) => (x.t0 - y.t0) || (x.exId < y.exId ? -1 : x.exId > y.exId ? 1 : 0));
+  }
+
+  /** what a result says beyond its score: the detail text and, for the checks grader, every check met or not ({label, ok}) */
+  function resultExt(C, r, ext) {
+    if (typeof r.detail === 'string' && r.detail) ext[C.X('detail')] = r.detail;
+    if (Array.isArray(r.checks)) ext[C.X('checks')] = r.checks.filter(c => c && typeof c === 'object').map(c => ({ label: typeof c.label === 'string' ? c.label : null, ok: !!c.ok }));
+    return ext;
+  }
+  function statements(input, opts) {
+    const C = setup(input, opts), out = [];
+    const cmi5 = C.profile === 'cmi5';
+    const auState = {};   // cmi5: per AU, what it said already (passed / completed once per registration; failed never after passed)
+    function push(v, object, { t, result, ctxExt, parents, category, session, key }) {
+      const ctx = { registration: C.registration, contextActivities: {}, language: C.locale };
+      if (parents && parents.length) ctx.contextActivities.parent = parents;
+      ctx.contextActivities.grouping = [courseRef(C)];
+      if (category && category.length) ctx.contextActivities.category = category.map(id => ({ objectType: 'Activity', id }));
+      const ex = Object.assign({}, ctxExt || {}); if (session) ex[CMI5_SESSION] = session;
+      if (Object.keys(ex).length) ctx.extensions = ex;
+      const st = { id: uuid5('statement|' + C.registration + '|' + v + '|' + object.id + '|' + key), actor: C.actor, verb: verb(v), object, context: ctx };
+      if (result) st.result = result;
+      const ts = iso(t); if (ts) st.timestamp = ts;
+      st.version = VERSION;
+      out.push(st); return st;
+    }
+
+    for (const { exId, a, t0 } of attemptsOf(input)) {
+      const ch = C.chapterOf(exId), obj = exerciseObject(C, exId, 'sim');
+      const att = typeof a.id === 'string' && a.id ? a.id : uuid5('attempt|' + exId + '|' + stable([a.seed, t0]));
+      const events = (Array.isArray(a.events) ? a.events : []).filter(e => e && typeof e.name === 'string');
+      const r = a.result && typeof a.result === 'object' && num(a.result.score) ? a.result : null;
+      const end = r && num(r.t) ? r.t : events.length && num(events[events.length - 1].t) ? events[events.length - 1].t : num(a.t) ? a.t : t0;
+      const hints = Number.isInteger(a.hints) && a.hints >= 0 ? a.hints : 0;
+      const base = { [C.X('attempt-id')]: att }; if (a.seed != null) base[C.X('seed')] = a.seed;
+      const parents = ch ? [chapterRef(C, ch)] : [];
+      const key = k => att + '|' + k;
+      if (!cmi5) {
+        push('attempted', obj, { t: t0, parents, ctxExt: Object.assign({}, base, { [C.X('hints-used')]: hints }), key: key('start') });
+        events.forEach((e, i) => push('interacted', obj, { t: e.t, parents, key: key('ev' + i),
+          ctxExt: Object.assign({}, base, { [C.X('event-name')]: e.name, [C.X('event-index')]: i }, e.data !== undefined ? { [C.X('event-data')]: e.data } : {}) }));
+        if (r) {
+          const score = Math.max(0, Math.min(1, r.score));
+          const res = { score: { scaled: score, raw: score, min: 0, max: 1 }, success: !!r.passed, completion: true, duration: duration(end - t0), extensions: { [C.X('hints-used')]: hints } };
+          resultExt(C, r, res.extensions);
+          push(r.passed ? 'passed' : 'failed', obj, { t: r.t || end, parents, ctxExt: base, result: res, key: key('result') });
+        }
+        continue;
+      }
+      // cmi5: a session per attempt; the defined statements are about the AU, the interactions about the exercise inside it
+      const au = auObject(C, ch, exId), session = uuid5('session|' + C.registration + '|' + att), st = auState[au.id] = auState[au.id] || {};
+      const auParents = C.granularity === 'activity' && ch ? [chapterRef(C, ch)] : [];
+      push('initialized', au, { t: t0, parents: auParents, category: [CMI5_CAT], session, ctxExt: base, key: key('init') });
+      events.forEach((e, i) => push('interacted', obj, { t: e.t, parents: [au], session, key: key('ev' + i),
+        ctxExt: Object.assign({}, base, { [C.X('event-name')]: e.name, [C.X('event-index')]: i }, e.data !== undefined ? { [C.X('event-data')]: e.data } : {}) }));
+      if (r) {
+        const score = Math.max(0, Math.min(1, r.score)), dur = duration(end - t0);
+        const ext = resultExt(C, r, { [C.X('hints-used')]: hints });
+        // the exercise's own outcome, as a cmi5 "allowed" statement (no cmi5 category)
+        push('answered', obj, { t: r.t || end, parents: [au], session, ctxExt: base, key: key('answer'),
+          result: { score: { scaled: score, raw: score, min: 0, max: 1 }, success: !!r.passed, completion: true, duration: dur, extensions: ext } });
+        if (r.passed && !st.passed) {
+          st.passed = true;
+          push('passed', au, { t: r.t || end, parents: auParents, category: [CMI5_CAT, MOVEON_CAT], session, ctxExt: base, key: key('passed'),
+            result: { score: { scaled: score, raw: score, min: 0, max: 1 }, success: true, duration: dur } });
+        } else if (!r.passed && !st.passed && !st.failed) {
+          st.failed = true;
+          push('failed', au, { t: r.t || end, parents: auParents, category: [CMI5_CAT, MOVEON_CAT], session, ctxExt: base, key: key('failed'),
+            result: { score: { scaled: score, raw: score, min: 0, max: 1 }, success: false, duration: dur } });
+        }
+        if (!st.completed) {
+          st.completed = true;
+          push('completed', au, { t: r.t || end, parents: auParents, category: [CMI5_CAT, MOVEON_CAT], session, ctxExt: base, key: key('completed'), result: { completion: true, duration: dur } });
+        }
+      }
+      push('terminated', au, { t: end, parents: auParents, category: [CMI5_CAT], session, ctxExt: base, key: key('end'), result: { duration: duration(end - t0) } });
+    }
+
+    // the ordinary exercises: S.res { exId: { n, ok, last, t, conf } } → one "answered" each (the latest answer)
+    const res = input && (input.res || input.answers);
+    if (res && typeof res === 'object' && !Array.isArray(res)) {
+      for (const exId of Object.keys(res).sort()) {
+        const r = res[exId]; if (!r || typeof r !== 'object' || typeof r.last !== 'boolean') continue;
+        const ch = C.chapterOf(exId), obj = exerciseObject(C, exId, null);
+        const ext = { [C.X('answers-count')]: Number.isInteger(r.n) ? r.n : 1, [C.X('correct-count')]: Number.isInteger(r.ok) ? r.ok : (r.last ? 1 : 0) };
+        if (typeof r.conf === 'string') ext[C.X('confidence')] = r.conf;
+        const result = { success: r.last, completion: true, extensions: ext };
+        const k = 'res|' + exId + '|' + stable([r.n, r.ok, r.last, r.t]);
+        if (cmi5) push('answered', obj, { t: r.t, parents: [auObject(C, ch, exId)], session: uuid5('session|' + C.registration + '|answers|' + (C.granularity === 'activity' ? exId : ch)), result, key: k });
+        else push('answered', obj, { t: r.t, parents: ch ? [chapterRef(C, ch)] : [], result, key: k });
+      }
+    }
+    return out;
+  }
+
+  /** the file the app offers to download (tools/schemas/noema.xapi-export.v1.schema.json) */
+  function exportFile(input, opts) {
+    const C = setup(input, opts), list = statements(input, opts);
+    const f = { format: 'noema.xapi-export/v1', xapiVersion: VERSION, profile: C.profile, pack: { id: String(C.pack.id || ''), activityBase: C.base }, registration: C.registration, statements: list };
+    if (opts && num(opts.now)) f.generated = iso(opts.now);
+    return f;
+  }
+
+  /* ---------- validation: the subset of xAPI 1.0.3 and cmi5 this file writes ---------- */
+  function validate(st) {
+    const P = [], bad = m => P.push(m);
+    if (!st || typeof st !== 'object') return ['not an object'];
+    if (!UUID_RE.test(st.id || '')) bad('id is not a UUID');
+    const a = st.actor;
+    if (!a || typeof a !== 'object') bad('no actor');
+    else {
+      for (const k of ['mbox', 'mbox_sha1sum', 'openid']) if (k in a) bad('actor has ' + k + ' (never an email or another personal identifier: use an account)');
+      if (a.objectType && a.objectType !== 'Agent') bad('actor.objectType must be Agent');
+      if (!a.account || !IRI_RE.test(a.account.homePage || '') || typeof a.account.name !== 'string' || !a.account.name) bad('actor.account needs homePage (IRI) and name');
+      if (a.name != null && (typeof a.name !== 'string' || /@/.test(a.name))) bad('actor.name must be a display name, not an address');
+      if (a.account && Object.keys(a.account).some(k => k !== 'homePage' && k !== 'name')) bad('actor.account: only homePage and name');
+    }
+    const v = st.verb;
+    if (!v || !IRI_RE.test(v.id || '')) bad('verb.id is not an IRI');
+    else if (!v.display || typeof v.display !== 'object' || !Object.keys(v.display).length) bad('verb.display is missing');
+    const o = st.object;
+    if (!o || !IRI_RE.test(o.id || '')) bad('object.id is not an IRI');
+    else if (o.objectType && o.objectType !== 'Activity') bad('object.objectType must be Activity');
+    else if (o.definition) {
+      const d = o.definition;
+      if (d.type != null && !IRI_RE.test(d.type)) bad('object.definition.type is not an IRI');
+      if (d.name && Object.keys(d.name).some(l => !LANG_RE.test(l))) bad('object.definition.name: a key is not a language tag');
+      if (d.interactionType && d.type !== ACT_TYPE.interaction) bad('interactionType needs the cmi.interaction type');
+      for (const k of Object.keys(d.extensions || {})) if (!IRI_RE.test(k)) bad('definition extension key is not an IRI: ' + k);
+    }
+    const r = st.result;
+    if (r != null) {
+      if (typeof r !== 'object') bad('result is not an object');
+      else {
+        const s = r.score;
+        if (s != null) {
+          if (s.scaled != null && !(num(s.scaled) && s.scaled >= -1 && s.scaled <= 1)) bad('result.score.scaled must be in [-1, 1]');
+          if (s.min != null && s.max != null && !(s.min < s.max)) bad('result.score: min must be < max');
+          if (s.raw != null && ((s.min != null && s.raw < s.min) || (s.max != null && s.raw > s.max))) bad('result.score.raw outside [min, max]');
+        }
+        if (r.success != null && typeof r.success !== 'boolean') bad('result.success must be a boolean');
+        if (r.completion != null && typeof r.completion !== 'boolean') bad('result.completion must be a boolean');
+        if (r.duration != null && !DUR_RE.test(r.duration)) bad('result.duration is not an ISO 8601 duration');
+        for (const k of Object.keys(r.extensions || {})) if (!IRI_RE.test(k)) bad('result extension key is not an IRI: ' + k);
+      }
+    }
+    const c = st.context;
+    if (c != null) {
+      if (c.registration != null && !UUID_RE.test(c.registration)) bad('context.registration is not a UUID');
+      if (c.language != null && !LANG_RE.test(c.language)) bad('context.language is not a language tag');
+      for (const k of Object.keys(c.extensions || {})) if (!IRI_RE.test(k)) bad('context extension key is not an IRI: ' + k);
+      for (const [k, list] of Object.entries(c.contextActivities || {})) {
+        if (!['parent', 'grouping', 'category', 'other'].includes(k)) bad('contextActivities.' + k + ' is not allowed');
+        else if (!Array.isArray(list) || !list.every(x => x && IRI_RE.test(x.id || ''))) bad('contextActivities.' + k + ' must be a list of activities');
+      }
+    }
+    if (st.timestamp != null && !TS_RE.test(st.timestamp)) bad('timestamp is not ISO 8601 with a zone');
+    if (st.version != null && !/^1\.0(\.\d+)?$/.test(st.version)) bad('version must be 1.0.x');
+    // cmi5 (cmi5 spec §9): a defined statement carries the cmi5 category, a registration and the session id; the rest do not carry the category
+    const name = v && typeof v.id === 'string' ? v.id.slice(v.id.lastIndexOf('/') + 1) : '';
+    const cats = ((c && c.contextActivities && c.contextActivities.category) || []).map(x => x && x.id);
+    const isCmi5 = cats.includes(CMI5_CAT), sess = c && c.extensions && c.extensions[CMI5_SESSION] != null;
+    if (isCmi5) {
+      if (!(v && v.id.startsWith(ADL) && CMI5_DEFINED.has(name))) bad('the cmi5 category on a verb cmi5 does not define (' + name + ')');
+      if (!c.registration) bad('cmi5: a registration is required');
+      if (!sess) bad('cmi5: the sessionid extension is required');
+      if (name === 'passed' && !(r && r.success === true)) bad('cmi5 passed: result.success must be true');
+      if (name === 'failed' && !(r && r.success === false)) bad('cmi5 failed: result.success must be false');
+      if (name === 'completed' && !(r && r.completion === true)) bad('cmi5 completed: result.completion must be true');
+      if (['passed', 'failed', 'completed', 'terminated'].includes(name) && !(r && r.duration)) bad('cmi5 ' + name + ': result.duration is required');
+      if ((name === 'passed' || name === 'failed') && r && r.completion != null) bad('cmi5 ' + name + ': no result.completion');
+      if (cats.includes(MOVEON_CAT) && !['passed', 'failed', 'completed'].includes(name)) bad('cmi5: the moveOn category only on passed, failed, completed');
+      if (['passed', 'failed', 'completed'].includes(name) && !cats.includes(MOVEON_CAT)) bad('cmi5 ' + name + ': the moveOn category is required');
+    } else if (cats.includes(MOVEON_CAT)) bad('the moveOn category without the cmi5 category');
+    return P;
+  }
+  /** every statement, plus the rules across them: unique ids; cmi5 per AU and registration: passed / completed at most once, no failed after passed */
+  function validateAll(list) {
+    const P = []; if (!Array.isArray(list)) return ['not a list'];
+    const ids = new Set(), seen = {};
+    list.forEach((st, i) => {
+      for (const p of validate(st)) P.push('#' + i + ': ' + p);
+      if (st && st.id) { if (ids.has(st.id)) P.push('#' + i + ': duplicate id ' + st.id); ids.add(st.id); }
+      const cats = ((st && st.context && st.context.contextActivities && st.context.contextActivities.category) || []).map(x => x && x.id);
+      if (!cats.includes(CMI5_CAT)) return;
+      const name = st.verb.id.slice(st.verb.id.lastIndexOf('/') + 1), k = st.context.registration + ' ' + st.object.id, s = seen[k] = seen[k] || {};
+      if ((name === 'passed' || name === 'completed') && s[name]) P.push('#' + i + ': cmi5: a second ' + name + ' for ' + st.object.id);
+      if (name === 'failed' && s.passed) P.push('#' + i + ': cmi5: failed after passed for ' + st.object.id);
+      s[name] = true;
+    });
+    return P;
+  }
+
+  /* ---------- cmi5.xml (cmi5 spec §13, the course structure) ---------- */
+  const xesc = s => String(s == null ? '' : s).replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g, '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+  const ls = (tag, l, s, pad) => `${pad}<${tag}>\n${pad}  <langstring lang="${xesc(l)}">${xesc(s)}</langstring>\n${pad}</${tag}>\n`;
+  /** course: a pack ({ id, subject: {title, description, language}, chapters: [{id, title, subtitle, exercises}] } or a built pack.json);
+      opts: { activityBase, launchBase ('https://noema-lite.netlify.app/'), granularity ('chapter': one AU per chapter; 'activity': one block per chapter,
+      an AU per sim exercise, one AU for the rest of the chapter), moveOn ('CompletedOrPassed'), masteryScore (0–1), locale } */
+  function cmi5Package(course, opts) {
+    opts = opts || {};
+    const subj = (course && course.subject) || {}, id = String((course && course.id) || subj.id || 'pack');
+    const l = lang(opts.locale || subj.language), title = subj.title || (course && course.title) || id, desc = subj.description || title;
+    let base = opts.activityBase || ('https://noema-lite.netlify.app/xapi/' + enc(id) + '/'); if (!base.endsWith('/')) base += '/';
+    const launch = opts.launchBase || 'https://noema-lite.netlify.app/';
+    const MOVEON = ['Passed', 'Completed', 'CompletedAndPassed', 'CompletedOrPassed', 'NotApplicable'];
+    const moveOn = MOVEON.includes(opts.moveOn) ? opts.moveOn : 'CompletedOrPassed';
+    const mastery = num(opts.masteryScore) && opts.masteryScore >= 0 && opts.masteryScore <= 1 ? ` masteryScore="${opts.masteryScore}"` : '';
+    const url = ch => xesc(launch + (launch.includes('?') ? '&' : '?') + 'subject=' + enc(id) + '#/ch/' + enc(ch));
+    const chapters = (course && Array.isArray(course.chapters) ? course.chapters : []).filter(c => c && typeof c.id === 'string');
+    const aus = [];
+    const au = (auid, t, d, ch, pad, ex) => {
+      aus.push({ id: auid, chapter: ch, ...(ex ? { exercise: ex } : {}) });
+      return `${pad}<au id="${xesc(auid)}" moveOn="${moveOn}"${mastery} launchMethod="AnyWindow">\n` + ls('title', l, t, pad + '  ') + ls('description', l, d, pad + '  ') + `${pad}  <url>${url(ch)}</url>\n${pad}</au>\n`;
+    };
+    let body = '';
+    for (const c of chapters) {
+      const ct = c.title || c.id, cd = c.subtitle || c.mantra || ct;
+      if (opts.granularity !== 'activity') { body += au(base + 'au/' + enc(c.id), ct, cd, c.id, '  '); continue; }
+      const sims = (c.exercises || []).filter(e => e && e.type === 'sim' && typeof e.id === 'string'), rest = (c.exercises || []).length - sims.length;
+      let inner = '';
+      for (const e of sims) inner += au(base + 'au/' + enc(e.id), plain(e.q) || e.id, plain(e.q) || e.id, c.id, '    ', e.id);
+      if (rest > 0 || !sims.length) inner += au(base + 'au/' + enc(c.id), ct, cd, c.id, '    ');
+      body += `  <block id="${xesc(base + 'block/' + enc(c.id))}">\n` + ls('title', l, ct, '    ') + ls('description', l, cd, '    ') + inner + '  </block>\n';
+    }
+    const xml = '<?xml version="1.0" encoding="utf-8"?>\n<courseStructure xmlns="https://w3id.org/xapi/profiles/cmi5/v1/CourseStructure.xsd">\n'
+      + `  <course id="${xesc(base)}">\n` + ls('title', l, title, '    ') + ls('description', l, desc, '    ') + '  </course>\n' + body + '</courseStructure>\n';
+    return { files: { 'cmi5.xml': xml }, aus };
+  }
+
+  return { VERSION, VERBS, CMI5_CAT, MOVEON_CAT, CMI5_SESSION, EXT_BASE, statements, exportFile, cmi5Package, validate, validateAll, duration, uuid5, sha1: b => hex(sha1(b)) };
+})();
+if (typeof window !== 'undefined') window.NoemaXAPI = NoemaXAPI;
+if (typeof module !== 'undefined' && module.exports) module.exports = NoemaXAPI;
+/* i18n-ignore-end */
+
+/* ---- 44_activity_wasm.js ---- */
+/* ===================== interactive activities — runtime wasm-module@1 and the sim-spec engine wasm@1 (docs/activities-dev/wasm.md) =====================
+   A pack may carry a precompiled WebAssembly module (a C / Rust / AssemblyScript simulation core) as an activities item:
+     { id, runtime: 'wasm-module@1', wasm: <base64, at most 2 MiB>, sha256: <hex of the bytes>, bytes?, abi?: { version: 1, step?, init?,
+       maxPages?, budgetMs?, scratch?, initEachStep? }, spec?: <a sim-spec@1 spec whose model is this module>, fallback, strings }
+   The pack ships ONLY the .wasm, never JS. The module may import nothing but the host ABI (module "noema" or "env"):
+     memory (one memory "memory", capped at abi.maxPages) · noema_log(ptr, len) (UTF-8, capped) · noema_now() → f64 ms ·
+     noema_random() → f64 in [0, 1), seeded by the activity's seed. Anything else (WASI, JS glue, a table or global) → refused before
+     instantiation (inspect(): our own reader of the binary, the twin of tools/wasm_check.py; WebAssembly.Module.imports again in the worker).
+   It runs in a dedicated blob: Worker whose network globals are removed before anything else (fetch, XHR, WebSocket, EventSource,
+   WebTransport, importScripts, Worker, BroadcastChannel, IndexedDB, caches); the page reads and sha256-checks the bytes and hands them
+   over — the worker never asks for anything. Every call has a time budget: over it, the worker is terminated (code 'runaway', restartable).
+   Two ways in:
+     · the engine wasm@1 of sim-spec@1 (ACT.registerEngine): spec.engine 'wasm@1', spec.model { module: <item id>, inputs: [expr…],
+       outputs: [{id, n?}…], step?, init? }: step(ptr_in, n_in, ptr_out, n_out) over f64 arrays, mapped to the spec's named outputs, so
+       the sim-spec renderer, its plots and the checks grader work unchanged (the sim runtime's 5 s per run is the budget there);
+     · the runtime wasm-module@1 (ACT.registerRuntime): an item with its own `spec` is shown by the sim-spec renderer with this engine;
+       and window.NoemaWasm.load(item) → a handle { call(fn, inputs, nOut), raw(fn, …ints), restart(), close() } for host code.
+   No user-visible text here: failures are codes (spec, unsupported, runaway, abi, import, memory, step, worker). */
+(() => {
+  /* i18n-ignore-start */   // code, limits and protocol names — no UI text
+  const root = typeof window !== 'undefined' ? window : globalThis;
+  const MAX_BYTES = 2 * 1024 * 1024, PAGES_DEFAULT = 256, PAGES_CAP = 1024;
+  const ABI_MODULES = ['noema', 'env'];
+  const ABI_FUNCS = { noema_log: '(i32,i32)->()', noema_now: '()->(f64)', noema_random: '()->(f64)' };
+  const STEP_SIGS = ['(i32,i32,i32,i32)->()', '(i32,i32,i32,i32)->(i32)'], INIT_SIG = '(i32)->()', ALLOC_SIG = '(i32)->(i32)';
+  const KINDS = ['func', 'table', 'memory', 'global', 'tag'];
+  const VT = { 0x7f: 'i32', 0x7e: 'i64', 0x7d: 'f32', 0x7c: 'f64', 0x7b: 'v128', 0x70: 'funcref', 0x6f: 'externref' };
+  const NAME_RE = /^[A-Za-z_][A-Za-z0-9_]{0,63}$/;
+  const ABI_KEYS = ['version', 'step', 'init', 'maxPages', 'budgetMs', 'scratch', 'initEachStep'], MODEL_KEYS = ['module', 'step', 'init', 'inputs', 'outputs'];
+  const LIM = { inputs: 64, outputs: 24, points: 2000, budgetMin: 50, budgetMax: 5000, budgetDefault: 1000, logLine: 200, logLines: 100 };
+  const NO_ABI = '(module "noema": noema_log, noema_now, noema_random, memory)';
+  const isInt = v => Number.isInteger(v);
+  const isObj = v => v != null && typeof v === 'object' && !Array.isArray(v);
+  const own = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
+
+  /* ---------- sha256 (synchronous: the spec check runs before the first frame) ---------- */
+  const SHA = (() => {
+    const primes = []; for (let n = 2; primes.length < 64; n++) if (primes.every(p => n % p)) primes.push(n);
+    const frac = x => Math.floor((x - Math.floor(x)) * 4294967296) >>> 0;
+    return { K: Uint32Array.from(primes, p => frac(Math.cbrt(p))), H: Uint32Array.from(primes.slice(0, 8), p => frac(Math.sqrt(p))) };
+  })();
+  function sha256(bytes) {
+    const l = bytes.length, nb = ((l + 9 + 63) >> 6) << 6, m = new Uint8Array(nb); m.set(bytes); m[l] = 0x80;
+    const dv = new DataView(m.buffer); dv.setUint32(nb - 4, (l * 8) >>> 0); dv.setUint32(nb - 8, Math.floor(l / 536870912));
+    const H = Uint32Array.from(SHA.H), W = new Uint32Array(64), K = SHA.K;
+    for (let o = 0; o < nb; o += 64) {
+      for (let i = 0; i < 16; i++) W[i] = dv.getUint32(o + i * 4);
+      for (let i = 16; i < 64; i++) {
+        const a = W[i - 15], b = W[i - 2];
+        const s0 = ((a >>> 7) | (a << 25)) ^ ((a >>> 18) | (a << 14)) ^ (a >>> 3), s1 = ((b >>> 17) | (b << 15)) ^ ((b >>> 19) | (b << 13)) ^ (b >>> 10);
+        W[i] = (W[i - 16] + s0 + W[i - 7] + s1) >>> 0;
+      }
+      let [a, b, c, d, e, f, g, h] = H;
+      for (let i = 0; i < 64; i++) {
+        const S1 = ((e >>> 6) | (e << 26)) ^ ((e >>> 11) | (e << 21)) ^ ((e >>> 25) | (e << 7)), ch = (e & f) ^ (~e & g);
+        const t1 = (h + S1 + ch + K[i] + W[i]) >>> 0;
+        const S0 = ((a >>> 2) | (a << 30)) ^ ((a >>> 13) | (a << 19)) ^ ((a >>> 22) | (a << 10)), mj = (a & b) ^ (a & c) ^ (b & c);
+        const t2 = (S0 + mj) >>> 0;
+        h = g; g = f; f = e; e = (d + t1) >>> 0; d = c; c = b; b = a; a = (t1 + t2) >>> 0;
+      }
+      H[0] += a; H[1] += b; H[2] += c; H[3] += d; H[4] += e; H[5] += f; H[6] += g; H[7] += h;
+    }
+    return Array.from(H, x => x.toString(16).padStart(8, '0')).join('');
+  }
+  function fromB64(s) { const bin = atob(s), out = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i); return out; }
+
+  /* ---------- the binary reader (the twin of tools/wasm_check.py parse / inspect: the same rules, the same messages) ---------- */
+  function parse(b) {
+    const bad = w => Object.assign(new Error(w), { bad: w });
+    if (b.length < 8 || b[0] !== 0 || b[1] !== 0x61 || b[2] !== 0x73 || b[3] !== 0x6d || b[4] !== 1 || b[5] || b[6] || b[7]) throw bad('magic');
+    const td = new TextDecoder('utf-8', { fatal: true });
+    const R = (i, end) => ({ i, end,
+      byte() { if (this.i >= this.end) throw bad('truncated'); return b[this.i++]; },
+      u32() { let r = 0, s = 0; for (;;) { const x = this.byte(); r += (x & 0x7f) * Math.pow(2, s); s += 7; if (!(x & 0x80)) return r; if (s > 35) throw bad('leb'); } },
+      name() { const n = this.u32(); if (this.i + n > this.end) throw bad('truncated'); let v; try { v = td.decode(b.subarray(this.i, this.i + n)); } catch (e) { throw bad('utf8'); } this.i += n; return v; },
+      limits() { const f = this.byte(), mn = this.u32(), mx = f & 1 ? this.u32() : null; return [f, mn, mx]; } });
+    const r = R(8, b.length), types = [], imports = [], mems = [], exports = []; let funcs = [], start = false;
+    while (r.i < r.end) {
+      const sid = r.byte(), size = r.u32(), end = r.i + size;
+      if (end > r.end) throw bad('section ' + sid);
+      const s = R(r.i, end);
+      if (sid === 1) for (let n = s.u32(); n--;) { if (s.byte() !== 0x60) throw bad('section 1'); const ps = []; for (let k = s.u32(); k--;) ps.push(VT[s.byte()] || '?'); const rs = []; for (let k = s.u32(); k--;) rs.push(VT[s.byte()] || '?'); types.push([ps, rs]); }
+      else if (sid === 2) for (let n = s.u32(); n--;) {
+        const mod = s.name(), nm = s.name(), k = s.byte();
+        if (k === 0) imports.push({ module: mod, name: nm, kind: 'func', type: s.u32() });
+        else if (k === 1) { s.byte(); s.limits(); imports.push({ module: mod, name: nm, kind: 'table', type: null }); }
+        else if (k === 2) imports.push({ module: mod, name: nm, kind: 'memory', type: null, limits: s.limits() });
+        else if (k === 3) { s.byte(); s.byte(); imports.push({ module: mod, name: nm, kind: 'global', type: null }); }
+        else if (k === 4) { s.byte(); s.u32(); imports.push({ module: mod, name: nm, kind: 'tag', type: null }); }
+        else throw bad('section 2');
+      }
+      else if (sid === 3) { funcs = []; for (let n = s.u32(); n--;) funcs.push(s.u32()); }
+      else if (sid === 5) for (let n = s.u32(); n--;) mems.push(s.limits());
+      else if (sid === 7) for (let n = s.u32(); n--;) { const nm = s.name(), k = s.byte(), ix = s.u32(); if (k > 4) throw bad('section 7'); exports.push({ name: nm, kind: KINDS[k], index: ix }); }
+      else if (sid === 8) start = true;
+      else if (sid > 13) throw bad('section ' + sid);
+      r.i = end;
+    }
+    return { types, imports, funcs, memories: mems, exports, start };
+  }
+  const sig = t => '(' + t[0].join(',') + ')->(' + t[1].join(',') + ')';
+  /** → { ok, errors, bytes, sha256, imports, exports, memory, start } (the same object as tools/wasm_check.py inspect) */
+  function inspect(bytes, maxPages = PAGES_DEFAULT, step = 'step', init = 'init') {
+    const b = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes), E = [];
+    const rep = { ok: false, errors: E, bytes: b.length, sha256: sha256(b), imports: [], exports: [], memory: null, start: false };
+    const lim = isInt(maxPages) ? Math.max(1, Math.min(maxPages, PAGES_CAP)) : PAGES_DEFAULT;
+    if (b.length > MAX_BYTES) { E.push(`size: the module is ${b.length} bytes (at most ${MAX_BYTES})`); return rep; }
+    let m; try { m = parse(b); } catch (e) { if (!e.bad) throw e; E.push(e.bad === 'magic' ? 'format: not a WebAssembly module (magic or version)' : `format: the module is malformed (${e.bad})`); return rep; }
+    const T = m.types, tsig = i => i >= 0 && i < T.length ? sig(T[i]) : '?';
+    const fsigs = [...m.imports.filter(i => i.kind === 'func').map(i => tsig(i.type)), ...m.funcs.map(tsig)];
+    let mem = null;
+    for (const im of m.imports) {
+      rep.imports.push({ module: im.module, name: im.name, kind: im.kind, type: im.kind === 'func' ? tsig(im.type) : null });
+      const where = `${im.module}.${im.name}`;
+      if (!ABI_MODULES.includes(im.module)) { E.push(`import: ${where} (${im.kind}) is not in the host ABI ${NO_ABI}`); continue; }
+      if (im.kind === 'func' && own(ABI_FUNCS, im.name)) { const got = tsig(im.type); if (got !== ABI_FUNCS[im.name]) E.push(`import: ${where} must be ${ABI_FUNCS[im.name]}, it is ${got}`); }
+      else if (im.kind === 'memory' && im.name === 'memory') { const [f, mn, mx] = im.limits; if (mem) E.push('memory: at most one memory'); mem = { min: mn, max: mx, imported: true, exported: false, flags: f }; }
+      else E.push(`import: ${where} (${im.kind}) is not in the host ABI ${NO_ABI}`);
+    }
+    for (const [f, mn, mx] of m.memories) { if (mem) { E.push('memory: at most one memory'); continue; } mem = { min: mn, max: mx, imported: false, exported: false, flags: f }; }
+    const ex = {};
+    for (const e of m.exports) {
+      const t = e.kind === 'func' ? (e.index < fsigs.length ? fsigs[e.index] : '?') : null;
+      const x = { name: e.name, kind: e.kind, type: t }; rep.exports.push(x); ex[e.name] = x;
+      if (e.kind === 'memory' && mem) mem.exported = mem.exported || e.name === 'memory';
+    }
+    rep.start = m.start;
+    if (!mem) E.push('memory: the module has no memory (define one with a maximum and export it as "memory", or import noema.memory)');
+    else {
+      if (mem.flags & ~1) E.push('memory: a shared or 64-bit memory is not allowed');
+      if (mem.min > lim) E.push(`memory: the initial size is ${mem.min} pages (at most ${lim})`);
+      if (mem.max == null && !mem.imported) E.push(`memory: the memory has no maximum (declare one of at most ${lim} pages)`);
+      else if (mem.max != null && mem.max > lim) E.push(`memory: the declared maximum is ${mem.max} pages (at most ${lim})`);
+      if (!mem.imported && !mem.exported) E.push('export: the memory must be exported as "memory"');
+      rep.memory = { min: mem.min, max: mem.max, imported: mem.imported, exported: mem.exported };
+    }
+    const st = own(ex, step) ? ex[step] : null;
+    if (!st || st.kind !== 'func') E.push(`export: no function "${step}"`);
+    else if (!STEP_SIGS.includes(st.type)) E.push(`export: ${step} must be (i32,i32,i32,i32)->() or ->(i32), it is ${st.type}`);
+    const it = own(ex, init) ? ex[init] : null;
+    if (it && (it.kind !== 'func' || it.type !== INIT_SIG)) E.push(`export: ${init} must be a function ${INIT_SIG}`);
+    const al = own(ex, 'alloc') ? ex.alloc : null;
+    if (al && (al.kind !== 'func' || al.type !== ALLOC_SIG)) E.push(`export: alloc must be a function ${ALLOC_SIG}`);
+    rep.ok = !E.length;
+    return rep;
+  }
+
+  /* ---------- the item and the model (the twins of check_abi / decode / check_item / check_model) ---------- */
+  function checkAbi(abi) {
+    const E = [];
+    if (abi == null) return E;
+    if (!isObj(abi)) return ['abi: must be an object'];
+    for (const k of Object.keys(abi)) if (!ABI_KEYS.includes(k)) E.push(`abi: unknown key ${k}`);
+    if ('version' in abi && abi.version !== 1) E.push('abi.version: must be 1');
+    for (const k of ['step', 'init']) if (k in abi && !(typeof abi[k] === 'string' && NAME_RE.test(abi[k]))) E.push(`abi.${k}: must be the name of an exported function`);
+    if ('maxPages' in abi && !(isInt(abi.maxPages) && abi.maxPages >= 1 && abi.maxPages <= PAGES_CAP)) E.push(`abi.maxPages: a whole number from 1 to ${PAGES_CAP}`);
+    if ('budgetMs' in abi && !(isInt(abi.budgetMs) && abi.budgetMs >= LIM.budgetMin && abi.budgetMs <= LIM.budgetMax)) E.push(`abi.budgetMs: a whole number from ${LIM.budgetMin} to ${LIM.budgetMax}`);
+    if ('scratch' in abi && !(isInt(abi.scratch) && abi.scratch >= 0 && abi.scratch % 8 === 0)) E.push('abi.scratch: a byte offset, a multiple of 8');
+    if ('initEachStep' in abi && typeof abi.initEachStep !== 'boolean') E.push('abi.initEachStep: true or false');
+    return E;
+  }
+  const DECODED = new Map();   // sha256 → bytes (a module is decoded and hashed once per page)
+  function decode(item) {
+    const w = isObj(item) ? item.wasm : null;
+    if (typeof w !== 'string' || !w) return [null, ['wasm: the module (base64) is required']];
+    if (w.length > Math.floor(MAX_BYTES * 4 / 3) + 4) return [null, [`size: the module is more than ${MAX_BYTES} bytes`]];
+    if (typeof item.sha256 === 'string' && DECODED.has(item.sha256 + ':' + w.length)) { const b = DECODED.get(item.sha256 + ':' + w.length); return [b, 'bytes' in item && item.bytes !== b.length ? [`bytes: ${item.bytes}, but the module has ${b.length}`] : []]; }
+    let b; try { if (!/^[A-Za-z0-9+/]*={0,2}$/.test(w) || w.length % 4) throw 0; b = fromB64(w); } catch (e) { return [null, ['wasm: not valid base64']]; }
+    const sh = item.sha256;
+    if (!(typeof sh === 'string' && /^[0-9a-f]{64}$/.test(sh))) return [b, ['sha256: the sha256 of the module (64 hex digits) is required']];
+    if (sha256(b) !== sh) return [b, ['sha256: does not match the module']];
+    if ('bytes' in item && item.bytes !== b.length) return [b, [`bytes: ${item.bytes}, but the module has ${b.length}`]];
+    if (DECODED.size > 16) DECODED.clear();
+    DECODED.set(sh + ':' + w.length, b);
+    return [b, []];
+  }
+  const abiOf = item => {
+    const a = isObj(item?.abi) ? item.abi : {};
+    return { step: typeof a.step === 'string' ? a.step : 'step', init: typeof a.init === 'string' ? a.init : 'init',
+      maxPages: isInt(a.maxPages) && a.maxPages >= 1 && a.maxPages <= PAGES_CAP ? a.maxPages : PAGES_DEFAULT,
+      budgetMs: isInt(a.budgetMs) && a.budgetMs >= LIM.budgetMin && a.budgetMs <= LIM.budgetMax ? a.budgetMs : LIM.budgetDefault,
+      scratch: isInt(a.scratch) && a.scratch >= 0 && a.scratch % 8 === 0 ? a.scratch : null, initEachStep: a.initEachStep !== false };
+  };
+  /** → { problems, report, bytes } of an activities item of runtime wasm-module@1 */
+  function checkItem(item) {
+    if (!isObj(item)) return { problems: ['the item must be an object'], report: null, bytes: null };
+    const E = [];
+    if (item.runtime !== 'wasm-module@1') E.push('runtime: must be wasm-module@1');
+    E.push(...checkAbi(item.abi));
+    const [b, P] = decode(item); E.push(...P);
+    if (!b || P.length) return { problems: E, report: null, bytes: null };
+    const abi = isObj(item.abi) ? item.abi : {}, A = abiOf(item);
+    const rep = inspect(b, A.maxPages, A.step, A.init); E.push(...rep.errors);
+    if (!rep.errors.length && !rep.exports.some(e => e.name === 'alloc' && e.kind === 'func') && !('scratch' in abi))
+      E.push('abi.scratch: the module exports no alloc(bytes); give the byte offset of its input/output area');
+    return { problems: E, report: rep, bytes: E.length ? null : b };
+  }
+  const REG = {};   // items the page registered (NoemaWasm.register), besides ACT.ITEMS of the open pack
+  const itemOf = id => typeof id !== 'string' ? null : (root.ACT?.ITEMS && own(root.ACT.ITEMS, id) ? root.ACT.ITEMS[id] : own(REG, id) ? REG[id] : null);
+  const allItems = () => Object.assign({}, REG, root.ACT?.ITEMS || {});
+  /** → problems of spec.model for wasm@1; items: {id: item} (default: the open pack's) */
+  function checkModel(spec, items) {
+    const E = [], I = items || allItems();
+    const m = isObj(spec) ? spec.model : null;
+    if (!isObj(m)) return ['spec.model: wasm@1 needs a model {module, inputs, outputs, step?, init?}'];
+    for (const k of Object.keys(m)) if (!MODEL_KEYS.includes(k)) E.push(`spec.model: unknown key ${k}`);
+    const it = typeof m.module === 'string' && own(I, m.module) ? I[m.module] : null;
+    if (!isObj(it) || it.runtime !== 'wasm-module@1') E.push(`spec.model.module: no wasm-module@1 item ${JSON.stringify(m.module === undefined ? null : m.module)} in the pack`);
+    for (const k of ['step', 'init']) if (k in m && !(typeof m[k] === 'string' && NAME_RE.test(m[k]))) E.push(`spec.model.${k}: must be the name of an exported function`);
+    const ins = m.inputs;
+    if (!(Array.isArray(ins) && ins.length >= 1 && ins.length <= LIM.inputs)) E.push(`spec.model.inputs: a list of 1 to ${LIM.inputs} expressions`);
+    else {
+      const names = isObj(spec.consts) ? Object.keys(spec.consts) : [];
+      for (const k of ['params', 'derived']) for (const x of Array.isArray(spec[k]) ? spec[k] : []) if (isObj(x) && typeof x.id === 'string') names.push(x.id);
+      ins.forEach((src, i) => {
+        const w = `spec.model.inputs[${i}]`;
+        if (typeof src !== 'string' || !src.trim()) { E.push(`${w}: an expression (a text such as “2*x + 1”) is required`); return; }
+        if (root.NoemaExpr) { const p = root.NoemaExpr.check(src, { vars: names }); if (p.length) E.push(`${w}: ${p[0].msg} in “${src.slice(0, 60)}”`); }
+      });
+    }
+    const outs = m.outputs, decl = new Map();
+    for (const o of Array.isArray(spec.outputs) ? spec.outputs : []) if (isObj(o)) decl.set(o.id, o.kind);
+    if (!(Array.isArray(outs) && outs.length >= 1 && outs.length <= LIM.outputs)) E.push(`spec.model.outputs: a list of 1 to ${LIM.outputs} {id, n?}`);
+    else {
+      const seen = new Set();
+      outs.forEach((o, i) => {
+        const w = `spec.model.outputs[${i}]`;
+        if (!(isObj(o) && typeof o.id === 'string')) { E.push(`${w}: must be {id, n?}`); return; }
+        for (const k of Object.keys(o)) if (k !== 'id' && k !== 'n') E.push(`${w}: unknown key ${k}`);
+        if (seen.has(o.id)) E.push(`${w}: ${o.id} twice`);
+        seen.add(o.id);
+        const kind = decl.has(o.id) ? decl.get(o.id) : undefined;
+        if (kind == null) { E.push(`${w}: ${o.id} is not in spec.outputs`); return; }
+        const n = 'n' in o ? o.n : 1;
+        if (kind === 'scalar' && n !== 1) E.push(`${w}: a scalar takes one value (no n)`);
+        if (kind === 'series' && !(isInt(n) && n >= 1 && n <= LIM.points)) E.push(`${w}.n: a series needs n, from 1 to ${LIM.points}`);
+      });
+      for (const oid of decl.keys()) if (!seen.has(oid)) E.push(`spec.outputs: ${oid} has no place in spec.model.outputs`);
+    }
+    if (isObj(it) && !E.length) {
+      const abi = isObj(it.abi) ? it.abi : {}, { problems: P, report: rep } = checkItem(it);
+      if (P.length) E.push(`spec.model.module: the module ${m.module} is refused (${P[0]})`);
+      else if (rep) {
+        const fx = {}; for (const e of rep.exports) if (e.kind === 'func') fx[e.name] = e;
+        const st = m.step || abi.step || 'step';
+        if (!own(fx, st) || !STEP_SIGS.includes(fx[st].type)) E.push(`spec.model.step: ${st} is not a step function of the module`);
+        const ini = m.init;
+        if (ini && (!own(fx, ini) || fx[ini].type !== INIT_SIG)) E.push(`spec.model.init: ${ini} is not an init function of the module`);
+      }
+    }
+    return E;
+  }
+
+  /* ---------- the worker: no network, the host ABI, the engine adapter (one source, also run in node by the tests) ---------- */
+  /** removes every way to the network from a worker's global scope (and its prototypes) before any other code runs there */
+  function neutralise(g) {
+    const K = ['fetch', 'XMLHttpRequest', 'WebSocket', 'WebSocketStream', 'EventSource', 'WebTransport', 'importScripts', 'Worker', 'SharedWorker',
+      'BroadcastChannel', 'indexedDB', 'caches', 'Request', 'navigator', 'RTCPeerConnection'];
+    for (const k of K) for (let o = g; o && o !== Object.prototype; o = Object.getPrototypeOf(o)) {
+      if (!Object.prototype.hasOwnProperty.call(o, k)) continue;
+      try { Object.defineProperty(o, k, { value: undefined, writable: false, configurable: false, enumerable: false }); } catch (e) { try { delete o[k]; } catch (e2) { } }
+    }
+  }
+  /** defines g.noemaWasmCore (instantiate + call) and g.noemaEngine (the wasm@1 adapter of sim-spec@1) */
+  function wasmWorker(g) {
+    const ABI = { noema_log: 1, noema_now: 1, noema_random: 1 }, LOG_LINE = 200, LOG_LINES = 100;
+    function rng(seed) { let a = seed >>> 0; return () => { a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+    const fail = (code, msg) => Object.assign(new Error(msg || code), { code });
+    /** bytes (or a WebAssembly.Module) + abi → an instance { call(fn, Float64Array, nOut) → Float64Array, raw(fn, args), reseed(), log } */
+    function instantiate(src, abi, seed) {
+      const mod = src instanceof WebAssembly.Module ? src : new WebAssembly.Module(src);
+      for (const im of WebAssembly.Module.imports(mod)) {   // the second line of the import check (the first: inspect on the page)
+        const okm = im.module === 'noema' || im.module === 'env';
+        if (!okm || !((im.kind === 'function' && ABI[im.name]) || (im.kind === 'memory' && im.name === 'memory'))) throw fail('import', im.module + '.' + im.name);
+      }
+      const log = [], t0 = (g.performance || Date).now(); let rand = rng(seed), mem = null, dropped = 0;
+      const env = {
+        noema_log(p, n) {
+          if (log.length >= LOG_LINES) { dropped++; return; }
+          try { const len = Math.max(0, Math.min(n >>> 0, LOG_LINE)), u = new Uint8Array(mem.buffer, p >>> 0, len); log.push(new TextDecoder().decode(u.slice())); } catch (e) { log.push('?'); }
+        },
+        noema_now: () => Math.round(((g.performance || Date).now() - t0) * 10) / 10,
+        noema_random: () => rand(),
+      };
+      const imp = { noema: env, env };
+      const memImp = WebAssembly.Module.imports(mod).find(i => i.kind === 'memory');
+      if (memImp) { const m0 = Math.max(1, abi.memMin || 1); mem = new WebAssembly.Memory({ initial: m0, maximum: Math.max(m0, Math.min(abi.memMax == null ? abi.maxPages : abi.memMax, abi.maxPages)) }); imp[memImp.module] = Object.assign({}, env, { memory: mem }); }
+      const inst = new WebAssembly.Instance(mod, imp), X = inst.exports;
+      if (!mem) { mem = X.memory; if (!(mem instanceof WebAssembly.Memory)) throw fail('memory', 'no exported memory'); }
+      if (typeof X[abi.step] !== 'function') throw fail('abi', 'no step ' + abi.step);
+      let area = null;
+      function io(nIn, nOut) {
+        const need = 8 * (nIn + nOut);
+        if (!area || area.need < need) {
+          let base = abi.scratch;
+          if (typeof X.alloc === 'function') base = X.alloc(need) >>> 0;
+          if (!(base >= 0)) throw fail('abi', 'no input/output area');
+          area = { need, pin: base, pout: base + 8 * nIn };
+        }
+        if (area.pout - area.pin !== 8 * nIn) area = Object.assign({}, area, { pout: area.pin + 8 * nIn });
+        if (area.pin + need > mem.buffer.byteLength) throw fail('abi', 'the input/output area is outside the memory');
+        return area;
+      }
+      function call(fn, input, nOut) {
+        const f = X[fn]; if (typeof f !== 'function') throw fail('abi', 'no function ' + fn);
+        const a = io(input.length, nOut); let dv = new DataView(mem.buffer);
+        for (let i = 0; i < input.length; i++) dv.setFloat64(a.pin + 8 * i, +input[i], true);
+        const r = f(a.pin, input.length, a.pout, nOut);
+        if (typeof r === 'number' && r !== 0) throw fail('step', 'status ' + r);
+        dv = new DataView(mem.buffer);   // (the memory may have grown)
+        if (a.pout + 8 * nOut > mem.buffer.byteLength) throw fail('abi', 'outputs outside the memory');
+        const out = new Float64Array(nOut); for (let i = 0; i < nOut; i++) out[i] = dv.getFloat64(a.pout + 8 * i, true);
+        return out;
+      }
+      const self_ = {
+        call, log, exports: Object.keys(X),
+        init() { if (typeof X[abi.init] === 'function') X[abi.init](seed | 0); },
+        reseed() { rand = rng(seed); },
+        raw(fn, args) { const f = X[fn]; if (typeof f !== 'function') throw fail('abi', 'no function ' + fn); const r = f(...(args || []).map(v => v | 0)); return typeof r === 'number' ? r : null; },
+        pages: () => mem.buffer.byteLength / 65536,
+        takeLog() { const l = log.splice(0); if (dropped) { l.push('… ' + dropped + ' more'); dropped = 0; } return l; },
+      };
+      self_.init();
+      return self_;
+    }
+    g.noemaWasmCore = { instantiate };
+    /** wasm@1 in sim-spec@1: create(spec, {seed}) → { run(inputs) } — inputs come from prepare: { $in: [numbers], $mod: {key, bytes, abi, layout} } */
+    g.noemaEngine = { create(spec, opts) {
+      const seed = (opts && opts.seed) >>> 0; let inst = null, key = null;
+      return { run(inp) {
+        const M = inp && inp.$mod; if (!M) throw fail('abi', 'no module');
+        if (!inst || key !== M.key) { inst = instantiate(M.bytes, M.abi, seed); key = M.key; }
+        else if (M.abi.initEachStep) { inst.reseed(); inst.init(); }
+        const out = inst.call(M.abi.step, inp.$in, M.nOut), r = {};
+        for (const L of M.layout) r[L.id] = L.series ? Array.from(out.subarray(L.off, L.off + L.n)) : out[L.off];
+        const lg = inst.takeLog(); if (lg.length && g.console) g.console.log('[noema] wasm', lg.slice(0, 10).join(' | '));
+        return r;
+      } };
+    } };
+  }
+  /** the direct protocol of NoemaWasm.load (appended after the core in its own worker; the sim runtime appends its own bridge instead) */
+  function directTail(g) {
+    let inst = null;
+    g.onmessage = e => {
+      const m = e.data || {};
+      try {
+        if (m.t === 'w:load') { inst = g.noemaWasmCore.instantiate(m.bytes, m.abi, m.seed >>> 0); g.postMessage({ t: 'w:ready', id: m.id, exports: inst.exports, log: inst.takeLog(), pages: inst.pages() }); return; }
+        if (!inst) throw Object.assign(new Error('not loaded'), { code: 'abi' });
+        const t0 = (g.performance || Date).now();
+        if (m.t === 'w:call') { if (m.reinit) { inst.reseed(); inst.init(); } const out = inst.call(m.fn, m.input, m.nOut); g.postMessage({ t: 'w:out', id: m.id, out, log: inst.takeLog(), ms: (g.performance || Date).now() - t0, pages: inst.pages() }, [out.buffer]); return; }
+        if (m.t === 'w:raw') { const v = inst.raw(m.fn, m.args); g.postMessage({ t: 'w:out', id: m.id, value: v, log: inst.takeLog(), pages: inst.pages() }); return; }
+      } catch (x) { g.postMessage({ t: 'w:err', id: m.id, code: (x && x.code) || (x instanceof WebAssembly.RuntimeError ? 'trap' : x instanceof WebAssembly.LinkError ? 'import' : 'error'), msg: String((x && x.message) || x).slice(0, 300) }); }
+    };
+  }
+  const workerSource = () => '"use strict";(' + neutralise.toString() + ')(self);\n(' + wasmWorker.toString() + ')(self);\n';
+
+  /* ---------- the host side: NoemaWasm.load(item) → a handle in its own worker, each call within the budget ---------- */
+  function load(item, o = {}) {
+    const { problems, report, bytes } = checkItem(item);
+    if (problems.length) return Promise.reject(Object.assign(new Error(problems[0]), { code: /^import/.test(problems[0]) ? 'import' : /^memory/.test(problems[0]) ? 'memory' : 'spec', problems }));
+    if (typeof Worker !== 'function' || typeof Blob !== 'function') return Promise.reject(Object.assign(new Error('no worker here'), { code: 'worker' }));
+    const A = abiOf(item), budget = isInt(o.budgetMs) ? Math.max(LIM.budgetMin, Math.min(o.budgetMs, LIM.budgetMax)) : A.budgetMs;
+    const abi = { step: A.step, init: A.init, maxPages: A.maxPages, scratch: A.scratch, memMin: report.memory ? report.memory.min : 1, memMax: report.memory ? report.memory.max : null };
+    const seed = (isInt(o.seed) ? o.seed : 1) >>> 0;
+    const url = URL.createObjectURL(new Blob([workerSource() + '(' + directTail.toString() + ')(self);'], { type: 'text/javascript' }));
+    let w = null, seq = 0, state = 'stopped';
+    const pending = new Map();
+    const killAll = code => { for (const [, p] of pending) { clearTimeout(p.timer); p.reject(Object.assign(new Error(code), { code })); } pending.clear(); };
+    function stop(code) { try { w?.terminate(); } catch (e) { } w = null; state = 'stopped'; killAll(code); }
+    function send(msg, transfer) {
+      if (!w) return Promise.reject(Object.assign(new Error('stopped'), { code: 'stopped' }));
+      const id = ++seq;
+      return new Promise((resolve, reject) => {
+        const timer = setTimeout(() => { if (!pending.has(id)) return; pending.delete(id); stop('runaway'); reject(Object.assign(new Error('runaway'), { code: 'runaway' })); h.onRunaway?.(); }, msg.t === 'w:load' ? Math.max(1000, budget) : budget);
+        pending.set(id, { resolve, reject, timer });
+        w.postMessage({ ...msg, id }, transfer || []);
+      });
+    }
+    function start() {
+      stop('restart');
+      w = new Worker(url); state = 'loading';
+      w.onmessage = e => {
+        const m = e.data || {}, key = m.id, p = pending.get(key);
+        if (!p) return; pending.delete(key); clearTimeout(p.timer);
+        if (m.t === 'w:err') p.reject(Object.assign(new Error(m.msg), { code: m.code })); else p.resolve(m);
+      };
+      w.onerror = e => { e.preventDefault?.(); stop('error'); };
+      return send({ t: 'w:load', bytes: bytes.slice(), abi, seed }).then(m => { state = 'ready'; h.exports = m.exports; return h; });
+    }
+    const h = {
+      budgetMs: budget, exports: [], report,
+      state: () => state,
+      /** fn(ptr_in, n_in, ptr_out, n_out) over f64: → { out: Float64Array, log, ms, pages } */
+      call(fn, inputs, nOut, opt = {}) { const input = Float64Array.from(inputs || [], v => +v); return send({ t: 'w:call', fn: fn || A.step, input, nOut: Math.max(0, Math.min(nOut | 0, LIM.outputs * LIM.points)), reinit: opt.reinit ?? A.initEachStep }); },
+      /** an exported function with i32 arguments (the tests' grow, a module's own setters) → { value, log, pages } */
+      raw: (fn, ...args) => send({ t: 'w:raw', fn, args }),
+      restart: () => start(),
+      close() { stop('closed'); URL.revokeObjectURL(url); },
+      onRunaway: null,
+    };
+    return start();
+  }
+
+  /* ---------- the engine wasm@1 of sim-spec@1, the runtime wasm-module@1 ---------- */
+  function layoutOf(spec) {
+    const m = spec.model, kinds = new Map((spec.outputs || []).map(o => [o.id, o.kind])); let off = 0;
+    const layout = m.outputs.map(o => { const n = 'n' in o ? o.n : 1, L = { id: o.id, off, n, series: kinds.get(o.id) === 'series' }; off += n; return L; });
+    return { layout, nOut: off };
+  }
+  const api = { MAX_BYTES, PAGES_DEFAULT, PAGES_CAP, ABI_FUNCS, LIM, sha256, inspect, checkAbi, checkItem, checkModel, decode, abiOf, layoutOf, load, workerSource,
+    register(item) { if (isObj(item) && typeof item.id === 'string') REG[item.id] = item; }, _neutralise: neutralise, _wasmWorker: wasmWorker, _directTail: directTail };
+  root.NoemaWasm = api;
+  if (typeof module === 'object' && module && module.exports) module.exports = api;
+
+  const ACTREF = typeof ACT !== 'undefined' ? ACT : root.ACT;
+  if (!ACTREF || typeof ACTREF.registerEngine !== 'function') return;
+  ACTREF.registerEngine({
+    id: 'wasm@1',
+    /** after the common checks: the model, the item, its sha256, its imports and memory — refused here means the fallback, never instantiation */
+    check: spec => checkModel(spec),
+    /** on the main thread: the inputs' expressions become numbers; the checked bytes travel with each run (the worker keeps one instance per module) */
+    prepare(spec, compile) {
+      const m = spec.model, it = itemOf(m.module), A = abiOf(it), { problems, bytes, report } = checkItem(it);
+      if (problems.length || !bytes) throw Object.assign(new Error('wasm module refused'), { code: 'spec' });
+      const ins = m.inputs.map(s => compile(s)), { layout, nOut } = layoutOf(spec);
+      const M = { key: report.sha256, bytes, nOut, layout, abi: { step: m.step || A.step, init: m.init || A.init, maxPages: A.maxPages, scratch: A.scratch, initEachStep: A.initEachStep, memMin: report.memory ? report.memory.min : 1, memMax: report.memory ? report.memory.max : null } };
+      const ev = (f, env) => { try { return +f(env); } catch (e) { return NaN; } };
+      return env => ({ $in: ins.map(f => ev(f, env)), $mod: M });
+    },
+    /** the sim runtime calls create here only when it cannot start a worker: a module never runs on the page's own thread */
+    create() { throw Object.assign(new Error('wasm@1 runs only in a worker'), { code: 'worker' }); },
+    workerSource: workerSource(),
+  });
+  if (typeof ACTREF.registerRuntime === 'function') ACTREF.registerRuntime({
+    id: 'wasm-module@1', version: 1, autoHeight: true,
+    /** an item with its own spec: the sim-spec renderer with this module as the engine; without one there is nothing to show */
+    mount(box, ctx) {
+      const a = ctx.act, sim = ACTREF.runtime?.('sim-spec@1');
+      api.register(a);
+      if (!sim || !isObj(a.spec)) { Promise.resolve().then(() => ctx.onFail(sim ? 'spec' : 'unsupported')); return { send() { }, close() { }, values: () => null }; }
+      const spec = Object.assign({}, a.spec, { engine: 'wasm@1', model: Object.assign({}, a.spec.model, { module: a.id }) });
+      return sim.mount(box, Object.assign({}, ctx, { act: Object.assign({}, a, { spec }) }));
+    },
+  });
+  /* i18n-ignore-end */
+})();
+
+/* ---- 45_activity_embed.js ---- */
+/* ===================== interactive activities — runtime external-embed@1 (a third-party interactive page, opt-in) =====================
+   docs/activities-dev/embed.md, docs/adr/001 D12. An activity that is a page of an allow-listed provider (PhET, GeoGebra, Desmos…)
+   shown in a frame. It is an EXPLORER only (a theory block): no provider offers a documented cross-origin result channel, so it is
+   never a graded sim (checkPack refuses one; the runtime refuses an exercise).
+     • Nothing loads by itself: the learner first sees a quiet card (what opens, that it needs the network and may set cookies, the
+       credit, the licence, a link to the provider's terms) and an Open button. Open is remembered per provider (S.settings.embedOk,
+       an account setting); the card is skipped next time, the credit line stays under the frame (attribution at the point of use).
+     • The URL must match the allow-list exactly (PROVIDERS = tools/embed_allow.json): https, the origin one of the provider's, path,
+       query and hash fully matching its patterns, no user info, no tricks (check / match below; tools/embed_check.py the same rules).
+     • Two frames, as in html-app@1: the app's frame holds a WRAPPER without scripts (CSP script-src 'none') whose policy says
+       frame-src <the provider's origins>, and the provider's page runs in the wrapper's frame. So the page can navigate only within
+       its provider; every other navigation is blocked by the wrapper's policy. Both frames: sandbox with the provider's tokens only
+       (allow-scripts + allow-same-origin — the PROVIDER's own origin, which it needs for its storage; never allow-top-navigation,
+       never allow-popups-to-escape-sandbox, no forms or popups unless the allow-list names them), referrerpolicy no-referrer,
+       devices off (allow: … 'none'), credentialless where the browser has it, loading lazy.
+     • Offline (navigator.onLine false) or a page that never loads → onFail with a code; the core shows the activity's fallback.
+   No words here: the visible texts are tE() keys (engine.act.embed.*) and the pack's own strings (title, why).
+   Off unless the deployment switches it on: NOEMA_CONFIG.activities['external-embed@1'] === true (the site CSP must list the
+   providers in frame-src first). Loads in Node too (module.exports: the checks, for tests/activities_embed.js). */
+var NoemaEmbed = (() => {   // var: loaded twice in the app (beside packcheck.js in the shell, then in engine.js)
+  /* i18n-ignore-start */   // code: codes, patterns, attribute values
+  const PROVIDERS = /*@providers*/[
+    {"id": "phet", "name": "PhET", "status": "allowed", "origins": ["https://phet.colorado.edu"], "path": "/sims/html/[a-z0-9-]+/(latest|[0-9]+\\.[0-9]+\\.[0-9]+)/[a-z0-9-]+_(all|[a-z]{2}(_[A-Z]{2})?)\\.html", "query": "(locale=[A-Za-z_]{2,6})?", "hash": null, "sandbox": ["allow-scripts", "allow-same-origin"], "licenses": ["CC-BY-4.0", "CC-BY-NC-4.0"], "creditMust": "PhET Interactive Simulations, University of Colorado Boulder", "credit": "PhET Interactive Simulations, University of Colorado Boulder · {title} · {license} · https://phet.colorado.edu", "terms": "https://phet.colorado.edu/en/licensing/html", "supportsResult": false, "notes": "HTML sims published before 2026-03-29: CC BY 4.0 (commercial use allowed; the credit, the licence and https://phet.colorado.edu as close to the point of use as possible; translating the credit is allowed). PhET's 2025 impact report announces a shift to CC BY-NC for newer sims, and its FAQ says commercial use needs a licence: read the sim's publication date in its About dialog and pick the licence. Every HTML sim page offers an Embed code. No result channel: PhET-iO (the instrumented API) is licensed separately. Language: ?locale=."},
+    {"id": "geogebra", "name": "GeoGebra", "status": "allowed", "origins": ["https://www.geogebra.org"], "path": "/material/iframe/id/[A-Za-z0-9]{4,16}(/[a-z]{1,8}/[A-Za-z0-9]{1,16})*", "query": null, "hash": null, "sandbox": ["allow-scripts", "allow-same-origin"], "licenses": ["GeoGebra-NC", "CC-BY-NC-SA-3.0", "CC-BY-NC-SA-4.0"], "creditMust": "GeoGebra", "credit": "{author} · {title} · GeoGebra (geogebra.org) · {license}", "terms": "https://www.geogebra.org/license", "supportsResult": false, "notes": "GeoGebra licence: the apps and the materials are free for non-commercial use with attribution (materials CC BY-NC-SA); commercial use (e.g. inside a non-academic e-book or a paid product) needs a licence from GeoGebra. Share > Embed gives the material/iframe URL. Explore only: the ggbApplet API needs deployggb.js running in OUR page (a third-party script in the app's origin: refused) or same-origin access to the frame; the iframe embed has no documented postMessage channel."},
+    {"id": "desmos", "name": "Desmos", "status": "allowed", "origins": ["https://www.desmos.com"], "path": "/(calculator|geometry|3d)/[a-z0-9]{6,24}", "query": "embed", "hash": null, "sandbox": ["allow-scripts", "allow-same-origin"], "licenses": ["Desmos-ToS"], "creditMust": "Desmos", "credit": "{title} · Desmos (desmos.com) · {license}", "terms": "https://www.desmos.com/terms", "supportsResult": false, "notes": "A saved graph's Share > Embed gives https://www.desmos.com/calculator/<id>?embed (no API key; Desmos staff on the API forum: the iframe route needs no API). The JS API (calculator.js) needs an API key and runs in OUR page: refused. The Terms of Service restrict commercial use. Explore only."},
+    {"id": "falstad", "name": "Falstad Circuit Simulator", "status": "pending", "origins": ["https://www.falstad.com", "https://falstad.com"], "path": "/circuit/circuitjs\\.html", "query": "(ctz|cct)=[A-Za-z0-9._~%+$!*'(),;:@/=-]{1,1900}", "hash": null, "sandbox": ["allow-scripts", "allow-same-origin"], "licenses": ["GPL-2.0-or-later"], "creditMust": "Paul Falstad", "credit": "Circuit simulator by Paul Falstad (falstad.com/circuit) · {license}", "terms": "https://www.falstad.com/licensing.html", "supportsResult": false, "notes": "Code: CircuitJS1, GPLv2. Site terms: use in a classroom unmodified; non-commercial modification or redistribution with credit and a link; 'for any other uses, contact me'. Framing the hosted page on another site is not addressed: PENDING until Paul Falstad confirms, or self-host the GPL build later (same origin: then its CircuitJS1 JS API could give a result channel). Cross-origin, that API is out of reach."},
+    {"id": "circuitjs", "name": "CircuitJS1 (Lush Projects)", "status": "pending", "origins": ["https://lushprojects.com"], "path": "/circuitjs/circuitjs(\\.html)?", "query": "(ctz|cct)=[A-Za-z0-9._~%+$!*'(),;:@/=-]{1,1900}", "hash": null, "sandbox": ["allow-scripts", "allow-same-origin"], "licenses": ["GPL-2.0-or-later"], "creditMust": "CircuitJS1", "credit": "CircuitJS1 by Paul Falstad and Iain Sharp (lushprojects.com/circuitjs) · {license}", "terms": "https://github.com/sharpie7/circuitjs1", "supportsResult": false, "notes": "Iain Sharp's hosted CircuitJS1 (GPLv2; the README says to embed the full-page version in an iframe, written for self-hosted copies). No terms for framing the hosted service: PENDING. Same API situation as falstad."},
+    {"id": "wokwi", "name": "Wokwi", "status": "pending", "origins": ["https://wokwi.com"], "path": "/projects/[0-9]{6,24}", "query": "(embed=1)?", "hash": null, "sandbox": ["allow-scripts", "allow-same-origin"], "licenses": ["Wokwi-ToS"], "creditMust": "Wokwi", "credit": "{title} · simulated on Wokwi (wokwi.com) · {license}", "terms": "https://docs.wokwi.com", "supportsResult": false, "notes": "Arduino / ESP32 / Pi Pico simulator, free to use. No public documentation of iframe embedding or of its terms was found (2026-11): only an 'early prototype, subject to change' partner embed (/_alpha/wembed/) in wokwi-embed-bridge-example. PENDING until Wokwi documents or confirms embedding. A project compiles the learner's code on Wokwi's servers."},
+  ]/*@end*/;
+  const RUNTIME = 'external-embed@1', MAX_URL = 2048, FALLBACK_MIN = 40, LOAD_TIMEOUT = 20000;
+  /** the sandbox tokens a provider may be given; everything else (allow-top-navigation*, allow-popups-to-escape-sandbox, allow-modals,
+      allow-downloads, allow-storage-access-by-user-activation, allow-presentation, allow-orientation-lock) is refused */
+  const SANDBOX_OK = new Set(['allow-scripts', 'allow-same-origin', 'allow-forms', 'allow-pointer-lock', 'allow-popups']);
+  const DEVICES = ['accelerometer', 'autoplay', 'camera', 'display-capture', 'encrypted-media', 'geolocation', 'gyroscope', 'magnetometer', 'microphone', 'midi', 'payment', 'publickey-credentials-get', 'screen-wake-lock', 'serial', 'usb', 'hid', 'bluetooth', 'web-share', 'xr-spatial-tracking'].map(f => f + " 'none'").join('; ');
+  const SAFE = /^[A-Za-z0-9\-._~%!$&'()*+,;=:@\/?#]+$/;
+  const URL_RE = /^https:\/\/([a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)+)(:[0-9]{1,5})?(\/[^?#]*)?(\?[^#]*)?(#.*)?$/;
+  const BAD_PATH = /\/\/|\/\.\.?(\/|$)|%2e|%2f|%5c|%00/i;
+  const isStr = v => typeof v === 'string' && v.trim().length > 0;
+  const full = (re, s) => { try { return new RegExp('^(?:' + re + ')$').test(s); } catch (e) { return false; } };
+  const provider = (id, list) => (Array.isArray(list) ? list : []).find(p => p && p.id === id) || null;
+
+  /** a URL string → { origin, path, query, hash } (query / hash without ? / #, null when absent) | { code } */
+  function parse(u) {
+    if (typeof u !== 'string' || !u) return { code: 'url-missing' };
+    if (u.length > MAX_URL) return { code: 'url-long' };
+    if (!u.startsWith('https://')) return { code: 'url-scheme' };   // http:, javascript:, data:, //host, HTTPS:… all refused
+    if (!SAFE.test(u)) return { code: 'url-chars' };                 // spaces, controls, backslashes, quotes, <>, non-ASCII
+    if (u.slice(8).split(/[/?#]/)[0].includes('@')) return { code: 'url-userinfo' };
+    const m = URL_RE.exec(u); if (!m) return { code: 'url-host' };
+    const path = m[3] || '/';
+    if (BAD_PATH.test(path)) return { code: 'url-path' };
+    return { origin: 'https://' + m[1] + (m[2] || ''), path, query: m[4] == null ? null : m[4].slice(1), hash: m[5] == null ? null : m[5].slice(1) };
+  }
+  /** does the URL match this provider exactly? → { ok: true, provider, origin } | { code } */
+  function match(url, p) {
+    const u = parse(url); if (u.code) return u;
+    if (!p || !Array.isArray(p.origins) || !p.origins.includes(u.origin)) return { code: 'url-origin' };
+    if (!full(p.path, u.path)) return { code: 'url-path' };
+    if (u.query != null && (p.query == null || !full(p.query, u.query))) return { code: 'url-query' };
+    if (u.query == null && p.query != null && !full(p.query, '')) return { code: 'url-query' };
+    if (u.hash != null && (p.hash == null || !full(p.hash, u.hash))) return { code: 'url-hash' };
+    return { ok: true, provider: p, origin: u.origin };
+  }
+  /** one registry item → { errors: ['code: what'], warnings } — the same rules as tools/embed_check.py check_item */
+  function check(a, opts) {
+    const list = (opts && opts.providers) || PROVIDERS, E = [], W = [];
+    const e = (code, what) => E.push(code + ': ' + what);
+    if (!a || typeof a !== 'object' || Array.isArray(a)) return { errors: ['item: not an object'], warnings: W };
+    if (a.runtime !== RUNTIME) e('runtime', 'runtime must be ' + RUNTIME);
+    const p = typeof a.provider === 'string' ? provider(a.provider, list) : null;
+    if (!p) e('provider-unknown', 'provider must be one of the allow-list (tools/embed_allow.json)');
+    else {
+      if (p.status !== 'allowed') e('provider-pending', 'provider ' + p.id + ' is not allowed yet (its embedding terms are not confirmed)');
+      if (!Array.isArray(p.sandbox) || p.sandbox.some(t => !SANDBOX_OK.has(t)) || !p.sandbox.includes('allow-scripts')) e('provider-sandbox', 'the provider asks for sandbox tokens outside ' + [...SANDBOX_OK].join(' '));
+      const m = match(a.url, p); if (!m.ok) e(m.code, 'url does not match provider ' + p.id + ' exactly');
+      if (!isStr(a.credit)) e('credit-missing', 'credit is required');
+      else if (isStr(p.creditMust) && !a.credit.includes(p.creditMust)) e('credit-provider', 'credit must name "' + p.creditMust + '"');
+      if (!isStr(a.license)) e('license-missing', 'license is required');
+      else if (!Array.isArray(p.licenses) || !p.licenses.includes(a.license)) e('license-provider', 'license must be one of ' + (p.licenses || []).join(', '));
+    }
+    if (p == null && typeof a.url === 'string') { const u = parse(a.url); if (u.code) e(u.code, 'url'); }
+    const fb = a.fallback && typeof a.fallback === 'object' ? a.fallback : {};
+    if (!(isStr(fb.text) && fb.text.trim().length >= FALLBACK_MIN) || !isStr(fb.media)) e('fallback-missing', 'fallback {media, text >= ' + FALLBACK_MIN + ' characters} is required (offline, refused, not chosen)');
+    if (a.capabilities != null && !(Array.isArray(a.capabilities) && a.capabilities.length === 0)) e('capabilities', 'an embed has no capabilities (it does not speak the activity protocol)');
+    if ('html' in a || 'spec' in a || 'entry' in a) e('not-embed', 'an embed carries no bundle, spec or entry');
+    const st = a.strings;
+    if (!st || typeof st !== 'object' || Array.isArray(st) || !Object.keys(st).length || Object.values(st).some(t => !t || typeof t !== 'object' || Array.isArray(t) || !isStr(t.title))) e('strings-title', 'strings.<locale>.title (what opens, in each language) is required');
+    if (a.height != null && !(typeof a.height === 'number' && a.height >= 120 && a.height <= 2000)) e('height', 'height must be 120–2000');
+    if (p && p.status === 'allowed' && /NC/.test(String(a.license || ''))) W.push('license-nc: ' + a.license + ' is non-commercial: fine for a free study app, not for a paid one');
+    return { errors: E, warnings: W };
+  }
+  /** a pack → { errors, warnings } for its embed items, and the sim exercises that would grade one (none can) */
+  function checkPack(pack, opts) {
+    const list = (opts && opts.providers) || PROVIDERS, E = [], W = [], items = {};
+    for (const a of (pack && pack.activities && Array.isArray(pack.activities.items) ? pack.activities.items : [])) {
+      if (!a || a.runtime !== RUNTIME) continue;
+      items[a.id] = a; const r = check(a, { providers: list });
+      E.push(...r.errors.map(m => 'activity ' + a.id + ': ' + m)); W.push(...r.warnings.map(m => 'activity ' + a.id + ': ' + m));
+    }
+    for (const c of (pack && Array.isArray(pack.chapters) ? pack.chapters : []))
+      for (const ex of (Array.isArray(c.exercises) ? c.exercises : []))
+        if (ex && ex.type === 'sim' && Object.prototype.hasOwnProperty.call(items, ex.activity)) {
+          const p = provider(items[ex.activity].provider, list);
+          if (!(p && p.supportsResult === true)) E.push(ex.id + ': sim-embed: activity ' + ex.activity + ' is an outside page (explore only): use it in a theory block');
+        }
+    return { errors: E, warnings: W };
+  }
+
+  /* ---------- the learner's choice, per provider (an account setting: S.settings.embedOk = { <provider>: time }) ---------- */
+  const consent = {
+    has(id) { try { return !!(typeof S !== 'undefined' && S.settings && S.settings.embedOk && Object.prototype.hasOwnProperty.call(S.settings.embedOk, id) && S.settings.embedOk[id]); } catch (e) { return false; } },
+    set(id) { try { if (typeof S === 'undefined' || !S.settings) return; S.settings.embedOk = Object.assign({}, S.settings.embedOk || {}, { [id]: Date.now() }); if (typeof save === 'function') save(); } catch (e) { } },
+    forget(id) { try { if (typeof S === 'undefined' || !S.settings || !S.settings.embedOk) return; const o = Object.assign({}, S.settings.embedOk); delete o[id]; S.settings.embedOk = o; if (typeof save === 'function') save(); } catch (e) { } },
+    list() { try { return typeof S !== 'undefined' && S.settings && S.settings.embedOk ? Object.keys(S.settings.embedOk) : []; } catch (e) { return []; } },
+  };
+
+  /* ---------- the runtime ---------- */
+  const T = (k, v) => (typeof tE === 'function' ? tE(k, v) : k);
+  const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = String(text); return e; };
+  function creditLine(a, p) {
+    const line = el('p', 'act-embed-credit');
+    line.append(el('span', '', a.credit), document.createTextNode(' · '), el('span', '', a.license), document.createTextNode(' · '));
+    const terms = el('a', '', T('engine.act.embed.terms', { provider: p.name }));
+    terms.href = p.terms; terms.target = '_blank'; terms.rel = 'noopener noreferrer'; terms.referrerPolicy = 'no-referrer';
+    line.append(terms);
+    return line;
+  }
+  /** the wrapper document: no scripts; its policy lets its one frame show only the provider's origins */
+  function wrapperDoc(url, p, tokens, title) {
+    const csp = ["default-src 'none'", "script-src 'none'", "style-src 'unsafe-inline'", 'frame-src ' + p.origins.join(' '), "form-action 'none'", "base-uri 'none'", "object-src 'none'"].join('; ');
+    const w = document.implementation.createHTMLDocument('');
+    const m = w.createElement('meta'); m.setAttribute('http-equiv', 'Content-Security-Policy'); m.setAttribute('content', csp);
+    const s = w.createElement('style'); s.textContent = 'html,body{margin:0;height:100%;overflow:hidden;background:transparent}iframe{display:block;border:0;width:100%;height:100%}';
+    const f = w.createElement('iframe');
+    f.setAttribute('sandbox', tokens); f.setAttribute('allow', DEVICES); f.setAttribute('referrerpolicy', 'no-referrer');
+    f.setAttribute('credentialless', ''); f.setAttribute('title', title); f.setAttribute('src', url);
+    w.head.replaceChildren(m, s); w.body.replaceChildren(f);
+    return '<!doctype html>' + w.documentElement.outerHTML;
+  }
+  function register() {
+    if (typeof ACT !== 'object' || !ACT || typeof ACT.registerRuntime !== 'function' || typeof document === 'undefined') return;
+    if (!(window.NOEMA_CONFIG && window.NOEMA_CONFIG.activities && window.NOEMA_CONFIG.activities[RUNTIME] === true)) return;   // opt-in per deployment
+    ACT.registerRuntime({
+      id: RUNTIME, version: 1,
+      /** → port { send(type), close() }; the page itself does not speak the activity protocol: this trusted host answers for it */
+      mount(box, { act, init, title, onMessage, onFail }) {
+        const later = f => Promise.resolve().then(f);   // never call back before the core holds the port
+        let closed = false, timer = null;
+        const out = (type, payload) => { if (!closed) onMessage(ACTP.out(type, payload)); };
+        const fail = code => later(() => { if (!closed) onFail(code); });
+        const root = el('div', 'act-embed');
+        const port = { send(type) { if (type === 'ping') later(() => out('pong')); }, close() { closed = true; clearTimeout(timer); root.remove(); } };
+        const r = check(act);
+        const p = provider(act && act.provider, PROVIDERS);
+        if (r.errors.length || !p) { console.warn('[noema] external-embed', act && act.id, r.errors.join(' | ')); fail('embed-refused'); return port; }
+        let href = ''; try { href = new URL(act.url).href; } catch (e) { }
+        if (href !== act.url) { console.warn('[noema] external-embed', act.id, 'url is not in its normal form'); fail('embed-refused'); return port; }
+        if (init && init.exerciseId) { fail('embed-graded'); return port; }   // explore only (docs/activities-dev/embed.md §4)
+        if (typeof navigator !== 'undefined' && navigator.onLine === false) { fail('embed-offline'); return port; }
+        const tokens = p.sandbox.filter(t => SANDBOX_OK.has(t)).join(' ');
+        const words = (init && init.strings) || {};
+        const name = words.title || act.id;
+        box.append(root);
+        later(() => out('ready', { protocols: [1] }));
+        function open() {
+          if (closed) return;
+          if (typeof navigator !== 'undefined' && navigator.onLine === false) return fail('embed-offline');
+          root.replaceChildren();
+          const f = el('iframe', 'act-frame act-embed-frame');
+          f.setAttribute('sandbox', tokens); f.setAttribute('allow', DEVICES); f.setAttribute('referrerpolicy', 'no-referrer');
+          f.setAttribute('credentialless', ''); f.setAttribute('loading', 'lazy'); f.setAttribute('title', T('engine.act.embed.frameTitle', { title: name, provider: p.name }));
+          f.setAttribute('data-provider', p.id);
+          f.addEventListener('load', () => { clearTimeout(timer); out('a11y:announce', { text: String(T('engine.act.embed.opened', { provider: p.name })).slice(0, 300) }); }, { once: true });
+          timer = setTimeout(() => fail('embed-timeout'), LOAD_TIMEOUT);
+          f.srcdoc = wrapperDoc(act.url, p, tokens, name);
+          root.append(f, creditLine(act, p));
+          out('event', { name: 'embed:open', data: { provider: p.id } });
+        }
+        if (consent.has(p.id)) { open(); return port; }
+        // the quiet card: nothing of the provider is requested before Open
+        const card = el('div', 'act-embed-card'); card.setAttribute('role', 'group'); card.setAttribute('aria-label', name);
+        card.append(el('p', 'act-embed-title', name), el('p', 'act-embed-ask', T('engine.act.embed.ask', { provider: p.name })));
+        if (typeof words.why === 'string' && words.why.trim()) card.append(el('p', 'act-embed-why', words.why));
+        card.append(creditLine(act, p));
+        const go = el('button', 'btn primary small act-embed-open', T('engine.act.embed.open', { provider: p.name })); go.type = 'button';
+        go.addEventListener('click', () => { if (closed) return; consent.set(p.id); open(); });
+        card.append(go);
+        root.append(card);
+        return port;
+      },
+    });
+  }
+  register();
+  /* i18n-ignore-end */
+  return { RUNTIME, PROVIDERS, SANDBOX_OK, parse, match, check, checkPack, consent };
+})();
+if (typeof module === 'object' && module && module.exports) module.exports = NoemaEmbed;
+else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
+
 /* ---- 50_sources.js ---- */
 /* ===================== Sources: registry, filtering, "what's new" ===================== */
 /* Data model: every chapter has `src`; any item (section, block, exercise, playbook, flashcard, pitfall)
@@ -8720,6 +9770,17 @@ function accSection(icon, title, { status = null, info = null, open = false, bod
     h('div', { class: 'accsecbody' }, body));
   return d;
 }
+/** Settings › Data: the outside activities (external-embed@1, docs/INTERACTIVE_EMBED.md) the learner let open without asking — one quiet
+    line with ⓘ and "Ask again" (NoemaEmbed.consent: S.settings.embedOk, an account setting); nothing at all while there is no yes to forget. */
+function embedConsentRow() {
+  const E = window.NoemaEmbed, ids = E?.consent?.list?.() || [];
+  if (!ids.length) return null;
+  const names = ids.map(id => (E.PROVIDERS || []).find(p => p.id === id)?.name || id);
+  const row = h('div', { class: 'subrow embedconsent', 'data-embed-consent': '' },
+    h('span', { class: 'grow tiny' }, tE('engine.act.embed.settings', { names: window.NoemaI18n?.fmt?.list ? NoemaI18n.fmt.list(names) : names.join(', ') }), ' ', tip(tE('engine.act.embed.settingsTip'))),
+    h('button', { class: 'btn small ghost', type: 'button', onclick: () => { for (const id of E.consent.list()) E.consent.forget(id); row.remove(); toast(tE('engine.act.embed.forgotten')); } }, tE('engine.act.embed.forget')));
+  return row;
+}
 const fmtBytes = n => n > 1e6 ? tE('engine.common.sizeMB', { size: window.NoemaI18n?.fmt ? NoemaI18n.fmt.number(n / 1e6, { minimumFractionDigits: 1, maximumFractionDigits: 1 }) : (n / 1e6).toFixed(1) }) : n > 1e3 ? tE('engine.common.sizeKB', { size: nf(Math.round(n / 1e3)) }) : tE('engine.common.sizeB', { size: nf(n) });
 /** A moment / a day / a time of day in the UI language (the same fields the browser's toLocale…String() shows). */
 const WHEN_DAY = { year: 'numeric', month: 'numeric', day: 'numeric' }, WHEN_TIME = { hour: 'numeric', minute: '2-digit', second: '2-digit' };
@@ -8947,7 +10008,8 @@ const ACC_VIEWS = {
                 h('button', { class: 'btn', onclick: async () => { c2(); const base = tE('engine.bk.restoredName', { name: obj.account.name || tE('engine.bk.restoredDefault') }); const id = (base.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'restored') + '-' + Date.now().toString(36).slice(-4); Noema.saveLocalAccount({ id, name: base, emoji: obj.account.emoji || '♻️', created: Date.now() }); await Noema.backup.apply(obj, id, 'replace'); Noema.switchTo(id, null); } }, '➕ ' + tE('engine.bk.asNew')),   // i18n-ignore
                 h('button', { class: 'btn ghost', onclick: c2 }, tE('engine.core.cancel')))));
           } })), guideBtn('restore', '♻️ ' + tE('engine.bk.howRestore'))] }),
-      accSection('🕘', tE('engine.bk.secPoints'), { status: { ok: true, text: nf(pts0.length) }, info: tE('engine.bk.pointsInfo'), body: rpBox }));
+      accSection('🕘', tE('engine.bk.secPoints'), { status: { ok: true, text: nf(pts0.length) }, info: tE('engine.bk.pointsInfo'), body: rpBox }),
+      embedConsentRow());
     drawFs(); drawRP();
   },
 

@@ -4,6 +4,9 @@
    the handshake happens and the activity shows its words in the pack's language; state is saved and comes back; the sim
    exercise grades with what the activity reports (right and wrong), with hints; a missing activity and a runtime that is
    switched off show the fallback (picture + text); an endless loop is stopped and Restart works; no page errors.
+   P6: wasm-module@1 (wasm-oscillator: the module through the sim renderer, the graded exercise, a refused import, runaway + Restart),
+   the xAPI export from the subject's ⋮ (the file, the actor = the account id), external-embed@1 switched on (the consent card, nothing
+   requested before Open, the frames, the remembered choice, Settings › Data "Ask again", offline, never graded).
    Usage: node tests/activities_app.js <prepared-repo-dir> <pack.json from tests/activities_pack.py (NOEMA_ACT_PACK)>   (BROWSERS=chromium,firefox,webkit) */
 const pw = require(process.env.PW || 'playwright');
 const path = require('path');
@@ -118,7 +121,123 @@ async function run(name) {
   await simSpec(p, ctx, E);
   await circuit(p, ctx, E);
   await p6engines(p, ctx, E);
+  await wasmApp(p, ctx, E);
+  await xapiApp(p, ctx, E);
+  await embedApp(p, ctx, E);
   await browser.close();
+}
+
+/* wasm-module@1 (docs/INTERACTIVE_WASM.md): the reference wasm-oscillator — a precompiled module with its own spec, shown by the
+   sim-spec renderer (no frame), computed in a worker; the sim exercise graded by checks; a forbidden import and a module that never
+   returns (runaway → Restart) show the fallback. */
+async function wasmApp(p, ctx, E) {
+  console.log('— wasm-module@1: the theory block');
+  const E0 = E.length, SEL = 'main .act-blk .act[data-activity="wasm-oscillator"]';
+  await p.evaluate(() => { location.hash = '#/'; }); await wait(300); await p.evaluate(() => { location.hash = '#/s/ch01-s01'; }); await wait(600);
+  const sa = await p.$('button:has-text("show all")'); if (sa) { await sa.click(); await wait(200); }
+  await p.locator(SEL).first().scrollIntoViewIfNeeded(); await startIfParked(p, SEL);
+  const ro = () => p.evaluate(s => [...document.querySelectorAll(s + ' .sim-ro dd')].map(d => d.textContent), SEL);
+  ok(await until(async () => (await ro()).length === 2 && /%/.test((await ro())[1])), 'the module renders through the sim-spec runtime (readouts computed by the worker) ' + JSON.stringify(await ro()));
+  const shape = await p.evaluate(s => { const r = document.querySelector(s); return { frame: !!r.querySelector('iframe'), sliders: r.querySelectorAll('input[type=range]').length, line: !!r.querySelector('.sim-plot path.sim-line'), title: r.querySelector('.sim-title')?.textContent }; }, SEL);
+  ok(!shape.frame && shape.sliders === 3 && shape.line && /damped mass/i.test(shape.title || ''), 'no frame; three sliders, a plot line and the title in the pack\'s words ' + JSON.stringify(shape));
+  ok(/0[.,]05/.test((await ro())[0]) && /6\d[.,]\d\s*%/.test((await ro())[1]), `the start values: ζ = 0.05, about 61 % of the energy left (${(await ro()).join(' · ')})`);
+  await p.evaluate(s => { const e = document.querySelector(s + ' [data-param="c"]'); e.value = '1.6'; e.dispatchEvent(new Event('input', { bubbles: true })); e.dispatchEvent(new Event('change', { bubbles: true })); }, SEL);
+  ok(await until(async () => /^2[.,][0-4]\s*%/.test((await ro())[1])), 'c = 1.6: the module recomputes — about 2 % left ' + (await ro())[1]);
+  ok(await until(() => p.evaluate(() => S.act?.['blk:ch01-s01:wasm-oscillator']?.data?.values?.c === 1.6)), 'the state is saved (S.act)');
+
+  console.log('— wasm-module@1: the sim exercise');
+  const card = async () => { await p.evaluate(() => { const m = document.querySelector('main'); m.innerHTML = ''; const c = exerciseCard(EX['ch01-e908']); c.id = 'T'; m.append(c); scrollTo(0, 0); }); await wait(300);
+    return until(() => p.evaluate(() => !!document.querySelector('#T .sim-ro dd')?.textContent)); };
+  const setC = v => p.evaluate(v => { const e = document.querySelector('#T [data-param="c"]'); e.value = String(v); e.dispatchEvent(new Event('input', { bubbles: true })); e.dispatchEvent(new Event('change', { bubbles: true })); }, v);
+  ok(await card(), 'the exercise card mounts the module');
+  await setC(1); await wait(700); await p.click('#T button:has-text("Check")'); await wait(300);
+  ok(await p.evaluate(() => { const c = document.getElementById('T'); return c._locked() && !!c.querySelector('.explain.bad') && /1 of 2|1 \/ 2/.test(c.querySelector('.act-checks-sum')?.textContent || ''); }), 'c = 1 (about 8 % left) is graded wrong: 1 of 2 conditions met');
+  await card(); await setC(1.6); await wait(700); await p.click('#T button:has-text("Check")'); await wait(300);
+  ok(await p.evaluate(() => { const c = document.getElementById('T'); return c._locked() && !!c.querySelector('.explain.ok'); }), 'c = 1.6 is graded right');
+  ok(await p.evaluate(() => S.att?.['ch01-e908']?.result?.passed === true && S.att['ch01-e908'].events.length >= 1), 'the attempt is saved (S.att)');
+
+  console.log('— wasm-module@1: refused and runaway modules');
+  const bad = require('fs').readFileSync(path.join(__dirname, 'fixtures', 'wasm', 'forbidden.wasm'));
+  await p.evaluate(([b64, sha]) => { const a = ACT.ITEMS['wasm-oscillator']; ACT.ITEMS['osc-bad'] = { ...a, id: 'osc-bad', wasm: b64, sha256: sha, bytes: atob(b64).length };
+    const m = document.querySelector('main'); m.innerHTML = ''; m.append(interactiveBlock({ t: 'interactive', activity: 'osc-bad' })); scrollTo(0, 0); }, [bad.toString('base64'), require('crypto').createHash('sha256').update(bad).digest('hex')]);
+  await startIfParked(p, 'main .act');
+  ok(await until(() => p.evaluate(() => !!document.querySelector('main .act-fallback') && !document.querySelector('main .sim') && document.querySelector('main .act-note').textContent.length > 0 && !document.querySelector('main .act-bar button'))), 'a module that imports env.fetch_url: the fallback, no Restart (refused before it is instantiated)');
+  await p.evaluate(() => { const a = ACT.ITEMS['wasm-oscillator']; ACT.ITEMS['osc-spin'] = { ...a, id: 'osc-spin', spec: { ...a.spec, model: { ...a.spec.model, step: 'spin' } } };
+    const m = document.querySelector('main'); m.innerHTML = ''; m.append(interactiveBlock({ t: 'interactive', activity: 'osc-spin' })); scrollTo(0, 0); });
+  await startIfParked(p, 'main .act');
+  const t0 = Date.now();
+  ok(await until(() => p.evaluate(() => !!document.querySelector('main .act-fallback') && !!document.querySelector('main .act-bar button')), 15000), `a step that never returns is stopped (the worker is terminated after the 5 s budget: ${((Date.now() - t0) / 1000).toFixed(1)} s), Restart is offered`);
+  ok(await p.evaluate(() => { const t = performance.now(); return new Promise(r => setTimeout(() => r(performance.now() - t < 500), 50)); }), 'the app stayed responsive (the module never ran on the page\'s thread)');
+  ok(E.length === E0, 'no page errors ' + JSON.stringify(E.slice(E0, E0 + 3)));
+}
+
+/* xAPI (docs/INTERACTIVE_XAPI.md): the subject's ⋮ has "Export learning record (xAPI)"; it downloads the attempts and answers as
+   noema.xapi-export/v1; the actor is the account id (never an e-mail); the statements pass NoemaXAPI.validateAll. */
+async function xapiApp(p, ctx, E) {
+  console.log('— xAPI: the export');
+  const E0 = E.length;
+  const item = await p.evaluate(() => { const it = subjectMenu()().find(x => x && x.label === tE('engine.xapi.export')); return it ? { label: it.label, sub: it.sub } : null; });
+  ok(item && /xAPI/.test(item.label) && item.sub, 'the subject\'s ⋮ menu has the quiet item "Export learning record (xAPI)" ' + JSON.stringify(item));
+  const [dl] = await Promise.all([p.waitForEvent('download', { timeout: 10000 }), p.evaluate(() => subjectMenu()().find(x => x && x.label === tE('engine.xapi.export')).run())]);
+  const file = JSON.parse(require('fs').readFileSync(await dl.path(), 'utf8'));
+  ok(dl.suggestedFilename() === 'demo-activities.xapi.json' && file.format === 'noema.xapi-export/v1' && file.statements.length >= 5, `a JSON file is downloaded: ${dl.suggestedFilename()}, ${file.statements?.length} statements`);
+  const acc = await p.evaluate(() => String(Noema.account.id));
+  ok(file.statements.every(s => s.actor?.account?.name === acc && !s.actor.mbox && !s.actor.mbox_sha1sum) && !/mbox|@[a-z0-9-]+\.[a-z]/i.test(JSON.stringify(file.statements.map(s => s.actor))), 'the actor is the account id, never an e-mail');
+  ok(file.statements.some(s => /passed|failed/.test(s.verb.id) && /ch01-e908/.test(s.object.id)) && file.statements.some(s => /answered/.test(s.verb.id) || /attempted/.test(s.verb.id)), 'the wasm exercise\'s result and the other attempts are in it');
+  ok(await p.evaluate(f => NoemaXAPI.validateAll(f.statements).length === 0, file), 'the statements are valid xAPI 1.0.3 (NoemaXAPI.validateAll)');
+  ok(E.length === E0, 'no page errors ' + JSON.stringify(E.slice(E0, E0 + 3)));
+}
+
+/* external-embed@1 (docs/INTERACTIVE_EMBED.md): off by default; switched on here (NOEMA_CONFIG), with PhET answered by a local route (the
+   internet is never used). The consent card comes first and nothing is requested before Open; Open frames only the provider; the choice
+   is remembered; Settings › Data has the quiet "Ask again" line; offline → the fallback with Restart; as an exercise → refused, no Restart. */
+async function embedApp(p, ctx, E) {
+  console.log('— external-embed@1: off by default');
+  const E0 = E.length;
+  ok(await p.evaluate(() => !ACT.runtime('external-embed@1') && !ACT.caps().has('runtime:external-embed@1')), 'the runtime is off in config (the app lacks runtime:external-embed@1)');
+  const reqs = []; await ctx.route('https://phet.colorado.edu/**', r => { reqs.push(r.request().url()); r.fulfill({ status: 200, contentType: 'text/html', body: '<!doctype html><title>fake PhET</title><p id="sim">Ohm</p>' }); });
+  await ctx.addInitScript(() => { let v; Object.defineProperty(window, 'NOEMA_CONFIG', { configurable: true, get: () => v, set: x => { v = x; if (x && typeof x === 'object') x.activities = Object.assign({}, x.activities, { 'external-embed@1': true }); } }); });
+  await p.reload(); await wait(1500);
+  ok(await p.evaluate(() => !!ACT.runtime('external-embed@1')), 'switched on (NOEMA_CONFIG.activities["external-embed@1"] = true): the runtime registers');
+  const ITEM = { id: 'ohm-phet', runtime: 'external-embed@1', stateVersion: 1, provider: 'phet', url: 'https://phet.colorado.edu/sims/html/ohms-law/latest/ohms-law_all.html',
+    credit: 'PhET Interactive Simulations, University of Colorado Boulder · Ohm’s Law · CC-BY-4.0 · https://phet.colorado.edu', license: 'CC-BY-4.0', height: 480,
+    fallback: { media: 'alias-lab-still', text: 'Ohm’s law: the current through a resistor grows with the voltage and falls with the resistance, I = V / R.' }, strings: { en: { title: 'Ohm’s law simulation', why: 'Move V and R and watch I.' } } };
+  const mountBlk = () => p.evaluate(a => { ACT.ITEMS[a.id] = a; const m = document.querySelector('main'); m.innerHTML = ''; m.append(interactiveBlock({ t: 'interactive', activity: a.id })); scrollTo(0, 0); }, ITEM);
+  await p.evaluate(() => { NoemaEmbed.consent.forget('phet'); }); await mountBlk(); await startIfParked(p, 'main .act');
+  ok(await until(() => p.evaluate(() => !!document.querySelector('main .act-embed-card'))), 'the card comes first');
+  const cardT = await p.evaluate(() => document.querySelector('main .act-embed-card').textContent);
+  ok(/needs the network/.test(cardT) && /cookies/.test(cardT) && /Open PhET/.test(cardT) && /CC-BY-4\.0/.test(cardT) && /terms/.test(cardT), 'the card: what opens, network and cookies, the credit and licence, the terms, Open PhET');
+  await wait(800); ok(reqs.length === 0 && await p.evaluate(() => !document.querySelector('main iframe')), 'nothing of the provider is requested before Open');
+  await p.click('main .act-embed-open');
+  ok(await until(() => p.evaluate(() => !!document.querySelector('main iframe.act-embed-frame'))) && await until(() => reqs.length >= 1), 'Open: the frame loads the provider (answered by the local route) ' + JSON.stringify(reqs.slice(0, 2)));
+  const fr = await p.$eval('main iframe.act-embed-frame', f => ({ sandbox: f.getAttribute('sandbox'), ref: f.getAttribute('referrerpolicy'), csp: (f.srcdoc.match(/frame-src [^;"]+/) || [''])[0], scripts: /<script/i.test(f.srcdoc), allow: f.getAttribute('allow') }));
+  ok(fr.sandbox === 'allow-scripts allow-same-origin' && fr.ref === 'no-referrer' && fr.csp === 'frame-src https://phet.colorado.edu' && !fr.scripts && /camera 'none'/.test(fr.allow), 'the frames: the provider\'s tokens only, no referrer, the wrapper has no scripts and frames only the provider ' + JSON.stringify(fr));
+  ok(reqs.every(u => u.startsWith('https://phet.colorado.edu/sims/html/ohms-law/')) && await p.evaluate(() => /PhET/.test(document.querySelector('main .act-embed-credit')?.textContent || '')), 'only the allowed URL is requested; the credit stays under the frame');
+  ok(await p.evaluate(() => !!S.settings.embedOk?.phet && NoemaEmbed.consent.list().includes('phet')), 'the choice is remembered (S.settings.embedOk, an account setting)');
+  await mountBlk(); await startIfParked(p, 'main .act');
+  ok(await until(() => p.evaluate(() => !!document.querySelector('main iframe.act-embed-frame') && !document.querySelector('main .act-embed-card'))), 'next time it opens without the card');
+
+  console.log('— external-embed@1: Settings › Data — "Ask again"');
+  // the page Settings › Data renders (ENGINE.accView('backup'): the same view in the frame and on the classic screens)
+  await p.evaluate(async () => { const m = document.querySelector('main'); m.innerHTML = ''; const b = document.createElement('div'); b.className = 'accbody'; m.append(b); await ACC_VIEWS.backup(b, () => { }); });
+  ok(await until(() => p.evaluate(() => !!document.querySelector('[data-embed-consent]'))), 'Settings › Data shows one quiet line for the outside activities');
+  const row = await p.evaluate(() => { const r = document.querySelector('[data-embed-consent]'); return { text: r.textContent, tip: !!r.querySelector('.tip, [title], button[aria-label]'), btns: r.querySelectorAll('button').length }; });
+  ok(/PhET/.test(row.text) && /Ask again/.test(row.text) && row.btns >= 1, 'the line names PhET, has its ⓘ and "Ask again" ' + JSON.stringify(row));
+  await p.click('[data-embed-consent] button:has-text("Ask again")'); await wait(300);
+  ok(await p.evaluate(() => !document.querySelector('[data-embed-consent]') && NoemaEmbed.consent.list().length === 0 && !S.settings.embedOk?.phet), '"Ask again" forgets the choice, and the line goes away');
+  await mountBlk(); await startIfParked(p, 'main .act');
+  ok(await until(() => p.evaluate(() => !!document.querySelector('main .act-embed-card'))), 'the card asks again');
+  await p.evaluate(async () => { const m = document.querySelector('main'); m.innerHTML = ''; const b = document.createElement('div'); m.append(b); await ACC_VIEWS.backup(b, () => { }); });
+  ok(await p.evaluate(() => !document.querySelector('[data-embed-consent]')), 'with nothing to forget, Settings shows no line at all (quiet)');
+
+  console.log('— external-embed@1: offline, and never graded');
+  await ctx.setOffline(true); await mountBlk(); await startIfParked(p, 'main .act');
+  ok(await until(() => p.evaluate(() => !!document.querySelector('main .act-fallback') && /offline/i.test(document.querySelector('main .act-note').textContent) && /Restart/.test(document.querySelector('main .act-bar').textContent))), 'offline: the fallback, "needs the network", and Restart (to try again)');
+  await ctx.setOffline(false);
+  await p.evaluate(() => { const m = document.querySelector('main'); m.innerHTML = ''; ACT.mount(m, 'ohm-phet', { ex: { id: 'ch01-e999', type: 'sim', activity: 'ohm-phet', grade: { mode: 'reported' } }, start: true }); });
+  ok(await until(() => p.evaluate(() => !!document.querySelector('main .act-fallback') && /not on the list/.test(document.querySelector('main .act-note').textContent) && !document.querySelector('main .act-bar button'))), 'mounted as an exercise: refused (explore only), the fallback, no Restart');
+  await ctx.unroute('https://phet.colorado.edu/**');
+  ok(E.length === E0, 'no page errors ' + JSON.stringify(E.slice(E0, E0 + 3)));
 }
 
 /* sim-spec@1 (docs/INTERACTIVE.md §12): the reference rc-lowpass — the app's own controls, readouts and plots (no frame), state,

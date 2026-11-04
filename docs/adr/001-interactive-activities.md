@@ -3,6 +3,7 @@
 * **Status:** accepted (2026-11-04). The owner approved the four plan changes in §2; P1 (core + `html-app@1`) and P2 (`sim-spec@1`, the
   expression language, the `checks` grader, `registerEngine`) are implemented (§8 "As built"). Where this record and the owner's
   decisions doc differ, the doc wins (items 6 and 7 are applied below: D7, D8).
+  The P6 runtimes of D12 (`wasm-module@1` + engine `wasm@1`, `external-embed@1`, the xAPI export, the H5P import) are built: §10.
 * **Date:** 2026-11-04 · **Requested by:** ANR · **Brief:** the "Handoff: Interactive Activities for noema-lite" message (thread "Add interactive activities to packs").
 * **Scope of this ADR:** the design for all phases P1–P5 and the results of the four P0 spikes. No feature code ships with it; the spike
   scripts are kept in `tests/spikes/activities/` so anyone can run them again.
@@ -347,3 +348,42 @@ mode, audits. The content work (the electronics Roadmap) starts only after the h
   the four blocks against the engine on the page, eight graded tries and the twin bench on a modified `sensor-node` (five
   instruments, the readings, the hidden lead rows, the current scope, the verdict). It passes `node --check`; it was not run in a
   browser in this phase.
+## 11. As built — P6 runtimes (`wasm-module@1`, `external-embed@1`, xAPI, H5P import; 2026-11-04)
+
+* **`wasm-module@1` is a sim-spec, not a page of its own.** The module only computes; the page is always the sim runtime's
+  renderer, through the engine `wasm@1` (`engine/src/44_activity_wasm.js`, `docs/INTERACTIVE_WASM.md`). An item with its own
+  `spec` is a whole activity (the runtime completes the spec: `engine: "wasm@1"`, `model.module` = the item); an item without one
+  is a module only, used by another sim-spec's `model.module`, and the validators refuse it in a block or a sim (it shows nothing).
+  The module gets no imports but a host ABI of three functions and one memory; the bytes are checked twice (our binary reader on
+  the page, `WebAssembly.Module.imports()` in the worker) and the worker removes every network global before anything runs —
+  the app has no CSP to lean on (§1). `tools/wasm_check.py` is the Python twin of the reader (same codes, same messages).
+  Failures reuse the core's codes, so the runtime adds no UI words. Reference activity `wasm-oscillator` (a damped oscillator,
+  `tests/fixtures/wasm/osc.wat`): `activity_new.py --from wasm-oscillator`; the harness runs the module in a real worker.
+* **`external-embed@1` is opt-in, explore only and asks first** (`45_activity_embed.js`, `docs/INTERACTIVE_EMBED.md`). It registers
+  only with `NOEMA_CONFIG.activities['external-embed@1'] === true` (not set in the shipped `config.js`), so by D1 every pack shows
+  the fallback until a site owner turns it on. The allow-list `tools/embed_allow.json` has PhET, GeoGebra and Desmos allowed;
+  **Falstad, CircuitJS and Wokwi pending** (refused: their terms do not address framing). The licence limits are recorded in
+  `docs/INTERACTIVE.md` §1 (PhET CC BY, newer sims CC BY-NC; GeoGebra non-commercial; Desmos ToS restrict commercial use) and the
+  validators warn `license-nc`. The core maps the runtime's failures: `embed-refused` / `embed-graded` stop without Restart,
+  `embed-offline` / `embed-timeout` with Restart. Consent is an account setting (`S.settings.embedOk`); Me › Data and sync shows one
+  quiet line with an ⓘ and "Ask again" (`NoemaEmbed.consent`). The card's words are in the engine catalogue in every UI language.
+* **No site CSP was added.** What a future one must allow is written down (`docs/INTERACTIVE_EMBED.md` §6): `frame-src 'self'` +
+  the allowed providers' origins generated from the allow-list; `'wasm-unsafe-eval'` and `worker-src blob:`.
+* **One validator rule set, four places.** `NoemaWasm` and `NoemaEmbed` are loaded beside `packcheck.js` wherever it runs (the
+  shell, the site, the one-file bundle, the connector); `engine/packcheck.js` and `tools/activities.py` call them (and
+  `wasm_check.py` / `embed_check.py`) and add the pack rules (`sim-embed`, a module without a spec, a spec naming another
+  module, `reported` impossible: the module reports nothing). `tests/activities.js` compares the messages on 27 packs.
+  `make_pack.py` inlines `module.wasm` as base64 + sha256; `unpack.py` writes it back byte for byte; an embed has no file.
+  `45_activity_embed.js` declares `var NoemaEmbed`, because the app loads it both on its own (for packcheck) and inside `engine.js`.
+* **xAPI export** (`43_xapi.js`, `docs/INTERACTIVE_XAPI.md`): the subject's ⋮ menu has "Export learning record (xAPI)"; it
+  writes `<subject>.xapi.json` (`noema.xapi-export/v1`, xAPI 1.0.3 statements from `S.att` and `S.res`). The actor is
+  `{account: {homePage: <site>, name: <account id>}}` — never an e-mail. **No cmi5 zip in the app yet** (`cmi5Package` exists;
+  an LMS launch is not implemented), and no LRS posting. The shell's own "My subjects" ⋮ does not offer it (the export reads the
+  open subject's attempts).
+* **H5P import** (`tools/h5p_import.py`, in the toolkit): `.h5p` quizzes become the pack's own exercise types; the playbook
+  (`INTERACTIVE_AUTHORING.md` "Importing H5P quizzes"), `SKILL.md`, `CONTENT_SPEC.md`, `docs/PIPELINES.md` and the connector's
+  instructions say that an import is a draft of exercises of the sources to which every rule Q1–Q8 still applies.
+* **Docs** `docs/INTERACTIVE_WASM.md`, `INTERACTIVE_EMBED.md`, `INTERACTIVE_XAPI.md` (folded from `docs/activities-dev/`) are in the
+  skill's references and in the connector guide's part `interactive`.
+* **Left for later:** a cmi5 package download; not counting a consent card (no frame yet) against the two live activities;
+  a site CSP; engine-specific host words (`engine.act.wasm.*`) for an emulator UI built on `NoemaWasm.load`.

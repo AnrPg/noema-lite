@@ -50,5 +50,20 @@
   "engine.act.bench.inst.log": "Registro de eventos",
   "engine.act.bench.inst.rssi": "Radio: intensidad de la señal (RSSI)",
   "engine.act.bench.current": "Corriente",
-  "engine.act.bench.logStats": "reinicios: {resets}, mensajes perdidos: {lost}, activaciones que se alargaron: {overruns}"
+  "engine.act.bench.logStats": "reinicios: {resets}, mensajes perdidos: {lost}, activaciones que se alargaron: {overruns}",
+  "engine.act.embed.ask": "Esta actividad abre {provider}. Necesita conexión a internet, y {provider} puede guardar cookies.",
+  "engine.act.embed.open": "Abrir {provider}",
+  "engine.act.embed.terms": "Condiciones de {provider}",
+  "engine.act.embed.frameTitle": "{title} — {provider}",
+  "engine.act.embed.opened": "{provider} está abierto.",
+  "engine.act.embed.offline": "Esta actividad necesita conexión a internet. Estás sin conexión.",
+  "engine.act.embed.refused": "Esta actividad externa no está en la lista de sitios permitidos.",
+  "engine.act.embed.timeout": "{provider} no se ha cargado.",
+  "engine.act.embed.settings": "Actividades externas que se abren sin preguntar: {names}",
+  "engine.act.embed.forget": "Volver a preguntar",
+  "engine.act.embed.settingsTip": "Una actividad externa (una página de PhET, GeoGebra o Desmos) pregunta una vez antes de abrirse: necesita conexión a internet y el sitio puede guardar cookies. «Volver a preguntar» olvida tu sí.",
+  "engine.act.embed.forgotten": "Las actividades externas volverán a preguntar antes de abrirse.",
+  "engine.xapi.export": "Exportar el registro de aprendizaje (xAPI)",
+  "engine.xapi.exportSub": "Tus intentos y respuestas en un archivo para un almacén de registros de aprendizaje (LRS)",
+  "engine.xapi.none": "Aún no hay nada que exportar: no tienes intentos ni respuestas en esta asignatura."
 }

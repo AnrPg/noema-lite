@@ -1,0 +1,15 @@
+{
+ "id": "wasm-oscillator",
+ "runtime": "wasm-module@1",
+ "entry": "activities/wasm-oscillator/module.wasm",
+ "stateVersion": 1,
+ "capabilities": ["state", "events"],
+ "abi": { "version": 1, "scratch": 1024, "maxPages": 16 },
+ "fallback": {
+  "media": "wasm-oscillator-still",
+  "text": "A 1 kg mass on a spring (k = 4 N/m) is pulled 1 m aside and let go. With light damping (c = 0.2 N·s/m) it swings for a long time and about 60 % of its energy is still there after 2.5 s; with c = 1.6 N·s/m the swings die out quickly and only about 2 % is left. The damping force −c·v takes the energy away; the spring alone only trades it between motion and stretch."
+ },
+ "origin": "own",
+ "credit": "noema-lite reference activity (the module is tests/fixtures/wasm/osc.wat, assembled)",
+ "license": "own"
+}

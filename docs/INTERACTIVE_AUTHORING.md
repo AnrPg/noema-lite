@@ -32,6 +32,12 @@ own rules, a step-by-step animation. A graded html-app reports its own result (`
 | the checks before delivery | every expression and key checked by `activity_lint.py` | lint for banned code + the browser test |
 | limits | 24 controls, 6 plots, 2000 points; formulas only | 512 KB; anything the sandbox allows |
 
+Two more, rarely: **wasm-module@1** when the model needs a real program (an emulator, a long iterative solver) — the page is
+still a sim-spec, only the computing is a WebAssembly module (`docs/INTERACTIVE_WASM.md`, start with `activity_new.py --from
+wasm-oscillator`); **external-embed@1** for a well-known outside simulation (PhET, GeoGebra, Desmos) in a theory block — explore
+only, needs the network, off unless the site switches it on, mind the licences (`docs/INTERACTIVE_EMBED.md`). Write the theory
+so that it stands without either.
+
 ## Steps
 
 1. **Pick the learnable** (map/chNN.json): what the learner should see happen, and the misconception the activity breaks.
@@ -158,6 +164,41 @@ battery (`vbat`, `vload`), the supply current (`i`) and `gnd`; its instruments t
 the current, the event log and the RSSI. Give each fault one instrument that shows it (the RSSI for a detached antenna, the
 average current for a wrong wake period, the voltage under load for an aged cell, the log for a brown-out level set too high).
 A faulty sensor (`sensor-stuck`, `sensor-drift`) has no instrument on the bench: keep it out of a bench's faults.
+
+## Importing H5P quizzes — `h5p_import.py`
+
+When the sources include ready-made **H5P packages** (`.h5p` files from H5P.org, Moodle, Lumi, a teacher's course), import them
+into the pack's **own exercise types** instead of retyping them. This is not the `h5p@1` runtime (which plays a package as H5P):
+the importer writes ordinary `mcq`, `tf`, `cloze`, `bucket`, `match`, `order`, `spotbug`, `img_drag`, `img_reveal` exercises and
+flashcards that the app grades, drills and schedules like any other.
+
+```
+python3 h5p_import.py a.h5p b.h5p … --out <subject-dir> --chapter ch07 [--title "…"] [--src <source id>] [--summary-order] [--report report.json]
+python3 validate.py <subject-dir>/chapters/ch07.json
+```
+
+* It writes `chapters/<chapter>.json` (one section per package), the pictures to `media/` and their entries to
+  `media/media.json` (an id already there is kept). It prints ✓ / ✗ per package and notes; exit 2 when nothing was imported.
+* What maps to what: MultiChoice → `mcq` (`img_reveal` with its picture), TrueFalse → `tf`, Blanks → `cloze`, DragText → `cloze`
+  with a bank (or `bucket`), MarkTheWords → `spotbug`, DragQuestion → `img_drag` / `match` / `bucket` / `mcq`, SingleChoiceSet
+  and Summary → `mcq`, QuestionSet and Column → their questions, Dialogcards → flashcards. Anything else is reported as
+  unsupported, never guessed. The package's title, author and licence go to each exercise's `cite` and the section's first line.
+* **Nothing of the package runs:** only `h5p.json`, `content/content.json` and the PNG / JPG / WebP pictures it names are read
+  (no SVG, no URLs, no libraries).
+
+**Every quality rule still applies after the import** (`CONTENT_SPEC.md`, Q1–Q8). The importer gives you a draft, not a chapter:
+
+1. Put the imported exercises into the chapter they belong to (or keep the imported chapter and give it a knowledge map
+   `map/chNN.json`, Q1): they count toward the chapter's quotas like any exercise of the sources (every one kept, Q3).
+2. **Self-contained** (Q2): an H5P question that leaned on a video, audio or an outside picture lost it (see the notes) —
+   rewrite it so that it stands alone; no "the video", "above", "slide 3".
+3. **Explanations:** the importer fills `explain` from the H5P feedback or with the right answer; write the *why* (and each
+   wrong option's `why` for an mcq), as for every exercise.
+4. **Test the idea** (Q5): H5P quizzes are often recall of one lesson's example; rewrite those into questions about the idea,
+   adjust `think`, `difficulty`, `tags`.
+5. Write the theory around them (an import has no `lr` and no theory beyond the section's first line), then the blind solve and
+   review (`review/chNN.json`) as for every chapter. A chapter left as a raw import is checked as `authoring.by: "import"`,
+   which gives quality *warnings* only — never deliver it that way.
 
 ## Pitfalls
 

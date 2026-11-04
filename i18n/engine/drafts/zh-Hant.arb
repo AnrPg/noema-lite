@@ -50,5 +50,20 @@
   "engine.act.bench.inst.log": "事件記錄",
   "engine.act.bench.inst.rssi": "無線：訊號強度（RSSI）",
   "engine.act.bench.current": "電流",
-  "engine.act.bench.logStats": "重新啟動：{resets} 次，遺失訊息：{lost} 則，逾時喚醒：{overruns} 次"
+  "engine.act.bench.logStats": "重新啟動：{resets} 次，遺失訊息：{lost} 則，逾時喚醒：{overruns} 次",
+  "engine.act.embed.ask": "此活動會開啟 {provider}。它需要連網，{provider} 可能會儲存 Cookie。",
+  "engine.act.embed.open": "開啟 {provider}",
+  "engine.act.embed.terms": "{provider} 的使用條款",
+  "engine.act.embed.frameTitle": "{title} — {provider}",
+  "engine.act.embed.opened": "{provider} 已開啟。",
+  "engine.act.embed.offline": "此活動需要連網。你目前處於離線狀態。",
+  "engine.act.embed.refused": "此外部活動不在允許的網站清單中。",
+  "engine.act.embed.timeout": "{provider} 未能載入。",
+  "engine.act.embed.settings": "無需詢問即可開啟的外部活動：{names}",
+  "engine.act.embed.forget": "重新詢問",
+  "engine.act.embed.settingsTip": "外部活動（PhET、GeoGebra 或 Desmos 的頁面）在開啟前會詢問一次：它需要連網，網站可能會儲存 Cookie。「重新詢問」會忘記你先前的同意。",
+  "engine.act.embed.forgotten": "外部活動在開啟前會重新詢問。",
+  "engine.xapi.export": "匯出學習紀錄（xAPI）",
+  "engine.xapi.exportSub": "你的嘗試與答案，存成可匯入學習紀錄庫（LRS）的檔案",
+  "engine.xapi.none": "目前沒有可匯出的內容：你在這門課中還沒有任何嘗試或答案。"
 }

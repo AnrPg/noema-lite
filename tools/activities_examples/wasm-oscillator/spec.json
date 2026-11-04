@@ -1,0 +1,35 @@
+{
+ "format": "noema.sim-spec/v1",
+ "title": "title",
+ "intro": "intro",
+ "consts": { "dt": 0.05, "share": 0.05 },
+ "params": [
+  { "id": "k", "kind": "slider", "label": "spring", "min": 1, "max": 10, "step": 0.5, "default": 4, "unit": "N/m" },
+  { "id": "c", "kind": "slider", "label": "damping", "min": 0, "max": 2, "step": 0.1, "default": 0.2, "unit": "N·s/m" },
+  { "id": "x0", "kind": "slider", "label": "start", "min": 0.2, "max": 2, "step": 0.1, "default": 1, "unit": "m" }
+ ],
+ "derived": [
+  { "id": "E0", "expr": "0.5 * k * x0 * x0" },
+  { "id": "zeta", "expr": "c / (2 * sqrt(k))" }
+ ],
+ "model": {
+  "inputs": ["k", "c", "x0", "0", "dt"],
+  "outputs": [{ "id": "t", "n": 50 }, { "id": "x", "n": 50 }, { "id": "E" }]
+ },
+ "outputs": [
+  { "id": "t", "kind": "series" },
+  { "id": "x", "kind": "series" },
+  { "id": "E", "kind": "scalar" }
+ ],
+ "readouts": [
+  { "label": "zetaLabel", "expr": "zeta", "format": "fixed", "digits": 2 },
+  { "label": "leftLabel", "expr": "100 * E / E0", "unit": "%", "format": "fixed", "digits": 1 }
+ ],
+ "plots": [
+  { "kind": "series", "title": "plotTitle",
+    "x": { "series": "t", "label": "time", "unit": "s" },
+    "y": { "min": -2.2, "max": 2.2, "label": "displacement", "unit": "m" },
+    "series": [{ "y": "x", "label": "xLine" }],
+    "marks": [{ "axis": "y", "expr": "0", "label": "restMark" }] }
+ ]
+}

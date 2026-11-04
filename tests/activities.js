@@ -63,6 +63,8 @@ require(path.join(ROOT, 'engine', 'src', '35_simexpr.js'));   // the expression 
 require(path.join(ROOT, 'engine', 'src', '36_engine_circuit.js'));   // the netlist and fault checker packcheck uses for circuit-mna@1
 for (const f of ['39_engine_thermal.js', '40_engine_pid.js', '41_engine_rf.js', '42_engine_twin.js']) require(path.join(ROOT, 'engine', 'src', f));   // the P6 engines' checkSpec packcheck uses
 require(path.join(ROOT, 'engine', 'packcheck.js'));
+require(path.join(ROOT, 'engine', 'src', '44_activity_wasm.js'));   // NoemaWasm: packcheck checks wasm-module@1 items and wasm@1 models with it (P6)
+globalThis.NoemaEmbed = require(path.join(ROOT, 'engine', 'src', '45_activity_embed.js'));   // NoemaEmbed: the external-embed@1 rules (P6)
 const P = globalThis.NoemaPackCheck;
 const html = fs.readFileSync(path.join(ROOT, 'tools', 'activities_examples', 'alias-lab', 'app.html'), 'utf8');
 const crypto = require('crypto');
@@ -289,9 +291,64 @@ const p6cases = {
 ccases['circuit: the event log on a circuit bench'] = p => { bn(p).instruments.push({ kind: 'log' }); };
 const P6GOOD = ['thermal good', 'thermal: a good output at an expression', 'pid good', 'pid: a good anti-windup toggle', 'rf good', 'twin good', 'twin bench good'];
 const P6PRE = /^(thermal|pid|rf|twin)\b/;
+// wasm-module@1 (P6): the reference wasm-oscillator (a module with its own spec) as the second activity, with a sim exercise graded by checks
+const WO = path.join(ROOT, 'tools', 'activities_examples', 'wasm-oscillator'), FIXW = path.join(ROOT, 'tests', 'fixtures', 'wasm');
+const wasmOf = b => ({ wasm: b.toString('base64'), sha256: crypto.createHash('sha256').update(b).digest('hex'), bytes: b.length });
+const woItem = { ...JSON.parse(fs.readFileSync(path.join(WO, 'activity.json'), 'utf8')), ...wasmOf(fs.readFileSync(path.join(WO, 'module.wasm'))), spec: JSON.parse(fs.readFileSync(path.join(WO, 'spec.json'), 'utf8')),
+  strings: Object.fromEntries(['en', 'el', 'ru'].map(l => [l, JSON.parse(fs.readFileSync(path.join(WO, `strings.${l}.json`), 'utf8'))])) };
+const WX = { id: 'ch01-e4', type: 'sim', activity: 'wasm-oscillator', task: { seed: 'auto', params: {} }, hints: ['h'],
+  grade: { mode: 'checks', checks: [{ expr: 'E <= share * E0', label: 'checkLeft', weight: 3 }, { expr: 'abs(k - 4) < 0.01', label: 'checkK' }] } };
+const wbase = () => { const p = base(); p.media['wasm-oscillator-still'] = { w: 600, h: 260 }; p.requires.push('runtime:wasm-module@1', 'engine:wasm@1'); p.activities.items.push(JSON.parse(JSON.stringify(woItem)));
+  p.chapters[0].sections[0].blocks.push({ t: 'interactive', activity: 'wasm-oscillator' }); p.chapters[0].exercises.push(JSON.parse(JSON.stringify(WX))); return p; };
+const wi = p => p.activities.items[1];
+/** the module alone (no spec) + a sim-spec@1 activity whose engine wasm@1 runs it (the second way in) */
+const viaSpec = p => { const m = wi(p), s = m.spec; delete m.spec; m.id = 'osc-core'; p.chapters[0].sections[0].blocks.pop(); p.chapters[0].exercises.pop();
+  p.activities.items.push({ id: 'osc-sim', runtime: 'sim-spec@1', stateVersion: 1, spec: { ...s, engine: 'wasm@1', model: { ...s.model, module: 'osc-core' } }, strings: m.strings, fallback: m.fallback });
+  p.requires.push('runtime:sim-spec@1'); p.chapters[0].sections[0].blocks.push({ t: 'interactive', activity: 'osc-sim' }); };
+const wcases = {
+  'wasm good': p => p,
+  'wasm: through a sim-spec@1 spec (engine wasm@1)': viaSpec,
+  'wasm: the spec names no module': p => { viaSpec(p); p.activities.items[2].spec.model.module = 'nope'; },
+  'wasm: the module without its own spec in a block': p => { delete wi(p).spec; p.chapters[0].exercises.pop(); },
+  'wasm: sha256 does not match': p => { wi(p).sha256 = '0'.repeat(64); },
+  'wasm: not base64': p => { wi(p).wasm = 'not base64!'; },
+  'wasm: no scratch and no alloc': p => { wi(p).abi = {}; },
+  'wasm: a forbidden import': p => { Object.assign(wi(p), wasmOf(fs.readFileSync(path.join(FIXW, 'forbidden.wasm')))); },
+  'wasm: memory over the limit': p => { Object.assign(wi(p), wasmOf(fs.readFileSync(path.join(FIXW, 'bigmem.wasm')))); },
+  'wasm: the own spec on another engine': p => { wi(p).spec.engine = 'formula@1'; },
+  'wasm: the own spec names another module': p => { wi(p).spec.model.module = 'other'; },
+  'wasm: a model output not declared': p => { wi(p).spec.model.outputs.push({ id: 'v', n: 50 }); },
+  'wasm: a model input with an unknown name': p => { wi(p).spec.model.inputs[0] = 'kk'; },
+  'wasm: no engine:wasm@1 in requires': p => { p.requires = p.requires.filter(x => x !== 'engine:wasm@1'); },
+  'wasm: graded "reported"': p => { p.chapters[0].exercises[1].grade = { mode: 'reported' }; },
+  'wasm: a check with an unknown name': p => { p.chapters[0].exercises[1].grade.checks[0].expr = 'Eend < 1'; },
+};
+// external-embed@1 (P6): an allow-listed outside page (PhET) in a theory block — explore only
+const emItem = { id: 'ohm-phet', runtime: 'external-embed@1', stateVersion: 1, provider: 'phet', url: 'https://phet.colorado.edu/sims/html/ohms-law/latest/ohms-law_all.html?locale=en',
+  credit: 'PhET Interactive Simulations, University of Colorado Boulder · Ohm’s Law · CC-BY-4.0 · https://phet.colorado.edu', license: 'CC-BY-4.0', height: 480,
+  fallback: { media: 'ohm-still', text: 'Ohm’s law: the current grows with the voltage and falls with the resistance (I = V / R).' },
+  strings: { en: { title: 'Ohm’s law simulation', why: 'Move V and R and watch I.' } } };
+const ebase = () => { const p = base(); p.media['ohm-still'] = { w: 600, h: 260 }; p.requires.push('runtime:external-embed@1'); p.activities.items.push(JSON.parse(JSON.stringify(emItem)));
+  p.chapters[0].sections[0].blocks.push({ t: 'interactive', activity: 'ohm-phet' }); return p; };
+const ei = p => p.activities.items[1];
+const ecases = {
+  'embed good': p => p,
+  'embed: a pending provider (Wokwi)': p => Object.assign(ei(p), { provider: 'wokwi', url: 'https://wokwi.com/projects/305569599398609473', credit: 'Blink · simulated on Wokwi (wokwi.com)', license: 'Wokwi-ToS' }),
+  'embed: a pending provider (Falstad)': p => Object.assign(ei(p), { provider: 'falstad', url: 'https://www.falstad.com/circuit/circuitjs.html?ctz=abc', credit: 'Circuit simulator by Paul Falstad', license: 'GPL-2.0-or-later' }),
+  'embed: an unknown provider': p => { ei(p).provider = 'flashsims'; },
+  'embed: http': p => { ei(p).url = ei(p).url.replace('https:', 'http:'); },
+  'embed: another origin': p => { ei(p).url = 'https://evil.example/sims/html/ohms-law/latest/ohms-law_all.html'; },
+  'embed: an entry': p => { ei(p).entry = 'activities/ohm-phet/app.html'; },
+  'embed: no credit': p => { delete ei(p).credit; },
+  'embed: no title': p => { delete ei(p).strings.en.title; },
+  'embed: in a sim exercise': p => { p.chapters[0].exercises.push({ id: 'ch01-e5', type: 'sim', activity: 'ohm-phet', grade: { mode: 'reported' } }); },
+  'embed: no runtime in requires': p => { p.requires = p.requires.filter(x => x !== 'runtime:external-embed@1'); },
+};
 const packs = [...Object.entries(cases).map(([k, f]) => { const p = base(); f(p); return [k, p]; }), ...Object.entries(scases).map(([k, f]) => { const p = sbase(); f(p); return [k, p]; }), ...Object.entries(ccases).map(([k, f]) => { const p = cbase(); f(p); return [k, p]; }),
+  ...Object.entries(wcases).map(([k, f]) => { const p = wbase(); f(p); return [k, p]; }), ...Object.entries(ecases).map(([k, f]) => { const p = ebase(); f(p); return [k, p]; }),
   ...Object.entries(p6cases).flatMap(([aid, cs]) => Object.entries(cs).map(([k, f]) => { const p = p6base(aid)(); f(p); return [k, p]; }))];
-const GOOD = new Set(['good', 'spec good', 'spec: a good choice and toggle', 'circuit good', 'circuit: rc-transient (no bench)', 'circuit: a good scalar output in a readout', 'circuit: a scope and a logic analyser', 'circuit: task.fault a list', 'circuit: a check on the diagnosis index', ...P6GOOD]);
+const GOOD = new Set(['good', 'spec good', 'spec: a good choice and toggle', 'circuit good', 'circuit: rc-transient (no bench)', 'circuit: a good scalar output in a readout', 'circuit: a scope and a logic analyser', 'circuit: task.fault a list', 'circuit: a check on the diagnosis index',
+  'wasm good', 'wasm: through a sim-spec@1 spec (engine wasm@1)', 'embed good', ...P6GOOD]);
 const tmp = path.join(require('os').tmpdir(), 'noema-act-parity.json'); fs.writeFileSync(tmp, JSON.stringify(packs));
 const py = JSON.parse(cp.execFileSync('python3', ['-c', `import sys, json; sys.path.insert(0, ${JSON.stringify(path.join(ROOT, 'tools'))}); import activities as A
 out = {}
@@ -302,6 +359,18 @@ for (const [k, p] of packs) {
   const js = P.checkActivities(p, Object.keys(p.translations || {}));
   const same = js.errors.length === py[k][0];
   ok(same && (GOOD.has(k) ? js.errors.length === 0 : js.errors.length > 0), `${k}: ${GOOD.has(k) && js.errors.length ? js.errors[0] + ' ' : ''}JS ${js.errors.length} error(s), Python ${py[k][0]}${GOOD.has(k) ? ' (a good pack passes)' : ' — ' + (js.errors[0] || '').slice(0, 110)}${same ? '' : '  JS: ' + js.errors.join(' | ')}`);
+}
+{ // P6: the same messages (not only the same counts) for wasm-module@1 and external-embed@1 packs
+  const py3 = JSON.parse(cp.execFileSync('python3', ['-c', `import sys, json; sys.path.insert(0, ${JSON.stringify(path.join(ROOT, 'tools'))}); import activities as A
+print(json.dumps([A.check_activities(p, list((p.get('translations') or {}).keys())) for k, p in json.load(open(sys.argv[1], encoding='utf-8')) if k.startswith(('wasm', 'embed'))], ensure_ascii=False))`, tmp], { encoding: 'utf8', maxBuffer: 64 << 20 }));
+  const js3 = packs.filter(([k]) => /^(wasm|embed)/.test(k)).map(([, p]) => P.checkActivities(p, Object.keys(p.translations || {})));
+  const norm = l => l.map(m => m.replace(/'/g, '"'));
+  const diff = js3.map((r, i) => JSON.stringify([norm(r.errors), norm(r.warnings)]) === JSON.stringify([norm(py3[i][0]), norm(py3[i][1])]) ? null : [r, py3[i]]).filter(Boolean);
+  ok(js3.length >= 25 && !diff.length, `wasm-module@1 and external-embed@1: checkActivities (JS) and check_activities (Python) give the same errors and warnings on ${js3.length} packs ${diff.length ? JSON.stringify(diff[0]).slice(0, 700) : ''}`);
+  const msg = k => (P.checkActivities(packs.find(x => x[0] === k)[1]).errors[0] || '');
+  ok(/forbidden|import: env\.fetch_url/.test(msg('wasm: a forbidden import')) && /sim-embed/.test(msg('embed: in a sim exercise')) && /provider-pending/.test(msg('embed: a pending provider (Falstad)')) && /url-scheme/.test(msg('embed: http')),
+    'a forbidden import, a graded outside page, a pending provider (Falstad, CircuitJS1, Wokwi: no framing permission) and http are refused with their codes');
+  ok(P.needRequires([woItem]).join() === 'activities/v1,runtime:wasm-module@1,engine:wasm@1','pack.requires of a wasm-module@1 item with its own spec: runtime:wasm-module@1 and engine:wasm@1');
 }
 ok(P.TYPES.has('sim') && P.BLOCKS.has('interactive'), 'packcheck knows the sim type and the interactive block');
 { // the same messages, not only the same counts, for the spec rules
@@ -357,6 +426,15 @@ ok(JSON.stringify(P.needRequires(sbase().activities.items)) === JSON.stringify([
   const miss = keys.filter(k => !en[k]).concat(...dr.map(f => { const d = JSON.parse(fs.readFileSync(path.join(ROOT, 'i18n', 'engine', 'drafts', f), 'utf8')); return keys.filter(k => !d[k]).map(k => f + ':' + k); }));
   ok(keys.length >= 5 && !miss.length, `the sim runtime's ${keys.length} host strings are in en.arb and in all ${dr.length} drafts ${miss.slice(0, 3).join(' ')}`);
 }
+{ // P6: the words of the outside-page card, the core's embed notes, the Settings line and the xAPI export exist in every UI language
+  const keys = new Set();
+  for (const f of ['45_activity_embed.js', '32_activities.js', '70_account.js', '40_views.js']) for (const m of fs.readFileSync(path.join(ROOT, 'engine', 'src', f), 'utf8').matchAll(/\b(?:T|tE)\('((?:engine\.act\.embed|engine\.xapi)\.[a-zA-Z]+)'/g)) keys.add(m[1]);
+  const en = JSON.parse(fs.readFileSync(path.join(ROOT, 'i18n', 'engine', 'en.arb'), 'utf8')), dr = fs.readdirSync(path.join(ROOT, 'i18n', 'engine', 'drafts'));
+  const miss = [...keys].filter(k => !en[k] || !en['@' + k]?.description).concat(...dr.map(f => { const d = JSON.parse(fs.readFileSync(path.join(ROOT, 'i18n', 'engine', 'drafts', f), 'utf8')); return [...keys].filter(k => !d[k]).map(k => f + ':' + k); }));
+  ok(keys.size >= 14 && !miss.length, `the ${keys.size} P6 host strings (outside-page card, notes, Settings "Ask again", xAPI export) are in en.arb with descriptions and in all ${dr.length} drafts ${miss.slice(0, 3).join(' ')}`);
+  const wsrc = fs.readFileSync(path.join(ROOT, 'engine', 'src', '44_activity_wasm.js'), 'utf8');
+  ok(!/\btE\(/.test(wsrc) && !/innerHTML|insertAdjacentHTML|document\.write|\beval\s*\(|new\s+Function/.test(wsrc.replace(/\/\*[\s\S]*?\*\//g, '')), 'wasm-module@1 adds no words of its own (failures are the core\'s codes) and never puts HTML or code from the pack in the page');
+}
 { // the sim runtime renders without a frame and never runs pack code: no eval / Function / HTML from the pack
   const src = fs.readFileSync(path.join(ROOT, 'engine', 'src', '35_activity_sim.js'), 'utf8');
   ok(!/\beval\s*\(|new\s+Function|innerHTML|insertAdjacentHTML|document\.write/.test(src) && /NoemaPackCheck\.checkSimSpec\(spec, tables, ACT\.engines\(\)\)/.test(src) && /NoemaExpr\.compile/.test(src), 'sim-spec@1: no eval, no new Function, no HTML from the pack; the spec is checked before it is shown; formulas only through NoemaExpr');
@@ -378,11 +456,21 @@ ok(/enum: \['workflow', 'content', 'visual', 'interactive'/.test(srv) && /intera
 for (const f of ['activity_new.py', 'activity_lint.py', 'activity_test.py', 'activity_preview.py', 'activity_harness.js']) ok(fs.existsSync(path.join(ROOT, 'skill', 'noema-pack-builder', 'scripts', f)), 'the skill has ' + f);
 ok(/'activities\.py'/.test(bld) && /'simexpr\.py'/.test(bld) && /activity_host/.test(bld) && /'35_activity_sim\.js', '35_simexpr\.js'/.test(bld) && /activities_examples/.test(bld), 'the skill zip carries activities.py, simexpr.py, the runtimes for the harness (html-app, sim-spec) and the reference activities');
 ok(/'circuit\.py'/.test(bld) && /'36_engine_circuit\.js', '36_engine_circuit_sim\.js'/.test(bld) && /'INTERACTIVE_SIMEXPR\.md', 'INTERACTIVE_CIRCUIT\.md'[,)]/.test(bld), 'the skill zip carries circuit.py and the circuit engine for the harness; the guide part "interactive" includes the circuit engine');
-ok(/^P6_ENGINES = \('39_engine_thermal\.js', '40_engine_pid\.js', '41_engine_rf\.js', '42_engine_twin\.js'\)$/m.test(bld) && /'thermal\.py', 'pid\.py', 'rf\.py', 'twin\.py'/.test(bld) && /'36_engine_circuit_sim\.js', \*P6_ENGINES, '43_engines_p6\.js'/.test(bld) && /'INTERACTIVE_CIRCUIT\.md', 'INTERACTIVE_ENGINES\.md'\) if/.test(bld)
+ok(/^P6_ENGINES = \('39_engine_thermal\.js', '40_engine_pid\.js', '41_engine_rf\.js', '42_engine_twin\.js'\)$/m.test(bld) && /'thermal\.py', 'pid\.py', 'rf\.py', 'twin\.py'/.test(bld) && /'36_engine_circuit_sim\.js', \*P6_ENGINES, '43_engines_p6\.js'/.test(bld) && /'INTERACTIVE_CIRCUIT\.md', 'INTERACTIVE_ENGINES\.md'\)(?: \+ INTERACTIVE_P6)? if/.test(bld)
   && /'engine\/src\/36_engine_circuit\.js', \*\('engine\/src\/' \+ f for f in P6_ENGINES\), 'engine\/packcheck\.js'/.test(bld) && /\{p6_scripts\}<script>\{esc\(rd\("engine\/packcheck\.js"/.test(bld) && /'36_engine_circuit\.js', \*P6_ENGINES\)\]/.test(bld),
   'the P6 engines: the skill zip carries thermal.py, pid.py, rf.py, twin.py and the engines for the harness; the connector, the site and the bundle load them beside packcheck; the guide part "interactive" includes INTERACTIVE_ENGINES.md');
 { const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8'), pc = html.indexOf('engine/packcheck.js');
   ok(['39_engine_thermal.js', '40_engine_pid.js', '41_engine_rf.js', '42_engine_twin.js'].every(f => { const i = html.indexOf('engine/src/' + f); return i > 0 && i < pc; }), 'the shell loads the four P6 engines before packcheck.js (their checkSpec)'); }
+ok(['wasm_check.py', 'embed_check.py', 'embed_allow.json', 'h5p_import.py'].every(f => new RegExp(`SKILL_TOOLS = \\[[^\\]]*'${f.replace('.', '\\.')}'`).test(bld)) && /'44_activity_wasm\.js'\): z\.write/.test(bld)
+  && /INTERACTIVE_P6 = \('INTERACTIVE_WASM\.md', 'INTERACTIVE_EMBED\.md', 'INTERACTIVE_XAPI\.md'\)/.test(bld) && /'INTERACTIVE_CIRCUIT\.md', 'INTERACTIVE_ENGINES\.md'\) \+ INTERACTIVE_P6 if os\.path\.exists/.test(bld) && ['INTERACTIVE_WASM.md', 'INTERACTIVE_EMBED.md', 'INTERACTIVE_XAPI.md'].every(f => fs.existsSync(path.join(ROOT, 'docs', f))),
+  'P6: the skill zip carries wasm_check.py, embed_check.py + the allow-list, h5p_import.py and the wasm runtime for the harness; the guide part "interactive" includes the wasm, embed and xAPI pages');
+{ const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
+  ok(['44_activity_wasm.js', '45_activity_embed.js'].every(f => html.includes('engine/src/' + f) && new RegExp(`'engine/src/${f.replace('.', '\\.')}'`).test(bld.split('MCP_ENGINE = ')[1].split('\n')[0]) && bld.includes(`rd("engine/src/${f}")`) && new RegExp(`\\('44_activity_wasm\\.js', '45_activity_embed\\.js'\\): shutil\\.copy`).test(bld))
+    && /^var NoemaEmbed = /m.test(fs.readFileSync(path.join(ROOT, 'engine', 'src', '45_activity_embed.js'), 'utf8')),
+    'the shell, the site, the one-file bundle and the connector load NoemaWasm and NoemaEmbed beside packcheck.js (45 declares var: it is loaded twice in the app)'); }
+{ const src = fs.readFileSync(path.join(ROOT, 'engine', 'src', '32_activities.js'), 'utf8');
+  ok(/why === 'embed-refused' \|\| why === 'embed-graded' \? stop\(tE\('engine\.act\.embed\.refused'\), false\)/.test(src) && /why === 'embed-offline' \? stop\(tE\('engine\.act\.embed\.offline'\)\)/.test(src) && /why === 'embed-timeout' \? stop\(tE\('engine\.act\.embed\.timeout'/.test(src),
+    'the core: a refused or graded outside page stops without Restart; offline or not loaded stops with Restart (retry)'); }
 ok(/'engine\/src\/35_simexpr\.js', 'engine\/src\/36_engine_circuit\.js', (?:\*\('engine\/src\/' \+ f for f in P6_ENGINES\), )?'engine\/packcheck\.js'/.test(bld) && /INTERACTIVE_SIMEXPR\.md/.test(bld), 'the connector runs NoemaExpr beside packcheck (sim-spec checks) and serves the expression language in the guide');
 { const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8'), a = html.indexOf('engine/src/35_simexpr.js'), b = html.indexOf('engine/packcheck.js'), c = html.indexOf('engine/src/36_engine_circuit.js');
   ok(a > 0 && a < b && c > 0 && c < b && /\('35_simexpr\.js', '36_engine_circuit\.js'(?:, \*P6_ENGINES)?\)\]   # NoemaExpr, NoemaCircuit (and the P6 engines )?beside packcheck/.test(bld) && /rd\("engine\/src\/35_simexpr\.js"\)\)\}<\/script>\n<script>\{esc\(rd\("engine\/src\/36_engine_circuit\.js"\)\)\}<\/script>\n(?:\{p6_scripts\})?<script>\{esc\(rd\("engine\/packcheck\.js"/.test(bld),

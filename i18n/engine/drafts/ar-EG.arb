@@ -50,5 +50,20 @@
   "engine.act.bench.inst.log": "سجل الأحداث",
   "engine.act.bench.inst.rssi": "الراديو: قوة الإشارة (RSSI)",
   "engine.act.bench.current": "التيار",
-  "engine.act.bench.logStats": "مرات إعادة التشغيل: {resets}، رسائل ضائعة: {lost}، استيقاظات تجاوزت وقتها: {overruns}"
+  "engine.act.bench.logStats": "مرات إعادة التشغيل: {resets}، رسائل ضائعة: {lost}، استيقاظات تجاوزت وقتها: {overruns}",
+  "engine.act.embed.ask": "يفتح هذا النشاط {provider}. يحتاج إلى الاتصال بالإنترنت، وقد يحفظ {provider} ملفات تعريف الارتباط.",
+  "engine.act.embed.open": "افتح {provider}",
+  "engine.act.embed.terms": "شروط {provider}",
+  "engine.act.embed.frameTitle": "{title} — {provider}",
+  "engine.act.embed.opened": "تم فتح {provider}.",
+  "engine.act.embed.offline": "يحتاج هذا النشاط إلى الاتصال بالإنترنت. أنت غير متصل الآن.",
+  "engine.act.embed.refused": "هذا النشاط الخارجي ليس ضمن قائمة المواقع المسموح بها.",
+  "engine.act.embed.timeout": "لم يُحمَّل {provider}.",
+  "engine.act.embed.settings": "أنشطة خارجية تُفتح دون سؤال: {names}",
+  "engine.act.embed.forget": "اسأل مجددًا",
+  "engine.act.embed.settingsTip": "يسأل النشاط الخارجي (صفحة من PhET أو GeoGebra أو Desmos) مرة واحدة قبل أن يُفتح: يحتاج إلى الإنترنت، وقد يحفظ الموقع ملفات تعريف الارتباط. «اسأل مجددًا» يُلغي موافقتك.",
+  "engine.act.embed.forgotten": "ستسأل الأنشطة الخارجية مجددًا قبل أن تُفتح.",
+  "engine.xapi.export": "تصدير سجل التعلّم (xAPI)",
+  "engine.xapi.exportSub": "محاولاتك وإجاباتك في ملف لمستودع سجلات التعلّم (LRS)",
+  "engine.xapi.none": "لا يوجد ما يُصدَّر بعد: ليست لديك محاولات أو إجابات في هذه المادة."
 }

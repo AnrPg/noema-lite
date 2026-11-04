@@ -415,6 +415,24 @@
       [/new\s+Array\s*\(\s*\d{7,}/i, 'a huge array'],
     ],
   };
+  // P6 (docs/adr/001 D12): a precompiled WebAssembly module (its own spec, or the model of a sim-spec@1 spec) and an allow-listed outside page
+  Object.assign(ACT, { WASM: 'wasm-module@1', WASM_ENGINE: 'wasm@1', EMBED: 'external-embed@1' });
+  ACT.RUNTIMES.add(ACT.WASM); ACT.RUNTIMES.add(ACT.EMBED);
+  ACT.CHECKS_RUNTIMES.add(ACT.WASM);   // a module with its own spec shows its values like sim-spec@1
+  ACT.ENGINES.add(ACT.WASM_ENGINE);
+  const WK = () => root.NoemaWasm || null;    // engine/src/44_activity_wasm.js, loaded beside this file (checkItem, checkModel: the twins of tools/wasm_check.py)
+  const EK = () => root.NoemaEmbed || null;   // engine/src/45_activity_embed.js, loaded beside this file (check, PROVIDERS: the twins of tools/embed_check.py)
+  const specObj = v => v != null && typeof v === 'object' && !Array.isArray(v);
+  /** the spec a wasm-module@1 item shows: its own spec, run by wasm@1 on the item itself (as the runtime completes it) */
+  function ownSpec(a) {
+    const s = a && a.spec; if (!specObj(s)) return s;
+    return { ...s, engine: ACT.WASM_ENGINE, model: { ...(specObj(s.model) ? s.model : {}), module: a.id } };
+  }
+  /** the spec an activity shows (sim-spec@1: its spec; wasm-module@1: its own spec, completed) or null */
+  const specOf = a => !a ? null : a.runtime === 'sim-spec@1' ? (specObj(a.spec) ? a.spec : null) : a.runtime === ACT.WASM ? (specObj(a.spec) ? ownSpec(a) : null) : null;
+  /** a wasm-module@1 item without its own spec: a module for a sim-spec@1 spec, nothing a block or an exercise can show */
+  const showsNothing = a => !!a && a.runtime === ACT.WASM && !specObj(a.spec);
+  const SHOWS_NOTHING = `is a ${ACT.WASM} module without its own spec: show it through a sim-spec@1 spec (engine ${ACT.WASM_ENGINE}, model.module) or give it a spec`;
   const utf8 = t => typeof TextEncoder !== 'undefined' ? new TextEncoder().encode(t).length : unescape(encodeURIComponent(t)).length;
   function visibleText(html) {
     let body = html.includes('<body') ? html.split('<body').slice(1).join('<body') : html;
@@ -672,8 +690,9 @@
     if (b.budget !== undefined && !(Number.isInteger(b.budget) && b.budget >= 1 && b.budget <= L.budget)) E.push(`spec.bench.budget is a whole number 1–${L.budget} (the measurements allowed)`);
   }
   /** checkSimSpec(spec, tables?, engines?) → errors of a sim-spec@1 spec. tables: {locale: {key: text}}; engines: the known engine ids
-      (default ACT.ENGINES; the app passes the engines it has registered). The same rules as tools/activities.py check_spec. */
-  function checkSimSpec(spec, tables, engines) {
+      (default ACT.ENGINES; the app passes the engines it has registered); items: {id: item} of the pack (a wasm@1 model names its
+      module there; none = the model is not checked here, the engine's own check does it in the app). The same rules as tools/activities.py check_spec. */
+  function checkSimSpec(spec, tables, engines, items) {
     const E = [], L = ACT.SPEC_LIM;
     if (!isObj(spec)) return ['spec: a JSON object is required (activities/<id>/spec.json)'];
     if (utf8(JSON.stringify(spec)) > L.bytes) E.push(`spec: at most ${L.bytes / 1024} KB`);
@@ -804,6 +823,7 @@
     });
     if (eng === ACT.CIRCUIT) checkCircuit(spec, inNames, E);
     else if (typeof eng === 'string' && Object.prototype.hasOwnProperty.call(ACT.P6, eng)) checkEngine(spec, eng, inNames, E);
+    if (eng === ACT.WASM_ENGINE && items) { if (!WK()) E.push('spec.model: the WebAssembly checker (NoemaWasm, engine/src/44_activity_wasm.js) is not loaded here'); else E.push(...WK().checkModel(spec, items)); }
     if (spec.bench != null) {
       if (!ACT.BENCH_ENGINES.has(eng)) E.push(`spec.bench needs an engine that can take measurements (${[...ACT.BENCH_ENGINES].sort().join(', ')})`);
       else checkBench(spec, inNames, seen, E, key, eng);
@@ -818,12 +838,13 @@
   function needRequires(items) {
     items = items.filter(isObj); if (!items.length) return [];
     const rts = [...new Set(items.map(a => a.runtime).filter(r => typeof r === 'string'))].sort().map(r => 'runtime:' + r);
-    const engs = [...new Set(items.filter(a => a.runtime === 'sim-spec@1' && isObj(a.spec)).map(a => 'engine' in a.spec ? a.spec.engine : ACT.DEFAULT_ENGINE).filter(e => typeof e === 'string' && e !== ACT.DEFAULT_ENGINE))].sort().map(e => 'engine:' + e);
+    const engs = [...new Set(items.filter(a => (a.runtime === 'sim-spec@1' || a.runtime === ACT.WASM) && isObj(a.spec)).map(a => a.runtime === ACT.WASM ? ACT.WASM_ENGINE : 'engine' in a.spec ? a.spec.engine : ACT.DEFAULT_ENGINE).filter(e => typeof e === 'string' && e !== ACT.DEFAULT_ENGINE))].sort().map(e => 'engine:' + e);
     return ['activities/v1', ...rts, ...engs];
   }
   function checkBlockAct(b, items) {
     const E = [];
     if (!Object.prototype.hasOwnProperty.call(items, b.activity)) E.push(`interactive: activity ${qv(b.activity)} is not in pack.activities`);
+    else if (showsNothing(items[b.activity])) E.push(`interactive: activity ${b.activity} ${SHOWS_NOTHING}`);
     const hg = b.height; if (hg != null && hg !== 'auto' && !(Number.isInteger(hg) && hg >= 120 && hg <= 2000)) E.push('interactive: height is "auto" or 120–2000 (px)');
     if (b.aspect != null && !(typeof b.aspect === 'string' && /^\d{1,2}:\d{1,2}$/.test(b.aspect))) E.push('interactive: aspect is like "16:9"');
     if (b.caption != null && typeof b.caption !== 'string') E.push('interactive: caption must be a text');
@@ -834,12 +855,17 @@
     const has = Object.prototype.hasOwnProperty.call(items, e.activity);
     if (!has) E.push(`activity ${qv(e.activity)} is not in pack.activities`);
     const a = has && isObj(items[e.activity]) ? items[e.activity] : null, rt = a ? a.runtime : null;
-    const spec = a && rt === 'sim-spec@1' && isObj(a.spec) ? a.spec : null;
+    const spec = specOf(a);
+    if (showsNothing(a)) E.push(`activity ${e.activity} ${SHOWS_NOTHING}`);
+    if (rt === ACT.EMBED) {   // no provider has a result channel (tools/embed_allow.json supportsResult): an outside page is explore only
+      const pv = (EK() ? EK().PROVIDERS : []).find(x => x && x.id === a.provider);
+      if (!(pv && pv.supportsResult === true)) E.push(`sim-embed: activity ${e.activity} is an outside page (explore only): use it in a theory block`);
+    }
     const g = e.grade;
     if (!isObj(g) || !ACT.GRADE_MODES.has(g.mode)) E.push('grade must be {"mode": "reported"} (the activity reports its result) or {"mode": "checks", "checks": [{"expr": …}]} (sim-spec@1)');
     else {
       if (g.pass != null && !(isNum(g.pass) && g.pass > 0 && g.pass <= 1)) E.push('grade.pass must be a number in (0, 1]');
-      if (g.mode === 'reported' && rt === 'sim-spec@1') E.push('a sim-spec@1 activity reports nothing itself: grade it with {"mode": "checks", "checks": […]}');
+      if (g.mode === 'reported' && ACT.CHECKS_RUNTIMES.has(rt)) E.push(`a ${rt} activity reports nothing itself: grade it with {"mode": "checks", "checks": […]}`);
       if (g.mode === 'checks') {
         if (rt != null && !ACT.CHECKS_RUNTIMES.has(rt)) E.push(`grade.mode "checks" needs an activity whose values the app can see (sim-spec@1); ${rt} reports its own result: use "reported"`);
         const cs = g.checks;
@@ -887,7 +913,8 @@
   function checkActivities(p, translations) {
     const E = [], W = [], reg = p?.activities, media = p?.media || {}, own = p?.subject?.language || 'en';
     const locs = [...new Set([own, ...(translations || Object.keys(p?.translations || {}))])].sort();
-    const items = {};
+    const items = {}, every = {};   // (a wasm@1 spec names a module item)
+    for (const x of (reg && Array.isArray(reg.items) ? reg.items : [])) if (x && typeof x === 'object' && typeof x.id === 'string') every[x.id] = x;
     if (reg != null) {
       if (typeof reg !== 'object' || Array.isArray(reg) || reg.format !== ACT.FORMAT) E.push(`activities: format must be "${ACT.FORMAT}"`);
       for (const a of (reg && Array.isArray(reg.items) ? reg.items : [])) {
@@ -913,7 +940,19 @@
           }
         } else if (rt === 'sim-spec@1') {
           if (!('spec' in a)) E.push(`${w}: the spec (activities/${aid}/spec.json) is missing`);
-          else E.push(...checkSimSpec(a.spec, isObj(a.strings) ? a.strings : null).map(m => `${w}: ${m}`));
+          else E.push(...checkSimSpec(a.spec, isObj(a.strings) ? a.strings : null, null, every).map(m => `${w}: ${m}`));
+        } else if (rt === ACT.WASM) {   // the module (size, sha256, imports, memory, exports) and its own spec, if it has one
+          if (!WK()) E.push(`${w}: the WebAssembly checker (NoemaWasm, engine/src/44_activity_wasm.js) is not loaded here`);
+          else E.push(...WK().checkItem(a).problems.map(m => `${w}: ${m}`));
+          const sp = a.spec;
+          if (sp !== undefined && sp !== null) {
+            if (isObj(sp) && ('engine' in sp ? sp.engine : ACT.WASM_ENGINE) !== ACT.WASM_ENGINE) E.push(`${w}: spec.engine: the own spec of a ${ACT.WASM} item runs on ${ACT.WASM_ENGINE} (leave engine out)`);
+            if (isObj(sp) && isObj(sp.model) && (sp.model.module !== undefined ? sp.model.module : aid) !== aid) E.push(`${w}: spec.model.module: the own spec of a ${ACT.WASM} item runs this item (leave module out)`);
+            E.push(...checkSimSpec(ownSpec(a), isObj(a.strings) ? a.strings : null, null, every).map(m => `${w}: ${m}`));
+          }
+        } else if (rt === ACT.EMBED) {   // an allow-listed outside page: the provider, the exact URL, credit and licence (tools/embed_allow.json)
+          if (!EK()) E.push(`${w}: the outside-page checker (NoemaEmbed, engine/src/45_activity_embed.js) is not loaded here`);
+          else { const r = EK().check(a); E.push(...r.errors.map(m => `${w}: ${m}`)); W.push(...r.warnings.map(m => `${w}: ${m}`)); }
         }
         const st = a.strings;
         if (!st || typeof st !== 'object' || Array.isArray(st) || !Object.keys(st).length) E.push(`${w}: strings {locale: {key: text}} are required (an activity shows no words of its own)`);
@@ -935,6 +974,10 @@
     for (const c of p?.chapters || []) {
       for (const sec of c.sections || []) (sec.blocks || []).forEach((b, i) => { if (b?.t !== 'interactive') return; used.add(b.activity); E.push(...checkBlockAct(b, items).map(m => `${sec.id} block ${i}: ${m}`)); });
       for (const e of c.exercises || []) { if (e?.type !== 'sim') continue; used.add(e.activity); E.push(...checkSim(e, items).map(m => `${e.id}: ${m}`)); }
+    }
+    for (const a of Object.values(items)) {   // a module item that a wasm@1 spec runs is used by that spec's blocks and exercises
+      const sp = a && a.runtime === 'sim-spec@1' ? a.spec : null;
+      if (isObj(sp) && sp.engine === ACT.WASM_ENGINE && isObj(sp.model) && Object.prototype.hasOwnProperty.call(items, sp.model.module)) used.add(sp.model.module);
     }
     for (const aid of Object.keys(items)) if (!used.has(aid)) W.push(`activity ${aid}: not used by any interactive block or sim exercise`);
     if (Object.keys(items).length) {
@@ -1095,5 +1138,5 @@
     return { errors: E, warnings: W, counts: { entries: entries.length, senses, stale, sections: Object.keys(secs).length, previews, anchors: anchors.length } };
   }
   /* i18n-ignore-end */
-  root.NoemaPackCheck = { checkPack, checkActivities, checkSimSpec, specNames, needRequires, lintHtml, ACTIVITY_RULES: ACT, checkExercise, checkBalance, checkQuality, checkBridge, checkTranslation, requiredLocales, RULES, QUALITY, LANGS, TYPES, BLOCKS, ID_RE };
+  root.NoemaPackCheck = { checkPack, checkActivities, checkSimSpec, ownSpec, specNames, needRequires, lintHtml, ACTIVITY_RULES: ACT, checkExercise, checkBalance, checkQuality, checkBridge, checkTranslation, requiredLocales, RULES, QUALITY, LANGS, TYPES, BLOCKS, ID_RE };
 })(typeof window !== 'undefined' ? window : globalThis);

@@ -878,5 +878,20 @@
   "engine.act.bench.inst.log": "Journal des événements",
   "engine.act.bench.inst.rssi": "Radio : puissance du signal reçu (RSSI)",
   "engine.act.bench.current": "Courant",
-  "engine.act.bench.logStats": "redémarrages : {resets}, messages perdus : {lost}, réveils qui ont débordé : {overruns}"
+  "engine.act.bench.logStats": "redémarrages : {resets}, messages perdus : {lost}, réveils qui ont débordé : {overruns}",
+  "engine.act.embed.ask": "Cette activité ouvre {provider}. Elle a besoin du réseau, et {provider} peut déposer des cookies.",
+  "engine.act.embed.open": "Ouvrir {provider}",
+  "engine.act.embed.terms": "Conditions d’utilisation de {provider}",
+  "engine.act.embed.frameTitle": "{title} — {provider}",
+  "engine.act.embed.opened": "{provider} est ouvert.",
+  "engine.act.embed.offline": "Cette activité a besoin du réseau. Tu es hors ligne.",
+  "engine.act.embed.refused": "Cette activité externe ne fait pas partie des sites autorisés.",
+  "engine.act.embed.timeout": "{provider} ne s’est pas chargé.",
+  "engine.act.embed.settings": "Activités externes qui s’ouvrent sans demander : {names}",
+  "engine.act.embed.forget": "Redemander",
+  "engine.act.embed.settingsTip": "Une activité externe (une page PhET, GeoGebra ou Desmos) demande une fois avant de s’ouvrir : elle a besoin du réseau, et le site peut déposer des cookies. « Redemander » oublie ton accord.",
+  "engine.act.embed.forgotten": "Les activités externes demanderont de nouveau avant de s’ouvrir.",
+  "engine.xapi.export": "Exporter le relevé d’apprentissage (xAPI)",
+  "engine.xapi.exportSub": "Tes essais et tes réponses dans un fichier pour un entrepôt d’apprentissage (LRS)",
+  "engine.xapi.none": "Rien à exporter pour l’instant : tu n’as ni essai ni réponse dans cette matière."
 }

@@ -878,5 +878,20 @@
   "engine.act.bench.inst.log": "Журнал событий",
   "engine.act.bench.inst.rssi": "Радио: уровень сигнала (RSSI)",
   "engine.act.bench.current": "Ток",
-  "engine.act.bench.logStats": "перезапусков: {resets}, потерянных сообщений: {lost}, затянувшихся пробуждений: {overruns}"
+  "engine.act.bench.logStats": "перезапусков: {resets}, потерянных сообщений: {lost}, затянувшихся пробуждений: {overruns}",
+  "engine.act.embed.ask": "Это задание открывает {provider}. Для него нужен интернет, и {provider} может сохранять файлы cookie.",
+  "engine.act.embed.open": "Открыть {provider}",
+  "engine.act.embed.terms": "Условия {provider}",
+  "engine.act.embed.frameTitle": "{title} — {provider}",
+  "engine.act.embed.opened": "{provider} открыт.",
+  "engine.act.embed.offline": "Для этого задания нужен интернет. Ты не в сети.",
+  "engine.act.embed.refused": "Этого внешнего задания нет в списке разрешённых сайтов.",
+  "engine.act.embed.timeout": "{provider} не загрузился.",
+  "engine.act.embed.settings": "Внешние задания, которые открываются без вопроса: {names}",
+  "engine.act.embed.forget": "Спрашивать снова",
+  "engine.act.embed.settingsTip": "Внешнее задание (страница PhET, GeoGebra или Desmos) один раз спрашивает, прежде чем открыться: ему нужен интернет, и сайт может сохранять файлы cookie. «Спрашивать снова» забывает твоё согласие.",
+  "engine.act.embed.forgotten": "Внешние задания снова будут спрашивать, прежде чем открыться.",
+  "engine.xapi.export": "Экспорт учебной истории (xAPI)",
+  "engine.xapi.exportSub": "Твои попытки и ответы в файле для хранилища учебных записей (LRS)",
+  "engine.xapi.none": "Пока нечего экспортировать: в этом предмете у тебя нет ни попыток, ни ответов."
 }

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Interactive activities travel inside the pack (html-app@1 alias-lab, sim-spec@1 rc-lowpass, the circuit and P6 engine references) (docs/INTERACTIVE.md, docs/adr/001 D2): a subject folder with activities/ →
+"""Interactive activities travel inside the pack (html-app@1 alias-lab, sim-spec@1 rc-lowpass, the circuits and P6 engine references, wasm-module@1 wasm-oscillator;
+external-embed@1 in a copy of its own) (docs/INTERACTIVE.md, docs/adr/001 D2): a subject folder with activities/ →
 make_pack.py → pack.activities (bundle inline, sha256, strings per locale) + pack.requires → unpack.py gives the folder back →
 make_pack.py again gives the same pack.version. And what make_pack.py refuses (missing strings, a network link, an unknown
 activity, a runtime of a later version). Uses the skill zip (dist/noema-pack-builder.zip; built here when missing).
@@ -42,8 +43,12 @@ for cid in CIRC:   # circuit-mna@1: a netlist in the spec; led-bench is a fault-
     cs, cd = os.path.join(ROOT, 'tools', 'activities_examples', cid), os.path.join(sd, 'activities', cid); os.makedirs(cd)
     for f in os.listdir(cs):
         if f.startswith('strings.') or f == 'spec.json': shutil.copy(os.path.join(cs, f), cd)
+WO = os.path.join(ROOT, 'tools', 'activities_examples', 'wasm-oscillator')   # wasm-module@1 (P6): a precompiled module + its own spec
+wd_ = os.path.join(sd, 'activities', 'wasm-oscillator'); os.makedirs(wd_)
+for f in os.listdir(WO):
+    if f.startswith('strings.') or f in ('spec.json', 'module.wasm'): shutil.copy(os.path.join(WO, f), wd_)
 wj(os.path.join(sd, 'activities', 'activities.json'), {'format': 'noema.activities/v1', 'items': [rj(os.path.join(EX, 'activity.json')), rj(os.path.join(RC, 'activity.json'))]
-   + [rj(os.path.join(ROOT, 'tools', 'activities_examples', cid, 'activity.json')) for cid in CIRC]})
+   + [rj(os.path.join(ROOT, 'tools', 'activities_examples', cid, 'activity.json')) for cid in CIRC] + [rj(os.path.join(WO, 'activity.json'))]})
 shutil.copy(os.path.join(EX, 'fallback.svg'), os.path.join(sd, 'media', 'alias-lab-still.svg'))
 shutil.copy(os.path.join(RC, 'fallback.svg'), os.path.join(sd, 'media', 'rc-lowpass-still.svg'))
 mm = rj(os.path.join(sd, 'media', 'media.json'))
@@ -51,6 +56,7 @@ mm['items'].append({'id': 'alias-lab-still', 'file': 'alias-lab-still.svg', 'ori
                     'alt': 'A 7 Hz sine (grey) sampled at 10 Hz (blue dots); the dots lie on a 3 Hz sine (red, dashed).'})
 mm['items'].append({'id': 'rc-lowpass-still', 'file': 'rc-lowpass-still.svg', 'origin': 'plot', 'license': 'own', 'credit': 'noema-lite',
                     'alt': 'The gain of an RC low-pass filter against frequency on a log scale: flat at 0 dB, −3 dB at about 1 kHz, then falling.'})
+CIRC['wasm-oscillator'] = 'A damped mass on a spring: the displacement against time, a slowly dying swing (c = 0.2) and a quickly dying one (c = 1.6).'
 for cid, alt in CIRC.items():
     shutil.copy(os.path.join(ROOT, 'tools', 'activities_examples', cid, 'fallback.svg'), os.path.join(sd, 'media', cid + '-still.svg'))
     mm['items'].append({'id': cid + '-still', 'file': cid + '-still.svg', 'origin': 'plot', 'license': 'own', 'credit': 'noema-lite', 'alt': alt})
@@ -113,8 +119,16 @@ SIM8 = {'id': 'ch01-e907', 'type': 'sim', 'section': 'ch01-s01', 'difficulty': 2
         'hints': ['Most of the charge goes into the wake-ups (sending, waiting for the acknowledgement), so fewer wake-ups means a longer life.', '24 readings a day means a period of at most 3600 s.'],
         'reveal': 'Any period from about 390 s to 3600 s: every 15 minutes the cell lasts about 600 days with 96 readings a day.',
         'explain': 'The average current is the charge of one wake-up divided by the period, plus the sleep current and the self-discharge; the life is the capacity divided by it. Lengthening the period helps until the sleep current and the self-discharge dominate.'}
+BLOCK5 = {'t': 'interactive', 'activity': 'wasm-oscillator', 'caption': 'A damped oscillator computed by a WebAssembly module: move k, c and x₀.'}
+SIM9 = {'id': 'ch01-e908', 'type': 'sim', 'section': 'ch01-s01', 'difficulty': 2, 'tags': ['calc'], 'think': 'apply', 'activity': 'wasm-oscillator',
+        'q': 'A 1 kg mass on a spring with k = 4 N/m is pulled 1 m aside and let go. Choose the damping c so that at most 5 % of its starting energy is left after 2.5 s.',
+        'task': {'seed': 'auto', 'params': {}},
+        'grade': {'mode': 'checks', 'checks': [{'expr': 'E <= share * E0', 'label': 'checkLeft', 'weight': 3}, {'expr': 'abs(k - 4) < 0.01', 'label': 'checkK'}]},
+        'hints': ['The damping force −c·v turns the energy into heat; the spring only trades it between motion and stretch.', 'The energy falls roughly like e^(−c·t): you need e^(−2.5·c) ≤ 0.05, so c of about 1.2 or more.'],
+        'reveal': 'c = 1.6 N·s/m leaves about 2 % of the energy after 2.5 s (c = 1 still leaves about 8 %).',
+        'explain': 'For light damping the energy of a damped oscillator falls about like e^(−c·t/m): with m = 1 kg, 5 % after 2.5 s needs c ≥ ln(20)/2.5 ≈ 1.2 N·s/m. The spring constant changes how fast it swings, not how fast the energy goes.'}
 def put(ch):
-    c = rj(ch); c['sections'][0]['blocks'] += [dict(BLOCK), dict(BLOCK2), dict(BLOCK3), dict(BLOCK4)] + [{'t': 'interactive', 'activity': a} for a in P6]; c['exercises'] += [json.loads(json.dumps(x)) for x in (SIM, SIM2, SIM3, SIM4, SIM5, SIM6, SIM7, SIM8)]; wj(ch, c)
+    c = rj(ch); c['sections'][0]['blocks'] += [dict(BLOCK), dict(BLOCK2), dict(BLOCK3), dict(BLOCK4), dict(BLOCK5)] + [{'t': 'interactive', 'activity': a} for a in P6]; c['exercises'] += [json.loads(json.dumps(x)) for x in (SIM, SIM2, SIM3, SIM4, SIM5, SIM6, SIM7, SIM8, SIM9)]; wj(ch, c)
 put(os.path.join(sd, 'chapters', 'ch01.json')); put(os.path.join(sd, 'translations', 'fr', 'ch01.json'))
 mk = lambda src, out: run(os.path.join(S, 'make_pack.py'), src, os.path.join(T, out))
 pk = lambda out: zipfile.ZipFile(os.path.join(T, out, 'demo-physics.noema.zip'))
@@ -128,19 +142,24 @@ check(p['activities']['format'] == 'noema.activities/v1' and a.get('html') == ht
 import hashlib
 check(a.get('sha256') == hashlib.sha256(html.encode()).hexdigest() and a.get('bytes') == len(html.encode()), 'sha256 and bytes name the bundle')
 check(sorted(a.get('strings') or {}) == ['el', 'en', 'fr', 'ru'] and a['strings']['el']['signal'] == 'Σήμα', 'the strings of every locale are in the pack')
-check(sorted(p.get('requires') or []) == ['activities/v1', 'engine:circuit-mna@1', 'engine:pid@1', 'engine:rf@1', 'engine:thermal@1', 'engine:twin@1', 'runtime:html-app@1', 'runtime:sim-spec@1'], 'pack.requires names the core, both runtimes, the circuit engine and the four P6 engines', str(p.get('requires')))
-check(p['counts'].get('activities') == 8 and 'alias-lab-still' in p['media'] and 'rc-lowpass-still' in p['media'], 'counts.activities; the fallback pictures are pack pictures (and need no exercises)')
+check(sorted(p.get('requires') or []) == ['activities/v1', 'engine:circuit-mna@1', 'engine:pid@1', 'engine:rf@1', 'engine:thermal@1', 'engine:twin@1', 'engine:wasm@1', 'runtime:html-app@1', 'runtime:sim-spec@1', 'runtime:wasm-module@1'], 'pack.requires names the core, the runtimes, the circuit, P6 and wasm engines and the four P6 engines', str(p.get('requires')))
+check(p['counts'].get('activities') == 9 and 'alias-lab-still' in p['media'] and 'rc-lowpass-still' in p['media'], 'counts.activities; the fallback pictures are pack pictures (and need no exercises)')
 check(b.get('spec') == rj(os.path.join(RC, 'spec.json')) and 'html' not in b and sorted(b.get('strings') or {}) == ['el', 'en', 'fr', 'ru'], 'sim-spec@1: the spec is inline in the pack (data, no bundle), with its strings')
 lb = next((x for x in p['activities']['items'] if x.get('id') == 'led-bench'), {})
 check(lb.get('spec') == rj(os.path.join(ROOT, 'tools', 'activities_examples', 'led-bench', 'spec.json')) and lb['spec']['bench']['diagnosis']['options'][6]['fault'] == 'ledReversed', 'circuit-mna@1: the bench spec is inline, its faults and diagnosis with it')
 check(all(next((x for x in p['activities']['items'] if x.get('id') == a), {}).get('spec') == rj(os.path.join(ROOT, 'tools', 'activities_examples', a, 'spec.json')) for a in P6), 'thermal@1, pid@1, rf@1, twin@1: the specs of heatsink, pid-tune, lora-link and sensor-node are inline')
+wo = next((x for x in p['activities']['items'] if x.get('id') == 'wasm-oscillator'), {})
+wbytes = open(os.path.join(WO, 'module.wasm'), 'rb').read()
+import base64
+check(base64.b64decode(wo.get('wasm') or '') == wbytes and wo.get('sha256') == hashlib.sha256(wbytes).hexdigest() and wo.get('bytes') == len(wbytes) and wo.get('abi') == {'version': 1, 'scratch': 1024, 'maxPages': 16}
+      and wo.get('spec') == rj(os.path.join(WO, 'spec.json')) and sorted(wo.get('strings') or {}) == ['el', 'en', 'fr', 'ru'], 'wasm-module@1: the module is inline (base64, sha256, bytes), with its abi, its own spec and its strings')
 if os.environ.get('NOEMA_ACT_PACK'):   # run_e2e.sh: tests/activities_app.js imports this pack into the app
     shutil.copy(os.path.join(sd, 'build', 'demo-physics.json'), os.environ['NOEMA_ACT_PACK'])
 
 # the round trip
 w2 = os.path.join(T, 'w2'); r = run(os.path.join(S, 'unpack.py'), os.path.join(T, 'o1', 'demo-physics.noema.zip'), w2)
 u = os.path.join(w2, 'demo-physics')
-check(r.returncode == 0 and '8 activities' in r.stdout, 'unpack.py gives the activities back', r.stdout + r.stderr)
+check(r.returncode == 0 and '9 activities' in r.stdout, 'unpack.py gives the activities back', r.stdout + r.stderr)
 check(open(os.path.join(u, 'activities', 'alias-lab', 'app.html'), encoding='utf-8', newline='').read() == html, 'app.html comes back byte for byte')
 check(rj(os.path.join(u, 'activities', 'alias-lab', 'strings.ru.json')) == rj(os.path.join(EX, 'strings.ru.json')), 'the string tables come back')
 check(rj(os.path.join(u, 'activities', 'rc-lowpass', 'spec.json')) == rj(os.path.join(RC, 'spec.json')), 'spec.json comes back')
@@ -148,6 +167,9 @@ reg = rj(os.path.join(u, 'activities', 'activities.json'))
 check(reg['items'][0].get('entry') == 'activities/alias-lab/app.html' and 'html' not in reg['items'][0], 'activities.json names the entry file (no bundle inside)')
 check(reg['items'][1].get('entry') == 'activities/rc-lowpass/spec.json' and 'spec' not in reg['items'][1], 'activities.json names spec.json (no spec inside)')
 check(rj(os.path.join(u, 'activities', 'led-bench', 'spec.json')) == rj(os.path.join(ROOT, 'tools', 'activities_examples', 'led-bench', 'spec.json')) and rj(os.path.join(u, 'activities', 'rc-transient', 'strings.el.json')) == rj(os.path.join(ROOT, 'tools', 'activities_examples', 'rc-transient', 'strings.el.json')), 'the circuit specs and their strings come back')
+wreg = next(x for x in reg['items'] if x['id'] == 'wasm-oscillator')
+check(open(os.path.join(u, 'activities', 'wasm-oscillator', 'module.wasm'), 'rb').read() == wbytes and rj(os.path.join(u, 'activities', 'wasm-oscillator', 'spec.json')) == rj(os.path.join(WO, 'spec.json'))
+      and wreg.get('entry') == 'activities/wasm-oscillator/module.wasm' and not ({'wasm', 'sha256', 'bytes', 'spec'} & set(wreg)) and wreg.get('abi'), 'module.wasm comes back byte for byte, with its spec.json; activities.json names module.wasm and keeps abi (no base64 inside)')
 r = mk(u, 'o2'); check(r.returncode == 0, 'the unpacked folder builds again', r.stdout + r.stderr)
 p2 = json.loads(pk('o2').read('pack.json'))
 check(p2['activities'] == p['activities'] and p2['version'] == p['version'], 'same activities, same pack.version after the round trip')
@@ -201,6 +223,43 @@ refused('a thermal binding with an unknown name', lambda w: p6spec(w, 'heatsink'
 refused('a pid plant the engine does not know', lambda w: p6spec(w, 'pid-tune', lambda s_: s_['model']['plant'].update(type='quantum')), 'spec.model.plant.type: one of fopdt')
 refused('an rf binding to no field of the link', lambda w: p6spec(w, 'lora-link', lambda s_: s_['model']['bindings'][1].update(field='radio.colour')), 'not a numeric field of the link')
 refused('a twin device that senses longer than it sleeps', lambda w: p6spec(w, 'sensor-node', lambda s_: s_['model']['device']['schedule'].update(sense=100)), 'must be shorter than the period')
+def wasm_of(w, fixture):
+    shutil.copy(os.path.join(ROOT, 'tests', 'fixtures', 'wasm', fixture + '.wasm'), os.path.join(w, 'activities', 'wasm-oscillator', 'module.wasm'))
+refused('a module that imports something outside the host ABI', lambda w: wasm_of(w, 'forbidden'), 'import: env.fetch_url (func) is not in the host ABI')
+refused('a module whose memory is over the limit', lambda w: wasm_of(w, 'bigmem'), 'memory: the declared maximum is 65536 pages')
+def nospec(w): os.remove(os.path.join(w, 'activities', 'wasm-oscillator', 'spec.json'))
+refused('a module without its own spec in a block', nospec, 'module without its own spec')
+refused('a wasm exercise graded "reported"', lambda w: ex_of(w, 'ch01-e908', lambda e: e.update(grade={'mode': 'reported'})), 'a wasm-module@1 activity reports nothing itself')
+
+# external-embed@1 (P6): an allow-listed outside page — no file, no entry; explore only
+EMB = {'id': 'ohm-phet', 'runtime': 'external-embed@1', 'stateVersion': 1, 'provider': 'phet', 'url': 'https://phet.colorado.edu/sims/html/ohms-law/latest/ohms-law_all.html',
+       'credit': 'PhET Interactive Simulations, University of Colorado Boulder · Ohm’s Law · CC-BY-4.0 · https://phet.colorado.edu', 'license': 'CC-BY-4.0', 'height': 480,
+       'fallback': {'media': 'alias-lab-still', 'text': 'Ohm’s law: the current through a resistor grows with the voltage and falls with the resistance, I = V / R.'}}
+ew = os.path.join(T, 'w-embed', 'demo-physics'); shutil.copytree(sd, ew); shutil.rmtree(os.path.join(ew, 'build'), ignore_errors=True)
+er = rj(os.path.join(ew, 'activities', 'activities.json')); er['items'].append(dict(EMB)); wj(os.path.join(ew, 'activities', 'activities.json'), er)
+for loc, title in (('en', 'Ohm’s law simulation (PhET)'), ('el', 'Προσομοίωση του νόμου του Ohm (PhET)'), ('ru', 'Симуляция закона Ома (PhET)'), ('fr', 'Simulation de la loi d’Ohm (PhET)')):
+    wj(os.path.join(ew, 'activities', 'ohm-phet', f'strings.{loc}.json'), {'title': title})
+for ch in (os.path.join(ew, 'chapters', 'ch01.json'), os.path.join(ew, 'translations', 'fr', 'ch01.json')):
+    c = rj(ch); c['sections'][0]['blocks'].append({'t': 'interactive', 'activity': 'ohm-phet', 'caption': 'PhET: Ohm’s law.'}); wj(ch, c)
+r = mk(ew, 'oe1'); check(r.returncode == 0, 'make_pack.py builds a pack with an outside page (external-embed@1)', r.stdout + r.stderr)
+pe = json.loads(zipfile.ZipFile(os.path.join(T, 'oe1', 'demo-physics.noema.zip')).read('pack.json'))
+ei = next((x for x in pe['activities']['items'] if x.get('id') == 'ohm-phet'), {})
+check(ei.get('url') == EMB['url'] and 'entry' not in ei and 'html' not in ei and sorted(ei.get('strings') or {}) == ['el', 'en', 'fr', 'ru'] and 'runtime:external-embed@1' in pe.get('requires', []),
+      'external-embed@1: the item travels with its url, credit and licence, no entry and no file; pack.requires names the runtime')
+we = os.path.join(T, 'w-embed2'); r = run(os.path.join(S, 'unpack.py'), os.path.join(T, 'oe1', 'demo-physics.noema.zip'), we)
+ue = os.path.join(we, 'demo-physics'); ere = next(x for x in rj(os.path.join(ue, 'activities', 'activities.json'))['items'] if x['id'] == 'ohm-phet')
+check(r.returncode == 0 and 'entry' not in ere and ere.get('url') == EMB['url'] and rj(os.path.join(ue, 'activities', 'ohm-phet', 'strings.el.json'))['title'].startswith('Προσομοίωση'), 'unpack.py gives the outside page back without an entry (its strings beside it)', r.stdout + r.stderr)
+r = mk(ue, 'oe2'); check(r.returncode == 0 and json.loads(zipfile.ZipFile(os.path.join(T, 'oe2', 'demo-physics.noema.zip')).read('pack.json'))['version'] == pe['version'], 'the outside page round-trips: same pack.version', r.stdout + r.stderr)
+def refused_e(name, change, want):
+    w = os.path.join(T, 'bad-e-' + name); shutil.copytree(ew, w); change(w)
+    r = mk(w, 'obe-' + name); check(r.returncode == 1 and want in r.stdout, 'refused: ' + name, r.stdout + r.stderr)
+def emb(w, **kw):
+    q = os.path.join(w, 'activities', 'activities.json'); r_ = rj(q); next(x for x in r_['items'] if x['id'] == 'ohm-phet').update(kw); wj(q, r_)
+refused_e('a provider whose terms are pending (Falstad)', lambda w: emb(w, provider='falstad', url='https://www.falstad.com/circuit/circuitjs.html?ctz=abc', credit='Circuit simulator by Paul Falstad', license='GPL-2.0-or-later'), 'provider-pending')
+refused_e('a URL off the allow-list', lambda w: emb(w, url='https://phet.colorado.edu/en/simulations/ohms-law'), 'url-path')
+def emb_sim(w):
+    c = rj(os.path.join(w, 'chapters', 'ch01.json')); c['exercises'].append({**SIM, 'id': 'ch01-e909', 'activity': 'ohm-phet'}); wj(os.path.join(w, 'chapters', 'ch01.json'), c)
+refused_e('an outside page graded as a sim', emb_sim, 'sim-embed')
 def noacts(w):
     shutil.rmtree(os.path.join(w, 'activities'))
 refused('a block without activities/', noacts, "activity 'alias-lab' is not in pack.activities")
