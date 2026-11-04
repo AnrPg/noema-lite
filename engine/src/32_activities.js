@@ -2,8 +2,12 @@
    A pack may carry activities (pack.activities, format noema.activities/v1): mini-apps, minigames and simulations. They appear as a
    theory block { t: 'interactive', activity } (an explorer, not graded) or as an exercise { type: 'sim', activity, task, grade, hints }.
    This file is the trusted core (ports & adapters): it knows only the RuntimeAdapter port, never a runtime by name.
-     registerRuntime({ id, version, mount(slot, ctx) → port })      a runtime (html-app@1 in 34_activity_html.js; more in P2–P4)
-     registerGrader({ id, grade(session, ex) → { ok, score } | null })
+     registerRuntime({ id, version, mount(slot, ctx) → port, autoHeight? })   a runtime (html-app@1 in 34_activity_html.js, sim-spec@1 in
+                                                                       35_activity_sim.js; more in P3–P4). autoHeight: it renders in the
+                                                                       app's own DOM and takes the height it needs (no frame)
+     registerEngine({ id, check?(spec) → problems, create(spec, {seed, task}) → { run(inputs) → outputs }, workerSource? })
+                                                                       an engine of sim-spec@1 (formula@1 built in; the circuit engine in P3)
+     registerGrader({ id, grade(session, ex) → { ok, score } | null })   reported (the activity's own result), checks (rules the app evaluates)
    The anti-corruption layer is ACTP (below): the only code that reads what an activity sends. Everything an activity says is
    untrusted: checked by shape and size, rate-limited, never run, never put in the page as HTML. */
 
@@ -53,10 +57,10 @@ const ACT = (() => {
   /* i18n-ignore-start */
   const reg = Noema.pack?.activities;
   const ITEMS = {}; for (const a of (reg && Array.isArray(reg.items) ? reg.items : [])) if (a && typeof a.id === 'string') ITEMS[a.id] = a;
-  const RUNTIMES = {}, GRADERS = {};
+  const RUNTIMES = {}, GRADERS = {}, ENGINES = {};
   const flags = () => Object.assign({ 'html-app@1': true }, window.NOEMA_CONFIG?.activities || {});
   /** the capabilities of this app (pack.requires): the core + every runtime that is registered and switched on */
-  const caps = () => new Set(['activities/v1', ...Object.keys(RUNTIMES).filter(id => flags()[id] !== false).map(id => 'runtime:' + id)]);
+  const caps = () => new Set(['activities/v1', ...Object.keys(RUNTIMES).filter(id => flags()[id] !== false).map(id => 'runtime:' + id), ...Object.keys(ENGINES).map(id => 'engine:' + id)]);
   const canRun = a => !!(a && RUNTIMES[a.runtime] && flags()[a.runtime] !== false);
   const LIVE = [];   // the activities running now (at most liveMax())
   const liveMax = () => innerWidth < 720 ? 1 : 2;
@@ -79,6 +83,11 @@ const ACT = (() => {
   }
   function registerRuntime(def) { if (def && def.id && typeof def.mount === 'function') RUNTIMES[def.id] = def; }
   function registerGrader(def) { if (def && def.id && typeof def.grade === 'function') GRADERS[def.id] = def; }
+  /** an engine of sim-spec@1: { id: 'name@N', check?(spec) → [problems], create(spec, {seed, task}) → { run(inputs) → outputs }, workerSource? }
+      (workerSource: the engine's code as text, defining self.noemaEngine = { create }; it then runs in a Worker — docs/INTERACTIVE.md §12.6) */
+  function registerEngine(def) { if (def && typeof def.id === 'string' && /^[a-z][a-z0-9-]*@\d+$/.test(def.id) && typeof def.create === 'function') ENGINES[def.id] = def; }
+  const engine = id => Object.prototype.hasOwnProperty.call(ENGINES, id) ? ENGINES[id] : null;
+  const engines = () => Object.keys(ENGINES);
 
   /* ---------- persistence: S.act (explorer state per activity and place) and S.att (the last attempt of each sim exercise) ---------- */
   const STATE_MAX = ACTP.LIM.state, KEEP_EVENTS = 200;
@@ -87,12 +96,31 @@ const ACT = (() => {
   function saveAttempt(sess) {
     if (!sess.ex) return;
     S.att = S.att || {};
-    S.att[sess.ex.id] = { id: sess.attemptId, seed: sess.seed, t: Date.now(), hints: sess.hintsUsed, result: sess.result, events: sess.events.slice(-KEEP_EVENTS) };
+    // the last attempt wins: a session that is torn down later (its card left the page) never overwrites an attempt begun after it
+    const had = S.att[sess.ex.id]; if (had && had.id !== sess.attemptId && (had.t0 || 0) > sess.t0) return;
+    S.att[sess.ex.id] = { id: sess.attemptId, seed: sess.seed, t0: sess.t0, t: Date.now(), hints: sess.hintsUsed, result: sess.result, events: sess.events.slice(-KEEP_EVENTS) };
     save();
   }
 
   /* ---------- graders (Strategy): reported — the activity reports its result; checks — host-side rules (P2, the expression language) ---------- */
   registerGrader({ id: 'reported', grade: sess => sess.result ? { ok: !!sess.result.passed, score: sess.result.score } : null });
+  /** checks: { mode: 'checks', checks: [{ expr, label?, weight? }], pass? } — the app evaluates each expression on the activity's current
+      values (params, derived, the engine's outputs; runtimes that expose them: sim-spec@1). score = the weighted share of checks met,
+      × 0.85 per hint used (never below × 0.5); passed = share >= pass (default 1). Nothing done yet (no event) → null: Check waits. */
+  const truthy = v => typeof v === 'boolean' ? v : (typeof v === 'number' && v !== 0 && v === v);
+  registerGrader({ id: 'checks', grade(sess, ex) {
+    const vals = sess.values?.(); if (!vals || !sess.events.length || !window.NoemaExpr) return null;
+    const cs = Array.isArray(ex?.grade?.checks) ? ex.grade.checks : [];
+    let tot = 0, got = 0; const per = [];
+    for (const c of cs) {
+      const w = typeof c?.weight === 'number' && c.weight > 0 ? c.weight : 1; let met = false;
+      try { met = truthy(NoemaExpr.evaluate(String(c.expr), vals)); } catch (e) { met = false; }
+      tot += w; if (met) got += w; per.push({ label: c?.label || null, ok: met });
+    }
+    const share = tot ? got / tot : 0, pass = typeof ex.grade.pass === 'number' ? ex.grade.pass : 1, factor = Math.max(0.5, Math.pow(0.85, sess.hintsUsed || 0));
+    sess.result = { score: Math.round(share * factor * 1e4) / 1e4, passed: share >= pass - 1e-9, detail: per.map(x => (x.ok ? '+' : '-') + (x.label || '')).join(' ').slice(0, 500), checks: per, t: Date.now() };
+    return { ok: sess.result.passed, score: sess.result.score, checks: per };
+  } });
 
   /** Mount an activity into `el`. ctx: { ex?, task?, place, height?, aspect?, caption?, start? (mount now, not when seen) }.
       → the session (destroy, restart, grade) — always returns, even when the activity cannot run (it then shows its fallback). */
@@ -108,7 +136,7 @@ const ACT = (() => {
     root.append(skip, box, bar, note, live, skipTarget);
     if (ctx.caption) root.append(h('div', { class: 'caption', html: fmt(ctx.caption) }));
     el.append(root);
-    const sess = { act: a, ex: ctx.ex || null, root, attemptId: uid(), seed: null, events: [], result: null, hintsUsed: 0, state: null, port: null, strikes: 0, alive: false, misses: 0, evWin: [], destroyed: false, onResult: null };
+    const sess = { act: a, ex: ctx.ex || null, root, attemptId: uid(), t0: Date.now(), seed: null, events: [], result: null, hintsUsed: 0, state: null, port: null, strikes: 0, alive: false, misses: 0, evWin: [], destroyed: false, onResult: null };
     sess.key = ctx.ex ? null : 'blk:' + (ctx.place || '') + ':' + actId;
     const seedOf = () => { const s = ctx.task?.seed; return Number.isInteger(s) ? s >>> 0 : rnd32(); };
 
@@ -129,7 +157,7 @@ const ACT = (() => {
     function stop(reason, offerRestart = true) {
       teardown();
       fallback(reason);
-      if (offerRestart) setBar(btn('↻ ' + tE('engine.act.restart'), () => start()));
+      setBar(offerRestart ? btn('↻ ' + tE('engine.act.restart'), () => start()) : null);
     }
     function teardown() {
       sess.alive = false; clearInterval(pingT); clearTimeout(timer); clearTimeout(saveT);
@@ -152,7 +180,7 @@ const ACT = (() => {
       switch (m.type) {
         case 'ready': sess.alive = true; note.textContent = ''; return;
         case 'pong': sess.misses = 0; return;
-        case 'resize': { if (ctx.height && ctx.height !== 'auto') return; const hpx = Math.max(160, Math.min(Math.round(p.h), Math.round(innerHeight * 1.5), 2000)); box.style.height = hpx + 'px'; return; }
+        case 'resize': { if ((ctx.height && ctx.height !== 'auto') || RUNTIMES[a.runtime]?.autoHeight) return; const hpx = Math.max(160, Math.min(Math.round(p.h), Math.round(innerHeight * 1.5), 2000)); box.style.height = hpx + 'px'; return; }
         case 'state': {
           if (!sess.key) { sess.state = { version: p.version, data: p.data }; return; }
           sess.state = { version: p.version, data: p.data };
@@ -178,7 +206,8 @@ const ACT = (() => {
       box.classList.remove('act-fallback'); box.classList.add('act-running'); note.textContent = tE('engine.act.loading');
       setBar(btn('↻ ' + tE('engine.act.restart'), () => { sess.attemptId = uid(); sess.events = []; sess.result = null; start(); }, 'btn ghost small'),
         document.fullscreenEnabled ? btn('⛶ ' + tE('engine.act.fullscreen'), () => { if (document.fullscreenElement) document.exitFullscreen(); else root.requestFullscreen?.().catch(() => { }); }, 'btn ghost small') : null);
-      if (ctx.height && ctx.height !== 'auto') box.style.height = Math.max(120, Math.min(+ctx.height || 360, 2000)) + 'px';
+      if (RUNTIMES[a.runtime].autoHeight) { box.style.height = ''; box.style.aspectRatio = ''; }   // rendered by the app itself: as tall as it needs
+      else if (ctx.height && ctx.height !== 'auto') box.style.height = Math.max(120, Math.min(+ctx.height || 360, 2000)) + 'px';
       else if (ctx.aspect && /^\d+:\d+$/.test(ctx.aspect)) { const [w, hh] = ctx.aspect.split(':').map(Number); box.style.aspectRatio = w + ' / ' + hh; }
       else box.style.height = (a.height && +a.height) ? Math.min(+a.height, 2000) + 'px' : '360px';
       if (sess.seed == null || !ctx.ex) sess.seed = seedOf();
@@ -197,7 +226,8 @@ const ACT = (() => {
       try {
         sess.port = RUNTIMES[a.runtime].mount(box, { act: a, init, title: tE('engine.act.frameTitle', { id: a.id }),
           onMessage: raw => { const r = ACTP.check(raw); if (r.ok) onMessage(r.msg); else if (r.version) stop(tE('engine.act.newerProtocol'), false); else if (!r.ignore) strike(r.why); },
-          onFail: why => stop(why === 'navigated' ? tE('engine.act.misbehaved') : tE('engine.act.failed')) });
+          onFail: why => why === 'unsupported' ? stop(tE('engine.act.notHere'), false) : why === 'spec' ? stop(tE('engine.act.failed'), false)
+            : why === 'runaway' ? stop(tE('engine.act.stopped')) : stop(why === 'navigated' ? tE('engine.act.misbehaved') : tE('engine.act.failed')) });
       } catch (e) { console.warn('[noema] activity mount failed', e); return stop(tE('engine.act.failed')); }
       if (notice) note.textContent = notice;
       LIVE.push(sess);
@@ -217,6 +247,7 @@ const ACT = (() => {
     sess.grade = () => { const g = GRADERS[sess.ex?.grade?.mode || 'reported']; return g ? g.grade(sess, sess.ex) : null; };
     sess.saveAttempt = () => saveAttempt(sess);
     sess.send = (type, payload) => sess.port?.send(type, payload);
+    sess.values = () => (sess.port && typeof sess.port.values === 'function' ? sess.port.values() : null);   // what the checks grader reads
     // lazy: an explorer starts when it comes into view (and only while there is room); offscreen it is paused
     if (ctx.start || !('IntersectionObserver' in window)) start();
     else {
@@ -246,7 +277,7 @@ const ACT = (() => {
     if (hidden.length) { c.exercises = keep; c._hidden = (c._hidden || 0) + hidden.length; }
     return hidden;
   }
-  return { ITEMS, mount, sweep, registerRuntime, registerGrader, caps, canRun, keepRunnable, strings, theme, LIVE };
+  return { ITEMS, mount, sweep, registerRuntime, runtime: id => RUNTIMES[id] || null, registerGrader, registerEngine, engine, engines, caps, canRun, keepRunnable, strings, theme, LIVE };
 })();
 
 /* the exercises already indexed (10_core.js) that this app cannot run leave the indexes; the pack is unchanged */
@@ -258,7 +289,7 @@ function dropUnrunnable() {
     comes back to the front (engine/curjobs.js App.stale); meanwhile every activity shows its fallback. */
 function checkRequires() {
   const req = Array.isArray(Noema.pack?.requires) ? Noema.pack.requires.filter(x => typeof x === 'string') : [];
-  const have = ACT.caps(), lack = req.filter(x => !have.has(x) && !x.startsWith('engine:'));
+  const have = ACT.caps(), lack = req.filter(x => !have.has(x));
   if (lack.length) { console.warn('[noema] this pack needs', lack.join(', ')); window.NoemaCurJobs?.App?.stale?.(); }
   return lack;
 }
@@ -286,10 +317,17 @@ R.sim = (ex, api) => {
   function showHint() { if (used >= hints.length || api.locked()) return null; const t = hints[used++]; sess.hintsUsed = used; hintBox.append(h('div', { class: 'fb', html: fmt(t) })); label(); return t; }
   sess.nextHint = showHint;
   label();
-  const el = h('div', {}, holder, hintBtn ? h('div', { class: 'row', style: { marginTop: '8px' } }, hintBtn) : null, hintBox);
+  const checksBox = h('div', { class: 'act-checks' });
+  const el = h('div', {}, holder, hintBtn ? h('div', { class: 'row', style: { marginTop: '8px' } }, hintBtn) : null, hintBox, checksBox);
+  /** the checks grader's verdict per check (its label from the activity's strings), so the learner sees which condition failed */
+  function showChecks(per) {
+    const T = ACT.strings(ACT.ITEMS[ex.activity]).table || {}, met = per.filter(x => x.ok).length;
+    checksBox.replaceChildren(h('div', { class: 'act-checks-sum' }, tE('engine.act.sim.checks', { met, total: per.length })),
+      h('ul', {}, per.filter(x => x.label && T[x.label]).map(x => h('li', { class: x.ok ? 'ok' : 'bad' }, (x.ok ? '✓ ' : '✗ ') + T[x.label]))));   // i18n-ignore (marks)
+  }
   return {
     el,
-    check() { const g = sess.grade?.(); if (!g) return null; sess.saveAttempt?.(); return g.ok; },
+    check() { const g = sess.grade?.(); if (!g) return null; if (Array.isArray(g.checks)) showChecks(g.checks); sess.saveAttempt?.(); return g.ok; },
     reveal() { if (hintBtn) hintBtn.disabled = true; if (sess.result?.passed && ex.reveal) el.append(h('div', { class: 'explain' }, h('div', { html: fmt(ex.reveal) }))); },
     bonus: () => -Math.round((4 + (ex.difficulty || 1) * 4) * (1 - Math.max(0.5, Math.pow(0.85, used)))),   // each hint used: score × 0.85, never below × 0.5 (docs/adr/001 D8)
     given: () => sess.result ? `(the activity reported: ${sess.result.passed ? 'passed' : 'not passed'}, score ${sess.result.score}${sess.result.detail ? ', ' + sess.result.detail : ''})` : '',   // i18n-ignore (AI context)

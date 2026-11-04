@@ -12,8 +12,9 @@ echo "if (typeof localStorage !== 'undefined' && localStorage.getItem('noema-tes
 # interactive activities: a pack with the reference activity, built and unpacked with the skill (tests/activities_app.js imports it)
 (cd "$T" && NOEMA_REBUILD_SKILL=1 NOEMA_ACT_PACK="$T/act-pack.json" python3 tests/activities_pack.py)
 (cd "$T" && python3 tools/build.py site bundle >/dev/null)
-node "$ROOT/tests/activities.js"        # the loop guard, the protocol checks, JS = Python rules, never allow-same-origin
-node "$ROOT/tests/activities_app.js" "$T" "$T/act-pack.json"   # activities in the app: sandbox, handshake, state, grading, fallbacks, endless loop (BROWSERS=chromium,firefox,webkit)
+node "$ROOT/tests/simexpr.js"          # the expression language of sim-spec@1: JS and Python agree bit for bit (docs/INTERACTIVE_SIMEXPR.md)
+node "$ROOT/tests/activities.js"        # the loop guard, the protocol checks, JS = Python rules (html-app, sim-spec, checks), never allow-same-origin
+node "$ROOT/tests/activities_app.js" "$T" "$T/act-pack.json"   # activities in the app: sandbox, handshake, state, grading, fallbacks, endless loop; sim-spec@1 and the checks grader (BROWSERS=chromium,firefox,webkit)
 node "$ROOT/tests/shell.js" "$T"
 node "$ROOT/tests/subject_switch.js" "$T"   # opening another subject reopens that one, even over a slow network
 node "$ROOT/tests/search_catalog.js"   # the search catalogue (docs/SEARCH.md)

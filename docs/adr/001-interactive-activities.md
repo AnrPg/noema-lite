@@ -1,7 +1,8 @@
 # ADR 001 · Interactive activities in packs (mini-apps, minigames, simulations)
 
-* **Status:** accepted (2026-11-04). The owner approved the four plan changes in §2; P1 (core + `html-app@1`) is implemented. Where this
-  record and the owner's decisions doc differ, the doc wins (items 6 and 7 are applied below: D7, D8).
+* **Status:** accepted (2026-11-04). The owner approved the four plan changes in §2; P1 (core + `html-app@1`) and P2 (`sim-spec@1`, the
+  expression language, the `checks` grader, `registerEngine`) are implemented (§8 "As built"). Where this record and the owner's
+  decisions doc differ, the doc wins (items 6 and 7 are applied below: D7, D8).
 * **Date:** 2026-11-04 · **Requested by:** ANR · **Brief:** the "Handoff: Interactive Activities for noema-lite" message (thread "Add interactive activities to packs").
 * **Scope of this ADR:** the design for all phases P1–P5 and the results of the four P0 spikes. No feature code ships with it; the spike
   scripts are kept in `tests/spikes/activities/` so anyone can run them again.
@@ -248,3 +249,34 @@ step with its check in `tools/pipelines/`), and the toolkit scripts `activity_ne
 P1 core + Tier A (+ `alias-lab`, security suite, D1 safety cards, pack/upload/unpack, contract v1) · P2 Tier B S1 (+ `rc-step-explorer`) ·
 P3 circuit bench (+ `fault-bench-led-driver`, replay harness) · P4 Tier C (+ `filter-designer-py`, offline proof) · P5 S3 engines, origin
 mode, audits. The content work (the electronics Roadmap) starts only after the handback of the brief's §16.
+
+## 8. As built — P2 (`sim-spec@1`, 2026-11-04)
+
+* **No frame.** A spec is data: the app's own code (`engine/src/35_activity_sim.js`) renders the controls, readouts and plots in the
+  page with the app's DOM, styles and tokens, and computes them with NoemaExpr and the registered engines. Nothing of the pack is
+  ever executed or put in the page as HTML (labels are text nodes, plots are SVG built element by element), so the sandbox, the CSP
+  and the loop guard that protect the app from *code* have nothing to guard here; a frame would only cost what the brief wanted
+  tier B for — the app's look, dark mode, the 320 px layout, the keyboard and screen-reader behaviour of real form controls — and a
+  second rendering path to keep in step. The trust boundary moves to the **spec check**: before anything is shown the runtime runs
+  `NoemaPackCheck.checkSimSpec` (the same rules as `tools/activities.py check_spec`, which the connector and `make_pack.py` run too)
+  and the engine's own `check`; a spec that fails, or an engine this app does not have, shows the fallback. Every expression is
+  compiled by NoemaExpr (no `eval`, ≤ 2000 nodes, no loops); a function plot evaluates at most 2000 points per line.
+* **Engines.** `ACT.registerEngine({ id, check?, create, workerSource? })`. `formula@1` is built in (the derived values are the model).
+  An engine with `workerSource` runs in a `blob:` Worker (tested in Chromium, Firefox and WebKit from the `file://` app; if a browser
+  refuses the worker the engine runs inline), latest inputs win, a run over 5 s terminates the worker and stops the activity
+  (Restart). Formulas run inline. The circuit engine (P3) registers through the same hook; the validators' `ENGINES` lists
+  (Python and JS) must name it too. `pack.requires` lists `engine:<id>` for every engine but `formula@1`, and `checkRequires()` now
+  checks engines like runtimes (`ACT.caps()` includes `engine:<id>` of every registered engine).
+* **Protocol.** The runtime talks to the core with the ACTP messages of every runtime (`ready`, `pong`, `state`, `event`; `pause`,
+  `resume`, `destroy`), so the live limit, the watchdog, pausing offscreen, S.act (the values of the controls) and S.att (events
+  `param` / `reset`) are unchanged. The core learned `autoHeight` (a runtime that renders in the page takes its own height) and three
+  failure codes: `unsupported` (→ "cannot run in this version", no Restart), `spec` (→ "could not start", no Restart), `runaway`.
+* **The checks grader** (`registerGrader('checks')`) evaluates `grade.checks[].expr` on `port.values()` (consts, params, derived,
+  scalar outputs); score = the weighted share × 0.85 per hint (floor 0.5); passed = share ≥ `pass` (default 1); nothing changed yet →
+  `null` (Check waits, as for `reported`). The exercise shows "n of m conditions met" and each labelled check with ✓ / ✗. The
+  validators refuse `checks` for runtimes that cannot expose values (html-app@1) and `reported` for sim-spec@1.
+* **Found on the way:** a sim session whose card had left the page was torn down up to 2 s later and saved its attempt over the
+  newer attempt of the next card; `saveAttempt` now keeps an attempt begun later (`t0`). Playwright cannot reach a sandboxed
+  `srcdoc` frame nested in another one in the full Chromium on a `file://` page (sandboxed frames get their own process); the app
+  test runs the full Chromium with `--disable-features=IsolateSandboxedIframes` (the loop guard, not the process model, is what
+  stops runaway code, as in Firefox and WebKit).

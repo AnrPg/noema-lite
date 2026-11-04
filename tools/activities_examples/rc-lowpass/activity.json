@@ -1,0 +1,14 @@
+{
+ "id": "rc-lowpass",
+ "runtime": "sim-spec@1",
+ "entry": "activities/rc-lowpass/spec.json",
+ "stateVersion": 1,
+ "capabilities": ["state", "events"],
+ "fallback": {
+  "media": "rc-lowpass-still",
+  "text": "The gain of an RC low-pass filter with R = 1.6 kΩ and C = 100 nF: flat (0 dB) at low frequencies, 3 dB down at the cutoff frequency fc = 1/(2πRC) ≈ 1 kHz, then falling by 20 dB for every tenfold rise in frequency. A larger R or C moves fc down; the time constant τ = RC is how long the output takes to reach 63 % of a step."
+ },
+ "origin": "own",
+ "credit": "noema-lite reference activity",
+ "license": "own"
+}

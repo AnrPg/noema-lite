@@ -16,7 +16,10 @@ const actFrame = (p, sel) => p.frames().find(f => f.parentFrame() && f.parentFra
 
 const http = require('http'); const hits = []; let BEACON = '';
 async function run(name) {
-  const browser = await pw[name].launch();
+  // Chromium: the full browser (docs/adr/001 §2), not the headless shell. Its sandboxed srcdoc frames get their own process, and
+  // Playwright then cannot attach to the mini-app frame nested in the wrapper (on a file:// page); IsolateSandboxedIframes off keeps
+  // them in reach (the loop guard, not the process model, is what stops a runaway: Firefox and WebKit have no such process either).
+  const browser = await pw[name].launch(name === 'chromium' && process.env.PW_CHANNEL !== '' ? { channel: process.env.PW_CHANNEL || 'chromium', args: ['--disable-features=IsolateSandboxedIframes'] } : {});
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } }); const p = await ctx.newPage(); p.setDefaultTimeout(10000);
   const E = []; p.on('pageerror', e => { if (!/^noema: this activity ran too long/.test(e.message)) E.push(e.message); });   // (the loop guard's own stop, thrown inside the frame on purpose)
   await p.goto('file://' + ROOT + '/index.html'); await p.evaluate(() => localStorage.clear()); await p.reload(); await wait(700);
@@ -110,7 +113,146 @@ async function run(name) {
     await wait(1800);
   }
   E.length = E0; ok(hits.length === 0, `no request leaves the activity (location, link, meta refresh, popup, data: page): ${JSON.stringify(hits)}`);   // (the hostile frames' own errors don't count)
+  await simSpec(p, ctx, E);
   await browser.close();
+}
+
+/* sim-spec@1 (docs/INTERACTIVE.md §12): the reference rc-lowpass — the app's own controls, readouts and plots (no frame), state,
+   the checks grader with hints, fallbacks (invalid spec, unknown engine, runtime off), registerEngine with a worker, 360 px, dark. */
+async function simSpec(p, ctx, E) {
+  console.log('— sim-spec@1: the theory block');
+  const E0 = E.length;
+  const SEL = 'main .act-blk .act[data-activity="rc-lowpass"]';
+  const openSec = async () => {
+    await p.evaluate(() => { location.hash = '#/'; }); await wait(300); await p.evaluate(() => { location.hash = '#/s/ch01-s01'; }); await wait(600);
+    const sa = await p.$('button:has-text("show all")'); if (sa) { await sa.click(); await wait(200); }
+    await p.locator(SEL).first().scrollIntoViewIfNeeded();
+    return until(() => p.evaluate(s => !!document.querySelector(s + ' .sim .sim-ro dd')?.textContent, SEL));
+  };
+  const ro = () => p.evaluate(s => [...document.querySelectorAll(s + ' .sim-ro dd')].map(d => d.textContent), SEL);
+  const bode = () => p.evaluate(s => document.querySelector(s + ' .sim-plot path.sim-line')?.getAttribute('d') || '', SEL);
+  ok(await openSec(), 'the sim-spec block renders when it comes into view');
+  const shape = await p.evaluate(s => { const r = document.querySelector(s); return { frame: !!r.querySelector('iframe'), sliders: r.querySelectorAll('input[type=range]').length, plots: r.querySelectorAll('.sim-plot svg').length,
+    title: r.querySelector('.sim-title')?.textContent, unlabelled: [...r.querySelectorAll('input, select')].filter(i => !(i.getAttribute('aria-label') || (i.id && r.querySelector(`label[for="${i.id}"]`)))).length,
+    svgAria: [...r.querySelectorAll('.sim-plot svg')].every(v => v.getAttribute('role') === 'img' && /Frequency|Time/.test(v.getAttribute('aria-label') || '')) }; }, SEL);
+  ok(!shape.frame && shape.sliders === 2 && shape.plots === 2 && shape.title === 'RC low-pass filter', `no frame: the app's own controls (2 sliders), 2 plots, the words of strings.en ${JSON.stringify(shape)}`);
+  ok(shape.unlabelled === 0 && shape.svgAria, 'every control has a label; every plot is an image with a description');
+  let r0 = await ro(); const d0 = await bode();
+  ok(/339\s*Hz/.test(r0[0]) && /470\s*µs/.test(r0[1]), `readouts from the defaults (R 4.7 kΩ, C 100 nF): ${r0.slice(0, 2).join(' · ')}`);
+  // the keyboard moves the slider (step 10 Ω): fc goes down a little, the plot follows
+  const rng = p.locator(SEL + ' input[type=range]').first(); await rng.focus(); for (let i = 0; i < 5; i++) await p.keyboard.press('ArrowRight'); await wait(150);
+  const r1 = await ro(), d1 = await bode();
+  ok(r1[0] !== r0[0] && /33\d/.test(r1[0]) && d1 !== d0 && d1.length > 100, `moving the slider with the keyboard updates the readout (${r1[0]}) and the plot`);
+  ok(/4[.,]75\s*kΩ/.test(await p.locator(SEL + ' .sim-lab output').first().innerText()), 'the slider shows its value with the unit');
+  await p.locator(SEL + ' input.sim-num[data-param="R"]').fill('1600'); await p.locator(SEL + ' input.sim-num[data-param="R"]').press('Tab'); await wait(150);
+  r0 = await ro();
+  ok(/995\s*Hz/.test(r0[0]) && /0[.,]5\s*%/.test(r0[2]), `typing R = 1600 Ω: fc ≈ 995 Hz, 0.5 % from the target (${r0[0]} · ${r0[2]})`);
+  ok(await until(() => p.evaluate(() => S.act?.['blk:ch01-s01:rc-lowpass']?.data?.values?.R === 1600)), 'the values are saved (S.act)');
+  await p.reload(); await wait(1200);
+  ok(await openSec() && /995\s*Hz/.test((await ro())[0]) && await p.locator(SEL + ' input.sim-num[data-param="R"]').inputValue() === '1600', 'after a reload the saved values come back');
+  // Reset puts the defaults back
+  await p.locator(SEL + ' .sim-foot button').click(); await wait(150);
+  ok(/339\s*Hz/.test((await ro())[0]), 'Reset brings back the defaults');
+  // pause (the block left the screen): nothing is computed until resume
+  await p.evaluate(() => ACT.LIVE.find(s => s.act.id === 'rc-lowpass').send('pause'));
+  await p.locator(SEL + ' input.sim-num[data-param="R"]').fill('2000'); await p.locator(SEL + ' input.sim-num[data-param="R"]').press('Tab'); await wait(100);
+  const paused = (await ro())[0];
+  await p.evaluate(() => ACT.LIVE.find(s => s.act.id === 'rc-lowpass').send('resume')); await wait(100);
+  ok(/339\s*Hz/.test(paused) && /796\s*Hz/.test((await ro())[0]), `paused: no new results (${paused}); resumed: computed (${(await ro())[0]})`);
+  ok(await p.evaluate(() => ACT.LIVE.length <= 2), 'the live limit counts sim-spec activities too (at most 2 on a wide screen)');
+
+  console.log('— sim-spec@1: small screens and dark mode');
+  for (const w of [360, 320]) {
+    await p.setViewportSize({ width: w, height: 800 }); await wait(400);
+    await p.locator(SEL).first().scrollIntoViewIfNeeded(); await wait(200);
+    const fit = await p.evaluate(s => { const r = document.querySelector(s), box = r.querySelector('.act-box'), rr = box.getBoundingClientRect();
+      return { page: document.documentElement.scrollWidth <= innerWidth + 1, box: box.scrollWidth <= box.clientWidth + 1, inside: rr.right <= innerWidth + 1 && rr.left >= -1,
+        svg: [...r.querySelectorAll('.sim-plot svg')].every(v => v.getBoundingClientRect().right <= rr.right + 1), touch: [...r.querySelectorAll('input.sim-num, input[type=range], .sim-foot button')].every(e => e.getBoundingClientRect().height >= 35) }; }, SEL);
+    ok(fit.page && fit.box && fit.inside && fit.svg && fit.touch, `${w} px: no sideways scrolling, the plots fit, touch targets >= 36 px ${JSON.stringify(fit)}`);
+  }
+  await p.setViewportSize({ width: 1280, height: 900 }); await wait(300);
+  await p.emulateMedia({ colorScheme: 'dark' }); await openSec(); await wait(300);
+  const lum = c => { const m = (c.match(/[\d.]+/g) || [255, 255, 255]).map(Number); return (0.2126 * m[0] + 0.7152 * m[1] + 0.0722 * m[2]) / 255; };
+  const dk = await p.evaluate(s => { const r = document.querySelector(s); const box = r.querySelector('.act-box'), dd = r.querySelector('.sim-ro dd'), ln = r.querySelector('.sim-plot path.sim-line');
+    return { bg: getComputedStyle(box).backgroundColor, ink: getComputedStyle(dd).color, line: getComputedStyle(ln).stroke }; }, SEL);
+  ok(lum(dk.bg) < 0.35 && lum(dk.ink) > 0.6 && dk.line && dk.line !== 'none', `dark mode: the theme's tokens (background ${dk.bg}, text ${dk.ink}, line ${dk.line})`);
+  await p.emulateMedia({ colorScheme: 'light' }); await wait(200);
+
+  console.log('— sim-spec@1: the sim exercise (checks grader)');
+  const card = async () => { await p.evaluate(() => { const m = document.querySelector('main'); m.innerHTML = ''; const c = exerciseCard(EX['ch01-e901']); c.id = 'T'; m.append(c); scrollTo(0, 0); }); await until(() => p.evaluate(() => !!document.querySelector('#T .sim .sim-ro dd')?.textContent)); };
+  const setR = async v => { const n = p.locator('#T input.sim-num[data-param="R"]'); await n.fill(String(v)); await n.press('Tab'); await wait(150); };
+  const check = async () => { await p.click('#T button:has-text("Check")'); await wait(300); };
+  await card();
+  ok(await p.evaluate(() => !!EX['ch01-e901'] && !document.querySelector('#T iframe')), 'the sim exercise with a sim-spec activity is shown');
+  await check();
+  ok(await p.evaluate(() => !document.getElementById('T')._locked()), 'Check before the learner changed anything does not grade');
+  const hint = p.locator('#T .act-hints').locator('..').locator('button:has-text("Hint")');
+  await hint.click(); ok(await p.locator('#T .act-hints .fb').count() === 1, 'a hint is shown');
+  await setR(4710); await check();
+  const bad = await p.evaluate(() => { const c = document.getElementById('T'); return { locked: c._locked(), bad: !!c.querySelector('.explain.bad'), list: [...c.querySelectorAll('.act-checks li')].map(l => l.className + ':' + l.textContent), sum: c.querySelector('.act-checks-sum')?.textContent, att: S.att?.['ch01-e901'] }; });
+  ok(bad.locked && bad.bad && bad.list.length === 2 && /^bad:/.test(bad.list[0]) && /^ok:/.test(bad.list[1]) && /1 of 2 conditions/.test(bad.sum), `R = 4.71 kΩ (≈ 338 Hz) is graded wrong; the conditions are listed ${JSON.stringify(bad.list)} · ${bad.sum}`);
+  ok(bad.att?.result?.passed === false && Math.abs(bad.att.result.score - 0.25 * 0.85) < 1e-6 && bad.att.hints === 1 && bad.att.events.length >= 1, `the attempt is saved: share 1/4 (weights 3 + 1) × 0.85 for the hint = ${bad.att?.result?.score}`);
+  await card(); await setR(1600); await check();
+  let good = await p.evaluate(() => { const c = document.getElementById('T'); return { ok: !!c.querySelector('.explain.ok'), reveal: /995 Hz/.test(c.textContent), score: S.att?.['ch01-e901']?.result?.score }; });
+  ok(good.ok && good.reveal && good.score === 1, `R = 1.6 kΩ is graded right (score ${good.score}), and the reveal is shown`);
+  await card(); await hint.click(); await setR(1600); await check();
+  await wait(2300);   // the earlier cards' sessions are torn down meanwhile (the watchdog sees they left the page): they must not overwrite this attempt
+  good = await p.evaluate(() => ({ ok: !!document.querySelector('#T .explain.ok'), score: S.att?.['ch01-e901']?.result?.score, hints: S.att?.['ch01-e901']?.hints }));
+  ok(good.ok && Math.abs(good.score - 0.85) < 1e-9 && good.hints === 1, `right after one hint: passed, score × 0.85 = ${good.score}; the attempt stays the last one`);
+  await card(); await p.locator('#T input.sim-num[data-param="C"]').fill('0.000001'); await p.locator('#T input.sim-num[data-param="C"]').press('Tab'); await wait(100); await setR(160); await check();
+  ok(await p.evaluate(() => !!document.querySelector('#T .explain.bad') && /99\d\s*Hz/.test(document.querySelector('#T .sim-ro dd').textContent)), 'the right fc reached with another C fails the "C stays 100 nF" condition');
+
+  console.log('— sim-spec@1: fallbacks and engines');
+  const mountItem = (id, change) => p.evaluate(([id, change]) => {
+    const a = JSON.parse(JSON.stringify(ACT.ITEMS['rc-lowpass'])); a.id = id; (new Function('a', change))(a); ACT.ITEMS[id] = a;   // (test code in the app page, not pack content)
+    const m = document.querySelector('main'); m.innerHTML = ''; m.append(interactiveBlock({ t: 'interactive', activity: id })); scrollTo(0, 0);
+  }, [id, change]);
+  const fbState = () => p.evaluate(() => ({ sim: !!document.querySelector('main .sim'), fb: !!document.querySelector('main .act-fallback img'), text: document.querySelector('main .act-fbtext')?.textContent || '', note: document.querySelector('main .act-note')?.textContent || '', restart: !!document.querySelector('main .act-bar button') && /Restart/.test(document.querySelector('main .act-bar').textContent) }));
+  await mountItem('rc-badspec', "a.spec.derived.push({ id: 'x', expr: 'R +* 2' });"); await wait(500);
+  let st = await fbState();
+  ok(!st.sim && st.fb && /1 kHz/.test(st.text) && /could not start/.test(st.note) && !st.restart, `an invalid spec: the fallback picture and text, no simulation ${JSON.stringify(st.note)}`);
+  await mountItem('rc-engine', "a.spec.engine = 'warp@9';"); await wait(500);
+  st = await fbState();
+  ok(!st.sim && st.fb && /cannot run in this version/.test(st.note), 'an engine this app does not have: the fallback, "cannot run in this version"');
+  await p.evaluate(() => { window.NOEMA_CONFIG.activities = { 'sim-spec@1': false }; }); await mountItem('rc-off', ''); await wait(300);
+  st = await fbState(); await p.evaluate(() => { delete window.NOEMA_CONFIG.activities; });
+  ok(!st.sim && st.fb, 'runtime sim-spec@1 switched off: the fallback');
+  // registerEngine: a tiny test engine (exponential decay, a time series) in a worker; and one whose own check refuses the spec
+  await p.evaluate(() => {
+    window.__inline = 0;
+    const src = "self.noemaEngine = { create: function (spec, o) { return { run: function (x) { var t = [], v = []; for (var i = 0; i <= 200; i++) { var tt = i * x.T / 200; t.push(tt); v.push(x.V0 * Math.exp(-tt / x.tau)); } return { t: t, v: v, vEnd: v[200], seed: o.seed }; } }; } };";
+    ACT.registerEngine({ id: 'decay-test@1', workerSource: src, check: spec => spec.model && spec.model.kind === 'decay' ? [] : ['model.kind must be decay'],
+      create(spec, o) { window.__inline++; const f = {}; (new Function('self', src))(f); return f.noemaEngine.create(spec, o); } });
+  });
+  const ENG = "a.spec = { format: 'noema.sim-spec/v1', engine: 'decay-test@1', model: { kind: 'decay' }, consts: { V0: 5 }, params: [{ id: 'tau', kind: 'slider', label: 'resistance', min: 0.1, max: 5, step: 0.1, default: 1 }, { id: 'T', kind: 'number', label: 'capacitance', min: 1, max: 20, default: 5 }]," +
+    " outputs: [{ id: 't', kind: 'series' }, { id: 'v', kind: 'series' }, { id: 'vEnd', kind: 'scalar' }], readouts: [{ label: 'voltage', expr: 'vEnd', digits: 3 }], plots: [{ kind: 'series', title: 'stepTitle', x: { series: 't', label: 'time', unit: 's' }, y: { min: 0, max: 5, label: 'voltage', unit: 'V' }, series: [{ y: 'v' }] }] };";
+  await mountItem('decay', ENG);
+  ok(await until(() => p.evaluate(() => /^0[.,]0337/.test(document.querySelector('main .sim-ro dd')?.textContent || ''))), 'an engine from registerEngine computes the outputs (5·e^−5 = 0.0337 V at the end)');
+  const dk2 = await p.evaluate(() => ({ d: document.querySelector('main .sim-plot path.sim-line')?.getAttribute('d') || '', inline: window.__inline, caps: ACT.caps().has('engine:decay-test@1') }));
+  ok(dk2.d.split('L').length > 150 && dk2.caps, `its time series is plotted (${dk2.d.split('L').length} points); the app lists engine:decay-test@1 among its capabilities`);
+  ok(dk2.inline === 0, `the engine with workerSource ran in a Worker (inline runs: ${dk2.inline})`);
+  await p.locator('main input.sim-num[data-param="tau"]').fill('2.5'); await p.locator('main input.sim-num[data-param="tau"]').press('Tab');
+  ok(await until(() => p.evaluate(() => /^0[.,]677/.test(document.querySelector('main .sim-ro dd')?.textContent || ''))), 'a new input runs the engine again (τ = 2.5 s → 0.677 V)');
+  // the checks grader never reads older results: while the engine still computes the latest inputs, values() is null
+  const stale = await p.evaluate(async () => {
+    const src = "self.noemaEngine = { create: function () { return { run: function (x) { var t0 = Date.now(); while (Date.now() - t0 < 400) { } return { vEnd: x.tau }; } }; } };";
+    ACT.registerEngine({ id: 'slow-test@1', workerSource: src, create() { const f = {}; (new Function('self', src))(f); return f.noemaEngine.create(); } });
+    const a = JSON.parse(JSON.stringify(ACT.ITEMS['rc-lowpass'])); a.id = 'slow';
+    a.spec = { format: 'noema.sim-spec/v1', engine: 'slow-test@1', model: {}, params: [{ id: 'tau', kind: 'number', label: 'resistance', min: 0, max: 10, default: 1 }], outputs: [{ id: 'vEnd', kind: 'scalar' }], readouts: [{ label: 'voltage', expr: 'vEnd' }] };
+    const box = document.createElement('div'); document.body.append(box); const msgs = [];
+    const port = ACT.runtime('sim-spec@1').mount(box, { act: a, init: { locale: 'en', stateVersion: 1 }, onMessage: m => msgs.push(m), onFail: c => msgs.push({ fail: c }) });
+    const until = async f => { for (let i = 0; i < 60; i++) { if (f()) return true; await new Promise(r => setTimeout(r, 50)); } return false; };
+    const first = await until(() => port.values()?.vEnd === 1);
+    const inp = box.querySelector('input[data-param="tau"]'); inp.value = '7'; inp.dispatchEvent(new Event('input', { bubbles: true })); inp.dispatchEvent(new Event('change', { bubbles: true }));
+    await new Promise(r => setTimeout(r, 60)); const during = port.values();
+    const after = await until(() => port.values()?.vEnd === 7);
+    port.close(); box.remove(); return { first, during, after, fails: msgs.filter(m => m.fail) };
+  });
+  ok(stale.first && stale.during === null && stale.after && !stale.fails.length, `while the engine computes the latest inputs the checks grader gets nothing (no grading of older results) ${JSON.stringify(stale)}`);
+  await mountItem('decay-bad', ENG + " a.spec.model.kind = 'other';"); await wait(400);
+  st = await fbState();
+  ok(!st.sim && st.fb && /could not start/.test(st.note), "the engine's own check refuses the spec: the fallback");
+  ok(E.length === E0, 'no page errors ' + JSON.stringify(E.slice(E0, E0 + 3)));
 }
 (async () => {
   const srv = http.createServer((q, r) => { hits.push(q.url); r.end('gone'); }); await new Promise(r => srv.listen(0, '127.0.0.1', r)); BEACON = `http://127.0.0.1:${srv.address().port}/beacon`;

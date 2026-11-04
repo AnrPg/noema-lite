@@ -843,5 +843,10 @@
   "engine.act.newerState": "Ton travail enregistré ici vient d’une version plus récente de l’activité ; il est conservé, et l’activité repart de zéro.",
   "engine.act.newerProtocol": "Cette activité demande une version plus récente de l’application.",
   "engine.act.newerType": "Cet exercice demande une version plus récente de l’application. Recharge la page pour l’avoir.",
-  "engine.act.hint": "{left, plural, =0 {Plus d’indice} one {Indice (encore #)} many {Indice (encore #)} other {Indice (encore #)}}"
+  "engine.act.hint": "{left, plural, =0 {Plus d’indice} one {Indice (encore #)} many {Indice (encore #)} other {Indice (encore #)}}",
+  "engine.act.sim.reset": "Rétablir les valeurs",
+  "engine.act.sim.computing": "Calcul en cours…",
+  "engine.act.sim.results": "Résultats",
+  "engine.act.sim.plot": "Courbe de {y} en fonction de {x}",
+  "engine.act.sim.checks": "Conditions remplies : {met} sur {total}"
 }

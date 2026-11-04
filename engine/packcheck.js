@@ -370,8 +370,14 @@
   /* ---------- interactive activities (docs/INTERACTIVE.md): the SAME rules as tools/activities.py (tests/activities.js) ---------- */
   const ACT = {
     FORMAT: 'noema.activities/v1', ID_RE: /^[a-z0-9][a-z0-9-]{1,60}$/, KEY_RE: /^[a-z][a-zA-Z0-9_.-]{0,63}$/,
-    RUNTIMES: new Set(['html-app@1']), LATER: { 'sim-spec@1': 'P2', 'py-module@1': 'P4', 'h5p@1': 'P4b' },
-    CAPS: new Set(['state', 'events', 'resize', 'result', 'hints', 'announce']), GRADE_MODES: new Set(['reported']),
+    RUNTIMES: new Set(['html-app@1', 'sim-spec@1']), LATER: { 'py-module@1': 'P4', 'h5p@1': 'P4b' },
+    CAPS: new Set(['state', 'events', 'resize', 'result', 'hints', 'announce']), GRADE_MODES: new Set(['reported', 'checks']),
+    CHECKS_RUNTIMES: new Set(['sim-spec@1']),   // runtimes whose values the app can see (the checks grader needs them)
+    // sim-spec@1 (docs/INTERACTIVE.md §12): the SAME rules as tools/activities.py check_spec
+    SPEC_FORMAT: 'noema.sim-spec/v1', DEFAULT_ENGINE: 'formula@1', ENGINES: new Set(['formula@1']),   // P3 adds circuit-mna@1, in both twins
+    SPEC_KEYS: new Set(['format', 'engine', 'model', 'title', 'intro', 'consts', 'params', 'derived', 'outputs', 'readouts', 'plots']),
+    SPEC_LIM: { params: 24, consts: 24, derived: 48, outputs: 24, readouts: 24, plots: 6, series: 6, marks: 8, points: 2000, options: 12, checks: 16, bytes: 64 * 1024, unit: 16, digits: 8 },
+    NAME_RE: /^[A-Za-z_][A-Za-z0-9_]{0,31}$/, PARAM_KINDS: ['slider', 'number', 'toggle', 'choice'], NUM_FORMATS: ['auto', 'si', 'fixed'],
     HTML_MAX: 512 * 1024, HTML_WARN: 256 * 1024, FALLBACK_MIN: 40, HINTS_MAX: 6,
     BANNED: [
       [/<script[^>]*\bsrc\s*=/i, 'an external script (<script src>): put every script inline'],
@@ -415,6 +421,170 @@
     if (words.length >= 3) W.push(`visible text in the HTML (“${words.slice(0, 6).join(' ')}…”): put every word in the string tables and show it with noema.t(key)`);
     return { errors: E, warnings: W };
   }
+  /* ---------- sim-spec@1 (docs/INTERACTIVE.md §12): every expression through NoemaExpr (engine/src/35_simexpr.js, loaded beside this file) ---------- */
+  const isObj = v => v != null && typeof v === 'object' && !Array.isArray(v);
+  const isNum = v => typeof v === 'number' && isFinite(v);
+  const list = v => Array.isArray(v) ? v : [];
+  const NX = () => root.NoemaExpr || null;
+  /** null, or the first problem of an expression (names null = not checked) */
+  function exprProblem(src, names, where) {
+    if (typeof src !== 'string' || !src.trim()) return `${where}: an expression (a text such as “2*x + 1”) is required`;
+    if (!NX()) return `${where}: the expression checker (NoemaExpr, engine/src/35_simexpr.js) is not loaded here`;
+    const p = NX().check(src, names ? { vars: names } : {});
+    return p.length ? `${where}: ${p[0].msg} in “${src.slice(0, 60)}”` : null;
+  }
+  const badName = n => !(typeof n === 'string' && ACT.NAME_RE.test(n)) || n === 'pi' || n === 'e' || n === 'true' || n === 'false' || !NX() || NX().check(n).length > 0;
+  /** the scalar names an expression of the spec may use: consts, params, derived, the engine's scalar outputs */
+  function specNames(spec) {
+    if (!isObj(spec)) return [];
+    const out = isObj(spec.consts) ? Object.keys(spec.consts) : [];
+    for (const k of ['params', 'derived']) for (const x of list(spec[k])) if (isObj(x) && typeof x.id === 'string') out.push(x.id);
+    for (const x of list(spec.outputs)) if (isObj(x) && typeof x.id === 'string' && x.kind === 'scalar') out.push(x.id);
+    return out;
+  }
+  /** checkSimSpec(spec, tables?, engines?) → errors of a sim-spec@1 spec. tables: {locale: {key: text}}; engines: the known engine ids
+      (default ACT.ENGINES; the app passes the engines it has registered). The same rules as tools/activities.py check_spec. */
+  function checkSimSpec(spec, tables, engines) {
+    const E = [], L = ACT.SPEC_LIM;
+    if (!isObj(spec)) return ['spec: a JSON object is required (activities/<id>/spec.json)'];
+    if (utf8(JSON.stringify(spec)) > L.bytes) E.push(`spec: at most ${L.bytes / 1024} KB`);
+    if (spec.format !== ACT.SPEC_FORMAT) E.push(`spec: format must be "${ACT.SPEC_FORMAT}"`);
+    for (const k of Object.keys(spec).filter(k => !ACT.SPEC_KEYS.has(k)).sort()) E.push(`spec: unknown field ${qv(k)}`);
+    const eng = 'engine' in spec ? spec.engine : ACT.DEFAULT_ENGINE, known = engines ? new Set(engines) : ACT.ENGINES;
+    if (typeof eng !== 'string' || !known.has(eng)) E.push(`spec: unknown engine ${qv(eng)} (this version knows ${[...known].sort().join(', ')})`);
+    if (eng === ACT.DEFAULT_ENGINE && 'model' in spec) E.push('spec: model configures another engine; formula@1 has none');
+    if (spec.model != null && !isObj(spec.model)) E.push('spec: model must be an object');
+    const keys = new Set(), seen = new Set();
+    const key = (k, where, need = false) => { if (k == null && !need) return; if (!(typeof k === 'string' && ACT.KEY_RE.test(k))) { E.push(`${where} must be a key of the activity's string tables`); return; } keys.add(k); };
+    const name = (n, where) => {
+      if (badName(n)) { E.push(`${where}: ${qv(n)} is not a usable name (a letter or _, then letters, digits, _; not pi, e or a reserved word)`); return false; }
+      if (seen.has(n)) { E.push(`${where}: the name ${n} is used twice`); return false; }
+      seen.add(n); return true;
+    };
+    const expr = (src, names, where) => { const m = exprProblem(src, names, where); if (m) E.push(m); };
+    const numfmt = (o, where) => {
+      if (o.unit != null && !(typeof o.unit === 'string' && o.unit.length <= L.unit)) E.push(`${where}.unit must be a text of at most ${L.unit} characters`);
+      if (o.format != null && !ACT.NUM_FORMATS.includes(o.format)) E.push(`${where}.format is one of ${ACT.NUM_FORMATS.join(', ')}`);
+      if (o.digits != null && !(Number.isInteger(o.digits) && o.digits >= 1 && o.digits <= L.digits)) E.push(`${where}.digits is a whole number 1–${L.digits}`);
+    };
+    key(spec.title, 'spec.title'); key(spec.intro, 'spec.intro');
+    const c = spec.consts;
+    if (c != null) {
+      if (!(isObj(c) && Object.keys(c).length <= L.consts)) E.push(`spec.consts must be an object of at most ${L.consts} numbers`);
+      else for (const [k, v] of Object.entries(c)) if (name(k, 'spec.consts') && !isNum(v)) E.push(`spec.consts.${k} must be a number`);
+    }
+    const ps = spec.params;
+    if (!(Array.isArray(ps) && ps.length >= 1 && ps.length <= L.params)) E.push(`spec.params must be a list of 1–${L.params} controls`);
+    list(ps).slice(0, L.params).forEach((p, i) => {
+      const w = `spec.params[${i}]`;
+      if (!isObj(p)) { E.push(`${w} must be an object`); return; }
+      name(p.id, w + '.id'); key(p.label, w + '.label', true);
+      const kd = p.kind;
+      if (!ACT.PARAM_KINDS.includes(kd)) { E.push(`${w}.kind is one of ${ACT.PARAM_KINDS.join(', ')}`); return; }
+      if (kd === 'slider' || kd === 'number') {
+        const lo = p.min, hi = p.max, df = p.default;
+        if (!(isNum(lo) && isNum(hi) && lo < hi)) { E.push(`${w}: min and max must be numbers, min < max`); return; }
+        if (p.step != null && !(isNum(p.step) && p.step > 0)) E.push(`${w}.step must be a number > 0`);
+        if (!(isNum(df) && lo <= df && df <= hi)) E.push(`${w}.default must be a number from min to max`);
+        if (p.scale != null && !['lin', 'log'].includes(p.scale)) E.push(`${w}.scale is lin or log`);
+        else if (p.scale === 'log' && lo <= 0) E.push(`${w}: a log scale needs min > 0`);
+        numfmt(p, w);
+      } else if (kd === 'toggle') {
+        if (p.default != null && typeof p.default !== 'boolean') E.push(`${w}.default must be true or false`);
+      } else {
+        const ops = p.options;
+        if (!(Array.isArray(ops) && ops.length >= 2 && ops.length <= L.options)) { E.push(`${w}.options must be a list of 2–${L.options} {value, label}`); return; }
+        const vals = [];
+        ops.forEach((o, j) => { if (!(isObj(o) && isNum(o.value))) { E.push(`${w}.options[${j}] needs a number value`); return; } key(o.label, `${w}.options[${j}].label`, true); vals.push(o.value); });
+        if (new Set(vals).size !== vals.length) E.push(`${w}.options: two options have the same value`);
+        if (p.default != null && !vals.includes(p.default)) E.push(`${w}.default must be the value of one of the options`);
+      }
+    });
+    const names = [...seen];   // consts and params (the order does not matter to a check)
+    const ds = spec.derived;
+    if (ds != null && !(Array.isArray(ds) && ds.length <= L.derived)) E.push(`spec.derived must be a list of at most ${L.derived} {id, expr}`);
+    list(ds).slice(0, L.derived).forEach((d, i) => {
+      const w = `spec.derived[${i}]`;
+      if (!isObj(d)) { E.push(`${w} must be an object {id, expr}`); return; }
+      expr(d.expr, [...names], w + '.expr');
+      if (name(d.id, w + '.id')) names.push(d.id);
+    });
+    const os = spec.outputs, series = [];
+    if (os != null) {
+      if (eng === ACT.DEFAULT_ENGINE) E.push('spec.outputs come from an engine; formula@1 has none (use derived)');
+      else if (!(Array.isArray(os) && os.length <= L.outputs)) E.push(`spec.outputs must be a list of at most ${L.outputs} {id, kind}`);
+      else os.forEach((o, i) => {
+        const w = `spec.outputs[${i}]`;
+        if (!(isObj(o) && (o.kind === 'scalar' || o.kind === 'series'))) { E.push(`${w} must be {id, kind: scalar | series}`); return; }
+        if (name(o.id, w + '.id')) (o.kind === 'scalar' ? names : series).push(o.id);
+      });
+    }
+    const rs = spec.readouts;
+    if (rs != null && !(Array.isArray(rs) && rs.length <= L.readouts)) E.push(`spec.readouts must be a list of at most ${L.readouts} {label, expr}`);
+    list(rs).slice(0, L.readouts).forEach((r, i) => {
+      const w = `spec.readouts[${i}]`;
+      if (!isObj(r)) { E.push(`${w} must be an object {label, expr}`); return; }
+      key(r.label, w + '.label', true); expr(r.expr, names, w + '.expr'); numfmt(r, w);
+    });
+    const pl = spec.plots;
+    if (pl != null && !(Array.isArray(pl) && pl.length <= L.plots)) E.push(`spec.plots must be a list of at most ${L.plots} plots`);
+    list(pl).slice(0, L.plots).forEach((p, i) => {
+      const w = `spec.plots[${i}]`;
+      if (!isObj(p) || !['function', 'series'].includes(p.kind)) { E.push(`${w} must be a plot {kind: function | series, x, y, series}`); return; }
+      key(p.title, w + '.title');
+      const x = isObj(p.x) ? p.x : null, y = p.y != null ? p.y : {};
+      if (!x) { E.push(`${w}.x must be an object`); return; }
+      if (!isObj(y)) { E.push(`${w}.y must be an object`); return; }
+      for (const [ax, o] of [['x', x], ['y', y]]) {
+        key(o.label, `${w}.${ax}.label`); numfmt(o, `${w}.${ax}`);
+        if (o.scale != null && !['lin', 'log'].includes(o.scale)) E.push(`${w}.${ax}.scale is lin or log`);
+        for (const b of ['min', 'max']) {
+          const v = o[b]; if (v == null) continue;
+          if (typeof v === 'string') expr(v, names, `${w}.${ax}.${b}`);
+          else if (!isNum(v)) E.push(`${w}.${ax}.${b} must be a number or an expression`);
+        }
+        if (isNum(o.min) && isNum(o.max) && !(o.min < o.max)) E.push(`${w}.${ax}: min must be below max`);
+        if (o.scale === 'log' && isNum(o.min) && o.min <= 0) E.push(`${w}.${ax}: a log scale needs min > 0`);
+      }
+      const local = [...names];
+      if (p.kind === 'function') {
+        const xv = x.var;
+        if (badName(xv) || seen.has(xv)) E.push(`${w}.x.var: ${qv(xv)} must be a new name for the x axis (not one of the spec's names)`);
+        else local.push(xv);
+        if (x.min == null || x.max == null) E.push(`${w}.x needs min and max`);
+        const pts = p.points;
+        if (pts != null && !(Number.isInteger(pts) && pts >= 2 && pts <= L.points)) E.push(`${w}.points is a whole number 2–${L.points}`);
+      } else if (!series.includes(x.series)) E.push(`${w}.x.series must name a series output of the engine`);
+      let ss = p.series;
+      if (!(Array.isArray(ss) && ss.length >= 1 && ss.length <= L.series)) { E.push(`${w}.series must be a list of 1–${L.series} lines`); ss = []; }
+      ss.forEach((s, j) => {
+        const ws = `${w}.series[${j}]`;
+        if (!isObj(s)) { E.push(`${ws} must be an object`); return; }
+        key(s.label, ws + '.label');
+        if (p.kind === 'function') expr(s.expr, local, ws + '.expr');
+        else if (!series.includes(s.y)) E.push(`${ws}.y must name a series output of the engine`);
+      });
+      let mk = p.marks;
+      if (mk != null && !(Array.isArray(mk) && mk.length <= L.marks)) { E.push(`${w}.marks must be a list of at most ${L.marks} {axis, expr}`); mk = []; }
+      list(mk).forEach((m, j) => {
+        const wm = `${w}.marks[${j}]`;
+        if (!(isObj(m) && (m.axis === 'x' || m.axis === 'y'))) { E.push(`${wm} must be {axis: x | y, expr, label?}`); return; }
+        key(m.label, wm + '.label'); expr(m.expr, names, wm + '.expr');
+      });
+    });
+    if (tables && Object.keys(tables).length) for (const k of [...keys].sort()) {
+      const miss = Object.keys(tables).filter(l => isObj(tables[l]) && !Object.prototype.hasOwnProperty.call(tables[l], k)).sort();
+      if (miss.length) E.push(`spec: the string ${k} is missing in strings.${miss.join(', strings.')}`);
+    }
+    return E;
+  }
+  /** what pack.requires must list: the core, each runtime, each engine other than formula@1 */
+  function needRequires(items) {
+    items = items.filter(isObj); if (!items.length) return [];
+    const rts = [...new Set(items.map(a => a.runtime).filter(r => typeof r === 'string'))].sort().map(r => 'runtime:' + r);
+    const engs = [...new Set(items.filter(a => a.runtime === 'sim-spec@1' && isObj(a.spec)).map(a => 'engine' in a.spec ? a.spec.engine : ACT.DEFAULT_ENGINE).filter(e => typeof e === 'string' && e !== ACT.DEFAULT_ENGINE))].sort().map(e => 'engine:' + e);
+    return ['activities/v1', ...rts, ...engs];
+  }
   function checkBlockAct(b, items) {
     const E = [];
     if (!Object.prototype.hasOwnProperty.call(items, b.activity)) E.push(`interactive: activity ${qv(b.activity)} is not in pack.activities`);
@@ -425,17 +595,47 @@
   }
   function checkSim(e, items) {
     const E = [];
-    if (!Object.prototype.hasOwnProperty.call(items, e.activity)) E.push(`activity ${qv(e.activity)} is not in pack.activities`);
+    const has = Object.prototype.hasOwnProperty.call(items, e.activity);
+    if (!has) E.push(`activity ${qv(e.activity)} is not in pack.activities`);
+    const a = has && isObj(items[e.activity]) ? items[e.activity] : null, rt = a ? a.runtime : null;
+    const spec = a && rt === 'sim-spec@1' && isObj(a.spec) ? a.spec : null;
     const g = e.grade;
-    if (!g || typeof g !== 'object' || !(ACT.GRADE_MODES.has(g.mode) || g.mode === 'checks')) E.push('grade must be {"mode": "reported"} (the activity reports its result)');
-    else if (g.mode === 'checks') E.push('grade.mode "checks" arrives with sim-spec@1 (the expression language, P2); use "reported"');
-    else if (g.pass != null && !(typeof g.pass === 'number' && g.pass > 0 && g.pass <= 1)) E.push('grade.pass must be a number in (0, 1]');
+    if (!isObj(g) || !ACT.GRADE_MODES.has(g.mode)) E.push('grade must be {"mode": "reported"} (the activity reports its result) or {"mode": "checks", "checks": [{"expr": …}]} (sim-spec@1)');
+    else {
+      if (g.pass != null && !(isNum(g.pass) && g.pass > 0 && g.pass <= 1)) E.push('grade.pass must be a number in (0, 1]');
+      if (g.mode === 'reported' && rt === 'sim-spec@1') E.push('a sim-spec@1 activity reports nothing itself: grade it with {"mode": "checks", "checks": […]}');
+      if (g.mode === 'checks') {
+        if (rt != null && !ACT.CHECKS_RUNTIMES.has(rt)) E.push(`grade.mode "checks" needs an activity whose values the app can see (sim-spec@1); ${rt} reports its own result: use "reported"`);
+        const cs = g.checks;
+        if (!(Array.isArray(cs) && cs.length >= 1 && cs.length <= ACT.SPEC_LIM.checks)) E.push(`grade.checks must be a list of 1–${ACT.SPEC_LIM.checks} checks {expr, label?, weight?}`);
+        else {
+          const names = spec ? specNames(spec) : null, tables = a && isObj(a.strings) ? a.strings : {};
+          cs.forEach((c, i) => {
+            const w = `grade.checks[${i}]`;
+            if (!isObj(c)) { E.push(`${w} must be an object {expr, label?, weight?}`); return; }
+            const m = exprProblem(c.expr, names, w + '.expr'); if (m) E.push(m);
+            if (c.weight != null && !(isNum(c.weight) && c.weight > 0)) E.push(`${w}.weight must be a number > 0`);
+            if (c.label != null) {
+              if (!(typeof c.label === 'string' && ACT.KEY_RE.test(c.label))) E.push(`${w}.label must be a key of the activity's string tables`);
+              else { const miss = Object.keys(tables).filter(l => isObj(tables[l]) && !Object.prototype.hasOwnProperty.call(tables[l], c.label)).sort(); if (miss.length) E.push(`${w}.label: the string ${c.label} is missing in strings.${miss.join(', strings.')}`); }
+            }
+          });
+        }
+      }
+    }
     const t = e.task;
     if (t != null) {
       if (typeof t !== 'object' || Array.isArray(t)) E.push('task must be an object {seed, params}');
       else {
         const sd = t.seed ?? 'auto'; if (!(sd === 'auto' || (Number.isInteger(sd) && sd >= 0))) E.push('task.seed is "auto" (a new one each attempt) or a whole number');
         if (t.params != null && (typeof t.params !== 'object' || Array.isArray(t.params))) E.push('task.params must be an object');
+        else if (spec && t.params) {
+          const consts = isObj(spec.consts) ? spec.consts : {};
+          for (const [k, v] of Object.entries(t.params)) {
+            if (!Object.prototype.hasOwnProperty.call(consts, k)) E.push(`task.params.${k}: not a constant of the spec (a sim-spec@1 task sets only the spec's consts)`);
+            else if (!isNum(v)) E.push(`task.params.${k} must be a number`);
+          }
+        }
       }
     }
     if (e.hints != null && !(Array.isArray(e.hints) && e.hints.length <= ACT.HINTS_MAX && e.hints.every(isStr))) E.push(`hints must be a list of at most ${ACT.HINTS_MAX} texts`);
@@ -456,7 +656,7 @@
         if (typeof aid !== 'string' || !ACT.ID_RE.test(aid)) { E.push(`activity ${qv(aid)}: id must be lower-case letters, digits and - (2–61)`); continue; }
         if (Object.prototype.hasOwnProperty.call(items, aid)) { E.push(`activity ${aid}: duplicate id`); continue; }
         items[aid] = a; const w = `activity ${aid}`, rt = a.runtime;
-        if (Object.prototype.hasOwnProperty.call(ACT.LATER, rt)) E.push(`${w}: runtime ${rt} arrives in a later version of the app (${ACT.LATER[rt]}); use html-app@1 for now`);
+        if (Object.prototype.hasOwnProperty.call(ACT.LATER, rt)) E.push(`${w}: runtime ${rt} arrives in a later version of the app (${ACT.LATER[rt]}); use html-app@1 or sim-spec@1 for now`);
         else if (!ACT.RUNTIMES.has(rt)) E.push(`${w}: unknown runtime ${qv(rt)} (one of ${[...ACT.RUNTIMES].sort().join(', ')})`);
         if (!(Number.isInteger(a.stateVersion) && a.stateVersion >= 1)) E.push(`${w}: stateVersion must be a whole number >= 1`);
         const caps = a.capabilities ?? [];
@@ -472,6 +672,9 @@
             if (a.sha256 != null && (!/^[0-9a-f]{64}$/.test(String(a.sha256)) || (nodeSha && nodeSha(a.html) !== a.sha256))) E.push(`${w}: sha256 does not match the bundle`);
             if (a.bytes != null && a.bytes !== utf8(a.html)) E.push(`${w}: bytes does not match the bundle`);
           }
+        } else if (rt === 'sim-spec@1') {
+          if (!('spec' in a)) E.push(`${w}: the spec (activities/${aid}/spec.json) is missing`);
+          else E.push(...checkSimSpec(a.spec, isObj(a.strings) ? a.strings : null).map(m => `${w}: ${m}`));
         }
         const st = a.strings;
         if (!st || typeof st !== 'object' || Array.isArray(st) || !Object.keys(st).length) E.push(`${w}: strings {locale: {key: text}} are required (an activity shows no words of its own)`);
@@ -497,7 +700,7 @@
     for (const aid of Object.keys(items)) if (!used.has(aid)) W.push(`activity ${aid}: not used by any interactive block or sim exercise`);
     if (Object.keys(items).length) {
       const req = Array.isArray(p.requires) ? p.requires : [];
-      const need = ['activities/v1', ...[...new Set(Object.values(items).map(a => a.runtime).filter(r => typeof r === 'string'))].sort().map(r => 'runtime:' + r)];
+      const need = needRequires(Object.values(items));
       const miss = need.filter(x => !req.includes(x)); if (miss.length) E.push(`pack.requires must list ${miss.join(', ')} (make_pack.py writes it)`);
     }
     return { errors: E, warnings: W };
@@ -653,5 +856,5 @@
     return { errors: E, warnings: W, counts: { entries: entries.length, senses, stale, sections: Object.keys(secs).length, previews, anchors: anchors.length } };
   }
   /* i18n-ignore-end */
-  root.NoemaPackCheck = { checkPack, checkActivities, lintHtml, ACTIVITY_RULES: ACT, checkExercise, checkBalance, checkQuality, checkBridge, checkTranslation, requiredLocales, RULES, QUALITY, LANGS, TYPES, BLOCKS, ID_RE };
+  root.NoemaPackCheck = { checkPack, checkActivities, checkSimSpec, specNames, needRequires, lintHtml, ACTIVITY_RULES: ACT, checkExercise, checkBalance, checkQuality, checkBridge, checkTranslation, requiredLocales, RULES, QUALITY, LANGS, TYPES, BLOCKS, ID_RE };
 })(typeof window !== 'undefined' ? window : globalThis);

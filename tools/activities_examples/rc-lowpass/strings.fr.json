@@ -1,0 +1,8 @@
+{"title": "Filtre passe-bas RC",
+ "intro": "Modifiez R et C : la fréquence de coupure se déplace le long de la courbe de gain, et la réponse à un échelon devient plus rapide ou plus lente.",
+ "resistance": "Résistance R", "capacitance": "Capacité C",
+ "fcLabel": "Fréquence de coupure fc = 1/(2πRC)", "tauLabel": "Constante de temps τ = RC", "errLabel": "Écart par rapport à la fréquence visée",
+ "bodeTitle": "Gain du filtre en fonction de la fréquence (diagramme de Bode)", "frequency": "Fréquence", "gain": "Gain", "gainLine": "gain du filtre",
+ "fcMark": "fc", "targetMark": "cible", "minus3": "−3 dB",
+ "stepTitle": "Sortie quand l’entrée passe d’un coup de 0 à 1 V", "time": "Temps", "voltage": "Sortie", "tauMark": "τ",
+ "checkFc": "La fréquence de coupure est assez proche de la cible.", "checkC": "C vaut toujours 100 nF."}
