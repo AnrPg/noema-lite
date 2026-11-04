@@ -250,7 +250,7 @@ ${describe(inv).slice(0, 60000)}
     const like = likeOn(have);
     const onMap = (s, x, how) => {
       const m = REF_AT.exec(x); if (!m) return null;
-      if (!have[m[1]]) { const l = like(m[1]); e.push(`step ${s.ref}: ${how} "${x}" is not a step of this Roadmap${l ? ` — did you mean ${l}?` : ''} (noema_roadmap_map lists every step id)`); return null; }
+      if (!Object.hasOwn(have, m[1])) { const l = like(m[1]); e.push(`step ${s.ref}: ${how} "${x}" is not a step of this Roadmap${l ? ` — did you mean ${l}?` : ''} (noema_roadmap_map lists every step id)`); return null; }
       return m[1];
     };
     const ext = [];   // links between the new part and the map: { from, to } with a new step's ref on one side
@@ -305,7 +305,7 @@ ${describe(inv).slice(0, 60000)}
     const id = (x, i, side, what) => {
       const v = String(x ?? '').trim(), m = REF_AT.exec(v), k = m ? m[1] : v;
       if (!k) { e.push(`${what} ${i + 1}: "${side}" is missing — "@<step id>" from noema_roadmap_map`); return null; }
-      if (!have[k]) { const l = like(k); e.push(`${what} ${i + 1}: ${side} "${v}" is not a step of this Roadmap${l ? ` — did you mean ${l}?` : ''} (noema_roadmap_map lists every step id)`); return null; }
+      if (!Object.hasOwn(have, k)) { const l = like(k); e.push(`${what} ${i + 1}: ${side} "${v}" is not a step of this Roadmap${l ? ` — did you mean ${l}?` : ''} (noema_roadmap_map lists every step id)`); return null; }
       return k;
     };
     const has = (a, b, list = edges) => list.some(x => x.from === a && x.to === b), key = (a, b) => a + '→' + b;
@@ -330,7 +330,7 @@ ${describe(inv).slice(0, 60000)}
       return { errors: [`these links form a cycle — a step cannot come before itself${cyc.length ? '; the cycle runs through ' + cyc.slice(0, 8).join(', ') : ''}. Check the direction: "from" is the prerequisite, "to" the step that builds on it`] };
     }
     if (!add.length && !rem.length) return { entry: null, already };
-    return { entry: { v: 1, kind: 'link', id: 'l' + now.toString(36), links: add, remove: rem, at: new Date(now).toISOString() }, already };
+    return { entry: { v: 1, kind: 'link', id: 'l' + now.toString(36) + Math.random().toString(36).slice(2, 6), links: add, remove: rem, at: new Date(now).toISOString() }, already };
   }
   /* i18n-ignore-end */
   /* i18n-ignore-start — the brief of the subject (for Claude) */

@@ -95,6 +95,9 @@ function unit() {
   const mx = J.merged(mk(), [{ key: J.inboxKey('cx', 'a1'), value: JSON.stringify(lk.entry) }, { key: J.inboxKey('cx', 'a2'), value: JSON.stringify(rm.entry) }]);
   ok(mx.edges.some(e => e.from === 'queues' && e.to === 'resilience') && mx.edges.some(e => e.from === 'queues' && e.to === 'vendors') && !mx.edges.some(e => e.from === 'resilience' && e.to === 'vendors'), 'merged(): the connector sees the links still in the inbox');
   ok(J.linkProblems({ ...mk(), nodes: { queues: {} } }, lk.entry).some(x => /does not have/.test(x)), 'a copy without one of the steps yet: the entry waits');
+  ok(/"@constructor" is not a step/.test(P.linkFromClaude(cx, { links: [{ from: '@constructor', to: '@vendors' }] }).errors?.[0] || ''), 'an id that is only an inherited property (@constructor) is not a step');
+  const undo = J.merged(mk(), [{ key: 'a', value: JSON.stringify(lk.entry) }, { key: 'b', value: JSON.stringify({ v: 1, kind: 'link', id: 'lundo', links: [], remove: [{ from: 'queues', to: 'resilience' }] }) }]);
+  ok(J.linkProblems(undo, lk.entry)[0] === 'applied' && !undo.edges.some(e => e.from === 'queues' && e.to === 'resilience'), 'an add undone by a later removal is never replayed (its receipt): the removed link stays removed');
   return { good };
 }
 

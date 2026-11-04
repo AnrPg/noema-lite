@@ -866,7 +866,7 @@ async function callTool(name, args, ctx) {
       const pk = await pickCurriculum(token, String(args?.curriculum_id || '').trim(), { any: true }); if (pk.error) return pk.error.startsWith('Which') ? text(pk.error) : fail(pk.error);
       const c = await curState(token, pk.c, uid);
       if (c.shared?.role === 'member' && !c.shared.ended) return fail(`“${c.title || c.goal}” is shared with the learner by ${c.shared.ownerName || 'its owner'}: its map is the owner's. Only the owner can change its links.`);
-      if (CJ().work(c).graph) return fail(`The map of “${c.title || c.goal}” is still being built (noema_curriculum_task): finish it first, then add the links.`);
+      if (CJ().work(c).graph || ['dag', 'audit', 'expand'].includes(c.stage)) return fail(`The map of “${c.title || c.goal}” is still being built: finish it first, then add the links.`);
       let d; try { d = globalThis.NoemaLLM.parseJSON(String(args?.links_json || '')); } catch (e) { return fail('links_json is not valid JSON — send ONE JSON object { "links": [...], "remove": [...] } (no prose around it).'); }
       const r = SP().linkFromClaude(c, d);
       if (r.errors) return fail(`Your links have ${r.errors.length} problem(s) — fix ALL of them and call noema_link_roadmap_steps again with the complete corrected object (noema_roadmap_map lists the steps and their ids):\n- ${r.errors.slice(0, 40).join('\n- ')}`);

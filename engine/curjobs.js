@@ -233,7 +233,9 @@
   function linkProblems(c, e) {
     const add = e.links || [], rem = e.remove || [], has = (x, list) => list.some(y => y.from === x.from && y.to === x.to), p = [];
     if (!add.length && !rem.length) return ['nothing to change'];
-    for (const x of [...add, ...rem]) if (!c.nodes?.[x.from] || !c.nodes?.[x.to]) p.push(`a link to a step this copy does not have (${x.from} → ${x.to})`);
+    if (e.id && (c.linksApplied || []).includes(e.id)) return ['applied'];   // its receipt: never replayed (a later entry may have undone it)
+    const own = id => !!c.nodes && Object.hasOwn(c.nodes, id);
+    for (const x of [...add, ...rem]) if (!own(x.from) || !own(x.to)) p.push(`a link to a step this copy does not have (${x.from} → ${x.to})`);
     if (p.length) return p;
     if (add.every(x => has(x, c.edges || [])) && !rem.some(x => has(x, c.edges || []))) return ['applied'];
     const after = [...(c.edges || []).filter(x => !has(x, rem)), ...add.filter(x => !has(x, c.edges || []))];
@@ -245,9 +247,10 @@
       recomputed. Nothing else changes — no step is re-planned and no subject or progress is touched. */
   function link(c, e) {
     const has = (x, list) => list.some(y => y.from === x.from && y.to === x.to);
-    const rem = (e.remove || []).filter(x => has(x, c.edges || [])), add = (e.links || []).filter(x => !has(x, c.edges || []) && c.nodes[x.from] && c.nodes[x.to]);
+    const rem = (e.remove || []).filter(x => has(x, c.edges || [])), add = (e.links || []).filter(x => !has(x, c.edges || []) && Object.hasOwn(c.nodes, x.from) && Object.hasOwn(c.nodes, x.to));
     c.edges = [...(c.edges || []).filter(x => !has(x, rem)), ...add.map(x => ({ from: x.from, to: x.to, why: x.why || '' }))];
     c.paths = { minimal: c.paths?.minimal || [], deep: C().order(c) };
+    if (e.id) c.linksApplied = [...(c.linksApplied || []), e.id].slice(-200);
     (c.log = c.log || []).push({ t: Date.now(), m: '🔗 ' + rt('roadmap.jobs.linksAdded', { added: add.length, removed: rem.length }), via: 'claude-app' });
     return { added: add.length, removed: rem.length };
   }
