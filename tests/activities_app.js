@@ -233,6 +233,22 @@ async function simSpec(p, ctx, E) {
   ok(dk2.inline === 0, `the engine with workerSource ran in a Worker (inline runs: ${dk2.inline})`);
   await p.locator('main input.sim-num[data-param="tau"]').fill('2.5'); await p.locator('main input.sim-num[data-param="tau"]').press('Tab');
   ok(await until(() => p.evaluate(() => /^0[.,]677/.test(document.querySelector('main .sim-ro dd')?.textContent || ''))), 'a new input runs the engine again (τ = 2.5 s → 0.677 V)');
+  // the checks grader never reads older results: while the engine still computes the latest inputs, values() is null
+  const stale = await p.evaluate(async () => {
+    const src = "self.noemaEngine = { create: function () { return { run: function (x) { var t0 = Date.now(); while (Date.now() - t0 < 400) { } return { vEnd: x.tau }; } }; } };";
+    ACT.registerEngine({ id: 'slow-test@1', workerSource: src, create() { const f = {}; (new Function('self', src))(f); return f.noemaEngine.create(); } });
+    const a = JSON.parse(JSON.stringify(ACT.ITEMS['rc-lowpass'])); a.id = 'slow';
+    a.spec = { format: 'noema.sim-spec/v1', engine: 'slow-test@1', model: {}, params: [{ id: 'tau', kind: 'number', label: 'resistance', min: 0, max: 10, default: 1 }], outputs: [{ id: 'vEnd', kind: 'scalar' }], readouts: [{ label: 'voltage', expr: 'vEnd' }] };
+    const box = document.createElement('div'); document.body.append(box); const msgs = [];
+    const port = ACT.runtime('sim-spec@1').mount(box, { act: a, init: { locale: 'en', stateVersion: 1 }, onMessage: m => msgs.push(m), onFail: c => msgs.push({ fail: c }) });
+    const until = async f => { for (let i = 0; i < 60; i++) { if (f()) return true; await new Promise(r => setTimeout(r, 50)); } return false; };
+    const first = await until(() => port.values()?.vEnd === 1);
+    const inp = box.querySelector('input[data-param="tau"]'); inp.value = '7'; inp.dispatchEvent(new Event('input', { bubbles: true })); inp.dispatchEvent(new Event('change', { bubbles: true }));
+    await new Promise(r => setTimeout(r, 60)); const during = port.values();
+    const after = await until(() => port.values()?.vEnd === 7);
+    port.close(); box.remove(); return { first, during, after, fails: msgs.filter(m => m.fail) };
+  });
+  ok(stale.first && stale.during === null && stale.after && !stale.fails.length, `while the engine computes the latest inputs the checks grader gets nothing (no grading of older results) ${JSON.stringify(stale)}`);
   await mountItem('decay-bad', ENG + " a.spec.model.kind = 'other';"); await wait(400);
   st = await fbState();
   ok(!st.sim && st.fb && /could not start/.test(st.note), "the engine's own check refuses the spec: the fallback");

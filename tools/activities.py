@@ -313,7 +313,7 @@ def check_spec(spec, tables=None, engines=None):
         if not (isinstance(k, str) and KEY_RE.match(k)): E.append(f"{where} must be a key of the activity's string tables"); return
         keys.add(k)
     def name(n, where):
-        if not (isinstance(n, str) and NAME_RE.match(n)) or n in SX.CONSTS or SX.check(n):
+        if not (isinstance(n, str) and NAME_RE.match(n)) or n in SX.CONSTS or n in ('true', 'false') or SX.check(n):
             E.append(f"{where}: {n!r} is not a usable name (a letter or _, then letters, digits, _; not pi, e or a reserved word)"); return False
         if n in seen: E.append(f"{where}: the name {n} is used twice"); return False
         seen.add(n); return True
@@ -404,7 +404,7 @@ def check_spec(spec, tables=None, engines=None):
         local = list(names)
         if p["kind"] == "function":
             xv = x.get("var")
-            if not (isinstance(xv, str) and NAME_RE.match(xv)) or xv in SX.CONSTS or SX.check(xv) or xv in seen: E.append(f"{w}.x.var: {xv!r} must be a new name for the x axis (not one of the spec's names)")
+            if not (isinstance(xv, str) and NAME_RE.match(xv)) or xv in SX.CONSTS or xv in ('true', 'false') or SX.check(xv) or xv in seen: E.append(f"{w}.x.var: {xv!r} must be a new name for the x axis (not one of the spec's names)")
             else: local.append(xv)
             if x.get("min") is None or x.get("max") is None: E.append(f"{w}.x needs min and max")
             pts = p.get("points")
