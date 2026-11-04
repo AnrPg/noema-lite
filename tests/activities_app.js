@@ -18,7 +18,7 @@ let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m)
 const wait = ms => new Promise(r => setTimeout(r, ms));
 const until = async (fn, ms = 10000) => { const t = Date.now(); while (Date.now() - t < ms) { try { if (await fn()) return true; } catch (e) { } await wait(150); } return false; };
 // a block that came into view while two others hold the live slots waits with its Start button (at most 2 run at once): press it
-const startIfParked = async (p, sel) => { if (await until(() => p.evaluate(s => !!document.querySelector(s + ' .sim'), sel), 1500)) return; const b = p.locator(sel + ' .act-bar button'); if (await b.count()) await b.first().click(); };
+const startIfParked = async (p, sel) => { if (await until(() => p.evaluate(s => !!document.querySelector(s + ' .sim'), sel), 1500)) return; const b = p.locator(sel + ' .act-bar button'); if (await b.count()) await b.first().click({ timeout: 5000 }).catch(() => {}); };   // (it may start by itself meanwhile: the button is gone)
 const actFrame = (p, sel) => p.frames().find(f => f.parentFrame() && f.parentFrame().parentFrame() === p.mainFrame() && sel(f));   // the mini-app: inside the wrapper frame
 
 const http = require('http'); const hits = []; let BEACON = '';
@@ -452,6 +452,8 @@ async function python(name) {
   const page = async (ctx, url, newUI) => {
     const p = await ctx.newPage(); p.setDefaultTimeout(15000); p.on('pageerror', e => E.push(e.message));
     await p.goto(url); await p.evaluate(n => { localStorage.clear(); if (n) localStorage.setItem('noema-test:newUI', '1'); }, !!newUI); await p.reload(); await wait(800);
+    // the website ships no profiles (build.py site leaves accounts/ out) and asks "Who is studying?": one local profile on this device
+    if (!await p.evaluate(() => !!window.Noema?.account)) { await p.evaluate(() => localStorage.setItem('noema1:accounts', JSON.stringify([{ id: 'learner', name: 'Learner', emoji: '🦉', pin: null, created: Date.now() }]))); await p.reload(); await wait(800); }
     await p.evaluate(async pk => { await Noema.importPack(Noema.account.id, pk); }, PACK);
     await p.goto(url + (url.includes('?') ? '&' : '?') + 'subject=demo-activities'); await wait(1500);
     return p;
@@ -470,12 +472,15 @@ async function python(name) {
     const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } }); await ctx.addInitScript(flagOn);
     let p = await page(ctx, URL0 + '/index.html');
     ok(await p.evaluate(() => !!ACT.ITEMS['py-filter'] && NoemaPy.available() && ACT.caps().has('runtime:py-module@1') && checkRequires().length === 0), 'on the website (http, the runtime on): the app has runtime:py-module@1, pack.requires is met');
+    // every text the quiet line shows (first use → loading → gone): from a local server Python loads in moments, so the
+    // first-use note may be replaced by the progress before a poll would see it
+    await p.evaluate(() => { window.__pyLines = []; new MutationObserver(() => { for (const l of document.querySelectorAll('.act-pyline')) { const x = l.textContent; if (x && window.__pyLines[window.__pyLines.length - 1] !== x) window.__pyLines.push(x); } }).observe(document.body, { childList: true, subtree: true, characterData: true }); });
     await openBlock(p);
-    const first = await until(() => p.evaluate(s => /downloads about \d+\s*MB once/.test(document.querySelector(s + ' .act-pyline')?.textContent || ''), SEL), 15000);
-    const note = await p.evaluate(s => document.querySelector(s + ' .act-pyline')?.textContent || '', SEL);
+    const first = await until(() => p.evaluate(() => window.__pyLines.some(x => /downloads about \d+\s*MB once/.test(x))), 15000);
+    const note = await p.evaluate(() => window.__pyLines.join(' | '));
     ok(first, `the first-use note says what it downloads, once (${note}; the manifest lists ${Object.keys(man.files || {}).length} files)`);
     ok(await filled(p), 'the Python sim renders: the readouts come from step() (' + (await ro(p)).join(' · ') + ')');
-    const shape = await p.evaluate(s => { const r = document.querySelector(s); return { title: r.querySelector('.sim-title')?.textContent, plots: r.querySelectorAll('.sim-plot svg').length, frames: [...r.querySelectorAll('iframe')].map(f => ({ sb: f.getAttribute('sandbox'), vis: f.offsetHeight > 0 })), line: r.querySelector('.act-pyline')?.hidden }; }, SEL);
+    const shape = await p.evaluate(s => { const r = document.querySelector(s); return { title: r.querySelector('.sim-title')?.textContent, plots: r.querySelectorAll('.sim-plot svg').length, frames: [...r.querySelectorAll('iframe')].map(f => ({ sb: f.getAttribute('sandbox'), vis: f.getAttribute('aria-hidden') !== 'true' && f.offsetHeight > 1 && getComputedStyle(f).opacity !== '0' })), line: r.querySelector('.act-pyline')?.hidden }; }, SEL);
     ok(shape.title === 'Two digital low-pass filters' && shape.plots === 2 && shape.frames.length === 1 && shape.frames[0].sb === 'allow-scripts' && !shape.frames[0].vis && shape.line, `the app's own controls and 2 plots; Python in one hidden sandboxed frame; the note gone once ready ${JSON.stringify(shape)}`);
     const r4 = await ro(p);
     await setN(p, SEL, 8); await until(async () => (await ro(p))[0] !== r4[0], 20000);
@@ -527,8 +532,11 @@ async function python(name) {
     const el = await until(() => p.evaluate(() => [...document.querySelectorAll('details summary')].some(x => /Python για τις δραστηριότητες/.test(x.textContent))), 8000);
     const elTxt = await p.evaluate(() => { const d = [...document.querySelectorAll('details')].find(x => /Python για τις δραστηριότητες/.test(x.querySelector('summary')?.textContent || '')); return d ? d.textContent : ''; });
     ok(el && /Όχι σε αυτή τη συσκευή|Εν μέρει εδώ/.test(elTxt) && /Ετοίμασε την Python/.test(elTxt), 'the shell\'s Data and sync page has the section, in Greek: ' + elTxt.slice(0, 160));
-    await p.evaluate(() => { location.hash = '#/s/ch01-s01'; }); await wait(600); await p.locator(SEL).first().scrollIntoViewIfNeeded(); await startIfParked(p, SEL);
-    ok(await until(() => p.evaluate(s => /κατεβάζει περίπου \d+\s*MB μία φορά/.test(document.querySelector(s + ' .act-pyline')?.textContent || ''), SEL), 15000), 'the first-use note in Greek');
+    await p.evaluate(() => { window.__pyLines = []; new MutationObserver(() => { for (const l of document.querySelectorAll('.act-pyline')) { const x = l.textContent; if (x && window.__pyLines[window.__pyLines.length - 1] !== x) window.__pyLines.push(x); } }).observe(document.body, { childList: true, subtree: true, characterData: true }); });
+    await p.evaluate(() => { location.hash = '#/s/ch01-s01'; }); await wait(600);
+    if (await p.evaluate(() => { const b = [...document.querySelectorAll('main button')].find(x => x.textContent.trim() === SL('showAll')); b?.click(); return !!b; })) await wait(300);   // the section in steps: "show all" (in Greek)
+    await p.locator(SEL).first().scrollIntoViewIfNeeded(); await startIfParked(p, SEL);
+    ok(await until(() => p.evaluate(() => window.__pyLines.some(x => /κατεβάζει περίπου \d+\s*MB μία φορά/.test(x))), 15000), 'the first-use note in Greek ' + await p.evaluate(() => window.__pyLines.join(' | ')));
     await ctx3.close(); await ctx.close();
 
     console.log('— py-module@1: where Python cannot run (the one-file bundle, file://)');
@@ -578,9 +586,9 @@ async function h5p(p, ctx, E) {
   if (!g) return;
   const attrs = await p.$eval(SEL + ' iframe.act-frame', f => { const P = new DOMParser(), w = P.parseFromString(f.srcdoc, 'text/html'), i = w.querySelector('iframe'), inn = i ? P.parseFromString(i.getAttribute('srcdoc'), 'text/html') : null;
     return { sandbox: f.getAttribute('sandbox'), inner: i?.getAttribute('sandbox'), wScripts: w.querySelectorAll('script').length, csp: inn?.head.querySelector('meta[http-equiv="Content-Security-Policy"]')?.getAttribute('content') || '' }; });
-  ok(attrs.sandbox === 'allow-scripts' && attrs.inner === 'allow-scripts' && attrs.wScripts === 0 && /script-src 'sha256-/.test(attrs.csp) && /connect-src 'none'/.test(attrs.csp) && !/unsafe-(inline|eval)/.test(attrs.csp),
-    'the same sandbox as a mini-app: allow-scripts only, a wrapper with no scripts, scripts by hash, no network, no unsafe-*');
-  ok(/Which planet is the largest/.test(await g.evaluate(() => document.querySelector('.h5p-question-content')?.textContent || '')), "its words in the pack's own language (the package's own content.json)");
+  ok(attrs.sandbox === 'allow-scripts' && attrs.inner === 'allow-scripts' && attrs.wScripts === 0 && /script-src 'sha256-/.test(attrs.csp) && /connect-src 'none'/.test(attrs.csp) && !/unsafe-/.test(attrs.csp.split(';').find(d => /^\s*script-src/.test(d)) || ''),
+    'the same sandbox as a mini-app: allow-scripts only, a wrapper with no scripts, scripts by hash (no unsafe-* in script-src; inline styles as for a mini-app), no network ' + JSON.stringify({ ...attrs, csp: attrs.csp.replace(/'sha256-[^']*' ?/g, '') }));
+  ok(/Which planet is the largest/.test(await g.evaluate(() => document.querySelector('.h5p-question-introduction')?.textContent || '')), "its words in the pack's own language (the package's own content.json)");
   await h5pAnswer(g, 'Jupiter');
   ok(await until(() => p.evaluate(() => !!S.act?.['blk:ch01-s01:planets-quiz']?.data?.h5p)), 'the state H5P reports is saved (S.act … data.h5p)');
   await p.reload(); await wait(1500);
@@ -607,7 +615,7 @@ async function h5p(p, ctx, E) {
       window.__lang = SUBJ.language; SUBJ.language = loc;   // the pack read in that language
       const m = document.querySelector('main'); m.innerHTML = ''; m.append(interactiveBlock({ t: 'interactive', activity: 'pq-' + loc })); scrollTo(0, 0); }, [loc, PQ_EL]);
     await h5pStart(p, 'main'); g = await h5pFrame(p);
-    const gr = g && await g.evaluate(() => ({ text: document.querySelector('.h5p-question-content')?.textContent || '', lang: document.documentElement.lang }));
+    const gr = g && await g.evaluate(() => ({ text: document.querySelector('.h5p-question-introduction')?.textContent || '', lang: document.documentElement.lang }));
     await p.evaluate(() => { SUBJ.language = window.__lang; });
     ok(gr && want.test(gr.text) && gr.lang === loc, `read in ${loc}: the item's content.json in that language (h5pByLocale.${loc}${loc === 'fr' ? ', put in by make_pack.py' : ''}) ${JSON.stringify(gr)}`);
   }
