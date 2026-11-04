@@ -192,9 +192,14 @@ const CONFIG = extra => `(() => { let c; Object.defineProperty(window, 'NOEMA_CO
     await ctx.route(/fonts\.(googleapis|gstatic)\.com/, r => r.fulfill({ status: 200, body: '' }));
     await ctx.addInitScript(CONFIG({ pseudoLocales: true, supabaseUrl: BASE, supabaseKey: 'sb_publishable_test', siteUrl: BASE, ...(opts.config || {}) }));
     await ctx.addInitScript(OBSERVE);
+    // what the app tries to copy: when the clipboard is refused, it shows the text in a prompt to copy by hand. That
+    // prompt's value is the copied payload (a link, a message for the learner's Claude — English on purpose), not interface text
+    const copied = new Set();
+    await ctx.exposeBinding('__i18nCopied', (src, t) => { copied.add(String(t)); });
+    await ctx.addInitScript(() => { const c = navigator.clipboard, w = c?.writeText?.bind(c); if (w) c.writeText = t => { try { window.__i18nCopied(String(t)); } catch (e) { } return w(t); }; });
     const page = await ctx.newPage(); page.setDefaultTimeout(4000);
     page.errs = []; page.on('pageerror', e => page.errs.push(e.message));
-    page.on('dialog', async d => { check({ text: d.message() + (d.defaultValue() ? ' ' + d.defaultValue() : ''), kind: 'dialog:' + d.type(), where: 'window.' + d.type() }); await (page.dialogAnswer ? d.accept(page.dialogAnswer) : d.dismiss()); });
+    page.on('dialog', async d => { const v = d.defaultValue(), payload = d.type() === 'prompt' && v && copied.has(v); check({ text: d.message() + (v && !payload ? ' ' + v : ''), kind: 'dialog:' + d.type(), where: 'window.' + d.type() }); await (page.dialogAnswer ? d.accept(page.dialogAnswer) : d.dismiss()); });
     return page;
   }
   /** One surface: do something, wait, collect what appeared (a step that hangs is abandoned after 12 s). */

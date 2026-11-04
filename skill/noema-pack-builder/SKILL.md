@@ -257,6 +257,10 @@ message) **grows that Roadmap by a new part — never a second Roadmap** (flow 9
 4. Go on as in *Curricula* below: `noema_curriculum_task` hands you the chapter plans of the new steps, then each step. In
    each new step's knowledge map, points the map already teaches go to `taughtIn` (exhaustive, never re-taught).
 5. Translate the new steps' titles and summaries with `noema_save_roadmap_translation` (the tool's answer lists them).
+6. A missing link between two steps that are **already on the map** (e.g. the new material shows an older step builds on
+   another): `noema_link_roadmap_steps(curriculum_id, links_json)` with `{ "links": [{ "from": "@prerequisite", "to":
+   "@dependent", "why": "…" }], "remove": [{ "from": "@a", "to": "@b" }] }` (`remove` optional, for a wrong link). Prepared
+   steps may be the `to` side: only the map changes (order, arrows), never a subject or the learner's progress.
 
 ## Curricula: steps, maps and chapter plans (noema-lite connector)
 A noema-lite **curriculum** is a map of steps; every step becomes a subject pack. When the learner asks you to work on one

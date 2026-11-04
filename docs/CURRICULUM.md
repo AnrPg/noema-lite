@@ -197,7 +197,9 @@ usage limits may spread a big one over days).
   always sees one or the other). A finished step: the app downloads the pack (pictures embedded), marks the step ⚡ and
   syncs the file index the connector wrote. Inbox rows are never mirrored into the device's KV. A **new part** of the
   Roadmap (`noema_extend_roadmap`, `{ kind: 'extend' }`) arrives the same way: its steps, links and `c.parts` entry
-  (docs/FROM_SOURCES.md §6).
+  (docs/FROM_SOURCES.md §6). So do **links between steps already on the map** (`noema_link_roadmap_steps`,
+  `{ kind: 'link', links, remove }`, 🔗 a toast): edges added (with their `why`) or removed and the study order recomputed —
+  a prepared step may get a new prerequisite, because only the map changes (no re-plan, no pack, no progress).
 * **Each queued step is prepared once.** `noema_curriculum_task` hands a step out only after *claiming* it for that run —
   an atomic KV row `a:curclaim:<cid>:<nid>` (insert-if-absent; an expired one is taken over by a conditional update), so
   overlapping scheduled runs and two runs asking at the same moment always get different steps. The claim ends when the

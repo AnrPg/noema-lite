@@ -82,7 +82,16 @@ material for a Roadmap that exists is a **new part** of it, never a second Roadm
    `prepare: false`, the new steps queued in study order. A finished Roadmap goes back to `stage: 'plan'`; nothing already
    planned or prepared changes. An entry is applied once (`c.parts` holds its id); one this copy cannot apply yet (a step it
    links to has not synced) waits up to a week.
-4. In the app, the map's ⋮ → **Add a part with Claude** copies the message for a Claude chat (`NoemaCurJobs.growMessage`);
+4. **`noema_link_roadmap_steps(curriculum_id, links_json)`** — a missing link between two steps that are **both on the
+   map already** (often found while growing it: the new part's material shows that an older step builds on another one).
+   `{ "links": [{ "from": "@prerequisite", "to": "@dependent", "why": "…" }], "remove": [{ "from": "@a", "to": "@b" }] }`
+   (`remove` optional, for a wrong link). Unlike `before`, **prepared steps may be the `to` side**: a link changes only
+   the map (study order, arrows, “after …” lines), never a step's subject, plan or the learner's progress. All problems
+   come back at once: an unknown `@id` (with *did you mean*), from = to, a cycle, a removed link that is not there; a link
+   already there is reported, not refused. Refused for a member of a shared Roadmap and while the map is still being
+   built. `NoemaSourcePlan.linkFromClaude` → inbox entry `{ kind: 'link', links, remove }`; `NoemaCurJobs.link` applies it
+   in the app (🔗 a toast) and in the connector's view (`merged`, so `noema_roadmap_map` shows it before the app synced).
+5. In the app, the map's ⋮ → **Add a part with Claude** copies the message for a Claude chat (`NoemaCurJobs.growMessage`);
    the learner pastes it with the new files. Nothing else on the map changes: the new steps simply appear on it.
 
 ## Tests
@@ -92,4 +101,6 @@ made from it (only the chapter planner runs; files and pages on their steps), on
 Shelf; the plan is the brief), the Claude app by copy and paste, and the connector's `noema_create_roadmap` (a wrong Roadmap
 sent back, a good one stored, its chapter-plan task naming the chat's files, the app picking it up on sync), then a new part
 (`noema_roadmap_map`, a part with an unknown `@id` / a duplicate step / no join sent back, a good one in the inbox and in the
-connector's view, its plan task naming the part's chat, the app adding it on sync).
+connector's view, its plan task naming the part's chat, the app adding it on sync), then links between steps on the map
+(`noema_link_roadmap_steps`: one to a prepared step, a duplicate, an unknown `@id`, a cycle, a removal, a shared map's
+member refused, the entry in the connector's view and applied by the app's sync without touching the step's subject).

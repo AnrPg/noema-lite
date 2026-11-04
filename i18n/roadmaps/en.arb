@@ -476,6 +476,20 @@
       }
     }
   },
+  "roadmap.jobs.linksAdded": "Links between steps changed: {added, plural, one {# added} other {# added}}, {removed, plural, one {# removed} other {# removed}}",
+  "@roadmap.jobs.linksAdded": {
+    "description": "Toast and Roadmap log line: the learner's Claude added prerequisite links between steps already on this Roadmap (and maybe removed wrong ones). Only the map's arrows and order change; no subject or progress changes.",
+    "placeholders": {
+      "added": {
+        "type": "int",
+        "example": "3"
+      },
+      "removed": {
+        "type": "int",
+        "example": "0"
+      }
+    }
+  },
   "roadmap.jobs.notHere": "This Roadmap is not on this device.",
   "@roadmap.jobs.notHere": {
     "description": "Error when the learner pastes Claude’s answer for a Roadmap that is not on this device."

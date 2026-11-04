@@ -226,6 +226,11 @@ ${describe(inv).slice(0, 60000)}
       prepared yet. d = { part, summary, steps: [{ ref, title, summary, role, prerequisites, before, files }], files }
       → { entry } — the inbox entry { kind: 'extend', part, nodes, edges, prepare } that NoemaCurJobs.extend applies — or { errors }. */
   const REF_AT = /^@(.+)$/, normT = s => String(s || '').toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
+  /** "did you mean": up to 3 steps of the map whose id or title looks like x → "@id (“title”), …" or '' */
+  const likeOn = have => {
+    const flat = x => normT(x).replace(/ /g, ''), pre = (a, b) => { let i = 0; while (i < a.length && a[i] === b[i]) i++; return i; };
+    return x => { const k = flat(x); return Object.values(have).filter(n => [flat(n.id), flat(n.title)].some(v => v && (v.includes(k) || k.includes(v) || pre(v, k) >= Math.min(5, k.length)))).slice(0, 3).map(n => `@${n.id} (“${n.title}”)`).join(', '); };
+  };
   function extendFromClaude(c, d, { independent = false, prepare = true, now = Date.now() } = {}) {
     const e = [], steps = Array.isArray(d?.steps) ? d.steps : [], have = c?.nodes || {};
     const part = String(d?.part || d?.title || '').trim();
@@ -242,11 +247,10 @@ ${describe(inv).slice(0, 60000)}
     });
     if (e.length) return { errors: e };
     const byTitle = new Map(Object.values(have).map(n => [normT(n.title), n.id]));
-    const flat = x => normT(x).replace(/ /g, ''), pre = (a, b) => { let i = 0; while (i < a.length && a[i] === b[i]) i++; return i; };
-    const like = x => { const k = flat(x); return Object.values(have).filter(n => [flat(n.id), flat(n.title)].some(v => v && (v.includes(k) || k.includes(v) || pre(v, k) >= Math.min(5, k.length)))).slice(0, 3).map(n => `@${n.id} (“${n.title}”)`).join(', '); };
+    const like = likeOn(have);
     const onMap = (s, x, how) => {
       const m = REF_AT.exec(x); if (!m) return null;
-      if (!have[m[1]]) { const l = like(m[1]); e.push(`step ${s.ref}: ${how} "${x}" is not a step of this Roadmap${l ? ` — did you mean ${l}?` : ''} (noema_roadmap_map lists every step id)`); return null; }
+      if (!Object.hasOwn(have, m[1])) { const l = like(m[1]); e.push(`step ${s.ref}: ${how} "${x}" is not a step of this Roadmap${l ? ` — did you mean ${l}?` : ''} (noema_roadmap_map lists every step id)`); return null; }
       return m[1];
     };
     const ext = [];   // links between the new part and the map: { from, to } with a new step's ref on one side
@@ -288,6 +292,46 @@ ${describe(inv).slice(0, 60000)}
     if (!C().topo([...Object.keys(have), ...Object.keys(nodes)], all)) { const cyc = (C().topo.cycle || []).map(x => have[x]?.title || nodes[x]?.title).filter(Boolean); return { errors: [`these links form a cycle with the map${cyc.length ? ': ' + cyc.join(' → ') : ''} — a step cannot come before itself`] }; }
     return { entry: { v: 1, kind: 'extend', part: { id: pid, title: part.slice(0, 120), summary: String(d.summary || '').slice(0, 400), at }, nodes, edges, prepare: !!prepare }, ids: idOf };
   }
+  /** 🔗 Link steps that are on the map already (noema_link_roadmap_steps, docs/FROM_SOURCES.md §6): new prerequisite links
+      between existing steps — prepared ones too: a link changes only the map (order, arrows, "after …"), never a step's
+      subject or the learner's progress — and wrong links removed. d = { links: [{ from: "@a", to: "@b", why }], remove: [{ from, to }] }
+      → { entry } — the inbox entry { kind: 'link', links, remove } that NoemaCurJobs.link applies — with the links that are
+      there already (`already`, not an error), or { errors } (every problem at once), or { entry: null, already } when nothing changes. */
+  function linkFromClaude(c, d, { now = Date.now() } = {}) {
+    const e = [], have = c?.nodes || {}, like = likeOn(have), edges = c?.edges || [];
+    const L = Array.isArray(d?.links) ? d.links : d?.links == null ? [] : null, R = Array.isArray(d?.remove) ? d.remove : d?.remove == null ? [] : null;
+    if (!L || !R) return { errors: ['links and remove must be lists of { "from": "@<step id>", "to": "@<step id>" }'] };
+    if (!L.length && !R.length) return { errors: ['links: at least one link { "from": "@<prerequisite>", "to": "@<the step that builds on it>", "why": "…" } (or remove: a link to take away)'] };
+    const id = (x, i, side, what) => {
+      const v = String(x ?? '').trim(), m = REF_AT.exec(v), k = m ? m[1] : v;
+      if (!k) { e.push(`${what} ${i + 1}: "${side}" is missing — "@<step id>" from noema_roadmap_map`); return null; }
+      if (!Object.hasOwn(have, k)) { const l = like(k); e.push(`${what} ${i + 1}: ${side} "${v}" is not a step of this Roadmap${l ? ` — did you mean ${l}?` : ''} (noema_roadmap_map lists every step id)`); return null; }
+      return k;
+    };
+    const has = (a, b, list = edges) => list.some(x => x.from === a && x.to === b), key = (a, b) => a + '→' + b;
+    const add = [], rem = [], already = [], seen = new Set();
+    L.forEach((x, i) => {
+      const a = id(x?.from, i, 'from', 'link'), b = id(x?.to, i, 'to', 'link'); if (!a || !b) return;
+      if (a === b) { e.push(`link ${i + 1}: @${a} cannot be its own prerequisite (from and to are the same step)`); return; }
+      if (seen.has(key(a, b))) return; seen.add(key(a, b));
+      if (has(a, b)) { already.push({ from: a, to: b }); return; }
+      add.push({ from: a, to: b, why: String(x?.why || '').trim().slice(0, 400) });
+    });
+    R.forEach((x, i) => {
+      const a = id(x?.from, i, 'from', 'remove'), b = id(x?.to, i, 'to', 'remove'); if (!a || !b) return;
+      if (seen.has(key(a, b))) { e.push(`remove ${i + 1}: @${a} → @${b} is also in links — add it or remove it, not both`); return; }
+      if (!has(a, b)) { e.push(`remove ${i + 1}: there is no link @${a} → @${b} on the map (noema_roadmap_map shows each step's "after …" prerequisites)`); return; }
+      seen.add(key(a, b)); rem.push({ from: a, to: b });
+    });
+    if (e.length) return { errors: e };
+    const after = [...edges.filter(x => !rem.some(y => y.from === x.from && y.to === x.to)), ...add];
+    if (!C().topo(Object.keys(have), after)) {
+      const cyc = (C().topo.cycle || []).filter(x => have[x]).map(x => `@${x} (“${have[x].title}”)`);
+      return { errors: [`these links form a cycle — a step cannot come before itself${cyc.length ? '; the cycle runs through ' + cyc.slice(0, 8).join(', ') : ''}. Check the direction: "from" is the prerequisite, "to" the step that builds on it`] };
+    }
+    if (!add.length && !rem.length) return { entry: null, already };
+    return { entry: { v: 1, kind: 'link', id: 'l' + now.toString(36) + Math.random().toString(36).slice(2, 6), links: add, remove: rem, at: new Date(now).toISOString() }, already };
+  }
   /* i18n-ignore-end */
   /* i18n-ignore-start — the brief of the subject (for Claude) */
   /** The subject alternative as the brief Claude builds it from: the confirmed chapter plan, each chapter with its pages. */
@@ -299,5 +343,5 @@ ${describe(inv).slice(0, 60000)}
   const courseMessage = (plan, inv, { language = '', goal = '' } = {}) => `Please make a noema-lite subject for me with the noema-lite connector, from the files I attach (${inv.map(it => it.name).join(', ')}).\nTitle: ${plan.title}\n${language ? `Language: ${language}\n` : ''}${goal ? `My goal: ${goal}\n` : ''}\n${courseBrief(plan)}`;
   /* i18n-ignore-end */
 
-  return { inventory, estimate, propose, task, fromAnswer, fromClaude, extendFromClaude, check, roadmapImport, mapText, courseBrief, courseMessage, units, S_PLAN, COURSE_MAX };
+  return { inventory, estimate, propose, task, fromAnswer, fromClaude, extendFromClaude, linkFromClaude, check, roadmapImport, mapText, courseBrief, courseMessage, units, S_PLAN, COURSE_MAX };
 })();
