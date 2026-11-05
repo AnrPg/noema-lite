@@ -235,7 +235,8 @@ console.log('— documents, files, zip');
     ok(pr.some(p => p.tab === 'item' && p.path.join('.') === 'fallback.text'), 'a short fallback text is a problem at its field'); }
   ok(JSON.stringify(AA.namesAt(refDoc('rc-lowpass').spec, ['derived', 1, 'expr'])) === JSON.stringify(['target', 'tol', 'R', 'C', 'tau']) && AA.namesAt(refDoc('rc-lowpass').spec, ['plots', 0, 'series', 0, 'expr']).includes('f'), 'the names a formula may use: the derived values above it; a plot line also gets its x');
   ok(JSON.stringify(AA.usedKeys(refDoc('rc-lowpass').spec)) === JSON.stringify(['title', 'intro', 'resistance', 'capacitance', 'fcLabel', 'tauLabel', 'errLabel', 'bodeTitle', 'frequency', 'gain', 'gainLine', 'fcMark', 'targetMark', 'minus3', 'stepTitle', 'time', 'voltage', 'tauMark']), 'the keys a spec names, in order');
-  for (const t of AA.TYPES) { const b = t.blank(); const pr = AA.check(b).filter(p => !(p.tab === 'item' && p.path.join('.') === 'fallback.text')); ok(!pr.length && t.match(b), `the blank "${t.id}" has no problem but its fallback text ${pr.length ? JSON.stringify(pr.slice(0, 2)) : ''}`); }
+  for (const t of AA.TYPES.filter(x => !x.lib)) {   // (a library engine's blank is its model's skeleton: its own checks then say what to fill in)
+    const b = t.blank(); const pr = AA.check(b).filter(p => !(p.tab === 'item' && p.path.join('.') === 'fallback.text')); ok(!pr.length && t.match(b), `the blank "${t.id}" has no problem but its fallback text ${pr.length ? JSON.stringify(pr.slice(0, 2)) : ''}`); }
 
   console.log('— the exported folder passes activity_lint.py');
   for (const id of ['rc-lowpass', 'led-bench']) {

@@ -155,8 +155,8 @@
       type: 'object', required: ['kind'],
       properties: { kind: { title: 'plotKind', enum: ['function', 'series', 'scene', 'sound'] }, title: ref('key', 'title') },
       oneOf: [line(p0.oneOf[0]), line(p0.oneOf[1]),
-        { title: 'plotKind.scene', required: ['of'], properties: { kind: { const: 'scene' }, of: { title: T('plotOf'), type: 'string', minLength: 1, 'x-noema': 'scene' }, height: { title: T('height'), type: 'integer', minimum: 120, maximum: 900 } } },
-        { title: 'plotKind.sound', required: ['of'], properties: { kind: { const: 'sound' }, of: { title: T('plotOf'), type: 'string', minLength: 1, 'x-noema': 'sound' }, height: { title: T('height'), type: 'integer', minimum: 120, maximum: 900 } } }],
+        { title: 'plotKind.scene', required: ['of'], properties: { kind: { const: 'scene' }, of: { title: T('plotOf'), type: 'string', minLength: 1, 'x-noema': 'scene' }, height: { title: 'height', type: 'integer', minimum: 120, maximum: 900 } } },
+        { title: 'plotKind.sound', required: ['of'], properties: { kind: { const: 'sound' }, of: { title: T('plotOf'), type: 'string', minLength: 1, 'x-noema': 'sound' }, height: { title: 'height', type: 'integer', minimum: 120, maximum: 900 } } }],
     };
     s.properties.plots = Object.assign({}, s.properties.plots, { items: ref('libPlot') });
     return s;

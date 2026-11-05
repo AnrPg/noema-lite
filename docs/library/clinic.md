@@ -9,7 +9,7 @@ circulation, oxygenation and lactate minute by minute, the tests reveal the diff
 **path of reasoning is graded** (essential actions, deadlines, harm, order, efficiency, calibration, information efficiency of the
 tests chosen, premature closure). The Python twin is `tools/lib_clinic.py` (`ID`, `check_spec`, `exprs`, `keys`, `offered`): it checks
 and does not compute, with the same problems (code, path, message, level) as the JS `checkSpec`. The tests are `node tests/lib_clinic.js`
-(63 assertions) and `node tests/enginelib.js` (JS ↔ Python parity on `tests/fixtures/enginelib/clinic.json`, 23 specs). The
+(64 assertions) and `node tests/enginelib.js` (JS ↔ Python parity on `tests/fixtures/enginelib/clinic.json`, 23 specs). The
 reference activity is `tools/activities_examples/sepsis-case`. The research behind this chapter is in the project's
 `engine-library/research/med.md` (part B).
 

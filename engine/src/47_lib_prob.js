@@ -449,10 +449,21 @@
      otherwise; y = 1 − x may be given exactly to keep the far tails. Returns [I, 1 − I] ---------- */
   function ibeta(x, a, b, y) {
     if (y === undefined) y = 1 - x;
-    if (!(a > 0 && b > 0) || Number.isNaN(x) || Number.isNaN(y)) return [NaN, NaN];
-    if (x <= 0) return [0, 1];
-    if (y <= 0) return [1, 0];
-    if (x > (a + 1) / (a + b + 2)) { const r = ibeta(y, b, a, x); return [r[1], r[0]]; }
+    if (!(a > 0 && b > 0) || Number.isNaN(x) || Number.isNaN(y)) return [NaN, NaN, NaN, NaN];
+    if (x <= 0) return [0, 1, -Infinity, 0];
+    if (y <= 0) return [1, 0, 0, -Infinity];
+    /* the fraction runs at its small argument: NR's swap at (a+1)/(a+b+2), but an argument near 1 loses the relative precision
+       of 1 − x to its rounding (ε/(1 − x)), so a small argument up to 4× the threshold is kept (it still converges fast) */
+    let swap = x > (a + 1) / (a + b + 2);
+    if (swap && x < 0.01 && x <= 4 * (a + 1) / (a + b + 2)) swap = false;
+    if (!swap && x > 0.99 && y <= 4 * (b + 1) / (a + b + 2)) swap = true;
+    const r = swap ? ibetaCF(y, b, a, x) : ibetaCF(x, a, b, y);
+    return swap ? [r[1], r[0], r[3], r[2]] : r;
+  }
+  /** I_x(a, b) without the swap; a huge a (≥ 1e7) with b ≤ 1 at x near 1: the gamma limit I ≈ Q(b, −(a + (b−1)/2) ln x)
+      (−a ln X → Gamma(b) for X ~ Beta(a, b); the scaling of DiDonato & Morris 1992 bgrat; relative error O(a⁻²) < 1e-13) */
+  function ibetaCF(x, a, b, y) {
+    if (x > 0.99 && a >= 1e7 && b <= 1) { const g = gammaPQ(b, -(a + (b - 1) / 2) * log1p(-y)); return [g[1], g[0], g[3], g[2]]; }
     let lpre;
     if (a >= 10 && b >= 10) {
       const s = a + b;
@@ -477,9 +488,9 @@
       d = 1 / d; const del = d * c; h *= del;
       if (abs(del - 1) < 1e-16) break;
     }
-    if (m > ITMAX) { note('no-convergence'); return [NaN, NaN]; }
-    const I = exp(lpre) * h / a;
-    return [I, 1 - I];
+    if (m > ITMAX) { note('no-convergence'); return [NaN, NaN, NaN, NaN]; }
+    const lI = lpre + log(h / a), I = exp(lI);
+    return [I, -expm1(lI), lI, log1p(-I)];
   }
 
   /* ---------- the Student t distribution: tails as ½ I_{ν/(ν+t²)}(ν/2, ½) — the form whose argument keeps the tail (NR §6.14;
@@ -494,6 +505,11 @@
     return t > 0 ? tail : 1 - tail;
   }
   const tcdf = (t, df) => tsf(-t, df);
+  function tlsf(t, df) {   // ln P(T > t), kept in the far right tail
+    if (!(t > 0) || df > 1e14) return t > 0 ? lncdf(-t) : log(tsf(t, df));
+    const t2 = t * t, x = df / (df + t2), y = t2 / (df + t2);
+    return -LN2 + (t2 > df ? ibeta(x, df / 2, 0.5, y)[2] : ibeta(y, 0.5, df / 2, x)[3]);
+  }
   function lntpdf(t, df) {
     if (df > 1e14) return -0.5 * t * t - LN_SQRT_2PI;
     const lr = df / 2 >= 10 ? -lgammaRatio(df / 2, 0.5) : lgamma((df + 1) / 2) - lgamma(df / 2);
@@ -844,7 +860,7 @@
   }
   function tD(df) {
     const D = continuous({
-      lo: -Infinity, hi: Infinity, lpdf: x => lntpdf(x, df), cdf: x => tcdf(x, df), sf: x => tsf(x, df),
+      lo: -Infinity, hi: Infinity, lpdf: x => lntpdf(x, df), cdf: x => tcdf(x, df), sf: x => tsf(x, df), lsf: x => tlsf(x, df), lcdf: x => tlsf(-x, df),
       q: p => qt(p, df), isf: p => -qt(p, df), median: 0, mode0: 0,
       mean: df > 1 ? 0 : NaN, var: df > 2 ? df / (df - 2) : df > 1 ? Infinity : NaN, skew: df > 3 ? 0 : NaN, kurt: df > 4 ? 6 / (df - 4) : df > 2 ? Infinity : NaN,
       sample: r => { const z = qnorm(uOpen(r)); return df > 1e14 ? z : z / sqrt(2 * rgamma(r, df / 2) / df); },
@@ -1040,7 +1056,7 @@
   }
   /** a p-value from the two tails of a statistic: two-sided = 2·min (capped at 1) */
   const pAlt = (alt, lo, up) => (alt === 'less' ? lo : alt === 'greater' ? up : min(1, 2 * min(lo, up)));
-  const wilson = (k, n, z) => { const ph = k / n, z2 = z * z, d = 1 + z2 / n, c = (ph + z2 / (2 * n)) / d, h = z * sqrt(ph * (1 - ph) / n + z2 / (4 * n * n)) / d; return [max(0, c - h), min(1, c + h)]; };
+  const wilson = (k, n, z) => { const ph = k / n, z2 = z * z, d = 1 + z2 / n, c = (ph + z2 / (2 * n)) / d, h = z * sqrt(ph * (1 - ph) / n + z2 / (4 * n * n)) / d; return [k <= 0 ? 0 : max(0, c - h), k >= n ? 1 : min(1, c + h)]; };   // the ends exact at k = 0 and k = n
   function grid(a, b, n) { const out = []; for (let i = 0; i < n; i++) out.push(n === 1 ? a : a + (b - a) * i / (n - 1)); return out; }
 
   /* ===================================================================================================================== */
@@ -1934,7 +1950,7 @@
       if (reps > 0) {
         if (!isI(reps, 1, 20000)) { I.add('param'); return out; }
         const off = pk ? categoricalD(pk, null) : poissonD(mean); let ext = 0, work = 0;
-        for (let k = 0; k < reps && work < 2e6; k++) {
+        for (let k = 0; k < reps && work < 5e6; k++) {
           let z = 1;
           for (let n = 0; n < gens && z > 0; n++) {
             if (z >= 1000) { if (pow(o.extinct, z) > 1e-6) I.add('capped'); break; }   // a line of ≥ 1000 survives but for q^1000 (counted when that is not negligible)
@@ -1942,7 +1958,7 @@
             else { let t = 0; for (let j = 0; j < z; j++) t += off.sample(r); work += z; z = t; }
           }
           if (z === 0) ext++;
-          if (work >= 2e6) { I.add('budget'); o.simExtinct = ext / (k + 1); return out; }
+          if (work >= 5e6) { I.add('budget'); o.simExtinct = ext / (k + 1); return out; }
         }
         o.simExtinct = ext / reps;
       }

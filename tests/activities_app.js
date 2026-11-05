@@ -177,6 +177,7 @@ async function run(name) {
     await wait(1800);
   }
   E.length = E0; ok(hits.length === 0, `no request leaves the activity (location, link, meta refresh, popup, data: page): ${JSON.stringify(hits)}`);   // (the hostile frames' own errors don't count)
+  await appEngines(p, ctx, E);
   await simSpec(p, ctx, E);
   await circuit(p, ctx, E);
   await p6engines(p, ctx, E);
@@ -186,6 +187,65 @@ async function run(name) {
   await h5p(p, ctx, E);
   await h5pBundle(browser, E);
   await browser.close();
+}
+
+/* html-app@1 + the engine library (docs/INTERACTIVE.md §8.1): the reference mini-game cheapest-route lists "engines": ["graph@1"]; the
+   mini-app asks noema.engine('graph@1') and the host runs the model in graph@1's own Worker (one per mini-app and engine, reused for
+   another model, ended on unmount). Played with the keyboard; the codes of what is refused (undeclared, spec, inputs, data that is not
+   plain, superseded); an engine the app cannot run → the fallback; 320 px without sideways scrolling. */
+async function appEngines(p, ctx, E) {
+  console.log('— engines from a mini-app (html-app@1 + graph@1)');
+  const CR = path.join(__dirname, '..', 'tools', 'activities_examples', 'cheapest-route'), html = fs.readFileSync(path.join(CR, 'app.html'), 'utf8');
+  const item = { ...JSON.parse(fs.readFileSync(path.join(CR, 'activity.json'), 'utf8')), html, strings: { en: JSON.parse(fs.readFileSync(path.join(CR, 'strings.en.json'), 'utf8')) } }; delete item.entry;
+  await p.evaluate(() => { const W = window.Worker; window.__W = W; window.__wn = 0; window.__wt = 0;
+    window.Worker = class extends W { constructor(...a) { super(...a); window.__wn++; } terminate() { window.__wt++; return super.terminate(); } }; });
+  const mount = async (it) => {
+    await p.evaluate(it => { ACT.ITEMS[it.id] = it; const m = document.querySelector('main'); m.innerHTML = ''; ACT.sweep(); m.append(interactiveBlock({ t: 'interactive', activity: it.id })); scrollTo(0, 0); }, it);
+    if (!await until(() => p.evaluate(() => !!document.querySelector('main iframe.act-frame')), 3000)) { const b = p.locator('main .act-bar button'); if (await b.count()) await b.first().click({ timeout: 5000 }).catch(() => {}); }
+    let g = null; await until(async () => { g = actFrame(p, () => true); return g && await g.evaluate(() => !!document.body.getAttribute('data-best')); }, 15000); return g;
+  };
+  let f = await mount(item);
+  ok(!!f, 'the mini-game starts and graph@1 answers (the cheapest route is known)');
+  if (!f) return;
+  const best = +(await f.evaluate(() => document.body.getAttribute('data-best')));
+  ok(JSON.stringify(await f.evaluate(() => noema.engines())) === '["graph@1"]' && await p.evaluate(() => window.__wn) === 1, 'noema.engines() lists what the registry entry declares; the model ran in a Worker of the host');
+  // play it with the keyboard only: Tab to a road, Enter; then Enter on "Check my route"
+  for (let i = 0; i < 8; i++) {
+    const sel = await f.evaluate(() => { const bs = [...document.querySelectorAll('#moves button')]; if (!bs.length) return null; const seen = (document.getElementById('where').textContent.match(/: ([A-G – ]+) \(/) || [, ''])[1];
+      const b = bs.find(x => x.dataset.to === 'G') || bs.find(x => !seen.includes(x.dataset.to)) || bs[0]; return '[data-to="' + b.dataset.to + '"]'; });
+    if (!sel) break;
+    await f.focus(sel); await p.keyboard.press('Enter'); await wait(80);
+  }
+  ok(await f.evaluate(() => !document.getElementById('check').disabled && document.activeElement === document.getElementById('check')), 'keyboard: each road is a button; at the goal the focus is on "Check my route"');
+  await p.keyboard.press('Enter'); await wait(150);
+  const res = await f.evaluate(() => ({ cls: document.getElementById('out').className, text: document.getElementById('out').textContent }));
+  ok(/^(ok|bad)$/.test(res.cls) && res.text.includes(String(best)), `checked: the route is compared with graph@1's cheapest (${best}): "${res.text}"`);
+  const codes = await f.evaluate(async () => {
+    const g = noema.engine('graph@1'), r = {}, err = async pr => { try { await pr; return 'resolved'; } catch (e) { return [e.code, (e.errors || []).length]; } };
+    const sp = { model: { graph: { nodes: [{ id: 'a' }, { id: 'b' }, { id: 'c' }], edges: [{ u: 'a', v: 'b', w: 4 }, { u: 'b', v: 'c', w: 1 }, { u: 'a', v: 'c', w: 7 }] }, run: { alg: 'dijkstra', source: 'a', target: 'c' } },
+      outputs: [{ id: 'best', kind: 'scalar', of: 'result' }, { id: 'path', kind: 'series', of: 'path' }] };
+    r.run = (await g.run(sp, {})).outputs;
+    r.check = await g.check({ model: { graph: { nodes: [] } }, outputs: [] });
+    r.spec = await err(g.run({ model: { graph: { nodes: [] } }, outputs: [] }, {}));
+    r.undeclared = await err(noema.engine('timeline@1').run(sp, {}));
+    r.inputs = await err(g.run(sp, { 'not a name': 1 }));
+    r.clone = await err(g.run(Object.assign({}, sp, { f: function () { } }), {}));
+    r.queue = (await Promise.allSettled([g.run(sp, {}), g.run(sp, {}), g.run(sp, {})])).map(x => x.status === 'fulfilled' ? x.value.outputs.best : x.reason.code);
+    return r; });
+  ok(codes.run.best === 5 && JSON.stringify(codes.run.path) === '[0,1,2]', 'noema.engine(\'graph@1\').run(spec, inputs) → the outputs the spec names (Dijkstra: 5 along a – b – c) ' + JSON.stringify(codes.run));
+  ok(codes.check.length >= 1 && codes.spec[0] === 'spec' && codes.spec[1] >= 1, 'check(spec) → the engine\'s own problems; run on a bad model is refused with code spec and the problems ' + JSON.stringify([codes.check, codes.spec]));
+  ok(codes.undeclared[0] === 'undeclared' && codes.inputs[0] === 'inputs' && codes.clone[0] === 'spec', 'an engine the entry does not list, bad inputs and a spec that is not plain data are refused with their codes ' + JSON.stringify([codes.undeclared, codes.inputs, codes.clone]));
+  ok(JSON.stringify(codes.queue) === '[5,"superseded",5]' && await p.evaluate(() => window.__wn) === 1, 'one run at a time and one waiting (the middle one is superseded); another model reuses the same Worker ' + JSON.stringify(codes.queue));
+  await p.evaluate(() => { document.querySelector('main').innerHTML = ''; ACT.sweep(); }); await wait(200);
+  ok(await p.evaluate(() => window.__wt) >= 1, 'unmounted: the engine\'s Worker is ended');
+  await p.evaluate(it => { ACT.ITEMS['cr-warp'] = { ...it, id: 'cr-warp', engines: ['graph@1', 'warp@1'] }; const m = document.querySelector('main'); m.innerHTML = ''; m.append(interactiveBlock({ t: 'interactive', activity: 'cr-warp' })); scrollTo(0, 0); }, item);
+  ok(await until(() => p.evaluate(() => !document.querySelector('main iframe') && /A to G/.test(document.querySelector('main .act-fbtext')?.textContent || '')), 6000), 'a mini-app that needs an engine this app lacks shows its fallback');
+  await p.setViewportSize({ width: 320, height: 800 });
+  f = await mount({ ...item, id: 'cr-320' });
+  ok(f && await f.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1 && document.querySelectorAll('#moves button').length > 0), '320 px: the mini-game fits without sideways scrolling');
+  await p.evaluate(() => { document.querySelector('main').innerHTML = ''; ACT.sweep(); window.Worker = window.__W; });
+  await p.setViewportSize({ width: 1280, height: 900 });
+  ok(!E.length, 'no page errors ' + JSON.stringify(E.slice(0, 3)));
 }
 
 /* wasm-module@1 (docs/INTERACTIVE_WASM.md): the reference wasm-oscillator — a precompiled module with its own spec, shown by the

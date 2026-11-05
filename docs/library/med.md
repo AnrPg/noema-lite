@@ -4,9 +4,9 @@ A general engine of the library (`docs/INTERACTIVE_LIBRARY.md`) for the numbers 
 time-varying-elastance pressure–volume loop), respiration and oxygen transport, acid–base (Henderson–Hasselbalch, compensation rules,
 Stewart), the kidney (CKD-EPI 2021, EKFC, Cockcroft–Gault, KDIGO), fluids and sodium, pharmacodynamics and pharmacokinetics, the
 glucose–insulin minimal model, body size, the ECG, 20 validated scores (each with its version and year) and clinical epidemiology (2×2
-tables, Bayes, the Fagan nomogram, effect measures, ROC, Kaplan–Meier). **106 functions.** The Python twin is `tools/lib_med.py`
+tables, Bayes, the Fagan nomogram, effect measures, ROC, Kaplan–Meier). **108 functions.** The Python twin is `tools/lib_med.py`
 (`ID`, `check_spec`, `exprs`, `keys`; the same function table `SIG`, byte for byte). It checks and does not compute, and it gives the
-same problems (code, path, message, level) as the JS `checkSpec`. The tests are `node tests/lib_med.js` (89 assertions) and
+same problems (code, path, message, level) as the JS `checkSpec`. The tests are `node tests/lib_med.js` (106 assertions) and
 `node tests/enginelib.js` (JS ↔ Python parity on `tests/fixtures/enginelib/med.json`, 25 specs). The reference activity is
 `tools/activities_examples/pv-loop` (the left ventricle's pressure–volume loop: contractility, filling pressure and resistance as
 sliders). The research behind this chapter is in the project's `engine-library/research/med.md` (part A).
@@ -170,6 +170,8 @@ ECG and hours in PK. The source column is the comment written beside the formula
 | `score.perc` | `age` `hr` `spo2` `leg` `hemopt` `surgery` `prior` `hormone` | `count` `negative` | — | — | Kline 2004 |
 | `score.curb65` | `confusion` `urea` `rr` `sbp` `dbp` `age` | `score` `cls` | — | — | Lim Thorax 2003 |
 | `score.qsofa` | `rr!` `sbp!` `gcs!` | `score` `positive` | — | — |  |
+| `score.sofa2` | `gcs` `delirium` `pf` `sf` `spo2` `adv` `novent` `ecmo` `map` `nepi` `dopa` `othervaso` `mcs` `novaso` `bili` `scr` `uo` `uoh` `rrt` `k` `ph` `hco3` `plt` | `score` `brain` `resp` `cardio` `liver` `kidney` `coag` | — | — | SOFA-2 (Ranzani JAMA 2025;334:2090, Table 2) |
+| `score.phoenix` | `age!` `pf` `sf` `spo2` `imv` `rsupport` `vaso` `lactate` `map` `plt` `inr` `ddimer` `fib` `gcs` `fixedpupils` `infection` | `score` `resp` `cardio` `coag` `neuro` `sepsis` `shock` | — | — | Phoenix (Schlapbach JAMA 2024;331:665) |
 | `score.sirs` | `temp` `hr` `rr` `paco2` `wbc` `bands` | `count` `positive` | — | — | Bone Chest 1992 |
 | `score.gcs` | `eye!` `verbal!` `motor!` `pupils` | `gcs` `gcsp` `severe` | — | — | Teasdale & Jennett 1974; GCS-P Brennan J Neurosurg 2018 (v = 0: not testable) |
 | `score.apgar` | `a!` `p!` `g!` `ac!` `r!` | `score` | — | — | Apgar 1953; AAP/ACOG 2015 |
@@ -304,6 +306,8 @@ the number is still computed as given.
 | `score.perc` | PERC (2004) | 8 criteria | `count`, `negative` | Kline, *J Thromb Haemost* 2004;2:1247 |
 | `score.curb65` | CURB-65 (2003) | confusion, urea > 7, RR ≥ 30, SBP < 90 or DBP ≤ 60, age ≥ 65 | `score`, `cls` | Lim, *Thorax* 2003;58:377 |
 | `score.qsofa` | qSOFA (2016) | RR ≥ 22, SBP ≤ 100, GCS < 15 | `score`, `positive` ≥ 2 | Seymour, *JAMA* 2016;315:762 (SSC 2021 advises against it as a sole screen) |
+| `score.sofa2` | SOFA-2 (2025) | per system 0–4 (missing → 0, footnote b): brain GCS 15 / 13–14 (or delirium drugs) / 9–12 / 6–8 / 3–5; respiratory PaO₂:FiO₂ > 300 / ≤ 300 / ≤ 225 / ≤ 150 / ≤ 75 mm Hg (3–4 need advanced support `adv`, or `novent` when it is unavailable or precluded; `ecmo` → 4), SpO₂:FiO₂ only with SpO₂ < 98 % (≤ 300 / 250 / 200 / 120); cardiovascular MAP ≥ 70 / < 70, norepinephrine + epinephrine (base, µg/kg/min) ≤ 0.2 or any other agent → 2, > 0.2–0.4 or low + other → 3, > 0.4, medium + other or mechanical support (`mcs`) → 4; dopamine alone ≤ 20 / > 20–40 / > 40; `novaso` → MAP bands 70 / 60–69 / 50–59 / 40–49 / < 40; liver bilirubin ≤ 1.2 / 3.0 / 6.0 / 12.0 / > 12 mg/dL; kidney creatinine ≤ 1.2 / 2.0 / 3.5 / > 3.5 mg/dL or urine output (`uo` mL/kg/h over `uoh` h) < 0.5 for 6–12 h / ≥ 12 h, < 0.3 for ≥ 24 h or anuria ≥ 12 h, RRT or its criteria (creatinine > 1.2 or oliguria < 0.3 > 6 h, plus K ≥ 6.0 or pH ≤ 7.20 with HCO₃ ≤ 12) → 4; platelets > 150 / ≤ 150 / ≤ 100 / ≤ 80 / ≤ 50 ×10³/µL | `score` 0–24 and the six parts | Ranzani, *JAMA* 2025;334:2090 (Table 2 and footnotes, transcribed from the article 2026-11) |
+| `score.phoenix` | Phoenix Sepsis Score (2024) | respiratory P/F < 400 or S/F < 292 on any support 1, < 200 / < 220 on IMV 2, < 100 / < 148 on IMV 3 (S/F with SpO₂ ≤ 97 %); cardiovascular 1 / ≥ 2 vasoactives 1 / 2, lactate 5–< 11 / ≥ 11 mmol/L 1 / 2, MAP by age (< 1 mo 17–30 / < 17; 1–11 mo 25–38 / < 25; 1–< 2 y 31–43 / < 31; 2–< 5 y 32–44 / < 32; 5–< 12 y 36–48 / < 36; 12–17 y 38–51 / < 38 mm Hg) 1 / 2; coagulation platelets < 100, INR > 1.3, D-dimer > 2 mg/L FEU, fibrinogen < 100 mg/dL, 1 each, max 2; neurological GCS ≤ 10 1, fixed pupils 2 | `score`, `sepsis` (suspected infection — assumed unless `infection` 0 — and ≥ 2), `shock` (sepsis with ≥ 1 cardiovascular point); ≥ 18 y → `validity` | Schlapbach, *JAMA* 2024;331:665 (PMC10900966); Sanchez-Pinto, *JAMA* 2024;331:675; the edges as in the authors' R package `phoenix` 1.1.3 (< 200 where the clinical table prints 100–200) |
 | `score.sirs` | SIRS (1992) | T > 38 or < 36, HR > 90, RR > 20 or PaCO₂ < 32, WBC > 12 or < 4 or bands > 10 % | `count`, `positive` ≥ 2 | Bone, *Chest* 1992;101:1644 |
 | `score.gcs` | GCS (1974/2014), GCS-P (2018) | E 1–4, V 1–5, M 1–6; pupils unreactive 0–2 | `gcs`, `gcsp`, `severe` ≤ 8 | Teasdale, *Lancet Neurol* 2014;13:844; Brennan, *J Neurosurg* 2018;128:1612 |
 | `score.apgar` | APGAR (1953) | five signs 0–2 | `score` | Apgar 1953; AAP/ACOG 644 (2015) |
@@ -317,10 +321,10 @@ the number is still computed as given.
 | `cardio.bp` | ESC 2024 / ACC-AHA 2025 BP classes | SBP, DBP | `cls`, `crisis` | as §2 |
 | `endo.dm` | ADA 2025 | FPG, OGTT, A1c | `cls` 0 normal, 1 prediabetes, 2 diabetes | ADA Standards of Care 2025 |
 
-**Check before release** (not implemented, or transcribed through secondary sources): **SOFA-2** (Ranzani, *JAMA* 2025) is not
-implemented — its cut-offs must be transcribed from the paper's table, not paraphrased; the **Phoenix** paediatric sepsis score
-(Schlapbach, *JAMA* 2024) is not implemented (the R package `phoenix` is a reference implementation to test against); the
-thresholds of the AMA/NICE-derived score bands are flagged here. (The EKFC Q values below 25 y, the CKiD U25 constants and the
+**Check before release** (not implemented, or transcribed through secondary sources): the thresholds of the AMA/NICE-derived score
+bands are flagged here. **SOFA-2** (Ranzani, *JAMA* 2025) and the **Phoenix** paediatric sepsis score (Schlapbach, *JAMA* 2024) were
+added in 2026-11 (`score.sofa2`, `score.phoenix`), their cut-offs transcribed from the articles' tables and Phoenix's edges checked
+against the authors' R package `phoenix` 1.1.3. (The EKFC Q values below 25 y, the CKiD U25 constants and the
 phenytoin coefficient were checked in 2026-11 — the coefficient corrected from 0.275 to Anderson's 0.25 — and no longer raise `verify`.) PREVENT (2024) and SCORE2 (2021) are left out (their coefficient tables, ≈ 2–3 KB each,
 would need transcription and a check against the published calculators).
 
@@ -341,7 +345,7 @@ Creatinine 88 without a unit → `units`; the same in µmol/L with `units` → t
 → `validity`. MDRD → `deprecated`. Na 110 + 3 % saline at a rate that raises Na > 10 in 24 h → `unsafe`. Driving pressure 18 → `unsafe`.
 Michaelis–Menten rate ≥ Vmax → no steady state (NaN) + `unsafe`. Oral PK with ka = k → the limit formula, no NaN. Delta ratio with
 HCO₃ 26 → `validity`. NNT with ARR 0 → ∞ is NaN + `impossible`; negative ARR → a negative NNT (NNH). Se 1 and Sp 1 → LR+ and DOR are NaN (undefined, not ∞). Kaplan–Meier
-without `opts` → the checker's `value`. A boolean input of 2 → `impossible`. Every one of the 106 functions run with its required inputs
+without `opts` → the checker's `value`. A boolean input of 2 → `impossible`. Every one of the 108 functions run with its required inputs
 at mid-range, and with all inputs missing, never throws.
 
 ## 7. Reference values (asserted in `tests/lib_med.js`)
