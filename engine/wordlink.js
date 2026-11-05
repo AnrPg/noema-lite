@@ -25,11 +25,14 @@
   /* i18n-ignore-end */
 
   /** A word with the clitics Arabic writes onto it (و ف, then ب ل ك, then the article ال; لل = ل + ال) → the word, then
-      each shorter reading: "والجدول" → والجدول, الجدول, جدول; an English possessive → also without 's. Other words: the
+      each shorter reading: "والجدول" → والجدول, الجدول, جدول; an English possessive → also without 's; a French elision
+      (l' d' j' m' n' s' t' c' qu' …) → also without it. Other words: the
       word alone. Entries are written without them. */
   const AR = /^[\u0600-\u06FF]/;
   function readings(f) {
     if (/'s$/.test(f) && f.length > 3) return [f, f.slice(0, -2)];   // an English possessive: "today's" is a form of "today"
+    const el = /^(?:l|d|j|m|n|s|t|c|qu|jusqu|lorsqu|puisqu)['’](.{2,})$/.exec(f);   // a French elision: "l'hélicase" → hélicase
+    if (el) return [f, el[1]];
     if (!AR.test(f)) return [f];
     const out = [f], add = w => { if (w.length >= 2 && !out.includes(w)) out.push(w); };
     for (const a of [f, ...(/^[وف]/.test(f) ? [f.slice(1)] : [])]) {

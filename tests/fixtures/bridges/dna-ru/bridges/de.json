@@ -1,0 +1,95 @@
+{
+ "format": "noema-bridge-locale",
+ "v": 1,
+ "native": "de",
+ "status": "draft",
+ "t": {
+  "репликация#1": {
+   "t": "Replikation",
+   "src": "19ui7r94fa"
+  },
+  "начинаться#1": {
+   "t": "beginnt",
+   "src": "1s9u9e01c3"
+  },
+  "точка начала репликации#1": {
+   "t": "Replikationsursprung",
+   "src": "rxhchu9t4r"
+  },
+  "хеликаза#1": {
+   "t": "Helikase",
+   "src": "1dfd3h2s15"
+  },
+  "раскручивать#1": {
+   "t": "entwindet",
+   "src": "hwce9e2imn"
+  },
+  "двойная спираль#1": {
+   "t": "Doppelhelix",
+   "src": "17543yjqlz"
+  },
+  "полимераза#1": {
+   "t": "Polymerase",
+   "src": "loaul51ywu"
+  },
+  "синтезировать#1": {
+   "t": "synthetisiert",
+   "src": "1kynr5unpy"
+  },
+  "новый#1": {
+   "t": "neu",
+   "src": "tfncfu1411"
+  },
+  "цепь#1": {
+   "t": "Strang",
+   "src": "1fj0tr4q70"
+  },
+  "каждый#1": {
+   "t": "jeder",
+   "src": "40cvpy132c"
+  },
+  "молекула#1": {
+   "t": "Molekül",
+   "src": "spefdc1dqm"
+  },
+  "сохранять#1": {
+   "t": "behält",
+   "src": "rk10g91iqc"
+  },
+  "старый#1": {
+   "t": "alt (Elternstrang)",
+   "src": "1kwi4515x5"
+  },
+  "полуконсервативный#1": {
+   "t": "semikonservativ",
+   "src": "i2fv47pk3y"
+  },
+  "ведущий#1": {
+   "t": "Leitstrang",
+   "src": "1nqwcjtjia"
+  },
+  "синтезироваться#1": {
+   "t": "wird synthetisiert",
+   "src": "f7bnsx1lo8"
+  },
+  "непрерывно#1": {
+   "t": "kontinuierlich",
+   "src": "bxosdxqlpz"
+  },
+  "отстающий#1": {
+   "t": "Folgestrang",
+   "src": "qf7osi5kj5"
+  },
+  "фрагмент#1": {
+   "t": "Fragment",
+   "src": "bxr4q01eqf"
+  },
+  "одна#1": {
+   "t": "ein",
+   "src": "1r4q82ayb0"
+  }
+ },
+ "sections": {
+  "ch01-s01": "Die DNA wird von den Replikationsursprüngen aus kopiert: Die Helikase entwindet die Doppelhelix, die Polymerase baut die neuen Stränge, den einen kontinuierlich, den anderen in Okazaki-Fragmenten."
+ }
+}

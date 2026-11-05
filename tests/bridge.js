@@ -5,8 +5,8 @@
    In the browser (the Databricks pilot, English → el / ru / ar): the 文A badge, the first-time card (native language, then
    A2 / B1 / B2), "Before you read", the dotted words and the glosses per level, never inside code, diagrams or exercises,
    the word card (translation, other meanings, draft), the anchor's sense, "I know it", help off, the phone's bottom sheet in
-   Arabic (right to left), a bridge imported for another pack (a wrong one refused), and every other pair of en el ru ar:
-   packs in Greek, Russian and Arabic (tests/fixtures/bridges), each into the other three languages.
+   Arabic (right to left), a bridge imported for another pack (a wrong one refused), and every other pair of en el ru ar de fr:
+   packs in Greek, Russian, Arabic, German and French (tests/fixtures/bridges), each into the other five languages.
    Usage: node tests/bridge.js <prepared-repo-dir> */
 const { chromium } = require(process.env.PW || 'playwright');
 const path = require('path'), fs = require('fs'), vm = require('vm'), { execFileSync } = require('child_process');
@@ -63,13 +63,14 @@ function unit() {
   const P = JSON.parse(fs.readFileSync(path.join(subj, 'pack.json'), 'utf8'));
   const sec = P.chapters[0].sections.find(s => s.id === sid);
   ok(JSON.stringify(ctx.NoemaCatalog.blockIds(sec.blocks)) === JSON.stringify(pyIds), `the tool's block ids are the app's (${sid}, ${pyIds.length} blocks)`);
-  // every pair of the four first languages (en el ru ar): the fixtures in el, ru and ar, each into the other three
+  // every pair of the six bridge languages (en el ru ar de fr): the fixtures in el, ru, ar, de and fr, each into the other five
   ok(W.find('والسلسلة بسلسلة للسلسلة السلاسل', W.index([{ k: 'سلسلة', forms: ['سلاسل'] }])).length === 4, 'Arabic: a word is found under its clitics (و, ب, لل, the article ال)');
-  for (const src of ['el', 'ru', 'ar']) {
+  ok(W.find("l'hélicase d’hélicase hélicase", W.index([{ k: 'hélicase' }])).length === 3, 'French: a word is found under an elision (l\', d’)');
+  for (const src of ['el', 'ru', 'ar', 'de', 'fr']) {
     const dir = path.join(ROOT, 'tests/fixtures/bridges/dna-' + src), FP = JSON.parse(fs.readFileSync(path.join(dir, 'pack.json'), 'utf8'));
     const cov = execFileSync('python3', [path.join(ROOT, 'tools/bridge.py'), 'coverage', path.join(dir, 'pack.json')], { encoding: 'utf8' });
     ok(/all: (\d+)\/\1 = 100/.test(cov) && /0 error\(s\)/.test(execFileSync('python3', [path.join(ROOT, 'tools/bridge.py'), 'check', path.join(dir, 'pack.json')], { encoding: 'utf8' })), `${src}: the fixture is clean and covers every content word (${cov.trim().split('\n')[0].trim()})`);
-    for (const nat of ['en', 'el', 'ru', 'ar'].filter(x => x !== src)) {
+    for (const nat of ['en', 'el', 'ru', 'ar', 'de', 'fr'].filter(x => x !== src)) {
       const o = path.join(require('os').tmpdir(), `bridge-${src}-${nat}.json`);
       execFileSync('python3', [path.join(ROOT, 'tools/bridge.py'), 'build', path.join(dir, 'pack.json'), '--native', nat, '-o', o], { encoding: 'utf8' });
       const bb = JSON.parse(fs.readFileSync(o, 'utf8')), rr = C(bb, FP);
@@ -193,16 +194,16 @@ const count = (page, sel) => page.$$eval(sel, x => x.length);
     ok(dp.includes('kinetic energy=κινητική ενέργεια'), `its words are linked after a reload, the phrase before the word (${dp.slice(0, 4).join(', ')})`);
     ok(!page._errors.length, 'no page errors' + (page._errors.length ? ': ' + page._errors.join(' · ') : ''));
 
-    console.log('— every other pair: packs in Greek, Russian and Arabic, each into the other three languages');
+    console.log('— every other pair: packs in Greek, Russian, Arabic, German and French, each into the other five languages');
     await page.context().close();
     page = await open(b, { sid: null, settings: { bridge: { on: true, level: 'open', asked: 1 } } });
-    const SCRIPT = { en: /[a-z]/i, el: /[α-ω]/i, ru: /[а-я]/i, ar: /[\u0600-\u06FF]/ };
-    for (const src of ['el', 'ru', 'ar']) {
+    const SCRIPT = { en: /[a-z]/i, el: /[α-ω]/i, ru: /[а-я]/i, ar: /[\u0600-\u06FF]/, de: /[a-zäöüß]/i, fr: /[a-zàâçéèêëîïôûùüÿœ]/i };
+    for (const src of ['el', 'ru', 'ar', 'de', 'fr']) {
       const FP = JSON.parse(fs.readFileSync(path.join(ROOT, `tests/fixtures/bridges/dna-${src}/pack.json`), 'utf8'));
-      const natives = ['en', 'el', 'ru', 'ar'].filter(x => x !== src);
+      const natives = ['en', 'el', 'ru', 'ar', 'de', 'fr'].filter(x => x !== src);
       const bs = natives.map(n => JSON.parse(fs.readFileSync(path.join(require('os').tmpdir(), `bridge-${src}-${n}.json`), 'utf8')));
       const r = await page.evaluate(async ({ FP, bs }) => { await Noema.importPack('anr', FP); for (const x of bs) await NoemaBridge.attach('anr', x); return Object.keys(NoemaBridge.available('anr', FP.subject.id)).sort().join(','); }, { FP, bs });
-      ok(r === natives.slice().sort().join(','), `${src}: the pack is imported with its three bridges (${r})`);
+      ok(r === natives.slice().sort().join(','), `${src}: the pack is imported with its five bridges (${r})`);
       await page.goto('about:blank'); await page.goto(URL); await wait(900);
       await page.click(`.noema-chip:has-text("${FP.subject.title}")`); await wait(1000);
       for (const nat of [...natives, src]) {

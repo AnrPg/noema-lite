@@ -2,7 +2,7 @@
    (docs/activities-dev/authoring_ui.md; ADR 001 D12 "an authoring UI generated from the same JSON Schemas as the validators").
    • Types: sim-spec@1 with formula@1 or circuit-mna@1 (registerType() for later runtimes: html-app@1, py-module@1, h5p@1).
    • The forms: NoemaSchemaForm over tools/schemas/noema.activities.v1 (the registry entry) and noema.sim-spec.v1 (+ noema.circuit.v1);
-     the words of each label key in every language right under the key, and a table of all words (en, el, ru, + any language).
+     the words of each label key in every language right under the key, and a table of all words (en, el, ru, de, fr, + any language).
    • Checks at the field: the schema, then the validators' own rules (NoemaPackCheck.checkSimSpec, checkActivities) — the same
      messages as activity_lint.py / make_pack.py / the connector; every formula through NoemaExpr.check with the declared names.
    • The preview: the app's real sim-spec@1 runtime (ACT.mount), debounced, beside the form (stacked below 960 px).
@@ -20,7 +20,7 @@
   const isObj = v => v != null && typeof v === 'object' && !Array.isArray(v);
   const clone = v => JSON.parse(JSON.stringify(v));
   const KEY_RE = /^[a-z][a-zA-Z0-9_.-]{0,63}$/, LOC_RE = /^[a-z]{2,3}(-[A-Z][a-z]{3})?(-(?:[A-Z]{2}|\d{3}))?$/;
-  const DEFAULT_LOCALES = ['en', 'el', 'ru'];
+  const DEFAULT_LOCALES = ['en', 'el', 'ru', 'de', 'fr'];
 
   /* ---------- words ---------- */
   const uiLoc = () => (root.NoemaI18n && root.NoemaI18n.locale) || 'en';

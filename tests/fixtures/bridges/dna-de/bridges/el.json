@@ -1,0 +1,87 @@
+{
+ "format": "noema-bridge-locale",
+ "v": 1,
+ "native": "el",
+ "status": "draft",
+ "t": {
+  "Replikation#1": {
+   "t": "αντιγραφή",
+   "src": "1as8vud12j"
+  },
+  "beginnen#1": {
+   "t": "ξεκινά",
+   "src": "8mw989g7or"
+  },
+  "Replikationsursprung#1": {
+   "t": "θέση έναρξης",
+   "src": "f5tx7s1ppj"
+  },
+  "Helikase#1": {
+   "t": "ελικάση",
+   "src": "9syu46dbv6"
+  },
+  "entwinden#1": {
+   "t": "ξετυλίγει",
+   "src": "1onv4zd4u5"
+  },
+  "Doppelhelix#1": {
+   "t": "διπλή έλικα",
+   "src": "1guken1d48"
+  },
+  "Polymerase#1": {
+   "t": "πολυμεράση",
+   "src": "kxqaea2brk"
+  },
+  "synthetisieren#1": {
+   "t": "συνθέτει",
+   "src": "1k1pfm61jh"
+  },
+  "neu#1": {
+   "t": "νέος",
+   "src": "1vr5npdui7"
+  },
+  "Strang#1": {
+   "t": "αλυσίδα",
+   "src": "1mzmbr144m"
+  },
+  "jeder#1": {
+   "t": "κάθε",
+   "src": "1ojbjg01qm"
+  },
+  "Molekül#1": {
+   "t": "μόριο",
+   "src": "lzjplcjgrg"
+  },
+  "behalten#1": {
+   "t": "κρατά",
+   "src": "121qb5e1im"
+  },
+  "alt#1": {
+   "t": "παλιός (μητρικός)",
+   "src": "q2mmi313fm"
+  },
+  "semikonservativ#1": {
+   "t": "ημισυντηρητική",
+   "src": "ascyu21028"
+  },
+  "Leitstrang#1": {
+   "t": "συνεχής αλυσίδα",
+   "src": "15og1i11hi"
+  },
+  "kontinuierlich#1": {
+   "t": "συνεχώς",
+   "src": "7xts7pv8a5"
+  },
+  "Folgestrang#1": {
+   "t": "ασυνεχής αλυσίδα",
+   "src": "o874wnb9px"
+  },
+  "Okazaki-Fragment#1": {
+   "t": "τμήμα Okazaki",
+   "src": "gj1sq61ajx"
+  }
+ },
+ "sections": {
+  "ch01-s01": "Το DNA αντιγράφεται από τις θέσεις έναρξης: η ελικάση ξετυλίγει τη διπλή έλικα και η πολυμεράση φτιάχνει τις νέες αλυσίδες, τη μία συνεχώς και την άλλη σε τμήματα Okazaki."
+ }
+}

@@ -235,7 +235,7 @@ Each chapter has "diagrams": 0–2 objects — only a diagram with real teaching
       run.chapters.push(m.chapter); Object.assign(run.media, m.media); await keep();
       onLog('   ✓ ' + rt('roadmap.gen.chapterDone', { sections: m.chapter.sections.length, exercises: m.chapter.exercises.length, flashcards: m.chapter.flashcards.length }));
     }
-    // 3b. translations — every chapter in English, Greek and Russian too (minus the step's own language; tools/pack_rules.json
+    // 3b. translations — every chapter in English, Greek, Russian, German and French too (minus the step's own language; tools/pack_rules.json
     //     "languages"): the same JSON with only the words translated, checked like an imported translation
     run.tr = run.tr || {};
     for (const loc of window.NoemaPackCheck.requiredLocales(c.language || 'en').translations) {
