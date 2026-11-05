@@ -892,7 +892,7 @@ window.NoemaCurriculum.Gen = (() => {
       if (!pack) return;
       say('📥 ' + rt('roadmap.gen.saving'));
       await finish(c, nid, pack, { files: pack._bundleFiles });
-      say('✅ ' + rt('roadmap.gen.ready')); window.Noema?.toast?.('🧭 ' + rt('roadmap.gen.readyToStudy', { title: n.title }));
+      say('✅ ' + rt('roadmap.gen.ready')); (window.Noema?.notice || window.Noema?.toast)?.('🧭 ' + rt('roadmap.gen.readyToStudy', { title: n.title }));
     } catch (e) {
       const stopped = e.kind === 'aborted' || /Stopped/.test(e.message);
       patchNode(c.id, nid, stopped ? { status: 'paused', error: rt('roadmap.gen.paused'), errorInfo: null } : { status: 'failed', error: e.message, errorInfo: C.errInfo(e), failedAt: Date.now() });

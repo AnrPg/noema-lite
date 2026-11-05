@@ -1187,13 +1187,40 @@
     },
     keep(acc, u) { const k = KV.accountKey('packmeta:' + u.subject, acc), m = jget(k, null); if (m) KV.set(k, JSON.stringify({ ...m, publicSkip: u.mark })); this.list = this.list.filter(x => x.id !== u.id); },
   };
+  /* ---- 🔔 news that arrived (a step's pack, a new part, links…): a short toast while at most 2 are on screen at once;
+     a 3rd one moves them all to the bell, where they wait until cleared — toasts never stack up over the page ---- */
+  const NOTICE_MAX = 2, NOTICE_KEEP = 200;   // keep: a storage bound only (the oldest beyond it go first)
+  const Notices = {
+    shown: [], burst: 0,   // the notice toasts on screen now: { el, text, at, timer }; till when news goes straight to the bell
+    key: acc => 'noema-notices:' + (acc || 'local'),   // this device only (not synced): what arrived here
+    list(acc) { try { const a = JSON.parse(localStorage.getItem(this.key(acc)) || '[]'); return Array.isArray(a) ? a : []; } catch (e) { return []; } },
+    write(acc, a) { try { localStorage.setItem(this.key(acc), JSON.stringify(a.slice(-NOTICE_KEEP))); } catch (e) { } Notes.local(); },
+    keep(acc, items) { this.write(acc, [...this.list(acc), ...items.map(x => ({ id: 'note:' + x.at + ':' + Math.random().toString(36).slice(2, 7), kind: 'notice', text: x.text, at: x.at }))]); },
+    dismiss(acc, id) { this.write(acc, this.list(acc).filter(x => x.id !== id)); },
+    clear(acc) { this.write(acc, []); },
+    /** A piece of news: a toast, or — when NOTICE_MAX are on screen already — into the bell with the ones on screen. */
+    add(msg, ms = 4000) {
+      const text = plainText(msg), at = Date.now(), acc = Notes.acc || window.Noema?.account?.id || KV.acc;
+      this.shown = this.shown.filter(x => x.el.isConnected);
+      if (this.shown.length >= NOTICE_MAX || at < this.burst) {   // the rest of a burst follows them to the bell, until it has been quiet for a while
+        const moved = this.shown.splice(0); moved.forEach(x => { clearTimeout(x.timer); x.el.remove(); });
+        this.burst = at + ms; this.keep(acc, [...moved, { text, at }]); return;
+      }
+      let t = document.querySelector('.toasts'); if (!t) { t = el('div', { class: 'toasts' }); document.body.append(t); }
+      const x = { el: el('div', { class: 'toast notice', role: 'status' }, text), text, at };
+      x.timer = setTimeout(() => { x.el.remove(); this.shown = this.shown.filter(y => y !== x); }, ms);
+      t.append(x.el); this.shown.push(x);
+    },
+  };
   const UPDATE_KINDS = ['curupdate', 'stepupdate', 'subjupdate'];
   const Notes = {
     pending: [], remote: [], listeners: [], timer: null, acc: null,
     on(f) { this.listeners.push(f); f(this.pending); },
+    /** An answered share or invitation leaves the list and the cloud's cached copy (else local() would bring it back). */
+    drop(id) { this.remote = this.remote.filter(x => x.id !== id); this.pending = this.pending.filter(x => x.id !== id); this.emit(); },
     emit() { this.listeners.forEach(f => { try { f(this.pending); } catch (e) { } }); },
     /** 🔔 = shares and invitations (from the cloud) + updates that wait for the learner (shared curricula, their steps, Explore subjects). */
-    local() { this.pending = [...this.remote, ...(window.NoemaCurShare?.updates?.(this.acc) || []), ...SubjUpdates.list]; this.emit(); return this.pending; },
+    local() { this.pending = [...this.remote, ...(window.NoemaCurShare?.updates?.(this.acc) || []), ...SubjUpdates.list, ...Notices.list(this.acc)]; this.emit(); return this.pending; },
     async refresh() {
       if (!this.acc || !isCloudAcc(this.acc)) return this.pending;
       try {
@@ -1206,7 +1233,7 @@
       return this.pending;
     },
     start(acc) {
-      this.acc = acc; if (!isCloudAcc(acc)) return;
+      this.acc = acc; this.local(); if (!isCloudAcc(acc)) return;   // 🔔 news kept on this device shows at once, for every kind of account
       this.refresh(); clearInterval(this.timer); this.timer = setInterval(() => this.refresh(), 120e3);
       document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') this.refresh(); });
       if (!this.curOn && window.NoemaCurShare?.onChange) { this.curOn = true; NoemaCurShare.onChange(() => this.local()); }
@@ -1221,7 +1248,7 @@
     async accept(sh) {
       if (sh.kind === 'curriculum') {   // 👥 join a shared curriculum: my own progress, the steps prepared together
         const c = await NoemaCurShare.join(this.acc, sh.curriculum);
-        this.pending = this.pending.filter(x => x.id !== sh.id); this.emit();
+        this.drop(sh.id);
         return { kind: 'curriculum', curriculum: c.id, title: c.title || c.goal };
       }
       const p = await NoemaCloud.downloadShared(sh.id);
@@ -1229,14 +1256,15 @@
       const added = await importPack(this.acc, p, { sharedBy: sh.from_name || sh.from_email, sharedAt: new Date().toISOString() });
       await attachSharedFiles(this.acc, p, 'noema-shared');
       await NoemaCloud.answerShare(sh.id, true);
-      this.pending = this.pending.filter(x => x.id !== sh.id); this.emit();
+      this.drop(sh.id);
       return added;
     },
-    async reject(sh) { if (sh.kind === 'curriculum') await NoemaCurShare.decline(sh.curriculum); else await NoemaCloud.answerShare(sh.id, false); this.pending = this.pending.filter(x => x.id !== sh.id); this.emit(); },
+    async reject(sh) { if (sh.kind === 'curriculum') await NoemaCurShare.decline(sh.curriculum); else await NoemaCloud.answerShare(sh.id, false); this.drop(sh.id); },
   };
   /** One request as a row: who, what (info), Accept / Reject. */
   function shareRow(sh, { onAccepted } = {}) {
     if (UPDATE_KINDS.includes(sh.kind)) return updateRow(sh);
+    if (sh.kind === 'notice') return noticeRow(sh);
     const tB = el('b', {}, sh.title), mtT = window.NoemaMT ? NoemaMT.toggle(Notes.acc, [NoemaMT.mark(tB, { language: sh.language || sh.meta?.language, kind: sh.kind === 'curriculum' ? 'shared.roadmap' : 'shared.pack' })]) : null;   // 🌐 its title on request (the personal message is never sent)
     const row = el('div', { class: 'nx-req' },
       sh.kind === 'curriculum' ? el('div', { class: 'grow' }, ...trx('loader.req.invites', { who: el('b', {}, `${sh.from_name || tr('loader.req.someone')}`), title: tB }), mtT ? ' ' : null, mtT,
@@ -1249,6 +1277,17 @@
     return row;
   }
 
+  /** 🔔 A piece of news as a row: what arrived, when, and ✕ to clear it. */
+  function noticeRow(sh) {
+    const when = window.NoemaI18n ? NoemaI18n.fmt.ago(sh.at) : '';
+    return el('div', { class: 'nx-req nx-notice' }, el('div', { class: 'grow' }, sh.text, when ? el('div', { class: 'tiny' }, when) : null),
+      el('button', { class: 'btn small ghost', title: tr('loader.note.dismiss'), 'aria-label': tr('loader.note.dismiss'), onclick: () => Notices.dismiss(Notes.acc, sh.id) }, '✕'));
+  }
+  /** 🔔 “Clear all” under the bell's list, when news waits there (null otherwise). */
+  function noticesClear(list) {
+    if (!list.some(x => x.kind === 'notice')) return null;
+    return el('div', { class: 'row nx-noticeclear', style: { justifyContent: 'flex-end' } }, el('button', { class: 'btn small ghost', onclick: () => Notices.clear(Notes.acc) }, tr('loader.note.clearAll')));
+  }
   /** 🔔 An update as a row: what changed, and Take / Keep mine (it waits until the learner answers). */
   function updateText(sh) {
     if (sh.kind === 'curupdate') return ['🧭 ', ...trx('loader.upd.curChanged', { title: el('b', {}, sh.title) }, { who: sh.from_name || tr('loader.upd.owner') }), el('div', { class: 'tiny' }, sh.lines?.length ? tr('loader.upd.curChangesList', { n: num(sh.count), lines: sh.lines.join(' · ') }) : tr('loader.upd.curChanges', { n: num(sh.count) }))];
@@ -1681,7 +1720,7 @@
     langStudy: { get: STUDY, set: putStudy, offered: studyOffered, chosen: langChosen, chooser: studyChooser, open: studyOpen },   // D21: the languages the learner studies
     geminiKey: GeminiKey, stats: Stats, idb: IDB, backup: Backup, autoBackup: AutoBackup,
     account: null, subject: null, pack: null, el, esc, jget, jset, convos: window.NoemaConvos || null, preloadedConvos: [],
-    accounts: allAccounts, getAccount, saveLocalAccount, subjectsFor, pickSubject, shelf, loadSubject, stepOf, openShelf: (acc, opts) => openShelf(acc || Noema.account?.id || KV.acc, opts || {}), pickAccount, importPackFile, importPack, exportPackage, overlay, claudeSetupView: (acc, opts) => claudeSetupView(acc, opts || {}), claudeGuide: opts => claudeGuide(Noema.account?.id || KV.acc, opts || {}), notes: Notes, shareRow, updateText, updateLabel,
+    accounts: allAccounts, getAccount, saveLocalAccount, subjectsFor, pickSubject, shelf, loadSubject, stepOf, openShelf: (acc, opts) => openShelf(acc || Noema.account?.id || KV.acc, opts || {}), pickAccount, importPackFile, importPack, exportPackage, overlay, claudeSetupView: (acc, opts) => claudeSetupView(acc, opts || {}), claudeGuide: opts => claudeGuide(Noema.account?.id || KV.acc, opts || {}), notes: Notes, shareRow, noticesClear, notice: (m, ms) => Notices.add(m, ms), updateText, updateLabel,
     share(s) { return shareDialog(Noema.account.id, s); },
     editSubject(s, o) { return editSubject(Noema.account.id, s, o); }, deleteSubject(s) { return deleteSubject(Noema.account.id, s); }, setHidden(id, h) { return setHidden(Noema.account.id, id, h); },
     toast: toastL, getPackById: (acc, id) => getPack(acc, { id, origin: 'imported' }), inlineTranslations: (acc, pack) => inlineTranslations(acc, null, pack),
@@ -1690,7 +1729,7 @@
     curricula() { if (SHELL() && NoemaShell.mounted) return NoemaShell.go('#/learn'); return window.NoemaCurMap?.library(Noema.account.id); },
     curriculumMap(cid, focus) { if (SHELL() && NoemaShell.mounted) return NoemaShell.go('#/map/' + encodeURIComponent(cid) + (focus ? '/' + encodeURIComponent(focus) : '')); return window.NoemaCurMap?.map(Noema.account.id, cid, { focus }); }, explore() { return explore(Noema.account.id); }, publicSubjects() { return publicSubjects(Noema.account.id); }, plain: { text: t => plainOn() ? plainText(t) : t, tree: plainTree, watch: plainWatch }, infoCard, packInfo, langTag, bridgeTag: s => window.NoemaBridge?.tag(s) || null, localizedSubject,
     removeLocalAccount(id) { const rm = jget(P + 'accounts:removed', []); rm.push(id); jset(P + 'accounts:removed', rm); jset(P + 'accounts', jget(P + 'accounts', []).filter(a => a.id !== id)); },
-    wipeAccountData(id) { ls.keys(`${P}${id}:`).forEach(k => ls.del(k)); },
+    wipeAccountData(id) { ls.keys(`${P}${id}:`).forEach(k => ls.del(k)); ls.del(Notices.key(id)); },   // 🔔 its news too (kept outside the synced keys)
     setCurrent(acc, subj) { if (Noema.switching) return; jset(P + 'current', { acc, subj }); },   // while a switch reloads the page, the subject still open must not take its place back
     switchTo(acc, subj, hash) { Noema.switching = true; jset(P + 'current', { acc, subj, skipPicker: !!subj }); if (/[?&](subject|account)=/.test(location.search)) { location.replace(location.pathname + (hash || '')); return; } location.hash = hash || ''; location.reload(); },   // a ?subject= link must not win over the new choice; hash: where to land (#/subject, #/s/<id>, …)
     async openSubjectPicker() { const s = await pickSubject(Noema.account.id, { closable: true }); if (s?.kind === 'language' && SHELL() && NoemaShell.mounted) return NoemaShell.go('#/lang/' + encodeURIComponent(s.courseId)); if (s && s.id !== Noema.subject?.id) Noema.switchTo(Noema.account.id, s.id, SHELL() ? '#/subject' : ''); else if (s && SHELL()) NoemaShell.go('#/subject'); },

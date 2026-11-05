@@ -51,7 +51,7 @@ async function checkInbox() {
     // the changed state reaches the cloud BEFORE its rows leave the inbox (a failed push keeps them for the next check)
     if (n) await CL.push(ACCOUNT.id);
     for (const k of done) await CL.kvDelete(k).catch(() => { });
-    if (n) { toast('📥 ' + tE('engine.inbox.applied', { n })); renderTopStats(); }
+    if (n) { (Noema.notice || toast)('📥 ' + tE('engine.inbox.applied', { n })); renderTopStats(); }
   } catch (e) { console.warn('[inbox]', e); } finally { inboxRun.busy = false; }
   return n;
 }

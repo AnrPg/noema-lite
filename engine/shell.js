@@ -263,12 +263,12 @@ window.NoemaShell = (() => {
   function openNotes() {
     sheet(L('notifications'), body => {
       const draw = list => { body.replaceChildren(); if (!list.length) body.append(h('p', { class: 'ns-muted' }, N().account?.kind === 'cloud' ? L('nothingNew') : L('notesNeedCloud')));
-        list.forEach(sh => body.append(N().shareRow(sh, { onAccepted: s => { F.layer.replaceChildren(); if (confirm(L('openNow', { title: s.title }))) accepted(s); } }))); };
+        list.forEach(sh => body.append(N().shareRow(sh, { onAccepted: s => { F.layer.replaceChildren(); if (confirm(L('openNow', { title: s.title }))) accepted(s); } }))); const clr = N().noticesClear?.(list); if (clr) body.append(clr); };
       N().notes.on(list => { if (body.isConnected) draw(list); });
     });
   }
   function drawShareBar(list) {
-    const bar = F.share, items = list.filter(x => !later.has(x.id)); bar.replaceChildren();
+    const bar = F.share, items = list.filter(x => !later.has(x.id) && x.kind !== 'notice'); bar.replaceChildren();   // 🔔 news only waits in the bell
     bar.classList.toggle('on', !!items.length); if (!items.length) return;
     const sh = items[0], more = items.length > 1 ? h('span', { class: 'tiny' }, '  ' + L('moreInBell', { n: items.length - 1 })) : null;
     const laterBtn = h('button', { class: 'btn small ghost', title: L('decideLater'), onclick: () => { later.add(sh.id); drawShareBar(N().notes.pending); } }, L('later'));

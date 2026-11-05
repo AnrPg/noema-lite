@@ -970,6 +970,14 @@
   "@loader.req.reject": {
     "description": "Button that rejects a share or an invitation (a ✕ is shown before it)."
   },
+  "loader.note.dismiss": "Clear",
+  "@loader.note.dismiss": {
+    "description": "Tooltip and screen-reader label of the ✕ button that removes one piece of news (a step ready, a new part…) from the notifications list."
+  },
+  "loader.note.clearAll": "Clear all",
+  "@loader.note.clearAll": {
+    "description": "Button under the notifications list that removes every piece of news (steps ready, new parts, links added…). Shares and invitations are not removed."
+  },
   "loader.upd.owner": "The owner",
   "@loader.upd.owner": {
     "description": "Stands for the unknown owner of a shared Roadmap in “{who} changed the Roadmap …”."

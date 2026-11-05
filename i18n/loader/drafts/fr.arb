@@ -146,6 +146,8 @@
   "loader.req.accept": "Accepter",
   "loader.req.rejected": "Refusé",
   "loader.req.reject": "Refuser",
+  "loader.note.dismiss": "Effacer",
+  "loader.note.clearAll": "Tout effacer",
   "loader.upd.owner": "Le propriétaire",
   "loader.upd.author": "Son auteur",
   "loader.upd.curChanged": "{who} a modifié le parcours « {title} »",
