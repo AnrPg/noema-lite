@@ -3,7 +3,7 @@
 A pack may carry a precompiled WebAssembly module: the simulation core of an activity written in C, Rust or AssemblyScript (a
 microcontroller emulator, a DSP kernel, a physics step function). The page around it is always the app's own `sim-spec@1`
 renderer (sliders, readouts, plots, the checks grader: `docs/INTERACTIVE.md` §12); the module only computes numbers.
-The contract of every activity is `docs/INTERACTIVE.md`; the decision is the ADR's D12 (P6), as built in its §11.
+The contract of every activity is `docs/INTERACTIVE.md`; the decision is the ADR's D12 (P6), as built in its §13.
 
 Code: `engine/src/44_activity_wasm.js` (`window.NoemaWasm`) · check tool: `wasm_check.py` (in the toolkit; `tools/wasm_check.py`)
 · the reference activity: `wasm-oscillator` · tests: `tests/activities_wasm.js`, `tests/activities.js`, `tests/activities_pack.py`

@@ -4,17 +4,24 @@ The SAME rules as engine/packcheck.js checkActivities (tests/activities.js runs 
   load_activities(subject_dir) → (registry | None, problems)   activities/activities.json + every bundle and string table
   check_activities(pack) → (errors, warnings)                   the registry, its references from blocks / sim exercises, pack.requires
   lint_html(html) → (errors, warnings)                         what a mini-app (html-app@1) may not contain
+  lint_python(src, packages) → (errors, warnings)              what the Python of a py-module@1 activity may not do (docs/INTERACTIVE_PYTHON.md)
 
 In the subject folder:
   activities/activities.json            {"format": "noema.activities/v1", "items": [{id, runtime, entry, stateVersion, fallback, …}]}
   activities/<id>/app.html              the bundle of an html-app@1 activity (entry)
   activities/<id>/spec.json             the spec of a sim-spec@1 activity (entry): data the app's own engines run, no code
+  activities/<id>/main.py               the Python of a py-module@1 activity (entry), with its spec.json beside it (no engine: step() computes)
   activities/<id>/strings.<locale>.json the activity's words, one file per language, the same keys in each
-In the pack (make_pack.py): pack.activities = {"format", "items": [{…, "html": <the bundle>, "sha256", "bytes" | "spec": {…}, "strings": {locale: {key: text}}}]}
+  activities/<id>/item.h5p              the package of an h5p@1 activity (entry): it travels BESIDE the pack (docs/INTERACTIVE_H5P.md),
+                                        the registry keeps its sha256 and bytes
+  activities/<id>/content.<locale>.json its content.json in another language (inline in the pack: h5pByLocale.<locale>.content)
+In the pack (make_pack.py): pack.activities = {"format", "items": [{…, "html": <the bundle>, "sha256", "bytes" | "spec": {…} | "python": <main.py>, "sha256", "bytes", "spec", "strings": {locale: {key: text}}}]}
 and pack.requires = ["activities/v1", "runtime:<id>", "engine:<id>" (an engine other than formula@1), …]. Everything is inline, like the
 pictures (ADR D2).
   check_spec(spec, tables) → errors                           a sim-spec@1 spec (docs/INTERACTIVE.md §12): shape, limits, names,
-                                                               every expression (simexpr.check), the engine, the string keys"""
+                                                               every expression (simexpr.check), the engine, the string keys
+  check_h5p_packages(pack, bytes_of) → (errors, warnings)     the .h5p files of the h5p@1 items (sha256, bytes, tools/h5p_check.py),
+                                                               twin of NoemaPackCheck.checkActivityPackages"""
 import base64, glob, hashlib, json, math, os, re, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import simexpr as SX   # the expression language of sim-spec@1 (docs/INTERACTIVE_SIMEXPR.md), twin of engine/src/35_simexpr.js
@@ -22,16 +29,39 @@ import circuit as CK   # the netlist checks of circuit-mna@1 (docs/INTERACTIVE_C
 import thermal, pid, rf, twin   # the model checks of the P6 engines (docs/INTERACTIVE_ENGINES.md), twins of engine/src/39–42_engine_*.js
 import wasm_check as WK   # wasm-module@1 (docs/INTERACTIVE_WASM.md), twin of engine/src/44_activity_wasm.js
 import embed_check as EK   # external-embed@1 (docs/INTERACTIVE_EMBED.md), twin of engine/src/45_activity_embed.js
+import h5p_check as H5   # the package rules of h5p@1 (tools/h5p_allow.json), twin of NoemaH5P.check (engine/src/38_activity_h5p.js)
 
 FORMAT = "noema.activities/v1"
 ID_RE = re.compile(r"^[a-z0-9][a-z0-9-]{1,60}$")
 KEY_RE = re.compile(r"^[a-z][a-zA-Z0-9_.-]{0,63}$")
 LOCALE_RE = re.compile(r"^[a-z]{2,3}(-[A-Z][a-z]{3})?(-(?:[A-Z]{2}|\d{3}))?$")
-RUNTIMES = {"html-app@1", "sim-spec@1"}                     # runtimes this version runs
-LATER = {"py-module@1": "P4", "h5p@1": "P4b"}               # known, arriving in a later version (docs/adr/001 §7)
+RUNTIMES = {"html-app@1", "sim-spec@1", "py-module@1", "h5p@1"}  # runtimes this version runs
+LATER = {}                                                  # known, arriving in a later version (docs/adr/001 §7)
 CAPS = {"state", "events", "resize", "result", "hints", "announce"}
 GRADE_MODES = {"reported", "checks"}
-CHECKS_RUNTIMES = {"sim-spec@1"}                            # runtimes whose values the app can see (the checks grader needs them)
+CHECKS_RUNTIMES = {"sim-spec@1", "py-module@1"}             # runtimes whose values the app can see (the checks grader needs them)
+SPEC_RUNTIMES = {"sim-spec@1", "py-module@1"}               # runtimes the app draws from a spec (py-module@1: its outputs come from Python's step())
+H5P = "h5p@1"                                               # an ordinary .h5p package played by the app's own H5P player (docs/INTERACTIVE_H5P.md)
+SHA_RE = re.compile(r"^[0-9a-f]{64}$")
+H5P_MAX = 100 * 1024 * 1024                                 # the .h5p file (tools/h5p_allow.json files.maxBytes is the unpacked limit)
+# py-module@1 (docs/INTERACTIVE_PYTHON.md): Python with numpy, scipy and the allow-listed extras — the same lists in engine/packcheck.js;
+# PY_EXTRAS = the names of tools/pywheels_allow.json (tests/activities.js checks that they agree)
+PY = "py-module@1"
+PY_BASE = ["numpy", "scipy"]
+PY_EXTRAS = ["quantiphy"]
+PY_MAX = 256 * 1024
+PY_STEP = (100, 10000)
+PY_PACKAGES_MAX = 12
+PY_BANNED = [
+    (r"^\s*(?:import\s+js\b|from\s+js\s+import\b|import\s+pyodide_js\b|from\s+pyodide_js\b)", "the browser (js, pyodide_js): Python has no page and no network here; return values from step()"),
+    (r"\bpyodide\.http\b|\bpyfetch\b|\bopen_url\b|^\s*(?:import|from)\s+(?:urllib|requests|http\.client|socket|ssl)\b", "a network call: a Python activity has no network"),
+    (r"^\s*(?:import|from)\s+micropip\b", 'micropip: list the package in "packages" instead (only the allow-listed ones)'),
+    (r"(?:^|[^A-Za-z0-9_.])input\s*\(", "input(): there is no console; the learner uses the controls of the spec"),
+]
+PY_WARN = [
+    (r"^\s*while\s+True\s*:", "while True: each step() has a budget (stepMs, 3 s by default) and is stopped after it"),
+    (r"\btime\.sleep\s*\(", "time.sleep(): a step blocks the learner while it sleeps; return at once"),
+]
 # sim-spec@1 (docs/INTERACTIVE.md §12): the SAME rules as engine/packcheck.js checkSimSpec
 SPEC_FORMAT = "noema.sim-spec/v1"
 DEFAULT_ENGINE = "formula@1"
@@ -121,6 +151,23 @@ def lint_html(html):
     if len(words) >= 3: W.append(f"visible text in the HTML (“{' '.join(words[:6])}…”): put every word in the string tables and show it with noema.t(key)")
     return E, W
 
+def lint_python(src, packages=None):
+    """→ (errors, warnings) of a py-module@1 activity's Python file (the same list as engine/packcheck.js lintPython)"""
+    E, W = [], []
+    if not isinstance(src, str) or not src.strip(): return ["the Python file is empty"], W
+    n = len(src.encode("utf-8"))
+    if n > PY_MAX: E.append(f"the Python file is {n // 1024} KB (at most {PY_MAX // 1024} KB)")
+    if not re.search(r"^def\s+step\s*\(", src, re.M): E.append("the Python file defines no step(inputs, state) at the top level")
+    for pat, why in PY_BANNED:
+        m = re.search(pat, src, re.M)
+        if m: E.append(f"{why} — found “{m.group(0).strip()[:40]}”")
+    for pat, why in PY_WARN:
+        if re.search(pat, src, re.M): W.append(why)
+    decl = set(packages if isinstance(packages, list) else [])
+    for name in PY_BASE + PY_EXTRAS:
+        if name not in decl and re.search(r"^\s*(?:import|from)\s+" + name + r"\b", src, re.M): E.append(f'the Python file imports {name}: list it in "packages"')
+    return E, W
+
 def sha256(text): return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 def load_activities(sdir):
@@ -139,6 +186,17 @@ def load_activities(sdir):
             if not f or not os.path.exists(f): probs.append(f"ERROR activity {aid}: entry {entry!r} not found"); a["html"] = ""
             else: a["html"] = open(f, encoding="utf-8", newline="").read()
             a["sha256"] = sha256(a["html"]); a["bytes"] = len(a["html"].encode("utf-8"))
+        elif a.get("runtime") == PY:   # Python (activities/<id>/main.py) + the spec the app draws (activities/<id>/spec.json)
+            if not _s(entry): entry = a["entry"] = f"activities/{aid}/main.py"
+            f = os.path.join(sdir, entry)
+            if not os.path.exists(f): probs.append(f"ERROR activity {aid}: entry {entry!r} not found"); a["python"] = ""
+            else: a["python"] = open(f, encoding="utf-8", newline="").read()
+            a["sha256"] = sha256(a["python"]); a["bytes"] = len(a["python"].encode("utf-8"))
+            f = os.path.join(sdir, "activities", aid, "spec.json")
+            if not os.path.exists(f): probs.append(f"ERROR activity {aid}: activities/{aid}/spec.json not found")
+            else:
+                try: a["spec"] = json.load(open(f, encoding="utf-8"))
+                except Exception as e: probs.append(f"ERROR activity {aid}: activities/{aid}/spec.json: {e}")
         elif a.get("runtime") == "sim-spec@1":
             if not _s(entry): entry = a["entry"] = f"activities/{aid}/spec.json"
             f = os.path.join(sdir, entry)
@@ -156,6 +214,20 @@ def load_activities(sdir):
             if os.path.exists(f):
                 try: a["spec"] = json.load(open(f, encoding="utf-8"))
                 except Exception as e: probs.append(f"ERROR activity {aid}: activities/{aid}/spec.json: {e}")
+        elif a.get("runtime") == H5P:
+            if not _s(entry): entry = a["entry"] = f"activities/{aid}/item.h5p"
+            f = os.path.join(sdir, entry)
+            if not os.path.isfile(f): probs.append(f"ERROR activity {aid}: entry {entry!r} not found")
+            else:
+                b = open(f, "rb").read(); a["sha256"] = hashlib.sha256(b).hexdigest(); a["bytes"] = len(b)
+            by = dict(a.get("h5pByLocale") or {}) if isinstance(a.get("h5pByLocale"), (dict, type(None))) else a.get("h5pByLocale")
+            for kind in ("content", "l10n"):   # activities/<id>/content.<locale>.json (+ l10n.<locale>.json: H5P's own strings) → inline
+                for f2 in sorted(glob.glob(os.path.join(sdir, "activities", aid, kind + ".*.json"))):
+                    loc = os.path.basename(f2)[len(kind) + 1:-5]
+                    if not isinstance(by, dict): continue
+                    try: by[loc] = {**(by.get(loc) or {}), kind: json.load(open(f2, encoding="utf-8"))}
+                    except Exception as e: probs.append(f"ERROR activity {aid}: {os.path.relpath(f2, sdir)}: {e}")
+            if by: a["h5pByLocale"] = by
         tables = {}
         pat = ((a.get("strings") or {}).get("file") if isinstance(a.get("strings"), dict) else None) or f"activities/{aid}/strings.{{locale}}.json"
         pre, suf = os.path.basename(pat).split("{locale}", 1) if "{locale}" in pat else (os.path.basename(pat), "")
@@ -175,9 +247,9 @@ def own_spec(a):
     return {**s, "engine": WASM_ENGINE, "model": {**m, "module": a.get("id")}}
 
 def _spec_of(a):
-    """the spec an activity shows (sim-spec@1: its spec; wasm-module@1: its own spec, completed) or None"""
+    """the spec an activity shows (sim-spec@1, py-module@1: its spec; wasm-module@1: its own spec, completed) or None"""
     if not isinstance(a, dict): return None
-    if a.get("runtime") == "sim-spec@1": return a.get("spec") if isinstance(a.get("spec"), dict) else None
+    if a.get("runtime") in SPEC_RUNTIMES: return a.get("spec") if isinstance(a.get("spec"), dict) else None
     if a.get("runtime") == WASM: return own_spec(a) if isinstance(a.get("spec"), dict) else None
     return None
 
@@ -206,7 +278,7 @@ def fallback_media(reg):
 
 def hash_part(reg):
     """what of the activities goes into pack.version: each bundle's sha256, its strings and its settings"""
-    return {a.get("id"): {k: v for k, v in a.items() if k not in ("html", "wasm")} for a in (reg or {}).get("items") or [] if isinstance(a, dict)}
+    return {a.get("id"): {k: v for k, v in a.items() if k not in ("html", "wasm", "python", "h5p")} for a in (reg or {}).get("items") or [] if isinstance(a, dict)}
 
 def check_activities(pack, translations=None):
     """→ (errors, warnings) of pack.activities, the blocks and sim exercises that use them, and pack.requires.
@@ -225,7 +297,7 @@ def check_activities(pack, translations=None):
             if aid in items: E.append(f"activity {aid}: duplicate id"); continue
             items[aid] = a; w = f"activity {aid}"
             rt = a.get("runtime")
-            if rt in LATER: E.append(f"{w}: runtime {rt} arrives in a later version of the app ({LATER[rt]}); use html-app@1 or sim-spec@1 for now")
+            if rt in LATER: E.append(f"{w}: runtime {rt} arrives in a later version of the app ({LATER[rt]}); use html-app@1, sim-spec@1, py-module@1 or h5p@1 for now")
             elif rt not in RUNTIMES: E.append(f"{w}: unknown runtime {rt!r} (one of {', '.join(sorted(RUNTIMES))})")
             if not (isinstance(a.get("stateVersion"), int) and a["stateVersion"] >= 1): E.append(f"{w}: stateVersion must be a whole number >= 1")
             caps = a.get("capabilities") or []
@@ -244,6 +316,27 @@ def check_activities(pack, translations=None):
             elif rt == "sim-spec@1":
                 if "spec" not in a: E.append(f"{w}: the spec (activities/{aid}/spec.json) is missing")
                 else: E += [f"{w}: {m}" for m in check_spec(a["spec"], a.get("strings") if isinstance(a.get("strings"), dict) else None, items=every)]
+            elif rt == PY:
+                pk = [] if a.get("packages") is None else a.get("packages"); allowed = PY_BASE + PY_EXTRAS
+                if not (isinstance(pk, list) and len(pk) <= PY_PACKAGES_MAX and all(isinstance(x, str) for x in pk)): E.append(f"{w}: packages must be a list of names ({', '.join(allowed)})")
+                else:
+                    for x in pk:
+                        if x not in allowed: E.append(f"{w}: package {x!r} is not available (numpy, scipy and the allow-listed extras: {', '.join(PY_EXTRAS)})")
+                    if len(set(pk)) != len(pk): E.append(f"{w}: packages lists a name twice")
+                    ex = [x for x in pk if x in PY_EXTRAS]
+                    if ex and a.get("requiresNetwork") is not True: E.append(f'{w}: an extra package ({", ".join(ex)}) is downloaded the first time: set "requiresNetwork": true')
+                if a.get("requiresNetwork") is not None and not isinstance(a.get("requiresNetwork"), bool): E.append(f"{w}: requiresNetwork must be true or false")
+                sm = a.get("stepMs")
+                if sm is not None and not (isinstance(sm, int) and not isinstance(sm, bool) and PY_STEP[0] <= sm <= PY_STEP[1]): E.append(f"{w}: stepMs is a whole number {PY_STEP[0]}–{PY_STEP[1]} (the budget of one step(), in ms)")
+                src = a.get("python")
+                if not isinstance(src, str): E.append(f"{w}: the Python file (activities/{aid}/main.py) is missing")
+                else:
+                    le, lw = lint_python(src, pk if isinstance(pk, list) else []); E += [f"{w}: {m}" for m in le]; W += [f"{w}: {m}" for m in lw]
+                    if a.get("sha256") is not None and a.get("sha256") != sha256(src): E.append(f"{w}: sha256 does not match the Python file")
+                    if a.get("bytes") is not None and a.get("bytes") != len(src.encode("utf-8")): E.append(f"{w}: bytes does not match the Python file")
+                if "spec" not in a: E.append(f"{w}: the spec (activities/{aid}/spec.json: the controls, readouts and plots the app draws) is missing")
+                else: E += [f"{w}: {m}" for m in check_spec(a["spec"], a.get("strings") if isinstance(a.get("strings"), dict) else None, python=True)]
+            elif rt == H5P: E += [f"{w}: {m}" for m in check_h5p_item(a, aid, locs, own)]
             elif rt == WASM:   # the module (size, sha256, imports, memory, exports) and its own spec, if it has one
                 E += [f"{w}: {m}" for m in WK.check_item(a)[0]]
                 sp = a.get("spec")
@@ -254,7 +347,8 @@ def check_activities(pack, translations=None):
             elif rt == EMBED:   # an allow-listed outside page: the provider, the exact URL, credit and licence (tools/embed_allow.json)
                 ee, ww = EK.check_item(a); E += [f"{w}: {m}" for m in ee]; W += [f"{w}: {m}" for m in ww]
             st = a.get("strings")
-            if not isinstance(st, dict) or not st: E.append(f"{w}: strings {{locale: {{key: text}}}} are required (an activity shows no words of its own)")
+            if rt == H5P and st in (None, {}): pass   # an H5P item keeps its words in content.json (h5pByLocale for the other languages)
+            elif not isinstance(st, dict) or not st: E.append(f"{w}: strings {{locale: {{key: text}}}} are required (an activity shows no words of its own)")
             else:
                 keys = None
                 for loc, tab in st.items():
@@ -293,6 +387,70 @@ def _shows_nothing(a):
     return isinstance(a, dict) and a.get("runtime") == WASM and not isinstance(a.get("spec"), dict)
 SHOWS_NOTHING = f"is a {WASM} module without its own spec: show it through a sim-spec@1 spec (engine {WASM_ENGINE}, model.module) or give it a spec"
 
+def check_h5p_item(a, aid, locs, own):
+    """the registry fields of an h5p@1 item (the package itself: check_h5p_packages)"""
+    E = []
+    entry = a.get("entry")
+    if entry is not None and not (isinstance(entry, str) and entry.startswith("activities/") and entry.endswith(".h5p") and ".." not in entry.split("/")): E.append(f"entry must be the .h5p file beside the pack (activities/{aid}/item.h5p)")
+    if not (isinstance(a.get("sha256"), str) and SHA_RE.match(a["sha256"])): E.append("sha256 (of the .h5p file) is required")
+    if not (isinstance(a.get("bytes"), int) and not isinstance(a.get("bytes"), bool) and 0 < a["bytes"] <= H5P_MAX): E.append(f"bytes (the size of the .h5p file, at most {H5P_MAX // 1048576} MB) is required")
+    if "html" in a: E.append("an h5p@1 item has no html (its .h5p file travels beside the pack)")
+    if a.get("h5p") is not None and not isinstance(a.get("h5p"), str): E.append("h5p (inline) must be the .h5p file in base64")
+    by = a.get("h5pByLocale")
+    if by is not None:
+        if not isinstance(by, dict): E.append("h5pByLocale must be {locale: {content} | {h5p, sha256}}")
+        else:
+            for loc, v in by.items():
+                if loc not in locs: E.append(f"h5pByLocale.{loc}: the pack is not read in {loc} ({', '.join(locs)})"); continue
+                if not isinstance(v, dict) or not (isinstance(v.get("content"), dict) or (isinstance(v.get("h5p"), str) and isinstance(v.get("sha256"), str) and SHA_RE.match(v["sha256"]))):
+                    E.append(f"h5pByLocale.{loc} must be {{content}} (its content.json) or {{h5p, sha256}} (another package in base64)")
+                elif v.get("l10n") is not None and not isinstance(v.get("l10n"), dict): E.append(f"h5pByLocale.{loc}.l10n must be an object (H5P's own strings)")
+    for loc in locs:
+        if loc != own and not (isinstance(by, dict) and loc in by): E.append(f"h5pByLocale.{loc} is missing: the item's words in {loc} (activities/{aid}/content.{loc}.json)")
+    return E
+
+def _unzip(b):
+    import io, zipfile
+    try:
+        with zipfile.ZipFile(io.BytesIO(b)) as z:
+            fa = H5.ALLOW["files"]; infos = [i for i in z.infolist() if not i.is_dir()]
+            if len(infos) > fa["maxFiles"] or sum(i.file_size for i in infos) > fa["maxBytes"]: return None
+            return {i.filename: z.read(i) for i in infos}
+    except Exception: return None
+
+def _b64(s):
+    import base64
+    try: return base64.b64decode(re.sub(r"^data:[^,]*;base64,", "", s).strip())
+    except Exception: return b""
+
+def check_h5p_packages(pack, bytes_of=None):
+    """→ (errors, warnings) of the .h5p files of the pack's h5p@1 items: sha256 and bytes as the registry says, the package rules
+    (tools/h5p_check.py), and each h5pByLocale translation with the same rules. bytes_of(item) → the file's bytes or None
+    (an inline "h5p" in base64 is used first). The SAME messages as NoemaPackCheck.checkActivityPackages (tests/activities.js)."""
+    E, W = [], []
+    for a in ((pack.get("activities") or {}).get("items") or []):
+        if not isinstance(a, dict) or a.get("runtime") != H5P or not isinstance(a.get("id"), str): continue
+        w = f"activity {a['id']}"
+        b = _b64(a["h5p"]) if isinstance(a.get("h5p"), str) else (bytes_of(a) if bytes_of else None)
+        if b is None: E.append(f"{w}: the .h5p file {a.get('entry') or ''} is missing"); continue
+        if a.get("sha256") != hashlib.sha256(b).hexdigest(): E.append(f"{w}: sha256 does not match the .h5p file")
+        if a.get("bytes") != len(b): E.append(f"{w}: bytes does not match the .h5p file")
+        files = _unzip(b)
+        if files is None: E.append(f"{w}: not a .h5p (zip) file"); continue
+        r = H5.check_files(files); E += [f"{w}: {m}" for m in r["errors"]]; W += [f"{w}: {m}" for m in r["warnings"]]
+        by = a.get("h5pByLocale") if isinstance(a.get("h5pByLocale"), dict) else {}
+        for loc in sorted(by):
+            v = by[loc]
+            if not isinstance(v, dict): continue
+            if isinstance(v.get("h5p"), str):
+                b2 = _b64(v["h5p"]); f2 = _unzip(b2)
+                if f2 is None: E.append(f"{w}: h5pByLocale.{loc}: not a .h5p (zip) file"); continue
+                if v.get("sha256") != hashlib.sha256(b2).hexdigest(): E.append(f"{w}: h5pByLocale.{loc}: sha256 does not match the .h5p file")
+            elif isinstance(v.get("content"), dict): f2 = {**files, "content/content.json": json.dumps(v["content"], ensure_ascii=False).encode("utf-8")}
+            else: continue
+            E += [f"{w}: h5pByLocale.{loc}: {m}" for m in H5.check_files(f2)["errors"]]
+    return E, W
+
 def check_block(b, items):
     E = []
     if b.get("activity") not in items: E.append(f"interactive: activity {b.get('activity')!r} is not in pack.activities")
@@ -319,9 +477,9 @@ def check_sim(e, items):
     if not isinstance(g, dict) or g.get("mode") not in GRADE_MODES: E.append('grade must be {"mode": "reported"} (the activity reports its result) or {"mode": "checks", "checks": [{"expr": …}]} (sim-spec@1)')
     else:
         if g.get("pass") is not None and not (_num(g["pass"]) and 0 < g["pass"] <= 1): E.append("grade.pass must be a number in (0, 1]")
-        if g["mode"] == "reported" and rt in CHECKS_RUNTIMES: E.append(f'a {rt} activity reports nothing itself: grade it with {{"mode": "checks", "checks": […]}}')
+        if g["mode"] == "reported" and rt in CHECKS_RUNTIMES and rt != PY: E.append(f'a {rt} activity reports nothing itself: grade it with {{"mode": "checks", "checks": […]}}')
         if g["mode"] == "checks":
-            if rt is not None and not (isinstance(rt, str) and rt in CHECKS_RUNTIMES): E.append(f'grade.mode "checks" needs an activity whose values the app can see (sim-spec@1); {rt} reports its own result: use "reported"')
+            if rt is not None and not (isinstance(rt, str) and rt in CHECKS_RUNTIMES): E.append(f'grade.mode "checks" needs an activity whose values the app can see (sim-spec@1, py-module@1, wasm-module@1); {rt} reports its own result: use "reported"')
             cs = g.get("checks")
             if not (isinstance(cs, list) and 1 <= len(cs) <= SPEC_LIM["checks"]): E.append(f"grade.checks must be a list of 1–{SPEC_LIM['checks']} checks {{expr, label?, weight?}}")
             else:
@@ -352,7 +510,8 @@ def check_sim(e, items):
                     if k == "fault" and fids is not None:   # a bench: the fault of this task (one id), or the ones the seed draws from (a list)
                         if not ((v in fids) if isinstance(v, str) else (isinstance(v, list) and len(v) >= 1 and all(isinstance(x, str) and x in fids for x in v))):
                             E.append("task.params.fault must be the id of a fault of the bench, or a list of them (the seed draws one)")
-                    elif k not in consts: E.append(f"task.params.{k}: not a constant of the spec (a sim-spec@1 task sets only the spec's consts)")
+                    elif k not in consts:
+                        if rt != PY: E.append(f"task.params.{k}: not a constant of the spec (a sim-spec@1 task sets only the spec's consts)")   # py-module@1: Python's init(task, seed) reads the others
                     elif not _num(v): E.append(f"task.params.{k} must be a number")
     h = e.get("hints")
     if h is not None and not (isinstance(h, list) and len(h) <= HINTS_MAX and all(_s(x) for x in h)): E.append(f"hints must be a list of at most {HINTS_MAX} texts")
@@ -378,16 +537,20 @@ def spec_names(spec):
     if isinstance(spec.get("bench"), dict): out += BENCH_NAMES   # a bench's values: for the checks of a sim exercise only (never shown)
     return out
 
-def check_spec(spec, tables=None, engines=None, items=None):
+def check_spec(spec, tables=None, engines=None, items=None, python=False):
     """→ errors of a sim-spec@1 spec. tables: {locale: {key: text}} (every label key must be in each); engines: the known engine ids;
-    items: {id: item} of the pack (a wasm@1 model names its module there; None = the model is not checked here)."""
+    items: {id: item} of the pack (a wasm@1 model names its module there; None = the model is not checked here).
+    python: the spec of a py-module@1 activity (its outputs come from Python's step(): no engine, no model, no bench, at least one output)."""
     E = []
     if not isinstance(spec, dict): return ["spec: a JSON object is required (activities/<id>/spec.json)"]
     if len(json.dumps(spec, ensure_ascii=False, separators=(",", ":")).encode("utf-8")) > SPEC_LIM["bytes"]: E.append(f"spec: at most {SPEC_LIM['bytes'] // 1024} KB")
     if spec.get("format") != SPEC_FORMAT: E.append(f'spec: format must be "{SPEC_FORMAT}"')
     for k in sorted(set(spec) - SPEC_KEYS): E.append(f"spec: unknown field {k!r}")
-    eng = spec.get("engine", DEFAULT_ENGINE); known = ENGINES if engines is None else set(engines)
-    if not isinstance(eng, str) or eng not in known: E.append(f"spec: unknown engine {eng!r} (this version knows {', '.join(sorted(known))})")
+    eng = PY if python else spec.get("engine", DEFAULT_ENGINE); known = ENGINES if engines is None else set(engines)
+    if python:
+        if "engine" in spec: E.append("spec.engine: the outputs of a py-module@1 activity come from its Python step(); leave engine out")
+        if "model" in spec: E.append("spec.model: a py-module@1 activity has no engine model (its Python code is the model)")
+    elif not isinstance(eng, str) or eng not in known: E.append(f"spec: unknown engine {eng!r} (this version knows {', '.join(sorted(known))})")
     if eng == DEFAULT_ENGINE and "model" in spec: E.append("spec: model configures another engine; formula@1 has none")
     if spec.get("model") is not None and not isinstance(spec["model"], dict): E.append("spec: model must be an object")
     keys = set(); seen = set()
@@ -451,6 +614,7 @@ def check_spec(spec, tables=None, engines=None, items=None):
         if name(d.get("id"), w + ".id"): names.append(d["id"])
     in_names = list(names)   # what an engine's inputs may use: consts, params, derived
     os_ = spec.get("outputs"); series = []
+    if python and not (isinstance(os_, list) and os_): E.append("spec.outputs: list what step() returns, at least one {id, kind: scalar | series}")
     if os_ is not None:
         if eng == DEFAULT_ENGINE: E.append("spec.outputs come from an engine; formula@1 has none (use derived)")
         elif not (isinstance(os_, list) and len(os_) <= SPEC_LIM["outputs"]): E.append(f"spec.outputs must be a list of at most {SPEC_LIM['outputs']} {{id, kind}}")

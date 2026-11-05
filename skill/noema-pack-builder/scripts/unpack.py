@@ -67,7 +67,25 @@ if acts:
         aid = str(x.get('id') or '')
         if not re.fullmatch(r'[a-z0-9][a-z0-9-]{1,60}', aid): print(f'⚠️ activity {aid!r}: not a valid id, skipped'); continue
         ad = os.path.join(d, 'activities', aid); os.makedirs(ad, exist_ok=True)
-        e = {k: v for k, v in x.items() if k not in ('html', 'sha256', 'bytes', 'strings', 'spec', 'wasm')}   # (external-embed@1: no file, no entry — its url, provider, credit stay in the registry)
+        e = {k: v for k, v in x.items() if k not in ('html', 'python', 'sha256', 'bytes', 'strings', 'spec', 'h5p', 'h5pByLocale', 'wasm')}   # (external-embed@1: no file, no entry — its url, provider, credit stay in the registry)
+        if x.get('runtime') == 'h5p@1':   # the .h5p file travels beside the pack: in the .noema.zip, inline (one-file copies), or next to a pack.json
+            e['entry'] = f'activities/{aid}/item.h5p'; ent = str(x.get('entry') or e['entry']); raw = None
+            if bundle and ent in bundle.namelist() and '..' not in ent.split('/'): raw = bundle.read(ent)
+            elif isinstance(x.get('h5p'), str): raw = base64.b64decode(re.sub(r'^data:[^,]*;base64,', '', x['h5p']))
+            else:
+                here = os.path.dirname(os.path.abspath(a[0]))
+                for g in (os.path.join(here, *e['entry'].split('/')), os.path.join(here, f'{sid}.act.{aid}.h5p')):
+                    if os.path.isfile(g): raw = open(g, 'rb').read(); break
+            if raw is None: print(f'⚠️ activity {aid}: its .h5p file is not here ({e["entry"]}) — get the file (it is inside {sid}.noema.zip) and put it there')
+            else: open(os.path.join(ad, 'item.h5p'), 'wb').write(raw)
+            rest = {}
+            for loc, v in (x.get('h5pByLocale') if isinstance(x.get('h5pByLocale'), dict) else {}).items():   # content.<locale>.json / l10n.<locale>.json
+                if not re.fullmatch(r'[A-Za-z]{2,3}(-[A-Za-z0-9]{2,4}){0,2}', str(loc)) or not isinstance(v, dict): continue
+                for kind in ('content', 'l10n'):
+                    if isinstance(v.get(kind), dict): json.dump(v[kind], open(os.path.join(ad, f'{kind}.{loc}.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+                left = {k: w for k, w in v.items() if k not in ('content', 'l10n')}   # another package for this language stays in the registry
+                if left: rest[loc] = left
+            if rest: e['h5pByLocale'] = rest
         if isinstance(x.get('html'), str):
             e['entry'] = f'activities/{aid}/app.html'; open(os.path.join(ad, 'app.html'), 'w', encoding='utf-8', newline='').write(x['html'])
         if 'spec' in x:   # sim-spec@1: the spec is data (activities/<id>/spec.json); wasm-module@1: its own spec, beside module.wasm
@@ -76,6 +94,8 @@ if acts:
             try: raw = base64.b64decode(x['wasm'], validate=True)
             except Exception: print(f'⚠️ activity {aid}: the module is not valid base64, skipped'); continue
             e['entry'] = f'activities/{aid}/module.wasm'; open(os.path.join(ad, 'module.wasm'), 'wb').write(raw)
+        if isinstance(x.get('python'), str):   # py-module@1: the Python file is the entry (activities/<id>/main.py), its spec beside it
+            e['entry'] = f'activities/{aid}/main.py'; open(os.path.join(ad, 'main.py'), 'w', encoding='utf-8', newline='').write(x['python'])
         for loc, tab in (x.get('strings') or {}).items():
             if re.fullmatch(r'[A-Za-z]{2,3}(-[A-Za-z0-9]{2,4}){0,2}', str(loc)): json.dump(tab, open(os.path.join(ad, f'strings.{loc}.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
         reg.append(e)

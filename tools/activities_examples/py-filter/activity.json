@@ -1,0 +1,15 @@
+{
+ "id": "py-filter",
+ "runtime": "py-module@1",
+ "entry": "activities/py-filter/main.py",
+ "packages": ["numpy"],
+ "stateVersion": 1,
+ "capabilities": ["state", "events"],
+ "fallback": {
+  "media": "py-filter-still",
+  "text": "The gain of a moving-average filter of N = 8 samples at a sampling rate of 8 kHz: close to 0 dB at low frequencies, about −1.3 dB at 300 Hz, and exact zeros (no output at all) at every multiple of fs/N = 1 kHz. A longer window smooths more and lowers the −3 dB frequency; a first-order (RC-like) filter has no zeros but falls by 20 dB per decade above its cutoff."
+ },
+ "origin": "own",
+ "credit": "noema-lite reference activity",
+ "license": "own"
+}

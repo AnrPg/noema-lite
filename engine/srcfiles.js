@@ -126,6 +126,69 @@ window.NoemaSrcFiles = (() => {
     }
     return res;
   }
+  /* ---------- h5p@1: an activity's .h5p file travels BESIDE the pack (docs/INTERACTIVE_H5P.md, docs/adr/001 D11) ----------
+     The registry item names it (entry activities/<id>/item.h5p, sha256, bytes); the file itself lives
+       on this device   IndexedDB "noema-files", key act|<account>|<subject>|<sha256> (so the item plays offline exactly when the pack does)
+       in the account   noema-private <user>/packs/<subject>/activities/<id>/item.h5p (beside packs/<subject>.json; noema_finish_upload asks for it)
+       in the library   beside the library pack: library/subjects/<subject>/activities/<id>/item.h5p (tools/build.py copies it to the site)
+     The host page reads it and checks its sha256 (NoemaH5P.load); the activity's frame never fetches anything. */
+  const SHA = /^[0-9a-f]{64}$/;
+  const h5pItems = p => ((p?.activities?.items) || []).filter(a => a && a.runtime === 'h5p@1' && SHA.test(String(a.sha256 || '')) && /^activities\/[^]+\.h5p$/.test(String(a.entry || '')) && !String(a.entry).split('/').includes('..'));
+  const actKey = (acc, subj, sha) => `act|${acc}|${subj}|${sha}`;
+  const actCloudPath = (subj, a) => `packs/${subj}/${a.entry}`;   // = cloud/mcp/server.mjs actPath (under the user's folder)
+  /** Keep the .h5p file of an item (checked against its bytes and sha256 first) → true when kept. */
+  async function putActivityFile(acc, subj, a, blob, { upload = true } = {}) {
+    if (!blob || (a.bytes && blob.size !== a.bytes) || (await sha256(blob).catch(() => null)) !== a.sha256) return false;
+    // the bytes, not the Blob: WebKit refuses a Blob in IndexedDB in some places (a file:// page: the transaction fails with no error)
+    await DB.put(actKey(acc, subj, a.sha256), { bytes: await blob.arrayBuffer(), id: a.id, size: blob.size, added: new Date().toISOString() });
+    if (upload && cloudOn(acc)) await NoemaCloud.uploadObject(actCloudPath(subj, a), blob, 'application/zip').catch(e => console.warn('[activity files] cloud upload failed — kept on this device', e));   // i18n-ignore (a log)
+    return true;
+  }
+  /** After importing a package: keep the .h5p files that came with it → { attached: [id], missing: [id] } */
+  async function attachActivityFiles(acc, pack, fileOf) {
+    const res = { attached: [], missing: [] };
+    for (const a of h5pItems(pack)) {
+      if (typeof a.h5p === 'string') continue;   // inline (a one-file copy): nothing to keep
+      let blob = null; try { blob = await fileOf(a.entry, a); } catch (e) { }
+      (blob && await putActivityFile(acc, pack.subject.id, a, blob) ? res.attached : res.missing).push(a.id);
+    }
+    return res;
+  }
+  /** The .h5p file of an item as bytes, from wherever it is: this device, the account (then kept here), the library's folder. null: none. */
+  async function activityFile(acc, subj, a, { base = null } = {}) {
+    const hit = await DB.get(actKey(acc, subj, a.sha256)).catch(() => null);
+    if (hit?.bytes) return new Uint8Array(hit.bytes);
+    if (hit?.blob) return new Uint8Array(await hit.blob.arrayBuffer());   // (kept as a Blob by an earlier version)
+    let blob = null;
+    if (cloudOn(acc)) blob = await NoemaCloud.downloadObject(actCloudPath(subj, a)).then(r => r.ok === false ? null : r.blob()).catch(() => null);
+    if (!blob && base) blob = await fetch(base + a.entry, { credentials: 'same-origin' }).then(r => r.ok ? r.blob() : null).catch(() => null);
+    if (!blob) return null;
+    if (await putActivityFile(acc, subj, a, blob, { upload: false }).catch(() => false)) return new Uint8Array(await blob.arrayBuffer());
+    return null;   // not the file the pack names (sha256 / size): never played
+  }
+  /** When a pack is opened: each h5p@1 item gets its loader (act.h5p, not stored with the pack) and the files are fetched early, so a
+      slow first download is done before the item mounts (the core stops a frame that has not said hello within 15 s). */
+  function wireActivities(acc, meta, pack) {
+    const subj = pack?.subject?.id, base = meta?.path && /\/pack\.js$/.test(meta.path) ? meta.path.replace(/pack\.js$/, '') : null;
+    const items = h5pItems(pack).filter(a => !('h5p' in a)); if (!subj || !items.length) return 0;
+    for (const a of items) {
+      let p = null; const load = () => p || (p = activityFile(acc, subj, a, { base }).then(u => { if (!u) p = null; return u; }));
+      Object.defineProperty(a, 'h5p', { value: load, enumerable: false, configurable: true, writable: true });   // (a function: never saved, never shared)
+      setTimeout(() => load().catch(() => { }), 0);
+    }
+    return items.length;
+  }
+  /** Every file that travels with a pack in a package (its packaged sources and its activities' .h5p files) → { path: Blob } */
+  async function bundleFiles(b, pack) {
+    const out = {};
+    for (const path of [...packaged(pack).map(s => s.file), ...h5pItems(pack).map(a => a.entry)]) { const f = await b.file(path).catch(() => null); if (f) out[path] = f; }
+    return out;
+  }
+  /** Remove the kept .h5p files of a subject (when the subject is deleted). */
+  async function removeActivityFiles(acc, pack) {
+    for (const a of h5pItems(pack)) await DB.del(actKey(acc, pack.subject.id, a.sha256)).catch(() => { });
+    if (cloudOn(acc)) { const paths = h5pItems(pack).map(a => `${NoemaCloud.session().user.id}/${actCloudPath(pack.subject.id, a)}`); if (paths.length) await NoemaCloud.deleteObjects('noema-private', paths).catch(() => { }); }
+  }
   /** A package of a subject: pack.json + every attached source file (also files attached by hand). */
   async function makeBundle(acc, pack) {
     if (!window.JSZip && window.NoemaViewer?.jszip) await NoemaViewer.jszip();
@@ -136,6 +199,11 @@ window.NoemaSrcFiles = (() => {
       let fn = String(rec.name || s.fileName || s.id).split(/[\\/]/).pop().replace(/[\u0000-\u001f<>:"|?*]/g, '_') || s.id; while (used.has(fn.toLowerCase())) fn = s.id + '-' + fn; used.add(fn.toLowerCase());
       Object.assign(s, { file: 'sources/' + fn, fileName: rec.name || fn, size: rec.blob.size, mime: rec.type || rec.blob.type || '', sha256: await sha256(rec.blob) });
       z.file('sources/' + fn, rec.blob, { createFolders: false, compression: /pdf|zip|image|video|audio|openxml|epub/.test(s.mime) ? 'STORE' : 'DEFLATE' }); n++;
+    }
+    for (const a of h5pItems(p)) {   // h5p@1: the .h5p files travel beside the pack, as make_pack.py writes them
+      if (typeof a.h5p === 'string') continue;
+      const u = await activityFile(acc, p.subject.id, a).catch(() => null);
+      if (u) z.file(a.entry, u, { createFolders: false, compression: 'STORE' });
     }
     p.counts = { ...(p.counts || {}), sourceFiles: n };
     z.file('pack.json', JSON.stringify(p));
@@ -174,5 +242,5 @@ window.NoemaSrcFiles = (() => {
     }
     return res;
   }
-  return { link, forSharing, attachShared, put, get, remove, removeAll, index, available, webUrl, match, cloudPath, MAX, isZip, packaged, readBundle, attachPackaged, makeBundle, downloadBundle, sha256, filePage };
+  return { link, forSharing, attachShared, put, get, remove, removeAll, index, available, webUrl, match, cloudPath, MAX, isZip, packaged, readBundle, attachPackaged, h5pItems, putActivityFile, attachActivityFiles, activityFile, wireActivities, removeActivityFiles, bundleFiles, makeBundle, downloadBundle, sha256, filePage };
 })();

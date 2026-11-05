@@ -2,7 +2,7 @@
 
 An activity that is a page of a third-party provider (a PhET simulation, a GeoGebra applet, a Desmos graph) shown in a frame.
 It is **opt-in, needs the network, and is explore only**: a theory block, never a graded `sim` exercise. The contract of every
-activity is `docs/INTERACTIVE.md`; the decision is the ADR's D12 (P6), as built in its §11.
+activity is `docs/INTERACTIVE.md`; the decision is the ADR's D12 (P6), as built in its §13.
 
 Files: the allow-list `tools/embed_allow.json` (in the toolkit as `embed_allow.json`), the runtime
 `engine/src/45_activity_embed.js` (+ `45_activity_embed.css`), the checks `embed_check.py` (= `NoemaEmbed.check` /

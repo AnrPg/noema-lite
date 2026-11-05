@@ -1,0 +1,68 @@
+{
+ "format": "noema.pyodide-pin/v1",
+ "version": "0.27.7",
+ "source": "https://cdn.jsdelivr.net/pyodide/v0.27.7/full/",
+ "core": [
+  "pyodide.js",
+  "pyodide.asm.js",
+  "pyodide.asm.wasm",
+  "python_stdlib.zip",
+  "pyodide-lock.json"
+ ],
+ "packages": {
+  "numpy": [
+   "numpy-2.0.2-cp312-cp312-pyodide_2024_0_wasm32.whl"
+  ],
+  "scipy": [
+   "numpy-2.0.2-cp312-cp312-pyodide_2024_0_wasm32.whl",
+   "openblas-0.3.26.zip",
+   "scipy-1.14.1-cp312-cp312-pyodide_2024_0_wasm32.whl"
+  ],
+  "micropip": [
+   "packaging-24.2-py3-none-any.whl",
+   "micropip-0.9.0-py3-none-any.whl"
+  ]
+ },
+ "files": {
+  "pyodide.js": {
+   "sha256": "b4cb23a53aba19c221659b9fb40a2f18281d685691dc06647fb0afd0681baf98",
+   "bytes": 14913
+  },
+  "pyodide.asm.js": {
+   "sha256": "6b4c90de5b7172873f04f21884d0e9d2274e305fe32116558fe3e4fbe3618d51",
+   "bytes": 1255688
+  },
+  "pyodide.asm.wasm": {
+   "sha256": "a50dd1843f805a0b7c45b61037ee0d7b26dfe85efe0e18ef95a34ad24e401f5f",
+   "bytes": 10105545
+  },
+  "python_stdlib.zip": {
+   "sha256": "16611534726e5d8ac2bd8f926410b2dcb8d6f49aa24913463533b457a2115c16",
+   "bytes": 2360737
+  },
+  "pyodide-lock.json": {
+   "sha256": "9c45b916001a750f4102fc287494f3eab215909c7535c626a20db80fd6333e2c",
+   "bytes": 112205
+  },
+  "numpy-2.0.2-cp312-cp312-pyodide_2024_0_wasm32.whl": {
+   "sha256": "ebb61241d962b98b21597d7ce43b67668a6d5bab3acec4fbe958657320d7cd08",
+   "bytes": 3061133
+  },
+  "openblas-0.3.26.zip": {
+   "sha256": "787ea9a8a5cd160204388d03324b3b7ce5c9aea14b5680cec987f837e76c5198",
+   "bytes": 6117592
+  },
+  "scipy-1.14.1-cp312-cp312-pyodide_2024_0_wasm32.whl": {
+   "sha256": "997c50a61564a8ce6a56ea98a42e7f4427e5eb98475a73233e83df6a184f415c",
+   "bytes": 13477451
+  },
+  "packaging-24.2-py3-none-any.whl": {
+   "sha256": "fbf6a5ace596eb8e28fe0089ecfc0bca2eb3930563e9ca06acb98ea5302b99f7",
+   "bytes": 71930
+  },
+  "micropip-0.9.0-py3-none-any.whl": {
+   "sha256": "034f22763607744f982d2911170c50b496a38b8ba0535e5a09618475b1d7b051",
+   "bytes": 114896
+  }
+ }
+}

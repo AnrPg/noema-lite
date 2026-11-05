@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 220" width="600" height="220">
+<rect width="600" height="220" fill="#fafaf7"/>
+<circle cx="150" cy="110" r="90" fill="#d9a066"/><path d="M62 92h176M60 112h180M66 132h168" stroke="#b07a45" stroke-width="7" fill="none"/>
+<circle cx="190" cy="140" r="9" fill="#c0604a"/>
+<circle cx="330" cy="110" r="8" fill="#5b8bd0"/><circle cx="400" cy="110" r="4.3" fill="#c1440e"/><circle cx="470" cy="110" r="7.6" fill="#e6c27a"/>
+<g font-family="sans-serif" font-size="15" fill="#333" text-anchor="middle"><text x="150" y="215">Jupiter</text><text x="330" y="140">Earth</text><text x="400" y="140">Mars</text><text x="470" y="140">Venus</text></g>
+</svg>

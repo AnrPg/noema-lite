@@ -62,7 +62,7 @@ The preview must be the *real* runtime, and `sim-spec@1` is part of `engine.js`,
 sets the subject first). A separate `author.html` would need a second copy of the runtime or a stubbed loader. So the page is
 a route, `#/author`; it works with any subject open (the activity is not added to it).
 
-## Integration (done, P6 — docs/adr/001 §12)
+## Integration (done, P6 — docs/adr/001 §14)
 
 1. **Loading**: `authorView` (`engine/src/40_views.js`) loads `schemaform.js`, `activity_author_schemas.js`, `activity_author.js` and
    `activity_author.css` from `NOEMA_ENGINE_BASE` on the first visit; `tools/build.py` copies them into the site and inlines them in

@@ -3,7 +3,7 @@
 The learner can take their record of a subject to a learning record store (LRS) or an LMS: **⋮ (the subject's menu) › Export
 learning record (xAPI)** downloads `<subject>.xapi.json` — every attempt of an activity, its events and results, and each
 exercise's answers, as xAPI 1.0.3 statements. Nothing is sent anywhere; the app has no LRS connection.
-The decision is the ADR's D12 (P6), as built in its §11.
+The decision is the ADR's D12 (P6), as built in its §13.
 
 Code: `engine/src/43_xapi.js` → `window.NoemaXAPI` (and `module.exports` for node): pure functions, no network, no
 `Date.now()`, no randomness. The menu item: `exportXAPI` in `engine/src/40_views.js`. The file's schema:

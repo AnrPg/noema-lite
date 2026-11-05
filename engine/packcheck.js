@@ -370,9 +370,23 @@
   /* ---------- interactive activities (docs/INTERACTIVE.md): the SAME rules as tools/activities.py (tests/activities.js) ---------- */
   const ACT = {
     FORMAT: 'noema.activities/v1', ID_RE: /^[a-z0-9][a-z0-9-]{1,60}$/, KEY_RE: /^[a-z][a-zA-Z0-9_.-]{0,63}$/,
-    RUNTIMES: new Set(['html-app@1', 'sim-spec@1']), LATER: { 'py-module@1': 'P4', 'h5p@1': 'P4b' },
+    RUNTIMES: new Set(['html-app@1', 'sim-spec@1', 'py-module@1', 'h5p@1']), LATER: {},
+    H5P: 'h5p@1', SHA_RE: /^[0-9a-f]{64}$/, H5P_MAX: 100 * 1024 * 1024,   // h5p@1: the .h5p file travels beside the pack (docs/INTERACTIVE_H5P.md)
     CAPS: new Set(['state', 'events', 'resize', 'result', 'hints', 'announce']), GRADE_MODES: new Set(['reported', 'checks']),
-    CHECKS_RUNTIMES: new Set(['sim-spec@1']),   // runtimes whose values the app can see (the checks grader needs them)
+    CHECKS_RUNTIMES: new Set(['sim-spec@1', 'py-module@1']),   // runtimes whose values the app can see (the checks grader needs them)
+    SPEC_RUNTIMES: new Set(['sim-spec@1', 'py-module@1']),     // runtimes the app draws from a spec (py-module@1: its outputs come from Python's step())
+    // py-module@1 (docs/INTERACTIVE_PYTHON.md): Python with numpy, scipy and the allow-listed extras (tools/pywheels_allow.json) — the same lists in tools/activities.py
+    PY: 'py-module@1', PY_BASE: ['numpy', 'scipy'], PY_EXTRAS: ['quantiphy'], PY_MAX: 256 * 1024, PY_STEP: [100, 10000], PY_PACKAGES_MAX: 12,
+    PY_BANNED: [
+      [/^\s*(?:import\s+js\b|from\s+js\s+import\b|import\s+pyodide_js\b|from\s+pyodide_js\b)/m, 'the browser (js, pyodide_js): Python has no page and no network here; return values from step()'],
+      [/\bpyodide\.http\b|\bpyfetch\b|\bopen_url\b|^\s*(?:import|from)\s+(?:urllib|requests|http\.client|socket|ssl)\b/m, 'a network call: a Python activity has no network'],
+      [/^\s*(?:import|from)\s+micropip\b/m, 'micropip: list the package in "packages" instead (only the allow-listed ones)'],
+      [/(?:^|[^A-Za-z0-9_.])input\s*\(/m, 'input(): there is no console; the learner uses the controls of the spec'],
+    ],
+    PY_WARN: [
+      [/^\s*while\s+True\s*:/m, 'while True: each step() has a budget (stepMs, 3 s by default) and is stopped after it'],
+      [/\btime\.sleep\s*\(/, 'time.sleep(): a step blocks the learner while it sleeps; return at once'],
+    ],
     // sim-spec@1 (docs/INTERACTIVE.md §12): the SAME rules as tools/activities.py check_spec
     SPEC_FORMAT: 'noema.sim-spec/v1', DEFAULT_ENGINE: 'formula@1', ENGINES: new Set(['formula@1', 'circuit-mna@1', 'thermal@1', 'pid@1', 'rf@1', 'twin@1']),   // the same list in tools/activities.py
     SPEC_KEYS: new Set(['format', 'engine', 'model', 'title', 'intro', 'consts', 'params', 'derived', 'outputs', 'readouts', 'plots', 'bench']),
@@ -429,7 +443,7 @@
     return { ...s, engine: ACT.WASM_ENGINE, model: { ...(specObj(s.model) ? s.model : {}), module: a.id } };
   }
   /** the spec an activity shows (sim-spec@1: its spec; wasm-module@1: its own spec, completed) or null */
-  const specOf = a => !a ? null : a.runtime === 'sim-spec@1' ? (specObj(a.spec) ? a.spec : null) : a.runtime === ACT.WASM ? (specObj(a.spec) ? ownSpec(a) : null) : null;
+  const specOf = a => !a ? null : ACT.SPEC_RUNTIMES.has(a.runtime) ? (specObj(a.spec) ? a.spec : null) : a.runtime === ACT.WASM ? (specObj(a.spec) ? ownSpec(a) : null) : null;
   /** a wasm-module@1 item without its own spec: a module for a sim-spec@1 spec, nothing a block or an exercise can show */
   const showsNothing = a => !!a && a.runtime === ACT.WASM && !specObj(a.spec);
   const SHOWS_NOTHING = `is a ${ACT.WASM} module without its own spec: show it through a sim-spec@1 spec (engine ${ACT.WASM_ENGINE}, model.module) or give it a spec`;
@@ -449,6 +463,19 @@
     for (const [re, why] of ACT.WARN) if (re.test(html)) W.push(why);
     const words = visibleText(html);
     if (words.length >= 3) W.push(`visible text in the HTML (“${words.slice(0, 6).join(' ')}…”): put every word in the string tables and show it with noema.t(key)`);
+    return { errors: E, warnings: W };
+  }
+  /** lintPython(source, packages) → { errors, warnings }: what a py-module@1 activity may not contain (the same list as tools/activities.py lint_python) */
+  function lintPython(src, packages) {
+    const E = [], W = [];
+    if (typeof src !== 'string' || !src.trim()) return { errors: ['the Python file is empty'], warnings: W };
+    const n = utf8(src);
+    if (n > ACT.PY_MAX) E.push(`the Python file is ${Math.floor(n / 1024)} KB (at most ${ACT.PY_MAX / 1024} KB)`);
+    if (!/^def\s+step\s*\(/m.test(src)) E.push('the Python file defines no step(inputs, state) at the top level');
+    for (const [re, why] of ACT.PY_BANNED) { const m = src.match(re); if (m) E.push(`${why} — found “${m[0].trim().slice(0, 40)}”`); }
+    for (const [re, why] of ACT.PY_WARN) if (re.test(src)) W.push(why);
+    const decl = new Set(Array.isArray(packages) ? packages : []);
+    for (const name of [...ACT.PY_BASE, ...ACT.PY_EXTRAS]) if (!decl.has(name) && new RegExp('^\\s*(?:import|from)\\s+' + name + '\\b', 'm').test(src)) E.push(`the Python file imports ${name}: list it in "packages"`);
     return { errors: E, warnings: W };
   }
   /* ---------- sim-spec@1 (docs/INTERACTIVE.md §12): every expression through NoemaExpr (engine/src/35_simexpr.js, loaded beside this file) ---------- */
@@ -689,17 +716,23 @@
     }
     if (b.budget !== undefined && !(Number.isInteger(b.budget) && b.budget >= 1 && b.budget <= L.budget)) E.push(`spec.bench.budget is a whole number 1–${L.budget} (the measurements allowed)`);
   }
-  /** checkSimSpec(spec, tables?, engines?) → errors of a sim-spec@1 spec. tables: {locale: {key: text}}; engines: the known engine ids
-      (default ACT.ENGINES; the app passes the engines it has registered); items: {id: item} of the pack (a wasm@1 model names its
-      module there; none = the model is not checked here, the engine's own check does it in the app). The same rules as tools/activities.py check_spec. */
-  function checkSimSpec(spec, tables, engines, items) {
+  /** checkSimSpec(spec, tables?, engines?, opts?) → errors of a sim-spec@1 spec. tables: {locale: {key: text}}; engines: the known engine ids
+      (default ACT.ENGINES; the app passes the engines it has registered). opts.python: the spec of a py-module@1 activity (its outputs
+      come from Python's step(): no engine, no model, no bench, at least one output). opts.items: {id: item} of the pack (a wasm@1 model
+      names its module there; none = the model is not checked here, the engine's own check does it in the app). The same rules as
+      tools/activities.py check_spec. */
+  function checkSimSpec(spec, tables, engines, opts) {
+    const py = !!(opts && opts.python), items = opts && isObj(opts.items) ? opts.items : null;
     const E = [], L = ACT.SPEC_LIM;
     if (!isObj(spec)) return ['spec: a JSON object is required (activities/<id>/spec.json)'];
     if (utf8(JSON.stringify(spec)) > L.bytes) E.push(`spec: at most ${L.bytes / 1024} KB`);
     if (spec.format !== ACT.SPEC_FORMAT) E.push(`spec: format must be "${ACT.SPEC_FORMAT}"`);
     for (const k of Object.keys(spec).filter(k => !ACT.SPEC_KEYS.has(k)).sort()) E.push(`spec: unknown field ${qv(k)}`);
-    const eng = 'engine' in spec ? spec.engine : ACT.DEFAULT_ENGINE, known = engines ? new Set(engines) : ACT.ENGINES;
-    if (typeof eng !== 'string' || !known.has(eng)) E.push(`spec: unknown engine ${qv(eng)} (this version knows ${[...known].sort().join(', ')})`);
+    const eng = py ? ACT.PY : 'engine' in spec ? spec.engine : ACT.DEFAULT_ENGINE, known = engines ? new Set(engines) : ACT.ENGINES;
+    if (py) {
+      if ('engine' in spec) E.push('spec.engine: the outputs of a py-module@1 activity come from its Python step(); leave engine out');
+      if ('model' in spec) E.push('spec.model: a py-module@1 activity has no engine model (its Python code is the model)');
+    } else if (typeof eng !== 'string' || !known.has(eng)) E.push(`spec: unknown engine ${qv(eng)} (this version knows ${[...known].sort().join(', ')})`);
     if (eng === ACT.DEFAULT_ENGINE && 'model' in spec) E.push('spec: model configures another engine; formula@1 has none');
     if (spec.model != null && !isObj(spec.model)) E.push('spec: model must be an object');
     const keys = new Set(), seen = new Set();
@@ -759,6 +792,7 @@
     });
     const inNames = [...names];   // what an engine's inputs may use: consts, params, derived
     const os = spec.outputs, series = [];
+    if (py && !(Array.isArray(os) && os.length)) E.push('spec.outputs: list what step() returns, at least one {id, kind: scalar | series}');
     if (os != null) {
       if (eng === ACT.DEFAULT_ENGINE) E.push('spec.outputs come from an engine; formula@1 has none (use derived)');
       else if (!(Array.isArray(os) && os.length <= L.outputs)) E.push(`spec.outputs must be a list of at most ${L.outputs} {id, kind}`);
@@ -865,9 +899,9 @@
     if (!isObj(g) || !ACT.GRADE_MODES.has(g.mode)) E.push('grade must be {"mode": "reported"} (the activity reports its result) or {"mode": "checks", "checks": [{"expr": …}]} (sim-spec@1)');
     else {
       if (g.pass != null && !(isNum(g.pass) && g.pass > 0 && g.pass <= 1)) E.push('grade.pass must be a number in (0, 1]');
-      if (g.mode === 'reported' && ACT.CHECKS_RUNTIMES.has(rt)) E.push(`a ${rt} activity reports nothing itself: grade it with {"mode": "checks", "checks": […]}`);
+      if (g.mode === 'reported' && ACT.CHECKS_RUNTIMES.has(rt) && rt !== ACT.PY) E.push(`a ${rt} activity reports nothing itself: grade it with {"mode": "checks", "checks": […]}`);
       if (g.mode === 'checks') {
-        if (rt != null && !ACT.CHECKS_RUNTIMES.has(rt)) E.push(`grade.mode "checks" needs an activity whose values the app can see (sim-spec@1); ${rt} reports its own result: use "reported"`);
+        if (rt != null && !ACT.CHECKS_RUNTIMES.has(rt)) E.push(`grade.mode "checks" needs an activity whose values the app can see (sim-spec@1, py-module@1, wasm-module@1); ${rt} reports its own result: use "reported"`);
         const cs = g.checks;
         if (!(Array.isArray(cs) && cs.length >= 1 && cs.length <= ACT.SPEC_LIM.checks)) E.push(`grade.checks must be a list of 1–${ACT.SPEC_LIM.checks} checks {expr, label?, weight?}`);
         else {
@@ -897,7 +931,7 @@
           for (const [k, v] of Object.entries(t.params)) {
             if (k === 'fault' && fids) {   // a bench: the fault of this task (one id), or the ones the seed draws from (a list)
               if (!(typeof v === 'string' ? fids.includes(v) : Array.isArray(v) && v.length >= 1 && v.every(x => typeof x === 'string' && fids.includes(x)))) E.push('task.params.fault must be the id of a fault of the bench, or a list of them (the seed draws one)');
-            } else if (!Object.prototype.hasOwnProperty.call(consts, k)) E.push(`task.params.${k}: not a constant of the spec (a sim-spec@1 task sets only the spec's consts)`);
+            } else if (!Object.prototype.hasOwnProperty.call(consts, k)) { if (rt !== ACT.PY) E.push(`task.params.${k}: not a constant of the spec (a sim-spec@1 task sets only the spec's consts)`); }   // py-module@1: Python's init(task, seed) reads the others
             else if (!isNum(v)) E.push(`task.params.${k} must be a number`);
           }
         }
@@ -910,6 +944,64 @@
   /** checkActivities(pack, locales?) → { errors, warnings }: pack.activities, the blocks and sim exercises that use them, pack.requires.
       The sha256 of a bundle is checked here when Node's crypto is at hand (the connector), else by the app when it mounts it. */
   const nodeSha = (() => { try { const c = globalThis.process?.getBuiltinModule?.('crypto'); return c ? s => c.createHash('sha256').update(s, 'utf8').digest('hex') : null; } catch (e) { return null; } })();
+  /** the registry fields of an h5p@1 item (the package itself: checkActivityPackages) — the SAME rules as tools/activities.py check_h5p_item */
+  function checkH5PItem(a, aid, locs, own) {
+    const E = [], entry = a.entry;
+    if (entry != null && !(typeof entry === 'string' && entry.startsWith('activities/') && entry.endsWith('.h5p') && !entry.split('/').includes('..'))) E.push(`entry must be the .h5p file beside the pack (activities/${aid}/item.h5p)`);
+    if (!(typeof a.sha256 === 'string' && ACT.SHA_RE.test(a.sha256))) E.push('sha256 (of the .h5p file) is required');
+    if (!(Number.isInteger(a.bytes) && a.bytes > 0 && a.bytes <= ACT.H5P_MAX)) E.push(`bytes (the size of the .h5p file, at most ${ACT.H5P_MAX / 1048576} MB) is required`);
+    if ('html' in a) E.push('an h5p@1 item has no html (its .h5p file travels beside the pack)');
+    if (a.h5p != null && typeof a.h5p !== 'string') E.push('h5p (inline) must be the .h5p file in base64');
+    const by = a.h5pByLocale;
+    if (by != null) {
+      if (!isObj(by)) E.push('h5pByLocale must be {locale: {content} | {h5p, sha256}}');
+      else for (const [loc, v] of Object.entries(by)) {
+        if (!locs.includes(loc)) { E.push(`h5pByLocale.${loc}: the pack is not read in ${loc} (${locs.join(', ')})`); continue; }
+        if (!isObj(v) || !(isObj(v.content) || (typeof v.h5p === 'string' && typeof v.sha256 === 'string' && ACT.SHA_RE.test(v.sha256)))) E.push(`h5pByLocale.${loc} must be {content} (its content.json) or {h5p, sha256} (another package in base64)`);
+        else if (v.l10n != null && !isObj(v.l10n)) E.push(`h5pByLocale.${loc}.l10n must be an object (H5P's own strings)`);
+      }
+    }
+    for (const loc of locs) if (loc !== own && !(isObj(by) && Object.prototype.hasOwnProperty.call(by, loc))) E.push(`h5pByLocale.${loc} is missing: the item's words in ${loc} (activities/${aid}/content.${loc}.json)`);
+    return E;
+  }
+  /** checkActivityPackages(pack, bytesOf?) → Promise<{ errors, warnings }>: the .h5p files of the pack's h5p@1 items — sha256 and bytes
+      as the registry says, the package rules (NoemaH5P.check, engine/src/38_activity_h5p.js, loaded beside this file), each h5pByLocale
+      translation with the same rules. bytesOf(item) → bytes (Uint8Array) | null, or a promise of them; an inline "h5p" (base64) is used
+      first. The SAME messages as tools/activities.py check_h5p_packages (tests/activities.js). The connector runs it on the files
+      uploaded beside a pack; the app runs NoemaH5P's checks itself when an item mounts. */
+  async function checkActivityPackages(p, bytesOf) {
+    const E = [], W = [], H = root.NoemaH5P;
+    const items = (p?.activities?.items || []).filter(a => isObj(a) && a.runtime === ACT.H5P && typeof a.id === 'string');
+    if (!items.length) return { errors: E, warnings: W };
+    if (!H || !root.crypto?.subtle) return { errors: E, warnings: ['h5p@1: the package checker (NoemaH5P, engine/src/38_activity_h5p.js) is not loaded here'] };
+    const b64 = s => { try { const t = atob(String(s).replace(/^data:[^,]*;base64,/, '').replace(/\s+/g, '')), u = new Uint8Array(t.length); for (let i = 0; i < t.length; i++) u[i] = t.charCodeAt(i); return u; } catch (e) { return new Uint8Array(0); } };
+    const hex = async u => Array.from(new Uint8Array(await root.crypto.subtle.digest('SHA-256', u)), x => x.toString(16).padStart(2, '0')).join('');
+    const unzip = async u => { try { return await H.unzip(u); } catch (e) { return null; } };
+    for (const a of items) {
+      const w = `activity ${a.id}`;
+      let b = typeof a.h5p === 'string' ? b64(a.h5p) : (bytesOf ? await bytesOf(a) : null);
+      if (b == null) { E.push(`${w}: the .h5p file ${a.entry || ''} is missing`); continue; }
+      if (!(b instanceof Uint8Array)) b = new Uint8Array(b);
+      if (a.sha256 !== await hex(b)) E.push(`${w}: sha256 does not match the .h5p file`);
+      if (a.bytes !== b.length) E.push(`${w}: bytes does not match the .h5p file`);
+      const files = await unzip(b);
+      if (!files) { E.push(`${w}: not a .h5p (zip) file`); continue; }
+      const r = H.check(files); E.push(...r.errors.map(m => `${w}: ${m}`)); W.push(...r.warnings.map(m => `${w}: ${m}`));
+      const by = isObj(a.h5pByLocale) ? a.h5pByLocale : {};
+      for (const loc of Object.keys(by).sort()) {
+        const v = by[loc]; if (!isObj(v)) continue;
+        let f2;
+        if (typeof v.h5p === 'string') {
+          const b2 = b64(v.h5p); f2 = await unzip(b2);
+          if (!f2) { E.push(`${w}: h5pByLocale.${loc}: not a .h5p (zip) file`); continue; }
+          if (v.sha256 !== await hex(b2)) E.push(`${w}: h5pByLocale.${loc}: sha256 does not match the .h5p file`);
+        } else if (isObj(v.content)) f2 = { ...files, 'content/content.json': new TextEncoder().encode(JSON.stringify(v.content)) };
+        else continue;
+        E.push(...H.check(f2).errors.map(m => `${w}: h5pByLocale.${loc}: ${m}`));
+      }
+    }
+    return { errors: E, warnings: W };
+  }
   function checkActivities(p, translations) {
     const E = [], W = [], reg = p?.activities, media = p?.media || {}, own = p?.subject?.language || 'en';
     const locs = [...new Set([own, ...(translations || Object.keys(p?.translations || {}))])].sort();
@@ -922,7 +1014,7 @@
         if (typeof aid !== 'string' || !ACT.ID_RE.test(aid)) { E.push(`activity ${qv(aid)}: id must be lower-case letters, digits and - (2–61)`); continue; }
         if (Object.prototype.hasOwnProperty.call(items, aid)) { E.push(`activity ${aid}: duplicate id`); continue; }
         items[aid] = a; const w = `activity ${aid}`, rt = a.runtime;
-        if (Object.prototype.hasOwnProperty.call(ACT.LATER, rt)) E.push(`${w}: runtime ${rt} arrives in a later version of the app (${ACT.LATER[rt]}); use html-app@1 or sim-spec@1 for now`);
+        if (Object.prototype.hasOwnProperty.call(ACT.LATER, rt)) E.push(`${w}: runtime ${rt} arrives in a later version of the app (${ACT.LATER[rt]}); use html-app@1, sim-spec@1, py-module@1 or h5p@1 for now`);
         else if (!ACT.RUNTIMES.has(rt)) E.push(`${w}: unknown runtime ${qv(rt)} (one of ${[...ACT.RUNTIMES].sort().join(', ')})`);
         if (!(Number.isInteger(a.stateVersion) && a.stateVersion >= 1)) E.push(`${w}: stateVersion must be a whole number >= 1`);
         const caps = a.capabilities ?? [];
@@ -940,7 +1032,25 @@
           }
         } else if (rt === 'sim-spec@1') {
           if (!('spec' in a)) E.push(`${w}: the spec (activities/${aid}/spec.json) is missing`);
-          else E.push(...checkSimSpec(a.spec, isObj(a.strings) ? a.strings : null, null, every).map(m => `${w}: ${m}`));
+          else E.push(...checkSimSpec(a.spec, isObj(a.strings) ? a.strings : null, null, { items: every }).map(m => `${w}: ${m}`));
+        } else if (rt === ACT.PY) {
+          const pk = a.packages == null ? [] : a.packages, allowed = [...ACT.PY_BASE, ...ACT.PY_EXTRAS];
+          if (!(Array.isArray(pk) && pk.length <= ACT.PY_PACKAGES_MAX && pk.every(x => typeof x === 'string'))) E.push(`${w}: packages must be a list of names (${allowed.join(', ')})`);
+          else {
+            for (const x of pk) if (!allowed.includes(x)) E.push(`${w}: package ${qv(x)} is not available (numpy, scipy and the allow-listed extras: ${ACT.PY_EXTRAS.join(', ')})`);
+            if (new Set(pk).size !== pk.length) E.push(`${w}: packages lists a name twice`);
+            if (pk.some(x => ACT.PY_EXTRAS.includes(x)) && a.requiresNetwork !== true) E.push(`${w}: an extra package (${pk.filter(x => ACT.PY_EXTRAS.includes(x)).join(', ')}) is downloaded the first time: set "requiresNetwork": true`);
+          }
+          if (a.requiresNetwork != null && typeof a.requiresNetwork !== 'boolean') E.push(`${w}: requiresNetwork must be true or false`);
+          if (a.stepMs != null && !(Number.isInteger(a.stepMs) && a.stepMs >= ACT.PY_STEP[0] && a.stepMs <= ACT.PY_STEP[1])) E.push(`${w}: stepMs is a whole number ${ACT.PY_STEP[0]}–${ACT.PY_STEP[1]} (the budget of one step(), in ms)`);
+          if (typeof a.python !== 'string') E.push(`${w}: the Python file (activities/${aid}/main.py) is missing`);
+          else {
+            const l = lintPython(a.python, Array.isArray(pk) ? pk : []); E.push(...l.errors.map(m => `${w}: ${m}`)); W.push(...l.warnings.map(m => `${w}: ${m}`));
+            if (a.sha256 != null && (!/^[0-9a-f]{64}$/.test(String(a.sha256)) || (nodeSha && nodeSha(a.python) !== a.sha256))) E.push(`${w}: sha256 does not match the Python file`);
+            if (a.bytes != null && a.bytes !== utf8(a.python)) E.push(`${w}: bytes does not match the Python file`);
+          }
+          if (!('spec' in a)) E.push(`${w}: the spec (activities/${aid}/spec.json: the controls, readouts and plots the app draws) is missing`);
+          else E.push(...checkSimSpec(a.spec, isObj(a.strings) ? a.strings : null, null, { python: true }).map(m => `${w}: ${m}`));
         } else if (rt === ACT.WASM) {   // the module (size, sha256, imports, memory, exports) and its own spec, if it has one
           if (!WK()) E.push(`${w}: the WebAssembly checker (NoemaWasm, engine/src/44_activity_wasm.js) is not loaded here`);
           else E.push(...WK().checkItem(a).problems.map(m => `${w}: ${m}`));
@@ -948,14 +1058,15 @@
           if (sp !== undefined && sp !== null) {
             if (isObj(sp) && ('engine' in sp ? sp.engine : ACT.WASM_ENGINE) !== ACT.WASM_ENGINE) E.push(`${w}: spec.engine: the own spec of a ${ACT.WASM} item runs on ${ACT.WASM_ENGINE} (leave engine out)`);
             if (isObj(sp) && isObj(sp.model) && (sp.model.module !== undefined ? sp.model.module : aid) !== aid) E.push(`${w}: spec.model.module: the own spec of a ${ACT.WASM} item runs this item (leave module out)`);
-            E.push(...checkSimSpec(ownSpec(a), isObj(a.strings) ? a.strings : null, null, every).map(m => `${w}: ${m}`));
+            E.push(...checkSimSpec(ownSpec(a), isObj(a.strings) ? a.strings : null, null, { items: every }).map(m => `${w}: ${m}`));
           }
         } else if (rt === ACT.EMBED) {   // an allow-listed outside page: the provider, the exact URL, credit and licence (tools/embed_allow.json)
           if (!EK()) E.push(`${w}: the outside-page checker (NoemaEmbed, engine/src/45_activity_embed.js) is not loaded here`);
           else { const r = EK().check(a); E.push(...r.errors.map(m => `${w}: ${m}`)); W.push(...r.warnings.map(m => `${w}: ${m}`)); }
-        }
+        } else if (rt === ACT.H5P) E.push(...checkH5PItem(a, aid, locs, own).map(m => `${w}: ${m}`));
         const st = a.strings;
-        if (!st || typeof st !== 'object' || Array.isArray(st) || !Object.keys(st).length) E.push(`${w}: strings {locale: {key: text}} are required (an activity shows no words of its own)`);
+        if (rt === ACT.H5P && (st == null || (isObj(st) && !Object.keys(st).length))) { /* an H5P item keeps its words in content.json (h5pByLocale for the other languages) */ }
+        else if (!st || typeof st !== 'object' || Array.isArray(st) || !Object.keys(st).length) E.push(`${w}: strings {locale: {key: text}} are required (an activity shows no words of its own)`);
         else {
           let keys = null;
           for (const [loc, tab] of Object.entries(st)) {
@@ -1138,5 +1249,5 @@
     return { errors: E, warnings: W, counts: { entries: entries.length, senses, stale, sections: Object.keys(secs).length, previews, anchors: anchors.length } };
   }
   /* i18n-ignore-end */
-  root.NoemaPackCheck = { checkPack, checkActivities, checkSimSpec, ownSpec, specNames, needRequires, lintHtml, ACTIVITY_RULES: ACT, checkExercise, checkBalance, checkQuality, checkBridge, checkTranslation, requiredLocales, RULES, QUALITY, LANGS, TYPES, BLOCKS, ID_RE };
+  root.NoemaPackCheck = { checkPack, checkActivities, checkActivityPackages, checkSimSpec, ownSpec, specNames, needRequires, lintHtml, lintPython, ACTIVITY_RULES: ACT, checkExercise, checkBalance, checkQuality, checkBridge, checkTranslation, requiredLocales, RULES, QUALITY, LANGS, TYPES, BLOCKS, ID_RE };
 })(typeof window !== 'undefined' ? window : globalThis);

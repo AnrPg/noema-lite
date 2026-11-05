@@ -7,6 +7,11 @@
    P6: wasm-module@1 (wasm-oscillator: the module through the sim renderer, the graded exercise, a refused import, runaway + Restart),
    the xAPI export from the subject's ⋮ (the file, the actor = the account id), external-embed@1 switched on (the consent card, nothing
    requested before Open, the frames, the remembered choice, Settings › Data "Ask again", offline, never graded).
+   py-module@1 (PY=0 skips it): over http, see python() below.
+   h5p@1 (docs/INTERACTIVE_H5P.md): planets-quiz's .h5p file is taken from the .noema.zip and kept on the device beside the pack; the
+   block plays it in the pack's own language, the state comes back after a reload, the sim exercise is graded right and wrong
+   from H5P's score, no request leaves the frame, French and Greek through h5pByLocale, the runtime off / a refused translation → the fallback;
+   the one-file bundle (act-bundle-inline.html / act-bundle-big.html, built by run_e2e.sh) plays it inline or shows the fallback.
    Usage: node tests/activities_app.js <prepared-repo-dir> <pack.json from tests/activities_pack.py (NOEMA_ACT_PACK)>   (BROWSERS=chromium,firefox,webkit) */
 const pw = require(process.env.PW || 'playwright');
 const path = require('path');
@@ -16,10 +21,24 @@ let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m)
 const wait = ms => new Promise(r => setTimeout(r, ms));
 const until = async (fn, ms = 10000) => { const t = Date.now(); while (Date.now() - t < ms) { try { if (await fn()) return true; } catch (e) { } await wait(150); } return false; };
 // a block that came into view while two others hold the live slots waits with its Start button (at most 2 run at once): press it
-const startIfParked = async (p, sel) => { if (await until(() => p.evaluate(s => !!document.querySelector(s + ' .sim'), sel), 1500)) return; const b = p.locator(sel + ' .act-bar button'); if (await b.count()) await b.first().click(); };
+const startIfParked = async (p, sel) => { if (await until(() => p.evaluate(s => !!document.querySelector(s + ' .sim'), sel), 1500)) return; const b = p.locator(sel + ' .act-bar button'); if (await b.count()) await b.first().click({ timeout: 5000 }).catch(() => {}); };   // (it may start by itself meanwhile: the button is gone)
 const actFrame = (p, sel) => p.frames().find(f => f.parentFrame() && f.parentFrame().parentFrame() === p.mainFrame() && sel(f));   // the mini-app: inside the wrapper frame
 
 const http = require('http'); const hits = []; let BEACON = '';
+// h5p@1: the stored entry of the .noema.zip (the .h5p travels beside the pack), read here without a zip library
+const zipEntry = (buf, name) => {
+  let e = buf.length - 22; while (e >= 0 && buf.readUInt32LE(e) !== 0x06054b50) e--; if (e < 0) return null;
+  for (let i = 0, n = buf.readUInt16LE(e + 10), o = buf.readUInt32LE(e + 16); i < n; i++) {
+    const method = buf.readUInt16LE(o + 10), size = buf.readUInt32LE(o + 20), nl = buf.readUInt16LE(o + 28), xl = buf.readUInt16LE(o + 30), cl = buf.readUInt16LE(o + 32), lo = buf.readUInt32LE(o + 42);
+    if (buf.toString('utf8', o + 46, o + 46 + nl) === name) { const at = lo + 30 + buf.readUInt16LE(lo + 26) + buf.readUInt16LE(lo + 28), d = buf.subarray(at, at + size); return method === 0 ? d : require('zlib').inflateRawSync(d); }
+    o += 46 + nl + xl + cl;
+  }
+  return null;
+};
+const fs = require('fs');
+const PQ_ZIP = fs.existsSync(process.argv[3] + '.noema.zip') ? fs.readFileSync(process.argv[3] + '.noema.zip') : null;
+const PQ_FILE = PQ_ZIP && zipEntry(PQ_ZIP, 'activities/planets-quiz/item.h5p');
+const PQ_EL = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'tools', 'activities_examples', 'planets-quiz', 'content.el.json'), 'utf8'));
 async function run(name) {
   // Chromium: the full browser (docs/adr/001 §2), not the headless shell. Its sandboxed srcdoc frames get their own process, and
   // Playwright then cannot attach to the mini-app frame nested in the wrapper (on a file:// page); IsolateSandboxedIframes off keeps
@@ -29,9 +48,17 @@ async function run(name) {
   const E = []; p.on('pageerror', e => { if (!/^noema: this activity ran too long/.test(e.message)) E.push(e.message); });   // (the loop guard's own stop, thrown inside the frame on purpose)
   await p.goto('file://' + ROOT + '/index.html'); await p.evaluate(() => localStorage.clear()); await p.reload(); await wait(700);
   await p.evaluate(async pk => { await Noema.importPack(Noema.account.id, pk); }, PACK);
+  if (PQ_FILE) {   // h5p@1: as Import does with a .noema.zip, the .h5p file is kept on this device beside the pack (checked by size and sha256)
+    const at = await p.evaluate(async ([pk, b64]) => { const u = Uint8Array.from(atob(b64), c => c.charCodeAt(0)), acc = Noema.account.id;
+      const bad = u.slice(); bad[bad.length - 30] ^= 1;   // the same size, one bit off
+      const a = pk.activities.items.find(x => x.id === 'planets-quiz');
+      return { bad: await NoemaSrcFiles.putActivityFile(acc, pk.subject.id, a, new Blob([bad]), { upload: false }),
+        res: await NoemaSrcFiles.attachActivityFiles(acc, pk, async entry => entry === 'activities/planets-quiz/item.h5p' ? new Blob([u]) : null) }; }, [PACK, PQ_FILE.toString('base64')]);
+    ok(at.bad === false && at.res.attached.includes('planets-quiz') && !at.res.missing.length, `h5p@1: the .h5p from the .noema.zip is kept on the device (a changed copy of the same size is refused) ${JSON.stringify(at)}`);
+  } else ok(false, 'h5p@1: no .noema.zip beside the pack (tests/activities_pack.py with NOEMA_ACT_PACK) or no activities/planets-quiz/item.h5p in it');
   await p.goto('file://' + ROOT + '/index.html?subject=demo-activities'); await wait(1500);
   ok(await p.evaluate(() => SUBJ.id === 'demo-activities' && !!ACT.ITEMS['alias-lab']), 'the pack opens with its activity');
-  ok(await p.evaluate(() => checkRequires().length === 0), 'pack.requires: this app has everything the pack needs');
+  ok(await p.evaluate(() => JSON.stringify(checkRequires()) === '["runtime:py-module@1"]'), 'pack.requires: this app has everything the pack needs but Python (Python never runs on file://)');
 
   console.log('— the theory block');
   await p.evaluate(() => { location.hash = '#/s/ch01-s01'; }); await wait(600);
@@ -124,6 +151,8 @@ async function run(name) {
   await wasmApp(p, ctx, E);
   await xapiApp(p, ctx, E);
   await embedApp(p, ctx, E);
+  await h5p(p, ctx, E);
+  await h5pBundle(browser, E);
   await browser.close();
 }
 
@@ -424,7 +453,7 @@ async function circuit(p, ctx, E) {
   ok(await until(() => p.evaluate(s => /3[.,]1\d\s*V/.test(document.querySelector(s + ' .sim-ro')?.textContent || ''), RT)), 'R = 1 kΩ: the engine (in its worker) gives 3.16 V at 1 ms (63 %)');
   const t1 = await trace();
   ok(t1[1] !== t0[1] && t1[0] === t0[0], 'the slider changes the capacitor trace on the scope, not the input');
-  ok(await p.evaluate(() => ACT.caps().has('engine:circuit-mna@1') && checkRequires().length === 0), 'the app has engine:circuit-mna@1 (pack.requires is met)');
+  ok(await p.evaluate(() => ACT.caps().has('engine:circuit-mna@1') && !checkRequires().includes('engine:circuit-mna@1')), 'the app has engine:circuit-mna@1 (that part of pack.requires is met)');
 
   console.log('— circuit-mna@1: the fault bench (an exercise)');
   const card = async id => { await p.evaluate(id => { const m = document.querySelector('main'); m.innerHTML = ''; const c = exerciseCard(EX[id]); c.id = 'T'; m.append(c); scrollTo(0, 0); }, id); await until(() => p.evaluate(() => !!document.querySelector('#T .sim-bench'))); };
@@ -631,8 +660,258 @@ async function p6engines(p, ctx, E) {
   ok(want.some(w => Math.abs(val(L[1]) - w) <= 0.01 * w), `the ammeter shows the engine's average current for the drawn device (${L[1]}; NoemaTwin: ${want.map(w => (w * 1e6).toFixed(1) + ' µA').join(', ')})`);
   ok(E.length === E0, 'no page errors ' + JSON.stringify(E.slice(E0, E0 + 3)));
 }
+/* py-module@1 (docs/INTERACTIVE_PYTHON.md): the reference py-filter over http, from the built site (dist/site) with the pinned Python
+   files (tools/fetch_pyodide.py) and the site's own _headers. The runtime is on by default; the test also forces the flag on, whatever config.js says.
+   Checks: the first-use note (sizes from the manifest), the Python sim renders in the sim-spec view, a slider changes Python's outputs,
+   the checks grader grades Python's outputs right and wrong, Settings › "Prepare Python for offline" → ready offline (classic and shell),
+   offline after prepare (/vendor aborted) it still runs, the Greek words, the one-file bundle and file:// show the fallback. */
+async function python(name) {
+  const fs = require('fs'), cp = require('child_process');
+  const SITE = path.join(ROOT, 'dist', 'site'), BUNDLE = path.join(ROOT, 'dist', 'noema-lite.html');
+  console.log('— py-module@1');
+  if (!fs.existsSync(path.join(SITE, 'index.html'))) { console.log('  SKIP: no dist/site (python3 tools/build.py site)'); return; }
+  if (!fs.existsSync(path.join(SITE, 'vendor', 'pyodide', 'manifest.json'))) {
+    try { cp.execFileSync('python3', [path.join(ROOT, 'tools', 'fetch_pyodide.py'), '--site', SITE], { stdio: 'inherit' }); }
+    catch (e) { console.log('  SKIP: tools/fetch_pyodide.py could not fetch Pyodide (network?)'); return; }
+  }
+  // the site's own _headers (Netlify: every rule whose path matches adds its headers)
+  const rules = []; let cur = null;
+  for (const l of fs.readFileSync(path.join(SITE, '_headers'), 'utf8').split('\n')) {
+    if (/^\S/.test(l)) { cur = { re: new RegExp('^' + l.trim().replace(/[.+?^${}()|[\]\\]/g, '\\$&').replace(/\*/g, '.*') + '$'), h: {} }; rules.push(cur); }
+    else if (cur && /^\s+[\w-]+:/.test(l)) { const i = l.indexOf(':'); cur.h[l.slice(0, i).trim().toLowerCase()] = l.slice(i + 1).trim(); }
+  }
+  const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.mjs': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png', '.wasm': 'application/wasm', '.zip': 'application/zip', '.whl': 'application/zip', '.woff2': 'font/woff2' };
+  let BLOCK = false; const VH = [];
+  const srv = http.createServer((q, r) => {
+    let u = decodeURIComponent(new URL(q.url, 'http://x').pathname); if (u.endsWith('/')) u += 'index.html';
+    if (u.startsWith('/vendor/')) { VH.push(u); if (BLOCK) { r.writeHead(503); return r.end(); } }
+    if (u === '/bundle.html') { r.writeHead(200, { 'content-type': TYPES['.html'] }); return r.end(fs.readFileSync(BUNDLE)); }
+    const f = path.join(SITE, u);
+    if (u.includes('..') || !fs.existsSync(f) || !fs.statSync(f).isFile()) { r.writeHead(404); return r.end(); }
+    const hd = { 'content-type': TYPES[path.extname(f)] || 'application/octet-stream' };
+    for (const x of rules) if (x.re.test(u)) Object.assign(hd, x.h);
+    r.writeHead(200, hd); r.end(fs.readFileSync(f));
+  });
+  await new Promise(r => srv.listen(0, '127.0.0.1', r)); const URL0 = `http://127.0.0.1:${srv.address().port}`;
+  const man = JSON.parse(fs.readFileSync(path.join(SITE, 'vendor', 'pyodide', 'manifest.json'), 'utf8'));
+  const browser = await pw[name].launch(name === 'chromium' && process.env.PW_CHANNEL !== '' ? { channel: process.env.PW_CHANNEL || 'chromium' } : {});
+  // the runtime switched on (NOEMA_CONFIG.activities['py-module@1'] = true), whatever config.js says — the same for the site, the bundle and file://
+  const flagOn = () => { let c; Object.defineProperty(window, 'NOEMA_CONFIG', { configurable: true, get: () => c, set: v => { c = v; if (v && typeof v === 'object') v.activities = Object.assign({}, v.activities, { 'py-module@1': true }); } }); };
+  const E = [];
+  const page = async (ctx, url, newUI) => {
+    const p = await ctx.newPage(); p.setDefaultTimeout(15000); p.on('pageerror', e => E.push(e.message));
+    await p.goto(url); await p.evaluate(n => { localStorage.clear(); if (n) localStorage.setItem('noema-test:newUI', '1'); }, !!newUI); await p.reload(); await wait(800);
+    // the website ships no profiles (build.py site leaves accounts/ out) and asks "Who is studying?": one local profile on this device
+    if (!await p.evaluate(() => !!window.Noema?.account)) { await p.evaluate(() => localStorage.setItem('noema1:accounts', JSON.stringify([{ id: 'learner', name: 'Learner', emoji: '🦉', pin: null, created: Date.now() }]))); await p.reload(); await wait(800); }
+    await p.evaluate(async pk => { await Noema.importPack(Noema.account.id, pk); }, PACK);
+    await p.goto(url + (url.includes('?') ? '&' : '?') + 'subject=demo-activities'); await wait(1500);
+    return p;
+  };
+  const SEL = 'main .act-blk .act[data-activity="py-filter"]';
+  const openBlock = async p => {
+    await p.evaluate(() => { location.hash = '#/'; }); await wait(300); await p.evaluate(() => { location.hash = '#/s/ch01-s01'; }); await wait(600);
+    const sa = await p.$('button:has-text("show all")'); if (sa) { await sa.click(); await wait(200); }
+    await p.locator(SEL).first().scrollIntoViewIfNeeded(); await startIfParked(p, SEL);
+  };
+  const ro = (p, s = SEL) => p.evaluate(s => [...document.querySelectorAll(s + ' .sim-ro dd')].map(d => d.textContent), s);
+  const filled = (p, s = SEL, ms = 120000) => until(() => p.evaluate(s => { const d = document.querySelectorAll(s + ' .sim-ro dd'); return d.length === 3 && [...d].every(x => /\d/.test(x.textContent)); }, s), ms);
+  const setN = (p, s, v) => p.evaluate(([s, v]) => { const e = document.querySelector(`${s} input[type=range][data-param="N"]`) || document.querySelector(`${s} [data-param="N"]`); e.value = String(v); e.dispatchEvent(new Event('input', { bubbles: true })); e.dispatchEvent(new Event('change', { bubbles: true })); }, [s, v]);
+
+  try {
+    const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } }); await ctx.addInitScript(flagOn);
+    let p = await page(ctx, URL0 + '/index.html');
+    ok(await p.evaluate(() => !!ACT.ITEMS['py-filter'] && NoemaPy.available() && ACT.caps().has('runtime:py-module@1') && checkRequires().length === 0), 'on the website (http, the runtime on): the app has runtime:py-module@1, pack.requires is met');
+    // every text the quiet line shows (first use → loading → gone): from a local server Python loads in moments, so the
+    // first-use note may be replaced by the progress before a poll would see it
+    await p.evaluate(() => { window.__pyLines = []; new MutationObserver(() => { for (const l of document.querySelectorAll('.act-pyline')) { const x = l.textContent; if (x && window.__pyLines[window.__pyLines.length - 1] !== x) window.__pyLines.push(x); } }).observe(document.body, { childList: true, subtree: true, characterData: true }); });
+    await openBlock(p);
+    const first = await until(() => p.evaluate(() => window.__pyLines.some(x => /downloads about \d+\s*MB once/.test(x))), 15000);
+    const note = await p.evaluate(() => window.__pyLines.join(' | '));
+    ok(first, `the first-use note says what it downloads, once (${note}; the manifest lists ${Object.keys(man.files || {}).length} files)`);
+    ok(await filled(p), 'the Python sim renders: the readouts come from step() (' + (await ro(p)).join(' · ') + ')');
+    const shape = await p.evaluate(s => { const r = document.querySelector(s); return { title: r.querySelector('.sim-title')?.textContent, plots: r.querySelectorAll('.sim-plot svg').length, frames: [...r.querySelectorAll('iframe')].map(f => ({ sb: f.getAttribute('sandbox'), vis: f.getAttribute('aria-hidden') !== 'true' && f.offsetHeight > 1 && getComputedStyle(f).opacity !== '0' })), line: r.querySelector('.act-pyline')?.hidden }; }, SEL);
+    ok(shape.title === 'Two digital low-pass filters' && shape.plots === 2 && shape.frames.length === 1 && shape.frames[0].sb === 'allow-scripts' && !shape.frames[0].vis && shape.line, `the app's own controls and 2 plots; Python in one hidden sandboxed frame; the note gone once ready ${JSON.stringify(shape)}`);
+    const r4 = await ro(p);
+    await setN(p, SEL, 8); await until(async () => (await ro(p))[0] !== r4[0], 20000);
+    const r8 = await ro(p);
+    ok(/−?-?3[.,]7\s*dB/.test(r4[0]) && /−?-?1\d\d[.,]\d\s*dB|−?-?[5-9]\d[.,]\d\s*dB/.test(r8[0]) && /1[.,]3\s*dB/.test(r8[1]), `a slider changes Python's outputs: N = 4 → ${r4[0]}, N = 8 → ${r8[0]} (300 Hz: ${r8[1]})`);
+    ok(VH.some(u => /numpy/.test(u)) && !VH.some(u => /scipy|openblas/.test(u)), 'numpy only: no scipy file was fetched (' + VH.length + ' /vendor requests)');
+
+    console.log('— py-module@1: the sim exercise (checks on Python\'s outputs)');
+    const card = async () => { await p.evaluate(() => { const m = document.querySelector('main'); m.innerHTML = ''; const c = exerciseCard(EX['ch01-e911']); c.id = 'T'; m.append(c); scrollTo(0, 0); }); await startIfParked(p, '#T'); return filled(p, '#T', 60000); };
+    const check = async () => { await p.click('#T button:has-text("Check")'); await wait(400); };
+    ok(await card(), 'the sim exercise ch01-e911 shows the Python activity ' + await p.evaluate(() => { const c = document.getElementById('T'); return JSON.stringify({ note: c?.querySelector('.act-note')?.textContent, line: c?.querySelector('.act-pyline')?.textContent, ro: [...(c?.querySelectorAll('.sim-ro dd') || [])].map(d => d.textContent), bar: c?.querySelector('.act-bar')?.textContent, live: ACT.LIVE.length }); }));
+    await setN(p, '#T', 16); await until(async () => /5[.,]9/.test((await ro(p, '#T'))[1] || ''), 20000); await check();
+    const bad = await p.evaluate(() => { const c = document.getElementById('T'); return { bad: !!c.querySelector('.explain.bad'), list: [...c.querySelectorAll('.act-checks li')].map(l => l.className + ':' + l.textContent), att: S.att?.['ch01-e911']?.result }; });
+    ok(bad.bad && bad.list.length === 2 && /^ok:/.test(bad.list[0]) && /^bad:/.test(bad.list[1]) && bad.att?.passed === false, `N = 16 removes the tone but loses 6 dB at 300 Hz: graded wrong ${JSON.stringify(bad.list)}`);
+    await card(); await setN(p, '#T', 8); await until(async () => /1[.,]3/.test((await ro(p, '#T'))[1] || ''), 20000); await check();
+    const good = await p.evaluate(() => ({ ok: !!document.querySelector('#T .explain.ok'), att: S.att?.['ch01-e911']?.result }));
+    ok(good.ok && good.att?.passed === true && good.att.score === 1, `N = 8: graded right (score ${good.att?.score})`);
+
+    console.log('— py-module@1: Settings › Prepare Python for offline (classic)');
+    await p.evaluate(() => openAccountMenu('backup'));
+    ok(await until(() => p.evaluate(() => [...document.querySelectorAll('.accbody details summary')].some(x => /Python for activities/.test(x.textContent))), 8000), 'the classic Backup tab has the Python section');
+    const pyDet = p.locator('.accbody details', { has: p.locator('summary', { hasText: 'Python for activities' }) });
+    await pyDet.locator('summary').click();
+    const st0 = await pyDet.evaluate(d => ({ pill: d.querySelector('summary .pill')?.textContent, line: d.querySelector('.act-pyset .tiny')?.textContent, btn: d.querySelector('[data-py="prepare"]')?.hidden === false ? d.querySelector('[data-py="prepare"]').textContent : null }));
+    ok(/Partly here/.test(st0.pill) && /of .* on this device/.test(st0.line) && /Prepare Python for offline \(\d/.test(st0.btn || ''), `before: partly here (numpy ran), the button says how much is left ${JSON.stringify(st0)}`);
+    await pyDet.locator('[data-py="prepare"]').click();
+    ok(await until(() => pyDet.evaluate(d => /Ready offline/.test(d.querySelector('summary .pill')?.textContent || '')), 180000), 'Prepare → the pill says "Ready offline"');
+    const st1 = await pyDet.evaluate(d => ({ line: d.querySelector('.act-pyset .tiny')?.textContent, btn: d.querySelector('[data-py="prepare"]')?.hidden, tip: d.textContent }));
+    ok(/numpy and scipy/.test(st1.line) && st1.btn === true, `after: what is on the device (${st1.line}); no button`);
+    ok(VH.some(u => /scipy/.test(u)), 'Prepare fetched scipy too');
+    const status = await p.evaluate(() => NoemaPy.status());
+    ok(status && status.groups && Object.values(status.groups).every(g => g.ready), 'NoemaPy.status(): every group is cached ' + JSON.stringify(Object.fromEntries(Object.entries(status?.groups || {}).map(([k, g]) => [k, g.ready]))));
+    await p.evaluate(() => document.querySelectorAll('.modal').forEach(m => m.remove()));
+
+    console.log('— py-module@1: offline after Prepare');
+    BLOCK = true; await ctx.route('**/vendor/**', rt => rt.abort());
+    const p2 = await ctx.newPage(); p2.on('pageerror', e => E.push(e.message));
+    await p2.goto(URL0 + '/index.html?subject=demo-activities'); await wait(1500); await openBlock(p2);
+    ok(await filled(p2, SEL, 60000), 'a new page with /vendor blocked (server 503 + route abort) still runs the Python activity (' + (await ro(p2)).join(' · ') + ')');
+    ok(!(await p2.evaluate(s => document.querySelector(s + ' .act-fallback'), SEL)), 'no fallback');
+    await p2.close(); await ctx.unroute('**/vendor/**'); BLOCK = false;
+
+    console.log('— py-module@1: the shell (Me › Data and sync) and Greek');
+    await p.close();
+    const ctx3 = await browser.newContext({ viewport: { width: 1280, height: 900 } }); await ctx3.addInitScript(flagOn);
+    p = await page(ctx3, URL0 + '/index.html', true);
+    await p.evaluate(() => { S.settings.lang = 'el'; save(); }); await p.reload(); await wait(1200);
+    await p.evaluate(() => { location.hash = '#/me/data'; }); await wait(800); await p.evaluate(() => document.querySelectorAll('details').forEach(d => d.open = true)); await wait(300);
+    const el = await until(() => p.evaluate(() => [...document.querySelectorAll('details summary')].some(x => /Python για τις δραστηριότητες/.test(x.textContent))), 8000);
+    const elTxt = await p.evaluate(() => { const d = [...document.querySelectorAll('details')].find(x => /Python για τις δραστηριότητες/.test(x.querySelector('summary')?.textContent || '')); return d ? d.textContent : ''; });
+    ok(el && /Όχι σε αυτή τη συσκευή|Εν μέρει εδώ/.test(elTxt) && /Ετοίμασε την Python/.test(elTxt), 'the shell\'s Data and sync page has the section, in Greek: ' + elTxt.slice(0, 160));
+    await p.evaluate(() => { window.__pyLines = []; new MutationObserver(() => { for (const l of document.querySelectorAll('.act-pyline')) { const x = l.textContent; if (x && window.__pyLines[window.__pyLines.length - 1] !== x) window.__pyLines.push(x); } }).observe(document.body, { childList: true, subtree: true, characterData: true }); });
+    await p.evaluate(() => { location.hash = '#/s/ch01-s01'; }); await wait(600);
+    if (await p.evaluate(() => { const b = [...document.querySelectorAll('main button')].find(x => x.textContent.trim() === SL('showAll')); b?.click(); return !!b; })) await wait(300);   // the section in steps: "show all" (in Greek)
+    await p.locator(SEL).first().scrollIntoViewIfNeeded(); await startIfParked(p, SEL);
+    ok(await until(() => p.evaluate(() => window.__pyLines.some(x => /κατεβάζει περίπου \d+\s*MB μία φορά/.test(x))), 15000), 'the first-use note in Greek ' + await p.evaluate(() => window.__pyLines.join(' | ')));
+    await ctx3.close(); await ctx.close();
+
+    console.log('— py-module@1: where Python cannot run (the one-file bundle, file://)');
+    const fbOf = q => q.evaluate(s => { const r = document.querySelector(s); return r ? { sim: !!r.querySelector('.sim'), fb: !!r.querySelector('.act-fallback img'), note: r.querySelector('.act-note')?.textContent || '', text: r.querySelector('.act-fbtext')?.textContent || '' } : null; }, SEL);
+    if (fs.existsSync(BUNDLE)) {
+      const c4 = await browser.newContext(); await c4.addInitScript(flagOn); const V4 = [];   // this context's own /vendor requests (the server's list may still get late ones of the pages closed before)
+      c4.on('request', r => { if (new URL(r.url()).pathname.startsWith('/vendor/')) V4.push(new URL(r.url()).pathname); });
+      const b = await page(c4, URL0 + '/bundle.html'); await openBlock(b); await wait(800);
+      const f = await fbOf(b);
+      const bu = await b.evaluate(() => ({ bundle: !!window.NOEMA_BUNDLE, py: NoemaPy.available() }));
+      ok(bu.bundle && !bu.py && f && !f.sim && f.fb && /works only on the website/.test(f.note) && !V4.length, `the one-file bundle (even over http): the fallback, "works only on the website", no /vendor request ${JSON.stringify({ ...bu, vendor: V4.slice(0, 4), ...f, text: undefined })}`);
+      await c4.close();
+    } else console.log('  (no dist/noema-lite.html: python3 tools/build.py bundle)');
+    const c5 = await browser.newContext(); await c5.addInitScript(flagOn);
+    const fp = await page(c5, 'file://' + ROOT + '/index.html'); await openBlock(fp); await wait(800);
+    const f5 = await fbOf(fp);
+    ok(f5 && !f5.sim && f5.fb && /works only on the website/.test(f5.note) && /moving-average|8 kHz|1 kHz/i.test(f5.text + ' ' + (await fp.evaluate(s => document.querySelector(s + ' img')?.alt || '', SEL))), `file://: the fallback picture and text, "works only on the website" ${JSON.stringify(f5)}`);
+    await c5.close();
+    ok(!E.length, 'no page errors ' + JSON.stringify(E.slice(0, 3)));
+  } finally { await browser.close(); srv.close(); }
+}
+
+/* h5p@1 (docs/INTERACTIVE_H5P.md): planets-quiz, an ordinary .h5p package (H5P.MultiChoice) whose file travels beside the pack. */
+const h5pFrame = async (p, ms = 20000) => {   // the item's frame (inside the wrapper) once H5P has drawn the question
+  let g = null;
+  await until(async () => { for (const f of p.frames()) { if (!(f.parentFrame() && f.parentFrame().parentFrame() === p.mainFrame())) continue;
+    if (await f.evaluate(() => document.querySelectorAll('.h5p-answer').length === 3).catch(() => false)) { g = f; return true; } } return false; }, ms);
+  return g;
+};
+const h5pAnswer = async (g, text) => { await g.evaluate(t => [...document.querySelectorAll('.h5p-answer')].find(li => li.textContent.trim() === t).click(), text); await wait(150); await g.click('.h5p-question-check-answer'); await wait(400); };
+const h5pStart = async (p, sel) => {   // a parked block (the live slots are taken): press its Start, as a learner would
+  if (await until(() => p.evaluate(s => !!document.querySelector(s + ' iframe.act-frame'), sel), 1500)) return;
+  const b = p.locator(sel + ' .act-bar button.primary'); if (await b.count()) await b.first().click();
+};
+async function h5p(p, ctx, E) {
+  const E0 = E.length; hits.length = 0;
+  const SEL = 'main .act-blk .act[data-activity="planets-quiz"]';
+  const openSec = async () => {
+    await p.evaluate(() => { location.hash = '#/'; }); await wait(300); await p.evaluate(() => { location.hash = '#/s/ch01-s01'; }); await wait(600);
+    const sa = await p.$('button:has-text("show all")'); if (sa) { await sa.click(); await wait(200); }
+    await p.locator(SEL).first().scrollIntoViewIfNeeded(); await h5pStart(p, SEL);
+    return h5pFrame(p);
+  };
+  console.log('— h5p@1: planets-quiz (an H5P package beside the pack)');
+  const it = await p.evaluate(() => { const a = ACT.ITEMS['planets-quiz']; return a && { fn: typeof a.h5p, keys: Object.keys(a).includes('h5p'), json: JSON.stringify(a).includes('"h5p"'), caps: ACT.caps().has('runtime:h5p@1'), req: (Noema.pack.requires || []).includes('runtime:h5p@1'), by: Object.keys(a.h5pByLocale || {}), lang: SUBJ.language }; });
+  ok(it && it.fn === 'function' && !it.keys && !it.json && it.caps && it.req, `the item has its loader (never stored: not enumerable, not in JSON); the app runs runtime:h5p@1, which pack.requires names ${JSON.stringify(it)}`);
+  let g = await openSec();
+  ok(!!g, 'the H5P block plays: the question and its three answers ' + await p.evaluate(s => document.querySelector(s + ' .act-note')?.textContent || '', SEL));
+  if (!g) return;
+  const attrs = await p.$eval(SEL + ' iframe.act-frame', f => { const P = new DOMParser(), w = P.parseFromString(f.srcdoc, 'text/html'), i = w.querySelector('iframe'), inn = i ? P.parseFromString(i.getAttribute('srcdoc'), 'text/html') : null;
+    return { sandbox: f.getAttribute('sandbox'), inner: i?.getAttribute('sandbox'), wScripts: w.querySelectorAll('script').length, csp: inn?.head.querySelector('meta[http-equiv="Content-Security-Policy"]')?.getAttribute('content') || '' }; });
+  ok(attrs.sandbox === 'allow-scripts' && attrs.inner === 'allow-scripts' && attrs.wScripts === 0 && /script-src 'sha256-/.test(attrs.csp) && /connect-src 'none'/.test(attrs.csp) && !/unsafe-/.test(attrs.csp.split(';').find(d => /^\s*script-src/.test(d)) || ''),
+    'the same sandbox as a mini-app: allow-scripts only, a wrapper with no scripts, scripts by hash (no unsafe-* in script-src; inline styles as for a mini-app), no network ' + JSON.stringify({ ...attrs, csp: attrs.csp.replace(/'sha256-[^']*' ?/g, '') }));
+  ok(/Which planet is the largest/.test(await g.evaluate(() => document.querySelector('.h5p-question-introduction')?.textContent || '')), "its words in the pack's own language (the package's own content.json)");
+  await h5pAnswer(g, 'Jupiter');
+  ok(await until(() => p.evaluate(() => !!S.act?.['blk:ch01-s01:planets-quiz']?.data?.h5p)), 'the state H5P reports is saved (S.act … data.h5p)');
+  await p.reload(); await wait(1500);
+  g = await openSec();
+  ok(g && await until(() => g.evaluate(() => { const li = [...document.querySelectorAll('.h5p-answer')].find(x => x.textContent.trim() === 'Jupiter'); return !!li && li.getAttribute('aria-checked') === 'true'; })), 'after a reload the saved state comes back: Jupiter is still chosen');
+
+  console.log('— h5p@1: the sim exercise (grade "reported": the score H5P reports)');
+  const card = async () => { await p.evaluate(() => { const m = document.querySelector('main'); m.innerHTML = ''; const c = exerciseCard(EX['ch01-e910']); c.id = 'T'; m.append(c); scrollTo(0, 0); }); await wait(300); await h5pStart(p, '#T'); return h5pFrame(p); };
+  g = await card();
+  ok(!!g, 'the exercise mounts the H5P item');
+  await p.click('#T button:has-text("Check")'); await wait(200);
+  ok(await p.evaluate(() => !document.getElementById('T')._locked()), 'Check before H5P reports a score does not grade');
+  await h5pAnswer(g, 'Mars');
+  await p.click('#T button:has-text("Check")'); await wait(300);
+  ok(await p.evaluate(() => { const c = document.getElementById('T'); return c._locked() && !!c.querySelector('.explain.bad') && S.att?.['ch01-e910']?.result?.passed === false; }), 'a wrong answer (Mars) is graded wrong, and the attempt saved');
+  g = await card(); await h5pAnswer(g, 'Jupiter');
+  await p.click('#T button:has-text("Check")'); await wait(300);
+  ok(await p.evaluate(() => { const c = document.getElementById('T'), r = S.att?.['ch01-e910']?.result; return c._locked() && !!c.querySelector('.explain.ok') && r?.passed === true && r.score === 1 && /11 times/.test(c.textContent); }), 'the right answer (Jupiter) is graded right (score 1), and the reveal is shown');
+
+  console.log('— h5p@1: translations through h5pByLocale (French from the pack, Greek), fallbacks');
+  for (const [loc, want] of [['fr', /Quelle est la plus grande planète/], ['el', /Ηλιακό Σύστημα/]]) {
+    await p.evaluate(([loc, el]) => { const a = ACT.ITEMS['planets-quiz'], b = { ...a, id: 'pq-' + loc, h5pByLocale: { ...a.h5pByLocale, ...(loc === 'el' ? { el: { content: el } } : {}) } };
+      Object.defineProperty(b, 'h5p', { value: a.h5p, enumerable: false, configurable: true, writable: true }); ACT.ITEMS['pq-' + loc] = b;
+      window.__lang = SUBJ.language; SUBJ.language = loc;   // the pack read in that language
+      const m = document.querySelector('main'); m.innerHTML = ''; m.append(interactiveBlock({ t: 'interactive', activity: 'pq-' + loc })); scrollTo(0, 0); }, [loc, PQ_EL]);
+    await h5pStart(p, 'main'); g = await h5pFrame(p);
+    const gr = g && await g.evaluate(() => ({ text: document.querySelector('.h5p-question-introduction')?.textContent || '', lang: document.documentElement.lang }));
+    await p.evaluate(() => { SUBJ.language = window.__lang; });
+    ok(gr && want.test(gr.text) && gr.lang === loc, `read in ${loc}: the item's content.json in that language (h5pByLocale.${loc}${loc === 'fr' ? ', put in by make_pack.py' : ''}) ${JSON.stringify(gr)}`);
+  }
+  const off = await p.evaluate(() => { window.NOEMA_CONFIG.activities = { 'h5p@1': false }; const m = document.querySelector('main'); m.innerHTML = ''; m.append(interactiveBlock({ t: 'interactive', activity: 'planets-quiz' })); const r = { img: !!m.querySelector('.act-fallback img'), text: m.querySelector('.act-fbtext')?.textContent || '', frame: !!m.querySelector('iframe') }; delete window.NOEMA_CONFIG.activities; return r; });
+  ok(off.img && /Jupiter/.test(off.text) && !off.frame, 'h5p@1 switched off: the fallback picture and text instead');
+  await p.evaluate(B => { const a = ACT.ITEMS['planets-quiz'], c = JSON.parse(JSON.stringify(a.h5pByLocale.fr.content)); c.question = '<p><img src="' + B + '?h5p-img"> ?</p>';
+    const b = { ...a, id: 'pq-link', h5pByLocale: { fr: { content: c } } }; Object.defineProperty(b, 'h5p', { value: a.h5p, enumerable: false, configurable: true, writable: true }); ACT.ITEMS['pq-link'] = b;
+    window.__lang = SUBJ.language; SUBJ.language = 'fr';
+    const m = document.querySelector('main'); m.innerHTML = ''; m.append(interactiveBlock({ t: 'interactive', activity: 'pq-link' })); scrollTo(0, 0); }, BEACON);
+  await h5pStart(p, 'main');
+  ok(await until(() => p.evaluate(() => !document.querySelector('main iframe') && !!document.querySelector('main .act-fallback img')), 12000), 'a translation with an outside link is refused before any frame: the fallback');
+  await p.evaluate(() => { SUBJ.language = window.__lang; });
+  const bad = await p.evaluate(() => { const a = ACT.ITEMS['planets-quiz'], b = { ...a, id: 'pq-bad', sha256: 'f'.repeat(64) }; Object.defineProperty(b, 'h5p', { value: a.h5p, enumerable: false, configurable: true, writable: true }); ACT.ITEMS['pq-bad'] = b;
+    const m = document.querySelector('main'); m.innerHTML = ''; m.append(interactiveBlock({ t: 'interactive', activity: 'pq-bad' })); scrollTo(0, 0); return true; });
+  await h5pStart(p, 'main');
+  ok(bad && await until(() => p.evaluate(() => !document.querySelector('main iframe') && !!document.querySelector('main .act-fallback img')), 12000), 'a package that is not the one the pack names (sha256) never plays: the fallback');
+  await wait(1000);
+  ok(hits.length === 0, `no request leaves the H5P frame: ${JSON.stringify(hits)}`);
+  ok(E.length === E0, 'no page errors ' + JSON.stringify(E.slice(E0, E0 + 3)));
+}
+/* h5p@1 in the one-file bundle (tools/build.py bundle_h5p): the .h5p inline up to NOEMA_H5P_INLINE_MAX; over it, the fallback. */
+async function h5pBundle(browser, E) {
+  for (const [file, inline] of [['act-bundle-inline.html', true], ['act-bundle-big.html', false]]) {
+    const f = path.join(ROOT, file);
+    if (!fs.existsSync(f)) { ok(false, `${file}: not built (tests/run_e2e.sh builds it)`); continue; }
+    console.log(`— h5p@1 in the one-file bundle (${inline ? 'the .h5p inline' : 'the .h5p too big for the one file'})`);
+    const c = await browser.newContext({ viewport: { width: 1280, height: 900 } }), p = await c.newPage(); p.setDefaultTimeout(10000);
+    const PE = []; p.on('pageerror', e => PE.push(e.message)); hits.length = 0;
+    await p.goto('file://' + f + '?subject=demo-physics'); await wait(1500);
+    ok(await until(() => p.evaluate(() => typeof SUBJ !== 'undefined' && SUBJ.id === 'demo-physics' && !!ACT.ITEMS['planets-quiz'])), `${file}: the subject opens with its H5P item`);
+    const kind = await p.evaluate(() => { const a = ACT.ITEMS['planets-quiz']; return { has: 'h5p' in a, type: a.h5p === null ? 'null' : typeof a.h5p, own: !Object.keys(a).includes('h5p') }; });
+    ok(kind.has && kind.own && kind.type === (inline ? 'string' : 'null'), `${file}: the item's .h5p is ${inline ? 'inline (base64)' : 'left out (null)'} and not enumerable ${JSON.stringify(kind)}`);
+    await p.evaluate(() => { location.hash = '#/s/ch01-s01'; }); await wait(800);
+    const sa = await p.$('button:has-text("show all")'); if (sa) { await sa.click(); await wait(200); }
+    const SEL = 'main .act-blk .act[data-activity="planets-quiz"]';
+    await p.locator(SEL).first().scrollIntoViewIfNeeded(); await h5pStart(p, SEL);
+    if (inline) ok(!!(await h5pFrame(p)), `${file}: the H5P item plays from the one file`);
+    else ok(await until(() => p.evaluate(s => { const r = document.querySelector(s); return !!r && !r.querySelector('iframe') && !!r.querySelector('.act-fallback img') && /Jupiter/.test(r.querySelector('.act-fbtext')?.textContent || ''); }, SEL), 15000), `${file}: too big for the one file — its fallback picture and text`);
+    ok(hits.length === 0 && !PE.length, `${file}: no request, no page errors ${JSON.stringify(hits)} ${JSON.stringify(PE.slice(0, 3))}`);
+    await c.close();
+  }
+}
 (async () => {
   const srv = http.createServer((q, r) => { hits.push(q.url); r.end('gone'); }); await new Promise(r => srv.listen(0, '127.0.0.1', r)); BEACON = `http://127.0.0.1:${srv.address().port}/beacon`;
-  for (const b of (process.env.BROWSERS || 'chromium').split(',')) { console.log(`\n[${b}]`); try { await run(b); } catch (e) { ok(false, b + ': ' + e.message.split('\n')[0]); } }
+  for (const b of (process.env.BROWSERS || 'chromium').split(',')) { console.log(`\n[${b}]`); try { await run(b); } catch (e) { ok(false, b + ': ' + e.message.split('\n')[0]); }
+    if (process.env.PY !== '0') try { await python(b); } catch (e) { ok(false, b + ' py-module@1: ' + e.message.split('\n')[0]); } }
   srv.close(); console.log(fails ? `\n${fails} failed` : '\nactivities_app: all passed'); process.exit(fails ? 1 : 0);
 })();

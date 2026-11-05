@@ -5,8 +5,9 @@ or a graded **sim** exercise (reach a goal in the activity; the activity reports
 The decisions and the spikes behind this page are in `docs/adr/001-interactive-activities.md`. How to write one well:
 `docs/INTERACTIVE_AUTHORING.md`. The formulas of `sim-spec@1`: `docs/INTERACTIVE_SIMEXPR.md`. The circuit engine and the
 fault-finding bench: `docs/INTERACTIVE_CIRCUIT.md`. The heat, control-loop, radio and IoT-twin engines:
-`docs/INTERACTIVE_ENGINES.md`. WebAssembly modules: `docs/INTERACTIVE_WASM.md`. Outside pages (PhET,
-GeoGebra, Desmos): `docs/INTERACTIVE_EMBED.md`. The learning record export: `docs/INTERACTIVE_XAPI.md`.
+`docs/INTERACTIVE_ENGINES.md`. Python (`py-module@1`): `docs/INTERACTIVE_PYTHON.md`. H5P packages (`h5p@1`):
+`docs/INTERACTIVE_H5P.md`. WebAssembly modules: `docs/INTERACTIVE_WASM.md`. Outside pages (PhET, GeoGebra, Desmos):
+`docs/INTERACTIVE_EMBED.md`. The learning record export: `docs/INTERACTIVE_XAPI.md`.
 
 Activities are optional. A chapter without them is complete; a chapter with them still needs every rule of
 `tools/CONTENT_SPEC.md` (Q1–Q8). An activity never replaces the theory: the text explains the idea, the activity lets the
@@ -18,8 +19,8 @@ learner try it.
 |---|---|---|
 | `html-app@1` (tier A) | one self-contained HTML file (inline scripts and styles, pictures as `data:` URIs) in a sandboxed frame | **available** |
 | `sim-spec@1` (tier B) | a JSON spec (controls, formulas, readouts, plots) run by the app's own trusted engines — no code in the pack (§12) | **available** — engines `formula@1` (formulas), `circuit-mna@1` (circuits, transients and fault-finding benches: §12.6–12.7), `thermal@1` (lumped thermal networks), `pid@1` (control loops), `rf@1` (radio links) and `twin@1` (the digital twin of a battery-powered IoT node, with benches) — `docs/INTERACTIVE_ENGINES.md` |
-| `py-module@1` (tier C) | Python (Pyodide + numpy, scipy; allow-listed extras through micropip) in a worker | later (P4); offline after the first use, never in the one-file bundle |
-| `h5p@1` | an ordinary `.h5p` package (quiz, drag and drop, interactive video, branching…) played by the app's own H5P player in the same sandbox | later (P4b) |
+| `py-module@1` (tier C) | Python (`main.py`, Pyodide + numpy, scipy; allow-listed extras through micropip) in a sandboxed worker; the app draws a sim-spec@1 spec with Python's outputs (`docs/INTERACTIVE_PYTHON.md`) | **available** on the website, on by default (`NOEMA_CONFIG.activities['py-module@1'] = false` turns it off); 17 MB (numpy) / 37 MB (scipy) once, offline after the first use, never in the one-file bundle or on `file://` |
+| `h5p@1` (tier B) | an ordinary `.h5p` package (quiz, drag and drop, fill in the blanks, mark the words, dialog cards…) played by the app's own H5P player in the same sandbox, no network (docs/INTERACTIVE_H5P.md) | **available** — on by default; the file travels beside the pack |
 | `wasm-module@1` | a precompiled WebAssembly module (C, Rust, AssemblyScript) run in a worker with no network and no imports but a tiny host ABI; shown through a `sim-spec@1` spec with the engine `wasm@1` (`docs/INTERACTIVE_WASM.md`) | **available** (P6) — engine `wasm@1` |
 | `external-embed@1` | an allow-listed page of an outside provider (PhET, GeoGebra, Desmos) in a double sandboxed frame, after a consent card; **explore only**, needs the network (`docs/INTERACTIVE_EMBED.md`) | **opt-in** (P6): off unless `NOEMA_CONFIG.activities['external-embed@1']` is `true`; Falstad, CircuitJS and Wokwi stay refused (pending) |
 
@@ -39,18 +40,27 @@ activities/
 └── <activity-id>/
     ├── app.html                    the bundle (html-app@1): everything inline, at most 512 KB (aim for <= 256 KB)
     ├── spec.json                   or the spec (sim-spec@1): data only, at most 64 KB (§12)
+    ├── main.py                     or the Python (py-module@1, at most 256 KB) + its spec.json (docs/INTERACTIVE_PYTHON.md)
     ├── module.wasm                 or a WebAssembly module (wasm-module@1, at most 2 MiB; + spec.json): docs/INTERACTIVE_WASM.md
     ├── strings.en.json             the activity's words, one table per language: {"key": "text with {vars}"}
     ├── strings.el.json
-    └── strings.ru.json             (every language the pack is read in: its own + each translation)
+    ├── strings.ru.json            (every language the pack is read in: its own + each translation)
+    ├── item.h5p                    or the .h5p package (h5p@1), unchanged, at most 100 MB; its words are in its content.json:
+    ├── content.el.json             one per translation of the pack (the same content.json in that language), no strings.*.json
+    └── activity.json               (h5p@1) id, title, height, fallback, licence
 media/<still>.svg|png               the fallback picture (a normal pack picture in media/media.json)
 ```
 
 `make_pack.py` puts each bundle **inline** in the pack (like the pictures), with its `sha256` and `bytes` (a spec as `spec`), and
 the string tables under `strings`; it writes `pack.requires` (+ `engine:<id>` for an engine other than the built-in `formula@1`)
-and `counts.activities`. `unpack.py` gives the folder back. `python3 activity_new.py <subject-dir> <id>` starts one from the
-reference activity alias-lab; `--runtime sim-spec@1` from rc-lowpass (an RC low-pass filter); `--from wasm-oscillator`
-(`--runtime wasm-module@1`) from a damped oscillator computed by a WebAssembly module.
+and `counts.activities`. An `h5p@1` package is **not** inline: `item.h5p` travels **beside** the pack (the `.noema.zip` entry
+`activities/<id>/item.h5p`; the account asks for it in `noema_finish_upload`), with its `sha256` and `bytes` in the registry and
+each `content.<locale>.json` inline under `h5pByLocale` (docs/INTERACTIVE_H5P.md §1–§2). `unpack.py` gives the folder back. `python3 activity_new.py <subject-dir> <id>` starts one from the
+reference activity alias-lab; `--runtime sim-spec@1` from rc-lowpass (an RC low-pass filter); `--from py-filter` from the Python
+reference (py-module@1: `main.py` inline as `python` with its `sha256` and `bytes`, its spec as `spec`, `runtime:py-module@1` in
+`pack.requires`); `--runtime h5p@1` from planets-quiz, or `--runtime h5p@1 --from FILE.h5p` from your own package; `--from wasm-oscillator`
+(`--runtime wasm-module@1`) from a damped oscillator computed by a WebAssembly module; `--from` rc-transient, led-bench, heatsink,
+pid-tune, lora-link or sensor-node from the other references of `tools/activities_examples/`.
 
 ## 3. The registry — `activities/activities.json`
 
@@ -58,7 +68,8 @@ reference activity alias-lab; `--runtime sim-spec@1` from rc-lowpass (an RC low-
 { "format": "noema.activities/v1",
   "items": [{
     "id": "alias-lab",                       // a-z, 0-9 and -, 2–61 characters, unique in the pack
-    "runtime": "html-app@1",                 // or "sim-spec@1" with "entry": "activities/<id>/spec.json"
+    "runtime": "html-app@1",                 // or "sim-spec@1" with "entry": "activities/<id>/spec.json", or "h5p@1" with
+                                             //   "entry": "activities/<id>/item.h5p" (+ "h5pByLocale"; no "strings" needed)
     "entry": "activities/alias-lab/app.html",
     "stateVersion": 1,                       // raise it when the shape of the saved state changes (§6)
     "capabilities": ["state", "events", "resize", "result", "announce"],   // + "hints"
@@ -96,6 +107,7 @@ reference activity alias-lab; `--runtime sim-spec@1` from rc-lowpass (an RC low-
 - `grade.mode`: `"reported"` (html-app@1) — the activity calls `noema.result({score, passed})`; **Check** grades with the last
   result (nothing reported yet → Check does nothing). `"checks"` (sim-spec@1) — the app evaluates the rules itself (§12.5);
   it is refused for an html-app, whose values the app cannot see, and `"reported"` is refused for a sim-spec, which reports nothing.
+  A py-module@1 activity takes either: `checks` on Python's outputs, or `reported` with `noema.result(score, passed)` from Python.
 - `hints` (at most 6): shown one by one under the activity; each one costs: the score × 0.85 per hint, never below × 0.5. A hint leads to the next good question, never to the answer.
 - `reveal`: shown after a right answer, `explain` as for every exercise.
 - Quality rules: `sim` is **opt-in** — it counts for a chapter only when `fits.types` of its map names it, and then at least
@@ -178,16 +190,24 @@ from 320 px wide with no horizontal scroll (docs/UI_MAP.md "Small screens"), tou
 
 ## 10. Offline
 
-`html-app@1`, `sim-spec@1` and `wasm-module@1` work offline (everything is inline; the engines are part of the app). `external-embed@1`
-needs the network every time: offline, or when the page does not load in 20 s, the block shows its fallback with Restart (= try again). `py-module@1` (later) needs the Pyodide files (and numpy, scipy) from the network the first
-time; after that they are kept on the device (Settings can prepare them ahead), as are packages installed through micropip. It is
-never available in the one-file bundle: its fallback shows there.
+`html-app@1`, `sim-spec@1` and `wasm-module@1` work offline (everything is inline; the engines are part of the app). `h5p@1` works offline too:
+the H5P player is part of the app, and the `.h5p` file is kept on the device with the pack (checked by its sha256); in the one-file
+bundle an item up to 2 MB is inline and a bigger one shows its fallback. `external-embed@1` needs the network every time: offline,
+or when the page does not load in 20 s, the block shows its fallback with Restart (= try again). `py-module@1` needs the
+Pyodide files (about 17 MB with numpy, 37 MB with scipy) from the website the first time; a service worker
+(`engine/pyodide-sw.js`) then keeps them on the device (`navigator.storage.persist()` is asked), as are the allow-listed extras.
+Settings › Data and sync (classic: Account › Backup) has "Prepare Python for offline" with progress, the size and what is cached.
+Offline without the files, and always in the one-file bundle and on `file://`, the activity shows its fallback with the reason.
+Deployment: `python3 tools/fetch_pyodide.py --site dist/site` after `python3 tools/build.py site` (Netlify does it, and a failed
+download never breaks the deploy); `build_site` writes the headers (`Service-Worker-Allowed`, immutable caching, `application/wasm`)
+into `_headers` — `docs/INTERACTIVE_PYTHON.md` §7.
 
 ## 11. Before you deliver — checklist
 
 1. `python3 activity_lint.py <subject-dir>` — no errors (and no warnings you cannot explain); for a sim-spec it checks every
    expression against the names the spec declares, every label key in every table, the limits; for a circuit the netlist,
-   the bindings, the faults, points and instruments of a bench.
+   the bindings, the faults, points and instruments of a bench; for an h5p@1 item the package rules of `h5p_check.py` (allowed
+   content types and libraries, no outside link, no file type H5P refuses) on the package and on each translation.
 2. `python3 activity_test.py <subject-dir>` — it loads, says hello, shows its words in every language, reports right and wrong
    results for the solutions and wrong attempts you listed, and no console errors (a bench: `measure` / `diagnose` steps, the
    readings in the log, the right and the tempting wrong diagnosis; docs/INTERACTIVE_AUTHORING.md).

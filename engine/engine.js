@@ -1531,6 +1531,9 @@ const ACTP = (() => {
     'a11y:announce': p => str(p.text, LIM.text) && p.text.trim().length > 0,
     error: p => CODE.test(p.code || '') && (p.message == null || str(p.message, LIM.detail)),
     pong: p => true, ack: p => true, nack: p => true,
+    // py-module@1 (37_activity_py.js): the runner's own messages, checked in full by NoemaPy.protocol before they get here; the core only notes them
+    'py:out': p => (p.outputs == null || isObj(p.outputs)) && (p.error == null || (isObj(p.error) && CODE.test(p.error.code || ''))),
+    'py:status': p => typeof p.phase === 'string' && p.phase.length <= 20,
   };
   /** → { ok: true, msg } | { ok: false, why, ignore? } — ignore: an unknown type (counted, not a strike) */
   function check(data) {
@@ -1558,10 +1561,14 @@ const ACT = (() => {
   const reg = Noema.pack?.activities;
   const ITEMS = {}; for (const a of (reg && Array.isArray(reg.items) ? reg.items : [])) if (a && typeof a.id === 'string') ITEMS[a.id] = a;
   const RUNTIMES = {}, GRADERS = {}, ENGINES = {};
-  const flags = () => Object.assign({ 'html-app@1': true }, window.NOEMA_CONFIG?.activities || {});
+  // every runtime is on unless config.js switches it off (docs/adr/001 §4 "Feature flags"): NOEMA_CONFIG.activities['py-module@1'] = false;
+  // py-module@1 still needs NoemaPy.available() (the website: never file:// or the one-file bundle)
+  const flags = () => Object.assign({ 'html-app@1': true, 'py-module@1': true }, window.NOEMA_CONFIG?.activities || {});
+  /** a runtime that is registered, switched on and can run here (available(): py-module@1 only on the website, never file:// or the one-file bundle) */
+  const enabled = id => !!(Object.prototype.hasOwnProperty.call(RUNTIMES, id) && flags()[id] !== false && (typeof RUNTIMES[id].available !== 'function' || RUNTIMES[id].available()));
   /** the capabilities of this app (pack.requires): the core + every runtime that is registered and switched on */
-  const caps = () => new Set(['activities/v1', ...Object.keys(RUNTIMES).filter(id => flags()[id] !== false).map(id => 'runtime:' + id), ...Object.keys(ENGINES).map(id => 'engine:' + id)]);
-  const canRun = a => !!(a && RUNTIMES[a.runtime] && flags()[a.runtime] !== false);
+  const caps = () => new Set(['activities/v1', ...Object.keys(RUNTIMES).filter(enabled).map(id => 'runtime:' + id), ...Object.keys(ENGINES).map(id => 'engine:' + id)]);
+  const canRun = a => !!(a && enabled(a.runtime));
   const LIVE = [];   // the activities running now (at most liveMax())
   const liveMax = () => innerWidth < 720 ? 1 : 2;
   const rnd32 = () => (crypto.getRandomValues(new Uint32Array(1))[0]) >>> 0;
@@ -1581,6 +1588,8 @@ const ACT = (() => {
     const bg = cs.backgroundColor || '', m = bg.match(/\d+(\.\d+)?/g), lum = m ? (0.2126 * m[0] + 0.7152 * m[1] + 0.0722 * m[2]) / 255 : 1;
     return { tokens: tk, scheme: lum < 0.5 ? 'dark' : 'light', reducedMotion: matchMedia('(prefers-reduced-motion: reduce)').matches, textScale: parseFloat(cs.fontSize) / 16 || 1, dir: document.documentElement.dir || 'ltr' };
   }
+  /** a runtime: { id, version, mount(slot, ctx) → port, autoHeight?, available?() → false where it cannot run (its fallback shows, with unavailable?() as the note),
+      failText?(code) → { text, restart } | null (its own words for a failure code; else the core's) } */
   function registerRuntime(def) { if (def && def.id && typeof def.mount === 'function') RUNTIMES[def.id] = def; }
   function registerGrader(def) { if (def && def.id && typeof def.grade === 'function') GRADERS[def.id] = def; }
   /** an engine of sim-spec@1: { id: 'name@N', check?(spec) → [problems], create(spec, {seed, task}) → { run(inputs) → outputs }, workerSource? }
@@ -1651,7 +1660,7 @@ const ACT = (() => {
     const btn = (label, onclick, cls = 'btn small') => h('button', { class: cls, type: 'button', onclick }, label);
 
     if (!a) { fallback(tE('engine.act.missing')); return Object.assign(sess, { destroy() { }, grade: () => null }); }
-    if (!canRun(a)) { fallback(tE('engine.act.notHere')); return Object.assign(sess, { destroy() { }, grade: () => null }); }
+    if (!canRun(a)) { const R0 = RUNTIMES[a.runtime], why = R0 && flags()[a.runtime] !== false && typeof R0.unavailable === 'function' ? R0.unavailable() : null; fallback(why || tE('engine.act.notHere')); return Object.assign(sess, { destroy() { }, grade: () => null }); }
 
     let timer = null, pingT = null, io = null, saveT = null;
     function stop(reason, offerRestart = true) {
@@ -1695,6 +1704,7 @@ const ACT = (() => {
         case 'result': sess.result = { score: p.score, passed: p.passed, detail: p.detail || null, t: Date.now() }; sess.onResult?.(sess.result); return;
         case 'hint:request': { const r = sess.nextHint?.(); sess.port?.send('hint', { text: r || null }, { re: m.id }); return; }
         case 'a11y:announce': live.textContent = ''; setTimeout(() => { live.textContent = p.text; }, 30); return;
+        case 'py:out': case 'py:status': return;   // the Python runtime's own traffic (37_activity_py_ui.js reads it)
         case 'error':
           if (p.code === 'runaway') return stop(tE('engine.act.stopped'));
           note.textContent = tE('engine.act.error', { code: p.code }); console.warn('[noema] activity error', actId, p.code, p.message || ''); return;
@@ -1732,13 +1742,13 @@ const ACT = (() => {
         sess.port = RUNTIMES[a.runtime].mount(box, { act: a, init, title: tE('engine.act.frameTitle', { id: a.id }),
           onLive: () => Promise.resolve().then(goLive),
           onMessage: raw => { const r = ACTP.check(raw); if (r.ok) onMessage(r.msg); else if (r.version) stop(tE('engine.act.newerProtocol'), false); else if (!r.ignore) strike(r.why); },
-          onFail: why => why === 'unsupported' ? stop(tE('engine.act.notHere'), false) : why === 'spec' ? stop(tE('engine.act.failed'), false)
+          onFail: why => { const own = RUNTIMES[a.runtime].failText?.(why); return own ? stop(own.text, !!own.restart) : why === 'unsupported' ? stop(tE('engine.act.notHere'), false) : why === 'spec' ? stop(tE('engine.act.failed'), false)
             : why === 'runaway' ? stop(tE('engine.act.stopped'))
             // external-embed@1 (docs/INTERACTIVE_EMBED.md): refused or mounted as an exercise → the fallback for good; offline or not loaded → Restart retries
             : why === 'embed-refused' || why === 'embed-graded' ? stop(tE('engine.act.embed.refused'), false)
             : why === 'embed-offline' ? stop(tE('engine.act.embed.offline'))
             : why === 'embed-timeout' ? stop(tE('engine.act.embed.timeout', { provider: (window.NoemaEmbed?.PROVIDERS || []).find(p => p.id === a.provider)?.name || String(a.provider || '') }))
-            : stop(why === 'navigated' ? tE('engine.act.misbehaved') : tE('engine.act.failed')) });
+            : stop(why === 'navigated' ? tE('engine.act.misbehaved') : tE('engine.act.failed')); } });
       } catch (e) { console.warn('[noema] activity mount failed', e); return stop(tE('engine.act.failed')); }
       if (notice) note.textContent = notice;
       if (!waiting) LIVE.push(sess);
@@ -1788,7 +1798,7 @@ const ACT = (() => {
     if (hidden.length) { c.exercises = keep; c._hidden = (c._hidden || 0) + hidden.length; }
     return hidden;
   }
-  return { ITEMS, mount, sweep, registerRuntime, runtime: id => RUNTIMES[id] || null, registerGrader, registerEngine, engine, engines, caps, canRun, keepRunnable, strings, theme, LIVE };
+  return { ITEMS, mount, sweep, registerRuntime, runtime: id => RUNTIMES[id] || null, enabled, registerGrader, registerEngine, engine, engines, caps, canRun, keepRunnable, strings, theme, LIVE };
 })();
 
 /* the exercises already indexed (10_core.js) that this app cannot run leave the indexes; the pack is unchanged */
@@ -2266,20 +2276,22 @@ APP.postMessage({t:'hello',nonce:N},'*');
     return s;
   }
 
-  ACT.registerRuntime({
-    id: 'sim-spec@1', version: 1, autoHeight: true,
-    /** → port { send(type, payload), close(), values() } */
-    mount(box, { act, init, onMessage, onFail }) {
+  /** The spec view: controls, readouts, plots (and a bench) drawn by the app from a spec. → port { send(type, payload), close(), values(), reveal(), saveSoon() }
+      host (optional, py-module@1 in 37_activity_py_ui.js): another runtime that computes the outputs itself —
+        { engine: { id }, check: { python: true } (the options of checkSimSpec), runner(spec, opts, onFail) → { run(inputs, done), measure?, close },
+          stateExtra() → fields saved beside the values, decorate(root) → adds its own lines to the view }
+      Without host the outputs come from the spec's engine (ACT.registerEngine). */
+  function simView(box, { act, init, onMessage, onFail }, host) {
       const later = f => Promise.resolve().then(f);   // never call back before the core holds the port
       const out = (type, payload) => { if (!closed) onMessage(ACTP.out(type, payload)); };
       let closed = false;
       const port = { send() { }, close() { closed = true; }, values: () => null };
       const spec = act.spec, tables = act.strings && typeof act.strings === 'object' ? act.strings : null;
-      const engId = spec && typeof spec === 'object' && 'engine' in spec ? spec.engine : 'formula@1';
-      const E = typeof engId === 'string' ? ACT.engine(engId) : null;
+      const engId = host ? host.engine.id : spec && typeof spec === 'object' && 'engine' in spec ? spec.engine : 'formula@1';
+      const E = host ? host.engine : typeof engId === 'string' ? ACT.engine(engId) : null;
       if (!E) { console.warn('[noema] sim-spec', act.id, 'unknown engine', engId); later(() => onFail('unsupported')); return port; }
-      if (spec.bench && !E.bench) { console.warn('[noema] sim-spec', act.id, 'engine', engId, 'takes no measurements'); later(() => onFail('unsupported')); return port; }
-      const probs = window.NoemaPackCheck?.checkSimSpec ? NoemaPackCheck.checkSimSpec(spec, tables, ACT.engines()) : ['the spec checker is not loaded'];
+      if (spec && spec.bench && !E.bench) { console.warn('[noema] sim-spec', act.id, 'engine', engId, 'takes no measurements'); later(() => onFail('unsupported')); return port; }
+      const probs = window.NoemaPackCheck?.checkSimSpec ? NoemaPackCheck.checkSimSpec(spec, tables, host ? null : ACT.engines(), host ? host.check : undefined) : ['the spec checker is not loaded'];
       if (!probs.length && E.check) try { probs.push(...(E.check(spec) || [])); } catch (e) { probs.push(String(e.message || e)); }
       if (probs.length) { console.warn('[noema] sim-spec', act.id, probs.slice(0, 5).join(' | ')); later(() => onFail('spec')); return port; }
 
@@ -2370,12 +2382,13 @@ APP.postMessage({t:'hello',nonce:N},'*');
       const B = spec.bench ? makeBench() : null;   // a fault-finding bench (§12.7): instruments, the measurement log, the diagnosis
       if (B) root.append(B.el);
       root.append(h('div', { class: 'sim-foot' }, busyNote, reset));
+      host?.decorate?.(root);
       box.append(root);
 
       /* ---------- computing ---------- */
       let env = {}, outputs = {}, paused = false, dirty = false, saveT = null, raf = 0, rev = 0, doneRev = 0;
       const prep = typeof E.prepare === 'function' ? E.prepare(spec, C) : (x => x);   // the engine's expressions → numbers, on this thread
-      const newRunner = () => E.id === 'formula@1' ? null : engineRunner(E, spec, { seed: init.seed >>> 0, task: { ...consts }, faults: B ? B.applied() : undefined }, why => onFail(why));
+      const newRunner = () => E.id === 'formula@1' ? null : (host ? host.runner : engineRunner)(E, spec, { seed: init.seed >>> 0, task: { ...consts }, faults: B ? B.applied() : undefined }, why => onFail(why));
       let runner = newRunner();
       const declared = spec.outputs || [];
 
@@ -2597,7 +2610,7 @@ APP.postMessage({t:'hello',nonce:N},'*');
           P.holder.replaceChildren(drawPlot(figs[i], p, data, { locale, aria: P.aria, xLabel: P.xLabel, yLabel: P.yLabel }));
         });
       }
-      function saveSoon() { clearTimeout(saveT); saveT = setTimeout(() => { const bs = B?.state(); out('state', { version: init.stateVersion || 1, data: { values: { ...vals }, ...(bs ? { bench: bs } : {}) } }); }, 250); }
+      function saveSoon() { clearTimeout(saveT); saveT = setTimeout(() => { const bs = B?.state(); out('state', { version: init.stateVersion || 1, data: { values: { ...vals }, ...(bs ? { bench: bs } : {}), ...(host?.stateExtra?.() || {}) } }); }, 250); }
       function changed(p, commit) {
         recompute(); saveSoon();
         if (commit) out('event', { name: 'param', data: { id: p.id, v: vals[p.id] } });
@@ -2618,10 +2631,12 @@ APP.postMessage({t:'hello',nonce:N},'*');
       // what the checks grader reads: the values once the latest inputs are computed (and a bench's own, once a diagnosis is chosen: before that Check waits)
       port.values = () => closed || doneRev !== rev ? null : B ? (B.ready() ? { ...env, ...B.values() } : null) : { ...env };
       port.reveal = () => { if (!closed) B?.reveal(); };   // after Check: the bench says what the fault was
+      port.saveSoon = saveSoon;
       later(() => out('ready', { protocols: [1] }));
       return port;
-    },
-  });
+  }
+  ACT.registerRuntime({ id: 'sim-spec@1', version: 1, autoHeight: true, mount: (box, ctx) => simView(box, ctx) });
+  ACT.simView = simView;   // the same view for runtimes that compute the outputs themselves (py-module@1)
   /* i18n-ignore-end */
 })();
 
@@ -5193,6 +5208,1057 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
     },
     create: (spec, opts) => local.noemaEngine.create(spec, opts),
     workerSource: NoemaCircuit.source() + '\n;(' + circuitSimEngine.toString() + ')(self);',
+  });
+  /* i18n-ignore-end */
+})();
+
+/* ---- 37_activity_py.js ---- */
+/* ===================== interactive activities — runtime py-module@1 (Tier C: Python with numpy/scipy, docs/INTERACTIVE_PYTHON.md) =====================
+   The activity is Python source (act.python) with a function step(inputs, state) → outputs (a dict) and an optional init(task, seed).
+   Its UI is not Python: the app draws the controls and plots from a declarative spec and calls step with py:step {inputs} → py:out {outputs}.
+   Where it runs: <iframe sandbox="allow-scripts"> (opaque origin "null") holding only OUR runner script (allowed by its hash), which
+   starts a blob: Worker with Pyodide 0.27.7. The runner has NO network at all (connect-src 'none'): the app reads the pinned files
+   (sha256-checked against /vendor/pyodide/manifest.json, cached on the device by engine/pyodide-sw.js) and hands their bytes over the
+   MessagePort; inside the worker, fetch() and importScripts() are replaced by a lookup in those bytes, so Pyodide, numpy, scipy and the
+   allow-listed extra wheels (micropip, our own index only) load without a request — and nothing else can be loaded: the lookup is
+   emptied once Python has started, and the policy blocks every real request (fetch, XHR, WebSocket, importScripts, import()).
+   A step that runs longer than its budget (3 s) ends the worker: error {code:'runaway'}; py:restart (or a new mount) starts it again.
+   Handshake as html-app@1 (34_activity_html.js): the runner posts hello {nonce} to the app, which hands over one MessagePort.
+   Not available on file:// copies and in the one-file bundle (no service worker, no cache, no files): the core shows the fallback.
+   Page API: window.NoemaPy = { available(), prepareOffline({include, onProgress, force}), status(), protocol, config() }. */
+(() => {
+  /* i18n-ignore-start */   // code, protocol names and Python source — no UI text
+  const DEFAULTS = { base: '/vendor/pyodide/0.27.7/', manifest: '/vendor/pyodide/manifest.json', sw: '/engine/pyodide-sw.js', swScope: '/vendor/pyodide/',
+    loader: '/vendor/pyodide/__loader.html', stepMs: 3000, initMs: 20000, startMs: 120000, maxPython: 256 * 1024 };
+  const config = () => Object.assign({}, DEFAULTS, (typeof window !== 'undefined' && window.NOEMA_CONFIG && window.NOEMA_CONFIG.py) || {});
+  const CACHE = 'noema-py-v1';
+  const BASE_PKGS = ['numpy', 'scipy'];
+  const VB = 'https://py.noema.invalid/';   // the virtual address of the files inside the worker (never requested: .invalid)
+  const isObj = v => v != null && typeof v === 'object' && !Array.isArray(v);
+  const jsize = v => { try { return JSON.stringify(v).length; } catch (e) { return Infinity; } };
+  const err = (code, message) => Object.assign(new Error(message || code), { code });
+  const hex = async buf => Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', buf)), b => b.toString(16).padStart(2, '0')).join('');
+  const b64 = async text => btoa(String.fromCharCode(...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text)))));
+  const TYPES = { js: 'text/javascript', wasm: 'application/wasm', json: 'application/json', zip: 'application/zip', whl: 'application/zip' };
+  const typeOf = p => TYPES[(p.split('.').pop() || '').toLowerCase()] || 'application/octet-stream';
+
+  /* ---------- the small protocol of this runtime (on top of noema.activity/v1, same envelope) ----------
+     app → runner  py:boot {python, packages, extras, stepMs, files}   (once, after init; files: { vpath: ArrayBuffer })
+                   py:step {inputs} + id          → py:out {outputs} | {error:{code, message}} + re = that id
+                   py:restart {}                  → a new worker with the same files and the last saved state
+     runner → app  py:status {phase: loading|starting|ready|stopped|failed, code?, message?, ms?}
+                   py:out {outputs?, error?, ms?, init?}   (init: true — what init(task, seed) returned) */
+  const PHASES = ['loading', 'starting', 'ready', 'stopped', 'failed'];
+  const CODE = /^[a-z0-9_.-]{1,40}$/;
+  const PY_IN = {
+    'py:out': p => (p.outputs == null || isObj(p.outputs)) && (p.error == null || (isObj(p.error) && CODE.test(p.error.code || '') && (p.error.message == null || (typeof p.error.message === 'string' && p.error.message.length <= 2000)))) && (p.ms == null || (typeof p.ms === 'number' && isFinite(p.ms))),
+    'py:status': p => PHASES.includes(p.phase) && (p.code == null || CODE.test(p.code)) && (p.message == null || (typeof p.message === 'string' && p.message.length <= 2000)),
+  };
+  const PY_OUT = { 'py:step': p => isObj(p.inputs), 'py:restart': p => true, 'py:boot': p => typeof p.python === 'string' };
+  /** → { ok, msg } | { ok: false, why } — the py:* messages (both directions), like ACTP.check; limits: one message ≤ 64 KB (as ACTP) */
+  function pyCheck(data, dir = 'in') {
+    if (!isObj(data) || data.p !== 'noema.activity' || data.v !== 1 || typeof data.type !== 'string') return { ok: false, why: 'not this protocol' };
+    const rules = dir === 'in' ? PY_IN : PY_OUT, rule = Object.prototype.hasOwnProperty.call(rules, data.type) ? rules[data.type] : null;
+    if (!rule) return { ok: false, why: 'unknown type ' + data.type, ignore: true };
+    const payload = data.payload == null ? {} : data.payload;
+    if (!isObj(payload)) return { ok: false, why: 'payload is not an object' };
+    if (data.type !== 'py:boot' && jsize(data) > 64 * 1024) return { ok: false, why: 'message too big' };
+    if (!rule(payload)) return { ok: false, why: 'bad ' + data.type };
+    return { ok: true, msg: { type: data.type, id: data.id, re: data.re, payload } };
+  }
+
+  /* ---------- the files: pinned manifest, service worker, cache ---------- */
+  const available = () => { try { return !!(!window.NOEMA_BUNDLE && window.isSecureContext && /^https?:$/.test(location.protocol) && 'caches' in window && window.crypto?.subtle && typeof Worker === 'function' && typeof WebAssembly === 'object'); } catch (e) { return false; } };
+  let swP = null, loaderEl = null, loaderP = null, loaderNo = 0, manP = null, via = null;   // via: how the last file was read ('sw' | 'page')
+  /** the registration of engine/pyodide-sw.js with an active worker, or null (unsupported, refused, NOEMA_CONFIG.py.sw === false) */
+  function sw() {
+    if (swP) return swP;
+    return swP = (async () => {
+      const c = config();
+      if (c.sw === false || !navigator.serviceWorker) return null;
+      try {
+        const reg = await navigator.serviceWorker.register(c.sw + '?manifest=' + encodeURIComponent(c.manifest), { scope: c.swScope });
+        if (!reg.active) {
+          const w = reg.installing || reg.waiting;
+          if (w) await new Promise(res => { const t = setTimeout(res, 10000); w.addEventListener('statechange', () => { if (w.state === 'activated' || w.state === 'redundant') { clearTimeout(t); res(); } }); });
+        }
+        return reg.active ? reg : null;
+      } catch (e) { console.warn('[noema] python: no service worker —', e && e.message); return null; }
+    })();
+  }
+  /** a hidden same-origin page in the worker's scope (served by the worker itself, no scripts can run in it): its fetch() goes
+      through the service worker. null → the page reads the cache itself (the same cache, the same checks). */
+  function loader() {
+    if (loaderEl && loaderEl.isConnected) return Promise.resolve(loaderEl);
+    if (loaderP) return loaderP;
+    if (Date.now() - loaderNo < 60000) return Promise.resolve(null);   // it just failed: the page's cache for a while
+    return loaderP = (async () => {
+      const reg = await sw(); if (!reg) return null;
+      const f = document.createElement('iframe');
+      f.src = config().loader; f.title = 'noema python files'; f.setAttribute('aria-hidden', 'true'); f.tabIndex = -1; f.style.display = 'none';
+      await new Promise(res => { f.addEventListener('load', res, { once: true }); setTimeout(res, 5000); (document.body || document.documentElement).append(f); });
+      let ok = false;
+      try { ok = !!f.contentWindow.navigator.serviceWorker.controller && typeof f.contentWindow.fetch === 'function' && f.contentDocument.title === 'noema python files'; } catch (e) { }
+      if (!ok) { f.remove(); loaderNo = Date.now(); return null; }
+      return (loaderEl = f);
+    })().finally(() => { loaderP = null; });
+  }
+  async function cache() { try { return await caches.open(CACHE); } catch (e) { return null; } }
+  /** the bytes of one pinned file, checked: the service worker (cache first) or, without it, the page's own cache */
+  async function getFile(path, sha256) {
+    const url = new URL(path, location.origin).href, f = await loader();
+    let buf;
+    if (f) {
+      let r; try { r = await f.contentWindow.fetch(url); } catch (e) { throw err('offline', path); }
+      if (!r.ok) throw err(r.headers.get('x-noema-error') === 'integrity' ? 'integrity' : r.status === 504 ? 'offline' : 'fetch', path + ' ' + r.status);
+      buf = await r.arrayBuffer(); via = 'sw';
+    } else {
+      via = 'page';
+      const c = await cache(), hit = c && await c.match(url);
+      if (hit) buf = await hit.arrayBuffer();
+      else {
+        let r; try { r = await fetch(url, { cache: 'no-cache', credentials: 'omit' }); } catch (e) { throw err('offline', path); }
+        if (!r.ok) throw err('fetch', path + ' ' + r.status);
+        buf = await r.arrayBuffer();
+        if (await hex(buf) !== sha256) throw err('integrity', path);
+        try { await c?.put(url, new Response(buf.slice(0), { headers: { 'content-type': typeOf(path) } })); } catch (e) { }
+        return buf;
+      }
+    }
+    if (await hex(buf) !== sha256) { try { (await cache())?.delete(url); } catch (e) { } throw err('integrity', path); }
+    return buf;
+  }
+  /** the runtime manifest written by tools/fetch_pyodide.py (network first; the cached copy offline) */
+  function manifest() {
+    if (manP) return manP;
+    manP = (async () => {
+      const url = new URL(config().manifest, location.origin).href, f = await loader();
+      let m = null;
+      if (f) { const r = await f.contentWindow.fetch(url).catch(() => null); if (r && r.ok) m = await r.json(); }
+      else {
+        const c = await cache();
+        try { const r = await fetch(url, { cache: 'no-cache', credentials: 'omit' }); if (r.ok) { m = await r.clone().json(); try { await c?.put(url, r); } catch (e) { } } } catch (e) { }
+        if (!m && c) { const hit = await c.match(url); if (hit) m = await hit.json(); }
+      }
+      if (!m || m.format !== 'noema.pyodide-manifest/v1' || !Array.isArray(m.core) || !isObj(m.files)) throw err('offline', 'no manifest');
+      return m;
+    })();
+    manP.catch(() => { manP = null; });
+    return manP;
+  }
+  /** what an activity's packages need: [{ vpath, path, sha256, bytes }] (core first) and the extra wheels; throws 'packages' */
+  function plan(man, packages) {
+    const out = new Map(), extras = [];
+    const add = (vpath, path, pin) => { if (!pin || !/^[0-9a-f]{64}$/.test(pin.sha256 || '')) throw err('packages', 'not pinned: ' + path); out.set(vpath, { vpath, path, sha256: pin.sha256, bytes: pin.bytes || 0 }); };
+    const pkg = name => { const files = man.packages && man.packages[name]; if (!Array.isArray(files)) throw err('packages', name + ' is not on this site'); for (const f of files) add('pyodide/' + f, man.base + f, man.files[f]); };
+    for (const f of man.core) add('pyodide/' + f, man.base + f, man.files[f]);
+    for (const p of packages) {
+      if (BASE_PKGS.includes(p)) pkg(p);
+      else if (man.wheels && Object.prototype.hasOwnProperty.call(man.wheels, p)) extras.push({ name: p, file: man.wheels[p].file });
+      else throw err('packages', p + ' is not on the allow-list');
+    }
+    if (extras.length) { pkg('micropip'); for (const x of extras) { const w = man.wheels[x.name]; if (!/^[A-Za-z0-9_.-]+-py3-none-any\.whl$/.test(w.file || '')) throw err('packages', 'bad wheel ' + x.name); add('pywheels/' + w.file, man.wheelsBase + w.file, w); } }
+    return { files: [...out.values()], extras };
+  }
+  async function loadAll(list, onProgress) {
+    const files = {}, total = list.length, totalBytes = list.reduce((s, f) => s + f.bytes, 0);
+    let done = 0, bytes = 0, i = 0;
+    const one = async () => { while (i < list.length) { const f = list[i++]; files[f.vpath] = await getFile(f.path, f.sha256); done++; bytes += f.bytes; onProgress && onProgress({ file: f.path, done, total, bytes, totalBytes }); } };
+    await Promise.all([one(), one(), one()]);
+    return files;
+  }
+  async function persist() {
+    try { if (!navigator.storage?.persist) return null; if (await navigator.storage.persisted()) return true; return await Promise.race([navigator.storage.persist(), new Promise(r => setTimeout(() => r(null), 3000))]); } catch (e) { return null; }
+  }
+  /** Settings → "Prepare Python for offline": download and keep the core + the named packages (numpy, scipy, allow-listed extras).
+      Never automatic; on a metered / save-data connection only with force. → { ok, files, bytes, persisted, failed: [{file, code}] } */
+  async function prepareOffline(opts = {}) {
+    const include = Array.isArray(opts.include) ? opts.include : ['numpy', 'scipy'];
+    if (!available()) return { ok: false, code: 'unavailable', files: 0, bytes: 0, persisted: null, failed: [] };
+    if (navigator.connection?.saveData && !opts.force) return { ok: false, code: 'save-data', files: 0, bytes: 0, persisted: null, failed: [] };
+    const persisted = await persist();
+    const man = await manifest();
+    const { files } = plan(man, include);
+    const failed = [];
+    let done = 0, bytes = 0;
+    const emit = d => { try { opts.onProgress?.(d); } catch (e) { } try { dispatchEvent(new CustomEvent('noema-py-progress', { detail: d })); } catch (e) { } };
+    emit({ file: null, done: 0, total: files.length, bytes: 0, totalBytes: files.reduce((s, f) => s + f.bytes, 0) });
+    let i = 0;
+    const one = async () => { while (i < files.length) { const f = files[i++]; try { await getFile(f.path, f.sha256); bytes += f.bytes; } catch (e) { failed.push({ file: f.path, code: e.code || 'fetch' }); } done++; emit({ file: f.path, done, total: files.length, bytes, totalBytes: files.reduce((s, x) => s + x.bytes, 0) }); } };
+    await Promise.all([one(), one(), one()]);
+    return { ok: !failed.length, files: files.length - failed.length, bytes, persisted, failed };
+  }
+  /** what an activity's packages need and how much of it is already on the device (the first-use note):
+      → { files, bytes, missing, missingBytes, extras: [names], extrasMissing: [names] }; throws when there is no manifest (offline, never used) */
+  async function need(packages) {
+    const man = await manifest(), { files, extras } = plan(man, Array.isArray(packages) ? packages : []);
+    const c = await cache(), have = new Set(c ? (await c.keys()).map(r => new URL(r.url).pathname) : []);
+    const miss = files.filter(f => !have.has(new URL(f.path, location.origin).pathname));
+    const sum = l => l.reduce((n, f) => n + (f.bytes || 0), 0);
+    return { files: files.length, bytes: sum(files), missing: miss.length, missingBytes: sum(miss), extras: extras.map(x => x.name),
+      extrasMissing: extras.filter(x => miss.some(f => f.vpath === 'pywheels/' + man.wheels[x.name].file)).map(x => x.name) };
+  }
+  /** what is on the device: { supported, sw: 'active'|'none', via: how the last file was read ('sw'|'page'|null), persisted, version, cachedBytes, groups: { core, numpy, scipy, micropip, <extra>: { files, cached, bytes, ready } } } */
+  async function status() {
+    const out = { supported: available(), sw: 'none', via, persisted: null, version: null, cachedBytes: 0, groups: {} };
+    if (!out.supported) return out;
+    try { out.persisted = navigator.storage?.persisted ? await navigator.storage.persisted() : null; } catch (e) { }
+    try { const reg = await navigator.serviceWorker?.getRegistration(config().swScope); out.sw = reg && reg.active ? 'active' : 'none'; } catch (e) { }
+    let man; try { man = await manifest(); } catch (e) { return out; }
+    out.version = man.version;
+    const c = await cache(), have = new Set(c ? (await c.keys()).map(r => new URL(r.url).pathname) : []);
+    const group = (name, list) => { const g = { files: list.length, cached: 0, bytes: 0 }; for (const [p, pin] of list) { g.bytes += pin.bytes || 0; if (have.has(p)) { g.cached++; out.cachedBytes += pin.bytes || 0; } } g.ready = g.cached === g.files; out.groups[name] = g; };
+    group('core', man.core.map(f => [man.base + f, man.files[f]]));
+    for (const [n, files] of Object.entries(man.packages || {})) group(n, files.map(f => [man.base + f, man.files[f]]));
+    for (const [n, w] of Object.entries(man.wheels || {})) group(n, [[man.wheelsBase + w.file, w]]);
+    return out;
+  }
+
+  /* ---------- the worker (runs Pyodide; its source is this function's text) ---------- */
+  function workerMain() {
+    'use strict';
+    var VB = 'https://py.noema.invalid/', FILES = {}, py = null, stepFn = null, realImport = self.importScripts.bind(self);
+    var TY = { js: 'text/javascript', wasm: 'application/wasm', json: 'application/json', zip: 'application/zip', whl: 'application/zip' };
+    function post(m) { self.postMessage(m); }
+    function urlOf(x) { return String(x && typeof x === 'object' && 'url' in x ? x.url : x); }
+    function get(u) { return Object.prototype.hasOwnProperty.call(FILES, u) ? FILES[u] : null; }
+    // every load of Pyodide goes through these two; after the start FILES is empty, so nothing can be loaded any more
+    self.fetch = function (input, opts) {
+      var u = urlOf(input), b = get(u);
+      if (!b) return Promise.reject(new TypeError('noema: ' + u.slice(0, 200) + ' cannot be loaded here'));
+      var integ = opts && opts.integrity, res = function () { return new Response(b, { status: 200, headers: { 'content-type': TY[(u.split('.').pop() || '').toLowerCase()] || 'application/octet-stream' } }); };
+      if (!integ || !self.crypto || !crypto.subtle) return Promise.resolve(res());
+      return crypto.subtle.digest('SHA-256', b).then(function (d) {
+        var s = btoa(String.fromCharCode.apply(null, new Uint8Array(d)));
+        if (String(integ).split(/\s+/).indexOf('sha256-' + s) < 0) throw new TypeError('noema: integrity ' + u);
+        return res();
+      });
+    };
+    self.importScripts = function () {
+      var urls = [];
+      for (var i = 0; i < arguments.length; i++) { var b = get(urlOf(arguments[i])); if (!b) throw new TypeError('noema: script cannot be loaded here'); urls.push(URL.createObjectURL(new Blob([b], { type: 'text/javascript' }))); }
+      return realImport.apply(self, urls);
+    };
+    function msgOf(e) { var s = String(e && e.message || e); var lines = s.trim().split('\n'); return lines.slice(-6).join('\n').slice(-1500); }
+    async function boot(m) {
+      var t0 = performance.now(), t1, t2;
+      try {
+        for (var k in m.files) FILES[VB + k] = m.files[k];
+        post({ k: 'status', phase: 'starting' });
+        self.importScripts(VB + 'pyodide/pyodide.js');
+        py = await self.loadPyodide({ indexURL: VB + 'pyodide/', lockFileURL: VB + 'pyodide/pyodide-lock.json', stdLibURL: VB + 'pyodide/python_stdlib.zip', packages: [], fullStdLib: false,
+          stdout: function (s) { post({ k: 'log', text: String(s).slice(0, 500) }); }, stderr: function (s) { post({ k: 'log', text: String(s).slice(0, 500), err: true }); } });
+        t1 = performance.now();
+        var pk = m.packages.filter(function (p) { return p === 'numpy' || p === 'scipy'; });
+        if (m.extras.length) pk.push('micropip');
+        if (pk.length) await py.loadPackage(pk, { checkIntegrity: true, messageCallback: function () { }, errorCallback: function (s) { post({ k: 'log', text: String(s).slice(0, 500), err: true }); } });
+        if (m.extras.length) {
+          py.globals.set('_noema_wheels', py.toPy(m.extras.map(function (x) { return VB + 'pywheels/' + x.file; })));
+          await py.runPythonAsync('import micropip\nawait micropip.install(list(_noema_wheels), deps=False)\ntry:\n    micropip.set_index_urls(["' + VB + 'pywheels/simple/{package_name}/"])\nexcept Exception:\n    pass\ndel _noema_wheels');
+        }
+        t2 = performance.now();
+        FILES = {};   // from here on nothing can be loaded: not our files, not any other
+        py.registerJsModule('_noema_bridge', { send: function (type, json) { post({ k: 'send', type: String(type), payload: JSON.parse(String(json)) }); } });
+        py.runPython(m.api, { filename: 'noema.py' });
+        py.globals.get('_noema_setup')(JSON.stringify(m.init));
+        stepFn = py.globals.get('_noema_step');
+        post({ k: 'user' });   // the author's code starts: the runner's budget runs from here
+        var r = py.globals.get('_noema_run')(m.python);
+        post({ k: 'ready', ms: { start: Math.round(t1 - t0), packages: Math.round(t2 - t1), user: Math.round(performance.now() - t2) }, outputs: r == null ? null : String(r) });
+      } catch (e) { FILES = {}; post({ k: 'fatal', code: py ? 'python' : 'py-start', message: msgOf(e) }); }
+    }
+    self.onmessage = function (e) {
+      var m = e.data || {};
+      if (m.k === 'boot') return boot(m);
+      if (m.k === 'step') {
+        var t = performance.now();
+        try { var s = stepFn(String(m.inputs)); post({ k: 'out', id: m.id, outputs: String(s), ms: Math.round(performance.now() - t) }); }
+        catch (x) { post({ k: 'out', id: m.id, error: { code: 'python', message: msgOf(x) }, ms: Math.round(performance.now() - t) }); }
+        return;
+      }
+      if (m.k === 'locale' && py) { try { py.globals.get('_noema_locale')(JSON.stringify({ locale: m.locale, strings: m.strings })); } catch (x) { } }
+    };
+  }
+
+  /* ---------- the Python side: module noema + the step/init calls (docs/INTERACTIVE_PYTHON.md §3) ---------- */
+  const NOEMA_PY = String.raw`
+import sys, json, math, re, types, random as _random
+import _noema_bridge
+_I = {}
+_ACT = {'g': None}
+noema = types.ModuleType('noema')
+noema.__doc__ = 'The noema-lite activity API (py-module@1): state, task, seed, locale, t(), save_state(), event(), result(), announce(), error(), random.'
+sys.modules['noema'] = noema
+
+def _clean(o, d=0):
+    if d > 40: raise ValueError('too deeply nested')
+    if o is None or isinstance(o, (bool, str)): return o
+    if isinstance(o, int): return o
+    if isinstance(o, float): return o if math.isfinite(o) else None
+    if isinstance(o, complex): return {'re': _clean(o.real), 'im': _clean(o.imag)}
+    if isinstance(o, dict): return {str(k): _clean(v, d + 1) for k, v in o.items()}
+    if isinstance(o, (list, tuple)): return [_clean(v, d + 1) for v in o]
+    tl = getattr(o, 'tolist', None)          # numpy arrays and numpy scalars
+    if callable(tl): return _clean(tl(), d + 1)
+    raise TypeError('cannot send a value of type ' + type(o).__name__)
+
+def _send(kind, payload):
+    _noema_bridge.send(kind, json.dumps(payload, allow_nan=False))
+
+def _fill(s, v):
+    return re.sub(r'\{(\w+)\}', lambda m: str(v[m.group(1)]) if v and v.get(m.group(1)) is not None else m.group(0), s)
+
+def t(key, vars=None):
+    tb = _I.get('strings') or {}
+    return _fill(str(tb.get(key, key)) if isinstance(tb, dict) else str(key), vars)
+
+def save_state(data=None):
+    if data is not None: noema.state = data
+    _send('state', {'version': int(_I.get('stateVersion') or 1), 'data': _clean(noema.state)})
+
+def event(name, data=None):
+    p = {'name': str(name)}
+    if data is not None: p['data'] = _clean(data)
+    _send('event', p)
+
+def result(score, passed, detail=None):
+    s = float(score)
+    if not math.isfinite(s): raise ValueError('score must be a number')
+    p = {'score': max(0.0, min(1.0, s)), 'passed': bool(passed)}
+    if detail is not None: p['detail'] = str(detail)[:500]
+    _send('result', p)
+
+def announce(text):
+    text = str(text).strip()[:300]
+    if text: _send('a11y:announce', {'text': text})
+
+def error(code, message=None):
+    p = {'code': re.sub(r'[^a-z0-9_.-]', '-', str(code).lower())[:40] or 'error'}
+    if message is not None: p['message'] = str(message)[:500]
+    _send('error', p)
+
+for _f in (t, save_state, event, result, announce, error): setattr(noema, _f.__name__, _f)
+
+def _noema_setup(js):
+    i = json.loads(js); _I.clear(); _I.update(i)
+    noema.task = i.get('task') or {}
+    noema.seed = int(i.get('seed') or 0)
+    noema.locale = i.get('locale') or 'en'
+    noema.exercise = i.get('exerciseId')
+    st = i.get('state')
+    noema.state = st if st is not None else {}
+    noema.state_from = i.get('stateFrom')
+    noema.random = _random.Random(noema.seed)
+
+def _noema_locale(js):
+    i = json.loads(js); _I['strings'] = i.get('strings') or _I.get('strings'); noema.locale = i.get('locale') or noema.locale
+
+def _noema_run(src):
+    g = {'__name__': 'activity', '__builtins__': __builtins__}
+    exec(compile(src, 'activity.py', 'exec'), g)
+    _ACT['g'] = g
+    if callable(g.get('init')):
+        r = g['init'](noema.task, noema.seed)
+        if isinstance(r, dict): return json.dumps(_clean(r), allow_nan=False)
+    return None
+
+def _noema_step(js):
+    g = _ACT['g'] or {}
+    f = g.get('step')
+    if not callable(f): raise RuntimeError('the activity defines no step(inputs, state)')
+    out = f(json.loads(js), noema.state)
+    if out is None: out = {}
+    if not isinstance(out, dict): raise TypeError('step() must return a dict, not ' + type(out).__name__)
+    return json.dumps(_clean(out), allow_nan=False)
+`;
+
+  /* ---------- the runner (the sandboxed frame's only script; its source is this function's text) ---------- */
+  function runnerMain(N, WSRC, API) {
+    'use strict';
+    var P = 'noema.activity', port = null, init = null, boot = null, worker = null, pyReady = false, busy = null, queued = null, timer = null, budget = 3000, initBudget = 20000, saved = null, stopped = false;
+    var SENDS = { state: 1, event: 1, result: 1, 'a11y:announce': 1, error: 1 };
+    function out(type, payload, extra) { var m = { p: P, v: 1, type: type, payload: payload || {} }; if (extra) for (var k in extra) m[k] = extra[k]; if (port) port.postMessage(m); }
+    function on(e) { if (e.source !== parent || !e.data || e.data.t !== 'welcome' || e.data.nonce !== N || !e.ports || !e.ports[0] || port) return; port = e.ports[0]; removeEventListener('message', on, true); port.onmessage = msg; port.start(); }
+    addEventListener('message', on, true);
+    function disarm() { clearTimeout(timer); timer = null; }
+    function arm(ms) { disarm(); timer = setTimeout(runaway, ms); }
+    function kill() { disarm(); if (worker) { try { worker.terminate(); } catch (x) { } } worker = null; pyReady = false; }
+    function reply(id, payload) { if (id != null) out('py:out', payload, { re: id }); }
+    function runaway() {
+      kill(); stopped = true;
+      out('error', { code: 'runaway', message: 'the Python code ran longer than ' + (budget / 1000) + ' s and was stopped' });
+      reply(busy, { error: { code: 'runaway', message: 'stopped after ' + budget + ' ms' } }); busy = null;
+      if (queued) { reply(queued.id, { error: { code: 'runaway', message: 'stopped' } }); queued = null; }
+      out('py:status', { phase: 'stopped', code: 'runaway' });
+    }
+    function dispatch() {
+      if (!pyReady || busy != null || !queued) return;
+      var q = queued; queued = null; busy = q.id == null ? '' : q.id;
+      worker.postMessage({ k: 'step', id: q.id, inputs: JSON.stringify(q.inputs) });
+      arm(budget);
+    }
+    function start() {
+      if (!init || !boot || worker) return;
+      stopped = false; pyReady = false;
+      try { worker = new Worker(URL.createObjectURL(new Blob([WSRC], { type: 'text/javascript' }))); }
+      catch (x) { out('py:status', { phase: 'failed', code: 'worker', message: String(x && x.message || x).slice(0, 300) }); return; }
+      worker.onmessage = fromWorker;
+      worker.onerror = function (e) { if (e && e.preventDefault) e.preventDefault(); out('py:status', { phase: 'failed', code: 'py-start', message: String(e && e.message || 'worker error').slice(0, 300) }); kill(); };
+      worker.postMessage({ k: 'boot', files: boot.files, python: boot.python, packages: boot.packages, extras: boot.extras, api: API,
+        init: { task: init.task || {}, seed: init.seed >>> 0, locale: init.locale, strings: init.strings || {}, exerciseId: init.exerciseId || null, stateVersion: init.stateVersion || 1,
+          state: saved ? saved.data : null, stateFrom: saved ? saved.from || null : null } });
+    }
+    function fromWorker(e) {
+      var m = e.data || {};
+      if (m.k === 'status') return out('py:status', { phase: m.phase });
+      if (m.k === 'user') return arm(initBudget);   // the top-level code (imports: scipy.signal alone takes seconds) and init(task, seed)
+      if (m.k === 'ready') {
+        disarm(); pyReady = true; out('py:status', { phase: 'ready', ms: (m.ms.start || 0) + (m.ms.packages || 0) + (m.ms.user || 0), timing: m.ms });
+        if (m.outputs) { try { var o = JSON.parse(m.outputs); if (m.outputs.length <= 60000) out('py:out', { outputs: o, init: true }); } catch (x) { } }
+        return dispatch();
+      }
+      if (m.k === 'send') {
+        if (!SENDS[m.type]) return;
+        if (m.type === 'state') saved = { data: m.payload && m.payload.data };
+        return out(m.type, m.payload);
+      }
+      if (m.k === 'out') {
+        disarm(); var id = busy; busy = null;
+        var p = { ms: m.ms };
+        if (m.error) p.error = { code: String(m.error.code || 'python').slice(0, 40), message: String(m.error.message || '').slice(0, 1500) };
+        else if (String(m.outputs).length > 60000) p.error = { code: 'too-big', message: 'step() returned ' + String(m.outputs).length + ' bytes (at most 60000)' };
+        else { try { p.outputs = JSON.parse(m.outputs); } catch (x) { p.error = { code: 'python', message: 'bad outputs' }; } }
+        reply(id === '' ? null : id, p);
+        return dispatch();
+      }
+      if (m.k === 'fatal') { kill(); return out('py:status', { phase: 'failed', code: m.code === 'python' ? 'python' : 'py-start', message: String(m.message || '').slice(0, 1500) }); }
+      if (m.k === 'log') { try { (m.err ? console.warn : console.log)('[python]', m.text); } catch (x) { } }
+    }
+    function msg(e) {
+      var m = e.data; if (!m || m.p !== P) return; var p = m.payload || {};
+      switch (m.type) {
+        case 'ping': return out('pong');
+        case 'init': init = p; saved = p.state ? { data: p.state.data, from: p.state.migrateFrom || null } : null; out('ready', { protocols: [1], wants: ['py:step'] }); out('py:status', { phase: 'loading' }); return start();
+        case 'py:boot': boot = p; budget = Math.max(100, Math.min(+p.stepMs || 3000, 30000)); initBudget = Math.max(budget, Math.min(+p.initMs || 20000, 60000)); return start();
+        case 'py:step': if (stopped || !p || typeof p.inputs !== 'object') { reply(m.id, { error: { code: stopped ? 'stopped' : 'bad-inputs' } }); return; }
+          if (queued) reply(queued.id, { error: { code: 'superseded' } });
+          queued = { id: m.id == null ? null : m.id, inputs: p.inputs }; return dispatch();
+        case 'py:restart': kill(); busy = null; if (queued) { reply(queued.id, { error: { code: 'superseded' } }); queued = null; } return start();
+        case 'locale': if (init) { init.locale = p.locale; init.strings = p.strings || init.strings; } if (worker) worker.postMessage({ k: 'locale', locale: p.locale, strings: p.strings || (init && init.strings) }); return;
+        case 'destroy': return kill();
+      }
+    }
+    parent.postMessage({ t: 'hello', nonce: N }, '*');
+  }
+
+  const CSP = hash => ["default-src 'none'", `script-src 'sha256-${hash}' blob: 'wasm-unsafe-eval'`, 'worker-src blob:', 'child-src blob:', "connect-src 'none'", "frame-src 'none'",
+    "img-src 'none'", "style-src 'none'", "font-src 'none'", "media-src 'none'", "object-src 'none'", "form-action 'none'", "base-uri 'none'", "manifest-src 'none'"].join('; ');
+  const ALLOW = ['accelerometer', 'autoplay', 'camera', 'display-capture', 'encrypted-media', 'fullscreen', 'geolocation', 'gyroscope', 'magnetometer', 'microphone', 'midi', 'payment', 'picture-in-picture', 'publickey-credentials-get', 'screen-wake-lock', 'usb', 'web-share', 'xr-spatial-tracking'].map(f => f + " 'none'").join('; ');
+  async function runnerDoc(nonce) {
+    const js = `(${runnerMain.toString()})(${JSON.stringify(nonce)}, ${JSON.stringify('(' + workerMain.toString() + ')();')}, ${JSON.stringify(NOEMA_PY)});`.replace(/<\/(script)/gi, '<\\/$1');
+    const csp = CSP(await b64(js)).replace(/"/g, '&quot;');   // the hash of exactly the text the frame runs
+    return `<!doctype html><html><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="${csp}"><script>${js}</script></head><body></body></html>`;
+  }
+
+  function mount(box, { act, init, title, onMessage, onFail, onPy }) {
+    const c = config();
+    const nonce = Array.from(crypto.getRandomValues(new Uint8Array(16)), b => b.toString(16).padStart(2, '0')).join('');
+    const frame = document.createElement('iframe');
+    frame.setAttribute('sandbox', 'allow-scripts');   // exactly this token: never allow-same-origin
+    frame.setAttribute('allow', ALLOW);
+    frame.setAttribute('referrerpolicy', 'no-referrer');
+    frame.setAttribute('title', title || 'python');
+    frame.setAttribute('aria-hidden', 'true');   // the runner shows nothing: the app draws the activity's controls
+    frame.className = 'act-frame act-pyrunner';
+    frame.style.cssText = 'position:absolute;width:1px;height:1px;border:0;opacity:0;pointer-events:none';
+    let ch = null, closed = false, failed = false, loads = 0, seq = 0, pyReady = false;
+    const pending = [], waits = {}, L = {};
+    const emit = m => { for (const f of (L[m.type] || []).slice()) { try { f(m.payload, m); } catch (e) { console.error(e); } } for (const f of (L['*'] || []).slice()) { try { f(m.payload, m); } catch (e) { console.error(e); } } };
+    const fail = why => { if (closed || failed) return; failed = true; clearTimeout(startT); for (const id in waits) { waits[id]({ error: { code: why } }); delete waits[id]; } onFail(why); };
+    const startT = setTimeout(() => { if (!pyReady) fail('timeout'); }, c.startMs);
+    const port = {
+      send(type, payload, extra) { const m = ACTP.out(type, payload, extra); if (closed) return; if (ch) ch.port1.postMessage(m); else pending.push(m); },
+      close() { closed = true; clearTimeout(startT); removeEventListener('message', hello); try { ch?.port1.close(); } catch (e) { } frame.remove(); for (const id in waits) { waits[id]({ error: { code: 'closed' } }); delete waits[id]; } },
+      /** → Promise<{ outputs } | { error: { code, message } }> */
+      step(inputs) { return new Promise(res => { if (closed || failed) return res({ error: { code: 'closed' } }); const id = 'py' + (++seq); waits[id] = res; port.send('py:step', { inputs: inputs || {} }, { id }); }); },
+      restart() { pyReady = false; port.send('py:restart', {}); },
+      on(type, f) { (L[type] = L[type] || []).push(f); return () => { L[type] = (L[type] || []).filter(x => x !== f); }; },
+      get ready() { return pyReady; },
+    };
+    function fromRunner(raw) {
+      if (closed) return;
+      if (raw && typeof raw.type === 'string' && raw.type.startsWith('py:')) {
+        const r = pyCheck(raw, 'in'); if (!r.ok) { console.warn('[noema] python runner:', r.why); return; }
+        const m = r.msg;
+        if (m.type === 'py:status') { if (m.payload.phase === 'ready') { pyReady = true; clearTimeout(startT); } if (m.payload.phase === 'stopped') pyReady = false; if (m.payload.phase === 'failed') { console.warn('[noema] python:', m.payload.code, m.payload.message || ''); fail(m.payload.code || 'python'); } }
+        if (m.type === 'py:out' && m.re && waits[m.re]) { const w = waits[m.re]; delete waits[m.re]; w(m.payload); }
+        emit(m);
+        try { onPy?.(m); } catch (e) { console.error(e); }
+      }
+      onMessage(raw);   // the core checks everything with ACTP (py:* are not its types: ignored there, never a strike)
+    }
+    function hello(e) {
+      if (closed || ch || e.source !== frame.contentWindow) return;
+      const d = e.data; if (!d || d.t !== 'hello' || d.nonce !== nonce) return;
+      removeEventListener('message', hello);
+      ch = new MessageChannel();
+      ch.port1.onmessage = m => fromRunner(m.data);
+      frame.contentWindow.postMessage({ t: 'welcome', nonce }, '*', [ch.port2]);
+      ch.port1.postMessage(ACTP.out('init', init));
+      while (pending.length) ch.port1.postMessage(pending.shift());
+    }
+    addEventListener('message', hello);
+    frame.addEventListener('load', () => { if (++loads > 1 && !closed) fail('navigated'); });
+    (async () => {
+      const python = act && act.python;
+      if (typeof python !== 'string' || !python.trim()) throw err('empty');
+      if (new TextEncoder().encode(python).length > c.maxPython) throw err('size');
+      if (act.sha256) { const h = await hex(new TextEncoder().encode(python)); if (h !== String(act.sha256).toLowerCase()) throw err('integrity', 'python source'); }
+      const packages = act.packages == null ? [] : act.packages;
+      if (!Array.isArray(packages) || packages.length > 12 || !packages.every(p => typeof p === 'string' && /^[a-z0-9_.-]{1,60}$/.test(p))) throw err('packages', 'bad packages');
+      if (!available()) throw err('unavailable');
+      frame.srcdoc = await runnerDoc(nonce);
+      if (closed) return;
+      box.append(frame);
+      const man = await manifest();
+      const { files, extras } = plan(man, packages);
+      if (extras.length && act.requiresNetwork !== true) throw err('packages', 'an activity with extra packages must declare requiresNetwork');
+      emit({ type: 'py:status', payload: { phase: 'loading', done: 0, total: files.length } });
+      const bytes = await loadAll(files, d => emit({ type: 'py:status', payload: { phase: 'loading', done: d.done, total: d.total, bytes: d.bytes, totalBytes: d.totalBytes } }));
+      if (closed) return;
+      port.send('py:boot', { python, packages: [...new Set(packages)], extras, stepMs: Math.max(100, Math.min(+act.stepMs || c.stepMs, 10000)), initMs: c.initMs, files: bytes });
+    })().catch(e => { console.warn('[noema] py-module', act && act.id, e.code || '', e.message || ''); fail(e.code || 'build'); });
+    return port;
+  }
+
+  const NoemaPy = { available, prepareOffline, status, need, config, protocol: { check: pyCheck }, mountRunner: mount, _plan: plan, _manifest: manifest };
+  if (typeof window !== 'undefined') window.NoemaPy = NoemaPy;
+  if (typeof ACT !== 'undefined' && available()) ACT.registerRuntime({ id: 'py-module@1', version: 1, startTimeoutMs: DEFAULTS.startMs, mount });
+  /* i18n-ignore-end */
+})();
+
+/* ---- 37_activity_py_ui.js ---- */
+/* ===================== py-module@1 in the app: the spec view computed by Python, the learner's notes, Settings (docs/INTERACTIVE_PYTHON.md) =====================
+   The runner (37_activity_py.js, NoemaPy.mountRunner) computes; the app renders. A py-module@1 item carries Python (act.python, a function
+   step(inputs, state) → outputs) and a spec in the sim-spec@1 format (params, derived, outputs, readouts, plots — no engine, no bench):
+   the sim-spec view of 35_activity_sim.js (ACT.simView) draws the controls, readouts and plots and asks Python for the outputs of the
+   latest inputs (one step at a time, the latest inputs win; the view's rev gate keeps the checks grader on the latest results).
+   So the checks grader works on Python's scalar outputs exactly as on an engine's, and noema.result() still reports ('reported').
+   The learner sees one quiet line above the controls: the first-use download (sizes from the manifest), the network an extra package
+   needs (requiresNetwork), the loading progress; offline without the files → the fallback with what to do. Settings › Data and sync:
+   "Prepare Python for offline" (37 MB with scipy), with progress and what is on the device (pyOfflineSection). */
+(() => {
+  if (typeof ACT === 'undefined' || !window.NoemaPy) return;
+  const PY = window.NoemaPy, RUNNER = PY.mountRunner;
+  /* i18n-ignore-start */
+  const ID = 'py-module@1';
+  const roundMB = n => tE('engine.common.sizeMB', { size: nf(Math.max(1, Math.round(n / 1e6))) });   // "about 17 MB"
+  const metered = () => { const c = navigator.connection; return !!(c && (c.saveData || c.type === 'cellular')); };
+  /* i18n-ignore-end */
+
+  function mount(box, ctx) {
+    const { act, init, onMessage, onFail } = ctx;
+    let closed = false, R = null, view = null, firstUse = false, latest = null, busy = false;
+    const sv = init.state && init.state.data && typeof init.state.data === 'object' ? init.state.data : null;
+    let pyState = sv && 'py' in sv ? sv.py : undefined;   // what Python saved with noema.save_state (kept beside the controls' values)
+    const pyInit = { ...init, state: pyState === undefined ? null : { version: init.state.version, data: pyState, ...(init.state.migrateFrom ? { migrateFrom: init.state.migrateFrom } : {}) } };
+    const line = h('div', { class: 'act-pyline', role: 'status', 'aria-live': 'polite' });
+    const holder = h('div', { class: 'act-pyrun' });   // the hidden runner frame
+    /** the view's engine: Python's step() for the latest inputs, one at a time */
+    const runner = { run(inputs, done) { latest = { inputs, done }; pump(); }, measure() { }, close() { latest = null; } };
+    function pump() {
+      if (closed || !R || busy || !latest) return;
+      const job = latest; latest = null; busy = true;
+      R.step(job.inputs).then(r => {
+        busy = false; if (closed) return;
+        if (r && r.outputs) { if (line.dataset.k === 'err') say('', ''); job.done(r.outputs); }
+        else {
+          const code = (r && r.error && r.error.code) || 'python';
+          if (!['superseded', 'closed', 'stopped', 'runaway'].includes(code)) { console.warn('[noema] python step', act.id, code, r?.error?.message || ''); say(tE('engine.act.py.stepError', { code }), 'err'); job.done(null); }
+        }
+        pump();
+      });
+    }
+    function say(text, k) { line.textContent = text; line.dataset.k = k || ''; line.hidden = !text; }
+    function fromPy(raw) {
+      if (closed) return;
+      const t = raw && raw.type;
+      if (t === 'ready' || t === 'pong' || (typeof t === 'string' && t.startsWith('py:'))) return;   // the view speaks for the activity; py:* are read below
+      if (t === 'state') { pyState = raw.payload ? raw.payload.data : null; view?.saveSoon?.(); return; }
+      onMessage(raw);   // event, result, a11y:announce, error (runaway → the core stops it, with Restart): the core checks each with ACTP
+    }
+    function progress(p) {
+      if (closed || !p) return;
+      if (p.phase === 'loading' && firstUse && p.totalBytes) say(tE('engine.act.py.loading', { done: fmtBytes(p.bytes || 0), total: fmtBytes(p.totalBytes) }), 'load');
+      else if (p.phase === 'starting' || (p.phase === 'loading' && !firstUse)) say(tE('engine.act.py.starting'), 'start');
+      else if (p.phase === 'ready') say('', '');
+    }
+    function go() {
+      if (closed || R) return;
+      R = RUNNER(holder, { act, init: pyInit, title: ctx.title, onMessage: fromPy, onFail: why => { if (!closed) onFail(why); } });
+      R.on('py:status', progress);
+      pump();
+    }
+    async function boot() {
+      let n = null; try { n = await PY.need(act.packages || []); } catch (e) { n = null; }   // no manifest: the runner says offline
+      if (closed) return;
+      if (n && n.missing) {
+        firstUse = true;
+        const size = roundMB(n.missingBytes), net = act.requiresNetwork === true && n.extrasMissing.length;
+        say(tE('engine.act.py.firstUse', { size }) + (net ? ' ' + tE('engine.act.py.network', { packages: n.extrasMissing.join(', ') }) : ''), 'first');
+        if (metered()) { line.append(' ', h('button', { class: 'btn small', type: 'button', onclick: e => { e.target.remove(); go(); } }, tE('engine.act.py.download', { size }))); return; }   // never by itself on mobile data
+      }
+      go();
+    }
+    view = ACT.simView(box, { act, init, onMessage: m => { if (!closed) onMessage(m); }, onFail }, {
+      engine: { id: ID }, check: { python: true },
+      runner: () => runner,
+      stateExtra: () => pyState === undefined ? {} : { py: pyState },
+      decorate: root => { say('', ''); root.prepend(line); root.append(holder); Promise.resolve().then(boot); },   // only once the spec has passed its check
+    });
+    function close() { if (closed) return; closed = true; latest = null; try { R?.close(); } catch (e) { } view.close(); }
+    return {
+      send(type, payload, extra) { if (type === 'locale') R?.send('locale', payload); view.send(type, payload, extra); if (type === 'destroy') close(); },
+      close, values: () => (closed ? null : view.values()), reveal: () => view.reveal?.(),
+    };
+  }
+  ACT.registerRuntime({
+    id: ID, version: 1, autoHeight: true, startTimeoutMs: 120000, mount,
+    available: () => PY.available(),
+    unavailable: () => tE('engine.act.py.noHere'),
+    failText: code => code === 'offline' || code === 'fetch' ? { text: tE('engine.act.py.offline'), restart: true }
+      : code === 'unavailable' ? { text: tE('engine.act.py.noHere'), restart: false }
+        : code === 'timeout' ? { text: tE('engine.act.py.slow'), restart: true } : null,
+  });
+
+  /** Settings › Data and sync: "Prepare Python for offline" — the core, numpy, scipy and the allow-listed extras, with progress and what is
+      on the device (one line; the details per part in its ⓘ). Only where Python activities can run (the website, the runtime switched on). */
+  window.pyOfflineSection = function pyOfflineSection() {
+    if (!ACT.enabled(ID)) return null;
+    const line = h('span', { class: 'tiny' }, tE('engine.py.checking'));
+    const info = h('span', {});
+    const bar = h('progress', { class: 'act-pybar', max: '1', value: '0', hidden: true });
+    const btn = h('button', { class: 'btn small', type: 'button', 'data-py': 'prepare', hidden: true, onclick: () => prepare(false) });
+    const body = h('div', { class: 'act-pyset' }, h('div', { class: 'row' }, line, info), h('div', { class: 'row' }, btn, bar));
+    const sec = accSection({ line: 'download' }, tE('engine.py.title'), { status: { ok: false, text: '…' }, info: tE('engine.py.info'), body });   // i18n-ignore (a placeholder)
+    const pill = sec.querySelector('summary .pill');
+    let all = null;
+    const setPill = (ok, text) => { pill.className = 'pill ' + (ok ? 'c' : 'warnpill'); pill.textContent = text; };
+    async function draw() {
+      let n = null, st = null;
+      try { const man = await PY._manifest(); all = ['numpy', 'scipy', ...Object.keys(man.wheels || {})]; n = await PY.need(all); st = await PY.status(); } catch (e) { n = null; }
+      if (!sec.isConnected && n === null) return;
+      if (!n) { setPill(false, tE('engine.py.notReady')); line.textContent = tE('engine.py.noFiles'); btn.hidden = true; info.replaceChildren(); return; }
+      const ready = n.missing === 0;
+      setPill(ready, ready ? tE('engine.py.ready') : n.missing < n.files ? tE('engine.py.partly') : tE('engine.py.notReady'));
+      line.textContent = ready ? tE('engine.py.have', { size: fmtBytes(n.bytes) }) : tE('engine.py.part', { have: fmtBytes(n.bytes - n.missingBytes), total: fmtBytes(n.bytes) });
+      const G = st && st.groups ? st.groups : {};
+      const parts = Object.entries(G).map(([k, g]) => `${k === 'core' ? 'Python' : k} ${fmtBytes(g.bytes)} ${g.ready ? '✓' : '—'}`).join(' · ');   // i18n-ignore (names and marks)
+      info.replaceChildren(tip(parts + '\n' + (st && st.persisted ? tE('engine.py.kept') : tE('engine.py.mayEvict'))));
+      btn.textContent = tE('engine.py.prepare', { size: fmtBytes(n.missingBytes) }); btn.hidden = ready; btn.disabled = false;
+    }
+    async function prepare(force) {
+      btn.disabled = true; bar.hidden = false; bar.value = 0;
+      const onProgress = d => { if (d.totalBytes) { bar.value = d.bytes / d.totalBytes; line.textContent = tE('engine.py.progress', { done: fmtBytes(d.bytes), total: fmtBytes(d.totalBytes) }); } };
+      let r; try { r = await PY.prepareOffline({ include: all || ['numpy', 'scipy'], onProgress, force }); } catch (e) { r = { ok: false, failed: [{}], code: e.code }; }
+      bar.hidden = true;
+      if (r.code === 'save-data') {
+        line.textContent = tE('engine.py.saveData'); btn.disabled = false;
+        btn.replaceWith(h('button', { class: 'btn small', type: 'button', 'data-py': 'anyway', onclick: e => { e.target.replaceWith(btn); prepare(true); } }, tE('engine.py.anyway')));
+        return;
+      }
+      await draw();
+      if (!r.ok) line.textContent = tE('engine.py.failed', { n: (r.failed || []).length || 1 });
+    }
+    draw();
+    return sec;
+  };
+})();
+
+/* ---- 38_activity_h5p.js ---- */
+/* ===================== interactive activities — runtime h5p@1 (an ordinary .h5p package; docs/INTERACTIVE_H5P.md, docs/adr/001 D11) =====================
+   An H5P item (quiz, drag and drop, fill in the blanks …) is played by the app's own pinned H5P player (h5p-standalone 3.8.2's core,
+   engine/vendor/h5p/3.8.2/player.js, never loaded from h5p.org) in exactly the frames of html-app@1: the app's frame holds a wrapper
+   without scripts whose policy says frame-src 'none' (no self-navigation), the item runs in the wrapper's own frame with
+   sandbox="allow-scripts" (opaque origin) and a CSP with no network at all and scripts ONLY by hash.
+   The frame never fetches anything. The HOST page reads the package (inline base64, bytes, a loader function, or a URL it fetches
+   itself), checks its sha256, unzips it (DecompressionStream, no zip library), checks it against the allow-list (check(), the same
+   rules as tools/h5p_check.py) and builds the frame's document: the core and every library's preloadedJs as inline scripts (each with
+   the loop guard of 33_activity_guard.js, then allowed by its hash), every preloadedCss as an inline style with its url()s turned into
+   data: URIs, content.json inside H5PIntegration. The content's own files (pictures, audio, video) are handed over the MessagePort as
+   transferred ArrayBuffers right after the handshake; inside, H5P.getPath answers with blob: URLs made from them.
+   What H5P says becomes the activity protocol (docs/INTERACTIVE.md §8):
+     xAPI answered / completed of the item itself (no parent) with a score → result { score: scaled 0..1, passed: success ?? score >= 0.5, detail }
+     every xAPI statement → event { name: 'h5p:<verb>', data: { score?, sub? } } (throttled)
+     instance.getCurrentState() after each statement, on pause and before destroy → state { version, data: { h5p: <state> } };
+     init.state comes back as H5P's contentUserData, so the item resumes where the learner left it.
+   act (a registry item, runtime 'h5p@1'):
+     h5p        the .h5p file: a base64 string (or { data: base64 }), an ArrayBuffer / Uint8Array / Blob, a function returning one of
+                these (or a promise), or { url } — fetched by this page, never by the frame
+     sha256     hex sha256 of the .h5p file (required for { url }; checked whenever given)
+     h5pByLocale { <locale>: { content: <content.json>, l10n?: {…H5P core strings} } | { h5p: <source>, sha256 } } — the item in the
+                language the pack is shown in (init.locale); without one the package's own content.json plays */
+(() => {
+  /* i18n-ignore-start */   // code, protocol names and H5P's own English defaults (replaced by h5pByLocale[locale].l10n)
+  const PLAYER_VERSION = '3.8.2';
+  const LIM = { files: 5000, bytes: 100 * 1024 * 1024, warnBytes: 20 * 1024 * 1024, media: 64 * 1024 * 1024 };
+  /** a copy of tools/h5p_allow.json (tests/activities_h5p.js checks that they agree) */
+  const ALLOW = {
+    content: { 'H5P.MultiChoice': ['1.14', '1.15', '1.16'], 'H5P.TrueFalse': ['1.6', '1.7', '1.8'], 'H5P.DragQuestion': ['1.13', '1.14'], 'H5P.Blanks': ['1.12', '1.13', '1.14'],
+      'H5P.DragText': ['1.8', '1.9', '1.10'], 'H5P.MarkTheWords': ['1.9', '1.10', '1.11'], 'H5P.SingleChoiceSet': ['1.10', '1.11'], 'H5P.Summary': ['1.10'], 'H5P.Dialogcards': ['1.8', '1.9'],
+      'H5P.QuestionSet': ['1.17', '1.18', '1.19', '1.20'], 'H5P.InteractiveVideo': ['1.24', '1.25', '1.26', '1.27'], 'H5P.BranchingScenario': ['1.7', '1.8'], 'H5P.CoursePresentation': ['1.24', '1.25', '1.26'] },
+    untested: ['H5P.QuestionSet', 'H5P.InteractiveVideo', 'H5P.BranchingScenario', 'H5P.CoursePresentation'],
+    libraries: { 'H5P.Question': ['1.4', '1.5'], 'H5P.JoubelUI': ['1.3'], 'H5P.FontIcons': ['1.0'], 'H5P.Transition': ['1.0'], FontAwesome: ['4.5'], 'jQuery.ui': ['1.10'], Drop: ['1.0'], Tether: ['1.0'],
+      'H5P.AdvancedText': ['1.1'], 'H5P.Text': ['1.1'], 'H5P.Image': ['1.1'], 'H5P.Audio': ['1.4', '1.5'], 'H5P.Video': ['1.5', '1.6'], 'H5P.TextUtilities': ['1.3'], 'H5P.DragNBar': ['1.5'],
+      'H5P.DragNDrop': ['1.1'], 'H5P.DragNResize': ['1.2'], 'H5P.Shape': ['1.0'], 'H5P.Table': ['1.1', '1.2'], 'H5P.Link': ['1.3'], 'H5P.Column': ['1.15', '1.16', '1.18'], 'H5P.Components': ['1.0'],
+      'H5P.SoundJS': ['0.6'], 'H5P.Timer': ['0.4'], 'H5P.ImageHotspots': ['1.10'], 'H5P.Nil': ['1.0'] },
+    refuse: { 'H5P.MathDisplay': 'loads MathJax from a CDN at run time', 'H5P.GoToQuestion': 'needs a host that is not there', 'H5P.Twitter': 'embeds an outside site', 'H5P.IFrameEmbed': 'embeds an outside page',
+      'H5P.GoogleMap': 'loads Google Maps', 'H5P.ThreeImage': 'loads outside panoramas', 'H5P.Chart': 'not checked yet' },
+    extensions: ['json', 'js', 'css', 'png', 'jpg', 'jpeg', 'gif', 'svg', 'webp', 'bmp', 'ico', 'woff', 'woff2', 'ttf', 'otf', 'eot', 'mp3', 'm4a', 'wav', 'ogg', 'oga', 'mp4', 'm4v', 'webm', 'ogv', 'vtt', 'txt', 'md', 'xml', 'map', 'patch', 'diff', 'csv', 'pdf', 'webvtt', 'tif', 'tiff'],
+    noExtension: ['LICENSE', 'LICENCE', 'README', 'COPYING', 'AUTHORS', 'CHANGELOG'],
+  };
+  const URL_RE = /(\bhttps?:|\bftp:|(^|[\s"'(=])\/\/[a-z0-9-]+(\.[a-z0-9-]+)+|youtube\.com|youtu\.be|\bjavascript:|\bdata:text\/html|\bvbscript:)/i;
+  const ATTRIBUTION = new Set(['source', 'link', 'licenseExtras', 'changes']);
+  const MIME = { png: 'image/png', jpg: 'image/jpeg', jpeg: 'image/jpeg', gif: 'image/gif', svg: 'image/svg+xml', webp: 'image/webp', bmp: 'image/bmp', ico: 'image/x-icon', woff: 'font/woff', woff2: 'font/woff2',
+    ttf: 'font/ttf', otf: 'font/otf', mp3: 'audio/mpeg', m4a: 'audio/mp4', wav: 'audio/wav', ogg: 'audio/ogg', oga: 'audio/ogg', mp4: 'video/mp4', m4v: 'video/mp4', webm: 'video/webm', ogv: 'video/ogg', vtt: 'text/vtt', webvtt: 'text/vtt', json: 'application/json', txt: 'text/plain' };
+  const fail = (code, msg) => Object.assign(new Error(msg || code), { code });
+  const extOf = n => { const b = n.split('/').pop(); return b.includes('.') ? b.split('.').pop().toLowerCase() : ''; };
+  const utf8 = u8 => new TextDecoder('utf-8').decode(u8);
+
+  /* ---------- the package: bytes → {path: Uint8Array} ---------- */
+  async function inflate(raw, size) {
+    // a stream made from the bytes, not Blob.stream(): WebKit's offline mode fails blob reads ("The I/O read operation failed")
+    const src = new ReadableStream({ start(c) { c.enqueue(raw); c.close(); } });
+    const rd = src.pipeThrough(new DecompressionStream('deflate-raw')).getReader();
+    const out = new Uint8Array(size); let n = 0;
+    for (;;) {
+      const { done, value } = await rd.read(); if (done) break;
+      if (n + value.length > size) { try { rd.cancel(); } catch (e) { } throw fail('zip', 'an entry is bigger than it says'); }   // a zip bomb stops here
+      out.set(value, n); n += value.length;
+    }
+    if (n !== size) throw fail('zip', 'an entry is shorter than it says');
+    return out;
+  }
+  /** unzip(bytes) → { path: Uint8Array } (stored and deflated entries; no zip64, no encryption) */
+  async function unzip(u8) {
+    const dv = new DataView(u8.buffer, u8.byteOffset, u8.byteLength);
+    let e = -1; for (let i = u8.length - 22; i >= Math.max(0, u8.length - 65557); i--) if (dv.getUint32(i, true) === 0x06054b50) { e = i; break; }
+    if (e < 0) throw fail('zip', 'not a zip file');
+    const count = dv.getUint16(e + 10, true), cdOff = dv.getUint32(e + 16, true);
+    if (count === 0xffff || cdOff === 0xffffffff) throw fail('zip', 'zip64 is not supported');
+    if (count > LIM.files) throw fail('size', count + ' files');
+    const out = {}, dec = new TextDecoder(); let p = cdOff, total = 0;
+    for (let k = 0; k < count; k++) {
+      if (p + 46 > u8.length || dv.getUint32(p, true) !== 0x02014b50) throw fail('zip', 'a broken central directory');
+      const flags = dv.getUint16(p + 8, true), method = dv.getUint16(p + 10, true), csize = dv.getUint32(p + 20, true), usize = dv.getUint32(p + 24, true);
+      const nlen = dv.getUint16(p + 28, true), xlen = dv.getUint16(p + 30, true), clen = dv.getUint16(p + 32, true), loff = dv.getUint32(p + 42, true);
+      const name = dec.decode(u8.subarray(p + 46, p + 46 + nlen)); p += 46 + nlen + xlen + clen;
+      if (name.endsWith('/')) continue;
+      if (flags & 1) throw fail('zip', 'an encrypted entry');
+      total += usize; if (total > LIM.bytes) throw fail('size', 'more than ' + LIM.bytes + ' bytes unpacked');
+      if (loff + 30 > u8.length || dv.getUint32(loff, true) !== 0x04034b50) throw fail('zip', 'a broken entry');
+      const start = loff + 30 + dv.getUint16(loff + 26, true) + dv.getUint16(loff + 28, true), raw = u8.subarray(start, start + csize);
+      if (method === 0) { if (csize !== usize) throw fail('zip', 'a broken stored entry'); out[name] = raw.slice(); }
+      else if (method === 8) out[name] = await inflate(raw, usize);
+      else throw fail('zip', 'compression method ' + method);
+    }
+    return out;
+  }
+
+  /* ---------- the rules (the same as tools/h5p_check.py; the messages are the same too) ---------- */
+  const allowed = (name, mm) => (ALLOW.content[name] || []).includes(mm) || (ALLOW.libraries[name] || []).includes(mm);
+  function walk(v, path, out) {
+    if (Array.isArray(v)) v.forEach((x, i) => walk(x, path.concat(String(i)), out));
+    else if (v && typeof v === 'object') for (const k of Object.keys(v)) walk(v[k], path.concat(k), out);
+    else if (typeof v === 'string') out.push([path, v]);
+  }
+  /** check(files) → { errors, warnings, main, order (library folders, dependencies first), libs { folder: library.json } } */
+  function check(files) {
+    const E = [], W = [], names = Object.keys(files);
+    const total = names.reduce((s, n) => s + files[n].length, 0);
+    if (names.length > LIM.files) E.push(`${names.length} files (at most ${LIM.files})`);
+    if (total > LIM.bytes) E.push(`${total} bytes unpacked (at most ${LIM.bytes})`);
+    else if (total > LIM.warnBytes) W.push(`${Math.floor(total / (1024 * 1024))} MB unpacked: large for a phone`);
+    for (const n of names) {
+      const parts = n.split('/');
+      if (n.startsWith('/') || n.includes('\\') || parts.some(x => x === '..' || x === '') || parts[0].includes(':')) { E.push(`${n}: a path that leaves the package`); continue; }
+      const base = parts[parts.length - 1], ext = base.includes('.') ? base.split('.').pop().toLowerCase() : '';
+      if (!ext && !ALLOW.noExtension.includes(base)) E.push(`${n}: a file without a known type`);
+      else if (ext && !ALLOW.extensions.includes(ext)) E.push(`${n}: files of type .${ext} are not allowed`);
+      if (ext === 'js' && (n.startsWith('content/') || !n.includes('/'))) E.push(`${n}: a script outside a library folder`);
+    }
+    const rj = p => JSON.parse(utf8(files[p]));
+    if (!files['h5p.json']) { E.push('no h5p.json'); return { errors: E, warnings: W }; }
+    let h5p; try { h5p = rj('h5p.json'); } catch (e) { E.push(`h5p.json is not JSON (${e.message})`); return { errors: E, warnings: W }; }
+    const main = h5p.mainLibrary, deps = h5p.preloadedDependencies;
+    if (typeof h5p.title !== 'string' || !h5p.title.trim()) E.push('h5p.json: no title');
+    if (typeof main !== 'string' || !Array.isArray(deps) || !deps.length) { E.push('h5p.json: no mainLibrary or preloadedDependencies'); return { errors: E, warnings: W }; }
+    const libs = {}, order = [], seen = new Set(), seenNames = new Set();
+    const key = d => { const a = parseInt(d?.majorVersion, 10), b = parseInt(d?.minorVersion, 10); return d && typeof d.machineName === 'string' && d.machineName && String(a) === String(d.majorVersion).trim() && String(b) === String(d.minorVersion).trim() ? [d.machineName, a + '.' + b] : null; };
+    function visit(d, why) {
+      const k = key(d);
+      if (!k) { E.push(`${why}: a dependency without machineName / majorVersion / minorVersion`); return; }
+      const [name, mm] = k, id = name + ' ' + mm;
+      if (seen.has(id)) return;
+      seen.add(id); seenNames.add(name);
+      if (Object.prototype.hasOwnProperty.call(ALLOW.refuse, name)) { E.push(`${name} ${mm}: refused (${ALLOW.refuse[name]})`); return; }
+      if (!allowed(name, mm)) E.push(`${name} ${mm}: not on the allow-list (tools/h5p_allow.json)`);
+      const folder = `${name}-${mm}`;
+      if (!files[folder + '/library.json']) { E.push(`${name} ${mm}: missing from the package (${folder}/library.json)`); return; }
+      let lj; try { lj = rj(folder + '/library.json'); } catch (e) { E.push(`${folder}/library.json is not JSON`); return; }
+      if (lj.machineName !== name || `${lj.majorVersion}.${lj.minorVersion}` !== mm) E.push(`${folder}/library.json names another library`);
+      for (const d2 of lj.preloadedDependencies || []) visit(d2, folder);
+      for (const kind of ['preloadedJs', 'preloadedCss']) for (const f of lj[kind] || []) { const p = `${folder}/${f?.path || ''}`; if (!files[p]) E.push(`${p}: named in ${kind} but missing`); }
+      libs[folder] = lj; order.push(folder);
+    }
+    for (const d of deps) visit(d, 'h5p.json');
+    if (!seenNames.has(main)) E.push(`mainLibrary ${main} is not among the preloadedDependencies`);
+    else if (!ALLOW.content[main]) E.push(`${main}: not an allowed content type (tools/h5p_allow.json "content")`);
+    else if (ALLOW.untested.includes(main)) W.push(`${main}: allowed, but not yet tested in the sandbox`);
+    const tops = [...new Set(names.filter(n => n.includes('/')).map(n => n.split('/')[0]))].filter(t => t !== 'content' && !libs[t]).sort();
+    for (const t of tops) W.push(`${t}/: a library no content uses (left out when playing)`);
+    let content = null;
+    if (!files['content/content.json']) E.push('no content/content.json');
+    else {
+      try {
+        content = rj('content/content.json'); const strs = []; walk(content, [], strs);
+        for (const [path, s] of strs) {
+          const m = URL_RE.exec(s); if (!m) continue;
+          const where = path.join('.');
+          if (path.length && ATTRIBUTION.has(path[path.length - 1]) && path.some(x => x === 'metadata' || x === 'copyright')) W.push(`content.json ${where}: an outside link in the attribution (shown as text only)`);
+          else E.push(`content.json ${where}: an outside link (${m[0].trim().slice(0, 40)}) — everything must be inside the package`);
+        }
+        for (const [path, s] of strs) if (path[path.length - 1] === 'path' && !URL_RE.test(s) && !files['content/' + s.split('#')[0]]) W.push(`content.json ${path.join('.')}: ${s} is not in the package`);
+      } catch (e) { E.push(`content/content.json is not JSON (${e.message})`); }
+    }
+    return { errors: E, warnings: W, main, h5p, order, libs, content, bytes: total };
+  }
+
+  /* ---------- reading the source of a package (the host page does it; the frame never fetches) ---------- */
+  const hex = async u8 => Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', u8)), b => b.toString(16).padStart(2, '0')).join('');
+  function b64(s) {
+    s = String(s).replace(/^data:[^,]*;base64,/, '').replace(/\s+/g, '');
+    const bin = atob(s), u8 = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u8[i] = bin.charCodeAt(i); return u8;
+  }
+  async function bytesOf(src, depth = 0) {
+    if (src == null) throw fail('nosource', 'act.h5p is missing');
+    if (typeof src === 'function' && depth < 2) return bytesOf(await src(), depth + 1);
+    if (src instanceof Uint8Array) return src;
+    if (src instanceof ArrayBuffer) return new Uint8Array(src);
+    if (typeof Blob !== 'undefined' && src instanceof Blob) return new Uint8Array(await src.arrayBuffer());
+    if (typeof src === 'string') return b64(src);
+    if (typeof src === 'object' && typeof src.data === 'string') return b64(src.data);
+    if (typeof src === 'object' && typeof src.url === 'string') {
+      if (!src.sha256) throw fail('integrity', 'a package by URL needs its sha256');
+      const r = await fetch(src.url, { credentials: 'same-origin', cache: 'force-cache' });
+      if (!r.ok) throw fail('fetch', 'HTTP ' + r.status);
+      return new Uint8Array(await r.arrayBuffer());
+    }
+    throw fail('nosource', 'act.h5p has an unknown shape');
+  }
+  const CACHE = new Map();   // sha256 → { files, check } (the last few packages, so Restart is quick)
+  async function load(src, want) {
+    const u8 = await bytesOf(src), sum = await hex(u8);
+    const w = want || (src && typeof src === 'object' && src.sha256) || null;
+    if (w && sum !== String(w).toLowerCase()) throw fail('integrity', 'sha256 mismatch');
+    if (CACHE.has(sum)) { const v = CACHE.get(sum); CACHE.delete(sum); CACHE.set(sum, v); return v; }
+    const files = await unzip(u8), c = check(files);
+    const v = { sha256: sum, files, check: c };
+    CACHE.set(sum, v); while (CACHE.size > 3) CACHE.delete(CACHE.keys().next().value);
+    return v;
+  }
+  /** the package for this locale: its own, another package (h5pByLocale[loc].h5p), or its own with another content.json */
+  async function prepare(act, locale) {
+    const alt = act.h5pByLocale && typeof act.h5pByLocale === 'object' && Object.prototype.hasOwnProperty.call(act.h5pByLocale, locale) ? act.h5pByLocale[locale] : null;
+    const pkg = alt && alt.h5p != null ? await load(alt.h5p, alt.sha256) : await load(act.h5p, act.sha256);
+    let c = pkg.check, files = pkg.files;
+    if (alt && alt.content && typeof alt.content === 'object' && alt.h5p == null) {
+      files = Object.assign({}, files, { 'content/content.json': new TextEncoder().encode(JSON.stringify(alt.content)) });
+      c = check(files);
+    }
+    if (c.errors.length) { console.warn('[noema] h5p', act.id, c.errors.slice(0, 5)); throw fail('h5p-check', c.errors[0]); }
+    return { files, check: c, l10n: alt && alt.l10n && typeof alt.l10n === 'object' ? alt.l10n : null, sha256: pkg.sha256 };
+  }
+
+  /* ---------- the player (the app's own file; a script tag, so it works from file:// as well) ---------- */
+  const ME = (typeof document !== 'undefined' && document.currentScript && document.currentScript.src) || '';
+  const playerUrl = () => window.NOEMA_CONFIG?.h5pPlayer || (ME.includes('/engine/') ? ME.slice(0, ME.lastIndexOf('/engine/') + 8) : 'engine/') + `vendor/h5p/${PLAYER_VERSION}/player.js`;
+  let playerP = null;
+  function player() {
+    if (window.NoemaH5PPlayer) return Promise.resolve(window.NoemaH5PPlayer);
+    return playerP || (playerP = new Promise((res, rej) => {
+      const s = document.createElement('script'); s.src = playerUrl(); s.async = true;
+      s.onload = () => window.NoemaH5PPlayer ? res(window.NoemaH5PPlayer) : (playerP = null, rej(fail('player', 'player.js defined nothing')));
+      s.onerror = () => { playerP = null; rej(fail('player', 'player.js did not load')); };
+      document.head.append(s);
+    }));
+  }
+
+  /* ---------- the frame's document ---------- */
+  const CSP = hashes => ["default-src 'none'", 'script-src ' + hashes.map(x => `'sha256-${x}'`).join(' '), "style-src 'unsafe-inline'", 'img-src data: blob:', 'font-src data:', 'media-src data: blob:',
+    "connect-src 'none'", "frame-src 'none'", "child-src 'none'", "worker-src 'none'", "object-src 'none'", "form-action 'none'", "base-uri 'none'", "manifest-src 'none'"].join('; ');
+  const ALLOWF = ['accelerometer', 'autoplay', 'camera', 'display-capture', 'encrypted-media', 'fullscreen', 'geolocation', 'gyroscope', 'magnetometer', 'microphone', 'midi', 'payment', 'picture-in-picture', 'publickey-credentials-get', 'screen-wake-lock', 'usb', 'web-share', 'xr-spatial-tracking'].map(f => f + " 'none'").join('; ');
+  const sha256b64 = async text => btoa(String.fromCharCode(...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text)))));
+  const rndName = p => p + Array.from(crypto.getRandomValues(new Uint8Array(8)), b => b.toString(16).padStart(2, '0')).join('');
+  const L10N = { fullscreen: 'Fullscreen', disableFullscreen: 'Disable fullscreen', download: 'Download', copyrights: 'Rights of use', embed: 'Embed', size: 'Size', close: 'Close', title: 'Title', author: 'Author',
+    year: 'Year', source: 'Source', license: 'License', thumbnail: 'Thumbnail', noCopyrights: 'No copyright information available for this content.', reuse: 'Reuse', by: 'by', showMore: 'Show more', showLess: 'Show less',
+    subLevel: 'Sublevel', confirmDialogHeader: 'Confirm action', confirmDialogBody: 'Please confirm that you wish to proceed. This action is not reversible.', cancelLabel: 'Cancel', confirmLabel: 'Confirm',
+    contentChanged: 'This content has changed since you last used it.', startingOver: "You'll be starting over.", licenseU: 'Undisclosed', licenseCC010: 'CC0 1.0 Universal (CC0 1.0) Public Domain Dedication', licenseC: 'Copyright' };
+  /** a library's css with its url()s as data: URIs from its own folder (fonts: only woff2 / woff; nothing is fetched) */
+  function css(text, dir, files) {
+    return text.replace(/url\(\s*(['"]?)([^'")]+)\1\s*\)(\s*format\(\s*['"]?([^'")]+)['"]?\s*\))?/g, (all, q, ref, fm, fmt) => {
+      const r = ref.trim();
+      if (/^data:/i.test(r)) return all;
+      const keep = s => 'url(' + s + ')' + (fm || '');
+      if (/^[a-z][a-z0-9+.-]*:|^\/\//i.test(r)) return keep('data:,');
+      const path = (dir + '/' + r.split(/[?#]/)[0]).split('/').reduce((a, x) => (x === '..' ? a.pop() : x && x !== '.' && a.push(x), a), []).join('/');
+      const ext = extOf(path), f = files[path];
+      if (!f || ['eot', 'ttf', 'otf'].includes(ext) || (fmt && !/^woff2?$/i.test(fmt)) || (ext === 'svg' && /#/.test(r)) || f.length > 2 * 1024 * 1024) return keep('data:,');
+      let s = ''; for (let i = 0; i < f.length; i += 0x8000) s += String.fromCharCode.apply(null, f.subarray(i, i + 0x8000));
+      return keep('"data:' + (MIME[ext] || 'application/octet-stream') + ';base64,' + btoa(s) + '"');
+    });
+  }
+
+  /** The frame side: claims the port, takes the files, starts H5P once the document, the files and init are there, and speaks the protocol. */
+  function bootstrap(nonce, KEY) {
+    return `(function(){'use strict';var N=${JSON.stringify(nonce)},P='noema.activity',APP=parent.parent,port=null,q=[],init=null,files=null,inst=null,last='',stT=null,evT={},csp=0,started=false;
+function send(type,payload){var m={p:P,v:1,type:type,payload:payload||{}};if(port)port.postMessage(m);else q.push(m);}
+function on(e){if(e.source!==APP||!e.data||e.data.t!=='welcome'||e.data.nonce!==N||!e.ports||!e.ports[0]||port)return;port=e.ports[0];removeEventListener('message',on,true);port.onmessage=msg;port.start();while(q.length)port.postMessage(q.shift());}
+addEventListener('message',on,true);
+Object.defineProperty(window,${JSON.stringify(KEY)},{value:Object.freeze({runaway:function(){send('error',{code:'runaway',message:'the item ran too long'});}}),writable:false,configurable:false,enumerable:false});
+function theme(t){if(!t)return;var r=document.documentElement;try{for(var k in t.tokens)r.style.setProperty('--noema-'+k,String(t.tokens[k]));r.dataset.noemaScheme=t.scheme;r.dataset.noemaMotion=t.reducedMotion?'reduce':'full';if(t.dir)r.dir=t.dir;}catch(x){}}
+function saveNow(){if(!inst||typeof inst.getCurrentState!=='function')return;var s;try{s=inst.getCurrentState();}catch(x){return;}if(s===undefined)return;var j;try{j=JSON.stringify(s);}catch(x){return;}if(j===last||j.length>250000)return;last=j;send('state',{version:init&&init.stateVersion||1,data:{h5p:s}});}
+function saveSoon(){clearTimeout(stT);stT=setTimeout(saveNow,300);}
+function msg(e){var m=e.data;if(!m)return;
+ if(m.p==='noema.h5p'&&m.type==='files'&&!files){files={};(m.files||[]).forEach(function(f){try{files[f.path]=URL.createObjectURL(new Blob([f.buf],{type:f.type||''}));}catch(x){}});go();return;}
+ if(m.p!==P)return;var p=m.payload||{};
+ if(m.type==='ping'){send('pong');return;}
+ if(m.type==='init'){init=p;theme(p.theme);if(p.locale)document.documentElement.lang=p.locale;go();return;}
+ if(m.type==='theme'){theme(p);return;}
+ if(m.type==='pause'||m.type==='destroy'){saveNow();return;}}
+function verb(st){var v=st&&st.verb&&st.verb.id||'';return v.slice(v.lastIndexOf('/')+1).toLowerCase().replace(/[^a-z0-9_-]/g,'').slice(0,40)||'statement';}
+function xapi(ev){var st=ev&&ev.data&&ev.data.statement;if(!st)return;var v=verb(st),r=st.result||null,ctx=st.context&&st.context.contextActivities,sub=!!(ctx&&ctx.parent&&ctx.parent.length);
+ var sc=r&&r.score?r.score:null,data={};if(sc&&typeof sc.max==='number'){data.score={raw:+sc.raw||0,max:+sc.max};}if(sub)data.sub=true;
+ var now=Date.now();if(now-(evT[v]||0)>=250||v==='answered'||v==='completed'){evT[v]=now;send('event',{name:'h5p:'+v,data:data});}
+ if(!sub&&(v==='answered'||v==='completed')&&sc){var s=typeof sc.scaled==='number'?sc.scaled:(sc.max>0?(+sc.raw||0)/sc.max:null);
+  if(s!=null&&isFinite(s)){s=Math.max(0,Math.min(1,s));send('result',{score:s,passed:typeof r.success==='boolean'?r.success:s>=0.5,detail:(sc.max>0?(+sc.raw||0)+'/'+sc.max+' ':'')+v});}}
+ saveSoon();}
+function go(){if(started||!init||!files||document.readyState==='loading')return;started=true;
+ try{var H=window.H5P,I=window.H5PIntegration,c=I.contents['cid-noema'];
+  var st=init.state&&!init.state.migrateFrom&&init.state.data&&init.state.data.h5p!==undefined?init.state.data.h5p:undefined;
+  if(st!==undefined){try{c.contentUserData=[{state:JSON.stringify(st)}];last=JSON.stringify(st);}catch(x){}}
+  H.getPath=function(path){var k=String(path||'').split('#')[0].replace(/^\\.?\\//,'');if(Object.prototype.hasOwnProperty.call(files,k))return files[k];return 'data:,';};
+  H.getLibraryPath=function(){return 'data:,';};
+  H.externalDispatcher.on('xAPI',xapi);
+  H.init(document.body);inst=H.instances&&H.instances[0]||null;
+  if(!inst){send('error',{code:'h5p-init',message:'no instance'});return;}
+  addEventListener('resize',function(){try{H.trigger(inst,'resize');}catch(x){}});
+  send('ready',{protocols:[1]});
+ }catch(x){send('error',{code:'h5p-init',message:String(x&&x.message||x).slice(0,300)});}}
+document.addEventListener('DOMContentLoaded',function(){go();measure();try{new ResizeObserver(measure).observe(document.documentElement);}catch(x){setInterval(measure,500);}});
+var lastH=0;function measure(){var h=Math.ceil(Math.max(document.documentElement.scrollHeight,document.body?document.body.scrollHeight:0));if(Math.abs(h-lastH)>2){lastH=h;send('resize',{h:h});}}
+document.addEventListener('securitypolicyviolation',function(e){if(++csp<=5)send('event',{name:'h5p:csp',data:{d:String(e.effectiveDirective||e.violatedDirective||'').slice(0,40),u:String(e.blockedURI||'').slice(0,80)}});});
+addEventListener('error',function(e){try{send('error',{code:'script',message:String(e.message||'').slice(0,300)});}catch(x){}});
+APP.postMessage({t:'hello',nonce:N},'*');
+})();`;
+  }
+  /** before the core: H5PIntegration and memory-only storage (an opaque origin has none; H5P's clipboard asks for it).
+      saveFreq must be truthy, or H5P ignores the saved state (h5p.js newRunnable); with no H5PIntegration.user its own saving stops
+      before any request ("Not signed in"), so the state reaches the app only through getCurrentState() above.
+      fullscreenDisabled: the frame may not go full screen (the app offers its own); it also keeps WebKit from logging a policy error. */
+  function pre(c, act, init, l10n) {
+    const lib = c.libs[c.order.find(f => c.libs[f].machineName === c.main)];
+    const integ = { baseUrl: 'about:srcdoc', url: 'urn:noema:activity:' + act.id, siteUrl: 'about:srcdoc', urlLibraries: 'data:,', postUserStatistics: false, saveFreq: 3600, reportingIsEnabled: false, fullscreenDisabled: true, ajax: {}, loadedJs: [], loadedCss: [],
+      core: { styles: [], scripts: [] }, l10n: { H5P: Object.assign({}, L10N, l10n || {}) },
+      contents: { 'cid-noema': { library: `${lib.machineName} ${lib.majorVersion}.${lib.minorVersion}`, jsonContent: JSON.stringify(c.content), fullScreen: false, exportUrl: '', embedCode: '', resizeCode: '', url: 'urn:noema:activity:' + act.id,
+        title: String(c.h5p.title || act.id), styles: [], scripts: [], displayOptions: { frame: false, export: false, embed: false, copyright: false, icon: false, copy: false },
+        metadata: { title: String(c.h5p.title || act.id), license: String(c.h5p.license || 'U') } } } };
+    return `(function(){function mem(){var d=Object.create(null);return{getItem:function(k){k=String(k);return k in d?d[k]:null;},setItem:function(k,v){d[String(k)]=String(v);},removeItem:function(k){delete d[String(k)];},clear:function(){d=Object.create(null);},key:function(i){return Object.keys(d)[i]||null;},get length(){return Object.keys(d).length;}};}
+['localStorage','sessionStorage'].forEach(function(n){try{window[n].length;}catch(e){try{Object.defineProperty(window,n,{value:mem(),configurable:true});}catch(x){}}});
+window.H5PIntegration=${JSON.stringify(integ).replace(/</g, '\\u003c')};window.H5P=window.H5P||{};window.H5P.preventInit=true;})();`;
+  }
+
+  /** → { doc (the wrapper's srcdoc), media [{path, type, bytes}] } */
+  async function buildDoc(pkg, nonce, act, init, core) {
+    const c = pkg.check, files = pkg.files, G = rndName('__noemaGuard'), KEY = rndName('__noemaH5P');
+    const scripts = [], styles = [core.css];
+    for (const f of c.order) {
+      const lj = c.libs[f];
+      for (const x of lj.preloadedCss || []) { const p = f + '/' + x.path; styles.push(css(utf8(files[p]), p.slice(0, p.lastIndexOf('/')), files)); }
+      for (const x of lj.preloadedJs || []) scripts.push(utf8(files[f + '/' + x.path]));
+    }
+    const guardOf = s => NoemaLoopGuard.transform(s, G).code;
+    const boot = bootstrap(nonce, KEY), guard = NoemaLoopGuard.runtime(G, 1500, `function(){try{window[${JSON.stringify(KEY)}].runaway()}catch(e){}}`);
+    const all = [boot, guard, pre(c, act, init, pkg.l10n), guardOf(core.js), ...scripts.map(guardOf)];
+    const hashes = await Promise.all(all.map(sha256b64));
+    const d = document.implementation.createHTMLDocument('');
+    const add = (tag, attrs, text) => { const e = d.createElement(tag); for (const [k, v] of Object.entries(attrs || {})) e.setAttribute(k, v); if (text != null) e.textContent = text; return e; };
+    d.documentElement.setAttribute('lang', init.locale || 'en'); d.documentElement.className = 'h5p-iframe';
+    d.head.replaceChildren(add('meta', { charset: 'utf-8' }), add('meta', { 'http-equiv': 'Content-Security-Policy', content: CSP(hashes) }), add('meta', { name: 'viewport', content: 'width=device-width, initial-scale=1' }),
+      add('style', {}, 'html,body{margin:0;background:#fff;color:#222;font-family:var(--noema-font,system-ui,sans-serif)}.h5p-content{font-family:inherit}'), ...styles.map(s => add('style', {}, s)), ...all.map(s => add('script', {}, s)));
+    d.body.replaceChildren(add('div', { class: 'h5p-content', 'data-content-id': 'noema' }));
+    const inner = '<!doctype html>' + d.documentElement.outerHTML;
+    const w = document.implementation.createHTMLDocument('');
+    const wm = w.createElement('meta'); wm.setAttribute('http-equiv', 'Content-Security-Policy'); wm.setAttribute('content', CSP(hashes));
+    const ws = w.createElement('style'); ws.textContent = 'html,body{margin:0;height:100%;overflow:hidden;background:transparent}iframe{display:block;border:0;width:100%;height:100%}';
+    const wf = w.createElement('iframe'); wf.setAttribute('sandbox', 'allow-scripts'); wf.setAttribute('allow', ALLOWF); wf.setAttribute('referrerpolicy', 'no-referrer'); wf.setAttribute('srcdoc', inner);
+    w.head.replaceChildren(wm, ws); w.body.replaceChildren(wf);
+    let mediaBytes = 0; const media = [];
+    for (const n of Object.keys(files)) {
+      if (!n.startsWith('content/') || n === 'content/content.json') continue;
+      const ext = extOf(n); if (!MIME[ext] || ext === 'json') continue;
+      mediaBytes += files[n].length; if (mediaBytes > LIM.media) throw fail('size', 'the content files are too big');
+      media.push({ path: n.slice(8), type: MIME[ext], bytes: files[n] });
+    }
+    return { doc: '<!doctype html>' + w.documentElement.outerHTML, media, scripts: all.length };
+  }
+
+  const NoemaH5P = Object.freeze({ PLAYER_VERSION, ALLOW, LIM, unzip, check, load, prepare, player, buildDoc, CACHE });
+  window.NoemaH5P = NoemaH5P;
+
+  if (typeof ACT === 'undefined' || !ACT.registerRuntime) return;
+  ACT.registerRuntime({
+    id: 'h5p@1', version: 1,
+    /** the same contract as html-app@1 → port { send(type, payload, extra), close() } */
+    mount(box, { act, init, title, onMessage, onFail }) {
+      const nonce = Array.from(crypto.getRandomValues(new Uint8Array(16)), b => b.toString(16).padStart(2, '0')).join('');
+      const frame = document.createElement('iframe');
+      frame.setAttribute('sandbox', 'allow-scripts');   // exactly this token: never allow-same-origin
+      frame.setAttribute('allow', ALLOWF);
+      frame.setAttribute('referrerpolicy', 'no-referrer');
+      frame.setAttribute('title', title);
+      frame.className = 'act-frame';
+      let ch = null, closed = false, loads = 0, media = [];
+      const pending = [];
+      const port = {
+        send(type, payload, extra) { const m = ACTP.out(type, payload, extra); if (ch) ch.port1.postMessage(m); else pending.push(m); },
+        close() { closed = true; removeEventListener('message', hello); try { ch?.port1.close(); } catch (e) { } frame.remove(); },
+      };
+      function hello(e) {
+        const app = (() => { try { return frame.contentWindow?.frames[0] || null; } catch (x) { return null; } })();
+        if (closed || ch || !app || e.source !== app) return;
+        const d = e.data; if (!d || d.t !== 'hello' || d.nonce !== nonce) return;
+        removeEventListener('message', hello);
+        ch = new MessageChannel();
+        ch.port1.onmessage = m => { if (!closed) onMessage(m.data); };
+        app.postMessage({ t: 'welcome', nonce }, '*', [ch.port2]);
+        const fl = media.map(f => ({ path: f.path, type: f.type, buf: f.bytes.slice().buffer }));   // copies: the cached package keeps its bytes
+        ch.port1.postMessage({ p: 'noema.h5p', type: 'files', files: fl }, fl.map(f => f.buf));
+        ch.port1.postMessage(ACTP.out('init', init));
+        while (pending.length) ch.port1.postMessage(pending.shift());
+      }
+      addEventListener('message', hello);
+      frame.addEventListener('load', () => { if (++loads > 1 && !closed) onFail('navigated'); });
+      (async () => {
+        if (!crypto?.subtle || typeof DecompressionStream === 'undefined') throw fail('unsupported', 'this browser cannot unpack H5P');
+        const [core, pkg] = await Promise.all([player(), prepare(act, init.locale)]);
+        if (closed) return;
+        const b = await buildDoc(pkg, nonce, act, init, core);
+        if (closed) return;
+        media = b.media; frame.srcdoc = b.doc; box.append(frame);
+      })().catch(e => { console.warn('[noema] h5p', act.id, e.code || '', e.message); if (!closed) onFail(e.code || 'build'); });
+      return port;
+    },
   });
   /* i18n-ignore-end */
 })();
@@ -9838,8 +10904,10 @@ function threadTracker(key, histLen) {
 const ACC_TABS = ['profile', 'settings', 'subjects', 'backup', 'cloud', 'help'];   // labels: t('acc.<tab>')   // i18n-ignore
 /** Collapsible section (closed by default) with an optional status pill and ⓘ tooltip. */
 function accSection(icon, title, { status = null, info = null, open = false, body }) {
+  // icon: an emoji (the older sections) or { line: '<engine/art.js key>' }, a line icon of the new frame (no emoji on new headers)
+  const head = icon && typeof icon === 'object' ? [h('span', { class: 'ns-svg accico', html: window.NoemaArt ? NoemaArt.svg(icon.line, 'i') : '' }), ' ', title] : [`${icon} ${title}`];
   const d = h('details', { class: 'accsec', open: open || null },
-    h('summary', {}, h('span', { class: 'chev' }, '▸'), h('span', { class: 'grow' }, `${icon} ${title}`), info ? tip(info) : null, status ? h('span', { class: 'pill ' + (status.ok ? 'c' : 'warnpill') }, status.text) : null),
+    h('summary', {}, h('span', { class: 'chev' }, '▸'), h('span', { class: 'grow' }, ...head), info ? tip(info) : null, status ? h('span', { class: 'pill ' + (status.ok ? 'c' : 'warnpill') }, status.text) : null),
     h('div', { class: 'accsecbody' }, body));
   return d;
 }
@@ -10082,7 +11150,8 @@ const ACC_VIEWS = {
                 h('button', { class: 'btn ghost', onclick: c2 }, tE('engine.core.cancel')))));
           } })), guideBtn('restore', '♻️ ' + tE('engine.bk.howRestore'))] }),
       accSection('🕘', tE('engine.bk.secPoints'), { status: { ok: true, text: nf(pts0.length) }, info: tE('engine.bk.pointsInfo'), body: rpBox }),
-      embedConsentRow());
+      embedConsentRow(),
+      window.pyOfflineSection?.() || '');   // Prepare Python for offline (37_activity_py_ui.js): only where Python activities can run
     drawFs(); drawRP();
   },
 

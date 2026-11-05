@@ -599,6 +599,7 @@ details.accsec>summary{list-style:none;cursor:pointer;display:flex;align-items:c
 details.accsec>summary::-webkit-details-marker{display:none}
 details.accsec>summary .chev{transition:transform .25s;color:var(--ink3);font-size:12px}
 details.accsec[open]>summary .chev{transform:rotate(90deg)}
+details.accsec>summary .accico svg.i{width:18px;height:18px;vertical-align:-3px;color:var(--ink2)}
 details.accsec[open]>summary{border-bottom:1px solid var(--line)}
 .accsecbody{padding:12px 14px 14px;animation:slideIn .3s}
 .pill.warnpill{background:var(--warn-bg);color:#a05a00}
@@ -1043,6 +1044,13 @@ kbd{font:600 12px var(--mono,monospace);padding:1px 6px;border-radius:6px;border
 .act-checks li.ok { color: var(--ok); }
 .act-checks li.bad { color: var(--bad); }
 @media (prefers-reduced-motion: reduce) { .sim * { transition: none !important; animation: none !important; } }
+/* py-module@1 (37_activity_py_ui.js): one quiet line above the controls (first use, loading, network); the runner frame shows nothing */
+.act-pyline { font-size: .85em; color: var(--ink2); margin: 0 0 8px; }
+.act-pyline[hidden] { display: none; }
+.act-pyline .btn { margin-left: 6px; }
+.act-pyrun { position: relative; height: 0; overflow: hidden; }
+.act-pyset .row { gap: 8px; flex-wrap: wrap; align-items: center; }
+.act-pybar { flex: 1 1 140px; max-width: 260px; height: 8px; }
 
 /* ---- 35_visual.css ---- */
 /* ---------- visual exercises & figures (docs/VISUAL.md) ---------- */

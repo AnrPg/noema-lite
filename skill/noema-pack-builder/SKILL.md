@@ -14,7 +14,7 @@ learner opens each source file at the pages the chapters cite.
 **The contract is in `references/`. Read both files before writing any content:**
 - `references/CONTENT_SPEC.md` — subject, chapters, sections, blocks, exercises, playbooks, quantities, pedagogy.
 - `references/VISUAL.md` — pictures, regions, the 7 picture-exercise types, figures, picture sourcing & licences.
-- `references/INTERACTIVE.md` — interactive activities (optional): mini-apps and declarative simulations (sim-spec@1, §12) in the theory and graded `sim` exercises; `references/INTERACTIVE_AUTHORING.md` is how to make one that teaches (and which runtime to pick); `references/INTERACTIVE_SIMEXPR.md` the expression language of a spec's formulas and checks; `references/INTERACTIVE_CIRCUIT.md` the circuit engine (`circuit-mna@1`: a netlist, sliders bound to its parts, scope traces) and the fault-finding bench (hidden faults, instruments, probe points, a diagnosis); `references/INTERACTIVE_ENGINES.md` the heat (`thermal@1`), control-loop (`pid@1`), radio (`rf@1`) and IoT-node twin (`twin@1`, with benches) engines; `references/INTERACTIVE_WASM.md` a precompiled WebAssembly module as a spec's engine (`wasm-module@1`, rarely); `references/INTERACTIVE_EMBED.md` an allow-listed outside page (PhET, GeoGebra, Desmos; `external-embed@1`, explore only, opt-in, licence limits); `references/INTERACTIVE_XAPI.md` the learner's xAPI export (nothing to author).
+- `references/INTERACTIVE.md` — interactive activities (optional): mini-apps and declarative simulations (sim-spec@1, §12) in the theory and graded `sim` exercises; `references/INTERACTIVE_AUTHORING.md` is how to make one that teaches (and which runtime to pick); `references/INTERACTIVE_SIMEXPR.md` the expression language of a spec's formulas and checks; `references/INTERACTIVE_CIRCUIT.md` the circuit engine (`circuit-mna@1`: a netlist, sliders bound to its parts, scope traces) and the fault-finding bench (hidden faults, instruments, probe points, a diagnosis); `references/INTERACTIVE_PYTHON.md` Python activities (`py-module@1`: `main.py` with `step(inputs, state)` + a spec; numpy, scipy; the API, the cost, the limits); `references/INTERACTIVE_H5P.md` H5P packages (`h5p@1`: an ordinary `.h5p` file, its translations, the rules it must pass); `references/INTERACTIVE_ENGINES.md` the heat (`thermal@1`), control-loop (`pid@1`), radio (`rf@1`) and IoT-node twin (`twin@1`, with benches) engines; `references/INTERACTIVE_WASM.md` a precompiled WebAssembly module as a spec's engine (`wasm-module@1`, rarely); `references/INTERACTIVE_EMBED.md` an allow-listed outside page (PhET, GeoGebra, Desmos; `external-embed@1`, explore only, opt-in, licence limits); `references/INTERACTIVE_XAPI.md` the learner's xAPI export (nothing to author).
 
 Scripts live in `scripts/` next to this file (Python 3, standard library + Pillow; for PDFs any of poppler, PyMuPDF, or pypdf + pypdfium2).
 
@@ -112,19 +112,24 @@ watch another), a process over time, a setting to find, a fault to probe. Never 
 python3 scripts/activity_new.py work/<id> <activity-id> --runtime sim-spec@1   # a declarative simulation (rc-lowpass): spec.json, strings, tests.json, a fallback picture — prefer this
 python3 scripts/activity_new.py work/<id> <activity-id> --from rc-transient     # a circuit (circuit-mna@1): a netlist, R and C on sliders, a scope trace
 python3 scripts/activity_new.py work/<id> <activity-id> --from led-bench        # a fault-finding bench: a hidden fault, multimeter/scope/logic, a diagnosis graded by checks
+python3 scripts/activity_new.py work/<id> <activity-id> --from py-filter        # Python (py-module@1, numpy): main.py step() feeds a spec's controls and plots — only when numbers need real numerics (17–37 MB download, website only)
 python3 scripts/activity_new.py work/<id> <activity-id> --from heatsink        # or pid-tune, lora-link, sensor-node: heat (thermal@1), a control loop (pid@1), a radio link (rf@1), an IoT node twin (twin@1)
 python3 scripts/activity_new.py work/<id> <activity-id> --from wasm-oscillator # rarely: a spec whose model is a WebAssembly module (wasm-module@1); check it with scripts/wasm_check.py
 python3 scripts/activity_new.py work/<id> <activity-id>    # a mini-app (alias-lab, html-app@1): app.html, strings.en/el/ru.json, tests.json — only what a spec cannot say
+python3 scripts/activity_new.py work/<id> <activity-id> --runtime h5p@1 --from item.h5p   # an existing H5P package (drag and drop, blanks…), unchanged; translate its content.json
+python3 scripts/h5p_check.py item.h5p                      # what an H5P package may contain (content types, no outside links); activity_lint runs it too
 python3 scripts/activity_lint.py work/<id>                 # the same rules as make_pack.py
 python3 scripts/activity_test.py work/<id>                 # in a real browser with the app's runtime: every language, tests.json cases (right AND tempting wrong)
 python3 scripts/activity_preview.py work/<id> <activity-id>  # light, dark, 360 px, fallback screenshots: look at each one
 ```
 Use it as a theory block `{"t": "interactive", "activity": "<id>"}` (explained in detail right after it) and/or a `sim` exercise
 (`task.params`; `grade: {"mode": "checks", "checks": [{"expr": "err <= tol", "label": "checkFc"}]}` on a sim-spec — the app checks
-the values itself — or `{"mode": "reported"}` on a mini-app; hints that lead to the idea, never the answer; add `"sim"` to the map's
+the values itself, also on Python's outputs — or `{"mode": "reported"}` on a mini-app or an H5P item (the score H5P reports); hints that lead to the idea, never the answer; add `"sim"` to the map's
 `fits.types`; a bench is graded on `correct` and `measurements`, its fault set by `task.params.fault` — INTERACTIVE_AUTHORING.md
 "A good fault-finding bench"). Every word from the string tables (a spec names keys; a mini-app calls `noema.t(key)`), one table per language of
-the pack; a fallback picture + text that teaches the same. An outside page (`external-embed@1`: PhET, GeoGebra, Desmos — only
+the pack (an H5P item instead: `activities/<id>/content.<locale>.json`, its content.json translated, one per language of the pack;
+its `item.h5p` travels beside the pack and `noema_finish_upload` asks for it — INTERACTIVE_AUTHORING.md "When to use H5P"); a
+fallback picture + text that teaches the same An outside page (`external-embed@1`: PhET, GeoGebra, Desmos — only
 the providers in `scripts/embed_allow.json` with status allowed; `scripts/embed_check.py`) goes only in a theory block, never a
 `sim`; the theory must stand without it (it is off unless the site enables it, and needs the network) — INTERACTIVE_EMBED.md.
 

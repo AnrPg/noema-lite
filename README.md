@@ -27,7 +27,7 @@ accounts/<profile>/
   backups/                 suggested target for the app's automatic folder backups
   packs/<id>/              PRIVATE subjects of this profile (never published to the website)
 tools/                     build, validate, pack_quality, pipeline (+ pipelines/), new_subject, source_text, db_sync, db_restore, svgkit (diagrams), CONTENT_SPEC.md, schemas/
-docs/                      LANGUAGES.md (foreign languages, polyglot — design + plan), VISUAL.md (picture exercises — canonical schema), INTERACTIVE.md (interactive activities: mini-apps and declarative simulations in the theory and graded sim exercises; INTERACTIVE_AUTHORING.md is the playbook, INTERACTIVE_SIMEXPR.md the expression language, adr/001 the decisions), CLAUDE_CONNECTOR.md, TUTORING.md, CONVERSATIONS.md, VAULT.md (the shared file vault), SEARCH.md (search, stable addresses, collections), REPORTS.md (problem reports: the button, the locator, the admins' page), BRIDGE.md (文A language help: a pack's words in the learner's own language), FROM_SOURCES.md (from a pile of material to a Roadmap or one subject), PIPELINES.md (every content flow, step by step, and the quality rules), TECH_DEBT.md
+docs/                      LANGUAGES.md (foreign languages, polyglot — design + plan), VISUAL.md (picture exercises — canonical schema), INTERACTIVE.md (interactive activities: mini-apps and declarative simulations in the theory and graded sim exercises; INTERACTIVE_AUTHORING.md is the playbook, INTERACTIVE_SIMEXPR.md the expression language, INTERACTIVE_CIRCUIT.md circuits and fault benches, INTERACTIVE_PYTHON.md Python activities and their deployment, adr/001 the decisions), CLAUDE_CONNECTOR.md, TUTORING.md, CONVERSATIONS.md, VAULT.md (the shared file vault), SEARCH.md (search, stable addresses, collections), REPORTS.md (problem reports: the button, the locator, the admins' page), BRIDGE.md (文A language help: a pack's words in the learner's own language), FROM_SOURCES.md (from a pile of material to a Roadmap or one subject), PIPELINES.md (every content flow, step by step, and the quality rules), TECH_DEBT.md
 cloud/                     supabase.sql (schema + row-level security), the setup guide, mcp/server.mjs (the Claude connector)
 skill/noema-pack-builder/  the Claude skill users add to their own Claude (zip built into the website)
 data/noema-lite.db     SQLite backup database (GENERATED, git-ignored; upload it to the cloud from the app)
@@ -38,6 +38,7 @@ tests/                     end-to-end tests (Playwright) incl. a Supabase emulat
 ```bash
 python3 tools/build.py                  # validate + rebuild engine, packs, registry
 python3 tools/build.py site bundle      # + website folder (dist/site) + single-file app
+python3 tools/fetch_pyodide.py --site dist/site   # after `site`: the pinned Python runtime for py-module@1 activities (Netlify does this; a failed fetch never breaks the deploy) — docs/INTERACTIVE_PYTHON.md
 python3 tools/db_sync.py                # refresh the SQLite backup database (versioned copy of every file + all content + profile backups)
 python3 tools/db_restore.py list        # what the database holds; restore files/subjects/packs/backups into a NEW folder
 ```

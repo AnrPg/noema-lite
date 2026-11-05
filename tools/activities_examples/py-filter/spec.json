@@ -1,0 +1,30 @@
+{
+ "format": "noema.sim-spec/v1",
+ "title": "title",
+ "intro": "intro",
+ "params": [
+  { "id": "kind", "kind": "choice", "label": "kindLabel", "options": [{ "value": 0, "label": "kindMA" }, { "value": 1, "label": "kindRC" }], "default": 0 },
+  { "id": "N", "kind": "slider", "label": "nLabel", "min": 1, "max": 32, "step": 1, "default": 4 },
+  { "id": "fc", "kind": "slider", "label": "fcLabel", "min": 20, "max": 3000, "scale": "log", "default": 500, "unit": "Hz", "format": "si" }
+ ],
+ "outputs": [
+  { "id": "f", "kind": "series" }, { "id": "gain", "kind": "series" }, { "id": "k", "kind": "series" }, { "id": "y", "kind": "series" },
+  { "id": "att1k", "kind": "scalar" }, { "id": "pass300", "kind": "scalar" }, { "id": "f3", "kind": "scalar" }
+ ],
+ "readouts": [
+  { "label": "att1kLabel", "expr": "att1k", "unit": "dB", "format": "fixed", "digits": 1 },
+  { "label": "pass300Label", "expr": "pass300", "unit": "dB", "format": "fixed", "digits": 1 },
+  { "label": "f3Label", "expr": "f3", "unit": "Hz", "format": "si", "digits": 3 }
+ ],
+ "plots": [
+  { "kind": "series", "title": "gainTitle",
+    "x": { "series": "f", "scale": "log", "label": "frequency", "unit": "Hz" },
+    "y": { "min": -60, "max": 5, "label": "gainAxis", "unit": "dB" },
+    "series": [{ "y": "gain", "label": "gainLine" }],
+    "marks": [{ "axis": "x", "expr": "1000", "label": "toneMark" }, { "axis": "x", "expr": "300", "label": "passMark" }, { "axis": "y", "expr": "-3", "label": "minus3" }] },
+  { "kind": "series", "title": "stepTitle",
+    "x": { "series": "k", "label": "sample" },
+    "y": { "min": 0, "max": 1.05, "label": "output" },
+    "series": [{ "y": "y" }] }
+ ]
+}
