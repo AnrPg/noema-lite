@@ -326,6 +326,7 @@ P6_ENGINES = ('39_engine_thermal.js', '40_engine_pid.js', '41_engine_rf.js', '42
 # the engine library of sim-spec@1 (docs/INTERACTIVE_LIBRARY.md): the shared core, every general engine (47–48_lib_*.js) and the catalogue
 # (which also registers them); loaded beside packcheck.js like the P6 engines; their Python twins tools/enginelib.py + tools/lib_<name>.py
 LIB_ENGINES = ('46_lib_core.js', *sorted(os.path.basename(f) for f in glob.glob(os.path.join(ENGINE, 'src', '4[78]_lib_*.js'))), '49_lib_catalog.js')
+LIB_DOCS = sorted(os.path.basename(f) for f in glob.glob(os.path.join(ROOT, 'docs', 'library', '*.md')))   # the chapters of the engine library (skill references/library/, the connector's guide part "interactive")
 LIB_TOOLS = ['enginelib.py', *sorted(os.path.basename(f) for f in glob.glob(os.path.join(ROOT, 'tools', 'lib_*.py')))]
 # py-module@1 (docs/INTERACTIVE_PYTHON.md §Deployment): the service worker's scope is /vendor/pyodide/ (its script lives in /engine/), the
 # versioned Pyodide folder and the wheels never change (immutable), the manifest is checked every time; ACAO/CORP only for a direct load
@@ -391,8 +392,9 @@ def build_skill(out_zip):
         for f in ['player.js', 'LICENSE', 'LICENSE-NOTICE.txt'] + sorted(os.path.relpath(g, h5pv).replace(os.sep, '/') for g in glob.glob(os.path.join(h5pv, 'source', '**', '*'), recursive=True) if os.path.isfile(g)):
             z.write(os.path.join(h5pv, f), 'noema-pack-builder/scripts/activity_host/h5p/' + f)
         z.write(os.path.join(ENGINE, 'packcheck.js'), 'noema-pack-builder/scripts/activity_host/packcheck.js')   # sim-spec@1: the spec check the runtime runs
-        for f in ('INTERACTIVE.md', 'INTERACTIVE_AUTHORING.md', 'INTERACTIVE_SIMEXPR.md', 'INTERACTIVE_CIRCUIT.md', 'INTERACTIVE_ENGINES.md', 'INTERACTIVE_PYTHON.md', 'INTERACTIVE_H5P.md') + INTERACTIVE_P6:
+        for f in ('INTERACTIVE.md', 'INTERACTIVE_AUTHORING.md', 'INTERACTIVE_LIBRARY.md', 'INTERACTIVE_SIMEXPR.md', 'INTERACTIVE_CIRCUIT.md', 'INTERACTIVE_ENGINES.md', 'INTERACTIVE_PYTHON.md', 'INTERACTIVE_H5P.md') + INTERACTIVE_P6:
             if os.path.exists(os.path.join(ROOT, 'docs', f)): z.write(os.path.join(ROOT, 'docs', f), f'noema-pack-builder/references/{f}')
+        for f in LIB_DOCS: z.write(os.path.join(ROOT, 'docs', 'library', f), f'noema-pack-builder/references/library/{f}')   # the engine library: one chapter per engine (docs/INTERACTIVE_LIBRARY.md)
         if os.path.exists(os.path.join(ROOT, 'docs', 'PIPELINES.md')): z.write(os.path.join(ROOT, 'docs', 'PIPELINES.md'), 'noema-pack-builder/references/PIPELINES.md')
         z.write(os.path.join(ROOT, 'tools', 'CONTENT_SPEC.md'), 'noema-pack-builder/references/CONTENT_SPEC.md')
         z.write(os.path.join(ROOT, 'docs', 'VISUAL.md'), 'noema-pack-builder/references/VISUAL.md')
@@ -440,7 +442,7 @@ def build_mcp_function(metas, out_dir):
     cfg['languages'] = [{k: m.get(k) for k in ('id', 'title', 'languages', 'path', 'profiles')} for m in LANG_METAS]   # language courses (D13 peers, refills)
     rd = lambda p: open(os.path.join(ROOT, p), encoding='utf-8').read()
     docs = {'workflow': rd('skill/noema-pack-builder/SKILL.md'), 'content': rd('tools/CONTENT_SPEC.md'), 'visual': rd('docs/VISUAL.md')}
-    if os.path.exists(os.path.join(ROOT, 'docs', 'INTERACTIVE.md')): docs['interactive'] = rd('docs/INTERACTIVE.md') + ''.join('\n\n---\n\n' + rd('docs/' + f) for f in ('INTERACTIVE_AUTHORING.md', 'INTERACTIVE_SIMEXPR.md', 'INTERACTIVE_CIRCUIT.md', 'INTERACTIVE_ENGINES.md', 'INTERACTIVE_PYTHON.md', 'INTERACTIVE_H5P.md') + INTERACTIVE_P6 if os.path.exists(os.path.join(ROOT, 'docs', f)))   # interactive activities: the contract + the playbook + the expression language
+    if os.path.exists(os.path.join(ROOT, 'docs', 'INTERACTIVE.md')): docs['interactive'] = rd('docs/INTERACTIVE.md') + ''.join('\n\n---\n\n' + rd('docs/' + f) for f in ('INTERACTIVE_AUTHORING.md', 'INTERACTIVE_LIBRARY.md', *('library/' + g for g in LIB_DOCS), 'INTERACTIVE_SIMEXPR.md', 'INTERACTIVE_CIRCUIT.md', 'INTERACTIVE_ENGINES.md', 'INTERACTIVE_PYTHON.md', 'INTERACTIVE_H5P.md') + INTERACTIVE_P6 if os.path.exists(os.path.join(ROOT, 'docs', f)))   # interactive activities: the contract + the playbook + the expression language
     if os.path.exists(os.path.join(ROOT, 'docs', 'BRIDGE.md')): docs['bridge'] = rd('docs/BRIDGE.md')   # 文A language bridges (noema_bridge_guide)
     # the content flows (noema_pipeline, docs/PIPELINES.md): the doc, the step library and every flow
     if os.path.exists(os.path.join(ROOT, 'docs', 'PIPELINES.md')): docs['pipelines'] = rd('docs/PIPELINES.md')

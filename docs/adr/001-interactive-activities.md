@@ -498,3 +498,21 @@ mode, audits. The content work (the electronics Roadmap) starts only after the h
   locale) and `--browser <prepared repo>` from `tests/run_e2e.sh`: `#/author` in the built site, the classic router and the frame
   (subject ⋮ › Create an activity, the crumbs, 320 px), rc-lowpass built from scratch, the preview, undo / redo, the .zip through
   `activity_lint.py`, dark mode.
+
+## 15. Addendum — the engine library and requests for new engines (2026-11-05)
+
+Decision (ANR, 2026-11-05): of three ways to make simulations general (A: only free code and formulas; B: a new engine built on
+request for each subject; Γ: a library of general engines), **Γ is the canonical way, with A always inside it and B as a button**.
+
+- **Γ, the library** (`docs/INTERACTIVE_LIBRARY.md`): general engines, each for a whole family of subjects — mathematics (`formula@1`,
+  `ode@1`, `prob@1`, `graph@1`, `geom@1`), life sciences and medicine (`genetics@1`, `seq@1`, `med@1`, `clinic@1` — clinical reasoning,
+  its own engine and the deepest — `anatomy@1`), humanities, arts and crafts (`timeline@1` with every calendar first-class, `music@1`,
+  `map@1`, `text@1`, `craft@1`). One contract (`46_lib_core.js` + a module per engine + a Python twin of its checks), new output kinds
+  `scene` and `sound` and line styles for library engines only. Models follow current published science; every source, validity
+  range and "check before release" value is in the engine's chapter (`docs/library/<name>.md`).
+- **A, the free way**, stays: `formula@1` is in the library; `html-app@1` and `py-module@1` when no engine fits.
+- **B, requests**: `#/engines` (the catalogue, *Request a new engine*, the answers), the table `noema_engine_requests`, and three new,
+  separate connector tools (`noema_request_engine`, `noema_engine_requests`, `noema_engine_request_update`); the app's admins answer.
+- **Additive only**: no existing spec, message, engine or tool changes; the validators keep every old message word for word.
+- **External code** is allowed for any engine (also the P3–P6 ones) when it is robust and free (MIT, BSD, Apache-2.0, ISC, public
+  domain): vendored and pinned under `engine/vendor/`, with its licence, runnable in the Worker, no network.

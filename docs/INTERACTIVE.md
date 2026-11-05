@@ -5,7 +5,8 @@ or a graded **sim** exercise (reach a goal in the activity; the activity reports
 The decisions and the spikes behind this page are in `docs/adr/001-interactive-activities.md`. How to write one well:
 `docs/INTERACTIVE_AUTHORING.md`. The formulas of `sim-spec@1`: `docs/INTERACTIVE_SIMEXPR.md`. The circuit engine and the
 fault-finding bench: `docs/INTERACTIVE_CIRCUIT.md`. The heat, control-loop, radio and IoT-twin engines:
-`docs/INTERACTIVE_ENGINES.md`. Python (`py-module@1`): `docs/INTERACTIVE_PYTHON.md`. H5P packages (`h5p@1`):
+`docs/INTERACTIVE_ENGINES.md`. The engine library (the canonical way: general engines for every field, and requests for new
+engines): `docs/INTERACTIVE_LIBRARY.md`. Python (`py-module@1`): `docs/INTERACTIVE_PYTHON.md`. H5P packages (`h5p@1`):
 `docs/INTERACTIVE_H5P.md`. WebAssembly modules: `docs/INTERACTIVE_WASM.md`. Outside pages (PhET, GeoGebra, Desmos):
 `docs/INTERACTIVE_EMBED.md`. The learning record export: `docs/INTERACTIVE_XAPI.md`.
 
