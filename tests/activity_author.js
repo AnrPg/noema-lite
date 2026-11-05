@@ -53,7 +53,18 @@ console.log('— the schemas');
 ok(fs.readFileSync(EMBED, 'utf8') === embedText(), 'engine/activity_author_schemas.js is the current copy of tools/schemas (python3 tools/build.py writes it)');
 ok(SCHEMA_FILES.every(f => JSON.stringify(globalThis.NoemaActivitySchemas?.[f]) === JSON.stringify(SCH(f))), 'the embedded schemas equal tools/schemas/*.json');
 for (const id of REFS) { const e = SF.validate(reg, sim, refDoc(id).spec); ok(!e.length, `sim-spec schema accepts the reference ${id} ${e.length ? JSON.stringify(e.slice(0, 2)) : ''}`); }
-for (const id of ['alias-lab', ...REFS]) { const it = rj(path.join(EX, id, 'activity.json')); const e = SF.validate(reg, regSchema, { format: 'noema.activities/v1', items: [it] }); ok(!e.length, `registry schema accepts the entry of ${id} ${e.length ? JSON.stringify(e.slice(0, 2)) : ''}`); }
+for (const id of fs.readdirSync(EX).filter(d => fs.existsSync(path.join(EX, d, 'activity.json')))) { const it = rj(path.join(EX, id, 'activity.json')); const e = SF.validate(reg, regSchema, { format: 'noema.activities/v1', items: [it] }); ok(!e.length, `registry schema accepts the entry of ${id} ${e.length ? JSON.stringify(e.slice(0, 2)) : ''}`); }
+
+{ // every runtime the validators accept, and entry by runtime: required for a file, refused for an outside page (external-embed@1)
+  const EMB = { id: 'ohm-phet', runtime: 'external-embed@1', stateVersion: 1, provider: 'phet', url: 'https://phet.colorado.edu/sims/html/ohms-law/latest/ohms-law_all.html',
+    credit: 'PhET Interactive Simulations · CC-BY-4.0', license: 'CC-BY-4.0', fallback: { media: 'ohm-still', text: 'Ohm’s law: the current through a resistor grows with the voltage and falls with the resistance.' } };
+  const v = it => SF.validate(reg, regSchema, { format: 'noema.activities/v1', items: [it] });
+  const rcItem = rj(path.join(EX, 'rc-lowpass', 'activity.json')), noEntry = { ...rcItem }; delete noEntry.entry;
+  ok(!v(EMB).length && v({ ...EMB, entry: 'activities/ohm-phet/app.html' }).length > 0 && v(noEntry).length > 0,
+    'registry schema: an outside page has no entry (one is refused); a sim-spec@1 item without its entry is refused ' + JSON.stringify(v(EMB).slice(0, 2)));
+  ok(['html-app@1', 'sim-spec@1', 'py-module@1', 'h5p@1', 'wasm-module@1', 'external-embed@1'].every(r => regSchema.$defs.item.properties.runtime.enum.includes(r)) && [...P.ACTIVITY_RULES.RUNTIMES].every(r => regSchema.$defs.item.properties.runtime.enum.includes(r)),
+    'registry schema: the runtime enum names every runtime the validators know');
+}
 
 // the parity cases of tests/activities.js (the spec part), on the spec alone: the schema never refuses what the validators accept,
 // and refuses every structural problem (names, formulas, order and tables are the validators' own: checkSimSpec)

@@ -183,10 +183,11 @@ function subjectMenu() {
     { label: SL('resetProgress', { title: SUBJ.title }), icon: 'close', danger: true, run: resetProgress }];
 }
 /** ⋮ › Export learning record (xAPI): this subject's activity attempts (S.att) and answers (S.res) as an xAPI 1.0.3 file, made by
-    NoemaXAPI (engine/src/43_xapi.js, docs/INTERACTIVE_XAPI.md) — nothing is sent anywhere. The actor is the account id, never an e-mail. */
+    NoemaXAPI (engine/src/43_xapi.js, docs/INTERACTIVE_XAPI.md) — nothing is sent anywhere. The actor is the account id, never an e-mail. The pack's own subject
+    (title, language) goes with the pack's own chapters, never the name translated for the UI (SUBJ). */
 function exportXAPI() {
   let r;
-  try { r = NoemaXAPI.subjectRecord({ att: S.att, res: S.res, pack: SUBJ, chapters: Noema.pack?.chapters || COURSE, accountId: ACCOUNT.id, site: Noema.config?.siteUrl, now: Date.now() }); }
+  try { r = NoemaXAPI.subjectRecord({ att: S.att, res: S.res, pack: Noema.pack?.subject || SUBJ, chapters: Noema.pack?.chapters || COURSE, accountId: ACCOUNT.id, site: Noema.config?.siteUrl, now: Date.now() }); }
   catch (e) { toast('⚠️ ' + errText(e), 4000); return; }
   if (!r) { toast(tE('engine.xapi.none'), 3500); return; }
   saveBlob(r.name, new Blob([JSON.stringify(r.file, null, 1)], { type: 'application/json' }));
@@ -195,7 +196,7 @@ function exportXAPI() {
     app's zip writer); its AUs open the chapters on the site, with the same ids as the xAPI record. */
 async function exportCmi5() {
   try {
-    const r = NoemaXAPI.subjectCmi5({ pack: SUBJ, chapters: Noema.pack?.chapters || COURSE, site: Noema.config?.siteUrl });
+    const r = NoemaXAPI.subjectCmi5({ pack: Noema.pack?.subject || SUBJ, chapters: Noema.pack?.chapters || COURSE, site: Noema.config?.siteUrl });
     saveBlob(r.name, await NoemaXAPI.zip(r.files));
   } catch (e) { toast('⚠️ ' + errText(e), 4000); }
 }

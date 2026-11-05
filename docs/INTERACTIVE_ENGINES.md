@@ -313,8 +313,8 @@ log for a brown-out level set too high) and a tempting wrong option ("nothing is
 ```js
 NoemaTwin = { id: 'twin@1', format: 'noema.twin/v1', limits, FAULT_KINDS, SCALARS, SERIES, NUM_FIELDS, EVENT_CODES, CHEMS,
               check, checkFaults, checkSpec, create, num, source, engine, simEngine, radio: {…} }
-create(device, {seed, faults}) → { run() → {scalars, perSensor, series, readings, truth, log, logCount}, measure(probe), analytic() }
-measure: {kind: 'V', a: 'vbat' | 'vload', at?} · {kind: 'I'} (A) · {kind: 'scope', node: 'i', tStart, tEnd} (A, unit: 'A') · {kind: 'log'} · {kind: 'rssi'}
+create(device, {seed, faults}) → { run() → {scalars, perSensor, series, readings, truth, log, logCount, counts}, measure(probe), analytic() }
+measure: {kind: 'V', a: 'vbat' | 'vload', at?} · {kind: 'I'} (A) · {kind: 'scope', node: 'i', tStart, tEnd} (A, unit: 'A') · {kind: 'log'} (→ `events`: the first 1000 entries, `count`, `counts`: per code over the whole run) · {kind: 'rssi'}
 ```
 
 **Codes.** `check`: `format`, `value` (a number out of its kind, a custom curve that is not 0→1 rising, sense ≥ period, …),

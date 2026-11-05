@@ -77,7 +77,9 @@
     const list = schemas ? (Array.isArray(schemas) ? schemas : Object.values(schemas)) : Object.values(root.NoemaActivitySchemas || {});
     REG = SF().registry(list); return REG;
   }
-  const itemSchema = reg => reg.get(REG_ID).$defs.item;
+  /** the registry entry's schema as the page offers it: the runtimes of the registered types only (the schema itself names every runtime) */
+  const itemSchema = reg => { const it = reg.get(REG_ID).$defs.item, rts = [...new Set(TYPES.map(t => t.runtime))];
+    return Object.assign({}, it, { properties: Object.assign({}, it.properties, { runtime: Object.assign({}, it.properties.runtime, { enum: it.properties.runtime.enum.filter(r => rts.includes(r)) }) }) }); };
   const under = (p, q) => q.length <= p.length && q.every((x, i) => p[i] === x);
   /** → [{tab: 'item' | 'spec' | 'strings', path, msg, key?}] — every problem of the document */
   function check(doc, reg = REG || registry()) {

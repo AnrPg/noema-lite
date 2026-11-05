@@ -239,8 +239,11 @@ async function xapiApp(p, ctx, E) {
   const E0 = E.length;
   const item = await p.evaluate(() => { const it = subjectMenu()().find(x => x && x.label === tE('engine.xapi.export')); return it ? { label: it.label, sub: it.sub } : null; });
   ok(item && /xAPI/.test(item.label) && item.sub, 'the subject\'s ⋮ menu has the quiet item "Export learning record (xAPI)" ' + JSON.stringify(item));
+  // a learner reading the subject in another language: SUBJ carries its translated name (subject.i18n), the chapters stay the pack's own
+  const own = await p.evaluate(() => { window.__subjTitle = SUBJ.title; SUBJ.title = 'Titre traduit (fr)'; return Noema.pack.subject.title; });
   const [dl] = await Promise.all([p.waitForEvent('download', { timeout: 10000 }), p.evaluate(() => subjectMenu()().find(x => x && x.label === tE('engine.xapi.export')).run())]);
   const file = JSON.parse(require('fs').readFileSync(await dl.path(), 'utf8'));
+  ok(JSON.stringify(file).includes(own) && !JSON.stringify(file).includes('Titre traduit'), 'the record names the course as the pack does (its own title with its own chapters), not the translated name of the UI');
   ok(dl.suggestedFilename() === 'demo-activities.xapi.json' && file.format === 'noema.xapi-export/v1' && file.statements.length >= 5, `a JSON file is downloaded: ${dl.suggestedFilename()}, ${file.statements?.length} statements`);
   const acc = await p.evaluate(() => String(Noema.account.id));
   ok(file.statements.every(s => s.actor?.account?.name === acc && !s.actor.mbox && !s.actor.mbox_sha1sum) && !/mbox|@[a-z0-9-]+\.[a-z]/i.test(JSON.stringify(file.statements.map(s => s.actor))), 'the actor is the account id, never an e-mail');
@@ -256,6 +259,8 @@ async function xapiApp(p, ctx, E) {
   ok(dz.suggestedFilename() === 'demo-activities.cmi5.zip' && xml.names.join() === 'cmi5.xml' && /<courseStructure xmlns="https:\/\/w3id\.org\/xapi\/profiles\/cmi5\/v1\/CourseStructure\.xsd">/.test(xml.xml || '')
     && (xml.xml || '').includes(`<course id="${base}">`) && (xml.xml || '').includes(`<au id="${base}au/ch01"`) && /\?subject=demo-activities#\/ch\/ch01/.test(xml.xml || ''),
     `a .zip with cmi5.xml: the course and one AU per chapter, with the same ids as the xAPI record (${dz.suggestedFilename()}, ${xml.names})`);
+  ok((xml.xml || '').includes(own) && !(xml.xml || '').includes('Titre traduit'), 'cmi5.xml names the course as the pack does, not the translated name');
+  await p.evaluate(() => { SUBJ.title = window.__subjTitle; });
   ok(E.length === E0, 'no page errors ' + JSON.stringify(E.slice(E0, E0 + 3)));
 }
 

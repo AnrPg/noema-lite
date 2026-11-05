@@ -56,7 +56,8 @@ def check(dev):
     if not (g(s, "sense", 0.05) < period): E("value", "schedule.sense", "must be shorter than the period")
     if g(r, "tech", "lora") == "lora" and not (7800 <= g(r, "bw", 125e3) <= 500000): E("value", "radio.bw", "LoRa bandwidth from 7.8 to 500 kHz")
     retries, ack, tx_every = g(s, "retries", 0), g(s, "ack", False), g(s, "txEvery", 1)
-    est = math.ceil(num(sm["duration"]) / period) * (2 + (retries + 1) * (2 if ack else 1) / tx_every)
+    wakes = num(sm["duration"]) / period   # as JS: Math.ceil(Infinity) is Infinity (math.ceil raises), and float products overflow to inf
+    est = (float(math.ceil(wakes)) if math.isfinite(wakes) else math.inf) * (2 + (retries + 1) * (2 if ack else 1) / tx_every)
     if est > g(sm, "maxEvents", DEF_EVENTS): E("budget", "sim.duration", "more events than sim.maxEvents")
     return P
 

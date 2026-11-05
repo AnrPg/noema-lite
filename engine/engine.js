@@ -7465,10 +7465,11 @@ function subjectMenu() {
     { label: SL('resetProgress', { title: SUBJ.title }), icon: 'close', danger: true, run: resetProgress }];
 }
 /** ⋮ › Export learning record (xAPI): this subject's activity attempts (S.att) and answers (S.res) as an xAPI 1.0.3 file, made by
-    NoemaXAPI (engine/src/43_xapi.js, docs/INTERACTIVE_XAPI.md) — nothing is sent anywhere. The actor is the account id, never an e-mail. */
+    NoemaXAPI (engine/src/43_xapi.js, docs/INTERACTIVE_XAPI.md) — nothing is sent anywhere. The actor is the account id, never an e-mail. The pack's own subject
+    (title, language) goes with the pack's own chapters, never the name translated for the UI (SUBJ). */
 function exportXAPI() {
   let r;
-  try { r = NoemaXAPI.subjectRecord({ att: S.att, res: S.res, pack: SUBJ, chapters: Noema.pack?.chapters || COURSE, accountId: ACCOUNT.id, site: Noema.config?.siteUrl, now: Date.now() }); }
+  try { r = NoemaXAPI.subjectRecord({ att: S.att, res: S.res, pack: Noema.pack?.subject || SUBJ, chapters: Noema.pack?.chapters || COURSE, accountId: ACCOUNT.id, site: Noema.config?.siteUrl, now: Date.now() }); }
   catch (e) { toast('⚠️ ' + errText(e), 4000); return; }
   if (!r) { toast(tE('engine.xapi.none'), 3500); return; }
   saveBlob(r.name, new Blob([JSON.stringify(r.file, null, 1)], { type: 'application/json' }));
@@ -7477,7 +7478,7 @@ function exportXAPI() {
     app's zip writer); its AUs open the chapters on the site, with the same ids as the xAPI record. */
 async function exportCmi5() {
   try {
-    const r = NoemaXAPI.subjectCmi5({ pack: SUBJ, chapters: Noema.pack?.chapters || COURSE, site: Noema.config?.siteUrl });
+    const r = NoemaXAPI.subjectCmi5({ pack: Noema.pack?.subject || SUBJ, chapters: Noema.pack?.chapters || COURSE, site: Noema.config?.siteUrl });
     saveBlob(r.name, await NoemaXAPI.zip(r.files));
   } catch (e) { toast('⚠️ ' + errText(e), 4000); }
 }
@@ -8965,13 +8966,13 @@ function reportedView() {
     const trFrom = o && o.traceFrom !== undefined ? o.traceFrom : 0, trTo = o && o.traceTo !== undefined ? o.traceTo : k.D.sim.trace;
     const rRadio = mulberry32(hash32('radio', seed)), rSens = sens.map(s => mulberry32(hash32('sensor:' + s.id, seed)));
     const voc = soc => interp(B.curve, Math.max(0, soc)) * B.cells;
-    let t = 0, q = 0, events = 0, dead = false, tDead = NaN, vMin = Infinity, logCount = 0, overrun = false;
+    let t = 0, q = 0, events = 0, dead = false, tDead = NaN, vMin = Infinity, logCount = 0, overrun = false; const counts = { reset: 0, lost: 0, overrun: 0, dead: 0 };
     const soc = () => B.soc0 - q / B.capacity;
     const bins = { q: new Float64Array(nb), vload: new Float64Array(nb).fill(Infinity), soc: new Float64Array(nb), v: new Float64Array(nb), del: new Float64Array(nb), res: new Float64Array(nb), rs: new Float64Array(nb), rn: new Float64Array(nb) };
     let bi = 0;
     const log = [], trace = [[], []], rx = { t: [], rssi: [], snr: [], reading: sens.map(() => []), truth: sens.map(() => []) };
     const cnt = { wakes: 0, sent: 0, attempts: 0, delivered: 0, lost: 0, resets: 0, active: 0 };
-    const ev = (code, extra) => { logCount++; if (log.length < MAX_LOG) log.push({ t, code, ...extra }); };
+    const ev = (code, extra) => { logCount++; counts[code] = (counts[code] || 0) + 1; if (log.length < MAX_LOG) log.push({ t, code, ...extra }); };
     const closeBin = () => { bins.soc[bi] = soc(); bins.v[bi] = voc(soc()); bi++; };
     /** a segment of dur s at I mA; false when the loaded voltage is below the brown-out level (nothing is drawn: the reset follows) */
     function seg(dur, I, checkBor) {
@@ -9043,7 +9044,7 @@ function reportedView() {
       if (wakeAt < t) { if (!overrun) ev('overrun'); overrun = true; wakeAt = t; }
     }
     while (bi < nb) closeBin();
-    return { T, t, q, dead, tDead, vMin, log, logCount, trace, rx, cnt, bins, W };
+    return { T, t, q, dead, tDead, vMin, log, logCount, counts, trace, rx, cnt, bins, W };
   }
 
   function results(k, r) {
@@ -9072,7 +9073,7 @@ function reportedView() {
       rssi: Array.from(r.bins.rs, (x, i) => (r.bins.rn[i] ? x / r.bins.rn[i] : NaN)),
       rxT: r.rx.t, traceT: r.trace[0], traceI: r.trace[1], eventT: r.log.map(e => e.t), eventCode: r.log.map(e => EVENT_CODES[e.code]),
     };
-    return { scalars: s, perSensor, series, readings: r.rx.reading, truth: r.rx.truth, log: r.log, logCount: r.logCount, sensors: k.sens.map(x => x.id) };
+    return { scalars: s, perSensor, series, readings: r.rx.reading, truth: r.rx.truth, log: r.log, logCount: r.logCount, counts: r.counts, sensors: k.sens.map(x => x.id) };
   }
   const thin = (a, n) => { if (a.length <= n) return Array.from(a); const kk = (a.length - 1) / (n - 1), out = []; for (let i = 0; i < n; i++) out.push(a[Math.round(i * kk)]); return out; };
 
@@ -9107,7 +9108,7 @@ function reportedView() {
         for (let i = 0; i < vv.length; i++) { mn = Math.min(mn, vv[i]); mx = Math.max(mx, vv[i]); if (i % 2) area += vv[i] * (tt[i] - tt[i - 1]); }
         return { kind: 'scope', unit: 'A', t: thin(tt, MAX_POINTS), v: thin(vv, MAX_POINTS), stats: { pp: mx - mn, mean: tt.length ? area / (t1 - t0) : NaN, min: mn, max: mx, freq: r.scalars.wakes > 1 ? 1 / compile(JSON.parse(JSON.stringify(devc)), faults).S.period : NaN } };
       }
-      if (probe.kind === 'log') { const r = run(); return { kind: 'log', events: r.log.slice(), count: r.logCount }; }
+      if (probe.kind === 'log') { const r = run(); return { kind: 'log', events: r.log.slice(), count: r.logCount, counts: { ...r.counts } }; }   // counts: the whole run's, per code (events: the first limits.log)
       if (probe.kind === 'rssi') { const r = run(); return { kind: 'rssi', value: r.scalars.rssiMean, n: r.scalars.delivered }; }
       throw fail('probe');
     }

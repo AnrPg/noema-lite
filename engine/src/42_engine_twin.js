@@ -256,13 +256,13 @@
     const trFrom = o && o.traceFrom !== undefined ? o.traceFrom : 0, trTo = o && o.traceTo !== undefined ? o.traceTo : k.D.sim.trace;
     const rRadio = mulberry32(hash32('radio', seed)), rSens = sens.map(s => mulberry32(hash32('sensor:' + s.id, seed)));
     const voc = soc => interp(B.curve, Math.max(0, soc)) * B.cells;
-    let t = 0, q = 0, events = 0, dead = false, tDead = NaN, vMin = Infinity, logCount = 0, overrun = false;
+    let t = 0, q = 0, events = 0, dead = false, tDead = NaN, vMin = Infinity, logCount = 0, overrun = false; const counts = { reset: 0, lost: 0, overrun: 0, dead: 0 };
     const soc = () => B.soc0 - q / B.capacity;
     const bins = { q: new Float64Array(nb), vload: new Float64Array(nb).fill(Infinity), soc: new Float64Array(nb), v: new Float64Array(nb), del: new Float64Array(nb), res: new Float64Array(nb), rs: new Float64Array(nb), rn: new Float64Array(nb) };
     let bi = 0;
     const log = [], trace = [[], []], rx = { t: [], rssi: [], snr: [], reading: sens.map(() => []), truth: sens.map(() => []) };
     const cnt = { wakes: 0, sent: 0, attempts: 0, delivered: 0, lost: 0, resets: 0, active: 0 };
-    const ev = (code, extra) => { logCount++; if (log.length < MAX_LOG) log.push({ t, code, ...extra }); };
+    const ev = (code, extra) => { logCount++; counts[code] = (counts[code] || 0) + 1; if (log.length < MAX_LOG) log.push({ t, code, ...extra }); };
     const closeBin = () => { bins.soc[bi] = soc(); bins.v[bi] = voc(soc()); bi++; };
     /** a segment of dur s at I mA; false when the loaded voltage is below the brown-out level (nothing is drawn: the reset follows) */
     function seg(dur, I, checkBor) {
@@ -334,7 +334,7 @@
       if (wakeAt < t) { if (!overrun) ev('overrun'); overrun = true; wakeAt = t; }
     }
     while (bi < nb) closeBin();
-    return { T, t, q, dead, tDead, vMin, log, logCount, trace, rx, cnt, bins, W };
+    return { T, t, q, dead, tDead, vMin, log, logCount, counts, trace, rx, cnt, bins, W };
   }
 
   function results(k, r) {
@@ -363,7 +363,7 @@
       rssi: Array.from(r.bins.rs, (x, i) => (r.bins.rn[i] ? x / r.bins.rn[i] : NaN)),
       rxT: r.rx.t, traceT: r.trace[0], traceI: r.trace[1], eventT: r.log.map(e => e.t), eventCode: r.log.map(e => EVENT_CODES[e.code]),
     };
-    return { scalars: s, perSensor, series, readings: r.rx.reading, truth: r.rx.truth, log: r.log, logCount: r.logCount, sensors: k.sens.map(x => x.id) };
+    return { scalars: s, perSensor, series, readings: r.rx.reading, truth: r.rx.truth, log: r.log, logCount: r.logCount, counts: r.counts, sensors: k.sens.map(x => x.id) };
   }
   const thin = (a, n) => { if (a.length <= n) return Array.from(a); const kk = (a.length - 1) / (n - 1), out = []; for (let i = 0; i < n; i++) out.push(a[Math.round(i * kk)]); return out; };
 
@@ -398,7 +398,7 @@
         for (let i = 0; i < vv.length; i++) { mn = Math.min(mn, vv[i]); mx = Math.max(mx, vv[i]); if (i % 2) area += vv[i] * (tt[i] - tt[i - 1]); }
         return { kind: 'scope', unit: 'A', t: thin(tt, MAX_POINTS), v: thin(vv, MAX_POINTS), stats: { pp: mx - mn, mean: tt.length ? area / (t1 - t0) : NaN, min: mn, max: mx, freq: r.scalars.wakes > 1 ? 1 / compile(JSON.parse(JSON.stringify(devc)), faults).S.period : NaN } };
       }
-      if (probe.kind === 'log') { const r = run(); return { kind: 'log', events: r.log.slice(), count: r.logCount }; }
+      if (probe.kind === 'log') { const r = run(); return { kind: 'log', events: r.log.slice(), count: r.logCount, counts: { ...r.counts } }; }   // counts: the whole run's, per code (events: the first limits.log)
       if (probe.kind === 'rssi') { const r = run(); return { kind: 'rssi', value: r.scalars.rssiMean, n: r.scalars.delivered }; }
       throw fail('probe');
     }

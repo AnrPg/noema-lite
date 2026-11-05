@@ -103,6 +103,19 @@ ok(E.checkPack(pack(false)).errors.length === 0 && pyP.block.length === 0, 'a pa
 ok(E.checkPack(pack(true)).errors.some(m => /sim-embed/.test(m)) && pyP.sim.some(m => /sim-embed/.test(m)), 'a sim exercise on an embed is refused (explore only), in JS and Python');
 ok(cp.spawnSync('python3', ['-I', path.join(ROOT, 'tools', 'embed_check.py'), path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'noema-embed-')), 'x.json')], { encoding: 'utf8' }).status !== 0, 'embed_check.py: a missing file fails');
 
+{ // the folder form: activities/activities.json names no strings; each language's title is in activities/<id>/strings.<locale>.json
+  const d = fs.mkdtempSync(path.join(os.tmpdir(), 'noema-embed-reg-')), a = good(), st = a.strings; delete a.strings;
+  fs.mkdirSync(path.join(d, 'activities', a.id), { recursive: true });
+  fs.writeFileSync(path.join(d, 'activities', 'activities.json'), JSON.stringify({ format: 'noema.activities/v1', items: [a] }));
+  for (const [l, t] of Object.entries(st)) fs.writeFileSync(path.join(d, 'activities', a.id, `strings.${l}.json`), JSON.stringify(t));
+  const run = f => cp.spawnSync('python3', ['-I', path.join(ROOT, 'tools', 'embed_check.py'), f], { encoding: 'utf8' });
+  const r1 = run(path.join(d, 'activities', 'activities.json'));
+  fs.writeFileSync(path.join(d, 'pack.json'), JSON.stringify({ activities: { format: 'noema.activities/v1', items: [a] } }));
+  const r2 = run(path.join(d, 'pack.json'));
+  ok(r1.status === 0 && /no errors/.test(r1.stdout) && r2.status === 1 && /strings-title/.test(r2.stdout),
+    'embed_check.py on activities/activities.json reads the strings beside it (a good embed passes); a built pack without strings is still refused ' + JSON.stringify([r1.stdout, r2.stdout]));
+}
+
 console.log('— registration (opt-in per deployment)');
 const reg = cfg => { const got = []; const ctx = { ACT: { registerRuntime: d => got.push(d.id) }, window: { NOEMA_CONFIG: cfg }, document: {}, console, Promise, setTimeout, clearTimeout, URL }; vm.createContext(ctx); vm.runInContext(SRC, ctx); return got; };
 ok(reg(undefined).length === 0 && reg({ activities: { 'external-embed@1': 'yes' } }).length === 0, 'not switched on: the runtime does not register (packs that need it show their fallback)');

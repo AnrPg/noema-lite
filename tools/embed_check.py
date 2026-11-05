@@ -3,6 +3,7 @@
 The same rules as engine/src/45_activity_embed.js (NoemaEmbed.check / checkPack); tests/activities_embed.js keeps them equal.
 
   python3 tools/embed_check.py <pack.json | activities/activities.json>     → the errors (exit 1) and warnings
+  (activities.json: each item's strings are read from activities/<id>/strings.<locale>.json beside it)
 
   check_item(item, providers=None) -> (errors, warnings)   each message "code: what"
   check_pack(pack, providers=None) -> (errors, warnings)   every embed item + the sim exercises that would grade one (refused)
@@ -125,7 +126,18 @@ def main(argv):
         print(__doc__); return 2
     with open(argv[1], encoding="utf-8") as f:
         doc = json.load(f)
-    pack = doc if "activities" in doc or "chapters" in doc else {"activities": doc}
+    if "activities" in doc or "chapters" in doc: pack = doc   # a built pack: its strings are inline
+    else:   # activities/activities.json of a subject folder: each item's string tables are activities/<id>/strings.<locale>.json
+        pack = {"activities": doc}
+        here = os.path.dirname(os.path.abspath(argv[1]))
+        for a in (doc.get("items") if isinstance(doc, dict) and isinstance(doc.get("items"), list) else []):
+            if not isinstance(a, dict) or a.get("runtime") != RUNTIME or "strings" in a or not re.fullmatch(r"[a-z0-9][a-z0-9-]{1,60}", str(a.get("id") or "")): continue
+            d, st = os.path.join(here, a["id"]), {}
+            for f in sorted(os.listdir(d)) if os.path.isdir(d) else []:
+                m = re.fullmatch(r"strings\.([A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,4}){0,2})\.json", f)
+                if m:
+                    with open(os.path.join(d, f), encoding="utf-8") as g: st[m.group(1)] = json.load(g)
+            if st: a["strings"] = st
     E, W = check_pack(pack)
     for m in E: print("✗ " + m)
     for m in W: print("⚠ " + m)

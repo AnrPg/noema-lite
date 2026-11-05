@@ -113,6 +113,11 @@ const lossy = () => ({ battery: { capacity: 2000 }, power: { sleep: 0.005, activ
   const sc = s.measure({ kind: 'scope', tStart: 0, tEnd: 900 });
   ok(sc.kind === 'scope' && Math.abs(sc.stats.max - 0.040) < 1e-12 && Math.abs(sc.stats.min - 5e-6) < 1e-12 && Math.abs(sc.stats.freq - 1 / 300) < 1e-12, 'measure scope: the current over 15 minutes, 5 µA to 40 mA, a wake every 300 s');
   ok(s.measure({ kind: 'log' }).kind === 'log' && Math.abs(s.measure({ kind: 'rssi' }).value - a.scalars.rssiMean) < 1e-12 && throwsCode(() => s.measure({ kind: 'Z' }), 'probe'), 'measure log / rssi; an unknown probe → "probe"');
+  { // the log keeps at most limits.log entries, but its counts are the whole run's (the bench's readout and the saved measurement)
+    const far = { ...d, radio: { ...d.radio, d: 30000 }, schedule: { ...d.schedule, period: 60, ack: true } }, m = T.create(far, { seed: 7 }).measure({ kind: 'log' });
+    const c = m.counts || {}, total = ['reset', 'lost', 'overrun', 'dead'].reduce((a, k) => a + (c[k] || 0), 0);
+    ok(m.count > T.limits.log && m.events.length === T.limits.log && total === m.count && c.lost > T.limits.log,
+      `measure log: counts per code over the whole run (${JSON.stringify(c)}, ${m.count} events), the list capped at ${T.limits.log}`); }
   const spec = { model: { device: d, bindings: [{ field: 'schedule.period', expr: 'period' }, { field: 'radio.sf', expr: 'sf' }] },
     outputs: [{ id: 'life', kind: 'scalar', of: 'lifeSim' }, { id: 'delivered', kind: 'scalar' }, { id: 'err', kind: 'scalar', of: 'readingErr', sensor: 'temp' }, { id: 'soc', kind: 'series' }, { id: 'rd', kind: 'series', of: 'reading' }] };
   ok(T.engine.check(spec).length === 0, 'a good spec passes engine.check');
@@ -158,6 +163,7 @@ const lossy = () => ({ battery: { capacity: 2000 }, power: { sleep: 0.005, activ
     { ...d, sensors: 'temp' }, { ...d, sensors: [{ id: 'a' }, { id: 'a' }, { base: 1 }, 5] }, { ...d, sensors: Array.from({ length: 9 }, (_, i) => ({ id: 's' + i })) },
     { ...d, radio: { tech: 'wifi' } }, { ...d, radio: { tech: 'lora', bw: 1e6 } }, { ...d, radio: { tech: 'ble', bw: 1e6, sf: 6, payload: 256 } },
     { ...d, brownout: { v: -1 } }, { ...d, sim: { duration: 365 * DAY, maxEvents: 1000 } }, { ...d, sim: { duration: 10, samples: 1, maxEvents: 6e6 } }, { ...d, colour: 'red', meta: {} },
+    { ...d, schedule: { period: 0.5 }, sim: { duration: 1.7e308 } }, { ...d, schedule: { period: 1 }, sim: { duration: 1e308 } },   // an endless estimate: over the budget, never a crash
   ];
   const faults = [
     [], 'x', [5], [{ kind: 'melt' }], [{ kind: 'sensor-stuck' }], [{ kind: 'sensor-stuck', sensor: 'hum', value: 'x' }], [{ kind: 'sensor-drift', sensor: 'temp', rate: 0.1, at: -1 }],
