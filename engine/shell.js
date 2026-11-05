@@ -78,7 +78,7 @@ window.NoemaShell = (() => {
 
   /* ---------- the engine of the open subject (engine/src/40_views.js calls attachEngine) ---------- */
   let ENGINE = null;
-  const ENGINE_ROUTES = new Set(['subject', 'ch', 's', 'practice', 'run', 'srun', 'boss', 'lightning', 'cards', 'drills', 'drill', 'mistakes', 'new', 'ex', 'author']);   // #/author: the activity author (its preview is the engine's sim-spec@1 runtime)
+  const ENGINE_ROUTES = new Set(['subject', 'ch', 's', 'practice', 'run', 'srun', 'boss', 'lightning', 'cards', 'drills', 'drill', 'mistakes', 'new', 'ex', 'author', 'engines']);   // #/author: the activity author (its preview is the engine's sim-spec@1 runtime); #/engines: the engines of activities and requests for new ones
   const subjectId = () => N()?.subject?.id || null;
   /** Open a subject (loads its pack: the page reloads) or, when it is open already, go to the place. */
   function open(subj, hash = '#/subject') {

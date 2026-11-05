@@ -129,6 +129,35 @@ function start({ port = 54321, staticDir = null, configOverride = null, maxObjec
     if (M === 'PATCH') { if (!isAdm(uid)) return repr(req, res, 200, []); for (const r of vis) Object.assign(r, Object.fromEntries(Object.entries(data).filter(([k]) => ['status', 'admin_note', 'fixed_in'].includes(k))), { updated_at: now() }); return repr(req, res, 200, vis); }
     if (M === 'DELETE') { if (isAdm(uid)) for (const r of vis) ereps.splice(ereps.indexOf(r), 1); return json(res, 204); }
   }
+  /* ---------- ⚙ requests for new engines (cloud/supabase.sql §16): the requester sends and sees their own; the admins see, answer
+     (status, engine_id, answer, fixed_in) and delete every one. The guard: who, the status, the answer; 20 a day. ---------- */
+  const ereqs = [];
+  function engineRequests(req, res, p, u, uid, data) {
+    if (p !== '/rest/v1/noema_engine_requests') return;
+    const M = req.method, sp = [...u.searchParams.entries()];
+    if (!uid) return json(res, 401, { message: 'JWT required' });
+    const st = /^in\.\((.*)\)$/.exec(u.searchParams.get('status') || '');
+    const vis = filt(ereqs.filter(r => r.requester === uid || isAdm(uid)), sp.filter(([k]) => k !== 'status' || !st)).filter(r => !st || st[1].split(',').includes(r.status));
+    const cols = (u.searchParams.get('select') || '*').split(','), pick = r => cols.includes('*') ? r : Object.fromEntries(cols.map(c => [c, r[c]]));
+    if (M === 'GET') return json(res, 200, vis.slice().sort((a, b) => a.created_at < b.created_at ? 1 : -1).slice(0, +(u.searchParams.get('limit') || 1000)).map(pick));
+    if (M === 'POST') {
+      const out = [];
+      for (const r of data) {
+        if ((r.requester && r.requester !== uid) || !r.title || !r.what || String(r.title).length > 120 || String(r.what).length > 4000 || !['teaching', 'quantitative', 'research'].includes(r.accuracy || 'teaching') || !['app', 'claude'].includes(r.via || 'app')) return json(res, 400, { code: '23514', message: 'violates check constraint' });
+        if (ereqs.filter(x => x.requester === uid && Date.now() - Date.parse(x.created_at) < 864e5).length >= 20) return json(res, 400, { code: 'P0001', message: 'engine request limit: 20 a day' });
+        const row = { ...r, id: crypto.randomUUID(), requester: uid, requester_name: users[uid].meta?.name || null, accuracy: r.accuracy || 'teaching', via: r.via || 'app', suggested: r.suggested || [], status: 'new', engine_id: null, answer: null, fixed_in: null, created_at: now(), updated_at: now() };
+        ereqs.push(row); out.push(row);
+      }
+      return repr(req, res, 201, out);
+    }
+    if (M === 'PATCH') {
+      if (!isAdm(uid)) return repr(req, res, 200, []);
+      if (data.status && !['new', 'seen', 'planned', 'building', 'available', 'declined', 'duplicate'].includes(data.status)) return json(res, 400, { code: '23514', message: 'violates check constraint' });
+      for (const r of vis) Object.assign(r, Object.fromEntries(Object.entries(data).filter(([k]) => ['status', 'engine_id', 'answer', 'fixed_in'].includes(k))), { updated_at: now() });
+      return repr(req, res, 200, vis);
+    }
+    if (M === 'DELETE') { if (isAdm(uid)) for (const r of vis) ereqs.splice(ereqs.indexOf(r), 1); return json(res, 204); }
+  }
   function sharedCurricula(req, res, p, u, uid, data, buf) {
     const sp = [...u.searchParams.entries()], M = req.method, em = emailOf(uid);
     if (p === '/rest/v1/noema_curricula_shared') {
@@ -206,6 +235,7 @@ function start({ port = 54321, staticDir = null, configOverride = null, maxObjec
       sharedCurricula(req, res, p, u, uid, data, buf); if (res.headersSent) return;
       vault(req, res, p, u, uid, data, buf); if (res.headersSent) return;
       reports(req, res, p, u, uid, data); if (res.headersSent) return;
+      engineRequests(req, res, p, u, uid, data); if (res.headersSent) return;
       so.handle(req, res, p, u, uid, data, buf); if (res.headersSent) return;
       // ---- anonymous reads: public packs + public bucket
       if (p === '/rest/v1/noema_public_packs' && req.method === 'GET') { const o = q('owner'); return json(res, 200, pubPacks.filter(r => !o || r.owner === o).slice().sort((a, b) => a.updated_at < b.updated_at ? 1 : -1)); }
@@ -332,7 +362,7 @@ function start({ port = 54321, staticDir = null, configOverride = null, maxObjec
       json(res, 404, { message: 'not found ' + p });
     });
   });
-  server.log = []; server.state = { users, kv, snaps, files, profiles, convs: {}, authz: {}, consents: [], callbacks: [], pubFiles, shrFiles, pubPacks, shares, pages, curs, mems, steps, curFiles, stepWrites: 0, vfiles, vrat, vrep, vobj, vfields, social: so.state, ereps, admins };
+  server.log = []; server.state = { users, kv, snaps, files, profiles, convs: {}, authz: {}, consents: [], callbacks: [], pubFiles, shrFiles, pubPacks, shares, pages, curs, mems, steps, curFiles, stepWrites: 0, vfiles, vrat, vrep, vobj, vfields, social: so.state, ereps, ereqs, admins };
   return new Promise(r => server.listen(port, () => r(server)));
 }
 module.exports = { start };

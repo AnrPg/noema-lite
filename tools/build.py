@@ -291,7 +291,7 @@ def build_site(metas):
             dst = os.path.join(out, f['path']); os.makedirs(os.path.dirname(dst), exist_ok=True); shutil.copy(os.path.join(ROOT, f['path']), dst)
         for f in m.get('media') or []:
             dst = os.path.join(out, f); os.makedirs(os.path.dirname(dst), exist_ok=True); shutil.copy(os.path.join(ROOT, f), dst)
-    for f in ('engine.js', 'engine.css', 'loader.js', 'i18n.js', 'themes.js', 'art.js', 'shell.js', 'react.js', 'convos.js', 'cloud.js', 'claude.js', 'packcheck.js', 'llm.js', 'mt.js', 'wordlink.js', 'bridge.js', 'curriculum.js', 'curjobs.js', 'curshare.js', 'imglib.js', 'curimport.js', 'sourceplan.js', 'vault.js', 'social.js', 'packgen.js', 'curmap.js', 'search.js', 'catalog.js', 'report.js', 'authoring.js', 'srcfiles.js', 'viewer.js', 'schemaform.js', 'activity_author_schemas.js', 'activity_author.js', 'activity_author.css'): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))   # (the activity author's four load on #/author)
+    for f in ('engine.js', 'engine.css', 'loader.js', 'i18n.js', 'themes.js', 'art.js', 'shell.js', 'react.js', 'convos.js', 'cloud.js', 'claude.js', 'packcheck.js', 'llm.js', 'mt.js', 'wordlink.js', 'bridge.js', 'curriculum.js', 'curjobs.js', 'curshare.js', 'imglib.js', 'curimport.js', 'sourceplan.js', 'vault.js', 'social.js', 'packgen.js', 'curmap.js', 'search.js', 'catalog.js', 'report.js', 'enginereq.js', 'authoring.js', 'srcfiles.js', 'viewer.js', 'schemaform.js', 'activity_author_schemas.js', 'activity_author.js', 'activity_author.css'): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))   # (the activity author's four load on #/author)
     os.makedirs(os.path.join(out, 'engine', 'src'), exist_ok=True); [shutil.copy(os.path.join(ENGINE, 'src', f), os.path.join(out, 'engine', 'src', f)) for f in ('35_simexpr.js', '36_engine_circuit.js', *P6_ENGINES, *LIB_ENGINES)]   # NoemaExpr, NoemaCircuit and the P6 engines beside packcheck.js: the shell checks sim-spec@1 packs before any subject (and engine.js) is open
     for f in ('43_xapi.js', '44_activity_wasm.js', '45_activity_embed.js'): shutil.copy(os.path.join(ENGINE, 'src', f), os.path.join(out, 'engine', 'src', f))   # NoemaXAPI for the shell's ⋮; NoemaWasm and NoemaEmbed beside packcheck.js (wasm-module@1, external-embed@1)
     shutil.copy(os.path.join(ENGINE, 'pyodide-sw.js'), os.path.join(out, 'engine', 'pyodide-sw.js'))   # py-module@1: the service worker that keeps Python offline (its files: tools/fetch_pyodide.py after this)
@@ -420,7 +420,7 @@ def public_config():
     return {'siteUrl': g('siteUrl'), 'supabaseUrl': g('supabaseUrl'), 'supabaseKey': g('supabaseKey')}
 
 # the app's own code the connector runs (pack checks; curriculum tasks, checks and how answers change a curriculum)
-MCP_ENGINE = ['engine/report.js', 'engine/src/38_activity_h5p.js', 'engine/src/35_simexpr.js', 'engine/src/36_engine_circuit.js', *('engine/src/' + f for f in P6_ENGINES), *('engine/src/' + f for f in LIB_ENGINES), 'engine/packcheck.js', 'engine/src/44_activity_wasm.js', 'engine/src/45_activity_embed.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js', 'engine/langcore.js', 'engine/curimport.js', 'engine/sourceplan.js']
+MCP_ENGINE = ['engine/report.js', 'engine/enginereq.js', 'engine/src/38_activity_h5p.js', 'engine/src/35_simexpr.js', 'engine/src/36_engine_circuit.js', *('engine/src/' + f for f in P6_ENGINES), *('engine/src/' + f for f in LIB_ENGINES), 'engine/packcheck.js', 'engine/src/44_activity_wasm.js', 'engine/src/45_activity_embed.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js', 'engine/langcore.js', 'engine/curimport.js', 'engine/sourceplan.js']
 MCP_PRELUDE = 'globalThis.window = globalThis;\n'
 
 def build_stamp():
@@ -542,6 +542,7 @@ def build_bundle(metas):
 <script>{esc(rd("engine/search.js"))}</script>
 <script>{esc(rd("engine/vendor/modern-screenshot.umd.js"))}</script>
 <script>{esc(rd("engine/report.js"))}</script>
+<script>{esc(rd("engine/enginereq.js"))}</script>
 <script>{esc(rd("engine/shell.js"))}</script>
 <script>{esc(rd("engine/react.js"))}</script>
 <script>{esc(rd("engine/authoring.js"))}</script>

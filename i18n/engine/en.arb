@@ -6417,5 +6417,429 @@
   "engine.py.mayEvict": "The browser may remove these files when space runs low; they are then downloaded again the next time.",
   "@engine.py.mayEvict": {
     "description": "In the details tooltip: the browser may delete the files when it needs space."
+  },
+  "engine.act.sim.scene": "Drawing",
+  "@engine.act.sim.scene": {
+    "description": "Accessible name of a drawing computed by a simulation (a construction, a map, a network, a pattern…); the drawing's title, if any, is read before it."
+  },
+  "engine.act.sim.sound": "Sound",
+  "@engine.act.sim.sound": {
+    "description": "Accessible name of a sound computed by a simulation (notes, a chord, a scale); its title, if any, is read before it."
+  },
+  "engine.act.sim.play": "Play",
+  "@engine.act.sim.play": {
+    "description": "Button that plays a sound computed by a simulation (never plays by itself)."
+  },
+  "engine.act.sim.stop": "Stop",
+  "@engine.act.sim.stop": {
+    "description": "Button that stops the sound of a simulation while it plays."
+  },
+  "engine.engines.menu": "Engines of activities",
+  "@engine.engines.menu": {
+    "description": "Item of the subject's ⋮ menu that opens the page listing the engines interactive activities compute with, where a new engine can be requested."
+  },
+  "engine.engines.menuSub": "What simulations can compute · ask for a new one",
+  "@engine.engines.menuSub": {
+    "description": "Second line of that menu item."
+  },
+  "engine.engines.title": "Engines of activities",
+  "@engine.engines.title": {
+    "description": "Title of the page that lists the engines (computing models) interactive activities and simulations use."
+  },
+  "engine.engines.intro": "Interactive activities compute with these engines. Look here first: a general engine usually fits. If nothing does, ask for a new one.",
+  "@engine.engines.intro": {
+    "description": "Short introduction at the top of the engines page."
+  },
+  "engine.engines.unavailable": "The list of engines is not available here.",
+  "@engine.engines.unavailable": {
+    "description": "Shown when the engines page cannot load its catalogue."
+  },
+  "engine.engines.group.math": "Mathematics",
+  "@engine.engines.group.math": {
+    "description": "Heading of the engines for mathematics (formulas, differential equations, probability, networks, geometry)."
+  },
+  "engine.engines.group.life": "Life sciences and medicine",
+  "@engine.engines.group.life": {
+    "description": "Heading of the engines for genetics, sequences, physiology, clinical reasoning and anatomy."
+  },
+  "engine.engines.group.arts": "Humanities, arts and crafts",
+  "@engine.engines.group.arts": {
+    "description": "Heading of the engines for timelines, music, maps, texts and handcrafts."
+  },
+  "engine.engines.free": "Free form",
+  "@engine.engines.free": {
+    "description": "Heading of the ways an author writes their own activity when no engine fits (a mini-app, Python)."
+  },
+  "engine.engines.freeNote": "When no engine fits, an author can write a small app or a Python program.",
+  "@engine.engines.freeNote": {
+    "description": "Note under the free-form heading."
+  },
+  "engine.engines.plugins": "Field plugins",
+  "@engine.engines.plugins": {
+    "description": "Heading of exact models for one field (circuits, heat, control, radio, devices)."
+  },
+  "engine.engines.pluginsNote": "Exact models of one field, with benches that hide a fault to find.",
+  "@engine.engines.pluginsNote": {
+    "description": "Note under the field plugins heading."
+  },
+  "engine.engines.request": "Request a new engine",
+  "@engine.engines.request": {
+    "description": "Button and dialog title: ask for a new engine to be built from a description."
+  },
+  "engine.engines.requestIntro": "Describe what should be simulated. The more precise, the better the engine. Claude and the app's team read every request.",
+  "@engine.engines.requestIntro": {
+    "description": "Introduction in the request dialog."
+  },
+  "engine.engines.more": "More details (optional)",
+  "@engine.engines.more": {
+    "description": "Folded section of the request dialog with the optional fields."
+  },
+  "engine.engines.f.title": "Name",
+  "@engine.engines.f.title": {
+    "description": "Field of the request dialog: a short name for the engine wanted, e.g. 'Chemical equilibrium'."
+  },
+  "engine.engines.f.what": "What should be simulated",
+  "@engine.engines.f.what": {
+    "description": "Required field: the phenomenon or model to simulate, as precisely as possible."
+  },
+  "engine.engines.f.field": "Field",
+  "@engine.engines.f.field": {
+    "description": "Optional field: the subject area (e.g. physical chemistry)."
+  },
+  "engine.engines.f.learner": "What the learner changes and sees",
+  "@engine.engines.f.learner": {
+    "description": "Optional field: the controls the learner moves and what should happen."
+  },
+  "engine.engines.f.measure": "What is measured or found",
+  "@engine.engines.f.measure": {
+    "description": "Optional field: the values to reach, the answer to find, what is graded."
+  },
+  "engine.engines.f.accuracy": "Accuracy",
+  "@engine.engines.f.accuracy": {
+    "description": "Label of the list choosing how exact the engine must be."
+  },
+  "engine.engines.f.sources": "Sources",
+  "@engine.engines.f.sources": {
+    "description": "Optional field: books, papers or standards the model should follow."
+  },
+  "engine.engines.f.examples": "Example exercises",
+  "@engine.engines.f.examples": {
+    "description": "Optional field: one or two exercises the engine should make possible."
+  },
+  "engine.engines.acc.teaching": "For understanding (the right behaviour)",
+  "@engine.engines.acc.teaching": {
+    "description": "Accuracy option: qualitatively right behaviour is enough."
+  },
+  "engine.engines.acc.quantitative": "Exact numbers (as in a course)",
+  "@engine.engines.acc.quantitative": {
+    "description": "Accuracy option: numbers a course or exam would check."
+  },
+  "engine.engines.acc.research": "Research grade",
+  "@engine.engines.acc.research": {
+    "description": "Accuracy option: as exact as current research models."
+  },
+  "engine.engines.maybe": "These may already do it:",
+  "@engine.engines.maybe": {
+    "description": "Above the engines the app suggests while the learner describes a new one."
+  },
+  "engine.engines.send": "Send",
+  "@engine.engines.send": {
+    "description": "Button that sends the request for a new engine."
+  },
+  "engine.engines.err.missing": "Please fill in “{field}”.",
+  "@engine.engines.err.missing": {
+    "description": "Error in the request dialog: a required field is empty; {field} is its name."
+  },
+  "engine.engines.err.short": "“{field}” needs at least {min, number} characters.",
+  "@engine.engines.err.short": {
+    "description": "Error: the field is too short; {min} = minimum characters."
+  },
+  "engine.engines.err.long": "“{field}” can have at most {max, number} characters.",
+  "@engine.engines.err.long": {
+    "description": "Error: the field is too long; {max} = maximum characters."
+  },
+  "engine.engines.err.value": "Please choose a value for “{field}”.",
+  "@engine.engines.err.value": {
+    "description": "Error: an invalid choice in a list."
+  },
+  "engine.engines.sent": "Request sent. You will see the answer here.",
+  "@engine.engines.sent": {
+    "description": "Toast after a request for a new engine was sent to the cloud."
+  },
+  "engine.engines.sentLocal": "Request saved on this device. Download it or copy it to send it.",
+  "@engine.engines.sentLocal": {
+    "description": "Toast after a request was saved locally (a profile without a cloud account)."
+  },
+  "engine.engines.mine": "Your requests",
+  "@engine.engines.mine": {
+    "description": "Heading of the learner's own requests for new engines."
+  },
+  "engine.engines.allRequests": "{n, plural, one {# request} other {All # requests}}",
+  "@engine.engines.allRequests": {
+    "description": "Heading for admins: every request for a new engine; {n} = how many."
+  },
+  "engine.engines.localNote": "Kept on this device only.",
+  "@engine.engines.localNote": {
+    "description": "Note under the requests of a profile without a cloud account."
+  },
+  "engine.engines.listFailed": "The requests could not be loaded.",
+  "@engine.engines.listFailed": {
+    "description": "Shown when the list of requests fails to load."
+  },
+  "engine.engines.doneBy": "Now done by {id}",
+  "@engine.engines.doneBy": {
+    "description": "Under an answered request: the engine that now does it; {id} is its code, e.g. chem@1."
+  },
+  "engine.engines.copyBrief": "Copy as a brief",
+  "@engine.engines.copyBrief": {
+    "description": "Button: copies the request as a text a developer or Claude builds from."
+  },
+  "engine.engines.copied": "Copied",
+  "@engine.engines.copied": {
+    "description": "Toast after copying the brief."
+  },
+  "engine.engines.download": "Download",
+  "@engine.engines.download": {
+    "description": "Button: downloads the request as a file."
+  },
+  "engine.engines.answer": "Answer",
+  "@engine.engines.answer": {
+    "description": "Admins only: folded section to answer a request."
+  },
+  "engine.engines.statusLabel": "Status",
+  "@engine.engines.statusLabel": {
+    "description": "Admins only: label of the status list of a request."
+  },
+  "engine.engines.engineIdLabel": "Engine that does it",
+  "@engine.engines.engineIdLabel": {
+    "description": "Admins only: the code of the engine that now does what was asked."
+  },
+  "engine.engines.answerLabel": "Note for the requester",
+  "@engine.engines.answerLabel": {
+    "description": "Admins only: a short answer the requester reads."
+  },
+  "engine.engines.fixedInLabel": "Built in (link)",
+  "@engine.engines.fixedInLabel": {
+    "description": "Admins only: where it was built, e.g. a pull request link."
+  },
+  "engine.engines.save": "Save",
+  "@engine.engines.save": {
+    "description": "Admins only: saves the answer to a request."
+  },
+  "engine.engines.saved": "Saved",
+  "@engine.engines.saved": {
+    "description": "Toast after an admin saved an answer."
+  },
+  "engine.engines.status.new": "New",
+  "@engine.engines.status.new": {
+    "description": "Status of a request: nobody has looked at it yet."
+  },
+  "engine.engines.status.seen": "Seen",
+  "@engine.engines.status.seen": {
+    "description": "Status: read by the team."
+  },
+  "engine.engines.status.planned": "Planned",
+  "@engine.engines.status.planned": {
+    "description": "Status: it will be built."
+  },
+  "engine.engines.status.building": "Being built",
+  "@engine.engines.status.building": {
+    "description": "Status: work has started."
+  },
+  "engine.engines.status.available": "Available",
+  "@engine.engines.status.available": {
+    "description": "Status: an engine now does it."
+  },
+  "engine.engines.status.declined": "Declined",
+  "@engine.engines.status.declined": {
+    "description": "Status: it will not be built (the answer says why)."
+  },
+  "engine.engines.status.duplicate": "Already asked",
+  "@engine.engines.status.duplicate": {
+    "description": "Status: the same as another request, or an existing engine already does it."
+  },
+  "engine.engines.formula.name": "Formulas",
+  "@engine.engines.formula.name": {
+    "description": "Engine name: computes values and curves from formulas."
+  },
+  "engine.engines.formula.what": "Any relation written as formulas: values, curves, sliders.",
+  "@engine.engines.formula.what": {
+    "description": "One-line description of the formulas engine."
+  },
+  "engine.engines.ode.name": "Differential equations",
+  "@engine.engines.ode.name": {
+    "description": "Engine name."
+  },
+  "engine.engines.ode.what": "Systems that change in time: growth, oscillations, epidemics, kinetics, chaos.",
+  "@engine.engines.ode.what": {
+    "description": "One-line description."
+  },
+  "engine.engines.prob.name": "Probability and statistics",
+  "@engine.engines.prob.name": {
+    "description": "Engine name."
+  },
+  "engine.engines.prob.what": "Distributions, sampling, tests and intervals, Bayes, Markov chains, simulations.",
+  "@engine.engines.prob.what": {
+    "description": "One-line description."
+  },
+  "engine.engines.graph.name": "Networks",
+  "@engine.engines.graph.name": {
+    "description": "Engine name: graphs of nodes and edges."
+  },
+  "engine.engines.graph.what": "Graphs and networks: paths, trees, flows, matchings, colourings, centrality.",
+  "@engine.engines.graph.what": {
+    "description": "One-line description."
+  },
+  "engine.engines.geom.name": "Geometry",
+  "@engine.engines.geom.name": {
+    "description": "Engine name."
+  },
+  "engine.engines.geom.what": "Constructions, triangle centres, conics, transformations, loci, measures.",
+  "@engine.engines.geom.what": {
+    "description": "One-line description."
+  },
+  "engine.engines.genetics.name": "Genetics",
+  "@engine.engines.genetics.name": {
+    "description": "Engine name."
+  },
+  "engine.engines.genetics.what": "Crosses, pedigrees, linkage, populations: drift, selection, mutation, migration.",
+  "@engine.engines.genetics.what": {
+    "description": "One-line description."
+  },
+  "engine.engines.seq.name": "Sequences",
+  "@engine.engines.seq.name": {
+    "description": "Engine name: DNA, RNA and protein sequences."
+  },
+  "engine.engines.seq.what": "DNA, RNA and proteins: translation, reading frames, alignment, primers, restriction maps.",
+  "@engine.engines.seq.what": {
+    "description": "One-line description."
+  },
+  "engine.engines.med.name": "Physiology and pharmacology",
+  "@engine.engines.med.name": {
+    "description": "Engine name."
+  },
+  "engine.engines.med.what": "The body as a system: circulation, breathing, acid–base, kidneys, drug levels and dosing.",
+  "@engine.engines.med.what": {
+    "description": "One-line description."
+  },
+  "engine.engines.clinic.name": "Clinical reasoning",
+  "@engine.engines.clinic.name": {
+    "description": "Engine name: virtual patients and diagnosis."
+  },
+  "engine.engines.clinic.what": "Virtual patients: history, examination, tests, differential diagnosis, probabilities, decisions.",
+  "@engine.engines.clinic.what": {
+    "description": "One-line description."
+  },
+  "engine.engines.anatomy.name": "Anatomy",
+  "@engine.engines.anatomy.name": {
+    "description": "Engine name."
+  },
+  "engine.engines.anatomy.what": "Structures and their links: nerves, vessels, muscles, joints, lesions and what they cause.",
+  "@engine.engines.anatomy.what": {
+    "description": "One-line description."
+  },
+  "engine.engines.timeline.name": "Timelines",
+  "@engine.engines.timeline.name": {
+    "description": "Engine name: chronology."
+  },
+  "engine.engines.timeline.what": "Events and periods in any calendar: Gregorian, Julian, Hebrew, Islamic, Persian, Chinese, Maya and more.",
+  "@engine.engines.timeline.what": {
+    "description": "One-line description."
+  },
+  "engine.engines.music.name": "Music",
+  "@engine.engines.music.name": {
+    "description": "Engine name."
+  },
+  "engine.engines.music.what": "Notes, intervals, scales, chords, tunings, rhythm and the sound of the harmonic series.",
+  "@engine.engines.music.what": {
+    "description": "One-line description."
+  },
+  "engine.engines.map.name": "Maps",
+  "@engine.engines.map.name": {
+    "description": "Engine name."
+  },
+  "engine.engines.map.what": "Projections, distances and routes on the globe, journeys and territories in time.",
+  "@engine.engines.map.what": {
+    "description": "One-line description."
+  },
+  "engine.engines.text.name": "Texts",
+  "@engine.engines.text.name": {
+    "description": "Engine name: analysis of texts and verse."
+  },
+  "engine.engines.text.what": "Word counts, concordances, style and authorship, metre and scansion of verse.",
+  "@engine.engines.text.what": {
+    "description": "One-line description."
+  },
+  "engine.engines.craft.name": "Handcrafts",
+  "@engine.engines.craft.name": {
+    "description": "Engine name."
+  },
+  "engine.engines.craft.what": "Knitting, weaving, quilting, embroidery, sewing, woodwork, pottery, metal and leather: the numbers and the patterns.",
+  "@engine.engines.craft.what": {
+    "description": "One-line description."
+  },
+  "engine.engines.htmlapp.name": "Mini-app",
+  "@engine.engines.htmlapp.name": {
+    "description": "Name of the free way: a small web app written by the pack's author."
+  },
+  "engine.engines.htmlapp.what": "A small app written for this activity: games, puzzles, anything an engine cannot do.",
+  "@engine.engines.htmlapp.what": {
+    "description": "One-line description."
+  },
+  "engine.engines.python.name": "Python",
+  "@engine.engines.python.name": {
+    "description": "Name of the free way: a Python program run in the browser."
+  },
+  "engine.engines.python.what": "A Python program run in the browser, with NumPy and SciPy.",
+  "@engine.engines.python.what": {
+    "description": "One-line description."
+  },
+  "engine.engines.circuit.name": "Electronic circuits",
+  "@engine.engines.circuit.name": {
+    "description": "Field plugin name."
+  },
+  "engine.engines.circuit.what": "Exact circuit simulation with instruments and hidden faults.",
+  "@engine.engines.circuit.what": {
+    "description": "One-line description."
+  },
+  "engine.engines.thermal.name": "Heat",
+  "@engine.engines.thermal.name": {
+    "description": "Field plugin name."
+  },
+  "engine.engines.thermal.what": "Heat flow, heatsinks and thermostats.",
+  "@engine.engines.thermal.what": {
+    "description": "One-line description."
+  },
+  "engine.engines.pid.name": "Control",
+  "@engine.engines.pid.name": {
+    "description": "Field plugin name: feedback control."
+  },
+  "engine.engines.pid.what": "Feedback loops and PID controllers to tune.",
+  "@engine.engines.pid.what": {
+    "description": "One-line description."
+  },
+  "engine.engines.rf.name": "Radio links",
+  "@engine.engines.rf.name": {
+    "description": "Field plugin name."
+  },
+  "engine.engines.rf.what": "Antennas, path loss and link budgets.",
+  "@engine.engines.rf.what": {
+    "description": "One-line description."
+  },
+  "engine.engines.twin.name": "Device twin",
+  "@engine.engines.twin.name": {
+    "description": "Field plugin name: a simulated embedded device."
+  },
+  "engine.engines.twin.what": "A battery-powered sensor device: energy, timing, faults.",
+  "@engine.engines.twin.what": {
+    "description": "One-line description."
+  },
+  "engine.engines.wasm.name": "Compiled code",
+  "@engine.engines.wasm.name": {
+    "description": "Field plugin name: WebAssembly modules."
+  },
+  "engine.engines.wasm.what": "Fast simulations compiled to WebAssembly.",
+  "@engine.engines.wasm.what": {
+    "description": "One-line description."
   }
 }

@@ -52,7 +52,7 @@ ok(typeof NoemaExpr.source === 'function' && /noemaExprModule/.test(NoemaExpr.so
 
 // ---- 4. the catalogue ----
 const ids = K.CATALOG.map(e => e.id);
-ok(new Set(ids).size === ids.length && ['ode@1', 'prob@1', 'graph@1', 'geom@1', 'genetics@1', 'seq@1', 'med@1', 'anatomy@1', 'timeline@1', 'music@1', 'map@1', 'text@1', 'craft@1'].every(i => K.LIBRARY.includes(i)), 'the catalogue lists every library engine once');
+ok(new Set(ids).size === ids.length && ['ode@1', 'prob@1', 'graph@1', 'geom@1', 'genetics@1', 'seq@1', 'med@1', 'clinic@1', 'anatomy@1', 'timeline@1', 'music@1', 'map@1', 'text@1', 'craft@1'].every(i => K.LIBRARY.includes(i)), 'the catalogue lists every library engine once');
 const libJS = Object.keys(PC.ACTIVITY_RULES.LIB).sort();
 ok(JSON.stringify(libJS) === JSON.stringify(K.LIBRARY.slice().sort()) && libJS.every(i => PC.ACTIVITY_RULES.ENGINES.has(i)), 'packcheck ACT.LIB = the catalogue\'s library, and every one is in ENGINES');
 const pyLib = JSON.parse(py('import json,activities as A; print(json.dumps([sorted(A.LIB), sorted(A.ENGINES)]))'));

@@ -49,9 +49,9 @@ alter default privileges in schema public grant all on tables to anon, authentic
     psql(seed); psql(seed)
     ok(True, 'cloud/supabase.sql runs, and runs again (idempotent); so does the seed of the vault fields')
     tables = psql("select tablename from pg_tables where schemaname='public' and tablename like 'noema_%' and rowsecurity order by 1")
-    ok(tables == ['noema_admins', 'noema_blocks', 'noema_buddies', 'noema_chat_files', 'noema_conversations', 'noema_curricula_shared', 'noema_curriculum_members', 'noema_curriculum_steps', 'noema_error_reports', 'noema_kv',
+    ok(tables == ['noema_admins', 'noema_blocks', 'noema_buddies', 'noema_chat_files', 'noema_conversations', 'noema_curricula_shared', 'noema_curriculum_members', 'noema_curriculum_steps', 'noema_engine_requests', 'noema_error_reports', 'noema_kv',
                   'noema_message_reports', 'noema_messages', 'noema_people', 'noema_profiles', 'noema_public_packs', 'noema_public_profiles', 'noema_room_members', 'noema_room_roadmaps',
-                  'noema_rooms', 'noema_shares', 'noema_snapshots', 'noema_vault_fields', 'noema_vault_files', 'noema_vault_hits', 'noema_vault_ratings', 'noema_vault_reports'], 'the 26 noema_ tables, all with row-level security: ' + ', '.join(tables))
+                  'noema_rooms', 'noema_shares', 'noema_snapshots', 'noema_vault_fields', 'noema_vault_files', 'noema_vault_hits', 'noema_vault_ratings', 'noema_vault_reports'], 'the 27 noema_ tables, all with row-level security: ' + ', '.join(tables))
     A, B, C = (str(uuid.uuid4()) for _ in range(3)); EA, EB, EC = 'anna@example.com', 'bob@example.com', 'carl@example.com'
     psql(f"insert into auth.users values ('{A}','{EA}'),('{B}','{EB}'),('{C}','{EC}')")
     # own data

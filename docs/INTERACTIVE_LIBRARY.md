@@ -10,7 +10,7 @@ an exact model the library does not have, anyone can **request a new engine** fr
 | layer | engines | what for |
 |---|---|---|
 | library — mathematics | `formula@1`, `ode@1`, `prob@1`, `graph@1`, `geom@1` | any relation, dynamical system, distribution, network, construction |
-| library — life sciences and medicine | `genetics@1`, `seq@1`, `med@1`, `anatomy@1` | heredity and populations, sequences, physiology, pharmacology and clinical reasoning, anatomy as data |
+| library — life sciences and medicine | `genetics@1`, `seq@1`, `med@1`, `clinic@1`, `anatomy@1` | heredity and populations, sequences, physiology and pharmacology, clinical reasoning (virtual patients, differential diagnosis, decisions), anatomy as data |
 | library — humanities, arts and crafts | `timeline@1`, `music@1`, `map@1`, `text@1`, `craft@1` | chronology in every calendar, music theory and acoustics, maps and journeys, texts and verse, handcrafts |
 | free | `html-app@1`, `py-module@1` | anything else, written by the pack's author |
 | plugins | `circuit-mna@1`, `thermal@1`, `pid@1`, `rf@1`, `twin@1`, `wasm@1` | exact models of one field (benches with hidden faults) |
@@ -108,6 +108,26 @@ engine is asked for.
 
 ## 3. Requesting a new engine
 
-Being built (this thread): the page `#/engines` (the catalogue, "Request a new engine", the learner's requests and their status),
-the table `noema_engine_requests` (`cloud/supabase.sql` §16), and the connector tools `noema_request_engine`,
-`noema_engine_requests`, `noema_engine_request_update`.
+When neither the library nor the free way fits, anyone asks for a new engine from a description. The feature is a small hexagon:
+
+| layer | where | what |
+|---|---|---|
+| domain | `engine/enginereq.js` (`NoemaEngineRequests`; no DOM, no network; the connector runs the same file) | `FIELDS` and their limits, `normalize(input) → {row, problems}`, `ACCURACY` (`teaching`, `quantitative`, `research`), `STATUSES` (`new`, `seen`, `planned`, `building`, `available`, `declined`, `duplicate`; `OPEN` = the first four), `cleanPatch(patch)` (what an admin may change), `brief(row)` (the English markdown to build the engine from) |
+| port | `store = {kind, submit(row), mine(), all(status), update(id, patch), isAdmin()}` | |
+| adapters | `cloudStore` (Supabase REST, table `noema_engine_requests`, `cloud/supabase.sql` §16) · `localStore` (a profile without a cloud account: `localStorage noema1:<profile>:enginereq`, at most 100, downloadable as JSON) | `store(ACCOUNT)` picks one |
+| UI | `engine/src/49_lib_view.js` + `49_lib_view.css`, the route `#/engines` (`#/engines/new` opens the form), the subject's ⋮ › *Engines of activities* | the catalogue (only the engines this app has), *Request a new engine*, *Your requests*; admins see every request and answer it in place |
+| connector | `cloud/mcp/server.mjs` | `noema_request_engine` (with `check_only` it only ranks the catalogue), `noema_engine_requests` (own; admins all, with a status filter; `id` → the brief), `noema_engine_request_update` (admins) |
+
+The form asks for one thing first, **what should be simulated** (40–4000 characters) and a name (4–120); the field, what the learner
+changes and sees, what is measured, the accuracy, sources and example exercises are folded under *More details*. While the person
+writes, `NoemaEngineCatalog.suggest` shows up to three engines of this app that may already do it; the ids it found are stored with the
+request (`suggested`) so whoever answers checks them first.
+
+The table's trigger owns everything that is not the person's words: on insert the requester, their shown name, `status = new` and the
+time; at most **20 requests a person a day**; on update only `status`, `engine_id`, `answer` and `fixed_in` change, and only for the
+app's admins (`noema_admins`). RLS: everyone inserts their own; reads their own (admins all); admins update and delete.
+
+**Answering a request** (an admin, or Claude with an admin account): `noema_engine_requests` → read the brief → first decide whether an
+engine of the library can be **extended** (additively, same id); build per §1; then `noema_engine_request_update` with `status
+available`, `engine_id` and `fixed_in` (the PR). `declined` and `duplicate` always carry an `answer` saying why or which engine.
+The requester sees the status, the engine and the note on `#/engines`.
