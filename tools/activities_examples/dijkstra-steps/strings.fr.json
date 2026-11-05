@@ -1,0 +1,14 @@
+{
+ "title": "L’algorithme de Dijkstra pas à pas",
+ "intro": "Cinq villes sont reliées par des routes à sens unique, chacune avec son coût. L’algorithme de Dijkstra trouve le trajet le moins cher de s vers chaque ville : il fixe à chaque fois la ville non encore fixée dont le coût connu est le plus petit, puis essaie les routes qui en partent. Faites-le avancer avec le curseur des étapes pour le voir travailler. Changez ensuite le coût de la route de s à t.",
+ "wLabel": "Coût de la route s → t",
+ "kLabel": "Étapes de l’algorithme",
+ "frameLabel": "Étapes affichées",
+ "dtLabel": "Coût minimal jusqu’à t",
+ "dxLabel": "Coût minimal jusqu’à x",
+ "hopsLabel": "Routes sur le trajet le moins cher vers x",
+ "sceneTitle": "Le réseau routier après les étapes affichées",
+ "checkShorter": "Le trajet le moins cher de s à x coûte moins de 9.",
+ "checkLeast": "La route s → t n’est pas rendue moins chère que nécessaire.",
+ "checkWatched": "Vous avez fait avancer l’algorithme jusqu’au bout."
+}

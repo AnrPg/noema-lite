@@ -3,7 +3,7 @@
  "engine": "graph@1",
  "title": "title",
  "intro": "intro",
- "consts": { "dMax": 8 },
+ "consts": { "dOld": 9, "wLeast": 7 },
  "params": [
   { "id": "wst", "kind": "slider", "label": "wLabel", "min": 1, "max": 15, "step": 1, "default": 10 },
   { "id": "k", "kind": "slider", "label": "kLabel", "min": 0, "max": 7, "step": 1, "default": 0 }

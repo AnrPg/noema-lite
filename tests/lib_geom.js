@@ -244,5 +244,26 @@ function r_nothrow(r) { return r && Array.isArray(r.diag); }
   ok(t1 < 50, `speed: a typical run (a triangle, its centres, the Euler line, the scene) ${t1} ms < 50 ms`);
   ok(wc === 0 && wr.out.r.length === 960 && t3 < 2000, `speed: the worst allowed (200 moving points: their minimum enclosing circle's centre traced and the hull's area over 960 samples — samples × objects at the budget 200 000 — plus Delaunay and Voronoi) ${t3} ms < 2 s`);
 }
+// ---------- the reference activity euler-line (its exercise's checks and tests.json; packcheck and activities.py agree) ----------
+{
+  const AD = path.join(ROOT, 'tools', 'activities_examples', 'euler-line'), rd = f => JSON.parse(fs.readFileSync(path.join(AD, f), 'utf8'));
+  const ex = rd('spec.json'), sim = G.engine.create(ex, { seed: 1 });
+  const LOC = ['en', 'el', 'ru', 'de', 'fr'], tables = Object.fromEntries(LOC.map(l => [l, rd(`strings.${l}.json`)]));
+  require(path.join(SRC, '49_lib_catalog.js')); require(path.join(ROOT, 'engine', 'packcheck.js'));
+  const js = globalThis.NoemaPackCheck.checkSimSpec(ex, tables);
+  const py = JSON.parse(require('child_process').execFileSync('python3', ['-c', 'import json, sys, activities as A; d = json.loads(sys.stdin.read()); print(json.dumps(A.check_spec(d[0], tables=d[1])))'], { cwd: path.join(ROOT, 'tools'), input: JSON.stringify([ex, tables]), encoding: 'utf8' }));
+  ok(js.length === 0 && py.length === 0, `euler-line: the spec passes packcheck (JS) and activities.check_spec (Python) with its five string tables${js.length + py.length ? ': ' + js.concat(py).join('; ') : ''}`);
+  ok(LOC.every(l => JSON.stringify(Object.keys(tables[l]).sort()) === JSON.stringify(Object.keys(tables.en).sort())), 'euler-line: the five string tables have the same keys');
+  const act = rd('activity.json'); ok(act.id === 'euler-line' && act.runtime === 'sim-spec@1' && fs.readFileSync(path.join(AD, 'fallback.svg'), 'utf8').startsWith('<svg'), 'euler-line: activity.json and fallback.svg');
+  const checks = ['onC == 1', 'hIn == 1', 'line == 1'].map(e => NoemaExpr.compile(e));
+  const T = rd('tests.json');
+  for (const c of T.cases) {
+    const v = Object.assign({}, ex.consts || {}, { cx: 2, cy: 4 }); for (const st of c.steps) v[st.set] = st.value;
+    const out = sim.run(v), env = Object.assign({}, v, Object.fromEntries(Object.entries(out).filter(([, x]) => typeof x === 'number')));
+    const inRange = Object.entries(c.expect.values || {}).every(([k, [a, b]]) => env[k] >= a && env[k] <= b);
+    const passed = checks.every(f => !!f(env));
+    ok(inRange && (c.expect.passed == null || passed === c.expect.passed), `euler-line: ${c.name}`);
+  }
+}
 console.log(`\n${n - fails}/${n} passed`);
 process.exit(fails ? 1 : 0);

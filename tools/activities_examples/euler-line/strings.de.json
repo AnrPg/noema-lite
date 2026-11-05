@@ -1,0 +1,14 @@
+{
+ "title": "Die Euler-Gerade",
+ "intro": "Jedes Dreieck hat einen Umkreismittelpunkt O (den Mittelpunkt des Kreises durch seine Ecken), einen Schwerpunkt G (den Schnittpunkt der Seitenhalbierenden), einen Höhenschnittpunkt H und den Mittelpunkt N des Neunpunktekreises. Euler fand 1767 heraus, dass O, G und H immer auf einer Geraden liegen, und zwar G ein Drittel des Weges von O nach H. Zieh an der Ecke C und beobachte, wie sich die Gerade bewegt.",
+ "cxLabel": "C, waagrecht",
+ "cyLabel": "C, senkrecht",
+ "angLabel": "Winkel bei C",
+ "ratioLabel": "HG ÷ GO",
+ "colLabel": "O, G und H auf einer Geraden",
+ "onLabel": "Die Euler-Gerade geht durch C",
+ "sceneTitle": "Das Dreieck, seine Mittelpunkte und die Euler-Gerade",
+ "checkOnC": "Die Euler-Gerade geht durch die Ecke C.",
+ "checkInside": "Der Höhenschnittpunkt H liegt im Inneren des Dreiecks.",
+ "checkLine": "Die Euler-Gerade existiert (das Dreieck ist nicht gleichseitig)."
+}

@@ -1,0 +1,13 @@
+{
+ "title": "Temper the fifth, find the wolf",
+ "intro": "A keyboard has twelve keys to the octave, but stacking pure fifths (3:2, 701.96 cents) never comes back to the starting note, and four pure fifths give a third much wider than the pure 5:4. Meantone temperament narrows every fifth by a fraction of the syntonic comma (21.51 cents) to bring the thirds closer to pure. Choose the fraction: 0 is Pythagorean tuning with pure fifths. Watch the major third C–E, how fast it beats against the pure third, and the one fifth left over between G♯ and E♭ on a keyboard tuned from E♭ to G♯: the wolf. Listen to the C major chord and to the wolf fifth.",
+ "fraction": "Fifths narrowed by (fraction of the syntonic comma)",
+ "fifthLabel": "Fifth C–G",
+ "thirdLabel": "Major third C–E",
+ "pureLabel": "Third minus the pure third (5:4)",
+ "wolfLabel": "Wolf fifth G♯–E♭",
+ "beatsLabel": "Beats of the third C4–E4",
+ "kbTitle": "C major on the keyboard: cents away from equal temperament",
+ "chordTitle": "The C major chord",
+ "wolfTitle": "The wolf fifth G♯3–E♭4"
+}

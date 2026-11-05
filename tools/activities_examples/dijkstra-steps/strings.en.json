@@ -1,0 +1,14 @@
+{
+ "title": "Dijkstra's algorithm, step by step",
+ "intro": "Five towns are joined by one-way roads, each marked with its cost. Dijkstra's algorithm finds the cheapest route from s to every town: it always settles the unsettled town with the smallest known cost, then tries the roads leaving it. Use the step slider to watch it work. Then change the cost of the road from s to t.",
+ "wLabel": "Cost of the road s → t",
+ "kLabel": "Steps of the algorithm",
+ "frameLabel": "Steps shown",
+ "dtLabel": "Cheapest cost to t",
+ "dxLabel": "Cheapest cost to x",
+ "hopsLabel": "Roads on the cheapest route to x",
+ "sceneTitle": "The road network after the steps shown",
+ "checkShorter": "The cheapest route from s to x costs less than 9.",
+ "checkLeast": "The road s → t is made no cheaper than it needs to be.",
+ "checkWatched": "You stepped the algorithm through to the end."
+}

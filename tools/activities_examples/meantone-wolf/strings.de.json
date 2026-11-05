@@ -1,0 +1,13 @@
+{
+ "title": "Die Quinte temperieren, den Wolf finden",
+ "intro": "Eine Tastatur hat zwölf Tasten pro Oktave, doch reine Quinten (3:2, 701,96 Cent) übereinander kehren nie zum Ausgangston zurück, und vier reine Quinten ergeben eine Terz, die viel weiter ist als die reine 5:4. Die mitteltönige Stimmung verengt jede Quinte um einen Bruchteil des syntonischen Kommas (21,51 Cent), damit die Terzen näher an die reinen kommen. Wähle den Bruchteil: 0 ist die pythagoreische Stimmung mit reinen Quinten. Beobachte die große Terz C–E, wie schnell sie gegen die reine Terz schwebt, und die eine übrig bleibende Quinte zwischen Gis und Es auf einer Tastatur, die von Es bis Gis gestimmt ist: den Wolf. Höre den C-Dur-Akkord und die Wolfsquinte.",
+ "fraction": "Verengung der Quinten (Bruchteil des syntonischen Kommas)",
+ "fifthLabel": "Quinte C–G",
+ "thirdLabel": "Große Terz C–E",
+ "pureLabel": "Terz minus reine Terz (5:4)",
+ "wolfLabel": "Wolfsquinte Gis–Es",
+ "beatsLabel": "Schwebungen der Terz C4–E4",
+ "kbTitle": "C-Dur auf der Tastatur: Abweichung in Cent von der gleichstufigen Stimmung",
+ "chordTitle": "Der C-Dur-Akkord",
+ "wolfTitle": "Die Wolfsquinte Gis3–Es4"
+}

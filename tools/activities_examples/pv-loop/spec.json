@@ -28,11 +28,11 @@
   { "id": "sw", "kind": "scalar", "of": "lv.sw" }
  ],
  "readouts": [
-  { "label": "svLabel", "expr": "sv", "unit": "mL", "format": "fixed", "digits": 0 },
-  { "label": "efLabel", "expr": "100 * ef", "unit": "%", "format": "fixed", "digits": 0 },
-  { "label": "edvLabel", "expr": "edv", "unit": "mL", "format": "fixed", "digits": 0 },
-  { "label": "esvLabel", "expr": "esv", "unit": "mL", "format": "fixed", "digits": 0 },
-  { "label": "mapLabel", "expr": "map", "unit": "mmHg", "format": "fixed", "digits": 0 },
+  { "label": "svLabel", "expr": "round(sv)", "unit": "mL", "format": "auto" },
+  { "label": "efLabel", "expr": "round(100 * ef)", "unit": "%", "format": "auto" },
+  { "label": "edvLabel", "expr": "round(edv)", "unit": "mL", "format": "auto" },
+  { "label": "esvLabel", "expr": "round(esv)", "unit": "mL", "format": "auto" },
+  { "label": "mapLabel", "expr": "round(map)", "unit": "mmHg", "format": "auto" },
   { "label": "coLabel", "expr": "co", "unit": "L/min", "format": "fixed", "digits": 1 },
   { "label": "swLabel", "expr": "sw / 7500", "unit": "J", "format": "fixed", "digits": 2 }
  ],

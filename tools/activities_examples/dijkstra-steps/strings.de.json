@@ -1,0 +1,14 @@
+{
+ "title": "Der Dijkstra-Algorithmus Schritt für Schritt",
+ "intro": "Fünf Orte sind durch Einbahnstraßen verbunden, jede mit ihren eigenen Kosten. Der Dijkstra-Algorithmus findet den günstigsten Weg von s zu jedem Ort: Er legt immer den noch offenen Ort mit den kleinsten bekannten Kosten endgültig fest und prüft dann die Straßen, die von dort abgehen. Schau ihm mit dem Schieberegler für die Schritte bei der Arbeit zu. Ändere danach die Kosten der Straße von s nach t.",
+ "wLabel": "Kosten der Straße s → t",
+ "kLabel": "Schritte des Algorithmus",
+ "frameLabel": "Gezeigte Schritte",
+ "dtLabel": "Geringste Kosten bis t",
+ "dxLabel": "Geringste Kosten bis x",
+ "hopsLabel": "Straßen auf dem günstigsten Weg nach x",
+ "sceneTitle": "Das Straßennetz nach den gezeigten Schritten",
+ "checkShorter": "Der günstigste Weg von s nach x kostet weniger als 9.",
+ "checkLeast": "Die Straße s → t ist nicht billiger gemacht als nötig.",
+ "checkWatched": "Du bist den Algorithmus bis zum Ende durchgegangen."
+}

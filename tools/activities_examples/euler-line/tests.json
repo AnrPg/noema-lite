@@ -1,0 +1,207 @@
+{
+ "cases": [
+  {
+   "name": "C(3, 4): isosceles and acute — the line passes through C (passes)",
+   "exercise": "ch01-e922",
+   "steps": [
+    {
+     "set": "cx",
+     "value": 3
+    },
+    {
+     "set": "cy",
+     "value": 4
+    }
+   ],
+   "expect": {
+    "passed": true,
+    "values": {
+     "onC": [
+      1,
+      1
+     ],
+     "hIn": [
+      1,
+      1
+     ],
+     "angC": [
+      73.6,
+      73.9
+     ]
+    }
+   }
+  },
+  {
+   "name": "C(3, 7): taller, still isosceles (passes)",
+   "exercise": "ch01-e922",
+   "steps": [
+    {
+     "set": "cx",
+     "value": 3
+    },
+    {
+     "set": "cy",
+     "value": 7
+    }
+   ],
+   "expect": {
+    "passed": true,
+    "values": {
+     "onC": [
+      1,
+      1
+     ],
+     "hIn": [
+      1,
+      1
+     ]
+    }
+   }
+  },
+  {
+   "name": "the start C(2, 4): the line x + y = 4 misses C (fails)",
+   "exercise": "ch01-e922",
+   "steps": [
+    {
+     "set": "cx",
+     "value": 2
+    },
+    {
+     "set": "cy",
+     "value": 4
+    }
+   ],
+   "expect": {
+    "passed": false,
+    "values": {
+     "onC": [
+      0,
+      0
+     ],
+     "col": [
+      1,
+      1
+     ],
+     "angC": [
+      71.4,
+      71.7
+     ]
+    }
+   }
+  },
+  {
+   "name": "C(3, 3): right-angled at C — H falls on C, not inside (fails)",
+   "exercise": "ch01-e922",
+   "steps": [
+    {
+     "set": "cx",
+     "value": 3
+    },
+    {
+     "set": "cy",
+     "value": 3
+    }
+   ],
+   "expect": {
+    "passed": false,
+    "values": {
+     "onC": [
+      1,
+      1
+     ],
+     "hIn": [
+      0,
+      0
+     ],
+     "angC": [
+      89.9,
+      90.1
+     ]
+    }
+   }
+  },
+  {
+   "name": "C(3, 2): obtuse at C — H outside (fails)",
+   "exercise": "ch01-e922",
+   "steps": [
+    {
+     "set": "cx",
+     "value": 3
+    },
+    {
+     "set": "cy",
+     "value": 2
+    }
+   ],
+   "expect": {
+    "passed": false,
+    "values": {
+     "onC": [
+      1,
+      1
+     ],
+     "hIn": [
+      0,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "name": "C(2.9, 4): nearly isosceles is not enough (fails)",
+   "exercise": "ch01-e922",
+   "steps": [
+    {
+     "set": "cx",
+     "value": 2.9
+    },
+    {
+     "set": "cy",
+     "value": 4
+    }
+   ],
+   "expect": {
+    "passed": false,
+    "values": {
+     "onC": [
+      0,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "name": "explorer: the values are saved; HG = 2·GO",
+   "steps": [
+    {
+     "set": "cx",
+     "value": 1
+    },
+    {
+     "set": "cy",
+     "value": 3
+    }
+   ],
+   "expect": {
+    "state": [
+     "cx",
+     "cy"
+    ],
+    "values": {
+     "hg": [
+      1.4906,
+      1.4908
+     ],
+     "go": [
+      0.7453,
+      0.7454
+     ],
+     "col": [
+      1,
+      1
+     ]
+    }
+   }
+  }
+ ]
+}

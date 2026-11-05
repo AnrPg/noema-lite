@@ -166,7 +166,7 @@
   /* ---------- the adapter port: an engine of the library → what ACT.registerEngine takes ----------
      def = { id, global (its window name), checkSpec(spec) → problems, run(spec, env, {seed}) → {scalars, series, scenes}, module (the
      engine module's function, for the Worker) }. The worker gets the spec once and then the inputs (consts, params, derived) of each
-     run; outputs are picked by the spec's outputs: scalar → a number, series → an array (≤ 2000), scene → a scene object. */
+     run; outputs are picked by the spec's outputs: scalar → a number, series → an array (≤ 2000), scene → a scene object, sound → {notes, wave?, partials?}. */
   function pick(spec, res) {
     const r = {};
     for (const o of (spec && spec.outputs) || []) {
@@ -174,6 +174,7 @@
       const v = res && res.out ? res.out[o.id] : undefined;
       if (o.kind === 'series') r[o.id] = Array.isArray(v) ? thin(v, MAX_POINTS) : [];
       else if (o.kind === 'scene') r[o.id] = isObj(v) ? v : { view: [-1, 1, -1, 1], items: [] };
+      else if (o.kind === 'sound') r[o.id] = isObj(v) && Array.isArray(v.notes) ? { ...v, notes: v.notes.slice(0, 512) } : { notes: [] };   // ≤ 512 notes (docs/INTERACTIVE_LIBRARY.md §1.4)
       else r[o.id] = typeof v === 'number' || typeof v === 'boolean' ? v : NaN;
     }
     return r;

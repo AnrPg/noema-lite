@@ -1,0 +1,17 @@
+{
+ "id": "meantone-wolf",
+ "runtime": "sim-spec@1",
+ "entry": "activities/meantone-wolf/spec.json",
+ "stateVersion": 1,
+ "capabilities": [
+  "state",
+  "events"
+ ],
+ "fallback": {
+  "media": "meantone-wolf-still",
+  "text": "Meantone temperament narrows each fifth by a fraction of the syntonic comma (81/80, 21.51 cents). With pure fifths (Pythagorean tuning, fraction 0) the fifth is 701.96 cents, the major third C–E 407.82 cents, 21.5 cents wider than the pure 5:4 (386.31 cents), and C4–E4 beats about 16 times a second; the leftover fifth G♯–E♭ is 678.49 cents. At a quarter comma the fifth is 696.58 cents, every major third of the keyboard's chain is pure and does not beat, and the wolf G♯–E♭ grows to 737.64 cents, 35.7 cents wider than a pure fifth. The picture shows C major on the keyboard at a quarter comma: C is the reference, E sits 13.7 cents and G 3.4 cents below equal temperament."
+ },
+ "origin": "own",
+ "credit": "noema-lite reference activity",
+ "license": "own"
+}

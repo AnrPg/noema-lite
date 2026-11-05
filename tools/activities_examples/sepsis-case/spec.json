@@ -64,12 +64,12 @@
   { "id": "order", "kind": "scalar", "of": "grade.order" }
  ],
  "readouts": [
-  { "label": "mapEndLabel", "expr": "mapEnd", "unit": "mmHg", "format": "fixed", "digits": 0 },
+  { "label": "mapEndLabel", "expr": "round(mapEnd)", "unit": "mmHg", "format": "auto" },
   { "label": "lacEndLabel", "expr": "lacEnd", "unit": "mmol/L", "format": "fixed", "digits": 1 },
-  { "label": "hypoLabel", "expr": "hypo", "unit": "min", "format": "fixed", "digits": 0 },
-  { "label": "pSLabel", "expr": "100 * pS", "unit": "%", "format": "fixed", "digits": 0 },
-  { "label": "errLabel", "expr": "100 * err", "unit": "%", "format": "fixed", "digits": 0 },
-  { "label": "gradeLabel", "expr": "100 * grade", "unit": "%", "format": "fixed", "digits": 0 }
+  { "label": "hypoLabel", "expr": "round(hypo)", "unit": "min", "format": "auto" },
+  { "label": "pSLabel", "expr": "round(100 * pS)", "unit": "%", "format": "auto" },
+  { "label": "errLabel", "expr": "round(100 * err)", "unit": "%", "format": "auto" },
+  { "label": "gradeLabel", "expr": "round(100 * grade)", "unit": "%", "format": "auto" }
  ],
  "plots": [
   { "kind": "series", "title": "vitalsTitle",

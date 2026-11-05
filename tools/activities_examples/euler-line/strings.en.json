@@ -1,0 +1,14 @@
+{
+ "title": "The Euler line",
+ "intro": "Every triangle has a circumcentre O (the centre of the circle through its vertices), a centroid G (where the medians meet), an orthocentre H (where the altitudes meet) and a nine-point centre N. Euler found in 1767 that O, G and H always lie on one line, with G one third of the way from O to H. Drag the vertex C and watch the line move.",
+ "cxLabel": "C, across",
+ "cyLabel": "C, up",
+ "angLabel": "Angle at C",
+ "ratioLabel": "HG ÷ GO",
+ "colLabel": "O, G and H on one line",
+ "onLabel": "The Euler line passes through C",
+ "sceneTitle": "The triangle, its centres and the Euler line",
+ "checkOnC": "The Euler line passes through the vertex C.",
+ "checkInside": "The orthocentre H lies inside the triangle.",
+ "checkLine": "The Euler line exists (the triangle is not equilateral)."
+}
