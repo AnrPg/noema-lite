@@ -326,6 +326,7 @@ P6_ENGINES = ('39_engine_thermal.js', '40_engine_pid.js', '41_engine_rf.js', '42
 # the engine library of sim-spec@1 (docs/INTERACTIVE_LIBRARY.md): the shared core, every general engine (47–48_lib_*.js) and the catalogue
 # (which also registers them); loaded beside packcheck.js like the P6 engines; their Python twins tools/enginelib.py + tools/lib_<name>.py
 LIB_ENGINES = ('46_lib_core.js', *sorted(os.path.basename(f) for f in glob.glob(os.path.join(ENGINE, 'src', '4[78]_lib_*.js'))), '49_lib_catalog.js')
+LIB_VENDOR = ('geographiclib-geodesic@2.2.0/noema-geodesic.js', 'world-atlas@2.0.2/noema-land-110m.js')   # vendored code of library engines (engine/vendor/, each with its licence), loaded before 46–49_lib_*.js: map@1's exact geodesics and land
 LIB_DOCS = sorted(os.path.basename(f) for f in glob.glob(os.path.join(ROOT, 'docs', 'library', '*.md')))   # the chapters of the engine library (skill references/library/, the connector's guide part "interactive")
 LIB_TOOLS = ['enginelib.py', *sorted(os.path.basename(f) for f in glob.glob(os.path.join(ROOT, 'tools', 'lib_*.py')))]
 # py-module@1 (docs/INTERACTIVE_PYTHON.md §Deployment): the service worker's scope is /vendor/pyodide/ (its script lives in /engine/), the
@@ -391,6 +392,8 @@ def build_skill(out_zip):
         h5pv = os.path.join(ENGINE, 'vendor', 'h5p', '3.8.2')   # h5p@1: the app's own H5P player for the harness, with its licences and readable source (GPL-3.0)
         for f in ['player.js', 'LICENSE', 'LICENSE-NOTICE.txt'] + sorted(os.path.relpath(g, h5pv).replace(os.sep, '/') for g in glob.glob(os.path.join(h5pv, 'source', '**', '*'), recursive=True) if os.path.isfile(g)):
             z.write(os.path.join(h5pv, f), 'noema-pack-builder/scripts/activity_host/h5p/' + f)
+        for f in LIB_VENDOR: z.write(os.path.join(ENGINE, 'vendor', f), 'noema-pack-builder/scripts/activity_host/vendor/' + os.path.basename(f))   # the library engines' vendored code (map@1), with its licences
+        for f in LIB_VENDOR: z.write(os.path.join(ENGINE, 'vendor', os.path.dirname(f), next(l for l in os.listdir(os.path.join(ENGINE, 'vendor', os.path.dirname(f))) if l.startswith('LICENSE'))), 'noema-pack-builder/scripts/activity_host/vendor/LICENSE-' + os.path.dirname(f))
         z.write(os.path.join(ENGINE, 'packcheck.js'), 'noema-pack-builder/scripts/activity_host/packcheck.js')   # sim-spec@1: the spec check the runtime runs
         for f in ('INTERACTIVE.md', 'INTERACTIVE_AUTHORING.md', 'INTERACTIVE_LIBRARY.md', 'INTERACTIVE_SIMEXPR.md', 'INTERACTIVE_CIRCUIT.md', 'INTERACTIVE_ENGINES.md', 'INTERACTIVE_PYTHON.md', 'INTERACTIVE_H5P.md') + INTERACTIVE_P6:
             if os.path.exists(os.path.join(ROOT, 'docs', f)): z.write(os.path.join(ROOT, 'docs', f), f'noema-pack-builder/references/{f}')
@@ -494,7 +497,7 @@ def build_bundle(metas):
     css = rd('engine/engine.css') + '\n' + rd('engine/activity_author.css')
     # every UI catalog inline (the single file works offline in any locale; pseudo-locales only for tests)
     i18n_cats = ''.join(f'<script>{esc(rd("engine/i18n/" + f))}</script>\n' for f in sorted(os.listdir(os.path.join(ENGINE, 'i18n'))) if f.endswith('.js') and f[:-3] not in ('en-XA', 'ar-XB'))
-    p6_scripts = ''.join(f'<script>{esc(rd("engine/src/" + f))}</script>\n' for f in (*P6_ENGINES, *LIB_ENGINES))   # the P6 engines' checks beside packcheck, like NoemaCircuit
+    p6_scripts = ''.join(f'<script>{esc(rd("engine/vendor/" + f))}</script>\n' for f in LIB_VENDOR) + ''.join(f'<script>{esc(rd("engine/src/" + f))}</script>\n' for f in (*P6_ENGINES, *LIB_ENGINES))   # the P6 engines' checks beside packcheck, like NoemaCircuit
     html = f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>noema-lite</title>

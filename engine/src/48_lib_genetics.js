@@ -1026,16 +1026,16 @@
   /* ---------- run: the spec's outputs ---------- */
   const RUN = { cross: runCross, pedigree: runPedigree, hw: runHW, selection: runSelection, drift: runDrift, map: runMap, coalescent: runCoalescent, ld: runLD, quant: runQuant };
   function run(spec, env, o) {
-    const m = spec.model, seed = (o && o.seed) || 1;
+    const m = (spec && spec.model && typeof spec.model === 'object' && spec.model) || {}, seed = (o && o.seed) || 1;
     let res;
     try { res = RUN[m.mode](m, env || {}, seed); } catch (e) { res = { out: { valid: 0 }, codes: ['error'] }; }
     const out = {};
-    for (const op of spec.outputs || []) {
+    for (const op of (spec && Array.isArray(spec.outputs) ? spec.outputs : [])) {
       if (!op || typeof op.id !== 'string') continue;
-      const d = has(OUTS[m.mode], op.of) ? OUTS[m.mode][op.of] : null;
+      const d = has(OUTS, m.mode) && typeof op.of === 'string' && has(OUTS[m.mode], op.of) ? OUTS[m.mode][op.of] : null;
       let v;
       if (d && d[1] && res.ARG && res.ARG[op.of]) { try { v = res.ARG[op.of](op.arg); } catch (e) { v = undefined; } }
-      else v = res.out[op.of];
+      else v = d ? res.out[op.of] : undefined;
       if (v === undefined) v = d && d[0] === 'series' ? [] : d && d[0] === 'scene' ? { view: [0, 1, 0, 1], items: [] } : NaN;
       out[op.id] = v;
     }

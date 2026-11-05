@@ -1,0 +1,20 @@
+{
+ "title": "Scanning Virgil's hexameters",
+ "intro": "The opening of the Aeneid in dactylic hexameter: six feet, the first four each a dactyl (long, short, short) or a spondee (long, long), the fifth almost always a dactyl, the sixth two syllables. A syllable is long by nature (a long vowel, marked here with a macron, or a diphthong) or by position (a vowel followed by two consonants); a final vowel or vowel + m before a vowel is elided. The text marks the long vowels that decide the scansion and the consonantal i of Lāvīnja-. Choose a line, mark the feet you think are dactyls, then compare with the scansion below.",
+ "lineLabel": "Line of Aeneid 1",
+ "foot1": "Foot 1 is a dactyl",
+ "foot2": "Foot 2 is a dactyl",
+ "foot3": "Foot 3 is a dactyl",
+ "foot4": "Foot 4 is a dactyl",
+ "aenLabel": "Virgil, Aeneid 1.1–7",
+ "sylLabel": "Syllables (after elision)",
+ "dactLabel": "Dactyls in feet 1–5",
+ "rightLabel": "Feet 1–4 marked correctly",
+ "penLabel": "Caesura after the third long (penthemimeral)",
+ "readLabel": "Valid scansions of the line",
+ "scanTitle": "The line scanned: – long, ⏑ short, ‖ caesura",
+ "plotTitle": "Dactyls per line",
+ "lineAxis": "Line",
+ "dactAxis": "Dactyls",
+ "dactLine": "dactyls in feet 1–5"
+}

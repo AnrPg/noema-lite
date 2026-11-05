@@ -313,7 +313,7 @@
     const N = modelNames(m), tpl = N.tpl;
     // the system itself: a template, or states with their equations
     if (tpl) {
-      if (m.kind != null && m.kind !== tpl.kind) E('value', 'model.kind', `the template ${m.template} is a ${tpl.kind}`);
+      if (m.kind != null && m.kind !== tpl.kind) E('value', 'model.kind', `the template ${m.template} is of kind ${tpl.kind}`);
       for (const k of ['states', 'rhs', 'next', 'delays', 'pairs']) if (m[k] != null) E('value', 'model.' + k, `comes from the template ${m.template}`);
       if (isObj(m.set)) for (const k of Object.keys(m.set)) if (okName(k) && !tpl.params.includes(k)) E('value', 'model.set.' + k, `not a parameter of the template ${m.template} (its parameters: ${tpl.params.join(', ')})`);
     } else {
@@ -388,7 +388,7 @@
       if (okName(s.of) && !N.states.includes(s.of)) E('value', 'model.sweep.of', 'not a state');
       if (N.kind === 'map' && typeof s.transient === 'number') { const pts = Number.isInteger(s.points) ? s.points : 200, keep = Number.isInteger(s.keep) ? s.keep : 50;
         if (!(Number.isInteger(s.transient) && s.transient >= 0)) E('value', 'model.sweep.transient', 'needs a whole number of iterations >= 0');
-        else if (pts * (s.transient + keep) > MAX_STEPS) E('budget', 'model.sweep', `points × (transient + keep) is more than ${MAX_STEPS} iterations`); }
+        else if (pts * (s.transient + keep) > maxSteps) E('budget', 'model.sweep', `points × (transient + keep) is more than maxSteps (${maxSteps}) iterations`); }
     }
     if (isObj(m.phase)) {
       for (const k of ['x', 'y']) if (okName(m.phase[k]) && !N.states.includes(m.phase[k])) E('value', 'model.phase.' + k, 'not a state');
@@ -577,7 +577,7 @@
       points: sv.points || 400, maxSteps: Math.min(sv.maxSteps || DEF_STEPS, MAX_STEPS) };
     if (isObj(m.equilibria)) { const box = isObj(m.equilibria.box) ? m.equilibria.box : {};
       M.eq = { box: Object.entries(box).map(([k, v]) => [N.states.indexOf(k), C.cx(v[0]), C.cx(v[1])]), grid: m.equilibria.grid || 3 }; }
-    if (isObj(m.lyapunov)) M.lyap = { k: m.lyapunov.k || 1, every: m.lyapunov.every != null ? C.cx(m.lyapunov.every) : () => 1, transient: m.lyapunov.transient != null ? C.cx(m.lyapunov.transient) : () => 0 };
+    if (isObj(m.lyapunov)) M.lyap = { k: m.lyapunov.k || 1, every: m.lyapunov.every != null ? C.cx(m.lyapunov.every) : () => 0.1, transient: m.lyapunov.transient != null ? C.cx(m.lyapunov.transient) : () => 0 };
     if (isObj(m.sweep)) { const s = m.sweep; M.sweep = { v: s.var, value: C.cx(s.value), min: C.cx(s.min), max: C.cx(s.max), points: s.points || 200, of: N.states.indexOf(s.of), keep: s.keep || 50, transient: s.transient != null ? C.cx(s.transient) : null }; }
     if (isObj(m.phase)) { const p = m.phase; M.phase = { x: N.states.indexOf(p.x), y: N.states.indexOf(p.y), box: ['xmin', 'xmax', 'ymin', 'ymax'].map(k => p[k] != null ? C.cx(p[k]) : null), field: p.field == null ? 15 : p.field, nullclines: p.nullclines !== false }; }
     return M;
@@ -618,25 +618,26 @@
   function stepperDopri(n, f, o, ctx) {
     const k1 = new Float64Array(n), k2 = new Float64Array(n), k3 = new Float64Array(n), k4 = new Float64Array(n), k5 = new Float64Array(n), k6 = new Float64Array(n), k7 = new Float64Array(n);
     const y = new Float64Array(n), y1 = new Float64Array(n), yt = new Float64Array(n), ysti = new Float64Array(n);
-    const { rtol, atol, hmax } = o; let t = 0, h = 0, facold = 1e-4, iasti = 0, nonsti = 0, stiff = false;
-    const sk = i => atol + rtol * Math.max(abs(y[i]), abs(y1[i]));
+    const { rtol, hmax } = o, AT = o.atolv; let t = 0, h = 0, facold = 1e-4, iasti = 0, nonsti = 0, stiff = false;
+    const sk = i => AT[i] + rtol * Math.max(abs(y[i]), abs(y1[i]));
     function hinit() {   // HNW I §II.4
-      let dnf = 0, dny = 0; for (let i = 0; i < n; i++) { const s = atol + rtol * abs(y[i]); dnf += (k1[i] / s) ** 2; dny += (y[i] / s) ** 2; }
+      let dnf = 0, dny = 0; for (let i = 0; i < n; i++) { const s = AT[i] + rtol * abs(y[i]); dnf += (k1[i] / s) ** 2; dny += (y[i] / s) ** 2; }
       let hh = dnf <= 1e-10 || dny <= 1e-10 ? 1e-6 : sqrt(dny / dnf) * 0.01; hh = Math.min(hh, hmax);
       for (let i = 0; i < n; i++) yt[i] = y[i] + hh * k1[i];
-      f(t + hh, yt, k2); let der2 = 0; for (let i = 0; i < n; i++) { const s = atol + rtol * abs(y[i]); der2 += ((k2[i] - k1[i]) / s) ** 2; }
+      f(t + hh, yt, k2); let der2 = 0; for (let i = 0; i < n; i++) { const s = AT[i] + rtol * abs(y[i]); der2 += ((k2[i] - k1[i]) / s) ** 2; }
       der2 = sqrt(der2) / hh; const der12 = Math.max(abs(der2), sqrt(dnf));
       const h1 = der12 <= 1e-15 ? Math.max(1e-6, abs(hh) * 1e-3) : Math.pow(0.01 / der12, 0.2);
-      return Math.min(100 * abs(hh), h1, hmax);
+      const r = Math.min(100 * abs(hh), h1, hmax); return r > 0 ? r : hmax * 1e-3;
     }
     return {
       name: 'dopri5', get stiff() { return stiff; }, get h() { return h; },
       reset(t0, y0, keepH) { t = t0; y.set(y0); f(t, y, k1); if (!keepH || !(h > 0)) h = hinit(); facold = 1e-4; },
       step(tT) {
-        for (;;) {
+        if (!k1.every(Number.isFinite)) return { fail: 'nan' };
+        for (let tries = 0; ; tries++) {
           const span = tT - t; if (!(span > 0)) return { fail: 'time' };
           let hh = Math.min(h, hmax), last = false; if (hh >= span * (1 - 1e-12)) { hh = span; last = true; }
-          if (hh < 1e-14 * Math.max(1, abs(t))) return { fail: 'step-underflow' };
+          if (!(hh > 10 * EPS * abs(t) && hh > 1e-300) || tries > 200) return { fail: 'step-underflow' };
           for (let i = 0; i < n; i++) yt[i] = y[i] + hh * A21 * k1[i]; f(t + 0.2 * hh, yt, k2);
           for (let i = 0; i < n; i++) yt[i] = y[i] + hh * (A31 * k1[i] + A32 * k2[i]); f(t + 0.3 * hh, yt, k3);
           for (let i = 0; i < n; i++) yt[i] = y[i] + hh * (A41 * k1[i] + A42 * k2[i] + A43 * k3[i]); f(t + 0.8 * hh, yt, k4);
@@ -647,7 +648,7 @@
           f(tph, y1, k7);
           let err = 0; for (let i = 0; i < n; i++) { const e = hh * (E1 * k1[i] + E3 * k3[i] + E4 * k4[i] + E5 * k5[i] + E6 * k6[i] + E7 * k7[i]); err += (e / sk(i)) ** 2; }
           err = sqrt(err / n);
-          if (!Number.isFinite(err)) { ctx.rejected++; h = hh / 10; if (h < 1e-14 * Math.max(1, abs(t))) return { fail: 'nan' }; continue; }
+          if (!Number.isFinite(err)) { ctx.rejected++; h = hh / 10; if (!(h > 10 * EPS * abs(t) && h > 1e-300)) return { fail: 'nan' }; continue; }
           const fac11 = Math.pow(err, 0.2 - 0.04 * 0.75);   // PI control (HNW I §IV.2: β = 0.04)
           if (err <= 1) {
             let fac = fac11 / Math.pow(facold, 0.04); fac = Math.max(0.1, Math.min(5, fac / 0.9)); const hnew = hh / fac; facold = Math.max(err, 1e-4);
@@ -673,22 +674,23 @@
     const d = 1 / (2 + Math.SQRT2), e32 = 6 + Math.SQRT2;
     const F0 = new Float64Array(n), F1 = new Float64Array(n), F2 = new Float64Array(n), k1 = new Float64Array(n), k2 = new Float64Array(n), k3 = new Float64Array(n);
     const y = new Float64Array(n), y1 = new Float64Array(n), yt = new Float64Array(n), J = new Float64Array(n * n), W = new Float64Array(n * n), Tt = new Float64Array(n), fx = new Float64Array(n);
-    const piv = new Int32Array(n); const { rtol, atol, hmax } = o; let t = 0, h = 0, jacOk = false;
+    const piv = new Int32Array(n); const { rtol, hmax } = o, AT = o.atolv; let t = 0, h = 0, jacOk = false;
     function jac() {   // forward differences (the threshold: Shampine & Reichelt 1997 §3.2, simplified)
-      for (let j = 0; j < n; j++) { const yj = y[j], del = 1.4901161193847656e-8 * Math.max(abs(yj), atol / rtol * 1e-3, 1e-12); y[j] = yj + del; f(t, y, fx); y[j] = yj; for (let i = 0; i < n; i++) J[i * n + j] = (fx[i] - F0[i]) / del; }
+      for (let j = 0; j < n; j++) { const yj = y[j], del = 1.4901161193847656e-8 * Math.max(abs(yj), AT[j] / rtol * 1e-3, 1e-12); y[j] = yj + del; f(t, y, fx); y[j] = yj; for (let i = 0; i < n; i++) J[i * n + j] = (fx[i] - F0[i]) / del; }
       const dt = 1.4901161193847656e-8 * Math.max(abs(t), 1e-6); f(t + dt, y, fx); for (let i = 0; i < n; i++) Tt[i] = (fx[i] - F0[i]) / dt;
       jacOk = true;
     }
     return {
       name: 'rosenbrock', stiff: false,
       reset(t0, y0, keepH) { t = t0; y.set(y0); f(t, y, F0); jacOk = false;
-        if (!keepH || !(h > 0)) { let s = 0; for (let i = 0; i < n; i++) s += (F0[i] / (atol + rtol * abs(y[i]))) ** 2; s = sqrt(s / n); h = Math.min(hmax, s > 0 ? 0.8 * Math.pow(rtol, 1 / 3) / s : hmax / 100); } },
+        if (!keepH || !(h > 0)) { let s = 0; for (let i = 0; i < n; i++) s += (F0[i] / (AT[i] + rtol * abs(y[i]))) ** 2; s = sqrt(s / n); h = Math.min(hmax, s > 0 ? 0.8 * Math.pow(rtol, 1 / 3) / s : hmax / 100); if (!(h > 0)) h = hmax * 1e-3; } },
       step(tT) {
+        if (!F0.every(Number.isFinite)) return { fail: 'nan' };
         if (!jacOk) jac();
-        for (;;) {
+        for (let tries = 0; ; tries++) {
           const span = tT - t; if (!(span > 0)) return { fail: 'time' };
           let hh = Math.min(h, hmax), last = false; if (hh >= span * (1 - 1e-12)) { hh = span; last = true; }
-          if (hh < 1e-14 * Math.max(1, abs(t))) return { fail: 'step-underflow' };
+          if (!(hh > 10 * EPS * abs(t) && hh > 1e-300) || tries > 200) return { fail: 'step-underflow' };
           for (let i = 0; i < n * n; i++) W[i] = -hh * d * J[i]; for (let i = 0; i < n; i++) W[i * n + i] += 1;
           if (!luFactor(W, n, piv)) { ctx.rejected++; h = hh / 4; continue; }
           for (let i = 0; i < n; i++) k1[i] = F0[i] + hh * d * Tt[i]; luSolve(W, n, piv, k1);
@@ -697,7 +699,7 @@
           const tph = last ? tT : t + hh;
           for (let i = 0; i < n; i++) y1[i] = y[i] + hh * k2[i]; f(tph, y1, F2);
           for (let i = 0; i < n; i++) k3[i] = F2[i] - e32 * (k2[i] - F1[i]) - 2 * (k1[i] - F0[i]) + hh * d * Tt[i]; luSolve(W, n, piv, k3);
-          let err = 0; for (let i = 0; i < n; i++) { const e = hh / 6 * (k1[i] - 2 * k2[i] + k3[i]); err += (e / (atol + rtol * Math.max(abs(y[i]), abs(y1[i])))) ** 2; }
+          let err = 0; for (let i = 0; i < n; i++) { const e = hh / 6 * (k1[i] - 2 * k2[i] + k3[i]); err += (e / (AT[i] + rtol * Math.max(abs(y[i]), abs(y1[i])))) ** 2; }
           err = sqrt(err / n);
           if (!Number.isFinite(err)) { ctx.rejected++; h = hh / 10; continue; }
           if (err <= 1) {
@@ -762,7 +764,7 @@
       onSample(t, y), crossings [{g(t, y), dir, apply?(t, y) → y | null, stop, onHit(t, y)}], timed [{t, apply(t, y) (in place)}],
       onSegment(seg, t0, t1)} → {t, y, stopped} */
   function flow(cfg, ctx) {
-    const n = cfg.n, o = { rtol: cfg.rtol, atol: cfg.atol, hmax: cfg.hmax, dt: cfg.dt };
+    const n = cfg.n, o = { rtol: cfg.rtol, atolv: cfg.atolv || new Float64Array(n).fill(cfg.atol), hmax: cfg.hmax, dt: cfg.dt };
     let method = cfg.method === 'auto' ? 'dopri5' : cfg.method, auto = cfg.method === 'auto';
     let st = makeStepper(method, n, cfg.f, o, ctx, cfg.pairs || []);
     let t = cfg.t0; const y = Float64Array.from(cfg.y0), tmp = new Float64Array(n), ya = new Float64Array(n);
@@ -770,13 +772,15 @@
     const samples = cfg.samples || []; let si = 0;
     const cross = cfg.crossings || [];
     const gv = new Float64Array(cross.length);
-    const evalG = (tt, yy) => { for (let j = 0; j < cross.length; j++) gv[j] = cross[j].g(tt, yy); };
+    // a g that is exactly 0 at a start or after a jump (a ball put on the floor) takes the side it leaves towards, so the next
+    // crossing in the event's direction is seen even when the whole flight fits in one step
+    const evalG = (tt, yy, start) => { for (let j = 0; j < cross.length; j++) { const g = cross[j].g(tt, yy); gv[j] = start && g === 0 && cross[j].dir ? (cross[j].dir < 0 ? 1e-300 : -1e-300) : g; } };
     let stopped = false, jumps = 0;
     // timed events at t0 come first (a dose at time 0), samples at t0 after them
     while (ti < timed.length && timed[ti].t <= t + 1e-12 * Math.max(1, abs(t))) { timed[ti].apply(t, y); ti++; }
     if (![...y].every(Number.isFinite)) { ctx.code('nan', t); return { t, y, stopped: true }; }
     st.reset(t, y);
-    evalG(t, y);
+    evalG(t, y, true);
     while (si < samples.length && samples[si] <= t) { cfg.onSample(samples[si], y); si++; }
     const ymax0 = Math.max(1, ...[...y].map(abs));
     while (t < cfg.tEnd && !stopped) {
@@ -818,7 +822,7 @@
         if (ev.apply) ev.apply(t1, ya);
         y.set(ya); t = t1; jumps++;
         if (jumps > MAX_EVENTS) { ctx.code('zeno', t); break; }
-        st.reset(t, y, true); evalG(t, y);
+        st.reset(t, y, true); evalG(t, y, true);
         continue;
       }
       while (si < samples.length && samples[si] <= t1 + 1e-12 * Math.max(1, abs(t1))) { const ts = Math.min(samples[si], t1); seg(ts, tmp); cfg.onSample(samples[si], tmp); si++; }
@@ -828,7 +832,7 @@
       // timed events at this time, then a restart
       let hit = false;
       while (ti < timed.length && timed[ti].t <= t + 1e-12 * Math.max(1, abs(t))) { timed[ti].apply(t, y); ti++; hit = true; }
-      if (hit) { if (![...y].every(Number.isFinite)) { ctx.code('nan', t); break; } st.reset(t, y, true); evalG(t, y); }
+      if (hit) { if (![...y].every(Number.isFinite)) { ctx.code('nan', t); break; } st.reset(t, y, true); evalG(t, y, true); }
       if (auto && st.stiff) {   // DOPRI5 found the problem stiff: go on with Rosenbrock (like LSODA's switch, Petzold 1983)
         ctx.code('stiff-switched', t); auto = false; method = 'rosenbrock'; st = makeStepper(method, n, cfg.f, o, ctx, []); st.reset(t, y); evalG(t, y);
       } else if (!auto && st.stiff && !ctx.has('stiff')) ctx.code('stiff', t);
@@ -1019,7 +1023,8 @@
         if (t > t0 + trans + 1e-12) { for (let j = 0; j < k; j++) sums[j] += log(r[j]); tAcc += every; record(t); }
       } }); }
       const dt = sv.dt ? sv.dt(env) : null;
-      flow({ n: m, f: fa, y0: Y0, t0, tEnd: t0 + nR * every, method: sv.method === 'verlet' || sv.method === 'yoshida4' ? 'rk4' : sv.method, rtol: sv.rtol, atol: sv.atol, dt, hmax: Math.min(every, (tEnd - t0) / 50), pairs: [], samples: [], onSample: () => {}, crossings: [], timed }, ctx);
+      const atolv = new Float64Array(m).fill(Math.min(sv.atol, 1e-12)); atolv.fill(sv.atol, 0, n);   // the tangent vectors shrink: a pure relative control
+      flow({ n: m, f: fa, y0: Y0, t0, tEnd: t0 + nR * every, method: sv.method === 'verlet' || sv.method === 'yoshida4' ? 'rk4' : sv.method, rtol: sv.rtol, atol: sv.atol, atolv, dt, hmax: Math.min(every, (tEnd - t0) / 50), pairs: [], samples: [], onSample: () => {}, crossings: [], timed }, ctx);
       if (tAcc * Math.max(...Array.from(sums, s => abs(s / Math.max(tAcc, 1e-300)))) < 50 || tAcc < 10 * every) ctx.code('lyap-short');
     }
     if (tAcc > 0) for (let j = 0; j < k; j++) out.lam[j] = sums[j] / tAcc;
@@ -1157,7 +1162,7 @@
     if (M.sweep && outs.some(o => ['sweepParam', 'sweepValue', 'orbit'].includes(o.of))) { sw = sweep(M, env, ctx); env[M.sweep.v] = sweepVal; }
     // the invariants along the samples
     const invSeries = M.invariants.map(v => traj.Y.map((y, i) => { traj.setEnv && traj.setEnv(traj.t[i], Float64Array.from(y)); return v.f(env); }));
-    const drift = invSeries.map(s => { if (!s.length) return NaN; const a = s[0], sc = Math.max(abs(a), 1e-300); let mx = 0; for (const v of s) mx = Math.max(mx, abs(v - a)); return mx / sc; });
+    const drift = invSeries.map(s => { if (!s.length) return NaN; const a = s[0], sc = Math.max(abs(a), 1); let mx = 0; for (const v of s) mx = Math.max(mx, abs(v - a)); return mx / sc; });
     drift.forEach(d => { if (d > 100 * M.solve.rtol + 1e-12 && M.kind !== 'map' && !M.events.some(e => e.set.length)) ctx.code('invariant-drift'); });
     // the aux values along the samples (on demand)
     const auxCache = new Map();

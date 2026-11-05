@@ -1,0 +1,190 @@
+{
+ "format": "noema.sim-spec/v1",
+ "engine": "text@1",
+ "title": "title",
+ "intro": "intro",
+ "params": [
+  {
+   "id": "line",
+   "kind": "slider",
+   "label": "lineLabel",
+   "min": 1,
+   "max": 7,
+   "step": 1,
+   "default": 1
+  },
+  {
+   "id": "d1",
+   "kind": "toggle",
+   "label": "foot1",
+   "default": false
+  },
+  {
+   "id": "d2",
+   "kind": "toggle",
+   "label": "foot2",
+   "default": false
+  },
+  {
+   "id": "d3",
+   "kind": "toggle",
+   "label": "foot3",
+   "default": false
+  },
+  {
+   "id": "d4",
+   "kind": "toggle",
+   "label": "foot4",
+   "default": false
+  }
+ ],
+ "derived": [
+  {
+   "id": "guess",
+   "expr": "d1 + d2 + d3 + d4"
+  }
+ ],
+ "model": {
+  "texts": [
+   {
+    "id": "aen",
+    "lang": "la",
+    "body": "Arma virumque canō, Troiae quī prīmus ab ōrīs\nĪtaliam, fātō profugus, Lāvīnjaque vēnit\nlītora, multum ille et terrīs iactātus et altō\nvī superum saevae memorem Iūnōnis ob īram;\nmulta quoque et bellō passus, dum conderet urbem,\nīnferretque deōs Latiō, genus unde Latīnum,\nAlbānīque patrēs, atque altae moenia Rōmae.",
+    "label": "aenLabel"
+   }
+  ],
+  "metre": {
+   "pattern": "hexameter",
+   "lang": "la"
+  }
+ },
+ "outputs": [
+  {
+   "id": "readings",
+   "kind": "scalar",
+   "of": "scansions",
+   "line": "line"
+  },
+  {
+   "id": "f1",
+   "kind": "scalar",
+   "of": "foot",
+   "line": "line",
+   "n": 1
+  },
+  {
+   "id": "f2",
+   "kind": "scalar",
+   "of": "foot",
+   "line": "line",
+   "n": 2
+  },
+  {
+   "id": "f3",
+   "kind": "scalar",
+   "of": "foot",
+   "line": "line",
+   "n": 3
+  },
+  {
+   "id": "f4",
+   "kind": "scalar",
+   "of": "foot",
+   "line": "line",
+   "n": 4
+  },
+  {
+   "id": "dact",
+   "kind": "scalar",
+   "of": "dactyls",
+   "line": "line"
+  },
+  {
+   "id": "syl",
+   "kind": "scalar",
+   "of": "syllables",
+   "line": "line"
+  },
+  {
+   "id": "pen",
+   "kind": "scalar",
+   "of": "caesura",
+   "line": "line",
+   "type": "penthemimeral"
+  },
+  {
+   "id": "scan",
+   "kind": "scene",
+   "of": "scansion",
+   "line": "line"
+  },
+  {
+   "id": "dl",
+   "kind": "series",
+   "of": "dactylsByLine"
+  },
+  {
+   "id": "ln",
+   "kind": "series",
+   "of": "lineAxis"
+  }
+ ],
+ "readouts": [
+  {
+   "label": "sylLabel",
+   "expr": "syl",
+   "format": "fixed",
+   "digits": 1
+  },
+  {
+   "label": "dactLabel",
+   "expr": "dact",
+   "format": "fixed",
+   "digits": 1
+  },
+  {
+   "label": "rightLabel",
+   "expr": "(d1 == f1) + (d2 == f2) + (d3 == f3) + (d4 == f4)",
+   "format": "fixed",
+   "digits": 1
+  },
+  {
+   "label": "penLabel",
+   "expr": "pen"
+  },
+  {
+   "label": "readLabel",
+   "expr": "readings",
+   "format": "fixed",
+   "digits": 1
+  }
+ ],
+ "plots": [
+  {
+   "kind": "scene",
+   "of": "scan",
+   "title": "scanTitle",
+   "height": 200
+  },
+  {
+   "kind": "series",
+   "title": "plotTitle",
+   "x": {
+    "series": "ln",
+    "label": "lineAxis"
+   },
+   "y": {
+    "min": 0,
+    "max": 5,
+    "label": "dactAxis"
+   },
+   "series": [
+    {
+     "y": "dl",
+     "style": "bars",
+     "label": "dactLine"
+    }
+   ]
+  }
+ ]
+}

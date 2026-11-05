@@ -1,0 +1,17 @@
+{
+ "title": "Prédateurs, proies et paradoxe de l'enrichissement",
+ "intro": "Les proies croissent vers la capacité de charge K de leur milieu ; les prédateurs les mangent, mais chaque prédateur ne peut traiter qu'un nombre limité de proies à la fois, et les prédateurs meurent à un taux constant. Enrichis le milieu des proies en augmentant K et observe ce que deviennent les deux populations une fois les premières oscillations amorties.",
+ "kLabel": "Capacité de charge des proies, K",
+ "swingLabel": "Amplitude des proies (crête à crête, en fin de simulation)",
+ "xStarLabel": "Densité des proies à la coexistence, x*",
+ "stableLabel": "L'état de coexistence est stable",
+ "plotTitle": "Proies et prédateurs au cours du temps",
+ "time": "Temps",
+ "density": "Densité de population",
+ "preyLine": "proies",
+ "predLine": "prédateurs",
+ "phaseTitle": "Plan de phase : prédateurs en fonction des proies",
+ "checkRich": "Le milieu est enrichi jusqu'à K = 2 ou plus.",
+ "checkStable": "Les deux espèces atteignent une coexistence stable.",
+ "checkPred": "Les prédateurs survivent."
+}

@@ -1,0 +1,19 @@
+{
+ "title": "One date, five calendars of antiquity",
+ "intro": "Ancient historians dated an event by the Olympiad, by the years from the founding of Rome, by the reign of a king. Choose a date in the Julian calendar, counted in years before the common era, and see the same day as an Olympiad and its year (the Olympic year starting in midsummer), as a year ab urbe condita (Varro's era, Rome founded in 753 BCE), as a year of the Hebrew world era (anno mundi), as a year of the era of Nabonassar used by Ptolemy (from 747 BCE) and as a Julian Day Number. Try the battle of Salamis, late September 480 BCE, or the first Olympic games, summer 776 BCE.",
+ "yearBce": "Year (BCE)",
+ "month": "Month",
+ "day": "Day",
+ "evBattle": "the chosen date",
+ "evMarathon": "Marathon (Sept 490 BCE)",
+ "perWars": "the Persian Wars (499–449 BCE)",
+ "bce": "BCE",
+ "olLabel": "Olympiad",
+ "olSubLabel": "Year of the Olympiad (1–4)",
+ "aucLabel": "Year ab urbe condita (Varro)",
+ "amLabel": "Year of the Hebrew era (anno mundi)",
+ "nabLabel": "Year of the era of Nabonassar",
+ "jdnLabel": "Julian Day Number",
+ "gapLabel": "Calendar years after Marathon",
+ "chartTitle": "The chosen date among the Persian Wars"
+}

@@ -1,0 +1,46 @@
+{
+ "format": "noema.sim-spec/v1",
+ "engine": "genetics@1",
+ "title": "title",
+ "intro": "intro",
+ "consts": { "reps": 200, "gens": 400 },
+ "params": [
+  { "id": "N", "kind": "slider", "label": "sizeLabel", "min": 10, "max": 500, "step": 10, "default": 20 },
+  { "id": "p0", "kind": "slider", "label": "p0Label", "min": 0.05, "max": 0.95, "step": 0.05, "default": 0.5 },
+  { "id": "s", "kind": "slider", "label": "sLabel", "min": -0.05, "max": 0.1, "step": 0.005, "default": 0 }
+ ],
+ "model": { "mode": "drift", "process": "wf", "N": "N", "p0": "p0", "s": "s", "h": 0.5, "reps": "reps", "gens": "gens" },
+ "outputs": [
+  { "id": "t", "kind": "series", "of": "t" },
+  { "id": "r1", "kind": "series", "of": "rep", "arg": 0 },
+  { "id": "r2", "kind": "series", "of": "rep", "arg": 1 },
+  { "id": "r3", "kind": "series", "of": "rep", "arg": 2 },
+  { "id": "r4", "kind": "series", "of": "rep", "arg": 3 },
+  { "id": "r5", "kind": "series", "of": "rep", "arg": 4 },
+  { "id": "hSim", "kind": "series", "of": "meanHs" },
+  { "id": "hTh", "kind": "series", "of": "hTheoryS" },
+  { "id": "fixed", "kind": "scalar", "of": "fixed" },
+  { "id": "lost", "kind": "scalar", "of": "lost" },
+  { "id": "u", "kind": "scalar", "of": "uTheory" },
+  { "id": "hEnd", "kind": "scalar", "of": "meanH" },
+  { "id": "hTheory", "kind": "scalar", "of": "hTheory" },
+  { "id": "tFix", "kind": "scalar", "of": "tFix" }
+ ],
+ "readouts": [
+  { "label": "fixedLabel", "expr": "100 * fixed", "unit": "%", "format": "fixed", "digits": 1 },
+  { "label": "uLabel", "expr": "100 * u", "unit": "%", "format": "fixed", "digits": 1 },
+  { "label": "lostLabel", "expr": "100 * lost", "unit": "%", "format": "fixed", "digits": 1 },
+  { "label": "hLabel", "expr": "hEnd", "format": "fixed", "digits": 3 },
+  { "label": "hTheoryLabel", "expr": "hTheory", "format": "fixed", "digits": 3 }
+ ],
+ "plots": [
+  { "kind": "series", "title": "pathsTitle",
+    "x": { "series": "t", "label": "gen" },
+    "y": { "min": 0, "max": 1, "label": "freq" },
+    "series": [ { "y": "r1", "label": "path1" }, { "y": "r2", "label": "path2" }, { "y": "r3", "label": "path3" }, { "y": "r4", "label": "path4" }, { "y": "r5", "label": "path5" } ] },
+  { "kind": "series", "title": "hTitle",
+    "x": { "series": "t", "label": "gen" },
+    "y": { "min": 0, "max": 0.5, "label": "het" },
+    "series": [ { "y": "hSim", "label": "hSimLine" }, { "y": "hTh", "label": "hThLine" } ] }
+ ]
+}

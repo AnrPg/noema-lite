@@ -1,0 +1,1184 @@
+{
+ "specs": [
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "music@1",
+   "title": "title",
+   "intro": "intro",
+   "consts": {
+    "pure": 386.3137,
+    "wolfMax": 740
+   },
+   "params": [
+    {
+     "id": "fr",
+     "kind": "slider",
+     "label": "fraction",
+     "min": 0,
+     "max": 0.5,
+     "step": 0.01,
+     "default": 0
+    }
+   ],
+   "model": {
+    "tuning": {
+     "system": "meantone",
+     "fraction": "fr",
+     "layout": "keyboard",
+     "chainStart": "Eb",
+     "a4": 440
+    },
+    "sets": [
+     {
+      "id": "triad",
+      "notes": [
+       "C4",
+       "E4",
+       "G4"
+      ]
+     },
+     {
+      "id": "wolfFifth",
+      "notes": [
+       "G#3",
+       "Eb4"
+      ]
+     }
+    ],
+    "timbres": [
+     {
+      "id": "organ",
+      "kind": "harmonic",
+      "n": 6,
+      "decay": 0.7
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "fifth",
+     "kind": "scalar",
+     "of": "cents",
+     "from": "C4",
+     "to": "G4"
+    },
+    {
+     "id": "third",
+     "kind": "scalar",
+     "of": "cents",
+     "from": "C4",
+     "to": "E4"
+    },
+    {
+     "id": "wolf",
+     "kind": "scalar",
+     "of": "cents",
+     "from": "G#4",
+     "to": "Eb5"
+    },
+    {
+     "id": "beats",
+     "kind": "scalar",
+     "of": "beats",
+     "a": "C4",
+     "b": "E4",
+     "p": 5,
+     "q": 4
+    },
+    {
+     "id": "kb",
+     "kind": "scene",
+     "of": "keyboard",
+     "set": "triad",
+     "from": "C4",
+     "to": "B4",
+     "cents": true
+    },
+    {
+     "id": "chord",
+     "kind": "sound",
+     "of": "play",
+     "set": "triad",
+     "timbre": "organ",
+     "dur": 2
+    },
+    {
+     "id": "wolfSound",
+     "kind": "sound",
+     "of": "play",
+     "set": "wolfFifth",
+     "timbre": "organ",
+     "dur": 2
+    }
+   ],
+   "readouts": [
+    {
+     "label": "fifthLabel",
+     "expr": "fifth",
+     "unit": "c",
+     "format": "fixed",
+     "digits": 2
+    },
+    {
+     "label": "thirdLabel",
+     "expr": "third",
+     "unit": "c",
+     "format": "fixed",
+     "digits": 2
+    },
+    {
+     "label": "pureLabel",
+     "expr": "third - pure",
+     "unit": "c",
+     "format": "fixed",
+     "digits": 2
+    },
+    {
+     "label": "wolfLabel",
+     "expr": "wolf",
+     "unit": "c",
+     "format": "fixed",
+     "digits": 2
+    },
+    {
+     "label": "beatsLabel",
+     "expr": "beats",
+     "unit": "Hz",
+     "format": "fixed",
+     "digits": 2
+    }
+   ],
+   "plots": [
+    {
+     "kind": "scene",
+     "of": "kb",
+     "title": "kbTitle",
+     "height": 220
+    },
+    {
+     "kind": "sound",
+     "of": "chord",
+     "title": "chordTitle",
+     "height": 120
+    },
+    {
+     "kind": "sound",
+     "of": "wolfSound",
+     "title": "wolfTitle",
+     "height": 120
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "music@1",
+   "title": "title",
+   "intro": "intro",
+   "params": [
+    {
+     "id": "u",
+     "kind": "slider",
+     "label": "u",
+     "min": 0,
+     "max": 1,
+     "step": 0.1,
+     "default": 0.5
+    }
+   ],
+   "model": {
+    "tuning": {
+     "system": "werckmeister3"
+    }
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "tuning",
+     "pc": 4,
+     "field": "cents"
+    },
+    {
+     "id": "s",
+     "kind": "series",
+     "of": "tuning",
+     "part": "dev"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "music@1",
+   "title": "title",
+   "intro": "intro",
+   "params": [
+    {
+     "id": "n",
+     "kind": "slider",
+     "label": "n",
+     "min": 12,
+     "max": 53,
+     "step": 1,
+     "default": 19
+    }
+   ],
+   "model": {
+    "tuning": {
+     "system": "edo",
+     "edo": "n"
+    },
+    "sets": [
+     {
+      "id": "c",
+      "notes": [
+       "C4",
+       "E4",
+       "G4"
+      ]
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "f",
+     "kind": "scalar",
+     "of": "freq",
+     "set": "c",
+     "i": 1
+    },
+    {
+     "id": "k",
+     "kind": "scene",
+     "of": "keyboard",
+     "set": "c",
+     "cents": true
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "music@1",
+   "title": "title",
+   "intro": "intro",
+   "params": [
+    {
+     "id": "u",
+     "kind": "slider",
+     "label": "u",
+     "min": 0,
+     "max": 1,
+     "step": 0.1,
+     "default": 0.5
+    }
+   ],
+   "model": {
+    "sets": [
+     {
+      "id": "p",
+      "pcs": [
+       0,
+       1,
+       3,
+       7,
+       8
+      ]
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "f",
+     "kind": "scalar",
+     "of": "pcset",
+     "set": "p",
+     "field": "forte"
+    },
+    {
+     "id": "c",
+     "kind": "scene",
+     "of": "clock",
+     "set": "p"
+    },
+    {
+     "id": "t",
+     "kind": "scene",
+     "of": "tonnetz",
+     "set": "p"
+    },
+    {
+     "id": "o",
+     "kind": "scene",
+     "of": "circle",
+     "set": "p"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "music@1",
+   "title": "title",
+   "intro": "intro",
+   "params": [
+    {
+     "id": "u",
+     "kind": "slider",
+     "label": "u",
+     "min": 0,
+     "max": 1,
+     "step": 0.1,
+     "default": 0.5
+    }
+   ],
+   "model": {
+    "sets": [
+     {
+      "id": "g",
+      "notes": [
+       "G3",
+       "B3",
+       "D4",
+       "F4"
+      ]
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "roman",
+     "set": "g",
+     "key": "C",
+     "mode": "major",
+     "field": "degree"
+    },
+    {
+     "id": "c",
+     "kind": "scalar",
+     "of": "chord",
+     "set": "g",
+     "field": "figure"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "music@1",
+   "title": "title",
+   "intro": "intro",
+   "params": [
+    {
+     "id": "u",
+     "kind": "slider",
+     "label": "u",
+     "min": 0,
+     "max": 1,
+     "step": 0.1,
+     "default": 0.5
+    }
+   ],
+   "model": {
+    "progressions": [
+     {
+      "id": "p",
+      "key": "C",
+      "chords": [
+       [
+        "C5",
+        "G4",
+        "E4",
+        "C3"
+       ],
+       [
+        "D5",
+        "A4",
+        "F4",
+        "D3"
+       ]
+      ]
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "v",
+     "kind": "scalar",
+     "of": "vl",
+     "progression": "p",
+     "rule": "all"
+    },
+    {
+     "id": "s",
+     "kind": "scene",
+     "of": "staff",
+     "progression": "p",
+     "clef": "grand"
+    },
+    {
+     "id": "pl",
+     "kind": "sound",
+     "of": "play",
+     "progression": "p",
+     "dur": 1
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "music@1",
+   "title": "title",
+   "intro": "intro",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 1,
+     "max": 8,
+     "step": 1,
+     "default": 3
+    }
+   ],
+   "model": {
+    "rhythms": [
+     {
+      "id": "r",
+      "k": "k",
+      "n": 8,
+      "rot": 0
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "o",
+     "kind": "scalar",
+     "of": "rhythm",
+     "rhythm": "r",
+     "field": "onsets"
+    },
+    {
+     "id": "c",
+     "kind": "scene",
+     "of": "clock",
+     "rhythm": "r"
+    },
+    {
+     "id": "pl",
+     "kind": "sound",
+     "of": "play",
+     "rhythm": "r",
+     "bpm": "90"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "music@1",
+   "title": "title",
+   "intro": "intro",
+   "params": [
+    {
+     "id": "u",
+     "kind": "slider",
+     "label": "u",
+     "min": 0,
+     "max": 1,
+     "step": 0.1,
+     "default": 0.5
+    }
+   ],
+   "model": {
+    "timbres": [
+     {
+      "id": "h",
+      "kind": "harmonic",
+      "n": 6,
+      "decay": 0.88
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "d",
+     "kind": "series",
+     "of": "dissonance",
+     "timbre": "h",
+     "from": 1,
+     "to": "2",
+     "points": 500,
+     "part": "y"
+    },
+    {
+     "id": "x",
+     "kind": "series",
+     "of": "dissonance",
+     "timbre": "h",
+     "points": 500,
+     "part": "x"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "music@1",
+   "title": "title",
+   "intro": "intro",
+   "params": [
+    {
+     "id": "u",
+     "kind": "slider",
+     "label": "u",
+     "min": 0,
+     "max": 1,
+     "step": 0.1,
+     "default": 0.5
+    }
+   ],
+   "model": {
+    "timbres": [
+     {
+      "id": "b",
+      "kind": "custom",
+      "ratios": [
+       1,
+       2.756,
+       5.404
+      ],
+      "amps": [
+       1,
+       0.5,
+       "a"
+      ]
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "s",
+     "kind": "series",
+     "of": "spectrum",
+     "timbre": "b",
+     "note": "A4",
+     "part": "x"
+    },
+    {
+     "id": "w",
+     "kind": "series",
+     "of": "waveform",
+     "timbre": "b",
+     "samples": 256,
+     "part": "y"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "music@1",
+   "title": "title",
+   "intro": "intro",
+   "params": [
+    {
+     "id": "u",
+     "kind": "slider",
+     "label": "u",
+     "min": 0,
+     "max": 1,
+     "step": 0.1,
+     "default": 0.5
+    }
+   ],
+   "model": {},
+   "outputs": [
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "resonator",
+     "type": "closed",
+     "k": 1,
+     "L": "len",
+     "tempC": 20
+    },
+    {
+     "id": "d",
+     "kind": "scalar",
+     "of": "duration",
+     "value": 0.25,
+     "dots": 1,
+     "bpm": 120
+    },
+    {
+     "id": "m",
+     "kind": "scalar",
+     "of": "meter",
+     "meter": "6/8",
+     "field": "beats"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "music@1",
+   "title": "title",
+   "intro": "intro",
+   "params": [
+    {
+     "id": "u",
+     "kind": "slider",
+     "label": "u",
+     "min": 0,
+     "max": 1,
+     "step": 0.1,
+     "default": 0.5
+    }
+   ],
+   "model": {},
+   "outputs": [
+    {
+     "id": "c",
+     "kind": "scalar",
+     "of": "comma",
+     "name": "syntonic"
+    },
+    {
+     "id": "z",
+     "kind": "scalar",
+     "of": "monzo",
+     "monzo": [
+      -4,
+      4,
+      -1
+     ]
+    },
+    {
+     "id": "ee",
+     "kind": "scalar",
+     "of": "edo",
+     "n": 31,
+     "ratio": 1.25,
+     "field": "error"
+    },
+    {
+     "id": "m",
+     "kind": "scalar",
+     "of": "melakarta",
+     "n": 29,
+     "i": 2
+    },
+    {
+     "id": "s",
+     "kind": "scalar",
+     "of": "scale",
+     "name": "rast",
+     "i": 2,
+     "field": "cents"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "music@1",
+   "title": "title",
+   "intro": "intro",
+   "params": [
+    {
+     "id": "u",
+     "kind": "slider",
+     "label": "u",
+     "min": 0,
+     "max": 1,
+     "step": 0.1,
+     "default": 0.5
+    }
+   ],
+   "model": {
+    "sets": [
+     {
+      "id": "a",
+      "notes": [
+       "C4",
+       "H4"
+      ]
+     },
+     {
+      "id": "a",
+      "midi": [
+       60
+      ]
+     }
+    ]
+   },
+   "outputs": []
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "music@1",
+   "title": "title",
+   "intro": "intro",
+   "params": [
+    {
+     "id": "u",
+     "kind": "slider",
+     "label": "u",
+     "min": 0,
+     "max": 1,
+     "step": 0.1,
+     "default": 0.5
+    }
+   ],
+   "model": {
+    "sets": [
+     {
+      "id": "a",
+      "notes": [
+       "C4"
+      ],
+      "pcs": [
+       0
+      ]
+     },
+     {
+      "id": "b",
+      "midi": [
+       60
+      ],
+      "transpose": "P3"
+     },
+     {
+      "id": "c",
+      "notes": [
+       "C4"
+      ],
+      "transpose": "M5"
+     }
+    ]
+   },
+   "outputs": []
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "music@1",
+   "title": "title",
+   "intro": "intro",
+   "params": [
+    {
+     "id": "u",
+     "kind": "slider",
+     "label": "u",
+     "min": 0,
+     "max": 1,
+     "step": 0.1,
+     "default": 0.5
+    }
+   ],
+   "model": {
+    "tuning": {
+     "system": "edo",
+     "tonic": "H"
+    }
+   },
+   "outputs": []
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "music@1",
+   "title": "title",
+   "intro": "intro",
+   "params": [
+    {
+     "id": "u",
+     "kind": "slider",
+     "label": "u",
+     "min": 0,
+     "max": 1,
+     "step": 0.1,
+     "default": 0.5
+    }
+   ],
+   "model": {
+    "tuning": {
+     "system": "cents",
+     "cents": [
+      0,
+      100
+     ]
+    }
+   },
+   "outputs": []
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "music@1",
+   "title": "title",
+   "intro": "intro",
+   "params": [
+    {
+     "id": "u",
+     "kind": "slider",
+     "label": "u",
+     "min": 0,
+     "max": 1,
+     "step": 0.1,
+     "default": 0.5
+    }
+   ],
+   "model": {
+    "progressions": [
+     {
+      "id": "p",
+      "key": "Q",
+      "chords": [
+       [
+        "C4",
+        "E4"
+       ],
+       [
+        "D4",
+        "F4",
+        "A4"
+       ]
+      ]
+     }
+    ]
+   },
+   "outputs": []
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "music@1",
+   "title": "title",
+   "intro": "intro",
+   "params": [
+    {
+     "id": "u",
+     "kind": "slider",
+     "label": "u",
+     "min": 0,
+     "max": 1,
+     "step": 0.1,
+     "default": 0.5
+    }
+   ],
+   "model": {
+    "progressions": [
+     {
+      "id": "p",
+      "chords": []
+     }
+    ]
+   },
+   "outputs": []
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "music@1",
+   "title": "title",
+   "intro": "intro",
+   "params": [
+    {
+     "id": "u",
+     "kind": "slider",
+     "label": "u",
+     "min": 0,
+     "max": 1,
+     "step": 0.1,
+     "default": 0.5
+    }
+   ],
+   "model": {
+    "rhythms": [
+     {
+      "id": "r"
+     },
+     {
+      "id": "s",
+      "pattern": "x-x"
+     }
+    ]
+   },
+   "outputs": []
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "music@1",
+   "title": "title",
+   "intro": "intro",
+   "params": [
+    {
+     "id": "u",
+     "kind": "slider",
+     "label": "u",
+     "min": 0,
+     "max": 1,
+     "step": 0.1,
+     "default": 0.5
+    }
+   ],
+   "model": {
+    "timbres": [
+     {
+      "id": "t",
+      "kind": "custom",
+      "ratios": [
+       1,
+       2
+      ],
+      "amps": [
+       1
+      ]
+     },
+     {
+      "id": "u",
+      "kind": "pipe"
+     }
+    ]
+   },
+   "outputs": []
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "music@1",
+   "title": "title",
+   "intro": "intro",
+   "params": [
+    {
+     "id": "u",
+     "kind": "slider",
+     "label": "u",
+     "min": 0,
+     "max": 1,
+     "step": 0.1,
+     "default": 0.5
+    }
+   ],
+   "model": {},
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "chord",
+     "set": "zz",
+     "field": "root"
+    },
+    {
+     "id": "b",
+     "kind": "scalar",
+     "of": "freq"
+    },
+    {
+     "id": "c",
+     "kind": "sound",
+     "of": "play"
+    },
+    {
+     "id": "d",
+     "kind": "scalar",
+     "of": "meter",
+     "meter": "3/5",
+     "field": "beats"
+    },
+    {
+     "id": "ee",
+     "kind": "scalar",
+     "of": "nope"
+    },
+    {
+     "id": "f",
+     "kind": "scalar",
+     "of": "nrt",
+     "set": "zz",
+     "ops": "PQ",
+     "field": "root"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "music@1",
+   "title": "title",
+   "intro": "intro",
+   "params": [
+    {
+     "id": "u",
+     "kind": "slider",
+     "label": "u",
+     "min": 0,
+     "max": 1,
+     "step": 0.1,
+     "default": 0.5
+    }
+   ],
+   "model": {},
+   "outputs": [
+    {
+     "id": "k",
+     "kind": "scene",
+     "of": "keyboard",
+     "from": "C9x"
+    },
+    {
+     "id": "c",
+     "kind": "scene",
+     "of": "clock"
+    },
+    {
+     "id": "s",
+     "kind": "scene",
+     "of": "staff"
+    },
+    {
+     "id": "x",
+     "kind": "series",
+     "of": "tuning"
+    },
+    {
+     "id": "y",
+     "kind": "sound",
+     "of": "tone"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "music@1",
+   "title": "title",
+   "intro": "intro",
+   "params": [
+    {
+     "id": "u",
+     "kind": "slider",
+     "label": "u",
+     "min": 0,
+     "max": 1,
+     "step": 0.1,
+     "default": 0.5
+    }
+   ],
+   "model": {},
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "interval",
+     "from": "C4",
+     "to": "G#4",
+     "field": "width"
+    },
+    {
+     "id": "b",
+     "kind": "scalar",
+     "of": "roman",
+     "set": "s",
+     "key": "Hb",
+     "field": "degree"
+    },
+    {
+     "id": "c",
+     "kind": "scalar",
+     "of": "beats",
+     "a": "C4",
+     "b": "E44"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "music@1",
+   "title": "title",
+   "intro": "intro",
+   "params": [
+    {
+     "id": "u",
+     "kind": "slider",
+     "label": "u",
+     "min": 0,
+     "max": 1,
+     "step": 0.1,
+     "default": 0.5
+    }
+   ],
+   "model": {
+    "sets": "none",
+    "timbres": [
+     {
+      "kind": "harmonic"
+     }
+    ]
+   },
+   "outputs": "nope"
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "music@1",
+   "title": "title",
+   "intro": "intro",
+   "params": [
+    {
+     "id": "u",
+     "kind": "slider",
+     "label": "u",
+     "min": 0,
+     "max": 1,
+     "step": 0.1,
+     "default": 0.5
+    }
+   ],
+   "model": null,
+   "outputs": []
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "music@1",
+   "title": "title",
+   "intro": "intro",
+   "params": [
+    {
+     "id": "u",
+     "kind": "slider",
+     "label": "u",
+     "min": 0,
+     "max": 1,
+     "step": 0.1,
+     "default": 0.5
+    }
+   ],
+   "model": {
+    "tuning": {
+     "system": "meantone",
+     "fraction": "1/4",
+     "a4": "a",
+     "chainStart": "E#"
+    },
+    "sets": [
+     {
+      "id": "s",
+      "midi": [
+       "m",
+       64,
+       "m+7"
+      ]
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "d",
+     "kind": "series",
+     "of": "dissonance",
+     "from": "r0",
+     "to": 2,
+     "points": 1,
+     "part": "z"
+    },
+    {
+     "id": "q",
+     "kind": "scalar",
+     "of": "pcset",
+     "set": "s",
+     "field": "forte",
+     "extra": 1
+    }
+   ]
+  }
+ ]
+}

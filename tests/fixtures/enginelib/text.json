@@ -998,6 +998,53 @@
 "max": 10
 }
 ]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "text@1",
+"params": [
+{
+"id": "w",
+"kind": "slider",
+"label": "wLabel",
+"min": 5,
+"max": 100,
+"default": 50
+}
+],
+"model": {
+"texts": [
+{
+"id": "aen",
+"lang": "la",
+"body": "Arma virumque cano, Troiae qui primus ab oris\nItaliam fato profugus Lavinjaque venit\nlitora, multum ille et terris iactatus et alto"
+}
+],
+"metre": {
+"pattern": "hexameter"
+}
+},
+"outputs": [
+{
+"id": "a",
+"kind": "scalar",
+"of": "dactyls",
+"line": "w/25"
+},
+{
+"id": "b",
+"kind": "scalar",
+"of": "foot",
+"line": 2.5,
+"n": 2
+},
+{
+"id": "c",
+"kind": "scene",
+"of": "scansion",
+"line": 0
+}
+]
 }
 ]
 }

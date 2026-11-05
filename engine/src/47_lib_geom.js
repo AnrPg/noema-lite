@@ -687,7 +687,14 @@
       fx[ob.id] = f;
     }
     const sw = isObj(m.sweep) ? { var: m.sweep.var, from: C.cx(m.sweep.from), to: C.cx(m.sweep.to), samples: m.sweep.samples || 200 } : null;
-    return { objs, fx, sw };
+    // what each object is built from (its refs, and the X of a pick near:X / far:X / other:X): the sweep rebuilds only what the loci and series need
+    const ids = new Set(objs.map(ob => ob.id)), deps = new Map();
+    for (const ob of objs) {
+      const d = new Set(), walk = x => { if (typeof x === 'string') { const r = x.replace(/^(near|far|other):/, ''); if (r !== ob.id && ids.has(r)) d.add(r); } else if (Array.isArray(x)) x.forEach(walk); else if (isObj(x)) Object.values(x).forEach(walk); };
+      if (ob.kind !== 'point') walk(ob.v); deps.set(ob.id, d);
+    }
+    const closure = roots => { const need = new Set(), st = roots.filter(r => ids.has(r)); while (st.length) { const r = st.pop(); if (need.has(r)) continue; need.add(r); for (const q of deps.get(r)) st.push(q); } return need; };
+    return { objs, fx, sw, closure };
   }
   function diagSet() { const L = [], set = new Set(); return { list: L, set, add(code, at) { const k = code + '@' + (at || ''); if (!set.has(k)) { set.add(k); L.push(at === undefined ? { code } : { code, at }); } }, has: (c, at) => (at === undefined ? L.some(d => d.code === c) : set.has(c + '@' + at)) }; }
   /** evaluate every object in order → Map id → value; mem keeps the previous sample's picks (continuity within a sweep) */
@@ -701,6 +708,7 @@
     const get = r => V.get(r);
     for (const ob of prep.objs) {
       const id = ob.id, v = ob.v, f = prep.fx[id];
+      if (opts && opts.only && !opts.only.has(id)) continue;
       let res;
       try { res = build(ob, v, f, get, env, S, tol, D, mem, opts); } catch (e) { res = und('undefined', id); }
       if (!res) res = und('undefined', id);
@@ -1071,11 +1079,12 @@
     if (sw && (loci.length || series.length)) {
       const a = sw.from(env), b = sw.to(env), n = sw.samples;
       const ser = series.map(() => []), lines = loci.map(() => [[]]), mem = { prev: new Map(), next: new Map() };
+      const only = prep.closure ? { only: prep.closure(loci.map(ob => ob.v.of).concat(...series.map(o => o.at || []))) } : null;
       if (!Number.isFinite(a) || !Number.isFinite(b)) D.add('param');
       else for (let i = 0; i < n; i++) {
         const u = a + (b - a) * i / (n - 1), e2 = Object.assign({}, env, { [sw.var]: u }), Dx = diagSet();
         mem.next = new Map();
-        const r = evaluate(spec, prep, e2, Dx, mem, null);
+        const r = evaluate(spec, prep, e2, Dx, mem, only);
         mem.prev = mem.next;
         for (const d of Dx.list) if (d.code === 'branch-switch') D.add('branch-switch', d.at);
         series.forEach((o, j) => { ser[j].push(o.of === 'sweep' ? u : measure(o, r.V, r.S, r.tol, Dx)); });
@@ -1095,7 +1104,7 @@
         if (o.of === 'flag') out[o.id] = (o.at && o.at.length ? D.has(o.code, o.at[0]) || (V.get(o.at[0]) && V.get(o.at[0]).t === 'X' && V.get(o.at[0]).code === o.code) : D.has(o.code)) ? 1 : 0;
         else if (o.of === 'residual') { const r = residualOf(o.test, (o.at || []).map(x => V.get(x)), base.S); out[o.id] = r ? r.res : NaN; }
         else if (o.of === 'always') out[o.id] = always(spec, prep, env, o, D);
-        else out[o.id] = measure(o, V, base.S, base.tol, D);
+        else { try { out[o.id] = measure(o, V, base.S, base.tol, D); } catch (err) { out[o.id] = NaN; D.add('undefined', o.id); } }   // an unchecked spec: a value, never a throw
       } else if (o.kind === 'scene') out[o.id] = drawing(prep, V, Array.isArray(m.view) ? m.view : viewOf(prep, V), o);
     }
     spec0 = null;

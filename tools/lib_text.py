@@ -32,12 +32,12 @@ OUT = {
         "keyness": {"text": "ref!", "ref": "ref!", "word": "raw!", "measure": "enum:g2|logRatio"},
         "readability": {"text": T_, "formula": "enum:" + "|".join(FORMULAS) + "!", "what": "enum:score|asl|asw|words|sentences|syllables"},
         "delta": {"a": "ref!", "b": "ref!", "mfw": "numx", "variant": "enum:burrows|cosine|quadratic"},
-        "syllables": {"text": T_, "line": LINE},
-        "scansions": {"text": T_, "line": "int:1:2000!"},
-        "foot": {"text": T_, "line": "int:1:2000!", "n": "int:1:6!", "reading": READ},
-        "dactyls": {"text": T_, "line": "int:1:2000!", "reading": READ},
-        "caesura": {"text": T_, "line": "int:1:2000!", "type": "enum:penthemimeral|trithemimeral|hephthemimeral|trochaic|bucolic|diaeresis!", "reading": READ},
-        "metreFit": {"text": T_, "line": "int:1:2000!"},
+        "syllables": {"text": T_, "line": "numx"},
+        "scansions": {"text": T_, "line": "numx!"},
+        "foot": {"text": T_, "line": "numx!", "n": "int:1:6!", "reading": READ},
+        "dactyls": {"text": T_, "line": "numx!", "reading": READ},
+        "caesura": {"text": T_, "line": "numx!", "type": "enum:penthemimeral|trithemimeral|hephthemimeral|trochaic|bucolic|diaeresis!", "reading": READ},
+        "metreFit": {"text": T_, "line": "numx!"},
         "rhyme": {"text": T_, "a": "int:1:2000!", "b": "int:1:2000!"},
         "scheme": {"text": T_, "scheme": "raw!", "from": LINE},
     },
@@ -51,14 +51,14 @@ OUT = {
     },
     "scene": {
         "kwic": {"text": T_, "word": "raw!", "window": "int:1:12", "max": "int:1:40"},
-        "scansion": {"text": T_, "line": "int:1:2000!", "reading": READ},
+        "scansion": {"text": T_, "line": "numx!", "reading": READ},
         "topWords": {"text": T_, "top": "int:2:30"},
         "deltaMap": {"mfw": "numx", "variant": "enum:burrows|cosine|quadratic"},
         "rhymes": {"text": T_, "from": LINE},
     },
 }
 RAW_F = ["word", "w1", "w2", "scheme"]
-NUMX_ORDER = ["window", "threshold", "sample", "per", "rmin", "rmax", "xmin", "o11", "r1", "c1", "n", "mfw"]
+NUMX_ORDER = ["line", "window", "threshold", "sample", "per", "rmin", "rmax", "xmin", "o11", "r1", "c1", "n", "mfw"]
 SCAN_OFS = ["scansions", "foot", "dactyls", "caesura", "scansion", "dactylsByLine", "metreFit"]
 
 
@@ -118,6 +118,7 @@ def check_spec(spec):
         if o["of"] in ("foot", "dactyls", "caesura", "scansions", "scansion", "dactylsByLine") and metre is not None and metre.get("pattern") in EN_METRES:
             E2("ref", at + ".of", "the English metres give metreFit and syllables")
         if o["of"] in ("delta", "deltaMap") and len(ids) < 3: E2("value", at + ".of", "Delta needs at least 3 texts")
+        if L.is_num(o.get("line")) and not (float(o["line"]).is_integer() and 1 <= o["line"] <= 2000): E2("value", at + ".line", "needs an integer from 1 to 2000")
         if o["of"] == "scheme" and _raw_ok(o.get("scheme")) and not re.fullmatch(r"[A-Za-z ]+", o["scheme"]): E2("value", at + ".scheme", "needs letters such as ABAB CDCD EFEF GG")
 
     L.check_outputs(spec, ID, ["scalar", "series", "scene"], out, E, W)

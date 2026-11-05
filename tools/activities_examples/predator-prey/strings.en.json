@@ -1,0 +1,17 @@
+{
+ "title": "Predators, prey and the paradox of enrichment",
+ "intro": "Prey grow towards the carrying capacity K of their environment; predators eat them, but each predator can only handle so many prey at a time, and predators die at a constant rate. Make the prey's environment richer by raising K and watch what happens to both populations once the first swings have died away.",
+ "kLabel": "Carrying capacity of the prey, K",
+ "swingLabel": "Swing of the prey (peak to peak, late in the run)",
+ "xStarLabel": "Prey density at coexistence, x*",
+ "stableLabel": "The coexistence state is stable",
+ "plotTitle": "Prey and predators over time",
+ "time": "Time",
+ "density": "Population density",
+ "preyLine": "prey",
+ "predLine": "predators",
+ "phaseTitle": "Phase plane: predators against prey",
+ "checkRich": "The environment is enriched to K = 2 or more.",
+ "checkStable": "The two species settle to a steady coexistence.",
+ "checkPred": "The predators survive."
+}

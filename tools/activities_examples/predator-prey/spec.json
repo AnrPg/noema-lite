@@ -1,0 +1,40 @@
+{
+ "format": "noema.sim-spec/v1",
+ "engine": "ode@1",
+ "title": "title",
+ "intro": "intro",
+ "consts": { "Kmin": 2 },
+ "params": [
+  { "id": "K", "kind": "slider", "label": "kLabel", "min": 0.5, "max": 5, "step": 0.05, "default": 4 }
+ ],
+ "model": {
+  "template": "rm",
+  "set": { "K": "K", "r": 1, "a": 1, "h": 1, "eff": 0.5, "m": 0.2, "x0": 1, "y0": 0.5 },
+  "solve": { "tEnd": 600, "transient": 300, "points": 600 },
+  "equilibria": { "box": { "x": [0.05, 5], "y": [0.05, 3] }, "grid": 4 },
+  "phase": { "x": "x", "y": "y", "xmin": 0, "ymin": 0, "field": 12 }
+ },
+ "outputs": [
+  { "id": "t", "kind": "series", "of": "t" },
+  { "id": "prey", "kind": "series", "of": "state", "var": "x" },
+  { "id": "pred", "kind": "series", "of": "state", "var": "y" },
+  { "id": "swing", "kind": "scalar", "of": "stat", "var": "x", "stat": "pp" },
+  { "id": "predEnd", "kind": "scalar", "of": "final", "var": "y" },
+  { "id": "xStar", "kind": "scalar", "of": "quantity", "name": "xStar" },
+  { "id": "Kc", "kind": "scalar", "of": "quantity", "name": "Kc" },
+  { "id": "stable", "kind": "scalar", "of": "eqStable", "index": 1 },
+  { "id": "portrait", "kind": "scene", "of": "phase" }
+ ],
+ "readouts": [
+  { "label": "swingLabel", "expr": "swing", "digits": 3 },
+  { "label": "xStarLabel", "expr": "xStar", "digits": 3 },
+  { "label": "stableLabel", "expr": "stable == 1" }
+ ],
+ "plots": [
+  { "kind": "series", "title": "plotTitle",
+    "x": { "series": "t", "label": "time" },
+    "y": { "min": 0, "label": "density" },
+    "series": [ { "y": "prey", "label": "preyLine" }, { "y": "pred", "label": "predLine" } ] },
+  { "kind": "scene", "title": "phaseTitle", "of": "portrait", "height": 320 }
+ ]
+}

@@ -1,0 +1,17 @@
+{
+ "id": "hexameter-scansion",
+ "runtime": "sim-spec@1",
+ "entry": "activities/hexameter-scansion/spec.json",
+ "stateVersion": 1,
+ "capabilities": [
+  "state",
+  "events"
+ ],
+ "fallback": {
+  "media": "hexameter-scansion-still",
+  "text": "Aeneid 1.1, Arma virumque canō, Troiae quī prīmus ab ōrīs, scans – ⏑ ⏑ | – ⏑ ⏑ | – – | – – | – ⏑ ⏑ | – –: dactyl, dactyl, spondee, spondee, dactyl, and a final spondee (DDSSDS), 15 syllables, with the main caesura after canō, after the third long syllable (penthemimeral). The seven opening lines: 1 DDSSDS, 2 DSDSDS, 3 DSSSDS (with the elisions mult(um) ill(e) et), 4 DSDSDS, 5 DSSSDS, 6 SDDDDS, 7 SDSSDS."
+ },
+ "origin": "own",
+ "credit": "noema-lite reference activity; text: Virgil, Aeneid 1.1–7 (public domain), long vowels marked",
+ "license": "own"
+}

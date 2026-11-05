@@ -1,0 +1,17 @@
+{
+ "id": "calendar-synchronism",
+ "runtime": "sim-spec@1",
+ "entry": "activities/calendar-synchronism/spec.json",
+ "stateVersion": 1,
+ "capabilities": [
+  "state",
+  "events"
+ ],
+ "fallback": {
+  "media": "calendar-synchronism-still",
+  "text": "One day seen in five ancient reckonings. The battle of Salamis, 22 September 480 BCE in the proleptic Julian calendar, fell in the first year of the 75th Olympiad (the Olympic year began in midsummer), in the year 274 from the founding of Rome by Varro's era (753 BCE = year 1), in the year 3282 of the Hebrew world era, in the year 268 of the era of Nabonassar (from 747 BCE) and on Julian Day 1 546 368. It came ten calendar years after Marathon (490 BCE), in the middle of the Persian Wars (499–449 BCE). The picture shows the timeline from 560 to 400 BCE with the two battles and the wars."
+ },
+ "origin": "own",
+ "credit": "noema-lite reference activity",
+ "license": "own"
+}

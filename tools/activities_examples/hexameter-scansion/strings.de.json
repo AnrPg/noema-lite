@@ -1,0 +1,20 @@
+{
+ "title": "Vergils Hexameter skandieren",
+ "intro": "Der Anfang der Aeneis im daktylischen Hexameter: sechs Versfüße, die ersten vier jeweils ein Daktylus (lang, kurz, kurz) oder ein Spondeus (lang, lang), der fünfte fast immer ein Daktylus, der sechste zwei Silben. Eine Silbe ist naturlang (ein langer Vokal, hier mit einem Makron bezeichnet, oder ein Diphthong) oder positionslang (ein Vokal vor zwei Konsonanten); ein auslautender Vokal oder Vokal + m vor einem Vokal wird elidiert. Der Text bezeichnet die langen Vokale, die über die Skansion entscheiden, und das konsonantische i in Lāvīnja-. Wähle einen Vers, markiere die Füße, die du für Daktylen hältst, und vergleiche mit der Skansion darunter.",
+ "lineLabel": "Vers der Aeneis 1",
+ "foot1": "Fuß 1 ist ein Daktylus",
+ "foot2": "Fuß 2 ist ein Daktylus",
+ "foot3": "Fuß 3 ist ein Daktylus",
+ "foot4": "Fuß 4 ist ein Daktylus",
+ "aenLabel": "Vergil, Aeneis 1,1–7",
+ "sylLabel": "Silben (nach der Elision)",
+ "dactLabel": "Daktylen in den Füßen 1–5",
+ "rightLabel": "Richtig markierte Füße 1–4",
+ "penLabel": "Zäsur nach der dritten Länge (Penthemimeres)",
+ "readLabel": "Gültige Skansionen des Verses",
+ "scanTitle": "Der skandierte Vers: – lang, ⏑ kurz, ‖ Zäsur",
+ "plotTitle": "Daktylen pro Vers",
+ "lineAxis": "Vers",
+ "dactAxis": "Daktylen",
+ "dactLine": "Daktylen in den Füßen 1–5"
+}

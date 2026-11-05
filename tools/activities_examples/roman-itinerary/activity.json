@@ -1,0 +1,17 @@
+{
+ "id": "roman-itinerary",
+ "runtime": "sim-spec@1",
+ "entry": "activities/roman-itinerary/spec.json",
+ "stateVersion": 1,
+ "capabilities": [
+  "state",
+  "events"
+ ],
+ "fallback": {
+  "media": "roman-itinerary-still",
+  "text": "A journey from Rome to Alexandria on a network of Roman roads, coastal hops and sea lanes. In July the fastest route goes by road to Ostia (30 km) and then across the open sea, about 2 150 km: some 17.6 days with ships making 130 km a day. In January the open sea is closed (mare clausum), so the traveller goes by road to Brundisium and then along the coasts by Corinth, Rhodes and Caesarea: six stages, about 3 030 km and 45 days. The straight geodesic distance is 1 953 km, about 1 320 Roman miles."
+ },
+ "origin": "own",
+ "credit": "noema-lite reference activity",
+ "license": "own"
+}

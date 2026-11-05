@@ -1,0 +1,17 @@
+{
+ "id": "predator-prey",
+ "runtime": "sim-spec@1",
+ "entry": "activities/predator-prey/spec.json",
+ "stateVersion": 1,
+ "capabilities": [
+  "state",
+  "events"
+ ],
+ "fallback": {
+  "media": "predator-prey-still",
+  "text": "Prey grow logistically up to the carrying capacity K; predators eat them with a saturating (Holling type II) appetite and die at a constant rate (the Rosenzweig–MacArthur model). With r = 1, a = 1, h = 1, e = 0.5 and m = 0.2 the two species can coexist at prey density x* = m/(a(e − mh)) = 2/3. That steady state is stable while K < 2x* + 1/(ah) = 7/3; enriching the prey's environment beyond that makes it unstable, and the populations swing in ever larger cycles that bring both close to extinction: the paradox of enrichment (Rosenzweig 1971). The picture shows K = 2 (the swings die out) and K = 4 (a large limit cycle)."
+ },
+ "origin": "own",
+ "credit": "noema-lite reference activity",
+ "license": "own"
+}

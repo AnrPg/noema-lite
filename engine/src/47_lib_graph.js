@@ -1426,7 +1426,7 @@
     if (rs.step !== undefined) { const v = C.cx(rs.step)(env || {}); k = Number.isFinite(v) ? Math.max(0, Math.min(nf, Math.floor(v))) : nf; }
     const outs = Array.isArray(spec.outputs) ? spec.outputs : [];
     const need = new Set(outs.filter(o => o && o.kind === 'scalar' && PROPS.includes(o.of)).map(o => o.of));
-    const PT = tracer(G, D); PT.ops = Math.max(0, T.ops - BUDGET / 2);   // the properties share what is left of the budget (≥ half of it)
+    const PT = tracer(G, D); PT.D = D; PT.ops = Math.max(0, T.ops - BUDGET / 2);   // the properties share what is left of the budget (≥ half of it)
     const pr = need.size ? props(G, need, PT) : {};
     const vals = R.values || new Float64Array(G.n).fill(NaN);
     const deg = () => Array.from({ length: G.n }, (_, u) => degree(G, u));

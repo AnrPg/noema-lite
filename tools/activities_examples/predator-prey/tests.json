@@ -1,0 +1,21 @@
+{
+ "cases": [
+  { "name": "K = 2.2: rich, and the populations still settle (passes)", "exercise": "ch01-e910",
+    "steps": [ { "set": "K", "value": 2.2 } ],
+    "expect": { "passed": true, "values": { "stable": [1, 1], "predEnd": [1.1, 1.25] } } },
+  { "name": "K = 2: the poorest environment the task allows (passes)", "exercise": "ch01-e910",
+    "steps": [ { "set": "K", "value": 2 } ],
+    "expect": { "passed": true, "values": { "stable": [1, 1], "swing": [0, 0.01] } } },
+  { "name": "K = 2.4: just past K = 7/3, the populations cycle (fails)", "exercise": "ch01-e910",
+    "steps": [ { "set": "K", "value": 2.4 } ],
+    "expect": { "passed": false, "values": { "stable": [0, 0], "swing": [0.3, 1] } } },
+  { "name": "the start value K = 4: large cycles (fails)", "exercise": "ch01-e910",
+    "steps": [ { "set": "K", "value": 4 } ],
+    "expect": { "passed": false, "values": { "swing": [3, 4], "Kc": [2.33, 2.34] } } },
+  { "name": "K = 1.5: steady, but not enriched enough (fails)", "exercise": "ch01-e910",
+    "steps": [ { "set": "K", "value": 1.5 } ],
+    "expect": { "passed": false, "values": { "stable": [1, 1] } } },
+  { "name": "explorer: the value is saved", "steps": [ { "set": "K", "value": 3 } ],
+    "expect": { "state": [ "K" ], "values": { "xStar": [0.66, 0.67], "swing": [1.5, 2.5] } } }
+ ]
+}

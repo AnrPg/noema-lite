@@ -1,0 +1,39 @@
+{
+ "cases": [
+  {
+   "name": "lactate and cultures at 10 min, antibiotics at 30, fluids at 15, honest estimates: stabilised, grade 100 %",
+   "steps": [ { "set": "labs", "value": true }, { "set": "tLab", "value": 10 }, { "set": "abx", "value": true }, { "set": "tAbx", "value": 30 },
+              { "set": "fluids", "value": true }, { "set": "tFl", "value": 15 }, { "set": "est0", "value": 0.4 }, { "set": "est1", "value": 0.85 } ],
+   "expect": { "values": { "outcome": [0, 0], "mapEnd": [85, 95], "lacEnd": [1, 1.7], "hypo": [0, 0], "pS": [0.83, 0.85], "err": [0, 0.02],
+                           "grade": [0.95, 1], "critical": [0, 0], "closure": [0, 0] } }
+  },
+  {
+   "name": "nothing done: the patient goes into septic shock (MAP 56, lactate 3.4), two critical errors, premature closure",
+   "steps": [],
+   "expect": { "values": { "outcome": [1, 1], "mapEnd": [50, 60], "lacEnd": [3, 3.8], "hypo": [80, 110], "grade": [0, 0.5], "critical": [2, 2], "closure": [1, 1] } }
+  },
+  {
+   "name": "antibiotics at 150 min: past the one-hour deadline, a critical error caps the grade at 50 %",
+   "steps": [ { "set": "labs", "value": true }, { "set": "tLab", "value": 10 }, { "set": "abx", "value": true }, { "set": "tAbx", "value": 150 },
+              { "set": "fluids", "value": true }, { "set": "tFl", "value": 15 }, { "set": "est0", "value": 0.4 }, { "set": "est1", "value": 0.85 } ],
+   "expect": { "values": { "lacEnd": [1.9, 2.4], "timely": [0.45, 0.55], "critical": [1, 1], "grade": [0.45, 0.5] } }
+  },
+  {
+   "name": "antibiotics given before the blood cultures are drawn: the order is wrong",
+   "steps": [ { "set": "labs", "value": true }, { "set": "tLab", "value": 45 }, { "set": "abx", "value": true }, { "set": "tAbx", "value": 30 },
+              { "set": "fluids", "value": true }, { "set": "tFl", "value": 15 }, { "set": "est0", "value": 0.4 }, { "set": "est1", "value": 0.85 } ],
+   "expect": { "values": { "outcome": [0, 0], "order": [0, 0], "grade": [0.9, 0.97] } }
+  },
+  {
+   "name": "only a CT scan: expensive, low-yield, and the sepsis goes untreated",
+   "steps": [ { "set": "ct", "value": true } ],
+   "expect": { "values": { "outcome": [1, 1], "cost": [300, 300], "closure": [1, 1], "grade": [0, 0.4] } }
+  },
+  {
+   "name": "the right care with miscalibrated estimates (95 % before, 30 % after a raised lactate)",
+   "steps": [ { "set": "labs", "value": true }, { "set": "tLab", "value": 10 }, { "set": "abx", "value": true }, { "set": "tAbx", "value": 30 },
+              { "set": "fluids", "value": true }, { "set": "tFl", "value": 15 }, { "set": "est0", "value": 0.95 }, { "set": "est1", "value": 0.3 } ],
+   "expect": { "state": [ "labs", "abx", "fluids", "est0", "est1" ], "values": { "outcome": [0, 0], "err": [0.5, 0.6], "grade": [0.9, 0.97] } }
+  }
+ ]
+}

@@ -644,6 +644,6 @@
 
   const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, prepare, scenes: true });
   engine.workerSource = C.workerSource(noemaLibMedModule, 'NoemaLibMed');
-  root.NoemaLibMed = Object.freeze({ id: ID, SIG, RANGE, checkSpec, exprs, keys, run, compute, calc, engine: Object.freeze(engine), simEngine, prepare });
+  root.NoemaLibMed = Object.freeze({ id: ID, SIG, RANGE, checkSpec, exprs, keys, run, compute, calc, engine: Object.freeze(engine), simEngine, prepare, moduleSource: () => noemaLibMedModule.toString() });
   /* i18n-ignore-end */
 })(typeof window !== 'undefined' ? window : globalThis);

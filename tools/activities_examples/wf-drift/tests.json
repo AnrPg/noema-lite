@@ -1,0 +1,170 @@
+{
+ "cases": [
+  {
+   "name": "N 20, p0 ½, neutral: within 400 generations every population fixes or loses A, about half each",
+   "steps": [
+    {
+     "set": "N",
+     "value": 20
+    },
+    {
+     "set": "p0",
+     "value": 0.5
+    },
+    {
+     "set": "s",
+     "value": 0
+    }
+   ],
+   "expect": {
+    "values": {
+     "u": [
+      0.5,
+      0.5
+     ],
+     "fixed": [
+      0.38,
+      0.62
+     ],
+     "lost": [
+      0.38,
+      0.62
+     ],
+     "tFix": [
+      55.4,
+      55.6
+     ],
+     "hEnd": [
+      0,
+      0.01
+     ]
+    }
+   }
+  },
+  {
+   "name": "N 500: drift is slow, heterozygosity close to H₀(1 − 1/1000)^400 = 0.335",
+   "steps": [
+    {
+     "set": "N",
+     "value": 500
+    },
+    {
+     "set": "p0",
+     "value": 0.5
+    },
+    {
+     "set": "s",
+     "value": 0
+    }
+   ],
+   "expect": {
+    "values": {
+     "hTheory": [
+      0.335,
+      0.3352
+     ],
+     "hEnd": [
+      0.28,
+      0.38
+     ],
+     "fixed": [
+      0,
+      0.12
+     ]
+    }
+   }
+  },
+  {
+   "name": "N 100, a rare favoured allele (p0 0.05, s 0.02): Kimura u = 0.1847, most copies still lost",
+   "steps": [
+    {
+     "set": "N",
+     "value": 100
+    },
+    {
+     "set": "p0",
+     "value": 0.05
+    },
+    {
+     "set": "s",
+     "value": 0.02
+    }
+   ],
+   "expect": {
+    "values": {
+     "u": [
+      0.1846,
+      0.1847
+     ],
+     "lost": [
+      0.7,
+      0.92
+     ]
+    }
+   }
+  },
+  {
+   "name": "N 50, a harmful allele (s −0.04) can still fix by drift: u = 0.119",
+   "steps": [
+    {
+     "set": "N",
+     "value": 50
+    },
+    {
+     "set": "p0",
+     "value": 0.5
+    },
+    {
+     "set": "s",
+     "value": -0.04
+    }
+   ],
+   "expect": {
+    "values": {
+     "u": [
+      0.1191,
+      0.1193
+     ],
+     "fixed": [
+      0.04,
+      0.2
+     ]
+    }
+   }
+  },
+  {
+   "name": "N 200, p0 0.1, s 0.05: selection wins, u = 0.865",
+   "steps": [
+    {
+     "set": "N",
+     "value": 200
+    },
+    {
+     "set": "p0",
+     "value": 0.1
+    },
+    {
+     "set": "s",
+     "value": 0.05
+    }
+   ],
+   "expect": {
+    "state": [
+     "N",
+     "p0",
+     "s"
+    ],
+    "values": {
+     "u": [
+      0.8646,
+      0.8647
+     ],
+     "fixed": [
+      0.75,
+      0.93
+     ]
+    }
+   }
+  }
+ ]
+}

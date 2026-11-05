@@ -1,0 +1,19 @@
+{
+ "title": "Une date, cinq calendriers de l’Antiquité",
+ "intro": "Les historiens antiques dataient un événement par l’olympiade, par les années depuis la fondation de Rome, par le règne d’un roi. Choisis une date du calendrier julien, en années avant l’ère commune, et vois le même jour comme une olympiade et son année (l’année olympique commence au milieu de l’été), comme une année ab urbe condita (l’ère de Varron : Rome fondée en 753 AEC), comme une année de l’ère juive du monde (anno mundi), comme une année de l’ère de Nabonassar qu’emploie Ptolémée (depuis 747 AEC) et comme un jour julien. Essaie la bataille de Salamine, fin septembre 480 AEC, ou les premiers Jeux olympiques, été 776 AEC.",
+ "yearBce": "Année (AEC)",
+ "month": "Mois",
+ "day": "Jour",
+ "evBattle": "la date choisie",
+ "evMarathon": "Marathon (sept. 490 AEC)",
+ "perWars": "les guerres médiques (499–449 AEC)",
+ "bce": "AEC",
+ "olLabel": "Olympiade",
+ "olSubLabel": "Année de l’olympiade (1–4)",
+ "aucLabel": "Année ab urbe condita (Varron)",
+ "amLabel": "Année de l’ère juive (anno mundi)",
+ "nabLabel": "Année de l’ère de Nabonassar",
+ "jdnLabel": "Jour julien",
+ "gapLabel": "Années civiles après Marathon",
+ "chartTitle": "La date choisie dans les guerres médiques"
+}

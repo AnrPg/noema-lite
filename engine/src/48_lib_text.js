@@ -42,12 +42,12 @@
       keyness: { text: 'ref!', ref: 'ref!', word: 'raw!', measure: 'enum:g2|logRatio' },
       readability: { text: T_, formula: `enum:${FORMULAS.join('|')}!`, what: 'enum:score|asl|asw|words|sentences|syllables' },
       delta: { a: 'ref!', b: 'ref!', mfw: 'numx', variant: 'enum:burrows|cosine|quadratic' },
-      syllables: { text: T_, line: LINE },
-      scansions: { text: T_, line: 'int:1:2000!' },
-      foot: { text: T_, line: 'int:1:2000!', n: 'int:1:6!', reading: READ },
-      dactyls: { text: T_, line: 'int:1:2000!', reading: READ },
-      caesura: { text: T_, line: 'int:1:2000!', type: 'enum:penthemimeral|trithemimeral|hephthemimeral|trochaic|bucolic|diaeresis!', reading: READ },
-      metreFit: { text: T_, line: 'int:1:2000!' },
+      syllables: { text: T_, line: 'numx' },
+      scansions: { text: T_, line: 'numx!' },
+      foot: { text: T_, line: 'numx!', n: 'int:1:6!', reading: READ },
+      dactyls: { text: T_, line: 'numx!', reading: READ },
+      caesura: { text: T_, line: 'numx!', type: 'enum:penthemimeral|trithemimeral|hephthemimeral|trochaic|bucolic|diaeresis!', reading: READ },
+      metreFit: { text: T_, line: 'numx!' },
       rhyme: { text: T_, a: 'int:1:2000!', b: 'int:1:2000!' },
       scheme: { text: T_, scheme: 'raw!', from: LINE },
     },
@@ -60,14 +60,14 @@
     },
     scene: {
       kwic: { text: T_, word: 'raw!', window: 'int:1:12', max: 'int:1:40' },
-      scansion: { text: T_, line: 'int:1:2000!', reading: READ },
+      scansion: { text: T_, line: 'numx!', reading: READ },
       topWords: { text: T_, top: 'int:2:30' },
       deltaMap: { mfw: 'numx', variant: 'enum:burrows|cosine|quadratic' },
       rhymes: { text: T_, from: LINE },
     },
   };
   const RAW_F = ['word', 'w1', 'w2', 'scheme'];
-  const NUMX_ORDER = ['window', 'threshold', 'sample', 'per', 'rmin', 'rmax', 'xmin', 'o11', 'r1', 'c1', 'n', 'mfw'];
+  const NUMX_ORDER = ['line', 'window', 'threshold', 'sample', 'per', 'rmin', 'rmax', 'xmin', 'o11', 'r1', 'c1', 'n', 'mfw'];
   const rawOk = v => typeof v === 'string' && v.trim() !== '' && v.length <= RAW_MAX;
 
   function checkSpec(spec) {
@@ -109,6 +109,7 @@
       if (o.of === 'metreFit' && isObj(M.metre) && !['iambic5', 'iambic4', 'trochaic4'].includes(M.metre.pattern)) E2('ref', at + '.of', 'metreFit is for the English metres (iambic5, iambic4, trochaic4); use scansions');
       if (['foot', 'dactyls', 'caesura', 'scansions', 'scansion', 'dactylsByLine'].includes(o.of) && isObj(M.metre) && ['iambic5', 'iambic4', 'trochaic4'].includes(M.metre.pattern)) E2('ref', at + '.of', 'the English metres give metreFit and syllables');
       if ((o.of === 'delta' || o.of === 'deltaMap') && ids.length < 3) E2('value', at + '.of', 'Delta needs at least 3 texts');
+      if (isNum(o.line) && !(Number.isInteger(o.line) && o.line >= 1 && o.line <= 2000)) E2('value', at + '.line', 'needs an integer from 1 to 2000');
       if (o.of === 'scheme' && rawOk(o.scheme) && !/^[A-Za-z ]+$/.test(o.scheme)) E2('value', at + '.scheme', 'needs letters such as ABAB CDCD EFEF GG');
     }, E, W);
     return P;
@@ -178,7 +179,7 @@
     } else for (const x of t.matchAll(TOKEN)) { if (useChars && NOSPACE.test(x[0])) charToks(x[0], x.index); else pushTok(x[0], x.index); }
     function charToks(s, i0) { let off = 0; for (const ch of s) { if (/[\p{L}\p{N}]/u.test(ch) || /\p{M}/u.test(ch)) { if (/\p{M}/u.test(ch) && out.length) { out[out.length - 1].w += ch; out[out.length - 1].s += ch; } else pushTok(ch, i0 + off); } off += ch.length; } }
     if (out.length > LIM.tokens) { codes.push('truncated'); out.length = LIM.tokens; }
-    return { toks: out, norm: t, sentences: out.length ? sent + 1 : 0 };
+    return { toks: out, norm: t, sentences: out.length ? sent + 1 : 0, hasEnd: sentEnd.test(t) };
   }
   const graphemes = s => { if (typeof Intl === 'object' && typeof Intl.Segmenter === 'function') { let n = 0; for (const _ of new Intl.Segmenter(undefined, { granularity: 'grapheme' }).segment(s)) n++; return n; } return [...s.normalize('NFC')].length; };
 
@@ -261,14 +262,14 @@
     if (measure === 'pmi' || measure === 'npmi' || measure === 'mi3') {
       if (o11 === 0) { codes.push('zero_pair'); return measure === 'npmi' ? -1 : -Infinity; }
       const pmi = Math.log2(o11 * n / (r1 * c1));
-      if (measure === 'pmi') return pmi;
-      if (measure === 'mi3') return Math.log2(o11 ** 3 * n / (r1 * c1));
+      if (measure === 'pmi') return pmi;   // Church & Hanks 1990
+      if (measure === 'mi3') return Math.log2(o11 ** 3 * n / (r1 * c1));   // Daille 1994
       return o11 === n ? 1 : pmi / -Math.log2(o11 / n);   // Bouma 2009
     }
     if (measure === 't') { if (o11 === 0) { codes.push('zero_pair'); return NaN; } return (o11 - E[0][0]) / Math.sqrt(o11); }   // Church et al. 1991
     if (measure === 'chi2') { if (E.some(r => r.some(e => e < 5))) codes.push('chi2_small'); return n * (O[0][0] * O[1][1] - O[0][1] * O[1][0]) ** 2 / (R[0] * R[1] * Cc[0] * Cc[1]); }
     if (measure === 'g2') { let g = 0; for (let i = 0; i < 2; i++) for (let j = 0; j < 2; j++) if (O[i][j] > 0) g += O[i][j] * Math.log(O[i][j] / E[i][j]); return 2 * g; }   // Dunning 1993
-    if (measure === 'dice') return 2 * o11 / (r1 + c1);
+    if (measure === 'dice') return 2 * o11 / (r1 + c1);   // Dice 1945; Smadja 1993
     if (measure === 'logDice') { if (o11 === 0) { codes.push('zero_pair'); return -Infinity; } return 14 + Math.log2(2 * o11 / (r1 + c1)); }   // Rychlý 2008
     return NaN;
   }
@@ -281,7 +282,8 @@
     if (EN_EXC[w]) return EN_EXC[w];
     if (w.length <= 3) return 1;
     let x = w.replace(/(?:[^laeiouy]es|[^laeiouy]ed|[^laeiouy]e)$/, m => m[0]).replace(/^y/, '');
-    if (/[^aeiouy]le$/.test(w)) x = w.slice(0, -2) + 'l';   // table, little: the -le stays a syllable
+    if (/[^aeiouy]le$/.test(w)) x = w.slice(0, -2) + 'el';  // table, little: the -le stays a syllable
+    if (/(?:[sxz]|ch|sh|[cg])es$/.test(w)) x = w.slice(0, -2) + 'as';   // boxes, places, judges: -es is a syllable
     if (/[td]ed$/.test(w)) x = w.slice(0, -2) + 'ad';          // wanted, needed: -ed is a syllable
     let n = (x.match(/[aeiouyà-ÿ]+/g) || []).length;
     if (/[^aeiou]ia/.test(w) || /[^t]io/.test(w) && !/(tion|sion|cious|tious|gious)/.test(w)) n += (w.match(/[^aeiouts]i[ao]/g) || []).length ? 1 : 0;
@@ -453,7 +455,24 @@
       // the syllable's written form: its onset consonants (from the previous vowel's cluster) + the vowel
       syl.push({ q, why, wi: v.wi, s: v.s, diph: v.diph, wordEnd: j >= seq.length || seq[j].wi !== v.wi, i });
     }
-    // written syllables for display: split the consonant clusters (one consonant to the next syllable, the rest to the coda)
+    // written syllables for display: inside a word one consonant (or a stop + liquid) opens the next syllable, the rest close this one;
+    // at a word end the consonants stay with their own word
+    const vi = []; seq.forEach((u, i) => { if (u.t === 'V') vi.push(i); });
+    if (vi.length) {
+      const on = vi.map(() => ''), co = vi.map(() => '');
+      for (let i = 0; i < vi[0]; i++) on[0] += seq[i].s;
+      for (let i = vi[vi.length - 1] + 1; i < seq.length; i++) co[vi.length - 1] += seq[i].s;
+      for (let k = 0; k + 1 < vi.length; k++) {
+        const a = vi[k], b = vi[k + 1], cl = seq.slice(a + 1, b), inW = cl.filter(c => c.wi === seq[a].wi && c.wi === seq[b].wi);
+        let nOn = inW.length >= 2 && inW[inW.length - 2].stop && inW[inW.length - 1].liq ? 2 : Math.min(1, inW.length);
+        cl.forEach((c, j) => {
+          if (c.wi === seq[a].wi && c.wi !== seq[b].wi) co[k] += c.s;
+          else if (c.wi !== seq[a].wi) on[k + 1] += c.s;
+          else if (inW.indexOf(c) >= inW.length - nOn) on[k + 1] += c.s; else co[k] += c.s;
+        });
+      }
+      syl.forEach((x, k) => { x.w = on[k] + x.s + co[k]; if (x.wordEnd) x.w = x.w.replace(/σ$/, 'ς'); });
+    }
     const cand = [];
     if (gr && opts.synizesis !== false) syl.forEach((s, k) => { const n = syl[k + 1]; if (n && n.wi === s.wi && s.s === 'ε' && !s.diph && ['ω', 'ο', 'α'].includes(n.s[0]) ) cand.push(k); });
     // author-marked synizesis / synaloepha (‿) inside a word: merge the two vowels
@@ -480,7 +499,7 @@
       const syl = []; const used = [];
       for (let i = 0; i < base.syl.length; i++) {
         const ci = base.cand.indexOf(i);
-        if (ci >= 0 && ci < k && (mask >> ci) & 1) { const a = base.syl[i], b = base.syl[i + 1]; syl.push(Object.assign({}, b, { q: ['L'], s: a.s + b.s, why: 'synizesis', wordEnd: b.wordEnd })); used.push('synizesis'); i++; }
+        if (ci >= 0 && ci < k && (mask >> ci) & 1) { const a = base.syl[i], b = base.syl[i + 1]; syl.push(Object.assign({}, b, { q: ['L'], s: a.s + b.s, w: (a.w || a.s) + (b.w || b.s), why: 'synizesis', wordEnd: b.wordEnd })); used.push('synizesis'); i++; }
         else syl.push(base.syl[i]);
       }
       const n = syl.length, path = [];
@@ -521,7 +540,7 @@
       }
       if (pattern === 'pentameter' && ends.has(starts[3])) cz.push('diaeresis');
       let cost = r.cost;
-      if (pattern === 'hexameter' && r.el[4][1] === 'S') { r.notes.push('spondeiazon'); cost += 1; }   // a rare licence (≈ 5 % of Homer's lines, ≈ 0.1 % of Virgil's)
+      if (pattern === 'hexameter' && r.el[4][1] === 'S') { r.notes.push('spondeiazon'); cost += 1; }   // a rare licence (≈ 5 % of Homer's lines; a few dozen lines in the whole Aeneid)
       return { q: r.q.replace(/X/g, 'L'), feet, cost, notes: r.notes, caesurae: cz, syl: r.syl, el: r.el };
     }).sort((a, b) => a.cost - b.cost || (a.feet < b.feet ? -1 : a.feet > b.feet ? 1 : 0) || (a.q < b.q ? -1 : 1));
     const max = opts.max || 64;
@@ -600,7 +619,7 @@
     const metre = m.metre || {}, mlang = metre.lang || (texts[0] && texts[0].lang) || 'la';
     const patternOf = ln => (metre.pattern === 'elegiac' ? (ln % 2 ? 'hexameter' : 'pentameter') : metre.pattern);
     const scanLine = (t, ln, id) => {
-      const L = lines(t); if (ln < 1 || ln > L.length) { code(id, 'no_line'); return null; }
+      const L = lines(t); if (!(ln >= 1 && ln <= L.length)) { code(id, 'no_line'); return null; }
       const key = t.id + ':' + ln; let r = prep.scans.get(key);
       if (!r) { const cs = []; r = scan(L[ln - 1], mlang === 'en' ? 'la' : mlang, patternOf(ln), metre, cs); r.codes = cs; prep.scans.set(key, r); }
       for (const c of r.codes) code(id, c);
@@ -610,7 +629,8 @@
     for (const o of spec.outputs || []) {
       try { out[o.id] = one(o); } catch (e) { out[o.id] = o.kind === 'series' ? [] : o.kind === 'scene' ? { view: [-1, 1, -1, 1], items: [] } : NaN; code(o.id, 'error'); }
     }
-    function one(o) {
+    function one(o0) {
+      const o = o0.line !== undefined ? Object.assign({}, o0, { line: Math.round(ev(o0.line, NaN)) }) : o0;
       const of = o.of, S = o.kind === 'scalar', t = tById(o.text);
       if (S) {
         if (['tokens', 'types', 'ttr', 'hapax', 'dis', 'sentences', 'chars', 'meanWordLen', 'yuleK', 'herdanC', 'guiraudR', 'simpsonD', 'honoreR', 'mattr', 'mtld', 'hdd', 'freq', 'zipf', 'heaps'].includes(of)) {
@@ -651,18 +671,18 @@
           if (o.measure === 'logRatio') return Math.log2(((a || 0.5) / na) / ((b || 0.5) / nb));
           const cs = [], g = assoc(a, a + b, na, na + nb, 'g2', cs); return a / na >= b / nb ? g : -g;   // signed G² (Rayson & Garside 2000)
         }
-        if (of === 'readability') { const r = tok(t, o.id), cs = []; const v = readability(r.toks, r.sentences, t.lang || 'en', o.formula, o.what || 'score', cs); cs.forEach(c => code(o.id, c)); return v; }
+        if (of === 'readability') { const r = tok(t, o.id), cs = []; const v = readability(r.toks, r.hasEnd ? r.sentences : 0, t.lang || 'en', o.formula, o.what || 'score', cs); cs.forEach(c => code(o.id, c)); return v; }
         if (of === 'delta') {
           const cs = [], lists = texts.map(x => tok(x, o.id).ws), { D } = deltaMatrix(lists, ev(o.mfw, 100), o.variant || 'burrows', cs); cs.forEach(c => code(o.id, c));
           return D[texts.findIndex(x => x.id === o.a)][texts.findIndex(x => x.id === o.b)];
         }
         if (of === 'syllables') {
           if (o.line === undefined) { const r = tok(t, o.id); return r.toks.reduce((a, x) => a + sylOf(x.s, t.lang || 'en'), 0); }
-          const L = lines(t); if (o.line > L.length) { code(o.id, 'no_line'); return NaN; }
+          const L = lines(t); if (!(o.line >= 1 && o.line <= L.length)) { code(o.id, 'no_line'); return NaN; }
           if ((t.lang || 'en') === 'la' || t.lang === 'grc') { const r = metre.pattern && !EN_TEMPLATES[metre.pattern] ? scanLine(t, o.line, o.id) : { base: lineSyllables(L[o.line - 1], t.lang, metre) }; return r.readings && r.readings.length ? r.readings[0].syl.length : r.base.syl.length; }
           return enFit(L[o.line - 1], 'iambic5', lex).syllables;
         }
-        if (of === 'metreFit') { const L = lines(t); if (o.line > L.length) { code(o.id, 'no_line'); return NaN; } const r = enFit(L[o.line - 1], metre.pattern, lex); r.codes.forEach(c => code(o.id, c)); if (!r.best) { code(o.id, 'syllable_count'); return NaN; } return r.best.hard; }
+        if (of === 'metreFit') { const L = lines(t); if (!(o.line >= 1 && o.line <= L.length)) { code(o.id, 'no_line'); return NaN; } const r = enFit(L[o.line - 1], metre.pattern, lex); r.codes.forEach(c => code(o.id, c)); if (!r.best) { code(o.id, 'syllable_count'); return NaN; } return r.best.hard; }
         if (['scansions', 'foot', 'dactyls', 'caesura'].includes(of)) {
           const r = scanLine(t, o.line, o.id); if (!r) return NaN;
           if (of === 'scansions') return r.readings.length;
@@ -716,11 +736,11 @@
         return sc.done();
       }
       if (o.of === 'scansion') {
-        const r = scanLine(t, o.line, o.id); const rd = r && r.readings[(o.reading || 1) - 1];
+        const r = scanLine(t, Math.round(ev(o.line, NaN)), o.id); const rd = r && r.readings[(o.reading || 1) - 1];
         const syl = rd ? rd.syl : (r ? r.base.syl : []), n = syl.length, sc = C.scene([-0.8, Math.max(n, 1) - 0.2, -1.6, 1.8]);
         syl.forEach((s, i) => {
           const q = rd ? rd.q[i] : (s.q.length === 1 ? s.q[0] : '?');
-          sc.txt(i, 0, { s: clip(s.s), c: s.wordEnd ? 'base' : 'base' });
+          sc.txt(i, 0, { s: clip(s.w || s.s), c: 'base' });
           sc.txt(i, 0.9, { s: q === 'L' ? '–' : q === 'S' ? '⏑' : '×', c: s.why ? 'warn' : 'hi' });
         });
         if (rd) {

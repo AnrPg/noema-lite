@@ -1,0 +1,17 @@
+{
+ "id": "pv-loop",
+ "runtime": "sim-spec@1",
+ "entry": "activities/pv-loop/spec.json",
+ "stateVersion": 1,
+ "capabilities": [
+  "state",
+  "events"
+ ],
+ "fallback": {
+  "media": "pv-loop-still",
+  "text": "The left ventricle draws one loop per beat on a pressure–volume diagram: it fills along the passive filling curve up to the end-diastolic volume, contracts with both valves shut until the pressure opens the aortic valve, ejects, then relaxes. The top-left corner of the loop sits on the end-systolic pressure–volume line, whose slope Ees measures contractility. With Ees 2.5 mmHg/mL, a filling pressure of 10 mmHg and a normal resistance the ventricle fills to 135 mL, ejects 79 mL (ejection fraction 59 %) and keeps a mean arterial pressure of 97 mmHg. A weak ventricle (Ees 1) ejects only 49 mL and the pressure falls to 60 mmHg; a higher filling pressure (16 mmHg) restores the stroke volume through the Frank–Starling mechanism, but only by dilating to 210 mL, while a lower resistance lets the weak heart eject more at a lower pressure."
+ },
+ "origin": "own",
+ "credit": "noema-lite reference activity",
+ "license": "own"
+}
