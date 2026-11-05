@@ -53,6 +53,38 @@ async function run(name) {
         res: await NoemaSrcFiles.attachActivityFiles(acc, pk, async entry => entry === 'activities/planets-quiz/item.h5p' ? new Blob([u]) : null) }; }, [PACK, PQ_FILE.toString('base64')]);
     ok(at.bad === false && at.res.attached.includes('planets-quiz') && !at.res.missing.length, `h5p@1: the .h5p from the .noema.zip is kept on the device (a changed copy of the same size is refused) ${JSON.stringify(at)}`);
   } else ok(false, 'h5p@1: no .noema.zip beside the pack (tests/activities_pack.py with NOEMA_ACT_PACK) or no activities/planets-quiz/item.h5p in it');
+  if (PQ_FILE) {   // h5p@1: the .h5p file in an exported package, a share, and when this device cannot keep it
+    const r = await p.evaluate(async ([pk, b64]) => {
+      const u = Uint8Array.from(atob(b64), c => c.charCodeAt(0)), acc = Noema.account.id, SF = NoemaSrcFiles, out = { want: u.length };
+      if (!window.JSZip && window.NoemaViewer?.jszip) await NoemaViewer.jszip();
+      const inZip = async blob => { const f = (await JSZip.loadAsync(blob)).file('activities/planets-quiz/item.h5p'); return f ? (await f.async('uint8array')).length : 0; };
+      const fresh = id => { const q = JSON.parse(JSON.stringify(pk)); q.subject = { ...q.subject, id }; return q; }, item = q => q.activities.items.find(x => x.id === 'planets-quiz');
+      // the one-file bundle: the item holds its .h5p inline (not enumerable) and nothing is kept on this device for the subject
+      const q1 = fresh('pq-inline'); Object.defineProperty(item(q1), 'h5p', { value: b64, enumerable: false, configurable: true, writable: true });
+      const b1 = await SF.makeBundle(acc, fresh('pq-inline'), { live: q1 }); out.inline = { size: await inZip(b1.blob), missing: b1.missing };
+      const realFetch = window.fetch; window.fetch = async (url, o) => String(url) === 'lib-base/activities/planets-quiz/item.h5p' ? new Response(new Blob([u])) : realFetch(url, o);
+      try {
+        const b2 = await SF.makeBundle(acc, fresh('pq-lib'), { base: 'lib-base/' }); out.lib = { size: await inZip(b2.blob), missing: b2.missing };   // a library subject before its .h5p is kept here
+        const b3 = await SF.makeBundle(acc, fresh('pq-none')); out.none = { size: await inZip(b3.blob), missing: b3.missing };   // nowhere to be had: reported
+        const tx = IDBDatabase.prototype.transaction;   // this device cannot keep it (storage full): the checked download still plays
+        IDBDatabase.prototype.transaction = function (s, m) { if (m === 'readwrite') throw new DOMException('full', 'QuotaExceededError'); return tx.apply(this, arguments); };
+        try { const g = await SF.activityFile(acc, 'pq-quota', item(fresh('pq-quota')), { base: 'lib-base/' }); out.quota = g ? g.length : 0; } finally { IDBDatabase.prototype.transaction = tx; }
+      } finally { window.fetch = realFetch; }
+      // shared: the .h5p goes with the subject's files, and the one who takes it keeps it as the item's file
+      const sh = await SF.forSharing(acc, pk.subject.id, { pack: pk, sources: false }); out.share = sh.map(f => [f.srcId, f.blob.size, !!f.act]);
+      const store = Object.fromEntries(sh.map(f => ['x/' + f.srcId, f.blob])), map = Object.fromEntries(sh.map(f => [f.srcId, { path: 'x/' + f.srcId, name: f.name, type: f.type, size: f.blob.size, chunks: 0 }]));
+      const had = !!window.NoemaCloud; if (!had) window.NoemaCloud = { session: () => null }; const gf = NoemaCloud.getFile; NoemaCloud.getFile = async (bk, pth) => store[pth];
+      try { const rq = fresh('pq-recv'), res = await SF.attachShared(acc, { ...rq, sharedFiles: map }, 'noema-shared'), g = await SF.activityFile(acc, 'pq-recv', item(rq)); out.recv = { res, size: g ? g.length : 0 }; }
+      finally { if (had) NoemaCloud.getFile = gf; else delete window.NoemaCloud; }
+      return out;
+    }, [PACK, PQ_FILE.toString('base64')]);
+    const W = r.want;
+    ok(r.inline.size === W && !r.inline.missing.length, `export from the one-file bundle: the item's inline .h5p goes into the package ${JSON.stringify(r.inline)}`);
+    ok(r.lib.size === W && !r.lib.missing.length, `export of a library subject before its .h5p is kept here: taken from beside the library pack ${JSON.stringify(r.lib)}`);
+    ok(r.none.size === 0 && JSON.stringify(r.none.missing) === '["planets-quiz"]', `export with the .h5p nowhere to be had: the item is reported missing ${JSON.stringify(r.none)}`);
+    ok(r.quota === W, `this device cannot keep the .h5p (storage full): the checked download is still played (${r.quota} of ${W} bytes)`);
+    ok(JSON.stringify(r.share) === JSON.stringify([['act:planets-quiz', W, true]]) && r.recv.res.attached === 1 && !r.recv.res.failed.length && r.recv.size === W, `shared: the .h5p goes with the subject and the recipient keeps it ${JSON.stringify({ share: r.share, recv: r.recv })}`);
+  }
   await p.goto('file://' + ROOT + '/index.html?subject=demo-activities'); await wait(1500);
   ok(await p.evaluate(() => SUBJ.id === 'demo-activities' && !!ACT.ITEMS['alias-lab']), 'the pack opens with its activity');
   ok(await p.evaluate(() => JSON.stringify(checkRequires()) === '["runtime:py-module@1"]'), 'pack.requires: this app has everything the pack needs but Python (Python never runs on file://)');

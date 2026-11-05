@@ -5160,7 +5160,12 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
           try {
             const m = simFor(inp).measure(probe);
             if (m.kind === 'scope') return { kind: 'scope', t: thin(m.t, MAXP), v: thin(m.v, MAXP), stats: m.stats };
-            if (m.kind === 'logic') { const out = {}; for (const nm of Object.keys(m.traces)) out[nm] = { level0: m.traces[nm][0], edges: m.edges[nm].slice(0, MAXP), stats: m.stats[nm] }; return { kind: 'logic', t0: m.t[0], t1: m.t[m.t.length - 1], traces: out }; }
+            if (m.kind === 'logic') {   // over MAXP edges: the window ends just before the first edge left out (cut), so the steps drawn stay true; the stats are the whole capture's
+              let t1 = m.t[m.t.length - 1], cut = false;
+              for (const nm of Object.keys(m.edges)) if (m.edges[nm].length > MAXP && m.edges[nm][MAXP].t < t1) { t1 = m.edges[nm][MAXP].t; cut = true; }
+              const out = {}; for (const nm of Object.keys(m.traces)) out[nm] = { level0: m.traces[nm][0], edges: m.edges[nm].filter(z => z.t < t1).slice(0, MAXP), stats: m.stats[nm] };
+              return { kind: 'logic', t0: m.t[0], t1, ...(cut ? { cut: true, tEnd: m.t[m.t.length - 1] } : {}), traces: out };
+            }
             return { kind: m.kind, value: m.value };
           } catch (e) { return { kind: probe && probe.kind, error: String(e && e.code || 'error') }; }
         },

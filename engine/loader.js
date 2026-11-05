@@ -935,12 +935,17 @@
   async function exportPackage(acc, pack) {
     if (!window.NoemaSrcFiles) { const a = el('a', { href: URL.createObjectURL(new Blob([JSON.stringify(pack)], { type: 'application/json' })), download: pack.subject.id + '.json' }); a.click(); return; }
     toastL('📦 ' + tr('loader.export.preparing'), 1500);
+    const live = pack, lib = (REG.subjects || []).find(x => x.id === pack.subject.id), base = lib?.path && /\/pack\.js$/.test(lib.path) ? lib.path.replace(/pack\.js$/, '') : null;   // h5p@1: the items' .h5p files come from what the app holds, or from beside the library pack
     // the pack as stored (the open subject's object is extended by the engine): IndexedDB copy, or the library file
     let clean = await IDB.get('packs', acc + '|' + pack.subject.id).catch(() => null);
     if (!clean) { const m = (REG.subjects || []).find(x => x.id === pack.subject.id); if (m?.path) clean = await fetch(m.path.replace(/pack\.js$/, 'pack.json')).then(r => r.ok ? r.json() : null).catch(() => null); }
     if (clean) pack = clean;
     pack = await inlineTranslations(acc, (REG.subjects || []).find(x => x.id === pack.subject.id), pack);   // the package stands alone
-    try { const n = await NoemaSrcFiles.downloadBundle(acc, pack); toastL(`⬇️ ${pack.subject.id}.noema.zip` + (n ? ' ' + tr('loader.export.withFiles', { n }) : ''), 3000); }   // i18n-ignore (a file name)
+    try {
+      const { files: n, missing } = await NoemaSrcFiles.downloadBundle(acc, pack, { live, base });
+      toastL(`⬇️ ${pack.subject.id}.noema.zip` + (n ? ' ' + tr('loader.export.withFiles', { n }) : ''), 3000);   // i18n-ignore (a file name)
+      if (missing.length) toastL('⚠️ ' + tr('loader.export.missingActivities', { n: missing.length, items: missing.join(', ') }), 8000);
+    }
     catch (e) { toastL('⚠️ ' + errMsg(e), 4000); }
   }
 
@@ -1036,7 +1041,7 @@
         const withFiles = el('input', { type: 'checkbox', checked: true });
         const filesRow = fx.length ? el('label', { class: 'nx-files' }, withFiles, ' 📎 ' + tr('loader.share.includeFiles', { n: fx.length, size: fmtMB(fx.reduce((a, m) => a + (m.size || 0), 0)) })) : null;
         const prog = el('div', { class: 'tiny' });
-        const files = async () => { if (!fx.length || !withFiles.checked) return []; prog.textContent = '⏳ ' + tr('loader.share.preparingFiles'); const fs = await NoemaSrcFiles.forSharing(acc, s.id); return fs; };
+        const files = async () => { const sources = fx.length > 0 && withFiles.checked, acts = NoemaSrcFiles.h5pItems(pack).length > 0; if (!sources && !acts) return []; prog.textContent = '⏳ ' + tr('loader.share.preparingFiles'); return NoemaSrcFiles.forSharing(acc, s.id, { pack, sources }); };   // h5p@1: an item's .h5p file is the activity itself: it always goes with it
         const onProgress = (k, n, name) => { prog.textContent = '⬆️ ' + tr('loader.share.uploading', { k: Math.min(n, Math.floor(k) + 1), n, name }); };
         const mine = await NoemaCloud.myPublished().catch(() => []);
         const pub = (mine || []).find(r => r.subject_id === s.id);

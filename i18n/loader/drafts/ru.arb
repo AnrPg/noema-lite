@@ -74,6 +74,7 @@
   "loader.import.notPack": "Этот файл — не пакет предмета noema-lite.",
   "loader.import.jsonNoFiles": "исходных файлов в этом .json нет (их {n, number}) — лучше импортируй пакет .noema.zip или прикрепи их в 📚 Источниках",
   "loader.export.preparing": "Готовлю пакет…",
+  "loader.export.missingActivities": "Не вошло в пакет интерактивных элементов: {n, number} — файла .h5p нет на этом устройстве ({items}). Откройте предмет один раз при подключении к сети и экспортируйте снова.",
   "loader.export.withFiles": "(исходных файлов: {n, number})",
   "loader.info.chapterCounts": "{sections, plural, one {# раздел} few {# раздела} many {# разделов} other {# раздела}} · {exercises, plural, one {# упражнение} few {# упражнения} many {# упражнений} other {# упражнения}}",
   "loader.info.chapters": "Главы",

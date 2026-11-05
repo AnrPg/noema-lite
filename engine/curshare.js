@@ -434,13 +434,14 @@
     const store = C().curStore(cid), ix = SF() ? SF().index(acc, pid) : {};
     const files = [];   // its own source files (the curriculum's material travels once, with the map)
     if (SF()) for (const [src, m] of Object.entries(ix)) { if (m.ref?.subj === store) continue; const rec = await SF().get(acc, pid, src).catch(() => null); if (rec?.blob) files.push({ srcId: src, blob: rec.blob, name: rec.name || m.name, type: rec.type || m.type || '' }); }
+    if (SF()?.activityFilesForSharing) files.push(...(await SF().activityFilesForSharing(acc, pack)).files);   // h5p@1: the items' .h5p files (the activity itself; attachShared keeps them)
     const up = files.length ? await CL().uploadShareFiles(BUCKET, f => `${cid}/steps/${uid}/${nid}/src-${f.safe}.${f.ext}`, files) : { map: {}, paths: [] };
     const out = { ...pack, sharedFiles: up.map }; delete out._sharedFiles;
     const path = Core.stepPath(cid, uid, nid);
     const w = await CL().putFile(BUCKET, path, new Blob([JSON.stringify(out)], { type: 'application/json' }), 'application/json');
     const counts = pack.counts || { chapters: (pack.chapters || []).length };
     const old = cur && cur.author === uid ? cur : null;
-    const r = await Core.ready(api, { cid, nid, me: uid, name: myName(acc), packId: pid, version: pack.version || null, path, meta: { chunks: w.chunks || 0, counts, sharedFiles: up.map, filePaths: up.paths, sourceFiles: files.length } });
+    const r = await Core.ready(api, { cid, nid, me: uid, name: myName(acc), packId: pid, version: pack.version || null, path, meta: { chunks: w.chunks || 0, counts, sharedFiles: up.map, filePaths: up.paths, sourceFiles: files.filter(f => !f.act).length } });
     if (!r.ok) {   // taken a moment earlier by somebody else
       await CL().deleteObjects(BUCKET, [...CL().partPaths(path, w.chunks || 0), ...up.paths]).catch(() => { });
       patchNode(acc, cid, nid, { own: true }); await Share.refresh(acc, cid).catch(() => { }); return { taken: r.row };

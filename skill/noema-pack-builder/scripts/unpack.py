@@ -69,14 +69,16 @@ if acts:
         ad = os.path.join(d, 'activities', aid); os.makedirs(ad, exist_ok=True)
         e = {k: v for k, v in x.items() if k not in ('html', 'python', 'sha256', 'bytes', 'strings', 'spec', 'h5p', 'h5pByLocale')}
         if x.get('runtime') == 'h5p@1':   # the .h5p file travels beside the pack: in the .noema.zip, inline (one-file copies), or next to a pack.json
-            e['entry'] = f'activities/{aid}/item.h5p'; ent = str(x.get('entry') or e['entry']); raw = None
-            if bundle and ent in bundle.namelist() and '..' not in ent.split('/'): raw = bundle.read(ent)
+            # the file is looked for under the item's own entry (checked: activities/….h5p, no ..); only the unpacked folder's name is item.h5p
+            e['entry'] = f'activities/{aid}/item.h5p'; ent = str(x.get('entry') or ''); raw = None
+            if not re.fullmatch(r'activities/[^\\:]+\.h5p', ent) or '..' in ent.split('/') or '' in ent.split('/'): ent = e['entry']
+            if bundle and ent in bundle.namelist(): raw = bundle.read(ent)
             elif isinstance(x.get('h5p'), str): raw = base64.b64decode(re.sub(r'^data:[^,]*;base64,', '', x['h5p']))
             else:
                 here = os.path.dirname(os.path.abspath(a[0]))
-                for g in (os.path.join(here, *e['entry'].split('/')), os.path.join(here, f'{sid}.act.{aid}.h5p')):
+                for g in dict.fromkeys((os.path.join(here, *ent.split('/')), os.path.join(here, *e['entry'].split('/')), os.path.join(here, f'{sid}.act.{aid}.h5p'))):
                     if os.path.isfile(g): raw = open(g, 'rb').read(); break
-            if raw is None: print(f'⚠️ activity {aid}: its .h5p file is not here ({e["entry"]}) — get the file (it is inside {sid}.noema.zip) and put it there')
+            if raw is None: print(f'⚠️ activity {aid}: its .h5p file is not here ({ent}) — get the file (it is inside {sid}.noema.zip) and put it there')
             else: open(os.path.join(ad, 'item.h5p'), 'wb').write(raw)
             rest = {}
             for loc, v in (x.get('h5pByLocale') if isinstance(x.get('h5pByLocale'), dict) else {}).items():   # content.<locale>.json / l10n.<locale>.json
