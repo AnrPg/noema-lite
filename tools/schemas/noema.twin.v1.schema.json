@@ -74,6 +74,10 @@
         "cutoff": {
           "$ref": "#/$defs/quantity",
           "description": "> 0"
+        },
+        "tempCap": {
+          "$ref": "#/$defs/quantity",
+          "description": "0 to 1: the fraction of capacity lost per °C below 25 °C (default by chemistry)"
         }
       },
       "additionalProperties": false
@@ -178,6 +182,10 @@
           "current": {
             "$ref": "#/$defs/quantity",
             "description": ">= 0"
+          },
+          "tempco": {
+            "$ref": "#/$defs/quantity",
+            "description": "any finite number: the reading's shift per °C away from 25 °C"
           }
         },
         "additionalProperties": false
@@ -303,6 +311,88 @@
     "meta": {
       "type": "object",
       "description": "free notes for authors; ignored"
+    },
+    "env": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "the ambient temperature (°C): temp − swing·cos(2πt/cycle); cold lowers the capacity, raises rInt, slows self-discharge and the sleep current",
+      "properties": {
+        "temp": {
+          "$ref": "#/$defs/quantity",
+          "description": "°C (default 25)"
+        },
+        "swing": {
+          "$ref": "#/$defs/quantity",
+          "description": ">= 0, °C"
+        },
+        "cycle": {
+          "$ref": "#/$defs/quantity",
+          "description": "> 0, s (default 86400)"
+        }
+      }
+    },
+    "clock": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "the crystal: ppm + tempco·(T − t0)²; a receive slot is missed when the clock error exceeds guard",
+      "properties": {
+        "ppm": {
+          "$ref": "#/$defs/quantity",
+          "description": "any finite number"
+        },
+        "tempco": {
+          "$ref": "#/$defs/quantity",
+          "description": "ppm/°C² (−0.034 for a tuning-fork crystal)"
+        },
+        "t0": {
+          "$ref": "#/$defs/quantity",
+          "description": "turnover temperature, °C (default 25)"
+        },
+        "guard": {
+          "$ref": "#/$defs/quantity",
+          "description": ">= 0, s (0 = no slots)"
+        },
+        "resync": {
+          "$ref": "#/$defs/quantity",
+          "description": ">= 0, s between beacons that reset the error (0 = only an acked delivery)"
+        }
+      }
+    },
+    "network": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "other devices on the same channel (pure ALOHA): their messages collide with this one's",
+      "properties": {
+        "nodes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 200
+        },
+        "period": {
+          "$ref": "#/$defs/quantity",
+          "description": "> 0, s (default: this device's)"
+        },
+        "airtime": {
+          "$ref": "#/$defs/quantity",
+          "description": "> 0, s (default: this device's)"
+        },
+        "jitter": {
+          "$ref": "#/$defs/quantity",
+          "description": "0 to 1 (1 = random phases, 0 = all wake in step)"
+        },
+        "capture": {
+          "$ref": "#/$defs/quantity",
+          "description": ">= 0, dB: a message this much stronger survives a collision"
+        },
+        "spread": {
+          "$ref": "#/$defs/quantity",
+          "description": ">= 0, dB"
+        },
+        "offset": {
+          "$ref": "#/$defs/quantity",
+          "description": "any finite number, dB"
+        }
+      }
     }
   },
   "additionalProperties": false,
@@ -332,7 +422,11 @@
             "battery-ageing",
             "antenna-detached",
             "wake-period",
-            "brownout"
+            "brownout",
+            "clock-drift",
+            "sync-wake",
+            "busy-channel",
+            "sensor-tempco"
           ]
         },
         "sensor": {
@@ -361,6 +455,18 @@
         },
         "v": {
           "$ref": "#/$defs/quantity"
+        },
+        "ppm": {
+          "$ref": "#/$defs/quantity",
+          "description": "clock-drift: ppm added (default 200)"
+        },
+        "nodes": {
+          "$ref": "#/$defs/quantity",
+          "description": "sync-wake / busy-channel: the other nodes (default 5 / +50)"
+        },
+        "coef": {
+          "$ref": "#/$defs/quantity",
+          "description": "sensor-tempco: per °C (default 0.5)"
         }
       },
       "additionalProperties": false
@@ -443,6 +549,9 @@
             "airtime",
             "attempts",
             "chargeUsed",
+            "clockErr",
+            "clockErrMax",
+            "collisions",
             "current",
             "dead",
             "delivered",
@@ -455,6 +564,7 @@
             "lifeSim",
             "lost",
             "per",
+            "ppmMean",
             "reading",
             "readingErr",
             "readingLast",
@@ -464,11 +574,16 @@
             "rssiMean",
             "rxT",
             "sent",
+            "slotMisses",
             "snrMean",
             "soc",
             "socEnd",
             "t",
             "tDead",
+            "temp",
+            "tempMax",
+            "tempMean",
+            "tempMin",
             "traceI",
             "traceT",
             "truth",

@@ -76,17 +76,21 @@ P6_TIMED = ["thermal@1", "pid@1"]   # engines whose model.transient times and ou
 # twin@1's bench: the probe points of the device and its instruments (the event log and the radio's RSSI besides V, I, scope)
 TWIN = "twin@1"
 TWIN_POINTS = ["vbat", "vload", "i", "gnd"]
-TWIN_INSTRUMENTS = ["V", "I", "scope", "log", "rssi"]
+TWIN_INSTRUMENTS = ["V", "I", "scope", "log", "rssi", "T", "clock"]
+WHOLE = ["log", "rssi", "T", "clock"]
 BENCH_NAMES = ["diagnosis", "measurements", "correct"]
-MODEL_KEYS = ["netlist", "bindings", "transient", "noise"]
-OUT_KEYS = ["id", "kind", "node", "branch", "time", "probe", "at", "stat"]
+MODEL_KEYS = ["netlist", "bindings", "transient", "noise", "ac"]
+OUT_KEYS = ["id", "kind", "node", "branch", "time", "probe", "at", "stat", "power", "ac", "ref"]
+# the AC analysis (docs/INTERACTIVE_CIRCUIT.md §9.6) and the meters' modes (§9.5)
+AC_CURVES = ["f", "db", "phase", "mag"]; AC_POINT = ["db", "phase", "mag"]; AC_STATS = ["dcDb", "peakDb", "fPeak", "f3db", "fLow3db", "fUnity", "pm"]
+MODES = ["dc", "ac", "rms", "avg"]
 STATS = ["final", "min", "max", "mean", "pp", "rms"]
 WAVES = {"pulse": ["v1", "v2", "delay", "rise", "fall", "width", "period"], "sine": ["offset", "amp", "freq", "phase", "delay"], "pwm": ["v", "freq", "duty", "low", "delay"]}
 BENCH_KEYS = ["faults", "points", "instruments", "diagnosis", "budget"]
-INSTRUMENTS = ["V", "I", "R", "scope", "logic"]
-INST_KEYS = ["kind", "points", "parts", "tEnd", "dt", "tStart", "threshold"]
+INSTRUMENTS = ["V", "I", "R", "scope", "logic", "bode"]
+INST_KEYS = ["kind", "points", "parts", "tEnd", "dt", "tStart", "threshold", "modes", "zin", "leads", "source", "fStart", "fStop", "fPoints"]
 BENCH_ID_RE = re.compile(r"^[A-Za-z][A-Za-z0-9_-]{0,31}$")
-BENCH_LIM = {"faults": 16, "apply": 4, "points": 24, "instruments": 5, "parts": 24, "options": 12, "budget": 100, "bindings": 24, "steps": 200000}
+BENCH_LIM = {"faults": 16, "apply": 4, "points": 24, "instruments": 7, "parts": 24, "options": 12, "budget": 100, "bindings": 24, "steps": 200000, "leads": 4, "acPoints": 1000}
 SPEC_LIM = {"params": 24, "consts": 24, "derived": 48, "outputs": 24, "readouts": 24, "plots": 6, "series": 6, "marks": 8,
             "points": 2000, "options": 12, "checks": 16, "bytes": 64 * 1024, "unit": 16, "digits": 8}
 NAME_RE = re.compile(r"^[A-Za-z_][A-Za-z0-9_]{0,31}$")
@@ -706,11 +710,20 @@ def _int(v): return isinstance(v, int) and not isinstance(v, bool)
 
 def _probe_ok(c, p):
     if not isinstance(p, dict): return False
+    meter = p.get("kind") in ("V", "I")   # a meter's mode, input resistance (V) and averaging window (§9.5)
+    if "mode" in p and not (meter and isinstance(p["mode"], str) and p["mode"] in MODES): return False
+    if "zin" in p and not (p.get("kind") == "V" and _num(p["zin"]) and p["zin"] >= 0): return False
+    for k in ("tEnd", "dt", "tStart"):
+        if k in p and not (meter and _num(p[k]) and (p[k] >= 0 if k == "tStart" else p[k] > 0)): return False
     if p.get("kind") in ("V", "R"): return _endpoint_ok(c, p.get("a")) and ("b" not in p or _endpoint_ok(c, p["b"]))
     if p.get("kind") == "I":
         e = c["els"].get(p.get("element")) if isinstance(p.get("element"), str) else None
         return bool(e) and ("pin" not in p or (_int(p["pin"]) and 0 <= p["pin"] < len(e["n"])))
     return False
+
+def _ac_source_ok(c, x):
+    """a source the AC analysis can excite: a V or I part"""
+    return isinstance(x, str) and x in c["els"] and c["els"][x]["type"] in ("V", "I")
 
 def _num_or_expr(v, names, where, E, pos):
     """a number (> 0 when pos) or an expression of names → the number, or None (an expression, or a problem added to E)"""
@@ -767,19 +780,48 @@ def check_circuit(spec, names, E):
     nz = m.get("noise")
     if nz is not None and not (isinstance(nz, dict) and all(k in ("rel", "abs") for k in nz) and all(k not in nz or (_num(nz[k]) and 0 <= nz[k] <= 1) for k in ("rel", "abs"))):
         E.append("spec.model.noise is {rel?, abs?}: numbers from 0 to 1 (the meter's relative and absolute error)")
+    ac = m.get("ac")
+    if ac is not None:
+        if not isinstance(ac, dict): E.append("spec.model.ac must be an object {source, fStart, fStop, points?}")
+        else:
+            _unknown(ac, ["source", "fStart", "fStop", "points"], "spec.model.ac", E)
+            if not _ac_source_ok(c, ac.get("source")): E.append("spec.model.ac.source must be a V or I part of the netlist (the source the analysis excites)")
+            for k in ("fStart", "fStop"):
+                if k not in ac: E.append(f"spec.model.ac.{k} is required (Hz)")
+                else: _num_or_expr(ac[k], names, "spec.model.ac." + k, E, True)
+            if _num(ac.get("fStart")) and _num(ac.get("fStop")) and not ac["fStop"] > ac["fStart"]: E.append("spec.model.ac: fStop must be above fStart")
+            if "points" in ac and not (_int(ac["points"]) and 2 <= ac["points"] <= L["acPoints"]): E.append(f"spec.model.ac.points is a whole number 2–{L['acPoints']}")
+    node_ok = lambda x: isinstance(x, str) and (x in c["nodes"] or _gnd(x))
     for i, o in enumerate(_list(spec.get("outputs"))):
         w = f"spec.outputs[{i}]"
         if not (isinstance(o, dict) and o.get("kind") in ("scalar", "series")): continue   # (reported with the outputs)
         _unknown(o, OUT_KEYS, w, E)
-        src = [k for k in ("node", "branch", "time", "probe") if k in o]
-        if len(src) != 1: E.append(f"{w} must name what it reads: one of node, branch, time, probe"); continue
+        if "ac" in o:   # a point or a curve of the AC analysis
+            if any(k in o for k in ("branch", "time", "probe", "power", "stat")): E.append(f"{w}: an ac output reads only ac, node, ref and (a gain or phase at one frequency) at")
+            curve = o["kind"] == "series"; v = o["ac"]
+            okv = isinstance(v, str) and (v in AC_CURVES if curve else (v in AC_POINT or v in AC_STATS))
+            if not okv: E.append(f"{w}.ac is one of {', '.join(AC_CURVES if curve else AC_POINT + AC_STATS)} on a {o['kind']} output")
+            if v != "f" and not node_ok(o.get("node")): E.append(f"{w}.node is not a node of the netlist (where the response is read)")
+            if v == "f" and "node" in o: E.append(f"{w}: the frequency axis (ac: f) reads no node")
+            if "ref" in o and not node_ok(o["ref"]): E.append(f"{w}.ref is not a node of the netlist")
+            if not curve and isinstance(v, str) and v in AC_POINT:
+                if "at" not in o: E.append(f"{w}.at is required: the frequency (Hz) of this {v}")
+                else: _num_or_expr(o["at"], names, w + ".at", E, True)
+            elif "at" in o: E.append(f"{w}: at belongs to a gain or phase at one frequency (ac: db, phase, mag on a scalar)")
+            if not isinstance(m.get("ac"), dict): E.append(f"{w} needs model.ac {{source, fStart, fStop, points?}}")
+            continue
+        if "ref" in o: E.append(f"{w}: ref belongs to an ac output")
+        src = [k for k in ("node", "branch", "time", "probe", "power") if k in o]
+        if len(src) != 1: E.append(f"{w} must name what it reads: one of node, branch, time, probe, power, ac"); continue
         s_ = src[0]
         if s_ == "time" and not (o["time"] is True and o["kind"] == "series"): E.append(f"{w}.time is true on a series output (the time axis of the transient)")
         if s_ == "node" and not (isinstance(o["node"], str) and (o["node"] in c["nodes"] or _gnd(o["node"]))): E.append(f"{w}.node is not a node of the netlist")
         if s_ == "branch" and not (isinstance(o["branch"], str) and o["branch"] in c["els"]): E.append(f"{w}.branch is not a part of the netlist")
-        if s_ == "probe" and not (o["kind"] == "scalar" and _probe_ok(c, o["probe"])): E.append(f"{w}.probe must be a reading {{kind: V | I | R, a, b? | element, pin?}} on a scalar output")
+        if s_ == "power" and not (isinstance(o["power"], str) and o["power"] in c["els"]): E.append(f"{w}.power is not a part of the netlist (the part whose power is read)")
+        if s_ == "probe" and not (o["kind"] == "scalar" and _probe_ok(c, o["probe"])): E.append(f"{w}.probe must be a reading {{kind: V | I | R, a, b? | element, pin?, mode?, zin?, tEnd?, dt?, tStart?}} on a scalar output")
         at, st = "at" in o, "stat" in o
-        if (at or st) and not (o["kind"] == "scalar" and s_ in ("node", "branch")): E.append(f"{w}: at and stat belong to a scalar output of a node or a branch")
+        if (at or st) and not (o["kind"] == "scalar" and s_ in ("node", "branch", "power")): E.append(f"{w}: at and stat belong to a scalar output of a node, a branch or a power")
+        if s_ == "power" and o["kind"] == "scalar" and not at and not st: E.append(f"{w}: a power is read over the transient: give at or stat")
         if at and st: E.append(f"{w}: at or stat, not both")
         if at: _num_or_expr(o["at"], names, w + ".at", E, False)
         if st and o["stat"] not in STATS: E.append(f"{w}.stat is one of {', '.join(STATS)}")
@@ -860,10 +902,10 @@ def check_bench(spec, names, seen, E, key, eng=CIRCUIT):
         if x["kind"] in kinds: E.append(f"{w}: the instrument {x['kind']} is listed twice")
         kinds.append(x["kind"])
         _unknown(x, INST_KEYS, w, E)
-        if x["kind"] in ("log", "rssi"):   # twin@1: the event log and the radio's RSSI read the device, not a point
-            if any(k != "kind" and k in INST_KEYS for k in x): E.append(f"{w}: the {'event log' if x['kind'] == 'log' else 'RSSI reading'} has only a kind")
+        if x["kind"] in WHOLE:   # twin@1: the event log, the radio's RSSI, the thermometer and the clock check read the device, not a point
+            if any(k != "kind" and k in INST_KEYS for k in x): E.append(f"{w}: the {({'log': 'event log', 'rssi': 'RSSI reading', 'T': 'thermometer', 'clock': 'clock check'})[x['kind']]} has only a kind")
             continue
-        scope = x["kind"] in ("scope", "logic")
+        scope = x["kind"] in ("scope", "logic"); meter = not tw and x["kind"] in ("V", "I")
         if x["kind"] == "I":
             if "points" in x: E.append(f"{w}: the ammeter reads parts (parts), not points")
             pa = x.get("parts")
@@ -888,8 +930,41 @@ def check_bench(spec, names, seen, E, key, eng=CIRCUIT):
                 if x["kind"] == "V" and any(a == "i" for a in on): E.append(f"{w}: the twin's voltmeter reads vbat or vload against gnd (list its points: not the current i)")
                 if x["kind"] == "scope" and any(a != "i" for a in on): E.append(f"{w}: the twin's oscilloscope shows the supply current (list its points: only points at i)")
         for k in ("tEnd", "dt", "tStart", "threshold"):
-            if k in x and not (scope and (k != "threshold" or x["kind"] == "logic")):
-                E.append(f"{w}.{k} belongs to {'the logic analyser' if k == 'threshold' else 'the oscilloscope and the logic analyser'}")
+            if k in x and not ((scope or meter) and (k != "threshold" or x["kind"] == "logic")):
+                E.append(f"{w}.{k} belongs to {'the logic analyser' if k == 'threshold' else 'the oscilloscope, the logic analyser and (its averaging window) the multimeter'}")
+        # the circuit's instruments (§9.5): the meter's modes, an input resistance, the scope probe's ground leads, the frequency response analyser
+        if "modes" in x:
+            ms = x["modes"]
+            if not (meter and isinstance(ms, list) and len(ms) >= 1 and all(isinstance(q, str) and q in MODES and ms.index(q) == j for j, q in enumerate(ms))):
+                E.append(f"{w}.modes belongs to the multimeter (V, I): a list of {', '.join(MODES)}, each once")
+        if "zin" in x and not (not tw and x["kind"] in ("V", "scope", "logic") and _num(x["zin"]) and x["zin"] >= 0):
+            E.append(f"{w}.zin belongs to the voltmeter, the oscilloscope and the logic analyser: their input resistance in Ω (0 = ideal)")
+        if "leads" in x:
+            ld = x["leads"]
+            if not (not tw and x["kind"] == "scope" and isinstance(ld, list) and 1 <= len(ld) <= L["leads"]): E.append(f"{w}.leads belongs to the oscilloscope: a list of 1–{L['leads']} ground leads {{label, lead, cin?}}")
+            else:
+                for j, q in enumerate(ld):
+                    wq = f"{w}.leads[{j}]"
+                    if not isinstance(q, dict): E.append(f"{wq} must be an object {{label, lead, cin?}}"); continue
+                    _unknown(q, ["label", "lead", "cin"], wq, E)
+                    if not (_num(q.get("lead")) and q["lead"] >= 0): E.append(f"{wq}.lead is the ground lead's inductance in H (0 = none; about 1 nH per mm of wire)")
+                    if "cin" in q and not (_num(q["cin"]) and q["cin"] >= 0): E.append(f"{wq}.cin is the probe's capacitance in F")
+                    key(q.get("label"), wq + ".label", True)
+        bode = x["kind"] == "bode"
+        for k in ("source", "fStart", "fStop", "fPoints"):
+            if k in x and not bode: E.append(f"{w}.{k} belongs to the frequency response analyser (bode)")
+        if bode:
+            if c and not _ac_source_ok(c, x.get("source")): E.append(f"{w}.source must be a V or I part of the netlist (the source the analyser sweeps)")
+            for k in ("fStart", "fStop"):
+                if k not in x: E.append(f"{w}.{k} is required (Hz)")
+                else: _num_or_expr(x[k], names, f"{w}.{k}", E, True)
+            if "fPoints" in x and not (_int(x["fPoints"]) and 2 <= x["fPoints"] <= L["acPoints"]): E.append(f"{w}.fPoints is a whole number 2–{L['acPoints']}")
+        if meter:
+            te = None if "tEnd" not in x else _num_or_expr(x["tEnd"], names, w + ".tEnd", E, True)
+            dt = None if "dt" not in x else _num_or_expr(x["dt"], names, w + ".dt", E, True)
+            if "tStart" in x: _num_or_expr(x["tStart"], names, w + ".tStart", E, False)
+            if ("dt" in x or "tStart" in x) and "tEnd" not in x: E.append(f"{w}: the multimeter's averaging window needs tEnd")
+            if _steps_over(te, dt): E.append(f"{w}: tEnd / dt is more than {L['steps']} steps")
         if scope:
             te = None
             if "tEnd" not in x: E.append(f"{w}.tEnd is required (how long the trace is, in s)")

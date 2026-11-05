@@ -24,17 +24,22 @@ The reference activities: `rc-transient` and `led-bench` (`tools/activities_exam
                { "id": "vAt", "kind": "scalar", "node": "out", "at": "target" }, { "id": "vMax", "kind": "scalar", "node": "out", "stat": "max" } ] }
 ```
 
-- **model** (`{netlist, bindings?, transient?, noise?}`, nothing else): `netlist` is §3.1 (checked with `check()`: its errors refuse
+- **model** (`{netlist, bindings?, transient?, noise?, ac?}`, nothing else): `netlist` is §3.1 (checked with `check()`: its errors refuse
   the spec, its warnings are warnings). `bindings` (≤ 24) set a part from the controls on every run: `{element, prop?, expr}` —
   `prop` defaults to `value` (R, C, L, a DC source); `on` for a switch (a toggle param); `pulse.v2`, `sine.freq`, `pwm.duty` … for
   a source with that waveform. `expr` is an expression (`docs/INTERACTIVE_SIMEXPR.md`) of the consts, params and derived values —
   computed by the app on the main thread, so the engine (in its Worker) gets numbers only. `transient` (`tEnd`, `dt?`: numbers or
   expressions; ≤ 200 000 steps) is needed by series outputs and by `at` / `stat`. `noise` (`{rel, abs?}`) adds the seeded meter
-  noise of §5.
+  noise of §5. `ac` (`{source, fStart, fStop, points?}`) is the AC analysis of §9.6 (a Bode plot).
 - **outputs**: `series` — `time: true` (the time axis), a `node` or a `branch` (a part's current) of the transient, thinned to
   2000 points; `scalar` — a `node` or `branch` at the DC operating point, or of the transient `at` a time (a number or expression)
   or as a `stat` (`final`, `min`, `max`, `mean`, `pp`, `rms`); or a `probe` (`{kind: V | I | R, a, b? | element, pin?}`, an
-  instrument reading; an ohmmeter's `OL` is ∞). Scalars join the names of readouts, marks and checks; series feed `series` plots.
+  instrument reading; an ohmmeter's `OL` is ∞; also `mode`, `zin` and a window `tEnd`, `dt`, `tStart`, §9.5). `power: "<part>"` is
+  the power a part takes (W, v·i summed over its pins; negative = it delivers), a series or a scalar `at` / `stat` of the transient.
+  `ac` reads the AC analysis (§9.6): a series `ac: "f"` (the frequency axis), `"db"`, `"phase"`, `"mag"` of a `node` (against
+  `ref`, default ground); a scalar `ac: "db" | "phase" | "mag"` `at` a frequency, or a landmark `ac: "dcDb" | "peakDb" | "fPeak" |
+  "f3db" | "fLow3db" | "fUnity" | "pm"` of a `node`. Scalars join the names of readouts, marks and checks; series feed `series`
+  plots (a Bode plot: `x` the `f` series with `scale: "log"`).
 - A run that fails (no convergence, the step budget) leaves the outputs as — (gaps in the plots); nothing breaks.
 
 ## 2. The fault-finding bench — `spec.bench`
@@ -157,11 +162,12 @@ open trace it is on the far side). `b` / `ref` default to `gnd`.
 
 | probe | reading |
 |---|---|
-| `{kind:'V', a, b}` | `{value V, unit:'V'}` — DC operating point, sources at their **average** (pulse/pwm duty-weighted, sine offset) |
-| `{kind:'I', element, pin?}` | `{value A, unit:'A'}` — same operating point; `branches` convention, or the current into `pin` |
+| `{kind:'V', a, b, zin?, mode?, tEnd?, dt?, tStart?}` | `{value V, unit:'V', mode?}` — a real DMM (§9.5): 10 MΩ input, the **true time average** (`dc`) of what the board does, or `ac`, `rms`, `avg`; a board with only DC sources reads its operating point |
+| `{kind:'I', element, pin?, mode?, …}` | `{value A, unit:'A'}` — the same, for the current (`branches` convention, or the current into `pin`: DC operating point) |
 | `{kind:'R', a, b}` | `{value Ω \| 'OL', unit:'ohm'}` — unpowered: V sources shorted, I sources open, op-amps off; 1 mA injected into `a`, R = (va − vb)/1 mA; `'OL'` above 20 MΩ. In circuit, so parallel paths count; a diode reads its drop / 1 mA in one direction, OL in the other |
-| `{kind:'scope', node, ref, tEnd, dt?, tStart?}` | `{t, v, unit:'V', stats:{min, max, mean, pp, rms, freq}}` — a transient (dt defaults to tEnd/1000) shown from `tStart` |
-| `{kind:'logic', nodes, threshold = 1.5, tEnd, dt?, tStart?}` | `{t, traces:{node:[0/1]}, edges:{node:[{t, to}]}, stats:{node:{freq, duty, edges}}, threshold}` — edge times interpolated between samples; noise is not applied |
+| `{kind:'scope', node, ref, tEnd, dt?, tStart?, zin?, cin?, lead?}` | `{t, v, unit:'V', stats:{min, max, mean, pp, rms, freq}}` — a transient (dt defaults to tEnd/1000) shown from `tStart`, through a 10 MΩ probe and (with `lead`) its ground lead (§9.5) |
+| `{kind:'bode', node, ref?, source, fStart, fStop, points?}` | `{kind:'bode', f, db, phase, stats:{dcDb, peakDb, fPeak, f3db, fLow3db, fUnity, pm}}` — the AC analysis (§9.6) |
+| `{kind:'logic', nodes, threshold = 1.5, tEnd, dt?, tStart?, zin?}` | `{t, traces:{node:[0/1]}, edges:{node:[{t, to}]}, stats:{node:{freq, duty, edges}}, threshold}` — edge times interpolated between samples; noise is not applied |
 
 **Noise** `{noise: {rel, abs = 0, seed}}` (or `opts.seed`): reading · (1 + rel·u) + abs·u′, u uniform in [−1, 1] from mulberry32 seeded
 by the seed and the probe itself. The same probe on the same sim always reads the same; same seed ⇒ identical numbers everywhere.
@@ -203,6 +209,69 @@ measurement could not be made", outputs as —).
 | PWM 30 % through RC, mean of the last 10 periods | 8e-5 |
 | 20000-step RC transient in node | ~30–70 ms (limit 300 ms) |
 
-Limits: ≤ 60 nodes, ≤ 200 elements, ≤ 200 000 steps per transient; fixed step only (no adaptive step control); no AC/small-signal
-analysis (use a sine transient), no temperature, no noise analysis; device models are first-order (see the table). A DMM reading of
-a nonlinear circuit driven by PWM uses averaged sources, not the true average of the waveform — use the scope's `stats.mean` there.
+Limits: ≤ 60 nodes, ≤ 200 elements, ≤ 200 000 steps per transient, ≤ 1000 AC points; fixed step only (no adaptive step control);
+no temperature in the circuit (the twin has one, `docs/INTERACTIVE_ENGINES.md`), no noise *analysis* (noise sources and pickup are
+simulated in the time domain); device models are first-order (see the table); lines are lossless; an op-amp has one pole (no second
+pole, no input common-mode limits). What used to be missing — AC analysis, true-average meters on PWM, op-amp bandwidth and slew,
+device capacitances, lines and reflections, ground-lead ringing, floating inputs — is §9 (`tests/circuit2.js`, 42 checks).
+
+## 9. The full physics (the default since 2026-11)
+
+Everything here is on by default and additive: a netlist that worked before still works and reads the same, except where the old
+reading was physically wrong (a DMM on PWM, a floating node at exactly 0 V). `check(nl, {version: 1})` / `create(nl, {version: 1})`
+switch it off (the first model, kept only for comparisons in `tests/circuit2.js`).
+
+### 9.1 Devices
+- **Diode** `params.Cj` (junction capacitance), `Bv` / `Ibv` (reverse breakdown at Bv, Ibv default 1 mA): Zeners and TVS diodes.
+  New presets `1n5819` (Schottky), `bzx55c3v3`, `bzx55c5v1` (Zeners), `smbj5.0a` (a 5 V TVS); the other presets gained Cj and Bv
+  (LEDs only Cj). Breakdown is off for the ohmmeter.
+- **BJT** `Cbe`, `Cbc`; **MOSFET** `Cgs`, `Cgd` (Miller), `Cds`, `body` (the body diode; on in `irlz44n`, `irf9540`). The presets carry
+  datasheet-sized values, so a gate driven through a resistor shows its **Miller plateau** and a switch its turn-on and turn-off
+  losses (`power` outputs).
+- **Op-amp** `gbw` (gain–bandwidth, Hz: one pole at gbw/gain), `slew` (V/s), `rout` (Ω), `vos` (input offset, V), `ib` (bias current
+  into each input, A); presets `lm358`, `lm741`, `tl072`, `ne5532`, `mcp6002` (rails from the supply pins and the preset's headroom).
+  Without these params an op-amp is as before (ideal-ish, gain only).
+- **`TLINE`** a lossless transmission line, `n: [a, b]` (each end against ground) or `[a, aRef, b, bRef]`; `params: {z0 = 50, td}`
+  or `{len, vf = 0.66}` (td = len / (vf·c)). Reflections, ringing, a matched end with no echo; in DC a pair of wires. A transient
+  needs `dt ≤ td` (else code `step`).
+- **`VSW`** a voltage-controlled switch, `n: [a, b, ctrl+, ctrl−]`, `params: {Ron = 0.01, Roff = 1e9, Von = 2, Voff = 1}`: smooth
+  between Voff and Von — buck and boost converters from a PWM source.
+- Faults: `drift` takes `add` (added to the param, e.g. `{kind: "drift", element: "U1", param: "vos", add: 0.005}`) besides `factor`;
+  every new numeric param can drift (a dried electrolytic: `C` factor 0.1; an aged op-amp: `gbw` factor 0.3).
+
+### 9.2 Waveforms
+`{noise: {rms, bw = 1000, offset = 0, seed?}}`: seeded band-limited Gaussian noise (a sensor's noise, an input to filter).
+
+### 9.3 Analysis
+AC small-signal analysis linearises every device at the DC operating point and solves the complex MNA (C → jωC, L → jωL, a line →
+its exact e^(−jωtd) two-port) at each frequency, log-spaced from fStart to fStop (`scale: 'lin'` for linear).
+
+### 9.4 Floating inputs pick things up
+A node with no DC path to ground (an unconnected CMOS input, an open trace's far side, a gate with no pull-down) is no longer an
+exact 0 V: it is tied through 100 MΩ to a hidden source of **50 Hz hum + band-limited noise + slow wander**, about the size a
+real bench sees (offset: half the board's highest supply). A DMM's 10 MΩ input loads it down; a scope or a logic analyser sees it
+wander and toggle; each measurement sees another stretch of it, seeded, so a sequence of measurements replays the same.
+`netlist.pickup: {hum, amp, noise, bw, wander, offset, r}` tunes it, `pickup: false` turns it off, a node object `{name, pickup: false}`
+exempts one node. The ohmmeter never sees it.
+
+### 9.5 Real instruments
+- **DMM** (`V`, `I` probes, bench instruments `V`, `I`): `zin` (V only; default 10 MΩ, `0` = ideal); `mode` `dc` (the true time
+  average), `ac` (RMS of the AC part), `rms` (true RMS, AC+DC), `avg` (a cheap average-responding meter, calibrated for sines — wrong on
+  PWM, the classic trap). On a board with time-varying sources the meter runs a transient over a window — automatic (50 periods of
+  the slowest source, the last 20 averaged, starting from the averaged operating point) or `tEnd`, `dt?`, `tStart?` — and averages
+  with trapezoids, so a diode or a MOSFET driven by PWM reads what a real meter reads.
+- **Scope** `zin` (default 10 MΩ), `cin` (default 12 pF when there is a lead), `lead` (the ground lead's inductance in H, ~1 nH per mm):
+  a 15 cm clip lead (`1.5e-7`) rings on a fast edge, a spring tip (`2e-9`) does not.
+- **Logic analyser** `zin` (default none).
+- **Bode** `{kind: 'bode', node, ref?, source, fStart, fStop, points?}` → the curve and its landmarks (§9.6).
+
+On a bench: `{kind: "V", modes: ["dc", "ac", "rms", "avg"], zin?, tEnd?, dt?, tStart?}` (the learner picks the mode; one mode = no
+choice), `{kind: "I", parts, modes?}`, `{kind: "scope", tEnd, leads: [{label, lead, cin?}, …]}` (the learner picks the ground
+connection: list both a long clip and a spring so the ringing can be found), `{kind: "bode", source, fStart, fStop, fPoints?}`
+(its probe on one of the bench's points), and `zin` on `V`, `scope`, `logic`. Up to 7 instruments.
+
+### 9.6 AC results and landmarks
+`ac(o)` → `{f, nodes: {name: {re, im}}}`; `acStats(f, re, im)` → `{db, phase (unwrapped, degrees), dcDb (the first point), peakDb,
+fPeak, f3db (above the peak, where the gain first falls 3 dB below it: a low-pass corner), fLow3db (below the peak, the same: a
+high-pass or band-pass corner), fUnity (the first 0 dB crossing downwards), pm (phase margin: 180° + the phase at fUnity)}`. Landmarks that do not exist are NaN.
+In a spec: `model.ac` + `ac` outputs (§1).

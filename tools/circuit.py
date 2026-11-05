@@ -1,4 +1,4 @@
-"""The netlist checks of the circuit engine circuit-mna@1 in Python (docs/INTERACTIVE_CIRCUIT.md): the twin of check() and
+"""The netlist checks of the circuit engine circuit-mna@1 in Python (its whole model, §9 included) (docs/INTERACTIVE_CIRCUIT.md): the twin of check() and
 checkFaults() in engine/src/36_engine_circuit.js — the same codes, paths and messages (tests/activities.js runs both on the
 same netlists). tools/activities.py uses it to check a sim-spec@1 spec whose engine is circuit-mna@1; it does not simulate.
 
@@ -14,23 +14,29 @@ ID_RE = re.compile(r"^[A-Za-z][A-Za-z0-9_\-]{0,31}$")
 SI = {"f": 1e-15, "p": 1e-12, "n": 1e-9, "u": 1e-6, "µ": 1e-6, "m": 1e-3, "k": 1e3, "K": 1e3, "M": 1e6, "meg": 1e6, "G": 1e9}
 _NUM = re.compile(r"^\s*([-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?)\s*(meg|[fpnuµmkKMG])?\s*$")
 NAN = float("nan")
-TYPES = {"R": [2], "C": [2], "L": [2], "V": [2], "I": [2], "D": [2], "SW": [2], "NPN": [3], "PNP": [3], "NMOS": [3], "PMOS": [3], "OPAMP": [3, 5]}
-PARAMS = {
+TYPES = {"R": [2], "C": [2], "L": [2], "V": [2], "I": [2], "D": [2], "SW": [2], "NPN": [3], "PNP": [3], "NMOS": [3], "PMOS": [3], "OPAMP": [3, 5],
+         "TLINE": [2, 4], "VSW": [4]}
+_MOS = {"Vth": "fin", "k": "pos", "lambda": "nonneg", "Cgs": "nonneg", "Cgd": "nonneg", "Cds": "nonneg", "body": "bool"}
+_BJT = {"Is": "pos", "betaF": "pos", "betaR": "pos", "Cbe": "nonneg", "Cbc": "nonneg"}
+PARAMS = {   # (in the JS order)
     "R": {}, "C": {}, "L": {}, "V": {}, "I": {},
-    "D": {"Is": "pos", "n": "pos"}, "SW": {"Ron": "pos", "Roff": "pos"},
-    "NPN": {"Is": "pos", "betaF": "pos", "betaR": "pos"}, "PNP": {"Is": "pos", "betaF": "pos", "betaR": "pos"},
-    "NMOS": {"Vth": "fin", "k": "pos", "lambda": "nonneg"}, "PMOS": {"Vth": "fin", "k": "pos", "lambda": "nonneg"},
-    "OPAMP": {"gain": "pos", "rails": "rails", "headroom": "nonneg"},
+    "D": {"Is": "pos", "n": "pos", "Cj": "nonneg", "Bv": "pos", "Ibv": "pos"}, "SW": {"Ron": "pos", "Roff": "pos"},
+    "NPN": dict(_BJT), "PNP": dict(_BJT), "NMOS": dict(_MOS), "PMOS": dict(_MOS),
+    "OPAMP": {"gain": "pos", "rails": "rails", "headroom": "nonneg", "gbw": "pos", "slew": "pos", "rout": "nonneg", "vos": "fin", "ib": "fin"},
+    "TLINE": {"z0": "pos", "td": "pos", "len": "pos", "vf": "vf"}, "VSW": {"Ron": "pos", "Roff": "pos", "Von": "fin", "Voff": "fin"},
 }
 PRESETS = {
-    "D": {"1n4148", "1n4001", "led-red", "led-orange", "led-yellow", "led-green", "led-blue", "led-white"},
+    "D": {"1n4148", "1n4001", "led-red", "led-orange", "led-yellow", "led-green", "led-blue", "led-white", "1n5819", "bzx55c3v3", "bzx55c5v1", "smbj5.0a"},
     "NPN": {"2n3904", "2n2222", "bc547"}, "PNP": {"2n3906", "bc557"},
     "NMOS": {"2n7000", "bs170", "irlz44n"}, "PMOS": {"bs250", "irf9540"},
+    "OPAMP": {"lm358", "lm741", "tl072", "ne5532", "mcp6002"},
 }
+PICKUP_FIELDS = {"hum": "nonneg", "amp": "nonneg", "noise": "nonneg", "bw": "pos", "wander": "nonneg", "offset": "fin", "r": "pos"}
 WAVE_FIELDS = {   # (in the JS order: the messages come out in it)
     "pulse": [("v1", "fin!"), ("v2", "fin!"), ("delay", "nonneg"), ("rise", "nonneg"), ("fall", "nonneg"), ("width", "pos"), ("period", "pos")],
     "sine": [("offset", "fin"), ("amp", "fin!"), ("freq", "pos!"), ("phase", "fin"), ("delay", "nonneg")],
     "pwm": [("v", "fin!"), ("freq", "pos!"), ("duty", "unit!"), ("low", "fin"), ("delay", "nonneg")],
+    "noise": [("rms", "nonneg!"), ("bw", "pos!"), ("offset", "fin"), ("seed", "fin")],
 }
 EL_KEYS = {"id", "type", "n", "value", "ic", "params", "preset", "on", "label", "note"}
 FAULT_KINDS = ["open", "short", "drift", "open-trace", "reverse"]
@@ -57,6 +63,7 @@ def check_number(kind, v):
     if kind == "pos": return x > 0
     if kind == "nonneg": return x >= 0
     if kind == "unit": return 0 <= x <= 1
+    if kind == "vf": return 0 < x <= 1
     if kind == "bool": return isinstance(v, bool)
     if kind == "rails": return isinstance(v, list) and len(v) == 2 and num(v[0]) < num(v[1])
     return _finite(x)
@@ -76,7 +83,7 @@ def check_wave(v, path, E):
         if not _finite(num(v)): E("value", path, "needs a number or a waveform")
         return
     keys = list(v)
-    if len(keys) != 1 or keys[0] not in ("dc", "pulse", "sine", "pwm"): E("value", path, "one of dc, pulse, sine, pwm"); return
+    if len(keys) != 1 or keys[0] not in ("dc", "pulse", "sine", "pwm", "noise"): E("value", path, "one of dc, pulse, sine, pwm, noise"); return
     kind = keys[0]
     if kind == "dc":
         if not _finite(num(v["dc"])): E("value", path + ".dc", "needs a number")
@@ -106,12 +113,20 @@ def check(nl):
     if not isinstance(nl.get("elements"), list): E("format", "elements", "not an array")
     if P: return P
     for k in nl:
-        if k not in ("format", "nodes", "elements", "meta"): W("unknown-field", k, "ignored")
+        if k not in ("format", "nodes", "elements", "meta", "pickup"): W("unknown-field", k, "ignored")
+    if "pickup" in nl:
+        pk = nl["pickup"]
+        if pk is not False and not _obj(pk): E("value", "pickup", "false, or {hum, amp, noise, bw, wander, offset, r}")
+        elif _obj(pk):
+            for k, v in pk.items():
+                if k not in PICKUP_FIELDS: E("value", "pickup." + k, "unknown field")
+                elif not check_number(PICKUP_FIELDS[k], v): E("value", "pickup." + k, "out of range")
     names, labels, node_at = {}, {}, {}   # (dicts keep the order, like the JS Set and Map)
     for i, x in enumerate(nl["nodes"]):
         nm = x if isinstance(x, str) else x.get("name") if _obj(x) else None
         if not isinstance(nm, str) or not NODE_RE.match(nm) or nm.endswith("\n"): E("node-name", f"nodes[{i}]", "bad node name"); continue
         if nm in names or nm in labels: E("dup-node", f"nodes[{i}]", "duplicate node " + nm); continue
+        if _obj(x) and "pickup" in x and not isinstance(x["pickup"], bool): E("value", f"nodes[{i}].pickup", "needs true or false")
         if _obj(x) and "probe" in x:
             if is_gnd(nm): E("node-name", f"nodes[{i}]", "ground cannot be a label"); continue
             labels[nm] = (x["probe"], i)
@@ -148,6 +163,7 @@ def check(nl):
         if "ic" in el and t not in ("C", "L"): E("value", at + ".ic", "only C and L have ic")
         if "on" in el and (t != "SW" or not isinstance(el["on"], bool)): E("value", at + ".on", "only SW has on (true/false)")
         if "preset" in el and not (t in PRESETS and isinstance(el["preset"], str) and el["preset"] in PRESETS[t]): E("preset", at + ".preset", "unknown preset")
+        if t == "TLINE" and not (_obj(el.get("params")) and ("td" in el["params"] or "len" in el["params"])): E("param", at + ".params", "a line needs td (s) or len (m)")
         if "params" in el:
             if not _obj(el["params"]): E("param", at + ".params", "not an object")
             else:
@@ -176,8 +192,13 @@ def check(nl):
         n, t = el["n"], el["type"]
         if t in ("V", "L") and not vl_u(n[0], n[1]): E("vloop", f"elements[{i}]", "loop of voltage sources / inductors")
         if t == "OPAMP" and not vl_u(n[2], G0): E("vloop", f"elements[{i}]", "op-amp output on a voltage-defined node")
-        if len(n) == 2 and t not in ("V", "L") and key(n[0]) == key(n[1]): W("self-loop", f"elements[{i}]", "both terminals on one node")
-        if t in ("R", "L", "V", "D", "SW"): dcp_u(n[0], n[1])
+        if t == "TLINE":
+            q = n if len(n) == 4 else [n[0], G0, n[1], G0]
+            for x, y in ((q[0], q[2]), (q[1], q[3])):
+                if key(x) != key(y) and not vl_u(x, y): E("vloop", f"elements[{i}]", "loop of voltage sources / inductors / lines")
+            dcp_u(q[0], q[2]); dcp_u(q[1], q[3])
+        if len(n) == 2 and t not in ("V", "L", "TLINE") and key(n[0]) == key(n[1]): W("self-loop", f"elements[{i}]", "both terminals on one node")
+        if t in ("R", "L", "V", "D", "SW", "VSW"): dcp_u(n[0], n[1])
         elif t in ("NPN", "PNP"): dcp_u(n[0], n[1]); dcp_u(n[1], n[2])
         elif t in ("NMOS", "PMOS"): dcp_u(n[0], n[2])
         elif t == "OPAMP": dcp_u(n[2], G0)
@@ -215,7 +236,7 @@ def check_faults(nl, faults):
         at = f"faults[{i}]"
         if not _obj(f): E(at, "a fault is an object {element | node, kind}"); continue
         for k in f:
-            if k not in FAULT_KEYS: E(f"{at}.{k}", "unknown field")
+            if k not in FAULT_KEYS and k != "add": E(f"{at}.{k}", "unknown field")
         if f.get("kind") not in FAULT_KINDS: E(at + ".kind", "one of " + ", ".join(FAULT_KINDS)); continue
         if f["kind"] == "open-trace":
             node = f.get("node")
@@ -241,8 +262,9 @@ def check_faults(nl, faults):
             if (not pins_ok(f["pins"], n)) if "pins" in f else (f["kind"] == "reverse" and n != 2): E(at + ".pins", "two different pins of the part")
         else:
             if "factor" in f and not num(f["factor"]) > 0: E(at + ".factor", "needs a number > 0")
+            if "add" in f and not _finite(num(f["add"])): E(at + ".add", "needs a number")
             if "param" in f:
                 t, prm = e["type"], f["param"]
-                okp = isinstance(prm, str) and (prm == "value" if t in ("R", "C", "L", "V", "I") else prm in PARAMS[t])
+                okp = isinstance(prm, str) and (prm == "value" if t in ("R", "C", "L", "V", "I") else prm in PARAMS[t] and PARAMS[t][prm] != "bool")
                 if not okp: E(at + ".param", "not a parameter of the part")
     return P

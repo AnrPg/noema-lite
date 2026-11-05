@@ -189,6 +189,41 @@ d = json.load(open(sys.argv[1], encoding='utf-8')); print(json.dumps({'devices':
   ok(same === total && found > 40, `JS ↔ Python check()/checkFaults()/checkSpec(): ${same}/${total} identical (${found} findings)`);
 }
 
+// ---------- 6. temperature, the clock, the channel ----------
+{
+  const base = () => ({ battery: { capacity: 500, chem: 'li-ion' }, power: { sleep: 0.01, active: 10, tx: 40, rx: 12 }, schedule: { period: 60, sense: 0.5 },
+    radio: { tech: 'lora', txTime: 0.1, d: 200, sigma: 0 }, sensors: [{ id: 'hum', base: 50, tempco: 0 }], sim: { duration: 400 * DAY, samples: 400, maxEvents: 3000000 } });
+  const warm = sim(base()), cold = sim(Object.assign(base(), { env: { temp: -20 } })), same = sim(Object.assign(base(), { env: { temp: 25 } }));
+  ok(Math.abs(same.scalars.tDead - warm.scalars.tDead) / warm.scalars.tDead < 0.01 && cold.scalars.tDead < 0.75 * warm.scalars.tDead,
+    `−20 °C: the cell lasts ${(cold.scalars.tDead / DAY).toFixed(0)} days instead of ${(warm.scalars.tDead / DAY).toFixed(0)} (capacity −36 %, more internal resistance); 25 °C changes nothing`);
+  const sw = sim(Object.assign(base(), { env: { temp: 10, swing: 15 }, sensors: [{ id: 'hum', base: 50, tempco: 0.4 }], sim: { duration: 10 * DAY, samples: 240 } }));
+  ok(Math.abs(sw.scalars.tempMin + 5) < 0.2 && Math.abs(sw.scalars.tempMax - 25) < 0.2 && sw.perSensor[0].readingErr > 3, `a daily swing 10 ± 15 °C: ${sw.scalars.tempMin.toFixed(1)} to ${sw.scalars.tempMax.toFixed(1)} °C; a sensor with 0.4 /°C reads ${sw.perSensor[0].readingErr.toFixed(1)} off on average`);
+  const T1 = T.create(Object.assign(base(), { env: { temp: 10, swing: 15 }, sim: { duration: 2 * DAY, samples: 48 } })).measure({ kind: 'T' });
+  ok(T1.kind === 'T' && T1.min < T1.max && Number.isFinite(T1.value), `the thermometer: now ${T1.value.toFixed(1)} °C, min ${T1.min.toFixed(1)}, max ${T1.max.toFixed(1)}`);
+  // the crystal: 200 ppm off, 60 s wakes → 12 ms a wake; slots of ±50 ms are missed after 5 wakes unless an ack resynchronises
+  const slot = (extra, faults) => sim(Object.assign(base(), { clock: Object.assign({ guard: 0.05 }, extra), sim: { duration: DAY, samples: 24 } }), faults);
+  const good = slot({ ppm: 10, resync: 3600 }), bad = slot({ ppm: 10, resync: 3600 }, [{ kind: 'clock-drift' }]), acked = sim(Object.assign(base(), { schedule: { period: 60, sense: 0.5, ack: true }, clock: { guard: 0.05 }, sim: { duration: DAY, samples: 24 } }), [{ kind: 'clock-drift' }]);
+  ok(good.scalars.slotMisses === 0 && bad.scalars.slotMisses > 0.5 * bad.scalars.sent && Math.abs(bad.scalars.ppmMean - 210) < 1e-9 && bad.scalars.slotMisses < bad.scalars.sent && acked.scalars.slotMisses === 0,
+    `clock-drift (+200 ppm): ${bad.scalars.slotMisses} of ${bad.scalars.sent} slots missed, worst error ${bad.scalars.clockErrMax.toFixed(1)} s; none at 10 ppm with an hourly beacon, none when each ack resynchronises`);
+  const resync = slot({ ppm: 210, resync: 120 });
+  ok(resync.scalars.slotMisses === 0 && resync.scalars.clockErrMax < 0.05, `a time beacon every 2 min keeps a 210 ppm clock inside its slot (worst ${(1000 * resync.scalars.clockErrMax).toFixed(1)} ms)`);
+  const tc = sim(Object.assign(base(), { env: { temp: -10 }, clock: { tempco: -0.034 }, sim: { duration: DAY, samples: 24 } }));
+  ok(Math.abs(tc.scalars.ppmMean + 0.034 * 35 * 35) < 1e-6, `a tuning-fork crystal at −10 °C: ${tc.scalars.ppmMean.toFixed(1)} ppm (−0.034·35²)`);
+  const ck = T.create(Object.assign(base(), { clock: { ppm: 50 }, sim: { duration: DAY, samples: 24 } })).measure({ kind: 'clock' });
+  ok(ck.kind === 'clock' && Math.abs(ck.value - 50) < 1e-9 && Math.abs(ck.err - 86400 * 50e-6) < 0.1, `the clock check: ${ck.value} ppm, ${ck.err.toFixed(2)} s behind after a day`);
+  // the channel: other nodes transmitting at random (pure ALOHA: P(success) ≈ e^(−2G))
+  const net = nodes => sim(Object.assign(base(), { network: { nodes, spread: 0, capture: 6 }, sim: { duration: 5 * DAY, samples: 24 } }));
+  const quiet = net(0), busy = net(100), G = 100 * 0.1 / 60;
+  ok(quiet.scalars.collisions === 0 && Math.abs(busy.scalars.deliveryRatio - Math.exp(-2 * G)) < 0.03, `100 other nodes, 0.1 s every minute: ${(100 * busy.scalars.deliveryRatio).toFixed(1)} % delivered (pure ALOHA e^(−2G) = ${(100 * Math.exp(-2 * G)).toFixed(1)} %), ${busy.scalars.collisions} collisions`);
+  const strong = sim(Object.assign(base(), { network: { nodes: 100, spread: 0, offset: -10, capture: 6 }, sim: { duration: 5 * DAY, samples: 24 } }));
+  ok(strong.scalars.collisions === 0, 'the capture effect: interferers 10 dB weaker never win');
+  const syn = sim(Object.assign(base(), { network: { spread: 0 }, sim: { duration: DAY, samples: 24 } }), [{ kind: 'sync-wake', nodes: 3 }]);
+  const synd = sim(Object.assign(base(), { network: { spread: 0 }, clock: { ppm: 30 }, sim: { duration: DAY, samples: 24 } }), [{ kind: 'sync-wake', nodes: 3 }]);
+  ok(syn.scalars.deliveryRatio === 0 && synd.scalars.deliveryRatio > 0.5, `sync-wake: nodes waking in step collide every time (${(100 * syn.scalars.deliveryRatio).toFixed(0)} % delivered); 30 ppm of drift slides them apart (${(100 * synd.scalars.deliveryRatio).toFixed(0)} %)`);
+  const bc = sim(base(), [{ kind: 'busy-channel' }]); ok(bc.scalars.collisions > 0, `busy-channel: 50 more nodes, ${bc.scalars.collisions} collisions`);
+  ok(T.check(Object.assign(base(), { network: { nodes: 500 } })).some(p => p.path === 'network.nodes') && T.checkFaults(base(), [{ kind: 'sensor-tempco', sensor: 'nope' }]).length === 1, 'checks: at most 200 other nodes; sensor-tempco names a sensor');
+}
+
 console.log(`\naccuracy: average current ${acc.iAvg.toExponential(1)} · battery life (simulated vs capacity / I) ${(100 * acc.life).toFixed(3)} % · 1 year @ 10 min ${acc.ms.toFixed(1)} ms · 30 days @ 10 s ${acc.ms2.toFixed(1)} ms`);
 console.log(`${n - fails}/${n} passed`);
 process.exit(fails ? 1 : 0);

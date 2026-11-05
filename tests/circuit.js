@@ -27,7 +27,7 @@ const divider = (r1 = 1000, r2 = 3000) => ({ nodes: ['vin', 'out'], elements: [
   const s = C.create(divider()), r = s.dc();
   ok(Math.abs(r.nodes.out - 7.5) < 1e-6, `divider: 10 V · 3k/(1k+3k) = 7.5 V (got ${r.nodes.out.toFixed(9)})`);
   ok(Math.abs(r.branches.R1 - 2.5e-3) < 1e-9 && Math.abs(r.branches.V1 + 2.5e-3) < 1e-9, 'divider: 2.5 mA through R1; the source delivering power has a negative current (passive sign)');
-  ok(Math.abs(s.measure({ kind: 'V', a: 'out' }).value - 7.5) < 1e-6 && Math.abs(s.measure({ kind: 'V', a: 'vin', b: 'out' }).value - 2.5) < 1e-6, 'multimeter V between nodes');
+  ok(Math.abs(s.measure({ kind: 'V', zin: 0, a: 'out' }).value - 7.5) < 1e-6 && Math.abs(s.measure({ kind: 'V', zin: 0, a: 'vin', b: 'out' }).value - 2.5) < 1e-6, 'multimeter V between nodes');
   ok(Math.abs(s.measure({ kind: 'I', element: 'R2' }).value - 2.5e-3) < 1e-9, 'multimeter I through an element');
   const R = s.measure({ kind: 'R', a: 'out', b: 'gnd' }).value;
   ok(Math.abs(R - 750) < 1e-3, `ohmmeter in circuit, unpowered: R1 ∥ R2 through the zeroed source = 750 Ω (got ${R.toFixed(6)})`);
@@ -168,7 +168,7 @@ const pwmRc = { nodes: ['p', 'out'], elements: [{ id: 'V1', type: 'V', n: ['p', 
   const last = tr.nodes.out.slice(-1000), mean = last.reduce((a, b) => a + b, 0) / last.length;
   acc.pwm = rel(mean, 1.5);
   ok(acc.pwm < 0.01, `PWM 5 V · 30 % through RC (τ = 10 ms): mean ${mean.toFixed(5)} V vs 1.5 V (${pct(acc.pwm)}); ripple ${(Math.max(...last) - Math.min(...last)).toFixed(4)} V`);
-  ok(Math.abs(s.measure({ kind: 'V', a: 'out' }).value - 1.5) < 1e-6, 'multimeter (DC) on a PWM-driven RC reads the average: 1.5 V');
+  { const v = s.measure({ kind: 'V', zin: 0, a: 'out' }).value; ok(Math.abs(v - 1.5) < 2e-3, `multimeter (DC) on a PWM-driven RC reads the true time average: ${v.toFixed(4)} V (1.5 V)`); }
   const la = s.measure({ kind: 'logic', nodes: ['p', 'out'], threshold: 2.5, tEnd: 5e-3, dt: 1e-6 });
   const ed = la.edges.p, rises = ed.filter(e => e.to === 1).map(e => e.t), falls = ed.filter(e => e.to === 0).map(e => e.t);
   ok(rises.length === 6 && falls.length === 5, `logic analyser: 5 ms of 1 kHz PWM (low at t = 0⁻) give ${rises.length} rising edges (0…5 ms) and ${falls.length} falling edges`);
@@ -182,11 +182,11 @@ const pwmRc = { nodes: ['p', 'out'], elements: [{ id: 'V1', type: 'V', n: ['p', 
 {
   const base = C.create(divider());
   const openR2 = C.create(divider(), { faults: [{ element: 'R2', kind: 'open' }] });
-  ok(Math.abs(openR2.measure({ kind: 'V', a: 'out' }).value - 10) < 1e-6, 'open R2: the output floats up to the supply through R1');
+  ok(Math.abs(openR2.measure({ kind: 'V', zin: 0, a: 'out' }).value - 10) < 1e-6, 'open R2: the output floats up to the supply through R1');
   ok(Math.abs(openR2.measure({ kind: 'R', a: 'out' }).value - 1000) < 1e-3, 'open R2: the ohmmeter across it reads only the other path (R1 through the source) = 1 kΩ');
   ok(Math.abs(openR2.measure({ kind: 'R', a: '@R2.0', b: '@R2.1' }).value - 1000) < 1e-3, 'pin references "@R2.0" measure where the legs are soldered');
   const openR1 = C.create(divider(), { faults: [{ element: 'R1', kind: 'open' }] });
-  ok(Math.abs(openR1.measure({ kind: 'V', a: 'out' }).value) < 1e-6 && Math.abs(openR1.measure({ kind: 'I', element: 'R2' }).value) < 1e-12, 'open R1: no current, the output falls to 0 V');
+  ok(Math.abs(openR1.measure({ kind: 'V', zin: 0, a: 'out' }).value) < 1e-6 && Math.abs(openR1.measure({ kind: 'I', element: 'R2' }).value) < 1e-12, 'open R1: no current, the output falls to 0 V');
   const ledNl = { nodes: ['vin', 'a'], elements: [{ id: 'V1', type: 'V', n: ['vin', 'gnd'], value: 5 }, { id: 'R1', type: 'R', n: ['vin', 'a'], value: 220 }, { id: 'D1', type: 'D', n: ['a', 'gnd'], preset: 'led-red' }] };
   const ledOpen = C.create(ledNl, { faults: [{ element: 'R1', kind: 'open' }] });
   ok(ledOpen.measure({ kind: 'R', a: 'vin', b: 'a' }).value === 'OL', 'open series resistor: OL on the ohmmeter (the only other path is the LED, reverse-biased by the meter)');
@@ -194,15 +194,15 @@ const pwmRc = { nodes: ['p', 'out'], elements: [{ id: 'V1', type: 'V', n: ['p', 
   ok(typeof fwd === 'number' && fwd > 1000 && fwd < 2500, `…with the probes swapped the meter forward-biases the LED: ${fwd.toFixed(0)} Ω (a diode reads its drop / 1 mA)`);
   ok(Math.abs(ledOpen.dc().branches.D1) < 1e-9 && C.create(ledNl).measure({ kind: 'R', a: 'vin', b: 'a' }).value > 219.9, 'open: the LED is dark; healthy: the meter reads 220 Ω');
   const short = C.create(divider(), { faults: [{ element: 'R2', kind: 'short' }] });
-  ok(Math.abs(short.measure({ kind: 'V', a: 'out' }).value) < 0.02 && short.measure({ kind: 'R', a: 'out' }).value < 0.01, 'short R2: the output sits at ~0 V and the ohmmeter reads ~0 Ω');
+  ok(Math.abs(short.measure({ kind: 'V', zin: 0, a: 'out' }).value) < 0.02 && short.measure({ kind: 'R', a: 'out' }).value < 0.01, 'short R2: the output sits at ~0 V and the ohmmeter reads ~0 Ω');
   ok(rel(short.measure({ kind: 'I', element: 'R1' }).value, 0.01) < 1e-4, 'short R2: R1 carries 10 V / 1 kΩ');
   const drift = C.create(divider(), { faults: [{ element: 'R2', kind: 'drift', factor: 2 }] });
-  ok(Math.abs(drift.measure({ kind: 'V', a: 'out' }).value - 60 / 7) < 1e-5 && Math.abs(drift.measure({ kind: 'R', a: 'out' }).value - 6000 / 7) < 1e-3, 'drift R2 ×2: the output becomes 10·6/7 V, R1 ∥ 2·R2 on the ohmmeter');
+  ok(Math.abs(drift.measure({ kind: 'V', zin: 0, a: 'out' }).value - 60 / 7) < 1e-5 && Math.abs(drift.measure({ kind: 'R', a: 'out' }).value - 6000 / 7) < 1e-3, 'drift R2 ×2: the output becomes 10·6/7 V, R1 ∥ 2·R2 on the ohmmeter');
   const dc = C.create(rc({ pulse: { v1: 0, v2: 5 } }), { faults: [{ element: 'C1', kind: 'drift', factor: 2 }] }).transient({ dt: 1e-6, tEnd: 3e-3 });
   ok(rel(dc.nodes.out[2000], 5 * (1 - Math.exp(-1))) < 0.005, 'drift C1 ×2: the time constant doubles');
   ok(Math.abs(C.create(divider(), { faults: [{ element: 'V1', kind: 'drift', factor: 0.5 }] }).dc().nodes.out - 3.75) < 1e-6, 'drift of a source scales its voltage');
   const trace = C.create(divider(), { faults: [{ node: 'out', kind: 'open-trace' }] });
-  ok(Math.abs(trace.measure({ kind: 'V', a: 'out' }).value - 10) < 1e-6 && Math.abs(trace.measure({ kind: 'V', a: '@R2.0' }).value) < 1e-6, 'open trace on "out": R1\'s side reads 10 V, R2\'s pad reads 0 V');
+  ok(Math.abs(trace.measure({ kind: 'V', zin: 0, a: 'out' }).value - 10) < 1e-6 && Math.abs(trace.measure({ kind: 'V', zin: 0, a: '@R2.0' }).value) < 1e-6, 'open trace on "out": R1\'s side reads 10 V, R2\'s pad reads 0 V');
   ok(Math.abs(trace.measure({ kind: 'R', a: 'out', b: '@R2.0' }).value - 4000) < 1e-2 && base.measure({ kind: 'R', a: 'out', b: '@R2.0' }).value === 0, 'open trace: 0 Ω along the trace when healthy; broken, the meter reads round the loop (R1 + R2 = 4 kΩ)');
   const iso = { nodes: ['vin', 'a', 'b'], elements: [{ id: 'V1', type: 'V', n: ['vin', 'gnd'], value: 5 }, { id: 'R1', type: 'R', n: ['vin', 'a'], value: 1000 }, { id: 'R2', type: 'R', n: ['a', 'b'], value: 1000 }, { id: 'C1', type: 'C', n: ['b', 'gnd'], value: 1e-6 }] };
   ok(C.create(iso, { faults: [{ node: 'a', kind: 'open-trace', side: ['R2'] }] }).measure({ kind: 'R', a: 'a', b: '@R2.0' }).value === 'OL', 'open trace with no other DC path (R2 leads only to a capacitor): OL');
@@ -216,7 +216,7 @@ const pwmRc = { nodes: ['p', 'out'], elements: [{ id: 'V1', type: 'V', n: ['p', 
   // reverse: a part soldered the wrong way round (P3, the fault-finding benches)
   const rev = C.create(ledNl, { faults: [{ element: 'D1', kind: 'reverse' }] }), rd = rev.dc();
   ok(Math.abs(rd.branches.D1) < 1e-9 && Math.abs(rd.nodes.a - 5) < 1e-3, `reverse: the LED reversed is dark and its anode pad sits at the supply (${rd.nodes.a.toFixed(4)} V)`);
-  ok(Math.abs(rev.measure({ kind: 'V', a: '@D1.0', b: '@D1.1' }).value + 5) < 1e-3, 'reverse: pin references follow the legs (anode leg on the cathode pad: −5 V anode to cathode)');
+  ok(Math.abs(rev.measure({ kind: 'V', zin: 0, a: '@D1.0', b: '@D1.1' }).value + 5) < 1e-3, 'reverse: pin references follow the legs (anode leg on the cathode pad: −5 V anode to cathode)');
   ok(throwsCode(() => C.create(bjtSwitch(5), { faults: [{ element: 'Q1', kind: 'reverse' }] }), 'fault') && Math.abs(C.create(bjtSwitch(5), { faults: [{ element: 'Q1', kind: 'reverse', pins: [0, 2] }] }).dc().branches.Q1) > 0, 'reverse: a 3-terminal part needs its two pins (c and e swapped: a BJT in reverse active mode)');
   // checkFaults: the validators' static check of a bench's faults
   const cf = f => C.checkFaults(ledNl, f).map(p => p.path + ' ' + p.msg);
@@ -230,7 +230,7 @@ const pwmRc = { nodes: ['p', 'out'], elements: [{ id: 'V1', type: 'V', n: ['p', 
 {
   const mk = seed => C.create(divider(), { noise: { rel: 0.01, seed } });
   const a = mk(42), b = mk(42), c = mk(7);
-  const pr = [{ kind: 'V', a: 'out' }, { kind: 'R', a: 'out' }, { kind: 'I', element: 'R1' }];
+  const pr = [{ kind: 'V', zin: 0, a: 'out' }, { kind: 'R', a: 'out' }, { kind: 'I', element: 'R1' }];
   const ra = pr.map(p => a.measure(p).value), rb = pr.map(p => b.measure(p).value), rc2 = pr.map(p => c.measure(p).value);
   ok(JSON.stringify(ra) === JSON.stringify(rb), `same seed → identical readings (${ra.map(v => v.toPrecision(6)).join(', ')})`);
   ok(JSON.stringify(ra) !== JSON.stringify(rc2), 'another seed → other readings');
@@ -268,8 +268,8 @@ const pwmRc = { nodes: ['p', 'out'], elements: [{ id: 'V1', type: 'V', n: ['p', 
   ok(codes(null).includes('format') && codes({ nodes: 'a' }).includes('format'), 'check: not a netlist');
   ok(throwsCode(() => C.create({ nodes: ['a'], elements: [{ id: 'R1', type: 'R', n: ['a', 'x'], value: 1 }] }), 'invalid'), 'create() refuses a netlist with errors: code "invalid" (with .problems)');
   const lab = C.create({ nodes: ['vin', 'out', { name: 'TP1', probe: 'out' }], elements: divider().elements });
-  ok(Math.abs(lab.measure({ kind: 'V', a: 'TP1' }).value - 7.5) < 1e-6 && Math.abs(lab.dc().nodes.TP1 - 7.5) < 1e-6, 'a probe-only label reads its node');
-  ok(throwsCode(() => lab.measure({ kind: 'V', a: 'nowhere' }), 'unknown-node') && throwsCode(() => lab.measure({ kind: 'Z' }), 'probe'), 'measure: unknown node / kind → codes');
+  ok(Math.abs(lab.measure({ kind: 'V', zin: 0, a: 'TP1' }).value - 7.5) < 1e-6 && Math.abs(lab.dc().nodes.TP1 - 7.5) < 1e-6, 'a probe-only label reads its node');
+  ok(throwsCode(() => lab.measure({ kind: 'V', zin: 0, a: 'nowhere' }), 'unknown-node') && throwsCode(() => lab.measure({ kind: 'Z' }), 'probe'), 'measure: unknown node / kind → codes');
   const s = C.create(rc(5));
   ok(throwsCode(() => s.transient({ dt: 1e-9, tEnd: 1 }), 'budget'), 'transient: more than 200000 steps → code "budget"');
   ok(throwsCode(() => s.transient({ dt: 1e-6, tEnd: 1e-3, maxSteps: 500 }), 'budget') && throwsCode(() => s.transient({ dt: 1e-6, tEnd: 1e-3, maxSteps: 300000 }), 'budget'), 'transient: beyond maxSteps, or maxSteps above 200000 → "budget"');

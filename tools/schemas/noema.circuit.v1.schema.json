@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://noema-lite.netlify.app/schemas/noema.circuit.v1.schema.json",
   "title": "noema-lite circuit netlist (noema.circuit/v1)",
-  "description": "The netlist run by the circuit engine circuit-mna@1 (engine/src/36_engine_circuit.js). Human-readable spec: docs/INTERACTIVE_CIRCUIT.md. The engine's own check() also tests what a schema cannot: unknown nodes, duplicate ids, voltage-source loops ('vloop'), nodes without a DC path to ground ('floating', a warning) and the limits (60 nodes, 200 elements).",
+  "description": "The netlist run by the circuit engine circuit-mna@1 (engine/src/36_engine_circuit.js). Human-readable spec: docs/INTERACTIVE_CIRCUIT.md. The engine's own check() also tests what a schema cannot: unknown nodes, duplicate ids, voltage-source loops ('vloop'), nodes without a DC path to ground ('floating', a warning) and the limits (60 nodes, 200 elements). Version 2 of the physics (the default): AC analysis, transmission lines, op-amp bandwidth and slew, device capacitances, breakdown, a voltage-controlled switch, pickup on floating nodes (§9).",
   "type": "object",
   "required": ["nodes", "elements"],
   "properties": {
@@ -19,18 +19,45 @@
             "required": ["name"],
             "properties": {
               "name": { "$ref": "#/$defs/nodeName" },
-              "probe": { "$ref": "#/$defs/nodeName", "description": "makes this a probe-only label (a test point) of that node; it cannot be an element terminal" }
+              "probe": {
+                "$ref": "#/$defs/nodeName",
+                "description": "makes this a probe-only label (a test point) of that node; it cannot be an element terminal"
+              },
+              "pickup": { "type": "boolean", "description": "false: this floating node picks nothing up" }
             },
             "additionalProperties": false
           }
         ]
       }
     },
-    "elements": { "type": "array", "maxItems": 200, "items": { "$ref": "#/$defs/element" } }
+    "elements": { "type": "array", "maxItems": 200, "items": { "$ref": "#/$defs/element" } },
+    "pickup": {
+      "oneOf": [
+        { "type": "boolean", "description": "false: no pickup anywhere" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "what a node with no DC path to ground picks up (docs/INTERACTIVE_CIRCUIT.md §9.4); defaults hum 50 Hz, amp 1 V, noise 0.3 V, bw 500 Hz, wander 0.3 V, r 100 MΩ",
+          "properties": {
+            "hum": { "type": "number" },
+            "amp": { "type": "number" },
+            "noise": { "type": "number" },
+            "bw": { "type": "number" },
+            "wander": { "type": "number" },
+            "offset": { "type": "number" },
+            "r": { "type": "number" }
+          }
+        }
+      ]
+    }
   },
   "additionalProperties": false,
   "$defs": {
-    "nodeName": { "type": "string", "pattern": "^[A-Za-z0-9_][A-Za-z0-9_+\\-]{0,31}$", "description": "'gnd' and '0' are ground (they need not be listed)" },
+    "nodeName": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_][A-Za-z0-9_+\\-]{0,31}$",
+      "description": "'gnd' and '0' are ground (they need not be listed)"
+    },
     "id": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_\\-]{0,31}$" },
     "quantity": {
       "description": "a number, or a string with an SI prefix: f p n u µ m k K M meg G (\"4.7k\", \"100n\")",
@@ -42,34 +69,88 @@
     "waveform": {
       "oneOf": [
         { "$ref": "#/$defs/quantity" },
-        { "type": "object", "required": ["dc"], "properties": { "dc": { "$ref": "#/$defs/quantity" } }, "additionalProperties": false },
         {
-          "type": "object", "required": ["pulse"], "additionalProperties": false,
-          "properties": { "pulse": {
-            "type": "object", "required": ["v1", "v2"], "additionalProperties": false,
-            "properties": {
-              "v1": { "$ref": "#/$defs/quantity" }, "v2": { "$ref": "#/$defs/quantity" },
-              "delay": { "$ref": "#/$defs/quantity" }, "rise": { "$ref": "#/$defs/quantity" }, "fall": { "$ref": "#/$defs/quantity" },
-              "width": { "$ref": "#/$defs/quantity" }, "period": { "$ref": "#/$defs/quantity" }
-            } } }
+          "type": "object",
+          "required": ["dc"],
+          "properties": { "dc": { "$ref": "#/$defs/quantity" } },
+          "additionalProperties": false
         },
         {
-          "type": "object", "required": ["sine"], "additionalProperties": false,
-          "properties": { "sine": {
-            "type": "object", "required": ["amp", "freq"], "additionalProperties": false,
-            "properties": {
-              "offset": { "$ref": "#/$defs/quantity" }, "amp": { "$ref": "#/$defs/quantity" }, "freq": { "$ref": "#/$defs/quantity" },
-              "phase": { "type": "number", "description": "degrees" }, "delay": { "$ref": "#/$defs/quantity" }
-            } } }
+          "type": "object",
+          "required": ["pulse"],
+          "additionalProperties": false,
+          "properties": {
+            "pulse": {
+              "type": "object",
+              "required": ["v1", "v2"],
+              "additionalProperties": false,
+              "properties": {
+                "v1": { "$ref": "#/$defs/quantity" },
+                "v2": { "$ref": "#/$defs/quantity" },
+                "delay": { "$ref": "#/$defs/quantity" },
+                "rise": { "$ref": "#/$defs/quantity" },
+                "fall": { "$ref": "#/$defs/quantity" },
+                "width": { "$ref": "#/$defs/quantity" },
+                "period": { "$ref": "#/$defs/quantity" }
+              }
+            }
+          }
         },
         {
-          "type": "object", "required": ["pwm"], "additionalProperties": false,
-          "properties": { "pwm": {
-            "type": "object", "required": ["v", "freq", "duty"], "additionalProperties": false,
-            "properties": {
-              "v": { "$ref": "#/$defs/quantity" }, "low": { "$ref": "#/$defs/quantity" }, "freq": { "$ref": "#/$defs/quantity" },
-              "duty": { "type": "number", "minimum": 0, "maximum": 1 }, "delay": { "$ref": "#/$defs/quantity" }
-            } } }
+          "type": "object",
+          "required": ["sine"],
+          "additionalProperties": false,
+          "properties": {
+            "sine": {
+              "type": "object",
+              "required": ["amp", "freq"],
+              "additionalProperties": false,
+              "properties": {
+                "offset": { "$ref": "#/$defs/quantity" },
+                "amp": { "$ref": "#/$defs/quantity" },
+                "freq": { "$ref": "#/$defs/quantity" },
+                "phase": { "type": "number", "description": "degrees" },
+                "delay": { "$ref": "#/$defs/quantity" }
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["pwm"],
+          "additionalProperties": false,
+          "properties": {
+            "pwm": {
+              "type": "object",
+              "required": ["v", "freq", "duty"],
+              "additionalProperties": false,
+              "properties": {
+                "v": { "$ref": "#/$defs/quantity" },
+                "low": { "$ref": "#/$defs/quantity" },
+                "freq": { "$ref": "#/$defs/quantity" },
+                "duty": { "type": "number", "minimum": 0, "maximum": 1 },
+                "delay": { "$ref": "#/$defs/quantity" }
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["noise"],
+          "additionalProperties": false,
+          "properties": {
+            "noise": {
+              "type": "object",
+              "required": ["rms"],
+              "additionalProperties": false,
+              "properties": {
+                "rms": { "$ref": "#/$defs/quantity" },
+                "bw": { "$ref": "#/$defs/quantity", "description": "bandwidth, Hz" },
+                "offset": { "$ref": "#/$defs/quantity" },
+                "seed": { "type": "integer" }
+              }
+            }
+          }
         }
       ]
     },
@@ -87,25 +168,210 @@
     "element": {
       "allOf": [{ "$ref": "#/$defs/common" }],
       "oneOf": [
-        { "properties": { "type": { "enum": ["R"] }, "n": { "$ref": "#/$defs/pins2" }, "value": { "$ref": "#/$defs/quantity", "description": "ohms, > 0" } }, "required": ["value"] },
-        { "properties": { "type": { "enum": ["C"] }, "n": { "$ref": "#/$defs/pins2" }, "value": { "$ref": "#/$defs/quantity", "description": "farads" }, "ic": { "$ref": "#/$defs/quantity", "description": "initial voltage n[0] − n[1]" } }, "required": ["value"] },
-        { "properties": { "type": { "enum": ["L"] }, "n": { "$ref": "#/$defs/pins2" }, "value": { "$ref": "#/$defs/quantity", "description": "henries" }, "ic": { "$ref": "#/$defs/quantity", "description": "initial current n[0] → n[1]" } }, "required": ["value"] },
-        { "properties": { "type": { "enum": ["V"] }, "n": { "$ref": "#/$defs/pins2" }, "value": { "$ref": "#/$defs/waveform", "description": "v(n[0]) − v(n[1])" } }, "required": ["value"] },
-        { "properties": { "type": { "enum": ["I"] }, "n": { "$ref": "#/$defs/pins2" }, "value": { "$ref": "#/$defs/waveform", "description": "amperes driven into n[0] (out of n[1])" } }, "required": ["value"] },
-        { "properties": { "type": { "enum": ["D"] }, "n": { "$ref": "#/$defs/pins2" },
-          "preset": { "enum": ["1n4148", "1n4001", "led-red", "led-orange", "led-yellow", "led-green", "led-blue", "led-white"] },
-          "params": { "type": "object", "properties": { "Is": { "$ref": "#/$defs/quantity" }, "n": { "type": "number", "exclusiveMinimum": 0 } }, "additionalProperties": false } } },
-        { "properties": { "type": { "enum": ["SW"] }, "n": { "$ref": "#/$defs/pins2" }, "on": { "type": "boolean" },
-          "params": { "type": "object", "properties": { "Ron": { "$ref": "#/$defs/quantity" }, "Roff": { "$ref": "#/$defs/quantity" } }, "additionalProperties": false } } },
-        { "properties": { "type": { "enum": ["NPN", "PNP"] }, "n": { "$ref": "#/$defs/pins3", "description": "[collector, base, emitter]" },
-          "preset": { "enum": ["2n3904", "2n2222", "bc547", "2n3906", "bc557"] },
-          "params": { "type": "object", "properties": { "Is": { "$ref": "#/$defs/quantity" }, "betaF": { "type": "number", "exclusiveMinimum": 0 }, "betaR": { "type": "number", "exclusiveMinimum": 0 } }, "additionalProperties": false } } },
-        { "properties": { "type": { "enum": ["NMOS", "PMOS"] }, "n": { "$ref": "#/$defs/pins3", "description": "[drain, gate, source]" },
-          "preset": { "enum": ["2n7000", "bs170", "irlz44n", "bs250", "irf9540"] },
-          "params": { "type": "object", "properties": { "Vth": { "type": "number" }, "k": { "type": "number", "exclusiveMinimum": 0 }, "lambda": { "type": "number", "minimum": 0 } }, "additionalProperties": false } } },
-        { "properties": { "type": { "enum": ["OPAMP"] },
-          "n": { "oneOf": [{ "$ref": "#/$defs/pins3" }, { "type": "array", "items": { "$ref": "#/$defs/nodeName" }, "minItems": 5, "maxItems": 5 }], "description": "[in+, in−, out] or [in+, in−, out, v+, v−] (supply pins set the rails)" },
-          "params": { "type": "object", "properties": { "gain": { "type": "number", "exclusiveMinimum": 0 }, "rails": { "type": "array", "items": { "type": "number" }, "minItems": 2, "maxItems": 2 }, "headroom": { "type": "number", "minimum": 0 } }, "additionalProperties": false } } }
+        {
+          "properties": {
+            "type": { "enum": ["R"] },
+            "n": { "$ref": "#/$defs/pins2" },
+            "value": { "$ref": "#/$defs/quantity", "description": "ohms, > 0" }
+          },
+          "required": ["value"]
+        },
+        {
+          "properties": {
+            "type": { "enum": ["C"] },
+            "n": { "$ref": "#/$defs/pins2" },
+            "value": { "$ref": "#/$defs/quantity", "description": "farads" },
+            "ic": { "$ref": "#/$defs/quantity", "description": "initial voltage n[0] − n[1]" }
+          },
+          "required": ["value"]
+        },
+        {
+          "properties": {
+            "type": { "enum": ["L"] },
+            "n": { "$ref": "#/$defs/pins2" },
+            "value": { "$ref": "#/$defs/quantity", "description": "henries" },
+            "ic": { "$ref": "#/$defs/quantity", "description": "initial current n[0] → n[1]" }
+          },
+          "required": ["value"]
+        },
+        {
+          "properties": {
+            "type": { "enum": ["V"] },
+            "n": { "$ref": "#/$defs/pins2" },
+            "value": { "$ref": "#/$defs/waveform", "description": "v(n[0]) − v(n[1])" }
+          },
+          "required": ["value"]
+        },
+        {
+          "properties": {
+            "type": { "enum": ["I"] },
+            "n": { "$ref": "#/$defs/pins2" },
+            "value": { "$ref": "#/$defs/waveform", "description": "amperes driven into n[0] (out of n[1])" }
+          },
+          "required": ["value"]
+        },
+        {
+          "properties": {
+            "type": { "enum": ["D"] },
+            "n": { "$ref": "#/$defs/pins2" },
+            "preset": {
+              "enum": [
+                "1n4148",
+                "1n4001",
+                "led-red",
+                "led-orange",
+                "led-yellow",
+                "led-green",
+                "led-blue",
+                "led-white",
+                "1n5819",
+                "bzx55c3v3",
+                "bzx55c5v1",
+                "smbj5.0a"
+              ]
+            },
+            "params": {
+              "type": "object",
+              "properties": {
+                "Is": { "$ref": "#/$defs/quantity" },
+                "n": { "type": "number", "exclusiveMinimum": 0 },
+                "Cj": { "$ref": "#/$defs/quantity", "description": "junction capacitance, F" },
+                "Bv": { "$ref": "#/$defs/quantity", "description": "reverse breakdown voltage (a Zener or TVS), V" },
+                "Ibv": { "$ref": "#/$defs/quantity", "description": "current at Bv, A (default 1 mA)" }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        {
+          "properties": {
+            "type": { "enum": ["SW"] },
+            "n": { "$ref": "#/$defs/pins2" },
+            "on": { "type": "boolean" },
+            "params": {
+              "type": "object",
+              "properties": { "Ron": { "$ref": "#/$defs/quantity" }, "Roff": { "$ref": "#/$defs/quantity" } },
+              "additionalProperties": false
+            }
+          }
+        },
+        {
+          "properties": {
+            "type": { "enum": ["NPN", "PNP"] },
+            "n": { "$ref": "#/$defs/pins3", "description": "[collector, base, emitter]" },
+            "preset": { "enum": ["2n3904", "2n2222", "bc547", "2n3906", "bc557"] },
+            "params": {
+              "type": "object",
+              "properties": {
+                "Is": { "$ref": "#/$defs/quantity" },
+                "betaF": { "type": "number", "exclusiveMinimum": 0 },
+                "betaR": { "type": "number", "exclusiveMinimum": 0 },
+                "Cbe": { "$ref": "#/$defs/quantity", "description": "base–emitter capacitance, F" },
+                "Cbc": { "$ref": "#/$defs/quantity", "description": "base–collector (Miller) capacitance, F" }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        {
+          "properties": {
+            "type": { "enum": ["NMOS", "PMOS"] },
+            "n": { "$ref": "#/$defs/pins3", "description": "[drain, gate, source]" },
+            "preset": { "enum": ["2n7000", "bs170", "irlz44n", "bs250", "irf9540"] },
+            "params": {
+              "type": "object",
+              "properties": {
+                "Vth": { "type": "number" },
+                "k": { "type": "number", "exclusiveMinimum": 0 },
+                "lambda": { "type": "number", "minimum": 0 },
+                "Cgs": { "$ref": "#/$defs/quantity", "description": "gate–source capacitance, F" },
+                "Cgd": { "$ref": "#/$defs/quantity", "description": "gate–drain (Miller) capacitance, F" },
+                "Cds": { "$ref": "#/$defs/quantity", "description": "drain–source capacitance, F" },
+                "body": { "type": "boolean", "description": "the body diode source → drain (on in the power presets)" }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        {
+          "properties": {
+            "type": { "enum": ["OPAMP"] },
+            "n": {
+              "oneOf": [
+                { "$ref": "#/$defs/pins3" },
+                { "type": "array", "items": { "$ref": "#/$defs/nodeName" }, "minItems": 5, "maxItems": 5 }
+              ],
+              "description": "[in+, in−, out] or [in+, in−, out, v+, v−] (supply pins set the rails)"
+            },
+            "params": {
+              "type": "object",
+              "properties": {
+                "gain": { "type": "number", "exclusiveMinimum": 0 },
+                "rails": { "type": "array", "items": { "type": "number" }, "minItems": 2, "maxItems": 2 },
+                "headroom": { "type": "number", "minimum": 0 },
+                "gbw": { "$ref": "#/$defs/quantity", "description": "gain–bandwidth product, Hz (a single pole at gbw/gain)" },
+                "slew": { "$ref": "#/$defs/quantity", "description": "slew rate, V/s (0.5 V/µs = 5e5)" },
+                "rout": { "$ref": "#/$defs/quantity", "description": "output resistance, Ω" },
+                "vos": { "type": "number", "description": "input offset voltage, V" },
+                "ib": { "type": "number", "description": "input bias current into each input, A" }
+              },
+              "additionalProperties": false
+            },
+            "preset": { "enum": ["lm358", "lm741", "tl072", "ne5532", "mcp6002"] }
+          }
+        },
+        {
+          "properties": {
+            "type": { "enum": ["TLINE"] },
+            "n": {
+              "oneOf": [
+                { "$ref": "#/$defs/pins2" },
+                { "type": "array", "items": { "$ref": "#/$defs/nodeName" }, "minItems": 4, "maxItems": 4 }
+              ],
+              "description": "[a, b] (each end against ground) or [a, aRef, b, bRef]"
+            },
+            "params": {
+              "type": "object",
+              "properties": {
+                "z0": { "$ref": "#/$defs/quantity", "description": "characteristic impedance, Ω (default 50)" },
+                "td": { "$ref": "#/$defs/quantity", "description": "one-way delay, s" },
+                "len": { "$ref": "#/$defs/quantity", "description": "length, m (td = len / (vf·c))" },
+                "vf": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "maximum": 1,
+                  "description": "velocity factor (default 0.66)"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "required": ["params"],
+          "description": "a lossless transmission line (reflections, ringing); needs td or len"
+        },
+        {
+          "properties": {
+            "type": { "enum": ["VSW"] },
+            "n": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/nodeName" },
+              "minItems": 4,
+              "maxItems": 4,
+              "description": "[a, b, ctrl+, ctrl−]"
+            },
+            "params": {
+              "type": "object",
+              "properties": {
+                "Ron": { "$ref": "#/$defs/quantity" },
+                "Roff": { "$ref": "#/$defs/quantity" },
+                "Von": { "type": "number", "description": "control voltage where it is fully on" },
+                "Voff": { "type": "number", "description": "control voltage where it is fully off" }
+              },
+              "additionalProperties": false
+            }
+          },
+          "description": "a voltage-controlled switch (a smooth ideal switch for converters)"
+        }
       ],
       "unevaluatedProperties": false
     }

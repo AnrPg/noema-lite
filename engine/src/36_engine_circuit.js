@@ -2,6 +2,9 @@
    A small, deterministic circuit simulator for the electronics benches of tier B (sim-spec@1): RC/RLC transients, filters, PWM and
    fault-finding benches (a virtual device with a hidden fault; the learner measures, then diagnoses). Pure JS, no DOM, no text for the
    learner: it gives codes and numbers only, the activity host words them.
+   Also: AC small-signal analysis (Bode), lossless transmission lines, op-amp gain-bandwidth / slew / offset / output resistance, device
+   capacitances, Zener/TVS breakdown, a voltage-controlled switch, mains pickup on floating nodes, meters with input resistance and
+   DC / AC / true-RMS / average-responding modes, scope probes with a ground lead, switching power (§9 of the doc).
    How: Modified Nodal Analysis (node voltages + the currents of voltage-defined branches), a dense LU with partial pivoting (circuits
    are small: at most 60 nodes), Newton–Raphson with junction limiting, gmin stepping and source stepping for the nonlinear parts,
    trapezoidal integration with a backward-Euler step at the start and on every step that holds a source discontinuity.
@@ -57,7 +60,49 @@
   };
   const SHORT_PINS = { NPN: [0, 2], PNP: [0, 2], NMOS: [0, 2], PMOS: [0, 2], OPAMP: [0, 1] };
   const DRIFT_PARAM = { R: 'value', C: 'value', L: 'value', V: 'value', I: 'value', D: 'Is', SW: 'Ron', NPN: 'betaF', PNP: 'betaF', NMOS: 'k', PMOS: 'k', OPAMP: 'gain' };
-  const NONLINEAR = new Set(['D', 'NPN', 'PNP', 'NMOS', 'PMOS', 'OPAMP']);
+  const NONLINEAR = new Set(['D', 'NPN', 'PNP', 'NMOS', 'PMOS', 'OPAMP', 'VSW']);
+
+  // ---- the second-generation model (docs/INTERACTIVE_CIRCUIT.md §9): line, voltage-controlled switch, device capacitances, breakdown, op-amp dynamics,
+  //      pickup on floating nodes, real instruments, AC analysis. {version: 1} switches it all off (the first model, kept for comparisons in tests/circuit2.js) ----
+  const TYPES2 = Object.assign({}, TYPES, { TLINE: [2, 4], VSW: [4] });
+  const PARAMS2 = Object.assign({}, PARAMS, {
+    D: Object.assign({}, PARAMS.D, { Cj: 'nonneg', Bv: 'pos', Ibv: 'pos' }),
+    NPN: Object.assign({}, PARAMS.NPN, { Cbe: 'nonneg', Cbc: 'nonneg' }), PNP: Object.assign({}, PARAMS.PNP, { Cbe: 'nonneg', Cbc: 'nonneg' }),
+    NMOS: Object.assign({}, PARAMS.NMOS, { Cgs: 'nonneg', Cgd: 'nonneg', Cds: 'nonneg', body: 'bool' }),
+    PMOS: Object.assign({}, PARAMS.PMOS, { Cgs: 'nonneg', Cgd: 'nonneg', Cds: 'nonneg', body: 'bool' }),
+    OPAMP: Object.assign({}, PARAMS.OPAMP, { gbw: 'pos', slew: 'pos', rout: 'nonneg', vos: 'fin', ib: 'fin' }),
+    TLINE: { z0: 'pos', td: 'pos', len: 'pos', vf: 'vf' }, VSW: { Ron: 'pos', Roff: 'pos', Von: 'fin', Voff: 'fin' },
+  });
+  const DEFAULTS2 = Object.assign({}, DEFAULTS, { TLINE: { z0: 50, vf: 0.66 }, VSW: { Ron: 0.01, Roff: 1e9, Von: 2, Voff: 1 } });
+  const PRESETS2 = (() => {
+    const P = {};
+    for (const t of Object.keys(PRESETS)) { P[t] = {}; for (const k of Object.keys(PRESETS[t])) P[t][k] = Object.assign({}, PRESETS[t][k]); }
+    const add = (t, k, v) => { P[t] = P[t] || {}; P[t][k] = Object.assign(P[t][k] || {}, v); };
+    add('D', '1n4148', { Cj: 4e-12, Bv: 100 }); add('D', '1n4001', { Cj: 15e-12, Bv: 50 });
+    for (const k of ['led-red', 'led-orange', 'led-yellow', 'led-green', 'led-blue', 'led-white']) add('D', k, { Cj: 20e-12 });
+    add('D', '1n5819', { Is: 3e-6, n: 1.05, Cj: 110e-12, Bv: 40 });                     // a Schottky: 0.35 V at 1 A
+    add('D', 'bzx55c3v3', { Is: 1e-14, n: 1, Bv: 3.3, Ibv: 5e-3, Cj: 300e-12 });       // Zeners: Bv at Ibv
+    add('D', 'bzx55c5v1', { Is: 1e-14, n: 1, Bv: 5.1, Ibv: 5e-3, Cj: 200e-12 });
+    add('D', 'smbj5.0a', { Is: 1e-12, n: 1, Bv: 6.4, Ibv: 1e-3, Cj: 2e-9 });            // a 5 V TVS
+    add('NPN', '2n3904', { Cbe: 8e-12, Cbc: 3.6e-12 }); add('NPN', '2n2222', { Cbe: 25e-12, Cbc: 8e-12 }); add('NPN', 'bc547', { Cbe: 10e-12, Cbc: 4e-12 });
+    add('PNP', '2n3906', { Cbe: 10e-12, Cbc: 4.5e-12 }); add('PNP', 'bc557', { Cbe: 10e-12, Cbc: 4.5e-12 });
+    add('NMOS', '2n7000', { Cgs: 20e-12, Cgd: 5e-12, Cds: 11e-12 }); add('NMOS', 'bs170', { Cgs: 20e-12, Cgd: 5e-12, Cds: 10e-12 });
+    add('NMOS', 'irlz44n', { Cgs: 1.5e-9, Cgd: 0.25e-9, Cds: 0.4e-9, body: true });
+    add('PMOS', 'bs250', { Cgs: 20e-12, Cgd: 5e-12, Cds: 10e-12 }); add('PMOS', 'irf9540', { Cgs: 1.2e-9, Cgd: 0.2e-9, Cds: 0.5e-9, body: true });
+    P.OPAMP = {
+      lm358: { gain: 1e5, gbw: 1e6, slew: 0.3e6, rout: 50, headroom: 1.2 }, lm741: { gain: 2e5, gbw: 1e6, slew: 0.5e6, rout: 75, headroom: 1.5 },
+      tl072: { gain: 2e5, gbw: 3e6, slew: 13e6, rout: 100, headroom: 1.5 }, ne5532: { gain: 1e5, gbw: 10e6, slew: 9e6, rout: 30, headroom: 1.5 },
+      mcp6002: { gain: 1e5, gbw: 1e6, slew: 0.6e6, rout: 100, headroom: 0.025 },
+    };
+    return P;
+  })();
+  const SHORT_PINS2 = Object.assign({}, SHORT_PINS, { TLINE: [0, 1], VSW: [0, 1] });
+  const DRIFT_PARAM2 = Object.assign({}, DRIFT_PARAM, { TLINE: 'z0', VSW: 'Ron' });
+  const ROP = 1e6, GCL = 10, C0 = 299792458;   // the op-amp's internal pole: a 1 MΩ node, clamped softly near its rails; the speed of light
+  const PICKUP = { hum: 50, amp: 1, noise: 0.3, bw: 500, wander: 0.3, r: 1e8 };     // what a node with no DC path picks up 
+  const MODES = ['dc', 'ac', 'rms', 'avg'];
+  const tbl = ver => (ver === 2 ? { T: TYPES2, P: PARAMS2, D: DEFAULTS2, PR: PRESETS2, SP: SHORT_PINS2, DP: DRIFT_PARAM2 } : { T: TYPES, P: PARAMS, D: DEFAULTS, PR: PRESETS, SP: SHORT_PINS, DP: DRIFT_PARAM });
+  const verOf = o => (o === 1 || (o && o.version === 1) ? 1 : 2);   // 2 = everything (the default); {version: 1} = the first model, kept for comparisons in the tests
 
   // ---- waveforms of the V and I sources ----
   const WAVE_FIELDS = {
@@ -65,13 +110,15 @@
     sine: { offset: 'fin', amp: 'fin!', freq: 'pos!', phase: 'fin', delay: 'nonneg' },
     pwm: { v: 'fin!', freq: 'pos!', duty: 'unit!', low: 'fin', delay: 'nonneg' },
   };
+  const WAVE_FIELDS2 = Object.assign({}, WAVE_FIELDS, { noise: { rms: 'nonneg!', bw: 'pos!', offset: 'fin', seed: 'fin' } });
   /** canonical form: {kind:'dc', dc} | {kind:'pulse', v1, v2, …} | … (numbers parsed, defaults filled) */
   function canonWave(spec) {
     if (!isObj(spec)) return { kind: 'dc', dc: num(spec) };
     if (spec.dc !== undefined) return { kind: 'dc', dc: num(spec.dc) };
-    for (const kind of ['pulse', 'sine', 'pwm']) if (spec[kind] !== undefined) {
+    for (const kind of ['pulse', 'sine', 'pwm', 'noise']) if (spec[kind] !== undefined) {
       const q = spec[kind] || {}, w = { kind };
-      for (const f of Object.keys(WAVE_FIELDS[kind])) w[f] = q[f] === undefined ? undefined : num(q[f]);
+      for (const f of Object.keys(WAVE_FIELDS2[kind])) w[f] = q[f] === undefined ? undefined : num(q[f]);
+      if (kind === 'noise') { w.offset = w.offset || 0; w.seed = w.seed || 0; return w; }
       if (kind === 'pulse') {
         w.delay = w.delay || 0; w.rise = w.rise || 0; w.fall = w.fall || 0; w.period = w.period || 0;
         if (w.width === undefined) w.width = w.period > 0 ? (w.period - w.rise - w.fall) / 2 : Infinity;
@@ -84,12 +131,31 @@
   }
   function scaleWave(w, f) {
     const s = Object.assign({}, w);
-    for (const k of ['dc', 'v1', 'v2', 'offset', 'amp', 'v', 'low']) if (typeof s[k] === 'number') s[k] *= f;
+    for (const k of ['dc', 'v1', 'v2', 'offset', 'amp', 'v', 'low', 'rms', 'humAmp', 'wander']) if (typeof s[k] === 'number') s[k] *= f;
     return s;
   }
+  function shiftWave(w, d) {   // drift {add}: every level moves by d
+    const s = Object.assign({}, w);
+    for (const k of ['dc', 'v1', 'v2', 'offset', 'v', 'low']) if (typeof s[k] === 'number') s[k] += d;
+    return s;
+  }
+  const gauss = r => { const u = Math.max(r(), 1e-300), v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
   /** → {at(t), avg, at0m (the value at t = 0⁻), next(t): the first breakpoint after t (Infinity if none)} */
   function wave(w) {
     if (w.kind === 'dc') return { at: () => w.dc, avg: w.dc, at0m: w.dc, next: () => Infinity };
+    if (w.kind === 'noise') {   // seeded band-limited noise (straight lines between Gaussian samples 1/(2·bw) apart), plus the pickup's hum and slow wander
+      const hold = w.hold || { shift: 0 }, sd = w.seed >>> 0, dn = 1 / (2 * w.bw), dw = 1;
+      const g = (tag, i) => gauss(mulberry32(hash32(tag + i, sd)));
+      const lerp = (tag, u) => { const i = Math.floor(u), f = u - i; return g(tag, i) * (1 - f) + g(tag, i + 1) * f; };
+      const at = t => {
+        const tt = t + hold.shift;
+        let v = w.offset + w.rms * lerp('n', tt / dn);
+        if (w.wander) v += w.wander * lerp('w', tt / dw);
+        if (w.humAmp && w.hum > 0) v += w.humAmp * Math.sin(2 * Math.PI * w.hum * tt);
+        return v;
+      };
+      return { at, avg: w.offset, get at0m() { return at(0); }, next: () => Infinity, noise: true };
+    }
     if (w.kind === 'sine') {
       const ph = w.phase * Math.PI / 180, om = 2 * Math.PI * w.freq;
       const at = t => w.offset + w.amp * Math.sin(t < w.delay ? ph : om * (t - w.delay) + ph);
@@ -141,18 +207,19 @@
       case 'pos': return x > 0;
       case 'nonneg': return x >= 0;
       case 'unit': return x >= 0 && x <= 1;
+      case 'vf': return x > 0 && x <= 1;
       case 'bool': return typeof v === 'boolean';
       case 'rails': return Array.isArray(v) && v.length === 2 && num(v[0]) < num(v[1]);
       default: return Number.isFinite(x);
     }
   }
-  function checkWave(v, path, E) {
+  function checkWave(v, path, E, ver) {
     if (!isObj(v)) { if (!Number.isFinite(num(v))) E('value', path, 'needs a number or a waveform'); return; }
-    const keys = Object.keys(v);
-    if (keys.length !== 1 || !['dc', 'pulse', 'sine', 'pwm'].includes(keys[0])) { E('value', path, 'one of dc, pulse, sine, pwm'); return; }
+    const keys = Object.keys(v), kinds = ver === 2 ? ['dc', 'pulse', 'sine', 'pwm', 'noise'] : ['dc', 'pulse', 'sine', 'pwm'];
+    if (keys.length !== 1 || !kinds.includes(keys[0])) { E('value', path, 'one of ' + kinds.join(', ')); return; }
     const kind = keys[0];
     if (kind === 'dc') { if (!Number.isFinite(num(v.dc))) E('value', path + '.dc', 'needs a number'); return; }
-    const q = v[kind], F = WAVE_FIELDS[kind];
+    const q = v[kind], F = WAVE_FIELDS2[kind];
     if (!isObj(q)) { E('value', path + '.' + kind, 'needs an object'); return; }
     for (const k of Object.keys(q)) if (!Object.prototype.hasOwnProperty.call(F, k)) E('value', `${path}.${kind}.${k}`, 'unknown field');
     for (const [k, spec] of Object.entries(F)) {
@@ -166,8 +233,9 @@
     }
   }
   const EL_KEYS = new Set(['id', 'type', 'n', 'value', 'ic', 'params', 'preset', 'on', 'label', 'note']);
-  function check(nl) {
-    const P = [];
+  const PICKUP_FIELDS = { hum: 'nonneg', amp: 'nonneg', noise: 'nonneg', bw: 'pos', wander: 'nonneg', offset: 'fin', r: 'pos' };
+  function check(nl, opts) {
+    const ver = verOf(opts), TB = tbl(ver), P = [];
     const E = (code, path, msg) => { P.push({ code, path, msg, level: 'error' }); };
     const W = (code, path, msg) => { P.push({ code, path, msg, level: 'warning' }); };
     if (!isObj(nl)) { E('format', '', 'netlist is not an object'); return P; }
@@ -175,12 +243,20 @@
     if (!Array.isArray(nl.nodes)) E('format', 'nodes', 'not an array');
     if (!Array.isArray(nl.elements)) E('format', 'elements', 'not an array');
     if (P.length) return P;
-    for (const k of Object.keys(nl)) if (!['format', 'nodes', 'elements', 'meta'].includes(k)) W('unknown-field', k, 'ignored');
+    for (const k of Object.keys(nl)) if (!['format', 'nodes', 'elements', 'meta'].concat(ver === 2 ? ['pickup'] : []).includes(k)) W('unknown-field', k, 'ignored');
+    if (ver === 2 && nl.pickup !== undefined) {
+      if (nl.pickup !== false && !isObj(nl.pickup)) E('value', 'pickup', 'false, or {hum, amp, noise, bw, wander, offset, r}');
+      else if (isObj(nl.pickup)) for (const [k, v] of Object.entries(nl.pickup)) {
+        if (!Object.prototype.hasOwnProperty.call(PICKUP_FIELDS, k)) E('value', 'pickup.' + k, 'unknown field');
+        else if (!checkNumber(PICKUP_FIELDS[k], v)) E('value', 'pickup.' + k, 'out of range');
+      }
+    }
     const names = new Set(), labels = new Map(), nodeAt = new Map();
     nl.nodes.forEach((x, i) => {
       const nm = typeof x === 'string' ? x : isObj(x) ? x.name : undefined;
       if (typeof nm !== 'string' || !NODE_RE.test(nm)) { E('node-name', `nodes[${i}]`, 'bad node name'); return; }
       if (names.has(nm) || labels.has(nm)) { E('dup-node', `nodes[${i}]`, 'duplicate node ' + nm); return; }
+      if (ver === 2 && isObj(x) && x.pickup !== undefined && typeof x.pickup !== 'boolean') E('value', `nodes[${i}].pickup`, 'needs true or false');
       if (isObj(x) && x.probe !== undefined) {
         if (isGnd(nm)) { E('node-name', `nodes[${i}]`, 'ground cannot be a label'); return; }
         labels.set(nm, { to: x.probe, i });
@@ -197,8 +273,8 @@
       if (typeof el.id !== 'string' || !ID_RE.test(el.id)) E('id', at + '.id', 'bad id');
       else if (ids.has(el.id)) E('dup-id', at + '.id', 'duplicate id ' + el.id); else ids.add(el.id);
       const t = el.type;
-      if (typeof t !== 'string' || !Object.prototype.hasOwnProperty.call(TYPES, t)) { E('type', at + '.type', 'unknown type'); return; }
-      if (!Array.isArray(el.n) || !TYPES[t].includes(el.n.length)) { E('pins', at + '.n', 'wrong number of terminals'); return; }
+      if (typeof t !== 'string' || !Object.prototype.hasOwnProperty.call(TB.T, t)) { E('type', at + '.type', 'unknown type'); return; }
+      if (!Array.isArray(el.n) || !TB.T[t].includes(el.n.length)) { E('pins', at + '.n', 'wrong number of terminals'); return; }
       el.n.forEach((m, k) => {
         if (labels.has(m)) E('probe-only', `${at}.n[${k}]`, 'a probe-only label cannot be a terminal');
         else if (typeof m !== 'string' || !(names.has(m) || isGnd(m))) E('unknown-node', `${at}.n[${k}]`, 'unknown node ' + m);
@@ -208,15 +284,16 @@
         else if (!(num(el.value) > 0)) E('value', at + '.value', 'needs a positive number');
         if (el.ic !== undefined && (t === 'R' || !Number.isFinite(num(el.ic)))) E('value', at + '.ic', 'needs a number');
       } else if (t === 'V' || t === 'I') {
-        if (el.value === undefined) E('value', at + '.value', 'missing value'); else checkWave(el.value, at + '.value', E);
+        if (el.value === undefined) E('value', at + '.value', 'missing value'); else checkWave(el.value, at + '.value', E, ver);
       } else if (el.value !== undefined) E('value', at + '.value', 'this type takes params, not a value');
       if (el.ic !== undefined && t !== 'C' && t !== 'L') E('value', at + '.ic', 'only C and L have ic');
       if (el.on !== undefined && (t !== 'SW' || typeof el.on !== 'boolean')) E('value', at + '.on', 'only SW has on (true/false)');
-      if (el.preset !== undefined && !(PRESETS[t] && typeof el.preset === 'string' && Object.prototype.hasOwnProperty.call(PRESETS[t], el.preset))) E('preset', at + '.preset', 'unknown preset');
+      if (el.preset !== undefined && !(TB.PR[t] && typeof el.preset === 'string' && Object.prototype.hasOwnProperty.call(TB.PR[t], el.preset))) E('preset', at + '.preset', 'unknown preset');
+      if (t === 'TLINE' && !(isObj(el.params) && (el.params.td !== undefined || el.params.len !== undefined))) E('param', at + '.params', 'a line needs td (s) or len (m)');
       if (el.params !== undefined) {
         if (!isObj(el.params)) E('param', at + '.params', 'not an object');
         else for (const [k, v] of Object.entries(el.params)) {
-          const kd = Object.prototype.hasOwnProperty.call(PARAMS[t], k) ? PARAMS[t][k] : null;
+          const kd = Object.prototype.hasOwnProperty.call(TB.P[t], k) ? TB.P[t][k] : null;
           if (!kd) E('param', `${at}.params.${k}`, 'unknown parameter');
           else if (!checkNumber(kd, v)) E('param', `${at}.params.${k}`, 'out of range');
         }
@@ -232,8 +309,13 @@
       const n = el.n;
       if ((el.type === 'V' || el.type === 'L') && !VL.u(n[0], n[1])) E('vloop', `elements[${i}]`, 'loop of voltage sources / inductors');
       if (el.type === 'OPAMP' && !VL.u(n[2], G0)) E('vloop', `elements[${i}]`, 'op-amp output on a voltage-defined node');
-      if (n.length === 2 && el.type !== 'V' && el.type !== 'L' && key(n[0]) === key(n[1])) W('self-loop', `elements[${i}]`, 'both terminals on one node');
-      if (['R', 'L', 'V', 'D', 'SW'].includes(el.type)) DCP.u(n[0], n[1]);
+      if (el.type === 'TLINE') {
+        const q = n.length === 4 ? n : [n[0], G0, n[1], G0];
+        for (const [x, y] of [[q[0], q[2]], [q[1], q[3]]]) if (key(x) !== key(y) && !VL.u(x, y)) E('vloop', `elements[${i}]`, 'loop of voltage sources / inductors / lines');
+        DCP.u(q[0], q[2]); DCP.u(q[1], q[3]);
+      }
+      if (n.length === 2 && el.type !== 'V' && el.type !== 'L' && el.type !== 'TLINE' && key(n[0]) === key(n[1])) W('self-loop', `elements[${i}]`, 'both terminals on one node');
+      if (['R', 'L', 'V', 'D', 'SW', 'VSW'].includes(el.type)) DCP.u(n[0], n[1]);
       else if (el.type === 'NPN' || el.type === 'PNP') { DCP.u(n[0], n[1]); DCP.u(n[1], n[2]); }
       else if (el.type === 'NMOS' || el.type === 'PMOS') DCP.u(n[0], n[2]);
       else if (el.type === 'OPAMP') DCP.u(n[2], G0);
@@ -251,8 +333,8 @@
       the validators run it on a bench's faults before the app ever compiles them). Twin: tools/circuit.py check_faults. */
   const FAULT_KINDS = ['open', 'short', 'drift', 'open-trace', 'reverse'];
   const FAULT_KEYS = new Set(['kind', 'element', 'pin', 'pins', 'factor', 'param', 'node', 'side']);
-  function checkFaults(nl, faults) {
-    const P = [], E = (path, msg) => { P.push({ code: 'fault', path, msg, level: 'error' }); };
+  function checkFaults(nl, faults, opts) {
+    const ver = verOf(opts), TB = tbl(ver), P = [], E = (path, msg) => { P.push({ code: 'fault', path, msg, level: 'error' }); };
     if (!Array.isArray(faults)) { E('', 'faults must be a list'); return P; }
     const els = isObj(nl) && Array.isArray(nl.elements) ? nl.elements.filter(isObj) : [];
     const byId = new Map(els.map(e => [e.id, e]));
@@ -262,7 +344,7 @@
     faults.forEach((f, i) => {
       const at = `faults[${i}]`;
       if (!isObj(f)) { E(at, 'a fault is an object {element | node, kind}'); return; }
-      for (const k of Object.keys(f)) if (!FAULT_KEYS.has(k)) E(`${at}.${k}`, 'unknown field');
+      for (const k of Object.keys(f)) if (!FAULT_KEYS.has(k) && !(ver === 2 && k === 'add')) E(`${at}.${k}`, 'unknown field');
       if (!FAULT_KINDS.includes(f.kind)) { E(at + '.kind', 'one of ' + FAULT_KINDS.join(', ')); return; }
       if (f.kind === 'open-trace') {
         if (typeof f.node !== 'string' || !(declared.has(f.node) || isGnd(f.node))) { E(at + '.node', 'not a node of the netlist'); return; }
@@ -284,8 +366,9 @@
         if (f.pins !== undefined ? !pinsOk(f.pins, n) : (f.kind === 'reverse' && n !== 2)) E(at + '.pins', 'two different pins of the part');
       } else {   // drift
         if (f.factor !== undefined && !(num(f.factor) > 0)) E(at + '.factor', 'needs a number > 0');
+        if (ver === 2 && f.add !== undefined && !Number.isFinite(num(f.add))) E(at + '.add', 'needs a number');
         if (f.param !== undefined) {
-          const t = e.type, okp = typeof f.param === 'string' && (['R', 'C', 'L', 'V', 'I'].includes(t) ? f.param === 'value' : Object.prototype.hasOwnProperty.call(PARAMS[t], f.param));
+          const t = e.type, okp = typeof f.param === 'string' && (['R', 'C', 'L', 'V', 'I'].includes(t) ? f.param === 'value' : Object.prototype.hasOwnProperty.call(TB.P[t], f.param) && TB.P[t][f.param] !== 'bool');
           if (!okp) E(at + '.param', 'not a parameter of the part');
         }
       }
@@ -295,24 +378,26 @@
 
   // ---- compile: faults applied, nodes indexed, element models built ----
   const parsePinRef = s => { const m = /^(.*)\.(\d+)$/.exec(String(s)); return m ? [m[1], +m[2]] : [String(s), undefined]; };
-  function normalize(el) {
-    const t = el.type, d = { id: el.id, type: t, n: el.n.slice(), p: {} };
+  function normalize(el, ver) {
+    const TB = tbl(ver), t = el.type, d = { id: el.id, type: t, n: el.n.slice(), p: {} };
     if (t === 'R' || t === 'C' || t === 'L') { d.p.value = num(el.value); if (el.ic !== undefined) d.p.ic = num(el.ic); }
     else if (t === 'V' || t === 'I') d.p.value = canonWave(el.value);
     else {
-      Object.assign(d.p, DEFAULTS[t], el.preset ? PRESETS[t][el.preset] : null);
-      for (const [k, v] of Object.entries(el.params || {})) d.p[k] = k === 'rails' ? [num(v[0]), num(v[1])] : num(v);
+      Object.assign(d.p, TB.D[t], el.preset ? TB.PR[t][el.preset] : null);
+      for (const [k, v] of Object.entries(el.params || {})) d.p[k] = k === 'rails' ? [num(v[0]), num(v[1])] : typeof v === 'boolean' ? v : num(v);
     }
     if (t === 'SW') d.on = el.on !== false;
     return d;
   }
-  function compile(nl, faults) {
-    const declared = [], labelOf = new Map();
+  function compile(nl, faults, o) {
+    o = o || {};
+    const ver = o.ver === 2 ? 2 : 1, TB = tbl(ver), declared = [], labelOf = new Map(), noPick = new Set();
     for (const x of nl.nodes) {
       const nm = typeof x === 'string' ? x : x.name;
       if (isObj(x) && x.probe !== undefined) labelOf.set(nm, x.probe); else declared.push(nm);
+      if (isObj(x) && x.pickup === false) noPick.add(nm);
     }
-    const els = nl.elements.map(normalize), byId = new Map(els.map(e => [e.id, e])), extra = [];
+    const els = nl.elements.map(e => normalize(e, ver)), byId = new Map(els.map(e => [e.id, e])), extra = [], hold = o.hold || { shift: 0 };
     const same = (m, node) => m === node || (isGnd(m) && isGnd(node));
     const known = s => typeof s === 'string' && (isGnd(s) || declared.includes(s));
     (faults || []).forEach((f, fi) => {   // a part soldered the wrong way round: its legs sit on each other's pads (so before the board)
@@ -351,19 +436,22 @@
         const pins = f.pin !== undefined ? [f.pin] : e.n.map((_, k) => k);
         for (const k of pins) { if (!(Number.isInteger(k) && k >= 0 && k < e.n.length)) throw fail('fault', { index: fi }); e.n[k] = '#open:' + fi + '.' + k; }
       } else if (f.kind === 'short') {
-        const pins = f.pins || SHORT_PINS[e.type] || [0, 1];
+        const pins = f.pins || TB.SP[e.type] || [0, 1];
         if (!Array.isArray(pins) || pins.length !== 2 || !pins.every(k => Number.isInteger(k) && k >= 0 && k < e.n.length) || pins[0] === pins[1]) throw fail('fault', { index: fi });
         if (e.n.length === 2) { e.type = 'R'; e.p = { value: RSHORT }; }
         else extra.push({ id: '#short:' + fi, type: 'R', n: [e.n[pins[0]], e.n[pins[1]]], board: [], p: { value: RSHORT } });
       } else if (f.kind === 'drift') {
-        const factor = f.factor === undefined ? 2 : num(f.factor), param = f.param || DRIFT_PARAM[e.type];
-        if (!(factor > 0)) throw fail('fault', { index: fi });
-        if (param === 'value' && (e.type === 'V' || e.type === 'I')) e.p.value = scaleWave(e.p.value, factor);
-        else if (typeof e.p[param] === 'number') e.p[param] *= factor;
+        const factor = f.factor === undefined ? (ver === 2 && f.add !== undefined ? 1 : 2) : num(f.factor), param = f.param || TB.DP[e.type];
+        const add = ver === 2 && f.add !== undefined ? num(f.add) : 0;
+        if (!(factor > 0) || !Number.isFinite(add)) throw fail('fault', { index: fi });
+        if (param === 'value' && (e.type === 'V' || e.type === 'I')) { e.p.value = scaleWave(e.p.value, factor); if (add) e.p.value = shiftWave(e.p.value, add); }
+        else if (typeof e.p[param] === 'number') { e.p[param] *= factor; if (add) e.p[param] += add; }
+        else if (ver === 2 && e.p[param] === undefined && Object.prototype.hasOwnProperty.call(TB.P[e.type] || {}, param)) { if (add) e.p[param] = add; }   // (an unset vos, ib … that a fault sets)
         else if (param === 'rails' && Array.isArray(e.p.rails)) e.p.rails = e.p.rails.map(v => v * factor);
         else throw fail('fault', { index: fi });
       } else throw fail('fault', { index: fi });
     });
+    if (ver === 2) compile2(els, extra, nl, noPick, labelOf, byId, o, declared);
     const all = els.concat(extra);
     // node indices: declared names first (ground = −1), then the private nodes the faults made
     const index = new Map(); let N = 0;
@@ -379,19 +467,81 @@
       else if (t === 'SW') e.g = 1 / (e.on ? p.Ron : p.Roff);
       else if (t === 'C') { e.C = p.value; e.ic = p.ic === undefined ? null : p.ic; if (e.ic !== null) e.k = nb++; }
       else if (t === 'L') { e.L = p.value; e.ic = p.ic === undefined ? null : p.ic; e.k = nb++; }
-      else if (t === 'V') { e.w = wave(p.value); e.k = nb++; }
-      else if (t === 'I') e.w = wave(p.value);
-      else if (t === 'D') { e.Is = p.Is; e.nvt = p.n * VT; e.vcrit = e.nvt * Math.log(e.nvt / (Math.SQRT2 * e.Is)); e.s = { v: 0 }; }
+      else if (t === 'V' || t === 'I') {
+        const w = p.value.kind === 'noise' ? Object.assign({}, p.value, { hold, seed: hash32(e.id, ((o.seed >>> 0) ^ (p.value.seed >>> 0)) >>> 0) }) : p.value;
+        e.w = wave(w); e.wk = w.kind; if (t === 'V') e.k = nb++;
+        e.per = w.kind === 'pwm' || w.kind === 'sine' ? 1 / w.freq : w.kind === 'pulse' ? (w.period > 0 ? w.period : 0) : w.kind === 'noise' ? (w.hum > 0 && w.humAmp ? 1 / w.hum : 1 / (2 * w.bw)) : 0;
+      }
+      else if (t === 'D') { e.Is = p.Is; e.nvt = p.n * VT; e.vcrit = e.nvt * Math.log(e.nvt / (Math.SQRT2 * e.Is)); e.s = { v: 0 }; e.bv = p.Bv > 0 ? p.Bv : 0; if (e.bv) { e.ibv = p.Ibv > 0 ? p.Ibv : 1e-3; e.vcritb = VT * Math.log(VT / (Math.SQRT2 * e.ibv)); } }
       else if (t === 'NPN' || t === 'PNP') { e.pol = t === 'NPN' ? 1 : -1; e.Is = p.Is; e.bf = p.betaF; e.br = p.betaR; e.vcrit = VT * Math.log(VT / (Math.SQRT2 * e.Is)); e.s = { vbe: 0, vbc: 0 }; }
       else if (t === 'NMOS' || t === 'PMOS') { e.pol = t === 'NMOS' ? 1 : -1; e.vth = Math.abs(p.Vth); e.kp = p.k; e.lam = p.lambda; }
-      else if (t === 'OPAMP') { e.A = p.gain; e.lo = p.rails[0]; e.hi = p.rails[1]; e.head = p.headroom; e.rp = e.pins.length === 5 ? e.pins[3] : null; e.rn = e.pins.length === 5 ? e.pins[4] : null; e.k = nb++; }
+      else if (t === 'OPAMP') {
+        e.A = p.gain; e.lo = p.rails[0]; e.hi = p.rails[1]; e.head = p.headroom; e.rp = e.pins.length === 5 ? e.pins[3] : null; e.rn = e.pins.length === 5 ? e.pins[4] : null; e.k = nb++;
+        e.vos = p.vos || 0; e.ib = p.ib || 0; e.y = e.yName ? idx(e.yName) : -1;
+        if (e.outName) e.d = idx(e.outName);
+        if (e.y >= 0) { e.gm = e.A / ROP; e.imax = p.slew > 0 ? p.slew * e.cp : Infinity; }
+      }
+      else if (t === 'TLINE') { e.z0 = p.z0; e.td = p.td !== undefined ? p.td : p.len / (p.vf * C0); e.tl = e.pins.length === 4 ? e.pins.slice() : [e.pins[0], -1, e.pins[1], -1]; e.k = nb; nb += 2; }
+      else if (t === 'VSW') { e.cn = e.pins[3]; e.lgon = Math.log(1 / p.Ron); e.lgoff = Math.log(1 / p.Roff); e.von = p.Von; e.voff = p.Voff === p.Von ? p.Von - 1e-3 : p.Voff; }
     }
     for (const e of all) if (e.k >= 0) e.k += N;
     const outNames = declared.slice(); if (!outNames.some(isGnd)) outNames.push('gnd');
     for (const l of labelOf.keys()) outNames.push(l);
     const resolveName = nm => (isGnd(nm) ? -1 : labelOf.has(nm) ? idx(labelOf.get(nm)) : index.get(nm));
-    return { N, S: N + nb, els: all, real: all.filter(e => e.id[0] !== '#'), byId, index, outNames, resolveName,
-      linear: !all.some(e => NONLINEAR.has(e.type)), sources: all.filter(e => e.w) };
+    return { N, S: N + nb, els: all, real: all.filter(e => e.id[0] !== '#'), byId, index, outNames, resolveName, ver, hold,
+      linear: !all.some(e => NONLINEAR.has(e.type)), sources: all.filter(e => e.w), varying: all.some(e => e.w && e.wk !== 'dc'), pickup: all.some(e => e.id === '#hum') };
+  }
+
+  /** the parts every real device has (junction and gate capacitances, a MOSFET's body diode, an op-amp's internal pole and output
+      resistance), the pickup of every node without a DC path to ground, then the probe's own parts (o.extras: a meter's input
+      resistance, a scope probe's capacitance and ground lead) — all hidden elements, ids starting with '#' */
+  function compile2(els, extra, nl, noPick, labelOf, byId, o, declared) {
+    const hid = (id, type, n, p) => extra.push({ id, type, n, board: [], p });
+    for (const e of els) {
+      const p = e.p, n = e.n, cap = (tag, a, b, v) => { if (v > 0) hid('#c' + tag + ':' + e.id, 'C', [a, b], { value: v }); };
+      if (e.type === 'D') cap('j', n[0], n[1], p.Cj);
+      else if (e.type === 'NPN' || e.type === 'PNP') { cap('be', n[1], n[2], p.Cbe); cap('bc', n[1], n[0], p.Cbc); }
+      else if (e.type === 'NMOS' || e.type === 'PMOS') {
+        cap('gs', n[1], n[2], p.Cgs); cap('gd', n[1], n[0], p.Cgd); cap('ds', n[0], n[2], p.Cds);
+        if (p.body === true) hid('#body:' + e.id, 'D', e.type === 'NMOS' ? [n[2], n[0]] : [n[0], n[2]], { Is: 1e-12, n: 1.3 });
+      } else if (e.type === 'OPAMP') {
+        if (p.gbw > 0 || p.slew > 0) {   // one pole: gain·ROP/(1 + s·ROP·Cp) = gain at DC, unity at gbw; the slew rate limits the current into Cp
+          const gbw = p.gbw > 0 ? p.gbw : 1e6, Cp = p.gain / (2 * Math.PI * gbw * ROP);
+          e.yName = '#op:' + e.id; e.cp = Cp;
+          hid('#rp:' + e.id, 'R', [e.yName, 'gnd'], { value: ROP }); hid('#cp:' + e.id, 'C', [e.yName, 'gnd'], { value: Cp });
+        }
+        if (p.rout > 0) { e.outName = '#opo:' + e.id; hid('#rout:' + e.id, 'R', [e.outName, n[2]], { value: p.rout }); }
+        if (p.vos) { const v = '#vos:' + e.id; hid('#vsrc:' + e.id, 'V', [v, n[0]], { value: { kind: 'dc', dc: p.vos } }); n[0] = v; p.vos = 0; }   // the offset: a source in series with in+
+      }
+    }
+    const pk = isObj(nl.pickup) ? nl.pickup : {}, pv = k => (pk[k] !== undefined ? num(pk[k]) : PICKUP[k]);
+    if (nl.pickup !== false && !o.noPickup) {   // a node with no DC path to ground picks up mains hum and noise through a high impedance
+      const par = new Map(), f = s => { s = isGnd(s) ? 'gnd' : s; while (par.has(s) && par.get(s) !== s) s = par.get(s); return s; }, u = (a, b) => { const x = f(a), y = f(b); if (x !== y) par.set(x, y); };
+      const names = new Set();
+      for (const e of els.concat(extra)) {
+        const n = e.n; n.forEach(m => { if (!isGnd(m)) names.add(m); });
+        if (['R', 'L', 'V', 'D', 'VSW'].includes(e.type) || (e.type === 'SW' && e.on)) u(n[0], n[1]);   // (an open switch is no path)
+        else if (e.type === 'NPN' || e.type === 'PNP') { u(n[0], n[1]); u(n[1], n[2]); }
+        else if (e.type === 'NMOS' || e.type === 'PMOS') u(n[0], n[2]);
+        else if (e.type === 'OPAMP') { u(n[2], 'gnd'); if (e.outName) u(e.outName, 'gnd'); if (e.yName) u(e.yName, 'gnd'); }
+        else if (e.type === 'TLINE') { const q = n.length === 4 ? n : [n[0], 'gnd', n[1], 'gnd']; u(q[0], q[2]); u(q[1], q[3]); }
+      }
+      const fl = [...names].filter(m => f(m) !== f('gnd') && !noPick.has(m));
+      if (fl.length) {
+        let top = 0; for (const e of els) if (e.type === 'V') { const a = wave(e.p.value).avg; if (a > top) top = a; }
+        hid('#hum', 'V', ['#humn', 'gnd'], { value: { kind: 'noise', offset: pk.offset !== undefined ? num(pk.offset) : top / 2, rms: pv('noise'), bw: pv('bw'), wander: pv('wander'), hum: pv('hum'), humAmp: pv('amp'), seed: 0, pickup: true } });
+        for (const m of fl) hid('#pick:' + m, 'R', [m, '#humn'], { value: pv('r') });
+      }
+    }
+    const at = s => {   // a probe's endpoint → the name of the node it touches
+      if (typeof s !== 'string') throw fail('unknown-node', { ref: s });
+      if (isGnd(s)) return 'gnd';
+      if (labelOf.has(s)) return labelOf.get(s);
+      if (s[0] === '@') { const [eid, pin] = parsePinRef(s.slice(1)), e = byId.get(eid); if (!e || pin === undefined || !(pin < e.board.length)) throw fail('unknown-node', { ref: s }); return e.board[pin]; }
+      if (!declared.includes(s)) throw fail('unknown-node', { ref: s });
+      return s;
+    };
+    (o.extras || []).forEach((x, i) => hid('#probe' + i + ':' + x.type, x.type, x.n.map(m => (m[0] === '#' && m[1] === '#' ? m.slice(1) : at(m))), { value: x.value }));
   }
 
   // ---- dense LU with partial pivoting ----
@@ -415,6 +565,52 @@
     for (let k = 0; k < n; k++) { const p = perm[k]; if (p !== k) { const t = x[k]; x[k] = x[p]; x[p] = t; } }
     for (let i = 1; i < n; i++) { let s = x[i]; for (let j = 0; j < i; j++) s -= M[i * n + j] * x[j]; x[i] = s; }
     for (let i = n - 1; i >= 0; i--) { let s = x[i]; for (let j = i + 1; j < n; j++) s -= M[i * n + j] * x[j]; x[i] = s / M[i * n + i]; }
+  }
+
+  // ---- complex dense LU with partial pivoting (the AC analysis) ----
+  function cfactor(R, I, n, perm) {
+    for (let k = 0; k < n; k++) {
+      let p = k, mx = R[k * n + k] * R[k * n + k] + I[k * n + k] * I[k * n + k];
+      for (let i = k + 1; i < n; i++) { const a = R[i * n + k] * R[i * n + k] + I[i * n + k] * I[i * n + k]; if (a > mx) { mx = a; p = i; } }
+      if (!(mx > 1e-40)) return false;
+      perm[k] = p;
+      if (p !== k) for (let j = 0; j < n; j++) { let t = R[k * n + j]; R[k * n + j] = R[p * n + j]; R[p * n + j] = t; t = I[k * n + j]; I[k * n + j] = I[p * n + j]; I[p * n + j] = t; }
+      const pr = R[k * n + k], pi = I[k * n + k], d = pr * pr + pi * pi;
+      for (let i = k + 1; i < n; i++) {
+        const ar = R[i * n + k], ai = I[i * n + k]; if (ar === 0 && ai === 0) continue;
+        const fr = (ar * pr + ai * pi) / d, fi = (ai * pr - ar * pi) / d; R[i * n + k] = fr; I[i * n + k] = fi;
+        for (let j = k + 1; j < n; j++) { const br = R[k * n + j], bi = I[k * n + j]; R[i * n + j] -= fr * br - fi * bi; I[i * n + j] -= fr * bi + fi * br; }
+      }
+    }
+    return true;
+  }
+  function csubst(R, I, n, perm, br, bi, xr, xi) {
+    xr.set(br); xi.set(bi);
+    for (let k = 0; k < n; k++) { const p = perm[k]; if (p !== k) { let t = xr[k]; xr[k] = xr[p]; xr[p] = t; t = xi[k]; xi[k] = xi[p]; xi[p] = t; } }
+    for (let i = 1; i < n; i++) { let sr = xr[i], si = xi[i]; for (let j = 0; j < i; j++) { const lr = R[i * n + j], li = I[i * n + j]; sr -= lr * xr[j] - li * xi[j]; si -= lr * xi[j] + li * xr[j]; } xr[i] = sr; xi[i] = si; }
+    for (let i = n - 1; i >= 0; i--) {
+      let sr = xr[i], si = xi[i];
+      for (let j = i + 1; j < n; j++) { const ur = R[i * n + j], ui = I[i * n + j]; sr -= ur * xr[j] - ui * xi[j]; si -= ur * xi[j] + ui * xr[j]; }
+      const dr = R[i * n + i], di = I[i * n + i], d = dr * dr + di * di; xr[i] = (sr * dr + si * di) / d; xi[i] = (si * dr - sr * di) / d;
+    }
+  }
+  /** a frequency response in numbers — gain in dB, phase in degrees (unwrapped), and its landmarks */
+  function acStats(f, re, im) {
+    const n = f.length, db = [], ph = []; let off = 0, prev = null;
+    for (let i = 0; i < n; i++) {
+      db.push(20 * Math.log10(Math.hypot(re[i], im[i]) || 1e-300));
+      let p = Math.atan2(im[i], re[i]) * 180 / Math.PI + off;
+      if (prev !== null) { while (p - prev > 180) { p -= 360; off -= 360; } while (p - prev < -180) { p += 360; off += 360; } }
+      ph.push(p); prev = p;
+    }
+    let ip = 0; for (let i = 1; i < n; i++) if (db[i] > db[ip]) ip = i;
+    const lf = i => Math.log(f[i]), cross = (i, j, lvl) => Math.exp(lf(i) + (lf(j) - lf(i)) * (lvl - db[i]) / (db[j] - db[i] || 1));
+    const pk = db[ip], lvl = pk - 3;
+    let f3 = NaN; for (let i = ip + 1; i < n; i++) if (db[i] <= lvl) { f3 = cross(i - 1, i, lvl); break; }
+    let fl = NaN; for (let i = ip - 1; i >= 0; i--) if (db[i] <= lvl) { fl = cross(i + 1, i, lvl); break; }
+    let fu = NaN, pmg = NaN;
+    for (let i = 1; i < n; i++) if (db[i - 1] > 0 && db[i] <= 0) { fu = cross(i - 1, i, 0); const t = (Math.log(fu) - lf(i - 1)) / (lf(i) - lf(i - 1) || 1); pmg = 180 + ph[i - 1] + (ph[i] - ph[i - 1]) * t; break; }
+    return { db, phase: ph, dcDb: db[0], peakDb: pk, fPeak: f[ip], f3db: f3, fLow3db: fl, fUnity: fu, pm: pmg };
   }
 
   // ---- device equations ----
@@ -486,10 +682,29 @@
           case 'V': BR(a, c, k); ROWV(k, a, c); B[k] = srcVal(e, ctx); break;
           case 'I': J(a, c, -srcVal(e, ctx)); break;   // drives the current into n[0]
           case 'D': {
-            const v = vx(x, a) - vx(x, c), vl = pnjlim(v, e.s.v, e.nvt, e.vcrit);
+            const v = vx(x, a) - vx(x, c);
+            let vl = pnjlim(v, e.s.v, e.nvt, e.vcrit);
+            if (e.bv && v < 0 && !ohm) { const u = -v - e.bv, ul = pnjlim(u, -e.s.v - e.bv, VT, e.vcritb); if (ul !== u) vl = -ul - e.bv; }   // reverse breakdown (Zener, TVS)
             if (vl !== v) limited = true; e.s.v = vl;
-            const g0 = e.Is * dex(vl / e.nvt) / e.nvt;
-            G(a, c, g0 + GMIN); J(a, c, e.Is * (ex(vl / e.nvt) - 1) - g0 * vl);
+            let g0 = e.Is * dex(vl / e.nvt) / e.nvt, i0 = e.Is * (ex(vl / e.nvt) - 1);
+            if (e.bv && !ohm) { const w = -(vl + e.bv) / VT;   // (the ohmmeter's open-circuit voltage, ~3 V, never reaches a breakdown)
+              i0 -= e.ibv * ex(w); g0 += e.ibv * dex(w) / VT; }
+            G(a, c, g0 + GMIN); J(a, c, i0 - g0 * vl);
+            break;
+          }
+          case 'VSW': {   // a switch driven by a voltage — log-conductance moves smoothly from Roff (at Voff) to Ron (at Von)
+            const vc = vx(x, e.d) - vx(x, e.cn), span = e.von - e.voff, u0 = (vc - e.voff) / span, u = u0 < 0 ? 0 : u0 > 1 ? 1 : u0;
+            const sm = u * u * (3 - 2 * u), ds = u0 > 0 && u0 < 1 ? 6 * u * (1 - u) / span : 0;
+            const g = Math.exp(e.lgoff + (e.lgon - e.lgoff) * sm), gc = g * (e.lgon - e.lgoff) * ds * (vx(x, a) - vx(x, c));
+            G(a, c, g); VC(a, c, e.d, e.cn, gc); J(a, c, -gc * vc);
+            break;
+          }
+          case 'TLINE': {   // a lossless line, method of characteristics — v_k − Z0·i_k = v_j(t − td) + Z0·i_j(t − td); in DC a pair of wires
+            const [p1, m1, p2, m2] = e.tl, k1 = k, k2 = k + 1, z = e.z0;
+            BR(p1, m1, k1); BR(p2, m2, k2);
+            ROWV(k1, p1, m1); A[k1 * S + k1] -= z; ROWV(k2, p2, m2); A[k2 * S + k2] -= z;
+            if (tran) { B[k1] = e.E1; B[k2] = e.E2; }
+            else { ROWV(k1, m2, p2); A[k1 * S + k2] -= z; ROWV(k2, m1, p1); A[k2 * S + k1] -= z; }
             break;
           }
           case 'NPN': case 'PNP': {
@@ -514,17 +729,31 @@
           case 'OPAMP': {
             const out = e.d; BR(out, -1, k);
             if (ohm) { A[k * S + k] = 1; break; }
+            if (e.ib) { J(a, -1, e.ib * ctx.src); J(c, -1, e.ib * ctx.src); }   // input bias current, into both inputs
             const vp = vx(x, a), vn = vx(x, c), rails = e.rp !== null;
             const hi = rails ? vx(x, e.rp) : e.hi, lo = rails ? vx(x, e.rn) : e.lo;
             let hh = (hi - lo) / 2 - e.head, dh = 1; if (hh < 1e-3) { hh = 1e-3; dh = 0; }
+            const vd = vp - vn, dyn = e.y >= 0;
+            let y, gy;   // what drives the output stage: gain·(vd + vos), or (with gbw / slew) the internal pole's node
+            if (dyn) {
+              const Y = e.y, yv = vx(x, Y), vdo = vd + e.vos * ctx.src;
+              let iy, gd;
+              if (e.imax < Infinity) { const th = Math.tanh(e.gm * vdo / e.imax); iy = e.imax * th; gd = e.gm * (1 - th * th); } else { iy = e.gm * vdo; gd = e.gm; }
+              if (a >= 0) A[Y * S + a] -= gd; if (c >= 0) A[Y * S + c] += gd; B[Y] += iy - gd * vd;
+              const L = hh + 0.3, sm = 0.05, sp = u => (u / sm > 40 ? u : sm * Math.log1p(Math.exp(u / sm))), sg_ = u => 1 / (1 + Math.exp(-u / sm));
+              const icl = GCL * (sp(yv - L) - sp(-yv - L)), dcl = GCL * (sg_(yv - L) + sg_(-yv - L));
+              A[Y * S + Y] += dcl; B[Y] -= icl - dcl * yv;
+              y = yv; gy = 1;
+            } else { y = e.A * (vd + e.vos * ctx.src); gy = e.A; }   // (vos and ib scale with the sources: source stepping can then start from a quiet op-amp)
             // linear (exact gain A) up to a knee m below the rail, then an exponential approach: smooth, C¹, bounded
-            const vd = vp - vn, y = e.A * vd, m = Math.min(0.05, hh / 2), knee = hh - m, ay = Math.abs(y);
-            let f = (hi + lo) / 2, fd = e.A, fh = 0;
+            const m = Math.min(0.05, hh / 2), knee = hh - m, ay = Math.abs(y);
+            let f = (hi + lo) / 2, fd = gy, fh = 0;
             if (ay <= knee) f += y;
-            else { const sg = y < 0 ? -1 : 1, ez = Math.exp(-(ay - knee) / m); f += sg * (hh - m * ez); fd = e.A * ez; fh = dh * sg * (1 - ez); }
+            else { const sg = y < 0 ? -1 : 1, ez = Math.exp(-(ay - knee) / m); f += sg * (hh - m * ez); fd = gy * ez; fh = dh * sg * (1 - ez); }
             if (out >= 0) A[k * S + out] += 1;
-            if (a >= 0) A[k * S + a] -= fd; if (c >= 0) A[k * S + c] += fd;
-            let rhs = f - fd * vd;
+            let rhs;
+            if (dyn) { A[k * S + e.y] -= fd; rhs = f - fd * y; }
+            else { if (a >= 0) A[k * S + a] -= fd; if (c >= 0) A[k * S + c] += fd; rhs = f - fd * vd; }
             if (rails) {
               const dhi = 0.5 + 0.5 * fh, dlo = 0.5 - 0.5 * fh;
               if (e.rp >= 0) A[k * S + e.rp] -= dhi; if (e.rn >= 0) A[k * S + e.rn] -= dlo;
@@ -584,7 +813,9 @@
         case 'C': { const i = ctx.mode === 'tran' ? e.ip : 0; return [i, -i]; }
         case 'L': case 'V': return [x[e.k], -x[e.k]];
         case 'I': { const j = srcVal(e, ctx); return [-j, j]; }
-        case 'D': { const v = va - vc, i = e.Is * (ex(v / e.nvt) - 1) + GMIN * v; return [i, -i]; }
+        case 'D': { const v = va - vc, i = e.Is * (ex(v / e.nvt) - 1) + GMIN * v - (e.bv ? e.ibv * ex(-(v + e.bv) / VT) : 0); return [i, -i]; }
+        case 'VSW': { const vcn = vx(x, e.d) - vx(x, e.cn), u0 = (vcn - e.voff) / (e.von - e.voff), u = u0 < 0 ? 0 : u0 > 1 ? 1 : u0, i = (va - vc) * Math.exp(e.lgoff + (e.lgon - e.lgoff) * u * u * (3 - 2 * u)); return [i, -i, 0, 0]; }
+        case 'TLINE': { const i1 = x[e.k], i2 = x[e.k + 1]; return e.pins.length === 4 ? [i1, -i1, i2, -i2] : [i1, i2]; }
         case 'NPN': case 'PNP': {
           const p = e.pol, vb = vc, vcol = va, ve = vx(x, e.d);
           bjt(e, p * (vb - ve), p * (vb - vcol), q);
@@ -597,7 +828,7 @@
           const id = (sw ? -1 : 1) * p * q.id + GMIN * (vd - vs);
           return [id, 0, -id];
         }
-        case 'OPAMP': return e.pins.map((_, i) => (i === 2 ? x[e.k] : 0));
+        case 'OPAMP': return e.pins.map((_, i) => (i === 2 ? x[e.k] : i < 2 ? e.ib || 0 : 0));
       }
       return e.pins.map(() => 0);
     }
@@ -627,21 +858,28 @@
       if (!(dt > 0) || !(tEnd > 0)) throw fail('bad-args');
       const steps = Math.ceil(tEnd / dt - 1e-9);
       if (!(maxSteps > 0) || maxSteps > MAX_STEPS || steps > maxSteps) throw fail('budget', { steps, limit: Math.min(maxSteps, MAX_STEPS) || MAX_STEPS });
-      const key = `${dt}|${tEnd}|${!!o.uic}`;
+      const pw = Array.isArray(o.power) ? o.power.filter(id => ck.byId.has(id)) : [];
+      const key = `${dt}|${tEnd}|${!!o.uic}|${!!o.fromAvg}|${ck.hold.shift}|${pw.join(',')}`;
       if (tranCache && tranCache.key === key) return tranCache;
-      const caps = ck.els.filter(e => e.type === 'C'), inds = ck.els.filter(e => e.type === 'L');
+      const caps = ck.els.filter(e => e.type === 'C'), inds = ck.els.filter(e => e.type === 'L'), tls = ck.els.filter(e => e.type === 'TLINE');
+      for (const e of tls) if (e.td < dt * (1 - 1e-9)) throw fail('step', { element: e.id, td: e.td, dt });
       let x;
       if (o.uic) {
         x = new Float64Array(S);
         for (const e of caps) { e.vp = e.ic === null ? 0 : e.ic; e.ip = 0; }
         for (const e of inds) { e.ip = e.ic === null ? 0 : e.ic; e.vp = 0; }
       } else {
-        x = op({ mode: 'op0', t0m: true, t: 0, gsh: 0, src: 1 });
+        x = o.fromAvg ? op({ mode: 'op', avg: true, t: 0, gsh: 0, src: 1 }) : op({ mode: 'op0', t0m: true, t: 0, gsh: 0, src: 1 });   // (fromAvg: a meter starts near the steady state)
         for (const e of caps) { e.vp = vx(x, e.a) - vx(x, e.c); e.ip = 0; }
         for (const e of inds) { e.ip = x[e.k]; e.vp = vx(x, e.a) - vx(x, e.c); }
       }
       const V = []; for (let i = 0; i < N; i++) { V.push(new Float64Array(steps + 1)); V[i][0] = x[i]; }
       const I = ck.real.map(e => { const arr = new Float64Array(steps + 1); arr[0] = mainCurrent(e, pinCurrents(e, x, { mode: 'op', t0m: true, t: 0, src: 1 })); return arr; });
+      const pwEl = pw.map(id => ck.byId.get(id)), PW = pwEl.map(() => new Float64Array(steps + 1));
+      const power = (e, xx, c) => { const pc = pinCurrents(e, xx, c); let q = 0; e.pins.forEach((pi, j) => { q += vx(xx, pi) * pc[j]; }); return q; };
+      pwEl.forEach((e, j) => { PW[j][0] = power(e, x, { mode: 'op', t0m: true, t: 0, src: 1 }); });
+      const tlv = (xx, e) => { const [p1, m1, p2, m2] = e.tl; return [vx(xx, p1) - vx(xx, m1), xx[e.k], vx(xx, p2) - vx(xx, m2), xx[e.k + 1]]; };
+      for (const e of tls) { e.h = [0, 1, 2, 3].map(() => new Float64Array(steps + 1)); tlv(x, e).forEach((v, j) => { e.h[j][0] = v; }); }
       const tol = 1e-6 * dt;
       const nextBp = t => { let m = Infinity; for (const e of ck.sources) { const b = e.w.next(t); if (b < m) m = b; } return m; };
       let bp = nextBp(-tol);   // a breakpoint at t = 0 makes the first step backward Euler anyway
@@ -652,6 +890,12 @@
         ctx.t = t1; ctx.be = s === 0 || bp <= t1 + tol;
         if (bp <= t1 + tol) bp = nextBp(t1 + tol);
         ctx.gsh = 0;
+        for (const e of tls) {   // the waves that left the other end td ago
+          const tp = t1 - e.td, h = e.h; let w;
+          if (tp <= 0) w = [h[0][0], h[1][0], h[2][0], h[3][0]];
+          else { const u = tp / dt; let i = Math.floor(u + 1e-9); if (i > s) i = s; const f = Math.max(0, u - i), j = Math.min(i + 1, s); w = h.map(a => a[i] * (1 - f) + a[j] * f); }
+          e.E1 = w[2] + e.z0 * w[3]; e.E2 = w[0] + e.z0 * w[1];
+        }
         if (!newton(ctx, xs, 60)) {
           let ok = true, xg = xs;
           for (let i = 3; i <= 12 && ok; i++) { ctx.gsh = Math.pow(10, -i); if (newton(ctx, xg, 100)) xg = Float64Array.from(X); else ok = false; }
@@ -666,16 +910,59 @@
         for (const e of inds) { e.ip = xs[e.k]; e.vp = vx(xs, e.a) - vx(xs, e.c); }
         for (let i = 0; i < N; i++) V[i][s + 1] = xs[i];
         ck.real.forEach((e, j) => { I[j][s + 1] = mainCurrent(e, pinCurrents(e, xs, ctx)); });
+        pwEl.forEach((e, j) => { PW[j][s + 1] = power(e, xs, ctx); });
+        for (const e of tls) tlv(xs, e).forEach((v, j) => { e.h[j][s + 1] = v; });
       }
       const T = new Float64Array(steps + 1); for (let s = 0; s <= steps; s++) T[s] = s * dt;
-      tranCache = { key, T, V, I, steps };
+      tranCache = { key, T, V, I, steps, P: Object.fromEntries(pw.map((id, j) => [id, PW[j]])) };
       return tranCache;
     }
     function transient(o) {
       const r = runTransient(o), zero = Array.from(new Float64Array(r.steps + 1)), nodes = {}, branches = {};
       for (const nm of ck.outNames) { const i = ck.resolveName(nm); nodes[nm] = i < 0 ? zero.slice() : Array.from(r.V[i]); }
       ck.real.forEach((e, j) => { branches[e.id] = Array.from(r.I[j]); });
-      return { t: Array.from(r.T), nodes, branches };
+      const out = { t: Array.from(r.T), nodes, branches };
+      if (o && Array.isArray(o.power)) out.power = Object.fromEntries(Object.entries(r.P).map(([id, a]) => [id, Array.from(a)]));
+      return out;
+    }
+
+    // ---- AC small-signal analysis — the circuit linearised at its DC operating point (sources at their average), one source excited ----
+    let acCache = null;
+    function ac(o) {
+      o = o || {};
+      const src = typeof o.source === 'string' ? ck.byId.get(o.source) : null;
+      const f0 = num(o.fStart), f1 = num(o.fStop), np = o.points === undefined ? 200 : Math.round(num(o.points)), lin = o.scale === 'lin';
+      if (!src || (src.type !== 'V' && src.type !== 'I') || !(f0 > 0) || !(f1 > f0) || !(np >= 2 && np <= 1000)) throw fail('bad-args');
+      const key = `${o.source}|${f0}|${f1}|${np}|${lin}`;
+      if (acCache && acCache.key === key) return acCache.r;
+      const { x, ctx } = dcX('avg');
+      stamp(Object.assign({}, ctx, { gsh: 0, src: 1 }), x);
+      const A0 = Float64Array.from(A), Re = new Float64Array(S * S), Im = new Float64Array(S * S), br = new Float64Array(S), bi = new Float64Array(S), xr = new Float64Array(S), xi = new Float64Array(S), pm = new Int32Array(S);
+      const f = [], nodes = {}; for (const nm of ck.outNames) nodes[nm] = { re: [], im: [] };
+      const jG = (a, c, b) => { if (a >= 0) { Im[a * S + a] += b; if (c >= 0) { Im[a * S + c] -= b; Im[c * S + a] -= b; } } if (c >= 0) Im[c * S + c] += b; };
+      for (let i = 0; i < np; i++) {
+        const fr = lin ? f0 + (f1 - f0) * i / (np - 1) : f0 * Math.pow(f1 / f0, i / (np - 1)), w = 2 * Math.PI * fr;
+        Re.set(A0); Im.fill(0); br.fill(0); bi.fill(0);
+        for (const e of ck.els) {
+          if (e.type === 'C') jG(e.a, e.c, w * e.C);
+          else if (e.type === 'L') Im[e.k * S + e.k] -= w * e.L;
+          else if (e.type === 'TLINE') {   // v_k − Z0·i_k = e^(−jωtd)·(v_j + Z0·i_j)
+            const [p1, m1, p2, m2] = e.tl, k1 = e.k, k2 = e.k + 1, z = e.z0, cr = Math.cos(w * e.td), ci = -Math.sin(w * e.td);
+            for (const kk of [k1, k2]) for (let j = 0; j < S; j++) { Re[kk * S + j] = 0; Im[kk * S + j] = 0; }
+            const put = (kk, col, r, im) => { if (col >= 0) { Re[kk * S + col] += r; Im[kk * S + col] += im; } };
+            put(k1, p1, 1, 0); put(k1, m1, -1, 0); put(k1, k1, -z, 0); put(k1, p2, -cr, -ci); put(k1, m2, cr, ci); put(k1, k2, -z * cr, -z * ci);
+            put(k2, p2, 1, 0); put(k2, m2, -1, 0); put(k2, k2, -z, 0); put(k2, p1, -cr, -ci); put(k2, m1, cr, ci); put(k2, k1, -z * cr, -z * ci);
+          }
+        }
+        if (src.type === 'V') br[src.k] = 1; else { if (src.a >= 0) br[src.a] += 1; if (src.c >= 0) br[src.c] -= 1; }
+        if (!cfactor(Re, Im, S, pm)) throw fail('singular');
+        csubst(Re, Im, S, pm, br, bi, xr, xi);
+        f.push(fr);
+        for (const nm of ck.outNames) { const j = ck.resolveName(nm); nodes[nm].re.push(j < 0 ? 0 : xr[j]); nodes[nm].im.push(j < 0 ? 0 : xi[j]); }
+      }
+      const r = { f, nodes };
+      acCache = { key, r };
+      return r;
     }
 
     // ---- instruments ----
@@ -766,12 +1053,13 @@
       }
       throw fail('probe');
     }
-    return { dc, transient, measure };
+    return { dc, transient, measure, ac, runTransient, dcX, ck, where, pinCurrents, mainCurrent };
   }
 
   function create(netlist, opts) {
     opts = opts || {};
-    const problems = check(netlist);
+    const ver = verOf(opts);
+    const problems = check(netlist, { version: ver });
     if (problems.some(p => p.level === 'error')) throw fail('invalid', { problems });
     if (opts.faults !== undefined && !Array.isArray(opts.faults)) throw fail('fault', { index: -1 });
     const faults = JSON.parse(JSON.stringify(opts.faults || []));
@@ -781,12 +1069,99 @@
       if (!(rel >= 0) || !(abs >= 0)) throw fail('bad-args');
       noise = { rel, abs, seed: (opts.noise.seed !== undefined ? num(opts.noise.seed) : opts.seed !== undefined ? num(opts.seed) : 1) >>> 0 };
     }
-    let nl = JSON.parse(JSON.stringify(netlist)), inner = makeSim(compile(nl, faults), noise);
+    const seed = (opts.seed !== undefined ? num(opts.seed) : 1) >>> 0;
+    let nl = JSON.parse(JSON.stringify(netlist));
+    const build = o2 => makeSim(compile(nl, faults, Object.assign({ ver, seed }, o2)), noise);
+    let inner = build({}), subs = new Map(), mcount = 0;
+    const sub = (key, o2) => { if (!subs.has(key)) subs.set(key, build(o2)); return subs.get(key); };
+
+    /** v2 instruments: the meter's input resistance and its modes (true averages and RMS of what really flows), a scope probe with its
+        own capacitance and ground lead, a logic analyser's input, the frequency response analyser (bode) */
+    function measure2(probe) {
+      if (!isObj(probe)) throw fail('probe');
+      const count = ++mcount;
+      const rng = noise ? mulberry32(hash32(JSON.stringify(probe), noise.seed)) : null;
+      const jit = v => (rng ? v * (1 + noise.rel * (2 * rng() - 1)) + noise.abs * (2 * rng() - 1) : v);
+      const shifted = (s, fn) => {   // every capture of a board with noise or pickup sees another stretch of it (the same sequence of measurements reads the same)
+        const h = s.ck.hold, live = s.ck.sources.some(e => e.wk === 'noise');
+        h.shift = live ? mulberry32(hash32('m' + count, seed))() * 1000 : 0;
+        try { return fn(); } finally { h.shift = 0; }
+      };
+      const nz = (v, d) => (v === undefined ? d : num(v));
+      function windowOf(s) {
+        if (probe.tEnd !== undefined) { const te = num(probe.tEnd); return { tEnd: te, dt: nz(probe.dt, te / 2000), tStart: nz(probe.tStart, te / 2) }; }
+        if (!s.ck.varying) return null;
+        let P = 0; for (const e of s.ck.sources) if (e.per > P) P = e.per;
+        return P > 0 ? { tEnd: 50 * P, dt: P / 200, tStart: 30 * P } : null;
+      }
+      function meter(s, dcVal, series) {   // → the reading in the probe's mode
+        const mode = probe.mode === undefined ? 'dc' : probe.mode;
+        if (!MODES.includes(mode)) throw fail('probe');
+        const w = windowOf(s);
+        if (!w) { const v = dcVal(); return mode === 'dc' ? v : mode === 'rms' ? Math.abs(v) : 0; }
+        return shifted(s, () => {
+          const r = s.runTransient({ tEnd: w.tEnd, dt: w.dt, maxSteps: probe.maxSteps, fromAvg: true }), v = series(r);
+          let s0 = 0; while (s0 < r.steps && r.T[s0] < w.tStart - 1e-9 * w.dt) s0++;
+          const avg = g => { let a = 0; for (let i = s0; i < r.steps; i++) a += (g(v[i]) + g(v[i + 1])) / 2; return a / Math.max(1, r.steps - s0); };   // time averages (trapezoids)
+          const mean = avg(y => y), sq = avg(y => y * y);
+          if (mode === 'dc') return mean;
+          if (mode === 'rms') return Math.sqrt(sq);
+          if (mode === 'ac') return Math.sqrt(Math.max(0, sq - mean * mean));
+          return avg(y => Math.abs(y - mean)) * Math.PI / (2 * Math.SQRT2);   // an average-responding meter, calibrated for sines
+        });
+      }
+      switch (probe.kind) {
+        case 'R': return sub('R', { noPickup: true }).measure(probe);
+        case 'V': {
+          const zin = nz(probe.zin, 1e7), a = probe.a, b = probe.b === undefined ? 'gnd' : probe.b;
+          if (!(zin >= 0)) throw fail('probe');
+          const s = zin > 0 ? sub(JSON.stringify(['V', a, b, zin]), { extras: [{ type: 'R', n: [a, b], value: zin }] }) : inner;
+          const ia = s.where(a), ib = s.where(b), vv = (x, i) => (i < 0 ? 0 : x[i]);
+          const value = meter(s, () => { const { x } = s.dcX('avg'); return vv(x, ia) - vv(x, ib); }, r => { const z = new Float64Array(r.steps + 1), A = ia < 0 ? z : r.V[ia], B = ib < 0 ? z : r.V[ib]; return A.map((y, i) => y - B[i]); });
+          return { kind: 'V', value: jit(value), unit: 'V', ...(probe.mode ? { mode: probe.mode } : {}) };
+        }
+        case 'I': {
+          const s = inner, e = s.ck.byId.get(probe.element); if (!e) throw fail('unknown-element', { ref: probe.element });
+          if (probe.pin !== undefined && !(probe.pin >= 0 && probe.pin < e.pins.length)) throw fail('probe');
+          const j = s.ck.real.indexOf(e), dcI = () => { const { x, ctx } = s.dcX('avg'), pc = s.pinCurrents(e, x, ctx); return probe.pin === undefined ? s.mainCurrent(e, pc) : pc[probe.pin]; };
+          const value = probe.pin !== undefined && probe.pin !== 0 ? dcI() : meter(s, dcI, r => r.I[j]);
+          return { kind: 'I', value: jit(value), unit: 'A', ...(probe.mode ? { mode: probe.mode } : {}) };
+        }
+        case 'scope': {
+          const zin = nz(probe.zin, 1e7), lead = nz(probe.lead, 0), cin = nz(probe.cin, lead > 0 ? 12e-12 : 0), ref = probe.ref === undefined ? 'gnd' : probe.ref;
+          if (!(zin >= 0) || !(lead >= 0) || !(cin >= 0)) throw fail('probe');
+          const tip = lead > 0 ? '##pg' : ref, ex = [];
+          if (zin > 0) ex.push({ type: 'R', n: [probe.node, tip], value: zin });
+          if (cin > 0) ex.push({ type: 'C', n: [probe.node, tip], value: cin });
+          if (lead > 0) ex.push({ type: 'L', n: ['##pg', ref], value: lead });
+          const s = ex.length ? sub(JSON.stringify(['scope', probe.node, ref, zin, cin, lead]), { extras: ex }) : inner;
+          const q = Object.assign({}, probe, { ref: lead > 0 ? '#pg' : ref }); delete q.zin; delete q.lead; delete q.cin;
+          return shifted(s, () => s.measure(q));
+        }
+        case 'logic': {
+          const zin = nz(probe.zin, 0); if (!(zin >= 0)) throw fail('probe');
+          const s = zin > 0 && Array.isArray(probe.nodes) ? sub(JSON.stringify(['logic', probe.nodes, zin]), { extras: probe.nodes.map(m => ({ type: 'R', n: [m, 'gnd'], value: zin })) }) : inner;
+          const q = Object.assign({}, probe); delete q.zin;
+          return shifted(s, () => s.measure(q));
+        }
+        case 'bode': {
+          const r = inner.ac({ source: probe.source, fStart: probe.fStart, fStop: probe.fStop, points: probe.points });
+          const na = probe.node, nb = probe.ref === undefined ? 'gnd' : probe.ref;
+          const pick = nm => { if (r.nodes[nm]) return r.nodes[nm]; const i = inner.where(nm); throw fail('unknown-node', { ref: nm, i }); };
+          const A = pick(na), B = isGnd(nb) ? null : pick(nb), re = A.re.map((v, i) => v - (B ? B.re[i] : 0)), im = A.im.map((v, i) => v - (B ? B.im[i] : 0));
+          const st = acStats(r.f, re, im);
+          return { kind: 'bode', f: r.f.slice(), db: st.db, phase: st.phase, stats: { dcDb: st.dcDb, peakDb: st.peakDb, fPeak: st.fPeak, f3db: st.f3db, fLow3db: st.fLow3db, fUnity: st.fUnity, pm: st.pm } };
+        }
+      }
+      return inner.measure(probe);
+    }
     return Object.freeze({
       id: ID,
       dc: o => inner.dc(o),
       transient: o => inner.transient(o),
-      measure: p => inner.measure(p),
+      measure: p => (ver === 2 ? measure2(p) : inner.measure(p)),
+      /** the AC analysis {source, fStart, fStop, points?, scale?} → {f, nodes: {name: {re, im}}} */
+      ac: o => { if (ver !== 2) throw fail('bad-args'); return inner.ac(o); },
       /** the learner flips a switch or turns a knob: {on} for SW, {value} for R, C, L, V, I */
       set(id, patch) {
         const el = nl.elements.find(e => e.id === id);
@@ -794,15 +1169,16 @@
         const next = JSON.parse(JSON.stringify(nl)), ne = next.elements.find(e => e.id === id);
         if (patch.on !== undefined) ne.on = patch.on;
         if (patch.value !== undefined) ne.value = patch.value;
-        const pr = check(next);
+        const pr = check(next, { version: ver });
         if (pr.some(p => p.level === 'error')) throw fail('invalid', { problems: pr });
-        nl = next; inner = makeSim(compile(nl, faults), noise);
+        nl = next; inner = build({}); subs = new Map();
       },
     });
   }
 
   /** the engine's own source, to run it in a Worker (the sim-spec@1 runtime's workerSource: engine/src/36_engine_circuit_sim.js) */
   const source = () => '(' + noemaCircuitModule.toString() + ')(self);';
-  root.NoemaCircuit = Object.freeze({ id: ID, format: FORMAT, limits: Object.freeze({ nodes: MAX_NODES, elements: MAX_ELEMENTS, steps: MAX_STEPS }), FAULT_KINDS: Object.freeze(FAULT_KINDS.slice()), check, checkFaults, create, num, source });
+  root.NoemaCircuit = Object.freeze({ id: ID, format: FORMAT, limits: Object.freeze({ nodes: MAX_NODES, elements: MAX_ELEMENTS, steps: MAX_STEPS, acPoints: 1000 }),
+    FAULT_KINDS: Object.freeze(FAULT_KINDS.slice()), MODES: Object.freeze(MODES.slice()), check, checkFaults, create, num, acStats, source });
   /* i18n-ignore-end */
 })(typeof window !== 'undefined' ? window : globalThis);
