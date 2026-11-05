@@ -270,7 +270,11 @@ async function appPart(browser, ref) {
   if (!ok(await until(() => p.evaluate(() => typeof ACT !== 'undefined' && !!ACT.engine('wasm@1') && !!ACT.runtime('wasm-module@1'))), 'the app has wasm@1 and wasm-module@1 (engine.js built with 44_activity_wasm.js)')) return;
   ok(await p.evaluate(() => ACT.caps().has('runtime:wasm-module@1') && ACT.caps().has('engine:wasm@1')), 'ACT.caps() names runtime:wasm-module@1 and engine:wasm@1 (pack.requires)');
   await p.evaluate(I => { Object.assign(ACT.ITEMS, I); }, ITEMS);
-  const mountBlk = id => p.evaluate(id => { const m = document.querySelector('main'); m.innerHTML = ''; m.append(interactiveBlock({ t: 'interactive', activity: id })); scrollTo(0, 0); }, id);
+  // a block that comes into view while the live slots are taken (blocks of the cleared page are destroyed only by their watchdog, ≤ 2 s)
+  // waits with its Start button over the fallback: press it, so that what is checked is the activity's own start, never the parked state
+  const mountBlk = async id => { await p.evaluate(id => { const m = document.querySelector('main'); m.innerHTML = ''; m.append(interactiveBlock({ t: 'interactive', activity: id })); scrollTo(0, 0); }, id);
+    if (await until(() => p.evaluate(() => !!document.querySelector('main .sim') || !!document.querySelector('main .act-note')?.textContent), 1500)) return;
+    const b = p.locator('main .act-bar button.btn.primary'); if (await b.count()) await b.first().click(); };
   await mountBlk('osc-sim');
   ok(await until(() => p.evaluate(() => !!document.querySelector('main .sim') && /Energy at the end/.test(document.querySelector('main').textContent))), 'the oscillator renders in the app (controls, readout) ' + JSON.stringify(await p.evaluate(() => document.querySelector('main').innerText.slice(0, 160))));
   const want = ref.E.toFixed(6);
