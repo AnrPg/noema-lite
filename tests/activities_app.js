@@ -575,8 +575,8 @@ async function p6engines(p, ctx, E) {
   const direct = (aid, vals) => p.evaluate(([a, v]) => { const sp = ACT.ITEMS[a].spec, E = ACT.engine(sp.engine), env = { ...(sp.consts || {}) };
     for (const q of sp.params) env[q.id] = q.id in v ? v[q.id] : q.default; for (const d of sp.derived || []) env[d.id] = NoemaExpr.compile(d.expr)(env);
     return E.create(sp, { seed: 1 }).run(E.prepare(sp, NoemaExpr.compile)(env)); }, [aid, vals]);
-  ok(await p.evaluate(() => ['thermal@1', 'pid@1', 'rf@1', 'twin@1'].every(e => ACT.caps().has('engine:' + e) && typeof ACT.engine(e)?.workerSource === 'string') && ACT.engine('twin@1').bench === true && checkRequires().length === 0),
-    'the app has engine:thermal@1, engine:pid@1, engine:rf@1 and engine:twin@1 (each with a workerSource; twin@1 runs benches); pack.requires is met');
+  ok(await p.evaluate(() => ['thermal@1', 'pid@1', 'rf@1', 'twin@1'].every(e => ACT.caps().has('engine:' + e) && typeof ACT.engine(e)?.workerSource === 'string') && ACT.engine('twin@1').bench === true && checkRequires().every(x => x === 'runtime:py-module@1' && !ACT.enabled('py-module@1'))),
+    'the app has engine:thermal@1, engine:pid@1, engine:rf@1 and engine:twin@1 (each with a workerSource; twin@1 runs benches); pack.requires is met (but for Python where it cannot run) ' + JSON.stringify(await p.evaluate(() => checkRequires())));
 
   console.log('— thermal@1: heatsink');
   const HS = 'main .act-blk .act[data-activity="heatsink"]';

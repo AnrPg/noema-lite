@@ -14,7 +14,7 @@ const SHOTS = process.env.SHOTS || '/tmp/noema_shots'; fs.mkdirSync(SHOTS, { rec
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
 const wait = ms => new Promise(r => setTimeout(r, ms));
 const until = async (fn, ms = 15000, step = 200) => { const t = Date.now(); while (Date.now() - t < ms) { try { if (await fn()) return true; } catch (e) { } await wait(step); } return false; };
-function errs(page, bag) { page.on('pageerror', e => bag.push('PAGEERROR ' + e.message)); page.on('console', m => { if (m.type() === 'error' && !/net::ERR|404|Failed to load resource/.test(m.text())) bag.push(m.text()); }); }
+function errs(page, bag) { page.on('pageerror', e => bag.push('PAGEERROR ' + e.message)); page.on('console', m => { if (m.type() === 'error' && !/net::ERR|404|Failed to load resource|Not allowed to load local resource: file:.*\/config\.local\.js$/.test(m.text())) bag.push(m.text()); }); }
 const texts = (page, sel) => page.$$eval(sel, l => l.map(x => x.textContent.trim()));
 // a ⋮ / ▾ menu's items: the title of each, without its icon or its explanation
 const menuItems = async (page, btn) => { await page.click(btn); await wait(250); const t = await page.$$eval('.ns-pop button', l => l.map(x => (x.querySelector('.mt')?.firstChild?.textContent || x.textContent).trim())); await page.keyboard.press('Escape'); await wait(150); return t; };
